@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE Package SYSTEM
+	  "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<Package>
+  <Global>
+    <Meta>
+      <Name>tasma</Name>
+      <Definiton>Configuration GUI for Pardus desktop</Definiton>
+      <Version>0.2</Version>
+      <Release>1</Release>
+      <HomePage>http://www.uludag.org.tr/projeler/masaustu/tasma/</HomePage>
+      <License>GPL</License>
+      <Source>ftp://ftp.uludag.org.tr/pub/uygulamalar/tasma/0.2/tasma-0.2.tar.gz</Source>
+      <Packager>
+	<PackageName>Barış Metin</PackageName>
+	<PackageEmail>baris@uludag.org.tr</PackageEmail>
+      </Packager>
+    </Meta>
+
+    <Requires>
+      <BuildTimePackage>
+	<Name>automake</Name>
+      </BuildTimePackage>
+
+      <BuildTimePackage>
+	<Name>autoconf</Name>
+      </BuildTimePackage>
+
+      <BuildTimePackage>
+	<Name>libtool</Name>
+      </BuildTimePackage>
+
+      <BuildTimePackage>
+	<Name>qt-devel</Name>
+	<VersionFrom>3.0</VersionFrom>
+      </BuildTimePackage>
+
+      <BuildTimePackage>
+	<Name>kdelibs-devel</Name>
+	<VersionFrom>3.3.2</VersionFrom>
+      </BuildTimePackage>
+
+
+      <RunTimePackage>
+	<Name>kdelibs</Name>
+	<VersionFrom>3.3.2</VersionFrom>
+      </RunTimePackage>
+
+      <RunTimePackage>
+	<Name>kdebase</Name>
+	<VersionFrom>3.3.2</VersionFrom>
+      </RunTimePackage>
+    </Requires>
+
+  </Global>
+
+  <Actions>
+    <Setup>
+      <LinkToFile>setup.sh</LinkToFile>
+    </Setup>
+    <Build>
+      <LinkToFile>build.sh</LinkToFile>
+    </Build>
+    <Install>
+      <LinkToFile>install.sh</LinkToFile>
+    </Install>
+  </Actions>
+
+</Package>

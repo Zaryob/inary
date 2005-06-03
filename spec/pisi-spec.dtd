@@ -1,0 +1,97 @@
+<!--
+    DTD for PISI.
+    See http://www.uludag.org.tr/projeler/pisi/ for details.
+-->
+
+<!ELEMENT Package (Global, SubPackage*, Actions)>
+
+
+<!-- global package definitions -->
+<!ELEMENT Global (Meta, Requires?, Provides?, Conflicts?)>
+
+<!-- definitions for sub-packages produced from the same source -->
+<!ELEMENT SubPackage (Name, Definition)>
+
+
+<!-- meta -->
+<!ELEMENT Meta (Name, Definition, Version, Release, HomePage?,
+	  License, Source, SourceFile*, Patch*, Packager)>
+
+<!-- name of the package -->
+<!ELEMENT Name (#PCDATA)>
+<!-- simple definition -->
+<!ELEMENT Definition (#PCDATA)>
+<!-- version number of the source -->
+<!ELEMENT Version (#PCDATA)>
+<!-- package release number -->
+<!ELEMENT Release (#PCDATA)>
+<!-- homepage of the source -->
+<!ELEMENT HomePage (#PCDATA)>
+<!-- license the source distributed under -->
+<!ELEMENT License (#PCDATA)>
+<!-- URL or filename of the source -->
+<!ELEMENT Source (#PCDATA)>
+<!-- additional files for building the package -->
+<!ELEMENT SourceFile (#PCDATA)>
+<!-- patches to be applied building the package -->
+<!ELEMENT Patch (#PCDATA)>
+<!-- packager information -->
+<!ELEMENT Packager (PackagerName, PackagerEmail)>
+
+<!-- name of the packager -->
+<!ELEMENT PackagerName (#PCDATA)>
+<!-- e-mail address of the packager -->
+<!ELEMENT PackagerEmail (#PCDATA)>
+
+
+<!-- requirements for package in various levels -->
+<!ELEMENT Requires (BuildTimePackage*, RunTimePackage*, ComarOM*)>
+
+<!-- build time requirements -->
+<!ELEMENT BuildTimePackage (Name, Version?, VersionFrom?, Versionto?)>
+<!-- run time requirements -->
+<!ELEMENT RunTimePackage (Name, Version?, VersionFrom?, VersionTo?)>
+<!-- ComarOM element. Define a path in OM -->
+<!ELEMENT ComarOM (#PCDATA)>
+
+<!ELEMENT VersionFrom (#PCDATA)>
+<!ELEMENT VersionTo (#PCDATA)>
+
+<!-- elements that package provides -->
+<!ELEMENT Provides (CSL*, ComarOM*)>
+
+<!-- CSL script associated with this package. Define path or URL of --
+  -- the script -->
+<!ELEMENT CSL (#PCDATA)>
+
+
+<!-- Conflicts -->
+<!ELEMENT Conflicts (ConflictedPackage*)>
+
+<!-- Package name that conflicts with this -->
+<!ELEMENT ConflictedPackage (Name, Version?, VersionFrom?, VersionTo?)>
+
+
+<!-- actions to be performed for this source -->
+<!ELEMENT Actions (Setup, Build?, Install, Test?)>
+
+<!-- setup action (unpack, patch, configure and others) -->
+<!ELEMENT Setup (LinkToScript)>
+<!-- build action (make or something diffrent -->
+<!ELEMENT Build (LinkToScript)>
+<!-- install action (make install or something diffrent -->
+<!ELEMENT Install (LinkToScript)>
+<!-- test action. Test the package for validity -->
+<!ELEMENT Test (LinkToScript)>
+
+<!-- action (script) filename for a particular action -->
+<!ELEMENT LinkToScript (#PCDATA)>
+
+
+<!-- attributes for elements -->
+<!ATTLIST SourceFile
+	  num NMTOKEN #REQUIRED>
+
+<!ATTLIST Patch
+	  num NMTOKEN #REQUIRED>
+

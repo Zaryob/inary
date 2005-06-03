@@ -1,0 +1,20 @@
+<!--
+    DTD for PISI.
+    See http://www.uludag.org.tr/projeler/pisi/ for details.
+-->
+
+<!ELEMENT Files (Package+)>
+
+<!-- Files provided by this package -->
+<!ELEMENT Package (Path*)>
+
+<!-- Path of the files of this package -->
+<!ELEMENT Path (#PCDATA)>
+
+
+<!ATTLIST Package
+	  name CDATA #REQUIRED>
+
+<!ATTLIST Path
+	  type (doc, data, bin, conf, lib)>
+
