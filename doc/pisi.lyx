@@ -31,15 +31,13 @@ PISI
 (Packages Installed Succesfully as Intented)
 \layout Author
 
-S.Çaðlar Onur <caglar@uludag.org.tr>, Onur Küçük <onur@uludag.org.tr>, 
-\newline 
-Barýþ Metin <baris@uludag.org.tr>
+S.Çaðlar Onur, Onur Küçük, Barýþ Metin
 \layout Date
 
 29 Mart 2005
 \layout Date
 
-Sürüm 0.3
+Sürüm 0.4
 \layout Standard
 \pagebreak_top \pagebreak_bottom 
 
@@ -914,7 +912,10 @@ a
 cpid-1.0.2.pspec
 \layout Itemize
 
-files.xml
+actions
+\layout Itemize
+
+ChangeLog
 \layout Itemize
 
 
@@ -927,22 +928,6 @@ acpid-1.0.2-branch.patch
 \layout Itemize
 
 acpid.init
-\end_deeper 
-\layout Itemize
-
-
-\series bold 
-actions/
-\begin_deeper 
-\layout Itemize
-
-setup.sh
-\layout Itemize
-
-build.sh
-\layout Itemize
-
-install.sh
 \end_deeper 
 \end_deeper 
 \end_deeper 
