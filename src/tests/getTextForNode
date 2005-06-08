@@ -1,0 +1,20 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+# ./getTextForNode ../../popt/popt.pspec PSPEC/Source/Name
+
+import sys
+sys.path.append("..")
+import specfile
+
+s = specfile.SpecFile(sys.argv[1])
+n=s.getNodes(sys.argv[2])
+
+if not n:
+    sys.exit(1) 
+
+for node in n[0].childNodes:
+    if node.nodeType == node.TEXT_NODE:
+        print node.data
+    else:
+        print "Verilen node için metin yok"
+
