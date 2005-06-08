@@ -1,0 +1,14 @@
+#! /usr/bin/python
+
+import gnubuild
+
+
+def setup:
+    gnubuild.configure
+
+def build:
+    gnubuild.build
+
+def install:
+    gnubuild.install
+
