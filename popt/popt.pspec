@@ -49,9 +49,9 @@
     </Description>
     <Category>devel:library</Category>
     <RuntimeDependencies>
-      <PackageDependency>
+      <Dependency>
 	<Name>gettext</Name>
-      </PackageDependency>
+      </Dependency>
     </RuntimeDependencies>
     <Files>
       <Path fileType="sharedLib">/usr/lib/</Path>
@@ -62,6 +62,3 @@
     </Files>
   </Package>
 </Pisi>
-
-
-
