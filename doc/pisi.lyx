@@ -317,19 +317,24 @@ Bu amaçla PÝSÝ (Packages Installed Successfully as Intented) adýný verdiðimiz
 PÝSÝ Tasarýmý
 \layout Subsection
 
+Paket Oluþturma
+\layout Standard
+
+Pisi bir dizin içinde verilen tanýmlama dosyalarý yamalar ve betikleri kullanara
+k bir pakedi oluþturur.
+ Burdaki dizin yapýsý aþaðýdaki gibidir.
+\layout Subsubsection
+
 PSPEC Dosyasý
 \layout Standard
 
 
 \series bold 
-PSPEC (PÝSÝ SPEC)
+PSPEC (PÝSÝ SPECification)
 \series default 
  dosyasý paketin oluþturulmasý için gerekli olan temel bilgiyi tanýmlar.
- PSPEC dosyasý, oluþturulacak paketin ne olduðu, hangi baþka paketlere baðýmlýlý
-k içerdiði, nasýl derlenmesi ve sisteme nasýl kurulmasý gerektiðini tanýmlayan
- betikleri gösteren; kýsaca paketin oluþturulmasý için gerek duyulan her
- türlü bilginin içinde bulunduðu dosyaya verilen isimdir.
- 
+ Oluþturulacak paketin ne olduðu, kaynaðý, kim tarafýndan paketlendiði,
+ hangi baþka paketlere ne tür baðýmlýlýklar içerdiði gibi bilgileri içerir.
 \layout Standard
 
 Bir PSPEC dosyasýndan, dolayýsý ile bir kaynaktan birden fazla paket oluþturulab
@@ -338,19 +343,26 @@ ilir.
  yalnýzca bir pakettir.
 \layout Standard
 
-PSPEC dosyalarýnýn içerebileceði alanlar þu þekilde tanýmlanmýþtýr;
+Dosya biçimi XML'dir ve aþaðýdaki etiketleri içerir:
 \layout Itemize
 
 
 \series bold 
-Global
+Pisi
 \begin_deeper 
 \layout Itemize
 
 
 \series bold 
-Meta
+Source
 \begin_deeper 
+\layout Itemize
+
+
+\series bold 
+Name
+\series default 
+: Uygulamanýn adý.
 \layout Itemize
 
 
@@ -362,91 +374,7 @@ Uygulamanýn web sitesinin URL'sini belirtir.
 
 
 \series bold 
-Version:
-\series default 
- Uygulamanýn sürüm numarasýný belirtir.
- (3.4.0 gibi)
-\layout Itemize
-
-
-\series bold 
-Release:
-\series default 
- Bu uygulama için hazýrlanan paketin sürüm numarasýný belirtir.
- (12 gibi)
-\layout Itemize
-
-
-\series bold 
-CFlags: 
-\series default 
-Paketin hangi ek derleyici bayraklarý ile derleneceðini belirtir.
-\layout Itemize
-
-
-\series bold 
-Source:
-\series default 
- Uygulamanýn orjinal kaynak kodlarýnýn bulunduðu adresi belirtir.
-\layout Itemize
-
-
-\series bold 
-SourceCheckSum: 
-\series default 
-Orjinal kaynak kodun doðrulama bilgisini (MD5, SHA v.s) verir.
-\layout Itemize
-
-
-\series bold 
-File(s): 
-\series default 
-Uygulama ile gelmeyen ama sistemde bulunmasý gereken dosyalarý belirtir.
- File, farklý dosyalar için birden fazla tekrarlanabilir.
- (init betikleri, belirli bir yere yerleþtirilecek simgeler, vb.)
-\begin_deeper 
-\layout Standard
-
-
-\series bold 
-Attribute(s)
-\layout Itemize
-
-
-\series bold 
-Destination: 
-\series default 
-Harici dosyalarýn kopyalanacaðý yeri belirtir.
- Kaynak kod açýldýðýnda oluþacak dizin sýradüzeni (hiyerarþi) içerisindeki
- konumunu baðlantýlý (rölatif) olarak gösterir.
-\end_deeper 
-\layout Itemize
-
-
-\series bold 
-Patch(s): 
-\series default 
-Uygulamaya hazýrlanan yamalarý ve uygulanýþ sýralarýný belirtir.
-\begin_deeper 
-\layout Standard
-
-
-\series bold 
-Attribute(s)
-\layout Itemize
-
-
-\series bold 
-Order:
-\series default 
- Uygulanacak yamalarýn sýrasýný belirtir.
- Nümerik bir deðerdir.
-\end_deeper 
-\layout Itemize
-
-
-\series bold 
-Packager(s): 
+Packager: 
 \series default 
 Paketi oluþturan kiþilerin adý/soyadý ve e-posta adresi belirtir.
 \begin_deeper 
@@ -454,14 +382,14 @@ Paketi oluþturan kiþilerin adý/soyadý ve e-posta adresi belirtir.
 
 
 \series bold 
-PackagerName:
+Name:
 \series default 
  Paket geliþtiricisinin adý ve soyadý.
 \layout Itemize
 
 
 \series bold 
-PackagerEmail:
+Email:
 \series default 
  Paket geliþtiricisinin e-posta adresi.
 \end_deeper 
@@ -469,35 +397,69 @@ PackagerEmail:
 
 
 \series bold 
-License(s): 
+License
 \series default 
-Uygulamanýn lisansýný belirtir.
- (GPL, BSD v.s gibi)
+: Uygulamanýn lisansýný belirtir (GPL, BSD, vb).
+\layout Itemize
+
+
+\series bold 
+Archive:
+\series default 
+ Uygulamanýn orjinal kaynak kodunun bulunduðu URL'yi belirtir.
+ 
+\series bold 
+archType
+\series default 
+ ile arþiv tipi (tar.gz, tar.bz2, zip, vb), 
+\series bold 
+md5sum
+\series default 
+ ile MD5 hash deðeri verilir.
+\layout Itemize
+
+
+\series bold 
+Patches
+\series default 
+: Orjinal koda uygulanacak yamalarýn sýralý bir listesini içerir.
+\begin_deeper 
+\layout Itemize
+
+
+\series bold 
+Patch
+\series default 
+: Yamanýn dosya adýný içerir.
+ 
+\series bold 
+compressionType
+\series default 
+ ile varsa sýkýþtýrma biçimi (gz, bz2, vb) verilebilir.
 \end_deeper 
 \layout Itemize
 
 
 \series bold 
-BuildRequirments:
+BuildDependencies
 \series default 
- Kaynaðýn derlenmesi sýrasýnda ihtiyaç duyulan baðýmlýlýklardýr.
+: Pakedi oluþturmak için gereken baðýmlýlýklarý listeler.
 \begin_deeper 
 \layout Itemize
 
 
 \series bold 
-BuildTimePackage(s): 
+Dependency
 \series default 
-Kaynaðýn derlenebilmesi için mutlaka sistemde kurulu olarak bulunmasý gereken
- paketleri belirtir.
+: Bir baðýmlýlýk tanýmlar.
 \begin_deeper 
 \layout Itemize
 
 
 \series bold 
-Name:
+Name
 \series default 
- Baðýmlý olunan paketin adýdýr.
+: Baðýmlýlýk duyulan pakedin adý.
 \layout Itemize
 
 
@@ -526,103 +488,39 @@ VersionTo:
 
 
 \series bold 
-Actions: 
+History
 \series default 
-Kaynaðýn derlenmesinden kurulumuna kadar kullanýlacak olan BASH betiklerini
- iþeret eder.
- Bash betikleri PSPEC dosyasýnýn bulunduðu dizindeki 
-\emph on 
-actions
-\emph default 
- dizininde saklanýrlar.
+: Pakete yapýlan güncellemelerin bir listesini verir.
 \begin_deeper 
 \layout Itemize
 
 
 \series bold 
-Setup: 
+Update
 \series default 
-Kaynaðýn kurulmasý, ayarlanmasý için gerekli bash betiðinin adýný verir.
- Kaynak derleme dizinine Source, File ve Patch bölümlerinde ifade edilen
- dosyalar kullanýlarak PÝSÝ tarafýndan otomatik bir þekilde açýlýr.
- Derleme öncesi kaynaða yapýlmasý gereken tüm iþlemler (Autotools kullanan
- paketlerde ./configure betiðinin çalýþtýrýlmasý gibi) setup betiði tarafýndan
- yapýlýr.
-\layout Itemize
-
-
-\series bold 
-Build: 
-\series default 
-Kaynaðýn derlenmesi için gerekli bash betiðinin adýný verir.
-\layout Itemize
-
-
-\series bold 
-Test: 
-\series default 
-Kaynaðý derlendikten sonra test edilmesi için gerekli bash betiðinin adýný
- verir.
-\layout Itemize
-
-
-\series bold 
-Install: 
-\series default 
-Kaynaðý sisteme kuran bash betiðinin adýný verir.
- Bu betik içerisinde kaynak kullanýlmakta olan sistemin dizin sýradüzeninden
- baðýmsýz olarak, PÝSÝ tarafýndan tanýmlanan kurulum dizinine (installroot)
- kurulur.
-\end_deeper 
-\layout Itemize
-
-
-\series bold 
-History: 
-\series default 
-Paket üzerine bir güncelleme yapýldýðýnda, güncelleme ile ilgili temel bilgileri
- verecektir.
- 
+: Bir güncellemeyi tarif eder.
 \begin_deeper 
 \layout Itemize
 
 
 \series bold 
-Update:
+Date
 \series default 
- Kaynaða yapýlan bir güncellemeyi tarif eder (yeni yama, yeni bir dosya
- eklenmesi veya Actions içerisindeki betiklerden birinin yeniden düzenlenmesi
- gibi).
-\begin_deeper 
-\layout Itemize
-
-
-\series bold 
-Date: 
-\series default 
-Güncellemenin yapýldýðý tarih ve saat bilgisini belirtir.
+: Güncellemenin tarihi.
 \layout Itemize
 
 
 \series bold 
 Version: 
 \series default 
-Güncellemenin yapýldýðý versiyonu belirtir.
+Uygulamanýn sürüm numarasý.
 \layout Itemize
 
 
 \series bold 
 Release:
 \series default 
- Güncellemenin yapýldýðý revizyonu belirtir.
-\layout Itemize
-
-
-\series bold 
-Status: 
-\series default 
-Güncellemenin kritikliði belirtir.
- (BugFix, SecurityUpdate, Enhancement)
+ Pakedin sürüm numarasý.
 \end_deeper 
 \end_deeper 
 \end_deeper 
@@ -631,262 +529,89 @@ Güncellemenin kritikliði belirtir.
 
 \series bold 
 Package
+\series default 
+: Uygulamadan oluþturulacak bir pakedi tanýmlar.
 \begin_deeper 
 \layout Itemize
 
 
 \series bold 
-Meta
-\begin_deeper 
+Name
+\series default 
+: Oluþturulacak pakedin adý.
 \layout Itemize
 
 
 \series bold 
-Name:
+Summary
 \series default 
- Paketin birden fazla küçük parçaya bölündüðünde oluþacak parçalardan ilkinin
- adýný belirtir.
-\layout Itemize
-
-
-\series bold 
-Description: 
-\series default 
-Uygulama hakkýnda özet bir açýklayýcý bilgi içerir.
+: Tek satýrlýk açýklayýcý bilgi.
  Çoklu dil desteðine sahiptir.
 \layout Itemize
 
 
 \series bold 
-Container(s):
+Description
 \series default 
- Uygulamanýn hangi uygulama grubuna dahil olduðu bilgisini tanýmlar.
- Bir paket birden fazla 
+: Uygulama hakkýnda özet açýklama.
+ Çoklu dil desteðine sahiptir.
+\layout Itemize
+
+
 \series bold 
-\emph on 
-Container
+Category
 \series default 
-\emph default 
-'a dahil olabilir.
- (Farklý aitlikler olabilir, bir ana kaynaktan türeme veya belirli, ortak
- bir iþlevi yerine getirme gibi.
+:
+\layout Itemize
+
+
+\series bold 
+RuntimeDependencies
+\series default 
+: Pakedin çalýþabilmesi için gereken baðýmlýlýklarýn bir listesini verir.
  
 \series bold 
-\emph on 
-Container
+Dependency
 \series default 
-\emph default 
- bunlarýn hepsini tanýmlamaktadýr).
- 
-\series bold 
-\emph on 
-Container
-\series default 
- tanýmlarý her 
-\series bold 
-Pardus
-\series default 
- sürümü için sabit bir liste olarak sunulacaktýr.
-
-\emph default 
- Paket geliþtiricileri bu listeyi kullanarak paketledikleri yazýlýmý bir/bir
- kaç 
-\series bold 
-Container
-\series default 
-'a dahil edebilirler.
-\end_deeper 
+ alt etiketlerinden oluþur.
 \layout Itemize
 
 
 \series bold 
-RunTimeRequirements: 
+Files
 \series default 
-Oluþturulan paketin kurulabilmesi/kullanýlabilmesi için saðlanmasý gereken
- baðýmlýlýklardýr.
+: Pakedin kurulacak dosyalarýnýn bir listesini verir.
 \begin_deeper 
 \layout Itemize
 
 
 \series bold 
-RunTimePackage: 
+Path
 \series default 
-Uygulamanýn derlendikten sonra çalýþabilmesi veya ek özellik kazanabilmesi
- için gerekli paketleri belirtir.
-\begin_deeper 
-\layout Itemize
-
-
-\series bold 
-Name:
-\series default 
- Baðýmlý olunan paketin adýný belirtir.
-\layout Itemize
-
-
-\series bold 
-Version:
-\series default 
- Baðýmlý olunan tek bir sürüm numarasýný belirtir.
-\layout Itemize
-
-
-\series bold 
-VersionFrom:
-\series default 
- Bu sürüm numarasýndan sonraki tüm sürüm numaralarýna baðýmlýlýðý tarif
- eder.
-\layout Itemize
-
-
-\series bold 
-VersionTo:
-\series default 
- Bu sürüm numaralarýna kadar olan baðýmlýlýðý tarif eder.
-\end_deeper 
-\layout Itemize
-
-
-\series bold 
-ComarOM: 
-\series default 
-Uygulamanýn 
-\series bold 
-ÇOMAR
-\series default 
-'ýn hangi 
-\series bold 
-OM
-\series default 
- bacaðýna ihtiyacý olduðunu belirtir.
-\end_deeper 
-\layout Itemize
-
-
-\series bold 
-Provides
-\begin_deeper 
-\layout Itemize
-
-
-\series bold 
-CSL: 
-\series default 
-Paketin yanýnda taþýdýðý 
-\series bold 
-CSL/CSL
-\series default 
-'lerin nerede/nerelerde olduðunu belirtir.
-\layout Itemize
-
-
-\series bold 
-OM:
-\series default 
- Uygulamanýn 
-\series bold 
-ÇOMAR
-\series default 
-'ýn 
-\series bold 
-OM
-\series default 
- bacaðýnda hangi uca/uçlara oturduðunu belirtir.
-\end_deeper 
-\layout Itemize
-
-
-\series bold 
-Conflicts
-\begin_deeper 
-\layout Itemize
-
-
-\series bold 
-ConflictedWith: 
-\series default 
-Paketin kurulmasýný engelleyen, kurulduðu zaman sistemde hangi paketler
- ile çakýþacaðýný, hangi paketler ile uyumsuz olduðunu belirtir.
- (modutils ve module-init-tools gibi)
-\end_deeper 
-\layout Itemize
-
-
-\series bold 
-Provides (Paketin bir parçasý OM ve CSL provide edebilir)
-\begin_deeper 
-\layout Itemize
-
-
-\series bold 
-CSL: 
-\series default 
-Paketin yanýnda taþýdýðý 
-\series bold 
-CSL/CSL
-\series default 
-'lerin nerede/nerelerde olduðunu belirtir.
-\layout Itemize
-
-
-\series bold 
-OM:
-\series default 
- Uygulamanýn 
-\series bold 
-ÇOMAR
-\series default 
-'ýn 
-\series bold 
-OM
-\series default 
- bacaðýnda hangi uca oturduðunu belirtir.
+:
 \end_deeper 
 \end_deeper 
+\end_deeper 
+\layout Subsubsection
+
+Actions Dosyasý
 \layout Standard
 
+Bu dosya bir Python betiði olup, kaynaðýn kurulmasý, derlenmesi, test edilmesi,
+ sisteme kurulmasý gibi iþlevleri yerine getiren fonksiyonlardan oluþur.
+\layout Subsubsection
 
-\emph on 
-
-\begin_inset Marginal
-collapsed true
-
+ChangeLog Dosyasý
 \layout Standard
 
+Pakedin sürümlerindeki deðiþikliklerin açýklamalarýný içerir.
+\layout Subsubsection
 
-\emph on 
-örnek 1-2 spec dosyasý hazýrlayýp buraya yerleþtirmek gerekiyor
-\end_inset 
-
-
+Files Dizini
 \layout Standard
 
-PSPEC dosyasýnda Global bölümü kaynaktan oluþturulacak tüm paketleri etkiler.
- Tanýmlanan her Package bölümü ise kaynaktan oluþturulacak bir paketin tarifidir.
- Her PSPEC dosyasýnda en az bir Package bölümü olmak zorundadýr.
-\layout Standard
-
-PSPEC dosyasý, belirlenecek paket formatýnýn içinde 
-\series bold 
-\emph on 
-XML
-\series default 
-\emph default 
- dosyasý olarak tutulacaktýr.
- XML dosyalarýnýn doðrulanmasý için kullanýlabilecek bilgi 
-\emph on 
-pisi-spec.dtd
-\emph default 
- dosyasýnda tanýmlanmýþtýr.
-\layout Standard
-
-Ayný uygulamanýn farklý mimarilere veya farklý amaçlara hizmet eden sürümlerini
- paket haline getirmek için farklý 
-\series bold 
-PSPEC
-\series default 
- dosyalarý kullanýlacaktýr.
- 
+Orjinal kaynaða uygulanacak yamalar ve kaynakta bulunmayan fazladan dosyalar
+ bu dizine konur.
 \layout Subsection
 
 metadata.xml
