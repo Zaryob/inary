@@ -344,18 +344,12 @@ ilir.
 \layout Standard
 
 Dosya biçimi XML'dir ve aþaðýdaki etiketleri içerir:
-\layout Itemize
+\layout Paragraph
 
-
-\series bold 
 Pisi
-\begin_deeper 
-\layout Itemize
+\layout Subparagraph
 
-
-\series bold 
 Source
-\begin_deeper 
 \layout Itemize
 
 
@@ -363,6 +357,8 @@ Source
 Name
 \series default 
 : Uygulamanýn adý.
+\begin_deeper 
+\begin_deeper 
 \layout Itemize
 
 
@@ -524,14 +520,13 @@ Release:
 \end_deeper 
 \end_deeper 
 \end_deeper 
-\layout Itemize
+\end_deeper 
+\layout Subparagraph
 
+Package:
+\layout Standard
 
-\series bold 
-Package
-\series default 
-: Uygulamadan oluþturulacak bir pakedi tanýmlar.
-\begin_deeper 
+Uygulamadan oluþturulacak bir pakedi tanýmlar.
 \layout Itemize
 
 
@@ -539,6 +534,8 @@ Package
 Name
 \series default 
 : Oluþturulacak pakedin adý.
+\begin_deeper 
+\begin_deeper 
 \layout Itemize
 
 
