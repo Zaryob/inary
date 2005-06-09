@@ -2,7 +2,7 @@
 
 # python standard library modules
 import urlparse
-import urllib
+import urllib, urllib2
 import os
 from sys import argv
 from sys import exit
@@ -12,6 +12,12 @@ import pisiconfig
 
 class FetchError (Exception):
     pass
+
+
+class ProgressMeter:
+    def __init__ (self,):
+    	pass
+    
 
 class Fetcher:
     """Yet another Pisi tool for fetching files from various sources.."""
@@ -35,7 +41,7 @@ class Fetcher:
         if os.access(self.filedest, os.W_OK) == False:
             self.err("no perm to write destination")
 
-        scheme_err = lambda: self.err("unexpected scheme (expecting file, http or ftp)")
+        scheme_err = lambda: self.err("unexpected scheme")
 
         actions = {
             'file': self.fetchLocalFile,
@@ -52,17 +58,48 @@ class Fetcher:
         copyfile(self.filepath, self.filedest + "/" + self.filename)
 
     def fetchRemoteFile (self):
-        try:
-            file = urllib.urlopen(self.uri)
+    	from httplib import HTTPException
 
-        except IOError, e:
-            self.err(e.strerror[1])
+    	try:
+    	    file = urllib2.urlopen(self.uri)
+            headers = file.info()
+	    
+    	except ValueError, e:
+            self.err('%s' % (e, ))
+	except IOError, e:
+            self.err('%s' % (e, ))
+	except OSError, e:
+            self.err('%s' % (e, ))
+	except HTTPException, e:
+	    self.err(('(%s): %s') % (e.__class__.__name__, e))
+
+        if not headers is None and not headers.has_key('Content-Length'):
+            self.err('file not found')
+	else: totalsize = int(headers['Content-Length'])
 
         dest = open(self.filedest + "/" + self.filename , "w")
-        dest.write(file.read())
+
+	bs = 1024*4
+	size = 0
+	oldpercent = -1
+	#FIXME: güzel, flexible bir progress nesnesi hazırlamak lazım.
+	#       şimdilik böyle kalsın, haftasonu hallederim..
+	chunk = file.read(bs)
+	size = size + len(chunk)
+	while chunk:
+	    dest.write(chunk)
+	    chunk = file.read(bs)
+	    size = size + len(chunk)
+	    percent = (size * 100) / totalsize
+	    if size != totalsize and oldpercent != percent:
+	    	print "%%%d" % (percent)
+		oldpercent = percent
+
+        dest.close(); print "%100" 
 
     def err (self, error):
-        raise FetchError, error
+        raise FetchError(error)
+
 
 def usage():
     print "Usage: %s URI" % argv[0]
