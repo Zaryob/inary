@@ -14,7 +14,9 @@ import fetcher
 
 if len(sys.argv) == 2:
 	obj = fetcher.Fetcher(sys.argv[1])
-	obj.fetch()
+	saved_file = obj.fetch()
+	if saved_file:
+		print "File saved: %s" % (saved_file)
 else:
 	sys.exit(0)
 
