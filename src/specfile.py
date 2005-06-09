@@ -24,8 +24,25 @@ from a PSPEC file"""
 	
 	return nodelist
 
-    def getText(self, nodepath):
-	pass
+    def getFirstNode(self, nodepath):
+	try:
+	    return self.getNodes(nodepath)[0]
+	except IndexError:
+	    return None
+    
+    def getFirstChildText(self, nodepath):
+	node = self.getFirstNode(nodepath)
+	if not node:
+	    return None
+
+	# get the first child
+	try:
+	    child = node.childNodes[0]
+	except IndexError:
+	    return None
+
+	if child.nodeType == child.TEXT_NODE:
+	    return child.data
 
     def getAttribute(self, nodepath, attribute):
 	pass
