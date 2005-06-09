@@ -19,10 +19,11 @@ class PisiBuild:
     def __init__(self, pspecfile):
 	self.pspecfile = pspecfile
 	pspec = SpecFile(pspecfile)
+        pspec.read()
 
-	self.packageName = pspec.getFirstChildText("PSPEC/Source/Name")
+	self.packageName = pspec.getFirstChildText("Source/Name")
 
-	archiveNode = pspec.getFirstNode("PSPEC/Source/Archive")
+	archiveNode = pspec.getFirstNode("Source/Archive")
 	self.archiveUri = pspec.getNodeText(archiveNode).strip()
 	self.archiveName = basename(self.archiveUri)
 	self.archiveType = pspec.getNodeAttribute(archiveNode, "archType")

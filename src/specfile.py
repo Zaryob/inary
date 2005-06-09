@@ -6,15 +6,33 @@ class SpecFile:
     """SpecFile: A class for extracting specific information
 from a PSPEC file"""
     def __init__(self, specfile):
-	self.dom = xml.dom.minidom.parse(specfile)
+        self.filename = specfile
+
+    def read():
+	self.dom = xml.dom.minidom.parse(filename)
+        # fill in fields
+        
+        self.packageName = pspec.getFirstChildText("Source/Name")
+
+	archiveNode = pspec.getFirstNode("Source/Archive")
+	self.archiveUri = pspec.getNodeText(archiveNode).strip()
+	self.archiveName = basename(self.archiveUri)
+	self.archiveType = pspec.getNodeAttribute(archiveNode, "archType")
+	self.archiveHash = pspec.getNodeAttribute(archiveNode,
+                                                  "md5sum")
+        patchesnode = pspec.getFirstNode("Source/Patches")
+
+    def write(outfn):
+        f = file(outfn, 'w')
+        xml.dom.minidom.writexml(f)
 
     def getNodes(self, nodepath):
 	"""getNodes function return nodes for given path of the node.
-	getNodes("PSPEC/Source/Name")
-	returns an array of Name tags in PSPEC/Source"""
+	getNodes("Source/Name")
+	returns a list of nodes in PSPEC/Source"""
+        nodepath = "PSPEC/" + nodepath
 	nodeArray=nodepath.split('/')
 
-	
 	# get DOM for top node
 	nodelist = self.dom.getElementsByTagName(nodeArray[0])
 	# iterate over
@@ -24,6 +42,7 @@ from a PSPEC file"""
 	return nodelist
 
     def getFirstNode(self, nodepath):
+        nodepath = "PSPEC/" + nodepath
 	try:
 	    return self.getNodes(nodepath)[0]
 	except IndexError:
@@ -40,6 +59,7 @@ from a PSPEC file"""
 	    return child.data
 
     def getFirstChildText(self, nodepath):
+        nodepath = "PSPEC/" + nodepath
 	node = self.getFirstNode(nodepath)
 	if not node:
 	    return None
