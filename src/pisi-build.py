@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 from specfile import SpecFile
-import fetcher
-import archive
-import pisipackage
-import pisiutils # patch, fileutils?
+from fetcher import Fetcher
+# import archive
+# import pisipackage
+# import pisiutils # patch, fileutils?
 
 class PisiBuildError(Exception):
     pass
@@ -15,8 +15,16 @@ class PisiBuild:
     def __init__(self, pspecfile):
 	self.pspecfile = pspecfile
 	self.pspec = SpecFile(pspecfile)
-	# pspec.getTag("tagname"), pspec.getAttribute("tagname","attribute"), vs.
-	# fonksiyonları olacak bu amcanın
+	self.packagename = self.pspec.getFirstChildText("PSPEC/Source/Name")
+	self.sourceuri = self.pspec.getFirstChildText("PSPEC/Source/Archive").strip()
+
+    def fetchArchive(self):
+	fetch = Fetcher(self.sourceuri)
+	fetch.fetch()
+
+
+def information(message):
+    print message
 
 def usage(progname = "pisi-build"):
     print """
@@ -58,12 +66,14 @@ def main():
 
     # doing the real job... vs. vs...
     pb = PisiBuild(pspec)
+    information("Building PISI package for: %s" % pb.packagename)
+    information("Fetching source from: %s" % pb.sourceuri)
     pb.fetchArchive()
-    pb.unpackArchive()
-    pb.applyPatches()
-    pb.buildSource()
-    pb.installTarget()
-    pb.buildPisiPackage()
+#     pb.unpackArchive()
+#     pb.applyPatches()
+#     pb.buildSource()
+#     pb.installTarget()
+#     pb.buildPisiPackage()
     
 
 if __name__ == "__main__":
