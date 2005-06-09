@@ -50,7 +50,12 @@ class Fetcher:
 		copyfile(self.filepath, self.filedest + "/" + self.filename)	
 		
 	def fetchRemoteFile (self):
-		file = urllib.urlopen(self.uri)
+		try:
+			file = urllib.urlopen(self.uri)
+
+		except IOError, e:
+			self.err(e.strerror[1])
+
 		dest = open(self.filedest + "/" + self.filename , "w")
 		dest.write(file.read())
 	
