@@ -14,8 +14,7 @@ class Fetcher:
 	"""Yet another Pisi tool for fetching files from various sources.."""
 	def __init__(self, uri):
 		self.uri = uri
-		self.filedest = "/var/tmp/pisi/cache"
-		self.builddir = "/var/tmp/pisi/work"
+		self.filedest = "/var/cache/pisi/archives"
 		self.scheme = "file"
 		self.netloc = ""
 		self.filepath = ""
