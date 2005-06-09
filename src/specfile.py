@@ -29,11 +29,7 @@ from a PSPEC file"""
 	except IndexError:
 	    return None
     
-    def getFirstChildText(self, nodepath):
-	node = self.getFirstNode(nodepath)
-	if not node:
-	    return None
-
+    def getNodeText(self, node):
 	# get the first child
 	try:
 	    child = node.childNodes[0]
@@ -43,8 +39,18 @@ from a PSPEC file"""
 	if child.nodeType == child.TEXT_NODE:
 	    return child.data
 
-    def getAttribute(self, nodepath, attribute):
-	pass
+    def getFirstChildText(self, nodepath):
+	node = self.getFirstNode(nodepath)
+	if not node:
+	    return None
+
+	return self.getNodeText(node)
+    
+    def getNodeAttribute(self, node, attrname):
+	for i in range(node.attributes.length):
+	    attr = node.attributes.item(i)
+	    if attr.name == attrname:
+		return attr.childNodes[0].data
 
 if __name__ == "__main__":
     import sys
