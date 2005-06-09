@@ -1,23 +1,19 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 # python standard library modules
 import urlparse
-import urllib, urllib2
+import urllib2
 import os
 from sys import argv
 from sys import exit
+from sys import stderr
 
 # pisi modules
 import pisiconfig
 
 class FetchError (Exception):
     pass
-
-
-class ProgressMeter:
-    def __init__ (self,):
-    	pass
-    
 
 class Fetcher:
     """Yet another Pisi tool for fetching files from various sources.."""
@@ -28,8 +24,10 @@ class Fetcher:
         self.netloc = ""
         self.filepath = ""
         self.filename = ""
+        self.percent = 0
 
     def fetch (self):
+        """Return value: Fetched file's full path.."""
         from string import split
         u = urlparse.urlparse(self.uri)
         self.scheme, self.netloc, self.filepath = u[0], u[1], u[2]
@@ -39,7 +37,7 @@ class Fetcher:
             self.err("filename error")
 
         if os.access(self.filedest, os.W_OK) == False:
-            self.err("no perm to write destination")
+            self.err("no perm to write to dest dir")
 
         scheme_err = lambda: self.err("unexpected scheme")
 
@@ -49,68 +47,83 @@ class Fetcher:
             'ftp' : self.fetchRemoteFile
             }; actions.get(self.scheme, scheme_err)()
 
+        return self.filedest + "/" + self.filename
+
+    def doGrab(self, file, dest, totalsize):
+        p = Progress(totalsize)
+        bs, size = 1024*4, 0
+
+        chunk = file.read(bs)
+        size = size + len(chunk)
+        self.percent = p.update(size)
+        while chunk:
+            dest.write(chunk)
+            chunk = file.read(bs)
+            size = size + len(chunk)
+            if p.update(size):
+            # XXX: Burasi boyle olmaz tabi.
+            #      Duzelecek bunlar hep..
+                self.percent = p.percent
+                out = '\r%-30.30s %%%3d' % (self.filename, self.percent)
+                stderr.write(out)
+                stderr.flush()
+
+        dest.close()
+        print ""
+
+
     def fetchLocalFile (self):
         from shutil import copyfile
 
         if os.access(self.filepath, os.F_OK) == False:
             self.err("no such file or no perm to read")
 
-        copyfile(self.filepath, self.filedest + "/" + self.filename)
+        dest = open(self.filedest + "/" + self.filename , "w")
+        totalsize = os.path.getsize(self.filepath)
+        file = open(self.filepath)
+        self.doGrab(file, dest, totalsize)
+
 
     def fetchRemoteFile (self):
-    	from httplib import HTTPException
+        from httplib import HTTPException
 
-    	try:
-    	    file = urllib2.urlopen(self.uri)
+        try:
+            file = urllib2.urlopen(self.uri)
             headers = file.info()
-	    
-    	except ValueError, e:
+    
+        except ValueError, e:
             self.err('%s' % (e, ))
-	except IOError, e:
+        except IOError, e:
             self.err('%s' % (e, ))
-	except OSError, e:
+        except OSError, e:
             self.err('%s' % (e, ))
-	except HTTPException, e:
-	    self.err(('(%s): %s') % (e.__class__.__name__, e))
+        except HTTPException, e:
+            self.err(('(%s): %s') % (e.__class__.__name__, e))
 
         if not headers is None and not headers.has_key('Content-Length'):
             self.err('file not found')
-	else: totalsize = int(headers['Content-Length'])
+        else: totalsize = int(headers['Content-Length'])
 
         dest = open(self.filedest + "/" + self.filename , "w")
+        self.doGrab(file, dest, totalsize)
 
-	bs = 1024*4
-	size = 0
-	oldpercent = -1
-	#FIXME: güzel, flexible bir progress nesnesi hazırlamak lazım.
-	#       şimdilik böyle kalsın, haftasonu hallederim..
-	chunk = file.read(bs)
-	size = size + len(chunk)
-	while chunk:
-	    dest.write(chunk)
-	    chunk = file.read(bs)
-	    size = size + len(chunk)
-	    percent = (size * 100) / totalsize
-	    if size != totalsize and oldpercent != percent:
-	    	print "%%%d" % (percent)
-		oldpercent = percent
-
-        dest.close(); print "%100" 
 
     def err (self, error):
         raise FetchError(error)
 
+class Progress:
+    def __init__(self, totalsize):
+        self.totalsize = totalsize
+        self.percent = 0
 
-def usage():
-    print "Usage: %s URI" % argv[0]
-
-def main():
-    if len(argv) != 2:
-        usage()
-        exit(1)
-
-    f = Fetcher(argv[1])
-    f.fetch()
+    def update(self, size):
+        percent = (size * 100) / self.totalsize
+        if percent and self.percent is not percent:
+                self.percent = percent
+                return percent
+        else:
+                return 0
 
 if __name__ == "__main__":
-    main()
+    print "hububat fiyatları.."
+    exit(0)
