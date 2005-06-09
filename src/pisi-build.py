@@ -19,16 +19,14 @@ class PisiBuild:
     def __init__(self, pspecfile):
 	self.pspecfile = pspecfile
 	pspec = SpecFile(pspecfile)
-        pspec.read()
 
-	self.packageName = pspec.getFirstChildText("Source/Name")
+	self.packageName = pspec.getSourceName()
 
-	archiveNode = pspec.getFirstNode("Source/Archive")
-	self.archiveUri = pspec.getNodeText(archiveNode).strip()
+	self.archiveUri = pspec.getArchiveUri()
 	self.archiveName = basename(self.archiveUri)
-	self.archiveType = pspec.getNodeAttribute(archiveNode, "archType")
-	self.archiveHash = pspec.getNodeAttribute(archiveNode, "md5sum")
-	
+	self.archiveType = pspec.getArchiveType()
+	self.archiveHash = pspec.getArchiveHash()
+
 	self.pspec = pspec
 
     def fetchArchive(self):
