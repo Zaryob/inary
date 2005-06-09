@@ -1,0 +1,20 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# mkdir /var/tmp/pisi/cache
+# ./fetch_file file:///etc/passwd
+# ./fetch http://www.uludag.org.tr/belgeler/gelistirici/gelistirici.pdf
+# ./fetch_file ftp://ftp.uludag.org.tr/pub/md5summer.exe
+# ls /var/tmp/pisi/cache
+
+import sys
+sys.path.append("..")
+import fetcher
+
+
+if len(sys.argv) == 2:
+	obj = fetcher.Fetcher(sys.argv[1])
+	obj.fetch()
+else:
+	sys.exit(0)
+
