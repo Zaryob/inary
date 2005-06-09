@@ -1,11 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+# python standard library modules
 import urlparse
 import urllib
 import os
 from sys import argv
 from sys import exit
+
+# pisi modules
+import pisiconfig
 
 class FetchError (Exception):
 	pass
@@ -14,7 +18,7 @@ class Fetcher:
 	"""Yet another Pisi tool for fetching files from various sources.."""
 	def __init__(self, uri):
 		self.uri = uri
-		self.filedest = "/var/cache/pisi/archives"
+		self.filedest = pisiconfig.archives_dir
 		self.scheme = "file"
 		self.netloc = ""
 		self.filepath = ""
