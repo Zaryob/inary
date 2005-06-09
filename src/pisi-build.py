@@ -1,11 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+# python standard library
+from os.path import basename
+
 from specfile import SpecFile
 from fetcher import Fetcher
 # import archive
 # import pisipackage
 # import pisiutils # patch, fileutils?
+import pisiconfig
 
 class PisiBuildError(Exception):
     pass
@@ -14,12 +18,20 @@ class PisiBuild:
     """PisiBuild class, provides the package build and creation rutines"""
     def __init__(self, pspecfile):
 	self.pspecfile = pspecfile
-	self.pspec = SpecFile(pspecfile)
-	self.packagename = self.pspec.getFirstChildText("PSPEC/Source/Name")
-	self.sourceuri = self.pspec.getFirstChildText("PSPEC/Source/Archive").strip()
+	pspec = SpecFile(pspecfile)
+
+	self.packageName = pspec.getFirstChildText("PSPEC/Source/Name")
+
+	archiveNode = pspec.getFirstNode("PSPEC/Source/Archive")
+	self.archiveUri = pspec.getNodeText(archiveNode).strip()
+	self.archiveName = basename(self.archiveUri)
+	self.archiveType = pspec.getNodeAttribute(archiveNode, "archType")
+	self.archiveHash = pspec.getNodeAttribute(archiveNode, "md5sum")
+	
+	self.pspec = pspec
 
     def fetchArchive(self):
-	fetch = Fetcher(self.sourceuri)
+	fetch = Fetcher(self.archiveUri)
 	fetch.fetch()
 
 
@@ -66,9 +78,11 @@ def main():
 
     # doing the real job... vs. vs...
     pb = PisiBuild(pspec)
-    information("Building PISI package for: %s" % pb.packagename)
-    information("Fetching source from: %s" % pb.sourceuri)
+    information("Building PISI package for: %s" % pb.packageName)
+    information("Fetching source from: %s (be patient)" % pb.archiveUri)
+    print pb.archiveType, pb.archiveHash
     pb.fetchArchive()
+    information("Source archive is stored: %s/%s" %(pisiconfig.archives_dir, pb.archiveName))
 #     pb.unpackArchive()
 #     pb.applyPatches()
 #     pb.buildSource()
