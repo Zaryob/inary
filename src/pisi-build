@@ -4,14 +4,15 @@
 # python standard library
 from os.path import basename
 
-from specfile import SpecFile
-from fetcher import Fetcher
-# import archive
-# import pisipackage
-# import pisiutils # patch, fileutils?
 import pisiconfig
 import util
 from pisibuild import PisiBuild
+
+def usage(progname = "pisi-build"):
+    print """
+Usage:
+%s [options] package-name.pspec
+""" %(progname)
 
 def main():
     import sys
@@ -43,7 +44,6 @@ def main():
 	raise PisiBuildError, "pisi-build excepts one (and only one) pspec file currently"
     else:
 	pspec = args[0]
-
 
     # doing the real job... vs. vs...
     pb = PisiBuild(pspec)

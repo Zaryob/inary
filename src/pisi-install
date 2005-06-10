@@ -1,3 +1,39 @@
 #! /usr/bin/python
 # -*- python -*-
 
+def usage(progname = "pisi-install"):
+    print """
+Usage:
+%s [options] package-name.pspec
+""" %(progname)
+    
+def main():
+    import sys
+    import getopt
+    
+    # wrapper for usage(progname) function
+    help = lambda: usage(sys.argv[0])
+
+    # getopt magic
+    try:
+	opts, args = getopt.getopt(sys.argv[1:],"h",["help"])
+    except getopt.GetoptError:
+	help()
+	sys.exit(1)
+
+    for opt, arg in opts:
+	if opt == "-h":
+	    help()
+	    sys.exit(1)
+
+    # package filename
+    packagefn = ""
+
+    # TODO: We accept only one pspec file (at a time) currently,
+    # but pisi-build may build many packages (pspecs given in order)
+    # sequentially.
+    if len(args) != 1:
+	help()
+	raise PisiBuildError, "pisi-install excepts one (and only one) pspec file currently"
+    else:
+	packagefn = args[0]

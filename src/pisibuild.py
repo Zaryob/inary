@@ -34,8 +34,3 @@ class PisiBuild:
 	fetch = Fetcher(self.archiveUri)
 	fetch.fetch()
 
-def usage(progname = "pisi-build"):
-    print """
-Usage:
-%s [options] package-name.pspec
-""" %(progname)
