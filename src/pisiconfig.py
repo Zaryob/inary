@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-global_patches_dir = "/var/lib/pisi/"
+lib_dir = "/var/lib/pisi/"
 db_dir = "/var/db/pisi/"
 archives_dir = "/var/cache/pisi/archives/"
 tmp_dir =  "/var/tmp/pisi/"
