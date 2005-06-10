@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 #import package
 from specfile import SpecFile
 from package import Package
