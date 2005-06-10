@@ -26,4 +26,4 @@ def install():
 				sysconfdir={D}/etc \
 				install'
 
-	os.system( install_string.replace( '{D}', os.path.dirname( os.getcwd() + '/image' ))
+	os.system( install_string.replace( '{D}', os.path.dirname( os.getcwd() + '/image' )))

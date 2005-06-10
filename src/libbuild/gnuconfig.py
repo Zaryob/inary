@@ -1,8 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import os, string, re, shutil, pisiconfig
+import os, string, re, shutil
 from shell import *
+
+sys.path.append('..')
+import pisiconfig
 
 def gnuconfig_findnewest():
 
@@ -24,8 +27,8 @@ def gnuconfig_update( package_name ):
 	newer_location = gnuconfig_findnewest()
 	
 	try:
-		shutil.copyfile( newer_location + '/config.sub', pisiconfig.tmp_dir + package_name + '/build/config.sub' )
-		shutil.copyfile( newer_location + '/config.guess', pisiconfig.tmp_dir + package_name + '/build/config.guess' )
+		shutil.copyfile( newer_location + '/config.sub', pisiconfig.tmp_dir + '/' + package_name + '/build/config.sub' )
+		shutil.copyfile( newer_location + '/config.guess', pisiconfig.tmp_dir + '/' + package_name + '/build/config.guess' )
 	except IOError:
 		print 'Hata mata...'
 		sys.exit()

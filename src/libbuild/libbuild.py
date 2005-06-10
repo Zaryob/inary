@@ -11,7 +11,7 @@ import pisiconfig
 if __name__ == "__main__":
 	package_name = 'popt-1.7'
 
-	os.chdir( pisiconfig.tmp_dir + package_name + '/build' )
+	os.chdir( pisiconfig.tmp_dir + '/' + package_name + '/build' )
 
 	gnuconfig_update( package_name )
 	libtoolize()
