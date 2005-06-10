@@ -19,13 +19,13 @@ def gnuconfig_findnewest():
 
 	return os.path.dirname( newer_location.popitem()[0] )
 
-def gnuconfig_update():
+def gnuconfig_update( package_name ):
 
 	newer_location = gnuconfig_findnewest()
 	
 	try:
-		shutil.copyfile( newer_location + '/config.sub', pisiconfig.build_dir + 'popt-1.7' + '/config.sub' )
-		shutil.copyfile( newer_location + '/config.guess', pisiconfig.build_dir + 'popt-1.7' + '/config.guess' )
+		shutil.copyfile( newer_location + '/config.sub', pisiconfig.tmp_dir + package_name + '/build/config.sub' )
+		shutil.copyfile( newer_location + '/config.guess', pisiconfig.tmp_dir + package_name + '/build/config.guess' )
 	except IOError:
 		print 'Hata mata...'
 		sys.exit()

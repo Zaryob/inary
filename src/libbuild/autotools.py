@@ -3,14 +3,16 @@
 
 import os, pisiconfig
 
-def configure():
-	os.system( './configure --prefix=/usr \
+def configure( parameters = None):
+	configure_string = './configure --prefix=/usr \
 				--host=i686-pc-linux-gnu \
 				--mandir=/usr/share/man \
 				--infodir=/usr/share/info \
 				--datadir=/usr/share \
 				--sysconfdir=/etc \
-				--localstatedir=/var/lib ')
+				--localstatedir=/var/lib {EXTRA}'
+
+	os.system( configure_string.replace( '{EXTRA}', parameters ))
 
 def make():
 	os.system( 'make' )
@@ -24,4 +26,4 @@ def install():
 				sysconfdir={D}/etc \
 				install'
 
-	os.system( install_string.replace('{D}', pisiconfig.image_dir ) )
+	os.system( install_string.replace( '{D}', os.path.dirname( os.getcwd() + '/image' ))

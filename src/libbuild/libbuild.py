@@ -4,12 +4,17 @@
 from gnuconfig import *
 from libtoolize import *
 from autotools import *
+
+sys.path.append('..')
 import pisiconfig
 
 if __name__ == "__main__":
-	os.chdir( pisiconfig.build_dir + 'popt-1.7' )
-	gnuconfig_update()
+	package_name = 'popt-1.7'
+
+	os.chdir( pisiconfig.tmp_dir + package_name + '/build' )
+
+	gnuconfig_update( package_name )
 	libtoolize()
-	configure()
+	configure( '--with-nls' )
 	make()
 	install()
