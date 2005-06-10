@@ -49,7 +49,7 @@ def main():
     else:
 	pspec = args[0]
 
-    # doing the real job... vs. vs...
+    # doing the real job.
     pb = PisiBuild(pspec)
     util.information("Building PISI package for: %s\n" % pb.spec.sourceName)
 
