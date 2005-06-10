@@ -31,7 +31,7 @@ def main():
     # sequentially.
     if len(args) != 1:
 	help()
-	raise util.ArgError, "pisi-install excepts one (and only one) package file currently"
+	raise util.ArgError, "pisi-install expects one (and only one) package file currently"
     else:
 	package_fn = args[0]
 

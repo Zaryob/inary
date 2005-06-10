@@ -40,7 +40,7 @@ def main():
     # sequentially.
     if len(args) != 1:
 	help()
-	raise PisiBuildError, "pisi-build excepts one (and only one) pspec file currently"
+	raise PisiBuildError, "pisi-build expects one (and only one) pspec file currently"
     else:
 	pspec = args[0]
 
