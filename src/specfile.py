@@ -8,14 +8,6 @@ class PatchInfo:
         self.filename = filenm
         self.compressionType = ctype
 
-# sayin arkadaslarim burada write icin koydugum seyleri silmeyin 
-# bu tam olmamis duzeltiyorum, o getlere de genel olarak
-# ihtiyac yok. *client* icin nasil kolay oluyorsa oyle olmali
-# yanlis su: bir class icindeki state'i cache etmez store eder
-# cache etmek ne zaman gerekir? represent ettigi data core'a
-# sigmiyorsa. diger zamanlarda yanlis bir metod olur.
-# otesinde de refactor ediyorum biraz -- eray
-
 class SpecFile(XmlFile):
     """A class for reading/writing from/to a PSPEC (PISI SPEC) file."""
 
