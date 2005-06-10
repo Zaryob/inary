@@ -42,3 +42,9 @@ def strlist(l):
 
 class ArgError(Exception):
     pass
+
+def usage(progname = "pisi-build"):
+    print """
+Usage:
+%s [options] package-name.pspec
+""" %(progname)

@@ -8,11 +8,6 @@ import pisiconfig
 import util
 from pisibuild import PisiBuild
 
-def usage(progname = "pisi-build"):
-    print """
-Usage:
-%s [options] package-name.pspec
-""" %(progname)
 
 def doProgress(filename, percent, rate):
     out = '\r%-30.30s %%%3d %d KB/s' % (filename, percent, rate)
@@ -23,7 +18,7 @@ def main():
     import getopt
     
     # wrapper for usage(progname) function
-    help = lambda: usage(sys.argv[0])
+    help = lambda: util.usage(sys.argv[0])
 
     # getopt magic
     try:

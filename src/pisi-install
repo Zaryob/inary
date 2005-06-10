@@ -4,18 +4,12 @@
 import install
 import util
 
-def usage(progname = "pisi-install"):
-    print """
-Usage:
-%s [options] package-name.pspec
-""" %(progname)
-    
 def main():
     import sys
     import getopt
     
     # wrapper for usage(progname) function
-    help = lambda: usage(sys.argv[0])
+    help = lambda: util.usage(sys.argv[0])
 
     # getopt magic
     try:
