@@ -50,23 +50,22 @@ class SpecFile(XmlFile):
 	archiveNode = self.getNode("Source/Archive")
         self.archiveUri = getNodeText(archiveNode).strip()
 	self.archiveType = getNodeAttribute(archiveNode, "archType")
-	self.archiveHash = getNodeAttribute(archiveNode, "md5sum")
+	self.archiveMD5 = getNodeAttribute(archiveNode, "md5sum")
         patchElts = self.getChildElts("Source/Patches")
-        patches = [ PatchInfo(p) for p in patchElts ]
-        for x in patches:
+        self.patches = [ PatchInfo(p) for p in patchElts ]
+        for x in self.patches:
             print "patch fn:", x.filename
             print "patch ct:", x.compressionType
         buildDepElts = self.getChildElts("Source/BuildDependencies")
-        buildDeps = [DepInfo(d) for d in buildDepElts]
-        for x in buildDeps:
+        self.buildDeps = [DepInfo(d) for d in buildDepElts]
+        for x in self.buildDeps:
             print "dep nm:", x.package
             print "dep vf:", x.versionFrom
 
         # find all binary packages
         packageElts = self.getAllNodes("Package")
-        packages = [PackageInfo(p) for p in packageElts]
-        print packages
-        for x in packages:
+        self.packages = [PackageInfo(p) for p in packageElts]
+        for x in self.packages:
             print 'package', x.name
             
     def verify(self):

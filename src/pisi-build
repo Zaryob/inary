@@ -51,11 +51,12 @@ def main():
     util.information("Fetching source from: %s (be patient)\n" % pb.spec.archiveUri)
     pb.fetchArchive(doProgress)
     util.information("Source archive is stored: %s/%s\n" %(pisiconfig.archives_dir, pb.archiveName))
-#     pb.unpackArchive()
-#     pb.applyPatches()
-#     pb.buildSource()
-#     pb.installTarget()
-#     pb.buildPisiPackage()
+    # pb.unpackArchive()
+    # pb.applyPatches()
+    # pb.buildSource()
+    # pb.installTarget()
+
+    pb.buildPackages()
     
 
 if __name__ == "__main__":

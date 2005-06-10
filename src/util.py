@@ -3,7 +3,7 @@
 
 import os
 import sys
-import string
+import md5
 
 def information(message):
     sys.stdout.write(message)
@@ -21,6 +21,13 @@ def check_dir(dir):
         (parent_dir, curr_dir) = os.path.split(dir)
         check_dir(parent_dir)
         os.mkdir(dir)
+
+def md5_file(filename):
+    m = md5.new()
+    f = file(filename, 'rb')
+    for l in f:
+        m.update(l)
+    return m.hexdigest()
 
 # run a command non-interactively
 def run_batch(cmd):

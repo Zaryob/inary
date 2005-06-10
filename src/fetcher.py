@@ -29,13 +29,13 @@ class Fetcher:
         self.percent = 0
         self.rate = 0
 	self.percentHook = None
-
-    def fetch (self):
-        """Return value: Fetched file's full path.."""
         from string import split
         u = urlparse.urlparse(self.uri)
         self.scheme, self.netloc, self.filepath = u[0], u[1], u[2]
         self.filename = split(self.filepath, "/")[-1:][0]
+
+    def fetch (self):
+        """Return value: Fetched file's full path.."""
 
         if self.filename == "":
             self.err("filename error")
