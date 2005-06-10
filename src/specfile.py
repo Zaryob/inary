@@ -18,6 +18,11 @@ class DepInfo:
         self.package = getNodeText(node).strip()
         self.versionFrom =  getNodeAttribute(node, "versionFrom")
 
+class PathInfo:
+    def __init__(self, node):
+        self.pathname = getNodeText(node)
+        self.fileType = getNodeAttribute(node, "fileType")
+
 class PackageInfo:
     def __init__(self, node):
         self.name = getNodeText(getNode(node, "Name"))
@@ -25,10 +30,11 @@ class PackageInfo:
         self.description = getNodeText(getNode(node, "Description"))
         self.category = getNodeText(getNode(node, "Category"))
         iDepElts = getAllNodes(node, "InstallDependencies")
-        self.installDeps = [DepInfo(d) for d in iDepElts]
+        self.installDeps = [DepInfo(x) for x in iDepElts]
         rtDepElts = getAllNodes(node, "RuntimeDependencies")
-        self.runtimeDeps = [DepInfo(d) for d in rtDepElts]
-        
+        self.runtimeDeps = [DepInfo(x) for x in rtDepElts]
+        self.paths = [PathInfo(x) for x in getAllNodes(node, "Files/Path")]
+
 
 class SpecFile(XmlFile):
     """A class for reading/writing from/to a PSPEC (PISI SPEC) file."""
