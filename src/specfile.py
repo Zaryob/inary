@@ -2,6 +2,11 @@
 
 import xml.dom.minidom
 
+class Patch:
+    def __init__(self, filename, patchtype):
+        self.filename = filename
+        self.compressionType = patchtype
+
 class XmlFile(object):
     """A class for retrieving information from an XML file"""
 
