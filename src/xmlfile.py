@@ -25,6 +25,10 @@ def getNodeText(node):
     else:
         raise XmlError("getNodeText: Expected text node, got something else!")
 
+# get only child elements
+def getChildElts(node):
+    return filter(lambda x:x.nodeType==x.ELEMENT_NODE, node.childNodes)
+
 # xmlfile class that further abstracts a dom object
 
 class XmlFile(object):
@@ -49,7 +53,7 @@ class XmlFile(object):
         node = self.getNode(tagpath)
         return filter(lambda x:x.nodeType==type, node.childNodes)
 
-    # get only child elements, slightly better than Serdar's sol'n :> -- exa
+    # get only child elements
     def getChildElts(self, tagpath):
         """ returns the children of the given path, only with given type """
         node = self.getNode(tagpath)

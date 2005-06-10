@@ -20,10 +20,7 @@
       <Patch compressionType="gz">popt-1.7-uclibc.patch.gz</Patch>
     </Patches>
     <BuildDependencies>
-      <Dependency>
-	<Name>make</Name>
-	<VersionFrom>1.8</VersionFrom>
-      </Dependency>
+      <Dependency versionFrom="1.8"> make </Dependency>
     </BuildDependencies>
     <History>
       <Update>
@@ -49,9 +46,7 @@
     </Description>
     <Category>devel:library</Category>
     <RuntimeDependencies>
-      <Dependency>
-	<Name>gettext</Name>
-      </Dependency>
+      <Dependency>gettext</Dependency>
     </RuntimeDependencies>
     <Files>
       <Path fileType="sharedLib">/usr/lib/</Path>
