@@ -14,6 +14,10 @@ Usage:
 %s [options] package-name.pspec
 """ %(progname)
 
+def doProgress(filename, percent, rate):
+    out = '\r%-30.30s %%%3d %d KB/s' % (filename, percent, rate)
+    util.information(out)
+
 def main():
     import sys
     import getopt
@@ -47,11 +51,11 @@ def main():
 
     # doing the real job... vs. vs...
     pb = PisiBuild(pspec)
-    util.information("Building PISI package for: %s" % pb.spec.sourceName)
-    util.information("Fetching source from: %s (be patient)" % pb.spec.archiveUri)
-    print pb.spec.archiveType, pb.spec.archiveHash
-    pb.fetchArchive()
-    util.information("Source archive is stored: %s/%s" %(pisiconfig.archives_dir, pb.archiveName))
+    util.information("Building PISI package for: %s\n" % pb.spec.sourceName)
+
+    util.information("Fetching source from: %s (be patient)\n" % pb.spec.archiveUri)
+    pb.fetchArchive(doProgress)
+    util.information("Source archive is stored: %s/%s\n" %(pisiconfig.archives_dir, pb.archiveName))
 #     pb.unpackArchive()
 #     pb.applyPatches()
 #     pb.buildSource()
