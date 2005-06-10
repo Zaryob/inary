@@ -19,21 +19,20 @@ def doProgress(filename, percent):
     stderr.flush()
 
 if len(sys.argv) == 2:
-	obj = fetcher.Fetcher(sys.argv[1])
-	obj.percentHook = doProgress
-	saved_file = obj.fetch()
-	if saved_file:
-		print "File saved: %s" % (saved_file)
+    obj = fetcher.Fetcher(sys.argv[1])
+    obj.percentHook = doProgress
+    saved_file = obj.fetch()
+    if saved_file:
+        print "File saved: %s" % (saved_file)
 else:
-	print """
-	fetcher.py için test uygulaması.. Parametre olarak verilen URI'deki dosyayı '%s'
-	hedefine kaydeder..
+    print """
+    fetcher.py için test uygulaması.. Parametre olarak verilen URI'deki dosyayı '%s' hedefine kaydeder..
 
-	Örnek:
-	
- 	./fetch_file file:///etc/passwd
- 	./fetch http://cekirdek.uludag.org.tr/~meren/Imagi.mp3 
- 	./fetch_file ftp://ftp.uludag.org.tr/pub/md5summer.exe
+    Örnek:
 
-	""" % (pisiconfig.archives_dir)
+    ./fetch_file file:///etc/passwd
+    ./fetch_file http://cekirdek.uludag.org.tr/~meren/Imagi.mp3 
+    ./fetch_file ftp://ftp.uludag.org.tr/pub/md5summer.exe
+
+    """ % (pisiconfig.archives_dir)
 
