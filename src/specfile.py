@@ -28,8 +28,3 @@ class SpecFile(XmlFile):
     def write(self, filename):
         """Write PSPEC file"""
         self.writexml(filename)
-
-if __name__ == "__main__":
-    import sys
-    sys.stderr.write("Not a callable module!")
-    exit(-1)
