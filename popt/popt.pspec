@@ -17,7 +17,7 @@
       ftp://ftp.rpm.org/pub/rpm/dist/rpm-4.1.x/popt-1.7.tar.gz
     </Archive>
     <Patches>
-      <Patch> compressionType="gz">popt-1.7-uclibc.patch.gz</Patch>
+      <Patch compressionType="gz">popt-1.7-uclibc.patch.gz</Patch>
     </Patches>
     <BuildDependencies>
       <Dependency>
