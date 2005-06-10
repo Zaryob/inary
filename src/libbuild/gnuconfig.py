@@ -8,6 +8,7 @@ sys.path.append('..')
 import pisiconfig
 
 def gnuconfig_findnewest():
+	''' find the newest config.* file according to timestamp and return it '''
 
 	locations = [ '/usr/share/gnuconfig/config.sub', '/usr/share/automake-1.8/config.sub', '/usr/share/automake-1.7/config.sub', '/usr/share/automake-1.6/config.sub', '/usr/share/automake-1.5/config.sub', '/usr/share/automake-1.4/config.sub' ]
 	
@@ -23,6 +24,7 @@ def gnuconfig_findnewest():
 	return os.path.dirname( newer_location.popitem()[0] )
 
 def gnuconfig_update( package_name ):
+	''' copy newest config.* onto source's '''
 
 	newer_location = gnuconfig_findnewest()
 	
