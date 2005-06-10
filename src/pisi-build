@@ -46,7 +46,7 @@ def main():
 
     # doing the real job.
     pb = PisiBuild(pspec)
-    util.information("Building PISI package for: %s\n" % pb.spec.sourceName)
+    util.information("Building PISI source package: %s\n" % pb.spec.sourceName)
 
     util.information("Fetching source from: %s (be patient)\n" % pb.spec.archiveUri)
     pb.fetchArchive(doProgress)

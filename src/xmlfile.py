@@ -25,21 +25,85 @@ def getNodeText(node):
     else:
         raise XmlError("getNodeText: Expected text node, got something else!")
 
-# get only child elements
 def getChildElts(node):
+    """get only child elements"""
     return filter(lambda x:x.nodeType==x.ELEMENT_NODE, node.childNodes)
+
+def getNode(node, tagpath):
+    """returns the *first* matching node for given tag path."""
+    
+    tags=tagpath.split('/')
+
+    # iterative code to search for the path
+        
+    # get DOM for top node
+    nodeList = node.getElementsByTagName(tags[0])
+    if len(nodeList)==0:
+        return None                 # not found
+
+    node = nodeList[0]              # discard other matches
+    for tag in tags[1:]:
+        nodeList = node.getElementsByTagName(tag)
+        if len(nodeList)==0:
+            return None
+        else:
+            node = nodeList[0]
+
+    return node
+
+def getAllNodes(node, tags):
+    """retrieve all nodes that match a given tag path."""
+
+    print "tags = ", tags
+    if len(tags)==0:
+        return None
+
+    nodeList = node.getElementsByTagName(tags[0])
+    if len(nodeList)==0:
+        return None
+
+    for tag in tags[1:]:
+        results = map(lambda x: x.getElementsByTagName(tag),nodeList)
+        nodeList = []
+        for x in results:
+            nodeList.extend(x)
+            pass # emacs indentation error, keep it here
+
+        if len(nodeList)==0:
+            return None
+
+    return nodeList
+
 
 # xmlfile class that further abstracts a dom object
 
 class XmlFile(object):
     """A class for retrieving information from an XML file"""
 
-    def readxml(self, filenm):
-	self.dom = mdom.parse(filenm)
+    def __init__(self, rootTag):
+        self.rootTag = rootTag
 
-    def writexml(self, filenm):
-        f = file(filenm,'w')
+    def readxml(self, fileName):
+	self.dom = mdom.parse(fileName)
+
+    def writexml(self, fileName):
+        f = file(fileName,'w')
         self.dom.writexml(f)
+
+    def verifyRootTag(self):
+        if self.dom.documentElement.tagName != self.rootTag:
+            raise XmlError("Root tagname not " % self.rootTag % " as expected")
+
+    def getNode(self, tagPath):
+	"""returns the *first* matching node for given tag path."""
+        self.verifyRootTag()
+        return getNode(self.dom.documentElement, tagPath)
+
+    def getAllNodes(self, tagPath):
+	"""returns all nodes matching a given tag path."""
+        self.verifyRootTag()
+        tags = tagPath.split('/')
+        return getAllNodes(self.dom.documentElement, tags)
 
     def getChildren(self, tagpath):
         """ returns the children of the given path"""
@@ -59,43 +123,9 @@ class XmlFile(object):
         node = self.getNode(tagpath)
         return filter(lambda x:x.nodeType==x.ELEMENT_NODE, node.childNodes)
 
-    def getNode(self, tagpath):
-	"""returns the node for given *unique* path of the node.
-
-	getNode("PSPEC/Source")
-	returns the node with the tag path PSPEC/Source"""
-
-	tags=tagpath.split('/')
-
-        # code to search for the path
-
-	# get DOM for top node
-	nodelist = self.dom.getElementsByTagName(tags[0])
-
-        if len(nodelist)==0:
-            return None                 # not found
-
-        node = nodelist[0]              # discard other matches
-	for nodename in tags[1:]:
-	    nodelist = node.getElementsByTagName(nodename)
-            if len(nodelist)==0:
-                return None
-            else:
-                node = nodelist[0]
-
-        return node
-
-    def getAllNodes(self, nodepath):
-	"""returns all trees corresponding to given path.
-
-	getAllNodes("PSPEC/Source")
-	returns an array of nodes under PSPEC/Source"""
-        raise XmlError("Not implemented!")
-
     def getChildText(self, tagpath):
 	node = self.getNode(tagpath)
 	if not node:
 	    return None
-
 	return getNodeText(node)
 
