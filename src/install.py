@@ -7,8 +7,6 @@ import util
 #import dependency
 #import conflicts
 
-class PisiInstallError(Exception):
-    pass
 
 def install_package_file(package_fn):
     
@@ -21,7 +19,7 @@ def install_package_file(package_fn):
     # check if we have all required files
 
     specfile = SpecFile()
-    specfile.read(install_dir + "pspec.xml")
+    specfile.read(install_dir + "/pspec.xml")
     # check pspec semantics
     specfile.verify()
     # check file system requirements
