@@ -1,4 +1,9 @@
+# some helper functions for using minidom
+
 import xml.dom.minidom
+
+class XmlError(Exception):
+    pass
 
 class XmlFile(object):
     """A class for retrieving information from an XML file"""
@@ -8,27 +13,48 @@ class XmlFile(object):
 
     def writexml(self, filenm):
         f = file(filenm,'w')
-        dom.writetoxml(f)
+        self.dom.writexml(f)
 
-    def getNodes(self, nodepath):
-	"""getNodes function return nodes for given path of the node.
+    def getChildren(self, tagpath):
+        """ returns the children of the given path"""
+        return self.dom.getChildren()
 
-	getNodes("PSPEC/Source/Name")
-	returns an array of Name nodes in PSPEC/Source"""
+    def getNode(self, tagpath):
+	"""returns the node for given *unique* path of the node.
 
-	nodeArray=nodepath.split('/')
+	getNode("PSPEC/Source")
+	returns the node with the tag path PSPEC/Source"""
+
+	tags=tagpath.split('/')
+
+        # code to search for the path
 
 	# get DOM for top node
-	nodelist = self.dom.getElementsByTagName(nodeArray[0])
-	# iterate over
-	for nodename in nodeArray[1:]:
-	    nodelist = nodelist[0].getElementsByTagName(nodename)
+	nodelist = self.dom.getElementsByTagName(tags[0])
 
-	return nodelist
+        if len(nodelist)==0:
+            raise XmlError("Root tag for " % tagpath % " not found")
+
+        node = nodelist[0]              # discard other matches
+	for nodename in tags[1:]:
+	    nodelist = node.getElementsByTagName(nodename)
+            if len(nodelist)==0:
+                raise XmlError("Tag path " % tagpath % " broken")
+            else:
+                node = nodelist[0]
+
+	return node
+
+    def getAllNodes(self, nodepath):
+	"""returns all trees corresponding to given path.
+
+	getAllNodes("PSPEC/Source")
+	returns an array of nodes under PSPEC/Source"""
+        raise XmlError("Not implemented!")
 
     def getFirstNode(self, nodepath):
 	try:
-	    return self.getNodes(nodepath)[0]
+	    return self.getNode(nodepath)
 	except IndexError:
 	    return None
 

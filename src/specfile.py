@@ -15,11 +15,14 @@ class SpecFile(XmlFile):
     def read(self, filename):
         """Read PSPEC file"""
         self.readxml(filename)
-	self.archiveNode = self.getFirstNode("PSPEC/Source/Archive")
         self.sourceName = self.getFirstChildText("PSPEC/Source/Name")
-        self.archiveUri = self.getNodeText(self.archiveNode).strip()
-	self.archiveType = self.getNodeAttribute(self.archiveNode, "archType")
-	self.archiveHash = self.getNodeAttribute(self.archiveNode, "md5sum")
+	archiveNode = self.getFirstNode("PSPEC/Source/Archive")
+        self.archiveUri = self.getNodeText(archiveNode).strip()
+	self.archiveType = self.getNodeAttribute(archiveNode, "archType")
+	self.archiveHash = self.getNodeAttribute(archiveNode, "md5sum")
+        patches = self.getNode("PSPEC/Source/Patches")
+        #patches = self.dom.getElementsByTagName("PSPEC")
+        #for x in patc
 
     def verify(self):
         """Verify PSPEC structures, are they what we want of them?"""
