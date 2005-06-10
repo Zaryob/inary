@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# read/write PISI source package specification file
 
 import xml.dom.minidom
 from xmlfile import XmlFile

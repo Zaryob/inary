@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# misc. utility functions, including process and file utils
+
 import os
 import sys
 import string

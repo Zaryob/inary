@@ -1,5 +1,5 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
+# download magic
 
 # python standard library modules
 import urlparse
@@ -130,6 +130,3 @@ class Progress:
         else:
                 return 0
 
-if __name__ == "__main__":
-    print "hububat fiyatları.."
-    exit(0)
