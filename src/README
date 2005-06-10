@@ -1,6 +1,36 @@
 PISI is a new package manager implemented in python.
 
-Guidelines:
+Guidelines
+----------
 
-1. When using dirnames, don't expect the dir to end with a trailing slash,
-and use the dirnames in pisiconfig
+1. When using dirnames, don't expect the dir to end
+   with a trailing slash, and please use the dirnames
+   in pisiconfig
+
+
+Coding Suggestions
+------------------
+In OO programming, try to invoke Demeter's law.
+One of the "rules" there is not directly accessing any
+objects that are further than, 2/3 refs, away. So the
+following code is OK.
+   destroy_system(a.system().name())
+but the following isn't as robust
+   destroy_system(object_store.root().a.system.name())
+As you can tell, this introduces too many implementation
+dependencies. The rule of thumb is that, in these cases
+you have to use a chain of methods to access data. I
+think it's a good idea to not count the object scope in
+this case, so in Python self.a means only one level of
+reference, not two.
+
+OTOH, in Python and C++, it's not always good to implement 
+accessor/modifier pairs for every property of an object.
+It would be much simpler if you are not doing any special
+processing on the property (e.g. if what the type system
+does is sufficient).
+
+The main rule of thumb in Demeter's Law is avoiding
+putting more than, say, 10 methods in a class. That works
+really well in practice, forcing refactoring every now
+and then.
