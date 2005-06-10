@@ -1,14 +1,20 @@
-#! /usr/bin/python
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
-import gnubuild
+from gnuconfig import *
+from libtoolize import *
+from autotools import *
 
+import pisiconfig
+
+package_name = 'popt-1.7'
 
 def setup:
-    gnubuild.configure
-
+	gnuconfig_update( package_name )
+	libtoolize()
+	configure( '--with-nls' )
 def build:
-    gnubuild.build
+	make()
 
 def install:
-    gnubuild.install
-
+	install()
