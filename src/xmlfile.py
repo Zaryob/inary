@@ -54,13 +54,12 @@ def getNode(node, tagpath):
 def getAllNodes(node, tags):
     """retrieve all nodes that match a given tag path."""
 
-    print "tags = ", tags
     if len(tags)==0:
-        return None
+        return []
 
     nodeList = node.getElementsByTagName(tags[0])
     if len(nodeList)==0:
-        return None
+        return []
 
     for tag in tags[1:]:
         results = map(lambda x: x.getElementsByTagName(tag),nodeList)
@@ -70,7 +69,7 @@ def getAllNodes(node, tags):
             pass # emacs indentation error, keep it here
 
         if len(nodeList)==0:
-            return None
+            return []
 
     return nodeList
 

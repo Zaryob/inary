@@ -20,8 +20,15 @@ class DepInfo:
 
 class PackageInfo:
     def __init__(self, node):
-        comps = getChildElts(node)
-        self.name = comps[0]
+        self.name = getNodeText(getNode(node, "Name"))
+        self.summary = getNodeText(getNode(node, "Summary"))
+        self.description = getNodeText(getNode(node, "Description"))
+        self.category = getNodeText(getNode(node, "Category"))
+        iDepElts = getAllNodes(node, "InstallDependencies")
+        self.installDeps = [DepInfo(d) for d in iDepElts]
+        rtDepElts = getAllNodes(node, "RuntimeDependencies")
+        self.runtimeDeps = [DepInfo(d) for d in rtDepElts]
+        
 
 class SpecFile(XmlFile):
     """A class for reading/writing from/to a PSPEC (PISI SPEC) file."""
@@ -53,7 +60,9 @@ class SpecFile(XmlFile):
         packageElts = self.getAllNodes("Package")
         packages = [PackageInfo(p) for p in packageElts]
         print packages
-        
+        for x in packages:
+            print 'package', x.name
+            
     def verify(self):
         """Verify PSPEC structures, are they what we want of them?"""
         return True
