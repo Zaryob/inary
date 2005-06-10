@@ -10,7 +10,7 @@
 import sys
 sys.path.append("..")
 import fetcher
-
+import pisiconfig
 
 if len(sys.argv) == 2:
 	obj = fetcher.Fetcher(sys.argv[1])
@@ -18,5 +18,15 @@ if len(sys.argv) == 2:
 	if saved_file:
 		print "File saved: %s" % (saved_file)
 else:
-	sys.exit(0)
+	print """
+	fetcher.py için test uygulaması.. Parametre olarak verilen URI'deki dosyayı '%s'
+	hedefine kaydeder..
+
+	Örnek:
+	
+ 	./fetch_file file:///etc/passwd
+ 	./fetch http://cekirdek.uludag.org.tr/~meren/Imagi.mp3 
+ 	./fetch_file ftp://ftp.uludag.org.tr/pub/md5summer.exe
+
+	""" % (pisiconfig.archives_dir)
 
