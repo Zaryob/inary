@@ -25,6 +25,7 @@ class Fetcher:
         self.filepath = ""
         self.filename = ""
         self.percent = 0
+        self.rate = 0
 	self.percentHook = None
 
     def fetch (self):
@@ -51,6 +52,8 @@ class Fetcher:
         return self.filedest + "/" + self.filename
 
     def doGrab(self, file, dest, totalsize):
+	from time import time
+        tnow, oldsize = int(time()), 0
         p = Progress(totalsize)
         bs, size = 1024*4, 0
 
@@ -61,10 +64,13 @@ class Fetcher:
             dest.write(chunk)
             chunk = file.read(bs)
             size = size + len(chunk)
+            if tnow != int(time()):
+                self.rate = (size - oldsize) / (int(time()) - tnow) / 1024
+                oldsize, tnow = size, int(time())
             if p.update(size):
                 self.percent = p.percent
 		if self.percentHook != None:
-			self.percentHook(self.filename, self.percent)
+			self.percentHook(self.filename, self.percent, self.rate)
 
         dest.close()
         print ""
