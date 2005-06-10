@@ -1,6 +1,9 @@
 #! /usr/bin/python
 # -*- python -*-
 
+import install
+import util
+
 def usage(progname = "pisi-install"):
     print """
 Usage:
@@ -27,13 +30,19 @@ def main():
 	    sys.exit(1)
 
     # package filename
-    packagefn = ""
+    package_fn = ""
 
     # TODO: We accept only one pspec file (at a time) currently,
     # but pisi-build may build many packages (pspecs given in order)
     # sequentially.
     if len(args) != 1:
 	help()
-	raise PisiBuildError, "pisi-install excepts one (and only one) pspec file currently"
+	raise util.ArgError, "pisi-install excepts one (and only one) package file currently"
     else:
-	packagefn = args[0]
+	package_fn = args[0]
+
+    install.install_package_file(package_fn)
+
+
+if __name__ == "__main__":
+    main()

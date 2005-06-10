@@ -22,3 +22,6 @@ def run_batch(cmd):
 # print a list
 def strlist(l):
     return string.join(map(lambda x: str(x) + ' ', l))
+
+class ArgError(Exception):
+    pass
