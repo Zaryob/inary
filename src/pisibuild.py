@@ -17,20 +17,15 @@ class PisiBuild:
     """PisiBuild class, provides the package build and creation rutines"""
     def __init__(self, pspecfile):
 	self.pspecfile = pspecfile
-	pspec = SpecFile()
-        pspec.read(pspecfile)
-        pspec.verify()                  # check pspec integrity
+	spec = SpecFile()
+        spec.read(pspecfile)
+        spec.verify()                  # check pspec integrity
 
-	self.packageName = pspec.sourceName
-
-	self.archiveUri = pspec.archiveUri
-	self.archiveName = basename(self.archiveUri)
-	self.archiveType = pspec.archiveType
-	self.archiveHash = pspec.archiveHash
-
-	self.pspec = pspec
+        # additional processing on spec file
+	self.archiveName = basename(spec.archiveUri)
+        self.spec = spec
 
     def fetchArchive(self):
-	fetch = Fetcher(self.archiveUri)
+	fetch = Fetcher(self.spec.archiveUri)
 	fetch.fetch()
 

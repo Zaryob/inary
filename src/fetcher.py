@@ -11,6 +11,7 @@ from sys import stderr
 
 # pisi modules
 import pisiconfig
+import util
 
 class FetchError (Exception):
     pass
@@ -20,6 +21,7 @@ class Fetcher:
     def __init__(self, uri):
         self.uri = uri
         self.filedest = pisiconfig.archives_dir
+        util.check_dir(self.filedest)
         self.scheme = "file"
         self.netloc = ""
         self.filepath = ""

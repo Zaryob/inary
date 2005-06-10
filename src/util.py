@@ -5,6 +5,19 @@ import string
 def information(message):
     print message
 
+# check if directory exists, and create if it doesn't
+# works recursively
+# FIXME: could hav a better name
+def check_dir(dir):
+    dir = dir.rstrip()
+    dir = dir.rstrip("/")
+    #print 'check dir ', dir
+    if not os.access(dir, os.F_OK):
+        # does the parent exist?
+        (parent_dir, curr_dir) = os.path.split(dir)
+        check_dir(parent_dir)
+        os.mkdir(dir)
+
 # run a command non-interactively
 def run_batch(cmd):
     print 'running ', cmd

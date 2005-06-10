@@ -47,9 +47,9 @@ def main():
 
     # doing the real job... vs. vs...
     pb = PisiBuild(pspec)
-    util.information("Building PISI package for: %s" % pb.packageName)
-    util.information("Fetching source from: %s (be patient)" % pb.archiveUri)
-    print pb.archiveType, pb.archiveHash
+    util.information("Building PISI package for: %s" % pb.spec.sourceName)
+    util.information("Fetching source from: %s (be patient)" % pb.spec.archiveUri)
+    print pb.spec.archiveType, pb.spec.archiveHash
     pb.fetchArchive()
     util.information("Source archive is stored: %s/%s" %(pisiconfig.archives_dir, pb.archiveName))
 #     pb.unpackArchive()
