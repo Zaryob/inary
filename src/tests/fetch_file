@@ -8,12 +8,19 @@
 # ls /var/tmp/pisi/cache
 
 import sys
+from sys import stderr
 sys.path.append("..")
 import fetcher
 import pisiconfig
 
+def doProgress(filename, percent):
+    out = '\r%-30.30s %%%3d' % (filename, percent)
+    stderr.write(out)
+    stderr.flush()
+
 if len(sys.argv) == 2:
 	obj = fetcher.Fetcher(sys.argv[1])
+	obj.percentHook = doProgress
 	saved_file = obj.fetch()
 	if saved_file:
 		print "File saved: %s" % (saved_file)
