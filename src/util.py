@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 import os
+import sys
 import string
 
 def information(message):
-    print message
+    sys.stdout.write(message)
+    sys.stdout.flush()
 
 # check if directory exists, and create if it doesn't
 # works recursively
