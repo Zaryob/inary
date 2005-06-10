@@ -25,6 +25,7 @@ class Fetcher:
         self.filepath = ""
         self.filename = ""
         self.percent = 0
+	self.percentHook = None
 
     def fetch (self):
         """Return value: Fetched file's full path.."""
@@ -61,12 +62,9 @@ class Fetcher:
             chunk = file.read(bs)
             size = size + len(chunk)
             if p.update(size):
-            # XXX: Burasi boyle olmaz tabi.
-            #      Duzelecek bunlar hep..
                 self.percent = p.percent
-                out = '\r%-30.30s %%%3d' % (self.filename, self.percent)
-                stderr.write(out)
-                stderr.flush()
+		if self.percentHook != None:
+			self.percentHook(self.filename, self.percent)
 
         dest.close()
         print ""
