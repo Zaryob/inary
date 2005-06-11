@@ -6,7 +6,7 @@ from os.path import basename
 
 import pisiconfig
 import util
-from pisibuild import PisiBuild
+from pisibuild import PisiBuild, PisiBuildError
 
 
 def doProgress(filename, percent, rate):
