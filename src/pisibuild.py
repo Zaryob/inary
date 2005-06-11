@@ -36,7 +36,7 @@ class PisiBuild:
         destpath = fetch.filedest + "/" + fetch.filename
         if os.access(destpath, os.R_OK):
             if util.md5_file(destpath)==self.spec.archiveMD5:
-                util.information(fetch.filename + " cached")
+                util.information(fetch.filename + " cached\n")
                 return
 
 	if percentHook:
@@ -57,5 +57,5 @@ class PisiBuild:
 
     def buildPackages(self):
         for package in self.spec.packages:
-            util.information("** Building package " % package.name);
+            util.information("** Building package %s\n" % package.name);
     
