@@ -1,7 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import os,sys, pisiconfig
+import os,sys
+
+sys.path.append('..')
+import pisiconfig
 
 def libtoolize():
         ''' FIXME: Düzgün hale getirilecek '''

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import os, string, re, shutil, pisiconfig
+import os, string, re, shutil
 from shell import *
 
 def gnuconfig_findnewest():

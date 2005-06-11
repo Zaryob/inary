@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import os, pisiconfig
+import os
 
 def configure( parameters = None):
 	''' FIXME: Düzgün hale getirilecek '''
