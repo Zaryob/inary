@@ -24,7 +24,7 @@ def make():
 def install():
 	''' FIXME: Düzgün hale getirilecek '''
 	''' {D} = /var/tmp/pisi/ _paket_adı_ /image/ '''
-
+	
 	install_string = 'make prefix={D}/usr \
 				datadir={D}/usr/share \
 				infodir={D}/usr/share/info \
@@ -32,5 +32,5 @@ def install():
 				mandir={D}/usr/share/man \
 				sysconfdir={D}/etc \
 				install'
-
-	os.system( install_string.replace( '{D}', os.path.dirname( os.getcwd() + '/image' )))
+	
+	os.system( install_string.replace( '{D}', os.path.dirname( os.getcwd()) + '/image' ))

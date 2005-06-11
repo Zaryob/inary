@@ -1,11 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import os, string, re, shutil
+import os, string, re, shutil, pisiconfig
 from shell import *
-
-sys.path.append('..')
-import pisiconfig
 
 def gnuconfig_findnewest():
 	''' find the newest config.* file according to timestamp and return it '''
@@ -23,14 +20,14 @@ def gnuconfig_findnewest():
 
 	return os.path.dirname( newer_location.popitem()[0] )
 
-def gnuconfig_update( package_name ):
+def gnuconfig_update():
 	''' copy newest config.* onto source's '''
 
 	newer_location = gnuconfig_findnewest()
-	
+
 	try:
-		shutil.copyfile( newer_location + '/config.sub', pisiconfig.tmp_dir + '/' + package_name + '/build/config.sub' )
-		shutil.copyfile( newer_location + '/config.guess', pisiconfig.tmp_dir + '/' + package_name + '/build/config.guess' )
+		shutil.copyfile( newer_location + '/config.sub', os.getcwd() + '/config.sub' )
+		shutil.copyfile( newer_location + '/config.guess', os.getcwd() + '/config.guess' )
 	except IOError:
 		print 'Hata mata...'
 		sys.exit()
