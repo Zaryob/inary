@@ -27,8 +27,8 @@ class Fetcher:
         self.filepath = ""
         self.filename = ""
         self.percent = 0
-        self.rate = 0
-	self.percentHook = None
+        self.rate = 0.0
+        self.percentHook = None
         from string import split
         u = urlparse.urlparse(self.uri)
         self.scheme, self.netloc, self.filepath = u[0], u[1], u[2]
@@ -54,11 +54,13 @@ class Fetcher:
         return self.filedest + "/" + self.filename
 
     def doGrab(self, file, dest, totalsize):
-	from time import time
-        tnow, oldsize = int(time()), 0
+        symbols = [' B/s', 'KB/s', 'MB/s', 'GB/s']
+        from time import time
+        tt, oldsize = int(time()), 0
         p = Progress(totalsize)
-        bs, size = 1024*4, 0
-
+        bs, size = 1024, 0
+        symbol, depth = "B/s", 0
+        st = time()
         chunk = file.read(bs)
         size = size + len(chunk)
         self.percent = p.update(size)
@@ -66,13 +68,22 @@ class Fetcher:
             dest.write(chunk)
             chunk = file.read(bs)
             size = size + len(chunk)
-            if tnow != int(time()):
-                self.rate = (size - oldsize) / (int(time()) - tnow) / 1024
-                oldsize, tnow = size, int(time())
+            ct = time()
+            if int(tt) != int(ct):
+                self.rate = size / (ct - st)
+                while self.rate > 1000 and depth < 3:
+                    self.rate /= 1024
+                    depth += 1
+                symbol, depth = symbols[depth], 0
+                oldsize, tt = size, time()
             if p.update(size):
                 self.percent = p.percent
-		if self.percentHook != None:
-			self.percentHook(self.filename, self.percent, self.rate)
+                if self.percentHook != None:
+                    retval = {'filename': self.filename, 
+                              'percent' : self.percent,
+                              'rate': self.rate,
+                              'symbol': symbol}
+                    self.percentHook(retval)
 
         dest.close()
         print ""

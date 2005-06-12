@@ -13,8 +13,9 @@ sys.path.append("..")
 import fetcher
 import pisiconfig
 
-def doProgress(filename, percent, rate):
-    out = '\r%-30.30s %%%3d %d KB/s' % (filename, percent, rate)
+def doProgress(pd):
+    out = '\r%-30.30s %3d%% %12.2f %s' % \
+        (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
     stderr.write(out)
     stderr.flush()
 

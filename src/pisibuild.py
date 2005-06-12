@@ -18,19 +18,19 @@ class PisiBuildError(Exception):
 class PisiBuild:
     """PisiBuild class, provides the package build and creation routines"""
     def __init__(self, pspecfile):
-	self.pspecfile = pspecfile
-	spec = SpecFile()
+        self.pspecfile = pspecfile
+        spec = SpecFile()
         spec.read(pspecfile)
         spec.verify()                  # check pspec integrity
 
         # additional processing on spec file
-	self.archiveName = basename(spec.archiveUri)
+        self.archiveName = basename(spec.archiveUri)
         self.spec = spec
 
     def fetchArchive(self, percentHook=None):
-	"""fetch an archive and store to pisiconfig.archives_dir
-	using fether.Fetcher"""
-	fetch = Fetcher(self.spec.archiveUri)
+        """fetch an archive and store to pisiconfig.archives_dir
+        using fether.Fetcher"""
+        fetch = Fetcher(self.spec.archiveUri)
 
         # check if source already cached
         destpath = fetch.filedest + "/" + fetch.filename
@@ -39,12 +39,12 @@ class PisiBuild:
                 util.information(fetch.filename + " cached\n")
                 return
 
-	if percentHook:
-	    fetch.percentHook = percentHook
-	fetch.fetch()
+        if percentHook:
+            fetch.percentHook = percentHook
+        fetch.fetch()
 
     def unpackArchive(self):
-	pass
+        pass
 
     def applyPatches(self):
         pass

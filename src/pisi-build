@@ -9,8 +9,9 @@ import util
 from pisibuild import PisiBuild, PisiBuildError
 
 
-def doProgress(filename, percent, rate):
-    out = '\r%-30.30s %%%3d %d KB/s' % (filename, percent, rate)
+def doProgress(filename, percent, rate, symbol):
+    out = '\r%-30.30s %3d%% %12.2f %s' % \
+        (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
     util.information(out)
 
 def main():
@@ -22,15 +23,15 @@ def main():
 
     # getopt magic
     try:
-	opts, args = getopt.getopt(sys.argv[1:],"h",["help"])
+        opts, args = getopt.getopt(sys.argv[1:],"h",["help"])
     except getopt.GetoptError:
-	help()
-	sys.exit(1)
+        help()
+        sys.exit(1)
 
     for opt, arg in opts:
-	if opt == "-h":
-	    help()
-	    sys.exit(1)
+        if opt == "-h":
+            help()
+            sys.exit(1)
 
     # pspec(PISI Spec) to be used for package
     pspec = ""
@@ -39,10 +40,10 @@ def main():
     # but pisi-build may build many packages (pspecs given in order)
     # sequentially.
     if len(args) != 1:
-	help()
-	raise PisiBuildError, "pisi-build expects one (and only one) pspec file currently"
+        help()
+        raise PisiBuildError, "pisi-build expects one (and only one) pspec file currently"
     else:
-	pspec = args[0]
+        pspec = args[0]
 
     # doing the real job.
     pb = PisiBuild(pspec)
