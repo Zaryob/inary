@@ -60,7 +60,9 @@ class PisiBuild:
         fetch.fetch()
 
     def unpackArchive(self):
-	archive = Archive(self.spec.archiveType, self.spec.archiveName)
+	type = self.spec.archiveType
+	filename = self.spec.archiveName
+	archive = Archive(type, filename)
 	archive.unpack()
         pass
 
