@@ -34,10 +34,9 @@ class PisiBuild:
 
     def install(self):
         ui.info("Building PISI source package: %s\n" % self.spec.sourceName)
-        ui.info("Fetching source from: %s" % self.spec.archiveUri)
+        ui.info("Fetching source from: %s\n" % self.spec.archiveUri)
         self.fetchArchive(displayProgress)
-        ui.info("\n")
-        ui.info("Source archive is stored: %s/%s\n" %(config.archives_dir(), self.archiveName))
+        ui.info("Source archive is stored: %s/%s\n" %(config.archives_dir(), self.spec.archiveName))
         # unpackArchive()
         # applyPatches()
         # buildSource()
@@ -53,7 +52,7 @@ class PisiBuild:
         destpath = fetch.filedest + "/" + fetch.filename
         if os.access(destpath, os.R_OK):
             if util.md5_file(destpath)==self.spec.archiveMD5:
-                ui.info(' [cached]')
+                ui.info('%s [cached]\n' % self.spec.archiveName)
                 return
 
         if percentHook:
