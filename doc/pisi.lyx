@@ -960,7 +960,7 @@ metadata.xml
 \emph default 
  dosyalarý depodaki paketlerden alýnarak ve birleþtirilerek 
 \series bold 
-pisi.index
+pisi-index.xml
 \series default 
  isminde bir içerik (depo içeriði) dosyasý düzenli aralýklar ile oluþturulacaktý
 r ( 
@@ -982,9 +982,16 @@ Paketin adý
 
 
 \series bold 
-Definition: 
+Summary:
 \series default 
-Paketin kýsa tanýmý
+ Paketin kýsa adý
+\layout Itemize
+
+
+\series bold 
+Description: 
+\series default 
+Paketin uzun tanýmý
 \layout Itemize
 
 
@@ -1010,7 +1017,7 @@ Paketin lisansý
 
 
 \series bold 
-RuntimeReq:
+RuntimeDependencies:
 \series default 
  Kurulmak/Çalýþmak için hangi paketlere ihtiyacý var?
 \layout Itemize
@@ -1055,7 +1062,7 @@ Paket kurulduðunda sistemde ne kadar yer kaplayacak?
 
 
 \series bold 
-pisi.index
+pisi-index.xml
 \series default 
  dosyasýnýn biçimi XML'dir.
  Dosyanýn doðrulanmasý için kullanýlabilecek bilgi 
@@ -1322,7 +1329,7 @@ ChangeSet
 \series default 
 ler ve kullanýcý yeni bir depo kullanmaya baþladýysa
 \series bold 
- pisi.index
+ pisi-index.xml
 \series default 
 ) alýr.
  
@@ -1422,10 +1429,13 @@ Veritabanlarý
  Veritabanlarý 
 \series bold 
 \emph on 
-BerkleyDB
+BerkeleyDB
 \series default 
 \emph default 
  veritabanlarýdýr.
+\layout Standard
+
+Beta versiyonda tek bir depo desteklenecektir.
 \layout Itemize
 
 
@@ -1447,18 +1457,18 @@ Depo Veritabanlarý:
  Birden fazla depo veritabaný olabilir.
  Her depo için 
 \series bold 
-pisi.index
+pisi-index.xml
 \series default 
  dosyasý içeriði depo veritabanýna aktarýlacaktýr.
 \layout Subsubsection
 
-Kurulu Paketler Veritabaný
+Kurulum Veritabaný
 \layout Standard
 
 Will be...
 \layout Subsubsection
 
-Depo Veritabalarý
+Depo Veritabanlarý
 \layout Standard
 
 Will be...
