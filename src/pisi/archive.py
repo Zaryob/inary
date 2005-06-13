@@ -19,8 +19,8 @@ class ArchiveTarFile(ArchiveBase):
 	super(ArchiveTarFile, self).__init__(fileName, type)
 
     def unpack(self):
-	if self.type == "targz":
-	    tar = tarfile.open(config.archives_dir() + "/" + self.fileName, 'r:gz')
+	if self.type == 'targz':
+	    tar = tarfile.open(config.archives_dir() + '/' + self.fileName, 'r:gz')
 	    for tarinfo in tar:
 		tar.extract(tarinfo)
 	    tar.close()
@@ -31,14 +31,14 @@ class ArchiveZip(ArchiveBase):
 	super(ArchiveZip, self).__init__(fileName, type)
 
     def unpack(self):
-        zip = zipfile.Zipfile(config.archives_dir() + "/" + self.fileName, 'r')
+        zip = zipfile.Zipfile(config.archives_dir() + '/' + self.fileName, 'r')
         fileNames = zip.namelist()
         for file in fileNames:
             file = config.archives_dir() + '/' + file
             if not os.path.exists(os.path.dirname(file)):
                 os.mkdir(os.path.dirname(file))
                 continue
-            buff = open (file, "wb")
+            buff = open (file, 'wb')
             fileContent = zip.read(file)
             buff.write(fileContent)
             buff.close()
