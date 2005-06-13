@@ -77,4 +77,5 @@ class MetaData(SpecFile):
 	distribution = self.getNodeText("Source/Distribution")
 	distributionRelease = self.getNodeText("Source/DistributionRelease")
 	architecture = self.getNodeText("Source/Architecture")
-	installsize = self.getNodeText("Source/InstallSize")
+	installSize = self.getNodeText("Source/InstallSize")
+
