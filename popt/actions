@@ -5,16 +5,13 @@ from gnuconfig import *
 from libtoolize import *
 from autotools import *
 
-import pisiconfig
-
-package_name = 'popt-1.7'
-
-def setup:
-	gnuconfig_update( package_name )
+def src_setup():
+	gnuconfig_update()
 	libtoolize()
 	configure( '--with-nls' )
-def build:
+
+def src_build():
 	make()
 
-def install:
+def src_install():
 	install()
