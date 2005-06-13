@@ -2,13 +2,18 @@
 # maintainer: baris and meren
 
 import tarfile
+import zipfile
 
 import config
 
-class ArchiveTarFile:
+class ArchiveBase(object):
     def __init__(self, filename, type):
 	self.type = type
 	self.filename = filename
+
+class ArchiveTarFile(ArchiveBase):
+    def __init__(self, filename, type):
+	super(ArchiveTarFile, self).__init__(filename, type)
 
     def unpack(self):
 	if self.type == "targz":
@@ -17,9 +22,12 @@ class ArchiveTarFile:
 		tar.extract(tarinfo)
 	    tar.close()
 
-class ArchiveZip:
-    pass
+class ArchiveZip(ArchiveBase):
+    def __init__(self, filename, type):
+	super(ArchiveZip, self).__init__(filename, type)
 
+    def unpack(self):
+	print "lolo"
 
 class Archive:
     """Unpack magic for Archive files..."""
