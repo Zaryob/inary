@@ -5,13 +5,13 @@ import time
 from tempfile import mkstemp, mkdtemp
 
 def sleep( sleep_time = 5 ):
-	time.sleep( sleep_time )
+    time.sleep( sleep_time )
 
 def createTmpFile():
-	handle, path = mkstemp()
-	return path
+    handle, path = mkstemp()
+    return path
 
 def createTmpDir():
-	path = mkdtemp()
-	return path
+    path = mkdtemp()
+    return path
 
