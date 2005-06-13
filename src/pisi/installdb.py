@@ -3,13 +3,11 @@
 # maintainer: eray and caglar
 
 import config
-import shelve
 import util
+import bsddb.dbshelve as shelve
 
 util.check_dir( config.db_dir() )
-
-d = shelve.open( config.db_dir() + '/install.dbm')
-
+d = shelve.open( config.db_dir() + '/install.bdb')
 files_dir = config.archives_dir() + "/files"
 
 class InstallDBError(Exception):
@@ -38,7 +36,7 @@ def remove( name, version, release):
     d[key] = 'r'
 
 def purge( name, version, release):
-    d.delete(key)
     util.remove_file( files_name( name, version, release) )
+    del d[key]
 
 

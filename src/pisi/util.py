@@ -8,7 +8,7 @@ import md5
 
 # check if directory exists, and create if it doesn't
 # works recursively
-# FIXME: could hav a better name
+# FIXME: could have a better name
 def check_dir(dir):
     dir = dir.rstrip()
     dir = dir.rstrip("/")
@@ -18,6 +18,17 @@ def check_dir(dir):
         (parent_dir, curr_dir) = os.path.split(dir)
         check_dir(parent_dir)
         os.mkdir(dir)
+
+# TODO:
+def copy_file():
+    pass
+
+def remove_file():
+    # unlink file
+    pass
+
+def copy_dir():
+    pass
 
 def md5_file(filename):
     m = md5.new()

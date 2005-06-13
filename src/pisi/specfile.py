@@ -19,6 +19,12 @@ class DepInfo:
         self.package = getNodeText(node).strip()
         self.versionFrom =  getNodeAttribute(node, "versionFrom")
 
+class HistoryInfo:
+    def __init__(self, node):
+        self.date = getNodeText(getNode(node, "Date"))
+        self.version = getNodeText(getNode(node, "Version"))
+        self.release = getNodeText(getNode(node, "Release"))
+
 class PathInfo:
     def __init__(self, node):
         self.pathname = getNodeText(node)
@@ -59,10 +65,13 @@ class SpecFile(XmlFile):
         buildDepElts = self.getChildElts("Source/BuildDependencies")
         self.buildDeps = [DepInfo(d) for d in buildDepElts]
 
+        historyElts = self.getAllNodes("History/Update")
+        self.history = [HistoryInfo(x) for x in historyElts]
+
         # find all binary packages
         packageElts = self.getAllNodes("Package")
         self.packages = [PackageInfo(p) for p in packageElts]
-            
+        
     def verify(self):
         """Verify PSPEC structures, are they what we want of them?"""
         return True
