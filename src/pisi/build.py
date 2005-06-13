@@ -33,10 +33,11 @@ class PisiBuild:
         self.spec = spec
 
     def build(self):
-        ui.info("Building PISI source package: %s\n" % self.spec.sourceName)
-        ui.info("Fetching source from: %s\n" % self.spec.archiveUri)
+        ui.info("Building PISI source package: %s\n" % self.spec.source.name)
+        ui.info("Fetching source from: %s\n" % self.spec.source.archiveUri)
         self.fetchArchive(displayProgress)
-        ui.info("Source archive is stored: %s/%s\n" %(config.archives_dir(), self.spec.archiveName))
+        ui.info("Source archive is stored: %s/%s\n"
+                %(config.archives_dir(), self.spec.source.archiveName))
         # unpackArchive()
         # applyPatches()
         # buildSource()
@@ -46,13 +47,14 @@ class PisiBuild:
     def fetchArchive(self, percentHook=None):
         """fetch an archive and store to config.archives_dir() 
         using fether.Fetcher"""
-        fetch = Fetcher(self.spec.archiveUri, self.spec.archiveName)
+        fetch = Fetcher(self.spec.source.archiveUri,
+                        self.spec.source.archiveName)
 
         # check if source already cached
         destpath = fetch.filedest + "/" + fetch.filename
         if os.access(destpath, os.R_OK):
-            if util.md5_file(destpath)==self.spec.archiveMD5:
-                ui.info('%s [cached]\n' % self.spec.archiveName)
+            if util.md5_file(destpath)==self.spec.source.archiveMD5:
+                ui.info('%s [cached]\n' % self.spec.source.archiveName)
                 return
 
         if percentHook:
@@ -60,8 +62,8 @@ class PisiBuild:
         fetch.fetch()
 
     def unpackArchive(self):
-	type = self.spec.archiveType
-	filename = self.spec.archiveName
+	type = self.spec.source.archiveType
+	filename = self.spec.source.archiveName
 	archive = Archive(type, filename)
 	archive.unpack()
         pass

@@ -25,6 +25,12 @@ def getNodeText(node):
     else:
         raise XmlError("getNodeText: Expected text node, got something else!")
 
+def getChildText(node_s, tagpath):
+    node = getNode(node_s, tagpath)
+    if not node:
+        return None
+    return getNodeText(node)
+
 def getChildElts(node):
     """get only child elements"""
     return filter(lambda x:x.nodeType==x.ELEMENT_NODE, node.childNodes)

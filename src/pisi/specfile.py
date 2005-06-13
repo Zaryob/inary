@@ -30,6 +30,10 @@ class PathInfo:
         self.pathname = getNodeText(node)
         self.fileType = getNodeAttribute(node, "fileType")
 
+# a structure to hold source information
+class SourceInfo:
+    pass
+
 class PackageInfo:
     def __init__(self, node):
         self.name = getNodeText(getNode(node, "Name"))
@@ -42,7 +46,6 @@ class PackageInfo:
         self.runtimeDeps = [DepInfo(x) for x in rtDepElts]
         self.paths = [PathInfo(x) for x in getAllNodes(node, "Files/Path")]
 
-
 class SpecFile(XmlFile):
     """A class for reading/writing from/to a PSPEC (PISI SPEC) file."""
 
@@ -53,20 +56,22 @@ class SpecFile(XmlFile):
         """Read PSPEC file"""
         
         self.readxml(filename)
-        self.sourceName = self.getChildText("Source/Name")
+
+        self.source = SourceInfo()
+        self.source.name = self.getChildText("Source/Name")
 	archiveNode = self.getNode("Source/Archive")
-        self.archiveUri = getNodeText(archiveNode).strip()
-	self.archiveName = basename(self.archiveUri)
-	self.archiveType = getNodeAttribute(archiveNode, "archType")
-	self.archiveMD5 = getNodeAttribute(archiveNode, "md5sum")
+        self.source.archiveUri = getNodeText(archiveNode).strip()
+	self.source.archiveName = basename(self.source.archiveUri)
+	self.source.archiveType = getNodeAttribute(archiveNode, "archType")
+	self.source.archiveMD5 = getNodeAttribute(archiveNode, "md5sum")
         patchElts = self.getChildElts("Source/Patches")
-        self.patches = [ PatchInfo(p) for p in patchElts ]
+        self.source.patches = [ PatchInfo(p) for p in patchElts ]
 
         buildDepElts = self.getChildElts("Source/BuildDependencies")
-        self.buildDeps = [DepInfo(d) for d in buildDepElts]
+        self.source.buildDeps = [DepInfo(d) for d in buildDepElts]
 
         historyElts = self.getAllNodes("History/Update")
-        self.history = [HistoryInfo(x) for x in historyElts]
+        self.source.history = [HistoryInfo(x) for x in historyElts]
 
         # find all binary packages
         packageElts = self.getAllNodes("Package")
