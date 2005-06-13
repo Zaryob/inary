@@ -4,10 +4,25 @@
 
 import sys
 sys.path.append("..")
-import specfile
+from pisi import specfile
 
-s = specfile.SpecFile(sys.argv[1])
+s = specfile.SpecFile()
+s.read(sys.argv[1])
 
-text = s.getFirstChildText(sys.argv[2])
-print text
+print "PSPEC/Source/Name", s.sourceName
+
+print "* patches"
+for patch in s.patches:
+    print "\tpatch fn:", patch.filename
+    print "\tpatch ct:", patch.compressionType
+
+print "* buildDeps"
+for dep in s.buildDeps:
+    print "\tdep nm:", dep.package
+    print "\tdep vf:", dep.versionFrom
+
+print "* packages"
+for package in s.packages:
+    print "\tPackage", package.name
+
 
