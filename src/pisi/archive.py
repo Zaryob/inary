@@ -4,6 +4,8 @@
 
 #standart lisbrary modules
 import os, sys
+import tarfile
+import zipfile
 
 #pisi modules
 import config
@@ -15,7 +17,6 @@ class ArchiveBase(object):
 
 class ArchiveTarFile(ArchiveBase):
     def __init__(self, fileName, type):
-        import tarfile
 	super(ArchiveTarFile, self).__init__(fileName, type)
 
     def unpack(self):
@@ -27,11 +28,10 @@ class ArchiveTarFile(ArchiveBase):
 
 class ArchiveZip(ArchiveBase):
     def __init__(self, fileName, type):
-        import zipfile
 	super(ArchiveZip, self).__init__(fileName, type)
 
     def unpack(self):
-        zip = zipfile.Zipfile(config.archives_dir() + '/' + self.fileName, 'r')
+        zip = zipfile.ZipFile(config.archives_dir() + '/' + self.fileName, 'r')
         fileNames = zip.namelist()
         for file in fileNames:
             file = config.archives_dir() + '/' + file
