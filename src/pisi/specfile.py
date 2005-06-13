@@ -53,20 +53,13 @@ class SpecFile(XmlFile):
 	self.archiveMD5 = getNodeAttribute(archiveNode, "md5sum")
         patchElts = self.getChildElts("Source/Patches")
         self.patches = [ PatchInfo(p) for p in patchElts ]
-        for x in self.patches:
-            print "patch fn:", x.filename
-            print "patch ct:", x.compressionType
+
         buildDepElts = self.getChildElts("Source/BuildDependencies")
         self.buildDeps = [DepInfo(d) for d in buildDepElts]
-        for x in self.buildDeps:
-            print "dep nm:", x.package
-            print "dep vf:", x.versionFrom
 
         # find all binary packages
         packageElts = self.getAllNodes("Package")
         self.packages = [PackageInfo(p) for p in packageElts]
-        for x in self.packages:
-            print 'package', x.name
             
     def verify(self):
         """Verify PSPEC structures, are they what we want of them?"""
