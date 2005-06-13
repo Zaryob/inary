@@ -3,6 +3,7 @@
 
 import xml.dom.minidom
 from xmlfile import *
+from os.path import basename
 
 class PatchInfo:
     def __init__(self, filenm, ctype):
@@ -49,6 +50,7 @@ class SpecFile(XmlFile):
         self.sourceName = self.getChildText("Source/Name")
 	archiveNode = self.getNode("Source/Archive")
         self.archiveUri = getNodeText(archiveNode).strip()
+	self.archiveName = basename(self.archiveUri)
 	self.archiveType = getNodeAttribute(archiveNode, "archType")
 	self.archiveMD5 = getNodeAttribute(archiveNode, "md5sum")
         patchElts = self.getChildElts("Source/Patches")
