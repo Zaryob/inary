@@ -10,7 +10,7 @@ from sys import exit
 from sys import stderr
 
 # pisi modules
-import pisiconfig
+import config
 import util
 
 class FetchError (Exception):
@@ -20,7 +20,7 @@ class Fetcher:
     """Yet another Pisi tool for fetching files from various sources.."""
     def __init__(self, uri):
         self.uri = uri
-        self.filedest = pisiconfig.archives_dir
+        self.filedest = config.archives_dir
         util.check_dir(self.filedest)
         self.scheme = "file"
         self.netloc = ""

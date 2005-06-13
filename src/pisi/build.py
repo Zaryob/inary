@@ -9,7 +9,7 @@ from fetcher import Fetcher
 # from archive import Archive
 # import pisipackage
 import util
-import pisiconfig
+import config
 
 
 class PisiBuildError(Exception):
@@ -28,7 +28,7 @@ class PisiBuild:
         self.spec = spec
 
     def fetchArchive(self, percentHook=None):
-        """fetch an archive and store to pisiconfig.archives_dir
+        """fetch an archive and store to pisi.config.archives_dir
         using fether.Fetcher"""
         fetch = Fetcher(self.spec.archiveUri)
 

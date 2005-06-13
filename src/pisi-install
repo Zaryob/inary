@@ -1,15 +1,15 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
 
-import install
-import util
+import pisi.install
+import pisi.util
 
 def main():
     import sys
     import getopt
     
     # wrapper for usage(progname) function
-    help = lambda: util.usage(sys.argv[0])
+    help = lambda: pisi.util.usage(sys.argv[0])
 
     # getopt magic
     try:
@@ -31,11 +31,11 @@ def main():
     # sequentially.
     if len(args) != 1:
 	help()
-	raise util.ArgError, "pisi-install expects one (and only one) package file currently"
+	raise pisi.util.ArgError, "pisi-install expects one (and only one) package file currently"
     else:
 	package_fn = args[0]
 
-    install.install_package_file(package_fn)
+    pisi.install.install_package_file(package_fn)
 
 
 if __name__ == "__main__":

@@ -4,22 +4,22 @@
 # python standard library
 from os.path import basename
 
-import pisiconfig
-import util
-from pisibuild import PisiBuild, PisiBuildError
+import pisi.config
+import pisi.util
+from pisi.build import PisiBuild, PisiBuildError
 
 
 def doProgress(filename, percent, rate, symbol):
     out = '\r%-30.30s %3d%% %12.2f %s' % \
         (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
-    util.information(out)
+    pisi.util.information(out)
 
 def main():
     import sys
     import getopt
     
     # wrapper for usage(progname) function
-    help = lambda: util.usage(sys.argv[0])
+    help = lambda: pisi.util.usage(sys.argv[0])
 
     # getopt magic
     try:
@@ -47,11 +47,11 @@ def main():
 
     # doing the real job.
     pb = PisiBuild(pspec)
-    util.information("Building PISI source package: %s\n" % pb.spec.sourceName)
+    pisi.util.information("Building PISI source package: %s\n" % pb.spec.sourceName)
 
-    util.information("Fetching source from: %s (be patient)\n" % pb.spec.archiveUri)
+    pisi.util.information("Fetching source from: %s (be patient)\n" % pb.spec.archiveUri)
     pb.fetchArchive(doProgress)
-    util.information("Source archive is stored: %s/%s\n" %(pisiconfig.archives_dir, pb.archiveName))
+    pisi.util.information("Source archive is stored: %s/%s\n" %(pisi.config.archives_dir, pb.archiveName))
     # pb.unpackArchive()
     # pb.applyPatches()
     # pb.buildSource()
