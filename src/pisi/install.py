@@ -13,10 +13,10 @@ import dependency
 
 def install_package_file(package_fn):
     
-    package = Package(package_fn, "r")
+    package = Package(package_fn, 'r')
     # extract control files
     util.clean_directory(install_dir)
-    ui.info.("extracting files\n")
+    ui.info.('extracting files\n')
     package.extract_files(install_dir)
 
     # verify package
@@ -33,7 +33,7 @@ def install_package_file(package_fn):
     # unzip package in place
 
     # update databases
-    installdb.install(spec.install_dir + '/files.xml')
 
     # installdb
+    installdb.install(spec.spec.install_dir + '/files.xml')
     

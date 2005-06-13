@@ -68,3 +68,13 @@ class SpecFile(XmlFile):
     def write(self, filename):
         """Write PSPEC file"""
         self.writexml(filename)
+
+class MetaData(SpecFile):
+    """This is a superset of the source spec definition"""
+
+    def read(self, filename):
+        SpecFile.read(filename)
+	distribution = self.getNodeText("Source/Distribution")
+	distributionRelease = self.getNodeText("Source/DistributionRelease")
+	architecture = self.getNodeText("Source/Architecture")
+	installsize = self.getNodeText("Source/InstallSize")
