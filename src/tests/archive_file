@@ -1,0 +1,16 @@
+#!/usr/bin/python
+
+import sys
+sys.path.append("..")
+sys.path.append(".")
+
+from pisi import archive
+from pisi import specfile
+
+spec = specfile.SpecFile()
+spec.read(sys.argv[1])
+
+print "unpacking file: %s" % spec.archiveName
+
+a = archive.Archive(spec.archiveType, spec.archiveName)
+a.unpack()
