@@ -13,5 +13,9 @@ if __name__ == "__main__":
     ''' WILLBE: pisi-build call action script after entered the build directory '''
 
     os.chdir( config.tmp_dir() + '/' + package_name + '/build' )
-
-    execfile( sys.argv[1] )
+    
+    locals = globals = {}
+    exec compile( open( sys.argv[1] ).read(), "error", "exec" ) in locals,globals
+    locals['src_setup']()
+    locals['src_build']()
+    locals['src_install']()
