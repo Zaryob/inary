@@ -10,8 +10,8 @@
 import sys
 from sys import stderr
 sys.path.append("..")
-import fetcher
-import pisiconfig
+from pisi import fetcher
+import pisi.config
 
 def doProgress(pd):
     out = '\r%-30.30s %3d%% %12.2f %s' % \
@@ -35,5 +35,5 @@ else:
     ./fetch_file http://cekirdek.uludag.org.tr/~meren/Imagi.mp3 
     ./fetch_file ftp://ftp.uludag.org.tr/pub/md5summer.exe
 
-    """ % (pisiconfig.archives_dir)
+    """ % (pisi.config.archives_dir)
 
