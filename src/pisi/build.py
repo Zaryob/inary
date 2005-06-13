@@ -32,7 +32,7 @@ class PisiBuild:
 
         self.spec = spec
 
-    def install(self):
+    def build(self):
         ui.info("Building PISI source package: %s\n" % self.spec.sourceName)
         ui.info("Fetching source from: %s\n" % self.spec.archiveUri)
         self.fetchArchive(displayProgress)
