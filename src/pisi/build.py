@@ -4,7 +4,6 @@
 
 # python standard library
 import os
-from os.path import basename
 
 from specfile import SpecFile
 from fetcher import Fetcher
@@ -31,8 +30,6 @@ class PisiBuild:
         spec.read(pspecfile)
         spec.verify()                  # check pspec integrity
 
-        # additional processing on spec file
-        self.archiveName = basename(spec.archiveUri)
         self.spec = spec
 
     def install(self):
@@ -50,7 +47,7 @@ class PisiBuild:
     def fetchArchive(self, percentHook=None):
         """fetch an archive and store to config.archives_dir() 
         using fether.Fetcher"""
-        fetch = Fetcher(self.spec.archiveUri)
+        fetch = Fetcher(self.spec.archiveUri, self.spec.archiveName)
 
         # check if source already cached
         destpath = fetch.filedest + "/" + fetch.filename
@@ -64,6 +61,8 @@ class PisiBuild:
         fetch.fetch()
 
     def unpackArchive(self):
+	archive = Archive(self.spec.archiveType, self.spec.archiveName)
+	archive.unpack()
         pass
 
     def applyPatches(self):
