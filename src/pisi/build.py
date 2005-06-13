@@ -38,6 +38,7 @@ class PisiBuild:
         self.fetchArchive(displayProgress)
         ui.info("Source archive is stored: %s/%s\n"
                 %(config.archives_dir(), self.spec.source.archiveName))
+	# solveBuildDependencies()
         # unpackArchive()
         # applyPatches()
         # buildSource()
