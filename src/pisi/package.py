@@ -1,5 +1,6 @@
 # package abstraction
 # provides methods to add/remove files, extract control files
+# maintainer: baris and meren
 
 class Package:
     """Package: PISI package class"""

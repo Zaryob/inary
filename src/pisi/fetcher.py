@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # download magic
+# maintainer: baris and meren
 
 # python standard library modules
 import urlparse

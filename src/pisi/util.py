@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 # misc. utility functions, including process and file utils
+# maintainer: eray and caglar and baris and meren!
 
 import os
 import sys
 import md5
-
-def information(message):
-    sys.stdout.write(message)
-    sys.stdout.flush()
 
 # check if directory exists, and create if it doesn't
 # works recursively
@@ -49,9 +46,3 @@ def strlist(l):
 
 class ArgError(Exception):
     pass
-
-def usage(progname = "pisi-build"):
-    print """
-Usage:
-%s [options] package-name.pspec
-""" %(progname)
