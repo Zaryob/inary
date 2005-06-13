@@ -19,7 +19,7 @@ class FetchError (Exception):
 
 class Fetcher:
     """Yet another Pisi tool for fetching files from various sources.."""
-    def __init__(self, uri):
+    def __init__(self, uri, fileName):
         self.uri = uri
         self.filedest = config.archives_dir()
         util.check_dir(self.filedest)
@@ -33,7 +33,7 @@ class Fetcher:
         from string import split
         u = urlparse.urlparse(self.uri)
         self.scheme, self.netloc, self.filepath = u[0], u[1], u[2]
-        self.filename = split(self.filepath, "/")[-1:][0]
+        self.filename = fileName
 
     def fetch (self):
         """Return value: Fetched file's full path.."""
