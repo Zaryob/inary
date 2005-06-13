@@ -17,6 +17,12 @@ import ui
 class PisiBuildError(Exception):
     pass
 
+# FIXME: this eventually has to go to ui module
+def displayProgress(pd):
+    out = '\r%-30.30s %3d%% %12.2f %s' % \
+        (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
+    ui.info(out)
+
 class PisiBuild:
     """PisiBuild class, provides the package build and creation routines"""
     def __init__(self, pspecfile):
@@ -29,8 +35,20 @@ class PisiBuild:
         self.archiveName = basename(spec.archiveUri)
         self.spec = spec
 
+    def install(self):
+        ui.info("Building PISI source package: %s\n" % self.spec.sourceName)
+        ui.info("Fetching source from: %s" % self.spec.archiveUri)
+        self.fetchArchive(displayProgress)
+        ui.info("\n")
+        ui.info("Source archive is stored: %s/%s\n" %(config.archives_dir(), self.archiveName))
+        # unpackArchive()
+        # applyPatches()
+        # buildSource()
+        # installTarget()
+        self.buildPackages()
+
     def fetchArchive(self, percentHook=None):
-        """fetch an archive and store to pisi.config.archives_dir
+        """fetch an archive and store to config.archives_dir() 
         using fether.Fetcher"""
         fetch = Fetcher(self.spec.archiveUri)
 
@@ -38,7 +56,7 @@ class PisiBuild:
         destpath = fetch.filedest + "/" + fetch.filename
         if os.access(destpath, os.R_OK):
             if util.md5_file(destpath)==self.spec.archiveMD5:
-                ui.info(fetch.filename + " cached\n")
+                ui.info(' [cached]')
                 return
 
         if percentHook:

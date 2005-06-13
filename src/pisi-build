@@ -15,11 +15,6 @@ Usage:
 %s [options] package-name.pspec
 """ %(progname)
 
-def doProgress(filename, percent, rate, symbol):
-    out = '\r%-30.30s %3d%% %12.2f %s' % \
-        (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
-    pisi.ui.info(out)
-
 def main():
     import sys
     import getopt
@@ -51,19 +46,9 @@ def main():
     else:
         pspec = args[0]
 
-    # doing the real job.
+    # don't do the real job here. this is just a CLI!
     pb = PisiBuild(pspec)
-    pisi.ui.info("Building PISI source package: %s\n" % pb.spec.sourceName)
-
-    pisi.ui.info("Fetching source from: %s (be patient)\n" % pb.spec.archiveUri)
-    pb.fetchArchive(doProgress)
-    pisi.ui.info("Source archive is stored: %s/%s\n" %(pisi.config.archives_dir, pb.archiveName))
-    # pb.unpackArchive()
-    # pb.applyPatches()
-    # pb.buildSource()
-    # pb.installTarget()
-
-    pb.buildPackages()
+    pb.install()
     
 
 if __name__ == "__main__":

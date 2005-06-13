@@ -21,7 +21,7 @@ class Fetcher:
     """Yet another Pisi tool for fetching files from various sources.."""
     def __init__(self, uri):
         self.uri = uri
-        self.filedest = config.archives_dir
+        self.filedest = config.archives_dir()
         util.check_dir(self.filedest)
         self.scheme = "file"
         self.netloc = ""

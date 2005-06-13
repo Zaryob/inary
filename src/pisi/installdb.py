@@ -2,14 +2,15 @@
 # installation database
 # maintainer: eray and caglar
 
-from config import *
+import config
 import shelve
 import util
 
+util.check_dir( config.db_dir() )
 
-d = shelve.open( db_dir + '/install.dbm')
+d = shelve.open( config.db_dir() + '/install.dbm')
 
-files_dir = archive_dir + "/files"
+files_dir = config.archives_dir() + "/files"
 
 class InstallDBError(Exception):
     pass
