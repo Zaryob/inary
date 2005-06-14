@@ -43,3 +43,22 @@ The main rule of thumb in Demeter's Law is avoiding
 putting more than, say, 10 methods in a class. That works
 really well in practice, forcing refactoring every now
 and then.
+
+Unittests
+---------
+Unittests are located in unittests directory. Running the tests are
+trivial. But you must syncronize your code and data with the test
+code, which can be a tedious work if you lose discipline.
+
+Sample data files are located in samples/ directory.
+
+For running all test suites, use the following command:
+
+$ ./unittests/run.py
+
+If you know what you are doing, you can run the tests seperately. But
+keep in your mind that test can depend each other. The following
+command will run tests in specfiletests and archivetests:
+
+$ ./unittests/run.py specfiletests archivetests
+
