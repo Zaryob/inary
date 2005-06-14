@@ -73,6 +73,12 @@ class SpecFile(XmlFile):
         historyElts = self.getAllNodes("History/Update")
         self.source.history = [HistoryInfo(x) for x in historyElts]
 
+	# As we have no Source/Version tag we need to get 
+	# the last version and release information
+	# from the first child of History/Update. And it works :)
+	self.source.version = self.source.history[0].version
+	self.source.release = self.source.history[0].release
+
         # find all binary packages
         packageElts = self.getAllNodes("Package")
         self.packages = [PackageInfo(p) for p in packageElts]
