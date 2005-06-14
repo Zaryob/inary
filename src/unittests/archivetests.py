@@ -7,6 +7,7 @@ from pisi import archive
 from pisi import specfile
 from pisi import fetcher
 from pisi import util
+from pisi import config
 
 class ArchiveFileTestCase(unittest.TestCase):
     def setUp(self):
@@ -14,8 +15,12 @@ class ArchiveFileTestCase(unittest.TestCase):
         self.spec.read("samples/popt.pspec")
 	
     def testUnpackTar(self):
+	targetDir = config.build_work_dir(self.spec.source.name,
+					  self.spec.source.version,
+					  self.spec.source.release)
 	achv = archive.Archive(self.spec.source.archiveType,
-			       self.spec.source.archiveName)
+			       self.spec.source.archiveName,
+			       targetDir)
 	
 	assert self.spec.source.archiveType == "targz"
 
@@ -38,7 +43,10 @@ class ArchiveFileTestCase(unittest.TestCase):
 	fetch = fetcher.Fetcher(uri, filename)
 	fetch.fetch()
 
-	achv = archive.Archive("zip", filename)
+	# imaginary name, version and release for our test zip file
+	targetDir = config.build_work_dir("sandbox", "0.1", "1")
+
+	achv = archive.Archive("zip", filename, targetDir)
 	achv.unpack()
 	
 
