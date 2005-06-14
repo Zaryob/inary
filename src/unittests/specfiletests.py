@@ -12,6 +12,14 @@ class SpecReadTestCase(unittest.TestCase):
 	self.assertEqual(self.spec.source.name,
 			    "popt")
 
+    def testSourceVersion(self):
+	self.assertEqual(self.spec.source.version,
+			 "1.7")
+
+    def testSourceLastRelease(self):
+	self.assertEqual(self.spec.source.release,
+			 "3")
+
     def testMD5Sum(self):
 	self.assertEqual(self.spec.source.archiveMD5,
 			    "5988e7aeb0ae4dac8d83561265984cc9")
