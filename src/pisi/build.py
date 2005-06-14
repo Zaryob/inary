@@ -7,7 +7,7 @@ import os
 
 from specfile import SpecFile
 from fetcher import Fetcher
-# from archive import Archive
+from archive import Archive
 # import pisipackage
 import util
 import config
@@ -42,7 +42,8 @@ class PisiBuild:
         ui.info("Source archive is stored: %s/%s\n"
                 %(config.archives_dir(), self.spec.source.archiveName))
 	# solveBuildDependencies()
-        # unpackArchive()
+	ui.info("Unpacking archive...\n")
+        self.unpackArchive()
         # applyPatches()
         # buildSource()
         # installTarget()
@@ -72,10 +73,12 @@ class PisiBuild:
 
     def unpackArchive(self):
 	type = self.spec.source.archiveType
-	filename = self.spec.source.archiveName
-	archive = Archive(type, filename)
+	fileName = self.spec.source.archiveName
+	targetDir = config.build_work_dir(self.spec.source.name,
+					  self.spec.source.version,
+					  self.spec.source.release)
+	archive = Archive(type, fileName, targetDir)
 	archive.unpack()
-        pass
 
     def applyPatches(self):
         pass
