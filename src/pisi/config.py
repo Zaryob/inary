@@ -8,7 +8,7 @@ tmp_dir_suffix =  "/var/tmp/pisi"
 
 destdir = ''                           # install default to root by default
 
-destdir = './test'                      # only for ALPHA
+destdir = './tmp'                      # only for ALPHA
 
 # the idea is that destdir can be set with --destdir=...
 
