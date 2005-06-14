@@ -12,15 +12,15 @@ import zipfile
 import config
 
 class ArchiveBase(object):
-    def __init__(self, fileName, type):
+    def __init__(self, type, fileName, targetPath):
 	self.type = type
 	self.fileName = fileName
-
 	self.filePath = config.archives_dir() + '/' + self.fileName
+	self.targetPath = targetPath
 
 class ArchiveTarFile(ArchiveBase):
-    def __init__(self, fileName, type):
-	super(ArchiveTarFile, self).__init__(fileName, type)
+    def __init__(self, type, fileName, targetPath):
+	super(ArchiveTarFile, self).__init__(type, fileName, targetPath)
 
     def unpack(self):
 	if self.type == 'targz':
@@ -30,8 +30,8 @@ class ArchiveTarFile(ArchiveBase):
 	    tar.close()
 
 class ArchiveZip(ArchiveBase):
-    def __init__(self, fileName, type):
-	super(ArchiveZip, self).__init__(fileName, type)
+    def __init__(self, type, fileName, targetPath):
+	super(ArchiveZip, self).__init__(type, fileName, targetPath)
 
     def unpack(self):
         zip = zipfile.ZipFile(self.filePath, 'r')
@@ -41,7 +41,7 @@ class ArchiveZip(ArchiveBase):
             if not os.path.exists(os.path.dirname(config.archives_dir() + '/' + file)):
                 os.mkdir(os.path.dirname(config.archives_dir() + '/' + file))
                 continue
-	    else: # directory is present, we should still continue (or delete?)
+	    else: # directory is present, we should still continue (or delete and recreate?)
 		continue
             buff = open (ofile, 'wb')
             fileContent = zip.read(file)
@@ -52,7 +52,7 @@ class ArchiveZip(ArchiveBase):
 class Archive:
     """Unpack magic for Archive files..."""
 
-    def __init__(self, type, fileName):
+    def __init__(self, type, fileName, targetPath):
 	"""accepted archive types:
 	targz, tarbz2, zip, tar"""	
 	
@@ -63,7 +63,7 @@ class Archive:
 	    'zip': ArchiveZip
 	    }
 	
-	self.archive = actions.get(type)(fileName, type)
+	self.archive = actions.get(type)(type, fileName, targetPath)
 
     def unpack(self):
 	self.archive.unpack()
