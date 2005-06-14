@@ -34,11 +34,11 @@ class ArchiveZip(ArchiveBase):
         zip = zipfile.ZipFile(config.archives_dir() + '/' + self.fileName, 'r')
         fileNames = zip.namelist()
         for file in fileNames:
-            file = config.archives_dir() + '/' + file
-            if not os.path.exists(os.path.dirname(file)):
-                os.mkdir(os.path.dirname(file))
+            ofile = config.archives_dir() + '/' + file
+            if not os.path.exists(os.path.dirname(config.archives_dir() + '/' + file)):
+                os.mkdir(os.path.dirname(config.archives_dir() + '/' + file))
                 continue
-            buff = open (file, 'wb')
+            buff = open (ofile, 'wb')
             fileContent = zip.read(file)
             buff.write(fileContent)
             buff.close()
