@@ -87,7 +87,6 @@ class Fetcher:
                     self.percentHook(retval)
 
         dest.close()
-        print ""
 
 
     def fetchLocalFile (self):
