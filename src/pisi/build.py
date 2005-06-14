@@ -17,6 +17,9 @@ class PisiBuildError(Exception):
     pass
 
 # FIXME: this eventually has to go to ui module
+# Infact all ui calls has nothing to do with this build process.
+# There more of them in PisiBuild...
+# And maybe we should consider moving PisiBuild.build() back to pisi-build CLI too.
 def displayProgress(pd):
     out = '\r%-30.30s %3d%% %12.2f %s' % \
         (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
@@ -60,7 +63,12 @@ class PisiBuild:
 
         if percentHook:
             fetch.percentHook = percentHook
-        fetch.fetch()
+        
+	fetch.fetch()
+
+	# FIXME: What a ugly hack! We should really find a cleaner way for output.
+	if percentHook:
+	    ui.info('\n')
 
     def unpackArchive(self):
 	type = self.spec.source.archiveType
