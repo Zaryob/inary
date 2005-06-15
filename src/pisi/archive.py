@@ -67,6 +67,11 @@ class ArchiveZip(ArchiveBase):
                 os.mkdir(ofile)
                 continue
             info = zip.getinfo(file)
+	    # O.K. we know following line is dull. What we wanted to
+	    # do was to compare the equality to 0xa0000000. But there
+	    # is a known problem in Python regarding the hex/oct
+	    # constants. Please see Guido's explanation at
+	    # http://mail.python.org/pipermail/python-dev/2003-February/033029.html
 	    if hex(info.external_attr)[2] == 'A':
                 target = zip.read(file)
 		os.symlink(target, ofile)
