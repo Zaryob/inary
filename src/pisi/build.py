@@ -8,6 +8,7 @@ import os
 from specfile import SpecFile
 from fetcher import Fetcher
 from archive import Archive
+
 # import pisipackage
 import util
 import config
@@ -41,13 +42,22 @@ class PisiBuild:
         self.fetchArchive(displayProgress)
         ui.info("Source archive is stored: %s/%s\n"
                 %(config.archives_dir(), self.spec.source.archiveName))
-	# solveBuildDependencies()
+	
+	self.solveBuildDependencies()
+	
 	ui.info("Unpacking archive...\n")
         self.unpackArchive()
-        # applyPatches()
-        # buildSource()
-        # installTarget()
-        self.buildPackages()
+        
+	# applyPatches()
+
+	self.actionScript = open( os.path.dirname( self.pspecfile ) + '/' + 'actions' ).read()
+
+	os.chdir( config.build_work_dir( self.spec.source.name, self.spec.source.version, self.spec.source.release ) + "/" + self.spec.source.name + "-" + self.spec.source.version)
+	locals = globals = {}
+	exec compile( self.actionScript , "error", "exec" ) in locals,globals
+	locals['src_setup']()
+	locals['src_build']()
+	locals['src_install']()
 
     def fetchArchive(self, percentHook=None):
         """fetch an archive and store to config.archives_dir() 
@@ -70,6 +80,9 @@ class PisiBuild:
 	# FIXME: What a ugly hack! We should really find a cleaner way for output.
 	if percentHook:
 	    ui.info('\n')
+
+    def solveBuildDependencies(self):
+    	pass
 
     def unpackArchive(self):
 	type = self.spec.source.archiveType
