@@ -68,11 +68,11 @@ class PisiBuild:
 		return 
 		
 	ui.info("Configuring %s...\n" % self.spec.source.name)
-	locals['src_setup']()
+	self.configureSource( locals )
 	ui.info("Building %s...\n" % self.spec.source.name)
-	locals['src_build']()
+	self.buildSource( locals )
 	ui.info("Installing %s...\n" % self.spec.source.name)
-	locals['src_install']()
+	self.installSource( locals )
 
     def fetchArchive(self, percentHook=None):
         """fetch an archive and store to config.archives_dir() 
@@ -112,11 +112,14 @@ class PisiBuild:
     def applyPatches(self):
         pass
 
-    def buildSource(self):
-        pass
+    def configureSource(self, locals):
+	locals['src_setup']()
 
-    def installTarget(self):
-        pass
+    def buildSource(self, locals):
+	locals['src_build']()
+
+    def installSource(self, locals):
+	locals['src_install']()
 
     def buildPackages(self):
         for package in self.spec.packages:
