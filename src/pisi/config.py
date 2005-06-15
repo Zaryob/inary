@@ -33,8 +33,8 @@ def tmp_dir():
 
 def build_work_dir(packageName, version, release):
     packageDir = packageName + '-' + version + '-' + release
-    return destdir + '/' + packageDir + build_work_dir_suffix
+    return destdir + tmp_dir_suffix + '/' + packageDir + build_work_dir_suffix
 
 def build_install_dir(packageName, version, release):
     packageDir = packageName + '-' + version + '-' + release
-    return destdir + '/' + packageDir + build_install_dir_suffix
+    return destdir + tmp_dir_suffix + '/' + packageDir + build_install_dir_suffix
