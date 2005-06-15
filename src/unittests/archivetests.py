@@ -19,13 +19,12 @@ class ArchiveFileTestCase(unittest.TestCase):
 					  self.spec.source.version,
 					  self.spec.source.release)
 	achv = archive.Archive(self.spec.source.archiveType,
-			       self.spec.source.archiveName,
-			       targetDir)
+			       self.spec.source.archiveName)
 	
 	assert self.spec.source.archiveType == "targz"
 
 	# unpacking is trivial with Archive()
-	achv.unpack()
+	achv.unpack(targetDir)
 	
 	# but testing is hard
 	# "var/tmp/pisi/popt-1.7-3/work" (targetDir)
@@ -48,8 +47,8 @@ class ArchiveFileTestCase(unittest.TestCase):
 	# imaginary name, version and release for our test zip file
 	targetDir = config.build_work_dir("sandbox", "0.1", "1")
 
-	achv = archive.Archive("zip", filename, targetDir)
-	achv.unpack()
+	achv = archive.Archive("zip", filename)
+	achv.unpack(targetDir)
 
 	assert pathexists(targetDir + "/sandbox")
 
