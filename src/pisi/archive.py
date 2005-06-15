@@ -17,8 +17,15 @@ class ArchiveBase(object):
 	self.fileName = fileName
 	self.filePath = config.archives_dir() + '/' + self.fileName
 	self.targetDir = targetDir
-        if not os.path.exists(self.targetDir):
-            os.makedirs(self.targetDir)
+
+	# first we check if we need to clean-up our working env.
+        if os.path.exists(self.targetDir):
+	    for root, dirs, files in os.walk(self.targetDir, topdown=False):
+		for name in files:
+		    os.remove(os.path.join(root, name))
+		for name in dirs:
+		    os.rmdir(os.path.join(root, name))
+
 
 class ArchiveTarFile(ArchiveBase):
     def __init__(self, type, fileName, targetDir):
