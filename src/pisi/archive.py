@@ -10,6 +10,7 @@ import zipfile
 
 #pisi modules
 import config
+import util
 
 class ArchiveBase(object):
     def __init__(self, type, fileName, targetDir):
@@ -20,11 +21,7 @@ class ArchiveBase(object):
 
 	# first we check if we need to clean-up our working env.
         if os.path.exists(self.targetDir):
-	    for root, dirs, files in os.walk(self.targetDir, topdown=False):
-		for name in files:
-		    os.remove(os.path.join(root, name))
-		for name in dirs:
-		    os.rmdir(os.path.join(root, name))
+	    util.purge_dir(self.targetDir)
 	else:
 	    os.makedirs(self.targetDir)
 
