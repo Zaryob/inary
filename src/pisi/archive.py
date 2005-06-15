@@ -17,17 +17,28 @@ class ArchiveBase(object):
 	self.fileName = fileName
 	self.filePath = config.archives_dir() + '/' + self.fileName
 	self.targetDir = targetDir
+        if not os.path.exists(self.targetDir):
+            os.makedirs(self.targetDir)
 
 class ArchiveTarFile(ArchiveBase):
     def __init__(self, type, fileName, targetDir):
 	super(ArchiveTarFile, self).__init__(type, fileName, targetDir)
 
     def unpack(self):
-	if self.type == 'targz':
-	    tar = tarfile.open(self.filePath, 'r:gz')
-	    for tarinfo in tar:
-		tar.extract(tarinfo)
-	    tar.close()
+        rmode = ""
+	if self.type == 'tar':
+	    rmode = 'r:'
+	elif self.type == 'targz':
+	    rmode = 'r:gz'
+	elif self.type == 'tarbz2':
+	    rmode = 'r:bz2'
+	tar = tarfile.open(self.filePath, rmode)
+        oldwd = os.getcwd()
+        os.chdir(self.targetDir)
+	for tarinfo in tar:
+	    tar.extract(tarinfo)
+        os.chdir(oldwd)
+	tar.close()
 
 class ArchiveZip(ArchiveBase):
     def __init__(self, type, fileName, targetDir):
@@ -37,12 +48,10 @@ class ArchiveZip(ArchiveBase):
         zip = zipfile.ZipFile(self.filePath, 'r')
         fileNames = zip.namelist()
         for file in fileNames:
-            ofile = config.archives_dir() + '/' + file
+            ofile = self.targetDir + '/' + file
             if not os.path.exists(ofile):
                 os.mkdir(ofile)
                 continue
-            elif os.path.exists(ofile):    #maybe ofile is not a dir, but file.
-                continue                   #so we have to check..
             buff = open (ofile, 'wb')
             fileContent = zip.read(file)
             buff.write(fileContent)
