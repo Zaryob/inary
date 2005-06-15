@@ -25,7 +25,8 @@ class ArchiveBase(object):
 		    os.remove(os.path.join(root, name))
 		for name in dirs:
 		    os.rmdir(os.path.join(root, name))
-
+	if not os.path.exists(self.targetDir):
+	    os.makedirs(self.targetDir)
 
 class ArchiveTarFile(ArchiveBase):
     def __init__(self, type, fileName, targetDir):
