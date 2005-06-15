@@ -13,12 +13,13 @@ import config
 import util
 
 class ArchiveBase(object):
-    def __init__(self, type, fileName, targetDir):
+    def __init__(self, type, fileName):
 	self.type = type
 	self.fileName = fileName
 	self.filePath = config.archives_dir() + '/' + self.fileName
-	self.targetDir = targetDir
 
+    def unpack(self, targetDir):
+	self.targetDir = targetDir
 	# first we check if we need to clean-up our working env.
         if os.path.exists(self.targetDir):
 	    util.purge_dir(self.targetDir)
@@ -26,10 +27,12 @@ class ArchiveBase(object):
 	    os.makedirs(self.targetDir)
 
 class ArchiveTarFile(ArchiveBase):
-    def __init__(self, type, fileName, targetDir):
-	super(ArchiveTarFile, self).__init__(type, fileName, targetDir)
+    def __init__(self, type, fileName):
+	super(ArchiveTarFile, self).__init__(type, fileName)
 
-    def unpack(self):
+    def unpack(self, targetDir):
+	super(ArchiveTarFile, self).unpack(targetDir)
+
         rmode = ""
 	if self.type == 'tar':
 	    rmode = 'r:'
@@ -46,10 +49,12 @@ class ArchiveTarFile(ArchiveBase):
 	tar.close()
 
 class ArchiveZip(ArchiveBase):
-    def __init__(self, type, fileName, targetDir):
-	super(ArchiveZip, self).__init__(type, fileName, targetDir)
+    def __init__(self, type, fileName):
+	super(ArchiveZip, self).__init__(type, fileName)
 
-    def unpack(self):
+    def unpack(self, targetDir):
+	super(ArchiveZip, self).unpack(targetDir)
+
         zip = zipfile.ZipFile(self.filePath, 'r')
         fileNames = zip.namelist()
         for file in fileNames:
@@ -73,7 +78,7 @@ class ArchiveZip(ArchiveBase):
 class Archive:
     """Unpack magic for Archive files..."""
 
-    def __init__(self, type, fileName, targetDir):
+    def __init__(self, type, fileName):
 	"""accepted archive types:
 	targz, tarbz2, zip, tar"""	
 	
@@ -84,7 +89,7 @@ class Archive:
 	    'zip': ArchiveZip
 	    }
 	
-	self.archive = actions.get(type)(type, fileName, targetDir)
+	self.archive = actions.get(type)(type, fileName)
 
-    def unpack(self):
-	self.archive.unpack()
+    def unpack(self, targetDir):
+	self.archive.unpack(targetDir)
