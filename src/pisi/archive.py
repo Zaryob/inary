@@ -12,15 +12,15 @@ import zipfile
 import config
 
 class ArchiveBase(object):
-    def __init__(self, type, fileName, targetPath):
+    def __init__(self, type, fileName, targetDir):
 	self.type = type
 	self.fileName = fileName
 	self.filePath = config.archives_dir() + '/' + self.fileName
-	self.targetPath = targetPath
+	self.targetDir = targetDir
 
 class ArchiveTarFile(ArchiveBase):
-    def __init__(self, type, fileName, targetPath):
-	super(ArchiveTarFile, self).__init__(type, fileName, targetPath)
+    def __init__(self, type, fileName, targetDir):
+	super(ArchiveTarFile, self).__init__(type, fileName, targetDir)
 
     def unpack(self):
 	if self.type == 'targz':
@@ -30,19 +30,20 @@ class ArchiveTarFile(ArchiveBase):
 	    tar.close()
 
 class ArchiveZip(ArchiveBase):
-    def __init__(self, type, fileName, targetPath):
-	super(ArchiveZip, self).__init__(type, fileName, targetPath)
+    def __init__(self, type, fileName, targetDir):
+	super(ArchiveZip, self).__init__(type, fileName, targetDir)
 
     def unpack(self):
         zip = zipfile.ZipFile(self.filePath, 'r')
         fileNames = zip.namelist()
         for file in fileNames:
             ofile = config.archives_dir() + '/' + file
-            if not os.path.exists(os.path.dirname(config.archives_dir() + '/' + file)):
-                os.mkdir(os.path.dirname(config.archives_dir() + '/' + file))
+	    print ofile
+            if not os.path.exists(ofile):
+                os.mkdir(ofile)
                 continue
-	    else: # directory is present, we should still continue (or delete and recreate?)
-		continue
+            elif os.path.exists(ofile):    #maybe ofile is not a dir, but file.
+                continue                   #so we have to check..
             buff = open (ofile, 'wb')
             fileContent = zip.read(file)
             buff.write(fileContent)
@@ -52,7 +53,7 @@ class ArchiveZip(ArchiveBase):
 class Archive:
     """Unpack magic for Archive files..."""
 
-    def __init__(self, type, fileName, targetPath):
+    def __init__(self, type, fileName, targetDir):
 	"""accepted archive types:
 	targz, tarbz2, zip, tar"""	
 	
@@ -63,7 +64,7 @@ class Archive:
 	    'zip': ArchiveZip
 	    }
 	
-	self.archive = actions.get(type)(type, fileName, targetPath)
+	self.archive = actions.get(type)(type, fileName, targetDir)
 
     def unpack(self):
 	self.archive.unpack()
