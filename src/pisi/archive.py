@@ -49,13 +49,20 @@ class ArchiveZip(ArchiveBase):
         fileNames = zip.namelist()
         for file in fileNames:
             ofile = self.targetDir + '/' + file
-            if not os.path.exists(ofile):
+
+	    # a directory is present. lets continue
+	    if os.path.isdir(ofile):
+		continue
+	    # do we need to create parent directory for our file?
+            if not os.path.exists(os.path.dirname(ofile)):
                 os.mkdir(ofile)
                 continue
+
             buff = open (ofile, 'wb')
             fileContent = zip.read(file)
             buff.write(fileContent)
             buff.close()
+
         zip.close()
                 
 class Archive:
