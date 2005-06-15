@@ -56,8 +56,7 @@ class ArchiveZip(ArchiveBase):
 	super(ArchiveZip, self).unpack(targetDir)
 
         zip = zipfile.ZipFile(self.filePath, 'r')
-        fileNames = zip.namelist()
-        for file in fileNames:
+        for file in zip.namelist():
             ofile = self.targetDir + '/' + file
 
 	    # a directory is present. lets continue
@@ -67,11 +66,15 @@ class ArchiveZip(ArchiveBase):
             if not os.path.exists(os.path.dirname(ofile)):
                 os.mkdir(ofile)
                 continue
-
-            buff = open (ofile, 'wb')
-            fileContent = zip.read(file)
-            buff.write(fileContent)
-            buff.close()
+            info = zip.getinfo(file)
+	    if hex(info.external_attr)[2] == 'A':
+                target = zip.read(file)
+		os.symlink(target, ofile)
+            else:
+                buff = open (ofile, 'wb')
+                fileContent = zip.read(file)
+                buff.write(fileContent)
+                buff.close()
 
         zip.close()
                 
