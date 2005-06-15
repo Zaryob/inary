@@ -33,4 +33,5 @@ def install():
                 sysconfdir={D}/etc \
                 install'
     
-    os.system( install_string.replace( '{D}', os.path.dirname( os.path.dirname( os.getcwd())) + '/image' ))
+    # FIXME: need to get install directory from pisi.config...
+    os.system( install_string.replace( '{D}', os.path.dirname( os.path.dirname( os.getcwd())) + '/install' ))
