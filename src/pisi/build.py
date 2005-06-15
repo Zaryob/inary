@@ -60,7 +60,13 @@ class PisiBuild:
 	# (from the assumption is evil dept.)
 	os.chdir( config.build_work_dir( self.spec.source.name, self.spec.source.version, self.spec.source.release ) + "/" + self.spec.source.name + "-" + self.spec.source.version)
 	locals = globals = {}
-	exec compile( self.actionScript , "error", "exec" ) in locals,globals
+	
+	try:
+		exec compile( self.actionScript , "error", "exec" ) in locals,globals
+	except SyntaxError, e:
+		print "Error : %s" % e
+		return 
+		
 	ui.info("Configuring %s...\n" % self.spec.source.name)
 	locals['src_setup']()
 	ui.info("Building %s...\n" % self.spec.source.name)
