@@ -38,6 +38,7 @@ class PisiBuild:
 
     def build(self):
         ui.info("Building PISI source package: %s\n" % self.spec.source.name)
+
         ui.info("Fetching source from: %s\n" % self.spec.source.archiveUri)
         self.fetchArchive(displayProgress)
         ui.info("Source archive is stored: %s/%s\n"
@@ -45,8 +46,9 @@ class PisiBuild:
 	
 	self.solveBuildDependencies()
 	
-	ui.info("Unpacking archive...\n")
-        self.unpackArchive()
+	ui.info("Unpacking archive...")
+        targetDir = self.unpackArchive()
+	ui.info(" unpacked (%s)\n" % targetDir)
         
 	# applyPatches()
 
@@ -92,6 +94,7 @@ class PisiBuild:
 					  self.spec.source.release)
 	archive = Archive(type, fileName, targetDir)
 	archive.unpack()
+	return targetDir
 
     def applyPatches(self):
         pass
