@@ -1,7 +1,7 @@
 
 import unittest
 from os.path import exists as pathexists
-from os.path import basename
+from os.path import basename, islink
 
 from pisi import archive
 from pisi import specfile
@@ -28,11 +28,13 @@ class ArchiveFileTestCase(unittest.TestCase):
 	achv.unpack()
 	
 	# but testing is hard
-	assert pathexists("popt-1.7")
+	# "var/tmp/pisi/popt-1.7-3/work" (targetDir)
+	assert pathexists(targetDir + "/popt-1.7")
 
-	testfile = "popt-1.7/Makefile.am"
+	testfile = targetDir + "/popt-1.7/Makefile.am"
 	assert pathexists(testfile)
 	
+	# check file integrity
 	self.assertEqual(util.md5_file(testfile),
 			 "171545adab7b51ebf6ec5575d3000a95")
 
@@ -48,7 +50,20 @@ class ArchiveFileTestCase(unittest.TestCase):
 
 	achv = archive.Archive("zip", filename, targetDir)
 	achv.unpack()
+
+	assert pathexists(targetDir + "/sandbox")
+
+	testfile = targetDir + "/sandbox/borek.cs"
+	assert pathexists(testfile)
+	
+	# check file integrity
+	self.assertEqual(util.md5_file(testfile),
+			 "1e0c3f1e4664ee8ca67caea8b6b12ea4")
+
+	# check for symbolic links
+	testfile = targetDir + "/sandbox/deneme/hed"
+	assert islink(testfile)
 	
 
+
 suite = unittest.makeSuite(ArchiveFileTestCase)
-	    
