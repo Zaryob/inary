@@ -7,7 +7,7 @@ from pisi.actionsapi.autotools import *
 
 def src_setup():
 	gnuconfig_update()
-	libtoolize()
+#	libtoolize()
 	configure( '--with-nls' )
 
 def src_build():
