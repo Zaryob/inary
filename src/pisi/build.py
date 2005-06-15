@@ -33,6 +33,10 @@ class PisiBuild:
         spec = SpecFile()
         spec.read(pspecfile)
         spec.verify()                  # check pspec integrity
+	
+	self.work_dir = config.build_work_dir(spec.source.name,
+					      spec.source.version,
+					      spec.source.release)
 
         self.spec = spec
 
@@ -102,12 +106,9 @@ class PisiBuild:
     def unpackArchive(self):
 	type = self.spec.source.archiveType
 	fileName = self.spec.source.archiveName
-	targetDir = config.build_work_dir(self.spec.source.name,
-					  self.spec.source.version,
-					  self.spec.source.release)
-	archive = Archive(type, fileName, targetDir)
-	archive.unpack()
-	return targetDir
+
+	archive = Archive(type, fileName)
+	archive.unpack(self.work_dir)
 
     def applyPatches(self):
         pass
