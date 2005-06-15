@@ -19,6 +19,14 @@ def check_dir(dir):
         check_dir(parent_dir)
         os.mkdir(dir)
 
+def purge_dir(top):
+    """Remove all content of a directory (top)"""
+    for root, dirs, files in os.walk(top, topdown=False):
+	for name in files:
+	    os.remove(os.path.join(root, name))
+	for name in dirs:
+	    os.rmdir(os.path.join(root, name))
+
 # TODO:
 def copy_file():
     pass
