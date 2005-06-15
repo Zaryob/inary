@@ -1,6 +1,7 @@
 # generic user interface
 
 import sys
+from output import *
 
 # put the interface directly in the module
 # since the UI is _unique_
@@ -15,7 +16,7 @@ def info(msg):
 # default UI implementation
 class CLI:
     def info(self, msg):
-        sys.stdout.write(msg)
+        sys.stdout.write( bold( red (msg)))
         sys.stdout.flush()
 
 # default UI is CLI
