@@ -38,7 +38,6 @@ class ArchiveZip(ArchiveBase):
         fileNames = zip.namelist()
         for file in fileNames:
             ofile = config.archives_dir() + '/' + file
-	    print ofile
             if not os.path.exists(ofile):
                 os.mkdir(ofile)
                 continue
