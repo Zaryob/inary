@@ -1,13 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from gnuconfig import *
-from libtoolize import *
-from autotools import *
+from pisi.actionsapi.gnuconfig import *
+from pisi.actionsapi.libtoolize import *
+from pisi.actionsapi.autotools import *
 
 def src_setup():
 	gnuconfig_update()
-	libtoolize()
+#	libtoolize()
 	configure( '--with-nls' )
 
 def src_build():
