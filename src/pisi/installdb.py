@@ -18,25 +18,25 @@ def files_name(name, version, release):
 
 def is_recorded(name, version, release):
     key = (name, version, release)
-    return d.has_key( key )
+    return d.has_key(key)
 
 def is_installed(name, version, release):
     key = (name, version, release)
     return is_recorded(key) and d[key]=='i'
 
-def install( name, version, release, files_xml):
+def install(name, version, release, files_xml):
     key = (name, version, release)
     if isInstalled(key):
         raise InstallDBError("already installed")
     d[key] = 'i'
-    util.copy_file(files_xml, files_name( name, version, release) )
+    util.copy_file(files_xml, files_name(name, version, release))
                    
-def remove( name, version, release):
+def remove(name, version, release):
     key = (name, version, release)
     d[key] = 'r'
 
-def purge( name, version, release):
-    util.remove_file( files_name( name, version, release) )
+def purge(name, version, release):
+    util.remove_file(files_name( name, version, release))
     del d[key]
 
 

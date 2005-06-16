@@ -8,10 +8,10 @@
 
 import bsddb.dbshelve as shelve
 
-util.check_dir( config.db_dir() )
-d = shelve.open( config.db_dir() + '/source.bdb')
+util.check_dir(config.db_dir())
+d = shelve.open(config.db_dir() + '/source.bdb')
 
-def add_source( name, source_info ):
+def add_source(name, source_info):
     d[name] = source_info
 
 def remove_source(name):

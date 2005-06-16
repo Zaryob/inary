@@ -40,19 +40,19 @@ def getChildElts(node):
 def getNode(node, tagpath):
     """returns the *first* matching node for given tag path."""
     
-    tags=tagpath.split('/')
+    tags = tagpath.split('/')
 
     # iterative code to search for the path
         
     # get DOM for top node
     nodeList = node.getElementsByTagName(tags[0])
-    if len(nodeList)==0:
+    if len(nodeList) == 0:
         return None                 # not found
 
     node = nodeList[0]              # discard other matches
     for tag in tags[1:]:
         nodeList = node.getElementsByTagName(tag)
-        if len(nodeList)==0:
+        if len(nodeList) == 0:
             return None
         else:
             node = nodeList[0]
@@ -62,11 +62,11 @@ def getNode(node, tagpath):
 def getAllNodes(node, tags):
     """retrieve all nodes that match a given tag path."""
 
-    if len(tags)==0:
+    if len(tags) == 0:
         return []
 
     nodeList = node.getElementsByTagName(tags[0])
-    if len(nodeList)==0:
+    if len(nodeList) == 0:
         return []
 
     for tag in tags[1:]:
@@ -76,7 +76,7 @@ def getAllNodes(node, tags):
             nodeList.extend(x)
             pass # emacs indentation error, keep it here
 
-        if len(nodeList)==0:
+        if len(nodeList) == 0:
             return []
 
     return nodeList
@@ -122,14 +122,14 @@ class XmlFile(object):
     def getChildrenWithType(self, tagpath, type):
         """ returns the children of the given path, only with given type """
         node = self.getNode(tagpath)
-        return filter(lambda x:x.nodeType==type, node.childNodes)
+        return filter(lambda x:x.nodeType == type, node.childNodes)
 
     # get only child elements
     def getChildElts(self, tagpath):
         """ returns the children of the given path, only with given type """
         node = self.getNode(tagpath)
 	try:
-	    return filter(lambda x:x.nodeType==x.ELEMENT_NODE, node.childNodes)
+	    return filter(lambda x:x.nodeType == x.ELEMENT_NODE, node.childNodes)
 	except AttributeError:
 	    return None
 
