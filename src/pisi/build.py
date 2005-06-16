@@ -46,7 +46,7 @@ class PisiBuild:
 	self.unpackArchive()
 	ui.info(" unpacked (%s)\n" % self.ctx.build_work_dir())
         
-	# applyPatches()
+	self.applyPatches()
 
 	try:
 		self.actionScript = open(os.path.dirname(self.ctx.pspecfile ) + '/' + 'actions').read()
@@ -70,6 +70,9 @@ class PisiBuild:
 	self.configureSource(locals)
 	self.buildSource(locals)
 	self.installSource(locals)
+
+	# after all, we are ready to build/prepare the packages
+	self.buildPackages()
 
     def fetchArchive(self, percentHook=None):
         """fetch an archive and store to ctx.archives_dir() 
