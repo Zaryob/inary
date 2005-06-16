@@ -4,11 +4,11 @@ import os
 
 from pisi import fetcher
 from pisi import util
-from pisi import config
+from pisi import context
 
 class FetcherTestCase(unittest.TestCase):
     def setUp(self):
-	self.ctx = config.Context("samples/popt.pspec")
+	self.ctx = context.Context("samples/popt.pspec")
 
 	self.fetch = fetcher.Fetcher(self.ctx)
 	

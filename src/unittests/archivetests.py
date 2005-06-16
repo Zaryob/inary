@@ -6,14 +6,14 @@ from os.path import basename, islink
 from pisi import archive
 from pisi import fetcher
 from pisi import util
-from pisi import config
+from pisi import context
 
 class ArchiveFileTestCase(unittest.TestCase):
 #     def setUp(self):
 # 	pass
 
     def testUnpackTar(self):
-	ctx = config.Context("samples/popt.pspec")
+	ctx = context.Context("samples/popt.pspec")
 
 	targetDir = ctx.build_work_dir()
 	achv = archive.Archive(ctx)
@@ -35,7 +35,7 @@ class ArchiveFileTestCase(unittest.TestCase):
 			 "171545adab7b51ebf6ec5575d3000a95")
 
     def testUnpackZip(self):
-	ctx = config.Context("samples/sandbox.pspec")
+	ctx = context.Context("samples/sandbox.pspec")
 	fetch = fetcher.Fetcher(ctx)
 	fetch.fetch()
 
