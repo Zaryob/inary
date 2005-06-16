@@ -1,17 +1,17 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from pisi.actionsapi.gnuconfig import *
-from pisi.actionsapi.libtoolize import *
-from pisi.actionsapi.autotools import *
+import pisi.actionsapi.gnuconfig as gnuconfig
+import pisi.actionsapi.libtoolize as libtoolize
+import pisi.actionsapi.autotools as autotools
 
 def setup():
-    gnuconfig_update()
-#    libtoolize()
-    configure( '--with-nls' )
+    gnuconfig.gnuconfig_update()
+#    libtoolize.libtoolize()
+    autotools.configure( '--with-nls' )
 
 def build():
-    make()
+    autotools.make()
 
 def install():
-    install()
+    autotools.install()
