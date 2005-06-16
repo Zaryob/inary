@@ -9,6 +9,8 @@ def configure(parameters = None):
     ''' FIXME: Düzgün hale getirilecek '''
     ''' {EXTRA} = '--with-nls --with-libusb --with-something-usefull '''
 
+    # FIXME: I don't think its feasible to write all these parameters
+    # here. There should be a way to get all these... pisi.context.Constants?
     configure_string = './configure --prefix=/usr \
                 --host=i686-pc-linux-gnu \
                 --mandir=/usr/share/man \
@@ -17,7 +19,8 @@ def configure(parameters = None):
                 --sysconfdir=/etc \
                 --localstatedir=/var/lib {EXTRA}'
 
-    os.system(configure_string.replace('{EXTRA}', parameters))
+    cmd = configure_string.replace('{EXTRA}', parameters)
+    os.system(cmd)
 
 def make():
     ''' FIXME: Düzgün hale getirilecek '''
@@ -35,6 +38,8 @@ def install():
                 mandir={D}/usr/share/man \
                 sysconfdir={D}/etc \
                 install'
-    
-    # FIXME: need to get install directory from pisi.config...
-    os.system(install_string.replace('{D}',os.path.dirname(os.path.dirname(os.getcwd())) + const.build_install_dir_suffix))
+
+    cmd = os.path.dirname(os.path.dirname(os.getcwd())) + \
+	const.build_install_dir_suffix
+    cmd = install_string.replace('{D}', cmd)
+    os.system(cmd)
