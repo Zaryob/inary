@@ -99,7 +99,7 @@ class XmlFile(object):
 
     def verifyRootTag(self):
         if self.dom.documentElement.tagName != self.rootTag:
-            raise XmlError("Root tagname not " % self.rootTag % " as expected")
+            raise XmlError("Root tagname not " + self.rootTag + " as expected")
 
     def getNode(self, tagPath):
 	"""returns the *first* matching node for given tag path."""

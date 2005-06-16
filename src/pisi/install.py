@@ -27,7 +27,8 @@ def install_package_file(package_fn):
     metadata = MetaData()
     metadata.read(install_dir() + '/metadata.xml')
     # check package semantics
-    metadata.verify()
+    if not metadata.verify():
+        raise InstallError("MetaData format wrong")
 
     # check file system requirements
     # what to do if / is split into /usr, /var, etc.?
