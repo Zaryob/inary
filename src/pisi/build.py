@@ -49,10 +49,11 @@ class PisiBuild:
 	self.applyPatches()
 
 	try:
-		self.actionScript = open(os.path.dirname(self.ctx.pspecfile ) + '/' + 'actions').read()
+	    specdir = os.path.dirname(self.ctx.pspecfile)
+	    self.actionScript = open("/".join([specdir,self.ctx.const.actions_file])).read()
 	except IOError, e:
-		ui.error ("Action Script: %s\n" % e)
-		return 
+	    ui.error ("Action Script: %s\n" % e)
+	    return 
 		
 	# FIXME: It's wrong to assume that unpacked archive 
 	# will create a name-version top-level directory.
@@ -62,10 +63,10 @@ class PisiBuild:
 	locals = globals = {}
 	
 	try:
-		exec compile(self.actionScript , "error", "exec") in locals,globals
+	    exec compile(self.actionScript , "error", "exec") in locals,globals
 	except SyntaxError, e:
-		ui.error ("Error : %s\n" % e)
-		return 
+	    ui.error ("Error : %s\n" % e)
+	    return 
 		
 	self.configureSource(locals)
 	self.buildSource(locals)
@@ -107,18 +108,18 @@ class PisiBuild:
 
     def configureSource(self, locals):
 	if 'src_setup' in locals:
-		ui.info("Configuring %s...\n" % self.spec.source.name)
-		locals['src_setup']()
+	    ui.info("Configuring %s...\n" % self.spec.source.name)
+	    locals['src_setup']()
 
     def buildSource(self, locals):
 	if 'src_build' in locals:
-		ui.info("Building %s...\n" % self.spec.source.name)
-		locals['src_build']()
+	    ui.info("Building %s...\n" % self.spec.source.name)
+	    locals['src_build']()
 
     def installSource(self, locals):
 	if 'src_install' in locals:
-		ui.info("Installing %s...\n" % self.spec.source.name)
-		locals['src_install']()
+	    ui.info("Installing %s...\n" % self.spec.source.name)
+	    locals['src_install']()
 
     def buildPackages(self):
         for package in self.spec.packages:

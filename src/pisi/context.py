@@ -34,6 +34,10 @@ class Constants:
 	self.c.build_work_dir_suffix = "/work"
 	self.c.build_install_dir_suffix  = "/install"
 
+	# file/directory names
+	self.c.actions_file = "actions.py"
+	self.c.files_dir = "files"
+
     def __getattr__(self, attr):
  	return getattr(self.c, attr)
 
