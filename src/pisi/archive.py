@@ -89,7 +89,7 @@ class Archive:
 	"""accepted archive types:
 	targz, tarbz2, zip, tar"""	
 	
-	actions = {
+	handlers = {
 	    'targz': ArchiveTarFile,
 	    'tarbz2': ArchiveTarFile,
 	    'tar': ArchiveTarFile,
@@ -97,7 +97,7 @@ class Archive:
 	    }
 	
 	type = ctx.spec.source.archiveType
-	self.archive = actions.get(type)(ctx)
+	self.archive = handlers.get(type)(ctx)
 
     def unpack(self, targetDir):
 	self.archive.unpack(targetDir)

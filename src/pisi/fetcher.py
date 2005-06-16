@@ -45,11 +45,11 @@ class Fetcher:
 
         scheme_err = lambda: self.err("unexpected scheme")
 
-        actions = {
+        handlers = {
             'file': self.fetchLocalFile,
             'http': self.fetchRemoteFile,
             'ftp' : self.fetchRemoteFile
-            }; actions.get(self.scheme, scheme_err)()
+            }; handlers.get(self.scheme, scheme_err)()
 
         return self.filedest + "/" + self.filename
 
