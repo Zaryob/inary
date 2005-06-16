@@ -20,6 +20,8 @@ def getNodeText(node):
         child = node.childNodes[0]
     except IndexError:
         return None
+    except AttributeError: # no node by that name
+	return None
     if child.nodeType == child.TEXT_NODE:
         return child.data
     else:
@@ -126,7 +128,10 @@ class XmlFile(object):
     def getChildElts(self, tagpath):
         """ returns the children of the given path, only with given type """
         node = self.getNode(tagpath)
-        return filter(lambda x:x.nodeType==x.ELEMENT_NODE, node.childNodes)
+	try:
+	    return filter(lambda x:x.nodeType==x.ELEMENT_NODE, node.childNodes)
+	except AttributeError:
+	    return None
 
     def getChildText(self, tagpath):
 	node = self.getNode(tagpath)
