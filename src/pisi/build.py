@@ -51,7 +51,7 @@ class PisiBuild:
 	try:
 		self.actionScript = open(os.path.dirname(self.ctx.pspecfile ) + '/' + 'actions').read()
 	except IOError, e:
-		print "Action Script: %s" % e
+		ui.error ("Action Script: %s\n" % e)
 		return 
 		
 	# FIXME: It's wrong to assume that unpacked archive 
@@ -64,7 +64,7 @@ class PisiBuild:
 	try:
 		exec compile(self.actionScript , "error", "exec") in locals,globals
 	except SyntaxError, e:
-		print "Error : %s" % e
+		ui.error ("Error : %s\n" % e)
 		return 
 		
 	self.configureSource(locals)

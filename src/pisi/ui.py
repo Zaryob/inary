@@ -13,12 +13,18 @@ def register(_impl):
 def info(msg):
     impl.info(msg)
 
+def error(msg):
+    impl.error(msg)
+
 # default UI implementation
 class CLI:
     def info(self, msg):
-        sys.stdout.write(bold(red(msg)))
+        sys.stdout.write(blue(msg))
         sys.stdout.flush()
 
+    def error(self,msg):
+        sys.stdout.write(bold(red(msg)))
+        sys.stdout.flush()
 # default UI is CLI
 impl = CLI()
 
