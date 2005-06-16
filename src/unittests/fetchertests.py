@@ -8,7 +8,7 @@ from pisi import context
 
 class FetcherTestCase(unittest.TestCase):
     def setUp(self):
-	self.ctx = context.Context("samples/popt.pspec")
+	self.ctx = context.Context("../popt/popt.pspec")
 
 	self.fetch = fetcher.Fetcher(self.ctx)
 	

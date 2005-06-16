@@ -6,7 +6,7 @@ from pisi import specfile
 class SpecReadTestCase(unittest.TestCase):
     def setUp(self):
 	self.spec = specfile.SpecFile()
-	self.spec.read("samples/popt.pspec")
+	self.spec.read("../popt/popt.pspec")
 	
     def testSourceName(self):
 	self.assertEqual(self.spec.source.name,
