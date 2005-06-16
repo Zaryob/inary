@@ -6,9 +6,6 @@
 import urlparse
 import urllib2
 import os
-from sys import argv
-from sys import exit
-from sys import stderr
 
 # pisi modules
 import util
