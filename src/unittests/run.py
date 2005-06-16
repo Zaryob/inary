@@ -8,11 +8,13 @@ runTestSuite = lambda(x): unittest.TextTestRunner(verbosity=2).run(x)
 
 def run_all():
     import specfiletests
+    import contexttests
     import fetchertests
     import archivetests
 
     alltests = unittest.TestSuite((
 	specfiletests.suite,
+	contexttests.suite,
 	fetchertests.suite,
 	archivetests.suite
 	))
