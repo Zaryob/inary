@@ -40,6 +40,8 @@ class Constants:
     def __setattr__(self, attr, value):
  	return setattr(self.c, attr, value)
 
+    def __delattr__(self, attr):
+	return delattr(self.c, attr)
 
 class Context(object):
     """Config/Context Singleton"""
