@@ -65,10 +65,12 @@ class SpecFile(XmlFile):
 	self.source.archiveType = getNodeAttribute(archiveNode, "archType")
 	self.source.archiveMD5 = getNodeAttribute(archiveNode, "md5sum")
         patchElts = self.getChildElts("Source/Patches")
-        self.source.patches = [ PatchInfo(p) for p in patchElts ]
+	if patchElts:
+	    self.source.patches = [ PatchInfo(p) for p in patchElts ]
 
         buildDepElts = self.getChildElts("Source/BuildDependencies")
-        self.source.buildDeps = [DepInfo(d) for d in buildDepElts]
+	if buildDepElts:
+	    self.source.buildDeps = [DepInfo(d) for d in buildDepElts]
 
         historyElts = self.getAllNodes("History/Update")
         self.source.history = [HistoryInfo(x) for x in historyElts]
