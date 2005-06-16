@@ -5,13 +5,11 @@
 # python standard library
 import os
 
-from specfile import SpecFile
 from fetcher import Fetcher
 from archive import Archive
 
 # import pisipackage
 import util
-import config
 import ui
 
 class PisiBuildError(Exception):
@@ -28,17 +26,11 @@ def displayProgress(pd):
 
 class PisiBuild:
     """PisiBuild class, provides the package build and creation routines"""
-    def __init__(self, pspecfile):
-        self.pspecfile = pspecfile
-        spec = SpecFile()
-        spec.read(pspecfile)
-        spec.verify()                  # check pspec integrity
-	
-	self.work_dir = config.build_work_dir(spec.source.name,
-					      spec.source.version,
-					      spec.source.release)
+    def __init__(self, context):
+        self.ctx = context
+	self.work_dir = self.ctx.build_work_dir()
 
-        self.spec = spec
+        self.spec = self.ctx.spec
 
     def build(self):
         ui.info("Building PISI source package: %s\n" % self.spec.source.name)
@@ -46,23 +38,23 @@ class PisiBuild:
         ui.info("Fetching source from: %s\n" % self.spec.source.archiveUri)
         self.fetchArchive(displayProgress)
         ui.info("Source archive is stored: %s/%s\n"
-                %(config.archives_dir(), self.spec.source.archiveName))
+                %(self.ctx.archives_dir(), self.spec.source.archiveName))
 	
 	self.solveBuildDependencies()
 	
 	ui.info("Unpacking archive...")
-        targetDir = self.unpackArchive()
-	ui.info(" unpacked (%s)\n" % targetDir)
+	self.unpackArchive()
+	ui.info(" unpacked (%s)\n" % self.ctx.build_work_dir())
         
 	# applyPatches()
 
-	self.actionScript = open( os.path.dirname( self.pspecfile ) + '/' + 'actions' ).read()
+	self.actionScript = open( os.path.dirname( self.ctx.pspecfile ) + '/' + 'actions' ).read()
 
 	# FIXME: It's wrong to assume that unpacked archive 
 	# will create a name-version top-level directory.
 	# Archive module should give the exact location.
 	# (from the assumption is evil dept.)
-	os.chdir( config.build_work_dir( self.spec.source.name, self.spec.source.version, self.spec.source.release ) + "/" + self.spec.source.name + "-" + self.spec.source.version)
+	os.chdir( self.ctx.build_work_dir() + "/" + self.spec.source.name + "-" + self.spec.source.version)
 	locals = globals = {}
 	
 	try:
@@ -79,10 +71,9 @@ class PisiBuild:
 	self.installSource( locals )
 
     def fetchArchive(self, percentHook=None):
-        """fetch an archive and store to config.archives_dir() 
+        """fetch an archive and store to ctx.archives_dir() 
         using fether.Fetcher"""
-        fetch = Fetcher(self.spec.source.archiveUri,
-                        self.spec.source.archiveName)
+        fetch = Fetcher(self.ctx)
 
         # check if source already cached
         destpath = fetch.filedest + "/" + fetch.filename
@@ -104,10 +95,7 @@ class PisiBuild:
     	pass
 
     def unpackArchive(self):
-	type = self.spec.source.archiveType
-	fileName = self.spec.source.archiveName
-
-	archive = Archive(type, fileName)
+	archive = Archive(self.ctx)
 	archive.unpack(self.work_dir)
 
     def applyPatches(self):

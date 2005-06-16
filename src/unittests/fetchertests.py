@@ -3,23 +3,21 @@ import unittest
 import os
 
 from pisi import fetcher
-from pisi import specfile
 from pisi import util
+from pisi import config
 
 class FetcherTestCase(unittest.TestCase):
     def setUp(self):
-	self.spec = specfile.SpecFile()
-	self.spec.read("samples/popt.pspec")
+	self.ctx = config.Context("samples/popt.pspec")
 
-	self.fetch = fetcher.Fetcher(self.spec.source.archiveUri,
-				     self.spec.source.archiveName)
+	self.fetch = fetcher.Fetcher(self.ctx)
 	
     def testFetch(self):
 	self.fetch.fetch()
 	destpath = self.fetch.filedest + "/" + self.fetch.filename
 	if os.access(destpath, os.R_OK):
             self.assertEqual(util.md5_file(destpath),
-			     self.spec.source.archiveMD5)
+			     self.ctx.spec.source.archiveMD5)
 
 
 suite = unittest.makeSuite(FetcherTestCase)

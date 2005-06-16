@@ -9,14 +9,13 @@ import tarfile
 import zipfile
 
 #pisi modules
-import config
 import util
 
 class ArchiveBase(object):
-    def __init__(self, type, fileName):
-	self.type = type
-	self.fileName = fileName
-	self.filePath = config.archives_dir() + '/' + self.fileName
+    def __init__(self, ctx):
+	self.type = ctx.spec.source.archiveType
+	self.fileName = os.path.basename(ctx.spec.source.archiveUri)
+	self.filePath = ctx.archives_dir() + '/' + self.fileName
 
     def unpack(self, targetDir):
 	self.targetDir = targetDir
@@ -27,8 +26,8 @@ class ArchiveBase(object):
 	    os.makedirs(self.targetDir)
 
 class ArchiveTarFile(ArchiveBase):
-    def __init__(self, type, fileName):
-	super(ArchiveTarFile, self).__init__(type, fileName)
+    def __init__(self, ctx):
+	super(ArchiveTarFile, self).__init__(ctx)
 
     def unpack(self, targetDir):
 	super(ArchiveTarFile, self).unpack(targetDir)
@@ -49,8 +48,8 @@ class ArchiveTarFile(ArchiveBase):
 	tar.close()
 
 class ArchiveZip(ArchiveBase):
-    def __init__(self, type, fileName):
-	super(ArchiveZip, self).__init__(type, fileName)
+    def __init__(self, ctx):
+	super(ArchiveZip, self).__init__(ctx)
 
     def unpack(self, targetDir):
 	super(ArchiveZip, self).unpack(targetDir)
@@ -86,7 +85,7 @@ class ArchiveZip(ArchiveBase):
 class Archive:
     """Unpack magic for Archive files..."""
 
-    def __init__(self, type, fileName):
+    def __init__(self, ctx):
 	"""accepted archive types:
 	targz, tarbz2, zip, tar"""	
 	
@@ -97,7 +96,8 @@ class Archive:
 	    'zip': ArchiveZip
 	    }
 	
-	self.archive = actions.get(type)(type, fileName)
+	type = ctx.spec.source.archiveType
+	self.archive = actions.get(type)(ctx)
 
     def unpack(self, targetDir):
 	self.archive.unpack(targetDir)

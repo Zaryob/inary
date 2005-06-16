@@ -11,7 +11,6 @@ from sys import exit
 from sys import stderr
 
 # pisi modules
-import config
 import util
 
 class FetchError (Exception):
@@ -19,9 +18,9 @@ class FetchError (Exception):
 
 class Fetcher:
     """Yet another Pisi tool for fetching files from various sources.."""
-    def __init__(self, uri, fileName):
-        self.uri = uri
-        self.filedest = config.archives_dir()
+    def __init__(self, ctx):
+        self.uri = ctx.spec.source.archiveUri
+        self.filedest = ctx.archives_dir()
         util.check_dir(self.filedest)
         self.scheme = "file"
         self.netloc = ""
@@ -33,7 +32,7 @@ class Fetcher:
         from string import split
         u = urlparse.urlparse(self.uri)
         self.scheme, self.netloc, self.filepath = u[0], u[1], u[2]
-        self.filename = fileName
+        self.filename = os.path.basename(self.uri)
 
     def fetch (self):
         """Return value: Fetched file's full path.."""

@@ -4,24 +4,21 @@ from os.path import exists as pathexists
 from os.path import basename, islink
 
 from pisi import archive
-from pisi import specfile
 from pisi import fetcher
 from pisi import util
 from pisi import config
 
 class ArchiveFileTestCase(unittest.TestCase):
-    def setUp(self):
-	self.spec = specfile.SpecFile()
-        self.spec.read("samples/popt.pspec")
-	
+#     def setUp(self):
+# 	pass
+
     def testUnpackTar(self):
-	targetDir = config.build_work_dir(self.spec.source.name,
-					  self.spec.source.version,
-					  self.spec.source.release)
-	achv = archive.Archive(self.spec.source.archiveType,
-			       self.spec.source.archiveName)
+	ctx = config.Context("samples/popt.pspec")
+
+	targetDir = ctx.build_work_dir()
+	achv = archive.Archive(ctx)
 	
-	assert self.spec.source.archiveType == "targz"
+	assert ctx.spec.source.archiveType == "targz"
 
 	# unpacking is trivial with Archive()
 	achv.unpack(targetDir)
@@ -38,16 +35,15 @@ class ArchiveFileTestCase(unittest.TestCase):
 			 "171545adab7b51ebf6ec5575d3000a95")
 
     def testUnpackZip(self):
-	# first, we need to fetch a zip file
-	uri = "http://cekirdek.uludag.org.tr/~meren/sandbox.zip"
-	filename = basename(uri)
-	fetch = fetcher.Fetcher(uri, filename)
+	ctx = config.Context("samples/sandbox.pspec")
+	fetch = fetcher.Fetcher(ctx)
 	fetch.fetch()
 
-	# imaginary name, version and release for our test zip file
-	targetDir = config.build_work_dir("sandbox", "0.1", "1")
+	targetDir = ctx.build_work_dir()
 
-	achv = archive.Archive("zip", filename)
+	assert ctx.spec.source.archiveType == "zip"
+
+	achv = archive.Archive(ctx)
 	achv.unpack(targetDir)
 
 	assert pathexists(targetDir + "/sandbox")
