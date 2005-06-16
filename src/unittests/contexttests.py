@@ -5,7 +5,7 @@ from pisi import context
 
 class ContextTestCase(unittest.TestCase):
     def setUp(self):
-	self.ctx = context.Context("../popt/popt.pspec")
+	self.ctx = context.Context("samples/popt/popt.pspec")
 	
     def testConstness(self):
 

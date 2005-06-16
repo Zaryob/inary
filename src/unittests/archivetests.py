@@ -13,7 +13,7 @@ class ArchiveFileTestCase(unittest.TestCase):
 # 	pass
 
     def testUnpackTar(self):
-	ctx = context.Context("../popt/popt.pspec")
+	ctx = context.Context("samples/popt/popt.pspec")
 
 	targetDir = ctx.build_work_dir()
 	achv = archive.Archive(ctx)
