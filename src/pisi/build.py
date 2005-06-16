@@ -107,19 +107,22 @@ class PisiBuild:
         pass
 
     def configureSource(self, locals):
-	if 'src_setup' in locals:
+	func = self.ctx.const.setup_func
+	if func in locals:
 	    ui.info("Configuring %s...\n" % self.spec.source.name)
-	    locals['src_setup']()
+	    locals[func]()
 
     def buildSource(self, locals):
-	if 'src_build' in locals:
+	func = self.ctx.const.build_func
+	if func in locals:
 	    ui.info("Building %s...\n" % self.spec.source.name)
-	    locals['src_build']()
+	    locals[func]()
 
     def installSource(self, locals):
-	if 'src_install' in locals:
+	func = self.ctx.const.install_func
+	if func in locals:
 	    ui.info("Installing %s...\n" % self.spec.source.name)
-	    locals['src_install']()
+	    locals[func]()
 
     def buildPackages(self):
         for package in self.spec.packages:
