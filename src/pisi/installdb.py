@@ -36,7 +36,7 @@ def remove(name, version, release):
     d[key] = 'r'
 
 def purge(name, version, release):
-    util.remove_file(files_name( name, version, release))
+    util.remove_file(files_name(name, version, release))
     del d[key]
 
 

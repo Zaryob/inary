@@ -35,7 +35,7 @@ def getChildText(node_s, tagpath):
 
 def getChildElts(node):
     """get only child elements"""
-    return filter(lambda x:x.nodeType==x.ELEMENT_NODE, node.childNodes)
+    return filter(lambda x:x.nodeType == x.ELEMENT_NODE, node.childNodes)
 
 def getNode(node, tagpath):
     """returns the *first* matching node for given tag path."""

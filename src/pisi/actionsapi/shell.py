@@ -4,7 +4,7 @@
 import sys, re
 from itertools import izip, imap, count, ifilter, ifilterfalse
 
-def cat( filename ):
+def cat(filename):
     return file(filename).xreadlines()
 
 class grep:

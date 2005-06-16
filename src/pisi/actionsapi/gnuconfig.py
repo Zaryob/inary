@@ -12,7 +12,7 @@ def gnuconfig_findnewest():
     newer_location = {}
 
     for i in locations:
-        newer_location[i] = re.sub( '\'', '', string.split((cat( i ) | tr(str.rstrip) | grep ('^timestamp') | join), '=')[1])
+        newer_location[i] = re.sub('\'', '', string.split((cat( i ) | tr(str.rstrip) | grep ('^timestamp') | join), '=')[1])
 
     keys = newer_location.keys()
     keys.sort()
