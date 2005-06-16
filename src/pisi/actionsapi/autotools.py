@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import os
+from pisi.context import Constants
+const = Constants.c
 
 def configure(parameters = None):
     ''' FIXME: Düzgün hale getirilecek '''
@@ -24,6 +26,7 @@ def make():
 def install():
     ''' FIXME: Düzgün hale getirilecek '''
     ''' {D} = /var/tmp/pisi/ _paket_adı_ /image/ '''
+    global const
 
     install_string = 'make prefix={D}/usr \
                 datadir={D}/usr/share \
@@ -34,4 +37,4 @@ def install():
                 install'
     
     # FIXME: need to get install directory from pisi.config...
-    os.system(install_string.replace('{D}',os.path.dirname(os.path.dirname(os.getcwd())) + '/install'))
+    os.system(install_string.replace('{D}',os.path.dirname(os.path.dirname(os.getcwd())) + const.build_install_dir_suffix))
