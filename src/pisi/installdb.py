@@ -2,13 +2,13 @@
 # installation database
 # maintainer: eray and caglar
 
-import config
+from context import Context
 import util
 import bsddb.dbshelve as shelve
 
-util.check_dir( config.db_dir() )
-d = shelve.open( config.db_dir() + '/install.bdb')
-files_dir = config.archives_dir() + "/files"
+util.check_dir(Context.db_dir())
+d = shelve.open(Context.db_dir() + '/install.bdb')
+files_dir = Context.archives_dir() + "/files"
 
 class InstallDBError(Exception):
     pass

@@ -16,7 +16,7 @@ def info(msg):
 # default UI implementation
 class CLI:
     def info(self, msg):
-        sys.stdout.write( bold( red (msg)))
+        sys.stdout.write(bold(red(msg)))
         sys.stdout.flush()
 
 # default UI is CLI

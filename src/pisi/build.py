@@ -48,24 +48,28 @@ class PisiBuild:
         
 	# applyPatches()
 
-	self.actionScript = open( os.path.dirname( self.ctx.pspecfile ) + '/' + 'actions' ).read()
-
+	try:
+		self.actionScript = open(os.path.dirname(self.ctx.pspecfile ) + '/' + 'actions').read()
+	except IOError, e:
+		print "Action Script: %s" % e
+		return 
+		
 	# FIXME: It's wrong to assume that unpacked archive 
 	# will create a name-version top-level directory.
 	# Archive module should give the exact location.
 	# (from the assumption is evil dept.)
-	os.chdir( self.ctx.build_work_dir() + "/" + self.spec.source.name + "-" + self.spec.source.version)
+	os.chdir(self.ctx.build_work_dir() + "/" + self.spec.source.name + "-" + self.spec.source.version)
 	locals = globals = {}
 	
 	try:
-		exec compile( self.actionScript , "error", "exec" ) in locals,globals
+		exec compile(self.actionScript , "error", "exec") in locals,globals
 	except SyntaxError, e:
 		print "Error : %s" % e
 		return 
 		
-	self.configureSource( locals )
-	self.buildSource( locals )
-	self.installSource( locals )
+	self.configureSource(locals)
+	self.buildSource(locals)
+	self.installSource(locals)
 
     def fetchArchive(self, percentHook=None):
         """fetch an archive and store to ctx.archives_dir() 

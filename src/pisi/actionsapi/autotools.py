@@ -3,7 +3,7 @@
 
 import os
 
-def configure( parameters = None):
+def configure(parameters = None):
     ''' FIXME: Düzgün hale getirilecek '''
     ''' {EXTRA} = '--with-nls --with-libusb --with-something-usefull '''
 
@@ -15,11 +15,11 @@ def configure( parameters = None):
                 --sysconfdir=/etc \
                 --localstatedir=/var/lib {EXTRA}'
 
-    os.system( configure_string.replace( '{EXTRA}', parameters ))
+    os.system(configure_string.replace('{EXTRA}', parameters))
 
 def make():
     ''' FIXME: Düzgün hale getirilecek '''
-    os.system( 'make' )
+    os.system('make')
 
 def install():
     ''' FIXME: Düzgün hale getirilecek '''
@@ -34,4 +34,4 @@ def install():
                 install'
     
     # FIXME: need to get install directory from pisi.config...
-    os.system( install_string.replace( '{D}', os.path.dirname( os.path.dirname( os.getcwd())) + '/install' ))
+    os.system(install_string.replace('{D}',os.path.dirname(os.path.dirname(os.getcwd())) + '/install'))
