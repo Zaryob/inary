@@ -63,11 +63,8 @@ class PisiBuild:
 		print "Error : %s" % e
 		return 
 		
-	ui.info("Configuring %s...\n" % self.spec.source.name)
 	self.configureSource( locals )
-	ui.info("Building %s...\n" % self.spec.source.name)
 	self.buildSource( locals )
-	ui.info("Installing %s...\n" % self.spec.source.name)
 	self.installSource( locals )
 
     def fetchArchive(self, percentHook=None):
@@ -102,13 +99,19 @@ class PisiBuild:
         pass
 
     def configureSource(self, locals):
-	locals['src_setup']()
+	if 'src_setup' in locals:
+		ui.info("Configuring %s...\n" % self.spec.source.name)
+		locals['src_setup']()
 
     def buildSource(self, locals):
-	locals['src_build']()
+	if 'src_build' in locals:
+		ui.info("Building %s...\n" % self.spec.source.name)
+		locals['src_build']()
 
     def installSource(self, locals):
-	locals['src_install']()
+	if 'src_install' in locals:
+		ui.info("Installing %s...\n" % self.spec.source.name)
+		locals['src_install']()
 
     def buildPackages(self):
         for package in self.spec.packages:
