@@ -40,6 +40,6 @@ def install():
                 install'
 
     cmd = os.path.dirname(os.path.dirname(os.getcwd())) + \
-	const.build_install_dir_suffix
+	const.install_dir_suffix
     cmd = install_string.replace('{D}', cmd)
     os.system(cmd)
