@@ -21,7 +21,7 @@ def run_all():
 	fetchertests.suite,
 	archivetests.suite,
         installdbtests.suite,
-        packagedbtests, suite
+        packagedbtests. suite
 	))
 
     runTestSuite(alltests)
