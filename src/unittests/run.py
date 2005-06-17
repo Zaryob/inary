@@ -7,18 +7,21 @@ sys.path.append(".")
 runTestSuite = lambda(x): unittest.TextTestRunner(verbosity=2).run(x)
 
 def run_all():
+    
     import specfiletests
     import contexttests
     import fetchertests
     import archivetests
     import installdbtests
+    import packagedbtests
 
     alltests = unittest.TestSuite((
 	specfiletests.suite,
 	contexttests.suite,
 	fetchertests.suite,
 	archivetests.suite,
-        installdbtests.suite
+        installdbtests.suite,
+        packagedbtests, suite
 	))
 
     runTestSuite(alltests)

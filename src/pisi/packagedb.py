@@ -9,10 +9,16 @@
 import bsddb.dbshelve as shelve
 
 import util
-import config
+from context import ctx
 
-util.check_dir(config.db_dir())
-d = shelve.open(config.db_dir() + '/package.bdb')
+util.check_dir(ctx.db_dir())
+d = shelve.open(ctx.db_dir() + '/package.bdb')
+
+def has_package(name):
+    return d.has_key(name)
+
+def get_package(name):
+    return d[name]
 
 def add_package(name, package_info):
     d[name] = package_info
