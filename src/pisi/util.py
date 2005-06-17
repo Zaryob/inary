@@ -10,14 +10,17 @@ import md5
 # works recursively
 # FIXME: could have a better name
 def check_dir(dir):
-    dir = dir.rstrip()
-    dir = dir.rstrip("/")
+    dir = dir.strip().rstrip("/")
     #print 'check dir ', dir
     if not os.access(dir, os.F_OK):
         # does the parent exist?
         (parent_dir, curr_dir) = os.path.split(dir)
-        check_dir(parent_dir)
-        os.mkdir(dir)
+        if parent_dir != "/":
+            check_dir(parent_dir)
+        try:
+            os.mkdir(dir)
+        except OSError, e:
+            raise UtilError("%s" % e)
 
 def purge_dir(top):
     """Remove all content of a directory (top)"""
@@ -63,5 +66,5 @@ def run_batch(cmd):
 def strlist(l):
     return string.join(map(lambda x: str(x) + ' ', l))
 
-class ArgError(Exception):
+class UtilError(Exception):
     pass
