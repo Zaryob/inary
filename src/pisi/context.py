@@ -16,8 +16,8 @@ class Constants:
 	self.c.tmp_dir_suffix =  "/var/tmp/pisi"
 
 	# directory suffixes for build
-	self.c.build_work_dir_suffix = "/work"
-	self.c.build_install_dir_suffix  = "/install"
+	self.c.work_dir_suffix = "/work"
+	self.c.install_dir_suffix  = "/install"
 
 	# file/directory names
 	self.c.actions_file = "actions.py"
@@ -53,6 +53,11 @@ class Context(object):
 	    spec.verify()	# check pspec integrity
 	    self.spec = spec
 
+        # directory accessor functions
+        # here is how it goes
+        # x_dir: system wide directory for storing info type x
+        # pkg_x_dir: per package directory for storing info type x
+
 	def lib_dir(self):
 	    return self.destdir + self.const.lib_dir_suffix
 
@@ -65,19 +70,22 @@ class Context(object):
 	def tmp_dir(self):
 	    return self.destdir + self.const.tmp_dir_suffix
 	
-	def build_work_dir(self):
+	def pkg_work_dir(self):
 	    packageDir = self.spec.source.name + '-' \
 		+ self.spec.source.version + '-' + self.spec.source.release
 
 	    return self.destdir + self.const.tmp_dir_suffix \
-		+ '/' + packageDir + self.const.build_work_dir_suffix
+		+ '/' + packageDir + self.const.work_dir_suffix
 
-	def build_install_dir(self):
+        def install_dir(self):
+            return self.tmp_dir() + self.const.install_dir_suffix
+
+	def pkg_install_dir(self):
 	    packageDir = self.spec.source.name + '-' \
 		+ self.spec.source.version + '-' + self.spec.source.release
 
 	    return self.destdir + self.const.tmp_dir_suffix \
-		+ '/' + packageDir + self.const.build_install_dir_suffix
+		+ '/' + packageDir + self.const.install_dir_suffix
 
     __instance = __impl()
 

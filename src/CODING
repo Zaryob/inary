@@ -11,6 +11,10 @@ Guidelines
 3. Follow python philosophy of 'batteries included'
 4. Don't make the code have runtime dependencies on
    a particular distribution (as much as possible)
+5. Don't assume narrow use cases.
+6. If you are changing something, check if that change
+   breaks anything and fix breakage. For instance a
+   name. Running the tests is not always enough!
 
 Unittests
 ---------

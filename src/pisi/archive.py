@@ -21,7 +21,7 @@ class ArchiveBase(object):
 	self.targetDir = targetDir
 	# first we check if we need to clean-up our working env.
         if os.path.exists(self.targetDir):
-	    util.purge_dir(self.targetDir)
+	    util.clean_dir(self.targetDir)
 	else:
 	    os.makedirs(self.targetDir)
 

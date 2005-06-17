@@ -15,7 +15,7 @@ class ArchiveFileTestCase(unittest.TestCase):
     def testUnpackTar(self):
 	ctx = context.Context("samples/popt/popt.pspec")
 
-	targetDir = ctx.build_work_dir()
+	targetDir = ctx.pkg_work_dir()
 	achv = archive.Archive(ctx)
 	
 	assert ctx.spec.source.archiveType == "targz"
@@ -39,7 +39,7 @@ class ArchiveFileTestCase(unittest.TestCase):
 	fetch = fetcher.Fetcher(ctx)
 	fetch.fetch()
 
-	targetDir = ctx.build_work_dir()
+	targetDir = ctx.pkg_work_dir()
 
 	assert ctx.spec.source.archiveType == "zip"
 

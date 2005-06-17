@@ -18,7 +18,9 @@ class PisiBuildError(Exception):
 # FIXME: this eventually has to go to ui module
 # Infact all ui calls has nothing to do with this build process.
 # There more of them in PisiBuild...
-# And maybe we should consider moving PisiBuild.build() back to pisi-build CLI too.
+# And maybe we should consider moving PisiBuild.build() back to pisi-build
+# CLI too.
+# exa: This, like all others, will have a GUI or CLI, interchangeably
 def displayProgress(pd):
     out = '\r%-30.30s %3d%% %12.2f %s' % \
         (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
@@ -28,7 +30,7 @@ class PisiBuild:
     """PisiBuild class, provides the package build and creation routines"""
     def __init__(self, context):
         self.ctx = context
-	self.work_dir = self.ctx.build_work_dir()
+	self.work_dir = self.ctx.pkg_work_dir()
 
         self.spec = self.ctx.spec
 
@@ -44,7 +46,7 @@ class PisiBuild:
 	
 	ui.info("Unpacking archive...")
 	self.unpackArchive()
-	ui.info(" unpacked (%s)\n" % self.ctx.build_work_dir())
+	ui.info(" unpacked (%s)\n" % self.ctx.pkg_work_dir())
         
 	self.applyPatches()
 
@@ -59,7 +61,7 @@ class PisiBuild:
 	# will create a name-version top-level directory.
 	# Archive module should give the exact location.
 	# (from the assumption is evil dept.)
-	os.chdir(self.ctx.build_work_dir() + "/" + self.spec.source.name + "-" + self.spec.source.version)
+	os.chdir(self.ctx.pkg_work_dir() + "/" + self.spec.source.name + "-" + self.spec.source.version)
 	locals = globals = {}
 	
 	try:

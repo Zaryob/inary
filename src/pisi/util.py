@@ -10,6 +10,9 @@ from ui import ui
 class FileError(Exception):
     pass
 
+class UtilError(Exception):
+    pass
+
 # shorthand to check if a file exists
 def check_file(file, mode = os.F_OK):
     if not os.access(file, mode):
@@ -23,7 +26,7 @@ def check_dir(dir):
     if not os.access(dir, os.F_OK):
         os.makedirs(dir)
 
-def purge_dir(top):
+def clean_dir(top):
     """Remove all content of a directory (top)"""
     for root, dirs, files in os.walk(top, topdown=False):
 	for name in files:
@@ -31,7 +34,6 @@ def purge_dir(top):
 	for name in dirs:
 	    os.rmdir(os.path.join(root, name))
 
-# TODO:
 def copy_file(s,d):
     check_file(s)
     check_dir(os.path.dirname(d))
@@ -41,7 +43,7 @@ def copy_file(s,d):
         fd.write(l)
 
 def copy_dir():
-    pass
+    raise UtilError("not implemented")
 
 def md5_file(filename):
     m = md5.new()
@@ -67,6 +69,3 @@ def run_batch(cmd):
 # print a list
 def strlist(l):
     return string.join(map(lambda x: str(x) + ' ', l))
-
-class UtilError(Exception):
-    pass
