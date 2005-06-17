@@ -19,16 +19,16 @@ def check_file(file, mode = os.F_OK):
 # FIXME: could have a better name
 def check_dir(dir):
     dir = dir.strip().rstrip("/")
-    #print 'check dir ', dir
     if not os.access(dir, os.F_OK):
+        os.makedirs(dir)
         # does the parent exist?
-        (parent_dir, curr_dir) = os.path.split(dir)
-        if parent_dir != "/":
-            check_dir(parent_dir)
-        try:
-            os.mkdir(dir)
-        except OSError, e:
-            raise UtilError("%s" % e)
+##        (parent_dir, curr_dir) = os.path.split(dir)
+##        if parent_dir != "/":
+##            check_dir(parent_dir)
+##        try:
+##            os.mkdir(dir)
+##        except OSError, e:
+##            raise UtilError("%s" % e)
 
 def purge_dir(top):
     """Remove all content of a directory (top)"""
