@@ -39,9 +39,9 @@ class Constants:
 	self.c.files_dir = "files"
 
 	# functions in actions_file
-	self.c.setup_func = "src_setup"
-	self.c.build_func = "src_build"
-	self.c.install_func = "src_install"
+	self.c.setup_func = "setup"
+	self.c.build_func = "build"
+	self.c.install_func = "install"
 
     def __getattr__(self, attr):
  	return getattr(self.c, attr)
