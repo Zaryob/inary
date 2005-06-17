@@ -6,6 +6,14 @@ import os
 import sys
 import md5
 
+class FileError(Exception):
+    pass
+
+# shorthand to check if a file exists
+def check_file(file, mode = os.F_OK):
+    if not os.access(file, mode):
+        raise FileError("File " + file + " not found")
+
 # check if directory exists, and create if it doesn't
 # works recursively
 # FIXME: could have a better name
@@ -31,12 +39,13 @@ def purge_dir(top):
 	    os.rmdir(os.path.join(root, name))
 
 # TODO:
-def copy_file():
-    pass
-
-def remove_file():
-    # unlink file
-    pass
+def copy_file(s,d):
+    check_file(s)
+    check_dir(os.path.dirname(d))
+    fs = file(s, 'rb')
+    fd = file(d, 'wb')
+    for l in fs:
+        fd.write(l)
 
 def copy_dir():
     pass

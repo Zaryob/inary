@@ -11,12 +11,14 @@ def run_all():
     import contexttests
     import fetchertests
     import archivetests
+    import installdbtests
 
     alltests = unittest.TestSuite((
 	specfiletests.suite,
 	contexttests.suite,
 	fetchertests.suite,
-	archivetests.suite
+	archivetests.suite,
+        installdbtests.suite
 	))
 
     runTestSuite(alltests)
@@ -26,10 +28,10 @@ if __name__ == "__main__":
     if len(args) > 1: # run modules given from the command line
 	tests = sys.argv[1:]
 	for test in tests:
-	    module = __import__(test)
+	    module = __import__(test + 'tests')
 	    print "\nRunning tests in '%s'...\n" % (test)
 	    runTestSuite(module.suite)
 
     else: # run all tests
-	print "\nRunning all test in an order...\n"
+	print "\nRunning all tests in order...\n"
 	run_all()
