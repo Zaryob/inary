@@ -10,7 +10,7 @@ from archive import Archive
 
 # import pisipackage
 import util
-import ui
+from ui import ui
 
 class PisiBuildError(Exception):
     pass

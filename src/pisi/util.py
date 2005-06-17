@@ -5,6 +5,7 @@
 import os
 import sys
 import md5
+from ui import ui
 
 class FileError(Exception):
     pass
@@ -21,14 +22,6 @@ def check_dir(dir):
     dir = dir.strip().rstrip("/")
     if not os.access(dir, os.F_OK):
         os.makedirs(dir)
-        # does the parent exist?
-##        (parent_dir, curr_dir) = os.path.split(dir)
-##        if parent_dir != "/":
-##            check_dir(parent_dir)
-##        try:
-##            os.mkdir(dir)
-##        except OSError, e:
-##            raise UtilError("%s" % e)
 
 def purge_dir(top):
     """Remove all content of a directory (top)"""
@@ -59,14 +52,14 @@ def md5_file(filename):
 
 # run a command non-interactively
 def run_batch(cmd):
-    print 'running ', cmd
+    ui.info('running ' + cmd)
     a = os.popen(cmd)
     lines = a.readlines()
     ret = a.close()
-    print 'return value ', ret
+    ui.debug('return value ' + ret)
     successful = ret == None
     if not successful:
-      print 'ERROR: executing command', cmd
+      ui.error('ERROR: executing command: ' + cmd)
       for x in lines:
         print x
     return (successful,lines)

@@ -4,7 +4,7 @@
 from specfile import *
 from package import Package
 import util
-import ui
+from ui import ui
 import installdb
 import packagedb
 import dependency
