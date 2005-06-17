@@ -7,14 +7,15 @@ A list of tasks to accomplish, organized into priority sections
 Legend:
 
 - Todo
-? Not determined if we have to do
+? Not determined if/how we have to do
 / In progress
-+ Accomplished, move to end of list
++ Accomplished
 
 1. Pre-Alpha
 
- / implement reading spec file
- - implement install database
+ + implement reading spec file
+ / implement install database
+ ? transaction/locking for database
 
 2. Alpha
 

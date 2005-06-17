@@ -35,7 +35,7 @@ class ArchiveFileTestCase(unittest.TestCase):
 			 "171545adab7b51ebf6ec5575d3000a95")
 
     def testUnpackZip(self):
-	ctx = context.Context("samples/sandbox.pspec")
+	ctx = context.Context("samples/sandbox/sandbox.pspec")
 	fetch = fetcher.Fetcher(ctx)
 	fetch.fetch()
 
