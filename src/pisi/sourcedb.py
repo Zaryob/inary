@@ -3,7 +3,7 @@
 # interface for update/query to local package repository
 # maintainer: eray and caglar
 
-# we basically store everything in sourceinfo class (?)
+# we basically store everything in sourceinfo class
 # yes, we are cheap
 
 import bsddb.dbshelve as shelve
