@@ -1,0 +1,64 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# system modules
+import sys
+from optparse import OptionParser
+
+# pisi modules
+sys.path.append("./lib")
+import pisi.install
+import pisi.util
+
+class ArgError(Exception):
+    pass
+
+def main():
+
+    # common options
+    
+    usage = "usage: %prog [options] cmd [args]"
+    parser = OptionParser(usage=usage,version="%prog " + pisi.__version__)
+    parser.add_option("-D", "--destdir", action="store")
+    parser.add_option("-v", "--verbose", action="store_true",
+                      dest="verbose", default=False,
+                      help="detailed output")
+    parser.add_option("-d", "--debug", action="store_true", default=True)
+    parser.add_option("-n", "--dry-run", action="store_true", default=False,
+                      help = "do not perform any action, just show what\
+                      would be done")
+
+    (options, args) = parser.parse_args()
+
+    print 'options = ', options
+    print 'args = ', args
+
+    if len(args)==0:
+        print "command expected"
+        print usage
+        sys.exit(2)
+
+    cmd = args.pop(0)
+
+    if cmd=="install":
+
+        usage = "usage: %prog install <package>"
+        parser = OptionParser(usage=usage,version="%prog " + pisi.__version__)
+        (options, args) = parser.parse_args()
+
+        # package filename
+        package_fn = ""
+
+        # TODO: We accept only one package file arg ATM
+        if len(args) != 1:
+            print "install cmd expects one (and only one) package file currently"
+            print usage
+            sys.exit(2)
+        else:
+            package_fn = args[0]
+
+        pisi.install.install_package_file(package_fn)
+
+
+if __name__ == "__main__":
+    main()
