@@ -1,0 +1,59 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# python standard library
+from os.path import basename
+import sys
+
+sys.path.append("./lib")
+import pisi.context
+import pisi.util
+from pisi.build import PisiBuild, PisiBuildError
+
+def usage(progname = "pisi-build"):
+    print """
+Usage:
+%s [options] package-name.pspec
+""" %(progname)
+
+def main():
+    import sys
+    import getopt
+    
+    # wrapper for usage(progname) function
+    help = lambda: usage(sys.argv[0])
+
+    # getopt magic
+    try:
+        opts, args = getopt.getopt(sys.argv[1:],"h",["help"])
+    except getopt.GetoptError:
+        help()
+        sys.exit(1)
+
+    for opt, arg in opts:
+        if opt == "-h":
+            help()
+            sys.exit(1)
+
+    # pspec(PISI Spec) to be used for package
+    pspec = ""
+
+    # TODO: We accept only one pspec file (at a time) currently,
+    # but pisi-build may build many packages (pspecs given in order)
+    # sequentially.
+    if len(args) != 1:
+        help()
+        raise PisiBuildError, "pisi-build expects one (and only one) pspec file currently"
+    else:
+        pspec = args[0]
+
+    # What we need to do first is create a context with our specfile
+    ctx = pisi.context.Context(pspec)
+
+    # don't do the real job here. this is just a CLI!
+    pb = PisiBuild(ctx)
+    pb.build()
+    
+
+if __name__ == "__main__":
+    main()
