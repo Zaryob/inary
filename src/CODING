@@ -16,28 +16,31 @@ Guidelines
    breaks anything and fix breakage. For instance a
    name. Running the tests is not always enough!
 
-Unittests
----------
+Unit testing
+------------
 
-Unittests are located in unittests directory. Running the tests are
-trivial. But you must syncronize your code and data with the test
+Unit tests are located in unittests directory. Running the tests is
+trivial. But you must synchronize your code and data with the test
 code, which can be a tedious work if you lose discipline.
 
 Sample data files are located in samples/ directory.
 
-For running all test suites, use the following command:
+For running the entire test suite, use the following command:
 
 $ ./unittests/run.py
 
 If you know what you are doing, you can run the tests seperately. But
-keep in your mind that test can depend each other. The following
-command will run tests in specfiletests and archivetests:
+keep in your mind that tests can depend on each other. (?) The unit test
+system doesn't know about that. The following command will run tests
+in specfiletests and archivetests in unittests dir:
 
-$ ./unittests/run.py specfiletests archivetests
+$ ./unittests/run.py specfile archive
 
 
 Misc. Suggestions
 -----------------
+
+1. Demeter's Law
 
 In OO programming, try to invoke Demeter's law.
 One of the "rules" there is not directly accessing any

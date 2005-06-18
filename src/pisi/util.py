@@ -61,9 +61,7 @@ def run_batch(cmd):
     ui.debug('return value ' + ret)
     successful = ret == None
     if not successful:
-      ui.error('ERROR: executing command: ' + cmd)
-      for x in lines:
-        print x
+      ui.error('ERROR: executing command: ' + cmd + '\n' + strlist(lines))
     return (successful,lines)
 
 # print a list
