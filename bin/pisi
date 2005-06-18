@@ -13,9 +13,6 @@ import pisi.install
 import pisi.util
 from pisi.build import PisiBuild, PisiBuildError
 
-class ArgError(Exception):
-    pass
-
 def main():
 
     # common options
