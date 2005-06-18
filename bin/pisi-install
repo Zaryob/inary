@@ -5,6 +5,7 @@
 import sys
 from optparse import OptionParser
 
+sys.path.append("./lib")
 import pisi.install
 import pisi.util
 

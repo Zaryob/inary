@@ -4,6 +4,7 @@
 
 # python standard library
 import os
+import sys
 
 from fetcher import Fetcher
 from archive import Archive

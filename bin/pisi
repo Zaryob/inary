@@ -9,6 +9,7 @@ from optparse import OptionParser
 sys.path.append("./lib")
 import pisi.install
 import pisi.util
+from pisi.build import PisiBuild, PisiBuildError
 
 class ArgError(Exception):
     pass
@@ -40,6 +41,35 @@ def main():
 
     cmd = args.pop(0)
 
+    if cmd=="build":
+
+        usage = "usage: %prog build <pspecfile>"
+        cparser = OptionParser(usage=usage,version="%prog " + pisi.__version__)
+        (coptions, cargs) = parser.parse_args(args)
+
+        print '*', cargs
+
+        # pspec(PISI Spec) to be used for package
+        pspec = ""
+
+        # TODO: We accept only one pspec file (at a time) currently,
+        # but pisi-build may build many packages (pspecs given in order)
+        # sequentially.
+        if len(cargs) != 1:
+            print "build expects one (and only one) pspec file currently"
+            print usage
+            sys.exit(2)
+        else:
+            pspec = cargs[0]
+
+        # What we need to do first is create a context with our specfile
+        ctx = pisi.context.Context(pspec)
+
+        # don't do the real job here. this is just a CLI!
+        pb = PisiBuild(ctx)
+        pb.build()
+        sys.exit(0)
+
     if cmd=="install":
 
         usage = "usage: %prog install <package>"
@@ -58,6 +88,11 @@ def main():
             package_fn = args[0]
 
         pisi.install.install_package_file(package_fn)
+        sys.exit(0)
+
+    print "command expected"
+    print usage
+    sys.exit(2)
 
 
 if __name__ == "__main__":

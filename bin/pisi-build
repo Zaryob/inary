@@ -3,10 +3,11 @@
 
 # python standard library
 from os.path import basename
+import sys
 
+sys.path.append("./lib")
 import pisi.context
 import pisi.util
-import pisi.ui
 from pisi.build import PisiBuild, PisiBuildError
 
 def usage(progname = "pisi-build"):
