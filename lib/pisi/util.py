@@ -36,7 +36,7 @@ def clean_dir(top):
 
 
 # calculate the size of files under a dir
-# based on the tutorial example
+# based on the os module example
 def dir_size(dir):
     from os.path import join, getsize
     def sizes():
