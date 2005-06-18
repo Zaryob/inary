@@ -34,6 +34,17 @@ def clean_dir(top):
 	for name in dirs:
 	    os.rmdir(os.path.join(root, name))
 
+
+# calculate the size of files under a dir
+# based on the tutorial example
+def dir_size(dir):
+    from os.path import join, getsize
+    def sizes():
+        for root, dirs, files in os.walk(dir):
+            print sum(getsize(join(root, name)) for name in files)
+            yield sum(getsize(join(root, name)) for name in files)
+    return sum( sizes() )
+
 def copy_file(s,d):
     check_file(s)
     check_dir(os.path.dirname(d))
