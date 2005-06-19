@@ -40,8 +40,8 @@ def dir_size(dir):
     from os.path import join, getsize
     def sizes():
         for root, dirs, files in os.walk(dir):
-            print sum(getsize(join(root, name)) for name in files)
-            yield sum(getsize(join(root, name)) for name in files)
+	    print sum([getsize(join(root, name)) for name in files])
+            yield sum([getsize(join(root, name)) for name in files])
     return sum( sizes() )
 
 def copy_file(src,dest):
