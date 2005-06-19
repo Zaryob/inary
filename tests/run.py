@@ -2,7 +2,7 @@
 
 import unittest
 import sys
-sys.path.append("./lib")
+sys.path.append(".")
 
 runTestSuite = lambda(x): unittest.TextTestRunner(verbosity=2).run(x)
 
