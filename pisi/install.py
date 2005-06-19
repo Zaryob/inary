@@ -43,4 +43,4 @@ def install_package_file(package_fn):
 
     # installdb
     installdb.install(spec.spec.install_dir() + '/files.xml')
-    
+
