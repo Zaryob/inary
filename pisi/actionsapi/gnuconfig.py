@@ -9,6 +9,7 @@ def gnuconfig_findnewest():
     timestamp and return it'''
 
     locations = ['/usr/share/gnuconfig/config.sub',
+		 '/usr/share/automake-1.9/config.sub',
 		 '/usr/share/automake-1.8/config.sub',
 		 '/usr/share/automake-1.7/config.sub',
 		 '/usr/share/automake-1.6/config.sub',
@@ -18,6 +19,8 @@ def gnuconfig_findnewest():
     newer_location = {}
 
     for i in locations:
+        if not os.path.exists(i):
+            continue
         newer_location[i] = re.sub('\'',
 				   '',
 				   string.split((cat(i) | 
