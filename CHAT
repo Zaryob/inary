@@ -1,0 +1,52 @@
+On Monday 20 June 2005 18:00, svn-internal@uludag.org.tr wrote:
+> Author: exa
+> Date: Mon Jun 20 18:00:11 2005
+> New Revision: 1329
+>
+> Modified:
+>    trunk/pisi/pisi/archive.py
+>    trunk/pisi/pisi/build.py
+>    trunk/pisi/pisi/package.py
+>    trunk/pisi/tests/archivetests.py
+> Log:
+> * tamam bu onemli, biraz dikkat lutfen
+>   - package context'i archive'in calismasi icin gerekli degil (source info)
+>   - archive ornegin package class'inin implementation'i icin kullaniliyor
+>     constructor'a a bakin
+>   - source adi vs. gibi seyleri bilmesi gereken module, build islemi
+>     sirasinda build module'u, diger turlu "batteries included" bir archive
+>     module'u degil, sadece source'lari acabilen bir archive module'u yazmis
+>     olurduk... ayni zamanda bu biraz sorumluluklarin karistirilmasi oluyor
+>     module'ler arasinda, bundan kacinmaya calisirsak iyi olur. fetcher'da
+> da benzer bir hata olabilir, sadece spec'teki source archive'larini
+> indirebiliyorsa, yanlis yazilmis demektir.
+>   - ayni zamanda dikkat ederseniz, sol kulagi sag elle tutmaya benziyor
+>     anlattigim tur karisikliklar
+>   - gereken is bitmis degil. package module'unun gerektirdigi fonksiyonlara
+>     bakiniz. sadece bazi dosyalari cikarmak, yeni arsiv olusturmak gibi
+>     fonksiyonlar istemekte.
+>   - package module'u install operasyonu icin kullanildigi icin onemli
+>   - tabii gene ayni archive module'unu binary package'lari build ederken de
+>     kullanabilmeliyiz vs. vs.
+
+Bu gönderimi (commit) sevmedim. Context'in faydasını kullanmamak oluyor bu. 
+Bizim standart modüller gibi "generic" modüller yazmamız gerekmiyor. Kendi 
+işimizi çözecek modüller yapmamız gerekiyor. Archive ve fetcher 
+kullanacağımız temel modüllerimizden. Eğer build işlemi (SpecFile ile 
+çalışacak) için ve install işlemi (Package ile çalışacak) modüller olmalarını
+istiyorsak Context'i buna göre geliştirebiliriz. Nasıl ki context şu anda 
+spec dosyası olmadan da çalışabiliyorsa. Package ile de çalışabilir hale 
+getirilebilir.
+
+Bu gönderim ile archive'i ilk yazdığımız haline çevirmiş oldun. Tek iletişim 
+kanalını SVN olarak bıraktığımız için birbirimizi yeterince anlayamıyoruz 
+sanırım. Birbirimizin yaptıklarını revert etmek bizi yavaşlatıyor. Buna bir 
+çözüm bulalım.
+
+iyi çalışmalar,
+-- 
+Barış Metin
+
+ÖNERİ: Jabber'da bir conference room açalım. Ve pisi üzerinde
+çalışırken mutlaka hepimiz orada bağlı olalım. Eray,
+jabber.uludag.org.tr'den bir hesap açabilir misin kendine?
