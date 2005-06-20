@@ -59,8 +59,10 @@ def getNode(node, tagpath):
 
     return node
 
-def getAllNodes(node, tags):
+def getAllNodes(node, tagPath):
     """retrieve all nodes that match a given tag path."""
+
+    tags = tagPath.split('/')
 
     if len(tags) == 0:
         return []
@@ -109,8 +111,7 @@ class XmlFile(object):
     def getAllNodes(self, tagPath):
 	"""returns all nodes matching a given tag path."""
         self.verifyRootTag()
-        tags = tagPath.split('/')
-        return getAllNodes(self.dom.documentElement, tags)
+        return getAllNodes(self.dom.documentElement, tagPath)
 
     def getChildren(self, tagpath):
         """ returns the children of the given path"""
