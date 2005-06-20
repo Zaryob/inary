@@ -63,6 +63,12 @@ def copy_file(src,dest):
 #         fd.write(l)
     shutil.copyfile(src, dest)
 
+def get_file_hashes(top):
+    for root, dirs, files in os.walk(top, topdown=False):
+	for file in files:
+	    f = os.path.join(root, file)
+	    yield (f, md5_file(f))
+
 def copy_dir(src, dest):
     """copy source dir to destination dir recursively"""
     raise UtilError("not implemented")
