@@ -18,7 +18,7 @@ import dependency
 
 ##eger bu kod gercekten buyurse bir takim non-trivial
 ##kisimlara ayrilirsa o zaman class yapariz. simdilik
-##boyle kalsin da hepsini gorelim algoritmanin
+##boyle kalsin da hepsini gorelim algoritmanin -- eray
 
 class InstallError(Exception):
     pass

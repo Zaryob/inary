@@ -1,5 +1,4 @@
-
-# reader for files.xml
+ # class for files.xml
 
 
 class FileInfo:
