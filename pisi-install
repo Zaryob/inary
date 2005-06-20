@@ -6,7 +6,7 @@ import sys
 from optparse import OptionParser
 
 sys.path.append("./lib")
-import pisi.install
+from pisi.install import PisiInstall, PisiInstallError
 import pisi.util
 
 class ArgError(Exception):
@@ -37,7 +37,8 @@ def main():
     else:
 	package_fn = args[0]
 
-    pisi.install.install_package_file(package_fn)
+    pi = PisiInstall(package_fn)
+    pi.install()
 
 
 if __name__ == "__main__":
