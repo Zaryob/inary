@@ -110,7 +110,7 @@ class PisiBuild:
     def unpackArchive(self):
         fileName = os.path.basename(self.ctx.spec.source.archiveUri)
         filePath = self.ctx.archives_dir() + '/' + fileName
-	archive = Archive(filePath, ctx.spec.source.archiveType)
+	archive = Archive(filePath, self.ctx.spec.source.archiveType)
 	archive.unpack(self.work_dir)
 
     def applyPatches(self):
@@ -144,10 +144,9 @@ class PisiBuild:
 	# the worst function in this project!
 	# just testing...
 	install_dir = self.ctx.pkg_install_dir()
-	for f in util.get_file_hashes(install_dir):
+	for fpath, fhash in util.get_file_hashes(install_dir):
 	    # get the relative path
-	    fpath = f[0][len(install_dir):]
-	    fhash = f[1]
+	    fpath = fpath[len(install_dir):]
 
 	    depth = 0
 	    ftype = ""
