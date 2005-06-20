@@ -37,8 +37,7 @@ def main():
     else:
 	package_fn = args[0]
 
-    pi = PisiInstall(package_fn)
-    pi.install()
+    install.install(package_fn)
 
 
 if __name__ == "__main__":
