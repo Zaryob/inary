@@ -5,6 +5,8 @@
 import os
 import sys
 import md5
+import shutil
+
 from ui import ui
 
 class FileError(Exception):
@@ -17,6 +19,7 @@ def check_file(file, mode = os.F_OK):
     "shorthand to check if a file exists"
     if not os.access(file, mode):
         raise FileError("File " + file + " not found")
+    return True
 
 def check_dir(dir):
     """check if directory exists, and create if it doesn't.
@@ -52,10 +55,12 @@ def copy_file(src,dest):
     """copy source file to destination file"""
     check_file(src)
     check_dir(os.path.dirname(dest))
-    fs = file(src, 'rb')
-    fd = file(dest, 'wb')
-    for l in fs:
-        fd.write(l)
+#don't reinvent the wheel
+#     fs = file(src, 'rb')
+#     fd = file(dest, 'wb')
+#     for l in fs:
+#         fd.write(l)
+    shutil.copyfile(src, dest)
 
 def copy_dir(src, dest):
     """copy source dir to destination dir recursively"""
