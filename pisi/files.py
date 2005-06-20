@@ -10,12 +10,21 @@ class FileInfo:
         self.md5Sum = getNodeText(getNode(node, "MD5Sum"))
 
     def elt(self, dom):
-        ## FIXME: looking for the clean way to do it
-        elt = dom.createElement()
-        elt.appendChild(dom.createTextNode(path))
-        elt.appendChild(dom.createTextNode(type))
-        elt.appendChild(dom.createTextNode(size))
-        elt.appendChild(dom.createTextNode(size))
+        ## FIXME: looking for a better way to do it
+        ## could apparently use helper functions to do this shorter
+        elt = dom.createElement("File")
+        pathElt = dom.createElement("Path")
+        pathElt.appendChild(dom.createTextNode(path))
+        typeElt = dom.createElement("Type")
+        typeElt.appendChild(dom.createTextNode(type))
+        sizeElt = dom.createElement("Size")
+        sizeElt.appendChild(dom.createTextNode(str(size)))
+        md5Elt = dom.createElement("MD5Sum")
+        md5Elt.appendChild(dom.createTextNode(md5sum))
+        elt.appendChild(pathElt)
+        elt.appendChild(typeElt)
+        elt.appendChild(sizeElt)
+        elt.appendChild(md5Elt)
         return elt
 
 class Files(XmlFile):
@@ -32,7 +41,6 @@ class Files(XmlFile):
     def write(self, filename):
         #FIXME: need a function to clear DOM first!
         for x in list:
-            pass
-            #elf.putNode("File/
+            elf.appendChild(x.elt(self.dom))
             
 
