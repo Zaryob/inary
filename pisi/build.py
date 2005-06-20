@@ -76,6 +76,8 @@ class PisiBuild:
 	self.installSource(locals)
 
 	# after all, we are ready to build/prepare the packages
+	# self.genMetaDataXml()
+	# self.genFilesXml()
 	self.buildPackages()
 
     def fetchArchive(self, percentHook=None):
