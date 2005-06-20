@@ -37,12 +37,15 @@ def clean_dir(top):
 def dir_size(dir):
     """ calculate the size of files under a dir
     based on the os module example"""
+    # It's really hard to give an approximate value for package's
+    # installed size. Gettin a sum of all files' sizes if far from
+    # being true. Using 'du' command (like Debian does) can be a
+    # better solution :(.
     getsize = os.path.getsize
     join = os.path.join
     def sizes():
         for root, dirs, files in os.walk(dir):
-	    print sum([getsize(join(root, name)) for name in files])
-            yield sum([getsize(join(root, name)) for name in files])
+	    yield sum([getsize(join(root, name)) for name in files])
     return sum( sizes() )
 
 def copy_file(src,dest):
