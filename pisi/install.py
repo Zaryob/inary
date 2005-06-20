@@ -11,6 +11,11 @@ import packagedb
 import dependency
 #import conflicts
 
+##TODO: bunu muhtemelen ops diye bir module'e tasimak
+##daha iyi olabilir. install/remove/upgrade islemlerinin
+##oldugu, ya da boyle ayrik kalabilir, ne ne kadar tutuyor
+##daha belli degil.... --eray
+
 class InstallError(Exception):
     pass
 
