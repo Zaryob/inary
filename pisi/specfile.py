@@ -103,3 +103,8 @@ class MetaData(SpecFile):
 	architecture = self.getNodeText("Source/Architecture")
 	installSize = self.getNodeText("Source/InstallSize")
 
+    def verify():
+        if len(packages) != 1:
+            return False
+        return True
+

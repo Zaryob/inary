@@ -33,14 +33,20 @@ def install_package_file(package_fn):
 
     # check file system requirements
     # what to do if / is split into /usr, /var, etc.?
-    
+
     # check conflicts
     # check dependencies
+    if not dependency.installable(metadata.packages[0].name):
+        raise InstallError("Package not installable")
 
     # unzip package in place
+    package.extract_dir_flat(ctx.destdir)
 
     # update databases
 
     # installdb
-    installdb.install(spec.spec.install_dir() + '/files.xml')
+    installdb.install(metadata.packages[0].name,
+                      metadata.source.version,
+                      metadata.source.release,
+                      ctx.install_dir() + '/files.xml')
 

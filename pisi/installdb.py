@@ -10,6 +10,7 @@ import util
 
 util.check_dir(ctx.db_dir())
 d = shelve.open(ctx.db_dir() + '/install.bdb')
+print 'installdb:', ctx.db_dir() + '/install.bdb'
 files_dir = ctx.archives_dir() + "/files"
 
 class InstallDBError(Exception):
@@ -36,7 +37,7 @@ def get_version(pkg):
     (status, version, release) = d[pkg]
     return (version, release)
 
-def is_removed(name):
+def is_removed(pkg):
     if is_recorded(pkg):
         (status, version, release) = d[pkg]
         return status=='r'
@@ -51,11 +52,13 @@ def install(pkg, version, release, files_xml):
     util.copy_file(files_xml, files_name(pkg, version, release))
                    
 def remove(pkg):
-    d[pkg] = 'r'
+    (status, version, release) = d[pkg]
+    d[pkg] = ('r', version, release)
 
 def purge(pkg):
-    (status, version, release) = d[pkg]
-    os.unlink(files_name(pkg, version, release))
-    del d[pkg]
+    if d.has_key(pkg):
+        (status, version, release) = d[pkg]
+        os.unlink(files_name(pkg, version, release))
+        del d[pkg]
 
 
