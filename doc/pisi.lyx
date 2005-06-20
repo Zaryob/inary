@@ -807,13 +807,21 @@ Type:
 
 
 \series bold 
-Hash: Path
+Size: 
+\series default 
+Dosyanin byte cinsinden boyutunu belirtir.
+\layout Itemize
+
+
+\series bold 
+MD5Sum: Path
 \series default 
  ile belirtilen dosyanýn 
 \emph on 
-hash
+cryptographic hash
 \emph default 
  deðerini verir.
+ (Bunu SHA1 ile degistirelim -- Eray)
 \end_deeper 
 \end_deeper 
 \layout Standard
