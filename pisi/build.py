@@ -44,7 +44,7 @@ class PisiBuild:
                 %(self.ctx.archives_dir(), self.spec.source.archiveName))
 	
 	self.solveBuildDependencies()
-	
+
 	ui.info("Unpacking archive...")
 	self.unpackArchive()
 	ui.info(" unpacked (%s)\n" % self.ctx.pkg_work_dir())
@@ -81,8 +81,6 @@ class PisiBuild:
 
 	os.chdir(curDir)
 	# after all, we are ready to build/prepare the packages
-	self.genMetaDataXml()
-	self.genFilesXml()
 	self.buildPackages()
 
     def fetchArchive(self, percentHook=None):
@@ -134,16 +132,33 @@ class PisiBuild:
 	    ui.info("Installing %s...\n" % self.spec.source.name)
 	    locals[func]()
 	    
-    def genMetaDataXml(self):
+    def genMetaDataXml(self, package):
 	#test
 	d = self.ctx.pkg_install_dir()
 	c = util.dir_size(d)
 	print d, c
 
-    def genFilesXml(self):
-	pass
+    def genFilesXml(self, package):
+	# the worst function in this project!
+	# just testing...
+	install_dir = self.ctx.pkg_install_dir()
+	for f in util.get_file_hashes(install_dir):
+	    # get the relative path
+	    fpath = f[0][len(install_dir):]
+	    fhash = f[1]
+
+	    depth = 0
+	    ftype = ""
+	    for path in package.paths:
+		if fpath.startswith(path.pathname):
+		    if depth < len(path.pathname):
+			depth = len(path.pathname)
+			ftype = path.fileType
+	    print fpath, ftype, fhash
 
     def buildPackages(self):
         for package in self.spec.packages:
             ui.info("** Building package %s\n" % package.name);
+	    self.genMetaDataXml(package)
+	    self.genFilesXml(package)
     
