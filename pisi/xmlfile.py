@@ -84,6 +84,35 @@ def getAllNodes(node, tagPath):
     return nodeList
 
 
+def appendTagPath(node, tagpath, child):
+    """append child at the end of a tag chain"""
+    for tag in tagpath[0:len(tagpath)-1]:
+        node = node.appendChild(createElement())
+    node.appendChild(child)
+
+def putNode(node, tagpath, newnode):
+    tags = tagpath.split('/')
+
+    # iterative code to search for the path
+        
+    # get DOM for top node
+    nodeList = node.getElementsByTagName(tags[0])
+    if len(nodeList) == 0:
+        appendTagPath(node, tagpath, newnode)
+
+    node = nodeList[0]              # discard other matches
+    tags.pop(0)
+    while len(tags)>0:
+        tag = tags.pop(0)
+        nodeList = node.getElementsByTagName(tag)
+        if len(nodeList) == 0:
+            tags = tag.insert(0)
+            appendTagPath(node, tags, newnode)
+        else:
+            node = nodeList[0]
+
+    return node
+
 # xmlfile class that further abstracts a dom object
 
 class XmlFile(object):

@@ -15,6 +15,9 @@ class PisiInstallError(Exception):
     pass
 
 class PisiInstall:
+# tek bir fonksiyon olan bir seyi class yapmak dogru mu?
+# ne state sakliyor PisiInstall?
+
 	def __init__(self, package_fn):
 		self.install(package_fn)
 
