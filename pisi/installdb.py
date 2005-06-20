@@ -16,7 +16,7 @@ class InstallDBError(Exception):
     pass
 
 def files_name(pkg, version, release):
-    return files_dir + '/' + pkg + '-' + version + '-' release + '.xml'
+    return files_dir + '/' + pkg + '-' + version + '-' + release + '.xml'
 
 def files(pkg):
     (status, version, release) = d[pkg]
