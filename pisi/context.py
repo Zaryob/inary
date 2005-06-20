@@ -77,9 +77,6 @@ class Context(object):
 	    return self.destdir + self.const.tmp_dir_suffix \
 		+ '/' + packageDir + self.const.work_dir_suffix
 
-        def install_dir(self):
-            return self.tmp_dir() + self.const.install_dir_suffix
-
 	def pkg_install_dir(self):
 	    packageDir = self.spec.source.name + '-' \
 		+ self.spec.source.version + '-' + self.spec.source.release
