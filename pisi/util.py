@@ -6,6 +6,7 @@ import os
 import sys
 import md5
 import shutil
+import statvfs
 
 from ui import ui
 
@@ -99,3 +100,8 @@ def do_patch(patch, p=0):
     retval = p.close()
     if retval:
          raise UtilError("ERROR: patch (%s) failed: %s" % (patch, strlist (o)))
+
+def partition_freespace(directory):
+	""" returns free space of given directory's partition """
+	st = os.statvfs(directory)
+	return st[statvfs.F_BSIZE] * st[statvfs.F_BFREE]
