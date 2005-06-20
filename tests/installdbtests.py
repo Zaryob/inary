@@ -21,7 +21,7 @@ class InstallDBTestCase(unittest.TestCase):
         f = installdb.files('installtest')
         a = f.readlines()
         self.assertEqual(a[0], 'placeholder\n')
-        self.assert_(installdb.is_installed('installtest')
+        self.assert_(installdb.is_installed('installtest'))
 
     def testRemovePurge(self):
         installdb.install('installtest', '0.1', '2', './tests/sandbox/files.xml')
