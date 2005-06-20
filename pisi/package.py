@@ -19,15 +19,18 @@ class Package:
 
     def extract_file(self, path, outdir):
         """extract file with path to outdir"""
+        impl.unpack_file(path, outdir)
 
     def extract_dir(self, dir, outdir):
         """extract directory recursively, this function
         copies the directory archiveroot/dir to outdir"""
+        impl.unpack_dir(path, outdir)
 
     def extract_dir_flat(self, dir, outdir):
         """extract directory recursively, this function
         unpacks the *contents* of directory archiveroot/dir inside outdir
         this is the function used by the installer"""
+        impl.unpack_dir_flat(dir, outdir)
         
     def extract_PISI_files(self, outdir):
         """extract PISI control files: metadata.xml, files.xml,
