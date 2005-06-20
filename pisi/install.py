@@ -16,6 +16,10 @@ import dependency
 ##oldugu, ya da boyle ayrik kalabilir, ne ne kadar tutuyor
 ##daha belli degil.... --eray
 
+##eger bu kod gercekten buyurse bir takim non-trivial
+##kisimlara ayrilirsa o zaman class yapariz. simdilik
+##boyle kalsin da hepsini gorelim algoritmanin
+
 class InstallError(Exception):
     pass
 
