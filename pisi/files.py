@@ -39,8 +39,8 @@ class Files(XmlFile):
         self.list = [FileInfo(x) for x in fileElts]
 
     def write(self, filename):
-        #FIXME: need a function to clear DOM first!
+        self.newDOM()
         for x in list:
-            elf.appendChild(x.elt(self.dom))
+            self.appendChild(x.elt(self.dom))
             
 

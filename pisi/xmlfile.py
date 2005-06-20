@@ -120,6 +120,16 @@ class XmlFile(object):
 
     def __init__(self, rootTag):
         self.rootTag = rootTag
+        self.newDOM()
+
+    def newDOM(self):
+        """clear DOM"""
+        from xml.dom.minidom import getDOMImplementation
+        impl = getDOMImplementation()
+        dom = impl.createDocument(None, self.rootTag, None)
+
+    def unlink(self):
+        self.dom.unlink()
 
     def readxml(self, fileName):
 	self.dom = mdom.parse(fileName)

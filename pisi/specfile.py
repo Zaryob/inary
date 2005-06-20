@@ -84,6 +84,8 @@ class SpecFile(XmlFile):
         # find all binary packages
         packageElts = self.getAllNodes("Package")
         self.packages = [PackageInfo(p) for p in packageElts]
+
+        self.unlink()
         
     def verify(self):
         """Verify PSPEC structures, are they what we want of them?"""
@@ -91,6 +93,8 @@ class SpecFile(XmlFile):
     
     def write(self, filename):
         """Write PSPEC file"""
+        self.newDOM()
+        ##TODO: write the good stuff here
         self.writexml(filename)
 
 class MetaData(SpecFile):
