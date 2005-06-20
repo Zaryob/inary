@@ -81,3 +81,13 @@ def run_batch(cmd):
 def strlist(l):
     """concatenate string reps of l's elements"""
     return string.join(map(lambda x: str(x) + ' ', l))
+
+def do_patch(patch, p=0):
+    """simple function to apply patches.."""
+    check_file(patch)
+    cmd = "patch -p%d < %s" % (p, patch)
+    p = os.popen(cmd)
+    o = p.readlines()
+    retval = p.close()
+    if retval:
+         raise UtilError("ERROR: patch (%s) failed: %s" % (patch, strlist (o)))
