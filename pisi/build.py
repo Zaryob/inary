@@ -57,7 +57,11 @@ class PisiBuild:
 	except IOError, e:
 	    ui.error ("Action Script: %s\n" % e)
 	    return 
-		
+
+	#we'll need this our working directory after actionscript
+	#finished its work in the work_dir
+	curDir = os.getcwd()
+
 	# FIXME: It's wrong to assume that unpacked archive 
 	# will create a name-version top-level directory.
 	# Archive module should give the exact location.
@@ -75,9 +79,10 @@ class PisiBuild:
 	self.buildSource(locals)
 	self.installSource(locals)
 
+	os.chdir(curDir)
 	# after all, we are ready to build/prepare the packages
-	# self.genMetaDataXml()
-	# self.genFilesXml()
+	self.genMetaDataXml()
+	self.genFilesXml()
 	self.buildPackages()
 
     def fetchArchive(self, percentHook=None):
@@ -128,6 +133,15 @@ class PisiBuild:
 	if func in locals:
 	    ui.info("Installing %s...\n" % self.spec.source.name)
 	    locals[func]()
+	    
+    def genMetaDataXml(self):
+	#test
+	d = self.ctx.pkg_install_dir()
+	c = util.dir_size(d)
+	print d, c
+
+    def genFilesXml(self):
+	pass
 
     def buildPackages(self):
         for package in self.spec.packages:
