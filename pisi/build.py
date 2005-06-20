@@ -108,7 +108,9 @@ class PisiBuild:
     	pass
 
     def unpackArchive(self):
-	archive = Archive(self.ctx)
+        fileName = os.path.basename(self.ctx.spec.source.archiveUri)
+        filePath = self.ctx.archives_dir() + '/' + fileName
+	archive = Archive(filePath, ctx.spec.source.archiveType)
 	archive.unpack(self.work_dir)
 
     def applyPatches(self):

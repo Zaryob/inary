@@ -2,12 +2,13 @@
 # provides methods to add/remove files, extract control files
 # maintainer: baris and meren
 
+import archive
+
 class Package:
     """Package: PISI package class"""
-    def __init__(self, packagefn, mode):
+    def __init__(self, packagefn):
+        self.impl = archive.ArchiveZip(packagefn)
         self.filename = packagefn
-        self.mode = mode                # bu gerekli mi?
-        # etc. etc.
 
     def add_file(self, fn):
         """add a file to package"""

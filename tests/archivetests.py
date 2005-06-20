@@ -1,5 +1,6 @@
 
 import unittest
+import os
 from os.path import exists as pathexists
 from os.path import basename, islink
 
@@ -16,7 +17,9 @@ class ArchiveFileTestCase(unittest.TestCase):
 	ctx = context.Context("samples/popt/popt.pspec")
 
 	targetDir = ctx.pkg_work_dir()
-	achv = archive.Archive(ctx)
+        fileName = os.path.basename(ctx.spec.source.archiveUri)
+        filePath = ctx.archives_dir() + '/' + fileName
+	achv = archive.Archive(filePath, ctx.spec.source.archiveType)
 	
 	assert ctx.spec.source.archiveType == "targz"
 
@@ -43,7 +46,9 @@ class ArchiveFileTestCase(unittest.TestCase):
 
 	assert ctx.spec.source.archiveType == "zip"
 
-	achv = archive.Archive(ctx)
+        fileName = os.path.basename(ctx.spec.source.archiveUri)
+        filePath = ctx.archives_dir() + '/' + fileName
+	achv = archive.Archive(filePath, ctx.spec.source.archiveType)
 	achv.unpack(targetDir)
 
 	assert pathexists(targetDir + "/sandbox")

@@ -7,15 +7,18 @@ import os
 import sys
 import tarfile
 import zipfile
+from context import ctx
 
 #pisi modules
 import util
 
+class ArchiveError:
+    pass
+
 class ArchiveBase(object):
-    def __init__(self, ctx):
-	self.type = ctx.spec.source.archiveType
-	self.fileName = os.path.basename(ctx.spec.source.archiveUri)
-	self.filePath = ctx.archives_dir() + '/' + self.fileName
+    def __init__(self, filepath, atype):
+	self.filePath = filepath
+	self.type = atype
 
     def unpack(self, targetDir):
 	self.targetDir = targetDir
@@ -26,8 +29,8 @@ class ArchiveBase(object):
 	    os.makedirs(self.targetDir)
 
 class ArchiveTarFile(ArchiveBase):
-    def __init__(self, ctx):
-	super(ArchiveTarFile, self).__init__(ctx)
+    def __init__(self, filepath, type="tar"):
+	super(ArchiveTarFile, self).__init__(filepath, type)
 
     def unpack(self, targetDir):
 	super(ArchiveTarFile, self).unpack(targetDir)
@@ -39,6 +42,9 @@ class ArchiveTarFile(ArchiveBase):
 	    rmode = 'r:gz'
 	elif self.type == 'tarbz2':
 	    rmode = 'r:bz2'
+        else:
+            raise ArchiveError("Archive type not recognized")
+
 	tar = tarfile.open(self.filePath, rmode)
         oldwd = os.getcwd()
         os.chdir(self.targetDir)
@@ -48,8 +54,8 @@ class ArchiveTarFile(ArchiveBase):
 	tar.close()
 
 class ArchiveZip(ArchiveBase):
-    def __init__(self, ctx):
-	super(ArchiveZip, self).__init__(ctx)
+    def __init__(self, filepath, type="zip"):
+	super(ArchiveZip, self).__init__(filepath, type)
 
     def unpack(self, targetDir):
 	super(ArchiveZip, self).unpack(targetDir)
@@ -85,7 +91,7 @@ class ArchiveZip(ArchiveBase):
 class Archive:
     """Unpack magic for Archive files..."""
 
-    def __init__(self, ctx):
+    def __init__(self, filepath, type):
 	"""accepted archive types:
 	targz, tarbz2, zip, tar"""	
 	
@@ -96,8 +102,7 @@ class Archive:
 	    'zip': ArchiveZip
 	    }
 	
-	type = ctx.spec.source.archiveType
-	self.archive = handlers.get(type)(ctx)
+	self.archive = handlers.get(type)(filepath, type)
 
     def unpack(self, targetDir):
 	self.archive.unpack(targetDir)
