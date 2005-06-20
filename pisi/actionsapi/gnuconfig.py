@@ -14,7 +14,8 @@ def gnuconfig_findnewest():
 		 '/usr/share/automake-1.7/config.sub',
 		 '/usr/share/automake-1.6/config.sub',
 		 '/usr/share/automake-1.5/config.sub',
-		 '/usr/share/automake-1.4/config.sub']
+		 '/usr/share/automake-1.4/config.sub',
+                 'share/config.sub']
     
     newer_location = {}
 
