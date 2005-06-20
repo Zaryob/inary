@@ -57,6 +57,30 @@ class ArchiveZip(ArchiveBase):
     def __init__(self, filepath, type="zip"):
 	super(ArchiveZip, self).__init__(filepath, type)
 
+    def unpack_file_cond(self, pred, targetDir):
+        """ unpack file according to predicate function filename -> bool"""
+	super(ArchiveTarFile, self).unpack(targetDir)
+
+        zip = zipfile.ZipFile(self.filePath, 'r')
+        for file in zip.namelist():
+            if pred(file):              # search for path
+                opath = os.path.join(targetDir, file)
+                if os.path.isdir(ofile):
+                    continue
+                util.check_dir(os.path.dirname(ofile))
+                if hex(info.external_attr)[2] == 'A':
+                    target = zip.read(file)
+                    os.symlink(target, ofile)
+                else:
+                    buff = open (ofile, 'wb')
+                    fileContent = zip.read(file)
+                    buff.write(fileContent)
+                    buff.close()
+        zip.close()
+
+    def unpack_file(self, path, targetDir):
+        unpack_file(self, lambda f:f==path, targetDir)
+
     def unpack(self, targetDir):
 	super(ArchiveZip, self).unpack(targetDir)
 
