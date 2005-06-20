@@ -97,7 +97,7 @@ class MetaData(SpecFile):
     """This is a superset of the source spec definition"""
 
     def read(self, filename):
-        SpecFile.read(filename)
+	super(MetaData, self).read(filename)
 	distribution = self.getNodeText("Source/Distribution")
 	distributionRelease = self.getNodeText("Source/DistributionRelease")
 	architecture = self.getNodeText("Source/Architecture")
