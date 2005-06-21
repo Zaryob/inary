@@ -105,7 +105,11 @@ class MetaData(SpecFile):
 	distribution = self.getNodeText("Source/Distribution")
 	distributionRelease = self.getNodeText("Source/DistributionRelease")
 	architecture = self.getNodeText("Source/Architecture")
-	installSize = self.getNodeText("Source/InstallSize")
+	installSize = int(self.getNodeText("Source/InstallSize"))
+
+    def write(self, filename):
+        ui.info("METADATA WRITE NOT IMPLEMENTED")
+        pass
 
     def verify():
         if len(packages) != 1:

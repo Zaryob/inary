@@ -4,16 +4,20 @@
 import installdb
 import packagedb
 import ui
+from version import Version
 
-# FIXME: this is supposed to handle all those attributes
 def satisfiesDep(pkg, depinfo):
     """determine if a package satisfies given dependency spec"""
     if not installdb.is_installed(depinfo.package):
         return False
     else:
         (version, release) = installdb.get_info(pkg)
-        # FIXME: specific processing for attributes
-        return True
+        ret = True
+        if depinfo.versionFrom:
+            ret &= Version(version) >= Version(depinfo.versionFrom)
+        if depinfo.versionTo:
+            ret &= Version(version) <= Version(depinfo.versionTo)        
+        return ret
 
 def installDeps(pkg):
     return packagedb.get_package(pkg).installDeps

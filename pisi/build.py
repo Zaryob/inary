@@ -11,6 +11,8 @@ import util
 from ui import ui
 from context import ctx
 from sourcearchive import SourceArchive
+from files import Files
+from specfile import SpecFile, MetaData
 
 class PisiBuildError(Exception):
     pass
@@ -98,9 +100,14 @@ class PisiBuild:
 	    
     def genMetaDataXml(self, package):
 	#test
+        metadata = MetaData()
 	d = self.ctx.pkg_install_dir()
-	c = util.dir_size(d)
-	print d, c
+        metadata.distribution = "Pardus" # from context?
+        metadata.distributionRelease = "0.1"
+        metadata.architecture = "Any"   # FIXME
+	metadata.installSize = util.dir_size(d)
+	print d, metadata.installSize
+        metadata.write(os.path.join(self.ctx.pkg_work_dir(),"metadata.xml"))
 
     def genFilesXml(self, package):
 	# the worst function in this project!
