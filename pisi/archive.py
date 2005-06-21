@@ -17,49 +17,49 @@ class ArchiveError:
 
 class ArchiveBase(object):
     def __init__(self, filepath, atype):
-	self.filePath = filepath
-	self.type = atype
+        self.filePath = filepath
+        self.type = atype
 
     def unpack(self, targetDir):
-	self.targetDir = targetDir
-	# first we check if we need to clean-up our working env.
+        self.targetDir = targetDir
+        # first we check if we need to clean-up our working env.
         if os.path.exists(self.targetDir):
-	    util.clean_dir(self.targetDir)
-	else:
-	    os.makedirs(self.targetDir)
+            util.clean_dir(self.targetDir)
+        else:
+            os.makedirs(self.targetDir)
 
 class ArchiveTarFile(ArchiveBase):
     def __init__(self, filepath, type="tar"):
-	super(ArchiveTarFile, self).__init__(filepath, type)
+        super(ArchiveTarFile, self).__init__(filepath, type)
 
     def unpack(self, targetDir):
-	super(ArchiveTarFile, self).unpack(targetDir)
+        super(ArchiveTarFile, self).unpack(targetDir)
 
         rmode = ""
-	if self.type == 'tar':
-	    rmode = 'r:'
-	elif self.type == 'targz':
-	    rmode = 'r:gz'
-	elif self.type == 'tarbz2':
-	    rmode = 'r:bz2'
+        if self.type == 'tar':
+            rmode = 'r:'
+        elif self.type == 'targz':
+            rmode = 'r:gz'
+        elif self.type == 'tarbz2':
+            rmode = 'r:bz2'
         else:
             raise ArchiveError("Archive type not recognized")
 
-	tar = tarfile.open(self.filePath, rmode)
+        tar = tarfile.open(self.filePath, rmode)
         oldwd = os.getcwd()
         os.chdir(self.targetDir)
-	for tarinfo in tar:
-	    tar.extract(tarinfo)
+        for tarinfo in tar:
+            tar.extract(tarinfo)
         os.chdir(oldwd)
-	tar.close()
+        tar.close()
 
 class ArchiveZip(ArchiveBase):
     def __init__(self, filepath, type="zip"):
-	super(ArchiveZip, self).__init__(filepath, type)
+        super(ArchiveZip, self).__init__(filepath, type)
 
     def unpack_file_cond(self, pred, targetDir, archiveRoot=''):
         """ unpack file according to predicate function filename -> bool"""
-	super(ArchiveZip, self).unpack(targetDir)
+        super(ArchiveZip, self).unpack(targetDir)
         zip = zipfile.ZipFile(self.filePath, 'r')
         for file in zip.namelist():
             if pred(file):              # check if condition holds
@@ -105,25 +105,25 @@ class ArchiveZip(ArchiveBase):
     def unpack(self, targetDir):
         self.unpack_file_cond(lambda f: True, targetDir)
         return 
-                
+
 class Archive:
     """Unpack magic for Archive files..."""
 
     def __init__(self, filepath, type):
-	"""accepted archive types:
-	targz, tarbz2, zip, tar"""	
-	
-	handlers = {
-	    'targz': ArchiveTarFile,
-	    'tarbz2': ArchiveTarFile,
-	    'tar': ArchiveTarFile,
-	    'zip': ArchiveZip
-	    }
-	
-	self.archive = handlers.get(type)(filepath, type)
+    """accepted archive types:
+        targz, tarbz2, zip, tar"""
+
+        handlers = {
+            'targz': ArchiveTarFile, 
+            'tarbz2': ArchiveTarFile,
+            'tar': ArchiveTarFile,
+            'zip': ArchiveZip
+        }
+
+        self.archive = handlers.get(type)(filepath, type)
 
     def unpack(self, targetDir):
-	self.archive.unpack(targetDir)
+        self.archive.unpack(targetDir)
 
     def unpack_files(self, files, targetDir):
-	self.archive.unpack_files(files, targetDir)
+        self.archive.unpack_files(files, targetDir)
