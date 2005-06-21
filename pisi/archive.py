@@ -87,6 +87,9 @@ class ArchiveZip(ArchiveBase):
     def unpack_file(self, path, targetDir):
         unpack_file(self, lambda f:f==path, targetDir)
 
+    def unpack_dir(self, path, targetDir):
+        unpack_file(self, lambda f:util.subpath(path,f), targetDir)
+
     def unpack(self, targetDir):
 	super(ArchiveZip, self).unpack(targetDir)
 
