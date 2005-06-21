@@ -34,8 +34,8 @@ class ArchiveFileTestCase(unittest.TestCase):
 	assert pathexists(testfile)
 	
 	# check file integrity
-	self.assertEqual(util.md5_file(testfile),
-			 "171545adab7b51ebf6ec5575d3000a95")
+	self.assertEqual(util.sha1_file(testfile),
+			 "5af9dd7d754f788cf511c57ce0af3d555fed009d")
 
     def testUnpackZip(self):
 	ctx = context.Context("tests/sandbox/sandbox.pspec")
@@ -57,8 +57,8 @@ class ArchiveFileTestCase(unittest.TestCase):
 	assert pathexists(testfile)
 	
 	# check file integrity
-	self.assertEqual(util.md5_file(testfile),
-			 "1e0c3f1e4664ee8ca67caea8b6b12ea4")
+	self.assertEqual(util.sha1_file(testfile),
+			 "06d0ee5ba49eccae6bc20552d55b3ba5ad52995e")
 
 	# check for symbolic links
 	testfile = targetDir + "/sandbox/deneme/hed"

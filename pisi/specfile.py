@@ -63,7 +63,7 @@ class SpecFile(XmlFile):
         self.source.archiveUri = getNodeText(archiveNode).strip()
 	self.source.archiveName = basename(self.source.archiveUri)
 	self.source.archiveType = getNodeAttribute(archiveNode, "archType")
-	self.source.archiveMD5 = getNodeAttribute(archiveNode, "md5sum")
+	self.source.archiveSHA1 = getNodeAttribute(archiveNode, "sha1sum")
         patchElts = self.getChildElts("Source/Patches")
 	if patchElts:
 	    self.source.patches = [PatchInfo(p) for p in patchElts]

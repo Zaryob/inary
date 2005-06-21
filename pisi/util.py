@@ -4,7 +4,7 @@
 
 import os
 import sys
-import md5
+import sha
 import shutil
 import statvfs
 
@@ -67,15 +67,15 @@ def get_file_hashes(top):
     for root, dirs, files in os.walk(top, topdown=False):
 	for file in files:
 	    f = os.path.join(root, file)
-	    yield (f, md5_file(f))
+	    yield (f, sha1_file(f))
 
 def copy_dir(src, dest):
     """copy source dir to destination dir recursively"""
     raise UtilError("not implemented")
 
-def md5_file(filename):
-    """calculate md5 hash of filename"""
-    m = md5.new()
+def sha1_file(filename):
+    """calculate sha1 hash of filename"""
+    m = sha.new()
     f = file(filename, 'rb')
     for l in f:
         m.update(l)

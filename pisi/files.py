@@ -7,7 +7,7 @@ class FileInfo:
         self.path = getNodeText(getNode(node, "Path"))
         self.type = getNodeText(getNode(node, "Type"))
         self.size = int(getNodeText(getNode(node, "Size")))
-        self.md5Sum = getNodeText(getNode(node, "MD5Sum"))
+        self.hash = getNodeText(getNode(node, "Hash"))
 
     def elt(self, dom):
         ## FIXME: looking for a better way to do it
@@ -19,12 +19,12 @@ class FileInfo:
         typeElt.appendChild(dom.createTextNode(type))
         sizeElt = dom.createElement("Size")
         sizeElt.appendChild(dom.createTextNode(str(size)))
-        md5Elt = dom.createElement("MD5Sum")
-        md5Elt.appendChild(dom.createTextNode(md5sum))
+        hashElt = dom.createElement("Hash")
+        hashElt.appendChild(dom.createTextNode(hash))
         elt.appendChild(pathElt)
         elt.appendChild(typeElt)
         elt.appendChild(sizeElt)
-        elt.appendChild(md5Elt)
+        elt.appendChild(hashElt)
         return elt
 
 class Files(XmlFile):

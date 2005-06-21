@@ -16,8 +16,8 @@ class FetcherTestCase(unittest.TestCase):
 	self.fetch.fetch()
 	destpath = self.fetch.filedest + "/" + self.fetch.filename
 	if os.access(destpath, os.R_OK):
-            self.assertEqual(util.md5_file(destpath),
-			     self.ctx.spec.source.archiveMD5)
+            self.assertEqual(util.sha1_file(destpath),
+			     self.ctx.spec.source.archiveSHA1)
 
 
 suite = unittest.makeSuite(FetcherTestCase)

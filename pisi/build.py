@@ -91,7 +91,7 @@ class PisiBuild:
         # check if source already cached
         destpath = fetch.filedest + "/" + fetch.filename
         if os.access(destpath, os.R_OK):
-            if util.md5_file(destpath) == self.spec.source.archiveMD5:
+            if util.sha1_file(destpath) == self.spec.source.archiveSHA1:
                 ui.info('%s [cached]\n' % self.spec.source.archiveName)
                 return
 
