@@ -170,6 +170,6 @@ def do_patch(patch, p=0):
          raise UtilError("ERROR: patch (%s) failed: %s" % (patch, strlist (o)))
 
 def partition_freespace(directory):
-	""" returns free space of given directory's partition """
-	st = os.statvfs(directory)
-	return st[statvfs.F_BSIZE] * st[statvfs.F_BFREE]
+    """ returns free space of given directory's partition """
+    st = os.statvfs(directory)
+    return st[statvfs.F_BSIZE] * st[statvfs.F_BFREE]

@@ -182,7 +182,7 @@ class XmlFile(object):
         return getNode(self.dom.documentElement, tagPath)
 
     def getNodeText(self, tagPath):
-	"""returns the text of *first* matching node for given tag path."""
+        """returns the text of *first* matching node for given tag path."""
         self.verifyRootTag()
         return getNodeText(getNode(self.dom.documentElement, tagPath))
 

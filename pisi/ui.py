@@ -48,4 +48,3 @@ class CLI:
 
 # default UI is CLI
 ui = CLI()
-

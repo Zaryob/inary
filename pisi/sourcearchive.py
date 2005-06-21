@@ -48,7 +48,7 @@ class SourceArchive:
         
         fetch.fetch()
 
-    	# FIXME: What a ugly hack! We should really find a cleaner way for output.
+        # FIXME: What a ugly hack! We should really find a cleaner way for output.
         if percentHook:
             ui.info('\n')
             pass

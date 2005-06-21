@@ -33,7 +33,7 @@ class PisiBuild:
         self.sourceArchive.fetch()
         ui.info("Source archive is stored: %s/%s\n"
                 %(self.ctx.archives_dir(), self.spec.source.archiveName))
-	
+    
         self.solveBuildDependencies()
 
         ui.info("Unpacking archive...")
@@ -59,13 +59,13 @@ class PisiBuild:
         # (from the assumption is evil dept.)
         os.chdir(self.ctx.pkg_work_dir() + "/" + self.spec.source.name + "-" + self.spec.source.version)
         locals = globals = {}
-	
+    
         try:
             exec compile(self.actionScript , "error", "exec") in locals,globals
         except SyntaxError, e:
             ui.error ("Error : %s\n" % e)
             return 
-		
+        
         self.configureSource(locals)
         self.buildSource(locals)
         self.installSource(locals)
@@ -98,7 +98,7 @@ class PisiBuild:
         if func in locals:
             ui.info("Installing %s...\n" % self.spec.source.name)
             locals[func]()
-	    
+        
     def genMetaDataXml(self, package):
         #test
         metadata = MetaData()

@@ -17,4 +17,3 @@ class const:
             raise self.ConstError, "Can't unbind constant: %s" % name
         # we don't have an attribute by this name
         raise NameError, name
-

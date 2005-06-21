@@ -46,7 +46,7 @@ def install(self, package_fn):
 
     # unzip package in place
     package.extract_dir_flat(ctx.destdir)
-	
+    
     # update databases
 
     # installdb
@@ -54,4 +54,3 @@ def install(self, package_fn):
                       metadata.source.version,
                       metadata.source.release,
                       ctx.install_dir() + '/files.xml')
-

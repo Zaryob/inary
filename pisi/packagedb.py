@@ -25,4 +25,3 @@ def add_package(name, package_info):
 
 def remove_package(name):
     del d[name]
-

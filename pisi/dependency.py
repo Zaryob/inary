@@ -43,4 +43,3 @@ def installable(pkg):
         return False
     else:
         return satisfiesRuntimeDeps(pkg) and satisfiesInstallDeps(pkg)
-

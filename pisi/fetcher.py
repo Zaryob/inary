@@ -136,4 +136,3 @@ class Progress:
                 return percent
         else:
                 return 0
-

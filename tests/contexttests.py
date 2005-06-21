@@ -6,7 +6,7 @@ from pisi import context
 class ContextTestCase(unittest.TestCase):
     def setUp(self):
         self.ctx = context.Context("samples/popt/popt.pspec")
-	
+    
     def testConstness(self):
         # test if we can get a const attribute?
         try:
@@ -17,7 +17,7 @@ class ContextTestCase(unittest.TestCase):
 
         # test binding a new constant
         self.ctx.const.test = "test binding"
-	
+    
         # test re-binding (which is illegal)
         try:
             self.ctx.const.test = "test rebinding"
