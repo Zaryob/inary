@@ -6,49 +6,37 @@
 import os
 import sys
 
-from fetcher import Fetcher
-from archive import Archive
-
 # import pisipackage
 import util
 from ui import ui
+from context import ctx
+from sourcearchive import SourceArchive
 
 class PisiBuildError(Exception):
     pass
-
-# FIXME: this eventually has to go to ui module
-# Infact all ui calls has nothing to do with this build process.
-# There more of them in PisiBuild...
-# And maybe we should consider moving PisiBuild.build() back to pisi-build
-# CLI too.
-# exa: This, like all others, will have a GUI or CLI, interchangeably
-def displayProgress(pd):
-    out = '\r%-30.30s %3d%% %12.2f %s' % \
-        (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
-    ui.info(out)
 
 class PisiBuild:
     """PisiBuild class, provides the package build and creation routines"""
     def __init__(self, context):
         self.ctx = context
 	self.work_dir = self.ctx.pkg_work_dir()
-
         self.spec = self.ctx.spec
+        self.sourceArchive = SourceArchive(self.ctx)
 
     def build(self):
         ui.info("Building PISI source package: %s\n" % self.spec.source.name)
 
         ui.info("Fetching source from: %s\n" % self.spec.source.archiveUri)
-        self.fetchArchive(displayProgress)
+        self.sourceArchive.fetch()
         ui.info("Source archive is stored: %s/%s\n"
                 %(self.ctx.archives_dir(), self.spec.source.archiveName))
 	
 	self.solveBuildDependencies()
 
 	ui.info("Unpacking archive...")
-	self.unpackArchive()
+	self.sourceArchive.unpack()
 	ui.info(" unpacked (%s)\n" % self.ctx.pkg_work_dir())
-        
+
 	self.applyPatches()
 
 	try:
@@ -83,35 +71,8 @@ class PisiBuild:
 	# after all, we are ready to build/prepare the packages
 	self.buildPackages()
 
-    def fetchArchive(self, percentHook=None):
-        """fetch an archive and store to ctx.archives_dir() 
-        using fether.Fetcher"""
-        fetch = Fetcher(self.ctx)
-
-        # check if source already cached
-        destpath = fetch.filedest + "/" + fetch.filename
-        if os.access(destpath, os.R_OK):
-            if util.sha1_file(destpath) == self.spec.source.archiveSHA1:
-                ui.info('%s [cached]\n' % self.spec.source.archiveName)
-                return
-
-        if percentHook:
-            fetch.percentHook = percentHook
-        
-	fetch.fetch()
-
-	# FIXME: What a ugly hack! We should really find a cleaner way for output.
-	if percentHook:
-	    ui.info('\n')
-
     def solveBuildDependencies(self):
     	pass
-
-    def unpackArchive(self):
-        fileName = os.path.basename(self.ctx.spec.source.archiveUri)
-        filePath = self.ctx.archives_dir() + '/' + fileName
-	archive = Archive(filePath, self.ctx.spec.source.archiveType)
-	archive.unpack(self.work_dir)
 
     def applyPatches(self):
         pass
