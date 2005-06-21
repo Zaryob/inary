@@ -10,7 +10,6 @@ import util
 
 util.check_dir(ctx.db_dir())
 d = shelve.open(ctx.db_dir() + '/install.bdb')
-print 'installdb:', ctx.db_dir() + '/install.bdb'
 files_dir = ctx.archives_dir() + "/files"
 
 class InstallDBError(Exception):
