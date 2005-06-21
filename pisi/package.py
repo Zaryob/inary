@@ -17,9 +17,9 @@ class Package:
         """extract entire package contents to directory"""
         extract_dir('', outdir)         # means package root
 
-    def extract_file(self, path, outdir):
+    def extract_files(self, paths, outdir):
         """extract file with path to outdir"""
-        impl.unpack_file(path, outdir)
+        impl.unpack_files(paths, outdir)
 
     def extract_dir(self, dir, outdir):
         """extract directory recursively, this function

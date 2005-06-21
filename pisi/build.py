@@ -12,7 +12,8 @@ from ui import ui
 from context import ctx
 from sourcearchive import SourceArchive
 from files import Files, FileInfo
-from specfile import SpecFile, MetaData
+from specfile import SpecFile
+from metadata import MetaData
 
 class PisiBuildError(Exception):
     pass

@@ -1,4 +1,6 @@
 
+import ui
+
 from xmlfile import *
 import specfile
 from specfile import SpecFile
