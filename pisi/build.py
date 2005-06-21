@@ -107,7 +107,7 @@ class PisiBuild:
         metadata.architecture = "Any"   # FIXME
 	metadata.installSize = util.dir_size(d)
 	print d, metadata.installSize
-        metadata.write(os.path.join(self.ctx.pkg_work_dir(),"metadata.xml"))
+        metadata.write(os.path.join(self.ctx.pkg_dir(),"metadata.xml"))
 
     def genFilesXml(self, package):
 	# the worst function in this project!
@@ -119,15 +119,14 @@ class PisiBuild:
 	    fpath = fpath[len(install_dir):]
 	    depth = 0
 	    ftype = ""
-            fsize = 0
 	    for path in package.paths:
 		if fpath.startswith(path.pathname):
 		    if depth < len(path.pathname):
 			depth = len(path.pathname)
 			ftype = path.fileType
-	    print fpath, ftype, fsize, fhash
-            files.append(FileInfo(fpath, ftype, fsize, fhash))
-        files.write(os.path.join(self.ctx.pkg_work_dir(),"files.xml"))
+	    print fpath, ftype, fhash
+            files.append(FileInfo(fpath, ftype, fhash))
+        files.write(os.path.join(self.ctx.pkg_dir(),"files.xml"))
 
     def buildPackages(self):
         for package in self.spec.packages:

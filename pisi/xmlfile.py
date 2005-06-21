@@ -126,7 +126,7 @@ class XmlFile(object):
         """clear DOM"""
         from xml.dom.minidom import getDOMImplementation
         impl = getDOMImplementation()
-        dom = impl.createDocument(None, self.rootTag, None)
+        self.dom = impl.createDocument(None, self.rootTag, None)
 
     def unlink(self):
         self.dom.unlink()

@@ -6,10 +6,9 @@ from xmlfile import XmlFile
 
 class FileInfo:
     
-    def __init__(self, _path = "", _type = "", _size = 0, _hash = ""):
+    def __init__(self, _path = "", _type = "", _hash = ""):
         self.path = _path
         self.type = _type
-        self.size = _size
         self.hash = _hash
 
     def readnew(node):
@@ -20,7 +19,6 @@ class FileInfo:
     def read(self, node):
         self.path = getNodeText(getNode(node, "Path"))
         self.type = getNodeText(getNode(node, "Type"))
-        self.size = int(getNodeText(getNode(node, "Size")))
         self.hash = getNodeText(getNode(node, "Hash"))
 
     def elt(self, dom):
@@ -28,16 +26,13 @@ class FileInfo:
         ## could apparently use helper functions to do this shorter
         elt = dom.createElement("File")
         pathElt = dom.createElement("Path")
-        pathElt.appendChild(dom.createTextNode(path))
+        pathElt.appendChild(dom.createTextNode(self.path))
         typeElt = dom.createElement("Type")
-        typeElt.appendChild(dom.createTextNode(type))
-        sizeElt = dom.createElement("Size")
-        sizeElt.appendChild(dom.createTextNode(str(size)))
+        typeElt.appendChild(dom.createTextNode(self.type))
         hashElt = dom.createElement("Hash")
-        hashElt.appendChild(dom.createTextNode(hash))
+        hashElt.appendChild(dom.createTextNode(self.hash))
         elt.appendChild(pathElt)
         elt.appendChild(typeElt)
-        elt.appendChild(sizeElt)
         elt.appendChild(hashElt)
         return elt
 
@@ -58,8 +53,7 @@ class Files(XmlFile):
 
     def write(self, filename):
         self.newDOM()
-        print list
-        for x in list:
-            self.dom.appendChild(x.elt(self.dom))
+        for x in self.list:
+            print x.elt(self.dom)
             
 
