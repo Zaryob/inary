@@ -72,7 +72,8 @@ class PisiBuild:
 	self.buildPackages()
 
     def solveBuildDependencies(self):
-    	pass
+        """pre-alpha: fail if dependencies not satisfied"""
+        pass
 
     def applyPatches(self):
         pass

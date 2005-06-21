@@ -35,6 +35,4 @@ class Package:
     def extract_PISI_files(self, outdir):
         """extract PISI control files: metadata.xml, files.xml,
         action scripts, etc."""
-        self.extract_file('metadata.xml', outdir)
-        self.extract_file('files.xml', outdir)
-        self.extract_dir('Config', outdir)
+        self.extract_files(['metadata.xml', 'files.xml','Config'], outdir)
