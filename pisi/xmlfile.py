@@ -43,6 +43,7 @@ def getNode(node, tagpath):
     """returns the *first* matching node for given tag path."""
     
     tags = tagpath.split('/')
+    assert len(tags)>0
 
     # iterative code to search for the path
         
@@ -86,13 +87,18 @@ def getAllNodes(node, tagPath):
     return nodeList
 
 
-def appendTagPath(dom, node, tagpath, child):
+def appendTagPath(dom, node, tagpath, child = None):
     """append child at the end of a tag chain starting from node"""
     for tag in tagpath[0:len(tagpath)-1]:
         node = node.appendChild(dom.createElement(tag))
-    node.appendChild(child)
+    if child:
+        return node.appendChild(child)
+    else:
+        return node.appendChild(dom.createElement(tag))
 
-def addNode(dom, node, tagpath, newnode):
+def addNode(dom, node, tagpath, newnode = None):
+    """add a new node at the end of the tree"""
+    
     tags = tagpath.split('/')
     assert len(tags)>0
 
@@ -106,8 +112,7 @@ def addNode(dom, node, tagpath, newnode):
     
     if len(nodeList) == 0:
         print 'SIFIR'
-        appendTagPath(dom, node, tagpath, newnode)
-        return
+        return appendTagPath(dom, node, tagpath, newnode)
     
     node = nodeList[0]              # discard other matches
     tags.pop(0)
@@ -116,7 +121,7 @@ def addNode(dom, node, tagpath, newnode):
         nodeList = node.getElementsByTagName(tag)
         if len(nodeList) == 0:
             tags = tag.insert(0)
-            appendTagPath(node, tags, newnode)
+            return appendTagPath(node, tags, newnode)
         else:
             node = nodeList[0]
 
@@ -207,7 +212,7 @@ class XmlFile(object):
 
     # write helpers
 
-    def addNode(self, tagPath, newnode):
+    def addNode(self, tagPath, newnode = None):
         self.verifyRootTag()
         return addNode(self.dom, self.dom.documentElement, tagPath, newnode)
 

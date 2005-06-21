@@ -16,12 +16,6 @@ import dependency
 ##gibi bir test edip nerelere extend edecek ama gorelim
 ##lutfen. daha hic calismadi bile. :/
 
-##alternatif olarak bunu muhtemelen ops diye bir module'e
-##tasimak
-##daha iyi olabilir. install/remove/upgrade islemlerinin
-##oldugu, ya da boyle ayrik kalabilir, ne ne kadar tutuyor
-##daha belli degil...
-
 class InstallError(Exception):
     pass
 

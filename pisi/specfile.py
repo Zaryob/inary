@@ -96,4 +96,5 @@ class SpecFile(XmlFile):
         """Write PSPEC file"""
         self.newDOM()
         self.addNodeText("Source/Name", self.source.name)
+        archiveNode = self.addNode("Source/Archive")
         self.writexml(filename)
