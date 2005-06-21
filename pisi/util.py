@@ -41,6 +41,11 @@ def prefix(a, b):
         if a[i]!=b[i]:
             return False
     return True
+
+def remove_prefix(a,b):
+    "remove prefix a from sequence b"
+    assert prefix(a,b)
+    return b[len(a):]
     
 # path functions
 
@@ -57,9 +62,13 @@ def commonprefix(l):
     return common
 
 # but this one is necessary
-def under_path(a, b):
-    """find if path a is a descendant of b in the directory tree"""
+def subpath(a, b):
+    """find if path a is before b in the directory tree"""
     return prefix(os.path.split(a), os.path.split(b))
+
+def removepathprefix(a, b):
+    comps = remove_prefix(os.path.split(a), os.path.split(b))
+    return reduce(os.path.join, comps)
 
 # file/dir functions
 

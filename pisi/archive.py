@@ -57,17 +57,20 @@ class ArchiveZip(ArchiveBase):
     def __init__(self, filepath, type="zip"):
 	super(ArchiveZip, self).__init__(filepath, type)
 
-    def unpack_file_cond(self, pred, targetDir, extractRoot=''):
+    def unpack_file_cond(self, pred, targetDir, archiveRoot=''):
         """ unpack file according to predicate function filename -> bool"""
 	super(ArchiveTarFile, self).unpack(targetDir)
 
         zip = zipfile.ZipFile(self.filePath, 'r')
         for file in zip.namelist():
             if pred(file):              # check if condition holds
-                if extractRoot=='':
-                    ofile = os.path.join(targetDir, file)
-                else:
-                    raise ArchiveError("changing extraction root not implemented yet")
+                if archiveRoot!='':
+                    # change archiveRoot
+                    if util.subpath(archiveRoot, file):
+                        file = util.removepathprefix(archiveRoot, file)
+                    else:
+                        continue        # don't extract if not under
+                ofile = os.path.join(targetDir, file)
                 if os.path.isdir(ofile):
                     continue
                 util.check_dir(os.path.dirname(ofile))
