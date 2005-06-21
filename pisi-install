@@ -32,10 +32,10 @@ def main():
 
     # TODO: We accept only one package file arg ATM
     if len(args) != 1:
-	print usage
-	raise ArgError, "pisi-install expects one (and only one) package file currently"
+	    print usage
+	    raise ArgError, "pisi-install expects one (and only one) package file currently"
     else:
-	package_fn = args[0]
+    	package_fn = args[0]
 
     install.install(package_fn)
 
