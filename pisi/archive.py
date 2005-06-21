@@ -84,11 +84,11 @@ class ArchiveZip(ArchiveBase):
                     buff.close()
         zip.close()
 
-    def unpack_file(self, path, targetDir):
-        unpack_file(self, lambda f:f==path, targetDir)
+    def unpack_files(self, paths, targetDir):
+        self.unpack_file_cond(self, lambda f:f in paths, targetDir)
 
     def unpack_dir(self, path, targetDir):
-        unpack_file(self, lambda f:util.subpath(path,f), targetDir)
+        self.unpack_file_cond(self, lambda f:util.subpath(path,f), targetDir)
 
     def unpack(self, targetDir):
 	super(ArchiveZip, self).unpack(targetDir)
@@ -140,5 +140,5 @@ class Archive:
     def unpack(self, targetDir):
 	self.archive.unpack(targetDir)
 
-    def unpack_file(self, targetDir):
-	self.archive.unpack(targetDir)
+    def unpack_files(self, files, targetDir):
+	self.archive.unpack_files(files, targetDir)

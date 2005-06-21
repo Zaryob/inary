@@ -73,7 +73,7 @@ class ArchiveFileTestCase(unittest.TestCase):
         fileName = os.path.basename(ctx.spec.source.archiveUri)
         filePath = ctx.archives_dir() + '/' + fileName
 	achv = archive.Archive(filePath, ctx.spec.source.archiveType)
-	achv.unpack_file("sandbox/borek.cd")
+	achv.unpack_files(["sandbox/borek.cd"], targetDir)
 	assert pathexists(targetDir + "/sandbox")
 	testfile = targetDir + "/sandbox/borek.cs"
 	assert pathexists(testfile)
