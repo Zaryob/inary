@@ -53,9 +53,9 @@ class Files(XmlFile):
 
     def write(self, filename):
         self.newDOM()
-	document = self.dom.documentElement
+        document = self.dom.documentElement
         for x in self.list:
-	    document.appendChild(x.elt(self.dom))
-	self.writexml(filename)
+            document.appendChild(x.elt(self.dom))
+        self.writexml(filename)
             
 
