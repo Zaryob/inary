@@ -18,9 +18,20 @@ class UtilError(Exception):
 
 # string/list functions
 
+def concat(l):
+    """concatenate a list of lists"""
+    return reduce( lambda x,y: x+y, l )
+
 def strlist(l):
     """concatenate string reps of l's elements"""
     return string.join(map(lambda x: str(x) + ' ', l))
+
+def multisplit(str, chars):
+    """ split str with any of chars"""
+    l = [str]
+    for c in chars:
+        l = concat(map(lambda x:x.split(c), l))
+    return l
 
 def same(l):
     "check if all elements of a sequence are equal"

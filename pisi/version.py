@@ -1,8 +1,10 @@
 # version structure
 
+import util
+
 class Version:
     def __init__(self, verstring):
-        self.comps = verstring.split('.-')
+        self.comps = map(lambda x: int(x), util.multisplit(verstring,'.-'))
 
     def pred(self,rhs,pred):
         for i in range(0, len(comps)-1):

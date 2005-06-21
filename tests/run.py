@@ -14,12 +14,14 @@ def run_all():
     import archivetests
     import installdbtests
     import packagedbtests
+    import versiontests
 
     alltests = unittest.TestSuite((
 	specfiletests.suite,
 	contexttests.suite,
 	fetchertests.suite,
 	archivetests.suite,
+        versiontests.suite,
         installdbtests.suite,
         packagedbtests. suite
 	))
