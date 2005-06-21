@@ -7,13 +7,16 @@ from specfile import SpecFile
 
 class MetaData(SpecFile):
     """This is a superset of the source spec definition"""
+    def __init__(self):
+	XmlFile.__init__(self, "METADATA")
 
     def read(self, filename):
-        super(MetaData, self).read(filename)
-        distribution = self.getNodeText("Source/Distribution")
-        distributionRelease = self.getNodeText("Source/DistributionRelease")
-        architecture = self.getNodeText("Source/Architecture")
-        installedSize = int(self.getNodeText("Source/InstalledSize"))
+	self.readxml(filename)
+
+        self.distribution = self.getNodeText("Source/Distribution")
+        self.distributionRelease = self.getNodeText("Source/DistributionRelease")
+        self.architecture = self.getNodeText("Source/Architecture")
+        self.installedSize = self.getNodeText("Source/InstalledSize")
 
     def write(self, filename):
         ui.info("METADATA WRITE NOT IMPLEMENTED\n")

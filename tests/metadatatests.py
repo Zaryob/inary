@@ -13,5 +13,6 @@ class MetaDataTestCase(unittest.TestCase):
     def testReadWrite(self):
         md = metadata.MetaData()
         md.read('tests/sandbox/metadata.xml')
+	print md.installedSize
 
 suite = unittest.makeSuite(MetaDataTestCase)
