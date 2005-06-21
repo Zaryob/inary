@@ -3,6 +3,7 @@ import unittest
 import os
 
 from pisi import specfile
+from pisi.context import ctx
 
 class SpecFileTestCase(unittest.TestCase):
     def setUp(self):
