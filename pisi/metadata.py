@@ -13,18 +13,18 @@ class MetaData(SpecFile):
     def read(self, filename):
         self.readxml(filename)
 
-	getNodeText = self.getNodeText
+        getNodeText = self.getNodeText
 
-	self.name = getNodeText("Name")
-	# self.summary # birden fazla olabilir (tr, en) SummaryInfo
-	               # icerisine almakta yarar var. SpecFile'da da
-	               # bu sekilde bir duzenleme gerekiyor.
-	self.homepage = getNodeText("Homepage")
-	self.license = getNodeText("License")
+        self.name = getNodeText("Name")
+        # self.summary # birden fazla olabilir (tr, en) SummaryInfo
+        # icerisine almakta yarar var. SpecFile'da da
+        # bu sekilde bir duzenleme gerekiyor.
+        self.homepage = getNodeText("Homepage")
+        self.license = getNodeText("License")
 	
-	historyElts = self.getAllNodes("History/Update")
-	self.history = [HistoryInfo(x) for x in historyElts]
-	self.version = self.history[0].version
+        historyElts = self.getAllNodes("History/Update")
+        self.history = [HistoryInfo(x) for x in historyElts]
+        self.version = self.history[0].version
         self.release = self.history[0].release
 
         self.distribution = getNodeText("Distribution")
