@@ -37,7 +37,7 @@ def prefix(a, b):
     "check if sequence a is a prefix of sequence b"
     if len(a)>len(b):
         return False
-    for i in [0:len(a)-1):
+    for i in range(0,len(a)-1):
         if a[i]!=b[i]:
             return False
     return True
@@ -55,7 +55,7 @@ def commonprefix(l):
     returns a list of path components"""
     common = []
     comps = map(os.path.split, l)
-    for i in [0:min(len,l)-1]:
+    for i in range(0, min(len,l)-1):
         compi = map(lambda x: x[i], comps) # get ith slice
         if same(compi):
             common.append(compi[0])

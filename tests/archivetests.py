@@ -64,6 +64,19 @@ class ArchiveFileTestCase(unittest.TestCase):
 	testfile = targetDir + "/sandbox/deneme/hed"
 	assert islink(testfile)
 	
+    def testUnpackZipCond(self):
+	ctx = context.Context("tests/sandbox/sandbox.pspec")
+	fetch = fetcher.Fetcher(ctx)
+	fetch.fetch()
+	targetDir = ctx.pkg_work_dir()
+	assert ctx.spec.source.archiveType == "zip"
+        fileName = os.path.basename(ctx.spec.source.archiveUri)
+        filePath = ctx.archives_dir() + '/' + fileName
+	achv = archive.Archive(filePath, ctx.spec.source.archiveType)
+	achv.unpack_file("sandbox/borek.cd")
+	assert pathexists(targetDir + "/sandbox")
+	testfile = targetDir + "/sandbox/borek.cs"
+	assert pathexists(testfile)
 
 
 suite = unittest.makeSuite(ArchiveFileTestCase)

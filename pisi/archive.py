@@ -139,3 +139,6 @@ class Archive:
 
     def unpack(self, targetDir):
 	self.archive.unpack(targetDir)
+
+    def unpack_file(self, targetDir):
+	self.archive.unpack(targetDir)
