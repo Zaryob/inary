@@ -575,15 +575,29 @@ Dependency
 \series bold 
 Files
 \series default 
-: Pakedin kurulacak dosyalarýnýn bir listesini verir.
+: Pakedin kurulacak dosyalarýnýn tiplerini belirlemek için kullanýlýr.
+ Dosya tipleri ile ilgili bigi 
+\begin_inset LatexCommand \ref{FType}
+
+\end_inset 
+
+ kýsmýnda verilmiþtir.
 \begin_deeper 
 \layout Itemize
 
 
 \series bold 
-Path
-\series default 
-:
+Directory
+\layout Itemize
+
+
+\series bold 
+Wildcard
+\layout Itemize
+
+
+\series bold 
+File
 \end_deeper 
 \end_deeper 
 \end_deeper 
@@ -797,31 +811,33 @@ PISI
 
 
 \series bold 
-Type:
+Type
+\begin_inset LatexCommand \label{FType}
+
+\end_inset 
+
+:
 \series default 
  Dosyanýn tipini belirtir.
  Paket sisteme kurulduðunda, veritabanýna bu tip tanýmý ile iþaretlenerek
  yerleþtirilecektir.
- (binary, conf, lib, data gibi)
+ Bu tip tanýmlarý þunlardan birisi olabileceði gibi boþ da býrakýlabilir:
+ 
+\noun on 
+executable, conf, doc, sharedLib, localeData, programData, header
+\noun default 
+.
 \layout Itemize
 
 
 \series bold 
-Size: 
+Hash: Path
 \series default 
-Dosyanin byte cinsinden boyutunu belirtir.
-\layout Itemize
-
-
-\series bold 
-MD5Sum: Path
-\series default 
- ile belirtilen dosyanýn 
+ ile belirtilen dosyanýn SHA1 algoritmasý ile elde edilmiþ 
 \emph on 
 cryptographic hash
 \emph default 
  deðerini verir.
- (Bunu SHA1 ile degistirelim -- Eray)
 \end_deeper 
 \end_deeper 
 \layout Standard
@@ -1587,7 +1603,7 @@ fileutils (stat, vb.
 DepSolver (baðýmlýlýk çözümleyici)
 \layout Itemize
 
-Fetcher (curl)
+Fetcher
 \layout Itemize
 
 ActionExec (Action betiklerinin çalýþtýrýlmasý)
@@ -1612,19 +1628,4 @@ files.xml dosyasýný/dosyalarýný oluþturacak.
 \layout Itemize
 
 libpisi kullanarak paket oluþturacak.
-\layout Section
-
-Diðer
-\layout Standard
-
-PÝSÝ C++ ile yazýlacak
-\layout Standard
-
-XML iþlemleri için xerces-c kütüphanesi kullanýlacak.
-\layout Standard
-
-berkleyDB
-\layout Standard
-
-libcurlpp
 \the_end
