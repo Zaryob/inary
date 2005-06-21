@@ -14,10 +14,20 @@ Legend:
 1. Pre-Alpha
 
  + implement reading spec file
- / implement install database
+ + implement writing
+   / files
+   - specfile
+   - metadata
+ / implement package module
+   / extraction
+   - add file / compression
+   - unit test
+ + implement install database
+ / implement package database
+ - implement source database
+ / implement dependency analysis
  ? transaction/locking for database
 
 2. Alpha
 
 3. Beta
-
