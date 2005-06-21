@@ -40,48 +40,48 @@ class Constants:
 class Context(object):
     """Config/Context Singleton"""
     class __impl:
-    def __init__(self):
-	    self.const = Constants()
-	    # self.c.destdir = ''       # install default to root by default
-	    self.destdir = './tmp'    # only for ALPHA
-	    # the idea is that destdir can be set with --destdir=...
+        def __init__(self):
+    	    self.const = Constants()
+    	    # self.c.destdir = ''       # install default to root by default
+    	    self.destdir = './tmp'    # only for ALPHA
+    	    # the idea is that destdir can be set with --destdir=...
 
-    def setSpecFile(self, pspecfile):
-	    self.pspecfile = pspecfile
-	    spec = SpecFile()
-	    spec.read(pspecfile)
-	    spec.verify()	# check pspec integrity
-	    self.spec = spec
+        def setSpecFile(self, pspecfile):
+    	    self.pspecfile = pspecfile
+    	    spec = SpecFile()
+    	    spec.read(pspecfile)
+    	    spec.verify()	# check pspec integrity
+    	    self.spec = spec
 
-        # directory accessor functions
-        # here is how it goes
-        # x_dir: system wide directory for storing info type x
-        # pkg_x_dir: per package directory for storing info type x
+            # directory accessor functions
+            # here is how it goes
+            # x_dir: system wide directory for storing info type x
+            # pkg_x_dir: per package directory for storing info type x
 
-    def lib_dir(self):
-	    return self.destdir + self.const.lib_dir_suffix
+        def lib_dir(self):
+    	    return self.destdir + self.const.lib_dir_suffix
 
-    def db_dir(self):
-	    return self.destdir + self.const.db_dir_suffix
+        def db_dir(self):
+    	    return self.destdir + self.const.db_dir_suffix
 
-    def archives_dir(self):
-	    return self.destdir + self.const.archives_dir_suffix
+        def archives_dir(self):
+    	    return self.destdir + self.const.archives_dir_suffix
 	
-    def tmp_dir(self):
-	    return self.destdir + self.const.tmp_dir_suffix
+        def tmp_dir(self):
+    	    return self.destdir + self.const.tmp_dir_suffix
 
-    def pkg_dir(self):
-	    packageDir = self.spec.source.name + '-' \
-		+ self.spec.source.version + '-' + self.spec.source.release
+        def pkg_dir(self):
+    	    packageDir = self.spec.source.name + '-' \
+	    	+ self.spec.source.version + '-' + self.spec.source.release
 
-	    return self.destdir + self.const.tmp_dir_suffix \
-		+ '/' + packageDir
+            return self.destdir + self.const.tmp_dir_suffix \
+            + '/' + packageDir
 	
-    def pkg_work_dir(self):
-	    return self.pkg_dir() + self.const.work_dir_suffix
+        def pkg_work_dir(self):
+    	    return self.pkg_dir() + self.const.work_dir_suffix
 
-    def pkg_install_dir(self):
-	    return self.pkg_dir() + self.const.install_dir_suffix
+        def pkg_install_dir(self):
+    	    return self.pkg_dir() + self.const.install_dir_suffix
 
     __instance = __impl()
 
