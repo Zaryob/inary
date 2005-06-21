@@ -60,27 +60,27 @@ class SpecFile(XmlFile):
 
         self.source = SourceInfo()
         self.source.name = self.getChildText("Source/Name")
-	archiveNode = self.getNode("Source/Archive")
+        archiveNode = self.getNode("Source/Archive")
         self.source.archiveUri = getNodeText(archiveNode).strip()
-	self.source.archiveName = basename(self.source.archiveUri)
-	self.source.archiveType = getNodeAttribute(archiveNode, "archType")
-	self.source.archiveSHA1 = getNodeAttribute(archiveNode, "sha1sum")
+        self.source.archiveName = basename(self.source.archiveUri)
+        self.source.archiveType = getNodeAttribute(archiveNode, "archType")
+        self.source.archiveSHA1 = getNodeAttribute(archiveNode, "sha1sum")
         patchElts = self.getChildElts("Source/Patches")
-	if patchElts:
-	    self.source.patches = [PatchInfo(p) for p in patchElts]
+        if patchElts:
+            self.source.patches = [PatchInfo(p) for p in patchElts]
 
         buildDepElts = self.getChildElts("Source/BuildDependencies")
-	if buildDepElts:
-	    self.source.buildDeps = [DepInfo(d) for d in buildDepElts]
+        if buildDepElts:
+            self.source.buildDeps = [DepInfo(d) for d in buildDepElts]
 
         historyElts = self.getAllNodes("History/Update")
         self.source.history = [HistoryInfo(x) for x in historyElts]
 
-	# As we have no Source/Version tag we need to get 
-	# the last version and release information
-	# from the first child of History/Update. And it works :)
-	self.source.version = self.source.history[0].version
-	self.source.release = self.source.history[0].release
+        # As we have no Source/Version tag we need to get 
+        # the last version and release information
+        # from the first child of History/Update. And it works :)
+        self.source.version = self.source.history[0].version
+        self.source.release = self.source.history[0].release
 
         # find all binary packages
         packageElts = self.getAllNodes("Package")
@@ -102,11 +102,11 @@ class MetaData(SpecFile):
     """This is a superset of the source spec definition"""
 
     def read(self, filename):
-	super(MetaData, self).read(filename)
-	distribution = self.getNodeText("Source/Distribution")
-	distributionRelease = self.getNodeText("Source/DistributionRelease")
-	architecture = self.getNodeText("Source/Architecture")
-	installSize = int(self.getNodeText("Source/InstallSize"))
+        super(MetaData, self).read(filename)
+        distribution = self.getNodeText("Source/Distribution")
+        distributionRelease = self.getNodeText("Source/DistributionRelease")
+        architecture = self.getNodeText("Source/Architecture")
+        installSize = int(self.getNodeText("Source/InstallSize"))
 
     def write(self, filename):
         ui.info("METADATA WRITE NOT IMPLEMENTED\n")
