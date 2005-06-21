@@ -126,7 +126,7 @@ class PisiBuild:
 			depth = len(path.pathname)
 			ftype = path.fileType
 	    print fpath, ftype, fsize, fhash
-            files.list.append(FileInfo(fpath, ftype, fsize, fhash))
+            files.append(FileInfo(fpath, ftype, fsize, fhash))
         files.write(os.path.join(self.ctx.pkg_work_dir(),"files.xml"))
 
     def buildPackages(self):

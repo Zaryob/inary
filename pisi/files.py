@@ -1,5 +1,8 @@
  # class for files.xml
 
+import xmlfile
+from xmlfile import XmlFile
+
 
 class FileInfo:
     
@@ -42,6 +45,10 @@ class Files(XmlFile):
     
     def __init__(self):
         XmlFile.__init__(self, "Files")
+        self.list = []
+
+    def append(self, fileinfo):
+        self.list.append(fileinfo)
 
     def read(self, filename):
         self.readxml(filename)
@@ -51,7 +58,8 @@ class Files(XmlFile):
 
     def write(self, filename):
         self.newDOM()
+        print list
         for x in list:
-            self.appendChild(x.elt(self.dom))
+            self.dom.appendChild(x.elt(self.dom))
             
 

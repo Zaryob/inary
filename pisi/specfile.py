@@ -4,6 +4,7 @@
 import xml.dom.minidom
 from xmlfile import *
 from os.path import basename
+from ui import ui
 
 class PatchInfo:
     def __init__(self, filenm, ctype):
@@ -108,7 +109,7 @@ class MetaData(SpecFile):
 	installSize = int(self.getNodeText("Source/InstallSize"))
 
     def write(self, filename):
-        ui.info("METADATA WRITE NOT IMPLEMENTED")
+        ui.info("METADATA WRITE NOT IMPLEMENTED\n")
         pass
 
     def verify():
