@@ -21,7 +21,7 @@ def getNodeText(node):
     except IndexError:
         return None
     except AttributeError: # no node by that name
-	return None
+        return None
     if child.nodeType == child.TEXT_NODE:
         return child.data
     else:
@@ -132,7 +132,7 @@ class XmlFile(object):
         self.dom.unlink()
 
     def readxml(self, fileName):
-	self.dom = mdom.parse(fileName)
+        self.dom = mdom.parse(fileName)
 
     def writexml(self, fileName):
         f = file(fileName,'w')
@@ -143,12 +143,12 @@ class XmlFile(object):
             raise XmlError("Root tagname not " + self.rootTag + " as expected")
 
     def getNode(self, tagPath):
-	"""returns the *first* matching node for given tag path."""
+        """returns the *first* matching node for given tag path."""
         self.verifyRootTag()
         return getNode(self.dom.documentElement, tagPath)
 
     def getAllNodes(self, tagPath):
-	"""returns all nodes matching a given tag path."""
+        """returns all nodes matching a given tag path."""
         self.verifyRootTag()
         return getAllNodes(self.dom.documentElement, tagPath)
 
@@ -168,14 +168,14 @@ class XmlFile(object):
     def getChildElts(self, tagpath):
         """ returns the children of the given path, only with given type """
         node = self.getNode(tagpath)
-	try:
-	    return filter(lambda x:x.nodeType == x.ELEMENT_NODE, node.childNodes)
-	except AttributeError:
-	    return None
+        try:
+            return filter(lambda x:x.nodeType == x.ELEMENT_NODE, node.childNodes)
+        except AttributeError:
+            return None
 
     def getChildText(self, tagpath):
-	node = self.getNode(tagpath)
-	if not node:
-	    return None
-	return getNodeText(node)
+        node = self.getNode(tagpath)
+        if not node:
+            return None
+        return getNodeText(node)
 
