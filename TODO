@@ -16,12 +16,16 @@ Legend:
  + implement reading spec file
  + implement writing
    / files
-   - specfile
    - metadata
+ + implement Actions API framework
+   / sample api modules (autotools)
+   - unit test
+ + implement source building
  / implement package module
    / extraction
    - add file / compression
    - unit test
+ / implement package creation
  + implement install database
  / implement package database
  - implement source database
@@ -29,5 +33,6 @@ Legend:
  ? transaction/locking for database
 
 2. Alpha
+ - implement writing specfile
 
 3. Beta
