@@ -16,6 +16,53 @@ class FileError(Exception):
 class UtilError(Exception):
     pass
 
+# string/list functions
+
+def strlist(l):
+    """concatenate string reps of l's elements"""
+    return string.join(map(lambda x: str(x) + ' ', l))
+
+def same(l):
+    "check if all elements of a sequence are equal"
+    if len(l)==0:
+        return True
+    else:
+        last = l.pop()
+        for x in l:
+            if x!=last:
+                return False
+        return True
+
+def prefix(a, b):
+    "check if sequence a is a prefix of sequence b"
+    if len(a)>len(b):
+        return False
+    for i in [0:len(a)-1):
+        if a[i]!=b[i]:
+            return False
+    return True
+    
+# path functions
+
+# I'm not sure how necessary this is. Ahem.
+def commonprefix(l):
+    """an improved version of os.path.commonprefix,
+    returns a list of path components"""
+    common = []
+    comps = map(os.path.split, l)
+    for i in [0:min(len,l)-1]:
+        compi = map(lambda x: x[i], comps) # get ith slice
+        if same(compi):
+            common.append(compi[0])
+    return common
+
+# but this one is necessary
+def under_path(a, b):
+    """find if path a is a descendant of b in the directory tree"""
+    return prefix(os.path.split(a), os.path.split(b))
+
+# file/dir functions
+
 def check_file(file, mode = os.F_OK):
     "shorthand to check if a file exists"
     if not os.access(file, mode):
@@ -92,10 +139,6 @@ def run_batch(cmd):
     if not successful:
       ui.error('ERROR: executing command: ' + cmd + '\n' + strlist(lines))
     return (successful,lines)
-
-def strlist(l):
-    """concatenate string reps of l's elements"""
-    return string.join(map(lambda x: str(x) + ' ', l))
 
 def do_patch(patch, p=0):
     """simple function to apply patches.."""
