@@ -1,5 +1,5 @@
 
-import ui
+from ui import ui
 
 from xmlfile import *
 import specfile
