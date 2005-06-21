@@ -99,11 +99,10 @@ def check_dir(dir):
 def clean_dir(top):
     "Remove all content of a directory (top)"
     for root, dirs, files in os.walk(top, topdown=False):
-	for name in files:
-	    os.remove(os.path.join(root, name))
-	for name in dirs:
-	    os.rmdir(os.path.join(root, name))
-
+        for name in files:
+            os.remove(os.path.join(root, name))
+        for name in dirs:
+            os.rmdir(os.path.join(root, name))
 
 def dir_size(dir):
     """ calculate the size of files under a dir
@@ -116,7 +115,7 @@ def dir_size(dir):
     join = os.path.join
     def sizes():
         for root, dirs, files in os.walk(dir):
-	    yield sum([getsize(join(root, name)) for name in files])
+            yield sum([getsize(join(root, name)) for name in files])
     return sum( sizes() )
 
 def copy_file(src,dest):
@@ -132,9 +131,9 @@ def copy_file(src,dest):
 
 def get_file_hashes(top):
     for root, dirs, files in os.walk(top, topdown=False):
-	for file in files:
-	    f = os.path.join(root, file)
-	    yield (f, sha1_file(f))
+        for file in files:
+            f = os.path.join(root, file)
+            yield (f, sha1_file(f))
 
 def copy_dir(src, dest):
     """copy source dir to destination dir recursively"""
