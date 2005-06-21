@@ -11,7 +11,7 @@ import util
 from ui import ui
 from context import ctx
 from sourcearchive import SourceArchive
-from files import Files
+from files import Files, FileInfo
 from specfile import SpecFile, MetaData
 
 class PisiBuildError(Exception):
@@ -112,19 +112,22 @@ class PisiBuild:
     def genFilesXml(self, package):
 	# the worst function in this project!
 	# just testing...
+        files = Files()
 	install_dir = self.ctx.pkg_install_dir()
 	for fpath, fhash in util.get_file_hashes(install_dir):
 	    # get the relative path
 	    fpath = fpath[len(install_dir):]
-
 	    depth = 0
 	    ftype = ""
+            fsize = 0
 	    for path in package.paths:
 		if fpath.startswith(path.pathname):
 		    if depth < len(path.pathname):
 			depth = len(path.pathname)
 			ftype = path.fileType
-	    print fpath, ftype, fhash
+	    print fpath, ftype, fsize, fhash
+            files.list.append(FileInfo(fpath, ftype, fsize, fhash))
+        files.write(os.path.join(self.ctx.pkg_work_dir(),"files.xml"))
 
     def buildPackages(self):
         for package in self.spec.packages:

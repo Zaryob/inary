@@ -3,7 +3,18 @@
 
 class FileInfo:
     
-    def __init__(self, node):
+    def __init__(self, _path = "", _type = "", _size = 0, _hash = ""):
+        self.path = _path
+        self.type = _type
+        self.size = _size
+        self.hash = _hash
+
+    def readnew(node):
+        f = FileInfo()
+        f.read(node)
+        return f
+
+    def read(self, node):
         self.path = getNodeText(getNode(node, "Path"))
         self.type = getNodeText(getNode(node, "Type"))
         self.size = int(getNodeText(getNode(node, "Size")))
@@ -36,7 +47,7 @@ class Files(XmlFile):
         self.readxml(filename)
 
         fileElts = getAllNodes(node, "File")
-        self.list = [FileInfo(x) for x in fileElts]
+        self.list = [FileInfo.readnew(x) for x in fileElts]
 
     def write(self, filename):
         self.newDOM()
