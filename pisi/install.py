@@ -11,14 +11,16 @@ import packagedb
 import dependency
 #import conflicts
 
-##TODO: bunu muhtemelen ops diye bir module'e tasimak
+##TODO: Caglar'in onerisi uzerine.
+##bunu PisiBuild gibi class yapalim. Asagida yazdigim
+##gibi bir test edip nerelere extend edecek ama gorelim
+##lutfen. daha hic calismadi bile. :/
+
+##alternatif olarak bunu muhtemelen ops diye bir module'e
+##tasimak
 ##daha iyi olabilir. install/remove/upgrade islemlerinin
 ##oldugu, ya da boyle ayrik kalabilir, ne ne kadar tutuyor
-##daha belli degil.... --eray
-
-##eger bu kod gercekten buyurse bir takim non-trivial
-##kisimlara ayrilirsa o zaman class yapariz. simdilik
-##boyle kalsin da hepsini gorelim algoritmanin -- eray
+##daha belli degil...
 
 class InstallError(Exception):
     pass
