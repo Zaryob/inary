@@ -43,6 +43,6 @@ colors = {'black'              : "\033[30m",
 
 def colorize(msg, color):
     if colors.has_key(color):
-	return colors[color] + msg + colors['default']
+        return colors[color] + msg + colors['default']
     else:
-	return msg
+        return msg
