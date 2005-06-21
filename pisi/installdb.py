@@ -58,8 +58,7 @@ def purge(pkg):
     if d.has_key(pkg):
         (status, version, release) = d[pkg]
         f = files_name(pkg, version, release)
-    if util.check_file(f):
-	    os.unlink(f)
-    del d[pkg]
-
+        if util.check_file(f):
+	        os.unlink(f)
+        del d[pkg]
 
