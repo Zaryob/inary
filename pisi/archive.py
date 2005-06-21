@@ -59,11 +59,12 @@ class ArchiveZip(ArchiveBase):
 
     def unpack_file_cond(self, pred, targetDir, archiveRoot=''):
         """ unpack file according to predicate function filename -> bool"""
-	super(ArchiveTarFile, self).unpack(targetDir)
-
+	super(ArchiveZip, self).unpack(targetDir)
         zip = zipfile.ZipFile(self.filePath, 'r')
         for file in zip.namelist():
             if pred(file):              # check if condition holds
+
+                # calculate output file name
                 if archiveRoot!='':
                     # change archiveRoot
                     if util.subpath(archiveRoot, file):
@@ -71,9 +72,20 @@ class ArchiveZip(ArchiveBase):
                     else:
                         continue        # don't extract if not under
                 ofile = os.path.join(targetDir, file)
-                if os.path.isdir(ofile):
+
+                # a directory is present. lets continue
+                if ofile[len(ofile)-1]=='/':
                     continue
+
+                # check that output dir is present
                 util.check_dir(os.path.dirname(ofile))
+
+                # O.K. we know following line is dull. What we wanted to
+                # do was to compare the equality to 0xa0000000. But there
+                # is a known problem in Python regarding the hex/oct
+                # constants. Please see Guido's explanation at
+                # http://mail.python.org/pipermail/python-dev/2003-February/033029.html
+                info = zip.getinfo(file)
                 if hex(info.external_attr)[2] == 'A':
                     target = zip.read(file)
                     os.symlink(target, ofile)
@@ -85,41 +97,14 @@ class ArchiveZip(ArchiveBase):
         zip.close()
 
     def unpack_files(self, paths, targetDir):
-        self.unpack_file_cond(self, lambda f:f in paths, targetDir)
+        self.unpack_file_cond(lambda f:f in paths, targetDir)
 
     def unpack_dir(self, path, targetDir):
-        self.unpack_file_cond(self, lambda f:util.subpath(path,f), targetDir)
+        self.unpack_file_cond(lambda f:util.subpath(path,f), targetDir)
 
     def unpack(self, targetDir):
-	super(ArchiveZip, self).unpack(targetDir)
-
-        zip = zipfile.ZipFile(self.filePath, 'r')
-        for file in zip.namelist():
-            ofile = self.targetDir + '/' + file
-
-	    # a directory is present. lets continue
-	    if os.path.isdir(ofile):
-		continue
-	    # do we need to create parent directory for our file?
-            if not os.path.exists(os.path.dirname(ofile)):
-                os.mkdir(ofile)
-                continue
-            info = zip.getinfo(file)
-	    # O.K. we know following line is dull. What we wanted to
-	    # do was to compare the equality to 0xa0000000. But there
-	    # is a known problem in Python regarding the hex/oct
-	    # constants. Please see Guido's explanation at
-	    # http://mail.python.org/pipermail/python-dev/2003-February/033029.html
-	    if hex(info.external_attr)[2] == 'A':
-                target = zip.read(file)
-		os.symlink(target, ofile)
-            else:
-                buff = open (ofile, 'wb')
-                fileContent = zip.read(file)
-                buff.write(fileContent)
-                buff.close()
-
-        zip.close()
+        self.unpack_file_cond(lambda f: True, targetDir)
+        return 
                 
 class Archive:
     """Unpack magic for Archive files..."""
