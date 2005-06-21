@@ -13,10 +13,12 @@ class MetaData(SpecFile):
     def read(self, filename):
 	self.readxml(filename)
 
-        self.distribution = self.getNodeText("Source/Distribution")
-        self.distributionRelease = self.getNodeText("Source/DistributionRelease")
-        self.architecture = self.getNodeText("Source/Architecture")
-        self.installedSize = self.getNodeText("Source/InstalledSize")
+        self.distribution = self.getNodeText("Distribution")
+        self.distributionRelease = self.getNodeText("DistributionRelease")
+        self.architecture = self.getNodeText("Architecture")
+	size = self.getNodeText("InstalledSize")
+	if size:
+	    self.installedSize = int(size)
 
     def write(self, filename):
         ui.info("METADATA WRITE NOT IMPLEMENTED\n")
