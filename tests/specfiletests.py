@@ -1,9 +1,10 @@
 
 import unittest
+import os
 
 from pisi import specfile
 
-class SpecReadTestCase(unittest.TestCase):
+class SpecFileTestCase(unittest.TestCase):
     def setUp(self):
         self.spec = specfile.SpecFile()
         self.spec.read("samples/popt/popt.pspec")
@@ -27,4 +28,8 @@ class SpecReadTestCase(unittest.TestCase):
     def testLenPackages(self):
         self.assertEqual(len(self.spec.packages), 1)
 
-suite = unittest.makeSuite(SpecReadTestCase)
+    def testCopy(self):
+	self.spec.read("samples/popt/popt.pspec")
+	self.spec.write(os.path.join(ctx.tmp_dir(), 'popt-copy.pspec'))
+
+suite = unittest.makeSuite(SpecFileTestCase)

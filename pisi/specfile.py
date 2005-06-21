@@ -95,25 +95,5 @@ class SpecFile(XmlFile):
     def write(self, filename):
         """Write PSPEC file"""
         self.newDOM()
-        ##TODO: write the good stuff here
+        self.addNodeText("Source/Name", source.name)
         self.writexml(filename)
-
-class MetaData(SpecFile):
-    """This is a superset of the source spec definition"""
-
-    def read(self, filename):
-        super(MetaData, self).read(filename)
-        distribution = self.getNodeText("Source/Distribution")
-        distributionRelease = self.getNodeText("Source/DistributionRelease")
-        architecture = self.getNodeText("Source/Architecture")
-        installSize = int(self.getNodeText("Source/InstallSize"))
-
-    def write(self, filename):
-        ui.info("METADATA WRITE NOT IMPLEMENTED\n")
-        pass
-
-    def verify():
-        if len(packages) != 1:
-            return False
-        return True
-

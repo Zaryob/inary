@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<PSPEC>
+
+  <Source>
+    <Name>sandbox</Name>
+    <Homepage>http://cekirdek.uludag.org.tr/~meren/</Homepage>
+    <Packager>
+      <Name>Meral</Name>
+      <Email>meren@uludag.org.tr</Email>
+    </Packager>
+    <License>As-Is</License>
+    <Archive archType="zip" sha1sum="b1e61fe4a840fbe624a01136e33343cdd1b0bf06">
+        http://cekirdek.uludag.org.tr/~meren/sandbox.zip
+    </Archive>
+    <History>
+      <Update>
+	<Date>06/15/2005</Date>
+	<Version>0.1</Version>
+	<Release>1</Release>
+      </Update>
+    </History>
+  <Distribution>Pardus</Distribution>
+  <DistributionRelease>0.1</DistributionRelease>
+  </Source>
+
+  <Package>
+    <Name>sandbox</Name>
+    <Summary lang="tr">Bla</Summary>
+    <Category>temprorary:zip</Category>
+    <Architecture>x86</Architecture>
+    <InstalledSize>40500</InstalledSize>
+  </Package>
+
+</PSPEC>

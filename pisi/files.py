@@ -57,5 +57,3 @@ class Files(XmlFile):
         for x in self.list:
             document.appendChild(x.elt(self.dom))
         self.writexml(filename)
-            
-

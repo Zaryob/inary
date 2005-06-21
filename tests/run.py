@@ -9,6 +9,7 @@ runTestSuite = lambda(x): unittest.TextTestRunner(verbosity=2).run(x)
 def run_all():
     
     import specfiletests
+    import metadatatests
     import contexttests
     import fetchertests
     import archivetests
@@ -18,12 +19,14 @@ def run_all():
     
     alltests = unittest.TestSuite((
 	specfiletests.suite,
+	specfiletests.suite,
+        metadatatests.suite,
 	contexttests.suite,
 	fetchertests.suite,
 	archivetests.suite,
-    installdbtests.suite,
-    packagedbtests.suite,
-    actionsapitests.suite
+        installdbtests.suite,
+        packagedbtests.suite,
+        actionsapitests.suite
 	))
 
     runTestSuite(alltests)

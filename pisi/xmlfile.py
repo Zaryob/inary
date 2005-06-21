@@ -9,13 +9,14 @@ class XmlError(Exception):
 # static functions
 
 def getNodeAttribute(node, attrname):
+    """get named attribute from DOM node"""
     for i in range(node.attributes.length):
         attr = node.attributes.item(i)
         if attr.name == attrname:
             return attr.childNodes[0].data
 
 def getNodeText(node):
-    # get the first child
+    """get the first child and expect it to be text!"""
     try:
         child = node.childNodes[0]
     except IndexError:
@@ -28,6 +29,7 @@ def getNodeText(node):
         raise XmlError("getNodeText: Expected text node, got something else!")
 
 def getChildText(node_s, tagpath):
+    """get the text of a child at the end of a tag path"""
     node = getNode(node_s, tagpath)
     if not node:
         return None
@@ -84,22 +86,29 @@ def getAllNodes(node, tagPath):
     return nodeList
 
 
-def appendTagPath(node, tagpath, child):
-    """append child at the end of a tag chain"""
+def appendTagPath(dom, node, tagpath, child):
+    """append child at the end of a tag chain starting from node"""
     for tag in tagpath[0:len(tagpath)-1]:
-        node = node.appendChild(createElement())
+        node = node.appendChild(dom.createElement(tag))
     node.appendChild(child)
 
-def putNode(node, tagpath, newnode):
+def addNode(dom, node, tagpath, newnode):
     tags = tagpath.split('/')
+    assert len(tags)>0
 
     # iterative code to search for the path
         
     # get DOM for top node
     nodeList = node.getElementsByTagName(tags[0])
-    if len(nodeList) == 0:
-        appendTagPath(node, tagpath, newnode)
 
+    print 'tags', tagpath
+    print '****', nodeList
+    
+    if len(nodeList) == 0:
+        print 'SIFIR'
+        appendTagPath(dom, node, tagpath, newnode)
+        return
+    
     node = nodeList[0]              # discard other matches
     tags.pop(0)
     while len(tags)>0:
@@ -129,6 +138,7 @@ class XmlFile(object):
         self.dom = impl.createDocument(None, self.rootTag, None)
 
     def unlink(self):
+        """deallocate DOM structure"""
         self.dom.unlink()
 
     def readxml(self, fileName):
@@ -142,10 +152,26 @@ class XmlFile(object):
         if self.dom.documentElement.tagName != self.rootTag:
             raise XmlError("Root tagname not " + self.rootTag + " as expected")
 
+    def newNode(self, tag):
+        return self.dom.createElement(tag)
+
+    def newTextNode(self, text):
+        return self.dom.createTextNode(text)
+
+    def newAttribute(self, name):
+        return self.dom.createAttribute(name)
+
+    # read helpers
+
     def getNode(self, tagPath):
         """returns the *first* matching node for given tag path."""
         self.verifyRootTag()
         return getNode(self.dom.documentElement, tagPath)
+
+    def getNodeText(self, tagPath):
+	"""returns the text of *first* matching node for given tag path."""
+        self.verifyRootTag()
+        return getNodeText(getNode(self.dom.documentElement, tagPath))
 
     def getAllNodes(self, tagPath):
         """returns all nodes matching a given tag path."""
@@ -179,3 +205,17 @@ class XmlFile(object):
             return None
         return getNodeText(node)
 
+    # write helpers
+
+    def addNode(self, tagPath, newnode):
+        self.verifyRootTag()
+        return addNode(self.dom, self.dom.documentElement, tagPath, newnode)
+
+    def addText(self, node, text):
+        node.appendChild(self.newTextNode(text))
+
+    def addNodeText(self, tagPath, text):
+        node = self.addNode(tagPath, self.newTextNode(text))
+        return node
+
+        
