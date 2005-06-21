@@ -18,16 +18,16 @@ def run_all():
     import actionsapitests
     
     alltests = unittest.TestSuite((
-    specfiletests.suite,
-    specfiletests.suite,
-    metadatatests.suite,
-    contexttests.suite,
-    fetchertests.suite,
-    archivetests.suite,
-    installdbtests.suite,
-    packagedbtests.suite,
-    actionsapitests.suite
-    ))
+	    specfiletests.suite,
+	    specfiletests.suite,
+	    metadatatests.suite,
+	    contexttests.suite,
+	    fetchertests.suite,
+	    archivetests.suite,
+	    installdbtests.suite,
+	    packagedbtests.suite,
+	    actionsapitests.suite
+	    ))
 
     runTestSuite(alltests)
 
