@@ -110,8 +110,8 @@ class Archive:
     """Unpack magic for Archive files..."""
 
     def __init__(self, filepath, type):
-	"""accepted archive types:
-	targz, tarbz2, zip, tar"""
+        """accepted archive types:
+        targz, tarbz2, zip, tar"""
 
         handlers = {
             'targz': ArchiveTarFile, 
