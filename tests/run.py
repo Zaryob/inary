@@ -14,7 +14,7 @@ def run_all():
     import archivetests
     import installdbtests
     import packagedbtests
-    import actionsapitest
+    import actionsapitests
     
     alltests = unittest.TestSuite((
 	specfiletests.suite,
