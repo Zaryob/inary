@@ -97,4 +97,6 @@ class SpecFile(XmlFile):
         self.newDOM()
         self.addNodeText("Source/Name", self.source.name)
         archiveNode = self.addNode("Source/Archive")
+        archiveNode.setAttribute("archType", self.source.archiveType)
+        archiveNode.setAttribute("sha1sum", self.source.archiveSHA1)
         self.writexml(filename)

@@ -87,43 +87,51 @@ def getAllNodes(node, tagPath):
     return nodeList
 
 
-def appendTagPath(dom, node, tagpath, child = None):
-    """append child at the end of a tag chain starting from node"""
-    for tag in tagpath[0:len(tagpath)-1]:
+def createTagPath(dom, node, tags):
+    """create new child at the end of a tag chain starting from node
+    no matter what"""
+    if len(tags)==0:
+        return node
+    for tag in tags:
         node = node.appendChild(dom.createElement(tag))
-    if child:
-        return node.appendChild(child)
+    return node
+
+def addTagPath(dom, node, tags, newnode=None):
+    """add newnode at the end of a tag chain, smart one"""
+    if newnode:                     # node to add specified
+        last = len(newnode)-1
+        if last >= 0:
+            node = createTagPath(dom, node, tags[0:last])
+            node.appendChild(newnode)
+        else:
+            raise XmlError("addNodePath: not enough tags")
     else:
-        return node.appendChild(dom.createElement(tag))
+        return createTagPath(dom, node, tags)
 
 def addNode(dom, node, tagpath, newnode = None):
     """add a new node at the end of the tree"""
     
-    tags = tagpath.split('/')
-    assert len(tags)>0
+    tags = tagpath.split('/')           # tag chain
+    assert len(tags)>0                  # we want a chain
 
     # iterative code to search for the path
         
     # get DOM for top node
     nodeList = node.getElementsByTagName(tags[0])
-
-    print 'tags', tagpath
-    print '****', nodeList
     
     if len(nodeList) == 0:
-        print 'SIFIR'
-        return appendTagPath(dom, node, tagpath, newnode)
+        return addTagPath(dom, node, tags, newnode)
     
-    node = nodeList[0]              # discard other matches
+    node = nodeList[len(nodeList)-1]              # discard other matches
     tags.pop(0)
     while len(tags)>0:
         tag = tags.pop(0)
         nodeList = node.getElementsByTagName(tag)
-        if len(nodeList) == 0:
-            tags = tag.insert(0)
-            return appendTagPath(node, tags, newnode)
+        if len(nodeList) == 0:          # couldn't find
+            tags.insert(0, tag)         # put it back in
+            return addTagPath(dom, node, tags, newnode)
         else:
-            node = nodeList[0]
+            node = nodeList[len(nodeList)-1]
 
     return node
 
