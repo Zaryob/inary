@@ -2,11 +2,12 @@
 from ui import ui
 
 from xmlfile import *
-import specfile
 from specfile import *
 
-class MetaData(SpecFile):
-    """This is a superset of the source spec definition"""
+
+class MetaData(XmlFile):
+    """Package metadata. Metadata is composed of Specfile and various
+other information."""
     def __init__(self):
         XmlFile.__init__(self, "METADATA")
 
@@ -17,8 +18,8 @@ class MetaData(SpecFile):
 
         self.name = getNodeText("Name")
         # self.summary # birden fazla olabilir (tr, en) SummaryInfo
-        # icerisine almakta yarar var. SpecFile'da da
-        # bu sekilde bir duzenleme gerekiyor.
+                       # icerisine almakta yarar var. SpecFile'da da
+                       # bu sekilde bir duzenleme gerekiyor.
         self.homepage = getNodeText("Homepage")
         self.license = getNodeText("License")
 	
