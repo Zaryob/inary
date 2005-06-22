@@ -96,33 +96,37 @@ class PisiBuild:
             locals[func]()
         
     def genMetaDataXml(self, package):
-        #test
         metadata = MetaData()
 
-        createElement = metadata.dom.createElement
-        createTextNode = metadata.dom.createTextNode
+        def createElt(tagName, text):
+            createElement = metadata.dom.createElement
+            createTextNode = metadata.dom.createTextNode
+            elt = createElement(tagName)
+            elt.appendChild(createTextNode(text))
+            return elt
 
-        elt = createElement("Distribution")
-        elt.appendChild(createTextNode(self.ctx.const.distribution))
-        metadata.appendElement(elt)
-
-        elt = createElement("DistrubutionRelease")
-        elt.appendChild(createTextNode(self.ctx.const.distributionRelease))
-        metadata.appendElement(elt)
-
-        elt = createElement("Architecture")
-        elt.appendChild(createTextNode("Any")) # FIXME
-        metadata.appendElement(elt)
-
+        metadata.appendElement(createElt("Name",
+                                         package.name))
+        metadata.appendElement(createElt("Summary",
+                                         package.summary))
+        metadata.appendElement(createElt("Description",
+                                         package.description))
+        metadata.appendElement(createElt("License",
+                                         self.spec.source.license))
+        metadata.appendElement(createElt("Distribution",
+                                         self.ctx.const.distribution))
+        metadata.appendElement(createElt("DistributionRelease",
+                                         self.ctx.const.distributionRelease))
+        metadata.appendElement(createElt("Architecture",
+                                         "Any")) # FIXME
         # FIXME: Bu hatalı. installsize'ı almak için tüm
         # pkg_install_dir()'ın boyutunu hesaplayamayız. Bir source
         # birden fazla kaynak üretebilir. package.paths ile
         # karşılaştırarak file listesinden boyutları hesaplatmalıyız.
         d = self.ctx.pkg_install_dir()
         size = util.dir_size(d)
-        elt = createElement("InstalledSize")
-        elt.appendChild(createTextNode(str(size)))
-        metadata.appendElement(elt)
+        metadata.appendElement(createElt("InstalledSize",
+                                         str(size)))
 
 
         metadata.write(os.path.join(self.ctx.pkg_dir(),"metadata.xml"))

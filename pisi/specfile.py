@@ -60,6 +60,7 @@ class SpecFile(XmlFile):
 
         self.source = SourceInfo()
         self.source.name = self.getChildText("Source/Name")
+        self.source.license = self.getChildText("Source/License")
         self.source.workdir = self.getChildText("Source/WorkDir")
         archiveNode = self.getNode("Source/Archive")
         self.source.archiveUri = getNodeText(archiveNode).strip()
