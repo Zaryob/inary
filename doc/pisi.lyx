@@ -347,12 +347,6 @@ Dosya biçimi XML'dir ve aþaðýdaki etiketleri içerir:
 Pisi
 \layout Subparagraph
 
-Meta 
-\series medium 
-(Bence bunu yeniden yapip icine Packager ve History'i koyabiliriz ...
- -- Eray)
-\layout Subparagraph
-
 Source
 \layout Itemize
 
@@ -361,8 +355,6 @@ Source
 Name
 \series default 
 : Uygulamanýn adý.
-\begin_deeper 
-\begin_deeper 
 \layout Itemize
 
 
@@ -370,6 +362,26 @@ Name
 Homepage: 
 \series default 
 Uygulamanýn web sitesinin URL'sini belirtir.
+\layout Itemize
+
+
+\series bold 
+Summary:
+\layout Itemize
+
+
+\series bold 
+Description:
+\layout Itemize
+
+
+\series bold 
+IsA:
+\layout Itemize
+
+
+\series bold 
+PartOf:
 \layout Itemize
 
 
@@ -441,6 +453,28 @@ compressionType
 
 
 \series bold 
+AdditionalFiles:
+\begin_deeper 
+\layout Itemize
+
+
+\series bold 
+Target:
+\layout Itemize
+
+
+\series bold 
+Permission:
+\layout Itemize
+
+
+\series bold 
+Owner:
+\end_deeper 
+\layout Itemize
+
+
+\series bold 
 BuildDependencies
 \series default 
 : Pakedi oluþturmak için gereken baðýmlýlýklarý listeler.
@@ -504,6 +538,11 @@ Update
 
 
 \series bold 
+Type:
+\layout Itemize
+
+
+\series bold 
 Date
 \series default 
 : Güncellemenin tarihi.
@@ -523,13 +562,10 @@ Release:
  Pakedin sürüm numarasý.
 \end_deeper 
 \end_deeper 
-\end_deeper 
-\end_deeper 
 \layout Subparagraph
 
-Package:
-\layout Standard
-
+Package: 
+\series medium 
 Uygulamadan oluþturulacak bir pakedi tanýmlar.
 \layout Itemize
 
@@ -538,8 +574,6 @@ Uygulamadan oluþturulacak bir pakedi tanýmlar.
 Name
 \series default 
 : Oluþturulacak pakedin adý.
-\begin_deeper 
-\begin_deeper 
 \layout Itemize
 
 
@@ -560,9 +594,12 @@ Description
 
 
 \series bold 
-Category
-\series default 
-:
+IsA:
+\layout Itemize
+
+
+\series bold 
+PartOf:
 \layout Itemize
 
 
@@ -571,10 +608,94 @@ RuntimeDependencies
 \series default 
 : Pakedin çalýþabilmesi için gereken baðýmlýlýklarýn bir listesini verir.
  
+\begin_deeper 
+\layout Itemize
+
+
 \series bold 
 Dependency
 \series default 
- alt etiketlerinden oluþur.
+: Bir baðýmlýlýk tanýmlar.
+\begin_deeper 
+\layout Itemize
+
+
+\series bold 
+Name
+\series default 
+: Baðýmlýlýk duyulan pakedin adý.
+\layout Itemize
+
+
+\series bold 
+Version:
+\series default 
+ Baðýmlý olunan tek bir sürüm numarasýný bildirir.
+\layout Itemize
+
+
+\series bold 
+VersionFrom:
+\series default 
+ Bu sürüm numarasýndan sonraki tüm sürüm numaralarýna baðýmlýlýðý tarif
+ eder.
+\layout Itemize
+
+
+\series bold 
+VersionTo:
+\series default 
+ Bu sürüm numaralarýna kadar olan baðýmlýlýðý tarif eder.
+\end_deeper 
+\end_deeper 
+\layout Itemize
+
+
+\series bold 
+InstallDependencies
+\series default 
+: Pakedin çalýþabilmesi için gereken baðýmlýlýklarýn bir listesini verir.
+ 
+\begin_deeper 
+\layout Itemize
+
+
+\series bold 
+Dependency
+\series default 
+: Bir baðýmlýlýk tanýmlar.
+\begin_deeper 
+\layout Itemize
+
+
+\series bold 
+Name
+\series default 
+: Baðýmlýlýk duyulan pakedin adý.
+\layout Itemize
+
+
+\series bold 
+Version:
+\series default 
+ Baðýmlý olunan tek bir sürüm numarasýný bildirir.
+\layout Itemize
+
+
+\series bold 
+VersionFrom:
+\series default 
+ Bu sürüm numarasýndan sonraki tüm sürüm numaralarýna baðýmlýlýðý tarif
+ eder.
+\layout Itemize
+
+
+\series bold 
+VersionTo:
+\series default 
+ Bu sürüm numaralarýna kadar olan baðýmlýlýðý tarif eder.
+\end_deeper 
+\end_deeper 
 \layout Itemize
 
 
@@ -604,8 +725,6 @@ Wildcard
 
 \series bold 
 File
-\end_deeper 
-\end_deeper 
 \end_deeper 
 \layout Subsubsection
 
@@ -693,12 +812,7 @@ Metadata
 
 
 \series bold 
-PSPEC dosyasýnýn Meta bölümü
-\layout Itemize
-
-
-\series bold 
-PSPEC dosyasýnýn Source bölümü
+PSPEC dosyasýnýn X.Y.Z [ yarýn yazacaðým ] bölümleri
 \layout Itemize
 
 
@@ -840,7 +954,12 @@ executable, conf, doc, sharedLib, localeData, programData, header
 
 
 \series bold 
-Hash: Path
+Size:
+\layout Itemize
+
+
+\series bold 
+SHA1: Path
 \series default 
  ile belirtilen dosyanýn SHA1 algoritmasý ile elde edilmiþ 
 \emph on 
@@ -960,25 +1079,36 @@ files/
 \begin_deeper 
 \layout Itemize
 
-acpid-1.0.2-branch.patch
+acpid.init
+\end_deeper 
 \layout Itemize
 
-acpid.init
+
+\series bold 
+patches/
+\begin_deeper 
+\layout Itemize
+
+acpid-1.0.2-branch.patch
+\end_deeper 
+\layout Itemize
+
+
+\series bold 
+comar/
+\begin_deeper 
+\layout Itemize
+
+acpid.csl
 \end_deeper 
 \end_deeper 
 \end_deeper 
 \layout Subsection
 
-Container
-\layout Standard
+Category
+\layout Subsection
 
-(Will be...)
-\layout Standard
-
-Container nedir? Ne iþe yarýyor?
-\layout Standard
-
-Container listesi...
+Component
 \layout Subsection
 
 Ýkili Paket Deposu
@@ -1201,14 +1331,14 @@ files.xml:
 
 
 \series bold 
-Config/ dizini:
+comar/ dizini:
 \series default 
  Kurulum betikleri
 \layout Itemize
 
 
 \series bold 
-Install/ dizini:
+install/ dizini:
 \series default 
  Paketin kurulu biçimi.
  Paketin sisteme kurulumu bu dizinin belirtilen dizine açýlýr.
