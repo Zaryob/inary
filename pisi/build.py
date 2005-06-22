@@ -53,11 +53,6 @@ class PisiBuild:
         #finished its work in the work_dir
         curDir = os.getcwd()
 
-        # FIXME: It's wrong to assume that unpacked archive 
-        # will create a name-version top-level directory.
-        # Archive module should give the exact location.
-        # (from the assumption is evil dept.)
-        os.chdir(self.ctx.pkg_work_dir() + "/" + self.spec.source.name + "-" + self.spec.source.version)
         locals = globals = {}
     
         try:
@@ -65,7 +60,9 @@ class PisiBuild:
         except SyntaxError, e:
             ui.error ("Error : %s\n" % e)
             return 
-        
+       
+        self.goToWorkDir(globals)
+       
         self.configureSource(locals)
         self.buildSource(locals)
         self.installSource(locals)
@@ -80,6 +77,19 @@ class PisiBuild:
 
     def applyPatches(self):
         pass
+
+    def goToWorkDir(self, globals):
+        path = globals['WorkDir']
+        if globals['WorkDir'] is not None:
+            path = self.ctx.pkg_work_dir() + "/" + path
+        else:
+            path = self.ctx.pkg_work_dir() + "/" + self.spec.source.name + "-" + self.spec.source.version
+            
+        try:
+            os.chdir(path)
+        except OSError, e:
+            ui.error ("No such file or directory: %s\n" % e)
+            sys.exit()
 
     def configureSource(self, locals):
         func = self.ctx.const.setup_func

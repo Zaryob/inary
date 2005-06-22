@@ -4,6 +4,8 @@
 from pisi.actionsapi import gnuconfig
 from pisi.actionsapi import autotools
 
+WorkDir='popt-1.7'
+
 def setup():
     gnuconfig.gnuconfig_update()
 #    libtoolize.libtoolize()
