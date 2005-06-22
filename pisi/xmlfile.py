@@ -3,139 +3,11 @@
 
 import xml.dom.minidom as mdom
 
-class XmlError(Exception):
-    pass
-
-# static functions
-
-def getNodeAttribute(node, attrname):
-    """get named attribute from DOM node"""
-    for i in range(node.attributes.length):
-        attr = node.attributes.item(i)
-        if attr.name == attrname:
-            return attr.childNodes[0].data
-
-def getNodeText(node):
-    """get the first child and expect it to be text!"""
-    try:
-        child = node.childNodes[0]
-    except IndexError:
-        return None
-    except AttributeError: # no node by that name
-        return None
-    if child.nodeType == child.TEXT_NODE:
-        return child.data
-    else:
-        raise XmlError("getNodeText: Expected text node, got something else!")
-
-def getChildText(node_s, tagpath):
-    """get the text of a child at the end of a tag path"""
-    node = getNode(node_s, tagpath)
-    if not node:
-        return None
-    return getNodeText(node)
-
-def getChildElts(node):
-    """get only child elements"""
-    return filter(lambda x:x.nodeType == x.ELEMENT_NODE, node.childNodes)
-
-def getNode(node, tagpath):
-    """returns the *first* matching node for given tag path."""
-    
-    tags = tagpath.split('/')
-    assert len(tags)>0
-
-    # iterative code to search for the path
-        
-    # get DOM for top node
-    nodeList = node.getElementsByTagName(tags[0])
-    if len(nodeList) == 0:
-        return None                 # not found
-
-    node = nodeList[0]              # discard other matches
-    for tag in tags[1:]:
-        nodeList = node.getElementsByTagName(tag)
-        if len(nodeList) == 0:
-            return None
-        else:
-            node = nodeList[0]
-
-    return node
-
-def getAllNodes(node, tagPath):
-    """retrieve all nodes that match a given tag path."""
-
-    tags = tagPath.split('/')
-
-    if len(tags) == 0:
-        return []
-
-    nodeList = node.getElementsByTagName(tags[0])
-    if len(nodeList) == 0:
-        return []
-
-    for tag in tags[1:]:
-        results = map(lambda x: x.getElementsByTagName(tag),nodeList)
-        nodeList = []
-        for x in results:
-            nodeList.extend(x)
-            pass # emacs indentation error, keep it here
-
-        if len(nodeList) == 0:
-            return []
-
-    return nodeList
-
-
-def createTagPath(dom, node, tags):
-    """create new child at the end of a tag chain starting from node
-    no matter what"""
-    if len(tags)==0:
-        return node
-    for tag in tags:
-        node = node.appendChild(dom.createElement(tag))
-    return node
-
-def addTagPath(dom, node, tags, newnode=None):
-    """add newnode at the end of a tag chain, smart one"""
-    if newnode:                     # node to add specified
-        last = len(newnode)-1
-        if last >= 0:
-            node = createTagPath(dom, node, tags[0:last])
-            node.appendChild(newnode)
-        else:
-            raise XmlError("addNodePath: not enough tags")
-    else:
-        return createTagPath(dom, node, tags)
-
-def addNode(dom, node, tagpath, newnode = None):
-    """add a new node at the end of the tree"""
-    
-    tags = tagpath.split('/')           # tag chain
-    assert len(tags)>0                  # we want a chain
-
-    # iterative code to search for the path
-        
-    # get DOM for top node
-    nodeList = node.getElementsByTagName(tags[0])
-    
-    if len(nodeList) == 0:
-        return addTagPath(dom, node, tags, newnode)
-    
-    node = nodeList[len(nodeList)-1]              # discard other matches
-    tags.pop(0)
-    while len(tags)>0:
-        tag = tags.pop(0)
-        nodeList = node.getElementsByTagName(tag)
-        if len(nodeList) == 0:          # couldn't find
-            tags.insert(0, tag)         # put it back in
-            return addTagPath(dom, node, tags, newnode)
-        else:
-            node = nodeList[len(nodeList)-1]
-
-    return node
+from xmlext import *
 
 # xmlfile class that further abstracts a dom object
+# using the high-level dom functions provided in xml module
+# (and sorely lacking in xml.dom :( )
 
 class XmlFile(object):
     """A class for retrieving information from an XML file"""
@@ -224,11 +96,23 @@ class XmlFile(object):
         self.verifyRootTag()
         return addNode(self.dom, self.dom.documentElement, tagPath, newnode)
 
+    def addNodeUnder(self, node, tagPath, newnode = None):
+        "this adds the new stuff under node"
+        self.verifyRootTag()
+        return addNode(self.dom, node, tagPath, newnode)
+
     def addText(self, node, text):
+        "add text to node"
         node.appendChild(self.newTextNode(text))
 
-    def addNodeText(self, tagPath, text):
+    def addTextNode(self, tagPath, text):
+        "add a text node with tag path"
         node = self.addNode(tagPath, self.newTextNode(text))
+        return node
+
+    def addTextNodeUnder(self, node, tagPath, text):
+        "add a text node under given node with tag path (phew)"
+        node = self.addNodeUnder(tagPath, self.newTextNode(text))
         return node
 
         

@@ -2,7 +2,8 @@
 # read/write PISI source package specification file
 
 import xml.dom.minidom
-from xmlfile import *
+from xmlext import *
+from xmlfile import XmlFile
 from os.path import basename
 from ui import ui
 
@@ -15,21 +16,46 @@ class PatchInfo:
         self.filename = getNodeText(node)
         self.compressionType = getNodeAttribute(node, "compressionType")
 
+    def addNode(self, xml):
+        node = xml.addNode("Source/Patches/Patch")
+        node.setAttribute("filename", self.filename)
+        node.setAttribute("compressionType", self.compressionType)
+
 class DepInfo:
     def __init__(self, node):
         self.package = getNodeText(node).strip()
-        self.versionFrom =  getNodeAttribute(node, "versionFrom")
+        self.versionFrom = getNodeAttribute(node, "versionFrom")
+        self.versionTo = getNodeAttribute(node, "versionTo")
 
-class HistoryInfo:
+    def elt(self, xml):
+        node = xml.newNode("Dependency")
+        node.setAttribute("versionFrom", self.versionFrom)
+        node.setAttribute("versionTo", self.versionTo)
+        return node
+
+class UpdateInfo:
     def __init__(self, node):
         self.date = getNodeText(getNode(node, "Date"))
         self.version = getNodeText(getNode(node, "Version"))
         self.release = getNodeText(getNode(node, "Release"))
 
+    def elt(self, xml):
+        node = xml.newNode("Update")
+        xml.addTextNodeUnder(node, "Date", self.date)
+        xml.addTextNodeUnder(node, "Version", self.version)
+        xml.addTextNodeUndeR(node, "Release", self.release)
+        return node
+
 class PathInfo:
     def __init__(self, node):
         self.pathname = getNodeText(node)
         self.fileType = getNodeAttribute(node, "fileType")
+
+    def elt(self, xml):
+        node = xml.newNode("Path")
+        xml.addText(node, self.pathname)
+        node.setAttribute("fileType", self.fileType)
+        return node
 
 # a structure to hold source information
 class SourceInfo:
@@ -47,6 +73,15 @@ class PackageInfo:
         self.runtimeDeps = [DepInfo(x) for x in rtDepElts]
         self.paths = [PathInfo(x) for x in getAllNodes(node, "Files/Path")]
 
+    def elt(self, xml):
+        node = xml.newNode("Package")
+        xml.addTextNodeUnder(node, "Name", self.name)
+        xml.addTextNodeUnder(node, "Summary", self.summary)
+        xml.addTextNodeUnder(node, "Description", self.description)
+        xml.addTextNodeUnder(node, "Category", self.category)
+        
+        return node
+        
 class SpecFile(XmlFile):
     """A class for reading/writing from/to a PSPEC (PISI SPEC) file."""
 
@@ -71,7 +106,7 @@ class SpecFile(XmlFile):
         buildDepElts = self.getAllNodes("Source/BuildDependencies/Dependency")
         self.source.buildDeps = [DepInfo(d) for d in buildDepElts]
         historyElts = self.getAllNodes("History/Update")
-        self.source.history = [HistoryInfo(x) for x in historyElts]
+        self.source.history = [UpdateInfo(x) for x in historyElts]
 
         # As we have no Source/Version tag we need to get 
         # the last version and release information
@@ -92,9 +127,12 @@ class SpecFile(XmlFile):
     def write(self, filename):
         """Write PSPEC file"""
         self.newDOM()
-        self.addNodeText("Source/Name", self.source.name)
+        self.addTextNode("Source/Name", self.source.name)
         archiveNode = self.addNode("Source/Archive")
         archiveNode.setAttribute("archType", self.source.archiveType)
         archiveNode.setAttribute("sha1sum", self.source.archiveSHA1)
-        #patchElts
+        for patch in self.source.patches:
+            patch.addNode(self)
+        for dep in map(lambda x : x.elt(self), self.source.buildDeps):
+            self.addNode("Source/BuildDependencies", dep)
         self.writexml(filename)
