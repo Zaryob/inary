@@ -154,5 +154,13 @@ class PisiBuild:
     def buildPackages(self):
         for package in self.spec.packages:
             ui.info("** Building package %s\n" % package.name);
+            
+            ui.info("Generating metadata.xml...")
             self.genMetaDataXml(package)
+            ui.info(" done.\n")
+
+            ui.info("Generating metadata.xml...")
             self.genFilesXml(package)
+            ui.info(" done.\n")
+
+            ui.info("Creating PISI package bla bla....\n")
