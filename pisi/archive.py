@@ -54,13 +54,20 @@ class ArchiveTarFile(ArchiveBase):
         tar.close()
 
 class ArchiveZip(ArchiveBase):
-    def __init__(self, filepath, type="zip"):
+    def __init__(self, filepath, type="zip", mode='r'):
         super(ArchiveZip, self).__init__(filepath, type)
+        self.zip = zipfile.ZipFile(filepath, mode)
+
+    def close(self):
+        self.zip.close()
+
+    def add_file(self, zipPath, filePath):
+        self.zip.write(filePath, filePath, zipfile.ZIP_DEFLATED)
 
     def unpack_file_cond(self, pred, targetDir, archiveRoot=''):
         """ unpack file according to predicate function filename -> bool"""
         super(ArchiveZip, self).unpack(targetDir)
-        zip = zipfile.ZipFile(self.filePath, 'r')
+        zip = self.zip
         for file in zip.namelist():
             if pred(file):              # check if condition holds
 
@@ -94,7 +101,6 @@ class ArchiveZip(ArchiveBase):
                     fileContent = zip.read(file)
                     buff.write(fileContent)
                     buff.close()
-        zip.close()
 
     def unpack_files(self, paths, targetDir):
         self.unpack_file_cond(lambda f:f in paths, targetDir)
@@ -104,6 +110,7 @@ class ArchiveZip(ArchiveBase):
 
     def unpack(self, targetDir):
         self.unpack_file_cond(lambda f: True, targetDir)
+        self.close()
         return 
 
 class Archive:
