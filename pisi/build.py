@@ -83,7 +83,8 @@ class PisiBuild:
         if path is not None:
             path = self.ctx.pkg_work_dir() + "/" + path
         else:
-            path = self.ctx.pkg_work_dir() + "/" + self.spec.source.name + "-" + self.spec.source.version
+            path = self.ctx.pkg_work_dir() + "/" + \
+                self.spec.source.name + "-" + self.spec.source.version
             
         try:
             os.chdir(path)
