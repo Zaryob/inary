@@ -3,6 +3,7 @@
 # maintainer: baris and meren
 
 import archive
+from context import ctx
 
 class Package:
     """Package: PISI package class"""
@@ -39,4 +40,4 @@ class Package:
     def extract_PISI_files(self, outdir):
         """extract PISI control files: metadata.xml, files.xml,
         action scripts, etc."""
-        self.extract_files(['metadata.xml', 'files.xml','Config'], outdir)
+        self.extract_files([ctx.const.metadata_xml, ctx.const.files_xml,'Config'], outdir)
