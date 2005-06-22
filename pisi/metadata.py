@@ -7,9 +7,10 @@ from specfile import *
 
 class MetaData(XmlFile):
     """Package metadata. Metadata is composed of Specfile and various
-other information."""
+    other information."""
     def __init__(self):
         XmlFile.__init__(self, "METADATA")
+        self.eltList = []
 
     def read(self, filename):
         self.readxml(filename)
@@ -35,9 +36,15 @@ other information."""
         if size:
             self.installedSize = int(size)
 
+    def appendElement(self, elt):
+        self.eltList.append(elt)
+
     def write(self, filename):
-        ui.info("METADATA WRITE NOT IMPLEMENTED\n")
-        pass
+        self.newDOM()
+        document = self.dom.documentElement
+        for elt in self.eltList:
+            document.appendChild(elt)
+        self.writexml(filename)
 
     def verify():
         return True

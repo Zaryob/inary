@@ -98,18 +98,33 @@ class PisiBuild:
     def genMetaDataXml(self, package):
         #test
         metadata = MetaData()
-        d = self.ctx.pkg_install_dir()
-        metadata.distribution = self.ctx.const.distribution
-        metadata.distributionRelease = self.ctx.const.distributionRelease
-        metadata.architecture = "Any"   # FIXME
+
+        createElement = metadata.dom.createElement
+        createTextNode = metadata.dom.createTextNode
+
+        elt = createElement("Distribution")
+        elt.appendChild(createTextNode(self.ctx.const.distribution))
+        metadata.appendElement(elt)
+
+        elt = createElement("DistrubutionRelease")
+        elt.appendChild(createTextNode(self.ctx.const.distributionRelease))
+        metadata.appendElement(elt)
+
+        elt = createElement("Architecture")
+        elt.appendChild(createTextNode("Any")) # FIXME
+        metadata.appendElement(elt)
 
         # FIXME: Bu hatalı. installsize'ı almak için tüm
         # pkg_install_dir()'ın boyutunu hesaplayamayız. Bir source
         # birden fazla kaynak üretebilir. package.paths ile
         # karşılaştırarak file listesinden boyutları hesaplatmalıyız.
-        metadata.installSize = util.dir_size(d) 
+        d = self.ctx.pkg_install_dir()
+        size = util.dir_size(d)
+        elt = createElement("InstalledSize")
+        elt.appendChild(createTextNode(str(size)))
+        metadata.appendElement(elt)
 
-        print d, metadata.installSize
+
         metadata.write(os.path.join(self.ctx.pkg_dir(),"metadata.xml"))
 
     def genFilesXml(self, package):
