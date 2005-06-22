@@ -116,6 +116,28 @@ class PisiBuild:
                                          package.summary))
         metadata.appendElement(createElt("Description",
                                          package.description))
+        metadata.appendElement(createElt("Category",
+                                         package.category))
+
+        elt = createElt("InstallDependencies")
+        for idep in package.installDeps:
+            d = createElt("Depencency", idep.package)
+            # we should also have versionTo and version
+            # attributes. But specfile/DepInfo doesn't defines
+            # them. So we don't here
+            if idep.versionFrom:
+                d.setAttribute("versionFrom", idep.versionFrom)
+            elt.appendChild(d)
+        metadata.appendElement(elt)
+
+        elt = createElt("RuntimeDependencies")
+        for rdep in package.runtimeDeps:
+            d = createElt("Depencency", rdep.package)
+            if rdep.versionFrom:
+                d.setAttribute("versionFrom", rdep.versionFrom)
+            elt.appendChild(d)
+        metadata.appendElement(elt)
+
         metadata.appendElement(createElt("License",
                                          self.spec.source.license))
         metadata.appendElement(createElt("Distribution",
