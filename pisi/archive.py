@@ -62,9 +62,9 @@ class ArchiveZip(ArchiveBase):
         self.zip.close()
 
     def add_file(self, file):
+        """add file or directory to a zip file"""
         if os.path.isdir(file):
             self.zip.writestr(file + '/', '')
-	    print file
             for f in os.listdir(file):
                self.add_file(file + '/' + f)
         else:

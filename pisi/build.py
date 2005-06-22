@@ -224,6 +224,6 @@ class PisiBuild:
             os.chdir(self.ctx.pkg_dir())
             pkg.add_file(self.ctx.const.metadata_xml)
             pkg.add_file(self.ctx.const.files_xml)
-            # pkd.add_dir("install")
+            pkg.add_file("install")
             pkg.close()
             os.chdir(c)

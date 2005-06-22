@@ -12,8 +12,8 @@ class Package:
         self.filename = packagefn
 
     def add_file(self, fn):
-        """add a file to package"""
-        self.impl.add_file(self.filename, fn)
+        """add a file or directory to package"""
+        self.impl.add_file(fn)
 
     def close(self):
         self.impl.close()
