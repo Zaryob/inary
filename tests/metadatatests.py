@@ -16,9 +16,9 @@ class MetaDataTestCase(unittest.TestCase):
 
         self.assertEqual(md.license, "As-Is")
 
-        self.assertEqual(md.version, "0.1")
+        self.assertEqual(md.version, "1.7")
 
-        self.assertEqual(md.installedSize, 40500)
+        self.assertEqual(md.installedSize, 546542)
 
     def testWrite(self):
         pass

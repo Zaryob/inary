@@ -25,7 +25,7 @@ class MetaData(XmlFile):
         self.license = getNodeText("License")
 	
         historyElts = self.getAllNodes("History/Update")
-        self.history = [HistoryInfo(x) for x in historyElts]
+        self.history = [UpdateInfo(x) for x in historyElts]
         self.version = self.history[0].version
         self.release = self.history[0].release
 

@@ -43,6 +43,7 @@ class UpdateInfo:
         self.version = getNodeText(getNode(node, "Version"))
         self.release = getNodeText(getNode(node, "Release"))
 
+class HistoryInfo:
     def elt(self, xml):
         node = xml.newNode("Update")
         xml.addTextNodeUnder(node, "Date", self.date)
