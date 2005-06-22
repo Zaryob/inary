@@ -41,9 +41,9 @@ class PackageInfo:
         self.summary = getNodeText(getNode(node, "Summary"))
         self.description = getNodeText(getNode(node, "Description"))
         self.category = getNodeText(getNode(node, "Category"))
-        iDepElts = getAllNodes(node, "InstallDependencies")
+        iDepElts = getAllNodes(node, "InstallDependencies/Dependency")
         self.installDeps = [DepInfo(x) for x in iDepElts]
-        rtDepElts = getAllNodes(node, "RuntimeDependencies")
+        rtDepElts = getAllNodes(node, "RuntimeDependencies/Dependency")
         self.runtimeDeps = [DepInfo(x) for x in rtDepElts]
         self.paths = [PathInfo(x) for x in getAllNodes(node, "Files/Path")]
 
