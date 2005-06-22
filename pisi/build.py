@@ -172,7 +172,7 @@ class PisiBuild:
             self.genMetaDataXml(package)
             ui.info(" done.\n")
 
-            ui.info("Generating metadata.xml...")
+            ui.info("Generating files.xml...")
             self.genFilesXml(package)
             ui.info(" done.\n")
 
