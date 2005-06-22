@@ -107,15 +107,21 @@ class PisiBuild:
         metadata.write(os.path.join(self.ctx.pkg_dir(),"metadata.xml"))
 
     def genFilesXml(self, package):
-        # the worst function in this project!
-        # just testing...
+        """Generetes files.xml using the path definitions in specfile and
+        generated files by the build system."""
         files = Files()
         install_dir = self.ctx.pkg_install_dir()
         for fpath, fhash in util.get_file_hashes(install_dir):
             # get the relative path
             fpath = fpath[len(install_dir):]
-            depth = 0
             ftype = ""
+            # The usage of depth is somewhat confusing. It is used for
+            # finding the best match to package.paths. For an example,
+            # if package.paths contains
+            # ['/usr/share','/usr/share/doc'] and fpath is
+            # /usr/share/doc/filename our iteration over package.paths
+            # should match the second item.
+            depth = 0
             for path in package.paths:
                 if fpath.startswith(path.pathname):
                     if depth < len(path.pathname):
