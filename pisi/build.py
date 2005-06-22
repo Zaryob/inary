@@ -222,7 +222,7 @@ class PisiBuild:
             c = os.getcwd()
 
             os.chdir(self.ctx.pkg_dir())
-            pkg.add_file(self.ctx.const.files_xml)
+            pkg.add_file(self.ctx.const.metadata_xml)
             pkg.add_file(self.ctx.const.files_xml)
             pkg.close()
             os.chdir(c)
