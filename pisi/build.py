@@ -98,11 +98,12 @@ class PisiBuild:
     def genMetaDataXml(self, package):
         metadata = MetaData()
 
-        def createElt(tagName, text):
+        def createElt(tagName, text=None):
             createElement = metadata.dom.createElement
             createTextNode = metadata.dom.createTextNode
             elt = createElement(tagName)
-            elt.appendChild(createTextNode(text))
+            if text:
+                elt.appendChild(createTextNode(text))
             return elt
 
         metadata.appendElement(createElt("Name",
@@ -128,6 +129,14 @@ class PisiBuild:
         metadata.appendElement(createElt("InstalledSize",
                                          str(size)))
 
+        elt = createElt("History")
+        for history in self.spec.source.history:
+            update = createElt("Update")
+            update.appendChild(createElt("Date", history.date))
+            update.appendChild(createElt("Version", history.version))
+            update.appendChild(createElt("Release", history.release))
+            elt.appendChild(update)
+        metadata.appendElement(elt)
 
         metadata.write(os.path.join(self.ctx.pkg_dir(),"metadata.xml"))
 
