@@ -216,7 +216,8 @@ class PisiBuild:
 
             ui.info("Creating PISI package bla bla....\n")
             # testing
-            pkgName = package.name + "-" + self.spec.source.version + ".pisi"
+            pkgName = package.name + '-' + self.spec.source.version +\
+                '-' + self.spec.source.release + ".pisi"
             pkg = Package(pkgName, 'w')
             c = os.getcwd()
 
