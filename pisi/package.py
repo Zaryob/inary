@@ -6,12 +6,16 @@ import archive
 
 class Package:
     """Package: PISI package class"""
-    def __init__(self, packagefn):
-        self.impl = archive.ArchiveZip(packagefn)
+    def __init__(self, packagefn, mode='r'):
+        self.impl = archive.ArchiveZip(packagefn, 'zip', mode)
         self.filename = packagefn
 
     def add_file(self, fn):
         """add a file to package"""
+        self.impl.add_file(self.filename, fn)
+
+    def close(self):
+        self.impl.close()
 
     def extract(self, outdir):
         """extract entire package contents to directory"""

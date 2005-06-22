@@ -14,6 +14,7 @@ from sourcearchive import SourceArchive
 from files import Files, FileInfo
 from specfile import SpecFile
 from metadata import MetaData
+from package import Package
 
 class PisiBuildError(Exception):
     pass
@@ -214,3 +215,13 @@ class PisiBuild:
             ui.info(" done.\n")
 
             ui.info("Creating PISI package bla bla....\n")
+            # testing
+            pkgName = package.name + "-" + self.spec.source.version + ".pisi"
+            pkg = Package(pkgName, 'w')
+            c = os.getcwd()
+
+            os.chdir(self.ctx.pkg_dir())
+            pkg.add_file("files.xml")
+            pkg.add_file("metadata.xml")
+            pkg.close()
+            os.chdir(c)
