@@ -61,14 +61,14 @@ class ArchiveZip(ArchiveBase):
     def close(self):
         self.zip.close()
 
-    def add_file(self, workDir, file):
-        realPath = workDir + '/' + file
-        if os.path.isdir(realPath):
+    def add_file(self, file):
+        if os.path.isdir(file):
             self.zip.writestr(file + '/', '')
-            for f in os.listdir(realPath):
-               self.add_file(workDir, file + '/' + f)
+	    print file
+            for f in os.listdir(file):
+               self.add_file(file + '/' + f)
         else:
-            self.zip.write(realPath, file, zipfile.ZIP_DEFLATED)
+            self.zip.write(file, file, zipfile.ZIP_DEFLATED)
 
     def unpack_file_cond(self, pred, targetDir, archiveRoot=''):
         """ unpack file according to predicate function filename -> bool"""
