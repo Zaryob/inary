@@ -176,7 +176,7 @@ class PisiBuild:
             elt.appendChild(update)
         metadata.appendElement(elt)
 
-        metadata.write(os.path.join(self.ctx.pkg_dir(),"metadata.xml"))
+        metadata.write(os.path.join(self.ctx.pkg_dir(), self.ctx.const.metadata_xml))
 
     def genFilesXml(self, package):
         """Generetes files.xml using the path definitions in specfile and
@@ -200,17 +200,17 @@ class PisiBuild:
                         depth = len(path.pathname)
                         ftype = path.fileType
             files.append(FileInfo(fpath, ftype, fhash))
-        files.write(os.path.join(self.ctx.pkg_dir(),"files.xml"))
+        files.write(os.path.join(self.ctx.pkg_dir(), self.ctx.const.files_xml))
 
     def buildPackages(self):
         for package in self.spec.packages:
             ui.info("** Building package %s\n" % package.name);
             
-            ui.info("Generating metadata.xml...")
+            ui.info("Generating %s..." % self.ctx.const.metadata_xml)
             self.genMetaDataXml(package)
             ui.info(" done.\n")
 
-            ui.info("Generating files.xml...")
+            ui.info("Generating %s..." % self.ctx.const.files_xml)
             self.genFilesXml(package)
             ui.info(" done.\n")
 
@@ -222,7 +222,7 @@ class PisiBuild:
             c = os.getcwd()
 
             os.chdir(self.ctx.pkg_dir())
-            pkg.add_file("files.xml")
-            pkg.add_file("metadata.xml")
+            pkg.add_file(self.ctx.const.files_xml)
+            pkg.add_file(self.ctx.const.files_xml)
             pkg.close()
             os.chdir(c)

@@ -27,6 +27,8 @@ class Constants:
         # file/directory names
         self.c.actions_file = "actions.py"
         self.c.files_dir = "files"
+        self.c.files_xml = "files.xml"
+        self.c.metadata_xml = "metadata.xml"
 
         # functions in actions_file
         self.c.setup_func = "setup"
