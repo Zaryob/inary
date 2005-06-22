@@ -39,7 +39,8 @@ def getChildElts(node):
 
 def getNode(node, tagpath):
     """returns the *first* matching node for given tag path."""
-    
+
+    assert type(tagpath)==str
     tags = tagpath.split('/')
     assert len(tags)>0
 
@@ -108,7 +109,8 @@ def addTagPath(dom, node, tags, newnode=None):
 
 def addNode(dom, node, tagpath, newnode = None):
     """add a new node at the end of the tree"""
-    
+
+    assert type(tagpath)==str
     tags = tagpath.split('/')           # tag chain
     assert len(tags)>0                  # we want a chain
 

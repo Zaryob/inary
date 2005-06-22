@@ -47,7 +47,7 @@ class UpdateInfo:
         node = xml.newNode("Update")
         xml.addTextNodeUnder(node, "Date", self.date)
         xml.addTextNodeUnder(node, "Version", self.version)
-        xml.addTextNodeUndeR(node, "Release", self.release)
+        xml.addTextNodeUnder(node, "Release", self.release)
         return node
 
 class PathInfo:
@@ -83,12 +83,12 @@ class PackageInfo:
         xml.addTextNodeUnder(node, "Summary", self.summary)
         xml.addTextNodeUnder(node, "Description", self.description)
         xml.addTextNodeUnder(node, "Category", self.category)
-        for dep in map(lambda x : x.elt(self), self.installDeps):
-            self.addNode("Source/InstallDependencies", dep)        
-        for dep in map(lambda x : x.elt(self), self.runtimeDeps):
-            self.addNode("Source/RuntimeDependencies", dep)
-        for path in map(lambda x : x.elt(self), self.paths):
-            self.addNode("Files", dep)            
+        for dep in map(lambda x : x.elt(xml), self.installDeps):
+            xml.addNode("Source/InstallDependencies", dep)        
+        for dep in map(lambda x : x.elt(xml), self.runtimeDeps):
+            xml.addNode("Source/RuntimeDependencies", dep)
+        for path in map(lambda x : x.elt(xml), self.paths):
+            xml.addNode("Files", dep)            
         return node
         
 class SpecFile(XmlFile):
