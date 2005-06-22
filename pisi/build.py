@@ -80,7 +80,7 @@ class PisiBuild:
 
     def goToWorkDir(self, globals):
         path = globals['WorkDir']
-        if globals['WorkDir'] is not None:
+        if path is not None:
             path = self.ctx.pkg_work_dir() + "/" + path
         else:
             path = self.ctx.pkg_work_dir() + "/" + self.spec.source.name + "-" + self.spec.source.version
