@@ -61,30 +61,30 @@ class ArchiveZip(ArchiveBase):
     def close(self):
         self.zip.close()
 
-    def add_file(self, file):
+    def add_file(self, fileName):
         """add file or directory to a zip file"""
-        if os.path.isdir(file):
-            self.zip.writestr(file + '/', '')
-            for f in os.listdir(file):
-               self.add_file(file + '/' + f)
+        if os.path.isdir(fileName):
+            self.zip.writestr(fileName + '/', '')
+            for f in os.listdir(fileName):
+               self.add_file(fileName + '/' + f)
         else:
-            self.zip.write(file, file, zipfile.ZIP_DEFLATED)
+            self.zip.write(fileName, fileName, zipfile.ZIP_DEFLATED)
 
     def unpack_file_cond(self, pred, targetDir, archiveRoot=''):
         """ unpack file according to predicate function filename -> bool"""
         super(ArchiveZip, self).unpack(targetDir)
         zip = self.zip
-        for file in zip.namelist():
-            if pred(file):              # check if condition holds
+        for fileName in zip.namelist():
+            if pred(fileName):   # check if condition holds
 
                 # calculate output file name
                 if archiveRoot!='':
                     # change archiveRoot
-                    if util.subpath(archiveRoot, file):
-                        file = util.removepathprefix(archiveRoot, file)
+                    if util.subpath(archiveRoot, fileName):
+                        fileName = util.removepathprefix(archiveRoot, fileName)
                     else:
                         continue        # don't extract if not under
-                ofile = os.path.join(targetDir, file)
+                ofile = os.path.join(targetDir, fileName)
 
                 # a directory is present. lets continue
                 if ofile[len(ofile)-1]=='/':
@@ -98,13 +98,13 @@ class ArchiveZip(ArchiveBase):
                 # is a known problem in Python regarding the hex/oct
                 # constants. Please see Guido's explanation at
                 # http://mail.python.org/pipermail/python-dev/2003-February/033029.html
-                info = zip.getinfo(file)
+                info = zip.getinfo(fileName)
                 if hex(info.external_attr)[2] == 'A':
-                    target = zip.read(file)
+                    target = zip.read(fileName)
                     os.symlink(target, ofile)
                 else:
                     buff = open (ofile, 'wb')
-                    fileContent = zip.read(file)
+                    fileContent = zip.read(fileName)
                     buff.write(fileContent)
                     buff.close()
 
