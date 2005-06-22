@@ -66,14 +66,10 @@ class SpecFile(XmlFile):
         self.source.archiveName = basename(self.source.archiveUri)
         self.source.archiveType = getNodeAttribute(archiveNode, "archType")
         self.source.archiveSHA1 = getNodeAttribute(archiveNode, "sha1sum")
-        patchElts = self.getChildElts("Source/Patches")
-        if patchElts:
-            self.source.patches = [PatchInfo(p) for p in patchElts]
-
-        buildDepElts = self.getChildElts("Source/BuildDependencies")
-        if buildDepElts:
-            self.source.buildDeps = [DepInfo(d) for d in buildDepElts]
-
+        patchElts = self.getAllNodes("Source/Patches/Patch")
+        self.source.patches = [PatchInfo(p) for p in patchElts]
+        buildDepElts = self.getChildElts("Source/BuildDependencies/Dependency")
+        self.source.buildDeps = [DepInfo(d) for d in buildDepElts]
         historyElts = self.getAllNodes("History/Update")
         self.source.history = [HistoryInfo(x) for x in historyElts]
 
@@ -100,4 +96,5 @@ class SpecFile(XmlFile):
         archiveNode = self.addNode("Source/Archive")
         archiveNode.setAttribute("archType", self.source.archiveType)
         archiveNode.setAttribute("sha1sum", self.source.archiveSHA1)
+        patchElts
         self.writexml(filename)
