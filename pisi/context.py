@@ -10,6 +10,11 @@ class Constants:
     c = oo.const()
 
     def __init__(self):
+        # Metadata 
+        #TODO: These two will be defined in a configuration file.
+        self.c.distribution = "Pardus"
+        self.c.distributionRelease = "0.1"
+
         self.c.lib_dir_suffix = "/var/lib/pisi"
         self.c.db_dir_suffix = "/var/db/pisi"
         self.c.archives_dir_suffix = "/var/cache/pisi/archives"

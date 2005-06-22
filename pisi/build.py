@@ -99,10 +99,16 @@ class PisiBuild:
         #test
         metadata = MetaData()
         d = self.ctx.pkg_install_dir()
-        metadata.distribution = "Pardus" # from context?
-        metadata.distributionRelease = "0.1"
+        metadata.distribution = self.ctx.const.distribution
+        metadata.distributionRelease = self.ctx.const.distributionRelease
         metadata.architecture = "Any"   # FIXME
-        metadata.installSize = util.dir_size(d)
+
+        # FIXME: Bu hatalı. installsize'ı almak için tüm
+        # pkg_install_dir()'ın boyutunu hesaplayamayız. Bir source
+        # birden fazla kaynak üretebilir. package.paths ile
+        # karşılaştırarak file listesinden boyutları hesaplatmalıyız.
+        metadata.installSize = util.dir_size(d) 
+
         print d, metadata.installSize
         metadata.write(os.path.join(self.ctx.pkg_dir(),"metadata.xml"))
 
