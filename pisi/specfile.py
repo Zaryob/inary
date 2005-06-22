@@ -133,6 +133,6 @@ class SpecFile(XmlFile):
         archiveNode.setAttribute("sha1sum", self.source.archiveSHA1)
         for patch in self.source.patches:
             patch.addNode(self)
-        for dep in map(lambda x : x.elt(self), self.source.buildDeps):
-            self.addNode("Source/BuildDependencies", dep)
+        #for dep in map(lambda x : x.elt(self), self.source.buildDeps):
+        #    self.addNode("Source/BuildDependencies", dep)
         self.writexml(filename)
