@@ -347,6 +347,12 @@ Dosya biçimi XML'dir ve aþaðýdaki etiketleri içerir:
 Pisi
 \layout Subparagraph
 
+Meta 
+\series medium 
+(Bence bunu yeniden yapip icine Packager ve History'i koyabiliriz ...
+ -- Eray)
+\layout Subparagraph
+
 Source
 \layout Itemize
 
@@ -687,12 +693,12 @@ Metadata
 
 
 \series bold 
-PSPEC dosyasýnýn Global/Meta bölümü
+PSPEC dosyasýnýn Meta bölümü
 \layout Itemize
 
 
 \series bold 
-PSPEC dosyasýnýn Global/History bölümü
+PSPEC dosyasýnýn Source bölümü
 \layout Itemize
 
 
@@ -749,6 +755,9 @@ XML
 pisi-metadata.dtd
 \emph default 
  dosyasýnda tanýmlanmýþtýr.
+ (Ek tag'ler de bir section'a eklenmeli ya da yeni section olusturulmali
+ gibi geldi bana, ornegin Distribution olabilir.
+ -- Eray)
 \layout Subsection
 
 files.xml

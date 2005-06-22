@@ -9,7 +9,7 @@ class MetaData(XmlFile):
     """Package metadata. Metadata is composed of Specfile and various
     other information."""
     def __init__(self):
-        XmlFile.__init__(self, "METADATA")
+        XmlFile.__init__(self, "PISI")
         self.eltList = []
 
     def read(self, filename):

@@ -95,7 +95,7 @@ class SpecFile(XmlFile):
     """A class for reading/writing from/to a PSPEC (PISI SPEC) file."""
 
     def __init__(self):
-        XmlFile.__init__(self,"PSPEC")
+        XmlFile.__init__(self,"PISI")
 
     def read(self, filename):
         """Read PSPEC file"""
