@@ -82,12 +82,6 @@ class Context(object):
             return self.destdir + self.const.tmp_dir_suffix \
             + '/' + packageDir
    
-        def pkg_src_dir(self):
-            if self.spec.source.workdir is None:
-                return self.pkg_work_dir() + '/' + self.spec.source.name + '-' + self.spec.source.version
-            else:
-                return self.pkg_work_dir() + '/' + self.spec.source.workdir
-   
         def pkg_work_dir(self):
             return self.pkg_dir() + self.const.work_dir_suffix
 

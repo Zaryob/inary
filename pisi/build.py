@@ -53,7 +53,11 @@ class PisiBuild:
         #finished its work in the work_dir
         curDir = os.getcwd()
 
-        os.chdir(self.ctx.pkg_src_dir())
+        # FIXME: It's wrong to assume that unpacked archive 
+        # will create a name-version top-level directory.
+        # Archive module should give the exact location.
+        # (from the assumption is evil dept.)
+        os.chdir(self.ctx.pkg_work_dir() + "/" + self.spec.source.name + "-" + self.spec.source.version)
         locals = globals = {}
     
         try:
