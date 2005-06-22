@@ -83,7 +83,12 @@ class PackageInfo:
         xml.addTextNodeUnder(node, "Summary", self.summary)
         xml.addTextNodeUnder(node, "Description", self.description)
         xml.addTextNodeUnder(node, "Category", self.category)
-        
+        for dep in map(lambda x : x.elt(self), self.installDeps):
+            self.addNode("Source/InstallDependencies", dep)        
+        for dep in map(lambda x : x.elt(self), self.runtimeDeps):
+            self.addNode("Source/RuntimeDependencies", dep)
+        for path in map(lambda x : x.elt(self), self.paths):
+            self.addNode("Files", dep)            
         return node
         
 class SpecFile(XmlFile):
@@ -139,4 +144,8 @@ class SpecFile(XmlFile):
             patch.addNode(self)
         for dep in map(lambda x : x.elt(self), self.source.buildDeps):
             self.addNode("Source/BuildDependencies", dep)
+        for update in map(lambda x : x.elt(self), self.source.history):
+            self.addNode("Source/History", dep)
+        for pkg in map(lambda x : x.elt(self), self.packages):
+            self.addNode("", pkg)
         self.writexml(filename)
