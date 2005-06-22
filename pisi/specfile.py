@@ -19,7 +19,8 @@ class PatchInfo:
     def addNode(self, xml):
         node = xml.addNode("Source/Patches/Patch")
         node.setAttribute("filename", self.filename)
-        node.setAttribute("compressionType", self.compressionType)
+        if self.compressionType:
+            node.setAttribute("compressionType", self.compressionType)
 
 class DepInfo:
     def __init__(self, node):
@@ -29,8 +30,11 @@ class DepInfo:
 
     def elt(self, xml):
         node = xml.newNode("Dependency")
-        node.setAttribute("versionFrom", self.versionFrom)
-        node.setAttribute("versionTo", self.versionTo)
+        xml.addText(node, self.package)
+        if self.versionFrom:
+            node.setAttribute("versionFrom", self.versionFrom)
+        if self.versionTo:
+            node.setAttribute("versionTo", self.versionTo)
         return node
 
 class UpdateInfo:
@@ -133,6 +137,6 @@ class SpecFile(XmlFile):
         archiveNode.setAttribute("sha1sum", self.source.archiveSHA1)
         for patch in self.source.patches:
             patch.addNode(self)
-        #for dep in map(lambda x : x.elt(self), self.source.buildDeps):
-        #    self.addNode("Source/BuildDependencies", dep)
+        for dep in map(lambda x : x.elt(self), self.source.buildDeps):
+            self.addNode("Source/BuildDependencies", dep)
         self.writexml(filename)
