@@ -185,21 +185,22 @@ class PisiBuild:
         install_dir = self.ctx.pkg_install_dir()
         for fpath, fhash in util.get_file_hashes(install_dir):
             # get the relative path
-            fpath = fpath[len(install_dir):]
+            frpath = fpath[len(install_dir):]
             ftype = ""
             # The usage of depth is somewhat confusing. It is used for
             # finding the best match to package.paths. For an example,
             # if package.paths contains
-            # ['/usr/share','/usr/share/doc'] and fpath is
+            # ['/usr/share','/usr/share/doc'] and frpath is
             # /usr/share/doc/filename our iteration over package.paths
             # should match the second item.
             depth = 0
             for path in package.paths:
-                if fpath.startswith(path.pathname):
+                if frpath.startswith(path.pathname):
                     if depth < len(path.pathname):
                         depth = len(path.pathname)
                         ftype = path.fileType
-            files.append(FileInfo(fpath, ftype, fhash))
+                        fsize = str(os.path.getsize(fpath))
+            files.append(FileInfo(frpath, ftype, fsize, fhash))
         files.write(os.path.join(self.ctx.pkg_dir(), self.ctx.const.files_xml))
 
     def buildPackages(self):
