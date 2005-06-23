@@ -5,6 +5,7 @@
 import archive
 from constants import const
 from config import config
+from metadata import MetaData
 
 class Package:
     """Package: PISI package class"""
@@ -25,18 +26,18 @@ class Package:
 
     def extract_files(self, paths, outdir):
         """extract file with path to outdir"""
-        impl.unpack_files(paths, outdir)
+        self.impl.unpack_files(paths, outdir)
 
     def extract_dir(self, dir, outdir):
         """extract directory recursively, this function
         copies the directory archiveroot/dir to outdir"""
-        impl.unpack_dir(path, outdir)
+        self.impl.unpack_dir(path, outdir)
 
     def extract_dir_flat(self, dir, outdir):
         """extract directory recursively, this function
         unpacks the *contents* of directory archiveroot/dir inside outdir
         this is the function used by the installer"""
-        impl.unpack_dir_flat(dir, outdir)
+        self.impl.unpack_dir_flat(dir, outdir)
         
     def extract_PISI_files(self, outdir):
         """extract PISI control files: metadata.xml, files.xml,

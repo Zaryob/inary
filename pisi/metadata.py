@@ -46,5 +46,5 @@ class MetaData(XmlFile):
             document.appendChild(elt)
         self.writexml(filename)
 
-    def verify():
+    def verify(self):
         return True

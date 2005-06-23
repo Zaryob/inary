@@ -9,6 +9,7 @@ from ui import ui
 import installdb
 import packagedb
 import dependency
+from metadata import MetaData
 #import conflicts
 
 ##TODO: Caglar'in onerisi uzerine.
@@ -41,7 +42,7 @@ def install(package_fn):
     
     # check conflicts
     # check dependencies
-    if not dependency.installable(metadata.packages[0].name):
+    if not dependency.installable(metadata.package.name):
         raise InstallError("Package not installable")
 
     # unzip package in place
