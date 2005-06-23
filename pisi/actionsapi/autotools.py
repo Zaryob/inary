@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-from pisi.context import Constants
-const = Constants.c
+from pisi.context import const
 
 def configure(parameters = None):
     ''' FIXME: Düzgün hale getirilecek '''

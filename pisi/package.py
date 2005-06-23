@@ -3,7 +3,7 @@
 # maintainer: baris and meren
 
 import archive
-from constants import constants
+from constants import const
 from config import config
 
 class Package:
@@ -41,5 +41,6 @@ class Package:
     def extract_PISI_files(self, outdir):
         """extract PISI control files: metadata.xml, files.xml,
         action scripts, etc."""
-        self.extract_files([constants.metadata_xml, constants.files_xml,'Config'], outdir)
+        self.extract_files([const.metadata_xml,
+                            const.files_xml,'Config'], outdir)
 

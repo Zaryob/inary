@@ -9,6 +9,7 @@ import sys
 # import pisipackage
 import util
 from ui import ui
+from constants import const
 from config import config
 from sourcearchive import SourceArchive
 from files import Files, FileInfo
@@ -45,7 +46,7 @@ class PisiBuild:
 
         try:
             specdir = os.path.dirname(self.ctx.pspecfile)
-            self.actionScript = open("/".join([specdir,self.ctx.const.actions_file])).read()
+            self.actionScript = open("/".join([specdir,const.actions_file])).read()
         except IOError, e:
             ui.error ("Action Script: %s\n" % e)
             return 
@@ -94,19 +95,19 @@ class PisiBuild:
             sys.exit()
 
     def configureSource(self, locals):
-        func = self.ctx.const.setup_func
+        func = const.setup_func
         if func in locals:
             ui.info("Configuring %s...\n" % self.spec.source.name)
             locals[func]()
 
     def buildSource(self, locals):
-        func = self.ctx.const.build_func
+        func = const.build_func
         if func in locals:
             ui.info("Building %s...\n" % self.spec.source.name)
             locals[func]()
 
     def installSource(self, locals):
-        func = self.ctx.const.install_func
+        func = const.install_func
         if func in locals:
             ui.info("Installing %s...\n" % self.spec.source.name)
             locals[func]()
@@ -153,9 +154,9 @@ class PisiBuild:
         metadata.appendElement(createElt("License",
                                          self.spec.source.license))
         metadata.appendElement(createElt("Distribution",
-                                         self.ctx.const.distribution))
+                                         const.distribution))
         metadata.appendElement(createElt("DistributionRelease",
-                                         self.ctx.const.distributionRelease))
+                                         const.distributionRelease))
         metadata.appendElement(createElt("Architecture",
                                          "Any")) # FIXME
         # FIXME: Bu hatalı. installsize'ı almak için tüm
@@ -176,7 +177,7 @@ class PisiBuild:
             elt.appendChild(update)
         metadata.appendElement(elt)
 
-        metadata.write(os.path.join(self.ctx.pkg_dir(), self.ctx.const.metadata_xml))
+        metadata.write(os.path.join(self.ctx.pkg_dir(), const.metadata_xml))
 
     def genFilesXml(self, package):
         """Generetes files.xml using the path definitions in specfile and
@@ -201,17 +202,17 @@ class PisiBuild:
                         ftype = path.fileType
                         fsize = str(os.path.getsize(fpath))
             files.append(FileInfo(frpath, ftype, fsize, fhash))
-        files.write(os.path.join(self.ctx.pkg_dir(), self.ctx.const.files_xml))
+        files.write(os.path.join(self.ctx.pkg_dir(), const.files_xml))
 
     def buildPackages(self):
         for package in self.spec.packages:
             ui.info("** Building package %s\n" % package.name);
             
-            ui.info("Generating %s..." % self.ctx.const.metadata_xml)
+            ui.info("Generating %s..." % const.metadata_xml)
             self.genMetaDataXml(package)
             ui.info(" done.\n")
 
-            ui.info("Generating %s..." % self.ctx.const.files_xml)
+            ui.info("Generating %s..." % const.files_xml)
             self.genFilesXml(package)
             ui.info(" done.\n")
 
@@ -223,8 +224,8 @@ class PisiBuild:
             c = os.getcwd()
 
             os.chdir(self.ctx.pkg_dir())
-            pkg.add_file(self.ctx.const.metadata_xml)
-            pkg.add_file(self.ctx.const.files_xml)
+            pkg.add_file(const.metadata_xml)
+            pkg.add_file(const.files_xml)
             pkg.add_file("install")
             pkg.close()
             os.chdir(c)

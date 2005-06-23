@@ -33,7 +33,7 @@ class SourceArchive:
     def fetch(self, percentHook=displayProgress):
         """fetch an archive and store to ctx.archives_dir() 
         using fetcher.Fetcher"""
-        fetch = Fetcher(self.ctx.source)
+        fetch = Fetcher(self.ctx.spec.source)
 
         # check if source already cached
         destpath = fetch.filedest + "/" + fetch.filename
