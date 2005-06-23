@@ -19,7 +19,7 @@ class FileInfo:
     def read(self, node):
         self.path = getNodeText(getNode(node, "Path"))
         self.type = getNodeText(getNode(node, "Type"))
-        self.hash = getNodeText(getNode(node, "Hash"))
+        self.hash = getNodeText(getNode(node, "SHA1Sum"))
 
     def elt(self, dom):
         ## FIXME: looking for a better way to do it
@@ -29,7 +29,7 @@ class FileInfo:
         pathElt.appendChild(dom.createTextNode(self.path))
         typeElt = dom.createElement("Type")
         typeElt.appendChild(dom.createTextNode(self.type))
-        hashElt = dom.createElement("Hash")
+        hashElt = dom.createElement("SHA1Sum")
         hashElt.appendChild(dom.createTextNode(self.hash))
         elt.appendChild(pathElt)
         elt.appendChild(typeElt)
