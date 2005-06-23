@@ -9,7 +9,7 @@ import sys
 # import pisipackage
 import util
 from ui import ui
-from context import ctx
+from config import config
 from sourcearchive import SourceArchive
 from files import Files, FileInfo
 from specfile import SpecFile
@@ -21,8 +21,8 @@ class PisiBuildError(Exception):
 
 class PisiBuild:
     """PisiBuild class, provides the package build and creation routines"""
-    def __init__(self, context):
-        self.ctx = context
+    def __init__(self, buildcontext):
+        self.ctx = buildcontext
         self.work_dir = self.ctx.pkg_work_dir()
         self.spec = self.ctx.spec
         self.sourceArchive = SourceArchive(self.ctx)

@@ -7,8 +7,9 @@ from pisi import util
 from pisi import context
 
 class PackageDBTestCase(unittest.TestCase):
+
     def setUp(self):
-        self.ctx = context.Context("samples/popt/popt.pspec")
+        self.ctx = context.BuildContext("samples/popt/popt.pspec")
         
     def testAdd(self):
         packagedb.add_package("testpackagedb", self.ctx.spec.packages[0])

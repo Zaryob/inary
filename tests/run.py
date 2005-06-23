@@ -2,32 +2,34 @@
 
 import unittest
 import sys
-sys.path.append(".")
+import os
+
+sys.path.append('.')
 
 runTestSuite = lambda(x): unittest.TextTestRunner(verbosity=2).run(x)
 
 def run_all():
-    
+
     import specfiletests
     import metadatatests
-    import contexttests
+    import constantstests
     import fetchertests
     import archivetests
     import installdbtests
     import packagedbtests
     import actionsapitests
-    
+
     alltests = unittest.TestSuite((
-	    specfiletests.suite,
-	    specfiletests.suite,
-	    metadatatests.suite,
-	    contexttests.suite,
-	    fetchertests.suite,
-	    archivetests.suite,
-	    installdbtests.suite,
-	    packagedbtests.suite,
-	    actionsapitests.suite
-	    ))
+        specfiletests.suite,
+        specfiletests.suite,
+        metadatatests.suite,
+        constantstests.suite,
+        fetchertests.suite,
+        archivetests.suite,
+        installdbtests.suite,
+        packagedbtests.suite,
+        actionsapitests.suite
+        ))
 
     runTestSuite(alltests)
 

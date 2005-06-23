@@ -4,11 +4,11 @@ import os
 
 from pisi import installdb
 from pisi import util
-from pisi import context
+from pisi.config import config
 
 class InstallDBTestCase(unittest.TestCase):
+
     def setUp(self):
-        self.ctx = context.Context()
         pass
 
     def testRemoveDummy(self):

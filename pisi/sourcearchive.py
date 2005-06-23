@@ -9,7 +9,6 @@ from archive import Archive
 import util
 from ui import ui
 import context
-from context import ctx
 
 class SourceArchiveError(Exception):
     pass
@@ -34,7 +33,7 @@ class SourceArchive:
     def fetch(self, percentHook=displayProgress):
         """fetch an archive and store to ctx.archives_dir() 
         using fetcher.Fetcher"""
-        fetch = Fetcher(self.ctx)
+        fetch = Fetcher(self.ctx.source)
 
         # check if source already cached
         destpath = fetch.filedest + "/" + fetch.filename

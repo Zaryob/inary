@@ -5,12 +5,12 @@
 import os
 import bsddb.dbshelve as shelve
 
-from context import ctx
+from config import config
 import util
 
-util.check_dir(ctx.db_dir())
-d = shelve.open(ctx.db_dir() + '/install.bdb')
-files_dir = ctx.archives_dir() + "/files"
+util.check_dir(config.db_dir())
+d = shelve.open(config.db_dir() + '/install.bdb')
+files_dir = config.db_dir() + "/files"
 
 class InstallDBError(Exception):
     pass

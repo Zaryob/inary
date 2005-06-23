@@ -14,7 +14,7 @@ class ArchiveFileTestCase(unittest.TestCase):
 #     pass
 
     def testUnpackTar(self):
-        ctx = context.Context("samples/popt/popt.pspec")
+        ctx = context.BuildContext("samples/popt/popt.pspec")
 
         targetDir = ctx.pkg_work_dir()
         fileName = os.path.basename(ctx.spec.source.archiveUri)
@@ -38,8 +38,8 @@ class ArchiveFileTestCase(unittest.TestCase):
              "5af9dd7d754f788cf511c57ce0af3d555fed009d")
 
     def testUnpackZip(self):
-        ctx = context.Context("tests/sandbox/sandbox.pspec")
-        fetch = fetcher.Fetcher(ctx)
+        ctx = context.BuildContext("tests/sandbox/sandbox.pspec")
+        fetch = fetcher.Fetcher(ctx.spec.source)
         fetch.fetch()
 
         targetDir = ctx.pkg_work_dir()
@@ -65,8 +65,8 @@ class ArchiveFileTestCase(unittest.TestCase):
         assert islink(testfile)
     
     def testUnpackZipCond(self):
-        ctx = context.Context("tests/sandbox/sandbox.pspec")
-        fetch = fetcher.Fetcher(ctx)
+        ctx = context.BuildContext("tests/sandbox/sandbox.pspec")
+        fetch = fetcher.Fetcher(ctx.spec.source)
         fetch.fetch()
         targetDir = ctx.pkg_work_dir()
         assert ctx.spec.source.archiveType == "zip"

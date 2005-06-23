@@ -9,15 +9,19 @@ import os
 
 # pisi modules
 import util
+from config import config
 
 class FetchError (Exception):
     pass
 
 class Fetcher:
-    """Yet another Pisi tool for fetching files from various sources.."""
-    def __init__(self, ctx):
-        self.uri = ctx.spec.source.archiveUri
-        self.filedest = ctx.archives_dir()
+    """Yet another Pisi tool for fetching files from various sources..
+    Of course, this is not limited to just fetching source files.
+    We fetch all kinds of things: source tarballs, index files,
+    packages, and God knows what."""
+    def __init__(self, source):
+        self.uri = source.archiveUri
+        self.filedest = config.archives_dir()
         util.check_dir(self.filedest)
         self.scheme = "file"
         self.netloc = ""

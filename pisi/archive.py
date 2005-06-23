@@ -7,7 +7,7 @@ import os
 import sys
 import tarfile
 import zipfile
-from context import ctx
+from config import config
 
 #pisi modules
 import util

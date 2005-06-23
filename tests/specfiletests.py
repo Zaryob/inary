@@ -3,7 +3,7 @@ import unittest
 import os
 
 from pisi import specfile
-from pisi.context import ctx
+from pisi.config import config
 
 class SpecFileTestCase(unittest.TestCase):
     def setUp(self):
@@ -31,6 +31,6 @@ class SpecFileTestCase(unittest.TestCase):
 
     def testCopy(self):
         self.spec.read("samples/popt/popt.pspec")
-        self.spec.write(os.path.join(ctx.tmp_dir(), 'popt-copy.pspec'))
+        self.spec.write(os.path.join(config.tmp_dir(), 'popt-copy.pspec'))
 
 suite = unittest.makeSuite(SpecFileTestCase)

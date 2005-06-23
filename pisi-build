@@ -46,8 +46,7 @@ def main():
         pspec = args[0]
 
     # What we need to do first is create a context with our specfile
-    ctx = pisi.context.Context(pspec)
-
+    ctx = pisi.context.BuildContext(pspec)
     # don't do the real job here. this is just a CLI!
     pb = PisiBuild(ctx)
     pb.build()

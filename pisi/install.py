@@ -4,7 +4,7 @@
 from specfile import *
 from package import Package
 import util
-from context import ctx
+from config import config
 from ui import ui
 import installdb
 import packagedb
@@ -23,15 +23,15 @@ def install(package_fn):
     
     package = Package(package_fn, 'r')
     # extract control files
-    util.clean_dir(ctx.install_dir())
+    util.clean_dir(config.install_dir())
     ui.info('extracting files\n')
-    package.extract_PISI_files(ctx.install_dir())
+    package.extract_PISI_files(config.install_dir())
 
     # verify package
     # check if we have all required files
 
     metadata = MetaData()
-    metadata.read(ctx.install_dir() + '/metadata.xml')
+    metadata.read(config.install_dir() + '/metadata.xml')
     # check package semantics
     if not metadata.verify():
         raise InstallError("MetaData format wrong")
@@ -45,7 +45,7 @@ def install(package_fn):
         raise InstallError("Package not installable")
 
     # unzip package in place
-    package.extract_dir_flat(ctx.destdir)
+    package.extract_dir_flat(config.destdir)
     
     # update databases
 
@@ -53,4 +53,4 @@ def install(package_fn):
     installdb.install(metadata.packages[0].name,
                       metadata.source.version,
                       metadata.source.release,
-                      ctx.install_dir() + '/files.xml')
+                      config.install_dir() + '/files.xml')
