@@ -423,11 +423,11 @@ Archive:
 \series bold 
 archType
 \series default 
- ile arþiv tipi (tar.gz, tar.bz2, zip, vb), 
+ arþiv tipini (tar.gz, tar.bz2, zip, vb) belirtirken, 
 \series bold 
-md5sum
+sha1sum
 \series default 
- ile MD5 hash deðeri verilir.
+, sha1 ile alýnmýþ özet deðerini belirtir.
 \layout Itemize
 
 
@@ -869,9 +869,12 @@ XML
 pisi-metadata.dtd
 \emph default 
  dosyasýnda tanýmlanmýþtýr.
- (Ek tag'ler de bir section'a eklenmeli ya da yeni section olusturulmali
- gibi geldi bana, ornegin Distribution olabilir.
- -- Eray)
+ 
+\layout Comment
+
+Ek tag'ler de bir section'a eklenmeli ya da yeni section olusturulmali gibi
+ geldi bana, ornegin Distribution olabilir.
+ -- Eray
 \layout Subsection
 
 files.xml
@@ -954,18 +957,20 @@ executable, conf, doc, sharedLib, localeData, programData, header
 
 
 \series bold 
-Size:
+Size: 
+\series default 
+Dosyanýn byte cinsinden boyutunu saklar.
 \layout Itemize
 
 
 \series bold 
-SHA1: Path
+SHA1Sum: Path
 \series default 
  ile belirtilen dosyanýn SHA1 algoritmasý ile elde edilmiþ 
 \emph on 
-cryptographic hash
+cryptographic 
 \emph default 
- deðerini verir.
+özet deðerini saklar.
 \end_deeper 
 \end_deeper 
 \layout Standard
@@ -975,9 +980,13 @@ files.xml dosyalarýnýn doðrulanmasý için kullanýlabilecek bilgi
 pisi-files.dtd
 \emph default 
  dosyasýnda tanýmlanmýþtýr.
-\layout Standard
+\layout Comment
 
 Bunlarin da acaba attribute seklinde olmasi daha mi dogru olur? -- Eray
+\layout Comment
+
+En son bunlarýn attribute þeklinde olmasýna karar verilmiþti.
+ -- Meren
 \layout Subsection
 
 PSPEC Deposu
@@ -1129,13 +1138,14 @@ metadata.xml
 pisi-index.xml
 \series default 
  isminde bir içerik (depo içeriði) dosyasý düzenli aralýklar ile oluþturulacaktý
-r ( 
-\series bold 
-Çaðlar:
-\series default 
- Burada cron illa mecbur yöntem olmak zorunda deðil sanki, þimdilik zikretmeyeli
-m, build farm zamanýnda bir çözüm buluruz ).
- Ýçeriðinde mevcut sürümün bilgilerini içerecek bir dosya oluþturulacaktýr.
+r
+\layout Comment
+
+Burada cron illa mecbur yöntem olmak zorunda deðil sanki, þimdilik zikretmeyelim
+, build farm zamanýnda bir çözüm buluruz -- Çaðlar
+\layout Standard
+
+Ýçeriðinde mevcut sürümün bilgilerini içerecek bir dosya oluþturulacaktýr.
  Bu dosya daðýtýmýn tüm paketleri için þu bilgileri içerecektir;
 \layout Itemize
 
@@ -1718,14 +1728,14 @@ DB
 ZIP
 \layout Itemize
 
-Utils
+Util
 \begin_deeper 
 \layout Itemize
 
 unpack (tar, tar.gz, tar.bz2, zip)
 \layout Itemize
 
-md5
+sha1
 \layout Itemize
 
 patch
@@ -1751,7 +1761,7 @@ ActionExec (Action betiklerinin çalýþtýrýlmasý)
 COMAR
 \layout Itemize
 
-Package (xml, zip, gpg, md5 modüllerini kullanýyor...)
+Package (xml, zip, gpg, util modüllerini kullanýyor...)
 \layout Subsection
 
 PÝSÝ Package Builder (GUI)
