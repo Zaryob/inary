@@ -5,7 +5,6 @@
 import archive
 from constants import const
 from config import config
-from metadata import MetaData
 
 class Package:
     """Package: PISI package class"""
