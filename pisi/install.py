@@ -19,7 +19,7 @@ import dependency
 class InstallError(Exception):
     pass
 
-def install(self, package_fn):
+def install(package_fn):
     
     package = Package(package_fn, 'r')
     # extract control files
