@@ -396,9 +396,37 @@ Paketin bir kategori/sistem/kolleksiyon'a aitliðini belirtir.
 \series bold 
 PartOf: 
 \series default 
-Paketin hangi aitliðin parçasý olduðunu belirtir.
+Paketin hangi bütünün/grubun parçasý olduðunu belirtir.
  Aitlik özellikleri için Freshmeat'in Trove kategorileri örnek verilebilir.
  ( örn: LyX and TeTex are parts of Tex:Distrubiton )
+\newline 
+
+\series bold 
+IsA
+\series default 
+ ve 
+\series bold 
+ParfOf
+\series default 
+ bir 
+\series bold 
+PÝSÝ
+\series default 
+ paketinin farklý türdeki aitliklerini ifade eder.
+ 
+\series bold 
+PartOf
+\series default 
+ ile belirtilen bir 
+\series bold 
+Component
+\series default 
+'in tümünü sisteme kurabilirsiniz.
+ Fakat 
+\series bold 
+IsA
+\series default 
+ ile belirtilen aitlikleri yanlýzca sorgulayabilirsiniz.
 \layout Itemize
 
 
@@ -451,7 +479,12 @@ sha1sum
 \series bold 
 Patches
 \series default 
-: Orjinal koda uygulanacak yamalarýn sýralý bir listesini içerir.
+: Orjinal koda uygulanacak yamalarýn 
+\series bold 
+sýralý
+\series default 
+ bir listesini içerir.
+ Yamalar bu bölümde tanýmlanan sýra ile kaynak koda uygulanýr.
 \begin_deeper 
 \layout Itemize
 
@@ -556,6 +589,25 @@ VersionTo:
 History
 \series default 
 : Pakete yapýlan güncellemelerin bir listesini verir.
+ 
+\series bold 
+History
+\series default 
+ altýndaki güncellemeleri belirten 
+\series bold 
+Update
+\series default 
+ taglarýnýn mutlaka tarihe göre sýralý olmasý gerekmektedir.
+ En son güncelleme en üstte bulunmalýdýr.
+ Çünkü en son güncellemeden alýnan 
+\series bold 
+Version
+\series default 
+ ve 
+\series bold 
+Release
+\series default 
+ bilgisi pakete uygulanacaktýr.
 \begin_deeper 
 \layout Itemize
 
@@ -572,7 +624,7 @@ Update
 Type: 
 \series default 
 Güncellemenin tipini belirtir.
- ( Güvenlik, Bug, Enhancement v.s )
+ (Güvenlik, Bug, Enhancement v.s)
 \layout Itemize
 
 
@@ -601,57 +653,59 @@ Release:
 Package: 
 \series medium 
 Uygulamadan oluþturulacak bir pakedi tanýmlar.
+ 
+\series default 
+Package
+\series medium 
+ içerisindeki bazý taglar 
+\series default 
+PÝSÝ
+\series medium 
+ içerisindekileri tekrarlayacaklardýr.
+ Bu tekrarlamalarýn bazýlarý override edilirken (üzerine yazýlýrken) bazýlarý
+ merge (birleþtirilecek) edilecek.
 \layout Itemize
 
 
 \series bold 
-Name
+Name: 
 \series default 
-: Oluþturulacak pakedin adý.
+Override
 \layout Itemize
 
 
 \series bold 
-Summary
+Summary: 
 \series default 
-: Tek satýrlýk açýklayýcý bilgi.
- Çoklu dil desteðine sahiptir.
+Override
 \layout Itemize
 
 
 \series bold 
 Description
 \series default 
-: Uygulama hakkýnda özet açýklama.
- Çoklu dil desteðine sahiptir.
+: Override
 \layout Itemize
 
 
 \series bold 
 License
 \series default 
-: Uygulamanýn lisansýný belirtir (GPL, BSD, vb).
+: Override
 \layout Itemize
 
 
 \series bold 
 IsA: 
 \series default 
-Paketin bir kategori/sistem/kolleksiyon'a aitliðini belirtir.
- ( 
-\emph on 
-örn:
-\emph default 
- k3b is a KDE program )
+Merge
 \layout Itemize
 
 
 \series bold 
 PartOf: 
 \series default 
-Paketin hangi aitliðin parçasý olduðunu belirtir.
- Aitlik özellikleri için Freshmeat'in Trove kategorileri örnek verilebilir.
- ( örn: LyX and TeTex are parts of Tex:Distrubiton )
+Merge
 \layout Itemize
 
 
@@ -795,17 +849,49 @@ File
 \end_deeper 
 \layout Subsubsection
 
-Actions Dosyasý
+actions.py Dosyasý
 \layout Standard
 
 Bu dosya bir Python betiði olup, kaynaðýn kurulmasý, derlenmesi, test edilmesi,
  sisteme kurulmasý gibi iþlevleri yerine getiren fonksiyonlardan oluþur.
+ 
+\layout Standard
+
+Paketin oluþturulmasý sýrasýnda derleme sistemi 
+\series bold 
+actions.py
+\series default 
+ içerisindeki 3 fonksiyon adýný arar ve çalýþtýrýr; 
+\series bold 
+setup, build, install
+\series default 
+.
+ Bu fonksiyonlardan install'ýn tanýmlanmasý zorunlu olmakla birlikte setup
+ ve build sadece tanýmlanmýþsa çalýþtýrýlýr.
+ 
+\layout Standard
+
+
+\series bold 
+actions.py
+\series default 
+'ler tarafýndan kullanýlmak üzere 
+\series bold 
+PÝSÝ
+\series default 
+ tarafýndan hazýr bir 
+\series bold 
+API
+\series default 
+ actionsapi adýnda sunulacaktýr.
 \layout Subsubsection
 
 ChangeLog Dosyasý
 \layout Standard
 
 Pakedin sürümlerindeki deðiþikliklerin açýklamalarýný içerir.
+ Bu dosya bilindik ChangeLog stilindedir ve PSPEC içindeki History bilgisi
+ ile ilgili deðildir.
 \layout Subsection
 
 metadata.xml
@@ -861,14 +947,12 @@ Metadata
 \series bold 
 Name
 \series default 
- {From Package Tag}: Uygulamanýn adý.
+ {From Package Tag}
 \layout Itemize
 
 
 \series bold 
-Homepage: 
-\series default 
-Uygulamanýn web sitesinin URL'sini belirtir.
+Homepage
 \layout Itemize
 
 
@@ -876,11 +960,6 @@ Uygulamanýn web sitesinin URL'sini belirtir.
 Summary 
 \series default 
 {From Package Tag}
-\series bold 
-:
-\series default 
- Tek satýrlýk açýklayýcý bilgi.
- Çoklu dil desteðine sahiptir.
 \layout Itemize
 
 
@@ -888,11 +967,6 @@ Summary
 Description 
 \series default 
 {From Package Tag}
-\series bold 
-: 
-\series default 
-Uygulama hakkýnda özet açýklama.
- Çoklu dil desteðine sahiptir.
 \layout Itemize
 
 
@@ -900,15 +974,6 @@ Uygulama hakkýnda özet açýklama.
 IsA 
 \series default 
 {From Package Tag}
-\series bold 
-: 
-\series default 
-Paketin bir kategori/sistem/kolleksiyon'a aitliðini belirtir.
- ( 
-\emph on 
-örn:
-\emph default 
- k3b is a KDE program )
 \layout Itemize
 
 
@@ -916,34 +981,24 @@ Paketin bir kategori/sistem/kolleksiyon'a aitliðini belirtir.
 PartOf 
 \series default 
 {From Package Tag}
-\series bold 
-: 
-\series default 
-Paketin hangi aitliðin parçasý olduðunu belirtir.
- Aitlik özellikleri için Freshmeat'in Trove kategorileri örnek verilebilir.
- ( örn: LyX and TeTex are parts of Tex:Distrubiton )
 \layout Itemize
 
 
 \series bold 
-Packager: 
-\series default 
-Paketi oluþturan kiþilerin adý/soyadý ve e-posta adresi belirtir.
+Packager
 \begin_deeper 
 \layout Itemize
 
 
 \series bold 
-Name:
+Name
 \series default 
- Paket geliþtiricisinin adý ve soyadý.
+.
 \layout Itemize
 
 
 \series bold 
-Email:
-\series default 
- Paket geliþtiricisinin e-posta adresi.
+Email
 \end_deeper 
 \layout Itemize
 
@@ -951,62 +1006,46 @@ Email:
 \series bold 
 License
 \series default 
- {From Package Tag}: Uygulamanýn lisansýný belirtir (GPL, BSD, vb).
+ {From Package Tag}
 \layout Itemize
 
 
 \series bold 
 History
-\series default 
-: Pakete yapýlan güncellemelerin bir listesini verir.
 \begin_deeper 
 \layout Itemize
 
 
 \series bold 
 Update
-\series default 
-: Bir güncellemeyi tarif eder.
 \begin_deeper 
 \layout Itemize
 
 
 \series bold 
-Type: 
-\series default 
-Güncellemenin tipini belirtir.
- ( Güvenlik, Bug, Enhancement v.s )
+Type
 \layout Itemize
 
 
 \series bold 
 Date
-\series default 
-: Güncellemenin tarihi.
 \layout Itemize
 
 
 \series bold 
-Version: 
-\series default 
-Uygulamanýn sürüm numarasý.
+Version
 \layout Itemize
 
 
 \series bold 
-Release:
-\series default 
- Pakedin sürüm numarasý.
+Release
 \end_deeper 
 \end_deeper 
 \layout Itemize
 
 
 \series bold 
-Conflicts:
-\series default 
- Paketin çalýþmasý/iþlevini yerine getirmesi için, sistemde olmamasý gereken
- paketleri belirtir.
+Conflicts
 \layout Itemize
 
 
@@ -1019,47 +1058,33 @@ Provides:
 
 \series bold 
 RuntimeDependencies
-\series default 
-: Pakedin çalýþabilmesi için gereken baðýmlýlýklarýn bir listesini verir.
- 
 \begin_deeper 
 \layout Itemize
 
 
 \series bold 
 Dependency
-\series default 
-: Bir baðýmlýlýk tanýmlar.
 \begin_deeper 
 \layout Itemize
 
 
 \series bold 
 Name
-\series default 
-: Baðýmlýlýk duyulan pakedin adý.
 \layout Itemize
 
 
 \series bold 
-Version:
-\series default 
- Baðýmlý olunan tek bir sürüm numarasýný bildirir.
+Version
 \layout Itemize
 
 
 \series bold 
-VersionFrom:
-\series default 
- Bu sürüm numarasýndan sonraki tüm sürüm numaralarýna baðýmlýlýðý tarif
- eder.
+VersionFrom
 \layout Itemize
 
 
 \series bold 
-VersionTo:
-\series default 
- Bu sürüm numaralarýna kadar olan baðýmlýlýðý tarif eder.
+VersionTo
 \end_deeper 
 \end_deeper 
 \layout Itemize
@@ -1067,47 +1092,33 @@ VersionTo:
 
 \series bold 
 InstallDependencies
-\series default 
-: Pakedin çalýþabilmesi için gereken baðýmlýlýklarýn bir listesini verir.
- 
 \begin_deeper 
 \layout Itemize
 
 
 \series bold 
 Dependency
-\series default 
-: Bir baðýmlýlýk tanýmlar.
 \begin_deeper 
 \layout Itemize
 
 
 \series bold 
 Name
-\series default 
-: Baðýmlýlýk duyulan pakedin adý.
 \layout Itemize
 
 
 \series bold 
-Version:
-\series default 
- Baðýmlý olunan tek bir sürüm numarasýný bildirir.
+Version
 \layout Itemize
 
 
 \series bold 
-VersionFrom:
-\series default 
- Bu sürüm numarasýndan sonraki tüm sürüm numaralarýna baðýmlýlýðý tarif
- eder.
+VersionFrom
 \layout Itemize
 
 
 \series bold 
-VersionTo:
-\series default 
- Bu sürüm numaralarýna kadar olan baðýmlýlýðý tarif eder.
+VersionTo
 \end_deeper 
 \end_deeper 
 \layout Itemize
@@ -1115,14 +1126,6 @@ VersionTo:
 
 \series bold 
 Files
-\series default 
-: Pakedin kurulacak dosyalarýnýn tiplerini belirlemek için kullanýlýr.
- Dosya tipleri ile ilgili bigi 
-\begin_inset LatexCommand \ref{FType}
-
-\end_inset 
-
- kýsmýnda verilmiþtir.
 \begin_deeper 
 \layout Itemize
 
