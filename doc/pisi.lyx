@@ -367,21 +367,38 @@ Uygulamanýn web sitesinin URL'sini belirtir.
 
 \series bold 
 Summary:
+\series default 
+ Tek satýrlýk açýklayýcý bilgi.
+ Çoklu dil desteðine sahiptir.
 \layout Itemize
 
 
 \series bold 
-Description:
+Description: 
+\series default 
+Uygulama hakkýnda özet açýklama.
+ Çoklu dil desteðine sahiptir.
 \layout Itemize
 
 
 \series bold 
-IsA:
+IsA: 
+\series default 
+Paketin bir kategori/sistem/kolleksiyon'a aitliðini belirtir.
+ ( 
+\emph on 
+örn:
+\emph default 
+ k3b is a KDE program )
 \layout Itemize
 
 
 \series bold 
-PartOf:
+PartOf: 
+\series default 
+Paketin hangi aitliðin parçasý olduðunu belirtir.
+ Aitlik özellikleri için Freshmeat'in Trove kategorileri örnek verilebilir.
+ ( örn: LyX and TeTex are parts of Tex:Distrubiton )
 \layout Itemize
 
 
@@ -453,23 +470,37 @@ compressionType
 
 
 \series bold 
-AdditionalFiles:
+AdditionalFiles: 
+\series default 
+Kaynak ile gelmeyen ama paketin çalýþmasý, ek özellik kazanmasý v.s.
+ için gerekli dosyalarý belirtir.
+ ( 
+\emph on 
+örn
+\emph default 
+; init betikleri )
 \begin_deeper 
 \layout Itemize
 
 
 \series bold 
-Target:
+Target: 
+\series default 
+Dosyanýn nereye konulacaðýný belirtir.
 \layout Itemize
 
 
 \series bold 
-Permission:
+Permission: 
+\series default 
+Dosyanýn hangi haklarla saklanacaðýný belirtir.
 \layout Itemize
 
 
 \series bold 
-Owner:
+Owner: 
+\series default 
+Dosyanýn sahip/grup bilgilerini belirtir.
 \end_deeper 
 \layout Itemize
 
@@ -538,7 +569,10 @@ Update
 
 
 \series bold 
-Type:
+Type: 
+\series default 
+Güncellemenin tipini belirtir.
+ ( Güvenlik, Bug, Enhancement v.s )
 \layout Itemize
 
 
@@ -594,12 +628,45 @@ Description
 
 
 \series bold 
-IsA:
+License
+\series default 
+: Uygulamanýn lisansýný belirtir (GPL, BSD, vb).
 \layout Itemize
 
 
 \series bold 
-PartOf:
+IsA: 
+\series default 
+Paketin bir kategori/sistem/kolleksiyon'a aitliðini belirtir.
+ ( 
+\emph on 
+örn:
+\emph default 
+ k3b is a KDE program )
+\layout Itemize
+
+
+\series bold 
+PartOf: 
+\series default 
+Paketin hangi aitliðin parçasý olduðunu belirtir.
+ Aitlik özellikleri için Freshmeat'in Trove kategorileri örnek verilebilir.
+ ( örn: LyX and TeTex are parts of Tex:Distrubiton )
+\layout Itemize
+
+
+\series bold 
+Conflicts:
+\series default 
+ Paketin çalýþmasý/iþlevini yerine getirmesi için, sistemde olmamasý gereken
+ paketleri belirtir.
+\layout Itemize
+
+
+\series bold 
+Provides:
+\series default 
+ *********************** ????????????????????????
 \layout Itemize
 
 
@@ -739,13 +806,6 @@ ChangeLog Dosyasý
 \layout Standard
 
 Pakedin sürümlerindeki deðiþikliklerin açýklamalarýný içerir.
-\layout Subsubsection
-
-Files Dizini
-\layout Standard
-
-Orjinal kaynaða uygulanacak yamalar ve kaynakta bulunmayan fazladan dosyalar
- bu dizine konur.
 \layout Subsection
 
 metadata.xml
@@ -789,19 +849,6 @@ Metadata
 Metadata
 \series default 
  dosyasýnýn içeriði þöyle tanýmlanmýþtýr;
-\layout Standard
-
-
-\begin_inset Marginal
-collapsed true
-
-\layout Standard
-
-metadata.xml'i de spec dosyasýnda olduðu gibi detaylandýrmak ve XML biçimi
- þeklinde (iç içe) yazmak gerekiyor
-\end_inset 
-
-
 \layout Itemize
 
 
@@ -812,16 +859,287 @@ Metadata
 
 
 \series bold 
-PSPEC dosyasýnýn X.Y.Z [ yarýn yazacaðým ] bölümleri
+Name
+\series default 
+ {From Package Tag}: Uygulamanýn adý.
 \layout Itemize
 
 
 \series bold 
-PSPEC dosyasýnýn
+Homepage: 
 \series default 
- 
+Uygulamanýn web sitesinin URL'sini belirtir.
+\layout Itemize
+
+
 \series bold 
-ilgili Package bölümü
+Summary 
+\series default 
+{From Package Tag}
+\series bold 
+:
+\series default 
+ Tek satýrlýk açýklayýcý bilgi.
+ Çoklu dil desteðine sahiptir.
+\layout Itemize
+
+
+\series bold 
+Description 
+\series default 
+{From Package Tag}
+\series bold 
+: 
+\series default 
+Uygulama hakkýnda özet açýklama.
+ Çoklu dil desteðine sahiptir.
+\layout Itemize
+
+
+\series bold 
+IsA 
+\series default 
+{From Package Tag}
+\series bold 
+: 
+\series default 
+Paketin bir kategori/sistem/kolleksiyon'a aitliðini belirtir.
+ ( 
+\emph on 
+örn:
+\emph default 
+ k3b is a KDE program )
+\layout Itemize
+
+
+\series bold 
+PartOf 
+\series default 
+{From Package Tag}
+\series bold 
+: 
+\series default 
+Paketin hangi aitliðin parçasý olduðunu belirtir.
+ Aitlik özellikleri için Freshmeat'in Trove kategorileri örnek verilebilir.
+ ( örn: LyX and TeTex are parts of Tex:Distrubiton )
+\layout Itemize
+
+
+\series bold 
+Packager: 
+\series default 
+Paketi oluþturan kiþilerin adý/soyadý ve e-posta adresi belirtir.
+\begin_deeper 
+\layout Itemize
+
+
+\series bold 
+Name:
+\series default 
+ Paket geliþtiricisinin adý ve soyadý.
+\layout Itemize
+
+
+\series bold 
+Email:
+\series default 
+ Paket geliþtiricisinin e-posta adresi.
+\end_deeper 
+\layout Itemize
+
+
+\series bold 
+License
+\series default 
+ {From Package Tag}: Uygulamanýn lisansýný belirtir (GPL, BSD, vb).
+\layout Itemize
+
+
+\series bold 
+History
+\series default 
+: Pakete yapýlan güncellemelerin bir listesini verir.
+\begin_deeper 
+\layout Itemize
+
+
+\series bold 
+Update
+\series default 
+: Bir güncellemeyi tarif eder.
+\begin_deeper 
+\layout Itemize
+
+
+\series bold 
+Type: 
+\series default 
+Güncellemenin tipini belirtir.
+ ( Güvenlik, Bug, Enhancement v.s )
+\layout Itemize
+
+
+\series bold 
+Date
+\series default 
+: Güncellemenin tarihi.
+\layout Itemize
+
+
+\series bold 
+Version: 
+\series default 
+Uygulamanýn sürüm numarasý.
+\layout Itemize
+
+
+\series bold 
+Release:
+\series default 
+ Pakedin sürüm numarasý.
+\end_deeper 
+\end_deeper 
+\layout Itemize
+
+
+\series bold 
+Conflicts:
+\series default 
+ Paketin çalýþmasý/iþlevini yerine getirmesi için, sistemde olmamasý gereken
+ paketleri belirtir.
+\layout Itemize
+
+
+\series bold 
+Provides:
+\series default 
+ *********************** ????????????????????????
+\layout Itemize
+
+
+\series bold 
+RuntimeDependencies
+\series default 
+: Pakedin çalýþabilmesi için gereken baðýmlýlýklarýn bir listesini verir.
+ 
+\begin_deeper 
+\layout Itemize
+
+
+\series bold 
+Dependency
+\series default 
+: Bir baðýmlýlýk tanýmlar.
+\begin_deeper 
+\layout Itemize
+
+
+\series bold 
+Name
+\series default 
+: Baðýmlýlýk duyulan pakedin adý.
+\layout Itemize
+
+
+\series bold 
+Version:
+\series default 
+ Baðýmlý olunan tek bir sürüm numarasýný bildirir.
+\layout Itemize
+
+
+\series bold 
+VersionFrom:
+\series default 
+ Bu sürüm numarasýndan sonraki tüm sürüm numaralarýna baðýmlýlýðý tarif
+ eder.
+\layout Itemize
+
+
+\series bold 
+VersionTo:
+\series default 
+ Bu sürüm numaralarýna kadar olan baðýmlýlýðý tarif eder.
+\end_deeper 
+\end_deeper 
+\layout Itemize
+
+
+\series bold 
+InstallDependencies
+\series default 
+: Pakedin çalýþabilmesi için gereken baðýmlýlýklarýn bir listesini verir.
+ 
+\begin_deeper 
+\layout Itemize
+
+
+\series bold 
+Dependency
+\series default 
+: Bir baðýmlýlýk tanýmlar.
+\begin_deeper 
+\layout Itemize
+
+
+\series bold 
+Name
+\series default 
+: Baðýmlýlýk duyulan pakedin adý.
+\layout Itemize
+
+
+\series bold 
+Version:
+\series default 
+ Baðýmlý olunan tek bir sürüm numarasýný bildirir.
+\layout Itemize
+
+
+\series bold 
+VersionFrom:
+\series default 
+ Bu sürüm numarasýndan sonraki tüm sürüm numaralarýna baðýmlýlýðý tarif
+ eder.
+\layout Itemize
+
+
+\series bold 
+VersionTo:
+\series default 
+ Bu sürüm numaralarýna kadar olan baðýmlýlýðý tarif eder.
+\end_deeper 
+\end_deeper 
+\layout Itemize
+
+
+\series bold 
+Files
+\series default 
+: Pakedin kurulacak dosyalarýnýn tiplerini belirlemek için kullanýlýr.
+ Dosya tipleri ile ilgili bigi 
+\begin_inset LatexCommand \ref{FType}
+
+\end_inset 
+
+ kýsmýnda verilmiþtir.
+\begin_deeper 
+\layout Itemize
+
+
+\series bold 
+Directory
+\layout Itemize
+
+
+\series bold 
+Wildcard
+\layout Itemize
+
+
+\series bold 
+File
+\end_deeper 
 \layout Itemize
 
 
@@ -870,11 +1188,6 @@ pisi-metadata.dtd
 \emph default 
  dosyasýnda tanýmlanmýþtýr.
  
-\layout Comment
-
-Ek tag'ler de bir section'a eklenmeli ya da yeni section olusturulmali gibi
- geldi bana, ornegin Distribution olabilir.
- -- Eray
 \layout Subsection
 
 files.xml
@@ -980,13 +1293,6 @@ files.xml dosyalarýnýn doðrulanmasý için kullanýlabilecek bilgi
 pisi-files.dtd
 \emph default 
  dosyasýnda tanýmlanmýþtýr.
-\layout Comment
-
-Bunlarin da acaba attribute seklinde olmasi daha mi dogru olur? -- Eray
-\layout Comment
-
-En son bunlarýn attribute þeklinde olmasýna karar verilmiþti.
- -- Meren
 \layout Subsection
 
 PSPEC Deposu
@@ -1139,10 +1445,6 @@ pisi-index.xml
 \series default 
  isminde bir içerik (depo içeriði) dosyasý düzenli aralýklar ile oluþturulacaktý
 r
-\layout Comment
-
-Burada cron illa mecbur yöntem olmak zorunda deðil sanki, þimdilik zikretmeyelim
-, build farm zamanýnda bir çözüm buluruz -- Çaðlar
 \layout Standard
 
 Ýçeriðinde mevcut sürümün bilgilerini içerecek bir dosya oluþturulacaktýr.
