@@ -103,10 +103,16 @@ class ArchiveZip(ArchiveBase):
                     target = zip.read(fileName)
                     os.symlink(target, ofile)
                 else:
+                    inf = zip.getinfo(fileName)
+                    perm = inf.external_attr
+                    perm &= 0x00FF0000;
+                    perm >>= 16;
+                    perm |= 0x00000100;
                     buff = open (ofile, 'wb')
                     fileContent = zip.read(fileName)
                     buff.write(fileContent)
                     buff.close()
+                    os.chmod(ofile, perm)
 
     def unpack_files(self, paths, targetDir):
         self.unpack_file_cond(lambda f:f in paths, targetDir)
