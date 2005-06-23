@@ -31,13 +31,14 @@ PISI
 (Packages Installed Succesfully as Intented)
 \layout Author
 
-S.Çaðlar Onur, Onur Küçük, Barýþ Metin
+S.Çaðlar Onur, Onur Küçük, Barýþ Metin, A.Murat Eren, Eray Özkural, Gürer
+ Özen
 \layout Date
 
-29 Mart 2005
+23 Haziran 2005
 \layout Date
 
-Sürüm 0.4
+Sürüm Pre-Alpha
 \layout Standard
 \pagebreak_top \pagebreak_bottom 
 
@@ -84,8 +85,12 @@ Kur emri, komut satýrý, grafik arayüzler, ya da sistemin otomatik olarak
 \layout Itemize
 
 Ayný þekilde yapýlandýrma sorularýndan kaçýnýlmalýdýr.
- Bu iþler ÇOMAR tarafýndan otomatik halledilecek, ya da kullanýcýnýn verdiði
- emirlerle sonradan yapýlacaktýr.
+ Bu iþler 
+\series bold 
+ÇOMAR
+\series default 
+ tarafýndan otomatik halledilecek, ya da kullanýcýnýn verdiði emirlerle
+ sonradan yapýlacaktýr.
  Bu, örneðin sunucu uygulamalarý kurulurken sunucu ayarý sorularý vs sorulmamasý
 ný getirir.
 \layout Itemize
@@ -133,7 +138,7 @@ Nerdeyse her uygulama kendi sürüm numarasý verme politikasýna sahip olduðundan,
 Kullanýcý, artýk ihtiyaç duymadýðý bir uygulamayý, yer ve takip tasarrufu
  amacýyla kaldýrmak isteyebilir.
  Kullanýcýnýn bu seçimi kolayca yapabilmesi için, ihtiyaç duyulmayan paketler,
- kurulu paketlerin kapladýðý alan gibi bilgileri sunabilmeliyiz.
+ kurulu paketlerin kapladýðý alan gibi bilgiler sunulabilmelidir.
 \layout Itemize
 
 Kullanýcý sistemde nelerin kurulu olduðunu, hangi paketleri kurabileceðini,
@@ -164,9 +169,9 @@ ri getirecek biçimde inþa edersek, hem kapsam sorunlarý, hem vakit ve að
  baðlantý hýzý açýsýndan yaþanan sorunlar çözülecektir.
 \layout Itemize
 
-Uygulamayý kod olarak çekip, deðiþik özellikler ile derleyebilecek portage
- benzeri bir sistem hedef kullanýcýmýza zorluklar çýkaracak ve doðrudan
- bir fayda saðlamayacaktýr.
+Uygulamayý kod olarak çekip, deðiþik özellikler ile derleyebilecek Gentoo
+ Linux'un Portage benzeri bir sistem hedef kullanýcýmýza zorluklar çýkaracak
+ ve doðrudan bir fayda saðlamayacaktýr.
  Ancak kimi programlarýn farklý biçimde derlenmiþ hallerini pakede ayrý
  bir özellik olarak koyabiliriz (örneðin mplayer pakedinde farklý iþlemciler
  için derlenmiþ birkaç tane 
@@ -181,7 +186,11 @@ Paketler farklý hedeflere kurulabilecek biçimde
 \begin_inset Quotes eld
 \end_inset 
 
+
+\emph on 
 relocatable
+\emph default 
+
 \begin_inset Quotes erd
 \end_inset 
 
@@ -271,24 +280,47 @@ Gerektiðinde pakedi oluþturan kiþinin imzasý dýþýnda, üçüncü parti kurum
 Yapýlandýrma Yöneticisi (ÇOMAR) gereksinimleri
 \layout Itemize
 
-Bir paket kurulduktan sonra, pakete ait CSL betikleri ÇOMAR'a bildirip kayýt
- ettirmelidir.
+Bir paket kurulduktan sonra, pakete ait 
+\series bold 
+CSL
+\series default 
+ betikleri 
+\series bold 
+ÇOMAR
+\series default 
+'a bildirip kayýt ettirmelidir.
 \layout Itemize
 
-Bir paket kaldýrýlmadan önce ÇOMAR'dan bu pakete ait betikleri kaldýrmasýný
- istemelidir.
+Bir paket kaldýrýlmadan önce 
+\series bold 
+ÇOMAR
+\series default 
+'dan bu pakete ait betikleri kaldýrmasýný istemelidir.
 \layout Itemize
 
-Bir paket eðer CSL betiði saðlýyorsa, paketin hangi OM dallarýna ait betikler
- içerdiði bilgisini tutmalýdýr.
+Bir paket eðer 
+\series bold 
+CSL
+\series default 
+ betiði saðlýyorsa, paketin hangi 
+\series bold 
+OM
+\series default 
+ dallarýna ait betikler içerdiði bilgisini tutmalýdýr.
 \layout Itemize
 
-Verilen bir OM dalý için, hangi paketlerin bu dala ait betik içerdiðini
- verebilmelidir.
+Verilen bir 
+\series bold 
+OM
+\series default 
+ dalý için, hangi paketlerin bu dala ait betik içerdiðini verebilmelidir.
 \layout Itemize
 
-Kurulmasý emredilen bir paket, kitaplýk ve programlarýn yanýsýra OM üzerinden
- saðlanan bazý görevlere ihtiyaç duyabilir.
+Kurulmasý emredilen bir paket, kitaplýk ve programlarýn yanýsýra 
+\series bold 
+OM
+\series default 
+ üzerinden saðlanan bazý görevlere ihtiyaç duyabilir.
  Bu durumda paket yöneticisinin o bacaktaki görevi saðlayan uygun bir pakedin
  kurulu olup olmadýðýna bakmasý, gerekiyorsa o görevi saðlayan paketlerden
  birini kurmasý gereklidir.
@@ -308,8 +340,15 @@ Gereksinimlerimizi saðlayabilmek için çeþitli tipte baðýmlýlýklar, farklý
  yöneticisi yazmak gereði doðmuþtur.
 \layout Standard
 
-Bu amaçla PÝSÝ (Packages Installed Successfully as Intented) adýný verdiðimiz
- yazýlýmý geliþtiriyoruz.
+Bu amaçla 
+\series bold 
+PÝSÝ
+\series default 
+ (
+\series bold 
+Packages Installed Successfully as Intented
+\series default 
+) adýný verdiðimiz yazýlýmý geliþtiriyoruz.
 \layout Section
 
 PÝSÝ Tasarýmý
@@ -318,9 +357,7 @@ PÝSÝ Tasarýmý
 Paket Oluþturma
 \layout Standard
 
-Pisi bir dizin içinde verilen tanýmlama dosyalarý yamalar ve betikleri kullanara
-k bir pakedi oluþturur.
- Burdaki dizin yapýsý aþaðýdaki gibidir.
+FIXME: Anlamlý bir giriþ paragrafý lazým!
 \layout Subsubsection
 
 PSPEC Dosyasý
@@ -335,8 +372,11 @@ PSPEC (PÝSÝ SPECification)
  hangi baþka paketlere ne tür baðýmlýlýklar içerdiði gibi bilgileri içerir.
 \layout Standard
 
-Bir PSPEC dosyasýndan, dolayýsý ile bir kaynaktan birden fazla paket oluþturulab
-ilir.
+Bir 
+\series bold 
+PSPEC
+\series default 
+ dosyasýndan, dolayýsý ile bir kaynaktan birden fazla paket oluþturulabilir.
  Örneðin kpdf paketi kdebase-sürüm.no.tar.gz kaynaðýndan oluþturulabilecek
  yalnýzca bir pakettir.
 \layout Standard
@@ -624,7 +664,7 @@ Update
 Type: 
 \series default 
 Güncellemenin tipini belirtir.
- (Güvenlik, Bug, Enhancement v.s)
+ (Security, Bug, Enhancement v.s)
 \layout Itemize
 
 
@@ -720,7 +760,7 @@ Conflicts:
 \series bold 
 Provides:
 \series default 
- *********************** ????????????????????????
+ FIXME: ????????????????????????
 \layout Itemize
 
 
@@ -847,6 +887,9 @@ Wildcard
 \series bold 
 File
 \end_deeper 
+\layout Standard
+
+TODO: Örnek Lazým!
 \layout Subsubsection
 
 actions.py Dosyasý
@@ -884,14 +927,28 @@ PÝSÝ
 API
 \series default 
  actionsapi adýnda sunulacaktýr.
+\layout Standard
+
+TODO: Örnek Lazým!
 \layout Subsubsection
 
 ChangeLog Dosyasý
 \layout Standard
 
 Pakedin sürümlerindeki deðiþikliklerin açýklamalarýný içerir.
- Bu dosya bilindik ChangeLog stilindedir ve PSPEC içindeki History bilgisi
- ile ilgili deðildir.
+ Bu dosya bilindik 
+\series bold 
+ChangeLog
+\series default 
+ stilindedir ve 
+\series bold 
+PSPEC
+\series default 
+ içindeki 
+\series bold 
+History
+\series default 
+ bilgisi ile ilgili deðildir.
 \layout Subsection
 
 metadata.xml
@@ -923,11 +980,13 @@ PSPEC
 Metadata
 \series default 
  dosyasýna yazýlmaktadýr.
- PSPEC dosyasýndaki Global/Meta, Global/History ve Package içerisindeki
- tüm bilgiler Metadata içerisine yazýlýr.
- Metadata PSPEC dosyasýndan alýnan bilgilerin yanýnda kaynak derlendikten
- ve paket oluþturulduktan sonra alýnabilecek diðer bilgileri de içerir (paketin
- kurulduktan sonra sistemde kapyacaðý alanýn boyutu gibi).
+ 
+\series bold 
+Metadata PSPEC
+\series default 
+ dosyasýndan alýnan bilgilerin yanýnda kaynak derlendikten ve paket oluþturulduk
+tan sonra alýnabilecek diðer bilgileri de içerir (paketin kurulduktan sonra
+ sistemde kaplayacaðý alanýn boyutu gibi).
 \layout Standard
 
 
@@ -1052,7 +1111,7 @@ Conflicts
 \series bold 
 Provides:
 \series default 
- *********************** ????????????????????????
+ FIXME: ????????????????????????
 \layout Itemize
 
 
@@ -1185,12 +1244,19 @@ XML
 \series default 
 \emph default 
  dosyasý olarak tutulacaktýr.
- Metadata XML dosyalarýnýn doðrulanmasý için kullanýlabilecek bilgi 
+ 
+\series bold 
+Metadata
+\series default 
+ XML dosyalarýnýn doðrulanmasý için kullanýlabilecek bilgi 
 \emph on 
 pisi-metadata.dtd
 \emph default 
  dosyasýnda tanýmlanmýþtýr.
  
+\layout Standard
+
+TODO: Örnek Lazým!
 \layout Subsection
 
 files.xml
@@ -1296,19 +1362,29 @@ files.xml dosyalarýnýn doðrulanmasý için kullanýlabilecek bilgi
 pisi-files.dtd
 \emph default 
  dosyasýnda tanýmlanmýþtýr.
+\layout Standard
+
+TODO: Örnek Lazým!
 \layout Subsection
 
 PSPEC Deposu
 \layout Standard
 
-Paketleri oluþturmak için gerekli PSPEC dosyalarý hiyerarþik bir yapýda
- bir 
+Paketleri oluþturmak için gerekli 
+\series bold 
+PSPEC
+\series default 
+ dosyalarý hiyerarþik bir yapýda bir 
 \emph on 
 subversion
 \emph default 
  deposunda sunulacaktýr.
  Geliþtirme iþlemleri bu depo üzerinde yapýlacaktýr.
- PSPEC deposunda paketler 
+ 
+\series bold 
+PSPEC
+\series default 
+ deposunda paketler 
 \emph on 
 
 \begin_inset Quotes eld
@@ -1327,8 +1403,12 @@ ilk harflerine göre
 
 \emph default 
  konumlandýrýlýrlar.
- Her paket kendine ait bir dizinde PSPEC dosyasý, paket oluþturma için gerekli
- olan ek dosyalar ve yamalarýn içinde bulunduðu files
+ Her paket kendine ait bir dizinde 
+\series bold 
+PSPEC
+\series default 
+ dosyasý, paket oluþturma için gerekli olan ek dosyalar ve yamalarýn içinde
+ bulunduðu files
 \series bold 
 /
 \series default 
@@ -1343,14 +1423,25 @@ Bir geliþtiricinin
 \series bold 
 Pardus Linux
 \series default 
-'a paket yapmasý için yalnýzca PSPEC depo sýradüzeninde paket için gerekli
- olan dosyalarý saðlamasý yeterlidir.
+'a paket yapmasý için yalnýzca 
+\series bold 
+PSPEC
+\series default 
+ depo sýradüzeninde paket için gerekli olan dosyalarý saðlamasý yeterlidir.
  
 \series bold 
 Pardus Linux
 \series default 
 'un belirli zamanlarda kullanýcýlara sunulacak sürümlerini oluþturmak için
- bu PSPEC deposundaki bu bilgiler kullanýlarak PÝSÝ paketleri oluþturulacaktýr.
+ bu 
+\series bold 
+PSPEC
+\series default 
+ deposundaki bu bilgiler kullanýlarak 
+\series bold 
+PÝSÝ
+\series default 
+ paketleri oluþturulacaktýr.
  
 \layout Standard
 
@@ -1385,7 +1476,7 @@ a
 cpid-1.0.2.pspec
 \layout Itemize
 
-actions
+actions.py
 \layout Itemize
 
 ChangeLog
@@ -1423,10 +1514,33 @@ acpid.csl
 \end_deeper 
 \layout Subsection
 
-Category
+Category ( IsA )
+\layout Standard
+
+FIXME: Daha anlamlý cümleler ve temiz anlatým
+\layout Standard
+
+Bir uygulamanýn yaptýðý iþi, ait olduðu kategoriyi belirtir yani uygulamalarýn
+ sýfatlarýdýr.
+ Bu bilgi kullanýlarak bir iþi ya da iþler grubunu yapan uygulamalar sorgulanabi
+lir.
+ Örneðin PDF Gösteren uygulamalarý göster, Ogg çalan ve konsoldan çalýþan
+ uygulamalar hangileridir gibi.
 \layout Subsection
 
-Component
+Component ( PartOf )
+\layout Standard
+
+FIXME: Daha anlamlý cümleler ve temiz anlatým
+\layout Standard
+
+Bir paketler bütününden oluþan anlamlý ve kurulabilir birliði temsil eder.
+ Yani uygulamalarý kapsüller.
+ Örneðin KDE Component'ý içinde kdebase, kdepim, kdemultimedia v.s gibi kaynaklar
+ý bulundurur, kdebase ise kcontrol, konqueror v.s.
+ gibi paketlerden oluþur.
+ Bu bilgi kullanýlarak örneðin KDE Component'ýný sisteme kur, kaldýr, güncelle
+ gibi eylemler gerçekleþtirilebilir.
 \layout Subsection
 
 Ýkili Paket Deposu
@@ -1457,88 +1571,68 @@ r
 
 \series bold 
 Name: 
-\series default 
-Paketin adý
 \layout Itemize
 
 
 \series bold 
 Summary:
 \series default 
- Paketin kýsa adý
+ 
 \layout Itemize
 
 
 \series bold 
-Description: 
-\series default 
-Paketin uzun tanýmý
+Description:
 \layout Itemize
 
 
 \series bold 
 Version: 
-\series default 
-Yazýlýmýn sürüm numarasý
 \layout Itemize
 
 
 \series bold 
 Release: 
-\series default 
-Paketin revizyon numarasý (kaçýncý paketlenmesi)
 \layout Itemize
 
 
 \series bold 
 License: 
-\series default 
-Paketin lisansý
 \layout Itemize
 
 
 \series bold 
 RuntimeDependencies:
-\series default 
- Kurulmak/Çalýþmak için hangi paketlere ihtiyacý var?
+\layout Itemize
+
+
+\series bold 
+InstallDependencies:
 \layout Itemize
 
 
 \series bold 
 Provides: 
-\series default 
-Paket neler saðlýyor (taným yukarýda)
 \layout Itemize
 
 
 \series bold 
 History:
-\series default 
- PSPEC dosyasýndan alýnmýþ olan paket durumunu gösteren bölüm.
 \layout Itemize
 
 
 \series bold 
 Conflicts:
-\series default 
- Paketin sistemde hangi paketler ile ayný anda kurulu olarak bulunamayacaðý
- bilgisi.
 \layout Itemize
 
 
 \series bold 
 PackageSize: 
-\series default 
-Paketin kapalý (kurulmadan önceki) boyutu.
- Bu bilgi pisi paketinin dosya sisteminde kapladýðý alan alýnarak oluþturulacakt
-ýr.
 \layout Itemize
 
 
 \series bold 
 InstalledSize: 
-\series default 
-Paket kurulduðunda sistemde ne kadar yer kaplayacak?
 \layout Standard
 
 
@@ -1686,66 +1780,85 @@ Bir geliþtiricinin paket oluþturmak için izleyeceði adýmlar þöyledir;
 \series bold 
 Geliþtirici Grafik Arayüzü
 \series default 
- ya da konsol araçlarý yardýmý ile PSPEC dosyasý yukarýda anlatýlan yapýya
- uygun olarak oluþturulur.
+ ya da konsol araçlarý yardýmý ile 
+\series bold 
+PSPEC
+\series default 
+ dosyasý yukarýda anlatýlan yapýya uygun olarak oluþturulur.
  Gerekli olacak yamalar ve dosyalar yukarýda tarif edildiði gibi files/
  dizinine yerleþtirilir.
 \layout Itemize
 
-Oluþturulan PSPEC dosyasý, hazýrlanan paketin derlenebilmesi için PÝSÝ tarafýnda
-n iþlenir.
- Eðer gerekli paketler sistemde mevcut deðil ise bu paketler PÝSÝ tarafýndan
- sisteme kurularak, sistem derleme iþlemine hazýr hale getirilir.
+Oluþturulan 
+\series bold 
+PSPEC
+\series default 
+ dosyasý, hazýrlanan paketin derlenebilmesi için 
+\series bold 
+PÝSÝ
+\series default 
+ tarafýndan iþlenir.
+ Eðer gerekli paketler sistemde mevcut deðil ise bu paketler 
+\series bold 
+PÝSÝ
+\series default 
+ tarafýndan otomatik veya kullanýcýya sorularak sisteme kurularak, sistem
+ derleme iþlemine hazýr hale getirilir.
  
-\emph on 
-(bunun için kullanýcýdan bir onay gerekiyor mu? Evet?)
 \layout Itemize
 
-Oluþturulan PSPEC dosyasýnýn Global bölümündeki bilgiler iþlenerek kaynak
- kod sisteme alýnýr ve doðruluðu kontrol edilir.
- Gerekli dosya ve yamalar yukarýda anlatýlan biçime uygun bir þekilde PISI
+Oluþturulan 
 \series bold 
- 
+PSPEC
+\series default 
+ dosyasýnýn Source bölümündeki bilgiler iþlenerek kaynak kod sisteme alýnýr
+ ve doðruluðu kontrol edilir.
+ Gerekli dosya ve yamalar yukarýda anlatýlan biçime uygun bir þekilde 
+\series bold 
+PISI 
 \series default 
 tarafýndan açýlýr ve gerekli yamalar koda uygulanýr.
  
-\emph on 
-(Adam kaynaðýn hash'ini kendisi çýkarmayacak sanýrým.
- Doðruluðunu burada kontrol etmek mantýklý deðil gibi?)
 \layout Itemize
 
 
 \series bold 
-PSPEC 
+actions.py
 \series default 
-dosyasýnýn 
-\series bold 
-Actions
-\series default 
- bölümündeki
 \emph on 
  
 \emph default 
-betikler sýra ile 
-\series bold 
-Pisi
-\series default 
- tarafýndan iþletilerek kaynak koddan ikili veri oluþturulur.
+betiði iþletilerek kaynak koddan ikili veri oluþturulur.
 \layout Itemize
 
 Geliþtirici (tercihen grafik arayüz yardýmý ile) derleme sonrasý oluþturulan
  dosyalarý, PSPEC dosyasýnda tanýmlanan Package bölümlerine göre sýnýflandýrýr.
- Oluþturulacak her paket için files.xml dosyasý yaratýlýr.
+ Oluþturulacak her paket için 
+\series bold 
+files.xml
+\series default 
+ dosyasý yaratýlýr.
 \layout Itemize
 
-PÝSÝ, PSPEC ve files.xml dosyalarýný iþleyerek paketi veya paketleri oluþturur.
+
+\series bold 
+PÝSÝ, PSPEC
+\series default 
+ ve 
+\series bold 
+files.xml
+\series default 
+ dosyalarýný iþleyerek paketi veya paketleri oluþturur.
 \layout Itemize
 
 Geliþtirici oluþturduðu paketleri sisteminde test eder.
 \layout Itemize
 
-Oluþturulan paket oluþturma dosyalarý (PSPEC dosyasý, files/ dizini ve actions/
- dizini) 
+Oluþturulan paket oluþturma dosyalarý (
+\series bold 
+PSPEC
+\series default 
+ dosyasý, actions.py ve dizinler) 
 \series bold 
 Merkezi Paket Derleme Çiftliði
 \series default 
@@ -1794,11 +1907,18 @@ Paket Kurmak
 Bir istemcinin sisteme paket kurmak için izleyeceði yol þöyledir;
 \layout Itemize
 
-Sistemdeki ilgili uygulamalardan biri PÝSÝ'ye paket kurmasý için istekte
- bulunur.
+Sistemdeki ilgili uygulamalardan biri 
+\series bold 
+PÝSÝ
+\series default 
+'ye paket kurmasý için istekte bulunur.
 \layout Itemize
 
-PÝSÝ, kendi yapýlandýrma dosyasýný iþleyerek, kendi yapýlandýrma dosyasýnýn
+
+\series bold 
+PÝSÝ
+\series default 
+, kendi yapýlandýrma dosyasýný iþleyerek, kendi yapýlandýrma dosyasýnýn
  içindeki bilgilerin ýþýðýnda 
 \series bold 
 Paket Deposu
@@ -1825,7 +1945,11 @@ Depo Veritaban
 ýna yerleþtirir.
 \layout Itemize
 
-PÝSÝ istenen paketin kurulmasý için gerekli olan bilgileri, ihtiyaç duyulan
+
+\series bold 
+PÝSÝ
+\series default 
+ istenen paketin kurulmasý için gerekli olan bilgileri, ihtiyaç duyulan
  paketleri belirler.
  Gerekli olan paketleri 
 \series bold 
@@ -1835,7 +1959,11 @@ ndan çekerek sisteme kurar.
  Eðer çakýþan paketler var ise bunlarý çözer.
 \layout Itemize
 
-PÝSÝ Kurulacak paketi 
+
+\series bold 
+PÝSÝ
+\series default 
+ Kurulacak paketi 
 \series bold 
 Paket Deposu
 \series default 
@@ -1864,11 +1992,18 @@ Paket Kaldýrmak
 Bir istemcinin sisteme paket kaldýrmak için izleyeceði yol þöyledir;
 \layout Itemize
 
-Sistemdeki ilgili uygulamalardan biri PÝSÝ'ye paket kaldýrmak için istekte
- bulunur.
+Sistemdeki ilgili uygulamalardan biri 
+\series bold 
+PÝSÝ
+\series default 
+'ye paket kaldýrmak için istekte bulunur.
 \layout Itemize
 
-PÝSÝ, kendi yapýlandýrma dosyasýný iþleyerek, 
+
+\series bold 
+PÝSÝ
+\series default 
+, kendi yapýlandýrma dosyasýný iþleyerek, 
 \series bold 
 Kurulu Paket Veritabaný
 \series default 
@@ -1876,32 +2011,64 @@ ndan paketin baþka bir paket tarafýndan gereksinim duyulup duyulmadýðýný
  kontrol eder.
 \layout Itemize
 
-PÝSÝ paketi kaldýrýr.
+
+\series bold 
+PÝSÝ
+\series default 
+ paketi kaldýrýr.
  
 \layout Itemize
 
-ÇOMAR'a ilgili CSL betiklerini kaldýrmasý için silinen paket ile ilgili
- bilgi verir.
+
+\series bold 
+ÇOMAR
+\series default 
+'a ilgili 
+\series bold 
+CSL
+\series default 
+ betiklerini kaldýrmasý için silinen paket ile ilgili bilgi verir.
 \layout Subsubsection
 
 Baðýmlýlýk çözmek
 \layout Standard
 
-PÝSÝ içerisinde paket baðýmlýlýðý, doðrudan paket isim ve sürüm numarasýna
- baðýmlýlýk olarak tanýmlanmýþtýr.
+TODO: Güzel anlatým, uzun bilimsel hikaye gerek
+\layout Standard
+
+
+\series bold 
+PÝSÝ
+\series default 
+ içerisinde paket baðýmlýlýðý, doðrudan paket isim ve sürüm numarasýna baðýmlýlý
+k olarak tanýmlanmýþtýr.
  Bu yüzden paket baðýmlýlýðýnýn çözümü depo veritabanýndan baðýmlýlýðý oluþturan
  paketleri iteratif olarak çýkarmak ile sýnýrlýdýr.
 \layout Standard
 
-Paketler için tanýmlanan bir diðer baðýmlýlýk tipi ise COMAR OM (Object
- Model) bacaklarýna olan baðýmlýlýktýr.
+Paketler için tanýmlanan bir diðer baðýmlýlýk tipi ise 
+\series bold 
+ÇOMAR OM
+\series default 
+ (Object Model) bacaklarýna olan baðýmlýlýktýr.
  Bu baðýmlýlýðýn çözümü için Kurulu Paketler ve Depo veritabanlarý sorgulanarak
- ilgili OM bacaðýný saðlayan bir paketin sistemde kurulu durumda olup olmadýðý
- bilgisi çýkartýlýr.
- Eðer yoksa ilgili OM bacaðýný saðlayan paketlerin bir listesi sunulur.
+ ilgili 
+\series bold 
+OM
+\series default 
+ bacaðýný saðlayan bir paketin sistemde kurulu durumda olup olmadýðý bilgisi
+ çýkartýlýr.
+ Eðer yoksa ilgili 
+\series bold 
+OM
+\series default 
+ bacaðýný saðlayan paketlerin bir listesi sunulur.
 \layout Subsection
 
 Veritabanlarý
+\layout Standard
+
+FIXME: Dizayný sonrasý güncellenmeli
 \layout Standard
 
 Ýstemci makinadaki paket veritabaný aþaðýdaki bölümlere sahip olacaktýr.
@@ -1939,21 +2106,35 @@ Depo Veritabanlarý:
 pisi-index.xml
 \series default 
  dosyasý içeriði depo veritabanýna aktarýlacaktýr.
+\layout Itemize
+
+
+\series bold 
+Kaynak Veritabanlarý:
 \layout Subsubsection
 
 Kurulum Veritabaný
 \layout Standard
 
-Will be...
+FIXME: Dizayný sonrasý güncellenmeli
 \layout Subsubsection
 
 Depo Veritabanlarý
 \layout Standard
 
-Will be...
+FIXME: Dizayný sonrasý güncellenmeli
+\layout Subsubsection
+
+Kaynak Veritabanlarý
+\layout Standard
+
+FIXME: Dizayný sonrasý güncellenmeli
 \layout Subsection
 
 libpisi
+\layout Standard
+
+FIXME: Revize edilmeli
 \layout Standard
 
 Paket veritabanýnýn ana yüklenicisi libpisi kütüphanesi olacaktýr.
