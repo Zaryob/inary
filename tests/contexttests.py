@@ -5,7 +5,7 @@ from pisi import context
 
 class ContextTestCase(unittest.TestCase):
     def setUp(self):
-        self.ctx = context.Context("samples/popt/popt.pspec")
+        self.ctx = context.BuildContext("samples/popt/popt.pspec")
     
     def testConstness(self):
         # test if we can get a const attribute?
