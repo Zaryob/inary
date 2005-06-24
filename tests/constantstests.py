@@ -35,4 +35,20 @@ class ContextTestCase(unittest.TestCase):
             # we achived our goal with this error. infact, this is a
             # ConstError but we can't catch it directly here
             pass
+
+    def testConstValues(self):
+        constDict = {
+            "actions_file": "actions.py",
+            "setup_func": "setup",
+            "lib_dir_suffix": "/var/lib/pisi",
+            "metadata_xml": "metadata.xml"
+            }
+            
+        for k in constDict.keys():
+            if hasattr(const, k):
+                value = getattr(const, k)
+                self.assertEqual(value, constDict[k])
+            else:
+                self.fail("Constants does not have an attribute named %s" % k)
+
 suite = unittest.makeSuite(ContextTestCase)
