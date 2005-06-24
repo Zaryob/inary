@@ -29,9 +29,6 @@ def main():
 
     (options, args) = parser.parse_args()
 
-    print 'options = ', options
-    print 'args = ', args
-
     # pspec(PISI Spec) to be used for package
     pspec = ""
 
