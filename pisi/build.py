@@ -56,7 +56,16 @@ class PisiBuild:
         curDir = os.getcwd()
 
         locals = globals = {}
-    
+        # put the evironment variables for actions API to use.
+        evn = {
+            "PKG_DIR": self.ctx.pkg_dir(),
+            "WORK_DIR": self.ctx.pkg_work_dir(),
+            "INSTALL_DIR": self.ctx.pkg_install_dir(),
+            "SRC_NAME": self.spec.source.name,
+            "SRC_VERSION": self.spec.source.version
+            }
+        os.environ.update(evn)
+
         try:
             exec compile(self.actionScript , "error", "exec") in locals,globals
         except SyntaxError, e:
