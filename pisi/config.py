@@ -1,3 +1,10 @@
+# PISI Configuration module is used for gathering and providing
+# regular PISI configurations.
+
+#TODO: Eventually PISI will have a configuration file (located in
+#/etc/pisi/conf?) and this module will provide access to those
+#configuration parameters.
+
 from constants import const
 
 class Config(object):
