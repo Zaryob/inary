@@ -49,11 +49,9 @@ def same(l):
 
 def prefix(a, b):
     "check if sequence a is a prefix of sequence b"
-    print 'PREFIX', a, b
     if len(a)>len(b):
         return False
     for i in range(0,len(a)):
-        print 'checking', a[i], b[i]
         if a[i]!=b[i]:
             return False
     return True

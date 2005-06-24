@@ -21,11 +21,12 @@ class ArchiveBase(object):
         self.filePath = filepath
         self.type = atype
 
-    def unpack(self, targetDir):
+    def unpack(self, targetDir, cleanDir=True):
         self.targetDir = targetDir
         # first we check if we need to clean-up our working env.
         if os.path.exists(self.targetDir):
-            util.clean_dir(self.targetDir)
+            if cleanDir:
+                util.clean_dir(self.targetDir)
         else:
             os.makedirs(self.targetDir)
 
@@ -108,7 +109,7 @@ class ArchiveZip(ArchiveBase):
     def unpack_file_cond(self, pred, targetDir, archiveRoot=''):
         """Unpack/Extract a file according to predicate function filename ->
         bool"""
-        super(ArchiveZip, self).unpack(targetDir)
+        super(ArchiveZip, self).unpack(targetDir, False)
         zip = self.zip
         for fileName in zip.namelist():
             if pred(fileName):   # check if condition holds
@@ -121,6 +122,7 @@ class ArchiveZip(ArchiveBase):
                         fileName = util.removepathprefix(archiveRoot, fileName)
                         print '*', fileName
                     else:
+                        
                         continue        # don't extract if not under
                 ofile = os.path.join(targetDir, fileName)
                 print 'ofile ', ofile
