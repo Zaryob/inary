@@ -13,12 +13,25 @@ class Index(XmlFile):
         self.sources = []
         self.packages = []
 
+    def read(self, filename):
+        """Read PSPEC file"""
+        
+        self.readxml(filename)
+
+        # find all binary packages
+        packageElts = self.getAllNodes("Package")
+        self.packages = [PackageInfo(p) for p in packageElts]
+        
+        self.unlink()
+    
+
     def write(self, filename):
         """Write index file"""
         self.newDOM()
         for pkg in self.packages:
             self.addChild(pkg.elt(self))
         self.writexml(filename)
+        self.unlink()
         
     def index(self, repo_dir):
 
