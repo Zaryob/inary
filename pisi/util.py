@@ -79,7 +79,10 @@ def subpath(a, b):
 
 def removepathprefix(a, b):
     comps = remove_prefix(os.path.split(a), os.path.split(b))
-    return reduce(os.path.join, comps)
+    if len(comps) > 0:
+        return os.path.join(*tuple(comps))
+    else:
+        return ""
 
 # file/dir functions
 

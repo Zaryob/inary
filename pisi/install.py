@@ -46,12 +46,12 @@ def install(package_fn):
 
     # unzip package in place
     ui.info('Extracting files\n')
-    package.extract_dir_flat('install', config.destdir)
+    #package.extract_dir_flat('install', config.destdir)
     
     # update databases
 
     # installdb
-    installdb.install(metadata.packages[0].name,
-                      metadata.source.version,
-                      metadata.source.release,
+    installdb.install(metadata.package.name,
+                      metadata.package.version,
+                      metadata.package.release,
                       config.install_dir() + '/files.xml')
