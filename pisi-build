@@ -30,23 +30,12 @@ def main():
     (options, args) = parser.parse_args()
 
     # pspec(PISI Spec) to be used for package
-    pspec = ""
-
-    # TODO: We accept only one pspec file (at a time) currently,
-    # but pisi-build may build many packages (pspecs given in order)
-    # sequentially.
-    if len(args) != 1:
-        print "pisi-build expects one (and only one) pspec file currently"
-        print usage
-        sys.exit(2)
-    else:
-        pspec = args[0]
-
-    # What we need to do first is create a context with our specfile
-    ctx = pisi.context.BuildContext(pspec)
-    # don't do the real job here. this is just a CLI!
-    pb = PisiBuild(ctx)
-    pb.build()
+    for pspec in args:
+        # What we need to do first is create a context with our specfile
+        ctx = pisi.context.BuildContext(pspec)
+        # don't do the real job here. this is just a CLI!
+        pb = PisiBuild(ctx)
+        pb.build()
 
 if __name__ == "__main__":
     main()
