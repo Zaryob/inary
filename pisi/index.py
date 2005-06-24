@@ -20,7 +20,7 @@ class Index(XmlFile):
 
         # find all binary packages
         packageElts = self.getAllNodes("Package")
-        self.packages = [PackageInfo(p) for p in packageElts]
+        self.packages = [metadata.PackageInfo(p) for p in packageElts]
         
         self.unlink()
     
