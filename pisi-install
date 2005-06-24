@@ -8,6 +8,7 @@ from optparse import OptionParser
 sys.path.append("./lib")
 import pisi.install
 import pisi.util
+from pisi.ui import ui
 
 class ArgError(Exception):
     pass
@@ -37,12 +38,13 @@ def main():
     else:
     	package_fn = args[0]
 
-    try:
+#    try:
+        ui.info('* Installing ' + package_fn)
         pisi.install.install(package_fn)
-    except pisi.install.InstallError, (errno, errstr):
-        print '*** An installation error has occured:'
-        print '    ', errstr
-        sys.exit(1)
+#    except pisi.install.InstallError, (errno, errstr):
+#        print '*** An installation error has occured:'
+#        print '    ', errstr
+#        sys.exit(1)
 
 if __name__ == "__main__":
     main()

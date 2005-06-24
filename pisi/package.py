@@ -26,13 +26,17 @@ class Package:
         extract_dir('', outdir)         # means package root
 
     def extract_files(self, paths, outdir):
-        """Extract file with path to outdir"""
+        """Extract paths to outdir"""
         self.impl.unpack_files(paths, outdir)
+
+    def extract_file(self, path, outdir):
+        """Extract file with path to outdir"""
+        self.extract_files([path], outdir)
 
     def extract_dir(self, dir, outdir):
         """Extract directory recursively, this function
         copies the directory archiveroot/dir to outdir"""
-        self.impl.unpack_dir(path, outdir)
+        self.impl.unpack_dir(dir, outdir)
 
     def extract_dir_flat(self, dir, outdir):
         """Extract directory recursively, this function
@@ -43,6 +47,6 @@ class Package:
     def extract_PISI_files(self, outdir):
         """Extract PISI control files: metadata.xml, files.xml,
         action scripts, etc."""
-        self.extract_files([const.metadata_xml,
-                            const.files_xml,'Config'], outdir)
+        self.extract_files([const.metadata_xml, const.files_xml], outdir)
+        self.extract_dir('config', outdir)
 

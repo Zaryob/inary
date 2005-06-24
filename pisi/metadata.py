@@ -80,8 +80,7 @@ class MetaData(XmlFile):
         self.writexml(filename)
 
     def verify(self):
-        assert self.getAllNodes("Package")==1
         assert self.source.name != None
-        assert self.source.homepage != None
         assert self.source.packager != None
+        assert self.package != None
         return True

@@ -3,7 +3,7 @@
 
 import installdb
 import packagedb
-import ui
+from ui import ui
 from version import Version
 
 def satisfiesDep(pkg, depinfo):
@@ -38,8 +38,8 @@ def satisfiesRuntimeDeps(pkg):
 def installable(pkg):
     """calculate if pkg is installable currently 
     which means it has to satisfy both install and runtime dependencies"""
-    if not packagedb.has_key(pkgname):
-        ui.info("package " + pkgname + " not installable");
+    if not packagedb.has_package(pkg):
+        ui.info("package " + pkg + " not installable");
         return False
     else:
         return satisfiesRuntimeDeps(pkg) and satisfiesInstallDeps(pkg)
