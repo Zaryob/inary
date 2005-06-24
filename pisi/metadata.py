@@ -38,11 +38,13 @@ class MetaData(XmlFile):
         XmlFile.__init__(self,"PISI")
 
     def fromSpec(src, pkg):
-        self.source.name = src.source.name
-        self.source.homepage = src.source.homepage
-        self.source.packager = src.source.packager
-        self.package = src.package
-        self.package.history = self.source.history # FIXME
+        md = MetaData()
+        md.source.name = src.source.name
+        md.source.homepage = src.source.homepage
+        md.source.packager = src.source.packager
+        md.package = src.package
+        md.package.history = self.source.history # FIXME
+        return md
 
     def read(self, filename):
         self.readxml(filename)
