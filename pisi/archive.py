@@ -85,7 +85,8 @@ class ArchiveZip(ArchiveBase):
         cwd = os.getcwd()
         pathName = os.path.dirname(fileName)
         fileName = os.path.basename(fileName)
-        os.chdir(pathName)
+        if pathName:
+            os.chdir(pathName)
         self.add_file(fileName)
         os.chdir(cwd)
 
