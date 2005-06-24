@@ -2,6 +2,7 @@
 from package import Package
 from xmlfile import XmlFile
 import metadata
+import packagedb
 from ui import ui
 import util
 from config import config
@@ -24,7 +25,6 @@ class Index(XmlFile):
         
         self.unlink()
     
-
     def write(self, filename):
         """Write index file"""
         self.newDOM()
@@ -42,6 +42,11 @@ class Index(XmlFile):
                 if fn.endswith('.pisi'):
                     ui.info('Adding ' + fn + ' to package index\n')
                     self.add_package(join(root, fn))
+
+    def update_db(self):
+        packagedb.clear()
+        for pkg in self.packages:
+            packagedb.add_package(pkg)
 
     def add_package(self, path):
         package = Package(path, 'r')
