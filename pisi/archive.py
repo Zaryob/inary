@@ -75,12 +75,20 @@ class ArchiveZip(ArchiveBase):
 
     def add_file(self, fileName):
         """Add file or directory to a zip file"""
-        if os.path.isdir(fileName):
+        if os.path.isdir(fileName) and not os.path.islink(fileName):
             self.zip.writestr(fileName + '/', '')
             for f in os.listdir(fileName):
                self.add_file(fileName + '/' + f)
         else:
-            self.zip.write(fileName, fileName, zipfile.ZIP_DEFLATED)
+            if os.path.islink(fileName):
+                dest = os.readlink(fileName)
+                attr = zipfile.ZipInfo()
+                attr.filename = fileName
+                attr.create_system = 3
+                attr.external_attr = 2716663808L # long of hex val '0xA1ED0000L'
+                self.zip.writestr(attr, dest)
+            else:
+                self.zip.write(fileName, fileName, zipfile.ZIP_DEFLATED)
 
     def unpack_file_cond(self, pred, targetDir, archiveRoot=''):
         """Unpack/Extract a file according to predicate function filename ->
@@ -118,9 +126,9 @@ class ArchiveZip(ArchiveBase):
                 else:
                     inf = zip.getinfo(fileName)
                     perm = inf.external_attr
-                    perm &= 0x00FF0000;
-                    perm >>= 16;
-                    perm |= 0x00000100;
+                    perm &= 0x00FF0000
+                    perm >>= 16
+                    perm |= 0x00000100
                     buff = open (ofile, 'wb')
                     fileContent = zip.read(fileName)
                     buff.write(fileContent)
