@@ -24,6 +24,7 @@ def installDeps(pkg):
 
 def satisfiesInstallDeps(pkg):
     deps = installDeps(pkg)
+    print 'installdeps = ', deps
     return reduce(lambda x,y:x and y,
                   map(lambda x: satisfiesDep(pkg, x), deps))
 
@@ -32,6 +33,7 @@ def runtimeDeps(pkg):
 
 def satisfiesRuntimeDeps(pkg):
     deps = runtimeDeps(pkg)
+    print 'runtimedeps = ', deps
     return reduce(lambda x,y:x and y,
                   map(lambda x: satisfiesDep(pkg, x), deps))
 

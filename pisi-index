@@ -1,0 +1,42 @@
+#! /usr/bin/python
+# -*- coding: utf-8 -*-
+
+# sys modules
+import sys
+from optparse import OptionParser
+
+#sys.path.append("./lib")
+import pisi.install
+import pisi.util
+from pisi.ui import ui
+
+class ArgError(Exception):
+    pass
+
+def main():
+    
+    usage = "usage: %prog [options] <package>"
+    parser = OptionParser(usage=usage,version="%prog " + pisi.__version__)
+    parser.add_option("-D", "--destdir", action="store")
+    parser.add_option("-v", "--verbose", action="store_true",
+                      dest="verbose", default=False,
+                      help="detailed output")
+    parser.add_option("-d", "--debug", action="store_true", default=True)
+    parser.add_option("-n", "--dry-run", action="store_true",
+                      default = "do not perform any action, just show what\
+                      would be done")
+
+    (options, args) = parser.parse_args()
+
+    if len(args) > 1:
+	    print usage
+	    raise ArgError, "pisi-build error takes at most one argument"
+    elif len(args) == 1:
+    	repo_dir = args[0]
+    else:
+        repo_dir = '.'
+
+    ui.info('* Building index of PISI files under ' + repo_dir + '\n')
+
+if __name__ == "__main__":
+    main()
