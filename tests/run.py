@@ -21,7 +21,7 @@ def run_all():
     import actionsapitests
 
     alltests = unittest.TestSuite((
-        utiltests.utiltests, 
+        utiltests.suite, 
         specfiletests.suite,
         specfiletests.suite,
         metadatatests.suite,
