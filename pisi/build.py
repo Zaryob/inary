@@ -125,9 +125,11 @@ class PisiBuild:
         install_func is _mandatory_ in actions.py. If its present it will
         be called, if not package building process will _fail_."""
         func = const.install_func
+        ui.info("Installing %s...\n" % self.spec.source.name)
         if func in locals:
-            ui.info("Installing %s...\n" % self.spec.source.name)
             locals[func]()
+        else:
+            raise PisiBuildError, "install function is not defined in actions.py!"
         
     def genMetaDataXml(self, package):
         """Generate the metadata.xml file for build source.
