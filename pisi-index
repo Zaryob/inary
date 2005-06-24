@@ -6,7 +6,7 @@ import sys
 from optparse import OptionParser
 
 #sys.path.append("./lib")
-import pisi.install
+from pisi.index import Index
 import pisi.util
 from pisi.ui import ui
 
@@ -38,5 +38,9 @@ def main():
 
     ui.info('* Building index of PISI files under ' + repo_dir + '\n')
 
+    index = Index()
+    index.index(repo_dir)
+    index.write('pisi-index.xml')
+                    
 if __name__ == "__main__":
     main()
