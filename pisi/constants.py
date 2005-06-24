@@ -1,3 +1,7 @@
+# PISI constants. 
+# If you have a "magic" constant value this is where it should be
+# defined.
+
 class _constant:
     "Constant members implementation"
     class ConstError(TypeError):
@@ -16,16 +20,17 @@ class _constant:
         raise NameError, name
 
 class Constants:
-    "Pisi constants"
+    "Pisi Constants Singleton"
 
     __c = _constant()
 
     def __init__(self):
-        # Metadata 
+        # Constants for metadata
         #TODO: These two will be defined in a configuration file.
         self.__c.distribution = "Pardus"
         self.__c.distributionRelease = "0.1"
 
+        # directories
         self.__c.lib_dir_suffix = "/var/lib/pisi"
         self.__c.db_dir_suffix = "/var/db/pisi"
         self.__c.archives_dir_suffix = "/var/cache/pisi/archives"
