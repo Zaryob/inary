@@ -4,6 +4,7 @@ import os
 
 from pisi import specfile
 from pisi.config import config
+import pisi.util as util
 
 class SpecFileTestCase(unittest.TestCase):
     def setUp(self):
@@ -30,6 +31,7 @@ class SpecFileTestCase(unittest.TestCase):
         self.assertEqual(len(self.spec.packages), 1)
 
     def testCopy(self):
+        util.check_dir(config.tmp_dir())
         self.spec.read("samples/popt/popt.pspec")
         self.spec.write(os.path.join(config.tmp_dir(), 'popt-copy.pspec'))
 

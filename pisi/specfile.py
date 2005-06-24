@@ -13,7 +13,7 @@ class PackagerInfo:
         self.email = getNodeText(getNode(node, "Email"))
 
     def elt(self, xml):
-        node = xml.newNode("Update")
+        node = xml.newNode("Packager")
         xml.addTextNodeUnder(node, "Name", self.name)
         xml.addTextNodeUnder(node, "Email", self.email)
         return node
@@ -79,6 +79,7 @@ class SourceInfo:
         self.name = getNodeText(node, "Name")
         self.homepage = getNodeText(node, "HomePage")
         self.packager = PackagerInfo(getNode(node, "Packager"))
+        self.description = getNodeText(node, "Description")
         self.license = getNodeText(node, "License")
         self.isa = getNodeText(node, "IsA")
         self.partof = getNodeText(node, "PartOf")
@@ -99,7 +100,8 @@ class SourceInfo:
         xml.addTextNodeUnder(node, "Name", self.name)
         if self.homepage:
             xml.addTextNodeUnder(node, "Homepage", self.homepage)
-        xml.addNodeUnder(node, "", self.packager.elt(xml))
+        node.appendChild(self.packager.elt(xml))
+        xml.addTextNodeUnder(node, "Description", self.description)
         xml.addTextNodeUnder(node, "License", self.license)
         xml.addTextNodeUnder(node, "IsA", self.isa)
         xml.addTextNodeUnder(node, "PartOf", self.partof)
@@ -181,7 +183,7 @@ class SpecFile(XmlFile):
     def write(self, filename):
         """Write PSPEC file"""
         self.newDOM()
-        self.addNode("", self.source.elt(self))
-        for pkg in map(lambda x : x.elt(self), self.packages):
-            self.addNode("", pkg)
+        self.addChild(self.source.elt(self))
+        for pkg in self.packages:
+            self.addChild(pkg.elt(self))
         self.writexml(filename)

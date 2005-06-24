@@ -92,12 +92,17 @@ class XmlFile(object):
 
     def addNode(self, tagPath, newnode = None):
         self.verifyRootTag()
-        return addNode(self.dom, self.dom.documentElement, tagPath, newnode)
+        return addNode(self.dom, self.dom.documentElement, tagPath,
+                       newnode)
 
     def addNodeUnder(self, node, tagPath, newnode = None):
         "this adds the new stuff under node"
         self.verifyRootTag()
         return addNode(self.dom, node, tagPath, newnode)
+
+    def addChild(self, newnode):
+        """add a new child node right under root element document"""
+        self.dom.documentElement.appendChild(newnode)
 
     def addText(self, node, text):
         "add text to node"

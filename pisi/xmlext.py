@@ -99,21 +99,18 @@ def createTagPath(dom, node, tags):
 
 def addTagPath(dom, node, tags, newnode=None):
     """add newnode at the end of a tag chain, smart one"""
+    node = createTagPath(dom, node, tags)
     if newnode:                     # node to add specified
-        last = len(tags)-1
-        if last >= 0:
-            node = createTagPath(dom, node, tags[0:last])
-            node.appendChild(newnode)
-        else:
-            raise XmlError("addNodePath: not enough tags")
-    else:
-        return createTagPath(dom, node, tags)
+        node.appendChild(newnode)
+    return node    
 
 def addNode(dom, node, tagpath, newnode = None):
     """add a new node at the end of the tree"""
 
     assert type(tagpath)==str
-    tags = tagpath.split('/')           # tag chain
+    tags = []
+    if tagpath != "":
+        tags = tagpath.split('/')           # tag chain
     assert len(tags)>0                  # we want a chain
 
     # iterative code to search for the path
