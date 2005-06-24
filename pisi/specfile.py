@@ -7,6 +7,17 @@ from xmlfile import XmlFile
 from os.path import basename
 from ui import ui
 
+class PackagerInfo:
+    def __init__(self, node):
+        self.name = getNodeText(getNode(node, "Name"))
+        self.email = getNodeText(getNode(node, "Email"))
+
+    def elt(self, xml):
+        node = xml.newNode("Update")
+        xml.addTextNodeUnder(node, "Name", self.name)
+        xml.addTextNodeUnder(node, "Email", self.email)
+        return node
+
 class PatchInfo:
     def __init__(self, filenm, ctype):
         self.filename = filenm
@@ -16,11 +27,12 @@ class PatchInfo:
         self.filename = getNodeText(node)
         self.compressionType = getNodeAttribute(node, "compressionType")
 
-    def addNode(self, xml):
-        node = xml.addNode("Source/Patches/Patch")
+    def elt(self, xml):
+        node = xml.newNode("Patch")
         node.setAttribute("filename", self.filename)
         if self.compressionType:
             node.setAttribute("compressionType", self.compressionType)
+        return node
 
 class DepInfo:
     def __init__(self, node):
@@ -61,34 +73,80 @@ class PathInfo:
         node.setAttribute("fileType", self.fileType)
         return node
 
-# a structure to hold source information
 class SourceInfo:
-    pass
+    "a structure to hold source information"
+    def __init__(self, node):
+        self.name = getNodeText(node, "Name")
+        self.homepage = getNodeText(node, "HomePage")
+        self.packager = PackagerInfo(getNode(node, "Packager"))
+        self.license = getNodeText(node, "License")
+        self.isa = getNodeText(node, "IsA")
+        self.partof = getNodeText(node, "PartOf")
+        archiveNode = getNode(node, "Archive")
+        self.archiveUri = getNodeText(archiveNode).strip()
+        self.archiveName = basename(self.archiveUri)
+        self.archiveType = getNodeAttribute(archiveNode, "archType")
+        self.archiveSHA1 = getNodeAttribute(archiveNode, "sha1sum")
+        patchElts = getAllNodes(node, "Patches/Patch")
+        self.patches = [PatchInfo(p) for p in patchElts]
+        buildDepElts = getAllNodes(node, "BuildDependencies/Dependency")
+        self.buildDeps = [DepInfo(d) for d in buildDepElts]
+        historyElts = getAllNodes(node, "History/Update")
+        self.history = [UpdateInfo(x) for x in historyElts]
+
+    def elt(self, xml):
+        node = xml.newNode("Source")
+        xml.addTextNodeUnder(node, "Name", self.name)
+        if self.homepage:
+            xml.addTextNodeUnder(node, "Homepage", self.homepage)
+        xml.addNodeUnder(node, "", self.packager.elt(xml))
+        xml.addTextNodeUnder(node, "License", self.license)
+        xml.addTextNodeUnder(node, "IsA", self.isa)
+        xml.addTextNodeUnder(node, "PartOf", self.partof)
+        archiveNode = xml.addNodeUnder(node, "Archive")
+        archiveNode.setAttribute("archType", self.archiveType)
+        archiveNode.setAttribute("sha1sum", self.archiveSHA1)
+        for patch in self.patches:
+            xml.addNodeUnder(node, "Patches", patch.elt(xml))
+        for dep in self.buildDeps:
+            xml.addNodeUnder(node, "BuildDependencies", dep.elt(xml))
+        for update in self.history:
+            xml.addNodeUnder(node, "History", update.elt(xml))
+        return node
 
 class PackageInfo:
     def __init__(self, node):
-        self.name = getNodeText(getNode(node, "Name"))
-        self.summary = getNodeText(getNode(node, "Summary"))
-        self.description = getNodeText(getNode(node, "Description"))
-        self.category = getNodeText(getNode(node, "Category"))
+        self.name = getNodeText(node, "Name")
+        self.summary = getNodeText(node, "Summary")
+        self.description = getNodeText(node, "Description")
+        self.isa = getNodeText(node, "IsA")
+        self.partof = getNodeText(node, "PartOf")
+        self.license = getNodeText(node, "License")
         iDepElts = getAllNodes(node, "InstallDependencies/Dependency")
         self.installDeps = [DepInfo(x) for x in iDepElts]
         rtDepElts = getAllNodes(node, "RuntimeDependencies/Dependency")
         self.runtimeDeps = [DepInfo(x) for x in rtDepElts]
         self.paths = [PathInfo(x) for x in getAllNodes(node, "Files/Path")]
+        historyElts = getAllNodes(node, "History/Update")
+        self.history = [UpdateInfo(x) for x in historyElts]
 
     def elt(self, xml):
         node = xml.newNode("Package")
         xml.addTextNodeUnder(node, "Name", self.name)
         xml.addTextNodeUnder(node, "Summary", self.summary)
         xml.addTextNodeUnder(node, "Description", self.description)
-        xml.addTextNodeUnder(node, "Category", self.category)
-        for dep in map(lambda x : x.elt(xml), self.installDeps):
-            xml.addNode("Source/InstallDependencies", dep)        
-        for dep in map(lambda x : x.elt(xml), self.runtimeDeps):
-            xml.addNode("Source/RuntimeDependencies", dep)
-        for path in map(lambda x : x.elt(xml), self.paths):
-            xml.addNode("Files", dep)            
+        if self.isa:
+            xml.addTextNodeUnder(node, "IsA", self.isa)
+        if self.partof:
+            xml.addTextNodeUnder(node, "PartOf", self.partof)
+        for dep in self.installDeps:
+            xml.addNodeUnder(node, "InstallDependencies", dep.elt(xml))
+        for dep in self.runtimeDeps:
+            xml.addNodeUnder(node, "RuntimeDependencies", dep.elt(xml))
+        for path in self.paths:
+            xml.addNodeUnder(node, "Files", path.elt(xml))
+        for update in self.history:
+            xml.addNodeUnder(node, "History", update.elt(xml))
         return node
         
 class SpecFile(XmlFile):
@@ -102,20 +160,7 @@ class SpecFile(XmlFile):
         
         self.readxml(filename)
 
-        self.source = SourceInfo()
-        self.source.name = self.getChildText("Source/Name")
-        self.source.license = self.getChildText("Source/License")
-        archiveNode = self.getNode("Source/Archive")
-        self.source.archiveUri = getNodeText(archiveNode).strip()
-        self.source.archiveName = basename(self.source.archiveUri)
-        self.source.archiveType = getNodeAttribute(archiveNode, "archType")
-        self.source.archiveSHA1 = getNodeAttribute(archiveNode, "sha1sum")
-        patchElts = self.getAllNodes("Source/Patches/Patch")
-        self.source.patches = [PatchInfo(p) for p in patchElts]
-        buildDepElts = self.getAllNodes("Source/BuildDependencies/Dependency")
-        self.source.buildDeps = [DepInfo(d) for d in buildDepElts]
-        historyElts = self.getAllNodes("History/Update")
-        self.source.history = [UpdateInfo(x) for x in historyElts]
+        self.source = SourceInfo(self.getNode("Source"))
 
         # As we have no Source/Version tag we need to get 
         # the last version and release information
@@ -136,16 +181,7 @@ class SpecFile(XmlFile):
     def write(self, filename):
         """Write PSPEC file"""
         self.newDOM()
-        self.addTextNode("Source/Name", self.source.name)
-        archiveNode = self.addNode("Source/Archive")
-        archiveNode.setAttribute("archType", self.source.archiveType)
-        archiveNode.setAttribute("sha1sum", self.source.archiveSHA1)
-        for patch in self.source.patches:
-            patch.addNode(self)
-        for dep in map(lambda x : x.elt(self), self.source.buildDeps):
-            self.addNode("Source/BuildDependencies", dep)
-        for update in map(lambda x : x.elt(self), self.source.history):
-            self.addNode("Source/History", dep)
+        self.addNode("", self.source.elt(self))
         for pkg in map(lambda x : x.elt(self), self.packages):
             self.addNode("", pkg)
         self.writexml(filename)

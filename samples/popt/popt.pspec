@@ -13,6 +13,8 @@
       <Email>hotmail@redhat.com</Email>
     </Packager>
     <License>As-Is</License>
+    <IsA>library:util</IsA>
+    <PartOf>rpm:archive</PartOf>
     <Archive archType="targz" sha1sum="66f3c77b87a160951b180447f4a6dce68ad2f71b">
       ftp://ftp.rpm.org/pub/rpm/dist/rpm-4.1.x/popt-1.7.tar.gz
     </Archive>
@@ -66,5 +68,12 @@
       <Path fileType="localedata">/usr/share/locale</Path>
       <Path fileType="header">/usr/include/popt.h</Path>
     </Files>
+    <History>
+      <Update>
+	<Date>06/14/2005</Date>
+	<Version>1.7</Version>
+	<Release>2</Release>
+      </Update>
+    </History>
   </Package>
 </PISI>

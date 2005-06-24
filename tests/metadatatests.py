@@ -4,7 +4,7 @@ import os
 
 from pisi import metadata
 from pisi import util
-from pisi import context
+from pisi.config import config
 
 class MetaDataTestCase(unittest.TestCase):
     def setUp(self):
@@ -14,13 +14,16 @@ class MetaDataTestCase(unittest.TestCase):
         md = metadata.MetaData()
         md.read('tests/sandbox/metadata.xml')
 
-        self.assertEqual(md.license, "As-Is")
+        self.assertEqual(md.package.license, "As-Is")
 
-        self.assertEqual(md.version, "1.7")
+        self.assertEqual(md.package.version, "1.7")
 
-        self.assertEqual(md.installedSize, 546542)
-
+        self.assertEqual(md.package.installedSize, 546542)
+        return md
+    
     def testWrite(self):
-        pass
+        md = self.testRead()
+        md.write(os.path.join(config.tmp_dir(),'metadata-test.xml' ))
+        
 
 suite = unittest.makeSuite(MetaDataTestCase)

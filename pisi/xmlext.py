@@ -13,8 +13,10 @@ def getNodeAttribute(node, attrname):
         if attr.name == attrname:
             return attr.childNodes[0].data
 
-def getNodeText(node):
+def getNodeText(node, tagpath = ""):
     """get the first child and expect it to be text!"""
+    if tagpath!="":
+        node = getNode(node, tagpath)
     try:
         child = node.childNodes[0]
     except IndexError:

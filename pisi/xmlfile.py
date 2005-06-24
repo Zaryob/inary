@@ -37,6 +37,8 @@ class XmlFile(object):
         if self.dom.documentElement.tagName != self.rootTag:
             raise XmlError("Root tagname not " + self.rootTag + " as expected")
 
+    # construction helpers
+
     def newNode(self, tag):
         return self.dom.createElement(tag)
 
@@ -55,8 +57,10 @@ class XmlFile(object):
 
     def getNodeText(self, tagPath):
         """returns the text of *first* matching node for given tag path."""
-        self.verifyRootTag()
-        return getNodeText(getNode(self.dom.documentElement, tagPath))
+        node = self.getNode(tagpath)
+        if not node:
+            return None
+        return getNodeText(node)
 
     def getAllNodes(self, tagPath):
         """returns all nodes matching a given tag path."""
@@ -83,12 +87,6 @@ class XmlFile(object):
             return filter(lambda x:x.nodeType == x.ELEMENT_NODE, node.childNodes)
         except AttributeError:
             return None
-
-    def getChildText(self, tagpath):
-        node = self.getNode(tagpath)
-        if not node:
-            return None
-        return getNodeText(node)
 
     # write helpers
 

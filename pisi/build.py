@@ -113,70 +113,18 @@ class PisiBuild:
             locals[func]()
         
     def genMetaDataXml(self, package):
-        metadata = MetaData()
-
-        def createElt(tagName, text=None):
-            createElement = metadata.dom.createElement
-            createTextNode = metadata.dom.createTextNode
-            elt = createElement(tagName)
-            if text:
-                elt.appendChild(createTextNode(text))
-            return elt
-
-        metadata.appendElement(createElt("Name",
-                                         package.name))
-        metadata.appendElement(createElt("Summary",
-                                         package.summary))
-        metadata.appendElement(createElt("Description",
-                                         package.description))
-        metadata.appendElement(createElt("Category",
-                                         package.category))
-
-        elt = createElt("InstallDependencies")
-        for idep in package.installDeps:
-            d = createElt("Depencency", idep.package)
-            # we should also have versionTo and version
-            # attributes. But specfile/DepInfo doesn't defines
-            # them. So we don't here
-            if idep.versionFrom:
-                d.setAttribute("versionFrom", idep.versionFrom)
-            elt.appendChild(d)
-        metadata.appendElement(elt)
-
-        elt = createElt("RuntimeDependencies")
-        for rdep in package.runtimeDeps:
-            d = createElt("Depencency", rdep.package)
-            if rdep.versionFrom:
-                d.setAttribute("versionFrom", rdep.versionFrom)
-            elt.appendChild(d)
-        metadata.appendElement(elt)
-
-        metadata.appendElement(createElt("License",
-                                         self.spec.source.license))
-        metadata.appendElement(createElt("Distribution",
-                                         const.distribution))
-        metadata.appendElement(createElt("DistributionRelease",
-                                         const.distributionRelease))
-        metadata.appendElement(createElt("Architecture",
-                                         "Any")) # FIXME
+        metadata = MetaData.fromSpec(self.spec.source, package)
+        metadata.package.distribution = const.distribution
+        metadata.package.distributionRelease = const.distributionRelease
+        metadata.package.architecture = "Any"
+        
         # FIXME: Bu hatalı. installsize'ı almak için tüm
         # pkg_install_dir()'ın boyutunu hesaplayamayız. Bir source
         # birden fazla kaynak üretebilir. package.paths ile
         # karşılaştırarak file listesinden boyutları hesaplatmalıyız.
         d = self.ctx.pkg_install_dir()
         size = util.dir_size(d)
-        metadata.appendElement(createElt("InstalledSize",
-                                         str(size)))
-
-        elt = createElt("History")
-        for history in self.spec.source.history:
-            update = createElt("Update")
-            update.appendChild(createElt("Date", history.date))
-            update.appendChild(createElt("Version", history.version))
-            update.appendChild(createElt("Release", history.release))
-            elt.appendChild(update)
-        metadata.appendElement(elt)
-
+        metadata.package.installedSize = str(size)
         metadata.write(os.path.join(self.ctx.pkg_dir(), const.metadata_xml))
 
     def genFilesXml(self, package):
