@@ -34,6 +34,9 @@ class Config(object):
         def tmp_dir(self):
             return self.destdir + const.tmp_dir_suffix
 
+        def install_dir(self):
+            return self.tmp_dir() + const.install_dir_suffix
+
     __configinstance = configimpl()
 
     def __init__(self):
