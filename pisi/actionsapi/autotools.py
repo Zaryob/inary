@@ -4,7 +4,7 @@
 import os
 from pisi.context import const
 
-def configure(parameters = None):
+def configure(parameters = ''):
     ''' FIXME: Düzgün hale getirilecek '''
     ''' {EXTRA} = '--with-nls --with-libusb --with-something-usefull '''
 
