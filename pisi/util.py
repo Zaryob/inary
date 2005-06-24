@@ -74,10 +74,11 @@ def commonprefix(l):
 
 # but this one is necessary
 def subpath(a, b):
-    """find if path a is before b in the directory tree"""
+    "find if path a is before b in the directory tree"
     return prefix(os.path.split(a), os.path.split(b))
 
 def removepathprefix(a, b):
+    "remove path prefix a from p, finding the pathname rooted at a"
     comps = remove_prefix(os.path.split(a), os.path.split(b))
     if len(comps) > 0:
         return os.path.join(*tuple(comps))
