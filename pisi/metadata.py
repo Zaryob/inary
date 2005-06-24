@@ -17,7 +17,7 @@ class SourceInfo:
         xml.addTextNodeUnder(node, "Name", self.name)
         if self.homepage:
             xml.addTextNodeUnder(node, "Homepage", self.homepage)
-        xml.addNodeUnder(node, "", self.packager.elt(xml))
+        node.appendChild(self.packager.elt(xml))
         return node
 
 class PackageInfo(specfile.PackageInfo):
@@ -71,8 +71,8 @@ class MetaData(XmlFile):
 
     def write(self, filename):
         self.newDOM()
-        self.addNode("", self.source.elt(self))
-        self.addNode("", self.package.elt(self))
+        self.addChild(self.source.elt(self))
+        self.addChild(self.package.elt(self))
         self.writexml(filename)
 
     def verify(self):
