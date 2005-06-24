@@ -2,7 +2,7 @@
 # Archive module provides access to regular archive file types.
 # maintainer baris and meren
 
-#standart lisbrary modules
+#standard lisbrary modules
 import os
 import sys
 import tarfile
@@ -73,12 +73,12 @@ class ArchiveZip(ArchiveBase):
         """Close the zip archive."""
         self.zip.close()
 
-    def add_file(self, fileName):
+    def add_to_archive(self, fileName):
         """Add file or directory to a zip file"""
         if os.path.isdir(fileName) and not os.path.islink(fileName):
             self.zip.writestr(fileName + '/', '')
             for f in os.listdir(fileName):
-               self.add_file(fileName + '/' + f)
+               self.add_to_archive(fileName + '/' + f)
         else:
             if os.path.islink(fileName):
                 dest = os.readlink(fileName)

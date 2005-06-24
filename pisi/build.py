@@ -200,8 +200,8 @@ class PisiBuild:
             c = os.getcwd()
 
             os.chdir(self.ctx.pkg_dir())
-            pkg.add_file(const.metadata_xml)
-            pkg.add_file(const.files_xml)
-            pkg.add_file("install")
+            pkg.add_to_package(const.metadata_xml)
+            pkg.add_to_package(const.files_xml)
+            pkg.add_to_package("install")
             pkg.close()
             os.chdir(c)

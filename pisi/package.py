@@ -13,9 +13,9 @@ class Package:
         self.impl = archive.ArchiveZip(packagefn, 'zip', mode)
         self.filename = packagefn
 
-    def add_file(self, fn):
+    def add_to_package(self, fn):
         """Add a file or directory to package"""
-        self.impl.add_file(fn)
+        self.impl.add_to_archive(fn)
 
     def close(self):
         """Close the package archive"""
