@@ -190,10 +190,12 @@ class PisiBuild:
             self.genFilesXml(package)
             ui.info(" done.\n")
 
-            ui.info("Creating PISI package bla bla....\n")
             # testing
             pkgName = package.name + '-' + self.spec.source.version +\
                 '-' + self.spec.source.release + ".pisi"
+            
+            ui.info("Creating PISI package %s\n" % pkgName)
+            
             pkg = Package(pkgName, 'w')
             c = os.getcwd()
 
