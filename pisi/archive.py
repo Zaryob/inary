@@ -123,15 +123,12 @@ class ArchiveZip(ArchiveBase):
                 else:
                     # change archiveRoot
                     if util.subpath(archiveRoot, info.filename):
-                        print '!', archiveRoot, info.filename
                         outpath = util.removepathprefix(archiveRoot,
                                                         info.filename)
-                        print '*', outpath
                     else:
                         continue        # don't extract if not under
 
                 ofile = os.path.join(targetDir, outpath)
-                print 'ofile ', ofile
 
                 if isdir:               # a directory is present.
                     continue            # FIXME: do nothing!

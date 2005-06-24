@@ -45,6 +45,7 @@ def main():
         print '*** An installation error has occured:'
         print '    ', estr
         sys.exit(1)
+    ui.info("Package(s) installed successfully as intended.\n")
 
 if __name__ == "__main__":
     main()
