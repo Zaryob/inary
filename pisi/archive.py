@@ -117,10 +117,13 @@ class ArchiveZip(ArchiveBase):
                 if archiveRoot!='':
                     # change archiveRoot
                     if util.subpath(archiveRoot, fileName):
+                        print '!', archiveRoot, fileName
                         fileName = util.removepathprefix(archiveRoot, fileName)
+                        print '*', fileName
                     else:
                         continue        # don't extract if not under
                 ofile = os.path.join(targetDir, fileName)
+                print 'ofile ', ofile
 
                 # a directory is present. lets continue
                 if ofile[len(ofile)-1]=='/':

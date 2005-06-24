@@ -46,7 +46,7 @@ def install(package_fn):
 
     # unzip package in place
     ui.info('Extracting files\n')
-    #package.extract_dir_flat('install', config.destdir)
+    package.extract_dir_flat('install', config.destdir)
     
     # update databases
 

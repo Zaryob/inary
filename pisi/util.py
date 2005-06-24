@@ -49,9 +49,11 @@ def same(l):
 
 def prefix(a, b):
     "check if sequence a is a prefix of sequence b"
+    print 'PREFIX', a, b
     if len(a)>len(b):
         return False
-    for i in range(0,len(a)-1):
+    for i in range(0,len(a)):
+        print 'checking', a[i], b[i]
         if a[i]!=b[i]:
             return False
     return True
@@ -63,13 +65,21 @@ def remove_prefix(a,b):
     
 # path functions
 
+def splitpath(a):
+    """split path into components and return as a list
+    os.path.split doesn't do what I want"""
+    l = a.split(os.path.sep)
+    if l[len(l)-1]=='':
+        l.pop()
+    return l
+
 # I'm not sure how necessary this is. Ahem.
 def commonprefix(l):
     """an improved version of os.path.commonprefix,
     returns a list of path components"""
     common = []
-    comps = map(os.path.split, l)
-    for i in range(0, min(len,l)-1):
+    comps = map(splitpath, l)
+    for i in range(0, min(len,l)):
         compi = map(lambda x: x[i], comps) # get ith slice
         if same(compi):
             common.append(compi[0])
@@ -78,7 +88,7 @@ def commonprefix(l):
 # but this one is necessary
 def subpath(a, b):
     "find if path a is before b in the directory tree"
-    return prefix(os.path.split(a), os.path.split(b))
+    return prefix(splitpath(a), splitpath(b))
 
 def removepathprefix(a, b):
     "remove path prefix a from p, finding the pathname rooted at a"
