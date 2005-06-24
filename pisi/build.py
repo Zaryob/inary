@@ -6,7 +6,6 @@
 import os
 import sys
 
-# import pisipackage
 import util
 from ui import ui
 from constants import const
