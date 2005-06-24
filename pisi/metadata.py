@@ -35,7 +35,8 @@ class PackageInfo(specfile.PackageInfo):
         xml.addTextNodeUnder(node, "Distribution", self.distribution)
         xml.addTextNodeUnder(node, "DistributionRelease", self.distributionRelease)
         xml.addTextNodeUnder(node, "Architecture", self.architecture)
-        xml.addTextNodeUnder(node, "InstalledSize", self.installedSize)
+        xml.addTextNodeUnder(node, "InstalledSize", str(self.installedSize))
+        return node
 
 class MetaData(XmlFile):
     """Package metadata. Metadata is composed of Specfile and various
