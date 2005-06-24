@@ -56,24 +56,17 @@ class PisiBuild:
         curDir = os.getcwd()
 
         locals = globals = {}
-        # put the evironment variables for actions API to use.
-        evn = {
-            "PKG_DIR": self.ctx.pkg_dir(),
-            "WORK_DIR": self.ctx.pkg_work_dir(),
-            "INSTALL_DIR": self.ctx.pkg_install_dir(),
-            "SRC_NAME": self.spec.source.name,
-            "SRC_VERSION": self.spec.source.version
-            }
-        os.environ.update(evn)
 
         try:
             exec compile(self.actionScript , "error", "exec") in locals,globals
         except SyntaxError, e:
             ui.error ("Error : %s\n" % e)
             return 
-       
-        self.goToWorkDir(globals)
-       
+        # Go to source directory
+        self.gotoSrcDir(globals)
+        # Set needed evironment variables for actions API
+        self.setEnvorinment()
+        #  Run configure, build and install phase
         self.configureSource(locals)
         self.buildSource(locals)
         self.installSource(locals)
@@ -89,7 +82,19 @@ class PisiBuild:
     def applyPatches(self):
         pass
 
-    def goToWorkDir(self, globals):
+    def setEnvorinment(self):
+        # put the evironment variables for actions API to use.
+        evn = {
+            "PKG_DIR": self.ctx.pkg_dir(),
+            "WORK_DIR": self.ctx.pkg_work_dir(),
+            "INSTALL_DIR": self.ctx.pkg_install_dir(),
+            "SRC_NAME": self.spec.source.name,
+            "SRC_VERSION": self.spec.source.version,
+            "SRC_RELEASE": self.spec.source.release
+            }
+        os.environ.update(evn)
+        
+    def gotoSrcDir(self, globals):
         """Changes the current working directory to package_work_dir() for
         actions.py to do its work."""
         if 'WorkDir' in globals:
