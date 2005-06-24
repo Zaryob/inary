@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# unpack magic
+# Archive module provides access to regular archive file types.
 # maintainer baris and meren
 
 #standart lisbrary modules
@@ -16,6 +16,7 @@ class ArchiveError:
     pass
 
 class ArchiveBase(object):
+    """Base class for Archive classes."""
     def __init__(self, filepath, atype):
         self.filePath = filepath
         self.type = atype
@@ -28,12 +29,17 @@ class ArchiveBase(object):
         else:
             os.makedirs(self.targetDir)
 
-class ArchiveTarFile(ArchiveBase):
+class ArchiveTar(ArchiveBase):
+    """ArchiveTar handles tar archives depending on the compression
+    type. Provides access to tar, tar.gz and tar.bz2 files. 
+
+    This class provides the unpack magic for tar archives."""
     def __init__(self, filepath, type="tar"):
-        super(ArchiveTarFile, self).__init__(filepath, type)
+        super(ArchiveTar, self).__init__(filepath, type)
 
     def unpack(self, targetDir):
-        super(ArchiveTarFile, self).unpack(targetDir)
+        """Unpack tar archive to a given target directory(targetDir)."""
+        super(ArchiveTar, self).unpack(targetDir)
 
         rmode = ""
         if self.type == 'tar':
@@ -54,15 +60,21 @@ class ArchiveTarFile(ArchiveBase):
         tar.close()
 
 class ArchiveZip(ArchiveBase):
+    """ArchiveZip handles zip archives. 
+
+    Being a zip archive PISI packages also use this class
+    extensively. This class provides unpacking and packing magic for
+    zip archives."""
     def __init__(self, filepath, type="zip", mode='r'):
         super(ArchiveZip, self).__init__(filepath, type)
         self.zip = zipfile.ZipFile(filepath, mode)
 
     def close(self):
+        """Close the zip archive."""
         self.zip.close()
 
     def add_file(self, fileName):
-        """add file or directory to a zip file"""
+        """Add file or directory to a zip file"""
         if os.path.isdir(fileName):
             self.zip.writestr(fileName + '/', '')
             for f in os.listdir(fileName):
@@ -71,7 +83,8 @@ class ArchiveZip(ArchiveBase):
             self.zip.write(fileName, fileName, zipfile.ZIP_DEFLATED)
 
     def unpack_file_cond(self, pred, targetDir, archiveRoot=''):
-        """ unpack file according to predicate function filename -> bool"""
+        """Unpack/Extract a file according to predicate function filename ->
+        bool"""
         super(ArchiveZip, self).unpack(targetDir)
         zip = self.zip
         for fileName in zip.namelist():
@@ -126,16 +139,17 @@ class ArchiveZip(ArchiveBase):
         return 
 
 class Archive:
-    """Unpack magic for Archive files..."""
+    """Archive is the main factory for ArchiveClasses, regarding the
+    Abstract Factory Pattern :)."""
 
     def __init__(self, filepath, type):
         """accepted archive types:
         targz, tarbz2, zip, tar"""
 
         handlers = {
-            'targz': ArchiveTarFile, 
-            'tarbz2': ArchiveTarFile,
-            'tar': ArchiveTarFile,
+            'targz': ArchiveTar, 
+            'tarbz2': ArchiveTar,
+            'tar': ArchiveTar,
             'zip': ArchiveZip
         }
 
