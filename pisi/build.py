@@ -113,7 +113,8 @@ class PisiBuild:
             locals[func]()
         
     def genMetaDataXml(self, package):
-        metadata = MetaData.fromSpec(self.spec.source, package)
+        metadata = MetaData()
+        metadata.fromSpec(self.spec.source, package)
         metadata.package.distribution = const.distribution
         metadata.package.distributionRelease = const.distributionRelease
         metadata.package.architecture = "Any"

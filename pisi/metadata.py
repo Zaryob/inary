@@ -5,10 +5,12 @@ from xmlfile import *
 import specfile
 
 class SourceInfo:
-    def __init__(self, node):
-        self.name = getNodeText(node, "Name")
-        self.homepage = getNodeText(node, "HomePage")
-        self.packager = specfile.PackagerInfo(getNode(node, "Packager"))
+
+    def __init__(self, node=None):
+        if node:
+            self.name = getNodeText(node, "Name")
+            self.homepage = getNodeText(node, "HomePage")
+            self.packager = specfile.PackagerInfo(getNode(node, "Packager"))
 
     def elt(self, xml):
         node = xml.newNode("Source")
@@ -20,15 +22,20 @@ class SourceInfo:
 
 class PackageInfo(specfile.PackageInfo):
 
-    def __init__(self, node):
-        specfile.PackageInfo.__init__(self, node)
-        self.distribution = getNodeText(node, "Distribution")
-        self.distributionRelease = getNodeText(node, "DistributionRelease")
-        self.architecture = getNodeText(node, "Architecture")
+    def __init__(self, node=None):
+        if node:
+            specfile.PackageInfo.__init__(self, node)
+            self.distribution = getNodeText(node, "Distribution")
+            self.distributionRelease = getNodeText(node, "DistributionRelease")
+            self.architecture = getNodeText(node, "Architecture")
+            self.installedSize = int(getNodeText(node, "InstalledSize"))
 
-        istext = getNodeText(node, "InstalledSize")
-        if istext:
-            self.installedSize = int(istext)
+    def elt(self, xml):
+        node = specfile.PackageInfo.elt(self, xml)
+        xml.addTextNodeUnder(node, "Distribution", self.distribution)
+        xml.addTextNodeUnder(node, "DistributionRelease", self.distributionRelease)
+        xml.addTextNodeUnder(node, "Architecture", self.architecture)
+        xml.addTextNodeUnder(node, "InstalledSize", self.installedSize)
 
 class MetaData(XmlFile):
     """Package metadata. Metadata is composed of Specfile and various
@@ -37,14 +44,22 @@ class MetaData(XmlFile):
     def __init__(self):
         XmlFile.__init__(self,"PISI")
 
-    def fromSpec(src, pkg):
-        md = MetaData()
-        md.source.name = src.source.name
-        md.source.homepage = src.source.homepage
-        md.source.packager = src.source.packager
-        md.package = src.package
-        md.package.history = self.source.history # FIXME
-        return md
+    def fromSpec(self, src, pkg):
+        self.source = SourceInfo()
+        self.source.name = src.name
+        self.source.homepage = src.homepage
+        self.source.packager = src.packager
+        self.package = PackageInfo()
+        self.package.name = pkg.name
+        self.package.summary = pkg.summary
+        self.package.description = pkg.description
+        self.package.isa = pkg.isa
+        self.package.partof = pkg.partof
+        self.package.license = pkg.license
+        self.package.installDeps = pkg.installDeps
+        self.package.runtimeDeps = pkg.runtimeDeps
+        self.package.paths = pkg.paths
+        self.package.history = src.history # FIXME
 
     def read(self, filename):
         self.readxml(filename)
