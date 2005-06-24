@@ -1,3 +1,7 @@
+# Metadata module provides access to metadata.xml. metadata.xml is
+# generated during the build process of a package and used in the
+# installation. Package repository also uses metadata.xml for building
+# a package index.
 
 from ui import ui
 
@@ -40,7 +44,7 @@ class PackageInfo(specfile.PackageInfo):
 
 class MetaData(XmlFile):
     """Package metadata. Metadata is composed of Specfile and various
-    other information."""
+    other information. A metadata has two parts, Source and Package."""
 
     def __init__(self):
         XmlFile.__init__(self,"PISI")

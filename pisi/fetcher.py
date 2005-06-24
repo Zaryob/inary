@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
-# download magic
-# maintainer: baris and meren
+
+# Yet another Pisi module for fetching files from various sources. Of
+# course, this is not limited to just fetching source files. We fetch
+# all kinds of things: source tarballs, index files, packages, and God
+# knows what.
 
 # python standard library modules
 import urlparse
@@ -15,10 +18,8 @@ class FetchError (Exception):
     pass
 
 class Fetcher:
-    """Yet another Pisi tool for fetching files from various sources..
-    Of course, this is not limited to just fetching source files.
-    We fetch all kinds of things: source tarballs, index files,
-    packages, and God knows what."""
+    """Fetcher can fetch a file from various sources using various
+    protocols."""
     def __init__(self, source):
         self.uri = source.archiveUri
         self.filedest = config.archives_dir()

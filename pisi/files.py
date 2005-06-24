@@ -1,11 +1,12 @@
- # class for files.xml
+# Files module provides access to files.xml. files.xml is genarated
+# during the build process of a package and used in installation.
 
 import xmlfile
 from xmlfile import XmlFile
 
 
 class FileInfo:
-    
+    """FileInfo holds the information for a File node/tag in files.xml"""
     def __init__(self, _path = "", _type = "", _size="", _hash = ""):
         self.path = _path
         self.type = _type

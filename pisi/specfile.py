@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
-# read/write PISI source package specification file
 
+# Specfile module is our handler for PSPEC files. PSPEC (PISI SPEC)
+# files are specification files for PISI source packages. This module
+# provides read and write access to PSPEC files.
+
+# standard python modules
 import xml.dom.minidom
+from os.path import basename
+
+# pisi modules
 from xmlext import *
 from xmlfile import XmlFile
-from os.path import basename
 from ui import ui
 
 class PackagerInfo:
@@ -74,7 +80,8 @@ class PathInfo:
         return node
 
 class SourceInfo:
-    "a structure to hold source information"
+    """A structure to hold source information. Source information is
+    located under <Source> tag in PSPEC file."""
     def __init__(self, node):
         self.name = getNodeText(node, "Name")
         self.homepage = getNodeText(node, "HomePage")
@@ -117,6 +124,9 @@ class SourceInfo:
         return node
 
 class PackageInfo:
+    """A structure to hold package information. Package information is
+    located under <Package> tag in PSPEC file. Opposite to Source each
+    PSPEC file can have more than one Package tag."""
     def __init__(self, node):
         self.name = getNodeText(node, "Name")
         self.summary = getNodeText(node, "Summary")

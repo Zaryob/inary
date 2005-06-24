@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
-# some helper functions for using minidom
+
+# XmlFile is a halper module for accessing XML files using
+# xml.dom.minidom.
+#
+# XmlFile class that further abstracts a dom object using the
+# high-level dom functions provided in xml module (and sorely lacking
+# in xml.dom :( )
 
 import xml.dom.minidom as mdom
 
 from xmlext import *
 
-# xmlfile class that further abstracts a dom object
-# using the high-level dom functions provided in xml module
-# (and sorely lacking in xml.dom :( )
 
 class XmlFile(object):
     """A class for retrieving information from an XML file"""

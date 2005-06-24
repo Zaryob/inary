@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# PISI configuration (static and dynamic)
+# Context module.
 
 from specfile import SpecFile
 from constants import const
