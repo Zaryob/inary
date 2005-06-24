@@ -63,6 +63,25 @@ class ArchiveFileTestCase(unittest.TestCase):
         # check for symbolic links
         testfile = targetDir + "/sandbox/deneme/hed"
         assert islink(testfile)
+
+    def testMakeZip(self):
+        # first unpack our dear sandbox.zip
+        ctx = context.BuildContext("tests/sandbox/sandbox.pspec")
+        targetDir = ctx.pkg_work_dir()
+        fileName = os.path.basename(ctx.spec.source.archiveUri)
+        filePath = ctx.archives_dir() + '/' + fileName
+        achv = archive.Archive(filePath, ctx.spec.source.archiveType)
+        achv.unpack(targetDir)
+        del achv
+
+        newZip = targetDir + "/new.zip"
+        zip = archive.ArchiveZip(newZip, 'zip', 'w')
+        sourceDir = targetDir + "/sandbox"
+        zip.add_to_archive(sourceDir)
+        zip.close()
+
+        #TODO: do some more work to test the integrity of new zip file
+
     
     def testUnpackZipCond(self):
         ctx = context.BuildContext("tests/sandbox/sandbox.pspec")
