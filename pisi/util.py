@@ -18,6 +18,9 @@ class UtilError(Exception):
 
 # string/list functions
 
+def unzip(seq):
+    return zip(*seq)
+
 def concat(l):
     """concatenate a list of lists"""
     return reduce( lambda x,y: x+y, l )
