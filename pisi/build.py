@@ -19,6 +19,27 @@ from package import Package
 class PisiBuildError(Exception):
     pass
 
+# helper functions
+def getFileType(path, pinfoList):
+    """Return the file type of a path according to the given PathInfo
+    list"""
+    # The usage of depth is somewhat confusing. It is used for
+    # finding the best match to package.paths. For an example,
+    # if package.paths contains
+    # ['/usr/share','/usr/share/doc'] and frpath is
+    # /usr/share/doc/filename our iteration over package.paths
+    # should match the second item.
+    depth = 0
+    ftype = ""
+    for pinfo in pinfoList:
+        if path.startswith(pinfo.pathname):
+            length = len(pinfo.pathname)
+            if depth < length:
+                depth = length
+                ftype = pinfo.fileType
+    return ftype
+
+
 class PisiBuild:
     """PisiBuild class, provides the package build and creation routines"""
     def __init__(self, buildcontext):
@@ -168,24 +189,14 @@ class PisiBuild:
         generated files by the build system."""
         files = Files()
         install_dir = self.ctx.pkg_install_dir()
-        for fpath, fhash in util.get_file_hashes(install_dir):
-            # get the relative path
-            frpath = fpath[len(install_dir):]
-            ftype = ""
-            # The usage of depth is somewhat confusing. It is used for
-            # finding the best match to package.paths. For an example,
-            # if package.paths contains
-            # ['/usr/share','/usr/share/doc'] and frpath is
-            # /usr/share/doc/filename our iteration over package.paths
-            # should match the second item.
-            depth = 0
-            for path in package.paths:
-                if frpath.startswith(path.pathname):
-                    if depth < len(path.pathname):
-                        depth = len(path.pathname)
-                        ftype = path.fileType
-                        fsize = str(os.path.getsize(fpath))
-            files.append(FileInfo(frpath, ftype, fsize, fhash))
+        for pinfo in package.paths:
+            path = install_dir + pinfo.pathname
+            for fpath, fhash in util.get_file_hashes(path):
+                frpath = fpath[len(install_dir):] # relative path
+                ftype = getFileType(frpath, package.paths)
+                fsize = str(os.path.getsize(fpath))
+                files.append(FileInfo(frpath, ftype, fsize, fhash))
+
         files.write(os.path.join(self.ctx.pkg_dir(), const.files_xml))
 
     def buildPackages(self):
@@ -214,6 +225,14 @@ class PisiBuild:
             os.chdir(self.ctx.pkg_dir())
             pkg.add_to_package(const.metadata_xml)
             pkg.add_to_package(const.files_xml)
-            pkg.add_to_package("install")
+
+            # Now it is time to add files to the packages. We should
+            # only add the files listed in the Files section of the
+            # Package.
+            for pinfo in package.paths:
+                p = os.path.join("install" + pinfo.pathname)
+                if os.path.exists(p):
+                    pkg.add_to_package(p)
+
             pkg.close()
             os.chdir(c)

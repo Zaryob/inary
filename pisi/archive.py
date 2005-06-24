@@ -77,25 +77,38 @@ class ArchiveZip(ArchiveBase):
         """Close the zip archive."""
         self.zip.close()
 
-    def add_to_archive(self, fileName):
-        """A wrapper function to handle working directory sh*t"""
+# Meren: Bu kapsülleyici fonksiyonu ben istemiştim ama sanırım
+# yanılmışım.  Paketi oluştururken farklı dosyaları install
+# içerisinden yüklemeye çalışırken verilen tüm path'i pakete koymasını
+# istememiz gerekiyor. Yani add_to_package("install/usr/include")
+# dediğimiz zaman. Zip içerisine install/usr/include şeklinde koyması
+# gerekiyor. Bu fonksiyonu şimdilik comment-out ediyorum ve bu
+# özelliğe de ihtiyacımız olur belki diye silmiyorum. Belki kolay
+# hatırlanır olmayan (sık kullanmayacağız) farklı bir isim ile burada
+# tutmak isteriz (add_basedir_to_archive?).
 
+# *********************************************************************
+#     def add_to_archive(self, fileName):
+#         """A wrapper function to handle working directory sh*t"""
+
+#         # Fuck zipfile! It's a pity that it can't handle unicode strings. Grrr!
+#         fileName = str(fileName)
+#         cwd = os.getcwd()
+#         pathName = os.path.dirname(fileName)
+#         fileName = os.path.basename(fileName)
+#         if pathName:
+#             os.chdir(pathName)
+#         self.add_file(fileName)
+#         os.chdir(cwd)
+
+    def add_to_archive(self, fileName):
+        """Add file or directory to a zip file"""
         # Fuck zipfile! It's a pity that it can't handle unicode strings. Grrr!
         fileName = str(fileName)
-        cwd = os.getcwd()
-        pathName = os.path.dirname(fileName)
-        fileName = os.path.basename(fileName)
-        if pathName:
-            os.chdir(pathName)
-        self.add_file(fileName)
-        os.chdir(cwd)
-
-    def add_file(self, fileName):
-        """Add file or directory to a zip file"""
         if os.path.isdir(fileName) and not os.path.islink(fileName):
             self.zip.writestr(fileName + '/', '')
             for f in os.listdir(fileName):
-               self.add_file(fileName + '/' + f)
+               self.add_to_archive(fileName + '/' + f)
         else:
             if os.path.islink(fileName):
                 dest = os.readlink(fileName)

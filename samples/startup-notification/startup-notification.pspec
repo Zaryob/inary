@@ -43,7 +43,6 @@
     <Files>
       <Path fileType="sharedLib">/usr/lib</Path>
       <Path fileType="doc">/usr/share/doc</Path>
-      <Path fileType="header">/usr/include</Path>
     </Files>
     <History>
       <Update>
@@ -53,4 +52,14 @@
       </Update>
     </History>
   </Package>
+
+  <Package>
+    <Name>startup-notification-devel</Name>
+    <Summary xml:lang="en">Development files for startup notification and feedback library</Summary>
+    <Description>sn development</Description>
+    <Files>
+      <Path fileType="header">/usr/include</Path>
+    </Files>
+  </Package>
+    
 </PISI>
