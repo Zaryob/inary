@@ -192,7 +192,7 @@ class PisiBuild:
         for pinfo in package.paths:
             path = install_dir + pinfo.pathname
             for fpath, fhash in util.get_file_hashes(path):
-                frpath = fpath[len(install_dir):] # relative path
+                frpath = util.removepathprefix(install_dir, fpath) # relative path
                 ftype = getFileType(frpath, package.paths)
                 fsize = str(os.path.getsize(fpath))
                 files.append(FileInfo(frpath, ftype, fsize, fhash))
