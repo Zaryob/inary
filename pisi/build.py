@@ -28,6 +28,7 @@ class PisiBuild:
         self.sourceArchive = SourceArchive(self.ctx)
 
     def build(self):
+        """Build the package in one shot."""
         ui.info("Building PISI source package: %s\n" % self.spec.source.name)
 
         ui.info("Fetching source from: %s\n" % self.spec.source.archiveUri)
@@ -80,6 +81,8 @@ class PisiBuild:
         pass
 
     def goToWorkDir(self, globals):
+        """Changes the current working directory to package_work_dir() for
+        actions.py to do its work."""
         path = globals['WorkDir']
         if path:
             path = self.ctx.pkg_work_dir() + "/" + path
@@ -94,24 +97,43 @@ class PisiBuild:
             sys.exit()
 
     def configureSource(self, locals):
+        """Calls the corresponding function in actions.py. This time its
+        const.setup_func which sets up the source tree for building.
+
+        setup_func is optional in actions.py. If its present it will
+        be called, if not nothing will be done."""
         func = const.setup_func
         if func in locals:
             ui.info("Configuring %s...\n" % self.spec.source.name)
             locals[func]()
 
     def buildSource(self, locals):
+        """Calls the corresponding function in actions.py. This time its
+        const.build_func which builds the source.
+
+        build_func is optional in actions.py. If its present it will
+        be called, if not nothing will be done."""
         func = const.build_func
         if func in locals:
             ui.info("Building %s...\n" % self.spec.source.name)
             locals[func]()
 
     def installSource(self, locals):
+        """Calls the corresponding function in actions.py. This time its
+        const.install_func which will install the build source.
+
+        install_func is _mandatory_ in actions.py. If its present it will
+        be called, if not package building process will _fail_."""
         func = const.install_func
         if func in locals:
             ui.info("Installing %s...\n" % self.spec.source.name)
             locals[func]()
         
     def genMetaDataXml(self, package):
+        """Generate the metadata.xml file for build source.
+
+        metadata.xml is composed of the information from specfile plus
+        some additional information."""
         metadata = MetaData()
         metadata.fromSpec(self.spec.source, package)
         metadata.package.distribution = const.distribution
@@ -153,6 +175,8 @@ class PisiBuild:
         files.write(os.path.join(self.ctx.pkg_dir(), const.files_xml))
 
     def buildPackages(self):
+        """Build each package defined in PSPEC file. After this process there
+        will be .pisi files hanging around, AS INTENDED ;)"""
         for package in self.spec.packages:
             ui.info("** Building package %s\n" % package.name);
             
