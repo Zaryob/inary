@@ -152,6 +152,9 @@ class ArchiveZip(ArchiveBase):
     def unpack_dir(self, path, targetDir):
         self.unpack_file_cond(lambda f:util.subpath(path,f), targetDir)
 
+    def unpack_dir_flat(self, path, targetDir):
+        self.unpack_file_cond(lambda f:util.subpath(path,f), targetDir, path)
+
     def unpack(self, targetDir):
         self.unpack_file_cond(lambda f: True, targetDir)
         self.close()

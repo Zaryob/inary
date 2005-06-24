@@ -26,7 +26,7 @@ def satisfiesInstallDeps(pkg):
     deps = installDeps(pkg)
     print 'installdeps = ', deps
     return reduce(lambda x,y:x and y,
-                  map(lambda x: satisfiesDep(pkg, x), deps))
+                  map(lambda x: satisfiesDep(pkg, x), deps),True)
 
 def runtimeDeps(pkg):
     return packagedb.get_package(pkg).runtimeDeps
@@ -35,14 +35,17 @@ def satisfiesRuntimeDeps(pkg):
     deps = runtimeDeps(pkg)
     print 'runtimedeps = ', deps
     return reduce(lambda x,y:x and y,
-                  map(lambda x: satisfiesDep(pkg, x), deps))
+                  map(lambda x: satisfiesDep(pkg, x), deps),True)
 
 def installable(pkg):
     """calculate if pkg is installable currently 
     which means it has to satisfy both install and runtime dependencies"""
     if not packagedb.has_package(pkg):
-        ui.info("package " + pkg +
-                " is not installable due to lacking dependencies\n");
+        ui.info("package " + pkg + " is not present in the package database\n");
+        return False
+    elif not satisfiesRuntimeDeps(pkg) and satisfiesInstallDeps(pkg):
+        ui.info("package " + pkg + " does not satisfy dependencies\n");
         return False
     else:
-        return satisfiesRuntimeDeps(pkg) and satisfiesInstallDeps(pkg)
+        return True
+

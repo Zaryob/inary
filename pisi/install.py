@@ -25,7 +25,6 @@ def install(package_fn):
     package = Package(package_fn, 'r')
     # extract control files
     util.clean_dir(config.install_dir())
-    ui.info('extracting files\n')
     package.extract_PISI_files(config.install_dir())
 
     # verify package
@@ -46,7 +45,8 @@ def install(package_fn):
         raise InstallError("Package not installable")
 
     # unzip package in place
-    package.extract_dir_flat(config.destdir)
+    ui.info('Extracting files\n')
+    package.extract_dir_flat('install', config.destdir)
     
     # update databases
 

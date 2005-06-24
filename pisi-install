@@ -39,7 +39,7 @@ def main():
     	package_fn = args[0]
 
     try:
-        ui.info('* Installing ' + package_fn)
+        ui.info('* Installing ' + package_fn + '\n')
         pisi.install.install(package_fn)
     except pisi.install.InstallError, estr:
         print '*** An installation error has occured:'
