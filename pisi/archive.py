@@ -111,42 +111,44 @@ class ArchiveZip(ArchiveBase):
         bool"""
         super(ArchiveZip, self).unpack(targetDir, False)
         zip = self.zip
-        for fileName in zip.namelist():
-            if pred(fileName):   # check if condition holds
+        for info in zip.infolist():
+            if pred(info.filename):   # check if condition holds
 
+                # below code removes that, so we find it here
+                isdir = info.filename.endswith('/')
+                
                 # calculate output file name
-                if archiveRoot!='':
+                if archiveRoot=='':
+                    outpath = info.filename
+                else:
                     # change archiveRoot
-                    if util.subpath(archiveRoot, fileName):
-                        print '!', archiveRoot, fileName
-                        fileName = util.removepathprefix(archiveRoot, fileName)
-                        print '*', fileName
+                    if util.subpath(archiveRoot, info.filename):
+                        print '!', archiveRoot, info.filename
+                        outpath = util.removepathprefix(archiveRoot,
+                                                        info.filename)
+                        print '*', outpath
                     else:
-                        
                         continue        # don't extract if not under
-                ofile = os.path.join(targetDir, fileName)
+
+                ofile = os.path.join(targetDir, outpath)
                 print 'ofile ', ofile
 
-                # a directory is present. lets continue
-                if fileName.endswith('/'):
-                    continue
+                if isdir:               # a directory is present.
+                    continue            # FIXME: do nothing!
 
                 # check that output dir is present
                 util.check_dir(os.path.dirname(ofile))
 
-                info = zip.getinfo(fileName)
-
                 if info.external_attr == self.symmagic:
-                    target = zip.read(fileName)
+                    target = zip.read(info.filename)
                     os.symlink(target, ofile)
                 else:
-                    inf = zip.getinfo(fileName)
-                    perm = inf.external_attr
+                    perm = info.external_attr
                     perm &= 0x00FF0000
                     perm >>= 16
                     perm |= 0x00000100
                     buff = open (ofile, 'wb')
-                    fileContent = zip.read(fileName)
+                    fileContent = zip.read(info.filename)
                     buff.write(fileContent)
                     buff.close()
                     os.chmod(ofile, perm)
