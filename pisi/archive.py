@@ -65,6 +65,9 @@ class ArchiveZip(ArchiveBase):
     Being a zip archive PISI packages also use this class
     extensively. This class provides unpacking and packing magic for
     zip archives."""
+    
+    symmagic = 2716663808 #long of hex val '0xA1ED0000L'
+    
     def __init__(self, filepath, type="zip", mode='r'):
         super(ArchiveZip, self).__init__(filepath, type)
         self.zip = zipfile.ZipFile(filepath, mode)
@@ -85,7 +88,7 @@ class ArchiveZip(ArchiveBase):
                 attr = zipfile.ZipInfo()
                 attr.filename = fileName
                 attr.create_system = 3
-                attr.external_attr = 2716663808L # long of hex val '0xA1ED0000L'
+                attr.external_attr = self.symmagic 
                 self.zip.writestr(attr, dest)
             else:
                 self.zip.write(fileName, fileName, zipfile.ZIP_DEFLATED)
@@ -114,13 +117,9 @@ class ArchiveZip(ArchiveBase):
                 # check that output dir is present
                 util.check_dir(os.path.dirname(ofile))
 
-                # O.K. we know following line is dull. What we wanted to
-                # do was to compare the equality to 0xa0000000. But there
-                # is a known problem in Python regarding the hex/oct
-                # constants. Please see Guido's explanation at
-                # http://mail.python.org/pipermail/python-dev/2003-February/033029.html
                 info = zip.getinfo(fileName)
-                if hex(info.external_attr)[2] == 'A':
+
+                if info.external_attr == self.symmagic:
                     target = zip.read(fileName)
                     os.symlink(target, ofile)
                 else:
