@@ -77,11 +77,20 @@ class ArchiveZip(ArchiveBase):
         self.zip.close()
 
     def add_to_archive(self, fileName):
+        """A wrapper function to handle working directory sh*t"""
+        cwd = os.getcwd()
+        pathName = os.path.dirname(fileName)
+        fileName = os.path.basename(fileName)
+        os.chdir(pathName)
+        self.add_file(fileName)
+        os.chdir(cwd)
+
+    def add_file(self, fileName):
         """Add file or directory to a zip file"""
         if os.path.isdir(fileName) and not os.path.islink(fileName):
             self.zip.writestr(fileName + '/', '')
             for f in os.listdir(fileName):
-               self.add_to_archive(fileName + '/' + f)
+               self.add_file(fileName + '/' + f)
         else:
             if os.path.islink(fileName):
                 dest = os.readlink(fileName)
