@@ -28,23 +28,14 @@ def main():
 
     (options, args) = parser.parse_args()
 
-    # package filename
-    package_fn = ""
-
-    # TODO: We accept only one package file arg ATM
-    if len(args) != 1:
-	    print usage
-	    raise ArgError, "pisi-install expects one (and only one) package file currently"
-    else:
-    	package_fn = args[0]
-
-    try:
-        ui.info('* Installing ' + package_fn + '\n')
-        pisi.install.install(package_fn)
-    except pisi.install.InstallError, estr:
-        print '*** An installation error has occured:'
-        print '    ', estr
-        sys.exit(1)
+    for package_fn in args:
+        try:
+            ui.info('* Installing ' + package_fn + '\n')
+            pisi.install.install(package_fn)
+        except pisi.install.InstallError, estr:
+            print '*** An installation error has occured:'
+            print '    ', estr
+            sys.exit(1)
     ui.info("Package(s) installed successfully as intended.\n")
 
 if __name__ == "__main__":
