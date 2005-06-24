@@ -78,6 +78,9 @@ class ArchiveZip(ArchiveBase):
 
     def add_to_archive(self, fileName):
         """A wrapper function to handle working directory sh*t"""
+
+        # Fuck zipfile! It's a pity that it can't handle unicode strings. Grrr!
+        fileName = str(fileName)
         cwd = os.getcwd()
         pathName = os.path.dirname(fileName)
         fileName = os.path.basename(fileName)
