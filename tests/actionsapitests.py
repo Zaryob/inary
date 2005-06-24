@@ -7,6 +7,6 @@ class gnuConfigTestCase(unittest.TestCase):
         self.gnuconfig = gnuconfig.gnuconfig_findnewest()
     
     def testFindNewest(self):
-        self.assert_ (self.gnuconfig > '/usr/share/automake-1.4')
+        self.assert_ (self.gnuconfig >= '/usr/share/automake-1.4')
 
 suite = unittest.makeSuite(gnuConfigTestCase)
