@@ -21,7 +21,7 @@ class ArchiveBase(object):
         self.filePath = filepath
         self.type = atype
 
-    def unpack(self, targetDir, cleanDir=True):
+    def unpack(self, targetDir, cleanDir=False):
         self.targetDir = targetDir
         # first we check if we need to clean-up our working env.
         if os.path.exists(self.targetDir):
@@ -128,7 +128,7 @@ class ArchiveZip(ArchiveBase):
                 print 'ofile ', ofile
 
                 # a directory is present. lets continue
-                if ofile[len(ofile)-1]=='/':
+                if fileName.endswith('/'):
                     continue
 
                 # check that output dir is present
