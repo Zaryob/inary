@@ -27,10 +27,8 @@ def install(package_fn):
     util.clean_dir(config.install_dir())
     package.extract_PISI_files(config.install_dir())
 
-    import sys
-    sys.exit(1)
-
     # verify package
+
     # check if we have all required files
 
     metadata = MetaData()

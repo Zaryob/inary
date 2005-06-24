@@ -14,4 +14,8 @@ class UtilTestCase(unittest.TestCase):
         self.assert_(subpath('usr', 'usr/local/src'))
         self.assert_(not subpath('usr/local', 'usr'))
 
+    def testRemovePathPrefix(self):
+        a = removepathprefix('usr/local', 'usr/local/lib')
+        self.assertEqual(a, 'lib')
+
 suite = unittest.makeSuite(UtilTestCase)
