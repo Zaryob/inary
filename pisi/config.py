@@ -6,6 +6,7 @@
 #configuration parameters.
 
 from constants import const
+import os
 
 class Config(object):
     """Config Singleton"""
@@ -14,7 +15,7 @@ class Config(object):
 
         def __init__(self):
             # self.c.destdir = ''       # install default to root by default
-            self.destdir = './tmp'    # only for ALPHA
+            self.destdir = os.getcwd() +'/tmp'    # only for ALPHA
             # the idea is that destdir can be set with --destdir=...
 
         # directory accessor functions
