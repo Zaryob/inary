@@ -84,10 +84,9 @@ class PisiBuild:
         """Changes the current working directory to package_work_dir() for
         actions.py to do its work."""
         if 'WorkDir' in globals:
-            path = self.ctx.pkg_work_dir() + "/" + globals['WorkDir']
+            path = os.path.join(self.ctx.pkg_work_dir(), globals['WorkDir'])
         else:
-            path = self.ctx.pkg_work_dir() + "/" + \
-                self.spec.source.name + "-" + self.spec.source.version
+            path = os.path.join(self.ctx.pkg_work_dir(), self.spec.source.name + "-" + self.spec.source.version)
             
         try:
             os.chdir(path)
