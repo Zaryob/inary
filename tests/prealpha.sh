@@ -7,3 +7,4 @@ rm -rf tmp
 ./pisi-updateindex pisi-index.xml
 ./pisi-install start*pisi
 ./pisi-install popt*pisi
+find tmp -iname '*.bdb' | xargs ./cat-db.py
