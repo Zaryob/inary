@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PSPEC SYSTEM
+	  "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+  <Source>
+    <Name>amarok</Name>
+    <Homepage>http://amarok.kde.org/</Homepage>
+    <Packager>
+      <Name>Baris Metin</Name>
+      <Email>baris@uludag.org.tr</Email>
+    </Packager>
+    <License>GPL</License>
+    <IsA>applications:audio</IsA>
+    <PartOf>desktop:kde</PartOf>
+    <Summary>Amarok audio player</Summary>
+    <Description>Feature-rich audio player for KDE system.</Description>
+    <Archive archType="tarbz2" sha1sum="660b576bcf5df6644dde03ba88d604c52191d593">
+      http://umn.dl.sourceforge.net/sourceforge/amarok/amarok-1.3-beta1.tar.bz2
+    </Archive>
+    <BuildDependencies>
+      <Dependency versionFrom="3.4.0">kdelibs</Dependency>
+    </BuildDependencies>
+    <History>
+      <Update>
+	<Date>06/25/2005</Date>
+	<Version>1.3-beta1</Version>
+	<Release>1</Release>
+      </Update>
+    </History>
+  </Source>
+
+  <Package>
+    <Name>amarok</Name>
+    <Summary>Amarok audio player</Summary>
+    <Description>Feature-rich audio player for KDE system.</Description>
+    <RuntimeDependencies>
+      <Dependency>kdebase</Dependency>
+    </RuntimeDependencies>
+    <Files>
+      <Path fileType="sharedLib">/usr/lib</Path>
+      <Path fileType="data">/usr/share</Path>
+      <Path fileType="localedata">/usr/share/locale</Path>
+      <Path fileType="executable">/usr/bin</Path>
+    </Files>
+  </Package>
+
+  <Package>
+    <Name>amarok-docs</Name>
+    <Summary>Documentation files for Amarok audio player</Summary>
+    <Description>Feature-rich audio player for KDE system.
+This package provides documentation files for Amarok.
+    </Description>
+    <Files>
+      <Path fileType="doc">/usr/share/doc</Path>
+    </Files>
+  </Package>
+
+</PISI>

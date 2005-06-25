@@ -128,9 +128,10 @@ def dir_size(dir):
     # better solution :(.
     getsize = os.path.getsize
     join = os.path.join
+    islink = os.path.islink
     def sizes():
         for root, dirs, files in os.walk(dir):
-            yield sum([getsize(join(root, name)) for name in files])
+            yield sum([getsize(join(root, name)) for name in files if not islink(join(root,name))])
     return sum( sizes() )
 
 def copy_file(src,dest):
@@ -156,11 +157,16 @@ def copy_dir(src, dest):
 
 def sha1_file(filename):
     """calculate sha1 hash of filename"""
-    m = sha.new()
-    f = file(filename, 'rb')
-    for l in f:
-        m.update(l)
-    return m.hexdigest()
+    # Broken links can cause problem!
+    try:
+        m = sha.new()
+        f = file(filename, 'rb')
+        for l in f:
+            m.update(l)
+        return m.hexdigest()
+    except IOError:
+        return "0"
+        
 
 def run_batch(cmd):
     """run command non-interactively and report return value and output"""

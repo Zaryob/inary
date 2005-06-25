@@ -31,6 +31,7 @@ def getFileType(path, pinfoList):
     # should match the second item.
     depth = 0
     ftype = ""
+    path = "/"+path # we need a real path.
     for pinfo in pinfoList:
         if path.startswith(pinfo.pathname):
             length = len(pinfo.pathname)
@@ -194,7 +195,10 @@ class PisiBuild:
             for fpath, fhash in util.get_file_hashes(path):
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
                 ftype = getFileType(frpath, package.paths)
-                fsize = str(os.path.getsize(fpath))
+                try: # broken links can cause problem
+                    fsize = str(os.path.getsize(fpath))
+                except OSError:
+                    fsize = "0"
                 files.append(FileInfo(frpath, ftype, fsize, fhash))
 
         files.write(os.path.join(self.ctx.pkg_dir(), const.files_xml))
@@ -226,13 +230,13 @@ class PisiBuild:
             pkg.add_to_package(const.metadata_xml)
             pkg.add_to_package(const.files_xml)
 
-            # Now it is time to add files to the packages. We should
-            # only add the files listed in the Files section of the
-            # Package.
-            for pinfo in package.paths:
-                p = os.path.join("install" + pinfo.pathname)
-                if os.path.exists(p):
-                    pkg.add_to_package(p)
+            # Now it is time to add files to the packages using newly
+            # created files.xml
+            files = Files()
+            files.read(const.files_xml)
+            for finfo in files.list:
+                p = "install/" + finfo.path
+                pkg.add_to_package(p)
 
             pkg.close()
             os.chdir(c)

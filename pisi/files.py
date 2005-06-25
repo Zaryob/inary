@@ -1,7 +1,7 @@
 # Files module provides access to files.xml. files.xml is genarated
 # during the build process of a package and used in installation.
 
-import xmlfile
+from xmlext import *
 from xmlfile import XmlFile
 
 
@@ -17,6 +17,7 @@ class FileInfo:
         f = FileInfo()
         f.read(node)
         return f
+    readnew = staticmethod(readnew)
 
     def read(self, node):
         self.path = getNodeText(getNode(node, "Path"))
@@ -54,7 +55,7 @@ class Files(XmlFile):
     def read(self, filename):
         self.readxml(filename)
 
-        fileElts = getAllNodes(node, "File")
+        fileElts = self.getAllNodes("File")
         self.list = [FileInfo.readnew(x) for x in fileElts]
 
     def write(self, filename):
