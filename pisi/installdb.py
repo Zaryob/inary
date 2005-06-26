@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # installation database
-# maintainer: eray and caglar
+# Author:  Eray Ozkural <eray@uludag.org.tr>
+
 
 import os
 import bsddb.dbshelve as shelve

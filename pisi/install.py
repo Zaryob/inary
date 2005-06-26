@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# Package install operation
+# Author:  Eray Ozkural <eray@uludag.org.tr>
 
 #import package
 from specfile import *

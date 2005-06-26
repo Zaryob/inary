@@ -1,4 +1,5 @@
 # version structure
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
 
 import util
 

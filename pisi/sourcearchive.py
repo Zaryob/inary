@@ -1,4 +1,7 @@
 # python standard library
+# Authors: Baris Metin <baris@uludag.org.tr
+#          Eray Ozkural <eray@uludag.org.tr>
+
 import os
 import sys
 

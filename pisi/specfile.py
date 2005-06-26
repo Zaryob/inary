@@ -4,6 +4,9 @@
 # files are specification files for PISI source packages. This module
 # provides read and write access to PSPEC files.
 
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
+#           Baris Metin <baris@uludag.org.tr
+
 # standard python modules
 import xml.dom.minidom
 from os.path import basename

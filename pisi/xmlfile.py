@@ -7,6 +7,9 @@
 # high-level dom functions provided in xml module (and sorely lacking
 # in xml.dom :( )
 
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
+#           Baris Metin <baris@uludag.org.tr
+
 import xml.dom.minidom as mdom
 
 from xmlext import *

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # package source database
 # interface for update/query to local package repository
-# maintainer: eray and caglar
+# Author:  Eray Ozkural <eray@uludag.org.tr>
 
 # we basically store everything in sourceinfo class
 # yes, we are cheap

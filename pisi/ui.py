@@ -1,4 +1,6 @@
 # generic user interface
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
+#           Murat Eren <meren@uludag.org.tr>
 
 import sys
 from colors import colorize

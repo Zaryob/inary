@@ -2,6 +2,8 @@
 # generated during the build process of a package and used in the
 # installation. Package repository also uses metadata.xml for building
 # a package index.
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
+#           Baris Metin <baris@uludag.org.tr
 
 from ui import ui
 

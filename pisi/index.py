@@ -1,3 +1,5 @@
+# PISI source/package index
+# Author:  Eray Ozkural <eray@uludag.org.tr>
 
 from package import Package
 from xmlfile import XmlFile

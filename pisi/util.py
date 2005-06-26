@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 # misc. utility functions, including process and file utils
-# maintainer: eray and caglar and baris and meren!
+
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
+#           Baris Metin <baris@uludag.org.tr>
+#           S. Caglar Onur <caglar@uludag.org.tr>
+#           A. Murat Eren <meren@uludag.org.tr>
 
 import os
 import sys

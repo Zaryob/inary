@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 # some helper functions for using minidom
+# works well enough for now... :/
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
+#           Baris Metin <baris@uludag.org.tr
 
 import xml.dom.minidom as mdom
 
