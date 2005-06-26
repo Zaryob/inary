@@ -11,6 +11,7 @@
 #           Baris Metin <baris@uludag.org.tr
 
 import xml.dom.minidom as mdom
+import codecs
 
 from xmlext import *
 
@@ -36,7 +37,7 @@ class XmlFile(object):
         self.dom = mdom.parse(fileName)
 
     def writexml(self, fileName):
-        f = file(fileName,'w')
+        f = codecs.open(fileName,'w', "utf-8")
         self.dom.writexml(f)
 
     def verifyRootTag(self):
