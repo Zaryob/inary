@@ -1,9 +1,9 @@
 # Files module provides access to files.xml. files.xml is genarated
 # during the build process of a package and used in installation.
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
 
 from xmlext import *
 from xmlfile import XmlFile
-
 
 class FileInfo:
     """FileInfo holds the information for a File node/tag in files.xml"""

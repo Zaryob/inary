@@ -2,6 +2,8 @@
 # If you have a "magic" constant value this is where it should be
 # defined.
 
+# Author: Baris Metin <baris@uludag.org.tr
+
 class _constant:
     "Constant members implementation"
     class ConstError(TypeError):

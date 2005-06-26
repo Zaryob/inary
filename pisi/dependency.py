@@ -1,4 +1,6 @@
 # dependency analyzer
+# Author:  Eray Ozkural <eray@uludag.org.tr>
+
 # maintainer: eray and caglar
 
 import installdb

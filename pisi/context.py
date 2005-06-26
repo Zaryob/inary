@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # Context module.
+# Authors: Baris Metin <baris@uludag.org.tr
+#          Eray Ozkural <eray@uludag.org.tr>
 
 from specfile import SpecFile
 from constants import const
