@@ -23,12 +23,11 @@ class PisiBuildError(Exception):
 def getFileType(path, pinfoList):
     """Return the file type of a path according to the given PathInfo
     list"""
-    # The usage of depth is somewhat confusing. It is used for
-    # finding the best match to package.paths. For an example,
-    # if package.paths contains
-    # ['/usr/share','/usr/share/doc'] and frpath is
-    # /usr/share/doc/filename our iteration over package.paths
-    # should match the second item.
+    # The usage of depth is somewhat confusing. It is used for finding
+    # the best match to paths(in pinfolist). For an example, if paths
+    # contain ['/usr/share','/usr/share/doc'] and path is
+    # /usr/share/doc/filename our iteration over paths should match
+    # the second item.
     depth = 0
     ftype = ""
     path = "/"+path # we need a real path.
