@@ -3,70 +3,84 @@
 # Author:  Eray Ozkural <eray@uludag.org.tr>
 
 
-import os
+import os, fcntl
 import bsddb.dbshelve as shelve
 
 from config import config
 import util
 
-util.check_dir(config.db_dir())
-d = shelve.open(config.db_dir() + '/install.bdb')
-files_dir = config.db_dir() + "/files"
-
 class InstallDBError(Exception):
     pass
 
-def files_name(pkg, version, release):
-    return str(files_dir + '/' + pkg + '-' + version + '-' + release + '.xml')
+class InstallDB:
 
-def files(pkg):
-    pkg = str(pkg)
-    (status, version, release) = d[pkg]
-    return file(files_name(pkg,version,release))
+    def __init__(self):
+        util.check_dir(config.db_dir())
+        self.db_filename = os.path.join(config.db_dir(), 'install.bdb')
+        self.d = shelve.open(self.db_filename)
+        self.files_dir = os.path.join(config.db_dir(), 'files')
+        self.fdummy = open(self.db_filename)
+        fcntl.flock(self.fdummy, fcntl.LOCK_EX)
 
-def is_recorded(pkg):
-    pkg = str(pkg)
-    return d.has_key(pkg)
+    def __del__(self):
+        #fcntl.flock(self.fdummy, fcntl.LOCK_UN)
+        self.fdummy.close()
+        
+    def files_name(self, pkg, version, release):
+        fn = pkg + '-' + version + '-' + release + '.xml'
+        return os.path.join(self.files_dir, fn)
 
-def is_installed(pkg):
-    pkg = str(pkg)
-    if is_recorded(pkg):
-        (status, version, release) = d[pkg]
-        return status=='i'
-    else:
-        return False
+    def files(self, pkg):
+        pkg = str(pkg)
+        (status, version, release) = self.d[pkg]
+        return file(self.files_name(pkg,version,release))
 
-def get_version(pkg):
-    pkg = str(pkg)
-    (status, version, release) = d[pkg]
-    return (version, release)
+    def is_recorded(self, pkg):
+        pkg = str(pkg)
+        return self.d.has_key(pkg)
 
-def is_removed(pkg):
-    pkg = str(pkg)
-    if is_recorded(pkg):
-        (status, version, release) = d[pkg]
-        return status=='r'
-    else:
-        return False
+    def is_installed(self, pkg):
+        pkg = str(pkg)
+        if self.is_recorded(pkg):
+            (status, version, release) = self.d[pkg]
+            return status=='i'
+        else:
+            return False
 
-def install(pkg, version, release, files_xml):
-    """install package with specific version and release"""
-    pkg = str(pkg)
-    if is_installed(pkg):
-        raise InstallDBError("already installed")
-    d[pkg] = ('i', version, release)
-    util.copy_file(files_xml, files_name(pkg, version, release))
-                   
-def remove(pkg):
-    pkg = str(pkg)
-    (status, version, release) = d[pkg]
-    d[pkg] = ('r', version, release)
+    def get_version(self, pkg):
+        pkg = str(pkg)
+        (status, version, release) = self.d[pkg]
+        return (version, release)
 
-def purge(pkg):
-    pkg = str(pkg)
-    if d.has_key(pkg):
-        (status, version, release) = d[pkg]
-        f = files_name(pkg, version, release)
-        if util.check_file(f):
-            os.unlink(f)
-        del d[pkg]
+    def is_removed(self, pkg):
+        pkg = str(pkg)
+        if self.is_recorded(pkg):
+            (status, version, release) = self.d[pkg]
+            return status=='r'
+        else:
+            return False
+
+    def install(self, pkg, version, release, files_xml):
+        """install package with specific version and release"""
+        pkg = str(pkg)
+        if self.is_installed(pkg):
+            raise InstallDBError("already installed")
+        self.d[pkg] = ('i', version, release)
+        util.copy_file(files_xml, self.files_name(pkg, version, release))
+
+    def remove(self, pkg):
+        pkg = str(pkg)
+        (status, version, release) = self.d[pkg]
+        self.d[pkg] = ('r', version, release)
+
+    def purge(self, pkg):
+        pkg = str(pkg)
+        if self.d.has_key(pkg):
+            (status, version, release) = self.d[pkg]
+            f = self.files_name(pkg, version, release)
+            if util.check_file(f):
+                os.unlink(f)
+            del self.d[pkg]
+
+installdb = InstallDB()
+

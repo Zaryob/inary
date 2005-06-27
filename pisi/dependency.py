@@ -1,7 +1,7 @@
 # dependency analyzer
 # Author:  Eray Ozkural <eray@uludag.org.tr>
 
-import installdb
+from installdb import installdb
 import packagedb
 from ui import ui
 from version import Version

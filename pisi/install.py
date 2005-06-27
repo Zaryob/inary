@@ -8,7 +8,7 @@ from package import Package
 import util
 from config import config
 from ui import ui
-import installdb
+from installdb import installdb
 import packagedb
 import dependency
 from metadata import MetaData

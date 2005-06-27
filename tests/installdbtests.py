@@ -2,7 +2,7 @@
 import unittest
 import os
 
-from pisi import installdb
+from pisi.installdb import installdb
 from pisi import util
 from pisi.config import config
 
