@@ -45,6 +45,9 @@ Legend:
    - pisi-upgrade
    ? svn-like CLI
  - multi-package dependency analysis
+   - design a package operation planner
+   - install operation
+   - upgrade operation
  - implement source database
  - implement missing unit tests
    - package
@@ -60,6 +63,7 @@ Legend:
    ? PISIMAT
    ? convert ebuild to pisi
  - COMAR interface
+   ? what do we need to specify in a package? (Provides only?)
    - package install: register config script
    - package remove: unregister config script
  - internet installation
@@ -68,5 +72,14 @@ Legend:
    - pisi updatedb over internet
  - multiple package repository
    - decide how to implement
+ - component/category
+   - requirements
+   - xml format
+   - usage
 
 3. Beta
+
+ - GUI
+   - installation
+   - remove
+   - upgrade
