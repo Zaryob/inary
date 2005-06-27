@@ -77,33 +77,9 @@ class ArchiveZip(ArchiveBase):
         """Close the zip archive."""
         self.zip.close()
 
-# Meren: Bu kapsülleyici fonksiyonu ben istemiştim ama sanırım
-# yanılmışım.  Paketi oluştururken farklı dosyaları install
-# içerisinden yüklemeye çalışırken verilen tüm path'i pakete koymasını
-# istememiz gerekiyor. Yani add_to_package("install/usr/include")
-# dediğimiz zaman. Zip içerisine install/usr/include şeklinde koyması
-# gerekiyor. Bu fonksiyonu şimdilik comment-out ediyorum ve bu
-# özelliğe de ihtiyacımız olur belki diye silmiyorum. Belki kolay
-# hatırlanır olmayan (sık kullanmayacağız) farklı bir isim ile burada
-# tutmak isteriz (add_basedir_to_archive?).
-
-# *********************************************************************
-#     def add_to_archive(self, fileName):
-#         """A wrapper function to handle working directory sh*t"""
-
-#         # Fuck zipfile! It's a pity that it can't handle unicode strings. Grrr!
-#         fileName = str(fileName)
-#         cwd = os.getcwd()
-#         pathName = os.path.dirname(fileName)
-#         fileName = os.path.basename(fileName)
-#         if pathName:
-#             os.chdir(pathName)
-#         self.add_file(fileName)
-#         os.chdir(cwd)
-
     def add_to_archive(self, fileName):
-        """Add file or directory to a zip file"""
-        # Fuck zipfile! It's a pity that it can't handle unicode strings. Grrr!
+        """Add file or directory path to the zip file"""
+        # It's a pity that zipfile can't handle unicode strings. Grrr!
         fileName = str(fileName)
         if os.path.isdir(fileName) and not os.path.islink(fileName):
             self.zip.writestr(fileName + '/', '')
@@ -119,6 +95,19 @@ class ArchiveZip(ArchiveBase):
                 self.zip.writestr(attr, dest)
             else:
                 self.zip.write(fileName, fileName, zipfile.ZIP_DEFLATED)
+
+    def add_basename_to_archive(self, fileName):
+        """Add only the basepath to the zip file. For example; if the given
+        fileName parameter is /usr/local/bin/somedir, this function
+        will create only the base directory/file somedir in the
+        archive."""
+        cwd = os.getcwd()
+        pathName = os.path.dirname(fileName)
+        fileName = os.path.basename(fileName)
+        if pathName:
+            os.chdir(pathName)
+        self.add_file(fileName)
+        os.chdir(cwd)
 
     def unpack_file_cond(self, pred, targetDir, archiveRoot=''):
         """Unpack/Extract a file according to predicate function filename ->
