@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PSPEC SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>logrotate</Name>
+        <Homepage>http://packages.debian.org/unstable/admin/logrotate.html</Homepage>
+        <Packager>
+            <Name>PACKAGER</Name>
+            <Email>PACKAGER_EMAIL</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>ISA</IsA>
+        <PartOf>PARTOF</PartOf>
+        <Description>Rotates, compresses, and mails system logs</Description>
+        <Archive archType="targz" sha1sum="84ce324a78ee071536c39e95d3086e53d7fe7ccb">ftp://ftp.linux.org.tr/pub/mirrors/gentoo/distfiles/logrotate_3.6.5.orig.tar.gz</Archive>
+        <BuildDependencies>
+
+       <Dependency>>=sys-apps/portage-2.0.47-r10</Dependency>
+       <Dependency>>=dev-libs/popt-1.5</Dependency>
+       <Dependency>>=sys-apps/sed-4</Dependency>
+       <Dependency>selinux?</Dependency>
+       <Dependency>sys-libs/libselinux</Dependency>
+       <Dependency>!bootstrap?</Dependency>
+       <Dependency>sys-devel/patch</Dependency>
+       <Dependency>userland_GNU?</Dependency>
+       <Dependency>sys-apps/shadow</Dependency>
+
+        </BuildDependencies>
+        <History>
+            <Update>
+                <Date>2005-06-28</Date>
+                <Version>3.6.5</Version>
+                <Release>1</Release>
+            </Update>
+        </History>
+    </Source>
+
+    <Package>
+        <Name>logrotate</Name>
+        <Summary xml:lang="en">Rotates, compresses, and mails system logs</Summary>
+        <RuntimeDependencies>
+
+         <Dependency>>=sys-apps/portage-2.0.47-r10</Dependency>
+         <Dependency>>=dev-libs/popt-1.5</Dependency>
+         <Dependency>>=sys-apps/sed-4</Dependency>
+         <Dependency>selinux?</Dependency>
+         <Dependency>sys-libs/libselinux</Dependency>
+         <Dependency>selinux?</Dependency>
+         <Dependency>sec-policy/selinux-logrotate</Dependency>
+
+        </RuntimeDependencies>
+        <Description>Rotates, compresses, and mails system logs</Description>
+        <Files>
+            <Path fileType="binary">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="doc">/usr/share/man</Path>
+        </Files>
+        <History>
+            <Update>
+                <Date>2005-06-28</Date>
+                <Version>3.6.5</Version>
+                <Release>1</Release>
+            </Update>
+        </History>
+  </Package>
+
+</PISI>
