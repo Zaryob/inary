@@ -28,10 +28,13 @@ class SourceArchive:
         self.ctx = ctx
         self.url = PUrl(self.ctx.spec.source.archiveUri)
         self.dest = join(config.archives_dir(), self.url.filename())
+        self.showProgress = None
 
     def fetch(self, interactive=True):
         if not self.isCached(interactive):
-            fetchUrl(self.url, config.archives_dir(), displayProgress)
+            if interactive:
+                self.showProgress = displayProgress
+            fetchUrl(self.url, config.archives_dir(), self.showProgress)
         
     def isCached(self, interactive=True):
         if not access(self.dest, R_OK):
