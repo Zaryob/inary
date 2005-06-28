@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # PISI source/package index
 # Author:  Eray Ozkural <eray@uludag.org.tr>
 
@@ -8,6 +9,7 @@ import packagedb
 from ui import ui
 import util
 from config import config
+from purl import PUrl
 
 class Index(XmlFile):
 
@@ -18,8 +20,17 @@ class Index(XmlFile):
 
     def read(self, filename):
         """Read PSPEC file"""
-        
-        self.readxml(filename)
+
+        self.filename = filename
+        url = PUrl(filename)
+        if url.isRemoteFile():
+            from os import getcwd
+            from fetcher import fetchUrl, displayProgress
+            # TODO: index dosyasını indirmek için bir yer bulmak lazım.
+            fetchUrl(url, getcwd(), displayProgress)
+            self.filename = url.filename()
+
+        self.readxml(self.filename)
 
         # find all binary packages
         packageElts = self.getAllNodes("Package")
