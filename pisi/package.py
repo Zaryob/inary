@@ -5,13 +5,24 @@
 import archive
 from constants import const
 from config import config
+from purl import PUrl
 
 class Package:
     """PISI Package Class provides access to a pisi package (.pisi
     file)."""
     def __init__(self, packagefn, mode='r'):
-        self.impl = archive.ArchiveZip(packagefn, 'zip', mode)
         self.filename = packagefn
+        url = PUrl(packagefn)
+
+        if url.isRemoteFile():
+            from os import getcwd
+            from fetcher import fetchUrl, displayProgress
+            # TODO: belki Constants.packages_dir() gibi bir yere
+            # indirmek daha iyi olur.
+            fetchUrl(url, getcwd(), displayProgress)
+            self.filename = url.filename()
+
+        self.impl = archive.ArchiveZip(self.filename, 'zip', mode)
 
     def add_to_package(self, fn):
         """Add a file or directory to package"""

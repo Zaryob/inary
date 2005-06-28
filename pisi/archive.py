@@ -71,7 +71,8 @@ class ArchiveZip(ArchiveBase):
     
     def __init__(self, filepath, type="zip", mode='r'):
         super(ArchiveZip, self).__init__(filepath, type)
-        self.zip = zipfile.ZipFile(filepath, mode)
+
+        self.zip = zipfile.ZipFile(self.filePath, mode)
 
     def close(self):
         """Close the zip archive."""

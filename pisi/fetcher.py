@@ -6,40 +6,50 @@
 # knows what.
 
 # python standard library modules
-import urlparse
 import urllib2
 import os
 
 # pisi modules
 import util
 from config import config
+from purl import PUrl
+from ui import ui
 
 class FetchError (Exception):
     pass
 
+# helper functions
+def displayProgress(pd):
+    out = '\r%-30.30s %3d%% %12.2f %s' % \
+        (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
+    ui.info(out)
+
+def fetchUrl(url, dest, percentHook=None):
+    fetch = Fetcher(url, dest)
+    fetch.percentHook = percentHook
+    fetch.fetch()
+    if percentHook:
+        ui.info('\n')
+
+
 class Fetcher:
     """Fetcher can fetch a file from various sources using various
     protocols."""
-    def __init__(self, source):
-        self.uri = source.archiveUri
-        self.filedest = config.archives_dir()
+    def __init__(self, url, dest):
+        if not isinstance(url, PUrl):
+            url = PUrl(url)
+ 
+        self.url = url
+        self.filedest = dest
         util.check_dir(self.filedest)
-        self.scheme = "file"
-        self.netloc = ""
-        self.filepath = ""
-        self.filename = ""
         self.percent = 0
         self.rate = 0.0
         self.percentHook = None
-        from string import split
-        u = urlparse.urlparse(self.uri)
-        self.scheme, self.netloc, self.filepath = u[0], u[1], u[2]
-        self.filename = os.path.basename(self.uri)
 
     def fetch (self):
         """Return value: Fetched file's full path.."""
 
-        if self.filename == "":
+        if not self.url.filename():
             self.err("filename error")
 
         if os.access(self.filedest, os.W_OK) == False:
@@ -47,13 +57,12 @@ class Fetcher:
 
         scheme_err = lambda: self.err("unexpected scheme")
 
-        handlers = {
-            'file': self.fetchLocalFile,
-            'http': self.fetchRemoteFile,
-            'ftp' : self.fetchRemoteFile
-            }; handlers.get(self.scheme, scheme_err)()
+        if self.url.isLocalFile():
+            self.fetchLocalFile()
+        else:
+            self.fetchRemoteFile()
 
-        return self.filedest + "/" + self.filename
+        return self.filedest + "/" + self.url.filename()
 
     def doGrab(self, file, dest, totalsize):
         symbols = [' B/s', 'KB/s', 'MB/s', 'GB/s']
@@ -81,7 +90,7 @@ class Fetcher:
             if p.update(size):
                 self.percent = p.percent
                 if self.percentHook != None:
-                    retval = {'filename': self.filename, 
+                    retval = {'filename': self.url.filename(), 
                               'percent' : self.percent,
                               'rate': self.rate,
                               'symbol': symbol}
@@ -92,13 +101,14 @@ class Fetcher:
 
     def fetchLocalFile (self):
         from shutil import copyfile
+        url = self.url
 
-        if os.access(self.filepath, os.F_OK) == False:
+        if os.access(url.path(), os.F_OK) == False:
             self.err("no such file or no perm to read")
 
-        dest = open(self.filedest + "/" + self.filename , "w")
-        totalsize = os.path.getsize(self.filepath)
-        file = open(self.filepath)
+        dest = open(self.filedest + "/" + url.filename() , "w")
+        totalsize = os.path.getsize(url.path())
+        file = open(url.path())
         self.doGrab(file, dest, totalsize)
 
 
@@ -106,7 +116,7 @@ class Fetcher:
         from httplib import HTTPException
 
         try:
-            file = urllib2.urlopen(self.uri)
+            file = urllib2.urlopen(self.url.uri)
             headers = file.info()
     
         except ValueError, e:
@@ -122,7 +132,7 @@ class Fetcher:
             self.err('file not found')
         else: totalsize = int(headers['Content-Length'])
 
-        dest = open(self.filedest + "/" + self.filename , "w")
+        dest = open(self.filedest + "/" + self.url.filename() , "w")
         self.doGrab(file, dest, totalsize)
 
 
