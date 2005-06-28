@@ -39,6 +39,7 @@ def main():
     index = Index()
     index.read(index_file)
     index.update_db()
+    ui.info('* Package db updated.\n')
                     
 if __name__ == "__main__":
     main()
