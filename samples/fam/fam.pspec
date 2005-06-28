@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PSPEC SYSTEM
+	  "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+
+  <Source>
+    <Name>fam</Name>
+    <Homepage>http://oss.sgi.com/projects/fam/</Homepage>
+    <Packager>
+      <Name>Kırmızı kafalar</Name>
+      <Email>hotmail@redhat.com</Email>
+    </Packager>
+    <License>As-Is</License>
+    <IsA>library:util</IsA>
+    <PartOf>rpm:archive</PartOf>
+    <Description>FAM, the File Alteration Monitor</Description>
+    <Archive archType="targz" sha1sum="6c2316f02acf89a41c42ffc3d7fd9cf5eada83a8">ftp://oss.sgi.com/projects/fam/download/stable/fam-2.7.0.tar.gz</Archive>
+    <Patches>
+        <Patch>fam-2.7.0-dnotify.patch</Patch>
+    </Patches>
+    <BuildDependencies>
+      <Dependency versionFrom="1.8"> make </Dependency>
+    </BuildDependencies>
+    <History>
+      <Update>
+	<Date>06/10/2005</Date>
+	<Version>2.7.0</Version>
+	<Release>2</Release>
+      </Update>
+      <Update>
+	<Date>05/05/2005</Date>
+	<Version>2.7.0</Version>
+	<Release>1</Release>
+      </Update>
+    </History>
+  </Source>
+
+  <Package>
+    <Name>fam</Name>
+    <Summary xml:lang="en">FAM, the File Alteration Monito</Summary>
+    <RuntimeDependencies>
+      <Dependency>portmap</Dependency>
+    </RuntimeDependencies>
+    <Description>FAM, the File Alteration Monito</Description>
+    <Files>
+      <Path fileType="binary">/usr/bin</Path>
+      <Path fileType="confit">/etc/</Path>
+      <Path fileType="sharedLib">/usr/lib</Path>
+      <Path fileType="doc">/usr/share/man</Path>
+      <Path fileType="doc">/usr/share/doc/libfame-0.9.0</Path>
+      <Path fileType="header">/usr/include</Path>
+      <Path fileType="header">/usr/share/aclocal</Path>
+    </Files>
+    <History>
+      <Update>
+	<Date>06/14/2005</Date>
+	<Version>2.7.0</Version>
+	<Release>2</Release>
+      </Update>
+    </History>
+  </Package>
+</PISI>

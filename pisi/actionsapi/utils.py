@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import os
 import time
 from tempfile import mkstemp, mkdtemp
 
@@ -15,3 +16,5 @@ def createTmpDir():
     path = mkdtemp()
     return path
 
+def chmod(filename, mode=0755):
+    os.chmod(filename, mode)
