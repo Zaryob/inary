@@ -5,7 +5,7 @@
 from package import Package
 from xmlfile import XmlFile
 import metadata
-import packagedb
+from packagedb import packagedb
 from ui import ui
 import util
 from config import config

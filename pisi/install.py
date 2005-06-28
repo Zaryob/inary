@@ -9,7 +9,7 @@ import util
 from config import config
 from ui import ui
 from installdb import installdb
-import packagedb
+from packagedb import packagedb
 import dependency
 from metadata import MetaData
 #import conflicts

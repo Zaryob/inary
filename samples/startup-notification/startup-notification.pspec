@@ -12,10 +12,12 @@
       <Name>Kırmızı kafalar</Name>
       <Email>hotmail@redhat.com</Email>
     </Packager>
-    <License>LGPL-2, BSD</License>
+    <License>LGPL-2</License>
+    <License>BSD</License>
     <IsA>library:x11</IsA>
     <PartOf>rpm:archive</PartOf>
-    <Description>Application startup notification and feedback library</Description>
+    <Description>Application startup notification and feedback library
+    </Description>
     <Archive archType="tarbz2" sha1sum="d2b5698b6209b5172d17222a3117db6447d7cdf1">
         ftp://ftp.linux.org.tr/pub/mirrors/gentoo/distfiles/startup-notification-0.8.tar.bz2
     </Archive>
