@@ -21,7 +21,7 @@ class PackageDB(DBShelf):
         util.check_dir(config.db_dir())
         filename = os.path.join(config.db_dir(), 'package.bdb')
         #d.open(filename, dbname, filetype, flags, mode)
-        flags = 0
+        flags = db.DB_CREATE
         mode = 0660
         filetype=db.DB_HASH
         dbname = None
