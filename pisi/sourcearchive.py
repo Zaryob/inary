@@ -29,19 +29,20 @@ class SourceArchive:
         self.url = PUrl(self.ctx.spec.source.archiveUri)
         self.dest = join(config.archives_dir(), self.url.filename())
 
-    def fetch(self):
-        if not self.isCached():
+    def fetch(self, interactive=True):
+        if not self.isCached(interactive):
             fetchUrl(self.url, config.archives_dir(), displayProgress)
         
-    def isCached(self):
+    def isCached(self, interactive=True):
         if not access(self.dest, R_OK):
             return False
 
         # check hash
         if util.sha1_file(self.dest) == self.ctx.spec.source.archiveSHA1:
-            ui.info('%s [cached]\n' % self.ctx.spec.source.archiveName)
+            if interactive:
+                ui.info('%s [cached]\n' % self.ctx.spec.source.archiveName)
             return True
 
-    def unpack(self):
+    def unpack(self, cleanDir=False):
         archive = Archive(self.dest, self.ctx.spec.source.archiveType)
-        archive.unpack(self.ctx.pkg_work_dir())
+        archive.unpack(self.ctx.pkg_work_dir(), cleanDir)
