@@ -48,7 +48,7 @@ Legend:
    - define the format of the configuration file
    - extend Config module (config.py) accordingly
  + implement file uri
-   ? extend the modules dealing with files accordingly
+   / extend the modules dealing with files accordingly
  - multi-package dependency analysis
    - design a package operation planner
    - install operation
@@ -65,13 +65,13 @@ Legend:
    - list of installed packages
    - comar OM information (Provides)
  - easy package preparation
-   ? convert ebuild to pisi
+   / convert ebuild to pisi
  - COMAR interface
    ? what do we need to specify in a package? (Provides only?)
    - package install: register config script
    - package remove: unregister config script
  - internet installation
-   ? support URI's whereever a filename is supported
+   / support URI's whereever a filename is supported
    - http server
    - pisi updatedb over internet
  - component/category
