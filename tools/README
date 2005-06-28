@@ -1,0 +1,7 @@
+cd PORTDIR_OVERLAY_KLASÖRÜNÜZ
+ln -s /usr/portage/eclass/
+ln -s /usr/portage/profiles/
+
+Makefile içindeki PORTDIR=PORTDIR_OVERLAY_KLASÖRÜ düzeltilecek
+
+Sonrasınra make ve make clean 
