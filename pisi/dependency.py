@@ -2,7 +2,7 @@
 # Author:  Eray Ozkural <eray@uludag.org.tr>
 
 from installdb import installdb
-import packagedb
+from packagedb import packagedb
 from ui import ui
 from version import Version
 

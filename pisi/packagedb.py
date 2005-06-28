@@ -8,7 +8,7 @@
 # yes, we are cheap
 
 from bsddb.dbshelve import DBShelf
-import os
+import os, fcntl
 
 import util
 from config import config
@@ -26,7 +26,7 @@ class PackageDB(DBShelf):
         filetype=db.DB_HASH
         dbname = None
         self.open( filename, dbname, filetype, flags, mode )
-        self.fdummy = open(self.db_filename)
+        self.fdummy = open(filename)
         fcntl.flock(self.fdummy, fcntl.LOCK_EX)
 
     def __del__(self):
