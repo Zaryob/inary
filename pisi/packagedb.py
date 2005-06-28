@@ -26,7 +26,13 @@ class PackageDB(DBShelf):
         filetype=db.DB_HASH
         dbname = None
         self.open( filename, dbname, filetype, flags, mode )
-        
+        self.fdummy = open(self.db_filename)
+        fcntl.flock(self.fdummy, fcntl.LOCK_EX)
+
+    def __del__(self):
+        #fcntl.flock(self.fdummy, fcntl.LOCK_UN)
+        self.fdummy.close()
+
     def has_package(self, name):
         name = str(name)
         return self.has_key(name)
