@@ -44,6 +44,10 @@ Legend:
    - MetaData
    - Files
    - Index
+ - incremental build
+   - generate binary release number by comparing MD5s
+   - keep track of successfully completed configure, make, install
+     steps (necessary for large-scale builds!)
  + command line interface:
    - multi-package installation
    - pisi-remove
