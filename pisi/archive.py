@@ -38,9 +38,9 @@ class ArchiveTar(ArchiveBase):
     def __init__(self, filepath, type="tar"):
         super(ArchiveTar, self).__init__(filepath, type)
 
-    def unpack(self, targetDir):
+    def unpack(self, targetDir, cleanDir=False):
         """Unpack tar archive to a given target directory(targetDir)."""
-        super(ArchiveTar, self).unpack(targetDir)
+        super(ArchiveTar, self).unpack(targetDir, cleanDir)
 
         rmode = ""
         if self.type == 'tar':
@@ -113,7 +113,6 @@ class ArchiveZip(ArchiveBase):
     def unpack_file_cond(self, pred, targetDir, archiveRoot=''):
         """Unpack/Extract a file according to predicate function filename ->
         bool"""
-        super(ArchiveZip, self).unpack(targetDir, False)
         zip = self.zip
         for info in zip.infolist():
             if pred(info.filename):   # check if condition holds
@@ -163,7 +162,9 @@ class ArchiveZip(ArchiveBase):
     def unpack_dir_flat(self, path, targetDir):
         self.unpack_file_cond(lambda f:util.subpath(path,f), targetDir, path)
 
-    def unpack(self, targetDir):
+    def unpack(self, targetDir, cleanDir=False):
+        super(ArchiveZip, self).unpack(targetDir, cleanDir)
+
         self.unpack_file_cond(lambda f: True, targetDir)
         self.close()
         return 
@@ -185,8 +186,8 @@ class Archive:
 
         self.archive = handlers.get(type)(filepath, type)
 
-    def unpack(self, targetDir):
-        self.archive.unpack(targetDir)
+    def unpack(self, targetDir, cleanDir=False):
+        self.archive.unpack(targetDir, cleanDir)
 
     def unpack_files(self, files, targetDir):
         self.archive.unpack_files(files, targetDir)
