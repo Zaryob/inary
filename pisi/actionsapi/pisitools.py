@@ -11,9 +11,11 @@ def dodoc(*documentList):
 
     srcTag = src_name + '-' + src_version + '-' + src_release
     
-    # FIXME: Exception yiyoruz eğer klasör mevcutsa, adam edilecek!
-    os.makedirs(install_dir + '/' + 'usr/share/doc/' + srcTag)
-  
+    try:
+        os.makedirs(install_dir + '/' + 'usr/share/doc/' + srcTag)
+    except OSError:
+        pass
+
     for document in documentList:
         if os.access(document, os.F_OK):
             shutil.copyfile(document, os.path.join(install_dir, \
