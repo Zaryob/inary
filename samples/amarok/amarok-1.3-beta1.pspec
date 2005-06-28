@@ -39,10 +39,10 @@
       <Dependency>kdebase</Dependency>
     </RuntimeDependencies>
     <Files>
-      <Path fileType="sharedLib">/usr/lib</Path>
-      <Path fileType="data">/usr/share</Path>
-      <Path fileType="localedata">/usr/share/locale</Path>
-      <Path fileType="executable">/usr/bin</Path>
+      <Path fileType="sharedLib">/usr/kde/3.4/lib</Path>
+      <Path fileType="data">/usr/kde/3.4/share</Path>
+      <Path fileType="localedata">/usr/kde/3.4/share/locale</Path>
+      <Path fileType="executable">/usr/kde/3.4/bin</Path>
     </Files>
   </Package>
 
@@ -53,7 +53,7 @@
 This package provides documentation files for Amarok.
     </Description>
     <Files>
-      <Path fileType="doc">/usr/share/doc</Path>
+      <Path fileType="doc">/usr/kde/3.4/share/doc</Path>
     </Files>
   </Package>
 

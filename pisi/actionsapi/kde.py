@@ -4,18 +4,23 @@
 import os
 from pisi.context import const
 
+# Global variables for compiling KDE programs...
+kde_dir = os.getenv('KDEDIR')
+qt_dir = os.getenv('QTDIR')
+qt_libdir = os.getenv('QTDIR') + '/lib/'
+
 def configure(parameters = ''):
     ''' FIXME: Düzgün hale getirilecek '''
     ''' parameters = '--with-nls --with-libusb --with-something-usefull '''
 
-    configure_string = './configure --prefix=/usr \
+    configure_string = './configure --prefix=%s \
                 --host=i686-pc-linux-gnu \
-                --mandir=/usr/share/man \
-                --infodir=/usr/share/info \
-                --datadir=/usr/share \
-                --sysconfdir=/etc \
-                --localstatedir=/var/lib \
-                %s' % parameters
+                --with-x \
+                --enable-mitshm \
+                --with-qt-dir=%s \
+                --enable-mt \
+                --with-qt-libraries=%s \
+                %s' % (kde_dir, qt_dir, qt_libdir, parameters)
 
     os.system(configure_string)
 
@@ -30,13 +35,6 @@ def install():
 
     dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
         const.install_dir_suffix
-
-    install_string = 'make prefix=%(prefix)s/usr \
-                datadir=%(prefix)s/usr/share \
-                infodir=%(prefix)s/usr/share/info \
-                localstatedir=%(prefix)s/var/lib \
-                mandir=%(prefix)s/usr/share/man \
-                sysconfdir=%(prefix)s/etc \
-                install' % {'prefix': dir_suffix}
-
+    
+    install_string = 'make prefix=%s/%s install' % (dir_suffix, kde_dir)
     os.system(install_string)

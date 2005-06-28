@@ -2,15 +2,18 @@
 # -*- coding: utf-8 -*-
 
 from pisi.actionsapi import gnuconfig
-from pisi.actionsapi import autotools
+from pisi.actionsapi import kde
 
 def setup():
     gnuconfig.gnuconfig_update()
-#    libtoolize.libtoolize()
-    autotools.configure()
+
+    # amarok does not respect kde coding standards, and makes a lot of
+    # assuptions regarding its installation directory. For this reason,
+    # it must be installed in the KDE install directory.
+    kde.configure('--with-arts --with-xine --with-gstreamer --with-opengl --with-libvisual --disable-amazon --disable-debug --without-debug')
 
 def build():
-    autotools.make()
+    kde.make()
 
 def install():
-    autotools.install()
+    kde.install()
