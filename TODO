@@ -37,7 +37,7 @@ Legend:
  + Package/Files
 
 2. Alpha
- + write specfile
+ + write specfile (eray)
  / file locking for database access
  - verify metodlari
    - SpecFile
@@ -58,21 +58,20 @@ Legend:
    - extend Config module (config.py) accordingly
  + implement file uri
    / extend the modules dealing with files accordingly
- - multi-package dependency analysis
+ - multi-package dependency analysis (eray)
    - design a package operation planner
    - install operation
    - upgrade operation
- - implement source database
+ - implement source database (eray)
  - implement missing unit tests
    - package
- - Package Repository
  - multi-architecture support
    - design decisions
    - extend XML specs to support that
    - cross-platform building support
  - non-interactive use
  - query
-   - list of installed packages
+   - list of installed packages (eray)
    - comar OM information (Provides)
  - easy package preparation
    / convert ebuild to pisi
@@ -93,6 +92,7 @@ Legend:
 
  - multiple package repository
    - decide how to implement
+   - make a package and sourcedb for each repo
  - transaction stuff for database
  - Packager's tool
    ? PISIMAT
