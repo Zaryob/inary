@@ -176,11 +176,10 @@ class PackageInfo(object):
         return node
 
     def verify(self):
-        ret = True
-        ret &= self.name
-        ret &= self.summary
-        ret &= len(self.paths) > 0
-        return ret
+        if not self.name: return False
+        if not self.summary: return False
+        if len(self.paths) <= 0: return False
+        return True
 
 class SpecFile(XmlFile):
     """A class for reading/writing from/to a PSPEC (PISI SPEC) file."""
@@ -242,11 +241,10 @@ class SpecFile(XmlFile):
         
     def verify(self):
         """Verify PSPEC structures, are they what we want of them?"""
-        ret = True
-        ret &= self.source.verify()
-        ret &= len(self.packages)>1
+        if not self.source.verify(): return False
+        if len(self.packages) <= 0: return False
         for x in self.packages:
-            ret &= x.verify()
+            if not x.verify(): return False
         return True
     
     def write(self, filename):
