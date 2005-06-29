@@ -14,7 +14,7 @@ setup(name="pisi",
       author_email="hotmail@uludag.org.tr",
       url="http://uludag.org.tr",
       package_dir = {'': ''},
-      packages = ['pisi', 'pisi.actionsapi'],
+      packages = ['pisi', 'pisi.cli', 'pisi.actionsapi'],
       package_data = {'pisi.actionsapi' : ['share/*'] }
       scripts = ['pisi-build', 'pisi-install']
      )
