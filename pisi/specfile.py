@@ -75,6 +75,8 @@ class PathInfo:
     def __init__(self, node):
         self.pathname = getNodeText(node)
         self.fileType = getNodeAttribute(node, "fileType")
+        if not self.fileType:
+            self.fileType = "other"
 
     def elt(self, xml):
         node = xml.newNode("Path")
