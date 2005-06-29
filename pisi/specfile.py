@@ -128,6 +128,11 @@ class SourceInfo:
             xml.addNodeUnder(node, "History", update.elt(xml))
         return node
 
+    def verify(self):
+        ret = True
+        ret &= len(self.history) > 0
+        return ret
+
 class PackageInfo:
     """A structure to hold package information. Package information is
     located under <Package> tag in PSPEC file. Opposite to Source each

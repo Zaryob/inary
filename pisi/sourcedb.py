@@ -7,12 +7,41 @@
 # yes, we are cheap
 
 import bsddb.dbshelve as shelve
+import os, fcntl
 
-util.check_dir(config.db_dir())
-d = shelve.open(config.db_dir() + '/source.bdb')
+import util
+from config import config
+from bsddb import db
 
-def add_source(name, source_info):
-    d[name] = source_info
+class SourceDB(object):
 
-def remove_source(name):
-    del d[name]
+    def __init__(self):
+        util.check_dir(config.db_dir())
+        filename = os.path.join(config.db_dir(), 'source.bdb')
+        self.d = shelve.open(filename)
+        self.fdummy = open(filename)
+        fcntl.flock(self.fdummy, fcntl.LOCK_EX)
+
+    def __del__(self):
+        #fcntl.flock(self.fdummy, fcntl.LOCK_UN)
+        self.fdummy.close()
+
+    def has_source(self, name):
+        name = str(name)
+        return self.d.has_key(name)
+
+    def get_source(self, name):
+        name = str(name)
+        return self.d[name]
+
+    def add_source(self, source_info):
+        assert source_info.verify()
+        name = str(source_info.name)
+        self.d[name] = source_info
+
+    def remove_source(self, name):
+        name = str(name)
+        del self.d[name]
+
+sourcedb = SourceDB()
+
