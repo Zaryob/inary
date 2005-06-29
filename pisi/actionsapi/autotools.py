@@ -13,13 +13,13 @@ def configure(parameters = ''):
     dirs = config.dirs
     flags = config.flags
 
-    configure_string = './configure --prefix=%s \
+    configure_string = './configure --prefix=/%s \
                 --host=%s \
-                --mandir=%s \
-                --infodir=%s \
-                --datadir=%s \
-                --sysconfdir=%s \
-                --localstatedir=%s \
+                --mandir=/%s \
+                --infodir=/%s \
+                --datadir=/%s \
+                --sysconfdir=/%s \
+                --localstatedir=/%s \
                 %s' % (dirs.defaultprefix,
                        flags.host,
                        dirs.man,
