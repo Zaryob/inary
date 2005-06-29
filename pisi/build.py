@@ -91,7 +91,8 @@ class PisiBuild:
         curDir = os.getcwd()
 
         locals = globals = {}
-
+        # Set needed evironment variables for actions API
+        self.setEnvorinment()
         try:
             exec compile(self.actionScript , "error", "exec") in locals,globals
         except SyntaxError, e:
@@ -99,8 +100,7 @@ class PisiBuild:
             return 
         # Go to source directory
         self.gotoSrcDir(globals)
-        # Set needed evironment variables for actions API
-        self.setEnvorinment()
+
         #  Run configure, build and install phase
         self.configureSource(locals)
         self.buildSource(locals)
