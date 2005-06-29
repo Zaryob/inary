@@ -129,7 +129,7 @@ class Fetcher:
             self.err(('(%s): %s') % (e.__class__.__name__, e))
 
         if not headers is None and not headers.has_key('Content-Length'):
-            self.err('file not found')
+            totalsize = 0 # could not get the totalsize of file
         else: totalsize = int(headers['Content-Length'])
 
         dest = open(self.filedest + "/" + self.url.filename() , "w")
@@ -145,6 +145,9 @@ class Progress:
         self.percent = 0
 
     def update(self, size):
+        if not self.totalsize:
+            return 100
+
         percent = (size * 100) / self.totalsize
         if percent and self.percent is not percent:
                 self.percent = percent
