@@ -438,7 +438,7 @@ PartOf:
 \series default 
 Paketin hangi bütünün/grubun parçasý olduðunu belirtir.
  Aitlik özellikleri için Freshmeat'in Trove kategorileri örnek verilebilir.
- ( örn: LyX and TeTex are parts of Tex:Distrubiton )
+ ( örn: LyX and TeTex are parts of Tex:Distrubiton ) 
 \newline 
 
 \series bold 
@@ -467,6 +467,16 @@ Component
 IsA
 \series default 
  ile belirtilen aitlikleri yanlýzca sorgulayabilirsiniz.
+\newline 
+Source ve Package taglarý içerisinde yalnýzca birer tane 
+\series bold 
+PartOf
+\series default 
+ tanýmlanabiliyor olmasýna karþýn, birden fazla 
+\series bold 
+IsA
+\series default 
+ tanýmlanabilir.
 \layout Itemize
 
 
@@ -745,7 +755,7 @@ Merge
 \series bold 
 PartOf: 
 \series default 
-Merge
+Override
 \layout Itemize
 
 
