@@ -89,6 +89,7 @@ class SourceInfo:
         self.name = getNodeText(node, "Name")
         self.homepage = getNodeText(node, "HomePage")
         self.packager = PackagerInfo(getNode(node, "Packager"))
+        self.summary = getNodeText(node, "Summary")
         self.description = getNodeText(node, "Description")
         self.license = map(getNodeText, getAllNodes(node, "License"))
         self.isa = map(getNodeText, getAllNodes(node, "IsA"))
@@ -144,7 +145,7 @@ class PackageInfo(object):
         self.name = getNodeText(node, "Name")
         self.summary = getNodeText(node, "Summary")
         self.description = getNodeText(node, "Description")
-        self.isa = getNodeText(node, "IsA")
+        self.isa = map(getNodeText, getAllNodes(node, "IsA"))
         self.partof = getNodeText(node, "PartOf")
         self.license = getNodeText(node, "License")
         iDepElts = getAllNodes(node, "InstallDependencies/Dependency")
@@ -160,8 +161,8 @@ class PackageInfo(object):
         xml.addTextNodeUnder(node, "Name", self.name)
         xml.addTextNodeUnder(node, "Summary", self.summary)
         xml.addTextNodeUnder(node, "Description", self.description)
-        if self.isa:
-            xml.addTextNodeUnder(node, "IsA", self.isa)
+        for isa in self.isa:
+            xml.addTextNodeUnder(node, "IsA", isa)
         if self.partof:
             xml.addTextNodeUnder(node, "PartOf", self.partof)
         for dep in self.installDeps:
@@ -204,7 +205,40 @@ class SpecFile(XmlFile):
         packageElts = self.getAllNodes("Package")
         self.packages = [PackageInfo(p) for p in packageElts]
 
+        self.doMerges()
+        self.doOverrides()
+
         self.unlink()
+
+    def doOverrides(self):
+        """Override tags from Source in Packages. Some tags in Packages
+        overrides the tags from Source. There is a more detailed
+        description in documents."""
+
+        for pkg in self.packages:
+
+            if not pkg.partof:
+                pkg.paftof = self.source.partof
+
+            if not pkg.license:
+                pkg.licence = self.source.partof
+        
+    def doMerges(self):
+        """Merge tags from Source in Packages. Some tags in Packages merged
+        with the tags from Source. There is a more detailed
+        description in documents."""
+
+        for pkg in self.packages:
+
+            if not pkg.summary:
+                pkg.summary = self.source.summary
+
+            if not pkg.description:
+                pkg.description = self.source.description
+
+            if not pkg.isa:
+                pkg.isa = self.source.isa
+
         
     def verify(self):
         """Verify PSPEC structures, are they what we want of them?"""

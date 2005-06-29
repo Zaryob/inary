@@ -38,6 +38,29 @@ class SpecFileTestCase(unittest.TestCase):
         if not matched:
             self.fail("Failed to match pathname: %s" %pn)
 
+    def testIsAPartOf(self):
+        # test existence in Source
+        if not "library:util:optparser" in self.spec.source.isa:
+            self.fail("Failed to match isA in Source")
+        if not isinstance(self.spec.source.isa, list):
+            self.fail("source.isa is not a list, but it must be...")
+
+        if "rpm:archive" != self.spec.source.partof:
+            self.fail("Failed to match PartOf in Source")
+
+        # test existence in Package
+        pkg = self.spec.packages[0]
+        if not "library:util:optparser" in pkg.isa:
+            self.fail("Failed to match isA....")
+        if not isinstance(pkg.isa, list):
+            self.fail("source.isa is not a list, but it must be...")
+
+        print pkg.partof
+        if "rpm:archive" != pkg.partof:
+            self.fail("Failed to match PartOf")
+        
+
+
     def testCopy(self):
         util.check_dir(config.tmp_dir())
         self.spec.read("samples/popt/popt.pspec")
