@@ -90,8 +90,8 @@ class SourceInfo:
         self.homepage = getNodeText(node, "HomePage")
         self.packager = PackagerInfo(getNode(node, "Packager"))
         self.description = getNodeText(node, "Description")
-        self.licenses = map(getNodeText, getAllNodes(node, "License"))
-        self.isa = getNodeText(node, "IsA")
+        self.license = map(getNodeText, getAllNodes(node, "License"))
+        self.isa = map(getNodeText, getAllNodes(node, "IsA"))
         self.partof = getNodeText(node, "PartOf")
         archiveNode = getNode(node, "Archive")
         self.archiveUri = getNodeText(archiveNode).strip()
@@ -112,9 +112,10 @@ class SourceInfo:
             xml.addTextNodeUnder(node, "Homepage", self.homepage)
         node.appendChild(self.packager.elt(xml))
         xml.addTextNodeUnder(node, "Description", self.description)
-        for license in self.licenses:
+        for license in self.license:
             xml.addTextNodeUnder(node, "License", license)
-        xml.addTextNodeUnder(node, "IsA", self.isa)
+        for isa in self.isa:
+            xml.addTextNodeUnder(node, "IsA", isa)
         xml.addTextNodeUnder(node, "PartOf", self.partof)
         archiveNode = xml.addNodeUnder(node, "Archive")
         archiveNode.setAttribute("type", self.archiveType)
