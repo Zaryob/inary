@@ -130,6 +130,9 @@ class SourceInfo:
 
     def verify(self):
         ret = True
+        ret &= self.name
+        ret &= self.summary
+        ret &= self.description
         ret &= len(self.history) > 0
         return ret
 
@@ -170,7 +173,14 @@ class PackageInfo:
         for update in self.history:
             xml.addNodeUnder(node, "History", update.elt(xml))
         return node
-        
+
+    def verify(self):
+        ret = True
+        ret &= self.name
+        ret &= self.summary
+        ret &= len(self.paths) > 0
+        return ret
+
 class SpecFile(XmlFile):
     """A class for reading/writing from/to a PSPEC (PISI SPEC) file."""
 
@@ -198,6 +208,11 @@ class SpecFile(XmlFile):
         
     def verify(self):
         """Verify PSPEC structures, are they what we want of them?"""
+        ret = True
+        ret &= self.source.verify()
+        ret &= len(packages)>1
+        for x in packages:
+            ret &= x.verify()
         return True
     
     def write(self, filename):
