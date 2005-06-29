@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+# stadard python modules
 import os
 import time
 from tempfile import mkstemp, mkdtemp

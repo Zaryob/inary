@@ -1,10 +1,17 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import os, string, re, shutil
-from shell import *
+# standard python modules
+import os
+import string
+import re
+import shutil
 
+# pisi modules
 from pisi.ui import ui
+
+# actions api modules
+from shell import *
 
 def gnuconfig_findnewest():
     ''' find the newest config.* file according to

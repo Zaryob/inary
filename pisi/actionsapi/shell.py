@@ -1,7 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import sys, re
+# standard python modules
+import sys
+import re
 from itertools import izip, imap, count, ifilter, ifilterfalse
 
 def cat(filename):

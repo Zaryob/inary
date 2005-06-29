@@ -1,8 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+# standard python modules
 import os
-from pisi.context import const
+
+# actions api modules
+from config import config
 
 # Global variables for compiling KDE programs...
 kde_dir = os.getenv('KDEDIR')
@@ -14,13 +17,13 @@ def configure(parameters = ''):
     ''' parameters = '--with-nls --with-libusb --with-something-usefull '''
 
     configure_string = './configure --prefix=%s \
-                --host=i686-pc-linux-gnu \
+                --host=%s \
                 --with-x \
                 --enable-mitshm \
                 --with-qt-dir=%s \
                 --enable-mt \
                 --with-qt-libraries=%s \
-                %s' % (kde_dir, qt_dir, qt_libdir, parameters)
+                %s' % (kde_dir, config.flags.host, qt_dir, qt_libdir, parameters)
 
     os.system(configure_string)
 
@@ -31,10 +34,9 @@ def make():
 def install():
     ''' FIXME: Düzgün hale getirilecek '''
     ''' dir_suffix = /var/tmp/pisi/ _paket_adı_ /image/ '''
-    global const
 
     dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
-        const.install_dir_suffix
+        config.const.install_dir_suffix
     
     install_string = 'make prefix=%s/%s install' % (dir_suffix, kde_dir)
     os.system(install_string)

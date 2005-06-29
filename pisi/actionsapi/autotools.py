@@ -1,21 +1,33 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+# standard python modules
 import os
-from pisi.context import const
+
+# actions api modules
+from config import config
 
 def configure(parameters = ''):
     ''' FIXME: Düzgün hale getirilecek '''
     ''' parameters = '--with-nls --with-libusb --with-something-usefull '''
+    dirs = config.dirs
+    flags = config.flags
 
-    configure_string = './configure --prefix=/usr \
-                --host=i686-pc-linux-gnu \
-                --mandir=/usr/share/man \
-                --infodir=/usr/share/info \
-                --datadir=/usr/share \
-                --sysconfdir=/etc \
-                --localstatedir=/var/lib \
-                %s' % parameters
+    configure_string = './configure --prefix=%s \
+                --host=%s \
+                --mandir=%s \
+                --infodir=%s \
+                --datadir=%s \
+                --sysconfdir=%s \
+                --localstatedir=%s \
+                %s' % (dirs.defaultprefix,
+                       flags.host,
+                       dirs.man,
+                       dirs.info,
+                       dirs.data,
+                       dirs.conf,
+                       dirs.localstate,
+                       parameters)
 
     os.system(configure_string)
 
@@ -26,17 +38,23 @@ def make():
 def install():
     ''' FIXME: Düzgün hale getirilecek '''
     ''' dir_suffix = /var/tmp/pisi/ _paket_adı_ /image/ '''
-    global const
+    dirs = config.dirs
 
     dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
-        const.install_dir_suffix
+        config.const.install_dir_suffix
 
-    install_string = 'make prefix=%(prefix)s/usr \
-                datadir=%(prefix)s/usr/share \
-                infodir=%(prefix)s/usr/share/info \
-                localstatedir=%(prefix)s/var/lib \
-                mandir=%(prefix)s/usr/share/man \
-                sysconfdir=%(prefix)s/etc \
-                install' % {'prefix': dir_suffix}
+    install_string = 'make prefix=%(prefix)s/%(defaultprefix)s \
+                datadir=%(prefix)s/%(data)s \
+                infodir=%(prefix)s/%(info)s \
+                localstatedir=%(prefix)s/%(localstate)s \
+                mandir=%(prefix)s/%(man)s \
+                sysconfdir=%(prefix)s/%(conf)s \
+                install' % {'prefix': dir_suffix,
+                            'defaultprefix': dirs.defaultprefix,
+                            'man': dirs.man,
+                            'info': dirs.info,
+                            'localstate': dirs.localstate,
+                            'conf': dirs.conf,
+                            'data': dirs.data}
 
     os.system(install_string)
