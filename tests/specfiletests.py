@@ -41,7 +41,7 @@ class SpecFileTestCase(unittest.TestCase):
     def testIsAPartOf(self):
         # test existence in Source
         if not "library:util:optparser" in self.spec.source.isa:
-            self.fail("Failed to match isA in Source")
+            self.fail("Failed to match IsA in Source")
         if not isinstance(self.spec.source.isa, list):
             self.fail("source.isa is not a list, but it must be...")
 
@@ -51,13 +51,12 @@ class SpecFileTestCase(unittest.TestCase):
         # test existence in Package
         pkg = self.spec.packages[0]
         if not "library:util:optparser" in pkg.isa:
-            self.fail("Failed to match isA....")
+            self.fail("Failed to match IsA in Package")
         if not isinstance(pkg.isa, list):
             self.fail("source.isa is not a list, but it must be...")
 
-        print pkg.partof
         if "rpm:archive" != pkg.partof:
-            self.fail("Failed to match PartOf")
+            self.fail("Failed to match PartOf in Package")
         
 
 

@@ -218,10 +218,10 @@ class SpecFile(XmlFile):
         for pkg in self.packages:
 
             if not pkg.partof:
-                pkg.paftof = self.source.partof
+                pkg.partof = self.source.partof
 
             if not pkg.license:
-                pkg.licence = self.source.partof
+                pkg.licence = self.source.license
         
     def doMerges(self):
         """Merge tags from Source in Packages. Some tags in Packages merged
