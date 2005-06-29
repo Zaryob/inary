@@ -27,9 +27,9 @@ class SourceInfo:
         return node
 
     def verify(self):
-        ret = True
-        ret &= self.name
+        if not self.name: return False
         return True
+
 
 class PackageInfo(specfile.PackageInfo):
 
@@ -50,9 +50,7 @@ class PackageInfo(specfile.PackageInfo):
         return node
 
     def verify(self):
-        ret = True
-        ret &= specfile.PackageInfo.verify()
-        return True
+        super(PackageInfo, self).verify()
 
 class MetaData(XmlFile):
     """Package metadata. Metadata is composed of Specfile and various
@@ -92,11 +90,9 @@ class MetaData(XmlFile):
         self.writexml(filename)
 
     def verify(self):
-        ret = True
-        ret &= hasattr(self, 'source')
-        if self.source:
-            ret &= self.source.verify()
-        ret &= self.package != None
-        if self.package:
-            ret &= self.package.verify()
+        if not hasattr(self, 'source'): return False
+        if not self.source.verify(): return False
+        
+        if not self.package: return False
+        if not self.package.verify(): return False
         return True

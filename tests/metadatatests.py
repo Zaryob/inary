@@ -24,6 +24,11 @@ class MetaDataTestCase(unittest.TestCase):
     def testWrite(self):
         md = self.testRead()
         md.write(os.path.join(config.tmp_dir(),'metadata-test.xml' ))
-        
+
+    def testVerify(self):
+        md = self.testRead()
+        if not md.verify():
+            self.fail("Couldn't verify!")
+
 
 suite = unittest.makeSuite(MetaDataTestCase)
