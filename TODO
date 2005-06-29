@@ -62,8 +62,11 @@ Legend:
    - design a package operation planner
    - install operation
    - upgrade operation
- - implement source database (eray)
+ - ui module improvements
+   - methods for interaction (yes, no questions, etc.)
+ + implement source database (eray)
  - implement missing unit tests
+   + sourcedb
    - package
  - multi-architecture support
    - design decisions
@@ -91,13 +94,18 @@ Legend:
 3. Beta
 
  - multiple package repository
-   - decide how to implement
+   / decide how to implement
    - make a package and sourcedb for each repo
+   - support medium types
+     - internet: http/ftp
+     - local repository
+     - cdrom dvd
  - transaction stuff for database
  - Packager's tool
    ? PISIMAT
 
  - GUI
+   - pyqt UI class to interface
    - installation
    - remove
    - upgrade
