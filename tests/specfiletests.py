@@ -58,7 +58,9 @@ class SpecFileTestCase(unittest.TestCase):
         if "rpm:archive" != pkg.partof:
             self.fail("Failed to match PartOf in Package")
         
-
+    def testVerify(self):
+        if not self.spec.verify():
+            self.fail("Failed to verify specfile")
 
     def testCopy(self):
         util.check_dir(config.tmp_dir())
