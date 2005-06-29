@@ -130,12 +130,11 @@ class SourceInfo:
         return node
 
     def verify(self):
-        ret = True
-        ret &= self.name != None
-        ret &= self.summary != None
-        ret &= self.description != None
-        ret &= len(self.history) > 0
-        return ret
+        if not self.name: return False
+        if not self.summary: return False
+        if not self.description: return False
+        if len(self.history) <= 0: return False
+        return True
 
 class PackageInfo(object):
     """A structure to hold package information. Package information is
