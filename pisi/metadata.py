@@ -50,7 +50,7 @@ class PackageInfo(specfile.PackageInfo):
         return node
 
     def verify(self):
-        super(PackageInfo, self).verify()
+        return specfile.PackageInfo.verify(self)
 
 class MetaData(XmlFile):
     """Package metadata. Metadata is composed of Specfile and various

@@ -17,9 +17,9 @@ def main():
     # common options
 
     usage = "usage: %prog [options] package-name.pspec"
-    import pisi.commonargs
+    import pisi.cli.commonargs
     parser = OptionParser(usage=usage,version="%prog " + pisi.__version__)
-    pisi.commonargs.add(parser)
+    parser = pisi.cli.commonargs.add(parser)
 
     (options, args) = parser.parse_args()
 
