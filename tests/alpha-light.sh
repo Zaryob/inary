@@ -1,7 +1,7 @@
 #!/bin/sh
 
 pwd
-./pisi-build samples/sta*/*.pspec
+./pisi-build samples/sta*/pspec.xml
 ./pisi-index .
 ./pisi-updatedb pisi-index.xml
 ./pisi-install start*pisi

@@ -2,7 +2,7 @@
 
 pwd
 rm -rf tmp
-./pisi-build samples/*/*.pspec
+./pisi-build samples/*/pspec.xml
 ./pisi-index .
 ./pisi-updatedb pisi-index.xml
 ./pisi-install start*pisi
