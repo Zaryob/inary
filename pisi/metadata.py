@@ -26,6 +26,11 @@ class SourceInfo:
         node.appendChild(self.packager.elt(xml))
         return node
 
+    def verify(self):
+        ret = True
+        ret &= self.name
+        return True
+
 class PackageInfo(specfile.PackageInfo):
 
     def __init__(self, node=None):
@@ -43,6 +48,11 @@ class PackageInfo(specfile.PackageInfo):
         xml.addTextNodeUnder(node, "Architecture", self.architecture)
         xml.addTextNodeUnder(node, "InstalledSize", str(self.installedSize))
         return node
+
+    def verify(self):
+        ret = True
+        ret &= specfile.PackageInfo.verify()
+        return True
 
 class MetaData(XmlFile):
     """Package metadata. Metadata is composed of Specfile and various
@@ -83,7 +93,10 @@ class MetaData(XmlFile):
 
     def verify(self):
         ret = True
-        ret &= self.source.name != None
-        ret &= self.source.packager != None
-        ret &= self.package != None
+        ret &= self.source
+        if self.source:
+            ret &= self.source.verify()
+        ret &= self.package
+        if self.package:
+            ret &= self.package.verify()
         return True
