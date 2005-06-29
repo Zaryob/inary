@@ -14,7 +14,10 @@
         <IsA>ISA</IsA>
         <PartOf>PARTOF</PartOf>
         <Description>Rotates, compresses, and mails system logs</Description>
-        <Archive archType="targz" sha1sum="84ce324a78ee071536c39e95d3086e53d7fe7ccb">ftp://ftp.linux.org.tr/pub/mirrors/gentoo/distfiles/logrotate_3.6.5.orig.tar.gz</Archive>
+        <Archive type="targz"
+	sha1sum="84ce324a78ee071536c39e95d3086e53d7fe7ccb">
+	  ftp://ftp.linux.org.tr/pub/mirrors/gentoo/distfiles/logrotate_3.6.5.orig.tar.gz
+	</Archive>
         <BuildDependencies>
 
        <Dependency>>=sys-apps/portage-2.0.47-r10</Dependency>

@@ -96,7 +96,7 @@ class SourceInfo:
         archiveNode = getNode(node, "Archive")
         self.archiveUri = getNodeText(archiveNode).strip()
         self.archiveName = basename(self.archiveUri)
-        self.archiveType = getNodeAttribute(archiveNode, "archType")
+        self.archiveType = getNodeAttribute(archiveNode, "type")
         self.archiveSHA1 = getNodeAttribute(archiveNode, "sha1sum")
         patchElts = getAllNodes(node, "Patches/Patch")
         self.patches = [PatchInfo(p) for p in patchElts]
@@ -116,7 +116,7 @@ class SourceInfo:
         xml.addTextNodeUnder(node, "IsA", self.isa)
         xml.addTextNodeUnder(node, "PartOf", self.partof)
         archiveNode = xml.addNodeUnder(node, "Archive")
-        archiveNode.setAttribute("archType", self.archiveType)
+        archiveNode.setAttribute("type", self.archiveType)
         archiveNode.setAttribute("sha1sum", self.archiveSHA1)
         for patch in self.patches:
             xml.addNodeUnder(node, "Patches", patch.elt(xml))
