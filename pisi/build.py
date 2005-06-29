@@ -39,6 +39,22 @@ def getFileType(path, pinfoList):
                 ftype = pinfo.fileType
     return ftype
 
+def checkPathCollutions(spath, spkg, pkgList):
+    # check collution with other packages 
+
+    # FIXME: BU ŞU ANDA İSTEDİĞİM GİBİ ÇALIŞMIYOR. EVE GİDİNCE
+    # DÜZELTECEĞİM VE BELGELEYECEĞİM.
+    collutions = []
+    for package in pkgList:
+        if package is spkg:
+            continue
+
+        for path in package.paths:
+            if path.pathname.startswith(spath):
+                collutions.append(path.pathname)
+
+    return collutions
+
 
 class PisiBuild:
     """PisiBuild class, provides the package build and creation routines"""
@@ -190,6 +206,13 @@ class PisiBuild:
         files = Files()
         install_dir = self.ctx.pkg_install_dir()
         for pinfo in package.paths:
+            collutions = checkPathCollutions(pinfo.pathname,
+                                             package,
+                                             self.spec.packages)
+            # don't add collutions to files.xml
+            if pinfo.pathname in collutions:
+                continue
+
             path = install_dir + pinfo.pathname
             for fpath, fhash in util.get_file_hashes(path):
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
