@@ -88,10 +88,10 @@ try:
             <Email>PACKAGER_EMAIL</Email>
         </Packager>
         <License>%s</License>
-        <IsA>ISA</IsA>
-        <PartOf>PARTOF</PartOf>
+        <IsA>category</IsA>
+        <PartOf>component</PartOf>
         <Description>%s</Description>
-        <Archive archType="%s" sha1sum="SUM">%s</Archive>
+        <Archive type="%s" sha1sum="SUM">%s</Archive>
         <BuildDependencies>
 
 %s

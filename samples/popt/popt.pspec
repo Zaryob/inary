@@ -13,7 +13,7 @@
       <Email>hotmail@redhat.com</Email>
     </Packager>
     <License>As-Is</License>
-    <IsA>library:util</IsA>
+    <IsA>library:util:optparser</IsA>
     <PartOf>rpm:archive</PartOf>
     <Description>Command line option parsing library.
       While it is similiar to getopt(3), it contains a number of enhancements, including:

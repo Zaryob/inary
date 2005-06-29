@@ -11,7 +11,8 @@
             <Email>PACKAGER_EMAIL</Email>
         </Packager>
         <License>GPL-2</License>
-        <IsA>ISA</IsA>
+        <IsA>system:util:logging</IsA>
+        <IsA>app:console</IsA>
         <PartOf>PARTOF</PartOf>
         <Description>Rotates, compresses, and mails system logs</Description>
         <Archive type="targz"
