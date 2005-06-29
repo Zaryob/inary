@@ -133,7 +133,7 @@ class SourceInfo:
         ret = True
         ret &= self.name != None
         ret &= self.summary != None
-        ret &= self.description != none
+        ret &= self.description != None
         ret &= len(self.history) > 0
         return ret
 
@@ -244,8 +244,8 @@ class SpecFile(XmlFile):
         """Verify PSPEC structures, are they what we want of them?"""
         ret = True
         ret &= self.source.verify()
-        ret &= len(packages)>1
-        for x in packages:
+        ret &= len(self.packages)>1
+        for x in self.packages:
             ret &= x.verify()
         return True
     
