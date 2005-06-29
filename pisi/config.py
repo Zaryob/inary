@@ -54,5 +54,4 @@ class Config(object):
         return setattr(self.__configinstance, attr, value)
 
 
-# create a default context WITH NO PSPEC
 config = Config()
