@@ -43,15 +43,15 @@ def checkPathCollision(package, pkgList):
     """This function will check for collision of paths in a package with
     the paths of packages in pkgList. The return value will be the
     list containing the paths that collide."""
-    collutions = []
+    collisions = []
     for pinfo in package.paths:
         for pkg in pkgList:
             if pkg is package:
                 continue
             for path in pkg.paths:
                 if path.pathname.startswith(pinfo.pathname):
-                    collutions.append(path.pathname)
-    return collutions
+                    collisions.append(path.pathname)
+    return collisions
 
 
 class PisiBuild:
