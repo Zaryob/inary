@@ -93,10 +93,10 @@ class MetaData(XmlFile):
 
     def verify(self):
         ret = True
-        ret &= self.source
+        ret &= hasattr(self, 'source')
         if self.source:
             ret &= self.source.verify()
-        ret &= self.package
+        ret &= self.package != None
         if self.package:
             ret &= self.package.verify()
         return True

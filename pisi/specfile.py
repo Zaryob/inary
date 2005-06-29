@@ -130,13 +130,13 @@ class SourceInfo:
 
     def verify(self):
         ret = True
-        ret &= self.name
-        ret &= self.summary
-        ret &= self.description
+        ret &= self.name != None
+        ret &= self.summary != None
+        ret &= self.description != none
         ret &= len(self.history) > 0
         return ret
 
-class PackageInfo:
+class PackageInfo(object):
     """A structure to hold package information. Package information is
     located under <Package> tag in PSPEC file. Opposite to Source each
     PSPEC file can have more than one Package tag."""
