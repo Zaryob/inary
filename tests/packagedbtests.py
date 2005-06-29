@@ -9,7 +9,7 @@ from pisi import context
 class PackageDBTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.ctx = context.BuildContext('samples/popt/popt.pspec')
+        self.ctx = context.BuildContext('samples/popt/pspec.xml')
         
     def testAdd(self):
         packagedb.add_package(self.ctx.spec.packages[0])

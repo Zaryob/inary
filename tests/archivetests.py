@@ -16,7 +16,7 @@ class ArchiveFileTestCase(unittest.TestCase):
 #     pass
 
     def testUnpackTar(self):
-        ctx = context.BuildContext("samples/popt/popt.pspec")
+        ctx = context.BuildContext("samples/popt/pspec.xml")
 
         achv = sourcearchive.SourceArchive(ctx)
     
@@ -41,7 +41,7 @@ class ArchiveFileTestCase(unittest.TestCase):
              "5af9dd7d754f788cf511c57ce0af3d555fed009d")
 
     def testUnpackZip(self):
-        ctx = context.BuildContext("tests/sandbox/sandbox.pspec")
+        ctx = context.BuildContext("tests/sandbox/pspec.xml")
 
         assert ctx.spec.source.archiveType == "zip"
 
@@ -65,7 +65,7 @@ class ArchiveFileTestCase(unittest.TestCase):
 
     def testMakeZip(self):
         # first unpack our dear sandbox.zip
-        ctx = context.BuildContext("tests/sandbox/sandbox.pspec")
+        ctx = context.BuildContext("tests/sandbox/pspec.xml")
         targetDir = ctx.pkg_work_dir()
         achv = sourcearchive.SourceArchive(ctx)
         achv.fetch(interactive=False)
@@ -82,7 +82,7 @@ class ArchiveFileTestCase(unittest.TestCase):
 
     
     def testUnpackZipCond(self):
-        ctx = context.BuildContext("tests/sandbox/sandbox.pspec")
+        ctx = context.BuildContext("tests/sandbox/pspec.xml")
         url = purl.PUrl(ctx.spec.source.archiveUri)
         targetDir = ctx.pkg_work_dir()
         filePath = join(ctx.archives_dir(), url.filename())

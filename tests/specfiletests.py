@@ -9,7 +9,7 @@ import pisi.util as util
 class SpecFileTestCase(unittest.TestCase):
     def setUp(self):
         self.spec = specfile.SpecFile()
-        self.spec.read("samples/popt/popt.pspec")
+        self.spec.read("samples/popt/pspec.xml")
     
     def testReadSpec(self):
         self.assertEqual(self.spec.source.name, "popt")
@@ -64,7 +64,7 @@ class SpecFileTestCase(unittest.TestCase):
 
     def testCopy(self):
         util.check_dir(config.tmp_dir())
-        self.spec.read("samples/popt/popt.pspec")
-        self.spec.write(os.path.join(config.tmp_dir(), 'popt-copy.pspec'))
+        self.spec.read("samples/popt/pspec.xml")
+        self.spec.write(os.path.join(config.tmp_dir(), 'popt-copy.pspec.xml'))
 
 suite = unittest.makeSuite(SpecFileTestCase)
