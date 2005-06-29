@@ -39,20 +39,18 @@ def getFileType(path, pinfoList):
                 ftype = pinfo.fileType
     return ftype
 
-def checkPathCollutions(spath, spkg, pkgList):
-    # check collution with other packages 
-
-    # FIXME: BU ŞU ANDA İSTEDİĞİM GİBİ ÇALIŞMIYOR. EVE GİDİNCE
-    # DÜZELTECEĞİM VE BELGELEYECEĞİM.
+def checkPathCollision(package, pkgList):
+    """This function will check for collision of paths in a package with
+    the paths of packages in pkgList. The return value will be the
+    list containing the paths that collide."""
     collutions = []
-    for package in pkgList:
-        if package is spkg:
-            continue
-
-        for path in package.paths:
-            if path.pathname.startswith(spath):
-                collutions.append(path.pathname)
-
+    for pinfo in package.paths:
+        for pkg in pkgList:
+            if pkg is package:
+                continue
+            for path in pkg.paths:
+                if path.pathname.startswith(pinfo.pathname):
+                    collutions.append(path.pathname)
     return collutions
 
 
@@ -205,16 +203,11 @@ class PisiBuild:
         generated files by the build system."""
         files = Files()
         install_dir = self.ctx.pkg_install_dir()
+        collisions = checkPathCollision(package,
+                                        self.spec.packages)
         for pinfo in package.paths:
-            collutions = checkPathCollutions(pinfo.pathname,
-                                             package,
-                                             self.spec.packages)
-            # don't add collutions to files.xml
-            if pinfo.pathname in collutions:
-                continue
-
             path = install_dir + pinfo.pathname
-            for fpath, fhash in util.get_file_hashes(path):
+            for fpath, fhash in util.get_file_hashes(path, collisions, install_dir):
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
                 ftype = getFileType(frpath, package.paths)
                 try: # broken links can cause problem

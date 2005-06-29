@@ -149,8 +149,19 @@ def copy_file(src,dest):
 #         fd.write(l)
     shutil.copyfile(src, dest)
 
-def get_file_hashes(top):
+def get_file_hashes(top, excludePrefixes=None, removePrefix=None):
+    """Generator function iterates over a toplevel path and gives the
+    (filePath, sha1Hash) tuple for all files. If excludePrefixes list
+    is given function will exclude the filePaths matching those
+    prefixes. The removePrefix string parameter will be used to remove
+    prefix from filePath while matching excludes, if given."""
     for root, dirs, files in os.walk(top, topdown=False):
+        # check if root matches an exclude, and continue
+        if excludePrefixes and removePrefix:
+            p = remove_prefix(removePrefix, root)
+            if [e for e in excludePrefixes if p.startswith(e)]:
+                continue
+
         for file in files:
             f = os.path.join(root, file)
             yield (f, sha1_file(f))
