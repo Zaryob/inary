@@ -333,6 +333,13 @@ Paket yöneticisi, bir pakete ait bir dosyanýn sistemde nereye yerleþtirilmiþ
 Neden PÝSÝ?
 \layout Standard
 
+
+\emph on 
+TODO: Bu soruya verebileceðimiz bir kaç satýr cevap daha vardýr eminim :).
+ PÝSÝ ne iyileþtirmeler getirecek/getiriyor maddeler halinde de yazabiliriz
+ yine...
+\layout Standard
+
 Gereksinimlerimizi saðlayabilmek için çeþitli tipte baðýmlýlýklar, farklý
  özelliklerle kurulabilen paketler, en az dosya indirme ile kurulum gibi
  özelliklere ihtiyacýmýz olacaktýr.
@@ -377,11 +384,13 @@ Bir
 PSPEC
 \series default 
  dosyasýndan, dolayýsý ile bir kaynaktan birden fazla paket oluþturulabilir.
- Örneðin kpdf paketi kdebase-sürüm.no.tar.gz kaynaðýndan oluþturulabilecek
+ Örneðin kcontrol paketi kdebase-sürüm.no.tar.gz kaynaðýndan oluþturulabilecek
  yalnýzca bir pakettir.
 \layout Standard
 
-Dosya biçimi XML'dir ve aþaðýdaki etiketleri içerir:
+Dosya biçimi XML'dir ve aþaðýdaki etiketleri içerir.
+ Her PSPEC dosyasýnda tüm etiketlerin bulunmasý zorunlu deðildir.
+ Bulunmasý zorunlu olan etiketler aþaðýda (Zorunlu) ile belirtilirler.
 \layout Paragraph
 
 Pisi
@@ -394,7 +403,7 @@ Source
 \series bold 
 Name
 \series default 
-: Uygulamanýn adý.
+: (Zorunlu) Uygulamanýn adý.
 \layout Itemize
 
 
@@ -408,13 +417,17 @@ Uygulamanýn web sitesinin URL'sini belirtir.
 \series bold 
 Summary:
 \series default 
- Tek satýrlýk açýklayýcý bilgi.
+ (Zorunlu) Tek satýrlýk açýklayýcý bilgi.
  Çoklu dil desteðine sahiptir.
 \layout Itemize
 
 
 \series bold 
-Description: 
+Description:
+\series default 
+ (Zorunlu)
+\series bold 
+ 
 \series default 
 Uygulama hakkýnda özet açýklama.
  Çoklu dil desteðine sahiptir.
@@ -425,11 +438,19 @@ Uygulama hakkýnda özet açýklama.
 IsA: 
 \series default 
 Paketin bir kategori/sistem/kolleksiyon'a aitliðini belirtir.
- ( 
+ 
 \emph on 
-örn:
+Örn:
 \emph default 
- k3b is a KDE program )
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+k3b is a KDE program
+\begin_inset Quotes erd
+\end_inset 
+
+
 \layout Itemize
 
 
@@ -438,7 +459,15 @@ PartOf:
 \series default 
 Paketin hangi bütünün/grubun parçasý olduðunu belirtir.
  Aitlik özellikleri için Freshmeat'in Trove kategorileri örnek verilebilir.
- ( örn: LyX and TeTex are parts of Tex:Distrubiton ) 
+ Örn: 
+\begin_inset Quotes eld
+\end_inset 
+
+LyX and TeTex are parts of Tex:Distrubiton
+\begin_inset Quotes erd
+\end_inset 
+
+
 \newline 
 
 \series bold 
@@ -481,7 +510,11 @@ IsA
 
 
 \series bold 
-Packager: 
+Packager:
+\series default 
+ (Zorunlu)
+\series bold 
+ 
 \series default 
 Paketi oluþturan kiþilerin adý/soyadý ve e-posta adresi belirtir.
 \begin_deeper 
@@ -491,14 +524,14 @@ Paketi oluþturan kiþilerin adý/soyadý ve e-posta adresi belirtir.
 \series bold 
 Name:
 \series default 
- Paket geliþtiricisinin adý ve soyadý.
+ (Zorunlu) Paket geliþtiricisinin adý ve soyadý.
 \layout Itemize
 
 
 \series bold 
 Email:
 \series default 
- Paket geliþtiricisinin e-posta adresi.
+ (Zorunlu) Paket geliþtiricisinin e-posta adresi.
 \end_deeper 
 \layout Itemize
 
@@ -506,14 +539,14 @@ Email:
 \series bold 
 License
 \series default 
-: Uygulamanýn lisansýný belirtir (GPL, BSD, vb).
+: (Zorunlu) Uygulamanýn lisansýný belirtir (GPL, BSD, vb).
 \layout Itemize
 
 
 \series bold 
 Archive:
 \series default 
- Uygulamanýn orjinal kaynak kodunun bulunduðu URL'yi belirtir.
+ (Zorunlu) Uygulamanýn orjinal kaynak kodunun bulunduðu URL'yi belirtir.
  
 \series bold 
 archType
@@ -638,7 +671,7 @@ VersionTo:
 \series bold 
 History
 \series default 
-: Pakete yapýlan güncellemelerin bir listesini verir.
+: (Zorunlu) Pakete yapýlan güncellemelerin bir listesini verir.
  
 \series bold 
 History
@@ -700,7 +733,11 @@ Release:
 \end_deeper 
 \layout Subparagraph
 
-Package: 
+Package:
+\series medium 
+ (Zorunlu)
+\series default 
+ 
 \series medium 
 Uygulamadan oluþturulacak bir pakedi tanýmlar.
  
@@ -873,7 +910,7 @@ VersionTo:
 \series bold 
 Files
 \series default 
-: Pakedin kurulacak dosyalarýnýn tiplerini belirlemek için kullanýlýr.
+: (Zorunlu) Pakedin kurulacak dosyalarýnýn tiplerini belirlemek için kullanýlýr.
  Dosya tipleri ile ilgili bigi 
 \begin_inset LatexCommand \ref{FType}
 
@@ -886,16 +923,22 @@ Files
 
 \series bold 
 Directory
+\series default 
+ (Zorunlu)
 \layout Itemize
 
 
 \series bold 
 Wildcard
+\series default 
+ (Zorunlu)
 \layout Itemize
 
 
 \series bold 
 File
+\series default 
+ (Zorunlu)
 \end_deeper 
 \layout Standard
 
