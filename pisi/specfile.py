@@ -27,6 +27,11 @@ class PackagerInfo:
         xml.addTextNodeUnder(node, "Email", self.email)
         return node
 
+    def verify(self):
+        if not self.name: return False
+        if not self.email: return False
+        return True
+
 class PatchInfo:
     def __init__(self, filenm, ctype):
         self.filename = filenm
@@ -63,13 +68,22 @@ class UpdateInfo:
         self.date = getNodeText(getNode(node, "Date"))
         self.version = getNodeText(getNode(node, "Version"))
         self.release = getNodeText(getNode(node, "Release"))
+        self.type = getNodeText(getNode(node, "Type"))
 
     def elt(self, xml):
         node = xml.newNode("Update")
         xml.addTextNodeUnder(node, "Date", self.date)
         xml.addTextNodeUnder(node, "Version", self.version)
         xml.addTextNodeUnder(node, "Release", self.release)
+        if self.type:
+                xml.addTextNodeUnder(node, "Type", self.type)
         return node
+
+    def verify(self):
+        if not self.date: return False
+        if not self.version: return False
+        if not self.release: return False
+        return True
 
 class PathInfo:
     def __init__(self, node):
@@ -83,6 +97,10 @@ class PathInfo:
         xml.addText(node, self.pathname)
         node.setAttribute("fileType", self.fileType)
         return node
+
+    def verify(self):
+        if not self.pathname: return False
+        return True
 
 class SourceInfo:
     """A structure to hold source information. Source information is
@@ -135,7 +153,17 @@ class SourceInfo:
         if not self.name: return False
         if not self.summary: return False
         if not self.description: return False
+        if not self.packager: return False
+        if not self.license: return False
+        if not self.archiveUri or \
+                not self.archiveType or \
+                not self.archiveSHA1: return False
         if len(self.history) <= 0: return False
+        
+        if not self.packager.verify(): return False
+        for update in self.history:
+            if not update.verify(): return False
+
         return True
 
 class PackageInfo(object):
@@ -179,7 +207,12 @@ class PackageInfo(object):
     def verify(self):
         if not self.name: return False
         if not self.summary: return False
+        if not self.description: return False
+        if not self.license: return False
         if len(self.paths) <= 0: return False
+
+        for path in self.paths:
+            if not path.verify(): return False
         return True
 
 class SpecFile(XmlFile):
@@ -217,11 +250,17 @@ class SpecFile(XmlFile):
 
         for pkg in self.packages:
 
+            if not pkg.summary:
+                pkg.summary = self.source.summary
+
+            if not pkg.description:
+                pkg.description = self.source.description
+
             if not pkg.partof:
                 pkg.partof = self.source.partof
 
             if not pkg.license:
-                pkg.licence = self.source.license
+                pkg.license = self.source.license
         
     def doMerges(self):
         """Merge tags from Source in Packages. Some tags in Packages merged
@@ -230,13 +269,9 @@ class SpecFile(XmlFile):
 
         for pkg in self.packages:
 
-            if not pkg.summary:
-                pkg.summary = self.source.summary
-
-            if not pkg.description:
-                pkg.description = self.source.description
-
-            if not pkg.isa:
+            if pkg.isa and self.source.isa:
+                pkg.isa.append(self.source.isa)
+            elif not pkg.isa and self.source.isa:
                 pkg.isa = self.source.isa
 
         
