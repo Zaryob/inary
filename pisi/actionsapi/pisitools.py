@@ -41,7 +41,7 @@ def dosbin(filename, destination=None):
     env = config.env
 
     if not destination:
-        destination = config.dirs.sbin
+        destination = '/' + config.dirs.sbin
 
     try:
         os.makedirs(env.install_dir + destination)
