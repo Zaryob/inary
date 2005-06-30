@@ -698,15 +698,15 @@ Release
 \series bold 
 Update
 \series default 
-: Bir güncellemeyi tarif eder.
+: (Zorunlu) Bir güncellemeyi tarif eder.
 \begin_deeper 
 \layout Itemize
 
 
 \series bold 
-Type: 
+Type:
 \series default 
-Güncellemenin tipini belirtir.
+ (Zorunlu) Güncellemenin tipini belirtir.
  (Security, Bug, Enhancement v.s)
 \layout Itemize
 
@@ -714,21 +714,21 @@ Güncellemenin tipini belirtir.
 \series bold 
 Date
 \series default 
-: Güncellemenin tarihi.
+: (Zorunlu) Güncellemenin tarihi.
 \layout Itemize
 
 
 \series bold 
-Version: 
+Version:
 \series default 
-Uygulamanýn sürüm numarasý.
+ (Zorunlu) Uygulamanýn sürüm numarasý.
 \layout Itemize
 
 
 \series bold 
 Release:
 \series default 
- Pakedin sürüm numarasý.
+ (Zorunlu) Pakedin sürüm numarasý.
 \end_deeper 
 \end_deeper 
 \layout Subparagraph
@@ -922,23 +922,19 @@ Files
 
 
 \series bold 
-Directory
+Path
 \series default 
  (Zorunlu)
+\begin_deeper 
 \layout Itemize
 
 
 \series bold 
-Wildcard
+fileType
 \series default 
- (Zorunlu)
-\layout Itemize
-
-
-\series bold 
-File
-\series default 
- (Zorunlu)
+ (Zorunlu) (attribute) Bir path'in tipini belirtir.
+ Belge, paylaþýmlý kütüphane, çalýþtýrýlabilir, vb...
+\end_deeper 
 \end_deeper 
 \layout Standard
 
