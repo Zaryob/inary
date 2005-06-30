@@ -50,7 +50,7 @@ def dosbin(filename, destination=None):
 
     if os.access(filename, os.F_OK):
         shutil.copyfile(filename,
-                        os.path.join(env.install_dir,
+                        os.path.join(env.install_dir +
                                      destination,
                                      os.path.basename(filename)))
 
