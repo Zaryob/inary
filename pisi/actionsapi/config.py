@@ -13,6 +13,8 @@ import pisi.constants
 
 class Env:
     """General environment variables used in actions API"""
+    pkg_dir = os.getenv('PKG_DIR')
+    work_dir = os.getenv('WORK_DIR')
     install_dir = os.getenv('INSTALL_DIR')
     src_name = os.getenv('SRC_NAME')
     src_version = os.getenv('SRC_VERSION')
