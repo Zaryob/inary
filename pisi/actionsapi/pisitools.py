@@ -37,11 +37,8 @@ def dosed(filename, *sedPattern):
     for pattern in sedPattern:
         os.system('sed -i -e \'' + pattern + '\' ' +  filename)
 
-def dosbin(filename, destination=None):
+def dosbin(filename, destination='/' + config.dirs.sbin):
     env = config.env
-
-    if not destination:
-        destination = '/' + config.dirs.sbin
 
     try:
         os.makedirs(env.install_dir + destination)
