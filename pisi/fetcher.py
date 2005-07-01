@@ -51,10 +51,8 @@ class Fetcher:
         if not self.url.filename():
             self.err("filename error")
 
-        if os.access(self.filedest, os.W_OK) == False:
+        if not os.access(self.filedest, os.W_OK):
             self.err("no perm to write to dest dir")
-
-        scheme_err = lambda: self.err("unexpected scheme")
 
         if self.url.isLocalFile():
             self.fetchLocalFile()
@@ -100,20 +98,20 @@ class Fetcher:
     def fetchLocalFile (self):
         url = self.url
 
-        if os.access(url.path(), os.F_OK) == False:
+        if not os.access(url.path(), os.F_OK):
             self.err("no such file or no perm to read")
 
         dest = open(os.path.join(self.filedest, url.filename()) , "w")
         totalsize = os.path.getsize(url.path())
-        fileURI = open(url.path())
-        self.doGrab(fileURI, dest, totalsize)
+        fileObj = open(url.path())
+        self.doGrab(fileObj, dest, totalsize)
 
     def fetchRemoteFile (self):
         from httplib import HTTPException
 
         try:
-            fileURI = urllib2.urlopen(self.url.uri)
-            headers = fileURI.info()
+            fileObj = urllib2.urlopen(self.url.uri)
+            headers = fileObj.info()
     
         except ValueError, e:
             self.err('%s' % (e, ))
@@ -129,8 +127,7 @@ class Fetcher:
         else: totalsize = int(headers['Content-Length'])
 
         dest = open(os.path.join(self.filedest, self.url.filename()) , "w")
-        self.doGrab(fileURI, dest, totalsize)
-
+        self.doGrab(fileObj, dest, totalsize)
 
     def err (self, error):
         raise FetchError(error)
