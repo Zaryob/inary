@@ -215,14 +215,14 @@ def uncompress(patchFile, compressType="gz", targetDir=None):
     else:
         filePath = os.path.basename(patchFile)
 
-    fileObj = open(filePath, "w")
-
     if compressType == "gz":
         from gzip import GzipFile
         obj = GzipFile(patchFile)
+    else if compressType = "bz2":
+        from bz2 import BZ2File
+        obj = BZ2File(patchFile)
 
-    fileObj.write(obj.read())
-    fileObj.close()
+    open(filePath, "w").write(obj.read())
     return filePath
 
 
