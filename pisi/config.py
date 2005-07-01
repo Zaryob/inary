@@ -8,6 +8,8 @@
 #/etc/pisi/conf?) and this module will provide access to those
 #configuration parameters.
 
+import os
+
 from constants import const
 
 class Config(object):
