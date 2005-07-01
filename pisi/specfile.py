@@ -133,8 +133,8 @@ class SourceInfo:
             xml.addTextNodeUnder(node, "Homepage", self.homepage)
         node.appendChild(self.packager.elt(xml))
         xml.addTextNodeUnder(node, "Description", self.description)
-        for license in self.license:
-            xml.addTextNodeUnder(node, "License", license)
+        for l in self.license:
+            xml.addTextNodeUnder(node, "License", l)
         for isa in self.isa:
             xml.addTextNodeUnder(node, "IsA", isa)
         xml.addTextNodeUnder(node, "PartOf", self.partof)
