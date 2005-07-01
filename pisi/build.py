@@ -9,10 +9,8 @@ import sys
 import util
 from ui import ui
 from constants import const
-from config import config
 from sourcearchive import SourceArchive
 from files import Files, FileInfo
-from specfile import SpecFile
 from metadata import MetaData
 from package import Package
 
@@ -87,7 +85,8 @@ class PisiBuild:
 
         try:
             specdir = os.path.dirname(self.ctx.pspecfile)
-            self.actionScript = open("/".join([specdir,const.actions_file])).read()
+            self.actionScript = open("/".join([specdir, \
+                const.actions_file])).read()
         except IOError, e:
             ui.error ("Action Script: %s\n" % e)
             return 
@@ -96,21 +95,22 @@ class PisiBuild:
         #finished its work in the work_dir
         curDir = os.getcwd()
 
-        locals = globals = {}
+        localSymbols = globalSymbols = {}
         # Set needed evironment variables for actions API
         self.setEnvorinment()
         try:
-            exec compile(self.actionScript , "error", "exec") in locals,globals
+            exec compile(self.actionScript , "error", "exec") in localSymbols, \
+                globalSymbols
         except SyntaxError, e:
             ui.error ("Error : %s\n" % e)
             return 
         # Go to source directory
-        self.gotoSrcDir(globals)
+        self.gotoSrcDir(globalSymbols)
 
         #  Run configure, build and install phase
-        self.configureSource(locals)
-        self.buildSource(locals)
-        self.installSource(locals)
+        self.configureSource(localSymbols)
+        self.buildSource(localSymbols)
+        self.installSource(localSymbols)
 
         os.chdir(curDir)
         # after all, we are ready to build/prepare the packages
@@ -145,43 +145,43 @@ class PisiBuild:
             }
         os.environ.update(evn)
         
-    def gotoSrcDir(self, globals):
+    def gotoSrcDir(self, globalSymbols):
         """Changes the current working directory to package_work_dir() for
         actions.py to do its work."""
-        if 'WorkDir' in globals:
-            path = os.path.join(self.ctx.pkg_work_dir(), globals['WorkDir'])
+        if 'WorkDir' in globalSymbols:
+            path = os.path.join(self.ctx.pkg_work_dir(), globalSymbols['WorkDir'])
         else:
-            path = os.path.join(self.ctx.pkg_work_dir(), self.spec.source.name + "-" + self.spec.source.version)
-            
+            path = os.path.join(self.ctx.pkg_work_dir(), self.spec.source.name \
+                + "-" + self.spec.source.version)        
         try:
             os.chdir(path)
         except OSError, e:
             ui.error ("No such file or directory: %s\n" % e)
             sys.exit()
 
-    def configureSource(self, locals):
+    def configureSource(self, localSymbols):
         """Calls the corresponding function in actions.py. This time its
         const.setup_func which sets up the source tree for building.
 
         setup_func is optional in actions.py. If its present it will
         be called, if not nothing will be done."""
         func = const.setup_func
-        if func in locals:
+        if func in localSymbols:
             ui.info("Configuring %s...\n" % self.spec.source.name)
-            locals[func]()
+            localSymbols[func]()
 
-    def buildSource(self, locals):
+    def buildSource(self, localSymbols):
         """Calls the corresponding function in actions.py. This time its
         const.build_func which builds the source.
 
         build_func is optional in actions.py. If its present it will
         be called, if not nothing will be done."""
         func = const.build_func
-        if func in locals:
+        if func in localSymbols:
             ui.info("Building %s...\n" % self.spec.source.name)
-            locals[func]()
+            localSymbols[func]()
 
-    def installSource(self, locals):
+    def installSource(self, localSymbols):
         """Calls the corresponding function in actions.py. This time its
         const.install_func which will install the build source.
 
@@ -189,8 +189,8 @@ class PisiBuild:
         be called, if not package building process will _fail_."""
         func = const.install_func
         ui.info("Installing %s...\n" % self.spec.source.name)
-        if func in locals:
-            locals[func]()
+        if func in localSymbols:
+            localSymbols[func]()
         else:
             raise PisiBuildError, "install function is not defined in actions.py!"
         
