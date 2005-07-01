@@ -218,7 +218,7 @@ def uncompress(patchFile, compressType="gz", targetDir=None):
     if compressType == "gz":
         from gzip import GzipFile
         obj = GzipFile(patchFile)
-    elif compressType = "bz2":
+    elif compressType == "bz2":
         from bz2 import BZ2File
         obj = BZ2File(patchFile)
 
