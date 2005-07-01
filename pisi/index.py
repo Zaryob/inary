@@ -73,4 +73,5 @@ class Index(XmlFile):
         if md.verify():
             self.packages.append(md.package)
         else:
+            # fn nedir burada böyle bir değişken yok?
             ui.error('Package ' + fn + ' metadata corrupt\n')

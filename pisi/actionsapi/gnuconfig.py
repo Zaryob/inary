@@ -39,7 +39,7 @@ def gnuconfig_findnewest():
     keys = newer_location.keys()
     keys.sort()
 
-    thelist=[]
+    thelist = []
     for i in keys:
         thelist.append((i, newer_location[i]))
 
