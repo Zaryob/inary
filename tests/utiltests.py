@@ -18,4 +18,8 @@ class UtilTestCase(unittest.TestCase):
         a = removepathprefix('usr/local', 'usr/local/lib')
         self.assertEqual(a, 'lib')
 
+        a = removepathprefix('usr/local/', 'usr/local/lib')
+        self.assertEqual(a, 'lib')
+
+
 suite = unittest.makeSuite(UtilTestCase)
