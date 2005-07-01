@@ -4,10 +4,8 @@
 
 #standard lisbrary modules
 import os
-import sys
 import tarfile
 import zipfile
-from config import config
 
 #pisi modules
 import util
@@ -35,8 +33,8 @@ class ArchiveTar(ArchiveBase):
     type. Provides access to tar, tar.gz and tar.bz2 files. 
 
     This class provides the unpack magic for tar archives."""
-    def __init__(self, filepath, type = "tar"):
-        super(ArchiveTar, self).__init__(filepath, type)
+    def __init__(self, filepath, ArchType = "tar"):
+        super(ArchiveTar, self).__init__(filepath, ArchType)
 
     def unpack(self, targetDir, cleanDir = False):
         """Unpack tar archive to a given target directory(targetDir)."""
@@ -69,8 +67,8 @@ class ArchiveZip(ArchiveBase):
     
     symmagic = 2716663808 #long of hex val '0xA1ED0000L'
     
-    def __init__(self, filepath, type = "zip", mode = 'r'):
-        super(ArchiveZip, self).__init__(filepath, type)
+    def __init__(self, filepath, ArchType = "zip", mode = 'r'):
+        super(ArchiveZip, self).__init__(filepath, ArchType)
 
         self.zip = zipfile.ZipFile(self.filePath, mode)
 
@@ -85,7 +83,7 @@ class ArchiveZip(ArchiveBase):
         if os.path.isdir(fileName) and not os.path.islink(fileName):
             self.zip.writestr(os.path.join(fileName, ''))
             for f in os.listdir(fileName):
-               self.add_to_archive(os.path.join(fileName, f))
+                self.add_to_archive(os.path.join(fileName, f))
         else:
             if os.path.islink(fileName):
                 dest = os.readlink(fileName)
@@ -107,7 +105,7 @@ class ArchiveZip(ArchiveBase):
         fileName = os.path.basename(fileName)
         if pathName:
             os.chdir(pathName)
-        self.add_file(fileName)
+        self.add_to_archive(fileName)
         os.chdir(cwd)
 
     def unpack_file_cond(self, pred, targetDir, archiveRoot = ''):
@@ -121,7 +119,7 @@ class ArchiveZip(ArchiveBase):
                 isdir = info.filename.endswith('/')
                 
                 # calculate output file name
-                if archiveRoot=='':
+                if archiveRoot == '':
                     outpath = info.filename
                 else:
                     # change archiveRoot
@@ -157,10 +155,10 @@ class ArchiveZip(ArchiveBase):
         self.unpack_file_cond(lambda f:f in paths, targetDir)
 
     def unpack_dir(self, path, targetDir):
-        self.unpack_file_cond(lambda f:util.subpath(path,f), targetDir)
+        self.unpack_file_cond(lambda f:util.subpath(path, f), targetDir)
 
     def unpack_dir_flat(self, path, targetDir):
-        self.unpack_file_cond(lambda f:util.subpath(path,f), targetDir, path)
+        self.unpack_file_cond(lambda f:util.subpath(path, f), targetDir, path)
 
     def unpack(self, targetDir, cleanDir=False):
         super(ArchiveZip, self).unpack(targetDir, cleanDir)
@@ -173,7 +171,7 @@ class Archive:
     """Archive is the main factory for ArchiveClasses, regarding the
     Abstract Factory Pattern :)."""
 
-    def __init__(self, filepath, type):
+    def __init__(self, filepath, ArchType):
         """accepted archive types:
         targz, tarbz2, zip, tar"""
 
@@ -184,7 +182,7 @@ class Archive:
             'zip': ArchiveZip
         }
 
-        self.archive = handlers.get(type)(filepath, type)
+        self.archive = handlers.get(ArchType)(filepath, ArchType)
 
     def unpack(self, targetDir, cleanDir = False):
         self.archive.unpack(targetDir, cleanDir)
