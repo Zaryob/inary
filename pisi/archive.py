@@ -70,18 +70,18 @@ class ArchiveZip(ArchiveBase):
     def __init__(self, filepath, ArchType = "zip", mode = 'r'):
         super(ArchiveZip, self).__init__(filepath, ArchType)
 
-        self.zip = zipfile.ZipFile(self.filePath, mode)
+        self.zipObj = zipfile.ZipFile(self.filePath, mode)
 
     def close(self):
         """Close the zip archive."""
-        self.zip.close()
+        self.zipObj.close()
 
     def add_to_archive(self, fileName):
         """Add file or directory path to the zip file"""
         # It's a pity that zipfile can't handle unicode strings. Grrr!
         fileName = str(fileName)
         if os.path.isdir(fileName) and not os.path.islink(fileName):
-            self.zip.writestr(os.path.join(fileName, ''))
+            self.zipObj.writestr(fileName + '/', '')
             for f in os.listdir(fileName):
                 self.add_to_archive(os.path.join(fileName, f))
         else:
@@ -91,9 +91,9 @@ class ArchiveZip(ArchiveBase):
                 attr.filename = fileName
                 attr.create_system = 3
                 attr.external_attr = self.symmagic 
-                self.zip.writestr(attr, dest)
+                self.zipObj.writestr(attr, dest)
             else:
-                self.zip.write(fileName, fileName, zipfile.ZIP_DEFLATED)
+                self.zipObj.write(fileName, fileName, zipfile.ZIP_DEFLATED)
 
     def add_basename_to_archive(self, fileName):
         """Add only the basepath to the zip file. For example; if the given
@@ -111,8 +111,8 @@ class ArchiveZip(ArchiveBase):
     def unpack_file_cond(self, pred, targetDir, archiveRoot = ''):
         """Unpack/Extract a file according to predicate function filename ->
         bool"""
-        zip = self.zip
-        for info in zip.infolist():
+        zipObj = self.zipObj
+        for info in zipObj.infolist():
             if pred(info.filename):   # check if condition holds
 
                 # below code removes that, so we find it here
@@ -138,7 +138,7 @@ class ArchiveZip(ArchiveBase):
                 util.check_dir(os.path.dirname(ofile))
 
                 if info.external_attr == self.symmagic:
-                    target = zip.read(info.filename)
+                    target = zipObj.read(info.filename)
                     os.symlink(target, ofile)
                 else:
                     perm = info.external_attr
@@ -146,7 +146,7 @@ class ArchiveZip(ArchiveBase):
                     perm >>= 16
                     perm |= 0x00000100
                     buff = open (ofile, 'wb')
-                    fileContent = zip.read(info.filename)
+                    fileContent = zipObj.read(info.filename)
                     buff.write(fileContent)
                     buff.close()
                     os.chmod(ofile, perm)
