@@ -115,7 +115,7 @@ def commonprefix(l):
 # but this one is necessary
 def subpath(a, b):
     "find if path a is before b in the directory tree"
-    return b.startswith(a)
+    return prefix(splitpath(a), splitpath(b))
 
 def removepathprefix(prefix, path):
     "remove path prefix a from b, finding the pathname rooted at a"
