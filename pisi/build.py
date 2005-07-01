@@ -58,7 +58,7 @@ class PisiBuild:
     """PisiBuild class, provides the package build and creation routines"""
     def __init__(self, buildcontext):
         self.ctx = buildcontext
-        self.work_dir = self.ctx.pkg_work_dir()
+        self.pspecDir = os.path.dirname(self.ctx.pspecfile)
         self.spec = self.ctx.spec
         self.sourceArchive = SourceArchive(self.ctx)
 
@@ -115,7 +115,17 @@ class PisiBuild:
         pass
 
     def applyPatches(self):
-        pass
+        files_dir = os.path.abspath(os.path.join(self.pspecDir,
+                                                 const.files_dir))
+
+        for patch in self.spec.source.patches:
+            patchFile = os.path.join(files_dir, patch.filename)
+            if patch.compressionType:
+                patchFile = util.uncompress(patchFile,
+                                            targetDir=self.ctx.tmp_dir())
+
+            ui.info("Applying patch: %s\n" % patch.filename)
+            util.do_patch(self.ctx.pkg_work_dir(), patchFile)
 
     def setEnvorinment(self):
         # put the evironment variables for actions API to use.

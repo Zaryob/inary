@@ -31,7 +31,7 @@ def concat(l):
 
 def strlist(l):
     """concatenate string reps of l's elements"""
-    return string.join(map(lambda x: str(x) + ' ', l))
+    return "".join(map(lambda x: str(x) + ' ', l))
 
 def multisplit(str, chars):
     """ split str with any of chars"""
@@ -196,15 +196,42 @@ def run_batch(cmd):
       ui.error('ERROR: executing command: ' + cmd + '\n' + strlist(lines))
     return (successful,lines)
 
-def do_patch(patch, p=0):
+def uncompress(patchFile, compressType="gz", targetDir=None):
+    """uncompresses a file and returns the path of the uncompressed
+    file"""
+    if targetDir:
+        filePath = os.path.join(targetDir,
+                                os.path.basename(patchFile))
+    else:
+        filePath = os.path.basename(patchFile)
+
+    fileObj = open(filePath, "w")
+
+    if compressType == "gz":
+        from gzip import GzipFile
+        obj = GzipFile(patchFile)
+
+    fileObj.write(obj.read())
+    fileObj.close()
+    return filePath
+
+
+def do_patch(sourceDir, patchFile, p=0):
     """simple function to apply patches.."""
-    check_file(patch)
-    cmd = "patch -p%d < %s" % (p, patch)
+
+    cwd = os.getcwd()
+    os.chdir(sourceDir)
+
+    check_file(patchFile)
+    cmd = "patch -p%d < %s" % (p, patchFile)
     p = os.popen(cmd)
     o = p.readlines()
     retval = p.close()
     if retval:
-         raise UtilError("ERROR: patch (%s) failed: %s" % (patch, strlist (o)))
+        raise UtilError("ERROR: patch (%s) failed: %s" % (patchFile,
+                                                          strlist (o)))
+
+    os.chdir(cwd)
 
 def partition_freespace(directory):
     """ returns free space of given directory's partition """
