@@ -46,6 +46,7 @@ class Flags:
 
 class ActionsConfig(pisi.config.Config):
     const = pisi.constants.const
+    conf = pisi.config.config
     env = Env()
     dirs = Dirs()
     flags = Flags()
