@@ -9,8 +9,6 @@
 #configuration parameters.
 
 from constants import const
-import os
-
 
 class Config(object):
     """Config Singleton"""
