@@ -5,10 +5,10 @@
 import os
 import string
 import re
-import shutil
 
 # pisi modules
 from pisi.ui import ui
+from pisi.util import copy_file
 
 # actions api modules
 from shell import *
@@ -51,9 +51,9 @@ def gnuconfig_update():
     newer_location = gnuconfig_findnewest()
 
     try:
-        shutil.copyfile(newer_location + '/config.sub',
+        copy_file(newer_location + '/config.sub',
             os.getcwd() + '/config.sub')
-        shutil.copyfile(newer_location + '/config.guess',
+        copy_file(newer_location + '/config.guess',
             os.getcwd() + '/config.guess')
     except IOError, e:
         ui.error ("Error : %s\n" % e)

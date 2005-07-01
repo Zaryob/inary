@@ -3,8 +3,9 @@
 
 # standard python modules
 import os
-import shutil
 import gzip
+
+from pisi.util import copy_file
 
 # actions api modules
 from config import config
@@ -26,7 +27,7 @@ def dodoc(*documentList):
 
     for document in documentList:
         if os.access(document, os.F_OK):
-            shutil.copyfile(document, 
+            copy_file(document, 
                             os.path.join(env.install_dir,
                                          dirs.doc,
                                          srcTag,
@@ -37,17 +38,17 @@ def dosed(filename, *sedPattern):
     for pattern in sedPattern:
         os.system('sed -i -e \'' + pattern + '\' ' +  filename)
 
-def dosbin(filename, destination='/' + config.dirs.sbin):
+def dosbin(filename, destination=config.dirs.sbin):
     env = config.env
 
     try:
-        os.makedirs(env.install_dir + destination)
+        os.makedirs(os.path.join(env.install_dir, destination))
     except OSError:
         pass
 
     if os.access(filename, os.F_OK):
-        shutil.copyfile(filename,
-                        os.path.join(env.install_dir +
+        copy_file(filename,
+                        os.path.join(env.install_dir,
                                      destination,
                                      os.path.basename(filename)))
 
@@ -56,7 +57,7 @@ def doman(filename):
     dirs = config.dirs
 
     man, postfix = filename.split('.')
-    destDir = os.path.join(env.install_dir, dirs.man, "man"+postfix)
+    destDir = os.path.join(env.install_dir, dirs.man, "man" + postfix)
     try:
         os.makedirs(destDir)
     except OSError:
@@ -67,7 +68,7 @@ def doman(filename):
     gzfile.close()
 
     if os.access(filename, os.F_OK):
-        shutil.copyfile(filename + '.gz',
+        copy_file(filename + '.gz',
                         os.path.join(destDir,
                                      os.path.basename(filename)))
 
