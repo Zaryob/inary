@@ -142,11 +142,6 @@ def copy_file(src,dest):
     """copy source file to destination file"""
     check_file(src)
     check_dir(os.path.dirname(dest))
-#don't reinvent the wheel
-#     fs = file(src, 'rb')
-#     fd = file(dest, 'wb')
-#     for l in fs:
-#         fd.write(l)
     shutil.copyfile(src, dest)
 
 def get_file_hashes(top, excludePrefixes=None, removePrefix=None):
