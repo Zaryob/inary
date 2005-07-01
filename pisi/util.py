@@ -6,12 +6,14 @@
 #           S. Caglar Onur <caglar@uludag.org.tr>
 #           A. Murat Eren <meren@uludag.org.tr>
 
+# standard python modules
 import os
 import sys
 import sha
 import shutil
 import statvfs
 
+# pisi modules
 from ui import ui
 
 class FileError(Exception):
@@ -20,7 +22,10 @@ class FileError(Exception):
 class UtilError(Exception):
     pass
 
-# string/list functions
+
+#########################
+# string/list functions #
+#########################
 
 def unzip(seq):
     return zip(*seq)
@@ -64,8 +69,28 @@ def remove_prefix(a,b):
     "remove prefix a from sequence b"
     assert prefix(a,b)
     return b[len(a):]
-    
-# path functions
+
+
+##############################
+# Process Releated Functions #
+##############################
+
+def run_batch(cmd):
+    """run command non-interactively and report return value and output"""
+    ui.info('running ' + cmd)
+    a = os.popen(cmd)
+    lines = a.readlines()
+    ret = a.close()
+    ui.debug('return value ' + ret)
+    successful = ret == None
+    if not successful:
+      ui.error('ERROR: executing command: ' + cmd + '\n' + strlist(lines))
+    return (successful,lines)
+
+
+#############################
+# Path Processing Functions #
+#############################
 
 def splitpath(a):
     """split path into components and return as a list
@@ -100,7 +125,10 @@ def removepathprefix(prefix, path):
     else:
         return ""
 
-# file/dir functions
+
+####################################
+# File/Directory Related Functions #
+####################################
 
 def check_file(file, mode = os.F_OK):
     "shorthand to check if a file exists"
@@ -176,20 +204,7 @@ def sha1_file(filename):
             m.update(l)
         return m.hexdigest()
     except IOError:
-        return "0"
-        
-
-def run_batch(cmd):
-    """run command non-interactively and report return value and output"""
-    ui.info('running ' + cmd)
-    a = os.popen(cmd)
-    lines = a.readlines()
-    ret = a.close()
-    ui.debug('return value ' + ret)
-    successful = ret == None
-    if not successful:
-      ui.error('ERROR: executing command: ' + cmd + '\n' + strlist(lines))
-    return (successful,lines)
+        return "0"     
 
 def uncompress(patchFile, compressType="gz", targetDir=None):
     """uncompresses a file and returns the path of the uncompressed
@@ -213,7 +228,6 @@ def uncompress(patchFile, compressType="gz", targetDir=None):
 
 def do_patch(sourceDir, patchFile, p=0):
     """simple function to apply patches.."""
-
     cwd = os.getcwd()
     os.chdir(sourceDir)
 
