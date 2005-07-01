@@ -64,7 +64,7 @@ class XmlFile(object):
 
     def getNodeText(self, tagPath):
         """returns the text of *first* matching node for given tag path."""
-        node = self.getNode(tagpath)
+        node = self.getNode(tagPath)
         if not node:
             return None
         return getNodeText(node)
