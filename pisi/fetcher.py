@@ -11,7 +11,6 @@ import os
 
 # pisi modules
 import util
-from config import config
 from purl import PUrl
 from ui import ui
 
@@ -64,7 +63,7 @@ class Fetcher:
 
         return os.path.join(self.filedest, self.url.filename())
 
-    def doGrab(self, file, dest, totalsize):
+    def doGrab(self, fileURI, dest, totalsize):
         symbols = [' B/s', 'KB/s', 'MB/s', 'GB/s']
         from time import time
         tt, oldsize = int(time()), 0
@@ -72,12 +71,12 @@ class Fetcher:
         bs, size = 1024, 0
         symbol, depth = "B/s", 0
         st = time()
-        chunk = file.read(bs)
+        chunk = fileURI.read(bs)
         size = size + len(chunk)
         self.percent = p.update(size)
         while chunk:
             dest.write(chunk)
-            chunk = file.read(bs)
+            chunk = fileURI.read(bs)
             size = size + len(chunk)
             ct = time()
             if int(tt) != int(ct):
@@ -98,9 +97,7 @@ class Fetcher:
 
         dest.close()
 
-
     def fetchLocalFile (self):
-        from shutil import copyfile
         url = self.url
 
         if os.access(url.path(), os.F_OK) == False:
@@ -108,16 +105,15 @@ class Fetcher:
 
         dest = open(os.path.join(self.filedest, url.filename()) , "w")
         totalsize = os.path.getsize(url.path())
-        file = open(url.path())
-        self.doGrab(file, dest, totalsize)
-
+        fileURI = open(url.path())
+        self.doGrab(fileURI, dest, totalsize)
 
     def fetchRemoteFile (self):
         from httplib import HTTPException
 
         try:
-            file = urllib2.urlopen(self.url.uri)
-            headers = file.info()
+            fileURI = urllib2.urlopen(self.url.uri)
+            headers = fileURI.info()
     
         except ValueError, e:
             self.err('%s' % (e, ))
@@ -133,7 +129,7 @@ class Fetcher:
         else: totalsize = int(headers['Content-Length'])
 
         dest = open(os.path.join(self.filedest, self.url.filename()) , "w")
-        self.doGrab(file, dest, totalsize)
+        self.doGrab(fileURI, dest, totalsize)
 
 
     def err (self, error):
@@ -150,7 +146,7 @@ class Progress:
 
         percent = (size * 100) / self.totalsize
         if percent and self.percent is not percent:
-                self.percent = percent
-                return percent
+            self.percent = percent
+            return percent
         else:
-                return 0
+            return 0
