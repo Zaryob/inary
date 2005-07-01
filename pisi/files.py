@@ -7,7 +7,7 @@ from xmlfile import XmlFile
 
 class FileInfo:
     """FileInfo holds the information for a File node/tag in files.xml"""
-    def __init__(self, _path = "", _type = "", _size="", _hash = ""):
+    def __init__(self, _path = "", _type = "", _size = "", _hash = ""):
         self.path = _path
         self.type = _type
         self.size = _size

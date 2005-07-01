@@ -34,7 +34,7 @@ def install(package_fn):
     # check if we have all required files
 
     metadata = MetaData()
-    metadata.read(config.install_dir() + '/metadata.xml')
+    metadata.read(os.path.join(config.install_dir(), 'metadata.xml'))
     # check package semantics
     if not metadata.verify():
         raise InstallError("MetaData format wrong")
@@ -57,4 +57,4 @@ def install(package_fn):
     installdb.install(metadata.package.name,
                       metadata.package.version,
                       metadata.package.release,
-                      config.install_dir() + '/files.xml')
+                      os.path.join(config.install_dir(), 'files.xml'))

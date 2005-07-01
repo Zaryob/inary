@@ -21,7 +21,7 @@ class ArchiveBase(object):
         self.filePath = filepath
         self.type = atype
 
-    def unpack(self, targetDir, cleanDir=False):
+    def unpack(self, targetDir, cleanDir = False):
         self.targetDir = targetDir
         # first we check if we need to clean-up our working env.
         if os.path.exists(self.targetDir):
@@ -35,10 +35,10 @@ class ArchiveTar(ArchiveBase):
     type. Provides access to tar, tar.gz and tar.bz2 files. 
 
     This class provides the unpack magic for tar archives."""
-    def __init__(self, filepath, type="tar"):
+    def __init__(self, filepath, type = "tar"):
         super(ArchiveTar, self).__init__(filepath, type)
 
-    def unpack(self, targetDir, cleanDir=False):
+    def unpack(self, targetDir, cleanDir = False):
         """Unpack tar archive to a given target directory(targetDir)."""
         super(ArchiveTar, self).unpack(targetDir, cleanDir)
 
@@ -69,7 +69,7 @@ class ArchiveZip(ArchiveBase):
     
     symmagic = 2716663808 #long of hex val '0xA1ED0000L'
     
-    def __init__(self, filepath, type="zip", mode='r'):
+    def __init__(self, filepath, type = "zip", mode = 'r'):
         super(ArchiveZip, self).__init__(filepath, type)
 
         self.zip = zipfile.ZipFile(self.filePath, mode)
@@ -83,9 +83,9 @@ class ArchiveZip(ArchiveBase):
         # It's a pity that zipfile can't handle unicode strings. Grrr!
         fileName = str(fileName)
         if os.path.isdir(fileName) and not os.path.islink(fileName):
-            self.zip.writestr(fileName + '/', '')
+            self.zip.writestr(os.path.join(fileName, ''))
             for f in os.listdir(fileName):
-               self.add_to_archive(fileName + '/' + f)
+               self.add_to_archive(os.path.join(fileName, f))
         else:
             if os.path.islink(fileName):
                 dest = os.readlink(fileName)
@@ -110,7 +110,7 @@ class ArchiveZip(ArchiveBase):
         self.add_file(fileName)
         os.chdir(cwd)
 
-    def unpack_file_cond(self, pred, targetDir, archiveRoot=''):
+    def unpack_file_cond(self, pred, targetDir, archiveRoot = ''):
         """Unpack/Extract a file according to predicate function filename ->
         bool"""
         zip = self.zip
@@ -186,7 +186,7 @@ class Archive:
 
         self.archive = handlers.get(type)(filepath, type)
 
-    def unpack(self, targetDir, cleanDir=False):
+    def unpack(self, targetDir, cleanDir = False):
         self.archive.unpack(targetDir, cleanDir)
 
     def unpack_files(self, files, targetDir):

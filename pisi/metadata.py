@@ -57,7 +57,7 @@ class MetaData(XmlFile):
     other information. A metadata has two parts, Source and Package."""
 
     def __init__(self):
-        XmlFile.__init__(self,"PISI")
+        XmlFile.__init__(self, "PISI")
 
     def fromSpec(self, src, pkg):
         self.source = SourceInfo()

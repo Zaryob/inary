@@ -62,7 +62,7 @@ class Fetcher:
         else:
             self.fetchRemoteFile()
 
-        return self.filedest + "/" + self.url.filename()
+        return os.path.join(self.filedest, self.url.filename())
 
     def doGrab(self, file, dest, totalsize):
         symbols = [' B/s', 'KB/s', 'MB/s', 'GB/s']
@@ -106,7 +106,7 @@ class Fetcher:
         if os.access(url.path(), os.F_OK) == False:
             self.err("no such file or no perm to read")
 
-        dest = open(self.filedest + "/" + url.filename() , "w")
+        dest = open(os.path.join(self.filedest, url.filename()) , "w")
         totalsize = os.path.getsize(url.path())
         file = open(url.path())
         self.doGrab(file, dest, totalsize)
@@ -132,7 +132,7 @@ class Fetcher:
             totalsize = 0 # could not get the totalsize of file
         else: totalsize = int(headers['Content-Length'])
 
-        dest = open(self.filedest + "/" + self.url.filename() , "w")
+        dest = open(os.path.join(self.filedest, self.url.filename()) , "w")
         self.doGrab(file, dest, totalsize)
 
 

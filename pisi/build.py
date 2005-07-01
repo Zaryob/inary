@@ -260,8 +260,7 @@ class PisiBuild:
             files = Files()
             files.read(const.files_xml)
             for finfo in files.list:
-                p = "install/" + finfo.path
-                pkg.add_to_package(p)
+                pkg.add_to_package("install/" + finfo.path)
 
             pkg.close()
             os.chdir(c)
