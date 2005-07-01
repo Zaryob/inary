@@ -34,7 +34,7 @@ class Package:
 
     def extract(self, outdir):
         """Extract entire package contents to directory"""
-        extract_dir('', outdir)         # means package root
+        self.extract_dir('', outdir)         # means package root
 
     def extract_files(self, paths, outdir):
         """Extract paths to outdir"""
