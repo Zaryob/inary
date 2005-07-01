@@ -46,6 +46,8 @@ class SourceArchive:
                 ui.info('%s [cached]\n' % self.ctx.spec.source.archiveName)
             return True
 
+        return False
+
     def unpack(self, cleanDir=False):
         archive = Archive(self.dest, self.ctx.spec.source.archiveType)
         archive.unpack(self.ctx.pkg_work_dir(), cleanDir)
