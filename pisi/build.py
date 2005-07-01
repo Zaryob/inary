@@ -19,7 +19,8 @@ from package import Package
 class PisiBuildError(Exception):
     pass
 
-# helper functions
+
+# Helper Functions
 def getFileType(path, pinfoList):
     """Return the file type of a path according to the given PathInfo
     list"""
@@ -32,7 +33,7 @@ def getFileType(path, pinfoList):
     ftype = ""
     path = "/"+path # we need a real path.
     for pinfo in pinfoList:
-        if path.startswith(pinfo.pathname):
+        if util.subpath(pinfo.pathname, path):
             length = len(pinfo.pathname)
             if depth < length:
                 depth = length
@@ -49,7 +50,12 @@ def checkPathCollision(package, pkgList):
             if pkg is package:
                 continue
             for path in pkg.paths:
-                if path.pathname.startswith(pinfo.pathname):
+                # if pinfo.pathname is a subpath of path.pathname like
+                # the example below. path.patname is marked as a
+                # collide. Exp:
+                # pinfo.pathname: /usr/share
+                # path.pathname: /usr/share/doc
+                if util.subpath(pinfo.pathname, path.pathname):
                     collisions.append(path.pathname)
     return collisions
 
