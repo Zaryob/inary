@@ -9,7 +9,7 @@
 #configuration parameters.
 
 import os
-
+from ConfigParser import ConfigParser
 from constants import const
 
 class Config(object):
@@ -18,9 +18,27 @@ class Config(object):
     class configimpl:
 
         def __init__(self):
-            # self.c.destdir = ''       # install default to root by default
-            self.destdir = os.getcwd() +'/tmp'    # only for ALPHA
+            configParser = ConfigParser()
+            configParser.read('/etc/pisi/pisi.conf')
+            #/etc/pisi/pisi.conf
+            #
+            #[general]
+            #destinationDirectory = /tmp
+            #
+            #[build]
+            #host = i686-pc-linux-gnu
+            #CFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
+            #CXXFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
+            
+            
+            self.destdir = os.getcwd() + configParser.get('general', \
+                'destinationDirectory')
+            # only for ALPHA
             # the idea is that destdir can be set with --destdir=...
+
+            self.host = configParser.get('build', 'host')
+            self.cflags = configParser.get('build', 'CFLAGS')
+            self.cxxflags = configParser.get('build', 'CXXFLAGS')
 
         # directory accessor functions
         # here is how it goes

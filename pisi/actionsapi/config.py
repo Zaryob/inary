@@ -35,18 +35,14 @@ class Dirs:
 
 class Flags:
     """General flags used in actions API"""
-    # TODO: Eventually we should consider getting these from a/the
-    # configuration file
-
-    # bu çok çirkin, bunu burada yazmamak gerekiyor, yine de actions
-    # api içerisinde tekrarlanmasından iyidir. Yeri geldiğinde
-    # standart config dosyasından build-arch'ı alıp ona göre
-    # oluştururuz...
-    host = "i686-pc-linux-gnu"
+    conf = pisi.config.config
+    
+    host = conf.host
+    cflags = conf.cflags
+    cxxflags = conf.cflags
 
 class ActionsConfig(pisi.config.Config):
     const = pisi.constants.const
-    conf = pisi.config.config
     env = Env()
     dirs = Dirs()
     flags = Flags()
