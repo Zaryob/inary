@@ -15,6 +15,7 @@ def getNodeAttribute(node, attrname):
         attr = node.attributes.item(i)
         if attr.name == attrname:
             return attr.childNodes[0].data
+    return None
 
 def getNodeText(node, tagpath = ""):
     """get the first child and expect it to be text!"""
