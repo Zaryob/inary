@@ -9,8 +9,44 @@
 #configuration parameters.
 
 import os
-from ConfigParser import ConfigParser
+from ConfigParser import ConfigParser, NoSectionError
 from constants import const
+
+class ConfigurationSection:
+    def __init__(self, items=None):
+        self.items = items
+
+    def __getattr__(self, attr):
+        if not self.items:
+            return ""
+
+        for item in self.items:
+            if item[0] == attr:
+                return item[1]
+        return ""
+
+# should we move this class to its own module?
+class ConfigurationFile(object):
+    def __init__(self, filePath):
+        parser = ConfigParser()
+        self.filePath = filePath
+        #/etc/pisi/pisi.conf
+        #[general]
+        #destinationDirectory = /tmp
+        #[build]
+        #host = i686-pc-linux-gnu
+        #CFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
+        #CXXFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
+
+        parser.read(self.filePath)
+
+        try:
+            self.general = ConfigurationSection(parser.items("general"))
+            self.build = ConfigurationSection(parser.items("build"))
+        except NoSectionError:
+            self.general = ConfigurationSection()
+            self.build = ConfigurationSection()
+
 
 class Config(object):
     """Config Singleton"""
@@ -18,27 +54,11 @@ class Config(object):
     class configimpl:
 
         def __init__(self):
-            configParser = ConfigParser()
-            configParser.read('/etc/pisi/pisi.conf')
-            #/etc/pisi/pisi.conf
-            #
-            #[general]
-            #destinationDirectory = /tmp
-            #
-            #[build]
-            #host = i686-pc-linux-gnu
-            #CFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
-            #CXXFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
-            
-            
-            self.destdir = os.getcwd() + configParser.get('general', \
-                'destinationDirectory')
-            # only for ALPHA
-            # the idea is that destdir can be set with --destdir=...
+            self.conf = ConfigurationFile("/etc/pisi/pisi.conf")
 
-            self.host = configParser.get('build', 'host')
-            self.cflags = configParser.get('build', 'CFLAGS')
-            self.cxxflags = configParser.get('build', 'CXXFLAGS')
+            self.destdir = self.conf.general.destinationDirectory
+            if not self.destdir:
+                self.destdir = os.getcwd()+"/tmp" # FOR ALPHA
 
         # directory accessor functions
         # here is how it goes
