@@ -8,72 +8,8 @@
 #/etc/pisi/conf?) and this module will provide access to those
 #configuration parameters.
 
-import os
-from ConfigParser import ConfigParser, NoSectionError
 from constants import const
-
-class ConfigException(Exception):
-    pass
-
-class GeneralDefaults:
-    destinationDirectory = os.getcwd()+"/tmp" # FOR ALPHA
-
-class BuildDefaults:
-    host = "i686-pc-linux-gnu"
-    CFLAGS = "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
-    CXXFLAGS= "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
-
-class ConfigurationSection(object):
-    def __init__(self, section, items=[]):
-        self.items = items
-        
-        if section == "general":
-            self.defaults = GeneralDefaults
-        elif section == "build":
-            self.defaults = BuildDefaults
-        else:
-            e = "No section by name '%s'" % section
-            raise ConfigException, e
-
-        self.section = section
-
-    def __getattr__(self, attr):
-        if not self.items:
-            if hasattr(self.defaults, attr):
-                return getattr(self.defaults, attr)
-            return ""
-        for item in self.items:
-            if item[0] == attr:
-                return item[1]
-        return ""
-
-# should we move this class to its own module?
-class ConfigurationFile(object):
-    def __init__(self, filePath):
-        parser = ConfigParser()
-        self.filePath = filePath
-        #/etc/pisi/pisi.conf
-        #[general]
-        #destinationDirectory = /tmp
-        #[build]
-        #host = i686-pc-linux-gnu
-        #CFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
-        #CXXFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
-
-        parser.read(self.filePath)
-
-        try:
-            generalitems = parser.items("general")
-        except NoSectionError:
-            generalitems = []
-        self.general = ConfigurationSection("general", generalitems)
-
-        try:
-            builditems = parser.items("build")
-        except NoSectionError:
-            builditems = []
-        self.build = ConfigurationSection("build", builditems)
-
+from configfile import ConfigurationFile
 
 class Config(object):
     """Config Singleton"""
