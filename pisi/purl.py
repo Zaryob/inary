@@ -24,6 +24,7 @@ class PUrl(object):
     def getUri(self):
         if self.__uri:
             return self.__uri
+        return None
 
     def setUri(self, uri):
         # (scheme, location, path, params, query, fragment)
