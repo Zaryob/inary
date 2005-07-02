@@ -23,7 +23,7 @@ def configure(parameters = ''):
                 --with-qt-dir=%s \
                 --enable-mt \
                 --with-qt-libraries=%s \
-                %s' % (kde_dir, config.flags.host, qt_dir, qt_libdir, parameters)
+                %s' % (kde_dir, glb.flags.host, qt_dir, qt_libdir, parameters)
 
     os.system(configure_string)
 
