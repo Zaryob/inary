@@ -12,14 +12,13 @@ import os
 from ConfigParser import ConfigParser, NoSectionError
 from constants import const
 
-class ConfigurationSection:
-    def __init__(self, items=None):
+class ConfigurationSection(object):
+    def __init__(self, items=[]):
         self.items = items
 
     def __getattr__(self, attr):
         if not self.items:
             return ""
-
         for item in self.items:
             if item[0] == attr:
                 return item[1]
@@ -47,6 +46,12 @@ class ConfigurationFile(object):
             self.general = ConfigurationSection()
             self.build = ConfigurationSection()
 
+class Defaults:
+    destinationDirectory = os.getcwd()+"/tmp" # FOR ALPHA
+
+    host = "i686-pc-linux-gnu"
+    CFLAGS = "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
+    CXXFLAGS= "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
 
 class Config(object):
     """Config Singleton"""
@@ -58,7 +63,10 @@ class Config(object):
 
             self.destdir = self.conf.general.destinationDirectory
             if not self.destdir:
-                self.destdir = os.getcwd()+"/tmp" # FOR ALPHA
+                self.destdir = Defaults.destinationDirectory
+
+            if not self.conf.build.host:
+                self.conf.build.host = Defaults.host
 
         # directory accessor functions
         # here is how it goes
