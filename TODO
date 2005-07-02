@@ -40,8 +40,8 @@ Legend:
  + write specfile (eray)
  + file locking for database access [not tested!] (eray)
  / verify metodlari
-   / SpecFile
-   / MetaData
+   + SpecFile
+   + MetaData
    - Files
    - Index
  - incremental build
@@ -54,10 +54,11 @@ Legend:
    - pisi-upgrade
    / svn-like CLI
  - configuration file
-   - define the format of the configuration file
-   - extend Config module (config.py) accordingly
+   + define the format of the configuration file
+   + extend Config module (config.py) accordingly
+   - define configuration keys
  + implement file uri
-   / extend the modules dealing with files accordingly
+   + extend the modules dealing with files accordingly
  - multi-package dependency analysis (eray)
    - design a package operation planner
    - install operation
@@ -68,6 +69,7 @@ Legend:
  - implement missing unit tests
    + sourcedb
    - package
+   - configuration file
  - multi-architecture support
    - design decisions
    - extend XML specs to support that
