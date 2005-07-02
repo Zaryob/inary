@@ -63,13 +63,16 @@ class ConfigurationFile(object):
         parser.read(self.filePath)
 
         try:
-            self.general = ConfigurationSection("general",
-                                                parser.items("general"))
-            self.build = ConfigurationSection("build",
-                                              parser.items("build"))
+            generalitems = parser.items("general")
         except NoSectionError:
-            self.general = ConfigurationSection("general")
-            self.build = ConfigurationSection("build")
+            generalitems = []
+        self.general = ConfigurationSection("general", generalitems)
+
+        try:
+            builditems = parser.items("build")
+        except NoSectionError:
+            builditems = []
+        self.build = ConfigurationSection("build", builditems)
 
 
 class Config(object):
