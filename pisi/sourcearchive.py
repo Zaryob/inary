@@ -5,7 +5,6 @@
 
 from os.path import join
 from os import access, R_OK
-import sys
 
 
 # pisi modules
@@ -14,7 +13,6 @@ from purl import PUrl
 from ui import ui
 from config import config
 from fetcher import fetchUrl, displayProgress
-import context
 import util
 
 
