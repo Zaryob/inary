@@ -4,7 +4,6 @@
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 #           Baris Metin <baris@uludag.org.tr
 
-import xml.dom.minidom as mdom
 
 class XmlError(Exception):
     pass
