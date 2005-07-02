@@ -10,7 +10,7 @@ import zipfile
 #pisi modules
 import util
 
-class ArchiveError:
+class ArchiveError(Exception):
     pass
 
 class ArchiveBase(object):
