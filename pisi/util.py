@@ -186,8 +186,8 @@ def get_file_hashes(top, excludePrefixes=None, removePrefix=None):
             if [e for e in excludePrefixes if p.startswith(e)]:
                 continue
 
-        for file in files:
-            f = os.path.join(root, file)
+        for fname in files:
+            f = os.path.join(root, fname)
             yield (f, sha1_file(f))
 
 def copy_dir(src, dest):
