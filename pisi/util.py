@@ -143,13 +143,15 @@ def check_dir(dir):
     if not os.access(dir, os.F_OK):
         os.makedirs(dir)
 
-def clean_dir(top):
+def clean_dir(path):
     "Remove all content of a directory (top)"
-    for root, dirs, files in os.walk(top, topdown=False):
-        for name in files:
-            os.remove(os.path.join(root, name))
-        for name in dirs:
-            os.rmdir(os.path.join(root, name))
+#     for root, dirs, files in os.walk(top, topdown=False):
+#         for name in files:
+#             os.remove(os.path.join(root, name))
+#         for name in dirs:
+#             os.rmdir(os.path.join(root, name))
+# don't reimplement the wheel
+    shutil.rmtree(path)
 
 def dir_size(dir):
     """ calculate the size of files under a dir
