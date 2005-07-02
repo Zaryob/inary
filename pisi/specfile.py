@@ -32,10 +32,6 @@ class PackagerInfo:
         return True
 
 class PatchInfo:
-    def __init__(self, filenm, ctype):
-        self.filename = filenm
-        self.compressionType = ctype
-
     def __init__(self, node):
         self.filename = getNodeText(node)
         self.compressionType = getNodeAttribute(node, "compressionType")
