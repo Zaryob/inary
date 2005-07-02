@@ -192,7 +192,7 @@ def get_file_hashes(top, excludePrefixes=None, removePrefix=None):
 
 def copy_dir(src, dest):
     """copy source dir to destination dir recursively"""
-    raise UtilError("not implemented")
+    shutil.copytree(src, dest)
 
 def sha1_file(filename):
     """calculate sha1 hash of filename"""
