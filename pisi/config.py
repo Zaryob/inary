@@ -12,12 +12,35 @@ import os
 from ConfigParser import ConfigParser, NoSectionError
 from constants import const
 
+class ConfigException(Exception):
+    pass
+
+class GeneralDefaults:
+    destinationDirectory = os.getcwd()+"/tmp" # FOR ALPHA
+
+class BuildDefaults:
+    host = "i686-pc-linux-gnu"
+    CFLAGS = "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
+    CXXFLAGS= "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
+
 class ConfigurationSection(object):
-    def __init__(self, items=[]):
+    def __init__(self, section, items=[]):
         self.items = items
+        
+        if section == "general":
+            self.defaults = GeneralDefaults
+        elif section == "build":
+            self.defaults = BuildDefaults
+        else:
+            e = "No section by name '%s'" % section
+            raise ConfigException, e
+
+        self.section = section
 
     def __getattr__(self, attr):
         if not self.items:
+            if hasattr(self.defaults, attr):
+                return getattr(self.defaults, attr)
             return ""
         for item in self.items:
             if item[0] == attr:
@@ -40,18 +63,14 @@ class ConfigurationFile(object):
         parser.read(self.filePath)
 
         try:
-            self.general = ConfigurationSection(parser.items("general"))
-            self.build = ConfigurationSection(parser.items("build"))
+            self.general = ConfigurationSection("general",
+                                                parser.items("general"))
+            self.build = ConfigurationSection("build",
+                                              parser.items("build"))
         except NoSectionError:
-            self.general = ConfigurationSection()
-            self.build = ConfigurationSection()
+            self.general = ConfigurationSection("general")
+            self.build = ConfigurationSection("build")
 
-class Defaults:
-    destinationDirectory = os.getcwd()+"/tmp" # FOR ALPHA
-
-    host = "i686-pc-linux-gnu"
-    CFLAGS = "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
-    CXXFLAGS= "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
 
 class Config(object):
     """Config Singleton"""
@@ -60,13 +79,7 @@ class Config(object):
 
         def __init__(self):
             self.conf = ConfigurationFile("/etc/pisi/pisi.conf")
-
             self.destdir = self.conf.general.destinationDirectory
-            if not self.destdir:
-                self.destdir = Defaults.destinationDirectory
-
-            if not self.conf.build.host:
-                self.conf.build.host = Defaults.host
 
         # directory accessor functions
         # here is how it goes
