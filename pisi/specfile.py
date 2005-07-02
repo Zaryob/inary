@@ -8,7 +8,6 @@
 #           Baris Metin <baris@uludag.org.tr
 
 # standard python modules
-import xml.dom.minidom
 from os.path import basename
 
 # pisi modules
