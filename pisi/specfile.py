@@ -43,6 +43,10 @@ class PatchInfo:
             node.setAttribute("compressionType", self.compressionType)
         return node
 
+    def verify(self):
+        if not self.filename: return False
+        return True
+
 class DepInfo:
     def __init__(self, node):
         self.package = getNodeText(node).strip()
@@ -57,6 +61,10 @@ class DepInfo:
         if self.versionTo:
             node.setAttribute("versionTo", self.versionTo)
         return node
+
+    def verify(self):
+        if not self.package: return False
+        return True
 
 class UpdateInfo:
     def __init__(self, node):
@@ -158,6 +166,10 @@ class SourceInfo:
         if not self.packager.verify(): return False
         for update in self.history:
             if not update.verify(): return False
+        for patch in self.patches:
+            if not patch.verify(): return False
+        for dep in self.buildDeps:
+            if not dep.verify(): return False
 
         return True
 
@@ -208,6 +220,10 @@ class PackageInfo(object):
 
         for path in self.paths:
             if not path.verify(): return False
+        for dep in self.installDeps:
+            if not dep.verify(): return False
+        for dep in self.runtimeDeps:
+            if not dep.verify(): return False
         return True
 
 class SpecFile(XmlFile):
