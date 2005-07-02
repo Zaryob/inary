@@ -5,13 +5,13 @@
 import os
 
 # actions api modules
-from config import config
+from actionglobals import glb
 
 def configure(parameters = ''):
     ''' FIXME: Düzgün hale getirilecek '''
     ''' parameters = '--with-nls --with-libusb --with-something-usefull '''
-    dirs = config.dirs
-    flags = config.flags
+    dirs = glb.dirs
+    flags = glb.flags
 
     configure_string = './configure --prefix=/%s \
                 --host=%s \
@@ -38,10 +38,10 @@ def make():
 def install():
     ''' FIXME: Düzgün hale getirilecek '''
     ''' dir_suffix = /var/tmp/pisi/ _paket_adı_ /image/ '''
-    dirs = config.dirs
+    dirs = glb.dirs
 
     dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
-        config.const.install_dir_suffix
+        glb.const.install_dir_suffix
 
     install_string = 'make prefix=%(prefix)s/%(defaultprefix)s \
                 datadir=%(prefix)s/%(data)s \

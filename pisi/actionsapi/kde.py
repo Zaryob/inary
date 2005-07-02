@@ -5,7 +5,7 @@
 import os
 
 # actions api modules
-from config import config
+from actionglobals import glb
 
 # Global variables for compiling KDE programs...
 kde_dir = os.getenv('KDEDIR')
@@ -36,7 +36,7 @@ def install():
     ''' dir_suffix = /var/tmp/pisi/ _paket_adı_ /image/ '''
 
     dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
-        config.const.install_dir_suffix
+        glb.const.install_dir_suffix
     
     install_string = 'make prefix=%s/%s install' % (dir_suffix, kde_dir)
     os.system(install_string)

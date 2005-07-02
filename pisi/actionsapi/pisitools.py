@@ -8,11 +8,11 @@ import gzip
 from pisi.util import copy_file
 
 # actions api modules
-from config import config
+from actionglobals import glb
 
 def dodoc(*documentList):
-    env = config.env
-    dirs = config.dirs
+    env = glb.env
+    dirs = glb.dirs
 
     srcTag = env.src_name + '-' \
         + env.src_version + '-' \
@@ -38,8 +38,8 @@ def dosed(filename, *sedPattern):
     for pattern in sedPattern:
         os.system('sed -i -e \'' + pattern + '\' ' +  filename)
 
-def dosbin(filename, destination=config.dirs.sbin):
-    env = config.env
+def dosbin(filename, destination=glb.dirs.sbin):
+    env = glb.env
 
     try:
         os.makedirs(os.path.join(env.install_dir, destination))
@@ -53,8 +53,8 @@ def dosbin(filename, destination=config.dirs.sbin):
                                      os.path.basename(filename)))
 
 def doman(filename):
-    env = config.env
-    dirs = config.dirs
+    env = glb.env
+    dirs = glb.dirs
 
     man, postfix = filename.split('.')
     destDir = os.path.join(env.install_dir, dirs.man, "man" + postfix)
