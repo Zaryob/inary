@@ -26,7 +26,7 @@ class CLI:
         sys.stdout.flush()
 
     def debug(self, msg):
-        if showDebug:
+        if self.showDebug:
             sys.stdout.write(msg)
             sys.stdout.flush()
 
