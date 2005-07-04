@@ -2,18 +2,64 @@
 # -*- coding: utf-8 -*-
 
 # python standard library
-from os.path import basename
+from os.path import basename, dirname, join
 import sys
 from optparse import OptionParser
 
 # pisi modules
 sys.path.append("./lib")
-import pisi.context
 import pisi.util
+from pisi.ui import ui
+from pisi.context import BuildContext
+from pisi.config import config
+from pisi.constants import const
 from pisi.build import PisiBuild, PisiBuildError
+from pisi.purl import PUrl
+from pisi.fetcher import fetchUrl
+
+
+class RemoteSource(object):
+    def __init__(self, url):
+        self.url = url
+        self.location = dirname(self.url.uri)
+
+        pkgname = basename(dirname(self.url.path()))
+        self.dest = join(config.tmp_dir(), pkgname)
+        
+        self.fetch_pspec()
+        pspec = join(self.dest, self.url.filename())
+        self.ctx = BuildContext(pspec)
+
+        self.fetch_actionsfile()
+        self.fetch_patches()
+        self.fetch_additionalFiles()
+
+    def fetch_pspec(self):
+        self.fetchFile(self.url.uri)
+
+    def fetch_actionsfile(self):
+        actionsuri = join(self.location, const.actions_file)
+        self.fetchFile(actionsuri)
+        
+    def fetch_patches(self):
+        spec = self.ctx.spec
+        for patch in spec.source.patches:
+            patchuri = join(self.location, 
+                            const.files_dir, patch.filename)
+            self.fetchFile(patchuri, const.files_dir)
+
+    def fetch_additionalFiles(self):
+        # TODO: bu özelliği şimdilik eklemedim. specfile.py'ye
+        # AdditionalFiles desteği eklemek lazım önce. Yarın yaparım.
+        pass
+
+    def fetchFile(self, uri, appendDest=""):
+        ui.info("Fetching %s\n" % uri)
+        dest = join(self.dest, appendDest)
+        fetchUrl(uri, dest)
+
 
 def main():
-
     # common options
 
     usage = "usage: %prog [options] package-name.pspec"
@@ -24,9 +70,14 @@ def main():
     (options, args) = parser.parse_args()
 
     # pspec(PISI Spec) to be used for package
-    for pspec in args:
+    for pspecfile in args:
         # What we need to do first is create a context with our specfile
-        ctx = pisi.context.BuildContext(pspec)
+        url = PUrl(pspecfile)
+        if url.isRemoteFile():
+            rs = RemoteSource(url)
+            ctx = rs.ctx
+        else:
+            ctx = BuildContext(url.uri)
         # don't do the real job here. this is just a CLI!
         pb = PisiBuild(ctx)
         pb.build()
