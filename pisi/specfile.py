@@ -35,6 +35,9 @@ class PatchInfo:
     def __init__(self, node):
         self.filename = getNodeText(node)
         self.compressionType = getNodeAttribute(node, "compressionType")
+        self.level = getNodeAttribute(node, "level")
+        if not self.level:
+            self.level = 0
 
     def elt(self, xml):
         node = xml.newNode("Patch")
