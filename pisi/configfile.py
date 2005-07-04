@@ -6,7 +6,7 @@
 # having an INI like format like below.
 #
 #[general]
-#destinationDirectory = /tmp
+#destinationdirectory = /tmp
 #
 #[build]
 #host = i686-pc-linux-gnu
@@ -22,7 +22,7 @@ class ConfigException(Exception):
 
 class GeneralDefaults:
     """Default values for [general] section"""
-    destinationDirectory = os.getcwd()+"/tmp" # FOR ALPHA
+    destinationdirectory = os.getcwd()+"/tmp" # FOR ALPHA
 
 class BuildDefaults:
     """Default values for [build] section"""
