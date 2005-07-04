@@ -75,13 +75,13 @@
     <Package>
         <Name>bash</Name>
         <Files>
-	  <File fileType="config">/etc</File>
-	  <File fileType="binary">/bin</File>
-	  <File fileType="binary">/usr/bin</File>
-	  <File fileType="doc">/usr/share/doc</File>
-	  <File fileType="doc">/usr/share/info</File>
-	  <File fileType="doc">/usr/share/man</File>
-	  <File fileType="localedata">/usr/share/locale</File>
+	  <Path fileType="config">/etc</Path>
+	  <Path fileType="binary">/bin</Path>
+	  <Path fileType="binary">/usr/bin</Path>
+	  <Path fileType="doc">/usr/share/doc</Path>
+	  <Path fileType="doc">/usr/share/info</Path>
+	  <Path fileType="doc">/usr/share/man</Path>
+	  <Path fileType="localedata">/usr/share/locale</Path>
         </Files>
   </Package>
 
