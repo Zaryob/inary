@@ -10,7 +10,7 @@ from actionglobals import glb
 # Global variables for compiling KDE programs...
 kde_dir = os.getenv('KDEDIR')
 qt_dir = os.getenv('QTDIR')
-qt_libdir = os.path.join(os.getenv('QTDIR') + 'lib/')
+qt_libdir = os.path.join(os.getenv('QTDIR') + '/lib/')
 
 def configure(parameters = ''):
     ''' FIXME: Düzgün hale getirilecek '''
