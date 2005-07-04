@@ -9,12 +9,11 @@ from pisi.actionsapi import pisitools
 def setup():
     gnuconfig.gnuconfig_update()
 
-    pisitools.dosed("s:-lcurses:-lncurses:", "configure")
+    pisitools.dosed("configure", "s:-lcurses:-lncurses:")
 
     autotools.configure("--with-nls --disable-profiling --without-gnu-malloc")
 
-    pisitools.dosed("/^TERMCAP_LIB/s:-lncurses:-Wl,-Bstatic -lncurses -Wl,-Bdynamic:",
-                    "Makefile")
+    pisitools.dosed("Makefile", "/^TERMCAP_LIB/s:-lncurses:-Wl,-Bstatic -lncurses -Wl,-Bdynamic:")
 
 def build():
     autotools.make()
