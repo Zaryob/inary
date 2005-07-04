@@ -124,6 +124,7 @@ class PisiBuild:
         os.environ.update(evn)
 
     def compileActionScript(self):
+        """Compiles actions.py and sets the actionLocals and actionGlobals"""
         specdir = os.path.dirname(self.ctx.pspecfile)
         scriptfile = os.path.join(specdir, const.actions_file)
         try:
