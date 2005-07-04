@@ -18,7 +18,7 @@
     <Description>FAM, the File Alteration Monitor</Description>
     <Archive type="targz" sha1sum="6c2316f02acf89a41c42ffc3d7fd9cf5eada83a8">ftp://oss.sgi.com/projects/fam/download/stable/fam-2.7.0.tar.gz</Archive>
     <Patches>
-        <Patch>fam-2.7.0-dnotify.patch</Patch>
+        <Patch level="1">fam-2.7.0-dnotify.patch</Patch>
     </Patches>
     <BuildDependencies>
       <Dependency versionFrom="1.8"> make </Dependency>
