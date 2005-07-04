@@ -236,7 +236,6 @@ def do_patch(sourceDir, patchFile, level):
     check_file(patchFile)
     level = int(level)
     cmd = "patch -p%d < %s" % (level, patchFile)
-    print "patch command", cmd
     p = os.popen(cmd)
     o = p.readlines()
     retval = p.close()
