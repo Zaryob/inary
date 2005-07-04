@@ -1,0 +1,13 @@
+--- expr.c
++++ expr.c	2004-07-30 16:39:48.000000000 +0200
+@@ -406,8 +406,8 @@
+   value = expcond ();
+   if (curtok == EQ || curtok == OP_ASSIGN)
+     {
+-      int special, op;
+-      intmax_t lvalue;
++      int special, op = -1;
++      intmax_t lvalue = 0;
+ 
+       special = curtok == OP_ASSIGN;
+ 

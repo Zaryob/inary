@@ -1,0 +1,19 @@
+--- lib/readline/display.c.orig	2004-11-08 13:08:07.591703936 +0200
++++ lib/readline/display.c	2004-11-08 13:08:25.111040592 +0200
+@@ -941,6 +941,7 @@
+ 	  /* nleft == number of characters in the line buffer between the
+ 	     start of the line and the cursor position. */
+ 	  nleft = c_pos - pos;
++#if 0
+ 
+ 	  /* Since _rl_backspace() doesn't know about invisible characters in the
+ 	     prompt, and there's no good way to tell it, we compensate for
+@@ -954,6 +955,8 @@
+ 		_rl_last_c_pos = nleft;
+ 	    }
+ 
++#endif
++
+ 	  if (MB_CUR_MAX > 1 && rl_byte_oriented == 0)
+ 	    _rl_move_cursor_relative (nleft, &invisible_line[pos]);
+ 	  else if (nleft != _rl_last_c_pos)

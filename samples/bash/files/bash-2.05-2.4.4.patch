@@ -1,0 +1,54 @@
+--- jobs.c
++++ jobs.c	Wed May  2 18:20:31 2001
+@@ -1166,6 +1166,15 @@
+       pid_t mypid;
+ 
+       mypid = getpid ();
++
++      if (interrupt_state)
++	{
++	  struct timeval tv;
++	  struct rusage   rx;
++	  (void) gettimeofday(&tv, NULL);
++	  (void) getrusage(RUSAGE_SELF, &rx);
++	}
++
+ #if defined (BUFFERED_INPUT)
+       /* Close default_buffered_input if it's > 0.  We don't close it if it's
+ 	 0 because that's the file descriptor used when redirecting input,
+--- quit.h
++++ quit.h	Wed May  2 17:38:34 2001
+@@ -21,8 +21,12 @@
+ #if !defined (_QUIT_H_)
+ #define _QUIT_H_
+ 
++#define __need_sig_atomic_t
++#include <signal.h>
++#undef  __need_sig_atomic_t
++
+ /* Non-zero means SIGINT has already ocurred. */
+-extern int interrupt_state;
++extern volatile sig_atomic_t interrupt_state;
+ 
+ extern void throw_to_top_level ();
+ 
+--- sig.c
++++ sig.c	Wed May  2 17:36:17 2001
+@@ -57,7 +57,7 @@
+ extern int interactive, interactive_shell, login_shell, startup_state;
+ 
+ /* Non-zero after SIGINT. */
+-int interrupt_state;
++volatile sig_atomic_t interrupt_state = 0;
+ 
+ /* The environment at the top-level R-E loop.  We use this in
+    the case of error return. */
+@@ -69,7 +69,7 @@
+ #endif /* JOB_CONTROL */
+ 
+ /* When non-zero, we throw_to_top_level (). */
+-int interrupt_immediately = 0;
++volatile sig_atomic_t interrupt_immediately = 0;
+ 
+ static void initialize_shell_signals ();
+ 

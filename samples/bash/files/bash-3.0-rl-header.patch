@@ -1,0 +1,10 @@
+--- lib/readline/readline.h.orig	2004-11-05 23:05:22.918840936 +0200
++++ lib/readline/readline.h	2004-11-05 23:05:47.657080152 +0200
+@@ -33,6 +33,7 @@
+ #  include "keymaps.h"
+ #  include "tilde.h"
+ #else
++#  include <stdio.h>
+ #  include <readline/rlstdc.h>
+ #  include <readline/rltypedefs.h>
+ #  include <readline/keymaps.h>

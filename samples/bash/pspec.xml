@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>bash</Name>
+        <Homepage>http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>category</IsA>
+        <PartOf>component</PartOf>
+        <Summary xml:lang="en">The standard GNU Bourne again shell</Summary>
+        <Description xml:lang="en">The standard GNU Bourne again shell</Description>
+        <Archive type="targz" sha1sum="3acf1ff4910d4bc863620c7533cbf4858370017b">ftp://ftp.gnu.org/pub/gnu/bash/bash-3.0.tar.gz</Archive>
+        <Patches>
+		<Patch compressionType="bz2" level="1">bash-3.0-gentoo.diff.bz2</Patch>
+		<Patch>bash30-001</Patch>
+		<Patch>bash30-002</Patch>
+		<Patch>bash30-003</Patch>
+		<Patch>bash30-004</Patch>
+		<Patch>bash30-005</Patch>
+		<Patch>bash30-006</Patch>
+		<Patch>bash30-007</Patch>
+		<Patch>bash30-008</Patch>
+		<Patch>bash30-009</Patch>
+		<Patch>bash30-010</Patch>
+		<Patch>bash30-011</Patch>
+		<Patch>bash30-012</Patch>
+		<Patch>bash30-013</Patch>
+		<Patch>bash30-014</Patch>
+		<Patch>bash30-015</Patch>
+		<Patch>bash30-016</Patch>
+		<Patch level="1">bash-3.0-etc-inputrc.patch</Patch>
+		<Patch level="1">bash-3.0-darwin-conn.patch</Patch>
+		<Patch level="1">bash-3.0-afs.patch</Patch>
+		<Patch>bash-3.0-crash.patch</Patch>
+		<Patch level="1">bash-3.0-jobs.patch</Patch>
+		<Patch level="1">bash-3.0-manpage.patch</Patch>
+		<Patch level="1">bash-3.0-pwd.patch</Patch>
+		<Patch>bash-3.0-read-e-segfault.patch</Patch>
+		<Patch level="1">bash-3.0-ulimit.patch</Patch>
+		<Patch>bash-3.0-read-builtin-pipe.patch</Patch>
+		<Patch>bash-3.0-trap-fg-signals.patch</Patch>
+		<Patch>bash-2.05-2.4.4.patch</Patch>
+		<Patch>bash-2.05a-security.patch</Patch>
+		<Patch>bash-3.0-evalexp.patch</Patch>
+		<Patch level="1">bash-3.0-locale.patch</Patch>
+		<Patch>bash-3.0-nfs_redir.patch</Patch>
+		<Patch>bash-3.0-utf8.patch</Patch>
+		<Patch>bash-3.0-prompt.patch</Patch>
+		<Patch level="1">bash-3.0-update-multibyte-ifs.patch</Patch>
+		<Patch level="1">bash-3.0-random.patch</Patch>
+		<Patch level="1">bash-3.0-privmode.patch</Patch>
+		<Patch>bash-3.0-rl-setenv.patch</Patch>
+		<Patch>bash-3.0-rl-del-backspace-policy.patch</Patch>
+		<Patch>bash-3.0-rl-header.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+	  <Dependency versionFrom="5.2">ncurses</Dependency>
+	  <Dependency>patch</Dependency>
+        </BuildDependencies>
+        <History>
+            <Update>
+                <Date>2005-07-04</Date>
+                <Version>3.0</Version>
+                <Release>11</Release>
+            </Update>
+        </History>
+    </Source>
+
+    <Package>
+        <Name>bash</Name>
+        <Files>
+	  <File fileType="config">/etc</File>
+	  <File fileType="binary">/bin</File>
+	  <File fileType="binary">/usr/bin</File>
+	  <File fileType="doc">/usr/share/doc</File>
+	  <File fileType="doc">/usr/share/info</File>
+	  <File fileType="doc">/usr/share/man</File>
+	  <File fileType="localedata">/usr/share/locale</File>
+        </Files>
+  </Package>
+
+</PISI>
+

@@ -1,0 +1,91 @@
+--- builtins/fc.def
++++ builtins/fc.def	2001/08/28 11:20:53
+@@ -371,6 +371,9 @@
+     {
+       unlink (fn);
+       free (fn);
++#ifdef DEBFIX
++      free (command);
++#endif
+       return (EXECUTION_FAILURE);
+     }
+ 
+@@ -383,6 +386,9 @@
+   /* Turn on the `v' flag while fc_execute_file runs so the commands
+      will be echoed as they are read by the parser. */
+   begin_unwind_frame ("fc builtin");
++#ifdef DEBFIX
++  add_unwind_protect ((Function *)xfree, command);
++#endif
+   add_unwind_protect ((Function *)xfree, fn);
+   add_unwind_protect (unlink, fn);
+   unwind_protect_int (echo_input_at_read);
+--- variables.c.orig	Wed Aug 21 12:10:57 2002
++++ variables.c	Wed Aug 21 12:14:18 2002
+@@ -1035,6 +1035,7 @@
+   return v;      
+ }
+      
++#if !defined(linux)
+ /* The random number seed.  You can change this by setting RANDOM. */
+ static unsigned long rseed = 1;
+ static int last_random_value;
+@@ -1060,6 +1061,21 @@
+   last_random_value = 0;
+ }
+ 
++#else
++
++static int last_sbrand_pid;
++
++static int brand ()
++{
++  return random() & 32767;
++}
++
++static void sbrand (unsigned long seed)
++{
++  srandom(seed);
++}
++#endif
++
+ static SHELL_VAR *
+ assign_random (self, value, unused)
+      SHELL_VAR *self;
+@@ -1075,6 +1091,7 @@
+ {
+   int rv;
+ 
++#if !defined(linux)
+   /* Reset for command and process substitution. */
+   if (subshell_environment)
+     sbrand (rseed + getpid() + NOW);
+@@ -1082,6 +1099,18 @@
+   do
+     rv = brand ();
+   while (rv == last_random_value);
++#else
++  if (subshell_environment)
++    {
++      int mypid = getpid();
++      if (mypid != last_sbrand_pid)
++	{
++	  last_sbrand_pid = mypid;
++	  sbrand (mypid + NOW);
++	}
++    }
++  rv = brand();
++#endif
+   return rv;
+ }
+ 
+@@ -1093,7 +1122,9 @@
+   char *p;
+ 
+   rv = get_random_number ();
++#if !defined(linux)
+   last_random_value = rv;
++#endif
+   p = itos (rv);
+ 
+   FREE (value_cell (var));
