@@ -124,33 +124,30 @@ class PisiBuild:
         os.environ.update(evn)
 
     def compileActionScript(self):
+        specdir = os.path.dirname(self.ctx.pspecfile)
+        scriptfile = os.path.join(specdir, const.actions_file)
         try:
-            specdir = os.path.dirname(self.ctx.pspecfile)
-            self.actionScript = open(os.path.join(specdir,
-                                                  const.actions_file)).read()
+            localSymbols = globalSymbols = {}
+            buf = open(scriptfile).read()
+            exec compile(buf, "error", "exec") in localSymbols, globalSymbols
         except IOError, e:
-            ui.error("Action Script: %s\n" % e)
-            return
-
-        localSymbols = globalSymbols = {}
-        try:
-            exec compile(self.actionScript, "error", "exec") in \
-                                             localSymbols, globalSymbols
+            ui.error("Unable to read Action Script (%s): %s\n" %(scriptfile,e))
+            sys.exit(1)
         except SyntaxError, e:
-            ui.error ("Error : %s\n" % e)
-            return
+            ui.error ("SyntaxError in Action Script (%s): %s\n" %(scriptfile,e))
+            sys.exit(1)
+
         self.actionLocals = localSymbols
         self.actionGlobals = globalSymbols
         
     def pkgSrcDir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
-        join = os.path.join
         try:
             srcdir = self.actionGlobals['WorkDir']
         except KeyError:
             srcdir = self.spec.source.name + "-" + self.spec.source.version
                     
-        path = join(self.ctx.pkg_work_dir(), srcdir)
+        path = os.path.join(self.ctx.pkg_work_dir(), srcdir)
         if not os.path.exists(path):
             ui.error ("No such file or directory: %s\n" % e)
             sys.exit(1)
