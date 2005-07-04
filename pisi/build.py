@@ -144,11 +144,11 @@ class PisiBuild:
     def pkgSrcDir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
         try:
-            srcdir = self.actionGlobals['WorkDir']
+            workdir = self.actionGlobals['WorkDir']
         except KeyError:
-            srcdir = self.spec.source.name + "-" + self.spec.source.version
+            workdir = self.spec.source.name + "-" + self.spec.source.version
                     
-        path = os.path.join(self.ctx.pkg_work_dir(), srcdir)
+        path = os.path.join(self.ctx.pkg_work_dir(), workdir)
         if not os.path.exists(path):
             ui.error ("No such file or directory: %s\n" % e)
             sys.exit(1)
