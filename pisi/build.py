@@ -150,7 +150,7 @@ class PisiBuild:
                     
         path = os.path.join(self.ctx.pkg_work_dir(), workdir)
         if not os.path.exists(path):
-            ui.error ("No such file or directory: %s\n" % e)
+            ui.error ("No such file or directory: %s\n" % path)
             sys.exit(1)
         return path
 
