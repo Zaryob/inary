@@ -81,8 +81,7 @@ class PisiBuild:
         self.sourceArchive.unpack()
         ui.info(" unpacked (%s)\n" % self.ctx.pkg_work_dir())
 
-        self.applyPatches()
-
+        # Compile actions.py
         try:
             specdir = os.path.dirname(self.ctx.pspecfile)
             self.actionScript = open("/".join([specdir, \
@@ -90,10 +89,6 @@ class PisiBuild:
         except IOError, e:
             ui.error ("Action Script: %s\n" % e)
             return 
-
-        #we'll need this our working directory after actionscript
-        #finished its work in the work_dir
-        curDir = os.getcwd()
 
         localSymbols = globalSymbols = {}
         # Set needed evironment variables for actions API
@@ -104,8 +99,16 @@ class PisiBuild:
         except SyntaxError, e:
             ui.error ("Error : %s\n" % e)
             return 
-        # Go to source directory
-        self.gotoSrcDir(globalSymbols)
+        # Get the source directory
+        self.srcDir = self.pkgSrcDir(globalSymbols)
+
+        # apply patches from specfile
+        self.applyPatches()
+
+        #we'll need this our working directory after actionscript
+        #finished its work in the work_dir
+        curDir = os.getcwd()
+        os.chdir(self.srcDir)
 
         #  Run configure, build and install phase
         self.configureSource(localSymbols)
@@ -128,13 +131,14 @@ class PisiBuild:
             patchFile = os.path.join(files_dir, patch.filename)
             if patch.compressionType:
                 patchFile = util.uncompress(patchFile,
+                                            compressType = patch.compressionType,
                                             targetDir=self.ctx.tmp_dir())
 
             ui.info("Applying patch: %s\n" % patch.filename)
-            util.do_patch(self.ctx.pkg_work_dir(), patchFile)
+            util.do_patch(self.srcDir, patchFile, level=patch.level)
 
     def setEnvorinment(self):
-        # put the evironment variables for actions API to use.
+        """Sets the environment variables for actions API to use"""
         evn = {
             "PKG_DIR": self.ctx.pkg_dir(),
             "WORK_DIR": self.ctx.pkg_work_dir(),
@@ -145,19 +149,18 @@ class PisiBuild:
             }
         os.environ.update(evn)
         
-    def gotoSrcDir(self, globalSymbols):
-        """Changes the current working directory to package_work_dir() for
-        actions.py to do its work."""
+    def pkgSrcDir(self, globalSymbols):
+        """Returns the real path of WorkDir for an unpacked archive."""
         if 'WorkDir' in globalSymbols:
             path = os.path.join(self.ctx.pkg_work_dir(), globalSymbols['WorkDir'])
         else:
             path = os.path.join(self.ctx.pkg_work_dir(), self.spec.source.name \
                 + "-" + self.spec.source.version)        
-        try:
-            os.chdir(path)
-        except OSError, e:
+            
+        if not os.path.exists(path):
             ui.error ("No such file or directory: %s\n" % e)
-            sys.exit()
+            sys.exit(1)
+        return path
 
     def configureSource(self, localSymbols):
         """Calls the corresponding function in actions.py. This time its
