@@ -66,6 +66,12 @@ class PisiBuild:
         self.spec = self.ctx.spec
         self.sourceArchive = SourceArchive(self.ctx)
 
+        self.setEnvorinmentVars()
+
+        self.actionLocals = None
+        self.actionGlobals = None
+        self.srcDir = None
+
     def build(self):
         """Build the package in one shot."""
         ui.info("Building PISI source package: %s\n" % self.spec.source.name)
@@ -81,43 +87,86 @@ class PisiBuild:
         self.sourceArchive.unpack()
         ui.info(" unpacked (%s)\n" % self.ctx.pkg_work_dir())
 
-        # Compile actions.py
-        try:
-            specdir = os.path.dirname(self.ctx.pspecfile)
-            self.actionScript = open("/".join([specdir, \
-                const.actions_file])).read()
-        except IOError, e:
-            ui.error ("Action Script: %s\n" % e)
-            return 
+        self.compileActionScript()
+        self.srcDir = self.pkgSrcDir()
 
-        localSymbols = globalSymbols = {}
-        # Set needed evironment variables for actions API
-        self.setEnvorinment()
-        try:
-            exec compile(self.actionScript , "error", "exec") in localSymbols, \
-                globalSymbols
-        except SyntaxError, e:
-            ui.error ("Error : %s\n" % e)
-            return 
-        # Get the source directory
-        self.srcDir = self.pkgSrcDir(globalSymbols)
-
-        # apply patches from specfile
         self.applyPatches()
 
-        #we'll need this our working directory after actionscript
-        #finished its work in the work_dir
+        # we'll need our working directory after actionscript
+        # finished its work in the archive source directory.
         curDir = os.getcwd()
         os.chdir(self.srcDir)
 
         #  Run configure, build and install phase
-        self.configureSource(localSymbols)
-        self.buildSource(localSymbols)
-        self.installSource(localSymbols)
+        ui.info("Setting up source...\n")
+        self.runActionFunction(const.setup_func)
+        ui.info("Building source...\n")
+        self.runActionFunction(const.build_func)
+        ui.info("Intalling...\n")
+        # install function is mandatory!
+        self.runActionFunction(const.install_func, True)
 
         os.chdir(curDir)
+
         # after all, we are ready to build/prepare the packages
         self.buildPackages()
+
+    def setEnvorinmentVars(self):
+        """Sets the environment variables for actions API to use"""
+        evn = {
+            "PKG_DIR": self.ctx.pkg_dir(),
+            "WORK_DIR": self.ctx.pkg_work_dir(),
+            "INSTALL_DIR": self.ctx.pkg_install_dir(),
+            "SRC_NAME": self.spec.source.name,
+            "SRC_VERSION": self.spec.source.version,
+            "SRC_RELEASE": self.spec.source.release
+            }
+        os.environ.update(evn)
+
+    def compileActionScript(self):
+        try:
+            specdir = os.path.dirname(self.ctx.pspecfile)
+            self.actionScript = open("/".join([specdir, \
+                                               const.actions_file])).read()
+        except IOError, e:
+            ui.error("Action Script: %s\n" % e)
+            return
+
+        localSymbols = globalSymbols = {}
+        try:
+            exec compile(self.actionScript , "error", "exec") in \
+                                             localSymbols, globalSymbols
+        except SyntaxError, e:
+            ui.error ("Error : %s\n" % e)
+            return
+        self.actionLocals = localSymbols
+        self.actionGlobals = globalSymbols
+        
+    def pkgSrcDir(self):
+        """Returns the real path of WorkDir for an unpacked archive."""
+        if 'WorkDir' in self.actionGlobals:
+            path = os.path.join(self.ctx.pkg_work_dir(),
+                                self.actionGlobals['WorkDir'])
+        else:
+            path = os.path.join(self.ctx.pkg_work_dir(), 
+                                self.spec.source.name + "-" + \
+                                self.spec.source.version)
+            
+        if not os.path.exists(path):
+            ui.error ("No such file or directory: %s\n" % e)
+            sys.exit(1)
+        return path
+
+    def runActionFunction(self, func, mandatory=False):
+        """Calls the corresponding function in actions.py. 
+
+        If mandatory parameter is True, and function is not present in
+        actionLocals PisiBuildError will be raised."""
+        if func in self.actionLocals:
+            self.actionLocals[func]()
+        else:
+            if mandatory:
+                PisiBuildError, "unable to call function from actions: %s" %func
 
     def solveBuildDependencies(self):
         """pre-alpha: fail if dependencies not satisfied"""
@@ -137,66 +186,6 @@ class PisiBuild:
             ui.info("Applying patch: %s\n" % patch.filename)
             util.do_patch(self.srcDir, patchFile, level=patch.level)
 
-    def setEnvorinment(self):
-        """Sets the environment variables for actions API to use"""
-        evn = {
-            "PKG_DIR": self.ctx.pkg_dir(),
-            "WORK_DIR": self.ctx.pkg_work_dir(),
-            "INSTALL_DIR": self.ctx.pkg_install_dir(),
-            "SRC_NAME": self.spec.source.name,
-            "SRC_VERSION": self.spec.source.version,
-            "SRC_RELEASE": self.spec.source.release
-            }
-        os.environ.update(evn)
-        
-    def pkgSrcDir(self, globalSymbols):
-        """Returns the real path of WorkDir for an unpacked archive."""
-        if 'WorkDir' in globalSymbols:
-            path = os.path.join(self.ctx.pkg_work_dir(), globalSymbols['WorkDir'])
-        else:
-            path = os.path.join(self.ctx.pkg_work_dir(), self.spec.source.name \
-                + "-" + self.spec.source.version)        
-            
-        if not os.path.exists(path):
-            ui.error ("No such file or directory: %s\n" % e)
-            sys.exit(1)
-        return path
-
-    def configureSource(self, localSymbols):
-        """Calls the corresponding function in actions.py. This time its
-        const.setup_func which sets up the source tree for building.
-
-        setup_func is optional in actions.py. If its present it will
-        be called, if not nothing will be done."""
-        func = const.setup_func
-        if func in localSymbols:
-            ui.info("Configuring %s...\n" % self.spec.source.name)
-            localSymbols[func]()
-
-    def buildSource(self, localSymbols):
-        """Calls the corresponding function in actions.py. This time its
-        const.build_func which builds the source.
-
-        build_func is optional in actions.py. If its present it will
-        be called, if not nothing will be done."""
-        func = const.build_func
-        if func in localSymbols:
-            ui.info("Building %s...\n" % self.spec.source.name)
-            localSymbols[func]()
-
-    def installSource(self, localSymbols):
-        """Calls the corresponding function in actions.py. This time its
-        const.install_func which will install the build source.
-
-        install_func is _mandatory_ in actions.py. If its present it will
-        be called, if not package building process will _fail_."""
-        func = const.install_func
-        ui.info("Installing %s...\n" % self.spec.source.name)
-        if func in localSymbols:
-            localSymbols[func]()
-        else:
-            raise PisiBuildError, "install function is not defined in actions.py!"
-        
     def genMetaDataXml(self, package):
         """Generate the metadata.xml file for build source.
 
