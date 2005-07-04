@@ -126,15 +126,15 @@ class PisiBuild:
     def compileActionScript(self):
         try:
             specdir = os.path.dirname(self.ctx.pspecfile)
-            self.actionScript = open("/".join([specdir, \
-                                               const.actions_file])).read()
+            self.actionScript = open(os.path.join(specdir,
+                                                  const.actions_file)).read()
         except IOError, e:
             ui.error("Action Script: %s\n" % e)
             return
 
         localSymbols = globalSymbols = {}
         try:
-            exec compile(self.actionScript , "error", "exec") in \
+            exec compile(self.actionScript, "error", "exec") in \
                                              localSymbols, globalSymbols
         except SyntaxError, e:
             ui.error ("Error : %s\n" % e)
@@ -144,13 +144,12 @@ class PisiBuild:
         
     def pkgSrcDir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
+        join = os.path.join
         if 'WorkDir' in self.actionGlobals:
-            path = os.path.join(self.ctx.pkg_work_dir(),
-                                self.actionGlobals['WorkDir'])
+            path = join(self.ctx.pkg_work_dir(),self.actionGlobals['WorkDir'])
         else:
-            path = os.path.join(self.ctx.pkg_work_dir(), 
-                                self.spec.source.name + "-" + \
-                                self.spec.source.version)
+            path = join(self.ctx.pkg_work_dir(), 
+                        self.spec.source.name + "-" + self.spec.source.version)
             
         if not os.path.exists(path):
             ui.error ("No such file or directory: %s\n" % e)
