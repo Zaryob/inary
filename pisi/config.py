@@ -18,7 +18,7 @@ class Config(object):
 
         def __init__(self):
             self.conf = ConfigurationFile("/etc/pisi/pisi.conf")
-            self.destdir = self.conf.general.destinationDirectory
+            self.destdir = self.conf.general.destinationdirectory
 
         # directory accessor functions
         # here is how it goes
