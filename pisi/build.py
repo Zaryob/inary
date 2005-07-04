@@ -145,12 +145,12 @@ class PisiBuild:
     def pkgSrcDir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
         join = os.path.join
-        if 'WorkDir' in self.actionGlobals:
-            path = join(self.ctx.pkg_work_dir(),self.actionGlobals['WorkDir'])
-        else:
-            path = join(self.ctx.pkg_work_dir(), 
-                        self.spec.source.name + "-" + self.spec.source.version)
-            
+        try:
+            srcdir = self.actionGlobals['WorkDir']
+        except KeyError:
+            srcdir = self.spec.source.name + "-" + self.spec.source.version
+                    
+        path = join(self.ctx.pkg_work_dir(), srcdir)
         if not os.path.exists(path):
             ui.error ("No such file or directory: %s\n" % e)
             sys.exit(1)
