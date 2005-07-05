@@ -11,8 +11,10 @@ from pisi.purl import PUrl
 from pisi.fetcher import fetchUrl
 
 class RemoteSource(object):
-    def __init__(self, url):
+    def __init__(self, url, username, password):
         self.url = url
+        self.username = username
+        self.password = password
         self.location = dirname(self.url.uri)
 
         pkgname = basename(dirname(self.url.path()))
@@ -50,14 +52,16 @@ class RemoteSource(object):
     def fetchFile(self, uri, appendDest=""):
         ui.info("Fetching %s\n" % uri)
         dest = join(self.dest, appendDest)
-        fetchUrl(uri, dest)
+        fetchUrl(uri, dest,
+                 username=self.username,
+                 password=self.password)
 
 
-def build(pspecfile):
+def build(pspecfile, username=None, password=None):
     # What we need to do first is create a context with our specfile
     url = PUrl(pspecfile)
     if url.isRemoteFile():
-        rs = RemoteSource(url)
+        rs = RemoteSource(url, username, password)
         ctx = rs.ctx
     else:
         ctx = BuildContext(url.uri)

@@ -24,9 +24,11 @@ def displayProgress(pd):
         (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
     ui.info(out)
 
-def fetchUrl(url, dest, percentHook=None):
+def fetchUrl(url, dest, username=None, password=None, percentHook=None):
     fetch = Fetcher(url, dest)
     fetch.percentHook = percentHook
+    if username and password:
+        fetch.setAuthInfo(username, password)
     fetch.fetch()
     if percentHook:
         ui.info('\n')
