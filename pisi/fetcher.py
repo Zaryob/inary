@@ -128,7 +128,7 @@ class Fetcher:
         except HTTPException, e:
             self.err(('(%s): %s') % (e.__class__.__name__, e))
 
-        if not headers is None and not headers.has_key('Content-Length'):
+        if headers and not headers.has_key('Content-Length'):
             totalsize = 0 # could not get the totalsize of file
         else: totalsize = int(headers['Content-Length'])
 
