@@ -7,7 +7,6 @@ import bsddb.dbshelve as shelve
 
 d = shelve.open( sys.argv[1] )
 
-#print 'list serial time, db size ', len(d) 
 for (k, data) in d.iteritems():
     print k, data
 
