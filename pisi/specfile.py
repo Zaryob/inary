@@ -31,6 +31,27 @@ class PackagerInfo:
         if not self.email: return False
         return True
 
+class AdditionalFileInfo:
+    def __init__(self, node):
+        self.filepath = getNodeText(node)
+        self.target = getNodeAttribute(node, "target")
+        self.permission = getNodeAttribute(node, "permission")
+        self.owner = getNodeAttribute(node, "owner")
+
+    def elt(self, xml):
+        node = xml.newNode("AdditionalFile")
+        xml.addText(node, self.filepath)
+        node.setAttribute("target", self.target)
+        if self.permission:
+            node.setAttribute("permission", self.permission)
+        if self.owner:
+            node.setAttribute("owner", self.owner)
+
+    def verify(self):
+        if not self.filepath: return False
+        if not self.target: return False
+        return True
+
 class PatchInfo:
     def __init__(self, node):
         self.filename = getNodeText(node)
