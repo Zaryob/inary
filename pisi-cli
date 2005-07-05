@@ -22,23 +22,29 @@ Use \"%prog help <subcommand>\" for help on a specific subcommand.
 PISI Package Manager
 """
 
+def commonopts(parser):
+    parser.add_option("-D", "--destdir", action="store")
+    parser.add_option("-u", "--username", action="store")
+    parser.add_option("-p", "--password", action="store")
+    parser.add_option("-P", action="store_true", dest="getpass", default=False,
+                      help="Get password from the command line")
+    parser.add_option("-v", "--verbose", action="store_true",
+                      dest="verbose", default=False,
+                      help="detailed output")
+    parser.add_option("-d", "--debug", action="store_true",
+                      default=True, help="show debugging information")
+    parser.add_option("-n", "--dry-run", action="store_true", default=False,
+                      help = "do not perform any action, just show what\
+                      would be done")
+    return parser
+
 class PisiCLI(object):
     def __init__(self):
-        parser = OptionParser(usage=usage,version="%prog " + pisi.__version__)
+        parser = OptionParser(usage=usage,
+                              version="%prog " + pisi.__version__)
+        parser.allow_interspersed_args = False
+        parser = commonopts(parser)
 
-        parser.add_option("-D", "--destdir", action="store")
-        parser.add_option("-u", "--username", action="store")
-        parser.add_option("-p", "--password", action="store")
-        parser.add_option("-P", action="store_true", dest="getpass", default=False,
-                          help="Get password from the command line")
-        parser.add_option("-v", "--verbose", action="store_true",
-                          dest="verbose", default=False,
-                          help="detailed output")
-        parser.add_option("-d", "--debug", action="store_true",
-                          default=True, help="show debugging information")
-        parser.add_option("-n", "--dry-run", action="store_true", default=False,
-                          help = "do not perform any action, just show what\
-                          would be done")
         (options, args) = parser.parse_args()
         
         self.parser = parser
