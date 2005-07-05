@@ -7,9 +7,19 @@ from optparse import OptionParser
 import pisi
 from pisi.cli import buildhelper, installhelper, indexhelper
 
-usage = """%prog COMMAND [ARGUMENTS] [options]
+usage = """%prog <subcommand> [options] [arguments]
 
-Where commands are bla bla...
+Subcommands:
+
+help
+build
+install
+index
+updatedb
+
+Use \"%prog help <subcommand>\" for help on a specific subcommand.
+
+PISI Package Manager
 """
 
 class PisiCLI(object):
@@ -30,6 +40,7 @@ class PisiCLI(object):
                           help = "do not perform any action, just show what\
                           would be done")
         (options, args) = parser.parse_args()
+        
         self.parser = parser
 
         try:
@@ -91,7 +102,6 @@ class PisiCLI(object):
 
         indexfile = self.args[0]
         indexhelper.updateindex(indexfile)
-
 
     def runCommand(self):
         commands = {
