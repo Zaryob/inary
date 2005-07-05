@@ -24,11 +24,9 @@ def displayProgress(pd):
         (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
     ui.info(out)
 
-def fetchUrl(url, dest, username=None, password=None, percentHook=None):
+def fetchUrl(url, dest, percentHook=None):
     fetch = Fetcher(url, dest)
     fetch.percentHook = percentHook
-    if username and password:
-        fetch.setAuthInfo(username, password)
     fetch.fetch()
     if percentHook:
         ui.info('\n')
@@ -47,8 +45,6 @@ class Fetcher:
         self.percent = 0
         self.rate = 0.0
         self.percentHook = None
-        self.username = ''
-        self.passwd = ''
 
     def fetch (self):
         """Return value: Fetched file's full path.."""
@@ -135,18 +131,11 @@ class Fetcher:
         dest = open(os.path.join(self.filedest, self.url.filename()) , "w")
         self.doGrab(fileObj, dest, totalsize)
 
-    def setAuthInfo(self, username='', passwd=''):
-        if self.url.isLocalFile():
-            self.err('No auth info needed for local files')
-        self.username = username
-        self.passwd = passwd
-        
     def formatRequest(self, request):
-        if self.username:
-            request.add_header('Authorization', 'Basic %s' % 
-                              (encodestring('%s:%s' % 
-                                           (self.username, self.passwd))))
-            
+        authinfo = self.url.authInfo()
+        if authinfo:
+            enc = encodestring("%s:%s" % authinfo)
+            request.add_header('Authorization', 'Basic %s' % enc)
         return request
 
     def err (self, error):

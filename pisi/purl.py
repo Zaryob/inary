@@ -21,6 +21,8 @@ class PUrl(object):
             self.__fragment = None
             self.__uri = None
 
+        self.__authinfo = None
+
     def getUri(self):
         if self.__uri:
             return self.__uri
@@ -48,6 +50,14 @@ class PUrl(object):
     def isRemoteFile(self):
         return not self.isLocalFile()
         
+    def setAuthInfo(self, authTuple):
+        if not isinstance(authTuple, tuple):
+            raise Exception, "setAuthInfo needs a tuple (user, pass)"
+        self.__authinfo = authTuple
+
+    def authInfo(self):
+        return self.__authinfo
+
     def scheme(self):
         return self.__scheme
 
