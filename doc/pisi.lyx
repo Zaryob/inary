@@ -587,6 +587,9 @@ level
 \series default 
  ile yamanýn patch komutuna -p ile verilebilen seviyesi verilebilir, level
  verilmez ise 0 olarak kabul edilir.
+ Örnek: 
+\newline 
+<Patch compressionType="gz" level="1">popt-1.7-uclibc.patch.gz</Patch>
 \end_deeper 
 \layout Itemize
 
@@ -606,23 +609,35 @@ Kaynak ile gelmeyen ama paketin çalýþmasý, ek özellik kazanmasý v.s.
 
 
 \series bold 
-Target: 
+AdditionalFile:
 \series default 
-Dosyanýn nereye konulacaðýný belirtir.
-\layout Itemize
-
+ Files dizini altýndan alýnacak dosyayý belirtir.
+ 
+\series bold 
+target
+\series default 
+ attribute dosyanýn nereye konulacaðýný belirtir, zorunludur.
 
 \series bold 
-Permission: 
+ permission 
 \series default 
-Dosyanýn hangi haklarla saklanacaðýný belirtir.
-\layout Itemize
-
+attribute varsa dosyanýn hangi haklarla saklanacaðýný belirtir.
 
 \series bold 
-Owner: 
+ owner
 \series default 
-Dosyanýn sahip/grup bilgilerini belirtir.
+ attribute varsa dosyanýn sahip/grup bilgilerini belirtir.
+ Örnek:
+\newline 
+<AdditionalFile target=
+\begin_inset Quotes erd
+\end_inset 
+
+/etc/bash/
+\begin_inset Quotes erd
+\end_inset 
+
+>bashrc</AdditionalFile>
 \end_deeper 
 \layout Itemize
 
@@ -646,29 +661,29 @@ Dependency
 \series bold 
 Name
 \series default 
-: Baðýmlýlýk duyulan pakedin adý.
+: (text) Baðýmlýlýk duyulan pakedin adý.
 \layout Itemize
 
 
 \series bold 
 Version:
 \series default 
- Baðýmlý olunan tek bir sürüm numarasýný bildirir.
+ (attribute) Baðýmlý olunan tek bir sürüm numarasýný bildirir.
 \layout Itemize
 
 
 \series bold 
 VersionFrom:
 \series default 
- Bu sürüm numarasýndan sonraki tüm sürüm numaralarýna baðýmlýlýðý tarif
- eder.
+ (attribute) Bu sürüm numarasýndan sonraki tüm sürüm numaralarýna baðýmlýlýðý
+ tarif eder.
 \layout Itemize
 
 
 \series bold 
 VersionTo:
 \series default 
- Bu sürüm numaralarýna kadar olan baðýmlýlýðý tarif eder.
+ (attribute) Bu sürüm numaralarýna kadar olan baðýmlýlýðý tarif eder.
 \end_deeper 
 \end_deeper 
 \layout Itemize
