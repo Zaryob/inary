@@ -8,6 +8,7 @@
 # python standard library modules
 import urllib2
 import os
+from base64 import encodestring
 
 # pisi modules
 import util
@@ -44,6 +45,8 @@ class Fetcher:
         self.percent = 0
         self.rate = 0.0
         self.percentHook = None
+        self.username = ''
+        self.passwd = ''
 
     def fetch (self):
         """Return value: Fetched file's full path.."""
@@ -110,7 +113,12 @@ class Fetcher:
         from httplib import HTTPException
 
         try:
-            fileObj = urllib2.urlopen(self.url.uri)
+            request = urllib2.Request(self.url.uri)
+            if self.username:
+                request.add_header('Authorization', 'Basic %s' % 
+                                   encodestring('%s:%s' % 
+                                   (self.username, self.passwd)))
+            fileObj = urllib2.urlopen(request)
             headers = fileObj.info()
     
         except ValueError, e:
