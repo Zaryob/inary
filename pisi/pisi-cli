@@ -1,0 +1,110 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+import sys
+from optparse import OptionParser
+
+import pisi
+from pisi.cli import buildhelper, installhelper, indexhelper
+
+usage = """%prog COMMAND [ARGUMENTS] [options]
+
+Where commands are bla bla...
+"""
+
+class PisiCLI(object):
+    def __init__(self):
+        parser = OptionParser(usage=usage,version="%prog " + pisi.__version__)
+
+        parser.add_option("-D", "--destdir", action="store")
+        parser.add_option("-u", "--username", action="store")
+        parser.add_option("-p", "--password", action="store")
+        parser.add_option("-P", action="store_true", dest="getpass", default=False,
+                          help="Get password from the command line")
+        parser.add_option("-v", "--verbose", action="store_true",
+                          dest="verbose", default=False,
+                          help="detailed output")
+        parser.add_option("-d", "--debug", action="store_true", default=True)
+        parser.add_option("-n", "--dry-run", action="store_true", default=False,
+                          help = "do not perform any action, just show what\
+                          would be done")
+        (options, args) = parser.parse_args()
+        self.parser = parser
+
+        try:
+            self.cmd = args[0]
+            self.args = args[1:]
+            self.options = options
+        except IndexError:
+            print usage
+            sys.exit(1)
+
+        self.authInfo = None
+        self.checkAuthInfo()
+
+    def checkAuthInfo(self):
+        username = self.options.username
+        password = self.options.password
+        if not username and not password:
+            return # No authentication
+        elif username and password:
+            self.authInfo = (username, password)
+            return
+
+        # TODO: yapılandırma dosyasını da kontrol et. Belki orada
+        # tanımlanmıştır?
+
+
+        if username and self.options.getpass:
+            from getpass import getpass
+            password = getpass("Password: ")
+            self.authInfo = (username, password)
+        return
+            
+
+    # FIX: her komut için ayrı help
+    def help(self, command=""):
+        if not self.args:
+            print usage
+            return
+
+        self.parser.print_help()
+
+    def install(self):
+        if not self.args:
+            self.help("install")
+        for arg in self.args:
+            installhelper.install(arg)
+
+    def build(self):
+        if not self.args:
+            self.help("build")
+
+        for arg in self.args:
+            buildhelper.build(arg, self.authInfo)
+
+    def updateindex(self):
+        """Update the repos db with the given index file (pisi-index.xml)"""
+        if len(self.args) != 1:
+            self.help("updateindex")
+
+        indexfile = self.args[0]
+        indexhelper.updateindex(indexfile)
+
+
+    def runCommand(self):
+        commands = {
+            "help": self.help,
+            "install": self.install,
+            "build": self.build,
+            "updateindex": self.updateindex
+            }
+
+        for key in commands.keys():
+            if key == self.cmd:
+                commands[key]()
+                break
+
+if __name__ == "__main__":
+    cli = PisiCLI()
+    cli.runCommand()
