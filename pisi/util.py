@@ -151,7 +151,8 @@ def clean_dir(path):
 #         for name in dirs:
 #             os.rmdir(os.path.join(root, name))
 # don't reimplement the wheel
-    shutil.rmtree(path)
+    if os.path.exists(path):
+        shutil.rmtree(path)
 
 def dir_size(dir):
     """ calculate the size of files under a dir
