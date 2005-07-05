@@ -5,7 +5,7 @@ import sys
 from optparse import OptionParser
 
 import pisi
-from pisi.cli import buildhelper, installhelper
+from pisi.cli import buildhelper, installhelper, indexhelper
 
 usage = """
 Detaylı help içeriği. Komutların teker teker açıklamaları vs...
@@ -35,7 +35,13 @@ def build(options, args):
         buildhelper.build(arg)
 
 def updateindex(options, args):
-    pass
+    """Update the repos db with the given index file (pisi-index.xml)"""
+    if len(args) != 1:
+        help(options, "updateindex")
+
+    indexfile = args[0]
+    indexhelper.updateindex(indexfile)
+
 
 def main():
     parser = OptionParser(usage=usage,version="%prog " + pisi.__version__)
