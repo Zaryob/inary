@@ -30,7 +30,7 @@ def main():
 
     if len(args) > 1:
 	    print usage
-	    raise ArgError, "pisi-build error takes at most one argument"
+	    raise ArgError, "pisi-index error takes at most one argument"
     elif len(args) == 1:
     	repo_dir = args[0]
     else:
