@@ -16,7 +16,7 @@ class ArchiveFileTestCase(unittest.TestCase):
 #     pass
 
     def testUnpackTar(self):
-        ctx = context.BuildContext("samples/popt/pspec.xml")
+        ctx = context.BuildContext("tests/popt/pspec.xml")
 
         achv = sourcearchive.SourceArchive(ctx)
     

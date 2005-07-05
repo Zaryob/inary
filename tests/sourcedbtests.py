@@ -9,7 +9,7 @@ from pisi import context
 class SourceDBTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.ctx = context.BuildContext("samples/popt/pspec.xml")
+        self.ctx = context.BuildContext("tests/popt/pspec.xml")
         
     def testAdd(self):
         sourcedb.add_source(self.ctx.spec.source)

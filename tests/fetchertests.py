@@ -10,7 +10,7 @@ from pisi import purl
 
 class FetcherTestCase(unittest.TestCase):
     def setUp(self):
-        self.ctx = context.BuildContext("samples/popt/pspec.xml")
+        self.ctx = context.BuildContext("tests/popt/pspec.xml")
         self.url = purl.PUrl(self.ctx.spec.source.archiveUri)
         self.destpath = config.config.archives_dir()
         self.fetch = fetcher.Fetcher(self.url, self.destpath)
