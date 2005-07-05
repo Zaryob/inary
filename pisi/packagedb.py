@@ -40,6 +40,9 @@ class PackageDB(object):
         name = str(package_info.name)
         self.d[name] = package_info
 
+    def clear(self):
+        self.d.clear()
+
     def remove_package(self, name):
         name = str(name)
         del self.d[name]
