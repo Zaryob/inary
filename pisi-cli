@@ -1,0 +1,71 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+import sys
+from optparse import OptionParser
+
+import pisi
+from pisi.cli import buildhelper
+
+usage = """
+Detaylı help içeriği. Komutların teker teker açıklamaları vs...
+usage: %prog [options] package-name.pspec
+"""
+
+def help(options, args):
+    if not args:
+        print usage
+        return
+    elif isinstance(args, str):
+        args = [args]
+
+    for a in args:
+        print "helping about command", a
+
+def install(options, args):
+    pass
+
+def build(options, args):
+    if not args:
+        help(options, "build")
+    for arg in args:
+        buildhelper.build(arg)
+
+def updateindex(options, args):
+    pass
+
+def main():
+    parser = OptionParser(usage=usage,version="%prog " + pisi.__version__)
+
+    parser.add_option("-D", "--destdir", action="store")
+    parser.add_option("-v", "--verbose", action="store_true",
+                      dest="verbose", default=False,
+                      help="detailed output")
+    parser.add_option("-d", "--debug", action="store_true", default=True)
+    parser.add_option("-n", "--dry-run", action="store_true", default=False,
+                      help = "do not perform any action, just show what\
+                      would be done")
+
+    (options, args) = parser.parse_args()
+    
+    try:
+        cmd = args[0]
+        args = args[1:]
+    except IndexError:
+        print usage
+        sys.exit(1)
+
+    commands = {
+        "help": help,
+        "install": install,
+        "build": build,
+        "updateindex": updateindex
+        }
+
+    for key in commands.keys():
+        if key == cmd:
+            commands[key](options, args)
+            break
+
+if __name__ == "__main__":
+    main()
