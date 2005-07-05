@@ -62,7 +62,7 @@ class PatchInfo:
 
     def elt(self, xml):
         node = xml.newNode("Patch")
-        node.setAttribute("filename", self.filename)
+        xml.addText(node, self.filename)
         if self.compressionType:
             node.setAttribute("compressionType", self.compressionType)
         return node
