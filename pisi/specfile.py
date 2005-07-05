@@ -213,7 +213,7 @@ class PackageInfo(object):
         self.description = getNodeText(node, "Description")
         self.isa = map(getNodeText, getAllNodes(node, "IsA"))
         self.partof = getNodeText(node, "PartOf")
-        self.license = getNodeText(node, "License")
+        self.license = map(getNodeText, getAllNodes(node, "License"))
         iDepElts = getAllNodes(node, "InstallDependencies/Dependency")
         self.installDeps = [DepInfo(x) for x in iDepElts]
         rtDepElts = getAllNodes(node, "RuntimeDependencies/Dependency")
@@ -227,6 +227,8 @@ class PackageInfo(object):
         xml.addTextNodeUnder(node, "Name", self.name)
         xml.addTextNodeUnder(node, "Summary", self.summary)
         xml.addTextNodeUnder(node, "Description", self.description)
+        for l in self.license:
+            xml.addTextNodeUnder(node, "License", l)
         for isa in self.isa:
             xml.addTextNodeUnder(node, "IsA", isa)
         if self.partof:
