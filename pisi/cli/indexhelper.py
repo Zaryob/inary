@@ -3,8 +3,17 @@
 from pisi.index import Index
 from pisi.ui import ui
 
-def updateindex(indexfile):
-    ui.info('* Updating index from index file: ' + indexfile + '\n')
+def index(repo_dir = '.'):
+    ui.info('* Building index of PISI files under ' + repo_dir + '\n')
+
+    index = Index()
+    index.index(repo_dir)
+    index.write('pisi-index.xml')
+    
+    ui.info('* Index file written')
+
+def updatedb(indexfile):
+    ui.info('* Updating DB from index file: ' + indexfile + '\n')
 
     index = Index()
     index.read(indexfile)
