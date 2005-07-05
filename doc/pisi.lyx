@@ -376,7 +376,8 @@ PSPEC (PÝSÝ SPECification)
 \series default 
  dosyasý paketin oluþturulmasý için gerekli olan temel bilgiyi tanýmlar.
  Oluþturulacak paketin ne olduðu, kaynaðý, kim tarafýndan paketlendiði,
- hangi baþka paketlere ne tür baðýmlýlýklar içerdiði gibi bilgileri içerir.
+ kaynaða uygulanan yamalar, hangi baþka paketlere ne tür baðýmlýlýklar içerdiði
+ gibi bilgileri içerir.
 \layout Standard
 
 Bir 
@@ -384,16 +385,30 @@ Bir
 PSPEC
 \series default 
  dosyasýndan, dolayýsý ile bir kaynaktan birden fazla paket oluþturulabilir.
- Örneðin kcontrol paketi kdebase-sürüm.no.tar.gz kaynaðýndan oluþturulabilecek
- yalnýzca bir pakettir.
+ Örneðin kcontrol paketi kdebase-kaynaksürümü.paketsürümü.tar.gz kaynaðýndan
+ oluþturulabilecek yalnýzca bir pakettir.
 \layout Standard
 
 Dosya biçimi XML'dir ve aþaðýdaki etiketleri içerir.
  Her PSPEC dosyasýnda tüm etiketlerin bulunmasý zorunlu deðildir.
- Bulunmasý zorunlu olan etiketler aþaðýda (Zorunlu) ile belirtilirler.
+ Bulunmasý zorunlu olan etiketler aþaðýda (*) ile belirtilirler.
+\layout Standard
+
+PSPEC dosyalarý PSPEC deposunda pakete ait dizinde 
+\series bold 
+pspec.xml
+\series default 
+ adý ile tutulurlar.
+\layout Standard
+
+Her PSPEC dosyasý PISI etiketi (tag) altýnda bir Source ve 
+\bar under 
+en az
+\bar default 
+ bir Package olmak üzere iki ana bölüm içermek zorundadýrlar.
 \layout Paragraph
 
-Pisi
+PISI
 \layout Subparagraph
 
 Source
@@ -403,7 +418,7 @@ Source
 \series bold 
 Name
 \series default 
-: (Zorunlu) Uygulamanýn adý.
+: (*) Uygulamanýn adý.
 \layout Itemize
 
 
@@ -417,7 +432,7 @@ Uygulamanýn web sitesinin URL'sini belirtir.
 \series bold 
 Summary:
 \series default 
- (Zorunlu) Tek satýrlýk açýklayýcý bilgi.
+ (*) Tek satýrlýk açýklayýcý bilgi.
  Çoklu dil desteðine sahiptir.
 \layout Itemize
 
@@ -425,7 +440,7 @@ Summary:
 \series bold 
 Description:
 \series default 
- (Zorunlu)
+ (*)
 \series bold 
  
 \series default 
@@ -512,7 +527,7 @@ IsA
 \series bold 
 Packager:
 \series default 
- (Zorunlu)
+ (*)
 \series bold 
  
 \series default 
@@ -524,14 +539,14 @@ Paketi oluþturan kiþilerin adý/soyadý ve e-posta adresi belirtir.
 \series bold 
 Name:
 \series default 
- (Zorunlu) Paket geliþtiricisinin adý ve soyadý.
+ (*) Paket geliþtiricisinin adý ve soyadý.
 \layout Itemize
 
 
 \series bold 
 Email:
 \series default 
- (Zorunlu) Paket geliþtiricisinin e-posta adresi.
+ (*) Paket geliþtiricisinin e-posta adresi.
 \end_deeper 
 \layout Itemize
 
@@ -539,14 +554,14 @@ Email:
 \series bold 
 License
 \series default 
-: (Zorunlu) Uygulamanýn lisansýný belirtir (GPL, BSD, vb).
+: (*) Uygulamanýn lisansýný belirtir (GPL, BSD, vb).
 \layout Itemize
 
 
 \series bold 
 Archive:
 \series default 
- (Zorunlu) Uygulamanýn orjinal kaynak kodunun bulunduðu URL'yi belirtir.
+ (*) Uygulamanýn orjinal kaynak kodunun bulunduðu URL'yi belirtir.
  
 \series bold 
 archType
@@ -556,6 +571,7 @@ archType
 sha1sum
 \series default 
 , sha1 ile alýnmýþ özet deðerini belirtir.
+ Her iki attribute (archType ve sha1sum) zorunludur.
 \layout Itemize
 
 
@@ -653,38 +669,23 @@ BuildDependencies
 \series bold 
 Dependency
 \series default 
-: Bir baðýmlýlýk tanýmlar.
-\begin_deeper 
-\layout Itemize
-
-
+: Bir baðýmlýlýðý tanýmlar.
+ Burada bahsedilen baðýmlýlýk paket baðýmlýlýðý olabilir (TODO: Comar baðýmlýlýk
+larýný da bir þekilde ifade etmek gerekiyordu.
+ Bu belgede daha önce vardý sanýrým çýkartmýþýz).
+ 
 \series bold 
-Name
+versionFrom
 \series default 
-: (text) Baðýmlýlýk duyulan pakedin adý.
-\layout Itemize
-
-
+ ve 
 \series bold 
-Version:
+versionTo
 \series default 
- (attribute) Baðýmlý olunan tek bir sürüm numarasýný bildirir.
-\layout Itemize
-
-
-\series bold 
-VersionFrom:
-\series default 
- (attribute) Bu sürüm numarasýndan sonraki tüm sürüm numaralarýna baðýmlýlýðý
- tarif eder.
-\layout Itemize
-
-
-\series bold 
-VersionTo:
-\series default 
- (attribute) Bu sürüm numaralarýna kadar olan baðýmlýlýðý tarif eder.
-\end_deeper 
+ attribute bilgileri ile paketin hangi sürüm numarasýna baðýmlý olduðu ifade
+ edilebilir.
+ Örnek:
+\newline 
+<Dependency versionFrom="1.8">make</Dependency>
 \end_deeper 
 \layout Itemize
 
@@ -692,7 +693,7 @@ VersionTo:
 \series bold 
 History
 \series default 
-: (Zorunlu) Pakete yapýlan güncellemelerin bir listesini verir.
+: (*) Pakete yapýlan güncellemelerin bir listesini verir.
  
 \series bold 
 History
@@ -719,7 +720,7 @@ Release
 \series bold 
 Update
 \series default 
-: (Zorunlu) Bir güncellemeyi tarif eder.
+: (*) Bir güncellemeyi tarif eder.
 \begin_deeper 
 \layout Itemize
 
@@ -727,49 +728,50 @@ Update
 \series bold 
 Type:
 \series default 
- (Zorunlu) Güncellemenin tipini belirtir.
- (Security, Bug, Enhancement v.s)
+ Güncellemenin tipini belirtir (Security, Bug, Enhancement, Normal v.s).
+ Eðer bu etiket tanýmlý deðilse tip Normal olarak kabul edilir.
 \layout Itemize
 
 
 \series bold 
 Date
 \series default 
-: (Zorunlu) Güncellemenin tarihi.
+: (*) Güncellemenin tarihi.
 \layout Itemize
 
 
 \series bold 
 Version:
 \series default 
- (Zorunlu) Uygulamanýn sürüm numarasý.
+ (*) Uygulamanýn sürüm numarasý.
 \layout Itemize
 
 
 \series bold 
 Release:
 \series default 
- (Zorunlu) Pakedin sürüm numarasý.
+ (*) Pakedin sürüm numarasý.
 \end_deeper 
 \end_deeper 
 \layout Subparagraph
 
 Package:
 \series medium 
- (Zorunlu)
+ (*)
 \series default 
  
 \series medium 
 Uygulamadan oluþturulacak bir pakedi tanýmlar.
- 
+ Her PSPEC dosyasý en az bir 
 \series default 
 Package
 \series medium 
- içerisindeki bazý taglar 
-\series default 
-PÝSÝ
+ etiketi içermek zorundadýr.
+\layout Subparagraph
+
+Package
 \series medium 
- içerisindekileri tekrarlayacaklardýr.
+ içerisindeki bazý taglar Source içerisindekileri tekrarlayabilir.
  Bu tekrarlamalarýn bazýlarý override edilirken (üzerine yazýlýrken) bazýlarý
  merge (birleþtirilecek) edilecek.
 \layout Itemize
@@ -845,37 +847,7 @@ RuntimeDependencies
 Dependency
 \series default 
 : Bir baðýmlýlýk tanýmlar.
-\begin_deeper 
-\layout Itemize
-
-
-\series bold 
-Name
-\series default 
-: Baðýmlýlýk duyulan pakedin adý.
-\layout Itemize
-
-
-\series bold 
-Version:
-\series default 
- Baðýmlý olunan tek bir sürüm numarasýný bildirir.
-\layout Itemize
-
-
-\series bold 
-VersionFrom:
-\series default 
- Bu sürüm numarasýndan sonraki tüm sürüm numaralarýna baðýmlýlýðý tarif
- eder.
-\layout Itemize
-
-
-\series bold 
-VersionTo:
-\series default 
- Bu sürüm numaralarýna kadar olan baðýmlýlýðý tarif eder.
-\end_deeper 
+ BuildDependency ile ayný yapýdadýr
 \end_deeper 
 \layout Itemize
 
@@ -893,37 +865,7 @@ InstallDependencies
 Dependency
 \series default 
 : Bir baðýmlýlýk tanýmlar.
-\begin_deeper 
-\layout Itemize
-
-
-\series bold 
-Name
-\series default 
-: Baðýmlýlýk duyulan pakedin adý.
-\layout Itemize
-
-
-\series bold 
-Version:
-\series default 
- Baðýmlý olunan tek bir sürüm numarasýný bildirir.
-\layout Itemize
-
-
-\series bold 
-VersionFrom:
-\series default 
- Bu sürüm numarasýndan sonraki tüm sürüm numaralarýna baðýmlýlýðý tarif
- eder.
-\layout Itemize
-
-
-\series bold 
-VersionTo:
-\series default 
- Bu sürüm numaralarýna kadar olan baðýmlýlýðý tarif eder.
-\end_deeper 
+ BuildDependency ile ayný yapýdadýr
 \end_deeper 
 \layout Itemize
 
@@ -931,7 +873,7 @@ VersionTo:
 \series bold 
 Files
 \series default 
-: (Zorunlu) Pakedin kurulacak dosyalarýnýn tiplerini belirlemek için kullanýlýr.
+: (*) Pakedin kurulacak dosyalarýnýn tiplerini belirlemek için kullanýlýr.
  Dosya tipleri ile ilgili bigi 
 \begin_inset LatexCommand \ref{FType}
 
@@ -945,21 +887,337 @@ Files
 \series bold 
 Path
 \series default 
- (Zorunlu)
-\begin_deeper 
-\layout Itemize
-
-
+ (*):
+\series bold 
+ 
+\series default 
+Bir dosya/dizin yolunu tarif eder.
+ Verilebilecek olan 
 \series bold 
 fileType
 \series default 
- (Zorunlu) (attribute) Bir path'in tipini belirtir.
+ attribute ise path'in tipini belirtir.
  Belge, paylaþýmlý kütüphane, çalýþtýrýlabilir, vb...
+ Eðer fileType verilmezse path tipi 
+\begin_inset Quotes eld
+\end_inset 
+
+other
+\begin_inset Quotes erd
+\end_inset 
+
+ olarak tanýmlanýr.
+ Örnek:
+\newline 
+<Path fileType="sharedLib">/usr/lib</Path>
 \end_deeper 
-\end_deeper 
+\layout Paragraph
+
+Örnek bir PSPEC Dosyasý
+\layout LyX-Code
+
+
+\size scriptsize 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+\layout LyX-Code
+
+
+\size scriptsize 
+<!DOCTYPE PSPEC SYSTEM    "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+\layout LyX-Code
+
+
+\size scriptsize 
+<PISI>
+\layout LyX-Code
+
+
+\size scriptsize 
+  <Source>
+\layout LyX-Code
+
+
+\size scriptsize 
+    <Name>popt</Name>
+\layout LyX-Code
+
+
+\size scriptsize 
+    <Homepage>http://www.rpm.org/</Homepage>
+\layout LyX-Code
+
+
+\size scriptsize 
+    <Packager>
+\layout LyX-Code
+
+
+\size scriptsize 
+      <Name>Pardus Man</Name>
+\layout LyX-Code
+
+
+\size scriptsize 
+      <Email>bilgi@uludag.org.tr</Email>
+\layout LyX-Code
+
+
+\size scriptsize 
+    </Packager>
+\layout LyX-Code
+
+
+\size scriptsize 
+    <License>As-Is</License>
+\layout LyX-Code
+
+
+\size scriptsize 
+    <IsA>library:util:optparser</IsA>
+\layout LyX-Code
+
+
+\size scriptsize 
+    <PartOf>rpm:archive</PartOf>
+\layout LyX-Code
+
+
+\size scriptsize 
+    <Summary xml:lang=
+\begin_inset Quotes erd
+\end_inset 
+
+en
+\begin_inset Quotes erd
+\end_inset 
+
+>Popt command line option parser</Summary>
+\layout LyX-Code
+
+
+\size scriptsize 
+    <Description xml:lang=
+\begin_inset Quotes erd
+\end_inset 
+
+en
+\begin_inset Quotes erd
+\end_inset 
+
+>Command line option parsing library.
+\layout LyX-Code
+
+
+\size scriptsize 
+      While it is similiar to getopt(3), it contains a number of enhancements,
+ including:
+\layout LyX-Code
+
+
+\size scriptsize 
+      1) popt is fully reentrant
+\layout LyX-Code
+
+
+\size scriptsize 
+      2) popt can parse arbitrary argv[] style arrays while getopt(2) makes
+ this quite difficult
+\layout LyX-Code
+
+
+\size scriptsize 
+      3) popt allows users to alias command line arguments
+\layout LyX-Code
+
+
+\size scriptsize 
+      4) popt provides convience functions for parsing strings into argv[]
+ style arrays
+\layout LyX-Code
+
+
+\size scriptsize 
+    </Description>
+\layout LyX-Code
+
+
+\size scriptsize 
+    <Archive type="targz" sha1sum="66f3c77b87a160951b180447f4a6dce68ad2f71b">ftp
+://ftp.rpm.org/pub/rpm/dist/rpm-4.1.x/popt-1.7.tar.gz</Archive>
+\layout LyX-Code
+
+
+\size scriptsize 
+    <Patches>
+\layout LyX-Code
+
+
+\size scriptsize 
+      <Patch compressionType="gz" level="1">popt-1.7-uclibc.patch.gz</Patch>
+\layout LyX-Code
+
+
+\size scriptsize 
+    </Patches>
+\layout LyX-Code
+
+
+\size scriptsize 
+    <BuildDependencies>
+\layout LyX-Code
+
+
+\size scriptsize 
+      <Dependency versionFrom="1.8">make</Dependency>
+\layout LyX-Code
+
+
+\size scriptsize 
+    </BuildDependencies>
+\layout LyX-Code
+
+
+\size scriptsize 
+    <History>
+\layout LyX-Code
+
+
+\size scriptsize 
+      <Update>
+\layout LyX-Code
+
+
+\size scriptsize 
+        <Date>06/14/2005</Date>
+\layout LyX-Code
+
+
+\size scriptsize 
+        <Version>1.7</Version>
+\layout LyX-Code
+
+
+\size scriptsize 
+        <Release>3</Release>
+\layout LyX-Code
+
+
+\size scriptsize 
+      </Update>
+\layout LyX-Code
+
+
+\size scriptsize 
+      <Update>
+\layout LyX-Code
+
+
+\size scriptsize 
+        <Date>06/10/2005</Date>
+\layout LyX-Code
+
+
+\size scriptsize 
+        <Version>1.7</Version>
+\layout LyX-Code
+
+
+\size scriptsize 
+        <Release>2</Release>
+\layout LyX-Code
+
+
+\size scriptsize 
+      </Update>
+\layout LyX-Code
+
+
+\size scriptsize 
+   </History>
+\layout LyX-Code
+
+
+\size scriptsize 
+  </Source>
+\layout LyX-Code
+
+\layout LyX-Code
+
+
+\size scriptsize 
+  <Package>
+\layout LyX-Code
+
+
+\size scriptsize 
+     <Name>popt</Name>
+\layout LyX-Code
+
+
+\size scriptsize 
+     <RuntimeDependencies>
+\layout LyX-Code
+
+
+\size scriptsize 
+       <Dependency>gettext</Dependency>
+\layout LyX-Code
+
+
+\size scriptsize 
+     </RuntimeDependencies>
+\layout LyX-Code
+
+
+\size scriptsize 
+     <Files>
+\layout LyX-Code
+
+
+\size scriptsize 
+       <Path fileType="sharedLib">/usr/lib</Path>
+\layout LyX-Code
+
+
+\size scriptsize 
+       <Path fileType="doc">/usr/share/doc</Path>
+\layout LyX-Code
+
+
+\size scriptsize 
+       <Path fileType="doc">/usr/share/man</Path>
+\layout LyX-Code
+
+
+\size scriptsize 
+       <Path fileType="localedata">/usr/share/locale</Path>
+\layout LyX-Code
+
+
+\size scriptsize 
+       <Path fileType="header">/usr/include/popt.h</Path>
+\layout LyX-Code
+
+
+\size scriptsize 
+     </Files>
+\layout LyX-Code
+
+
+\size scriptsize 
+  </Package>
+\layout LyX-Code
+
+
+\size scriptsize 
+</PISI>
 \layout Standard
 
-TODO: Örnek Lazým!
+Yukarýdaki örnek dosyada Package içerisinde tanýmlanmayan taglar Source
+ içerisinden alýnarak kullanýlacaktýr.
+ Bir kaynak paketten birden fazla ikili (binary) paket oluþturmak için Package
+ etiketleri farklý isimler (Name) verilerek arttýrýlabilir.
+ Paketler Files içerisinde bulunan Path taglarýna göre bölümlendirilecektir.
 \layout Subsubsection
 
 actions.py Dosyasý
@@ -997,9 +1255,75 @@ PÝSÝ
 API
 \series default 
  actionsapi adýnda sunulacaktýr.
-\layout Standard
+\layout Paragraph
 
-TODO: Örnek Lazým!
+Örnek bir actions.py dosyasý:
+\layout LyX-Code
+
+
+\size scriptsize 
+from pisi.actionsapi import gnuconfig
+\layout LyX-Code
+
+
+\size scriptsize 
+from pisi.actionsapi import autotools
+\layout LyX-Code
+
+\layout LyX-Code
+
+
+\size scriptsize 
+WorkDir='popt-1.7'
+\layout LyX-Code
+
+\layout LyX-Code
+
+
+\size scriptsize 
+def setup():
+\layout LyX-Code
+
+
+\size scriptsize 
+    gnuconfig.gnuconfig_update()
+\layout LyX-Code
+
+
+\size scriptsize 
+    autotools.configure(
+\begin_inset Quotes eld
+\end_inset 
+
+--with-nls
+\begin_inset Quotes erd
+\end_inset 
+
+)
+\layout LyX-Code
+
+\layout LyX-Code
+
+
+\size scriptsize 
+def build():
+\layout LyX-Code
+
+
+\size scriptsize 
+    autotools.make()
+\layout LyX-Code
+
+\layout LyX-Code
+
+
+\size scriptsize 
+def install():
+\layout LyX-Code
+
+
+\size scriptsize 
+    autotools.install() 
 \layout Subsubsection
 
 ChangeLog Dosyasý
@@ -1038,7 +1362,7 @@ Metadata
 Metadata
 \series default 
  dosyasý sadece oluþturulan paket ile ilgili bilgileri tutmaktan sorumludur.
- Paket'den hakkýnda temel bilgi bu dosyadan alýnacaktýr.
+ Paket hakkýnda temel bilgi bu dosyadan alýnacaktýr.
 \layout Standard
 
 Bu bilgilerin büyük kýsmý 
@@ -1064,19 +1388,21 @@ tan sonra alýnabilecek diðer bilgileri de içerir (paketin kurulduktan sonra
 Metadata
 \series default 
  dosyasýnýn içeriði þöyle tanýmlanmýþtýr;
-\layout Itemize
+\layout Standard
 
 
 \series bold 
-Metadata
-\begin_deeper 
+PISI
+\layout Subparagraph
+
+Source: 
+\series medium 
+Bu bölümdeki bilgiler PSPEC dosyasýnýn Source bölümünden alýnýr.
 \layout Itemize
 
 
 \series bold 
 Name
-\series default 
- {From Package Tag}
 \layout Itemize
 
 
@@ -1086,30 +1412,12 @@ Homepage
 
 
 \series bold 
-Summary 
-\series default 
-{From Package Tag}
+Summary
 \layout Itemize
 
 
 \series bold 
-Description 
-\series default 
-{From Package Tag}
-\layout Itemize
-
-
-\series bold 
-IsA 
-\series default 
-{From Package Tag}
-\layout Itemize
-
-
-\series bold 
-PartOf 
-\series default 
-{From Package Tag}
+Description
 \layout Itemize
 
 
@@ -1129,13 +1437,29 @@ Name
 \series bold 
 Email
 \end_deeper 
+\layout Subparagraph
+
+Package
+\layout Itemize
+
+
+\series bold 
+Name
+\layout Itemize
+
+
+\series bold 
+Summary
+\layout Itemize
+
+
+\series bold 
+Description
 \layout Itemize
 
 
 \series bold 
 License
-\series default 
- {From Package Tag}
 \layout Itemize
 
 
@@ -1193,29 +1517,6 @@ RuntimeDependencies
 
 \series bold 
 Dependency
-\begin_deeper 
-\layout Itemize
-
-
-\series bold 
-Name
-\layout Itemize
-
-
-\series bold 
-Version
-\layout Itemize
-
-
-\series bold 
-VersionFrom
-\layout Itemize
-
-
-\series bold 
-VersionTo
-\end_deeper 
-\end_deeper 
 \layout Itemize
 
 
@@ -1227,28 +1528,6 @@ InstallDependencies
 
 \series bold 
 Dependency
-\begin_deeper 
-\layout Itemize
-
-
-\series bold 
-Name
-\layout Itemize
-
-
-\series bold 
-Version
-\layout Itemize
-
-
-\series bold 
-VersionFrom
-\layout Itemize
-
-
-\series bold 
-VersionTo
-\end_deeper 
 \end_deeper 
 \layout Itemize
 
@@ -1260,17 +1539,7 @@ Files
 
 
 \series bold 
-Directory
-\layout Itemize
-
-
-\series bold 
-Wildcard
-\layout Itemize
-
-
-\series bold 
-File
+Path
 \end_deeper 
 \layout Itemize
 
@@ -1318,15 +1587,10 @@ XML
 \series bold 
 Metadata
 \series default 
- XML dosyalarýnýn doðrulanmasý için kullanýlabilecek bilgi 
-\emph on 
-pisi-metadata.dtd
-\emph default 
- dosyasýnda tanýmlanmýþtýr.
+ XML dosyalarýnýn yapýsý PSPEC dosyasý ile hemen hemen aynýdýr.
+ Yalnýzca Metadata paket oluþumundan sonra elimizde olan bazý ek bilgileri
+ de içerir.
  
-\layout Standard
-
-TODO: Örnek Lazým!
 \layout Subsection
 
 files.xml
