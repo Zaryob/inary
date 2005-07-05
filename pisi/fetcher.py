@@ -113,12 +113,8 @@ class Fetcher:
         from httplib import HTTPException
 
         try:
-            request = urllib2.Request(self.url.uri)
-            if self.username:
-                request.add_header('Authorization', 'Basic %s' % 
-                                   encodestring('%s:%s' % 
-                                   (self.username, self.passwd)))
-            fileObj = urllib2.urlopen(request)
+            fileObj = urllib2.urlopen(self.formatRequest\
+                                     (urllib2.Request(self.url.uri)))
             headers = fileObj.info()
     
         except ValueError, e:
@@ -136,6 +132,20 @@ class Fetcher:
 
         dest = open(os.path.join(self.filedest, self.url.filename()) , "w")
         self.doGrab(fileObj, dest, totalsize)
+
+    def setAuthInfo(self, username='', passwd=''):
+        if self.url.isLocalFile():
+            self.err('No auth info needed for local files')
+        self.username = username
+        self.passwd = passwd
+        
+    def formatRequest(self, request):
+        if self.username:
+            request.add_header('Authorization', 'Basic %s' % 
+                              (encodestring('%s:%s' % 
+                                           (self.username, self.passwd))))
+            
+        return request
 
     def err (self, error):
         raise FetchError(error)
