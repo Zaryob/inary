@@ -75,7 +75,7 @@ class PisiBuild:
     def build(self):
         """Build the package in one shot."""
         if not self.spec.verify():
-            ui.err("PSPEC file is not valid")
+            ui.error("PSPEC file is not valid")
             raise PisiBuildError, "invalid PSPEC file %s" % self.ctx.pspecfile
 
         ui.info("Building PISI source package: %s\n" % self.spec.source.name)
