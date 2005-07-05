@@ -2,7 +2,8 @@
 # Package install operation
 # Author:  Eray Ozkural <eray@uludag.org.tr>
 
-#import package
+import os
+
 from specfile import *
 from package import Package
 import util
