@@ -5,7 +5,7 @@ import sys
 from optparse import OptionParser
 
 import pisi
-from pisi.cli import buildhelper
+from pisi.cli import buildhelper, installhelper
 
 usage = """
 Detaylı help içeriği. Komutların teker teker açıklamaları vs...
@@ -23,7 +23,10 @@ def help(options, args):
         print "helping about command", a
 
 def install(options, args):
-    pass
+    if not args:
+        help(options, "install")
+    for arg in args:
+        installhelper.install(arg)
 
 def build(options, args):
     if not args:
