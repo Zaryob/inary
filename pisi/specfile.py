@@ -148,6 +148,8 @@ class SourceInfo:
         self.archiveSHA1 = getNodeAttribute(archiveNode, "sha1sum")
         patchElts = getAllNodes(node, "Patches/Patch")
         self.patches = [PatchInfo(p) for p in patchElts]
+        aFilesElts = getAllNodes(node, "AdditionalFiles/AdditionalFile")
+        self.additionalFiles = [AdditionalFileInfo(f) for f in aFilesElts]
         buildDepElts = getAllNodes(node, "BuildDependencies/Dependency")
         self.buildDeps = [DepInfo(d) for d in buildDepElts]
         historyElts = getAllNodes(node, "History/Update")
@@ -170,6 +172,8 @@ class SourceInfo:
         archiveNode.setAttribute("sha1sum", self.archiveSHA1)
         for patch in self.patches:
             xml.addNodeUnder(node, "Patches", patch.elt(xml))
+        for afile in self.additionalFiles:
+            xml.addNodeUnder(node, "AdditionalFiles", afile.elt(xml))
         for dep in self.buildDeps:
             xml.addNodeUnder(node, "BuildDependencies", dep.elt(xml))
         for update in self.history:
@@ -192,6 +196,8 @@ class SourceInfo:
             if not update.verify(): return False
         for patch in self.patches:
             if not patch.verify(): return False
+        for afile in self.additionalFiles:
+            if not afile.verify(): return False
         for dep in self.buildDeps:
             if not dep.verify(): return False
 
