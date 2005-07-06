@@ -69,97 +69,355 @@ Bu paketleri kurup kaldýrmak, çeþitli kaynaklardan temin etmek, sorgulamak,
 \layout Section
 
 Paket Yöneticisi Gereksinimleri
+\layout Standard
+
+Bu kýsýmda önceki bölümde tanýmlanan paket yöneticisi kavramýnýn, sunmasý
+ beklenen gereksinimler listelenmiþtir.
 \layout Subsection
 
-Kullanýcý gereksinimleri
+Kullanýcý Gereksinimleri
+\layout Standard
+
+Kullanýcý gereksinimleri, bir biliþim okuryazarý olarak daha önce tanýmladýðýmýz
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+
+\begin_inset LatexCommand \url[http://www.uludag.org.tr/belgeler/okuryazar/okuryazar.html]{}
+
+\end_inset 
+
+
+\end_inset 
+
+ kullanýcý profiline baðlý kalýnarak çýkarýlmýþtýr.
 \layout Itemize
 
-Biliþim okuryazarý adýný verdiðimiz hedef kullanýcýmýzýn temel isteði, sisteme
- istediði uygulamalarý kurabilmektir.
+Biliþim okuryazarýýn temel isteði, sisteme istediði uygulamalarý kolayca
+ kurabilmekten ibarettir.
 \begin_deeper 
 \layout Itemize
 
 Kur emri, komut satýrý, grafik arayüzler, ya da sistemin otomatik olarak
- pakete ihtiyaç olduðunu saptamasýyla kolayca verilebilmeli, mümkün olduðunca
- soru sorulmadan ve kullanýcýyý rahatsýz etmeden yerine getirilmelidir.
+ bir pakete ihtiyaç olduðunu saptamasýyla kolayca verilebilmeli, bu görev
+ mümkün olduðunca soru sorulmadan ve kullanýcýyý rahatsýz etmeden yerine
+ getirilmelidir.
 \layout Itemize
 
-Ayný þekilde yapýlandýrma sorularýndan kaçýnýlmalýdýr.
- Bu iþler 
-\series bold 
-ÇOMAR
-\series default 
- tarafýndan otomatik halledilecek, ya da kullanýcýnýn verdiði emirlerle
- sonradan yapýlacaktýr.
- Bu, örneðin sunucu uygulamalarý kurulurken sunucu ayarý sorularý vs sorulmamasý
-ný getirir.
+Kullanýcý, paketin sistemde doðru þekilde çalýþabilmesi için gerekli olan
+ yapýlandýrma gereksinimlerinin karþýlanmasýndan mümkün olduðuncayalýtýlmalýdý.
+ Yapýlandýrma ile ilgili görevler paket yöneticisi dýþýndaki bir araçla
+ saðlanabilmeli, ya da kullanýcýnýn verdiði emirlerle sonradan yapýlabilmelidir.
+ 
 \layout Itemize
 
-Kurulum elden geldiðince hýzlý olmalýdýr.
+Kurulum mümkün olduðunca hýzlý olmalýdýr.
 \end_deeper 
 \layout Itemize
 
 Kurulu programlarýn yeni sürümleri çýktýkça, veya üzerinde düzeltmeler ve
- güvenlik onarýmlarý yapýlmýþ yeni paket sürümleri yayýmlandýkça, biliþim
- okuryazarý kullanýcýmýz elindeki uygulamalarý güncellemek isteyecektir.
+ güvenlik onarýmlarý yapýlmýþ yeni paket sürümleri yayýmlandýkça, kullanýcý
+ elindeki uygulamalarý güncellemek isteyecektir.
 \begin_deeper 
 \layout Itemize
 
-Paketin her sürümünün önem derecesini (yeni özellikler, hata düzeltmeleri,
- güvenlik açýðý düzeltmesi) belirtebilmek gereklidir.
- Böylece kullanýcý vakti yada að baðlantý hýzý yetersiz olduðunda acil önem
- taþýyan ve yapýlmasý gerekli güncellemeleri, diðerlerinden kolayca ayýrabilecek
-tir.
+Kullanýcý vakti yada að baðlantý hýzý yetersiz olduðunda acil önem taþýyan
+ ve yapýlmasý gerekli güncellemeleri, diðerlerinden kolayca ayýrabilmelidir;
+ bunun yapýlabilmesi için paketin her sürümündeki güncellemelerin önem derecesi
+ (yeni özellikler, hata düzeltmeleri, güvenlik açýðý düzeltmesi) paketleme
+ esnasýnda belirtilebilmelidir.
 \layout Itemize
 
-Bir paketin eski veya deneysel sürümlerini kurmayý, hedef kullanýcýmýzýn
- bir ihtiyacý olarak görmüyoruz.
- Kullanýcýmýz paketteki en son düzeltmeleri isteyecektir, ve eðer uygulama
- ayrý özellik kümesine sahip iki ayrý yoldan geliþtirilmekteyse, bu uygulamayý
- iki ayrý paket olarak tutabiliriz.
- Bu basitleþtirmedeki amacýmýz paket yöneticisini basit tutmaktan ziyade,
- kullanýcýnýn paketin eski bir sürümünü kurup, sonra bunu unutarak daha
- sonra çýkacak güncellemeleri kaçýrmasýný önlemektir.
+Bir paketin eski veya deneysel sürümlerini kurmak biliþim okuryazarýnýn
+ bir ihtiyacý deðildir.
+ Dolayýsýyla eski sürümler ve geliþtirme sürümleri alternatifleri ile kullanýcýn
+ýn kafasýnýn karýþtýrýlmamasý için; kullanýcý paketler deposunda her eriþtiðinde
+ en son düzeltmeleri içeren son ve tek bir sürüme ulaþabilmelidir.
+ Bu hem basitlik hem de kullanýcýnýn istemeyerek yanlýþ bir paket kurmasýnýn
+ önüne geçer.
 \layout Itemize
 
-Benzeri þekilde, paketler üzerinde ayrý ayrý güncelleme politikasý belirleyebilm
-ek, faydasýndan çok kafa karýþýklýðý yaratacaðýndan dolayý desteklenmeyecektir.
+Paket güncelleme ile ilgili paket bazýnda ayrý ayrý politikalar belirlenmesi
+ yukarda bahsedilen kullanýcý profilinden bakýldýðýnda gereksiz ve kafa
+ karýþtýrýcýdýr.
 \end_deeper 
 \layout Itemize
 
 Nerdeyse her uygulama kendi sürüm numarasý verme politikasýna sahip olduðundan,
  paketin asýl sürüm numarasý yanýnda, düzenli olarak artacak bir numara
  daha vererek, kullanýcýnýn kolayca hangi sürümlerin yeni olduðunu ayýrt
- edebilmesini saðlamalýyýz.
- Ayný uygulama sürümünün çeþitli hata düzeltmeleri içeren farklý paket sürümleri
- olabileceði de düþünülürse bunun önemi anlaþýlýr.
+ edebilmesi saðlanabilmeldiir (ayný uygulama sürümünün çeþitli hata düzeltmeleri
+ içeren farklý paket sürümleri olabileceði de düþünülürse bunun önemi daha
+ net bir þekilde ortaya çýkmaktadýr).
 \layout Itemize
 
 Kullanýcý, artýk ihtiyaç duymadýðý bir uygulamayý, yer ve takip tasarrufu
  amacýyla kaldýrmak isteyebilir.
- Kullanýcýnýn bu seçimi kolayca yapabilmesi için, ihtiyaç duyulmayan paketler,
- kurulu paketlerin kapladýðý alan gibi bilgiler sunulabilmelidir.
+ Kullanýcýnýn bu seçimi kolayca yapabilmesi için, hiç bir paket tarafýndan
+ ihtiyaç duyulmayan paketler, kurulu paketlerin kapladýðý alan gibi bilgiler
+ paket yöneticisinden kolayca alýnabilmelidir.
 \layout Itemize
 
 Kullanýcý sistemde nelerin kurulu olduðunu, hangi paketleri kurabileceðini,
  kurulu paketlere ait bilgileri, sistemdeki bir bileþen veya dosyanýn hangi
- uygulamaya ait olduðunu ve benzeri bir takým bilgileri sorgulayabilmelidir.
+ uygulamaya ait olduðunu ve benzeri paket yöneticisinden kolayca alabilmelidir.
 \layout Itemize
 
-Varolan paket yöneticilerinin (rpm, dpkg, portage, vs) paket kapsamlarý
- kullanýcýlara bazý zorluklar yaþatmaktadýr.
+Paketler farklý hedeflere kurulabilecek biçimde 
+\begin_inset Quotes eld
+\end_inset 
+
+
+\emph on 
+relocatable
+\emph default 
+
+\begin_inset Quotes erd
+\end_inset 
+
+ özellik taþýmalýdýr (bu, farklý hedeflere kurulum, ya da baþkasýna ait
+ sistemde ev dizinine kurulum gibi yeteneklerin saðlanmasý için gereklidir).
+\layout Itemize
+
+Paket bileþenlerinin deðiþip deðiþmediði kontrol toplamlarý, özet fonksiyonlarý
+ yardýmýyla tespit edilebilmelidir.
+ Paket yöneticisinin böyle bir durumu kontrol edebilmesi, ve örneðin bir
+ kullanýcý hatasý sonucu silinen/deðiþen dosyalarý tekrar temin edip düzeltebilm
+esi kullanýcýya kolaylýk saðlar.
+\layout Subsection
+
+Paketleyici/Geliþtirici Gereksinimleri
+\layout Itemize
+
+Paket hazýrlamak kolay olmalýdýr.
+ Paket hazýrlanýrken ve inþa edilirken gerekli dosyalar bir çok ayrý kaynaktan
+ temin edilebilmelidir.
+ 
+\layout Itemize
+
+Kolayca paket oluþturabilmek için, tercihen bir grafik arayüz ile paket
+ hazýrlanabilmelidir.
+ Paket yöneticisi, üst geliþtirici kodunu alýp, gerekli bilgileri hazýrlatacak,
+ gerekli iþaretlemeleri kolayca yapabilecek bir araç sunmalýdýr.
+\layout Itemize
+
+Paket yöneticisinin geliþtirme sistemi, paketleyici hatalarýnýn gözden kaçmasýný
+ zorlaþtýracak araçlar sunmalýdýr.
+\layout Subsection
+
+Paket Kaynaðý Gereksinimleri
+\layout Itemize
+
+Paketler CD, Internet, uzak dosya sistemi gibi çeþitli kaynaklardan kurulabilmel
+idir.
+ Temel olarak iki tip kaynak sözkonusudur.
+\layout Itemize
+
+Ýlk tip, pakedi tek bir dosya olarak taþýyabilen ve programý depolama aygýtlarý,
+ e-posta ve benzeri yollarla daðýtmaya uygun bir arþiv dosyasýdýr.
 \begin_deeper 
 \layout Itemize
 
-Kapsam çok geniþ olduðunda (örneðin tek bir KDE pakedi), kullanýcý her güncellem
-ede çok büyük dosyalar çekmekte, sisteme kullanmayacaðý bileþenleri (örneðin
- KDE oyunlarý, ya da bilmediði dillere ait destekler) kurmaktadýr.
+Bu arþiv içinden, arþiv hakkýnda bilgi alýnabilecek dosyalara, bütün arþivi
+ açmadan eriþilebilmelidir.
+\layout Itemize
+
+Mümkünse arþivin yaygýn olarak bilinen ve kullanýlan araçlarla açýlabilmesinde
+ yarar vardýr.
+\end_deeper 
+\layout Itemize
+
+Ýkinci tip kaynak ise Internet yada yerel að üzerinden bir paket grubunun
+ indeks bilgilerini ve kendilerini sunabilecek bir 
+\begin_inset Quotes eld
+\end_inset 
+
+depo
+\begin_inset Quotes erd
+\end_inset 
+
+ sunucusudur.
+\begin_deeper 
+\layout Itemize
+
+Ayný biçimde, bir pakedin belirli dosyalarýna direk ve hýzlý þekilde eriþilebilm
+elidir.
+\end_deeper 
+\layout Itemize
+
+Paketler birden fazla kaynaktan temin edilebilmelidir.
+\layout Subsection
+
+Güvenlik Gereksinimleri
+\layout Itemize
+
+CD, Internet gibi deðiþik yollarla temin edilen paketlern kim tarafýndan
+ paketlendiði bilgisi ve içeriðinin yolda deðiþmediði garantisi için bir
+ dijital imza sistemi desteklenmelidir.
+\layout Itemize
+
+Gerektiðinde pakedi oluþturan kiþinin imzasý dýþýnda, üçüncü parti kurum
+ veya kiþilerin de pakedi deneyip, güvendiðini belirtebilmesi için, birden
+ fazla kiþi tarafýndan pakedin imzalanabilmesi gereklidir.
+\layout Subsection
+
+Kurumsal Gereksinimler
+\layout Comment
+
+Bu kýsmý biraz daha açmak gerekli.
+\layout Itemize
+
+Paket yöneticisi birden fazla paket kaynaðý ile ayný anda sorunsuz bir þekilde
+ çalýþabilmelidir.
+\layout Itemize
+
+Kurumlar ya da bireyler tarafýndan ön tanýmlý depoda da bulunan kimi paketlerin
+ özelleþtirlmiþ versiyonlarýnýn bulunduðu depolar overlay olarak tanýmlanabilmel
+idir.
+\layout Itemize
+
+Ön tanýmlý depoda bulunmayan çeþitli paketlerin bulunduðu depolar addon
+ olarak tanýmlanabilmelidir.
+\layout Section
+
+Neden PÝSÝ?
+\layout Standard
+
+Bu kýsýmda neden varolan paket yöneticisi çözümlerinden yararlanmak yerine
+ yeni bir paket yöneticisi yazmaya karar verildiði açýklanmaya çalýþýlacaktýr.
+\layout Standard
+
+Öncelikle Pardus'ta kullanýlacak paket yöneticisinin, sisteme kurulan paketlerin
+ kendilerini sistem koþullarýna göre otomatik bir þekilde yapýlandýrmasýna
+ da olanak saðlayacak olan yapýlandýrma yöneticimiz ÇOMAR tarafýndan ihtiyaç
+ duyulan gereksinimleri de yerine getirmesi gerekliliði söz konusudur.
+ ÇOMAR'ýn paket yöneticisi gereksinimleri þu þekilde listelenebilir:
+\layout Itemize
+
+Bir paket kurulduktan sonra, pakete ait 
+\series bold 
+CSL
+\series default 
+ betikleri 
+\series bold 
+ÇOMAR
+\series default 
+'a bildirip kayýt ettirebilmelidir.
+\layout Itemize
+
+Bir paket kaldýrýlmadan önce 
+\series bold 
+ÇOMAR
+\series default 
+'dan bu pakete ait betikleri kaldýrmasýný isteyebilmelidir.
+\layout Itemize
+
+Bir paket eðer 
+\series bold 
+CSL
+\series default 
+ betiði saðlýyorsa, paketin hangi 
+\series bold 
+OM
+\series default 
+ dallarýna ait betikler içerdiði bilgisini tutabilmelidir.
+\layout Itemize
+
+Bir paketin ihtiyaç duyduðu yapýlandýrma görevlerinin bulunduðu bir 
+\series bold 
+OM
+\series default 
+ dalý için, hangi paketlerin bu dala ait betik içerdiði bilgisi sorgulanabilmeli
+dir.
+\layout Itemize
+
+Kurulmasý emredilen bir paket, kitaplýk ve programlarýn yanýsýra 
+\series bold 
+OM
+\series default 
+ üzerinden saðlanan bazý görevlere ihtiyaç duyabilir.
+ Bu durumda paket yöneticisinin o bacaktaki görevi saðlayan uygun bir pakedin
+ kurulu olup olmadýðýna bakmasý, gerekiyorsa o görevi saðlayan paketlerden
+ birini kurmasý gereklidir.
+\layout Itemize
+
+Paket yöneticisi, bir pakete ait bir dosyanýn sistemde nereye yerleþtirilmiþ
+ olduðunu söyleyebilmelidir.
+\layout Standard
+
+Kolaylýkla görülmektedir ki yukarda belirtilen ÇOMAR gereksinimleri, diðer
+ paket yöneticilerinin özelleþtirilmesi ile saðlanamayacak gereksinimler
+ deðillerdir.
+ 
+\layout Standard
+
+Fakat hali hazýrda kullanýlan bir paket yöneticisine bu tip özelliklerin
+ eklenmesi, paket yöneticisinin kalan kýsmýnýn elden geçirilmesi ve ana
+ geliþtirici tarafýndan yapýlan güncellemelerin takibi anlamýnda çok büyük
+ bir iþ yükünü de beraberinde getirir.
+ Bunun dýþýnda, varolan ve geniþ kullaným kitlesine sahip paket yöneticileri
+ (RPM, DPKG ve Portage) yukarda saydýðýmýz gereksinimlerin kimilerini bizim
+ olmasý gerektiðini düþündüðümüz basitlikte yerine getirememekte, kimilerini
+ de hiç vaad etmemektedirler.
+\layout Standard
+
+Aþaðýda bizce ne gibi dezavantajlar barýndýrdýklarý listelenmeye çalýþýlmýþtýr:
+\layout Comment
+
+Ýþte arkadaþlar buralar dolacak güzelcene.
+ Hadi bakalým.
+\layout Subsection
+
+Neden DPKG Deðil?
+\layout Subsection
+
+Neden RPM Deðil?
+\layout Subsection
+
+Neden Portage Deðil?
+\layout Standard
+
+Yukardaki gereksinimleri tam olarak saðlayabilmek için çeþitli tipte baðýmlýlýkl
+ar, farklý özelliklerle kurulabilen paketler, en az dosya indirme ile kurulum
+ gibi özelliklere ihtiyacýmýz olduðu anlaþýlmýþtýr.
+ Halihazýrdaki paket sistemlerinin yukardaki örneklerde de anlatýldýðý gibi
+ bunlarý beklediðimiz oranda saðlamadýklarý ve onlara bu özellikleri kazandýrman
+ýn yeni bir tane yazmaktan daha kolay olmamasýndan dolayý yeni bir paket
+ yöneticisi yazmak gereði doðmuþtur.
+\layout Standard
+
+
+\series bold 
+PÝSÝ
+\series default 
+ (
+\series bold 
+Packages Installed Successfully as Intented
+\series default 
+) bu nedenle geliþtirilmektedir.
+\layout Subsection
+
+JUNKKÝEEEE
+\layout Comment
+
+Alttaki kýsým daha önce yukarlarda bir yerlerde idi, kaybolmsaýn diye buraya
+ koyuyorum, uygun bir yere monte edecek sonra da burdan sileceðizdir.
+\layout Standard
+
+DPKG ve RPM gibi ikili paketlerin ile çalýþan paket yöneticilerinin paket
+ kapsamý ile ilgili sýkýntýlar mevcuttur: Kapsam çok geniþ olduðunda (örneðin
+ tek bir KDE pakedi), kullanýcý her güncellemede çok büyük dosyalar çekmekte,
+ sisteme kullanmayacaðý bileþenleri (örneðin KDE oyunlarý, ya da bilmediði
+ dillere ait destekler) kurmaktadýr.
 \layout Itemize
 
 Kapsam dar tutulup küçük paketler oluþturulduðunda ise paket sayýsýnýn artmasýnd
 an dolayý, paket kavramýnýn getirdiði soyutlama azalmakta, sisteme büyük
  bir platformu kurmak için kendisi bir bileþen içermeyip yalnýzca diðer
  paketleri kurdurtan sanal paketler gibi yama çözümler gerekmektedir.
+\begin_deeper 
 \layout Itemize
 
 Kullanýcýya uygulamalarý belli özellikleri (örneðin geliþtirme kitleri,
@@ -180,182 +438,6 @@ mplayer
 \emph default 
  programý gibi).
 \end_deeper 
-\layout Itemize
-
-Paketler farklý hedeflere kurulabilecek biçimde 
-\begin_inset Quotes eld
-\end_inset 
-
-
-\emph on 
-relocatable
-\emph default 
-
-\begin_inset Quotes erd
-\end_inset 
-
- özellik taþýmalýdýr.
- Bu, farklý hedeflere kurulum, ya da baþkasýna ait sistemde ev dizinine
- kurulum gibi yeteneklerin saðlanmasý için gereklidir.
-\layout Itemize
-
-Paket bileþenlerinin deðiþip deðiþmediði kontrol toplamlarý, hash fonksiyonlarý
- gibi yöntemlerle tespit edilebilir.
- Paket yöneticisinin böyle bir durumu kontrol edebilmesi, ve örneðin bir
- kullanýcý hatasý sonucu silinen/deðiþen dosyalarý tekrar temin edip düzeltebilm
-esi kullanýcýya kolaylýk saðlar.
-\layout Subsection
-
-Paketleyici gereksinimleri
-\layout Itemize
-
-Paket hazýrlamak kolay olmalýdýr.
-\layout Itemize
-
-Kolayca paket oluþturabilmek için, tercihen bir grafik arayüz ile paket
- hazýrlanabilmelidir.
- Üst geliþtirici kodunu alýp, gerekli bilgileri hazýrlatacak, gerekli iþaretleme
-leri kolayca yapabilecek bir araç kullanýlabilir.
-\layout Itemize
-
-Paketleyici hatalarýnýn farkedilmeden gözden kaçmasý önlenmelidir.
-\layout Subsection
-
-Paket kaynaðý gereksinimleri
-\layout Itemize
-
-Kullanýcý paketleri CD, disket, internet gibi çeþitli kaynaklarla ulaþýp
- kurabilmek isteyecektir.
- Temel olarak iki tip kaynak sözkonusudur.
-\layout Itemize
-
-Ýlk tip, pakedi tek bir dosya olarak taþýyabilen ve programý disketle, epostayla
- ve benzeri yollarla daðýtmaya uygun bir arþiv dosyasýdýr.
-\begin_deeper 
-\layout Itemize
-
-Bu arþiv içinden belirli bir dosyaya, bütün arþivi açmadan eriþilebilmelidir.
-\layout Itemize
-
-Mümkünse arþivin yaygýn olarak bilinen ve kullanýlan araçlarla açýlabilmesinde
- yarar vardýr.
-\end_deeper 
-\layout Itemize
-
-Ýkinci tip kaynak ise internet yada yerel að üzerinden bir paket grubunun
- indeks bilgilerini ve kendilerini sunabilecek bir 
-\begin_inset Quotes eld
-\end_inset 
-
-depo
-\begin_inset Quotes erd
-\end_inset 
-
- sunucusudur.
-\begin_deeper 
-\layout Itemize
-
-Ayný biçimde, bir pakedin belirli dosyalarýna direk eriþilebilmelidir.
- Paketler Web üzerinden sunulurken bunu saðlamak için pakedi açýk olarak
- tutabiliriz.
-\end_deeper 
-\layout Itemize
-
-Kullanýcý birden fazla kaynaktan paketleri temin edebilmelidir.
-\layout Subsection
-
-Güvenlik gereksinimleri
-\layout Itemize
-
-Kullanýcýnýn CD, internet, vs gibi deðiþik ortamlar aracýlýðý ile temin
- ettiði paketlerin kimden geldiðini bilebilmesi, ve içeriðinin yolda deðiþmediði
-nden emin olmasý için bir dijital imza sistemi desteklenmelidir.
-\layout Itemize
-
-Gerektiðinde pakedi oluþturan kiþinin imzasý dýþýnda, üçüncü parti kurum
- veya kiþilerin de pakedi deneyip, güvendiðini belirtebilmesi için, birden
- fazla kiþi tarafýndan pakedin imzalanabilmesi iyi olacaktýr.
-\layout Subsection
-
-Yapýlandýrma Yöneticisi (ÇOMAR) gereksinimleri
-\layout Itemize
-
-Bir paket kurulduktan sonra, pakete ait 
-\series bold 
-CSL
-\series default 
- betikleri 
-\series bold 
-ÇOMAR
-\series default 
-'a bildirip kayýt ettirmelidir.
-\layout Itemize
-
-Bir paket kaldýrýlmadan önce 
-\series bold 
-ÇOMAR
-\series default 
-'dan bu pakete ait betikleri kaldýrmasýný istemelidir.
-\layout Itemize
-
-Bir paket eðer 
-\series bold 
-CSL
-\series default 
- betiði saðlýyorsa, paketin hangi 
-\series bold 
-OM
-\series default 
- dallarýna ait betikler içerdiði bilgisini tutmalýdýr.
-\layout Itemize
-
-Verilen bir 
-\series bold 
-OM
-\series default 
- dalý için, hangi paketlerin bu dala ait betik içerdiðini verebilmelidir.
-\layout Itemize
-
-Kurulmasý emredilen bir paket, kitaplýk ve programlarýn yanýsýra 
-\series bold 
-OM
-\series default 
- üzerinden saðlanan bazý görevlere ihtiyaç duyabilir.
- Bu durumda paket yöneticisinin o bacaktaki görevi saðlayan uygun bir pakedin
- kurulu olup olmadýðýna bakmasý, gerekiyorsa o görevi saðlayan paketlerden
- birini kurmasý gereklidir.
-\layout Itemize
-
-Paket yöneticisi, bir pakete ait bir dosyanýn sistemde nereye yerleþtirilmiþ
- olduðunu söyleyebilmelidir.
-\layout Section
-
-Neden PÝSÝ?
-\layout Standard
-
-
-\emph on 
-TODO: Bu soruya verebileceðimiz bir kaç satýr cevap daha vardýr eminim :).
- PÝSÝ ne iyileþtirmeler getirecek/getiriyor maddeler halinde de yazabiliriz
- yine...
-\layout Standard
-
-Gereksinimlerimizi saðlayabilmek için çeþitli tipte baðýmlýlýklar, farklý
- özelliklerle kurulabilen paketler, en az dosya indirme ile kurulum gibi
- özelliklere ihtiyacýmýz olacaktýr.
- Halihazýrdaki paket sistemleri bunlarý saðlamadýklarý için yeni bir paket
- yöneticisi yazmak gereði doðmuþtur.
-\layout Standard
-
-Bu amaçla 
-\series bold 
-PÝSÝ
-\series default 
- (
-\series bold 
-Packages Installed Successfully as Intented
-\series default 
-) adýný verdiðimiz yazýlýmý geliþtiriyoruz.
 \layout Section
 
 PÝSÝ Tasarýmý
