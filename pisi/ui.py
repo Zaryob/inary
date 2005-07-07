@@ -14,13 +14,6 @@ class CLI:
     def __init__(self, debuggy = True):
         self.showDebug = debuggy
 
-    class Progress:
-        def __init__(self, name, symbol):
-            self.name = name
-            self.percent = 0
-            self.rate = 0
-            self.symbol = symbol
-
     def info(self, msg):
         sys.stdout.write(colorize(msg, 'blue'))
         sys.stdout.flush()
@@ -34,18 +27,25 @@ class CLI:
         sys.stdout.write(colorize(msg, 'red'))
         sys.stdout.flush()
 
-    def startProgress(self, name, symbol):
-        ## support one progress for now
-        self.activeProgress = Progress(name, symbol)
+    class Progress:
+        def __init__(self, totalsize):
+            self.totalsize = totalsize
+            self.percent = 0
+        
+        def update(self, size):
+            if not self.totalsize:
+                return 100
 
-    def updateProgress(self, percent, rate):
-        self.activeProgress.percent = percent
-        self.activeProgress.rate = rate
-        self.displayProgress(pd)
+            percent = (size * 100) / self.totalsize
+            if percent and self.percent is not percent:
+                self.percent = percent
+                return percent
+            else:
+                return 0
 
-    def displayProgress(pd):
+    def displayProgress(self, pd):
         out = '\r%-30.30s %3d%% %12.2f %s' % \
-              (self.name, self.percent, self.rate, self.symbol)
+            (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
         self.info(out)
 
 # default UI is CLI

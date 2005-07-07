@@ -12,7 +12,7 @@ from archive import Archive
 from purl import PUrl
 from ui import ui
 from config import config
-from fetcher import fetchUrl, displayProgress
+from fetcher import fetchUrl
 import util
 
 
@@ -31,7 +31,7 @@ class SourceArchive:
     def fetch(self, interactive=True):
         if not self.isCached(interactive):
             if interactive:
-                self.showProgress = displayProgress
+                self.showProgress = ui.displayProgress
             fetchUrl(self.url, config.archives_dir(), self.showProgress)
         
     def isCached(self, interactive=True):

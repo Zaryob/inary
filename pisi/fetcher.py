@@ -19,11 +19,6 @@ class FetchError (Exception):
     pass
 
 # helper functions
-def displayProgress(pd):
-    out = '\r%-30.30s %3d%% %12.2f %s' % \
-        (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
-    ui.info(out)
-
 def fetchUrl(url, dest, percentHook=None):
     fetch = Fetcher(url, dest)
     fetch.percentHook = percentHook
@@ -66,7 +61,7 @@ class Fetcher:
         symbols = [' B/s', 'KB/s', 'MB/s', 'GB/s']
         from time import time
         tt, oldsize = int(time()), 0
-        p = Progress(totalsize)
+        p = ui.Progress(totalsize)
         bs, size = 1024, 0
         symbol, depth = "B/s", 0
         st = time()
@@ -87,7 +82,7 @@ class Fetcher:
                 oldsize, tt = size, time()
             if p.update(size):
                 self.percent = p.percent
-                if self.percentHook != None:
+                if self.percentHook:
                     retval = {'filename': self.url.filename(), 
                               'percent' : self.percent,
                               'rate': self.rate,
@@ -141,18 +136,3 @@ class Fetcher:
     def err (self, error):
         raise FetchError(error)
 
-class Progress:
-    def __init__(self, totalsize):
-        self.totalsize = totalsize
-        self.percent = 0
-
-    def update(self, size):
-        if not self.totalsize:
-            return 100
-
-        percent = (size * 100) / self.totalsize
-        if percent and self.percent is not percent:
-            self.percent = percent
-            return percent
-        else:
-            return 0

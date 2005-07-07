@@ -16,10 +16,11 @@ class Package:
 
         if url.isRemoteFile():
             from os import getcwd
-            from fetcher import fetchUrl, displayProgress
+            from fetcher import fetchUrl
+            from ui import ui
             # TODO: belki Constants.packages_dir() gibi bir yere
             # indirmek daha iyi olur.
-            fetchUrl(url, getcwd(), displayProgress)
+            fetchUrl(url, getcwd(), ui.displayProgress)
             self.filename = url.filename()
 
         self.impl = archive.ArchiveZip(self.filename, 'zip', mode)

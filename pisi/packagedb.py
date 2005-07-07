@@ -16,7 +16,8 @@ from config import config
 from bsddb import db
 
 class PackageDB(object):
-
+    """PackageDB class provides an interface to the package database with
+    a delegated dbshelve object"""
     def __init__(self):
         util.check_dir(config.db_dir())
         filename = os.path.join(config.db_dir(), 'package.bdb')

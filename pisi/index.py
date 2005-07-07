@@ -25,9 +25,9 @@ class Index(XmlFile):
         url = PUrl(filename)
         if url.isRemoteFile():
             from os import getcwd
-            from fetcher import fetchUrl, displayProgress
+            from fetcher import fetchUrl
             # TODO: index dosyasını indirmek için bir yer bulmak lazım.
-            fetchUrl(url, getcwd(), displayProgress)
+            fetchUrl(url, getcwd(), ui.displayProgress)
             self.filename = url.filename()
 
         self.readxml(self.filename)
