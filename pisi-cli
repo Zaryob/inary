@@ -22,21 +22,21 @@ Use \"%prog help <command>\" for help on a specific subcommand.
 PISI Package Manager
 """
 
-def commonopts(parser):
-    parser.add_option("-D", "--destdir", action="store")
-    parser.add_option("-u", "--username", action="store")
-    parser.add_option("-p", "--password", action="store")
-    parser.add_option("-P", action="store_true", dest="getpass", default=False,
-                      help="Get password from the command line")
-    parser.add_option("-v", "--verbose", action="store_true",
-                      dest="verbose", default=False,
-                      help="detailed output")
-    parser.add_option("-d", "--debug", action="store_true",
-                      default=True, help="show debugging information")
-    parser.add_option("-n", "--dry-run", action="store_true", default=False,
-                      help = "do not perform any action, just show what\
-                      would be done")
-    return parser
+# def commonopts(parser):
+#     parser.add_option("-D", "--destdir", action="store")
+#     parser.add_option("-u", "--username", action="store")
+#     parser.add_option("-p", "--password", action="store")
+#     parser.add_option("-P", action="store_true", dest="getpass", default=False,
+#                       help="Get password from the command line")
+#     parser.add_option("-v", "--verbose", action="store_true",
+#                       dest="verbose", default=False,
+#                       help="detailed output")
+#     parser.add_option("-d", "--debug", action="store_true",
+#                       default=True, help="show debugging information")
+#     parser.add_option("-n", "--dry-run", action="store_true", default=False,
+#                       help = "do not perform any action, just show what\
+#                       would be done")
+#     return parser
 
 
 class ParserError:
@@ -60,14 +60,27 @@ class PisiCLI(object):
         # first construct a parser for common options
         # this is really dummy
         parser = Parser(usage=usage, version="%prog " + pisi.__version__)
-        parser.allow_interspersed_args = False
-        parser = commonopts(parser)
+#        parser.allow_interspersed_args = False
+#        parser = commonopts(parser)
+        parser.add_option("-D", "--destdir", action="store")
+        parser.add_option("-u", "--username", action="store")
+        parser.add_option("-p", "--password", action="store")
+        parser.add_option("-P", action="store_true", dest="getpass", default=False,
+                          help="Get password from the command line")
+        parser.add_option("-v", "--verbose", action="store_true",
+                          dest="verbose", default=False,
+                          help="detailed output")
+        parser.add_option("-d", "--debug", action="store_true",
+                          default=True, help="show debugging information")
+        parser.add_option("-n", "--dry-run", action="store_true", default=False,
+                          help = "do not perform any action, just show what\
+                          would be done")
 
         self.command = ""
         try:
             (options, args) = parser.parse_args()
-            if len(parser.rargs)==0:
-                self.die()
+#            if len(parser.rargs)==0:
+#                self.die()
             self.command = args[0]
         except ParserError:
             # fully expected :) let's see if we got an argument
@@ -81,10 +94,9 @@ class PisiCLI(object):
 #         parser.allow_interspersed_args = False
 #         self.parser = commonopts(parser)    
 #         self.add_subcommand_opts()
-#         (self.options, args) = sel
-#         f.parser.parse_args()
+#         (self.options, args) = self.parser.parse_args()
         self.args = args[1:]
-        print options
+        self.options = options
 
         self.authInfo = None
         self.checkAuthInfo()
