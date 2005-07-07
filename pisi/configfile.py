@@ -22,7 +22,7 @@ class ConfigException(Exception):
 
 class GeneralDefaults:
     """Default values for [general] section"""
-    destinationdirectory = os.getcwd()+"/tmp" # FOR ALPHA
+    destinationdirectory = os.getcwd() + "/tmp" # FOR ALPHA
 
 class BuildDefaults:
     """Default values for [build] section"""
