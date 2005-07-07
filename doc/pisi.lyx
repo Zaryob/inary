@@ -281,7 +281,7 @@ Gerektiðinde pakedi oluþturan kiþinin imzasý dýþýnda, üçüncü parti kurum
 Kurumsal Gereksinimler
 \layout Comment
 
-Bu kýsmý biraz daha açmak gerekli.
+(meren) Bu kýsmý biraz daha açmak gerekli (yoksa deðil mi?).
 \layout Itemize
 
 Paket yöneticisi birden fazla paket kaynaðý ile ayný anda sorunsuz bir þekilde
@@ -289,29 +289,52 @@ Paket yöneticisi birden fazla paket kaynaðý ile ayný anda sorunsuz bir þekilde
 \layout Itemize
 
 Kurumlar ya da bireyler tarafýndan ön tanýmlý depoda da bulunan kimi paketlerin
- özelleþtirlmiþ versiyonlarýnýn bulunduðu depolar overlay olarak tanýmlanabilmel
-idir.
+ özelleþtirlmiþ versiyonlarýnýn bulunduðu depolar 
+\emph on 
+overlay
+\emph default 
+ olarak tanýmlanabilmelidir.
 \layout Itemize
 
-Ön tanýmlý depoda bulunmayan çeþitli paketlerin bulunduðu depolar addon
+Ön tanýmlý depoda bulunmayan çeþitli paketlerin bulunduðu depolar 
+\emph on 
+addon
+\emph default 
  olarak tanýmlanabilmelidir.
 \layout Section
 
 Neden PÝSÝ?
 \layout Standard
 
-Varolan paket yöneticilerinde görevler ve bilgilerin düzgün bir biçimde
- ayrýlmadýklarý görülmektedir.
+Hali hazýrda varolan ve geniþ bir kullaným oranýna sahip paket yöneticileri
+ (RPM, DPKG ve Portage) yukarda saydýðýmýz gereksinimlerin kimilerini bizim
+ olmasý gerektiðini düþündüðümüz basitlikte yerine getirememekte, kimilerini
+ de hiç vaad etmemektedirler.
+ Bu paket yöneticilerinin geliþtirilmesi ve istenen noktaya getirilmeye
+ çalýþýlmasý yeni ve ayaklarý yere daha saðlam basan bir paket yöneticisini
+ yeniden yazmaktan daha kolay deðildir.
+\layout Standard
+
+Daha önemlisi, varolan paket yöneticilerinin paket formatlarýnda 
+\emph on 
+görev
+\emph default 
+leri ve 
+\emph on 
+bilgi
+\emph default 
+leri birbirinden düzgün bir biçimde ayrýlmadýklarý görülmektedir.
  Bu araçlar basit olarak hazýrlanmýþ ve zaman içinde ortaya çýkan ihtiyaçlarý
  karþýlamak için sürekli yeni özellikler eklenerek bugünkü hallerine gelmiþlerdi
 r.
  Bunun getirdiði karmaþýklýðý temizlemek için aþaðýdaki ilkeleri temel alan
- yeni bir paket yöneticisi yazma kararýna vardýk:
+ yeni bir paket yöneticisi yazmaya karar verilmiþtir:
 \layout Itemize
 
 Kurulum ve yapýlandýrma birbirinden ayrý iki görevdir.
- Kurulum yalnýzca programlar kurulur, güncellenir ve kaldýrýlýrken iþ görürken,
- yapýlandýrma hem kurulumda hem de çalýþan sistemde söz konusudur.
+ Kurulum, yalnýzca programlarýn kurulumu, güncellenmesi ve kaldýrýlmasý
+ esnasýnda iþ görürken, yapýlandýrma hem kurulumda hem de çalýþan sistemde
+ söz konusudur.
  Bu ayrý görevleri sorumluluk sýnýrlarý belirlenmiþ ayrý araçlarýn yerine
  getirmesi uygundur.
  Uludað projesi için yapýlandýrma iþlerini yürütecek araç ÇOMAR'dýr.
@@ -323,15 +346,33 @@ Paket meta bilgileri ile paketin derlenme ve kurulumunu yöneten betikler
  Varolan paket yöneticilerinde paket tanýmlama dosyalarý kod ile bilginin
  birbirine karýþtýðý, araçlarla iþlemesi zor, net ve kesin tanýmlanmamýþ
  biçimlerdedir.
-\layout Subsection
+\layout Comment
 
-Neden DPKG Deðil?
-\layout Subsection
+(meren) Bu kýsýmda daha önce olan ÇOMAR ile ilgili daha önceden liste halinde
+ verilmiþ gerekler artýk yok burda..
+ O gereklerin belgenin 
+\series bold 
+1699.
 
-Neden RPM Deðil?
-\layout Subsection
+\series default 
+ revizyonundan alýnýp Tasarým altýnda uygun bir yere koyulmasý gerekli..
+\newline 
 
-Neden Portage Deðil?
+\newline 
+(meren) Daha önce hemen bu kýsmýn altýndaki baþlýklar olan 
+\begin_inset Quotes eld
+\end_inset 
+
+Neden {Portage,DPKG,RPM}
+\begin_inset Quotes erd
+\end_inset 
+
+ deðil baþlýklarýný kaldýrmaya karar verdik.
+ Onlarý tek tek anlatmanýn ve eksik kalan yönlerinden bahsetmenin gereði
+ olmadýðýný düþündük.
+ Öte yandan da neden X paket yöneticisini seçmediniz sorusuna belge üzerinden
+ yanýt vermemiz de hoþ olurdu diye hissediyorum ben.
+ Bu konuyu bir düþünelim hýzlýca...
 \layout Section
 
 PÝSÝ Tasarýmý
