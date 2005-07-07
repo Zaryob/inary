@@ -31,7 +31,7 @@ class CLI:
         def __init__(self, totalsize):
             self.totalsize = totalsize
             self.percent = 0
-        
+
         def update(self, size):
             if not self.totalsize:
                 return 100

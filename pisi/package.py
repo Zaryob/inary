@@ -20,7 +20,7 @@ class Package:
             from ui import ui
             # TODO: belki Constants.packages_dir() gibi bir yere
             # indirmek daha iyi olur.
-            fetchUrl(url, getcwd(), ui.displayProgress)
+            fetchUrl(url, getcwd(), ui.Progress)
             self.filename = url.filename()
 
         self.impl = archive.ArchiveZip(self.filename, 'zip', mode)

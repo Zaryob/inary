@@ -76,13 +76,15 @@ class PisiCLI(object):
             #print 'rargs', parser.rargs, 'vals', parser.values
             self.command = parser.rargs[0]
 
-        # now for the real parser
-        parser = OptionParser(usage=usage, version="%prog " + pisi.__version__)
-        parser.allow_interspersed_args = False
-        self.parser = commonopts(parser)    
-        self.add_subcommand_opts()
-        (self.options, args) = self.parser.parse_args()
+#         # now for the real parser
+#         parser = OptionParser(usage=usage, version="%prog " + pisi.__version__)
+#         parser.allow_interspersed_args = False
+#         self.parser = commonopts(parser)    
+#         self.add_subcommand_opts()
+#         (self.options, args) = sel
+#         f.parser.parse_args()
         self.args = args[1:]
+        print options
 
         self.authInfo = None
         self.checkAuthInfo()

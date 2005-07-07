@@ -27,7 +27,7 @@ class Index(XmlFile):
             from os import getcwd
             from fetcher import fetchUrl
             # TODO: index dosyasını indirmek için bir yer bulmak lazım.
-            fetchUrl(url, getcwd(), ui.displayProgress)
+            fetchUrl(url, getcwd(), ui.Progress)
             self.filename = url.filename()
 
         self.readxml(self.filename)

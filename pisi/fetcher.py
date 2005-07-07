@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 
 # Yet another Pisi module for fetching files from various sources. Of
@@ -19,11 +20,11 @@ class FetchError (Exception):
     pass
 
 # helper functions
-def fetchUrl(url, dest, percentHook=None):
+def fetchUrl(url, dest, progress=None):
     fetch = Fetcher(url, dest)
-    fetch.percentHook = percentHook
+    fetch.progress = progress
     fetch.fetch()
-    if percentHook:
+    if progress:
         ui.info('\n')
 
 
@@ -61,13 +62,14 @@ class Fetcher:
         symbols = [' B/s', 'KB/s', 'MB/s', 'GB/s']
         from time import time
         tt, oldsize = int(time()), 0
-        p = ui.Progress(totalsize)
         bs, size = 1024, 0
         symbol, depth = "B/s", 0
         st = time()
         chunk = fileURI.read(bs)
         size = size + len(chunk)
-        self.percent = p.update(size)
+        if self.progress:
+            p = self.progress(totalsize)
+            self.percent = p.update(size)
         while chunk:
             dest.write(chunk)
             chunk = fileURI.read(bs)
@@ -80,14 +82,14 @@ class Fetcher:
                     depth += 1
                 symbol, depth = symbols[depth], 0
                 oldsize, tt = size, time()
-            if p.update(size):
-                self.percent = p.percent
-                if self.percentHook:
+            if self.progress:
+                if p.update(size):
+                    self.percent = p.percent
                     retval = {'filename': self.url.filename(), 
                               'percent' : self.percent,
                               'rate': self.rate,
                               'symbol': symbol}
-                    self.percentHook(retval)
+                    ui.displayProgress(retval)
 
         dest.close()
 
