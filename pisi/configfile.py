@@ -12,6 +12,10 @@
 #host = i686-pc-linux-gnu
 #CFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
 #CXXFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
+#
+#[svn]
+#username = caglar
+#password = isteoylebirsey
 
 import os
 from ConfigParser import ConfigParser, NoSectionError
@@ -30,6 +34,9 @@ class BuildDefaults:
     CFLAGS = "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
     CXXFLAGS= "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
 
+class SvnDefaults:
+    """Default values for [svn] section """
+    username =  password = None
 
 class ConfigurationSection(object):
     """ConfigurationSection class defines a section in the configuration
@@ -41,6 +48,8 @@ class ConfigurationSection(object):
             self.defaults = GeneralDefaults
         elif section == "build":
             self.defaults = BuildDefaults
+        elif section == "svn":
+            self.defaults = SvnDefaults
         else:
             e = "No section by name '%s'" % section
             raise ConfigException, e
@@ -76,3 +85,9 @@ class ConfigurationFile(object):
         except NoSectionError:
             builditems = []
         self.build = ConfigurationSection("build", builditems)
+
+        try:
+            svnitems = parser.items("svn")
+        except NoSectionError:
+            svnitems = []
+        self.svn = ConfigurationSection("svn", svnitems)

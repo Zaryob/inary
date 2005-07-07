@@ -19,6 +19,8 @@ class Config(object):
         def __init__(self):
             self.conf = ConfigurationFile("/etc/pisi/pisi.conf")
             self.destdir = self.conf.general.destinationdirectory
+            self.username = self.conf.svn.username
+            self.password = self.conf.svn.password
 
         # directory accessor functions
         # here is how it goes

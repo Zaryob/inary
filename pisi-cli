@@ -6,6 +6,7 @@ from optparse import OptionParser
 
 import pisi
 from pisi.cli import buildhelper, installhelper, indexhelper
+from pisi.config import config
 
 usage = """%prog <command> [options] [arguments]
 
@@ -56,7 +57,6 @@ class PisiCLI(object):
     commands = ["help", "build", "install", "index", "updatedb"]
     
     def __init__(self):
-
         # first construct a parser for common options
         # this is really dummy
         parser = Parser(usage=usage, version="%prog " + pisi.__version__)
@@ -125,15 +125,13 @@ class PisiCLI(object):
         username = self.options.username
         password = self.options.password
         if not username and not password:
-            return # No authentication
+            if config.username and config.password:
+                self.authInfo = (config.username, config.password)
+            return
         elif username and password:
             self.authInfo = (username, password)
             return
-
-        # TODO: yapılandırma dosyasını da kontrol et. Belki orada
-        # tanımlanmıştır?
-
-
+        
         if username and self.options.getpass:
             from getpass import getpass
             password = getpass("Password: ")
