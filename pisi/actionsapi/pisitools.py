@@ -5,7 +5,11 @@
 import os
 import gzip
 import shutil
+import fileinput
+import re
+import sys
 
+from utils import makedirs
 from pisi.util import copy_file
 
 # actions api modules
@@ -19,12 +23,9 @@ def dodoc(*documentList):
         + env.src_version + '-' \
         + env.src_release
     
-    try:
-        os.makedirs(os.path.join(env.install_dir,
+    makedirs(os.path.join(env.install_dir,
                                  dirs.doc,
                                  srcTag))
-    except OSError:
-        pass
 
     for document in documentList:
         if os.access(document, os.F_OK):
@@ -34,18 +35,15 @@ def dodoc(*documentList):
                                          srcTag,
                                          os.path.basename(document)))
 
-def dosed(filename, *sedPattern):
-    #FIXME: Convert to python
-    for pattern in sedPattern:
-        os.system('sed -i -e \'' + pattern + '\' ' +  filename)
+def dosed(filename, searchPattern, replacePattern = ''):
+    for line in fileinput.input(filename, inplace = 1):
+            line = re.sub(searchPattern, replacePattern, line)
+            sys.stdout.write(line)
 
 def dosbin(filename, destination=glb.dirs.sbin):
     env = glb.env
 
-    try:
-        os.makedirs(os.path.join(env.install_dir, destination))
-    except OSError:
-        pass
+    makedirs(os.path.join(env.install_dir, destination))
 
     if os.access(filename, os.F_OK):
         copy_file(filename,
@@ -59,10 +57,8 @@ def doman(filename):
 
     man, postfix = filename.split('.')
     destDir = os.path.join(env.install_dir, dirs.man, "man" + postfix)
-    try:
-        os.makedirs(destDir)
-    except OSError:
-        pass
+    
+    makedirs(destDir)
 
     gzfile = gzip.GzipFile(filename + '.gz', 'w', 9)
     gzfile.writelines(file(filename).xreadlines())
@@ -75,19 +71,14 @@ def doman(filename):
 def domove(source, destination):
     env = glb.env
 
-    try:
-        os.makedirs(env.install_dir + '/' + os.path.dirname(destination))
-    except OSError:
-        pass
+    makedirs(env.install_dir + '/' + os.path.dirname(destination))
    
     shutil.move(env.install_dir + '/' + source, env.install_dir + '/' + destination)
     
 def dosym(source, destination):
     env = glb.env
 
-    try:
-        os.makedirs( env.install_dir + '/' + os.path.dirname(destination))
-    except OSError:
-        pass
+    makedirs( env.install_dir + '/' + os.path.dirname(destination))
     
-    os.symlink(source, env.install_dir + destination)
+    if not os.path.islink(env.install_dir + destination):
+        os.symlink(source, env.install_dir + destination)

@@ -17,5 +17,11 @@ def createTmpDir():
     path = mkdtemp()
     return path
 
-def chmod(filename, mode=0755):
+def chmod(filename, mode = 0755):
     os.chmod(filename, mode)
+
+def makedirs(directoryName):
+    try:
+        os.makedirs(directoryName)
+    except OSError:
+        pass
