@@ -4,6 +4,7 @@
 # standard python modules
 import os
 import gzip
+import shutil
 
 from pisi.util import copy_file
 
@@ -71,4 +72,22 @@ def doman(filename):
         copy_file(filename + '.gz',
                         os.path.join(destDir,
                                      os.path.basename(filename)))
+def domove(source, destination):
+    env = glb.env
 
+    try:
+        os.makedirs(env.install_dir + '/' + os.path.dirname(destination))
+    except OSError:
+        pass
+   
+    shutil.move(env.install_dir + '/' + source, env.install_dir + '/' + destination)
+    
+def dosym(source, destination):
+    env = glb.env
+
+    try:
+        os.makedirs( env.install_dir + '/' + os.path.dirname(destination))
+    except OSError:
+        pass
+    
+    os.symlink(source, env.install_dir + destination)
