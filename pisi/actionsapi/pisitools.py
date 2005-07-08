@@ -40,7 +40,7 @@ def dosed(filename, searchPattern, replacePattern = ''):
             line = re.sub(searchPattern, replacePattern, line)
             sys.stdout.write(line)
 
-def dosbin(filename, destination=glb.dirs.sbin):
+def dosbin(filename, destination = glb.dirs.sbin):
     env = glb.env
 
     makedirs(os.path.join(env.install_dir, destination))
@@ -51,28 +51,29 @@ def dosbin(filename, destination=glb.dirs.sbin):
                                      destination,
                                      os.path.basename(filename)))
 
-def doman(filename):
+def doman(*filenameList):
     env = glb.env
     dirs = glb.dirs
 
-    man, postfix = filename.split('.')
-    destDir = os.path.join(env.install_dir, dirs.man, "man" + postfix)
+    for filename in filenameList:
+        man, postfix = filename.split('.')
+        destDir = os.path.join(env.install_dir, dirs.man, "man" + postfix)
     
-    makedirs(destDir)
+        makedirs(destDir)
 
-    gzfile = gzip.GzipFile(filename + '.gz', 'w', 9)
-    gzfile.writelines(file(filename).xreadlines())
-    gzfile.close()
+        gzfile = gzip.GzipFile(filename + '.gz', 'w', 9)
+        gzfile.writelines(file(filename).xreadlines())
+        gzfile.close()
 
-    if os.access(filename, os.F_OK):
-        copy_file(filename + '.gz',
-                        os.path.join(destDir,
+        if os.access(filename, os.F_OK):
+            copy_file(filename + '.gz',
+                            os.path.join(destDir,
                                      os.path.basename(filename)))
+
 def domove(source, destination):
     env = glb.env
 
     makedirs(env.install_dir + '/' + os.path.dirname(destination))
-   
     shutil.move(env.install_dir + '/' + source, env.install_dir + '/' + destination)
     
 def dosym(source, destination):
