@@ -14,8 +14,9 @@ where <command> is one of:
 
 help
 build
-install
 index
+info
+install
 updatedb
 
 Use \"%prog help <command>\" for help on a specific subcommand.
@@ -54,7 +55,7 @@ class Parser(OptionParser):
 
 class PisiCLI(object):
 
-    commands = ["help", "build", "install", "index", "updatedb"]
+    commands = ["help", "build", "info", "install", "index", "updatedb"]
     
     def __init__(self):
         # first construct a parser for common options
@@ -149,6 +150,21 @@ class PisiCLI(object):
             return
 
         self.parser.print_help()
+
+    def info_opts(self):
+        pass
+
+    def info(self):
+        if not self.args:
+            self.help("index")
+        for arg in self.args:
+            self.printinfo(arg)
+
+    def printinfo(self, arg):
+        import os.path
+        if os.path.exists(arg):
+            metadata, files = pisi.install.get_pkg_info(arg)
+            print metadata.package
 
     def index_opts(self):
         pass

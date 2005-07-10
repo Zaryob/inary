@@ -6,6 +6,7 @@ import os
 
 from specfile import *
 from package import Package
+from files import Files
 import util
 from config import config
 from ui import ui
@@ -23,8 +24,9 @@ from metadata import MetaData
 class InstallError(Exception):
     pass
 
-def install(package_fn):
-    
+from os.path import join, exists
+
+def get_pkg_info(package_fn):
     package = Package(package_fn, 'r')
     # extract control files
     util.clean_dir(config.install_dir())
@@ -33,15 +35,33 @@ def install(package_fn):
     # verify package
 
     # check if we have all required files
-
+    if not exists(join(config.install_dir(), 'metadata.xml')):
+        raise InstallError('metadata.xml missing')
+    if not exists(join(config.install_dir(), 'files.xml')):
+        raise InstallError('files.xml missing')
+    
     metadata = MetaData()
-    metadata.read(os.path.join(config.install_dir(), 'metadata.xml'))
+    metadata.read(join(config.install_dir(), 'metadata.xml'))
+
+    files = Files()
+    files.read(join(config.install_dir(), 'files.xml'))
+
+    return metadata, files
+
+def install(package_fn):
+
+    metadata, files = get_pkg_info(package_fn)
+    
     # check package semantics
     if not metadata.verify():
         raise InstallError("MetaData format wrong")
 
     # check file system requirements
     # what to do if / is split into /usr, /var, etc.?
+
+    # check if package is in database
+    if not packagedb.has_package(metadata.package.name):
+        packagedb.add_package(metadata.package) # terrible solution it seems
     
     # check conflicts
     # check dependencies

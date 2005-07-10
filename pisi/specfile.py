@@ -258,6 +258,11 @@ class PackageInfo(object):
             if not dep.verify(): return False
         return True
 
+    def __str__(self):
+        s = 'Name: ' + self.name
+        s += '\nSummary: ' + self.summary
+        return s
+
 class SpecFile(XmlFile):
     """A class for reading/writing from/to a PSPEC (PISI SPEC) file."""
 

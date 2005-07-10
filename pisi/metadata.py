@@ -52,6 +52,10 @@ class PackageInfo(specfile.PackageInfo):
     def verify(self):
         return specfile.PackageInfo.verify(self)
 
+    def __str__(self):
+        s = specfile.PackageInfo.__str__(self)
+        return s
+
 class MetaData(XmlFile):
     """Package metadata. Metadata is composed of Specfile and various
     other information. A metadata has two parts, Source and Package."""

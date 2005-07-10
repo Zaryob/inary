@@ -145,12 +145,7 @@ def check_dir(dir):
 
 def clean_dir(path):
     "Remove all content of a directory (top)"
-#     for root, dirs, files in os.walk(top, topdown=False):
-#         for name in files:
-#             os.remove(os.path.join(root, name))
-#         for name in dirs:
-#             os.rmdir(os.path.join(root, name))
-# don't reimplement the wheel
+    # don't reimplement the wheel
     if os.path.exists(path):
         shutil.rmtree(path)
 
