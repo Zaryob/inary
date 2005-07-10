@@ -156,7 +156,7 @@ class PisiCLI(object):
 
     def info(self):
         if not self.args:
-            self.help("index")
+            self.help("info")
         for arg in self.args:
             self.printinfo(arg)
 
