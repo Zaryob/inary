@@ -31,9 +31,9 @@ class CLI:
         while True:
             s = raw_input(msg + colorize('(yes/no)', 'red'))
             if s.starts_with('y') or s.starts_with('Y'):
-                return true
+                return True
             if s.starts_with('n') or s.starts_with('N'):
-                return false
+                return False
 
     class Progress:
         def __init__(self, totalsize):
