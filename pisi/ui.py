@@ -27,6 +27,14 @@ class CLI:
         sys.stdout.write(colorize(msg, 'red'))
         sys.stdout.flush()
 
+    def confirm(self, msg):
+        while True:
+            s = raw_input(msg + colorize('(yes/no)', 'red'))
+            if s.starts_with('y') or s.starts_with('Y'):
+                return true
+            if s.starts_with('n') or s.starts_with('N'):
+                return false
+
     class Progress:
         def __init__(self, totalsize):
             self.totalsize = totalsize
