@@ -64,6 +64,8 @@ def install(package_fn):
         packagedb.add_package(metadata.package) # terrible solution it seems
     
     # check conflicts
+    if 
+    
     # check dependencies
     if not dependency.installable(metadata.package.name):
         raise InstallError("Package not installable")

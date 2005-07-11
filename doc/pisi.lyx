@@ -840,14 +840,26 @@ Override
 Conflicts:
 \series default 
  Paketin çalýþmasý/iþlevini yerine getirmesi için, sistemde olmamasý gereken
- paketleri belirtir.
+ paketleri belirtir, bu örneðin ayný dosyayý iki paketin de taþýmasý durumunda
+ olabilir.
+ 
+\series bold 
+Package:
+\series default 
+ Olmamasý gereken paket adýný verir.
 \layout Itemize
 
 
 \series bold 
-Provides:
+Provides: 
 \series default 
- FIXME: ????????????????????????
+Paketin saðladýðý ÇOMAR OM ayaklarýnýn bir listesini verir.
+ 
+\series bold 
+OM: 
+\series default 
+Çomar OM ayaðýnýn adýný verir.
+ (FIXME)
 \layout Itemize
 
 
