@@ -17,6 +17,7 @@ build
 index
 info
 install
+remove
 updatedb
 
 Use \"%prog help <command>\" for help on a specific subcommand.
@@ -55,7 +56,8 @@ class Parser(OptionParser):
 
 class PisiCLI(object):
 
-    commands = ["help", "build", "info", "install", "index", "updatedb"]
+    commands = ["help", "build", "info", "install",
+                "remove", "index", "updatedb"]
     
     def __init__(self):
         # first construct a parser for common options
@@ -141,6 +143,11 @@ class PisiCLI(object):
             
 
     # FIX: her komut için ayrı help
+
+    help_help = """help: display help
+usage: help
+help <command>"""
+    
     def help_opts(self):
         pass
 
@@ -149,8 +156,14 @@ class PisiCLI(object):
             print usage
             return
 
-        self.parser.print_help()
+        if command !="":
+            print self.__getattribute__(command + '_help')
+        else:
+            print self.__getattribute__(self.args[0] + '_help')
 
+    info_help = """info: display information about a package 
+usage: info <package> ...
+"""
     def info_opts(self):
         pass
 
@@ -165,6 +178,8 @@ class PisiCLI(object):
         if os.path.exists(arg):
             metadata, files = pisi.install.get_pkg_info(arg)
             print metadata.package
+
+    index_help = """index: Index PISI files in a given directory"""
 
     def index_opts(self):
         pass
@@ -181,6 +196,8 @@ class PisiCLI(object):
             print 'Indexing only a single directory supported'
             self.die()
 
+    install_help = """install: install PISI packages"""
+
     def install_opts(self):
         self.parser.add_option("", "--test", action="store_true",
                                default=True, help="xxxx")
@@ -191,6 +208,8 @@ class PisiCLI(object):
         for arg in self.args:
             installhelper.install(arg)
 
+    build_help = """build: compile PISI packages"""
+
     def build_opts(self):
         pass
 
@@ -200,6 +219,20 @@ class PisiCLI(object):
 
         for arg in self.args:
             buildhelper.build(arg, self.authInfo)
+
+    remove_help = """remove: remove PISI packages"""
+
+    def remove_opts(self):
+        self.parser.add_option("", "--test", action="store_true",
+                               default=True, help="xxxx")
+
+    def remove(self):
+        if not self.args:
+            self.help("install")
+        for arg in self.args:
+            pisi.install.remove(arg)
+
+    updatedb_help = """updatedb: update source and package databases"""
 
     def updatedb_opts(self):
         pass
