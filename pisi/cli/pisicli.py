@@ -4,7 +4,6 @@ import sys
 from optparse import OptionParser
 
 import pisi
-from pisi.cli import buildhelper, installhelper, indexhelper
 from pisi.config import config
 
 usage = """%prog <command> [options] [arguments]
@@ -180,6 +179,7 @@ usage: info <package> ...
         pass
 
     def index(self):
+        from pisi.cli import indexhelper
         if not self.args:
             self.help("index")
 
@@ -198,6 +198,7 @@ usage: info <package> ...
                                default=True, help="xxxx")
 
     def install(self):
+        from pisi.cli import installhelper
         if not self.args:
             self.help("install")
         for arg in self.args:
@@ -209,6 +210,8 @@ usage: info <package> ...
         pass
 
     def build(self):
+        from pisi.cli import buildhelper
+
         if not self.args:
             self.help("build")
 
