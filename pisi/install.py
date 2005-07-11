@@ -48,6 +48,17 @@ def get_pkg_info(package_fn):
 
     return metadata, files
 
+
+def remove(package_name):
+    """Remove a goddamn package"""
+    ui.info('Removing package ' + package_name)
+    if not installdb.is_installed(package_name):
+        raise InstallError('Trying to remove nonexistent package '
+                           + package_name)
+    for fileinfo in installdb.files(package_name):
+        os.unlink(fileinfo.path)
+    installdb.remove(package_name)
+
 def install(package_fn):
 
     metadata, files = get_pkg_info(package_fn)
@@ -59,18 +70,51 @@ def install(package_fn):
     # check file system requirements
     # what to do if / is split into /usr, /var, etc.?
 
+    package = metadata.package
+
     # check if package is in database
-    if not packagedb.has_package(metadata.package.name):
-        packagedb.add_package(metadata.package) # terrible solution it seems
+    if not packagedb.has_package(package.name):
+        packagedb.add_package(package) # terrible solution it seems
     
     # check conflicts
     for pkg in metadata.package.conflicts:
-        if installdb.has_package(pkg):
+        if installdb.has_package(package):
             raise InstallError("Package conflicts " + pkg)
     
     # check dependencies
-    if not dependency.installable(metadata.package.name):
+    if not dependency.installable(package.name):
         raise InstallError("Package not installable")
+
+    #TODO:
+    if installdb.is_installed(package.name): # is this a reinstallation?
+
+        (iversion, irelease) = installdb.get_version(package.name)
+
+        if package.version == iversion and package.release == irelease:
+            if not ui.confirm('Re-install same version package?'):
+                raise InstallError('Package re-install declined')
+
+        upgrade = False
+        # is this an upgrade?
+        # determine and report the kind of upgrade: version, release, build
+        if package.version > iversion:
+            ui.info('Upgrading to new upstream version')
+            upgrade = True
+        elif package.release > irelease:
+            ui.info('Upgrading to new distribution release')
+            upgrade = True
+
+        # is this a downgrade? confirm this action.
+        if not upgrade:
+            if package.version < iversion:
+                x = 'Downgrade to old upstream version?'
+            elif package.release < irelease:
+                x = 'Downgrade to old distribution release?'
+            if not ui.confirm(x):
+                raise InstallError('Package downgrade declined')
+
+        # remove old package then
+        remove(package.name)
 
     # unzip package in place
     ui.info('Extracting files\n')

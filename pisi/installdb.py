@@ -7,6 +7,7 @@ import os, fcntl
 import bsddb.dbshelve as shelve
 
 from config import config
+from files import Files
 import util
 
 class InstallDBError(Exception):
@@ -33,7 +34,9 @@ class InstallDB:
     def files(self, pkg):
         pkg = str(pkg)
         (status, version, release) = self.d[pkg]
-        return file(self.files_name(pkg,version,release))
+        files = Files()
+        files.read(self.files_name(pkg,version,release))
+        return files
 
     def is_recorded(self, pkg):
         pkg = str(pkg)
