@@ -279,24 +279,28 @@ Gerektiðinde pakedi oluþturan kiþinin imzasý dýþýnda, üçüncü parti kurum
 \layout Subsection
 
 Kurumsal Gereksinimler
-\layout Comment
-
-(meren) Bu kýsmý biraz daha açmak gerekli (yoksa deðil mi?).
 \layout Itemize
 
 Paket yöneticisi birden fazla paket kaynaðý ile ayný anda sorunsuz bir þekilde
  çalýþabilmelidir.
 \layout Itemize
 
-Kurumlar ya da bireyler tarafýndan ön tanýmlý depoda da bulunan kimi paketlerin
- özelleþtirlmiþ versiyonlarýnýn bulunduðu depolar 
+Kurumlar ya da bireyler tarafýndan 
+\emph on 
+ön tanýmlý depoda da bulunan
+\emph default 
+ kimi paketlerin deðiþtirilmiþ versiyonlarýnýn bulunduðu depolar 
 \emph on 
 overlay
 \emph default 
  olarak tanýmlanabilmelidir.
 \layout Itemize
 
-Ön tanýmlý depoda bulunmayan çeþitli paketlerin bulunduðu depolar 
+Ön tanýmlý depoda 
+\emph on 
+bulunmayan
+\emph default 
+ çeþitli paketlerin bulunduðu depolar 
 \emph on 
 addon
 \emph default 
@@ -327,11 +331,15 @@ leri birbirinden düzgün bir biçimde ayrýlmadýklarý görülmektedir.
  Bu araçlar basit olarak hazýrlanmýþ ve zaman içinde ortaya çýkan ihtiyaçlarý
  karþýlamak için sürekli yeni özellikler eklenerek bugünkü hallerine gelmiþlerdi
 r.
- Bunun getirdiði karmaþýklýðý temizlemek için aþaðýdaki ilkeleri temel alan
- yeni bir paket yöneticisi yazmaya karar verilmiþtir:
+ Bunun getirdiði karmaþýklýðý temizlemek için aþaðýdaki iki ilkeyi temel
+ alan yeni bir paket yöneticisinin yazýlmasýna verilmiþtir:
 \layout Itemize
 
-Kurulum ve yapýlandýrma birbirinden ayrý iki görevdir.
+
+\series bold 
+Kurulum ve yapýlandýrma birbirinden ayrý iki görevdir
+\series default 
+.
  Kurulum, yalnýzca programlarýn kurulumu, güncellenmesi ve kaldýrýlmasý
  esnasýnda iþ görürken, yapýlandýrma hem kurulumda hem de çalýþan sistemde
  söz konusudur.
@@ -341,38 +349,15 @@ Kurulum ve yapýlandýrma birbirinden ayrý iki görevdir.
  PÝSÝ bu görevleri ÇOMAR'a devredecektir.
 \layout Itemize
 
-Paket meta bilgileri ile paketin derlenme ve kurulumunu yöneten betikler
- iç içe geçmemelidir.
- Varolan paket yöneticilerinde paket tanýmlama dosyalarý kod ile bilginin
- birbirine karýþtýðý, araçlarla iþlemesi zor, net ve kesin tanýmlanmamýþ
- biçimlerdedir.
-\layout Comment
 
-(meren) Bu kýsýmda daha önce olan ÇOMAR ile ilgili daha önceden liste halinde
- verilmiþ gerekler artýk yok burda..
- O gereklerin belgenin 
 \series bold 
-1699.
-
+Paket meta bilgileri ile paketin derlenme ve kurulumunu yöneten betikler
+ iç içe geçmemelidir
 \series default 
- revizyonundan alýnýp Tasarým altýnda uygun bir yere koyulmasý gerekli..
-\newline 
-
-\newline 
-(meren) Daha önce hemen bu kýsmýn altýndaki baþlýklar olan 
-\begin_inset Quotes eld
-\end_inset 
-
-Neden {Portage,DPKG,RPM}
-\begin_inset Quotes erd
-\end_inset 
-
- deðil baþlýklarýný kaldýrmaya karar verdik.
- Onlarý tek tek anlatmanýn ve eksik kalan yönlerinden bahsetmenin gereði
- olmadýðýný düþündük.
- Öte yandan da neden X paket yöneticisini seçmediniz sorusuna belge üzerinden
- yanýt vermemiz de hoþ olurdu diye hissediyorum ben.
- Bu konuyu bir düþünelim hýzlýca...
+.
+ Varolan paket yöneticilerinde paket tanýmlama dosyalarý kod ile bilginin
+ birbirine karýþtýðý, araçlarla iþlemesi, içinden bilgi çýkarýlmasý zor,
+ net ve kesin tanýmlanmamýþ biçimlerdedir.
 \layout Section
 
 PÝSÝ Tasarýmý
@@ -381,7 +366,8 @@ PÝSÝ Tasarýmý
 Paket Oluþturma
 \layout Standard
 
-FIXME: Anlamlý bir giriþ paragrafý lazým!
+Bu kýsýmda bir PISI paketinin oluþturulmasý ve kullanýlmasý esnasýnda gerek
+ duyulacak meta dosyalar ve süreçler netleþtirilmeye çalýþýlmýþtýr.
 \layout Subsubsection
 
 PSPEC Dosyasý
@@ -556,14 +542,14 @@ Paketi oluþturan kiþilerin adý/soyadý ve e-posta adresi belirtir.
 \series bold 
 Name:
 \series default 
- (*) Paket geliþtiricisinin adý ve soyadý.
+ (*) Paket oluþturan kiþinin adý ve soyadý.
 \layout Itemize
 
 
 \series bold 
 Email:
 \series default 
- (*) Paket geliþtiricisinin e-posta adresi.
+ (*) Paket oluþturan kiþinin e-posta adresi.
 \end_deeper 
 \layout Itemize
 
@@ -618,8 +604,8 @@ compressionType
 \series bold 
 level
 \series default 
- ile yamanýn patch komutuna -p ile verilebilen seviyesi verilebilir, level
- verilmez ise 0 olarak kabul edilir.
+ ile yamanýn patch komutuna seviye verilebilir, level verilmez ise seviye
+ 0 olarak kabul edilir.
  Örnek: 
 \newline 
 <Patch compressionType="gz" level="1">popt-1.7-uclibc.patch.gz</Patch>
@@ -687,9 +673,7 @@ BuildDependencies
 Dependency
 \series default 
 : Bir baðýmlýlýðý tanýmlar.
- Burada bahsedilen baðýmlýlýk paket baðýmlýlýðý olabilir (TODO: Comar baðýmlýlýk
-larýný da bir þekilde ifade etmek gerekiyordu.
- Bu belgede daha önce vardý sanýrým çýkartmýþýz).
+ Burada bahsedilen baðýmlýlýk paket baðýmlýlýðý olabilir.
  
 \series bold 
 versionFrom
@@ -702,7 +686,7 @@ versionTo
  edilebilir.
  Örnek:
 \newline 
-<Dependency versionFrom="1.8">make</Dependency>
+<Dependency versionFrom="1.8">automake</Dependency>
 \end_deeper 
 \layout Itemize
 
@@ -795,44 +779,44 @@ Package
 
 
 \series bold 
-Name: 
+Name 
 \series default 
-Override
+(tanýmlý ise Source bölümündekinin yerine kullanýlýr)
 \layout Itemize
 
 
 \series bold 
-Summary: 
+Summary 
 \series default 
-Override
+(tanýmlý ise Source bölümündekinin yerine kullanýlýr)
 \layout Itemize
 
 
 \series bold 
-Description
+Description 
 \series default 
-: Override
+(tanýmlý ise Source bölümündekinin yerine kullanýlýr)
 \layout Itemize
 
 
 \series bold 
-License
+License 
 \series default 
-: Override
+(tanýmlý ise Source bölümündekinin yerine kullanýlýr)
 \layout Itemize
 
 
 \series bold 
-IsA: 
+IsA 
 \series default 
-Merge
+(tanýmlý ise Source bölümündeki ile birleþtirilir)
 \layout Itemize
 
 
 \series bold 
-PartOf: 
+PartOf 
 \series default 
-Override
+(tanýmlý ise Source bölümündekinin yerine kullanýlýr)
 \layout Itemize
 
 
@@ -853,13 +837,7 @@ Package:
 \series bold 
 Provides: 
 \series default 
-Paketin saðladýðý ÇOMAR OM ayaklarýnýn bir listesini verir.
- 
-\series bold 
-OM: 
-\series default 
-Çomar OM ayaðýnýn adýný verir.
- (FIXME)
+Paketin saðladýðý ÇOMAR OM bacaklarýnýn bir listesini verir.
 \layout Itemize
 
 
@@ -1097,7 +1075,7 @@ en
 
 
 \size scriptsize 
-      <Dependency versionFrom="1.8">make</Dependency>
+      <Dependency versionFrom="1.8">automake</Dependency>
 \layout LyX-Code
 
 
@@ -1303,13 +1281,6 @@ from pisi.actionsapi import autotools
 
 
 \size scriptsize 
-WorkDir='popt-1.7'
-\layout LyX-Code
-
-\layout LyX-Code
-
-
-\size scriptsize 
 def setup():
 \layout LyX-Code
 
@@ -1458,8 +1429,6 @@ Packager
 
 \series bold 
 Name
-\series default 
-.
 \layout Itemize
 
 
@@ -1534,7 +1503,7 @@ Conflicts
 \series bold 
 Provides:
 \series default 
- FIXME: ????????????????????????
+ Paketin hangi OM bacaklarýný saðladýðýný belirtir.
 \layout Itemize
 
 
@@ -1832,11 +1801,7 @@ cpid/
 \begin_deeper 
 \layout Itemize
 
-
-\series bold 
-a
-\series default 
-cpid-1.0.2.pspec
+pspec.xml
 \layout Itemize
 
 actions.py
@@ -1933,69 +1898,69 @@ r
 
 
 \series bold 
-Name: 
+Name
 \layout Itemize
 
 
 \series bold 
-Summary:
+Summary
 \series default 
  
 \layout Itemize
 
 
 \series bold 
-Description:
+Description
 \layout Itemize
 
 
 \series bold 
-Version: 
+Version 
 \layout Itemize
 
 
 \series bold 
-Release: 
+Release 
 \layout Itemize
 
 
 \series bold 
-License: 
+License
 \layout Itemize
 
 
 \series bold 
-RuntimeDependencies:
+RuntimeDependencies
 \layout Itemize
 
 
 \series bold 
-InstallDependencies:
+InstallDependencies
 \layout Itemize
 
 
 \series bold 
-Provides: 
+Provides 
 \layout Itemize
 
 
 \series bold 
-History:
+History
 \layout Itemize
 
 
 \series bold 
-Conflicts:
+Conflicts
 \layout Itemize
 
 
 \series bold 
-PackageSize: 
+PackageSize 
 \layout Itemize
 
 
 \series bold 
-InstalledSize: 
+InstalledSize
 \layout Standard
 
 
@@ -2473,31 +2438,28 @@ pisi-index.xml
 
 
 \series bold 
-Kaynak Veritabanlarý:
+Kaynak Veritabanlarý
 \layout Subsubsection
 
 Kurulum Veritabaný
 \layout Standard
 
-FIXME: Dizayný sonrasý güncellenmeli
+FIXME: Ayrýntýlý taným eklenecek
 \layout Subsubsection
 
 Depo Veritabanlarý
 \layout Standard
 
-FIXME: Dizayný sonrasý güncellenmeli
+FIXME: Ayrýntýlý taným eklenecek
 \layout Subsubsection
 
 Kaynak Veritabanlarý
 \layout Standard
 
-FIXME: Dizayný sonrasý güncellenmeli
+FIXME: Ayrýntýlý taným eklenecek
 \layout Subsection
 
 libpisi
-\layout Standard
-
-FIXME: Revize edilmeli
 \layout Standard
 
 Paket veritabanýnýn ana yüklenicisi libpisi kütüphanesi olacaktýr.
