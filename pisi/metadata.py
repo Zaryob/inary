@@ -79,6 +79,8 @@ class MetaData(XmlFile):
         self.package.runtimeDeps = pkg.runtimeDeps
         self.package.paths = pkg.paths
         self.package.history = src.history # FIXME
+        self.package.conflicts = pkg.conflicts
+        self.package.provides = pkg.provides
 
     def read(self, filename):
         self.readxml(filename)

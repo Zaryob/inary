@@ -221,10 +221,10 @@ class PackageInfo(object):
         self.paths = [PathInfo(x) for x in getAllNodes(node, "Files/Path")]
         historyElts = getAllNodes(node, "History/Update")
         self.history = [UpdateInfo(x) for x in historyElts]
-#        conflElts = getAllNodes(node, "Conflicts/Package")
-#        self.conflicts = map(getNodeText, conflElts)
-#        provElts = getAllNodes(node, "Provides/OM")
-#        self.provides = map(getNodeText, provElts)
+        conflElts = getAllNodes(node, "Conflicts/Package")
+        self.conflicts = map(getNodeText, conflElts)
+        provElts = getAllNodes(node, "Provides/OM")
+        self.provides = map(getNodeText, provElts)
 
     def elt(self, xml):
         node = xml.newNode("Package")
@@ -245,10 +245,10 @@ class PackageInfo(object):
             xml.addNodeUnder(node, "Files", path.elt(xml))
         for update in self.history:
             xml.addNodeUnder(node, "History", update.elt(xml))
-#        for conflict in self.conflicts:
-#            xml.addTextNodeUnder(node, "Conflicts/Package", conflict)
-#        for om in self.provides:
-#            xml.addTextNodeUnder(node, "Provides/OM", om)
+        for conflict in self.conflicts:
+            xml.addTextNodeUnder(node, "Conflicts/Package", conflict)
+        for om in self.provides:
+            xml.addTextNodeUnder(node, "Provides/OM", om)
         return node
 
     def verify(self):
