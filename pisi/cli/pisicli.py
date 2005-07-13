@@ -8,7 +8,7 @@ from pisi.config import config
 
 
 # globals
-usage = """%prog <command> [options] [arguments]
+usage_text = """%prog <command> [options] [arguments]
 
 where <command> is one of:
 
@@ -68,7 +68,7 @@ class Command(object):
     """generic help string for any command"""
     def __init__(self):
         # now for the real parser THIS IS ABSOLUTELY NECESSARY
-        self.parser = OptionParser(usage=usage,
+        self.parser = OptionParser(usage=usage_text,
                                    version="%prog " + pisi.__version__)
         #self.parser.allow_interspersed_args = False
         self.options()
@@ -109,12 +109,12 @@ class Help(Command):
     def __init__(self):
         super(Help, self).__init__()
 
-    def run(self, args=None):
-        if not args:
-            print usage
+    def run(self):
+        if not self.args:
+            print usage_text
             return
         
-        for arg in args:
+        for arg in self.args:
             obj = cmdObject(arg, True)
             obj.help()
                 
@@ -205,7 +205,7 @@ class Index(Command):
             indexhelper.index()
         else:
             print 'Indexing only a single directory supported'
-            self.die()
+            return
 
 class UpdateDB(Command):
     """updatedb: update source and package databases"""
@@ -217,27 +217,27 @@ class UpdateDB(Command):
             self.help()
             return
 
+        from pisi.cli import indexhelper
         indexfile = self.args[0]
         indexhelper.updatedb(indexfile)
 ######## end commands #########
 
-class ParserError:
-    def __init__(self, msg):
-        self.msg = msg
+class ParserError(Exception):
+    pass
 
 class Parser(OptionParser):
-    def __init__(self, usage, version):
-        OptionParser.__init__(self, usage=usage, version=version)
+    def __init__(self, version):
+        OptionParser.__init__(self, usage=usage_text, version=version)
 
     def error(self, msg):
-        raise ParserError(msg)
+        raise ParserError, msg
 
 class PisiCLI(object):
 
     def __init__(self):
         # first construct a parser for common options
         # this is really dummy
-        self.parser = Parser(usage=usage, version="%prog " + pisi.__version__)
+        self.parser = Parser(version="%prog " + pisi.__version__)
         #self.parser.allow_interspersed_args = False
         self.parser = commonopts(self.parser)
 
@@ -262,7 +262,7 @@ class PisiCLI(object):
             self.die()
 
     def die(self):
-        print usage
+        print usage_text
         sys.exit(1)
 
     def runCommand(self):
