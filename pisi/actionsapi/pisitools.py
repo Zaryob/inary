@@ -8,8 +8,9 @@ import shutil
 import fileinput
 import re
 import sys
+import glob
 
-from utils import makedirs
+from utils import makedirs, unlink
 from pisi.util import copy_file
 
 # actions api modules
@@ -27,9 +28,10 @@ def dodoc(*documentList):
                                  dirs.doc,
                                  srcTag))
 
-    for document in documentList:
-        if os.access(document, os.F_OK):
-            copy_file(document, 
+    for item in documentList:
+        for document in glob.glob(item):
+            if os.access(document, os.F_OK):
+               copy_file(document, 
                             os.path.join(env.install_dir,
                                          dirs.doc,
                                          srcTag,
@@ -72,14 +74,35 @@ def doman(*filenameList):
 
 def domove(source, destination):
     env = glb.env
-
+    
     makedirs(env.install_dir + '/' + os.path.dirname(destination))
-    shutil.move(env.install_dir + '/' + source, env.install_dir + '/' + destination)
+    try:
+        shutil.move(env.install_dir + '/' + source, env.install_dir + '/' + destination)
+    except OSError, e:
+        pass
     
 def dosym(source, destination):
     env = glb.env
 
-    makedirs( env.install_dir + '/' + os.path.dirname(destination))
+    makedirs(env.install_dir + '/' + os.path.dirname(destination))
     
     if not os.path.islink(env.install_dir + destination):
         os.symlink(source, env.install_dir + destination)
+
+def dolib(filename, destination = '/lib', srcDir = ''):
+    env = glb.env
+
+    if not srcDir:
+        libFile = os.path.join(env.work_dir, env.src_name + "-" + env.src_version, filename)
+    else:
+        libFile = os.path.join(env.work_dir, srcDir, filename)
+
+    makedirs(env.install_dir + destination)
+
+    if os.access(libFile, os.F_OK):
+        copy_file(libFile, env.install_dir + destination + '/' + filename)
+
+def remove(filename):
+    env = glb.env
+    
+    unlink(env.install_dir + filename)

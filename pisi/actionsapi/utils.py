@@ -20,6 +20,9 @@ def createTmpDir():
 def chmod(filename, mode = 0755):
     os.chmod(filename, mode)
 
+def unlink(filename):
+    os.unlink(filename)
+
 def makedirs(directoryName):
     try:
         os.makedirs(directoryName)

@@ -31,11 +31,12 @@ def configure(parameters = ''):
 
     os.system(configure_string)
 
-def make():
+def make(parameters = ''):
     ''' FIXME: Düzgün hale getirilecek '''
-    os.system('make')
+    make_string = 'make %s' % parameters
+    os.system(make_string)
 
-def install():
+def install(parameters = ''):
     ''' FIXME: Düzgün hale getirilecek '''
     ''' dir_suffix = /var/tmp/pisi/ _paket_adı_ /image/ '''
     dirs = glb.dirs
@@ -43,7 +44,9 @@ def install():
     dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
         glb.const.install_dir_suffix
 
-    install_string = 'make prefix=%(prefix)s/%(defaultprefix)s \
+
+    if not parameters:
+        install_string = 'make prefix=%(prefix)s/%(defaultprefix)s \
                 datadir=%(prefix)s/%(data)s \
                 infodir=%(prefix)s/%(info)s \
                 localstatedir=%(prefix)s/%(localstate)s \
@@ -56,5 +59,7 @@ def install():
                             'localstate': dirs.localstate,
                             'conf': dirs.conf,
                             'data': dirs.data}
+    else:
+        install_string = 'make PREFIX=%s%s install' % (dir_suffix, parameters)
 
     os.system(install_string)
