@@ -28,7 +28,6 @@ def configure(parameters = ''):
                        dirs.conf,
                        dirs.localstate,
                        parameters)
-
     os.system(configure_string)
 
 def make(parameters = ''):
@@ -61,5 +60,15 @@ def install(parameters = ''):
                             'data': dirs.data}
     else:
         install_string = 'make PREFIX=%s%s install' % (dir_suffix, parameters)
+
+    os.system(install_string)
+
+def installWithDestdir():
+    dirs = glb.dirs
+
+    dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
+        glb.const.install_dir_suffix
+
+    install_string = 'make install DESTDIR=%s' % dir_suffix
 
     os.system(install_string)

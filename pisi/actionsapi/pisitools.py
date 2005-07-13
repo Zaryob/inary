@@ -11,7 +11,7 @@ import sys
 import glob
 
 from utils import makedirs, unlink
-from pisi.util import copy_file
+from pisi.util import copy_file, clean_dir
 
 # actions api modules
 from actionglobals import glb
@@ -106,3 +106,8 @@ def remove(filename):
     env = glb.env
     
     unlink(env.install_dir + filename)
+
+def removeDir(dirname):
+    env = glb.env
+    
+    clean_dir(env.install_dir + dirname)
