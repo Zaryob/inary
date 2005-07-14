@@ -44,7 +44,7 @@ def install(parameters = ''):
     dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
         glb.const.install_dir_suffix
 
-    install_string = 'make prefix=%s/%(defaultprefix)s \
+    install_string = 'make prefix=%(prefix)s/%(defaultprefix)s \
                 datadir=%(prefix)s/%(data)s \
                 infodir=%(prefix)s/%(info)s \
                 localstatedir=%(prefix)s/%(localstate)s \
