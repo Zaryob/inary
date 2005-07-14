@@ -102,6 +102,11 @@ def dolib(filename, destination = '/lib', srcDir = ''):
     if os.access(libFile, os.F_OK):
         copy_file(libFile, env.install_dir + destination + '/' + filename)
 
+def dodir(parameters = ''):
+    env = glb.env
+
+    makedirs(env.install_dir + parameters)
+
 def remove(filename):
     env = glb.env
     

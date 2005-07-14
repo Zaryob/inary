@@ -28,6 +28,7 @@ def configure(parameters = ''):
                        dirs.conf,
                        dirs.localstate,
                        parameters)
+    
     os.system(configure_string)
 
 def make(parameters = ''):
@@ -43,9 +44,7 @@ def install(parameters = ''):
     dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
         glb.const.install_dir_suffix
 
-
-    if not parameters:
-        install_string = 'make prefix=%(prefix)s/%(defaultprefix)s \
+    install_string = 'make prefix=%s/%(defaultprefix)s \
                 datadir=%(prefix)s/%(data)s \
                 infodir=%(prefix)s/%(info)s \
                 localstatedir=%(prefix)s/%(localstate)s \
@@ -58,8 +57,16 @@ def install(parameters = ''):
                             'localstate': dirs.localstate,
                             'conf': dirs.conf,
                             'data': dirs.data}
-    else:
-        install_string = 'make PREFIX=%s%s install' % (dir_suffix, parameters)
+
+    os.system(install_string)
+
+def installWithPrefix(parameters = ''):
+    dirs = glb.dirs
+
+    dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
+        glb.const.install_dir_suffix
+
+    install_string = 'make PREFIX=%s%s install' % (dir_suffix, parameters)
 
     os.system(install_string)
 
@@ -70,5 +77,15 @@ def installWithDestdir():
         glb.const.install_dir_suffix
 
     install_string = 'make install DESTDIR=%s' % dir_suffix
+
+    os.system(install_string)
+
+def installWithBasedir():
+    dirs = glb.dirs
+
+    dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
+        glb.const.install_dir_suffix
+
+    install_string = 'make BASEDIR=%s install' % dir_suffix
 
     os.system(install_string)
