@@ -11,6 +11,14 @@ def registerScript(om, appname, scriptPath):
     s.close()
     return True
 
+def removeScript(appname):
+    s = socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)
+    s.connect("/tmp/comar")
+    cmd = "-" + appname + '\n'
+    s.send(cmd)
+    s.close()
+    return True
+
 def call(om):
     s = socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)
     s.connect("/tmp/comar")
