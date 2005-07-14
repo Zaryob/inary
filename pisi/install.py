@@ -127,7 +127,8 @@ def install(package_fn):
     # something like the below?
     # import comariface
     # for comar int metadata.package.providesComar:
-    #     comariface.register(comar.om, comar.script)
+    #     scriptPath = .... + comar.script
+    #     comariface.register(comar.om, metadata.package.name, scriptPath)
 
     # update databases
 
