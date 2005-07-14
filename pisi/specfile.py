@@ -129,6 +129,22 @@ class PathInfo:
         if not self.pathname: return False
         return True
 
+class ComarProvide:
+    def __init__(self, node):
+        self.om = getNodeText(node)
+        self.script=getNodeAttribute(node, "script")
+
+    def elt(self, xml):
+        node = xml.newNode("COMAR")
+        xml.addText(node, self.om)
+        node.setAttribute("script", self.script)
+        return node
+
+    def verify(self):
+        if not self.om or not self.script:
+            return False
+        return True
+
 class SourceInfo:
     """A structure to hold source information. Source information is
     located under <Source> tag in PSPEC file."""
@@ -223,8 +239,10 @@ class PackageInfo(object):
         self.history = [UpdateInfo(x) for x in historyElts]
         conflElts = getAllNodes(node, "Conflicts/Package")
         self.conflicts = map(getNodeText, conflElts)
-        provElts = getAllNodes(node, "Provides/OM")
-        self.provides = map(getNodeText, provElts)
+        provComarElts = getAllNodes(node, "Provides/COMAR")
+        self.providesComar = [ComarProvide(x) for x in provComarElts]
+        reqComarElts = getAllNodes(node, "Requires/COMAR")
+        self.requiresComar = map(getNodeText, reqComarElts)
 
     def elt(self, xml):
         node = xml.newNode("Package")
@@ -247,8 +265,10 @@ class PackageInfo(object):
             xml.addNodeUnder(node, "History", update.elt(xml))
         for conflict in self.conflicts:
             xml.addTextNodeUnder(node, "Conflicts/Package", conflict)
-        for om in self.provides:
-            xml.addTextNodeUnder(node, "Provides/OM", om)
+        for pcomar in self.providesComar:
+            xml.addTextNodeUnder(node, "Provides/COMAR", pcomar.elt(xml))
+        for rcomar in self.requiresComar:
+            xml.addTextNodeUnder(node, "Requires/COMAR", rcomar)
         return node
 
     def verify(self):

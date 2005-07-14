@@ -80,7 +80,9 @@ class MetaData(XmlFile):
         self.package.paths = pkg.paths
         self.package.history = src.history # FIXME
         self.package.conflicts = pkg.conflicts
-        self.package.provides = pkg.provides
+        self.package.providesComar = pkg.providesComar
+        self.package.requiresComar = pkg.requiresComar
+        
 
     def read(self, filename):
         self.readxml(filename)
