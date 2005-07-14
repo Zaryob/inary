@@ -6,7 +6,6 @@ def registerScript(om, appname, scriptPath):
     s = socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)
     s.connect("/tmp/comar")
     cmd = '+' + om + ' ' + appname + ' ' +scriptPath + '\n'
-    print cmd
     s.send(cmd)
     s.close()
     return True
