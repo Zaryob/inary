@@ -119,7 +119,16 @@ def install(package_fn):
     # unzip package in place
     ui.info('Extracting files\n')
     package.extract_dir_flat('install', config.destdir)
-    
+
+    # TODO: put files.xml, metadata.xml, actions.py and COMAR scripts
+    # somewhere in the file system. We'll need these in future...
+
+    # TODO: register COMAR scripts
+    # something like the below?
+    # import comariface
+    # for comar int metadata.package.providesComar:
+    #     comariface.register(comar.om, comar.script)
+
     # update databases
 
     # installdb
