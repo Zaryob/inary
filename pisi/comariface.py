@@ -24,4 +24,4 @@ def call(om):
     s.connect("/tmp/comar")
     cmd = '$' + om + '\n'
     s.send(cmd)
-    return s.recv(500)
+    return True
