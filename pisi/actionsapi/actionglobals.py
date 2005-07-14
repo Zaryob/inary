@@ -13,12 +13,13 @@ import pisi.constants
 
 class Env:
     """General environment variables used in actions API"""
-    pkg_dir = os.getenv('PKG_DIR')
-    work_dir = os.getenv('WORK_DIR')
-    install_dir = os.getenv('INSTALL_DIR')
-    src_name = os.getenv('SRC_NAME')
-    src_version = os.getenv('SRC_VERSION')
-    src_release = os.getenv('SRC_RELEASE')
+    def __init__(self):
+        self.pkg_dir = os.getenv('PKG_DIR')
+        self.work_dir = os.getenv('WORK_DIR')
+        self.install_dir = os.getenv('INSTALL_DIR')
+        self.src_name = os.getenv('SRC_NAME')
+        self.src_version = os.getenv('SRC_VERSION')
+        self.src_release = os.getenv('SRC_RELEASE')
 
 class Dirs:
     """General directories used in actions API."""
@@ -41,9 +42,22 @@ class Flags:
     cxxflags = conf.build.cflags
 
 class ActionGlobals(pisi.config.Config):
-    const = pisi.constants.const
-    env = Env()
-    dirs = Dirs()
-    flags = Flags()
+    class impl:
+        const = pisi.constants.const
+        env = Env()
+        dirs = Dirs()
+        flags = Flags()
+
+    __instance = impl()
+
+    def __getattr__(self, attr):
+
+        # Using environment variables is somewhat tricky. Each time
+        # you need them you need to check for their value.
+        if attr == "env":
+            self.__instance.env = Env()
+
+        return getattr(self.__instance, attr)
+        
 
 glb = ActionGlobals()
