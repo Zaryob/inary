@@ -31,6 +31,10 @@ def configure(parameters = ''):
     
     os.system(configure_string)
 
+def compile(parameters = ''):
+    compile_string = 'gcc ${CFLAGS} %s' % parameters
+    os.system(compile_string)
+
 def make(parameters = ''):
     ''' FIXME: Düzgün hale getirilecek '''
     make_string = 'make %s' % parameters
