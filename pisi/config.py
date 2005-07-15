@@ -42,6 +42,15 @@ class Config(object):
         def install_dir(self):
             return self.tmp_dir() + const.install_dir_suffix
 
+        def files_xml_dir(self):
+            return self.destdir + const.files_xml_dir_suffix
+
+        def metadata_xml_dir(self):
+            return self.destdir + const.metadata_xml_dir_suffix
+        
+        def comar_files_dir(self):
+            return self.destdir + const.comar_files_dir_suffix
+
     __configinstance = configimpl()
 
     def __init__(self):

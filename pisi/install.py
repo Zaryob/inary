@@ -9,11 +9,13 @@ from package import Package
 from files import Files
 import util
 from config import config
+from constants import const
 from ui import ui
 from installdb import installdb
 from packagedb import packagedb
 import dependency
 from metadata import MetaData
+import comariface
 #import conflicts
 
 ##TODO: Caglar'in onerisi uzerine.
@@ -54,6 +56,11 @@ def extract_pkg_files(package_fn):
     ui.info('Extracting files\n')
     package.extract_dir_flat('install', config.destdir)
     
+def copy_from_pkg(package_fn, file, dest):
+    package = Package(package_fn, 'r')
+    
+    ui.info('Coping file %s to %s\n' %(file, dest))
+    package.extract_file(file, dest)
 
 def remove(package_name):
     """Remove a goddamn package"""
@@ -125,15 +132,26 @@ def install(package_fn):
     # unzip package in place
     extract_pkg_files(package_fn)
 
-    # TODO: put files.xml, metadata.xml, actions.py and COMAR scripts
+    # put files.xml, metadata.xml, actions.py and COMAR scripts
     # somewhere in the file system. We'll need these in future...
+    copy_from_pkg(package_fn, const.files_xml , config.files_xml_dir())
+    copy_from_pkg(package_fn, const.metadata_xml , config.metadata_xml_dir())
+    for pcomar in package.providesComar:
+        fpath = os.path.join(const.comar_dir, pcomar.script)
+        # comar prefix is added to the libdir while extracting comar
+        # script file. so we'll use lib_dir as destination.
+        copy_from_pkg(package_fn, fpath, config.lib_dir())
+    
 
-    # TODO: register COMAR scripts
-    # something like the below?
-    # import comariface
-    # for comar int metadata.package.providesComar:
-    #     scriptPath = .... + comar.script
-    #     comariface.register(comar.om, metadata.package.name, scriptPath)
+    # register COMAR scripts
+    for pcomar in package.providesComar:
+        scriptPath = config.comar_files_dir() + pcomar.script
+        ui.info("Registering COMAR script %s\n" % pcomar.script)
+        ret = comariface.registerScript(pcomar.om,
+                                        package.name,
+                                        scriptPath)
+        if not ret:
+            ui.error("Unable to register COMAR script. Be sure that comard is running!\n")
 
     # update databases
 

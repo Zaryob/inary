@@ -33,10 +33,16 @@ class Constants:
         self.__c.distributionRelease = "0.1"
 
         # directories
+        # TODO: bu dizinler constant olmak zorunda değil. yalnızca bu
+        # grubu config içerisine taşıyabiliriz. configfile'dan
+        # düzenlenebilirler.
         self.__c.lib_dir_suffix = "/var/lib/pisi"
         self.__c.db_dir_suffix = "/var/db/pisi"
         self.__c.archives_dir_suffix = "/var/cache/pisi/archives"
         self.__c.tmp_dir_suffix =  "/var/tmp/pisi"
+        self.__c.comar_files_dir_suffix = "/var/lib/pisi/comar"
+        self.__c.files_xml_dir_suffix = "/var/lib/pisi/files"
+        self.__c.metadata_xml_dir_suffix = "/var/lib/pisi/metadata"
 
         # directory suffixes for build
         self.__c.work_dir_suffix = "/work"
