@@ -48,6 +48,12 @@ def get_pkg_info(package_fn):
 
     return metadata, files
 
+def extract_pkg_files(package_fn):
+    package = Package(package_fn, 'r')
+
+    ui.info('Extracting files\n')
+    package.extract_dir_flat('install', config.destdir)
+    
 
 def remove(package_name):
     """Remove a goddamn package"""
@@ -117,8 +123,7 @@ def install(package_fn):
         remove(package.name)
 
     # unzip package in place
-    ui.info('Extracting files\n')
-    package.extract_dir_flat('install', config.destdir)
+    extract_pkg_files(package_fn)
 
     # TODO: put files.xml, metadata.xml, actions.py and COMAR scripts
     # somewhere in the file system. We'll need these in future...
