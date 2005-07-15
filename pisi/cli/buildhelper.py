@@ -43,6 +43,15 @@ class RemoteSource(object):
             self.url.uri = patchuri
             self.fetch(const.files_dir)
 
+    def fetch_comarfiles(self):
+        spec = self.ctx.spec
+        for package in spec.packages:
+            for pcomar in package.providesComar:
+                comaruri = join(self.location,
+                                const.comar_dir, pcomar.script)
+                self.url.uri = comaruri
+                self.fetch(const.comar_dir)
+
     def fetch_additionalFiles(self):
         spec = self.ctx.spec
         for afile in spec.source.additionalFiles:

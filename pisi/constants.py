@@ -45,6 +45,7 @@ class Constants:
         # file/directory names
         self.__c.actions_file = "actions.py"
         self.__c.files_dir = "files"
+        self.__c.comar_dir = "comar"
         self.__c.files_xml = "files.xml"
         self.__c.metadata_xml = "metadata.xml"
 

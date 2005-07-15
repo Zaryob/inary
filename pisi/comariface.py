@@ -2,25 +2,20 @@
 
 import socket
 
-def registerScript(om, appname, scriptPath):
+def sendCommand(cmd, blocking=False):
     s = socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)
     s.connect("/tmp/comar")
-    cmd = '+' + om + ' ' + appname + ' ' +scriptPath + '\n'
     s.send(cmd)
     s.close()
-    return True
+
+def registerScript(om, appname, scriptPath):
+    cmd = '+' + om + ' ' + appname + ' ' +scriptPath + '\n'
+    sendCommand(cmd)
 
 def removeScript(appname):
-    s = socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)
-    s.connect("/tmp/comar")
     cmd = "-" + appname + '\n'
-    s.send(cmd)
-    s.close()
-    return True
+    sendCommand(cmd)
 
 def call(om):
-    s = socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)
-    s.connect("/tmp/comar")
     cmd = '$' + om + '\n'
-    s.send(cmd)
-    return True
+    sendCommand(cmd)
