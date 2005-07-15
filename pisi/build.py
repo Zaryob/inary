@@ -181,7 +181,7 @@ class PisiBuild:
             patchFile = os.path.join(files_dir, patch.filename)
             if patch.compressionType:
                 patchFile = util.uncompress(patchFile,
-                                            compressType = patch.compressionType,
+                                            compressType=patch.compressionType,
                                             targetDir=self.ctx.tmp_dir())
 
             ui.info("Applying patch: %s\n" % patch.filename)
@@ -250,6 +250,15 @@ class PisiBuild:
             pkg = Package(pkgName, 'w')
             c = os.getcwd()
 
+            # add comar files to package
+            os.chdir(self.pspecDir)
+            for pcomar in package.providesComar:
+                fname = os.path.join(const.comar_dir,
+                                     pcomar.script)
+                pkg.add_to_package(fname)
+
+
+            # add xmls and files
             os.chdir(self.ctx.pkg_dir())
             pkg.add_to_package(const.metadata_xml)
             pkg.add_to_package(const.files_xml)
