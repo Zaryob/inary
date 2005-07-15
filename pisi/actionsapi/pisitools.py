@@ -23,7 +23,7 @@ def insinto(directory, filename):
     
    makedirs(env.install_dir + directory)
    
-    if os.access(filename, os.F_OK):
+   if os.access(filename, os.F_OK):
         copy_file(filename, env.install_dir +
                 directory + os.path.basename(filename))
 
