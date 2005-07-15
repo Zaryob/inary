@@ -63,18 +63,19 @@ def dosbin(filename, destination = glb.dirs.sbin):
 
 def doman(*filenameList):
 
-    for filename in filenameList:
-        man, postfix = filename.split('.')
-        destDir = os.path.join(env.install_dir, dirs.man, "man" + postfix)
+    for item in filenameList:
+        for filename in glob.glob(item):
+            man, postfix = filename.split('.')
+            destDir = os.path.join(env.install_dir, dirs.man, "man" + postfix)
     
-        makedirs(destDir)
+            makedirs(destDir)
 
-        gzfile = gzip.GzipFile(filename + '.gz', 'w', 9)
-        gzfile.writelines(file(filename).xreadlines())
-        gzfile.close()
+            gzfile = gzip.GzipFile(filename + '.gz', 'w', 9)
+            gzfile.writelines(file(filename).xreadlines())
+            gzfile.close()
 
-        if os.access(filename, os.F_OK):
-            copy_file(filename + '.gz',
+            if os.access(filename, os.F_OK):
+                copy_file(filename + '.gz',
                             os.path.join(destDir,
                                      os.path.basename(filename)))
 
