@@ -27,6 +27,7 @@ class RemoteSource(object):
 
         self.fetch_actionsfile()
         self.fetch_patches()
+        self.fetch_comarfiles()
         self.fetch_additionalFiles()
 
 

@@ -266,7 +266,7 @@ class PackageInfo(object):
         for conflict in self.conflicts:
             xml.addTextNodeUnder(node, "Conflicts/Package", conflict)
         for pcomar in self.providesComar:
-            xml.addTextNodeUnder(node, "Provides/COMAR", pcomar.elt(xml))
+            xml.addNodeUnder(node, "Provides/COMAR", pcomar.elt(xml))
         for rcomar in self.requiresComar:
             xml.addTextNodeUnder(node, "Requires/COMAR", rcomar)
         return node
