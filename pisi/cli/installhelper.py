@@ -1,13 +1,14 @@
-import sys
 
-import pisi.install
-from pisi.ui import ui
+from pisi.install import PisiInstall
+from pisi.context import InstallContext
+from pisi.purl import PUrl
 
 def install(packagefile):
-    try:
-        ui.info('* Installing ' + packagefile + '\n')
-        pisi.install.install(packagefile)
-    except pisi.install.InstallError, e:
-        print '*** An installation error has occured:'
-        print '\t', e
-        sys.exit(1)
+    url = PUrl(packagefile)
+    if url.isRemoteFile():
+        pass # bunu simdilik bosverelim, once bir calissin :)
+    else:
+        ctx = InstallContext(url.uri)
+
+    pi = PisiInstall(ctx)
+    pi.install()

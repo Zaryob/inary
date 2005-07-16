@@ -3,9 +3,12 @@
 # Authors: Baris Metin <baris@uludag.org.tr
 #          Eray Ozkural <eray@uludag.org.tr>
 
-from specfile import SpecFile
 from constants import const
 from config import Config
+from specfile import SpecFile
+from package import Package
+from metadata import MetaData
+from files import Files
 
 class BuildContext(object):
     """Build Context Singleton"""
@@ -59,34 +62,56 @@ class InstallContext(object):
         def __init(self):
             super(ctximpl, self).__init__()
 
-        def setMetadataFile(self, metadatafile):
-            self.metadatafile = metadatafile
+        def setPackage(self, packagefile):
+            self.packagefile = packagefile
+            self.package = Package(packagefile, 'r')
+
+            tmpdir = self.tmp_dir()
+            # extract control files
+            self.package.extract_PISI_files(tmpdir)
+
+            # read files.xml and metadata.xml
+            mdxml = tmpdir + '/' + const.metadata_xml
+            self.setMetadataXML(mdxml)
+            filesxml = tmpdir + '/' + const.files_xml
+            self.setFilesXML(filesxml)
+
+        def setMetadataXML(self, metadataxml):
+            self.metadataxml = metadataxml
             metadata = MetaData()
-            metadata.read(metadatafile)
-            metadata.verify()
+            metadata.read(metadataxml)
+            if not metadata.verify():
+                raise InstallError("MetaData format wrong")
 
             self.metadata = metadata
 
+        def setFilesXML(self, filesxml):
+            self.filesxml = filesxml
+            files = Files()
+            files.read(filesxml)
+
+            self.files = files
+
         def pkg_dir(self):
             packageDir = self.metadata.package.name + '-' \
-                + self.metadata.package.version + '-' + self.metadata.package.release
+                + self.metadata.package.version + '-' \
+                + self.metadata.package.release
 
-            return self.destdir + config.lib_dir() \
-                + '/' + packageDir
+            return self.lib_dir() + '/' + packageDir
 
         def files_dir(self):
-            return self.pkg_dir() + const.files_xml_dir_suffix
+            return self.pkg_dir() + const.files_dir_suffix
 
         def metadata_dir(self):
-            return self.pkg_dir() + const.metadata_xml_dir_suffix
+            return self.pkg_dir() + const.metadata_dir_suffix
         
         def comar_dir(self):
-            return self.pkg_dir() + const.comar_files_dir_suffix
+            return self.pkg_dir() + const.comar_dir_suffix
 
     __instance = ctximpl()               # singleton implementation
 
-    def __init__(self, mdfile):
-        self.__instance.setMetadataFile(mdfile)
+    def __init__(self, packagefile):
+        self.__instance.setPackage(packagefile)
 
     def __getattr__(self, attr):
         return getattr(self.__instance, attr)

@@ -41,13 +41,18 @@ class Constants:
         self.__c.db_dir_suffix = "/var/db/pisi"
         self.__c.archives_dir_suffix = "/var/cache/pisi/archives"
         self.__c.tmp_dir_suffix =  "/var/tmp/pisi"
-        self.__c.comar_files_dir_suffix = "/var/lib/pisi/comar"
-        self.__c.files_xml_dir_suffix = "/var/lib/pisi/files"
-        self.__c.metadata_xml_dir_suffix = "/var/lib/pisi/metadata"
 
         # directory suffixes for build
         self.__c.work_dir_suffix = "/work"
         self.__c.install_dir_suffix  = "/install"
+
+        # directory suffixes for intall. We'll use these directories
+        # for storing files related to the packages. Each package will
+        # have its own directory under lib_dir with has these
+        # sub-directories.
+        self.__c.comar_dir_suffix = "/comar"
+        self.__c.files_dir_suffix = "/files"
+        self.__c.metadata_dir_suffix = "/metadata"
 
         # file/directory names
         self.__c.actions_file = "actions.py"

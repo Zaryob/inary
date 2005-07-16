@@ -26,42 +26,8 @@ import comariface
 class InstallError(Exception):
     pass
 
-from os.path import join, exists
-
-def get_pkg_info(package_fn):
-    package = Package(package_fn, 'r')
-    # extract control files
-    util.clean_dir(config.install_dir())
-    package.extract_PISI_files(config.install_dir())
-
-    # verify package
-
-    # check if we have all required files
-    if not exists(join(config.install_dir(), 'metadata.xml')):
-        raise InstallError('metadata.xml missing')
-    if not exists(join(config.install_dir(), 'files.xml')):
-        raise InstallError('files.xml missing')
-    
-    metadata = MetaData()
-    metadata.read(join(config.install_dir(), 'metadata.xml'))
-
-    files = Files()
-    files.read(join(config.install_dir(), 'files.xml'))
-
-    return metadata, files
-
-def extract_pkg_files(package_fn):
-    package = Package(package_fn, 'r')
-
-    ui.info('Extracting files\n')
-    package.extract_dir_flat('install', config.destdir)
-    
-def copy_from_pkg(package_fn, file, dest):
-    package = Package(package_fn, 'r')
-    
-    ui.info('Coping file %s to %s\n' %(file, dest))
-    package.extract_file(file, dest)
-
+# bu fonksiyonun burada işi olmamalı. Silmeyi doğrudan install.py'nin
+# içinde yapmamalıyız!
 def remove(package_name):
     """Remove a goddamn package"""
     ui.info('Removing package ' + package_name)
@@ -72,91 +38,111 @@ def remove(package_name):
         os.unlink(fileinfo.path)
     installdb.remove(package_name)
 
-def install(package_fn):
 
-    metadata, files = get_pkg_info(package_fn)
+class PisiInstall:
+    "PisiInstall class, provides install rutines for pisi packages"
+    def __init__(self, installcontext):
+        self.ctx = installcontext
+        self.metadata = self.ctx.metadata
+        self.files = self.ctx.files
+        self.package = self.ctx.package
+
+    def extractInstall(self):
+        ui.info('Extracting files\n')
+        self.package.extract_dir_flat('install', config.destdir)
     
-    # check package semantics
-    if not metadata.verify():
-        raise InstallError("MetaData format wrong")
+    def storePisiFiles(self):
+        # put files.xml, metadata.xml, actions.py and COMAR scripts
+        # somewhere in the file system. We'll need these in future...
 
-    # check file system requirements
-    # what to do if / is split into /usr, /var, etc.?
+        ui.info('Storing %s\n' % const.files_xml)
+        self.package.extract_file(const.files_xml, self.ctx.files_dir())
 
-    package = metadata.package
+        ui.info('Storing %s\n' % const.metadata_xml)
+        self.package.extract_file(const.metadata_xml, self.ctx.metadata_dir())
 
-    # check if package is in database
-    if not packagedb.has_package(package.name):
-        packagedb.add_package(package) # terrible solution it seems
+        for pcomar in self.metadata.package.providesComar:
+            fpath = os.path.join(const.comar_dir, pcomar.script)
+            # comar prefix is added to the pkg_dir while extracting comar
+            # script file. so we'll use pkg_dir as destination.
+            ui.info('Storing %s\n' % fpath)
+            self.package.extract_file(fpath, self.ctx.pkg_dir())
+
+    def registerCOMARScripts(self):
+        # register COMAR scripts
+        for pcomar in self.metadata.package.providesComar:
+            scriptPath = os.path.join(self.ctx.comar_dir(),pcomar.script)
+            ui.info("Registering COMAR script %s\n" % pcomar.script)
+            ret = comariface.registerScript(pcomar.om,
+                                            self.metadata.package.name,
+                                            scriptPath)
+            if not ret:
+                ui.error("registerScript failed. Be sure that comard is running!\n")
+
+
+    def install(self):
+
+        # check file system requirements
+        # what to do if / is split into /usr, /var, etc.?
+
+        pkginfo = self.metadata.package
+
+        # check if package is in database
+        if not packagedb.has_package(pkginfo.name):
+            packagedb.add_package(pkginfo) # terrible solution it seems
     
-    # check conflicts
-    for pkg in metadata.package.conflicts:
-        if installdb.has_package(package):
-            raise InstallError("Package conflicts " + pkg)
+        # check conflicts
+        for pkg in self.metadata.package.conflicts:
+            if installdb.has_package(pkginfo):
+                raise InstallError("Package conflicts " + pkg)
     
-    # check dependencies
-    if not dependency.installable(package.name):
-        raise InstallError("Package not installable")
+        # check dependencies
+        if not dependency.installable(pkginfo.name):
+            raise InstallError("Package not installable")
 
-    #TODO:
-    if installdb.is_installed(package.name): # is this a reinstallation?
+        #TODO:
+        if installdb.is_installed(pkginfo.name): # is this a reinstallation?
+            (iversion, irelease) = installdb.get_version(pkginfo.name)
 
-        (iversion, irelease) = installdb.get_version(package.name)
+            if pkginfo.version == iversion and pkginfo.release == irelease:
+                if not ui.confirm('Re-install same version package?'):
+                    raise InstallError('Package re-install declined')
 
-        if package.version == iversion and package.release == irelease:
-            if not ui.confirm('Re-install same version package?'):
-                raise InstallError('Package re-install declined')
+            upgrade = False
+            # is this an upgrade?
+            # determine and report the kind of upgrade: version, release, build
+            if pkginfo.version > iversion:
+                ui.info('Upgrading to new upstream version')
+                upgrade = True
+            elif pkginfo.release > irelease:
+                ui.info('Upgrading to new distribution release')
+                upgrade = True
 
-        upgrade = False
-        # is this an upgrade?
-        # determine and report the kind of upgrade: version, release, build
-        if package.version > iversion:
-            ui.info('Upgrading to new upstream version')
-            upgrade = True
-        elif package.release > irelease:
-            ui.info('Upgrading to new distribution release')
-            upgrade = True
+            # is this a downgrade? confirm this action.
+            if not upgrade:
+                if pkginfo.version < iversion:
+                    x = 'Downgrade to old upstream version?'
+                elif pkginfo.release < irelease:
+                    x = 'Downgrade to old distribution release?'
+                if not ui.confirm(x):
+                    raise InstallError('Package downgrade declined')
 
-        # is this a downgrade? confirm this action.
-        if not upgrade:
-            if package.version < iversion:
-                x = 'Downgrade to old upstream version?'
-            elif package.release < irelease:
-                x = 'Downgrade to old distribution release?'
-            if not ui.confirm(x):
-                raise InstallError('Package downgrade declined')
+                # remove old package then
+                remove(pkginfo.name)
 
-        # remove old package then
-        remove(package.name)
+        # unzip package in place
+        self.extractInstall()
 
-    # unzip package in place
-    extract_pkg_files(package_fn)
+        # store files.xml, metadata.xml and comar scripts for further usage
+        self.storePisiFiles()
 
-    # put files.xml, metadata.xml, actions.py and COMAR scripts
-    # somewhere in the file system. We'll need these in future...
-    copy_from_pkg(package_fn, const.files_xml , config.files_xml_dir())
-    copy_from_pkg(package_fn, const.metadata_xml , config.metadata_xml_dir())
-    for pcomar in package.providesComar:
-        fpath = os.path.join(const.comar_dir, pcomar.script)
-        # comar prefix is added to the libdir while extracting comar
-        # script file. so we'll use lib_dir as destination.
-        copy_from_pkg(package_fn, fpath, config.lib_dir())
-    
+        # register comar scripts
+        self.registerCOMARScripts()
 
-    # register COMAR scripts
-    for pcomar in package.providesComar:
-        scriptPath = config.comar_files_dir() + pcomar.script
-        ui.info("Registering COMAR script %s\n" % pcomar.script)
-        ret = comariface.registerScript(pcomar.om,
-                                        package.name,
-                                        scriptPath)
-        if not ret:
-            ui.error("Unable to register COMAR script. Be sure that comard is running!\n")
+        # update databases
 
-    # update databases
-
-    # installdb
-    installdb.install(metadata.package.name,
-                      metadata.package.version,
-                      metadata.package.release,
-                      os.path.join(config.install_dir(), 'files.xml'))
+        # installdb
+        installdb.install(self.metadata.package.name,
+                          self.metadata.package.version,
+                          self.metadata.package.release,
+                          os.path.join(self.ctx.files_dir(), 'files.xml'))
