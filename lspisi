@@ -15,4 +15,8 @@ if not zipfile.is_zipfile(sys.argv[1]):
 f = zipfile.ZipFile(sys.argv[1], "r")
 
 for file in f.namelist():
-    print file
+    if f.getinfo(file).external_attr == 2716663808:
+        print file + " --> symlink"
+    else:
+        print file
+    
