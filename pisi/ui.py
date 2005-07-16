@@ -30,9 +30,9 @@ class CLI:
     def confirm(self, msg):
         while True:
             s = raw_input(msg + colorize('(yes/no)', 'red'))
-            if s.starts_with('y') or s.starts_with('Y'):
+            if s.startswith('y') or s.startswith('Y'):
                 return True
-            if s.starts_with('n') or s.starts_with('N'):
+            if s.startswith('n') or s.startswith('N'):
                 return False
 
     class Progress:
