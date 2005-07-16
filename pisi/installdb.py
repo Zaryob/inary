@@ -69,7 +69,11 @@ class InstallDB:
         if self.is_installed(pkg):
             raise InstallDBError("already installed")
         self.d[pkg] = ('i', version, release)
-        util.copy_file(files_xml, self.files_name(pkg, version, release))
+        # files dosyasını config.lib_dir()+name+version+release+/files
+        # altına saklıyoruz zaten. bu yüzden bu işleme gerek
+        # yok. Paketin diğer dosyaları ile birlikte aynı dizin
+        # hiyerarşisi altında durması daha iyi...
+#        util.copy_file(files_xml, self.files_name(pkg, version, release))
 
     def remove(self, pkg):
         pkg = str(pkg)
