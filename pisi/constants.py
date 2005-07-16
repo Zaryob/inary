@@ -1,3 +1,4 @@
+# *-* coding: utf-8 *-* 
 # PISI constants. 
 # If you have a "magic" constant value this is where it should be
 # defined.

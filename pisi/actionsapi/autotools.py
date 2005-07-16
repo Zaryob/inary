@@ -93,3 +93,13 @@ def installWithBasedir():
     install_string = 'make BASEDIR=%s install' % dir_suffix
 
     os.system(install_string)
+
+def installWithInstallRootdir():
+    dirs = glb.dirs
+
+    dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
+        glb.const.install_dir_suffix
+
+    install_string = 'make INSTALL_ROOT=%s install' % dir_suffix
+
+    os.system(install_string)
