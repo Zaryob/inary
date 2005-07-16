@@ -99,12 +99,6 @@ class InstallContext(object):
 
             return self.lib_dir() + '/' + packageDir
 
-        def files_dir(self):
-            return self.pkg_dir() + const.files_dir_suffix
-
-        def metadata_dir(self):
-            return self.pkg_dir() + const.metadata_dir_suffix
-        
         def comar_dir(self):
             return self.pkg_dir() + const.comar_dir_suffix
 

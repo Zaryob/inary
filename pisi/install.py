@@ -51,10 +51,10 @@ class PisiInstall:
         # somewhere in the file system. We'll need these in future...
 
         ui.info('Storing %s\n' % const.files_xml)
-        self.package.extract_file(const.files_xml, self.ctx.files_dir())
+        self.package.extract_file(const.files_xml, self.ctx.pkg_dir())
 
         ui.info('Storing %s\n' % const.metadata_xml)
-        self.package.extract_file(const.metadata_xml, self.ctx.metadata_dir())
+        self.package.extract_file(const.metadata_xml, self.ctx.pkg_dir())
 
         for pcomar in self.metadata.package.providesComar:
             fpath = os.path.join(const.comar_dir, pcomar.script)
@@ -140,4 +140,4 @@ class PisiInstall:
         installdb.install(self.metadata.package.name,
                           self.metadata.package.version,
                           self.metadata.package.release,
-                          os.path.join(self.ctx.files_dir(), 'files.xml'))
+                          os.path.join(self.ctx.pkg_dir(), 'files.xml'))
