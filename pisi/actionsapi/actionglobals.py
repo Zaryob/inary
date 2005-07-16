@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # standard python modules
-import os
+from os import getenv
 
 # pisi modules
 import pisi.config
@@ -11,15 +11,28 @@ import pisi.constants
 # Set individual information, that are generally needed for actions
 # api.
 
-class Env:
+class Env(object):
     """General environment variables used in actions API"""
     def __init__(self):
-        self.pkg_dir = os.getenv('PKG_DIR')
-        self.work_dir = os.getenv('WORK_DIR')
-        self.install_dir = os.getenv('INSTALL_DIR')
-        self.src_name = os.getenv('SRC_NAME')
-        self.src_version = os.getenv('SRC_VERSION')
-        self.src_release = os.getenv('SRC_RELEASE')
+        self.__vars = {
+            "pkg_dir": "PKG_DIR",
+            "work_dir": "WORK_DIR",
+            "install_dir": "INSTALL_DIR",
+            "src_name": "SRC_NAME",
+            "src_version": "SRC_VERSION",
+            "src_release": "SRC_RELEASE"
+            }
+
+    def __getattr__(self, attr):
+
+        # Using environment variables is somewhat tricky. Each time
+        # you need them you need to check for their value.
+        if self.__vars.has_key(attr):
+            return getenv(self.__vars[attr])
+        else:
+            return None
+
+
 
 class Dirs:
     """General directories used in actions API."""
@@ -42,22 +55,9 @@ class Flags:
     cxxflags = conf.build.cflags
 
 class ActionGlobals(pisi.config.Config):
-    class impl:
-        const = pisi.constants.const
-        env = Env()
-        dirs = Dirs()
-        flags = Flags()
-
-    __instance = impl()
-
-    def __getattr__(self, attr):
-
-        # Using environment variables is somewhat tricky. Each time
-        # you need them you need to check for their value.
-        if attr == "env":
-            self.__instance.env = Env()
-
-        return getattr(self.__instance, attr)
-        
+    const = pisi.constants.const
+    env = Env()
+    dirs = Dirs()
+    flags = Flags()
 
 glb = ActionGlobals()
