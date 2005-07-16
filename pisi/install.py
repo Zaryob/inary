@@ -18,11 +18,6 @@ from metadata import MetaData
 import comariface
 #import conflicts
 
-##TODO: Caglar'in onerisi uzerine.
-##bunu PisiBuild gibi class yapalim. Asagida yazdigim
-##gibi bir test edip nerelere extend edecek ama gorelim
-##lutfen. daha hic calismadi bile. :/
-
 class InstallError(Exception):
     pass
 
