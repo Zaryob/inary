@@ -6,8 +6,8 @@ import os
 import time
 from tempfile import mkstemp, mkdtemp
 
-def sleep(sleep_time = 5):
-    time.sleep(sleep_time)
+def sleep(seconds = 5):
+    time.sleep(seconds)
 
 def createTmpFile():
     handle, path = mkstemp()

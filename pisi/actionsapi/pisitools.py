@@ -21,11 +21,12 @@ dirs = glb.dirs
 
 def insinto(directory, filename):
     
-   makedirs(env.install_dir + directory)
+    makedirs(env.install_dir + directory)
    
-   if os.access(filename, os.F_OK):
-        copy_file(filename, env.install_dir +
-                directory + os.path.basename(filename))
+    for file in glob.glob(filename):
+        if os.access(file, os.F_OK):
+            copy_file(file, env.install_dir +
+                directory + os.path.basename(file))
 
 def dodoc(*documentList):
 
@@ -111,7 +112,7 @@ def dodir(parameters = ''):
     makedirs(env.install_dir + parameters)
 
 def remove(filename):
-    
+
     unlink(env.install_dir + filename)
 
 def removeDir(dirname):
