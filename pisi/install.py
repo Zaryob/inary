@@ -23,6 +23,9 @@ class InstallError(Exception):
 
 # bu fonksiyonun burada işi olmamalı. Silmeyi doğrudan install.py'nin
 # içinde yapmamalıyız!
+## evet module'un ismi yanlis. ozunde install/upgrade/remove
+## islemlerinin cok buyuk farklari yok. hepsine operations.py denip
+## su class gereksizliginden kurtulacagim.
 def remove(package_name):
     """Remove a goddamn package"""
     ui.info('Removing package ' + package_name)
@@ -38,6 +41,8 @@ class PisiInstall:
     "PisiInstall class, provides install rutines for pisi packages"
     def __init__(self, installcontext):
         self.ctx = installcontext
+        ## bu context fikri multi package installation fikriyle
+        ## uyusmuyor ne yazik ki. gitmesi gerek.
         self.metadata = self.ctx.metadata
         self.files = self.ctx.files
         self.package = self.ctx.package
