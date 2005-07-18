@@ -25,7 +25,7 @@ class Installer:
     "Installer class, provides install routines for pisi packages"
     def __init__(self, package_fname):
         self.package = Package(package_fname)
-        self.package.read()
+        self.package.read_info()
         self.metadata = self.package.metadata
         self.files = self.package.files
 

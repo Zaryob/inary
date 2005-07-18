@@ -109,9 +109,9 @@ class Install(Command):
             self.help()
             return
 
-        from pisi.cli import installhelper
+        from pisi.install import Installer
         for arg in self.args:
-            url = PUrl(packagefile)
+            url = PUrl(arg)
             if url.isRemoteFile():
                 pass # bunu simdilik bosverelim, once bir calissin :)
 

@@ -74,15 +74,15 @@ class Package:
             outdir = config.tmp_dir()
 
         # extract control files
-        self.package.extract_PISI_files(tmpdir)
+        self.extract_PISI_files(outdir)
 
         self.metadata = MetaData()
-        self.metadata.read( join(tmpdir, config.metadata_xml) )
-        if not metadata.verify():
+        self.metadata.read( join(outdir, const.metadata_xml) )
+        if not self.metadata.verify():
             raise PackageError("MetaData format wrong")
 
         self.files = Files()
-        self.files.read( join(tmpdir, const.files_xml) )
+        self.files.read( join(outdir, const.files_xml) )
         
     def pkg_dir(self):
         packageDir = self.metadata.package.name + '-' \
