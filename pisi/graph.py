@@ -9,7 +9,7 @@ class digraph(object):
         #self.__edata = {}
 
     def add_vertex(u, data = None):
-        assert not u in self.__v
+        #assert not u in self.__v
         self.__v.add(u)
         if data!=None:
             self.__vdata[u] = data
