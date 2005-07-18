@@ -104,9 +104,6 @@ class Installer:
                     upgrade = True
 
                 # is this a downgrade? confirm this action.
-                #
-                # burada bir gariplik var. Tam olarak ne yapmak istediğini
-                # anlamadığım için bırakıyorm. Ama bu kod çalışmıyor.
                 if not upgrade:
                     if pkginfo.version < iversion:
                         x = 'Downgrade to old upstream version?'
