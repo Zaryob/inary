@@ -8,7 +8,7 @@ class ContextTestCase(unittest.TestCase):
     def testConstness(self):
         # test if we can get a const attribute?
         try:
-            test = const.archives_dir_suffix
+            test = const.package_prefix
             self.assertNotEqual(test, "")
         except AttributeError:
             self.fail("Couldn't get const attribute")
@@ -40,7 +40,6 @@ class ContextTestCase(unittest.TestCase):
         constDict = {
             "actions_file": "actions.py",
             "setup_func": "setup",
-            "lib_dir_suffix": "/var/lib/pisi",
             "metadata_xml": "metadata.xml"
             }
             
