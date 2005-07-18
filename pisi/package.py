@@ -20,7 +20,7 @@ class Package:
     """PISI Package Class provides access to a pisi package (.pisi
     file)."""
     def __init__(self, packagefn, mode='r'):
-        self.filename = packagefn
+        self.filepath = packagefn
         url = PUrl(packagefn)
 
         if url.isRemoteFile():
