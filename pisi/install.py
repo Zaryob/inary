@@ -128,8 +128,8 @@ class PisiInstall:
                 if not ui.confirm(x):
                     raise InstallError('Package downgrade declined')
 
-                # remove old package then
-                remove(pkginfo.name)
+            # remove old package then
+            remove(pkginfo.name)
 
         # unzip package in place
         self.extractInstall()
