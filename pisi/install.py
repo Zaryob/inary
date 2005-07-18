@@ -25,7 +25,7 @@ class Installer:
     "Installer class, provides install routines for pisi packages"
     def __init__(self, package_fname):
         self.package = Package(package_fname)
-        self.package.read_info()
+        self.package.read()
         self.metadata = self.package.metadata
         self.files = self.package.files
 
@@ -104,6 +104,9 @@ class Installer:
                 upgrade = True
 
             # is this a downgrade? confirm this action.
+            #
+            # burada bir gariplik var. Tam olarak ne yapmak istediğini
+            # anlamadığım için bırakıyorm. Ama bu kod çalışmıyor.
             if not upgrade:
                 if pkginfo.version < iversion:
                     x = 'Downgrade to old upstream version?'
