@@ -10,6 +10,7 @@ from purl import PUrl
 def remove(package_name):
     """Remove a goddamn package"""
     from installdb import installdb
+    from comariface import removeScripts
 
     ui.info('Removing package %s\n' % package_name)
     if not installdb.is_installed(package_name):
@@ -18,6 +19,7 @@ def remove(package_name):
     for fileinfo in installdb.files(package_name).list:
         os.unlink( os.path.join(config.destdir, fileinfo.path) )
     installdb.remove(package_name)
+    removeScripts(package_name)
 
 def install(pkg_location):
     from install import Installer

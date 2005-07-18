@@ -16,7 +16,7 @@ def registerScript(om, appname, scriptPath):
     cmd = '+' + om + ' ' + appname + ' ' +scriptPath + '\n'
     return sendCommand(cmd)
 
-def removeScript(appname):
+def removeScripts(appname):
     cmd = "-" + appname + '\n'
     return sendCommand(cmd)
 
