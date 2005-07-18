@@ -167,11 +167,11 @@ class Index(Command):
             self.help()
             return
 
-        from pisi.cli import indexhelper
+        from pisi.operations import index
         if len(self.args)==1:
-            indexhelper.index(self.args[0])
+            index(self.args[0])
         elif len(self.args)==0:
-            indexhelper.index()
+            index()
         else:
             print 'Indexing only a single directory supported'
             return
@@ -186,8 +186,8 @@ class UpdateDB(Command):
             self.help()
             return
 
-        from pisi.cli import indexhelper
+        from pisi.operations import updatedb
         indexfile = self.args[0]
-        indexhelper.updatedb(indexfile)
+        updatedb(indexfile)
 
 
