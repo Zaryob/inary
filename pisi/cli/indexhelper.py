@@ -10,7 +10,7 @@ def index(repo_dir = '.'):
     index.index(repo_dir)
     index.write('pisi-index.xml')
     
-    ui.info('* Index file written')
+    ui.info('* Index file written\n')
 
 def updatedb(indexfile):
     ui.info('* Updating DB from index file: ' + indexfile + '\n')
