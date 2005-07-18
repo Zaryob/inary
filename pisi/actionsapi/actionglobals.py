@@ -49,10 +49,10 @@ class Dirs:
 
 class Flags:
     """General flags used in actions API"""
-    conf = pisi.config.config.conf
-    host = conf.build.host
-    cflags = conf.build.cflags
-    cxxflags = conf.build.cflags
+    values = pisi.config.config.values
+    host = values.build.host
+    cflags = values.build.cflags
+    cxxflags = values.build.cflags
 
 class ActionGlobals(pisi.config.Config):
     const = pisi.constants.const

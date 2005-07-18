@@ -68,6 +68,7 @@ class ConfigurationSection(object):
 
 
 class ConfigurationFile(object):
+    """Parse and get configuration values from the configuration file"""
     def __init__(self, filePath):
         parser = ConfigParser()
         self.filePath = filePath
