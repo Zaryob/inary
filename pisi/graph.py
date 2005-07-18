@@ -20,47 +20,47 @@ class digraph(object):
                 l.append( (u,v) )
         return l
 
-    def from_edge_list(self, el):
+    def from_list(self, el):
         "convert a list of edges (u,v) to graph"
         for (u,v) in el:
             self.add_edge(u,v)
 
-    def add_vertex(u, data = None):
+    def add_vertex(self, u, data = None):
         "add vertex u, optionally with data"
         assert not u in self.__v
         self.__v.add(u)
         self.__adj[u] = set()
-        if data!=None:
+        if data:
             self.__vdata[u] = data
 
-    def add_edge(u, v, edata = None):
+    def add_edge(self, u, v, edata = None):
         "add edge u -> v"
         if not u in self.__v:
-            add_vertex(u)
+            self.add_vertex(u)
         if not v in self.__v:
-            add_vertex(v)
+            self.add_vertex(v)
         self.__adj[u].add(v)
         #if edata != None:
 
-    def set_vertex_data(u, data):
+    def set_vertex_data(self, u, data):
         self.__vdata[u] = data
 
-    def vertex_data(u):
+    def vertex_data(self, u):
         return self.__vdata[u]
 
-    def has_vertex(u):
+    def has_vertex(self, u):
         return u in self.__v
 
-    def has_edge(u,v):
+    def has_edge(self, u,v):
         if u in self.__v:
             return v in self.__adj[u]
         else:
             return False
 
-    def adj(u):
+    def adj(self, u):
         return self.__adj[u]
 
-    def dfs(finish_hook = None):
+    def dfs(self, finish_hook = None):
         self.color = {}
         self.p = {}
         self.d = {}
@@ -70,23 +70,23 @@ class digraph(object):
             self.p[u] = None
         self.time = 0
         for u in self.__v:
-            if color[u] = 'w':
-                dfs_visit(u)
+            if self.color[u] == 'w':
+                self.dfs_visit(u, finish_hook)
 
-    def dfs_visit(u, finish_hook):
+    def dfs_visit(self, u, finish_hook):
         self.color[u] = 'g'
         self.d[u] = self.time = self.time + 1
         for v in self.adj(u):
-            if self.color[v] = 'w':
+            if self.color[v] == 'w':
                 self.p[v] = u
-                dfs_visit(v)
-        self.color[u] = black
-        if finish_hook != None:
+                self.dfs_visit(v, finish_hook)
+        self.color[u] = 'b'
+        if finish_hook:
             finish_hook(u)
         self.f[u] = self.time = self.time + 1
 
-    def topological_sort():
+    def topological_sort(self):
         l = []
-        dfs(lambda u: l.append(u))
+        self.dfs(lambda u: l.append(u))
         return l
 
