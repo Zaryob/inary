@@ -47,12 +47,16 @@ class Command(object):
     def checkAuthInfo(self):
         username = self.options.username
         password = self.options.password
-        if not username and not password:
-            if config.values.svn.username and config.values.svn.password:
-                self.authInfo = (config.values.svn.username,
-                                 config.values.svn.password)
-                return
-        elif username and password:
+
+        # We'll get the username, password pair from a configuration
+        # file from users home directory. Currently we need user to
+        # give it from the user interface.
+#         if not username and not password:
+#             if someauthconfig.username and someauthconfig.password:
+#                 self.authInfo = (someauthconfig.username,
+#                                  someauthconfig.password)
+#                 return
+        if username and password:
             self.authInfo = (username, password)
             return
         

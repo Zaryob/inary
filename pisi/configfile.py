@@ -1,3 +1,5 @@
+# -*- conding: utf-8 -*-
+
 # PISI Configuration File module, obviously, is used to read from the
 # configuration file. Module also defines default values for
 # configuration parameters.
@@ -13,9 +15,11 @@
 #CFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
 #CXXFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
 #
-#[svn]
-#username = caglar
-#password = isteoylebirsey
+#[dirs]
+#lib_dir = /var/lib/pisi
+#db_dir = /var/db/pisi
+#archives_dir = /var/cache/pisi/archives
+#tmp_dir = /var/tmp/pisi
 
 import os
 from ConfigParser import ConfigParser, NoSectionError
@@ -43,9 +47,12 @@ class DirsDefaults:
     archives_dir = "/var/cache/pisi/archives"
     tmp_dir =  "/var/tmp/pisi"
 
-class SvnDefaults:
-    """Default values for [svn] section """
-    username =  password = None
+# bu bilgiyi burada tutmak mantıklı değil. bunun yerine kullanıcının
+# kendi ev dizininde ayrı bir dosyada tutmak gerekiyor. Şimdilik bunu
+# desteklemeyelim. Sonra hallederiz...
+# class SvnDefaults:
+#     """Default values for [svn] section """
+#     username =  password = None
 
 class ConfigurationSection(object):
     """ConfigurationSection class defines a section in the configuration
@@ -59,8 +66,6 @@ class ConfigurationSection(object):
             self.defaults = BuildDefaults
         elif section == "directories":
             self.defaults = DirsDefaults
-        elif section == "svn":
-            self.defaults = SvnDefaults
         else:
             e = "No section by name '%s'" % section
             raise ConfigException, e
@@ -103,9 +108,3 @@ class ConfigurationFile(object):
         except NoSectionError:
             dirsitems = []
         self.dirs = ConfigurationSection("directories", dirsitems)
-
-        try:
-            svnitems = parser.items("svn")
-        except NoSectionError:
-            svnitems = []
-        self.svn = ConfigurationSection("svn", svnitems)
