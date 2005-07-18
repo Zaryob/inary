@@ -7,22 +7,41 @@ class digraph(object):
         self.__adj = {}
         self.__vdata = {}
         #self.__edata = {}
+        
+    def vertices(self):
+        "return set of vertex descriptors"
+        return self.__v
+
+    def edges(self):
+        "return a list of edge descriptors"
+        l = []
+        for u in self.__v:
+            for v in self.__u:
+                l.append( (u,v) )
+        return l
 
     def add_vertex(u, data = None):
-        #assert not u in self.__v
+        "add vertex u, optionally with data"
+        assert not u in self.__v
         self.__v.add(u)
+        self.__adj[u] = set()
         if data!=None:
             self.__vdata[u] = data
 
     def add_edge(u, v, edata = None):
-        self.__adj[u].add(u)
+        "add edge u -> v"
+        if not u in self.__v:
+            add_vertex(u)
+        if not v in self.__v:
+            add_vertex(v)
+        self.__adj[u].add(v)
         #if edata != None:
 
     def set_vertex_data(u, data):
         self.__vdata[u] = data
 
     def vertex_data(u):
-        self.__vdata[u]
+        return self.__vdata[u]
 
     def has_vertex(u):
         return u in self.__v
