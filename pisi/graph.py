@@ -88,5 +88,7 @@ class digraph(object):
     def topological_sort(self):
         l = []
         self.dfs(lambda u: l.append(u))
+        l.reverse()
         return l
+    
 
