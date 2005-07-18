@@ -75,10 +75,10 @@ def doman(*filenameList):
             gzfile.writelines(file(filename).xreadlines())
             gzfile.close()
 
-            if os.access(filename, os.F_OK):
+            if os.access(filename + '.gz', os.F_OK):
                 copy_file(filename + '.gz',
                             os.path.join(destDir,
-                                     os.path.basename(filename)))
+                                     os.path.basename(filename + '.gz')))
 
 def domove(source, destination):
     
