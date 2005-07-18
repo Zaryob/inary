@@ -50,6 +50,13 @@ class InstallDB:
         else:
             return False
 
+    def list_installed(self):
+        l = []
+        for (pkg, (status,version,release)) in self.d.iteritems():
+            if status=='i':
+                l.append(pkg)
+        return l
+
     def get_version(self, pkg):
         pkg = str(pkg)
         (status, version, release) = self.d[pkg]

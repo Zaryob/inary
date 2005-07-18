@@ -14,4 +14,6 @@ def remove(package_name):
 from install import Installer
 
 def install(package_name):
-    Installer 
+    i = Installer(package_name), i.install()
+
+

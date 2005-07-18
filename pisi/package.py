@@ -75,7 +75,6 @@ class Package:
         # extract control files
         self.package.extract_PISI_files(tmpdir)
 
-            filesxml = 
         self.metadata = MetaData()
         self.metadata.read( join(tmpdir, config.metadata_xml) )
         if not metadata.verify():

@@ -7,43 +7,10 @@ import pisi
 from pisi.config import config
 import pisi.operations
 from pisi.purl import PUrl
+from common import *
 from commands import *
-
 # globals
-usage_text = """%prog <command> [options] [arguments]
 
-where <command> is one of:
-
-help
-build
-index
-info
-install
-remove
-updatedb
-
-Use \"%prog help <command>\" for help on a specific subcommand.
-
-PISI Package Manager
-"""
-
-
-def commonopts(parser):
-    p = parser
-    p.add_option("-D", "--destdir", action="store")
-    p.add_option("-u", "--username", action="store")
-    p.add_option("-p", "--password", action="store")
-    p.add_option("-P", action="store_true", dest="getpass", default=False,
-                 help="Get password from the command line")
-    p.add_option("-v", "--verbose", action="store_true",
-                 dest="verbose", default=False,
-                 help="detailed output")
-    p.add_option("-d", "--debug", action="store_true",
-                 default=True, help="show debugging information")
-    p.add_option("-n", "--dry-run", action="store_true", default=False,
-                 help = "do not perform any action, just show what\
-                 would be done")
-    return p
 
 
 

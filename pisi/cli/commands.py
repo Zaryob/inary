@@ -1,3 +1,11 @@
+import sys
+from optparse import OptionParser
+import pisi
+from pisi.config import config
+import pisi.operations
+from pisi.purl import PUrl
+from common import *
+
 # helper functions
 def cmdObject(cmd, fail=False):
     commands = {"help": Help,
@@ -22,7 +30,7 @@ class Command(object):
     """generic help string for any command"""
     def __init__(self):
         # now for the real parser
-        self.parser = OptionParser(usage=usage_text,
+        self.parser = OptionParser(usage="",
                                    version="%prog " + pisi.__version__)
         self.options()
         self.parser = commonopts(self.parser)
