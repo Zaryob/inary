@@ -9,6 +9,7 @@ import sys
 import util
 from ui import ui
 from constants import const
+from config import config
 from sourcearchive import SourceArchive
 from files import Files, FileInfo
 from metadata import MetaData
@@ -194,8 +195,8 @@ class PisiBuild:
         some additional information."""
         metadata = MetaData()
         metadata.fromSpec(self.spec.source, package)
-        metadata.package.distribution = const.distribution
-        metadata.package.distributionRelease = const.distributionRelease
+        metadata.package.distribution = config.values.general.distribution
+        metadata.package.distributionRelease = config.values.general.distribution_release
         metadata.package.architecture = "Any"
         
         # FIXME: Bu hatalı. installsize'ı almak için tüm

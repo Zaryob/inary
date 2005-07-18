@@ -28,22 +28,8 @@ class Constants:
     __c = _constant()
 
     def __init__(self):
-        # Constants for metadata
-        #TODO: These two will be defined in a configuration file.
-        self.__c.distribution = "Pardus"
-        self.__c.distributionRelease = "0.1"
-
         # prefix for package names
         self.__c.package_prefix = ".pisi"
-
-        # directories
-        # TODO: bu dizinler constant olmak zorunda değil. yalnızca bu
-        # grubu config içerisine taşıyabiliriz. configfile'dan
-        # düzenlenebilirler.
-        self.__c.lib_dir_suffix = "/var/lib/pisi"
-        self.__c.db_dir_suffix = "/var/db/pisi"
-        self.__c.archives_dir_suffix = "/var/cache/pisi/archives"
-        self.__c.tmp_dir_suffix =  "/var/tmp/pisi"
 
         # directory suffixes for build
         self.__c.work_dir_suffix = "/work"

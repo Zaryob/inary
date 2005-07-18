@@ -1,12 +1,10 @@
+# -*- coding: utf-8 -*-
 # PISI Configuration module is used for gathering and providing
 # regular PISI configurations.
 
 # Authors: Baris Metin <baris@uludag.org.tr
 #          Eray Ozkural <eray@uludag.org.tr>
 
-#TODO: Eventually PISI will have a configuration file (located in
-#/etc/pisi/conf?) and this module will provide access to those
-#configuration parameters.
 
 from constants import const
 from configfile import ConfigurationFile
@@ -26,17 +24,20 @@ class Config(object):
         # pkg_x_dir: per package directory for storing info type x
 
         def lib_dir(self):
-            return self.destdir + const.lib_dir_suffix
+            return self.destdir + self.values.dirs.lib_dir
 
         def db_dir(self):
-            return self.destdir + const.db_dir_suffix
+            return self.destdir + self.values.dirs.db_dir
 
         def archives_dir(self):
-            return self.destdir + const.archives_dir_suffix
+            return self.destdir + self.values.dirs.archives_dir
     
         def tmp_dir(self):
-            return self.destdir + const.tmp_dir_suffix
+            return self.destdir + self.values.dirs.tmp_dir
 
+        # bu dizini neden kullanıyoruz? Yalnızca index.py içerisinde
+        # kullanılıyor ama /var/tmp/pisi/install gibi bir dizine niye
+        # ihtiyacımız var? (baris)
         def install_dir(self):
             return self.tmp_dir() + const.install_dir_suffix
 

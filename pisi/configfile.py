@@ -27,12 +27,21 @@ class ConfigException(Exception):
 class GeneralDefaults:
     """Default values for [general] section"""
     destinationdirectory = os.getcwd() + "/tmp" # FOR ALPHA
+    distribution = "Pardus"
+    distribution_release = "0.1"
 
 class BuildDefaults:
     """Default values for [build] section"""
     host = "i686-pc-linux-gnu"
     CFLAGS = "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
     CXXFLAGS= "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
+
+class DirsDefaults:
+    "Default values for [directories] section"
+    lib_dir = "/var/lib/pisi"
+    db_dir = "/var/db/pisi"
+    archives_dir = "/var/cache/pisi/archives"
+    tmp_dir =  "/var/tmp/pisi"
 
 class SvnDefaults:
     """Default values for [svn] section """
@@ -48,6 +57,8 @@ class ConfigurationSection(object):
             self.defaults = GeneralDefaults
         elif section == "build":
             self.defaults = BuildDefaults
+        elif section == "directories":
+            self.defaults = DirsDefaults
         elif section == "svn":
             self.defaults = SvnDefaults
         else:
@@ -86,6 +97,12 @@ class ConfigurationFile(object):
         except NoSectionError:
             builditems = []
         self.build = ConfigurationSection("build", builditems)
+
+        try:
+            dirsitems = parser.items("directories")
+        except NoSectionError:
+            dirsitems = []
+        self.dirs = ConfigurationSection("directories", dirsitems)
 
         try:
             svnitems = parser.items("svn")

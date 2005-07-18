@@ -27,10 +27,11 @@ class BuildContext(object):
         # pkg_x_dir: per package directory for storing info type x
 
         def pkg_dir(self):
+            "package build directory"
             packageDir = self.spec.source.name + '-' \
                 + self.spec.source.version + '-' + self.spec.source.release
 
-            return self.destdir + const.tmp_dir_suffix \
+            return self.destdir + self.values.dirs.tmp_dir \
                 + '/' + packageDir
    
         def pkg_work_dir(self):
