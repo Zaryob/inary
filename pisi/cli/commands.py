@@ -48,7 +48,7 @@ class Command(object):
         username = self.options.username
         password = self.options.password
 
-        # We'll get the username, password pair from a configuration
+        # TODO: We'll get the username, password pair from a configuration
         # file from users home directory. Currently we need user to
         # give it from the user interface.
 #         if not username and not password:
