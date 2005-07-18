@@ -69,7 +69,7 @@ class Package:
         self.extract_files([const.metadata_xml, const.files_xml], outdir)
         self.extract_dir('config', outdir)
 
-    def read_info(self, outdir = None):
+    def read(self, outdir = None):
         if not outdir:
             outdir = config.tmp_dir()
 

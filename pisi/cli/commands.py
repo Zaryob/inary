@@ -154,7 +154,7 @@ class Info(Command):
     def printinfo(self, arg):
         import os.path
         if os.path.exists(arg):
-            metadata, files = pisi.install.get_pkg_info(arg)
+            metadata, files = pisi.operations.info(arg)
             print metadata.package
 
 class Index(Command):

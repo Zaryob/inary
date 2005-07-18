@@ -80,6 +80,9 @@ class Installer:
     
         # check dependencies
         if not dependency.installable(pkginfo.name):
+            ui.error('Dependencies for ' + pkginfo.name +
+                     ' not satisfied\n')
+            
             raise InstallError("Package not installable")
 
         #TODO:
