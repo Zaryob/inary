@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # package abstraction
 # provides methods to add/remove files, extract control files
 # maintainer: baris and meren
@@ -91,12 +93,13 @@ class Package:
 
         return join( config.lib_dir(), packageDir)
 
-    def pkg_dir_aux():
-        packageDir = self.metadata.package.name + '-' \
-                     + self.metadata.package.version + '-' \
-                     + self.metadata.package.release
+# bu fonksiyonun aynısı yukarıda başka bir isim ile var, biri fazla...
+#     def pkg_dir_aux():
+#         packageDir = self.metadata.package.name + '-' \
+#                      + self.metadata.package.version + '-' \
+#                      + self.metadata.package.release
 
-        return join( config.lib_dir(), packageDir)
+#         return join( config.lib_dir(), packageDir)
 
     def comar_dir(self):
-        return join( self.pkg_dir(), const.comar_dir_suffix)
+        return self.pkg_dir() + const.comar_dir_suffix
