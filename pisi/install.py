@@ -21,34 +21,9 @@ import comariface
 class InstallError(Exception):
     pass
 
-# bu fonksiyonun burada işi olmamalı. Silmeyi doğrudan install.py'nin
-# içinde yapmamalıyız!
-## evet module'un ismi yanlis. ozunde install/upgrade/remove
-## islemlerinin cok buyuk farklari yok. hepsine operations.py denip
-## su class gereksizliginden kurtulacagim.
-#
-# operations.py'yi ayrıca yapalım. Tek paket kurulumunu ayrı bir modül
-# ile kotarmak daha temiz bir implementation'a götürecektir
-# bizi. PisiInstall'un sınıf olması ise bence gereksiz değil, install
-# sırasında kullanılan ortak veriyi aşağıda görüyoruz zaten. Ayrı ayrı
-# fonksiyonlar ve ilk parametre olarak "package_fn" gibi bir değerin
-# gönderilmesi gereksiz bence. Dahası bu PisiBuild ile de uyumlu bir
-# implemantation olduğu için daha rahat anlaşılır bir kod tabanı
-# oluşturuyor. (baris)
-
-
 class Installer:
     "Installer class, provides install rutines for pisi packages"
     def __init__(self, package_fname):
-        # Ben buna karşıyım. Multi-package işini kotarmak yalnızca
-        # install'da değil hemen hemen tüm işlemlerde halletmemiz
-        # gereken bir iş. Build, install, remove, upgrade, vs. hemen
-        # hepsinde multi-package ile ne yapacağımıza karar vermemiz
-        # gerekiyor. Bu yüzden katman katman düşünelim
-        # işleri. install.py tek paketi kuran bir modül, build.py'nin
-        # tek pspec.xml dosyasından peket derlediği gibi. Biz bu
-        # modülleri kullanarak üst seviye modüller ile çoklu paketler
-        # işini halletmeliyiz. (baris)
         self.package = Package(package_fname)
         self.package.read()
         self.metadata = self.package.metadata
