@@ -2,7 +2,6 @@ import sys
 from optparse import OptionParser
 import pisi
 from pisi.config import config
-import pisi.operations
 from pisi.purl import PUrl
 from common import *
 
@@ -140,7 +139,8 @@ class Remove(Command):
             return
 
         for arg in self.args:
-            pisi.install.remove(arg)
+            from pisi.operations import remove
+            remove(arg)
 
 class Info(Command):
     """info: display information about a package 
@@ -159,7 +159,8 @@ class Info(Command):
     def printinfo(self, arg):
         import os.path
         if os.path.exists(arg):
-            metadata, files = pisi.operations.info(arg)
+            from pisi.operations import info
+            metadata, files = info(arg)
             print metadata.package
 
 class Index(Command):

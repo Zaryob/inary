@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 # PISI Configuration module is used for gathering and providing
 # regular PISI configurations.
 
