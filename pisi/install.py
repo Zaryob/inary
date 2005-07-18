@@ -16,6 +16,7 @@ from packagedb import packagedb
 import dependency
 from metadata import MetaData
 import comariface
+import operations
 #import conflicts
 
 class InstallError(Exception):
@@ -85,38 +86,37 @@ class Installer:
             
             raise InstallError("Package not installable")
 
-        #TODO:
         if installdb.is_installed(pkginfo.name): # is this a reinstallation?
             (iversion, irelease) = installdb.get_version(pkginfo.name)
 
             if pkginfo.version == iversion and pkginfo.release == irelease:
                 if not ui.confirm('Re-install same version package?'):
                     raise InstallError('Package re-install declined')
+            else:
+                upgrade = False
+                # is this an upgrade?
+                # determine and report the kind of upgrade: version, release, build
+                if pkginfo.version > iversion:
+                    ui.info('Upgrading to new upstream version')
+                    upgrade = True
+                elif pkginfo.release > irelease:
+                    ui.info('Upgrading to new distribution release')
+                    upgrade = True
 
-            upgrade = False
-            # is this an upgrade?
-            # determine and report the kind of upgrade: version, release, build
-            if pkginfo.version > iversion:
-                ui.info('Upgrading to new upstream version')
-                upgrade = True
-            elif pkginfo.release > irelease:
-                ui.info('Upgrading to new distribution release')
-                upgrade = True
-
-            # is this a downgrade? confirm this action.
-            #
-            # burada bir gariplik var. Tam olarak ne yapmak istediğini
-            # anlamadığım için bırakıyorm. Ama bu kod çalışmıyor.
-            if not upgrade:
-                if pkginfo.version < iversion:
-                    x = 'Downgrade to old upstream version?'
-                elif pkginfo.release < irelease:
-                    x = 'Downgrade to old distribution release?'
-                if not ui.confirm(x):
-                    raise InstallError('Package downgrade declined')
+                # is this a downgrade? confirm this action.
+                #
+                # burada bir gariplik var. Tam olarak ne yapmak istediğini
+                # anlamadığım için bırakıyorm. Ama bu kod çalışmıyor.
+                if not upgrade:
+                    if pkginfo.version < iversion:
+                        x = 'Downgrade to old upstream version?'
+                    elif pkginfo.release < irelease:
+                        x = 'Downgrade to old distribution release?'
+                    if not ui.confirm(x):
+                        raise InstallError('Package downgrade declined')
 
             # remove old package then
-            remove(pkginfo.name)
+            operations.remove(pkginfo.name)
 
         # unzip package in place
         self.extractInstall()

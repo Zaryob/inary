@@ -91,5 +91,12 @@ class Package:
 
         return join( config.lib_dir(), packageDir)
 
+    def pkg_dir_aux():
+        packageDir = self.metadata.package.name + '-' \
+                     + self.metadata.package.version + '-' \
+                     + self.metadata.package.release
+
+        return join( config.lib_dir(), packageDir)
+
     def comar_dir(self):
         return join( self.pkg_dir(), const.comar_dir_suffix)

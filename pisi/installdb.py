@@ -7,6 +7,7 @@ import os, fcntl
 import bsddb.dbshelve as shelve
 
 from config import config
+from constants import const
 from files import Files
 import util
 
@@ -28,8 +29,9 @@ class InstallDB:
         self.fdummy.close()
         
     def files_name(self, pkg, version, release):
-        fn = pkg + '-' + version + '-' + release + '.xml'
-        return os.path.join(self.files_dir, fn)
+        from os.path import join
+        pkg_dir = join(config.lib_dir(), pkg + '-' + version + '-' + release)
+        return join(pkg_dir, const.files_xml)
 
     def files(self, pkg):
         pkg = str(pkg)
@@ -91,9 +93,9 @@ class InstallDB:
         pkg = str(pkg)
         if self.d.has_key(pkg):
             (status, version, release) = self.d[pkg]
-            f = self.files_name(pkg, version, release)
-            if util.check_file(f):
-                os.unlink(f)
+            #f = self.files_name(pkg, version, release)
+            #if util.check_file(f):
+            #    os.unlink(f)
             del self.d[pkg]
 
 installdb = InstallDB()
