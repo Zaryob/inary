@@ -6,6 +6,12 @@ import archive
 from constants import const
 from config import config
 from purl import PUrl
+from os.path import join
+from metadata import MetaData
+from files import Files
+
+class PackageError:
+    pass
 
 class Package:
     """PISI Package Class provides access to a pisi package (.pisi
@@ -62,3 +68,28 @@ class Package:
         self.extract_files([const.metadata_xml, const.files_xml], outdir)
         self.extract_dir('config', outdir)
 
+    def read_info(self, outdir = None):
+        if not outdir:
+            outdir = config.tmp_dir()
+
+        # extract control files
+        self.package.extract_PISI_files(tmpdir)
+
+            filesxml = 
+        self.metadata = MetaData()
+        self.metadata.read( join(tmpdir, config.metadata_xml) )
+        if not metadata.verify():
+            raise PackageError("MetaData format wrong")
+
+        self.files = Files()
+        self.files.read( join(tmpdir, const.files_xml) )
+        
+    def pkg_dir(self):
+        packageDir = self.metadata.package.name + '-' \
+                     + self.metadata.package.version + '-' \
+                     + self.metadata.package.release
+
+        return join( config.lib_dir(), packageDir)
+
+    def comar_dir(self):
+        return join( self.pkg_dir(), const.comar_dir_suffix)

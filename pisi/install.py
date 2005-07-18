@@ -35,24 +35,11 @@ class InstallError(Exception):
 # gönderilmesi gereksiz bence. Dahası bu PisiBuild ile de uyumlu bir
 # implemantation olduğu için daha rahat anlaşılır bir kod tabanı
 # oluşturuyor. (baris)
-def remove(package_name):
-    """Remove a goddamn package"""
-    ui.info('Removing package ' + package_name)
-    if not installdb.is_installed(package_name):
-        raise InstallError('Trying to remove nonexistent package '
-                           + package_name)
-    for fileinfo in installdb.files(package_name):
-        os.unlink(fileinfo.path)
-    installdb.remove(package_name)
 
 
-class PisiInstall:
-    "PisiInstall class, provides install rutines for pisi packages"
-    def __init__(self, installcontext):
-        self.ctx = installcontext
-        ## bu context fikri multi package installation fikriyle
-        ## uyusmuyor ne yazik ki. gitmesi gerek.
-        #
+class Installer:
+    "Installer class, provides install rutines for pisi packages"
+    def __init__(self, package_fname):
         # Ben buna karşıyım. Multi-package işini kotarmak yalnızca
         # install'da değil hemen hemen tüm işlemlerde halletmemiz
         # gereken bir iş. Build, install, remove, upgrade, vs. hemen
@@ -62,9 +49,10 @@ class PisiInstall:
         # tek pspec.xml dosyasından peket derlediği gibi. Biz bu
         # modülleri kullanarak üst seviye modüller ile çoklu paketler
         # işini halletmeliyiz. (baris)
-        self.metadata = self.ctx.metadata
-        self.files = self.ctx.files
-        self.package = self.ctx.package
+        self.package = Package(package_fname)
+        self.package.read()
+        self.metadata = self.package.metadata
+        self.files = self.package.files
 
     def extractInstall(self):
         ui.info('Extracting files\n')
@@ -74,24 +62,23 @@ class PisiInstall:
         # put files.xml, metadata.xml, actions.py and COMAR scripts
         # somewhere in the file system. We'll need these in future...
 
-        #BUG: these look like they ought to be part of Package class
         ui.info('Storing %s\n' % const.files_xml)
-        self.package.extract_file(const.files_xml, self.ctx.pkg_dir())
+        self.package.extract_file(const.files_xml, self.package.pkg_dir())
 
         ui.info('Storing %s\n' % const.metadata_xml)
-        self.package.extract_file(const.metadata_xml, self.ctx.pkg_dir())
+        self.package.extract_file(const.metadata_xml, self.package.pkg_dir())
 
         for pcomar in self.metadata.package.providesComar:
             fpath = os.path.join(const.comar_dir, pcomar.script)
             # comar prefix is added to the pkg_dir while extracting comar
             # script file. so we'll use pkg_dir as destination.
             ui.info('Storing %s\n' % fpath)
-            self.package.extract_file(fpath, self.ctx.pkg_dir())
+            self.package.extract_file(fpath, self.package.pkg_dir())
 
     def registerCOMARScripts(self):
         # register COMAR scripts
         for pcomar in self.metadata.package.providesComar:
-            scriptPath = os.path.join(self.ctx.comar_dir(),pcomar.script)
+            scriptPath = os.path.join(self.package.comar_dir(),pcomar.script)
             ui.info("Registering COMAR script %s\n" % pcomar.script)
             ret = comariface.registerScript(pcomar.om,
                                             self.metadata.package.name,
