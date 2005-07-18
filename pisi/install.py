@@ -22,7 +22,7 @@ class InstallError(Exception):
     pass
 
 class Installer:
-    "Installer class, provides install rutines for pisi packages"
+    "Installer class, provides install routines for pisi packages"
     def __init__(self, package_fname):
         self.package = Package(package_fname)
         self.package.read()
@@ -127,4 +127,4 @@ class Installer:
         installdb.install(self.metadata.package.name,
                           self.metadata.package.version,
                           self.metadata.package.release,
-                          os.path.join(self.ctx.pkg_dir(), 'files.xml'))
+                          os.path.join(self.package.pkg_dir(), 'files.xml'))
