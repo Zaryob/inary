@@ -32,6 +32,9 @@ class Config(object):
 
         def archives_dir(self):
             return self.destdir + self.values.dirs.archives_dir
+
+        def packages_dir(self):
+            return self.destdir + self.values.dirs.packages_dir
     
         def tmp_dir(self):
             return self.destdir + self.values.dirs.tmp_dir

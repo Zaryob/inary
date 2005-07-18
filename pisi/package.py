@@ -24,15 +24,13 @@ class Package:
         url = PUrl(packagefn)
 
         if url.isRemoteFile():
-            from os import getcwd
             from fetcher import fetchUrl
             from ui import ui
-            # TODO: belki Constants.packages_dir() gibi bir yere
-            # indirmek daha iyi olur.
-            fetchUrl(url, getcwd(), ui.Progress)
-            self.filename = url.filename()
+            dest = config.packages_dir()
+            fetchUrl(url, dest, ui.Progress)
+            self.filepath = join(dest, url.filename())
 
-        self.impl = archive.ArchiveZip(self.filename, 'zip', mode)
+        self.impl = archive.ArchiveZip(self.filepath, 'zip', mode)
 
     def add_to_package(self, fn):
         """Add a file or directory to package"""

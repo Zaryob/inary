@@ -19,6 +19,7 @@
 #lib_dir = /var/lib/pisi
 #db_dir = /var/db/pisi
 #archives_dir = /var/cache/pisi/archives
+#packages_dir = /var/cache/pisi/packages
 #tmp_dir = /var/tmp/pisi
 
 import os
@@ -45,6 +46,7 @@ class DirsDefaults:
     lib_dir = "/var/lib/pisi"
     db_dir = "/var/db/pisi"
     archives_dir = "/var/cache/pisi/archives"
+    packages_dir = "/var/cache/pisi/packages"
     tmp_dir =  "/var/tmp/pisi"
 
 # bu bilgiyi burada tutmak mantıklı değil. bunun yerine kullanıcının

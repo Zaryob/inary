@@ -22,11 +22,7 @@ def remove(package_name):
 def install(pkg_location):
     from install import Installer
 
-    url = PUrl(pkg_location)
-    if url.isRemoteFile():
-        pass # bunu simdilik bosverelim, once bir calissin :)
-
-    i = Installer(url.uri)
+    i = Installer(pkg_location)
     i.install()
 
 
