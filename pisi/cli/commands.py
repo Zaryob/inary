@@ -48,9 +48,9 @@ class Command(object):
         username = self.options.username
         password = self.options.password
         if not username and not password:
-            if config.values.username and config.values.password:
-                self.authInfo = (config.values.username,
-                                 config..values.password)
+            if config.values.svn.username and config.values.svn.password:
+                self.authInfo = (config.values.svn.username,
+                                 config.values.svn.password)
                 return
         elif username and password:
             self.authInfo = (username, password)
