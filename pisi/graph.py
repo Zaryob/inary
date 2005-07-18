@@ -1,5 +1,8 @@
 # the most simple minded digraph class ever
 
+class CycleError:
+    pass
+
 class digraph(object):
 
     def __init__(self):
@@ -66,7 +69,7 @@ class digraph(object):
         self.d = {}
         self.f = {}
         for u in self.__v:
-            self.color[u] = 'w'
+            self.color[u] = 'w'         # mark white (unexplored)
             self.p[u] = None
         self.time = 0
         for u in self.__v:
@@ -74,16 +77,25 @@ class digraph(object):
                 self.dfs_visit(u, finish_hook)
 
     def dfs_visit(self, u, finish_hook):
-        self.color[u] = 'g'
+        self.color[u] = 'g'             # mark green (discovered)
         self.d[u] = self.time = self.time + 1
         for v in self.adj(u):
-            if self.color[v] == 'w':
+            if self.color[v] == 'w':    # explore unexplored vertices
                 self.p[v] = u
                 self.dfs_visit(v, finish_hook)
-        self.color[u] = 'b'
+            elif self.color[v] == 'g':  # cycle detected
+                raise CycleError
+        self.color[u] = 'b'             # mark black (completed)
         if finish_hook:
             finish_hook(u)
         self.f[u] = self.time = self.time + 1
+
+    def cycle_free(self):
+        try:
+            self.dfs()
+            return True
+        except CycleError:
+            return False
 
     def topological_sort(self):
         l = []

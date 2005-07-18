@@ -7,15 +7,15 @@ from pisi.config import config
 
 class GraphTestCase(unittest.TestCase):
     def setUp(self):
-        g0 = graph.digraph()
-        g0.from_list([ (1,2), (1,3), (2,3), (3,4), (4, 5), (4,1)])
+        self.g0 = graph.digraph()
+        self.g0.from_list([ (1,2), (1,3), (2,3), (3,4), (4, 5), (4,1)])
         
-        g1 = graph.digraph()
-        g1.from_list([ (0,2), (0,3), (3,4), (2,4), (0,5), (5,4) ])
-        self.g1 = g1
+        self.g1 = graph.digraph()
+        self.g1.from_list([ (0,2), (0,3), (3,4), (2,4), (0,5), (5,4) ])
 
     def testCycle(self):
-        pass
+        self.assert_(not self.g0.cycle_free())
+        self.assert_(self.g1.cycle_free())
 
     def testTopologicalSort(self):
         order = self.g1.topological_sort()
