@@ -72,7 +72,7 @@ class Command(object):
                                    version="%prog " + pisi.__version__)
         #self.parser.allow_interspersed_args = False
         self.options()
-        self.parsr = commonopts(self.parser)
+        self.parser = commonopts(self.parser)
         (self.options, args) = self.parser.parse_args()
         self.args = args[1:]
 
@@ -112,11 +112,13 @@ class Help(Command):
     def run(self):
         if not self.args:
             print usage_text
+            print self.parser.format_option_help()
             return
         
         for arg in self.args:
             obj = cmdObject(arg, True)
             obj.help()
+#            print "\n",self.parser.format_option_help()
                 
 class Build(Command):
     """build: compile PISI package using a pspec.xml file"""
