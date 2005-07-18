@@ -40,7 +40,7 @@ class Fetcher:
         util.check_dir(self.filedest)
         self.percent = 0
         self.rate = 0.0
-        self.percentHook = None
+        self.progress = None
 
     def fetch (self):
         """Return value: Fetched file's full path.."""
