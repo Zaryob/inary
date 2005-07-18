@@ -2,11 +2,12 @@
 # provides methods to add/remove files, extract control files
 # maintainer: baris and meren
 
+from os.path import join
+
 import archive
 from constants import const
 from config import config
 from purl import PUrl
-from os.path import join
 from metadata import MetaData
 from files import Files
 
