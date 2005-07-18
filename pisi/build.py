@@ -243,7 +243,7 @@ class PisiBuild:
 
             # testing
             pkgName = package.name + '-' + self.spec.source.version +\
-                '-' + self.spec.source.release + ".pisi"
+                '-' + self.spec.source.release + const.package_prefix
             
             ui.info("Creating PISI package %s\n" % pkgName)
             

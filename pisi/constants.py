@@ -33,6 +33,9 @@ class Constants:
         self.__c.distribution = "Pardus"
         self.__c.distributionRelease = "0.1"
 
+        # prefix for package names
+        self.__c.package_prefix = ".pisi"
+
         # directories
         # TODO: bu dizinler constant olmak zorunda değil. yalnızca bu
         # grubu config içerisine taşıyabiliriz. configfile'dan
