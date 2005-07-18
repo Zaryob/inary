@@ -55,6 +55,7 @@ class PisiInstall:
         # put files.xml, metadata.xml, actions.py and COMAR scripts
         # somewhere in the file system. We'll need these in future...
 
+        #BUG: these look like they ought to be part of Package class
         ui.info('Storing %s\n' % const.files_xml)
         self.package.extract_file(const.files_xml, self.ctx.pkg_dir())
 
