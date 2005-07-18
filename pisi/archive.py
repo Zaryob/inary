@@ -22,11 +22,10 @@ class ArchiveBase(object):
     def unpack(self, targetDir, cleanDir = False):
         self.targetDir = targetDir
         # first we check if we need to clean-up our working env.
-        if os.path.exists(self.targetDir):
-            if cleanDir:
-                util.clean_dir(self.targetDir)
-        else:
-            os.makedirs(self.targetDir)
+        if os.path.exists(self.targetDir) and cleanDir:
+            util.clean_dir(self.targetDir)
+
+        os.makedirs(self.targetDir)
 
 class ArchiveTar(ArchiveBase):
     """ArchiveTar handles tar archives depending on the compression

@@ -46,6 +46,6 @@ class SourceArchive:
 
         return False
 
-    def unpack(self, cleanDir=False):
+    def unpack(self, cleanDir=True):
         archive = Archive(self.dest, self.ctx.spec.source.archiveType)
         archive.unpack(self.ctx.pkg_work_dir(), cleanDir)
