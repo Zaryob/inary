@@ -19,7 +19,6 @@ def remove(package_name):
         os.unlink( os.path.join(config.destdir, fileinfo.path) )
     installdb.remove(package_name)
 
-
 def install(pkg_location):
     from install import Installer
 
@@ -56,3 +55,17 @@ def updatedb(indexfile):
     index.read(indexfile)
     index.update_db()
     ui.info('* Package db updated.\n')
+
+
+def build(pspecfile, authInfo=None):
+    from build import PisiBuild
+
+    url = PUrl(pspecfile)
+    if url.isRemoteFile():
+        from sourcefetcher import SourceFetcher
+        fs = SourceFetcher(url, authInfo)
+        url.uri = fs.fetch_all()
+
+    # don't do the real job here. this is just a CLI!
+    pb = PisiBuild(url.uri)
+    pb.build()

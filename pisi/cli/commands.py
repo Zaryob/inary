@@ -95,9 +95,9 @@ class Build(Command):
             self.help()
             return
 
-        from pisi.cli import buildhelper
+        from pisi.operations import build
         for arg in self.args:
-            buildhelper.build(arg, self.authInfo)
+            build(arg, self.authInfo)
 
 class Install(Command):
     """install: install PISI packages"""

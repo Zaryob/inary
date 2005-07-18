@@ -10,6 +10,7 @@ import util
 from ui import ui
 from constants import const
 from config import config
+from context import BuildContext
 from sourcearchive import SourceArchive
 from files import Files, FileInfo
 from metadata import MetaData
@@ -61,8 +62,8 @@ def checkPathCollision(package, pkgList):
 
 class PisiBuild:
     """PisiBuild class, provides the package build and creation routines"""
-    def __init__(self, buildcontext):
-        self.ctx = buildcontext
+    def __init__(self, pspec):
+        self.ctx = BuildContext(pspec)
         self.pspecDir = os.path.dirname(self.ctx.pspecfile)
         self.spec = self.ctx.spec
         self.sourceArchive = SourceArchive(self.ctx)

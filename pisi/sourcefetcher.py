@@ -2,15 +2,13 @@
 
 from os.path import basename, dirname, join
 
-from pisi.ui import ui
-from pisi.context import BuildContext
-from pisi.config import config
-from pisi.constants import const
-from pisi.build import PisiBuild, PisiBuildError
-from pisi.purl import PUrl
-from pisi.fetcher import fetchUrl
+from ui import ui
+from config import config
+from constants import const
+from purl import PUrl
+from specfile import SpecFile
 
-class RemoteSource(object):
+class SourceFetcher(object):
     def __init__(self, url, authInfo=None):
         self.url = url
         if authInfo:
@@ -20,16 +18,19 @@ class RemoteSource(object):
         pkgname = basename(dirname(self.url.path()))
         self.dest = join(config.tmp_dir(), pkgname)
         
+    def fetch_all(self):
         # fetch pspec file
         self.fetch()
         pspec = join(self.dest, self.url.filename())
-        self.ctx = BuildContext(pspec)
+        self.spec = SpecFile()
+        self.spec.read(pspec)
 
         self.fetch_actionsfile()
         self.fetch_patches()
         self.fetch_comarfiles()
         self.fetch_additionalFiles()
 
+        return pspec
 
     def fetch_actionsfile(self):
         actionsuri = join(self.location, const.actions_file)
@@ -37,7 +38,7 @@ class RemoteSource(object):
         self.fetch()
         
     def fetch_patches(self):
-        spec = self.ctx.spec
+        spec = self.spec
         for patch in spec.source.patches:
             patchuri = join(self.location, 
                             const.files_dir, patch.filename)
@@ -45,7 +46,7 @@ class RemoteSource(object):
             self.fetch(const.files_dir)
 
     def fetch_comarfiles(self):
-        spec = self.ctx.spec
+        spec = self.spec
         for package in spec.packages:
             for pcomar in package.providesComar:
                 comaruri = join(self.location,
@@ -54,7 +55,7 @@ class RemoteSource(object):
                 self.fetch(const.comar_dir)
 
     def fetch_additionalFiles(self):
-        spec = self.ctx.spec
+        spec = self.spec
         for afile in spec.source.additionalFiles:
             afileuri = join(self.location, 
                             const.files_dir, patch.filename)
@@ -62,18 +63,9 @@ class RemoteSource(object):
             self.fetch(const.files_dir)
 
     def fetch(self, appendDest=""):
+        from fetcher import fetchUrl
+
         ui.info("Fetching %s\n" % self.url.uri)
         dest = join(self.dest, appendDest)
         fetchUrl(self.url, dest)
 
-def build(pspecfile, authInfo=None):
-    # What we need to do first is create a context with our specfile
-    url = PUrl(pspecfile)
-    if url.isRemoteFile():
-        rs = RemoteSource(url, authInfo)
-        ctx = rs.ctx
-    else:
-        ctx = BuildContext(url.uri)
-    # don't do the real job here. this is just a CLI!
-    pb = PisiBuild(ctx)
-    pb.build()
