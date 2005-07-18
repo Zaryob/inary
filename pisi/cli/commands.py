@@ -113,16 +113,9 @@ class Install(Command):
             self.help()
             return
 
-        from pisi.install import Installer
+        from pisi.operations import install
         for arg in self.args:
-            url = PUrl(arg)
-            if url.isRemoteFile():
-                pass # bunu simdilik bosverelim, once bir calissin :)
-
-            pi = Installer(url.uri)
-            pi.install()
-
-
+            install(arg)
 
 class Remove(Command):
     """remove: remove PISI packages"""
@@ -138,8 +131,8 @@ class Remove(Command):
             self.help()
             return
 
+        from pisi.operations import remove
         for arg in self.args:
-            from pisi.operations import remove
             remove(arg)
 
 class Info(Command):
@@ -158,8 +151,9 @@ class Info(Command):
 
     def printinfo(self, arg):
         import os.path
+        from pisi.operations import info
+
         if os.path.exists(arg):
-            from pisi.operations import info
             metadata, files = info(arg)
             print metadata.package
 

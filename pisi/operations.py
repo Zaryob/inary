@@ -6,7 +6,7 @@ from ui import ui
 from package import Package
 from installdb import installdb
 from packagedb import packagedb
-from os.path import join
+from purl import PUrl
 
 # all package operation interfaces are here
 
@@ -17,14 +17,20 @@ def remove(package_name):
         raise Exception('Trying to remove nonexistent package '
                         + package_name)
     for fileinfo in installdb.files(package_name).list:
-        os.unlink( join(config.destdir, fileinfo.path) )
+        os.unlink( os.path.join(config.destdir, fileinfo.path) )
     installdb.remove(package_name)
 
 
-from install import Installer
+def install(pkg_location):
+    from install import Installer
 
-def install(package_name):
-    i = Installer(package_name), i.install()
+    url = PUrl(pkg_location)
+    if url.isRemoteFile():
+        pass # bunu simdilik bosverelim, once bir calissin :)
+
+    i = Installer(url.uri)
+    i.install()
+
 
 def info(package_name):
     package = Package(package_name)
