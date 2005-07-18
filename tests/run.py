@@ -17,8 +17,11 @@ def run_all():
     import fetchertests
     import archivetests
     import installdbtests
+    import sourcedbtests
     import packagedbtests
     import actionsapitests
+    import graphtests
+    import versiontests
 
     alltests = unittest.TestSuite((
         utiltests.suite, 
@@ -29,8 +32,11 @@ def run_all():
         fetchertests.suite,
         archivetests.suite,
         installdbtests.suite,
+        sourcedbtests.suite,
         packagedbtests.suite,
-        actionsapitests.suite
+        actionsapitests.suite,
+        graphtests.suite,
+        versiontests.suite
         ))
 
     runTestSuite(alltests)
