@@ -6,7 +6,6 @@ import os
 
 from specfile import *
 from package import Package
-from files import Files
 import util
 from config import config
 from constants import const
