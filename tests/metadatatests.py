@@ -14,7 +14,7 @@ class MetaDataTestCase(unittest.TestCase):
         md = metadata.MetaData()
         md.read('tests/sandbox/metadata.xml')
 
-        self.assertEqual(md.package.license, "As-Is")
+        self.assertEqual(md.package.license, ["As-Is"])
 
         self.assertEqual(md.package.version, "1.7")
 
