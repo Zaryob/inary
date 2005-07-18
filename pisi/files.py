@@ -43,6 +43,13 @@ class FileInfo:
         elt.appendChild(hashElt)
         return elt
 
+    def verify(self):
+        if not self.path: return False
+        if not self.type: return False
+        if not self.size: return False
+        if not self.hash: return False
+        return True
+
 class Files(XmlFile):
     
     def __init__(self):
@@ -64,3 +71,8 @@ class Files(XmlFile):
         for x in self.list:
             document.appendChild(x.elt(self.dom))
         self.writexml(filename)
+
+    def verify(self):
+        for finfo in self.list:
+            if not finfo.verify(): return False
+        return True

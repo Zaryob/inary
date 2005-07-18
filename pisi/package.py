@@ -83,6 +83,8 @@ class Package:
 
         self.files = Files()
         self.files.read( join(outdir, const.files_xml) )
+        if not self.files.verify():
+            raise PackageError, "invalid %s" % const.files_xml
         
     def pkg_dir(self):
         packageDir = self.metadata.package.name + '-' \
