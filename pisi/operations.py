@@ -54,7 +54,7 @@ def install(pkg):
                         (pkg_name, repo_url))
                 install_package(package_uri)
                 return
-        ui.error("Package %s not found in the index file." %pkg)
+        ui.error("Package %s not found in the index file.\n" %pkg)
 
 def install_package(pkg_location):
     from install import Installer
