@@ -23,6 +23,7 @@
 #db_dir = /var/db/pisi
 #archives_dir = /var/cache/pisi/archives
 #packages_dir = /var/cache/pisi/packages
+#index_dir = /var/cache/pisi/index
 #tmp_dir = /var/tmp/pisi
 
 import os
@@ -54,6 +55,7 @@ class DirsDefaults:
     db_dir = "/var/db/pisi"
     archives_dir = "/var/cache/pisi/archives"
     packages_dir = "/var/cache/pisi/packages"
+    index_dir = "/var/cache/pisi/index"
     tmp_dir =  "/var/tmp/pisi"
 
 
@@ -78,15 +80,19 @@ class ConfigurationSection(object):
         self.section = section
 
     def __getattr__(self, attr):
-        if not self.items:
-            if hasattr(self.defaults, attr):
-                return getattr(self.defaults, attr)
-            return ""
-        for item in self.items:
-            if item[0] == attr:
-                return item[1]
-        return ""
 
+        # first search for attribute in the items provided in the
+        # configuration file.
+        if self.items:
+            for item in self.items:
+                if item[0] == attr:
+                    return item[1]
+
+        # then fall back to defaults
+        if hasattr(self.defaults, attr):
+            return getattr(self.defaults, attr)
+
+        return ""
 
 class ConfigurationFile(object):
     """Parse and get configuration values from the configuration file"""
@@ -106,7 +112,7 @@ class ConfigurationFile(object):
             repositems = parser.items("repos")
         except NoSectionError:
             repositems = []
-        self.repos = ConfigurationSection("repos", generalitems)
+        self.repos = ConfigurationSection("repos", repositems)
 
         try:
             builditems = parser.items("build")
