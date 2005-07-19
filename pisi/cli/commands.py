@@ -12,6 +12,8 @@ def cmdObject(cmd, fail=False):
                 "info": Info,
                 "install": Install,
                 "list-installed": ListInstalled,
+                "list-available": ListAvailable,
+                "search-available": SearchAvailable,
                 "remove": Remove,
                 "index": Index,
                 "updatedb": UpdateDB}
@@ -206,3 +208,24 @@ class UpdateDB(Command):
         updatedb(indexfile)
 
 
+class ListAvailable(Command):
+    "list-available: list the available packages in the repository"
+    def __init__(self):
+        super(ListAvailable, self).__init__()
+
+    def run(self):
+        from pisi import util
+        (repo, index) = util.repo_index()
+
+        for package in index.packages:
+            name = package.name
+            version = package.history[0].version
+            release = package.history[0].release
+
+            print util.package_name(name, version, release)
+
+class SearchAvailable(Command):
+    "search-available: search in available packages"
+    pass
+
+        

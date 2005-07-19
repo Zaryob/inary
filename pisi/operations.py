@@ -6,6 +6,7 @@ from ui import ui
 from purl import PUrl
 import util
 
+
 # all package operation interfaces are here
 
 def remove(package_name):
@@ -31,14 +32,8 @@ def install(pkg):
         install_package(pkg)
     else:
         from os.path import join
-        from index import Index
 
-        # TODO: Currently we're supporting for only one
-        # repository. We'll extend this functionality soon.
-        repo_url = config.values.repos.default
-        index = Index()
-        indexpath = join(config.index_dir(), const.pisi_index)
-        index.read(indexpath)
+        (repo, index) = util.repo_index()
 
         # search pkg in index for it's presence in repository
         for package in index.packages:
@@ -47,8 +42,9 @@ def install(pkg):
                 release = package.history[0].release
 
                 name = util.package_name(pkg, version, release)
-                package_uri = join(repo_url, name[0], name)
-                ui.info("Installing %s from repository %s\n" %(name, repo_url))
+                package_uri = join(repo, name[0], name)
+
+                ui.info("Installing %s from repository %s\n" %(name, repo))
                 install_package(package_uri)
                 return
         ui.error("Package %s not found in the index file.\n" %pkg)

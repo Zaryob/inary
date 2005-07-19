@@ -16,6 +16,7 @@ import statvfs
 # pisi modules
 from ui import ui
 from constants import const
+from config import config
 
 class FileError(Exception):
     pass
@@ -247,9 +248,23 @@ def partition_freespace(directory):
     st = os.statvfs(directory)
     return st[statvfs.F_BSIZE] * st[statvfs.F_BFREE]
 
-#############################
-# Package Related Functions #
-#############################
+########################################
+# Package/Repository Related Functions #
+########################################
 
 def package_name(name, version, release):
     return  name + '-' + version + '-' + release + const.package_prefix
+
+
+# TODO: Currently we're supporting for only one repository. We'll
+# extend this functionality soon.
+def repo_index(repo = config.values.repos.default):
+    "return a par (url, IndexObj) for the given repository"
+    from index import Index
+
+    index = Index()
+    # buraya repo adını da ekleyeceğiz.
+    # path/to/repos_dir/default/pisi-index.xml gibi...
+    indexpath = os.path.join(config.index_dir(), const.pisi_index)
+    index.read(indexpath)
+    return (repo, index)
