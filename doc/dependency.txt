@@ -40,7 +40,6 @@ system that are not modelled well with SAT problem.
 
 3. Package operation planning
 
-
 The dependency resolution problem may be viewed as a simple forward
 chaining problem, where we would like to begin from an initial state
 S_0 and by following allowable system transitions t_i: S -> S, 
@@ -58,12 +57,71 @@ of atomic system transitions. Given an initial state and a final
 state, the job of the package operation planner is to determine
 whether there is a plan, and if so find the "best" one.
 
+Where there are no versions involved (e.g. upgrade/downgrade), we will
+replace the pair (x,v) with x.
 
-4. Solving the simplest case with topological sorting
+3.1 System consistency
 
-5. Complex cases
+It is worth mentioning here the concept of system consistency. As in a
+database transaction, it is not acceptable that the system violates an
+invariant afterwards. In the context of PISI, system consistency is
+composed of two conditions for the current set of installed packages.
+  1. All package dependencies are satisfied (we may call this a closed system)
+  2. No package conflicts are present.
 
-5.1 A complex upgrade
+Therefore, by atomic transition we also mean one that does not corrupt
+system consistency. The system is thus never in an inconsistent state.
+
+
+3.2 Solving the simplest case with topological sorting
+
+We will now concentrate on a simple form of the problem which can
+be solved with topological sorting. This form is not concerned with
+versions. From initial set of packages S_0, we would like to
+install in addition a new set A of packages obtaining S_f = S_0 \cup A.
+
+The only relations considered are of the form: a Depends on b, or more
+shortly aDb.
+
+The graph of all such simple dependency relations is a directed graph
+(digraph) G. For each dependency relation aDB, there is an edge a ->
+b in G. Accessing graph G usually requires a database operation and
+is therefore expensive.
+
+We now consider the digraph G_A of the minimal set of simple
+dependency relations which contains all information required to
+construct a plan to install packages A. G_A is a vertex induced graph
+such that the fringe of $A$, e.g. vertices with out-degree $0$ are
+already installed. Vertices of G_A are taken from S_f. First, let us
+explain the labelling scheme. Already installed vertices are labelled
+with 'i'. Packages to be added are labelled with 'a', and packages to
+be installed due to dependencies are labelled with 'd'. We
+construct the graph as follows
+
+  G_A <- isolated vertex set A labelled with 'a'
+  repeat
+    done <- true
+    for each u in V_A with out-degree 0
+      for v in adj(u) in G
+        if v is not in V_A
+           done <- false
+           if v is installed
+              label v with 'i'
+           else
+              label v with 'd'
+           add (u,v) to G_A
+  until done
+
+By this iterative expansion, we do a minimum number of database
+accesses to G and construct a dependency graph in memory. If the
+G_A's fringe has vertices with non 'i'-labels, then A cannot be
+installed. Otherwise, we find a topological sort L of G_A, and in
+the reverse order, install packages for vertices labelled with
+'a' or 'd'.
+
+4. Complex cases
+
+4.1 A complex upgrade
 
 plan: upgrade (a,1) to (a,2)
 
