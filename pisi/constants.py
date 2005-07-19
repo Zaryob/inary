@@ -49,6 +49,7 @@ class Constants:
         self.__c.comar_dir = "comar"
         self.__c.files_xml = "files.xml"
         self.__c.metadata_xml = "metadata.xml"
+        self.__c.pisi_index = "pisi-index.xml"
 
         # functions in actions_file
         self.__c.setup_func = "setup"

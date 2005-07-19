@@ -182,12 +182,14 @@ class UpdateDB(Command):
         super(UpdateDB, self).__init__()
 
     def run(self):
-        if len(self.args) != 1:
-            self.help()
-            return
-
         from pisi.operations import updatedb
-        indexfile = self.args[0]
+        try:
+            indexfile = self.args[0]
+        except IndexError:
+            # doesn't have an index file, we'll use the repo url in
+            # configuration file
+            indexfile = None
+
         updatedb(indexfile)
 
 

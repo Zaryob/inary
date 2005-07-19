@@ -21,16 +21,17 @@ class Index(XmlFile):
     def read(self, filename):
         """Read PSPEC file"""
 
-        self.filename = filename
+        self.filepath = filename
         url = PUrl(filename)
         if url.isRemoteFile():
-            from os import getcwd
+            from os.path import join
             from fetcher import fetchUrl
-            # TODO: index dosyasını indirmek için bir yer bulmak lazım.
-            fetchUrl(url, getcwd(), ui.Progress)
-            self.filename = url.filename()
+            # TODO: farklı depoların index dosyalarını handle edebilmek gerekiyor.
+            dest = config.index_dir()
+            fetchUrl(url, dest, ui.Progress)
+            self.filepath = join(dest, url.filename())
 
-        self.readxml(self.filename)
+        self.readxml(self.filepath)
 
         # find all binary packages
         packageElts = self.getAllNodes("Package")
