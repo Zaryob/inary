@@ -1,5 +1,8 @@
 # the most simple minded digraph class ever
 
+# for python 2.3 compatibility
+from sets import Set as set
+
 class CycleError:
     pass
 
