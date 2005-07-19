@@ -94,6 +94,12 @@ class ConfigurationSection(object):
 
         return ""
 
+    # We'll need to access configuration keys by their names as a
+    # string. Like; ["default"]...
+    def __getitem__(self, key):
+        return self.__getattr__(key)
+        
+
 class ConfigurationFile(object):
     """Parse and get configuration values from the configuration file"""
     def __init__(self, filePath):
