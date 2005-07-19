@@ -255,9 +255,6 @@ def partition_freespace(directory):
 def package_name(name, version, release):
     return  name + '-' + version + '-' + release + const.package_prefix
 
-
-# TODO: Currently we're supporting for only one repository. We'll
-# extend this functionality soon.
 def repo_index(reponame = "default"):
     "return a par (url, IndexObj) for the given repository"
     from index import Index
