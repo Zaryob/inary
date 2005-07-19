@@ -73,16 +73,16 @@ def index(repo_dir = '.'):
     index.write(const.pisi_index)
     ui.info('* Index file written\n')
 
-def updatedb(indexfile = None):
+def updatedb(indexfile = None, repo = "default"):
     from index import Index
 
     if not indexfile:
-        repos_path = config.values.repos.default
+        repos_path = config.values.repos[repo]
         indexfile = os.path.join(repos_path, const.pisi_index)
 
     ui.info('* Updating DB from index file: %s\n' % indexfile)
     index = Index()
-    index.read(indexfile)
+    index.read(indexfile, repo)
     index.update_db()
     ui.info('* Package db updated.\n')
 

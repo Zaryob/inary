@@ -18,18 +18,21 @@ class Index(XmlFile):
         self.sources = []
         self.packages = []
 
-    def read(self, filename):
+    def read(self, filename, repo = None):
         """Read PSPEC file"""
 
         self.filepath = filename
         url = PUrl(filename)
         if url.isRemoteFile():
-            from os.path import join
+            import os
             from fetcher import fetchUrl
-            # TODO: farklı depoların index dosyalarını handle edebilmek gerekiyor.
-            dest = config.index_dir()
+
+            dest = os.path.join(config.index_dir(), repo)
+            if not os.path.exists(dest):
+                os.makedirs(dest)
             fetchUrl(url, dest, ui.Progress)
-            self.filepath = join(dest, url.filename())
+
+            self.filepath = os.path.join(dest, url.filename())
 
         self.readxml(self.filepath)
 

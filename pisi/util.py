@@ -258,13 +258,14 @@ def package_name(name, version, release):
 
 # TODO: Currently we're supporting for only one repository. We'll
 # extend this functionality soon.
-def repo_index(repo = config.values.repos.default):
+def repo_index(reponame = "default"):
     "return a par (url, IndexObj) for the given repository"
     from index import Index
 
+    repourl = config.values.repos[reponame]
+
     index = Index()
-    # buraya repo adını da ekleyeceğiz.
-    # path/to/repos_dir/default/pisi-index.xml gibi...
-    indexpath = os.path.join(config.index_dir(), const.pisi_index)
+    indexpath = os.path.join(config.index_dir(),
+                             reponame, const.pisi_index)
     index.read(indexpath)
-    return (repo, index)
+    return (repourl, index)
