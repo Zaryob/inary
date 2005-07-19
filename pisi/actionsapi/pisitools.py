@@ -19,14 +19,21 @@ from actionglobals import glb
 env = glb.env
 dirs = glb.dirs
 
-def insinto(directory, filename):
+def insinto(directory, filename, fileas=''):
     
     makedirs(env.install_dir + directory)
-   
-    for file in glob.glob(filename):
-        if os.access(file, os.F_OK):
-            copy_file(file, env.install_dir +
-                directory + os.path.basename(file))
+
+    if not fileas:
+        for file in glob.glob(filename):
+            if os.access(file, os.F_OK):
+                copy_file(file, env.install_dir +
+                    directory + os.path.basename(file))
+
+    #XXX: toparla burayi..
+    else:
+        if os.access(filename, os.F_OK):
+            copy_file(filename, env.install_dir +
+                    directory + fileas)
 
 def dodoc(*documentList):
 
