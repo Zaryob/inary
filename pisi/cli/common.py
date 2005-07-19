@@ -7,6 +7,7 @@ build
 index
 info
 install
+list-installed
 remove
 updatedb
 

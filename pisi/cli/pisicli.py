@@ -9,10 +9,6 @@ import pisi.operations
 from pisi.purl import PUrl
 from common import *
 from commands import *
-# globals
-
-
-
 
 class ParserError(Exception):
     pass
@@ -47,7 +43,6 @@ class PisiCLI(object):
                 self.die()
             cmd = self.parser.rargs[0]
 
-        #print '*', cmd
         self.command = cmdObject(cmd)
         if not self.command:
             print "Unrecognized command: ", cmd

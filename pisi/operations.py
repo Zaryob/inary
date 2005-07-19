@@ -104,6 +104,5 @@ def build(pspecfile, authInfo=None):
         fs = SourceFetcher(url, authInfo)
         url.uri = fs.fetch_all()
 
-    # don't do the real job here. this is just a CLI!
     pb = PisiBuild(url.uri)
     pb.build()

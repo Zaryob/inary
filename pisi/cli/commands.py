@@ -11,6 +11,7 @@ def cmdObject(cmd, fail=False):
                 "build": Build,
                 "info": Info,
                 "install": Install,
+                "list-installed": ListInstalled,
                 "remove": Remove,
                 "index": Index,
                 "updatedb": UpdateDB}
@@ -29,7 +30,7 @@ class Command(object):
     """generic help string for any command"""
     def __init__(self):
         # now for the real parser
-        self.parser = OptionParser(usage="",
+        self.parser = OptionParser(usage=usage_text,
                                    version="%prog " + pisi.__version__)
         self.options()
         self.parser = commonopts(self.parser)
@@ -175,6 +176,18 @@ class Index(Command):
         else:
             print 'Indexing only a single directory supported'
             return
+
+class ListInstalled(Command):
+    """list-installed: print a list of all installed packages  
+    usage: list-installed """
+
+    def __init__(self):
+        super(ListInstalled, self).__init__()
+
+    def run(self):
+        from pisi.installdb import installdb
+        for pkg in installdb.list_installed():
+            print pkg
 
 class UpdateDB(Command):
     """updatedb: update source and package databases"""
