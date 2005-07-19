@@ -1,0 +1,83 @@
+Dependency Resolution in PISI
+
+Eray Ozkural
+
+
+
+1. Introduction
+
+Dependency resolution in package management systems have a
+significance in that they are the key to providing system stability
+and internet upgrades. The scale of package databases requires the
+dependency resolution mechanism to be efficient and correct,
+motivating a closer look at the theory.
+
+
+2. Review
+
+Dependency resolution has been taken in the most general setting as
+the famous SAT problem of propositional logic. If we consider a system
+D of dependency statements D_i, each statement can be taken as a 
+proposition in propositional logic which states, for
+instance:
+
+D_i:   if package a is installed or package b is installed, then package i
+is installable.
+...
+
+The system is thus understood as the conjunction of such facts, giving
+us a logical programming system for determining installation conditions.
+
+Note that for simplicity we do not consider the nuances in upgrade and
+remove operations at the moment.
+
+However, using a SAT solver for this operation may be shooting a fly
+with a bazooka. We observe that only certain forms of propositions
+will be necessary for a dependency system. Furthermore, as we shall
+see further constraints and optimizations may be required of the
+system that are not modelled well with SAT problem.
+
+
+3. Package operation planning
+
+
+The dependency resolution problem may be viewed as a simple forward
+chaining problem, where we would like to begin from an initial state
+S_0 and by following allowable system transitions t_i: S -> S, 
+arrive at a desired system state S_f.
+
+A system state S_i is defined as the set of installed packages on the
+system together with their versions, i.e. S_i = { (x,v) : x is
+installed, v=version(x)}. An atomic system transition t_i chains one
+system state into another, making one ACID change on the system. The
+usual atomic transitions are the single package install, remove and
+upgrade operations found in low-level package management code.
+
+A package operation plan is thus naturally conceived of as a sequence
+of atomic system transitions. Given an initial state and a final
+state, the job of the package operation planner is to determine
+whether there is a plan, and if so find the "best" one.
+
+
+4. Solving the simplest case with topological sorting
+
+5. Complex cases
+
+5.1 A complex upgrade
+
+plan: upgrade (a,1) to (a,2)
+
+rules:
+  (a,1) depends on (b,1), (c,1)
+  (a,1) conflicts with (d,1)
+  (a,2) depends on (c,3), (d,2)
+  (a,2) conflicts with (b,1)
+
+initial state:
+  (a,1), (b,1), (c,1) installed 
+
+plan:
+  remove (b,1)
+  upgrade (c,1) -> (c,3)
+  install (d,2)
+  upgrade (a,1) -> (a,2)
