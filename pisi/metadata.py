@@ -88,6 +88,7 @@ class MetaData(XmlFile):
         self.readxml(filename)
         self.source = SourceInfo(self.getNode("Source"))
         self.package = PackageInfo(self.getNode("Package"))
+
         self.package.version = self.package.history[0].version
         self.package.release = self.package.history[0].release
 

@@ -243,13 +243,13 @@ class PisiBuild:
             self.genFilesXml(package)
             ui.info(" done.\n")
 
-            # testing
-            pkgName = package.name + '-' + self.spec.source.version +\
-                '-' + self.spec.source.release + const.package_prefix
+            name = util.package_name(package.name,
+                                     self.spec.source.version,
+                                     self.spec.source.release)
             
-            ui.info("Creating PISI package %s\n" % pkgName)
+            ui.info("Creating PISI package %s\n" % name)
             
-            pkg = Package(pkgName, 'w')
+            pkg = Package(name, 'w')
             c = os.getcwd()
 
             # add comar files to package

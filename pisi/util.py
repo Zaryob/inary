@@ -15,6 +15,7 @@ import statvfs
 
 # pisi modules
 from ui import ui
+from constants import const
 
 class FileError(Exception):
     pass
@@ -245,3 +246,10 @@ def partition_freespace(directory):
     """ returns free space of given directory's partition """
     st = os.statvfs(directory)
     return st[statvfs.F_BSIZE] * st[statvfs.F_BFREE]
+
+#############################
+# Package Related Functions #
+#############################
+
+def package_name(name, version, release):
+    return  name + '-' + version + '-' + release + const.package_prefix
