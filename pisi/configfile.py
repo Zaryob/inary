@@ -10,6 +10,9 @@
 #[general]
 #destinationdirectory = /tmp
 #
+#[repos]
+#default = http://cekirdek.uludag.org.tr/pisi/
+#
 #[build]
 #host = i686-pc-linux-gnu
 #CFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
@@ -35,6 +38,10 @@ class GeneralDefaults:
     distribution = "Pardus"
     distribution_release = "0.1"
 
+class ReposDefaults:
+    # No default repository in the code!
+    pass
+
 class BuildDefaults:
     """Default values for [build] section"""
     host = "i686-pc-linux-gnu"
@@ -49,12 +56,6 @@ class DirsDefaults:
     packages_dir = "/var/cache/pisi/packages"
     tmp_dir =  "/var/tmp/pisi"
 
-# bu bilgiyi burada tutmak mantıklı değil. bunun yerine kullanıcının
-# kendi ev dizininde ayrı bir dosyada tutmak gerekiyor. Şimdilik bunu
-# desteklemeyelim. Sonra hallederiz...
-# class SvnDefaults:
-#     """Default values for [svn] section """
-#     username =  password = None
 
 class ConfigurationSection(object):
     """ConfigurationSection class defines a section in the configuration
@@ -64,6 +65,8 @@ class ConfigurationSection(object):
         
         if section == "general":
             self.defaults = GeneralDefaults
+        elif section == "repos":
+            self.defaults = ReposDefaults
         elif section == "build":
             self.defaults = BuildDefaults
         elif section == "directories":
@@ -98,6 +101,12 @@ class ConfigurationFile(object):
         except NoSectionError:
             generalitems = []
         self.general = ConfigurationSection("general", generalitems)
+
+        try:
+            repositems = parser.items("repos")
+        except NoSectionError:
+            repositems = []
+        self.repos = ConfigurationSection("repos", generalitems)
 
         try:
             builditems = parser.items("build")
