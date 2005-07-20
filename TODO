@@ -1,4 +1,5 @@
 
+
 PiSi ToDo List
 ==============
 
@@ -37,6 +38,7 @@ Legend:
  + Package/Files
 
 2. Alpha
+ - fix xml indentation (meren)
  + write specfile (eray)
  + file locking for database access [not tested!] (eray)
  / verify metodlari
@@ -70,10 +72,7 @@ Legend:
    + sourcedb
    - package
    - configuration file
- - multi-architecture support
-   - design decisions
-   - extend XML specs to support that
-   - cross-platform building support
+ - incremental build versioning (meren)
  - non-interactive use
  / query
    + list of installed packages (eray)
@@ -94,6 +93,7 @@ Legend:
    - usage
  - refactor actionsAPI
  - actionsAPI documentation
+ - versioning information document
 
 3. Beta
 
@@ -104,6 +104,10 @@ Legend:
      - internet: http/ftp
      - local repository
      - cdrom dvd
+ - multi-architecture support
+   - design decisions
+   - extend XML specs to support that
+   - cross-platform building support
  - transaction stuff for database
  - Packager's tool
    ? PISIMAT
