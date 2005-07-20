@@ -41,19 +41,14 @@ Legend:
  - fix xml indentation (meren)
  + write specfile (eray)
  + file locking for database access [not tested!] (eray)
- / verify metodlari
-   + SpecFile
-   + MetaData
-   + Files
-   - Index
  - incremental build
-   - generate binary release number by comparing MD5s
+   - generate binary release number by comparing MD5s (MEREN)
    - keep track of successfully completed configure, make, install
-     steps (necessary for large-scale builds!)
+     steps (necessary for large-scale builds?) (MEREN)
  + command line interface:
-   - multi-package installation
-   + pisi-remove
-   - pisi-upgrade
+   / multi-package installation
+   + pisi remove
+   - pisi upgrade
    + svn-like CLI
  / configuration file
    + define the format of the configuration file
@@ -61,22 +56,17 @@ Legend:
    - define configuration keys
  + implement file uri
    + extend the modules dealing with files accordingly
- - multi-package dependency analysis (eray)
+ / multi-package dependency analysis (eray)
    + design a package operation planner
    - install operation
    - upgrade operation
  + ui module improvements
    + methods for interaction (yes, no questions, etc.)
  + implement source database (eray)
- - implement missing unit tests
-   + sourcedb
-   - package
-   - configuration file
- - incremental build versioning (meren)
  - non-interactive use
  / query
    + list of installed packages (eray)
-   - comar OM information (Provides)
+   - comar OM information (Provides) (eray)
  + easy package preparation
    + convert ebuild to pisi
  + COMAR interface
@@ -87,13 +77,22 @@ Legend:
    + support URI's whereever a filename is supported
    + http server
    + pisi updatedb over internet
- - component/category
-   - requirements
+ / component/category
+   + requirements
    - xml format
    - usage
  - refactor actionsAPI
  - actionsAPI documentation
  - versioning information document
+ / verify metodlari
+   + SpecFile
+   + MetaData
+   + Files
+   - Index
+ - implement missing unit tests
+   + sourcedb
+   - package
+   - configuration file
 
 3. Beta
 
@@ -109,11 +108,9 @@ Legend:
    - extend XML specs to support that
    - cross-platform building support
  - transaction stuff for database
- - Packager's tool
-   ? PISIMAT
-
  - GUI
    - pyqt UI class to interface
+   - PISIMAT
    - installation
    - remove
    - upgrade
