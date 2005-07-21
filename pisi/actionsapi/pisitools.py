@@ -118,6 +118,21 @@ def dodir(parameters = ''):
 
     makedirs(env.install_dir + parameters)
 
+def newman(source, destination, srcDir = ''):
+
+    man, postfix = destination.split('.')
+    destDir = os.path.join(env.install_dir, dirs.man, "man" + postfix)
+
+    makedirs(destDir)
+
+    if not srcDir:
+        file = os.path.join(env.work_dir, env.src_name + "-" + env.src_version, source)
+    else:
+        file = os.path.join(env.work_dir, srcDir, source)
+
+    if os.access(file, os.F_OK):
+                copy_file(file, os.path.join(destDir, os.path.basename(destination)))
+
 def remove(filename):
 
     unlink(env.install_dir + filename)
@@ -125,3 +140,10 @@ def remove(filename):
 def removeDir(dirname):
     
     clean_dir(env.install_dir + dirname)
+
+def doecho(content, filename):
+    makedirs(env.install_dir + '/' + os.path.dirname(filename))
+    
+    f = open(env.install_dir + '/' + filename, 'w')
+    f.write(content)
+    f.close()
