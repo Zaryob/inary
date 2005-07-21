@@ -4,6 +4,7 @@
 # stadard python modules
 import os
 import time
+import glob
 from tempfile import mkstemp, mkdtemp
 
 def sleep(seconds = 5):
@@ -18,7 +19,8 @@ def createTmpDir():
     return path
 
 def chmod(filename, mode = 0755):
-    os.chmod(filename, mode)
+    for file in glob.glob(filename):
+        os.chmod(file, mode)
 
 def unlink(filename):
     os.unlink(filename)
@@ -28,3 +30,7 @@ def makedirs(directoryName):
         os.makedirs(directoryName)
     except OSError:
         pass
+
+def touch(filename):
+    for file in glob.glob(filename):
+        os.utime(file, None)

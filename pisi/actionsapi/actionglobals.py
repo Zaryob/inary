@@ -32,8 +32,6 @@ class Env(object):
         else:
             return None
 
-
-
 class Dirs:
     """General directories used in actions API."""
     # TODO: Eventually we should consider getting these from a/the
@@ -50,9 +48,9 @@ class Dirs:
 class Flags:
     """General flags used in actions API"""
     values = pisi.config.config.values
-    host = values.build.host
-    cflags = values.build.cflags
-    cxxflags = values.build.cxxflags
+    environ["HOST"] = host = values.build.host
+    environ["CFLAGS"] = cflags = values.build.cflags
+    environ["CXXFLAGS"] = cxxflags = values.build.cxxflags
     ldflags = values.build.ldflags
 
 class ActionGlobals(pisi.config.Config):
