@@ -77,13 +77,13 @@ def installWithPrefix(parameters = ''):
 
     os.system(install_string)
 
-def installWithDestdir():
+def installWithDestdir(parameters = ''):
     dirs = glb.dirs
 
     dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
         glb.const.install_dir_suffix
 
-    install_string = 'make install DESTDIR=%s' % dir_suffix
+    install_string = 'make install DESTDIR=%s %s' % (dir_suffix, parameters)
 
     os.system(install_string)
 
