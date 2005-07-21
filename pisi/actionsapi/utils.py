@@ -34,3 +34,10 @@ def makedirs(directoryName):
 def touch(filename):
     for file in glob.glob(filename):
         os.utime(file, None)
+
+def changeDir(directoryName = ''):
+    current = os.getcwd()
+    if directoryName:
+        os.chdir(directoryName)
+    else:
+        os.chdir(os.path.dirname(current))
