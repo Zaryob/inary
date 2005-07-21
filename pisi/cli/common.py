@@ -8,6 +8,7 @@ index
 info
 install
 list-installed
+list-available
 remove
 updatedb
 
