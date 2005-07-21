@@ -173,6 +173,29 @@ installing packages in the reverse order of a topological sort
 guarantees that no package is installed before all of its dependencies
 are installed. Thus, this yields a consistency-preserving plan.
 
+\subsection{Conditional dependencies}
+
+In the PISI specification, we allow a dependency to specify a local
+condition, for instance a program may require a dependency on
+\texttt{libx} with pardus source release $3$ or greater. Another
+program may require a dependency on a particular source release. These
+conditions are local because they can be computed over the elements of
+system state $S_i$, e.g. package (name, version) pairs. Let us denote this
+condition by a predicate $P(b)$ such that $aDb iff P(b)$.  The
+predicate $P$ for the dependency $aDb$ can be stored as edge data for
+$(u,v)$ on the graph.
+% thus when we say $P(u,v)$, this means the predicate stored on
+%$(u,v)$ edge for vertex $v$.
+
+In this case, the vertices of the package dependency graph $G$ and the
+planning graph $G_A$ retain the version information along with the
+package name. The dependency relation thus holds between two pairs
+$(p_1,v_1)$ and $(p_2,v_2)$, satisfying a given predicate
+$P(p_2,v_2)$. When constructing the graph, we therefore take this
+predicate into account and admit a new edge $(u,v)$, and thus a new
+vertex $v$ into $G_A$ if and only if the target vertex satisfies
+$P(v)$.
+
 \subsection{Conflicts and COMAR dependencies}
 
 The tags \texttt{Conflicts} and \texttt{Provides} are inherited from
@@ -196,7 +219,32 @@ the number of alternatives for comar OM $A$; the problem is that there
 seems to be no simple solution to solve satisfiability with arbitrary
 disjunctions in package dependency, short of a $SAT$ solver).
 
-The resolution of conflicts 
+The resolution of conflicts to maintain system consistency condition
+$2$ is easier to achieve. This can be always satisfied by disallowing
+installation of a package that would violate the condition. In the
+install operation, after constructing the partial dependency graph
+$G_A$, we merely have to check whether any conflict appears within the
+vertices of $G_A$. If so, then the operation is untenable, since $G_A$
+shows the future state of the installed system. Since a conflict is
+symmetric, it is represented as a bidirectional edge $a \leftrightarrow b$. To
+distinguish dependencies from conflicts, the edges would have to be
+labelled in this case, for instance with 'd' and 'c'.
+
+\section{Remove and upgrade operations}
+ 
+Dependency resolution for remove operation is similar to install.  The
+only difference is that we follow the topological sort order, instead
+of its reverse when processing packages.
+
+The upgrade operation is more complicated. First of all, the system
+has to distinguish between the current relation graph
+(e.g. dependencies and conflicts), and the future relation graph which
+may be different in rather important aspects. In theory, we allow any
+dependency and conflict to change.
+
+Therefore, we have a $G_0$ which represents the current relations
+(among installed packages) in the system, and a $G_f$ which is
+probably taken from a remote package repository. 
 
 \section{Examples}
 
