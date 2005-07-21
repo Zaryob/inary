@@ -77,7 +77,7 @@ vertices in which there are only forward edges.
 The dependency resolution problem may be viewed as a simple forward
 chaining problem, where we would like to begin from an initial state
 $S_0$ and by following allowable system transitions $t_i: S -> S$, 
-arrive at a desired system state $S_f$.
+arrive at a desired system state $S_f$ (where $S$ is the set of all states).
 
 A system state $S_i$ is defined as the set of installed packages on the
 system together with their versions, i.e. $S_i = \{  (x,v) : x \text{ is
@@ -106,7 +106,7 @@ composed of two conditions for the current set of installed packages.
 \begin{enumerate}
 \item All package dependencies are satisfied (we may call this a
   closed system)
-\item No packag conflicts are present. 
+\item No package conflicts are present. 
 \end{enumerate}
 
 Therefore, by atomic transition we also mean one that does not corrupt
@@ -148,7 +148,7 @@ construct the graph as follows
   \STATE done $\gets$ true
   \FOR{each $u \in  V_A$ with out-degree $0$}
     \FOR{ $v \in adj(u) $ of $G$}
-      \IF{$v is \notin V_A$}
+      \IF{$v \notin V_A$}
         \STATE done $\gets$ false
         \IF{$v$ is installed}
           \STATE label $v$ with 'i'
@@ -230,21 +230,75 @@ symmetric, it is represented as a bidirectional edge $a \leftrightarrow b$. To
 distinguish dependencies from conflicts, the edges would have to be
 labelled in this case, for instance with 'd' and 'c'.
 
-\section{Remove and upgrade operations}
- 
+\subsection{Remove operation}
+
 Dependency resolution for remove operation is similar to install.  The
-only difference is that we follow the topological sort order, instead
-of its reverse when processing packages.
+only difference is that we remove the packages in the topological order rather
+than installing packages in the reverse topological order.
+
+\section{Remote repositories and upgrade operation}
+ 
 
 The upgrade operation is more complicated. First of all, the system
-has to distinguish between the current relation graph
-(e.g. dependencies and conflicts), and the future relation graph which
-may be different in rather important aspects. In theory, we allow any
-dependency and conflict to change.
+has to distinguish between the current relation graph (e.g.
+dependencies and conflicts), and the future relation graph which may
+be different in rather important aspects. In theory, we allow any
+dependency and conflict to change. Therefore, we have a $G_0$ which
+represents the current relations (among installed packages) in the
+system, and a $G_f$ which is probably taken from a remote package
+repository. We begin by noting that $G_0$ and $G_f$ have to be
+compatible. That is, to say, if a package $(u,v)$ is shared across two
+times, then the declarations made by the package are one and the same.
 
-Therefore, we have a $G_0$ which represents the current relations
-(among installed packages) in the system, and a $G_f$ which is
-probably taken from a remote package repository. 
+$G_0$ can be calculated from the package information (e.g. metadata)
+of the installed packages and is stored by PISI in a dedicated
+database. $G_f$ is most likely constructed from a PISI Index file
+corresponding to a particular package repository. Accessing both of
+these entities is expensive and we should take care to minimize access
+as in the previous section.
+
+To preserve consistency during individual transitions, the planner can
+choose to remove a minimal number of packages from the system to bring
+it to a clean state, and then install the new versions of these
+packages in the correct order. Let us assume that it is indeed
+possible to achieve this ``clean state''. Apparently, this is not
+always possible because other packages may depend on the package(s) to
+upgrade. At any rate, to achieve this, first we need to
+calculate subgraphs of $G_0$ and $G_f$. We can calculate alternative
+plans from these subgraphs if need be.
+
+Let $A$ be the set of packages to be upgraded from a given repository.
+$G_{A,0}$ is the subgraph of $G_{0}$ induced by the ``upgrade
+closure'' of $A$. The ``upgrade closure'' of a set $A$ of packages is
+defined as a minimal set of packages $B \supseteq A$ such that there is no
+package in $B$ that requires an upgrade for $A$ to be upgraded. This
+is found by assuming that the current system state $S_0$ is
+consistent, and by constructing a relation graph of the future state
+of the system to detect the dependencies that have changed.
+
+Obviously, to make a plan, we must first know the goal state. In a
+multi-package upgrade, the exact details of the goal state depend on
+the graph $G_f$ of the repository. Thus, we construct a graph
+$G_{A,f}$ that is a vertex-induced subgraph of $G_f$ such that it
+contains all information relevant to upgrading packages $A$. We begin
+by a vertex induced graph by $A$. These are the packages that will be
+upgraded in any case. Then, we make a pass on the vertices, and look
+at all the outgoing edges, we compare whether this edge has changed in
+any substantial way from the previous version. In particular, we are
+interested in whether the predicate of the edge is valid for the
+version of the same package in our current system. Every compared
+vertex in this manner is marked done, and the edges not valid for the
+current system pull new unmarked vertices into $G_f$, this continues
+until there are no unmarked vertices left. Hence, the vertices of
+$G_f$ are the packages that must be upgraded. 
+
+To actually carry out the upgrade a strategy is to upgrade one by one
+all the packages in some order. A good order is again the reverse
+topological order order, in fact, the operation is merely a special case of a
+multi-package installation code that can install from a remote
+repository. However, in case no package depends on the packages to be
+upgraded, then we can carry out a completely consistency-preserving
+plan as discussed above.
 
 \section{Examples}
 
@@ -260,14 +314,36 @@ rules:\\
 \\
 initial state:\\
   $(a,1), (b,1), (c,1)$ installed \\
+
+In this case, we can find a consistency-preserving plan in terms of
+install and remove operations.
+
 \\
 plan:\\
+  remove $(a,1)$\\
   remove $(b,1)$\\
   remove $(c,1)$\\
-  remove $(a,1)$\\
   install $(c,3)$\\
   install $(d,2)$\\
   install $(a,2)$\\
+
+\subsection{Another upgrade}
+
+objective: upgrade $(b,1) \to (b,2)$\\
+\\
+current dep: $(a,1) \to[=1] (b,1) \to[=1] (c,1) \to[=1] (d,1)$\\
+repo dep: \nobreakspace{} \nobreakspace$(a,1) \to[=2] (b,2) \to[=2] (c,2) \to[=1] (d,1)$\\
+
+In this case, we cannot remove $(b,1)$ because it's locked in the
+chain. In fact, here there is no consistency-preserving plan in terms
+of atomic single package transitions: install, remove, upgrade. In
+these cases, it seems best to resort to upgrade in place, and in the
+reverse topological order of dependencies.
+
+plan:\\
+ upgrade $(c,1) \to (c,2)$
+ upgrade $(b,1) \to (b,2)$
+
 
 \subsection{A multi package remove}
 
@@ -288,3 +364,4 @@ plan:\\
   remove $(c,2)$\\
   remove $(a,2)$\\
 \end{document}
+
