@@ -56,10 +56,9 @@ package $i$ is installable.\\
 ...
 
 The system is thus understood as the conjunction of such facts, giving
-us a logical programming formulation to determine installation conditions.
-
-Note that for simplicity we do not consider the nuances in upgrade and
-remove operations at the moment.
+us a logical programming formulation to determine installation
+conditions. Note that for simplicity we do not consider the nuances in
+upgrade and remove operations at the moment.
 
 However, using a SAT solver for this operation may be shooting a fly
 with a bazooka. We observe that only certain forms of propositions
@@ -196,6 +195,8 @@ consider $\Pi_{bDA}num(A)$ graphs in the worst case where $num(A)$ is
 the number of alternatives for comar OM $A$; the problem is that there
 seems to be no simple solution to solve satisfiability with arbitrary
 disjunctions in package dependency, short of a $SAT$ solver).
+
+The resolution of conflicts 
 
 \section{Examples}
 
