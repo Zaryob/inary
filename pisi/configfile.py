@@ -17,6 +17,7 @@
 #host = i686-pc-linux-gnu
 #CFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
 #CXXFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
+#LDFLAGS=
 #
 #[dirs]
 #lib_dir = /var/lib/pisi
@@ -47,7 +48,8 @@ class BuildDefaults:
     """Default values for [build] section"""
     host = "i686-pc-linux-gnu"
     CFLAGS = "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
-    CXXFLAGS= "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
+    CXXFLAGS = "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
+    LDFLAGS = ""
 
 class DirsDefaults:
     "Default values for [directories] section"
