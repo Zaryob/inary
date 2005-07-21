@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # standard python modules
-from os import getenv
+from os import getenv, environ
 
 # pisi modules
 import pisi.config
@@ -50,9 +50,9 @@ class Dirs:
 class Flags:
     """General flags used in actions API"""
     values = pisi.config.config.values
-    host = values.build.host
-    cflags = values.build.cflags
-    cxxflags = values.build.cflags
+    environ["HOST"] = host = values.build.host
+    environ["CFLAGS"] = cflags = values.build.cflags
+    environ["CXXLAGS"] = cxxflags = values.build.cflags
 
 class ActionGlobals(pisi.config.Config):
     const = pisi.constants.const
