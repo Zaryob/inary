@@ -38,49 +38,31 @@ Legend:
  + Package/Files
 
 2. Alpha
- - fix xml indentation (meren)
- + write specfile (eray)
- + file locking for database access [not tested!] (eray)
  - incremental build
    - generate binary release number by comparing MD5s (MEREN)
    - keep track of successfully completed configure, make, install
      steps (necessary for large-scale builds?) (MEREN)
- + command line interface:
-   / multi-package installation
-   + pisi remove
-   - pisi upgrade
-   + svn-like CLI
- / configuration file
-   + define the format of the configuration file
-   + extend Config module (config.py) accordingly
-   - define configuration keys
- + implement file uri
-   + extend the modules dealing with files accordingly
  / multi-package dependency analysis (eray)
    + design a package operation planner
    - install operation
    - upgrade operation
- + ui module improvements
-   + methods for interaction (yes, no questions, etc.)
- + implement source database (eray)
+ + command line interface:
+   / multi-package installation
+   + pisi remove
+   - pisi upgrade (baris)
+   + svn-like CLI
  - non-interactive use
- / query
-   + list of installed packages (eray)
-   - comar OM information (Provides) (eray)
- + easy package preparation
-   + convert ebuild to pisi
- + COMAR interface
-   + what do we need to specify in a package.
-   + package install: register config script
-   + package remove: unregister config script
- + internet installation
-   + support URI's whereever a filename is supported
-   + http server
-   + pisi updatedb over internet
+ / configuration file
+   + define the format of the configuration file
+   + extend Config module (config.py) accordingly
+   - define configuration keys
  / component/category
    + requirements
    - xml format
    - usage
+ / query
+   + list of installed packages (eray)
+   - comar OM information (Provides) (baris)
  - refactor actionsAPI
  - actionsAPI documentation
  - versioning information document
@@ -93,9 +75,28 @@ Legend:
    + sourcedb
    - package
    - configuration file
+ + fix xml indentation (meren)
+ + write specfile (eray)
+ + file locking for database access [not tested!] (eray)
+ + implement file uri
+   + extend the modules dealing with files accordingly
+ + ui module improvements
+   + methods for interaction (yes, no questions, etc.)
+ + implement source database (eray)
+ + easy package preparation
+   + convert ebuild to pisi
+ + COMAR interface
+   + what do we need to specify in a package.
+   + package install: register config script
+   + package remove: unregister config script
+ + internet installation
+   + support URI's whereever a filename is supported
+   + http server
+   + pisi updatedb over internet
 
 3. Beta
 
+ - system-wide upgrade (upgrade-all) komutu (eray)
  - multiple package repository
    / decide how to implement
    - make a package and sourcedb for each repo

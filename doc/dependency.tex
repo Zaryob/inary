@@ -1,10 +1,7 @@
-
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: t
 %%% End: 
-
-
 
 \documentclass[a4paper,11pt]{article}
 \usepackage{graphicx}
@@ -37,8 +34,6 @@
 \begin{document}
 
 \maketitle
-
-
 
 \section{Introduction}
 
@@ -86,11 +81,14 @@ $S_0$ and by following allowable system transitions $t_i: S -> S$,
 arrive at a desired system state $S_f$.
 
 A system state $S_i$ is defined as the set of installed packages on the
-system together with their versions, i.e. $S_i = \{  (x,v) : x is
-installed, v=version(x)\} $. An atomic system transition $t_i$ chains one
+system together with their versions, i.e. $S_i = \{  (x,v) : x \text{ is
+installed}, v=version(x)\} $. An atomic system transition $t_i$ chains one
 system state into another, making one ACID change on the system. The
-usual atomic transitions are the single package install, remove and
-upgrade operations found in low-level package management code.
+usual atomic transitions are the single package install and remove 
+operations found in low-level package management code of PISI. Note
+that in PISI, an upgrade operation is identical to a remove operation
+followed by an install operation (which sets it apart from some other
+packaging systems).
 
 A package operation plan is thus naturally conceived of as a sequence
 of atomic system transitions. Given an initial state and a final
@@ -98,7 +96,7 @@ state, the job of the package operation planner is to determine
 whether there is a plan, and if so find the "best" one.
 
 Where there are no versions involved (e.g. upgrade/downgrade), we will
-replace the pair $(x,v)$ with $x$.
+replace the pair $(x,v)$ with $x$ in the definitions for simplicity.
 
 \subsection{System consistency}
 
@@ -109,12 +107,13 @@ composed of two conditions for the current set of installed packages.
 \begin{enumerate}
 \item All package dependencies are satisfied (we may call this a
   closed system)
-\item No package conflicts are present.
+\item No packag conflicts are present. 
 \end{enumerate}
 
 Therefore, by atomic transition we also mean one that does not corrupt
-system consistency. The system is thus never in an inconsistent state.
-
+system consistency. The system is thus never in an inconsistent
+state. We will explain the conflicts later, for the present let us
+look at the dependency condition.
 
 \subsection{Solving the simplest case with topological sorting}
 
@@ -170,15 +169,41 @@ accesses to $G$ and construct a dependency graph in memory. If the
 $G_A$'s fringe has vertices with non 'i'-labels, then $A$ cannot be
 installed. Otherwise, we find a topological sort $L$ of $G_A$, and in
 the reverse order, install packages for vertices labelled with
-'a' or 'd'.
+'a' or 'd'. Observe that, by definition of a topological sort,
+installing packages in the reverse order of a topological sort
+guarantees that no package is installed before all of its dependencies
+are installed. Thus, this yields a consistency-preserving plan.
 
-\section{Complex cases}
+\subsection{Conflicts and COMAR dependencies}
 
-\subsection{A complex upgrade}
+The tags \texttt{Conflicts} and \texttt{Provides} are inherited from
+Debian distribution. A conflict between two packages ($a$ conflicts
+with $b$) is a symmetric relation that prevents the packages ($a,b$)
+from being installed simultaneously. (It is sufficient that only one
+direction of the relation is declared, the other direction is
+inferred) Provision in the form of $a$ provides $A$ denotes that $a$
+implements a virtual package abstraction $A$.
+
+In PISI, a package can provide an object of a COMAR Object Model (OM),
+and is currently the only model of a ``virtual package''. In the
+following example, let $a_1,a_2,\ldots,a_n$ provide the OM $A$. A package
+can depend on another package's OM, for instance $b$ comar-depends on
+$A$ (or in short form $bDA$). In this case, it is sufficient that only
+one of the $a_i$ are installed. To resolve this, the user is asked to
+choose from a list of alternatives immediately, since otherwise there
+is unavoidable combinatorial explosion (in the form of having to
+consider $\Pi_{bDA}num(A)$ graphs in the worst case where $num(A)$ is
+the number of alternatives for comar OM $A$; the problem is that there
+seems to be no simple solution to solve satisfiability with arbitrary
+disjunctions in package dependency, short of a $SAT$ solver).
+
+\section{Examples}
+
+\subsection{A single package upgrade}
 
 plan: upgrade $(a,1)$ to $(a,2)$\\
 \\
-rules:
+rules:\\
   $(a,1)$ depends on $(b,1), (c,1)$ \\
   $(a,1)$ conflicts with $(d,1)$\\
   $(a,2)$ depends on $(c,3), (d,2)$\\
@@ -189,9 +214,28 @@ initial state:\\
 \\
 plan:\\
   remove $(b,1)$\\
-  upgrade $(c,1) -> (c,3)$\\
+  remove $(c,1)$\\
+  remove $(a,1)$\\
+  install $(c,3)$\\
   install $(d,2)$\\
-  upgrade $(a,1) -> (a,2)$\\
+  install $(a,2)$\\
 
+\subsection{A multi package remove}
 
+plan: remove $(a,2), (b,3), (c,2)$\\
+\\
+rules:\\
+  $(c,2)$ depends $(a,2)$\\
+  $(d,2)$ depends on $(b,3), (c,2)$\\
+  $(e,1)$ depends on $(a,2)$\\
+  $(f,2)$ depends on $(e,1)$\\
+  $(g,2)$ depends on $(e,1)$\\\\
+plan:\\
+  remove $(f,2)$\\
+  remove $(g,2)$\\
+  remove $(e,1)$\\
+  remove $(d,2)$\\
+  remove $(b,3)$\\
+  remove $(c,2)$\\
+  remove $(a,2)$\\
 \end{document}
