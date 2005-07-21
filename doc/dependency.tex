@@ -1,0 +1,197 @@
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
+
+
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage{amstext}
+\usepackage{amsfonts}
+\usepackage{amsbsy}
+\usepackage{amsthm}
+\usepackage{prettyref}
+%\newrefformat{alg}{Algorithm~\ref{#1}}
+%\newrefformat{eq}{Equation~\ref{#1}}
+%\newrefformat{lem}{Lemma~\ref{#1}}
+%\newrefformat{thm}{Theorem~\ref{#1}}
+%\newrefformat{chp}{Chapter~\ref{#1}}
+%\newrefformat{sec}{Section~\ref{#1}}
+%\newrefformat{apx}{Appendix~\ref{#1}}
+%\newrefformat{tab}{Table~\ref{#1}}
+%\newrefformat{fig}{Figure~\ref{#1}}
+
+
+%usepackage[active]{srcltx}
+\title{ Dependency Resolution in PISI}
+
+\author{Eray \"{O}zkural}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+
+\section{Introduction}
+
+Dependency resolution in package management systems have a
+significance in that they are the key to providing system stability
+and internet upgrades. The scale of package databases requires the
+dependency resolution mechanism to be efficient and correct,
+motivating a closer look at the theory.
+
+
+\section{Review}
+
+Dependency resolution has been taken in the most general setting as
+the famous SAT problem of propositional logic. If we consider a system
+$D$ of dependency statements $D_i$, each statement can be taken as a
+proposition in propositional logic which states, for instance:
+
+$D_i$: if package $a$ is installed or package $b$ is installed, then
+package $i$ is installable.\\
+...
+
+The system is thus understood as the conjunction of such facts, giving
+us a logical programming formulation to determine installation conditions.
+
+Note that for simplicity we do not consider the nuances in upgrade and
+remove operations at the moment.
+
+However, using a SAT solver for this operation may be shooting a fly
+with a bazooka. We observe that only certain forms of propositions
+will be necessary for a dependency system. Furthermore, as we shall
+see further constraints and optimizations may be required of the
+system that are not modelled well with the SAT problem.
+
+We use a graph theoretic approach instead. A directed graph (digraph)
+$G=(V,E)$ is formally a set of vertices $V$ and a set of edges $E$
+where each edge $(u,v)$ represents an edge from a vertex to
+another. Topological sort of a graph gives a total ordering of the
+vertices in which there are only forward edges. 
+
+\section{Package operation planning}
+
+The dependency resolution problem may be viewed as a simple forward
+chaining problem, where we would like to begin from an initial state
+$S_0$ and by following allowable system transitions $t_i: S -> S$, 
+arrive at a desired system state $S_f$.
+
+A system state $S_i$ is defined as the set of installed packages on the
+system together with their versions, i.e. $S_i = \{  (x,v) : x is
+installed, v=version(x)\} $. An atomic system transition $t_i$ chains one
+system state into another, making one ACID change on the system. The
+usual atomic transitions are the single package install, remove and
+upgrade operations found in low-level package management code.
+
+A package operation plan is thus naturally conceived of as a sequence
+of atomic system transitions. Given an initial state and a final
+state, the job of the package operation planner is to determine
+whether there is a plan, and if so find the "best" one.
+
+Where there are no versions involved (e.g. upgrade/downgrade), we will
+replace the pair $(x,v)$ with $x$.
+
+\subsection{System consistency}
+
+It is worth mentioning here the concept of system consistency. As in a
+database transaction, it is not acceptable that the system violates an
+invariant afterwards. In the context of PISI, system consistency is
+composed of two conditions for the current set of installed packages.
+\begin{enumerate}
+\item All package dependencies are satisfied (we may call this a
+  closed system)
+\item No package conflicts are present.
+\end{enumerate}
+
+Therefore, by atomic transition we also mean one that does not corrupt
+system consistency. The system is thus never in an inconsistent state.
+
+
+\subsection{Solving the simplest case with topological sorting}
+
+We will now concentrate on a simple form of the problem which can
+be solved with topological sorting. This form is not concerned with
+versions. From initial set of packages $S_0$, we would like to
+install in addition a new set $A$ of packages obtaining $S_f = S_0 \cup
+A$.
+
+The only relations considered are of the form: $a$ Depends on $b$, or more
+briefly $aDb$.
+
+The graph of all such simple dependency relations is a directed graph
+(digraph) $G$. For each dependency relation $aDB$, there is an edge $a
+\to b$ in $G$. Accessing graph $G$ usually requires a database operation and
+is therefore expensive.
+
+We now consider the digraph $G_A$ of the minimal set of simple
+dependency relations which contains all information required to
+construct a plan to install packages $A$. $G_A$ is a vertex induced graph
+such that the fringe of $A$, e.g. vertices with out-degree $0$ are
+already installed. Vertices of $G_A$ are taken from $S_f$. First, let us
+explain the labelling scheme. Already installed vertices are labelled
+with 'i'. Packages to be added are labelled with 'a', and packages to
+be installed due to dependencies are labelled with 'd'. We
+construct the graph as follows
+\begin{algorithm}
+  %\caption{$\textsc{Par-Freq}(T_i, \epsilon, \textsc{Mine-Freq} )$}
+  \label{alg:cons-graph}
+  \begin{algorithmic}[1]
+\STATE $G_A \gets$ isolated vertex set $A$ labelled with 'a'
+\REPEAT
+  \STATE done $\gets$ true
+  \FOR{each $u \in  V_A$ with out-degree $0$}
+    \FOR{ $v \in adj(u) $ of $G$}
+      \IF{$v is \notin V_A$}
+        \STATE done $\gets$ false
+        \IF{$v$ is installed}
+          \STATE label $v$ with 'i'
+        \ELSE
+          \STATE label $v$ with 'd'
+        \ENDIF
+        \STATE add $(u,v)$ to $G_A$
+       \ENDIF
+     \ENDFOR
+  \ENDFOR
+\UNTIL{done}
+\end{algorithmic}
+\end{algorithm}
+
+By this iterative expansion, we do a minimum number of database
+accesses to $G$ and construct a dependency graph in memory. If the
+$G_A$'s fringe has vertices with non 'i'-labels, then $A$ cannot be
+installed. Otherwise, we find a topological sort $L$ of $G_A$, and in
+the reverse order, install packages for vertices labelled with
+'a' or 'd'.
+
+\section{Complex cases}
+
+\subsection{A complex upgrade}
+
+plan: upgrade $(a,1)$ to $(a,2)$\\
+\\
+rules:
+  $(a,1)$ depends on $(b,1), (c,1)$ \\
+  $(a,1)$ conflicts with $(d,1)$\\
+  $(a,2)$ depends on $(c,3), (d,2)$\\
+  $(a,2)$ conflicts with $(b,1)$\\
+\\
+initial state:\\
+  $(a,1), (b,1), (c,1)$ installed \\
+\\
+plan:\\
+  remove $(b,1)$\\
+  upgrade $(c,1) -> (c,3)$\\
+  install $(d,2)$\\
+  upgrade $(a,1) -> (a,2)$\\
+
+
+\end{document}
