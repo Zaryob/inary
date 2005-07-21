@@ -27,7 +27,8 @@ def getNodeText(node, tagpath = ""):
     except AttributeError: # no node by that name
         return None
     if child.nodeType == child.TEXT_NODE:
-        return child.data
+        # in any case, strip whitespaces...
+        return child.data.strip()
     else:
         raise XmlError("getNodeText: Expected text node, got something else!")
 

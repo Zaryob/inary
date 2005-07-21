@@ -38,7 +38,8 @@ class XmlFile(object):
 
     def writexml(self, fileName):
         f = codecs.open(fileName,'w', "utf-8")
-        self.dom.writexml(f)
+        f.write(self.dom.toprettyxml())
+        f.close()
 
     def verifyRootTag(self):
         if self.dom.documentElement.tagName != self.rootTag:
