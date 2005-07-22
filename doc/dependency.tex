@@ -120,17 +120,16 @@ look at the dependency condition.
 
 We will now concentrate on a simple form of the problem which can be
 solved with topological sorting. This form is not concerned with
-versions. From an initial set of packages $S_0$, we would like to
-install in addition a new set $A$ of packages obtaining $S_f = S_0 \cup
-A$.
+versions. Neither do we consider remote repositories.  From an initial
+set of packages $S_0$, we would like to install in addition a new set
+$A$ of packages obtaining $S_f = S_0 \cup A$, for a static set of package
+relations. 
 
-The only relations considered are of the form: $a$ Depends on $b$, or more
-briefly $aDb$.
-
-The graph of all such simple dependency relations is a digraph $G$.
-For each dependency relation $aDb$, there is an edge $a \to b$ in $G$.
-Accessing graph $G$ usually requires a database operation and is
-therefore expensive.
+The only relations considered are of the form: $a$ Depends on $b$, or
+more briefly $aDb$. The graph of all such simple dependency relations
+is a digraph $G$.  For each dependency relation $aDb$, there is an
+edge $a \to b$ in $G$.  Accessing graph $G$ usually requires a database
+operation and is therefore expensive.
 
 We now consider the digraph $G_A$ of the minimal set of simple
 dependency relations which contains all information required to
@@ -183,7 +182,7 @@ condition, for instance a program may require a dependency on
 program may require a dependency on a particular source release. These
 conditions are local because they can be computed over the elements of
 system state $S_i$, e.g. package (name, version) pairs. Let us denote this
-condition by a predicate $P(b)$ such that $aDb iff P(b)$.  The
+condition by a predicate $P(b)$ such that $aDb$ iff $P(b)$.  The
 predicate $P$ for the dependency $aDb$ can be stored as edge data for
 $(u,v)$ on the graph.
 % thus when we say $P(u,v)$, this means the predicate stored on
@@ -200,43 +199,51 @@ $P(v)$.
 
 \subsection{Conflicts and COMAR dependencies}
 
-The tags \texttt{Conflicts} and \texttt{Provides} are inherited from
-Debian distribution. A conflict between two packages ($a$ conflicts
-with $b$) is a symmetric relation that prevents the packages ($a,b$)
-from being installed simultaneously. (It is sufficient that only one
-direction of the relation is declared, the other direction is
-inferred) Provision in the form of $a$ provides $A$ denotes that $a$
-implements a virtual package abstraction $A$.
+The tags \texttt{Conflicts} and \texttt{Provides} in PISI are
+inherited from Debian distribution. A conflict between two packages
+($a$ conflicts with $b$) is a symmetric relation that prevents the
+packages $a,b$ from being installed simultaneously (It is
+sufficient that only one direction of the relation is declared, the
+other direction is inferred). Provision in the form of $a$ provides $A$
+denotes that $a$ implements a virtual package abstraction $A$.
 
 In PISI, a package can provide an object of a COMAR Object Model (OM),
 and is currently the only model of a ``virtual package''. In the
 following example, let $a_1,a_2,\ldots,a_n$ provide the OM $A$. A package
 can depend on another package's OM, for instance $b$ comar-depends on
-$A$ (or in short form $bDA$). In this case, it is sufficient that only
-one of the $a_i$ are installed. To resolve this, the user is asked to
-choose from a list of alternatives immediately, since otherwise there
-is unavoidable combinatorial explosion (in the form of having to
-consider $\Pi_{bDA}num(A)$ graphs in the worst case where $num(A)$ is
-the number of alternatives for comar OM $A$; the problem is that there
-seems to be no simple solution to solve satisfiability with arbitrary
-disjunctions in package dependency, short of a $SAT$ solver).
+$A$ (or in short form $bDA$) (Currently, conditions on virtual
+dependencies are not supported). In this case, it is sufficient that
+only one of the $a_i$ are installed. To resolve this, the user is
+asked to choose from a list of alternatives immediately, since
+otherwise there is unavoidable combinatorial explosion (in the form of
+having to consider $\Pi_{bDA}num(A)$ graphs in the worst case where
+$num(A)$ is the number of alternatives for comar OM $A$; the problem
+is that there seems to be no simple solution to solve satisfiability
+with arbitrary disjunctions in package dependency, short of a $SAT$
+solver).
 
 The resolution of conflicts to maintain system consistency condition
-$2$ is easier to achieve. This can be always satisfied by disallowing
-installation of a package that would violate the condition. In the
+$2$ is easier to achieve. This can be satisfied by disallowing
+installation of a package that would violate the condition, or
+removing currently installed packages which conflict with the newly
+installed package and its dependencies. In most package managers, the
+second option is confirmed by the user for making it easier. In the
 install operation, after constructing the partial dependency graph
-$G_A$, we merely have to check whether any conflict appears within the
+$G_A$, we merely have to check whether any conflict appears among the
 vertices of $G_A$. If so, then the operation is untenable, since $G_A$
 shows the future state of the installed system. Since a conflict is
 symmetric, it is represented as a bidirectional edge $a \leftrightarrow b$. To
 distinguish dependencies from conflicts, the edges would have to be
-labelled in this case, for instance with 'd' and 'c'.
+labelled in this case, for instance with 'd' and 'c'. The removal
+option can be implemented by invoking a multi-package remove operation
+on the packages in conflict.
 
 \subsection{Remove operation}
 
 Dependency resolution for remove operation is similar to install.  The
-only difference is that we remove the packages in the topological order rather
-than installing packages in the reverse topological order.
+only significant difference is that we remove the packages in the
+topological order rather than installing packages in the reverse
+topological order.
 
 \section{Remote repositories and upgrade operation}
  
