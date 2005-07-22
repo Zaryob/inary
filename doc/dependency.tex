@@ -256,8 +256,9 @@ dependency and conflict to change. Therefore, we have a $G_0$ which
 represents the current relations (among installed packages) in the
 system, and a $G_f$ which is probably taken from a remote package
 repository. We begin by noting that $G_0$ and $G_f$ have to be
-compatible. That is, to say, if a package $(u,v)$ is shared across two
-times, then the declarations made by the package are one and the same.
+compatible. That is, to say, if a package $(p_1,v_1)$ is shared across
+two graphs, then the declarations made by the package are one and the
+same.
 
 $G_0$ can be calculated from the package information (e.g. metadata)
 of the installed packages and is stored by PISI in a dedicated
@@ -267,7 +268,7 @@ these entities is expensive and we should take care to minimize access
 as in the previous section.
 
 To preserve consistency during individual transitions, the planner can
-choose to remove a minimal number of packages from the system to bring
+choose to remove a minimum number of packages from the system to bring
 it to a clean state, and then install the new versions of these
 packages in the correct order. Let us assume that it is indeed
 possible to achieve this ``clean state''. Apparently, this is not
