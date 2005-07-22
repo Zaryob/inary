@@ -319,7 +319,7 @@ operation.
 
 \subsection{A single package upgrade}
 
-plan: upgrade $(a,1)$ to $(a,2)$\\
+goal: upgrade $(a,1)$ to $(a,2)$\\
 \\
 rules:\\
   $(a,1)$ depends on $(b,1), (c,1)$ \\
@@ -343,7 +343,7 @@ plan:\\
 
 \subsection{Another upgrade}
 
-objective: upgrade $(b,1) \to (b,2)$\\
+goal: upgrade $(b,1) \to (b,2)$\\
 \\
 current dep: $(a,1) \to[=1] (b,1) \to[=1] (c,1) \to[=1] (d,1)$\\
 repo dep: \nobreakspace{} \nobreakspace$(a,1) \to[=2] (b,2) \to[=2] (c,2) \to[=1] (d,1)$\\
@@ -361,7 +361,7 @@ plan:\\
 
 \subsection{A multi package remove}
 
-plan: remove $(a,2), (b,3), (c,2)$\\
+goal: remove $(a,2), (b,3), (c,2)$\\
 \\
 rules:\\
   $(c,2)$ depends $(a,2)$\\
