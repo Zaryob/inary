@@ -19,15 +19,6 @@ def satisfiesDep(pkg, depinfo):
             ret &= Version(version) <= Version(depinfo.versionTo)        
         return ret
 
-def installDeps(pkg):
-    return packagedb.get_package(pkg).installDeps
-
-def satisfiesInstallDeps(pkg):
-    deps = installDeps(pkg)
-#    print 'installdeps = ', deps
-    return reduce(lambda x,y:x and y,
-                  map(lambda x: satisfiesDep(pkg, x), deps),True)
-
 def runtimeDeps(pkg):
     return packagedb.get_package(pkg).runtimeDeps
 
@@ -43,7 +34,7 @@ def installable(pkg):
     if not packagedb.has_package(pkg):
         ui.info("package " + pkg + " is not present in the package database\n");
         return False
-    elif satisfiesRuntimeDeps(pkg) and satisfiesInstallDeps(pkg):
+    elif satisfiesRuntimeDeps(pkg):
         return True
     else:
         ui.info("package " + pkg + " does not satisfy dependencies\n");

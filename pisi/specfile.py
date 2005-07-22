@@ -230,8 +230,6 @@ class PackageInfo(object):
         self.isa = map(getNodeText, getAllNodes(node, "IsA"))
         self.partof = getNodeText(node, "PartOf")
         self.license = map(getNodeText, getAllNodes(node, "License"))
-        iDepElts = getAllNodes(node, "InstallDependencies/Dependency")
-        self.installDeps = [DepInfo(x) for x in iDepElts]
         rtDepElts = getAllNodes(node, "RuntimeDependencies/Dependency")
         self.runtimeDeps = [DepInfo(x) for x in rtDepElts]
         self.paths = [PathInfo(x) for x in getAllNodes(node, "Files/Path")]
@@ -255,8 +253,6 @@ class PackageInfo(object):
             xml.addTextNodeUnder(node, "IsA", isa)
         if self.partof:
             xml.addTextNodeUnder(node, "PartOf", self.partof)
-        for dep in self.installDeps:
-            xml.addNodeUnder(node, "InstallDependencies", dep.elt(xml))
         for dep in self.runtimeDeps:
             xml.addNodeUnder(node, "RuntimeDependencies", dep.elt(xml))
         for path in self.paths:
@@ -280,8 +276,6 @@ class PackageInfo(object):
 
         for path in self.paths:
             if not path.verify(): return False
-        for dep in self.installDeps:
-            if not dep.verify(): return False
         for dep in self.runtimeDeps:
             if not dep.verify(): return False
         return True

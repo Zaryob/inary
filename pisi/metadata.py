@@ -75,7 +75,6 @@ class MetaData(XmlFile):
         self.package.isa = pkg.isa
         self.package.partof = pkg.partof
         self.package.license = pkg.license
-        self.package.installDeps = pkg.installDeps
         self.package.runtimeDeps = pkg.runtimeDeps
         self.package.paths = pkg.paths
         self.package.history = src.history # FIXME
