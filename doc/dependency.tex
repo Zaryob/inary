@@ -22,8 +22,6 @@
 %\newrefformat{apx}{Appendix~\ref{#1}}
 %\newrefformat{tab}{Table~\ref{#1}}
 %\newrefformat{fig}{Figure~\ref{#1}}
-
-
 %usepackage[active]{srcltx}
 \title{ Dependency Resolution in PISI}
 
@@ -68,26 +66,30 @@ system that are not modelled well with the SAT problem.
 
 We use a graph theoretic approach instead. A directed graph (digraph)
 $G=(V,E)$ is formally a set of vertices $V$ and a set of edges $E$
-where each edge $(u,v)$ represents an edge from a vertex to
-another. Topological sort of a graph gives a total ordering of the
-vertices in which there are only forward edges. 
+where each edge $(u,v)$ represents an edge from a vertex to another.
+Accessor functions $V(G)$ and $E(G)$ yield the vertex and edge set of
+the graph $G$. Topological sort of a graph gives a total ordering of
+the vertices in which there are only forward edges. A vertex induced
+subgraph of $G$ by vertex set $A$ contains only the vertex set $A$ and
+edges incident to members of $A$.
 
 \section{Package operation planning}
 
 The dependency resolution problem may be viewed as a simple forward
 chaining problem, where we would like to begin from an initial state
-$S_0$ and by following allowable system transitions $t_i: S -> S$, 
+$S_0$ and by following allowable system transitions $t_i: S \to S$, 
 arrive at a desired system state $S_f$ (where $S$ is the set of all states).
 
-A system state $S_i$ is defined as the set of installed packages on the
-system together with their versions, i.e. $S_i = \{  (x,v) : x \text{ is
-installed}, v=version(x)\} $. An atomic system transition $t_i$ chains one
-system state into another, making one ACID change on the system. The
-usual atomic transitions are the single package install and remove 
-operations found in low-level package management code of PISI. Note
-that in PISI, an upgrade operation is identical to a remove operation
-followed by an install operation (which sets it apart from some other
-packaging systems).
+A system state $S_i$ is defined as the set of installed packages on
+the system together with their versions, i.e. $S_i = \{ (x,v) : x
+\text{ is installed}, v=version(x)\} $. An atomic system transition
+$t_i$ chains one system state into another, making one ACID change on
+the system. The usual atomic transitions are the single package
+install, remove and reinstall (upgrade or downgrade) operations found
+in low-level package management code of PISI. Note that in PISI, an
+upgrade operation is identical to a remove operation followed by an
+install operation (which sets it apart from some other packaging
+systems).
 
 A package operation plan is thus naturally conceived of as a sequence
 of atomic system transitions. Given an initial state and a final
@@ -116,39 +118,39 @@ look at the dependency condition.
 
 \subsection{Solving the simplest case with topological sorting}
 
-We will now concentrate on a simple form of the problem which can
-be solved with topological sorting. This form is not concerned with
-versions. From initial set of packages $S_0$, we would like to
+We will now concentrate on a simple form of the problem which can be
+solved with topological sorting. This form is not concerned with
+versions. From an initial set of packages $S_0$, we would like to
 install in addition a new set $A$ of packages obtaining $S_f = S_0 \cup
 A$.
 
 The only relations considered are of the form: $a$ Depends on $b$, or more
 briefly $aDb$.
 
-The graph of all such simple dependency relations is a directed graph
-(digraph) $G$. For each dependency relation $aDB$, there is an edge $a
-\to b$ in $G$. Accessing graph $G$ usually requires a database operation and
-is therefore expensive.
+The graph of all such simple dependency relations is a digraph $G$.
+For each dependency relation $aDb$, there is an edge $a \to b$ in $G$.
+Accessing graph $G$ usually requires a database operation and is
+therefore expensive.
 
 We now consider the digraph $G_A$ of the minimal set of simple
 dependency relations which contains all information required to
-construct a plan to install packages $A$. $G_A$ is a vertex induced graph
-such that the fringe of $A$, e.g. vertices with out-degree $0$ are
-already installed. Vertices of $G_A$ are taken from $S_f$. First, let us
-explain the labelling scheme. Already installed vertices are labelled
-with 'i'. Packages to be added are labelled with 'a', and packages to
-be installed due to dependencies are labelled with 'd'. We
-construct the graph as follows
+construct a plan to install packages $A$. $G_A$ is a vertex induced
+graph such that the fringe of $A$, e.g. vertices with out-degree $0$
+depend only on packages that are already installed (or none). Vertices
+of $G_A$ are taken from $S_f$. First, let us explain the labelling
+scheme.  Already installed vertices are labelled with 'i'. Packages to
+be added are labelled with 'a', and packages to be installed due to
+dependencies are labelled with 'd'. We construct the graph as follows
 \begin{algorithm}
-  %\caption{$\textsc{Par-Freq}(T_i, \epsilon, \textsc{Mine-Freq} )$}
+  \caption{$\textsc{Make-}G_A(G, A)$}
   \label{alg:cons-graph}
   \begin{algorithmic}[1]
-\STATE $G_A \gets$ isolated vertex set $A$ labelled with 'a'
+\STATE $G_A \gets$ vertex induced subgraph of $G$ by $A$ labelled with 'a'
 \REPEAT
   \STATE done $\gets$ true
-  \FOR{each $u \in  V_A$ with out-degree $0$}
+  \FOR{each $u \in  V(G_A)$ with out-degree $0$}
     \FOR{ $v \in adj(u) $ of $G$}
-      \IF{$v \notin V_A$}
+      \IF{$v \notin V(G_A)$}
         \STATE done $\gets$ false
         \IF{$v$ is installed}
           \STATE label $v$ with 'i'
@@ -281,24 +283,29 @@ multi-package upgrade, the exact details of the goal state depend on
 the graph $G_f$ of the repository. Thus, we construct a graph
 $G_{A,f}$ that is a vertex-induced subgraph of $G_f$ such that it
 contains all information relevant to upgrading packages $A$. We begin
-by a vertex induced graph by $A$. These are the packages that will be
-upgraded in any case. Then, we make a pass on the vertices, and look
-at all the outgoing edges, we compare whether this edge has changed in
-any substantial way from the previous version. In particular, we are
-interested in whether the predicate of the edge is valid for the
-version of the same package in our current system. Every compared
-vertex in this manner is marked done, and the edges not valid for the
-current system pull new unmarked vertices into $G_f$, this continues
-until there are no unmarked vertices left. Hence, the vertices of
-$G_f$ are the packages that must be upgraded. 
+by a vertex induced subgraph of $G_f$ by $A$. These are the packages
+that will be upgraded in any case. Then, we make a pass on the
+vertices, and look at all the outgoing edges, we compare whether this
+edge has changed in any substantial way from the previous version. In
+particular, we are interested in whether the predicate of the edge is
+valid for the version of the same package in our current system. Every
+compared vertex in this manner is marked done, and the edges not valid
+for the current system pull new unmarked vertices into $G_f$, this
+continues until there are no unmarked vertices left. Hence, the
+vertices of $G_f$ are the packages that must be upgraded.
 
-To actually carry out the upgrade a strategy is to upgrade one by one
-all the packages in some order. A good order is again the reverse
-topological order order, in fact, the operation is merely a special case of a
-multi-package installation code that can install from a remote
-repository. However, in case no package depends on the packages to be
-upgraded, then we can carry out a completely consistency-preserving
-plan as discussed above.
+To actually carry out the upgrade a strategy is to upgrade all the
+packages in $G_{A,f}$ in some order. A good order is again the reverse
+topological order order, in fact, the upgrade operation is merely a
+special case of a multi-package installation code that can install
+from a remote repository, since a multi-package installation can
+contain upgrades in addition to new packages. However, in case no
+package depends on the packages to be upgraded, then we can carry out
+a completely consistency-preserving plan as discussed above. The
+conflicts are resolved in the usual fashion, by removing those
+packages in conflict with new packages that are installed. This can be
+accomplished by invoking a remove operation prior to the upgrade
+operation.
 
 \section{Examples}
 
@@ -317,7 +324,6 @@ initial state:\\
 
 In this case, we can find a consistency-preserving plan in terms of
 install and remove operations.
-
 \\
 plan:\\
   remove $(a,1)$\\
@@ -339,10 +345,10 @@ chain. In fact, here there is no consistency-preserving plan in terms
 of atomic single package transitions: install, remove, upgrade. In
 these cases, it seems best to resort to upgrade in place, and in the
 reverse topological order of dependencies.
-
+\\
 plan:\\
- upgrade $(c,1) \to (c,2)$
- upgrade $(b,1) \to (b,2)$
+ upgrade $(c,1) \to (c,2)$\\
+ upgrade $(b,1) \to (b,2)$\\
 
 
 \subsection{A multi package remove}
