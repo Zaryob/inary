@@ -56,6 +56,15 @@ class Constants:
         self.__c.build_func = "build"
         self.__c.install_func = "install"
 
+        # file types
+        self.__c.doc = "doc"
+        self.__c.conf = "conf"
+        self.__c.header = "header"
+        self.__c.library = "library"
+        self.__c.executable = "executable"
+        self.__c.data = "data"
+        self.__c.localedata = "localedata"
+
     def __getattr__(self, attr):
         return getattr(self.__c, attr)
 
