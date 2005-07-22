@@ -19,7 +19,15 @@ def remove(package_name):
         raise Exception('Trying to remove nonexistent package '
                         + package_name)
     for fileinfo in installdb.files(package_name).list:
-        os.unlink( os.path.join(config.destdir, fileinfo.path) )
+        fpath = os.path.join(config.destdir, fileinfo.path)
+        # TODO: We have to store configuration files for futher
+        # usage. Currently we'are doing it like rpm does and saving
+        # with a prefix, leaving the user to edit it. In the future
+        # we'll have a plan for these configuration files.
+        if fileinfo.type == const.conf:
+            os.rename(fpath, fpath+".pisi")
+        else:
+            os.unlink(fpath)
     installdb.remove(package_name)
     removeScripts(package_name)
 
