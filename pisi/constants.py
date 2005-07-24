@@ -58,6 +58,8 @@ class Constants:
 
         # file types
         self.__c.doc = "doc"
+        self.__c.man = "man"
+        self.__c.info = "info"
         self.__c.conf = "conf"
         self.__c.header = "header"
         self.__c.library = "library"
