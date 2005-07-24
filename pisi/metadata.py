@@ -81,6 +81,7 @@ class MetaData(XmlFile):
         self.package.conflicts = pkg.conflicts
         self.package.providesComar = pkg.providesComar
         self.package.requiresComar = pkg.requiresComar
+        self.package.additionalFiles = pkg.additionalFiles
         
 
     def read(self, filename):

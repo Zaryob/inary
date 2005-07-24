@@ -33,14 +33,14 @@ class PackagerInfo:
 
 class AdditionalFileInfo:
     def __init__(self, node):
-        self.filepath = getNodeText(node)
+        self.filename = getNodeText(node)
         self.target = getNodeAttribute(node, "target")
         self.permission = getNodeAttribute(node, "permission")
         self.owner = getNodeAttribute(node, "owner")
 
     def elt(self, xml):
         node = xml.newNode("AdditionalFile")
-        xml.addText(node, self.filepath)
+        xml.addText(node, self.filename)
         node.setAttribute("target", self.target)
         if self.permission:
             node.setAttribute("permission", self.permission)
@@ -48,7 +48,7 @@ class AdditionalFileInfo:
             node.setAttribute("owner", self.owner)
 
     def verify(self):
-        if not self.filepath: return False
+        if not self.filename: return False
         if not self.target: return False
         return True
 
@@ -164,8 +164,6 @@ class SourceInfo:
         self.archiveSHA1 = getNodeAttribute(archiveNode, "sha1sum")
         patchElts = getAllNodes(node, "Patches/Patch")
         self.patches = [PatchInfo(p) for p in patchElts]
-        aFilesElts = getAllNodes(node, "AdditionalFiles/AdditionalFile")
-        self.additionalFiles = [AdditionalFileInfo(f) for f in aFilesElts]
         buildDepElts = getAllNodes(node, "BuildDependencies/Dependency")
         self.buildDeps = [DepInfo(d) for d in buildDepElts]
         historyElts = getAllNodes(node, "History/Update")
@@ -188,8 +186,6 @@ class SourceInfo:
         archiveNode.setAttribute("sha1sum", self.archiveSHA1)
         for patch in self.patches:
             xml.addNodeUnder(node, "Patches", patch.elt(xml))
-        for afile in self.additionalFiles:
-            xml.addNodeUnder(node, "AdditionalFiles", afile.elt(xml))
         for dep in self.buildDeps:
             xml.addNodeUnder(node, "BuildDependencies", dep.elt(xml))
         for update in self.history:
@@ -212,8 +208,6 @@ class SourceInfo:
             if not update.verify(): return False
         for patch in self.patches:
             if not patch.verify(): return False
-        for afile in self.additionalFiles:
-            if not afile.verify(): return False
         for dep in self.buildDeps:
             if not dep.verify(): return False
 
@@ -241,6 +235,8 @@ class PackageInfo(object):
         self.providesComar = [ComarProvide(x) for x in provComarElts]
         reqComarElts = getAllNodes(node, "Requires/COMAR")
         self.requiresComar = map(getNodeText, reqComarElts)
+        aFilesElts = getAllNodes(node, "AdditionalFiles/AdditionalFile")
+        self.additionalFiles = [AdditionalFileInfo(f) for f in aFilesElts]
 
     def elt(self, xml):
         node = xml.newNode("Package")
@@ -265,6 +261,8 @@ class PackageInfo(object):
             xml.addNodeUnder(node, "Provides", pcomar.elt(xml))
         for rcomar in self.requiresComar:
             xml.addTextNodeUnder(node, "Requires/COMAR", rcomar)
+        for afile in self.additionalFiles:
+            xml.addNodeUnder(node, "AdditionalFiles", afile.elt(xml))
         return node
 
     def verify(self):
@@ -278,6 +276,8 @@ class PackageInfo(object):
             if not path.verify(): return False
         for dep in self.runtimeDeps:
             if not dep.verify(): return False
+        for afile in self.additionalFiles:
+            if not afile.verify(): return False
         return True
 
     def __str__(self):

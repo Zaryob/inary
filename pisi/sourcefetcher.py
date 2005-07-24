@@ -56,11 +56,12 @@ class SourceFetcher(object):
 
     def fetch_additionalFiles(self):
         spec = self.spec
-        for afile in spec.source.additionalFiles:
-            afileuri = join(self.location, 
-                            const.files_dir, patch.filename)
-            self.url.uri = afileuri
-            self.fetch(const.files_dir)
+        for pkg in self.spec.packages:
+            for afile in pkg.additionalFiles:
+                afileuri = join(self.location, 
+                                const.files_dir, patch.filename)
+                self.url.uri = afileuri
+                self.fetch(const.files_dir)
 
     def fetch(self, appendDest=""):
         from fetcher import fetchUrl
