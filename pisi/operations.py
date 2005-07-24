@@ -6,7 +6,6 @@ from ui import ui
 from purl import PUrl
 import util
 
-
 # all package operation interfaces are here
 
 def remove(package_name):
@@ -59,9 +58,7 @@ def install(pkg):
 
 def install_package(pkg_location):
     from install import Installer
-
-    i = Installer(pkg_location)
-    i.install()
+    Installer(pkg_location).install()
 
 
 def info(package_name):

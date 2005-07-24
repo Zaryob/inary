@@ -72,17 +72,12 @@ class InstallDB:
         else:
             return False
 
-    def install(self, pkg, version, release, files_xml):
+    def install(self, pkg, version, release):
         """install package with specific version and release"""
         pkg = str(pkg)
         if self.is_installed(pkg):
             raise InstallDBError("already installed")
         self.d[pkg] = ('i', version, release)
-        # files dosyasını config.lib_dir()+name+version+release+/files
-        # altına saklıyoruz zaten. bu yüzden bu işleme gerek
-        # yok. Paketin diğer dosyaları ile birlikte aynı dizin
-        # hiyerarşisi altında durması daha iyi...
-#        util.copy_file(files_xml, self.files_name(pkg, version, release))
 
     def remove(self, pkg):
         pkg = str(pkg)
@@ -93,9 +88,6 @@ class InstallDB:
         pkg = str(pkg)
         if self.d.has_key(pkg):
             (status, version, release) = self.d[pkg]
-            #f = self.files_name(pkg, version, release)
-            #if util.check_file(f):
-            #    os.unlink(f)
             del self.d[pkg]
 
 installdb = InstallDB()

@@ -10,7 +10,7 @@ from config import config
 from constants import const
 from ui import ui
 from installdb import installdb
-from packagedb import packagedb
+from packagedb import packagedb, inst_packagedb
 import dependency
 from metadata import MetaData
 import comariface
@@ -22,19 +22,32 @@ class InstallError(Exception):
 
 class Installer:
     "Installer class, provides install routines for pisi packages"
+
     def __init__(self, package_fname):
         self.package = Package(package_fname)
         self.package.read()
         self.metadata = self.package.metadata
         self.files = self.package.files
 
+    def install(self):
+        self.pkginfo = self.metadata.package
+        self.check_requirements()
+        self.check_relations()
+        self.reinstall()
+        self.extractInstall()
+        self.storePisiFiles()
+        self.registerCOMARScripts()
+        self.update_databases()
+
     def extractInstall(self):
+        "unzip package in place"
+
         ui.info('Extracting files\n')
         self.package.extract_dir_flat('install', config.destdir)
-    
+ 
     def storePisiFiles(self):
-        # put files.xml, metadata.xml, actions.py and COMAR scripts
-        # somewhere in the file system. We'll need these in future...
+        """put files.xml, metadata.xml, actions.py and COMAR scripts
+        somewhere in the file system. We'll need these in future..."""
 
         ui.info('Storing %s\n' % const.files_xml)
         self.package.extract_file(const.files_xml, self.package.pkg_dir())
@@ -50,7 +63,8 @@ class Installer:
             self.package.extract_file(fpath, self.package.pkg_dir())
 
     def registerCOMARScripts(self):
-        # register COMAR scripts
+        "register COMAR scripts"
+
         for pcomar in self.metadata.package.providesComar:
             scriptPath = os.path.join(self.package.comar_dir(),pcomar.script)
             ui.info("Registering COMAR script %s\n" % pcomar.script)
@@ -60,72 +74,70 @@ class Installer:
             if not ret:
                 ui.error("registerScript failed. Be sure that comard is running!\n")
 
+    def check_requirements(self):
+        """check system requirements"""
+        
+        #TODO: IS THERE ENOUGH SPACE?
+        # what to do if / is split into /usr, /var, etc.
+        pass
 
-    def install(self):
-
-        # check file system requirements
-        # what to do if / is split into /usr, /var, etc.?
-
-        pkginfo = self.metadata.package
-
+    def check_relations(self):
         # check if package is in database
-        if not packagedb.has_package(pkginfo.name):
-            packagedb.add_package(pkginfo) # terrible solution it seems
+        # TODO: when repodb comes alive, this will put it into 3rd
+        # party packagedb
+        if not packagedb.has_package(self.pkginfo.name):
+            packagedb.add_package(self.pkginfo) # terrible solution it seems
     
         # check conflicts
         for pkg in self.metadata.package.conflicts:
-            if installdb.has_package(pkginfo):
+            if installdb.has_package(self.pkginfo):
                 raise InstallError("Package conflicts " + pkg)
     
         # check dependencies
-        if not dependency.installable(pkginfo.name):
-            ui.error('Dependencies for ' + pkginfo.name +
+        if not dependency.installable(self.pkginfo.name):
+            ui.error('Dependencies for ' + self.pkginfo.name +
                      ' not satisfied\n')
-            
             raise InstallError("Package not installable")
 
-        if installdb.is_installed(pkginfo.name): # is this a reinstallation?
-            (iversion, irelease) = installdb.get_version(pkginfo.name)
+    def reinstall(self):
+        "check reinstall, confirm action, and remove package if reinstall"
 
-            if pkginfo.version == iversion and pkginfo.release == irelease:
+        if installdb.is_installed(self.pkginfo.name): # is this a reinstallation?
+            (iversion, irelease) = installdb.get_version(self.pkginfo.name)
+
+            if self.pkginfo.version == iversion and self.pkginfo.release == irelease:
                 if not ui.confirm('Re-install same version package?'):
                     raise InstallError('Package re-install declined')
             else:
                 upgrade = False
                 # is this an upgrade?
                 # determine and report the kind of upgrade: version, release, build
-                if pkginfo.version > iversion:
+                if self.pkginfo.version > iversion:
                     ui.info('Upgrading to new upstream version')
                     upgrade = True
-                elif pkginfo.release > irelease:
+                elif self.pkginfo.release > irelease:
                     ui.info('Upgrading to new distribution release')
                     upgrade = True
 
                 # is this a downgrade? confirm this action.
                 if not upgrade:
-                    if pkginfo.version < iversion:
+                    if self.pkginfo.version < iversion:
                         x = 'Downgrade to old upstream version?'
-                    elif pkginfo.release < irelease:
+                    elif self.pkginfo.release < irelease:
                         x = 'Downgrade to old distribution release?'
                     if not ui.confirm(x):
                         raise InstallError('Package downgrade declined')
 
             # remove old package then
-            operations.remove(pkginfo.name)
+            operations.remove(self.pkginfo.name)
 
-        # unzip package in place
-        self.extractInstall()
-
-        # store files.xml, metadata.xml and comar scripts for further usage
-        self.storePisiFiles()
-
-        # register comar scripts
-        self.registerCOMARScripts()
-
-        # update databases
+    def update_databases(self):
+        "update databases"
 
         # installdb
         installdb.install(self.metadata.package.name,
                           self.metadata.package.version,
-                          self.metadata.package.release,
-                          os.path.join(self.package.pkg_dir(), 'files.xml'))
+                          self.metadata.package.release)
+
+        # installed packages
+        inst_packagedb.add_package(self.pkginfo)

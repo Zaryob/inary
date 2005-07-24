@@ -18,9 +18,9 @@ from bsddb import db
 class PackageDB(object):
     """PackageDB class provides an interface to the package database with
     a delegated dbshelve object"""
-    def __init__(self):
+    def __init__(self, id):
         util.check_dir(config.db_dir())
-        filename = os.path.join(config.db_dir(), 'package.bdb')
+        filename = os.path.join(config.db_dir(), 'package-' + id + '.bdb')
         self.d = shelve.open(filename)
         self.fdummy = open(filename)
         fcntl.flock(self.fdummy, fcntl.LOCK_EX)
@@ -48,5 +48,6 @@ class PackageDB(object):
         name = str(name)
         del self.d[name]
 
-packagedb = PackageDB()
+packagedb = PackageDB('repo')
 
+inst_packagedb = PackageDB('local')
