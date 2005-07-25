@@ -54,6 +54,23 @@ def dodoc(*documentList):
                                          srcTag,
                                          os.path.basename(document)))
 
+def newdoc(source, destination):
+
+    srcTag = env.src_name + '-' \
+        + env.src_version + '-' \
+        + env.src_release
+    
+    makedirs(os.path.join(env.install_dir,
+                                 dirs.doc,
+                                 srcTag))
+
+    if os.access(source, os.F_OK):
+        copy_file(source, 
+            os.path.join(env.install_dir, 
+                                         dirs.doc,
+                                         srcTag,
+                                         destination))
+
 def dosed(filename, searchPattern, replacePattern = ''):
     for line in fileinput.input(filename, inplace = 1):
             line = re.sub(searchPattern, replacePattern, line)
