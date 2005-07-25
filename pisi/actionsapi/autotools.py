@@ -108,3 +108,12 @@ def installWithInstallRootdir():
     install_string = 'make INSTALL_ROOT=%s install' % dir_suffix
 
     os.system(install_string)
+
+def aclocal(parameters = ''):
+    os.system("aclocal %s" % parameters)
+
+def autoconf(parameters = ''):
+    os.system("autoconf %s" % parameters)
+
+def automake(parameters = ''):
+    os.system("automake %s" % parameters)

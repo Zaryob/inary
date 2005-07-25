@@ -5,6 +5,7 @@
 import os
 import time
 import glob
+import shutil
 from tempfile import mkstemp, mkdtemp
 
 def sleep(seconds = 5):
@@ -41,3 +42,12 @@ def changeDir(directoryName = ''):
         os.chdir(directoryName)
     else:
         os.chdir(os.path.dirname(current))
+
+def ls(directory):
+    return os.listdir(directory)
+
+def move(source, destination):
+    shutil.move(source, destination)
+
+def export(key, value):
+    os.environ[key] = value
