@@ -15,12 +15,12 @@ def install(packages):
     """install a list of packages (either files, urls, or names)"""
     #TODO: this for loop is just a placeholder
     for x in packages:
-        operations.install(x)
+        operations.install_single(x)
 
 def remove(packages):
     #TODO: this for loop is just a placeholder
     for x in packages:
-        operations.remove(x)
+        operations.remove_single(x)
 
 
 def info(package_name):

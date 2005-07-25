@@ -133,7 +133,7 @@ class Installer:
                         raise InstallError('Package downgrade declined')
 
             # remove old package then
-            operations.remove(pkg.name)
+            operations.remove_single(pkg.name)
 
     def update_databases(self):
         "update databases"

@@ -10,9 +10,10 @@ import util
 
 # single package operations
 
-def remove(package_name):
+def remove_single(package_name):
     """Remove a single package"""
     from installdb import installdb
+    from packagedb import inst_packagedb
     from comariface import removeScripts
 
     #TODO: check dependencies
@@ -32,16 +33,17 @@ def remove(package_name):
         else:
             os.unlink(fpath)
     installdb.remove(package_name)
+    inst_packagedb.remove_package(package_name)
     removeScripts(package_name)
 
 # TODO: repository'den okuma isi yas burada, bu degisecek
-def install(pkg):
+def install_single(pkg):
     url = PUrl(pkg)
     # Check if we are dealing with a remote file or a real path of
     # package filename. Otherwise we'll try installing a package from
     # the package repository.
     if url.isRemoteFile() or os.path.exists(url.uri):
-        install_package(pkg)
+        install_single_package(pkg)
     else:
         from os.path import join
 
@@ -64,7 +66,7 @@ def install(pkg):
                 return
         ui.error("Package %s not found in the index file.\n" %pkg)
 
-def install_package(pkg_location):
+def install_single_package(pkg_location):
     from install import Installer
     Installer(pkg_location).install()
 
