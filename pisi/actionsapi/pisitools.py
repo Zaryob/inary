@@ -183,3 +183,5 @@ GROUP ( /lib/%s )
     f.close()
     chmod(env.install_dir + "/usr/lib/%s" % parameters)
 
+def preplib(parameters = ''):
+    os.system("/sbin/ldconfig -n -N %s%s" % (env.install_dir, parameters))
