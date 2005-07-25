@@ -27,6 +27,10 @@ class CLI:
         sys.stdout.write(colorize(msg, 'red'))
         sys.stdout.flush()
 
+    def action(self,msg):
+        sys.stdout.write(colorize(msg, 'green'))
+        sys.stdout.flush()
+
     def confirm(self, msg):
         while True:
             s = raw_input(msg + colorize('(yes/no)', 'red'))

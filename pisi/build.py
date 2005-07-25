@@ -104,11 +104,11 @@ class PisiBuild:
         os.chdir(self.srcDir)
 
         #  Run configure, build and install phase
-        ui.info("Setting up source...\n")
+        ui.action("Setting up source...\n")
         self.runActionFunction(const.setup_func)
-        ui.info("Building source...\n")
+        ui.action("Building source...\n")
         self.runActionFunction(const.build_func)
-        ui.info("Intalling...\n")
+        ui.action("Intalling...\n")
         # install function is mandatory!
         self.runActionFunction(const.install_func, True)
 
@@ -186,7 +186,7 @@ class PisiBuild:
                                             compressType=patch.compressionType,
                                             targetDir=self.ctx.tmp_dir())
 
-            ui.info("Applying patch: %s\n" % patch.filename)
+            ui.action("* Applying patch: %s\n" % patch.filename)
             util.do_patch(self.srcDir, patchFile, level=patch.level)
 
     def genMetaDataXml(self, package):
@@ -242,13 +242,13 @@ class PisiBuild:
         """Build each package defined in PSPEC file. After this process there
         will be .pisi files hanging around, AS INTENDED ;)"""
         for package in self.spec.packages:
-            ui.info("** Building package %s\n" % package.name);
+            ui.action("** Building package %s\n" % package.name);
             
-            ui.info("Generating %s..." % const.metadata_xml)
+            ui.action("Generating %s..." % const.metadata_xml)
             self.genMetaDataXml(package)
             ui.info(" done.\n")
 
-            ui.info("Generating %s..." % const.files_xml)
+            ui.action("Generating %s..." % const.files_xml)
             self.genFilesXml(package)
             ui.info(" done.\n")
 
@@ -256,7 +256,7 @@ class PisiBuild:
                                      self.spec.source.version,
                                      self.spec.source.release)
             
-            ui.info("Creating PISI package %s\n" % name)
+            ui.action("Creating PISI package %s\n" % name)
             
             pkg = Package(name, 'w')
             c = os.getcwd()
