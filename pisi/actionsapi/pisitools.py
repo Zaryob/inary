@@ -10,7 +10,7 @@ import re
 import sys
 import glob
 
-from utils import makedirs, unlink
+from utils import makedirs, unlink, chmod
 from pisi.util import copy_file, clean_dir
 
 # actions api modules
@@ -147,3 +147,22 @@ def doecho(content, filename):
     f = open(env.install_dir + '/' + filename, 'w')
     f.write(content)
     f.close()
+
+def gen_usr_ldscript(parameters = ''): 
+
+    dodir("/usr/lib")
+
+    f = open(env.install_dir + '/usr/lib/' + parameters, 'w')
+    content = '''
+/* GNU ld script
+    Since Pardus has critical dynamic libraries
+    in /lib, and the static versions in /usr/lib,
+    we need to have a "fake" dynamic lib in /usr/lib,
+    otherwise we run into linking problems.
+*/
+GROUP ( /lib/%s )
+''' % parameters
+    f.write(content)
+    f.close()
+    chmod(env.install_dir + "/usr/lib/%s" % parameters)
+

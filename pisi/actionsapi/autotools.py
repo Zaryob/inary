@@ -57,13 +57,15 @@ def install(parameters = ''):
                 localstatedir=%(prefix)s/%(localstate)s \
                 mandir=%(prefix)s/%(man)s \
                 sysconfdir=%(prefix)s/%(conf)s \
+                %(parameters)s \
                 install' % {'prefix': dir_suffix,
                             'defaultprefix': dirs.defaultprefix,
                             'man': dirs.man,
                             'info': dirs.info,
                             'localstate': dirs.localstate,
                             'conf': dirs.conf,
-                            'data': dirs.data}
+                            'data': dirs.data,
+                            'parameters': parameters}
 
     os.system(install_string)
 
