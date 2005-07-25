@@ -1,3 +1,5 @@
+# Package Operations: install/remove/upgrade
+
 import os
 
 from config import config
@@ -6,12 +8,14 @@ from ui import ui
 from purl import PUrl
 import util
 
-# all package operation interfaces are here
+# single package operations
 
 def remove(package_name):
-    """Remove a goddamn package"""
+    """Remove a single package"""
     from installdb import installdb
     from comariface import removeScripts
+
+    #TODO: check dependencies
 
     ui.info('Removing package %s\n' % package_name)
     if not installdb.is_installed(package_name):
@@ -30,6 +34,7 @@ def remove(package_name):
     installdb.remove(package_name)
     removeScripts(package_name)
 
+# TODO: repository'den okuma isi yas burada, bu degisecek
 def install(pkg):
     url = PUrl(pkg)
     # Check if we are dealing with a remote file or a real path of
@@ -63,46 +68,12 @@ def install_package(pkg_location):
     from install import Installer
     Installer(pkg_location).install()
 
+# deneme, don't remove ulan
+class AtomicOperation(object):
+    def __init__(self, package, ignore_dep = False):
+        self.package = package
+        self.ignore_dep = ignore_dep
 
-def info(package_name):
-    from package import Package
-
-    package = Package(package_name)
-    package.read()
-    return package.metadata, package.files
-
-
-def index(repo_dir = '.'):
-    from index import Index
-
-    ui.info('* Building index of PISI files under %s\n' % repo_dir)
-    index = Index()
-    index.index(repo_dir)
-    index.write(const.pisi_index)
-    ui.info('* Index file written\n')
-
-def updatedb(indexfile = None, repo = "default"):
-    from index import Index
-
-    if not indexfile:
-        repos_path = config.values.repos[repo]
-        indexfile = os.path.join(repos_path, const.pisi_index)
-
-    ui.info('* Updating DB from index file: %s\n' % indexfile)
-    index = Index()
-    index.read(indexfile, repo)
-    index.update_db()
-    ui.info('* Package db updated.\n')
-
-
-def build(pspecfile, authInfo=None):
-    from build import PisiBuild
-
-    url = PUrl(pspecfile)
-    if url.isRemoteFile():
-        from sourcefetcher import SourceFetcher
-        fs = SourceFetcher(url, authInfo)
-        url.uri = fs.fetch_all()
-
-    pb = PisiBuild(url.uri)
-    pb.build()
+    def run(self, package):
+        "perform an atomic package operation"
+        pass

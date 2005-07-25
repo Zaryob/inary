@@ -4,6 +4,7 @@ import pisi
 from pisi.config import config
 from pisi.purl import PUrl
 from common import *
+import pisi.toplevel
 
 # helper functions
 def cmdObject(cmd, fail=False):
@@ -98,9 +99,8 @@ class Build(Command):
             self.help()
             return
 
-        from pisi.operations import build
         for arg in self.args:
-            build(arg, self.authInfo)
+            pisi.toplevel.build(arg, self.authInfo)
 
 class Install(Command):
     """install: install PISI packages"""
@@ -116,9 +116,7 @@ class Install(Command):
             self.help()
             return
 
-        from pisi.operations import install
-        for arg in self.args:
-            install(arg)
+        pisi.toplevel.install(self.args)
 
 class Remove(Command):
     """remove: remove PISI packages"""
@@ -134,9 +132,7 @@ class Remove(Command):
             self.help()
             return
 
-        from pisi.operations import remove
-        for arg in self.args:
-            remove(arg)
+        pisi.toplevel.remove(self.args)
 
 class Info(Command):
     """info: display information about a package 
@@ -154,7 +150,7 @@ class Info(Command):
 
     def printinfo(self, arg):
         import os.path
-        from pisi.operations import info
+        from pisi.toplevel import info
 
         if os.path.exists(arg):
             metadata, files = info(arg)
@@ -170,7 +166,7 @@ class Index(Command):
             self.help()
             return
 
-        from pisi.operations import index
+        from pisi.toplevel import index
         if len(self.args)==1:
             index(self.args[0])
         elif len(self.args)==0:
@@ -197,7 +193,6 @@ class UpdateDB(Command):
         super(UpdateDB, self).__init__()
 
     def run(self):
-        from pisi.operations import updatedb
         try:
             indexfile = self.args[0]
         except IndexError:
@@ -205,7 +200,7 @@ class UpdateDB(Command):
             # configuration file
             indexfile = None
 
-        updatedb(indexfile)
+        pisi.toplevel.updatedb(indexfile)
 
 
 class ListAvailable(Command):

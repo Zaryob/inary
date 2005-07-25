@@ -38,45 +38,44 @@ Legend:
  + Package/Files
 
 2. Alpha
- - incremental build
+ - incremental build (meren)
    - generate binary release number by comparing MD5s (meren)
    - keep track of successfully completed configure, make, install
      steps (necessary for large-scale builds?) (meren)
  / multi-package dependency analysis (eray)
    + design a package operation planner
-   - install operation
-   - upgrade operation
+   - install operation (eray)
+   - upgrade operation (eray)
  + command line interface:
-   / multi-package installation
    + pisi remove
    - pisi upgrade (baris)
    + svn-like CLI
- - non-interactive use
+ - non-interactive use (baris)
  / configuration file
    + define the format of the configuration file
    + extend Config module (config.py) accordingly
-   - define configuration keys
+   - define configuration keys (baris - meren)
  / component/category
    + requirements
-   - xml format
-   - usage
+   - xml format (baris) (bunlarin class'leri yazilmali)
+   - usage (build process'in icine koymak baris - meren)
  / query
    + list of installed packages (eray)
    - comar OM information (Provides) (baris)
- - refactor actionsAPI
- - actionsAPI documentation
+ - refactor actionsAPI (caglar)
+ - actionsAPI documentation (caglar)
  / versioning information document (bunu ben yazmistim zaten - eray)
  / verify metodlari
    + SpecFile
    + MetaData
    + Files
-   - Index
- - implement missing unit tests
+   - Index (bu onemli degil)
+ - implement missing unit tests (bunlari da salliyoruz simdilik)
    + sourcedb
-   - package
+   - package 
    - configuration file
  + fix xml indentation (meren)
- - define file types (doc, executable, conf, etc...)
+ - define file types (doc, executable, conf, etc...) (baris - meren)
  + write specfile (eray)
  + file locking for database access [not tested!] (eray)
  + implement file uri
