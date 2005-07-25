@@ -40,6 +40,7 @@ def install(pkg):
     else:
         from os.path import join
 
+        # TODO: TABII BURADA REPODB KULLANILACAK BU COK INEFFICIENT
         (repo, index) = util.repo_index()
 
         # search pkg in index for it's presence in repository
