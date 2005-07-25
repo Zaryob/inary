@@ -96,10 +96,9 @@ Legend:
 
 3. Beta
 
- - exception handling (baris)
  - system-wide upgrade (upgrade-all) komutu (eray)
  / multiple package repository
-   + decide how to implement
+   / decide how to implement
    - make a package and sourcedb for each repo
    - support medium types
      - internet: http/ftp
@@ -111,6 +110,9 @@ Legend:
    - installation
    - remove
    - upgrade
+ - partial caching and automatic resume for file download
+  - use a separate "partial/" subdir like urpmi
+ - exception handling (baris)
  - transaction stuff for database (eray)
  - incremental build/fetch for repository index (pisi-index.xml)
    - diffsets (caglar)
