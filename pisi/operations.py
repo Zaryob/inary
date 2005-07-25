@@ -40,10 +40,12 @@ def install(pkg):
     else:
         from os.path import join
 
-        # TODO: TABII BURADA REPODB KULLANILACAK BU COK INEFFICIENT
+        # TODO: tabii burada repodb falan kullanilmali cok inefficient
         (repo, index) = util.repo_index()
 
         # search pkg in index for it's presence in repository
+        # TODO: normalde hicbir zaman boyle linear search yapilmamali
+        # buyuk olabilecek listeler uzerinden
         for package in index.packages:
             if package.name == pkg:
                 version = package.history[0].version
