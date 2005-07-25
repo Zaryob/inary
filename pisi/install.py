@@ -24,12 +24,14 @@ class Installer:
     "Installer class, provides install routines for pisi packages"
 
     def __init__(self, package_fname):
+        "initialize from a file name"
         self.package = Package(package_fname)
         self.package.read()
         self.metadata = self.package.metadata
         self.files = self.package.files
 
     def install(self):
+        "entry point"
         self.pkginfo = self.metadata.package
         self.check_requirements()
         self.check_relations()
@@ -102,34 +104,36 @@ class Installer:
     def reinstall(self):
         "check reinstall, confirm action, and remove package if reinstall"
 
-        if installdb.is_installed(self.pkginfo.name): # is this a reinstallation?
-            (iversion, irelease) = installdb.get_version(self.pkginfo.name)
+        pkg = self.pkginfo
+        
+        if installdb.is_installed(pkg.name): # is this a reinstallation?
+            (iversion, irelease) = installdb.get_version(pkg.name)
 
-            if self.pkginfo.version == iversion and self.pkginfo.release == irelease:
+            if pkg.version == iversion and pkg.release == irelease:
                 if not ui.confirm('Re-install same version package?'):
                     raise InstallError('Package re-install declined')
             else:
                 upgrade = False
                 # is this an upgrade?
                 # determine and report the kind of upgrade: version, release, build
-                if self.pkginfo.version > iversion:
+                if pkg.version > iversion:
                     ui.info('Upgrading to new upstream version')
                     upgrade = True
-                elif self.pkginfo.release > irelease:
+                elif pkg.release > irelease:
                     ui.info('Upgrading to new distribution release')
                     upgrade = True
 
                 # is this a downgrade? confirm this action.
                 if not upgrade:
-                    if self.pkginfo.version < iversion:
+                    if pkg.version < iversion:
                         x = 'Downgrade to old upstream version?'
-                    elif self.pkginfo.release < irelease:
+                    elif pkg.release < irelease:
                         x = 'Downgrade to old distribution release?'
                     if not ui.confirm(x):
                         raise InstallError('Package downgrade declined')
 
             # remove old package then
-            operations.remove(self.pkginfo.name)
+            operations.remove(pkg.name)
 
     def update_databases(self):
         "update databases"

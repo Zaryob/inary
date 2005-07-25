@@ -39,9 +39,9 @@ Legend:
 
 2. Alpha
  - incremental build
-   - generate binary release number by comparing MD5s (MEREN)
+   - generate binary release number by comparing MD5s (meren)
    - keep track of successfully completed configure, make, install
-     steps (necessary for large-scale builds?) (MEREN)
+     steps (necessary for large-scale builds?) (meren)
  / multi-package dependency analysis (eray)
    + design a package operation planner
    - install operation
@@ -65,7 +65,7 @@ Legend:
    - comar OM information (Provides) (baris)
  - refactor actionsAPI
  - actionsAPI documentation
- - versioning information document
+ / versioning information document (bunu ben yazmistim zaten - eray)
  / verify metodlari
    + SpecFile
    + MetaData
@@ -97,23 +97,25 @@ Legend:
 
 3. Beta
 
+ - exception handling (baris)
  - system-wide upgrade (upgrade-all) komutu (eray)
- - multiple package repository
-   / decide how to implement
+ / multiple package repository
+   + decide how to implement
    - make a package and sourcedb for each repo
    - support medium types
      - internet: http/ftp
      - local repository
      - cdrom dvd
- - multi-architecture support
-   - design decisions
-   - extend XML specs to support that
-   - cross-platform building support
- - transaction stuff for database
- - incremental build/fetch for repository index (pisi-index.xml)
  - GUI
    - pyqt UI class to interface
    - PISIMAT
    - installation
    - remove
    - upgrade
+ - transaction stuff for database (eray)
+ - incremental build/fetch for repository index (pisi-index.xml)
+   - diffsets (caglar)
+ - multi-architecture support
+   / design decisions
+   / extend XML specs to support that
+   - cross-platform building support
