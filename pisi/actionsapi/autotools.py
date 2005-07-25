@@ -109,6 +109,9 @@ def installWithInstallRootdir():
 
     os.system(install_string)
 
+def rawInstall(parameters = ''):
+    os.system("make %s install" % parameters)
+
 def aclocal(parameters = ''):
     os.system("aclocal %s" % parameters)
 
