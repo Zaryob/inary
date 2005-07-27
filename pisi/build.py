@@ -234,6 +234,11 @@ class PisiBuild:
         will be .pisi files hanging around, AS INTENDED ;)"""
         for package in self.spec.packages:
 
+            name = util.package_name(package.name,
+                                     self.spec.source.version,
+                                     self.spec.source.release)
+            
+            pkg = Package(name, 'w')
             c = os.getcwd()
 	    
             # add comar files to package
@@ -270,14 +275,8 @@ class PisiBuild:
             self.genFilesXml(package)
             ui.info(" done.\n")
 
-            name = util.package_name(package.name,
-                                     self.spec.source.version,
-                                     self.spec.source.release)
-            
             ui.action("Creating PISI package %s\n" % name)
             
-            pkg = Package(name, 'w')
-
             # add xmls and files
             os.chdir(self.ctx.pkg_dir())
 	    
