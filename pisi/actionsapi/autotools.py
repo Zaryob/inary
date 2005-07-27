@@ -34,6 +34,9 @@ def configure(parameters = ''):
 def rawConfigure(parameters = ''):
     os.system('./configure ' + parameters)
 
+def rawConfigureWithPrefix(prefix='', parameters = ''):
+    os.system(prefix + ' ./configure ' + parameters)
+
 def compile(parameters = ''):
     compile_string = 'gcc ${CFLAGS} %s' % parameters
     os.system(compile_string)
