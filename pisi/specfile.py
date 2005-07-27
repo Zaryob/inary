@@ -37,7 +37,6 @@ class AdditionalFileInfo:
         self.target = getNodeAttribute(node, "target")
         self.permission = getNodeAttribute(node, "permission")
         self.owner = getNodeAttribute(node, "owner")
-        self.fileas = getNodeAttribute(node, "fileas")
 
     def elt(self, xml):
         node = xml.newNode("AdditionalFile")
@@ -47,8 +46,6 @@ class AdditionalFileInfo:
             node.setAttribute("permission", self.permission)
         if self.owner:
             node.setAttribute("owner", self.owner)
-        if self.owner:
-            node.setAttribute("fileas", self.fileas)
 
     def verify(self):
         if not self.filename: return False

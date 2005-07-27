@@ -247,13 +247,8 @@ class PisiBuild:
             install_dir = self.ctx.pkg_dir() + const.install_dir_suffix
             for afile in package.additionalFiles:
                 src = os.path.join(const.files_dir, afile.filename)
-                dest = os.path.join(install_dir + afile.target)
-                if not afile.fileas:
-                    util.copy_file(src, dest, fileas=afile.filename)
-                    dest += afile.filename
-                else:
-                    util.copy_file(src, dest, fileas=afile.fileas)
-                    dest += afile.fileas
+                dest = os.path.join(install_dir + os.path.dirname(afile.target), os.path.basename(afile.target))
+                util.copy_file(src, dest)
                 if afile.permission:
                     os.chmod(dest, int(afile.permission) | 0777)
                 if afile.owner:
