@@ -227,21 +227,38 @@ class PisiBuild:
                     fsize = "0"
                 files.append(FileInfo(frpath, ftype, fsize, fhash))
 
-        # append AdditionalFiles to files.xml
-        for afile in package.additionalFiles:
-            fpath = install_dir + afile.target
-            ftype = "AdditionalFile"
-            fhash = util.sha1_file(fpath)
-            fsize = str(os.path.getsize(fpath))
-            frpath = util.removepathprefix(install_dir, fpath) # relative path
-            files.append(FileInfo(frpath, ftype, fsize, fhash))
-
         files.write(os.path.join(self.ctx.pkg_dir(), const.files_xml))
 
     def buildPackages(self):
         """Build each package defined in PSPEC file. After this process there
         will be .pisi files hanging around, AS INTENDED ;)"""
         for package in self.spec.packages:
+
+            c = os.getcwd()
+	    
+            # add comar files to package
+            os.chdir(self.pspecDir)
+            for pcomar in package.providesComar:
+                fname = os.path.join(const.comar_dir,
+                                     pcomar.script)
+                pkg.add_to_package(fname)
+
+            # store additional files
+            install_dir = self.ctx.pkg_dir() + const.install_dir_suffix
+            for afile in package.additionalFiles:
+                src = os.path.join(const.files_dir, afile.filename)
+                dest = os.path.join(install_dir + afile.target)
+                if not afile.fileas:
+                    util.copy_file(src, dest, fileas=afile.filename)
+                    dest += afile.filename
+                else:
+                    util.copy_file(src, dest, fileas=afile.fileas)
+                    dest += afile.fileas
+                if afile.permission:
+                    os.chmod(dest, int(afile.permission) | 0777)
+	
+            os.chdir(c)
+
             ui.action("** Building package %s\n" % package.name);
             
             ui.action("Generating %s..." % const.metadata_xml)
@@ -259,26 +276,10 @@ class PisiBuild:
             ui.action("Creating PISI package %s\n" % name)
             
             pkg = Package(name, 'w')
-            c = os.getcwd()
-
-            # add comar files to package
-            os.chdir(self.pspecDir)
-            for pcomar in package.providesComar:
-                fname = os.path.join(const.comar_dir,
-                                     pcomar.script)
-                pkg.add_to_package(fname)
-
-            # store additional files
-            install_dir = self.ctx.pkg_dir() + const.install_dir_suffix
-            for afile in package.additionalFiles:
-                src = os.path.join(const.files_dir, afile.filename)
-                dest = os.path.join(install_dir + afile.target, afile.filename)
-                util.copy_file(src, dest)
-                if afile.permission:
-                    os.chmod(dest, afile.permission)
 
             # add xmls and files
             os.chdir(self.ctx.pkg_dir())
+	    
             pkg.add_to_package(const.metadata_xml)
             pkg.add_to_package(const.files_xml)
 

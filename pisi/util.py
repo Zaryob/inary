@@ -166,11 +166,14 @@ def dir_size(dir):
             yield sum([getsize(join(root, name)) for name in files if not islink(join(root,name))])
     return sum( sizes() )
 
-def copy_file(src,dest):
+def copy_file(src, dest, fileas=''):
     """copy source file to destination file"""
     check_file(src)
     check_dir(os.path.dirname(dest))
-    shutil.copyfile(src, dest)
+    if not fileas:
+        shutil.copyfile(src, dest)
+    else:
+        shutil.copyfile(src, dest + '/' + fileas)
 
 def get_file_hashes(top, excludePrefixes=None, removePrefix=None):
     """Generator function iterates over a toplevel path and returns the
