@@ -3,7 +3,7 @@
 # for python 2.3 compatibility
 import sys
 ver = sys.version_info
-if ver[0] == 2 and ver[1] == 4:
+if ver[0] <= 2 and ver[1] < 4:
     from sets import Set as set
 
 class CycleError:

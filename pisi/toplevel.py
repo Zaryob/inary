@@ -1,7 +1,11 @@
 # top level PISI interfaces
 # a facade to the entire PISI system
 
-import os, sys
+import os
+import sys
+ver = sys.version_info
+if ver[0] <= 2 and ver[1] < 4:
+    from sets import Set as set
 
 from config import config
 from constants import const
@@ -21,6 +25,7 @@ def install(packages):
 
 def install_pkg_files(packages):
     """install a number of pisi package files"""
+    from package import Package
 
     # read the package information into memory first
     # regardless of which distribution they come from
