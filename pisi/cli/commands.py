@@ -216,7 +216,6 @@ class UpdateRepo(Command):
     def run(self):
         self.init_db()
         for repo in self.args:
-            pisi.ui.info('Updating repository ' + repo + '\n')
             pisi.toplevel.update_repo(repo)
 
 class AddRepo(Command):

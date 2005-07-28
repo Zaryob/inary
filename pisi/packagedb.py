@@ -15,6 +15,9 @@ import util
 from config import config
 from bsddb import db
 
+class PackageDBError:
+    pass
+
 class PackageDB(object):
     """PackageDB class provides an interface to the package database with
     a delegated dbshelve object"""
@@ -38,9 +41,6 @@ class PackageDB(object):
         name = str(name)
         return self.d[name]
 
-    def list(self):
-        return self.d.keys()
-
     def add_package(self, package_info):
         name = str(package_info.name)
         self.d[name] = package_info
@@ -52,20 +52,31 @@ class PackageDB(object):
         name = str(name)
         del self.d[name]
 
+
 packagedbs = {}
 
 def add_db(name):
     packagedbs[name] = PackageDB(name)
 
 def get_db(name):
-    return packagesdb[name]
+    return packagedbs[name]
 
 def remove_db(name):
     del packagedbs[name]
-    # erase database file
+    #erase database file
 
-#def has_package
-#def get_package
+def has_package(name):
+    for repo in packagedbs.keys():
+        if get_db(repo).has_package(name):
+            return True
+    return False
+
+def get_package(name):
+    for repo in packagedbs.keys():
+        if get_db(repo).has_package(name):
+            return get_db(repo).get_package(name)
+    raise PackageDBError('get_package: package ' + name + ' not found')
+
 #def remove_package
 
 inst_packagedb = PackageDB('local')

@@ -111,13 +111,9 @@ def remove_repo(name):
 
 def update_repo(repo):
 
-    if not indexfile:
-        repos_path = config.values.repos[repo]
-        indexfile = os.path.join(repos_path, const.pisi_index)
-
     ui.info('* Updating repository: %s\n' % repo)
     index = Index()
-    index.read(repodb.get_repo(repo).indexuri.uri())
+    index.read(repodb.get_repo(repo).indexuri.getUri())
     index.update_db(repo)
     ui.info('* Package db updated.\n')
 
