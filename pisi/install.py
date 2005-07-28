@@ -11,6 +11,7 @@ from constants import const
 from ui import ui
 from installdb import installdb
 import packagedb
+from packagedb import inst_packagedb
 import dependency
 from metadata import MetaData
 import comariface

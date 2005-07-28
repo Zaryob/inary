@@ -6,7 +6,7 @@ from config import config
 from constants import const
 from ui import ui
 from purl import PUrl
-import util
+import util, packagedb
 
 # single package operations
 
@@ -36,8 +36,8 @@ def remove_single(package_name):
     inst_packagedb.remove_package(package_name)
     removeScripts(package_name)
 
-# TODO: repository'den okuma isi yas burada, bu degisecek
 def install_single(pkg):
+    """install a single package from URI or ID"""
     url = PUrl(pkg)
     # Check if we are dealing with a remote file or a real path of
     # package filename. Otherwise we'll try installing a package from
@@ -45,30 +45,23 @@ def install_single(pkg):
     if url.isRemoteFile() or os.path.exists(url.uri):
         install_single_package(pkg)
     else:
-        from os.path import join
+        install_single_name(pkg)
 
-        # TODO: tabii burada repodb falan kullanilmali cok inefficient
-        (repo, index) = util.repo_index()
-
-        # search pkg in index for it's presence in repository
-        # TODO: normalde hicbir zaman boyle linear search yapilmamali
-        # buyuk olabilecek listeler uzerinden
-        for package in index.packages:
-            if package.name == pkg:
-                version = package.history[0].version
-                release = package.history[0].release
-
-                name = util.package_name(pkg, version, release)
-                package_uri = join(repo, name[0], name)
-
-                ui.info("Installing %s from repository %s\n" %(name, repo))
-                install_package(package_uri)
-                return
-        ui.error("Package %s not found in the index file.\n" %pkg)
-
-def install_single_package(pkg_location):
+def install_single_uri(pkg_location):
     from install import Installer
     Installer(pkg_location).install()
+
+def install_single_name(name):
+    """install a single package from ID"""
+    # find package in repository
+    repo = packagedb.which_repo(name)
+    if repo:
+        pkg = packagedb.get_package(name)
+        ui.info("Installing %s from repository %s\n" %(name, repo))
+        ui.debug("Package URI: %s\n" % pkg.packageURI)
+        install_single_uri(pkg.packageURI)
+    else:
+        ui.error("Package %s not found in the repository file.\n" % pkg)
 
 # deneme, don't remove ulan
 class AtomicOperation(object):

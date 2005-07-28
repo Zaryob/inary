@@ -6,12 +6,14 @@ import packagedb
 from ui import ui
 from version import Version
 
-def satisfiesDep(pkg, depinfo):
+def satisfiesDep(pkg_name, depinfo):
     """determine if a package satisfies given dependency spec"""
+    if not installdb.is_installed(pkg_name):
+        return False
     if not installdb.is_installed(depinfo.package):
         return False
     else:
-        (version, release) = installdb.get_info(pkg)
+        (version, release) = installdb.get_version(pkg_name)
         ret = True
         if depinfo.versionFrom:
             ret &= Version(version) >= Version(depinfo.versionFrom)
@@ -28,9 +30,12 @@ def runtimeDeps(pkg):
 
 def satisfiesRuntimeDeps(pkg):
     deps = runtimeDeps(pkg)
-#    print 'runtimedeps = ', deps
-    return reduce(lambda x,y:x and y,
-                  map(lambda x: satisfiesDep(pkg, x), deps),True)
+    for dep in deps:
+        if not satisfiesDep(pkg, dep):
+            ui.error('Package %s does not satisfy dependency %s\n' %
+                     (pkg,dep.package))
+            return False
+    return True
 
 def installable(pkg):
     """calculate if pkg is installable currently 
@@ -41,6 +46,6 @@ def installable(pkg):
     elif satisfiesRuntimeDeps(pkg):
         return True
     else:
-        ui.info("package " + pkg + " does not satisfy dependencies\n");
+        #ui.info("package " + pkg + " does not satisfy dependencies\n");
         return False
 

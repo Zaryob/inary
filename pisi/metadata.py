@@ -67,7 +67,6 @@ class PackageInfo(specfile.PackageInfo):
         ret = ret and self.distribution!=None
         ret = ret and self.distributionRelease!=None
         ret = ret and self.architecture!=None and self.installedSize!=None
-        ret = ret and self.packageURI!=None
         return ret
 
     def __str__(self):

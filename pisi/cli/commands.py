@@ -200,8 +200,7 @@ class ListInstalled(Command):
         self.init_db()
         from pisi.installdb import installdb
         for pkg in installdb.list_installed():
-            from pisi.packagedb import packagedb
-            package = packagedb.get_package(pkg)
+            package = pisi.packagedb.get_package(pkg)
             if not self.options.long:
                 print package.name, '-', package.summary
             else:

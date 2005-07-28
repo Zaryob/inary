@@ -71,6 +71,12 @@ def has_package(name):
             return True
     return False
 
+def which_repo(name):
+    for repo in packagedbs.keys():
+        if get_db(repo).has_package(name):
+            return repo
+    return None
+
 def get_package(name):
     for repo in packagedbs.keys():
         if get_db(repo).has_package(name):

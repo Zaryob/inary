@@ -77,6 +77,8 @@ def install_pkg_names(A):
     l = G_f.topological_sort()
     l.reverse()
     print l
+    for x in l:
+        operations.install_single_name(x)
 
 def remove(packages):
     #TODO: this for loop is just a placeholder
