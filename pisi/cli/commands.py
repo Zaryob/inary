@@ -266,6 +266,10 @@ TODO: Some description...
         super(UpdateRepo, self).__init__()
 
     def run(self):
+        if not self.args:
+            self.help()
+            return
+
         self.init_db()
         for repo in self.args:
             pisi.toplevel.update_repo(repo)
