@@ -150,10 +150,9 @@ class Info(Command):
 
     def printinfo(self, arg):
         import os.path
-        from pisi.toplevel import info
 
         if os.path.exists(arg):
-            metadata, files = info(arg)
+            metadata, files = pisi.toplevel.info(arg)
             print metadata.package
 
 class Index(Command):
@@ -182,10 +181,19 @@ class ListInstalled(Command):
     def __init__(self):
         super(ListInstalled, self).__init__()
 
+    def options(self):
+        self.parser.add_option("-l", "--long", action="store_true",
+                               default=False, help="show in long format")
+
     def run(self):
         from pisi.installdb import installdb
         for pkg in installdb.list_installed():
-            print pkg
+            from pisi.packagedb import packagedb
+            package = packagedb.get_package(pkg)
+            if not self.options.long:
+                print package.name, '-', package.summary
+            else:
+                print package
 
 class UpdateDB(Command):
     """updatedb: update source and package databases"""
@@ -210,6 +218,8 @@ class ListAvailable(Command):
 
     def run(self):
         from pisi import util
+        # FIXME: bu asagidaki code bayagi anlamsiz
+        # neden bir packagedb'miz var?
         (repo, index) = util.repo_index()
 
         for package in index.packages:
