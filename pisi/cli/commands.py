@@ -1,3 +1,5 @@
+# -*- coding:utf-8 -*-
+
 import sys
 from optparse import OptionParser
 import pisi
@@ -13,7 +15,7 @@ def cmdObject(cmd, fail=False):
                 "info": Info,
                 "install": Install,
                 "list-installed": ListInstalled,
-                "list-available": ListAvailable,
+#                "list-available": ListAvailable,
                 "search-available": SearchAvailable,
                 "remove": Remove,
                 "index": Index,
@@ -83,7 +85,16 @@ class Command(object):
         print getattr(self, "__doc__")
 
 class Help(Command):
-    """prints usage"""
+    """Prints usage
+
+    Usage:
+    help [command-name]
+
+If run without parameters will print the general usage documentation.
+
+If run with a command name as the parameter will print the documentation
+for that command.
+"""
     def __init__(self):
         super(Help, self).__init__()
 
@@ -99,7 +110,14 @@ class Help(Command):
 #            print "\n",self.parser.format_option_help()
                 
 class Build(Command):
-    """build: compile PISI package using a pspec.xml file"""
+    """Build a PISI package using a pspec.xml file
+
+    Usage:
+    build pspec.xml
+
+You can give an URI of the pspec.xml file. PISI will
+fetch all necessary files and build the package for you.
+"""
     def __init__(self):
         super(Build, self).__init__()
 
@@ -112,7 +130,15 @@ class Build(Command):
             pisi.toplevel.build(arg, self.authInfo)
 
 class Install(Command):
-    """install: install PISI packages"""
+    """Install PISI packages
+
+    Usage:
+    install package
+
+You can give an URI of the pisi package. Or you can just give a
+package name and choose to install a package from the defined
+repositories (with add-repo).
+"""
     def __init__(self):
         super(Install, self).__init__()
 
@@ -129,7 +155,13 @@ class Install(Command):
         pisi.toplevel.install(self.args)
 
 class Remove(Command):
-    """remove: remove PISI packages"""
+    """Remove PISI packages
+
+    Usage:
+    remove package-name
+
+Remove a package from your system. Just give the package name to remove.
+"""
     def __init__(self):
         super(Remove, self).__init__()
 
@@ -146,8 +178,13 @@ class Remove(Command):
         pisi.toplevel.remove(self.args)
 
 class Info(Command):
-    """info: display information about a package 
-    usage: info <package> ..."""
+    """Display information about a package 
+
+    Usage: 
+    info <package>
+
+TODO: Some description...
+"""
     def __init__(self):
         super(Info, self).__init__()
 
@@ -167,7 +204,13 @@ class Info(Command):
             print metadata.package
 
 class Index(Command):
-    """index: Index PISI files in a given directory"""
+    """Index PISI files in a given directory
+
+    Usage:
+    index directory
+
+TODO: Some description...
+"""
     def __init__(self):
         super(Index, self).__init__()
 
@@ -186,8 +229,13 @@ class Index(Command):
             return
 
 class ListInstalled(Command):
-    """list-installed: print a list of all installed packages  
-    usage: list-installed """
+    """Print the list of all installed packages  
+
+    Usage:
+    list-installed
+
+TODO: Some description...
+"""
 
     def __init__(self):
         super(ListInstalled, self).__init__()
@@ -207,8 +255,13 @@ class ListInstalled(Command):
                 print package
 
 class UpdateRepo(Command):
-    """update-repo: update the databases of a repository
-    usage: update-repo <repo1> <repo2> ...."""
+    """Update the databases of a repository
+
+    Usage:
+    update-repo <repo1> <repo2>
+
+TODO: Some description...
+"""
     def __init__(self):
         super(UpdateRepo, self).__init__()
 
@@ -218,8 +271,13 @@ class UpdateRepo(Command):
             pisi.toplevel.update_repo(repo)
 
 class AddRepo(Command):
-    """add-repo: add a repository
-    usage: add-repo <repo> <indexuri>"""
+    """Add a repository
+
+    Usage:
+    add-repo <repo> <indexuri>
+
+TODO: Some description...
+"""
     def __init__(self):
         super(AddRepo, self).__init__()
 
@@ -234,8 +292,13 @@ class AddRepo(Command):
             return
 
 class RemoveRepo(Command):
-    """remove-repo: remove a repository
-    usage: remove-repo <repo>"""
+    """Remove a repository
+
+    Usage:
+    remove-repo <repo>
+
+TODO: Some description...
+"""
     def __init__(self):
         super(RemoveRepo, self).__init__()
 
@@ -249,7 +312,13 @@ class RemoveRepo(Command):
             return
 
 class ListRepo(Command):
-    """list-repo: list repositories"""
+    """List repositories
+
+    Usage:
+    list-repo
+
+TODO: Some description...
+"""
     def __init__(self):
         super(ListRepo, self).__init__()
 
@@ -286,7 +355,13 @@ class ListRepo(Command):
 #             print util.package_name(name, version, release)
 
 class SearchAvailable(Command):
-    "search-available: search in available packages"
+    "Search in available packages
+
+    Usage:
+    search-available <search pattern>
+
+TODO: Some description...
+"
     pass
 
         
