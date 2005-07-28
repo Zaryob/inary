@@ -355,13 +355,13 @@ TODO: Some description...
 #             print util.package_name(name, version, release)
 
 class SearchAvailable(Command):
-    "Search in available packages
+    """Search in available packages
 
     Usage:
     search-available <search pattern>
 
 TODO: Some description...
-"
+"""
     pass
 
         
