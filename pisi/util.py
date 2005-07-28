@@ -255,14 +255,3 @@ def partition_freespace(directory):
 def package_name(name, version, release):
     return  name + '-' + version + '-' + release + const.package_prefix
 
-def repo_index(reponame = "default"):
-    "return a par (url, IndexObj) for the given repository"
-    from index import Index
-
-    repourl = config.values.repos[reponame]
-
-    index = Index()
-    indexpath = os.path.join(config.index_dir(),
-                             reponame, const.pisi_index)
-    index.read(indexpath)
-    return (repourl, index)

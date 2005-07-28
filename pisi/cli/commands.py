@@ -260,24 +260,30 @@ class ListRepo(Command):
             print repo
             print '  ', repodb.get_repo(repo).indexuri.getUri()
 
-class ListAvailable(Command):
-    "list-available: list the available packages in the repository"
-    def __init__(self):
-        super(ListAvailable, self).__init__()
+# FIXME: Bu fonksiyonun başka bir şekilde implement edilmesi
+# gerekiyor. Şu anda zaten çalışmıyor.
+#
+# Uyarı: Eğer yaptığınız bir değişiklik bir fonksiyonu geçersiz
+# kılıyorsa, lütfen fonksiyonu comment-out edin. Ve nedenlerini yazın.
+#
+# class ListAvailable(Command):
+#     "list-available: list the available packages in the repository"
+#     def __init__(self):
+#         super(ListAvailable, self).__init__()
 
-    def run(self):
-        self.init_db()
-        from pisi import util
-        # FIXME: bu asagidaki code bayagi anlamsiz
-        # neden bir packagedb'miz var?
-        (repo, index) = util.repo_index()
+#     def run(self):
+#         self.init_db()
+#         from pisi import util
+#         # FIXME: bu asagidaki code bayagi anlamsiz
+#         # neden bir packagedb'miz var?
+#         (repo, index) = util.repo_index()
 
-        for package in index.packages:
-            name = package.name
-            version = package.history[0].version
-            release = package.history[0].release
+#         for package in index.packages:
+#             name = package.name
+#             version = package.history[0].version
+#             release = package.history[0].release
 
-            print util.package_name(name, version, release)
+#             print util.package_name(name, version, release)
 
 class SearchAvailable(Command):
     "search-available: search in available packages"

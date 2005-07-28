@@ -10,9 +10,6 @@
 #[general]
 #destinationdirectory = /tmp
 #
-#[repos]
-#default = http://cekirdek.uludag.org.tr/pisi/
-#
 #[build]
 #host = i686-pc-linux-gnu
 #CFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
@@ -40,10 +37,6 @@ class GeneralDefaults:
     distribution = "Pardus"
     distribution_release = "0.1"
 
-class ReposDefaults:
-    # No default repository in the code!
-    pass
-
 class BuildDefaults:
     """Default values for [build] section"""
     host = "i686-pc-linux-gnu"
@@ -69,8 +62,6 @@ class ConfigurationSection(object):
         
         if section == "general":
             self.defaults = GeneralDefaults
-        elif section == "repos":
-            self.defaults = ReposDefaults
         elif section == "build":
             self.defaults = BuildDefaults
         elif section == "directories":
@@ -115,12 +106,6 @@ class ConfigurationFile(object):
         except NoSectionError:
             generalitems = []
         self.general = ConfigurationSection("general", generalitems)
-
-        try:
-            repositems = parser.items("repos")
-        except NoSectionError:
-            repositems = []
-        self.repos = ConfigurationSection("repos", repositems)
 
         try:
             builditems = parser.items("build")
