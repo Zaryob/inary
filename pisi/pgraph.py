@@ -19,7 +19,7 @@ class PGraph(digraph):
         if not pkg in self.vertices():
             pkg2 = packagedb.get_package(depinfo.package)
 
-        self.add_edge(pkg, depinfo.package, ('d', depinfo),
+        self.add_edge(str(pkg), str(depinfo.package), ('d', depinfo),
                       (pkg1.version, pkg1.release),
                       (pkg2.version, pkg2.release) )
 
@@ -31,7 +31,7 @@ class PGraph(digraph):
         if not pkg in self.vertices():
             pkg2 = packagedb.get_package(depinfo.package)
 
-        self.add_biedge(pkg, conflinfo.package, ('c', conflinfo)
+        self.add_biedge(str(pkg), str(conflinfo.package), ('c', conflinfo)
                         (pkg1.version, pkg1.release),
                         (pkg2.version, pkg2.release) )
 

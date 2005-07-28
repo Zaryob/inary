@@ -58,6 +58,7 @@ def install_pkg_names(A):
 
     # find the "install closure" graph of G_f by package 
     # set A using packagedb
+    print A
     B = A
     state = {}
     while len(B) > 0:
@@ -73,7 +74,9 @@ def install_pkg_names(A):
                     G_f.add_dep(x, dep)
         B = Bp
     G_f.write_graphviz(sys.stdout)
-
+    l = G_f.topological_sort()
+    l.reverse()
+    print l
 
 def remove(packages):
     #TODO: this for loop is just a placeholder
