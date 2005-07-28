@@ -17,6 +17,8 @@ class SourceInfo:
             self.name = getNodeText(node, "Name")
             self.homepage = getNodeText(node, "HomePage")
             self.packager = specfile.PackagerInfo(getNode(node, "Packager"))
+        else:
+            self.homepage = None
 
     def elt(self, xml):
         node = xml.newNode("Source")
@@ -33,24 +35,40 @@ class SourceInfo:
 
 class PackageInfo(specfile.PackageInfo):
 
-    def __init__(self, node=None):
+    def __init__(self, node = None):
         if node:
             specfile.PackageInfo.__init__(self, node)
+            self.version = getNodeText(node, "Version")
+            self.release = getNodeText(node, "Release")
+            self.build = int(getNodeText(node, "Build"))
             self.distribution = getNodeText(node, "Distribution")
             self.distributionRelease = getNodeText(node, "DistributionRelease")
             self.architecture = getNodeText(node, "Architecture")
             self.installedSize = int(getNodeText(node, "InstalledSize"))
+            self.packageURI = getNodeText(node, "PackageURI")
+        else:
+            self.packageURI = None
 
     def elt(self, xml):
         node = specfile.PackageInfo.elt(self, xml)
+        xml.addTextNodeUnder(node, "Version", self.version)
+        xml.addTextNodeUnder(node, "Release", self.release)
+        xml.addTextNodeUnder(node, "Build", str(self.build))
         xml.addTextNodeUnder(node, "Distribution", self.distribution)
         xml.addTextNodeUnder(node, "DistributionRelease", self.distributionRelease)
         xml.addTextNodeUnder(node, "Architecture", self.architecture)
         xml.addTextNodeUnder(node, "InstalledSize", str(self.installedSize))
+        if self.packageURI:
+            xml.addTextNodeUnder(node, "PackageURI", str(self.packageURI))
         return node
 
     def verify(self):
-        return specfile.PackageInfo.verify(self)
+        ret = specfile.PackageInfo.verify(self) and self.build!=None
+        ret = ret and self.distribution!=None
+        ret = ret and self.distributionRelease!=None
+        ret = ret and self.architecture!=None and self.installedSize!=None
+        ret = ret and self.packageURI!=None
+        return ret
 
     def __str__(self):
         s = specfile.PackageInfo.__str__(self)
@@ -82,15 +100,17 @@ class MetaData(XmlFile):
         self.package.providesComar = pkg.providesComar
         self.package.requiresComar = pkg.requiresComar
         self.package.additionalFiles = pkg.additionalFiles
-        
+
+        # FIXME: right way to do it?
+        self.source.version = src.version
+        self.source.release = src.release
+        self.package.version = src.version
+        self.package.release = src.release
 
     def read(self, filename):
         self.readxml(filename)
         self.source = SourceInfo(self.getNode("Source"))
         self.package = PackageInfo(self.getNode("Package"))
-
-        self.package.version = self.package.history[0].version
-        self.package.release = self.package.history[0].release
 
     def write(self, filename):
         self.newDOM()

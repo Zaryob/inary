@@ -196,6 +196,10 @@ class PisiBuild:
         some additional information."""
         metadata = MetaData()
         metadata.fromSpec(self.spec.source, package)
+
+        # FIXME: MEREEEEEN :)
+        metadata.package.build = 0 # BOGUS. WRONG.
+        
         metadata.package.distribution = config.values.general.distribution
         metadata.package.distributionRelease = config.values.general.distribution_release
         metadata.package.architecture = "Any"

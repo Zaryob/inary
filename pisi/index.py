@@ -50,11 +50,12 @@ class Index(XmlFile):
         self.writexml(filename)
         self.unlink()
         
-    def index(self, repo_dir):
+    def index(self, repo_uri):
+        self.repo_dir = repo_uri
 
         import os
         from os.path import join, getsize
-        for root, dirs, files in os.walk(repo_dir):
+        for root, dirs, files in os.walk(repo_uri):
             for fn in files:
                 if fn.endswith('.pisi'):
                     ui.info('Adding ' + fn + ' to package index\n')
@@ -73,6 +74,8 @@ class Index(XmlFile):
 
         md = metadata.MetaData()
         md.read(config.install_dir() + '/metadata.xml')
+        # TODO: in the future we'll do all of this with purl/pfile/&helpers
+        md.package.packageURI = path
         # check package semantics
         if md.verify():
             self.packages.append(md.package)

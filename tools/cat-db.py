@@ -5,6 +5,10 @@
 import sys
 import bsddb.dbshelve as shelve
 
+sys.path.append('.')
+
+import pisi
+
 d = shelve.open( sys.argv[1] )
 
 for (k, data) in d.iteritems():

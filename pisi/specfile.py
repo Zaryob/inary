@@ -16,9 +16,10 @@ from xmlfile import XmlFile
 from ui import ui
 
 class PackagerInfo:
-    def __init__(self, node):
-        self.name = getNodeText(getNode(node, "Name"))
-        self.email = getNodeText(getNode(node, "Email"))
+    def __init__(self, node = None):
+        if node:
+            self.name = getNodeText(getNode(node, "Name"))
+            self.email = getNodeText(getNode(node, "Email"))
 
     def elt(self, xml):
         node = xml.newNode("Packager")
@@ -32,11 +33,14 @@ class PackagerInfo:
         return True
 
 class AdditionalFileInfo:
-    def __init__(self, node):
-        self.filename = getNodeText(node)
-        self.target = getNodeAttribute(node, "target")
-        self.permission = getNodeAttribute(node, "permission")
-        self.owner = getNodeAttribute(node, "owner")
+    def __init__(self, node = None):
+        if node:
+            self.filename = getNodeText(node)
+            self.target = getNodeAttribute(node, "target")
+            self.permission = getNodeAttribute(node, "permission")
+            self.owner = getNodeAttribute(node, "owner")
+        else:
+            self.permission = self.owner = None
 
     def elt(self, xml):
         node = xml.newNode("AdditionalFile")
@@ -53,18 +57,25 @@ class AdditionalFileInfo:
         return True
 
 class PatchInfo:
-    def __init__(self, node):
-        self.filename = getNodeText(node)
-        self.compressionType = getNodeAttribute(node, "compressionType")
-        self.level = getNodeAttribute(node, "level")
+    def __init__(self, node = None):
+        if node:
+            self.filename = getNodeText(node)
+            self.compressionType = getNodeAttribute(node, "compressionType")
+            self.level = getNodeAttribute(node, "level")
+        else:
+            self.compressionType = None
         if not self.level:
             self.level = 0
+        else:
+            self.level = int(self.level)
 
     def elt(self, xml):
         node = xml.newNode("Patch")
         xml.addText(node, self.filename)
         if self.compressionType:
             node.setAttribute("compressionType", self.compressionType)
+        if self.level:
+            node.setAttribute("level", self.level)            
         return node
 
     def verify(self):
@@ -72,10 +83,16 @@ class PatchInfo:
         return True
 
 class DepInfo:
-    def __init__(self, node):
-        self.package = getNodeText(node).strip()
-        self.versionFrom = getNodeAttribute(node, "versionFrom")
-        self.versionTo = getNodeAttribute(node, "versionTo")
+    def __init__(self, node = None):
+        if node:
+            self.package = getNodeText(node).strip()
+            self.versionFrom = getNodeAttribute(node, "versionFrom")
+            self.versionTo = getNodeAttribute(node, "versionTo")
+            self.releaseFrom = getNodeAttribute(node, "releaseFrom")
+            self.releaseTo = getNodeAttribute(node, "releaseTo")
+        else:
+            self.versionFrom = self.versionTo = None
+            self.releaseFrom = self.releaseFrom = None
 
     def elt(self, xml):
         node = xml.newNode("Dependency")
@@ -84,6 +101,10 @@ class DepInfo:
             node.setAttribute("versionFrom", self.versionFrom)
         if self.versionTo:
             node.setAttribute("versionTo", self.versionTo)
+        if self.releaseFrom:
+            node.setAttribute("releaseFrom", self.versionFrom)
+        if self.releaseTo:
+            node.setAttribute("releaseTo", self.versionTo)
         return node
 
     def verify(self):
@@ -91,11 +112,14 @@ class DepInfo:
         return True
 
 class UpdateInfo:
-    def __init__(self, node):
-        self.date = getNodeText(getNode(node, "Date"))
-        self.version = getNodeText(getNode(node, "Version"))
-        self.release = getNodeText(getNode(node, "Release"))
-        self.type = getNodeText(getNode(node, "Type"))
+    def __init__(self, node = None):
+        if node:
+            self.date = getNodeText(getNode(node, "Date"))
+            self.version = getNodeText(getNode(node, "Version"))
+            self.release = getNodeText(getNode(node, "Release"))
+            self.type = getNodeText(getNode(node, "Type"))
+        else:
+            self.type = None
 
     def elt(self, xml):
         node = xml.newNode("Update")
@@ -113,9 +137,10 @@ class UpdateInfo:
         return True
 
 class PathInfo:
-    def __init__(self, node):
-        self.pathname = getNodeText(node)
-        self.fileType = getNodeAttribute(node, "fileType")
+    def __init__(self, node = None):
+        if node:
+            self.pathname = getNodeText(node)
+            self.fileType = getNodeAttribute(node, "fileType")
         if not self.fileType:
             self.fileType = "other"
 
@@ -130,9 +155,10 @@ class PathInfo:
         return True
 
 class ComarProvide:
-    def __init__(self, node):
-        self.om = getNodeText(node)
-        self.script=getNodeAttribute(node, "script")
+    def __init__(self, node = None):
+        if node:
+            self.om = getNodeText(node)
+            self.script=getNodeAttribute(node, "script")
 
     def elt(self, xml):
         node = xml.newNode("COMAR")
@@ -148,27 +174,30 @@ class ComarProvide:
 class SourceInfo:
     """A structure to hold source information. Source information is
     located under <Source> tag in PSPEC file."""
-    def __init__(self, node):
-        self.name = getNodeText(node, "Name")
-        self.homepage = getNodeText(node, "HomePage")
-        self.packager = PackagerInfo(getNode(node, "Packager"))
-        self.summary = getNodeText(node, "Summary")
-        self.description = getNodeText(node, "Description")
-        self.license = map(getNodeText, getAllNodes(node, "License"))
-        self.isa = map(getNodeText, getAllNodes(node, "IsA"))
-        self.partof = getNodeText(node, "PartOf")
-        archiveNode = getNode(node, "Archive")
-        self.archiveUri = getNodeText(archiveNode).strip()
-        self.archiveName = basename(self.archiveUri)
-        self.archiveType = getNodeAttribute(archiveNode, "type")
-        self.archiveSHA1 = getNodeAttribute(archiveNode, "sha1sum")
-        patchElts = getAllNodes(node, "Patches/Patch")
-        self.patches = [PatchInfo(p) for p in patchElts]
-        buildDepElts = getAllNodes(node, "BuildDependencies/Dependency")
-        self.buildDeps = [DepInfo(d) for d in buildDepElts]
-        historyElts = getAllNodes(node, "History/Update")
-        self.history = [UpdateInfo(x) for x in historyElts]
-
+    def __init__(self, node = None):
+        if node:
+            self.name = getNodeText(node, "Name")
+            self.homepage = getNodeText(node, "HomePage")
+            self.packager = PackagerInfo(getNode(node, "Packager"))
+            self.summary = getNodeText(node, "Summary")
+            self.description = getNodeText(node, "Description")
+            self.license = map(getNodeText, getAllNodes(node, "License"))
+            self.isa = map(getNodeText, getAllNodes(node, "IsA"))
+            self.partof = getNodeText(node, "PartOf")
+            archiveNode = getNode(node, "Archive")
+            self.archiveUri = getNodeText(archiveNode).strip()
+            self.archiveName = basename(self.archiveUri)
+            self.archiveType = getNodeAttribute(archiveNode, "type")
+            self.archiveSHA1 = getNodeAttribute(archiveNode,
+                                                "sha1sum")
+            patchElts = getAllNodes(node, "Patches/Patch")
+            self.patches = [PatchInfo(p) for p in patchElts]
+            buildDepElts = getAllNodes(node,
+                                       "BuildDependencies/Dependency")
+            self.buildDeps = [DepInfo(d) for d in buildDepElts]
+            historyElts = getAllNodes(node, "History/Update")
+            self.history = [UpdateInfo(x) for x in historyElts]
+        
     def elt(self, xml):
         node = xml.newNode("Source")
         xml.addTextNodeUnder(node, "Name", self.name)
@@ -198,9 +227,8 @@ class SourceInfo:
         if not self.description: return False
         if not self.packager: return False
         if not self.license: return False
-        if not self.archiveUri or \
-                not self.archiveType or \
-                not self.archiveSHA1: return False
+        if (not self.archiveUri) or (not self.archiveType): return False
+        if not self.archiveSHA1: return False
         if len(self.history) <= 0: return False
         
         if not self.packager.verify(): return False
@@ -217,26 +245,27 @@ class PackageInfo(object):
     """A structure to hold package information. Package information is
     located under <Package> tag in PSPEC file. Opposite to Source each
     PSPEC file can have more than one Package tag."""
-    def __init__(self, node):
-        self.name = getNodeText(node, "Name")
-        self.summary = getNodeText(node, "Summary")
-        self.description = getNodeText(node, "Description")
-        self.isa = map(getNodeText, getAllNodes(node, "IsA"))
-        self.partof = getNodeText(node, "PartOf")
-        self.license = map(getNodeText, getAllNodes(node, "License"))
-        rtDepElts = getAllNodes(node, "RuntimeDependencies/Dependency")
-        self.runtimeDeps = [DepInfo(x) for x in rtDepElts]
-        self.paths = [PathInfo(x) for x in getAllNodes(node, "Files/Path")]
-        historyElts = getAllNodes(node, "History/Update")
-        self.history = [UpdateInfo(x) for x in historyElts]
-        conflElts = getAllNodes(node, "Conflicts/Package")
-        self.conflicts = map(getNodeText, conflElts)
-        provComarElts = getAllNodes(node, "Provides/COMAR")
-        self.providesComar = [ComarProvide(x) for x in provComarElts]
-        reqComarElts = getAllNodes(node, "Requires/COMAR")
-        self.requiresComar = map(getNodeText, reqComarElts)
-        aFilesElts = getAllNodes(node, "AdditionalFiles/AdditionalFile")
-        self.additionalFiles = [AdditionalFileInfo(f) for f in aFilesElts]
+    def __init__(self, node = None):
+        if node:
+            self.name = getNodeText(node, "Name")
+            self.summary = getNodeText(node, "Summary")
+            self.description = getNodeText(node, "Description")
+            self.isa = map(getNodeText, getAllNodes(node, "IsA"))
+            self.partof = getNodeText(node, "PartOf")
+            self.license = map(getNodeText, getAllNodes(node, "License"))
+            rtDepElts = getAllNodes(node, "RuntimeDependencies/Dependency")
+            self.runtimeDeps = [DepInfo(x) for x in rtDepElts]
+            self.paths = [PathInfo(x) for x in getAllNodes(node, "Files/Path")]
+            historyElts = getAllNodes(node, "History/Update")
+            self.history = [UpdateInfo(x) for x in historyElts]
+            conflElts = getAllNodes(node, "Conflicts/Package")
+            self.conflicts = map(getNodeText, conflElts)
+            provComarElts = getAllNodes(node, "Provides/COMAR")
+            self.providesComar = [ComarProvide(x) for x in provComarElts]
+            reqComarElts = getAllNodes(node, "Requires/COMAR")
+            self.requiresComar = map(getNodeText, reqComarElts)
+            aFilesElts = getAllNodes(node, "AdditionalFiles/AdditionalFile")
+            self.additionalFiles = [AdditionalFileInfo(f) for f in aFilesElts]
 
     def elt(self, xml):
         node = xml.newNode("Package")
@@ -283,6 +312,7 @@ class PackageInfo(object):
     def __str__(self):
         s = 'Name: ' + self.name
         s += '\nSummary: ' + self.summary
+        s += '\nDescription: ' + self.description
         return s
 
 class SpecFile(XmlFile):

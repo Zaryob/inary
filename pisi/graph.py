@@ -1,7 +1,10 @@
 # the most simple minded digraph class ever
 
 # for python 2.3 compatibility
-from sets import Set as set
+import sys
+ver = sys.version_info
+if ver[0] == 2 and ver[1] == 4:
+    from sets import Set as set
 
 class CycleError:
     pass
@@ -12,7 +15,7 @@ class digraph(object):
         self.__v = set()
         self.__adj = {}
         self.__vdata = {}
-        #self.__edata = {}
+        self.__edata = {}
         
     def vertices(self):
         "return set of vertex descriptors"
@@ -38,21 +41,30 @@ class digraph(object):
         self.__adj[u] = set()
         if data:
             self.__vdata[u] = data
+            self.__edata[u] = {}
 
-    def add_edge(self, u, v, edata = None):
+    def add_edge(self, u, v, edata = None, udata = None, vdata = None):
         "add edge u -> v"
         if not u in self.__v:
-            self.add_vertex(u)
+            self.add_vertex(u, udata)
         if not v in self.__v:
-            self.add_vertex(v)
+            self.add_vertex(v, vdata)
         self.__adj[u].add(v)
-        #if edata != None:
+        if edata != None:
+            self.__edata[u][v] = edata
+
+    def add_biedge(self, u, v, edata = None):
+        self.add_edge(u, v, edata)
+        self.add_edge(v, u, edata)
 
     def set_vertex_data(self, u, data):
         self.__vdata[u] = data
 
     def vertex_data(self, u):
         return self.__vdata[u]
+
+    def edge_data(self, u, v):
+        return self.__edata[u][v]
 
     def has_vertex(self, u):
         return u in self.__v
@@ -105,5 +117,25 @@ class digraph(object):
         self.dfs(lambda u: l.append(u))
         l.reverse()
         return l
-    
+
+    def write_graphviz(self, f):
+        f.write('digraph G {\n')
+        for u in self.vertices():
+            f.write(u)
+            self.write_graphviz_vlabel(f, u)
+            f.write(';\n')
+        f.write('\n')
+        for u in self.vertices():
+            for v in self.adj(u):
+                f.write(u + ' -- ' + v)
+                self.write_graphviz_elabel(f, u, v)
+                f.write(';\n')
+        f.write('\n')
+        f.write('}\n')
+
+    def write_graphviz_vlabel(self, f, u):
+        pass
+
+    def write_graphviz_elabel(self, f, u, v):
+        pass
 

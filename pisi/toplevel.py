@@ -2,20 +2,81 @@
 # a facade to the entire PISI system
 
 import os
+import sys
 
 from config import config
 from constants import const
 from ui import ui
 from purl import PUrl
 import util
-
+import dependency
+import pgraph
 import operations
+from packagedb import packagedb
 
 def install(packages):
-    """install a list of packages (either files, urls, or names)"""
-    #TODO: this for loop is just a placeholder
+    """install a list of packages (either files/urls, or names)"""
+    # determine if this is a list of files/urls or names
+    if packages[0].endswith(const.package_prefix): # they all have to!
+        install_pkg_files(packages)
+    else:
+        install_pkg_names(packages)
+
+def install_pkg_files(packages):
+    """install a number of pisi package files"""
+
+    # read the package information into memory first
+    # regardless of which distribution they come from
+    d_t = {}
     for x in packages:
-        operations.install_single(x)
+        package = Package(x)
+        package.read()
+        d_t[package.name] = package.metadata
+
+    # for this case, we have to determine the dependencies
+    # that aren't already satisfied and try to install them 
+    # from the repository.
+    dep_unsatis = []
+    for name in d_t.keys():
+        pkg = d_t[name]
+        deps = pkg.runtimeDeps
+        if not dependency.satisfiesDep(pkg, deps):
+            dep_unsatis.append(deps)
+
+    # now determine if these unsatisfied dependencies could
+    # be satisfied by installing packages from the repo
+
+    # if so, then invoke install_pkg_names
+    install_pkg_names([x.package for x in dep_unsatis])
+
+def install_pkg_names(A):
+    """This is the real thing. It installs packages from
+    the repository, trying to perform a minimum number of
+    installs"""
+    
+    # try to construct a pisi graph of packages to
+    # install / reinstall
+
+    G_f = pgraph.PGraph()               # construct G_f
+
+    # find the "install closure" graph of G_f by package 
+    # set A using packagedb
+    B = A
+    state = {}
+    while len(B) > 0:
+        Bp = set()
+        for x in B:
+            pkg = packagedb.get_package(x)
+            #print pkg
+            for dep in pkg.runtimeDeps:
+                # we don't deal with satisfied dependencies
+                if not dependency.satisfiesDep(pkg, dep):
+                    if not dep.package in G_f.vertices():
+                        Bp.add(str(dep.package))
+                    G_f.add_dep(x, dep)
+        B = Bp
+    G_f.write_graphviz(sys.stdout)
+
 
 def remove(packages):
     #TODO: this for loop is just a placeholder

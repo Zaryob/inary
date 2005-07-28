@@ -166,7 +166,7 @@ def dir_size(dir):
             yield sum([getsize(join(root, name)) for name in files if not islink(join(root,name))])
     return sum( sizes() )
 
-def copy_file(src, dest):
+def copy_file(src,dest):
     """copy source file to destination file"""
     check_file(src)
     check_dir(os.path.dirname(dest))
