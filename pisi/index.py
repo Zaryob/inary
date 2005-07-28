@@ -5,7 +5,7 @@
 from package import Package
 from xmlfile import XmlFile
 import metadata
-from packagedb import packagedb
+import packagedb
 from ui import ui
 import util
 from config import config
@@ -61,10 +61,11 @@ class Index(XmlFile):
                     ui.info('Adding ' + fn + ' to package index\n')
                     self.add_package(join(root, fn))
 
-    def update_db(self):
-        packagedb.clear()
+    def update_db(self, repo):
+        pkgdb = packagedb.get_db(repo)
+        pkgdb.clear()
         for pkg in self.packages:
-            packagedb.add_package(pkg)
+            pkgdb.add_package(pkg)
 
     def add_package(self, path):
         package = Package(path, 'r')

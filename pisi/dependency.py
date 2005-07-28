@@ -2,7 +2,7 @@
 # Author:  Eray Ozkural <eray@uludag.org.tr>
 
 from installdb import installdb
-from packagedb import packagedb
+import packagedb
 from ui import ui
 from version import Version
 
@@ -17,6 +17,10 @@ def satisfiesDep(pkg, depinfo):
             ret &= Version(version) >= Version(depinfo.versionFrom)
         if depinfo.versionTo:
             ret &= Version(version) <= Version(depinfo.versionTo)        
+        if depinfo.releaseFrom:
+            ret &= Version(release) <= Version(depinfo.releaseFrom)        
+        if depinfo.releaseTo:
+            ret &= Version(release) <= Version(depinfo.releaseTo)       
         return ret
 
 def runtimeDeps(pkg):

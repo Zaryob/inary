@@ -17,7 +17,11 @@ def cmdObject(cmd, fail=False):
                 "search-available": SearchAvailable,
                 "remove": Remove,
                 "index": Index,
-                "updatedb": UpdateDB}
+                "update-repo": UpdateRepo, 
+                "add-repo": AddRepo, 
+                "remove-repo": RemoveRepo, 
+                "list-repo": ListRepo
+                }
 
     if commands.has_key(cmd):
         obj = commands[cmd]()
@@ -31,6 +35,7 @@ def cmdObject(cmd, fail=False):
 
 class Command(object):
     """generic help string for any command"""
+
     def __init__(self):
         # now for the real parser
         self.parser = OptionParser(usage=usage_text,
@@ -39,7 +44,7 @@ class Command(object):
         self.parser = commonopts(self.parser)
         (self.options, args) = self.parser.parse_args()
         self.args = args[1:]
-
+       
         self.checkAuthInfo()
 
     def options(self):
@@ -54,11 +59,11 @@ class Command(object):
         # TODO: We'll get the username, password pair from a configuration
         # file from users home directory. Currently we need user to
         # give it from the user interface.
-#         if not username and not password:
-#             if someauthconfig.username and someauthconfig.password:
-#                 self.authInfo = (someauthconfig.username,
-#                                  someauthconfig.password)
-#                 return
+        #         if not username and not password:
+        #             if someauthconfig.username and someauthconfig.password:
+        #                 self.authInfo = (someauthconfig.username,
+        #                                  someauthconfig.password)
+        #                 return
         if username and password:
             self.authInfo = (username, password)
             return
@@ -69,6 +74,10 @@ class Command(object):
             self.authInfo = (username, password)
         else:
             self.authInfo = None
+
+    def init_db(self):
+        from pisi.repodb import repodb
+        repodb.init_dbs()
 
     def help(self):
         print getattr(self, "__doc__")
@@ -116,6 +125,7 @@ class Install(Command):
             self.help()
             return
 
+        self.init_db()
         pisi.toplevel.install(self.args)
 
 class Remove(Command):
@@ -132,6 +142,7 @@ class Remove(Command):
             self.help()
             return
 
+        self.init_db()
         pisi.toplevel.remove(self.args)
 
 class Info(Command):
@@ -186,6 +197,7 @@ class ListInstalled(Command):
                                default=False, help="show in long format")
 
     def run(self):
+        self.init_db()
         from pisi.installdb import installdb
         for pkg in installdb.list_installed():
             from pisi.packagedb import packagedb
@@ -195,21 +207,60 @@ class ListInstalled(Command):
             else:
                 print package
 
-class UpdateDB(Command):
-    """updatedb: update source and package databases"""
+class UpdateRepo(Command):
+    """update-repo: update the databases of a repository
+    usage: update-repo <repo1> <repo2> ...."""
     def __init__(self):
-        super(UpdateDB, self).__init__()
+        super(UpdateRepo, self).__init__()
 
     def run(self):
-        try:
-            indexfile = self.args[0]
-        except IndexError:
-            # doesn't have an index file, we'll use the repo url in
-            # configuration file
-            indexfile = None
+        self.init_db()
+        for repo in self.args:
+            pisi.ui.info('Updating repository ' + repo + '\n')
+            pisi.toplevel.update_repo(repo)
 
-        pisi.toplevel.updatedb(indexfile)
+class AddRepo(Command):
+    """add-repo: add a repository
+    usage: add-repo <repo> <indexuri>"""
+    def __init__(self):
+        super(AddRepo, self).__init__()
 
+    def run(self):
+
+        if len(self.args)>=2:
+            name = self.args[0]
+            indexuri = self.args[1]
+            pisi.toplevel.add_repo(name, indexuri)
+        else:
+            self.help()
+            return
+
+class RemoveRepo(Command):
+    """remove-repo: remove a repository
+    usage: remove-repo <repo>"""
+    def __init__(self):
+        super(RemoveRepo, self).__init__()
+
+    def run(self):
+
+        if len(self.args)>=1:
+            name = self.args[0]
+            pisi.toplevel.remove_repo(name)
+        else:
+            self.help()
+            return
+
+class ListRepo(Command):
+    """list-repo: list repositories"""
+    def __init__(self):
+        super(ListRepo, self).__init__()
+
+    def run(self):
+
+        from pisi.repodb import repodb
+        for repo in repodb.list():
+            print repo
+            print '  ', repodb.get_repo(repo).indexuri.getUri()
 
 class ListAvailable(Command):
     "list-available: list the available packages in the repository"
@@ -217,6 +268,7 @@ class ListAvailable(Command):
         super(ListAvailable, self).__init__()
 
     def run(self):
+        self.init_db()
         from pisi import util
         # FIXME: bu asagidaki code bayagi anlamsiz
         # neden bir packagedb'miz var?

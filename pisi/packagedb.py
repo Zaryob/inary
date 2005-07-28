@@ -20,14 +20,15 @@ class PackageDB(object):
     a delegated dbshelve object"""
     def __init__(self, id):
         util.check_dir(config.db_dir())
-        filename = os.path.join(config.db_dir(), 'package-' + id + '.bdb')
-        self.d = shelve.open(filename)
-        self.fdummy = open(filename)
+        self.filename = os.path.join(config.db_dir(), 'package-' + id + '.bdb')
+        self.d = shelve.open(self.filename)
+        self.fdummy = file(self.filename + '.lock', 'w')
         fcntl.flock(self.fdummy, fcntl.LOCK_EX)
 
     def __del__(self):
         #fcntl.flock(self.fdummy, fcntl.LOCK_UN)
         self.fdummy.close()
+        #os.unlink(self.filename + '.lock')
 
     def has_package(self, name):
         name = str(name)
@@ -36,6 +37,9 @@ class PackageDB(object):
     def get_package(self, name):
         name = str(name)
         return self.d[name]
+
+    def list(self):
+        return self.d.keys()
 
     def add_package(self, package_info):
         name = str(package_info.name)
@@ -48,6 +52,20 @@ class PackageDB(object):
         name = str(name)
         del self.d[name]
 
-packagedb = PackageDB('repo')
+packagedbs = {}
+
+def add_db(name):
+    packagedbs[name] = PackageDB(name)
+
+def get_db(name):
+    return packagesdb[name]
+
+def remove_db(name):
+    del packagedbs[name]
+    # erase database file
+
+#def has_package
+#def get_package
+#def remove_package
 
 inst_packagedb = PackageDB('local')

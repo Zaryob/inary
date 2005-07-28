@@ -17,14 +17,15 @@ class SourceDB(object):
 
     def __init__(self):
         util.check_dir(config.db_dir())
-        filename = os.path.join(config.db_dir(), 'source.bdb')
-        self.d = shelve.open(filename)
-        self.fdummy = open(filename)
+        self.filename = os.path.join(config.db_dir(), 'source.bdb')
+        self.d = shelve.open(self.filename)
+        self.fdummy = file(self.filename + '.lock', 'w')
         fcntl.flock(self.fdummy, fcntl.LOCK_EX)
 
     def __del__(self):
         #fcntl.flock(self.fdummy, fcntl.LOCK_UN)
         self.fdummy.close()
+        #os.unlink(self.filename + '.lock')
 
     def has_source(self, name):
         name = str(name)

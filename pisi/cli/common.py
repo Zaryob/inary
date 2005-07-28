@@ -10,7 +10,10 @@ install
 list-installed
 list-available
 remove
-updatedb
+add-repo
+remove-repo
+list-repo
+update-repo
 
 Use \"%prog help <command>\" for help on a specific subcommand.
 

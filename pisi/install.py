@@ -10,7 +10,7 @@ from config import config
 from constants import const
 from ui import ui
 from installdb import installdb
-from packagedb import packagedb, inst_packagedb
+import packagedb
 import dependency
 from metadata import MetaData
 import comariface

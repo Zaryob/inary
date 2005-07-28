@@ -1,18 +1,15 @@
 # top level PISI interfaces
 # a facade to the entire PISI system
 
-import os
-import sys
+import os, sys
 
 from config import config
 from constants import const
 from ui import ui
 from purl import PUrl
-import util
-import dependency
-import pgraph
-import operations
-from packagedb import packagedb
+import util, dependency, pgraph, operations, packagedb
+from repodb import repodb
+from index import Index
 
 def install(packages):
     """install a list of packages (either files/urls, or names)"""
@@ -101,18 +98,27 @@ def index(repo_dir = '.'):
     index.write(const.pisi_index)
     ui.info('* Index file written\n')
 
+class Repo:
+    def __init__(self, indexuri):
+        self.indexuri = indexuri
 
-def updatedb(indexfile = None, repo = "default"):
-    from index import Index
+def add_repo(name, indexuri):
+    repo = Repo(PUrl(indexuri))
+    repodb.add_repo(name, repo)
+
+def remove_repo(name):
+    repodb.remove_repo(name)
+
+def update_repo(repo):
 
     if not indexfile:
         repos_path = config.values.repos[repo]
         indexfile = os.path.join(repos_path, const.pisi_index)
 
-    ui.info('* Updating DB from index file: %s\n' % indexfile)
+    ui.info('* Updating repository: %s\n' % repo)
     index = Index()
-    index.read(indexfile, repo)
-    index.update_db()
+    index.read(repodb.get_repo(repo).indexuri.uri())
+    index.update_db(repo)
     ui.info('* Package db updated.\n')
 
 

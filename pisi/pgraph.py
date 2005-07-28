@@ -1,6 +1,6 @@
 # PISI package relation graph that represents the state of packagedb
 
-from packagedb import packagedb
+import packagedb
 from sourcedb import sourcedb
 from graph import *
 
