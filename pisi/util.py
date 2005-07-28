@@ -24,6 +24,17 @@ class FileError(Exception):
 class UtilError(Exception):
     pass
 
+#################################
+# # Helpers for O-O programming #
+#################################
+
+def print_object_members(obj):
+    "prints the __dict__ of an object"
+    ui.debug("--- %s ---\n" %obj.__class__)
+    d = obj.__dict__
+    for member in d.keys():
+        ui.debug("\t%s: %s\n" % (member, d[member]))
+
 
 #########################
 # string/list functions #
