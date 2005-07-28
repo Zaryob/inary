@@ -44,7 +44,7 @@ Legend:
      steps (necessary for large-scale builds?) (meren)
  / multi-package dependency analysis (eray)
    + design a package operation planner
-   - install operation (eray)
+   / install operation (eray)
    - upgrade operation (eray)
  + command line interface:
    + pisi remove
@@ -69,11 +69,11 @@ Legend:
    + SpecFile
    + MetaData
    + Files
-   - Index (bu onemli degil)
- - implement missing unit tests (bunlari da salliyoruz simdilik)
+   - Index (o kadar onemli degil)
+ - implement missing unit tests
    + sourcedb
-   - package 
-   - configuration file
+   - package (baris)
+   - configuration file (baris)
  + fix xml indentation (meren)
  - define file types (doc, executable, conf, etc...) (baris - meren)
  + write specfile (eray)
@@ -97,9 +97,9 @@ Legend:
 3. Beta
 
  - system-wide upgrade (upgrade-all) komutu (eray)
- / multiple package repository
-   / decide how to implement
-   - make a package and sourcedb for each repo
+ / multiple package repository (eray)
+   + decide how to implement
+   / make a package and sourcedb for each repo
    - support medium types
      - internet: http/ftp
      - local repository
@@ -110,15 +110,17 @@ Legend:
    - installation
    - remove
    - upgrade
- - partial caching and automatic resume for file download
+ - partial caching and automatic resume for file download (meren)
   - use a separate "partial/" subdir like urpmi
  - exception handling (baris)
- - transaction stuff for database (eray)
  - incremental build/fetch for repository index (pisi-index.xml)
    - diffsets (caglar)
- - multi-architecture support
+ - multi-architecture support (baris, caglar)
    / design decisions
    / extend XML specs to support that
    - cross-platform building support
 
 4. Release
+
+5. Post Release
+   - transaction stuff for database (eray)
