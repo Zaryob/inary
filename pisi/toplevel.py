@@ -49,7 +49,7 @@ def install_pkg_files(packages):
         md = d_t[name]
         deps = md.package.runtimeDeps
         if not dependency.satisfiesDeps(md.package.name, deps):
-            dep_unsatis.append(deps)
+            dep_unsatis += deps
 
     # now determine if these unsatisfied dependencies could
     # be satisfied by installing packages from the repo
