@@ -15,17 +15,20 @@ def satisfiesDep(pkg_name, depinfo):
         (version, release) = (pkg.version, pkg.release)
         return depinfo.satisfies(pkg_name, version, release)
 
-def runtimeDeps(pkg):
-    return packagedb.get_package(pkg).runtimeDeps
-
-def satisfiesRuntimeDeps(pkg):
-    deps = runtimeDeps(pkg)
+def satisfiesDeps(pkg, deps):
     for dep in deps:
         if not satisfiesDep(pkg, dep):
             ui.error('Package %s does not satisfy dependency %s\n' %
                      (pkg,dep))
             return False
     return True
+
+def runtimeDeps(pkg):
+    return packagedb.get_package(pkg).runtimeDeps
+
+def satisfiesRuntimeDeps(pkg):
+    deps = runtimeDeps(pkg)
+    return satisfiesDeps(pkg, deps)
 
 def installable(pkg):
     """calculate if pkg is installable currently 

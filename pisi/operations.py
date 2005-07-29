@@ -43,11 +43,12 @@ def install_single(pkg):
     # package filename. Otherwise we'll try installing a package from
     # the package repository.
     if url.isRemoteFile() or os.path.exists(url.uri):
-        install_single_package(pkg)
+        install_single_file(pkg)
     else:
         install_single_name(pkg)
 
-def install_single_uri(pkg_location):
+def install_single_file(pkg_location):
+    """install a package file"""
     from install import Installer
     Installer(pkg_location).install()
 

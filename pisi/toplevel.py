@@ -27,34 +27,44 @@ def install_pkg_files(packages):
     """install a number of pisi package files"""
     from package import Package
 
+    for x in packages:
+        if not x.endswith(const.package_prefix):
+            ui.error('Mixing file names and package names not supported\n')
+            return False
+
     # read the package information into memory first
     # regardless of which distribution they come from
     d_t = {}
     for x in packages:
         package = Package(x)
         package.read()
-        d_t[package.name] = package.metadata
+        d_t[package.metadata.package.name] = package.metadata
 
     # for this case, we have to determine the dependencies
     # that aren't already satisfied and try to install them 
-    # from the repository.
+    # from the repository
     dep_unsatis = []
     for name in d_t.keys():
-        pkg = d_t[name]
-        deps = pkg.runtimeDeps
-        if not dependency.satisfiesDep(pkg, deps):
+        md = d_t[name]
+        deps = md.package.runtimeDeps
+        if not dependency.satisfiesDeps(md.package.name, deps):
             dep_unsatis.append(deps)
 
     # now determine if these unsatisfied dependencies could
     # be satisfied by installing packages from the repo
 
     # if so, then invoke install_pkg_names
-    install_pkg_names([x.package for x in dep_unsatis])
+    if install_pkg_names([x.package for x in dep_unsatis]):
+        for x in packages:
+            operations.install_single_file(x)
 
 def install_pkg_names(A):
     """This is the real thing. It installs packages from
     the repository, trying to perform a minimum number of
     installs"""
+
+    if len(A)==0:
+        return True
     
     # try to construct a pisi graph of packages to
     # install / reinstall
@@ -87,6 +97,8 @@ def install_pkg_names(A):
     print l
     for x in l:
         operations.install_single_name(x)
+        
+    return True                         # everything went OK :)
 
 def remove(packages):
     #TODO: this for loop is just a placeholder
