@@ -1,12 +1,13 @@
 import unittest
 
-from pisi.actionsapi import gnuconfig
+from pisi.actionsapi import shelltools
+from pisi.actionsapi import autotools
+from pisi.actionsapi import pisitools
 
-class gnuConfigTestCase(unittest.TestCase):
-    def setUp(self):
-        self.gnuconfig = gnuconfig.gnuconfig_findnewest()
-    
-    def testFindNewest(self):
-        self.assert_ (self.gnuconfig >= '/usr/share/automake-1.4')
+""" 
+ Burasi ActionsAPI'yi gercekten test edecek case'ler ile
+ dolacak.. Ornegin bir paketin acilip derlenip dosed, dosym
+ doman, dobin, dosbin gibi fonksiyonlarin dogru calisrligi
+ test edilecek..
+"""
 
-suite = unittest.makeSuite(gnuConfigTestCase)

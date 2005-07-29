@@ -19,7 +19,7 @@ def run_all():
     import installdbtests
     import sourcedbtests
     import packagedbtests
-    import actionsapitests
+    #import actionsapitests
     import graphtests
     import versiontests
     import configfiletests
@@ -36,7 +36,7 @@ def run_all():
         installdbtests.suite,
         sourcedbtests.suite,
         packagedbtests.suite,
-        actionsapitests.suite,
+        #actionsapitests.suite,
         graphtests.suite,
         versiontests.suite,
         configfiletests.suite,
