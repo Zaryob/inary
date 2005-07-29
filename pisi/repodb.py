@@ -7,11 +7,7 @@ import os, fcntl
 from config import config
 import packagedb, util
 from pisi.purl import PUrl
-
-class Repo:
-    def __init__(self, indexuri):
-        self.indexuri = indexuri
-        
+       
 class RepoDB(object):
     """RepoDB maps repo ids to repository information"""
     def __init__(self):
