@@ -16,7 +16,7 @@
 #CXXFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
 #LDFLAGS=
 #
-#[dirs]
+#[directories]
 #lib_dir = /var/lib/pisi
 #db_dir = /var/db/pisi
 #archives_dir = /var/cache/pisi/archives
