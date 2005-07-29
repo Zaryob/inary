@@ -64,16 +64,19 @@ def install_pkg_names(A):
     # find the "install closure" graph of G_f by package 
     # set A using packagedb
     print A
+    for x in A:
+        G_f.add_package(x)
     B = A
-    state = {}
+    #state = {}
     while len(B) > 0:
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            #print pkg
+            print pkg
             for dep in pkg.runtimeDeps:
+                print 'checking ', dep
                 # we don't deal with satisfied dependencies
-                if not dependency.satisfiesDep(pkg, dep):
+                if not dependency.satisfiesDep(x, dep):
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
