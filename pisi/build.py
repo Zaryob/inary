@@ -78,6 +78,16 @@ class PisiBuild:
             ui.error("PSPEC file is not valid")
             raise PisiBuildError, "invalid PSPEC file %s" % self.ctx.pspecfile
 
+    def setState(self, state):
+        stateFile = os.path.join(self.srcDir, "pisiBuildState")
+        open(stateFile, "w").write(state)
+
+    def getState(self):
+        stateFile = os.path.join(self.srcDir, "pisiBuildState")
+        if not os.path.exists(stateFile): # no state
+            return None
+        return open(stateFile, "r").read()
+
     def build(self):
         """Build the package in one shot."""
 
@@ -166,11 +176,8 @@ class PisiBuild:
         except KeyError:
             workdir = self.spec.source.name + "-" + self.spec.source.version
                     
-        path = os.path.join(self.ctx.pkg_work_dir(), workdir)
-        if not os.path.exists(path):
-            ui.error ("No such file or directory: %s\n" % path)
-            sys.exit(1)
-        return path
+        return os.path.join(self.ctx.pkg_work_dir(), workdir)
+        
 
     def runActionFunction(self, func, mandatory=False):
         """Calls the corresponding function in actions.py. 

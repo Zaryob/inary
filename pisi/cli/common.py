@@ -4,10 +4,7 @@ where <command> is one of:
 
 help
 build
-build-unpack
-build-runsetupaction
-build-runbuildaction
-build-runinstallaction
+build-until
 index
 info
 install

@@ -12,10 +12,7 @@ import pisi.toplevel
 def cmdObject(cmd, fail=False):
     commands = {"help": Help,
                 "build": Build,
-                "build-unpack": BuildUnpack,
-                "build-runsetupaction": BuildRunSetupAction,
-                "build-runbuildaction": BuildRunBuildAction,
-                "build-runinstallaction": BuildRunInstallAction,
+                "build-until": BuildUntil,
                 "info": Info,
                 "install": Install,
                 "list-installed": ListInstalled,
@@ -375,82 +372,32 @@ TODO: Some description...
 
 # Partial build commands        
 
-class BuildUnpack(Command):
-    """Unpack source using a pspec.xml file
+class BuildUntil(Command):
+    """Run the build process partially
 
     Usage:
-    build-unpack pspec.xml
+    -sStateName build-until <pspec file>
+
+    Where states are:
+    unpack, setupaction, buildaction, installaction, buildpackages
 
 You can give an URI of the pspec.xml file. PISI will fetch all
 necessary files and unpack the source and prepare a source directory
 for you.
 """
     def __init__(self):
-        super(BuildUnpack, self).__init__()
+        super(BuildUntil, self).__init__()
+
+    def options(self):
+        self.parser.add_option("-s", action="store", dest="state")
 
     def run(self):
         if not self.args:
             self.help()
             return
 
-        for arg in self.args:
-            pisi.toplevel.build_unpack(arg, self.authInfo)
-
-class BuildRunSetupAction(Command):
-    """Unpack source using a pspec.xml file
-
-    Usage:
-    build-runsetupaction pspec.xml
-
-TODO: Some desc.
-"""
-    def __init__(self):
-        super(BuildRunSetupAction, self).__init__()
-
-    def run(self):
-        if not self.args:
-            self.help()
-            return
+        state = self.options.state
 
         for arg in self.args:
-            pisi.toplevel.build_runSetupAction(arg, self.authInfo)
+            pisi.toplevel.build_until(arg, state, self.authInfo)
 
-
-class BuildRunBuildAction(Command):
-    """Unpack source using a pspec.xml file
-
-    Usage:
-    build-runbuildaction pspec.xml
-
-TODO: Some desc.
-"""
-    def __init__(self):
-        super(BuildRunBuildAction, self).__init__()
-
-    def run(self):
-        if not self.args:
-            self.help()
-            return
-
-        for arg in self.args:
-            pisi.toplevel.build_runBuildAction(arg, self.authInfo)
-
-
-class BuildRunInstallAction(Command):
-    """Unpack source using a pspec.xml file
-
-    Usage:
-    build-runsetupactions pspec.xml
-
-TODO: Some desc.
-"""
-    def __init__(self):
-        super(BuildRunInstallAction, self).__init__()
-
-    def run(self):
-        if not self.args:
-            self.help()
-            return
-
-        for arg in self.args:
-            pisi.toplevel.build_runInstallAction(arg, self.authInfo)

@@ -144,43 +144,85 @@ def prepare_for_build(pspecfile, authInfo=None):
     pb = PisiBuild(url.uri)
     return pb
 
-def build_unpack(pspecfile, authInfo=None):
-    pb = prepare_for_build(pspecfile, authInfo)
-    pb.fetchSourceArchive()
-    pb.unpackSourceArchive()
-    pb.compileActionScript()
-    pb.applyPatches()
-
-def build_runSetupAction(pspecfile, authInfo=None):
-    pb = prepare_for_build(pspecfile, authInfo)
-    pb.fetchSourceArchive()
-    pb.unpackSourceArchive()
-    pb.compileActionScript()
-    pb.applyPatches()
-    pb.runSetupAction()
-
-def build_runBuildAction(pspecfile, authInfo=None):
-    pb = prepare_for_build(pspecfile, authInfo)
-    pb.fetchSourceArchive()
-    pb.unpackSourceArchive()
-    pb.compileActionScript()
-    pb.applyPatches()
-    pb.runSetupAction()
-    pb.runBuildAction()
-
-def build_runInstallAction(pspecfile, authInfo=None):
-    pb = prepare_for_build(pspecfile, authInfo)
-    pb.fetchSourceArchive()
-    pb.unpackSourceArchive()
-    pb.compileActionScript()
-    pb.applyPatches()
-    pb.runSetupAction()
-    pb.runBuildAction()
-    pb.runInstallAction()
-
 def build(pspecfile, authInfo=None):
     pb = prepare_for_build(pspecfile, authInfo)
     pb.build()
+
+def __buildState_unpack(pb):
+    # unpack is the first state to run.
+    pb.fetchSourceArchive()
+    pb.unpackSourceArchive()
+    pb.applyPatches()
+
+    pb.setState("unpack")
+
+def __buildState_setupAction(pb, lastState):
+
+    if lastState != "unpack":
+        __buildState_unpack(pb)
+    pb.runSetupAction()
+
+    pb.setState("setupaction")
+
+def __buildState_buildAction(pb, lastState):
+
+    if lastState != "setupaction":
+        __buildState_setupAction(pb, lastState)
+    pb.runBuildAction()
+
+    pb.setState("buildaction")
+
+def __buildState_installAction(pb, lastState):
+    
+    if lastState != "buildaction":
+        __buildState_buildAction(pb, lastState)
+    pb.runInstallAction()
+
+    pb.setState("installaction")
+
+def __buildState_package(pb, lastState):
+
+    if lastState != "installaction":
+        __buildState_installAction(pb, lastState)
+    pb.buildPackages()
+
+    pb.setState("buildpackages")
+
+def build_until(pspecfile, state, authInfo=None):
+    pb = prepare_for_build(pspecfile, authInfo)
+    pb.compileActionScript()
+    
+    last = pb.getState()
+    ui.info("Last state is %s\n"%last)
+
+    if not last: last = "none"
+    elif last == state: return # allready there
+
+    order = {"none": 0,
+             "unpack": 1,
+             "setupaction": 2,
+             "buildaction": 3,
+             "installaction": 4,
+             "buildpackages": 5}
+
+    if last != "unpack" or order[last] < order["unpack"]:
+        __buildState_unpack(pb)
+    if state == "unpack": return
+
+    if last != "setupaction" or order[last] < order["setupaction"]:
+        __buildState_setupAction(pb, last)
+    if state == "setupaction": return
+    
+    if last != "buildaction" or order[last] < order["buildaction"]:
+        __buildState_buildAction(pb, last)
+    if state == "buildaction": return
+
+    if last != "installaction" or order[last] < order["installaction"]:
+        __buildState_installAction(pb, last)
+    if state == "installaction": return
+
+    __buildState_package(pb, last)
+    
 
 
 
