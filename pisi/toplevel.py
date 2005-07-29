@@ -197,6 +197,14 @@ def build(pspecfile, authInfo=None):
     pb = prepare_for_build(pspecfile, authInfo)
     pb.build()
 
+
+order = {"none": 0,
+         "unpack": 1,
+         "setupaction": 2,
+         "buildaction": 3,
+         "installaction": 4,
+         "buildpackages": 5}
+
 def __buildState_unpack(pb):
     # unpack is the first state to run.
     pb.fetchSourceArchive()
@@ -205,34 +213,34 @@ def __buildState_unpack(pb):
 
     pb.setState("unpack")
 
-def __buildState_setupAction(pb, lastState):
+def __buildState_setupaction(pb, last):
 
-    if lastState != "unpack":
+    if order[last] < order["unpack"]:
         __buildState_unpack(pb)
     pb.runSetupAction()
 
     pb.setState("setupaction")
 
-def __buildState_buildAction(pb, lastState):
+def __buildState_buildaction(pb, last):
 
-    if lastState != "setupaction":
-        __buildState_setupAction(pb, lastState)
+    if order[last] < order["setupaction"]:
+        __buildState_setupaction(pb, last)
     pb.runBuildAction()
 
     pb.setState("buildaction")
 
-def __buildState_installAction(pb, lastState):
+def __buildState_installaction(pb, last):
     
-    if lastState != "buildaction":
-        __buildState_buildAction(pb, lastState)
+    if order[last] < order["buildaction"]:
+        __buildState_buildaction(pb, last)
     pb.runInstallAction()
 
     pb.setState("installaction")
 
-def __buildState_package(pb, lastState):
+def __buildState_buildpackages(pb, last):
 
-    if lastState != "installaction":
-        __buildState_installAction(pb, lastState)
+    if order[last] < order["installaction"]:
+        __buildState_installaction(pb, last)
     pb.buildPackages()
 
     pb.setState("buildpackages")
@@ -242,35 +250,28 @@ def build_until(pspecfile, state, authInfo=None):
     pb.compileActionScript()
     
     last = pb.getState()
-    ui.info("Last state is %s\n"%last)
+    ui.info("Last state was %s\n"%last)
 
     if not last: last = "none"
-    elif last == state: return # allready there
 
-    order = {"none": 0,
-             "unpack": 1,
-             "setupaction": 2,
-             "buildaction": 3,
-             "installaction": 4,
-             "buildpackages": 5}
-
-    if last != "unpack" or order[last] < order["unpack"]:
+    if state == "unpack":
         __buildState_unpack(pb)
-    if state == "unpack": return
+        return
 
-    if last != "setupaction" or order[last] < order["setupaction"]:
-        __buildState_setupAction(pb, last)
-    if state == "setupaction": return
+    if state == "setupaction":
+        __buildState_setupaction(pb, last)
+        return
     
-    if last != "buildaction" or order[last] < order["buildaction"]:
-        __buildState_buildAction(pb, last)
-    if state == "buildaction": return
+    if state == "buildaction":
+        __buildState_buildaction(pb, last)
+        return
 
-    if last != "installaction" or order[last] < order["installaction"]:
-        __buildState_installAction(pb, last)
-    if state == "installaction": return
+    if state == "installaction":
+        print "blibli"
+        __buildState_installaction(pb, last)
+        return
 
-    __buildState_package(pb, last)
+    __buildState_buildpackages(pb, last)
     
 
 
