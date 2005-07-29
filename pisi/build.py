@@ -74,45 +74,27 @@ class PisiBuild:
         self.actionGlobals = None
         self.srcDir = None
 
-    def build(self):
-        """Build the package in one shot."""
         if not self.spec.verify():
             ui.error("PSPEC file is not valid")
             raise PisiBuildError, "invalid PSPEC file %s" % self.ctx.pspecfile
 
+    def build(self):
+        """Build the package in one shot."""
+
         ui.info("Building PISI source package: %s\n" % self.spec.source.name)
 
-        ui.info("Fetching source from: %s\n" % self.spec.source.archiveUri)
-        self.sourceArchive.fetch()
-        ui.info("Source archive is stored: %s/%s\n"
-                %(self.ctx.archives_dir(), self.spec.source.archiveName))
-    
-        self.solveBuildDependencies()
+        self.fetchSourceArchive()
 
-        ui.info("Unpacking archive...")
-        self.sourceArchive.unpack()
-        ui.info(" unpacked (%s)\n" % self.ctx.pkg_work_dir())
+        self.unpackSourceArchive()
 
         self.compileActionScript()
-        self.srcDir = self.pkgSrcDir()
 
+        self.solveBuildDependencies()
+
+        # apply the patches and prepare a source directory for build.
         self.applyPatches()
 
-        # we'll need our working directory after actionscript
-        # finished its work in the archive source directory.
-        curDir = os.getcwd()
-        os.chdir(self.srcDir)
-
-        #  Run configure, build and install phase
-        ui.action("Setting up source...\n")
-        self.runActionFunction(const.setup_func)
-        ui.action("Building source...\n")
-        self.runActionFunction(const.build_func)
-        ui.action("Intalling...\n")
-        # install function is mandatory!
-        self.runActionFunction(const.install_func, True)
-
-        os.chdir(curDir)
+        self.runActions()
 
         # after all, we are ready to build/prepare the packages
         self.buildPackages()
@@ -128,6 +110,35 @@ class PisiBuild:
             "SRC_RELEASE": self.spec.source.release
             }
         os.environ.update(evn)
+
+    def fetchSourceArchive(self):
+        ui.info("Fetching source from: %s\n" % self.spec.source.archiveUri)
+        self.sourceArchive.fetch()
+        ui.info("Source archive is stored: %s/%s\n"
+                %(self.ctx.archives_dir(), self.spec.source.archiveName))
+
+
+    def unpackSourceArchive(self):
+        ui.info("Unpacking archive...")
+        self.sourceArchive.unpack()
+        ui.info(" unpacked (%s)\n" % self.ctx.pkg_work_dir())
+
+    def runActions(self):
+        # we'll need our working directory after actionscript
+        # finished its work in the archive source directory.
+        curDir = os.getcwd()
+        os.chdir(self.srcDir)
+
+        #  Run configure, build and install phase
+        ui.action("Setting up source...\n")
+        self.runActionFunction(const.setup_func)
+        ui.action("Building source...\n")
+        self.runActionFunction(const.build_func)
+        ui.action("Intalling...\n")
+        # install function is mandatory!
+        self.runActionFunction(const.install_func, True)
+
+        os.chdir(curDir)
 
     def compileActionScript(self):
         """Compiles actions.py and sets the actionLocals and actionGlobals"""
@@ -146,6 +157,7 @@ class PisiBuild:
 
         self.actionLocals = localSymbols
         self.actionGlobals = globalSymbols
+        self.srcDir = self.pkgSrcDir()
         
     def pkgSrcDir(self):
         """Returns the real path of WorkDir for an unpacked archive."""

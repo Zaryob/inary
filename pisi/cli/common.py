@@ -4,6 +4,8 @@ where <command> is one of:
 
 help
 build
+build-unpack
+build-runactions
 index
 info
 install

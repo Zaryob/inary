@@ -131,7 +131,8 @@ def update_repo(repo):
     ui.info('* Package db updated.\n')
 
 
-def build(pspecfile, authInfo=None):
+# build functions...
+def prepare_for_build(pspecfile, authInfo=None):
     from build import PisiBuild
 
     url = PUrl(pspecfile)
@@ -141,5 +142,26 @@ def build(pspecfile, authInfo=None):
         url.uri = fs.fetch_all()
 
     pb = PisiBuild(url.uri)
+    return pb
+
+def build_unpack(pspecfile, authInfo=None):
+    pb = prepare_for_build(pspecfile, authInfo)
+    pb.fetchSourceArchive()
+    pb.unpackSourceArchive()
+    pb.compileActionScript()
+    pb.applyPatches()
+
+def build_runactions(pspecfile, authInfo=None):
+    pb = prepare_for_build(pspecfile, authInfo)
+    pb.fetchSourceArchive()
+    pb.unpackSourceArchive()
+    pb.compileActionScript()
+    pb.applyPatches()
+    pb.runActions()
+
+def build(pspecfile, authInfo=None):
+    pb = prepare_for_build(pspecfile, authInfo)
     pb.build()
+
+
 

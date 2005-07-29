@@ -12,6 +12,8 @@ import pisi.toplevel
 def cmdObject(cmd, fail=False):
     commands = {"help": Help,
                 "build": Build,
+                "build-unpack": BuildUnpack,
+                "build-runactions": BuildRunActions,
                 "info": Info,
                 "install": Install,
                 "list-installed": ListInstalled,
@@ -368,4 +370,47 @@ TODO: Some description...
 """
     pass
 
-        
+
+# Partial build commands        
+
+class BuildUnpack(Command):
+    """Unpack source using a pspec.xml file
+
+    Usage:
+    build-unpack pspec.xml
+
+You can give an URI of the pspec.xml file. PISI will fetch all
+necessary files and unpack the source and prepare a source directory
+for you.
+"""
+    def __init__(self):
+        super(BuildUnpack, self).__init__()
+
+    def run(self):
+        if not self.args:
+            self.help()
+            return
+
+        for arg in self.args:
+            pisi.toplevel.build_unpack(arg, self.authInfo)
+
+class BuildRunActions(Command):
+    """Unpack source using a pspec.xml file
+
+    Usage:
+    build-runactions pspec.xml
+
+You can give an URI of the pspec.xml file. PISI will fetch all
+necessary files and unpack the source, prepare a source directory and
+run the functions in actions.py.
+"""
+    def __init__(self):
+        super(BuildRunActions, self).__init__()
+
+    def run(self):
+        if not self.args:
+            self.help()
+            return
+
+        for arg in self.args:
+            pisi.toplevel.build_runactions(arg, self.authInfo)
