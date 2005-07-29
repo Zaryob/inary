@@ -2,7 +2,7 @@
 import unittest
 import os
 
-from pisi.packagedb import packagedb
+from pisi import packagedb
 from pisi import util
 from pisi import context
 
