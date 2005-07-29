@@ -15,6 +15,18 @@ class PGraph(digraph):
         pkg1 = packagedb.get_package(pkg)
         self.add_vertex(str(pkg), (pkg1.version, pkg1.release))
 
+    def add_plain_dep(self, pkg1name, pkg2name):
+        pkg1data = None
+        if not pkg1name in self.vertices():
+            pkg1 = packagedb.get_package(pkg1name)
+            pkg1data = (pkg1.version, pkg1.release)
+        pkg2data = None
+        if not pkg2name in self.vertices():
+            pkg2 = packagedb.get_package(pkg2name)
+            pkg2data = (pkg2.version, pkg2.release) 
+        self.add_edge(str(pkg1name), str(pkg2name), ('d', None),
+                      pkg1data, pkg2data )
+
     def add_dep(self, pkg, depinfo):
         pkg1data = None
         if not pkg in self.vertices():

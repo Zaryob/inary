@@ -13,6 +13,7 @@ from ui import ui
 from purl import PUrl
 import util, dependency, pgraph, operations, packagedb
 from repodb import repodb
+from installdb import installdb
 from index import Index
 
 def install(packages):
@@ -122,22 +123,22 @@ def remove(A):
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            print pkg
+            print 'processing', pkg.name
             rev_deps = packagedb.get_rev_deps(x)
-            for dep in rev_deps:
-                print 'checking ', dep
-                # we don't deal with satisfied dependencies
-                if not dependency.satisfiesDep(dep.package, dep):
-                    if not dep.package in G_f.vertices():
-                        Bp.add(str(dep.package))
-                        G_f.add_rev_dep(dep, x)
+            for (rev_dep, depinfo) in rev_deps:
+                print 'checking ', rev_dep
+                # we don't deal with unsatisfied dependencies
+                if dependency.satisfiesDep(rev_dep, depinfo):
+                    if not rev_dep in G_f.vertices():
+                        Bp.add(rev_dep)
+                        G_f.add_plain_dep(rev_dep, x)
         B = Bp
     G_f.write_graphviz(sys.stdout)
     l = G_f.topological_sort()
     print l
     for x in l:
-        #operations.remove_single_name(x)
-        pass
+        if installdb.is_installed(x):
+            operations.remove_single(x)
         
     return True                         # everything went OK :)
 

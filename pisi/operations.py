@@ -60,7 +60,7 @@ def install_single_name(name):
         pkg = packagedb.get_package(name)
         ui.info("Installing %s from repository %s\n" %(name, repo))
         ui.debug("Package URI: %s\n" % pkg.packageURI)
-        install_single_uri(pkg.packageURI)
+        install_single_file(pkg.packageURI)
     else:
         ui.error("Package %s not found in the repository file.\n" % pkg)
 

@@ -45,18 +45,21 @@ class PackageDB(object):
 
     def get_rev_deps(self, name):
         name = str(name)
-        a = self.dr[name]
-        return a
+        if self.dr.has_key(name):
+            return self.dr[name]
+        else:
+            return []
 
     def add_package(self, package_info):
         name = str(package_info.name)
         self.d[name] = package_info
         for dep in package_info.runtimeDeps:
             dep_name = str(dep.package)
+            print '!!', name, dep.package
             if self.dr.has_key(dep_name):
-                self.dr[dep_name].append(dep)
+                self.dr[dep_name].append( (name, dep) )
             else:
-                self.dr[dep_name] = [dep]
+                self.dr[dep_name] = [ (name, dep) ]
 
     def clear(self):
         self.d.clear()
