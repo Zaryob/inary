@@ -55,7 +55,6 @@ class PackageDB(object):
         self.d[name] = package_info
         for dep in package_info.runtimeDeps:
             dep_name = str(dep.package)
-            print '!!', name, dep.package
             if self.dr.has_key(dep_name):
                 self.dr[dep_name].append( (name, dep) )
             else:

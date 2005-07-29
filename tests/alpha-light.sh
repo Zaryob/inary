@@ -11,3 +11,5 @@ pisi-cli update-repo repo1
 #find tmp -iname '*.bdb' | xargs tools/cat-db.py
 pisi-cli install zip
 pisi-cli list-installed
+pisi-cli remove unzip
+pisi-cli install zip*.pisi
