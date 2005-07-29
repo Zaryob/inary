@@ -1,187 +1,202 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
 
-# standard python modules
 import os
-import gzip
+import glob
+import sys
 import shutil
 import fileinput
 import re
-import sys
-import glob
 
-from utils import makedirs, unlink, chmod
-from pisi.util import copy_file, clean_dir
+import get
+from pisitools_functions import *
+from shelltools import *
 
-# actions api modules
-from actionglobals import glb
+def dobin(sourceFile, destinationDirectory = '/usr/bin'):
+    '''insert a executable file into /bin or /usr/bin'''
 
-env = glb.env
-dirs = glb.dirs
+    ''' example call: pisitools.dobin("bin/xloadimage", "/bin", "xload") '''
+    executable_insinto(sourceFile, get.installDIR() + destinationDirectory)
+ 
+def doconfd():
+    #FIXME: AdditionalFiles
+    pass
 
-def insinto(directory, filename, fileas=''):
+def dodir(destinationDirectory):
+    '''creates a directory tree'''
+    makedirs(get.installDIR() + destinationDirectory)
+
+def dodoc(*sourceFiles):
+    '''inserts the files in the list of files into /usr/share/doc/PACKAGE''' 
+    readable_insinto(get.installDIR() + "/usr/share/doc/" + get.srcTAG(), *sourceFiles)
+
+def doenvd():
+    #FIXME: AdditionalFiles
+    pass
+
+def doexe(sourceFile, destinationDirectory):
+    '''insert a executable file into destination directory'''
     
-    makedirs(env.install_dir + directory)
+    ''' example call: pisitools.doexe("kde-3.4.sh", "/etc/X11/Sessions")'''
+    executable_insinto(sourceFile, get.installDIR() + destinationDirectory)
 
-    if not fileas:
-        for file in glob.glob(filename):
-            if os.access(file, os.F_OK):
-                copy_file(file, env.install_dir +
-                    directory + os.path.basename(file))
+def dohard(sourceFile, destinationFile):
+    '''creates hard link between sourceFile and destinationFile'''
+    #FIXME: How can i use hard-links in Python?
+    pass
 
-    #XXX: toparla burayi..
-    else:
-        if os.access(filename, os.F_OK):
-            copy_file(filename, env.install_dir +
-                    directory + fileas)
+def dohtml(*sourceFiles):
+    '''inserts the files in the list of files into /usr/share/doc/PACKAGE/html'''
+ 
+    ''' example call: pisitools.dohtml("doc/doxygen/html/*")'''
+    destionationDirectory = os.path.join(get.installDIR(), "usr/share/doc" ,get.srcTAG(), "html")
 
-def dodoc(*documentList):
+    if not can_access_directory(destionationDirectory):
+        makedirs(os.getcwd() + destionationDirectory)
 
-    srcTag = env.src_name + '-' \
-        + env.src_version + '-' \
-        + env.src_release
-    
-    makedirs(os.path.join(env.install_dir,
-                                 dirs.doc,
-                                 srcTag))
+    allowed_extensions = ['.png', '.gif', '.html', '.htm', '.jpg', '.css', '.js']
+    disallowed_directories = ['CVS']
 
-    for item in documentList:
-        for document in glob.glob(item):
-            if os.access(document, os.F_OK):
-               copy_file(document, 
-                            os.path.join(env.install_dir,
-                                         dirs.doc,
-                                         srcTag,
-                                         os.path.basename(document)))
+    for sourceFile in sourceFiles:
+        for source in glob.glob(sourceFile):
+            if os.path.isfile(source) and os.path.splitext(source)[1] in allowed_extensions:
+                os.system("install -m0644 %s %s" % (source, destionationDirectory))
+            if os.path.isdir(source) and os.path.basename(source) not in disallowed_directories:
+                for root, dirs, files in os.walk(source):
+                    for source in files:
+                        if os.path.splitext(source)[1] in allowed_extensions:
+                            makedirs(destionationDirectory)
+                            os.system("install -m0644 %s %s" % (os.path.join(root, source), destionationDirectory))
+                            print "install -m0644 %s %s" % (os.path.join(root, source), destionationDirectory)
 
-def newdoc(source, destination):
+def doinfo(*sourceFiles):
+    '''inserts the info files in the list of files into /usr/share/info'''
+    readable_insinto(get.infoDIR(), *sourceFiles)
 
-    srcTag = env.src_name + '-' \
-        + env.src_version + '-' \
-        + env.src_release
-    
-    makedirs(os.path.join(env.install_dir,
-                                 dirs.doc,
-                                 srcTag))
+def doinitd():
+    #FIXME: AdditionalFiles
+    pass
 
-    if os.access(source, os.F_OK):
-        copy_file(source, 
-            os.path.join(env.install_dir, 
-                                         dirs.doc,
-                                         srcTag,
-                                         destination))
+def dojar():
+    '''installs jar files into /usr/share/PACKAGE/lib, and adds to /usr/share/PACKAGE/classpath.env'''
+    pass
 
-def dosed(filename, searchPattern, replacePattern = ''):
-    for line in fileinput.input(filename, inplace = 1):
-            line = re.sub(searchPattern, replacePattern, line)
-            sys.stdout.write(line)
+def dolib(sourceFile, destinationDirectory = '/usr/lib'):
+    '''insert the library info /usr/lib'''
+    sourceFile = os.path.join(get.workDIR(), get.srcDIR(), sourceFile)
+    destinationDirectory = get.installDIR() + destinationDirectory
+    print destinationDirectory
+    makedirs(destinationDirectory)
+    os.system("install -m0644 %s %s" % (sourceFile, destinationDirectory))
 
-def dosbin(filename, destination = glb.dirs.sbin):
+def dolib_a():
+    '''insert the static library info /usr/lib with permission 0644'''
+    pass
 
-    makedirs(os.path.join(env.install_dir, destination))
+def dolib_so():
+    '''insert the static library info /usr/lib with permission 0755'''
+    pass
 
-    if os.access(filename, os.F_OK):
-        copy_file(filename,
-                        os.path.join(env.install_dir,
-                                     destination,
-                                     os.path.basename(filename)))
+def doman(*sourceFiles):
+    '''inserts the man pages in the list of files into /usr/share/man/'''
 
-def doman(*filenameList):
+    '''example call: pisitools.doman("man.1", "pardus.*")'''
+    if not can_access_directory(get.manDIR()):
+        makedirs(get.manDIR())
 
-    for item in filenameList:
-        for filename in glob.glob(item):
-            man, postfix = filename.split('.')
-            destDir = os.path.join(env.install_dir, dirs.man, "man" + postfix)
-    
-            makedirs(destDir)
+    #FIXME: splitext
+    for sourceFile in sourceFiles:
+        for source in glob.glob(sourceFile):
+            try:
+                pageName, pageDirectory = source.split('.')
+            except ValueError:
+                print "doman: Wrong man page file"
+                sys.exit(1)
+                
+            makedirs(get.manDIR() + '/man%s' % pageDirectory) 
+            os.system("install -m0644 %s %s" % (source, get.manDIR() + '/man%s' % pageDirectory))
 
-            gzfile = gzip.GzipFile(filename + '.gz', 'w', 9)
-            gzfile.writelines(file(filename).xreadlines())
-            gzfile.close()
-
-            if os.access(filename + '.gz', os.F_OK):
-                copy_file(filename + '.gz',
-                            os.path.join(destDir,
-                                     os.path.basename(filename + '.gz')))
+def domo_(*sourceFiles):
+    '''inserts the mo files in the list of files into /usr/share/locale/LOCALE/LC_MESSAGES'''
+    pass
 
 def domove(source, destination):
+    '''moves sourceFile/Direcroty into destinationFile/Directory'''
     
-    makedirs(env.install_dir + '/' + os.path.dirname(destination))
+    ''' example call: pisitools.domove("/usr/bin/bash", "/bin/bash")'''
+    ''' example call: pisitools.domove("/usr/bin/", "/usr/sbin")'''
+    makedirs(get.installDIR() + os.path.dirname(destination))
+    shutil.move(get.installDIR() + source, get.installDIR() + destination)
+
+def dopython():
+    '''FIXME: What the hell is this?'''
+    pass
+
+def dosed(sourceFile, findPattern, replacePattern = ''):
+    '''replaces patterns in sourceFile'''
+    
+    ''' example call: pisitools.dosed("/etc/passwd", "caglar", "cem")'''
+    ''' example call: pisitools.dosym("/etc/passwd", "caglar")'''
+    ''' example call: pisitools.dosym("Makefile", "(?m)^(HAVE_PAM=.*)no", r"\1yes")'''
+
+    if can_access_file(sourceFile):
+        for line in fileinput.input(sourceFile, inplace = 1):
+            line = re.sub(findPattern, replacePattern, line)
+            sys.stdout.write(line)
+    else:
+        raise FileError("File doesn't exists or permission denied...")
+
+def dosbin(sourceFile, destinationDirectory = '/usr/sbin'):
+    '''insert a executable file into /sbin or /usr/sbin'''
+    
+    ''' example call: pisitools.dobin("bin/xloadimage", "/sbin") '''
+    executable_insinto(sourceFile, get.installDIR() + destinationDirectory)
+        
+def dosym(sourceFile, destinationFile):
+    '''creates soft link between sourceFile and destinationFile'''
+
+    ''' example call: pisitools.dosym("/usr/bin/bash", "/bin/bash")'''
+    makedirs(get.installDIR() + os.path.dirname(destinationFile))
+
     try:
-        shutil.move(env.install_dir + '/' + source, env.install_dir + '/' + destination)
-    except OSError, e:
-        pass
-    
-def dosym(source, destination):
+        os.symlink(sourceFile, get.installDIR() + destinationFile)
+    except OSError:
+        print "dosym: File exists..."
 
-    makedirs(env.install_dir + '/' + os.path.dirname(destination))
-    
-    if not os.path.islink(env.install_dir + destination):
-        os.symlink(source, env.install_dir + destination)
+''' ************************************************************************** '''
 
-def dolib(filename, destination = '/lib', srcDir = ''):
+def insinto(destinationDirectory, sourceFile,  destinationFile = ''):
+    '''insert a sourceFile into destinationDirectory as a destinationFile with same uid/guid/permissions'''
+    makedirs(get.installDIR() + destinationDirectory)
 
-    if not srcDir:
-        libFile = os.path.join(env.work_dir, env.src_name + "-" + env.src_version, filename)
-    else:
-        libFile = os.path.join(env.work_dir, srcDir, filename)
+    for file in glob.glob(sourceFile):
+        if can_access_file(file):
+            shutil.copy(sourceFile, get.installDIR() + os.path.join(destinationDirectory, destinationFile))
 
-    makedirs(env.install_dir + destination)
+''' ************************************************************************** '''
 
-    if os.access(libFile, os.F_OK):
-        copy_file(libFile, env.install_dir + destination + '/' + filename)
+def newdoc(sourceFile, destinationFile):
+    shutil.move(sourceFile, destinationFile)
+    readable_insinto(get.installDIR() + "/usr/share/doc/" + get.srcTAG(), destinationFile)
 
-def dodir(parameters = ''):
+def newman(sourceFile, destinationFile):
+    shutil.move(sourceFile, destinationFile)
+    doman(destinationFile)
 
-    makedirs(env.install_dir + parameters)
+''' ************************************************************************** '''
 
-def newman(source, destination, srcDir = ''):
+def remove(sourceFile):
+    unlink(get.installDIR() + sourceFile)
 
-    man, postfix = destination.split('.')
-    destDir = os.path.join(env.install_dir, dirs.man, "man" + postfix)
+def removeDir(destinationDirectory):
+    unlinkDir(get.installDIR() + destinationDirectory)
 
-    makedirs(destDir)
+''' ************************************************************************** '''
 
-    if not srcDir:
-        file = os.path.join(env.work_dir, env.src_name + "-" + env.src_version, source)
-    else:
-        file = os.path.join(env.work_dir, srcDir, source)
+def preplib():
+    '''prepare all library files for installation'''
+    pass
 
-    if os.access(file, os.F_OK):
-                copy_file(file, os.path.join(destDir, os.path.basename(destination)))
-
-def remove(filename):
-
-    unlink(env.install_dir + filename)
-
-def removeDir(dirname):
-    
-    clean_dir(env.install_dir + dirname)
-
-def doecho(content, filename):
-    makedirs(env.install_dir + '/' + os.path.dirname(filename))
-    
-    f = open(env.install_dir + '/' + filename, 'w')
-    f.write(content)
-    f.close()
-
-def gen_usr_ldscript(parameters = ''): 
-
-    dodir("/usr/lib")
-
-    f = open(env.install_dir + '/usr/lib/' + parameters, 'w')
-    content = '''
-/* GNU ld script
-    Since Pardus has critical dynamic libraries
-    in /lib, and the static versions in /usr/lib,
-    we need to have a "fake" dynamic lib in /usr/lib,
-    otherwise we run into linking problems.
-*/
-GROUP ( /lib/%s )
-''' % parameters
-    f.write(content)
-    f.close()
-    chmod(env.install_dir + "/usr/lib/%s" % parameters)
-
-def preplib(parameters = ''):
-    os.system("/sbin/ldconfig -n -N %s%s" % (env.install_dir, parameters))
+def preplib_so():
+    '''prepare dynamic library files for installation'''
+    pass

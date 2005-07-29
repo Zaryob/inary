@@ -5,7 +5,7 @@
 import os
 
 # actions api modules
-from actionglobals import glb
+from variables import glb
 
 def configure(parameters = ''):
     ''' FIXME: Düzgün hale getirilecek '''
