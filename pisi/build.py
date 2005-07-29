@@ -94,7 +94,9 @@ class PisiBuild:
         # apply the patches and prepare a source directory for build.
         self.applyPatches()
 
-        self.runActions()
+        self.runSetupAction()
+        self.runBuildAction()
+        self.runInstallAction()
 
         # after all, we are ready to build/prepare the packages
         self.buildPackages()
@@ -123,22 +125,20 @@ class PisiBuild:
         self.sourceArchive.unpack()
         ui.info(" unpacked (%s)\n" % self.ctx.pkg_work_dir())
 
-    def runActions(self):
-        # we'll need our working directory after actionscript
-        # finished its work in the archive source directory.
-        curDir = os.getcwd()
-        os.chdir(self.srcDir)
-
+    def runSetupAction(self):
         #  Run configure, build and install phase
         ui.action("Setting up source...\n")
         self.runActionFunction(const.setup_func)
+
+    def runBuildAction(self):
         ui.action("Building source...\n")
         self.runActionFunction(const.build_func)
+
+    def runInstallAction(self):
         ui.action("Intalling...\n")
         # install function is mandatory!
         self.runActionFunction(const.install_func, True)
 
-        os.chdir(curDir)
 
     def compileActionScript(self):
         """Compiles actions.py and sets the actionLocals and actionGlobals"""
@@ -177,11 +177,19 @@ class PisiBuild:
 
         If mandatory parameter is True, and function is not present in
         actionLocals PisiBuildError will be raised."""
+        # we'll need our working directory after actionscript
+        # finished its work in the archive source directory.
+        curDir = os.getcwd()
+        os.chdir(self.srcDir)
+
+
         if func in self.actionLocals:
             self.actionLocals[func]()
         else:
             if mandatory:
                 PisiBuildError, "unable to call function from actions: %s" %func
+
+        os.chdir(curDir)
 
     def solveBuildDependencies(self):
         """pre-alpha: fail if dependencies not satisfied"""

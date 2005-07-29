@@ -151,13 +151,32 @@ def build_unpack(pspecfile, authInfo=None):
     pb.compileActionScript()
     pb.applyPatches()
 
-def build_runactions(pspecfile, authInfo=None):
+def build_runSetupAction(pspecfile, authInfo=None):
     pb = prepare_for_build(pspecfile, authInfo)
     pb.fetchSourceArchive()
     pb.unpackSourceArchive()
     pb.compileActionScript()
     pb.applyPatches()
-    pb.runActions()
+    pb.runSetupAction()
+
+def build_runBuildAction(pspecfile, authInfo=None):
+    pb = prepare_for_build(pspecfile, authInfo)
+    pb.fetchSourceArchive()
+    pb.unpackSourceArchive()
+    pb.compileActionScript()
+    pb.applyPatches()
+    pb.runSetupAction()
+    pb.runBuildAction()
+
+def build_runInstallAction(pspecfile, authInfo=None):
+    pb = prepare_for_build(pspecfile, authInfo)
+    pb.fetchSourceArchive()
+    pb.unpackSourceArchive()
+    pb.compileActionScript()
+    pb.applyPatches()
+    pb.runSetupAction()
+    pb.runBuildAction()
+    pb.runInstallAction()
 
 def build(pspecfile, authInfo=None):
     pb = prepare_for_build(pspecfile, authInfo)

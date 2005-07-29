@@ -13,7 +13,9 @@ def cmdObject(cmd, fail=False):
     commands = {"help": Help,
                 "build": Build,
                 "build-unpack": BuildUnpack,
-                "build-runactions": BuildRunActions,
+                "build-runsetupaction": BuildRunSetupAction,
+                "build-runbuildaction": BuildRunBuildAction,
+                "build-runinstallaction": BuildRunInstallAction,
                 "info": Info,
                 "install": Install,
                 "list-installed": ListInstalled,
@@ -394,18 +396,16 @@ for you.
         for arg in self.args:
             pisi.toplevel.build_unpack(arg, self.authInfo)
 
-class BuildRunActions(Command):
+class BuildRunSetupAction(Command):
     """Unpack source using a pspec.xml file
 
     Usage:
-    build-runactions pspec.xml
+    build-runsetupaction pspec.xml
 
-You can give an URI of the pspec.xml file. PISI will fetch all
-necessary files and unpack the source, prepare a source directory and
-run the functions in actions.py.
+TODO: Some desc.
 """
     def __init__(self):
-        super(BuildRunActions, self).__init__()
+        super(BuildRunSetupAction, self).__init__()
 
     def run(self):
         if not self.args:
@@ -413,4 +413,44 @@ run the functions in actions.py.
             return
 
         for arg in self.args:
-            pisi.toplevel.build_runactions(arg, self.authInfo)
+            pisi.toplevel.build_runSetupAction(arg, self.authInfo)
+
+
+class BuildRunBuildAction(Command):
+    """Unpack source using a pspec.xml file
+
+    Usage:
+    build-runbuildaction pspec.xml
+
+TODO: Some desc.
+"""
+    def __init__(self):
+        super(BuildRunBuildAction, self).__init__()
+
+    def run(self):
+        if not self.args:
+            self.help()
+            return
+
+        for arg in self.args:
+            pisi.toplevel.build_runBuildAction(arg, self.authInfo)
+
+
+class BuildRunInstallAction(Command):
+    """Unpack source using a pspec.xml file
+
+    Usage:
+    build-runsetupactions pspec.xml
+
+TODO: Some desc.
+"""
+    def __init__(self):
+        super(BuildRunInstallAction, self).__init__()
+
+    def run(self):
+        if not self.args:
+            self.help()
+            return
+
+        for arg in self.args:
+            pisi.toplevel.build_runInstallAction(arg, self.authInfo)

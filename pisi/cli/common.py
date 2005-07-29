@@ -5,7 +5,9 @@ where <command> is one of:
 help
 build
 build-unpack
-build-runactions
+build-runsetupaction
+build-runbuildaction
+build-runinstallaction
 index
 info
 install
