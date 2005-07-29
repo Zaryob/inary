@@ -27,6 +27,18 @@ class PGraph(digraph):
         self.add_edge(str(pkg), str(depinfo.package), ('d', depinfo),
                       pkg1data, pkg2data )
 
+    def add_rev_dep(self, depinfo, pkg):
+        pkg1data = None
+        if not pkg in self.vertices():
+            pkg1 = packagedb.get_package(depinfo.package)
+            pkg1data = (pkg1.version, pkg1.release)
+        pkg2data = None
+        if not depinfo.package in self.vertices():
+            pkg2 = packagedb.get_package(pkg)
+            pkg2data = (pkg2.version, pkg2.release) 
+        self.add_edge(str(depinfo.package), str(pkg), ('d', depinfo),
+                      pkg1data, pkg2data )
+
     def add_conflict(self, pkg, conflinfo):
         pkg1data = None
         if not pkg in self.vertices():

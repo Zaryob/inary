@@ -100,10 +100,46 @@ def install_pkg_names(A):
         
     return True                         # everything went OK :)
 
-def remove(packages):
-    #TODO: this for loop is just a placeholder
-    for x in packages:
-        operations.remove_single(x)
+def remove(A):
+    """remove set A of packages from system"""
+    
+    if len(A)==0:
+        return True
+    
+    # try to construct a pisi graph of packages to
+    # install / reinstall
+
+    G_f = pgraph.PGraph()               # construct G_f
+
+    # find the "install closure" graph of G_f by package 
+    # set A using packagedb
+    print A
+    for x in A:
+        G_f.add_package(x)
+    B = A
+    #state = {}
+    while len(B) > 0:
+        Bp = set()
+        for x in B:
+            pkg = packagedb.get_package(x)
+            print pkg
+            rev_deps = packagedb.get_rev_deps(x)
+            for dep in rev_deps:
+                print 'checking ', dep
+                # we don't deal with satisfied dependencies
+                if not dependency.satisfiesDep(dep.package, dep):
+                    if not dep.package in G_f.vertices():
+                        Bp.add(str(dep.package))
+                        G_f.add_rev_dep(dep, x)
+        B = Bp
+    G_f.write_graphviz(sys.stdout)
+    l = G_f.topological_sort()
+    print l
+    for x in l:
+        #operations.remove_single_name(x)
+        pass
+        
+    return True                         # everything went OK :)
 
 
 def info(package_name):
