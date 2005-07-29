@@ -75,7 +75,7 @@ class PatchInfo:
         if self.compressionType:
             node.setAttribute("compressionType", self.compressionType)
         if self.level:
-            node.setAttribute("level", self.level)            
+            node.setAttribute("level", str(self.level))
         return node
 
     def verify(self):
