@@ -32,15 +32,16 @@ class PackagerInfo:
         if not self.email: return False
         return True
 
+    def __str__(self):
+        s = " ".join(self.name, self.email)
+        return s
+
 class AdditionalFileInfo:
     def __init__(self, node = None):
         if node:
             self.filename = getNodeText(node)
             self.target = getNodeAttribute(node, "target")
             self.permission = getNodeAttribute(node, "permission")
-            self.owner = getNodeAttribute(node, "owner")
-        else:
-            self.permission = self.owner = None
 
     def elt(self, xml):
         node = xml.newNode("AdditionalFile")
@@ -48,13 +49,16 @@ class AdditionalFileInfo:
         node.setAttribute("target", self.target)
         if self.permission:
             node.setAttribute("permission", self.permission)
-        if self.owner:
-            node.setAttribute("owner", self.owner)
 
     def verify(self):
         if not self.filename: return False
         if not self.target: return False
         return True
+
+    def __str__(self):
+        s = "->".join(self.filename, self.target)
+        s += s + '(' + self.permission + ')'
+        return s
 
 class PatchInfo:
     def __init__(self, node = None):
@@ -81,6 +85,12 @@ class PatchInfo:
     def verify(self):
         if not self.filename: return False
         return True
+
+    def __str__(self):
+        s = self.filename
+        s += ' (' + self.compressionType + ')'
+        s += ' level:' + self.level
+        return s
 
 class DepInfo:
     def __init__(self, node = None):
@@ -162,6 +172,13 @@ class UpdateInfo:
         if not self.release: return False
         return True
 
+    def __str__(self):
+        s = self.date
+        s += ", ver=" + self.version
+        s += ", rel=" + self.release
+        s += ", type=" + self.type
+        return s
+
 class PathInfo:
     def __init__(self, node = None):
         if node:
@@ -180,6 +197,11 @@ class PathInfo:
         if not self.pathname: return False
         return True
 
+    def __str__(self):
+        s = self.pathname
+        s += ", type=" + self.fileType
+        return s
+
 class ComarProvide:
     def __init__(self, node = None):
         if node:
@@ -196,6 +218,11 @@ class ComarProvide:
         if not self.om or not self.script:
             return False
         return True
+
+    def __str__(self):
+        s = self.script
+        s += ' (' + self.om + ')'
+        return s
 
 class SourceInfo:
     """A structure to hold source information. Source information is

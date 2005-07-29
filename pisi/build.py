@@ -287,12 +287,6 @@ class PisiBuild:
                 util.copy_file(src, dest)
                 if afile.permission:
                     os.chmod(dest, int(afile.permission) | 0777)
-                if afile.owner:
-                    #FIXME: Additional dosyalar icin owner'in set edilmesi
-                    # gerekli.. Bununla beraber tag'in owner yerine, 
-                    # owneruid - ownergid seklinde tutulmasi daha iyi
-                    # degil mi? Unutmayalim diye buraya bir FIXME koydum.
-                    pass
 	
             os.chdir(c)
 
