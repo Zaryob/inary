@@ -26,10 +26,10 @@ def executable_insinto(sourceFile, destinationDirectory):
         raise FileError("File doesn't exists or permission denied...")
 
     if can_access_directory(destinationDirectory) and os.path.isdir(destinationDirectory):
-        os.system("install -m0755 -o caglar -g users %s %s" % (sourceFile, destinationDirectory))
+        os.system("install -m0755 -o root -g root %s %s" % (sourceFile, destinationDirectory))
     else:
         makedirs(destinationDirectory)
-        os.system("install -m0755 -o caglar -g users %s %s" % (sourceFile, destinationDirectory))
+        os.system("install -m0755 -o root -g root %s %s" % (sourceFile, destinationDirectory))
 
 def readable_insinto(destinationDirectory, *sourceFiles):
     '''inserts file list into destinationDirectory'''
