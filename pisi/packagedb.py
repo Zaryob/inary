@@ -15,7 +15,7 @@ import util
 from config import config
 from bsddb import db
 
-class PackageDBError:
+class PackageDBError(Exception):
     pass
 
 class PackageDB(object):
@@ -81,7 +81,7 @@ def get_package(name):
     for repo in packagedbs.keys():
         if get_db(repo).has_package(name):
             return get_db(repo).get_package(name)
-    raise PackageDBError('get_package: package ' + name + ' not found')
+    raise PackageDBError, 'get_package: package ' + name + ' not found'
 
 #def remove_package
 
