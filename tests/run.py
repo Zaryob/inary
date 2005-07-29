@@ -22,6 +22,7 @@ def run_all():
     import actionsapitests
     import graphtests
     import versiontests
+    import configfiletests
 
     alltests = unittest.TestSuite((
         utiltests.suite, 
@@ -36,7 +37,8 @@ def run_all():
         packagedbtests.suite,
         actionsapitests.suite,
         graphtests.suite,
-        versiontests.suite
+        versiontests.suite,
+        configfiletests.suite
         ))
 
     runTestSuite(alltests)
