@@ -13,6 +13,11 @@ def cmdObject(cmd, fail=False):
     commands = {"help": Help,
                 "build": Build,
                 "build-until": BuildUntil,
+                "build-dounpack": BuildDoUnpack,
+                "build-dosetup": BuildDoSetup,
+                "build-dobuild": BuildDoBuild,
+                "build-doinstall": BuildDoInstall,
+                "build-dopackage": BuildDoPackage,
                 "info": Info,
                 "install": Install,
                 "list-installed": ListInstalled,
@@ -400,4 +405,104 @@ for you.
 
         for arg in self.args:
             pisi.toplevel.build_until(arg, state, self.authInfo)
+
+class BuildDoUnpack(Command):
+    """Unpack the source archive
+
+    Usage:
+    build-dounpack <pspec file>
+
+TODO: desc.
+"""
+    def __init__(self):
+        super(BuildDoUnpack, self).__init__()
+
+    def run(self):
+        if not self.args:
+            self.help()
+            return
+
+        for arg in self.args:
+            pisi.toplevel.build_until(arg, "unpack", self.authInfo)
+
+
+class BuildDoSetup(Command):
+    """Setup the source
+
+    Usage:
+    build-dosetup <pspec file>
+
+TODO: desc.
+"""
+    def __init__(self):
+        super(BuildDoSetup, self).__init__()
+
+    def run(self):
+        if not self.args:
+            self.help()
+            return
+
+        for arg in self.args:
+            pisi.toplevel.build_until(arg, "setupaction", self.authInfo)
+
+
+class BuildDoBuild(Command):
+    """Setup the source
+
+    Usage:
+    build-dobuild <pspec file>
+
+TODO: desc.
+"""
+    def __init__(self):
+        super(BuildDoBuild, self).__init__()
+
+    def run(self):
+        if not self.args:
+            self.help()
+            return
+
+        for arg in self.args:
+            pisi.toplevel.build_until(arg, "buildaction", self.authInfo)
+
+class BuildDoInstall(Command):
+    """Install to the sandbox
+
+    Usage:
+    build-doinstall <pspec file>
+
+TODO: desc.
+"""
+    def __init__(self):
+        super(BuildDoInstall, self).__init__()
+
+    def run(self):
+        if not self.args:
+            self.help()
+            return
+
+        for arg in self.args:
+            pisi.toplevel.build_until(arg, "installaction", self.authInfo)
+
+class BuildDoPackage(Command):
+    """Setup the source
+
+    Usage:
+    build-dobuild <pspec file>
+
+TODO: desc.
+"""
+    def __init__(self):
+        super(BuildDoPackage, self).__init__()
+
+    def run(self):
+        if not self.args:
+            self.help()
+            return
+
+        for arg in self.args:
+            pisi.toplevel.build_until(arg, "buildpackages", self.authInfo)
+
+
+
 

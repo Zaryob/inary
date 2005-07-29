@@ -5,6 +5,11 @@ where <command> is one of:
 help
 build
 build-until
+build-dounpack
+build-dosetup
+build-dobuild
+build-doinstall
+build-dopackage
 index
 info
 install
