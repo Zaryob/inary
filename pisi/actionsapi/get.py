@@ -54,11 +54,7 @@ def LDFLAGS():
     return flags.ldflags
 
 def getBinutilsInfo(needed):
-    process = os.popen("type -p %s-%s" % (HOST(), needed))
-    output = process.readlines()
-    process.close()
-
-    return output[0]
+    return "%s-%s" % (HOST(), needed)
 
 def AR():
     return getBinutilsInfo("ar")
