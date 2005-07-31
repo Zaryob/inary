@@ -135,5 +135,8 @@ def addNode(dom, node, tagpath, newnode = None):
             return addTagPath(dom, node, tags, newnode)
         else:
             node = nodeList[len(nodeList)-1]
+    else:
+        # had only one tag..
+        return addTagPath(dom, node, tags, newnode)
 
     return node
