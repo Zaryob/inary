@@ -2,6 +2,8 @@
 # PISI source/package index
 # Author:  Eray Ozkural <eray@uludag.org.tr>
 
+import os
+
 from package import Package
 from xmlfile import XmlFile
 import metadata
@@ -9,6 +11,7 @@ import packagedb
 from ui import ui
 import util
 from config import config
+from constants import const
 from purl import PUrl
 
 class Index(XmlFile):
@@ -24,7 +27,6 @@ class Index(XmlFile):
         self.filepath = filename
         url = PUrl(filename)
         if url.isRemoteFile():
-            import os
             from fetcher import fetchUrl
 
             dest = os.path.join(config.index_dir(), repo)
@@ -52,14 +54,11 @@ class Index(XmlFile):
         
     def index(self, repo_uri):
         self.repo_dir = repo_uri
-
-        import os
-        from os.path import join, getsize
         for root, dirs, files in os.walk(repo_uri):
             for fn in files:
-                if fn.endswith('.pisi'):
+                if fn.endswith(const.package_prefix):
                     ui.info('Adding ' + fn + ' to package index\n')
-                    self.add_package(join(root, fn))
+                    self.add_package(os.path.join(root, fn))
 
     def update_db(self, repo):
         pkgdb = packagedb.get_db(repo)
@@ -74,7 +73,7 @@ class Index(XmlFile):
         package.extract_PISI_files(config.install_dir())
 
         md = metadata.MetaData()
-        md.read(config.install_dir() + '/metadata.xml')
+        md.read(os.path.join(config.install_dir(), const.metadata_xml))
         # TODO: in the future we'll do all of this with purl/pfile/&helpers
         md.package.packageURI = path
         # check package semantics
