@@ -51,8 +51,6 @@ class PackageInfo(specfile.PackageInfo):
 
     def elt(self, xml):
         node = specfile.PackageInfo.elt(self, xml)
-        xml.addTextNodeUnder(node, "Version", self.version)
-        xml.addTextNodeUnder(node, "Release", self.release)
         xml.addTextNodeUnder(node, "Build", str(self.build))
         xml.addTextNodeUnder(node, "Distribution", self.distribution)
         xml.addTextNodeUnder(node, "DistributionRelease", self.distributionRelease)
