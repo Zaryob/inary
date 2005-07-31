@@ -9,7 +9,6 @@
 # python standard library modules
 import urllib2
 import os
-from urllib import addinfourl
 from base64 import encodestring
 
 # pisi modules
@@ -42,7 +41,6 @@ class Fetcher:
         self.percent = 0
         self.rate = 0.0
         self.progress = None
-        self.existSize = 0
 
     def fetch (self):
         """Return value: Fetched file's full path.."""
@@ -101,7 +99,7 @@ class Fetcher:
         if not os.access(url.path(), os.F_OK):
             self.err("no such file or no perm to read")
 
-        dest = open(os.path.join(self.filedest, url.filename()) , "wb")
+        dest = open(os.path.join(self.filedest, url.filename()) , "w")
         totalsize = os.path.getsize(url.path())
         fileObj = open(url.path())
         self.doGrab(fileObj, dest, totalsize)
@@ -109,17 +107,9 @@ class Fetcher:
     def fetchRemoteFile (self):
         from httplib import HTTPException
 
-        localFile = os.path.join(self.filedest, self.url.filename())
-
-        if os.path.exists(localFile) and self.url.scheme() == "http" or self.url.scheme() == "https":
-            self.existSize = os.path.getsize(localFile)
-            ui.info('Resuming (%d bytes already downloaded)...\n' % self.existSize)
-            dest = open(localFile, "ab")
-        else:
-            dest = open(localFile, "wb")
-                
         try:
-            fileObj = urllib2.urlopen(self.formatRequest(urllib2.Request(self.url.uri)))
+            fileObj = urllib2.urlopen(self.formatRequest\
+                                     (urllib2.Request(self.url.uri)))
             headers = fileObj.info()
     
         except ValueError, e:
@@ -135,6 +125,7 @@ class Fetcher:
             totalsize = 0 # could not get the totalsize of file
         else: totalsize = int(headers['Content-Length'])
 
+        dest = open(os.path.join(self.filedest, self.url.filename()) , "w")
         self.doGrab(fileObj, dest, totalsize)
 
     def formatRequest(self, request):
@@ -142,29 +133,8 @@ class Fetcher:
         if authinfo:
             enc = encodestring("%s:%s" % authinfo)
             request.add_header('Authorization', 'Basic %s' % enc)
-        if self.existSize:
-            range_handler = HTTPRangeHandler()
-            opener = urllib2.build_opener(range_handler)
-            urllib2.install_opener(opener)
-            request.add_header('Range', 'bytes=%d-' % self.existSize)
         return request
 
     def err (self, error):
         raise FetchError(error)
 
-class HTTPRangeHandler(urllib2.BaseHandler):
-    """ 
-    "urllib2, the 'Error 206: Partial Content'
-    reponse from the HTTP server is really what we expected.
-    Don't give up, resume the download..
-    """
-
-    def http_error_206(self, request, fp, errcode, msg, headers):
-        return addinfourl(fp, headers, request.get_full_url())
-
-    def http_error_416(self, request, fp, errcode, msg, headers):
-        # HTTP 1.1's 'Range Not Satisfiable' error..
-        raise FetchError('Requested Range Not Satisfiable')
-
-class FTPRangeHandler:
-    pass
