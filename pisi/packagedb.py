@@ -32,7 +32,14 @@ class PackageDB(object):
         self.lockfile = self.fname + '.lock'
  
         self.fdummy = file(self.lockfile, 'w')
-        fcntl.flock(self.fdummy, fcntl.LOCK_EX)
+        try:
+            fcntl.flock(self.fdummy, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except IOError:
+            import sys
+            from ui import ui
+            ui.error("Another instance of PISI is running. Try later!\n")
+            sys.exit(1)
+            
 
     def has_package(self, name):
         name = str(name)
