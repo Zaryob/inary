@@ -89,8 +89,9 @@ class Installer:
         # TODO: when repodb comes alive, this will put it into 3rd
         # party packagedb
         if not packagedb.has_package(self.pkginfo.name):
-            packagedb.add_package(self.pkginfo) # terrible solution it seems
-    
+            db = packagedb.thirdparty_packagedb
+            db.add_package(self.pkginfo)
+
         # check conflicts
         for pkg in self.metadata.package.conflicts:
             if installdb.has_package(self.pkginfo):

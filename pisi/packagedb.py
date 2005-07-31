@@ -10,6 +10,7 @@
 #from bsddb.dbshelve import DBShelf
 import bsddb.dbshelve as shelve
 import os, fcntl
+import atexit
 
 import util
 from config import config
@@ -29,6 +30,7 @@ class PackageDB(object):
         self.dr = shelve.open(self.fname2)
         
         self.lockfile = self.fname + '.lock'
+ 
         self.fdummy = file(self.lockfile, 'w')
         fcntl.flock(self.fdummy, fcntl.LOCK_EX)
 
@@ -78,9 +80,9 @@ def remove_db(name):
     #erase database file
 
 def has_package(name):
-    for repo in packagedbs.keys():
-        if get_db(repo).has_package(name):
-            return True
+    repo = which_repo(name)
+    if repo or thirdparty_packagedb.has_package(name):
+        return True
     return False
 
 def which_repo(name):
@@ -90,16 +92,19 @@ def which_repo(name):
     return None
 
 def get_package(name):
-    for repo in packagedbs.keys():
-        if get_db(repo).has_package(name):
-            return get_db(repo).get_package(name)
-    raise PackageDBError, 'get_package: package ' + name + ' not found'
+    repo = which_repo(name)
+    if repo:
+        return get_db(repo).get_package(name)
+    if thirdparty_packagedb.has_package(name):
+        return thirdparty_packagedb.get_package(name)
+    raise PackageDBError, 'get_package: package %s not found' % name
 
 def get_rev_deps(name):
     repo = which_repo(name)
-    return get_db(repo).get_rev_deps(name)
+    if repo:
+        return get_db(repo).get_rev_deps(name)
+    if thirdparty_packagedb.has_package(name):
+        return thirdparty_packagedb.get_rev_deps(name)    
 
-
-#def remove_package
-
-inst_packagedb = PackageDB('local')
+inst_packagedb = PackageDB('installed')
+thirdparty_packagedb = PackageDB('thirdparty')
