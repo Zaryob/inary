@@ -10,7 +10,6 @@
 #from bsddb.dbshelve import DBShelf
 import bsddb.dbshelve as shelve
 import os, fcntl
-import atexit
 
 import util
 from config import config
