@@ -17,19 +17,14 @@ class InstallDBTestCase(unittest.TestCase):
         
     def testInstall(self):
         installdb.purge('installtest')
-        installdb.install('installtest', '0.1', '2', './tests/sandbox/files.xml')
-        f = installdb.files('installtest')
-        a = f.readlines()
-        self.assertEqual(a[0], 'placeholder\n')
-        self.assert_(installdb.is_installed('installtest'))
+        installdb.install('installtest', '0.1', '2')
 
     def testRemovePurge(self):
-        installdb.install('installtest', '0.1', '2', './tests/sandbox/files.xml')
+        installdb.install('installtest', '0.1', '2')
         self.assert_(installdb.is_installed('installtest'))
         installdb.remove('installtest')
         self.assert_(installdb.is_removed('installtest'))
         installdb.purge('installtest')
         self.assert_(not installdb.is_recorded('installtest'))
-        self.assert_(not os.access(installdb.files_name('installtest', '0.1','2'), os.F_OK))
 
 suite = unittest.makeSuite(InstallDBTestCase)
