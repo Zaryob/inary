@@ -175,7 +175,7 @@ def update_repo(repo):
 
     ui.info('* Updating repository: %s\n' % repo)
     index = Index()
-    index.read(repodb.get_repo(repo).indexuri.getUri())
+    index.read(repodb.get_repo(repo).indexuri.getUri(), repo)
     index.update_db(repo)
     ui.info('* Package db updated.\n')
 
