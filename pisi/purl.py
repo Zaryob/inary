@@ -79,4 +79,7 @@ class PUrl(object):
     def fragment(self):
         return self.__fragment
 
+    def __str__(self):
+        return self.getUri()
+
     uri = property(getUri, setUri)
