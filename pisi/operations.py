@@ -57,10 +57,22 @@ def install_single_name(name):
     # find package in repository
     repo = packagedb.which_repo(name)
     if repo:
+        # TODO: Allright this is ugly, but works.  Eventually, we'll
+        # change this...
+        from repodb import repodb
+        repo = repodb.get_repo(repo)
         pkg = packagedb.get_package(name)
-        ui.info("Installing %s from repository %s\n" %(name, repo))
-        ui.debug("Package URI: %s\n" % pkg.packageURI)
-        install_single_file(pkg.packageURI)
+
+        if repo.indexuri.isLocalFile():
+            pkg_path = pkg.packageURI
+        else:
+            pkg_path = os.path.join(os.path.dirname(repo.indexuri.getUri()),
+                                    pkg.packageURI)
+
+        ui.debug("Package URI: %s\n" % pkg_path)
+
+        # Package will handle remote file for us!
+        install_single_file(pkg_path)
     else:
         ui.error("Package %s not found in the repository file.\n" % pkg)
 

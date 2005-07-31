@@ -58,7 +58,7 @@ class Index(XmlFile):
             for fn in files:
                 if fn.endswith(const.package_prefix):
                     ui.info('Adding ' + fn + ' to package index\n')
-                    self.add_package(os.path.join(root, fn))
+                    self.add_package(os.path.join(root, fn), repo_uri)
 
     def update_db(self, repo):
         pkgdb = packagedb.get_db(repo)
@@ -66,7 +66,7 @@ class Index(XmlFile):
         for pkg in self.packages:
             pkgdb.add_package(pkg)
 
-    def add_package(self, path):
+    def add_package(self, path, repo_uri):
         package = Package(path, 'r')
         # extract control files
         util.clean_dir(config.install_dir())
@@ -75,7 +75,9 @@ class Index(XmlFile):
         md = metadata.MetaData()
         md.read(os.path.join(config.install_dir(), const.metadata_xml))
         # TODO: in the future we'll do all of this with purl/pfile/&helpers
-        md.package.packageURI = path
+        # After that, we'll remove the ugly repo_uri parameter from this
+        # function.
+        md.package.packageURI = util.removepathprefix(repo_uri, path)
         # check package semantics
         if md.verify():
             self.packages.append(md.package)
