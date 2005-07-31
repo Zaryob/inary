@@ -1,7 +1,18 @@
+# Copyright (C) 2005, TUBITAK/UEKAE
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 2 of the License, or (at your option)
+# any later version.
+#
+# Please read the COPYING file.
+#
+
 # Metadata module provides access to metadata.xml. metadata.xml is
 # generated during the build process of a package and used in the
 # installation. Package repository also uses metadata.xml for building
 # a package index.
+
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 #           Baris Metin <baris@uludag.org.tr
 
