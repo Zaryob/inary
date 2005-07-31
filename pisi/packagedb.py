@@ -10,6 +10,7 @@
 #from bsddb.dbshelve import DBShelf
 import bsddb.dbshelve as shelve
 import os, fcntl
+import atexit
 
 import util
 from config import config
@@ -27,13 +28,14 @@ class PackageDB(object):
         self.d = shelve.open(self.fname)
         self.fname2 = os.path.join(config.db_dir(), 'revdep-%s.bdb'  % id )
         self.dr = shelve.open(self.fname2)
-        self.fdummy = file(self.fname + '.lock', 'w')
+        
+        self.lockfile = self.fname + '.lock'
+        if os.path.exists(self.lockfile):
+            # buraya hic bir zaman gelmemesi gerekiyor.
+            raise PackageDBError, "Lock file exists. Something is wrong!"
+ 
+        self.fdummy = file(self.lockfile, 'w')
         fcntl.flock(self.fdummy, fcntl.LOCK_EX)
-
-    def __del__(self):
-        #fcntl.flock(self.fdummy, fcntl.LOCK_UN)
-        self.fdummy.close()
-        #os.unlink(self.fname + '.lock')
 
     def has_package(self, name):
         name = str(name)
@@ -72,6 +74,7 @@ packagedbs = {}
 
 def add_db(name):
     packagedbs[name] = PackageDB('repo-' + name)
+    atexit.register(close, packagedbs[name])
 
 def get_db(name):
     return packagedbs[name]
@@ -102,6 +105,17 @@ def get_rev_deps(name):
     repo = which_repo(name)
     return get_db(repo).get_rev_deps(name)
 
+def close(pkg_db):
+    try:
+        fcntl.flock(pkg_db.fdummy, fcntl.LOCK_UN)
+        pkg_db.fdummy.close()
+        os.unlink(pkg_db.lockfile)
+    except ValueError:
+        # packagedb allready closed.
+        pass
+
+
 #def remove_package
 
 inst_packagedb = PackageDB('local')
+atexit.register(close, inst_packagedb)
