@@ -71,7 +71,7 @@ class PackageDB(object):
 packagedbs = {}
 
 def add_db(name):
-    packagedbs[name] = PackageDB(name)
+    packagedbs[name] = PackageDB('repo-' + name)
 
 def get_db(name):
     return packagedbs[name]
