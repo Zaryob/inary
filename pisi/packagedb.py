@@ -97,7 +97,7 @@ def remove_db(name):
 
 def has_package(name):
     repo = which_repo(name)
-    if repo or thirdparty_packagedb.has_package(name):
+    if repo or thirdparty_packagedb.has_package(name) or inst_packagedb.has_package(name):
         return True
     return False
 
@@ -113,6 +113,8 @@ def get_package(name):
         return get_db(repo).get_package(name)
     if thirdparty_packagedb.has_package(name):
         return thirdparty_packagedb.get_package(name)
+    if inst_packagedb.has_package(name):
+        return inst_packagedb.get_package(name)
     raise PackageDBError, 'get_package: package %s not found' % name
 
 def get_rev_deps(name):
@@ -121,6 +123,8 @@ def get_rev_deps(name):
         return get_db(repo).get_rev_deps(name)
     if thirdparty_packagedb.has_package(name):
         return thirdparty_packagedb.get_rev_deps(name)    
+    if inst_packagedb.has_package(name):
+        return inst_packagedb.get_rev_deps(name)
 
-inst_packagedb = PackageDB('installed')
 thirdparty_packagedb = PackageDB('thirdparty')
+inst_packagedb = PackageDB('installed')
