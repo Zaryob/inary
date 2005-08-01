@@ -69,7 +69,7 @@ class SourceFetcher(object):
         for pkg in self.spec.packages:
             for afile in pkg.additionalFiles:
                 afileuri = join(self.location, 
-                                const.files_dir, patch.filename)
+                                const.files_dir, afile.filename)
                 self.url.uri = afileuri
                 self.fetch(const.files_dir)
 
