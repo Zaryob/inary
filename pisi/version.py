@@ -23,7 +23,7 @@ class Version:
         return self.verstring
 
     def pred(self,rhs,pred):
-        for i in range(0, len(comps)-1):
+        for i in range(0, len(self.comps)-1):
             if pred(self.comps[i],rhs.comps[i]):
                 return True
         else:
