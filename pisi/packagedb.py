@@ -36,12 +36,8 @@ class PackageDB(object):
     def __init__(self, id):
         util.check_dir(config.db_dir())
         self.fname = os.path.join(config.db_dir(), 'package-%s.bdb' % id )
-        self.d = shelve.open(self.fname)
         self.fname2 = os.path.join(config.db_dir(), 'revdep-%s.bdb'  % id )
-        self.dr = shelve.open(self.fname2)
-        
         self.lockfile = self.fname + '.lock'
- 
         self.fdummy = file(self.lockfile, 'w')
         try:
             fcntl.flock(self.fdummy, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -50,6 +46,8 @@ class PackageDB(object):
             from ui import ui
             ui.error("Another instance of PISI is running. Try later!\n")
             sys.exit(1)
+        self.d = shelve.open(self.fname)
+        self.dr = shelve.open(self.fname2)
             
 
     def has_package(self, name):
