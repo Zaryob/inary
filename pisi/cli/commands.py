@@ -31,7 +31,7 @@ def cmdObject(cmd, fail=False):
                 "info": Info,
                 "install": Install,
                 "list-installed": ListInstalled,
-#                "list-available": ListAvailable,
+                "list-available": ListAvailable,
                 "search-available": SearchAvailable,
                 "remove": Remove,
                 "index": Index,
@@ -349,30 +349,40 @@ TODO: Some description...
             print repo
             print '  ', repodb.get_repo(repo).indexuri.getUri()
 
-# FIXME: Bu fonksiyonun başka bir şekilde implement edilmesi
-# gerekiyor. Şu anda zaten çalışmıyor.
-#
-# Uyarı: Eğer yaptığınız bir değişiklik bir fonksiyonu geçersiz
-# kılıyorsa, lütfen fonksiyonu comment-out edin. Ve nedenlerini yazın.
-#
-# class ListAvailable(Command):
-#     "list-available: list the available packages in the repository"
-#     def __init__(self):
-#         super(ListAvailable, self).__init__()
 
-#     def run(self):
-#         self.init_db()
-#         from pisi import util
-#         # FIXME: bu asagidaki code bayagi anlamsiz
-#         # neden bir packagedb'miz var?
-#         (repo, index) = util.repo_index()
+class ListAvailable(Command):
+    """List available packages in the repositories
 
-#         for package in index.packages:
-#             name = package.name
-#             version = package.history[0].version
-#             release = package.history[0].release
+    Usage:
+    list-available [repo]
 
-#             print util.package_name(name, version, release)
+TODO: desc...
+"""
+    def __init__(self):
+        super(ListAvailable, self).__init__()
+    
+    def run(self):
+        from pisi.repodb import repodb
+        from pisi.ui import ui
+
+        self.init_db()
+
+        if self.args:
+            for arg in self.args:
+                self.print_packages(arg)
+        else:
+            # print for all repos
+            for repo in repodb.list():
+                ui.info("Repository : %s\n" % repo)
+                self.print_packages(repo)
+
+    def print_packages(self, repo):
+        from pisi import packagedb
+
+        pkg_db = packagedb.get_db(repo)
+        for p in pkg_db.list_packages():
+            print p
+
 
 class SearchAvailable(Command):
     """Search in available packages
