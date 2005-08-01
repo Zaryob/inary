@@ -29,10 +29,15 @@ from index import Index
 def install(packages):
     """install a list of packages (either files/urls, or names)"""
     # determine if this is a list of files/urls or names
-    if packages[0].endswith(const.package_prefix): # they all have to!
-        install_pkg_files(packages)
-    else:
-        install_pkg_names(packages)
+    try:
+        if packages[0].endswith(const.package_prefix): # they all have to!
+            install_pkg_files(packages)
+        else:
+            install_pkg_names(packages)
+    except packagedb.PackageDBError, e:
+        ui.error("PackageDBError: (%s)\n" % e)
+        ui.error("Package is not installable. Its very likely a dependency problem.\n")
+        
 
 def install_pkg_files(packages):
     """install a number of pisi package files"""
