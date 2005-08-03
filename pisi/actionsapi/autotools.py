@@ -21,7 +21,7 @@ def configure(parameters = ''):
     ''' FIXME: Düzgün hale getirilecek '''
     ''' parameters = '--with-nls --with-libusb --with-something-usefull '''
     dirs = glb.dirs
-    flags = glb.flags
+    env = glb.env
 
     configure_string = './configure --prefix=/%s \
                 --host=%s \
@@ -31,7 +31,7 @@ def configure(parameters = ''):
                 --sysconfdir=/%s \
                 --localstatedir=/%s \
                 %s' % (dirs.defaultprefix,
-                       flags.host,
+                       env.host,
                        dirs.man,
                        dirs.info,
                        dirs.data,
