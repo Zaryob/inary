@@ -205,6 +205,13 @@ def copy_dir(src, dest):
     """copy source dir to destination dir recursively"""
     shutil.copytree(src, dest)
 
+def check_file_hash(filename, hash):
+    """Check the files integrity with a given hash"""
+    if sha1_file(filename) == hash:
+        return True
+
+    return False
+
 def sha1_file(filename):
     """calculate sha1 hash of filename"""
     # Broken links can cause problem!

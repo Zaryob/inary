@@ -37,7 +37,9 @@ class SourceArchive:
     def __init__(self, ctx):
         self.ctx = ctx
         self.url = PUrl(self.ctx.spec.source.archiveUri)
-        self.dest = join(config.archives_dir(), self.url.filename())
+        self.archiveFile = join(config.archives_dir(), self.url.filename())
+        self.archiveType = self.ctx.spec.source.archiveType
+        self.archiveSHA1 = self.ctx.spec.source.archiveSHA1
 
     def fetch(self, interactive=True):
         if not self.isCached(interactive):
@@ -47,11 +49,11 @@ class SourceArchive:
             fetchUrl(self.url, config.archives_dir(), progress)
         
     def isCached(self, interactive=True):
-        if not access(self.dest, R_OK):
+        if not access(self.archiveFile, R_OK):
             return False
 
         # check hash
-        if util.sha1_file(self.dest) == self.ctx.spec.source.archiveSHA1:
+        if util.check_file_hash(self.archiveFile, self.archiveSHA1):
             if interactive:
                 ui.info('%s [cached]\n' % self.ctx.spec.source.archiveName)
             return True
@@ -59,5 +61,10 @@ class SourceArchive:
         return False
 
     def unpack(self, cleanDir=True):
-        archive = Archive(self.dest, self.ctx.spec.source.archiveType)
+
+        # check archive file's integrity
+        if not util.check_file_hash(self.archiveFile, self.archiveSHA1):
+            raise SourceArchiveError, "unpack: check_file_hash failed"
+            
+        archive = Archive(self.archiveFile, self.archiveType)
         archive.unpack(self.ctx.pkg_work_dir(), cleanDir)
