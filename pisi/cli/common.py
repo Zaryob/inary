@@ -15,11 +15,11 @@ where <command> is one of:
 help
 build
 build-until
-build-dounpack
-build-dosetup
-build-dobuild
-build-doinstall
-build-dopackage
+build-unpack
+build-setup
+build-build
+build-install
+build-package
 index
 info
 install

@@ -238,15 +238,11 @@ def __buildState_unpack(pb):
     pb.unpackSourceArchive()
     pb.applyPatches()
 
-    pb.setState("unpack")
-
 def __buildState_setupaction(pb, last):
 
     if order[last] < order["unpack"]:
         __buildState_unpack(pb)
     pb.runSetupAction()
-
-    pb.setState("setupaction")
 
 def __buildState_buildaction(pb, last):
 
@@ -254,23 +250,17 @@ def __buildState_buildaction(pb, last):
         __buildState_setupaction(pb, last)
     pb.runBuildAction()
 
-    pb.setState("buildaction")
-
 def __buildState_installaction(pb, last):
     
     if order[last] < order["buildaction"]:
         __buildState_buildaction(pb, last)
     pb.runInstallAction()
 
-    pb.setState("installaction")
-
 def __buildState_buildpackages(pb, last):
 
     if order[last] < order["installaction"]:
         __buildState_installaction(pb, last)
     pb.buildPackages()
-
-    pb.setState("buildpackages")
 
 def build_until(pspecfile, state, authInfo=None):
     pb = prepare_for_build(pspecfile, authInfo)
@@ -294,12 +284,7 @@ def build_until(pspecfile, state, authInfo=None):
         return
 
     if state == "installaction":
-        print "blibli"
         __buildState_installaction(pb, last)
         return
 
     __buildState_buildpackages(pb, last)
-    
-
-
-

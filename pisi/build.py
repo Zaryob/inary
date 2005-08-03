@@ -108,11 +108,11 @@ class PisiBuild:
         if os.path.exists(self.ctx.pkg_dir()):
             util.clean_dir(self.ctx.pkg_dir())
 
+        self.compileActionScript()
+         
         self.fetchSourceArchive()
 
         self.unpackSourceArchive()
-
-        self.compileActionScript()
 
         self.solveBuildDependencies()
 
@@ -144,26 +144,28 @@ class PisiBuild:
         ui.info("Source archive is stored: %s/%s\n"
                 %(self.ctx.archives_dir(), self.spec.source.archiveName))
 
-
     def unpackSourceArchive(self):
         ui.info("Unpacking archive...")
         self.sourceArchive.unpack()
         ui.info(" unpacked (%s)\n" % self.ctx.pkg_work_dir())
+        self.setState("unpacked")
 
     def runSetupAction(self):
         #  Run configure, build and install phase
         ui.action("Setting up source...\n")
         self.runActionFunction(const.setup_func)
+        self.setState("setupaction")
 
     def runBuildAction(self):
         ui.action("Building source...\n")
         self.runActionFunction(const.build_func)
+        self.setState("buildaction")
 
     def runInstallAction(self):
-        ui.action("Intalling...\n")
+        ui.action("Installing...\n")
         # install function is mandatory!
         self.runActionFunction(const.install_func, True)
-
+        self.setState("installaction")
 
     def compileActionScript(self):
         """Compiles actions.py and sets the actionLocals and actionGlobals"""
@@ -192,7 +194,6 @@ class PisiBuild:
             workdir = self.spec.source.name + "-" + self.spec.source.version
                     
         return os.path.join(self.ctx.pkg_work_dir(), workdir)
-        
 
     def runActionFunction(self, func, mandatory=False):
         """Calls the corresponding function in actions.py. 
@@ -332,3 +333,4 @@ class PisiBuild:
 
             pkg.close()
             os.chdir(c)
+            self.setState("buildpackages")

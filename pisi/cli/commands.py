@@ -23,11 +23,11 @@ def cmdObject(cmd, fail=False):
     commands = {"help": Help,
                 "build": Build,
                 "build-until": BuildUntil,
-                "build-dounpack": BuildDoUnpack,
-                "build-dosetup": BuildDoSetup,
-                "build-dobuild": BuildDoBuild,
-                "build-doinstall": BuildDoInstall,
-                "build-dopackage": BuildDoPackage,
+                "build-unpack": BuildUnpack,
+                "build-setup": BuildSetup,
+                "build-build": BuildBuild,
+                "build-install": BuildInstall,
+                "build-package": BuildPackage,
                 "info": Info,
                 "install": Install,
                 "list-installed": ListInstalled,
@@ -426,7 +426,7 @@ for you.
         for arg in self.args:
             pisi.toplevel.build_until(arg, state, self.authInfo)
 
-class BuildDoUnpack(Command):
+class BuildUnpack(Command):
     """Unpack the source archive
 
     Usage:
@@ -435,7 +435,7 @@ class BuildDoUnpack(Command):
 TODO: desc.
 """
     def __init__(self):
-        super(BuildDoUnpack, self).__init__()
+        super(BuildUnpack, self).__init__()
 
     def run(self):
         if not self.args:
@@ -446,7 +446,7 @@ TODO: desc.
             pisi.toplevel.build_until(arg, "unpack", self.authInfo)
 
 
-class BuildDoSetup(Command):
+class BuildSetup(Command):
     """Setup the source
 
     Usage:
@@ -455,7 +455,7 @@ class BuildDoSetup(Command):
 TODO: desc.
 """
     def __init__(self):
-        super(BuildDoSetup, self).__init__()
+        super(BuildSetup, self).__init__()
 
     def run(self):
         if not self.args:
@@ -466,7 +466,7 @@ TODO: desc.
             pisi.toplevel.build_until(arg, "setupaction", self.authInfo)
 
 
-class BuildDoBuild(Command):
+class BuildBuild(Command):
     """Setup the source
 
     Usage:
@@ -475,7 +475,7 @@ class BuildDoBuild(Command):
 TODO: desc.
 """
     def __init__(self):
-        super(BuildDoBuild, self).__init__()
+        super(BuildBuild, self).__init__()
 
     def run(self):
         if not self.args:
@@ -485,7 +485,7 @@ TODO: desc.
         for arg in self.args:
             pisi.toplevel.build_until(arg, "buildaction", self.authInfo)
 
-class BuildDoInstall(Command):
+class BuildInstall(Command):
     """Install to the sandbox
 
     Usage:
@@ -494,7 +494,7 @@ class BuildDoInstall(Command):
 TODO: desc.
 """
     def __init__(self):
-        super(BuildDoInstall, self).__init__()
+        super(BuildInstall, self).__init__()
 
     def run(self):
         if not self.args:
@@ -504,7 +504,7 @@ TODO: desc.
         for arg in self.args:
             pisi.toplevel.build_until(arg, "installaction", self.authInfo)
 
-class BuildDoPackage(Command):
+class BuildPackage(Command):
     """Setup the source
 
     Usage:
@@ -513,7 +513,7 @@ class BuildDoPackage(Command):
 TODO: desc.
 """
     def __init__(self):
-        super(BuildDoPackage, self).__init__()
+        super(BuildPackage, self).__init__()
 
     def run(self):
         if not self.args:
@@ -522,7 +522,3 @@ TODO: desc.
 
         for arg in self.args:
             pisi.toplevel.build_until(arg, "buildpackages", self.authInfo)
-
-
-
-
