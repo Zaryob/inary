@@ -29,7 +29,11 @@ class Env(object):
             'install_dir': 'INSTALL_DIR',
             'src_name': 'SRC_NAME',
             'src_version': 'SRC_VERSION',
-            'src_release': 'SRC_RELEASE'
+            'src_release': 'SRC_RELEASE',
+            'host': 'HOST',
+            'cflags': 'CFLAGS',
+            'cxxflags': 'CXXFLAGS',
+            'ldflags': 'LDFLAGS'
         }
 
     def __getattr__(self, attr):
@@ -60,7 +64,7 @@ class Flags:
     environ['HOST'] = host = values.build.host
     environ['CFLAGS'] = cflags = values.build.cflags
     environ['CXXFLAGS'] = cxxflags = values.build.cxxflags
-    ldflags = values.build.ldflags
+    environ['LDFLAGS'] = ldflags = values.build.ldflags
 
 class Variables(pisi.config.Config):
     const = pisi.constants.const

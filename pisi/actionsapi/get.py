@@ -52,16 +52,16 @@ def srcDIR():
     return env.src_name + '-' + env.src_version
         
 def HOST():
-    return flags.host
+    return env.host
 
 def CFLAGS():
-    return flags.cflags
+    return env.cflags
 
 def CXXFLAGS():
-    return flags.cxxflags
+    return env.cxxflags
 
 def LDFLAGS():
-    return flags.ldflags
+    return env.ldflags
 
 def getBinutilsInfo(needed):
     return "%s-%s" % (HOST(), needed)
