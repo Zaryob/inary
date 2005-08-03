@@ -28,15 +28,27 @@ from index import Index
 
 def install(packages):
     """install a list of packages (either files/urls, or names)"""
-    # determine if this is a list of files/urls or names
+
+    # FIXME: this function name "install" makes impossible to import
+    # and use install module directly.
+    from install import InstallError
+
     try:
+        # determine if this is a list of files/urls or names
         if packages[0].endswith(const.package_prefix): # they all have to!
             install_pkg_files(packages)
         else:
             install_pkg_names(packages)
+
+    except InstallError, e:
+        ui.error("%s\n" % e)
+
     except packagedb.PackageDBError, e:
         ui.error("PackageDBError: (%s)\n" % e)
         ui.error("Package is not installable. Its very likely a dependency problem.\n")
+
+    except Exception, e:
+        ui.error("Error: %e\n" % e)
         
 
 def install_pkg_files(packages):
