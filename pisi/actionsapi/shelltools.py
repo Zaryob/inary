@@ -28,12 +28,14 @@ def can_access_directory(destinationDirectory):
     return os.access(destinationDirectory, os.R_OK | os.W_OK | os.X_OK)
 
 def makedirs(destinationDirectory):
+    '''recursive directory creation function'''
     try:
         os.makedirs(destinationDirectory)
     except OSError:
         pass
 
 def chmod(sourceFile, mode = 0755):
+    '''change the mode of sourceFile to the mode'''
     for file in glob.glob(sourceFile):
         os.chmod(file, mode)
             
@@ -47,6 +49,7 @@ def unlinkDir(sourceDirectory):
         print "unlinkDir: remove failed..."
 
 def move(sourceFile, destinationFile):
+    '''recursively move a sourceFile or directory to destinationFile'''
     shutil.move(sourceFile, destinationFile)
 
 def touch(sourceFile):
@@ -54,6 +57,7 @@ def touch(sourceFile):
         os.utime(file, None)
 
 def cd(directoryName = ''):
+    '''change directory'''
     current = os.getcwd()
     if directoryName:
         os.chdir(directoryName)
@@ -61,6 +65,7 @@ def cd(directoryName = ''):
         os.chdir(os.path.dirname(current))
 
 def ls(sourceDirectory):
+    '''listdir'''
     return os.listdir(sourceDirectory)
 
 def export(key, value):
