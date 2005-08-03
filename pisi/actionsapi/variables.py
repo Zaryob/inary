@@ -20,9 +20,24 @@ import pisi.constants
 
 # Set individual information, that are generally needed for ActionsAPI
 
+def exportFlags():
+    '''General flags used in actions API.'''
+
+    # Build systems depend on these environment variables. That is why
+    # we export them instead of using as (instance) variables.
+    values = pisi.config.config.values
+    environ['HOST'] = host = values.build.host
+    environ['CFLAGS'] = cflags = values.build.cflags
+    environ['CXXFLAGS'] = cxxflags = values.build.cxxflags
+    environ['LDFLAGS'] = ldflags = values.build.ldflags
+
+
 class Env(object):
     '''General environment variables used in actions API'''
     def __init__(self):
+
+        setFlags()
+
         self.__vars = {
             'pkg_dir': 'PKG_DIR',
             'work_dir': 'WORK_DIR',
@@ -58,18 +73,10 @@ class Dirs:
     localstate = 'var/lib'
     defaultprefix = 'usr'
 
-class Flags:
-    '''General flags used in actions API'''
-    values = pisi.config.config.values
-    environ['HOST'] = host = values.build.host
-    environ['CFLAGS'] = cflags = values.build.cflags
-    environ['CXXFLAGS'] = cxxflags = values.build.cxxflags
-    environ['LDFLAGS'] = ldflags = values.build.ldflags
 
 class Variables(pisi.config.Config):
     const = pisi.constants.const
     env = Env()
     dirs = Dirs()
-    flags = Flags()
 
 glb = Variables()
