@@ -11,6 +11,7 @@
 # Please read the COPYING file.
 #
 
+# Standart Python Modules
 import os
 import glob
 import sys
@@ -18,6 +19,7 @@ import shutil
 import fileinput
 import re
 
+# ActionsAPI Modules
 import get
 from pisitools_functions import *
 from shelltools import *
@@ -80,7 +82,7 @@ def dohtml(*sourceFiles):
                             print "install -m0644 %s %s" % (os.path.join(root, source), destionationDirectory)
 
 def doinfo(*sourceFiles):
-    '''inserts the info files in the list of files into /usr/share/info'''
+    '''inserts the into files in the list of files into /usr/share/info'''
     readable_insinto(get.infoDIR(), *sourceFiles)
 
 def doinitd():
@@ -92,20 +94,35 @@ def dojar():
     pass
 
 def dolib(sourceFile, destinationDirectory = '/usr/lib'):
-    '''insert the library info /usr/lib'''
+    '''insert the library into /usr/lib'''
+    
+    '''example call: pisitools.dolib_a("libz.a")'''
+    '''example call: pisitools.dolib_a("libz.so")'''
+    #FIXME: Glob needed?
     sourceFile = os.path.join(get.workDIR(), get.srcDIR(), sourceFile)
     destinationDirectory = get.installDIR() + destinationDirectory
-    print destinationDirectory
-    makedirs(destinationDirectory)
-    os.system("install -m0644 %s %s" % (sourceFile, destinationDirectory))
 
-def dolib_a():
-    '''insert the static library info /usr/lib with permission 0644'''
-    pass
+    lib_insinto(sourceFile, destinationDirectory, 0755)
+    
+def dolib_a(sourceFile, destinationDirectory = '/usr/lib'):
+    '''insert the static library into /usr/lib with permission 0644'''
+    
+    '''example call: pisitools.dolib_a("staticlib/libvga.a")'''
+    #FIXME: Glob needed?
+    sourceFile = os.path.join(get.workDIR(), get.srcDIR(), sourceFile)
+    destinationDirectory = get.installDIR() + destinationDirectory
 
-def dolib_so():
-    '''insert the static library info /usr/lib with permission 0755'''
-    pass
+    lib_insinto(sourceFile, destinationDirectory, 0644)
+
+def dolib_so(sourceFile, destinationDirectory = '/usr/lib'):
+    '''insert the static library into /usr/lib with permission 0755'''
+    
+    '''example call: pisitools.dolib_so("pppd/plugins/minconn.so")'''
+    #FIXME: Glob needed?
+    sourceFile = os.path.join(get.workDIR(), get.srcDIR(), sourceFile)
+    destinationDirectory = get.installDIR() + destinationDirectory
+
+    lib_insinto(sourceFile, destinationDirectory, 0755)
 
 def doman(*sourceFiles):
     '''inserts the man pages in the list of files into /usr/share/man/'''
@@ -114,10 +131,10 @@ def doman(*sourceFiles):
     if not can_access_directory(get.manDIR()):
         makedirs(get.manDIR())
 
-    #FIXME: splitext
     for sourceFile in sourceFiles:
         for source in glob.glob(sourceFile):
             try:
+                #FIXME: splitext
                 pageName, pageDirectory = source.split('.')
             except ValueError:
                 print "doman: Wrong man page file"
@@ -186,19 +203,23 @@ def insinto(destinationDirectory, sourceFile,  destinationFile = ''):
 ''' ************************************************************************** '''
 
 def newdoc(sourceFile, destinationFile):
+    '''inserts a sourceFile into /usr/share/doc/PACKAGE/ directory as a destinationFile'''
     shutil.move(sourceFile, destinationFile)
     readable_insinto(get.installDIR() + "/usr/share/doc/" + get.srcTAG(), destinationFile)
 
 def newman(sourceFile, destinationFile):
+    '''inserts a sourceFile into /usr/share/man/manPREFIX/ directory as a destinationFile'''
     shutil.move(sourceFile, destinationFile)
     doman(destinationFile)
 
 ''' ************************************************************************** '''
 
 def remove(sourceFile):
+    '''removes sourceFile'''
     unlink(get.installDIR() + sourceFile)
 
 def removeDir(destinationDirectory):
+    '''removes destinationDirectory and its subtrees'''
     unlinkDir(get.installDIR() + destinationDirectory)
 
 ''' ************************************************************************** '''
