@@ -147,13 +147,18 @@ def domo_(*sourceFiles):
     '''inserts the mo files in the list of files into /usr/share/locale/LOCALE/LC_MESSAGES'''
     pass
 
-def domove(source, destination):
+def domove(sourceFile, destination, destinationFile = ''):
     '''moves sourceFile/Direcroty into destinationFile/Directory'''
     
     ''' example call: pisitools.domove("/usr/bin/bash", "/bin/bash")'''
     ''' example call: pisitools.domove("/usr/bin/", "/usr/sbin")'''
-    makedirs(get.installDIR() + os.path.dirname(destination))
-    shutil.move(get.installDIR() + source, get.installDIR() + destination)
+    makedirs(get.installDIR() + destination)
+        
+    for file in glob.glob(get.installDIR() + sourceFile):
+        if not destinationFile:
+            shutil.move(file, get.installDIR() + os.path.join(destination, os.path.basename(file)))
+        else:
+            shutil.move(file, get.installDIR() + os.path.join(destination, destinationFile))
 
 def dopython():
     '''FIXME: What the hell is this?'''
