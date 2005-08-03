@@ -104,10 +104,6 @@ class PisiBuild:
 
         ui.info("Building PISI source package: %s\n" % self.spec.source.name)
         
-        # remove the work/install directory before the build process        
-        if os.path.exists(self.ctx.pkg_dir()):
-            util.clean_dir(self.ctx.pkg_dir())
-
         self.compileActionScript()
          
         self.fetchSourceArchive()
@@ -146,6 +142,11 @@ class PisiBuild:
 
     def unpackSourceArchive(self):
         ui.info("Unpacking archive...")
+       
+        # Before unpack make sure work_dir is clean 
+        if os.path.exists(self.ctx.pkg_work_dir()):
+            util.clean_dir(self.ctx.pkg_work_dir())
+            
         self.sourceArchive.unpack()
         ui.info(" unpacked (%s)\n" % self.ctx.pkg_work_dir())
         self.setState("unpacked")
@@ -163,6 +164,11 @@ class PisiBuild:
 
     def runInstallAction(self):
         ui.action("Installing...\n")
+        
+        # Before install make sure install_dir is clean 
+        if os.path.exists(self.ctx.pkg_install_dir()):
+            util.clean_dir(self.ctx.pkg_install_dir())
+            
         # install function is mandatory!
         self.runActionFunction(const.install_func, True)
         self.setState("installaction")
