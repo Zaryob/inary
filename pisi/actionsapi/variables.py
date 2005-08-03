@@ -26,17 +26,16 @@ def exportFlags():
     # Build systems depend on these environment variables. That is why
     # we export them instead of using as (instance) variables.
     values = pisi.config.config.values
-    environ['HOST'] = host = values.build.host
-    environ['CFLAGS'] = cflags = values.build.cflags
-    environ['CXXFLAGS'] = cxxflags = values.build.cxxflags
-    environ['LDFLAGS'] = ldflags = values.build.ldflags
-
+    environ['HOST'] =  values.build.host
+    environ['CFLAGS'] = values.build.cflags
+    environ['CXXFLAGS'] = values.build.cxxflags
+    environ['LDFLAGS'] = values.build.ldflags
 
 class Env(object):
     '''General environment variables used in actions API'''
     def __init__(self):
 
-        setFlags()
+        exportFlags()
 
         self.__vars = {
             'pkg_dir': 'PKG_DIR',
@@ -72,7 +71,6 @@ class Dirs:
     conf = 'etc'
     localstate = 'var/lib'
     defaultprefix = 'usr'
-
 
 class Variables(pisi.config.Config):
     const = pisi.constants.const

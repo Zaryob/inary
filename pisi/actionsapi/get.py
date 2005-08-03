@@ -19,7 +19,6 @@ from variables import glb
 
 env = glb.env
 dirs = glb.dirs
-flags = glb.flags
 
 def pkgDIR():
     return env.pkg_dir
