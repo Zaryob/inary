@@ -103,6 +103,10 @@ class PisiBuild:
         """Build the package in one shot."""
 
         ui.info("Building PISI source package: %s\n" % self.spec.source.name)
+        
+        # remove the work/install directory before the build process        
+        if os.path.exists(self.ctx.pkg_dir()):
+            util.clean_dir(self.ctx.pkg_dir())
 
         self.fetchSourceArchive()
 
