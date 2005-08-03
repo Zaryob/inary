@@ -13,5 +13,13 @@
 from pisi.cli.pisicli import PisiCLI
 
 if __name__ == "__main__":
-    cli = PisiCLI()
-    cli.runCommand()
+    try:
+        cli = PisiCLI()
+        cli.runCommand()
+    except KeyboardInterrupt:
+        import sys
+        from pisi.ui import ui
+
+        ui.error("\nKeyboardIntterupt: exiting...\n")
+        sys.exit(1)
+        
