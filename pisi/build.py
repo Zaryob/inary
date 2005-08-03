@@ -142,11 +142,6 @@ class PisiBuild:
 
     def unpackSourceArchive(self):
         ui.info("Unpacking archive...")
-       
-        # Before unpack make sure work_dir is clean 
-        if os.path.exists(self.ctx.pkg_work_dir()):
-            util.clean_dir(self.ctx.pkg_work_dir())
-            
         self.sourceArchive.unpack()
         ui.info(" unpacked (%s)\n" % self.ctx.pkg_work_dir())
         self.setState("unpacked")
