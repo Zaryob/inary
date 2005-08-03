@@ -53,3 +53,17 @@ def readable_insinto(destinationDirectory, *sourceFiles):
     for sourceFile in sourceFiles:
         for source in glob.glob(sourceFile):
             os.system("install -m0644 %s %s" % (source, destinationDirectory))
+
+def lib_insinto(sourceFile, destinationDirectory, permission = 0644):
+    '''inserts a library fileinto destinationDirectory with given permission'''
+
+    if not sourceFiles or not destinationDirectory:
+        raise ArgumentError("Insufficient arguments...")
+
+    if not can_access_directory(destinationDirectory):
+        makedirs(destinationDirectory)
+    
+    if os.path.islink(sourceFile):
+        os.symlink(os.path.realpath(sourceFile), os.path.join(destinationDirectory, sourceFile))
+    else:
+        os.system("install -m%s %s %s" % (permission, sourceFile, destinationDirectory))
