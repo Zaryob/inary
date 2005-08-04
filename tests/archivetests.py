@@ -61,15 +61,15 @@ class ArchiveFileTestCase(unittest.TestCase):
         targetDir = ctx.pkg_work_dir()
         assert pathexists(targetDir + "/sandbox")
 
-        testfile = targetDir + "/sandbox/borek.cs"
+        testfile = targetDir + "/sandbox/loremipsum.txt"
         assert pathexists(testfile)
     
         # check file integrity
         self.assertEqual(util.sha1_file(testfile),
-             "06d0ee5ba49eccae6bc20552d55b3ba5ad52995e")
+             "80abb91ee44eb6eb69defa1e0760e58451351b94")
 
         # check for symbolic links
-        testfile = targetDir + "/sandbox/deneme/hed"
+        testfile = targetDir + "/sandbox/testdir/link1"
         assert islink(testfile)
 
     def testMakeZip(self):
@@ -103,9 +103,9 @@ class ArchiveFileTestCase(unittest.TestCase):
         assert ctx.spec.source.archiveType == "zip"
 
         achv = archive.Archive(filePath, ctx.spec.source.archiveType)
-        achv.unpack_files(["sandbox/borek.cs"], targetDir)
+        achv.unpack_files(["sandbox/loremipsum.txt"], targetDir)
         assert pathexists(targetDir + "/sandbox")
-        testfile = targetDir + "/sandbox/borek.cs"
+        testfile = targetDir + "/sandbox/loremipsum.txt"
         assert pathexists(testfile)
 
 suite = unittest.makeSuite(ArchiveFileTestCase)
