@@ -24,7 +24,7 @@ def remove_single(package_name):
     """Remove a single package"""
     from installdb import installdb
     from packagedb import inst_packagedb
-    from comariface import removeScripts
+    from comariface import comard
 
     #TODO: check dependencies
 
@@ -44,7 +44,8 @@ def remove_single(package_name):
             os.unlink(fpath)
     installdb.remove(package_name)
     inst_packagedb.remove_package(package_name)
-    removeScripts(package_name)
+    # FIXME: (return value)...
+    comard.remove(package_name)
 
 def install_single(pkg):
     """install a single package from URI or ID"""

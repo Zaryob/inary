@@ -26,7 +26,7 @@ import packagedb
 from packagedb import inst_packagedb
 import dependency
 from metadata import MetaData
-import comariface
+from comariface import comard
 import operations
 #import conflicts
 
@@ -83,11 +83,11 @@ class Installer:
         for pcomar in self.metadata.package.providesComar:
             scriptPath = os.path.join(self.package.comar_dir(),pcomar.script)
             ui.info("Registering COMAR script %s\n" % pcomar.script)
-            ret = comariface.registerScript(pcomar.om,
-                                            self.metadata.package.name,
-                                            scriptPath)
-            if not ret:
-                ui.error("registerScript failed. Be sure that comard is running!\n")
+            # FIXME: We must check the result of the command (possibly
+            # with id?)
+            comard.register(pcomar.om,
+                            self.metadata.package.name,
+                            scriptPath)
 
     def check_requirements(self):
         """check system requirements"""

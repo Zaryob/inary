@@ -48,8 +48,9 @@ def install(packages):
         ui.error("Package is not installable. Its very likely a dependency problem.\n")
 
     except Exception, e:
-        ui.error("Error: %e\n" % e)
-        
+        print e
+        ui.error("Error: %s\n" % e)
+
 
 def install_pkg_files(packages):
     """install a number of pisi package files"""
