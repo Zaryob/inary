@@ -52,6 +52,10 @@ def move(sourceFile, destinationFile):
     '''recursively move a sourceFile or directory to destinationFile'''
     shutil.move(sourceFile, destinationFile)
 
+def copy(sourceFile, destinationFile):
+    '''recursively copy a sourceFile or directory to destinationFile'''
+    shutil.copy(sourceFile, destinationFile)
+
 def touch(sourceFile):
     for file in glob.glob(sourceFile):
         os.utime(file, None)
@@ -64,9 +68,12 @@ def cd(directoryName = ''):
     else:
         os.chdir(os.path.dirname(current))
 
-def ls(sourceDirectory):
+def ls(source):
     '''listdir'''
-    return os.listdir(sourceDirectory)
+    if os.path.isdir(source):
+        return os.listdir(source)
+    else:
+        return glob.glob(source)
 
 def export(key, value):
     os.environ[key] = value
