@@ -148,7 +148,7 @@ def domo_(*sourceFiles):
     pass
 
 def domove(sourceFile, destination, destinationFile = ''):
-    '''moves sourceFile/Direcroty into destinationFile/Directory'''
+    '''moves sourceFile/Directory into destinationFile/Directory'''
     
     ''' example call: pisitools.domove("/usr/bin/bash", "/bin/bash")'''
     ''' example call: pisitools.domove("/usr/bin/", "/usr/sbin")'''
