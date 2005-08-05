@@ -61,4 +61,4 @@ class BuildContext(object):
         return getattr(self.__instance, attr)
 
     def __setattr__(self, attr, value):
-        return setattr(self.__instance, attr, value)
+        setattr(self.__instance, attr, value)
