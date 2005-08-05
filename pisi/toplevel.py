@@ -87,6 +87,8 @@ def install_pkg_files(packages):
         for x in packages:
             operations.install_single_file(x)
 
+    return True # everything went OK.
+
 def install_pkg_names(A):
     """This is the real thing. It installs packages from
     the repository, trying to perform a minimum number of
@@ -180,7 +182,6 @@ def info(package_name):
 
 
 def index(repo_dir = '.'):
-    from index import Index
 
     ui.info('* Building index of PISI files under %s\n' % repo_dir)
     index = Index()
@@ -210,6 +211,9 @@ def update_repo(repo):
 
 # build functions...
 def prepare_for_build(pspecfile, authInfo=None):
+
+    # FIXME: there is a function named "build" in this module which
+    # makes it impossible to use build module directly.
     from build import PisiBuild
 
     url = PUrl(pspecfile)
