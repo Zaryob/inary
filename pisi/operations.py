@@ -23,8 +23,8 @@ import util, packagedb
 def remove_single(package_name):
     """Remove a single package"""
     from installdb import installdb
-    from packagedb import inst_packagedb
     from comariface import comard
+    inst_packagedb = packagedb.inst_packagedb
 
     #TODO: check dependencies
 
