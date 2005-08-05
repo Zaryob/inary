@@ -68,7 +68,7 @@ class PGraph(digraph):
             pkg1data = (pkg1.version, pkg1.release) 
         pkg2data = None
         if not pkg in self.vertices():
-            pkg2 = packagedb.get_package(depinfo.package)
+            pkg2 = packagedb.get_package(conflinfo.package)
             pkg2data = (pkg2.version, pkg2.release)
 
         self.add_biedge(str(pkg), str(conflinfo.package), ('c', conflinfo)
