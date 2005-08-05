@@ -38,7 +38,7 @@ class InstallError(Exception):
         ui.error(Exception)
 
 def configure(parameters = ''):
-    ''' configure source with given parameters = "--with-nls --with-libusb --with-something-usefull"'''
+    '''configure source with given parameters = "--with-nls --with-libusb --with-something-usefull"'''
     if can_access_file('configure'):
         gnuconfig_update()
         
@@ -55,7 +55,7 @@ def configure(parameters = ''):
         raise ConfigureError('!!! No configure script found...\n')
 
 def rawConfigure(parameters = ''):
-    ''' configure source with given parameters = " --prefix=/usr --libdir=/usr/lib --with-nls"'''
+    '''configure source with given parameters = "--prefix=/usr --libdir=/usr/lib --with-nls"'''
     if can_access_file('configure'):
         gnuconfig_update()
 
@@ -75,9 +75,11 @@ def rawConfigureWithPrefix(prefix='', parameters = ''):
         raise ConfigureError('!!! No configure script found...\n')
 
 def compile(parameters = ''):
+    #FIXME: Only one package uses this until now, hmmm
     system('%s %s %s' % (get.GCC(), get.CFLAGS(), parameters))
 
 def make(parameters = ''):
+    '''make source with given parameters = "all" || "doc" etc.'''
     if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
         if system('make %s' % parameters):
             raise MakeError('!!! Make failed...\n')
@@ -85,6 +87,7 @@ def make(parameters = ''):
         raise MakeError('!!! No Makefile found...\n')
 
 def install(parameters = ''):
+    '''install source into install directory with given parameters'''
     if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
         install_string = 'make prefix=%(prefix)s/%(defaultprefix)s \
                 datadir=%(prefix)s/%(data)s \
@@ -108,6 +111,7 @@ def install(parameters = ''):
         raise InstallError('!!! No Makefile found...\n')
 
 def rawInstall(parameters = ''):
+    '''install source into install directory with given parameters = PREFIX=%s % get.installDIR()'''
     if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
         if system('make %s install' % parameters):
             raise InstallError('!!! Install failed...\n')
@@ -115,10 +119,13 @@ def rawInstall(parameters = ''):
         raise InstallError('!!! No Makefile found...\n')
 
 def aclocal(parameters = ''):
+    '''generates an aclocal.m4 based on the contents of configure.in.'''    
     system('aclocal %s' % parameters)
 
 def autoconf(parameters = ''):
+    '''generates a configure script'''
     system('autoconf %s' % parameters)
 
 def automake(parameters = ''):
+    '''generates a makefile'''
     system('automake %s' % parameters)
