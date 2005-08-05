@@ -126,5 +126,7 @@ def get_rev_deps(name):
     if inst_packagedb.has_package(name):
         return inst_packagedb.get_rev_deps(name)
 
+    return None
+
 thirdparty_packagedb = PackageDB('thirdparty')
 inst_packagedb = PackageDB('installed')
