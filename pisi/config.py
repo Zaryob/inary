@@ -67,7 +67,7 @@ class Config(object):
         return getattr(self.__configinstance, attr)
 
     def __setattr__(self, attr, value):
-        return setattr(self.__configinstance, attr, value)
+        setattr(self.__configinstance, attr, value)
 
 
 config = Config()
