@@ -19,7 +19,7 @@ class Version:
         self.comps = map(lambda x: int(x), util.multisplit(verstring,'.-'))
         self.verstring = verstring
 
-    def string():
+    def string(self):
         return self.verstring
 
     def pred(self,rhs,pred):
