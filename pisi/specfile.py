@@ -136,13 +136,13 @@ class DepInfo:
         ret = True
         from version import Version
         if self.versionFrom:
-            ret &= Version(version) >= Version(depinfo.versionFrom)
+            ret &= Version(version) >= Version(self.versionFrom)
         if self.versionTo:
-            ret &= Version(version) <= Version(depinfo.versionTo)        
+            ret &= Version(version) <= Version(self.versionTo)        
         if self.releaseFrom:
-            ret &= Version(release) <= Version(depinfo.releaseFrom)        
+            ret &= Version(release) <= Version(self.releaseFrom)        
         if self.releaseTo:
-            ret &= Version(release) <= Version(depinfo.releaseTo)       
+            ret &= Version(release) <= Version(self.releaseTo)       
         return ret
         
     def __str__(self):
