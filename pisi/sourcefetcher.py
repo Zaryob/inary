@@ -66,7 +66,7 @@ class SourceFetcher(object):
 
     def fetch_additionalFiles(self):
         spec = self.spec
-        for pkg in self.spec.packages:
+        for pkg in spec.packages:
             for afile in pkg.additionalFiles:
                 afileuri = join(self.location, 
                                 const.files_dir, afile.filename)
