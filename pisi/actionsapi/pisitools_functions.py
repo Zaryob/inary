@@ -30,35 +30,35 @@ def executable_insinto(sourceFile, destinationDirectory):
     '''insert a executable file into destinationDirectory'''
 
     if not sourceFile or not destinationDirectory:
-        raise ArgumentError("Insufficient arguments...")
+        raise ArgumentError('Insufficient arguments...')
 
     if not can_access_file(sourceFile):
-        raise FileError("File doesn't exists or permission denied...")
+        raise FileError('File doesn\'t exists or permission denied...')
 
     if can_access_directory(destinationDirectory) and os.path.isdir(destinationDirectory):
-        os.system("install -m0755 -o root -g root %s %s" % (sourceFile, destinationDirectory))
+        os.system('install -m0755 -o root -g root %s %s' % (sourceFile, destinationDirectory))
     else:
         makedirs(destinationDirectory)
-        os.system("install -m0755 -o root -g root %s %s" % (sourceFile, destinationDirectory))
+        os.system('install -m0755 -o root -g root %s %s' % (sourceFile, destinationDirectory))
 
 def readable_insinto(destinationDirectory, *sourceFiles):
     '''inserts file list into destinationDirectory'''
 
     if not sourceFiles or not destinationDirectory:
-        raise ArgumentError("Insufficient arguments...")
+        raise ArgumentError('Insufficient arguments...')
 
     if not can_access_directory(destinationDirectory):
         makedirs(destinationDirectory)
 
     for sourceFile in sourceFiles:
         for source in glob.glob(sourceFile):
-            os.system("install -m0644 %s %s" % (source, destinationDirectory))
+            os.system('install -m0644 %s %s' % (source, destinationDirectory))
 
 def lib_insinto(sourceFile, destinationDirectory, permission = 0644):
     '''inserts a library fileinto destinationDirectory with given permission'''
 
-    if not sourceFiles or not destinationDirectory:
-        raise ArgumentError("Insufficient arguments...")
+    if not sourceFile or not destinationDirectory:
+        raise ArgumentError('Insufficient arguments...')
 
     if not can_access_directory(destinationDirectory):
         makedirs(destinationDirectory)
@@ -66,4 +66,4 @@ def lib_insinto(sourceFile, destinationDirectory, permission = 0644):
     if os.path.islink(sourceFile):
         os.symlink(os.path.realpath(sourceFile), os.path.join(destinationDirectory, sourceFile))
     else:
-        os.system("install -m%s %s %s" % (permission, sourceFile, destinationDirectory))
+        os.system('install -m%s %s %s' % (permission, sourceFile, destinationDirectory))

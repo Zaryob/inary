@@ -16,6 +16,9 @@ import os
 import glob
 import shutil
 
+# Pisi Modules
+from pisi.ui import ui
+
 # ActionsAPI Modules
 import get
 
@@ -46,7 +49,7 @@ def unlinkDir(sourceDirectory):
     if can_access_directory(sourceDirectory):
         shutil.rmtree(sourceDirectory)
     else:
-        print "unlinkDir: remove failed..."
+        ui.error('unlinkDir: remove failed...')
 
 def move(sourceFile, destinationFile):
     '''recursively move a sourceFile or directory to destinationFile'''
@@ -77,4 +80,13 @@ def ls(source):
 
 def export(key, value):
     os.environ[key] = value
-        
+
+def system(command):
+    p = os.popen(command)
+    while 1:
+        line = p.readline()
+        if not line:
+            break
+        ui.debug(line)
+
+    p.close()

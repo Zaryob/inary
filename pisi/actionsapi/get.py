@@ -20,6 +20,8 @@ from variables import glb
 env = glb.env
 dirs = glb.dirs
 
+# variables.Env 
+
 def pkgDIR():
     return env.pkg_dir
 
@@ -29,12 +31,6 @@ def workDIR():
 def installDIR():
     return env.install_dir
 
-def infoDIR():
-    return os.path.join(installDIR(), dirs.info)
-
-def manDIR():
-    return os.path.join(installDIR(), dirs.man)
-    
 def srcNAME():
     return env.src_name
 
@@ -62,33 +58,60 @@ def CXXFLAGS():
 def LDFLAGS():
     return env.ldflags
 
+# variables.Dirs
+
+def docDIR():
+    return dirs.doc
+
+def sbinDIR():
+    return dirs.sbin
+
+def infoDIR():
+    return dirs.info
+
+def manDIR():
+    return dirs.man
+
+def dataDIR():
+    return dirs.data
+
+def confDIR():
+    return dirs.conf
+
+def localstateDIR():
+    return dirs.localstate
+
+def defaultprefixDIR():
+    return dirs.defaultprefix
+
+# Binutils Variables
+
 def getBinutilsInfo(needed):
-    return "%s-%s" % (HOST(), needed)
+    return '%s-%s' % (HOST(), needed)
 
 def AR():
-    return getBinutilsInfo("ar")
+    return getBinutilsInfo('ar')
 
 def AS():
-    return getBinutilsInfo("as")
+    return getBinutilsInfo('as')
 
 def CC():
-    return getBinutilsInfo("gcc")
+    return getBinutilsInfo('gcc')
 
 def CXX():
-    return getBinutilsInfo("g++")
+    return getBinutilsInfo('g++')
 
 def LD():
-    return getBinutilsInfo("ld")
+    return getBinutilsInfo('ld')
 
 def NM():
-    return getBinutilsInfo("nm")
+    return getBinutilsInfo('nm')
 
 def RANLIB():
-    return getBinutilsInfo("ranlib")
+    return getBinutilsInfo('ranlib')
 
 def F77():
-    return getBinutilsInfo("f77")
+    return getBinutilsInfo('f77')
 
 def GCJ():
-    return getBinutilsInfo("gcj")
-
+    return getBinutilsInfo('gcj')

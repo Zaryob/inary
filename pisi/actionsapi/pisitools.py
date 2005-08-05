@@ -40,7 +40,7 @@ def dodir(destinationDirectory):
 
 def dodoc(*sourceFiles):
     '''inserts the files in the list of files into /usr/share/doc/PACKAGE''' 
-    readable_insinto(get.installDIR() + "/usr/share/doc/" + get.srcTAG(), *sourceFiles)
+    readable_insinto(get.installDIR() + os.path.join('/usr/share/doc', get.srcTAG()), *sourceFiles)
 
 def doenvd():
     #FIXME: AdditionalFiles
@@ -61,7 +61,7 @@ def dohtml(*sourceFiles):
     '''inserts the files in the list of files into /usr/share/doc/PACKAGE/html'''
  
     ''' example call: pisitools.dohtml("doc/doxygen/html/*")'''
-    destionationDirectory = os.path.join(get.installDIR(), "usr/share/doc" ,get.srcTAG(), "html")
+    destionationDirectory = os.path.join(get.installDIR(), 'usr/share/doc' ,get.srcTAG(), 'html')
 
     if not can_access_directory(destionationDirectory):
         makedirs(os.getcwd() + destionationDirectory)
@@ -72,17 +72,17 @@ def dohtml(*sourceFiles):
     for sourceFile in sourceFiles:
         for source in glob.glob(sourceFile):
             if os.path.isfile(source) and os.path.splitext(source)[1] in allowed_extensions:
-                os.system("install -m0644 %s %s" % (source, destionationDirectory))
+                os.system('install -m0644 %s %s' % (source, destionationDirectory))
             if os.path.isdir(source) and os.path.basename(source) not in disallowed_directories:
                 for root, dirs, files in os.walk(source):
                     for source in files:
                         if os.path.splitext(source)[1] in allowed_extensions:
                             makedirs(destionationDirectory)
-                            os.system("install -m0644 %s %s" % (os.path.join(root, source), destionationDirectory))
+                            os.system('install -m0644 %s %s' % (os.path.join(root, source), destionationDirectory))
 
 def doinfo(*sourceFiles):
     '''inserts the into files in the list of files into /usr/share/info'''
-    readable_insinto(get.infoDIR(), *sourceFiles)
+    readable_insinto(os.path.join(get.installDIR(), get.infoDIR()), *sourceFiles)
 
 def doinitd():
     #FIXME: AdditionalFiles
@@ -127,8 +127,9 @@ def doman(*sourceFiles):
     '''inserts the man pages in the list of files into /usr/share/man/'''
 
     '''example call: pisitools.doman("man.1", "pardus.*")'''
-    if not can_access_directory(get.manDIR()):
-        makedirs(get.manDIR())
+    manDIR = os.path.join(get.installDIR(), get.manDIR())
+    if not can_access_directory(manDIR):
+        makedirs(manDIR)
 
     for sourceFile in sourceFiles:
         for source in glob.glob(sourceFile):
@@ -136,11 +137,11 @@ def doman(*sourceFiles):
                 #FIXME: splitext
                 pageName, pageDirectory = source.split('.')
             except ValueError:
-                print "doman: Wrong man page file"
+                print 'doman: Wrong man page file'
                 sys.exit(1)
                 
-            makedirs(get.manDIR() + '/man%s' % pageDirectory) 
-            os.system("install -m0644 %s %s" % (source, get.manDIR() + '/man%s' % pageDirectory))
+            makedirs(manDIR + '/man%s' % pageDirectory) 
+            os.system('install -m0644 %s %s' % (source, manDIR + '/man%s' % pageDirectory))
 
 def domo_(*sourceFiles):
     '''inserts the mo files in the list of files into /usr/share/locale/LOCALE/LC_MESSAGES'''
@@ -175,7 +176,7 @@ def dosed(sourceFile, findPattern, replacePattern = ''):
             line = re.sub(findPattern, replacePattern, line)
             sys.stdout.write(line)
     else:
-        raise FileError("File doesn't exists or permission denied...")
+        raise FileError('File doesn\'t exists or permission denied...')
 
 def dosbin(sourceFile, destinationDirectory = '/usr/sbin'):
     '''insert a executable file into /sbin or /usr/sbin'''
@@ -192,7 +193,7 @@ def dosym(sourceFile, destinationFile):
     try:
         os.symlink(sourceFile, get.installDIR() + destinationFile)
     except OSError:
-        print "dosym: File exists..."
+        print 'dosym: File exists...'
 
 ''' ************************************************************************** '''
 
@@ -209,7 +210,7 @@ def insinto(destinationDirectory, sourceFile,  destinationFile = ''):
 def newdoc(sourceFile, destinationFile):
     '''inserts a sourceFile into /usr/share/doc/PACKAGE/ directory as a destinationFile'''
     shutil.move(sourceFile, destinationFile)
-    readable_insinto(get.installDIR() + "/usr/share/doc/" + get.srcTAG(), destinationFile)
+    readable_insinto(os.path.join(get.installDIR(), 'usr/share/doc', get.srcTAG()), destinationFile)
 
 def newman(sourceFile, destinationFile):
     '''inserts a sourceFile into /usr/share/man/manPREFIX/ directory as a destinationFile'''

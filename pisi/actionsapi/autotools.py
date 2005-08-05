@@ -11,59 +11,41 @@
 # Please read the COPYING file.
 #
 
-# standard python modules
+# Standard Python Modules
 import os
 
-# actions api modules
-from variables import glb
+# ActionsAPI Modules
+import get
+from shelltools import system
 
 def configure(parameters = ''):
-    ''' FIXME: Düzgün hale getirilecek '''
-    ''' parameters = '--with-nls --with-libusb --with-something-usefull '''
-    dirs = glb.dirs
-    env = glb.env
+    ''' configure source with given parameters = "--with-nls --with-libusb --with-something-usefull"'''
 
-    configure_string = './configure --prefix=/%s \
-                --host=%s \
-                --mandir=/%s \
-                --infodir=/%s \
-                --datadir=/%s \
-                --sysconfdir=/%s \
-                --localstatedir=/%s \
-                %s' % (dirs.defaultprefix,
-                       env.host,
-                       dirs.man,
-                       dirs.info,
-                       dirs.data,
-                       dirs.conf,
-                       dirs.localstate,
-                       parameters)
+    configure_string = './configure --prefix=/%s --host=%s --mandir=/%s \
+            --infodir=/%s --datadir=/%s --sysconfdir=/%s \
+                --localstatedir=/%s %s' \
+                    % (get.defaultprefixDIR(), get.HOST(), get.manDIR(), 
+                        get.infoDIR(), get.dataDIR(), get.confDIR(), 
+                            get.localstateDIR(), parameters)
     
-    os.system(configure_string)
-
+    system(configure_string)
+    
 def rawConfigure(parameters = ''):
-    os.system('./configure ' + parameters)
+    ''' configure source with given parameters = " --prefix=/usr --libdir=/usr/lib --with-nls"'''
+    system('./configure %s' % parameters)
 
+#FIXME: Find another way!
 def rawConfigureWithPrefix(prefix='', parameters = ''):
-    os.system(prefix + ' ./configure ' + parameters)
+    system('%s ./configure %s' % ( prefix, parameters))
 
 def compile(parameters = ''):
-    compile_string = 'gcc ${CFLAGS} %s' % parameters
-    os.system(compile_string)
+    system('%s %s %s' % (get.GCC(), get.CFLAGS(), parameters))
 
 def make(parameters = ''):
-    ''' FIXME: Düzgün hale getirilecek '''
-    make_string = 'make %s' % parameters
-    os.system(make_string)
+    make_string = ('make %s' % parameters)
+    system(make_string)
 
 def install(parameters = ''):
-    ''' FIXME: Düzgün hale getirilecek '''
-    ''' dir_suffix = /var/tmp/pisi/ _paket_adı_ /image/ '''
-    dirs = glb.dirs
-
-    dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
-        glb.const.install_dir_suffix
-
     install_string = 'make prefix=%(prefix)s/%(defaultprefix)s \
                 datadir=%(prefix)s/%(data)s \
                 infodir=%(prefix)s/%(info)s \
@@ -71,65 +53,25 @@ def install(parameters = ''):
                 mandir=%(prefix)s/%(man)s \
                 sysconfdir=%(prefix)s/%(conf)s \
                 %(parameters)s \
-                install' % {'prefix': dir_suffix,
-                            'defaultprefix': dirs.defaultprefix,
-                            'man': dirs.man,
-                            'info': dirs.info,
-                            'localstate': dirs.localstate,
-                            'conf': dirs.conf,
-                            'data': dirs.data,
+                install' % {'prefix': get.installDIR(),
+                            'defaultprefix': get.defaultprefixDIR(),
+                            'man': get.manDIR(),
+                            'info': get.infoDIR(),
+                            'localstate': get.localstateDIR(),
+                            'conf': get.confDIR(),
+                            'data': get.dataDIR(),
                             'parameters': parameters}
 
-    os.system(install_string)
-
-def installWithPrefix(parameters = ''):
-    dirs = glb.dirs
-
-    dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
-        glb.const.install_dir_suffix
-
-    install_string = 'make PREFIX=%s%s install' % (dir_suffix, parameters)
-
-    os.system(install_string)
-
-def installWithDestdir(parameters = ''):
-    dirs = glb.dirs
-
-    dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
-        glb.const.install_dir_suffix
-
-    install_string = 'make install DESTDIR=%s %s' % (dir_suffix, parameters)
-
-    os.system(install_string)
-
-def installWithBasedir():
-    dirs = glb.dirs
-
-    dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
-        glb.const.install_dir_suffix
-
-    install_string = 'make BASEDIR=%s install' % dir_suffix
-
-    os.system(install_string)
-
-def installWithInstallRootdir():
-    dirs = glb.dirs
-
-    dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
-        glb.const.install_dir_suffix
-
-    install_string = 'make INSTALL_ROOT=%s install' % dir_suffix
-
-    os.system(install_string)
+    system(install_string)
 
 def rawInstall(parameters = ''):
-    os.system("make %s install" % parameters)
+    system('make %s install' % parameters)
 
 def aclocal(parameters = ''):
-    os.system("aclocal %s" % parameters)
+    system('aclocal %s' % parameters)
 
 def autoconf(parameters = ''):
-    os.system("autoconf %s" % parameters)
+    system('autoconf %s' % parameters)
 
 def automake(parameters = ''):
-    os.system("automake %s" % parameters)
+    system('automake %s' % parameters)
