@@ -35,8 +35,7 @@ class XmlFile(object):
 
     def newDOM(self):
         """clear DOM"""
-        from xml.dom.minidom import getDOMImplementation
-        impl = getDOMImplementation()
+        impl = mdom.getDOMImplementation()
         self.dom = impl.createDocument(None, self.rootTag, None)
 
     def unlink(self):

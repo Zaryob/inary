@@ -19,7 +19,6 @@
 
 # standard python modules
 import os
-import sys
 import sha
 import shutil
 import statvfs
