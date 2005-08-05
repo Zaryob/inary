@@ -133,17 +133,22 @@ class DepInfo:
 
     def satisfies(self, pkg_name, version, release):
         """determine if a package ver. satisfies given dependency spec"""
-        ret = True
         from version import Version
+
         if self.versionFrom:
-            ret &= Version(version) >= Version(depinfo.versionFrom)
+            ret &= Version(version) >= Version(self.versionFrom)
+            if not ret: return False
         if self.versionTo:
-            ret &= Version(version) <= Version(depinfo.versionTo)        
+            ret &= Version(version) <= Version(self.versionTo)
+            if not ret: return False
         if self.releaseFrom:
-            ret &= Version(release) <= Version(depinfo.releaseFrom)        
+            ret &= Version(release) <= Version(self.releaseFrom)
+            if not ret: return False
         if self.releaseTo:
-            ret &= Version(release) <= Version(depinfo.releaseTo)       
-        return ret
+            ret &= Version(release) <= Version(self.releaseTo)
+            if not ret: return False
+
+        return True
         
     def __str__(self):
         s = self.package
