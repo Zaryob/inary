@@ -24,7 +24,7 @@ from purl import PUrl
 from metadata import MetaData
 from files import Files
 
-class PackageError:
+class PackageError(Exception):
     pass
 
 class Package:
@@ -90,7 +90,7 @@ class Package:
         self.metadata = MetaData()
         self.metadata.read( join(outdir, const.metadata_xml) )
         if not self.metadata.verify():
-            raise PackageError("MetaData format wrong")
+            raise PackageError, "MetaData format wrong"
 
         self.files = Files()
         self.files.read( join(outdir, const.files_xml) )
