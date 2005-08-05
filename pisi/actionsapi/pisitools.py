@@ -79,7 +79,6 @@ def dohtml(*sourceFiles):
                         if os.path.splitext(source)[1] in allowed_extensions:
                             makedirs(destionationDirectory)
                             os.system("install -m0644 %s %s" % (os.path.join(root, source), destionationDirectory))
-                            print "install -m0644 %s %s" % (os.path.join(root, source), destionationDirectory)
 
 def doinfo(*sourceFiles):
     '''inserts the into files in the list of files into /usr/share/info'''
