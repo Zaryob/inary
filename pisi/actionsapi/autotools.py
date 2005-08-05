@@ -14,39 +14,79 @@
 # Standard Python Modules
 import os
 
+# Pisi Modules
+from pisi.ui import ui
+
 # ActionsAPI Modules
 import get
 from shelltools import system
+from shelltools import can_access_file
+from libtools import gnuconfig_update
+
+class ConfigureError(Exception):
+    def __init__(self, Exception):
+        ui.error(Exception)
+        if can_access_file('config.log'):
+            ui.error('\n!!! Please attach the config.log to your bug report:\n%s/config.log\n' % os.getcwd())
+
+class MakeError(Exception):
+    def __init__(self, Exception):
+        ui.error(Exception)
+
+class InstallError(Exception):
+    def __init__(self, Exception):
+        ui.error(Exception)
 
 def configure(parameters = ''):
     ''' configure source with given parameters = "--with-nls --with-libusb --with-something-usefull"'''
-
-    configure_string = './configure --prefix=/%s --host=%s --mandir=/%s \
+    if can_access_file('configure'):
+        gnuconfig_update()
+        
+        configure_string = './configure --prefix=/%s --host=%s --mandir=/%s \
             --infodir=/%s --datadir=/%s --sysconfdir=/%s \
                 --localstatedir=/%s %s' \
                     % (get.defaultprefixDIR(), get.HOST(), get.manDIR(), 
                         get.infoDIR(), get.dataDIR(), get.confDIR(), 
                             get.localstateDIR(), parameters)
     
-    system(configure_string)
-    
+        if system(configure_string):
+            raise ConfigureError('!!! Configure failed...\n')
+    else:
+        raise ConfigureError('!!! No configure script found...\n')
+
 def rawConfigure(parameters = ''):
     ''' configure source with given parameters = " --prefix=/usr --libdir=/usr/lib --with-nls"'''
-    system('./configure %s' % parameters)
+    if can_access_file('configure'):
+        gnuconfig_update()
 
-#FIXME: Find another way!
+        if system('./configure %s' % parameters):
+            raise ConfigureError('!!! Configure failed...\n')
+    else:
+        raise ConfigureError('!!! No configure script found...\n')
+ 
 def rawConfigureWithPrefix(prefix='', parameters = ''):
-    system('%s ./configure %s' % ( prefix, parameters))
+    #FIXME: Find another way for this function!
+    if can_access_file('configure'):
+        gnuconfig_update()
+
+        if system('%s ./configure %s' % ( prefix, parameters)):
+            raise ConfigureError('!!! Configure failed...\n')
+    else:
+        raise ConfigureError('!!! No configure script found...\n')
 
 def compile(parameters = ''):
     system('%s %s %s' % (get.GCC(), get.CFLAGS(), parameters))
 
 def make(parameters = ''):
-    make_string = ('make %s' % parameters)
-    system(make_string)
+    if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
+        if system('make %s' % parameters):
+            raise MakeError('!!! Make failed...\n')
+    else:
+        raise MakeError('!!! No Makefile found...\n')
 
 def install(parameters = ''):
-    install_string = 'make prefix=%(prefix)s/%(defaultprefix)s \
+    if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
+        install_string = 'make prefix=%(prefix)s/%(defaultprefix)s \
                 datadir=%(prefix)s/%(data)s \
                 infodir=%(prefix)s/%(info)s \
                 localstatedir=%(prefix)s/%(localstate)s \
@@ -62,10 +102,17 @@ def install(parameters = ''):
                             'data': get.dataDIR(),
                             'parameters': parameters}
 
-    system(install_string)
+        if system(install_string):
+            raise InstallError('!!! Install failed...\n')
+    else:
+        raise InstallError('!!! No Makefile found...\n')
 
 def rawInstall(parameters = ''):
-    system('make %s install' % parameters)
+    if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
+        if system('make %s install' % parameters):
+            raise InstallError('!!! Install failed...\n')
+    else:
+        raise InstallError('!!! No Makefile found...\n')
 
 def aclocal(parameters = ''):
     system('aclocal %s' % parameters)

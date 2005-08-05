@@ -89,4 +89,4 @@ def system(command):
             break
         ui.debug(line)
 
-    p.close()
+    return p.close()
