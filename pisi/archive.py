@@ -126,7 +126,7 @@ class ArchiveZip(ArchiveBase):
             if pred(info.filename):   # check if condition holds
 
                 # below code removes that, so we find it here
-                isdir = info.filename.endswith('/')
+                isDir = info.filename.endswith('/')
                 
                 # calculate output file name
                 if archiveRoot == '':
@@ -141,8 +141,9 @@ class ArchiveZip(ArchiveBase):
 
                 ofile = os.path.join(targetDir, outpath)
 
-                if isdir:               # a directory is present.
-                    continue            # FIXME: do nothing!
+                if isDir:               # a directory is present.
+                    os.mkdir(os.path.join(targetDir, info.filename))
+                    continue
 
                 # check that output dir is present
                 util.check_dir(os.path.dirname(ofile))
