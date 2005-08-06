@@ -80,11 +80,8 @@ def compile(parameters = ''):
 
 def make(parameters = ''):
     '''make source with given parameters = "all" || "doc" etc.'''
-    if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
-        if system('make %s' % parameters):
+    if system('make %s' % parameters):
             raise MakeError('!!! Make failed...\n')
-    else:
-        raise MakeError('!!! No Makefile found...\n')
 
 def install(parameters = ''):
     '''install source into install directory with given parameters'''
