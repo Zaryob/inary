@@ -75,7 +75,7 @@ class PisiBuild:
     """PisiBuild class, provides the package build and creation routines"""
     def __init__(self, pspec):
         self.ctx = BuildContext(pspec)
-        self.pspecDir = os.path.dirname(self.ctx.pspecfile)
+        self.pspecDir = os.path.dirname(os.path.realpath(self.ctx.pspecfile))
         self.spec = self.ctx.spec
         self.sourceArchive = SourceArchive(self.ctx)
 
