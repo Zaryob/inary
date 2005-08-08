@@ -82,6 +82,7 @@ def export(key, value):
     os.environ[key] = value
 
 def system(command):
+    ui.debug('executing ' + command)
     p = os.popen(command)
     while 1:
         line = p.readline()
@@ -90,3 +91,12 @@ def system(command):
         ui.debug(line)
 
     return p.close()
+
+def exists_binary(bin):
+    # determine if path has binary
+    from os.path import exists, join
+    path = os.environ['PATH'].split(':')
+    for directory in path:
+        if exists( join(directory, bin) ):
+            return True
+    return False

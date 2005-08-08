@@ -22,15 +22,25 @@ def register(_impl):
 
 # default UI implementation
 class CLI:
-    def __init__(self, debuggy = True):
-        self.showDebug = debuggy
+    def __init__(self, debuggy = False, verbose = False):
+        self.show_debug = debuggy
+        self.show_verbose = verbose
 
-    def info(self, msg):
-        sys.stdout.write(colorize(msg, 'blue'))
+    def set_verbose(self, flag):
+        self.show_verbose = flag
+
+    def set_debug(self, flag):
+        self.show_debug = flag
+
+    def info(self, msg, verbose = False):
+        if verbose and self.show_verbose:
+            sys.stdout.write(colorize(msg, 'blue'))
+        elif not verbose:
+            sys.stdout.write(colorize(msg, 'blue'))
         sys.stdout.flush()
 
     def debug(self, msg):
-        if self.showDebug:
+        if self.show_debug:
             sys.stdout.write(msg)
             sys.stdout.flush()
 

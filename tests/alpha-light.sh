@@ -2,7 +2,7 @@
 
 pwd
 PATH=$PATH:.
-set -x
+set -x -e
 pisi-cli build tests/zip/pspec.xml tests/unzip/pspec.xml
 pisi-cli index .
 pisi-cli add-repo repo1 pisi-index.xml
