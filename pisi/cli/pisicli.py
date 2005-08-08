@@ -14,7 +14,6 @@ import sys
 from optparse import OptionParser
 
 import pisi
-from pisi.config import config
 import pisi.operations
 from pisi.purl import PUrl
 from common import *
@@ -44,11 +43,9 @@ class PisiCLI(object):
             (options, args) = self.parser.parse_args()
             #if len(parser.rargs)==0:
             #    self.die()
-            print 'running cmd'
             cmd = args[0]
-            pisi.config.config = pisi.config.Config(options)
-            cli = pisi.ui.CLI(options.debug)
-            pisi.ui.ui = cli
+            #cli = pisi.ui.CLI(options.debug)
+            #pisi.ui.ui = cli
             
         except IndexError:
             self.die()

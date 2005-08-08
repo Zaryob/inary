@@ -13,7 +13,6 @@
 import sys
 from optparse import OptionParser
 import pisi
-from pisi.config import config
 from pisi.purl import PUrl
 from common import *
 import pisi.toplevel
@@ -67,6 +66,7 @@ class Command(object):
         self.args = args[1:]
 
         # initialize PiSi
+        print '**** running cmd'
         pisi.config.config = pisi.config.Config(self.options)
         cli = pisi.ui.CLI(self.options.debug)
         pisi.ui.ui = cli
