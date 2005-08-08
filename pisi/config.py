@@ -23,8 +23,6 @@ class Config(object):
     """Config Singleton"""
     
     def __init__(self, options = None):
-        if options:
-            print 'wohoo', options
         self.options = options
         self.values = ConfigurationFile("/etc/pisi/pisi.conf")
         self.destdir = self.values.general.destinationdirectory

@@ -66,7 +66,7 @@ class Command(object):
         self.args = args[1:]
 
         # initialize PiSi
-        print '**** running cmd'
+        #print '**** running cmd'
         pisi.config.config = pisi.config.Config(self.options)
         cli = pisi.ui.CLI(self.options.debug)
         pisi.ui.ui = cli
@@ -200,7 +200,6 @@ repositories (with add-repo).
 """
     def __init__(self):
         super(Install, self).__init__()
-        print pisi.config.config.options
 
     def run(self):
         if not self.args:

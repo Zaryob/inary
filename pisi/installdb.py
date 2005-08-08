@@ -14,11 +14,12 @@
 #
 # Author:  Eray Ozkural <eray@uludag.org.tr>
 
+# System
+import os
+import fcntl
 
-import os, fcntl
+# PiSi
 import lockeddbshelve as shelve
-
-from config import config
 from constants import const
 from files import Files
 import util
@@ -32,10 +33,12 @@ class InstallDB:
         from os.path import join
         self.d = shelve.LockedDBShelf('install')
         self.dp = shelve.LockedDBShelf('configpending')
+        from config import config
         self.files_dir = os.path.join(config.db_dir(), 'files')
 
     def files_name(self, pkg, version, release):
         from os.path import join
+        from config import config
         pkg_dir = join(config.lib_dir(), pkg + '-' + version + '-' + release)
         return join(pkg_dir, const.files_xml)
 
@@ -87,7 +90,8 @@ class InstallDB:
     def install(self, pkg, version, release):
         """install package with specific version and release"""
         pkg = str(pkg)
-        print "INSTALLDB", config.options, config.options.ignore_comar
+        from config import config
+        #print "INSTALLDB", config.options#, config.options.ignore_comar
         if self.is_installed(pkg):
             raise InstallDBError("already installed")
         if config.options.ignore_comar:
