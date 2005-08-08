@@ -172,6 +172,11 @@ def remove(A):
         
     return True                         # everything went OK :)
 
+def configure_pending():
+    # TODO: not coded yet
+    # start with pending packages
+    # configure them in reverse topological order of configuration dependency
+    pass
 
 def info(package_name):
     from package import Package

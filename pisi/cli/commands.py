@@ -232,8 +232,9 @@ Remove a package from your system. Just give the package name to remove.
 
 class ConfigurePending(PackageOp):
     """configure pending packages"""
+    
     def __init__(self):
-        super(Remove, self).__init__()
+        super(ConfigurePending, self).__init__()
 
     def run(self):
         #if not self.args:
