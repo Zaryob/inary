@@ -69,6 +69,12 @@ class PackageDB(object):
         else:
             return []
 
+    def list_packages(self):
+        l = []
+        for (pkg, x) in self.d.iteritems():
+            l.append(pkg)
+        return l
+
     def add_package(self, package_info):
         name = str(package_info.name)
         self.d[name] = package_info
