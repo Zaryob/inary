@@ -153,6 +153,8 @@ class Installer:
     def update_databases(self):
         "update databases"
 
+        print "INSTALL", config.options, config.options.ignore_comar
+
         # installdb
         installdb.install(self.metadata.package.name,
                           self.metadata.package.version,

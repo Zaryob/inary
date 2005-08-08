@@ -9,9 +9,9 @@
 #
 # Please read the COPYING file.
 #
-
+#
 # installation database
-
+#
 # Author:  Eray Ozkural <eray@uludag.org.tr>
 
 
@@ -31,6 +31,7 @@ class InstallDB:
     def __init__(self):
         from os.path import join
         self.d = shelve.LockedDBShelf('install')
+        self.dp = shelve.LockedDBShelf('configpending')
         self.files_dir = os.path.join(config.db_dir(), 'files')
 
     def files_name(self, pkg, version, release):
@@ -53,7 +54,7 @@ class InstallDB:
         pkg = str(pkg)
         if self.is_recorded(pkg):
             (status, version, release) = self.d[pkg]
-            return status=='i'
+            return status=='i' or status=='ip'
         else:
             return False
 
@@ -62,6 +63,12 @@ class InstallDB:
         for (pkg, (status,version,release)) in self.d.iteritems():
             if status=='i':
                 l.append(pkg)
+        return l
+
+    def list_pending(self):
+        l = []
+        for (pkg, x) in self.dp.iteritems():
+            l.append(pkg)
         return l
 
     def get_version(self, pkg):
@@ -80,8 +87,15 @@ class InstallDB:
     def install(self, pkg, version, release):
         """install package with specific version and release"""
         pkg = str(pkg)
+        print "INSTALLDB", config.options, config.options.ignore_comar
         if self.is_installed(pkg):
             raise InstallDBError("already installed")
+        if config.options.ignore_comar:
+            state = 'ip'
+            self.dp[pkg] = True
+        else:
+            state = 'i'
+            
         self.d[pkg] = ('i', version, release)
 
     def remove(self, pkg):

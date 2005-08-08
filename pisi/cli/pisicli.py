@@ -44,7 +44,9 @@ class PisiCLI(object):
             (options, args) = self.parser.parse_args()
             #if len(parser.rargs)==0:
             #    self.die()
+            print 'running cmd'
             cmd = args[0]
+            pisi.config.config = pisi.config.Config(options)
             cli = pisi.ui.CLI(options.debug)
             pisi.ui.ui = cli
             

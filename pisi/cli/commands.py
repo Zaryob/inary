@@ -32,6 +32,7 @@ def cmdObject(cmd, fail=False):
                 "info": Info,
                 "install": Install,
                 "configure-pending": ConfigurePending,
+                "list-pending": ListPending,
                 "list-installed": ListInstalled,
                 "list-available": ListAvailable,
                 "search-available": SearchAvailable,
@@ -64,7 +65,12 @@ class Command(object):
         self.parser = commonopts(self.parser)
         (self.options, args) = self.parser.parse_args()
         self.args = args[1:]
-       
+
+        # initialize PiSi
+        pisi.config.config = pisi.config.Config(self.options)
+        cli = pisi.ui.CLI(self.options.debug)
+        pisi.ui.ui = cli
+        
         self.checkAuthInfo()
 
     def options(self):
@@ -194,6 +200,7 @@ repositories (with add-repo).
 """
     def __init__(self):
         super(Install, self).__init__()
+        print pisi.config.config.options
 
     def run(self):
         if not self.args:
@@ -426,6 +433,22 @@ TODO: desc...
 
         pkg_db = packagedb.get_db(repo)
         for p in pkg_db.list_packages():
+            print p
+
+
+class ListPending(Command):
+    """List pending packages"""
+    
+    def __init__(self):
+        super(ListPending, self).__init__()
+    
+    def run(self):
+        from pisi.installdb import installdb
+        from pisi.ui import ui
+
+        self.init_db()
+
+        for p in installdb.list_pending():
             print p
 
 
