@@ -107,7 +107,7 @@ class Installer:
 
         # check conflicts
         for pkg in self.metadata.package.conflicts:
-            if installdb.has_package(self.pkginfo):
+            if installdb.is_installed(self.pkginfo):
                 raise InstallError("Package conflicts " + pkg)
     
         # check dependencies
