@@ -37,10 +37,9 @@ class PackageDB(object):
         util.check_dir(config.db_dir())
         self.fname = os.path.join(config.db_dir(), 'package-%s.bdb' % id )
         self.fname2 = os.path.join(config.db_dir(), 'revdep-%s.bdb'  % id )
-        self.lockfile = self.fname + '.lock'
-        self.fdummy = file(self.lockfile, 'w')
+        self.lockfile = file(self.fname + '.lock', 'w')
         try:
-            fcntl.flock(self.fdummy, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            fcntl.flock(self.lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except IOError:
             import sys
             from ui import ui
@@ -48,7 +47,12 @@ class PackageDB(object):
             sys.exit(1)
         self.d = shelve.open(self.fname)
         self.dr = shelve.open(self.fname2)
-            
+
+    def __del__(self):
+        pass
+        #self.d.close()
+        #self.dr.close()
+        #self.lockfile.close()
 
     def has_package(self, name):
         name = str(name)

@@ -26,6 +26,7 @@ install
 list-installed
 list-available
 remove
+configure-pending
 add-repo
 remove-repo
 list-repo

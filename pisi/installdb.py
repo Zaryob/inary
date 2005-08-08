@@ -16,7 +16,7 @@
 
 
 import os, fcntl
-import bsddb.dbshelve as shelve
+import lockeddbshelve as shelve
 
 from config import config
 from constants import const
@@ -33,13 +33,7 @@ class InstallDB:
         self.db_filename = os.path.join(config.db_dir(), 'install.bdb')
         self.d = shelve.open(self.db_filename)
         self.files_dir = os.path.join(config.db_dir(), 'files')
-        self.fdummy = open(self.db_filename)
-        fcntl.flock(self.fdummy, fcntl.LOCK_EX)
 
-    def __del__(self):
-        #fcntl.flock(self.fdummy, fcntl.LOCK_UN)
-        self.fdummy.close()
-        
     def files_name(self, pkg, version, release):
         from os.path import join
         pkg_dir = join(config.lib_dir(), pkg + '-' + version + '-' + release)

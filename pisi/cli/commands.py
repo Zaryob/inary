@@ -31,6 +31,7 @@ def cmdObject(cmd, fail=False):
                 "build-package": BuildPackage,
                 "info": Info,
                 "install": Install,
+                "configure-pending": ConfigurePending,
                 "list-installed": ListInstalled,
                 "list-available": ListAvailable,
                 "search-available": SearchAvailable,
@@ -221,6 +222,20 @@ Remove a package from your system. Just give the package name to remove.
 
         self.init()
         pisi.toplevel.remove(self.args)
+        self.finalize()
+
+class ConfigurePending(PackageOp):
+    """configure pending packages"""
+    def __init__(self):
+        super(Remove, self).__init__()
+
+    def run(self):
+        #if not self.args:
+        #    self.help()
+        #    return
+
+        self.init()
+        pisi.toplevel.configure_pending()
         self.finalize()
 
 class Info(Command):
