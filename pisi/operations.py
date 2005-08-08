@@ -44,8 +44,9 @@ def remove_single(package_name):
             os.unlink(fpath)
     installdb.remove(package_name)
     inst_packagedb.remove_package(package_name)
-    # FIXME: (return value)...
-    comard.remove(package_name)
+    if comard:
+        # FIXME: (return value)...
+        comard.remove(package_name)
 
 def install_single(pkg):
     """install a single package from URI or ID"""

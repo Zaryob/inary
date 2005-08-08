@@ -13,6 +13,9 @@
 import socket
 import struct
 
+class ComarError(Exception):
+	pass
+
 class ComarIface:
 	"""A class for communicating with comard."""
 	RESULT = 0
@@ -31,7 +34,7 @@ class ComarIface:
 			self.sock.connect("/tmp/comar")
 		except:
 			# should raise an exception here
-			print "Cannot connect to COMAR"
+			raise ComarError, 'Cannot connect to COMAR daemon'
 	
 	def __pack(self, cmd, id, args):
 		size = 0
@@ -104,4 +107,12 @@ class ComarIface:
 		"""
 		pass
 
-comard = ComarIface()
+comard = None
+
+def init():
+	comard = ComarIface()
+
+def finalize():
+	if comard:
+		del comard
+

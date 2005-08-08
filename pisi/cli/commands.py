@@ -17,6 +17,7 @@ from pisi.config import config
 from pisi.purl import PUrl
 from common import *
 import pisi.toplevel
+from pisi.ui import ui
 
 # helper functions
 def cmdObject(cmd, fail=False):
@@ -100,6 +101,10 @@ class Command(object):
     def help(self):
         print getattr(self, "__doc__")
 
+    def die(self):
+        print 'Program terminated abnormally.'
+        sys.exit(-1)
+
 class Help(Command):
     """Prints usage
 
@@ -145,7 +150,38 @@ fetch all necessary files and build the package for you.
         for arg in self.args:
             pisi.toplevel.build(arg, self.authInfo)
 
-class Install(Command):
+class PackageOp(Command):
+    """Abstract package operation command"""
+    def __init__(self):
+        super(PackageOp, self).__init__()
+
+    def options(self):
+        self.parser.add_option("", "--ignore-comar", action="store_true",
+                               default=False, help="xxxx")
+        self.parser.add_option("", "--ignore-dependency",
+                               action="store_true",
+                               default=False, help="xxxx")
+
+    def init(self):
+        self.init_db()
+        import pisi.comariface
+        if not self.options.ignore_comar:
+            try:
+                pisi.comariface.init()
+            except pisi.comariface.ComarError:
+                ui.error('Comar error encountered\n')
+                self.die()
+                
+    def finalize(self):
+        #self.finalize_db()
+        if not self.options.ignore_comar:
+            pass
+            #try:
+            #    pisi.comariface.finalize()
+            #except pisi.comariface.ComarError:
+            #    ui.error('Comar error encountered\n')
+        
+class Install(PackageOp):
     """Install PISI packages
 
     Usage:
@@ -158,19 +194,16 @@ repositories (with add-repo).
     def __init__(self):
         super(Install, self).__init__()
 
-    def options(self):
-        self.parser.add_option("", "--test", action="store_true",
-                               default=True, help="xxxx")
-
     def run(self):
         if not self.args:
             self.help()
             return
 
-        self.init_db()
+        self.init()
         pisi.toplevel.install(self.args)
+        self.finalize()
 
-class Remove(Command):
+class Remove(PackageOp):
     """Remove PISI packages
 
     Usage:
@@ -181,17 +214,14 @@ Remove a package from your system. Just give the package name to remove.
     def __init__(self):
         super(Remove, self).__init__()
 
-    def options(self):
-        self.parser.add_option("", "--test", action="store_true",
-                               default=True, help="xxxx")
-
     def run(self):
         if not self.args:
             self.help()
             return
 
-        self.init_db()
+        self.init()
         pisi.toplevel.remove(self.args)
+        self.finalize()
 
 class Info(Command):
     """Display information about a package 

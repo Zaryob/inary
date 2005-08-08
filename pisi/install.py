@@ -85,9 +85,10 @@ class Installer:
             ui.info("Registering COMAR script %s\n" % pcomar.script)
             # FIXME: We must check the result of the command (possibly
             # with id?)
-            comard.register(pcomar.om,
-                            self.metadata.package.name,
-                            scriptPath)
+            if comard:
+                comard.register(pcomar.om,
+                                self.metadata.package.name,
+                                scriptPath)
 
     def check_requirements(self):
         """check system requirements"""
