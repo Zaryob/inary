@@ -29,6 +29,9 @@ class Config(object):
         self.values = ConfigurationFile("/etc/pisi/pisi.conf")
         self.destdir = self.values.general.destinationdirectory
 
+    def __call__(self):
+        return self
+
     # directory accessor functions
     # here is how it goes
     # x_dir: system wide directory for storing info type x

@@ -138,7 +138,7 @@ class PisiBuild:
         ui.info("Fetching source from: %s\n" % self.spec.source.archiveUri)
         self.sourceArchive.fetch()
         ui.info("Source archive is stored: %s/%s\n"
-                %(self.ctx.archives_dir(), self.spec.source.archiveName))
+                %(config.archives_dir(), self.spec.source.archiveName))
 
     def unpackSourceArchive(self):
         ui.info("Unpacking archive...")
