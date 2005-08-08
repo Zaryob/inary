@@ -16,7 +16,6 @@
 # Authors: Baris Metin <baris@uludag.org.tr
 #          Eray Ozkural <eray@uludag.org.tr>
 
-
 from constants import const
 from configfile import ConfigurationFile
 

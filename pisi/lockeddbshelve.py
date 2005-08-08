@@ -10,53 +10,42 @@
 # Please read the COPYING file.
 #
 # A simple wrapper to implement locking for bsddb's dbshelf
-
+#
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 
 
 import bsddb.dbshelve as shelve
 import bsddb.db as db
+import os
 import fcntl
 
-def open(filename, flags=db.DB_CREATE, mode=0660, filetype=db.DB_HASH,
-         dbenv=None, dbname=None):
-    """
-    A simple factory function for compatibility with the standard
-    shleve.py module.  It can be used like this, where key is a string
-    and data is a pickleable object:
-
-        from bsddb import dbshelve
-        db = dbshelve.open(filename)
-
-        db[key] = data
-
-        db.close()
-    """
-    if type(flags) == type(''):
-        sflag = flags
-        if sflag == 'r':
-            flags = db.DB_RDONLY
-        elif sflag == 'rw':
-            flags = 0
-        elif sflag == 'w':
-            flags =  db.DB_CREATE
-        elif sflag == 'c':
-            flags =  db.DB_CREATE
-        elif sflag == 'n':
-            flags = db.DB_TRUNCATE | db.DB_CREATE
-        else:
-            raise error, "flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
-
-    d = LockedDBShelf(dbenv)
-    d.open(filename, dbname, filetype, flags, mode)
-    return d
+from config import config
+import util
 
 class LockedDBShelf(shelve.DBShelf):
 
-    def __init__(self, env = None):
-        shelve.DBShelf.__init__(self, env)
-
+    def __init__(self, dbname, flags=db.DB_CREATE, mode=0660,
+                 filetype=db.DB_HASH, dbenv=None):
+        shelve.DBShelf.__init__(self, dbenv)
+        if type(flags) == type(''):
+            sflag = flags
+            if sflag == 'r':
+                flags = db.DB_RDONLY
+            elif sflag == 'rw':
+                flags = 0
+            elif sflag == 'w':
+                flags =  db.DB_CREATE
+            elif sflag == 'c':
+                flags =  db.DB_CREATE
+            elif sflag == 'n':
+                flags = db.DB_TRUNCATE | db.DB_CREATE
+            else:
+                raise error, "flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
+        filename = os.path.join( config.db_dir(), dbname + '.bdb')
+        LockedDBShelf.open(self,filename, dbname, filetype, flags, mode)
+        
     def open(self, filename, dbname, filetype, flags, mode):
+        util.check_dir(config.db_dir())
         self.lockfile = file(filename + '.lock', 'w')
         try:
             fcntl.flock(self.lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)

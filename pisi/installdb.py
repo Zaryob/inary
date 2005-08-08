@@ -29,9 +29,8 @@ class InstallDBError(Exception):
 class InstallDB:
 
     def __init__(self):
-        util.check_dir(config.db_dir())
-        self.db_filename = os.path.join(config.db_dir(), 'install.bdb')
-        self.d = shelve.open(self.db_filename)
+        from os.path import join
+        self.d = shelve.LockedDBShelf('install')
         self.files_dir = os.path.join(config.db_dir(), 'files')
 
     def files_name(self, pkg, version, release):
@@ -97,4 +96,7 @@ class InstallDB:
             del self.d[pkg]
 
 installdb = InstallDB()
+
+#def init():
+#    installdb = InstallDB()
 
