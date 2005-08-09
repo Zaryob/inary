@@ -43,7 +43,7 @@ def remove_single(package_name):
         else:
             os.unlink(fpath)
     installdb.remove(package_name)
-    inst_packagedb.remove_package(package_name)
+    packagedb.remove_package(package_name)
     if comard:
         # FIXME: (return value)...
         comard.remove(package_name)

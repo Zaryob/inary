@@ -138,5 +138,13 @@ def get_rev_deps(name):
 
     return None
 
+def remove_package(name):
+    # remove the guy from the tracking databases
+    inst_packagedb.remove_package(name)
+    if thirdparty_packagedb.has_package(name):
+        thirdparty_packagedb.remove_package(name)
+
+# tracking databases for non-repository information
+
 thirdparty_packagedb = PackageDB('thirdparty')
 inst_packagedb = PackageDB('installed')

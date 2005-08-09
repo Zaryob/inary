@@ -132,11 +132,21 @@ def install_pkg_names(A):
     return True                         # everything went OK :)
 
 def remove(A):
-    """remove set A of packages from system"""
+    """remove set A of packages from system (A is a list of package names)"""
     
+    # filter packages that are not installed
+    Ap = []
+    for x in A:
+        if installdb.is_installed(x):
+            Ap.append(x)
+        else:
+            ui.info('Package %s does not exist. Cannot remove.\n' % x)
+    A = Ap
+
     if len(A)==0:
+        ui.info('No packages to remove.\n')
         return True
-    
+        
     # try to construct a pisi graph of packages to
     # install / reinstall
 
@@ -169,6 +179,8 @@ def remove(A):
     for x in l:
         if installdb.is_installed(x):
             operations.remove_single(x)
+        else:
+            ui.info('Package %s does not exist. Cannot remove.\n' % x)
         
     return True                         # everything went OK :)
 
