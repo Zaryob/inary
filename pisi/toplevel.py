@@ -47,9 +47,9 @@ def install(packages):
         ui.error("PackageDBError: (%s)\n" % e)
         ui.error("Package is not installable.\n")
 
-    except Exception, e:
-        print e
-        ui.error("Error: %s\n" % e)
+    #except Exception, e:
+    #    print e
+    #    ui.error("Error: %s\n" % e)
 
 
 def install_pkg_files(packages):
@@ -117,8 +117,8 @@ def install_pkg_names(A):
             print pkg
             for dep in pkg.runtimeDeps:
                 print 'checking ', dep
-                # we don't deal with satisfied dependencies
-                if not dependency.satisfiesDep(x, dep):
+                # we don't deal with already *satisfied* dependencies
+                if not dependency.installedSatisfiesDep(dep):
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
@@ -184,7 +184,7 @@ def upgrade_pkg_names(A):
             for dep in pkg.runtimeDeps:
                 print 'checking ', dep
                 # add packages that can be upgraded
-                if not dependency.upgradableDep(x, dep):
+                if not dependency.upgradableDep(dep):
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
@@ -235,7 +235,7 @@ def remove(A):
             for (rev_dep, depinfo) in rev_deps:
                 print 'checking ', rev_dep
                 # we don't deal with unsatisfied dependencies
-                if dependency.satisfiesDep(rev_dep, depinfo):
+                if dependency.installedSatisfiesDep(depinfo):
                     if not rev_dep in G_f.vertices():
                         Bp.add(rev_dep)
                         G_f.add_plain_dep(rev_dep, x)

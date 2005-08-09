@@ -74,37 +74,53 @@ class DepInfo:
             s += 'rel <= ' + self.releaseTo
         return s
 
-def upgradableDep(pkg_name, depinfo):
-    """determine if package in *repository* satisfies given dependency spec in installdb"""
-    if not installdb.is_installed(depinfo.package):
-        return False
-    else:
-        pkg = packagedb.get_package(pkg_name)
-        (version, release) = (pkg.version, pkg.release)
-        return depinfo.satisfies(pkg_name, version, release)
-
-def satisfiesDep(pkg_name, depinfo):
-    """determine if an *already installed* package can be upgraded given dependency spec in installdb"""
-    if not installdb.is_installed(depinfo.package):
+def installedSatisfiesDep(depinfo):
+    """determine if a package in *repository* satisfies given
+dependency spec"""
+    pkg_name = depinfo.package
+    if not installdb.is_installed(pkg_name):
         return False
     else:
         pkg = packagedb.inst_packagedb.get_package(pkg_name)
         (version, release) = (pkg.version, pkg.release)
         return depinfo.satisfies(pkg_name, version, release)
 
-def satisfiesDeps(pkg, deps):
+def repoSatisfiesDep(depinfo):
+    """determine if a package in *repository* satisfies given
+dependency spec"""
+    pkg_name = depinfo.package
+    if not packagedb.has_package(pkg_name):
+        return False
+    else:
+        pkg = packagedb.get_package(pkg_name)
+        (version, release) = (pkg.version, pkg.release)
+        return depinfo.satisfies(pkg_name, version, release)
+
+def upgradableDep(depinfo):
+    """determine if an *already installed* package can be upgraded given dependency spec in installdb"""
+    if not installdb.is_installed(depinfo.package):
+        return False
+    else:
+        pkg = packagedb.get_package(pkg_name)
+        (version, release) = (pkg.version, pkg.release)
+        return depinfo.satisfies(pkg_name, version, release)
+##        pkg_name = depinfo.package
+##        pkg = packagedb.inst_packagedb.get_package(pkg_name)
+##        (version, release) = (pkg.version, pkg.release)
+##        pkg_then = packagedb.get_package(pkg_name)
+##        (version_then, release_then) = (pkg_then.version, pkg_then.release)
+##        return depinfo.upgradable(pkg_name, release, release_then)
+
+def satisfiesDeps(pkg, deps, sat = installedSatisfiesDep):
     for dep in deps:
-        if not satisfiesDep(pkg, dep):
+        if not sat(dep):
             ui.error('Package %s does not satisfy dependency %s\n' %
                      (pkg,dep))
             return False
     return True
 
-def runtimeDeps(pkg):
-    return packagedb.get_package(pkg).runtimeDeps
-
 def satisfiesRuntimeDeps(pkg):
-    deps = runtimeDeps(pkg)
+    deps = packagedb.get_package(pkg).runtimeDeps
     return satisfiesDeps(pkg, deps)
 
 def installable(pkg):
