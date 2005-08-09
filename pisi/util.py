@@ -189,16 +189,30 @@ def get_file_hashes(top, excludePrefixes=None, removePrefix=None):
     matching those prefixes. The removePrefix string parameter will be
     used to remove prefix from filePath while matching excludes, if
     given."""
-    for root, dirs, files in os.walk(top, topdown=False):
-        # check if root matches an exclude, and continue
+
+    def hasExcludedPrefix(filename):
         if excludePrefixes and removePrefix:
-            p = remove_prefix(removePrefix, root)
-            if [e for e in excludePrefixes if p.startswith(e)]:
-                continue
+            tempfnam = remove_prefix(removePrefix, filename)
+            for p in excludePrefixes:
+                if tempfnam.startswith(p):
+                    return 1
+                else:
+                    return 0
+        return 0
+       
+    for root, dirs, files in os.walk(top, topdown=False):
+        if os.path.islink(root):
+           if not hasExcludedPrefix(root):
+               #yield the symlink..
+               yield (root, sha1_file(root))
+           excludePrefixes.append(remove_prefix(removePrefix, root) + "/")
 
         for fname in files:
             f = os.path.join(root, fname)
-            yield (f, sha1_file(f))
+            if hasExcludedPrefix(f):
+                continue
+            else:
+                yield (f, sha1_file(f))
 
 def copy_dir(src, dest):
     """copy source dir to destination dir recursively"""
