@@ -42,10 +42,10 @@ class Installer:
         self.package.read()
         self.metadata = self.package.metadata
         self.files = self.package.files
+        self.pkginfo = self.metadata.package
 
     def install(self):
         "entry point"
-        self.pkginfo = self.metadata.package
         self.check_requirements()
         self.check_relations()
         self.reinstall()
@@ -53,42 +53,6 @@ class Installer:
         self.storePisiFiles()
         self.registerCOMARScripts()
         self.update_databases()
-
-    def extractInstall(self):
-        "unzip package in place"
-
-        ui.info('Extracting files\n')
-        self.package.extract_dir_flat('install', config.destdir)
- 
-    def storePisiFiles(self):
-        """put files.xml, metadata.xml, actions.py and COMAR scripts
-        somewhere in the file system. We'll need these in future..."""
-
-        ui.info('Storing %s\n' % const.files_xml)
-        self.package.extract_file(const.files_xml, self.package.pkg_dir())
-
-        ui.info('Storing %s\n' % const.metadata_xml)
-        self.package.extract_file(const.metadata_xml, self.package.pkg_dir())
-
-        for pcomar in self.metadata.package.providesComar:
-            fpath = os.path.join(const.comar_dir, pcomar.script)
-            # comar prefix is added to the pkg_dir while extracting comar
-            # script file. so we'll use pkg_dir as destination.
-            ui.info('Storing %s\n' % fpath)
-            self.package.extract_file(fpath, self.package.pkg_dir())
-
-    def registerCOMARScripts(self):
-        "register COMAR scripts"
-
-        for pcomar in self.metadata.package.providesComar:
-            scriptPath = os.path.join(self.package.comar_dir(),pcomar.script)
-            ui.info("Registering COMAR script %s\n" % pcomar.script)
-            # FIXME: We must check the result of the command (possibly
-            # with id?)
-            if comard:
-                comard.register(pcomar.om,
-                                self.metadata.package.name,
-                                scriptPath)
 
     def check_requirements(self):
         """check system requirements"""
@@ -99,8 +63,7 @@ class Installer:
 
     def check_relations(self):
         # check if package is in database
-        # TODO: when repodb comes alive, this will put it into 3rd
-        # party packagedb
+        # If it is not, put it into 3rd party packagedb
         if not packagedb.has_package(self.pkginfo.name):
             db = packagedb.thirdparty_packagedb
             db.add_package(self.pkginfo)
@@ -150,17 +113,50 @@ class Installer:
             # remove old package then
             operations.remove_single(pkg.name)
 
+    def extractInstall(self):
+        "unzip package in place"
+
+        ui.info('Extracting files\n')
+        self.package.extract_dir_flat('install', config.destdir)
+ 
+    def storePisiFiles(self):
+        """put files.xml, metadata.xml, actions.py and COMAR scripts
+        somewhere in the file system. We'll need these in future..."""
+
+        ui.info('Storing %s\n' % const.files_xml)
+        self.package.extract_file(const.files_xml, self.package.pkg_dir())
+
+        ui.info('Storing %s\n' % const.metadata_xml)
+        self.package.extract_file(const.metadata_xml, self.package.pkg_dir())
+
+        for pcomar in self.metadata.package.providesComar:
+            fpath = os.path.join(const.comar_dir, pcomar.script)
+            # comar prefix is added to the pkg_dir while extracting comar
+            # script file. so we'll use pkg_dir as destination.
+            ui.info('Storing %s\n' % fpath)
+            self.package.extract_file(fpath, self.package.pkg_dir())
+
+    def registerCOMARScripts(self):
+        "register COMAR scripts"
+
+        for pcomar in self.metadata.package.providesComar:
+            scriptPath = os.path.join(self.package.comar_dir(),pcomar.script)
+            ui.info("Registering COMAR script %s\n" % pcomar.script)
+            # FIXME: We must check the result of the command (possibly
+            # with id?)
+            if comard:
+                comard.register(pcomar.om,
+                                self.metadata.package.name,
+                                scriptPath)
+
+
     def update_databases(self):
         "update databases"
-
-        #print "INSTALL", config.options, config.options.ignore_comar
 
         # installdb
         installdb.install(self.metadata.package.name,
                           self.metadata.package.version,
                           self.metadata.package.release)
-
-        #print "INSTALL2", config.options, config.options.ignore_comar
 
         # installed packages
         inst_packagedb.add_package(self.pkginfo)
