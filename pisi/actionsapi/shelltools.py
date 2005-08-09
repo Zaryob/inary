@@ -100,3 +100,14 @@ def exists_binary(bin):
         if exists( join(directory, bin) ):
             return True
     return False
+
+def isLink(sourceFile):
+    return os.path.islink(sourceFile)
+
+def realPath(sourceFile):
+    return os.path.realpath(sourceFile)
+
+def baseName(sourceFile):
+    return os.path.basename(sourceFile)
+
+
