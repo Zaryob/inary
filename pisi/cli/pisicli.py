@@ -61,7 +61,7 @@ class PisiCLI(object):
             self.die()
 
     def die(self):
-        print usage_text
+        self.parser.print_help()
         sys.exit(1)
 
     def runCommand(self):

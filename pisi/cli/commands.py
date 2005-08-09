@@ -45,8 +45,6 @@ class Command(object):
 
     def __init__(self):
         # now for the real parser
-        #usage_text = usage_text1 + commandsString() + usage_text2
-        #self.usage_text = usage_text
         self.parser = OptionParser(usage=usage_text,
                                    version="%prog " + pisi.__version__)
         self.options()
@@ -117,8 +115,7 @@ for that command.
 
     def run(self):
         if not self.args:
-            print usage_text
-            print self.parser.format_option_help()
+            self.parser.print_help()
             return
         
         for arg in self.args:
@@ -624,4 +621,5 @@ commands = {"help": Help,
             "list-repo": ListRepo
             }
 
-usage_text = usage_text1 + commandsString() + usage_text2
+usage_text = (usage_text1 + commandsString() + usage_text2)
+

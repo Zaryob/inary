@@ -247,7 +247,7 @@ def remove(A):
         if installdb.is_installed(x):
             operations.remove_single(x)
         else:
-            ui.info('Package %s does not exist. Cannot remove.\n' % x)
+            ui.info('Package %s is not installed. Cannot remove.\n' % x)
         
     return True                         # everything went OK :)
 
