@@ -61,6 +61,9 @@ def copy(sourceFile, destinationFile):
     for file in glob.glob(sourceFile):
         shutil.copy(file, destinationFile)
 
+def copytree(source, destination, sym=False):
+    shutil.copytree(source, destination, sym)
+
 def touch(sourceFile):
     for file in glob.glob(sourceFile):
         os.utime(file, None)
@@ -111,4 +114,6 @@ def realPath(sourceFile):
 def baseName(sourceFile):
     return os.path.basename(sourceFile)
 
+def sym(sourceFile, destinationFile):
+    os.symlink(sourceFile, destinationFile)
 
