@@ -228,7 +228,7 @@ class PisiBuild:
             if patch.compressionType:
                 patchFile = util.uncompress(patchFile,
                                             compressType=patch.compressionType,
-                                            targetDir=self.ctx.tmp_dir())
+                                            targetDir=config.tmp_dir())
 
             ui.action("* Applying patch: %s\n" % patch.filename)
             util.do_patch(self.srcDir, patchFile, level=patch.level)
