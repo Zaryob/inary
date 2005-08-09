@@ -18,30 +18,17 @@ from common import *
 import pisi.toplevel
 from pisi.ui import ui
 
+
+def commandsString():
+    s = ''
+    l = commands.keys()
+    l.sort()
+    for x in l:
+        s += x + '\n'
+    return s
+
 # helper functions
 def cmdObject(cmd, fail=False):
-    commands = {"help": Help,
-                "build": Build,
-                "build-until": BuildUntil,
-                "build-unpack": BuildUnpack,
-                "build-setup": BuildSetup,
-                "build-build": BuildBuild,
-                "build-install": BuildInstall,
-                "build-package": BuildPackage,
-                "info": Info,
-                "install": Install,
-                "configure-pending": ConfigurePending,
-                "list-pending": ListPending,
-                "list-installed": ListInstalled,
-                "list-available": ListAvailable,
-                "search-available": SearchAvailable,
-                "remove": Remove,
-                "index": Index,
-                "update-repo": UpdateRepo, 
-                "add-repo": AddRepo, 
-                "remove-repo": RemoveRepo, 
-                "list-repo": ListRepo
-                }
 
     if commands.has_key(cmd):
         obj = commands[cmd]()
@@ -58,6 +45,8 @@ class Command(object):
 
     def __init__(self):
         # now for the real parser
+        #usage_text = usage_text1 + commandsString() + usage_text2
+        #self.usage_text = usage_text
         self.parser = OptionParser(usage=usage_text,
                                    version="%prog " + pisi.__version__)
         self.options()
@@ -192,11 +181,10 @@ class Install(PackageOp):
     """Install PISI packages
 
     Usage:
-    install package
+    install package1 package2 ... packagen
 
-You can give an URI of the pisi package. Or you can just give a
-package name and choose to install a package from the defined
-repositories (with add-repo).
+You may use filenames, URIs or package names for packages. If you have
+specified a package name, it should exist in a specified repository.
 """
     def __init__(self):
         super(Install, self).__init__()
@@ -210,11 +198,32 @@ repositories (with add-repo).
         pisi.toplevel.install(self.args)
         self.finalize()
 
+class Upgrade(PackageOp):
+    """Upgrade PISI packages
+
+    Usage:
+    Upgrade package1 package2 ... packagen
+
+You may use filenames, URIs or package names for packages. If you have
+specified a package name, it should exist in a specified repository.
+"""
+    def __init__(self):
+        super(Install, self).__init__()
+
+    def run(self):
+        if not self.args:
+            self.help()
+            return
+
+        self.init()
+        pisi.toplevel.upgrade(self.args)
+        self.finalize()
+
 class Remove(PackageOp):
     """Remove PISI packages
 
     Usage:
-    remove package-name
+    remove package1-name package2-name ... packagen-name
 
 Remove a package from your system. Just give the package name to remove.
 """
@@ -590,3 +599,29 @@ TODO: desc.
 
         for arg in self.args:
             pisi.toplevel.build_until(arg, "buildpackages", self.authInfo)
+
+commands = {"help": Help,
+            "build": Build,
+            "build-until": BuildUntil,
+            "build-unpack": BuildUnpack,
+            "build-setup": BuildSetup,
+            "build-build": BuildBuild,
+            "build-install": BuildInstall,
+            "build-package": BuildPackage,
+            "info": Info,
+            "install": Install,
+            "configure-pending": ConfigurePending,
+            "list-pending": ListPending,
+            "list-installed": ListInstalled,
+            "list-available": ListAvailable,
+            "search-available": SearchAvailable,
+            "remove": Remove,
+            "upgrade": Upgrade,
+            "index": Index,
+            "update-repo": UpdateRepo, 
+            "add-repo": AddRepo, 
+            "remove-repo": RemoveRepo, 
+            "list-repo": ListRepo
+            }
+
+usage_text = usage_text1 + commandsString() + usage_text2

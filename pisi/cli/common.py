@@ -8,31 +8,13 @@
 # Please read the COPYING file.
 #
 
-usage_text = """%prog <command> [options] [arguments]
+usage_text1 = """%prog <command> [options] [arguments]
 
 where <command> is one of:
 
-help
-build
-build-until
-build-unpack
-build-setup
-build-build
-build-install
-build-package
-index
-info
-install
-list-installed
-list-available
-remove
-configure-pending
-list-pending
-add-repo
-remove-repo
-list-repo
-update-repo
+"""
 
+usage_text2 = """
 Use \"%prog help <command>\" for help on a specific subcommand.
 
 PISI Package Manager

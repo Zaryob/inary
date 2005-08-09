@@ -38,29 +38,6 @@ Legend:
  + Package/Files
 
 2. Alpha
- / component/category
-   + requirements
-   - xml format (baris) (bunlarin class'leri yazilmali)
-   - usage (build process'in icine koymak baris - meren)
- + query
-   - comar OM information (Provides)
-   - package by name, summary/description
- - actionsAPI documentation, unittests (caglar - meren)
- / versioning information document
- / verify metodlari
-   + SpecFile
-   + MetaData
-   + Files
-   - Index (o kadar onemli degil)
- - implement missing unit tests
-   + sourcedb
-   + package (baris)
-   + configuration file (baris)
- - non-interactive use (baris)
- - incremental build (meren)
-   - generate binary release number by comparing MD5s (meren)
-   + keep track of successfully completed configure, make, install
-     steps (necessary for large-scale builds?) (meren)
  + multi-package dependency analysis (eray)
    + design a package operation planner
    + install/remove operations (eray)
@@ -118,10 +95,32 @@ Legend:
  - exception handling (baris)
  - incremental build/fetch for repository index (pisi-index.xml)
    - diffsets (caglar)
+ / component/category
+   + requirements
+   - xml format (baris) (bunlarin class'leri yazilmali)
+   - usage (build process'in icine koymak baris - meren)
+ + query
+   - comar OM information (Provides)
+   - package by name, summary/description
+ - actionsAPI documentation, unittests (caglar - meren)
+ / versioning information document
+ / verify metodlari
+   + SpecFile
+   + MetaData
+   + Files
+   - Index (o kadar onemli degil)
+ - implement missing unit tests
+   + sourcedb
+   + package (baris)
+   + configuration file (baris)
+ - non-interactive use (baris)
+ - incremental build (meren)
+   - generate binary release number by comparing MD5s (meren)
+   + keep track of successfully completed configure, make, install
+     steps (necessary for large-scale builds?) (meren)
+ + database locking bugs (eray)
 
 4. Release (bug fix, guzellestirme vs.)
-
- - file locking hikayesi database'lerde guzel calisiyor mu (eray)
 
 5. Post Release
 
