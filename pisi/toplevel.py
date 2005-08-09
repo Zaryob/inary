@@ -184,7 +184,7 @@ def upgrade_pkg_names(A):
             for dep in pkg.runtimeDeps:
                 print 'checking ', dep
                 # add packages that can be upgraded
-                if not dependency.upgradableDep(dep):
+                if not dependency.repoSatisfiesDep(dep):
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)

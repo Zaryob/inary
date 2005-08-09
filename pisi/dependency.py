@@ -96,21 +96,6 @@ dependency spec"""
         (version, release) = (pkg.version, pkg.release)
         return depinfo.satisfies(pkg_name, version, release)
 
-def upgradableDep(depinfo):
-    """determine if an *already installed* package can be upgraded given dependency spec in installdb"""
-    if not installdb.is_installed(depinfo.package):
-        return False
-    else:
-        pkg = packagedb.get_package(pkg_name)
-        (version, release) = (pkg.version, pkg.release)
-        return depinfo.satisfies(pkg_name, version, release)
-##        pkg_name = depinfo.package
-##        pkg = packagedb.inst_packagedb.get_package(pkg_name)
-##        (version, release) = (pkg.version, pkg.release)
-##        pkg_then = packagedb.get_package(pkg_name)
-##        (version_then, release_then) = (pkg_then.version, pkg_then.release)
-##        return depinfo.upgradable(pkg_name, release, release_then)
-
 def satisfiesDeps(pkg, deps, sat = installedSatisfiesDep):
     for dep in deps:
         if not sat(dep):
