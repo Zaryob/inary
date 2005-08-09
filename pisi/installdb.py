@@ -91,10 +91,9 @@ class InstallDB:
         """install package with specific version and release"""
         pkg = str(pkg)
         from config import config
-        #print "INSTALLDB", config.options#, config.options.ignore_comar
         if self.is_installed(pkg):
             raise InstallDBError("already installed")
-        if config.options.ignore_comar:
+        if config.options and config.options.ignore_comar:
             state = 'ip'
             self.dp[pkg] = True
         else:

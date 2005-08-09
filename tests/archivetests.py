@@ -18,6 +18,7 @@ from pisi import sourcearchive
 from pisi import fetcher
 from pisi import util
 from pisi import context
+from pisi.config import config
 from pisi import purl
 
 class ArchiveFileTestCase(unittest.TestCase):
@@ -94,7 +95,7 @@ class ArchiveFileTestCase(unittest.TestCase):
         ctx = context.BuildContext("tests/sandbox/pspec.xml")
         url = purl.PUrl(ctx.spec.source.archiveUri)
         targetDir = ctx.pkg_work_dir()
-        filePath = join(ctx.archives_dir(), url.filename())
+        filePath = join(config.archives_dir(), url.filename())
 
         # check cached
         if util.sha1_file(filePath) != ctx.spec.source.archiveSHA1:
