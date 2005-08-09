@@ -53,11 +53,13 @@ def unlinkDir(sourceDirectory):
 
 def move(sourceFile, destinationFile):
     '''recursively move a sourceFile or directory to destinationFile'''
-    shutil.move(sourceFile, destinationFile)
+    for file in glob.glob(sourceFile):
+        shutil.move(file, destinationFile)
 
 def copy(sourceFile, destinationFile):
     '''recursively copy a sourceFile or directory to destinationFile'''
-    shutil.copy(sourceFile, destinationFile)
+    for file in glob.glob(sourceFile):
+        shutil.copy(file, destinationFile)
 
 def touch(sourceFile):
     for file in glob.glob(sourceFile):
@@ -94,10 +96,9 @@ def system(command):
 
 def exists_binary(bin):
     # determine if path has binary
-    from os.path import exists, join
     path = os.environ['PATH'].split(':')
     for directory in path:
-        if exists( join(directory, bin) ):
+        if os.path.exists(os.path.join(directory, bin) ):
             return True
     return False
 
