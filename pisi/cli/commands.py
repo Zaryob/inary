@@ -165,9 +165,9 @@ class PackageOp(Command):
     def options(self):
         self.parser.add_option("", "--ignore-comar", action="store_true",
                                default=False, help="xxxx")
-        self.parser.add_option("", "--ignore-dependency",
-                               action="store_true",
-                               default=False, help="xxxx")
+##        self.parser.add_option("", "--ignore-dependency",
+##                               action="store_true",
+##                               default=False, help="xxxx")
 
     def init(self):
         self.init_db()
