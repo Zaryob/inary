@@ -45,7 +45,7 @@ def install(packages):
 
     except packagedb.PackageDBError, e:
         ui.error("PackageDBError: (%s)\n" % e)
-        ui.error("Package is not installable. Its very likely a dependency problem.\n")
+        ui.error("Package is not installable.\n")
 
     except Exception, e:
         print e
@@ -95,6 +95,7 @@ def install_pkg_names(A):
     installs"""
 
     if len(A)==0:
+        ui.info('No packages to install.\n')
         return True
     
     # try to construct a pisi graph of packages to
@@ -128,6 +129,72 @@ def install_pkg_names(A):
     print l
     for x in l:
         operations.install_single_name(x)
+        
+    return True                         # everything went OK :)
+
+
+def upgrade(A):
+    upgrade_pkg_names(A)
+
+def upgrade_pkg_names(A):
+    """Re-installs packages from the repository, trying to perform
+    a maximum number of upgrades."""
+
+    # filter packages that are not installed
+    Ap = []
+    for x in A:
+        if not installdb.is_installed(x):
+            ui.info('Package %s is not installed.\n' % x)
+            continue
+        (version, release) = installdb.get_version(x)
+        (versionp, releasep) = (packagedb.get_package(x).version,
+                                packagedb.get_package(x).release)
+        # BUG: we should use build instead of release
+        if release < releasep:
+            Ap.append(x)
+        else:
+            #ui.info('Package %s cannot be upgraded. ' % x)
+            # BUG: where is build no?
+            ui.info('Package %s is already at its latest version %s,\
+ release %s, build ?.\n'
+                    % (x, versionp, releasep))
+    A = Ap
+
+    if len(A)==0:
+        ui.info('No packages to upgrade.\n')
+        return True
+    
+    # try to construct a pisi graph of packages to
+    # install / reinstall
+
+    G_f = pgraph.PGraph()               # construct G_f
+
+    # find the "install closure" graph of G_f by package 
+    # set A using packagedb
+    print A
+    for x in A:
+        G_f.add_package(x)
+    B = A
+    #state = {}
+    while len(B) > 0:
+        Bp = set()
+        for x in B:
+            pkg = packagedb.get_package(x)
+            print pkg
+            for dep in pkg.runtimeDeps:
+                print 'checking ', dep
+                # add packages that can be upgraded
+                if not dependency.upgradableDep(x, dep):
+                    if not dep.package in G_f.vertices():
+                        Bp.add(str(dep.package))
+                    G_f.add_dep(x, dep)
+        B = Bp
+    G_f.write_graphviz(sys.stdout)
+    l = G_f.topological_sort()
+    l.reverse()
+    print l
+    for x in l:
+        operations.install_single_name(x, True)
         
     return True                         # everything went OK :)
 

@@ -28,7 +28,7 @@ def remove_single(package_name):
 
     #TODO: check dependencies
 
-    ui.info('Removing package %s\n' % package_name)
+    ui.info('Removing package %s' % package_name)
     if not installdb.is_installed(package_name):
         raise Exception('Trying to remove nonexistent package '
                         + package_name)
@@ -47,24 +47,25 @@ def remove_single(package_name):
     if comard:
         # FIXME: (return value)...
         comard.remove(package_name)
+    ui.info('.\n')
 
-def install_single(pkg):
+def install_single(pkg, upgrade = False):
     """install a single package from URI or ID"""
     url = PUrl(pkg)
     # Check if we are dealing with a remote file or a real path of
     # package filename. Otherwise we'll try installing a package from
     # the package repository.
     if url.isRemoteFile() or os.path.exists(url.uri):
-        install_single_file(pkg)
+        install_single_file(pkg, upgrade)
     else:
-        install_single_name(pkg)
+        install_single_name(pkg, upgrade)
 
-def install_single_file(pkg_location):
+def install_single_file(pkg_location, upgrade = False):
     """install a package file"""
     from install import Installer
-    Installer(pkg_location).install()
+    Installer(pkg_location).install(not upgrade)
 
-def install_single_name(name):
+def install_single_name(name, upgrade = False):
     """install a single package from ID"""
     # find package in repository
     repo = packagedb.which_repo(name)
@@ -84,7 +85,7 @@ def install_single_name(name):
         ui.debug("Package URI: %s\n" % pkg_path)
 
         # Package will handle remote file for us!
-        install_single_file(pkg_path)
+        install_single_file(pkg_path, upgrade)
     else:
         ui.error("Package %s not found in the repository file.\n" % pkg)
 

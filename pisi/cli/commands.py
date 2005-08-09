@@ -208,7 +208,7 @@ You may use filenames, URIs or package names for packages. If you have
 specified a package name, it should exist in a specified repository.
 """
     def __init__(self):
-        super(Install, self).__init__()
+        super(Upgrade, self).__init__()
 
     def run(self):
         if not self.args:

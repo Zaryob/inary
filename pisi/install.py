@@ -44,8 +44,12 @@ class Installer:
         self.files = self.package.files
         self.pkginfo = self.metadata.package
 
-    def install(self):
+    def install(self, ask_reinstall = True):
         "entry point"
+        ui.info('Installing %s, version %s, release %s, build %s\n' %
+                (self.pkginfo.name, self.pkginfo.version,
+                 self.pkginfo.release, self.pkginfo.build))
+        self.ask_reinstall = ask_reinstall
         self.check_requirements()
         self.check_relations()
         self.reinstall()
@@ -88,8 +92,9 @@ class Installer:
             (iversion, irelease) = installdb.get_version(pkg.name)
 
             if pkg.version == iversion and pkg.release == irelease:
-                if not ui.confirm('Re-install same version package?'):
-                    raise InstallError('Package re-install declined')
+                if self.ask_reinstall:
+                    if not ui.confirm('Re-install same version package?'):
+                        raise InstallError('Package re-install declined')
             else:
                 upgrade = False
                 # is this an upgrade?
@@ -102,7 +107,7 @@ class Installer:
                     upgrade = True
 
                 # is this a downgrade? confirm this action.
-                if not upgrade:
+                if self.ask_reinstall and (not upgrade):
                     if pkg.version < iversion:
                         x = 'Downgrade to old upstream version?'
                     elif pkg.release < irelease:
@@ -116,17 +121,17 @@ class Installer:
     def extractInstall(self):
         "unzip package in place"
 
-        ui.info('Extracting files\n')
+        ui.info('Extracting files,\n')
         self.package.extract_dir_flat('install', config.destdir)
  
     def storePisiFiles(self):
         """put files.xml, metadata.xml, actions.py and COMAR scripts
         somewhere in the file system. We'll need these in future..."""
 
-        ui.info('Storing %s\n' % const.files_xml)
+        ui.info('Storing %s, ' % const.files_xml)
         self.package.extract_file(const.files_xml, self.package.pkg_dir())
 
-        ui.info('Storing %s\n' % const.metadata_xml)
+        ui.info('%s.\n' % const.metadata_xml)
         self.package.extract_file(const.metadata_xml, self.package.pkg_dir())
 
         for pcomar in self.metadata.package.providesComar:

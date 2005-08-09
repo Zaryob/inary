@@ -24,6 +24,7 @@ from os.path import basename
 from xmlext import *
 from xmlfile import XmlFile
 from ui import ui
+from dependency import DepInfo
 
 class PackagerInfo:
     def __init__(self, node = None):
@@ -102,60 +103,6 @@ class PatchInfo:
         s += ' level:' + self.level
         return s
 
-class DepInfo:
-    def __init__(self, node = None):
-        if node:
-            self.package = getNodeText(node).strip()
-            self.versionFrom = getNodeAttribute(node, "versionFrom")
-            self.versionTo = getNodeAttribute(node, "versionTo")
-            self.releaseFrom = getNodeAttribute(node, "releaseFrom")
-            self.releaseTo = getNodeAttribute(node, "releaseTo")
-        else:
-            self.versionFrom = self.versionTo = None
-            self.releaseFrom = self.releaseFrom = None
-
-    def elt(self, xml):
-        node = xml.newNode("Dependency")
-        xml.addText(node, self.package)
-        if self.versionFrom:
-            node.setAttribute("versionFrom", self.versionFrom)
-        if self.versionTo:
-            node.setAttribute("versionTo", self.versionTo)
-        if self.releaseFrom:
-            node.setAttribute("releaseFrom", self.versionFrom)
-        if self.releaseTo:
-            node.setAttribute("releaseTo", self.versionTo)
-        return node
-
-    def verify(self):
-        if not self.package: return False
-        return True
-
-    def satisfies(self, pkg_name, version, release):
-        """determine if a package ver. satisfies given dependency spec"""
-        ret = True
-        from version import Version
-        if self.versionFrom:
-            ret &= Version(version) >= Version(self.versionFrom)
-        if self.versionTo:
-            ret &= Version(version) <= Version(self.versionTo)        
-        if self.releaseFrom:
-            ret &= Version(release) <= Version(self.releaseFrom)        
-        if self.releaseTo:
-            ret &= Version(release) <= Version(self.releaseTo)       
-        return ret
-        
-    def __str__(self):
-        s = self.package
-        if self.versionFrom:
-            s += 'ver >= ' + self.versionFrom
-        if self.versionTo:
-            s += 'ver <= ' + self.versionTo
-        if self.releaseFrom:
-            s += 'rel >= ' + self.releaseFrom
-        if self.releaseTo:
-            s += 'rel <= ' + self.releaseTo
-        return s
 
 class UpdateInfo:
     def __init__(self, node = None):
