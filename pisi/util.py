@@ -199,13 +199,19 @@ def get_file_hashes(top, excludePrefixes=None, removePrefix=None):
                 else:
                     return 0
         return 0
-       
+
     for root, dirs, files in os.walk(top, topdown=False):
-        if os.path.islink(root):
-           if not hasExcludedPrefix(root):
-               #yield the symlink..
-               yield (root, sha1_file(root))
-           excludePrefixes.append(remove_prefix(removePrefix, root) + "/")
+        if os.path.islink(root) and not hasExcludedPrefix(root):
+            #yield the symlink..
+            yield (root, sha1_file(root))
+            excludePrefixes.append(remove_prefix(removePrefix, root) + "/")
+            continue
+
+        if os.path.isdir(root) and not hasExcludedPrefix(root):
+            parent, r, d, f = root, '', '', ''
+            for r, d, f in os.walk(parent, topdown=False): pass
+            if not f and not d:
+                yield (parent, sha1_file(parent))
 
         for fname in files:
             f = os.path.join(root, fname)
@@ -235,7 +241,7 @@ def sha1_file(filename):
             m.update(l)
         return m.hexdigest()
     except IOError:
-        return "0"     
+        return "0" 
 
 def uncompress(patchFile, compressType="gz", targetDir=None):
     """uncompresses a file and returns the path of the uncompressed
