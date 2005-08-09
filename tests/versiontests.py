@@ -30,6 +30,3 @@ class VersionTestCase(unittest.TestCase):
         self.assert_(v4 >= v4)
 
 suite = unittest.makeSuite(VersionTestCase)
-
-if __name__ == '__main__':
-    unittest.main()
