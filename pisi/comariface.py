@@ -44,7 +44,7 @@ class ComarIface:
 		# NOTE: COMAR RPC is using network byte order (big endian)
 		fmt = "!ii"
 		for a in args:
-                        a = str(a) # damn unicode
+            a = str(a) # damn unicode
 			fmt += "h%dsB" % (len(a))
 			size += 2 + len(a) + 1
 			args2.append(len(a))
