@@ -28,7 +28,7 @@ import pisi
 import pisi.util as util
 from pisi.config import config
 
-class PackageDBError(pisi.PisiError):
+class PackageDBError(pisi.Error):
     pass
 
 class PackageDB(object):

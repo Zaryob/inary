@@ -24,17 +24,17 @@ from pisi.actionsapi.shelltools import system
 from pisi.actionsapi.shelltools import can_access_file
 from pisi.actionsapi.libtools import gnuconfig_update
 
-class ConfigureError(Exception):
+class ConfigureError(pisi.actionsapi.Error):
     def __init__(self, Exception):
         ui.error(Exception)
         if can_access_file('config.log'):
             ui.error('\n!!! Please attach the config.log to your bug report:\n%s/config.log\n' % os.getcwd())
 
-class MakeError(Exception):
+class MakeError(pisi.actionsapi.Error):
     def __init__(self, Exception):
         ui.error(Exception)
 
-class InstallError(Exception):
+class InstallError(pisi.actionsapi.Error):
     def __init__(self, Exception):
         ui.error(Exception)
 

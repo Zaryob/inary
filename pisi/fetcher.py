@@ -27,7 +27,7 @@ from pisi.purl import PUrl
 from pisi.ui import ui
 
 
-class FetchError(pisi.PisiError):
+class FetchError(pisi.Error):
     pass
 
 

@@ -29,7 +29,7 @@ from pisi.metadata import MetaData
 from pisi.package import Package
 
 
-class PisiBuildError(pisi.PisiError):
+class PisiBuildError(pisi.Error):
     pass
 
 

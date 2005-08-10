@@ -26,7 +26,7 @@ from pisi.metadata import MetaData
 from pisi.files import Files
 
 
-class PackageError(pisi.PisiError):
+class PackageError(pisi.Error):
     pass
 
 

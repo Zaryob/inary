@@ -13,8 +13,8 @@ __version__ = '0.1'
 
 import pisi
 
-class ActionsApiError(pisi.PisiError):
+class Error(pisi.Error):
     pass
 
-class ActionsApiException(pisi.PisiException):
+class Exception(pisi.Exception):
     pass

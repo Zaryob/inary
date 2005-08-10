@@ -18,7 +18,7 @@
 
 import pisi
 
-class XmlError(pisi.PisiError):
+class XmlError(pisi.Error):
     pass
 
 def getNodeAttribute(node, attrname):

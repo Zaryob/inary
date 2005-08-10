@@ -21,10 +21,10 @@ import glob
 import pisi.actionsapi
 from pisi.actionsapi.shelltools import *
 
-class FileError(Exception):
+class FileError(pisi.actionsapi.Error):
     pass
 
-class ArgumentError(Exception):
+class ArgumentError(pisi.actionsapi.Error):
     pass
 
 def executable_insinto(sourceFile, destinationDirectory):

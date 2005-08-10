@@ -22,7 +22,7 @@ import pisi
 import pisi.util as util
 
 
-class ArchiveError(pisi.PisiError):
+class ArchiveError(pisi.Error):
     pass
 
 

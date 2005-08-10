@@ -26,7 +26,7 @@ from pisi.files import Files
 import pisi.util as util
 
 
-class InstallDBError(pisi.PisiError):
+class InstallDBError(pisi.Error):
     pass
 
 

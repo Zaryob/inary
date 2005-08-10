@@ -28,7 +28,7 @@ from pisi.config import config
 from pisi.fetcher import fetchUrl
 import pisi.util as util
 
-class SourceArchiveError(pisi.PisiError):
+class SourceArchiveError(pisi.Error):
     pass
 
 class SourceArchive:

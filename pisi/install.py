@@ -31,7 +31,7 @@ from pisi.comariface import comard
 import pisi.operations as operations
 #import conflicts
 
-class InstallError(pisi.PisiError):
+class InstallError(pisi.Error):
     pass
 
 class Installer:

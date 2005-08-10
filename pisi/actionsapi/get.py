@@ -15,10 +15,14 @@
 import os.path
 
 # PISI Modules
+import pisi.actionsapi
 from pisi.ui import ui
 
 # ActionsAPI Modules
 from variables import glb
+
+class BinutilsError(pisi.actionsapi.Error):
+    pass
 
 env = glb.env
 dirs = glb.dirs
@@ -96,9 +100,6 @@ def exists_binary(bin):
         if os.path.exists(os.path.join(directory, bin) ):
             return True
     return False
-
-class BinutilsError:
-    pass
 
 def getBinutilsInfo(util):
     cross_build_name = '%s-%s' % (HOST(), util)
