@@ -89,6 +89,9 @@ def defaultprefixDIR():
 
 # Binutils Variables
 
+def getBinutilsInfo(needed):
+    return '%s-%s' % (HOST(), needed)
+
 def AR():
     return getBinutilsInfo('ar')
 
