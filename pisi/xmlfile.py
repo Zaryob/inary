@@ -90,7 +90,7 @@ class XmlFile(object):
         return node.childNodes
 
     # get only elements of a given type
-    # BUG: this doesn't work
+    #FIXME:  this doesn't work
     def getChildrenWithType(self, tagpath, type):
         """ returns the children of the given path, only with given type """
         node = self.getNode(tagpath)

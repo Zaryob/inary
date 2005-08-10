@@ -149,12 +149,12 @@ def upgrade_pkg_names(A):
         (version, release) = installdb.get_version(x)
         (versionp, releasep) = (packagedb.get_package(x).version,
                                 packagedb.get_package(x).release)
-        # BUG: we should use build instead of release
+        # FIXME: we should use build instead of release
         if release < releasep:
             Ap.append(x)
         else:
             #ui.info('Package %s cannot be upgraded. ' % x)
-            # BUG: where is build no?
+            # FIXME: where is build no?
             ui.info('Package %s is already at its latest version %s,\
  release %s, build ?.\n'
                     % (x, versionp, releasep))
