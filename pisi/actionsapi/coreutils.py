@@ -40,8 +40,8 @@ class printto:
     def __init__(self, out = sys.stdout):
         self.out = out
     def __ror__(self,input):
-        for l in input:
-            print >> self.out, l
+        for line in input:
+            print >> self.out, line
 
 printlines = printto(sys.stdout)
 

@@ -215,8 +215,8 @@ class SourceInfo:
             xml.addTextNodeUnder(node, "Homepage", self.homepage)
         node.appendChild(self.packager.elt(xml))
         xml.addTextNodeUnder(node, "Description", self.description)
-        for l in self.license:
-            xml.addTextNodeUnder(node, "License", l)
+        for lic in self.license:
+            xml.addTextNodeUnder(node, "License", lic)
         for isa in self.isa:
             xml.addTextNodeUnder(node, "IsA", isa)
         xml.addTextNodeUnder(node, "PartOf", self.partof)
@@ -282,8 +282,8 @@ class PackageInfo(object):
         xml.addTextNodeUnder(node, "Name", self.name)
         xml.addTextNodeUnder(node, "Summary", self.summary)
         xml.addTextNodeUnder(node, "Description", self.description)
-        for l in self.license:
-            xml.addTextNodeUnder(node, "License", l)
+        for lic in self.license:
+            xml.addTextNodeUnder(node, "License", lic)
         for isa in self.isa:
             xml.addTextNodeUnder(node, "IsA", isa)
         if self.partof:

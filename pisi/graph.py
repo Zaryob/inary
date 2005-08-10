@@ -35,11 +35,11 @@ class digraph(object):
 
     def edges(self):
         "return a list of edge descriptors"
-        l = []
+        list = []
         for u in self.__v:
             for v in self.__u:
-                l.append( (u,v) )
-        return l
+                list.append( (u,v) )
+        return list
 
     def from_list(self, el):
         "convert a list of edges (u,v) to graph"
@@ -125,10 +125,10 @@ class digraph(object):
             return False
 
     def topological_sort(self):
-        l = []
-        self.dfs(lambda u: l.append(u))
-        l.reverse()
-        return l
+        list = []
+        self.dfs(lambda u: list.append(u))
+        list.reverse()
+        return list
 
     def write_graphviz(self, f):
         f.write('digraph G {\n')

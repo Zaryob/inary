@@ -124,10 +124,10 @@ def install_pkg_names(A):
                     G_f.add_dep(x, dep)
         B = Bp
     G_f.write_graphviz(sys.stdout)
-    l = G_f.topological_sort()
-    l.reverse()
-    print l
-    for x in l:
+    order = G_f.topological_sort()
+    order.reverse()
+    print order
+    for x in order:
         operations.install_single_name(x)
         
     return True                         # everything went OK :)
@@ -190,10 +190,10 @@ def upgrade_pkg_names(A):
                     G_f.add_dep(x, dep)
         B = Bp
     G_f.write_graphviz(sys.stdout)
-    l = G_f.topological_sort()
-    l.reverse()
-    print l
-    for x in l:
+    order = G_f.topological_sort()
+    order.reverse()
+    print order
+    for x in order:
         operations.install_single_name(x, True)
         
     return True                         # everything went OK :)
@@ -241,9 +241,9 @@ def remove(A):
                         G_f.add_plain_dep(rev_dep, x)
         B = Bp
     G_f.write_graphviz(sys.stdout)
-    l = G_f.topological_sort()
-    print l
-    for x in l:
+    order = G_f.topological_sort()
+    print order
+    for x in order:
         if installdb.is_installed(x):
             operations.remove_single(x)
         else:

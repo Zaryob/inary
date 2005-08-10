@@ -65,17 +65,17 @@ class InstallDB:
             return False
 
     def list_installed(self):
-        l = []
+        list = []
         for (pkg, (status,version,release)) in self.d.iteritems():
             if status=='i':
-                l.append(pkg)
-        return l
+                list.append(pkg)
+        return list
 
     def list_pending(self):
-        l = []
+        list = []
         for (pkg, x) in self.dp.iteritems():
-            l.append(pkg)
-        return l
+            list.append(pkg)
+        return list
 
     def get_version(self, pkg):
         pkg = str(pkg)

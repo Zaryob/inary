@@ -108,10 +108,10 @@ def run_batch(cmd):
 def splitpath(a):
     """split path into components and return as a list
     os.path.split doesn't do what I want"""
-    l = a.split(os.path.sep)
-    if l[len(l)-1]=='':
-        l.pop()
-    return l
+    comps = a.split(os.path.sep)
+    if comps[len(comps)-1]=='':
+        comps.pop()
+    return comps
 
 # I'm not sure how necessary this is. Ahem.
 def commonprefix(l):
@@ -238,8 +238,8 @@ def sha1_file(filename):
     try:
         m = sha.new()
         f = file(filename, 'rb')
-        for l in f:
-            m.update(l)
+        for line in f:
+            m.update(line)
         return m.hexdigest()
     except IOError:
         return "0" 

@@ -22,9 +22,9 @@ from pisi.ui import ui
 
 def commandsString():
     s = ''
-    l = commands.keys()
-    l.sort()
-    for x in l:
+    list = commands.keys()
+    list.sort()
+    for x in list:
         s += x + '\n'
     return s
 
