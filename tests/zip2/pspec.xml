@@ -18,7 +18,7 @@
         <Archive type="targz" sha1sum="0600c93218e6acf1be75dd79da4244eabc8e16cf">ftp://ftp.linux.org.tr/pub/mirrors/gentoo/distfiles/zip23.tar.gz</Archive>
         <Patches>
     		<Patch>zip-2.3-unix_configure-pic.patch</Patch>
-    		<Patch level="1">zip-CAN-2004-1010.patch</Patch>
+    		<!-- <Patch level="1">zip-CAN-2004-1010.patch</Patch> -->
             <Patch level="1">zcrypt.patch</Patch>
         </Patches>
         <BuildDependencies>
@@ -27,9 +27,9 @@
         </BuildDependencies>
         <History>
             <Update>
-                <Date>2005-07-15</Date>
-                <Version>2.3</Version>
-                <Release>1</Release>
+                <Date>2005-08-11</Date>
+                <Version>2.4</Version>
+                <Release>3</Release>
             </Update>
         </History>
     </Source>
