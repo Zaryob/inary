@@ -15,7 +15,7 @@
 import os
 
 # actions api modules
-from actionglobals import glb
+from pisi.actionsapi.actionglobals import glb
 
 # Global variables for compiling KDE programs...
 kde_dir = os.getenv('KDEDIR')
