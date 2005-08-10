@@ -14,10 +14,10 @@ __version__ = "0.2"
 
 __all__ = [ 'toplevel', 'packagedb', 'installdb' ]
 
-class PisiError(Exception):
+class Error(Exception):
     """Class of exceptions that lead to program termination"""
     pass
 
-class PisiException(Exception):
+class Exception(Exception):
     """Class of exceptions that must be caught and handled within PISI"""
     pass
