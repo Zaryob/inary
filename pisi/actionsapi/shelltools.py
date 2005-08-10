@@ -97,14 +97,6 @@ def system(command):
 
     return p.close()
 
-def exists_binary(bin):
-    # determine if path has binary
-    path = os.environ['PATH'].split(':')
-    for directory in path:
-        if os.path.exists(os.path.join(directory, bin) ):
-            return True
-    return False
-
 def isLink(sourceFile):
     return os.path.islink(sourceFile)
 

@@ -19,7 +19,6 @@ from pisi.ui import ui
 
 # ActionsAPI Modules
 from variables import glb
-from shelltools import exists_binary
 
 env = glb.env
 dirs = glb.dirs
@@ -89,18 +88,6 @@ def defaultprefixDIR():
     return dirs.defaultprefix
 
 # Binutils Variables
-
-def getBinutilsInfo(util):
-    cross_build_name = '%s-%s' % (HOST(), util)
-    if not exists_binary(cross_build_name):
-        if not exists_binary(util):
-            ui.error('Error: util %s cannot be found' % util)
-        else:
-            ui.debug('Warning: %s does not exist, using plain name %s'
-                     % (cross_build_name, util))
-            return util
-    else:
-        return cross_build_name
 
 def AR():
     return getBinutilsInfo('ar')
