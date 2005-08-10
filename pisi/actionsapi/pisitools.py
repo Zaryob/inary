@@ -22,7 +22,7 @@ import re
 # ActionsAPI Modules
 import pisi.actionsapi
 import pisi.actionsapi.get as get
-from pisi.actionsapi.pisitoolsfun import *
+from pisi.actionsapi.pisitoolsfunctions import *
 from pisi.actionsapi.shelltools import *
 
 def dobin(sourceFile, destinationDirectory = '/usr/bin'):
