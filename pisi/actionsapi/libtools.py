@@ -19,8 +19,9 @@ import shutil
 from pisi.ui import ui
 
 # ActionsAPI Modules
-from shelltools import chmod, makedirs
-import get
+import pisi.actionsapi
+from pisi.actionsapi.shelltools import chmod, makedirs
+import pisi.actionsapi.get
 
 def preplib(sourceDirectory):
     os.system('/sbin/ldconfig -n -N %s' % get.installDIR() + sourceDirectory)

@@ -24,14 +24,15 @@ import shutil
 import statvfs
 
 # pisi modules
-from ui import ui
-from constants import const
-from config import config
+import pisi
+from pisi.ui import ui
+from pisi.constants import const
+from pisi.config import config
 
-class FileError(Exception):
+class FileError(pisi.PisiError):
     pass
 
-class UtilError(Exception):
+class UtilError(pisi.PisiError):
     pass
 
 

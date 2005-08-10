@@ -17,15 +17,18 @@
 
 from os.path import join
 
-import archive
-from constants import const
-from config import config
-from purl import PUrl
-from metadata import MetaData
-from files import Files
+import pisi
+import pisi.archive as archive
+from pisi.constants import const
+from pisi.config import config
+from pisi.purl import PUrl
+from pisi.metadata import MetaData
+from pisi.files import Files
 
-class PackageError(Exception):
+
+class PackageError(pisi.PisiError):
     pass
+
 
 class Package:
     """PISI Package Class provides access to a pisi package (.pisi

@@ -12,11 +12,13 @@
 
 import os
 
-from config import config
-from constants import const
-from ui import ui
-from purl import PUrl
-import util, packagedb
+import pisi
+from pisi.config import config
+from pisi.constants import const
+from pisi.ui import ui
+from pisi.purl import PUrl
+import pisi.util as util
+import pisi.packagedb as packagedb
 
 # single package operations
 

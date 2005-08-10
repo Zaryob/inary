@@ -10,3 +10,11 @@
 
 # pisi.actionsapi version
 __version__ = '0.1'
+
+import pisi
+
+class ActionsApiError(pisi.PisiError):
+    pass
+
+class ActionsApiException(pisi.PisiException):
+    pass

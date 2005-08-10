@@ -16,6 +16,8 @@
 
 # Author: Baris Metin <baris@uludag.org.tr
 
+import pisi
+
 class _constant:
     "Constant members implementation"
     class ConstError(TypeError):

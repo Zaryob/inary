@@ -16,8 +16,8 @@ from optparse import OptionParser
 import pisi
 import pisi.operations
 from pisi.purl import PUrl
-from common import *
-from commands import *
+from pisi.cli.common import *
+from pisi.cli.commands import *
 
 class ParserError(Exception):
     pass

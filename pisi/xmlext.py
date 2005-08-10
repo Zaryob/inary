@@ -16,8 +16,9 @@
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 #           Baris Metin <baris@uludag.org.tr
 
+import pisi
 
-class XmlError(Exception):
+class XmlError(pisi.PisiError):
     pass
 
 def getNodeAttribute(node, attrname):

@@ -20,15 +20,15 @@ from os import access, R_OK
 
 
 # pisi modules
-from archive import Archive
-from purl import PUrl
-from ui import ui
-from config import config
-from fetcher import fetchUrl
-import util
+import pisi
+from pisi.archive import Archive
+from pisi.purl import PUrl
+from pisi.ui import ui
+from pisi.config import config
+from pisi.fetcher import fetchUrl
+import pisi.util as util
 
-
-class SourceArchiveError(Exception):
+class SourceArchiveError(pisi.PisiError):
     pass
 
 class SourceArchive:

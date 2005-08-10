@@ -20,9 +20,10 @@ import fileinput
 import re
 
 # ActionsAPI Modules
-import get
-from pisitools_functions import *
-from shelltools import *
+import pisi.actionsapi
+import pisi.actionsapi.get as get
+from pisi.actionsapi.pisitools_functions import *
+from pisi.actionsapi.shelltools import *
 
 def dobin(sourceFile, destinationDirectory = '/usr/bin'):
     '''insert a executable file into /bin or /usr/bin'''

@@ -16,21 +16,22 @@
 
 import os
 
-from specfile import *
-from package import Package
-from config import config
-from constants import const
-from ui import ui
-from installdb import installdb
-import packagedb
-from packagedb import inst_packagedb
-import dependency
-from metadata import MetaData
-from comariface import comard
-import operations
+import pisi
+from pisi.specfile import *
+from pisi.package import Package
+from pisi.config import config
+from pisi.constants import const
+from pisi.ui import ui
+from pisi.installdb import installdb
+import pisi.packagedb as packagedb
+from pisi.packagedb import inst_packagedb
+import pisi.dependency as dependency
+from pisi.metadata import MetaData
+from pisi.comariface import comard
+import pisi.operations as operations
 #import conflicts
 
-class InstallError(Exception):
+class InstallError(pisi.PisiError):
     pass
 
 class Installer:

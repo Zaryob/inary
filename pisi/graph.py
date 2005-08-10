@@ -16,7 +16,9 @@ ver = sys.version_info
 if ver[0] <= 2 and ver[1] < 4:
     from sets import Set as set
 
-class CycleError(Exception):
+# not a PISI error!
+
+class CycleException(Exception):
     pass
 
 class digraph(object):

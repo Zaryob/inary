@@ -18,7 +18,8 @@ import os
 import glob
 
 # ActionsAPI Modules
-from shelltools import *
+import pisi.actionsapi
+from pisi.actionsapi.shelltools import *
 
 class FileError(Exception):
     pass

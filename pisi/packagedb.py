@@ -22,12 +22,13 @@
 #from bsddb.dbshelve import DBShelf
 import bsddb.dbshelve as shelve
 import os, fcntl
-
-import util
-from config import config
 from bsddb import db
 
-class PackageDBError(Exception):
+import pisi
+import pisi.util as util
+from pisi.config import config
+
+class PackageDBError(pisi.PisiError):
     pass
 
 class PackageDB(object):

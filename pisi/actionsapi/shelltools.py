@@ -20,7 +20,8 @@ import shutil
 from pisi.ui import ui
 
 # ActionsAPI Modules
-import get
+import pisi.actionsapi
+import pisi.actionsapi.get
 
 def can_access_file(sourceFile):
     '''test the existence of file'''

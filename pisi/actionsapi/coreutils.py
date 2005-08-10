@@ -16,6 +16,8 @@ import sys
 import re
 from itertools import izip, imap, count, ifilter, ifilterfalse
 
+import pisi.actionsapi as actionsapi
+
 def cat(filename):
     return file(filename).xreadlines()
 

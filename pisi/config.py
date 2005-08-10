@@ -16,8 +16,9 @@
 # Authors: Baris Metin <baris@uludag.org.tr
 #          Eray Ozkural <eray@uludag.org.tr>
 
-from constants import const
-from configfile import ConfigurationFile
+import pisi
+from pisi.constants import const
+from pisi.configfile import ConfigurationFile
 
 class Config(object):
     """Config Singleton"""
@@ -26,9 +27,6 @@ class Config(object):
         self.options = options
         self.values = ConfigurationFile("/etc/pisi/pisi.conf")
         self.destdir = self.values.general.destinationdirectory
-
-    def __call__(self):
-        return self
 
     # directory accessor functions
     # here is how it goes

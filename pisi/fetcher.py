@@ -21,12 +21,15 @@ import os
 from base64 import encodestring
 
 # pisi modules
-import util
-from purl import PUrl
-from ui import ui
+import pisi
+import pisi.util as util
+from pisi.purl import PUrl
+from pisi.ui import ui
 
-class FetchError (Exception):
+
+class FetchError(pisi.PisiError):
     pass
+
 
 # helper functions
 def fetchUrl(url, dest, progress=None):

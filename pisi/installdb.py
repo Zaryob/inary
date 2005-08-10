@@ -19,13 +19,16 @@ import os
 import fcntl
 
 # PiSi
-import lockeddbshelve as shelve
-from constants import const
-from files import Files
-import util
+import pisi
+import pisi.lockeddbshelve as shelve
+from pisi.constants import const
+from pisi.files import Files
+import pisi.util as util
 
-class InstallDBError(Exception):
+
+class InstallDBError(pisi.PisiError):
     pass
+
 
 class InstallDB:
 

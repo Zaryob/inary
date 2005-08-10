@@ -17,17 +17,19 @@
 import os
 import sys
 
-import util
-from ui import ui
-from constants import const
-from config import config
-from context import BuildContext
-from sourcearchive import SourceArchive
-from files import Files, FileInfo
-from metadata import MetaData
-from package import Package
+import pisi
+import pisi.util as util
+from pisi.ui import ui
+from pisi.constants import const
+from pisi.config import config
+from pisi.context import BuildContext
+from pisi.sourcearchive import SourceArchive
+from pisi.files import Files, FileInfo
+from pisi.metadata import MetaData
+from pisi.package import Package
 
-class PisiBuildError(Exception):
+
+class PisiBuildError(pisi.PisiError):
     pass
 
 

@@ -13,7 +13,9 @@
 import socket
 import struct
 
-class ComarError(Exception):
+import pisi
+
+class ComarError(pisi.PisiError):
 	pass
 
 class ComarIface:

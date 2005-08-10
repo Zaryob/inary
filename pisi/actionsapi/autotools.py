@@ -18,10 +18,11 @@ import os
 from pisi.ui import ui
 
 # ActionsAPI Modules
-import get
-from shelltools import system
-from shelltools import can_access_file
-from libtools import gnuconfig_update
+import pisi.actionsapi
+import pisi.actionsapi.get as get
+from pisi.actionsapi.shelltools import system
+from pisi.actionsapi.shelltools import can_access_file
+from pisi.actionsapi.libtools import gnuconfig_update
 
 class ConfigureError(Exception):
     def __init__(self, Exception):

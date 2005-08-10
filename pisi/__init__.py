@@ -8,6 +8,16 @@
 # Please read the COPYING file.
 #
 
-# PISI package version
-__version__ = "0.1"
+# PISI version
 
+__version__ = "0.2"
+
+__all__ = [ 'toplevel', 'packagedb', 'installdb' ]
+
+class PisiError(Exception):
+    """Class of exceptions that lead to program termination"""
+    pass
+
+class PisiException(Exception):
+    """Class of exceptions that must be caught and handled within PISI"""
+    pass

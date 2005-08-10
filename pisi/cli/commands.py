@@ -12,9 +12,10 @@
 
 import sys
 from optparse import OptionParser
+
 import pisi
 from pisi.purl import PUrl
-from common import *
+from pisi.cli.common import *
 import pisi.toplevel
 from pisi.ui import ui
 
@@ -26,6 +27,7 @@ def commandsString():
     for x in l:
         s += x + '\n'
     return s
+
 
 # helper functions
 def cmdObject(cmd, fail=False):
@@ -39,6 +41,7 @@ def cmdObject(cmd, fail=False):
         sys.exit(1)
     else:
         return None
+
 
 class Command(object):
     """generic help string for any command"""
@@ -99,6 +102,7 @@ class Command(object):
         print 'Program terminated abnormally.'
         sys.exit(-1)
 
+
 class Help(Command):
     """Prints usage
 
@@ -122,6 +126,7 @@ for that command.
             obj = cmdObject(arg, True)
             obj.help()
 #            print "\n",self.parser.format_option_help()
+
                 
 class Build(Command):
     """Build a PISI package using a pspec.xml file
@@ -142,6 +147,7 @@ fetch all necessary files and build the package for you.
 
         for arg in self.args:
             pisi.toplevel.build(arg, self.authInfo)
+
 
 class PackageOp(Command):
     """Abstract package operation command"""
@@ -173,6 +179,7 @@ class PackageOp(Command):
             #    pisi.comariface.finalize()
             #except pisi.comariface.ComarError:
             #    ui.error('Comar error encountered\n')
+
         
 class Install(PackageOp):
     """Install PISI packages
@@ -195,6 +202,7 @@ specified a package name, it should exist in a specified repository.
         pisi.toplevel.install(self.args)
         self.finalize()
 
+
 class Upgrade(PackageOp):
     """Upgrade PISI packages
 
@@ -216,6 +224,7 @@ specified a package name, it should exist in a specified repository.
         pisi.toplevel.upgrade(self.args)
         self.finalize()
 
+
 class Remove(PackageOp):
     """Remove PISI packages
 
@@ -236,6 +245,7 @@ Remove a package from your system. Just give the package name to remove.
         pisi.toplevel.remove(self.args)
         self.finalize()
 
+
 class ConfigurePending(PackageOp):
     """configure pending packages"""
     
@@ -250,6 +260,7 @@ class ConfigurePending(PackageOp):
         self.init()
         pisi.toplevel.configure_pending()
         self.finalize()
+
 
 class Info(Command):
     """Display information about a package 
@@ -277,6 +288,7 @@ TODO: Some description...
             metadata, files = pisi.toplevel.info(arg)
             print metadata.package
 
+
 class Index(Command):
     """Index PISI files in a given directory
 
@@ -301,6 +313,7 @@ TODO: Some description...
         else:
             print 'Indexing only a single directory supported'
             return
+
 
 class ListInstalled(Command):
     """Print the list of all installed packages  
@@ -328,6 +341,7 @@ TODO: Some description...
             else:
                 print package
 
+
 class UpdateRepo(Command):
     """Update the databases of a repository
 
@@ -347,6 +361,7 @@ TODO: Some description...
         self.init_db()
         for repo in self.args:
             pisi.toplevel.update_repo(repo)
+
 
 class AddRepo(Command):
     """Add a repository
@@ -369,6 +384,7 @@ TODO: Some description...
             self.help()
             return
 
+
 class RemoveRepo(Command):
     """Remove a repository
 
@@ -388,6 +404,7 @@ TODO: Some description...
         else:
             self.help()
             return
+
 
 class ListRepo(Command):
     """List repositories
@@ -500,6 +517,7 @@ for you.
         for arg in self.args:
             pisi.toplevel.build_until(arg, state, self.authInfo)
 
+
 class BuildUnpack(Command):
     """Unpack the source archive
 
@@ -559,6 +577,7 @@ TODO: desc.
         for arg in self.args:
             pisi.toplevel.build_until(arg, "buildaction", self.authInfo)
 
+
 class BuildInstall(Command):
     """Install to the sandbox
 
@@ -578,6 +597,7 @@ TODO: desc.
         for arg in self.args:
             pisi.toplevel.build_until(arg, "installaction", self.authInfo)
 
+
 class BuildPackage(Command):
     """Setup the source
 
@@ -596,6 +616,8 @@ TODO: desc.
 
         for arg in self.args:
             pisi.toplevel.build_until(arg, "buildpackages", self.authInfo)
+
+# command dictionary
 
 commands = {"help": Help,
             "build": Build,

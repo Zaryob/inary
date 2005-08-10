@@ -9,20 +9,22 @@
 #
 # Please read the COPYING file.
 #
-
 # Archive module provides access to regular archive file types.
 # maintainer baris and meren
 
-#standard lisbrary modules
+# standard library modules
 import os
 import tarfile
 import zipfile
 
-#pisi modules
-import util
+# PiSi modules
+import pisi
+import pisi.util as util
 
-class ArchiveError(Exception):
+
+class ArchiveError(pisi.PisiError):
     pass
+
 
 class ArchiveBase(object):
     """Base class for Archive classes."""
@@ -37,6 +39,7 @@ class ArchiveBase(object):
             util.clean_dir(self.targetDir)
 
         os.makedirs(self.targetDir)
+
 
 class ArchiveTar(ArchiveBase):
     """ArchiveTar handles tar archives depending on the compression
@@ -67,6 +70,7 @@ class ArchiveTar(ArchiveBase):
             tar.extract(tarinfo)
         os.chdir(oldwd)
         tar.close()
+
 
 class ArchiveZip(ArchiveBase):
     """ArchiveZip handles zip archives. 
@@ -179,6 +183,7 @@ class ArchiveZip(ArchiveBase):
         self.unpack_file_cond(lambda f: True, targetDir)
         self.close()
         return 
+
 
 class Archive:
     """Archive is the main factory for ArchiveClasses, regarding the

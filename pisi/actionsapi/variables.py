@@ -15,8 +15,8 @@
 from os import getenv, environ
 
 # Pisi-Core Modules
-import pisi.config
-import pisi.constants
+import pisi.config                      # That was the only correct
+import pisi.constants                   # use before changing to abs. imports
 
 # Set individual information, that are generally needed for ActionsAPI
 
