@@ -75,16 +75,19 @@ Legend:
 
  - i18n support
  - automatic generation of usage_text from commands
- - upgrade operation (eray)
- - system-wide upgrade (upgrade-all) komutu (eray)
+ / upgrade (eray)
+   + upgrade operation
+   / test upgrade op
+   - system-wide upgrade (upgrade-all) komutu
  / multiple package repository (eray)
    + decide how to implement
    / make a package and sourcedb for each repo
    - support medium types :( uhuuuu
      - internet: http/ftp
      - local repository
-     - cdrom dvd
- - GUI
+     - cdrom dvd 
+ - UI
+   - ask alternatives to choose from (eray)
    - pyqt UI class to interface
    - PISIMAT
    - installation
