@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.7.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-08-10, 19:32:09 -->
+<!-- Saved: 2005-08-10, 20:16:49 -->
 <!-- Copyright (C) 2005 PiSi Development Team, pisi@uludag.org.tr -->
 <Project version="3.7">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -128,11 +128,6 @@
       <Dir>pisi</Dir>
       <Dir>actionsapi</Dir>
       <Name>kde.py</Name>
-    </Source>
-    <Source>
-      <Dir>pisi</Dir>
-      <Dir>actionsapi</Dir>
-      <Name>pisitools_functions.py</Name>
     </Source>
     <Source>
       <Dir>pisi</Dir>
@@ -306,11 +301,12 @@
       <Name>version.py</Name>
     </Source>
     <Source>
-      <Dir>pisi</Dir>
-      <Name>exception.py</Name>
+      <Name>setup.py</Name>
     </Source>
     <Source>
-      <Name>setup.py</Name>
+      <Dir>pisi</Dir>
+      <Dir>actionsapi</Dir>
+      <Name>pisitoolsfun.py</Name>
     </Source>
   </Sources>
   <Forms>
@@ -322,6 +318,11 @@
   <Others>
     <Other>
       <Name>pisi-cli</Name>
+    </Other>
+    <Other>
+      <Dir>pisi</Dir>
+      <Dir>actionsapi</Dir>
+      <Name>pisitoolsfun</Name>
     </Other>
   </Others>
   <MainScript>

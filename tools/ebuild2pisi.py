@@ -114,8 +114,8 @@ def getPatches(filename, pkgName, version):
     patched = False
     for line in fileObj:
         line = line.strip()
-	if line.startswith('#'):
-	    continue
+        if line.startswith('#'):
+            continue
 
 	p = rc("\Aepatch ").search(line)
 	if not p:

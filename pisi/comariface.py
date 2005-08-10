@@ -44,12 +44,12 @@ class ComarIface:
 		# NOTE: COMAR RPC is using network byte order (big endian)
 		fmt = "!ii"
 		for a in args:
-            a = str(a) # damn unicode
-			fmt += "h%dsB" % (len(a))
-			size += 2 + len(a) + 1
-			args2.append(len(a))
-			args2.append(a.encode("utf-8"))
-			args2.append(0)
+                    a = str(a)      # damn unicode
+                    fmt += "h%dsB" % (len(a))
+                    size += 2 + len(a) + 1
+                    args2.append(len(a))
+                    args2.append(a.encode("utf-8"))
+                    args2.append(0)
 		pak = struct.pack(fmt, (cmd << 24) | size, id, *args2)
 		return pak
 	
