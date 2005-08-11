@@ -107,6 +107,9 @@ def realPath(sourceFile):
 def baseName(sourceFile):
     return os.path.basename(sourceFile)
 
+def dirName(sourceFile):
+    return os.path.dirname(sourceFile)
+
 def sym(sourceFile, destinationFile):
     os.symlink(sourceFile, destinationFile)
 
