@@ -101,10 +101,10 @@ class Installer:
                 # is this an upgrade?
                 # determine and report the kind of upgrade: version, release, build
                 if pkg.version > iversion:
-                    ui.info('Upgrading to new upstream version')
+                    ui.info('Upgrading to new upstream version\n')
                     upgrade = True
                 elif pkg.release > irelease:
-                    ui.info('Upgrading to new distribution release')
+                    ui.info('Upgrading to new distribution release\n')
                     upgrade = True
 
                 # is this a downgrade? confirm this action.

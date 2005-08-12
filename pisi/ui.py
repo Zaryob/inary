@@ -14,7 +14,9 @@
 #           Murat Eren <meren@uludag.org.tr>
 
 import sys
-from colors import colorize
+
+from pisi.colors import colorize
+from pisi.config import config
 
 def register(_impl):
     """ Register a UI implementation"""
@@ -53,6 +55,9 @@ class CLI:
         sys.stdout.flush()
 
     def confirm(self, msg):
+        from pisi.config import config
+        if config.options and config.options.yes_all:
+            return True
         while True:
             s = raw_input(msg + colorize('(yes/no)', 'red'))
             if s.startswith('y') or s.startswith('Y'):
@@ -82,4 +87,5 @@ class CLI:
         self.info(out)
 
 # default UI is CLI
-ui = CLI()
+ui = None
+#CLI()

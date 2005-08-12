@@ -16,8 +16,6 @@ from optparse import OptionParser
 import pisi
 from pisi.purl import PUrl
 from pisi.cli.common import *
-import pisi.toplevel
-from pisi.ui import ui
 
 
 def commandsString():
@@ -48,18 +46,21 @@ class Command(object):
 
     def __init__(self):
         # now for the real parser
+        import pisi
         self.parser = OptionParser(usage=usage_text,
                                    version="%prog " + pisi.__version__)
         self.options()
         self.parser = commonopts(self.parser)
         (self.options, self.args) = self.parser.parse_args()
+        #print 'opts,args = ', self.options, self.args
         self.args.pop(0)                # exclude command arg
 
+        import pisi
+        #from pisi.ui import ui
+
         # initialize PiSi
-        #print '**** running cmd'
         pisi.config.config = pisi.config.Config(self.options)
-        cli = pisi.ui.CLI(self.options.debug)
-        pisi.ui.ui = cli
+        pisi.ui.ui = pisi.ui.CLI(self.options.debug)
         
         self.checkAuthInfo()
 
@@ -91,9 +92,17 @@ class Command(object):
         else:
             self.authInfo = None
 
-    def init_db(self):
-        from pisi.repodb import repodb
-        repodb.init_dbs()
+    def init(self, database = False):
+        """initialize PiSi components"""
+        
+        # IMPORTANT: command imports here or in the command class run fxns
+        import pisi.toplevel
+        if database:
+            from pisi.repodb import repodb
+            repodb.init_dbs()
+
+    def finalize(self):
+        pass
 
     def help(self):
         print getattr(self, "__doc__")
@@ -121,12 +130,17 @@ for that command.
         if not self.args:
             self.parser.print_help()
             return
+
+        self.init()
         
         for arg in self.args:
+            print
+            pisi.ui.ui.info("%s: " % arg)
             obj = cmdObject(arg, True)
             obj.help()
-#            print "\n",self.parser.format_option_help()
-
+        
+        self.finalize()
+            
                 
 class Build(Command):
     """Build a PISI package using a pspec.xml file
@@ -145,8 +159,10 @@ fetch all necessary files and build the package for you.
             self.help()
             return
 
+        self.init()
         for arg in self.args:
             pisi.toplevel.build(arg, self.authInfo)
+        self.finalize()
 
 
 class PackageOp(Command):
@@ -162,7 +178,7 @@ class PackageOp(Command):
 ##                               default=False, help="xxxx")
 
     def init(self):
-        self.init_db()
+        super(PackageOp, self).init(True)
         import pisi.comariface
         if not self.options.ignore_comar:
             try:
@@ -170,6 +186,7 @@ class PackageOp(Command):
             except pisi.comariface.ComarError:
                 ui.error('Comar error encountered\n')
                 self.die()
+        self.finalize()
                 
     def finalize(self):
         #self.finalize_db()
@@ -278,8 +295,10 @@ TODO: Some description...
             self.help()
             return
 
+        self.init()
         for arg in self.args:
             self.printinfo(arg)
+        self.finalize()
 
     def printinfo(self, arg):
         import os.path
@@ -301,7 +320,8 @@ TODO: Some description...
         super(Index, self).__init__()
 
     def run(self):
-
+        
+        self.init()
         from pisi.toplevel import index
         if len(self.args)==1:
             index(self.args[0])
@@ -311,7 +331,7 @@ TODO: Some description...
         else:
             print 'Indexing only a single directory supported.'
             return
-
+        self.finalize()
 
 class ListInstalled(Command):
     """Print the list of all installed packages  
@@ -330,7 +350,7 @@ TODO: Some description...
                                default=False, help="show in long format")
 
     def run(self):
-        self.init_db()
+        self.init(True)
         from pisi.installdb import installdb
         for pkg in installdb.list_installed():
             package = pisi.packagedb.get_package(pkg)
@@ -338,6 +358,7 @@ TODO: Some description...
                 print package.name, '-', package.summary
             else:
                 print package
+        self.finalize()
 
 
 class UpdateRepo(Command):
@@ -359,7 +380,7 @@ TODO: Some description...
         self.init_db()
         for repo in self.args:
             pisi.toplevel.update_repo(repo)
-
+        self.finalize()
 
 class AddRepo(Command):
     """Add a repository
@@ -375,9 +396,11 @@ TODO: Some description...
     def run(self):
 
         if len(self.args)>=2:
+            self.init()
             name = self.args[0]
             indexuri = self.args[1]
             pisi.toplevel.add_repo(name, indexuri)
+            self.init()
         else:
             self.help()
             return
@@ -397,8 +420,10 @@ TODO: Some description...
     def run(self):
 
         if len(self.args)>=1:
+            self.init()
             name = self.args[0]
             pisi.toplevel.remove_repo(name)
+            self.finalize()
         else:
             self.help()
             return
@@ -417,10 +442,12 @@ TODO: Some description...
 
     def run(self):
 
+        self.init()
         from pisi.repodb import repodb
         for repo in repodb.list():
             print repo
             print '  ', repodb.get_repo(repo).indexuri.getUri()
+        self.finalize()
 
 
 class ListAvailable(Command):
@@ -448,6 +475,7 @@ TODO: desc...
             for repo in repodb.list():
                 ui.info("Repository : %s\n" % repo)
                 self.print_packages(repo)
+        self.finalize()
 
     def print_packages(self, repo):
         from pisi import packagedb
@@ -472,6 +500,7 @@ class ListPending(Command):
         for p in installdb.list_pending():
             print p
 
+        self.finalize()
 
 class SearchAvailable(Command):
     """Search in available packages
@@ -506,14 +535,17 @@ for you.
         self.parser.add_option("-s", action="store", dest="state")
 
     def run(self):
+
         if not self.args:
             self.help()
             return
 
+        self.init()
         state = self.options.state
 
         for arg in self.args:
             pisi.toplevel.build_until(arg, state, self.authInfo)
+        self.finalize()
 
 
 class BuildUnpack(Command):
@@ -532,8 +564,10 @@ TODO: desc.
             self.help()
             return
 
+        self.init()
         for arg in self.args:
             pisi.toplevel.build_until(arg, "unpack", self.authInfo)
+        self.finalize()
 
 
 class BuildSetup(Command):
@@ -552,8 +586,11 @@ TODO: desc.
             self.help()
             return
 
+        self.init()
         for arg in self.args:
-            pisi.toplevel.build_until(arg, "setupaction", self.authInfo)
+            pisi.toplevel.build_until(arg, "setupaction",
+                                      self.authInfo)
+        self.finalize()
 
 
 class BuildBuild(Command):
@@ -572,8 +609,10 @@ TODO: desc.
             self.help()
             return
 
+        self.init()
         for arg in self.args:
             pisi.toplevel.build_until(arg, "buildaction", self.authInfo)
+        self.finalize()
 
 
 class BuildInstall(Command):
@@ -592,8 +631,11 @@ TODO: desc.
             self.help()
             return
 
+        self.init()
         for arg in self.args:
-            pisi.toplevel.build_until(arg, "installaction", self.authInfo)
+            pisi.toplevel.build_until(arg, "installaction",
+                                      self.authInfo)
+        self.finalize()
 
 
 class BuildPackage(Command):
@@ -612,8 +654,10 @@ TODO: desc.
             self.help()
             return
 
+        self.init()
         for arg in self.args:
             pisi.toplevel.build_until(arg, "buildpackages", self.authInfo)
+        self.finalize()
 
 # command dictionary
 

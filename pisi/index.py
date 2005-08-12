@@ -16,15 +16,15 @@
 
 import os
 
-from package import Package
-from xmlfile import XmlFile
-import metadata
-import packagedb
-from ui import ui
-import util
-from config import config
-from constants import const
-from purl import PUrl
+from pisi.package import Package
+from pisi.xmlfile import XmlFile
+import pisi.metadata as metadata
+import pisi.packagedb as packagedb
+from pisi.ui import ui
+import pisi.util as util
+from pisi.config import config
+from pisi.constants import const
+from pisi.purl import PUrl
 
 class Index(XmlFile):
 

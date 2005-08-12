@@ -19,11 +19,12 @@
 # yes, we are cheap
 
 import bsddb.dbshelve as shelve
-import os, fcntl
-
-import util
-from config import config
+import os
+import fcntl
 from bsddb import db
+
+import pisi.util as util
+from pisi.config import config
 
 class SourceDB(object):
 

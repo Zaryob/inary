@@ -19,8 +19,8 @@ import bsddb.db as db
 import os
 import fcntl
 
-from config import config
-import util
+from pisi.config import config
+import pisi.util as util
 
 class LockedDBShelf(shelve.DBShelf):
 

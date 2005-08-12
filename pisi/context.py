@@ -15,9 +15,9 @@
 # Authors: Baris Metin <baris@uludag.org.tr
 #          Eray Ozkural <eray@uludag.org.tr>
 
-from constants import const
-from config import config
-from specfile import SpecFile
+from pisi.constants import const
+from pisi.config import config
+from pisi.specfile import SpecFile
 
 class BuildContext(object):
     """Build Context Singleton"""

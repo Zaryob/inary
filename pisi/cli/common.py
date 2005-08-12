@@ -23,6 +23,8 @@ PISI Package Manager
 def commonopts(parser):
     p = parser
     p.add_option("-D", "--destdir", action="store")
+    p.add_option("", "--yes-all", action="store_true",
+                 default=False, help = "assume yes in all yes/no queries")
     p.add_option("-u", "--username", action="store")
     p.add_option("-p", "--password", action="store")
     p.add_option("-P", action="store_true", dest="getpass", default=False,

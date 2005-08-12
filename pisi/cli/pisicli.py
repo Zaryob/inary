@@ -14,7 +14,6 @@ import sys
 from optparse import OptionParser
 
 import pisi
-import pisi.operations
 from pisi.purl import PUrl
 from pisi.cli.common import *
 from pisi.cli.commands import *

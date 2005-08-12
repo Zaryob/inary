@@ -14,8 +14,9 @@ from bsddb import db
 import bsddb.dbshelve as shelve
 import os, fcntl
 
-from config import config
-import packagedb, util
+from pisi.config import config
+import pisi.packagedb as packagedb
+import pisi.util as util
 from pisi.purl import PUrl
        
 class RepoDB(object):

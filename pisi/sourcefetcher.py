@@ -12,11 +12,11 @@
 
 from os.path import basename, dirname, join
 
-from ui import ui
-from config import config
-from constants import const
-from purl import PUrl
-from specfile import SpecFile
+from pisi.ui import ui
+from pisi.config import config
+from pisi.constants import const
+from pisi.purl import PUrl
+from pisi.specfile import SpecFile
 
 class SourceFetcher(object):
     def __init__(self, url, authInfo=None):

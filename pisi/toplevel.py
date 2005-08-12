@@ -92,7 +92,9 @@ def install_pkg_files(packages):
     # be satisfied by installing packages from the repo
 
     # if so, then invoke install_pkg_names
-    if install_pkg_names([x.package for x in dep_unsatis]):
+    extra_packages = [x.package for x in dep_unsatis]
+    if (extra_packages and install_pkg_names(extra_packages)) or \
+           (not extra_packages):
         for x in packages:
             operations.install_single_file(x)
 
@@ -291,7 +293,11 @@ def add_repo(name, indexuri):
     repodb.add_repo(name, repo)
 
 def remove_repo(name):
-    repodb.remove_repo(name)
+    if repodb.has_repo(name):
+        repodb.remove_repo(name)
+    else:
+        ui.error('* Repository %s does not exist. Cannot remove.\n'
+                 % name)
 
 def update_repo(repo):
 
