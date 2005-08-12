@@ -233,7 +233,7 @@ class PisiBuild:
                                             targetDir=config.tmp_dir())
 
             ui.action("* Applying patch: %s\n" % patch.filename)
-            util.do_patch(self.srcDir, patchFile, level=patch.level)
+            util.do_patch(self.srcDir, patchFile, level=patch.level, target=patch.target)
 
     def genMetaDataXml(self, package):
         """Generate the metadata.xml file for build source.

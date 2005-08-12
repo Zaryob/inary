@@ -77,12 +77,15 @@ class PatchInfo:
             self.filename = getNodeText(node)
             self.compressionType = getNodeAttribute(node, "compressionType")
             self.level = getNodeAttribute(node, "level")
+            self.target = getNodeAttribute(node, "target")
         else:
             self.compressionType = None
         if not self.level:
             self.level = 0
         else:
             self.level = int(self.level)
+        if not self.target:
+            self.target = ''
 
     def elt(self, xml):
         node = xml.newNode("Patch")
@@ -91,6 +94,8 @@ class PatchInfo:
             node.setAttribute("compressionType", self.compressionType)
         if self.level:
             node.setAttribute("level", str(self.level))
+        if self.target:
+            node.setAttribute("target", self.target)
         return node
 
     def verify(self):

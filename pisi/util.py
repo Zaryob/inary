@@ -264,14 +264,14 @@ def uncompress(patchFile, compressType="gz", targetDir=None):
     return filePath
 
 
-def do_patch(sourceDir, patchFile, level):
+def do_patch(sourceDir, patchFile, level, target = ''):
     """simple function to apply patches.."""
     cwd = os.getcwd()
     os.chdir(sourceDir)
 
     check_file(patchFile)
     level = int(level)
-    cmd = "patch -p%d < %s" % (level, patchFile)
+    cmd = "patch -p%d %s< %s" % (level, target, patchFile)
     p = os.popen(cmd)
     o = p.readlines()
     retval = p.close()
