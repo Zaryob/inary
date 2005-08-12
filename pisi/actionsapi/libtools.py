@@ -33,8 +33,8 @@ def gnuconfig_update():
 
     ui.info('GNU Config Update Finished...\n')
 
-def libtoolize():
-    os.system('/usr/bin/libtoolize --copy --force')
+def libtoolize(parameters = ''):
+    os.system('/usr/bin/libtoolize %s' % parameters)
 
 def gen_usr_ldscript(dynamicLib):
 
