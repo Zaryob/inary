@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.7.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-08-10, 20:16:49 -->
+<!-- Saved: 2005-08-11, 04:30:17 -->
 <!-- Copyright (C) 2005 PiSi Development Team, pisi@uludag.org.tr -->
 <Project version="3.7">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -306,7 +306,7 @@
     <Source>
       <Dir>pisi</Dir>
       <Dir>actionsapi</Dir>
-      <Name>pisitoolsfun.py</Name>
+      <Name>pisitoolsfunctions.py</Name>
     </Source>
   </Sources>
   <Forms>
@@ -318,11 +318,6 @@
   <Others>
     <Other>
       <Name>pisi-cli</Name>
-    </Other>
-    <Other>
-      <Dir>pisi</Dir>
-      <Dir>actionsapi</Dir>
-      <Name>pisitoolsfun</Name>
     </Other>
   </Others>
   <MainScript>

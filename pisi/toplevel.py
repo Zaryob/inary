@@ -69,6 +69,10 @@ def install_pkg_files(packages):
         package.read()
         d_t[package.metadata.package.name] = package.metadata
 
+    def satisfiesDep(dep):
+        return dependency.installedSatisfiesDep(dep) \
+               or dependency.dictSatisfiesDep(d_t, dep)
+            
     # for this case, we have to determine the dependencies
     # that aren't already satisfied and try to install them 
     # from the repository
@@ -76,7 +80,8 @@ def install_pkg_files(packages):
     for name in d_t.keys():
         md = d_t[name]
         deps = md.package.runtimeDeps
-        if not dependency.satisfiesDeps(md.package.name, deps):
+        if not dependency.satisfiesDeps(md.package.name, deps,
+                                        satisfiesDep):
             dep_unsatis += deps
 
     # now determine if these unsatisfied dependencies could

@@ -74,6 +74,16 @@ class DepInfo:
             s += 'rel <= ' + self.releaseTo
         return s
 
+def dictSatisfiesDep(dict, depinfo):
+    """determine if a package in a dictionary satisfies given dependency spec"""
+    pkg_name = depinfo.package
+    if not dict.has_key(pkg_name):
+        return False
+    else:
+        pkg = dict[pkg_name]
+        (version, release) = (pkg.version, pkg.release)
+        return depinfo.satisfies(pkg_name, version, release)
+
 def installedSatisfiesDep(depinfo):
     """determine if a package in *repository* satisfies given
 dependency spec"""

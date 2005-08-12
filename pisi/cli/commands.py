@@ -52,8 +52,8 @@ class Command(object):
                                    version="%prog " + pisi.__version__)
         self.options()
         self.parser = commonopts(self.parser)
-        (self.options, args) = self.parser.parse_args()
-        self.args = args[1:]
+        (self.options, self.args) = self.parser.parse_args()
+        self.args.pop(0)                # exclude command arg
 
         # initialize PiSi
         #print '**** running cmd'
@@ -301,17 +301,15 @@ TODO: Some description...
         super(Index, self).__init__()
 
     def run(self):
-        if not self.args:
-            self.help()
-            return
 
         from pisi.toplevel import index
         if len(self.args)==1:
             index(self.args[0])
         elif len(self.args)==0:
+            print 'Indexing current directory.'
             index()
         else:
-            print 'Indexing only a single directory supported'
+            print 'Indexing only a single directory supported.'
             return
 
 

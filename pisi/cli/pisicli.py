@@ -41,11 +41,9 @@ class PisiCLI(object):
         cmd = ""
         try:
             (options, args) = self.parser.parse_args()
-            #if len(parser.rargs)==0:
-            #    self.die()
+            if len(args)==0:
+                self.die()
             cmd = args[0]
-            #cli = pisi.ui.CLI(options.debug)
-            #pisi.ui.ui = cli
             
         except IndexError:
             self.die()
