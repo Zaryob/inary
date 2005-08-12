@@ -15,6 +15,8 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import get
 from pisi.actionsapi import pisitools
 
+WorkDir="zip-2.3"
+
 def setup():
     pisitools.dosed("unix/Makefile", "-O2", get.CFLAGS())
 
