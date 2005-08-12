@@ -135,8 +135,8 @@ def doman(*sourceFiles):
     for sourceFile in sourceFiles:
         for source in glob.glob(sourceFile):
             try:
-                #FIXME: splitext
-                pageName, pageDirectory = source.split('.')
+                pageName, pageDirectory = source[:source.rindex('.')], \
+                                          source[source.rindex('.')+1:]
             except ValueError:
                 print 'doman: Wrong man page file'
                 sys.exit(1)
