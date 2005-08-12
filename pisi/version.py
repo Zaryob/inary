@@ -29,15 +29,15 @@ class Version:
         else:
             return False
 
-    def lt(self,rhs):
+    def __lt__(self,rhs):
         return self.pred(rhs, lambda x,y: x<y)
 
-    def le(self,rhs):
+    def __le__(self,rhs):
         return self.pred(rhs, lambda x,y: x<=y)
 
-    def gt(self,rhs):
+    def __gt__(self,rhs):
         return self.pred(rhs, lambda x,y: x>y)
 
-    def ge(self,rhs):
+    def __ge__(self,rhs):
         return self.pred(rhs, lambda x,y: x>=y)
 
