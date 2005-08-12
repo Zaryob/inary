@@ -89,7 +89,10 @@ class Index(XmlFile):
         # TODO: in the future we'll do all of this with purl/pfile/&helpers
         # After that, we'll remove the ugly repo_uri parameter from this
         # function.
-        md.package.packageURI = util.removepathprefix(repo_uri, path)
+        # FIXME: for now, do all paths absolute, support relative URIs
+        # in the future
+        #md.package.packageURI = util.removepathprefix(repo_uri, path)
+        md.package.packageURI = os.path.realpath(path)        
         # check package semantics
         if md.verify():
             self.packages.append(md.package)
