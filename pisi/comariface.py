@@ -15,7 +15,7 @@ import struct
 
 import pisi
 
-class ComarError(pisi.PisiError):
+class ComarError(pisi.Error):
     pass
 
 class ComarIface:
