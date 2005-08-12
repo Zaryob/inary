@@ -21,7 +21,7 @@ from pisi.ui import ui
 # ActionsAPI Modules
 import pisi.actionsapi
 from pisi.actionsapi.shelltools import chmod, makedirs
-import pisi.actionsapi.get
+import pisi.actionsapi.get as get
 
 def preplib(sourceDirectory):
     os.system('/sbin/ldconfig -n -N %s' % get.installDIR() + sourceDirectory)
