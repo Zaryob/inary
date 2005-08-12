@@ -17,14 +17,18 @@ ver = sys.version_info
 if ver[0] <= 2 and ver[1] < 4:
     from sets import Set as set
 
-from config import config
-from constants import const
-from ui import ui
-from purl import PUrl
-import util, dependency, pgraph, operations, packagedb
-from repodb import repodb
-from installdb import installdb
-from index import Index
+from pisi.config import config
+from pisi.constants import const
+from pisi.ui import ui
+from pisi.purl import PUrl
+import pisi.util as util
+import pisi.dependency as dependency
+import pisi.pgraph as pgraph
+import pisi.operations as operations
+import pisi.packagedb as packagedb
+from pisi.repodb import repodb
+from pisi.installdb import installdb
+from pisi.index import Index
 
 def install(packages):
     """install a list of packages (either files/urls, or names)"""
@@ -67,7 +71,7 @@ def install_pkg_files(packages):
     for x in packages:
         package = Package(x)
         package.read()
-        d_t[package.metadata.package.name] = package.metadata
+        d_t[package.metadata.package.name] = package.metadata.package
 
     def satisfiesDep(dep):
         return dependency.installedSatisfiesDep(dep) \
@@ -78,11 +82,11 @@ def install_pkg_files(packages):
     # from the repository
     dep_unsatis = []
     for name in d_t.keys():
-        md = d_t[name]
-        deps = md.package.runtimeDeps
-        if not dependency.satisfiesDeps(md.package.name, deps,
-                                        satisfiesDep):
-            dep_unsatis += deps
+        pkg = d_t[name]
+        deps = pkg.runtimeDeps
+        for dep in deps:
+            if not satisfiesDep(dep):
+                dep_unsatis.append(dep)
 
     # now determine if these unsatisfied dependencies could
     # be satisfied by installing packages from the repo
