@@ -147,6 +147,7 @@ def install_pkg_names(A):
 def upgrade(A):
     upgrade_pkg_names(A)
 
+
 def upgrade_pkg_names(A):
     """Re-installs packages from the repository, trying to perform
     a maximum number of upgrades."""
@@ -174,6 +175,8 @@ def upgrade_pkg_names(A):
     if len(A)==0:
         ui.info('No packages to upgrade.\n')
         return True
+
+    ui.debug('A = %s\n' % str(A))
     
     # try to construct a pisi graph of packages to
     # install / reinstall
@@ -182,7 +185,6 @@ def upgrade_pkg_names(A):
 
     # find the "install closure" graph of G_f by package 
     # set A using packagedb
-    print A
     for x in A:
         G_f.add_package(x)
     B = A
@@ -195,7 +197,14 @@ def upgrade_pkg_names(A):
             for dep in pkg.runtimeDeps:
                 print 'checking ', dep
                 # add packages that can be upgraded
-                if not dependency.repoSatisfiesDep(dep):
+                if dependency.repoSatisfiesDep(dep):
+                    if installdb.is_installed(dep.package):
+                        #FIXME: use build no
+                        (v,r) = installdb.get_version(dep.package)
+                        rep_pkg = packagedb.get_package(dep.package)
+                        (vp,rp) = (rep_pkg.version, rep_pkg.release)
+                        if r >= rp:     # installed already older
+                            continue
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
