@@ -377,7 +377,7 @@ TODO: Some description...
             self.help()
             return
 
-        self.init_db()
+        self.init(True)
         for repo in self.args:
             pisi.toplevel.update_repo(repo)
         self.finalize()
@@ -465,7 +465,7 @@ TODO: desc...
         from pisi.repodb import repodb
         from pisi.ui import ui
 
-        self.init_db()
+        self.init(True)
 
         if self.args:
             for arg in self.args:
@@ -495,7 +495,7 @@ class ListPending(Command):
         from pisi.installdb import installdb
         from pisi.ui import ui
 
-        self.init_db()
+        self.init(True)
 
         for p in installdb.list_pending():
             print p
