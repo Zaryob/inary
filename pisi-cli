@@ -18,6 +18,7 @@ from pisi.ui import ui
 def handleException(exception, value, tb):
     import traceback
     import exceptions
+    from pisi.ui import ui
 
     if exception == exceptions.KeyboardInterrupt:
         ui.error("\nKeyboardInterrupt: Exiting...\n")
