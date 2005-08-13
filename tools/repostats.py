@@ -53,6 +53,20 @@ def scan_pspec(folder):
             dirs.remove(".svn")
     return paks
 
+def add_deps(deps, spec):
+    a = {}
+    for d in spec.source.buildDeps:
+        p = d.package
+        if not a.has_key(p):
+            a[p] = 1
+    for pak in spec.packages:
+        for d in pak.runtimeDeps:
+            p = d.package
+            if not a.has_key(p):
+                a[p] = 1
+    for p in a:
+        deps.add(p)
+
 hosts = Histogram()
 people = Histogram()
 licenses = Histogram()
@@ -63,6 +77,8 @@ nr_binpaks = 0
 nr_patches = 0
 maxpy_lines = 0
 maxpy_name = None
+paknames = {}
+dependencies = Histogram()
 
 errors = []
 
@@ -90,6 +106,8 @@ for pak in paks:
         pass
     nr_binpaks += len(spec.packages)
     nr_patches += len(spec.source.patches)
+    paknames[spec.source.name] = 1
+    add_deps(dependencies, spec)
     if len(spec.source.patches) > mostp_count:
         mostp_count = len(spec.source.patches)
         mostp_name = spec.source.name
@@ -126,22 +144,32 @@ else:
 
 print "<h1>Komponentler</h1><table>"
 for name,cnt in components.get_list():
-    print "<tr><td>%s</td><td>%s</td>" % (name, cnt)
+    print "<tr><td>%s</td><td>%s</td></tr>" % (name, cnt)
 print "</table>"
 
 print "<h1>Paketleyiciler</h1><table>"
 for name,cnt in people.get_list():
-    echo("<tr><td>%s</td><td>%s</td>" % (name, cnt))
+    echo("<tr><td>%s</td><td>%s</td></tr>" % (name, cnt))
 print "</table>"
 
 print "<h1>Lisanslar</h1><table>"
 for name,cnt in licenses.get_list():
-    print "<tr><td>%s</td><td>%s</td>" % (name, cnt)
+    print "<tr><td>%s</td><td>%s</td></tr>" % (name, cnt)
+print "</table>"
+
+echo(u"<h1>Bağımlılıklar<br>")
+echo(u"<small>(italik olanlar depoda bulunmayanlar)</small></h1>")
+print "<table>"
+for name,cnt in dependencies.get_list():
+    if paknames.has_key(name):
+        print "<tr><td><b>%s</b></td><td>%d</td></tr>" % (name, cnt)
+    else:
+        print "<tr><td><i>%s</i></td><td>%d</td></tr>" % (name, cnt)
 print "</table>"
 
 echo(u"<h1>Kod kaynakları</h1><table>")
 for name,cnt in hosts.get_list():
-    print "<tr><td>%s</td><td>%s</td>" % (name, cnt)
+    print "<tr><td>%s</td><td>%s</td></tr>" % (name, cnt)
 print "</table>"
 
 print "</body>"
