@@ -61,6 +61,8 @@ mostp_name = None
 mostp_count = 0
 nr_binpaks = 0
 nr_patches = 0
+maxpy_lines = 0
+maxpy_name = None
 
 errors = []
 
@@ -77,6 +79,15 @@ for pak in paks:
         for e in errs:
             errors.append([pak, e])
         continue
+    try:
+        f = file(os.path.join(pak, "actions.py"))
+        L = len(f.readlines())
+        if L > maxpy_lines:
+            maxpy_lines = L
+            maxpy_name = spec.source.name
+        f.close()
+    except:
+        pass
     nr_binpaks += len(spec.packages)
     nr_patches += len(spec.source.patches)
     if len(spec.source.patches) > mostp_count:
@@ -101,6 +112,9 @@ print "<p>Toplam %d kod paketi, ve bunlardan oluşturulacak %d ikili paket var.<
 echo(u"<p>Toplam peç sayısı %d</p>" % nr_patches)
 if mostp_count > 0:
     echo(u"<p>En çok peçlenen yazılım %d peçle %s!</p>" % (mostp_count, mostp_name))
+
+if maxpy_lines > 0:
+    echo(u"<p>En uzun actions.py betiğine sahip yazılım %d satırla %s!</p>" % (maxpy_lines, maxpy_name))
 
 if errors != []:
     print "<h1>Hatalar</h1><table>"
