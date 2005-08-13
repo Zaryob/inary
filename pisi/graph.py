@@ -16,9 +16,11 @@ ver = sys.version_info
 if ver[0] <= 2 and ver[1] < 4:
     from sets import Set as set
 
-# not a PISI error!
+import pisi
 
-class CycleException(Exception):
+# not an error!
+
+class CycleException(pisi.Exception):
     pass
 
 class digraph(object):
@@ -111,7 +113,7 @@ class digraph(object):
                 self.p[v] = u
                 self.dfs_visit(v, finish_hook)
             elif self.color[v] == 'g':  # cycle detected
-                raise CycleError
+                raise CycleException
         self.color[u] = 'b'             # mark black (completed)
         if finish_hook:
             finish_hook(u)
@@ -121,7 +123,7 @@ class digraph(object):
         try:
             self.dfs()
             return True
-        except CycleError:
+        except CycleException:
             return False
 
     def topological_sort(self):
