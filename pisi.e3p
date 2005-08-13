@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Project SYSTEM "Project-3.7.dtd">
+<!DOCTYPE Project SYSTEM "Project-3.5.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-08-11, 04:30:17 -->
+<!-- Saved: 2005-08-13, 17:04:57 -->
 <!-- Copyright (C) 2005 PiSi Development Team, pisi@uludag.org.tr -->
-<Project version="3.7">
-  <ProgLanguage mixed="0">Python</ProgLanguage>
-  <UIType>Kde</UIType>
+<Project version="3.5">
   <Description>The package management software of Pardus distribution.
 </Description>
-  <Version>0.2</Version>
+  <VersIon>0.2</VersIon>
   <Author>PiSi Development Team</Author>
-  <Email>pisi@uludag.org.tr</Email>
+  <EmaIl>pisi@uludag.org.tr</EmaIl>
   <Sources>
     <Source>
       <Dir>tools</Dir>
@@ -307,6 +305,10 @@
       <Dir>pisi</Dir>
       <Dir>actionsapi</Dir>
       <Name>pisitoolsfunctions.py</Name>
+    </Source>
+    <Source>
+      <Dir>tools</Dir>
+      <Name>repostats.py</Name>
     </Source>
   </Sources>
   <Forms>
