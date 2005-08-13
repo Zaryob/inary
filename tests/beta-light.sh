@@ -3,6 +3,7 @@
 pwd
 PATH=$PATH:.
 set -x -e
+   pisi-cli --ignore-comar remove unzip
 pisi-cli build tests/zip/pspec.xml tests/unzip/pspec.xml
 pisi-cli index .
 pisi-cli add-repo repo1 pisi-index.xml

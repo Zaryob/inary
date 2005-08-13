@@ -30,6 +30,9 @@ from pisi.repodb import repodb
 from pisi.installdb import installdb
 from pisi.index import Index
 
+class Error:
+    pass
+
 def install(packages):
     """install a list of packages (either files/urls, or names)"""
 
@@ -56,13 +59,13 @@ def install(packages):
     #    ui.error("Error: %s\n" % e)
 
 
-def install_pkg_files(packages):
+def install_pkg_files(package_URIs):
     """install a number of pisi package files"""
     from package import Package
 
-    ui.debug('A = %s\n' % str(packages))
+    ui.debug('A = %s\n' % str(package_URIs))
 
-    for x in packages:
+    for x in package_URIs:
         if not x.endswith(const.package_prefix):
             ui.error('Mixing file names and package names not supported YET.\n')
             return False
@@ -70,10 +73,13 @@ def install_pkg_files(packages):
     # read the package information into memory first
     # regardless of which distribution they come from
     d_t = {}
-    for x in packages:
+    dfn = {}
+    for x in package_URIs:
         package = Package(x)
         package.read()
-        d_t[package.metadata.package.name] = package.metadata.package
+        name = str(package.metadata.package.name)
+        d_t[name] = package.metadata.package
+        dfn[name] = x
 
     def satisfiesDep(dep):
         return dependency.installedSatisfiesDep(dep) \
@@ -99,8 +105,55 @@ def install_pkg_files(packages):
            (not extra_packages):
         #FIXME: Construct a dependency graph for files
         # and install in rev. topological order
-        for x in packages:
-            operations.install_single_file(x)
+    
+        class PackageDB:
+            def __init__(self):
+                self.d = d_t
+            
+            def get_package(self, key):
+                return d_t[str(key)]
+        
+        packagedb = PackageDB()
+       
+        A = d_t.keys()
+       
+        if len(A)==0:
+            ui.info('No packages to install.\n')
+            return True
+        
+        # try to construct a pisi graph of packages to
+        # install / reinstall
+    
+        G_f = pgraph.PGraph(packagedb)               # construct G_f
+    
+        # find the "install closure" graph of G_f by package 
+        # set A using packagedb
+        print A
+        for x in A:
+            G_f.add_package(x)
+        B = A
+        #state = {}
+        while len(B) > 0:
+            Bp = set()
+            for x in B:
+                pkg = packagedb.get_package(x)
+                print pkg
+                for dep in pkg.runtimeDeps:
+                    print 'checking ', dep
+                    if dependency.dictSatisfiesDep(d_t, dep):
+                        if not dep.package in G_f.vertices():
+                            Bp.add(str(dep.package))
+                        G_f.add_dep(x, dep)
+            B = Bp
+        G_f.write_graphviz(sys.stdout)
+        order = G_f.topological_sort()
+        order.reverse()
+        print order
+
+        for x in order:
+            operations.install_single_file(dfn[x])
+    else:
+        raise Error('External dependencies not satisfied')
 
     return True # everything went OK.
 
@@ -118,7 +171,7 @@ def install_pkg_names(A):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
-    G_f = pgraph.PGraph()               # construct G_f
+    G_f = pgraph.PGraph(packagedb)               # construct G_f
 
     # find the "install closure" graph of G_f by package 
     # set A using packagedb
@@ -187,7 +240,7 @@ def upgrade_pkg_names(A):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
-    G_f = pgraph.PGraph()               # construct G_f
+    G_f = pgraph.PGraph(packagedb)               # construct G_f
 
     # find the "install closure" graph of G_f by package 
     # set A using packagedb
@@ -243,7 +296,7 @@ def remove(A):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
-    G_f = pgraph.PGraph()               # construct G_f
+    G_f = pgraph.PGraph(packagedb)               # construct G_f
 
     # find the "install closure" graph of G_f by package 
     # set A using packagedb
