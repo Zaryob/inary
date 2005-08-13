@@ -122,7 +122,7 @@ def installable(pkg):
     """calculate if pkg is installable currently 
     which means it has to satisfy both install and runtime dependencies"""
     if not packagedb.has_package(pkg):
-        ui.info("package " + pkg + " is not present in the package database\n");
+        ui.info("Package " + pkg + " is not present in the package database\n");
         return False
     elif satisfiesRuntimeDeps(pkg):
         return True

@@ -186,7 +186,6 @@ class PackageOp(Command):
             except pisi.comariface.ComarError:
                 ui.error('Comar error encountered\n')
                 self.die()
-        self.finalize()
                 
     def finalize(self):
         #self.finalize_db()

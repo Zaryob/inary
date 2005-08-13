@@ -60,9 +60,11 @@ def install_pkg_files(packages):
     """install a number of pisi package files"""
     from package import Package
 
+    ui.debug('A = %s\n' % str(packages))
+
     for x in packages:
         if not x.endswith(const.package_prefix):
-            ui.error('Mixing file names and package names not supported\n')
+            ui.error('Mixing file names and package names not supported YET.\n')
             return False
 
     # read the package information into memory first
@@ -95,6 +97,8 @@ def install_pkg_files(packages):
     extra_packages = [x.package for x in dep_unsatis]
     if (extra_packages and install_pkg_names(extra_packages)) or \
            (not extra_packages):
+        #FIXME: Construct a dependency graph for files
+        # and install in rev. topological order
         for x in packages:
             operations.install_single_file(x)
 
@@ -104,6 +108,8 @@ def install_pkg_names(A):
     """This is the real thing. It installs packages from
     the repository, trying to perform a minimum number of
     installs"""
+
+    ui.debug('A = %s\n' % str(A))
 
     if len(A)==0:
         ui.info('No packages to install.\n')
