@@ -14,6 +14,7 @@ import os
 
 sys.path.append('.')
 import pisi.specfile
+import pisi.purl
 
 class Histogram:
     def __init__(self):
@@ -52,26 +53,65 @@ def scan_pspec(folder):
             dirs.remove(".svn")
     return paks
 
+hosts = Histogram()
 people = Histogram()
 licenses = Histogram()
+components = Histogram()
 mostp_name = None
 mostp_count = 0
+nr_binpaks = 0
+nr_patches = 0
 
-for pak in scan_pspec(sys.argv[1]):
+errors = []
+
+paks = scan_pspec(sys.argv[1])
+for pak in paks:
     spec = pisi.specfile.SpecFile()
-    spec.read(os.path.join(pak, "pspec.xml"))
+    try:
+        spec.read(os.path.join(pak, "pspec.xml"))
+    except Exception, inst:
+        errors.append([pak, str(inst)])
+        continue
+    if spec.verify() is False:
+        errors.append([pak, "specfile verification failed"])
+        continue
+    nr_binpaks += len(spec.packages)
+    nr_patches += len(spec.source.patches)
     if len(spec.source.patches) > mostp_count:
         mostp_count = len(spec.source.patches)
         mostp_name = spec.source.name
     name = spec.source.packager.name
     lices = spec.source.license
+    partof = spec.source.partof
+    if partof:
+        components.add(partof)
     people.add(name)
     for lice in lices:
         licenses.add(lice)
+    host = pisi.purl.PUrl(spec.source.archiveUri).location()
+    hosts.add(host)
 
 print "<html><head><title>%s İstatistikleri</title>" % (sys.argv[1])
 print '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'
 print "</head><body>"
+
+print "<p>Toplam %d kod paketi, ve bunlardan oluşturulacak %d ikili paket var.</p>" % (len(paks), nr_binpaks)
+echo(u"<p>Toplam peç sayısı %d</p>" % nr_patches)
+if mostp_count > 0:
+    echo(u"<p>En çok peçlenen yazılım %d peçle %s!</p>" % (mostp_count, mostp_name))
+
+if errors != []:
+    print "<h1>Hatalar</h1><table>"
+    for e in errors:
+        print "<tr><td>%s</td><td>%s</td></tr>" % (e[0], e[1])
+    print "</table>"
+else:
+    print "<p>Hata yok, tebrikler!</p>"
+
+print "<h1>Komponentler</h1><table>"
+for name,cnt in components.get_list():
+    print "<tr><td>%s</td><td>%s</td>" % (name, cnt)
+print "</table>"
 
 print "<h1>Paketleyiciler</h1><table>"
 for name,cnt in people.get_list():
@@ -83,7 +123,9 @@ for name,cnt in licenses.get_list():
     print "<tr><td>%s</td><td>%s</td>" % (name, cnt)
 print "</table>"
 
-if mostp_count > 0:
-    echo(u"<p>En çok peçlenen yazılım %d peçle %s!</p>" % (mostp_count, mostp_name))
+echo(u"<h1>Kod kaynakları</h1><table>")
+for name,cnt in hosts.get_list():
+    print "<tr><td>%s</td><td>%s</td>" % (name, cnt)
+print "</table>"
 
 print "</body>"
