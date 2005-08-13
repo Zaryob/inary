@@ -68,7 +68,7 @@ class SpecFileTestCase(unittest.TestCase):
             self.fail("Failed to match PartOf in Package")
         
     def testVerify(self):
-        if not self.spec.verify():
+        if self.spec.has_errors():
             self.fail("Failed to verify specfile")
 
     def testCopy(self):

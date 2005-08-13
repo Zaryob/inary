@@ -49,7 +49,9 @@ class SourceDB(object):
         return self.d[name]
 
     def add_source(self, source_info):
-        assert source_info.verify()
+        # FIXME: how can you make a negative assertion -gurer
+        # and yes i'm not very clever :)
+        # assert source_info.has_errors()
         name = str(source_info.name)
         self.d[name] = source_info
 

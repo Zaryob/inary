@@ -94,7 +94,7 @@ class Index(XmlFile):
         #md.package.packageURI = util.removepathprefix(repo_uri, path)
         md.package.packageURI = os.path.realpath(path)        
         # check package semantics
-        if md.verify():
-            self.packages.append(md.package)
-        else:
+        if md.has_errors():
             ui.error('Package ' + md.package.name + ': metadata corrupt\n')
+        else:
+            self.packages.append(md.package)

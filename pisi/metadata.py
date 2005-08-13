@@ -20,6 +20,7 @@ from ui import ui
 
 from xmlfile import *
 import specfile
+from util import Checks
 
 class SourceInfo:
 
@@ -39,9 +40,10 @@ class SourceInfo:
         node.appendChild(self.packager.elt(xml))
         return node
 
-    def verify(self):
-        if not self.name: return False
-        return True
+    def has_errors(self):
+        if not self.name:
+            return [ "SourceInfo should have a Name" ]
+        return None
 
 
 class PackageInfo(specfile.PackageInfo):
@@ -71,12 +73,16 @@ class PackageInfo(specfile.PackageInfo):
             xml.addTextNodeUnder(node, "PackageURI", str(self.packageURI))
         return node
 
-    def verify(self):
-        ret = specfile.PackageInfo.verify(self) and self.build!=None
+    def has_errors(self):
+        # FIXME: there should be real error msgs
+        # and comment the logic here please, it isn't very clear -gurer
+        ret = (specfile.PackageInfo.has_errors(self) == None) and self.build!=None
         ret = ret and self.distribution!=None
         ret = ret and self.distributionRelease!=None
         ret = ret and self.architecture!=None and self.installedSize!=None
-        return ret
+        if ret:
+            return None
+        return [ "Some error in package metadata" ]
 
     def __str__(self):
         s = specfile.PackageInfo.__str__(self)
@@ -126,10 +132,14 @@ class MetaData(XmlFile):
         self.addChild(self.package.elt(self))
         self.writexml(filename)
 
-    def verify(self):
-        if not hasattr(self, 'source'): return False
-        if not self.source.verify(): return False
+    def has_errors(self):
+        err = Checks()
+        # FIXME: is this an internal error?? -gurer
+        if not hasattr(self, 'source'):
+            err.add("Metadata should have source")
+        err.join(self.source.has_errors())
         
-        if not self.package: return False
-        if not self.package.verify(): return False
-        return True
+        if not self.package:
+            err.add("Metadata should have a package")
+        err.join(self.package.has_errors())
+        return err.list

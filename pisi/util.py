@@ -38,6 +38,32 @@ class UtilError(pisi.Error):
 
 
 #########################
+# spec validation utility #
+#########################
+
+class Checks:
+    def __init__(self):
+        self.list = None
+    
+    def add(self, err):
+        if not self.list:
+            self.list = []
+        self.list.append(err)
+    
+    def join(self, list):
+        if list != None:
+            if not self.list:
+                self.list = []
+            self.list.extend(list)
+    
+    def has_tag(self, var, section, name):
+        if not var:
+            if not self.list:
+                self.list = []
+            self.list.append("%s section should have a '%s' tag" % (section, name))
+
+
+#########################
 # string/list functions #
 #########################
 

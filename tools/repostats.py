@@ -72,8 +72,10 @@ for pak in paks:
     except Exception, inst:
         errors.append([pak, str(inst)])
         continue
-    if spec.verify() is False:
-        errors.append([pak, "specfile verification failed"])
+    errs = spec.has_errors()
+    if errs:
+        for e in errs:
+            errors.append([pak, e])
         continue
     nr_binpaks += len(spec.packages)
     nr_patches += len(spec.source.patches)

@@ -30,7 +30,9 @@ class BuildContext(object):
         self.pspecfile = pspecfile
         spec = SpecFile()
         spec.read(pspecfile)
-        spec.verify()    # check pspec integrity
+        # FIXME: following checks the integrity but does nothing when it is wrong
+        # -gurer
+        #spec.verify()    # check pspec integrity
         self.spec = spec
 
     # directory accessor functions

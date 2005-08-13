@@ -15,6 +15,7 @@
 
 from xmlext import *
 from xmlfile import XmlFile
+from util import Checks
 
 class FileInfo:
     """FileInfo holds the information for a File node/tag in files.xml"""
@@ -54,12 +55,13 @@ class FileInfo:
         elt.appendChild(hashElt)
         return elt
 
-    def verify(self):
-        if not self.path: return False
-        if not self.type: return False
-        if not self.size: return False
-        if not self.hash: return False
-        return True
+    def has_errors(self):
+        err = Checks()
+        err.has_tag(self.path, "File", "Path")
+        err.has_tag(self.type, "File", "Type")
+        err.has_tag(self.size, "File", "Size")
+        err.has_tag(self.hash, "File", "Hash")
+        return err.list
 
 class Files(XmlFile):
     
@@ -83,7 +85,8 @@ class Files(XmlFile):
             document.appendChild(x.elt(self.dom))
         self.writexml(filename)
 
-    def verify(self):
+    def has_errors(self):
+        err = Checks()
         for finfo in self.list:
-            if not finfo.verify(): return False
-        return True
+            err.join(finfo.has_errors())
+        return err.list

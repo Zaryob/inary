@@ -25,12 +25,16 @@ from xmlext import *
 from xmlfile import XmlFile
 from ui import ui
 from dependency import DepInfo
+from util import Checks
 
 class PackagerInfo:
     def __init__(self, node = None):
         if node:
             self.name = getNodeText(getNode(node, "Name"))
             self.email = getNodeText(getNode(node, "Email"))
+        else:
+            self.name = None
+            self.email = None
 
     def elt(self, xml):
         node = xml.newNode("Packager")
@@ -38,10 +42,11 @@ class PackagerInfo:
         xml.addTextNodeUnder(node, "Email", self.email)
         return node
 
-    def verify(self):
-        if not self.name: return False
-        if not self.email: return False
-        return True
+    def has_errors(self):
+        err = Checks()
+        err.has_tag(self.name, "Packager", "Name")
+        err.has_tag(self.email, "Packager", "Email")
+        return err.list
 
     def __str__(self):
         s = " ".join(self.name, self.email)
@@ -61,10 +66,13 @@ class AdditionalFileInfo:
         if self.permission:
             node.setAttribute("permission", self.permission)
 
-    def verify(self):
-        if not self.filename: return False
-        if not self.target: return False
-        return True
+    def has_errors(self):
+        err = Checks()
+        if not self.filename:
+            err.add("AdditionalFile should have file name string")
+        if not self.target:
+            err.add("AdditionalFile should have a target attribute")
+        return err.list
 
     def __str__(self):
         s = "->".join(self.filename, self.target)
@@ -98,9 +106,10 @@ class PatchInfo:
             node.setAttribute("target", self.target)
         return node
 
-    def verify(self):
-        if not self.filename: return False
-        return True
+    def has_errors(self):
+        if not self.filename:
+            return [ "Patch should have a filename string" ]
+        return None
 
     def __str__(self):
         s = self.filename
@@ -128,11 +137,12 @@ class UpdateInfo:
                 xml.addTextNodeUnder(node, "Type", self.type)
         return node
 
-    def verify(self):
-        if not self.date: return False
-        if not self.version: return False
-        if not self.release: return False
-        return True
+    def has_errors(self):
+        err = Checks()
+        err.has_tag(self.date, "Update", "Date")
+        err.has_tag(self.version, "Update", "Version")
+        err.has_tag(self.release, "Update", "Release")
+        return err.list
 
     def __str__(self):
         s = self.date
@@ -155,9 +165,10 @@ class PathInfo:
         node.setAttribute("fileType", self.fileType)
         return node
 
-    def verify(self):
-        if not self.pathname: return False
-        return True
+    def has_errors(self):
+        if not self.pathname:
+            return [ "Path tag should have a name string" ]
+        return None
 
     def __str__(self):
         s = self.pathname
@@ -176,10 +187,10 @@ class ComarProvide:
         node.setAttribute("script", self.script)
         return node
 
-    def verify(self):
+    def has_errors(self):
         if not self.om or not self.script:
-            return False
-        return True
+            return [ "COMAR provide should have something :)" ]
+        return None
 
     def __str__(self):
         s = self.script
@@ -236,25 +247,29 @@ class SourceInfo:
             xml.addNodeUnder(node, "History", update.elt(xml))
         return node
 
-    def verify(self):
-        if not self.name: return False
-        if not self.summary: return False
-        if not self.description: return False
-        if not self.packager: return False
-        if not self.license: return False
-        if (not self.archiveUri) or (not self.archiveType): return False
-        if not self.archiveSHA1: return False
-        if len(self.history) <= 0: return False
+    def has_errors(self):
+        err = Checks()
+        err.has_tag(self.name, "Source", "Name")
+        err.has_tag(self.description, "Source", "Description")
+        err.has_tag(self.summary, "Source", "Summary")
+        err.has_tag(self.packager, "Source", "Packager")
+        err.has_tag(self.license, "Source", "License")
+        if (not self.archiveUri) or (not self.archiveType):
+            err.add("Source archive URI and type should be given")
+        if not self.archiveSHA1:
+            errd.add("Source archive should have a SHA1 sum")
+        if len(self.history) <= 0:
+            err.add("Source needs some education about History :)")
         
-        if not self.packager.verify(): return False
+        err.join(self.packager.has_errors())
         for update in self.history:
-            if not update.verify(): return False
+            err.join(update.has_errors())
         for patch in self.patches:
-            if not patch.verify(): return False
+            err.join(patch.has_errors())
         for dep in self.buildDeps:
-            if not dep.verify(): return False
-
-        return True
+            err.join(dep.has_errors())
+        
+        return err.list
 
 class PackageInfo(object):
     """A structure to hold package information. Package information is
@@ -309,20 +324,23 @@ class PackageInfo(object):
             xml.addNodeUnder(node, "AdditionalFiles", afile.elt(xml))
         return node
 
-    def verify(self):
-        if not self.name: return False
-        if not self.summary: return False
-        if not self.description: return False
-        if not self.license: return False
-        if len(self.paths) <= 0: return False
-
+    def has_errors(self):
+        err = Checks()
+        err.has_tag(self.name, "Package", "Name")
+        err.has_tag(self.summary, "Package", "Summary")
+        err.has_tag(self.description, "Package", "Description")
+        err.has_tag(self.license, "Package", "License")
+        if len(self.paths) <= 0:
+            err.add("Package should have some files")
+        
         for path in self.paths:
-            if not path.verify(): return False
+            err.join(path.has_errors())
         for dep in self.runtimeDeps:
-            if not dep.verify(): return False
+            err.join(dep.has_errors())
         for afile in self.additionalFiles:
-            if not afile.verify(): return False
-        return True
+            err.join(afile.has_errors())
+        
+        return err.list
 
     def __str__(self):
         s = 'Name: ' + self.name
@@ -389,14 +407,15 @@ class SpecFile(XmlFile):
             elif not pkg.isa and self.source.isa:
                 pkg.isa = self.source.isa
 
-        
-    def verify(self):
-        """Verify PSPEC structures, are they what we want of them?"""
-        if not self.source.verify(): return False
-        if len(self.packages) <= 0: return False
-        for x in self.packages:
-            if not x.verify(): return False
-        return True
+    def has_errors(self):
+        """Return errors of the PSPEC file if there are any."""
+        err = Checks()
+        err.join(self.source.has_errors())
+        if len(self.packages) <= 0:
+            errs.add("There should be at least one Package section")
+        for p in self.packages:
+            err.join(p.has_errors())
+        return err.list
     
     def write(self, filename):
         """Write PSPEC file"""

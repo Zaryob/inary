@@ -18,6 +18,7 @@ from ui import ui
 from version import Version
 from xmlext import *
 from xmlfile import XmlFile
+from util import Checks
 
 class DepInfo:
     def __init__(self, node = None):
@@ -44,9 +45,10 @@ class DepInfo:
             node.setAttribute("releaseTo", self.versionTo)
         return node
 
-    def verify(self):
-        if not self.package: return False
-        return True
+    def has_errors(self):
+        if not self.package:
+            return [ "Dependency should have a package string" ]
+        return None
 
     def satisfies(self, pkg_name, version, release):
         """determine if a package ver. satisfies given dependency spec"""

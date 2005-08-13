@@ -25,7 +25,6 @@ from pisi.purl import PUrl
 from pisi.metadata import MetaData
 from pisi.files import Files
 
-
 class PackageError(pisi.Error):
     pass
 
@@ -92,12 +91,12 @@ class Package:
 
         self.metadata = MetaData()
         self.metadata.read( join(outdir, const.metadata_xml) )
-        if not self.metadata.verify():
+        if self.metadata.has_errors():
             raise PackageError, "MetaData format wrong"
 
         self.files = Files()
         self.files.read( join(outdir, const.files_xml) )
-        if not self.files.verify():
+        if self.files.has_errors():
             raise PackageError, "invalid %s" % const.files_xml
         
     def pkg_dir(self):
