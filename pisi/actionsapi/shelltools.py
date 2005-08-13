@@ -88,7 +88,7 @@ def export(key, value):
     os.environ[key] = value
 
 def system(command):
-    ui.debug('executing ' + command)
+    ui.debug('executing %s\n' % command)
     p = os.popen(command)
     while 1:
         line = p.readline()
