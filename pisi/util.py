@@ -19,6 +19,7 @@
 
 # standard python modules
 import os
+import sys
 import sha
 import shutil
 import statvfs
@@ -100,6 +101,22 @@ def run_batch(cmd):
       ui.error('ERROR: executing command: ' + cmd + '\n' + strlist(lines))
     return (successful,lines)
 
+
+def xtermTitle(message):
+    """sets message as a console window's title"""
+    if os.environ.has_key("TERM") and sys.stderr.isatty():
+        terminalType = os.environ["TERM"]
+        for term in ["xterm", "Eterm", "aterm", "rxvt", "screen", "kterm", "rxvt-unicode"]:
+            if terminalType.startswith(term):
+                sys.stderr.write("\x1b]2;"+str(message)+"\x07")
+                sys.stderr.flush()
+                break
+
+def xtermTitleReset():
+    """resets console window's title"""
+    if os.environ.has_key("TERM"):
+        terminalType = os.environ["TERM"]
+        xtermTitle(os.environ["TERM"])
 
 #############################
 # Path Processing Functions #

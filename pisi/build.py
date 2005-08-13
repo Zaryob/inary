@@ -105,6 +105,7 @@ class PisiBuild:
         """Build the package in one shot."""
 
         ui.info("Building PISI source package: %s\n" % self.spec.source.name)
+        util.xtermTitle("Building PISI source package: %s\n" % self.spec.source.name)
         
         self.compileActionScript()
          
@@ -337,3 +338,4 @@ class PisiBuild:
             pkg.close()
             os.chdir(c)
             self.setState("buildpackages")
+            util.xtermTitleReset()
