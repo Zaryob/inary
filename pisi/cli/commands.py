@@ -56,7 +56,6 @@ class Command(object):
         self.args.pop(0)                # exclude command arg
 
         import pisi
-        #from pisi.ui import ui
 
         # initialize PiSi
         pisi.config.config = pisi.config.Config(self.options)
@@ -97,6 +96,8 @@ class Command(object):
         
         # IMPORTANT: command imports here or in the command class run fxns
         import pisi.toplevel
+        from pisi.ui import ui
+
         if database:
             from pisi.repodb import repodb
             repodb.init_dbs()
@@ -179,12 +180,13 @@ class PackageOp(Command):
 
     def init(self):
         super(PackageOp, self).init(True)
+        import pisi
         import pisi.comariface
         if not self.options.ignore_comar:
             try:
                 pisi.comariface.init()
             except pisi.comariface.ComarError:
-                ui.error('Comar error encountered\n')
+                pisi.ui.ui.error('Comar error encountered\n')
                 self.die()
                 
     def finalize(self):
@@ -269,9 +271,6 @@ class ConfigurePending(PackageOp):
         super(ConfigurePending, self).__init__()
 
     def run(self):
-        #if not self.args:
-        #    self.help()
-        #    return
 
         self.init()
         pisi.toplevel.configure_pending()
