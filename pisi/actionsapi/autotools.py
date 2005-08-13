@@ -38,6 +38,10 @@ class InstallError(pisi.actionsapi.Error):
     def __init__(self, Exception):
         ui.error(Exception)
 
+class RunTimeError(pisi.actionsapi.Error):
+    def __init__(self, Exception):
+        ui.error(Exception)
+
 def configure(parameters = ''):
     '''configure source with given parameters = "--with-nls --with-libusb --with-something-usefull"'''
     if can_access_file('configure'):
@@ -118,12 +122,15 @@ def rawInstall(parameters = ''):
 
 def aclocal(parameters = ''):
     '''generates an aclocal.m4 based on the contents of configure.in.'''    
-    system('aclocal %s' % parameters)
+    if system('aclocal %s' % parameters):
+        raise RunTimeError("!!!! Running aclocal failed...")
 
 def autoconf(parameters = ''):
     '''generates a configure script'''
-    system('autoconf %s' % parameters)
+    if system('autoconf %s' % parameters):
+        raise RunTimeError("!!!! Running autoconf failed...")
 
 def automake(parameters = ''):
     '''generates a makefile'''
-    system('automake %s' % parameters)
+    if system('automake %s' % parameters):
+        raise RunTimeError("!!!! Running automake failed...")

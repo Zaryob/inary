@@ -31,10 +31,6 @@ def dobin(sourceFile, destinationDirectory = '/usr/bin'):
     ''' example call: pisitools.dobin("bin/xloadimage", "/bin", "xload") '''
     executable_insinto(sourceFile, get.installDIR() + destinationDirectory)
  
-def doconfd():
-    #FIXME: AdditionalFiles
-    pass
-
 def dodir(destinationDirectory):
     '''creates a directory tree'''
     makedirs(get.installDIR() + destinationDirectory)
@@ -42,10 +38,6 @@ def dodir(destinationDirectory):
 def dodoc(*sourceFiles):
     '''inserts the files in the list of files into /usr/share/doc/PACKAGE''' 
     readable_insinto(get.installDIR() + os.path.join('/usr/share/doc', get.srcTAG()), *sourceFiles)
-
-def doenvd():
-    #FIXME: AdditionalFiles
-    pass
 
 def doexe(sourceFile, destinationDirectory):
     '''insert a executable file into destination directory'''
@@ -84,10 +76,6 @@ def dohtml(*sourceFiles):
 def doinfo(*sourceFiles):
     '''inserts the into files in the list of files into /usr/share/info'''
     readable_insinto(os.path.join(get.installDIR(), get.infoDIR()), *sourceFiles)
-
-def doinitd():
-    #FIXME: AdditionalFiles
-    pass
 
 def dojar():
     '''installs jar files into /usr/share/PACKAGE/lib, and adds to /usr/share/PACKAGE/classpath.env'''
@@ -227,13 +215,3 @@ def remove(sourceFile):
 def removeDir(destinationDirectory):
     '''removes destinationDirectory and its subtrees'''
     unlinkDir(get.installDIR() + destinationDirectory)
-
-''' ************************************************************************** '''
-
-def preplib():
-    '''prepare all library files for installation'''
-    pass
-
-def preplib_so():
-    '''prepare dynamic library files for installation'''
-    pass

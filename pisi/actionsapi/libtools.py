@@ -20,21 +20,33 @@ from pisi.ui import ui
 
 # ActionsAPI Modules
 import pisi.actionsapi
-from pisi.actionsapi.shelltools import chmod, makedirs
+from pisi.actionsapi.shelltools import chmod, makedirs, can_access_directory
 import pisi.actionsapi.get as get
 
-def preplib(sourceDirectory):
-    os.system('/sbin/ldconfig -n -N %s' % get.installDIR() + sourceDirectory)
+class RunTimeError(pisi.actionsapi.Error):
+    def __init__(self, Exception):
+        ui.error(Exception)
+
+def preplib(sourceDirectory = '/usr/lib'):
+    sourceDirectory = '%s' % (get.installDIR() + sourceDirectory)
+    if can_access_directory(sourceDirectory):
+        os.system('/sbin/ldconfig -n -N %s' % sourceDirectory)
+
+def preplib_so(sourceDirectory):
+    pass
 
 def gnuconfig_update():
     ''' copy newest config.* onto source's '''
-    shutil.copyfile('/usr/share/gnuconfig/config.sub', os.getcwd() + '/config.sub')
-    shutil.copyfile('/usr/share/gnuconfig/config.guess',os.getcwd() + '/config.guess')
-
+    for root, dirs, files in os.walk(os.getcwd()):
+        for file in files:
+            if file  == "config.sub" or file == "config.guess":
+                shutil.copyfile('/usr/share/gnuconfig/%s' % file, os.path.join(root, file))
+        
     ui.info('GNU Config Update Finished...\n')
 
 def libtoolize(parameters = ''):
-    os.system('/usr/bin/libtoolize %s' % parameters)
+    if os.system('/usr/bin/libtoolize %s' % parameters):
+        raise RunTimeError("!!!! Running libtoolize failed...")
 
 def gen_usr_ldscript(dynamicLib):
 
