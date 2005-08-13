@@ -81,8 +81,11 @@ def install_single_name(name, upgrade = False):
         if repo.indexuri.isLocalFile():
             pkg_path = pkg.packageURI
         else:
+            # FIXME: determine if we have relative paths in the index
+            # rather than doing this. Requires the index to know about
+            # that
             pkg_path = os.path.join(os.path.dirname(repo.indexuri.getUri()),
-                                    pkg.packageURI)
+                                    os.path.basename(pkg.packageURI))
 
         ui.debug("Package URI: %s\n" % pkg_path)
 
