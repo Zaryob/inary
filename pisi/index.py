@@ -24,7 +24,7 @@ from pisi.ui import ui
 import pisi.util as util
 from pisi.config import config
 from pisi.constants import const
-from pisi.purl import PUrl
+from pisi.purl import URI
 
 class Index(XmlFile):
 
@@ -37,8 +37,8 @@ class Index(XmlFile):
         """Read PSPEC file"""
 
         self.filepath = filename
-        url = PUrl(filename)
-        if url.isRemoteFile():
+        url = URI(filename)
+        if url.is_remote_file():
             from fetcher import fetchUrl
 
             dest = os.path.join(config.index_dir(), repo)
@@ -86,13 +86,13 @@ class Index(XmlFile):
 
         md = metadata.MetaData()
         md.read(os.path.join(config.install_dir(), const.metadata_xml))
-        # TODO: in the future we'll do all of this with purl/pfile/&helpers
-        # After that, we'll remove the ugly repo_uri parameter from this
-        # function.
-        # FIXME: for now, do all paths absolute, support relative URIs
-        # in the future
-        #md.package.packageURI = util.removepathprefix(repo_uri, path)
-        md.package.packageURI = os.path.realpath(path)        
+        if config.options and config.options.absolute_uris:
+            md.package.packageURI = os.path.realpath(path)
+        else:                           # create relative path by default
+            # TODO: in the future we'll do all of this with purl/pfile/&helpers
+            # After that, we'll remove the ugly repo_uri parameter from this
+            # function.
+            md.package.packageURI = util.removepathprefix(repo_uri, path)
         # check package semantics
         if md.has_errors():
             ui.error('Package ' + md.package.name + ': metadata corrupt\n')

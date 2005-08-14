@@ -7,20 +7,19 @@
 #
 # Please read the COPYING file.
 #
-
-# Simplifying working with URLs, PURL module provides common URL
-# parsing interface
+# Simplifies working with URLs, purl module provides common URL
+# parsing and processing
 
 from urlparse import urlparse
 from os.path import basename
 
-class PUrl(object):
+class URI(object):
     """PUrl class provides a URL parser and simplifies working with
     URLs."""
 
     def __init__(self, uri=None):
         if uri:
-            self.setUri(uri)
+            self.set_uri(uri)
         else:
             self.__scheme = None
             self.__location = None
@@ -33,12 +32,12 @@ class PUrl(object):
 
         self.__authinfo = None
 
-    def getUri(self):
+    def get_uri(self):
         if self.__uri:
             return self.__uri
         return None
 
-    def setUri(self, uri):
+    def set_uri(self, uri):
         # (scheme, location, path, params, query, fragment)
         u = urlparse(uri, "file")
         self.__scheme = u[0]
@@ -51,21 +50,21 @@ class PUrl(object):
 
         self.__uri = uri
 
-    def isLocalFile(self):
+    def is_local_file(self):
         if self.scheme() == "file":
             return True
         else:
             return False
 
-    def isRemoteFile(self):
-        return not self.isLocalFile()
+    def is_remote_file(self):
+        return not self.is_local_file()
         
-    def setAuthInfo(self, authTuple):
+    def set_auth_info(self, authTuple):
         if not isinstance(authTuple, tuple):
             raise Exception, "setAuthInfo needs a tuple (user, pass)"
         self.__authinfo = authTuple
 
-    def authInfo(self):
+    def auth_info(self):
         return self.__authinfo
 
     def scheme(self):
@@ -90,6 +89,6 @@ class PUrl(object):
         return self.__fragment
 
     def __str__(self):
-        return self.getUri()
+        return self.get_uri()
 
     uri = property(getUri, setUri)

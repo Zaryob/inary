@@ -17,7 +17,7 @@ import os, fcntl
 from pisi.config import config
 import pisi.packagedb as packagedb
 import pisi.util as util
-from pisi.purl import PUrl
+from pisi.purl import URI
        
 class RepoDB(object):
     """RepoDB maps repo ids to repository information"""

@@ -16,7 +16,7 @@ import pisi
 from pisi.config import config
 from pisi.constants import const
 from pisi.ui import ui
-from pisi.purl import PUrl
+from pisi.purl import URI
 import pisi.util as util
 import pisi.packagedb as packagedb
 
@@ -53,11 +53,11 @@ def remove_single(package_name):
 
 def install_single(pkg, upgrade = False):
     """install a single package from URI or ID"""
-    url = PUrl(pkg)
+    url = URI(pkg)
     # Check if we are dealing with a remote file or a real path of
     # package filename. Otherwise we'll try installing a package from
     # the package repository.
-    if url.isRemoteFile() or os.path.exists(url.uri):
+    if url.is_remote_file() or os.path.exists(url.uri):
         install_single_file(pkg, upgrade)
     else:
         install_single_name(pkg, upgrade)
@@ -72,19 +72,17 @@ def install_single_name(name, upgrade = False):
     # find package in repository
     repo = packagedb.which_repo(name)
     if repo:
-        # TODO: Allright this is ugly, but works.  Eventually, we'll
-        # change this...
         from repodb import repodb
         repo = repodb.get_repo(repo)
         pkg = packagedb.get_package(name)
 
-        if repo.indexuri.isLocalFile():
+        if repo.indexuri.is_local_file():
             pkg_path = pkg.packageURI
         else:
             # FIXME: determine if we have relative paths in the index
             # rather than doing this. Requires the index to know about
             # that
-            pkg_path = os.path.join(os.path.dirname(repo.indexuri.getUri()),
+            pkg_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
                                     os.path.basename(pkg.packageURI))
 
         ui.debug("Package URI: %s\n" % pkg_path)
@@ -92,7 +90,7 @@ def install_single_name(name, upgrade = False):
         # Package will handle remote file for us!
         install_single_file(pkg_path, upgrade)
     else:
-        ui.error("Package %s not found in the repository file.\n" % pkg)
+        ui.error("Package %s not found in any active repository.\n" % pkg)
 
 # deneme, don't remove ulan
 class AtomicOperation(object):

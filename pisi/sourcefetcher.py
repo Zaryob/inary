@@ -15,14 +15,14 @@ from os.path import basename, dirname, join
 from pisi.ui import ui
 from pisi.config import config
 from pisi.constants import const
-from pisi.purl import PUrl
+from pisi.purl import URI
 from pisi.specfile import SpecFile
 
 class SourceFetcher(object):
     def __init__(self, url, authInfo=None):
         self.url = url
         if authInfo:
-            self.url.setAuthInfo(authInfo)
+            self.url.set_auth_info(authInfo)
         self.location = dirname(self.url.uri)
 
         pkgname = basename(dirname(self.url.path()))

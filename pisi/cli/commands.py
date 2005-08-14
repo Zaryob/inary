@@ -14,7 +14,7 @@ import sys
 from optparse import OptionParser
 
 import pisi
-from pisi.purl import PUrl
+from pisi.purl import URI
 from pisi.cli.common import *
 
 
@@ -352,6 +352,11 @@ source and binary packages.
     def name(self):
         return ("index", "ix")
 
+    def options(self):
+        self.parser.add_option("-a", "--absolute-uris", action="store_true",
+                               default=False,
+                               help="store absolute links for indexed files.")
+
     def run(self):
         
         self.init()
@@ -492,7 +497,7 @@ Lists currently tracked repositories.
         from pisi.repodb import repodb
         for repo in repodb.list():
             print repo
-            print '  ', repodb.get_repo(repo).indexuri.getUri()
+            print '  ', repodb.get_repo(repo).indexuri.get_uri()
         self.finalize()
 
 

@@ -22,7 +22,7 @@ from os import access, R_OK
 # pisi modules
 import pisi
 from pisi.archive import Archive
-from pisi.purl import PUrl
+from pisi.purl import URI
 from pisi.ui import ui
 from pisi.config import config
 from pisi.fetcher import fetchUrl
@@ -36,7 +36,7 @@ class SourceArchive:
     and unpacking a source archive"""
     def __init__(self, ctx):
         self.ctx = ctx
-        self.url = PUrl(self.ctx.spec.source.archiveUri)
+        self.url = URI(self.ctx.spec.source.archiveUri)
         self.archiveFile = join(config.archives_dir(), self.url.filename())
         self.archiveType = self.ctx.spec.source.archiveType
         self.archiveSHA1 = self.ctx.spec.source.archiveSHA1

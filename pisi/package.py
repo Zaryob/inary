@@ -21,7 +21,7 @@ import pisi
 import pisi.archive as archive
 from pisi.constants import const
 from pisi.config import config
-from pisi.purl import PUrl
+from pisi.purl import URI
 from pisi.metadata import MetaData
 from pisi.files import Files
 
@@ -34,9 +34,9 @@ class Package:
     file)."""
     def __init__(self, packagefn, mode='r'):
         self.filepath = packagefn
-        url = PUrl(packagefn)
+        url = URI(packagefn)
 
-        if url.isRemoteFile():
+        if url.is_remote_file():
             from fetcher import fetchUrl
             from ui import ui
             dest = config.packages_dir()

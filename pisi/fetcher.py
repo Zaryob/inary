@@ -23,7 +23,7 @@ from base64 import encodestring
 # pisi modules
 import pisi
 import pisi.util as util
-from pisi.purl import PUrl
+from pisi.purl import URI
 from pisi.ui import ui
 
 
@@ -44,8 +44,8 @@ class Fetcher:
     """Fetcher can fetch a file from various sources using various
     protocols."""
     def __init__(self, url, dest):
-        if not isinstance(url, PUrl):
-            url = PUrl(url)
+        if not isinstance(url, URI):
+            url = URI(url)
  
         self.url = url
         self.filedest = dest
@@ -63,7 +63,7 @@ class Fetcher:
         if not os.access(self.filedest, os.W_OK):
             self.err("no perm to write to dest dir")
 
-        if self.url.isLocalFile():
+        if self.url.is_local_file():
             self.fetchLocalFile()
         else:
             self.fetchRemoteFile()
@@ -141,7 +141,7 @@ class Fetcher:
         self.doGrab(fileObj, dest, totalsize)
 
     def formatRequest(self, request):
-        authinfo = self.url.authInfo()
+        authinfo = self.url.auth_info()
         if authinfo:
             enc = encodestring("%s:%s" % authinfo)
             request.add_header('Authorization', 'Basic %s' % enc)

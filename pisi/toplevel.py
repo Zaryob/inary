@@ -20,7 +20,7 @@ if ver[0] <= 2 and ver[1] < 4:
 from pisi.config import config
 from pisi.constants import const
 from pisi.ui import ui
-from pisi.purl import PUrl
+from pisi.purl import URI
 import pisi.util as util
 import pisi.dependency as dependency
 import pisi.pgraph as pgraph
@@ -357,7 +357,7 @@ class Repo:
         self.indexuri = indexuri
 
 def add_repo(name, indexuri):
-    repo = Repo(PUrl(indexuri))
+    repo = Repo(URI(indexuri))
     repodb.add_repo(name, repo)
 
 def remove_repo(name):
@@ -371,7 +371,7 @@ def update_repo(repo):
 
     ui.info('* Updating repository: %s\n' % repo)
     index = Index()
-    index.read(repodb.get_repo(repo).indexuri.getUri(), repo)
+    index.read(repodb.get_repo(repo).indexuri.get_uri(), repo)
     index.update_db(repo)
     ui.info('* Package db updated.\n')
 
@@ -383,8 +383,8 @@ def prepare_for_build(pspecfile, authInfo=None):
     # makes it impossible to use build module directly.
     from build import PisiBuild
 
-    url = PUrl(pspecfile)
-    if url.isRemoteFile():
+    url = URI(pspecfile)
+    if url.is_remote_file():
         from sourcefetcher import SourceFetcher
         fs = SourceFetcher(url, authInfo)
         url.uri = fs.fetch_all()
