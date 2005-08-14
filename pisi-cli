@@ -15,7 +15,7 @@ import sys
 from pisi.cli.pisicli import PisiCLI
 from pisi.ui import ui
 
-def handleException(exception, value, tb):
+def handle_exception(exception, value, tb):
     import traceback
     import exceptions
     import xml
@@ -41,8 +41,7 @@ Please file a bug report! (http://bugs.uludag.org.tr)
 
 if __name__ == "__main__":
 
-    sys.excepthook = handleException
+    sys.excepthook = handle_exception
 
     cli = PisiCLI()
-    cli.runCommand()
-        
+    cli.run_command()

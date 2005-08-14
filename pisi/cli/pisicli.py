@@ -61,5 +61,5 @@ class PisiCLI(object):
         self.parser.print_help()
         sys.exit(1)
 
-    def runCommand(self):
+    def run_command(self):
         self.command.run()
