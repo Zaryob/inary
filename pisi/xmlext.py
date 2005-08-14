@@ -9,9 +9,10 @@
 #
 # Please read the COPYING file.
 #
-
 # some helper functions for using minidom
 # works well enough for now... :/
+# function names are mixedCase for compatibility with minidom,
+# an old library
 
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 #           Baris Metin <baris@uludag.org.tr

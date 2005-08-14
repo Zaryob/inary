@@ -25,7 +25,7 @@ from pisi.archive import Archive
 from pisi.uri import URI
 from pisi.ui import ui
 from pisi.config import config
-from pisi.fetcher import fetchUrl
+from pisi.fetcher import fetch_url
 import pisi.util as util
 
 class SourceArchiveError(pisi.Error):
@@ -42,13 +42,13 @@ class SourceArchive:
         self.archiveSHA1 = self.ctx.spec.source.archiveSHA1
 
     def fetch(self, interactive=True):
-        if not self.isCached(interactive):
+        if not self.is_cached(interactive):
             if interactive:
                 progress = ui.Progress
             else: progress = None
-            fetchUrl(self.url, config.archives_dir(), progress)
+            fetch_url(self.url, config.archives_dir(), progress)
         
-    def isCached(self, interactive=True):
+    def is_cached(self, interactive=True):
         if not access(self.archiveFile, R_OK):
             return False
 

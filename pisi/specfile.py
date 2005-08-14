@@ -371,12 +371,12 @@ class SpecFile(XmlFile):
         packageElts = self.getAllNodes("Package")
         self.packages = [PackageInfo(p) for p in packageElts]
 
-        self.doMerges()
-        self.doOverrides()
+        self.merge_tags()
+        self.override_tags()
 
         self.unlink()
 
-    def doOverrides(self):
+    def override_tags(self):
         """Override tags from Source in Packages. Some tags in Packages
         overrides the tags from Source. There is a more detailed
         description in documents."""
@@ -395,7 +395,7 @@ class SpecFile(XmlFile):
             if not pkg.license:
                 pkg.license = self.source.license
         
-    def doMerges(self):
+    def merge_tags(self):
         """Merge tags from Source in Packages. Some tags in Packages merged
         with the tags from Source. There is a more detailed
         description in documents."""

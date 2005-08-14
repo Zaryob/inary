@@ -74,9 +74,9 @@ class SourceFetcher(object):
                 self.fetch(const.files_dir)
 
     def fetch(self, appendDest=""):
-        from fetcher import fetchUrl
+        from fetcher import fetch_url
 
         ui.info("Fetching %s\n" % self.url.uri)
         dest = join(self.dest, appendDest)
-        fetchUrl(self.url, dest)
+        fetch_url(self.url, dest)
 

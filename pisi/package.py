@@ -37,10 +37,10 @@ class Package:
         url = URI(packagefn)
 
         if url.is_remote_file():
-            from fetcher import fetchUrl
+            from fetcher import fetch_url
             from ui import ui
             dest = config.packages_dir()
-            fetchUrl(url, dest, ui.Progress)
+            fetch_url(url, dest, ui.Progress)
             self.filepath = join(dest, url.filename())
 
         self.impl = archive.ArchiveZip(self.filepath, 'zip', mode)

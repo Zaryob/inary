@@ -471,7 +471,7 @@ Remove all repository information from the system.
         if len(self.args)>=1:
             self.init()
             for repo in self.args:
-                toplevel.remove_repo(repo)
+                pisi.toplevel.remove_repo(repo)
             self.finalize()
         else:
             self.help()

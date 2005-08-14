@@ -24,9 +24,9 @@ class BuildContext(object):
 
     def __init__(self, pspecfile):
         super(BuildContext, self).__init__()
-        self.setSpecFile(pspecfile)
+        self.set_spec_file(pspecfile)
 
-    def setSpecFile(self, pspecfile):
+    def set_spec_file(self, pspecfile):
         self.pspecfile = pspecfile
         spec = SpecFile()
         spec.read(pspecfile)

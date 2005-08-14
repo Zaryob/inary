@@ -9,13 +9,15 @@
 #
 # Please read the COPYING file.
 #
-
 # XmlFile is a halper module for accessing XML files using
 # xml.dom.minidom.
 #
 # XmlFile class that further abstracts a dom object using the
 # high-level dom functions provided in xml module (and sorely lacking
 # in xml.dom :( )
+#
+# method names are mixedCase for compatibility with minidom,
+# an old library
 
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 #           Baris Metin <baris@uludag.org.tr

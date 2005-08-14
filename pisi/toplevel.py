@@ -82,8 +82,8 @@ def install_pkg_files(package_URIs):
         dfn[name] = x
 
     def satisfiesDep(dep):
-        return dependency.installedSatisfiesDep(dep) \
-               or dependency.dictSatisfiesDep(d_t, dep)
+        return dependency.installed_satisfies_dep(dep) \
+               or dependency.dict_satisfies_dep(d_t, dep)
             
     # for this case, we have to determine the dependencies
     # that aren't already satisfied and try to install them 
@@ -140,7 +140,7 @@ def install_pkg_files(package_URIs):
                 print pkg
                 for dep in pkg.runtimeDeps:
                     print 'checking ', dep
-                    if dependency.dictSatisfiesDep(d_t, dep):
+                    if dependency.dict_satisfies_dep(d_t, dep):
                         if not dep.package in G_f.vertices():
                             Bp.add(str(dep.package))
                         G_f.add_dep(x, dep)
@@ -188,7 +188,7 @@ def install_pkg_names(A):
             for dep in pkg.runtimeDeps:
                 print 'checking ', dep
                 # we don't deal with already *satisfied* dependencies
-                if not dependency.installedSatisfiesDep(dep):
+                if not dependency.installed_satisfies_dep(dep):
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
@@ -256,7 +256,7 @@ def upgrade_pkg_names(A):
             for dep in pkg.runtimeDeps:
                 print 'checking ', dep
                 # add packages that can be upgraded
-                if dependency.repoSatisfiesDep(dep):
+                if dependency.repo_satisfies_dep(dep):
                     if installdb.is_installed(dep.package):
                         #FIXME: use build no
                         (v,r) = installdb.get_version(dep.package)
@@ -314,7 +314,7 @@ def remove(A):
             for (rev_dep, depinfo) in rev_deps:
                 print 'checking ', rev_dep
                 # we don't deal with unsatisfied dependencies
-                if dependency.installedSatisfiesDep(depinfo):
+                if dependency.installed_satisfies_dep(depinfo):
                     if not rev_dep in G_f.vertices():
                         Bp.add(rev_dep)
                         G_f.add_plain_dep(rev_dep, x)
@@ -406,39 +406,39 @@ order = {"none": 0,
 
 def __buildState_unpack(pb):
     # unpack is the first state to run.
-    pb.fetchSourceArchive()
-    pb.unpackSourceArchive()
-    pb.applyPatches()
+    pb.fetch_source_archive()
+    pb.unpack_source_archive()
+    pb.apply_patches()
 
 def __buildState_setupaction(pb, last):
 
     if order[last] < order["unpack"]:
         __buildState_unpack(pb)
-    pb.runSetupAction()
+    pb.run_setup_action()
 
 def __buildState_buildaction(pb, last):
 
     if order[last] < order["setupaction"]:
         __buildState_setupaction(pb, last)
-    pb.runBuildAction()
+    pb.run_build_action()
 
 def __buildState_installaction(pb, last):
     
     if order[last] < order["buildaction"]:
         __buildState_buildaction(pb, last)
-    pb.runInstallAction()
+    pb.run_install_action()
 
 def __buildState_buildpackages(pb, last):
 
     if order[last] < order["installaction"]:
         __buildState_installaction(pb, last)
-    pb.buildPackages()
+    pb.build_packages()
 
 def build_until(pspecfile, state, authInfo=None):
     pb = prepare_for_build(pspecfile, authInfo)
-    pb.compileActionScript()
+    pb.compile_action_script()
     
-    last = pb.getState()
+    last = pb.get_state()
     ui.info("Last state was %s\n"%last)
 
     if not last: last = "none"

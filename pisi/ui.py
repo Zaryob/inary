@@ -81,7 +81,7 @@ class CLI:
             else:
                 return 0
 
-    def displayProgress(self, pd):
+    def display_progress(self, pd):
         out = '\r%-30.30s %3d%% %12.2f %s' % \
             (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
         self.info(out)

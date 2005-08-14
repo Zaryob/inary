@@ -32,7 +32,7 @@ class FetchError(pisi.Error):
 
 
 # helper functions
-def fetchUrl(url, dest, progress=None):
+def fetch_url(url, dest, progress=None):
     fetch = Fetcher(url, dest)
     fetch.progress = progress
     fetch.fetch()
@@ -70,7 +70,7 @@ class Fetcher:
 
         return os.path.join(self.filedest, self.url.filename())
 
-    def doGrab(self, fileURI, dest, totalsize):
+    def _do_grab(self, fileURI, dest, totalsize):
         symbols = [' B/s', 'KB/s', 'MB/s', 'GB/s']
         from time import time
         tt, oldsize = int(time()), 0
@@ -101,7 +101,7 @@ class Fetcher:
                               'percent' : self.percent,
                               'rate': self.rate,
                               'symbol': symbol}
-                    ui.displayProgress(retval)
+                    ui.display_progress(retval)
 
         dest.close()
 
@@ -114,7 +114,7 @@ class Fetcher:
         dest = open(os.path.join(self.filedest, url.filename()) , "w")
         totalsize = os.path.getsize(url.path())
         fileObj = open(url.path())
-        self.doGrab(fileObj, dest, totalsize)
+        self._do_grab(fileObj, dest, totalsize)
 
     def fetchRemoteFile (self):
         from httplib import HTTPException
@@ -138,7 +138,7 @@ class Fetcher:
         else: totalsize = int(headers['Content-Length'])
 
         dest = open(os.path.join(self.filedest, self.url.filename()) , "w")
-        self.doGrab(fileObj, dest, totalsize)
+        self._do_grab(fileObj, dest, totalsize)
 
     def formatRequest(self, request):
         authinfo = self.url.auth_info()

@@ -14,7 +14,7 @@ from graph import *
 
 # Cache the results from packagedb queries in a graph
 
-class PGraph(digraph):
+class PGraph(Digraph):
     
     def __init__(self, packagedb):
         super(PGraph, self).__init__()

@@ -39,12 +39,12 @@ class Index(XmlFile):
         self.filepath = filename
         url = URI(filename)
         if url.is_remote_file():
-            from fetcher import fetchUrl
+            from fetcher import fetch_url
 
             dest = os.path.join(config.index_dir(), repo)
             if not os.path.exists(dest):
                 os.makedirs(dest)
-            fetchUrl(url, dest, ui.Progress)
+            fetch_url(url, dest, ui.Progress)
 
             self.filepath = os.path.join(dest, url.filename())
 

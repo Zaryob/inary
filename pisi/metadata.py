@@ -95,7 +95,7 @@ class MetaData(XmlFile):
     def __init__(self):
         XmlFile.__init__(self, "PISI")
 
-    def fromSpec(self, src, pkg):
+    def from_spec(self, src, pkg):
         self.source = SourceInfo()
         self.source.name = src.name
         self.source.homepage = src.homepage

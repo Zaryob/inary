@@ -34,7 +34,7 @@ class PisiBuildError(pisi.Error):
 
 
 # Helper Functions
-def getFileType(path, pinfoList):
+def get_file_type(path, pinfoList):
     """Return the file type of a path according to the given PathInfo
     list"""
     # The usage of depth is somewhat confusing. It is used for finding
@@ -53,7 +53,7 @@ def getFileType(path, pinfoList):
                 ftype = pinfo.fileType
     return ftype
 
-def checkPathCollision(package, pkgList):
+def check_path_collision(package, pkgList):
     """This function will check for collision of paths in a package with
     the paths of packages in pkgList. The return value will be the
     list containing the paths that collide."""
@@ -81,7 +81,7 @@ class PisiBuild:
         self.spec = self.ctx.spec
         self.sourceArchive = SourceArchive(self.ctx)
 
-        self.setEnvorinmentVars()
+        self.set_environment_vars()
 
         self.actionLocals = None
         self.actionGlobals = None
@@ -94,11 +94,11 @@ class PisiBuild:
                 ui.error(e + '\n')
             raise PisiBuildError, "invalid PSPEC file %s" % self.ctx.pspecfile
 
-    def setState(self, state):
+    def set_state(self, state):
         stateFile = os.path.join(self.srcDir, "pisiBuildState")
         open(stateFile, "w").write(state)
 
-    def getState(self):
+    def get_state(self):
         stateFile = os.path.join(self.srcDir, "pisiBuildState")
         if not os.path.exists(stateFile): # no state
             return None
@@ -110,25 +110,25 @@ class PisiBuild:
         ui.info("Building PISI source package: %s\n" % self.spec.source.name)
         util.xtermTitle("Building PISI source package: %s\n" % self.spec.source.name)
         
-        self.compileActionScript()
+        self.compile_action_script()
          
-        self.fetchSourceArchive()
+        self.fetch_source_archive()
 
-        self.unpackSourceArchive()
+        self.unpack_source_archive()
 
-        self.solveBuildDependencies()
+        self.solve_build_dependencies()
 
         # apply the patches and prepare a source directory for build.
-        self.applyPatches()
+        self.apply_patches()
 
-        self.runSetupAction()
-        self.runBuildAction()
-        self.runInstallAction()
+        self.run_setup_action()
+        self.run_build_action()
+        self.run_install_action()
 
         # after all, we are ready to build/prepare the packages
-        self.buildPackages()
+        self.build_packages()
 
-    def setEnvorinmentVars(self):
+    def set_environment_vars(self):
         """Sets the environment variables for actions API to use"""
         evn = {
             "PKG_DIR": self.ctx.pkg_dir(),
@@ -140,30 +140,30 @@ class PisiBuild:
             }
         os.environ.update(evn)
 
-    def fetchSourceArchive(self):
+    def fetch_source_archive(self):
         ui.info("Fetching source from: %s\n" % self.spec.source.archiveUri)
         self.sourceArchive.fetch()
         ui.info("Source archive is stored: %s/%s\n"
                 %(config.archives_dir(), self.spec.source.archiveName))
 
-    def unpackSourceArchive(self):
+    def unpack_source_archive(self):
         ui.info("Unpacking archive...")
         self.sourceArchive.unpack()
         ui.info(" unpacked (%s)\n" % self.ctx.pkg_work_dir())
-        self.setState("unpacked")
+        self.set_state("unpacked")
 
-    def runSetupAction(self):
+    def run_setup_action(self):
         #  Run configure, build and install phase
         ui.action("Setting up source...\n")
-        self.runActionFunction(const.setup_func)
-        self.setState("setupaction")
+        self.run_action_function(const.setup_func)
+        self.set_state("setupaction")
 
-    def runBuildAction(self):
+    def run_build_action(self):
         ui.action("Building source...\n")
-        self.runActionFunction(const.build_func)
-        self.setState("buildaction")
+        self.run_action_function(const.build_func)
+        self.set_state("buildaction")
 
-    def runInstallAction(self):
+    def run_install_action(self):
         ui.action("Installing...\n")
         
         # Before install make sure install_dir is clean 
@@ -171,10 +171,10 @@ class PisiBuild:
             util.clean_dir(self.ctx.pkg_install_dir())
             
         # install function is mandatory!
-        self.runActionFunction(const.install_func, True)
-        self.setState("installaction")
+        self.run_action_function(const.install_func, True)
+        self.set_state("installaction")
 
-    def compileActionScript(self):
+    def compile_action_script(self):
         """Compiles actions.py and sets the actionLocals and actionGlobals"""
         specdir = os.path.dirname(self.ctx.pspecfile)
         scriptfile = os.path.join(specdir, const.actions_file)
@@ -191,9 +191,9 @@ class PisiBuild:
 
         self.actionLocals = localSymbols
         self.actionGlobals = globalSymbols
-        self.srcDir = self.pkgSrcDir()
+        self.srcDir = self.pkg_src_dir()
         
-    def pkgSrcDir(self):
+    def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
         try:
             workdir = self.actionGlobals['WorkDir']
@@ -202,7 +202,7 @@ class PisiBuild:
                     
         return os.path.join(self.ctx.pkg_work_dir(), workdir)
 
-    def runActionFunction(self, func, mandatory=False):
+    def run_action_function(self, func, mandatory=False):
         """Calls the corresponding function in actions.py. 
 
         If mandatory parameter is True, and function is not present in
@@ -221,11 +221,12 @@ class PisiBuild:
 
         os.chdir(curDir)
 
-    def solveBuildDependencies(self):
-        """pre-alpha: fail if dependencies not satisfied"""
+    def solve_build_dependencies(self):
+        """fail if dependencies not satisfied"""
+        #TODO: we'll have to do better than plugging a fxn here
         pass
 
-    def applyPatches(self):
+    def apply_patches(self):
         files_dir = os.path.abspath(os.path.join(self.pspecDir,
                                                  const.files_dir))
 
@@ -239,13 +240,13 @@ class PisiBuild:
             ui.action("* Applying patch: %s\n" % patch.filename)
             util.do_patch(self.srcDir, patchFile, level=patch.level, target=patch.target)
 
-    def genMetaDataXml(self, package):
+    def gen_metadata_xml(self, package):
         """Generate the metadata.xml file for build source.
 
         metadata.xml is composed of the information from specfile plus
         some additional information."""
         metadata = MetaData()
-        metadata.fromSpec(self.spec.source, package)
+        metadata.from_spec(self.spec.source, package)
 
         # FIXME: MEREEEEEN :)
         metadata.package.build = 0 # BOGUS. WRONG.
@@ -263,18 +264,18 @@ class PisiBuild:
         metadata.package.installedSize = str(size)
         metadata.write(os.path.join(self.ctx.pkg_dir(), const.metadata_xml))
 
-    def genFilesXml(self, package):
+    def gen_files_xml(self, package):
         """Generetes files.xml using the path definitions in specfile and
         generated files by the build system."""
         files = Files()
         install_dir = self.ctx.pkg_install_dir()
-        collisions = checkPathCollision(package,
+        collisions = check_path_collision(package,
                                         self.spec.packages)
         for pinfo in package.paths:
             path = install_dir + pinfo.pathname
             for fpath, fhash in util.get_file_hashes(path, collisions, install_dir):
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
-                ftype = getFileType(frpath, package.paths)
+                ftype = get_file_type(frpath, package.paths)
                 try: # broken links can cause problem
                     fsize = str(os.path.getsize(fpath))
                 except OSError:
@@ -283,7 +284,7 @@ class PisiBuild:
 
         files.write(os.path.join(self.ctx.pkg_dir(), const.files_xml))
 
-    def buildPackages(self):
+    def build_packages(self):
         """Build each package defined in PSPEC file. After this process there
         will be .pisi files hanging around, AS INTENDED ;)"""
         for package in self.spec.packages:
@@ -294,7 +295,7 @@ class PisiBuild:
             
             pkg = Package(name, 'w')
             c = os.getcwd()
-	    
+        
             # add comar files to package
             os.chdir(self.pspecDir)
             for pcomar in package.providesComar:
@@ -310,24 +311,24 @@ class PisiBuild:
                 util.copy_file(src, dest)
                 if afile.permission:
                     os.chmod(dest, int(afile.permission) | 0777)
-	
+    
             os.chdir(c)
 
             ui.action("** Building package %s\n" % package.name);
             
             ui.action("Generating %s..." % const.metadata_xml)
-            self.genMetaDataXml(package)
+            self.gen_metadata_xml(package)
             ui.info(" done.\n")
 
             ui.action("Generating %s..." % const.files_xml)
-            self.genFilesXml(package)
+            self.gen_files_xml(package)
             ui.info(" done.\n")
 
             ui.action("Creating PISI package %s\n" % name)
             
             # add xmls and files
             os.chdir(self.ctx.pkg_dir())
-	    
+        
             pkg.add_to_package(const.metadata_xml)
             pkg.add_to_package(const.files_xml)
 
@@ -340,5 +341,5 @@ class PisiBuild:
 
             pkg.close()
             os.chdir(c)
-            self.setState("buildpackages")
+            self.set_state("buildpackages")
             util.xtermTitleReset()

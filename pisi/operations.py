@@ -77,7 +77,7 @@ def install_single_name(name, upgrade = False):
         pkg = packagedb.get_package(name)
 
         if repo.indexuri.is_local_file():
-            pkg_path = pkg.packageURI
+            pkg_path = str(pkg.packageURI)
         else:
             # FIXME: determine if we have relative paths in the index
             # rather than doing this. Requires the index to know about

@@ -76,7 +76,7 @@ class DepInfo:
             s += 'rel <= ' + self.releaseTo
         return s
 
-def dictSatisfiesDep(dict, depinfo):
+def dict_satisfies_dep(dict, depinfo):
     """determine if a package in a dictionary satisfies given dependency spec"""
     pkg_name = depinfo.package
     if not dict.has_key(pkg_name):
@@ -86,7 +86,7 @@ def dictSatisfiesDep(dict, depinfo):
         (version, release) = (pkg.version, pkg.release)
         return depinfo.satisfies(pkg_name, version, release)
 
-def installedSatisfiesDep(depinfo):
+def installed_satisfies_dep(depinfo):
     """determine if a package in *repository* satisfies given
 dependency spec"""
     pkg_name = depinfo.package
@@ -97,7 +97,7 @@ dependency spec"""
         (version, release) = (pkg.version, pkg.release)
         return depinfo.satisfies(pkg_name, version, release)
 
-def repoSatisfiesDep(depinfo):
+def repo_satisfies_dep(depinfo):
     """determine if a package in *repository* satisfies given
 dependency spec"""
     pkg_name = depinfo.package
@@ -108,7 +108,7 @@ dependency spec"""
         (version, release) = (pkg.version, pkg.release)
         return depinfo.satisfies(pkg_name, version, release)
 
-def satisfiesDeps(pkg, deps, sat = installedSatisfiesDep):
+def satisfies_dependencies(pkg, deps, sat = installed_satisfies_dep):
     for dep in deps:
         if not sat(dep):
             ui.error('Package %s does not satisfy dependency %s\n' %
@@ -116,9 +116,9 @@ def satisfiesDeps(pkg, deps, sat = installedSatisfiesDep):
             return False
     return True
 
-def satisfiesRuntimeDeps(pkg):
+def satisfies_runtime_deps(pkg):
     deps = packagedb.get_package(pkg).runtimeDeps
-    return satisfiesDeps(pkg, deps)
+    return satisfies_dependencies(pkg, deps)
 
 def installable(pkg):
     """calculate if pkg is installable currently 
@@ -126,7 +126,7 @@ def installable(pkg):
     if not packagedb.has_package(pkg):
         ui.info("Package " + pkg + " is not present in the package database\n");
         return False
-    elif satisfiesRuntimeDeps(pkg):
+    elif satisfies_runtime_deps(pkg):
         return True
     else:
         #ui.info("package " + pkg + " does not satisfy dependencies\n");

@@ -54,9 +54,9 @@ class Installer:
         self.check_requirements()
         self.check_relations()
         self.reinstall()
-        self.extractInstall()
-        self.storePisiFiles()
-        self.registerCOMARScripts()
+        self.extract_install()
+        self.store_pisi_files()
+        self.register_comar_scripts()
         self.update_databases()
 
     def check_requirements(self):
@@ -119,13 +119,13 @@ class Installer:
             # remove old package then
             operations.remove_single(pkg.name)
 
-    def extractInstall(self):
+    def extract_install(self):
         "unzip package in place"
 
         ui.info('Extracting files,\n')
         self.package.extract_dir_flat('install', config.destdir)
  
-    def storePisiFiles(self):
+    def store_pisi_files(self):
         """put files.xml, metadata.xml, actions.py and COMAR scripts
         somewhere in the file system. We'll need these in future..."""
 
@@ -142,7 +142,7 @@ class Installer:
             ui.info('Storing %s\n' % fpath)
             self.package.extract_file(fpath, self.package.pkg_dir())
 
-    def registerCOMARScripts(self):
+    def register_comar_scripts(self):
         "register COMAR scripts"
 
         for pcomar in self.metadata.package.providesComar:

@@ -23,7 +23,7 @@ import pisi
 class CycleException(pisi.Exception):
     pass
 
-class digraph(object):
+class Digraph(object):
 
     def __init__(self):
         self.__v = set()
