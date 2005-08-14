@@ -190,9 +190,12 @@ def insinto(destinationDirectory, sourceFile,  destinationFile = ''):
     '''insert a sourceFile into destinationDirectory as a destinationFile with same uid/guid/permissions'''
     makedirs(get.installDIR() + destinationDirectory)
 
-    for file in glob.glob(sourceFile):
-        if can_access_file(file):
-            shutil.copy(sourceFile, get.installDIR() + os.path.join(destinationDirectory, destinationFile))
+    if not destinationFile:
+        for file in glob.glob(sourceFile):
+            if can_access_file(file):
+                shutil.copy(file, get.installDIR() + os.path.join(destinationDirectory, os.path.basename(file)))
+    else:
+        shutil.copy(sourceFile, get.installDIR() + os.path.join(destinationDirectory, destinationFile))
 
 ''' ************************************************************************** '''
 
