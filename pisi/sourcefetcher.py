@@ -15,7 +15,7 @@ from os.path import basename, dirname, join
 from pisi.ui import ui
 from pisi.config import config
 from pisi.constants import const
-from pisi.purl import URI
+from pisi.uri import URI
 from pisi.specfile import SpecFile
 
 class SourceFetcher(object):

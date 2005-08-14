@@ -19,7 +19,7 @@ from pisi import fetcher
 from pisi import util
 from pisi import context
 from pisi.config import config
-from pisi import purl
+from pisi import uri 
 
 class ArchiveFileTestCase(unittest.TestCase):
 #     def setUp(self):
@@ -93,7 +93,7 @@ class ArchiveFileTestCase(unittest.TestCase):
     
     def testUnpackZipCond(self):
         ctx = context.BuildContext("tests/sandbox/pspec.xml")
-        url = purl.PUrl(ctx.spec.source.archiveUri)
+        url = uri.URI(ctx.spec.source.archiveUri)
         targetDir = ctx.pkg_work_dir()
         filePath = join(config.archives_dir(), url.filename())
 

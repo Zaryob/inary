@@ -23,7 +23,7 @@ from base64 import encodestring
 # pisi modules
 import pisi
 import pisi.util as util
-from pisi.purl import URI
+from pisi.uri import URI
 from pisi.ui import ui
 
 

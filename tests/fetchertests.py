@@ -15,12 +15,12 @@ from pisi import fetcher
 from pisi import util
 from pisi import context
 from pisi import config
-from pisi import purl
+from pisi import uri
 
 class FetcherTestCase(unittest.TestCase):
     def setUp(self):
         self.ctx = context.BuildContext("tests/popt/pspec.xml")
-        self.url = purl.PUrl(self.ctx.spec.source.archiveUri)
+        self.url = uri.URI(self.ctx.spec.source.archiveUri)
         self.destpath = config.config.archives_dir()
         self.fetch = fetcher.Fetcher(self.url, self.destpath)
     

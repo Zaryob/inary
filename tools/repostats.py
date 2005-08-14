@@ -14,7 +14,7 @@ import os
 
 sys.path.append('.')
 import pisi.specfile
-import pisi.purl
+import pisi.uri
 
 class Histogram:
     def __init__(self):
@@ -119,7 +119,7 @@ for pak in paks:
     people.add(name)
     for lice in lices:
         licenses.add(lice)
-    host = pisi.purl.PUrl(spec.source.archiveUri).location()
+    host = pisi.uri.URI(spec.source.archiveUri).location()
     hosts.add(host)
 
 print "<html><head><title>%s İstatistikleri</title>" % (sys.argv[1])

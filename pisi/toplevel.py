@@ -20,7 +20,7 @@ if ver[0] <= 2 and ver[1] < 4:
 from pisi.config import config
 from pisi.constants import const
 from pisi.ui import ui
-from pisi.purl import URI
+from pisi.uri import URI
 import pisi.util as util
 import pisi.dependency as dependency
 import pisi.pgraph as pgraph

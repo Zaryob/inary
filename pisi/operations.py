@@ -16,7 +16,7 @@ import pisi
 from pisi.config import config
 from pisi.constants import const
 from pisi.ui import ui
-from pisi.purl import URI
+from pisi.uri import URI
 import pisi.util as util
 import pisi.packagedb as packagedb
 

@@ -22,7 +22,7 @@ from os import access, R_OK
 # pisi modules
 import pisi
 from pisi.archive import Archive
-from pisi.purl import URI
+from pisi.uri import URI
 from pisi.ui import ui
 from pisi.config import config
 from pisi.fetcher import fetchUrl

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Project SYSTEM "Project-3.5.dtd">
+<!DOCTYPE Project SYSTEM "Project-3.7.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-08-13, 17:04:57 -->
-<!-- Copyright (C) 2005 PiSi Development Team, pisi@uludag.org.tr -->
-<Project version="3.5">
+<!-- Saved: 2005-08-14, 19:43:08 -->
+<!-- Copyright (C) 2005 PiSi Development Team,  -->
+<Project version="3.7">
+  <ProgLanguage mixed="0">Python</ProgLanguage>
+  <UIType>Qt</UIType>
   <Description>The package management software of Pardus distribution.
 </Description>
-  <VersIon>0.2</VersIon>
   <Author>PiSi Development Team</Author>
-  <EmaIl>pisi@uludag.org.tr</EmaIl>
+  <Email></Email>
   <Sources>
     <Source>
       <Dir>tools</Dir>
@@ -292,10 +293,6 @@
     </Source>
     <Source>
       <Dir>pisi</Dir>
-      <Name>purl.py</Name>
-    </Source>
-    <Source>
-      <Dir>pisi</Dir>
       <Name>version.py</Name>
     </Source>
     <Source>
@@ -309,6 +306,10 @@
     <Source>
       <Dir>tools</Dir>
       <Name>repostats.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Name>uri.py</Name>
     </Source>
   </Sources>
   <Forms>

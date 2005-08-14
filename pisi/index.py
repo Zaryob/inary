@@ -24,7 +24,7 @@ from pisi.ui import ui
 import pisi.util as util
 from pisi.config import config
 from pisi.constants import const
-from pisi.purl import URI
+from pisi.uri import URI
 
 class Index(XmlFile):
 

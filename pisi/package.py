@@ -21,7 +21,7 @@ import pisi
 import pisi.archive as archive
 from pisi.constants import const
 from pisi.config import config
-from pisi.purl import URI
+from pisi.uri import URI
 from pisi.metadata import MetaData
 from pisi.files import Files
 
