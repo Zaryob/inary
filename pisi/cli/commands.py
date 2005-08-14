@@ -129,15 +129,12 @@ class Command(object):
 
 
 class Help(Command):
-    """Prints help
+    """Prints help for given commands.
 
-Usage: help <command1> <command2> ... <commandn>
+Usage: help [ <command1> <command2> ... <commandn> ]
 
-If run without parameters will print the general usage documentation.
+If run without parameters, it prints the general help."""
 
-If run with a command name as the parameter will print the documentation
-for that command."""
-    
     def __init__(self):
         #TODO? Discard Help's own usage doc in favor of general usage doc
         #self.__doc__ = usage_text
