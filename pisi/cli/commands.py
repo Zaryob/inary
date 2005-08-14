@@ -18,7 +18,7 @@ from pisi.purl import PUrl
 from pisi.cli.common import *
 
 
-def commandsString():
+def commands_string():
     s = ''
     list = commands.keys()
     list.sort()
@@ -27,8 +27,7 @@ def commandsString():
     return s
 
 
-# helper functions
-def cmdObject(cmd, fail=False):
+def get_command(cmd, fail=False):
 
     if commands.has_key(cmd):
         obj = commands[cmd]()
@@ -47,7 +46,7 @@ class Command(object):
     def __init__(self):
         # now for the real parser
         import pisi
-        self.parser = OptionParser(usage=usage_text,
+        self.parser = OptionParser(usage=getattr(self, "__doc__"),
                                    version="%prog " + pisi.__version__)
         self.options()
         self.parser = commonopts(self.parser)
@@ -61,14 +60,14 @@ class Command(object):
         pisi.config.config = pisi.config.Config(self.options)
         pisi.ui.ui = pisi.ui.CLI(self.options.debug)
         
-        self.checkAuthInfo()
+        self.check_auth_info()
 
     def options(self):
         """This is a fall back function. If the implementer module provides an
         options function it will be called"""
         pass
 
-    def checkAuthInfo(self):
+    def check_auth_info(self):
         username = self.options.username
         password = self.options.password
 
@@ -106,7 +105,8 @@ class Command(object):
         pass
 
     def help(self):
-        print getattr(self, "__doc__")
+        self.parser.print_help()
+        #print getattr(self, "__doc__")
 
     def die(self):
         print 'Program terminated abnormally.'
@@ -114,7 +114,7 @@ class Command(object):
 
 
 class Help(Command):
-    """Prints usage
+    """Prints help for a given command
 
     Usage:
     help [command-name]
@@ -122,27 +122,30 @@ class Help(Command):
 If run without parameters will print the general usage documentation.
 
 If run with a command name as the parameter will print the documentation
-for that command.
+for that command, where command is one of: 
+
 """
+
     def __init__(self):
+        self.__doc__ = usage_text
         super(Help, self).__init__()
 
     def run(self):
         if not self.args:
+            self.parser.set_usage(usage_text)
             self.parser.print_help()
             return
-
+            
         self.init()
         
         for arg in self.args:
             print
-            pisi.ui.ui.info("%s: " % arg)
-            obj = cmdObject(arg, True)
+            pisi.ui.ui.info("command: %s\n" % arg)
+            obj = get_command(arg, True)
             obj.help()
         
         self.finalize()
-            
-                
+
 class Build(Command):
     """Build a PISI package using a pspec.xml file
 
@@ -683,5 +686,5 @@ commands = {"help": Help,
             "list-repo": ListRepo
             }
 
-usage_text = (usage_text1 + commandsString() + usage_text2)
+usage_text = (usage_text1 + commands_string() + usage_text2)
 

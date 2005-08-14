@@ -15,9 +15,9 @@ where <command> is one of:
 """
 
 usage_text2 = """
-Use \"%prog help <command>\" for help on a specific subcommand.
+Use \"%prog help <command>\" for help on a specific command.
 
-PISI Package Manager
+PiSi Package Manager
 """
 
 def commonopts(parser):
