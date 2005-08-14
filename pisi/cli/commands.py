@@ -339,11 +339,12 @@ TODO: Some description
 class Index(Command):
     """Index PISI files in a given directory
 
-Usage: index directory
+Usage: index <directory>
 
-index command searches for all PiSi files in a directory and accumulates
-the information in an XML file. In particular, it indexes both source and
-binary packages.
+This command searches for all PiSi files in a directory, collects PiSi
+tags from them and accumulates the information in an output XML file,
+named by default 'pisi-index.xml'. In particular, it indexes both
+source and binary packages.
 """
     def __init__(self):
         super(Index, self).__init__()
