@@ -51,7 +51,6 @@ class Command(object):
         self.options()
         self.parser = commonopts(self.parser)
         (self.options, self.args) = self.parser.parse_args()
-        #print 'opts,args = ', self.options, self.args
         self.args.pop(0)                # exclude command arg
 
         import pisi
@@ -93,22 +92,35 @@ class Command(object):
     def init(self, database = False):
         """initialize PiSi components"""
         
-        # IMPORTANT: command imports here or in the command class run fxns
+        # NB: command imports here or in the command class run fxns
         import pisi.toplevel
         from pisi.ui import ui
 
+        # initialize repository databases
         if database:
             from pisi.repodb import repodb
             repodb.init_dbs()
 
     def finalize(self):
+        """do cleanup work for PiSi components"""
+        pass
+        
+    def name(self):
+        """(command name, shortname) pair to be filled by subclasses"""
         pass
 
+    def format_name(self):
+        (name, shortname) = self.name()
+        return "%s (%s)" % (name, shortname)
+
     def help(self):
-        self.parser.print_help()
-        #print getattr(self, "__doc__")
+        """print help for the command"""
+        pisi.ui.ui.info(self.format_name() + ': ')
+        print getattr(self, "__doc__")
+        print self.parser.format_option_help()
 
     def die(self):
+        """exit program"""
         print 'Program terminated abnormally.'
         sys.exit(-1)
 
@@ -116,8 +128,7 @@ class Command(object):
 class Help(Command):
     """Prints help for a given command
 
-    Usage:
-    help [command-name]
+Usage: help <command1> <command2> ... <commandn>
 
 If run without parameters will print the general usage documentation.
 
@@ -127,8 +138,13 @@ for that command, where command is one of:
 """
 
     def __init__(self):
-        self.__doc__ = usage_text
+        #TODO? Discard Help's own usage doc in favor of general usage doc
+        #self.__doc__ = usage_text
+        self.__doc__ += commands_string()
         super(Help, self).__init__()
+
+    def name(self):
+        return ("help", "h")
 
     def run(self):
         if not self.args:
@@ -139,24 +155,25 @@ for that command, where command is one of:
         self.init()
         
         for arg in self.args:
-            print
-            pisi.ui.ui.info("command: %s\n" % arg)
             obj = get_command(arg, True)
             obj.help()
+            print
         
         self.finalize()
 
 class Build(Command):
     """Build a PISI package using a pspec.xml file
 
-    Usage:
-    build pspec.xml
+Usage: build <pspec.xml>
 
-You can give an URI of the pspec.xml file. PISI will
+You can give a URI of the pspec.xml file. PISI will
 fetch all necessary files and build the package for you.
 """
     def __init__(self):
         super(Build, self).__init__()
+
+    def name(self):
+        return ("build", "bi")
 
     def run(self):
         if not self.args:
@@ -205,14 +222,16 @@ class PackageOp(Command):
 class Install(PackageOp):
     """Install PISI packages
 
-    Usage:
-    install package1 package2 ... packagen
+Usage: install <package1> <package2> ... <packagen>
 
 You may use filenames, URIs or package names for packages. If you have
 specified a package name, it should exist in a specified repository.
 """
     def __init__(self):
         super(Install, self).__init__()
+
+    def name(self):
+        return ("install", "it")
 
     def run(self):
         if not self.args:
@@ -227,14 +246,16 @@ specified a package name, it should exist in a specified repository.
 class Upgrade(PackageOp):
     """Upgrade PISI packages
 
-    Usage:
-    Upgrade package1 package2 ... packagen
+Usage: Upgrade <package1> <package2> ... <packagen>
 
 You may use filenames, URIs or package names for packages. If you have
 specified a package name, it should exist in a specified repository.
 """
     def __init__(self):
         super(Upgrade, self).__init__()
+
+    def name(self):
+        return ("upgrade", "up")
 
     def run(self):
         if not self.args:
@@ -249,13 +270,15 @@ specified a package name, it should exist in a specified repository.
 class Remove(PackageOp):
     """Remove PISI packages
 
-    Usage:
-    remove package1-name package2-name ... packagen-name
+Usage: remove <package1> <package2> ... <packagen>
 
-Remove a package from your system. Just give the package name to remove.
+Remove package(s) from your system. Just give the package names to remove.
 """
     def __init__(self):
         super(Remove, self).__init__()
+
+    def name(self):
+        return ("remove", "rm")
 
     def run(self):
         if not self.args:
@@ -268,10 +291,14 @@ Remove a package from your system. Just give the package name to remove.
 
 
 class ConfigurePending(PackageOp):
-    """configure pending packages"""
+    """configure pending packages
+    """
     
     def __init__(self):
         super(ConfigurePending, self).__init__()
+
+    def name(self):
+        return ("configure-pending", "cp")
 
     def run(self):
 
@@ -281,15 +308,17 @@ class ConfigurePending(PackageOp):
 
 
 class Info(Command):
-    """Display information about a package 
+    """Display package information
 
-    Usage: 
-    info <package>
+Usage: info <package1> <package2> ... <packagen>
 
-TODO: Some description...
+TODO: Some description
 """
     def __init__(self):
         super(Info, self).__init__()
+
+    def name(self):
+        return ("info", "i")
 
     def run(self):
         if not self.args:
@@ -312,13 +341,17 @@ TODO: Some description...
 class Index(Command):
     """Index PISI files in a given directory
 
-    Usage:
-    index directory
+Usage: index directory
 
-TODO: Some description...
+index command searches for all PiSi files in a directory and accumulates
+the information in an XML file. In particular, it indexes both source and
+binary packages.
 """
     def __init__(self):
         super(Index, self).__init__()
+
+    def name(self):
+        return ("index", "ix")
 
     def run(self):
         
@@ -337,14 +370,15 @@ TODO: Some description...
 class ListInstalled(Command):
     """Print the list of all installed packages  
 
-    Usage:
-    list-installed
+Usage: list-installed
 
-TODO: Some description...
 """
 
     def __init__(self):
         super(ListInstalled, self).__init__()
+
+    def name(self):
+        return ("list-installed", "li")
 
     def options(self):
         self.parser.add_option("-l", "--long", action="store_true",
@@ -363,15 +397,18 @@ TODO: Some description...
 
 
 class UpdateRepo(Command):
-    """Update the databases of a repository
+    """Update repository databases
 
-    Usage:
-    update-repo <repo1> <repo2>
+Usage: update-repo <repo1> <repo2> ... <repon>
 
-TODO: Some description...
+<repoi>: repository name
+Synchronizes the PiSi databases with the current repository.
 """
     def __init__(self):
         super(UpdateRepo, self).__init__()
+
+    def name(self):
+        return ("update-repo", "ur")
 
     def run(self):
         if not self.args:
@@ -386,13 +423,18 @@ TODO: Some description...
 class AddRepo(Command):
     """Add a repository
 
-    Usage:
-    add-repo <repo> <indexuri>
+Usage: add-repo <repo> <indexuri>
 
-TODO: Some description...
+<repo>: name of repository to add
+<indexuri>: URI of index file
+
+NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 """
     def __init__(self):
         super(AddRepo, self).__init__()
+
+    def name(self):
+        return ("add-repo", "ar")
 
     def run(self):
 
@@ -408,22 +450,24 @@ TODO: Some description...
 
 
 class RemoveRepo(Command):
-    """Remove a repository
+    """Remove repositories
 
-    Usage:
-    remove-repo <repo>
+Usage: remove-repo <repo1> <repo2> ... <repon>
 
-TODO: Some description...
+Remove all repository information from the system.
 """
     def __init__(self):
         super(RemoveRepo, self).__init__()
+
+    def name(self):
+        return ("remove-repo", "rr")
 
     def run(self):
 
         if len(self.args)>=1:
             self.init()
-            name = self.args[0]
-            pisi.toplevel.remove_repo(name)
+            for repo in self.args:
+                toplevel.remove_repo(repo)
             self.finalize()
         else:
             self.help()
@@ -433,13 +477,15 @@ TODO: Some description...
 class ListRepo(Command):
     """List repositories
 
-    Usage:
-    list-repo
+Usage: list-repo
 
-TODO: Some description...
+Lists currently tracked repositories.
 """
     def __init__(self):
         super(ListRepo, self).__init__()
+
+    def name(self):
+        return ("list-repo", "lr")
 
     def run(self):
 
@@ -454,14 +500,16 @@ TODO: Some description...
 class ListAvailable(Command):
     """List available packages in the repositories
 
-    Usage:
-    list-available [repo]
+Usage: list-available [ <repo1> <repo2> ... repon ]
 
-TODO: desc...
+Gives a brief list of PiSi components published in the repository.
 """
     def __init__(self):
         super(ListAvailable, self).__init__()
-    
+
+    def name(self):
+        return ("list-available", "li")
+
     def run(self):
         from pisi.repodb import repodb
         from pisi.ui import ui
@@ -492,6 +540,9 @@ class ListPending(Command):
     def __init__(self):
         super(ListPending, self).__init__()
     
+    def name(self):
+        return ("list-pending", "lp")
+
     def run(self):
         from pisi.installdb import installdb
         from pisi.ui import ui
@@ -506,24 +557,21 @@ class ListPending(Command):
 class SearchAvailable(Command):
     """Search in available packages
 
-    Usage:
-    search-available <search pattern>
+Usage: search-available <search pattern>
 
-TODO: Some description...
+FIXME: this is bogus
 """
     pass
-
 
 # Partial build commands        
 
 class BuildUntil(Command):
     """Run the build process partially
 
-    Usage:
-    -sStateName build-until <pspec file>
+Usage: -sStateName build-until <pspec file>
 
-    Where states are:
-    unpack, setupaction, buildaction, installaction, buildpackages
+where states are:
+unpack, setupaction, buildaction, installaction, buildpackages
 
 You can give an URI of the pspec.xml file. PISI will fetch all
 necessary files and unpack the source and prepare a source directory
@@ -531,6 +579,9 @@ for you.
 """
     def __init__(self):
         super(BuildUntil, self).__init__()
+
+    def name(self):
+        return ("build-until", "bu")
 
     def options(self):
         self.parser.add_option("-s", action="store", dest="state")
@@ -552,13 +603,15 @@ for you.
 class BuildUnpack(Command):
     """Unpack the source archive
 
-    Usage:
-    build-dounpack <pspec file>
+Usage: build-dounpack <pspec file>
 
 TODO: desc.
 """
     def __init__(self):
         super(BuildUnpack, self).__init__()
+
+    def name(self):
+        return ("build-unpack", "biu")
 
     def run(self):
         if not self.args:
@@ -574,13 +627,15 @@ TODO: desc.
 class BuildSetup(Command):
     """Setup the source
 
-    Usage:
-    build-dosetup <pspec file>
+Usage: build-dosetup <pspec file>
 
 TODO: desc.
 """
     def __init__(self):
         super(BuildSetup, self).__init__()
+
+    def name(self):
+        return ("build-setup", "bis")
 
     def run(self):
         if not self.args:
@@ -597,13 +652,15 @@ TODO: desc.
 class BuildBuild(Command):
     """Setup the source
 
-    Usage:
-    build-dobuild <pspec file>
+Usage: build-dobuild <pspec file>
 
 TODO: desc.
 """
     def __init__(self):
         super(BuildBuild, self).__init__()
+
+    def name(self):
+        return ("build-dobuild", "bib")
 
     def run(self):
         if not self.args:
@@ -619,13 +676,15 @@ TODO: desc.
 class BuildInstall(Command):
     """Install to the sandbox
 
-    Usage:
-    build-doinstall <pspec file>
+Usage: build-doinstall <pspec file>
 
 TODO: desc.
 """
     def __init__(self):
         super(BuildInstall, self).__init__()
+
+    def name(self):
+        return ("build-doinstall", "bii")
 
     def run(self):
         if not self.args:
@@ -642,13 +701,15 @@ TODO: desc.
 class BuildPackage(Command):
     """Setup the source
 
-    Usage:
-    build-dobuild <pspec file>
+Usage: build-dobuild <pspec file>
 
 TODO: desc.
 """
     def __init__(self):
         super(BuildPackage, self).__init__()
+
+    def name(self):
+        return ("build-dopackage", "bip")
 
     def run(self):
         if not self.args:
@@ -687,4 +748,3 @@ commands = {"help": Help,
             }
 
 usage_text = (usage_text1 + commands_string() + usage_text2)
-
