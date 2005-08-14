@@ -111,7 +111,10 @@ class Command(object):
 
     def format_name(self):
         (name, shortname) = self.name()
-        return "%s (%s)" % (name, shortname)
+        if shortname:
+            return "%s (%s)" % (name, shortname)
+        else:
+            return name
 
     def help(self):
         """print help for the command"""
@@ -126,21 +129,19 @@ class Command(object):
 
 
 class Help(Command):
-    """Prints help for a given command
+    """Prints help
 
 Usage: help <command1> <command2> ... <commandn>
 
 If run without parameters will print the general usage documentation.
 
 If run with a command name as the parameter will print the documentation
-for that command, where command is one of: 
-
-"""
-
+for that command."""
+    
     def __init__(self):
         #TODO? Discard Help's own usage doc in favor of general usage doc
         #self.__doc__ = usage_text
-        self.__doc__ += commands_string()
+        #self.__doc__ += commands_string()
         super(Help, self).__init__()
 
     def name(self):
