@@ -103,8 +103,6 @@ def install_pkg_files(package_URIs):
     extra_packages = [x.package for x in dep_unsatis]
     if (extra_packages and install_pkg_names(extra_packages)) or \
            (not extra_packages):
-        #FIXME: Construct a dependency graph for files
-        # and install in rev. topological order
     
         class PackageDB:
             def __init__(self):

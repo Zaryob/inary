@@ -409,6 +409,8 @@ class SpecFile(XmlFile):
 
     def has_errors(self):
         """Return errors of the PSPEC file if there are any."""
+        #TODO: has_errors name is misleading for a function that does
+        #not just return a boolean value. check() would be better - exa
         err = Checks()
         err.join(self.source.has_errors())
         if len(self.packages) <= 0:
