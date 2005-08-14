@@ -91,4 +91,4 @@ class URI(object):
     def __str__(self):
         return self.get_uri()
 
-    uri = property(getUri, setUri)
+    uri = property(get_uri, set_uri)
