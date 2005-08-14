@@ -81,7 +81,7 @@ def install_single_name(name, upgrade = False):
         else:
             # FIXME: determine if we have relative paths in the index
             # rather than doing this. Requires the index to know about
-            # that
+            # that related to bug 368
             pkg_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
                                     os.path.basename(pkg.packageURI))
 
