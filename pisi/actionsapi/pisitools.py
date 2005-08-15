@@ -43,7 +43,8 @@ def doexe(sourceFile, destinationDirectory):
     '''insert a executable file into destination directory'''
     
     ''' example call: pisitools.doexe("kde-3.4.sh", "/etc/X11/Sessions")'''
-    executable_insinto(sourceFile, get.installDIR() + destinationDirectory)
+    for file in glob.glob(sourceFile):
+        executable_insinto(file, get.installDIR() + destinationDirectory)
 
 def dohard(sourceFile, destinationFile):
     '''creates hard link between sourceFile and destinationFile'''
