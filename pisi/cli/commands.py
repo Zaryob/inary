@@ -434,16 +434,19 @@ Usage: list-installed
         from pisi.installdb import installdb
         list = installdb.list_installed()
         list.sort()
+        if self.options.install_info:
+            print 'Package Name     |St|   Version|  Rel.| Build| Distro| Date'
+            print '============================================================================='
         for pkg in list:
             package = pisi.packagedb.inst_packagedb.get_package(pkg)
             inst_info = installdb.get_info(pkg)
             if self.options.long:
                 print package
                 print inst_info
-            elif self.options.detailed:
-                print package.name, '-', inst_info.one_liner()
+            elif self.options.install_info:
+                print '%15s | %s ' % (package.name, inst_info.one_liner())
             else:
-                print package.name, '-', package.summary
+                print '%15s - %s ' % (package.name, package.summary)
         self.finalize()
 
 

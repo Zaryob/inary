@@ -47,7 +47,7 @@ class InstallInfo:
     def one_liner(self):
         import time
         time_str = time.strftime("%d %b %Y %H:%M", self.time)
-        s = '%s,%s,%s,%s,%s,%s' % (self.state, self.version, self.release,
+        s = '%2s|%10s|%6s|%6s|%8s|%12s' % (self.state, self.version, self.release,
                                    self.build, self.distribution,
                                    time_str)
         return s
