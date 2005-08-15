@@ -391,7 +391,9 @@ Usage: list-installed
     def run(self):
         self.init(True)
         from pisi.installdb import installdb
-        for pkg in installdb.list_installed():
+        list = installdb.list_installed()
+        list.sort()
+        for pkg in list:
             package = pisi.packagedb.get_package(pkg)
             if not self.options.long:
                 print package.name, '-', package.summary
@@ -534,7 +536,9 @@ Gives a brief list of PiSi components published in the repository.
         from pisi import packagedb
 
         pkg_db = packagedb.get_db(repo)
-        for p in pkg_db.list_packages():
+        list = pkg_db.list_packages()
+        list.sort()
+        for p in list:
             print p
 
 
@@ -553,7 +557,9 @@ class ListPending(Command):
 
         self.init(True)
 
-        for p in installdb.list_pending():
+        list = installdb.list_pending()
+        list.sort()
+        for p in list:
             print p
 
         self.finalize()
