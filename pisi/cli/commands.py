@@ -49,7 +49,7 @@ class Command(object):
         self.parser = OptionParser(usage=getattr(self, "__doc__"),
                                    version="%prog " + pisi.__version__)
         self.options()
-        self.parser = commonopts(self.parser)
+        self.commonopts()
         (self.options, self.args) = self.parser.parse_args()
         self.args.pop(0)                # exclude command arg
 
@@ -60,6 +60,26 @@ class Command(object):
         pisi.ui.ui = pisi.ui.CLI(self.options.debug)
         
         self.check_auth_info()
+
+    def commonopts():
+        '''common options'''
+        p = self.parser
+        p.add_option("-D", "--destdir", action="store")
+        p.add_option("", "--yes-all", action="store_true",
+                     default=False, help = "assume yes in all yes/no queries")
+        p.add_option("-u", "--username", action="store")
+        p.add_option("-p", "--password", action="store")
+        p.add_option("-P", action="store_true", dest="getpass", default=False,
+                     help="Get password from the command line")
+        p.add_option("-v", "--verbose", action="store_true",
+                     dest="verbose", default=False,
+                     help="detailed output")
+        p.add_option("-d", "--debug", action="store_true",
+                     default=True, help="show debugging information")
+        p.add_option("-n", "--dry-run", action="store_true", default=False,
+                     help = "do not perform any action, just show what\
+                     would be done")
+        return p
 
     def options(self):
         """This is a fall back function. If the implementer module provides an
@@ -756,5 +776,15 @@ commands = {"help": Help,
             "remove-repo": RemoveRepo, 
             "list-repo": ListRepo
             }
+
+usage_text1 = """%prog <command> [options] [arguments]
+
+where <command> is one of:
+
+"""
+
+usage_text2 = """
+Use \"%prog help <command>\" for help on a specific command.
+"""
 
 usage_text = (usage_text1 + commands_string() + usage_text2)
