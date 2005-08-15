@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.7.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-08-14, 19:43:08 -->
+<!-- Saved: 2005-08-15, 15:35:13 -->
 <!-- Copyright (C) 2005 PiSi Development Team,  -->
 <Project version="3.7">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -321,6 +321,18 @@
   <Others>
     <Other>
       <Name>pisi-cli</Name>
+    </Other>
+    <Other>
+      <Dir>tests</Dir>
+      <Name>beta-light.sh</Name>
+    </Other>
+    <Other>
+      <Dir>tests</Dir>
+      <Name>beta-upgrade.sh</Name>
+    </Other>
+    <Other>
+      <Dir>tests</Dir>
+      <Name>beta.sh</Name>
     </Other>
   </Others>
   <MainScript>

@@ -46,8 +46,12 @@ class CLI:
             sys.stdout.write(msg)
             sys.stdout.flush()
 
+    def warning(self,msg):
+        sys.stdout.write(colorize('Warning:' + msg, 'purple'))
+        sys.stdout.flush()
+
     def error(self,msg):
-        sys.stdout.write(colorize(msg, 'red'))
+        sys.stdout.write(colorize('Error:' + msg, 'red'))
         sys.stdout.flush()
 
     def action(self,msg):

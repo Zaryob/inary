@@ -53,7 +53,11 @@ class PackageInfo(specfile.PackageInfo):
             specfile.PackageInfo.__init__(self, node)
             self.version = getNodeText(node, "Version")
             self.release = getNodeText(node, "Release")
-            self.build = int(getNodeText(node, "Build"))
+            build_ = getNodeText(node, "Build")
+            if build_:
+                self.build = int(build_)
+            else:
+                self.build = None
             self.distribution = getNodeText(node, "Distribution")
             self.distributionRelease = getNodeText(node, "DistributionRelease")
             self.architecture = getNodeText(node, "Architecture")
@@ -64,7 +68,8 @@ class PackageInfo(specfile.PackageInfo):
 
     def elt(self, xml):
         node = specfile.PackageInfo.elt(self, xml)
-        xml.addTextNodeUnder(node, "Build", str(self.build))
+        if self.build:
+            xml.addTextNodeUnder(node, "Build", str(self.build))
         xml.addTextNodeUnder(node, "Distribution", self.distribution)
         xml.addTextNodeUnder(node, "DistributionRelease", self.distributionRelease)
         xml.addTextNodeUnder(node, "Architecture", self.architecture)
@@ -76,7 +81,7 @@ class PackageInfo(specfile.PackageInfo):
     def has_errors(self):
         # FIXME: there should be real error msgs
         # and comment the logic here please, it isn't very clear -gurer
-        ret = (specfile.PackageInfo.has_errors(self) == None) and self.build!=None
+        ret = (specfile.PackageInfo.has_errors(self) == None)
         ret = ret and self.distribution!=None
         ret = ret and self.distributionRelease!=None
         ret = ret and self.architecture!=None and self.installedSize!=None

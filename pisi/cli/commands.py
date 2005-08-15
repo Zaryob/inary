@@ -179,6 +179,13 @@ If run without parameters, it prints the general help."""
         
         self.finalize()
 
+        
+def buildno_opts(self):
+    self.parser.add_option("", "--ignore-build-no", action="store_true",
+                           default=False,
+                           help="Don't take build no into account.")        
+
+
 class Build(Command):
     """Build a PISI package using a pspec.xml file
 
@@ -192,6 +199,9 @@ fetch all necessary files and build the package for you.
 
     def name(self):
         return ("build", "bi")
+
+    def options(self):
+        buildno_opts(self)
 
     def run(self):
         if not self.args:
@@ -251,6 +261,10 @@ specified a package name, it should exist in a specified repository.
     def name(self):
         return ("install", "it")
 
+    def options(self):
+        super(Install, self).options()
+        buildno_opts(self)
+
     def run(self):
         if not self.args:
             self.help()
@@ -274,6 +288,9 @@ specified a package name, it should exist in a specified repository.
 
     def name(self):
         return ("upgrade", "up")
+
+    def options(self):
+        buildno_opts(self)
 
     def run(self):
         if not self.args:
@@ -391,6 +408,7 @@ source and binary packages.
             return
         self.finalize()
 
+
 class ListInstalled(Command):
     """Print the list of all installed packages  
 
@@ -445,6 +463,7 @@ Synchronizes the PiSi databases with the current repository.
         for repo in self.args:
             pisi.toplevel.update_repo(repo)
         self.finalize()
+
 
 class AddRepo(Command):
     """Add a repository
@@ -584,6 +603,7 @@ class ListPending(Command):
 
         self.finalize()
 
+
 class SearchAvailable(Command):
     """Search in available packages
 
@@ -592,6 +612,7 @@ Usage: search-available <search pattern>
 FIXME: this is bogus
 """
     pass
+
 
 # Partial build commands        
 

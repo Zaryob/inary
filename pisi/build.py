@@ -248,9 +248,6 @@ class PisiBuild:
         metadata = MetaData()
         metadata.from_spec(self.spec.source, package)
 
-        # FIXME: MEREEEEEN :)
-        metadata.package.build = 0 # BOGUS. WRONG.
-        
         metadata.package.distribution = config.values.general.distribution
         metadata.package.distributionRelease = config.values.general.distribution_release
         metadata.package.architecture = "Any"
@@ -262,6 +259,20 @@ class PisiBuild:
         d = self.ctx.pkg_install_dir()
         size = util.dir_size(d)
         metadata.package.installedSize = str(size)
+        
+        # build no
+        # FIXME: @!#$%^*( MEREEEEEN :)
+        if config.options.ignore_build_no:
+            metadata.package.build = None  # means, build no information n/a
+            ui.warning('Build number is not available.')
+        else:
+            found = False
+            # TODO: find previous build in config.options.output_dir
+            if not found:
+                metadata.package.build = None
+            # TODO: else: check if metadata has changed in any significant way
+            # TODO: see if any file has changed except metadata
+
         metadata.write(os.path.join(self.ctx.pkg_dir(), const.metadata_xml))
 
     def gen_files_xml(self, package):
