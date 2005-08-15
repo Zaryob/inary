@@ -13,8 +13,10 @@
 from urlparse import urlparse
 from os.path import basename
 
+import pisi.util as util
+
 class URI(object):
-    """PUrl class provides a URL parser and simplifies working with
+    """URI class provides a URL parser and simplifies working with
     URLs."""
 
     def __init__(self, uri=None):
@@ -58,6 +60,12 @@ class URI(object):
 
     def is_remote_file(self):
         return not self.is_local_file()
+        
+    def is_absolute_path(self):
+        return util.absolute_path(self.__path)
+
+    def is_relative_path(self):
+        return not self.is_absolute_path()
         
     def set_auth_info(self, authTuple):
         if not isinstance(authTuple, tuple):

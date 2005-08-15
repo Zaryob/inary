@@ -71,7 +71,7 @@ def unzip(seq):
     return zip(*seq)
 
 def concat(l):
-    """concatenate a list of lists"""
+    '''concatenate a list of lists'''
     return reduce( lambda x,y: x+y, l )
 
 def strlist(l):
@@ -86,7 +86,7 @@ def multisplit(str, chars):
     return l
 
 def same(l):
-    "check if all elements of a sequence are equal"
+    '''check if all elements of a sequence are equal'''
     if len(l)==0:
         return True
     else:
@@ -97,7 +97,7 @@ def same(l):
         return True
 
 def prefix(a, b):
-    "check if sequence a is a prefix of sequence b"
+    '''check if sequence a is a prefix of sequence b'''
     if len(a)>len(b):
         return False
     for i in range(0,len(a)):
@@ -128,7 +128,7 @@ def run_batch(cmd):
     return (successful,lines)
 
 
-def xtermTitle(message):
+def xterm_title(message):
     """sets message as a console window's title"""
     if os.environ.has_key("TERM") and sys.stderr.isatty():
         terminalType = os.environ["TERM"]
@@ -138,11 +138,11 @@ def xtermTitle(message):
                 sys.stderr.flush()
                 break
 
-def xtermTitleReset():
+def xterm_title_reset():
     """resets console window's title"""
     if os.environ.has_key("TERM"):
         terminalType = os.environ["TERM"]
-        xtermTitle(os.environ["TERM"])
+        xterm_title(os.environ["TERM"])
 
 #############################
 # Path Processing Functions #
@@ -150,7 +150,7 @@ def xtermTitleReset():
 
 def splitpath(a):
     """split path into components and return as a list
-    os.path.split doesn't do what I want"""
+    os.path.split doesn't do what I want like removing trailing /"""
     comps = a.split(os.path.sep)
     if comps[len(comps)-1]=='':
         comps.pop()
@@ -181,6 +181,10 @@ def removepathprefix(prefix, path):
     else:
         return ""
 
+def absolute_path(path):
+    "determine if given @path is absolute"
+    comps = splitpath(path)
+    return comps[0] == ''
 
 ####################################
 # File/Directory Related Functions #
@@ -226,7 +230,7 @@ def copy_file(src,dest):
     check_dir(os.path.dirname(dest))
     shutil.copyfile(src, dest)
 
-def get_file_hashes(top, excludePrefixes=None, removePrefix=None):
+def get_file_hashes(top, exclude_prefix=None, remove_prefix=None):
     """Generator function iterates over a toplevel path and returns the
     (filePath, sha1Hash) tuple for all files. If excludePrefixes list
     is given as a parameter, function will exclude the filePaths
@@ -234,10 +238,10 @@ def get_file_hashes(top, excludePrefixes=None, removePrefix=None):
     used to remove prefix from filePath while matching excludes, if
     given."""
 
-    def hasExcludedPrefix(filename):
-        if excludePrefixes and removePrefix:
-            tempfnam = remove_prefix(removePrefix, filename)
-            for p in excludePrefixes:
+    def has_excluded_prefix(filename):
+        if exclude_prefix and remove_prefix:
+            tempfnam = remove_prefix(remove_prefix, filename)
+            for p in exclude_prefix:
                 if tempfnam.startswith(p):
                     return 1
                 else:
@@ -245,13 +249,13 @@ def get_file_hashes(top, excludePrefixes=None, removePrefix=None):
         return 0
 
     for root, dirs, files in os.walk(top, topdown=False):
-        if os.path.islink(root) and not hasExcludedPrefix(root):
+        if os.path.islink(root) and not has_excluded_prefix(root):
             #yield the symlink..
             yield (root, sha1_file(root))
-            excludePrefixes.append(remove_prefix(removePrefix, root) + "/")
+            exclude_prefix.append(remove_prefix(remove_prefix, root) + "/")
             continue
 
-        if os.path.isdir(root) and not hasExcludedPrefix(root):
+        if os.path.isdir(root) and not has_excluded_prefix(root):
             parent, r, d, f = root, '', '', ''
             for r, d, f in os.walk(parent, topdown=False): pass
             if not f and not d:
@@ -259,7 +263,7 @@ def get_file_hashes(top, excludePrefixes=None, removePrefix=None):
 
         for fname in files:
             f = os.path.join(root, fname)
-            if hasExcludedPrefix(f):
+            if has_excluded_prefix(f):
                 continue
             else:
                 yield (f, sha1_file(f))
@@ -335,4 +339,3 @@ def partition_freespace(directory):
 
 def package_name(name, version, release):
     return  name + '-' + version + '-' + release + const.package_prefix
-

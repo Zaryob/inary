@@ -76,14 +76,13 @@ def install_single_name(name, upgrade = False):
         repo = repodb.get_repo(repo)
         pkg = packagedb.get_package(name)
 
-        if repo.indexuri.is_local_file():
+        # FIXME: let pkg.packageURI be stored as URI type rather than string
+        pkg_uri = URI(pkg.packageURI)
+        if pkg_uri.is_absolute_path():
             pkg_path = str(pkg.packageURI)
         else:
-            # FIXME: determine if we have relative paths in the index
-            # rather than doing this. Requires the index to know about
-            # that related to bug 368
             pkg_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
-                                    os.path.basename(pkg.packageURI))
+                                    pkg_uri.path())
 
         ui.debug("Package URI: %s\n" % pkg_path)
 
