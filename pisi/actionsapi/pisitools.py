@@ -133,9 +133,14 @@ def doman(*sourceFiles):
             makedirs(manDIR + '/man%s' % pageDirectory) 
             os.system('install -m0644 %s %s' % (source, manDIR + '/man%s' % pageDirectory))
 
-def domo_(*sourceFiles):
+def domo(sourceFile, locale, destinationFile ):
     '''inserts the mo files in the list of files into /usr/share/locale/LOCALE/LC_MESSAGES'''
-    pass
+
+    '''example call: pisitools.domo("po/tr.po", "tr", "pam_login.mo")'''
+
+    system("msgfmt %s" % sourceFile)
+    makedirs(get.installDIR() + "/usr/share/locale/%s/LC_MESSAGES/" % locale)
+    shutil.move("messages.mo", get.installDIR() + "/usr/share/locale/%s/LC_MESSAGES/%s" % (locale, destinationFile))
 
 def domove(sourceFile, destination, destinationFile = ''):
     '''moves sourceFile/Directory into destinationFile/Directory'''
