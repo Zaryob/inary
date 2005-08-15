@@ -83,7 +83,6 @@ class Installer:
                      ' not satisfied\n')
             raise InstallError("Package not installable")
 
-    # FIXME: where is build no?
     def reinstall(self):
         "check reinstall, confirm action, and remove package if reinstall"
 
@@ -92,7 +91,18 @@ class Installer:
         if installdb.is_installed(pkg.name): # is this a reinstallation?
             (iversion, irelease, ibuild) = installdb.get_version(pkg.name)
 
-            if pkg.version == iversion and pkg.release == irelease:
+            # determine if same version
+            same_ver = False
+            ignore_build = config.options and config.options.ignore_build_no
+            if (not ibuild) or (not pkg.build) or ignore_build:
+                # we don't look at builds to compare two package versions
+                if pkg.version == iversion and pkg.release == irelease:
+                    same_ver = True
+            else:
+                if pkg.build == ibuild:
+                    same_ver = True
+
+            if same_ver:
                 if self.ask_reinstall:
                     if not ui.confirm('Re-install same version package?'):
                         raise InstallError('Package re-install declined')
@@ -106,6 +116,10 @@ class Installer:
                 elif pkg.release > irelease:
                     ui.info('Upgrading to new distribution release\n')
                     upgrade = True
+                elif ((not ignore_build) and ibuild and pkg.build
+                       and pkg.build > ibuild):
+                    ui.info('Upgrading to new distribution build\n')
+                    upgrade = True
 
                 # is this a downgrade? confirm this action.
                 if self.ask_reinstall and (not upgrade):
@@ -113,6 +127,8 @@ class Installer:
                         x = 'Downgrade to old upstream version?'
                     elif pkg.release < irelease:
                         x = 'Downgrade to old distribution release?'
+                    else:
+                        x = 'Downgrade to old distribution build?'
                     if not ui.confirm(x):
                         raise InstallError('Package downgrade declined')
 

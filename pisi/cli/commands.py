@@ -348,7 +348,6 @@ class Info(Command):
 
 Usage: info <package1> <package2> ... <packagen>
 
-TODO: Some description
 """
     def __init__(self):
         super(Info, self).__init__()

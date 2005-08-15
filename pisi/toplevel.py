@@ -208,6 +208,8 @@ def upgrade(A):
 def upgrade_pkg_names(A):
     """Re-installs packages from the repository, trying to perform
     a maximum number of upgrades."""
+    
+    ignore_build = config.options and config.options.ignore_build_no
 
     # filter packages that are not installed
     Ap = []
@@ -217,7 +219,7 @@ def upgrade_pkg_names(A):
             continue
         (version, release, build) = installdb.get_version(x)
         pkg = packagedb.get_package(x)
-        if (config.options and config.options.ignore_build_no) or (not build):
+        if ignore_build or (not build):
             if release < pkg.release:
                 Ap.append(x)
         elif build < pkg.build:
@@ -260,7 +262,11 @@ def upgrade_pkg_names(A):
                         rep_pkg = packagedb.get_package(dep.package)
                         (vp,rp,bp) = (rep_pkg.version, rep_pkg.release, 
                                       rep_pkg.build)
-                        if r >= rp:     # installed already older
+                        if ignore_build or (not b) or (not bp):
+                            # if we can't look at build
+                            if r >= rp:     # installed already new
+                                continue
+                        elif b and bp and b >= bp:
                             continue
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
