@@ -54,7 +54,7 @@ class PackageInfo(specfile.PackageInfo):
             self.version = getNodeText(node, "Version")
             self.release = getNodeText(node, "Release")
             build_ = getNodeText(node, "Build")
-            if build_:
+            if build_ != None:
                 self.build = int(build_)
             else:
                 self.build = None
@@ -68,7 +68,7 @@ class PackageInfo(specfile.PackageInfo):
 
     def elt(self, xml):
         node = specfile.PackageInfo.elt(self, xml)
-        if self.build:
+        if self.build != None:
             xml.addTextNodeUnder(node, "Build", str(self.build))
         xml.addTextNodeUnder(node, "Distribution", self.distribution)
         xml.addTextNodeUnder(node, "DistributionRelease", self.distributionRelease)

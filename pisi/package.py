@@ -106,13 +106,5 @@ class Package:
 
         return join( config.lib_dir(), packageDir)
 
-# bu fonksiyonun aynısı yukarıda başka bir isim ile var, biri fazla...
-#     def pkg_dir_aux():
-#         packageDir = self.metadata.package.name + '-' \
-#                      + self.metadata.package.version + '-' \
-#                      + self.metadata.package.release
-
-#         return join( config.lib_dir(), packageDir)
-
     def comar_dir(self):
         return self.pkg_dir() + const.comar_dir_suffix

@@ -202,6 +202,8 @@ fetch all necessary files and build the package for you.
 
     def options(self):
         buildno_opts(self)
+        self.parser.add_option("-O", "--output-dir", action="store", default=".",
+                               help="output directory for produced packages")       
 
     def run(self):
         if not self.args:
@@ -209,6 +211,8 @@ fetch all necessary files and build the package for you.
             return
 
         self.init()
+        from pisi.config import config
+        pisi.ui.ui.info('Output directory: %s\n' % config.options.output_dir)
         for arg in self.args:
             pisi.toplevel.build(arg, self.authInfo)
         self.finalize()

@@ -261,17 +261,41 @@ class PisiBuild:
         metadata.package.installedSize = str(size)
         
         # build no
-        # FIXME: @!#$%^*( MEREEEEEN :)
+        # FIXME: sovsak MEREEEEEN :)
         if config.options.ignore_build_no:
             metadata.package.build = None  # means, build no information n/a
             ui.warning('Build number is not available.')
         else:
-            found = False
-            # TODO: find previous build in config.options.output_dir
-            if not found:
-                metadata.package.build = None
-            # TODO: else: check if metadata has changed in any significant way
-            # TODO: see if any file has changed except metadata
+            old_package_fn = None
+            # find previous build in config.options.output_dir
+            # FIXME: get the newest version, make this into another fxn
+            for root, dirs, files in os.walk(config.options.output_dir):
+                if old_package_fn:
+                    break
+                for fn in files:
+                    if fn.startswith(metadata.package.name + '-') and \
+                        fn.endswith(const.package_prefix):
+                        old_package_fn = os.path.join(root, fn)
+                        ui.info('Found old version %s\n' % old_package_fn)
+                        break
+            if not old_package_fn:
+                metadata.package.build = 0
+                ui.warning('No previous build found. Setting build no to 0.\n')
+            else:
+                old_pkg = Package(old_package_fn, 'r')
+                from os.path import join
+                old_pkg.read(join(config.tmp_dir(), 'oldpkg'))
+                # TODO: check if metadata has changed in any significant way
+                # TODO: see if any file has changed except metadata
+                changed = True
+                old_build = old_pkg.metadata.package.build
+                if old_build is None:
+                    ui.warning('Old package lacks a build no! Setting build no to 0.')
+                    metadata.package.build = 0
+                elif changed:
+                    metadata.package.build = old_build + 1
+                else:
+                    metadata.package.build = old_build
 
         metadata.write(os.path.join(self.ctx.pkg_dir(), const.metadata_xml))
 
@@ -304,9 +328,25 @@ class PisiBuild:
                                      self.spec.source.version,
                                      self.spec.source.release)
             
+
+            ui.action("** Building package %s\n" % package.name);
+            
+            ui.action("Generating %s..." % const.metadata_xml)
+            self.gen_metadata_xml(package)
+            ui.info(" done.\n")
+
+            ui.action("Generating %s..." % const.files_xml)
+            self.gen_files_xml(package)
+            ui.info(" done.\n")
+
+            ui.action("Creating PISI package %s\n" % name)
+            
             pkg = Package(name, 'w')
+
             c = os.getcwd()
         
+            os.chdir(c)
+
             # add comar files to package
             os.chdir(self.pspecDir)
             for pcomar in package.providesComar:
@@ -322,21 +362,7 @@ class PisiBuild:
                 util.copy_file(src, dest)
                 if afile.permission:
                     os.chmod(dest, int(afile.permission) | 0777)
-    
-            os.chdir(c)
 
-            ui.action("** Building package %s\n" % package.name);
-            
-            ui.action("Generating %s..." % const.metadata_xml)
-            self.gen_metadata_xml(package)
-            ui.info(" done.\n")
-
-            ui.action("Generating %s..." % const.files_xml)
-            self.gen_files_xml(package)
-            ui.info(" done.\n")
-
-            ui.action("Creating PISI package %s\n" % name)
-            
             # add xmls and files
             os.chdir(self.ctx.pkg_dir())
         
