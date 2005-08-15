@@ -61,7 +61,7 @@ class Command(object):
         
         self.check_auth_info()
 
-    def commonopts():
+    def commonopts(self):
         '''common options'''
         p = self.parser
         p.add_option("-D", "--destdir", action="store")
