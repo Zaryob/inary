@@ -41,13 +41,14 @@ class InstallInfo:
         self.release = release
         self.build = build
         self.distribution = distribution
-        from time import localtime, strftime
-        self.time = localtime()
+        import time
+        self.time = time.localtime()
 
     def one_liner(self):
-        time_str = strftime("%d %b %Y %H:%M", self.time)
+        import time
+        time_str = time.strftime("%d %b %Y %H:%M", self.time)
         s = '%s,%s,%s,%s,%s,%s' % (self.state, self.version, self.release,
-                                   self.self.build, self.distribution,
+                                   self.build, self.distribution,
                                    time_str)
         return s
     
@@ -56,8 +57,10 @@ class InstallInfo:
         
     def __str__(self):
         s = "State: %s\nVersion: %s, Release: %s, Build: %s\n" % \
-            (state_map[self.state], self.version, self.release, self.build)
-        time_str = strftime("%d %b %Y %H:%M", self.time)
+            (InstallInfo.state_map[self.state], self.version,
+             self.release, self.build)
+        import time
+        time_str = time.strftime("%d %b %Y %H:%M", self.time)
         s += 'Distribution: %s, Install Time: %s\n' % (self.distribution,
                                                        time_str)
         return s
@@ -100,7 +103,7 @@ class InstallDB:
     def list_installed(self):
         list = []
         for (pkg, info) in self.d.iteritems():
-            if info.state=='i':
+            if info.state=='i' or info.state=='ip':
                 list.append(pkg)
         return list
 

@@ -426,7 +426,7 @@ Usage: list-installed
     def options(self):
         self.parser.add_option("-l", "--long", action="store_true",
                                default=False, help="show in long format")
-        self.parser.add_option("", "--detailed", action="store_true",
+        self.parser.add_option("-i", "--install-info", action="store_true",
                                default=False, help="show detailed install info")
 
     def run(self):
