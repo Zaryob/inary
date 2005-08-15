@@ -290,6 +290,7 @@ specified a package name, it should exist in a specified repository.
         return ("upgrade", "up")
 
     def options(self):
+        super(Upgrade, self).options()
         buildno_opts(self)
 
     def run(self):
@@ -425,6 +426,8 @@ Usage: list-installed
     def options(self):
         self.parser.add_option("-l", "--long", action="store_true",
                                default=False, help="show in long format")
+        self.parser.add_option("", "--detailed", action="store_true",
+                               default=False, help="show detailed install info")
 
     def run(self):
         self.init(True)
@@ -432,11 +435,15 @@ Usage: list-installed
         list = installdb.list_installed()
         list.sort()
         for pkg in list:
-            package = pisi.packagedb.get_package(pkg)
-            if not self.options.long:
-                print package.name, '-', package.summary
-            else:
+            package = pisi.packagedb.inst_packagedb.get_package(pkg)
+            inst_info = installdb.get_info(pkg)
+            if self.options.long:
                 print package
+                print inst_info
+            elif self.options.detailed:
+                print package.name, '-', inst_info.one_liner()
+            else:
+                print package.name, '-', package.summary
         self.finalize()
 
 

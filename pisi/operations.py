@@ -62,6 +62,7 @@ def install_single(pkg, upgrade = False):
     else:
         install_single_name(pkg, upgrade)
 
+# FIXME: Here and elsewhere pkg_location must be a URI
 def install_single_file(pkg_location, upgrade = False):
     """install a package file"""
     from install import Installer
@@ -82,7 +83,7 @@ def install_single_name(name, upgrade = False):
             pkg_path = str(pkg.packageURI)
         else:
             pkg_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
-                                    pkg_uri.path())
+                                    str(pkg_uri.path()))
 
         ui.debug("Package URI: %s\n" % pkg_path)
 

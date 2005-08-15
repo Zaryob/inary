@@ -30,6 +30,39 @@ class InstallDBError(pisi.Error):
     pass
 
 
+class InstallInfo:
+    # some data is replicated from packagedb.inst_packagedb
+    # we store as an object, hey, we can waste O(1) space.
+    # this is also easier to modify in the future, without
+    # requiring database upgrades! wow!
+    def __init__(self, state, version, release, build, distribution):
+        self.state = state
+        self.version = version
+        self.release = release
+        self.build = build
+        self.distribution = distribution
+        from time import localtime, strftime
+        self.time = localtime()
+
+    def one_liner(self):
+        time_str = strftime("%d %b %Y %H:%M", self.time)
+        s = '%s,%s,%s,%s,%s,%s' % (self.state, self.version, self.release,
+                                   self.self.build, self.distribution,
+                                   time_str)
+        return s
+    
+    state_map = { 'i': 'installed', 'ip':'installed-pending', 'r:removed'
+                  'p': 'purged' }
+        
+    def __str__(self):
+        s = "State: %s\nVersion: %s, Release: %s, Build: %s\n" % \
+            (state_map[self.state], self.version, self.release, self.build)
+        time_str = strftime("%d %b %Y %H:%M", self.time)
+        s += 'Distribution: %s, Install Time: %s\n' % (self.distribution,
+                                                       time_str)
+        return s
+
+
 class InstallDB:
 
     def __init__(self):
@@ -47,9 +80,9 @@ class InstallDB:
 
     def files(self, pkg):
         pkg = str(pkg)
-        (status, version, release) = self.d[pkg]
+        pkginfo = self.d[pkg]
         files = Files()
-        files.read(self.files_name(pkg,version,release))
+        files.read(self.files_name(pkg,pkginfo.version,pkginfo.release))
         return files
 
     def is_recorded(self, pkg):
@@ -59,15 +92,15 @@ class InstallDB:
     def is_installed(self, pkg):
         pkg = str(pkg)
         if self.is_recorded(pkg):
-            (status, version, release) = self.d[pkg]
-            return status=='i' or status=='ip'
+            info = self.d[pkg]
+            return info.state=='i' or info.state=='ip'
         else:
             return False
 
     def list_installed(self):
         list = []
-        for (pkg, (status,version,release)) in self.d.iteritems():
-            if status=='i':
+        for (pkg, info) in self.d.iteritems():
+            if info.state=='i':
                 list.append(pkg)
         return list
 
@@ -77,21 +110,25 @@ class InstallDB:
             list.append(pkg)
         return list
 
+    def get_info(self, pkg):
+        pkg = str(pkg)
+        return self.d[pkg]
+
     def get_version(self, pkg):
         pkg = str(pkg)
-        (status, version, release) = self.d[pkg]
-        return (version, release)
+        info = self.d[pkg]
+        return (info.version, info.release, info.build)
 
     def is_removed(self, pkg):
         pkg = str(pkg)
         if self.is_recorded(pkg):
-            (status, version, release) = self.d[pkg]
-            return status=='r'
+            info = self.d[pkg]
+            return info.state=='r'
         else:
             return False
 
-    def install(self, pkg, version, release):
-        """install package with specific version and release"""
+    def install(self, pkg, version, release, build, distro = ""):
+        """install package with specific version, release, build"""
         pkg = str(pkg)
         from pisi.config import config
         if self.is_installed(pkg):
@@ -102,21 +139,18 @@ class InstallDB:
         else:
             state = 'i'
             
-        self.d[pkg] = ('i', version, release)
+        self.d[pkg] = InstallInfo(state, version, release, build, distro)
 
     def remove(self, pkg):
         pkg = str(pkg)
-        (status, version, release) = self.d[pkg]
-        self.d[pkg] = ('r', version, release)
+        info = self.d[pkg]
+        info.state = 'r'
+        self.d[pkg] = info
 
     def purge(self, pkg):
         pkg = str(pkg)
         if self.d.has_key(pkg):
-            (status, version, release) = self.d[pkg]
             del self.d[pkg]
 
 installdb = InstallDB()
-
-#def init():
-#    installdb = InstallDB()
 

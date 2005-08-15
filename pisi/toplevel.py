@@ -215,18 +215,18 @@ def upgrade_pkg_names(A):
         if not installdb.is_installed(x):
             ui.info('Package %s is not installed.\n' % x)
             continue
-        (version, release) = installdb.get_version(x)
-        (versionp, releasep) = (packagedb.get_package(x).version,
-                                packagedb.get_package(x).release)
-        # FIXME: we should use build instead of release
-        if release < releasep:
-            Ap.append(x)
+        (version, release, build) = installdb.get_version(x)
+        pkg = packagedb.get_package(x)
+        if (config.options and config.options.ignore_build_no) or (not build):
+            if release < pkg.release:
+                Ap.append(x)
+        elif build < pkg.build:
+                Ap.append(x)
         else:
             #ui.info('Package %s cannot be upgraded. ' % x)
-            # FIXME: where is build no?
             ui.info('Package %s is already at its latest version %s,\
- release %s, build ?.\n'
-                    % (x, versionp, releasep))
+ release %s, build %s.\n'
+                    % (x, pkg.version, pkg.release, pkg.build))
     A = Ap
 
     if len(A)==0:
@@ -256,10 +256,10 @@ def upgrade_pkg_names(A):
                 # add packages that can be upgraded
                 if dependency.repo_satisfies_dep(dep):
                     if installdb.is_installed(dep.package):
-                        #FIXME: use build no
-                        (v,r) = installdb.get_version(dep.package)
+                        (v,r,b) = installdb.get_version(dep.package)
                         rep_pkg = packagedb.get_package(dep.package)
-                        (vp,rp) = (rep_pkg.version, rep_pkg.release)
+                        (vp,rp,bp) = (rep_pkg.version, rep_pkg.release, 
+                                      rep_pkg.build)
                         if r >= rp:     # installed already older
                             continue
                     if not dep.package in G_f.vertices():

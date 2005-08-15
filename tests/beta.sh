@@ -3,13 +3,13 @@
 set -x # xtrace
 set -e # errexit
 
-echo "alpha functionality test script"
+echo "beta functionality test script"
 echo "working directory:" `pwd`
 echo "cleaning destination dir: tmp"
 rm -rf tmp
 #echo "*** build tests"
-pisi-cli build https://svn.uludag.org.tr/pisi/trunk/z/zip/pspec.xml \
-    https://svn.uludag.org.tr/pisi/trunk/u/unzip/pspec.xml
+pisi-cli build https://svn.uludag.org.tr/pisi/trunk/system/base/zip/pspec.xml \
+    https://svn.uludag.org.tr/pisi/trunk/system/base/unzip/pspec.xml
 
 #partial-builds
 pisi-cli build-dosetup https://svn.uludag.org.tr/pisi/trunk/system/base/hdparm/pspec.xml

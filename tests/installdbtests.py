@@ -26,10 +26,10 @@ class InstallDBTestCase(unittest.TestCase):
         
     def testInstall(self):
         installdb.purge('installtest')
-        installdb.install('installtest', '0.1', '2')
+        installdb.install('installtest', '0.1', '2', '3')
 
     def testRemovePurge(self):
-        installdb.install('installtest', '0.1', '2')
+        installdb.install('installtest', '0.1', '2', '3')
         self.assert_(installdb.is_installed('installtest'))
         installdb.remove('installtest')
         self.assert_(installdb.is_removed('installtest'))

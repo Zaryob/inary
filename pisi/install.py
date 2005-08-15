@@ -61,7 +61,6 @@ class Installer:
 
     def check_requirements(self):
         """check system requirements"""
-        
         #TODO: IS THERE ENOUGH SPACE?
         # what to do if / is split into /usr, /var, etc.
         pass
@@ -77,20 +76,21 @@ class Installer:
         for pkg in self.metadata.package.conflicts:
             if installdb.is_installed(self.pkginfo):
                 raise InstallError("Package conflicts " + pkg)
-    
+
         # check dependencies
         if not dependency.installable(self.pkginfo.name):
             ui.error('Dependencies for ' + self.pkginfo.name +
                      ' not satisfied\n')
             raise InstallError("Package not installable")
 
+    # FIXME: where is build no?
     def reinstall(self):
         "check reinstall, confirm action, and remove package if reinstall"
 
         pkg = self.pkginfo
-        
+
         if installdb.is_installed(pkg.name): # is this a reinstallation?
-            (iversion, irelease) = installdb.get_version(pkg.name)
+            (iversion, irelease, ibuild) = installdb.get_version(pkg.name)
 
             if pkg.version == iversion and pkg.release == irelease:
                 if self.ask_reinstall:
@@ -162,7 +162,9 @@ class Installer:
         # installdb
         installdb.install(self.metadata.package.name,
                           self.metadata.package.version,
-                          self.metadata.package.release)
+                          self.metadata.package.release,
+                          self.metadata.package.build,
+                          self.metadata.package.distribution)
 
         # installed packages
         inst_packagedb.add_package(self.pkginfo)

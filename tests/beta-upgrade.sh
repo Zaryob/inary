@@ -11,7 +11,7 @@ mkdir -p myrepo
 cd myrepo
 ../pisi-cli build ../tests/zip2/pspec.xml ../tests/unzip2/pspec.xml
 cd ..
-pisi-cli index myrepo
+pisi-cli --absolute-uris index myrepo
 pisi-cli remove-repo repo1
 pisi-cli add-repo repo1 pisi-index.xml
 pisi-cli list-repo
