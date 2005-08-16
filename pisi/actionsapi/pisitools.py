@@ -91,7 +91,7 @@ def dolib(sourceFile, destinationDirectory = '/usr/lib'):
     sourceFile = os.path.join(os.getcwd(), sourceFile)
     destinationDirectory = get.installDIR() + destinationDirectory
 
-    lib_insinto(sourceFile, destinationDirectory, 0755)
+    lib_insinto(sourceFile, destinationDirectory, 755)
     
 def dolib_a(sourceFile, destinationDirectory = '/usr/lib'):
     '''insert the static library into /usr/lib with permission 0644'''
@@ -101,7 +101,7 @@ def dolib_a(sourceFile, destinationDirectory = '/usr/lib'):
     sourceFile = os.path.join(os.getcwd(), sourceFile)
     destinationDirectory = get.installDIR() + destinationDirectory
 
-    lib_insinto(sourceFile, destinationDirectory, 0644)
+    lib_insinto(sourceFile, destinationDirectory, 644)
 
 def dolib_so(sourceFile, destinationDirectory = '/usr/lib'):
     '''insert the static library into /usr/lib with permission 0755'''
@@ -111,7 +111,7 @@ def dolib_so(sourceFile, destinationDirectory = '/usr/lib'):
     sourceFile = os.path.join(os.getcwd(), sourceFile)
     destinationDirectory = get.installDIR() + destinationDirectory
 
-    lib_insinto(sourceFile, destinationDirectory, 0755)
+    lib_insinto(sourceFile, destinationDirectory, 755)
 
 def doman(*sourceFiles):
     '''inserts the man pages in the list of files into /usr/share/man/'''
