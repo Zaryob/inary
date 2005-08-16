@@ -294,26 +294,30 @@ class PisiBuild:
         #NOTE: not functional yet..
         old_package_fn = None
         # find previous build in config.options.output_dir
-        # FIXME: get the newest version, make this into another fxn
+        found = []
         for root, dirs, files in os.walk(config.options.output_dir):
-            if old_package_fn:
-                break
             for fn in files:
                 if fn.startswith(package_name + '-') and \
                     fn.endswith(const.package_prefix):
                     old_package_fn = os.path.join(root, fn)
                     ui.info('(found old version %s)' % old_package_fn)
-                    break
-        if not old_package_fn:
+                    old_pkg = Package(old_package_fn, 'r')
+                    from os.path import join
+                    old_pkg.read(join(config.tmp_dir(), 'oldpkg'))
+                    old_build = old_pkg.metadata.package.build
+                    found.append( (old_package_fn, old_build) )
+        if not found:
             return 0
             ui.warning('(no previous build found, setting build no to 0.)')
         else:
-            old_pkg = Package(old_package_fn, 'r')
-            from os.path import join
-            old_pkg.read(join(config.tmp_dir(), 'oldpkg'))
+            a = filter(lambda (x,y): y != None, found)
+            if a:
+                a.sort(lambda x,y : cmp(x[1],y[1]))
+                old_build = a[0][1]
+            else:
+                old_build = None
             # TODO: compare old files.xml with the new one..
             changed = True
-            old_build = old_pkg.metadata.package.build
             if old_build is None:
                 ui.warning('(old package lacks a build no, setting build no to 0.)')
                 return 0
