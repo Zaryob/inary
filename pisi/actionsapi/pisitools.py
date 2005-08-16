@@ -88,7 +88,7 @@ def dolib(sourceFile, destinationDirectory = '/usr/lib'):
     '''example call: pisitools.dolib_a("libz.a")'''
     '''example call: pisitools.dolib_a("libz.so")'''
     #FIXME: Glob needed?
-    sourceFile = os.path.join(get.workDIR(), get.srcDIR(), sourceFile)
+    sourceFile = os.path.join(os.getcwd(), sourceFile)
     destinationDirectory = get.installDIR() + destinationDirectory
 
     lib_insinto(sourceFile, destinationDirectory, 0755)
@@ -98,7 +98,7 @@ def dolib_a(sourceFile, destinationDirectory = '/usr/lib'):
     
     '''example call: pisitools.dolib_a("staticlib/libvga.a")'''
     #FIXME: Glob needed?
-    sourceFile = os.path.join(get.workDIR(), get.srcDIR(), sourceFile)
+    sourceFile = os.path.join(os.getcwd(), sourceFile)
     destinationDirectory = get.installDIR() + destinationDirectory
 
     lib_insinto(sourceFile, destinationDirectory, 0644)
@@ -108,7 +108,7 @@ def dolib_so(sourceFile, destinationDirectory = '/usr/lib'):
     
     '''example call: pisitools.dolib_so("pppd/plugins/minconn.so")'''
     #FIXME: Glob needed?
-    sourceFile = os.path.join(get.workDIR(), get.srcDIR(), sourceFile)
+    sourceFile = os.path.join(os.getcwd(), sourceFile)
     destinationDirectory = get.installDIR() + destinationDirectory
 
     lib_insinto(sourceFile, destinationDirectory, 0755)
