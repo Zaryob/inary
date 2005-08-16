@@ -11,3 +11,10 @@
 # pisi.cli package version
 __version__ = "0.1"
 
+import pisi
+
+class Error(pisi.Error):
+    pass
+
+class Exception(pisi.Exception):
+    pass

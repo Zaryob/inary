@@ -14,33 +14,40 @@ import sys
 from optparse import OptionParser
 
 import pisi
+import pisi.cli
 from pisi.uri import URI
-
-
-def commands_string():
-    s = ''
-    list = commands.keys()
-    list.sort()
-    for x in list:
-        s += x + '\n'
-    return s
-
-
-def get_command(cmd, fail=False):
-
-    if commands.has_key(cmd):
-        obj = commands[cmd]()
-        return obj
-
-    if fail:
-        print "Unrecognized command: ", cmd
-        sys.exit(1)
-    else:
-        return None
 
 
 class Command(object):
     """generic help string for any command"""
+
+    # class variables
+
+    cmd = []
+    cmd_dict = {}
+
+    def commands_string():
+        s = ''
+        list = [x.name[0] for x in Command.cmd]
+        list.sort()
+        for x in list:
+            s += x + '\n'
+        return s
+    commands_string = staticmethod(commands_string)
+    
+    def get_command(cmd, fail=False):
+    
+        if Command.cmd_dict.has_key(cmd):
+            return Command.cmd_dict[cmd]()
+    
+        if fail:
+            print "Unrecognized command: ", cmd
+            sys.exit(1)
+        else:
+            return None
+    get_command = staticmethod(get_command)
+
+    # instance variabes
 
     def __init__(self):
         # now for the real parser
@@ -124,12 +131,15 @@ class Command(object):
         """do cleanup work for PiSi components"""
         pass
         
-    def name(self):
-        """(command name, shortname) pair to be filled by subclasses"""
-        pass
+    #def name(self):
+    #    """(command name, shortname) pair to be filled by subclasses"""
+    #    pass
+
+    def get_name(self):
+        return self.__class__.longname
 
     def format_name(self):
-        (name, shortname) = self.name()
+        (name, shortname) = self.get_name()
         if shortname:
             return "%s (%s)" % (name, shortname)
         else:
@@ -147,6 +157,24 @@ class Command(object):
         sys.exit(-1)
 
 
+class autocommand(type):
+    def __init__(cls, name, bases, dict):
+        super(autocommand, cls).__init__(name, bases, dict)
+        Command.cmd.append(cls)
+        name = getattr(cls, 'name', None)
+        if name is None:
+            raise pisi.cli.Error('command lacks name')
+        longname, shortname = name
+        def add_cmd(cmd):
+            if Command.cmd_dict.has_key(cmd):
+                raise pisi.cli.Error('duplicate command %s' % cmd)
+            else:
+                Command.cmd_dict[cmd] = cls
+        add_cmd(longname)
+        if shortname:
+            add_cmd(shortname)
+            
+
 class Help(Command):
     """Prints help for given commands.
 
@@ -154,14 +182,15 @@ Usage: help [ <command1> <command2> ... <commandn> ]
 
 If run without parameters, it prints the general help."""
 
+    __metaclass__ = autocommand
+
     def __init__(self):
         #TODO? Discard Help's own usage doc in favor of general usage doc
         #self.__doc__ = usage_text
         #self.__doc__ += commands_string()
         super(Help, self).__init__()
 
-    def name(self):
-        return ("help", "h")
+    name = ("help", "h")
 
     def run(self):
         if not self.args:
@@ -193,11 +222,12 @@ Usage: build <pspec.xml>
 You can give a URI of the pspec.xml file. PISI will
 fetch all necessary files and build the package for you.
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(Build, self).__init__()
 
-    def name(self):
-        return ("build", "bi")
+    name = ("build", "bi")
 
     def options(self):
         buildno_opts(self)
@@ -258,11 +288,12 @@ Usage: install <package1> <package2> ... <packagen>
 You may use filenames, URIs or package names for packages. If you have
 specified a package name, it should exist in a specified repository.
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(Install, self).__init__()
 
-    def name(self):
-        return ("install", "it")
+    name = "install", "it"
 
     def options(self):
         super(Install, self).options()
@@ -286,11 +317,12 @@ Usage: Upgrade <package1> <package2> ... <packagen>
 You may use filenames, URIs or package names for packages. If you have
 specified a package name, it should exist in a specified repository.
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(Upgrade, self).__init__()
 
-    def name(self):
-        return ("upgrade", "up")
+    name = ("upgrade", "up")
 
     def options(self):
         super(Upgrade, self).options()
@@ -313,11 +345,12 @@ Usage: remove <package1> <package2> ... <packagen>
 
 Remove package(s) from your system. Just give the package names to remove.
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(Remove, self).__init__()
 
-    def name(self):
-        return ("remove", "rm")
+    name = ("remove", "rm")
 
     def run(self):
         if not self.args:
@@ -336,11 +369,12 @@ Usage: Upgrade
 
 Upgrade the entire system.
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(Upgrade, self).__init__()
 
-    def name(self):
-        return ("upgrade-all", None)
+    name = ("upgrade-all", None)
 
     def options(self):
         super(UpgradeAll, self).options()
@@ -360,11 +394,12 @@ class ConfigurePending(PackageOp):
     """configure pending packages
     """
     
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(ConfigurePending, self).__init__()
 
-    def name(self):
-        return ("configure-pending", "cp")
+    name = ("configure-pending", "cp")
 
     def run(self):
 
@@ -379,11 +414,12 @@ class Info(Command):
 Usage: info <package1> <package2> ... <packagen>
 
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(Info, self).__init__()
 
-    def name(self):
-        return ("info", "i")
+    name = ("info", "i")
 
     def options(self):
         self.parser.add_option("-f", "--files", action="store_true",
@@ -428,11 +464,12 @@ tags from them and accumulates the information in an output XML file,
 named by default 'pisi-index.xml'. In particular, it indexes both
 source and binary packages.
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(Index, self).__init__()
 
-    def name(self):
-        return ("index", "ix")
+    name = ("index", "ix")
 
     def options(self):
         self.parser.add_option("-a", "--absolute-uris", action="store_true",
@@ -461,11 +498,12 @@ Usage: list-installed
 
 """
 
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(ListInstalled, self).__init__()
 
-    def name(self):
-        return ("list-installed", "li")
+    name = ("list-installed", "li")
 
     def options(self):
         self.parser.add_option("-l", "--long", action="store_true",
@@ -502,11 +540,12 @@ Usage: update-repo <repo1> <repo2> ... <repon>
 <repoi>: repository name
 Synchronizes the PiSi databases with the current repository.
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(UpdateRepo, self).__init__()
 
-    def name(self):
-        return ("update-repo", "ur")
+    name = ("update-repo", "ur")
 
     def run(self):
         if not self.args:
@@ -529,11 +568,12 @@ Usage: add-repo <repo> <indexuri>
 
 NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(AddRepo, self).__init__()
 
-    def name(self):
-        return ("add-repo", "ar")
+    name = ("add-repo", "ar")
 
     def run(self):
 
@@ -555,11 +595,12 @@ Usage: remove-repo <repo1> <repo2> ... <repon>
 
 Remove all repository information from the system.
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(RemoveRepo, self).__init__()
 
-    def name(self):
-        return ("remove-repo", "rr")
+    name = ("remove-repo", "rr")
 
     def run(self):
 
@@ -580,11 +621,12 @@ Usage: list-repo
 
 Lists currently tracked repositories.
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(ListRepo, self).__init__()
 
-    def name(self):
-        return ("list-repo", "lr")
+    name = ("list-repo", "lr")
 
     def run(self):
 
@@ -603,11 +645,12 @@ Usage: list-available [ <repo1> <repo2> ... repon ]
 
 Gives a brief list of PiSi components published in the repository.
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(ListAvailable, self).__init__()
 
-    def name(self):
-        return ("list-available", "li")
+    name = ("list-available", "la")
 
     def run(self):
         from pisi.repodb import repodb
@@ -638,11 +681,12 @@ Gives a brief list of PiSi components published in the repository.
 class ListPending(Command):
     """List pending packages"""
     
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(ListPending, self).__init__()
     
-    def name(self):
-        return ("list-pending", "lp")
+    name = ("list-pending", "lp")
 
     def run(self):
         from pisi.installdb import installdb
@@ -682,11 +726,12 @@ You can give an URI of the pspec.xml file. PISI will fetch all
 necessary files and unpack the source and prepare a source directory
 for you.
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(BuildUntil, self).__init__()
 
-    def name(self):
-        return ("build-until", "bu")
+    name = ("build-until", "bu")
 
     def options(self):
         self.parser.add_option("-s", action="store", dest="state")
@@ -712,11 +757,12 @@ Usage: build-dounpack <pspec file>
 
 TODO: desc.
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(BuildUnpack, self).__init__()
 
-    def name(self):
-        return ("build-unpack", "biu")
+    name = ("build-unpack", "biu")
 
     def run(self):
         if not self.args:
@@ -736,11 +782,12 @@ Usage: build-dosetup <pspec file>
 
 TODO: desc.
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(BuildSetup, self).__init__()
 
-    def name(self):
-        return ("build-setup", "bis")
+    name = ("build-setup", "bis")
 
     def run(self):
         if not self.args:
@@ -761,11 +808,12 @@ Usage: build-dobuild <pspec file>
 
 TODO: desc.
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(BuildBuild, self).__init__()
 
-    def name(self):
-        return ("build-dobuild", "bib")
+    name = ("build-dobuild", "bib")
 
     def run(self):
         if not self.args:
@@ -785,11 +833,12 @@ Usage: build-doinstall <pspec file>
 
 TODO: desc.
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(BuildInstall, self).__init__()
 
-    def name(self):
-        return ("build-doinstall", "bii")
+    name = ("build-doinstall", "bii")
 
     def run(self):
         if not self.args:
@@ -810,11 +859,12 @@ Usage: build-dobuild <pspec file>
 
 TODO: desc.
 """
+    __metaclass__ = autocommand
+
     def __init__(self):
         super(BuildPackage, self).__init__()
 
-    def name(self):
-        return ("build-dopackage", "bip")
+    name = ("build-dopackage", "bip")
 
     def run(self):
         if not self.args:
@@ -826,32 +876,6 @@ TODO: desc.
             pisi.toplevel.build_until(arg, "buildpackages", self.authInfo)
         self.finalize()
 
-# command dictionary
-
-commands = {"help": Help,
-            "build": Build,
-            "build-until": BuildUntil,
-            "build-unpack": BuildUnpack,
-            "build-setup": BuildSetup,
-            "build-build": BuildBuild,
-            "build-install": BuildInstall,
-            "build-package": BuildPackage,
-            "info": Info,
-            "install": Install,
-            "configure-pending": ConfigurePending,
-            "list-pending": ListPending,
-            "list-installed": ListInstalled,
-            "list-available": ListAvailable,
-            "search-available": SearchAvailable,
-            "remove": Remove,
-            "upgrade": Upgrade,
-            "index": Index,
-            "update-repo": UpdateRepo, 
-            "add-repo": AddRepo, 
-            "remove-repo": RemoveRepo, 
-            "list-repo": ListRepo
-            }
-
 usage_text1 = """%prog <command> [options] [arguments]
 
 where <command> is one of:
@@ -862,4 +886,4 @@ usage_text2 = """
 Use \"%prog help <command>\" for help on a specific command.
 """
 
-usage_text = (usage_text1 + commands_string() + usage_text2)
+usage_text = (usage_text1 + Command.commands_string() + usage_text2)

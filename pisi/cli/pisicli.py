@@ -52,7 +52,7 @@ class PisiCLI(object):
                 self.die()
             cmd = self.parser.rargs[0]
 
-        self.command = get_command(cmd)
+        self.command = Command.get_command(cmd)
         if not self.command:
             print "Unrecognized command: ", cmd
             self.die()
