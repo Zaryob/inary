@@ -329,6 +329,33 @@ Remove package(s) from your system. Just give the package names to remove.
         self.finalize()
 
 
+class UpgradeAll(PackageOp):
+    """Upgrade system
+
+Usage: Upgrade
+
+Upgrade the entire system.
+"""
+    def __init__(self):
+        super(Upgrade, self).__init__()
+
+    def name(self):
+        return ("upgrade-all", None)
+
+    def options(self):
+        super(UpgradeAll, self).options()
+        buildno_opts(self)
+
+    def run(self):
+        if self.args:
+            self.help()
+            return
+
+        self.init()
+        pisi.toplevel.upgrade(installdb.list_installed())
+        self.finalize()
+
+
 class ConfigurePending(PackageOp):
     """configure pending packages
     """

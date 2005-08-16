@@ -29,7 +29,7 @@ from pisi.metadata import MetaData
 from pisi.package import Package
 
 
-class PisiBuildError(pisi.Error):
+class Error(pisi.Error):
     pass
 
 
@@ -70,6 +70,8 @@ def check_path_collision(package, pkgList):
                 # path.pathname: /usr/share/doc
                 if util.subpath(pinfo.pathname, path.pathname):
                     collisions.append(path.pathname)
+                    ui.error('Path %s belongs in multiple packages\n' %
+                             path.pathname)
     return collisions
 
 
@@ -199,7 +201,7 @@ class PisiBuild:
         """Calls the corresponding function in actions.py. 
 
         If mandatory parameter is True, and function is not present in
-        actionLocals PisiBuildError will be raised."""
+        actionLocals pisi.build.Error will be raised."""
         # we'll need our working directory after actionscript
         # finished its work in the archive source directory.
         curDir = os.getcwd()
@@ -210,7 +212,7 @@ class PisiBuild:
             self.actionLocals[func]()
         else:
             if mandatory:
-                PisiBuildError, "unable to call function from actions: %s" %func
+                Error, "unable to call function from actions: %s" %func
 
         os.chdir(curDir)
 
@@ -269,7 +271,10 @@ class PisiBuild:
         files = Files()
         install_dir = self.ctx.pkg_install_dir()
         collisions = check_path_collision(package,
-                                        self.spec.packages)
+                                          self.spec.packages)
+        if collisions:
+            raise Error('Path collisions detected')
+        d = {}
         for pinfo in package.paths:
             path = install_dir + pinfo.pathname
             for fpath, fhash in util.get_file_hashes(path, collisions, install_dir):
@@ -279,8 +284,9 @@ class PisiBuild:
                     fsize = str(os.path.getsize(fpath))
                 except OSError:
                     fsize = "0"
-                files.append(FileInfo(frpath, ftype, fsize, fhash))
-
+                d[frpath] = FileInfo(frpath, ftype, fsize, fhash)
+        for (p, fileinfo) in d.iteritems():
+            files.append(fileinfo)
         files.write(os.path.join(self.ctx.pkg_dir(), const.files_xml))
         self.files = files
 
