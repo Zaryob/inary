@@ -18,7 +18,7 @@ from pisi.ui import ui
 def handle_exception(exception, value, tb):
     import traceback
     import exceptions
-    import pisi.xmlext.XmlError as XmlError
+    from pisi.xmlext import XmlError
     from pisi.ui import ui
 
     if exception == exceptions.KeyboardInterrupt:
