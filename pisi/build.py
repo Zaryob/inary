@@ -261,41 +261,11 @@ class PisiBuild:
         metadata.package.installedSize = str(size)
         
         # build no
-        # FIXME: sovsak MEREEEEEN :)
         if config.options.ignore_build_no:
             metadata.package.build = None  # means, build no information n/a
-            ui.warning('Build number is not available.')
+            ui.warning('build number is not available.')
         else:
-            old_package_fn = None
-            # find previous build in config.options.output_dir
-            # FIXME: get the newest version, make this into another fxn
-            for root, dirs, files in os.walk(config.options.output_dir):
-                if old_package_fn:
-                    break
-                for fn in files:
-                    if fn.startswith(metadata.package.name + '-') and \
-                        fn.endswith(const.package_prefix):
-                        old_package_fn = os.path.join(root, fn)
-                        ui.info('Found old version %s\n' % old_package_fn)
-                        break
-            if not old_package_fn:
-                metadata.package.build = 0
-                ui.warning('No previous build found. Setting build no to 0.\n')
-            else:
-                old_pkg = Package(old_package_fn, 'r')
-                from os.path import join
-                old_pkg.read(join(config.tmp_dir(), 'oldpkg'))
-                # TODO: check if metadata has changed in any significant way
-                # TODO: see if any file has changed except metadata
-                changed = True
-                old_build = old_pkg.metadata.package.build
-                if old_build is None:
-                    ui.warning('Old package lacks a build no! Setting build no to 0.')
-                    metadata.package.build = 0
-                elif changed:
-                    metadata.package.build = old_build + 1
-                else:
-                    metadata.package.build = old_build
+            metadata.package.build = self.get_build_number(metadata.package.name)
 
         metadata.write(os.path.join(self.ctx.pkg_dir(), const.metadata_xml))
 
@@ -319,6 +289,40 @@ class PisiBuild:
 
         files.write(os.path.join(self.ctx.pkg_dir(), const.files_xml))
 
+    def get_build_number(self, package_name):
+        """Generate build number"""
+        #NOTE: not functional yet..
+        old_package_fn = None
+        # find previous build in config.options.output_dir
+        # FIXME: get the newest version, make this into another fxn
+        for root, dirs, files in os.walk(config.options.output_dir):
+            if old_package_fn:
+                break
+            for fn in files:
+                if fn.startswith(package_name + '-') and \
+                    fn.endswith(const.package_prefix):
+                    old_package_fn = os.path.join(root, fn)
+                    ui.info('(found old version %s)' % old_package_fn)
+                    break
+        if not old_package_fn:
+            return 0
+            ui.warning('(no previous build found, setting build no to 0.)')
+        else:
+            old_pkg = Package(old_package_fn, 'r')
+            from os.path import join
+            old_pkg.read(join(config.tmp_dir(), 'oldpkg'))
+            # TODO: compare old files.xml with the new one..
+            changed = True
+            old_build = old_pkg.metadata.package.build
+            if old_build is None:
+                ui.warning('(old package lacks a build no, setting build no to 0.)')
+                return 0
+            elif changed:
+                return old_build + 1
+            else:
+                return old_build
+
+
     def build_packages(self):
         """Build each package defined in PSPEC file. After this process there
         will be .pisi files hanging around, AS INTENDED ;)"""
@@ -330,13 +334,13 @@ class PisiBuild:
             
 
             ui.action("** Building package %s\n" % package.name);
-            
-            ui.action("Generating %s..." % const.metadata_xml)
-            self.gen_metadata_xml(package)
-            ui.info(" done.\n")
 
             ui.action("Generating %s..." % const.files_xml)
             self.gen_files_xml(package)
+            ui.info(" done.\n")
+           
+            ui.action("Generating %s..." % const.metadata_xml)
+            self.gen_metadata_xml(package)
             ui.info(" done.\n")
 
             ui.action("Creating PISI package %s\n" % name)
