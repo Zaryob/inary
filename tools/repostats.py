@@ -79,6 +79,7 @@ maxpy_lines = 0
 maxpy_name = None
 paknames = {}
 dependencies = Histogram()
+types = Histogram()
 
 errors = []
 
@@ -106,6 +107,9 @@ for pak in paks:
         pass
     nr_binpaks += len(spec.packages)
     nr_patches += len(spec.source.patches)
+    for p in spec.packages:
+        for x in p.paths:
+            types.add(x.fileType)
     paknames[spec.source.name] = 1
     add_deps(dependencies, spec)
     if len(spec.source.patches) > mostp_count:
@@ -154,6 +158,11 @@ print "</table>"
 
 print "<h1>Lisanslar</h1><table>"
 for name,cnt in licenses.get_list():
+    print "<tr><td>%s</td><td>%s</td></tr>" % (name, cnt)
+print "</table>"
+
+print "<h1>Dosya tipleri</h1><table>"
+for name,cnt in types.get_list():
     print "<tr><td>%s</td><td>%s</td></tr>" % (name, cnt)
 print "</table>"
 
