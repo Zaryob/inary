@@ -23,7 +23,7 @@
 #           Baris Metin <baris@uludag.org.tr
 
 import xml.dom.minidom as mdom
-from xml.parsers.expat import ExpatError as ExpatError
+from xml.parsers.expat import ExpatError
 import codecs
 
 from xmlext import *
