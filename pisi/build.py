@@ -265,9 +265,10 @@ class PisiBuild:
             metadata.package.build = None  # means, build no information n/a
             ui.warning('build number is not available.')
         else:
-            metadata.package.build = self.get_build_number(metadata.package.name)
+            metadata.package.build = self.calc_build_no(metadata.package.name)
 
         metadata.write(os.path.join(self.ctx.pkg_dir(), const.metadata_xml))
+        self.metadata = metadata
 
     def gen_files_xml(self, package):
         """Generetes files.xml using the path definitions in specfile and
@@ -288,11 +289,11 @@ class PisiBuild:
                 files.append(FileInfo(frpath, ftype, fsize, fhash))
 
         files.write(os.path.join(self.ctx.pkg_dir(), const.files_xml))
+        self.files = files
 
-    def get_build_number(self, package_name):
-        """Generate build number"""
-        #NOTE: not functional yet..
-        old_package_fn = None
+    def calc_build_no(self, package_name):
+        """Calculate build number"""
+
         # find previous build in config.options.output_dir
         found = []
         for root, dirs, files in os.walk(config.options.output_dir):
@@ -313,11 +314,37 @@ class PisiBuild:
             a = filter(lambda (x,y): y != None, found)
             if a:
                 a.sort(lambda x,y : cmp(x[1],y[1]))
+                old_package_fn = a[0][0]
                 old_build = a[0][1]
             else:
                 old_build = None
-            # TODO: compare old files.xml with the new one..
-            changed = True
+
+            # compare old files.xml with the new one..
+            old_pkg = Package(old_package_fn, 'r')
+            from os.path import join
+            old_pkg.read(join(config.tmp_dir(), 'oldpkg'))
+
+            # FIXME: TAKE INTO ACCOUNT MINOR CHANGES IN METADATA
+            changed = False
+            fnew = self.files.list
+            fold = old_pkg.files.list
+            fold.sort(lambda x,y : cmp(x.path,y.path))
+            fnew.sort(lambda x,y : cmp(x.path,y.path))
+            if len(fnew) != len(fold):
+                changed = True
+            else:
+                for i in range(len(fold)):
+                    fo = fold.pop(0)
+                    fn = fnew.pop(0)
+                    if fo.path != fn.path:
+                        changed = True
+                        break
+                    else:
+                        if fo.hash != fn.hash:
+                            changed = True
+                            break
+
+            # set build number
             if old_build is None:
                 ui.warning('(old package lacks a build no, setting build no to 0.)')
                 return 0
@@ -325,7 +352,6 @@ class PisiBuild:
                 return old_build + 1
             else:
                 return old_build
-
 
     def build_packages(self):
         """Build each package defined in PSPEC file. After this process there

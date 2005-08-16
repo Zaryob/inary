@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.7.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-08-15, 15:35:13 -->
-<!-- Copyright (C) 2005 PiSi Development Team,  -->
+<!-- Saved: 2005-08-16, 12:33:37 -->
+<!-- Copyright (C) 2005 PiSi Development Team, pisi@uludag.org.tr -->
 <Project version="3.7">
   <ProgLanguage mixed="0">Python</ProgLanguage>
   <UIType>Qt</UIType>
   <Description>The package management software of Pardus distribution.
 </Description>
+  <Version>0.2</Version>
   <Author>PiSi Development Team</Author>
-  <Email></Email>
+  <Email>pisi@uludag.org.tr</Email>
   <Sources>
     <Source>
       <Dir>tools</Dir>
@@ -142,11 +143,6 @@
       <Dir>pisi</Dir>
       <Dir>actionsapi</Dir>
       <Name>coreutils.py</Name>
-    </Source>
-    <Source>
-      <Dir>pisi</Dir>
-      <Dir>cli</Dir>
-      <Name>common.py</Name>
     </Source>
     <Source>
       <Dir>pisi</Dir>
