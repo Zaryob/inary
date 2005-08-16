@@ -87,13 +87,12 @@ Legend:
      - internet: http/ftp
      - local repository
      - cdrom dvd 
- - UI
+ / UI
    - ask alternatives to choose from (eray)
    - pyqt UI class to interface
    - PISIMAT
-   - installation
-   - remove
-   - upgrade
+   / pykde GUI (cartman)
+   + metaclass coolness for CLI command framework (eray)
  - partial caching and automatic resume for file download (meren)
   - use a separate "partial/" subdir like urpmi
  / exception handling (baris)

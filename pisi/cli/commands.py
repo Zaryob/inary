@@ -136,7 +136,7 @@ class Command(object):
     #    pass
 
     def get_name(self):
-        return self.__class__.longname
+        return self.__class__.name
 
     def format_name(self):
         (name, shortname) = self.get_name()
@@ -201,7 +201,7 @@ If run without parameters, it prints the general help."""
         self.init()
         
         for arg in self.args:
-            obj = get_command(arg, True)
+            obj = Command.get_command(arg, True)
             obj.help()
             print
         
