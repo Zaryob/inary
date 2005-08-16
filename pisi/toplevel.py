@@ -17,6 +17,7 @@ ver = sys.version_info
 if ver[0] <= 2 and ver[1] < 4:
     from sets import Set as set
 
+import pisi
 from pisi.config import config
 from pisi.constants import const
 from pisi.ui import ui
@@ -30,7 +31,7 @@ from pisi.repodb import repodb
 from pisi.installdb import installdb
 from pisi.index import Index
 
-class Error:
+class Error(pisi.Error):
     pass
 
 def install(packages):
@@ -340,13 +341,34 @@ def configure_pending():
     # configure them in reverse topological order of configuration dependency
     pass
 
-def info(package_name):
+def info(package):
+    if package.endswith(const.package_prefix):
+        return info_file(package)
+    else:
+        return info_name(package)
+    
+def info_file(package):
     from package import Package
+
+    if not os.path.exist(package):
+        raise Error ('File %s not found' % package)
 
     package = Package(package_name)
     package.read()
     return package.metadata, package.files
 
+def info_name(package_name):
+    if packagedb.has_package(package_name):
+        package = packagedb.get_package(package_name)
+        from pisi.metadata import MetaData
+        metadata = MetaData()
+        metadata.package = package
+        #FIXME: get it from sourcedb
+        metadata.source = None
+        files = installdb.files(package.name)
+        return metadata, files
+    else:
+        raise Error('Package %s not installed' % package_name)
 
 def index(repo_dir = '.'):
 

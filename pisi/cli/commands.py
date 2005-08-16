@@ -385,6 +385,14 @@ Usage: info <package1> <package2> ... <packagen>
     def name(self):
         return ("info", "i")
 
+    def options(self):
+        self.parser.add_option("-f", "--files", action="store_true",
+                               default=False,
+                               help="Show a list of package files.")
+        self.parser.add_option("-F", "--files-path", action="store_true",
+                               default=False,
+                               help="Show only paths.")
+
     def run(self):
         if not self.args:
             self.help()
@@ -398,9 +406,16 @@ Usage: info <package1> <package2> ... <packagen>
     def printinfo(self, arg):
         import os.path
 
-        if os.path.exists(arg):
-            metadata, files = pisi.toplevel.info(arg)
-            print metadata.package
+        metadata, files = pisi.toplevel.info(arg)
+        print metadata.package
+        if self.options.files or self.options.files_path:
+            print
+            print 'Files:'
+            for fileinfo in files.list:
+                if self.options.files:
+                    print fileinfo
+                else:
+                    print fileinfo.path
 
 
 class Index(Command):

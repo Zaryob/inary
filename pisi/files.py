@@ -60,8 +60,13 @@ class FileInfo:
         err.has_tag(self.path, "File", "Path")
         err.has_tag(self.type, "File", "Type")
         err.has_tag(self.size, "File", "Size")
-        err.has_tag(self.hash, "File", "Hash")
+        err.has_tag(self.hash, "File", "SHA1Sum")
         return err.list
+        
+    def __str__(self):
+        s = "%s, type: %s, size: %s, sha1sum: %s" %  (self.path, self.type,
+                                                      self.size, self.hash)
+        return s
 
 class Files(XmlFile):
     

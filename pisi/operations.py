@@ -41,7 +41,7 @@ def remove_single(package_name):
         # with a prefix and leaving the user to edit it. In the future
         # we'll have a plan for these configuration files.
         if fileinfo.type == const.conf:
-            os.rename(fpath, fpath+".pisi")
+            os.rename(fpath, fpath + ".pisi")
         else:
             os.unlink(fpath)
     installdb.remove(package_name)

@@ -272,7 +272,7 @@ class SourceInfo:
         
         return err.list
 
-class PackageInfo(object):
+class PackageInfo:
     """A structure to hold package information. Package information is
     located under <Package> tag in PSPEC file. Opposite to Source each
     PSPEC file can have more than one Package tag."""
@@ -348,6 +348,13 @@ class PackageInfo(object):
         s += '\nSummary: ' + self.summary
         s += '\nDescription: ' + self.description
         return s
+
+    def pkg_dir(self):
+        packageDir = self.name + '-' \
+                     + self.version + '-' \
+                     + self.release
+
+        return join( config.lib_dir(), packageDir)
 
 class SpecFile(XmlFile):
     """A class for reading/writing from/to a PSPEC (PISI SPEC) file."""
