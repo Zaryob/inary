@@ -23,6 +23,7 @@
 #           Baris Metin <baris@uludag.org.tr
 
 import xml.dom.minidom as mdom
+import xml.parsers.expat.ExpatError as ExpatError
 import codecs
 
 from xmlext import *
@@ -45,7 +46,10 @@ class XmlFile(object):
         self.dom.unlink()
 
     def readxml(self, fileName):
-        self.dom = mdom.parse(fileName)
+        try:
+            self.dom = mdom.parse(fileName)
+        except ExpatError, inst:
+            raise XmlError("File '%s' has invalid XML: %s" % (fileName, str(inst)))
 
     def writexml(self, fileName):
         f = codecs.open(fileName,'w', "utf-8")

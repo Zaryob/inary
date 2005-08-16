@@ -27,6 +27,7 @@ from ui import ui
 from dependency import DepInfo
 from util import Checks
 
+
 class PackagerInfo:
     def __init__(self, node = None):
         if node:
@@ -375,6 +376,13 @@ class SpecFile(XmlFile):
         self.override_tags()
 
         self.unlink()
+
+        errs = self.has_errors()
+        if errs:
+            e = ""
+            for x in errs:
+                e += x + "\n"
+            raise XmlError("File '%s' has errors:\n%s" % (filename, e))
 
     def override_tags(self):
         """Override tags from Source in Packages. Some tags in Packages

@@ -87,13 +87,6 @@ class PisiBuild:
         self.actionGlobals = None
         self.srcDir = None
 
-        errs = self.spec.has_errors()
-        if errs:
-            ui.error("PSPEC file is not valid\n")
-            for e in errs:
-                ui.error(e + '\n')
-            raise PisiBuildError, "invalid PSPEC file %s" % self.ctx.pspecfile
-
     def set_state(self, state):
         stateFile = os.path.join(self.srcDir, "pisiBuildState")
         open(stateFile, "w").write(state)

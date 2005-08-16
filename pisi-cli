@@ -18,14 +18,14 @@ from pisi.ui import ui
 def handle_exception(exception, value, tb):
     import traceback
     import exceptions
-    import xml
+    import pisi.xmlext.XmlError as XmlError
     from pisi.ui import ui
 
     if exception == exceptions.KeyboardInterrupt:
         ui.error("\nKeyboardInterrupt: Exiting...\n")
         sys.exit(1)
-    elif exception == xml.parsers.expat.ExpatError:
-        ui.error("Invalid XML: " + str(value)+'\n')
+    elif exception == XmlError:
+        ui.error(str(value))
         sys.exit(1)
 
     ui.error("""
