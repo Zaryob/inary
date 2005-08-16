@@ -230,7 +230,7 @@ def copy_file(src,dest):
     check_dir(os.path.dirname(dest))
     shutil.copyfile(src, dest)
 
-def get_file_hashes(top, exclude_prefix=None, remove_prefix=None):
+def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
     """Generator function iterates over a toplevel path and returns the
     (filePath, sha1Hash) tuple for all files. If excludePrefixes list
     is given as a parameter, function will exclude the filePaths
@@ -239,8 +239,8 @@ def get_file_hashes(top, exclude_prefix=None, remove_prefix=None):
     given."""
 
     def has_excluded_prefix(filename):
-        if exclude_prefix and remove_prefix:
-            tempfnam = remove_prefix(remove_prefix, filename)
+        if exclude_prefix and removePrefix:
+            tempfnam = remove_prefix(removePrefix, filename)
             for p in exclude_prefix:
                 if tempfnam.startswith(p):
                     return 1
@@ -253,7 +253,7 @@ def get_file_hashes(top, exclude_prefix=None, remove_prefix=None):
             #yield the symlink..
             #bug 373
             yield (root, sha1_data(os.readlink(root)))
-            exclude_prefix.append(remove_prefix(remove_prefix, root) + "/")
+            exclude_prefix.append(remove_prefix(removePrefix, root) + "/")
             continue
 
         if os.path.isdir(root) and not has_excluded_prefix(root):
