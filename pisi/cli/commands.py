@@ -877,7 +877,7 @@ TODO: desc.
             pisi.toplevel.build_until(arg, "buildpackages", self.authInfo)
         self.finalize()
 
-usage_text1 = """%prog <command> [options] [arguments]
+usage_text1 = """%prog [options] <command> [arguments]
 
 where <command> is one of:
 
