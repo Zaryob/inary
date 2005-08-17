@@ -23,6 +23,48 @@ import pisi.uri
 def echo(string):
     print string.encode("utf8")
 
+def valuesort(x, y):
+    if x[1] > y[1]:
+        return -1
+    elif x[1] == y[1]:
+        return 0
+    else:
+        return 1
+
+
+class Max:
+    def __init__(self, title, count):
+        self.list = {}
+        self.title = title
+        self.count = count
+    
+    def add(self, name, value):
+        list = {}
+        i = 0
+        for x,y in self.list.items():
+            if value > y:
+                list[name] = value
+            else:
+                list[x] = y
+            i += 1
+            if i >= self.count:
+                break
+        if i < self.count:
+            list[name] = value
+        self.list = list
+    
+    def get_list(self):
+        items = self.list.items()
+        items.sort(valuesort)
+        return items
+    
+    def html_out(self):
+        echo(("<h1>%s</h1><table>" % self.title) % self.count)
+        for x,y in self.get_list():
+                echo("<tr><td>%s</td><td>%s</td></tr>" % (x, y))
+        echo("</table>")
+
+
 class Histogram:
     def __init__(self, title):
         self.list = {}
@@ -34,17 +76,9 @@ class Histogram:
         else:
             self.list[name] = 1
     
-    def _sortfunc(self, x, y):
-        if x[1] > y[1]:
-            return -1
-        elif x[1] == y[1]:
-            return 0
-        else:
-            return 1
-    
     def get_list(self):
         items = self.list.items()
-        items.sort(self._sortfunc)
+        items.sort(valuesort)
         return items
     
     def html_out(self):
@@ -81,15 +115,14 @@ def add_deps(deps, spec):
 hosts = Histogram(_("Source hosts"))
 people = Histogram(_("Packagers"))
 licenses = Histogram(_("Licenses"))
+categories = Histogram(_("Categories"))
 components = Histogram(_("Components"))
 dependencies = Histogram(_("Dependencies"))
 types = Histogram(_("File types"))
-mostp_name = None
-mostp_count = 0
+mostpatched = Max(_("Top %d most patched source"), 5)
+longpy = Max(_("Top %d longest action.py scripts"), 5)
 nr_binpaks = 0
 nr_patches = 0
-maxpy_lines = 0
-maxpy_name = None
 paknames = {}
 
 errors = []
@@ -102,35 +135,27 @@ for pak in paks:
     except Exception, inst:
         errors.append([pak, str(inst)])
         continue
-    errs = spec.has_errors()
-    if errs:
-        for e in errs:
-            errors.append([pak, e])
-        continue
     try:
         f = file(os.path.join(pak, "actions.py"))
         L = len(f.readlines())
-        if L > maxpy_lines:
-            maxpy_lines = L
-            maxpy_name = spec.source.name
+        longpy.add(spec.source.name, L)
         f.close()
     except:
         pass
     nr_binpaks += len(spec.packages)
     nr_patches += len(spec.source.patches)
+    mostpatched.add(spec.source.name, len(spec.source.patches))
     for p in spec.packages:
+        if p.partof:
+            components.add(p.partof)
+        for x in p.isa:
+            categories.add(x)
         for x in p.paths:
             types.add(x.fileType)
     paknames[spec.source.name] = 1
     add_deps(dependencies, spec)
-    if len(spec.source.patches) > mostp_count:
-        mostp_count = len(spec.source.patches)
-        mostp_name = spec.source.name
     name = spec.source.packager.name
     lices = spec.source.license
-    partof = spec.source.partof
-    if partof:
-        components.add(partof)
     people.add(name)
     for lice in lices:
         licenses.add(lice)
@@ -143,11 +168,9 @@ echo("</head><body>")
 
 print "<p>Toplam %d kod paketi, ve bunlardan oluşturulacak %d ikili paket var.</p>" % (len(paks), nr_binpaks)
 echo(u"<p>Toplam peç sayısı %d</p>" % nr_patches)
-if mostp_count > 0:
-    echo(u"<p>En çok peçlenen yazılım %d peçle %s!</p>" % (mostp_count, mostp_name))
 
-if maxpy_lines > 0:
-    echo(u"<p>En uzun actions.py betiğine sahip yazılım %d satırla %s!</p>" % (maxpy_lines, maxpy_name))
+mostpatched.html_out()
+longpy.html_out()
 
 if errors != []:
     print "<h1>Hatalar</h1><table>"
@@ -158,6 +181,7 @@ else:
     print "<p>Hata yok, tebrikler!</p>"
 
 components.html_out()
+categories.html_out()
 people.html_out()
 licenses.html_out()
 types.html_out()
