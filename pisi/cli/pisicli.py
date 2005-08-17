@@ -20,37 +20,70 @@ from pisi.cli.commands import *
 class ParserError(Exception):
     pass
 
-class Parser(OptionParser):
+
+class PreParser(OptionParser):
+    """consumes any options, and finds arguments from command line"""
+
     def __init__(self, version):
         OptionParser.__init__(self, usage=usage_text, version=version)
 
     def error(self, msg):
         raise ParserError, msg
+        
+    def parse_args(self, args=None):
+        self.rargs = self._get_args(args)
+        self._process_args()
+        return self.args
+
+    def _process_args(self):
+        args = []
+        rargs = self.rargs
+        if not self.allow_interspersed_args:
+            first_arg = False
+        while rargs:
+            arg = rargs[0]
+            def option():
+                if not self.allow_interspersed_args and first_arg:
+                    self.error('Options must precede non-option arguments')
+                del rargs[0]
+                return
+            # We handle bare "--" explicitly, and bare "-" is handled by the
+            # standard arg handler since the short arg case ensures that the
+            # len of the opt string is greater than 1.
+            if arg == "--":
+                del rargs[0]
+                break
+            elif arg[0:2] == "--":
+                # process a single long option (possibly with value(s))
+                option()
+            elif arg[:1] == "-" and len(arg) > 1:
+                # process a cluster of short options (possibly with
+                # value(s) for the last one only)
+                option()
+            else: # then it must be an argument
+                args.append(arg)
+                del rargs[0]
+        self.args = args
+
 
 class PisiCLI(object):
 
     def __init__(self):
         # first construct a parser for common options
         # this is really dummy
-        self.parser = Parser(version="%prog " + pisi.__version__)
-        #self.parser.allow_interspersed_args = False
+        self.parser = PreParser(version="%prog " + pisi.__version__)
 
-        cmd = ""
         try:
-            (options, args) = self.parser.parse_args()
-            if len(args)==0:
+            args = self.parser.parse_args()
+            if len(args)==0: # more explicit than using IndexError
+                print 'No command given'
                 self.die()
-            cmd = args[0]
-            
-        except IndexError:
-            self.die()
+            cmd_name = args[0]
         except ParserError:
-            # fully expected :) let's see if we got an argument
-            if len(self.parser.rargs)==0:
-                self.die()
-            cmd = self.parser.rargs[0]
+            print 'Command line parsing error'
+            self.die()
 
-        self.command = Command.get_command(cmd)
+        self.command = Command.get_command(cmd_name)
         if not self.command:
             print "Unrecognized command: ", cmd
             self.die()
