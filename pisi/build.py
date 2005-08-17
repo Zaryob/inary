@@ -301,6 +301,7 @@ class PisiBuild:
         found = []
         for root, dirs, files in os.walk(config.options.output_dir):
             for fn in files:
+                fn = fn.decode("utf-8")
                 if fn.startswith(package_name + '-') and \
                     fn.endswith(const.package_prefix):
                     old_package_fn = os.path.join(root, fn)
