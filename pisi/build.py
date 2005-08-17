@@ -17,6 +17,10 @@
 import os
 import sys
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 import pisi
 import pisi.util as util
 from pisi.ui import ui
@@ -70,7 +74,7 @@ def check_path_collision(package, pkgList):
                 # path.pathname: /usr/share/doc
                 if util.subpath(pinfo.pathname, path.pathname):
                     collisions.append(path.pathname)
-                    ui.error('Path %s belongs in multiple packages\n' %
+                    ui.error(_('Path %s belongs in multiple packages\n') %
                              path.pathname)
     return collisions
 
@@ -102,8 +106,8 @@ class PisiBuild:
     def build(self):
         """Build the package in one shot."""
 
-        ui.info("Building PISI source package: %s\n" % self.spec.source.name)
-        util.xterm_title("Building PISI source package: %s\n" % self.spec.source.name)
+        ui.info(_("Building PISI source package: %s\n") % self.spec.source.name)
+        util.xterm_title(_("Building PISI source package: %s\n") % self.spec.source.name)
         
         self.compile_action_script()
          
@@ -136,30 +140,30 @@ class PisiBuild:
         os.environ.update(evn)
 
     def fetch_source_archive(self):
-        ui.info("Fetching source from: %s\n" % self.spec.source.archiveUri)
+        ui.info(_("Fetching source from: %s\n") % self.spec.source.archiveUri)
         self.sourceArchive.fetch()
-        ui.info("Source archive is stored: %s/%s\n"
+        ui.info(_("Source archive is stored: %s/%s\n")
                 %(config.archives_dir(), self.spec.source.archiveName))
 
     def unpack_source_archive(self):
-        ui.info("Unpacking archive...")
+        ui.info(_("Unpacking archive..."))
         self.sourceArchive.unpack()
-        ui.info(" unpacked (%s)\n" % self.ctx.pkg_work_dir())
+        ui.info(_(" unpacked (%s)\n") % self.ctx.pkg_work_dir())
         self.set_state("unpacked")
 
     def run_setup_action(self):
         #  Run configure, build and install phase
-        ui.action("Setting up source...\n")
+        ui.action(_("Setting up source...\n"))
         self.run_action_function(const.setup_func)
         self.set_state("setupaction")
 
     def run_build_action(self):
-        ui.action("Building source...\n")
+        ui.action(_("Building source...\n"))
         self.run_action_function(const.build_func)
         self.set_state("buildaction")
 
     def run_install_action(self):
-        ui.action("Installing...\n")
+        ui.action(_("Installing...\n"))
         
         # Before install make sure install_dir is clean 
         if os.path.exists(self.ctx.pkg_install_dir()):
@@ -178,10 +182,10 @@ class PisiBuild:
             buf = open(scriptfile).read()
             exec compile(buf, "error", "exec") in localSymbols, globalSymbols
         except IOError, e:
-            ui.error("Unable to read Action Script (%s): %s\n" %(scriptfile,e))
+            ui.error(_("Unable to read Action Script (%s): %s\n") %(scriptfile,e))
             sys.exit(1)
         except SyntaxError, e:
-            ui.error ("SyntaxError in Action Script (%s): %s\n" %(scriptfile,e))
+            ui.error (_("SyntaxError in Action Script (%s): %s\n") %(scriptfile,e))
             sys.exit(1)
 
         self.actionLocals = localSymbols
@@ -212,7 +216,7 @@ class PisiBuild:
             self.actionLocals[func]()
         else:
             if mandatory:
-                Error, "unable to call function from actions: %s" %func
+                Error, _("unable to call function from actions: %s") %func
 
         os.chdir(curDir)
 
@@ -232,7 +236,7 @@ class PisiBuild:
                                             compressType=patch.compressionType,
                                             targetDir=config.tmp_dir())
 
-            ui.action("* Applying patch: %s\n" % patch.filename)
+            ui.action(_("* Applying patch: %s\n") % patch.filename)
             util.do_patch(self.srcDir, patchFile, level=patch.level, target=patch.target)
 
     def gen_metadata_xml(self, package):
@@ -273,7 +277,7 @@ class PisiBuild:
         collisions = check_path_collision(package,
                                           self.spec.packages)
         if collisions:
-            raise Error('Path collisions detected')
+            raise Error(_('Path collisions detected'))
         d = {}
         for pinfo in package.paths:
             path = install_dir + pinfo.pathname
@@ -362,17 +366,17 @@ class PisiBuild:
                                      self.spec.source.release)
             
 
-            ui.action("** Building package %s\n" % package.name);
+            ui.action(_("** Building package %s\n") % package.name);
 
-            ui.action("Generating %s..." % const.files_xml)
+            ui.action(_("Generating %s...") % const.files_xml)
             self.gen_files_xml(package)
-            ui.info(" done.\n")
+            ui.info(_(" done.\n"))
            
-            ui.action("Generating %s..." % const.metadata_xml)
+            ui.action(_("Generating %s...") % const.metadata_xml)
             self.gen_metadata_xml(package)
-            ui.info(" done.\n")
+            ui.info(_(" done.\n"))
 
-            ui.action("Creating PISI package %s\n" % name)
+            ui.action(_("Creating PISI package %s\n") % name)
             
             pkg = Package(name, 'w')
 

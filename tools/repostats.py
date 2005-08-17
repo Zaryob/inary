@@ -12,13 +12,21 @@
 import sys
 import os
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 sys.path.append('.')
 import pisi.specfile
 import pisi.uri
 
+def echo(string):
+    print string.encode("utf8")
+
 class Histogram:
-    def __init__(self):
+    def __init__(self, title):
         self.list = {}
+        self.title = title
     
     def add(self, name):
         if self.list.has_key(name):
@@ -38,10 +46,13 @@ class Histogram:
         items = self.list.items()
         items.sort(self._sortfunc)
         return items
+    
+    def html_out(self):
+        echo("<h1>%s</h1><table>" % self.title)
+        for name,cnt in self.get_list():
+            echo("<tr><td>%s</td><td>%s</td></tr>" % (name, cnt))
+        echo("</table>")
 
-
-def echo(string):
-    print string.encode("utf8")
 
 def scan_pspec(folder):
     paks = []
@@ -67,10 +78,12 @@ def add_deps(deps, spec):
     for p in a:
         deps.add(p)
 
-hosts = Histogram()
-people = Histogram()
-licenses = Histogram()
-components = Histogram()
+hosts = Histogram(_("Source hosts"))
+people = Histogram(_("Packagers"))
+licenses = Histogram(_("Licenses"))
+components = Histogram(_("Components"))
+dependencies = Histogram(_("Dependencies"))
+types = Histogram(_("File types"))
 mostp_name = None
 mostp_count = 0
 nr_binpaks = 0
@@ -78,8 +91,6 @@ nr_patches = 0
 maxpy_lines = 0
 maxpy_name = None
 paknames = {}
-dependencies = Histogram()
-types = Histogram()
 
 errors = []
 
@@ -128,7 +139,7 @@ for pak in paks:
 
 print "<html><head><title>%s İstatistikleri</title>" % (sys.argv[1])
 print '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'
-print "</head><body>"
+echo("</head><body>")
 
 print "<p>Toplam %d kod paketi, ve bunlardan oluşturulacak %d ikili paket var.</p>" % (len(paks), nr_binpaks)
 echo(u"<p>Toplam peç sayısı %d</p>" % nr_patches)
@@ -146,28 +157,13 @@ if errors != []:
 else:
     print "<p>Hata yok, tebrikler!</p>"
 
-print "<h1>Komponentler</h1><table>"
-for name,cnt in components.get_list():
-    print "<tr><td>%s</td><td>%s</td></tr>" % (name, cnt)
-print "</table>"
+components.html_out()
+people.html_out()
+licenses.html_out()
+types.html_out()
 
-print "<h1>Paketleyiciler</h1><table>"
-for name,cnt in people.get_list():
-    echo("<tr><td>%s</td><td>%s</td></tr>" % (name, cnt))
-print "</table>"
-
-print "<h1>Lisanslar</h1><table>"
-for name,cnt in licenses.get_list():
-    print "<tr><td>%s</td><td>%s</td></tr>" % (name, cnt)
-print "</table>"
-
-print "<h1>Dosya tipleri</h1><table>"
-for name,cnt in types.get_list():
-    print "<tr><td>%s</td><td>%s</td></tr>" % (name, cnt)
-print "</table>"
-
-echo(u"<h1>Bağımlılıklar<br>")
-echo(u"<small>(italik olanlar depoda bulunmayanlar)</small></h1>")
+echo(_("<h1>Dependencies<br>"))
+echo(_("<small>package name with italics are not available in the repository</small></h1>"))
 print "<table>"
 for name,cnt in dependencies.get_list():
     if paknames.has_key(name):
@@ -176,9 +172,6 @@ for name,cnt in dependencies.get_list():
         print "<tr><td><i>%s</i></td><td>%d</td></tr>" % (name, cnt)
 print "</table>"
 
-echo(u"<h1>Kod kaynakları</h1><table>")
-for name,cnt in hosts.get_list():
-    print "<tr><td>%s</td><td>%s</td></tr>" % (name, cnt)
-print "</table>"
+hosts.html_out()
 
 print "</body>"

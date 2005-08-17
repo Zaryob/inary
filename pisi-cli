@@ -12,6 +12,10 @@
 
 import sys
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 from pisi.cli.pisicli import PisiCLI
 from pisi.ui import ui
 
@@ -22,20 +26,20 @@ def handle_exception(exception, value, tb):
     from pisi.ui import ui
 
     if exception == exceptions.KeyboardInterrupt:
-        ui.error("\nKeyboardInterrupt: Exiting...\n")
+        ui.error(_("\nKeyboardInterrupt: Exiting...\n"))
         sys.exit(1)
     elif exception == XmlError:
         ui.error(str(value))
         sys.exit(1)
 
-    ui.error("""
+    ui.error(_("""
 Internal PISI Error:
 Please file a bug report! (http://bugs.uludag.org.tr)
 
-""")
+"""))
 
     ui.error("%s\n" %value)
-    ui.info("Traceback:\n")
+    ui.info(_("Traceback:\n"))
     traceback.print_tb(tb)
     sys.exit(1)
 
