@@ -754,7 +754,7 @@ for you.
 class BuildUnpack(Command):
     """Unpack the source archive
 
-Usage: build-dounpack <pspec file>
+Usage: build-unpack <pspec file>
 
 TODO: desc.
 """
@@ -779,7 +779,7 @@ TODO: desc.
 class BuildSetup(Command):
     """Setup the source
 
-Usage: build-dosetup <pspec file>
+Usage: build-setup <pspec file>
 
 TODO: desc.
 """
@@ -805,7 +805,7 @@ TODO: desc.
 class BuildBuild(Command):
     """Setup the source
 
-Usage: build-dobuild <pspec file>
+Usage: build-build <pspec file>
 
 TODO: desc.
 """
@@ -814,7 +814,7 @@ TODO: desc.
     def __init__(self):
         super(BuildBuild, self).__init__()
 
-    name = ("build-dobuild", "bib")
+    name = ("build-build", "bib")
 
     def run(self):
         if not self.args:
@@ -830,7 +830,7 @@ TODO: desc.
 class BuildInstall(Command):
     """Install to the sandbox
 
-Usage: build-doinstall <pspec file>
+Usage: build-install <pspec file>
 
 TODO: desc.
 """
@@ -839,7 +839,7 @@ TODO: desc.
     def __init__(self):
         super(BuildInstall, self).__init__()
 
-    name = ("build-doinstall", "bii")
+    name = ("build-install", "bii")
 
     def run(self):
         if not self.args:
@@ -856,7 +856,7 @@ TODO: desc.
 class BuildPackage(Command):
     """Setup the source
 
-Usage: build-dobuild <pspec file>
+Usage: build-build <pspec file>
 
 TODO: desc.
 """
@@ -865,7 +865,7 @@ TODO: desc.
     def __init__(self):
         super(BuildPackage, self).__init__()
 
-    name = ("build-dopackage", "bip")
+    name = ("build-package", "bip")
 
     def run(self):
         if not self.args:
