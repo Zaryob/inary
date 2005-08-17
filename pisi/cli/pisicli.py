@@ -15,7 +15,6 @@ from optparse import OptionParser
 
 import pisi
 from pisi.uri import URI
-from pisi.cli.common import *
 from pisi.cli.commands import *
 
 class ParserError(Exception):
@@ -35,7 +34,6 @@ class PisiCLI(object):
         # this is really dummy
         self.parser = Parser(version="%prog " + pisi.__version__)
         #self.parser.allow_interspersed_args = False
-        self.parser = commonopts(self.parser)
 
         cmd = ""
         try:
