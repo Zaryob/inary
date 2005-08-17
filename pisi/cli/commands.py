@@ -372,7 +372,7 @@ Upgrade the entire system.
     __metaclass__ = autocommand
 
     def __init__(self):
-        super(Upgrade, self).__init__()
+        super(UpgradeAll, self).__init__()
 
     name = ("upgrade-all", None)
 
@@ -386,6 +386,7 @@ Upgrade the entire system.
             return
 
         self.init()
+        from pisi.installdb import installdb
         pisi.toplevel.upgrade(installdb.list_installed())
         self.finalize()
 
