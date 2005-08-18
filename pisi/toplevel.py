@@ -358,6 +358,7 @@ def info_file(package):
     return package.metadata, package.files
 
 def info_name(package_name):
+    """fetch package information for a package"""
     if packagedb.has_package(package_name):
         package = packagedb.get_package(package_name)
         from pisi.metadata import MetaData
@@ -365,10 +366,14 @@ def info_name(package_name):
         metadata.package = package
         #FIXME: get it from sourcedb
         metadata.source = None
-        files = installdb.files(package.name)
+        #TODO: fetch the files from server if possible
+        if installdb.is_installed(package.name):
+            files = installdb.files(package.name)
+        else:
+            files = None
         return metadata, files
     else:
-        raise Error('Package %s not installed' % package_name)
+        raise Error('Package %s not found' % package_name)
 
 def index(repo_dir = '.'):
 

@@ -435,7 +435,7 @@ Usage: info <package1> <package2> ... <packagen>
             self.help()
             return
 
-        self.init()
+        self.init(True)
         for arg in self.args:
             self.printinfo(arg)
         self.finalize()
@@ -446,13 +446,16 @@ Usage: info <package1> <package2> ... <packagen>
         metadata, files = pisi.toplevel.info(arg)
         print metadata.package
         if self.options.files or self.options.files_path:
-            print
-            print 'Files:'
-            for fileinfo in files.list:
-                if self.options.files:
-                    print fileinfo
-                else:
-                    print fileinfo.path
+            if files:
+                print
+                print 'Files:'
+                for fileinfo in files.list:
+                    if self.options.files:
+                        print fileinfo
+                    else:
+                        print fileinfo.path
+            else:
+                print 'File information not available'
 
 
 class Index(Command):
