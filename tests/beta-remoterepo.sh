@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export $PATH=$PATH:.
+export PATH=$PATH:.
 set -x # xtrace
 set -e # errexit
 
