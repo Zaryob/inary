@@ -59,26 +59,16 @@ def configure(parameters = ''):
     else:
         raise ConfigureError('!!! No configure script found...\n')
 
-def rawConfigure(parameters = ''):
+def rawConfigure(parameters = '', prefix=''):
     '''configure source with given parameters = "--prefix=/usr --libdir=/usr/lib --with-nls"'''
     if can_access_file('configure'):
         gnuconfig_update()
 
-        if system('./configure %s' % parameters):
+        if system('%s ./configure %s' % (prefix, parameters)):
             raise ConfigureError('!!! Configure failed...\n')
     else:
         raise ConfigureError('!!! No configure script found...\n')
  
-def rawConfigureWithPrefix(prefix='', parameters = ''):
-    #FIXME: Find another way for this function!
-    if can_access_file('configure'):
-        gnuconfig_update()
-
-        if system('%s ./configure %s' % ( prefix, parameters)):
-            raise ConfigureError('!!! Configure failed...\n')
-    else:
-        raise ConfigureError('!!! No configure script found...\n')
-
 def compile(parameters = ''):
     #FIXME: Only one package uses this until now, hmmm
     system('%s %s %s' % (get.GCC(), get.CFLAGS(), parameters))
