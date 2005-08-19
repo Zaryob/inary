@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.7.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-08-16, 12:33:37 -->
+<!-- Saved: 2005-08-19, 16:42:14 -->
 <!-- Copyright (C) 2005 PiSi Development Team, pisi@uludag.org.tr -->
 <Project version="3.7">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -241,10 +241,6 @@
     </Source>
     <Source>
       <Dir>pisi</Dir>
-      <Name>toplevel.py</Name>
-    </Source>
-    <Source>
-      <Dir>pisi</Dir>
       <Name>sourcefetcher.py</Name>
     </Source>
     <Source>
@@ -306,6 +302,10 @@
     <Source>
       <Dir>pisi</Dir>
       <Name>uri.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Name>api.py</Name>
     </Source>
   </Sources>
   <Forms>

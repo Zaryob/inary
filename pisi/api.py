@@ -34,6 +34,14 @@ from pisi.index import Index
 class Error(pisi.Error):
     pass
 
+def init(database = True):
+    """Kickstart PISI subsystem"""
+        # initialize repository databases
+    if database:
+        from pisi.repodb import repodb
+        repodb.init_dbs()
+
+
 def install(packages):
     """install a list of packages (either files/urls, or names)"""
 

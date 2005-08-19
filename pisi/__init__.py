@@ -12,7 +12,7 @@
 
 __version__ = "0.3"
 
-__all__ = [ 'toplevel', 'packagedb', 'installdb' ]
+__all__ = [ 'api', 'packagedb', 'installdb' ]
 
 class Error(Exception):
     """Class of exceptions that lead to program termination"""

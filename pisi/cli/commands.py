@@ -115,17 +115,14 @@ class Command(object):
         else:
             self.authInfo = None
 
-    def init(self, database = False):
+    def init(self, database = True):
         """initialize PiSi components"""
         
         # NB: command imports here or in the command class run fxns
-        import pisi.toplevel
+        import pisi.api
         from pisi.ui import ui
 
-        # initialize repository databases
-        if database:
-            from pisi.repodb import repodb
-            repodb.init_dbs()
+        pisi.api.init(database)
 
     def finalize(self):
         """do cleanup work for PiSi components"""
@@ -243,7 +240,7 @@ fetch all necessary files and build the package for you.
         from pisi.config import config
         pisi.ui.ui.info('Output directory: %s\n' % config.options.output_dir)
         for arg in self.args:
-            pisi.toplevel.build(arg, self.authInfo)
+            pisi.api.build(arg, self.authInfo)
         self.finalize()
 
 
@@ -305,7 +302,7 @@ specified a package name, it should exist in a specified repository.
             return
 
         self.init()
-        pisi.toplevel.install(self.args)
+        pisi.api.install(self.args)
         self.finalize()
 
 
@@ -334,7 +331,7 @@ specified a package name, it should exist in a specified repository.
             return
 
         self.init()
-        pisi.toplevel.upgrade(self.args)
+        pisi.api.upgrade(self.args)
         self.finalize()
 
 
@@ -358,7 +355,7 @@ Remove package(s) from your system. Just give the package names to remove.
             return
 
         self.init()
-        pisi.toplevel.remove(self.args)
+        pisi.api.remove(self.args)
         self.finalize()
 
 
@@ -387,7 +384,7 @@ Upgrade the entire system.
 
         self.init()
         from pisi.installdb import installdb
-        pisi.toplevel.upgrade(installdb.list_installed())
+        pisi.api.upgrade(installdb.list_installed())
         self.finalize()
 
 
@@ -405,7 +402,7 @@ class ConfigurePending(PackageOp):
     def run(self):
 
         self.init()
-        pisi.toplevel.configure_pending()
+        pisi.api.configure_pending()
         self.finalize()
 
 
@@ -443,7 +440,7 @@ Usage: info <package1> <package2> ... <packagen>
     def printinfo(self, arg):
         import os.path
 
-        metadata, files = pisi.toplevel.info(arg)
+        metadata, files = pisi.api.info(arg)
         print metadata.package
         if self.options.files or self.options.files_path:
             if files:
@@ -483,7 +480,7 @@ source and binary packages.
     def run(self):
         
         self.init()
-        from pisi.toplevel import index
+        from pisi.api import index
         if len(self.args)==1:
             index(self.args[0])
         elif len(self.args)==0:
@@ -558,7 +555,7 @@ Synchronizes the PiSi databases with the current repository.
 
         self.init(True)
         for repo in self.args:
-            pisi.toplevel.update_repo(repo)
+            pisi.api.update_repo(repo)
         self.finalize()
 
 
@@ -585,7 +582,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
             self.init()
             name = self.args[0]
             indexuri = self.args[1]
-            pisi.toplevel.add_repo(name, indexuri)
+            pisi.api.add_repo(name, indexuri)
             self.init()
         else:
             self.help()
@@ -611,7 +608,7 @@ Remove all repository information from the system.
         if len(self.args)>=1:
             self.init()
             for repo in self.args:
-                pisi.toplevel.remove_repo(repo)
+                pisi.api.remove_repo(repo)
             self.finalize()
         else:
             self.help()
@@ -750,7 +747,7 @@ for you.
         state = self.options.state
 
         for arg in self.args:
-            pisi.toplevel.build_until(arg, state, self.authInfo)
+            pisi.api.build_until(arg, state, self.authInfo)
         self.finalize()
 
 
@@ -775,7 +772,7 @@ TODO: desc.
 
         self.init()
         for arg in self.args:
-            pisi.toplevel.build_until(arg, "unpack", self.authInfo)
+            pisi.api.build_until(arg, "unpack", self.authInfo)
         self.finalize()
 
 
@@ -800,7 +797,7 @@ TODO: desc.
 
         self.init()
         for arg in self.args:
-            pisi.toplevel.build_until(arg, "setupaction",
+            pisi.api.build_until(arg, "setupaction",
                                       self.authInfo)
         self.finalize()
 
@@ -826,7 +823,7 @@ TODO: desc.
 
         self.init()
         for arg in self.args:
-            pisi.toplevel.build_until(arg, "buildaction", self.authInfo)
+            pisi.api.build_until(arg, "buildaction", self.authInfo)
         self.finalize()
 
 
@@ -851,7 +848,7 @@ TODO: desc.
 
         self.init()
         for arg in self.args:
-            pisi.toplevel.build_until(arg, "installaction",
+            pisi.api.build_until(arg, "installaction",
                                       self.authInfo)
         self.finalize()
 
@@ -877,7 +874,7 @@ TODO: desc.
 
         self.init()
         for arg in self.args:
-            pisi.toplevel.build_until(arg, "buildpackages", self.authInfo)
+            pisi.api.build_until(arg, "buildpackages", self.authInfo)
         self.finalize()
 
 usage_text1 = """%prog [options] <command> [arguments]
