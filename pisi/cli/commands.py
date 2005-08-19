@@ -128,10 +128,6 @@ class Command(object):
         """do cleanup work for PiSi components"""
         pass
         
-    #def name(self):
-    #    """(command name, shortname) pair to be filled by subclasses"""
-    #    pass
-
     def get_name(self):
         return self.__class__.name
 
