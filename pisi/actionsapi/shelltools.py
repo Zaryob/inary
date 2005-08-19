@@ -66,8 +66,13 @@ def copytree(source, destination, sym=False):
     shutil.copytree(source, destination, sym)
 
 def touch(sourceFile):
-    for file in glob.glob(sourceFile):
-        os.utime(file, None)
+    '''changes the access time of the 'sourceFile', or creates it if it is not exist'''
+    if glob.glob(sourceFile):
+        for file in glob.glob(sourceFile):
+            os.utime(file, None)
+    else:
+        f = open(sourceFile, 'w')
+        f.close()
 
 def cd(directoryName = ''):
     '''change directory'''
