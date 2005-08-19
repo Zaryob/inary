@@ -256,6 +256,14 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
             exclude_prefix.append(remove_prefix(removePrefix, root) + "/")
             continue
 
+        #bug 397
+        for dir in dirs:
+            d = os.path.join(root, dir)
+            if os.path.islink(d) and not has_excluded_prefix(d):
+                yield (d, sha1_data(os.readlink(d)))
+                exclude_prefix.append(remove_prefix(removePrefix, d) + "/")
+
+        #bug 340
         if os.path.isdir(root) and not has_excluded_prefix(root):
             parent, r, d, f = root, '', '', ''
             for r, d, f in os.walk(parent, topdown=False): pass
