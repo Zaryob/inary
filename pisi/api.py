@@ -18,6 +18,27 @@ if ver[0] <= 2 and ver[1] < 4:
     from sets import Set as set
 
 import pisi
+
+class Error(pisi.Error):
+    pass
+
+def init(database = True, options = None, ui = None ):
+    import pisi.config
+    import pisi.ui
+    """Initialize PiSi subsystem"""
+    pisi.config.config = pisi.config.Config(options)
+    if ui is None:
+        if options:
+            pisi.ui.ui = pisi.ui.CLI(options.debug)
+        else:
+            pisi.ui.ui = pisi.ui.CLI()
+    else:
+        pisi.ui.ui = ui
+    # initialize repository databases
+    if database:
+        from pisi.repodb import repodb
+        repodb.init_dbs()
+
 from pisi.config import config
 from pisi.constants import const
 from pisi.ui import ui
@@ -30,16 +51,6 @@ import pisi.packagedb as packagedb
 from pisi.repodb import repodb
 from pisi.installdb import installdb
 from pisi.index import Index
-
-class Error(pisi.Error):
-    pass
-
-def init(database = True):
-    """Kickstart PISI subsystem"""
-        # initialize repository databases
-    if database:
-        from pisi.repodb import repodb
-        repodb.init_dbs()
 
 
 def install(packages):

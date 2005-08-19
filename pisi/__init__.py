@@ -21,3 +21,6 @@ class Error(Exception):
 class Exception(Exception):
     """Class of exceptions that must be caught and handled within PISI"""
     pass
+
+# FIXME: can't do this due to name clashes in config and other singletons booo
+#from pisi.api import *

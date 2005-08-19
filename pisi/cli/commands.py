@@ -58,12 +58,6 @@ class Command(object):
         self.commonopts()
         (self.options, self.args) = self.parser.parse_args()
         self.args.pop(0)                # exclude command arg
-
-        import pisi
-
-        # initialize PiSi
-        pisi.config.config = pisi.config.Config(self.options)
-        pisi.ui.ui = pisi.ui.CLI(self.options.debug)
         
         self.check_auth_info()
 
@@ -119,10 +113,10 @@ class Command(object):
         """initialize PiSi components"""
         
         # NB: command imports here or in the command class run fxns
+        import pisi
         import pisi.api
+        pisi.api.init(database, self.options)
         from pisi.ui import ui
-
-        pisi.api.init(database)
 
     def finalize(self):
         """do cleanup work for PiSi components"""
