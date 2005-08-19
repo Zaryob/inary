@@ -249,6 +249,7 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
         return 0
 
     for root, dirs, files in os.walk(top, topdown=False):
+        #bug 339
         if os.path.islink(root) and not has_excluded_prefix(root):
             #yield the symlink..
             #bug 373
