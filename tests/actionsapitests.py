@@ -6,18 +6,46 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
 
 import unittest
+import zipfile
 
-from pisi.actionsapi import shelltools
-from pisi.actionsapi import autotools
-from pisi.actionsapi import pisitools
+class ActionsAPITestCase(unittest.TestCase):
+    def setUp(self):
+        self.f = zipfile.ZipFile("helloworld-0.1-1.pisi", "r")
+        self.filelist = []
+    
+        for file in self.f.namelist():
+            self.filelist.append(file)
 
-""" 
- Burasi ActionsAPI'yi gercekten test edecek case'ler ile
- dolacak.. Ornegin bir paketin acilip derlenip dosed, dosym
- doman, dobin, dosbin gibi fonksiyonlarin dogru calisrligi
- test edilecek..
-"""
+    def testFileList(self):
+        fileContent = ["files.xml", \
+                       "install/bin/helloworld", \
+                       "install/opt/PARDUS", \
+                       "install/opt/helloworld/helloworld", \
+                       "install/opt/uludag", \
+                       "install/sbin/helloworld", \
+                       "install/sys/PARDUS", \
+                       "install/sys/uludag", \
+                       "install/usr/bin/goodbye", \
+                       "install/usr/bin/helloworld", \
+                       "install/usr/lib/helloworld.o", \
+                       "install/usr/sbin/goodbye", \
+                       "install/usr/sbin/helloworld", \
+                       "install/usr/share/doc/helloworld-0.1-1/Makefile.am", \
+                       "install/usr/share/doc/helloworld-0.1-1/goodbyeworld.cpp", \
+                       "install/usr/share/info/Makefile.am", \
+                       "install/usr/share/info/Makefile.cvs", \
+                       "install/usr/share/info/Makefile.in", \
+                       "install/var/goodbye", \
+                       "install/var/hello", \
+                       "metadata.xml"]
+        
+        '''check number of files in package'''
+        self.assertEqual(fileContent.__len__(), self.filelist.__len__())
 
+        '''check file content'''
+        for file in self.filelist:
+            self.assert_(fileContent.__contains__(file))
+
+suite = unittest.makeSuite(ActionsAPITestCase)
