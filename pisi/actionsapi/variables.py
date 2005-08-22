@@ -9,14 +9,13 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
 
 # Standard Python Modules
 from os import getenv, environ
 
 # Pisi-Core Modules
-import pisi.config                      # That was the only correct
-import pisi.constants                   # use before changing to abs. imports
+import pisi.config
+import pisi.constants
 
 # Set individual information, that are generally needed for ActionsAPI
 
@@ -71,6 +70,10 @@ class Dirs:
     conf = 'etc'
     localstate = 'var/lib'
     defaultprefix = 'usr'
+
+    #FIXME: Get these from config or somewhere else!
+    kde = '/usr/kde/3.4'
+    qt = '/usr/qt/3'
 
 class Variables(pisi.config.Config):
     const = pisi.constants.const

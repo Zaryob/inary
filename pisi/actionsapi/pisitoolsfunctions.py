@@ -9,7 +9,6 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
 
 # Generic functions for common usage of pisitools #
 
@@ -38,11 +37,10 @@ def executable_insinto(sourceFile, destinationDirectory):
     if not can_access_file(sourceFile):
         raise FileError('File doesn\'t exists or permission denied...')
 
-    if can_access_directory(destinationDirectory) and os.path.isdir(destinationDirectory):
-        os.system('install -m0755 -o root -g root %s %s' % (sourceFile, destinationDirectory))
-    else:
+    if not can_access_directory(destinationDirectory):
         makedirs(destinationDirectory)
-        os.system('install -m0755 -o root -g root %s %s' % (sourceFile, destinationDirectory))
+ 
+    system('install -m0755 -o root -g root %s %s' % (sourceFile, destinationDirectory))
 
 def readable_insinto(destinationDirectory, *sourceFiles):
     '''inserts file list into destinationDirectory'''
@@ -55,7 +53,7 @@ def readable_insinto(destinationDirectory, *sourceFiles):
 
     for sourceFile in sourceFiles:
         for source in glob.glob(sourceFile):
-            os.system('install -m0644 %s %s' % (source, destinationDirectory))
+            system('install -m0644 %s %s' % (source, destinationDirectory))
 
 def lib_insinto(sourceFile, destinationDirectory, permission = 0644):
     '''inserts a library fileinto destinationDirectory with given permission'''
@@ -69,4 +67,4 @@ def lib_insinto(sourceFile, destinationDirectory, permission = 0644):
     if os.path.islink(sourceFile):
         os.symlink(os.path.realpath(sourceFile), os.path.join(destinationDirectory, sourceFile))
     else:
-        os.system('install -m%s %s %s' % (permission, sourceFile, destinationDirectory))
+        system('install -m%s %s %s' % (permission, sourceFile, destinationDirectory))

@@ -9,7 +9,6 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
 
 # Standard Python Modules
 import sys
@@ -17,7 +16,7 @@ import re
 from itertools import izip, imap, count, ifilter, ifilterfalse
 
 # ActionsAPI
-import pisi.actionsapi as actionsapi
+import pisi.actionsapi
 
 def cat(filename):
     return file(filename).xreadlines()

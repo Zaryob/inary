@@ -9,15 +9,16 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
 
 # Standart Python Modules
 import os
 import glob
 import sys
-import shutil
 import fileinput
 import re
+
+# Pisi Modules
+from pisi.ui import ui
 
 # ActionsAPI Modules
 import pisi.actionsapi
@@ -66,13 +67,13 @@ def dohtml(*sourceFiles):
     for sourceFile in sourceFiles:
         for source in glob.glob(sourceFile):
             if os.path.isfile(source) and os.path.splitext(source)[1] in allowed_extensions:
-                os.system('install -m0644 %s %s' % (source, destionationDirectory))
+                system('install -m0644 %s %s' % (source, destionationDirectory))
             if os.path.isdir(source) and os.path.basename(source) not in disallowed_directories:
                 for root, dirs, files in os.walk(source):
                     for source in files:
                         if os.path.splitext(source)[1] in allowed_extensions:
                             makedirs(destionationDirectory)
-                            os.system('install -m0644 %s %s' % (os.path.join(root, source), destionationDirectory))
+                            system('install -m0644 %s %s' % (os.path.join(root, source), destionationDirectory))
 
 def doinfo(*sourceFiles):
     '''inserts the into files in the list of files into /usr/share/info'''
@@ -87,7 +88,6 @@ def dolib(sourceFile, destinationDirectory = '/usr/lib'):
     
     '''example call: pisitools.dolib_a("libz.a")'''
     '''example call: pisitools.dolib_a("libz.so")'''
-    #FIXME: Glob needed?
     sourceFile = os.path.join(os.getcwd(), sourceFile)
     destinationDirectory = get.installDIR() + destinationDirectory
 
@@ -97,7 +97,6 @@ def dolib_a(sourceFile, destinationDirectory = '/usr/lib'):
     '''insert the static library into /usr/lib with permission 0644'''
     
     '''example call: pisitools.dolib_a("staticlib/libvga.a")'''
-    #FIXME: Glob needed?
     sourceFile = os.path.join(os.getcwd(), sourceFile)
     destinationDirectory = get.installDIR() + destinationDirectory
 
@@ -107,7 +106,6 @@ def dolib_so(sourceFile, destinationDirectory = '/usr/lib'):
     '''insert the static library into /usr/lib with permission 0755'''
     
     '''example call: pisitools.dolib_so("pppd/plugins/minconn.so")'''
-    #FIXME: Glob needed?
     sourceFile = os.path.join(os.getcwd(), sourceFile)
     destinationDirectory = get.installDIR() + destinationDirectory
 
@@ -127,20 +125,19 @@ def doman(*sourceFiles):
                 pageName, pageDirectory = source[:source.rindex('.')], \
                                           source[source.rindex('.')+1:]
             except ValueError:
-                print 'doman: Wrong man page file'
-                sys.exit(1)
+                ui.error('\n!!! ActionsAPI [doman]: Wrong man page file...\n')
                 
             makedirs(manDIR + '/man%s' % pageDirectory) 
-            os.system('install -m0644 %s %s' % (source, manDIR + '/man%s' % pageDirectory))
+            system('install -m0644 %s %s' % (source, manDIR + '/man%s' % pageDirectory))
 
 def domo(sourceFile, locale, destinationFile ):
     '''inserts the mo files in the list of files into /usr/share/locale/LOCALE/LC_MESSAGES'''
 
     '''example call: pisitools.domo("po/tr.po", "tr", "pam_login.mo")'''
 
-    system("msgfmt %s" % sourceFile)
-    makedirs(get.installDIR() + "/usr/share/locale/%s/LC_MESSAGES/" % locale)
-    shutil.move("messages.mo", get.installDIR() + "/usr/share/locale/%s/LC_MESSAGES/%s" % (locale, destinationFile))
+    system('msgfmt %s' % sourceFile)
+    makedirs('%s/usr/share/locale/%s/LC_MESSAGES/' % (get.installDIR(), locale))
+    move('messages.mo', '%s/usr/share/locale/%s/LC_MESSAGES/%s' % (get.installDIR(), locale, destinationFile))
 
 def domove(sourceFile, destination, destinationFile = ''):
     '''moves sourceFile/Directory into destinationFile/Directory'''
@@ -151,9 +148,9 @@ def domove(sourceFile, destination, destinationFile = ''):
         
     for file in glob.glob(get.installDIR() + sourceFile):
         if not destinationFile:
-            shutil.move(file, get.installDIR() + os.path.join(destination, os.path.basename(file)))
+            move(file, get.installDIR() + os.path.join(destination, os.path.basename(file)))
         else:
-            shutil.move(file, get.installDIR() + os.path.join(destination, destinationFile))
+            move(file, get.installDIR() + os.path.join(destination, destinationFile))
 
 def dopython():
     '''FIXME: What the hell is this?'''
@@ -168,6 +165,7 @@ def dosed(sourceFile, findPattern, replacePattern = ''):
 
     if can_access_file(sourceFile):
         for line in fileinput.input(sourceFile, inplace = 1):
+            #FIXME: In-place filtering is disabled when standard input is read
             line = re.sub(findPattern, replacePattern, line)
             sys.stdout.write(line)
     else:
@@ -188,9 +186,7 @@ def dosym(sourceFile, destinationFile):
     try:
         os.symlink(sourceFile, get.installDIR() + destinationFile)
     except OSError:
-        print 'dosym: File exists...'
-
-''' ************************************************************************** '''
+        ui.error('\n!!! ActionsAPI [dosym]: File exists...\n')
 
 def insinto(destinationDirectory, sourceFile,  destinationFile = ''):
     '''insert a sourceFile into destinationDirectory as a destinationFile with same uid/guid/permissions'''
@@ -199,23 +195,19 @@ def insinto(destinationDirectory, sourceFile,  destinationFile = ''):
     if not destinationFile:
         for file in glob.glob(sourceFile):
             if can_access_file(file):
-                shutil.copy(file, get.installDIR() + os.path.join(destinationDirectory, os.path.basename(file)))
+                copy(file, get.installDIR() + os.path.join(destinationDirectory, os.path.basename(file)))
     else:
-        shutil.copy(sourceFile, get.installDIR() + os.path.join(destinationDirectory, destinationFile))
-
-''' ************************************************************************** '''
+        copy(sourceFile, get.installDIR() + os.path.join(destinationDirectory, destinationFile))
 
 def newdoc(sourceFile, destinationFile):
     '''inserts a sourceFile into /usr/share/doc/PACKAGE/ directory as a destinationFile'''
-    shutil.move(sourceFile, destinationFile)
+    move(sourceFile, destinationFile)
     readable_insinto(os.path.join(get.installDIR(), 'usr/share/doc', get.srcTAG()), destinationFile)
 
 def newman(sourceFile, destinationFile):
     '''inserts a sourceFile into /usr/share/man/manPREFIX/ directory as a destinationFile'''
-    shutil.move(sourceFile, destinationFile)
+    move(sourceFile, destinationFile)
     doman(destinationFile)
-
-''' ************************************************************************** '''
 
 def remove(sourceFile):
     '''removes sourceFile'''

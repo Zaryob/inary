@@ -9,44 +9,60 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
 
 # standard python modules
 import os
 
-# actions api modules
-from pisi.actionsapi.actionglobals import glb
+# Pisi Modules
+from pisi.ui import ui
 
-# Global variables for compiling KDE programs...
-kde_dir = os.getenv('KDEDIR')
-qt_dir = os.getenv('QTDIR')
-qt_libdir = os.path.join(os.getenv('QTDIR') + '/lib/')
+# ActionsAPI Modules
+import pisi.actionsapi
+import pisi.actionsapi.get as get
+from pisi.actionsapi.shelltools import system
+
+class ConfigureError(pisi.actionsapi.Error):
+    def __init__(self, Exception):
+        ui.error(Exception)
+        if can_access_file('config.log'):
+            ui.error('\n!!! Please attach the config.log to your bug report:\n%s/config.log\n' % os.getcwd())
+
+class MakeError(pisi.actionsapi.Error):
+    def __init__(self, Exception):
+        ui.error(Exception)
+
+class InstallError(pisi.actionsapi.Error):
+    def __init__(self, Exception):
+        ui.error(Exception)
 
 def configure(parameters = ''):
-    ''' FIXME: Düzgün hale getirilecek '''
     ''' parameters = '--with-nls --with-libusb --with-something-usefull '''
-
-    configure_string = './configure --prefix=%s \
+    if can_access_file('configure'):
+        args = './configure \
+                --prefix=%s \
                 --host=%s \
                 --with-x \
                 --enable-mitshm \
                 --with-qt-dir=%s \
                 --enable-mt \
                 --with-qt-libraries=%s \
-                %s' % (kde_dir, glb.env.host, qt_dir, qt_libdir, parameters)
+                %s' % (get.kdeDIR(), get.HOST(), get.qtDIR(), get.qtLIBDIR(), parameters)
 
-    os.system(configure_string)
+        if system(args):
+            raise ConfigureError('!!! Configure failed...\n')
+    else:
+        raise ConfigureError('!!! No configure script found...\n')
 
-def make():
-    ''' FIXME: Düzgün hale getirilecek '''
-    os.system('make')
+def make(parameters = ''):
+    '''make source with given parameters = "all" || "doc" etc.'''
+    if system('make %s' % parameters):
+        raise MakeError('!!! Make failed...\n')
 
 def install():
-    ''' FIXME: Düzgün hale getirilecek '''
-    ''' dir_suffix = /var/tmp/pisi/ _paket_adı_ /image/ '''
-
-    dir_suffix = os.path.dirname(os.path.dirname(os.getcwd())) + \
-        glb.const.install_dir_suffix
-    
-    install_string = 'make prefix=%s/%s install' % (dir_suffix, kde_dir)
-    os.system(install_string)
+    if can_access_file('Makefile'):
+        args = 'make prefix=%s/%s install' % (get.installDIR(), get.kdeDIR())
+        
+        if system(args):
+            raise InstallError('!!! Install failed...\n')
+    else:
+        raise InstallError('!!! No Makefile found...\n')

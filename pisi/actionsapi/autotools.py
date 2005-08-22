@@ -9,7 +9,6 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
 
 # Standard Python Modules
 import os
@@ -47,24 +46,30 @@ def configure(parameters = ''):
     if can_access_file('configure'):
         gnuconfig_update()
         
-        configure_string = './configure --prefix=/%s --host=%s --mandir=/%s \
-            --infodir=/%s --datadir=/%s --sysconfdir=/%s \
-                --localstatedir=/%s %s' \
-                    % (get.defaultprefixDIR(), get.HOST(), get.manDIR(), 
-                        get.infoDIR(), get.dataDIR(), get.confDIR(), 
-                            get.localstateDIR(), parameters)
+        args = './configure \
+                --prefix=/%s \
+                --host=%s \
+                --mandir=/%s \
+                --infodir=/%s \
+                --datadir=/%s \
+                --sysconfdir=/%s \
+                --localstatedir=/%s \
+                %s' % (get.defaultprefixDIR(), \
+                       get.HOST(), get.manDIR(), \
+                       get.infoDIR(), get.dataDIR(), \
+                       get.confDIR(), get.localstateDIR(), parameters)
     
-        if system(configure_string):
+        if system(args):
             raise ConfigureError('!!! Configure failed...\n')
     else:
         raise ConfigureError('!!! No configure script found...\n')
 
-def rawConfigure(parameters = '', prefix=''):
+def rawConfigure(parameters = ''):
     '''configure source with given parameters = "--prefix=/usr --libdir=/usr/lib --with-nls"'''
     if can_access_file('configure'):
         gnuconfig_update()
 
-        if system('%s ./configure %s' % (prefix, parameters)):
+        if system('./configure %s' % parameters):
             raise ConfigureError('!!! Configure failed...\n')
     else:
         raise ConfigureError('!!! No configure script found...\n')
@@ -81,7 +86,7 @@ def make(parameters = ''):
 def install(parameters = ''):
     '''install source into install directory with given parameters'''
     if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
-        install_string = 'make prefix=%(prefix)s/%(defaultprefix)s \
+        args = 'make prefix=%(prefix)s/%(defaultprefix)s \
                 datadir=%(prefix)s/%(data)s \
                 infodir=%(prefix)s/%(info)s \
                 localstatedir=%(prefix)s/%(localstate)s \
@@ -97,7 +102,7 @@ def install(parameters = ''):
                             'data': get.dataDIR(),
                             'parameters': parameters}
 
-        if system(install_string):
+        if system(args):
             raise InstallError('!!! Install failed...\n')
     else:
         raise InstallError('!!! No Makefile found...\n')
@@ -113,14 +118,14 @@ def rawInstall(parameters = ''):
 def aclocal(parameters = ''):
     '''generates an aclocal.m4 based on the contents of configure.in.'''    
     if system('aclocal %s' % parameters):
-        raise RunTimeError("!!!! Running aclocal failed...")
+        raise RunTimeError('!!! Running aclocal failed...')
 
 def autoconf(parameters = ''):
     '''generates a configure script'''
     if system('autoconf %s' % parameters):
-        raise RunTimeError("!!!! Running autoconf failed...")
+        raise RunTimeError('!!! Running autoconf failed...')
 
 def automake(parameters = ''):
     '''generates a makefile'''
     if system('automake %s' % parameters):
-        raise RunTimeError("!!!! Running automake failed...")
+        raise RunTimeError('!!! Running automake failed...')

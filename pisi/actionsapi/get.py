@@ -9,7 +9,6 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
 
 # Standart Python Modules
 import os.path
@@ -91,6 +90,15 @@ def localstateDIR():
 def defaultprefixDIR():
     return dirs.defaultprefix
 
+def kdeDIR():
+    return dirs.kde
+
+def qtDIR():
+    return dirs.qt
+
+def qtLIBDIR():
+    return '%s/lib/' % qtDIR()
+
 # Binutils Variables
 
 def exists_binary(bin):
@@ -105,10 +113,9 @@ def getBinutilsInfo(util):
     cross_build_name = '%s-%s' % (HOST(), util)
     if not exists_binary(cross_build_name):
         if not exists_binary(util):
-            #ui.error('Error: util %s cannot be found' % util)
             raise BinutilsError('util %s cannot be found' % util)
         else:
-            ui.debug('Warning: %s does not exist, using plain name %s'
+            ui.debug('Warning: %s does not exist, using plain name %s' \
                      % (cross_build_name, util))
             return util
     else:
