@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#!/usr/bin/python
 #
 # Copyright (C) 2005, TUBITAK/UEKAE
 #
