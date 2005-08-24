@@ -83,7 +83,7 @@ def make(parameters = ''):
     if system('make %s' % parameters):
             raise MakeError('!!! Make failed...\n')
 
-def install(parameters = ''):
+def install(parameters = '', argument = 'install'):
     '''install source into install directory with given parameters'''
     if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
         args = 'make prefix=%(prefix)s/%(defaultprefix)s \
@@ -93,24 +93,25 @@ def install(parameters = ''):
                 mandir=%(prefix)s/%(man)s \
                 sysconfdir=%(prefix)s/%(conf)s \
                 %(parameters)s \
-                install' % {'prefix': get.installDIR(),
+                %(argument)s' % {'prefix': get.installDIR(),
                             'defaultprefix': get.defaultprefixDIR(),
                             'man': get.manDIR(),
                             'info': get.infoDIR(),
                             'localstate': get.localstateDIR(),
                             'conf': get.confDIR(),
                             'data': get.dataDIR(),
-                            'parameters': parameters}
+                            'parameters': parameters,
+                            'argument':argument}
 
         if system(args):
             raise InstallError('!!! Install failed...\n')
     else:
         raise InstallError('!!! No Makefile found...\n')
 
-def rawInstall(parameters = ''):
+def rawInstall(parameters = '', argument = 'install'):
     '''install source into install directory with given parameters = PREFIX=%s % get.installDIR()'''
     if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
-        if system('make %s install' % parameters):
+        if system('make %s %s' % (parameters, argument)):
             raise InstallError('!!! Install failed...\n')
     else:
         raise InstallError('!!! No Makefile found...\n')
