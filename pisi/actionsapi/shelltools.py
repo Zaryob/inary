@@ -72,6 +72,8 @@ def unlink(sourceFile):
             os.unlink(sourceFile)
         except OSError:
             ui.error('\n!!! ActionsAPI [unlink]: Permission denied...\n')
+    elif isDirectory(sourceFile):
+        pass
     else:
         ui.error('\n!!! ActionsAPI [unlink]: File doesn\'t exists...\n')
 
@@ -82,8 +84,10 @@ def unlinkDir(sourceDirectory):
             shutil.rmtree(sourceDirectory)
         except OSError:
             ui.error('\n!!! ActionsAPI [unlinkDir]: Operation not permitted...\n')
+    elif isFile(sourceDirectory):
+        pass                                
     else:
-        ui.error('\n!!! ActionsAPI [unlinkDir]: File doesn\'t exists...\n')
+        ui.error('\n!!! ActionsAPI [unlinkDir]: Directory doesn\'t exists...\n')
 
 def move(sourceFile, destinationFile):
     '''recursively move a sourceFile or directory to destinationFile'''
@@ -156,9 +160,9 @@ def isFile(sourceFile):
     '''return True if sourceFile is an existing regular file'''
     return os.path.isfile(sourceFile)
 
-def isDirectory(sourceFile):
+def isDirectory(sourceDirectory):
     '''Return True if sourceFile is an existing directory'''
-    return os.path.isdir(sourceFile)
+    return os.path.isdir(sourceDirectory)
 
 def realPath(sourceFile):
     '''return the canonical path of the specified filename, eliminating any symbolic links encountered in the path'''

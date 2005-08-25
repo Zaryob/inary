@@ -211,8 +211,10 @@ def newman(sourceFile, destinationFile):
 
 def remove(sourceFile):
     '''removes sourceFile'''
-    unlink(get.installDIR() + sourceFile)
+    for file in glob.glob(get.installDIR() + sourceFile):
+        unlink(file)
 
 def removeDir(destinationDirectory):
     '''removes destinationDirectory and its subtrees'''
-    unlinkDir(get.installDIR() + destinationDirectory)
+    for directory in glob.glob(get.installDIR() + destinationDirectory):
+        unlinkDir(directory)
