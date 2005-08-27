@@ -76,4 +76,5 @@ class SpecFileTestCase(unittest.TestCase):
         self.spec.read("tests/popt/pspec.xml")
         self.spec.write(os.path.join(config.tmp_dir(), 'popt-copy.pspec.xml'))
 
+
 suite = unittest.makeSuite(SpecFileTestCase)

@@ -21,12 +21,16 @@
 from os.path import basename
 
 # pisi modules
-from xmlext import *
-from xmlfile import XmlFile
-from ui import ui
-from dependency import DepInfo
-from util import Checks
+from pisi.xmlext import *
+import pisi.xmlfile as xmlfile
+from pisi.xmlfile import XmlFile
+from pisi.ui import ui
+from pisi.dependency import DepInfo
+from pisi.util import Checks
 
+
+#class Packager:
+#    __metaclass__ = xmlfile.autoxml
 
 class PackagerInfo:
     def __init__(self, node = None):
@@ -50,7 +54,7 @@ class PackagerInfo:
         return err.list
 
     def __str__(self):
-        s = " ".join(self.name, self.email)
+        s = "%s <%s>" % (self.name, self.email)
         return s
 
 class AdditionalFileInfo:

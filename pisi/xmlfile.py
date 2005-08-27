@@ -28,6 +28,55 @@ import codecs
 
 from xmlext import *
 
+import pisi
+
+class Error(pisi.Error):
+    pass
+
+import types
+
+mandatory, optional = range(2)
+
+class autoxml(type):
+
+    def __init__(cls, name, bases, dict):
+
+        # add XmlFile as one of the superclasses
+        bases = list(bases)
+        if not XmlFile in bases:
+            bases.append(XmlFile)
+
+        # standard initialization
+        super(autoxml, cls).__init__(name, bases, dict)
+
+        # initialize class attribute __xml_tags
+        setattr(cls, '__xml_tags', [])
+
+        # find variables that start with x_
+        for var in dict:
+            if var.startswith('t_'):
+                print 'xml tag', var
+                autoxml.gen_tag(cls, var[2:])
+
+    def gen_tag(cls, tag):
+        # generate readers and writers for the tag
+        val = getattr(cls, 't_' + tag)
+        tag_type = val[0]
+        if type(tag_type) == type(type):
+            if val[0] == types.IntType:
+                autoxml.gen_int_tag(cls, tag, val)
+    #gen_tag = staticmethod(gen_tag)
+
+    def mixed_case(cls, identifier):
+        identifier_p = identifier[0].lower() + identifier[1:]
+        return identifier_p
+
+    def gen_int_tag(cls, tag, val):
+        print tag, val
+        name = cls.mixed_case(tag)
+        def read_int(self):
+            self.name = getNodeText(getNode(node, tag))
+        setattr(cls, 'decode' + tag, read_int)
 
 class XmlFile(object):
     """A class for retrieving information from an XML file"""
