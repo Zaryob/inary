@@ -14,7 +14,7 @@
 import os
 
 # Pisi Modules
-from pisi.ui import ui
+import pisi.context as ctx
 
 # ActionsAPI Modules
 import pisi.actionsapi
@@ -25,21 +25,21 @@ from pisi.actionsapi.libtools import gnuconfig_update
 
 class ConfigureError(pisi.actionsapi.Error):
     def __init__(self, Exception):
-        ui.error(Exception)
+        ctx.ui.error(Exception)
         if can_access_file('config.log'):
-            ui.error('\n!!! Please attach the config.log to your bug report:\n%s/config.log\n' % os.getcwd())
+            ctx.ui.error('\n!!! Please attach the config.log to your bug report:\n%s/config.log\n' % os.getcwd())
 
 class MakeError(pisi.actionsapi.Error):
     def __init__(self, Exception):
-        ui.error(Exception)
+        ctx.ui.error(Exception)
 
 class InstallError(pisi.actionsapi.Error):
     def __init__(self, Exception):
-        ui.error(Exception)
+        ctx.ui.error(Exception)
 
 class RunTimeError(pisi.actionsapi.Error):
     def __init__(self, Exception):
-        ui.error(Exception)
+        ctx.ui.error(Exception)
 
 def configure(parameters = ''):
     '''configure source with given parameters = "--with-nls --with-libusb --with-something-usefull"'''

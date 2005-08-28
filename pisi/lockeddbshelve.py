@@ -19,8 +19,7 @@ import bsddb.db as db
 import os
 import fcntl
 
-from pisi.config import config
-import pisi.util as util
+import pisi
 
 class LockedDBShelf(shelve.DBShelf):
 
@@ -41,22 +40,20 @@ class LockedDBShelf(shelve.DBShelf):
                 flags = db.DB_TRUNCATE | db.DB_CREATE
             else:
                 raise error, "flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
-        filename = os.path.join( config.db_dir(), dbname + '.bdb')
+        filename = os.path.join( pisi.context.config.db_dir(), dbname + '.bdb')
         LockedDBShelf.open(self,filename, dbname, filetype, flags, mode)
         
     def open(self, filename, dbname, filetype, flags, mode):
-        util.check_dir(config.db_dir())
+        pisi.util.check_dir(pisi.context.config.db_dir())
         self.lockfile = file(filename + '.lock', 'w')
         try:
             fcntl.flock(self.lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except IOError:
             import sys
-            from ui import ui
-            ui.error("Another instance of PISI is running. Try later!\n")
+            pisi.context.ui.error("Another instance of PISI is running. Try later!\n")
             sys.exit(1)
         return self.db.open(filename, dbname, filetype, flags, mode)
 
     def close(self):
         self.db.close()
         self.lockfile.close()
-

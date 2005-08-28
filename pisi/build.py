@@ -23,9 +23,7 @@ _ = __trans.ugettext
 
 import pisi
 import pisi.util as util
-from pisi.ui import ui
-from pisi.constants import const
-from pisi.config import config
+import pisi.context as ctx
 from pisi.context import BuildContext
 from pisi.sourcearchive import SourceArchive
 from pisi.files import Files, FileInfo
@@ -74,9 +72,47 @@ def check_path_collision(package, pkgList):
                 # path.pathname: /usr/share/doc
                 if util.subpath(pinfo.pathname, path.pathname):
                     collisions.append(path.pathname)
-                    ui.error(_('Path %s belongs in multiple packages\n') %
+                    ctx.ui.error(_('Path %s belongs in multiple packages\n') %
                              path.pathname)
     return collisions
+
+# a dynamic build context
+from pisi.specfile import SpecFile
+
+
+class BuildContext(object):
+    """Build Context Singleton"""
+
+    def __init__(self, pspecfile):
+        super(BuildContext, self).__init__()
+        self.set_spec_file(pspecfile)
+
+    def set_spec_file(self, pspecfile):
+        self.pspecfile = pspecfile
+        spec = SpecFile()
+        spec.read(pspecfile)
+        # FIXME: following checks the integrity but does nothing when it is wrong
+        # -gurer
+        #spec.verify()    # check pspec integrity
+        self.spec = spec
+
+    # directory accessor functions
+        
+    # pkg_x_dir: per package directory for storing info type x
+
+    def pkg_dir(self):
+        "package build directory"
+        packageDir = self.spec.source.name + '-' + \
+                     self.spec.source.version + '-' + self.spec.source.release
+
+        return config.destdir + config.values.dirs.tmp_dir \
+               + '/' + packageDir
+   
+    def pkg_work_dir(self):
+        return self.pkg_dir() + const.work_dir_suffix
+
+    def pkg_install_dir(self):
+        return self.pkg_dir() + const.install_dir_suffix
 
 
 class PisiBuild:
@@ -106,7 +142,7 @@ class PisiBuild:
     def build(self):
         """Build the package in one shot."""
 
-        ui.info(_("Building PISI source package: %s\n") % self.spec.source.name)
+        ctx.ui.info(_("Building PISI source package: %s\n") % self.spec.source.name)
         util.xterm_title(_("Building PISI source package: %s\n") % self.spec.source.name)
         
         self.compile_action_script()
@@ -140,30 +176,30 @@ class PisiBuild:
         os.environ.update(evn)
 
     def fetch_source_archive(self):
-        ui.info(_("Fetching source from: %s\n") % self.spec.source.archiveUri)
+        ctx.ui.info(_("Fetching source from: %s\n") % self.spec.source.archiveUri)
         self.sourceArchive.fetch()
-        ui.info(_("Source archive is stored: %s/%s\n")
+        ctx.ui.info(_("Source archive is stored: %s/%s\n")
                 %(config.archives_dir(), self.spec.source.archiveName))
 
     def unpack_source_archive(self):
-        ui.info(_("Unpacking archive..."))
+        ctx.ui.info(_("Unpacking archive..."))
         self.sourceArchive.unpack()
-        ui.info(_(" unpacked (%s)\n") % self.ctx.pkg_work_dir())
+        ctx.ui.info(_(" unpacked (%s)\n") % self.ctx.pkg_work_dir())
         self.set_state("unpacked")
 
     def run_setup_action(self):
         #  Run configure, build and install phase
-        ui.action(_("Setting up source...\n"))
+        ctx.ui.action(_("Setting up source...\n"))
         self.run_action_function(const.setup_func)
         self.set_state("setupaction")
 
     def run_build_action(self):
-        ui.action(_("Building source...\n"))
+        ctx.ui.action(_("Building source...\n"))
         self.run_action_function(const.build_func)
         self.set_state("buildaction")
 
     def run_install_action(self):
-        ui.action(_("Installing...\n"))
+        ctx.ui.action(_("Installing...\n"))
         
         # Before install make sure install_dir is clean 
         if os.path.exists(self.ctx.pkg_install_dir()):
@@ -182,10 +218,10 @@ class PisiBuild:
             buf = open(scriptfile).read()
             exec compile(buf, "error", "exec") in localSymbols, globalSymbols
         except IOError, e:
-            ui.error(_("Unable to read Action Script (%s): %s\n") %(scriptfile,e))
+            ctx.ui.error(_("Unable to read Action Script (%s): %s\n") %(scriptfile,e))
             sys.exit(1)
         except SyntaxError, e:
-            ui.error (_("SyntaxError in Action Script (%s): %s\n") %(scriptfile,e))
+            ctx.ui.error (_("SyntaxError in Action Script (%s): %s\n") %(scriptfile,e))
             sys.exit(1)
 
         self.actionLocals = localSymbols
@@ -236,7 +272,7 @@ class PisiBuild:
                                             compressType=patch.compressionType,
                                             targetDir=config.tmp_dir())
 
-            ui.action(_("* Applying patch: %s\n") % patch.filename)
+            ctx.ui.action(_("* Applying patch: %s\n") % patch.filename)
             util.do_patch(self.srcDir, patchFile, level=patch.level, target=patch.target)
 
     def gen_metadata_xml(self, package):
@@ -262,7 +298,7 @@ class PisiBuild:
         # build no
         if config.options.ignore_build_no:
             metadata.package.build = None  # means, build no information n/a
-            ui.warning('build number is not available.')
+            ctx.ui.warning('build number is not available.')
         else:
             metadata.package.build = self.calc_build_no(metadata.package.name)
 
@@ -305,7 +341,7 @@ class PisiBuild:
                 if fn.startswith(package_name + '-') and \
                     fn.endswith(const.package_prefix):
                     old_package_fn = os.path.join(root, fn)
-                    ui.info('(found old version %s)' % old_package_fn)
+                    ctx.ui.info('(found old version %s)' % old_package_fn)
                     old_pkg = Package(old_package_fn, 'r')
                     from os.path import join
                     old_pkg.read(join(config.tmp_dir(), 'oldpkg'))
@@ -313,7 +349,7 @@ class PisiBuild:
                     found.append( (old_package_fn, old_build) )
         if not found:
             return 0
-            ui.warning('(no previous build found, setting build no to 0.)')
+            ctx.ui.warning('(no previous build found, setting build no to 0.)')
         else:
             a = filter(lambda (x,y): y != None, found)
             if a:
@@ -350,7 +386,7 @@ class PisiBuild:
 
             # set build number
             if old_build is None:
-                ui.warning('(old package lacks a build no, setting build no to 0.)')
+                ctx.ui.warning('(old package lacks a build no, setting build no to 0.)')
                 return 0
             elif changed:
                 return old_build + 1
@@ -367,17 +403,17 @@ class PisiBuild:
                                      self.spec.source.release)
             
 
-            ui.action(_("** Building package %s\n") % package.name);
+            ctx.ui.action(_("** Building package %s\n") % package.name);
 
-            ui.action(_("Generating %s...") % const.files_xml)
+            ctx.ui.action(_("Generating %s...") % const.files_xml)
             self.gen_files_xml(package)
-            ui.info(_(" done.\n"))
+            ctx.ui.info(_(" done.\n"))
            
-            ui.action(_("Generating %s...") % const.metadata_xml)
+            ctx.ui.action(_("Generating %s...") % const.metadata_xml)
             self.gen_metadata_xml(package)
-            ui.info(_(" done.\n"))
+            ctx.ui.info(_(" done.\n"))
 
-            ui.action(_("Creating PISI package %s\n") % name)
+            ctx.ui.action(_("Creating PISI package %s\n") % name)
             
             pkg = Package(name, 'w')
 

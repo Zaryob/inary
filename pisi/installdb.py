@@ -20,8 +20,8 @@ import fcntl
 
 # PiSi
 import pisi
+import pisi.context as ctx
 import pisi.lockeddbshelve as shelve
-from pisi.constants import const
 from pisi.files import Files
 import pisi.util as util
 
@@ -72,12 +72,10 @@ class InstallDB:
         from os.path import join
         self.d = shelve.LockedDBShelf('install')
         self.dp = shelve.LockedDBShelf('configpending')
-        from pisi.config import config
-        self.files_dir = os.path.join(config.db_dir(), 'files')
+        self.files_dir = os.path.join(ctx.config.db_dir(), 'files')
 
     def files_name(self, pkg, version, release):
         from os.path import join
-        from pisi.config import config
         pkg_dir = join(config.lib_dir(), pkg + '-' + version + '-' + release)
         return join(pkg_dir, const.files_xml)
 
@@ -133,7 +131,6 @@ class InstallDB:
     def install(self, pkg, version, release, build, distro = ""):
         """install package with specific version, release, build"""
         pkg = str(pkg)
-        from pisi.config import config
         if self.is_installed(pkg):
             raise InstallDBError("already installed")
         if config.options and config.options.ignore_comar:
@@ -155,5 +152,8 @@ class InstallDB:
         if self.d.has_key(pkg):
             del self.d[pkg]
 
-installdb = InstallDB()
+installdb = None
+
+def init():
+    installdb = InstallDB()
 

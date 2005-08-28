@@ -59,5 +59,8 @@ class SourceDB(object):
         name = str(name)
         del self.d[name]
 
-sourcedb = SourceDB()
+sourcedb = None
 
+def init():
+    sourcedb = SourceDB()
+    

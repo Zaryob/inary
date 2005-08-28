@@ -19,8 +19,6 @@ import os
 import pisi
 from pisi.specfile import *
 from pisi.package import Package
-from pisi.config import config
-from pisi.constants import const
 from pisi.ui import ui
 from pisi.installdb import installdb
 import pisi.packagedb as packagedb

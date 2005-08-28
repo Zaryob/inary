@@ -26,7 +26,7 @@ from bsddb import db
 
 import pisi
 import pisi.util as util
-from pisi.config import config
+import pisi.context as ctx
 
 class PackageDBError(pisi.Error):
     pass
@@ -35,9 +35,9 @@ class PackageDB(object):
     """PackageDB class provides an interface to the package database with
     a delegated dbshelve object"""
     def __init__(self, id):
-        util.check_dir(config.db_dir())
-        self.fname = os.path.join(config.db_dir(), 'package-%s.bdb' % id )
-        self.fname2 = os.path.join(config.db_dir(), 'revdep-%s.bdb'  % id )
+        util.check_dir(ctx.config.db_dir())
+        self.fname = os.path.join(ctx.config.db_dir(), 'package-%s.bdb' % id )
+        self.fname2 = os.path.join(ctx.config.db_dir(), 'revdep-%s.bdb'  % id )
         self.lockfile = file(self.fname + '.lock', 'w')
         try:
             fcntl.flock(self.lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -147,5 +147,9 @@ def remove_package(name):
 
 # tracking databases for non-repository information
 
-thirdparty_packagedb = PackageDB('thirdparty')
-inst_packagedb = PackageDB('installed')
+thirdparty_packagedb = None
+inst_packagedb = None
+
+def init():
+    thirdparty_packagedb = PackageDB('thirdparty')
+    inst_packagedb = PackageDB('installed')

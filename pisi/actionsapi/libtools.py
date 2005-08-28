@@ -14,7 +14,7 @@
 import os
 
 # Pisi-Core Modules
-from pisi.ui import ui
+import pisi.context as ctx
 
 # ActionsAPI Modules
 import pisi.actionsapi
@@ -23,7 +23,7 @@ import pisi.actionsapi.get as get
 
 class RunTimeError(pisi.actionsapi.Error):
     def __init__(self, Exception):
-        ui.error(Exception)
+        ctx.ui.error(Exception)
 
 def preplib(sourceDirectory = '/usr/lib'):
     sourceDirectory = get.installDIR() + sourceDirectory
@@ -40,7 +40,7 @@ def gnuconfig_update():
         for file in files:
             if file in ['config.sub', 'config.guess']:
                 copy('/usr/share/gnuconfig/%s' % file, os.path.join(root, file))
-                ui.info('GNU Config Update Finished...\n')
+                ctx.ui.info('GNU Config Update Finished...\n')
 
 def libtoolize(parameters = ''):
     if system('/usr/bin/libtoolize %s' % parameters):

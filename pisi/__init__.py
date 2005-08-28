@@ -8,7 +8,7 @@
 # Please read the COPYING file.
 #
 
-# PISI version
+# PiSi version
 
 __version__ = "0.3"
 

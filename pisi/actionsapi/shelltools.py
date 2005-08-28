@@ -16,7 +16,7 @@ import glob
 import shutil
 
 # Pisi Modules
-from pisi.ui import ui
+import pisi.context as ctx
 
 # ActionsAPI Modules
 import pisi.actionsapi
@@ -44,9 +44,9 @@ def chmod(sourceFile, mode = 0755):
             try:
                 os.chmod(file, mode)
             except OSError:
-                ui.error('\n!!! ActionsAPI [chmod]: Operation not permitted...\n')
+                ctx.ui.error('\n!!! ActionsAPI [chmod]: Operation not permitted...\n')
         else:
-            ui.error('\n!!! ActionsAPI [chmod]: File doesn\'t exists...\n')
+            ctx.ui.error('\n!!! ActionsAPI [chmod]: File doesn\'t exists...\n')
 
 def chown(sourceFile, uid = 0, gid = 0):
     '''change the owner and group id of sourceFile to the numeric uid and gid'''
@@ -54,16 +54,16 @@ def chown(sourceFile, uid = 0, gid = 0):
         try:
             os.chown(sourceFile, uid, gid)
         except OSError:
-            ui.error('\n!!! ActionsAPI [chown]: Operation not permitted...\n')
+            ctx.ui.error('\n!!! ActionsAPI [chown]: Operation not permitted...\n')
     else:
-        ui.error('\n!!! ActionsAPI [chown]: File doesn\'t exists...\n')
+        ctx.ui.error('\n!!! ActionsAPI [chown]: File doesn\'t exists...\n')
 
 def sym(sourceFile, destinationFile):
     '''creates symbolic link'''
     try:
         os.symlink(sourceFile, destinationFile)
     except OSError:
-        ui.error('\n!!! ActionsAPI [sym]: Permission denied...\n')
+        ctx.ui.error('\n!!! ActionsAPI [sym]: Permission denied...\n')
 
 def unlink(sourceFile):
     '''remove the file path'''
@@ -71,11 +71,11 @@ def unlink(sourceFile):
         try:
             os.unlink(sourceFile)
         except OSError:
-            ui.error('\n!!! ActionsAPI [unlink]: Permission denied...\n')
+            ctx.ui.error('\n!!! ActionsAPI [unlink]: Permission denied...\n')
     elif isDirectory(sourceFile):
         pass
     else:
-        ui.error('\n!!! ActionsAPI [unlink]: File doesn\'t exists...\n')
+        ctx.ui.error('\n!!! ActionsAPI [unlink]: File doesn\'t exists...\n')
 
 def unlinkDir(sourceDirectory):
     '''delete an entire directory tree'''
@@ -83,11 +83,11 @@ def unlinkDir(sourceDirectory):
         try:
             shutil.rmtree(sourceDirectory)
         except OSError:
-            ui.error('\n!!! ActionsAPI [unlinkDir]: Operation not permitted...\n')
+            ctx.ui.error('\n!!! ActionsAPI [unlinkDir]: Operation not permitted...\n')
     elif isFile(sourceDirectory):
         pass                                
     else:
-        ui.error('\n!!! ActionsAPI [unlinkDir]: Directory doesn\'t exists...\n')
+        ctx.ui.error('\n!!! ActionsAPI [unlinkDir]: Directory doesn\'t exists...\n')
 
 def move(sourceFile, destinationFile):
     '''recursively move a sourceFile or directory to destinationFile'''
@@ -96,9 +96,9 @@ def move(sourceFile, destinationFile):
             try:
                 shutil.move(file, destinationFile)
             except OSError:
-                ui.error('\n!!! ActionsAPI [move]: Permission denied...\n')
+                ctx.ui.error('\n!!! ActionsAPI [move]: Permission denied...\n')
         else:
-            ui.error('\n!!! ActionsAPI [move]: File doesn\'t exists...\n')
+            ctx.ui.error('\n!!! ActionsAPI [move]: File doesn\'t exists...\n')
 
 def copy(sourceFile, destinationFile):
     '''recursively copy a sourceFile or directory to destinationFile'''
@@ -107,9 +107,9 @@ def copy(sourceFile, destinationFile):
             try:
                 shutil.copy(file, destinationFile)
             except IOError:
-                ui.error('\n!!! ActionsAPI [copy]: Permission denied...\n')
+                ctx.ui.error('\n!!! ActionsAPI [copy]: Permission denied...\n')
         else:
-            ui.error('\n!!! ActionsAPI [copy]: File doesn\'t exists...\n')
+            ctx.ui.error('\n!!! ActionsAPI [copy]: File doesn\'t exists...\n')
 
 def copytree(source, destination, sym = False):
     '''recursively copy an entire directory tree rooted at source'''
@@ -117,9 +117,9 @@ def copytree(source, destination, sym = False):
         try:
             shutil.copytree(source, destination, sym)
         except OSError:
-            ui.error('\n!!! ActionsAPI [copytree]: Permission denied...\n')
+            ctx.ui.error('\n!!! ActionsAPI [copytree]: Permission denied...\n')
     else:
-        ui.error('\n!!! ActionsAPI [copytree]: Directory doesn\'t exists...\n')
+        ctx.ui.error('\n!!! ActionsAPI [copytree]: Directory doesn\'t exists...\n')
 
 def touch(sourceFile):
     '''changes the access time of the 'sourceFile', or creates it if it is not exist'''
@@ -131,7 +131,7 @@ def touch(sourceFile):
             f = open(sourceFile, 'w')
             f.close()
         except IOError:
-            ui.error('\n!!! ActionsAPI [touch]: Permission denied...\n')
+            ctx.ui.error('\n!!! ActionsAPI [touch]: Permission denied...\n')
 
 def cd(directoryName = ''):
     '''change directory'''
@@ -179,12 +179,12 @@ def dirName(sourceFile):
 def system(command):
     #FIXME: String formatting
     command = command.replace("                 ", " ")
-    ui.debug('executing %s\n' % command)
+    ctx.ui.debug('executing %s\n' % command)
     p = os.popen(command)
     while 1:
         line = p.readline()
         if not line:
             break
-        ui.debug(line)
+        ctx.ui.debug(line)
 
     return p.close()

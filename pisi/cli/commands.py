@@ -116,7 +116,7 @@ class Command(object):
         import pisi
         import pisi.api
         pisi.api.init(database, self.options)
-        from pisi.ui import ui
+        import pisi.context as ctx
 
     def finalize(self):
         """do cleanup work for PiSi components"""
@@ -134,7 +134,7 @@ class Command(object):
 
     def help(self):
         """print help for the command"""
-        pisi.ui.ui.info(self.format_name() + ': ')
+        ctx.ui.info(self.format_name() + ': ')
         print getattr(self, "__doc__")
         print self.parser.format_option_help()
 
@@ -227,8 +227,7 @@ fetch all necessary files and build the package for you.
             return
 
         self.init()
-        from pisi.config import config
-        pisi.ui.ui.info('Output directory: %s\n' % config.options.output_dir)
+        ctx.ui.info('Output directory: %s\n' % config.options.output_dir)
         for arg in self.args:
             pisi.api.build(arg, self.authInfo)
         self.finalize()
@@ -254,7 +253,7 @@ class PackageOp(Command):
             try:
                 pisi.comariface.init()
             except pisi.comariface.ComarError:
-                pisi.ui.ui.error('Comar error encountered\n')
+                ctx.ui.error('Comar error encountered\n')
                 self.die()
                 
     def finalize(self):
@@ -645,7 +644,6 @@ Gives a brief list of PiSi components published in the repository.
 
     def run(self):
         from pisi.repodb import repodb
-        from pisi.ui import ui
 
         self.init(True)
 
@@ -655,7 +653,7 @@ Gives a brief list of PiSi components published in the repository.
         else:
             # print for all repos
             for repo in repodb.list():
-                ui.info("Repository : %s\n" % repo)
+                ctx.ui.info("Repository : %s\n" % repo)
                 self.print_packages(repo)
         self.finalize()
 
@@ -681,8 +679,6 @@ class ListPending(Command):
 
     def run(self):
         from pisi.installdb import installdb
-        from pisi.ui import ui
-
         self.init(True)
 
         list = installdb.list_pending()

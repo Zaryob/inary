@@ -13,9 +13,9 @@
 
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 
-from xmlext import *
-from xmlfile import XmlFile
-from util import Checks
+from pisi.xmlext import *
+from pisi.xmlfile import XmlFile
+from pisi.util import Checks
 
 class FileInfo:
     """FileInfo holds the information for a File node/tag in files.xml"""

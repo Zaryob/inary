@@ -12,13 +12,12 @@
 
 # Author:  Eray Ozkural <eray@uludag.org.tr>
 
-from installdb import installdb
-import packagedb
-from ui import ui
-from version import Version
-from xmlext import *
-from xmlfile import XmlFile
-from util import Checks
+#import pisi.db as db
+import pisi.context as ctx
+from pisi.version import Version
+from pisi.xmlext import *
+from pisi.xmlfile import XmlFile
+from pisi.util import Checks
 
 class DepInfo:
     def __init__(self, node = None):

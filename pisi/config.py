@@ -17,7 +17,7 @@
 #          Eray Ozkural <eray@uludag.org.tr>
 
 import pisi
-from pisi.constants import const
+import pisi.context as ctx
 from pisi.configfile import ConfigurationFile
 
 class Config(object):
@@ -55,6 +55,7 @@ class Config(object):
     # kullanılıyor ama /var/tmp/pisi/install gibi bir dizine niye
     # ihtiyacımız var? (baris)
     def install_dir(self):
-        return self.tmp_dir() + const.install_dir_suffix
+        return self.tmp_dir() + ctx.const.install_dir_suffix
 
+#TODO: remove this
 config = Config()

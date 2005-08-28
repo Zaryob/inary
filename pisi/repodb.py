@@ -14,7 +14,7 @@ from bsddb import db
 import bsddb.dbshelve as shelve
 import os, fcntl
 
-from pisi.config import config
+import pisi.context as ctx
 import pisi.packagedb as packagedb
 import pisi.util as util
 from pisi.uri import URI
@@ -22,7 +22,7 @@ from pisi.uri import URI
 class RepoDB(object):
     """RepoDB maps repo ids to repository information"""
     def __init__(self):
-        self.filename = os.path.join(config.db_dir(), 'repo.bdb')
+        self.filename = os.path.join(ctx.config.db_dir(), 'repo.bdb')
         self.d = shelve.open(self.filename)
         self.fdummy = open(self.filename + '.lock', 'w')
         fcntl.flock(self.fdummy, fcntl.LOCK_EX)
@@ -59,4 +59,10 @@ class RepoDB(object):
         name = str(name)
         del self.d[name]
 
-repodb = RepoDB()
+repodb = None
+
+def init():
+    repodb = RepoDB()
+    repodb.init_dbs()
+    print 'repodb initialized'
+    

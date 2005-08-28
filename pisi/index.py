@@ -20,10 +20,8 @@ from pisi.package import Package
 from pisi.xmlfile import XmlFile
 import pisi.metadata as metadata
 import pisi.packagedb as packagedb
-from pisi.ui import ui
+import pisi.context as ctx
 import pisi.util as util
-from pisi.config import config
-from pisi.constants import const
 from pisi.uri import URI
 
 class Index(XmlFile):
@@ -41,10 +39,10 @@ class Index(XmlFile):
         if url.is_remote_file():
             from fetcher import fetch_url
 
-            dest = os.path.join(config.index_dir(), repo)
+            dest = os.path.join(ctx.config.index_dir(), repo)
             if not os.path.exists(dest):
                 os.makedirs(dest)
-            fetch_url(url, dest, ui.Progress)
+            fetch_url(url, dest, ctx.ui.Progress)
 
             self.filepath = os.path.join(dest, url.filename())
 
@@ -68,8 +66,8 @@ class Index(XmlFile):
         self.repo_dir = repo_uri
         for root, dirs, files in os.walk(repo_uri):
             for fn in files:
-                if fn.endswith(const.package_prefix):
-                    ui.info('Adding ' + fn + ' to package index\n')
+                if fn.endswith(ctx.const.package_prefix):
+                    ctx.ui.info('Adding ' + fn + ' to package index\n')
                     self.add_package(os.path.join(root, fn), repo_uri)
 
     def update_db(self, repo):
@@ -81,12 +79,12 @@ class Index(XmlFile):
     def add_package(self, path, repo_uri):
         package = Package(path, 'r')
         # extract control files
-        util.clean_dir(config.install_dir())
-        package.extract_PISI_files(config.install_dir())
+        util.clean_dir(ctx.config.install_dir())
+        package.extract_PISI_files(ctx.config.install_dir())
 
         md = metadata.MetaData()
-        md.read(os.path.join(config.install_dir(), const.metadata_xml))
-        if config.options and config.options.absolute_uris:
+        md.read(os.path.join(ctx.config.install_dir(), ctx.const.metadata_xml))
+        if ctx.config.options and ctx.config.options.absolute_uris:
             md.package.packageURI = os.path.realpath(path)
         else:                           # create relative path by default
             # TODO: in the future we'll do all of this with purl/pfile/&helpers
@@ -95,6 +93,6 @@ class Index(XmlFile):
             md.package.packageURI = util.removepathprefix(repo_uri, path)
         # check package semantics
         if md.has_errors():
-            ui.error('Package ' + md.package.name + ': metadata corrupt\n')
+            ctx.ui.error('Package ' + md.package.name + ': metadata corrupt\n')
         else:
             self.packages.append(md.package)

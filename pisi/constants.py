@@ -88,6 +88,3 @@ class Constants:
 
     def __delattr__(self, attr):
         delattr(self.__c, attr)
-
-# singleton for easy access here
-const = Constants()

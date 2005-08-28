@@ -22,9 +22,8 @@ from os.path import basename
 
 # pisi modules
 from pisi.xmlext import *
-import pisi.xmlfile as xmlfile
 from pisi.xmlfile import XmlFile
-from pisi.ui import ui
+import pisi
 from pisi.dependency import DepInfo
 from pisi.util import Checks
 

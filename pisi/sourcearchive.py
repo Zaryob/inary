@@ -23,8 +23,6 @@ from os import access, R_OK
 import pisi
 from pisi.archive import Archive
 from pisi.uri import URI
-from pisi.ui import ui
-from pisi.config import config
 from pisi.fetcher import fetch_url
 import pisi.util as util
 

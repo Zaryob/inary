@@ -16,14 +16,11 @@
 import sys
 
 from pisi.colors import colorize
-from pisi.config import config
+import pisi.context as ctx
 
-def register(_impl):
-    """ Register a UI implementation"""
-    ui = _impl
 
-# default UI implementation
 class CLI:
+    "Command Line Interface"
     def __init__(self, debuggy = False, verbose = False):
         self.show_debug = debuggy
         self.show_verbose = verbose
@@ -90,6 +87,3 @@ class CLI:
             (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
         self.info(out)
 
-# default UI is CLI
-ui = None
-#CLI()

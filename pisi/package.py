@@ -18,9 +18,8 @@
 from os.path import join
 
 import pisi
+import pisi.context as ctx
 import pisi.archive as archive
-from pisi.constants import const
-from pisi.config import config
 from pisi.uri import URI
 from pisi.metadata import MetaData
 from pisi.files import Files
@@ -79,7 +78,7 @@ class Package:
     def extract_PISI_files(self, outdir):
         """Extract PISI control files: metadata.xml, files.xml,
         action scripts, etc."""
-        self.extract_files([const.metadata_xml, const.files_xml], outdir)
+        self.extract_files([ctx.const.metadata_xml, ctx.const.files_xml], outdir)
         self.extract_dir('config', outdir)
 
     def read(self, outdir = None):
@@ -90,14 +89,14 @@ class Package:
         self.extract_PISI_files(outdir)
 
         self.metadata = MetaData()
-        self.metadata.read( join(outdir, const.metadata_xml) )
+        self.metadata.read( join(outdir, ctx.const.metadata_xml) )
         if self.metadata.has_errors():
             raise PackageError, "MetaData format wrong"
 
         self.files = Files()
-        self.files.read( join(outdir, const.files_xml) )
+        self.files.read( join(outdir, ctx.const.files_xml) )
         if self.files.has_errors():
-            raise PackageError, "invalid %s" % const.files_xml
+            raise PackageError, "invalid %s" % ctx.const.files_xml
         
     def pkg_dir(self):
         packageDir = self.metadata.package.name + '-' \
@@ -107,4 +106,4 @@ class Package:
         return join( config.lib_dir(), packageDir)
 
     def comar_dir(self):
-        return self.pkg_dir() + const.comar_dir_suffix
+        return self.pkg_dir() + ctx.const.comar_dir_suffix

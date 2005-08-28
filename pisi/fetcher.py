@@ -24,7 +24,7 @@ from base64 import encodestring
 import pisi
 import pisi.util as util
 from pisi.uri import URI
-from pisi.ui import ui
+import pisi.context as ctx
 
 
 class FetchError(pisi.Error):
@@ -37,7 +37,7 @@ def fetch_url(url, dest, progress=None):
     fetch.progress = progress
     fetch.fetch()
     if progress:
-        ui.info('\n')
+        ctx.ctx.ui.info('\n')
 
 
 class Fetcher:
@@ -101,7 +101,7 @@ class Fetcher:
                               'percent' : self.percent,
                               'rate': self.rate,
                               'symbol': symbol}
-                    ui.display_progress(retval)
+                    ctx.ui.display_progress(retval)
 
         dest.close()
 

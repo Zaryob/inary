@@ -16,11 +16,11 @@
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 #           Baris Metin <baris@uludag.org.tr
 
-from ui import ui
+import pisi.context as ctx
 
-from xmlfile import *
-import specfile
-from util import Checks
+from pisi.xmlfile import *
+import pisi.specfile as specfile
+from pisi.util import Checks
 
 class SourceInfo:
 

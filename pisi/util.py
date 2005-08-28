@@ -26,9 +26,6 @@ import statvfs
 
 # pisi modules
 import pisi
-from pisi.ui import ui
-from pisi.constants import const
-from pisi.config import config
 
 class FileError(pisi.Error):
     pass

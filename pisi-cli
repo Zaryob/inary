@@ -17,7 +17,6 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 from pisi.cli.pisicli import PisiCLI
-from pisi.ui import ui
 
 def handle_exception(exception, value, tb):
     import traceback

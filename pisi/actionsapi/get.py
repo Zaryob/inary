@@ -15,7 +15,7 @@ import os.path
 
 # PISI Modules
 import pisi.actionsapi
-from pisi.ui import ui
+import pisi.context as ctx
 
 # ActionsAPI Modules
 from variables import glb
@@ -115,7 +115,7 @@ def getBinutilsInfo(util):
         if not exists_binary(util):
             raise BinutilsError('util %s cannot be found' % util)
         else:
-            ui.debug('Warning: %s does not exist, using plain name %s' \
+            ctx.ui.debug('Warning: %s does not exist, using plain name %s' \
                      % (cross_build_name, util))
             return util
     else:

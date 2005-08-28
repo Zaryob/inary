@@ -15,40 +15,17 @@
 # Authors: Baris Metin <baris@uludag.org.tr
 #          Eray Ozkural <eray@uludag.org.tr>
 
-from pisi.constants import const
-from pisi.config import config
-from pisi.specfile import SpecFile
+# global variables here
 
-class BuildContext(object):
-    """Build Context Singleton"""
+import pisi.constants
 
-    def __init__(self, pspecfile):
-        super(BuildContext, self).__init__()
-        self.set_spec_file(pspecfile)
+const = pisi.constants.Constants()
 
-    def set_spec_file(self, pspecfile):
-        self.pspecfile = pspecfile
-        spec = SpecFile()
-        spec.read(pspecfile)
-        # FIXME: following checks the integrity but does nothing when it is wrong
-        # -gurer
-        #spec.verify()    # check pspec integrity
-        self.spec = spec
+config = None
 
-    # directory accessor functions
-        
-    # pkg_x_dir: per package directory for storing info type x
+# default UI is CLI
+ui = None # not now
 
-    def pkg_dir(self):
-        "package build directory"
-        packageDir = self.spec.source.name + '-' + \
-                     self.spec.source.version + '-' + self.spec.source.release
-
-        return config.destdir + config.values.dirs.tmp_dir \
-               + '/' + packageDir
-   
-    def pkg_work_dir(self):
-        return self.pkg_dir() + const.work_dir_suffix
-
-    def pkg_install_dir(self):
-        return self.pkg_dir() + const.install_dir_suffix
+#def register(_impl):
+#    """ Register a UI implementation"""
+#    ui = _impl

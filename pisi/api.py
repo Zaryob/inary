@@ -19,29 +19,7 @@ if ver[0] <= 2 and ver[1] < 4:
 
 import pisi
 
-class Error(pisi.Error):
-    pass
-
-def init(database = True, options = None, ui = None ):
-    import pisi.config
-    import pisi.ui
-    """Initialize PiSi subsystem"""
-    pisi.config.config = pisi.config.Config(options)
-    if ui is None:
-        if options:
-            pisi.ui.ui = pisi.ui.CLI(options.debug)
-        else:
-            pisi.ui.ui = pisi.ui.CLI()
-    else:
-        pisi.ui.ui = ui
-    # initialize repository databases
-    if database:
-        from pisi.repodb import repodb
-        repodb.init_dbs()
-
-from pisi.config import config
-from pisi.constants import const
-from pisi.ui import ui
+import pisi.context as ctx
 from pisi.uri import URI
 import pisi.util as util
 import pisi.dependency as dependency
@@ -52,6 +30,34 @@ from pisi.repodb import repodb
 from pisi.installdb import installdb
 from pisi.index import Index
 
+class Error(pisi.Error):
+    pass
+
+def init(database = True, options = None, ui = None ):
+    """Initialize PiSi subsystem"""
+
+    import pisi.config
+    ctx.config = pisi.config.Config(options)
+
+    if ui is None:
+        import pisi.ui
+        if options:
+            pisi.context.ui = pisi.ui.CLI(options.debug)
+        else:
+            pisi.context.ui = pisi.ui.CLI()
+    else:
+        pisi.context.ui = ui
+
+    # initialize repository databases
+    if database:
+        import pisi.repodb
+        pisi.repodb.init()
+        import pisi.installdb
+        pisi.installdb.init()
+        import pisi.packagedb
+        pisi.packagedb.init()
+        import pisi.sourcedb
+        pisi.sourcedb.init()
 
 def install(packages):
     """install a list of packages (either files/urls, or names)"""
@@ -68,26 +74,26 @@ def install(packages):
             install_pkg_names(packages)
 
     except InstallError, e:
-        ui.error("%s\n" % e)
+        ctx.ui.error("%s\n" % e)
 
     except packagedb.PackageDBError, e:
-        ui.error("PackageDBError: (%s)\n" % e)
-        ui.error("Package is not installable.\n")
+        ctx.ui.error("PackageDBError: (%s)\n" % e)
+        ctx.ui.error("Package is not installable.\n")
 
     #except Exception, e:
     #    print e
-    #    ui.error("Error: %s\n" % e)
+    #    ctx.ui.error("Error: %s\n" % e)
 
 
 def install_pkg_files(package_URIs):
     """install a number of pisi package files"""
     from package import Package
 
-    ui.debug('A = %s\n' % str(package_URIs))
+    ctx.ui.debug('A = %s\n' % str(package_URIs))
 
     for x in package_URIs:
         if not x.endswith(const.package_prefix):
-            ui.error('Mixing file names and package names not supported YET.\n')
+            ctx.ui.error('Mixing file names and package names not supported YET.\n')
             return False
 
     # read the package information into memory first
@@ -136,7 +142,7 @@ def install_pkg_files(package_URIs):
         A = d_t.keys()
        
         if len(A)==0:
-            ui.info('No packages to install.\n')
+            ctx.ui.info('No packages to install.\n')
             return True
         
         # try to construct a pisi graph of packages to
@@ -180,10 +186,10 @@ def install_pkg_names(A):
     the repository, trying to perform a minimum number of
     installs"""
 
-    ui.debug('A = %s\n' % str(A))
+    ctx.ui.debug('A = %s\n' % str(A))
 
     if len(A)==0:
-        ui.info('No packages to install.\n')
+        ctx.ui.info('No packages to install.\n')
         return True
     
     # try to construct a pisi graph of packages to
@@ -235,7 +241,7 @@ def upgrade_pkg_names(A):
     Ap = []
     for x in A:
         if not installdb.is_installed(x):
-            ui.info('Package %s is not installed.\n' % x)
+            ctx.ui.info('Package %s is not installed.\n' % x)
             continue
         (version, release, build) = installdb.get_version(x)
         pkg = packagedb.get_package(x)
@@ -245,17 +251,17 @@ def upgrade_pkg_names(A):
         elif build < pkg.build:
                 Ap.append(x)
         else:
-            #ui.info('Package %s cannot be upgraded. ' % x)
-            ui.info('Package %s is already at its latest version %s,\
+            #ctx.ui.info('Package %s cannot be upgraded. ' % x)
+            ctx.ui.info('Package %s is already at its latest version %s,\
  release %s, build %s.\n'
                     % (x, pkg.version, pkg.release, pkg.build))
     A = Ap
 
     if len(A)==0:
-        ui.info('No packages to upgrade.\n')
+        ctx.ui.info('No packages to upgrade.\n')
         return True
 
-    ui.debug('A = %s\n' % str(A))
+    ctx.ui.debug('A = %s\n' % str(A))
     
     # try to construct a pisi graph of packages to
     # install / reinstall
@@ -310,11 +316,11 @@ def remove(A):
         if installdb.is_installed(x):
             Ap.append(x)
         else:
-            ui.info('Package %s does not exist. Cannot remove.\n' % x)
+            ctx.ui.info('Package %s does not exist. Cannot remove.\n' % x)
     A = Ap
 
     if len(A)==0:
-        ui.info('No packages to remove.\n')
+        ctx.ui.info('No packages to remove.\n')
         return True
         
     # try to construct a pisi graph of packages to
@@ -350,7 +356,7 @@ def remove(A):
         if installdb.is_installed(x):
             operations.remove_single(x)
         else:
-            ui.info('Package %s is not installed. Cannot remove.\n' % x)
+            ctx.ui.info('Package %s is not installed. Cannot remove.\n' % x)
         
     return True                         # everything went OK :)
 
@@ -396,11 +402,11 @@ def info_name(package_name):
 
 def index(repo_dir = '.'):
 
-    ui.info('* Building index of PISI files under %s\n' % repo_dir)
+    ctx.ui.info('* Building index of PISI files under %s\n' % repo_dir)
     index = Index()
     index.index(repo_dir)
-    index.write(const.pisi_index)
-    ui.info('* Index file written\n')
+    index.write(ctx.const.pisi_index)
+    ctx.ui.info('* Index file written\n')
 
 class Repo:
     def __init__(self, indexuri):
@@ -414,16 +420,16 @@ def remove_repo(name):
     if repodb.has_repo(name):
         repodb.remove_repo(name)
     else:
-        ui.error('* Repository %s does not exist. Cannot remove.\n'
+        ctx.ui.error('* Repository %s does not exist. Cannot remove.\n'
                  % name)
 
 def update_repo(repo):
 
-    ui.info('* Updating repository: %s\n' % repo)
+    ctx.ui.info('* Updating repository: %s\n' % repo)
     index = Index()
     index.read(repodb.get_repo(repo).indexuri.get_uri(), repo)
     index.update_db(repo)
-    ui.info('* Package database updated.\n')
+    ctx.ui.info('* Package database updated.\n')
 
 
 # build functions...
@@ -489,7 +495,7 @@ def build_until(pspecfile, state, authInfo=None):
     pb.compile_action_script()
     
     last = pb.get_state()
-    ui.info("Last state was %s\n"%last)
+    ctx.ui.info("Last state was %s\n"%last)
 
     if not last: last = "none"
 

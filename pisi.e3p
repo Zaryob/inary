@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.7.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-08-19, 16:42:14 -->
+<!-- Saved: 2005-08-28, 03:00:42 -->
 <!-- Copyright (C) 2005 PiSi Development Team, pisi@uludag.org.tr -->
 <Project version="3.7">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -19,10 +19,6 @@
     <Source>
       <Dir>tools</Dir>
       <Name>cat-db.py</Name>
-    </Source>
-    <Source>
-      <Dir>tools</Dir>
-      <Name>list-portage-base.py</Name>
     </Source>
     <Source>
       <Dir>tests</Dir>
@@ -306,6 +302,52 @@
     <Source>
       <Dir>pisi</Dir>
       <Name>api.py</Name>
+    </Source>
+    <Source>
+      <Dir></Dir>
+      <Dir>home</Dir>
+      <Dir>exa</Dir>
+      <Dir>code</Dir>
+      <Dir>projects</Dir>
+      <Dir>pisi-gurer</Dir>
+      <Name>dependency.py</Name>
+    </Source>
+    <Source>
+      <Dir></Dir>
+      <Dir>home</Dir>
+      <Dir>exa</Dir>
+      <Dir>code</Dir>
+      <Dir>projects</Dir>
+      <Dir>pisi-gurer</Dir>
+      <Name>specfile.py</Name>
+    </Source>
+    <Source>
+      <Dir></Dir>
+      <Dir>home</Dir>
+      <Dir>exa</Dir>
+      <Dir>code</Dir>
+      <Dir>projects</Dir>
+      <Dir>pisi-gurer</Dir>
+      <Name>xmlutil.py</Name>
+    </Source>
+    <Source>
+      <Dir></Dir>
+      <Dir>home</Dir>
+      <Dir>exa</Dir>
+      <Dir>code</Dir>
+      <Dir>projects</Dir>
+      <Dir>pisi-kga</Dir>
+      <Name>setup.py</Name>
+    </Source>
+    <Source>
+      <Dir></Dir>
+      <Dir>home</Dir>
+      <Dir>exa</Dir>
+      <Dir>code</Dir>
+      <Dir>projects</Dir>
+      <Dir>pisi-kga</Dir>
+      <Dir>src</Dir>
+      <Name>pisi_kga.py</Name>
     </Source>
   </Sources>
   <Forms>

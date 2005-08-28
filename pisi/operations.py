@@ -13,9 +13,7 @@
 import os
 
 import pisi
-from pisi.config import config
-from pisi.constants import const
-from pisi.ui import ui
+import pisi.context as ctx
 from pisi.uri import URI
 import pisi.util as util
 import pisi.packagedb as packagedb
