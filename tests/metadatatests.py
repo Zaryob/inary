@@ -36,7 +36,7 @@ class MetaDataTestCase(unittest.TestCase):
 
     def testVerify(self):
         md = self.testRead()
-        if not md.verify():
+        if md.has_errors():
             self.fail("Couldn't verify!")
 
 

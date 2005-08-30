@@ -26,6 +26,9 @@ config = None
 # default UI is CLI
 ui = None # not now
 
+installdb = None
+repodb = None
+
 #def register(_impl):
 #    """ Register a UI implementation"""
 #    ui = _impl

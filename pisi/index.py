@@ -16,12 +16,12 @@
 
 import os
 
-from pisi.package import Package
-from pisi.xmlfile import XmlFile
+import pisi.context as ctx
 import pisi.metadata as metadata
 import pisi.packagedb as packagedb
-import pisi.context as ctx
 import pisi.util as util
+from pisi.package import Package
+from pisi.xmlfile import XmlFile
 from pisi.uri import URI
 
 class Index(XmlFile):

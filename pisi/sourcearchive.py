@@ -21,10 +21,11 @@ from os import access, R_OK
 
 # pisi modules
 import pisi
+import pisi.util as util
+import pisi.context as ctx
 from pisi.archive import Archive
 from pisi.uri import URI
 from pisi.fetcher import fetch_url
-import pisi.util as util
 
 class SourceArchiveError(pisi.Error):
     pass
@@ -32,19 +33,20 @@ class SourceArchiveError(pisi.Error):
 class SourceArchive:
     """source archive. this is a class responsible for fetching
     and unpacking a source archive"""
-    def __init__(self, ctx):
-        self.ctx = ctx
-        self.url = URI(self.ctx.spec.source.archiveUri)
-        self.archiveFile = join(config.archives_dir(), self.url.filename())
-        self.archiveType = self.ctx.spec.source.archiveType
-        self.archiveSHA1 = self.ctx.spec.source.archiveSHA1
+    def __init__(self, bctx):
+        self.url = URI(bctx.spec.source.archiveUri)
+        self.archiveFile = join(ctx.config.archives_dir(), self.url.filename())
+        self.archiveName = bctx.spec.source.archiveName
+        self.archiveType = bctx.spec.source.archiveType
+        self.archiveSHA1 = bctx.spec.source.archiveSHA1
+        self.bctx = bctx
 
     def fetch(self, interactive=True):
         if not self.is_cached(interactive):
             if interactive:
-                progress = ui.Progress
+                progress = ctx.ui.Progress
             else: progress = None
-            fetch_url(self.url, config.archives_dir(), progress)
+            fetch_url(self.url, ctx.config.archives_dir(), progress)
         
     def is_cached(self, interactive=True):
         if not access(self.archiveFile, R_OK):
@@ -53,7 +55,7 @@ class SourceArchive:
         # check hash
         if util.check_file_hash(self.archiveFile, self.archiveSHA1):
             if interactive:
-                ui.info('%s [cached]\n' % self.ctx.spec.source.archiveName)
+                ctx.ui.info('%s [cached]\n' % self.archiveName)
             return True
 
         return False
@@ -65,4 +67,4 @@ class SourceArchive:
             raise SourceArchiveError, "unpack: check_file_hash failed"
             
         archive = Archive(self.archiveFile, self.archiveType)
-        archive.unpack(self.ctx.pkg_work_dir(), cleanDir)
+        archive.unpack(self.bctx.pkg_work_dir(), cleanDir)

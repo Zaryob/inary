@@ -20,6 +20,7 @@ import os
 import fcntl
 
 import pisi
+import pisi.context
 
 class LockedDBShelf(shelve.DBShelf):
 
@@ -41,7 +42,7 @@ class LockedDBShelf(shelve.DBShelf):
             else:
                 raise error, "flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
         filename = os.path.join( pisi.context.config.db_dir(), dbname + '.bdb')
-        LockedDBShelf.open(self,filename, dbname, filetype, flags, mode)
+        self.open(filename, dbname, filetype, flags, mode)
         
     def open(self, filename, dbname, filetype, flags, mode):
         pisi.util.check_dir(pisi.context.config.db_dir())

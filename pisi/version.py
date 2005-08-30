@@ -12,7 +12,7 @@
 
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 
-import util
+import pisi.util as util
 
 class Version:
     def __init__(self, verstring):

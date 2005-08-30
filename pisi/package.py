@@ -38,7 +38,7 @@ class Package:
         if url.is_remote_file():
             from fetcher import fetch_url
             from ui import ui
-            dest = config.packages_dir()
+            dest = ctx.config.packages_dir()
             fetch_url(url, dest, ui.Progress)
             self.filepath = join(dest, url.filename())
 
@@ -83,7 +83,7 @@ class Package:
 
     def read(self, outdir = None):
         if not outdir:
-            outdir = config.tmp_dir()
+            outdir = ctx.config.tmp_dir()
 
         # extract control files
         self.extract_PISI_files(outdir)
@@ -103,7 +103,7 @@ class Package:
                      + self.metadata.package.version + '-' \
                      + self.metadata.package.release
 
-        return join( config.lib_dir(), packageDir)
+        return join( ctx.config.lib_dir(), packageDir)
 
     def comar_dir(self):
         return self.pkg_dir() + ctx.const.comar_dir_suffix

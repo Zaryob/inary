@@ -24,7 +24,6 @@ _ = __trans.ugettext
 import pisi
 import pisi.util as util
 import pisi.context as ctx
-from pisi.context import BuildContext
 from pisi.sourcearchive import SourceArchive
 from pisi.files import Files, FileInfo
 from pisi.metadata import MetaData
@@ -105,23 +104,23 @@ class BuildContext(object):
         packageDir = self.spec.source.name + '-' + \
                      self.spec.source.version + '-' + self.spec.source.release
 
-        return config.destdir + config.values.dirs.tmp_dir \
+        return ctx.config.destdir + ctx.config.values.dirs.tmp_dir \
                + '/' + packageDir
    
     def pkg_work_dir(self):
-        return self.pkg_dir() + const.work_dir_suffix
+        return self.pkg_dir() + ctx.const.work_dir_suffix
 
     def pkg_install_dir(self):
-        return self.pkg_dir() + const.install_dir_suffix
+        return self.pkg_dir() + ctx.const.install_dir_suffix
 
 
 class PisiBuild:
     """PisiBuild class, provides the package build and creation routines"""
     def __init__(self, pspec):
-        self.ctx = BuildContext(pspec)
-        self.pspecDir = os.path.dirname(os.path.realpath(self.ctx.pspecfile))
-        self.spec = self.ctx.spec
-        self.sourceArchive = SourceArchive(self.ctx)
+        self.bctx = BuildContext(pspec)
+        self.pspecDir = os.path.dirname(os.path.realpath(self.bctx.pspecfile))
+        self.spec = self.bctx.spec
+        self.sourceArchive = SourceArchive(self.bctx)
 
         self.set_environment_vars()
 
@@ -166,9 +165,9 @@ class PisiBuild:
     def set_environment_vars(self):
         """Sets the environment variables for actions API to use"""
         evn = {
-            "PKG_DIR": self.ctx.pkg_dir(),
-            "WORK_DIR": self.ctx.pkg_work_dir(),
-            "INSTALL_DIR": self.ctx.pkg_install_dir(),
+            "PKG_DIR": self.bctx.pkg_dir(),
+            "WORK_DIR": self.bctx.pkg_work_dir(),
+            "INSTALL_DIR": self.bctx.pkg_install_dir(),
             "SRC_NAME": self.spec.source.name,
             "SRC_VERSION": self.spec.source.version,
             "SRC_RELEASE": self.spec.source.release
@@ -179,40 +178,40 @@ class PisiBuild:
         ctx.ui.info(_("Fetching source from: %s\n") % self.spec.source.archiveUri)
         self.sourceArchive.fetch()
         ctx.ui.info(_("Source archive is stored: %s/%s\n")
-                %(config.archives_dir(), self.spec.source.archiveName))
+                %(ctx.config.archives_dir(), self.spec.source.archiveName))
 
     def unpack_source_archive(self):
         ctx.ui.info(_("Unpacking archive..."))
         self.sourceArchive.unpack()
-        ctx.ui.info(_(" unpacked (%s)\n") % self.ctx.pkg_work_dir())
+        ctx.ui.info(_(" unpacked (%s)\n") % self.bctx.pkg_work_dir())
         self.set_state("unpacked")
 
     def run_setup_action(self):
         #  Run configure, build and install phase
         ctx.ui.action(_("Setting up source...\n"))
-        self.run_action_function(const.setup_func)
+        self.run_action_function(ctx.const.setup_func)
         self.set_state("setupaction")
 
     def run_build_action(self):
         ctx.ui.action(_("Building source...\n"))
-        self.run_action_function(const.build_func)
+        self.run_action_function(ctx.const.build_func)
         self.set_state("buildaction")
 
     def run_install_action(self):
         ctx.ui.action(_("Installing...\n"))
         
         # Before install make sure install_dir is clean 
-        if os.path.exists(self.ctx.pkg_install_dir()):
-            util.clean_dir(self.ctx.pkg_install_dir())
+        if os.path.exists(self.bctx.pkg_install_dir()):
+            util.clean_dir(self.bctx.pkg_install_dir())
             
         # install function is mandatory!
-        self.run_action_function(const.install_func, True)
+        self.run_action_function(ctx.const.install_func, True)
         self.set_state("installaction")
 
     def compile_action_script(self):
         """Compiles actions.py and sets the actionLocals and actionGlobals"""
-        specdir = os.path.dirname(self.ctx.pspecfile)
-        scriptfile = os.path.join(specdir, const.actions_file)
+        specdir = os.path.dirname(self.bctx.pspecfile)
+        scriptfile = os.path.join(specdir, ctx.const.actions_file)
         try:
             localSymbols = globalSymbols = {}
             buf = open(scriptfile).read()
@@ -235,7 +234,7 @@ class PisiBuild:
         except KeyError:
             workdir = self.spec.source.name + "-" + self.spec.source.version
                     
-        return os.path.join(self.ctx.pkg_work_dir(), workdir)
+        return os.path.join(self.bctx.pkg_work_dir(), workdir)
 
     def run_action_function(self, func, mandatory=False):
         """Calls the corresponding function in actions.py. 
@@ -263,14 +262,14 @@ class PisiBuild:
 
     def apply_patches(self):
         files_dir = os.path.abspath(os.path.join(self.pspecDir,
-                                                 const.files_dir))
+                                                 ctx.const.files_dir))
 
         for patch in self.spec.source.patches:
             patchFile = os.path.join(files_dir, patch.filename)
             if patch.compressionType:
                 patchFile = util.uncompress(patchFile,
                                             compressType=patch.compressionType,
-                                            targetDir=config.tmp_dir())
+                                            targetDir=ctx.config.tmp_dir())
 
             ctx.ui.action(_("* Applying patch: %s\n") % patch.filename)
             util.do_patch(self.srcDir, patchFile, level=patch.level, target=patch.target)
@@ -283,33 +282,33 @@ class PisiBuild:
         metadata = MetaData()
         metadata.from_spec(self.spec.source, package)
 
-        metadata.package.distribution = config.values.general.distribution
-        metadata.package.distributionRelease = config.values.general.distribution_release
+        metadata.package.distribution = ctx.config.values.general.distribution
+        metadata.package.distributionRelease = ctx.config.values.general.distribution_release
         metadata.package.architecture = "Any"
         
         # FIXME: Bu hatalı. installsize'ı almak için tüm
         # pkg_install_dir()'ın boyutunu hesaplayamayız. Bir source
         # birden fazla kaynak üretebilir. package.paths ile
         # karşılaştırarak file listesinden boyutları hesaplatmalıyız.
-        d = self.ctx.pkg_install_dir()
+        d = self.bctx.pkg_install_dir()
         size = util.dir_size(d)
         metadata.package.installedSize = str(size)
         
         # build no
-        if config.options.ignore_build_no:
+        if ctx.config.options.ignore_build_no:
             metadata.package.build = None  # means, build no information n/a
             ctx.ui.warning('build number is not available.')
         else:
             metadata.package.build = self.calc_build_no(metadata.package.name)
 
-        metadata.write(os.path.join(self.ctx.pkg_dir(), const.metadata_xml))
+        metadata.write(os.path.join(self.bctx.pkg_dir(), ctx.const.metadata_xml))
         self.metadata = metadata
 
     def gen_files_xml(self, package):
         """Generetes files.xml using the path definitions in specfile and
         generated files by the build system."""
         files = Files()
-        install_dir = self.ctx.pkg_install_dir()
+        install_dir = self.bctx.pkg_install_dir()
         collisions = check_path_collision(package,
                                           self.spec.packages)
         if collisions:
@@ -327,24 +326,24 @@ class PisiBuild:
                 d[frpath] = FileInfo(frpath, ftype, fsize, fhash)
         for (p, fileinfo) in d.iteritems():
             files.append(fileinfo)
-        files.write(os.path.join(self.ctx.pkg_dir(), const.files_xml))
+        files.write(os.path.join(self.bctx.pkg_dir(), ctx.const.files_xml))
         self.files = files
 
     def calc_build_no(self, package_name):
         """Calculate build number"""
 
-        # find previous build in config.options.output_dir
+        # find previous build in ctx.config.options.output_dir
         found = []
-        for root, dirs, files in os.walk(config.options.output_dir):
+        for root, dirs, files in os.walk(ctx.config.options.output_dir):
             for fn in files:
                 fn = fn.decode('utf-8')
                 if fn.startswith(package_name + '-') and \
-                    fn.endswith(const.package_prefix):
+                    fn.endswith(ctx.const.package_prefix):
                     old_package_fn = os.path.join(root, fn)
                     ctx.ui.info('(found old version %s)' % old_package_fn)
                     old_pkg = Package(old_package_fn, 'r')
                     from os.path import join
-                    old_pkg.read(join(config.tmp_dir(), 'oldpkg'))
+                    old_pkg.read(join(ctx.config.tmp_dir(), 'oldpkg'))
                     old_build = old_pkg.metadata.package.build
                     found.append( (old_package_fn, old_build) )
         if not found:
@@ -362,7 +361,7 @@ class PisiBuild:
             # compare old files.xml with the new one..
             old_pkg = Package(old_package_fn, 'r')
             from os.path import join
-            old_pkg.read(join(config.tmp_dir(), 'oldpkg'))
+            old_pkg.read(join(ctx.config.tmp_dir(), 'oldpkg'))
 
             # FIXME: TAKE INTO ACCOUNT MINOR CHANGES IN METADATA
             changed = False
@@ -405,11 +404,11 @@ class PisiBuild:
 
             ctx.ui.action(_("** Building package %s\n") % package.name);
 
-            ctx.ui.action(_("Generating %s...") % const.files_xml)
+            ctx.ui.action(_("Generating %s...") % ctx.const.files_xml)
             self.gen_files_xml(package)
             ctx.ui.info(_(" done.\n"))
            
-            ctx.ui.action(_("Generating %s...") % const.metadata_xml)
+            ctx.ui.action(_("Generating %s...") % ctx.const.metadata_xml)
             self.gen_metadata_xml(package)
             ctx.ui.info(_(" done.\n"))
 
@@ -424,29 +423,29 @@ class PisiBuild:
             # add comar files to package
             os.chdir(self.pspecDir)
             for pcomar in package.providesComar:
-                fname = os.path.join(const.comar_dir,
+                fname = os.path.join(ctx.const.comar_dir,
                                      pcomar.script)
                 pkg.add_to_package(fname)
 
             # store additional files
-            install_dir = self.ctx.pkg_dir() + const.install_dir_suffix
+            install_dir = self.bctx.pkg_dir() + ctx.const.install_dir_suffix
             for afile in package.additionalFiles:
-                src = os.path.join(const.files_dir, afile.filename)
+                src = os.path.join(ctx.const.files_dir, afile.filename)
                 dest = os.path.join(install_dir + os.path.dirname(afile.target), os.path.basename(afile.target))
                 util.copy_file(src, dest)
                 if afile.permission:
                     os.chmod(dest, int(afile.permission) | 0777)
 
             # add xmls and files
-            os.chdir(self.ctx.pkg_dir())
+            os.chdir(self.bctx.pkg_dir())
         
-            pkg.add_to_package(const.metadata_xml)
-            pkg.add_to_package(const.files_xml)
+            pkg.add_to_package(ctx.const.metadata_xml)
+            pkg.add_to_package(ctx.const.files_xml)
 
             # Now it is time to add files to the packages using newly
             # created files.xml
             files = Files()
-            files.read(const.files_xml)
+            files.read(ctx.const.files_xml)
             for finfo in files.list:
                 pkg.add_to_package("install/" + finfo.path)
 

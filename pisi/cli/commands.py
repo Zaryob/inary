@@ -15,6 +15,7 @@ from optparse import OptionParser
 
 import pisi
 import pisi.cli
+import pisi.context as ctx
 from pisi.uri import URI
 
 
@@ -113,10 +114,8 @@ class Command(object):
         """initialize PiSi components"""
         
         # NB: command imports here or in the command class run fxns
-        import pisi
         import pisi.api
         pisi.api.init(database, self.options)
-        import pisi.context as ctx
 
     def finalize(self):
         """do cleanup work for PiSi components"""
@@ -227,7 +226,7 @@ fetch all necessary files and build the package for you.
             return
 
         self.init()
-        ctx.ui.info('Output directory: %s\n' % config.options.output_dir)
+        ctx.ui.info('Output directory: %s\n' % ctx.config.options.output_dir)
         for arg in self.args:
             pisi.api.build(arg, self.authInfo)
         self.finalize()
@@ -372,8 +371,7 @@ Upgrade the entire system.
             return
 
         self.init()
-        from pisi.installdb import installdb
-        pisi.api.upgrade(installdb.list_installed())
+        pisi.api.upgrade(ctx.installdb.list_installed())
         self.finalize()
 
 
@@ -503,15 +501,14 @@ Usage: list-installed
 
     def run(self):
         self.init(True)
-        from pisi.installdb import installdb
-        list = installdb.list_installed()
+        list = ctx.installdb.list_installed()
         list.sort()
         if self.options.install_info:
             print 'Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'
             print '========================================================================'
         for pkg in list:
             package = pisi.packagedb.inst_packagedb.get_package(pkg)
-            inst_info = installdb.get_info(pkg)
+            inst_info = ctx.installdb.get_info(pkg)
             if self.options.long:
                 print package
                 print inst_info
@@ -621,10 +618,9 @@ Lists currently tracked repositories.
     def run(self):
 
         self.init()
-        from pisi.repodb import repodb
-        for repo in repodb.list():
+        for repo in ctx.repodb.list():
             print repo
-            print '  ', repodb.get_repo(repo).indexuri.get_uri()
+            print '  ', ctx.repodb.get_repo(repo).indexuri.get_uri()
         self.finalize()
 
 
@@ -643,7 +639,6 @@ Gives a brief list of PiSi components published in the repository.
     name = ("list-available", "la")
 
     def run(self):
-        from pisi.repodb import repodb
 
         self.init(True)
 
@@ -652,7 +647,7 @@ Gives a brief list of PiSi components published in the repository.
                 self.print_packages(arg)
         else:
             # print for all repos
-            for repo in repodb.list():
+            for repo in ctx.repodb.list():
                 ctx.ui.info("Repository : %s\n" % repo)
                 self.print_packages(repo)
         self.finalize()
@@ -678,10 +673,9 @@ class ListPending(Command):
     name = ("list-pending", "lp")
 
     def run(self):
-        from pisi.installdb import installdb
         self.init(True)
 
-        list = installdb.list_pending()
+        list = ctx.installdb.list_pending()
         list.sort()
         for p in list:
             print p

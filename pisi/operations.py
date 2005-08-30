@@ -14,40 +14,39 @@ import os
 
 import pisi
 import pisi.context as ctx
-from pisi.uri import URI
 import pisi.util as util
 import pisi.packagedb as packagedb
+from pisi.uri import URI
 
 # single package operations
 
 def remove_single(package_name):
     """Remove a single package"""
-    from installdb import installdb
     from comariface import comard
     inst_packagedb = packagedb.inst_packagedb
 
     #TODO: check dependencies
 
-    ui.info('Removing package %s' % package_name)
-    if not installdb.is_installed(package_name):
+    ctx.ui.info('Removing package %s' % package_name)
+    if not ctx.installdb.is_installed(package_name):
         raise Exception('Trying to remove nonexistent package '
                         + package_name)
-    for fileinfo in installdb.files(package_name).list:
-        fpath = os.path.join(config.destdir, fileinfo.path)
+    for fileinfo in ctx.installdb.files(package_name).list:
+        fpath = os.path.join(ctx.config.destdir, fileinfo.path)
         # TODO: We have to store configuration files for futher
         # usage. Currently we'are doing it like rpm does, saving
         # with a prefix and leaving the user to edit it. In the future
         # we'll have a plan for these configuration files.
-        if fileinfo.type == const.conf:
+        if fileinfo.type == ctx.const.conf:
             os.rename(fpath, fpath + ".pisi")
         else:
             os.unlink(fpath)
-    installdb.remove(package_name)
+    ctx.installdb.remove(package_name)
     packagedb.remove_package(package_name)
     if comard:
         # FIXME: (return value)...
         comard.remove(package_name)
-    ui.info('.\n')
+    ctx.ui.info('.\n')
 
 def install_single(pkg, upgrade = False):
     """install a single package from URI or ID"""
@@ -71,8 +70,7 @@ def install_single_name(name, upgrade = False):
     # find package in repository
     repo = packagedb.which_repo(name)
     if repo:
-        from repodb import repodb
-        repo = repodb.get_repo(repo)
+        repo = ctx.repodb.get_repo(repo)
         pkg = packagedb.get_package(name)
 
         # FIXME: let pkg.packageURI be stored as URI type rather than string
@@ -83,12 +81,12 @@ def install_single_name(name, upgrade = False):
             pkg_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
                                     str(pkg_uri.path()))
 
-        ui.debug("Package URI: %s\n" % pkg_path)
+        ctx.ui.debug("Package URI: %s\n" % pkg_path)
 
         # Package will handle remote file for us!
         install_single_file(pkg_path, upgrade)
     else:
-        ui.error("Package %s not found in any active repository.\n" % pkg)
+        ctx.ui.error("Package %s not found in any active repository.\n" % pkg)
 
 # deneme, don't remove ulan
 class AtomicOperation(object):

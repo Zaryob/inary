@@ -11,17 +11,21 @@
 import unittest
 import os
 
+import pisi.context as ctx
+import pisi.api
+from pisi.specfile import SpecFile
 from pisi import fetcher
 from pisi import util
-from pisi import context
-from pisi import config
 from pisi import uri
 
 class FetcherTestCase(unittest.TestCase):
     def setUp(self):
-        self.ctx = context.BuildContext("tests/popt/pspec.xml")
-        self.url = uri.URI(self.ctx.spec.source.archiveUri)
-        self.destpath = config.config.archives_dir()
+        pisi.api.init()
+
+        self.spec = SpecFile()
+        self.spec.read("tests/popt/pspec.xml")
+        self.url = uri.URI(self.spec.source.archiveUri)
+        self.destpath = ctx.config.archives_dir()
         self.fetch = fetcher.Fetcher(self.url, self.destpath)
     
     def testFetch(self):
@@ -29,6 +33,6 @@ class FetcherTestCase(unittest.TestCase):
         fetchedFile = os.path.join(self.destpath, self.url.filename())
         if os.access(fetchedFile, os.R_OK):
             self.assertEqual(util.sha1_file(fetchedFile),
-                 self.ctx.spec.source.archiveSHA1)
+                             self.spec.source.archiveSHA1)
 
 suite = unittest.makeSuite(FetcherTestCase)

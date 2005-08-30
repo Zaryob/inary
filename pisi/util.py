@@ -26,6 +26,7 @@ import statvfs
 
 # pisi modules
 import pisi
+import pisi.context as ctx
 
 class FileError(pisi.Error):
     pass
@@ -357,4 +358,4 @@ def partition_freespace(directory):
 ########################################
 
 def package_name(name, version, release):
-    return  name + '-' + version + '-' + release + const.package_prefix
+    return  name + '-' + version + '-' + release + ctx.const.package_prefix

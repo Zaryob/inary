@@ -13,32 +13,34 @@ import os
 from os.path import exists as pathexists
 from os.path import basename, islink, join
 
+import pisi.context as ctx
+import pisi.api
 from pisi import archive
 from pisi import sourcearchive
 from pisi import fetcher
 from pisi import util
-from pisi import context
+from pisi.build import BuildContext
 from pisi.config import config
 from pisi import uri 
 
 class ArchiveFileTestCase(unittest.TestCase):
-#     def setUp(self):
-#     pass
+    def setUp(self):
+        pisi.api.init()
 
     def testUnpackTar(self):
-        ctx = context.BuildContext("tests/popt/pspec.xml")
+        bctx = BuildContext("tests/popt/pspec.xml")
 
-        achv = sourcearchive.SourceArchive(ctx)
+        achv = sourcearchive.SourceArchive(bctx)
     
-        assert ctx.spec.source.archiveType == "targz"
+        assert bctx.spec.source.archiveType == "targz"
 
         # skip fetching and directly unpack the previously fetched (by
         # fetchertests) archive
-        if not achv.isCached(interactive=False):
+        if not achv.is_cached(interactive=False):
             achv.fetch(interactive=False)
         achv.unpack()
     
-        targetDir = ctx.pkg_work_dir()
+        targetDir = bctx.pkg_work_dir()
         # but testing is hard
         # "var/tmp/pisi/popt-1.7-3/work" (targetDir)
         assert pathexists(targetDir + "/popt-1.7")
@@ -51,15 +53,15 @@ class ArchiveFileTestCase(unittest.TestCase):
              "5af9dd7d754f788cf511c57ce0af3d555fed009d")
 
     def testUnpackZip(self):
-        ctx = context.BuildContext("tests/sandbox/pspec.xml")
+        bctx = BuildContext("tests/sandbox/pspec.xml")
 
-        assert ctx.spec.source.archiveType == "zip"
+        assert bctx.spec.source.archiveType == "zip"
 
-        achv = sourcearchive.SourceArchive(ctx)
+        achv = sourcearchive.SourceArchive(bctx)
         achv.fetch(interactive=False)
         achv.unpack(cleanDir=True)
 
-        targetDir = ctx.pkg_work_dir()
+        targetDir = bctx.pkg_work_dir()
         assert pathexists(targetDir + "/sandbox")
 
         testfile = targetDir + "/sandbox/loremipsum.txt"
@@ -75,9 +77,9 @@ class ArchiveFileTestCase(unittest.TestCase):
 
     def testMakeZip(self):
         # first unpack our dear sandbox.zip
-        ctx = context.BuildContext("tests/sandbox/pspec.xml")
-        targetDir = ctx.pkg_work_dir()
-        achv = sourcearchive.SourceArchive(ctx)
+        bctx = BuildContext("tests/sandbox/pspec.xml")
+        targetDir = bctx.pkg_work_dir()
+        achv = sourcearchive.SourceArchive(bctx)
         achv.fetch(interactive=False)
         achv.unpack(cleanDir=True)
         del achv
@@ -92,18 +94,18 @@ class ArchiveFileTestCase(unittest.TestCase):
 
     
     def testUnpackZipCond(self):
-        ctx = context.BuildContext("tests/sandbox/pspec.xml")
-        url = uri.URI(ctx.spec.source.archiveUri)
-        targetDir = ctx.pkg_work_dir()
+        bctx = BuildContext("tests/sandbox/pspec.xml")
+        url = uri.URI(bctx.spec.source.archiveUri)
+        targetDir = bctx.pkg_work_dir()
         filePath = join(config.archives_dir(), url.filename())
 
         # check cached
-        if util.sha1_file(filePath) != ctx.spec.source.archiveSHA1:
-            fetch = fetcher.Fetcher(ctx.spec.source.archiveUri, targetDir)
+        if util.sha1_file(filePath) != bctx.spec.source.archiveSHA1:
+            fetch = fetcher.Fetcher(bctx.spec.source.archiveUri, targetDir)
             fetch.fetch()
-        assert ctx.spec.source.archiveType == "zip"
+        assert bctx.spec.source.archiveType == "zip"
 
-        achv = archive.Archive(filePath, ctx.spec.source.archiveType)
+        achv = archive.Archive(filePath, bctx.spec.source.archiveType)
         achv.unpack_files(["sandbox/loremipsum.txt"], targetDir)
         assert pathexists(targetDir + "/sandbox")
         testfile = targetDir + "/sandbox/loremipsum.txt"

@@ -11,19 +11,25 @@
 import unittest
 import os
 
+import pisi.context as ctx
+import pisi.api
 from pisi.packagedb import PackageDB
 from pisi import util
-from pisi import context
+from pisi.specfile import SpecFile
 
 class PackageDBTestCase(unittest.TestCase):
 
     def setUp(self):
         # setUp will be called for each test individually
-        self.ctx = context.BuildContext('tests/popt/pspec.xml')
+        pisi.api.init()
+
+        self.spec = SpecFile()
+        self.spec.read('tests/popt/pspec.xml')
+
         self.pdb = PackageDB('testdb')
         
     def testAdd(self):
-        self.pdb.add_package(self.ctx.spec.packages[0])
+        self.pdb.add_package(self.spec.packages[0])
         self.assert_(self.pdb.has_package('popt-libs'))
         # close the database and remove lock
         del self.pdb

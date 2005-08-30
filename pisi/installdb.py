@@ -76,8 +76,8 @@ class InstallDB:
 
     def files_name(self, pkg, version, release):
         from os.path import join
-        pkg_dir = join(config.lib_dir(), pkg + '-' + version + '-' + release)
-        return join(pkg_dir, const.files_xml)
+        pkg_dir = join(ctx.config.lib_dir(), pkg + '-' + version + '-' + release)
+        return join(pkg_dir, ctx.const.files_xml)
 
     def files(self, pkg):
         pkg = str(pkg)
@@ -133,7 +133,7 @@ class InstallDB:
         pkg = str(pkg)
         if self.is_installed(pkg):
             raise InstallDBError("already installed")
-        if config.options and config.options.ignore_comar:
+        if ctx.config.options and ctx.config.options.ignore_comar:
             state = 'ip'
             self.dp[pkg] = True
         else:
@@ -152,8 +152,14 @@ class InstallDB:
         if self.d.has_key(pkg):
             del self.d[pkg]
 
-installdb = None
+
+db = None
 
 def init():
-    installdb = InstallDB()
+    global db
+    if db:
+        return db
+
+    db = InstallDB()
+    return db
 

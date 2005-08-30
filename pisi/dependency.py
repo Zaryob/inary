@@ -14,6 +14,7 @@
 
 #import pisi.db as db
 import pisi.context as ctx
+import pisi.packagedb as packagedb
 from pisi.version import Version
 from pisi.xmlext import *
 from pisi.xmlfile import XmlFile
@@ -89,7 +90,7 @@ def installed_satisfies_dep(depinfo):
     """determine if a package in *repository* satisfies given
 dependency spec"""
     pkg_name = depinfo.package
-    if not installdb.is_installed(pkg_name):
+    if not ctx.installdb.is_installed(pkg_name):
         return False
     else:
         pkg = packagedb.inst_packagedb.get_package(pkg_name)

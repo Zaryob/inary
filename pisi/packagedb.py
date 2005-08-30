@@ -43,8 +43,7 @@ class PackageDB(object):
             fcntl.flock(self.lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except IOError:
             import sys
-            from ui import ui
-            ui.error("Another instance of PISI is running. Try later!\n")
+            ctx.ui.error("Another instance of PISI is running. Try later!\n")
             sys.exit(1)
         self.d = shelve.open(self.fname)
         self.dr = shelve.open(self.fname2)
@@ -151,5 +150,10 @@ thirdparty_packagedb = None
 inst_packagedb = None
 
 def init():
-    thirdparty_packagedb = PackageDB('thirdparty')
-    inst_packagedb = PackageDB('installed')
+    global thirdparty_packagedb
+    global inst_packagedb
+    
+    if not thirdparty_packagedb:
+        thirdparty_packagedb = PackageDB('thirdparty')
+    if not inst_packagedb:
+        inst_packagedb = PackageDB('installed')

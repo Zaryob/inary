@@ -23,8 +23,8 @@ from base64 import encodestring
 # pisi modules
 import pisi
 import pisi.util as util
-from pisi.uri import URI
 import pisi.context as ctx
+from pisi.uri import URI
 
 
 class FetchError(pisi.Error):
@@ -37,7 +37,7 @@ def fetch_url(url, dest, progress=None):
     fetch.progress = progress
     fetch.fetch()
     if progress:
-        ctx.ctx.ui.info('\n')
+        ctx.ui.info('\n')
 
 
 class Fetcher:

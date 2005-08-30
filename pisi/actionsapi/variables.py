@@ -14,8 +14,7 @@
 from os import getenv, environ
 
 # Pisi-Core Modules
-import pisi.config
-import pisi.constants
+import pisi.context as ctx
 
 # Set individual information, that are generally needed for ActionsAPI
 
@@ -24,7 +23,7 @@ def exportFlags():
 
     # Build systems depend on these environment variables. That is why
     # we export them instead of using as (instance) variables.
-    values = pisi.config.config.values
+    values = ctx.config.values
     environ['HOST'] =  values.build.host
     environ['CFLAGS'] = values.build.cflags
     environ['CXXFLAGS'] = values.build.cxxflags
@@ -75,9 +74,9 @@ class Dirs:
     kde = '/usr/kde/3.4'
     qt = '/usr/qt/3'
 
-class Variables(pisi.config.Config):
-    const = pisi.constants.const
-    env = Env()
-    dirs = Dirs()
+def initVariables():
+    ctx.env = Env()
+    ctx.dirs = Dirs()
+    return ctx
 
-glb = Variables()
+glb = initVariables()

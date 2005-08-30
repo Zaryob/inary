@@ -26,8 +26,8 @@ import pisi.dependency as dependency
 import pisi.pgraph as pgraph
 import pisi.operations as operations
 import pisi.packagedb as packagedb
-from pisi.repodb import repodb
-from pisi.installdb import installdb
+import pisi.repodb
+import pisi.installdb
 from pisi.index import Index
 
 class Error(pisi.Error):
@@ -50,14 +50,12 @@ def init(database = True, options = None, ui = None ):
 
     # initialize repository databases
     if database:
-        import pisi.repodb
-        pisi.repodb.init()
-        import pisi.installdb
-        pisi.installdb.init()
-        import pisi.packagedb
-        pisi.packagedb.init()
-        import pisi.sourcedb
-        pisi.sourcedb.init()
+        ctx.repodb = pisi.repodb.init()
+        ctx.installdb = pisi.installdb.init()
+
+        packagedb.init()
+#        import pisi.sourcedb
+#        pisi.sourcedb.init()
 
 def install(packages):
     """install a list of packages (either files/urls, or names)"""
@@ -68,7 +66,7 @@ def install(packages):
 
     try:
         # determine if this is a list of files/urls or names
-        if packages[0].endswith(const.package_prefix): # they all have to!
+        if packages[0].endswith(ctx.const.package_prefix): # they all have to!
             install_pkg_files(packages)
         else:
             install_pkg_names(packages)
@@ -92,7 +90,7 @@ def install_pkg_files(package_URIs):
     ctx.ui.debug('A = %s\n' % str(package_URIs))
 
     for x in package_URIs:
-        if not x.endswith(const.package_prefix):
+        if not x.endswith(ctx.const.package_prefix):
             ctx.ui.error('Mixing file names and package names not supported YET.\n')
             return False
 
@@ -235,15 +233,15 @@ def upgrade_pkg_names(A):
     """Re-installs packages from the repository, trying to perform
     a maximum number of upgrades."""
     
-    ignore_build = config.options and config.options.ignore_build_no
+    ignore_build = ctx.config.options and ctx.config.options.ignore_build_no
 
     # filter packages that are not installed
     Ap = []
     for x in A:
-        if not installdb.is_installed(x):
+        if not ctx.installdb.is_installed(x):
             ctx.ui.info('Package %s is not installed.\n' % x)
             continue
-        (version, release, build) = installdb.get_version(x)
+        (version, release, build) = ctx.installdb.get_version(x)
         pkg = packagedb.get_package(x)
         if ignore_build or (not build):
             if release < pkg.release:
@@ -283,8 +281,8 @@ def upgrade_pkg_names(A):
                 print 'checking ', dep
                 # add packages that can be upgraded
                 if dependency.repo_satisfies_dep(dep):
-                    if installdb.is_installed(dep.package):
-                        (v,r,b) = installdb.get_version(dep.package)
+                    if ctx.installdb.is_installed(dep.package):
+                        (v,r,b) = ctx.installdb.get_version(dep.package)
                         rep_pkg = packagedb.get_package(dep.package)
                         (vp,rp,bp) = (rep_pkg.version, rep_pkg.release, 
                                       rep_pkg.build)
@@ -313,7 +311,7 @@ def remove(A):
     # filter packages that are not installed
     Ap = []
     for x in A:
-        if installdb.is_installed(x):
+        if ctx.installdb.is_installed(x):
             Ap.append(x)
         else:
             ctx.ui.info('Package %s does not exist. Cannot remove.\n' % x)
@@ -328,7 +326,7 @@ def remove(A):
 
     G_f = pgraph.PGraph(packagedb)               # construct G_f
 
-    # find the "install closure" graph of G_f by package 
+    # find the (install closure) graph of G_f by package 
     # set A using packagedb
     print A
     for x in A:
@@ -353,7 +351,7 @@ def remove(A):
     order = G_f.topological_sort()
     print order
     for x in order:
-        if installdb.is_installed(x):
+        if ctx.installdb.is_installed(x):
             operations.remove_single(x)
         else:
             ctx.ui.info('Package %s is not installed. Cannot remove.\n' % x)
@@ -367,7 +365,7 @@ def configure_pending():
     pass
 
 def info(package):
-    if package.endswith(const.package_prefix):
+    if package.endswith(ctx.const.package_prefix):
         return info_file(package)
     else:
         return info_name(package)
@@ -375,10 +373,10 @@ def info(package):
 def info_file(package):
     from package import Package
 
-    if not os.path.exist(package):
+    if not os.path.exists(package):
         raise Error ('File %s not found' % package)
 
-    package = Package(package_name)
+    package = Package(package)
     package.read()
     return package.metadata, package.files
 
@@ -392,8 +390,8 @@ def info_name(package_name):
         #FIXME: get it from sourcedb
         metadata.source = None
         #TODO: fetch the files from server if possible
-        if installdb.is_installed(package.name):
-            files = installdb.files(package.name)
+        if ctx.installdb.is_installed(package.name):
+            files = ctx.installdb.files(package.name)
         else:
             files = None
         return metadata, files
@@ -414,11 +412,11 @@ class Repo:
 
 def add_repo(name, indexuri):
     repo = Repo(URI(indexuri))
-    repodb.add_repo(name, repo)
+    ctx.repodb.add_repo(name, repo)
 
 def remove_repo(name):
-    if repodb.has_repo(name):
-        repodb.remove_repo(name)
+    if ctx.repodb.has_repo(name):
+        ctx.repodb.remove_repo(name)
     else:
         ctx.ui.error('* Repository %s does not exist. Cannot remove.\n'
                  % name)
@@ -427,7 +425,7 @@ def update_repo(repo):
 
     ctx.ui.info('* Updating repository: %s\n' % repo)
     index = Index()
-    index.read(repodb.get_repo(repo).indexuri.get_uri(), repo)
+    index.read(ctx.repodb.get_repo(repo).indexuri.get_uri(), repo)
     index.update_db(repo)
     ctx.ui.info('* Package database updated.\n')
 

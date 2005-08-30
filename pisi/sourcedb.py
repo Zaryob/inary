@@ -24,13 +24,13 @@ import fcntl
 from bsddb import db
 
 import pisi.util as util
-from pisi.config import config
+import pisi.context as ctx
 
 class SourceDB(object):
 
     def __init__(self):
-        util.check_dir(config.db_dir())
-        self.filename = os.path.join(config.db_dir(), 'source.bdb')
+        util.check_dir(ctx.config.db_dir())
+        self.filename = os.path.join(ctx.config.db_dir(), 'source.bdb')
         self.d = shelve.open(self.filename)
         self.fdummy = file(self.filename + '.lock', 'w')
         fcntl.flock(self.fdummy, fcntl.LOCK_EX)
@@ -62,5 +62,10 @@ class SourceDB(object):
 sourcedb = None
 
 def init():
+    global sourcedb
+    if sourcedb:
+        return sourcedb
+
     sourcedb = SourceDB()
+    return sourcedb
     

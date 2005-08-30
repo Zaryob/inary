@@ -10,11 +10,13 @@
 
 import unittest
 
-from pisi.constants import const 
+import pisi.context as ctx
 
 class ContextTestCase(unittest.TestCase):
     
     def testConstness(self):
+        const = ctx.const
+
         # test if we can get a const attribute?
         try:
             test = const.package_prefix
@@ -46,6 +48,8 @@ class ContextTestCase(unittest.TestCase):
             pass
 
     def testConstValues(self):
+        const = ctx.const
+
         constDict = {
             "actions_file": "actions.py",
             "setup_func": "setup",
@@ -58,5 +62,6 @@ class ContextTestCase(unittest.TestCase):
                 self.assertEqual(value, constDict[k])
             else:
                 self.fail("Constants does not have an attribute named %s" % k)
+
 
 suite = unittest.makeSuite(ContextTestCase)

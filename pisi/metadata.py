@@ -17,9 +17,8 @@
 #           Baris Metin <baris@uludag.org.tr
 
 import pisi.context as ctx
-
-from pisi.xmlfile import *
 import pisi.specfile as specfile
+from pisi.xmlfile import *
 from pisi.util import Checks
 
 class SourceInfo:

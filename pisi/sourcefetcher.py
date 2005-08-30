@@ -12,9 +12,8 @@
 
 from os.path import basename, dirname, join
 
+import pisi.context as ctx
 from pisi.ui import ui
-from pisi.config import config
-from pisi.constants import const
 from pisi.uri import URI
 from pisi.specfile import SpecFile
 
@@ -26,7 +25,7 @@ class SourceFetcher(object):
         self.location = dirname(self.url.uri)
 
         pkgname = basename(dirname(self.url.path()))
-        self.dest = join(config.tmp_dir(), pkgname)
+        self.dest = join(ctx.config.tmp_dir(), pkgname)
         
     def fetch_all(self):
         # fetch pspec file
@@ -43,7 +42,7 @@ class SourceFetcher(object):
         return pspec
 
     def fetch_actionsfile(self):
-        actionsuri = join(self.location, const.actions_file)
+        actionsuri = join(self.location, ctx.const.actions_file)
         self.url.uri = actionsuri
         self.fetch()
         
@@ -51,27 +50,27 @@ class SourceFetcher(object):
         spec = self.spec
         for patch in spec.source.patches:
             patchuri = join(self.location, 
-                            const.files_dir, patch.filename)
+                            ctx.const.files_dir, patch.filename)
             self.url.uri = patchuri
-            self.fetch(const.files_dir)
+            self.fetch(ctx.const.files_dir)
 
     def fetch_comarfiles(self):
         spec = self.spec
         for package in spec.packages:
             for pcomar in package.providesComar:
                 comaruri = join(self.location,
-                                const.comar_dir, pcomar.script)
+                                ctx.const.comar_dir, pcomar.script)
                 self.url.uri = comaruri
-                self.fetch(const.comar_dir)
+                self.fetch(ctx.const.comar_dir)
 
     def fetch_additionalFiles(self):
         spec = self.spec
         for pkg in spec.packages:
             for afile in pkg.additionalFiles:
                 afileuri = join(self.location, 
-                                const.files_dir, afile.filename)
+                                ctx.const.files_dir, afile.filename)
                 self.url.uri = afileuri
-                self.fetch(const.files_dir)
+                self.fetch(ctx.const.files_dir)
 
     def fetch(self, appendDest=""):
         from fetcher import fetch_url

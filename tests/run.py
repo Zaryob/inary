@@ -21,7 +21,7 @@ runTestSuite = lambda(x): unittest.TextTestRunner(verbosity=2).run(x)
 def run_all():
 
     import utiltests
-    import xmlfile
+    import xmlfiletests
     import specfiletests
     import metadatatests
     import constantstests

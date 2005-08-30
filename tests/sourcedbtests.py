@@ -11,22 +11,28 @@
 import unittest
 import os
 
-from pisi.sourcedb import sourcedb
+import pisi.context as ctx
+import pisi.api
+import pisi.sourcedb
 from pisi import util
-from pisi import context
+from pisi.specfile import SpecFile
 
 class SourceDBTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.ctx = context.BuildContext("tests/popt/pspec.xml")
+        pisi.api.init()
+
+        self.sourcedb = pisi.sourcedb.init()
+        self.spec = SpecFile()
+        self.spec.read("tests/popt/pspec.xml")
         
     def testAdd(self):
-        sourcedb.add_source(self.ctx.spec.source)
-        self.assert_(sourcedb.has_source("popt"))
+        self.sourcedb.add_source(self.spec.source)
+        self.assert_(self.sourcedb.has_source("popt"))
     
     def testRemove(self):
         self.testAdd()
-        sourcedb.remove_source("popt")
-        self.assert_(not sourcedb.has_source("popt"))
+        self.sourcedb.remove_source("popt")
+        self.assert_(not self.sourcedb.has_source("popt"))
 
 suite = unittest.makeSuite(SourceDBTestCase)

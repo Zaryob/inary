@@ -17,16 +17,15 @@
 import os
 
 import pisi
+
+import pisi.context as ctx
+import pisi.packagedb as packagedb
+import pisi.dependency as dependency
+import pisi.operations as operations
 from pisi.specfile import *
 from pisi.package import Package
-from pisi.ui import ui
-from pisi.installdb import installdb
-import pisi.packagedb as packagedb
-from pisi.packagedb import inst_packagedb
-import pisi.dependency as dependency
 from pisi.metadata import MetaData
 from pisi.comariface import comard
-import pisi.operations as operations
 #import conflicts
 
 class InstallError(pisi.Error):
@@ -45,7 +44,7 @@ class Installer:
 
     def install(self, ask_reinstall = True):
         "entry point"
-        ui.info('Installing %s, version %s, release %s, build %s\n' %
+        ctx.ui.info('Installing %s, version %s, release %s, build %s\n' %
                 (self.pkginfo.name, self.pkginfo.version,
                  self.pkginfo.release, self.pkginfo.build))
         self.ask_reinstall = ask_reinstall
@@ -72,12 +71,12 @@ class Installer:
 
         # check conflicts
         for pkg in self.metadata.package.conflicts:
-            if installdb.is_installed(self.pkginfo):
+            if ctx.installdb.is_installed(self.pkginfo):
                 raise InstallError("Package conflicts " + pkg)
 
         # check dependencies
         if not dependency.installable(self.pkginfo.name):
-            ui.error('Dependencies for ' + self.pkginfo.name +
+            ctx.ui.error('Dependencies for ' + self.pkginfo.name +
                      ' not satisfied\n')
             raise InstallError("Package not installable")
 
@@ -86,12 +85,12 @@ class Installer:
 
         pkg = self.pkginfo
 
-        if installdb.is_installed(pkg.name): # is this a reinstallation?
-            (iversion, irelease, ibuild) = installdb.get_version(pkg.name)
+        if ctx.installdb.is_installed(pkg.name): # is this a reinstallation?
+            (iversion, irelease, ibuild) = ctx.installdb.get_version(pkg.name)
 
             # determine if same version
             same_ver = False
-            ignore_build = config.options and config.options.ignore_build_no
+            ignore_build = ctx.config.options and ctx.config.options.ignore_build_no
             if (not ibuild) or (not pkg.build) or ignore_build:
                 # we don't look at builds to compare two package versions
                 if pkg.version == iversion and pkg.release == irelease:
@@ -102,21 +101,21 @@ class Installer:
 
             if same_ver:
                 if self.ask_reinstall:
-                    if not ui.confirm('Re-install same version package?'):
+                    if not ctx.ui.confirm('Re-install same version package?'):
                         raise InstallError('Package re-install declined')
             else:
                 upgrade = False
                 # is this an upgrade?
                 # determine and report the kind of upgrade: version, release, build
                 if pkg.version > iversion:
-                    ui.info('Upgrading to new upstream version\n')
+                    ctx.ui.info('Upgrading to new upstream version\n')
                     upgrade = True
                 elif pkg.release > irelease:
-                    ui.info('Upgrading to new distribution release\n')
+                    ctx.ui.info('Upgrading to new distribution release\n')
                     upgrade = True
                 elif ((not ignore_build) and ibuild and pkg.build
                        and pkg.build > ibuild):
-                    ui.info('Upgrading to new distribution build\n')
+                    ctx.ui.info('Upgrading to new distribution build\n')
                     upgrade = True
 
                 # is this a downgrade? confirm this action.
@@ -127,7 +126,7 @@ class Installer:
                         x = 'Downgrade to old distribution release?'
                     else:
                         x = 'Downgrade to old distribution build?'
-                    if not ui.confirm(x):
+                    if not ctx.ui.confirm(x):
                         raise InstallError('Package downgrade declined')
 
             # remove old package then
@@ -136,24 +135,24 @@ class Installer:
     def extract_install(self):
         "unzip package in place"
 
-        ui.info('Extracting files,\n')
-        self.package.extract_dir_flat('install', config.destdir)
+        ctx.ui.info('Extracting files,\n')
+        self.package.extract_dir_flat('install', ctx.config.destdir)
  
     def store_pisi_files(self):
         """put files.xml, metadata.xml, actions.py and COMAR scripts
         somewhere in the file system. We'll need these in future..."""
 
-        ui.info('Storing %s, ' % const.files_xml)
-        self.package.extract_file(const.files_xml, self.package.pkg_dir())
+        ctx.ui.info('Storing %s, ' % ctx.const.files_xml)
+        self.package.extract_file(ctx.const.files_xml, self.package.pkg_dir())
 
-        ui.info('%s.\n' % const.metadata_xml)
-        self.package.extract_file(const.metadata_xml, self.package.pkg_dir())
+        ctx.ui.info('%s.\n' % ctx.const.metadata_xml)
+        self.package.extract_file(ctx.const.metadata_xml, self.package.pkg_dir())
 
         for pcomar in self.metadata.package.providesComar:
-            fpath = os.path.join(const.comar_dir, pcomar.script)
+            fpath = os.path.join(ctx.const.comar_dir, pcomar.script)
             # comar prefix is added to the pkg_dir while extracting comar
             # script file. so we'll use pkg_dir as destination.
-            ui.info('Storing %s\n' % fpath)
+            ctx.ui.info('Storing %s\n' % fpath)
             self.package.extract_file(fpath, self.package.pkg_dir())
 
     def register_comar_scripts(self):
@@ -161,7 +160,7 @@ class Installer:
 
         for pcomar in self.metadata.package.providesComar:
             scriptPath = os.path.join(self.package.comar_dir(),pcomar.script)
-            ui.info("Registering COMAR script %s\n" % pcomar.script)
+            ctx.ui.info("Registering COMAR script %s\n" % pcomar.script)
             # FIXME: We must check the result of the command (possibly
             # with id?)
             if comard:
@@ -174,11 +173,11 @@ class Installer:
         "update databases"
 
         # installdb
-        installdb.install(self.metadata.package.name,
+        ctx.installdb.install(self.metadata.package.name,
                           self.metadata.package.version,
                           self.metadata.package.release,
                           self.metadata.package.build,
                           self.metadata.package.distribution)
 
         # installed packages
-        inst_packagedb.add_package(self.pkginfo)
+        packagedb.inst_packagedb.add_package(self.pkginfo)

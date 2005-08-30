@@ -16,7 +16,6 @@
 import sys
 
 from pisi.colors import colorize
-import pisi.context as ctx
 
 
 class CLI:
