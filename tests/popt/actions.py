@@ -11,14 +11,11 @@
 # Please read the COPYING file.
 #
 
-from pisi.actionsapi import libtools
 from pisi.actionsapi import autotools
 
 WorkDir='popt-1.7'
 
 def setup():
-    libtools.gnuconfig_update()
-#    libtoolize.libtoolize()
     autotools.configure( '--with-nls' )
 
 def build():
