@@ -38,15 +38,12 @@ def makedirs(destinationDirectory):
         pass
 
 def echo(destionationFile, content):
-    if can_access_file(destionationFile):
-        try:
-            f = open(destionationFile, 'a')
-            f.write("%s\n" % content)
-            f.close()
-        except IOError:
-            ctx.ui.error('\n!!! ActionsAPI [echo]: Can\'t append to file...\n')
-    else:
-        ctx.ui.error('\n!!! ActionsAPI [echo]: File doesn\'t exists...\n')
+    try:
+        f = open(destionationFile, 'a')
+        f.write("%s\n" % content)
+        f.close()
+    except IOError:
+        ctx.ui.error('\n!!! ActionsAPI [echo]: Can\'t append to file...\n')
 
 def chmod(sourceFile, mode = 0755):
     '''change the mode of sourceFile to the mode'''

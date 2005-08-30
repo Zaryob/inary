@@ -11,7 +11,7 @@
 # Please read the COPYING file.
 
 # Standart Python Modules
-import os.path
+import os
 
 # PISI Modules
 import pisi.actionsapi
@@ -25,6 +25,12 @@ class BinutilsError(pisi.actionsapi.Error):
 
 env = glb.env
 dirs = glb.dirs
+
+def curDIR():
+    return os.getcwd()
+
+def ENV(env):
+    return os.environ[env];
 
 # variables.Env 
 
