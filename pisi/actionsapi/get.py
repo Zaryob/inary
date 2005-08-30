@@ -29,8 +29,8 @@ dirs = glb.dirs
 def curDIR():
     return os.getcwd()
 
-def ENV(env):
-    return os.environ[env];
+def ENV(environ):
+    return os.environ[environ];
 
 # variables.Env 
 
