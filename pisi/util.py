@@ -236,6 +236,10 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
     used to remove prefix from filePath while matching excludes, if
     given."""
 
+    # also handle single files
+    if os.path.isfile(top):
+        return top, sha1_file(top)
+
     def has_excluded_prefix(filename):
         if exclude_prefix and removePrefix:
             tempfnam = remove_prefix(removePrefix, filename)
