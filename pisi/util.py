@@ -238,7 +238,8 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
 
     # also handle single files
     if os.path.isfile(top):
-        return top, sha1_file(top)
+        yield (top, sha1_file(top))
+        return
 
     def has_excluded_prefix(filename):
         if exclude_prefix and removePrefix:
