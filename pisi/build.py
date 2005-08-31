@@ -397,11 +397,23 @@ class PisiBuild:
         will be .pisi files hanging around, AS INTENDED ;)"""
         for package in self.spec.packages:
 
+            # store additional files
+            c = os.getcwd()
+            os.chdir(self.pspecDir)
+            install_dir = self.bctx.pkg_dir() + ctx.const.install_dir_suffix
+            for afile in package.additionalFiles:
+                src = os.path.join(ctx.const.files_dir, afile.filename)
+                dest = os.path.join(install_dir + os.path.dirname(afile.target), os.path.basename(afile.target))
+                util.copy_file(src, dest)
+                if afile.permission:
+                    os.chmod(dest, int(afile.permission) | 0777)
+
+            os.chdir(c)
+
             name = util.package_name(package.name,
                                      self.spec.source.version,
                                      self.spec.source.release)
             
-
             ctx.ui.action(_("** Building package %s\n") % package.name);
 
             ctx.ui.action(_("Generating %s...") % ctx.const.files_xml)
@@ -416,25 +428,12 @@ class PisiBuild:
             
             pkg = Package(name, 'w')
 
-            c = os.getcwd()
-        
-            os.chdir(c)
-
             # add comar files to package
             os.chdir(self.pspecDir)
             for pcomar in package.providesComar:
                 fname = os.path.join(ctx.const.comar_dir,
                                      pcomar.script)
                 pkg.add_to_package(fname)
-
-            # store additional files
-            install_dir = self.bctx.pkg_dir() + ctx.const.install_dir_suffix
-            for afile in package.additionalFiles:
-                src = os.path.join(ctx.const.files_dir, afile.filename)
-                dest = os.path.join(install_dir + os.path.dirname(afile.target), os.path.basename(afile.target))
-                util.copy_file(src, dest)
-                if afile.permission:
-                    os.chmod(dest, int(afile.permission) | 0777)
 
             # add xmls and files
             os.chdir(self.bctx.pkg_dir())
