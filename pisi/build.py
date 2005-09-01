@@ -264,6 +264,8 @@ class PisiBuild:
         pass
 
     def patch_exists(self):
+        """check existence of patch files declared in PSPEC"""
+
         files_dir = os.path.abspath(os.path.join(self.pspecDir,
                                                  ctx.const.files_dir))
         for patch in self.spec.source.patches:
