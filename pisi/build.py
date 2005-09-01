@@ -145,7 +145,10 @@ class PisiBuild:
         util.xterm_title(_("Building PISI source package: %s\n") % self.spec.source.name)
         
         self.compile_action_script()
-         
+   
+        # check if all patch files exists, if there are missing no need to unpack!
+        self.patch_exists()
+  
         self.fetch_source_archive()
 
         self.unpack_source_archive()
@@ -259,6 +262,14 @@ class PisiBuild:
         """fail if dependencies not satisfied"""
         #TODO: we'll have to do better than plugging a fxn here
         pass
+
+    def patch_exists(self):
+        files_dir = os.path.abspath(os.path.join(self.pspecDir,
+                                                 ctx.const.files_dir))
+        for patch in self.spec.source.patches:
+            patchFile = os.path.join(files_dir, patch.filename)
+            if not os.access(patchFile, os.F_OK):
+                raise Error(_("Patch file is missing: %s\n") % patch.filename)
 
     def apply_patches(self):
         files_dir = os.path.abspath(os.path.join(self.pspecDir,
