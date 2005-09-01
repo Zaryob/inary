@@ -9,17 +9,19 @@
 #
 # Please read the COPYING file.
 #
-# some helper functions for using minidom
-# works well enough for now... :/
-# function names are mixedCase for compatibility with minidom,
-# an old library
-
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 #           Baris Metin <baris@uludag.org.tr
+
+"""
+ some helper functions for using minidom
+ function names are mixedCase for compatibility with minidom,
+ an old library
+"""
 
 import pisi
 
 class XmlError(pisi.Error):
+    "named this way because the class if mostly used with an import *"
     pass
 
 def getNodeAttribute(node, attrname):
@@ -104,7 +106,6 @@ def getAllNodes(node, tagPath):
             return []
 
     return nodeList
-
 
 def createTagPath(dom, node, tags):
     """create new child at the end of a tag chain starting from node
