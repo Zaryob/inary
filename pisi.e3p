@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Project SYSTEM "Project-3.7.dtd">
+<!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-08-28, 03:00:42 -->
+<!-- Saved: 2005-09-02, 17:09:47 -->
 <!-- Copyright (C) 2005 PiSi Development Team, pisi@uludag.org.tr -->
-<Project version="3.7">
+<Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
   <UIType>Qt</UIType>
   <Description>The package management software of Pardus distribution.
 </Description>
-  <Version>0.2</Version>
+  <VersIon>0.2</VersIon>
   <Author>PiSi Development Team</Author>
-  <Email>pisi@uludag.org.tr</Email>
+  <EmaIl>pisi@uludag.org.tr</EmaIl>
   <Sources>
     <Source>
       <Dir>tools</Dir>
@@ -304,50 +304,12 @@
       <Name>api.py</Name>
     </Source>
     <Source>
-      <Dir></Dir>
-      <Dir>home</Dir>
-      <Dir>exa</Dir>
-      <Dir>code</Dir>
-      <Dir>projects</Dir>
-      <Dir>pisi-gurer</Dir>
-      <Name>dependency.py</Name>
+      <Dir>tests</Dir>
+      <Name>xmlfiletests.py</Name>
     </Source>
     <Source>
-      <Dir></Dir>
-      <Dir>home</Dir>
-      <Dir>exa</Dir>
-      <Dir>code</Dir>
-      <Dir>projects</Dir>
-      <Dir>pisi-gurer</Dir>
-      <Name>specfile.py</Name>
-    </Source>
-    <Source>
-      <Dir></Dir>
-      <Dir>home</Dir>
-      <Dir>exa</Dir>
-      <Dir>code</Dir>
-      <Dir>projects</Dir>
-      <Dir>pisi-gurer</Dir>
-      <Name>xmlutil.py</Name>
-    </Source>
-    <Source>
-      <Dir></Dir>
-      <Dir>home</Dir>
-      <Dir>exa</Dir>
-      <Dir>code</Dir>
-      <Dir>projects</Dir>
-      <Dir>pisi-kga</Dir>
-      <Name>setup.py</Name>
-    </Source>
-    <Source>
-      <Dir></Dir>
-      <Dir>home</Dir>
-      <Dir>exa</Dir>
-      <Dir>code</Dir>
-      <Dir>projects</Dir>
-      <Dir>pisi-kga</Dir>
-      <Dir>src</Dir>
-      <Name>pisi_kga.py</Name>
+      <Dir>pisi</Dir>
+      <Name>specfilenew.py</Name>
     </Source>
   </Sources>
   <Forms>
@@ -372,6 +334,10 @@
       <Dir>tests</Dir>
       <Name>beta.sh</Name>
     </Other>
+    <Other>
+      <Dir>tests</Dir>
+      <Name>sandbox</Name>
+    </Other>
   </Others>
   <MainScript>
     <Name>pisi-cli</Name>
@@ -381,4 +347,11 @@
     <VcsOptions>{'status': [], 'log': [], 'global': [], 'update': [], 'remove': [], 'add': [], 'tag': [], 'export': [], 'diff': [], 'commit': [], 'checkout': [], 'history': []}</VcsOptions>
     <VcsOtherData>{'standardLayout': 1}</VcsOtherData>
   </Vcs>
+  <FiletypeAssociations>
+    <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
+    <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
+  </FiletypeAssociations>
 </Project>
