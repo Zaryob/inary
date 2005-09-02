@@ -11,7 +11,8 @@
 #
 #
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
-#           Baris Metin <baris@uludag.org.tr
+#           Gurer Ozen <gurer@uludag.org.tr>
+#           Baris Metin <baris@uludag.org.tr>
 
 
 """
@@ -23,10 +24,10 @@
  in xml.dom :( )
 
  autoxml is a metaclass for automatic XML translation, using
- a miniature type system
+ a miniature type system. (w00t!)
 
  Method names are mixedCase for compatibility with minidom,
- an old library
+ an old library.
 """
 
 # System
@@ -45,9 +46,45 @@ class Error(pisi.Error):
 
 import types
 
-mandatory, optional = range(2)
+mandatory, optional = range(2) # poor man's enum
 
+# basic types
+Text = types.StringType
+Integer = types.IntType
 
+class LocalText:
+    "handle tags with localized text"
+
+    def __init__():
+        locs = {}
+        
+    def decode(nodes, req):
+        # flags, tag name, instance attribute
+        if not nodes:
+            if req == mandatory:
+                pass
+                #errs.append("Tag '%s' should have at least one '%s' tag\n" % (parent.tagName, d[2]))
+        else:
+            for node in nodes:
+                lang = getAttribute(node, "xml:lang")
+                c = getText(node)
+                if not c:
+                    #errs.append("Tag '%s' should have some text data\n" % node.tagName)
+                    break
+                # FIXME: check for dups and 'en'
+                if not lang:
+                    lang = 'en'
+                self.locs[lang] = c
+            # FIXME: return full list too
+            L = language
+            if not locs.has_key(L):
+                L = 'en'
+            if not locs.has_key(L):
+                errs.append("Tag '%s' should have an English version\n" % d[2])
+                return ""
+            return locs[L]
+
+            
 class autoxml(type):
     "high-level automatic XML transformation interface for xmlfile"
 
@@ -70,7 +107,7 @@ class autoxml(type):
         root_tag = cls.tag
 
         # generate helper routines
-        initializers = []
+        inits = []
         decoders = []
         encoders = []
         formatters = []
@@ -78,27 +115,20 @@ class autoxml(type):
             if var.startswith('t_') or var.startswith('a_'):
                 name = var[2:]
                 #print 'name', name
-                # possible python bug, binds var only to t_Email here!
-##                def initializer(self):
-##                    print 'got', name
-##                    setattr(self, name, None)
-##                initializers.append(initializer)
-                initializers.append(autoxml.gen_init(cls, name))
                 if var.startswith('t_'):
                     x = autoxml.gen_tag(cls, name)
                 elif var.startswith('a_'):
                     x = autoxml.gen_attr(cls, name)
-                (decoder, encoder, formatter) = x
+                (init, decoder, encoder, formatter) = x
+                inits.append(init)
                 decoders.append(decoder)
                 encoders.append(encoder)
                 formatters.append(formatter)
 
-        #print initializers
-
-        setattr(cls, 'initializers', initializers)
+        setattr(cls, 'initializers', inits)
         def initialize(self):
-            for initializer in self.__class__.initializers:
-                initializer(self)
+            for init in self.__class__.initializers:
+                init(self)
         setattr(cls, '__init__', initialize)            
 
         setattr(cls, 'decoders', decoders)
@@ -125,21 +155,21 @@ class autoxml(type):
                 return self.format()
             setattr(cls, '__str__', string)
 
-    def gen_init(cls, name):
-        def initializer(self):
-            varname = cls.mixed_case(name)
-            #print 'init:', varname
-            setattr(self, varname, None)
-        return initializer
-
     def gen_tag(cls, tag):
         # generate readers and writers for the tag
         val = getattr(cls, 't_' + tag)
         tag_type = val[0]
-        if type(tag_type) == type(type):
+        return autoxml.gen_tag_aux(cls, tag, tag_type, val)
+    
+    def gen_tag_aux(cls, tag, tag_type, val):
+        if type(tag_type) == types.TypeType:
             # basic types
             return autoxml.gen_basic_tag(cls, tag, val)
-
+        elif type(tag_type) == types.ClassType:
+            return autoxml.gen_class_tag(cls, tag, val)
+        elif type(tag_type) == types.ListType:
+            return autoxml.gen_list_tag(cls, tag, val)
+                
     def gen_attr(cls, tag):
         "generate readers and writers for an attribute"
         #print 'attr:', tag
@@ -157,6 +187,10 @@ class autoxml(type):
         name = cls.mixed_case(token)
         token_type = val[0]
         req = val[1]
+       
+        def initialize(self):
+            #print 'init:', name
+            setattr(self, name, None)
 
         def decode(self, node):
             text = readtext(node, token)
@@ -181,7 +215,7 @@ class autoxml(type):
                 if req == mandatory:
                     return ['Mandatory argument not available']
 
-        def formatter(self):
+        def format(self):
             #print 'format:', name
             if hasattr(self, name):
                 return '%s: %s\n' % (token, str(getattr(self, name)))
@@ -190,7 +224,7 @@ class autoxml(type):
                     raise Error('Mandatory variable %s not available' % name)
             return ""
 
-        return decode, encode, formatter
+        return initialize, decode, encode, format
 
     def gen_basic_attr(cls, attr, val):
         """generate an attribute with a basic datatype"""
@@ -207,6 +241,56 @@ class autoxml(type):
         def writetext(xml, node, tag, value):
             xml.addTextNodeUnder(node, tag, value)
         return autoxml.gen_basic(cls, tag, val, readtext, writetext)
+
+    def gen_class_tag(cls, tag, val):
+        pass
+
+    def gen_list_tag(cls, tag, val):
+        name = cls.mixed_case(token)
+        token_type = val[0]
+        req = val[1]
+
+        if len(val)>=3:
+            path = val[2]
+        else:
+            path = tag
+        if len(token_type!=1):
+            raise Error('List type must contain one element')
+
+        x = autoxml.gen_tag_aux(cls, tag, tag_type, val)    
+        (x_init, x_decoder, x_encoder, x_formatter) = x
+
+        def init(self):
+            varname = cls.mixed_case(name)
+            setattr(self, varname, [])
+
+        def decode(self, node):
+            nodes = getAllNodes(node)
+            if len(nodes) is 0 and req is mandatory:
+                pass
+                #FIXME: add error here
+            for node in nodes:
+                x_decoder(self, node)
+                pass
+
+        def encode(self, xml):
+            node = xml.newNode(cls.tag)
+            if hasattr(self, name):
+                writetext(xml, node, token, str(getattr(self, name)))
+            else:
+                if req == mandatory:
+                    return ['Mandatory argument not available']
+
+        def format(self):
+            #print 'format:', name
+            if hasattr(self, name):
+                return '%s: %s\n' % (token, str(getattr(self, name)))
+            else:
+                if req == mandatory:
+                    raise Error('Mandatory variable %s not available' % name)
+            return ""
+        
+        return (init, decode, encode, format)
 
     basic_cons_map = {
         types.StringType : str,

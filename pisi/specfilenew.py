@@ -9,13 +9,14 @@
 #
 # Please read the COPYING file.
 #
-
-# Specfile module is our handler for PSPEC files. PSPEC (PISI SPEC)
-# files are specification files for PISI source packages. This module
-# provides read and write access to PSPEC files.
-
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 #           Baris Metin <baris@uludag.org.tr>
+
+"""
+ Specfile module is our handler for PSPEC files. PSPEC (PISI SPEC)
+ files are specification files for PISI source packages. This module
+ provides read and write routines for PSPEC files.
+"""
 
 # standard python modules
 from os.path import basename
@@ -28,17 +29,18 @@ from pisi.ui import ui
 from pisi.dependency import DepInfo
 from pisi.util import Checks
 
+__metaclass__ = xmlfile.autoxml
+
 
 class Packager:
-    __metaclass__ = xmlfile.autoxml
     t_Name = [types.StringType, xmlfile.mandatory]
     t_Email = [types.StringType, xmlfile.mandatory]
     def __str__(self):
         s = "%s <%s>" % (self.name, self.email)
         return s
+        
+        
 class AdditionalFileInfo:
-    __metaclass__ = xmlfile.autoxml
-
     s_Filename = xmlfile.mandatory
     a_Target = [types.StringType, xmlfile.mandatory]
     a_Permission = [types.StringType, xmlfile.optional]
@@ -49,9 +51,8 @@ class AdditionalFileInfo:
             s += '(%s)' % self.permission
         return s
 
+        
 class Patch:
-    __metaclass__ = xmlfile.autoxml
-
     s_Filename = xmlfile.mandatory
     a_compressionType = [types.StringType, xmlfile.optional]
     a_level = [types.StringType, xmlfile.optional]
@@ -67,8 +68,8 @@ class Patch:
             s += ' target:' + self.target
         return s
 
+        
 class Update:
-    __metaclass__ = xmlfile.autoxml
 
     t_Date = [types.StringType, xmlfile.mandatory]
     t_Version = [types.StringType, xmlfile.mandatory]
@@ -83,10 +84,12 @@ class Update:
             s += ", type=" + self.type
         return s
 
+        
 class Path:
-    __metaclass__ = xmlfile.autoxml
+
     s_Path = xmlfile.mandatory
     a_fileType =  [types.StringType, xmlfile.optional]
+
     def __str__(self):
         s = self.pathname
         s += ", type=" + self.fileType
@@ -94,17 +97,19 @@ class Path:
 
 
 class ComarProvide:
-    __metaclass__ = xmlfile.autoxml
+
     s_om = [types.StringType, xmlfile.mandatory]
     a_script = [types.StringType, xmlfile.mandatory]
+
     def __str__(self):
         # FIXME: descriptive enough?
         s = self.script
         s += ' (' + self.om + ')'
         return s
 
+        
 class Archive:
-    __metaclass__ = xmlfile.autoxml
+
     s_uri = [ types.StringType, xmlfile.mandatory ]
     a_type =[ types.StringType, xmlfile.mandatory ]
     a_sha1sum =[ types.StringType, xmlfile.mandatory ]
@@ -114,7 +119,7 @@ class Archive:
 
 
 class Source:
-    __metaclass__ = xmlfile.autoxml
+
     t_Name = [types.StringType, xmlfile.mandatory]
     t_HomePage = [types.StringType, xmlfile.mandatory]
     t_Packager = [Packager, xmlfile.mandatory]
@@ -130,7 +135,7 @@ class Source:
 
 
 class Package:
-    __metaclass__ = xmlfile.autoxml
+
     t_Name = [ types.StringType, xmlfile.mandatory ]
     t_Summary = [ types.StringType, xmlfile.mandatory ]
     t_Description = [ types.StringType, xmlfile.mandatory ]

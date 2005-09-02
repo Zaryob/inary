@@ -57,6 +57,7 @@ def init(database = True, options = None, ui = None ):
 #        import pisi.sourcedb
 #        pisi.sourcedb.init()
 
+
 def install(packages):
     """install a list of packages (either files/urls, or names)"""
 
@@ -235,7 +236,7 @@ def upgrade_pkg_names(A):
     
     ignore_build = ctx.config.options and ctx.config.options.ignore_build_no
 
-    # filter packages that are not installed
+    # filter packages that are not upgradable
     Ap = []
     for x in A:
         if not ctx.installdb.is_installed(x):
@@ -305,6 +306,25 @@ def upgrade_pkg_names(A):
         
     return True                         # everything went OK :)
 
+def list_upgradable():
+    A = ctx.installdb.list_installed()
+    # filter packages that are not upgradable
+    Ap = []
+    for x in A:
+        if not ctx.installdb.is_installed(x):
+            continue
+        (version, release, build) = ctx.installdb.get_version(x)
+        pkg = packagedb.get_package(x)
+        if ignore_build or (not build):
+            if release < pkg.release:
+                Ap.append(x)
+        elif build < pkg.build:
+                Ap.append(x)
+        else:
+            pass
+            #ctx.ui.info('Package %s cannot be upgraded. ' % x)
+    return Ap
+    
 def remove(A):
     """remove set A of packages from system (A is a list of package names)"""
     

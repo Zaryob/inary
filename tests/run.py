@@ -15,6 +15,7 @@ import sys
 import os
 
 sys.path.append('.')
+sys.path.append('..')
 
 runTestSuite = lambda(x): unittest.TextTestRunner(verbosity=2).run(x)
 
