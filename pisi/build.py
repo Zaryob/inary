@@ -129,11 +129,11 @@ class PisiBuild:
         self.srcDir = None
 
     def set_state(self, state):
-        stateFile = os.path.join(self.srcDir, "pisiBuildState")
+        stateFile = os.path.join(self.bctx.pkg_work_dir(), "pisiBuildState")
         open(stateFile, "w").write(state)
 
     def get_state(self):
-        stateFile = os.path.join(self.srcDir, "pisiBuildState")
+        stateFile = os.path.join(self.bctx.pkg_work_dir(), "pisiBuildState")
         if not os.path.exists(stateFile): # no state
             return None
         return open(stateFile, "r").read()
