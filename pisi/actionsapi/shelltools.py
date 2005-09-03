@@ -100,7 +100,7 @@ def unlinkDir(sourceDirectory):
 def move(sourceFile, destinationFile):
     '''recursively move a sourceFile or directory to destinationFile'''
     for file in glob.glob(sourceFile):
-        if can_access_file(file):
+        if isFile(file) or isLink(file):
             try:
                 shutil.move(file, destinationFile)
             except OSError:
@@ -111,7 +111,7 @@ def move(sourceFile, destinationFile):
 def copy(sourceFile, destinationFile):
     '''recursively copy a sourceFile or directory to destinationFile'''
     for file in glob.glob(sourceFile):
-        if can_access_file(file):
+        if isFile(file) or isLink(file):
             try:
                 shutil.copy(file, destinationFile)
             except IOError:
@@ -121,7 +121,7 @@ def copy(sourceFile, destinationFile):
 
 def copytree(source, destination, sym = False):
     '''recursively copy an entire directory tree rooted at source'''
-    if can_access_directory(source):
+    if isDirectory(file) or isLink(file):
         try:
             shutil.copytree(source, destination, sym)
         except OSError:
