@@ -661,6 +661,42 @@ Gives a brief list of PiSi components published in the repository.
         for p in list:
             print p
 
+class ListUpgrades(Command):
+    """List packages to be upgraded
+
+Usage: list-upgrades [ <repo1> <repo2> ... repon ]
+
+"""
+    __metaclass__ = autocommand
+
+    def __init__(self):
+        super(ListUpgrades, self).__init__()
+
+    name = ("list-upgrades", "lu")
+
+    def run(self):
+
+        self.init(True)
+
+        if self.args:
+            for arg in self.args:
+                self.print_packages(arg)
+        else:
+            # print for all repos
+            for repo in ctx.repodb.list():
+                ctx.ui.info("Repository : %s\n" % repo)
+                self.print_packages(repo)
+        self.finalize()
+
+    def print_packages(self, repo):
+        from pisi import packagedb
+
+        pkg_db = packagedb.get_db(repo)
+        list = pkg_db.list_upgrades()
+        list.sort()
+        for p in list:
+            print p
+
 
 class ListPending(Command):
     """List pending packages"""
