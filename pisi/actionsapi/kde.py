@@ -58,9 +58,9 @@ def make(parameters = ''):
     if system('make %s' % parameters):
         raise MakeError('!!! Make failed...\n')
 
-def install():
+def install(parameters = 'install'):
     if can_access_file('Makefile'):
-        args = 'make DESTDIR=%s/%s destdir==%s/%s install' % (get.installDIR(), get.kdeDIR(), get.installDIR(), get.kdeDIR())
+        args = 'make DESTDIR=%s/%s destdir==%s/%s %s' % (get.installDIR(), get.kdeDIR(), get.installDIR(), get.kdeDIR(), parameters)
         
         if system(args):
             raise InstallError('!!! Install failed...\n')
