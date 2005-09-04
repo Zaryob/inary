@@ -187,7 +187,7 @@ class PisiBuild:
         ctx.ui.info(_("Unpacking archive..."))
         self.sourceArchive.unpack()
         ctx.ui.info(_(" unpacked (%s)\n") % self.bctx.pkg_work_dir())
-        self.set_state("unpacked")
+        self.set_state("unpack")
 
     def run_setup_action(self):
         #  Run configure, build and install phase
