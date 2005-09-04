@@ -121,7 +121,7 @@ def copy(sourceFile, destinationFile):
 
 def copytree(source, destination, sym = False):
     '''recursively copy an entire directory tree rooted at source'''
-    if isDirectory(file) or isLink(file):
+    if isDirectory(source) or isLink(source):
         try:
             shutil.copytree(source, destination, sym)
         except OSError:
