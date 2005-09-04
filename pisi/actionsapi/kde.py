@@ -43,9 +43,12 @@ def configure(parameters = ''):
                 --host=%s \
                 --with-x \
                 --enable-mitshm \
+                --with-xinerama \
                 --with-qt-dir=%s \
                 --enable-mt \
                 --with-qt-libraries=%s \
+                --disable-dependency-tracking \
+                --disable-debug \
                 %s' % (get.kdeDIR(), get.HOST(), get.qtDIR(), get.qtLIBDIR(), parameters)
 
         if system(args):
@@ -60,7 +63,7 @@ def make(parameters = ''):
 
 def install(parameters = 'install'):
     if can_access_file('Makefile'):
-        args = 'make DESTDIR=%s/%s destdir==%s/%s %s' % (get.installDIR(), get.kdeDIR(), get.installDIR(), get.kdeDIR(), parameters)
+        args = 'make DESTDIR=%s destdir=%s %s' % (get.installDIR(), get.installDIR(), parameters)
         
         if system(args):
             raise InstallError('!!! Install failed...\n')
