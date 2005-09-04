@@ -47,6 +47,7 @@ def configure(parameters = ''):
                 --with-qt-dir=%s \
                 --enable-mt \
                 --with-qt-libraries=%s \
+                --enable-final \
                 --disable-dependency-tracking \
                 --disable-debug \
                 %s' % (get.kdeDIR(), get.HOST(), get.qtDIR(), get.qtLIBDIR(), parameters)
