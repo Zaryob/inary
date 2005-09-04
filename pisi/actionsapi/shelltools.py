@@ -100,7 +100,7 @@ def unlinkDir(sourceDirectory):
 def move(sourceFile, destinationFile):
     '''recursively move a sourceFile or directory to destinationFile'''
     for file in glob.glob(sourceFile):
-        if isFile(file) or isLink(file):
+        if isFile(file) or isLink(file) or isDirectory(file):
             try:
                 shutil.move(file, destinationFile)
             except OSError:
