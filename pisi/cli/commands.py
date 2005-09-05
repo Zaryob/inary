@@ -197,7 +197,7 @@ If run without parameters, it prints the general help."""
 def buildno_opts(self):
     self.parser.add_option("", "--ignore-build-no", action="store_true",
                            default=False,
-                           help="Don't take build no into account.")        
+                           help="do not take build no into account.")        
 
 
 class Build(Command):
@@ -239,10 +239,10 @@ class PackageOp(Command):
 
     def options(self):
         self.parser.add_option("", "--ignore-comar", action="store_true",
-                               default=False, help="xxxx")
+                               default=False, help="bypass comar configuration agent")
 ##        self.parser.add_option("", "--ignore-dependency",
 ##                               action="store_true",
-##                               default=False, help="xxxx")
+##                               default=False, help="death")
 
     def init(self):
         super(PackageOp, self).init(True)
@@ -674,28 +674,31 @@ Usage: list-upgrades [ <repo1> <repo2> ... repon ]
 
     name = ("list-upgrades", "lu")
 
+    def options(self):
+        self.parser.add_option("-l", "--long", action="store_true",
+                               default=False, help="show in long format")
+        self.parser.add_option("-i", "--install-info", action="store_true",
+                               default=False, help="show detailed install info")
+        buildno_opts(self)
+                               
     def run(self):
-
         self.init(True)
-
-        if self.args:
-            for arg in self.args:
-                self.print_packages(arg)
-        else:
-            # print for all repos
-            for repo in ctx.repodb.list():
-                ctx.ui.info("Repository : %s\n" % repo)
-                self.print_packages(repo)
-        self.finalize()
-
-    def print_packages(self, repo):
-        from pisi import packagedb
-
-        pkg_db = packagedb.get_db(repo)
-        list = pkg_db.list_upgrades()
+        list = pisi.api.list_upgradable()
         list.sort()
-        for p in list:
-            print p
+        if self.options.install_info:
+            print 'Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'
+            print '========================================================================'
+        for pkg in list:
+            package = pisi.packagedb.inst_packagedb.get_package(pkg)
+            inst_info = ctx.installdb.get_info(pkg)
+            if self.options.long:
+                print package
+                print inst_info
+            elif self.options.install_info:
+                print '%-15s | %s ' % (package.name, inst_info.one_liner())
+            else:
+                print '%15s - %s ' % (package.name, package.summary)
+        self.finalize()
 
 
 class ListPending(Command):

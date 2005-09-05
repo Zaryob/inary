@@ -307,6 +307,8 @@ def upgrade_pkg_names(A):
     return True                         # everything went OK :)
 
 def list_upgradable():
+    ignore_build = ctx.config.options and ctx.config.options.ignore_build_no
+
     A = ctx.installdb.list_installed()
     # filter packages that are not upgradable
     Ap = []
