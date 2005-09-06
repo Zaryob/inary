@@ -26,8 +26,8 @@ PSPEC_TEMPLATE='''<?xml version="1.0" encoding="utf-8" standalone="no"?>
         <Name>%(packagename)s</Name>
         <Homepage>%(homepage)s</Homepage>
         <Packager>
-            <Name>PACKAGER</Name>
-            <Email>PACKAGER_EMAIL</Email>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
         </Packager>
         <License>%(license)s</License>
         <IsA>category</IsA>
@@ -57,7 +57,7 @@ PSPEC_TEMPLATE='''<?xml version="1.0" encoding="utf-8" standalone="no"?>
         </RuntimeDependencies>
         <Files>
 FILES
-		<Path fileType=""></Path>
+            <Path fileType=""></Path>
         </Files>
   </Package>
 
@@ -92,7 +92,7 @@ def getArchiveType(uri):
 def getDepString(deps):
     depString = "Dependencies should be reformated and check for correctness"
     for dep in portage.flatten(portage.tokenize(deps)):
-        depString += "\n\t\t<Dependency>"+dep+"</Dependency>"
+        depString += "\n        <Dependency>"+dep+"</Dependency>"
 
     return depString
 
@@ -117,23 +117,23 @@ def getPatches(filename, pkgName, version):
         if line.startswith('#'):
             continue
 
-	p = rc("\Aepatch ").search(line)
-	if not p:
-	    p = rc("\Apatch ").search(line)
-	if p:
-	    patched = True
-	    line = line[p.end():]
- 	    for r in dispatcher.keys():
- 		m = r.search(line)
- 		while m:
- 		    line = line[:m.start()] + dispatcher[r] + line[m.end():]
- 		    m = r.search(line)
+    p = rc("\Aepatch ").search(line)
+    if not p:
+        p = rc("\Apatch ").search(line)
+    if p:
+        patched = True
+        line = line[p.end():]
+        for r in dispatcher.keys():
+        m = r.search(line)
+        while m:
+            line = line[:m.start()] + dispatcher[r] + line[m.end():]
+            m = r.search(line)
 
             patchList.append(line)
 
     patchString = "Patches should be checked for correctness"
     for patch in patchList:
-        patchString += "\n\t\t<Patch>"+patch+"</Patch>"
+        patchString += "\n        <Patch>"+patch+"</Patch>"
 
     return patchString
 
