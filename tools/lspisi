@@ -9,31 +9,49 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
 
+import os
 import sys
 import zipfile
 
-if not sys.argv[1]:
-    print "pisi file name required..."
-    sys.exit()
-
-if not zipfile.is_zipfile(sys.argv[1]):
-    print "ZIP file required..."
-    sys.exit()
-
-f = zipfile.ZipFile(sys.argv[1], "r")
-
-filelist = []
-
-for file in f.namelist():
-    filelist.append(file)
-
-filelist.sort()
-
-for file in filelist:
-    if f.getinfo(file).external_attr == 2716663808:
-        print file + " --> symlink"
+def openZip(fileName):
+    if not zipfile.is_zipfile(fileName):
+        print "ZIP file required..."
+        sys.exit()
     else:
-        print file
+        f = zipfile.ZipFile(fileName, "r")
+        return f
+
+def fillFileList(zipFile):
+    filelist = []
+
+    for file in zipFile.namelist():
+        filelist.append(file)
     
+    filelist.sort()
+    return filelist
+
+def uniq(alist):
+    set = {}
+    return [set.setdefault(e,e) for e in alist if e not in set]
+
+if __name__ == "__main__":
+
+    if sys.argv[1] == "dirs":
+        f = openZip(sys.argv[2])
+        dirlist =[]
+        for file in fillFileList(f):
+            dirlist.append(os.path.dirname(file))
+    
+        for dir in uniq(dirlist):
+            print dir
+    elif sys.argv[1]:
+        f = openZip(sys.argv[1])
+        for file in fillFileList(f):
+            if f.getinfo(file).external_attr == 2716663808:
+                print file + " --> symlink"
+            else:
+                print file
+    else:
+        print "pisi file name required..."
+        sys.exit()
