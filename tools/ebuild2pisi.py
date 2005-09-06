@@ -26,8 +26,8 @@ PSPEC_TEMPLATE='''<?xml version="1.0" encoding="utf-8" standalone="no"?>
         <Name>%(packagename)s</Name>
         <Homepage>%(homepage)s</Homepage>
         <Packager>
-            <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Name>PACKAGER</Name>
+            <Email>PACKAGERMAIL@uludag.org.tr</Email>
         </Packager>
         <License>%(license)s</License>
         <IsA>category</IsA>
