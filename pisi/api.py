@@ -326,7 +326,7 @@ def list_upgradable():
             pass
             #ctx.ui.info('Package %s cannot be upgraded. ' % x)
     return Ap
-    
+
 def remove(A):
     """remove set A of packages from system (A is a list of package names)"""
     

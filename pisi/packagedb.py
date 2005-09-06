@@ -75,6 +75,8 @@ class PackageDB(object):
             list.append(pkg)
         return list
 
+    #TODO: list_upgrades?
+
     def add_package(self, package_info):
         name = str(package_info.name)
         self.d[name] = package_info

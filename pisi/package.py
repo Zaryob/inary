@@ -37,9 +37,8 @@ class Package:
 
         if url.is_remote_file():
             from fetcher import fetch_url
-            from ui import ui
             dest = ctx.config.packages_dir()
-            fetch_url(url, dest, ui.Progress)
+            fetch_url(url, dest, ctx.ui.Progress)
             self.filepath = join(dest, url.filename())
 
         self.impl = archive.ArchiveZip(self.filepath, 'zip', mode)

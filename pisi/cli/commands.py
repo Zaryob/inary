@@ -734,7 +734,7 @@ FIXME: this is bogus
 
 # Partial build commands        
 
-class BuildUntil(Command):
+class BuildUntil(Build):
     """Run the build process partially
 
 Usage: -sStateName build-until <pspec file>
@@ -754,6 +754,7 @@ for you.
     name = ("build-until", "bu")
 
     def options(self):
+        super(BuildUntil, self).options()        
         self.parser.add_option("-s", action="store", dest="state")
 
     def run(self):
@@ -770,7 +771,7 @@ for you.
         self.finalize()
 
 
-class BuildUnpack(Command):
+class BuildUnpack(Build):
     """Unpack the source archive
 
 Usage: build-unpack <pspec file>
@@ -795,7 +796,7 @@ TODO: desc.
         self.finalize()
 
 
-class BuildSetup(Command):
+class BuildSetup(Build):
     """Setup the source
 
 Usage: build-setup <pspec file>
@@ -846,7 +847,7 @@ TODO: desc.
         self.finalize()
 
 
-class BuildInstall(Command):
+class BuildInstall(Build):
     """Install to the sandbox
 
 Usage: build-install <pspec file>
@@ -872,7 +873,7 @@ TODO: desc.
         self.finalize()
 
 
-class BuildPackage(Command):
+class BuildPackage(Build):
     """Setup the source
 
 Usage: build-build <pspec file>

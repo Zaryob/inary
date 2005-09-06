@@ -33,7 +33,6 @@ class XmlFileTestCase(unittest.TestCase):
             a_href = [types.StringType, xmlfile.mandatory]
             #t_Projects = [ [types.StringType], xmlfile.mandatory]
         a = A()
-        print a
         self.assertEqual(a.href, None)
         dom = mdom.parse('tests/sandbox/a.xml')
         node = getNode(dom, 'A')

@@ -13,7 +13,6 @@
 from os.path import basename, dirname, join
 
 import pisi.context as ctx
-from pisi.ui import ui
 from pisi.uri import URI
 from pisi.specfile import SpecFile
 
@@ -75,7 +74,7 @@ class SourceFetcher(object):
     def fetch(self, appendDest=""):
         from fetcher import fetch_url
 
-        ui.info("Fetching %s\n" % self.url.uri)
+        ctx.ui.info("Fetching %s\n" % self.url.uri)
         dest = join(self.dest, appendDest)
         fetch_url(self.url, dest)
 
