@@ -124,7 +124,7 @@ def getPatches(filename, pkgName, version):
         patched = True
         line = line[p.end():]
         for r in dispatcher.keys():
-        m = r.search(line)
+            m = r.search(line)
         while m:
             line = line[:m.start()] + dispatcher[r] + line[m.end():]
             m = r.search(line)

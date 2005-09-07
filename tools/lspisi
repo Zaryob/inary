@@ -44,7 +44,7 @@ if __name__ == "__main__":
             dirlist.append(os.path.dirname(file))
     
         for dir in uniq(dirlist):
-            print dir
+            print "<Path fileType=\"\">" + dir.replace("install/", "/") + "</Path>"
     elif sys.argv[1]:
         f = openZip(sys.argv[1])
         for file in fillFileList(f):
