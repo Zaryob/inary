@@ -68,9 +68,9 @@ def install(packages):
     try:
         # determine if this is a list of files/urls or names
         if packages[0].endswith(ctx.const.package_prefix): # they all have to!
-            install_pkg_files(packages)
+            return install_pkg_files(packages)
         else:
-            install_pkg_names(packages)
+            return install_pkg_names(packages)
 
     except InstallError, e:
         ctx.ui.error("%s\n" % e)
