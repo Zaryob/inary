@@ -130,3 +130,8 @@ def automake(parameters = ''):
     '''generates a makefile'''
     if system('automake %s' % parameters):
         raise RunTimeError('!!! Running automake failed...')
+
+def autoheader(parameters = ''):
+    '''generates templates for configure'''
+    if system('autoheader %s' % parameters):
+        raise RunTimeError('!!! Running autoheader failed...')
