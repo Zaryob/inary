@@ -123,7 +123,6 @@ def getPatches(filename, pkgName, version):
         if p:
             patched = True
             line = line[p.end():]
-            print line
             for r in dispatcher.keys():
                 m = r.search(line)
                 while m:
