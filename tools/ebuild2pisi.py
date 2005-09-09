@@ -26,8 +26,8 @@ PSPEC_TEMPLATE='''<?xml version="1.0" encoding="utf-8" standalone="no"?>
         <Name>%(packagename)s</Name>
         <Homepage>%(homepage)s</Homepage>
         <Packager>
-            <Name>PACKAGER</Name>
-            <Email>PACKAGERMAIL@uludag.org.tr</Email>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
         </Packager>
         <License>%(license)s</License>
         <IsA>category</IsA>
@@ -117,18 +117,19 @@ def getPatches(filename, pkgName, version):
         if line.startswith('#'):
             continue
 
-    p = rc("\Aepatch ").search(line)
-    if not p:
-        p = rc("\Apatch ").search(line)
-    if p:
-        patched = True
-        line = line[p.end():]
-        for r in dispatcher.keys():
-            m = r.search(line)
-        while m:
-            line = line[:m.start()] + dispatcher[r] + line[m.end():]
-            m = r.search(line)
-
+        p = rc("\Aepatch ").search(line)
+        if not p:
+            p = rc("\Apatch ").search(line)
+        if p:
+            patched = True
+            line = line[p.end():]
+            print line
+            for r in dispatcher.keys():
+                m = r.search(line)
+                while m:
+                    line = line[:m.start()] + dispatcher[r] + line[m.end():]
+                    m = r.search(line)
+    
             patchList.append(line)
 
     patchString = "Patches should be checked for correctness"
@@ -136,7 +137,6 @@ def getPatches(filename, pkgName, version):
         patchString += "\n        <Patch>"+patch+"</Patch>"
 
     return patchString
-
 
 def main(ebuild):
     dict = {}
