@@ -30,6 +30,10 @@ class InstallError(pisi.actionsapi.Error):
     def __init__(self, Exception):
         ctx.ui.error(Exception)
 
+class RunTimeError(pisi.actionsapi.Error):
+    def __init__(self, Exception):
+        ctx.ui.error(Exception)
+
 def compile(parameters = ''):
     '''compile source with given parameters.'''
     if system('python setup.py build %s' % (get.installDIR(), parameters)):
@@ -46,3 +50,8 @@ def install(parameters = ''):
     for doc in DDOCS:
         if can_access_file(doc):
             pisitools.dodoc(doc)
+
+def run(parameters = ''):
+    '''executes parameters with python'''
+    if system('python %s' % (parameters)):
+        raise RunTimeError('!!! Running %s failed...\n' % parameters)
