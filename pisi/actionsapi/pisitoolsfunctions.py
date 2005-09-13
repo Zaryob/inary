@@ -16,17 +16,20 @@
 import os
 import glob
 
+# Pisi Modules
+import pisi.context as ctx
+
 # ActionsAPI Modules
 import pisi.actionsapi
 from pisi.actionsapi.shelltools import *
 
 class FileError(pisi.actionsapi.Error):
     def __init__(self, Exception):
-        ui.error(Exception)
+        ctx.ui.error(Exception)
         
 class ArgumentError(pisi.actionsapi.Error):
     def __init__(self, Exception):
-        ui.error(Exception)
+        ctx.ui.error(Exception)
 
 def executable_insinto(sourceFile, destinationDirectory):
     '''insert a executable file into destinationDirectory'''
