@@ -73,7 +73,7 @@ class Constants:
         self.__c.doc = "doc"
         self.__c.man = "man"
         self.__c.info = "info"
-        self.__c.conf = "conf"
+        self.__c.conf = "config"
         self.__c.header = "header"
         self.__c.library = "library"
         self.__c.executable = "executable"
