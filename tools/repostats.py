@@ -118,6 +118,7 @@ licenses = Histogram(_("Licenses"))
 categories = Histogram(_("Categories"))
 components = Histogram(_("Components"))
 dependencies = Histogram(_("Dependencies"))
+releases = Histogram(_("Releases"))
 types = Histogram(_("File types"))
 mostpatched = Max(_("Top %d most patched source"), 5)
 longpy = Max(_("Top %d longest action.py scripts"), 5)
@@ -145,6 +146,7 @@ for pak in paks:
     nr_binpaks += len(spec.packages)
     nr_patches += len(spec.source.patches)
     mostpatched.add(spec.source.name, len(spec.source.patches))
+    releases.add(str(spec.source.release))
     for p in spec.packages:
         if p.partof:
             components.add(p.partof)
@@ -184,6 +186,7 @@ components.html_out()
 categories.html_out()
 people.html_out()
 licenses.html_out()
+releases.html_out()
 types.html_out()
 
 echo(_("<h1>Dependencies<br>"))
