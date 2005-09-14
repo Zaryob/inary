@@ -33,6 +33,7 @@
 #packages_dir = /var/cache/pisi/packages
 #index_dir = /var/cache/pisi/index
 #tmp_dir = /var/tmp/pisi
+#icon_theme_dir = /usr/share/icons/Tulliana-1.0
 
 import os
 from ConfigParser import ConfigParser, NoSectionError
@@ -62,6 +63,7 @@ class DirsDefaults:
     packages_dir = "/var/cache/pisi/packages"
     index_dir = "/var/cache/pisi/index"
     tmp_dir =  "/var/tmp/pisi"
+    icon_theme_dir = "/usr/share/icons/Tulliana-1.0"
 
 
 class ConfigurationSection(object):
