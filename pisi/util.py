@@ -358,6 +358,14 @@ def partition_freespace(directory):
     st = os.statvfs(directory)
     return st[statvfs.F_BSIZE] * st[statvfs.F_BFREE]
 
+def clean_locks(top = '.'):
+    for root, dirs, files in os.walk(top):
+        for fn in files:
+            if fn.endswith('.lock'):
+                path = os.path.join(root, fn)
+                ctx.ui.info('Removing lock %s\n', path)
+                os.unlink(path)
+
 ########################################
 # Package/Repository Related Functions #
 ########################################

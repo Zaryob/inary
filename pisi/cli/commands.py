@@ -193,6 +193,20 @@ If run without parameters, it prints the general help."""
         
         self.finalize()
 
+class Clean(Command):
+    """Clean stale locks."""
+
+    __metaclass__ = autocommand
+
+    def __init__(self):
+        super(Clean, self).__init__()
+
+    name = ("clean", None)
+
+    def run(self):
+        self.init()
+        pisi.util.clean_locks()
+        self.finalize()
         
 def buildno_opts(self):
     self.parser.add_option("", "--ignore-build-no", action="store_true",
