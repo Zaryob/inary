@@ -31,19 +31,18 @@ class ArgumentError(pisi.actionsapi.Error):
     def __init__(self, Exception):
         ctx.ui.error(Exception)
 
-def executable_insinto(sourceFile, destinationDirectory):
+def executable_insinto(destinationDirectory, *sourceFiles):
     '''insert a executable file into destinationDirectory'''
 
-    if not sourceFile or not destinationDirectory:
+    if not sourceFiles or not destinationDirectory:
         raise ArgumentError('Insufficient arguments...')
-
-    if not can_access_file(sourceFile):
-        raise FileError('File doesn\'t exists or permission denied...')
 
     if not can_access_directory(destinationDirectory):
         makedirs(destinationDirectory)
- 
-    system('install -m0755 -o root -g root %s %s' % (sourceFile, destinationDirectory))
+
+    for sourceFile in sourceFiles:
+        for source in glob.glob(sourceFile):
+            system('install -m0755 -o root -g root %s %s' % (source, destinationDirectory))
 
 def readable_insinto(destinationDirectory, *sourceFiles):
     '''inserts file list into destinationDirectory'''

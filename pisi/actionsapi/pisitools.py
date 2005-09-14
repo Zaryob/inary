@@ -30,7 +30,7 @@ def dobin(sourceFile, destinationDirectory = '/usr/bin'):
     '''insert a executable file into /bin or /usr/bin'''
 
     ''' example call: pisitools.dobin("bin/xloadimage", "/bin", "xload") '''
-    executable_insinto(sourceFile, get.installDIR() + destinationDirectory)
+    executable_insinto(get.installDIR() + destinationDirectory, sourceFile)
  
 def dodir(destinationDirectory):
     '''creates a directory tree'''
@@ -44,8 +44,7 @@ def doexe(sourceFile, destinationDirectory):
     '''insert a executable file into destination directory'''
     
     ''' example call: pisitools.doexe("kde-3.4.sh", "/etc/X11/Sessions")'''
-    for file in glob.glob(sourceFile):
-        executable_insinto(file, get.installDIR() + destinationDirectory)
+    executable_insinto(get.installDIR() + destinationDirectory, sourceFile)
 
 def dohard(sourceFile, destinationFile):
     '''creates hard link between sourceFile and destinationFile'''
@@ -175,7 +174,7 @@ def dosbin(sourceFile, destinationDirectory = '/usr/sbin'):
     '''insert a executable file into /sbin or /usr/sbin'''
     
     ''' example call: pisitools.dobin("bin/xloadimage", "/sbin") '''
-    executable_insinto(sourceFile, get.installDIR() + destinationDirectory)
+    executable_insinto(get.installDIR() + destinationDirectory, sourceFile)
         
 def dosym(sourceFile, destinationFile):
     '''creates soft link between sourceFile and destinationFile'''
