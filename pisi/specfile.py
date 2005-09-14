@@ -212,6 +212,7 @@ class SourceInfo:
             self.summary = getNodeText(node, "Summary")
             self.description = getNodeText(node, "Description")
             self.license = map(getNodeText, getAllNodes(node, "License"))
+            self.icon = getNodeText(node, "Icon")
             self.isa = map(getNodeText, getAllNodes(node, "IsA"))
             self.partof = getNodeText(node, "PartOf")
             archiveNode = getNode(node, "Archive")
@@ -234,7 +235,10 @@ class SourceInfo:
         if self.homepage:
             xml.addTextNodeUnder(node, "Homepage", self.homepage)
         node.appendChild(self.packager.elt(xml))
+        xml.addTextNodeUnder(node, "Summary", self.summary)
         xml.addTextNodeUnder(node, "Description", self.description)
+        if self.icon:
+            xml.addTextNodeUnder(node, "Icon", self.icon)
         for lic in self.license:
             xml.addTextNodeUnder(node, "License", lic)
         for isa in self.isa:
@@ -287,6 +291,7 @@ class PackageInfo:
             self.isa = map(getNodeText, getAllNodes(node, "IsA"))
             self.partof = getNodeText(node, "PartOf")
             self.license = map(getNodeText, getAllNodes(node, "License"))
+            self.icon = getNodeText(node, "Icon")
             rtDepElts = getAllNodes(node, "RuntimeDependencies/Dependency")
             self.runtimeDeps = [DepInfo(x) for x in rtDepElts]
             self.paths = [PathInfo(x) for x in getAllNodes(node, "Files/Path")]
@@ -306,6 +311,8 @@ class PackageInfo:
         xml.addTextNodeUnder(node, "Name", self.name)
         xml.addTextNodeUnder(node, "Summary", self.summary)
         xml.addTextNodeUnder(node, "Description", self.description)
+        if self.icon:
+            xml.addTextNodeUnder(node, "Icon", self.icon)
         for lic in self.license:
             xml.addTextNodeUnder(node, "License", lic)
         for isa in self.isa:
@@ -399,6 +406,7 @@ class SpecFile(XmlFile):
         overrides the tags from Source. There is a more detailed
         description in documents."""
 
+        tmp = []
         for pkg in self.packages:
 
             if not pkg.summary:
@@ -412,18 +420,30 @@ class SpecFile(XmlFile):
 
             if not pkg.license:
                 pkg.license = self.source.license
+
+            if not pkg.icon:
+                pkg.icon = self.source.icon
+
+            tmp.append(pkg)
+
+        self.packages = tmp
         
     def merge_tags(self):
         """Merge tags from Source in Packages. Some tags in Packages merged
         with the tags from Source. There is a more detailed
         description in documents."""
 
+        tmp = []
         for pkg in self.packages:
 
             if pkg.isa and self.source.isa:
                 pkg.isa.append(self.source.isa)
             elif not pkg.isa and self.source.isa:
                 pkg.isa = self.source.isa
+
+            tmp.append(pkg)
+
+        self.packages = tmp
 
     def has_errors(self):
         """Return errors of the PSPEC file if there are any."""

@@ -108,6 +108,7 @@ class MetaData(XmlFile):
         self.package.name = pkg.name
         self.package.summary = pkg.summary
         self.package.description = pkg.description
+        self.package.icon = pkg.icon
         self.package.isa = pkg.isa
         self.package.partof = pkg.partof
         self.package.license = pkg.license
