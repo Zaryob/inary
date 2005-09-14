@@ -19,7 +19,6 @@
 # we basically store everything in PackageInfo class
 # yes, we are cheap
 
-#from bsddb.dbshelve import DBShelf
 import bsddb.dbshelve as shelve
 import os, fcntl
 from bsddb import db
@@ -28,7 +27,7 @@ import pisi
 import pisi.util as util
 import pisi.context as ctx
 
-class PackageDBError(pisi.Error):
+class Error(pisi.Error):
     pass
 
 class PackageDB(object):
@@ -114,7 +113,8 @@ def has_package(name):
     return False
 
 def which_repo(name):
-    for repo in packagedbs.keys():
+    import pisi.repodb
+    for repo in pisi.repodb.db.list():
         if get_db(repo).has_package(name):
             return repo
     return None
@@ -127,7 +127,7 @@ def get_package(name):
         return thirdparty_packagedb.get_package(name)
     if inst_packagedb.has_package(name):
         return inst_packagedb.get_package(name)
-    raise PackageDBError, 'get_package: package %s not found' % name
+    raise Error('get_package: package %s not found' % name)
 
 def get_rev_deps(name):
     repo = which_repo(name)

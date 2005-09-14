@@ -30,6 +30,7 @@ import pisi.repodb
 import pisi.installdb
 from pisi.index import Index
 
+
 class Error(pisi.Error):
     pass
 
@@ -428,12 +429,9 @@ def index(repo_dir = '.'):
     index.write(ctx.const.pisi_index)
     ctx.ui.info('* Index file written\n')
 
-class Repo:
-    def __init__(self, indexuri):
-        self.indexuri = indexuri
 
 def add_repo(name, indexuri):
-    repo = Repo(URI(indexuri))
+    repo = pisi.repodb.Repo(URI(indexuri))
     ctx.repodb.add_repo(name, repo)
 
 def remove_repo(name):

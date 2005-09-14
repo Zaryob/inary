@@ -13,46 +13,84 @@
 from bsddb import db
 import os, fcntl
 
+import pisi
 import pisi.lockeddbshelve as shelve
 import pisi.context as ctx
 import pisi.packagedb as packagedb
 import pisi.util as util
 from pisi.uri import URI
        
+class Error(pisi.Error):
+    pass
+
+class Repo:
+    def __init__(self, indexuri):
+        self.indexuri = indexuri
+
+#class HttpRepo
+
+#class FtpRepo
+
+#class RemovableRepo
+
+
 class RepoDB(object):
     """RepoDB maps repo ids to repository information"""
+
     def __init__(self):
         self.d = shelve.LockedDBShelf("repo")
+        if not self.d.has_key("order"):
+            self.d["order"] = []
 
     def init_dbs(self):
         # initialize package/source dbs
-        for x in self.d.keys():
+        for x in self.list():
             packagedb.add_db(x)
 
     def __del__(self):
         self.d.close()
 
+    def repo_name(self, ix):
+        l = self.list()
+        return l[ix]
+
+    def swap(self, x,y):
+        l = d["order"]
+        t = l[x]
+        l[x] = l[y]
+        l[y] = t
+        d["order"] = l
+
     def has_repo(self, name):
         name = str(name)
-        return self.d.has_key(name)
+        return self.d.has_key("repo-" + name)
 
     def get_repo(self, name):
         name = str(name)
-        return self.d[name]
+        return self.d["repo-" + name]
 
     def add_repo(self, name, repo_info):
-        self.d[name] = repo_info
+        if self.d.has_key("repo-" + name):
+            raise Error('Repository %s already exists' % name)
+        self.d["repo-" + name] = repo_info
+        order = self.d["order"]
+        order.append(name)
+        self.d["order"] = order
         packagedb.add_db(name)
 
     def list(self):
-        return self.d.keys()
+        return self.d["order"]
 
     def clear(self):
         self.d.clear()
 
     def remove_repo(self, name):
         name = str(name)
-        del self.d[name]
+        del self.d["repo-" + name]
+        l = self.d["order"]
+        l.remove(name)
+        self.d["order"] = l
+        
 
 db = None
 

@@ -73,20 +73,10 @@ Legend:
 
 3. Beta
 
- - API: yeah, we even got application users (eray)
- / i18n support
- + upgrade (eray)
-   + upgrade operation
-   + test upgrade op
-   + system-wide upgrade (upgrade-all) komutu
- - overhaul installdb (try to merge its use with packagedb) (eray)
- - configure-pending (eray)
- - ordered configure install thing (eray)
+ / API: yeah, we even got application users (eray)
  / multiple package repository (eray)
    + decide how to implement
-   / make a package and sourcedb for each repo
-     + packagedb
-     - sourceb
+   + support repo order
    - support medium types :( uhuuuu
      - internet: http/ftp
      - local repository
@@ -97,17 +87,19 @@ Legend:
    - PISIMAT
    / pykde GUI (cartman)
    + metaclass coolness for CLI command framework (eray)
+ / i18n support (those who know how to do it)
+ + upgrade (eray)
+   + upgrade operation
+   + test upgrade op
+   + system-wide upgrade (upgrade-all) komutu
+ - overhaul installdb (try to merge its use with packagedb) (eray)
+ - configure-pending (eray)
+ - ordered configure install thing (eray)
  - partial caching and automatic resume for file download (meren)
   - use a separate "partial/" subdir like urpmi
  / exception handling (baris)
    / better/more sensible exception hierarchy (eray)
    ? recovery from exceptions where necessary
- - incremental build/fetch for repository index (pisi-index.xml)
-   - diffsets (caglar)
- / component/category
-   + requirements
-   - xml format (baris) (bunlarin class'leri yazilmali)
-   - usage (build process'in icine koymak baris - meren)
  / query
    - comar OM information (Provides)
    + package by name, summary/description
@@ -135,9 +127,18 @@ Legend:
 
 5. Post Release
 
+ / make a package and sourcedb for each repo
+   + packagedb
+   - sourceb
  - transaction stuff for database (eray)
  - multi-architecture support (baris, caglar)
    / design decisions
    / extend XML specs to support that
    - cross-platform building support
+ / component/category
+   + requirements
+   - xml format (baris) (bunlarin class'leri yazilmali)
+   - usage (build process'in icine koymak baris - meren)
+ - incremental build/fetch for repository index (pisi-index.xml)
+   - diffsets (caglar)
    
