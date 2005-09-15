@@ -77,24 +77,30 @@ Legend:
  / multiple package repository (eray)
    + decide how to implement
    + support repo order
-   - support medium types :( uhuuuu
+   - support medium types
      - internet: http/ftp
      - local repository
      - cdrom dvd 
  / UI
+   - improve interface
    - ask alternatives to choose from (eray)
    - pyqt UI class to interface
    - PISIMAT
    / pykde GUI (cartman)
    + metaclass coolness for CLI command framework (eray)
  / i18n support (those who know how to do it)
+ / components
+   + requirements
+   - xml format (baris) (bunlarin class'leri yazilmali)
+   - query components
+   - install/remove components
  + upgrade (eray)
    + upgrade operation
    + test upgrade op
    + system-wide upgrade (upgrade-all) komutu
- - overhaul installdb (try to merge its use with packagedb) (eray)
+ / overhaul installdb (try to merge its use with packagedb) (eray)
  - configure-pending (eray)
- - ordered configure install thing (eray)
+ ? ordered configure install thing (eray)
  - partial caching and automatic resume for file download (meren)
   - use a separate "partial/" subdir like urpmi
  / exception handling (baris)
@@ -135,10 +141,6 @@ Legend:
    / design decisions
    / extend XML specs to support that
    - cross-platform building support
- / component/category
-   + requirements
-   - xml format (baris) (bunlarin class'leri yazilmali)
-   - usage (build process'in icine koymak baris - meren)
  - incremental build/fetch for repository index (pisi-index.xml)
    - diffsets (caglar)
    
