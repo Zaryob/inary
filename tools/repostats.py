@@ -32,58 +32,31 @@ def valuesort(x, y):
         return 1
 
 
-class Max:
-    def __init__(self, title, count):
-        self.list = {}
-        self.title = title
-        self.count = count
-    
-    def add(self, name, value):
-        list = {}
-        i = 0
-        for x,y in self.list.items():
-            if value > y:
-                list[name] = value
-            else:
-                list[x] = y
-            i += 1
-            if i >= self.count:
-                break
-        if i < self.count:
-            list[name] = value
-        self.list = list
-    
-    def get_list(self):
-        items = self.list.items()
-        items.sort(valuesort)
-        return items
-    
-    def html_out(self):
-        echo(("<h1>%s</h1><table>" % self.title) % self.count)
-        for x,y in self.get_list():
-                echo("<tr><td>%s</td><td>%s</td></tr>" % (x, y))
-        echo("</table>")
-
-
 class Histogram:
     def __init__(self, title):
         self.list = {}
         self.title = title
     
-    def add(self, name):
-        if self.list.has_key(name):
-            self.list[name] = self.list[name] + 1
+    def add(self, name, value=None):
+        if value:
+            self.list[name] = value
         else:
-            self.list[name] = 1
+            if self.list.has_key(name):
+                self.list[name] = self.list[name] + 1
+            else:
+                self.list[name] = 1
     
     def get_list(self):
         items = self.list.items()
         items.sort(valuesort)
         return items
     
-    def html_out(self):
+    def html_out(self, max=0):
         echo("<h1>%s</h1><table>" % self.title)
-        for name,cnt in self.get_list():
+        list = self.get_list()
+        if max != 0:
+            list = list[:max]
+        for name,cnt in list:
             echo("<tr><td>%s</td><td>%s</td></tr>" % (name, cnt))
         echo("</table>")
 
@@ -120,8 +93,8 @@ components = Histogram(_("Components"))
 dependencies = Histogram(_("Dependencies"))
 releases = Histogram(_("Releases"))
 types = Histogram(_("File types"))
-mostpatched = Max(_("Top %d most patched source"), 5)
-longpy = Max(_("Top %d longest action.py scripts"), 5)
+mostpatched = Histogram(_("Top five most patched source"))
+longpy = Histogram(_("Top five longest action.py scripts"))
 nr_binpaks = 0
 nr_patches = 0
 paknames = {}
@@ -171,8 +144,8 @@ echo("</head><body>")
 print "<p>Toplam %d kod paketi, ve bunlardan oluşturulacak %d ikili paket var.</p>" % (len(paks), nr_binpaks)
 echo(u"<p>Toplam peç sayısı %d</p>" % nr_patches)
 
-mostpatched.html_out()
-longpy.html_out()
+mostpatched.html_out(5)
+longpy.html_out(5)
 
 if errors != []:
     print "<h1>Hatalar</h1><table>"
@@ -192,12 +165,16 @@ types.html_out()
 echo(_("<h1>Dependencies<br>"))
 echo(_("<small>package name with italics are not available in the repository</small></h1>"))
 print "<table>"
+notavail = 0
 for name,cnt in dependencies.get_list():
     if paknames.has_key(name):
         print "<tr><td><b>%s</b></td><td>%d</td></tr>" % (name, cnt)
     else:
+        notavail += 1
         print "<tr><td><i>%s</i></td><td>%d</td></tr>" % (name, cnt)
 print "</table>"
+
+print "<p>%d packages are not available in repository.</p>" % notavail
 
 hosts.html_out()
 
