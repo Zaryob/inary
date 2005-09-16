@@ -26,11 +26,12 @@ class XmlError(pisi.Error):
 
 def getNodeAttribute(node, attrname):
     """get named attribute from DOM node"""
-    for i in range(node.attributes.length):
-        attr = node.attributes.item(i)
-        if attr.name == attrname:
-            return attr.childNodes[0].data
-    return None
+    if not node.hasAttribute(attrname):
+        return None
+    return node.getAttribute(attrname)
+
+def getTagByName(parent, childName):
+    return [x for x in parent.childNodes if x.nodeType == x.ELEMENT_NODE if x.tagName == childName]
 
 def getNodeText(node, tagpath = ""):
     """get the first child and expect it to be text!"""
@@ -69,13 +70,13 @@ def getNode(node, tagpath):
     # iterative code to search for the path
         
     # get DOM for top node
-    nodeList = node.getElementsByTagName(tags[0])
+    nodeList = getTagByName(node, tags[0])
     if len(nodeList) == 0:
         return None                 # not found
 
     node = nodeList[0]              # discard other matches
     for tag in tags[1:]:
-        nodeList = node.getElementsByTagName(tag)
+        nodeList = getTagByName(node, tag)
         if len(nodeList) == 0:
             return None
         else:
@@ -91,12 +92,12 @@ def getAllNodes(node, tagPath):
     if len(tags) == 0:
         return []
 
-    nodeList = node.getElementsByTagName(tags[0])
+    nodeList = getTagByName(node, tags[0])
     if len(nodeList) == 0:
         return []
 
     for tag in tags[1:]:
-        results = map(lambda x: x.getElementsByTagName(tag),nodeList)
+        results = map(lambda x: getTagByName(x, tag), nodeList)
         nodeList = []
         for x in results:
             nodeList.extend(x)
@@ -135,7 +136,7 @@ def addNode(dom, node, tagpath, newnode = None):
     # iterative code to search for the path
         
     # get DOM for top node
-    nodeList = node.getElementsByTagName(tags[0])
+    nodeList = getTagByName(node, tags[0])
     
     if len(nodeList) == 0:
         return addTagPath(dom, node, tags, newnode)
@@ -144,7 +145,7 @@ def addNode(dom, node, tagpath, newnode = None):
     tags.pop(0)
     while len(tags)>0:
         tag = tags.pop(0)
-        nodeList = node.getElementsByTagName(tag)
+        nodeList = getTagByName(node, tag)
         if len(nodeList) == 0:          # couldn't find
             tags.insert(0, tag)         # put it back in
             return addTagPath(dom, node, tags, newnode)

@@ -50,9 +50,9 @@ class PackageInfo(specfile.PackageInfo):
     def __init__(self, node = None):
         if node:
             specfile.PackageInfo.__init__(self, node)
-            self.version = getNodeText(node, "Version")
-            self.release = getNodeText(node, "Release")
-            build_ = getNodeText(node, "Build")
+            self.version = getNodeText(node, "History/Update/Version")
+            self.release = getNodeText(node, "History/Update/Release")
+            build_ = getNodeText(node, "History/Update/Build")
             if build_ != None:
                 self.build = int(build_)
             else:
