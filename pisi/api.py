@@ -76,7 +76,7 @@ def install(packages):
     except InstallError, e:
         ctx.ui.error("%s\n" % e)
 
-    except packagedb.PackageDBError, e:
+    except packagedb.Error, e:
         ctx.ui.error("PackageDBError: (%s)\n" % e)
         ctx.ui.error("Package is not installable.\n")
 
