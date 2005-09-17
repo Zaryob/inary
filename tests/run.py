@@ -48,7 +48,8 @@ def run_all():
         installdbtests.suite,
         sourcedbtests.suite,
         packagedbtests.suite,
-        actionsapitests.suite,
+# FIXME: actionsapitests requires tester to run a specific command first.
+#        actionsapitests.suite,
         graphtests.suite,
         versiontests.suite,
         configfiletests.suite,
