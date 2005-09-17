@@ -26,12 +26,12 @@ class PackageTestCase(unittest.TestCase):
     def testAddExtract(self):
         cur = os.getcwd()
         tmpdir = config.tmp_dir()
-        sandboxdir = os.path.join(cur, "tests/sandbox")
+        testdir = os.path.join(cur, "tests/popt")
 
         pkg_path = os.path.join(tmpdir, self.pkgName)
         pkg = package.Package(pkg_path, "w")
 
-        os.chdir(sandboxdir)
+        os.chdir(testdir)
         pkg.add_to_package("files.xml")
         pkg.add_to_package("metadata.xml")
         os.chdir(cur)
