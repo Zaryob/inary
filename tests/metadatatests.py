@@ -21,13 +21,13 @@ class MetaDataTestCase(unittest.TestCase):
         
     def testRead(self):
         md = metadata.MetaData()
-        md.read('tests/sandbox/metadata.xml')
+        md.read('tests/popt/metadata.xml')
 
         self.assertEqual(md.package.license, ["As-Is"])
 
         self.assertEqual(md.package.version, "1.7")
 
-        self.assertEqual(md.package.installedSize, 546542)
+        self.assertEqual(md.package.installedSize, 149691)
         return md
     
     def testWrite(self):
