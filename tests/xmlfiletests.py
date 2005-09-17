@@ -34,7 +34,7 @@ class XmlFileTestCase(unittest.TestCase):
             #t_Projects = [ [types.StringType], xmlfile.mandatory]
         a = A()
         self.assertEqual(a.href, None)
-        dom = mdom.parse('tests/sandbox/a.xml')
+        dom = mdom.parse('tests/a.xml')
         node = getNode(dom, 'A')
         self.assert_(len(A.decoders)>0)
         a.decode(node)
