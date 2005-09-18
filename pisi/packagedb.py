@@ -40,10 +40,10 @@ class PackageDB(object):
         self.lockfile = file(self.fname + '.lock', 'w')
         try:
             fcntl.flock(self.lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except IOError:
-            import sys
-            ctx.ui.error("Another instance of PISI is running. Try later!\n")
-            sys.exit(1)
+        except IOError, e:
+             import sys
+             ctx.ui.error("PackageDB: %s\n" % e)
+             sys.exit(1)
         self.d = shelve.open(self.fname)
         self.dr = shelve.open(self.fname2)
 
