@@ -30,9 +30,14 @@ def scan_pspec(folder):
     return paks
 
 if __name__ == "__main__":
-    paks = scan_pspec(sys.argv[1])
+    try:
+        paks = scan_pspec(sys.argv[1])
+    except:
+        print "Usage: fetchAll.py path2repo"
+        sys.exit(1)
+        
     for pak in paks:
         spec = pisi.specfile.SpecFile()
         spec.read(os.path.join(pak, "pspec.xml"))
         fetch_url(pisi.uri.URI(spec.source.archiveUri), config.archives_dir())
-        print pisi.uri.URI(spec.source.archiveUri -> config.archives_dir()
+        print pisi.uri.URI(spec.source.archiveUri), " -> " , config.archives_dir()
