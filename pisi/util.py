@@ -363,7 +363,7 @@ def clean_locks(top = '.'):
         for fn in files:
             if fn.endswith('.lock'):
                 path = os.path.join(root, fn)
-                ctx.ui.info('Removing lock %s\n', path)
+                ctx.ui.info('Removing lock %s', path)
                 os.unlink(path)
 
 ########################################

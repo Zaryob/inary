@@ -35,16 +35,16 @@ def preplib_so(sourceDirectory):
     pass
 
 def gnuconfig_update():
-    ''' copy newest config.* onto source's '''
+    ''' copy newest config.* onto source\'s '''
     for root, dirs, files in os.walk(os.getcwd()):
         for file in files:
             if file in ['config.sub', 'config.guess']:
                 copy('/usr/share/gnuconfig/%s' % file, os.path.join(root, file))
-                ctx.ui.info('GNU Config Update Finished...\n')
+                ctx.ui.info('GNU Config Update Finished.')
 
 def libtoolize(parameters = ''):
     if system('/usr/bin/libtoolize %s' % parameters):
-        raise RunTimeError('!!! Running libtoolize failed...')
+        raise RunTimeError('Running libtoolize failed...')
 
 def gen_usr_ldscript(dynamicLib):
 

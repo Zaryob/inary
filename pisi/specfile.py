@@ -9,13 +9,19 @@
 #
 # Please read the COPYING file.
 #
-
-# Specfile module is our handler for PSPEC files. PSPEC (PISI SPEC)
-# files are specification files for PISI source packages. This module
-# provides read and write access to PSPEC files.
-
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
-#           Baris Metin <baris@uludag.org.tr
+#           Gurer Ozen <gurer@uludag.org.tr>
+#           Baris Metin <baris@uludag.org.tr>
+# History:
+# Baris wrote the first version, then Baris and Eray did
+# several revisions of it. It was rewritten in accordance
+# with Gurer's observations.
+
+
+"""Specfile module is our handler for PSPEC files. PSPEC (PISI SPEC)
+files are specification files for PISI source packages. This module
+provides read and write access to PSPEC files."""
+
 
 # standard python modules
 from os.path import basename

@@ -9,11 +9,10 @@
 #
 # Please read the COPYING file.
 #
+# Authors: Baris Metin <baris@uludag.org.tr>
+#          Eray Ozkural <eray@uludag.org.tr>
 
 # python standard library
-
-# Authors: Baris Metin <baris@uludag.org.tr
-#          Eray Ozkural <eray@uludag.org.tr>
 
 from os.path import join
 from os import access, R_OK
@@ -55,7 +54,7 @@ class SourceArchive:
         # check hash
         if util.check_file_hash(self.archiveFile, self.archiveSHA1):
             if interactive:
-                ctx.ui.info('%s [cached]\n' % self.archiveName)
+                ctx.ui.info('%s [cached]' % self.archiveName)
             return True
 
         return False

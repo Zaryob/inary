@@ -51,7 +51,7 @@ class LockedDBShelf(shelve.DBShelf):
             fcntl.flock(self.lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except IOError:
             import sys
-            pisi.context.ui.error("Another instance of PISI is running. Try later!\n")
+            pisi.context.ui.error("Another instance of PISI is running. Try later!")
             sys.exit(1)
         return self.db.open(filename, dbname, filetype, flags, mode)
 

@@ -25,7 +25,7 @@ class ConfigureError(pisi.actionsapi.Error):
     def __init__(self, Exception):
         ctx.ui.error(Exception)
         if can_access_file('config.log'):
-            ctx.ui.error('\n!!! Please attach the config.log to your bug report:\n%s/config.log\n' % os.getcwd())
+            ctx.ui.error('\n!!! Please attach the config.log to your bug report:\n%s/config.log' % os.getcwd())
 
 class MakeError(pisi.actionsapi.Error):
     def __init__(self, Exception):

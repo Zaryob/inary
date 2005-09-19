@@ -111,7 +111,7 @@ dependency spec"""
 def satisfies_dependencies(pkg, deps, sat = installed_satisfies_dep):
     for dep in deps:
         if not sat(dep):
-            ctx.ui.error('Package %s does not satisfy dependency %s\n' %
+            ctx.ui.error('Package %s does not satisfy dependency %s' %
                      (pkg,dep))
             return False
     return True
@@ -124,7 +124,7 @@ def installable(pkg):
     """calculate if pkg is installable currently 
     which means it has to satisfy both install and runtime dependencies"""
     if not packagedb.has_package(pkg):
-        ctx.ui.info("Package " + pkg + " is not present in the package database\n");
+        ctx.ui.info("Package " + pkg + " is not present in the package database");
         return False
     elif satisfies_runtime_deps(pkg):
         return True

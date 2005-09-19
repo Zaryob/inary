@@ -124,7 +124,7 @@ def doman(*sourceFiles):
                 pageName, pageDirectory = source[:source.rindex('.')], \
                                           source[source.rindex('.')+1:]
             except ValueError:
-                ctx.ui.error('\n!!! ActionsAPI [doman]: Wrong man page file...\n')
+                ctx.ui.error('\n!!! ActionsAPI [doman]: Wrong man page file...')
                 
             makedirs(manDIR + '/man%s' % pageDirectory) 
             system('install -m0644 %s %s' % (source, manDIR + '/man%s' % pageDirectory))
@@ -185,7 +185,7 @@ def dosym(sourceFile, destinationFile):
     try:
         os.symlink(sourceFile, get.installDIR() + destinationFile)
     except OSError:
-        ctx.ui.error('\n!!! ActionsAPI [dosym]: File exists...\n')
+        ctx.ui.error('\n!!! ActionsAPI [dosym]: File exists...')
 
 def insinto(destinationDirectory, sourceFile,  destinationFile = ''):
     '''insert a sourceFile into destinationDirectory as a destinationFile with same uid/guid/permissions'''

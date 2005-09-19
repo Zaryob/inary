@@ -71,7 +71,7 @@ def check_path_collision(package, pkgList):
                 # path.pathname: /usr/share/doc
                 if util.subpath(pinfo.pathname, path.pathname):
                     collisions.append(path.pathname)
-                    ctx.ui.error(_('Path %s belongs in multiple packages\n') %
+                    ctx.ui.error(_('Path %s belongs in multiple packages') %
                              path.pathname)
     return collisions
 
@@ -141,7 +141,7 @@ class PisiBuild:
     def build(self):
         """Build the package in one shot."""
 
-        ctx.ui.info(_("Building PISI source package: %s\n") % self.spec.source.name)
+        ctx.ui.info(_("Building PISI source package: %s") % self.spec.source.name)
         util.xterm_title(_("Building PISI source package: %s\n") % self.spec.source.name)
         
         self.compile_action_script()
@@ -178,15 +178,15 @@ class PisiBuild:
         os.environ.update(evn)
 
     def fetch_source_archive(self):
-        ctx.ui.info(_("Fetching source from: %s\n") % self.spec.source.archiveUri)
+        ctx.ui.info(_("Fetching source from: %s") % self.spec.source.archiveUri)
         self.sourceArchive.fetch()
-        ctx.ui.info(_("Source archive is stored: %s/%s\n")
+        ctx.ui.info(_("Source archive is stored: %s/%s")
                 %(ctx.config.archives_dir(), self.spec.source.archiveName))
 
     def unpack_source_archive(self):
         ctx.ui.info(_("Unpacking archive..."))
         self.sourceArchive.unpack()
-        ctx.ui.info(_(" unpacked (%s)\n") % self.bctx.pkg_work_dir())
+        ctx.ui.info(_(" unpacked (%s)") % self.bctx.pkg_work_dir())
         self.set_state("unpack")
 
     def run_setup_action(self):
@@ -220,10 +220,10 @@ class PisiBuild:
             buf = open(scriptfile).read()
             exec compile(buf, "error", "exec") in localSymbols, globalSymbols
         except IOError, e:
-            ctx.ui.error(_("Unable to read Action Script (%s): %s\n") %(scriptfile,e))
+            ctx.ui.error(_("Unable to read Action Script (%s): %s") %(scriptfile,e))
             sys.exit(1)
         except SyntaxError, e:
-            ctx.ui.error (_("SyntaxError in Action Script (%s): %s\n") %(scriptfile,e))
+            ctx.ui.error (_("SyntaxError in Action Script (%s): %s") %(scriptfile,e))
             sys.exit(1)
 
         self.actionLocals = localSymbols
@@ -427,17 +427,17 @@ class PisiBuild:
                                      self.spec.source.version,
                                      self.spec.source.release)
             
-            ctx.ui.action(_("** Building package %s\n") % package.name);
+            ctx.ui.action(_("** Building package %s") % package.name);
 
             ctx.ui.action(_("Generating %s...") % ctx.const.files_xml)
             self.gen_files_xml(package)
-            ctx.ui.info(_(" done.\n"))
+            ctx.ui.info(_(" done."))
            
             ctx.ui.action(_("Generating %s...") % ctx.const.metadata_xml)
             self.gen_metadata_xml(package)
-            ctx.ui.info(_(" done.\n"))
+            ctx.ui.info(_(" done."))
 
-            ctx.ui.action(_("Creating PISI package %s\n") % name)
+            ctx.ui.action(_("Creating PISI package %s") % name)
             
             pkg = Package(name, 'w')
 

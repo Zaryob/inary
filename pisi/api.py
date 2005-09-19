@@ -7,9 +7,10 @@
 #
 # Please read the COPYING file.
 #
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
+#           Baris Metin <baris@uludag.org.tr>
 
-# top level PISI interfaces
-# a facade to the entire PISI system
+"""Top level PISI interfaces. a facade to the entire PISI system"""
 
 import os
 import sys
@@ -29,10 +30,12 @@ import pisi.packagedb as packagedb
 import pisi.repodb
 import pisi.installdb
 from pisi.index import Index
+import pisi.cli
 
 
 class Error(pisi.Error):
     pass
+
 
 def init(database = True, options = None, ui = None ):
     """Initialize PiSi subsystem"""
@@ -41,11 +44,10 @@ def init(database = True, options = None, ui = None ):
     ctx.config = pisi.config.Config(options)
 
     if ui is None:
-        import pisi.ui
         if options:
-            pisi.context.ui = pisi.ui.CLI(options.debug)
+            pisi.context.ui = pisi.cli.CLI(options.debug)
         else:
-            pisi.context.ui = pisi.ui.CLI()
+            pisi.context.ui = pisi.cli.CLI()
     else:
         pisi.context.ui = ui
 
@@ -57,7 +59,6 @@ def init(database = True, options = None, ui = None ):
         packagedb.init()
 #        import pisi.sourcedb
 #        pisi.sourcedb.init()
-
 
 def install(packages):
     """install a list of packages (either files/urls, or names)"""
@@ -73,23 +74,23 @@ def install(packages):
         else:
             return install_pkg_names(packages)
 
+    #FIXME: As Gurer warns, something's fishy with this exception proc.
     except InstallError, e:
-        ctx.ui.error("%s\n" % e)
+        ctx.ui.error("InstallError:%s" % e)
 
     except packagedb.Error, e:
-        ctx.ui.error("PackageDBError: (%s)\n" % e)
-        ctx.ui.error("Package is not installable.\n")
+        ctx.ui.error("PackageDBError: (%s)" % e)
+        ctx.ui.error("Package is not installable.")
 
     #except Exception, e:
     #    print e
-    #    ctx.ui.error("Error: %s\n" % e)
-
+    #    ctx.ui.error("Error: %s" % e)
 
 def install_pkg_files(package_URIs):
     """install a number of pisi package files"""
     from package import Package
 
-    ctx.ui.debug('A = %s\n' % str(package_URIs))
+    ctx.ui.debug('A = %s' % str(package_URIs))
 
     for x in package_URIs:
         if not x.endswith(ctx.const.package_prefix):
@@ -142,7 +143,7 @@ def install_pkg_files(package_URIs):
         A = d_t.keys()
        
         if len(A)==0:
-            ctx.ui.info('No packages to install.\n')
+            ctx.ui.info('No packages to install.')
             return True
         
         # try to construct a pisi graph of packages to
@@ -186,10 +187,10 @@ def install_pkg_names(A):
     the repository, trying to perform a minimum number of
     installs"""
 
-    ctx.ui.debug('A = %s\n' % str(A))
+    ctx.ui.debug('A = %s' % str(A))
 
     if len(A)==0:
-        ctx.ui.info('No packages to install.\n')
+        ctx.ui.info('No packages to install.')
         return True
     
     # try to construct a pisi graph of packages to
@@ -241,7 +242,7 @@ def upgrade_pkg_names(A):
     Ap = []
     for x in A:
         if not ctx.installdb.is_installed(x):
-            ctx.ui.info('Package %s is not installed.\n' % x)
+            ctx.ui.info('Package %s is not installed.' % x)
             continue
         (version, release, build) = ctx.installdb.get_version(x)
         pkg = packagedb.get_package(x)
@@ -253,15 +254,15 @@ def upgrade_pkg_names(A):
         else:
             #ctx.ui.info('Package %s cannot be upgraded. ' % x)
             ctx.ui.info('Package %s is already at its latest version %s,\
- release %s, build %s.\n'
+ release %s, build %s.'
                     % (x, pkg.version, pkg.release, pkg.build))
     A = Ap
 
     if len(A)==0:
-        ctx.ui.info('No packages to upgrade.\n')
+        ctx.ui.info('No packages to upgrade.')
         return True
 
-    ctx.ui.debug('A = %s\n' % str(A))
+    ctx.ui.debug('A = %s' % str(A))
     
     # try to construct a pisi graph of packages to
     # install / reinstall
@@ -337,11 +338,11 @@ def remove(A):
         if ctx.installdb.is_installed(x):
             Ap.append(x)
         else:
-            ctx.ui.info('Package %s does not exist. Cannot remove.\n' % x)
+            ctx.ui.info('Package %s does not exist. Cannot remove.' % x)
     A = Ap
 
     if len(A)==0:
-        ctx.ui.info('No packages to remove.\n')
+        ctx.ui.info('No packages to remove.')
         return True
         
     # try to construct a pisi graph of packages to
@@ -377,7 +378,7 @@ def remove(A):
         if ctx.installdb.is_installed(x):
             operations.remove_single(x)
         else:
-            ctx.ui.info('Package %s is not installed. Cannot remove.\n' % x)
+            ctx.ui.info('Package %s is not installed. Cannot remove.' % x)
         
     return True                         # everything went OK :)
 
@@ -423,11 +424,11 @@ def info_name(package_name):
 
 def index(repo_dir = '.'):
 
-    ctx.ui.info('* Building index of PISI files under %s\n' % repo_dir)
+    ctx.ui.info('* Building index of PISI files under %s' % repo_dir)
     index = Index()
     index.index(repo_dir)
     index.write(ctx.const.pisi_index)
-    ctx.ui.info('* Index file written\n')
+    ctx.ui.info('* Index file written')
 
 
 def add_repo(name, indexuri):
@@ -438,16 +439,16 @@ def remove_repo(name):
     if ctx.repodb.has_repo(name):
         ctx.repodb.remove_repo(name)
     else:
-        ctx.ui.error('* Repository %s does not exist. Cannot remove.\n'
+        ctx.ui.error('* Repository %s does not exist. Cannot remove.'
                  % name)
 
 def update_repo(repo):
 
-    ctx.ui.info('* Updating repository: %s\n' % repo)
+    ctx.ui.info('* Updating repository: %s' % repo)
     index = Index()
     index.read(ctx.repodb.get_repo(repo).indexuri.get_uri(), repo)
     index.update_db(repo)
-    ctx.ui.info('* Package database updated.\n')
+    ctx.ui.info('* Package database updated.')
 
 
 # build functions...
@@ -513,7 +514,7 @@ def build_until(pspecfile, state, authInfo=None):
     pb.compile_action_script()
     
     last = pb.get_state()
-    ctx.ui.info("Last state was %s\n"%last)
+    ctx.ui.info("Last state was %s"%last)
 
     if not last: last = "none"
 

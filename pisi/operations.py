@@ -7,8 +7,9 @@
 #
 # Please read the COPYING file.
 #
+#
 
-# Package Operations: install/remove/upgrade
+"Package Operations: install/remove/upgrade"
 
 import os
 
@@ -46,7 +47,6 @@ def remove_single(package_name):
     if comard:
         # FIXME: (return value)...
         comard.remove(package_name)
-    ctx.ui.info('.\n')
 
 def install_single(pkg, upgrade = False):
     """install a single package from URI or ID"""
@@ -81,12 +81,12 @@ def install_single_name(name, upgrade = False):
             pkg_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
                                     str(pkg_uri.path()))
 
-        ctx.ui.debug("Package URI: %s\n" % pkg_path)
+        ctx.ui.debug("Package URI: %s" % pkg_path)
 
         # Package will handle remote file for us!
         install_single_file(pkg_path, upgrade)
     else:
-        ctx.ui.error("Package %s not found in any active repository.\n" % pkg)
+        ctx.ui.error("Package %s not found in any active repository." % pkg)
 
 # deneme, don't remove ulan
 class AtomicOperation(object):

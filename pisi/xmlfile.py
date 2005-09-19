@@ -24,10 +24,11 @@
  in xml.dom :( )
 
  autoxml is a metaclass for automatic XML translation, using
- a miniature type system. (w00t!)
+ a miniature type system. (w00t!) This is based on an excellent
+ high-level XML processing prototype that Gurer prepared.
 
  Method names are mixedCase for compatibility with minidom,
- an old library.
+ an old library. 
 """
 
 # System
@@ -38,22 +39,23 @@ import codecs
 # PiSi
 import pisi
 from pisi.xmlext import *
+import pisi.context as ctx
 
 
 class Error(pisi.Error):
     pass
-
 
 import types
 
 mandatory, optional = range(2) # poor man's enum
 
 # basic types
+
 Text = types.StringType
 Integer = types.IntType
 
-class LocalText:
-    "handle tags with localized text"
+class LocalText(object):
+    """Handles XML tags/attributes with localized text"""
 
     def __init__():
         locs = {}
@@ -80,17 +82,89 @@ class LocalText:
             if not locs.has_key(L):
                 L = 'en'
             if not locs.has_key(L):
-                errs.append("Tag '%s' should have an English version\n" % d[2])
+                #errs.append("Tag '%s' should have an English version\n" % d[2])
                 return ""
             return locs[L]
 
             
 class autoxml(type):
-    "high-level automatic XML transformation interface for xmlfile"
+    """High-level automatic XML transformation interface for xmlfile.
+    The idea is to declare a class for each XML tag. Inside the
+    class the tags and attributes nested in the tag are further
+    elaborated. A simple example follows:
+
+    class Employee:
+         __metaclass__ = autoxml
+         t_Name = [xmlfile.Text, xmlfile.mandatory]
+         a_Type = [xmlfile.Integer, xmlfile.optional]
+    
+    This class defines a tag and an attribute nested in Employee 
+    class. Name is a string and type is an integer, called basic
+    types.
+    While the tag is mandatory, the attribute may be left out.
+    
+    Other basic types supported are: xmlfile.Float, xmlfile.Double
+    and (not implemented yet): xmlfile.Binary
+
+    By default, the class name is taken as the corresponding tag,
+    which may be overridden by defining a tag attribute. Thus, 
+    the same tag may also be written as:
+
+    class EmployeeXML:
+        ...
+        tag = 'Employee'
+        ...
+
+    In addition to basic types, we allow for two kinds of complex
+    types: class types and list types.
+
+    A declared class can be nested in another class as follows
+
+    class Position:
+         __metaclass__ = autoxml
+         t_Name = [xmlfile.Text, xmlfile.mandatory]
+         t_Description = [xmlfile.Text, xmlfile.optional]
+
+    which we can add to our Employee class.
+
+    class Employee:
+         __metaclass__ = autoxml
+         t_Name = [xmlfile.Text, xmlfile.mandatory]
+         a_Type = [xmlfile.Integer, xmlfile.optional]
+         t_Position = [Position, xmlfile.mandatory]
+
+    Note some unfortunate redundancy here with Position; this is
+    justified by the implementation (kidding). Still, you might
+    want to assign a different name than the class name that
+    goes in there, which may be fully qualified.
+
+    There is more! Suppose we want to define a company, with
+    of course many employees.
+
+    class Company:
+        __metaclass__ = autoxml
+        t_Employees = [ Employee, xmlfile.mandatory]
+
+    Logically, inside the Company tag, we will have several Employee
+    tags, which are inserted to the Employees instance variable of
+    Company in order of appearance.
+    The mandatory flag here asserts that at least one such record
+    is to be found.
+
+    It is also possible to change the XML path we expect the tag in,
+    just like with any other tag.
+
+         t_Employees = [ Employee, xmlfile.mandatory, 'Employees/Employee']
+
+
+    You see, it works like magic, when it works of course. All of it
+    done without a single brain exploding.
+        
+    """
 
     def __init__(cls, name, bases, dict):
 
-        # add XmlFile as one of the superclasses
+        # add XmlFile as one of the superclasses, we're smart
         bases = list(bases)
         if not XmlFile in bases:
             bases.append(XmlFile)
@@ -98,7 +172,7 @@ class autoxml(type):
         # standard initialization
         super(autoxml, cls).__init__(name, bases, dict)
 
-        # initialize class attribute __xml_tags
+        #TODO: initialize class attribute __xml_tags
         #setattr(cls, 'xml_variables', [])
 
         if not dict.has_key('tag'):
@@ -119,11 +193,14 @@ class autoxml(type):
                     x = autoxml.gen_tag(cls, name)
                 elif var.startswith('a_'):
                     x = autoxml.gen_attr(cls, name)
+                ctx.ui.debug(x)
                 (init, decoder, encoder, formatter) = x
                 inits.append(init)
                 decoders.append(decoder)
                 encoders.append(encoder)
                 formatters.append(formatter)
+
+        varname = cls.mixed_case(name)
 
         setattr(cls, 'initializers', inits)
         def initialize(self):
@@ -134,13 +211,13 @@ class autoxml(type):
         setattr(cls, 'decoders', decoders)
         def decode(self, node):
             for decoder in self.__class__.decoders:
-                decoder(self, node)
+                setattr(self, varname, decoder(self, node))         
         setattr(cls, 'decode', decode)
 
         setattr(cls, 'encoders', encoders)
         def encode(self, xml):
             for encoder in self.__class__.encoders:
-                encoder(self, xml)
+                encoder(self, xml, getattr(self, varname))
         setattr(cls, 'encode', encode)
 
         setattr(cls, 'formatters', formatters)
@@ -183,7 +260,9 @@ class autoxml(type):
         return identifier_p
 
     def gen_basic(cls, token, val, readtext, writetext):
-        "generate a basic tag or attribute"
+        """Generate a basic tag or attribute. This has got
+        to be pretty generic so we can invoke it from the complex
+        types such as Class and List"""
         name = cls.mixed_case(token)
         token_type = val[0]
         req = val[1]
@@ -198,25 +277,23 @@ class autoxml(type):
                 try:
                     value = autoxml.basic_cons_map[token_type](text)
                 except Error:
-                    return ['Type mismatch']
+                    raise Error('Type mismatch')
                 setattr(self, name, value)
             else:
                 if req == mandatory:
-                    return ['Mandatory argument not available']
+                    raise Error('Mandatory argument not available')
                 else:
-                    setattr(self, name, None)
                     return None
 
-        def encode(self, xml):
+        def encode(self, xml, value):
             node = xml.newNode(cls.tag)
             if hasattr(self, name):
-                writetext(xml, node, token, str(getattr(self, name)))
+                writetext(xml, node, token, str(value))
             else:
                 if req == mandatory:
-                    return ['Mandatory argument not available']
+                    raise Error('Mandatory argument not available')
 
         def format(self):
-            #print 'format:', name
             if hasattr(self, name):
                 return '%s: %s\n' % (token, str(getattr(self, name)))
             else:
@@ -226,69 +303,63 @@ class autoxml(type):
 
         return initialize, decode, encode, format
 
-    def gen_basic_attr(cls, attr, val):
+    def gen_basic_attr(cls, attr, spec):
         """generate an attribute with a basic datatype"""
         def readtext(node, attr):
             return getNodeAttribute(node, attr)
         def writetext(xml, node, attr, value):
             node.setAttribute(attr, value)
-        return autoxml.gen_basic(cls, attr, val, readtext, writetext)
+        return autoxml.gen_basic(cls, attr, spec, readtext, writetext)
 
-    def gen_basic_tag(cls, tag, val):
+    def gen_basic_tag(cls, tag, spec):
         """generate a tag with a basic datatype"""
         def readtext(node, tag):
             return getNodeText(getNode(node, tag))
         def writetext(xml, node, tag, value):
             xml.addTextNodeUnder(node, tag, value)
-        return autoxml.gen_basic(cls, tag, val, readtext, writetext)
+        return autoxml.gen_basic(cls, tag, spec, readtext, writetext)
 
     def gen_class_tag(cls, tag, val):
         pass
 
     def gen_list_tag(cls, tag, val):
-        name = cls.mixed_case(token)
-        token_type = val[0]
+        name = cls.mixed_case(tag)
+        tag_type = val[0]
         req = val[1]
 
         if len(val)>=3:
-            path = val[2]
+            path = val[2]               # an alternative path specified
         else:
-            path = tag
-        if len(token_type!=1):
-            raise Error('List type must contain one element')
-
-        x = autoxml.gen_tag_aux(cls, tag, tag_type, val)    
-        (x_init, x_decoder, x_encoder, x_formatter) = x
+            path = tag                  # otherwise it's the same name as
+                                        # the tag
+        if len(tag_type) != 1:
+            raise Error('List type must contain only one element')
+        x = autoxml.gen_tag_aux(cls, tag, tag_type[0], val)    
+        (init_item, decode_item, encode_item, format_item) = x
 
         def init(self):
-            varname = cls.mixed_case(name)
-            setattr(self, varname, [])
+            setattr(self, name, [])
 
         def decode(self, node):
-            nodes = getAllNodes(node)
-            if len(nodes) is 0 and req is mandatory:
-                pass
-                #FIXME: add error here
-            for node in nodes:
-                x_decoder(self, node)
-                pass
+            l = []
+            self.nodes = getAllNodes(node, path)
+            print 'F U', self.nodes
+            if len(self.nodes) is 0 and req is mandatory:
+                raise Error('Mandatory list empty')
+            for node in self.nodes:
+                l.append(decode_item(self, node))
+            return l
 
-        def encode(self, xml):
-            node = xml.newNode(cls.tag)
-            if hasattr(self, name):
-                writetext(xml, node, token, str(getattr(self, name)))
-            else:
-                if req == mandatory:
-                    return ['Mandatory argument not available']
+        def encode(self, xml, value):
+            pass
 
         def format(self):
             #print 'format:', name
-            if hasattr(self, name):
-                return '%s: %s\n' % (token, str(getattr(self, name)))
-            else:
-                if req == mandatory:
-                    raise Error('Mandatory variable %s not available' % name)
-            return ""
+            s = ''
+            l = getattr(self, name)
+            for ix in range(len(l)):
+                s += str(ix) + format_item(l[ix])
+            return s
         
         return (init, decode, encode, format)
 

@@ -74,7 +74,7 @@ class SourceFetcher(object):
     def fetch(self, appendDest=""):
         from fetcher import fetch_url
 
-        ctx.ui.info("Fetching %s\n" % self.url.uri)
+        ctx.ui.info("Fetching %s" % self.url.uri)
         dest = join(self.dest, appendDest)
         fetch_url(self.url, dest)
 

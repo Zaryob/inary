@@ -44,7 +44,7 @@ class Installer:
 
     def install(self, ask_reinstall = True):
         "entry point"
-        ctx.ui.info('Installing %s, version %s, release %s, build %s\n' %
+        ctx.ui.info('Installing %s, version %s, release %s, build %s' %
                 (self.pkginfo.name, self.pkginfo.version,
                  self.pkginfo.release, self.pkginfo.build))
         self.ask_reinstall = ask_reinstall
@@ -77,7 +77,7 @@ class Installer:
         # check dependencies
         if not dependency.installable(self.pkginfo.name):
             ctx.ui.error('Dependencies for ' + self.pkginfo.name +
-                     ' not satisfied\n')
+                     ' not satisfied')
             raise InstallError("Package not installable")
 
     def reinstall(self):
@@ -108,14 +108,14 @@ class Installer:
                 # is this an upgrade?
                 # determine and report the kind of upgrade: version, release, build
                 if pkg.version > iversion:
-                    ctx.ui.info('Upgrading to new upstream version\n')
+                    ctx.ui.info('Upgrading to new upstream version')
                     upgrade = True
                 elif pkg.release > irelease:
-                    ctx.ui.info('Upgrading to new distribution release\n')
+                    ctx.ui.info('Upgrading to new distribution release')
                     upgrade = True
                 elif ((not ignore_build) and ibuild and pkg.build
                        and pkg.build > ibuild):
-                    ctx.ui.info('Upgrading to new distribution build\n')
+                    ctx.ui.info('Upgrading to new distribution build')
                     upgrade = True
 
                 # is this a downgrade? confirm this action.
@@ -135,7 +135,7 @@ class Installer:
     def extract_install(self):
         "unzip package in place"
 
-        ctx.ui.info('Extracting files,\n')
+        ctx.ui.info('Extracting files,')
         self.package.extract_dir_flat('install', ctx.config.destdir)
  
     def store_pisi_files(self):
@@ -145,14 +145,14 @@ class Installer:
         ctx.ui.info('Storing %s, ' % ctx.const.files_xml)
         self.package.extract_file(ctx.const.files_xml, self.package.pkg_dir())
 
-        ctx.ui.info('%s.\n' % ctx.const.metadata_xml)
+        ctx.ui.info('%s.' % ctx.const.metadata_xml)
         self.package.extract_file(ctx.const.metadata_xml, self.package.pkg_dir())
 
         for pcomar in self.metadata.package.providesComar:
             fpath = os.path.join(ctx.const.comar_dir, pcomar.script)
             # comar prefix is added to the pkg_dir while extracting comar
             # script file. so we'll use pkg_dir as destination.
-            ctx.ui.info('Storing %s\n' % fpath)
+            ctx.ui.info('Storing %s' % fpath)
             self.package.extract_file(fpath, self.package.pkg_dir())
 
     def register_comar_scripts(self):
@@ -160,7 +160,7 @@ class Installer:
 
         for pcomar in self.metadata.package.providesComar:
             scriptPath = os.path.join(self.package.comar_dir(),pcomar.script)
-            ctx.ui.info("Registering COMAR script %s\n" % pcomar.script)
+            ctx.ui.info("Registering COMAR script %s" % pcomar.script)
             # FIXME: We must check the result of the command (possibly
             # with id?)
             if comard:

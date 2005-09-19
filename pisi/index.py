@@ -67,7 +67,7 @@ class Index(XmlFile):
         for root, dirs, files in os.walk(repo_uri):
             for fn in files:
                 if fn.endswith(ctx.const.package_prefix):
-                    ctx.ui.info('Adding ' + fn + ' to package index\n')
+                    ctx.ui.info('Adding ' + fn + ' to package index')
                     self.add_package(os.path.join(root, fn), repo_uri)
 
     def update_db(self, repo):
@@ -93,6 +93,6 @@ class Index(XmlFile):
             md.package.packageURI = util.removepathprefix(repo_uri, path)
         # check package semantics
         if md.has_errors():
-            ctx.ui.error('Package ' + md.package.name + ': metadata corrupt\n')
+            ctx.ui.error('Package ' + md.package.name + ': metadata corrupt')
         else:
             self.packages.append(md.package)

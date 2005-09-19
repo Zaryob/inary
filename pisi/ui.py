@@ -7,63 +7,18 @@
 #
 # Please read the COPYING file.
 #
-
 # generic user interface
-
+#
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 #           Murat Eren <meren@uludag.org.tr>
 
 import sys
 
-from pisi.colors import colorize
+import pisi
+import pisi.context as ctx
 
-
-class CLI:
-    "Command Line Interface"
-    def __init__(self, debuggy = False, verbose = False):
-        self.show_debug = debuggy
-        self.show_verbose = verbose
-
-    def set_verbose(self, flag):
-        self.show_verbose = flag
-
-    def set_debug(self, flag):
-        self.show_debug = flag
-
-    def info(self, msg, verbose = False):
-        if verbose and self.show_verbose:
-            sys.stdout.write(colorize(msg, 'blue'))
-        elif not verbose:
-            sys.stdout.write(colorize(msg, 'blue'))
-        sys.stdout.flush()
-
-    def debug(self, msg):
-        if self.show_debug:
-            sys.stdout.write(msg)
-            sys.stdout.flush()
-
-    def warning(self,msg):
-        sys.stdout.write(colorize('Warning:' + msg, 'purple'))
-        sys.stdout.flush()
-
-    def error(self,msg):
-        sys.stdout.write(colorize('Error:' + msg, 'red'))
-        sys.stdout.flush()
-
-    def action(self,msg):
-        sys.stdout.write(colorize(msg, 'green'))
-        sys.stdout.flush()
-
-    def confirm(self, msg):
-        from pisi.config import config
-        if config.options and config.options.yes_all:
-            return True
-        while True:
-            s = raw_input(msg + colorize('(yes/no)', 'red'))
-            if s.startswith('y') or s.startswith('Y'):
-                return True
-            if s.startswith('n') or s.startswith('N'):
-                return False
+class UI(object):
+    "Abstract class for UI operations, derive from this."
 
     class Progress:
         def __init__(self, totalsize):
@@ -81,8 +36,49 @@ class CLI:
             else:
                 return 0
 
-    def display_progress(self, pd):
-        out = '\r%-30.30s %3d%% %12.2f %s' % \
-            (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
-        self.info(out)
+    def __init__(self, debuggy = False, verbose = False):
+        self.show_debug = debuggy
+        self.show_verbose = verbose
 
+    def set_verbose(self, flag):
+        self.show_verbose = flag
+
+    def set_debug(self, flag):
+        self.show_debug = flag
+
+    def info(self, msg, verbose = False):
+        "give an informative message"
+        pass
+
+    def ack(self, msg):
+        "inform the user of an important event and wait for acknowledgement"
+        pass
+
+    def debug(self, msg):
+        "show debugging info"
+        if self.show_debug:
+            self.info('DEBUG: ' + msg)
+
+    def warning(self,msg):
+        "warn the user"
+        pass
+
+    def error(self,msg):
+        "inform a (possibly fatal) error"
+        pass
+
+    def action(self,msg):
+        "uh?"
+        pass
+
+    def choose(self, msg, list):
+        "ask the user to choose from a list of alternatives"
+        pass
+
+    def confirm(self, msg):
+        "ask a yes/no question"
+        pass
+    
+    def display_progress(self, pd):
+        "display progress"
+        pass
