@@ -16,28 +16,39 @@ sys.path.append('.')
 
 import pisi.uri
 import pisi.specfile
+import pisi.util as util
+
 from pisi.config import config
 from pisi.fetcher import fetch_url
 
-def scan_pspec(folder):
-    paks = []
+def scanPSPEC(folder):
+    packages = []
     for root, dirs, files in os.walk(folder):
         if "pspec.xml" in files:
-            paks.append(root)
+            packages.append(root)
         # dont walk into the versioned stuff
         if ".svn" in dirs:
             dirs.remove(".svn")
-    return paks
+    return packages
+
+def isCached(file, sha1sum):
+    return util.check_file_hash(os.path.join(config.archives_dir(), file), sha1sum)
 
 if __name__ == "__main__":
     try:
-        paks = scan_pspec(sys.argv[1])
+        packages = scanPSPEC(sys.argv[1])
     except:
         print "Usage: fetchAll.py path2repo"
         sys.exit(1)
         
-    for pak in paks:
+    for package in packages:
         spec = pisi.specfile.SpecFile()
-        spec.read(os.path.join(pak, "pspec.xml"))
-        fetch_url(pisi.uri.URI(spec.source.archiveUri), config.archives_dir())
-        print pisi.uri.URI(spec.source.archiveUri), " -> " , config.archives_dir()
+        spec.read(os.path.join(package, "pspec.xml"))
+
+        URI = pisi.uri.URI(spec.source.archiveUri)
+
+        if not isCached(URI.filename(), spec.source.archiveSHA1):
+            print URI, " -> " , os.path.join(config.archives_dir(), URI.filename())
+            fetch_url(URI, config.archives_dir())
+        else:
+            print URI, "already downloaded..."
