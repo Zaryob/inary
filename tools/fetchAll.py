@@ -49,6 +49,10 @@ if __name__ == "__main__":
 
         if not isCached(URI.filename(), spec.source.archiveSHA1):
             print URI, " -> " , os.path.join(config.archives_dir(), URI.filename())
-            fetch_url(URI, config.archives_dir())
+            try:
+	            fetch_url(URI, config.archives_dir())
+            except pisi.fetcher.FetchError, e:
+                print e
+                pass
         else:
             print URI, "already downloaded..."
