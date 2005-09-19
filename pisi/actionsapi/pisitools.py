@@ -58,7 +58,7 @@ def dohtml(*sourceFiles):
     destionationDirectory = os.path.join(get.installDIR(), 'usr/share/doc' ,get.srcTAG(), 'html')
 
     if not can_access_directory(destionationDirectory):
-        makedirs(os.getcwd() + destionationDirectory)
+        makedirs(destionationDirectory)
 
     allowed_extensions = ['.png', '.gif', '.html', '.htm', '.jpg', '.css', '.js']
     disallowed_directories = ['CVS']
@@ -66,7 +66,7 @@ def dohtml(*sourceFiles):
     for sourceFile in sourceFiles:
         for source in glob.glob(sourceFile):
             if os.path.isfile(source) and os.path.splitext(source)[1] in allowed_extensions:
-                system('install -m0644 %s %s' % (source, destionationDirectory))
+                system('install -m0644 %s %s' % ('"' + source + '"', destionationDirectory))
             if os.path.isdir(source) and os.path.basename(source) not in disallowed_directories:
                 for root, dirs, files in os.walk(source):
                     for source in files:
