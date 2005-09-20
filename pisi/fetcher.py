@@ -134,9 +134,10 @@ class Fetcher:
         except HTTPException, e:
             self.err(('(%s): %s') % (e.__class__.__name__, e))
 
-        if headers and not headers.has_key('Content-Length'):
-            totalsize = 0 # could not get the totalsize of file
-        else: totalsize = int(headers['Content-Length'])
+        try:
+            totalsize = int(headers['Content-Length'])
+        except:
+            totalsize = 0
 
         dest = open(os.path.join(self.filedest, self.url.filename()) , "w")
         self._do_grab(fileObj, dest, totalsize)
