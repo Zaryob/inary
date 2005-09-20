@@ -25,7 +25,6 @@ import pisi.operations as operations
 from pisi.specfile import *
 from pisi.package import Package
 from pisi.metadata import MetaData
-from pisi.comariface import comard
 #import conflicts
 
 class InstallError(pisi.Error):

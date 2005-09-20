@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-09-02, 17:09:47 -->
-<!-- Copyright (C) 2005 PiSi Development Team, pisi@uludag.org.tr -->
+<!-- Saved: 2005-09-20, 16:43:07 -->
+<!-- Copyright (C) 2005 PiSi Development Team,  -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
   <UIType>Qt</UIType>
   <Description>The package management software of Pardus distribution.
 </Description>
-  <VersIon>0.2</VersIon>
   <Author>PiSi Development Team</Author>
-  <EmaIl>pisi@uludag.org.tr</EmaIl>
+  <EmaIl></EmaIl>
   <Sources>
     <Source>
       <Dir>tools</Dir>
@@ -311,6 +310,9 @@
       <Dir>pisi</Dir>
       <Name>specfilenew.py</Name>
     </Source>
+    <Source>
+      <Name>TODO</Name>
+    </Source>
   </Sources>
   <Forms>
   </Forms>
@@ -349,9 +351,9 @@
   </Vcs>
   <FiletypeAssociations>
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.ui" type="FORMS" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
-    <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
   </FiletypeAssociations>
 </Project>

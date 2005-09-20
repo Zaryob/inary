@@ -261,11 +261,11 @@ class PackageOp(Command):
     def init(self):
         super(PackageOp, self).init(True)
         import pisi
-        import pisi.comariface
         if not self.options.ignore_comar:
             try:
-                pisi.comariface.init()
-            except pisi.comariface.ComarError:
+                import comar
+                ctx.comard = comar.Link() # context
+            except comar.Error:
                 ctx.ui.error('Comar error encountered\n')
                 self.die()
                 

@@ -23,7 +23,6 @@ from pisi.uri import URI
 
 def remove_single(package_name):
     """Remove a single package"""
-    from comariface import comard
     inst_packagedb = packagedb.inst_packagedb
 
     #TODO: check dependencies
@@ -32,6 +31,9 @@ def remove_single(package_name):
     if not ctx.installdb.is_installed(package_name):
         raise Exception('Trying to remove nonexistent package '
                         + package_name)
+    if ctx.comard:
+        ctx.comard.remove(package_name)
+        ctx.comard.call("System.Package", "preremove")
     for fileinfo in ctx.installdb.files(package_name).list:
         fpath = os.path.join(ctx.config.destdir, fileinfo.path)
         # TODO: We have to store configuration files for futher
@@ -44,9 +46,6 @@ def remove_single(package_name):
             os.unlink(fpath)
     ctx.installdb.remove(package_name)
     packagedb.remove_package(package_name)
-    if comard:
-        # FIXME: (return value)...
-        comard.remove(package_name)
 
 def install_single(pkg, upgrade = False):
     """install a single package from URI or ID"""
