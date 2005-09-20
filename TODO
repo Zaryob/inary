@@ -73,14 +73,27 @@ Legend:
 
 3. Beta
 
- / API: yeah, we even got application users (eray)
+ - configure-pending (eray)
+ / autoxml: automated xml processing (eray)
+   + design
+   + basic types
+   / list type
+   - class type
+   / localtext type
+ / components (eray)
+   + requirements
+   - xml format
+   - query components: list of components/packages in a component
+   - install/remove components
+ / API: we even have application users (eray)
  / multiple package repository (eray)
    + decide how to implement
    + support repo order
-   ? support medium types
+   - support medium types
      - internet: http/ftp
-     - local repository
-     - cdrom dvd 
+     - local repository: file://
+     - removable media: media://
+ / i18n support
  / UI
    ? pyqt UI class to interface
    - PISIMAT
@@ -92,25 +105,7 @@ Legend:
     + ask alternatives to choose from (eray)
    + eliminate \n's from infos, what's the point?
    + metaclass coolness for CLI command framework (eray)
- / autoxml: automated xml processing
-   + design
-   + basic types
-   / list typ
-   - class typ
-   / localtext type
- / components
-   + requirements
-   - xml format (bunlarin class'leri yazilmali)
-   - query components: list of components/packages in a component
-   - install/remove components
- / i18n support
- - configure-pending (eray)
  / overhaul installdb (try to merge its use with packagedb) (eray)
- + upgrade (eray)
-   + upgrade operation
-   + test upgrade op
-   + system-wide upgrade (upgrade-all) komutu
- ? ordered configure install thing (eray)
  - partial caching and automatic resume for file download (meren)
   - use a separate "partial/" subdir like urpmi
  / exception handling (baris)
@@ -127,11 +122,15 @@ Legend:
    + MetaData
    + Files
    - Index (o kadar onemli degil)
+ ? non-interactive use (baris)
  + implement missing unit tests
    + sourcedb
    + package (baris)
    + configuration file (baris)
- ? non-interactive use (baris)
+ + upgrade (eray)
+   + upgrade operation
+   + test upgrade op
+   + system-wide upgrade (upgrade-all) komutu
  + incremental build (eray)
    + generate binary release number by comparing MD5s (eray)
    + keep track of successfully completed configure, make, install

@@ -262,8 +262,8 @@ class PackageOp(Command):
         super(PackageOp, self).init(True)
         import pisi
         if not self.options.ignore_comar:
+            import comar
             try:
-                import comar
                 ctx.comard = comar.Link() # context
             except comar.Error:
                 ctx.ui.error('Comar error encountered\n')

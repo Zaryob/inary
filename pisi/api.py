@@ -56,6 +56,7 @@ def init(database = True, options = None, ui = None ):
         ctx.repodb = pisi.repodb.init()
         ctx.installdb = pisi.installdb.init()
 
+        # TODO: bunun da ctx'de olmasi gerek, global hesabi
         packagedb.init()
 #        import pisi.sourcedb
 #        pisi.sourcedb.init()
