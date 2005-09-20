@@ -14,6 +14,8 @@ import xml.dom.minidom as mdom
 from xml.parsers.expat import ExpatError
 import types
 
+import pisi
+import pisi.api
 from pisi import xmlfile
 from pisi.config import config
 import pisi.util as util
@@ -21,8 +23,7 @@ from pisi.xmlext import *
 
 class XmlFileTestCase(unittest.TestCase):
     def setUp(self):
-#        impl = mdom.getDOMImplementation()
-        pass
+        pisi.api.init(False)
     
     def testMetaClass(self):
         class A:

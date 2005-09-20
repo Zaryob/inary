@@ -191,17 +191,17 @@ class PisiBuild:
 
     def run_setup_action(self):
         #  Run configure, build and install phase
-        ctx.ui.action(_("Setting up source...\n"))
+        ctx.ui.action(_("Setting up source..."))
         self.run_action_function(ctx.const.setup_func)
         self.set_state("setupaction")
 
     def run_build_action(self):
-        ctx.ui.action(_("Building source...\n"))
+        ctx.ui.action(_("Building source..."))
         self.run_action_function(ctx.const.build_func)
         self.set_state("buildaction")
 
     def run_install_action(self):
-        ctx.ui.action(_("Installing...\n"))
+        ctx.ui.action(_("Installing..."))
         
         # Before install make sure install_dir is clean 
         if os.path.exists(self.bctx.pkg_install_dir()):
@@ -284,7 +284,7 @@ class PisiBuild:
                                             compressType=patch.compressionType,
                                             targetDir=ctx.config.tmp_dir())
 
-            ctx.ui.action(_("* Applying patch: %s\n") % patch.filename)
+            ctx.ui.action(_("* Applying patch: %s") % patch.filename)
             util.do_patch(self.srcDir, patchFile, level=patch.level, target=patch.target)
 
     def gen_metadata_xml(self, package):

@@ -35,6 +35,7 @@
 import xml.dom.minidom as mdom
 from xml.parsers.expat import ExpatError
 import codecs
+import types
 
 # PiSi
 import pisi
@@ -45,8 +46,7 @@ import pisi.context as ctx
 class Error(pisi.Error):
     pass
 
-import types
-
+    
 mandatory, optional = range(2) # poor man's enum
 
 # basic types
