@@ -208,6 +208,30 @@ class Clean(Command):
         pisi.util.clean_locks()
         self.finalize()
         
+
+class Graph(Command):
+    """Graph package relations.
+Usage: graph <package1> <package2> ...
+
+Write a graph of package relations, tracking dependency and
+conflicts relations starting from given packages.
+"""
+
+    __metaclass__ = autocommand
+
+    def __init__(self):
+        super(Graph, self).__init__()
+
+    name = ("graph", None)
+
+    def run(self):
+        self.init()
+        if self.args:
+            g = pisi.api.package_graph(self.args)
+            g.write_graphviz(file('pgraph.dot', 'w'))
+        self.finalize()
+
+
 def buildno_opts(self):
     self.parser.add_option("", "--ignore-build-no", action="store_true",
                            default=False,

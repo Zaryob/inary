@@ -228,6 +228,39 @@ def install_pkg_names(A):
         
     return True                         # everything went OK :)
 
+def package_graph(A):
+    """Construct a package relations graph, containing
+    all dependencies of packages A"""
+
+    ctx.ui.debug('A = %s' % str(A))
+  
+    # try to construct a pisi graph of packages to
+    # install / reinstall
+
+    G_f = pgraph.PGraph(packagedb)               # construct G_f
+
+    # find the "install closure" graph of G_f by package 
+    # set A using packagedb
+    for x in A:
+        G_f.add_package(x)
+    B = A
+    #state = {}
+    while len(B) > 0:
+        Bp = set()
+        for x in B:
+            pkg = packagedb.get_package(x)
+            print pkg
+            for dep in pkg.runtimeDeps:
+                # we don't deal with already *satisfied* dependencies
+                if not dep.package in G_f.vertices():
+                    Bp.add(str(dep.package))
+                G_f.add_dep(x, dep)
+#               if not dependency.installed_satisfies_dep(dep):
+#                   if not dep.package in G_f.vertices():
+#                       Bp.add(str(dep.package))
+#                   G_f.add_dep(x, dep)
+        B = Bp
+    return G_f
 
 def upgrade(A):
     upgrade_pkg_names(A)

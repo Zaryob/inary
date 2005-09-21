@@ -75,5 +75,5 @@ class PGraph(Digraph):
 
     def write_graphviz_vlabel(self, f, u):
         (v, r) = self.vertex_data(u)
-        f.write('[ ' + str(u) + '(' + str(v) + ',' + str(r) + ') ]')
+        f.write('[ label = \"' + str(u) + '(' + str(v) + ',' + str(r) + ')\" ]')
 

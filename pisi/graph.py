@@ -132,16 +132,20 @@ class Digraph(object):
         list.reverse()
         return list
 
+    def id_str(self, u):
+        s = str(u)
+        return s.replace('-', '_')
+
     def write_graphviz(self, f):
         f.write('digraph G {\n')
         for u in self.vertices():
-            f.write(u)
+            f.write(self.id_str(u))
             self.write_graphviz_vlabel(f, u)
             f.write(';\n')
         f.write('\n')
         for u in self.vertices():
             for v in self.adj(u):
-                f.write(u + ' -- ' + v)
+                f.write( self.id_str(u) + ' -> ' + self.id_str(v))
                 self.write_graphviz_elabel(f, u, v)
                 f.write(';\n')
         f.write('\n')
