@@ -26,6 +26,11 @@ class XmlFileTestCase(unittest.TestCase):
         pisi.api.init(False)
     
     def testMetaClass(self):
+        class OtherInfo:
+            __metaclass__ = xmlfile.autoxml
+            t_BirthDate = [types.StringType, xmlfile.mandatory]
+            t_Interest = [types.StringType, xmlfile.mandatory]
+        
         class A:
             __metaclass__ = xmlfile.autoxml
             t_Name = [types.StringType, xmlfile.mandatory]
@@ -33,6 +38,7 @@ class XmlFileTestCase(unittest.TestCase):
             t_Email = [types.StringType, xmlfile.optional]
             a_href = [types.StringType, xmlfile.mandatory]
             t_Projects = [ [types.StringType], xmlfile.mandatory, 'Projects/Project']
+            t_OtherInfo = [ OtherInfo, xmlfile.optional ]
         a = A()
         self.assertEqual(a.href, None)
         dom = mdom.parse('tests/a.xml')

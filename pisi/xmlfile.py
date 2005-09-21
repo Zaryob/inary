@@ -163,6 +163,7 @@ class autoxml(type):
     """
 
     def __init__(cls, name, bases, dict):
+        print 'generating class', name
 
         # add XmlFile as one of the superclasses, we're smart
         bases = list(bases)
@@ -285,12 +286,12 @@ class autoxml(type):
     def gen_tag(cls, tag, spec, readtext, writetext):
         """generate readers and writers for the tag"""
         tag_type = spec[0]
-        if type(tag_type) == types.TypeType:
+        if type(tag_type) is types.TypeType:
             return cls.gen_anon_basic(tag, spec, readtext, writetext)
-        elif type(tag_type) == types.ListType:
-            return cls.gen_list_tag(tag, spec, readtext, writetext)
-        elif type(tag_type) == types.ClassType:
-            return cls.gen_class_tag(tag, spec, readtext, writetext)
+        elif type(tag_type) is types.ListType:
+            return cls.gen_list_tag(tag, spec)
+        elif type(tag_type) is autoxml or type(tag_type) is types.ClassType:
+            return cls.gen_class_tag(tag, spec)
 
     def mixed_case(cls, identifier):
         """helper function to turn token name into mixed case"""
@@ -334,7 +335,7 @@ class autoxml(type):
                 return value
             else:
                 if req == mandatory:
-                    raise Error('Mandatory argument not available')
+                    raise Error('Mandatory token %s not available' % token)
                 else:
                     return None
 
@@ -352,20 +353,32 @@ class autoxml(type):
 
         return initialize, decode, encode, format
 
-    def gen_class_tag(cls, tag, spec, readtext, writetext):
+    def gen_class_tag(cls, tag, spec):
         """generate a class datatype"""
         name, tag_type, req, path = cls.parse_spec(tag, spec)
 
         def make_object():
-            pass
+            return tag_type.__new__(tag_type)
 
         def init():
-            return None
+            return make_object()
 
         def decode(node):
-            return None
+            node = getNode(node, path)
+            if node:
+                try:
+                    obj = make_object()
+                    obj.decode(node)
+                    return obj
+                except Error:
+                    raise Error('Type mismatch: DOM cannot be decoded')
+            else:
+                if req == mandatory:
+                    raise Error('Mandatory argument not available')
+                else:
+                    return None
 
-        def encode(xml, l):
+        def encode(xml, value):
             pass
 
         def format(l):
@@ -374,7 +387,7 @@ class autoxml(type):
         
         return (init, decode, encode, format)
 
-    def gen_list_tag(cls, tag, spec, readtext, writetext):
+    def gen_list_tag(cls, tag, spec):
         """generate a list datatype"""
         name, tag_type, req, path = cls.parse_spec(tag, spec)
         if len(tag_type) != 1:
