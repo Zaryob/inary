@@ -32,7 +32,7 @@ class XmlFileTestCase(unittest.TestCase):
             t_Number = [types.IntType, xmlfile.optional]
             t_Email = [types.StringType, xmlfile.optional]
             a_href = [types.StringType, xmlfile.mandatory]
-            #t_Projects = [ [types.StringType], xmlfile.mandatory]
+            t_Projects = [ [types.StringType], xmlfile.mandatory, 'Projects/Project']
         a = A()
         self.assertEqual(a.href, None)
         dom = mdom.parse('tests/a.xml')
@@ -43,13 +43,15 @@ class XmlFileTestCase(unittest.TestCase):
         self.assertEqual(a.number, 868)
         self.assertEqual(a.name, 'Eray Ozkural')
         string = a.format()
-        #print '*', string
+        print '*', string
         #self.assert_(string.startswith('Name'))
         outfn = '/tmp/a2.xml'
         xml = xmlfile.XmlFile('A')
         a2 = A()
         a2.name = "Baris Metin"
         a2.email = "baris@uludag.org.tr"
+        a2.href = 'http://cekirdek.uludag.org.tr/~baris'
+        a2.projects = [ 'pisi', 'tasma', 'plasma' ]
         elt = a2.encode(xml)
         string = a2.format()
 

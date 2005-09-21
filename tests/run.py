@@ -17,6 +17,9 @@ import os
 sys.path.append('.')
 sys.path.append('..')
 
+import pisi
+import pisi.api
+
 runTestSuite = lambda(x): unittest.TextTestRunner(verbosity=2).run(x)
 
 def run_all():
@@ -59,6 +62,7 @@ def run_all():
     runTestSuite(alltests)
 
 if __name__ == "__main__":
+    pisi.api.init(False)
     args = sys.argv
     if len(args) > 1: # run modules given from the command line
         tests = sys.argv[1:]

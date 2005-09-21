@@ -143,7 +143,7 @@ class autoxml(type):
 
     class Company:
         __metaclass__ = autoxml
-        t_Employees = [ Employee, xmlfile.mandatory]
+        t_Employees = [ [Employee], xmlfile.mandatory]
 
     Logically, inside the Company tag, we will have several Employee
     tags, which are inserted to the Employees instance variable of
@@ -154,7 +154,7 @@ class autoxml(type):
     It is also possible to change the XML path we expect the tag in,
     just like with any other tag.
 
-         t_Employees = [ Employee, xmlfile.mandatory, 'Employees/Employee']
+         t_Employees = [ [Employee], xmlfile.mandatory, 'Employees/Employee']
 
 
     You see, it works like magic, when it works of course. All of it
@@ -175,12 +175,11 @@ class autoxml(type):
         #TODO: initialize class attribute __xml_tags
         #setattr(cls, 'xml_variables', [])
 
-        if not dict.has_key('tag'):
-            setattr(cls, 'tag', name)
+        # default class tag is class name
+        if not dict.has_key('tag'): 
+            cls.tag = name
 
-        root_tag = cls.tag
-
-        # generate helper routines
+        # generate helper routines, for each XML component
         inits = []
         decoders = []
         encoders = []
@@ -188,177 +187,208 @@ class autoxml(type):
         for var in dict:
             if var.startswith('t_') or var.startswith('a_'):
                 name = var[2:]
-                #print 'name', name
-                if var.startswith('t_'):
-                    x = autoxml.gen_tag(cls, name)
-                elif var.startswith('a_'):
-                    x = autoxml.gen_attr(cls, name)
-                ctx.ui.debug(x)
+                print 'generating member', name
+                if var.startswith('a_'):
+                    x = autoxml.gen_attr_member(cls, name)
+                elif var.startswith('t_'):
+                    x = autoxml.gen_tag_member(cls, name)
                 (init, decoder, encoder, formatter) = x
                 inits.append(init)
                 decoders.append(decoder)
                 encoders.append(encoder)
                 formatters.append(formatter)
 
-        varname = cls.mixed_case(name)
-
-        setattr(cls, 'initializers', inits)
+        # generate top-level helper functions
+        cls.initializers = inits
         def initialize(self):
             for init in self.__class__.initializers:
                 init(self)
-        setattr(cls, '__init__', initialize)            
+        cls.__init__ = initialize
 
-        setattr(cls, 'decoders', decoders)
+        cls.decoders = decoders
         def decode(self, node):
             for decoder in self.__class__.decoders:
-                setattr(self, varname, decoder(self, node))         
-        setattr(cls, 'decode', decode)
+                decoder(self, node)
+        cls.decode = decode
 
-        setattr(cls, 'encoders', encoders)
+        cls.encoders = encoders
         def encode(self, xml):
             for encoder in self.__class__.encoders:
-                encoder(self, xml, getattr(self, varname))
-        setattr(cls, 'encode', encode)
+                encoder(self, xml)
+        cls.encode = encode
 
-        setattr(cls, 'formatters', formatters)
+        cls.formatters = formatters
         def format(self):
             string = ''
             for formatter in self.__class__.formatters:
-                string = string + formatter(self)
+                string += formatter(self)
             return string
-        setattr(cls, 'format', format)
+        cls.format = format
         if not dict.has_key('__str__'):
-            def string(self):
-                return self.format()
-            setattr(cls, '__str__', string)
+            cls.__str__ = format
 
-    def gen_tag(cls, tag):
-        # generate readers and writers for the tag
-        val = getattr(cls, 't_' + tag)
-        tag_type = val[0]
-        return autoxml.gen_tag_aux(cls, tag, tag_type, val)
-    
-    def gen_tag_aux(cls, tag, tag_type, val):
-        if type(tag_type) == types.TypeType:
-            # basic types
-            return autoxml.gen_basic_tag(cls, tag, val)
-        elif type(tag_type) == types.ClassType:
-            return autoxml.gen_class_tag(cls, tag, val)
-        elif type(tag_type) == types.ListType:
-            return autoxml.gen_list_tag(cls, tag, val)
-                
-    def gen_attr(cls, tag):
-        "generate readers and writers for an attribute"
-        #print 'attr:', tag
-        val = getattr(cls, 'a_' + tag)
-        tag_type = val[0]
+    def gen_attr_member(cls, attr):
+        """generate readers and writers for an attribute member"""
+        print 'attr:', attr
+        spec = getattr(cls, 'a_' + attr)
+        tag_type = spec[0]
         assert type(tag_type) == type(type)
-        return autoxml.gen_basic_attr(cls, tag, val)
+        def readtext(node, attr):
+            return getNodeAttribute(node, attr)
+        def writetext(xml, node, attr, value):
+            node.setAttribute(attr, value)
+        anonfuns = cls.gen_anon_basic(attr, spec, readtext, writetext)
+        return cls.gen_named_comp(attr, spec, anonfuns)
+
+    def gen_tag_member(cls, tag):
+        """generate helper funs for tag member of class"""
+        spec = getattr(cls, 't_' + tag)
+        def readtext(node, tag):
+            return getNodeText(getNode(node, tag))
+        def writetext(xml, node, tag, value):
+            xml.addTextNodeUnder(node, tag, value)
+        anonfuns = cls.gen_tag(tag, spec, readtext, writetext)
+        return cls.gen_named_comp(tag, spec, anonfuns)
+                    
+    def gen_named_comp(cls, token, spec, anonfuns):
+        """generate a named component tag/attr. a decoration of
+        anonymous functions that do not bind to variable names"""
+        name = cls.mixed_case(token)
+        token_type = spec[0]
+        req = spec[1]
+        (init_a, decode_a, encode_a, format_a) = anonfuns
+
+        def init(self):
+            setattr(self, name, init_a())
+            
+        def decode(self, node):
+            setattr(self, name, decode_a(node))
+            
+        def encode(self, xml):
+            if hasattr(self, name):
+                value = getattr(self, name)
+            else:
+                value = None
+            encode_a(xml, value)
+            
+        def format(self):
+            if hasattr(self, name):
+                value = getattr(self,name)
+                return '%s: %s\n' % (token, format_a(value))
+            else:
+                if req == mandatory:
+                    raise Error('Mandatory variable %s not available' % name)
+            return ''
+            
+        return (init, decode, encode, format)
+
+    def gen_tag(cls, tag, spec, readtext, writetext):
+        """generate readers and writers for the tag"""
+        tag_type = spec[0]
+        if type(tag_type) == types.TypeType:
+            return cls.gen_anon_basic(tag, spec, readtext, writetext)
+        elif type(tag_type) == types.ListType:
+            return cls.gen_list_tag(tag, spec, readtext, writetext)
+        elif type(tag_type) == types.ClassType:
+            return cls.gen_class_tag(tag, spec, readtext, writetext)
 
     def mixed_case(cls, identifier):
+        """helper function to turn token name into mixed case"""
         identifier_p = identifier[0].lower() + identifier[1:]
         return identifier_p
 
-    def gen_basic(cls, token, val, readtext, writetext):
-        """Generate a basic tag or attribute. This has got
-        to be pretty generic so we can invoke it from the complex
-        types such as Class and List"""
+    def gen_anon_basic(cls, token, spec, readtext, writetext):
+        """Generate a tag or attribute with one of the basic
+        types like integer. This has got to be pretty generic
+        so we can invoke it from the complex types such as Class
+        and List. The readtext and writetext arguments achieve
+        the text input I/O for this datatype."""
+        
         name = cls.mixed_case(token)
-        token_type = val[0]
-        req = val[1]
+        token_type = spec[0]
+        req = spec[1]
        
-        def initialize(self):
-            #print 'init:', name
-            setattr(self, name, None)
+        def initialize():
+            """default value for all basic types is None"""
+            return None
 
-        def decode(self, node):
+        def decode(node):
+            """decode from DOM node, the value, watching the spec"""
             text = readtext(node, token)
+            print 'read text ', text
             if text:
                 try:
                     value = autoxml.basic_cons_map[token_type](text)
                 except Error:
-                    raise Error('Type mismatch')
-                setattr(self, name, value)
+                    raise Error('Type mismatch: read text cannot be decoded')
+                return value
             else:
                 if req == mandatory:
                     raise Error('Mandatory argument not available')
                 else:
                     return None
 
-        def encode(self, xml, value):
+        def encode(xml, value):
+            """encode given value into xml file"""
             node = xml.newNode(cls.tag)
-            if hasattr(self, name):
+            if value:
                 writetext(xml, node, token, str(value))
             else:
                 if req == mandatory:
                     raise Error('Mandatory argument not available')
 
-        def format(self):
-            if hasattr(self, name):
-                return '%s: %s\n' % (token, str(getattr(self, name)))
-            else:
-                if req == mandatory:
-                    raise Error('Mandatory variable %s not available' % name)
-            return ""
+        def format(value):
+            return str(value)
 
         return initialize, decode, encode, format
 
-    def gen_basic_attr(cls, attr, spec):
-        """generate an attribute with a basic datatype"""
-        def readtext(node, attr):
-            return getNodeAttribute(node, attr)
-        def writetext(xml, node, attr, value):
-            node.setAttribute(attr, value)
-        return autoxml.gen_basic(cls, attr, spec, readtext, writetext)
-
-    def gen_basic_tag(cls, tag, spec):
-        """generate a tag with a basic datatype"""
-        def readtext(node, tag):
-            return getNodeText(getNode(node, tag))
-        def writetext(xml, node, tag, value):
-            xml.addTextNodeUnder(node, tag, value)
-        return autoxml.gen_basic(cls, tag, spec, readtext, writetext)
-
-    def gen_class_tag(cls, tag, val):
+    def gen_class_tag(cls, tag, spec, readtext, writetext):
         pass
 
-    def gen_list_tag(cls, tag, val):
+    def gen_list_tag(cls, tag, spec, readtext, writetext):
+        """ generate a list member of a class. we do not support
+        list members that are embedded in lists. """
         name = cls.mixed_case(tag)
-        tag_type = val[0]
-        req = val[1]
+        tag_type = spec[0]
+        req = spec[1]
 
-        if len(val)>=3:
-            path = val[2]               # an alternative path specified
+        if len(spec)>=3:
+            path = spec[2]               # an alternative path specified
         else:
             path = tag                  # otherwise it's the same name as
                                         # the tag
         if len(tag_type) != 1:
             raise Error('List type must contain only one element')
-        x = autoxml.gen_tag_aux(cls, tag, tag_type[0], val)    
+        def readtext(node, tag):
+            return getNodeText(node)
+        def writetext(xml, node, tag, value):
+            xml.addTextNode(node, value)
+        x = cls.gen_tag(tag, [tag_type[0], mandatory], readtext, writetext)
         (init_item, decode_item, encode_item, format_item) = x
 
-        def init(self):
-            setattr(self, name, [])
+        def init():
+            return []
 
-        def decode(self, node):
+        def decode(node):
             l = []
-            self.nodes = getAllNodes(node, path)
-            print 'F U', self.nodes
-            if len(self.nodes) is 0 and req is mandatory:
+            nodes = getAllNodes(node, path)
+            print 'F U', nodes
+            if len(nodes) is 0 and req is mandatory:
                 raise Error('Mandatory list empty')
-            for node in self.nodes:
-                l.append(decode_item(self, node))
+            for node in nodes:
+                l.append(decode_item(node))
             return l
 
-        def encode(self, xml, value):
+        def encode(xml, l):
             pass
 
-        def format(self):
+        def format(l):
             #print 'format:', name
             s = ''
-            l = getattr(self, name)
             for ix in range(len(l)):
-                s += str(ix) + format_item(l[ix])
+                s += str(ix+1) + ': ' + format_item(l[ix])
+                if ix != len(l)-1:
+                    s += ', '
             return s
         
         return (init, decode, encode, format)
