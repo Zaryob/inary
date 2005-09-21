@@ -297,6 +297,18 @@ class autoxml(type):
         identifier_p = identifier[0].lower() + identifier[1:]
         return identifier_p
 
+    def parse_spec(cls, token, spec):
+        name = cls.mixed_case(token)
+        token_type = spec[0]
+        req = spec[1]
+
+        if len(spec)>=3:
+            path = spec[2]               # an alternative path specified
+        else:
+            path = token                 # otherwise it's the same name as
+                                         # the token
+        return name, token_type, req, path
+
     def gen_anon_basic(cls, token, spec, readtext, writetext):
         """Generate a tag or attribute with one of the basic
         types like integer. This has got to be pretty generic
@@ -304,9 +316,7 @@ class autoxml(type):
         and List. The readtext and writetext arguments achieve
         the text input I/O for this datatype."""
         
-        name = cls.mixed_case(token)
-        token_type = spec[0]
-        req = spec[1]
+        name, token_type, req, path = cls.parse_spec(token, spec)
        
         def initialize():
             """default value for all basic types is None"""
@@ -343,27 +353,39 @@ class autoxml(type):
         return initialize, decode, encode, format
 
     def gen_class_tag(cls, tag, spec, readtext, writetext):
-        pass
+        """generate a class datatype"""
+        name, tag_type, req, path = cls.parse_spec(tag, spec)
+
+        def make_object():
+            pass
+
+        def init():
+            return None
+
+        def decode(node):
+            return None
+
+        def encode(xml, l):
+            pass
+
+        def format(l):
+            s = ''
+            return s
+        
+        return (init, decode, encode, format)
 
     def gen_list_tag(cls, tag, spec, readtext, writetext):
-        """ generate a list member of a class. we do not support
-        list members that are embedded in lists. """
-        name = cls.mixed_case(tag)
-        tag_type = spec[0]
-        req = spec[1]
-
-        if len(spec)>=3:
-            path = spec[2]               # an alternative path specified
-        else:
-            path = tag                  # otherwise it's the same name as
-                                        # the tag
+        """generate a list datatype"""
+        name, tag_type, req, path = cls.parse_spec(tag, spec)
         if len(tag_type) != 1:
             raise Error('List type must contain only one element')
-        def readtext(node, tag):
+
+        def readtext_item(node, tag):
             return getNodeText(node)
-        def writetext(xml, node, tag, value):
+        def writetext_item(xml, node, tag, value):
             xml.addTextNode(node, value)
-        x = cls.gen_tag(tag, [tag_type[0], mandatory], readtext, writetext)
+        x = cls.gen_tag(tag, [tag_type[0], mandatory],
+                        readtext_item, writetext_item)
         (init_item, decode_item, encode_item, format_item) = x
 
         def init():
