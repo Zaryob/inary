@@ -15,7 +15,7 @@
 
 # maintainer: baris and meren
 
-from os.path import join
+from os.path import join, exists
 
 import pisi
 import pisi.context as ctx
@@ -38,9 +38,15 @@ class Package:
         if url.is_remote_file():
             from fetcher import fetch_url
             dest = ctx.config.packages_dir()
-            fetch_url(url, dest, ctx.ui.Progress)
             self.filepath = join(dest, url.filename())
-
+            
+            # FIXME: exists is not enough, also sha1sum check needed \
+            #        when implemented in pisi-index.xml
+            if not exists(self.filepath):
+                fetch_url(url, dest, ctx.ui.Progress)
+            else:
+                ctx.ui.info('%s [cached]' % url.filename())
+                
         self.impl = archive.ArchiveZip(self.filepath, 'zip', mode)
 
     def add_to_package(self, fn):
