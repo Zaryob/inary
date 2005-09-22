@@ -299,6 +299,8 @@ class autoxml(type):
         return identifier_p
 
     def parse_spec(cls, token, spec):
+        """decompose member specification"""
+
         name = cls.mixed_case(token)
         token_type = spec[0]
         req = spec[1]
@@ -378,12 +380,18 @@ class autoxml(type):
                 else:
                     return None
 
-        def encode(xml, value):
-            pass
-
-        def format(l):
-            s = ''
-            return s
+        def encode(xml, obj):
+            if obj:
+                try:
+                    obj.encode(xml)
+                except Error:
+                    raise Error('Object cannot be encoded')                    
+            else:
+                if req == mandatory:
+                    raise Error('Mandatory argument not available')
+                
+        def format(obj):
+            return obj.format()
         
         return (init, decode, encode, format)
 
@@ -415,7 +423,13 @@ class autoxml(type):
             return l
 
         def encode(xml, l):
-            pass
+            if len(l) > 0:                
+                for elt in l:
+                    node = xml.newNode(path)
+                    encode_item(xml, node)
+            else:
+                if req is mandatory:
+                    raise Error('Mandatory list empty')
 
         def format(l):
             #print 'format:', name

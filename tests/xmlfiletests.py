@@ -54,14 +54,17 @@ class XmlFileTestCase(unittest.TestCase):
         string = a.format()
         print '*', string
         #self.assert_(string.startswith('Name'))
-        outfn = '/tmp/a2.xml'
+        xml = xmlfile.XmlFile('A')
+        elta = a.encode(xml)
+        xml.writexml('/tmp/a.xml')
         xml = xmlfile.XmlFile('A')
         a2 = A()
         a2.name = "Baris Metin"
         a2.email = "baris@uludag.org.tr"
         a2.href = 'http://cekirdek.uludag.org.tr/~baris'
         a2.projects = [ 'pisi', 'tasma', 'plasma' ]
-        elt = a2.encode(xml)
+        elta2 = a2.encode(xml)
+        xml.writexml('/tmp/a2.xml')
         string = a2.format()
 
 suite = unittest.makeSuite(XmlFileTestCase)
