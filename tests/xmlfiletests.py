@@ -26,6 +26,7 @@ class XmlFileTestCase(unittest.TestCase):
         pisi.api.init(False)
     
     def testMetaClass(self):
+
         class OtherInfo:
             __metaclass__ = xmlfile.autoxml
             t_BirthDate = [types.StringType, xmlfile.mandatory]

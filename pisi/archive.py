@@ -145,17 +145,19 @@ class ArchiveZip(ArchiveBase):
 
                 ofile = os.path.join(target_dir, outpath)
 
-                if is_dir:               # a directory is present.
-                    os.mkdir(os.path.join(target_dir, info.filename))
+                if is_dir:               # this is a directory
+                    os.makedirs(os.path.join(target_dir, info.filename))
                     continue
 
                 # check that output dir is present
                 util.check_dir(os.path.dirname(ofile))
 
+                # remove output file we might be overwriting
+                if os.path.exists(ofile):
+                    os.remove(ofile)
+ 
                 if info.external_attr == self.symmagic:
                     target = zip_obj.read(info.filename)
-                    if os.path.exists(ofile):
-                        os.remove(ofile)
                     os.symlink(target, ofile)
                 else:
                     perm = info.external_attr
