@@ -208,14 +208,16 @@ class autoxml(type):
 
         cls.decoders = decoders
         def decode(self, node):
-            for decoder in self.__class__.decoders:
-                decoder(self, node)
+            for decode_member in self.__class__.decoders:
+                decode_member(self, node)
         cls.decode = decode
 
         cls.encoders = encoders
         def encode(self, xml):
-            for encoder in self.__class__.encoders:
-                encoder(self, xml)
+            node = xml.newNode(cls.tag)
+            for encode_member in self.__class__.encoders:
+                encode_member(self, xml, node)
+            return node
         cls.encode = encode
 
         cls.formatters = formatters
@@ -236,22 +238,33 @@ class autoxml(type):
         assert type(tag_type) == type(type)
         def readtext(node, attr):
             return getNodeAttribute(node, attr)
-        def writetext(xml, node, attr, value):
-            node.setAttribute(attr, value)
-        anonfuns = cls.gen_anon_basic(attr, spec, readtext, writetext)
-        return cls.gen_named_comp(attr, spec, anonfuns)
+        def createnode(xml, attr):
+            return xml.newAttribute(attr)
+        def writetext(node, attr, text):
+            attr.value = text
+            node.setAttributeNode(attr)
+        anonfuns = cls.gen_anon_basic(attr, spec, readtext, createnode, writetext)
+        def mergetext(node, attr):
+            pass
+        return cls.gen_named_comp(attr, spec, anonfuns, mergetext)
 
     def gen_tag_member(cls, tag):
         """generate helper funs for tag member of class"""
         spec = getattr(cls, 't_' + tag)
-        def readtext(node, tag):
-            return getNodeText(getNode(node, tag))
-        def writetext(xml, node, tag, value):
-            xml.addTextNodeUnder(node, tag, value)
-        anonfuns = cls.gen_tag(tag, spec, readtext, writetext)
-        return cls.gen_named_comp(tag, spec, anonfuns)
+        def readtext(node, tagpath):
+            return getNodeText(getNode(node, tagpath))
+        def createnode(xml, tag):
+            return xml.newNode(tag)
+        def writetext(node, text):
+            node.addText(node, text)
+        anonfuns = cls.gen_tag(tag, spec, createnode, readtext, writetext)
+        def mergetext(xml, node, tagpath):
+            pass
+            head, tail = cls.tagpath_head_last(tagpath)
+            subnode = xml.newNode(tail)
+        return cls.gen_named_comp(tag, spec, anonfuns, mergetext)
                     
-    def gen_named_comp(cls, token, spec, anonfuns):
+    def gen_named_comp(cls, token, spec, anonfuns, createnode):
         """generate a named component tag/attr. a decoration of
         anonymous functions that do not bind to variable names"""
         name = cls.mixed_case(token)
@@ -260,17 +273,20 @@ class autoxml(type):
         (init_a, decode_a, encode_a, format_a) = anonfuns
 
         def init(self):
+            """initialize component"""
             setattr(self, name, init_a())
             
         def decode(self, node):
+            """decode component from DOM node"""
             setattr(self, name, decode_a(node))
             
-        def encode(self, xml):
+        def encode(self, xml, node):
+            """encode self inside, possibly new, DOM node using xml"""
             if hasattr(self, name):
                 value = getattr(self, name)
             else:
                 value = None
-            encode_a(xml, value)
+            return encode_a(xml, self.dom.documentElement, value)
             
         def format(self):
             if hasattr(self, name):
@@ -283,11 +299,11 @@ class autoxml(type):
             
         return (init, decode, encode, format)
 
-    def gen_tag(cls, tag, spec, readtext, writetext):
+    def gen_tag(cls, tag, spec, readtext, createnode, writetext):
         """generate readers and writers for the tag"""
         tag_type = spec[0]
         if type(tag_type) is types.TypeType:
-            return cls.gen_anon_basic(tag, spec, readtext, writetext)
+            return cls.gen_anon_basic(tag, spec, readtext, createnode, writetext)
         elif type(tag_type) is types.ListType:
             return cls.gen_list_tag(tag, spec)
         elif type(tag_type) is autoxml or type(tag_type) is types.ClassType:
@@ -298,9 +314,16 @@ class autoxml(type):
         identifier_p = identifier[0].lower() + identifier[1:]
         return identifier_p
 
+    def tagpath_head_last(cls, tag_path):
+        "returns split of the tag path into last tag and the rest"
+        try:
+            lastsep = tagpath.rindex('/')
+        except ValueError, e:
+            return ('', tag_path)
+        return (tag_path[:laststep], tag_path[laststep+1:])
+
     def parse_spec(cls, token, spec):
         """decompose member specification"""
-
         name = cls.mixed_case(token)
         token_type = spec[0]
         req = spec[1]
@@ -312,14 +335,14 @@ class autoxml(type):
                                          # the token
         return name, token_type, req, path
 
-    def gen_anon_basic(cls, token, spec, readtext, writetext):
+    def gen_anon_basic(cls, token, spec, readtext, createnode, writetext):
         """Generate a tag or attribute with one of the basic
         types like integer. This has got to be pretty generic
-        so we can invoke it from the complex types such as Class
+        so that we can invoke it from the complex types such as Class
         and List. The readtext and writetext arguments achieve
-        the text input I/O for this datatype."""
+        the DOM text access for this datatype."""
         
-        name, token_type, req, path = cls.parse_spec(token, spec)
+        name, token_type, req, tagpath = cls.parse_spec(token, spec)
        
         def initialize():
             """default value for all basic types is None"""
@@ -327,7 +350,7 @@ class autoxml(type):
 
         def decode(node):
             """decode from DOM node, the value, watching the spec"""
-            text = readtext(node, token)
+            text = readtext(node, tagpath)
             print 'read text ', text
             if text:
                 try:
@@ -341,16 +364,19 @@ class autoxml(type):
                 else:
                     return None
 
-        def encode(xml, value):
-            """encode given value into xml file"""
-            node = xml.newNode(cls.tag)
+        def encode(xml, node, value):
+            """encode given value inside DOM node"""
             if value:
-                writetext(xml, node, token, str(value))
+                path = cls.tagpath_head_last(tagpath)
+                node = createnode(xml, token)
+                writetext(node, str(value))
+                return node
             else:
                 if req == mandatory:
                     raise Error('Mandatory argument not available')
 
         def format(value):
+            """format value for pretty printing"""
             return str(value)
 
         return initialize, decode, encode, format
@@ -383,7 +409,7 @@ class autoxml(type):
         def encode(xml, obj):
             if obj:
                 try:
-                    obj.encode(xml)
+                    return obj.encode(xml)
                 except Error:
                     raise Error('Object cannot be encoded')                    
             else:
@@ -401,12 +427,14 @@ class autoxml(type):
         if len(tag_type) != 1:
             raise Error('List type must contain only one element')
 
-        def readtext_item(node, tag):
-            return getNodeText(node)
-        def writetext_item(xml, node, tag, value):
-            xml.addTextNode(node, value)
+        def readtext(node, tagpath):
+            return getNodeText(getNode(node, tagpath))
+        def createnode(xml, tag):
+            return xml.newNode(tag)
+        def writetext(node, text):
+            node.addText(node, text)
         x = cls.gen_tag(tag, [tag_type[0], mandatory],
-                        readtext_item, writetext_item)
+                        readtext, createnode, writetext)
         (init_item, decode_item, encode_item, format_item) = x
 
         def init():
@@ -422,11 +450,13 @@ class autoxml(type):
                 l.append(decode_item(node))
             return l
 
-        def encode(xml, l):
+        def encode(xml, node, l):
             if len(l) > 0:                
-                for elt in l:
-                    node = xml.newNode(path)
-                    encode_item(xml, node)
+                for item in l:
+                    item_node = xml.newNode(path)
+                    encode_item(xml, item, item_node)
+                    xml.addTextNodeUnder(item_node)
+                return node
             else:
                 if req is mandatory:
                     raise Error('Mandatory list empty')
@@ -488,7 +518,7 @@ class XmlFile(object):
     def newTextNode(self, text):
         return self.dom.createTextNode(text)
 
-    def newAttribute(self, name):
+    def newAttribute(self, attr):
         return self.dom.createAttribute(name)
 
     # read helpers
@@ -535,17 +565,18 @@ class XmlFile(object):
     # write helpers
 
     def addNode(self, tagPath, newnode = None):
+        "this adds the newnode under given tag path"
         self.verifyRootTag()
         return addNode(self.dom, self.dom.documentElement, tagPath,
                        newnode)
 
     def addNodeUnder(self, node, tagPath, newnode = None):
-        "this adds the new stuff under node"
+        "this adds the new stuff under node and then following tag path"
         self.verifyRootTag()
         return addNode(self.dom, node, tagPath, newnode)
 
     def addChild(self, newnode):
-        """add a new child node right under root element document"""
+        "add a new child node right under root element document"
         self.dom.documentElement.appendChild(newnode)
 
     def addText(self, node, text):
@@ -553,7 +584,7 @@ class XmlFile(object):
         node.appendChild(self.newTextNode(text))
 
     def addTextNode(self, tagPath, text):
-        "add a text node with tag path"
+        "add a text node with given tag path"
         node = self.addNode(tagPath, self.newTextNode(text))
         return node
 

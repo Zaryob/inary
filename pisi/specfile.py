@@ -22,7 +22,6 @@
 files are specification files for PISI source packages. This module
 provides read and write access to PSPEC files."""
 
-
 # standard python modules
 from os.path import basename
 
@@ -32,7 +31,6 @@ from pisi.xmlext import *
 from pisi.xmlfile import XmlFile
 from pisi.dependency import DepInfo
 from pisi.util import Checks
-
 
 #class Packager:
 #    __metaclass__ = xmlfile.autoxml
@@ -284,6 +282,7 @@ class SourceInfo:
             err.join(dep.has_errors())
         
         return err.list
+
 
 class PackageInfo:
     """A structure to hold package information. Package information is

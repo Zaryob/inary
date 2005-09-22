@@ -22,6 +22,7 @@ import pisi.util as util
 from pisi.xmlext import *
 
 class XmlFileTestCase(unittest.TestCase):
+
     def setUp(self):
         pisi.api.init(False)
     
@@ -55,7 +56,7 @@ class XmlFileTestCase(unittest.TestCase):
         print '*', string
         #self.assert_(string.startswith('Name'))
         xml = xmlfile.XmlFile('A')
-        elta = a.encode(xml)
+        a.encode(xml)
         xml.writexml('/tmp/a.xml')
         xml = xmlfile.XmlFile('A')
         a2 = A()
@@ -63,7 +64,7 @@ class XmlFileTestCase(unittest.TestCase):
         a2.email = "baris@uludag.org.tr"
         a2.href = 'http://cekirdek.uludag.org.tr/~baris'
         a2.projects = [ 'pisi', 'tasma', 'plasma' ]
-        elta2 = a2.encode(xml)
+        a2.encode(xml)
         xml.writexml('/tmp/a2.xml')
         string = a2.format()
 
