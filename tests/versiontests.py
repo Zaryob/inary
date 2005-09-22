@@ -12,13 +12,11 @@ import unittest
 import os
 
 from pisi import version
-from pisi import util
-from pisi import context
 
 class VersionTestCase(unittest.TestCase):
     def setUp(self):
         pass
-        
+
     def testOps(self):
         v1 = version.Version("0.3.1")
         v2 = version.Version("0.3.5")
@@ -28,5 +26,27 @@ class VersionTestCase(unittest.TestCase):
         self.assert_(v3 > v2)
         self.assert_(v1 <= v3)
         self.assert_(v4 >= v4)
+
+        # with keywords
+        v1 = version.Version("2.23_pre10")
+        v2 = version.Version("2.23")
+        v3 = version.Version("2.21")
+        v4 = version.Version("2.23_p1")
+        v5 = version.Version("2.23_beta1")
+        self.assert_(v1 < v2)
+        self.assert_(v1 > v3)
+        self.assert_(v1 < v4)
+        self.assert_(v1 > v5)
+        self.assert_(v2 < v4)
+        self.assert_(v2 > v5)
+
+        # with character
+        v1 = version.Version("2.10a")
+        v2 = version.Version("2.10")
+        v3 = version.Version("2.10d")
+        self.assert_(v1 > v2)
+        self.assert_(v1 < v3)
+        self.assert_(v2 < v3)
+        
 
 suite = unittest.makeSuite(VersionTestCase)
