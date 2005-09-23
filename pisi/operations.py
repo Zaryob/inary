@@ -41,9 +41,16 @@ def remove_single(package_name):
         # with a prefix and leaving the user to edit it. In the future
         # we'll have a plan for these configuration files.
         if fileinfo.type == ctx.const.conf:
-            os.rename(fpath, fpath + ".pisi")
+            if os.path.isfile(fpath):
+                os.rename(fpath, fpath + ".pisi")
         else:
-            os.unlink(fpath)
+            try:
+                os.unlink(fpath)
+            except OSError:
+                # file is removed (maybe manually)
+                # FIXME: should give a warning
+                pass
+
     ctx.installdb.remove(package_name)
     packagedb.remove_package(package_name)
 
