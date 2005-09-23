@@ -14,6 +14,7 @@ __version__ = "0.1"
 import sys
 
 import pisi
+import pisi.context as ctx
 from pisi.ui import UI
 from pisi.cli.colors import colorize
 
