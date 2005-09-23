@@ -31,7 +31,8 @@ def getNodeAttribute(node, attrname):
     return node.getAttribute(attrname)
 
 def getTagByName(parent, childName):
-    return [x for x in parent.childNodes if x.nodeType == x.ELEMENT_NODE if x.tagName == childName]
+    return [x for x in parent.childNodes
+            if x.nodeType == x.ELEMENT_NODE if x.tagName == childName]
 
 def getNodeText(node, tagpath = ""):
     """get the first child and expect it to be text!"""
@@ -131,6 +132,10 @@ def addNode(dom, node, tagpath, newnode = None):
     tags = []
     if tagpath != "":
         tags = tagpath.split('/')           # tag chain
+    else:
+        addTagPath(dom, node, [], newnode)
+        return node
+        
     assert len(tags)>0                  # we want a chain
 
     # iterative code to search for the path

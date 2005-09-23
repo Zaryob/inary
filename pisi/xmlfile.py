@@ -163,6 +163,7 @@ class autoxml(type):
     """
 
     def __init__(cls, name, bases, dict):
+        """entry point for metaclass code"""
         print 'generating class', name
 
         # add XmlFile as one of the superclasses, we're smart
@@ -202,6 +203,7 @@ class autoxml(type):
         # generate top-level helper functions
         cls.initializers = inits
         def initialize(self):
+#            XmlFile.__init__(self, cls.tag)
             for init in self.__class__.initializers:
                 init(self)
         cls.__init__ = initialize
@@ -217,6 +219,7 @@ class autoxml(type):
             node = xml.newNode(cls.tag)
             for encode_member in self.__class__.encoders:
                 encode_member(self, xml, node)
+            xml.dom.documentElement = node
             return node
         cls.encode = encode
 
@@ -238,33 +241,42 @@ class autoxml(type):
         assert type(tag_type) == type(type)
         def readtext(node, attr):
             return getNodeAttribute(node, attr)
-        def createnode(xml, attr):
-            return xml.newAttribute(attr)
-        def writetext(node, attr, text):
+        def createnode(xml, attr_name):
+            return xml.newAttribute(attr_name)  # create an attribute node
+        def writetext(xml, attr, nil, text):
             attr.value = text
-            node.setAttributeNode(attr)
         anonfuns = cls.gen_anon_basic(attr, spec, readtext, createnode, writetext)
         def mergetext(node, attr):
-            pass
+            node.setAttributeNode(node, attr)
         return cls.gen_named_comp(attr, spec, anonfuns, mergetext)
 
     def gen_tag_member(cls, tag):
         """generate helper funs for tag member of class"""
         spec = getattr(cls, 't_' + tag)
-        def readtext(node, tagpath):
-            return getNodeText(getNode(node, tagpath))
-        def createnode(xml, tag):
-            return xml.newNode(tag)
-        def writetext(node, text):
-            node.addText(node, text)
-        anonfuns = cls.gen_tag(tag, spec, createnode, readtext, writetext)
-        def mergetext(xml, node, tagpath):
-            pass
-            head, tail = cls.tagpath_head_last(tagpath)
-            subnode = xml.newNode(tail)
+        anonfuns = cls.gen_tag(tag, spec)
+        def mergetext(node, newnode):
+            print 'mergenode', node, newnode
+            node.appendChild(newnode)
         return cls.gen_named_comp(tag, spec, anonfuns, mergetext)
                     
-    def gen_named_comp(cls, token, spec, anonfuns, createnode):
+    def gen_tag(cls, tag, spec):
+        """generate readers and writers for the tag"""
+        tag_type = spec[0]
+        if type(tag_type) is types.TypeType:
+            def readtext(node, tagpath):
+                return getNodeText(node, tagpath)
+            def createnode(xml, tag):
+                return xml.newNode(tag)
+            def writetext(xml, node, tagpath, text):
+                xml.addTextNodeUnder(node, tagpath, text)
+            return cls.gen_anon_basic(tag, spec, readtext,
+                                      createnode, writetext)
+        elif type(tag_type) is types.ListType:
+            return cls.gen_list_tag(tag, spec)
+        elif type(tag_type) is autoxml or type(tag_type) is types.ClassType:
+            return cls.gen_class_tag(tag, spec)
+
+    def gen_named_comp(cls, token, spec, anonfuns, mergetext):
         """generate a named component tag/attr. a decoration of
         anonymous functions that do not bind to variable names"""
         name = cls.mixed_case(token)
@@ -286,7 +298,9 @@ class autoxml(type):
                 value = getattr(self, name)
             else:
                 value = None
-            return encode_a(xml, self.dom.documentElement, value)
+            newnode = encode_a(xml, value)
+            if newnode:
+                mergetext(node, newnode)
             
         def format(self):
             if hasattr(self, name):
@@ -299,28 +313,20 @@ class autoxml(type):
             
         return (init, decode, encode, format)
 
-    def gen_tag(cls, tag, spec, readtext, createnode, writetext):
-        """generate readers and writers for the tag"""
-        tag_type = spec[0]
-        if type(tag_type) is types.TypeType:
-            return cls.gen_anon_basic(tag, spec, readtext, createnode, writetext)
-        elif type(tag_type) is types.ListType:
-            return cls.gen_list_tag(tag, spec)
-        elif type(tag_type) is autoxml or type(tag_type) is types.ClassType:
-            return cls.gen_class_tag(tag, spec)
-
     def mixed_case(cls, identifier):
         """helper function to turn token name into mixed case"""
-        identifier_p = identifier[0].lower() + identifier[1:]
-        return identifier_p
+        if identifier is "":
+            return ""
+        else:
+            return identifier[0].lower() + identifier[1:]
 
-    def tagpath_head_last(cls, tag_path):
+    def tagpath_head_last(cls, tagpath):
         "returns split of the tag path into last tag and the rest"
         try:
             lastsep = tagpath.rindex('/')
         except ValueError, e:
-            return ('', tag_path)
-        return (tag_path[:laststep], tag_path[laststep+1:])
+            return ('', tagpath)
+        return (tagpath[:lastsep], tagpath[lastsep+1:])
 
     def parse_spec(cls, token, spec):
         """decompose member specification"""
@@ -364,12 +370,12 @@ class autoxml(type):
                 else:
                     return None
 
-        def encode(xml, node, value):
+        def encode(xml, value):
             """encode given value inside DOM node"""
             if value:
-                path = cls.tagpath_head_last(tagpath)
-                node = createnode(xml, token)
-                writetext(node, str(value))
+                head, last = cls.tagpath_head_last(tagpath)
+                node = createnode(xml, last)
+                writetext(xml, node, head, str(value))
                 return node
             else:
                 if req == mandatory:
@@ -424,17 +430,19 @@ class autoxml(type):
     def gen_list_tag(cls, tag, spec):
         """generate a list datatype"""
         name, tag_type, req, path = cls.parse_spec(tag, spec)
+        head, last = cls.tagpath_head_last(path)
+
         if len(tag_type) != 1:
             raise Error('List type must contain only one element')
 
-        def readtext(node, tagpath):
-            return getNodeText(getNode(node, tagpath))
-        def createnode(xml, tag):
-            return xml.newNode(tag)
-        def writetext(node, text):
-            node.addText(node, text)
-        x = cls.gen_tag(tag, [tag_type[0], mandatory],
-                        readtext, createnode, writetext)
+#        def readtext(node, tagpath):
+#            print 'shit', node, tagpath
+#            return getNodeText(node)
+#        def createnode(xml, tag):
+#            return xml.newNode(last)
+#        def writetext(node, text):
+#            node.addText(node, text)
+        x = cls.gen_tag(last, [tag_type[0], mandatory])
         (init_item, decode_item, encode_item, format_item) = x
 
         def init():
@@ -447,16 +455,18 @@ class autoxml(type):
             if len(nodes) is 0 and req is mandatory:
                 raise Error('Mandatory list empty')
             for node in nodes:
-                l.append(decode_item(node))
+                dummy = node.ownerDocument.createElement(last)
+                dummy.appendChild(node)
+                l.append(decode_item(dummy))
             return l
 
-        def encode(xml, node, l):
-            if len(l) > 0:                
+        def encode(xml, l):
+            dummy = xml.newNode("Dummy")
+            if len(l) > 0:
                 for item in l:
-                    item_node = xml.newNode(path)
-                    encode_item(xml, item, item_node)
-                    xml.addTextNodeUnder(item_node)
-                return node
+                    item_node = encode_item(xml, item)
+                    xml.addNodeUnder(dummy, last, item_node)
+                return getNode(dummy, "Dummy")
             else:
                 if req is mandatory:
                     raise Error('Mandatory list empty')
@@ -519,11 +529,11 @@ class XmlFile(object):
         return self.dom.createTextNode(text)
 
     def newAttribute(self, attr):
-        return self.dom.createAttribute(name)
+        return self.dom.createAttribute(attr)
 
     # read helpers
 
-    def getNode(self, tagPath):
+    def getNode(self, tagPath = ""):
         """returns the *first* matching node for given tag path."""
         self.verifyRootTag()
         return getNode(self.dom.documentElement, tagPath)
@@ -590,4 +600,5 @@ class XmlFile(object):
 
     def addTextNodeUnder(self, node, tagPath, text):
         "add a text node under given node with tag path (phew)"
+        print "addtextnodeunder", node, tagPath, text
         return self.addNodeUnder(node, tagPath, self.newTextNode(text))
