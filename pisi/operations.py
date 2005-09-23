@@ -44,12 +44,12 @@ def remove_single(package_name):
             if os.path.isfile(fpath):
                 os.rename(fpath, fpath + ".pisi")
         else:
-            try:
+            # check if file is removed manually.
+            # And we don't remove directories!
+            # FIXME: should give a warning if it is...
+            if os.path.isfile(fpath):
                 os.unlink(fpath)
-            except OSError:
-                # file is removed (maybe manually)
-                # FIXME: should give a warning
-                pass
+
 
     ctx.installdb.remove(package_name)
     packagedb.remove_package(package_name)
