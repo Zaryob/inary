@@ -147,7 +147,7 @@ class ArchiveZip(ArchiveBase):
 
                 if is_dir:               # this is a directory
                     try: # To get rid of Error:[Errno 17] File exists: errors
-                        os.makedirs(os.path.join(target_dir, info.filename))
+                        os.makedirs(os.path.join(target_dir, outpath))
                     except OSError:
                         pass
                     continue
