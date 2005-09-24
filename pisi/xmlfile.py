@@ -507,8 +507,10 @@ class XmlFile(object):
         f.close()
 
     def verifyRootTag(self):
-        if self.dom.documentElement.tagName != self.rootTag:
-            raise Error("Root tagname not " + self.rootTag + " as expected")
+        actual_roottag = self.dom.documentElement.tagName
+        if actual_roottag != self.rootTag:
+            raise Error("Root tagname %s not identical to %s as expected " %
+                        (actual_roottag, self.rootTag) )
 
     # construction helpers
 
