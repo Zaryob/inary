@@ -143,19 +143,14 @@ class autoxml(type):
 
     class Company:
         __metaclass__ = autoxml
-        t_Employees = [ [Employee], xmlfile.mandatory]
+        t_Employees = [ [Employee], xmlfile.mandatory, 'Employee']
 
-    Logically, inside the Company tag, we will have several Employee
-    tags, which are inserted to the Employees instance variable of
+    Logically, inside the Company/Employees tag, we will have several
+    Employes tags, which are inserted to the Employees instance variable of
     Company in order of appearance.
+
     The mandatory flag here asserts that at least one such record
     is to be found.
-
-    It is also possible to change the XML path we expect the tag in,
-    just like with any other tag.
-
-         t_Employees = [ [Employee], xmlfile.mandatory, 'Employees/Employee']
-
 
     You see, it works like magic, when it works of course. All of it
     done without a single brain exploding.
