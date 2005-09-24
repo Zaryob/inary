@@ -56,9 +56,9 @@ class XmlFileTestCase(unittest.TestCase):
         print '*', string
         #self.assert_(string.startswith('Name'))
         xml = xmlfile.XmlFile('A')
-        a.otherInfo.encode(xml)
+        a.encode(xml)
         xml.writexml('/tmp/a.xml')
-        print 'A DONE'
+        print '/tmp/a.xml written'
         return
         xml = xmlfile.XmlFile('A')
         a2 = A()
