@@ -32,7 +32,7 @@ class XmlFileTestCase(unittest.TestCase):
             __metaclass__ = xmlfile.autoxml
             t_BirthDate = [types.StringType, xmlfile.mandatory]
             t_Interest = [types.StringType, xmlfile.optional]
-            t_CodesWith = [ [types.StringType], xmlfile.optional, 'CodesWith/Person']
+            t_CodesWith = [ [types.StringType], xmlfile.optional, 'Person']
         
         class A:
             __metaclass__ = xmlfile.autoxml
@@ -40,7 +40,7 @@ class XmlFileTestCase(unittest.TestCase):
             t_Number = [types.IntType, xmlfile.optional]
             t_Email = [types.StringType, xmlfile.optional]
             a_href = [types.StringType, xmlfile.mandatory]
-            t_Projects = [ [types.StringType], xmlfile.mandatory, 'Projects/Project']
+            t_Projects = [ [types.StringType], xmlfile.mandatory, 'Project']
             t_OtherInfo = [ OtherInfo, xmlfile.optional ]
 
         a = A()

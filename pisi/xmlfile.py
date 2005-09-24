@@ -356,7 +356,7 @@ class autoxml(type):
 
         def decode(node):
             """decode from DOM node, the value, watching the spec"""
-            text = readtext(node, tagpath)
+            text = readtext(node, token)
             print 'read text ', text
             if text:
                 try:
@@ -373,9 +373,8 @@ class autoxml(type):
         def encode(xml, value):
             """encode given value inside DOM node"""
             if value:
-                head, last = cls.tagpath_head_last(tagpath)
-                node = createnode(xml, last)
-                writetext(xml, node, head, str(value))
+                node = createnode(xml, token)
+                writetext(xml, node, token, str(value))
                 return node
             else:
                 if req == mandatory:
@@ -398,7 +397,7 @@ class autoxml(type):
             return make_object()
 
         def decode(node):
-            node = getNode(node, path)
+            node = getNode(node, tag)
             if node:
                 try:
                     obj = make_object()
@@ -415,7 +414,9 @@ class autoxml(type):
         def encode(xml, obj):
             if obj:
                 try:
-                    return obj.encode(xml)
+                    node = obj.encode(xml)
+                    #FIXME: change node's tag?
+                    return 
                 except Error:
                     raise Error('Object cannot be encoded')                    
             else:
@@ -428,21 +429,14 @@ class autoxml(type):
         return (init, decode, encode, format)
 
     def gen_list_tag(cls, tag, spec):
-        """generate a list datatype"""
-        name, tag_type, req, path = cls.parse_spec(tag, spec)
-        head, last = cls.tagpath_head_last(path)
+        """generate a list datatype. stores comps in tag/comp_tag"""
+        name, tag_type, req, comp_tag = cls.parse_spec(tag, spec)
+        #head, last = cls.tagpath_head_last(path)
 
         if len(tag_type) != 1:
             raise Error('List type must contain only one element')
 
-#        def readtext(node, tagpath):
-#            print 'shit', node, tagpath
-#            return getNodeText(node)
-#        def createnode(xml, tag):
-#            return xml.newNode(last)
-#        def writetext(node, text):
-#            node.addText(node, text)
-        x = cls.gen_tag(last, [tag_type[0], mandatory])
+        x = cls.gen_tag(comp_tag, [tag_type[0], mandatory])
         (init_item, decode_item, encode_item, format_item) = x
 
         def init():
@@ -450,12 +444,13 @@ class autoxml(type):
 
         def decode(node):
             l = []
-            nodes = getAllNodes(node, path)
+            nodes = getAllNodes(node, tag + '/' + comp_tag)
+            print node, tag + '/' + comp_tag
             print 'F U', nodes
             if len(nodes) is 0 and req is mandatory:
                 raise Error('Mandatory list empty')
             for node in nodes:
-                dummy = node.ownerDocument.createElement(last)
+                dummy = node.ownerDocument.createElement("Dummy")
                 dummy.appendChild(node)
                 l.append(decode_item(dummy))
             return l
@@ -465,7 +460,7 @@ class autoxml(type):
             if len(l) > 0:
                 for item in l:
                     item_node = encode_item(xml, item)
-                    xml.addNodeUnder(dummy, last, item_node)
+                    xml.addNodeUnder(dummy, comp_tag, item_node)
                 return getNode(dummy, "Dummy")
             else:
                 if req is mandatory:
