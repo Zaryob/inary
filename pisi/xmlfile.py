@@ -242,7 +242,7 @@ class autoxml(type):
             attr.value = text
         anonfuns = cls.gen_anon_basic(attr, spec, readtext, createnode, writetext)
         def mergetext(node, attr):
-            node.setAttributeNode(node, attr)
+            node.setAttributeNode(attr)
         return cls.gen_named_comp(attr, spec, anonfuns, mergetext)
 
     def gen_tag_member(cls, tag):
