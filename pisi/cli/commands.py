@@ -691,12 +691,17 @@ Gives a brief list of PiSi components published in the repository.
 
     def print_packages(self, repo):
         from pisi import packagedb
+        from colors import colorize
 
         pkg_db = packagedb.get_db(repo)
         list = pkg_db.list_packages()
+        installed_list = ctx.installdb.list_installed()
         list.sort()
         for p in list:
-            print p
+            if p in installed_list:
+                print colorize(p, "cyan")
+            else:
+                print p
 
 class ListUpgrades(Command):
     """List packages to be upgraded
