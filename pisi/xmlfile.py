@@ -592,5 +592,4 @@ class XmlFile(object):
 
     def addTextNodeUnder(self, node, tagPath, text):
         "add a text node under given node with tag path (phew)"
-        print "addtextnodeunder", node, tagPath, text
         return self.addNodeUnder(node, tagPath, self.newTextNode(text))
