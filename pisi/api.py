@@ -509,7 +509,7 @@ def prepare_for_build(pspecfile, authInfo=None):
     # FIXME: take care of the required buildDeps...
     # For now just report an error!
     if dep_unsatis:
-        ctx.ui.error("Unsatisfied Build Dependencies:\n")
+        ctx.ui.error("Unsatisfied Build Dependencies:")
         for dep in dep_unsatis:
             ctx.ui.error(dep.package)
 # FIXME: Don't exit for now! It's annoying to test on a system that
