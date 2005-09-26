@@ -499,6 +499,21 @@ def prepare_for_build(pspecfile, authInfo=None):
         url.uri = fs.fetch_all()
 
     pb = PisiBuild(url.uri)
+
+    # find out the build dependencies that are not satisfied...
+    dep_unsatis = []
+    for dep in pb.spec.source.buildDeps:
+        if not dependency.installed_satisfies_dep(dep):
+            dep_unsatis.append(dep)
+
+    # FIXME: take care of the required buildDeps...
+    # For now just report an error!
+    if dep_unsatis:
+        ctx.ui.error("Unsatisfied Build Dependencies:\n")
+        for dep in dep_unsatis:
+            ctx.ui.error(dep.package)
+        sys.exit(1)
+
     return pb
 
 def build(pspecfile, authInfo=None):
