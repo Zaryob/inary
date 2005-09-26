@@ -331,33 +331,6 @@ specified a package name, it should exist in a specified repository.
         pisi.api.install(self.args)
         self.finalize()
 
-
-class InstallAvailable(Command):
-    """Install available packages in the repositories
-
-Usage: install-available [ <repo1> <repo2> ... repon ]
-
-Install all packages in the given repository.
-"""
-    __metaclass__ = autocommand
-
-    def __init__(self):
-        super(InstallAvailable, self).__init__()
-
-    name = ("install-available", "ia")
-
-    def run(self):
-	from pisi import packagedb
-
-        self.init()
-
-        # iterate over repos
-        for repo in ctx.repodb.list():
-            pkg_db = packagedb.get_db(repo)
-            # get all packages from repo and install them
-            pisi.api.install(pkg_db.list_packages())
-        self.finalize()
-
 class Upgrade(PackageOp):
     """Upgrade PISI packages
 
