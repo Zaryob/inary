@@ -355,8 +355,7 @@ class PisiBuild:
                     old_package_fn = os.path.join(root, fn)
                     ctx.ui.info('(found old version %s)' % old_package_fn)
                     old_pkg = Package(old_package_fn, 'r')
-                    from os.path import join
-                    old_pkg.read(join(ctx.config.tmp_dir(), 'oldpkg'))
+                    old_pkg.read(os.path.join(ctx.config.tmp_dir(), 'oldpkg'))
                     old_build = old_pkg.metadata.package.build
                     found.append( (old_package_fn, old_build) )
         if not found:
@@ -373,8 +372,7 @@ class PisiBuild:
 
             # compare old files.xml with the new one..
             old_pkg = Package(old_package_fn, 'r')
-            from os.path import join
-            old_pkg.read(join(ctx.config.tmp_dir(), 'oldpkg'))
+            old_pkg.read(os.path.join(ctx.config.tmp_dir(), 'oldpkg'))
 
             # FIXME: TAKE INTO ACCOUNT MINOR CHANGES IN METADATA
             changed = False
@@ -419,7 +417,8 @@ class PisiBuild:
                 dest = os.path.join(install_dir + os.path.dirname(afile.target), os.path.basename(afile.target))
                 util.copy_file(src, dest)
                 if afile.permission:
-                    os.chmod(dest, int(afile.permission) | 0777)
+                    # mode is octal!
+                    os.chmod(dest, int(afile.permission, 8))
 
             os.chdir(c)
 
