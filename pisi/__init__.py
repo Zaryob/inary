@@ -10,7 +10,7 @@
 
 # PiSi version
 
-__version__ = "0.3"
+__version__ = "1.0_alpha2"
 
 __all__ = [ 'api', 'packagedb', 'installdb' ]
 
