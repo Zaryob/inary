@@ -228,9 +228,11 @@ def install_pkg_names(A):
         
     return True                         # everything went OK :)
 
-def package_graph(A):
+def package_graph(A, ignore_installed = False):
     """Construct a package relations graph, containing
-    all dependencies of packages A"""
+    all dependencies of packages A, if ignore_installed
+    option is True, then only uninstalled deps will
+    be added."""
 
     ctx.ui.debug('A = %s' % str(A))
   
@@ -251,14 +253,12 @@ def package_graph(A):
             pkg = packagedb.get_package(x)
             print pkg
             for dep in pkg.runtimeDeps:
-                # we don't deal with already *satisfied* dependencies
+                if ignore_installed:
+                    if not dependency.installed_satisfies_dep(dep):
+                        continue
                 if not dep.package in G_f.vertices():
                     Bp.add(str(dep.package))
                 G_f.add_dep(x, dep)
-#               if not dependency.installed_satisfies_dep(dep):
-#                   if not dep.package in G_f.vertices():
-#                       Bp.add(str(dep.package))
-#                   G_f.add_dep(x, dep)
         B = Bp
     return G_f
 
