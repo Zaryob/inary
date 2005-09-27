@@ -345,13 +345,22 @@ class PisiBuild:
     def calc_build_no(self, package_name):
         """Calculate build number"""
 
+        def found_package(fn):
+            "did we find the filename we were looking for?"
+            if fn.startswith(package_name + '-'):
+                if fn.endswith(ctx.const.package_prefix):
+                    verstr = fn[len(package_name):
+                                len(fn)-len(ctx.const.package_prefix)]
+                    if s.count('-') <= 2:
+                        return True
+            return False
+
         # find previous build in ctx.config.options.output_dir
         found = []
         for root, dirs, files in os.walk(ctx.config.options.output_dir):
             for fn in files:
                 fn = fn.decode('utf-8')
-                if fn.startswith(package_name + '-') and \
-                    fn.endswith(ctx.const.package_prefix):
+                if found_package(fn):
                     old_package_fn = os.path.join(root, fn)
                     ctx.ui.info('(found old version %s)' % old_package_fn)
                     old_pkg = Package(old_package_fn, 'r')
