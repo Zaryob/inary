@@ -351,7 +351,7 @@ class PisiBuild:
                 if fn.endswith(ctx.const.package_prefix):
                     verstr = fn[len(package_name):
                                 len(fn)-len(ctx.const.package_prefix)]
-                    if s.count('-') <= 2:
+                    if verstr.count('-') <= 2:
                         return True
             return False
 
