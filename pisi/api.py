@@ -280,11 +280,18 @@ def upgrade_pkg_names(A):
             continue
         (version, release, build) = ctx.installdb.get_version(x)
         pkg = packagedb.get_package(x)
-        if ignore_build or (not build):
+
+        # First check version. If they are same, check release. Again
+        # if releases are same and checking buildno is premitted,
+        # check build number.
+        if version < pkg.version:
+            Ap.append(x)
+        elif version == pkg.version:
             if release < pkg.release:
                 Ap.append(x)
-        elif build < pkg.build:
-                Ap.append(x)
+            if release == pkg.release and build and not ignore_build:
+                if build < pkg.build:
+                    Ap.append(x)
         else:
             #ctx.ui.info('Package %s cannot be upgraded. ' % x)
             ctx.ui.info('Package %s is already at its latest version %s,\

@@ -47,6 +47,9 @@ class VersionTestCase(unittest.TestCase):
         self.assert_(v1 > v2)
         self.assert_(v1 < v3)
         self.assert_(v2 < v3)
-        
+
+        v1 = version.Version("pisi-1.0_alpha1")
+        v2 = version.Version("pisi-1.0_alpha2")
+        self.assert_(v2 > v1)
 
 suite = unittest.makeSuite(VersionTestCase)
