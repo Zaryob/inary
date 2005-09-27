@@ -254,7 +254,7 @@ def package_graph(A, ignore_installed = False):
             print pkg
             for dep in pkg.runtimeDeps:
                 if ignore_installed:
-                    if not dependency.installed_satisfies_dep(dep):
+                    if dependency.installed_satisfies_dep(dep):
                         continue
                 if not dep.package in G_f.vertices():
                     Bp.add(str(dep.package))
