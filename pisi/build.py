@@ -372,6 +372,7 @@ class PisiBuild:
             ctx.ui.warning('(no previous build found, setting build no to 0.)')
         else:
             a = filter(lambda (x,y): y != None, found)
+            ctx.ui.debug(str(a))
             if a:
                 a.sort(lambda x,y : cmp(x[1],y[1]))
                 old_package_fn = a[0][0]

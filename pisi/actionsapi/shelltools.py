@@ -115,9 +115,9 @@ def copy(sourceFile, destinationFile):
             try:
                 shutil.copy(file, destinationFile)
             except IOError:
-                ctx.ui.error(' ActionsAPI [copy]: Permission denied.')
+                ctx.ui.error('ActionsAPI [copy]: Permission denied.')
         else:
-            ctx.ui.error(' ActionsAPI [copy]: File doesn\'t exists.')
+            ctx.ui.error('ActionsAPI [copy]: File %s does not exist.' % file)
 
 def copytree(source, destination, sym = False):
     '''recursively copy an entire directory tree rooted at source'''
