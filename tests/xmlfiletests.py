@@ -56,7 +56,10 @@ class XmlFileTestCase(unittest.TestCase):
         print '*', string
         #self.assert_(string.startswith('Name'))
         xml = xmlfile.XmlFile('A')
-        a.encode(xml)
+        xml.newDOM()
+        node = a.encode(xml)
+        print 'allah', node
+        xml.rootNode().appendChild(node)
         xml.writexml('/tmp/a.xml')
         print '/tmp/a.xml written'
         return

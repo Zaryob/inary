@@ -54,6 +54,7 @@ mandatory, optional = range(2) # poor man's enum
 Text = types.StringType
 Integer = types.IntType
 
+
 class LocalText(object):
     """Handles XML tags/attributes with localized text"""
 
@@ -184,7 +185,6 @@ class autoxml(type):
         for var in dict:
             if var.startswith('t_') or var.startswith('a_'):
                 name = var[2:]
-                print 'generating member', name
                 if var.startswith('a_'):
                     x = autoxml.gen_attr_member(cls, name)
                 elif var.startswith('t_'):
@@ -214,7 +214,6 @@ class autoxml(type):
             node = xml.newNode(cls.tag)
             for encode_member in self.__class__.encoders:
                 encode_member(self, xml, node)
-            xml.dom.documentElement = node
             return node
         cls.encode = encode
 
@@ -237,20 +236,24 @@ class autoxml(type):
         def readtext(node, attr):
             return getNodeAttribute(node, attr)
         def createnode(xml, attr_name):
+            print 'create attr', attr_name
             return xml.newAttribute(attr_name)  # create an attribute node
         def writetext(xml, attr, nil, text):
+            print 'write attr', attr, text
             attr.value = text
         anonfuns = cls.gen_anon_basic(attr, spec, readtext, createnode, writetext)
-        def mergetext(node, attr):
-            node.setAttributeNode(attr)
+        def mergetext(node, newattr):
+            print 'merge attr', node, attr
+            node.setAttributeNode(newattr)
         return cls.gen_named_comp(attr, spec, anonfuns, mergetext)
 
     def gen_tag_member(cls, tag):
         """generate helper funs for tag member of class"""
+        print 'tag:', tag
         spec = getattr(cls, 't_' + tag)
         anonfuns = cls.gen_tag(tag, spec)
         def mergetext(node, newnode):
-            print 'mergenode', node, newnode
+            print 'merge tag', node, newnode
             node.appendChild(newnode)
         return cls.gen_named_comp(tag, spec, anonfuns, mergetext)
                     
@@ -259,10 +262,13 @@ class autoxml(type):
         tag_type = spec[0]
         if type(tag_type) is types.TypeType:
             def readtext(node, tagpath):
+                print 'read tag', node, tagpath
                 return getNodeText(node, tagpath)
             def createnode(xml, tag):
+                print 'create node', tag
                 return xml.newNode(tag)
             def writetext(xml, node, tagpath, text):
+                print 'write tag', node, tagpath, text
                 xml.addTextNodeUnder(node, tagpath, text)
             return cls.gen_anon_basic(tag, spec, readtext,
                                       createnode, writetext)
@@ -296,6 +302,10 @@ class autoxml(type):
             newnode = encode_a(xml, value)
             if newnode:
                 mergetext(node, newnode)
+            else:
+                if req == mandatory:
+                    raise Error('Mandatory variable %s not available' % name)
+                
             
         def format(self):
             if hasattr(self, name):
@@ -494,6 +504,10 @@ class XmlFile(object):
         """deallocate DOM structure"""
         self.dom.unlink()
 
+    def rootNode(self):
+        """returns root document element"""
+        return self.dom.documentElement
+
     def readxml(self, fileName):
         try:
             self.dom = mdom.parse(fileName)
@@ -507,7 +521,7 @@ class XmlFile(object):
         f.close()
 
     def verifyRootTag(self):
-        actual_roottag = self.dom.documentElement.tagName
+        actual_roottag = self.rootNode().tagName
         if actual_roottag != self.rootTag:
             raise Error("Root tagname %s not identical to %s as expected " %
                         (actual_roottag, self.rootTag) )
