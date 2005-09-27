@@ -200,8 +200,14 @@ def insinto(destinationDirectory, sourceFile,  destinationFile = ''):
 
 def newdoc(sourceFile, destinationFile):
     '''inserts a sourceFile into /usr/share/doc/PACKAGE/ directory as a destinationFile'''
+    destinationDirectory = '' #490
+    try:
+        destinationDirectory = destinationFile[:destinationFile.rindex('/')]
+        destinationFile = destinationFile[destinationFile.rindex('/') + 1:]
+    except:
+        pass
     move(sourceFile, destinationFile)
-    readable_insinto(os.path.join(get.installDIR(), 'usr/share/doc', get.srcTAG()), destinationFile)
+    readable_insinto(os.path.join(get.installDIR(), 'usr/share/doc', get.srcTAG(), destinationDirectory), destinationFile)
 
 def newman(sourceFile, destinationFile):
     '''inserts a sourceFile into /usr/share/man/manPREFIX/ directory as a destinationFile'''
