@@ -462,13 +462,11 @@ class autoxml(type):
             return l
 
         def encode(xml, node, l):
-            listnode = xml.newNode(tag)
             if len(l) > 0:
+                listnode = xml.newNode(tag)
                 for item in l:
                     encode_item(xml, listnode, item)
-                    #item_node = encode_item(xml, item)
-                    #xml.addNodeUnder(listnode, comp_tag, item_node)
-                #return getNode(dummy, "Dummy")
+                node.appendChild(listnode)
             else:
                 if req is mandatory:
                     raise Error('Mandatory list empty')
