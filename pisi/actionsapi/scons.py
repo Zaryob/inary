@@ -15,6 +15,8 @@
 import pisi.context as ctx
 
 # ActionsAPI Modules
+import pisi.actionsapi
+import pisi.actionsapi.get as get
 from pisi.actionsapi.shelltools import system
 
 
@@ -27,9 +29,9 @@ class InstallError(pisi.actionsapi.Error):
         ctx.ui.error(Exception)
 
 def make(parameters = ''):
-    if system("scons %s", % parameters):
+    if system("scons %s" % parameters):
         raise MakeError('!!! Make failed...\n')
 
 def install(parameters = 'install'):
-    if system("scons %s", % parameters):
+    if system("scons prefix=%s/%s %s" % (get.installDIR(), get.defaultprefixDIR(), parameters)):
         raise InstallError('!!! Install failed...\n')
