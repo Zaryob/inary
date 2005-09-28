@@ -213,7 +213,6 @@ class autoxml(type):
         def encode(self, xml, node):
             for encode_member in self.__class__.encoders:
                 encode_member(self, xml, node)
-            return
         cls.encode = encode
 
         cls.formatters = formatters
@@ -417,10 +416,12 @@ class autoxml(type):
                     return None
 
         def encode(xml, node, obj):
-            if obj:
+            if node and obj:
                 try:
-                    node = obj.encode(xml, node)
-                    #FIXME: change node's tag?
+                    #FIXME: this doesn't look pretty
+                    classnode = node.ownerDocument.createElement(tag)
+                    obj.encode(xml, classnode)
+                    node.appendChild(classnode)
                     return 
                 except Error:
                     raise Error('Object cannot be encoded')                    
