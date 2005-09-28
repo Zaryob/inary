@@ -353,6 +353,48 @@ def do_patch(sourceDir, patchFile, level, target = ''):
 
     os.chdir(cwd)
 
+
+def strip_directory(top, excludelist=[]):
+    for root, dirs, files in os.walk(top):
+        for fn in files:
+            frpath = os.path.join(root, fn)
+
+            # real path in .pisi package
+            p = '/' + removepathprefix(top, frpath)
+            strip = True
+            for exclude in excludelist:
+                if p.startswith(exclude):
+                    strip = False
+
+            if strip:
+                strip_file(frpath)
+
+def strip_file(filepath):
+    """strip a file"""
+    p = os.popen("file %s" % filepath)
+    o = p.read()
+
+    def run_strip(f, flags=""):
+        p = os.popen("strip %s %s" %(flags, f))
+        ret = p.close()
+        if ret:
+            raise UtilError, "strip command failed!"
+
+    if "current ar archive" in o:
+        run_strip(filepath, "-g")
+        return True
+
+    elif "SB executable" in o:
+        run_strip(filepath)
+        return True
+
+    elif "SB shared object" in o:
+        run_strip(filepath, "--strip-unneeded")
+        # FIXME: warn for TEXTREL
+        return True
+
+    return False
+
 def partition_freespace(directory):
     """ returns free space of given directory's partition """
     st = os.statvfs(directory)

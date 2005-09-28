@@ -162,6 +162,8 @@ class PisiBuild:
         self.run_build_action()
         self.run_install_action()
 
+        self.strip_install_dir()
+
         # after all, we are ready to build/prepare the packages
         self.build_packages()
 
@@ -287,6 +289,16 @@ class PisiBuild:
             ctx.ui.action(_("* Applying patch: %s") % patch.filename)
             util.do_patch(self.srcDir, patchFile, level=patch.level, target=patch.target)
 
+    def strip_install_dir(self):
+        """strip install directory"""
+        ctx.ui.action(_("Stripping files.."))
+        install_dir = self.bctx.pkg_install_dir()
+        try:
+            nostrip = self.actionGlobals['NoStrip']
+            util.strip_directory(install_dir, nostrip)
+        except KeyError:
+            util.strip_directory(install_dir)
+
     def gen_metadata_xml(self, package):
         """Generate the metadata.xml file for build source.
 
@@ -314,7 +326,8 @@ class PisiBuild:
         else:
             metadata.package.build = self.calc_build_no(metadata.package.name)
 
-        metadata.write(os.path.join(self.bctx.pkg_dir(), ctx.const.metadata_xml))
+        metadata_xml_path = os.path.join(self.bctx.pkg_dir(), ctx.const.metadata_xml)
+        metadata.write(metadata_xml_path)
         self.metadata = metadata
 
     def gen_files_xml(self, package):
@@ -339,7 +352,9 @@ class PisiBuild:
                 d[frpath] = FileInfo(frpath, ftype, fsize, fhash)
         for (p, fileinfo) in d.iteritems():
             files.append(fileinfo)
-        files.write(os.path.join(self.bctx.pkg_dir(), ctx.const.files_xml))
+
+        files_xml_path = os.path.join(self.bctx.pkg_dir(), ctx.const.files_xml)
+        files.write(files_xml_path)
         self.files = files
 
     def calc_build_no(self, package_name):
