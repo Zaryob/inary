@@ -57,9 +57,8 @@ class XmlFileTestCase(unittest.TestCase):
         #self.assert_(string.startswith('Name'))
         xml = xmlfile.XmlFile('A')
         xml.newDOM()
-        node = a.encode(xml)
-        print 'allah', node
-        xml.rootNode().appendChild(node)
+        a.encode(xml, xml.rootNode())
+        #xml.rootNode().appendChild(node)
         xml.writexml('/tmp/a.xml')
         print '/tmp/a.xml written'
         return

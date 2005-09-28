@@ -210,11 +210,10 @@ class autoxml(type):
         cls.decode = decode
 
         cls.encoders = encoders
-        def encode(self, xml):
-            node = xml.newNode(cls.tag)
+        def encode(self, xml, node):
             for encode_member in self.__class__.encoders:
                 encode_member(self, xml, node)
-            return node
+            return
         cls.encode = encode
 
         cls.formatters = formatters
@@ -299,12 +298,13 @@ class autoxml(type):
                 value = getattr(self, name)
             else:
                 value = None
-            newnode = encode_a(xml, value)
-            if newnode:
-                mergetext(node, newnode)
-            else:
-                if req == mandatory:
-                    raise Error('Mandatory variable %s not available' % name)
+            encode_a(xml, node, value)
+            #newnode = 
+            #if newnode:
+            #    mergetext(node, newnode)
+            #else:
+            #    if req == mandatory:
+            #        raise Error('Mandatory variable %s not available' % name)
                 
             
         def format(self):
@@ -375,10 +375,10 @@ class autoxml(type):
                 else:
                     return None
 
-        def encode(xml, value):
+        def encode(xml, node, value):
             """encode given value inside DOM node"""
             if value:
-                node = createnode(xml, token)
+                #node = createnode(xml, token)
                 writetext(xml, node, token, str(value))
                 return node
             else:
@@ -416,10 +416,10 @@ class autoxml(type):
                 else:
                     return None
 
-        def encode(xml, obj):
+        def encode(xml, node, obj):
             if obj:
                 try:
-                    node = obj.encode(xml)
+                    node = obj.encode(xml, node)
                     #FIXME: change node's tag?
                     return 
                 except Error:
@@ -460,13 +460,14 @@ class autoxml(type):
                 l.append(decode_item(dummy))
             return l
 
-        def encode(xml, l):
-            dummy = xml.newNode("Dummy")
+        def encode(xml, node, l):
+            listnode = xml.newNode(tag)
             if len(l) > 0:
                 for item in l:
-                    item_node = encode_item(xml, item)
-                    xml.addNodeUnder(dummy, comp_tag, item_node)
-                return getNode(dummy, "Dummy")
+                    encode_item(xml, listnode, item)
+                    #item_node = encode_item(xml, item)
+                    #xml.addNodeUnder(listnode, comp_tag, item_node)
+                #return getNode(dummy, "Dummy")
             else:
                 if req is mandatory:
                     raise Error('Mandatory list empty')
