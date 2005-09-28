@@ -365,9 +365,13 @@ def strip_directory(top, excludelist=[]):
             for exclude in excludelist:
                 if p.startswith(exclude):
                     strip = False
+                    ctx.ui.debug("%s [%s]" %(p, "NoStrip"))
 
             if strip:
-                strip_file(frpath)
+                if strip_file(frpath):
+                    print p, "strip"
+                    ctx.ui.debug("%s [%s]" %(p, "stripped"))
+                
 
 def strip_file(filepath):
     """strip a file"""
