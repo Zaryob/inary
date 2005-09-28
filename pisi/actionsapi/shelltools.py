@@ -116,6 +116,8 @@ def copy(sourceFile, destinationFile):
                 shutil.copy(file, destinationFile)
             except IOError:
                 ctx.ui.error('ActionsAPI [copy]: Permission denied.')
+        elif isDirectory(file):
+            copytree(file, destinationFile)
         else:
             ctx.ui.error('ActionsAPI [copy]: File %s does not exist.' % file)
 
