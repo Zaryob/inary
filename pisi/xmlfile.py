@@ -237,9 +237,9 @@ class autoxml(type):
         def createnode(xml, attr_name):
             print 'create attr', attr_name
             return xml.newAttribute(attr_name)  # create an attribute node
-        def writetext(xml, attr, nil, text):
+        def writetext(xml, node, attr, text):
             print 'write attr', attr, text
-            attr.value = text
+            node.setAttribute(attr, text)
         anonfuns = cls.gen_anon_basic(attr, spec, readtext, createnode, writetext)
         def mergetext(node, newattr):
             print 'merge attr', node, attr
