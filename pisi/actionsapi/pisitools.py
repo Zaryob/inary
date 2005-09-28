@@ -162,7 +162,7 @@ def rename(sourceFile, destinationFile):
     try:        
         os.rename(get.installDIR() + sourceFile, get.installDIR() + baseDir + "/" + destinationFile)
     except OSError:
-        ctx.ui.error('\n!!! ActionsAPI [dorename]: No such file or directory: "%s"...' % sourceFile)
+        ctx.ui.error('\n!!! ActionsAPI [rename]: No such file or directory: "%s"...' % sourceFile)
 
 def dopython():
     '''FIXME: What the hell is this?'''
