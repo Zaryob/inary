@@ -9,7 +9,7 @@
 #
 
 # pisi.actionsapi version
-__version__ = '1.0_alpha2'
+__version__ = '1.0_alpha3'
 
 import pisi
 
