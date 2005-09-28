@@ -24,6 +24,8 @@ class XmlError(pisi.Error):
     "named this way because the class if mostly used with an import *"
     pass
 
+#FIXME: these Node's in the following routines seem redundant
+
 def getNodeAttribute(node, attrname):
     """get named attribute from DOM node"""
     if not node.hasAttribute(attrname):
@@ -161,3 +163,13 @@ def addNode(dom, node, tagpath, newnode = None):
         return addTagPath(dom, node, tags, newnode)
 
     return node
+
+def newNode(node, tag):
+    return node.ownerDocument.createElement(tag)
+
+def newTextNode(node, text):
+    return node.ownerDocument.createTextNode(text)
+
+def addText(node, tagPath, text):
+    newnode = newTextNode(node, text)
+    addNode(node.ownerDocument, node, tagPath, newnode)

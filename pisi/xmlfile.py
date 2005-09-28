@@ -78,8 +78,8 @@ class LocalText(object):
                 #errs.append("Tag '%s' should have at least one '%s' tag\n" % (parent.tagName, d[2]))
         else:
             for node in nodes:
-                lang = getAttribute(node, "xml:lang")
-                c = getText(node)
+                lang = getNodeAttribute(node, "xml:lang")
+                c = getNodeText(node)
                 if not c:
                     #errs.append("Tag '%s' should have some text data\n" % node.tagName)
                     break
@@ -98,7 +98,11 @@ class LocalText(object):
             
     def encode(self, xml, node):
         for key in self.locs.iterkeys():
-            lang = addTextNode(node, key, self.locs[key])
+            newnode = newNode(node, self.tag)
+            newnode.setAttribute('xml:lang', key)     
+            newtext = newTextNode(node, self.locs[key])
+            newnode.appendChild(newtext)
+            node.appendChild(newnode)
     
     def format(self):
         return ''
@@ -275,6 +279,8 @@ class autoxml(type):
             return cls.gen_anon_basic(tag, spec, readtext, writetext)
         elif type(tag_type) is types.ListType:
             return cls.gen_list_tag(tag, spec)
+        elif tag_type is LocalText:
+            return cls.gen_insetclass_tag(tag, spec)
         elif type(tag_type) is autoxml or type(tag_type) is types.TypeType:
             return cls.gen_class_tag(tag, spec)
         else:
@@ -492,6 +498,59 @@ class autoxml(type):
                     s += ', '
             return s
         
+        return (init, decode, encode, format)
+
+    def gen_insetclass_tag(cls, tag, spec):
+        """generate a class datatype that is highly integrated
+           don't worry if that means nothing to you. this is a silly
+           hack to implement local text quickly. it's not the most 
+           elegant thing in the world. it's basically a copy of 
+           class tag"""
+        name, tag_type, req, path = cls.parse_spec(tag, spec)
+
+        def make_object():
+            obj = tag_type.__new__(tag_type)
+            obj.__init__(tag, spec)
+            return obj
+
+        def init():
+            return make_object()
+
+        def decode(node):
+            if node:
+                try:
+                    obj = make_object()
+                    obj.decode(node)
+                    return obj
+                except Error:
+                    raise Error('Type mismatch: DOM cannot be decoded')
+            else:
+                if req == mandatory:
+                    raise Error('Mandatory argument not available')
+                else:
+                    return None
+
+        def encode(xml, node, obj):
+            if node and obj:
+                try:
+                    #FIXME: this doesn't look pretty
+                    obj.encode(xml, node)
+                except Error:
+                    if req == mandatory:
+                        # note: we can receive an error if obj has no content
+                        raise Error('Object cannot be encoded')                    
+            else:
+                if req == mandatory:
+                    raise Error('Mandatory argument not available')
+                
+        def format(obj):
+            try:
+                return obj.format()
+            except Error:
+                if req == mandatory:
+                    raise Error('Mandatory argument not available')
+                else:
+                    return ""
         return (init, decode, encode, format)
 
     basic_cons_map = {
