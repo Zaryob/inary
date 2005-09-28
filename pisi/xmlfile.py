@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright (C) 2005, TUBITAK/UEKAE
 #
@@ -160,7 +161,7 @@ class autoxml(type):
 
     def __init__(cls, name, bases, dict):
         """entry point for metaclass code"""
-        print 'generating class', name
+        #print 'generating class', name
 
         # add XmlFile as one of the superclasses, we're smart
         bases = list(bases)
@@ -227,55 +228,42 @@ class autoxml(type):
 
     def gen_attr_member(cls, attr):
         """generate readers and writers for an attribute member"""
-        print 'attr:', attr
+        #print 'attr:', attr
         spec = getattr(cls, 'a_' + attr)
         tag_type = spec[0]
         assert type(tag_type) == type(type)
         def readtext(node, attr):
             return getNodeAttribute(node, attr)
-        def createnode(xml, attr_name):
-            print 'create attr', attr_name
-            return xml.newAttribute(attr_name)  # create an attribute node
         def writetext(xml, node, attr, text):
-            print 'write attr', attr, text
+            #print 'write attr', attr, text
             node.setAttribute(attr, text)
-        anonfuns = cls.gen_anon_basic(attr, spec, readtext, createnode, writetext)
-        def mergetext(node, newattr):
-            print 'merge attr', node, attr
-            node.setAttributeNode(newattr)
-        return cls.gen_named_comp(attr, spec, anonfuns, mergetext)
+        anonfuns = cls.gen_anon_basic(attr, spec, readtext, writetext)
+        return cls.gen_named_comp(attr, spec, anonfuns)
 
     def gen_tag_member(cls, tag):
         """generate helper funs for tag member of class"""
-        print 'tag:', tag
+        #print 'tag:', tag
         spec = getattr(cls, 't_' + tag)
         anonfuns = cls.gen_tag(tag, spec)
-        def mergetext(node, newnode):
-            print 'merge tag', node, newnode
-            node.appendChild(newnode)
-        return cls.gen_named_comp(tag, spec, anonfuns, mergetext)
+        return cls.gen_named_comp(tag, spec, anonfuns)
                     
     def gen_tag(cls, tag, spec):
         """generate readers and writers for the tag"""
         tag_type = spec[0]
         if type(tag_type) is types.TypeType:
             def readtext(node, tagpath):
-                print 'read tag', node, tagpath
+                #print 'read tag', node, tagpath
                 return getNodeText(node, tagpath)
-            def createnode(xml, tag):
-                print 'create node', tag
-                return xml.newNode(tag)
             def writetext(xml, node, tagpath, text):
-                print 'write tag', node, tagpath, text
+                #print 'write tag', node, tagpath, text
                 xml.addTextNodeUnder(node, tagpath, text)
-            return cls.gen_anon_basic(tag, spec, readtext,
-                                      createnode, writetext)
+            return cls.gen_anon_basic(tag, spec, readtext, writetext)
         elif type(tag_type) is types.ListType:
             return cls.gen_list_tag(tag, spec)
         elif type(tag_type) is autoxml or type(tag_type) is types.ClassType:
             return cls.gen_class_tag(tag, spec)
 
-    def gen_named_comp(cls, token, spec, anonfuns, mergetext):
+    def gen_named_comp(cls, token, spec, anonfuns):
         """generate a named component tag/attr. a decoration of
         anonymous functions that do not bind to variable names"""
         name = cls.mixed_case(token)
@@ -345,7 +333,7 @@ class autoxml(type):
                                          # the token
         return name, token_type, req, path
 
-    def gen_anon_basic(cls, token, spec, readtext, createnode, writetext):
+    def gen_anon_basic(cls, token, spec, readtext, writetext):
         """Generate a tag or attribute with one of the basic
         types like integer. This has got to be pretty generic
         so that we can invoke it from the complex types such as Class
@@ -361,7 +349,7 @@ class autoxml(type):
         def decode(node):
             """decode from DOM node, the value, watching the spec"""
             text = readtext(node, token)
-            print 'read text ', text
+            #print 'read text ', text
             if text:
                 try:
                     value = autoxml.basic_cons_map[token_type](text)
@@ -377,7 +365,6 @@ class autoxml(type):
         def encode(xml, node, value):
             """encode given value inside DOM node"""
             if value:
-                #node = createnode(xml, token)
                 writetext(xml, node, token, str(value))
                 return node
             else:
@@ -422,16 +409,22 @@ class autoxml(type):
                     classnode = node.ownerDocument.createElement(tag)
                     obj.encode(xml, classnode)
                     node.appendChild(classnode)
-                    return 
                 except Error:
-                    raise Error('Object cannot be encoded')                    
+                    if req == mandatory:
+                        # note: we can receive an error if obj has no content
+                        raise Error('Object cannot be encoded')                    
             else:
                 if req == mandatory:
                     raise Error('Mandatory argument not available')
                 
         def format(obj):
-            return obj.format()
-        
+            try:
+                return obj.format()
+            except Error:
+                if req == mandatory:
+                    raise Error('Mandatory argument not available')
+                else:
+                    return ""
         return (init, decode, encode, format)
 
     def gen_list_tag(cls, tag, spec):
@@ -451,8 +444,7 @@ class autoxml(type):
         def decode(node):
             l = []
             nodes = getAllNodes(node, tag + '/' + comp_tag)
-            print node, tag + '/' + comp_tag
-            print 'F U', nodes
+            #print node, tag + '/' + comp_tag, nodes
             if len(nodes) is 0 and req is mandatory:
                 raise Error('Mandatory list empty')
             for node in nodes:
@@ -462,7 +454,7 @@ class autoxml(type):
             return l
 
         def encode(xml, node, l):
-            if len(l) > 0:
+            if l and len(l) > 0:
                 listnode = xml.newNode(tag)
                 for item in l:
                     encode_item(xml, listnode, item)

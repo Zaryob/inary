@@ -32,7 +32,7 @@ class XmlFileTestCase(unittest.TestCase):
             __metaclass__ = xmlfile.autoxml
             t_BirthDate = [types.StringType, xmlfile.mandatory]
             t_Interest = [types.StringType, xmlfile.optional]
-            #t_CodesWith = [ [types.StringType], xmlfile.optional, 'Person']
+            t_CodesWith = [ [types.StringType], xmlfile.optional, 'Person']
         
         class A:
             __metaclass__ = xmlfile.autoxml
@@ -58,17 +58,16 @@ class XmlFileTestCase(unittest.TestCase):
         xml = xmlfile.XmlFile('A')
         xml.newDOM()
         a.encode(xml, xml.rootNode())
-        #xml.rootNode().appendChild(node)
+        xml.rootNode().appendChild(node)
         xml.writexml('/tmp/a.xml')
-        print '/tmp/a.xml written'
-        return
+        #print '/tmp/a.xml written'
         xml = xmlfile.XmlFile('A')
         a2 = A()
         a2.name = "Baris Metin"
         a2.email = "baris@uludag.org.tr"
         a2.href = 'http://cekirdek.uludag.org.tr/~baris'
         a2.projects = [ 'pisi', 'tasma', 'plasma' ]
-        a2.encode(xml)
+        a2.encode(xml, xml.rootNode())
         xml.writexml('/tmp/a2.xml')
         string = a2.format()
 
