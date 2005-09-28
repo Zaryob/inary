@@ -58,9 +58,8 @@ class XmlFileTestCase(unittest.TestCase):
         xml = xmlfile.XmlFile('A')
         xml.newDOM()
         a.encode(xml, xml.rootNode())
-        xml.rootNode().appendChild(node)
         xml.writexml('/tmp/a.xml')
-        #print '/tmp/a.xml written'
+        print '/tmp/a.xml written'
         xml = xmlfile.XmlFile('A')
         a2 = A()
         a2.name = "Baris Metin"

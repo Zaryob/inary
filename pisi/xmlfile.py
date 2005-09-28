@@ -55,15 +55,23 @@ mandatory, optional = range(2) # poor man's enum
 Text = types.StringType
 Integer = types.IntType
 
+#class datatype(type):
+#    def __init__(cls, name, bases, dict):
+#        """entry point for metaclass code"""
+#        # standard initialization
+#        super(autoxml, cls).__init__(name, bases, dict)
 
 class LocalText(object):
-    """Handles XML tags/attributes with localized text"""
+    """Handles XML tags with localized text"""
 
-    def __init__():
-        locs = {}
-        
-    def decode(nodes, req):
+    def __init__(self, tag, spec):
+        self.tag = tag
+        self.req = spec[1]
+        self.locs = {}
+    
+    def decode(self, node):
         # flags, tag name, instance attribute
+        nodes = getAllNodes(node, tag)
         if not nodes:
             if req == mandatory:
                 pass
@@ -80,14 +88,20 @@ class LocalText(object):
                     lang = 'en'
                 self.locs[lang] = c
             # FIXME: return full list too
-            L = language
-            if not locs.has_key(L):
-                L = 'en'
-            if not locs.has_key(L):
-                #errs.append("Tag '%s' should have an English version\n" % d[2])
-                return ""
-            return locs[L]
-
+            #L = language
+            #if not self.locs.has_key(L):
+            #    L = 'en'
+            #if not self.locs.has_key(L):
+            #    #errs.append("Tag '%s' should have an English version\n" % d[2])
+            #    return ""
+            #retur
+            
+    def encode(self, xml, node):
+        for key in self.locs.iterkeys():
+            lang = addTextNode(node, key, self.locs[key])
+    
+    def format(self):
+        return ''
             
 class autoxml(type):
     """High-level automatic XML transformation interface for xmlfile.
@@ -198,7 +212,7 @@ class autoxml(type):
 
         # generate top-level helper functions
         cls.initializers = inits
-        def initialize(self):
+        def initialize(self, tag = None, spec = None):
 #            XmlFile.__init__(self, cls.tag)
             for init in self.__class__.initializers:
                 init(self)
@@ -382,7 +396,7 @@ class autoxml(type):
         name, tag_type, req, path = cls.parse_spec(tag, spec)
 
         def make_object():
-            return tag_type.__new__(tag_type)
+            return tag_type.__new__(tag_type, tag, spec)
 
         def init():
             return make_object()
