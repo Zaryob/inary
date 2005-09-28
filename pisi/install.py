@@ -52,7 +52,8 @@ class Installer:
         self.reinstall()
         self.extract_install()
         self.store_pisi_files()
-        self.register_comar_scripts()
+        if ctx.comard:
+            self.register_comar_scripts()
         self.update_databases()
 
     def check_requirements(self):
@@ -157,15 +158,21 @@ class Installer:
     def register_comar_scripts(self):
         "register COMAR scripts"
 
+        com = ctx.comard
+
         for pcomar in self.metadata.package.providesComar:
             scriptPath = os.path.join(self.package.comar_dir(),pcomar.script)
             ctx.ui.info("Registering COMAR script %s" % pcomar.script)
-            # FIXME: We must check the result of the command (possibly
-            # with id?)
-            if comard:
-                comard.register(pcomar.om,
-                                self.metadata.package.name,
-                                scriptPath)
+
+            com.register(pcomar.om,
+                         self.metadata.package.name,
+                         scriptPath)
+            while 1:
+                reply = com.read_cmd()
+                if reply[0] == com.RESULT:
+                    break
+                elif reply[1] == com.ERROR:
+                    raise InstallError, "COMAR.register failed!"
 
 
     def update_databases(self):

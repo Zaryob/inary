@@ -32,8 +32,18 @@ def remove_single(package_name):
         raise Exception('Trying to remove nonexistent package '
                         + package_name)
     if ctx.comard:
-        ctx.comard.remove(package_name)
-        ctx.comard.call("System.Package", "preremove")
+        com = ctx.comard
+
+# TODO: run preremove scripts...
+#        com.call("System.Package", "preremove")
+        com.remove(package_name)
+        while 1:
+            reply = com.read_cmd()
+            if reply[0] == com.RESULT:
+                break
+            elif reply[1] == com.ERROR:
+                raise Error, "COMAR.remove failed!"
+
     for fileinfo in ctx.installdb.files(package_name).list:
         fpath = os.path.join(ctx.config.destdir, fileinfo.path)
         # TODO: We have to store configuration files for futher

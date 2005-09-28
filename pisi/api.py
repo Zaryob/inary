@@ -43,6 +43,18 @@ def init(database = True, options = None, ui = None ):
     import pisi.config
     ctx.config = pisi.config.Config(options)
 
+    if ctx.config.options and not ctx.config.options.ignore_comar:
+        # FIXME: just try for others (that don't use comar)
+        try:
+            import comar
+            ctx.comard = comar.Link()
+        except ImportError:
+            print "INSTALL COMARD!"
+            print "skipping COMAR connection for now..."
+        except comar.Error:
+            print "NEXT TIME RUN COMARD FIRST!"
+            print "skipping COMAR connection for now..."
+
     if ui is None:
         if options:
             pisi.context.ui = pisi.cli.CLI(options.debug)
