@@ -71,9 +71,9 @@ class LocalText(object):
     
     def decode(self, node):
         # flags, tag name, instance attribute
-        nodes = getAllNodes(node, tag)
+        nodes = getAllNodes(node, self.tag)
         if not nodes:
-            if req == mandatory:
+            if self.req == mandatory:
                 pass
                 #errs.append("Tag '%s' should have at least one '%s' tag\n" % (parent.tagName, d[2]))
         else:
@@ -264,7 +264,8 @@ class autoxml(type):
     def gen_tag(cls, tag, spec):
         """generate readers and writers for the tag"""
         tag_type = spec[0]
-        if type(tag_type) is types.TypeType:
+        if type(tag_type) is types.TypeType and \
+           autoxml.basic_cons_map.has_key(tag_type):
             def readtext(node, tagpath):
                 #print 'read tag', node, tagpath
                 return getNodeText(node, tagpath)
@@ -274,8 +275,11 @@ class autoxml(type):
             return cls.gen_anon_basic(tag, spec, readtext, writetext)
         elif type(tag_type) is types.ListType:
             return cls.gen_list_tag(tag, spec)
-        elif type(tag_type) is autoxml or type(tag_type) is types.ClassType:
+        elif type(tag_type) is autoxml or type(tag_type) is types.TypeType:
             return cls.gen_class_tag(tag, spec)
+        else:
+            raise Error('gen_tag: unrecognized tag type %s in spec' %
+                        str(tag_type))
 
     def gen_named_comp(cls, token, spec, anonfuns):
         """generate a named component tag/attr. a decoration of
@@ -396,7 +400,9 @@ class autoxml(type):
         name, tag_type, req, path = cls.parse_spec(tag, spec)
 
         def make_object():
-            return tag_type.__new__(tag_type, tag, spec)
+            obj = tag_type.__new__(tag_type)
+            obj.__init__(tag, spec)
+            return obj
 
         def init():
             return make_object()

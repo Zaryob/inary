@@ -37,6 +37,7 @@ class XmlFileTestCase(unittest.TestCase):
         class A:
             __metaclass__ = xmlfile.autoxml
             t_Name = [types.StringType, xmlfile.mandatory]
+            t_Description = [xmlfile.LocalText, xmlfile.mandatory]
             t_Number = [types.IntType, xmlfile.optional]
             t_Email = [types.StringType, xmlfile.optional]
             a_href = [types.StringType, xmlfile.mandatory]
