@@ -135,6 +135,8 @@ for pak in paks:
     for lice in lices:
         licenses.add(lice)
     host = pisi.uri.URI(spec.source.archiveUri).location()
+    if host == "":
+        print pisi.uri.URI(spec.source.archiveUri)
     hosts.add(host)
 
 print "<html><head><title>%s İstatistikleri</title>" % (sys.argv[1])
