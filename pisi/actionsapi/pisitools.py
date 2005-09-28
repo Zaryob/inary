@@ -151,14 +151,16 @@ def domove(sourceFile, destination, destinationFile = ''):
         else:
             move(file, get.installDIR() + os.path.join(destination, destinationFile))
 
-def dorename(sourceFile, destinationFile):
+def rename(sourceFile, destinationFile):
     ''' renames sourceFile as destinationFile'''
     
     ''' example call: pisitools.dorename("/usr/bin/bash", "bash.old") '''
     ''' the result of the previous example would be "/usr/bin/bash.old" '''
 
+    baseDir = os.path.dirname(sourceFile)
+
     try:        
-        os.rename(get.installDIR() + sourceFile, get.installDIR() + destinationFile)
+        os.rename(get.installDIR() + sourceFile, get.installDIR() + baseDir + "/" + destinationFile)
     except OSError:
         ctx.ui.error('\n!!! ActionsAPI [dorename]: No such file or directory: "%s"...' % sourceFile)
 
