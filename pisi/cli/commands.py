@@ -68,7 +68,7 @@ class Command(object):
         p.add_option("-D", "--destdir", action="store")
         p.add_option("", "--yes-all", action="store_true",
                      default=False, help = "assume yes in all yes/no queries")
-        p.add_option("", "--ignore-comar", action="store_true",
+        p.add_option("-B", "--ignore-comar", action="store_true",
                      default=False, help="bypass comar configuration agent")
         p.add_option("-u", "--username", action="store")
         p.add_option("-p", "--password", action="store")
