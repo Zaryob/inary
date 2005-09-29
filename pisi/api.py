@@ -17,6 +17,9 @@ import sys
 ver = sys.version_info
 if ver[0] <= 2 and ver[1] < 4:
     from sets import Set as set
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
 
 import pisi
 
@@ -49,11 +52,10 @@ def init(database = True, options = None, ui = None ):
             import comar
             ctx.comard = comar.Link()
         except ImportError:
-            print "INSTALL COMARD!"
+            raise Error(_("COMAR: comard not fully installed"))
             print "skipping COMAR connection for now..."
         except comar.Error:
-            print "NEXT TIME RUN COMARD FIRST!"
-            print "skipping COMAR connection for now..."
+            raise Error(_("COMAR: comard not running or defunct"))
 
     if ui is None:
         if options:
