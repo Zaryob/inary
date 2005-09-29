@@ -57,6 +57,7 @@ class Command(object):
         self.options()
         self.commonopts()
         (self.options, self.args) = self.parser.parse_args()
+        self.override_options()
         self.args.pop(0)                # exclude command arg
         
         self.check_auth_info()
@@ -78,13 +79,19 @@ class Command(object):
                      default=True, help="show debugging information")
         p.add_option("-n", "--dry-run", action="store_true", default=False,
                      help = "do not perform any action, just show what\
-                     would be done")
+                     would be done")        
         return p
 
     def options(self):
         """This is a fall back function. If the implementer module provides an
         options function it will be called"""
         pass
+
+    def override_options(self):
+        # if ignore_comar is not defined, it is True, where it is defined 
+        # its default is False. Confused? Don't get confused, it's correct :)
+        if not hasattr(self.options, 'ignore_comar'):
+            self.options.ignore_comar = True
 
     def check_auth_info(self):
         username = self.options.username
