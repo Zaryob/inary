@@ -17,21 +17,26 @@ __metaclass__ = xmlfile.autoxml
 
 class Distribution:
     t_Name = [xmlfile.Text, xmlfile.mandatory]
+    t_Description = [xmlfile.LocalText, xmlfile.mandatory]
     t_Version = [xmlfile.Text, xmlfile.mandatory]
     t_Type =  [xmlfile.Text, xmlfile.mandatory]
     t_Dependencies = [ [xmlfile.Text], xmlfile.optional, "Distribution"]
 
 class Component:
     "part-of representation for component declarations"
-    t_Name = [xmlfile.Text, xmlfile.mandatory]
+    
+    t_Name = [xmlfile.Text, xmlfile.mandatory]     # fully qualified name
     t_PartOf = [xmlfile.Text, xmlfile.mandatory]
+    t_LocalName = [xmlfile.LocalText, xmlfile.mandatory]
+    t_Description = [xmlfile.LocalText, xmlfile.mandatory]
     #t_Icon = [xmlfile.Binary, xmlfile.mandatory]
     t_Dependencies = [ [xmlfile.String], xmlfile.optional, "Component"]
 
 class ComponentTree:
     "index representation for the component structure"
     tag = "Component"
-    t_Name = [xmlfile.Text, xmlfile.mandatory]
+    
+    t_Name = [xmlfile.Text, xmlfile.mandatory]    # fully qualified name
     #t_Icon = [xmlfile.Binary, xmlfile.mandatory]
     t_Dependencies = [ [xmlfile.Text], xmlfile.optional, "Component"]
     t_Parts = [ [ComponentTree], xmlfile.optional, "Component"]

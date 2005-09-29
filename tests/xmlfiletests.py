@@ -49,16 +49,20 @@ class XmlFileTestCase(unittest.TestCase):
         dom = mdom.parse('tests/a.xml')
         node = getNode(dom, 'A')
         self.assert_(len(A.decoders)>0)
-        a.decode(node)
+        errs = []
+        print 'errs', errs
+        a.decode(node, errs)
         self.assert_(a.href.startswith('http'))
         self.assertEqual(a.number, 868)
         self.assertEqual(a.name, 'Eray Ozkural')
-        string = a.format()
+        string = a.format(errs)
         print '*', string
         #self.assert_(string.startswith('Name'))
         xml = xmlfile.XmlFile('A')
         xml.newDOM()
-        a.encode(xml, xml.rootNode())
+        errs2 = []
+        a.encode(xml, xml.rootNode(), errs2)
+        print 'errs2', errs2
         xml.writexml('/tmp/a.xml')
         print '/tmp/a.xml written'
         xml = xmlfile.XmlFile('A')
@@ -67,8 +71,10 @@ class XmlFileTestCase(unittest.TestCase):
         a2.email = "baris@uludag.org.tr"
         a2.href = 'http://cekirdek.uludag.org.tr/~baris'
         a2.projects = [ 'pisi', 'tasma', 'plasma' ]
-        a2.encode(xml, xml.rootNode())
+        errs3 = []
+        a2.encode(xml, xml.rootNode(), errs3)
+        print 'errs3', errs3
         xml.writexml('/tmp/a2.xml')
-        string = a2.format()
+        string = a2.format(errs3)
 
 suite = unittest.makeSuite(XmlFileTestCase)

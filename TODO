@@ -74,15 +74,9 @@ Legend:
 3. Beta
 
  - configure-pending (eray)
- / autoxml: automated xml processing (eray)
-   + design
-   + basic types
-   + list type
-   + class type
-   / localtext type
  / components (eray)
    + requirements
-   - xml format
+   / xml format
    - query components: list of components/packages in a component
    - install/remove components
  / API: we even have application users (eray)
@@ -123,6 +117,12 @@ Legend:
    + Files
    - Index (o kadar onemli degil)
  ? non-interactive use (baris)
+ + autoxml: automated xml processing (eray)
+   + design
+   + basic types
+   + list type
+   + class type
+   + localtext type
  + implement missing unit tests
    + sourcedb
    + package (baris)

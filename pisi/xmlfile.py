@@ -47,7 +47,6 @@ import pisi.context as ctx
 class Error(pisi.Error):
     pass
 
-    
 mandatory, optional = range(2) # poor man's enum
 
 # basic types
@@ -69,20 +68,20 @@ class LocalText(object):
         self.req = spec[1]
         self.locs = {}
     
-    def decode(self, node):
+    def decode(self, node, errs):
         # flags, tag name, instance attribute
         nodes = getAllNodes(node, self.tag)
         if not nodes:
             if self.req == mandatory:
-                pass
-                #errs.append("Tag '%s' should have at least one '%s' tag\n" % (parent.tagName, d[2]))
+                errs.append("LocalText '%s' should have at least one '%s' tag\n" %
+                             self.tag)
         else:
             for node in nodes:
                 lang = getNodeAttribute(node, "xml:lang")
                 c = getNodeText(node)
                 if not c:
-                    #errs.append("Tag '%s' should have some text data\n" % node.tagName)
-                    break
+                    errs.append("'%s' language of tag '%s' should have some text data\n" %
+                                (lang, self.tag))
                 # FIXME: check for dups and 'en'
                 if not lang:
                     lang = 'en'
@@ -96,7 +95,7 @@ class LocalText(object):
             #    return ""
             #retur
             
-    def encode(self, xml, node):
+    def encode(self, xml, node, errs):
         for key in self.locs.iterkeys():
             newnode = newNode(node, self.tag)
             newnode.setAttribute('xml:lang', key)     
@@ -104,7 +103,7 @@ class LocalText(object):
             newnode.appendChild(newtext)
             node.appendChild(newnode)
     
-    def format(self):
+    def format(self, errs):
         return ''
             
 class autoxml(type):
@@ -223,22 +222,22 @@ class autoxml(type):
         cls.__init__ = initialize
 
         cls.decoders = decoders
-        def decode(self, node):
+        def decode(self, node, errs):
             for decode_member in self.__class__.decoders:
-                decode_member(self, node)
+                decode_member(self, node, errs)
         cls.decode = decode
 
         cls.encoders = encoders
-        def encode(self, xml, node):
+        def encode(self, xml, node, errs):
             for encode_member in self.__class__.encoders:
-                encode_member(self, xml, node)
+                encode_member(self, xml, node, errs)
         cls.encode = encode
 
         cls.formatters = formatters
-        def format(self):
+        def format(self, errs):
             string = ''
             for formatter in self.__class__.formatters:
-                string += formatter(self)
+                string += formatter(self, errs)
             return string
         cls.format = format
         if not dict.has_key('__str__'):
@@ -299,29 +298,22 @@ class autoxml(type):
             """initialize component"""
             setattr(self, name, init_a())
             
-        def decode(self, node):
+        def decode(self, node, errs):
             """decode component from DOM node"""
-            setattr(self, name, decode_a(node))
+            setattr(self, name, decode_a(node, errs))
             
-        def encode(self, xml, node):
+        def encode(self, xml, node, errs):
             """encode self inside, possibly new, DOM node using xml"""
             if hasattr(self, name):
                 value = getattr(self, name)
             else:
                 value = None
-            encode_a(xml, node, value)
-            #newnode = 
-            #if newnode:
-            #    mergetext(node, newnode)
-            #else:
-            #    if req == mandatory:
-            #        raise Error('Mandatory variable %s not available' % name)
-                
+            encode_a(xml, node, value, errs)
             
-        def format(self):
+        def format(self, errs):
             if hasattr(self, name):
                 value = getattr(self,name)
-                return '%s: %s\n' % (token, format_a(value))
+                return '%s: %s\n' % (token, format_a(value, errs))
             else:
                 if req == mandatory:
                     raise Error('Mandatory variable %s not available' % name)
@@ -370,7 +362,7 @@ class autoxml(type):
             """default value for all basic types is None"""
             return None
 
-        def decode(node):
+        def decode(node, errs):
             """decode from DOM node, the value, watching the spec"""
             text = readtext(node, token)
             #print 'read text ', text
@@ -378,24 +370,23 @@ class autoxml(type):
                 try:
                     value = autoxml.basic_cons_map[token_type](text)
                 except Error:
-                    raise Error('Type mismatch: read text cannot be decoded')
+                    value = None
+                    errs.append('Type mismatch: read text cannot be decoded')
                 return value
             else:
                 if req == mandatory:
-                    raise Error('Mandatory token %s not available' % token)
-                else:
-                    return None
+                    errs.append('Mandatory token %s not available' % token)
+                return None
 
-        def encode(xml, node, value):
+        def encode(xml, node, value, errs):
             """encode given value inside DOM node"""
             if value:
                 writetext(xml, node, token, str(value))
-                return node
             else:
                 if req == mandatory:
-                    raise Error('Mandatory argument not available')
+                    errs.append('Mandatory argument not available')
 
-        def format(value):
+        def format(value, errs):
             """format value for pretty printing"""
             return str(value)
 
@@ -413,44 +404,43 @@ class autoxml(type):
         def init():
             return make_object()
 
-        def decode(node):
+        def decode(node, errs):
             node = getNode(node, tag)
             if node:
                 try:
                     obj = make_object()
-                    obj.decode(node)
+                    obj.decode(node, errs)
                     return obj
                 except Error:
-                    raise Error('Type mismatch: DOM cannot be decoded')
+                    errs.append('Type mismatch: DOM cannot be decoded')
             else:
                 if req == mandatory:
-                    raise Error('Mandatory argument not available')
-                else:
-                    return None
-
-        def encode(xml, node, obj):
+                    errs.append('Mandatory argument not available')
+            return None
+        
+        def encode(xml, node, obj, errs):
             if node and obj:
                 try:
                     #FIXME: this doesn't look pretty
                     classnode = node.ownerDocument.createElement(tag)
-                    obj.encode(xml, classnode)
+                    obj.encode(xml, classnode, errs)
                     node.appendChild(classnode)
                 except Error:
                     if req == mandatory:
                         # note: we can receive an error if obj has no content
-                        raise Error('Object cannot be encoded')                    
+                        errs.append('Object cannot be encoded')
             else:
                 if req == mandatory:
-                    raise Error('Mandatory argument not available')
+                    errs.append('Mandatory argument not available')
                 
-        def format(obj):
+        def format(obj, errs):
             try:
-                return obj.format()
+                return obj.format(errs)
             except Error:
                 if req == mandatory:
-                    raise Error('Mandatory argument not available')
+                    errs.append('Mandatory argument not available')
                 else:
-                    return ""
+                    return ''
         return (init, decode, encode, format)
 
     def gen_list_tag(cls, tag, spec):
@@ -467,33 +457,33 @@ class autoxml(type):
         def init():
             return []
 
-        def decode(node):
+        def decode(node, errs):
             l = []
             nodes = getAllNodes(node, tag + '/' + comp_tag)
             #print node, tag + '/' + comp_tag, nodes
             if len(nodes) is 0 and req is mandatory:
-                raise Error('Mandatory list empty')
+                errs.append('Mandatory list empty')
             for node in nodes:
                 dummy = node.ownerDocument.createElement("Dummy")
                 dummy.appendChild(node)
-                l.append(decode_item(dummy))
+                l.append(decode_item(dummy, errs))
             return l
 
-        def encode(xml, node, l):
+        def encode(xml, node, l, errs):
             if l and len(l) > 0:
                 listnode = xml.newNode(tag)
                 for item in l:
-                    encode_item(xml, listnode, item)
+                    encode_item(xml, listnode, item, errs)
                 node.appendChild(listnode)
             else:
                 if req is mandatory:
-                    raise Error('Mandatory list empty')
+                    errs.append('Mandatory list empty')
 
-        def format(l):
+        def format(l, errs):
             #print 'format:', name
             s = ''
             for ix in range(len(l)):
-                s += str(ix+1) + ': ' + format_item(l[ix])
+                s += str(ix+1) + ': ' + format_item(l[ix], errs)
                 if ix != len(l)-1:
                     s += ', '
             return s
@@ -516,41 +506,40 @@ class autoxml(type):
         def init():
             return make_object()
 
-        def decode(node):
+        def decode(node, errs):
             if node:
                 try:
                     obj = make_object()
-                    obj.decode(node)
+                    obj.decode(node, errs)
                     return obj
                 except Error:
-                    raise Error('Type mismatch: DOM cannot be decoded')
+                    errs.append('Type mismatch: DOM cannot be decoded')
             else:
                 if req == mandatory:
-                    raise Error('Mandatory argument not available')
-                else:
-                    return None
+                    errs.append('Mandatory argument not available')
+            return None
 
-        def encode(xml, node, obj):
+        def encode(xml, node, obj, errs):
             if node and obj:
                 try:
                     #FIXME: this doesn't look pretty
-                    obj.encode(xml, node)
+                    obj.encode(xml, node, errs)
                 except Error:
                     if req == mandatory:
                         # note: we can receive an error if obj has no content
-                        raise Error('Object cannot be encoded')                    
+                        errs.append('Object cannot be encoded')                    
             else:
                 if req == mandatory:
-                    raise Error('Mandatory argument not available')
+                    errs.append('Mandatory argument not available')
                 
-        def format(obj):
+        def format(obj, errs):
             try:
-                return obj.format()
+                return obj.format(errs)
             except Error:
                 if req == mandatory:
-                    raise Error('Mandatory argument not available')
+                    errs.append('Mandatory argument not available')
                 else:
-                    return ""
+                    return ''
         return (init, decode, encode, format)
 
     basic_cons_map = {
