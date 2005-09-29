@@ -28,6 +28,12 @@ class Config(object):
         self.values = ConfigurationFile("/etc/pisi/pisi.conf")
         self.destdir = self.values.general.destinationdirectory
 
+    def get_option(self, opt):
+        if self.options:
+            if hasattr(self.options, opt):
+                return getattr(self.options, opt)
+        return None
+
     # directory accessor functions
     # here is how it goes
     # x_dir: system wide directory for storing info type x
