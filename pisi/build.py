@@ -431,12 +431,10 @@ class PisiBuild:
                 ctx.ui.warning('(old package lacks a build no, setting build no to 0.)')
                 return 0
             elif changed:
-                ctx.ui.info('There are changes, incrementing build no to %d' %
-                            old_build + 1)
+                ctx.ui.info('There are changes, incrementing build no to %d' % (old_build + 1))
                 return old_build + 1
             else:
-                ctx.ui.info('There is no change from previous build %d ' %
-                            old_build)                
+                ctx.ui.info('There is no change from previous build %d ' % old_build)                
                 return old_build
 
     def build_packages(self):
