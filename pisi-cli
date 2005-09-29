@@ -38,16 +38,20 @@ def handle_exception(exception, value, tb):
         ui.error(_("Fatal Error:"))
         traceback = ctx.options and ctx.options.debug
     elif exception == pisi.Exception:
-        ui.error(_("""
-Internal PISI Error:
-Please file a bug report! (http://bugs.uludag.org.tr)
-"""))
+        traceback = True
+    else:
+        # For any other exception (possibly Python exceptions) show
+        # the traceback!
         traceback = True
 
     ui.error("%s" %exception)
     ui.error("%s\n" %value)
 
     if traceback:
+        ui.error(_("""
+Internal PISI Error:
+Please file a bug report! (http://bugs.uludag.org.tr)
+"""))
         ui.info(_("Traceback:"))
         traceback.print_tb(tb)
 
