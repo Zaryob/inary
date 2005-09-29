@@ -18,7 +18,6 @@ import pisi.cli
 import pisi.context as ctx
 from pisi.uri import URI
 
-
 class Command(object):
     """generic help string for any command"""
 
@@ -68,8 +67,6 @@ class Command(object):
         p.add_option("-D", "--destdir", action="store")
         p.add_option("", "--yes-all", action="store_true",
                      default=False, help = "assume yes in all yes/no queries")
-        p.add_option("-B", "--ignore-comar", action="store_true",
-                     default=False, help="bypass comar configuration agent")
         p.add_option("-u", "--username", action="store")
         p.add_option("-p", "--password", action="store")
         p.add_option("-P", action="store_true", dest="getpass", default=False,
@@ -279,24 +276,15 @@ class PackageOp(Command):
         super(PackageOp, self).__init__()
 
     def options(self):
-        pass
-##        self.parser.add_option("", "--ignore-dependency",
-##                               action="store_true",
-##                               default=False, help="death")
+        p = self.parser
+        p.add_option("-B", "--ignore-comar", action="store_true",
+                     default=False, help="bypass comar configuration agent")
+        p.add_option("", "--ignore-dependency",
+                     action="store_true",
+                     default=False, help="death of sanity")
 
     def init(self):
         super(PackageOp, self).init(True)
-        pass
-# ctx.comard should be initialized in pisi.api for other interfaces to
-# use it!
-#        import pisi
-#         if not self.options.ignore_comar:
-#             import comar
-#             try:
-#                 ctx.comard = comar.Link() # context
-#             except comar.Error:
-#                 ctx.ui.error('Comar error encountered\n')
-#                 self.die()
                 
     def finalize(self):
         #self.finalize_db()

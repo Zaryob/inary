@@ -46,7 +46,12 @@ def init(database = True, options = None, ui = None ):
     import pisi.config
     ctx.config = pisi.config.Config(options)
 
-    if ctx.config.options and not ctx.config.options.ignore_comar:
+    init_comar = False
+    if ctx.config.options:
+        if hasattr(ctx.config.options, 'ignore_comar'):
+            if ctx.config.options.ignore_comar:
+                init_comar = True
+    if init_comar:
         # FIXME: just try for others (that don't use comar)
         try:
             import comar
