@@ -137,6 +137,7 @@ class Command(object):
         """print help for the command"""
         ctx.ui.info(self.format_name() + ': ')
         print getattr(self, "__doc__")
+        print
         print self.parser.format_option_help()
 
     def die(self):
@@ -340,9 +341,12 @@ class Upgrade(PackageOp):
 
 Usage: Upgrade <package1> <package2> ... <packagen>
 
-You may use filenames, URIs or package names for packages. If you have
-specified a package name, it should exist in a specified repository.
-"""
+You may use only package names to specify packages because
+the package upgrade operation is defined only with respect 
+to repositories. If you have specified a package name, it
+should exist in the package repositories. If you just want to
+reinstall a package from a pisi file, use the install command."""
+
     __metaclass__ = autocommand
 
     def __init__(self):

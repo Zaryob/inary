@@ -84,7 +84,7 @@ def install(packages):
 
     try:
         # determine if this is a list of files/urls or names
-        if packages[0].endswith(ctx.const.package_prefix): # they all have to!
+        if packages[0].endswith('.pisi'): # they all have to!
             return install_pkg_files(packages)
         else:
             return install_pkg_names(packages)
@@ -289,6 +289,8 @@ def upgrade_pkg_names(A):
     # filter packages that are not upgradable
     Ap = []
     for x in A:
+        if x.endswith('.pisi'):
+            ctx.ui.debug("Warning: package *name* ends with '.pisi'")
         if not ctx.installdb.is_installed(x):
             ctx.ui.info('Package %s is not installed.' % x)
             continue
