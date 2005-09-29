@@ -362,10 +362,15 @@ class PisiBuild:
             "did we find the filename we were looking for?"
             if fn.startswith(package_name + '-'):
                 if fn.endswith(ctx.const.package_prefix):
-                    verstr = fn[len(package_name):
+                    # get version string, skip separator '-'
+                    verstr = fn[len(package_name) + 1:
                                 len(fn)-len(ctx.const.package_prefix)]
-                    if verstr.count('-') <= 2:
-                        return True
+                    import string
+                    for x in verstr.split('-'):
+                        # weak rule: version components start with a digit
+                        if x is '' or (not x[0] in string.digits):
+                            return False
+                    return True
             return False
 
         # find previous build in ctx.config.options.output_dir
@@ -378,6 +383,10 @@ class PisiBuild:
                     ctx.ui.info('(found old version %s)' % old_package_fn)
                     old_pkg = Package(old_package_fn, 'r')
                     old_pkg.read(os.path.join(ctx.config.tmp_dir(), 'oldpkg'))
+                    if str(old_pkg.metadata.package.name) != package_name:
+                        ctx.ui.warning('Skipping %s with wrong pkg name ' %
+                                       old_package_fn)
+                        continue
                     old_build = old_pkg.metadata.package.build
                     found.append( (old_package_fn, old_build) )
         if not found:
@@ -422,8 +431,12 @@ class PisiBuild:
                 ctx.ui.warning('(old package lacks a build no, setting build no to 0.)')
                 return 0
             elif changed:
+                ctx.ui.info('There are changes, incrementing build no to %d' %
+                            old_build + 1)
                 return old_build + 1
             else:
+                ctx.ui.info('There is no change from previous build %d ' %
+                            old_build)                
                 return old_build
 
     def build_packages(self):
@@ -455,16 +468,14 @@ class PisiBuild:
             
             ctx.ui.action(_("** Building package %s") % package.name);
 
-            ctx.ui.action(_("Generating %s...") % ctx.const.files_xml)
+            ctx.ui.info(_("Generating %s,") % ctx.const.files_xml)
             self.gen_files_xml(package)
-            ctx.ui.info(_(" done."))
            
-            ctx.ui.action(_("Generating %s...") % ctx.const.metadata_xml)
+            ctx.ui.info(_("Generating %s,") % ctx.const.metadata_xml)
             self.gen_metadata_xml(package)
-            ctx.ui.info(_(" done."))
 
-            ctx.ui.action(_("Creating PISI package %s") % name)
-            
+            ctx.ui.info(_("Creating PISI package %s.") % name)
+
             pkg = Package(name, 'w')
 
             # add comar files to package
@@ -491,3 +502,4 @@ class PisiBuild:
             os.chdir(c)
             self.set_state("buildpackages")
             util.xterm_title_reset()
+            ctx.ui.info(_("Done."))

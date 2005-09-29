@@ -37,13 +37,17 @@ class CLI(UI):
         sys.stdout.write(str)
         sys.stdout.flush()
 
-    def info(self, msg, verbose = False):
+    def info(self, msg, verbose = False, noln = False):
         # TODO: need to look at more kinds of info messages
         # let's cheat from KDE :)
+        if noln:
+            msgend = ''
+        else:
+            msgend = '\n'
         if verbose and self.show_verbose:
-            self.output(msg + '\n')
+            self.output(msg + msgend)
         elif not verbose:
-            self.output(msg + '\n')
+            self.output(msg + msgend)
 
     def warning(self,msg):
         self.output(colorize('Warning:' + msg + '\n', 'purple'))
