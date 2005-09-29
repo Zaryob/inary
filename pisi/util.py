@@ -381,7 +381,7 @@ def strip_file(filepath):
         p = os.popen("strip %s %s" %(flags, f))
         ret = p.close()
         if ret:
-            raise UtilError, "strip command failed!"
+            ctx.ui.warning("strip command failed for file '%s'!" % f)
 
     if "current ar archive" in o:
         run_strip(filepath, "-g")

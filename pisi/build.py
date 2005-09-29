@@ -162,8 +162,6 @@ class PisiBuild:
         self.run_build_action()
         self.run_install_action()
 
-        self.strip_install_dir()
-
         # after all, we are ready to build/prepare the packages
         self.build_packages()
 
@@ -431,6 +429,10 @@ class PisiBuild:
     def build_packages(self):
         """Build each package defined in PSPEC file. After this process there
         will be .pisi files hanging around, AS INTENDED ;)"""
+
+        # Strip install directory before building .pisi packages.
+        self.strip_install_dir()
+
         for package in self.spec.packages:
 
             # store additional files
