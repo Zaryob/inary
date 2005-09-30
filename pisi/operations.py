@@ -57,7 +57,7 @@ def remove_single(package_name):
             # check if file is removed manually.
             # And we don't remove directories!
             # FIXME: should give a warning if it is...
-            if os.path.isfile(fpath):
+            if os.path.isfile(fpath) or os.path.islink(fpath):
                 os.unlink(fpath)
 
 
