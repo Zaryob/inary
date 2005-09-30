@@ -161,8 +161,6 @@ class ArchiveZip(ArchiveBase):
                 if info.external_attr == self.symmagic:
                     target = zip_obj.read(info.filename)
                     # remove target file we might be overwriting
-                    if os.path.exists(target):
-                        os.remove(target)
                     os.symlink(target, ofile)
                 else:
                     perm = info.external_attr
