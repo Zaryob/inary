@@ -19,7 +19,7 @@ from pisi import util
 class InstallDBTestCase(unittest.TestCase):
 
     def setUp(self):
-        pisi.api.init()
+        pisi.api.init(database = True, comar = False)
         self.installdb = ctx.installdb
 
     def testRemoveDummy(self):

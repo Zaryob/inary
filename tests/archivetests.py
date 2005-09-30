@@ -25,7 +25,7 @@ from pisi import uri
 
 class ArchiveFileTestCase(unittest.TestCase):
     def setUp(self):
-        pisi.api.init()
+        pisi.api.init(comar = False)
 
     def testUnpackTar(self):
         bctx = BuildContext("tests/popt/pspec.xml")

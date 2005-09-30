@@ -21,7 +21,7 @@ class PackageDBTestCase(unittest.TestCase):
 
     def setUp(self):
         # setUp will be called for each test individually
-        pisi.api.init()
+        pisi.api.init(comar = False)
 
         self.spec = SpecFile()
         self.spec.read('tests/popt/pspec.xml')

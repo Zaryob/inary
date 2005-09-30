@@ -40,13 +40,13 @@ class Error(pisi.Error):
     pass
 
 
-def init(database = True, options = None, ui = None ):
+def init(database = True, options = None, ui = None, comar = True):
     """Initialize PiSi subsystem"""
 
     import pisi.config
     ctx.config = pisi.config.Config(options)
 
-    if not ctx.config.get_option('ignore_comar'):
+    if comar and not ctx.config.get_option('ignore_comar'):
         # FIXME: just try for others (that don't use comar)
         try:
             import comar

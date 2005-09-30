@@ -20,7 +20,7 @@ from pisi.specfile import SpecFile
 class SourceDBTestCase(unittest.TestCase):
 
     def setUp(self):
-        pisi.api.init()
+        pisi.api.init(comar = False)
 
         self.sourcedb = pisi.sourcedb.init()
         self.spec = SpecFile()

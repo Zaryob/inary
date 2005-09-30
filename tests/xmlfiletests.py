@@ -24,7 +24,7 @@ from pisi.xmlext import *
 class XmlFileTestCase(unittest.TestCase):
 
     def setUp(self):
-        pisi.api.init(False)
+        pisi.api.init(database = False, comar = False)
     
     def testMetaClass(self):
 

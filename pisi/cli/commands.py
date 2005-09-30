@@ -52,12 +52,12 @@ class Command(object):
     def __init__(self):
         # now for the real parser
         import pisi
+        self.comar = False
         self.parser = OptionParser(usage=getattr(self, "__doc__"),
                                    version="%prog " + pisi.__version__)
         self.options()
         self.commonopts()
         (self.options, self.args) = self.parser.parse_args()
-        self.override_options()
         self.args.pop(0)                # exclude command arg
         
         self.check_auth_info()
@@ -87,12 +87,6 @@ class Command(object):
         options function it will be called"""
         pass
 
-    def override_options(self):
-        # if ignore_comar is not defined, it is True, where it is defined 
-        # its default is False. Confused? Don't get confused, it's correct :)
-        if not hasattr(self.options, 'ignore_comar'):
-            self.options.ignore_comar = True
-
     def check_auth_info(self):
         username = self.options.username
         password = self.options.password
@@ -121,7 +115,8 @@ class Command(object):
         
         # NB: command imports here or in the command class run fxns
         import pisi.api
-        pisi.api.init(database, self.options)
+        pisi.api.init(database = database, options = self.options,
+                      comar = self.comar)
 
     def finalize(self):
         """do cleanup work for PiSi components"""
@@ -281,6 +276,7 @@ class PackageOp(Command):
     """Abstract package operation command"""
     def __init__(self):
         super(PackageOp, self).__init__()
+        self.comar = True
 
     def options(self):
         p = self.parser
