@@ -282,9 +282,9 @@ class PackageOp(Command):
         p = self.parser
         p.add_option("-B", "--ignore-comar", action="store_true",
                      default=False, help="bypass comar configuration agent")
-        p.add_option("", "--ignore-dependency",
-                     action="store_true",
-                     default=False, help="death of sanity")
+        p.add_option("", "--ignore-dependency", action="store_true",
+                     default=False,
+                     help="do not take dependency information into account")
 
     def init(self):
         super(PackageOp, self).init(True)

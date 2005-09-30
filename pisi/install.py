@@ -75,10 +75,11 @@ class Installer:
                 raise InstallError("Package conflicts " + pkg)
 
         # check dependencies
-        if not dependency.installable(self.pkginfo.name):
-            ctx.ui.error('Dependencies for ' + self.pkginfo.name +
-                     ' not satisfied')
-            raise InstallError("Package not installable")
+        if not ctx.config.get_option('ignore_dependency'):
+            if not dependency.installable(self.pkginfo.name):
+                ctx.ui.error('Dependencies for ' + self.pkginfo.name +
+                             ' not satisfied')
+                raise InstallError("Package not installable")
 
     def reinstall(self):
         "check reinstall, confirm action, and remove package if reinstall"

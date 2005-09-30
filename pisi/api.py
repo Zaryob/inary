@@ -112,6 +112,12 @@ def install_pkg_files(package_URIs):
             ctx.ui.error('Mixing file names and package names not supported YET.\n')
             return False
 
+    if ctx.config.get_option('ignore_dependency'):
+        # simple code path then
+        for x in package_URIs:
+            operations.install_single_file(x)
+        return True
+            
     # read the package information into memory first
     # regardless of which distribution they come from
     d_t = {}
