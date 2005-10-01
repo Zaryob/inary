@@ -483,6 +483,16 @@ class PisiBuild:
                                      pcomar.script)
                 pkg.add_to_package(fname)
 
+            # add {post,pre}{install,remove} scripts to package if exists
+            prefix_list = [".preinstall", ".preremove", \
+                           ".postinstall", ".preinstall"]
+
+            for file in prefix_list:
+                filename = package.name + file
+                if os.path.exists(filename):
+                    pkg.add_to_package(filename)
+                    ctx.ui.info(_("%s added to PISI package %s.") % (filename, name))
+
             # add xmls and files
             os.chdir(self.bctx.pkg_dir())
         
