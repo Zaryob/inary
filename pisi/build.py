@@ -335,8 +335,8 @@ class PisiBuild:
         install_dir = self.bctx.pkg_install_dir()
         collisions = check_path_collision(package,
                                           self.spec.packages)
-        if collisions:
-            raise Error(_('Path collisions detected'))
+#        if collisions:
+#            raise Error(_('Path collisions detected'))
         d = {}
         for pinfo in package.paths:
             path = install_dir + pinfo.pathname
