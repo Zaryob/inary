@@ -333,10 +333,12 @@ class PisiBuild:
         generated files by the build system."""
         files = Files()
         install_dir = self.bctx.pkg_install_dir()
+
+        # we'll exclude collisions in get_file_hashes. Having a
+        # collisions list is not wrong, we must just handle it :).
         collisions = check_path_collision(package,
                                           self.spec.packages)
-#        if collisions:
-#            raise Error(_('Path collisions detected'))
+
         d = {}
         for pinfo in package.paths:
             path = install_dir + pinfo.pathname
