@@ -247,8 +247,6 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
             for p in exclude_prefix:
                 if tempfnam.startswith(p):
                     return 1
-                else:
-                    return 0
         return 0
 
     for root, dirs, files in os.walk(top, topdown=False):
