@@ -88,7 +88,11 @@ Legend:
      - local repository: file://
      - removable media: media://
  / i18n support
- / UI
+   - summary,description için doğru dili kullanmak
+   - pisi mesajlarının çevrilebilir hale getirilmesi (build.py yi örnek alın)
+   - build sistemine .pot oluşturma vs desteği (pygettext)
+   - mesajların çevirisinin yapılması (pisi tr.po)
+/ UI
    ? pyqt UI class to interface
    - PISIMAT
    / pykde GUI (cartman)
