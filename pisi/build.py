@@ -71,7 +71,7 @@ def check_path_collision(package, pkgList):
                 # path.pathname: /usr/share/doc
                 if util.subpath(pinfo.pathname, path.pathname):
                     collisions.append(path.pathname)
-                    ctx.ui.error(_('Path %s belongs in multiple packages') %
+                    ctx.ui.debug(_('Path %s belongs in multiple packages') %
                              path.pathname)
     return collisions
 
