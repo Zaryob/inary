@@ -372,7 +372,7 @@ def strip_directory(top, excludelist=[]):
 
 def strip_file(filepath):
     """strip a file"""
-    p = os.popen("file %s" % filepath)
+    p = os.popen("file \"%s\"" % filepath)
     o = p.read()
 
     def run_strip(f, flags=""):
