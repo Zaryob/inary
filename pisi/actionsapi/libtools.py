@@ -22,8 +22,10 @@ from pisi.actionsapi.shelltools import *
 import pisi.actionsapi.get as get
 
 class RunTimeError(pisi.actionsapi.Error):
-    def __init__(self, Exception):
-        ctx.ui.error(Exception)
+    def __init__(self, value):
+        pisi.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
 
 def preplib(sourceDirectory = '/usr/lib'):
     sourceDirectory = get.installDIR() + sourceDirectory

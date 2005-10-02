@@ -24,22 +24,30 @@ from pisi.actionsapi.shelltools import can_access_file
 from pisi.actionsapi.libtools import gnuconfig_update
 
 class ConfigureError(pisi.actionsapi.Error):
-    def __init__(self, Exception):
-        ctx.ui.error(Exception)
+    def __init__(self, value):
+        pisi.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
         if can_access_file('config.log'):
             ctx.ui.error('\n!!! Please attach the config.log to your bug report:\n%s/config.log\n' % os.getcwd())
 
 class MakeError(pisi.actionsapi.Error):
-    def __init__(self, Exception):
-        ctx.ui.error(Exception)
+    def __init__(self, value):
+        pisi.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
 
 class InstallError(pisi.actionsapi.Error):
-    def __init__(self, Exception):
-        ctx.ui.error(Exception)
+    def __init__(self, value):
+        pisi.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
 
 class RunTimeError(pisi.actionsapi.Error):
-    def __init__(self, Exception):
-        ctx.ui.error(Exception)
+    def __init__(self, value):
+        pisi.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
 
 def configure(parameters = ''):
     '''configure source with given parameters = "--with-nls --with-libusb --with-something-usefull"'''

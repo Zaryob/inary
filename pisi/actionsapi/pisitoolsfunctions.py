@@ -24,12 +24,16 @@ import pisi.actionsapi
 from pisi.actionsapi.shelltools import *
 
 class FileError(pisi.actionsapi.Error):
-    def __init__(self, Exception):
-        ctx.ui.error(Exception)
+    def __init__(self, value):
+        pisi.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
         
 class ArgumentError(pisi.actionsapi.Error):
-    def __init__(self, Exception):
-        ctx.ui.error(Exception)
+    def __init__(self, value):
+        pisi.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
 
 def executable_insinto(destinationDirectory, *sourceFiles):
     '''insert a executable file into destinationDirectory'''
