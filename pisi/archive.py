@@ -154,8 +154,9 @@ class ArchiveZip(ArchiveBase):
                 # check that output dir is present
                 util.check_dir(os.path.dirname(ofile))
 
-                # remove output file we might be overwriting
-                if os.path.exists(ofile):
+                # remove output file we might be overwriting.
+                # (also check for islink? for broken symlinks...)
+                if os.path.exists(ofile) or os.path.islink(ofile):
                     os.remove(ofile)
  
                 if info.external_attr == self.symmagic:
