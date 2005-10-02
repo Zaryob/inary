@@ -66,3 +66,5 @@ def install(parameters = 'install'):
      else:
         if system('perl Build install'):
             raise MakeError, '!!! Install failed...\n'
+
+# FIXME: fix_local_pod % update_pod
