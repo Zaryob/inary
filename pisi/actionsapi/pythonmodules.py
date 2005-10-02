@@ -23,26 +23,32 @@ from pisi.actionsapi.shelltools import system, can_access_file
 from pisi.actionsapi.pisitools import dodoc
 
 class CompileError(pisi.actionsapi.Error):
-    def __init__(self, Exception):
-        ctx.ui.error(Exception)
+    def __init__(self, value=''):
+        pisi.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
 
 class InstallError(pisi.actionsapi.Error):
-    def __init__(self, Exception):
-        ctx.ui.error(Exception)
+    def __init__(self, value=''):
+        pisi.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
 
 class RunTimeError(pisi.actionsapi.Error):
-    def __init__(self, Exception):
-        ctx.ui.error(Exception)
+    def __init__(self, value=''):
+        pisi.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
 
 def compile(parameters = ''):
     '''compile source with given parameters.'''
     if system('python setup.py build %s' % (get.installDIR(), parameters)):
-        raise CompileError('!!! Make failed...\n')
+        raise CompileError, '!!! Make failed...\n'
 
 def install(parameters = ''):
     '''does python setup.py install'''
     if system('python setup.py install --root=%s --no-compile %s' % (get.installDIR(), parameters)):
-        raise InstallError('!!! Install failed...\n')
+        raise InstallError, '!!! Install failed...\n'
 
     DDOCS = 'CHANGELOG COPYRIGHT KNOWN_BUGS MAINTAINERS PKG-INFO \
              CONTRIBUTORS LICENSE COPYING* Change* MANIFEST* README*'
@@ -54,4 +60,4 @@ def install(parameters = ''):
 def run(parameters = ''):
     '''executes parameters with python'''
     if system('python %s' % (parameters)):
-        raise RunTimeError('!!! Running %s failed...\n' % parameters)
+        raise RunTimeError, '!!! Running %s failed...\n' % parameters
