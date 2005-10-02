@@ -400,8 +400,13 @@ class PisiBuild:
             fp = os.path.join(ctx.config.options.output_dir, f)
             if os.path.isfile(fp):
                 files.append(fp)
-        for f in os.listdir(ctx.config.packages_dir()):
-            fp = os.path.join(ctx.config.packages_dir(), f)
+
+        packages_dir = ctx.config.packages_dir()
+        # FIXME: packages_dir() should be there!
+        if not os.path.exists(packages_dir):
+            os.makedirs(packages_dir)
+        for f in os.listdir(packages_dir):
+            fp = os.path.join(packages_dir, f)
             if os.path.isfile(fp):
                 files.append(fp)
 
