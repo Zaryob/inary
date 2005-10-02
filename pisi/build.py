@@ -377,20 +377,47 @@ class PisiBuild:
 
         # find previous build in ctx.config.options.output_dir
         found = []
-        for root, dirs, files in os.walk(ctx.config.options.output_dir):
-            for fn in files:
-                fn = fn.decode('utf-8')
-                if found_package(fn):
-                    old_package_fn = os.path.join(root, fn)
-                    ctx.ui.info('(found old version %s)' % old_package_fn)
-                    old_pkg = Package(old_package_fn, 'r')
-                    old_pkg.read(os.path.join(ctx.config.tmp_dir(), 'oldpkg'))
-                    if str(old_pkg.metadata.package.name) != package_name:
-                        ctx.ui.warning('Skipping %s with wrong pkg name ' %
-                                       old_package_fn)
-                        continue
-                    old_build = old_pkg.metadata.package.build
-                    found.append( (old_package_fn, old_build) )
+#        for root, dirs, files in os.walk(ctx.config.options.output_dir):
+#             for fn in files:
+#                 fn = fn.decode('utf-8')
+#                 if found_package(fn):
+#                     old_package_fn = os.path.join(root, fn)
+#                     ctx.ui.info('(found old version %s)' % old_package_fn)
+#                     old_pkg = Package(old_package_fn, 'r')
+#                     old_pkg.read(os.path.join(ctx.config.tmp_dir(), 'oldpkg'))
+#                     if str(old_pkg.metadata.package.name) != package_name:
+#                         ctx.ui.warning('Skipping %s with wrong pkg name ' %
+#                                        old_package_fn)
+#                         continue
+#                     old_build = old_pkg.metadata.package.build
+#                     found.append( (old_package_fn, old_build) )
+#
+# FIXME: Following dirty lines of code just search in the output_dir and
+# packages dir for previous packages. But we should find a neat way
+# for this...
+        files = []
+        for f in os.listdir(ctx.config.options.output_dir):
+            fp = os.path.join(ctx.config.options.output_dir, f)
+            if os.path.isfile(fp):
+                files.append(fp)
+        for f in os.listdir(ctx.config.packages_dir()):
+            fp = os.path.join(ctx.config.packages_dir(), f)
+            if os.path.isfile(fp):
+                files.append(fp)
+
+        for fn in files:
+            fn = fn.decode('utf-8')
+            if found_package(os.path.basename(fn)):
+                old_package_fn = fn
+                ctx.ui.info('(found old version %s)' % old_package_fn)
+                old_pkg = Package(old_package_fn, 'r')
+                old_pkg.read(os.path.join(ctx.config.tmp_dir(), 'oldpkg'))
+                if str(old_pkg.metadata.package.name) != package_name:
+                    ctx.ui.warning('Skipping %s with wrong pkg name ' %
+                                   old_package_fn)
+                    continue
+                old_build = old_pkg.metadata.package.build
+                found.append( (old_package_fn, old_build) )
         if not found:
             return 0
             ctx.ui.warning('(no previous build found, setting build no to 0.)')
