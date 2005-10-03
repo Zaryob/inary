@@ -18,6 +18,7 @@ import pisi.context as ctx
 import pisi.util as util
 import pisi.packagedb as packagedb
 from pisi.uri import URI
+import pisi.comariface as comariface
 
 # single package operations
 
@@ -42,22 +43,12 @@ def remove_file(fileinfo):
             ctx.ui.warning('Not removing non-file, non-link %d' % fpath)
 
 def run_preremove(package_name):
-
     if ctx.comard:
-        com = ctx.comard
-
-        # TODO: run preremove scripts...
-        #        com.call("System.Package", "preremove")
-        com.remove(package_name)
-        while 1:
-            reply = com.read_cmd()
-            if reply[0] == com.RESULT:
-                break
-            elif reply[1] == com.ERROR:
-                raise Error, "COMAR.remove failed!"
+        comariface.run_preremove(package_name)
     else:
         # TODO: store this somewhere
         pass
+
 def remove_db(package_name):
     ctx.installdb.remove(package_name)
     packagedb.remove_package(package_name)  #FIXME: this looks like a mistake!

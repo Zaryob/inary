@@ -291,14 +291,8 @@ class PackageOp(Command):
                 
     def finalize(self):
         #self.finalize_db()
-        if not self.options.ignore_comar:
-            pass
-            #try:
-            #    pisi.comariface.finalize()
-            #except pisi.comariface.ComarError:
-            #    ui.error('Comar error encountered\n')
+        pass
 
-        
 class Install(PackageOp):
     """Install PISI packages
 

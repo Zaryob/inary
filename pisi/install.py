@@ -29,6 +29,7 @@ import pisi.operations as operations
 from pisi.specfile import *
 from pisi.package import Package
 from pisi.metadata import MetaData
+import pisi.comariface as comariface
 #import conflicts
 
 class InstallError(pisi.Error):
@@ -58,7 +59,7 @@ class Installer:
         self.store_pisi_files()
         if ctx.comard:
             self.register_comar_scripts()
-            self.comar_run_postinstall()
+            comariface.run_postinstall(self.pkginfo.name)
         self.update_databases()
 
     def check_requirements(self):
@@ -165,7 +166,7 @@ class Installer:
         ctx.ui.info(_('Storing %s, ') % ctx.const.files_xml)
         self.package.extract_file(ctx.const.files_xml, self.package.pkg_dir())
 
-        ctx.ui.info(_('%s.') % ctx.const.metadata_xml)
+        ctx.ui.info(_('Storing %s.') % ctx.const.metadata_xml)
         self.package.extract_file(ctx.const.metadata_xml, self.package.pkg_dir())
 
         for pcomar in self.metadata.package.providesComar:
@@ -193,26 +194,6 @@ class Installer:
                     break
                 else:
                     raise InstallError, _("COMAR.register ERROR!")
-
-
-    def comar_run_postinstall(self):
-        "run postinstall scripts trough COMAR"
-
-        com = ctx.comard
-        ctx.ui.info(_("Running postinstall script for %s") % self.metadata.package.name)
-        com.call_package("System.Package.postInstall", self.metadata.package.name)
-        while 1:
-            reply = com.read_cmd()
-            if reply[0] == com.RESULT:
-                break
-            elif reply[0] == com.NONE: # package has no postInstall script
-                break
-            elif reply[0] == com.FAIL:
-                e = _("COMAR.call_package(System.Pakcage.postInstall, %s) failed!: %s") % (
-                    self.metadata.package.name, reply[2])
-                raise InstallError, e
-            else:
-                raise InstallError, _("COMAR.call_package ERROR: %d") % reply[0]
 
 
     def update_databases(self):

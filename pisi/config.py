@@ -9,12 +9,13 @@
 #
 # Please read the COPYING file.
 #
-
-# PISI Configuration module is used for gathering and providing
-# regular PISI configurations.
-
-# Authors: Baris Metin <baris@uludag.org.tr
+# Authors: Baris Metin <baris@uludag.org.tr>
 #          Eray Ozkural <eray@uludag.org.tr>
+
+"""
+PISI Configuration module is used for gathering and providing
+regular PISI configurations.
+"""
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
