@@ -54,6 +54,7 @@ class Installer:
         self.store_pisi_files()
         if ctx.comard:
             self.register_comar_scripts()
+            self.comar_run_postinstall()
         self.update_databases()
 
     def check_requirements(self):
@@ -186,8 +187,28 @@ class Installer:
                 reply = com.read_cmd()
                 if reply[0] == com.RESULT:
                     break
-                elif reply[1] == com.ERROR:
-                    raise InstallError, "COMAR.register failed!"
+                else:
+                    raise InstallError, "COMAR.register ERROR!"
+
+
+    def comar_run_postinstall(self):
+        "run postinstall scripts trough COMAR"
+
+        com = ctx.comard
+        ctx.ui.info("Running postinstall script for %s" % self.metadata.package.name)
+        com.call_package("System.Package.postInstall", self.metadata.package.name)
+        while 1:
+            reply = com.read_cmd()
+            if reply[0] == com.RESULT:
+                break
+            elif reply[0] == com.NONE: # package has no postInstall script
+                break
+            elif reply[0] == com.FAIL:
+                e = "COMAR.call_package(System.Pakcage.postInstall, %s) failed!: %s" % (
+                    self.metadata.package.name, reply[2])
+                raise InstallError, e
+            else:
+                raise InstallError, "COMAR.call_package ERROR: %d" % reply[0]
 
 
     def update_databases(self):
