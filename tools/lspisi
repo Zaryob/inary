@@ -49,7 +49,7 @@ if __name__ == "__main__":
         f = openZip(sys.argv[1])
         for file in fillFileList(f):
             if f.getinfo(file).external_attr == 2716663808:
-                print file + " --> symlink"
+                print file + " --> " + f.read(file)
             else:
                 print file
     else:
