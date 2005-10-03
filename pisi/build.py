@@ -320,7 +320,7 @@ class PisiBuild:
         # build no
         if ctx.config.options.ignore_build_no:
             metadata.package.build = None  # means, build no information n/a
-            ctx.ui.warning('build number is not available.')
+            ctx.ui.warning(_('build number is not available.'))
         else:
             metadata.package.build = self.calc_build_no(metadata.package.name)
 
@@ -414,18 +414,18 @@ class PisiBuild:
             fn = fn.decode('utf-8')
             if found_package(os.path.basename(fn)):
                 old_package_fn = fn
-                ctx.ui.info('(found old version %s)' % old_package_fn)
+                ctx.ui.info(_('(found old version %s)') % old_package_fn)
                 old_pkg = Package(old_package_fn, 'r')
                 old_pkg.read(os.path.join(ctx.config.tmp_dir(), 'oldpkg'))
                 if str(old_pkg.metadata.package.name) != package_name:
-                    ctx.ui.warning('Skipping %s with wrong pkg name ' %
+                    ctx.ui.warning(_('Skipping %s with wrong pkg name ') %
                                    old_package_fn)
                     continue
                 old_build = old_pkg.metadata.package.build
                 found.append( (old_package_fn, old_build) )
         if not found:
             return 0
-            ctx.ui.warning('(no previous build found, setting build no to 0.)')
+            ctx.ui.warning(_('(no previous build found, setting build no to 0.)'))
         else:
             a = filter(lambda (x,y): y != None, found)
             ctx.ui.debug(str(a))
@@ -462,13 +462,13 @@ class PisiBuild:
 
             # set build number
             if old_build is None:
-                ctx.ui.warning('(old package lacks a build no, setting build no to 0.)')
+                ctx.ui.warning(_('(old package lacks a build no, setting build no to 0.)'))
                 return 0
             elif changed:
-                ctx.ui.info('There are changes, incrementing build no to %d' % (old_build + 1))
+                ctx.ui.info(_('There are changes, incrementing build no to %d' % (old_build + 1)))
                 return old_build + 1
             else:
-                ctx.ui.info('There is no change from previous build %d ' % old_build)                
+                ctx.ui.info(_('There is no change from previous build %d ') % old_build)
                 return old_build
 
     def build_packages(self):
