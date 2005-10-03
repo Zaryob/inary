@@ -49,7 +49,7 @@ class Installer:
         self.ask_reinstall = ask_reinstall
         self.check_requirements()
         self.check_relations()
-        self.reinstall()
+        self.check_reinstall()
         self.extract_install()
         self.store_pisi_files()
         if ctx.comard:
@@ -81,11 +81,12 @@ class Installer:
                              ' not satisfied')
                 raise InstallError("Package not installable")
 
-    def reinstall(self):
-        "check reinstall, confirm action, and remove package if reinstall"
+    def check_reinstall(self):
+        "check reinstall, confirm action, and schedule reinstall"
 
         pkg = self.pkginfo
 
+        self.reinstall = False
         if ctx.installdb.is_installed(pkg.name): # is this a reinstallation?
             (iversion, irelease, ibuild) = ctx.installdb.get_version(pkg.name)
 
@@ -130,15 +131,28 @@ class Installer:
                     if not ctx.ui.confirm(x):
                         raise InstallError('Package downgrade declined')
 
-            # remove old package then
-            operations.remove_single(pkg.name)
+            # schedule for reinstall
+            self.old_files = ctx.installdb.files(pkg.name)
+            self.reinstall = True
+            operations.run_preremove(pkg.name)
 
     def extract_install(self):
         "unzip package in place"
 
         ctx.ui.info('Extracting files,')
         self.package.extract_dir_flat('install', ctx.config.destdir)
- 
+
+        if self.reinstall:
+            # remove left over files
+            new = set(map(lambda x: str(x.path), self.files.list))
+            old = set(map(lambda x: str(x.path), self.old_files.list))
+            leftover = old - new
+            old_fileinfo = {}
+            for fileinfo in self.old_files.list:
+                old_fileinfo[str(fileinfo.path)] = fileinfo
+            for path in leftover:
+                operations.remove_file( old_fileinfo[path] )
+
     def store_pisi_files(self):
         """put files.xml, metadata.xml, actions.py and COMAR scripts
         somewhere in the file system. We'll need these in future..."""
@@ -178,6 +192,9 @@ class Installer:
 
     def update_databases(self):
         "update databases"
+
+        if self.reinstall:
+            operations.remove_db(self.metadata.package.name)
 
         # installdb
         ctx.installdb.install(self.metadata.package.name,

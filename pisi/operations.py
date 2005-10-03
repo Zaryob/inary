@@ -21,6 +21,45 @@ from pisi.uri import URI
 
 # single package operations
 
+# remove stuff
+
+def remove_file(fileinfo):
+    fpath = os.path.join(ctx.config.destdir, fileinfo.path)
+    # TODO: We have to store configuration files for futher
+    # usage. Currently we'are doing it like rpm does, saving
+    # with a prefix and leaving the user to edit it. In the future
+    # we'll have a plan for these configuration files.
+    if fileinfo.type == ctx.const.conf:
+        if os.path.isfile(fpath):
+            os.rename(fpath, fpath + ".pisi")
+    else:
+        # check if file is removed manually.
+        # And we don't remove directories!
+        # TODO: remove directory if there is nothing under it?
+        if os.path.isfile(fpath) or os.path.islink(fpath):
+            os.unlink(fpath)
+        else:
+            ctx.ui.warning('Not removing non-file, non-link %d' % fpath)
+
+def run_preremove(package_name):
+
+    if ctx.comard:
+        com = ctx.comard
+
+        # TODO: run preremove scripts...
+        #        com.call("System.Package", "preremove")
+        com.remove(package_name)
+        while 1:
+            reply = com.read_cmd()
+            if reply[0] == com.RESULT:
+                break
+            elif reply[1] == com.ERROR:
+                raise Error, "COMAR.remove failed!"
+
+def remove_db(package_name):
+    ctx.installdb.remove(package_name)
+    packagedb.remove_package(package_name)  #FIXME: this looks like a mistake!
+
 def remove_single(package_name):
     """Remove a single package"""
     inst_packagedb = packagedb.inst_packagedb
@@ -31,38 +70,13 @@ def remove_single(package_name):
     if not ctx.installdb.is_installed(package_name):
         raise Exception('Trying to remove nonexistent package '
                         + package_name)
-    if ctx.comard:
-        com = ctx.comard
-
-# TODO: run preremove scripts...
-#        com.call("System.Package", "preremove")
-        com.remove(package_name)
-        while 1:
-            reply = com.read_cmd()
-            if reply[0] == com.RESULT:
-                break
-            elif reply[1] == com.ERROR:
-                raise Error, "COMAR.remove failed!"
-
+        
+    run_preremove(package_name)
+        
     for fileinfo in ctx.installdb.files(package_name).list:
-        fpath = os.path.join(ctx.config.destdir, fileinfo.path)
-        # TODO: We have to store configuration files for futher
-        # usage. Currently we'are doing it like rpm does, saving
-        # with a prefix and leaving the user to edit it. In the future
-        # we'll have a plan for these configuration files.
-        if fileinfo.type == ctx.const.conf:
-            if os.path.isfile(fpath):
-                os.rename(fpath, fpath + ".pisi")
-        else:
-            # check if file is removed manually.
-            # And we don't remove directories!
-            # FIXME: should give a warning if it is...
-            if os.path.isfile(fpath) or os.path.islink(fpath):
-                os.unlink(fpath)
+        remove_file(fileinfo)
 
-
-    ctx.installdb.remove(package_name)
-    packagedb.remove_package(package_name)
+    remove_db(package_name)
 
 def install_single(pkg, upgrade = False):
     """install a single package from URI or ID"""
