@@ -200,7 +200,7 @@ class Installer:
 
         com = ctx.comard
         ctx.ui.info(_("Running postinstall script for %s") % self.metadata.package.name)
-        com.call_package(_("System.Package.postInstall"), self.metadata.package.name)
+        com.call_package("System.Package.postInstall", self.metadata.package.name)
         while 1:
             reply = com.read_cmd()
             if reply[0] == com.RESULT:
