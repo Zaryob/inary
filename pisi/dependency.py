@@ -12,6 +12,10 @@
 
 # Author:  Eray Ozkural <eray@uludag.org.tr>
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 #import pisi.db as db
 import pisi.context as ctx
 import pisi.packagedb as packagedb
@@ -47,7 +51,7 @@ class DepInfo:
 
     def has_errors(self):
         if not self.package:
-            return [ "Dependency should have a package string" ]
+            return [ _("Dependency should have a package string") ]
         return None
 
     def satisfies(self, pkg_name, version, release):
@@ -111,7 +115,7 @@ dependency spec"""
 def satisfies_dependencies(pkg, deps, sat = installed_satisfies_dep):
     for dep in deps:
         if not sat(dep):
-            ctx.ui.error('Package %s does not satisfy dependency %s' %
+            ctx.ui.error(_('Package %s does not satisfy dependency %s') %
                      (pkg,dep))
             return False
     return True
@@ -124,7 +128,7 @@ def installable(pkg):
     """calculate if pkg is installable currently 
     which means it has to satisfy both install and runtime dependencies"""
     if not packagedb.has_package(pkg):
-        ctx.ui.info("Package " + pkg + " is not present in the package database");
+        ctx.ui.info(_("Package %s is not present in the package database") % pkg);
         return False
     elif satisfies_runtime_deps(pkg):
         return True

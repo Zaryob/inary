@@ -17,6 +17,10 @@ import os
 import tarfile
 import zipfile
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 # PiSi modules
 import pisi
 import pisi.util as util
@@ -61,7 +65,7 @@ class ArchiveTar(ArchiveBase):
         elif self.type == 'tarbz2':
             rmode = 'r:bz2'
         else:
-            raise ArchiveError("Archive type not recognized")
+            raise ArchiveError(_("Archive type not recognized"))
 
         tar = tarfile.open(self.file_path, rmode)
         oldwd = os.getcwd()

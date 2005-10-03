@@ -38,6 +38,9 @@
 import os
 from ConfigParser import ConfigParser, NoSectionError
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
 
 class ConfigException(Exception):
     pass
@@ -79,7 +82,7 @@ class ConfigurationSection(object):
         elif section == "directories":
             self.defaults = DirsDefaults
         else:
-            e = "No section by name '%s'" % section
+            e = _("No section by name '%s'") % section
             raise ConfigException, e
 
         self.section = section

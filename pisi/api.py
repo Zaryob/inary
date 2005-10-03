@@ -17,6 +17,7 @@ import sys
 ver = sys.version_info
 if ver[0] <= 2 and ver[1] < 4:
     from sets import Set as set
+    
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
@@ -53,7 +54,7 @@ def init(database = True, options = None, ui = None, comar = True):
             ctx.comard = comar.Link()
         except ImportError:
             raise Error(_("COMAR: comard not fully installed"))
-            print "skipping COMAR connection for now..."
+            print _("skipping COMAR connection for now...")
         except comar.Error:
             raise Error(_("COMAR: comard not running or defunct"))
 
@@ -109,10 +110,10 @@ def install_pkg_files(package_URIs):
 
     for x in package_URIs:
         if not x.endswith(ctx.const.package_prefix):
-            ctx.ui.error('Mixing file names and package names not supported YET.\n')
+            ctx.ui.error(_('Mixing file names and package names not supported YET.'))
             return False
 
-    if ctx.config.get_option('ignore_dependency'):
+    if ctx.config.get_option(_('ignore_dependency')):
         # simple code path then
         for x in package_URIs:
             operations.install_single_file(x)
@@ -164,7 +165,7 @@ def install_pkg_files(package_URIs):
         A = d_t.keys()
        
         if len(A)==0:
-            ctx.ui.info('No packages to install.')
+            ctx.ui.info(_('No packages to install.'))
             return True
         
         # try to construct a pisi graph of packages to
@@ -199,7 +200,7 @@ def install_pkg_files(package_URIs):
         for x in order:
             operations.install_single_file(dfn[x])
     else:
-        raise Error('External dependencies not satisfied')
+        raise Error(_('External dependencies not satisfied'))
 
     return True # everything went OK.
 
@@ -211,7 +212,7 @@ def install_pkg_names(A):
     ctx.ui.debug('A = %s' % str(A))
 
     if len(A)==0:
-        ctx.ui.info('No packages to install.')
+        ctx.ui.info(_('No packages to install.'))
         return True
     
     # try to construct a pisi graph of packages to
@@ -232,7 +233,7 @@ def install_pkg_names(A):
             pkg = packagedb.get_package(x)
             print pkg
             for dep in pkg.runtimeDeps:
-                print 'checking ', dep
+                ctx.ui.debug('checking %s' % str(dep))
                 # we don't deal with already *satisfied* dependencies
                 if not dependency.installed_satisfies_dep(dep):
                     if not dep.package in G_f.vertices():
@@ -285,7 +286,6 @@ def package_graph(A, ignore_installed = False):
 def upgrade(A):
     upgrade_pkg_names(A)
 
-
 def upgrade_pkg_names(A):
     """Re-installs packages from the repository, trying to perform
     a maximum number of upgrades."""
@@ -296,9 +296,9 @@ def upgrade_pkg_names(A):
     Ap = []
     for x in A:
         if x.endswith('.pisi'):
-            ctx.ui.debug("Warning: package *name* ends with '.pisi'")
+            ctx.ui.debug(_("Warning: package *name* ends with '.pisi'"))
         if not ctx.installdb.is_installed(x):
-            ctx.ui.info('Package %s is not installed.' % x)
+            ctx.ui.info(_('Package %s is not installed.') % x)
             continue
         (version, release, build) = ctx.installdb.get_version(x)
         pkg = packagedb.get_package(x)
@@ -316,13 +316,13 @@ def upgrade_pkg_names(A):
                     Ap.append(x)
         else:
             #ctx.ui.info('Package %s cannot be upgraded. ' % x)
-            ctx.ui.info('Package %s is already at its latest version %s,\
- release %s, build %s.'
+            ctx.ui.info(_('Package %s is already at its latest version %s,\
+ release %s, build %s.')
                     % (x, pkg.version, pkg.release, pkg.build))
     A = Ap
 
     if len(A)==0:
-        ctx.ui.info('No packages to upgrade.')
+        ctx.ui.info(_('No packages to upgrade.'))
         return True
 
     ctx.ui.debug('A = %s' % str(A))
@@ -344,7 +344,7 @@ def upgrade_pkg_names(A):
             pkg = packagedb.get_package(x)
             print pkg
             for dep in pkg.runtimeDeps:
-                print 'checking ', dep
+                #print 'checking ', dep
                 # add packages that can be upgraded
                 if dependency.repo_satisfies_dep(dep):
                     if ctx.installdb.is_installed(dep.package):
@@ -401,11 +401,11 @@ def remove(A):
         if ctx.installdb.is_installed(x):
             Ap.append(x)
         else:
-            ctx.ui.info('Package %s does not exist. Cannot remove.' % x)
+            ctx.ui.info(_('Package %s does not exist. Cannot remove.') % x)
     A = Ap
 
     if len(A)==0:
-        ctx.ui.info('No packages to remove.')
+        ctx.ui.info(_('No packages to remove.'))
         return True
         
     # try to construct a pisi graph of packages to
@@ -424,32 +424,53 @@ def remove(A):
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            print 'processing', pkg.name
+            #print 'processing', pkg.name
             rev_deps = packagedb.get_rev_deps(x)
             for (rev_dep, depinfo) in rev_deps:
-                print 'checking ', rev_dep
+                #print 'checking ', rev_dep
                 # we don't deal with unsatisfied dependencies
                 if dependency.installed_satisfies_dep(depinfo):
                     if not rev_dep in G_f.vertices():
                         Bp.add(rev_dep)
                         G_f.add_plain_dep(rev_dep, x)
         B = Bp
-    G_f.write_graphviz(sys.stdout)
+    #G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
-    print order
+    #FIXME: do something more informative here
+    #print order
     for x in order:
         if ctx.installdb.is_installed(x):
             operations.remove_single(x)
         else:
-            ctx.ui.info('Package %s is not installed. Cannot remove.' % x)
+            ctx.ui.info(_('Package %s is not installed. Cannot remove.') % x)
         
     return True                         # everything went OK :)
 
 def configure_pending():
-    # TODO: not coded yet
     # start with pending packages
-    # configure them in reverse topological order of configuration dependency
-    pass
+    # configure them in reverse topological order of dependency
+    A = ctx.installdb.list_pending()
+    print A
+    G_f = pgraph.PGraph(packagedb)               # construct G_f
+    for x in A:
+        G_f.add_package(x)
+    B = A
+    #state = {}
+    while len(B) > 0:
+        Bp = set()
+        for x in B:
+            pkg = packagedb.get_package(x)
+            print pkg
+            for dep in pkg.runtimeDeps:
+                if dep.package in G_f.vertices():
+                    G_f.add_dep(x, dep)
+        B = Bp
+    G_f.write_graphviz(sys.stdout)
+    order = G_f.topological_sort()
+    order.reverse()
+    print order
+    #for x in order:
+        
 
 def info(package):
     if package.endswith(ctx.const.package_prefix):
@@ -457,13 +478,13 @@ def info(package):
     else:
         return info_name(package)
     
-def info_file(package):
+def info_file(package_fn):
     from package import Package
 
-    if not os.path.exists(package):
-        raise Error ('File %s not found' % package)
+    if not os.path.exists(package_fn):
+        raise Error (_('File %s not found') % package_fn)
 
-    package = Package(package)
+    package = Package(package_fn)
     package.read()
     return package.metadata, package.files
 
@@ -483,15 +504,15 @@ def info_name(package_name):
             files = None
         return metadata, files
     else:
-        raise Error('Package %s not found' % package_name)
+        raise Error(_('Package %s not found') % package_name)
 
 def index(repo_dir = '.'):
 
-    ctx.ui.info('* Building index of PISI files under %s' % repo_dir)
+    ctx.ui.info(_('* Building index of PISI files under %s') % repo_dir)
     index = Index()
     index.index(repo_dir)
     index.write(ctx.const.pisi_index)
-    ctx.ui.info('* Index file written')
+    ctx.ui.info(_('* Index file written'))
 
 
 def add_repo(name, indexuri):
@@ -502,16 +523,16 @@ def remove_repo(name):
     if ctx.repodb.has_repo(name):
         ctx.repodb.remove_repo(name)
     else:
-        ctx.ui.error('* Repository %s does not exist. Cannot remove.'
+        ctx.ui.error(_('* Repository %s does not exist. Cannot remove.') 
                  % name)
 
 def update_repo(repo):
 
-    ctx.ui.info('* Updating repository: %s' % repo)
+    ctx.ui.info(_('* Updating repository: %s') % repo)
     index = Index()
     index.read(ctx.repodb.get_repo(repo).indexuri.get_uri(), repo)
     index.update_db(repo)
-    ctx.ui.info('* Package database updated.')
+    ctx.ui.info(_('* Package database updated.'))
 
 
 # build functions...
@@ -538,13 +559,14 @@ def prepare_for_build(pspecfile, authInfo=None):
     # FIXME: take care of the required buildDeps...
     # For now just report an error!
     if dep_unsatis:
-        ctx.ui.error("Unsatisfied Build Dependencies:")
+        ctx.ui.error(_("Unsatisfied Build Dependencies:"))
         for dep in dep_unsatis:
-            ctx.ui.error(dep.package)
-# FIXME: Don't exit for now! It's annoying to test on a system that
-# doesn't has all packages made with pisi.
-# Will be enabled on the full-pisi system.
-#        sys.exit(1)
+            ctx.ui.warning(dep.package)
+
+    # FIXME: Don't exit for now! It's annoying to test on a system that
+    # doesn't has all packages made with pisi.
+    # Will be enabled on the full-pisi system.
+    #        sys.exit(1)
 
     return pb
 

@@ -55,7 +55,9 @@ def run_preremove(package_name):
                 break
             elif reply[1] == com.ERROR:
                 raise Error, "COMAR.remove failed!"
-
+    else:
+        # TODO: store this somewhere
+        pass
 def remove_db(package_name):
     ctx.installdb.remove(package_name)
     packagedb.remove_package(package_name)  #FIXME: this looks like a mistake!

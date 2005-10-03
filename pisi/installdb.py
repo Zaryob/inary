@@ -18,6 +18,10 @@
 import os
 import fcntl
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 # PiSi
 import pisi
 import pisi.context as ctx
@@ -52,17 +56,17 @@ class InstallInfo:
                                    time_str)
         return s
     
-    state_map = { 'i': 'installed', 'ip':'installed-pending', 'r:removed'
-                  'p': 'purged' }
+    state_map = { 'i': _('installed'), 'ip':_('installed-pending'),
+                  'r':_('removed'), 'p': _('purged') }
         
     def __str__(self):
-        s = "State: %s\nVersion: %s, Release: %s, Build: %s\n" % \
+        s = _("State: %s\nVersion: %s, Release: %s, Build: %s\n") % \
             (InstallInfo.state_map[self.state], self.version,
              self.release, self.build)
         import time
         time_str = time.strftime("%d %b %Y %H:%M", self.time)
-        s += 'Distribution: %s, Install Time: %s\n' % (self.distribution,
-                                                       time_str)
+        s += _('Distribution: %s, Install Time: %s\n') % (self.distribution,
+                                                          time_str)
         return s
 
 
@@ -132,8 +136,8 @@ class InstallDB:
         """install package with specific version, release, build"""
         pkg = str(pkg)
         if self.is_installed(pkg):
-            raise InstallDBError("already installed")
-        if ctx.config.options and ctx.config.options.ignore_comar:
+            raise InstallDBError(_("Already installed"))
+        if ctx.config.get_option('ignore_comar'):
             state = 'ip'
             self.dp[pkg] = True
         else:

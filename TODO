@@ -78,7 +78,7 @@ Legend:
  - configure-pending (eray)
  / i18n support
    - summary,description için doğru dili kullanmak
-   - pisi mesajlarının çevrilebilir hale getirilmesi (build.py yi örnek alın)
+   / pisi mesajlarının çevrilebilir hale getirilmesi (build.py yi örnek alın)
    - build sistemine .pot oluşturma vs desteği (pygettext)
    - mesajların çevirisinin yapılması (pisi tr.po)
  / query
@@ -119,6 +119,7 @@ Legend:
      - removable media: media://
  - partial caching and automatic resume for file download (meren)
   - use a separate "partial/" subdir like urpmi
+ - a helper script for finding dependencies
  
  * low priority 
  

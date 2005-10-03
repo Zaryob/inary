@@ -11,6 +11,10 @@
 
 """a placeholder for data types, might factor elsewhere later"""
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 import pisi.xmlfile
 
 __metaclass__ = xmlfile.autoxml

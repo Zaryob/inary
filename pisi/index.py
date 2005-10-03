@@ -16,6 +16,10 @@
 
 import os
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 import pisi.context as ctx
 import pisi.metadata as metadata
 import pisi.packagedb as packagedb
@@ -67,7 +71,7 @@ class Index(XmlFile):
         for root, dirs, files in os.walk(repo_uri):
             for fn in files:
                 if fn.endswith(ctx.const.package_prefix):
-                    ctx.ui.info('Adding ' + fn + ' to package index')
+                    ctx.ui.info(_('Adding %s  to package index') %s)
                     self.add_package(os.path.join(root, fn), repo_uri)
 
     def update_db(self, repo):
@@ -93,6 +97,6 @@ class Index(XmlFile):
             md.package.packageURI = util.removepathprefix(repo_uri, path)
         # check package semantics
         if md.has_errors():
-            ctx.ui.error('Package ' + md.package.name + ': metadata corrupt')
+            ctx.ui.error(_('Package %s: metadata corrupt') % md.package.name)
         else:
             self.packages.append(md.package)

@@ -20,6 +20,10 @@ import urllib2
 import os
 from base64 import encodestring
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 # pisi modules
 import pisi
 import pisi.util as util
@@ -59,10 +63,10 @@ class Fetcher:
         """Return value: Fetched file's full path.."""
 
         if not self.url.filename():
-            self.err("filename error")
+            self.err(_("Filename error"))
 
         if not os.access(self.filedest, os.W_OK):
-            self.err("no perm to write to dest dir")
+            self.err(_("Access denied to write to dest dir"))
 
         if self.url.is_local_file():
             self.fetchLocalFile()
@@ -110,7 +114,7 @@ class Fetcher:
         url = self.url
 
         if not os.access(url.path(), os.F_OK):
-            self.err("no such file or no perm to read")
+            self.err(_("No such file or no permission to read"))
 
         dest = open(os.path.join(self.filedest, url.filename()) , "w")
         totalsize = os.path.getsize(url.path())

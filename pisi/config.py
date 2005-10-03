@@ -16,6 +16,10 @@
 # Authors: Baris Metin <baris@uludag.org.tr
 #          Eray Ozkural <eray@uludag.org.tr>
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 import pisi
 import pisi.context as ctx
 from pisi.configfile import ConfigurationFile

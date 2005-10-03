@@ -16,6 +16,10 @@
 
 import os
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 import pisi
 
 import pisi.context as ctx
@@ -78,9 +82,9 @@ class Installer:
         # check dependencies
         if not ctx.config.get_option('ignore_dependency'):
             if not dependency.installable(self.pkginfo.name):
-                ctx.ui.error('Dependencies for ' + self.pkginfo.name +
-                             ' not satisfied')
-                raise InstallError("Package not installable")
+                ctx.ui.error(_('Dependencies for %s not satisfied') %
+                             self.pkginfo.name)
+                raise InstallError(_("Package not installable"))
 
     def check_reinstall(self):
         "check reinstall, confirm action, and schedule reinstall"
@@ -104,33 +108,33 @@ class Installer:
 
             if same_ver:
                 if self.ask_reinstall:
-                    if not ctx.ui.confirm('Re-install same version package?'):
-                        raise InstallError('Package re-install declined')
+                    if not ctx.ui.confirm(_('Re-install same version package?')):
+                        raise InstallError(_('Package re-install declined'))
             else:
                 upgrade = False
                 # is this an upgrade?
                 # determine and report the kind of upgrade: version, release, build
                 if pkg.version > iversion:
-                    ctx.ui.info('Upgrading to new upstream version')
+                    ctx.ui.info(_('Upgrading to new upstream version'))
                     upgrade = True
                 elif pkg.release > irelease:
-                    ctx.ui.info('Upgrading to new distribution release')
+                    ctx.ui.info(_('Upgrading to new distribution release'))
                     upgrade = True
                 elif ((not ignore_build) and ibuild and pkg.build
                        and pkg.build > ibuild):
-                    ctx.ui.info('Upgrading to new distribution build')
+                    ctx.ui.info(_('Upgrading to new distribution build'))
                     upgrade = True
 
                 # is this a downgrade? confirm this action.
                 if self.ask_reinstall and (not upgrade):
                     if pkg.version < iversion:
-                        x = 'Downgrade to old upstream version?'
+                        x = _('Downgrade to old upstream version?')
                     elif pkg.release < irelease:
-                        x = 'Downgrade to old distribution release?'
+                        x = _('Downgrade to old distribution release?')
                     else:
-                        x = 'Downgrade to old distribution build?'
+                        x = _('Downgrade to old distribution build?')
                     if not ctx.ui.confirm(x):
-                        raise InstallError('Package downgrade declined')
+                        raise InstallError(_('Package downgrade declined'))
 
             # schedule for reinstall
             self.old_files = ctx.installdb.files(pkg.name)
@@ -140,7 +144,7 @@ class Installer:
     def extract_install(self):
         "unzip package in place"
 
-        ctx.ui.info('Extracting files,')
+        ctx.ui.info(_('Extracting files'))
         self.package.extract_dir_flat('install', ctx.config.destdir)
 
         if self.reinstall:
@@ -158,17 +162,17 @@ class Installer:
         """put files.xml, metadata.xml, actions.py and COMAR scripts
         somewhere in the file system. We'll need these in future..."""
 
-        ctx.ui.info('Storing %s, ' % ctx.const.files_xml)
+        ctx.ui.info(_('Storing %s, ') % ctx.const.files_xml)
         self.package.extract_file(ctx.const.files_xml, self.package.pkg_dir())
 
-        ctx.ui.info('%s.' % ctx.const.metadata_xml)
+        ctx.ui.info(_('%s.') % ctx.const.metadata_xml)
         self.package.extract_file(ctx.const.metadata_xml, self.package.pkg_dir())
 
         for pcomar in self.metadata.package.providesComar:
             fpath = os.path.join(ctx.const.comar_dir, pcomar.script)
             # comar prefix is added to the pkg_dir while extracting comar
             # script file. so we'll use pkg_dir as destination.
-            ctx.ui.info('Storing %s' % fpath)
+            ctx.ui.info(_('Storing %s') % fpath)
             self.package.extract_file(fpath, self.package.pkg_dir())
 
     def register_comar_scripts(self):
@@ -178,7 +182,7 @@ class Installer:
 
         for pcomar in self.metadata.package.providesComar:
             scriptPath = os.path.join(self.package.comar_dir(),pcomar.script)
-            ctx.ui.info("Registering COMAR script %s" % pcomar.script)
+            ctx.ui.info(_("Registering COMAR script %s") % pcomar.script)
 
             com.register(pcomar.om,
                          self.metadata.package.name,
@@ -188,15 +192,15 @@ class Installer:
                 if reply[0] == com.RESULT:
                     break
                 else:
-                    raise InstallError, "COMAR.register ERROR!"
+                    raise InstallError, _("COMAR.register ERROR!")
 
 
     def comar_run_postinstall(self):
         "run postinstall scripts trough COMAR"
 
         com = ctx.comard
-        ctx.ui.info("Running postinstall script for %s" % self.metadata.package.name)
-        com.call_package("System.Package.postInstall", self.metadata.package.name)
+        ctx.ui.info(_("Running postinstall script for %s") % self.metadata.package.name)
+        com.call_package(_("System.Package.postInstall"), self.metadata.package.name)
         while 1:
             reply = com.read_cmd()
             if reply[0] == com.RESULT:
@@ -204,11 +208,11 @@ class Installer:
             elif reply[0] == com.NONE: # package has no postInstall script
                 break
             elif reply[0] == com.FAIL:
-                e = "COMAR.call_package(System.Pakcage.postInstall, %s) failed!: %s" % (
+                e = _("COMAR.call_package(System.Pakcage.postInstall, %s) failed!: %s") % (
                     self.metadata.package.name, reply[2])
                 raise InstallError, e
             else:
-                raise InstallError, "COMAR.call_package ERROR: %d" % reply[0]
+                raise InstallError, _("COMAR.call_package ERROR: %d") % reply[0]
 
 
     def update_databases(self):
