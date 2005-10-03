@@ -38,6 +38,10 @@ from xml.parsers.expat import ExpatError
 import codecs
 import types
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 # PiSi
 import pisi
 from pisi.xmlext import *
