@@ -18,6 +18,10 @@
  an old library
 """
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 import pisi
 
 class XmlError(pisi.Error):
@@ -50,7 +54,7 @@ def getNodeText(node, tagpath = ""):
         # in any case, strip whitespaces...
         return child.data.strip()
     else:
-        raise XmlError("getNodeText: Expected text node, got something else!")
+        raise XmlError(_("getNodeText: Expected text node, got something else!"))
 
 def getChildText(node_s, tagpath):
     """get the text of a child at the end of a tag path"""

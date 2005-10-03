@@ -73,27 +73,19 @@ class LocalText(object):
         nodes = getAllNodes(node, self.tag)
         if not nodes:
             if self.req == mandatory:
-                errs.append("LocalText '%s' should have at least one '%s' tag\n" %
+                errs.append(_("LocalText '%s' should have at least one '%s' tag\n") %
                              self.tag)
         else:
             for node in nodes:
                 lang = getNodeAttribute(node, "xml:lang")
                 c = getNodeText(node)
                 if not c:
-                    errs.append("'%s' language of tag '%s' should have some text data\n" %
+                    errs.append(_("'%s' language of tag '%s' should have some text data\n") %
                                 (lang, self.tag))
                 # FIXME: check for dups and 'en'
                 if not lang:
                     lang = 'en'
                 self.locs[lang] = c
-            # FIXME: return full list too
-            #L = language
-            #if not self.locs.has_key(L):
-            #    L = 'en'
-            #if not self.locs.has_key(L):
-            #    #errs.append("Tag '%s' should have an English version\n" % d[2])
-            #    return ""
-            #retur
             
     def encode(self, xml, node, errs):
         for key in self.locs.iterkeys():
@@ -105,6 +97,15 @@ class LocalText(object):
     
     def format(self, errs):
         return ''
+
+    # FIXME: use something like the below to return a default
+    #L = language
+    #if not self.locs.has_key(L):
+    #    L = 'en'
+    #if not self.locs.has_key(L):
+    #    #errs.append("Tag '%s' should have an English version\n" % d[2])
+    #    return ""
+    #retur
             
 class autoxml(type):
     """High-level automatic XML transformation interface for xmlfile.
@@ -283,7 +284,7 @@ class autoxml(type):
         elif type(tag_type) is autoxml or type(tag_type) is types.TypeType:
             return cls.gen_class_tag(tag, spec)
         else:
-            raise Error('gen_tag: unrecognized tag type %s in spec' %
+            raise Error(_('gen_tag: unrecognized tag type %s in spec') %
                         str(tag_type))
 
     def gen_named_comp(cls, token, spec, anonfuns):
@@ -316,7 +317,7 @@ class autoxml(type):
                 return '%s: %s\n' % (token, format_a(value, errs))
             else:
                 if req == mandatory:
-                    raise Error('Mandatory variable %s not available' % name)
+                    raise Error(_('Mandatory variable %s not available') % name)
             return ''
             
         return (init, decode, encode, format)
@@ -371,11 +372,11 @@ class autoxml(type):
                     value = autoxml.basic_cons_map[token_type](text)
                 except Error:
                     value = None
-                    errs.append('Type mismatch: read text cannot be decoded')
+                    errs.append(_('Type mismatch: read text cannot be decoded'))
                 return value
             else:
                 if req == mandatory:
-                    errs.append('Mandatory token %s not available' % token)
+                    errs.append(_('Mandatory token %s not available') % token)
                 return None
 
         def encode(xml, node, value, errs):
@@ -384,7 +385,7 @@ class autoxml(type):
                 writetext(xml, node, token, str(value))
             else:
                 if req == mandatory:
-                    errs.append('Mandatory argument not available')
+                    errs.append(_('Mandatory argument not available'))
 
         def format(value, errs):
             """format value for pretty printing"""
@@ -412,10 +413,10 @@ class autoxml(type):
                     obj.decode(node, errs)
                     return obj
                 except Error:
-                    errs.append('Type mismatch: DOM cannot be decoded')
+                    errs.append(_('Type mismatch: DOM cannot be decoded'))
             else:
                 if req == mandatory:
-                    errs.append('Mandatory argument not available')
+                    errs.append(_('Mandatory argument not available'))
             return None
         
         def encode(xml, node, obj, errs):
@@ -428,17 +429,17 @@ class autoxml(type):
                 except Error:
                     if req == mandatory:
                         # note: we can receive an error if obj has no content
-                        errs.append('Object cannot be encoded')
+                        errs.append(_('Object cannot be encoded'))
             else:
                 if req == mandatory:
-                    errs.append('Mandatory argument not available')
+                    errs.append(_('Mandatory argument not available'))
                 
         def format(obj, errs):
             try:
                 return obj.format(errs)
             except Error:
                 if req == mandatory:
-                    errs.append('Mandatory argument not available')
+                    errs.append(_('Mandatory argument not available'))
                 else:
                     return ''
         return (init, decode, encode, format)
@@ -449,7 +450,7 @@ class autoxml(type):
         #head, last = cls.tagpath_head_last(path)
 
         if len(tag_type) != 1:
-            raise Error('List type must contain only one element')
+            raise Error(_('List type must contain only one element'))
 
         x = cls.gen_tag(comp_tag, [tag_type[0], mandatory])
         (init_item, decode_item, encode_item, format_item) = x
@@ -462,7 +463,7 @@ class autoxml(type):
             nodes = getAllNodes(node, tag + '/' + comp_tag)
             #print node, tag + '/' + comp_tag, nodes
             if len(nodes) is 0 and req is mandatory:
-                errs.append('Mandatory list empty')
+                errs.append(_('Mandatory list empty'))
             for node in nodes:
                 dummy = node.ownerDocument.createElement("Dummy")
                 dummy.appendChild(node)
@@ -477,7 +478,7 @@ class autoxml(type):
                 node.appendChild(listnode)
             else:
                 if req is mandatory:
-                    errs.append('Mandatory list empty')
+                    errs.append(_('Mandatory list empty'))
 
         def format(l, errs):
             #print 'format:', name
@@ -513,10 +514,10 @@ class autoxml(type):
                     obj.decode(node, errs)
                     return obj
                 except Error:
-                    errs.append('Type mismatch: DOM cannot be decoded')
+                    errs.append(_('Type mismatch: DOM cannot be decoded'))
             else:
                 if req == mandatory:
-                    errs.append('Mandatory argument not available')
+                    errs.append(_('Mandatory argument not available'))
             return None
 
         def encode(xml, node, obj, errs):
@@ -527,17 +528,17 @@ class autoxml(type):
                 except Error:
                     if req == mandatory:
                         # note: we can receive an error if obj has no content
-                        errs.append('Object cannot be encoded')                    
+                        errs.append(_('Object cannot be encoded'))
             else:
                 if req == mandatory:
-                    errs.append('Mandatory argument not available')
+                    errs.append(_('Mandatory argument not available'))
                 
         def format(obj, errs):
             try:
                 return obj.format(errs)
             except Error:
                 if req == mandatory:
-                    errs.append('Mandatory argument not available')
+                    errs.append(_('Mandatory argument not available'))
                 else:
                     return ''
         return (init, decode, encode, format)
@@ -572,8 +573,8 @@ class XmlFile(object):
         try:
             self.dom = mdom.parse(fileName)
         except ExpatError, inst:
-            raise Error("File '%s' has invalid XML: %s\n" % (fileName,
-                                                             str(inst)))
+            raise Error(_("File '%s' has invalid XML: %s\n") % (fileName,
+                                                                str(inst)))
 
     def writexml(self, fileName):
         f = codecs.open(fileName,'w', "utf-8")
@@ -583,7 +584,7 @@ class XmlFile(object):
     def verifyRootTag(self):
         actual_roottag = self.rootNode().tagName
         if actual_roottag != self.rootTag:
-            raise Error("Root tagname %s not identical to %s as expected " %
+            raise Error(_("Root tagname %s not identical to %s as expected") %
                         (actual_roottag, self.rootTag) )
 
     # construction helpers

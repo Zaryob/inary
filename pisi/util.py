@@ -24,14 +24,18 @@ import sha
 import shutil
 import statvfs
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 # pisi modules
 import pisi
 import pisi.context as ctx
 
-class FileError(pisi.Error):
+class Error(pisi.Error):
     pass
 
-class UtilError(pisi.Error):
+class FileError(Error):
     pass
 
 
@@ -58,7 +62,7 @@ class Checks:
         if not var:
             if not self.list:
                 self.list = []
-            self.list.append("%s section should have a '%s' tag" % (section, name))
+            self.list.append(_("%s section should have a '%s' tag") % (section, name))
 
 
 #########################
@@ -115,16 +119,15 @@ def remove_prefix(a,b):
 
 def run_batch(cmd):
     """run command non-interactively and report return value and output"""
-    ui.info('running ' + cmd)
+    ui.info(_('running ') + cmd)
     a = os.popen(cmd)
     lines = a.readlines()
     ret = a.close()
-    ui.debug('return value ' + ret)
+    ui.debug(_('return value ') + ret)
     successful = ret == None
     if not successful:
-      ui.error('ERROR: executing command: ' + cmd + '\n' + strlist(lines))
+      ui.error(_('Failed command: %s') % cmd + strlist(lines))
     return (successful,lines)
-
 
 def xterm_title(message):
     """sets message as a console window's title"""
@@ -230,7 +233,7 @@ def copy_file(src,dest):
 
 def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
     """Generator function iterates over a toplevel path and returns the
-    (filePath, sha1Hash) tuple for all files. If excludePrefixes list
+    (filePath, sha1Hash) tuples for all files. If excludePrefixes list
     is given as a parameter, function will exclude the filePaths
     matching those prefixes. The removePrefix string parameter will be
     used to remove prefix from filePath while matching excludes, if
@@ -346,8 +349,8 @@ def do_patch(sourceDir, patchFile, level, target = ''):
     o = p.readlines()
     retval = p.close()
     if retval:
-        raise UtilError("ERROR: patch (%s) failed: %s" % (patchFile,
-                                                          strlist (o)))
+        raise Error(_("ERROR: patch (%s) failed: %s") % (patchFile,
+                                                         strlist (o)))
 
     os.chdir(cwd)
 
@@ -379,7 +382,7 @@ def strip_file(filepath):
         p = os.popen("strip %s %s" %(flags, f))
         ret = p.close()
         if ret:
-            ctx.ui.warning("strip command failed for file '%s'!" % f)
+            ctx.ui.warning(_("strip command failed for file '%s'!") % f)
 
     if "current ar archive" in o:
         run_strip(filepath, "-g")
@@ -406,7 +409,7 @@ def clean_locks(top = '.'):
         for fn in files:
             if fn.endswith('.lock'):
                 path = os.path.join(root, fn)
-                ctx.ui.info('Removing lock %s', path)
+                ctx.ui.info(_('Removing lock %s'), path)
                 os.unlink(path)
 
 ########################################

@@ -18,7 +18,11 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
+import pisi
 import pisi.context as ctx
+
+class Error(pisi.Error):
+    pass
 
 def run_postinstall(package_name):
     "run postinstall scripts trough COMAR"
@@ -34,11 +38,11 @@ def run_postinstall(package_name):
         elif reply[0] == com.NONE: # package has no postInstall script
             break
         elif reply[0] == com.FAIL:
-            e = _("COMAR.call_package(System.Pakcage.postInstall, %s) failed!: %s") % (
+            e = _("COMAR.call_package(System.Package.postInstall, %s) failed!: %s") % (
                 self.metadata.package.name, reply[2])
-            raise InstallError, e
+            raise Error, e
         else:
-            raise InstallError, _("COMAR.call_package ERROR: %d") % reply[0]
+            raise Error, _("COMAR.call_package ERROR: %d") % reply[0]
 
 def run_preremove(package_name):
     com = ctx.comard

@@ -17,6 +17,9 @@
 from os.path import join
 from os import access, R_OK
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
 
 # pisi modules
 import pisi
@@ -26,7 +29,7 @@ from pisi.archive import Archive
 from pisi.uri import URI
 from pisi.fetcher import fetch_url
 
-class SourceArchiveError(pisi.Error):
+class Error(pisi.Error):
     pass
 
 class SourceArchive:
@@ -54,7 +57,7 @@ class SourceArchive:
         # check hash
         if util.check_file_hash(self.archiveFile, self.archiveSHA1):
             if interactive:
-                ctx.ui.info('%s [cached]' % self.archiveName)
+                ctx.ui.info(_('%s [cached]') % self.archiveName)
             return True
 
         return False
@@ -63,7 +66,7 @@ class SourceArchive:
 
         # check archive file's integrity
         if not util.check_file_hash(self.archiveFile, self.archiveSHA1):
-            raise SourceArchiveError, "unpack: check_file_hash failed"
+            raise Error, _("unpack: check_file_hash failed")
             
         archive = Archive(self.archiveFile, self.archiveType)
         archive.unpack(self.bctx.pkg_work_dir(), cleanDir)

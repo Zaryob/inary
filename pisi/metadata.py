@@ -7,14 +7,19 @@
 #
 # Please read the COPYING file.
 #
-
-# Metadata module provides access to metadata.xml. metadata.xml is
-# generated during the build process of a package and used in the
-# installation. Package repository also uses metadata.xml for building
-# a package index.
-
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 #           Baris Metin <baris@uludag.org.tr
+
+"""
+Metadata module provides access to metadata.xml. metadata.xml is
+generated during the build process of a package and used in the
+installation. Package repository also uses metadata.xml for building
+a package index.
+"""
+
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
 
 import pisi.context as ctx
 import pisi.specfile as specfile
@@ -41,7 +46,7 @@ class SourceInfo:
 
     def has_errors(self):
         if not self.name:
-            return [ "SourceInfo should have a Name" ]
+            return [ _("SourceInfo should have a Name") ]
         return None
 
 
@@ -87,7 +92,7 @@ class PackageInfo(specfile.PackageInfo):
         ret = ret and self.architecture!=None and self.installedSize!=None
         if ret:
             return None
-        return [ "Some error in package metadata" ]
+        return [ _("Some error in package metadata") ]
 
     def __str__(self):
         s = specfile.PackageInfo.__str__(self)
@@ -142,10 +147,10 @@ class MetaData(XmlFile):
         err = Checks()
         # FIXME: is this an internal error?? -gurer
         if not hasattr(self, 'source'):
-            err.add("Metadata should have source")
+            err.add(_("Metadata should have source"))
         err.join(self.source.has_errors())
         
         if not self.package:
-            err.add("Metadata should have a package")
+            err.add(_("Metadata should have a package"))
         err.join(self.package.has_errors())
         return err.list

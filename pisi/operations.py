@@ -13,6 +13,10 @@
 
 import os
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 import pisi
 import pisi.context as ctx
 import pisi.util as util
@@ -40,7 +44,7 @@ def remove_file(fileinfo):
         if os.path.isfile(fpath) or os.path.islink(fpath):
             os.unlink(fpath)
         else:
-            ctx.ui.warning('Not removing non-file, non-link %d' % fpath)
+            ctx.ui.warning(_('Not removing non-file, non-link %d') % fpath)
 
 def run_preremove(package_name):
     if ctx.comard:
@@ -59,9 +63,9 @@ def remove_single(package_name):
 
     #TODO: check dependencies
 
-    ctx.ui.info('Removing package %s' % package_name)
+    ctx.ui.info(_('Removing package %s') % package_name)
     if not ctx.installdb.is_installed(package_name):
-        raise Exception('Trying to remove nonexistent package '
+        raise Exception(_('Trying to remove nonexistent package ')
                         + package_name)
         
     run_preremove(package_name)
@@ -104,12 +108,12 @@ def install_single_name(name, upgrade = False):
             pkg_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
                                     str(pkg_uri.path()))
 
-        ctx.ui.debug("Package URI: %s" % pkg_path)
+        ctx.ui.debug(_("Package URI: %s") % pkg_path)
 
         # Package will handle remote file for us!
         install_single_file(pkg_path, upgrade)
     else:
-        ctx.ui.error("Package %s not found in any active repository." % pkg)
+        ctx.ui.error(_("Package %s not found in any active repository.") % pkg)
 
 # deneme, don't remove ulan
 class AtomicOperation(object):

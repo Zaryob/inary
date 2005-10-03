@@ -17,7 +17,6 @@ import re
 import pisi.util as util
 
 
-
 # Basic rule is:
 # p > (no suffix) > rc > pre > beta > alpha
 keywords = {"alpha": 0,
@@ -33,7 +32,6 @@ def has_keyword(versionitem):
         return True
 
     return False
-
 
 
 class VersionItem:
@@ -157,5 +155,3 @@ class Version:
 
     def __ge__(self,rhs):
         return self.pred(rhs, lambda x,y: x>=y)
-
-

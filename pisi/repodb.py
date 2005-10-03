@@ -13,6 +13,10 @@
 from bsddb import db
 import os, fcntl
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 import pisi
 import pisi.lockeddbshelve as shelve
 import pisi.context as ctx
@@ -71,7 +75,7 @@ class RepoDB(object):
 
     def add_repo(self, name, repo_info):
         if self.d.has_key("repo-" + name):
-            raise Error('Repository %s already exists' % name)
+            raise Error(_('Repository %s already exists') % name)
         self.d["repo-" + name] = repo_info
         order = self.d["order"]
         order.append(name)

@@ -32,7 +32,7 @@ from pisi.metadata import MetaData
 import pisi.comariface as comariface
 #import conflicts
 
-class InstallError(pisi.Error):
+class Error(pisi.Error):
     pass
 
 class Installer:
@@ -48,7 +48,7 @@ class Installer:
 
     def install(self, ask_reinstall = True):
         "entry point"
-        ctx.ui.info('Installing %s, version %s, release %s, build %s' %
+        ctx.ui.info(_('Installing %s, version %s, release %s, build %s') %
                 (self.pkginfo.name, self.pkginfo.version,
                  self.pkginfo.release, self.pkginfo.build))
         self.ask_reinstall = ask_reinstall
@@ -78,14 +78,14 @@ class Installer:
         # check conflicts
         for pkg in self.metadata.package.conflicts:
             if ctx.installdb.is_installed(self.pkginfo):
-                raise InstallError("Package conflicts " + pkg)
+                raise Error(_("Package conflicts %s") % pkg)
 
         # check dependencies
         if not ctx.config.get_option('ignore_dependency'):
             if not dependency.installable(self.pkginfo.name):
                 ctx.ui.error(_('Dependencies for %s not satisfied') %
                              self.pkginfo.name)
-                raise InstallError(_("Package not installable"))
+                raise Error(_("Package not installable"))
 
     def check_reinstall(self):
         "check reinstall, confirm action, and schedule reinstall"
@@ -110,7 +110,7 @@ class Installer:
             if same_ver:
                 if self.ask_reinstall:
                     if not ctx.ui.confirm(_('Re-install same version package?')):
-                        raise InstallError(_('Package re-install declined'))
+                        raise Error(_('Package re-install declined'))
             else:
                 upgrade = False
                 # is this an upgrade?
@@ -135,7 +135,7 @@ class Installer:
                     else:
                         x = _('Downgrade to old distribution build?')
                     if not ctx.ui.confirm(x):
-                        raise InstallError(_('Package downgrade declined'))
+                        raise Error(_('Package downgrade declined'))
 
             # schedule for reinstall
             self.old_files = ctx.installdb.files(pkg.name)
@@ -193,7 +193,7 @@ class Installer:
                 if reply[0] == com.RESULT:
                     break
                 else:
-                    raise InstallError, _("COMAR.register ERROR!")
+                    raise Error, _("COMAR.register ERROR!")
 
 
     def update_databases(self):

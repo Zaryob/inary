@@ -18,12 +18,18 @@
 # with Gurer's observations.
 
 
-"""Specfile module is our handler for PSPEC files. PSPEC (PISI SPEC)
+"""
+Specfile module is our handler for PSPEC files. PSPEC (PISI SPEC)
 files are specification files for PISI source packages. This module
-provides read and write access to PSPEC files."""
+provides read and write access to PSPEC files.
+"""
 
 # standard python modules
 from os.path import basename
+
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
 
 # pisi modules
 import pisi
@@ -77,9 +83,9 @@ class AdditionalFileInfo:
     def has_errors(self):
         err = Checks()
         if not self.filename:
-            err.add("AdditionalFile should have file name string")
+            err.add(_("AdditionalFile should have file name string"))
         if not self.target:
-            err.add("AdditionalFile should have a target attribute")
+            err.add(_("AdditionalFile should have a target attribute"))
         return err.list
 
     def __str__(self):
@@ -116,7 +122,7 @@ class PatchInfo:
 
     def has_errors(self):
         if not self.filename:
-            return [ "Patch should have a filename string" ]
+            return [ _("Patch should have a filename string") ]
         return None
 
     def __str__(self):
@@ -175,7 +181,7 @@ class PathInfo:
 
     def has_errors(self):
         if not self.pathname:
-            return [ "Path tag should have a name string" ]
+            return [ _("Path tag should have a name string") ]
         return None
 
     def __str__(self):
@@ -197,7 +203,7 @@ class ComarProvide:
 
     def has_errors(self):
         if not self.om or not self.script:
-            return [ "COMAR provide should have something :)" ]
+            return [ _("COMAR provide should have something :)") ]
         return None
 
     def __str__(self):
@@ -267,11 +273,11 @@ class SourceInfo:
         err.has_tag(self.packager, "Source", "Packager")
         err.has_tag(self.license, "Source", "License")
         if (not self.archiveUri) or (not self.archiveType):
-            err.add("Source archive URI and type should be given")
+            err.add(_("Source archive URI and type should be given"))
         if not self.archiveSHA1:
-            errd.add("Source archive should have a SHA1 sum")
+            errd.add(_("Source archive should have a SHA1 sum"))
         if len(self.history) <= 0:
-            err.add("Source needs some education about History :)")
+            err.add(_("Source needs some education in History :)"))
         
         err.join(self.packager.has_errors())
         for update in self.history:
@@ -347,7 +353,7 @@ class PackageInfo:
         err.has_tag(self.description, "Package", "Description")
         err.has_tag(self.license, "Package", "License")
         if len(self.paths) <= 0:
-            err.add("Package should have some files")
+            err.add(_("Package should have some files"))
         
         for path in self.paths:
             err.join(path.has_errors())
@@ -404,7 +410,7 @@ class SpecFile(XmlFile):
             e = ""
             for x in errs:
                 e += x + "\n"
-            raise XmlError("File '%s' has errors:\n%s" % (filename, e))
+            raise XmlError(_("File '%s' has errors:\n%s") % (filename, e))
 
     def override_tags(self):
         """Override tags from Source in Packages. Some tags in Packages
@@ -457,7 +463,7 @@ class SpecFile(XmlFile):
         err = Checks()
         err.join(self.source.has_errors())
         if len(self.packages) <= 0:
-            errs.add("There should be at least one Package section")
+            errs.add(_("There should be at least one Package section"))
         for p in self.packages:
             err.join(p.has_errors())
         return err.list

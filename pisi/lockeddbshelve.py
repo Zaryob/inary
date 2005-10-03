@@ -9,7 +9,6 @@
 #
 # Please read the COPYING file.
 #
-# A simple wrapper to implement locking for bsddb's dbshelf
 #
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 
@@ -19,10 +18,18 @@ import bsddb.db as db
 import os
 import fcntl
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 import pisi
 import pisi.context
 
+class Error(pisi.Error):
+    pass
+
 class LockedDBShelf(shelve.DBShelf):
+    """A simple wrapper to implement locking for bsddb's dbshelf"""
 
     def __init__(self, dbname, flags=db.DB_CREATE, mode=0660,
                  filetype=db.DB_HASH, dbenv=None):
@@ -40,7 +47,7 @@ class LockedDBShelf(shelve.DBShelf):
             elif sflag == 'n':
                 flags = db.DB_TRUNCATE | db.DB_CREATE
             else:
-                raise error, "flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
+                raise Error, _("Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags")
         filename = os.path.join( pisi.context.config.db_dir(), dbname + '.bdb')
         self.open(filename, dbname, filetype, flags, mode)
         
@@ -51,7 +58,7 @@ class LockedDBShelf(shelve.DBShelf):
             fcntl.flock(self.lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except IOError:
             import sys
-            pisi.context.ui.error("Another instance of PISI is running. Try later!")
+            pisi.context.ui.error(_("Another instance of PISI is running. Try later!"))
             sys.exit(1)
         return self.db.open(filename, dbname, filetype, flags, mode)
 

@@ -17,6 +17,10 @@
 
 from os.path import join, exists
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 import pisi
 import pisi.context as ctx
 import pisi.archive as archive
@@ -24,7 +28,7 @@ from pisi.uri import URI
 from pisi.metadata import MetaData
 from pisi.files import Files
 
-class PackageError(pisi.Error):
+class Error(pisi.Error):
     pass
 
 
@@ -45,7 +49,7 @@ class Package:
             if not exists(self.filepath):
                 fetch_url(url, dest, ctx.ui.Progress)
             else:
-                ctx.ui.info('%s [cached]' % url.filename())
+                ctx.ui.info(_('%s [cached]') % url.filename())
                 
         self.impl = archive.ArchiveZip(self.filepath, 'zip', mode)
 
@@ -96,12 +100,12 @@ class Package:
         self.metadata = MetaData()
         self.metadata.read( join(outdir, ctx.const.metadata_xml) )
         if self.metadata.has_errors():
-            raise PackageError, "MetaData format wrong"
+            raise Error, _("MetaData format wrong")
 
         self.files = Files()
         self.files.read( join(outdir, ctx.const.files_xml) )
         if self.files.has_errors():
-            raise PackageError, "invalid %s" % ctx.const.files_xml
+            raise Error, _("Invalid %s") % ctx.const.files_xml
         
     def pkg_dir(self):
         packageDir = self.metadata.package.name + '-' \

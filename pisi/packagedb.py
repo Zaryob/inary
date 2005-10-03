@@ -23,6 +23,10 @@ import bsddb.dbshelve as shelve
 import os, fcntl
 from bsddb import db
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 import pisi
 import pisi.util as util
 import pisi.context as ctx
@@ -127,7 +131,7 @@ def get_package(name):
         return thirdparty_packagedb.get_package(name)
     if inst_packagedb.has_package(name):
         return inst_packagedb.get_package(name)
-    raise Error('get_package: package %s not found' % name)
+    raise Error(_('get_package: package %s not found') % name)
 
 def get_rev_deps(name):
     repo = which_repo(name)

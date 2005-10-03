@@ -9,19 +9,23 @@
 #
 # Please read the COPYING file.
 #
-
-# package source database
-# interface for update/query to local package repository
-
 # Author:  Eray Ozkural <eray@uludag.org.tr>
 
-# we basically store everything in sourceinfo class
-# yes, we are cheap
+"""
+package source database
+interface for update/query to local package repository
+we basically store everything in sourceinfo class
+yes, we are cheap
+"""
 
 import bsddb.dbshelve as shelve
 import os
 import fcntl
 from bsddb import db
+
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
 
 import pisi.util as util
 import pisi.context as ctx
@@ -49,9 +53,7 @@ class SourceDB(object):
         return self.d[name]
 
     def add_source(self, source_info):
-        # FIXME: how can you make a negative assertion -gurer
-        # and yes i'm not very clever :)
-        # assert source_info.has_errors()
+        assert not source_info.has_errors()
         name = str(source_info.name)
         self.d[name] = source_info
 
