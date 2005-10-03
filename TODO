@@ -76,14 +76,15 @@ Legend:
  * high priority
 
  / i18n support
-   - summary,description için doğru dili kullanmak
-   / pisi mesajlarının çevrilebilir hale getirilmesi (build.py yi örnek alın)
-   - build sistemine .pot oluşturma vs desteği (pygettext)
-   - mesajların çevirisinin yapılması (pisi tr.po)
+   / translations and correct language for summary, description
+   + make pisi messages translatable
+     [pisi mesajlarının çevrilebilir hale getirilmesi] (build.py yi örnek alın)
+   - .pot stuff [build sistemine .pot oluşturma vs desteği] (pygettext)
+   - translate messages mesajların çevirisinin yapılması (pisi tr.po)
  / query
-   - comar OM information (Provides)
+   + comar OM information (Provides)
    + package by name, summary/description
-   - files (rpm -ql)
+   + files (rpm -ql)
  / documentation
    / actionsAPI documentation, unittests (caglar - meren)
    / versioning information document
