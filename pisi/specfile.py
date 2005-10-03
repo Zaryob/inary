@@ -368,6 +368,9 @@ class PackageInfo:
         s = 'Name: ' + self.name
         s += '\nSummary: ' + self.summary
         s += '\nDescription: ' + self.description
+        s += '\nProvides: '
+        for x in self.providesComar:
+           s += x.om
         return s
 
     def pkg_dir(self):

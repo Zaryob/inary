@@ -13,6 +13,10 @@
 # Standard Python Modules
 import os
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 # Pisi Modules
 import pisi.context as ctx
 
@@ -29,7 +33,7 @@ class ConfigureError(pisi.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
         if can_access_file('config.log'):
-            ctx.ui.error('\n!!! Please attach the config.log to your bug report:\n%s/config.log\n' % os.getcwd())
+            ctx.ui.error(_('Please attach the config.log to your bug report:\n%s/config.log') % os.getcwd())
 
 class MakeError(pisi.actionsapi.Error):
     def __init__(self, value):
@@ -68,9 +72,9 @@ def configure(parameters = ''):
                        get.confDIR(), get.localstateDIR(), parameters)
     
         if system(args):
-            raise ConfigureError('!!! Configure failed...\n')
+            raise ConfigureError(_('Configure failed.'))
     else:
-        raise ConfigureError('!!! No configure script found...\n')
+        raise ConfigureError(_('No configure script found.'))
 
 def rawConfigure(parameters = ''):
     '''configure source with given parameters = "--prefix=/usr --libdir=/usr/lib --with-nls"'''
@@ -78,9 +82,9 @@ def rawConfigure(parameters = ''):
         gnuconfig_update()
 
         if system('./configure %s' % parameters):
-            raise ConfigureError('!!! Configure failed...\n')
+            raise ConfigureError(_('Configure failed.'))
     else:
-        raise ConfigureError('!!! No configure script found...\n')
+        raise ConfigureError(_('No configure script found.'))
  
 def compile(parameters = ''):
     #FIXME: Only one package uses this until now, hmmm
@@ -89,7 +93,7 @@ def compile(parameters = ''):
 def make(parameters = ''):
     '''make source with given parameters = "all" || "doc" etc.'''
     if system('make %s' % parameters):
-            raise MakeError('!!! Make failed...\n')
+            raise MakeError(_('Make failed.'))
 
 def install(parameters = '', argument = 'install'):
     '''install source into install directory with given parameters'''
@@ -112,39 +116,39 @@ def install(parameters = '', argument = 'install'):
                             'argument':argument}
 
         if system(args):
-            raise InstallError('!!! Install failed...\n')
+            raise InstallError(_('Install failed.'))
     else:
-        raise InstallError('!!! No Makefile found...\n')
+        raise InstallError(_('No Makefile found.'))
 
 def rawInstall(parameters = '', argument = 'install'):
     '''install source into install directory with given parameters = PREFIX=%s % get.installDIR()'''
     if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
         if system('make %s %s' % (parameters, argument)):
-            raise InstallError('!!! Install failed...\n')
+            raise InstallError(_('Install failed.'))
     else:
-        raise InstallError('!!! No Makefile found...\n')
+        raise InstallError(_('No Makefile found.'))
 
 def aclocal(parameters = ''):
     '''generates an aclocal.m4 based on the contents of configure.in.'''    
     if system('aclocal %s' % parameters):
-        raise RunTimeError('!!! Running aclocal failed...')
+        raise RunTimeError(_('Running aclocal failed.'))
 
 def autoconf(parameters = ''):
     '''generates a configure script'''
     if system('autoconf %s' % parameters):
-        raise RunTimeError('!!! Running autoconf failed...')
+        raise RunTimeError(_('Running autoconf failed.'))
 
 def autoreconf(parameters = ''):
     '''re-generates a configure script'''
     if system('autoreconf %s' % parameters):
-        raise RunTimeError('!!! Running autoconf failed...')
+        raise RunTimeError(_('Running autoconf failed.'))
 
 def automake(parameters = ''):
     '''generates a makefile'''
     if system('automake %s' % parameters):
-        raise RunTimeError('!!! Running automake failed...')
+        raise RunTimeError(_('Running automake failed.'))
 
 def autoheader(parameters = ''):
     '''generates templates for configure'''
     if system('autoheader %s' % parameters):
-        raise RunTimeError('!!! Running autoheader failed...')
+        raise RunTimeError(_('Running autoheader failed.'))

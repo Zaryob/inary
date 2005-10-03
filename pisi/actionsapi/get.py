@@ -13,6 +13,10 @@
 # Standart Python Modules
 import os
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 # PISI Modules
 import pisi.actionsapi
 import pisi.context as ctx
@@ -119,9 +123,9 @@ def getBinutilsInfo(util):
     cross_build_name = '%s-%s' % (HOST(), util)
     if not exists_binary(cross_build_name):
         if not exists_binary(util):
-            raise BinutilsError('util %s cannot be found' % util)
+            raise BinutilsError(_('Util %s cannot be found') % util)
         else:
-            ctx.ui.debug('Warning: %s does not exist, using plain name %s' \
+            ctx.ui.debug(_('Warning: %s does not exist, using plain name %s') \
                      % (cross_build_name, util))
             return util
     else:
