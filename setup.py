@@ -9,10 +9,6 @@
 #
 # Please read the COPYING file.
 
-#
-# Install script for tengis.
-#
-
 import os
 import shutil
 from distutils.core import setup
@@ -41,13 +37,17 @@ def getVersion():
     else:
         return PISI_VERSION
 
-class InstallPisi(install):
+i18n_domain = "pisi"
+i18n_languages = "tr"
+
+class I18nInstall(install):
     def run(self):
         install.run(self)
-        # FIXME: refactor this into a generic i18n function
-        # and take po names and install dir from options
-        os.popen("msgfmt po/tr.po -o po/tr.mo")
-        shutil.copy("po/tr.mo", "/usr/share/locale/tr/LC_MESSAGES/pisi.mo")
+        for lang in i18n_languages.split(' '):
+            print "Installing '%s' translations..." % lang
+            os.popen("msgfmt po/%s.po -o po/%s.mo" % (lang, lang))
+            shutil.copy("po/%s.mo" % lang,
+                "/usr/share/locale/%s/LC_MESSAGES/%s.mo" % (lang, i18n_domain))
 
 setup(name="pisi",
     version= getVersion(),
@@ -61,6 +61,6 @@ setup(name="pisi",
     packages = ['pisi', 'pisi.cli', 'pisi.actionsapi'],
     scripts = ['pisi-cli'],
     cmdclass = {
-        'install' : InstallPisi
+        'install' : I18nInstall
     }
     )
