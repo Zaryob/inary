@@ -48,5 +48,6 @@ setup(name="pisi",
       url="http://www.uludag.org.tr/eng/pisi/",
       package_dir = {'': ''},
       packages = ['pisi', 'pisi.cli', 'pisi.actionsapi'],
+      data_files = [ ('/usr/share/locale/tr/LC_MESSAGES', ['po/tr/pisi.mo'])], 
       scripts = ['pisi-cli']
      )
