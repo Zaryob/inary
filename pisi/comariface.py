@@ -29,7 +29,7 @@ def run_postinstall(package_name):
 
     com = ctx.comard
     assert(com)
-    ctx.ui.info(_("Running postinstall script for %s") % package_name)
+    ctx.ui.info(_("Running post-install script for %s") % package_name)
     com.call_package("System.Package.postInstall", package_name)
     while 1:
         reply = com.read_cmd()
@@ -49,6 +49,7 @@ def run_preremove(package_name):
     assert(com)
 
     # First, call preRemove script!
+    ctx.ui.info(_("Running pre-remove script for %s") % package_name)
     com.call_package("System.Package.preRemove", package_name)
     while 1:
         reply = com.read_cmd()
@@ -64,6 +65,7 @@ def run_preremove(package_name):
             raise Error, _("COMAR.call_package ERROR: %d") % reply[0]
 
     # and than, remove package's Comar Scripts...
+    ctx.ui.info(_("Unregistering COMAR scripts for %s") % package_name)
     com.remove(package_name)
     while 1:
         reply = com.read_cmd()
