@@ -64,16 +64,13 @@ class CLI(UI):
             self.output(msg + msgend)
 
     def warning(self,msg):
-        #self.output('Warning: ' + msg + '\n')
         self.output(colorize(_('Warning: ') + msg + '\n', 'purple'), err=True)
 
     def error(self,msg):
-        #self.output('Error:' + msg + '\n')
         self.output(colorize(_('Error: ') + msg + '\n', 'red'), err=True)
 
     def action(self,msg):
         #TODO: this seems quite redundant?
-        #self.output(msg + '\n', 'green')
         self.output(colorize(msg + '\n', 'green'))
 
     def choose(self, msg, opts):
