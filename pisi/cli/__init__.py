@@ -43,8 +43,13 @@ class CLI(UI):
         #self.encoding = self.encoding.lower()
         #FIXME: above code does not work for some reason on MDK!
 
-    def output(self, str):
-        print str.encode('utf-8')
+    def output(self, str, err = False):
+        if err:
+            out = sys.stdout
+        else:
+            out = sys.stderr
+        out.write(str.encode('utf-8'))
+        out.flush()
 
     def info(self, msg, verbose = False, noln = False):
         # TODO: need to look at more kinds of info messages
@@ -60,11 +65,11 @@ class CLI(UI):
 
     def warning(self,msg):
         #self.output('Warning: ' + msg + '\n')
-        self.output(colorize(_('Warning: ') + msg + '\n', 'purple'))
+        self.output(colorize(_('Warning: ') + msg + '\n', 'purple'), err=True)
 
     def error(self,msg):
         #self.output('Error:' + msg + '\n')
-        self.output(colorize(_('Error: ') + msg + '\n', 'red'))
+        self.output(colorize(_('Error: ') + msg + '\n', 'red'), err=True)
 
     def action(self,msg):
         #TODO: this seems quite redundant?
