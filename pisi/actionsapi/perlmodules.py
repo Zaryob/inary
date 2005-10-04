@@ -60,10 +60,10 @@ def make(parameters = ''):
 
 def install(parameters = 'install'):
     '''install source with given parameters.'''
-     if can_access_file('Makefile'):
+    if can_access_file('Makefile'):
         if system('make %s' % parameters):                  
             raise InstallError, '!!! Install failed...\n'
-     else:
+    else:
         if system('perl Build install'):
             raise MakeError, '!!! Install failed...\n'
 
