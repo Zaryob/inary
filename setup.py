@@ -43,7 +43,7 @@ def getVersion():
 
 class InstallPisi(install):
     def run(self):
-        #install.run(self)
+        install.run(self)
         # FIXME: refactor this into a generic i18n function
         # and take po names and install dir from options
         os.popen("msgfmt po/tr.po -o po/tr.mo")
