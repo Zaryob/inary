@@ -23,7 +23,7 @@ import pisi.context as ctx
 from pisi.uri import URI
 
 class Command(object):
-    _("""generic help string for any command"""
+    _("""generic help string for any command""")
 
     # class variables
 
