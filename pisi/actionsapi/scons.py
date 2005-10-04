@@ -14,6 +14,10 @@
 # Pisi Modules
 import pisi.context as ctx
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 # ActionsAPI Modules
 import pisi.actionsapi
 import pisi.actionsapi.get as get
@@ -34,8 +38,8 @@ class InstallError(pisi.actionsapi.Error):
 
 def make(parameters = ''):
     if system("scons %s" % parameters):
-        raise MakeError('!!! Make failed...\n')
+        raise MakeError(_('!!! Make failed...\n'))
 
 def install(parameters = 'install'):
     if system("scons prefix=%s/%s %s" % (get.installDIR(), get.defaultprefixDIR(), parameters)):
-        raise InstallError('!!! Install failed...\n')
+        raise InstallError(_('!!! Install failed...\n'))

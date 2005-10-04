@@ -13,6 +13,10 @@
 # Standard Python Modules
 import os
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 # Pisi-Core Modules
 import pisi.context as ctx
 
@@ -31,7 +35,7 @@ def preplib(sourceDirectory = '/usr/lib'):
     sourceDirectory = get.installDIR() + sourceDirectory
     if can_access_directory(sourceDirectory):
         if system('/sbin/ldconfig -n -N %s' % sourceDirectory):
-            raise RunTimeError('!!! Running ldconfig failed...')
+            raise RunTimeError(_('!!! Running ldconfig failed...'))
 
 def preplib_so(sourceDirectory):
     pass
@@ -42,11 +46,11 @@ def gnuconfig_update():
         for file in files:
             if file in ['config.sub', 'config.guess']:
                 copy('/usr/share/gnuconfig/%s' % file, os.path.join(root, file))
-                ctx.ui.info('GNU Config Update Finished.')
+                ctx.ui.info(_('GNU Config Update Finished.'))
 
 def libtoolize(parameters = ''):
     if system('/usr/bin/libtoolize %s' % parameters):
-        raise RunTimeError('Running libtoolize failed...')
+        raise RunTimeError(_('Running libtoolize failed...'))
 
 def gen_usr_ldscript(dynamicLib):
 

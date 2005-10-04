@@ -17,6 +17,10 @@ import sys
 import fileinput
 import re
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 # Pisi Modules
 import pisi.context as ctx
 
@@ -124,7 +128,7 @@ def doman(*sourceFiles):
                 pageName, pageDirectory = source[:source.rindex('.')], \
                                           source[source.rindex('.')+1:]
             except ValueError:
-                ctx.ui.error('\n!!! ActionsAPI [doman]: Wrong man page file...')
+                ctx.ui.error(_('\n!!! ActionsAPI [doman]: Wrong man page file: %s') % (source))
                 
             makedirs(manDIR + '/man%s' % pageDirectory) 
             system('install -m0644 %s %s' % (source, manDIR + '/man%s' % pageDirectory))
@@ -162,7 +166,7 @@ def rename(sourceFile, destinationFile):
     try:        
         os.rename(get.installDIR() + sourceFile, get.installDIR() + baseDir + "/" + destinationFile)
     except OSError:
-        ctx.ui.error('\n!!! ActionsAPI [rename]: No such file or directory: "%s"...' % sourceFile)
+        ctx.ui.error(_('\n!!! ActionsAPI [rename]: No such file or directory: %s') % (sourceFile))
 
 def dopython():
     '''FIXME: What the hell is this?'''
@@ -181,7 +185,7 @@ def dosed(sourceFile, findPattern, replacePattern = ''):
             line = re.sub(findPattern, replacePattern, line)
             sys.stdout.write(line)
     else:
-        raise FileError('File doesn\'t exists or permission denied...')
+        raise FileError(_('File doesn\'t exists or permission denied: %s') % sourceFile)
 
 def dosbin(sourceFile, destinationDirectory = '/usr/sbin'):
     '''insert a executable file into /sbin or /usr/sbin'''
@@ -198,7 +202,7 @@ def dosym(sourceFile, destinationFile):
     try:
         os.symlink(sourceFile, get.installDIR() + destinationFile)
     except OSError:
-        ctx.ui.error('\n!!! ActionsAPI [dosym]: File exists...')
+        ctx.ui.error(_('\n!!! ActionsAPI [dosym]: File exists: %s') % (sourceFile))
 
 def insinto(destinationDirectory, sourceFile,  destinationFile = ''):
     '''insert a sourceFile into destinationDirectory as a destinationFile with same uid/guid/permissions'''

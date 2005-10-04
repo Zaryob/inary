@@ -13,6 +13,10 @@
 # standard python modules
 import os
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 # Pisi Modules
 import pisi.context as ctx
 
@@ -44,27 +48,27 @@ def configure(parameters = ''):
     export('PERL_MM_USE_DEFAULT', '1')
     if can_access_file('Build.PL'):
         if system('perl Build.PL installdirs=vendor destdir=%s' % get.installDIR()):
-            raise CompileError, '!!! Configure failed...\n'
+            raise CompileError, _('!!! Configure failed...\n')
     else:
         if system('perl Makefile.PL %s PREFIX=/usr INSTALLDIRS=vendor DESTDIR=%s' % (parameters, get.installDIR())):
-            raise CompileError, '!!! Configure failed...\n'
+            raise CompileError, _('!!! Configure failed...\n')
 
 def make(parameters = ''):
     '''make source with given parameters.'''
     if can_access_file('Makefile'):
         if system('make %s' % parameters):                  
-            raise MakeError, '!!! Make failed...\n'
+            raise MakeError, _('!!! Make failed...\n')
     else:
         if system('perl Build build'):
-            raise MakeError, '!!! Make failed...\n'
+            raise MakeError, _('!!! Make failed...\n')
 
 def install(parameters = 'install'):
     '''install source with given parameters.'''
     if can_access_file('Makefile'):
         if system('make %s' % parameters):                  
-            raise InstallError, '!!! Install failed...\n'
+            raise InstallError, _('!!! Install failed...\n')
     else:
         if system('perl Build install'):
-            raise MakeError, '!!! Install failed...\n'
+            raise MakeError, _('!!! Install failed...\n')
 
 # FIXME: fix_local_pod % update_pod

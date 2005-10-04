@@ -13,6 +13,10 @@
 # standard python modules
 import os
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 # Pisi Modules
 import pisi.context as ctx
 
@@ -43,12 +47,12 @@ class RunTimeError(pisi.actionsapi.Error):
 def compile(parameters = ''):
     '''compile source with given parameters.'''
     if system('python setup.py build %s' % (get.installDIR(), parameters)):
-        raise CompileError, '!!! Make failed...\n'
+        raise CompileError, _('!!! Make failed...\n')
 
 def install(parameters = ''):
     '''does python setup.py install'''
     if system('python setup.py install --root=%s --no-compile %s' % (get.installDIR(), parameters)):
-        raise InstallError, '!!! Install failed...\n'
+        raise InstallError, _('!!! Install failed...\n')
 
     DDOCS = 'CHANGELOG COPYRIGHT KNOWN_BUGS MAINTAINERS PKG-INFO \
              CONTRIBUTORS LICENSE COPYING* Change* MANIFEST* README*'
@@ -60,4 +64,4 @@ def install(parameters = ''):
 def run(parameters = ''):
     '''executes parameters with python'''
     if system('python %s' % (parameters)):
-        raise RunTimeError, '!!! Running %s failed...\n' % parameters
+        raise RunTimeError, _('!!! Running %s failed...\n') % parameters
