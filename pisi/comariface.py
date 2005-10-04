@@ -39,7 +39,7 @@ def run_postinstall(package_name):
             break
         elif reply[0] == com.FAIL:
             e = _("COMAR.call_package(System.Package.postInstall, %s) failed!: %s") % (
-                self.metadata.package.name, reply[2])
+                package_name, reply[2])
             raise Error, e
         else:
             raise Error, _("COMAR.call_package ERROR: %d") % reply[0]
@@ -47,6 +47,23 @@ def run_postinstall(package_name):
 def run_preremove(package_name):
     com = ctx.comard
     assert(com)
+
+    # First, call preRemove script!
+    com.call_package("System.Package.preRemove", package_name)
+    while 1:
+        reply = com.read_cmd()
+        if reply[0] == com.RESULT:
+            break
+        elif reply[0] == com.NONE: # package has no preRemove script
+            break
+        elif reply[0] == com.FAIL:
+            e = _("COMAR.call_package(System.Package.preRemove, %s) failed!: %s") % (
+                package_name, reply[2])
+            raise Error, e
+        else:
+            raise Error, _("COMAR.call_package ERROR: %d") % reply[0]
+
+    # and than, remove package's Comar Scripts...
     com.remove(package_name)
     while 1:
         reply = com.read_cmd()
@@ -54,3 +71,4 @@ def run_preremove(package_name):
             break
         elif reply[1] == com.ERROR:
             raise Error, "COMAR.remove failed!"
+
