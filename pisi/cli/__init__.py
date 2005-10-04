@@ -12,6 +12,7 @@
 __version__ = "1.0_alpha4"
 
 import sys
+import locale
 
 import pisi
 import pisi.context as ctx
@@ -32,10 +33,12 @@ class CLI(UI):
 
     def __init__(self, show_debug = False, show_verbose = False):
         super(CLI, self).__init__(show_debug, show_verbose)
+        #self.encoding = locale.getpreferredencoding()
+        #self.encoding = self.encoding.lower()
+        #FIXME: above code does not work for some reason on MDK!
 
     def output(self, str):
-        sys.stdout.write(str.encode("utf-8"))
-        sys.stdout.flush()
+        print str.encode('utf-8')
 
     def info(self, msg, verbose = False, noln = False):
         # TODO: need to look at more kinds of info messages
@@ -50,13 +53,16 @@ class CLI(UI):
             self.output(msg + msgend)
 
     def warning(self,msg):
+        #self.output('Warning: ' + msg + '\n')
         self.output(colorize('Warning:' + msg + '\n', 'purple'))
 
     def error(self,msg):
-        self.output(colorize('Error:' + msg + '\n', 'red'))
+        #self.output('Error:' + msg + '\n')
+        self.output(colorize('Error: ' + msg + '\n', 'red'))
 
     def action(self,msg):
         #TODO: this seems quite redundant?
+        #self.output(msg + '\n', 'green')
         self.output(colorize(msg + '\n', 'green'))
 
     def choose(self, msg, opts):
