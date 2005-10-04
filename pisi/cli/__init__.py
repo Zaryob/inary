@@ -14,6 +14,12 @@ __version__ = "1.0_alpha4"
 import sys
 import locale
 
+
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
+
 import pisi
 import pisi.context as ctx
 from pisi.ui import UI
