@@ -15,6 +15,10 @@ import os
 import glob
 import shutil
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 # Pisi Modules
 import pisi.context as ctx
 
@@ -43,7 +47,7 @@ def echo(destionationFile, content):
         f.write("%s\n" % content)
         f.close()
     except IOError:
-        ctx.ui.error(' ActionsAPI [echo]: Can\'t append to file...')
+        ctx.ui.error(_(' ActionsAPI [echo]: Can\'t append to file %s...') % (destionationFile))
 
 def chmod(sourceFile, mode = 0755):
     '''change the mode of sourceFile to the mode'''
@@ -52,9 +56,10 @@ def chmod(sourceFile, mode = 0755):
             try:
                 os.chmod(file, mode)
             except OSError:
-                ctx.ui.error(' ActionsAPI [chmod]: Operation not permitted...')
+                ctx.ui.error(_(' ActionsAPI [chmod]: Operation not permitted: %s (mode: %s)') \
+                                                                % (file, mode))
         else:
-            ctx.ui.error(' ActionsAPI [chmod]: File doesn\'t exists...')
+            ctx.ui.error(_(' ActionsAPI [chmod]: File %s doesn\'t exists.') % (file))
 
 def chown(sourceFile, uid = 0, gid = 0):
     '''change the owner and group id of sourceFile to the numeric uid and gid'''
@@ -62,16 +67,17 @@ def chown(sourceFile, uid = 0, gid = 0):
         try:
             os.chown(sourceFile, uid, gid)
         except OSError:
-            ctx.ui.error(' ActionsAPI [chown]: Operation not permitted...')
+            ctx.ui.error(_(' ActionsAPI [chown]: Operation not permitted: %s (uid: %s, gid: %s)') \
+                                                 % (sourceFile, uid, gid))
     else:
-        ctx.ui.error(' ActionsAPI [chown]: File doesn\'t exists...')
+        ctx.ui.error(_(' ActionsAPI [chown]: File %s doesn\'t exists.') % sourceFile)
 
 def sym(sourceFile, destinationFile):
     '''creates symbolic link'''
     try:
         os.symlink(sourceFile, destinationFile)
     except OSError:
-        ctx.ui.error(' ActionsAPI [sym]: Permission denied...')
+        ctx.ui.error(_(' ActionsAPI [sym]: Permission denied: %s to %s') % (file, destinationFile))
 
 def unlink(sourceFile):
     '''remove the file path'''
@@ -79,11 +85,11 @@ def unlink(sourceFile):
         try:
             os.unlink(sourceFile)
         except OSError:
-            ctx.ui.error(' ActionsAPI [unlink]: Permission denied.')
+            ctx.ui.error(_(' ActionsAPI [unlink]: Permission denied: %s.') % (sourceFile))
     elif isDirectory(sourceFile):
         pass
     else:
-        ctx.ui.error(' ActionsAPI [unlink]: File doesn\'t exists.')
+        ctx.ui.error(_(' ActionsAPI [unlink]: File %s doesn\'t exists.') % (sourceFile))
 
 def unlinkDir(sourceDirectory):
     '''delete an entire directory tree'''
@@ -91,11 +97,11 @@ def unlinkDir(sourceDirectory):
         try:
             shutil.rmtree(sourceDirectory)
         except OSError:
-            ctx.ui.error(' ActionsAPI [unlinkDir]: Operation not permitted.')
+            ctx.ui.error(_(' ActionsAPI [unlinkDir]: Operation not permitted: %s') % (sourceDirectory))
     elif isFile(sourceDirectory):
         pass                                
     else:
-        ctx.ui.error(' ActionsAPI [unlinkDir]: Directory doesn\'t exists.')
+        ctx.ui.error(_(' ActionsAPI [unlinkDir]: Directory %s doesn\'t exists.') % (sourceDirectory))
 
 def move(sourceFile, destinationFile):
     '''recursively move a sourceFile or directory to destinationFile'''
@@ -104,9 +110,9 @@ def move(sourceFile, destinationFile):
             try:
                 shutil.move(file, destinationFile)
             except OSError:
-                ctx.ui.error(' ActionsAPI [move]: Permission denied.')
+                ctx.ui.error(_(' ActionsAPI [move]: Permission denied: %s to %s') % (file, destinationFile))
         else:
-            ctx.ui.error(' ActionsAPI [move]: File doesn\'t exists.')
+            ctx.ui.error(_(' ActionsAPI [move]: File %s doesn\'t exists.') % (file))
 
 def copy(sourceFile, destinationFile):
     '''recursively copy a sourceFile or directory to destinationFile'''
@@ -115,11 +121,11 @@ def copy(sourceFile, destinationFile):
             try:
                 shutil.copy(file, destinationFile)
             except IOError:
-                ctx.ui.error('ActionsAPI [copy]: Permission denied.')
+                ctx.ui.error(_('ActionsAPI [copy]: Permission denied: %s to %s') % (file, destinationFile))
         elif isDirectory(file):
             copytree(file, destinationFile)
         else:
-            ctx.ui.error('ActionsAPI [copy]: File %s does not exist.' % file)
+            ctx.ui.error(_('ActionsAPI [copy]: File %s does not exist.') % file)
 
 def copytree(source, destination, sym = False):
     '''recursively copy an entire directory tree rooted at source'''
@@ -127,9 +133,9 @@ def copytree(source, destination, sym = False):
         try:
             shutil.copytree(source, destination, sym)
         except OSError:
-            ctx.ui.error(' ActionsAPI [copytree]: Permission denied.')
+            ctx.ui.error(_(' ActionsAPI [copytree]: Permission denied: %s to %s') % (source, destination))
     else:
-        ctx.ui.error(' ActionsAPI [copytree]: Directory doesn\'t exists.')
+        ctx.ui.error(_(' ActionsAPI [copytree]: Directory %s doesn\'t exists.') % (source))
 
 def touch(sourceFile):
     '''changes the access time of the 'sourceFile', or creates it if it is not exist'''
@@ -141,7 +147,7 @@ def touch(sourceFile):
             f = open(sourceFile, 'w')
             f.close()
         except IOError:
-            ctx.ui.error(' ActionsAPI [touch]: Permission denied.')
+            ctx.ui.error(_(' ActionsAPI [touch]: Permission denied: %s') % (sourceFile))
 
 def cd(directoryName = ''):
     '''change directory'''
@@ -189,7 +195,7 @@ def dirName(sourceFile):
 def system(command):
     #FIXME: String formatting
     command = command.replace("                 ", " ")
-    ctx.ui.debug('executing %s' % command)
+    ctx.ui.debug(_('executing %s') % command)
     p = os.popen(command)
     while 1:
         line = p.readline()
