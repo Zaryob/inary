@@ -20,7 +20,7 @@ if ver[0] <= 2 and ver[1] < 4:
     
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.lgettext
 
 import pisi
 
@@ -113,7 +113,7 @@ def install_pkg_files(package_URIs):
             ctx.ui.error(_('Mixing file names and package names not supported YET.'))
             return False
 
-    if ctx.config.get_option(_('ignore_dependency')):
+    if ctx.config.get_option('ignore_dependency'):
         # simple code path then
         for x in package_URIs:
             operations.install_single_file(x)
