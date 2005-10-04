@@ -1,14 +1,14 @@
-# PiSi Translation
+# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
-# Eray Ozkural <eray@uludag.org.tr>
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0_alpha3\n"
-"POT-Creation-Date: 2005-10-04 16:55+ZONE\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2005-10-05 00:49+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: <EMAIL@ADDRESS>\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
@@ -182,6 +182,446 @@ msgstr ""
 
 #: pisi/actionsapi/autotools.py:154
 msgid "Running autoheader failed."
+msgstr ""
+
+#: pisi/actionsapi/pisitools.py:131
+msgid "\n!!! ActionsAPI [doman]: Wrong man page file: %s"
+msgstr ""
+
+#: pisi/actionsapi/pisitools.py:169
+msgid "\n!!! ActionsAPI [rename]: No such file or directory: %s"
+msgstr ""
+
+#: pisi/actionsapi/pisitools.py:188
+msgid "File doesn't exists or permission denied: %s"
+msgstr ""
+
+#: pisi/actionsapi/pisitools.py:205
+msgid "\n!!! ActionsAPI [dosym]: File exists: %s"
+msgstr ""
+
+#: pisi/actionsapi/kde.py:32
+msgid ""
+"\n"
+"!!! Please attach the config.log to your bug report:\n"
+"%s/config.log"
+msgstr ""
+
+#: pisi/actionsapi/kde.py:60 pisi/actionsapi/perlmodules.py:51 :54
+msgid "!!! Configure failed...\n"
+msgstr ""
+
+#: pisi/actionsapi/kde.py:62
+msgid "!!! No configure script found...\n"
+msgstr ""
+
+#: pisi/actionsapi/kde.py:67 pisi/actionsapi/pythonmodules.py:50
+#: pisi/actionsapi/scons.py:41 pisi/actionsapi/perlmodules.py:60 :63
+msgid "!!! Make failed...\n"
+msgstr ""
+
+#: pisi/actionsapi/kde.py:74 pisi/actionsapi/pythonmodules.py:55
+#: pisi/actionsapi/scons.py:45 pisi/actionsapi/perlmodules.py:69 :72
+msgid "!!! Install failed...\n"
+msgstr ""
+
+#: pisi/actionsapi/kde.py:76
+msgid "!!! No Makefile found...\n"
+msgstr ""
+
+#: pisi/actionsapi/libtools.py:38
+msgid "!!! Running ldconfig failed..."
+msgstr ""
+
+#: pisi/actionsapi/libtools.py:49
+msgid "GNU Config Update Finished."
+msgstr ""
+
+#: pisi/actionsapi/libtools.py:53
+msgid "Running libtoolize failed..."
+msgstr ""
+
+#: pisi/actionsapi/pythonmodules.py:67
+msgid "!!! Running %s failed...\n"
+msgstr ""
+
+#: pisi/actionsapi/pisitoolsfunctions.py:46 :59
+msgid "Insufficient arguments..."
+msgstr ""
+
+#: pisi/actionsapi/pisitoolsfunctions.py:72
+msgid " Insufficient arguments..."
+msgstr ""
+
+#: pisi/cli/commands.py:26
+msgid "generic help string for any command"
+msgstr ""
+
+#: pisi/cli/commands.py:48 pisi/cli/pisicli.py:92
+msgid "Unrecognized command: "
+msgstr ""
+
+#: pisi/cli/commands.py:74
+msgid "assume yes in all yes/no queries"
+msgstr ""
+
+#: pisi/cli/commands.py:78
+msgid "get password from the command line"
+msgstr ""
+
+#: pisi/cli/commands.py:81
+msgid "detailed output"
+msgstr ""
+
+#: pisi/cli/commands.py:83
+msgid "show debugging information"
+msgstr ""
+
+#: pisi/cli/commands.py:85
+msgid "do not perform any action, just show what                     would be done"
+msgstr ""
+
+#: pisi/cli/commands.py:112
+msgid "Password: "
+msgstr ""
+
+#: pisi/cli/commands.py:148
+msgid "Program terminated abnormally."
+msgstr ""
+
+#: pisi/cli/commands.py:158
+msgid "command lacks name"
+msgstr ""
+
+#: pisi/cli/commands.py:162
+msgid "duplicate command %s"
+msgstr ""
+
+#: pisi/cli/commands.py:171
+msgid ""
+"Prints help for given commands.\n"
+"\n"
+"Usage: help [ <command1> <command2> ... <commandn> ]\n"
+"\n"
+"If run without parameters, it prints the general help."
+msgstr ""
+
+#: pisi/cli/commands.py:203
+msgid "Clean stale locks."
+msgstr ""
+
+#: pisi/cli/commands.py:219
+msgid ""
+"Graph package relations.\n"
+"Usage: graph <package1> <package2> ...\n"
+"\n"
+"Write a graph of package relations, tracking dependency and\n"
+"conflicts relations starting from given packages.\n"
+msgstr ""
+
+#: pisi/cli/commands.py:244
+msgid "do not take build no into account."
+msgstr ""
+
+#: pisi/cli/commands.py:248
+msgid ""
+"Build a PISI package using a pspec.xml file\n"
+"\n"
+"Usage: build <pspec.xml>\n"
+"\n"
+"You can give a URI of the pspec.xml file. PISI will\n"
+"fetch all necessary files and build the package for you.\n"
+msgstr ""
+
+#: pisi/cli/commands.py:265
+msgid "output directory for produced packages"
+msgstr ""
+
+#: pisi/cli/commands.py:289
+msgid "bypass comar configuration agent"
+msgstr ""
+
+#: pisi/cli/commands.py:292
+msgid "do not take dependency information into account"
+msgstr ""
+
+#: pisi/cli/commands.py:302
+msgid ""
+"Install PISI packages\n"
+"\n"
+"Usage: install <package1> <package2> ... <packagen>\n"
+"\n"
+"You may use filenames, URIs or package names for packages. If you have\n"
+"specified a package name, it should exist in a specified repository.\n"
+msgstr ""
+
+#: pisi/cli/commands.py:330
+msgid ""
+"Upgrade PISI packages\n"
+"\n"
+"Usage: Upgrade <package1> <package2> ... <packagen>\n"
+"\n"
+"You may use only package names to specify packages because\n"
+"the package upgrade operation is defined only with respect \n"
+"to repositories. If you have specified a package name, it\n"
+"should exist in the package repositories. If you just want to\n"
+"reinstall a package from a pisi file, use the install command."
+msgstr ""
+
+#: pisi/cli/commands.py:362
+msgid ""
+"Remove PISI packages\n"
+"\n"
+"Usage: remove <package1> <package2> ... <packagen>\n"
+"\n"
+"Remove package(s) from your system. Just give the package names to remove.\n"
+msgstr ""
+
+#: pisi/cli/commands.py:386
+msgid ""
+"Upgrade system\n"
+"\n"
+"Usage: Upgrade\n"
+"\n"
+"Upgrade the entire system.\n"
+msgstr ""
+
+#: pisi/cli/commands.py:414
+msgid ""
+"configure pending packages\n"
+"    "
+msgstr ""
+
+#: pisi/cli/commands.py:432
+msgid ""
+"Display package information\n"
+"\n"
+"Usage: info <package1> <package2> ... <packagen>\n"
+"\n"
+msgstr ""
+
+#: pisi/cli/commands.py:447
+msgid "show a list of package files."
+msgstr ""
+
+#: pisi/cli/commands.py:450
+msgid "Show only paths."
+msgstr ""
+
+#: pisi/cli/commands.py:477
+msgid "File information not available"
+msgstr ""
+
+#: pisi/cli/commands.py:481
+msgid ""
+"Index PISI files in a given directory\n"
+"\n"
+"Usage: index <directory>\n"
+"\n"
+"This command searches for all PiSi files in a directory, collects PiSi\n"
+"tags from them and accumulates the information in an output XML file,\n"
+"named by default 'pisi-index.xml'. In particular, it indexes both\n"
+"source and binary packages.\n"
+msgstr ""
+
+#: pisi/cli/commands.py:500
+msgid "store absolute links for indexed files."
+msgstr ""
+
+#: pisi/cli/commands.py:509
+msgid "Indexing current directory."
+msgstr ""
+
+#: pisi/cli/commands.py:512
+msgid "Indexing only a single directory supported."
+msgstr ""
+
+#: pisi/cli/commands.py:518
+msgid ""
+"Print the list of all installed packages  \n"
+"\n"
+"Usage: list-installed\n"
+"\n"
+msgstr ""
+
+#: pisi/cli/commands.py:542 :729
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr ""
+
+#: pisi/cli/commands.py:558
+msgid ""
+"Update repository databases\n"
+"\n"
+"Usage: update-repo <repo1> <repo2> ... <repon>\n"
+"\n"
+"<repoi>: repository name\n"
+"Synchronizes the PiSi databases with the current repository.\n"
+msgstr ""
+
+#: pisi/cli/commands.py:584
+msgid ""
+"Add a repository\n"
+"\n"
+"Usage: add-repo <repo> <indexuri>\n"
+"\n"
+"<repo>: name of repository to add\n"
+"<indexuri>: URI of index file\n"
+"\n"
+"NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment\n"
+msgstr ""
+
+#: pisi/cli/commands.py:614
+msgid ""
+"Remove repositories\n"
+"\n"
+"Usage: remove-repo <repo1> <repo2> ... <repon>\n"
+"\n"
+"Remove all repository information from the system.\n"
+msgstr ""
+
+#: pisi/cli/commands.py:640
+msgid ""
+"List repositories\n"
+"\n"
+"Usage: list-repo\n"
+"\n"
+"Lists currently tracked repositories.\n"
+msgstr ""
+
+#: pisi/cli/commands.py:663
+msgid ""
+"List available packages in the repositories\n"
+"\n"
+"Usage: list-available [ <repo1> <repo2> ... repon ]\n"
+"\n"
+"Gives a brief list of PiSi components published in the repository.\n"
+msgstr ""
+
+#: pisi/cli/commands.py:686
+msgid "Repository : %s\n"
+msgstr ""
+
+#: pisi/cli/commands.py:705
+msgid ""
+"List packages to be upgraded\n"
+"\n"
+"Usage: list-upgrades [ <repo1> <repo2> ... repon ]\n"
+"\n"
+msgstr ""
+
+#: pisi/cli/commands.py:721
+msgid "show detailed install info"
+msgstr ""
+
+#: pisi/cli/commands.py:745
+msgid "List pending packages"
+msgstr ""
+
+#: pisi/cli/commands.py:766
+msgid ""
+"Search packages\n"
+"\n"
+"Usage: search <search pattern>\n"
+"\n"
+"#FIXME: fill this later\n"
+msgstr ""
+
+#: pisi/cli/commands.py:778
+msgid ""
+"Run the build process partially\n"
+"\n"
+"Usage: -sStateName build-until <pspec file>\n"
+"\n"
+"where states are:\n"
+"unpack, setupaction, buildaction, installaction, buildpackages\n"
+"\n"
+"You can give an URI of the pspec.xml file. PISI will fetch all\n"
+"necessary files and unpack the source and prepare a source directory\n"
+"for you.\n"
+msgstr ""
+
+#: pisi/cli/commands.py:815
+msgid ""
+"Unpack the source archive\n"
+"\n"
+"Usage: build-unpack <pspec file>\n"
+"\n"
+"TODO: desc.\n"
+msgstr ""
+
+#: pisi/cli/commands.py:840
+msgid ""
+"Setup the source\n"
+"\n"
+"Usage: build-setup <pspec file>\n"
+"\n"
+"TODO: desc.\n"
+msgstr ""
+
+#: pisi/cli/commands.py:866 :917
+msgid ""
+"Setup the source\n"
+"\n"
+"Usage: build-build <pspec file>\n"
+"\n"
+"TODO: desc.\n"
+msgstr ""
+
+#: pisi/cli/commands.py:891
+msgid ""
+"Install to the sandbox\n"
+"\n"
+"Usage: build-install <pspec file>\n"
+"\n"
+"TODO: desc.\n"
+msgstr ""
+
+#: pisi/cli/commands.py:941
+msgid ""
+"%prog [options] <command> [arguments]\n"
+"\n"
+"where <command> is one of:\n"
+"\n"
+msgstr ""
+
+#: pisi/cli/commands.py:947
+msgid "\nUse \"%prog help <command>\" for help on a specific command.\n"
+msgstr ""
+
+#: pisi/cli/pisicli.py:83
+msgid "No command given"
+msgstr ""
+
+#: pisi/cli/pisicli.py:87
+msgid "Command line parsing error"
+msgstr ""
+
+#: pisi/cli/__init__.py:67
+msgid "Warning: "
+msgstr ""
+
+#: pisi/cli/__init__.py:70
+msgid "Error: "
+msgstr ""
+
+#: pisi/cli/__init__.py:93
+msgid "(yes/no)"
+msgstr ""
+
+#: pisi/cli/__init__.py:94
+msgid "y"
+msgstr ""
+
+#: pisi/cli/__init__.py:94
+msgid "Y"
+msgstr ""
+
+#: pisi/cli/__init__.py:96
+msgid "n"
+msgstr ""
+
+#: pisi/cli/__init__.py:96
+msgid "N"
 msgstr ""
 
 #: pisi/lockeddbshelve.py:50
@@ -442,15 +882,15 @@ msgstr ""
 msgid "Failed command: %s"
 msgstr ""
 
-#: pisi/util.py:352
+#: pisi/util.py:356
 msgid "ERROR: patch (%s) failed: %s"
 msgstr ""
 
-#: pisi/util.py:385
+#: pisi/util.py:389
 msgid "strip command failed for file '%s'!"
 msgstr ""
 
-#: pisi/util.py:412
+#: pisi/util.py:416
 msgid "Removing lock %s"
 msgstr ""
 
@@ -658,10 +1098,6 @@ msgstr ""
 
 #: pisi/api.py:113
 msgid "Mixing file names and package names not supported YET."
-msgstr ""
-
-#: pisi/api.py:116
-msgid "ignore_dependency"
 msgstr ""
 
 #: pisi/api.py:168 :215
