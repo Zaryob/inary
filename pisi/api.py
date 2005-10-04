@@ -20,7 +20,7 @@ if ver[0] <= 2 and ver[1] < 4:
     
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.lgettext
+_ = __trans.ugettext
 
 import pisi
 

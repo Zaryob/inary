@@ -13,7 +13,10 @@
 # Install script for tengis.
 #
 
+import os
+import shutil
 from distutils.core import setup
+from distutils.command.install import install
 
 PISI_VERSION = "0.1"
 
@@ -38,16 +41,27 @@ def getVersion():
     else:
         return PISI_VERSION
 
+class InstallPisi(install):
+    def run(self):
+        #install.run(self)
+        # FIXME: refactor this into a generic i18n function
+        # and take po names and install dir from options
+        os.popen("msgfmt po/tr.po -o po/tr.mo")
+        shutil.copy("po/tr.mo", "/usr/share/locale/tr/LC_MESSAGES/pisi.mo")
+
 setup(name="pisi",
-      version= getVersion(),
-      description="PISI (Packages Installed Successfully as Intended)",
-      long_description="PISI is the package management system of Pardus Linux.",
-      license="GNU GPL2",
-      author="Pardus Developers",
-      author_email="pisi@uludag.org.tr",
-      url="http://www.uludag.org.tr/eng/pisi/",
-      package_dir = {'': ''},
-      packages = ['pisi', 'pisi.cli', 'pisi.actionsapi'],
-      data_files = [ ('/usr/share/locale/tr/LC_MESSAGES', ['po/tr/pisi.mo'])], 
-      scripts = ['pisi-cli']
-     )
+    version= getVersion(),
+    description="PISI (Packages Installed Successfully as Intended)",
+    long_description="PISI is the package management system of Pardus Linux.",
+    license="GNU GPL2",
+    author="Pardus Developers",
+    author_email="pisi@uludag.org.tr",
+    url="http://www.uludag.org.tr/eng/pisi/",
+    package_dir = {'': ''},
+    packages = ['pisi', 'pisi.cli', 'pisi.actionsapi'],
+    data_files = [ ('/usr/share/locale/tr/LC_MESSAGES', ['po/tr/pisi.mo'])], 
+    scripts = ['pisi-cli'],
+    cmdclass = {
+        'install' : InstallPisi
+    }
+    )

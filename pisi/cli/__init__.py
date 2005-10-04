@@ -34,7 +34,7 @@ class CLI(UI):
         super(CLI, self).__init__(show_debug, show_verbose)
 
     def output(self, str):
-        sys.stdout.write(str)
+        sys.stdout.write(str.encode("utf-8"))
         sys.stdout.flush()
 
     def info(self, msg, verbose = False, noln = False):
