@@ -144,6 +144,7 @@ def xterm_title(message):
 
 def xterm_title_reset():
     """resets console window's title"""
+    #TODO: this, too.
     if os.environ.has_key("TERM"):
         terminalType = os.environ["TERM"]
         xterm_title(os.environ["TERM"])
