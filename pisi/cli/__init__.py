@@ -54,11 +54,11 @@ class CLI(UI):
 
     def warning(self,msg):
         #self.output('Warning: ' + msg + '\n')
-        self.output(colorize('Warning:' + msg + '\n', 'purple'))
+        self.output(colorize(_('Warning: ') + msg + '\n', 'purple'))
 
     def error(self,msg):
         #self.output('Error:' + msg + '\n')
-        self.output(colorize('Error: ' + msg + '\n', 'red'))
+        self.output(colorize(_('Error: ') + msg + '\n', 'red'))
 
     def action(self,msg):
         #TODO: this seems quite redundant?
@@ -82,14 +82,13 @@ class CLI(UI):
         if ctx.config.options and ctx.config.options.yes_all:
             return True
         while True:
-            s = raw_input(msg + colorize('(yes/no)', 'red'))
-            if s.startswith('y') or s.startswith('Y'):
+            s = raw_input(msg + colorize(_('(yes/no)'), 'red'))
+            if s.startswith(_('y')) or s.startswith(_('Y')):
                 return True
-            if s.startswith('n') or s.startswith('N'):
+            if s.startswith(_('n')) or s.startswith(_('N')):
                 return False
 
     def display_progress(self, pd):
         out = '\r%-30.30s %3d%% %12.2f %s' % \
             (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
         self.output(out)
-

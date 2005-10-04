@@ -12,6 +12,10 @@
 
 import sys
 from optparse import OptionParser
+    
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
 
 import pisi
 from pisi.uri import URI
@@ -44,7 +48,7 @@ class PreParser(OptionParser):
             arg = rargs[0]
             def option():
                 if not self.allow_interspersed_args and first_arg:
-                    self.error('Options must precede non-option arguments')
+                    self.error_(('Options must precede non-option arguments'))
                 del rargs[0]
                 return
             # We handle bare "--" explicitly, and bare "-" is handled by the
@@ -76,16 +80,16 @@ class PisiCLI(object):
         try:
             args = self.parser.parse_args()
             if len(args)==0: # more explicit than using IndexError
-                print 'No command given'
+                print _('No command given')
                 self.die()
             cmd_name = args[0]
         except ParserError:
-            print 'Command line parsing error'
+            print _('Command line parsing error')
             self.die()
 
         self.command = Command.get_command(cmd_name)
         if not self.command:
-            print "Unrecognized command: ", cmd
+            print _("Unrecognized command: "), cmd
             self.die()
 
     def die(self):

@@ -131,6 +131,9 @@ def run_batch(cmd):
 
 def xterm_title(message):
     """sets message as a console window's title"""
+    return
+    #TODO: the last thing needed in util probably
+    #this is going to be moved to pisi.cli later
     if os.environ.has_key("TERM") and sys.stderr.isatty():
         terminalType = os.environ["TERM"]
         for term in ["xterm", "Eterm", "aterm", "rxvt", "screen", "kterm", "rxvt-unicode"]:

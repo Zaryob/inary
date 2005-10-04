@@ -12,6 +12,10 @@
 
 import sys
 from optparse import OptionParser
+    
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
 
 import pisi
 import pisi.cli
@@ -19,7 +23,7 @@ import pisi.context as ctx
 from pisi.uri import URI
 
 class Command(object):
-    """generic help string for any command"""
+    _("""generic help string for any command""")
 
     # class variables
 
@@ -41,7 +45,7 @@ class Command(object):
             return Command.cmd_dict[cmd]()
     
         if fail:
-            print "Unrecognized command: ", cmd
+            print _("Unrecognized command: "), cmd
             sys.exit(1)
         else:
             return None
@@ -67,19 +71,19 @@ class Command(object):
         p = self.parser
         p.add_option("-D", "--destdir", action="store")
         p.add_option("", "--yes-all", action="store_true",
-                     default=False, help = "assume yes in all yes/no queries")
+                     default=False, help = _("assume yes in all yes/no queries"))
         p.add_option("-u", "--username", action="store")
         p.add_option("-p", "--password", action="store")
         p.add_option("-P", action="store_true", dest="getpass", default=False,
-                     help="Get password from the command line")
+                     help=_("get password from the command line"))
         p.add_option("-v", "--verbose", action="store_true",
                      dest="verbose", default=False,
-                     help="detailed output")
+                     help=_("detailed output"))
         p.add_option("-d", "--debug", action="store_true",
-                     default=True, help="show debugging information")
+                     default=True, help=_("show debugging information"))
         p.add_option("-n", "--dry-run", action="store_true", default=False,
-                     help = "do not perform any action, just show what\
-                     would be done")        
+                     help = _("do not perform any action, just show what\
+                     would be done"))
         return p
 
     def options(self):
@@ -105,7 +109,7 @@ class Command(object):
         
         if username and self.options.getpass:
             from getpass import getpass
-            password = getpass("Password: ")
+            password = getpass(_("Password: "))
             self.authInfo = (username, password)
         else:
             self.authInfo = None
@@ -141,7 +145,7 @@ class Command(object):
 
     def die(self):
         """exit program"""
-        print 'Program terminated abnormally.'
+        print _('Program terminated abnormally.')
         sys.exit(-1)
 
 
@@ -151,11 +155,11 @@ class autocommand(type):
         Command.cmd.append(cls)
         name = getattr(cls, 'name', None)
         if name is None:
-            raise pisi.cli.Error('command lacks name')
+            raise pisi.cli.Error(_('command lacks name'))
         longname, shortname = name
         def add_cmd(cmd):
             if Command.cmd_dict.has_key(cmd):
-                raise pisi.cli.Error('duplicate command %s' % cmd)
+                raise pisi.cli.Error(_('duplicate command %s') % cmd)
             else:
                 Command.cmd_dict[cmd] = cls
         add_cmd(longname)
@@ -237,7 +241,7 @@ conflicts relations starting from given packages.
 def buildno_opts(self):
     self.parser.add_option("", "--ignore-build-no", action="store_true",
                            default=False,
-                           help="do not take build no into account.")        
+                           help=_("do not take build no into account."))
 
 
 class Build(Command):
@@ -258,7 +262,7 @@ fetch all necessary files and build the package for you.
     def options(self):
         buildno_opts(self)
         self.parser.add_option("-O", "--output-dir", action="store", default=".",
-                               help="output directory for produced packages")       
+                               help=_("output directory for produced packages"))
 
     def run(self):
         if not self.args:
@@ -281,10 +285,10 @@ class PackageOp(Command):
     def options(self):
         p = self.parser
         p.add_option("-B", "--ignore-comar", action="store_true",
-                     default=False, help="bypass comar configuration agent")
+                     default=False, help=_("bypass comar configuration agent"))
         p.add_option("", "--ignore-dependency", action="store_true",
                      default=False,
-                     help="do not take dependency information into account")
+                     help=_("do not take dependency information into account"))
 
     def init(self):
         super(PackageOp, self).init(True)
@@ -439,10 +443,10 @@ Usage: info <package1> <package2> ... <packagen>
     def options(self):
         self.parser.add_option("-f", "--files", action="store_true",
                                default=False,
-                               help="Show a list of package files.")
+                               help=_("show a list of package files."))
         self.parser.add_option("-F", "--files-path", action="store_true",
                                default=False,
-                               help="Show only paths.")
+                               help=_("Show only paths."))
 
     def run(self):
         if not self.args:
@@ -469,7 +473,7 @@ Usage: info <package1> <package2> ... <packagen>
                     else:
                         print fileinfo.path
             else:
-                print 'File information not available'
+                print _('File information not available')
 
 
 class Index(Command):
@@ -492,7 +496,7 @@ source and binary packages.
     def options(self):
         self.parser.add_option("-a", "--absolute-uris", action="store_true",
                                default=False,
-                               help="store absolute links for indexed files.")
+                               help=_("store absolute links for indexed files."))
 
     def run(self):
         
@@ -501,10 +505,10 @@ source and binary packages.
         if len(self.args)==1:
             index(self.args[0])
         elif len(self.args)==0:
-            print 'Indexing current directory.'
+            print _('Indexing current directory.')
             index()
         else:
-            print 'Indexing only a single directory supported.'
+            print _('Indexing only a single directory supported.')
             return
         self.finalize()
 
@@ -534,8 +538,8 @@ Usage: list-installed
         list = ctx.installdb.list_installed()
         list.sort()
         if self.options.install_info:
-            print 'Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'
-            print '========================================================================'
+            print _('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date')
+            print   '========================================================================'
         for pkg in list:
             package = pisi.packagedb.inst_packagedb.get_package(pkg)
             inst_info = ctx.installdb.get_info(pkg)
@@ -678,7 +682,7 @@ Gives a brief list of PiSi components published in the repository.
         else:
             # print for all repos
             for repo in ctx.repodb.list():
-                ctx.ui.info("Repository : %s\n" % repo)
+                ctx.ui.info(_("Repository : %s\n") % repo)
                 self.print_packages(repo)
         self.finalize()
 
@@ -713,7 +717,7 @@ Usage: list-upgrades [ <repo1> <repo2> ... repon ]
         self.parser.add_option("-l", "--long", action="store_true",
                                default=False, help="show in long format")
         self.parser.add_option("-i", "--install-info", action="store_true",
-                               default=False, help="show detailed install info")
+                               default=False, help=_("show detailed install info"))
         buildno_opts(self)
                                
     def run(self):
@@ -721,8 +725,8 @@ Usage: list-upgrades [ <repo1> <repo2> ... repon ]
         list = pisi.api.list_upgradable()
         list.sort()
         if self.options.install_info:
-            print 'Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'
-            print '========================================================================'
+            print _('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date')
+            print   '========================================================================'
         for pkg in list:
             package = pisi.packagedb.inst_packagedb.get_package(pkg)
             inst_info = ctx.installdb.get_info(pkg)
@@ -757,12 +761,12 @@ class ListPending(Command):
         self.finalize()
 
 
-class SearchAvailable(Command):
-    """Search in available packages
+class Search(Command):
+    """Search packages
 
-Usage: search-available <search pattern>
+Usage: search <search pattern>
 
-FIXME: this is bogus
+#FIXME: fill this later
 """
     pass
 
@@ -770,7 +774,7 @@ FIXME: this is bogus
 # Partial build commands        
 
 class BuildUntil(Build):
-    """Run the build process partially
+    _("""Run the build process partially
 
 Usage: -sStateName build-until <pspec file>
 
@@ -780,7 +784,7 @@ unpack, setupaction, buildaction, installaction, buildpackages
 You can give an URI of the pspec.xml file. PISI will fetch all
 necessary files and unpack the source and prepare a source directory
 for you.
-"""
+""")
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -909,12 +913,13 @@ TODO: desc.
 
 
 class BuildPackage(Build):
-    """Setup the source
+    _("""Setup the source
 
 Usage: build-build <pspec file>
 
 TODO: desc.
-"""
+""")
+
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -932,14 +937,14 @@ TODO: desc.
             pisi.api.build_until(arg, "buildpackages", self.authInfo)
         self.finalize()
 
-usage_text1 = """%prog [options] <command> [arguments]
+usage_text1 = _("""%prog [options] <command> [arguments]
 
 where <command> is one of:
 
-"""
+""")
 
-usage_text2 = """
+usage_text2 = _("""
 Use \"%prog help <command>\" for help on a specific command.
-"""
+""")
 
 usage_text = (usage_text1 + Command.commands_string() + usage_text2)
