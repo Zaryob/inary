@@ -81,7 +81,7 @@ def install(packages):
 
     # FIXME: this function name "install" makes impossible to import
     # and use install module directly.
-    from install import InstallError
+    from install import Error as InstallError
 
     try:
         # determine if this is a list of files/urls or names
