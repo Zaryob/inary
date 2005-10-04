@@ -39,16 +39,22 @@ class CLI(UI):
 
     def __init__(self, show_debug = False, show_verbose = False):
         super(CLI, self).__init__(show_debug, show_verbose)
-        #self.encoding = locale.getpreferredencoding()
-        #self.encoding = self.encoding.lower()
-        #FIXME: above code does not work for some reason on MDK!
+        locale.setlocale(locale.LC_ALL, '')
+        #print locale.getlocale()
+        self.encoding = locale.getpreferredencoding()
+        locale.setlocale(locale.LC_ALL, 'C')
+        # workaround a silly python bug!
+        self.encoding = self.encoding.lower()
+        locale.setlocale(locale.LC_ALL, '')
+        if show_debug:
+            print 'output encoding: ', self.encoding
 
     def output(self, str, err = False):
         if err:
             out = sys.stdout
         else:
             out = sys.stderr
-        out.write(str.encode('utf-8'))
+        out.write(str.encode(self.encoding))
         out.flush()
 
     def info(self, msg, verbose = False, noln = False):
