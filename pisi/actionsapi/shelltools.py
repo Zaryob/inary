@@ -14,6 +14,7 @@
 import os
 import glob
 import shutil
+import pwd
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -61,11 +62,11 @@ def chmod(sourceFile, mode = 0755):
         else:
             ctx.ui.error(_(' ActionsAPI [chmod]: File %s doesn\'t exists.') % (file))
 
-def chown(sourceFile, uid = 0, gid = 0):
-    '''change the owner and group id of sourceFile to the numeric uid and gid'''
+def chown(sourceFile, uid = "root", gid = "root"):
+    '''change the owner and group id of sourceFile to uid and gid'''
     if can_access_file(sourceFile):
         try:
-            os.chown(sourceFile, uid, gid)
+            os.chown(sourceFile, pwd.getpwnam(uid)[2], pwd.getpwnam(gid)[3])
         except OSError:
             ctx.ui.error(_(' ActionsAPI [chown]: Operation not permitted: %s (uid: %s, gid: %s)') \
                                                  % (sourceFile, uid, gid))
