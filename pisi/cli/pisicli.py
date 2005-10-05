@@ -89,7 +89,7 @@ class PisiCLI(object):
 
         self.command = Command.get_command(cmd_name)
         if not self.command:
-            print _("Unrecognized command: "), cmd
+            ctx.ui.error(_("Unrecognized command: %s") % cmd_name)
             self.die()
 
     def die(self):

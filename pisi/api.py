@@ -92,11 +92,13 @@ def install(packages):
 
     #FIXME: As Gurer warns, something's fishy with this exception proc.
     except InstallError, e:
-        ctx.ui.error("InstallError:%s" % e)
+        print type(e)
+        ctx.ui.error(str(e))
+        ctx.ui.error("InstallError:") #%s" % str(e))
 
     except packagedb.Error, e:
-        ctx.ui.error("PackageDBError: (%s)" % e)
-        ctx.ui.error("Package is not installable.")
+        ctx.ui.error("PackageDBError: (%s)" % str(e))
+        ctx.ui.error(_("Package is not installable."))
 
     #except Exception, e:
     #    print e

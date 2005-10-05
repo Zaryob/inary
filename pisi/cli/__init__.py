@@ -40,21 +40,15 @@ class CLI(UI):
     def __init__(self, show_debug = False, show_verbose = False):
         super(CLI, self).__init__(show_debug, show_verbose)
         locale.setlocale(locale.LC_ALL, '')
-        #print locale.getlocale()
-        self.encoding = locale.getpreferredencoding()
-        locale.setlocale(locale.LC_ALL, 'C')
-        # workaround a silly python bug!
-        self.encoding = self.encoding.lower()
-        locale.setlocale(locale.LC_ALL, '')
-        if show_debug:
-            print 'output encoding: ', self.encoding
 
-    def output(self, str, err = False):
+    def output(self, msg, err = False):
+        if type(msg)==type(unicode()):
+            msg = msg.encode('utf-8')
         if err:
             out = sys.stdout
         else:
             out = sys.stderr
-        out.write(str.encode(self.encoding))
+        out.write(msg)
         out.flush()
 
     def info(self, msg, verbose = False, noln = False):
@@ -96,10 +90,11 @@ class CLI(UI):
         if ctx.config.options and ctx.config.options.yes_all:
             return True
         while True:
-            s = raw_input(msg + colorize(_('(yes/no)'), 'red'))
-            if s.startswith(_('y')) or s.startswith(_('Y')):
+            prompt = msg + colorize(_('(yes/no)'), 'red')
+            s = raw_input(prompt.encode('utf-8'))
+            if s.startswith(_('y').encode('utf-8')) or s.startswith(_('Y').encode('utf-8')):
                 return True
-            if s.startswith(_('n')) or s.startswith(_('N')):
+            if s.startswith(_('n').encode('utf-8')) or s.startswith(_('N').encode('utf-8')):
                 return False
 
     def display_progress(self, pd):
