@@ -92,9 +92,9 @@ def install(packages):
 
     #FIXME: As Gurer warns, something's fishy with this exception proc.
     except InstallError, e:
-        print type(e)
-        ctx.ui.error(str(e))
-        ctx.ui.error("InstallError:") #%s" % str(e))
+        # FIXME: This is a workaround for __str__ conversion used in
+        # Python exceptions
+        ctx.ui.error(e.args[0])
 
     except packagedb.Error, e:
         ctx.ui.error("PackageDBError: (%s)" % str(e))

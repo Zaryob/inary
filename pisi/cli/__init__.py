@@ -92,9 +92,9 @@ class CLI(UI):
         while True:
             prompt = msg + colorize(_('(yes/no)'), 'red')
             s = raw_input(prompt.encode('utf-8'))
-            if s.startswith(_('y').encode('utf-8')) or s.startswith(_('Y').encode('utf-8')):
+            if s[0] in locale.nl_langinfo(locale.YESEXPR):
                 return True
-            if s.startswith(_('n').encode('utf-8')) or s.startswith(_('N').encode('utf-8')):
+            elif s[0] in locale.nl_langinfo(locale.NOEXPR):
                 return False
 
     def display_progress(self, pd):
