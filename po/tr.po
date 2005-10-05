@@ -74,71 +74,71 @@ msgstr "Uyarı: %s yok, düz ad %s kullanılıyor"
 
 #: pisi/actionsapi/shelltools.py:50
 msgid " ActionsAPI [echo]: Can't append to file %s..."
-msgstr ""
+msgstr " ActionsAPI [echo]: %s dosyasına eklenemiyor..."
 
 #: pisi/actionsapi/shelltools.py:59
 msgid " ActionsAPI [chmod]: Operation not permitted: %s (mode: %s)"
-msgstr ""
+msgstr " ActionsAPI [chmod]: İşleme izin verilmedi: %s (mod: %s)"
 
 #: pisi/actionsapi/shelltools.py:62
 msgid " ActionsAPI [chmod]: File %s doesn't exists."
-msgstr ""
+msgstr " ActionsAPI [chmod]: %s dosyası bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:70
 msgid " ActionsAPI [chown]: Operation not permitted: %s (uid: %s, gid: %s)"
-msgstr ""
+msgstr " ActionsAPI [chown]: İşleme izin verilmedi: %s (uid: %s, gid: %s)"
 
 #: pisi/actionsapi/shelltools.py:73
 msgid " ActionsAPI [chown]: File %s doesn't exists."
-msgstr ""
+msgstr " ActionsAPI [chown]: %s dosyası bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:80
 msgid " ActionsAPI [sym]: Permission denied: %s to %s"
-msgstr ""
+msgstr " ActionsAPI [sym]: Erişim engellendi: %s -> %s"
 
 #: pisi/actionsapi/shelltools.py:88
 msgid " ActionsAPI [unlink]: Permission denied: %s."
-msgstr ""
+msgstr " ActionsAPI [unlink]: Erişim engellendi: %s."
 
 #: pisi/actionsapi/shelltools.py:92
 msgid " ActionsAPI [unlink]: File %s doesn't exists."
-msgstr ""
+msgstr " ActionsAPI [unlink]: %s dosyası bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:100
 msgid " ActionsAPI [unlinkDir]: Operation not permitted: %s"
-msgstr ""
+msgstr " ActionsAPI [unlinkDir]: İşleme izin verilmedi: %s"
 
 #: pisi/actionsapi/shelltools.py:104
 msgid " ActionsAPI [unlinkDir]: Directory %s doesn't exists."
-msgstr ""
+msgstr " ActionsAPI [unlinkDir]: %s dizini bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:113
 msgid " ActionsAPI [move]: Permission denied: %s to %s"
-msgstr ""
+msgstr " ActionsAPI [move]: Erişim engellendi: %s -> %s"
 
 #: pisi/actionsapi/shelltools.py:115
 msgid " ActionsAPI [move]: File %s doesn't exists."
-msgstr ""
+msgstr " ActionsAPI [move]: %s dosyası bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:124
 msgid "ActionsAPI [copy]: Permission denied: %s to %s"
-msgstr ""
+msgstr "ActionsAPI [copy]: Erişim engellendi: %s -> %s"
 
 #: pisi/actionsapi/shelltools.py:128
 msgid "ActionsAPI [copy]: File %s does not exist."
-msgstr ""
+msgstr "ActionsAPI [copy]: %s dosyası bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:136
 msgid " ActionsAPI [copytree]: Permission denied: %s to %s"
-msgstr ""
+msgstr " ActionsAPI [copytree]: Erişim engellendi: %s -< %s"
 
 #: pisi/actionsapi/shelltools.py:138
 msgid " ActionsAPI [copytree]: Directory %s doesn't exists."
-msgstr ""
+msgstr " ActionsAPI [copytree]: %s dizini bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:150
 msgid " ActionsAPI [touch]: Permission denied: %s"
-msgstr ""
+msgstr " ActionsAPI [touch]: Erişim engellendi: %s"
 
 #: pisi/actionsapi/shelltools.py:198
 msgid "executing %s"
@@ -174,24 +174,24 @@ msgstr "Yerleştirme başarısızlığa uğgradı."
 # pisi/actionsapi/autotools.py:121 :129
 #: pisi/actionsapi/autotools.py:121
 msgid "No Makefile found."
-msgstr "Makefile bulunamadı"
+msgstr "Makefile bulunamadı."
 
 #: pisi/actionsapi/autotools.py:134
 msgid "Running aclocal failed."
-msgstr "aclocal çalıştırılamadı"
+msgstr "aclocal çalıştırılamadı."
 
 # pisi/actionsapi/autotools.py:139 :144
 #: pisi/actionsapi/autotools.py:139
 msgid "Running autoconf failed."
-msgstr ""
+msgstr "autoconf çalıştırılamadı."
 
 #: pisi/actionsapi/autotools.py:149
 msgid "Running automake failed."
-msgstr ""
+msgstr "automake çalıştırılamadı."
 
 #: pisi/actionsapi/autotools.py:154
 msgid "Running autoheader failed."
-msgstr ""
+msgstr "autoheader çalıştırılamadı."
 
 #: pisi/actionsapi/pisitools.py:131
 msgid ""
