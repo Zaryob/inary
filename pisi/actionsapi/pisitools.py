@@ -168,10 +168,6 @@ def rename(sourceFile, destinationFile):
     except OSError:
         ctx.ui.error(_('\n!!! ActionsAPI [rename]: No such file or directory: %s') % (sourceFile))
 
-def dopython():
-    '''FIXME: What the hell is this?'''
-    pass
-
 def dosed(sourceFile, findPattern, replacePattern = ''):
     '''replaces patterns in sourceFile'''
     

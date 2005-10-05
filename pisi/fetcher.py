@@ -19,6 +19,7 @@
 import urllib2
 import os
 from base64 import encodestring
+from shutil import move
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -68,12 +69,15 @@ class Fetcher:
         if not os.access(self.filedest, os.W_OK):
             self.err(_("Access denied to write to dest dir"))
 
-        if self.url.is_local_file():
-            self.fetchLocalFile()
-        else:
-            self.fetchRemoteFile()
+        archiveFile = os.path.join(self.filedest, self.url.filename())
 
-        return os.path.join(self.filedest, self.url.filename())
+        if self.url.is_local_file():
+            self.fetchLocalFile(archiveFile + ".part")
+        else:
+            self.fetchRemoteFile(archiveFile + ".part")
+
+        move(archiveFile + ".part", archiveFile)
+        return archiveFile 
 
     def _do_grab(self, fileURI, dest, totalsize):
         symbols = [' B/s', 'KB/s', 'MB/s', 'GB/s']
@@ -110,18 +114,18 @@ class Fetcher:
 
         dest.close()
 
-    def fetchLocalFile (self):
+    def fetchLocalFile (self, archiveFile):
         url = self.url
 
         if not os.access(url.path(), os.F_OK):
             self.err(_("No such file or no permission to read"))
 
-        dest = open(os.path.join(self.filedest, url.filename()) , "w")
+        dest = open(archiveFile, "w")
         totalsize = os.path.getsize(url.path())
         fileObj = open(url.path())
         self._do_grab(fileObj, dest, totalsize)
 
-    def fetchRemoteFile (self):
+    def fetchRemoteFile (self, archiveFile):
         from httplib import HTTPException
 
         try:
@@ -143,7 +147,7 @@ class Fetcher:
         except:
             totalsize = 0
 
-        dest = open(os.path.join(self.filedest, self.url.filename()) , "w")
+        dest = open(archiveFile, "w")
         self._do_grab(fileObj, dest, totalsize)
 
     def formatRequest(self, request):
