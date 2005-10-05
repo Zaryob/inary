@@ -90,13 +90,16 @@ class CLI(UI):
         if ctx.config.options and ctx.config.options.yes_all:
             return True
         while True:
+            import re
+            yesexpr = re.compile(locale.nl_langinfo(locale.YESEXPR))
+
             prompt = msg + colorize(_('(yes/no)'), 'red')
             s = raw_input(prompt.encode('utf-8'))
-            if s[0] in locale.nl_langinfo(locale.YESEXPR):
+            if yesexpr.search(s):
                 return True
-            elif s[0] in locale.nl_langinfo(locale.NOEXPR):
-                return False
 
+            return False
+            
     def display_progress(self, pd):
         out = '\r%-30.30s %3d%% %12.2f %s' % \
             (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])

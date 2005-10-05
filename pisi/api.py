@@ -97,7 +97,8 @@ def install(packages):
         ctx.ui.error(e.args[0])
 
     except packagedb.Error, e:
-        ctx.ui.error("PackageDBError: (%s)" % str(e))
+        # FIXME: same workaround...
+        ctx.ui.error("PackageDBError: (%s)" % e.args[0])
         ctx.ui.error(_("Package is not installable."))
 
     #except Exception, e:
