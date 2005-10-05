@@ -54,7 +54,7 @@ def init(database = True, options = None, ui = None, comar = True):
             ctx.comard = comar.Link()
         except ImportError:
             raise Error(_("COMAR: comard not fully installed"))
-            print _("skipping COMAR connection for now...")
+            #print _("skipping COMAR connection for now...")
         except comar.Error:
             raise Error(_("COMAR: comard not running or defunct"))
 
@@ -178,7 +178,7 @@ def install_pkg_files(package_URIs):
     
         # find the "install closure" graph of G_f by package 
         # set A using packagedb
-        print A
+        #print A
         for x in A:
             G_f.add_package(x)
         B = A
@@ -187,19 +187,20 @@ def install_pkg_files(package_URIs):
             Bp = set()
             for x in B:
                 pkg = packagedb.get_package(x)
-                print pkg
+                #print pkg
                 for dep in pkg.runtimeDeps:
-                    print 'checking ', dep
+                    #print 'checking ', dep
                     if dependency.dict_satisfies_dep(d_t, dep):
                         if not dep.package in G_f.vertices():
                             Bp.add(str(dep.package))
                         G_f.add_dep(x, dep)
             B = Bp
-        G_f.write_graphviz(sys.stdout)
+        if ctx.config.get_option('debug'):
+            G_f.write_graphviz(sys.stdout)
         order = G_f.topological_sort()
         order.reverse()
-        print order
-
+        #if ctx.config.get_option('debug'):
+        #    print 'installation order', order
         for x in order:
             operations.install_single_file(dfn[x])
     else:
@@ -225,7 +226,7 @@ def install_pkg_names(A):
 
     # find the "install closure" graph of G_f by package 
     # set A using packagedb
-    print A
+    #print A
     for x in A:
         G_f.add_package(x)
     B = A
@@ -234,7 +235,7 @@ def install_pkg_names(A):
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            print pkg
+            #print pkg
             for dep in pkg.runtimeDeps:
                 ctx.ui.debug('checking %s' % str(dep))
                 # we don't deal with already *satisfied* dependencies
@@ -243,10 +244,11 @@ def install_pkg_names(A):
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
         B = Bp
-    G_f.write_graphviz(sys.stdout)
+    if ctx.config.get_option('debug'):
+        #G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
-    print order
+    #print order
     for x in order:
         operations.install_single_name(x)
         
@@ -275,7 +277,7 @@ def package_graph(A, ignore_installed = False):
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            print pkg
+            #print pkg
             for dep in pkg.runtimeDeps:
                 if ignore_installed:
                     if dependency.installed_satisfies_dep(dep):
@@ -345,7 +347,7 @@ def upgrade_pkg_names(A):
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            print pkg
+            #print pkg
             for dep in pkg.runtimeDeps:
                 #print 'checking ', dep
                 # add packages that can be upgraded
@@ -368,7 +370,7 @@ def upgrade_pkg_names(A):
     G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
-    print order
+    #print order
     for x in order:
         operations.install_single_name(x, True)
         
@@ -418,7 +420,7 @@ def remove(A):
 
     # find the (install closure) graph of G_f by package 
     # set A using packagedb
-    print A
+    #print A
     for x in A:
         G_f.add_package(x)
     B = A
@@ -453,7 +455,7 @@ def configure_pending():
     # start with pending packages
     # configure them in reverse topological order of dependency
     A = ctx.installdb.list_pending()
-    print A
+    #print A
     G_f = pgraph.PGraph(packagedb)               # construct G_f
     for x in A:
         G_f.add_package(x)
@@ -463,7 +465,7 @@ def configure_pending():
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            print pkg
+            #print pkg
             for dep in pkg.runtimeDeps:
                 if dep.package in G_f.vertices():
                     G_f.add_dep(x, dep)
@@ -471,7 +473,7 @@ def configure_pending():
     G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
-    print order
+    #print order
     for x in order:
         comariface.run_postinstall(x)
 

@@ -34,6 +34,10 @@ class Exception(pisi.Exception):
     pass
 
 
+def printu(msg):
+    msg.encode('utf-8')
+    
+
 class CLI(UI):
     "Command Line Interface"
 

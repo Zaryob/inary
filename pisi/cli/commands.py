@@ -45,7 +45,7 @@ class Command(object):
             return Command.cmd_dict[cmd]()
     
         if fail:
-            print _("Unrecognized command: "), cmd
+            ctx.ui.info(_("Unrecognized command: ") + cmd)
             sys.exit(1)
         else:
             return None
@@ -139,13 +139,12 @@ class Command(object):
     def help(self):
         """print help for the command"""
         ctx.ui.info(self.format_name() + ': ')
-        print getattr(self, "__doc__")
-        print
-        print self.parser.format_option_help()
+        ctx.ui.info(getattr(self, "__doc__") + '\n')
+        ctx.ui.info(self.parser.format_option_help())
 
     def die(self):
         """exit program"""
-        print _('Program terminated abnormally.')
+        ctx.ui.error(_('Program terminated abnormally.'))
         sys.exit(-1)
 
 
@@ -187,7 +186,7 @@ If run without parameters, it prints the general help.""")
     def run(self):
         if not self.args:
             self.parser.set_usage(usage_text)
-            self.parser.print_help()
+            ctx.ui.info(self.parser.format_help())
             return
             
         self.init()
@@ -195,7 +194,7 @@ If run without parameters, it prints the general help.""")
         for arg in self.args:
             obj = Command.get_command(arg, True)
             obj.help()
-            print
+            ctx.ui.info('')
         
         self.finalize()
 
@@ -463,18 +462,17 @@ Usage: info <package1> <package2> ... <packagen>
         import os.path
 
         metadata, files = pisi.api.info(arg)
-        print metadata.package
+        ctx.ui.info(str(metadata.package))
         if self.options.files or self.options.files_path:
             if files:
-                print
-                print 'Files:'
+                ctx.ui.info(_('\nFiles:'))
                 for fileinfo in files.list:
                     if self.options.files:
                         print fileinfo
                     else:
                         print fileinfo.path
             else:
-                print _('File information not available')
+                ctx.ui.warning(_('File information not available'))
 
 
 class Index(Command):
@@ -506,10 +504,10 @@ source and binary packages.
         if len(self.args)==1:
             index(self.args[0])
         elif len(self.args)==0:
-            print _('Indexing current directory.')
+            ctx.ui.info( _('Indexing current directory.'))
             index()
         else:
-            print _('Indexing only a single directory supported.')
+            ctx.ui.info( _('Indexing only a single directory supported.'))
             return
         self.finalize()
 
@@ -539,18 +537,18 @@ Usage: list-installed
         list = ctx.installdb.list_installed()
         list.sort()
         if self.options.install_info:
-            print _('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date')
-            print   '========================================================================'
+            ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
+            print         '========================================================================'
         for pkg in list:
             package = pisi.packagedb.inst_packagedb.get_package(pkg)
             inst_info = ctx.installdb.get_info(pkg)
             if self.options.long:
-                print package
-                print inst_info
+                ctx.ui.info(package)
+                ctx.ui.info(inst_info)
             elif self.options.install_info:
-                print '%-15s | %s ' % (package.name, inst_info.one_liner())
+                ctx.ui.info('%-15s | %s ' % (package.name, inst_info.one_liner()))
             else:
-                print '%15s - %s ' % (package.name, package.summary)
+                ctx.ui.info('%15s - %s ' % (package.name, package.summary))
         self.finalize()
 
 
@@ -654,7 +652,7 @@ Lists currently tracked repositories.
 
         self.init()
         for repo in ctx.repodb.list():
-            print repo
+            ctx.ui.info(repo)
             print '  ', ctx.repodb.get_repo(repo).indexuri.get_uri()
         self.finalize()
 
@@ -726,18 +724,18 @@ Usage: list-upgrades [ <repo1> <repo2> ... repon ]
         list = pisi.api.list_upgradable()
         list.sort()
         if self.options.install_info:
-            print _('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date')
-            print   '========================================================================'
+            ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
+            print         '========================================================================'
         for pkg in list:
             package = pisi.packagedb.inst_packagedb.get_package(pkg)
             inst_info = ctx.installdb.get_info(pkg)
             if self.options.long:
-                print package
+                ctx.ui.info(package)
                 print inst_info
             elif self.options.install_info:
-                print '%-15s | %s ' % (package.name, inst_info.one_liner())
+                ctx.ui.info('%-15s | %s ' % (package.name, inst_info.one_liner()))
             else:
-                print '%15s - %s ' % (package.name, package.summary)
+                ctx.ui.info('%15s - %s ' % (package.name, package.summary))
         self.finalize()
 
 
