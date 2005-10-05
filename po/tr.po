@@ -278,15 +278,15 @@ msgstr "aclocal çalıştırılamadı"
 # pisi/actionsapi/pisitoolsfunctions.py:46 :59
 #: pisi/actionsapi/pisitoolsfunctions.py:46
 msgid "Insufficient arguments..."
-msgstr ""
+msgstr "Yetersiz argümanlar"
 
 #: pisi/actionsapi/pisitoolsfunctions.py:72
 msgid " Insufficient arguments..."
-msgstr ""
+msgstr "Yetersiz argümanlar"
 
 #: pisi/cli/commands.py:26
 msgid "generic help string for any command"
-msgstr ""
+msgstr "herhangi bir komut yardımı için yer tutucu"
 
 #: pisi/cli/commands.py:48 pisi/cli/pisicli.py:92
 #, fuzzy
@@ -295,36 +295,36 @@ msgstr "Başarısız komut: %s"
 
 #: pisi/cli/commands.py:74
 msgid "assume yes in all yes/no queries"
-msgstr ""
+msgstr "bütün evet/hayır sorularında evet varsay"
 
 #: pisi/cli/commands.py:78
 msgid "get password from the command line"
-msgstr ""
+msgstr "parolayı komut satırından al"
 
 #: pisi/cli/commands.py:81
 msgid "detailed output"
-msgstr ""
+msgstr "detaylı çıktı"
 
 #: pisi/cli/commands.py:83
 msgid "show debugging information"
-msgstr ""
+msgstr "hata ayıklama bilgisini göster"
 
 #: pisi/cli/commands.py:85
 msgid ""
 "do not perform any action, just show what                     would be done"
-msgstr ""
+msgstr "bir eylem gerçekleşirme, sadece ne yapılacağını göster"
 
 #: pisi/cli/commands.py:112
 msgid "Password: "
-msgstr ""
+msgstr "Parola: "
 
 #: pisi/cli/commands.py:148
 msgid "Program terminated abnormally."
-msgstr ""
+msgstr "Program anormal biçimde sonlandı."
 
 #: pisi/cli/commands.py:158
 msgid "command lacks name"
-msgstr ""
+msgstr "komut adı eksik"
 
 #: pisi/cli/commands.py:162
 #, fuzzy
@@ -339,10 +339,15 @@ msgid ""
 "\n"
 "If run without parameters, it prints the general help."
 msgstr ""
+"Verilen komutlar için yardım metnini gösterir.\n"
+"\n"
+"Kullanım: help [ <komut1> <komut2> ... <komutn> ]\n"
+"\n"
+"Eğer parametre verilmezse genel yardımı yazar."
 
 #: pisi/cli/commands.py:203
 msgid "Clean stale locks."
-msgstr ""
+msgstr "Bayat kilitleri temizle."
 
 #: pisi/cli/commands.py:219
 msgid ""
@@ -352,10 +357,15 @@ msgid ""
 "Write a graph of package relations, tracking dependency and\n"
 "conflicts relations starting from given packages.\n"
 msgstr ""
+"Paket ilişkilerini çiz.\n"
+"Kullanım: graph <package1> <package2> ...\n"
+"\n"
+"Paket ilişkilerinin bir çizgesini, bağımlılık ve çatışma\n"
+"ilişkilerini verilen paketlerden takip ederek yaz.\n"
 
 #: pisi/cli/commands.py:244
 msgid "do not take build no into account."
-msgstr ""
+msgstr "inşa no'sunu dikkate alma"
 
 #: pisi/cli/commands.py:248
 msgid ""
@@ -366,18 +376,24 @@ msgid ""
 "You can give a URI of the pspec.xml file. PISI will\n"
 "fetch all necessary files and build the package for you.\n"
 msgstr ""
+"pspec.xml kullanarak bir PISI paketi inşa et\n"
+"\n"
+"Kullanım: build <pspec.xml>\n"
+"\n"
+"pspec.xml dosyasının URI'ını verebilirsiniz. PISI sizin\n"
+"için gerekli tüm dosyaları çekip inşa edecektir.\n"
 
 #: pisi/cli/commands.py:265
 msgid "output directory for produced packages"
-msgstr ""
+msgstr "üretilecek paketler için çıktı dizini"
 
 #: pisi/cli/commands.py:289
 msgid "bypass comar configuration agent"
-msgstr ""
+msgstr "çomar yapılandırma aygıtını kullanma"
 
 #: pisi/cli/commands.py:292
 msgid "do not take dependency information into account"
-msgstr ""
+msgstr "bağımlılık bilgilerini dikkate alma"
 
 #: pisi/cli/commands.py:302
 msgid ""
@@ -388,6 +404,12 @@ msgid ""
 "You may use filenames, URIs or package names for packages. If you have\n"
 "specified a package name, it should exist in a specified repository.\n"
 msgstr ""
+"PISI paketlerini yükle\n"
+"\n"
+"Kullanım: install <package1> <package2> ... <packagen>\n"
+"\n"
+"Paketler için dosya adları, URI'lar veya paket adları kullanabilirsiniz.\n"
+"Eğer bir paket adı verdiyseniz, paket deposunda bulunmalı.\n"
 
 #: pisi/cli/commands.py:330
 msgid ""
@@ -401,6 +423,13 @@ msgid ""
 "should exist in the package repositories. If you just want to\n"
 "reinstall a package from a pisi file, use the install command."
 msgstr ""
+"PISI paketlerini yükselt\n"
+"\n"
+"Kullanım: Upgrade <package1> <package2> ... <packagen>\n"
+"\n"
+"Paketleri belirtmek için şimdilik sadece paket adları kullanabilirsiniz\n"
+"Verdiğiniz paket adları depolarda yer almalıdır. Eğer sadece\n"
+"bir dosyayı yeniden kurmak istiyorsanız install komutunu kullanın\n"
 
 #: pisi/cli/commands.py:362
 msgid ""
@@ -410,6 +439,11 @@ msgid ""
 "\n"
 "Remove package(s) from your system. Just give the package names to remove.\n"
 msgstr ""
+"PISI paketlerini kaldır\n"
+"\n"
+"Kullanım: remove <package1> <package2> ... <packagen>\n"
+"\n"
+"Paket(leri) sisteminizden kaldırır. Sadece kaldırılacak paketlerin adlarını verin.\n"
 
 #: pisi/cli/commands.py:386
 msgid ""
@@ -419,12 +453,19 @@ msgid ""
 "\n"
 "Upgrade the entire system.\n"
 msgstr ""
+"Sistemi yükselt\n"
+"\n"
+"Kullanım: Upgrade\n"
+"\n"
+"Bütün sistemi yükselt.\n"
 
 #: pisi/cli/commands.py:414
 msgid ""
 "configure pending packages\n"
 "    "
 msgstr ""
+"bekleyen paketleri yapılandır\n"
+"    "
 
 #: pisi/cli/commands.py:432
 msgid ""
@@ -433,14 +474,18 @@ msgid ""
 "Usage: info <package1> <package2> ... <packagen>\n"
 "\n"
 msgstr ""
+"Paket bilgisini göster\n"
+"\n"
+"Kullanım: info <package1> <package2> ... <packagen>\n"
+"\n"
 
 #: pisi/cli/commands.py:447
 msgid "show a list of package files."
-msgstr ""
+msgstr "paketteki dosyaların bir listesini göster"
 
 #: pisi/cli/commands.py:450
 msgid "Show only paths."
-msgstr ""
+msgstr "Sadece yolları göster"
 
 #: pisi/cli/commands.py:477
 #, fuzzy
@@ -458,18 +503,26 @@ msgid ""
 "named by default 'pisi-index.xml'. In particular, it indexes both\n"
 "source and binary packages.\n"
 msgstr ""
+"Verilen bir dizindeki PISI dosyalarının endeksle\n"
+"\n"
+"Kullanım: index <directory>\n"
+"\n"
+"Bu komut bir dizindeki bütüm PİSİ dosyalarını arastırır, PIS\n"
+"etiketlerini toplar ve bilgiyi çıktı, varsayılan adı 'pisi-index.xml',"
+"olan XML dosyasında birleştirir. Özellikle, hem ikili hem kaynak\n"
+"paketlerini endeksler.\n"
 
 #: pisi/cli/commands.py:500
 msgid "store absolute links for indexed files."
-msgstr ""
+msgstr "endekslenmiş dosyalar için mutlak bağlar sakla"
 
 #: pisi/cli/commands.py:509
 msgid "Indexing current directory."
-msgstr ""
+msgstr "Şu andaki dizini endeksliyor."
 
 #: pisi/cli/commands.py:512
 msgid "Indexing only a single directory supported."
-msgstr ""
+msgstr "Tek bir dizini endeksleme destekleniyor."
 
 #: pisi/cli/commands.py:518
 msgid ""
@@ -478,12 +531,17 @@ msgid ""
 "Usage: list-installed\n"
 "\n"
 msgstr ""
+"Kurulu paketlerin bir listesini yaz  \n"
+"\n"
+"Kullanım: list-installed\n"
+"\n"
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/commands.py:542
 msgid ""
 "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
 msgstr ""
+"Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
 
 #: pisi/cli/commands.py:558
 msgid ""
@@ -494,6 +552,12 @@ msgid ""
 "<repoi>: repository name\n"
 "Synchronizes the PiSi databases with the current repository.\n"
 msgstr ""
+"Depo veritabanlarını günceller\n"
+"\n"
+"Kullanım: update-repo <depo1> <depo2> ... <depon>\n"
+"\n"
+"<depoi>: depo adı\n"
+"PİSİ veritabanlarını depo ile eşzamanlı hale getirir.\n"
 
 #: pisi/cli/commands.py:584
 msgid ""
@@ -507,6 +571,15 @@ msgid ""
 "NB: We support only local files (e.g., /a/b/c) and http:// URIs at the "
 "moment\n"
 msgstr ""
+"Bir depo ekle\n"
+"\n"
+"Kullanım: add-repo <depo> <indexuri>\n"
+"\n"
+"<depo>: eklenecek deponun adı\n"
+"<indexuri>: endeks dosyasının URI'ı\n"
+"\n"
+"Not: Şimdilik sadece lokal dosyaları (e.g., /a/b/c) ve http:// URI'larını\n"
+"destekliyoruz\n"
 
 #: pisi/cli/commands.py:614
 msgid ""
@@ -516,6 +589,11 @@ msgid ""
 "\n"
 "Remove all repository information from the system.\n"
 msgstr ""
+"Depoları kaldır\n"
+"\n"
+"Kullanım: remove-repo <depo1> <depo2> ... <depon>\n"
+"\n"
+"Sistemden ilgili bütün depo bilgisini kaldır.\n"
 
 #: pisi/cli/commands.py:640
 msgid ""
@@ -525,6 +603,11 @@ msgid ""
 "\n"
 "Lists currently tracked repositories.\n"
 msgstr ""
+"Depoları listele\n"
+"\n"
+"Kullanım: list-repo\n"
+"\n"
+"Şu anda izlenen bütün depoları gösterir.\n"
 
 #: pisi/cli/commands.py:663
 msgid ""
@@ -534,11 +617,16 @@ msgid ""
 "\n"
 "Gives a brief list of PiSi components published in the repository.\n"
 msgstr ""
+"Depolardaki paketleri gösterir\n"
+"\n"
+"Kullanım: list-available [ <depo1> <depo2> ... depon ]\n"
+"\n"
+"Depoda yayımlanmış olan PİSİ bileşenlerinin kısa bir listesini verir.\n"
 
 #: pisi/cli/commands.py:686
 #, fuzzy
 msgid "Repository : %s\n"
-msgstr "Repo %s güncelleniyor."
+msgstr "Depo: %s."
 
 #: pisi/cli/commands.py:705
 msgid ""
@@ -547,15 +635,19 @@ msgid ""
 "Usage: list-upgrades [ <repo1> <repo2> ... repon ]\n"
 "\n"
 msgstr ""
+"Yükseltilecek paketleri listele\n"
+"\n"
+"Kullanım: list-upgrades [ <depo1> <depo2> ... depon ]\n"
+"\n"
 
 #: pisi/cli/commands.py:721
 msgid "show detailed install info"
-msgstr ""
+msgstr "detaylı yükleme bilgisi göster"
 
 #: pisi/cli/commands.py:745
 #, fuzzy
 msgid "List pending packages"
-msgstr "* Paket %s inşa ediliyor"
+msgstr "Bekleyen paketleri listele"
 
 #: pisi/cli/commands.py:766
 msgid ""
@@ -579,6 +671,13 @@ msgid ""
 "necessary files and unpack the source and prepare a source directory\n"
 "for you.\n"
 msgstr ""
+"İnşa işlevini kısmen çalıştır\n"
+"\n"
+"Kullanım: -s<Adım> build-until <pspec file>\n"
+"\n"
+"Adım aşağıdakilerden birisi olabilir:\n"
+"unpack, setupaction, buildaction, installaction, buildpackages\n"
+"\n"
 
 #: pisi/cli/commands.py:815
 msgid ""
@@ -624,20 +723,26 @@ msgid ""
 "where <command> is one of:\n"
 "\n"
 msgstr ""
+"%prog [seçenekler] <komut> [argümanlar]\n"
+"\n"
+"<komut> aşağıdakilerden birisi olabilir:\n"
+"\n"
 
 #: pisi/cli/commands.py:947
 msgid ""
 "\n"
 "Use \"%prog help <command>\" for help on a specific command.\n"
 msgstr ""
+"\n"
+"Belli bir komut hakkında yardım için \"%prog help <komut>\"'i kullanın.\n"
 
 #: pisi/cli/pisicli.py:83
 msgid "No command given"
-msgstr ""
+msgstr "Komut verilmedi"
 
 #: pisi/cli/pisicli.py:87
 msgid "Command line parsing error"
-msgstr ""
+msgstr "Komut satırı ayrıştırma hatası"
 
 #: pisi/cli/__init__.py:67
 #, fuzzy
@@ -646,32 +751,33 @@ msgstr "çalıştırıyor"
 
 #: pisi/cli/__init__.py:70
 msgid "Error: "
-msgstr ""
+msgstr "Hata: "
 
 #: pisi/cli/__init__.py:93
 msgid "(yes/no)"
-msgstr ""
+msgstr "(evet/hayır)"
 
 #: pisi/cli/__init__.py:94
 msgid "y"
-msgstr ""
+msgstr "e"
 
 #: pisi/cli/__init__.py:94
 msgid "Y"
-msgstr ""
+msgstr "E"
 
 #: pisi/cli/__init__.py:96
 msgid "n"
-msgstr ""
+msgstr "h"
 
 #: pisi/cli/__init__.py:96
 msgid "N"
-msgstr ""
+msgstr "H"
 
 #: pisi/lockeddbshelve.py:50
 msgid ""
 "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
 msgstr ""
+"Bayraklar 'r', 'w', 'c' or 'n'den birisi olmalı ya da bsddb.db.DB_* bayraklarını kullanmalı"
 
 #: pisi/lockeddbshelve.py:61
 msgid "Another instance of PISI is running. Try later!"
