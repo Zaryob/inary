@@ -41,5 +41,5 @@ def make(parameters = ''):
         raise MakeError(_('!!! Make failed...\n'))
 
 def install(parameters = 'install'):
-    if system("scons prefix=%s/%s %s" % (get.installDIR(), get.defaultprefixDIR(), parameters)):
+    if system("scons prefix=%s %s" % (get.installDIR(), parameters)):
         raise InstallError(_('!!! Install failed...\n'))
