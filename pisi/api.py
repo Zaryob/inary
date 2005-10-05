@@ -537,7 +537,7 @@ def update_repo(repo):
     index = Index()
     index.read(ctx.repodb.get_repo(repo).indexuri.get_uri(), repo)
     index.update_db(repo)
-    ctx.ui.info(_('* Package database updated.'))
+    ctx.ui.info(_('\n* Package database updated.'))
 
 
 # build functions...
