@@ -245,7 +245,7 @@ def install_pkg_names(A):
                     G_f.add_dep(x, dep)
         B = Bp
     if ctx.config.get_option('debug'):
-        #G_f.write_graphviz(sys.stdout)
+        G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
     #print order

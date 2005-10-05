@@ -80,7 +80,7 @@ class Command(object):
                      dest="verbose", default=False,
                      help=_("detailed output"))
         p.add_option("-d", "--debug", action="store_true",
-                     default=True, help=_("show debugging information"))
+                     default=False, help=_("show debugging information"))
         p.add_option("-n", "--dry-run", action="store_true", default=False,
                      help = _("do not perform any action, just show what\
                      would be done"))
