@@ -9,7 +9,7 @@
 #
 
 # pisi.cli package version
-__version__ = "1.0_alpha4"
+__version__ = "1.0_alpha5"
 
 import sys
 import locale
