@@ -35,7 +35,7 @@ class Exception(pisi.Exception):
 
 
 def printu(msg):
-    msg.encode('utf-8')
+    print msg.encode('utf-8')
     
 
 class CLI(UI):

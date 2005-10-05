@@ -18,6 +18,8 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
+import pisi.cli
+from pisi.cli import printu
 from pisi.uri import URI
 from pisi.cli.commands import *
 
@@ -93,7 +95,7 @@ class PisiCLI(object):
             self.die()
 
     def die(self):
-        printu(self.parser.format_help())
+        printu('\n' + self.parser.format_help())
         sys.exit(1)
 
     def run_command(self):
