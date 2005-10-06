@@ -158,7 +158,7 @@ def domove(sourceFile, destination, destinationFile = ''):
 def rename(sourceFile, destinationFile):
     ''' renames sourceFile as destinationFile'''
     
-    ''' example call: pisitools.dorename("/usr/bin/bash", "bash.old") '''
+    ''' example call: pisitools.rename("/usr/bin/bash", "bash.old") '''
     ''' the result of the previous example would be "/usr/bin/bash.old" '''
 
     baseDir = os.path.dirname(sourceFile)
