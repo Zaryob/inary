@@ -49,9 +49,9 @@ class CLI(UI):
         if type(msg)==type(unicode()):
             msg = msg.encode('utf-8')
         if err:
-            out = sys.stdout
-        else:
             out = sys.stderr
+        else:
+            out = sys.stdout
         out.write(msg)
         out.flush()
 
