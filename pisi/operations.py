@@ -44,7 +44,7 @@ def remove_file(fileinfo):
         if os.path.isfile(fpath) or os.path.islink(fpath):
             os.unlink(fpath)
         else:
-            ctx.ui.warning(_('Not removing non-file, non-link %d') % fpath)
+            ctx.ui.warning(_('Not removing non-file, non-link %s') % fpath)
 
 def run_preremove(package_name):
     if ctx.comard:
