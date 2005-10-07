@@ -52,10 +52,13 @@ class SourceFetcher(object):
     def fetch_patches(self):
         spec = self.spec
         for patch in spec.source.patches:
+            file_name = basename(patch.filename)
+            dir_name = dirname(patch.filename)
             patchuri = join(self.location, 
-                            ctx.const.files_dir, patch.filename)
+                            ctx.const.files_dir, dir_name, file_name)
             self.url.uri = patchuri
-            self.fetch(ctx.const.files_dir)
+            target_dir = join(ctx.const.files_dir, dir_name)
+            self.fetch(target_dir)
 
     def fetch_comarfiles(self):
         spec = self.spec
@@ -70,10 +73,13 @@ class SourceFetcher(object):
         spec = self.spec
         for pkg in spec.packages:
             for afile in pkg.additionalFiles:
+                file_name = basename(afile.filename)
+                dir_name = dirname(afile.filename)
                 afileuri = join(self.location, 
-                                ctx.const.files_dir, afile.filename)
+                                ctx.const.files_dir, dir_name, file_name)
                 self.url.uri = afileuri
-                self.fetch(ctx.const.files_dir)
+                target_dir = join(ctx.const.files_dir, dir_name)
+                self.fetch(target_dir)
 
     def fetch(self, appendDest=""):
         from fetcher import fetch_url
