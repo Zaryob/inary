@@ -59,11 +59,11 @@ class RepoDB(object):
         return l[ix]
 
     def swap(self, x,y):
-        l = d["order"]
+        l = self.d["order"]
         t = l[x]
         l[x] = l[y]
         l[y] = t
-        d["order"] = l
+        self.d["order"] = l
 
     def has_repo(self, name):
         name = str(name)
