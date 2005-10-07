@@ -82,10 +82,6 @@ def doinfo(*sourceFiles):
     '''inserts the into files in the list of files into /usr/share/info'''
     readable_insinto(os.path.join(get.installDIR(), get.infoDIR()), *sourceFiles)
 
-def dojar():
-    '''installs jar files into /usr/share/PACKAGE/lib, and adds to /usr/share/PACKAGE/classpath.env'''
-    pass
-
 def dolib(sourceFile, destinationDirectory = '/usr/lib'):
     '''insert the library into /usr/lib'''
     

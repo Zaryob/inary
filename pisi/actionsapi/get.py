@@ -111,7 +111,7 @@ def qtLIBDIR():
 
 # Binutils Variables
 
-def exists_binary(bin):
+def existBinary(bin):
     # determine if path has binary
     path = os.environ['PATH'].split(':')
     for directory in path:
@@ -121,8 +121,8 @@ def exists_binary(bin):
 
 def getBinutilsInfo(util):
     cross_build_name = '%s-%s' % (HOST(), util)
-    if not exists_binary(cross_build_name):
-        if not exists_binary(util):
+    if not existBinary(cross_build_name):
+        if not existBinary(util):
             raise BinutilsError(_('Util %s cannot be found') % util)
         else:
             ctx.ui.debug(_('Warning: %s does not exist, using plain name %s') \
