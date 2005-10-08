@@ -45,6 +45,22 @@ class ArchiveBase(object):
         os.makedirs(self.target_dir)
 
 
+class ArchiveBinary(ArchiveBase):
+    """ArchiveBinary handles binary archive files (usually distrubuted as
+    .bin files)"""
+    def __init__(self, file_path, arch_type = "tar"):
+        super(ArchiveTar, self).__init__(file_path, arch_type)
+
+    def unpack(self, target_dir, clean_dir = False):
+        super(ArchiveTar, self).unpack(target_dir, clean_dir)
+
+        # we can't unpack .bin files. we'll just move them to target
+        # directory and leave the dirty job to actions.py ;)
+        import shutil
+        target_file = os.path.join(target_dir, self.file_path)
+        shutil.copyfile(self.file_path, target_file)
+
+
 class ArchiveTar(ArchiveBase):
     """ArchiveTar handles tar archives depending on the compression
     type. Provides access to tar, tar.gz and tar.bz2 files. 
@@ -206,7 +222,8 @@ class Archive:
             'targz': ArchiveTar, 
             'tarbz2': ArchiveTar,
             'tar': ArchiveTar,
-            'zip': ArchiveZip
+            'zip': ArchiveZip,
+            'binary': ArchiveBinary
         }
 
         self.archive = handlers.get(arch_type)(file_path, arch_type)
