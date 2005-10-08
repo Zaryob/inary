@@ -164,20 +164,22 @@ def rename(sourceFile, destinationFile):
     except OSError:
         ctx.ui.error(_('\n!!! ActionsAPI [rename]: No such file or directory: %s') % (sourceFile))
 
-def dosed(sourceFile, findPattern, replacePattern = ''):
-    '''replaces patterns in sourceFile'''
+def dosed(sourceFiles, findPattern, replacePattern = ''):
+    '''replaces patterns in sourceFiles'''
     
     ''' example call: pisitools.dosed("/etc/passwd", "caglar", "cem")'''
     ''' example call: pisitools.dosym("/etc/passwd", "caglar")'''
+    ''' example call: pisitools.dosym("/etc/pass*", "caglar")'''
     ''' example call: pisitools.dosym("Makefile", "(?m)^(HAVE_PAM=.*)no", r"\1yes")'''
 
-    if can_access_file(sourceFile):
-        for line in fileinput.input(sourceFile, inplace = 1):
-            #FIXME: In-place filtering is disabled when standard input is read
-            line = re.sub(findPattern, replacePattern, line)
-            sys.stdout.write(line)
-    else:
-        raise FileError(_('File doesn\'t exists or permission denied: %s') % sourceFile)
+    for sourceFile in glob.glob(sourceFiles):
+        if can_access_file(sourceFile):
+            for line in fileinput.input(sourceFile, inplace = 1):
+                #FIXME: In-place filtering is disabled when standard input is read
+                line = re.sub(findPattern, replacePattern, line)
+                sys.stdout.write(line)
+        else:
+            raise FileError(_('File doesn\'t exists or permission denied: %s') % sourceFile)
 
 def dosbin(sourceFile, destinationDirectory = '/usr/sbin'):
     '''insert a executable file into /sbin or /usr/sbin'''
