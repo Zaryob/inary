@@ -50,9 +50,9 @@ if __name__ == "__main__":
 
 * %s-%s (%s)
 
-  %s; %s <caglar@uludag.org.tr>
+  %s; %s <%s>
   Initial import
-''' % (name, name, version, date, date, packager)
+''' % (name, name, version, date, date, packager,mail)
     
         file = os.path.join(package, "ChangeLog")
         
