@@ -49,10 +49,10 @@ class ArchiveBinary(ArchiveBase):
     """ArchiveBinary handles binary archive files (usually distrubuted as
     .bin files)"""
     def __init__(self, file_path, arch_type = "tar"):
-        super(ArchiveTar, self).__init__(file_path, arch_type)
+        super(ArchiveBinary, self).__init__(file_path, arch_type)
 
     def unpack(self, target_dir, clean_dir = False):
-        super(ArchiveTar, self).unpack(target_dir, clean_dir)
+        super(ArchiveBinary, self).unpack(target_dir, clean_dir)
 
         # we can't unpack .bin files. we'll just move them to target
         # directory and leave the dirty job to actions.py ;)
