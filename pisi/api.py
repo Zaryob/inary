@@ -641,3 +641,8 @@ def build_until(pspecfile, state, authInfo=None):
         return
 
     __buildState_buildpackages(pb, last)
+
+def delete_cache():
+    util.clean_dir(ctx.config.packages_dir())
+    util.clean_dir(ctx.config.archives_dir())
+    util.clean_dir(ctx.config.tmp_dir())

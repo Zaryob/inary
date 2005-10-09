@@ -214,6 +214,19 @@ class Clean(Command):
         pisi.util.clean_locks()
         self.finalize()
         
+class DeleteCache(Command):
+    """Clean stale locks."""
+
+    __metaclass__ = autocommand
+
+    def __init__(self):
+        super(DeleteCache, self).__init__()
+
+    name = ("delete-cache", None)
+
+    def run(self):
+        self.init(database=False)
+        pisi.api.delete_cache()
 
 class Graph(Command):
     """Graph package relations.
