@@ -10,6 +10,8 @@
 
 # Colors module provides some color codes for console output.
 
+import pisi.context as ctx
+
 colors = {'black'              : "\033[30m",
       'red'                : "\033[31m",
       'green'              : "\033[32m",
@@ -54,7 +56,7 @@ colors = {'black'              : "\033[30m",
 
 def colorize(msg, color):
     """Colorize the given message for console output"""
-    if colors.has_key(color):
+    if colors.has_key(color) and not ctx.config.get_option('no_color'):
         return colors[color] + msg + colors['default']
     else:
         return msg

@@ -85,6 +85,8 @@ class Command(object):
         p.add_option("-n", "--dry-run", action="store_true", default=False,
                      help = _("do not perform any action, just show what\
                      would be done"))
+        p.add_option("", "--no-color", action="store_true", default=False,
+                     help = _("print like a man"))
         return p
 
     def options(self):
