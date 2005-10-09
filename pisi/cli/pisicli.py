@@ -37,9 +37,10 @@ class PreParser(OptionParser):
         raise ParserError, msg
         
     def parse_args(self, args=None):
+        self.opts = []
         self.rargs = self._get_args(args)
         self._process_args()
-        return self.args
+        return (self.opts, self.args)
 
     def _process_args(self):
         args = []
@@ -51,6 +52,7 @@ class PreParser(OptionParser):
             def option():
                 if not self.allow_interspersed_args and first_arg:
                     self.error_(('Options must precede non-option arguments'))
+                self.opts.append(rargs[0][2:])
                 del rargs[0]
                 return
             # We handle bare "--" explicitly, and bare "-" is handled by the
@@ -80,8 +82,11 @@ class PisiCLI(object):
         self.parser = PreParser(version="%prog " + pisi.__version__)
 
         try:
-            args = self.parser.parse_args()
+            opts, args = self.parser.parse_args()
             if len(args)==0: # more explicit than using IndexError
+                if 'version' in opts:
+                    self.parser.print_version()
+                    sys.exit(0)
                 printu(_('No command given'))
                 self.die()
             cmd_name = args[0]
