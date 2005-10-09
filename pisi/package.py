@@ -115,4 +115,4 @@ class Package:
         return join( ctx.config.lib_dir(), packageDir)
 
     def comar_dir(self):
-        return join(self.pkg_dir(), ctx.const.comar_dir_suffix)
+        return join(self.pkg_dir(), ctx.const.comar_dir)
