@@ -213,6 +213,8 @@ def install_pkg_names(A):
     the repository, trying to perform a minimum number of
     installs"""
 
+    A = set(A) # A was a list, remove duplicates
+
     ctx.ui.debug('A = %s' % str(A))
 
     if len(A)==0:
@@ -324,7 +326,7 @@ def upgrade_pkg_names(A):
             ctx.ui.info(_('Package %s is already at its latest version %s,\
  release %s, build %s.')
                     % (x, pkg.version, pkg.release, pkg.build))
-    A = Ap
+    A = set(Ap)
 
     if len(A)==0:
         ctx.ui.info(_('No packages to upgrade.'))
@@ -407,7 +409,7 @@ def remove(A):
             Ap.append(x)
         else:
             ctx.ui.info(_('Package %s does not exist. Cannot remove.') % x)
-    A = Ap
+    A = set(Ap)
 
     if len(A)==0:
         ctx.ui.info(_('No packages to remove.'))
