@@ -24,7 +24,7 @@ import pisi.context as ctx
 from pisi.uri import URI
 
 class Command(object):
-    _("""generic help string for any command""")
+    """generic help string for any command"""
 
     # class variables
 
@@ -169,11 +169,11 @@ class autocommand(type):
             
 
 class Help(Command):
-    _("""Prints help for given commands.
+    """Prints help for given commands.
 
 Usage: help [ <command1> <command2> ... <commandn> ]
 
-If run without parameters, it prints the general help.""")
+If run without parameters, it prints the general help."""
 
     __metaclass__ = autocommand
 
@@ -201,7 +201,7 @@ If run without parameters, it prints the general help.""")
         self.finalize()
 
 class Clean(Command):
-    _("""Clean stale locks.""")
+    """Clean stale locks."""
 
     __metaclass__ = autocommand
 
@@ -217,12 +217,12 @@ class Clean(Command):
         
 
 class Graph(Command):
-    _("""Graph package relations.
+    """Graph package relations.
 Usage: graph <package1> <package2> ...
 
 Write a graph of package relations, tracking dependency and
 conflicts relations starting from given packages.
-""")
+"""
 
     __metaclass__ = autocommand
 
@@ -246,13 +246,13 @@ def buildno_opts(self):
 
 
 class Build(Command):
-    _("""Build a PISI package using a pspec.xml file
+    """Build a PISI package using a pspec.xml file
 
 Usage: build <pspec.xml>
 
 You can give a URI of the pspec.xml file. PISI will
 fetch all necessary files and build the package for you.
-""")
+"""
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -300,13 +300,13 @@ class PackageOp(Command):
         pass
 
 class Install(PackageOp):
-    _("""Install PISI packages
+    """Install PISI packages
 
 Usage: install <package1> <package2> ... <packagen>
 
 You may use filenames, URIs or package names for packages. If you have
 specified a package name, it should exist in a specified repository.
-""")
+"""
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -328,7 +328,7 @@ specified a package name, it should exist in a specified repository.
         self.finalize()
 
 class Upgrade(PackageOp):
-    _("""Upgrade PISI packages
+    """Upgrade PISI packages
 
 Usage: Upgrade <package1> <package2> ... <packagen>
 
@@ -336,7 +336,7 @@ You may use only package names to specify packages because
 the package upgrade operation is defined only with respect 
 to repositories. If you have specified a package name, it
 should exist in the package repositories. If you just want to
-reinstall a package from a pisi file, use the install command.""")
+reinstall a package from a pisi file, use the install command."""
 
     __metaclass__ = autocommand
 
@@ -360,12 +360,12 @@ reinstall a package from a pisi file, use the install command.""")
 
 
 class Remove(PackageOp):
-    _("""Remove PISI packages
+    """Remove PISI packages
 
 Usage: remove <package1> <package2> ... <packagen>
 
 Remove package(s) from your system. Just give the package names to remove.
-""")
+"""
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -384,12 +384,12 @@ Remove package(s) from your system. Just give the package names to remove.
 
 
 class UpgradeAll(PackageOp):
-    _("""Upgrade system
+    """Upgrade system
 
 Usage: Upgrade
 
 Upgrade the entire system.
-""")
+"""
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -412,8 +412,8 @@ Upgrade the entire system.
 
 
 class ConfigurePending(PackageOp):
-    _("""configure pending packages
-    """)
+    """configure pending packages
+    """
     
     __metaclass__ = autocommand
 
@@ -430,11 +430,11 @@ class ConfigurePending(PackageOp):
 
 
 class Info(Command):
-    _("""Display package information
+    """Display package information
 
 Usage: info <package1> <package2> ... <packagen>
 
-""")
+"""
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -478,7 +478,7 @@ Usage: info <package1> <package2> ... <packagen>
 
 
 class Index(Command):
-    _("""Index PISI files in a given directory
+    """Index PISI files in a given directory
 
 Usage: index <directory>
 
@@ -486,7 +486,7 @@ This command searches for all PiSi files in a directory, collects PiSi
 tags from them and accumulates the information in an output XML file,
 named by default 'pisi-index.xml'. In particular, it indexes both
 source and binary packages.
-""")
+"""
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -515,11 +515,11 @@ source and binary packages.
 
 
 class ListInstalled(Command):
-    _("""Print the list of all installed packages  
+    """Print the list of all installed packages  
 
 Usage: list-installed
 
-""")
+"""
 
     __metaclass__ = autocommand
 
@@ -555,13 +555,13 @@ Usage: list-installed
 
 
 class UpdateRepo(Command):
-    _("""Update repository databases
+    """Update repository databases
 
 Usage: update-repo <repo1> <repo2> ... <repon>
 
 <repoi>: repository name
 Synchronizes the PiSi databases with the current repository.
-""")
+"""
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -581,7 +581,7 @@ Synchronizes the PiSi databases with the current repository.
 
 
 class AddRepo(Command):
-    _("""Add a repository
+    """Add a repository
 
 Usage: add-repo <repo> <indexuri>
 
@@ -589,7 +589,7 @@ Usage: add-repo <repo> <indexuri>
 <indexuri>: URI of index file
 
 NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
-""")
+"""
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -611,12 +611,12 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 
 
 class RemoveRepo(Command):
-    _("""Remove repositories
+    """Remove repositories
 
 Usage: remove-repo <repo1> <repo2> ... <repon>
 
 Remove all repository information from the system.
-""")
+"""
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -637,12 +637,12 @@ Remove all repository information from the system.
 
 
 class ListRepo(Command):
-    _("""List repositories
+    """List repositories
 
 Usage: list-repo
 
 Lists currently tracked repositories.
-""")
+"""
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -660,12 +660,12 @@ Lists currently tracked repositories.
 
 
 class ListAvailable(Command):
-    _("""List available packages in the repositories
+    """List available packages in the repositories
 
 Usage: list-available [ <repo1> <repo2> ... repon ]
 
 Gives a brief list of PiSi components published in the repository.
-""")
+"""
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -702,11 +702,11 @@ Gives a brief list of PiSi components published in the repository.
                 print p
 
 class ListUpgrades(Command):
-    _("""List packages to be upgraded
+    """List packages to be upgraded
 
 Usage: list-upgrades [ <repo1> <repo2> ... repon ]
 
-""")
+"""
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -742,7 +742,7 @@ Usage: list-upgrades [ <repo1> <repo2> ... repon ]
 
 
 class ListPending(Command):
-    _("""List pending packages""")
+    """List pending packages"""
 
     __metaclass__ = autocommand
 
@@ -763,19 +763,19 @@ class ListPending(Command):
 
 
 class Search(Command):
-    _("""Search packages
+    """Search packages
 
 Usage: search <search pattern>
 
 #FIXME: fill this later
-""")
+"""
     pass
 
 
 # Partial build commands        
 
 class BuildUntil(Build):
-    _("""Run the build process partially
+    """Run the build process partially
 
 Usage: -sStateName build-until <pspec file>
 
@@ -785,7 +785,7 @@ unpack, setupaction, buildaction, installaction, buildpackages
 You can give an URI of the pspec.xml file. PISI will fetch all
 necessary files and unpack the source and prepare a source directory
 for you.
-""")
+"""
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -812,12 +812,12 @@ for you.
 
 
 class BuildUnpack(Build):
-    _("""Unpack the source archive
+    """Unpack the source archive
 
 Usage: build-unpack <pspec file>
 
 TODO: desc.
-""")
+"""
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -837,12 +837,12 @@ TODO: desc.
 
 
 class BuildSetup(Build):
-    _("""Setup the source
+    """Setup the source
 
 Usage: build-setup <pspec file>
 
 TODO: desc.
-""")
+"""
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -863,12 +863,12 @@ TODO: desc.
 
 
 class BuildBuild(Command):
-    _("""Setup the source
+    """Setup the source
 
 Usage: build-build <pspec file>
 
 TODO: desc.
-""")
+"""
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -888,12 +888,12 @@ TODO: desc.
 
 
 class BuildInstall(Build):
-    _("""Install to the sandbox
+    """Install to the sandbox
 
 Usage: build-install <pspec file>
 
 TODO: desc.
-""")
+"""
     __metaclass__ = autocommand
 
     def __init__(self):
@@ -914,12 +914,12 @@ TODO: desc.
 
 
 class BuildPackage(Build):
-    _("""Setup the source
+    """Setup the source
 
 Usage: build-build <pspec file>
 
 TODO: desc.
-""")
+"""
 
     __metaclass__ = autocommand
 
