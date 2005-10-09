@@ -35,7 +35,6 @@ import pisi.repodb
 import pisi.installdb
 from pisi.index import Index
 import pisi.cli
-import pisi.comariface as comariface
 
 class Error(pisi.Error):
     pass
@@ -476,8 +475,13 @@ def configure_pending():
     order = G_f.topological_sort()
     order.reverse()
     #print order
-    for x in order:
-        comariface.run_postinstall(x)
+    try:
+        import pisi.comariface as comariface
+        for x in order:
+            comariface.run_postinstall(x)
+    except ImportError:
+        raise Error(_("COMAR: comard not fully installed"))
+    
 
 def info(package):
     if package.endswith(ctx.const.package_prefix):

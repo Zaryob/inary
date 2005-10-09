@@ -36,7 +36,6 @@ import pisi.operations as operations
 from pisi.specfile import *
 from pisi.package import Package
 from pisi.metadata import MetaData
-import pisi.comariface as comariface
 #import conflicts
 
 class Error(pisi.Error):
@@ -66,6 +65,7 @@ class Installer:
         self.store_pisi_files()
         if ctx.comard:
             self.register_comar_scripts()
+            import pisi.comariface as comariface
             comariface.run_postinstall(self.pkginfo.name)
         self.update_databases()
 
