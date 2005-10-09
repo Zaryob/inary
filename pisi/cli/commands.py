@@ -19,7 +19,6 @@ _ = __trans.ugettext
 
 import pisi
 import pisi.cli
-from pisi.cli import printu
 import pisi.context as ctx
 from pisi.uri import URI
 
@@ -188,7 +187,7 @@ If run without parameters, it prints the general help."""
     def run(self):
         if not self.args:
             self.parser.set_usage(usage_text)
-            printu(self.parser.format_help())
+            pisi.cli.printu(self.parser.format_help())
             return
             
         self.init(database = False)
@@ -561,6 +560,7 @@ Usage: update-repo <repo1> <repo2> ... <repon>
 
 <repoi>: repository name
 Synchronizes the PiSi databases with the current repository.
+If no repositories are given, all repositories are updated.
 """
     __metaclass__ = autocommand
 
@@ -570,12 +570,14 @@ Synchronizes the PiSi databases with the current repository.
     name = ("update-repo", "ur")
 
     def run(self):
-        if not self.args:
-            self.help()
-            return
+        self.init(database = True)
 
-        self.init(True)
-        for repo in self.args:
+        if self.args:
+            repos = self.args
+        else:
+            repos = ctx.repodb.list()
+
+        for repo in repos:
             pisi.api.update_repo(repo)
         self.finalize()
 
