@@ -63,7 +63,7 @@ class Installer:
         self.check_reinstall()
         self.extract_install()
         self.store_pisi_files()
-        if ctx.comard:
+        if ctx.comar:
             self.register_comar_scripts()
             import pisi.comariface as comariface
             comariface.run_postinstall(self.pkginfo.name)
@@ -190,18 +190,9 @@ class Installer:
 
         for pcomar in self.metadata.package.providesComar:
             scriptPath = os.path.join(self.package.comar_dir(),pcomar.script)
-            ctx.ui.info(_("Registering COMAR script %s") % pcomar.script)
-
-            com.register(pcomar.om,
-                         self.metadata.package.name,
-                         scriptPath)
-            while 1:
-                reply = com.read_cmd()
-                if reply[0] == com.RESULT:
-                    break
-                else:
-                    raise Error, _("COMAR.register ERROR!")
-
+            import pisi.comariface
+            pisi.comariface.register(pcomar, self.metadata.package.name,
+                                     scriptPath)
 
     def update_databases(self):
         "update databases"

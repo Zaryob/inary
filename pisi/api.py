@@ -46,16 +46,8 @@ def init(database = True, options = None, ui = None, comar = True):
     import pisi.config
     ctx.config = pisi.config.Config(options)
 
-    if comar and not ctx.config.get_option('ignore_comar'):
-        # FIXME: just try for others (that don't use comar)
-        try:
-            import comar
-            ctx.comard = comar.Link()
-        except ImportError:
-            raise Error(_("COMAR: comard not fully installed"))
-            #print _("skipping COMAR connection for now...")
-        except comar.Error:
-            raise Error(_("COMAR: comard not running or defunct"))
+    # TODO: this is definitely not dynamic beyond this point!
+    ctx.comar = comar and not ctx.config.get_option('ignore_comar')
 
     if ui is None:
         if options:

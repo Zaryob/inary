@@ -196,6 +196,7 @@ def join_path(a, *p):
     """The python original version has a silly logic"""
     path = a
     for b in p:
+        b = b.lstrip('/')
         if path == '' or path.endswith('/'):
             path +=  b
         else:
