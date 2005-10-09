@@ -29,7 +29,7 @@ import pisi.comariface as comariface
 # remove stuff
 
 def remove_file(fileinfo):
-    fpath = pisi.util.join_path(ctx.config.destdir(), fileinfo.path)
+    fpath = pisi.util.join_path(ctx.config.dest_dir(), fileinfo.path)
     # TODO: We have to store configuration files for futher
     # usage. Currently we'are doing it like rpm does, saving
     # with a prefix and leaving the user to edit it. In the future

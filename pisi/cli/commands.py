@@ -19,6 +19,7 @@ _ = __trans.ugettext
 
 import pisi
 import pisi.cli
+from pisi.cli import printu
 import pisi.context as ctx
 from pisi.uri import URI
 
@@ -69,7 +70,8 @@ class Command(object):
     def commonopts(self):
         '''common options'''
         p = self.parser
-        p.add_option("-D", "--destdir", action="store")
+        p.add_option("-D", "--destdir", action="store", default = None,
+                     help = _("change the system root for pisi commands"))
         p.add_option("", "--yes-all", action="store_true",
                      default=False, help = _("assume yes in all yes/no queries"))
         p.add_option("-u", "--username", action="store")
@@ -186,7 +188,7 @@ If run without parameters, it prints the general help.""")
     def run(self):
         if not self.args:
             self.parser.set_usage(usage_text)
-            ctx.ui.info(self.parser.format_help())
+            printu(self.parser.format_help())
             return
             
         self.init()

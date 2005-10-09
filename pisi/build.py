@@ -104,7 +104,7 @@ class BuildContext(object):
         packageDir = self.spec.source.name + '-' + \
                      self.spec.source.version + '-' + self.spec.source.release
         from pisi.util import join_path as join
-        return join( ctx.config.destdir(), ctx.config.values.dirs.tmp_dir,
+        return join( ctx.config.dest_dir(), ctx.config.values.dirs.tmp_dir,
                      packageDir )
    
     def pkg_work_dir(self):
