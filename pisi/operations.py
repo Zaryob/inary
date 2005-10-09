@@ -22,7 +22,6 @@ import pisi.context as ctx
 import pisi.util as util
 import pisi.packagedb as packagedb
 from pisi.uri import URI
-import pisi.comariface as comariface
 
 # single package operations
 
@@ -48,6 +47,7 @@ def remove_file(fileinfo):
 
 def run_preremove(package_name):
     if ctx.comard:
+        import pisi.comariface as comariface
         comariface.run_preremove(package_name)
     else:
         # TODO: store this somewhere
