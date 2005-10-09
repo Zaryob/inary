@@ -191,7 +191,7 @@ If run without parameters, it prints the general help."""
             printu(self.parser.format_help())
             return
             
-        self.init()
+        self.init(database = False)
         
         for arg in self.args:
             obj = Command.get_command(arg, True)
@@ -270,7 +270,7 @@ fetch all necessary files and build the package for you.
             self.help()
             return
 
-        self.init()
+        self.init(database = False)
         ctx.ui.info('Output directory: %s\n' % ctx.config.options.output_dir)
         for arg in self.args:
             pisi.api.build(arg, self.authInfo)
