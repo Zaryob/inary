@@ -73,13 +73,12 @@ class InstallInfo:
 class InstallDB:
 
     def __init__(self):
-        from os.path import join
         self.d = shelve.LockedDBShelf('install')
         self.dp = shelve.LockedDBShelf('configpending')
-        self.files_dir = os.path.join(ctx.config.db_dir(), 'files')
+        self.files_dir = pisi.util.join_path(ctx.config.db_dir(), 'files')
 
     def files_name(self, pkg, version, release):
-        from os.path import join
+        from pisi.util import join_path as join
         pkg_dir = join(ctx.config.lib_dir(), pkg + '-' + version + '-' + release)
         return join(pkg_dir, ctx.const.files_xml)
 

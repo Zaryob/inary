@@ -191,6 +191,17 @@ def absolute_path(path):
     comps = splitpath(path)
     return comps[0] == ''
 
+def join_path(a, *p):
+    """Join two or more pathname components, inserting '/' as needed"""
+    """The python original version has a silly logic"""
+    path = a
+    for b in p:
+        if path == '' or path.endswith('/'):
+            path +=  b
+        else:
+            path += '/' + b
+    return path
+
 ####################################
 # File/Directory Related Functions #
 ####################################

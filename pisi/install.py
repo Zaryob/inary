@@ -153,7 +153,7 @@ class Installer:
         "unzip package in place"
 
         ctx.ui.info(_('Extracting files'))
-        self.package.extract_dir_flat('install', ctx.config.destdir)
+        self.package.extract_dir_flat('install', ctx.config.destdir())
 
         if self.reinstall:
             # remove left over files

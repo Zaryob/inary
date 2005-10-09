@@ -24,6 +24,7 @@ _ = __trans.ugettext
 import pisi
 import pisi.context as ctx
 from pisi.configfile import ConfigurationFile
+from pisi.util import join_path as join
 
 class Config(object):
     """Config Singleton"""
@@ -31,7 +32,6 @@ class Config(object):
     def __init__(self, options = None):
         self.options = options
         self.values = ConfigurationFile("/etc/pisi/pisi.conf")
-        self.destdir = self.values.general.destinationdirectory
 
     def get_option(self, opt):
         if self.options:
@@ -44,23 +44,29 @@ class Config(object):
     # x_dir: system wide directory for storing info type x
     # pkg_x_dir: per package directory for storing info type x
 
+    def destdir(self):
+        dir = str(self.get_option('destdir'))
+        if not dir:
+           dir = self.values.general.destinationdirectory
+        return dir
+
     def lib_dir(self):
-        return self.destdir + self.values.dirs.lib_dir
+        return join(self.destdir(), self.values.dirs.lib_dir)
 
     def db_dir(self):
-        return self.destdir + self.values.dirs.db_dir
+        return join(self.destdir(), self.values.dirs.db_dir)
 
     def archives_dir(self):
-        return self.destdir + self.values.dirs.archives_dir
+        return join(self.destdir(), self.values.dirs.archives_dir)
 
     def packages_dir(self):
-        return self.destdir + self.values.dirs.packages_dir
+        return join(self.destdir(), self.values.dirs.packages_dir)
 
     def index_dir(self):
-        return self.destdir + self.values.dirs.index_dir
+        return join(self.destdir(), self.values.dirs.index_dir)
 
     def tmp_dir(self):
-        return self.destdir + self.values.dirs.tmp_dir
+        return join(self.destdir(), self.values.dirs.tmp_dir)
 
     # bu dizini neden kullanıyoruz? Yalnızca index.py içerisinde
     # kullanılıyor ama /var/tmp/pisi/install gibi bir dizine niye
