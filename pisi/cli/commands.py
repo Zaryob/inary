@@ -215,7 +215,7 @@ class Clean(Command):
         self.finalize()
         
 class DeleteCache(Command):
-    """Clean stale locks."""
+    """Delete cache files"""
 
     __metaclass__ = autocommand
 
