@@ -142,7 +142,8 @@ class Command(object):
     def help(self):
         """print help for the command"""
         ctx.ui.info(self.format_name() + ': ')
-        ctx.ui.info(__trans.ugettext(__doc__) + '\n')
+        trans = gettext.translation('pisi', fallback=True)
+        ctx.ui.info(trans.ugettext(self.__doc__) + '\n')
         ctx.ui.info(self.parser.format_option_help())
 
     def die(self):
@@ -787,6 +788,54 @@ Usage: search <search pattern>
 #FIXME: fill this later
 """
     pass
+
+class SearchFile(Command):
+    """Search for a file
+
+Usage: search-file <path1> <path2> ... <pathn>
+
+Finds the installed package which contains the specified file.
+"""
+    __metaclass__ = autocommand
+
+    def __init__(self):
+        super(SearchFile, self).__init__()
+    
+    name = ("search-file", "sf")
+
+    def options(self):
+        self.parser.add_option("-l", "--long", action="store_true",
+                               default=False, help="show in long format")
+    
+    @staticmethod
+    def search_exact(path):
+        if ctx.filesdb.has_file(path):
+            (pkg_name, file_info) = ctx.filesdb.get_info(path)
+            ctx.ui.info(_('Package: %s') % pkg_name)
+            if ctx.options.long:
+                ctx.ui.info(_('Type: %s, Hash: %s') % (file_info.type,
+                                                      file_info.hash) )
+        else:
+            ctx.ui.error(_('Path %s does not belong to an installed package') % path)
+
+    def run(self):
+
+        self.init(True)
+
+        if not self.args:
+            self.help()
+            return        
+       
+        # search among existing files
+        for path in self.args:
+            ctx.ui.info(_('Searching for %s') % path)
+            if os.path.exists(path):
+                search_exact(os.path.realpath(path))
+            else:
+                pisi.api.error(_('%s cannot be found'))
+
+        self.finalize()
+
 
 
 # Partial build commands        

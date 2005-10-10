@@ -16,6 +16,7 @@
 from pisi.xmlext import *
 from pisi.xmlfile import XmlFile
 from pisi.util import Checks
+import pisi.lockeddbshelve as shelve
 
 class FileInfo:
     """FileInfo holds the information for a File node/tag in files.xml"""
@@ -95,3 +96,22 @@ class Files(XmlFile):
         for finfo in self.list:
             err.join(finfo.has_errors())
         return err.list
+
+class FilesDB(shelve.LockedDBShelf):
+
+    def __init__(self):
+        shelve.LockedDBShelf.__init__(self, 'files')
+        #self.files_dir = pisi.util.join_path(ctx.config.db_dir(), 'files')
+
+    def add_files(pkg_name, files):
+        for x in files.list:
+            self[x.path] = (pkg_name, x)
+
+    def has_file(path):
+        return self.has_key(path)
+
+    def get_file_info(path):
+        if not self.has_key(path):
+            return None
+        else:
+            return self[path]
