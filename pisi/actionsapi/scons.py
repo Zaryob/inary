@@ -23,15 +23,14 @@ import pisi.actionsapi
 import pisi.actionsapi.get as get
 from pisi.actionsapi.shelltools import system
 
-
 class MakeError(pisi.actionsapi.Error):
-    def __init__(self, value):
+    def __init__(self, value=''):
         pisi.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)
 
 class InstallError(pisi.actionsapi.Error):
-    def __init__(self, value):
+    def __init__(self, value=''):
         pisi.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)

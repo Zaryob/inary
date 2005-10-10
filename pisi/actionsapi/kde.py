@@ -23,21 +23,28 @@ import pisi.context as ctx
 # ActionsAPI Modules
 import pisi.actionsapi
 import pisi.actionsapi.get as get
-from pisi.actionsapi.shelltools import system, can_access_file
+from pisi.actionsapi.shelltools import system
+from pisi.actionsapi.shelltools import can_access_file
 
 class ConfigureError(pisi.actionsapi.Error):
-    def __init__(self, Exception):
-        ctx.ui.error(Exception)
+    def __init__(self, value=''):
+        pisi.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
         if can_access_file('config.log'):
             ctx.ui.error(_('\n!!! Please attach the config.log to your bug report:\n%s/config.log') % os.getcwd())
 
 class MakeError(pisi.actionsapi.Error):
-    def __init__(self, Exception):
-        ctx.ui.error(Exception)
+    def __init__(self, value=''):
+        pisi.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
 
 class InstallError(pisi.actionsapi.Error):
-    def __init__(self, Exception):
-        ctx.ui.error(Exception)
+    def __init__(self, value=''):
+        pisi.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
 
 def configure(parameters = ''):
     ''' parameters = '--with-nls --with-libusb --with-something-usefull '''

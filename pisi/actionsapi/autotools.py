@@ -28,7 +28,7 @@ from pisi.actionsapi.shelltools import can_access_file
 from pisi.actionsapi.libtools import gnuconfig_update
 
 class ConfigureError(pisi.actionsapi.Error):
-    def __init__(self, value):
+    def __init__(self, value=''):
         pisi.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)
@@ -36,19 +36,19 @@ class ConfigureError(pisi.actionsapi.Error):
             ctx.ui.error(_('Please attach the config.log to your bug report:\n%s/config.log') % os.getcwd())
 
 class MakeError(pisi.actionsapi.Error):
-    def __init__(self, value):
+    def __init__(self, value=''):
         pisi.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)
 
 class InstallError(pisi.actionsapi.Error):
-    def __init__(self, value):
+    def __init__(self, value=''):
         pisi.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)
 
 class RunTimeError(pisi.actionsapi.Error):
-    def __init__(self, value):
+    def __init__(self, value=''):
         pisi.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)

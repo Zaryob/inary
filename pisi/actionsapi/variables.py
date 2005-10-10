@@ -11,7 +11,8 @@
 # Please read the COPYING file.
 
 # Standard Python Modules
-from os import getenv, environ
+from os import getenv
+from os import environ
 
 # Pisi-Core Modules
 import pisi.context as ctx

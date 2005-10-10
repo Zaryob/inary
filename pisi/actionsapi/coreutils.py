@@ -11,9 +11,13 @@
 # Please read the COPYING file.
 
 # Standard Python Modules
-import sys
 import re
-from itertools import izip, imap, count, ifilter, ifilterfalse
+import sys
+from itertools import izip
+from itertools import imap
+from itertools import count
+from itertools import ifilter
+from itertools import ifilterfalse
 
 # ActionsAPI
 import pisi.actionsapi

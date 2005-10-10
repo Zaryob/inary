@@ -23,7 +23,9 @@ import pisi.context as ctx
 # ActionsAPI Modules
 import pisi.actionsapi
 import pisi.actionsapi.get as get
-from pisi.actionsapi.shelltools import system, can_access_file, export
+from pisi.actionsapi.shelltools import system
+from pisi.actionsapi.shelltools import can_access_file
+from pisi.actionsapi.shelltools import export
 
 class ConfigureError(pisi.actionsapi.Error):
     def __init__(self, value=''):

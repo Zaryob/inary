@@ -26,7 +26,7 @@ from pisi.actionsapi.shelltools import *
 import pisi.actionsapi.get as get
 
 class RunTimeError(pisi.actionsapi.Error):
-    def __init__(self, value):
+    def __init__(self, value=''):
         pisi.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)
@@ -36,9 +36,6 @@ def preplib(sourceDirectory = '/usr/lib'):
     if can_access_directory(sourceDirectory):
         if system('/sbin/ldconfig -n -N %s' % sourceDirectory):
             raise RunTimeError(_('!!! Running ldconfig failed...'))
-
-def preplib_so(sourceDirectory):
-    pass
 
 def gnuconfig_update():
     ''' copy newest config.* onto source\'s '''

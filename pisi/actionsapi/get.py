@@ -25,27 +25,43 @@ import pisi.context as ctx
 from variables import glb
 
 class BinutilsError(pisi.actionsapi.Error):
-    pass
+    def __init__(self, value=''):
+        pisi.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
 
+# Globals                                
 env = glb.env
 dirs = glb.dirs
 
 def curDIR():
+    '''returns current work directory's path'''
     return os.getcwd()
 
+def curKERNEL():
+    '''returns currently running kernel's version'''
+    versionString = file("/proc/version").readline()
+    return versionString.split()[2]
+
 def ENV(environ):
+    '''returns any given environ variable'''
     return os.environ[environ];
 
-# variables.Env 
+# PİSİ Related Functions
 
 def pkgDIR():
+    '''returns the path of binary packages'''
+    '''Default: /var/cache/pisi/packages''' 
     return env.pkg_dir
 
 def workDIR():
     return env.work_dir
 
 def installDIR():
+    '''returns the path of binary packages'''
     return env.install_dir
+
+# PSPEC Related Functions
 
 def srcNAME():
     return env.src_name
@@ -61,8 +77,15 @@ def srcTAG():
 
 def srcDIR():
     return env.src_name + '-' + env.src_version
+
+# Build Related Functions
         
 def HOST():
+    return env.host
+
+def CHOST():
+    # FIXME: Currently it behave same as HOST,
+    # but will be used for cross-compiling when PİSİ ready...           
     return env.host
 
 def CFLAGS():
@@ -74,7 +97,7 @@ def CXXFLAGS():
 def LDFLAGS():
     return env.ldflags
 
-# variables.Dirs
+# Directory Related Functions
 
 def docDIR():
     return dirs.doc
@@ -101,12 +124,15 @@ def defaultprefixDIR():
     return dirs.defaultprefix
 
 def kdeDIR():
+    # FIXME: Get followings from env.d or somewhere else
     return dirs.kde
 
 def qtDIR():
+    # FIXME: Get followings from env.d or somewhere else
     return dirs.qt
 
 def qtLIBDIR():
+    # FIXME: Get followings from env.d or somewhere else
     return '%s/lib/' % qtDIR()
 
 # Binutils Variables
@@ -115,7 +141,7 @@ def existBinary(bin):
     # determine if path has binary
     path = os.environ['PATH'].split(':')
     for directory in path:
-        if os.path.exists(os.path.join(directory, bin) ):
+        if os.path.exists(os.path.join(directory, bin)):
             return True
     return False
 

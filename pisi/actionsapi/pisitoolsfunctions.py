@@ -28,13 +28,13 @@ import pisi.actionsapi
 from pisi.actionsapi.shelltools import *
 
 class FileError(pisi.actionsapi.Error):
-    def __init__(self, value):
+    def __init__(self, value=''):
         pisi.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)
         
 class ArgumentError(pisi.actionsapi.Error):
-    def __init__(self, value):
+    def __init__(self, value=''):
         pisi.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)
