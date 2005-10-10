@@ -58,8 +58,6 @@ class BuildDefaults:
     CFLAGS = "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
     CXXFLAGS = "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
     LDFLAGS = ""
-    CC = "gcc"
-    CXX = "g++"
 
 class DirsDefaults:
     "Default values for [directories] section"

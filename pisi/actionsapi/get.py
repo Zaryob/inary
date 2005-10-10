@@ -164,10 +164,10 @@ def AS():
     return getBinutilsInfo('as')
 
 def CC():
-    return getBinutilsInfo(ctx.config.values.build.CC)
+    return getBinutilsInfo('gcc')
 
 def CXX():
-    return getBinutilsInfo(ctx.config.values.build.CXX)
+    return getBinutilsInfo('g++')
 
 def LD():
     return getBinutilsInfo('ld')
