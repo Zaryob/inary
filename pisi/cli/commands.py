@@ -819,6 +819,7 @@ Finds the installed package which contains the specified file.
     search_exact = staticmethod(search_exact)
 
     def run(self):
+        import os.path
 
         self.init(True)
 
@@ -830,7 +831,7 @@ Finds the installed package which contains the specified file.
         for path in self.args:
             ctx.ui.info(_('Searching for %s') % path)
             if os.path.exists(path):
-                search_exact(os.path.realpath(path))
+                self.search_exact(os.path.realpath(path))
             else:
                 pisi.api.error(_('%s cannot be found'))
 

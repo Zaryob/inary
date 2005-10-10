@@ -103,14 +103,14 @@ class FilesDB(shelve.LockedDBShelf):
         shelve.LockedDBShelf.__init__(self, 'files')
         #self.files_dir = pisi.util.join_path(ctx.config.db_dir(), 'files')
 
-    def add_files(pkg_name, files):
+    def add_files(self, pkg_name, files):
         for x in files.list:
             self[x.path] = (pkg_name, x)
 
-    def has_file(path):
+    def has_file(self, path):
         return self.has_key(path)
 
-    def get_file_info(path):
+    def get_file_info(self, path):
         if not self.has_key(path):
             return None
         else:
