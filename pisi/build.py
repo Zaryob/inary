@@ -309,12 +309,11 @@ class PisiBuild:
         metadata.package.distributionRelease = ctx.config.values.general.distribution_release
         metadata.package.architecture = "Any"
         
-        # FIXME: Bu hatalı. installsize'ı almak için tüm
-        # pkg_install_dir()'ın boyutunu hesaplayamayız. Bir source
-        # birden fazla kaynak üretebilir. package.paths ile
-        # karşılaştırarak file listesinden boyutları hesaplatmalıyız.
-        d = self.bctx.pkg_install_dir()
-        size = util.dir_size(d)
+        size, d = 0, self.bctx.pkg_install_dir()
+
+        for path in package.paths:
+             size += util.dir_size(util.join_path(d, path.pathname))
+
         metadata.package.installedSize = str(size)
         
         # build no
@@ -502,7 +501,7 @@ class PisiBuild:
 
             ctx.ui.info(_("Generating %s,") % ctx.const.files_xml)
             self.gen_files_xml(package)
-           
+
             ctx.ui.info(_("Generating %s,") % ctx.const.metadata_xml)
             self.gen_metadata_xml(package)
 
