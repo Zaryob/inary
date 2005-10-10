@@ -14,8 +14,8 @@
 #           Baris Metin <baris@uludag.org.tr>
 # History:
 # Baris wrote the first version, then Baris and Eray did
-# several revisions of it. It was rewritten in accordance
-# with Gurer's observations.
+# several revisions of it. It was modified in accordance
+# with Gurer's observations about poor error handling.
 
 
 """
@@ -365,10 +365,12 @@ class PackageInfo:
         return err.list
 
     def __str__(self):
-        s = 'Name: ' + self.name
-        s += '\nSummary: ' + self.summary
-        s += '\nDescription: ' + self.description
-        s += '\nProvides: '
+        s = _('Name: %s, version: %s, release: %s, build %s') % (
+              self.name, self.version, self.release, self.build)
+        s += _('\nSummary: ') + self.summary
+        s += _('\nDescription: ') + self.description
+        s += _('\nComponent: ') + self.partof
+        s += _('\nProvides: ')
         for x in self.providesComar:
            s += x.om
         return s

@@ -142,7 +142,7 @@ class Command(object):
     def help(self):
         """print help for the command"""
         ctx.ui.info(self.format_name() + ': ')
-        ctx.ui.info(getattr(self, "__doc__") + '\n')
+        ctx.ui.info(__trans.ugettext(__doc__) + '\n')
         ctx.ui.info(self.parser.format_option_help())
 
     def die(self):
