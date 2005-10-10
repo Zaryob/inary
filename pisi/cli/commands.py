@@ -807,7 +807,6 @@ Finds the installed package which contains the specified file.
         self.parser.add_option("-l", "--long", action="store_true",
                                default=False, help="show in long format")
     
-    @staticmethod
     def search_exact(path):
         if ctx.filesdb.has_file(path):
             (pkg_name, file_info) = ctx.filesdb.get_info(path)
@@ -817,6 +816,7 @@ Finds the installed package which contains the specified file.
                                                       file_info.hash) )
         else:
             ctx.ui.error(_('Path %s does not belong to an installed package') % path)
+    search_exact = staticmethod(search_exact)
 
     def run(self):
 
