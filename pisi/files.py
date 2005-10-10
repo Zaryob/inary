@@ -105,12 +105,13 @@ class FilesDB(shelve.LockedDBShelf):
 
     def add_files(self, pkg_name, files):
         for x in files.list:
-            self[x.path] = (pkg_name, x)
+            self[str(x.path)] = (pkg_name, x)
 
     def has_file(self, path):
-        return self.has_key(path)
+        return self.has_key(str(path))
 
-    def get_file_info(self, path):
+    def get_file(self, path):
+        path = str(path)
         if not self.has_key(path):
             return None
         else:

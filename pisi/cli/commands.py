@@ -807,19 +807,19 @@ Finds the installed package which contains the specified file.
         self.parser.add_option("-l", "--long", action="store_true",
                                default=False, help="show in long format")
     
+    @staticmethod
     def search_exact(path):
+        path = path.lstrip('/') #FIXME: this shouldn't be necessary :/
         if ctx.filesdb.has_file(path):
-            (pkg_name, file_info) = ctx.filesdb.get_info(path)
+            (pkg_name, file_info) = ctx.filesdb.get_file(path)
             ctx.ui.info(_('Package: %s') % pkg_name)
-            if ctx.options.long:
+            if ctx.config.options.long:
                 ctx.ui.info(_('Type: %s, Hash: %s') % (file_info.type,
                                                       file_info.hash) )
         else:
             ctx.ui.error(_('Path %s does not belong to an installed package') % path)
-    search_exact = staticmethod(search_exact)
 
     def run(self):
-        import os.path
 
         self.init(True)
 
@@ -830,10 +830,10 @@ Finds the installed package which contains the specified file.
         # search among existing files
         for path in self.args:
             ctx.ui.info(_('Searching for %s') % path)
+            import os.path
             if os.path.exists(path):
-                self.search_exact(os.path.realpath(path))
-            else:
-                pisi.api.error(_('%s cannot be found'))
+                path = os.path.realpath(path)
+            self.search_exact(path)
 
         self.finalize()
 

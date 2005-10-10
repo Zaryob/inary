@@ -205,5 +205,8 @@ class Installer:
                           self.metadata.package.build,
                           self.metadata.package.distribution)
 
+        # filesdb
+        ctx.filesdb.add_files(self.metadata.package.name, self.files)
+
         # installed packages
         packagedb.inst_packagedb.add_package(self.pkginfo)
