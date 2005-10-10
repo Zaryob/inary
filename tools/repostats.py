@@ -341,8 +341,6 @@ class Source:
             errors.append(_("Duplicate source packages:\n%s\n%s\n") % (
                 path, sources[name].path))
             return
-        if not spec.source.homepage:
-            errors.append(_("Package '%s' has no homepage tag") % name)
         sources[name] = self
         self.spec = spec
         self.name = name
