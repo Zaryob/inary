@@ -64,7 +64,7 @@ class Command(object):
         (self.options, self.args) = self.parser.parse_args()
         self.args.pop(0)                # exclude command arg
         
-        self.check_auth_info()
+        self.process_opts()
 
     def commonopts(self):
         '''common options'''
@@ -85,7 +85,7 @@ class Command(object):
         p.add_option("-n", "--dry-run", action="store_true", default=False,
                      help = _("do not perform any action, just show what\
                      would be done"))
-        p.add_option("", "--no-color", action="store_true", default=False,
+        p.add_option("-N", "--no-color", action="store_true", default=False,
                      help = _("print like a man"))
         return p
 
@@ -93,6 +93,18 @@ class Command(object):
         """This is a fall back function. If the implementer module provides an
         options function it will be called"""
         pass
+
+    def process_opts(self):
+        self.check_auth_info()
+        
+        # make destdir absolute
+        if self.options.destdir:
+            dir = str(self.options.destdir)
+            import os.path
+            if not os.path.exists(dir):
+                raise Exception, _('Destination directory %s does not exist') % dir
+            self.options.destdir = os.path.realpath(dir)
+
 
     def check_auth_info(self):
         username = self.options.username

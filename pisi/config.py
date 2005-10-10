@@ -47,9 +47,13 @@ class Config(object):
     def dest_dir(self):
         dir = self.get_option('destdir')
         if dir:
-            return str(dir)
+            dir = str(dir)
         else:
-            return self.values.general.destinationdirectory
+            dir = self.values.general.destinationdirectory
+        import os.path
+        if not os.path.exists(dir):
+            raise Exception, _('Destination directory %s does not exist') % dir
+        return dir
 
     def lib_dir(self):
         return join(self.dest_dir(), self.values.dirs.lib_dir)
