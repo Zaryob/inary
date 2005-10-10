@@ -46,6 +46,10 @@ Depoda toplam %(nr_source)d kaynak paket, ve bu paketlerden oluşturulacak
 %(most_patched)s
 </tbody></table></p>
 
+<h3>En uzun actions.py betikli 5 kaynak paket:</h3><p><table><tbody>
+%(longpy)s
+</tbody></table></p>
+
 <h3>Eksik paketler</h3><p><table><tbody>
 %(missing)s
 </tbody></table></p>
@@ -80,16 +84,16 @@ def_package_html = u"""
 <h1>İkili paket: %(name)s</h1>
 <h2>Versiyon %(version)s, sürüm %(release)s</h2>
 
-<h3>Derlemek için bağımlılar:</h3>
+<h3>Derlemek için gerekenler:</h3>
 <p>%(buildDeps)s</p>
 
-<h3>Çalıştırmak için bağımlılar:</h3>
+<h3>Çalıştırmak için gerekenler:</h3>
 <p>%(runtimeDeps)s</p>
 
-<h3>Pakete derlenmek için bağımlılar:</h3>
+<h3>Bağımlı paketler (derlenmek için):</h3>
 <p>%(revBuildDeps)s</p>
 
-<h3>Pakete çalışmak için bağımlılar:</h3>
+<h3>Bağımlı paketler (çalışmak için):</h3>
 <p>%(revRuntimeDeps)s</p>
 
 </body></html>
@@ -102,7 +106,11 @@ def_source_html = u"""
 </head><body>
 
 <h1>Kaynak paket: %(name)s</h1>
-<h2>Versiyon %(version)s, sürüm %(release)s</h2>
+<h2>Kaynak versiyon %(version)s, depo sürümü %(release)s</h2>
+<h3><a href='%(homepage)s'>%(homepage)s</a></h3>
+
+<h3>Lisanslar:</h3>
+<p>%(license)s</p>
 
 <h3>Bu kaynaktan derlenen ikili paketler:</h3>
 <p>%(packages)s</p>
@@ -118,10 +126,10 @@ def_missing_html = u"""
 
 <h1>Eksik ikili paket: %(name)s</h1>
 
-<h3>Pakete derlenmek için bağımlılar:</h3>
+<h3>Bağımlı paketler (derlenmek için):</h3>
 <p>%(revBuildDeps)s</p>
 
-<h3>Pakete çalışmak için bağımlılar:</h3>
+<h3>Bağımlı paketler (çalışmak için):</h3>
 <p>%(revRuntimeDeps)s</p>
 
 </body></html>
@@ -333,6 +341,8 @@ class Source:
             errors.append(_("Duplicate source packages:\n%s\n%s\n") % (
                 path, sources[name].path))
             return
+        if not spec.source.homepage:
+            errors.append(_("Package '%s' has no homepage tag") % name)
         sources[name] = self
         self.spec = spec
         self.name = name
@@ -367,6 +377,8 @@ class Source:
             (map(lambda x: x.name, self.spec.packages)))
         dict = {
             "name": self.name,
+            "homepage": source.homepage,
+            "license": ", ".join(source.license),
             "version": source.version,
             "release": source.release,
             "packages": ", ".join(paks)
@@ -492,20 +504,26 @@ class Repository:
             printu("   %4d %s" % (p[1], p[0]))
     
     def report_html(self):
-        miss = map(lambda x: "<tr><td><a href='package-%s.html'>%s</a></td></tr>" % (x, x), missing.keys())
-        people = self.people.get_list()
+        miss = map(lambda x: "<tr><td><a href='./package-%s.html'>%s</a></td></tr>" % (x, x), missing.keys())
         upeople = {}
-        for p in people:
+        for p in self.people.get_list():
             upeople["<a href='./%s.html'>%s</a>" % (p[0], p[0])] = p[1]
         if errors:
             e = "<br>".join(errors)
         else:
             e = ""
+        upatch = {}
+        for p in self.mostpatched.get_list(5):
+            upatch["<a href='./source-%s.html'>%s</a>" % (p[0], p[0])] = p[1]
+        ulongpy = {}
+        for p in self.longpy.get_list(5):
+            ulongpy["<a href='./source-%s.html'>%s</a>" % (p[0], p[0])] = p[1]
         dict = {
             "nr_source": self.nr_sources,
             "nr_packages": self.nr_packages,
             "nr_patches": self.nr_patches,
-            "most_patched": template_table("table", self.mostpatched.get_list(5)),
+            "most_patched": template_table("table", upatch.items()),
+            "longpy": template_table("table", ulongpy.items()),
             "packagers": template_table("table", upeople.items()),
             "missing": "\n".join(miss),
             "errors": e

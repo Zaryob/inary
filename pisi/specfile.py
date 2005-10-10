@@ -217,7 +217,7 @@ class SourceInfo:
     def __init__(self, node = None):
         if node:
             self.name = getNodeText(node, "Name")
-            self.homepage = getNodeText(node, "HomePage")
+            self.homepage = getNodeText(node, "Homepage")
             self.packager = PackagerInfo(getNode(node, "Packager"))
             self.summary = getNodeText(node, "Summary")
             self.description = getNodeText(node, "Description")
