@@ -186,8 +186,6 @@ class Installer:
     def register_comar_scripts(self):
         "register COMAR scripts"
 
-        com = ctx.comard
-
         for pcomar in self.metadata.package.providesComar:
             scriptPath = os.path.join(self.package.comar_dir(),pcomar.script)
             import pisi.comariface

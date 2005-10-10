@@ -29,7 +29,7 @@ ui = None # not now
 installdb = None
 repodb = None
 
-comard = None
+comar = None
 
 #def register(_impl):
 #    """ Register a UI implementation"""

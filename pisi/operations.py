@@ -46,7 +46,7 @@ def remove_file(fileinfo):
             ctx.ui.warning(_('Not removing non-file, non-link %s') % fpath)
 
 def run_preremove(package_name):
-    if ctx.comard:
+    if ctx.comar:
         import pisi.comariface as comariface
         comariface.run_preremove(package_name)
     else:
