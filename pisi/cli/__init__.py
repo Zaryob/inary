@@ -34,9 +34,11 @@ class Exception(pisi.Exception):
     pass
 
 
-def printu(msg):
-    print msg.encode('utf-8')
-    
+def printu(obj):
+    if not isinstance(obj, unicode):
+        obj = unicode(obj)
+    print obj.encode('utf-8')
+
 
 class CLI(UI):
     "Command Line Interface"
