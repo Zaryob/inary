@@ -193,7 +193,7 @@ def install_pkg_files(package_URIs):
             G_f.write_graphviz(sys.stdout)
         order = G_f.topological_sort()
         order.reverse()
-        ctx.ui.info(_('Installation order: ') + order)
+        ctx.ui.info(_('Installation order: ') + `order`)
         for x in order:
             operations.install_single_file(dfn[x])
     else:
