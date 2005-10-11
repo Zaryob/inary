@@ -1,4 +1,5 @@
-
+# -*- coding: utf-8 -*-
+#
 
 # Guido's cool metaclass examples. fair use. ahahah.
 # I find these quite handy. Use them :)
