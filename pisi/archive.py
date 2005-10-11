@@ -184,7 +184,7 @@ class ArchiveZip(ArchiveBase):
                     os.symlink(target, ofile)
                 else:
                     perm = info.external_attr
-                    perm &= 0x00FF0000
+                    perm &= 0x08FF0000
                     perm >>= 16
                     perm |= 0x00000100
                     buff = open (ofile, 'wb')
