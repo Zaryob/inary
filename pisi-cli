@@ -32,26 +32,26 @@ def handle_exception(exception, value, tb):
         ui.error(_("\nKeyboardInterrupt: Exiting...\n"))
         sys.exit(1)
     elif exception == XmlError:
-        ui.error(str(value))
+        ui.error(unicode(value))
         sys.exit(1)
-    elif exception == pisi.Error:
-        ui.error(_("Fatal Error:"))
-        show_traceback = ctx.options and ctx.options.debug
-    elif exception == pisi.Exception:
+    elif isinstance(value, pisi.Error):
+        ui.error(_("Fatal Error"))
+        show_traceback = ctx.config.get_option('debug')
+    elif isinstance(value, pisi.Exception):
         show_traceback = True
-    else:
-        # For any other exception (possibly Python exceptions) show
-        # the traceback!
-        show_traceback = True
-
-    ui.error("%s" %exception)
-    ui.error("%s\n" %value)
-
-    if show_traceback:
         ui.error(_("""
 Internal PISI Error:
 Please file a bug report! (http://bugs.uludag.org.tr)
 """))
+    else:
+        # For any other exception (possibly Python exceptions) show
+        # the traceback!
+        show_traceback = ctx.config.get_option('debug')
+        ui.error("System Error. Use --debug to see a traceback.")
+
+    ui.error("%s: %s\n" % (exception, value))
+
+    if show_traceback:
         ui.info(_("Traceback:"))
         traceback.print_tb(tb)
 
