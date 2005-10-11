@@ -315,8 +315,8 @@ def upgrade_pkg_names(A):
                     Ap.append(x)
         else:
             #ctx.ui.info('Package %s cannot be upgraded. ' % x)
-            ctx.ui.info(_('Package %s is already at its latest version %s,\
- release %s, build %s.')
+            ctx.ui.info(_('Package %s is already at its latest version\
+ which is version %s, release %s, build %s.')
                     % (x, pkg.version, pkg.release, pkg.build))
     A = set(Ap)
 
