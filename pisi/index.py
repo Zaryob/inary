@@ -9,10 +9,11 @@
 #
 # Please read the COPYING file.
 #
-
-# PISI source/package index
-
 # Author:  Eray Ozkural <eray@uludag.org.tr>
+
+
+"""PISI source/package index"""
+
 
 import os
 

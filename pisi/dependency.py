@@ -9,10 +9,9 @@
 #
 # Please read the COPYING file.
 #
-
-# dependency analyzer
-
 # Author:  Eray Ozkural <eray@uludag.org.tr>
+
+"""dependency analyzer"""
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
