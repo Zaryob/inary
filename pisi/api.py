@@ -205,7 +205,7 @@ def install_pkg_names(A):
     the repository, trying to perform a minimum number of
     installs"""
 
-    A = set(A) # A was a list, remove duplicates
+    A_0 = A = set(A) # A was a list, remove duplicates
 
     ctx.ui.debug('A = %s' % str(A))
 
@@ -242,7 +242,12 @@ def install_pkg_names(A):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
-    #print order
+    ctx.ui.info(_("""\
+The following minimal list of packages will be installed \
+in the respective order to satisfy dependencies: """) + util.strlist(order))
+    if len(order) > len(A_0):
+        if not ctx.ui.confirm('Do you want to continue?'):
+            return False
     for x in order:
         operations.install_single_name(x)
         
@@ -292,6 +297,7 @@ def upgrade_pkg_names(A):
     ignore_build = ctx.config.options and ctx.config.options.ignore_build_no
 
     # filter packages that are not upgradable
+    A_0 = A = set(A)
     Ap = []
     for x in A:
         if x.endswith('.pisi'):
@@ -315,8 +321,8 @@ def upgrade_pkg_names(A):
                     Ap.append(x)
         else:
             #ctx.ui.info('Package %s cannot be upgraded. ' % x)
-            ctx.ui.info(_('Package %s is already at its latest version\
- which is version %s, release %s, build %s.')
+            ctx.ui.info(_('Package %s is already at its latest \
+version %s, release %s, build %s.')
                     % (x, pkg.version, pkg.release, pkg.build))
     A = set(Ap)
 
@@ -361,10 +367,15 @@ def upgrade_pkg_names(A):
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
         B = Bp
-    G_f.write_graphviz(sys.stdout)
+    if ctx.options.get_option('debug'):
+        G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
-    #print order
+    ctx.ui.info(_("""The following packages will be upgraded: """) +
+                util.strlist(order))
+    if len(order) > len(A_0):
+        if not ctx.ui.confirm('Do you want to continue?'):
+            return False
     for x in order:
         operations.install_single_name(x, True)
         
@@ -395,6 +406,7 @@ def remove(A):
     """remove set A of packages from system (A is a list of package names)"""
     
     # filter packages that are not installed
+    A_0 = A = set(A)
     Ap = []
     for x in A:
         if ctx.installdb.is_installed(x):
@@ -433,10 +445,15 @@ def remove(A):
                         Bp.add(rev_dep)
                         G_f.add_plain_dep(rev_dep, x)
         B = Bp
-    #G_f.write_graphviz(sys.stdout)
+    if ctx.options.get_option('debug'):
+        G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
-    #FIXME: do something more informative here
-    #print order
+    ctx.ui.info(_("""\
+The following minimal list of packages will be removed \ 
+in the respective order to satisfy dependencies: """) + util.strlist(order))
+    if len(order) > len(A_0):
+        if not ctx.ui.confirm('Do you want to continue?'):
+            return False
     for x in order:
         if ctx.installdb.is_installed(x):
             operations.remove_single(x)
