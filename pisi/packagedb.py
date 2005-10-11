@@ -45,9 +45,7 @@ class PackageDB(object):
         try:
             fcntl.flock(self.lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except IOError, e:
-             import sys
-             ctx.ui.error("PackageDB: %s" % e)
-             sys.exit(1)
+             raise Error(_("Cannot lock PackageDB: %s") % e)
         self.d = shelve.open(self.fname)
         self.dr = shelve.open(self.fname2)
 

@@ -22,6 +22,11 @@ import pisi.cli
 import pisi.context as ctx
 from pisi.uri import URI
 
+
+class Error(pisi.Error):
+    pass
+
+
 class Command(object):
     """generic help string for any command"""
 
@@ -45,8 +50,7 @@ class Command(object):
             return Command.cmd_dict[cmd]()
     
         if fail:
-            ctx.ui.info(_("Unrecognized command: ") + cmd)
-            sys.exit(1)
+            raise Error(_("Unrecognized command: ") + cmd)
         else:
             return None
     get_command = staticmethod(get_command)
@@ -102,7 +106,7 @@ class Command(object):
             dir = str(self.options.destdir)
             import os.path
             if not os.path.exists(dir):
-                raise Exception, _('Destination directory %s does not exist') % dir
+                raise Error, _('Destination directory %s does not exist') % dir
             self.options.destdir = os.path.realpath(dir)
 
 
@@ -160,7 +164,8 @@ class Command(object):
 
     def die(self):
         """exit program"""
-        ctx.ui.error(_('Program terminated abnormally.'))
+        #FIXME: not called from anywhere?
+        ctx.ui.error(_('Command terminated abnormally.'))
         sys.exit(-1)
 
 
@@ -170,11 +175,11 @@ class autocommand(type):
         Command.cmd.append(cls)
         name = getattr(cls, 'name', None)
         if name is None:
-            raise pisi.cli.Error(_('command lacks name'))
+            raise pisi.cli.Error(_('Command lacks name'))
         longname, shortname = name
         def add_cmd(cmd):
             if Command.cmd_dict.has_key(cmd):
-                raise pisi.cli.Error(_('duplicate command %s') % cmd)
+                raise pisi.cli.Error(_('Duplicate command %s') % cmd)
             else:
                 Command.cmd_dict[cmd] = cls
         add_cmd(longname)

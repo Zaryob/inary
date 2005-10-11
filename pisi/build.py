@@ -220,11 +220,9 @@ class PisiBuild:
             buf = open(scriptfile).read()
             exec compile(buf, "error", "exec") in localSymbols, globalSymbols
         except IOError, e:
-            ctx.ui.error(_("Unable to read Action Script (%s): %s") %(scriptfile,e))
-            sys.exit(1)
+            raise Error(_("Unable to read Action Script (%s): %s") %(scriptfile,e))
         except SyntaxError, e:
-            ctx.ui.error (_("SyntaxError in Action Script (%s): %s") %(scriptfile,e))
-            sys.exit(1)
+            raise Error(_("SyntaxError in Action Script (%s): %s") %(scriptfile,e))
 
         self.actionLocals = localSymbols
         self.actionGlobals = globalSymbols

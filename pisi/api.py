@@ -584,11 +584,7 @@ def prepare_for_build(pspecfile, authInfo=None):
         ctx.ui.error(_("Unsatisfied Build Dependencies:"))
         for dep in dep_unsatis:
             ctx.ui.warning(dep.package)
-
-    # FIXME: Don't exit for now! It's annoying to test on a system that
-    # doesn't has all packages made with pisi.
-    # Will be enabled on the full-pisi system.
-    #        sys.exit(1)
+        # FIXME: raise an exception if ignore-depends not given
 
     return pb
 
