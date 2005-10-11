@@ -572,8 +572,8 @@ Usage: list-installed
             package = pisi.packagedb.inst_packagedb.get_package(pkg)
             inst_info = ctx.installdb.get_info(pkg)
             if self.options.long:
-                ctx.ui.info(str(package))
-                ctx.ui.info(str(inst_info))
+                ctx.ui.info(unicode(package))
+                ctx.ui.info(unicode(inst_info))
             elif self.options.install_info:
                 ctx.ui.info('%-15s | %s ' % (package.name, inst_info.one_liner()))
             else:
@@ -732,7 +732,7 @@ Gives a brief list of PiSi components published in the repository.
         for p in list:
             package = pkg_db.get_package(p)
             if self.options.long:
-                ctx.ui.info(str(package))
+                ctx.ui.info(unicode(package))
             else:
                 pstr = p
                 if p in installed_list:
