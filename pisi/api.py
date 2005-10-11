@@ -445,7 +445,7 @@ def remove(A):
                         Bp.add(rev_dep)
                         G_f.add_plain_dep(rev_dep, x)
         B = Bp
-    if ctx.options.get_option('debug'):
+    if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     ctx.ui.info(_("""\
