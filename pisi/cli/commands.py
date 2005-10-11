@@ -491,7 +491,7 @@ Usage: info <package1> <package2> ... <packagen>
         import os.path
 
         metadata, files = pisi.api.info(arg)
-        ctx.ui.info(str(metadata.package))
+        ctx.ui.info(unicode(metadata.package))
         if self.options.files or self.options.files_path:
             if files:
                 ctx.ui.info(_('\nFiles:'))

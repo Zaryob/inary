@@ -386,6 +386,7 @@ class autoxml(type):
         def encode(xml, node, value, errs):
             """encode given value inside DOM node"""
             if value:
+                #FIXME: unicode() here?
                 writetext(xml, node, token, str(value))
             else:
                 if req == mandatory:
@@ -393,7 +394,7 @@ class autoxml(type):
 
         def format(value, errs):
             """format value for pretty printing"""
-            return str(value)
+            return unicode(value)
 
         return initialize, decode, encode, format
 

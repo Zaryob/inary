@@ -151,12 +151,14 @@ valid_filetypes = [
 ]
 
 def printu(obj):
-    if isinstance(obj, unicode):
+    """smart print command which handles unicode strings and objects which
+    return unicode __str__'s, a common case in our implementation"""
+    if isinstance(obj, str):
+        print obj
+    elif isinstance(obj, unicode):
         print obj.encode('utf-8')
-    elif isinstance(obj, str):
-        print obj.decode('utf-8')
     else:
-        print str(obj)
+        print unicode(obj).encode('utf-8') # this is printu!
 
 def valuesort(x, y):
     if x[1] > y[1]:
