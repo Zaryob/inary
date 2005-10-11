@@ -20,6 +20,7 @@ _ = __trans.ugettext
 sys.path.append('.')
 import pisi.specfile
 import pisi.uri
+from pisi.cli import printu
 
 # default html templates
 
@@ -149,14 +150,6 @@ valid_filetypes = [
     "header",
     "all"
 ]
-
-def printu(obj):
-    if isinstance(obj, unicode):
-        print obj.encode('utf-8')
-    elif isinstance(obj, str):
-        print obj.decode('utf-8')
-    else:
-        print str(obj)
 
 def valuesort(x, y):
     if x[1] > y[1]:
