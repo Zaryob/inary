@@ -369,7 +369,7 @@ class PackageInfo:
               self.name, self.version, self.release, self.build)
         s += _('\nSummary: ') + self.summary
         s += _('\nDescription: ') + self.description
-        s += _('\nComponent: ') + self.partof
+        s += _('\nComponent: ') + str(self.partof)
         s += _('\nProvides: ')
         for x in self.providesComar:
            s += x.om
