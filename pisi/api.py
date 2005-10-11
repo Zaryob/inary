@@ -191,8 +191,7 @@ def install_pkg_files(package_URIs):
             G_f.write_graphviz(sys.stdout)
         order = G_f.topological_sort()
         order.reverse()
-        #if ctx.config.get_option('debug'):
-        #    print 'installation order', order
+        ctx.ui.info(_('Installation order: ') + order)
         for x in order:
             operations.install_single_file(dfn[x])
     else:
@@ -367,7 +366,7 @@ version %s, release %s, build %s.')
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
         B = Bp
-    if ctx.options.get_option('debug'):
+    if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()

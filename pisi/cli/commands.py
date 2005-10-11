@@ -703,6 +703,10 @@ Gives a brief list of PiSi components published in the repository.
 
     name = ("list-available", "la")
 
+    def options(self):
+        self.parser.add_option("-l", "--long", action="store_true",
+                               default=False, help="show in long format")
+
     def run(self):
 
         self.init(True)
@@ -726,10 +730,15 @@ Gives a brief list of PiSi components published in the repository.
         installed_list = ctx.installdb.list_installed()
         list.sort()
         for p in list:
-            if p in installed_list:
-                print colorize(p, "cyan")
+            package = pkg_db.get_package(p)
+            if self.options.long:
+                ctx.ui.info(str(package))
             else:
-                print p
+                pstr = p
+                if p in installed_list:
+                    pstr = colorize(p, "cyan")
+                ctx.ui.info('%15s - %s ' % (pstr, package.summary))
+                
 
 class ListUpgrades(Command):
     """List packages to be upgraded
