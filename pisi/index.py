@@ -71,7 +71,7 @@ class Index(XmlFile):
         for root, dirs, files in os.walk(repo_uri):
             for fn in files:
                 if fn.endswith(ctx.const.package_prefix):
-                    ctx.ui.info(_('Adding %s  to package index') %s)
+                    ctx.ui.info(_('Adding %s  to package index') %fn)
                     self.add_package(os.path.join(root, fn), repo_uri)
 
     def update_db(self, repo):
