@@ -84,20 +84,10 @@ def install(packages):
         else:
             return install_pkg_names(packages)
 
-    #FIXME: As Gurer warns, something's fishy with this exception proc.
-    except InstallError, e:
-        # FIXME: This is a workaround for __str__ conversion used in
-        # Python exceptions
-        ctx.ui.error(e.args[0])
-
     except packagedb.Error, e:
-        # FIXME: same workaround...
-        ctx.ui.error("PackageDBError: (%s)" % e.args[0])
         ctx.ui.error(_("Package is not installable."))
+        raise e
 
-    #except Exception, e:
-    #    print e
-    #    ctx.ui.error("Error: %s" % e)
 
 def install_pkg_files(package_URIs):
     """install a number of pisi package files"""

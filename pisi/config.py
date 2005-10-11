@@ -26,6 +26,9 @@ import pisi.context as ctx
 from pisi.configfile import ConfigurationFile
 from pisi.util import join_path as join
 
+class Error(pisi.Error):
+    pass
+
 class Config(object):
     """Config Singleton"""
     
@@ -52,7 +55,7 @@ class Config(object):
             dir = self.values.general.destinationdirectory
         import os.path
         if not os.path.exists(dir):
-            raise Exception, _('Destination directory %s does not exist') % dir
+            raise Error, _('Destination directory %s does not exist') % dir
         return dir
 
     def lib_dir(self):

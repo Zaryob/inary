@@ -322,7 +322,7 @@ def sha1_file(filename):
             m.update(line)
         return m.hexdigest()
     except IOError:
-        return "0" 
+        raise FileError(_("Cannot calculate SHA1 hash of %s") % filename) 
 
 def sha1_data(data):
     """calculate sha1 hash of given data"""
@@ -331,7 +331,7 @@ def sha1_data(data):
         m.update(data)
         return m.hexdigest()
     except:
-        return "0" 
+        raise Error(_("Cannot calculate SHA1 hash of given data"))
 
 def uncompress(patchFile, compressType="gz", targetDir=None):
     """uncompresses a file and returns the path of the uncompressed

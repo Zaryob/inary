@@ -124,7 +124,7 @@ def doman(*sourceFiles):
                 pageName, pageDirectory = source[:source.rindex('.')], \
                                           source[source.rindex('.')+1:]
             except ValueError:
-                ctx.ui.error(_('\n!!! ActionsAPI [doman]: Wrong man page file: %s') % (source))
+                ctx.ui.warning(_('ActionsAPI [doman]: Wrong man page file: %s') % (source))
                 
             makedirs(manDIR + '/man%s' % pageDirectory) 
             system('install -m0644 %s %s' % (source, manDIR + '/man%s' % pageDirectory))
@@ -162,7 +162,7 @@ def rename(sourceFile, destinationFile):
     try:        
         os.rename(get.installDIR() + sourceFile, get.installDIR() + baseDir + "/" + destinationFile)
     except OSError:
-        ctx.ui.error(_('\n!!! ActionsAPI [rename]: No such file or directory: %s') % (sourceFile))
+        ctx.ui.warning(_('ActionsAPI [rename]: No such file or directory: %s') % (sourceFile))
 
 def dosed(sourceFiles, findPattern, replacePattern = ''):
     '''replaces patterns in sourceFiles'''
@@ -196,7 +196,7 @@ def dosym(sourceFile, destinationFile):
     try:
         os.symlink(sourceFile, get.installDIR() + destinationFile)
     except OSError:
-        ctx.ui.error(_('\n!!! ActionsAPI [dosym]: File exists: %s') % (sourceFile))
+        ctx.ui.warning(_('ActionsAPI [dosym]: File exists: %s') % (sourceFile))
 
 def insinto(destinationDirectory, sourceFile,  destinationFile = ''):
     '''insert a sourceFile into destinationDirectory as a destinationFile with same uid/guid/permissions'''

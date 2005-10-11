@@ -32,7 +32,7 @@ import pisi.context as ctx
 from pisi.uri import URI
 
 
-class FetchError(pisi.Error):
+class Error(pisi.Error):
     pass
 
 
@@ -128,19 +128,19 @@ class Fetcher:
     def fetchRemoteFile (self, archiveFile):
         from httplib import HTTPException
 
+        uri = self.url.uri
         try:
-            fileObj = urllib2.urlopen(self.formatRequest\
-                                     (urllib2.Request(self.url.uri)))
+            fileObj = urllib2.urlopen(self.formatRequest(urllib2.Request(uri)))
             headers = fileObj.info()
     
         except ValueError, e:
-            self.err('%s' % (e, ))
+            self.err('Cannot fetch %s; value error: %s' % (uri, e))
         except IOError, e:
-            self.err('%s' % (e, ))
+            self.err('Cannot fetch %s; %s' % (uri, e))
         except OSError, e:
-            self.err('%s' % (e, ))
+            self.err('Cannot fetch %s; %s' % (uri, e))
         except HTTPException, e:
-            self.err(('(%s): %s') % (e.__class__.__name__, e))
+            self.err(('Cannot fetch %s; (%s): %s') % (uri, e.__class__.__name__, e))
 
         try:
             totalsize = int(headers['Content-Length'])
@@ -158,5 +158,5 @@ class Fetcher:
         return request
 
     def err (self, error):
-        raise FetchError(error)
+        raise Error(error)
 

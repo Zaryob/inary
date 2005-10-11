@@ -42,7 +42,9 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-class ConfigException(Exception):
+import pisi
+
+class Error(pisi.Error):
     pass
 
 class GeneralDefaults:
@@ -84,7 +86,7 @@ class ConfigurationSection(object):
             self.defaults = DirsDefaults
         else:
             e = _("No section by name '%s'") % section
-            raise ConfigException, e
+            raise Error, e
 
         self.section = section
 
