@@ -183,7 +183,7 @@ def removepathprefix(prefix, path):
     "remove path prefix a from b, finding the pathname rooted at a"
     comps = remove_prefix(splitpath(prefix), splitpath(path))
     if len(comps) > 0:
-        return os.path.join(*tuple(comps))
+        return join_path(*tuple(comps))
     else:
         return ""
 
@@ -235,7 +235,7 @@ def dir_size(dir):
     # being true. Using 'du' command (like Debian does) can be a
     # better solution :(.
     getsize = os.path.getsize
-    join = os.path.join
+    join = join_path
     islink = os.path.islink
     def sizes():
         for root, dirs, files in os.walk(dir):
@@ -292,7 +292,7 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
 
         #bug 397
         for dir in dirs:
-            d = os.path.join(root, dir)
+            d = join_path(root, dir)
             if os.path.islink(d) and not has_excluded_prefix(d):
                 yield (d, sha1_sum(os.readlink(d), True))
                 exclude_prefix.append(remove_prefix(removePrefix, d) + "/")
@@ -305,7 +305,7 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
                 yield (parent, sha1_sum(parent))
 
         for fname in files:
-            f = os.path.join(root, fname)
+            f = join_path(root, fname)
             if has_excluded_prefix(f):
                 continue
             #bug 373
@@ -350,7 +350,7 @@ def uncompress(patchFile, compressType="gz", targetDir=None):
     """uncompresses a file and returns the path of the uncompressed
     file"""
     if targetDir:
-        filePath = os.path.join(targetDir,
+        filePath = join_path(targetDir,
                                 os.path.basename(patchFile))
     else:
         filePath = os.path.basename(patchFile)
@@ -387,7 +387,7 @@ def do_patch(sourceDir, patchFile, level, target = ''):
 def strip_directory(top, excludelist=[]):
     for root, dirs, files in os.walk(top):
         for fn in files:
-            frpath = os.path.join(root, fn)
+            frpath = join_path(root, fn)
 
             # real path in .pisi package
             p = '/' + removepathprefix(top, frpath)
@@ -437,7 +437,7 @@ def clean_locks(top = '.'):
     for root, dirs, files in os.walk(top):
         for fn in files:
             if fn.endswith('.lock'):
-                path = os.path.join(root, fn)
+                path = join_path(root, fn)
                 ctx.ui.info(_('Removing lock %s'), path)
                 os.unlink(path)
 
@@ -459,14 +459,14 @@ def env_update():
 
     list = []
     for file in os.listdir(env_dir):
-        if not os.path.isdir(os.path.join(env_dir, file)):
+        if not os.path.isdir(join_path(env_dir, file)):
             list.append(file)
 
     list.sort()
 
     keys = {}
     for file in list:
-        f = open(os.path.join(env_dir, file), "r")
+        f = open(join_path(env_dir, file), "r")
         for line in f:
             if not re.search("^#", line.strip()):
                 currentLine = line.strip().split("=")
