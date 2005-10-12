@@ -12,7 +12,7 @@
 # generic user interface
 #
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
-#           Murat Eren <meren@uludag.org.tr>
+#           A. Murat Eren <meren@uludag.org.tr>
 
 import sys
 
@@ -23,9 +23,9 @@ class UI(object):
     "Abstract class for UI operations, derive from this."
 
     class Progress:
-        def __init__(self, totalsize):
+        def __init__(self, totalsize, existsize = 0):
             self.totalsize = totalsize
-            self.percent = 0
+            self.percent = (existsize * 100) / totalsize
 
         def update(self, size):
             if not self.totalsize:
