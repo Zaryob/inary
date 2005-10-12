@@ -193,7 +193,9 @@ def dosym(sourceFile, destinationFile):
     '''creates soft link between sourceFile and destinationFile'''
 
     ''' example call: pisitools.dosym("/usr/bin/bash", "/bin/bash")'''
-    makedirs(get.installDIR() + os.path.dirname(destinationFile))
+    path = get.installDIR() + os.path.dirname(destinationFile)
+    if not os.access(path, os.F_OK):
+        makedirs(path)
 
     try:
         os.symlink(sourceFile, get.installDIR() + destinationFile)
