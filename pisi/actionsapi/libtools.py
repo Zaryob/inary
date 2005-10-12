@@ -19,7 +19,7 @@ _ = __trans.ugettext
 
 # Pisi-Core Modules
 import pisi.context as ctx
-import pisi.util as util
+from pisi.util import join_path
 
 # ActionsAPI Modules
 import pisi.actionsapi
