@@ -73,10 +73,10 @@ def srcRELEASE():
     return env.src_release
 
 def srcTAG():
-    return env.src_name + '-' + env.src_version + '-' + env.src_release
+    return "%s-%s-%s" % (env.src_name, env.src_version, env.src_release)
 
 def srcDIR():
-    return env.src_name + '-' + env.src_version
+    return "%s-%s" % (env.src_name, env.src_version)
 
 # Build Related Functions
         

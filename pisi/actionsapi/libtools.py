@@ -19,6 +19,7 @@ _ = __trans.ugettext
 
 # Pisi-Core Modules
 import pisi.context as ctx
+import pisi.util as util
 
 # ActionsAPI Modules
 import pisi.actionsapi
@@ -32,7 +33,7 @@ class RunTimeError(pisi.actionsapi.Error):
         ctx.ui.error(value)
 
 def preplib(sourceDirectory = '/usr/lib'):
-    sourceDirectory = get.installDIR() + sourceDirectory
+    sourceDirectory = path_join(get.installDIR(), sourceDirectory)
     if can_access_directory(sourceDirectory):
         if system('/sbin/ldconfig -n -N %s' % sourceDirectory):
             raise RunTimeError(_('Running ldconfig failed.'))
@@ -42,7 +43,7 @@ def gnuconfig_update():
     for root, dirs, files in os.walk(os.getcwd()):
         for file in files:
             if file in ['config.sub', 'config.guess']:
-                copy('/usr/share/gnuconfig/%s' % file, os.path.join(root, file))
+                copy('/usr/share/gnuconfig/%s' % file, util.join_path(root, file))
                 ctx.ui.info(_('GNU Config Update Finished.'))
 
 def libtoolize(parameters = ''):
