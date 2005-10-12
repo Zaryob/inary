@@ -34,6 +34,7 @@
 # System
 import xml.dom.minidom as mdom
 from xml.parsers.expat import ExpatError
+import locale
 import codecs
 import types
 
@@ -99,7 +100,18 @@ class LocalText(object):
             node.appendChild(newnode)
     
     def format(self, errs):
-        return ''
+        L = locale.getlocale()[0][0:2] # try to read language, pathetic isn't it?
+        if self.locs.has_key(L):
+            return self.locs[L]
+        elif self.locs.has_key('en'):
+            # fallback to English, blah
+            return self.locs['en']
+        elif self.locs.has_key('tr'):
+            # fallback to Turkish
+            return self.locs['tr']
+        else:
+            errs.append("Tag '%s' should have at least an English or Turkish version\n" % d[2])
+            return ''
 
     # FIXME: use something like the below to return a default
     #L = language
