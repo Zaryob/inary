@@ -265,7 +265,7 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
         try:
             return func(f)
         except FileError:
-            return "0"
+            return None
 
     # also handle single files
     if os.path.isfile(top):
