@@ -68,6 +68,9 @@ class Installer:
             import pisi.comariface as comariface
             comariface.run_postinstall(self.pkginfo.name)
         self.update_databases()
+        ctx.ui.info("Regenerating /etc/ld.so.cache...")
+        util.env_update()
+                        
 
     def check_requirements(self):
         """check system requirements"""
