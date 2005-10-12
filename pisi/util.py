@@ -255,9 +255,21 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
     used to remove prefix from filePath while matching excludes, if
     given."""
 
+    def sha1_sum(f, data=False):
+        func = None
+        if data:
+            func = sha1_data
+        else:
+            func = sha1_file
+
+        try:
+            return func(f)
+        except FileError:
+            return "0"
+
     # also handle single files
     if os.path.isfile(top):
-        yield (top, sha1_file(top))
+        yield (top, sha1_sum(top))
         return
 
     def has_excluded_prefix(filename):
@@ -273,7 +285,7 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
         if os.path.islink(root) and not has_excluded_prefix(root):
             #yield the symlink..
             #bug 373
-            yield (root, sha1_data(os.readlink(root)))
+            yield (root, sha1_sum(os.readlink(root)))
             exclude_prefix.append(remove_prefix(removePrefix, root) + "/")
             continue
 
@@ -281,7 +293,7 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
         for dir in dirs:
             d = os.path.join(root, dir)
             if os.path.islink(d) and not has_excluded_prefix(d):
-                yield (d, sha1_data(os.readlink(d)))
+                yield (d, sha1_sum(os.readlink(d)))
                 exclude_prefix.append(remove_prefix(removePrefix, d) + "/")
 
         #bug 340
@@ -289,7 +301,7 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
             parent, r, d, f = root, '', '', ''
             for r, d, f in os.walk(parent, topdown=False): pass
             if not f and not d:
-                yield (parent, sha1_file(parent))
+                yield (parent, sha1_sum(parent))
 
         for fname in files:
             f = os.path.join(root, fname)
@@ -297,9 +309,9 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
                 continue
             #bug 373
             elif os.path.islink(f):
-                yield (f, sha1_data(os.readlink(f)))
+                yield (f, sha1_sum(os.readlink(f)))
             else:
-                yield (f, sha1_file(f))
+                yield (f, sha1_sum(f))
 
 def copy_dir(src, dest):
     """copy source dir to destination dir recursively"""
@@ -322,11 +334,7 @@ def sha1_file(filename):
             m.update(line)
         return m.hexdigest()
     except IOError:
-        # raise FileError(_("Cannot calculate SHA1 hash of %s") % filename)
-        #
-        # Don't raise Error here. Broken links can be present in
-        # package and returning 0 is totaly fine here!
-        return "0"
+        raise FileError(_("Cannot calculate SHA1 hash of %s") % filename)
 
 def sha1_data(data):
     """calculate sha1 hash of given data"""
@@ -335,11 +343,7 @@ def sha1_data(data):
         m.update(data)
         return m.hexdigest()
     except:
-        # raise Error(_("Cannot calculate SHA1 hash of given data"))
-        #
-        # Don't raise Error here. Broken links can be present in
-        # package and returning 0 is totaly fine here!
-        return "0"
+        raise Error(_("Cannot calculate SHA1 hash of given data"))
 
 def uncompress(patchFile, compressType="gz", targetDir=None):
     """uncompresses a file and returns the path of the uncompressed
