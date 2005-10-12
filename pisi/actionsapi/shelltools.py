@@ -40,7 +40,8 @@ def can_access_directory(destinationDirectory):
 def makedirs(destinationDirectory):
     '''recursive directory creation function'''
     try:
-        os.makedirs(destinationDirectory)
+        if not os.access(destinationDirectory, os.F_OK):
+            os.makedirs(destinationDirectory)
     except OSError:
         error(_('Cannot create directory %s' % destinationDirectory))
 
