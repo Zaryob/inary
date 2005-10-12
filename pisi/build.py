@@ -24,6 +24,7 @@ _ = __trans.ugettext
 import pisi
 import pisi.util as util
 import pisi.context as ctx
+import pisi.dependency as dependency
 from pisi.sourcearchive import SourceArchive
 from pisi.files import Files, FileInfo
 from pisi.metadata import MetaData
@@ -114,8 +115,8 @@ class BuildContext(object):
         return self.pkg_dir() + ctx.const.install_dir_suffix
 
 
-class PisiBuild:
-    """PisiBuild class, provides the package build and creation routines"""
+class Builder:
+    """Provides the package build and creation routines"""
     def __init__(self, pspec):
         self.bctx = BuildContext(pspec)
         self.pspecDir = os.path.dirname(os.path.realpath(self.bctx.pspecfile))
@@ -148,12 +149,11 @@ class PisiBuild:
    
         # check if all patch files exists, if there are missing no need to unpack!
         self.patch_exists()
-  
+
+        self.check_build_dependencies()
+
         self.fetch_source_archive()
-
         self.unpack_source_archive()
-
-        self.solve_build_dependencies()
 
         # apply the patches and prepare a source directory for build.
         self.apply_patches()
@@ -256,10 +256,24 @@ class PisiBuild:
 
         os.chdir(curDir)
 
-    def solve_build_dependencies(self):
+    def check_build_dependencies(self):
         """fail if dependencies not satisfied"""
         #TODO: we'll have to do better than plugging a fxn here
-        pass
+        # find out the build dependencies that are not satisfied...
+        dep_unsatis = []
+        for dep in self.spec.source.buildDeps:
+            if not dependency.installed_satisfies_dep(dep):
+                dep_unsatis.append(dep)
+    
+        # FIXME: take care of the required buildDeps...
+        # For now just report an error!
+        if dep_unsatis:
+            ctx.ui.error(_("Unsatisfied Build Dependencies:"))
+            for dep in dep_unsatis:
+                ctx.ui.warning(dep.package)
+            # FIXME: raise an exception if ignore-depends not given
+            if not ctx.config.get_option('ignore_dependency'):
+                raise Error(_('Cannot build package due to unsatisfied build dependencies'))
 
     def patch_exists(self):
         """check existence of patch files declared in PSPEC"""

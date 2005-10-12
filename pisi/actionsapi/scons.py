@@ -37,8 +37,8 @@ class InstallError(pisi.actionsapi.Error):
 
 def make(parameters = ''):
     if system("scons %s" % parameters):
-        raise MakeError(_('!!! Make failed...\n'))
+        raise MakeError(_('Make failed.'))
 
 def install(parameters = 'install'):
     if system("scons prefix=%s %s" % (get.installDIR(), parameters)):
-        raise InstallError(_('!!! Install failed...\n'))
+        raise InstallError(_('Install failed.'))

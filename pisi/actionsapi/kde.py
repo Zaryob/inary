@@ -64,20 +64,20 @@ def configure(parameters = ''):
                 %s' % (get.kdeDIR(), get.HOST(), get.qtDIR(), get.qtLIBDIR(), parameters)
 
         if system(args):
-            raise ConfigureError(_('!!! Configure failed...\n'))
+            raise ConfigureError(_('Configure failed.'))
     else:
-        raise ConfigureError(_('!!! No configure script found...\n'))
+        raise ConfigureError(_('No configure script found.'))
 
 def make(parameters = ''):
     '''make source with given parameters = "all" || "doc" etc.'''
     if system('make %s' % parameters):
-        raise MakeError(_('!!! Make failed...\n'))
+        raise MakeError(_('Make failed.'))
 
 def install(parameters = 'install'):
     if can_access_file('Makefile'):
         args = 'make DESTDIR=%s destdir=%s %s' % (get.installDIR(), get.installDIR(), parameters)
         
         if system(args):
-            raise InstallError(_('!!! Install failed...\n'))
+            raise InstallError(_('Install failed.'))
     else:
-        raise InstallError(_('!!! No Makefile found...\n'))
+        raise InstallError(_('No Makefile found.'))

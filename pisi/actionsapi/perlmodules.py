@@ -50,27 +50,27 @@ def configure(parameters = ''):
     export('PERL_MM_USE_DEFAULT', '1')
     if can_access_file('Build.PL'):
         if system('perl Build.PL installdirs=vendor destdir=%s' % get.installDIR()):
-            raise CompileError, _('!!! Configure failed...\n')
+            raise CompileError, _('Configure failed.')
     else:
         if system('perl Makefile.PL %s PREFIX=/usr INSTALLDIRS=vendor DESTDIR=%s' % (parameters, get.installDIR())):
-            raise CompileError, _('!!! Configure failed...\n')
+            raise CompileError, _('Configure failed.')
 
 def make(parameters = ''):
     '''make source with given parameters.'''
     if can_access_file('Makefile'):
         if system('make %s' % parameters):                  
-            raise MakeError, _('!!! Make failed...\n')
+            raise MakeError, _('Make failed.')
     else:
         if system('perl Build build'):
-            raise MakeError, _('!!! Make failed...\n')
+            raise MakeError, _('perl build failed.')
 
 def install(parameters = 'install'):
     '''install source with given parameters.'''
     if can_access_file('Makefile'):
         if system('make %s' % parameters):                  
-            raise InstallError, _('!!! Install failed...\n')
+            raise InstallError, _('Make failed.')
     else:
         if system('perl Build install'):
-            raise MakeError, _('!!! Install failed...\n')
+            raise MakeError, _('perl install failed.')
 
 # FIXME: fix_local_pod % update_pod

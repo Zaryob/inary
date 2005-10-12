@@ -35,7 +35,7 @@ def preplib(sourceDirectory = '/usr/lib'):
     sourceDirectory = get.installDIR() + sourceDirectory
     if can_access_directory(sourceDirectory):
         if system('/sbin/ldconfig -n -N %s' % sourceDirectory):
-            raise RunTimeError(_('!!! Running ldconfig failed...'))
+            raise RunTimeError(_('Running ldconfig failed.'))
 
 def gnuconfig_update():
     ''' copy newest config.* onto source\'s '''
@@ -47,7 +47,7 @@ def gnuconfig_update():
 
 def libtoolize(parameters = ''):
     if system('/usr/bin/libtoolize %s' % parameters):
-        raise RunTimeError(_('Running libtoolize failed...'))
+        raise RunTimeError(_('Running libtoolize failed.'))
 
 def gen_usr_ldscript(dynamicLib):
 

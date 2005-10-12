@@ -20,3 +20,11 @@ class Error(pisi.Error):
 
 class Exception(pisi.Exception):
     pass
+
+import pisi.context as ctx
+
+def error(msg):
+    if ctx.config.get_option('ignore_action_errors'):
+        ctx.ui.error(msg)
+    else:
+        raise Error(msg)

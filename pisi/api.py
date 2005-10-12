@@ -550,38 +550,20 @@ def update_repo(repo):
 # build functions...
 def prepare_for_build(pspecfile, authInfo=None):
 
-    # FIXME: there is a function named "build" in this module which
-    # makes it impossible to use build module directly.
-    from build import PisiBuild
-
     url = URI(pspecfile)
     if url.is_remote_file():
         from sourcefetcher import SourceFetcher
         fs = SourceFetcher(url, authInfo)
         url.uri = fs.fetch_all()
 
-    pb = PisiBuild(url.uri)
-
-    # find out the build dependencies that are not satisfied...
-    dep_unsatis = []
-    for dep in pb.spec.source.buildDeps:
-        if not dependency.installed_satisfies_dep(dep):
-            dep_unsatis.append(dep)
-
-    # FIXME: take care of the required buildDeps...
-    # For now just report an error!
-    if dep_unsatis:
-        ctx.ui.error(_("Unsatisfied Build Dependencies:"))
-        for dep in dep_unsatis:
-            ctx.ui.warning(dep.package)
-        # FIXME: raise an exception if ignore-depends not given
+    import pisi.build
+    pb = pisi.build.Builder(url.uri)
 
     return pb
 
 def build(pspecfile, authInfo=None):
     pb = prepare_for_build(pspecfile, authInfo)
     pb.build()
-
 
 order = {"none": 0,
          "unpack": 1,

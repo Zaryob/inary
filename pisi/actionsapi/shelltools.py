@@ -27,6 +27,8 @@ import pisi.context as ctx
 import pisi.actionsapi
 import pisi.actionsapi.get
 
+from pisi.actionsapi import error
+
 def can_access_file(sourceFile):
     '''test the existence of file'''
     return os.access(sourceFile, os.F_OK)
@@ -40,7 +42,7 @@ def makedirs(destinationDirectory):
     try:
         os.makedirs(destinationDirectory)
     except OSError:
-        pass
+        error(_('Cannot create directory %s' % destinationDirectory))
 
 def echo(destionationFile, content):
     try:
@@ -48,7 +50,7 @@ def echo(destionationFile, content):
         f.write("%s\n" % content)
         f.close()
     except IOError:
-        ctx.ui.error(_(' ActionsAPI [echo]: Can\'t append to file %s...') % (destionationFile))
+        error(_('ActionsAPI [echo]: Can\'t append to file %s.') % (destionationFile))
 
 def chmod(sourceFile, mode = 0755):
     '''change the mode of sourceFile to the mode'''
@@ -98,11 +100,11 @@ def unlinkDir(sourceDirectory):
         try:
             shutil.rmtree(sourceDirectory)
         except OSError:
-            ctx.ui.error(_(' ActionsAPI [unlinkDir]: Operation not permitted: %s') % (sourceDirectory))
+            error(_(' ActionsAPI [unlinkDir]: Operation not permitted: %s') % (sourceDirectory))
     elif isFile(sourceDirectory):
         pass                                
     else:
-        ctx.ui.error(_(' ActionsAPI [unlinkDir]: Directory %s doesn\'t exists.') % (sourceDirectory))
+        error(_(' ActionsAPI [unlinkDir]: Directory %s doesn\'t exists.') % (sourceDirectory))
 
 def move(sourceFile, destinationFile):
     '''recursively move a sourceFile or directory to destinationFile'''
@@ -111,9 +113,9 @@ def move(sourceFile, destinationFile):
             try:
                 shutil.move(file, destinationFile)
             except OSError:
-                ctx.ui.error(_(' ActionsAPI [move]: Permission denied: %s to %s') % (file, destinationFile))
+                error(_(' ActionsAPI [move]: Permission denied: %s to %s') % (file, destinationFile))
         else:
-            ctx.ui.error(_(' ActionsAPI [move]: File %s doesn\'t exists.') % (file))
+            error(_(' ActionsAPI [move]: File %s doesn\'t exists.') % (file))
 
 def copy(sourceFile, destinationFile):
     '''recursively copy a sourceFile or directory to destinationFile'''
@@ -122,11 +124,11 @@ def copy(sourceFile, destinationFile):
             try:
                 shutil.copy(file, destinationFile)
             except IOError:
-                ctx.ui.error(_('ActionsAPI [copy]: Permission denied: %s to %s') % (file, destinationFile))
+                error(_('ActionsAPI [copy]: Permission denied: %s to %s') % (file, destinationFile))
         elif isDirectory(file):
             copytree(file, destinationFile)
         else:
-            ctx.ui.error(_('ActionsAPI [copy]: File %s does not exist.') % file)
+            error(_('ActionsAPI [copy]: File %s does not exist.') % file)
 
 def copytree(source, destination, sym = False):
     '''recursively copy an entire directory tree rooted at source'''
@@ -134,9 +136,9 @@ def copytree(source, destination, sym = False):
         try:
             shutil.copytree(source, destination, sym)
         except OSError:
-            ctx.ui.error(_(' ActionsAPI [copytree]: Permission denied: %s to %s') % (source, destination))
+            error(_(' ActionsAPI [copytree]: Permission denied: %s to %s') % (source, destination))
     else:
-        ctx.ui.error(_(' ActionsAPI [copytree]: Directory %s doesn\'t exists.') % (source))
+        error(_(' ActionsAPI [copytree]: Directory %s doesn\'t exists.') % (source))
 
 def touch(sourceFile):
     '''changes the access time of the 'sourceFile', or creates it if it is not exist'''
@@ -148,7 +150,7 @@ def touch(sourceFile):
             f = open(sourceFile, 'w')
             f.close()
         except IOError:
-            ctx.ui.error(_(' ActionsAPI [touch]: Permission denied: %s') % (sourceFile))
+            error(_(' ActionsAPI [touch]: Permission denied: %s') % (sourceFile))
 
 def cd(directoryName = ''):
     '''change directory'''

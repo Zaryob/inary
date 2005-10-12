@@ -30,6 +30,8 @@ import pisi.actionsapi.get as get
 from pisi.actionsapi.pisitoolsfunctions import *
 from pisi.actionsapi.shelltools import *
 
+from pisi.actionsapi import error
+
 def dobin(sourceFile, destinationDirectory = '/usr/bin'):
     '''insert a executable file into /bin or /usr/bin'''
 
@@ -124,7 +126,7 @@ def doman(*sourceFiles):
                 pageName, pageDirectory = source[:source.rindex('.')], \
                                           source[source.rindex('.')+1:]
             except ValueError:
-                ctx.ui.warning(_('ActionsAPI [doman]: Wrong man page file: %s') % (source))
+                error(_('ActionsAPI [doman]: Wrong man page file: %s') % (source))
                 
             makedirs(manDIR + '/man%s' % pageDirectory) 
             system('install -m0644 %s %s' % (source, manDIR + '/man%s' % pageDirectory))
@@ -162,7 +164,7 @@ def rename(sourceFile, destinationFile):
     try:        
         os.rename(get.installDIR() + sourceFile, get.installDIR() + baseDir + "/" + destinationFile)
     except OSError:
-        ctx.ui.warning(_('ActionsAPI [rename]: No such file or directory: %s') % (sourceFile))
+        error(_('ActionsAPI [rename]: No such file or directory: %s') % (sourceFile))
 
 def dosed(sourceFiles, findPattern, replacePattern = ''):
     '''replaces patterns in sourceFiles'''
@@ -179,7 +181,7 @@ def dosed(sourceFiles, findPattern, replacePattern = ''):
                 line = re.sub(findPattern, replacePattern, line)
                 sys.stdout.write(line)
         else:
-            raise FileError(_('File doesn\'t exists or permission denied: %s') % sourceFile)
+            raise FileError(_('File does not exist or permission denied: %s') % sourceFile)
 
 def dosbin(sourceFile, destinationDirectory = '/usr/sbin'):
     '''insert a executable file into /sbin or /usr/sbin'''
@@ -196,7 +198,7 @@ def dosym(sourceFile, destinationFile):
     try:
         os.symlink(sourceFile, get.installDIR() + destinationFile)
     except OSError:
-        ctx.ui.warning(_('ActionsAPI [dosym]: File exists: %s') % (sourceFile))
+        error(_('ActionsAPI [dosym]: File exists: %s') % (sourceFile))
 
 def insinto(destinationDirectory, sourceFile,  destinationFile = ''):
     '''insert a sourceFile into destinationDirectory as a destinationFile with same uid/guid/permissions'''
@@ -212,11 +214,9 @@ def insinto(destinationDirectory, sourceFile,  destinationFile = ''):
 def newdoc(sourceFile, destinationFile):
     '''inserts a sourceFile into /usr/share/doc/PACKAGE/ directory as a destinationFile'''
     destinationDirectory = '' #490
-    try:
-        destinationDirectory = destinationFile[:destinationFile.rindex('/')]
-        destinationFile = destinationFile[destinationFile.rindex('/') + 1:]
-    except:
-        pass
+    import os.path
+    destinationDirectory = os.path.dirname(destinationFile)
+    destinationFile = os.path.basename(destinationFile)
     move(sourceFile, destinationFile)
     readable_insinto(os.path.join(get.installDIR(), 'usr/share/doc', get.srcTAG(), destinationDirectory), destinationFile)
 

@@ -43,7 +43,7 @@ def executable_insinto(destinationDirectory, *sourceFiles):
     '''insert a executable file into destinationDirectory'''
 
     if not sourceFiles or not destinationDirectory:
-        raise ArgumentError(_('Insufficient arguments...'))
+        raise ArgumentError(_('Insufficient arguments.'))
 
     if not can_access_directory(destinationDirectory):
         makedirs(destinationDirectory)
@@ -56,7 +56,7 @@ def readable_insinto(destinationDirectory, *sourceFiles):
     '''inserts file list into destinationDirectory'''
 
     if not sourceFiles or not destinationDirectory:
-        raise ArgumentError(_('Insufficient arguments...'))
+        raise ArgumentError(_('Insufficient arguments.'))
 
     if not can_access_directory(destinationDirectory):
         makedirs(destinationDirectory)
@@ -69,7 +69,7 @@ def lib_insinto(sourceFile, destinationDirectory, permission = 0644):
     '''inserts a library fileinto destinationDirectory with given permission'''
 
     if not sourceFile or not destinationDirectory:
-        raise ArgumentError(_(' Insufficient arguments...'))
+        raise ArgumentError(_(' Insufficient arguments.'))
 
     if not can_access_directory(destinationDirectory):
         makedirs(destinationDirectory)

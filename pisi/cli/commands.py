@@ -219,6 +219,7 @@ If run without parameters, it prints the general help."""
         
         self.finalize()
 
+
 class Clean(Command):
     """Clean stale locks."""
 
@@ -233,7 +234,8 @@ class Clean(Command):
         self.init()
         pisi.util.clean_locks()
         self.finalize()
-        
+
+
 class DeleteCache(Command):
     """Delete cache files"""
 
@@ -247,6 +249,7 @@ class DeleteCache(Command):
     def run(self):
         self.init(database=False)
         pisi.api.delete_cache()
+
 
 class Graph(Command):
     """Graph package relations.
@@ -270,11 +273,18 @@ conflicts relations starting from given packages.
             g.write_graphviz(file('pgraph.dot', 'w'))
         self.finalize()
 
+# option mixins
 
 def buildno_opts(self):
     self.parser.add_option("", "--ignore-build-no", action="store_true",
                            default=False,
                            help=_("do not take build no into account."))
+
+def ignoredep_opt(self):
+    p = self.parser
+    p.add_option("-E", "--ignore-dependency", action="store_true",
+                 default=False,
+                 help=_("do not take dependency information into account"))
 
 
 class Build(Command):
@@ -294,8 +304,13 @@ fetch all necessary files and build the package for you.
 
     def options(self):
         buildno_opts(self)
+        ignoredep_opt(self)
         self.parser.add_option("-O", "--output-dir", action="store", default=".",
                                help=_("output directory for produced packages"))
+        self.parser.add_option("-A", "--ignore-action-errors",
+                               action="store_true", default=False,
+                               help=_("bypass errors from ActionsAPI"))
+        
 
     def run(self):
         if not self.args:
@@ -320,9 +335,7 @@ class PackageOp(Command):
         p = self.parser
         p.add_option("-B", "--ignore-comar", action="store_true",
                      default=False, help=_("bypass comar configuration agent"))
-        p.add_option("", "--ignore-dependency", action="store_true",
-                     default=False,
-                     help=_("do not take dependency information into account"))
+        ignoredep_opt(self)
 
     def init(self):
         super(PackageOp, self).init(True)
@@ -330,6 +343,7 @@ class PackageOp(Command):
     def finalize(self):
         #self.finalize_db()
         pass
+
 
 class Install(PackageOp):
     """Install PISI packages
@@ -358,6 +372,7 @@ specified a package name, it should exist in a specified repository.
         self.init()
         pisi.api.install(self.args)
         self.finalize()
+
 
 class Upgrade(PackageOp):
     """Upgrade PISI packages
@@ -864,8 +879,8 @@ Finds the installed package which contains the specified file.
         self.finalize()
 
 
-
 # Partial build commands        
+
 
 class BuildUntil(Build):
     """Run the build process partially
@@ -955,7 +970,7 @@ TODO: desc.
         self.finalize()
 
 
-class BuildBuild(Command):
+class BuildBuild(Build):
     """Setup the source
 
 Usage: build-build <pspec file>

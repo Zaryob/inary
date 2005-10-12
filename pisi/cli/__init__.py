@@ -72,10 +72,16 @@ class CLI(UI):
             self.output(msg + msgend)
 
     def warning(self,msg):
-        self.output(colorize(_('Warning: ') + msg + '\n', 'purple'), err=True)
+        if ctx.config.get_option('no_color'):
+            self.output(_('Warning: ') + msg + '\n', err=True)
+        else:
+            self.output(colorize(msg + '\n', 'purple'), err=True)
 
     def error(self,msg):
-        self.output(colorize(_('Error: ') + msg + '\n', 'red'), err=True)
+        if ctx.config.get_option('no_color'):
+            self.output(_('Error: ') + msg + '\n', err=True)
+        else:
+            self.output(colorize(msg + '\n', 'red'), err=True)
 
     def action(self,msg):
         #TODO: this seems quite redundant?
