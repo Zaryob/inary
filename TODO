@@ -73,12 +73,6 @@ Legend:
 
 3. Beta
 
- * high priority
-
- / documentation
-   / actionsAPI documentation, unittests (caglar - meren)
-   + versioning information document
- 
  * medium priority
  
  / components (eray)
@@ -86,7 +80,6 @@ Legend:
    / xml format
    - query components: list of components/packages in a component
    - install/remove components 
- / API: we even have application users (eray)
  / multiple package repository (eray)
    + decide how to implement
    + support repo order
@@ -95,7 +88,7 @@ Legend:
      - local repository: file://
      - removable media: media://
  - partial caching and automatic resume for file download (meren)
-  - use a separate "partial/" subdir like urpmi
+   - use a '.part' extension
  - a helper script for finding dependencies
  
  * low priority 
@@ -110,9 +103,6 @@ Legend:
       - research if there are language independent phonetic encodings
       - implement as an option (or make it possible to turn it off if it works well :))
     - fault tolerant search in package names (bir sekilde)
-/ exception handling (baris)
-   / better/more sensible exception hierarchy (eray)
-   ? recovery from exceptions where necessary
  / overhaul installdb (try to merge its use with packagedb) (eray)
  / verify metodlari
    + SpecFile
@@ -122,7 +112,20 @@ Legend:
  ? non-interactive use (baris)
  
  * finished tasks
- 
+
+ + search-file command
+ + exception handling
+   + uniform exception hierarchy (eray)
+   + proper handling
+ + API: we even have application users (eray)
+   + a facade module pisi.api  (eray)
+   + a library init command (eray)
+   + high-level package ops, index (eray)
+   + info/util commands
+   + build commands (baris)
+ + documentation
+   + actionsAPI documentation, unittests (caglar - meren)
+   + versioning information document
  + UI
    + PISIMAT
    + pykde GUI (cartman)
@@ -164,14 +167,17 @@ Legend:
    + keep track of successfully completed configure, make, install
      steps (necessary for large-scale builds?) (meren)
  + database locking bugs (eray)
- + provide a library interface for users outside (YALI, TASMA). "import pisi" (baris)
 
 4. Release (bug fix, guzellestirme vs.)
 
 5. Post Release
 
- - a database of components: faster access
+ - high-level build commands
+   - install build dependencies
+   - build-all (or build-distro) command
+   - an emerge command, just for fun
  - more support for categories:
+   - a database of components: faster access
    - put categories into a database
    - fast search for categories
  / make a package and sourcedb for each repo
