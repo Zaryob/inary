@@ -480,7 +480,6 @@ def env_update():
                     pass
 
     # generate profile.env
-    keys["PATH"] += ":/bin/:/sbin/:/usr/bin/"
     f = open(profile_file, "w")
     for key in keys:
         f.write("export %s=\"%s\"\n" % (key, keys[key]))
