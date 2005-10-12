@@ -43,7 +43,7 @@ def gnuconfig_update():
     for root, dirs, files in os.walk(os.getcwd()):
         for file in files:
             if file in ['config.sub', 'config.guess']:
-                copy('/usr/share/gnuconfig/%s' % file, util.join_path(root, file))
+                copy('/usr/share/gnuconfig/%s' % file, join_path(root, file))
                 ctx.ui.info(_('GNU Config Update Finished.'))
 
 def libtoolize(parameters = ''):
