@@ -33,7 +33,7 @@ class RunTimeError(pisi.actionsapi.Error):
         ctx.ui.error(value)
 
 def preplib(sourceDirectory = '/usr/lib'):
-    sourceDirectory = path_join(get.installDIR(), sourceDirectory)
+    sourceDirectory = join_path(get.installDIR(), sourceDirectory)
     if can_access_directory(sourceDirectory):
         if system('/sbin/ldconfig -n -N %s' % sourceDirectory):
             raise RunTimeError(_('Running ldconfig failed.'))

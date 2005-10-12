@@ -37,21 +37,21 @@ def dobin(sourceFile, destinationDirectory = '/usr/bin'):
     '''insert a executable file into /bin or /usr/bin'''
 
     ''' example call: pisitools.dobin("bin/xloadimage", "/bin", "xload") '''
-    executable_insinto(path_join(get.installDIR(), destinationDirectory), sourceFile)
+    executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
  
 def dodir(destinationDirectory):
     '''creates a directory tree'''
-    makedirs(path_join(get.installDIR(), destinationDirectory))
+    makedirs(join_path(get.installDIR(), destinationDirectory))
 
 def dodoc(*sourceFiles):
     '''inserts the files in the list of files into /usr/share/doc/PACKAGE''' 
-    readable_insinto(path_join(get.installDIR(), join_path('/usr/share/doc', get.srcTAG())), *sourceFiles)
+    readable_insinto(join_path(get.installDIR(), join_path('/usr/share/doc', get.srcTAG())), *sourceFiles)
 
 def doexe(sourceFile, destinationDirectory):
     '''insert a executable file into destination directory'''
     
     ''' example call: pisitools.doexe("kde-3.4.sh", "/etc/X11/Sessions")'''
-    executable_insinto(path_join(get.installDIR(), destinationDirectory), sourceFile)
+    executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
 
 def dohard(sourceFile, destinationFile):
     '''creates hard link between sourceFile and destinationFile'''
@@ -91,7 +91,7 @@ def dolib(sourceFile, destinationDirectory = '/usr/lib'):
     '''example call: pisitools.dolib_a("libz.a")'''
     '''example call: pisitools.dolib_a("libz.so")'''
     sourceFile = join_path(os.getcwd(), sourceFile)
-    destinationDirectory = path_join(get.installDIR(), destinationDirectory)
+    destinationDirectory = join_path(get.installDIR(), destinationDirectory)
 
     lib_insinto(sourceFile, destinationDirectory, 755)
     
@@ -100,7 +100,7 @@ def dolib_a(sourceFile, destinationDirectory = '/usr/lib'):
     
     '''example call: pisitools.dolib_a("staticlib/libvga.a")'''
     sourceFile = join_path(os.getcwd(), sourceFile)
-    destinationDirectory = path_join(get.installDIR(), destinationDirectory)
+    destinationDirectory = join_path(get.installDIR(), destinationDirectory)
 
     lib_insinto(sourceFile, destinationDirectory, 644)
 
@@ -109,7 +109,7 @@ def dolib_so(sourceFile, destinationDirectory = '/usr/lib'):
     
     '''example call: pisitools.dolib_so("pppd/plugins/minconn.so")'''
     sourceFile = join_path(os.getcwd(), sourceFile)
-    destinationDirectory = path_join(get.installDIR(), destinationDirectory)
+    destinationDirectory = join_path(get.installDIR(), destinationDirectory)
 
     lib_insinto(sourceFile, destinationDirectory, 755)
 
@@ -129,8 +129,8 @@ def doman(*sourceFiles):
             except ValueError:
                 error(_('ActionsAPI [doman]: Wrong man page file: %s') % (source))
                 
-            makedirs(path_join(manDIR, '/man%s' % pageDirectory)) 
-            system('install -m0644 %s %s' % (source, path_join(manDIR, '/man%s' % pageDirectory)))
+            makedirs(join_path(manDIR, '/man%s' % pageDirectory)) 
+            system('install -m0644 %s %s' % (source, join_path(manDIR, '/man%s' % pageDirectory)))
 
 def domo(sourceFile, locale, destinationFile ):
     '''inserts the mo files in the list of files into /usr/share/locale/LOCALE/LC_MESSAGES'''
@@ -146,13 +146,13 @@ def domove(sourceFile, destination, destinationFile = ''):
     
     ''' example call: pisitools.domove("/usr/bin/bash", "/bin/bash")'''
     ''' example call: pisitools.domove("/usr/bin/", "/usr/sbin")'''
-    makedirs(path_join(get.installDIR(), destination))
+    makedirs(join_path(get.installDIR(), destination))
         
-    for file in glob.glob(path_join(get.installDIR(), sourceFile)):
+    for file in glob.glob(join_path(get.installDIR(), sourceFile)):
         if not destinationFile:
-            move(file, path_join(get.installDIR(), join_path(destination, os.path.basename(file))))
+            move(file, join_path(get.installDIR(), join_path(destination, os.path.basename(file))))
         else:
-            move(file, path_join(get.installDIR(), path_join(destination, destinationFile)))
+            move(file, join_path(get.installDIR(), join_path(destination, destinationFile)))
 
 def rename(sourceFile, destinationFile):
     ''' renames sourceFile as destinationFile'''
@@ -163,7 +163,7 @@ def rename(sourceFile, destinationFile):
     baseDir = os.path.dirname(sourceFile)
 
     try:        
-        os.rename(path_join(get.installDIR(), sourceFile), path_join(get.installDIR(), baseDir, destinationFile))
+        os.rename(join_path(get.installDIR(), sourceFile), join_path(get.installDIR(), baseDir, destinationFile))
     except OSError:
         error(_('ActionsAPI [rename]: No such file or directory: %s') % (sourceFile))
 
@@ -188,31 +188,31 @@ def dosbin(sourceFile, destinationDirectory = '/usr/sbin'):
     '''insert a executable file into /sbin or /usr/sbin'''
     
     ''' example call: pisitools.dobin("bin/xloadimage", "/sbin") '''
-    executable_insinto(path_join(get.installDIR(), destinationDirectory), sourceFile)
+    executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
         
 def dosym(sourceFile, destinationFile):
     '''creates soft link between sourceFile and destinationFile'''
 
     ''' example call: pisitools.dosym("/usr/bin/bash", "/bin/bash")'''
-    path = path_join(get.installDIR(), os.path.dirname(destinationFile))
+    path = join_path(get.installDIR(), os.path.dirname(destinationFile))
     if not os.access(path, os.F_OK):
         makedirs(path)
 
     try:
-        os.symlink(sourceFile, path_join(get.installDIR() ,destinationFile))
+        os.symlink(sourceFile, join_path(get.installDIR() ,destinationFile))
     except OSError:
         error(_('ActionsAPI [dosym]: File exists: %s') % (sourceFile))
 
 def insinto(destinationDirectory, sourceFile,  destinationFile = ''):
     '''insert a sourceFile into destinationDirectory as a destinationFile with same uid/guid/permissions'''
-    makedirs(path_join(get.installDIR(), destinationDirectory))
+    makedirs(join_path(get.installDIR(), destinationDirectory))
 
     if not destinationFile:
         for file in glob.glob(sourceFile):
             if can_access_file(file):
-                copy(file, path_join(get.installDIR(), path_join(destinationDirectory, os.path.basename(file))))
+                copy(file, join_path(get.installDIR(), join_path(destinationDirectory, os.path.basename(file))))
     else:
-        copy(sourceFile, path_join(get.installDIR(), path_join(destinationDirectory, destinationFile)))
+        copy(sourceFile, join_path(get.installDIR(), join_path(destinationDirectory, destinationFile)))
 
 def newdoc(sourceFile, destinationFile):
     '''inserts a sourceFile into /usr/share/doc/PACKAGE/ directory as a destinationFile'''
@@ -221,7 +221,7 @@ def newdoc(sourceFile, destinationFile):
     destinationDirectory = os.path.dirname(destinationFile)
     destinationFile = os.path.basename(destinationFile)
     move(sourceFile, destinationFile)
-    readable_insinto(path_join(get.installDIR(), 'usr/share/doc', get.srcTAG(), destinationDirectory), destinationFile)
+    readable_insinto(join_path(get.installDIR(), 'usr/share/doc', get.srcTAG(), destinationDirectory), destinationFile)
 
 def newman(sourceFile, destinationFile):
     '''inserts a sourceFile into /usr/share/man/manPREFIX/ directory as a destinationFile'''
@@ -230,10 +230,10 @@ def newman(sourceFile, destinationFile):
 
 def remove(sourceFile):
     '''removes sourceFile'''
-    for file in glob.glob(path_join(get.installDIR(), sourceFile)):
+    for file in glob.glob(join_path(get.installDIR(), sourceFile)):
         unlink(file)
 
 def removeDir(destinationDirectory):
     '''removes destinationDirectory and its subtrees'''
-    for directory in glob.glob(path_join(get.installDIR(), destinationDirectory)):
+    for directory in glob.glob(join_path(get.installDIR(), destinationDirectory)):
         unlinkDir(directory)
