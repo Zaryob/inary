@@ -120,14 +120,14 @@ def remove_prefix(a,b):
 
 def run_batch(cmd):
     """run command non-interactively and report return value and output"""
-    ui.info(_('running ') + cmd)
+    ctx.ui.info(_('running ') + cmd)
     a = os.popen(cmd)
     lines = a.readlines()
     ret = a.close()
-    ui.debug(_('return value ') + ret)
+    ctx.ui.debug(_('return value %s') % ret)
     successful = ret == None
     if not successful:
-      ui.error(_('Failed command: %s') % cmd + strlist(lines))
+      ctx.ui.error(_('Failed command: %s') % cmd + strlist(lines))
     return (successful,lines)
 
 def xterm_title(message):
@@ -449,19 +449,24 @@ def package_name(name, version, release):
     return  name + '-' + version + '-' + release + ctx.const.package_prefix
 
 def env_update():
-    if not os.path.exists("/etc/env.d"):
-        os.makedirs("/etc/env.d", 0755)
+
+    env_dir = join_path(ctx.config.dest_dir(), "/etc/env.d")
+    profile_file = join_path(ctx.config.dest_dir(), "/etc/profile.env")
+    ldconf_file = join_path(ctx.config.dest_dir(), "/etc/ld.so.conf")
+
+    if not os.path.exists(env_dir):
+        os.makedirs(env_dir, 0755)
 
     list = []
-    for file in os.listdir("/etc/env.d"):
-        if not os.path.isdir(os.path.join("/etc/env.d", file)):
+    for file in os.listdir(env_dir):
+        if not os.path.isdir(os.path.join(env_dir, file)):
             list.append(file)
 
     list.sort()
 
     keys = {}
     for file in list:
-        f = open(os.path.join("/etc/env.d", file), "r")
+        f = open(os.path.join(env_dir, file), "r")
         for line in f:
             if not re.search("^#", line.strip()):
                 currentLine = line.strip().split("=")
@@ -476,13 +481,13 @@ def env_update():
 
     # generate profile.env
     keys["PATH"] += ":/bin/:/sbin/:/usr/bin/"
-    f = open("/etc/profile.env", "w")
+    f = open(profile_file, "w")
     for key in keys:
         f.write("export %s=\"%s\"\n" % (key, keys[key]))
     f.close()
 
     # generate ld.co.conf
-    f = open("/etc/ld.so.conf", "w")
+    f = open(ldconf_file, "w")
     for path in keys["LDPATH"].split(":"):
         f.write("%s\n" % path)
     f.close()

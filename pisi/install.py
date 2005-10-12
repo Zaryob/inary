@@ -33,6 +33,7 @@ import pisi.context as ctx
 import pisi.packagedb as packagedb
 import pisi.dependency as dependency
 import pisi.operations as operations
+import pisi.util as util
 from pisi.specfile import *
 from pisi.package import Package
 from pisi.metadata import MetaData
