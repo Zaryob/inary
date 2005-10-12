@@ -22,7 +22,7 @@ import pisi.lockeddbshelve as shelve
 
 class FileInfo:
     """FileInfo holds the information for a File node/tag in files.xml"""
-    def __init__(self, _path = "", _type = "", _size = "", _hash = ""):
+    def __init__(self, _path = "", _type = "", _size = "", _hash = None):
         self.path = _path
         self.type = _type
         self.size = _size
@@ -38,7 +38,11 @@ class FileInfo:
         self.path = getNodeText(getNode(node, "Path"))
         self.type = getNodeText(getNode(node, "Type"))
         self.size = getNodeText(getNode(node, "Size"))
-        self.hash = getNodeText(getNode(node, "SHA1Sum"))
+        hashnode = getNode(node, "SHA1Sum")
+        if hashnode:
+            self.hash = getNodeText(hashnode)
+        else:
+            self.hash = None
 
     def elt(self, dom):
         ## FIXME: looking for a better way to do it
@@ -46,16 +50,17 @@ class FileInfo:
         elt = dom.createElement("File")
         pathElt = dom.createElement("Path")
         pathElt.appendChild(dom.createTextNode(self.path))
+        elt.appendChild(pathElt)
         typeElt = dom.createElement("Type")
         typeElt.appendChild(dom.createTextNode(self.type))
+        elt.appendChild(typeElt)
         sizeElt = dom.createElement("Size")
         sizeElt.appendChild(dom.createTextNode(self.size))
-        hashElt = dom.createElement("SHA1Sum")
-        hashElt.appendChild(dom.createTextNode(self.hash))
-        elt.appendChild(pathElt)
-        elt.appendChild(typeElt)
         elt.appendChild(sizeElt)
-        elt.appendChild(hashElt)
+        if self.hash:
+            hashElt = dom.createElement("SHA1Sum")
+            hashElt.appendChild(dom.createTextNode(self.hash))
+            elt.appendChild(hashElt)
         return elt
 
     def has_errors(self):
@@ -63,7 +68,7 @@ class FileInfo:
         err.has_tag(self.path, "File", "Path")
         err.has_tag(self.type, "File", "Type")
         err.has_tag(self.size, "File", "Size")
-        err.has_tag(self.hash, "File", "SHA1Sum")
+        #err.has_tag(self.hash, "File", "SHA1Sum")
         return err.list
         
     def __str__(self):
