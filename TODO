@@ -87,8 +87,6 @@ Legend:
      - internet: http/ftp
      - local repository: file://
      - removable media: media://
- - partial caching and automatic resume for file download (meren)
-   - use a '.part' extension
  - a helper script for finding dependencies
  
  * low priority 
@@ -113,38 +111,41 @@ Legend:
  
  * finished tasks
 
- + search-file command
- + exception handling
-   + uniform exception hierarchy (eray)
+ + partial caching and automatic resume for file download (meren)
+   + use a '.part' extension
+ + search-file command (eray)
+ + exception handling (eray)
+   + uniform exception hierarchy
    + proper handling
  + API: we even have application users (eray)
    + a facade module pisi.api  (eray)
    + a library init command (eray)
    + high-level package ops, index (eray)
-   + info/util commands
+   + info/util commands (eray)
    + build commands (baris)
  + documentation
    + actionsAPI documentation, unittests (caglar - meren)
-   + versioning information document
+   + versioning information document (eray - baris)
  + UI
    + PISIMAT
    + pykde GUI (cartman)
-   + improve interface
+   + improve interface (eray)
     + refactor UI, reintroduce base class
     + add an ack interface, start cleaning up a bit
-   + cli
-    + ask alternatives to choose from (eray)
+   + cli (eray)
+    + ask alternatives to choose from
    + eliminate \n's from infos, what's the point?
    + metaclass coolness for CLI command framework (eray)
  + i18n support
-   + translations and correct language for summary, description
-   + make pisi messages translatable
-   + .pot support for dist script
-   + translate messages mesajların çevirisinin yapılması (pisi tr.po)
+   + translations and correct language for summary, description (packagers)
+   + make pisi messages translatable (eray)
+   + .pot support for dist script (gurer)
+   + translate messages mesajların çevirisinin yapılması (pisi tr.po) (eray)
+   + proper unicode handling in code - tons of fixes (eray)
  + configure-pending (eray)
- + ignore-deps
- + more robust upgrade
- + query
+ + ignore-deps (eray)
+ + more robust upgrade (eray)
+ + query (eray)
    + comar OM information (Provides)
    + find package by name, display summary/description
    + info --files option (like rpm -ql, but better of course)
