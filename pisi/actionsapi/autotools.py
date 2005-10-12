@@ -88,7 +88,7 @@ def rawConfigure(parameters = ''):
  
 def compile(parameters = ''):
     #FIXME: Only one package uses this until now, hmmm
-    system('%s %s %s' % (get.GCC(), get.CFLAGS(), parameters))
+    system('%s %s %s' % (get.CC(), get.CFLAGS(), parameters))
 
 def make(parameters = ''):
     '''make source with given parameters = "all" || "doc" etc.'''
