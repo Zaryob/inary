@@ -75,7 +75,7 @@ Legend:
 
  * medium priority
  
- / components (eray)
+ / components and distribution (eray)
    + requirements
    / xml format
    - query components: list of components/packages in a component
@@ -87,11 +87,11 @@ Legend:
      - internet: http/ftp
      - local repository: file://
      - removable media: media://
- - a helper script for finding dependencies
+ - a helper script for finding dependencies (eray)
  
  * low priority 
  
- - search command: 
+ - search command: (eray)
     - implement an inverted index (if there's a good one, just use it)
     - search in either summary, or description
     - english stemming
@@ -141,8 +141,9 @@ Legend:
    + make pisi messages translatable (eray)
    + .pot support for dist script (gurer)
    + translate messages mesajların çevirisinin yapılması (pisi tr.po) (eray)
-   + proper unicode handling in code - tons of fixes (eray)
+   + proper unicode handling in code - tons of fixes (eray - baris)
  + configure-pending (eray)
+ + proper commar connection (baris - gurer)
  + ignore-deps (eray)
  + more robust upgrade (eray)
  + query (eray)
