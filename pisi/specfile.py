@@ -165,7 +165,7 @@ class UpdateInfo:
 
     def __str__(self):
         return "%s, ver=%s, rel=%s, type=%s" % (
-            self.data, self.version, self.release, self.type)
+            self.date, self.version, self.release, self.type)
 
 class PathInfo:
     def __init__(self, node = None):

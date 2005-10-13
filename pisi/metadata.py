@@ -58,7 +58,7 @@ class PackageInfo(specfile.PackageInfo):
         if node:
             specfile.PackageInfo.__init__(self, node)
             self.version = getNodeText(node, "History/Update/Version")
-            self.release = getNodeText(node, "History/Update/Release")
+            self.release = getNodeAttribute(getNode(node, "History/Update"), "release")
             #FIXME: Support Build No under History/Update/Build
             build_ = getNodeText(node, "Build")
             if build_ != None:
