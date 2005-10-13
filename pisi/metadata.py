@@ -122,7 +122,8 @@ class MetaData(XmlFile):
         self.package.license = pkg.license
         self.package.runtimeDeps = pkg.runtimeDeps
         self.package.paths = pkg.paths
-        self.package.history = src.history # FIXME
+        # FIXME: no need to copy full history with comments
+        self.package.history = src.history
         self.package.conflicts = pkg.conflicts
         self.package.providesComar = pkg.providesComar
         self.package.requiresComar = pkg.requiresComar

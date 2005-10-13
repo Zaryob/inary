@@ -540,7 +540,9 @@ if errors:
     printu("***")
 
 if len(sys.argv) > 2:
-    if sys.argv[2] == "packager":
+    if sys.argv[2] == "check":
+        sys.exit(0)
+    elif sys.argv[2] == "packager":
         if len(sys.argv) > 3:
             packagers[unicode(sys.argv[3].decode('utf-8'))].report()
             sys.exit(0)

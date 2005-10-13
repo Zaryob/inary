@@ -135,35 +135,37 @@ class PatchInfo:
 class UpdateInfo:
     def __init__(self, node = None):
         if node:
+            self.release = getNodeAttribute(node, "release")
+            self.type = getNodeAttribute(node, "type")
             self.date = getNodeText(getNode(node, "Date"))
             self.version = getNodeText(getNode(node, "Version"))
-            self.release = getNodeText(getNode(node, "Release"))
-            self.type = getNodeText(getNode(node, "Type"))
+            self.comment = getNodeText(getNode(node, "Comment"))
+            self.name = getNodeText(getNode(node, "Name"))
+            self.email = getNodeText(getNode(node, "Email"))
         else:
             self.type = None
 
     def elt(self, xml):
         node = xml.newNode("Update")
+        node.setAttribute("release", self.release)
         xml.addTextNodeUnder(node, "Date", self.date)
         xml.addTextNodeUnder(node, "Version", self.version)
-        xml.addTextNodeUnder(node, "Release", self.release)
+        xml.addTextNodeUnder(node, "Comment", self.comment)
+        xml.addTextNodeUnder(node, "Name", self.name)
+        xml.addTextNodeUnder(node, "Email", self.email)
         if self.type:
-                xml.addTextNodeUnder(node, "Type", self.type)
+                node.setAttribute("type", self.type)
         return node
 
     def has_errors(self):
         err = Checks()
         err.has_tag(self.date, "Update", "Date")
         err.has_tag(self.version, "Update", "Version")
-        err.has_tag(self.release, "Update", "Release")
         return err.list
 
     def __str__(self):
-        s = self.date
-        s += ", ver=" + self.version
-        s += ", rel=" + self.release
-        s += ", type=" + self.type
-        return s
+        return "%s, ver=%s, rel=%s, type=%s" % (
+            self.data, self.version, self.release, self.type)
 
 class PathInfo:
     def __init__(self, node = None):
@@ -236,8 +238,6 @@ class SourceInfo:
             buildDepElts = getAllNodes(node,
                                        "BuildDependencies/Dependency")
             self.buildDeps = [DepInfo(d) for d in buildDepElts]
-            historyElts = getAllNodes(node, "History/Update")
-            self.history = [UpdateInfo(x) for x in historyElts]
         
     def elt(self, xml):
         node = xml.newNode("Source")
@@ -276,12 +276,8 @@ class SourceInfo:
             err.add(_("Source archive URI and type should be given"))
         if not self.archiveSHA1:
             errd.add(_("Source archive should have a SHA1 sum"))
-        if len(self.history) <= 0:
-            err.add(_("Source needs some education in History :)"))
         
         err.join(self.packager.has_errors())
-        for update in self.history:
-            err.join(update.has_errors())
         for patch in self.patches:
             err.join(patch.has_errors())
         for dep in self.buildDeps:
@@ -334,6 +330,7 @@ class PackageInfo:
             xml.addNodeUnder(node, "RuntimeDependencies", dep.elt(xml))
         for path in self.paths:
             xml.addNodeUnder(node, "Files", path.elt(xml))
+        # FIXME: no need to put full history with comments in metafile.xml
         for update in self.history:
             xml.addNodeUnder(node, "History", update.elt(xml))
         for conflict in self.conflicts:
@@ -395,11 +392,14 @@ class SpecFile(XmlFile):
 
         self.source = SourceInfo(self.getNode("Source"))
 
+        historyElts = getAllNodes(self.getNode("History"), "Update")
+        self.history = [UpdateInfo(x) for x in historyElts]
+        
         # As we have no Source/Version tag we need to get 
         # the last version and release information
         # from the first child of History/Update. And it works :)
-        self.source.version = self.source.history[0].version
-        self.source.release = self.source.history[0].release
+        self.source.version = self.history[0].version
+        self.source.release = self.history[0].release
 
         # find all binary packages
         packageElts = self.getAllNodes("Package")
@@ -408,8 +408,15 @@ class SpecFile(XmlFile):
         self.merge_tags()
         self.override_tags()
 
+        #FIXME: copy only needed information
+        # no need to keep full history with comments in metadata.xml
+        self.source.history = self.history
+        for p in self.packages:
+            p.history = self.history
+
         self.unlink()
 
+ 
         errs = self.has_errors()
         if errs:
             e = ""
@@ -471,6 +478,10 @@ class SpecFile(XmlFile):
             errs.add(_("There should be at least one Package section"))
         for p in self.packages:
             err.join(p.has_errors())
+        if len(self.history) <= 0:
+            err.add(_("Source needs some education in History :)"))
+        for update in self.history:
+            err.join(update.has_errors())
         return err.list
     
     def write(self, filename):
