@@ -49,7 +49,10 @@ def curPYTHON():
 
 def ENV(environ):
     '''returns any given environ variable'''
-    return os.environ[environ];
+    try:
+        return os.environ[environ];
+    except KeyError:
+        return None
 
 # PİSİ Related Functions
 
