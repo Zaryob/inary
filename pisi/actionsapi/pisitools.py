@@ -215,7 +215,6 @@ def insinto(destinationDirectory, sourceFile,  destinationFile = ''):
 def newdoc(sourceFile, destinationFile):
     '''inserts a sourceFile into /usr/share/doc/PACKAGE/ directory as a destinationFile'''
     destinationDirectory = '' #490
-    import os.path
     destinationDirectory = os.path.dirname(destinationFile)
     destinationFile = os.path.basename(destinationFile)
     move(sourceFile, destinationFile)
