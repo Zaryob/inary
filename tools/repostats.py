@@ -12,6 +12,7 @@
 import sys
 import os
 import codecs
+import re
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -51,7 +52,7 @@ Depoda toplam %(nr_source)d kaynak paket, ve bu paketlerden oluşturulacak
 %(longpy)s
 </tbody></table></p>
 
-<h3>Eksik paketler</h3><p><table><tbody>
+<h3>Eksik ikili paketler</h3><p><table><tbody>
 %(missing)s
 </tbody></table></p>
 
@@ -112,6 +113,9 @@ def_source_html = u"""
 
 <h3>Lisanslar:</h3>
 <p>%(license)s</p>
+
+<p><a href="http://bugs.uludag.org.tr/buglist.cgi?query_format=advanced&short_desc_type=allwordssubstr&short_desc=&product=Paketler&component=%(name)s&long_desc_type=substring&long_desc=&bug_file_loc_type=allwordssubstr&bug_file_loc=&keywords_type=allwords&keywords=&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&emailassigned_to1=1&emailtype1=substring&email1=&emailassigned_to2=1&emailreporter2=1&emailcc2=1&emailtype2=substring&email2=&bugidtype=include&bug_id=&votes=&chfieldfrom=&chfieldto=Now&chfieldvalue=&cmdtype=doit&order=Reuse+same+sort+as+last+time&field0-0-0=noop&type0-0-0=noop&value0-0-0=">
+Hata kayıtlarına bak</a></p>
 
 <h3>Bu kaynaktan derlenen ikili paketler:</h3>
 <p>%(packages)s</p>
@@ -189,6 +193,9 @@ def template_table(tmpl_name, list):
     for item in list:
         data += (tmpl % item)
     return data
+
+def mangle_email(email):
+    return re.sub("@", " [at] ", email)
 
 
 class Histogram:
@@ -409,7 +416,7 @@ class Packager:
         srcs = map(lambda x: "<a href='source-%s.html'>%s</a>" % (x, x), self.sources)
         dict = {
             "name": self.name,
-            "email": self.email,
+            "email": mangle_email(self.email),
             "sources": ", ".join(srcs)
         }
         template_write("paksite/%s.html" % self.name, "packager", dict)
@@ -496,26 +503,26 @@ class Repository:
     
     def report_html(self):
         miss = map(lambda x: "<tr><td><a href='./package-%s.html'>%s</a></td></tr>" % (x, x), missing.keys())
-        upeople = {}
+        upeople = []
         for p in self.people.get_list():
-            upeople["<a href='./%s.html'>%s</a>" % (p[0], p[0])] = p[1]
+            upeople.append(("<a href='./%s.html'>%s</a>" % (p[0], p[0]), p[1]))
         if errors:
             e = "<br>".join(errors)
         else:
             e = ""
-        upatch = {}
+        upatch = []
         for p in self.mostpatched.get_list(5):
-            upatch["<a href='./source-%s.html'>%s</a>" % (p[0], p[0])] = p[1]
-        ulongpy = {}
+            upatch.append(("<a href='./source-%s.html'>%s</a>" % (p[0], p[0]), p[1]))
+        ulongpy = []
         for p in self.longpy.get_list(5):
-            ulongpy["<a href='./source-%s.html'>%s</a>" % (p[0], p[0])] = p[1]
+            ulongpy.append(("<a href='./source-%s.html'>%s</a>" % (p[0], p[0]), p[1]))
         dict = {
             "nr_source": self.nr_sources,
             "nr_packages": self.nr_packages,
             "nr_patches": self.nr_patches,
-            "most_patched": template_table("table", upatch.items()),
-            "longpy": template_table("table", ulongpy.items()),
-            "packagers": template_table("table", upeople.items()),
+            "most_patched": template_table("table", upatch),
+            "longpy": template_table("table", ulongpy),
+            "packagers": template_table("table", upeople),
             "missing": "\n".join(miss),
             "errors": e
         }
