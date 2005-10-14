@@ -45,7 +45,7 @@ def curKERNEL():
 
 def curPYTHON():
     ''' returns currently used python's version'''
-    return os.readlink("/usr/bin/python")
+    return os.path.basename(os.readlink("/usr/bin/python"))
 
 def ENV(environ):
     '''returns any given environ variable'''
