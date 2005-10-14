@@ -41,13 +41,6 @@ PSPEC_TEMPLATE='''<?xml version="1.0" encoding="utf-8" standalone="no"?>
         <BuildDependencies>
 %(buildDep)s
         </BuildDependencies>
-        <History>
-            <Update>
-                <Date>%(updateDate)s</Date>
-                <Version>%(updateVersion)s</Version>
-                <Release>%(updateRelease)s</Release>
-            </Update>
-        </History>
     </Source>
 
     <Package>
@@ -59,8 +52,17 @@ PSPEC_TEMPLATE='''<?xml version="1.0" encoding="utf-8" standalone="no"?>
 FILES
             <Path fileType=""></Path>
         </Files>
-  </Package>
+    </Package>
 
+    <History>
+        <Update release="1">
+            <Date>%(updateDate)s</Date>
+            <Version>%(updateVersion)s</Version>
+            <Comment>First release.</Comment>
+            <Name>PACKAGER</Name>
+            <Email>PACKAGER_EMAIL</Email>
+        </Update>
+    </History>
 </PISI>
 '''
 
