@@ -217,12 +217,14 @@ def newdoc(sourceFile, destinationFile):
     destinationDirectory = '' #490
     destinationDirectory = os.path.dirname(destinationFile)
     destinationFile = os.path.basename(destinationFile)
-    move(sourceFile, destinationFile)
+    # Use copy instead of move or let build-install scream like file not found!
+    copy(sourceFile, destinationFile)
     readable_insinto(join_path(get.installDIR(), 'usr/share/doc', get.srcTAG(), destinationDirectory), destinationFile)
 
 def newman(sourceFile, destinationFile):
     '''inserts a sourceFile into /usr/share/man/manPREFIX/ directory as a destinationFile'''
-    move(sourceFile, destinationFile)
+    # Use copy instead of move or let build-install scream like file not found!
+    copy(sourceFile, destinationFile)
     doman(destinationFile)
 
 def remove(sourceFile):
