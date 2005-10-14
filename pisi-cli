@@ -38,7 +38,7 @@ def handle_exception(exception, value, tb):
         sys.exit(1)
     elif isinstance(value, pisi.Error):
         ui.error(_("Fatal Error. Program Terminated."))
-        show_traceback = ctx.config and ctx.config.options.debug
+        show_traceback = ctx.get_option('debug')
     elif isinstance(value, pisi.Exception):
         show_traceback = True
         ui.error(_("""
@@ -47,7 +47,7 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
     else:
         # For any other exception (possibly Python exceptions) show
         # the traceback!
-        show_traceback = ctx.config and ctx.config.options.debug
+        show_traceback = ctx.get_option('debug')
         ui.error(_("System Error. Program Terminated."))
 
     ui.error("%s: %s\n" % (exception, value))
