@@ -23,6 +23,9 @@ const = pisi.constants.Constants()
 
 config = None
 
+def get_option(opt):
+    return config and config.get_option(opt)
+
 # default UI is CLI
 ui = None # not now
 

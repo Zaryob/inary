@@ -36,18 +36,21 @@ class Exception(pisi.Exception):
     pass
 
 
-def printu(obj):
+def printu(obj, err = False):
     if not isinstance(obj, unicode):
         obj = unicode(obj)
-    print obj.encode('utf-8')
-
+    if err:
+        out = sys.stderr
+    else:
+        out = sys.stdout
+    out.write(obj.encode('utf-8'))
+    out.flush()
 
 class CLI(UI):
     "Command Line Interface"
 
     def __init__(self, show_debug = False, show_verbose = False):
         super(CLI, self).__init__(show_debug, show_verbose)
-        locale.setlocale(locale.LC_ALL, '')
 
     def output(self, msg, err = False):
         if type(msg)==type(unicode()):
@@ -72,13 +75,13 @@ class CLI(UI):
             self.output(msg + msgend)
 
     def warning(self,msg):
-        if ctx.config.get_option('no_color'):
+        if ctx.get_option('no_color'):
             self.output(_('Warning: ') + msg + '\n', err=True)
         else:
             self.output(colorize(msg + '\n', 'purple'), err=True)
 
     def error(self,msg):
-        if ctx.config.get_option('no_color'):
+        if ctx.get_option('no_color'):
             self.output(_('Error: ') + msg + '\n', err=True)
         else:
             self.output(colorize(msg + '\n', 'red'), err=True)

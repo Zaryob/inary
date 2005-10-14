@@ -12,8 +12,9 @@
 
 
 import sys
-import gettext
+import locale
 
+import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
@@ -30,14 +31,14 @@ def handle_exception(exception, value, tb):
     ui = pisi.cli.CLI() # make a temporary UI
     show_traceback = False
     if exception == exceptions.KeyboardInterrupt:
-        ui.error(_("KeyboardInterrupt: Exiting...\n"))
+        ui.error(_("Keyboard Interrupt: Exiting..."))
         sys.exit(1)
     elif exception == XmlError:
         ui.error(unicode(value))
         sys.exit(1)
     elif isinstance(value, pisi.Error):
         ui.error(_("Fatal Error. Program Terminated."))
-        show_traceback = ctx.config.get_option('debug')
+        show_traceback = ctx.config and ctx.config.options.debug
     elif isinstance(value, pisi.Exception):
         show_traceback = True
         ui.error(_("""
@@ -46,7 +47,7 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
     else:
         # For any other exception (possibly Python exceptions) show
         # the traceback!
-        show_traceback = ctx.config.get_option('debug')
+        show_traceback = ctx.config and ctx.config.options.debug
         ui.error(_("System Error. Program Terminated."))
 
     ui.error("%s: %s\n" % (exception, value))
@@ -63,5 +64,6 @@ if __name__ == "__main__":
    
     sys.excepthook = handle_exception
 
+    locale.setlocale(locale.LC_ALL, '')
     cli = PisiCLI()
     cli.run_command()
