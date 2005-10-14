@@ -43,6 +43,10 @@ def curKERNEL():
     versionString = file("/proc/version").readline()
     return versionString.split()[2]
 
+def curPYTHON():
+    ''' returns currently used python's version'''
+    return os.readlink("/usr/bin/python")
+
 def ENV(environ):
     '''returns any given environ variable'''
     return os.environ[environ];
