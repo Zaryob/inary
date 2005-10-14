@@ -30,13 +30,13 @@ def handle_exception(exception, value, tb):
     ui = pisi.cli.CLI() # make a temporary UI
     show_traceback = False
     if exception == exceptions.KeyboardInterrupt:
-        ui.error(_("\nKeyboardInterrupt: Exiting...\n"))
+        ui.error(_("KeyboardInterrupt: Exiting...\n"))
         sys.exit(1)
     elif exception == XmlError:
         ui.error(unicode(value))
         sys.exit(1)
     elif isinstance(value, pisi.Error):
-        ui.error(_("\nFatal Error. Program Terminated."))
+        ui.error(_("Fatal Error. Program Terminated."))
         show_traceback = ctx.config.get_option('debug')
     elif isinstance(value, pisi.Exception):
         show_traceback = True
@@ -47,7 +47,7 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
         # For any other exception (possibly Python exceptions) show
         # the traceback!
         show_traceback = ctx.config.get_option('debug')
-        ui.error(_("\nSystem Error. Program Terminated."))
+        ui.error(_("System Error. Program Terminated."))
 
     ui.error("%s: %s\n" % (exception, value))
 

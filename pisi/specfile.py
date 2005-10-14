@@ -150,11 +150,14 @@ class UpdateInfo:
         node.setAttribute("release", self.release)
         xml.addTextNodeUnder(node, "Date", self.date)
         xml.addTextNodeUnder(node, "Version", self.version)
-        xml.addTextNodeUnder(node, "Comment", self.comment)
-        xml.addTextNodeUnder(node, "Name", self.name)
-        xml.addTextNodeUnder(node, "Email", self.email)
+        if self.comment:
+            xml.addTextNodeUnder(node, "Comment", self.comment)
+        if self.name:
+            xml.addTextNodeUnder(node, "Name", self.name)
+        if self.email:
+            xml.addTextNodeUnder(node, "Email", self.email)
         if self.type:
-                node.setAttribute("type", self.type)
+            node.setAttribute("type", self.type)
         return node
 
     def has_errors(self):

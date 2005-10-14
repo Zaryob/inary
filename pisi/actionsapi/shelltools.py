@@ -44,7 +44,7 @@ def makedirs(destinationDirectory):
         if not os.access(destinationDirectory, os.F_OK):
             os.makedirs(destinationDirectory)
     except OSError:
-        error(_('Cannot create directory %s' % destinationDirectory))
+        error(_('Cannot create directory %s') % destinationDirectory)
 
 def echo(destionationFile, content):
     try:
@@ -61,10 +61,10 @@ def chmod(sourceFile, mode = 0755):
             try:
                 os.chmod(file, mode)
             except OSError:
-                ctx.ui.error(_(' ActionsAPI [chmod]: Operation not permitted: %s (mode: %s)') \
+                ctx.ui.error(_('ActionsAPI [chmod]: Operation not permitted: %s (mode: %s)') \
                                                                 % (file, mode))
         else:
-            ctx.ui.error(_(' ActionsAPI [chmod]: File %s doesn\'t exists.') % (file))
+            ctx.ui.error(_('ActionsAPI [chmod]: File %s doesn\'t exists.') % (file))
 
 def chown(sourceFile, uid = "root", gid = "root"):
     '''change the owner and group id of sourceFile to uid and gid'''
@@ -72,17 +72,17 @@ def chown(sourceFile, uid = "root", gid = "root"):
         try:
             os.chown(sourceFile, pwd.getpwnam(uid)[2], grp.getgrnam(gid)[2])
         except OSError:
-            ctx.ui.error(_(' ActionsAPI [chown]: Operation not permitted: %s (uid: %s, gid: %s)') \
+            ctx.ui.error(_('ActionsAPI [chown]: Operation not permitted: %s (uid: %s, gid: %s)') \
                                                  % (sourceFile, uid, gid))
     else:
-        ctx.ui.error(_(' ActionsAPI [chown]: File %s doesn\'t exists.') % sourceFile)
+        ctx.ui.error(_('ActionsAPI [chown]: File %s doesn\'t exists.') % sourceFile)
 
 def sym(sourceFile, destinationFile):
     '''creates symbolic link'''
     try:
         os.symlink(sourceFile, destinationFile)
     except OSError:
-        ctx.ui.error(_(' ActionsAPI [sym]: Permission denied: %s to %s') % (file, destinationFile))
+        ctx.ui.error(_('ActionsAPI [sym]: Permission denied: %s to %s') % (file, destinationFile))
 
 def unlink(sourceFile):
     '''remove the file path'''
@@ -90,11 +90,11 @@ def unlink(sourceFile):
         try:
             os.unlink(sourceFile)
         except OSError:
-            ctx.ui.error(_(' ActionsAPI [unlink]: Permission denied: %s.') % (sourceFile))
+            ctx.ui.error(_('ActionsAPI [unlink]: Permission denied: %s.') % (sourceFile))
     elif isDirectory(sourceFile):
         pass
     else:
-        ctx.ui.error(_(' ActionsAPI [unlink]: File %s doesn\'t exists.') % (sourceFile))
+        ctx.ui.error(_('ActionsAPI [unlink]: File %s doesn\'t exists.') % (sourceFile))
 
 def unlinkDir(sourceDirectory):
     '''delete an entire directory tree'''
@@ -102,11 +102,11 @@ def unlinkDir(sourceDirectory):
         try:
             shutil.rmtree(sourceDirectory)
         except OSError:
-            error(_(' ActionsAPI [unlinkDir]: Operation not permitted: %s') % (sourceDirectory))
+            error(_('ActionsAPI [unlinkDir]: Operation not permitted: %s') % (sourceDirectory))
     elif isFile(sourceDirectory):
         pass                                
     else:
-        error(_(' ActionsAPI [unlinkDir]: Directory %s doesn\'t exists.') % (sourceDirectory))
+        error(_('ActionsAPI [unlinkDir]: Directory %s doesn\'t exists.') % (sourceDirectory))
 
 def move(sourceFile, destinationFile):
     '''recursively move a sourceFile or directory to destinationFile'''
@@ -115,9 +115,9 @@ def move(sourceFile, destinationFile):
             try:
                 shutil.move(file, destinationFile)
             except OSError:
-                error(_(' ActionsAPI [move]: Permission denied: %s to %s') % (file, destinationFile))
+                error(_('ActionsAPI [move]: Permission denied: %s to %s') % (file, destinationFile))
         else:
-            error(_(' ActionsAPI [move]: File %s doesn\'t exists.') % (file))
+            error(_('ActionsAPI [move]: File %s doesn\'t exists.') % (file))
 
 def copy(sourceFile, destinationFile):
     '''recursively copy a sourceFile or directory to destinationFile'''
@@ -138,9 +138,9 @@ def copytree(source, destination, sym = False):
         try:
             shutil.copytree(source, destination, sym)
         except OSError:
-            error(_(' ActionsAPI [copytree]: Permission denied: %s to %s') % (source, destination))
+            error(_('ActionsAPI [copytree]: Permission denied: %s to %s') % (source, destination))
     else:
-        error(_(' ActionsAPI [copytree]: Directory %s doesn\'t exists.') % (source))
+        error(_('ActionsAPI [copytree]: Directory %s doesn\'t exists.') % (source))
 
 def touch(sourceFile):
     '''changes the access time of the 'sourceFile', or creates it if it is not exist'''
@@ -152,7 +152,7 @@ def touch(sourceFile):
             f = open(sourceFile, 'w')
             f.close()
         except IOError:
-            error(_(' ActionsAPI [touch]: Permission denied: %s') % (sourceFile))
+            error(_('ActionsAPI [touch]: Permission denied: %s') % (sourceFile))
 
 def cd(directoryName = ''):
     '''change directory'''
