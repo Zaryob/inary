@@ -295,24 +295,24 @@ class Package:
     
     def report(self):
         source = self.source.spec.source
-        printu(_("Binary package: %s") % self.name)
-        printu(_("  Version %s release %s") % (source.version, source.release))
-        printu(_("  Packager: %s <%s>") % (
+        printu(_("Binary package: %s\n") % self.name)
+        printu(_("  Version %s release %s\n") % (source.version, source.release))
+        printu(_("  Packager: %s <%s>\n") % (
             source.packager.name, source.packager.email))
-        printu(_("  Build dependencies:"))
+        printu(_("  Build dependencies:\n"))
         for d in source.buildDeps:
-            printu("    %s" % d.package)
-        printu(_("  Runtime dependencies:"))
+            printu("    %s\n" % d.package)
+        printu(_("  Runtime dependencies:\n"))
         for d in self.pakspec.runtimeDeps:
-            printu("    %s" % d.package)
+            printu("    %s\n" % d.package)
         if self.revBuildDeps:
-            printu(_("  Reverse build dependencies:"))
+            printu(_("  Reverse build dependencies:\n"))
             for d in self.revBuildDeps:
-                printu("    %s" % d)
+                printu("    %s\n" % d)
         if self.revRuntimeDeps:
-            printu(_("  Reverse runtime dependencies:"))
+            printu(_("  Reverse runtime dependencies:\n"))
             for d in self.revRuntimeDeps:
-                printu("    %s" % d)
+                printu("    %s\n" % d)
     
     def report_html(self):
         source = self.source.spec.source
@@ -403,14 +403,14 @@ class Packager:
             self.errors = []
     
     def report(self):
-        printu(_("Packager: %s <%s>") % (self.name, self.email))
+        printu(_("Packager: %s <%s>\n") % (self.name, self.email))
         if self.errors:
-            printu(_("  Errors:"))
+            printu(_("  Errors:\n"))
             for e in self.errors:
-                printu("    %s" % e)
-        printu(_("  Source packages (%d):") % len(self.sources))
+                printu("    %s\n" % e)
+        printu(_("  Source packages (%d):\n") % len(self.sources))
         for s in self.sources:
-            printu("    %s" % s)
+            printu("    %s\n" % s)
     
     def report_html(self):
         srcs = map(lambda x: "<a href='source-%s.html'>%s</a>" % (x, x), self.sources)
@@ -471,35 +471,35 @@ class Repository:
             p.markDeps()
     
     def report(self):
-        printu(_("Repository Statistics:"))
+        printu(_("Repository Statistics:\n"))
         # general stats
-        printu(_("  Total of %d source packages, and %d binary packages.") % (
+        printu(_("  Total of %d source packages, and %d binary packages.\n") % (
             self.nr_sources, self.nr_packages))
-        printu(_("  There are %d patches applied.") % self.nr_patches)
+        printu(_("  There are %d patches applied.\n") % self.nr_patches)
         # problems
         if missing:
-            printu(_("  Missing packages (%d):") % len(missing))
+            printu(_("  Missing packages (%d):\n") % len(missing))
             for m in missing.values():
-                printu("    %s" % m.name)
+                printu("    %s\n" % m.name)
         # trivia
-        printu(_("  Top five most patched source:"))
+        printu(_("  Top five most patched source:\n"))
         for p in self.mostpatched.get_list(5):
-            printu("   %4d %s" % (p[1], p[0]))
-        printu(_("  Top five longest action.py scripts:"))
+            printu("   %4d %s\n" % (p[1], p[0]))
+        printu(_("  Top five longest action.py scripts:\n"))
         for p in self.longpy.get_list(5):
-            printu("   %4d %s" % (p[1], p[0]))
+            printu("   %4d %s\n" % (p[1], p[0]))
         # lists
-        printu(_("  COMAR scripts:"))
+        printu(_("  COMAR scripts:\n"))
         for cs in self.cscripts.get_list():
-            printu("   %4d %s" % (cs[1], cs[0]))
+            printu("   %4d %s\n" % (cs[1], cs[0]))
         people = self.people.get_list()
-        printu(_("  Packagers (%d):") % len(people))
+        printu(_("  Packagers (%d):\n") % len(people))
         for p in people:
-            printu("   %4d %s" % (p[1], p[0]))
+            printu("   %4d %s\n" % (p[1], p[0]))
         licenses = self.licenses.get_list()
-        printu(_("   Licenses (%d):") % len(licenses))
+        printu(_("   Licenses (%d):\n") % len(licenses))
         for p in licenses:
-            printu("   %4d %s" % (p[1], p[0]))
+            printu("   %4d %s\n" % (p[1], p[0]))
     
     def report_html(self):
         miss = map(lambda x: "<tr><td><a href='./package-%s.html'>%s</a></td></tr>" % (x, x), missing.keys())
@@ -532,19 +532,20 @@ class Repository:
 # command line driver
 
 if len(sys.argv) < 2:
-    printu(_("Usage: repostats.py source-repo-path [ command [arg] ]"))
+    printu(_("Usage: repostats.py source-repo-path [ command [arg] ]\n"))
     sys.exit(0)
 
 repo = Repository(sys.argv[1])
-printu(_("Scanning source repository..."))
+printu(_("Scanning source repository...\n"))
 repo.scan()
 
 if errors:
-    printu("***")
-    printu(_("Encountered %d errors! Fix them immediately!") % len(errors))
+    printu("***\n")
+    printu(_("Encountered %d errors! Fix them immediately!\n") % len(errors))
     for e in errors:
         printu(e)
-    printu("***")
+	printu("\n")
+    printu("***\n")
 
 if len(sys.argv) > 2:
     if sys.argv[2] == "check":
@@ -555,14 +556,14 @@ if len(sys.argv) > 2:
             sys.exit(0)
         else:
             for p in packagers.values():
-                printu(_("%s <%s>, %s source package") % (p.name, p.email, len(p.sources)))
+                printu(_("%s <%s>, %s source package\n") % (p.name, p.email, len(p.sources)))
             sys.exit(0)
     elif sys.argv[2] == "package":
         if len(sys.argv) > 3:
             packages[unicode(sys.argv[3].decode('utf-8'))].report()
             sys.exit(0)
         else:
-            printu(_("Which package?"))
+            printu(_("Which package?\n"))
             sys.exit(0)
     elif sys.argv[2] == "html":
         try:
