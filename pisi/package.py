@@ -27,6 +27,7 @@ import pisi.archive as archive
 from pisi.uri import URI
 from pisi.metadata import MetaData
 from pisi.files import Files
+import pisi.util as util
 
 class Error(pisi.Error):
     pass
@@ -99,7 +100,9 @@ class Package:
 
         self.metadata = MetaData()
         self.metadata.read( join(outdir, ctx.const.metadata_xml) )
-        if self.metadata.has_errors():
+        errs = self.metadata.has_errors()
+        if errs:
+            util.Checks.print_errors(errs)
             raise Error, _("MetaData format wrong")
 
         self.files = Files()

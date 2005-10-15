@@ -49,7 +49,7 @@ class SourceInfo:
     def has_errors(self):
         if not self.name:
             return [ _("SourceInfo should have a Name") ]
-        return None
+        return []
 
 
 class PackageInfo(specfile.PackageInfo):
@@ -88,13 +88,15 @@ class PackageInfo(specfile.PackageInfo):
     def has_errors(self):
         # FIXME: there should be real error msgs
         # and comment the logic here please, it isn't very clear -gurer
-        ret = (specfile.PackageInfo.has_errors(self) == None)
-        ret = ret and self.distribution!=None
-        ret = ret and self.distributionRelease!=None
-        ret = ret and self.architecture!=None and self.installedSize!=None
-        if ret:
-            return None
-        return [ _("Some error in package metadata") ]
+        err = Checks()
+        err.join(specfile.PackageInfo.has_errors(self))
+        err.has_tag(self.version, 'Package', 'Version')
+        err.has_tag(self.release, 'Package', 'Release')
+        err.has_tag(self.distribution, 'Package', 'Distribution')
+        err.has_tag(self.distributionRelease, 'Package', 'DistributionRelease')
+        err.has_tag(self.architecture, 'Package', 'Architecture')
+        err.has_tag(self.installedSize, 'Package', 'InstalledSize')
+        return err.list
 
     def __str__(self):
         s = specfile.PackageInfo.__str__(self)

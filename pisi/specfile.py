@@ -123,7 +123,7 @@ class PatchInfo:
     def has_errors(self):
         if not self.filename:
             return [ _("Patch should have a filename string") ]
-        return None
+        return []
 
     def __str__(self):
         s = self.filename
@@ -187,7 +187,7 @@ class PathInfo:
     def has_errors(self):
         if not self.pathname:
             return [ _("Path tag should have a name string") ]
-        return None
+        return []
 
     def __str__(self):
         s = self.pathname
@@ -209,7 +209,7 @@ class ComarProvide:
     def has_errors(self):
         if not self.om or not self.script:
             return [ _("COMAR provide should have something :)") ]
-        return None
+        return []
 
     def __str__(self):
         s = self.script

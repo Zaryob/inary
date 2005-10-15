@@ -75,6 +75,7 @@ class Installer:
 
     def check_requirements(self):
         """check system requirements"""
+        
         #TODO: IS THERE ENOUGH SPACE?
         # what to do if / is split into /usr, /var, etc.
         pass

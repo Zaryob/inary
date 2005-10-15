@@ -46,25 +46,25 @@ class FileError(Error):
 
 class Checks:
     def __init__(self):
-        self.list = None
+        self.list = []
     
     def add(self, err):
-        if not self.list:
-            self.list = []
         self.list.append(err)
     
     def join(self, list):
-        if list != None:
-            if not self.list:
-                self.list = []
-            self.list.extend(list)
+        self.list.extend(list)
     
     def has_tag(self, var, section, name):
         if not var:
-            if not self.list:
-                self.list = []
             self.list.append(_("%s section should have a '%s' tag") % (section, name))
 
+    def has_error():
+        return len(self.list)>0
+        
+    def print_errors(list):
+        for x in list:
+            ctx.ui.error(x)
+    print_errors = staticmethod(print_errors)
 
 #########################
 # string/list functions #
