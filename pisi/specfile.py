@@ -162,13 +162,14 @@ class UpdateInfo:
 
     def has_errors(self):
         err = Checks()
+        err.has_tag(self.release, "Update", "Release")
         err.has_tag(self.date, "Update", "Date")
-        err.has_tag(self.version, "Update", "Version")
+        #err.has_tag(self.version, "Update", "Version")
         return err.list
 
     def __str__(self):
-        return "%s, ver=%s, rel=%s, type=%s" % (
-            self.date, self.version, self.release, self.type)
+        return "rel=%s, date=%s, ver=%s, type=%s" % (
+            self.release, self.date, self.version, self.type)
 
 class PathInfo:
     def __init__(self, node = None):
