@@ -53,7 +53,7 @@ class DepInfo:
     def has_errors(self):
         if not self.package:
             return [ _("Dependency should have a package string") ]
-        return None
+        return []
 
     def satisfies(self, pkg_name, version, release):
         """determine if a package ver. satisfies given dependency spec"""
