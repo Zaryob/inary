@@ -485,11 +485,12 @@ def env_update():
         f.write("export %s=\"%s\"\n" % (key, keys[key]))
     f.close()
 
-    # generate ld.co.conf
+    # generate ld.so.conf
     f = open(ldconf_file, "w")
-    for path in keys["LDPATH"].split(":"):
-        f.write("%s\n" % path)
+    if keys.has_key("LDPATH"):
+        for path in keys["LDPATH"].split(":"):
+            f.write("%s\n" % path)
     f.close()
 
     # run ldconfig
-    run_batch("/sbin/ldconfig -X -r /")
+    run_batch("/sbin/ldconfig -X -r %s" % ctx.config.dest_dir())
