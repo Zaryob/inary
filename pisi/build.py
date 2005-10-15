@@ -176,6 +176,8 @@ class Builder:
             "SRC_RELEASE": self.spec.source.release
             }
         os.environ.update(evn)
+        # Add ccache directory for support Compiler Cache :)
+        os.environ["PATH"] = "/usr/lib/ccache/bin/:" + os.environ["PATH"]
 
     def fetch_source_archive(self):
         ctx.ui.info(_("Fetching source from: %s") % self.spec.source.archiveUri)
