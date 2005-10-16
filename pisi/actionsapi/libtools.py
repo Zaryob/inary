@@ -43,6 +43,8 @@ def gnuconfig_update():
     for root, dirs, files in os.walk(os.getcwd()):
         for file in files:
             if file in ['config.sub', 'config.guess']:
+                if os.path.islink(file):
+                    unlink(file)
                 copy('/usr/share/gnuconfig/%s' % file, join_path(root, file))
                 ctx.ui.info(_('GNU Config Update Finished.'))
 
