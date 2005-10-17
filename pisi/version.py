@@ -98,7 +98,14 @@ class VersionItem:
             return self._value >= rhs._value
         else: # l < r
             return False
-                
+
+    def __eq__(self,rhs):
+        l = keywords[self._keyword]
+        r = keywords[rhs._keyword]
+        if l == r and self._value == rhs._value:
+                return True
+        return False
+
 
 
 class Version:
@@ -140,11 +147,10 @@ class Version:
             except IndexError:
                 ritem = VersionItem("")
 
-            if pred(litem, ritem):
-                return True
+            if not pred(litem, ritem):
+                return False
 
-        else:
-            return False
+        return True
 
     def __lt__(self,rhs):
         return self.pred(rhs, lambda x,y: x<y)
@@ -157,3 +163,6 @@ class Version:
 
     def __ge__(self,rhs):
         return self.pred(rhs, lambda x,y: x>=y)
+
+    def __eq__(self,rhs):
+        return self.pred(rhs, lambda x,y: x==y)
