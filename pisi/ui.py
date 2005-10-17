@@ -25,18 +25,19 @@ class UI(object):
     class Progress:
         def __init__(self, totalsize, existsize = 0):
             self.totalsize = totalsize
-            self.percent = (existsize * 100) / totalsize
+            try:
+                self.percent = (existsize * 100) / totalsize
+            except:
+                self.percent = 0
 
         def update(self, size):
             if not self.totalsize:
                 return 100
-
-            percent = (size * 100) / self.totalsize
-            if percent and self.percent is not percent:
-                self.percent = percent
-                return percent
-            else:
-                return 0
+            try:
+                self.percent = (size * 100) / self.totalsize
+            except:
+                self.percent = 0
+            return self.percent
 
     def __init__(self, debuggy = False, verbose = False):
         self.show_debug = debuggy
