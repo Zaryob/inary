@@ -11,28 +11,29 @@
 import unittest
 import os
 
-from pisi import version
+from pisi.version import Version
 
 class VersionTestCase(unittest.TestCase):
     def setUp(self):
         pass
 
-    def testOps(self):
-        v1 = version.Version("0.3.1")
-        v2 = version.Version("0.3.5")
-        v3 = version.Version("1.5.2-4")
-        v4 = version.Version("0.3.1-1")
+    def testOpsNumerical(self):
+        v1 = Version("0.3.1")
+        v2 = Version("0.3.5")
+        v3 = Version("1.5.2-4")
+        v4 = Version("0.3.1-1")
         self.assert_(v1 < v2)
         self.assert_(v3 > v2)
         self.assert_(v1 <= v3)
         self.assert_(v4 >= v4)
 
+    def testOpsKeywords(self):
         # with keywords
-        v1 = version.Version("2.23_pre10")
-        v2 = version.Version("2.23")
-        v3 = version.Version("2.21")
-        v4 = version.Version("2.23_p1")
-        v5 = version.Version("2.23_beta1")
+        v1 = Version("2.23_pre10")
+        v2 = Version("2.23")
+        v3 = Version("2.21")
+        v4 = Version("2.23_p1")
+        v5 = Version("2.23_beta1")
         self.assert_(v1 < v2)
         self.assert_(v1 > v3)
         self.assert_(v1 < v4)
@@ -40,16 +41,24 @@ class VersionTestCase(unittest.TestCase):
         self.assert_(v2 < v4)
         self.assert_(v2 > v5)
 
+        v1 = Version("pisi-1.0_alpha1")
+        v2 = Version("pisi-1.0_alpha2")
+        self.assert_(v2 > v1)
+
+    def testOpsCharacters(self):
         # with character
-        v1 = version.Version("2.10a")
-        v2 = version.Version("2.10")
-        v3 = version.Version("2.10d")
+        v1 = Version("2.10a")
+        v2 = Version("2.10")
+        v3 = Version("2.10d")
         self.assert_(v1 > v2)
         self.assert_(v1 < v3)
         self.assert_(v2 < v3)
 
-        v1 = version.Version("pisi-1.0_alpha1")
-        v2 = version.Version("pisi-1.0_alpha2")
-        self.assert_(v2 > v1)
+    def testGeBug(self):
+        # bug 603
+        v1 = Version('1.8.0')
+        v2 = Version('1.9.1')
+        self.assert_( not v1 > v2 )
+        self.assert_( not v1 >= v2 )
 
 suite = unittest.makeSuite(VersionTestCase)
