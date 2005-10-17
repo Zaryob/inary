@@ -24,6 +24,7 @@ import sys
 import sha
 import shutil
 import statvfs
+import operator
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -67,8 +68,14 @@ class Checks:
     print_errors = staticmethod(print_errors)
 
 #########################
-# string/list functions #
+# string/list/functional#
 #########################
+
+def every(seq, pred):
+    return reduce(operator.and_, map(pred, seq))
+
+def any(seq, pred):
+    return reduce(operator.or_, map(pred, seq))
 
 def unzip(seq):
     return zip(*seq)

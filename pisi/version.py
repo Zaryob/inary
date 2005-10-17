@@ -9,10 +9,17 @@
 #
 # Please read the COPYING file.
 #
-
-# version structure
-
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
+#           Baris Metin <baris@uludag.org.tr>
+#
+# History:
+# Eray wrote the first version
+# Baris added support for the fancy keywords and
+# alphanumeric version string components
+
+
+"""version structure"""
+
 
 import re
 
@@ -58,6 +65,9 @@ class VersionItem:
             # rest is the version item's value. And each must have
             # one!
             self._value = itemstring[len(self._keyword):]
+
+    def __str__(self):
+        return str(self._value)
 
     def __lt__(self,rhs):
         l = keywords[self._keyword]
@@ -130,39 +140,42 @@ class Version:
     def string(self):
         return self.verstring
 
-    def pred(self, rhs, pred):
-        
-        loop = len(self.comps)
-        if len(rhs.comps) > loop:
-            loop = len(rhs.comps)
+    def compare(self, rhs):
+        """this comparison routine is essentially a comparison routine
+        for two rationals in (0,1) interval. we compare two sequences
+        of digits one by one. We start with the leftmost digit
+        in the expansion. If they are equal, we proceed to the next. If
+        not we use the comparison operator. And we iterate to the left.
+        The result is, 0 if two are equal, -1 if self < rhs, and +1
+        if self>rhs"""
+        lhs = self.comps
+        rhs = rhs.comps
+        # pad the short version string with zeros
+        if len(lhs) < len(rhs):
+            lhs.extend( [VersionItem('0')] * (len(rhs) - len(lhs)) )
+        elif len(lhs) > len(rhs):            
+            rhs.extend( [VersionItem('0')] * (len(lhs) - len(rhs)) )
+        # now let's iterate from left to right
+        for (litem, ritem) in zip(lhs, rhs):
+            if litem < ritem:
+                return -1
+            elif litem > ritem:
+                return +1
+        return 0
 
-        for i in range(0, loop):
-            try:
-                litem = self.comps[i]
-            except IndexError:
-                litem = VersionItem("")
-
-            try:
-                ritem = rhs.comps[i]
-            except IndexError:
-                ritem = VersionItem("")
-
-            if not pred(litem, ritem):
-                return False
-
-        return True
+    # premature optimization is the root of all evil
 
     def __lt__(self,rhs):
-        return self.pred(rhs, lambda x,y: x<y)
+        return self.compare(rhs) < 0
 
     def __le__(self,rhs):
-        return self.pred(rhs, lambda x,y: x<=y)
-
+        return self.compare(rhs) <= 0
+            
     def __gt__(self,rhs):
-        return self.pred(rhs, lambda x,y: x>y)
+        return self.compare(rhs) > 0
 
     def __ge__(self,rhs):
-        return self.pred(rhs, lambda x,y: x>=y)
+        return self.compare(rhs) >= 0
 
     def __eq__(self,rhs):
-        return self.pred(rhs, lambda x,y: x==y)
+        return self.compare(rhs) == 0
