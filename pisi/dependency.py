@@ -35,7 +35,7 @@ class DepInfo:
             self.releaseTo = getNodeAttribute(node, "releaseTo")
         else:
             self.versionFrom = self.versionTo = None
-            self.releaseFrom = self.releaseFrom = None
+            self.releaseFrom = self.releaseTo = None
 
     def elt(self, xml):
         node = xml.newNode("Dependency")
@@ -58,15 +58,15 @@ class DepInfo:
     def satisfies(self, pkg_name, version, release):
         """determine if a package ver. satisfies given dependency spec"""
         ret = True
-        from version import Version
+        v = Version(version)
         if self.versionFrom:
-            ret &= Version(version) >= Version(self.versionFrom)
+            ret &= v >= Version(self.versionFrom)
         if self.versionTo:
-            ret &= Version(version) <= Version(self.versionTo)        
+            ret &= v <= Version(self.versionTo)        
         if self.releaseFrom:
-            ret &= Version(release) <= Version(self.releaseFrom)        
+            ret &= v <= Version(self.releaseFrom)        
         if self.releaseTo:
-            ret &= Version(release) <= Version(self.releaseTo)       
+            ret &= v <= Version(self.releaseTo)       
         return ret
         
     def __str__(self):
