@@ -55,8 +55,9 @@ class XmlFileTestCase(unittest.TestCase):
         self.assert_(a.href.startswith('http'))
         self.assertEqual(a.number, 868)
         self.assertEqual(a.name, 'Eray Ozkural')
-        string = a.format(errs)
-        print '*', string
+        #string = a.format(errs)
+        #print '*', string
+        a.print_text()
         #self.assert_(string.startswith('Name'))
         xml = xmlfile.XmlFile('A')
         xml.newDOM()
@@ -75,6 +76,6 @@ class XmlFileTestCase(unittest.TestCase):
         a2.encode(xml, xml.rootNode(), errs3)
         print 'errs3', errs3
         xml.writexml('/tmp/a2.xml')
-        string = a2.format(errs3)
+        #string = a2.format(errs3)
 
 suite = unittest.makeSuite(XmlFileTestCase)

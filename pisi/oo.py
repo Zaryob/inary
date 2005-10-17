@@ -23,3 +23,6 @@ class autosuper(type):
         
 class autosuprop(autosuper, autoprop):
     pass
+    
+class Struct:
+    def __init__(self, **entries): self.__dict__.update(entries)

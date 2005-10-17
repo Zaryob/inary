@@ -47,7 +47,6 @@ import pisi
 from pisi.xmlext import *
 import pisi.context as ctx
 
-
 class Error(pisi.Error):
     pass
 
@@ -99,28 +98,18 @@ class LocalText(object):
             newnode.appendChild(newtext)
             node.appendChild(newnode)
     
-    def format(self, errs):
+    def format(self, f, errs):
         L = locale.getlocale()[0][0:2] # try to read language, pathetic isn't it?
         if self.locs.has_key(L):
-            return self.locs[L]
+            f.add_flowing_data(self.locs[L])
         elif self.locs.has_key('en'):
             # fallback to English, blah
-            return self.locs['en']
+            f.add_flowing_data(self.locs['en'])
         elif self.locs.has_key('tr'):
             # fallback to Turkish
-            return self.locs['tr']
+            f.add_flowing_data(self.locs['tr'])
         else:
             errs.append(_("Tag should have at least an English or Turkish version"))
-            return ''
-
-    # FIXME: use something like the below to return a default
-    #L = language
-    #if not self.locs.has_key(L):
-    #    L = 'en'
-    #if not self.locs.has_key(L):
-    #    #errs.append("Tag '%s' should have an English version\n" % d[2])
-    #    return ""
-    #retur
             
 class autoxml(type):
     """High-level automatic XML transformation interface for xmlfile.
@@ -192,6 +181,7 @@ class autoxml(type):
         
     """
 
+
     def __init__(cls, name, bases, dict):
         """entry point for metaclass code"""
         #print 'generating class', name
@@ -252,14 +242,22 @@ class autoxml(type):
         cls.encode = encode
 
         cls.formatters = formatters
-        def format(self, errs):
-            string = ''
+        def format(self, f, errs):
             for formatter in self.__class__.formatters:
-                string += formatter(self, errs)
-            return string
+                formatter(self, f, errs)
         cls.format = format
-        if not dict.has_key('__str__'):
-            cls.__str__ = format
+        def print_text(self):
+            import formatter
+            w = formatter.DumbWriter() # plain text
+            f = formatter.AbstractFormatter(w)
+            errs = []
+            self.format(f, errs)
+            if errs:
+                for x in errs:
+                    ctx.ui.warning(x)
+        cls.print_text = print_text
+        #if not dict.has_key('__str__'):
+        #    cls.__str__ = str
 
     def gen_attr_member(cls, attr):
         """generate readers and writers for an attribute member"""
@@ -328,14 +326,13 @@ class autoxml(type):
                 value = None
             encode_a(xml, node, value, errs)
             
-        def format(self, errs):
+        def format(self, f, errs):
             if hasattr(self, name):
                 value = getattr(self,name)
-                return '%s: %s\n' % (token, format_a(value, errs))
+                f.add_literal_data('%s: %s\n' % (token, format_a(value, f, errs)))
             else:
                 if req == mandatory:
                     raise Error(_('Mandatory variable %s not available') % name)
-            return ''
             
         return (init, decode, encode, format)
 
@@ -405,9 +402,9 @@ class autoxml(type):
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
 
-        def format(value, errs):
+        def format(value, f, errs):
             """format value for pretty printing"""
-            return unicode(value)
+            f.add_literal_data(unicode(value))
 
         return initialize, decode, encode, format
 
@@ -452,14 +449,12 @@ class autoxml(type):
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
                 
-        def format(obj, errs):
+        def format(obj, f, errs):
             try:
-                return obj.format(errs)
+                obj.format(f, errs)
             except Error:
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
-                else:
-                    return ''
         return (init, decode, encode, format)
 
     def gen_list_tag(cls, tag, spec):
@@ -498,15 +493,14 @@ class autoxml(type):
                 if req is mandatory:
                     errs.append(_('Mandatory list empty'))
 
-        def format(l, errs):
-            #print 'format:', name
-            s = ''
+        def format(l, f, errs):
+            # indent here
             for ix in range(len(l)):
-                s += str(ix+1) + ': ' + format_item(l[ix], errs)
+                f.add_flowing_data(str(ix+1) + ': ')
+                format_item(l[ix], f, errs)
                 if ix != len(l)-1:
-                    s += ', '
-            return s
-        
+                    f.add_flowing_data(', ')
+
         return (init, decode, encode, format)
 
     def gen_insetclass_tag(cls, tag, spec):
@@ -551,14 +545,13 @@ class autoxml(type):
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
                 
-        def format(obj, errs):
+        def format(obj, f, errs):
             try:
-                return obj.format(errs)
+                obj.format(f, errs)
             except Error:
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
-                else:
-                    return ''
+
         return (init, decode, encode, format)
 
     basic_cons_map = {

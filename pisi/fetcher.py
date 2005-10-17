@@ -10,10 +10,10 @@
 # Please read the COPYING file.
 #
 
-# Yet another Pisi module for fetching files from various sources. Of
-# course, this is not limited to just fetching source files. We fetch
-# all kinds of things: source tarballs, index files, packages, and God
-# knows what.
+"""Yet another Pisi module for fetching files from various sources. Of
+course, this is not limited to just fetching source files. We fetch
+all kinds of things: source tarballs, index files, packages, and God
+knows what."""
 
 # python standard library modules
 import urllib2
