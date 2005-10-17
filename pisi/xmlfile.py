@@ -110,7 +110,7 @@ class LocalText(object):
             # fallback to Turkish
             return self.locs['tr']
         else:
-            errs.append("Tag '%s' should have at least an English or Turkish version\n" % d[2])
+            errs.append(_("Tag should have at least an English or Turkish version"))
             return ''
 
     # FIXME: use something like the below to return a default
@@ -216,7 +216,9 @@ class autoxml(type):
         decoders = []
         encoders = []
         formatters = []
-        for var in dict:
+        order = dict.keys()
+        order.sort()
+        for var in order:
             if var.startswith('t_') or var.startswith('a_'):
                 name = var[2:]
                 if var.startswith('a_'):

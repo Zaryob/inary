@@ -13,6 +13,7 @@
 import unittest
 import sys
 import os
+import locale
 
 sys.path.append('.')
 sys.path.append('..')
@@ -59,6 +60,7 @@ def run_all():
     runTestSuite(alltests)
 
 if __name__ == "__main__":
+    locale.setlocale(locale.LC_ALL, '')
     args = sys.argv
     if len(args) > 1: # run modules given from the command line
         tests = sys.argv[1:]
