@@ -102,6 +102,14 @@ def_package_html = u"""
 </body></html>
 """
 
+def_history_html= u"""
+<h5>Sürüm %s</h5><p>
+Tarih: %s<br>
+Yapan: <a href="./%s.html">%s</a><br>
+Açıklama: %s
+</p>
+"""
+
 def_source_html = u"""
 <html><head>
     <title>Kaynak paket %(name)s</title>
@@ -124,6 +132,9 @@ Hata kayıtlarına bak</a></p>
 
 <h3>Bu kaynaktan derlenen ikili paketler:</h3>
 <p>%(packages)s</p>
+
+<h3>Tarihçe</h3>
+%(history)s
 
 </body></html>
 """
@@ -370,12 +381,26 @@ class Source:
             Package(self, p)
         self.checkRelease()
     
+    def validDate(self, date):
+        # yyyy-mm-dd
+        err = 0
+        if len(date) != 10:
+            err = 1
+        if date[4] != '-' or date[7] != '-':
+            err = 1
+        if err:
+            e = _("Source package '%s' has wrong date format '%s'") % (self.name, date)
+            errors.append(e)
+        # more checks can be added, i.e. valid day month ranges, etc
+    
     def checkRelease(self):
         # FIXME: this check also belongs to specfile
         prev = None
+        prevDate = None
         for h in self.spec.source.history:
             if prev:
                 prev -= 1
+                self.validDate(h.date)
                 if prev <= 0:
                     e = _("Source package '%s' has wrong release numbers") % self.name
                     errors.append(e)
@@ -386,6 +411,8 @@ class Source:
                     return
             else:
                 prev = int(h.release)
+                prevDate = h.date
+                self.validDate(prevDate)
         if prev != 1:
             e = _("Source package '%s' has no first release") % self.name
             errors.append(e)
@@ -394,12 +421,14 @@ class Source:
         source = self.spec.source
         paks = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x),
             (map(lambda x: x.name, self.spec.packages)))
+        histdata = map(lambda x: (x.release, x.date, x.name, x.name, x.comment), self.spec.history)
         dict = {
             "name": self.name,
             "homepage": source.homepage,
             "license": ", ".join(source.license),
             "version": source.version,
             "release": source.release,
+            "history": template_table("history", histdata),
             "packages": ", ".join(paks),
             "summary": source.summary
         }
@@ -436,10 +465,11 @@ class Packager:
     
     def report_html(self):
         srcs = map(lambda x: "<a href='source-%s.html'>%s</a>" % (x, x), self.sources)
+        srcs.sort()
         dict = {
             "name": self.name,
             "email": mangle_email(self.email),
-            "sources": ", ".join(srcs)
+            "sources": "<br>".join(srcs)
         }
         template_write("paksite/%s.html" % self.name, "packager", dict)
 
@@ -572,7 +602,7 @@ if errors:
     printu(_("Encountered %d errors! Fix them immediately!\n") % len(errors))
     for e in errors:
         printu(e)
-	printu("\n")
+    printu("\n")
     printu("***\n")
 
 if len(sys.argv) > 2:
