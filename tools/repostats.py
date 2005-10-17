@@ -250,6 +250,10 @@ class Histogram:
             else:
                 self.list[name] = 1
     
+    def note(self, name):
+        if not self.list.has_key(name):
+            self.list[name] = 0
+    
     def get_list(self, max=0):
         items = self.list.items()
         items.sort(valuesort)
@@ -526,6 +530,8 @@ class Repository:
         self.nr_patches += len(spec.source.patches)
         # update top fives
         self.people.add(spec.source.packager.name)
+        for u in spec.history:
+            self.people.note(u.name)
         for p in spec.packages:
             for cs in p.providesComar:
                 self.cscripts.add(cs.om)
