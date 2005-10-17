@@ -71,9 +71,13 @@ def_packager_html = u"""
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head><body>
 
-<p>%(name)s &lt;%(email)s&gt;</p>
-<p>Paketler:</p>
+<h1>%(name)s &lt;%(email)s&gt;</h1>
+
+<h3>Paketler:</h3>
 <p>%(sources)s</p>
+
+<h3>Güncellemeler:</h3>
+<p>%(updates)s</p>
 
 </body></html>
 """
@@ -135,6 +139,9 @@ Hata kayıtlarına bak</a></p>
 
 <h3>Tarihçe</h3>
 %(history)s
+
+<h3>Yamalar</h3>
+%(patches)s
 
 </body></html>
 """
@@ -422,6 +429,7 @@ class Source:
         paks = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x),
             (map(lambda x: x.name, self.spec.packages)))
         histdata = map(lambda x: (x.release, x.date, x.name, x.name, x.comment), self.spec.history)
+        ptch = map(lambda x: x.filename, source.patches)
         dict = {
             "name": self.name,
             "homepage": source.homepage,
@@ -430,28 +438,44 @@ class Source:
             "release": source.release,
             "history": template_table("history", histdata),
             "packages": "<br>".join(paks),
-            "summary": source.summary
+            "summary": source.summary,
+            "patches": "<br>".join(ptch)
         }
         template_write("paksite/source-%s.html" % self.name, "source", dict)
 
 
 class Packager:
-    def __init__(self, spec):
-        name = spec.source.packager.name
-        email = spec.source.packager.email
+    def __init__(self, spec, update=None):
+        if update:
+            name = update.name
+            email = update.email
+        else:
+            name = spec.source.packager.name
+            email = spec.source.packager.email
         if packagers.has_key(name):
             if email != packagers[name].email:
                 e = _("Developer '%s <%s>' has another mail address '%s' in source package '%s'") % (
                     name, packagers[name].email, email, spec.source.name)
                 packagers[name].errors.append(e)
                 errors.append(e)
-            packagers[name].sources.append(spec.source.name)
+            if update:
+                packagers[name].updates.append((spec.source.name, update.release, update.comment))
+            else:
+                packagers[name].sources.append(spec.source.name)
         else:
             packagers[name] = self
             self.name = name
             self.email = email
-            self.sources = [spec.source.name]
+            if update:
+                self.sources = []
+                self.updates = [(spec.source.name, update.release, update.comment)]
+            else:
+                self.sources = [spec.source.name]
+                self.updates = []
             self.errors = []
+        if not update:
+            for update in spec.history:
+                Packager(spec, update)
     
     def report(self):
         printu(_("Packager: %s <%s>\n") % (self.name, self.email))
@@ -462,14 +486,20 @@ class Packager:
         printu(_("  Source packages (%d):\n") % len(self.sources))
         for s in self.sources:
             printu("    %s\n" % s)
+        printu(_("  Updates (%d):\n") % len(self.updates))
+        for s in self.updates:
+            printu("    %s (%s): %s\n" % s)
     
     def report_html(self):
-        srcs = map(lambda x: "<a href='source-%s.html'>%s</a>" % (x, x), self.sources)
+        srcs = map(lambda x: "<a href='./source-%s.html'>%s</a>" % (x, x), self.sources)
         srcs.sort()
+        upds = map(lambda x: "<b><a href='./source-%s.html'>%s</a> (%s)</b><br>%s<br>" % (
+            x[0], x[0], x[1], x[2]), self.updates)
         dict = {
             "name": self.name,
             "email": mangle_email(self.email),
-            "sources": "<br>".join(srcs)
+            "sources": "<br>".join(srcs),
+            "updates": " ".join(upds)
         }
         template_write("paksite/%s.html" % self.name, "packager", dict)
 
