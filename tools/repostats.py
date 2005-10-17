@@ -429,7 +429,7 @@ class Source:
             "version": source.version,
             "release": source.release,
             "history": template_table("history", histdata),
-            "packages": ", ".join(paks),
+            "packages": "<br>".join(paks),
             "summary": source.summary
         }
         template_write("paksite/source-%s.html" % self.name, "source", dict)
