@@ -36,7 +36,8 @@ def_repo_html = u"""
 </head><body>
 
 <p>
-Depoda toplam %(nr_source)d kaynak paket, ve bu paketlerden oluşturulacak
+Depoda toplam %(nr_source)d
+<a href="./sources.html">kaynak paket</a>, ve bu paketlerden oluşturulacak
 %(nr_packages)d ikili paket bulunmaktadır. Toplam %(nr_patches)d yama mevcuttur.
 </p>
 
@@ -111,14 +112,34 @@ def_source_html = u"""
 <h2>Kaynak versiyon %(version)s, depo sürümü %(release)s</h2>
 <h3><a href='%(homepage)s'>%(homepage)s</a></h3>
 
+<h3>Açıklama</h3>
+<p>%(summary)s</p>
+
 <h3>Lisanslar:</h3>
 <p>%(license)s</p>
 
-<p><a href="http://bugs.uludag.org.tr/buglist.cgi?query_format=advanced&short_desc_type=allwordssubstr&short_desc=&product=Paketler&component=%(name)s&long_desc_type=substring&long_desc=&bug_file_loc_type=allwordssubstr&bug_file_loc=&keywords_type=allwords&keywords=&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&emailassigned_to1=1&emailtype1=substring&email1=&emailassigned_to2=1&emailreporter2=1&emailcc2=1&emailtype2=substring&email2=&bugidtype=include&bug_id=&votes=&chfieldfrom=&chfieldto=Now&chfieldvalue=&cmdtype=doit&order=Reuse+same+sort+as+last+time&field0-0-0=noop&type0-0-0=noop&value0-0-0=">
+<h3>İşlemler:</h3>
+<p><a href="http://bugs.uludag.org.tr/buglist.cgi?product=Paketler&component=%(name)s&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">
 Hata kayıtlarına bak</a></p>
 
 <h3>Bu kaynaktan derlenen ikili paketler:</h3>
 <p>%(packages)s</p>
+
+</body></html>
+"""
+
+def_sources_html = u"""
+<html><head>
+    <title>Kaynak paketler listesi</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body>
+
+<h1>Kaynak paketler listesi</h1>
+<hr>
+
+<p>
+%(source_list)s
+</p>
 
 </body></html>
 """
@@ -379,7 +400,8 @@ class Source:
             "license": ", ".join(source.license),
             "version": source.version,
             "release": source.release,
-            "packages": ", ".join(paks)
+            "packages": ", ".join(paks),
+            "summary": source.summary
         }
         template_write("paksite/source-%s.html" % self.name, "source", dict)
 
@@ -527,6 +549,12 @@ class Repository:
             "errors": e
         }
         template_write("paksite/index.html", "repo", dict)
+        srclist = map(lambda x: "<a href='./source-%s.html'>%s</a>" % (x, x), sources)
+        srclist.sort()
+        dict = {
+            "source_list": "<br>".join(srclist)
+        }
+        template_write("paksite/sources.html", "sources", dict)
 
 
 # command line driver
