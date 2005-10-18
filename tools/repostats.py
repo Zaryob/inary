@@ -18,6 +18,8 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
+from svn import core, client
+
 sys.path.append('.')
 import pisi.specfile
 import pisi.uri
@@ -131,6 +133,7 @@ def_source_html = u"""
 <p>%(license)s</p>
 
 <h3>İşlemler:</h3>
+<p><a href="%(uri)s">Paket dosyalarına bak</a></p>
 <p><a href="http://bugs.uludag.org.tr/buglist.cgi?product=Paketler&component=%(name)s&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">
 Hata kayıtlarına bak</a></p>
 
@@ -178,6 +181,19 @@ def_missing_html = u"""
 
 </body></html>
 """
+
+
+def svn_uri(path):
+    # init
+    core.apr_initialize()
+    pool = core.svn_pool_create(None)
+    core.svn_config_ensure(None, pool)
+    # get commit date
+    uri = client.svn_client_url_from_path(path, pool)
+    # cleanup
+    core.svn_pool_destroy(pool)
+    core.apr_terminate()
+    return uri
 
 
 # FIXME: This check should be in specfile
@@ -388,6 +404,7 @@ class Source:
         self.spec = spec
         self.name = name
         self.path = path
+        self.uri = svn_uri(path)
         for p in spec.packages:
             Package(self, p)
         self.checkRelease()
@@ -443,7 +460,8 @@ class Source:
             "history": template_table("history", histdata),
             "packages": "<br>".join(paks),
             "summary": source.summary,
-            "patches": "<br>".join(ptch)
+            "patches": "<br>".join(ptch),
+            "uri": self.uri
         }
         template_write("paksite/source-%s.html" % self.name, "source", dict)
 
