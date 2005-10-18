@@ -131,10 +131,10 @@ class Fetcher:
     def fetchRemoteFile (self, archivefile):
         from httplib import HTTPException
 
-        if os.path.exists(archivefile) and \
-                 self.scheme == "http" or self.scheme == "https":
-            self.existsize = os.path.getsize(archivefile)
-            dest = open(archivefile, "ab")
+        if os.path.exists(archivefile):
+            if self.scheme == "http" or self.scheme == "https":
+                self.existsize = os.path.getsize(archivefile)
+                dest = open(archivefile, "ab")
         else:
             dest = open(archivefile, "wb")
  
