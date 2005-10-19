@@ -630,7 +630,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
             name = self.args[0]
             indexuri = self.args[1]
             pisi.api.add_repo(name, indexuri)
-            self.init()
+            self.finalize()
         else:
             self.help()
             return
