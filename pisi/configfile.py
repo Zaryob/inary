@@ -22,8 +22,8 @@
 #
 #[build]
 #host = i686-pc-linux-gnu
-#CFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
-#CXXFLAGS= -mcpu=i686 -O2 -pipe -fomit-frame-pointer
+#CFLAGS= -mtune=i686 -O2 -pipe -fomit-frame-pointer
+#CXXFLAGS= -mtune=i686 -O2 -pipe -fomit-frame-pointer
 #LDFLAGS=
 #
 #[directories]
@@ -57,8 +57,8 @@ class GeneralDefaults:
 class BuildDefaults:
     """Default values for [build] section"""
     host = "i686-pc-linux-gnu"
-    CFLAGS = "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
-    CXXFLAGS = "-mcpu=i686 -O2 -pipe -fomit-frame-pointer"
+    CFLAGS = "-mtune=i686 -O2 -pipe -fomit-frame-pointer"
+    CXXFLAGS = "-mtune=i686 -O2 -pipe -fomit-frame-pointer"
     LDFLAGS = ""
 
 class DirsDefaults:
