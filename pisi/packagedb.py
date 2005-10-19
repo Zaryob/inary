@@ -150,14 +150,10 @@ def remove_package(name):
 
 # tracking databases for non-repository information
 
-thirdparty_packagedb = None
-inst_packagedb = None
+thirdparty_packagedb = inst_packagedb = None
 
-def init():
-    global thirdparty_packagedb
-    global inst_packagedb
-    
-    if not thirdparty_packagedb:
-        thirdparty_packagedb = PackageDB('thirdparty')
-    if not inst_packagedb:
-        inst_packagedb = PackageDB('installed')
+def init_db():   
+    if not pisi.packagedb.thirdparty_packagedb:
+        pisi.packagedb.thirdparty_packagedb = PackageDB('thirdparty')
+    if not pisi.packagedb.inst_packagedb:
+        pisi.packagedb.inst_packagedb = PackageDB('installed')

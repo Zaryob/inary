@@ -65,8 +65,9 @@ def init(database = True, options = None, ui = None, comar = True):
         ctx.installdb = pisi.installdb.init()
         ctx.filesdb = pisi.files.FilesDB()
 
-        # TODO: bunun da ctx'de olmasi gerek, global hesabi
-        packagedb.init()
+        packagedb.init_db()
+        
+        #TODO: sourcedb
 #        import pisi.sourcedb
 #        pisi.sourcedb.init()
 

@@ -656,6 +656,7 @@ Remove all repository information from the system.
             self.init()
             for repo in self.args:
                 pisi.api.remove_repo(repo)
+                ctx.ui.info(_('Repo %s removed from system.') % repo)
             self.finalize()
         else:
             self.help()
