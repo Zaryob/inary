@@ -281,11 +281,15 @@ def package_graph(A, ignore_installed = False):
 def upgrade(A):
     upgrade_pkg_names(A)
 
-def upgrade_pkg_names(A):
+def upgrade_pkg_names(A = []):
     """Re-installs packages from the repository, trying to perform
     a maximum number of upgrades."""
     
     ignore_build = ctx.config.options and ctx.config.options.ignore_build_no
+
+    if not A:
+        # if A is empty, then upgrade all packages
+        A = ctx.installdb.list_installed()
 
     # filter packages that are not upgradable
     A_0 = A = set(A)

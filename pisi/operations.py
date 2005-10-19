@@ -117,6 +117,10 @@ def install_single_name(name, upgrade = False):
     else:
         ctx.ui.error(_("Package %s not found in any active repository.") % pkg)
 
+# high level operations
+
+
+
 # deneme, don't remove ulan
 class AtomicOperation(object):
     def __init__(self, package, ignore_dep = False):

@@ -163,7 +163,7 @@ class UpdateInfo:
     def has_errors(self):
         err = Checks()
         if not self.release:
-            err.add(_("Update must have a Release attribute"))
+            err.add(_("Update must have a release attribute"))
         err.has_tag(self.date, "Update", "Date")
         #err.has_tag(self.version, "Update", "Version")
         return err.list

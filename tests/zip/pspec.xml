@@ -7,8 +7,8 @@
         <Name>zip</Name>
         <Homepage>ftp://ftp.freesoftware.com/pub/infozip/Zip.html</Homepage>
         <Packager>
-            <Name>PACKAGER</Name>
-            <Email>PACKAGER_EMAIL</Email>
+            <Name>zibidi</Name>
+            <Email>himini@gmail.com</Email>
         </Packager>
         <License>Info-ZIP</License>
         <IsA>category</IsA>
@@ -22,16 +22,8 @@
             <Patch level="1">zcrypt.patch</Patch>
         </Patches>
         <BuildDependencies>
-            <Dependency>unzip</Dependency>
             <Dependency>patch</Dependency>
         </BuildDependencies>
-        <History>
-            <Update>
-                <Date>2005-07-15</Date>
-                <Version>2.3</Version>
-                <Release>1</Release>
-            </Update>
-        </History>
     </Source>
 
     <Package>
@@ -45,6 +37,12 @@
             <Path fileType="doc">/usr/share/man</Path>
         </Files>
   </Package>
+  <History>
+     <Update release="1">
+       <Date>2005-07-15</Date>
+       <Version>2.3</Version>
+     </Update>
+  </History>
 
 </PISI>
 

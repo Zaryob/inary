@@ -377,7 +377,11 @@ specified a package name, it should exist in a specified repository.
 class Upgrade(PackageOp):
     """Upgrade PISI packages
 
-Usage: Upgrade <package1> <package2> ... <packagen>
+Usage: Upgrade [<package1> <package2> ... <packagen>]
+
+<packagei>: package name
+
+Upgrades the entire system if no package names are given
 
 You may use only package names to specify packages because
 the package upgrade operation is defined only with respect 
@@ -427,34 +431,6 @@ Remove package(s) from your system. Just give the package names to remove.
 
         self.init()
         pisi.api.remove(self.args)
-        self.finalize()
-
-
-class UpgradeAll(PackageOp):
-    """Upgrade system
-
-Usage: Upgrade
-
-Upgrade the entire system.
-"""
-    __metaclass__ = autocommand
-
-    def __init__(self):
-        super(UpgradeAll, self).__init__()
-
-    name = ("upgrade-all", None)
-
-    def options(self):
-        super(UpgradeAll, self).options()
-        buildno_opts(self)
-
-    def run(self):
-        if self.args:
-            self.help()
-            return
-
-        self.init()
-        pisi.api.upgrade(ctx.installdb.list_installed())
         self.finalize()
 
 
@@ -604,11 +580,11 @@ Usage: list-installed
 class UpdateRepo(Command):
     """Update repository databases
 
-Usage: update-repo <repo1> <repo2> ... <repon>
+Usage: update-repo [<repo1> <repo2> ... <repon>]
 
 <repoi>: repository name
 Synchronizes the PiSi databases with the current repository.
-If no repositories are given, all repositories are updated.
+If no repository is given, all repositories are updated.
 """
     __metaclass__ = autocommand
 
