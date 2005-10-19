@@ -244,6 +244,13 @@ def dir_size(dir):
     getsize = os.path.getsize
     join = join_path
     islink = os.path.islink
+    isdir = os.path.isdir
+    exist = os.path.exists
+
+    if exist(dir) and (not isdir(dir) and not islink(dir)):
+        #so, this is not a directory but file..
+        return getsize(dir)
+
     def sizes():
         for root, dirs, files in os.walk(dir):
             yield sum([getsize(join(root, name)) for name in files if not islink(join(root,name))])
