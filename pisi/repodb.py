@@ -77,7 +77,7 @@ class RepoDB(object):
 
     def add_repo(self, name, repo_info):
         name = str(name)
-        repo_info = str(repo_info)
+        assert (isinstance(repo_info,Repo))
         if self.d.has_key("repo-" + name):
             raise Error(_('Repository %s already exists') % name)
         self.d["repo-" + name] = repo_info
