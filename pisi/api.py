@@ -184,7 +184,7 @@ def install_pkg_files(package_URIs):
             G_f.write_graphviz(sys.stdout)
         order = G_f.topological_sort()
         order.reverse()
-        ctx.ui.info(_('Installation order: ') + `order`)
+        ctx.ui.info(_('Installation order: ') + util.strlist(order) )
         for x in order:
             operations.install_single_file(dfn[x])
     else:
@@ -234,9 +234,9 @@ def install_pkg_names(A):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
-    ctx.ui.info(_("""\
-The following minimal list of packages will be installed \
-in the respective order to satisfy dependencies: """) + util.strlist(order))
+    ctx.ui.info(_("""The following minimal list of packages will be installed
+in the respective order to satisfy dependencies:
+""") + util.strlist(order))
     if len(order) > len(A_0):
         if not ctx.ui.confirm('Do you want to continue?'):
             return False
@@ -367,7 +367,7 @@ version %s, release %s, build %s.')
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
-    ctx.ui.info(_("""The following packages will be upgraded: """) +
+    ctx.ui.info(_("""The following packages will be upgraded:\n""") +
                 util.strlist(order))
     if len(order) > len(A_0):
         if not ctx.ui.confirm('Do you want to continue?'):
@@ -436,7 +436,8 @@ def remove(A):
             for (rev_dep, depinfo) in rev_deps:
                 #print 'checking ', rev_dep
                 # we don't deal with unsatisfied dependencies
-                if dependency.installed_satisfies_dep(depinfo):
+                if packagedb.has_package(rev_dep) and \
+                   dependency.installed_satisfies_dep(depinfo):
                     if not rev_dep in G_f.vertices():
                         Bp.add(rev_dep)
                         G_f.add_plain_dep(rev_dep, x)
@@ -444,9 +445,9 @@ def remove(A):
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
-    ctx.ui.info(_("""\
-The following minimal list of packages will be removed \ 
-in the respective order to satisfy dependencies: """) + util.strlist(order))
+    ctx.ui.info(_("""The following minimal list of packages will be removed
+in the respective order to satisfy dependencies:
+""") + util.strlist(order))
     if len(order) > len(A_0):
         if not ctx.ui.confirm('Do you want to continue?'):
             return False
