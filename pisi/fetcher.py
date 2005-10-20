@@ -17,9 +17,14 @@ knows what."""
 
 # python standard library modules
 import urllib2
+import urllib
+import ftplib
 import os
+import socket
+import sys
+from mimetypes import guess_type
+from mimetools import Message
 from base64 import encodestring
-from urllib import addinfourl
 from shutil import move
 
 import gettext
@@ -31,7 +36,6 @@ import pisi
 import pisi.util as util
 import pisi.context as ctx
 from pisi.uri import URI
-
 
 class Error(pisi.Error):
     pass
@@ -132,7 +136,7 @@ class Fetcher:
         from httplib import HTTPException
 
         if os.path.exists(archivefile):
-            if self.scheme == "http" or self.scheme == "https":
+            if self.scheme == "http" or self.scheme == "https" or self.scheme == "ftp":
                 self.existsize = os.path.getsize(archivefile)
                 dest = open(archivefile, "ab")
         else:
@@ -169,6 +173,11 @@ class Fetcher:
             opener = urllib2.build_opener(range_handler)
             urllib2.install_opener(opener)
             request.add_header('Range', 'bytes=%d-' % self.existsize)
+        if self.existsize and self.scheme =="ftp":
+            range_handler = FTPRangeHandler()
+            opener = urllib2.build_opener(range_handler)
+            urllib2.install_opener(opener)
+            request.add_header('Range', 'bytes=%d-' % self.existsize)
         return request
 
     def err (self, error):
@@ -182,8 +191,110 @@ class HTTPRangeHandler(urllib2.BaseHandler):
     """
 
     def http_error_206(self, request, fp, errcode, msg, headers):
-        return addinfourl(fp, headers, request.get_full_url())
+        return urllib.addinfourl(fp, headers, request.get_full_url())
 
     def http_error_416(self, request, fp, errcode, msg, headers):
         # HTTP 1.1's 'Range Not Satisfiable' error..
         raise FetchError(_('Requested range not satisfiable'))
+
+
+class FTPRangeHandler(urllib2.FTPHandler):
+    """
+    FTP Range support..
+    """
+    def ftp_open(self, req):
+        host = req.get_host()
+        host, port = urllib.splitport(host)
+        if port is None:
+            port = ftplib.FTP_PORT
+
+        try:
+            host = socket.gethostbyname(host)
+        except socket.error, msg:
+            raise FetchError(msg)
+        path, attrs = urllib.splitattr(req.get_selector())
+        dirs = path.split('/')
+        dirs = map(urllib.unquote, dirs)
+        dirs, file = dirs[:-1], dirs[-1]
+        if dirs and not dirs[0]:
+            dirs = dirs[1:]
+        try:
+            fw = self.connect_ftp('', '', host, port, dirs)
+            type = file and 'I' or 'D'
+            for attr in attrs:
+                attr, value = urllib.splitattr(attr)
+                if attr.lower() == 'type' and \
+                   value in ('a', 'A', 'i', 'I', 'd', 'D'):
+                    type = value.upper()
+            
+            rawr = req.headers.get('Range', None)
+            rest = int(rawr.split("=")[1].rstrip("-"))
+            
+            fp, retrlen = fw.retrfile(file, type, rest)
+            
+            fb, lb = rest, retrlen
+            if retrlen is None or retrlen == 0:
+                raise FetchError(_('Requested Range Not Satisfiable'))
+            retrlen = lb - fb
+            if retrlen < 0:
+                # beginning of range is larger than file
+                raise FetchError(_('Requested Range Not Satisfiable'))
+            
+            headers = ""
+            mtype = guess_type(req.get_full_url())[0]
+            if mtype:
+                headers += "Content-Type: %s\n" % mtype
+            if retrlen is not None and retrlen >= 0:
+                headers += "Content-Length: %d\n" % retrlen
+
+            try:    
+                from cStringIO import StringIO
+            except ImportError, msg: 
+                from StringIO import StringIO
+
+            return urllib.addinfourl(fp, Message(StringIO(headers)), req.get_full_url())
+        except ftplib.all_errors, msg:
+            raise IOError, (_('ftp error'), msg), sys.exc_info()[2]
+
+    def connect_ftp(self, user, passwd, host, port, dirs):
+        fw = ftpwrapper('', '', host, port, dirs)
+        return fw
+
+class ftpwrapper(urllib.ftpwrapper):
+    def retrfile(self, file, type, rest=None):
+        self.endtransfer()
+        if type in ('d', 'D'): cmd = 'TYPE A'; isdir = 1
+        else: cmd = 'TYPE ' + type; isdir = 0
+        try:
+            self.ftp.voidcmd(cmd)
+        except ftplib.all_errors:
+            self.init()
+            self.ftp.voidcmd(cmd)
+        conn = None
+        if file and not isdir:
+            try:
+                self.ftp.nlst(file)
+            except ftplib.error_perm, reason:
+                raise IOError, (_('ftp error'), reason), sys.exc_info()[2]
+            # Restore the transfer mode!
+            self.ftp.voidcmd(cmd)
+            try:
+                cmd = 'RETR ' + file
+                conn = self.ftp.ntransfercmd(cmd, rest)
+            except ftplib.error_perm, reason:
+                if str(reason)[:3] == '501':
+                    # workaround for REST not suported error
+                    fp, retrlen = self.retrfile(file, type)
+                    fp = RangeableFileObject(fp, (rest,''))
+                    return (fp, retrlen)
+                elif str(reason)[:3] != '550':
+                    raise IOError, (_('ftp error'), reason), sys.exc_info()[2]
+        if not conn:
+            self.ftp.voidcmd('TYPE A')
+            if file: cmd = 'LIST ' + file
+            else: cmd = 'LIST'
+            conn = self.ftp.ntransfercmd(cmd)
+        self.busy = 1
+        return (urllib.addclosehook(conn[0].makefile('rb'),
+                            self.endtransfer), conn[1])
+
