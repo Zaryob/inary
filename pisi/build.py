@@ -25,6 +25,7 @@ import pisi
 import pisi.util as util
 import pisi.context as ctx
 import pisi.dependency as dependency
+import pisi.operations as operations
 from pisi.sourcearchive import SourceArchive
 from pisi.files import Files, FileInfo
 from pisi.metadata import MetaData
@@ -268,11 +269,15 @@ class Builder:
                 dep_unsatis.append(dep)
     
         if dep_unsatis:
-            ctx.ui.error(_("Unsatisfied Build Dependencies:"))
+            ctx.ui.info(_("Unsatisfied Build Dependencies:"))
             for dep in dep_unsatis:
                 ctx.ui.warning(dep.package)
             if not ctx.config.get_option('ignore_dependency'):
+                ctx.ui.info(_('Installing build dependencies.'))
+                operations.install([dep.package for dep in dep_unsatis])
                 raise Error(_('Cannot build package due to unsatisfied build dependencies'))
+            else:
+                ctx.ui.warning(_('Ignoring build dependencies.'))
 
     def patch_exists(self):
         """check existence of patch files declared in PSPEC"""
