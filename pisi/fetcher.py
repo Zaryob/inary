@@ -37,7 +37,7 @@ import pisi.util as util
 import pisi.context as ctx
 from pisi.uri import URI
 
-class Error(pisi.Error):
+class FetchError(pisi.Error):
     pass
 
 
@@ -164,24 +164,25 @@ class Fetcher:
         self._do_grab(fileObj, dest, totalsize)
 
     def formatRequest(self, request):
-        authinfo = self.url.auth_info()
-        if authinfo:
-            enc = encodestring("%s:%s" % authinfo)
+        if self.url.auth_info():
+            enc = encodestring("%s:%s" % self.url.auth_info())
             request.add_header('Authorization', 'Basic %s' % enc)
-        if self.existsize and self.scheme == "http" or self.scheme == "https":
-            range_handler = HTTPRangeHandler()
-            opener = urllib2.build_opener(range_handler)
+
+        range_handlers = {
+            'http' : HTTPRangeHandler,
+            'https': HTTPRangeHandler,
+            'ftp'  : FTPRangeHandler
+        }
+
+        if self.existsize and range_handlers.has_key(self.scheme):
+            opener = urllib2.build_opener(range_handlers.get(self.scheme)())
             urllib2.install_opener(opener)
             request.add_header('Range', 'bytes=%d-' % self.existsize)
-        if self.existsize and self.scheme =="ftp":
-            range_handler = FTPRangeHandler()
-            opener = urllib2.build_opener(range_handler)
-            urllib2.install_opener(opener)
-            request.add_header('Range', 'bytes=%d-' % self.existsize)
+
         return request
 
     def err (self, error):
-        raise Error(error)
+        raise FetchError(error)
 
 class HTTPRangeHandler(urllib2.BaseHandler):
     """ 
