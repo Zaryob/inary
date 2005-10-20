@@ -163,7 +163,7 @@ class Install(AtomicOperation):
             # schedule for reinstall
             self.old_files = ctx.installdb.files(pkg.name)
             self.reinstall = True
-            operations.run_preremove(pkg.name)
+            run_preremove(pkg.name)
 
     def extract_install(self):
         "unzip package in place"
@@ -180,7 +180,7 @@ class Install(AtomicOperation):
             for fileinfo in self.old_files.list:
                 old_fileinfo[str(fileinfo.path)] = fileinfo
             for path in leftover:
-                operations.remove_file( old_fileinfo[path] )
+                remove_file( old_fileinfo[path] )
 
     def store_pisi_files(self):
         """put files.xml, metadata.xml, actions.py and COMAR scripts
@@ -212,7 +212,7 @@ class Install(AtomicOperation):
         "update databases"
 
         if self.reinstall:
-            operations.remove_db(self.metadata.package.name)
+            remove_db(self.metadata.package.name)
 
         # installdb
         ctx.installdb.install(self.metadata.package.name,
