@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-10-19, 20:42:26 -->
+<!-- Saved: 2005-10-20, 23:32:54 -->
 <!-- Copyright (C) 2005 PiSi Development Team,  -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -248,10 +248,6 @@
     </Source>
     <Source>
       <Dir>pisi</Dir>
-      <Name>install.py</Name>
-    </Source>
-    <Source>
-      <Dir>pisi</Dir>
       <Name>installdb.py</Name>
     </Source>
     <Source>
@@ -345,10 +341,6 @@
       <Name>tr.po</Name>
     </Source>
     <Source>
-      <Dir>tools</Dir>
-      <Name>ChangeLogGenerator.py</Name>
-    </Source>
-    <Source>
       <Dir>pisi</Dir>
       <Name>oo.py</Name>
     </Source>
@@ -363,6 +355,10 @@
     <Source>
       <Dir>tests</Dir>
       <Name>dependencytests.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Name>atomicoperations.py</Name>
     </Source>
   </Sources>
   <Forms>
@@ -401,10 +397,10 @@
     <VcsOtherData>{'standardLayout': 1}</VcsOtherData>
   </Vcs>
   <FiletypeAssociations>
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
     <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
     <FiletypeAssociation pattern="*.ui" type="FORMS" />
-    <FiletypeAssociation pattern="*.py" type="SOURCES" />
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
   </FiletypeAssociations>
 </Project>

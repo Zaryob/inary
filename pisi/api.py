@@ -66,10 +66,22 @@ def init(database = True, options = None, ui = None, comar = True):
         ctx.filesdb = pisi.files.FilesDB()
 
         packagedb.init_db()
-        
         #TODO: sourcedb
 #        import pisi.sourcedb
 #        pisi.sourcedb.init()
+    else:
+        ctx.repodb = None
+        ctx.installdb = None
+        ctx.filesdb = None
+
+def finalize():
+    def delete_db(db):
+        if db:
+            del db
+    for x in [ctx.repodb, ctx.installdb, ctx.filesdb]:
+        delete_db(x)
+    
+    packagedb.finalize_db()
 
 def list_upgradable():
     ignore_build = ctx.config.options and ctx.config.options.ignore_build_no

@@ -157,3 +157,9 @@ def init_db():
         pisi.packagedb.thirdparty_packagedb = PackageDB('thirdparty')
     if not pisi.packagedb.inst_packagedb:
         pisi.packagedb.inst_packagedb = PackageDB('installed')
+
+def finalize_db():
+    if pisi.packagedb.thirdparty_packagedb:
+        del pisi.packagedb.thirdparty_packagedb
+    if pisi.packagedb.inst_packagedb:
+        del pisi.packagedb.inst_packagedb

@@ -75,7 +75,7 @@ class Command(object):
         p = self.parser
         p.add_option("-D", "--destdir", action="store", default = None,
                      help = _("change the system root for pisi commands"))
-        p.add_option("", "--yes-all", action="store_true",
+        p.add_option("-y", "--yes-all", action="store_true",
                      default=False, help = _("assume yes in all yes/no queries"))
         p.add_option("-u", "--username", action="store")
         p.add_option("-p", "--password", action="store")
@@ -143,7 +143,7 @@ class Command(object):
 
     def finalize(self):
         """do cleanup work for PiSi components"""
-        pass
+        pisi.api.finalize()
         
     def get_name(self):
         return self.__class__.name

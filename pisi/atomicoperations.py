@@ -42,11 +42,13 @@ from pisi.uri import URI
 class Error(pisi.Error):
     pass
 
+# single package operations
+
 class AtomicOperation(object):
 
-    def __init__(self, package, ignore_dep = None):
-        self.package = package
-        if not ignore_dep:
+    def __init__(self, ignore_dep = None):
+        #self.package = package
+        if ignore_dep==None:
             self.ignore_dep = ctx.config.get_option('ignore_dependency')
         else:
             self.ignore_dep = ignore_dep
@@ -54,6 +56,7 @@ class AtomicOperation(object):
     def run(self, package):
         "perform an atomic package operation"
         pass
+
 
 class Install(AtomicOperation):
     "Install class, provides install routines for pisi packages"
@@ -163,7 +166,7 @@ class Install(AtomicOperation):
             # schedule for reinstall
             self.old_files = ctx.installdb.files(pkg.name)
             self.reinstall = True
-            run_preremove(pkg.name)
+            Remove(pkg.name).run_preremove()
 
     def extract_install(self):
         "unzip package in place"
@@ -180,7 +183,7 @@ class Install(AtomicOperation):
             for fileinfo in self.old_files.list:
                 old_fileinfo[str(fileinfo.path)] = fileinfo
             for path in leftover:
-                remove_file( old_fileinfo[path] )
+                Remove.remove_file( old_fileinfo[path] )
 
     def store_pisi_files(self):
         """put files.xml, metadata.xml, actions.py and COMAR scripts
@@ -212,7 +215,7 @@ class Install(AtomicOperation):
         "update databases"
 
         if self.reinstall:
-            remove_db(self.metadata.package.name)
+            Remove(self.metadata.package.name).remove_db()
 
         # installdb
         ctx.installdb.install(self.metadata.package.name,
@@ -227,60 +230,6 @@ class Install(AtomicOperation):
         # installed packages
         packagedb.inst_packagedb.add_package(self.pkginfo)
 
-# single package operations
-
-# remove stuff
-
-def Remove(AtomicOperation):
-    pass
-
-def remove_file(fileinfo):
-    fpath = pisi.util.join_path(ctx.config.dest_dir(), fileinfo.path)
-    # TODO: We have to store configuration files for futher
-    # usage. Currently we'are doing it like rpm does, saving
-    # with a prefix and leaving the user to edit it. In the future
-    # we'll have a plan for these configuration files.
-    if fileinfo.type == ctx.const.conf:
-        if os.path.isfile(fpath):
-            os.rename(fpath, fpath + ".pisi")
-    else:
-        # check if file is removed manually.
-        # And we don't remove directories!
-        # TODO: remove directory if there is nothing under it?
-        if os.path.isfile(fpath) or os.path.islink(fpath):
-            os.unlink(fpath)
-        else:
-            ctx.ui.warning(_('Not removing non-file, non-link %s') % fpath)
-
-def run_preremove(package_name):
-    if ctx.comar:
-        import pisi.comariface as comariface
-        comariface.run_preremove(package_name)
-    else:
-        # TODO: store this somewhere
-        pass
-
-def remove_db(package_name):
-    ctx.installdb.remove(package_name)
-    packagedb.remove_package(package_name)  #FIXME: this looks like a mistake!
-
-def remove_single(package_name):
-    """Remove a single package"""
-    inst_packagedb = packagedb.inst_packagedb
-
-    #TODO: check dependencies
-
-    ctx.ui.info(_('Removing package %s') % package_name)
-    if not ctx.installdb.is_installed(package_name):
-        raise Exception(_('Trying to remove nonexistent package ')
-                        + package_name)
-        
-    run_preremove(package_name)
-        
-    for fileinfo in ctx.installdb.files(package_name).list:
-        remove_file(fileinfo)
-
-    remove_db(package_name)
 
 def install_single(pkg, upgrade = False):
     """install a single package from URI or ID"""
@@ -296,7 +245,6 @@ def install_single(pkg, upgrade = False):
 # FIXME: Here and elsewhere pkg_location must be a URI
 def install_single_file(pkg_location, upgrade = False):
     """install a package file"""
-    from pisi.atomicoperations import Install
     Install(pkg_location).install(not upgrade)
 
 def install_single_name(name, upgrade = False):
@@ -320,5 +268,72 @@ def install_single_name(name, upgrade = False):
         # Package will handle remote file for us!
         install_single_file(pkg_path, upgrade)
     else:
-        ctx.ui.error(_("Package %s not found in any active repository.") % pkg)
+        raise Error(_("Package %s not found in any active repository.") % pkg)
 
+
+class Remove(AtomicOperation):
+    
+    def __init__(self, package_name, ignore_dep = None):
+        super(Remove, self).__init__(ignore_dep)
+        self.package_name = package_name
+        
+    def run(self):
+        """Remove a single package"""
+        inst_packagedb = packagedb.inst_packagedb
+       
+        ctx.ui.info(_('Removing package %s') % self.package_name)
+        if not ctx.installdb.is_installed(self.package_name):
+            raise Exception(_('Trying to remove nonexistent package ')
+                            + self.package_name)
+                            
+        self.check_dependencies()
+            
+        self.run_preremove()
+            
+        for fileinfo in ctx.installdb.files(self.package_name).list:
+            self.remove_file(fileinfo)
+    
+        self.remove_db()
+
+    def check_dependencies(self):
+        #we only have to check the dependencies to ensure the
+        #system will be consistent after this removal
+        pass
+        # is there any package who depends on this package?
+
+    def remove_file(fileinfo):
+        fpath = pisi.util.join_path(ctx.config.dest_dir(), fileinfo.path)
+        # TODO: We have to store configuration files for futher
+        # usage. Currently we'are doing it like rpm does, saving
+        # with a prefix and leaving the user to edit it. In the future
+        # we'll have a plan for these configuration files.
+        if fileinfo.type == ctx.const.conf:
+            if os.path.isfile(fpath):
+                os.rename(fpath, fpath + ".pisi")
+        else:
+            # check if file is removed manually.
+            # And we don't remove directories!
+            # TODO: remove directory if there is nothing under it?
+            if os.path.isfile(fpath) or os.path.islink(fpath):
+                os.unlink(fpath)
+            else:
+                ctx.ui.warning(_('Not removing non-file, non-link %s') % fpath)
+
+    remove_file = staticmethod(remove_file)
+    
+    def run_preremove(self):
+        if ctx.comar:
+            import pisi.comariface as comariface
+            comariface.run_preremove(self.package_name)
+        else:
+            # TODO: store this somewhere
+            pass
+    
+    def remove_db(self):
+        ctx.installdb.remove(self.package_name)
+        #FIXME: this looks like a mistake!
+        packagedb.remove_package(self.package_name)
+
+
+def remove_single(package_name):
+    Remove(package_name).run()

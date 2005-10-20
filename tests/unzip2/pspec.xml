@@ -24,13 +24,6 @@
             <Dependency>sed</Dependency>
             <Dependency>patch</Dependency>
         </BuildDependencies>
-        <History>
-            <Update>
-                <Date>2005-08-10</Date>
-                <Version>5.52</Version>
-                <Release>2</Release>
-            </Update>
-        </History>
     </Source>
 
     <Package>
@@ -44,6 +37,12 @@
     	    <Path fileType="doc">/usr/share/man</Path>
         </Files>
   </Package>
+  <History>
+    <Update release="2">
+      <Date>2005-08-10</Date>
+      <Version>5.52</Version>
+    </Update>
+ </History>
 
 </PISI>
 
