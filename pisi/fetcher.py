@@ -26,6 +26,7 @@ from mimetypes import guess_type
 from mimetools import Message
 from base64 import encodestring
 from shutil import move
+from time import time
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -88,28 +89,27 @@ class Fetcher:
 
     def _do_grab(self, fileURI, dest, totalsize):
         symbols = [' B/s', 'KB/s', 'MB/s', 'GB/s']
-        from time import time
-        tt, oldsize = int(time()), 0
-        bs, size = 1024, self.existsize
+        bs, tt, = 1024, int(time())
+        size = existsize = self.existsize
         symbol, depth = "B/s", 0
         st = time()
         chunk = fileURI.read(bs)
-        size = size + len(chunk)
+        size += len(chunk)
         if self.progress:
-            p = self.progress(totalsize, self.existsize)
+            p = self.progress(totalsize, existsize)
             self.percent = p.update(size)
         while chunk:
             dest.write(chunk)
             chunk = fileURI.read(bs)
-            size = size + len(chunk)
+            size += len(chunk)
             ct = time()
             if int(tt) != int(ct):
-                self.rate = size / (ct - st)
+                self.rate = (size - existsize) / (ct - st)
                 while self.rate > 1000 and depth < 3:
                     self.rate /= 1024
                     depth += 1
                 symbol, depth = symbols[depth], 0
-                oldsize, tt = size, time()
+                tt = time()
             if self.progress:
                 if p.update(size):
                     self.percent = p.percent
