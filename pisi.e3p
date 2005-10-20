@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-10-18, 01:54:10 -->
+<!-- Saved: 2005-10-19, 20:42:26 -->
 <!-- Copyright (C) 2005 PiSi Development Team,  -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -402,9 +402,9 @@
   </Vcs>
   <FiletypeAssociations>
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.ui" type="FORMS" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
-    <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
   </FiletypeAssociations>
 </Project>
