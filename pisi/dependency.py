@@ -126,7 +126,7 @@ def satisfies_runtime_deps(pkg):
     return satisfies_dependencies(pkg, deps)
 
 def installable(pkg):
-    """calculate if pkg is installable currently 
+    """calculate if pkg name is installable currently 
     which means it has to satisfy both install and runtime dependencies"""
     if not packagedb.has_package(pkg):
         ctx.ui.info(_("Package %s is not present in the package database") % pkg);
@@ -134,6 +134,5 @@ def installable(pkg):
     elif satisfies_runtime_deps(pkg):
         return True
     else:
-        #ctx.ui.info("package " + pkg + " does not satisfy dependencies\n");
         return False
 

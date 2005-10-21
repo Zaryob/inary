@@ -61,8 +61,9 @@ class AtomicOperation(object):
 class Install(AtomicOperation):
     "Install class, provides install routines for pisi packages"
 
-    def __init__(self, package_fname):
+    def __init__(self, package_fname, ignore_dep = None):
         "initialize from a file name"
+        super(Install, self).__init__(ignore_dep)
         self.package = Package(package_fname)
         self.package.read()
         self.metadata = self.package.metadata
@@ -95,12 +96,6 @@ class Install(AtomicOperation):
         pass
 
     def check_relations(self):
-        # check if package is in database
-        # If it is not, put it into 3rd party packagedb
-        if not packagedb.has_package(self.pkginfo.name):
-            db = packagedb.thirdparty_packagedb
-            db.add_package(self.pkginfo)
-
         # check conflicts
         for pkg in self.metadata.package.conflicts:
             if ctx.installdb.is_installed(self.pkginfo):
@@ -108,10 +103,16 @@ class Install(AtomicOperation):
 
         # check dependencies
         if not ctx.config.get_option('ignore_dependency'):
-            if not dependency.installable(self.pkginfo.name):
+            if not self.pkginfo.installable():
                 ctx.ui.error(_('Dependencies for %s not satisfied') %
                              self.pkginfo.name)
                 raise Error(_("Package not installable"))
+
+        # check if package is in database
+        # If it is not, put it into 3rd party packagedb
+        if not packagedb.has_package(self.pkginfo.name):
+            db = packagedb.thirdparty_packagedb
+            db.add_package(self.pkginfo)
 
     def check_reinstall(self):
         "check reinstall, confirm action, and schedule reinstall"

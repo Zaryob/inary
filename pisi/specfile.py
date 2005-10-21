@@ -384,6 +384,12 @@ class PackageInfo:
 
         return join( config.lib_dir(), packageDir)
 
+    def installable(self):
+        """calculate if pkg is installable currently"""
+        import pisi.dependency
+        deps = self.runtimeDeps
+        return pisi.dependency.satisfies_dependencies(self.name, deps)
+
 class SpecFile(XmlFile):
     """A class for reading/writing from/to a PSPEC (PISI SPEC) file."""
 

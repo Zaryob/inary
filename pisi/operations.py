@@ -47,17 +47,11 @@ def install(packages):
     # and use install module directly.
     from pisi.atomicoperations import Error as InstallError
 
-    try:
-        # determine if this is a list of files/urls or names
-        if packages[0].endswith('.pisi'): # they all have to!
-            return install_pkg_files(packages)
-        else:
-            return install_pkg_names(packages)
-
-    except packagedb.Error, e:
-        ctx.ui.error(_("Package is not installable."))
-        raise e
-
+    # determine if this is a list of files/urls or names
+    if packages[0].endswith('.pisi'): # they all have to!
+        return install_pkg_files(packages)
+    else:
+        return install_pkg_names(packages)
 
 def install_pkg_files(package_URIs):
     """install a number of pisi package files"""
@@ -67,14 +61,13 @@ def install_pkg_files(package_URIs):
 
     for x in package_URIs:
         if not x.endswith(ctx.const.package_prefix):
-            ctx.ui.error(_('Mixing file names and package names not supported YET.'))
-            return False
+            raise Error(_('Mixing file names and package names not supported yet.'))
 
     if ctx.config.get_option('ignore_dependency'):
         # simple code path then
         for x in package_URIs:
             atomicoperations.install_single_file(x)
-        return True
+        return # short circuit
             
     # read the package information into memory first
     # regardless of which distribution they come from
@@ -88,6 +81,8 @@ def install_pkg_files(package_URIs):
         dfn[name] = x
 
     def satisfiesDep(dep):
+        # is dependency satisfied among available packages
+        # or packages to be installed?
         return dependency.installed_satisfies_dep(dep) \
                or dependency.dict_satisfies_dep(d_t, dep)
             
@@ -123,7 +118,7 @@ def install_pkg_files(package_URIs):
        
         if len(A)==0:
             ctx.ui.info(_('No packages to install.'))
-            return True
+            return
         
         # try to construct a pisi graph of packages to
         # install / reinstall
@@ -172,7 +167,7 @@ def install_pkg_names(A):
 
     if len(A)==0:
         ctx.ui.info(_('No packages to install.'))
-        return True
+        return
     
     # try to construct a pisi graph of packages to
     # install / reinstall
@@ -211,8 +206,6 @@ in the respective order to satisfy dependencies:
             return False
     for x in order:
         atomicoperations.install_single_name(x)
-        
-    return True                         # everything went OK :)
 
 def upgrade(A):
     upgrade_pkg_names(A)
@@ -309,9 +302,6 @@ version %s, release %s, build %s.')
             return False
     for x in order:
         atomicoperations.install_single_name(x, True)
-        
-    return True                         # everything went OK :)
-
 
 def remove(A):
     """remove set A of packages from system (A is a list of package names)"""
@@ -328,7 +318,7 @@ def remove(A):
 
     if len(A)==0:
         ctx.ui.info(_('No packages to remove.'))
-        return True
+        return
         
     # try to construct a pisi graph of packages to
     # install / reinstall
@@ -365,11 +355,10 @@ in the respective order to satisfy dependencies:
 """) + util.strlist(order))
     if len(order) > len(A_0):
         if not ctx.ui.confirm('Do you want to continue?'):
+            ctx.ui.warning(_('Package removal declined'))
             return False
     for x in order:
         if ctx.installdb.is_installed(x):
             atomicoperations.remove_single(x)
         else:
             ctx.ui.info(_('Package %s is not installed. Cannot remove.') % x)
-        
-    return True                         # everything went OK :)
