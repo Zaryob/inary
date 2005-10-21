@@ -46,8 +46,8 @@ class VersionTestCase(unittest.TestCase):
         self.assert_(v2 < v4)
         self.assert_(v2 > v5)
 
-        v1 = Version("pisi-1.0_alpha1")
-        v2 = Version("pisi-1.0_alpha2")
+        v1 = Version("1.0_alpha1")
+        v2 = Version("1.0_alpha2")
         self.assert_(v2 > v1)
 
     def testOpsCharacters(self):
