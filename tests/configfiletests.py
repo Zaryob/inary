@@ -42,4 +42,19 @@ class ConfigFileTestCase(unittest.TestCase):
         self.assertEqual(cf.build.host, cf.build["host"])
         self.assertEqual(cf.dirs.index_dir, cf.dirs["index_dir"])
 
+    def testFlagsExists(self):
+        cf = self.cf
+        
+        #build
+        self.assert_(cf.build.CFLAGS)
+        self.assert_(cf.build.CXXFLAGS)
+
+        #general
+        self.assert_(cf.general.destinationdirectory)
+
+        #dirs
+        self.assert_(cf.dirs.index_dir)
+        self.assert_(cf.dirs.tmp_dir)
+        self.assert_(cf.dirs.packages_dir)
+
 suite = unittest.makeSuite(ConfigFileTestCase)
