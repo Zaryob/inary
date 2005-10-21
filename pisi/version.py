@@ -22,6 +22,7 @@
 
 
 import re
+import string
 
 import pisi.util as util
 
@@ -60,11 +61,15 @@ class VersionItem:
                         self._keyword = keyword
         
         if self._keyword == "NOKEY":
-            self._value = itemstring
+            if len(itemstring) == 1 and itemstring in string.ascii_letters:
+                # single letter version item ('a' to 'Z')
+                self._value = itemstring
+            else:
+                self._value = int(itemstring)
         else:
             # rest is the version item's value. And each must have
             # one!
-            self._value = itemstring[len(self._keyword):]
+            self._value = int(itemstring[len(self._keyword):])
 
     def __str__(self):
         return str(self._value)
@@ -74,7 +79,7 @@ class VersionItem:
         r = keywords[rhs._keyword]
         if l < r:
             return True
-        elif l == r: 
+        elif l == r:
             return self._value < rhs._value
         else: # l > r
             return False
