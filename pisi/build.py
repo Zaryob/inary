@@ -273,9 +273,12 @@ class Builder:
             for dep in dep_unsatis:
                 ctx.ui.warning(dep.package)
             if not ctx.config.get_option('ignore_dependency'):
-                ctx.ui.info(_('Installing build dependencies.'))
-                operations.install([dep.package for dep in dep_unsatis])
-                raise Error(_('Cannot build package due to unsatisfied build dependencies'))
+                if ctx.ui.confirm(
+                _('Do you want to install the unsatisfied build dependencies')):
+                    ctx.ui.info(_('Installing build dependencies.'))
+                    operations.install([dep.package for dep in dep_unsatis])
+                else:
+                    raise Error(_('Cannot build package due to unsatisfied build dependencies'))
             else:
                 ctx.ui.warning(_('Ignoring build dependencies.'))
 

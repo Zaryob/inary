@@ -9,7 +9,7 @@ echo "working directory:" `pwd`
 echo "cleaning destination dir: tmp"
 rm -rf tmp
 #echo "*** repository tests"
-pisi-cli add-repo pardus ftp://ftp.uludag.org.tr/pub/pisi/binary/system/base/pisi-index.xml 
+pisi-cli -D add-repo pardus ftp://ftp.uludag.org.tr/pub/pisi/binary/pisi-index.xml 
 pisi-cli update-repo pardus
 pisi-cli list-repo
 
