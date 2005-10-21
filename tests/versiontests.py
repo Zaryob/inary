@@ -17,6 +17,11 @@ class VersionTestCase(unittest.TestCase):
     def setUp(self):
         pass
 
+    def testSingle(self):
+        v1 = Version("103")
+        v2 = Version("90")
+        self.assert_(v1 > v2)
+
     def testOpsNumerical(self):
         v1 = Version("0.3.1")
         v2 = Version("0.3.5")
