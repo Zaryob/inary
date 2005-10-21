@@ -137,8 +137,8 @@ def copytree(source, destination, sym = False):
     if isDirectory(source) or isLink(source):
         try:
             shutil.copytree(source, destination, sym)
-        except OSError:
-            error(_('ActionsAPI [copytree]: Permission denied: %s to %s') % (source, destination))
+        except OSError, e:
+            error(_('ActionsAPI [copytree] %s to %s: %s') % (source, destination, e))
     else:
         error(_('ActionsAPI [copytree]: Directory %s doesn\'t exists.') % (source))
 
