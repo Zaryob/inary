@@ -33,6 +33,8 @@ def handle_exception(exception, value, tb):
         ui.error(_("Keyboard Interrupt: Exiting..."))
         sys.exit(1)
     elif exception == XmlError:
+        #FIXME: is this necessary? Looks redundant.
+        ui.error("XML error encountered.")
         ui.error(unicode(value))
         sys.exit(1)
     elif isinstance(value, pisi.Error):
