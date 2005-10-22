@@ -399,6 +399,8 @@ reinstall a package from a pisi file, use the install command."""
     def options(self):
         super(Upgrade, self).options()
         buildno_opts(self)
+        self.parser.add_option("-e", "--eager", action="store_true",
+                               default=False, help=_("eager upgrades"))
 
     def run(self):
         if not self.args:

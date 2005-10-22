@@ -181,6 +181,9 @@ def install_pkg_names(A):
         G_f.add_package(x)
     B = A
     #state = {}
+    
+    #TODO: conflicts
+    
     while len(B) > 0:
         Bp = set()
         for x in B:
@@ -267,6 +270,23 @@ version %s, release %s, build %s.')
         G_f.add_package(x)
     B = A
     #state = {}
+    
+    def upgradable(dep):
+        #pre dep.package is installed
+        (v,r,b) = ctx.installdb.get_version(dep.package)
+        rep_pkg = packagedb.get_package(dep.package)
+        (vp,rp,bp) = (rep_pkg.version, rep_pkg.release, 
+                      rep_pkg.build)
+        if ignore_build or (not b) or (not bp):
+            # if we can't look at build
+            if r >= rp:     # installed already new
+                return False
+        elif b and bp and b >= bp:
+            return False
+        return True
+
+    # TODO: conflicts
+
     while len(B) > 0:
         Bp = set()
         for x in B:
@@ -276,17 +296,14 @@ version %s, release %s, build %s.')
                 #print 'checking ', dep
                 # add packages that can be upgraded
                 if dependency.repo_satisfies_dep(dep):
+                    #TODO: distinguish must upgrade and upgradable
                     if ctx.installdb.is_installed(dep.package):
-                        (v,r,b) = ctx.installdb.get_version(dep.package)
-                        rep_pkg = packagedb.get_package(dep.package)
-                        (vp,rp,bp) = (rep_pkg.version, rep_pkg.release, 
-                                      rep_pkg.build)
-                        if ignore_build or (not b) or (not bp):
-                            # if we can't look at build
-                            if r >= rp:     # installed already new
+                        if not ctx.get_option('eager'):
+                            if dependency.installed_satisfies_dep(dep):
                                 continue
-                        elif b and bp and b >= bp:
-                            continue
+                        else:
+                            if not upgradable(dep):
+                                continue
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
