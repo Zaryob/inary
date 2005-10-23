@@ -32,11 +32,6 @@ def handle_exception(exception, value, tb):
     if exception == exceptions.KeyboardInterrupt:
         ui.error(_("Keyboard Interrupt: Exiting..."))
         sys.exit(1)
-    elif exception == XmlError:
-        #FIXME: is this necessary? Looks redundant.
-        ui.error("XML error encountered.")
-        ui.error(unicode(value))
-        sys.exit(1)
     elif isinstance(value, pisi.Error):
         ui.error(_("Fatal Error. Program Terminated."))
         show_traceback = ctx.get_option('debug')
