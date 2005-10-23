@@ -16,16 +16,6 @@ __version__ = "1.0_alpha6"
 
 __all__ = [ 'api', 'packagedb', 'installdb' ]
 
-class Error(Exception):
-    """Class of exceptions that lead to program termination"""
-    def __str__(self):
-        s = ''
-        for x in self.args:
-            if s != '':
-                s += '\n'
-            s += x.encode('utf-8')
-        return s
-
 class Exception(Exception):
     """Class of exceptions that must be caught and handled within PISI"""
     def __str__(self):
@@ -35,6 +25,10 @@ class Exception(Exception):
                 s += '\n'
             s += x.encode('utf-8')
         return s
+
+class Error(Exception):
+    """Class of exceptions that lead to program termination"""
+    pass
 
 # FIXME: can't do this due to name clashes in config and other singletons booo
 #from pisi.api import *
