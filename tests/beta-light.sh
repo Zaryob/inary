@@ -1,4 +1,4 @@
-#!/bin/sh
+bi#!/bin/sh
 
 pwd
 PATH=$PATH:.
@@ -18,6 +18,6 @@ pisi-cli -Dtmp --ignore-comar install zip
 pisi-cli -Dtmp list-installed
 pisi-cli -Dtmp --ignore-comar remove unzip
 pisi-cli -Dtmp info zip*.pisi
-pisi-cli -Dtmp --ignore-comar install zip*.pisi
+pisi-cli -d -Dtmp --ignore-comar install zip*.pisi
 pisi-cli -Dtmp list-pending
 pisi-cli -Dtmp configure-pending

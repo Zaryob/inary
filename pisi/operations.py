@@ -156,6 +156,30 @@ def install_pkg_files(package_URIs):
 
     return True # everything went OK.
 
+def check_conflicts(order):
+    """check if upgrading to the latest versions will cause havoc
+    done in a simple minded way without regard for dependencies of
+    conflicts, etc."""
+    B_0 = B = set(order)
+    C = set()
+    # calculate conflict closure
+    while len(B) > 0:
+        Bp = set()
+        for x in B:
+            pkg = packagedb.get_package(x) # get latest version!
+            #TODO: read conflicts from a conflicts db...
+            for conflict in pkg.conflicts:
+                if ctx.installdb.is_installed(self.pkginfo):
+                    Bp.add(conflict)
+                    C.add(conflict)
+        B = Bp
+    if B_0.intersection(C):
+        raise Error(_("Selected packages %s and %s are in conflict.") % (x, pkg))
+    if C:
+        if not ctx.ui.confirm(_('Remove the following conflicting packages?')):
+            #raise Error(_("Package %s conflicts installed package %s") % (x, pkg))
+            raise Error(_("Conflicts remain"))
+
 def install_pkg_names(A):
     """This is the real thing. It installs packages from
     the repository, trying to perform a minimum number of
@@ -201,6 +225,7 @@ def install_pkg_names(A):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
+    check_conflicts(order)
     ctx.ui.info(_("""The following minimal list of packages will be installed
 in the respective order to satisfy dependencies:
 """) + util.strlist(order))
@@ -312,6 +337,7 @@ version %s, release %s, build %s.')
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
+    check_conflicts(order)
     ctx.ui.info(_("""The following packages will be upgraded:\n""") +
                 util.strlist(order))
     if len(order) > len(A_0):
