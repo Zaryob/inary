@@ -9,14 +9,14 @@ echo "working directory:" `pwd`
 echo "cleaning destination dir: tmp"
 rm -rf tmp
 #echo "*** repository tests"
-pisi-cli -D add-repo pardus ftp://ftp.uludag.org.tr/pub/pisi/binary/pisi-index.xml 
-pisi-cli update-repo pardus
-pisi-cli list-repo
+pisi-cli -Dtmp add-repo pardus http://paketler.uludag.org.tr/pardus-devel/pisi-index.xml
+pisi-cli -Dtmp update-repo pardus
+pisi-cli -Dtmp list-repo
 
 #echo "*** package ops"
-pisi-cli list-available
-pisi-cli info python
-pisi-cli install python
+pisi-cli -Dtmp list-available
+pisi-cli -Dtmp info python
+pisi-cli -Dtmp -y install python
 
 echo "*** database contents"
 for x in `find tmp -iname '*.bdb'`; do

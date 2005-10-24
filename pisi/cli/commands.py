@@ -106,7 +106,8 @@ class Command(object):
             dir = str(self.options.destdir)
             import os.path
             if not os.path.exists(dir):
-                raise Error, _('Destination directory %s does not exist') % dir
+                pisi.cli.printu(_('Destination directory %s does not exist. Creating directory.\n') % dir)
+                os.makedirs(dir)
             self.options.destdir = os.path.realpath(dir)
 
 
