@@ -33,6 +33,17 @@ class LockedDBShelf(shelve.DBShelf):
     def __init__(self, dbname, flags=db.DB_CREATE, mode=0660,
                  filetype=db.DB_HASH, dbenv=None):
         shelve.DBShelf.__init__(self, dbenv)
+        filename = os.path.join( pisi.context.config.db_dir(), dbname + '.bdb')
+        self.open(filename, dbname, filetype, flags, mode)
+
+    def __del__(self):
+        # superclass does something funky, we don't need that
+        pass
+        
+    def open(self, filename, dbname, filetype, flags, mode):
+        self.filename = filename        
+        self.closed = False
+        #print 'open', filename
         if type(flags) == type(''):
             sflag = flags
             if sflag == 'r':
@@ -47,30 +58,28 @@ class LockedDBShelf(shelve.DBShelf):
                 flags = db.DB_TRUNCATE | db.DB_CREATE
             else:
                 raise Error, _("Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags")
-        filename = os.path.join( pisi.context.config.db_dir(), dbname + '.bdb')
-        self.open(filename, dbname, filetype, flags, mode)
-        self.filename = filename
-        self.closed = False
-
-    def __del__(self):
-        # superclass does something funky, we don't need that
-        pass
-        
-    def open(self, filename, dbname, filetype, flags, mode):
-        #print 'open', filename
+        self.flags = flags
         pisi.util.check_dir(pisi.context.config.db_dir())
-        self.lockfile = file(filename + '.lock', 'w')
+        if self.flags != db.DB_RDONLY:
+            self.lock()
+        return self.db.open(filename, dbname, filetype, flags, mode)
+
+    def lock(self):
+        self.lockfile = file(self.filename + '.lock', 'w')
         try:
             fcntl.flock(self.lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except IOError:
             raise Error(_("Another instance of PISI is running. Try later!"))
-        return self.db.open(filename, dbname, filetype, flags, mode)
+
 
     def close(self):
         if self.closed:
             return
         self.db.close()
+        if self.flags != db.DB_RDONLY:
+            self.unlock()
+        self.closed = True
+
+    def unlock(self):
         self.lockfile.close()
         os.unlink(self.filename + '.lock')
-        #print 'closed', self.filename
-        self.closed = True

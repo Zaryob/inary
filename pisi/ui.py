@@ -81,7 +81,7 @@ class UI(object):
     def confirm(self, msg):
         "ask a yes/no question"
         pass
-    
+
     def display_progress(self, pd):
         "display progress"
         pass
