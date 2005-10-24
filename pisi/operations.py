@@ -335,6 +335,30 @@ version %s, release %s, build %s.')
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
         B = Bp
+    # now, search reverse dependencies to see if anything
+    # should be upgraded
+    B = A
+    while len(B) > 0:
+        Bp = set()
+        for x in B:
+            pkg = packagedb.get_package(x)
+            rev_deps = packagedb.get_rev_deps(x)
+            for (rev_dep, depinfo) in rev_deps:
+                if not ctx.get_option('eager'):
+                    # add unsatisfied reverse dependencies
+                    if packagedb.has_package(rev_dep) and \
+                       (not dependency.installed_satisfies_dep(depinfo)):
+                        if not dependency.repo_satisfies_dep(dep):
+                            raise Error(_("Reverse dependency %s cannot be satisfied") % rev_dep)
+                        if not rev_dep in G_f.vertices():
+                            Bp.add(rev_dep)
+                            G_f.add_plain_dep(rev_dep, x)
+                else:
+                    if not rev_dep in G_f.vertices():
+                        Bp.add(rev_dep)
+                        G_f.add_plain_dep(rev_dep, x)
+        B = Bp
+
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
