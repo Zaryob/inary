@@ -279,7 +279,11 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
 
         try:
             return func(f)
-        except FileError:
+        except FileError, e:
+            if os.path.issymlink(f):
+                ctx.ui.warning(_('Ignoring "external" link %s') % f)
+            else:
+                raise e
             return None
 
     # also handle single files
