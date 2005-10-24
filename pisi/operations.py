@@ -103,12 +103,12 @@ def install_pkg_files(package_URIs):
     # if so, then invoke install_pkg_names
     extra_packages = [x.package for x in dep_unsatis]
     if extra_packages:
-        ctx.ui.info(_("""The following minimal list of packages will be installed
-in the respective order to satisfy dependencies:
-""") + util.strlist(order))
+        ctx.ui.info(_("""The following packages will be installed
+in the respective order to satisfy extra dependencies:
+""") + util.strlist(extra_packages))
         if not ctx.ui.confirm(_('Do you want to continue?')):
             raise Error(_('External dependencies not satisfied'))
-        install_packages(extra_packages)
+        install_pkg_names(extra_packages)
     class PackageDB:
         def __init__(self):
             self.d = d_t

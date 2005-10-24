@@ -1,4 +1,4 @@
-bi#!/bin/sh
+#!/bin/sh
 
 pwd
 PATH=$PATH:.
@@ -14,10 +14,10 @@ pisi-cli -Dtmp -d add-repo repo1 pisi-index.xml
 pisi-cli -Dtmp list-repo
 pisi-cli -Dtmp update-repo repo1
 pisi-cli -Dtmp list-available
-pisi-cli -Dtmp --ignore-comar install zip
+pisi-cli -Dtmp --ignore-comar -y install zip
 pisi-cli -Dtmp list-installed
-pisi-cli -Dtmp --ignore-comar remove unzip
+pisi-cli -Dtmp --ignore-comar -y remove unzip
 pisi-cli -Dtmp info zip*.pisi
-pisi-cli -d -Dtmp --ignore-comar install zip*.pisi
+pisi-cli -d -Dtmp --ignore-comar -y install zip*.pisi
 pisi-cli -Dtmp list-pending
 pisi-cli -Dtmp configure-pending
