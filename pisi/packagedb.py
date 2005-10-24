@@ -155,5 +155,5 @@ def finalize_db():
     if pisi.packagedb.inst_packagedb:
         pisi.packagedb.inst_packagedb.close()
     if pisi.packagedb.packagedbs:
-        pisi.packagedb.packagedbs.close()
+        del pisi.packagedb.packagedbs
 
