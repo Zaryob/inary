@@ -109,6 +109,7 @@ in the respective order to satisfy extra dependencies:
         if not ctx.ui.confirm(_('Do you want to continue?')):
             raise Error(_('External dependencies not satisfied'))
         install_pkg_names(extra_packages)
+
     class PackageDB:
         def get_package(self, key):
             return d_t[str(key)]
@@ -128,18 +129,14 @@ in the respective order to satisfy extra dependencies:
 
     # find the "install closure" graph of G_f by package 
     # set A using packagedb
-    #print A
     for x in A:
         G_f.add_package(x)
     B = A
-    #state = {}
     while len(B) > 0:
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            #print pkg
             for dep in pkg.runtimeDeps:
-                #print 'checking ', dep
                 if dependency.dict_satisfies_dep(d_t, dep):
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
@@ -152,8 +149,6 @@ in the respective order to satisfy extra dependencies:
     ctx.ui.info(_('Installation order: ') + util.strlist(order) )
     for x in order:
         atomicoperations.install_single_file(dfn[x])
-
-    return True # everything went OK.
 
 def check_conflicts(order):
     """check if upgrading to the latest versions will cause havoc
@@ -199,19 +194,14 @@ def install_pkg_names(A):
 
     # find the "install closure" graph of G_f by package 
     # set A using packagedb
-    #print A
     for x in A:
         G_f.add_package(x)
     B = A
-    #state = {}
-    
-    #TODO: conflicts
     
     while len(B) > 0:
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            #print pkg
             for dep in pkg.runtimeDeps:
                 ctx.ui.debug('checking %s' % str(dep))
                 # we don't deal with already *satisfied* dependencies
@@ -293,7 +283,6 @@ version %s, release %s, build %s.')
     for x in A:
         G_f.add_package(x)
     B = A
-    #state = {}
     
     def upgradable(dep):
         #pre dep.package is installed
@@ -315,9 +304,7 @@ version %s, release %s, build %s.')
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            #print pkg
             for dep in pkg.runtimeDeps:
-                #print 'checking ', dep
                 # add packages that can be upgraded
                 if dependency.repo_satisfies_dep(dep):
                     #TODO: distinguish must upgrade and upgradable
@@ -395,19 +382,15 @@ def remove(A):
 
     # find the (install closure) graph of G_f by package 
     # set A using packagedb
-    #print A
     for x in A:
         G_f.add_package(x)
     B = A
-    #state = {}
     while len(B) > 0:
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            #print 'processing', pkg.name
             rev_deps = packagedb.get_rev_deps(x)
             for (rev_dep, depinfo) in rev_deps:
-                #print 'checking ', rev_dep
                 # we don't deal with unsatisfied dependencies
                 if packagedb.has_package(rev_dep) and \
                    dependency.installed_satisfies_dep(depinfo):
