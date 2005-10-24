@@ -334,6 +334,8 @@ version %s, release %s, build %s.')
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
+                else:
+                    raise Error(_("Reverse dependency %s cannot be satisfied") % rev_dep)
         B = Bp
     # now, search reverse dependencies to see if anything
     # should be upgraded
