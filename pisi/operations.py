@@ -110,11 +110,8 @@ in the respective order to satisfy extra dependencies:
             raise Error(_('External dependencies not satisfied'))
         install_pkg_names(extra_packages)
     class PackageDB:
-        def __init__(self):
-            self.d = d_t
-        
         def get_package(self, key):
-            return self.d[str(key)]
+            return d_t[str(key)]
     
     packagedb = PackageDB()
    
