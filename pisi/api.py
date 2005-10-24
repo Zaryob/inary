@@ -218,11 +218,12 @@ def index(repo_dir = '.'):
 def add_repo(name, indexuri):
     repo = pisi.repodb.Repo(URI(indexuri))
     ctx.repodb.add_repo(name, repo)
+    ctx.ui.info(_('Repo %s added to system.') % name)
 
 def remove_repo(name):
     if ctx.repodb.has_repo(name):
         ctx.repodb.remove_repo(name)
-        ctx.ui.info(_('Repo %s removed from system.') % repo)
+        ctx.ui.info(_('Repo %s removed from system.') % name)
     else:
         ctx.ui.error(_('Repository %s does not exist. Cannot remove.') 
                  % name)
