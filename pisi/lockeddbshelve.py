@@ -12,7 +12,6 @@
 #
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 
-
 import bsddb.dbshelve as shelve
 import bsddb.db as db
 import os
@@ -50,8 +49,15 @@ class LockedDBShelf(shelve.DBShelf):
                 raise Error, _("Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags")
         filename = os.path.join( pisi.context.config.db_dir(), dbname + '.bdb')
         self.open(filename, dbname, filetype, flags, mode)
+        self.filename = filename
+        self.closed = False
+
+    def __del__(self):
+        # superclass does something funky, we don't need that
+        pass
         
     def open(self, filename, dbname, filetype, flags, mode):
+        #print 'open', filename
         pisi.util.check_dir(pisi.context.config.db_dir())
         self.lockfile = file(filename + '.lock', 'w')
         try:
@@ -61,5 +67,10 @@ class LockedDBShelf(shelve.DBShelf):
         return self.db.open(filename, dbname, filetype, flags, mode)
 
     def close(self):
+        if self.closed:
+            return
         self.db.close()
         self.lockfile.close()
+        os.unlink(self.filename + '.lock')
+        #print 'closed', self.filename
+        self.closed = True

@@ -30,6 +30,7 @@ _ = __trans.ugettext
 import pisi
 import pisi.util as util
 import pisi.context as ctx
+import pisi.lockeddbshelve as shelve
 
 class Error(pisi.Error):
     pass
@@ -38,22 +39,12 @@ class PackageDB(object):
     """PackageDB class provides an interface to the package database with
     a delegated dbshelve object"""
     def __init__(self, id):
-        util.check_dir(ctx.config.db_dir())
-        self.fname = os.path.join(ctx.config.db_dir(), 'package-%s.bdb' % id )
-        self.fname2 = os.path.join(ctx.config.db_dir(), 'revdep-%s.bdb'  % id )
-        self.lockfile = file(self.fname + '.lock', 'w')
-        try:
-            fcntl.flock(self.lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except IOError, e:
-             raise Error(_("Cannot lock PackageDB: %s") % e)
-        self.d = shelve.open(self.fname)
-        self.dr = shelve.open(self.fname2)
+        self.d = shelve.LockedDBShelf('package-%s' % id )
+        self.dr = shelve.LockedDBShelf('revdep-%s' % id )
 
-    def __del__(self):
-        pass
-        #self.d.close()
-        #self.dr.close()
-        #self.lockfile.close()
+    def close(self):
+        self.d.close()
+        self.dr.close()
 
     def has_package(self, name):
         name = str(name)
@@ -107,7 +98,7 @@ def get_db(name):
 def remove_db(name):
     del packagedbs[name]
     #erase database file
-
+    
 def has_package(name):
     repo = which_repo(name)
     if repo or thirdparty_packagedb.has_package(name) or inst_packagedb.has_package(name):
@@ -160,6 +151,9 @@ def init_db():
 
 def finalize_db():
     if pisi.packagedb.thirdparty_packagedb:
-        del pisi.packagedb.thirdparty_packagedb
+        pisi.packagedb.thirdparty_packagedb.close()
     if pisi.packagedb.inst_packagedb:
-        del pisi.packagedb.inst_packagedb
+        pisi.packagedb.inst_packagedb.close()
+    if pisi.packagedb.packagedbs:
+        pisi.packagedb.packagedbs.close()
+

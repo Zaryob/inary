@@ -77,6 +77,10 @@ class InstallDB:
         self.dp = shelve.LockedDBShelf('configpending')
         self.files_dir = pisi.util.join_path(ctx.config.db_dir(), 'files')
 
+    def close(self):
+        self.d.close()
+        self.dp.close()
+
     def files_name(self, pkg, version, release):
         from pisi.util import join_path as join
         pkg_dir = join(ctx.config.lib_dir(), pkg + '-' + version + '-' + release)
@@ -165,4 +169,9 @@ def init():
 
     db = InstallDB()
     return db
+
+def finalize():
+    global db
+    if db:
+        db.close()
 

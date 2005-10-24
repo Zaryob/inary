@@ -53,7 +53,7 @@ class RepoDB(object):
         for x in self.list():
             packagedb.add_db(x)
 
-    def __del__(self):
+    def close(self):
         self.d.close()
 
     def repo_name(self, ix):
@@ -103,11 +103,16 @@ class RepoDB(object):
 db = None
 
 def init():
-    global db
-    if db:
-        return db
+    if pisi.repodb.db:
+        return pisi.repodb.db
 
-    db = RepoDB()
-    db.init_dbs()
-    return db
+    pisi.repodb.db = RepoDB()
+    pisi.repodb.db.init_dbs()
+    return pisi.repodb.db
     
+def finalize():
+    global db
+    if pisi.repodb.db:
+        db.close()
+
+

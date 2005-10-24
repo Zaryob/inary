@@ -9,9 +9,7 @@
 #
 # Please read the COPYING file.
 #
-
-# perform analysis on problem instances and store results in a database
-# avoiding multiple invocations of the same instance
+# Author: Eray Ozkural <eray@uludag.org.tr>
 
 import sys
 import bsddb.dbshelve as shelve

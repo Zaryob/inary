@@ -29,20 +29,15 @@ _ = __trans.ugettext
 
 import pisi.util as util
 import pisi.context as ctx
+import pisi.lockeddbshelve as shelve
 
 class SourceDB(object):
 
     def __init__(self):
-        util.check_dir(ctx.config.db_dir())
-        self.filename = os.path.join(ctx.config.db_dir(), 'source.bdb')
-        self.d = shelve.open(self.filename)
-        self.fdummy = file(self.filename + '.lock', 'w')
-        fcntl.flock(self.fdummy, fcntl.LOCK_EX)
+        self.d = shelve.LockedDBShelf('source')
 
     def __del__(self):
-        #fcntl.flock(self.fdummy, fcntl.LOCK_UN)
-        self.fdummy.close()
-        #os.unlink(self.filename + '.lock')
+        self.d.close()
 
     def has_source(self, name):
         name = str(name)

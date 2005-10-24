@@ -73,15 +73,16 @@ def init(database = True, options = None, ui = None, comar = True):
         ctx.repodb = None
         ctx.installdb = None
         ctx.filesdb = None
+    ctx.ui.debug('PISI API initialized')
 
 def finalize():
-    def delete_db(db):
-        if db:
-            del db
-    for x in [ctx.repodb, ctx.installdb, ctx.filesdb]:
-        delete_db(x)
-    
+    pisi.repodb.finalize()
+    pisi.installdb.finalize()
+    if ctx.filesdb != None:
+        ctx.filesdb.close()
+
     packagedb.finalize_db()
+    ctx.ui.debug('PISI API finalized')
 
 def list_upgradable():
     ignore_build = ctx.config.options and ctx.config.options.ignore_build_no
@@ -221,8 +222,9 @@ def add_repo(name, indexuri):
 def remove_repo(name):
     if ctx.repodb.has_repo(name):
         ctx.repodb.remove_repo(name)
+        ctx.ui.info(_('Repo %s removed from system.') % repo)
     else:
-        ctx.ui.error(_('* Repository %s does not exist. Cannot remove.') 
+        ctx.ui.error(_('Repository %s does not exist. Cannot remove.') 
                  % name)
 
 def update_repo(repo):
