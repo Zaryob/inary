@@ -24,6 +24,7 @@ _ = __trans.ugettext
 import pisi
 import pisi.context as ctx
 from pisi.configfile import ConfigurationFile
+import pisi.util
 from pisi.util import join_path as join
 
 class Error(pisi.Error):
@@ -58,23 +59,28 @@ class Config(object):
             raise Error, _('Destination directory %s does not exist') % dir
         return dir
 
+    def subdir(self, path):
+        dir = join(self.dest_dir(), path)
+        pisi.util.check_dir(dir)
+        return dir
+
     def lib_dir(self):
-        return join(self.dest_dir(), self.values.dirs.lib_dir)
+        return self.subdir(self.values.dirs.lib_dir)
 
     def db_dir(self):
-        return join(self.dest_dir(), self.values.dirs.db_dir)
+        return self.subdir(self.values.dirs.db_dir)
 
     def archives_dir(self):
-        return join(self.dest_dir(), self.values.dirs.archives_dir)
+        return self.subdir(self.values.dirs.archives_dir)
 
     def packages_dir(self):
-        return join(self.dest_dir(), self.values.dirs.packages_dir)
+        return self.subdir(self.values.dirs.packages_dir)
 
     def index_dir(self):
-        return join(self.dest_dir(), self.values.dirs.index_dir)
+        return self.subdir(self.values.dirs.index_dir)
 
     def tmp_dir(self):
-        return join(self.dest_dir(), self.values.dirs.tmp_dir)
+        return self.subdir(self.values.dirs.tmp_dir)
 
     # bu dizini neden kullanıyoruz? Yalnızca index.py içerisinde
     # kullanılıyor ama /var/tmp/pisi/install gibi bir dizine niye

@@ -18,7 +18,7 @@ sys.path.append('.')
 
 import pisi
 
-d = shelve.open( sys.argv[1] )
+d = shelve.open( sys.argv[1], flags='r' )
 
 for (k, data) in d.iteritems():
     print k, data
