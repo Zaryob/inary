@@ -183,11 +183,11 @@ class Builder:
         if os.path.exists("/opt/icecream/bin/gcc"):
             # Add icecream directory for support distributed compiling :)
             os.environ["PATH"] = "/opt/icecream/bin/:" + os.environ["PATH"]
-            ctx.ui.info(_("IceCream detected. Make sure your daemon is up and running...")
+            ctx.ui.info(_("IceCream detected. Make sure your daemon is up and running..."))
         elif os.path.exists("/usr/lib/ccache/bin/gcc"):
             # Add ccache directory for support Compiler Cache :)
             os.environ["PATH"] = "/usr/lib/ccache/bin/:" + os.environ["PATH"]
-            ctx.ui.info(_("CCache detected...")
+            ctx.ui.info(_("CCache detected..."))
 
     def fetch_source_archive(self):
         ctx.ui.info(_("Fetching source from: %s") % self.spec.source.archiveUri)
