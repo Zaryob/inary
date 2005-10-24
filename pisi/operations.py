@@ -102,57 +102,59 @@ def install_pkg_files(package_URIs):
 
     # if so, then invoke install_pkg_names
     extra_packages = [x.package for x in dep_unsatis]
-    if (extra_packages and install_pkg_names(extra_packages)) or \
-           (not extra_packages):
-    
-        class PackageDB:
-            def __init__(self):
-                self.d = d_t
-            
-            def get_package(self, key):
-                return d_t[str(key)]
+    if extra_packages:
+        ctx.ui.info(_("""The following minimal list of packages will be installed
+in the respective order to satisfy dependencies:
+""") + util.strlist(order))
+        if not ctx.ui.confirm(_('Do you want to continue?')):
+            raise Error(_('External dependencies not satisfied'))
+        install_packages(extra_packages)
+    class PackageDB:
+        def __init__(self):
+            self.d = d_t
         
-        packagedb = PackageDB()
-       
-        A = d_t.keys()
-       
-        if len(A)==0:
-            ctx.ui.info(_('No packages to install.'))
-            return
-        
-        # try to construct a pisi graph of packages to
-        # install / reinstall
+        def get_package(self, key):
+            return d_t[str(key)]
     
-        G_f = pgraph.PGraph(packagedb)               # construct G_f
+    packagedb = PackageDB()
+   
+    A = d_t.keys()
+   
+    if len(A)==0:
+        ctx.ui.info(_('No packages to install.'))
+        return
     
-        # find the "install closure" graph of G_f by package 
-        # set A using packagedb
-        #print A
-        for x in A:
-            G_f.add_package(x)
-        B = A
-        #state = {}
-        while len(B) > 0:
-            Bp = set()
-            for x in B:
-                pkg = packagedb.get_package(x)
-                #print pkg
-                for dep in pkg.runtimeDeps:
-                    #print 'checking ', dep
-                    if dependency.dict_satisfies_dep(d_t, dep):
-                        if not dep.package in G_f.vertices():
-                            Bp.add(str(dep.package))
-                        G_f.add_dep(x, dep)
-            B = Bp
-        if ctx.config.get_option('debug'):
-            G_f.write_graphviz(sys.stdout)
-        order = G_f.topological_sort()
-        order.reverse()
-        ctx.ui.info(_('Installation order: ') + util.strlist(order) )
-        for x in order:
-            atomicoperations.install_single_file(dfn[x])
-    else:
-        raise Error(_('External dependencies not satisfied'))
+    # try to construct a pisi graph of packages to
+    # install / reinstall
+
+    G_f = pgraph.PGraph(packagedb)               # construct G_f
+
+    # find the "install closure" graph of G_f by package 
+    # set A using packagedb
+    #print A
+    for x in A:
+        G_f.add_package(x)
+    B = A
+    #state = {}
+    while len(B) > 0:
+        Bp = set()
+        for x in B:
+            pkg = packagedb.get_package(x)
+            #print pkg
+            for dep in pkg.runtimeDeps:
+                #print 'checking ', dep
+                if dependency.dict_satisfies_dep(d_t, dep):
+                    if not dep.package in G_f.vertices():
+                        Bp.add(str(dep.package))
+                    G_f.add_dep(x, dep)
+        B = Bp
+    if ctx.config.get_option('debug'):
+        G_f.write_graphviz(sys.stdout)
+    order = G_f.topological_sort()
+    order.reverse()
+    ctx.ui.info(_('Installation order: ') + util.strlist(order) )
+    for x in order:
+        atomicoperations.install_single_file(dfn[x])
 
     return True # everything went OK.
 
@@ -230,7 +232,7 @@ def install_pkg_names(A):
 in the respective order to satisfy dependencies:
 """) + util.strlist(order))
     if len(order) > len(A_0):
-        if not ctx.ui.confirm('Do you want to continue?'):
+        if not ctx.ui.confirm(_('Do you want to continue?')):
             return False
     for x in order:
         atomicoperations.install_single_name(x)
