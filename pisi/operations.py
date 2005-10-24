@@ -114,7 +114,7 @@ in the respective order to satisfy extra dependencies:
             self.d = d_t
         
         def get_package(self, key):
-            return d_t[str(key)]
+            return self.d[str(key)]
     
     packagedb = PackageDB()
    
