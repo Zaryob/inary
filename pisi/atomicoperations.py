@@ -86,8 +86,7 @@ class Install(AtomicOperation):
             import pisi.comariface as comariface
             comariface.run_postinstall(self.pkginfo.name)
         self.update_databases()
-        ctx.ui.info("Regenerating /etc/ld.so.cache...")
-        util.env_update()
+        self.update_environment()
                         
     def check_requirements(self):
         """check system requirements"""
@@ -230,6 +229,18 @@ class Install(AtomicOperation):
 
         # installed packages
         packagedb.inst_packagedb.add_package(self.pkginfo)
+
+    def update_environment(self):
+        # check if we have any shared objects or anything under
+        # /etc/env.d
+        shared = False
+        for x in self.files.list:
+            if x.path.endswith('.so') or x.path.startswith('/etc/env.d'):
+                shared = True
+                break
+        if shared:
+            ctx.ui.info("Regenerating /etc/ld.so.cache...")
+            util.env_update()
 
 
 def install_single(pkg, upgrade = False):
