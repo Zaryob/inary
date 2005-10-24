@@ -30,17 +30,23 @@ class Error(pisi.Error):
 class LockedDBShelf(shelve.DBShelf):
     """A simple wrapper to implement locking for bsddb's dbshelf"""
 
-    def __init__(self, dbname, flags=db.DB_CREATE, mode=0660,
+    def __init__(self, dbname, mode=0660,
                  filetype=db.DB_HASH, dbenv=None):
         shelve.DBShelf.__init__(self, dbenv)
         filename = os.path.join( pisi.context.config.db_dir(), dbname + '.bdb')
+        if os.access(os.path.dirname(filename), os.W_OK):
+            flags = 'w'
+        elif os.access(filename, os.R_OK):
+            flags = 'r'
+        else:
+            raise Error(_('Cannot attain read or write access to database %s') % dbname)
         self.open(filename, dbname, filetype, flags, mode)
 
     def __del__(self):
         # superclass does something funky, we don't need that
         pass
         
-    def open(self, filename, dbname, filetype, flags, mode):
+    def open(self, filename, dbname, filetype, flags=db.DB_CREATE, mode=0660):
         self.filename = filename        
         self.closed = False
         #print 'open', filename
