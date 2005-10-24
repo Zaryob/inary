@@ -634,7 +634,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
             indexuri = self.args[1]
             pisi.api.add_repo(name, indexuri)
             if ctx.ui.confirm(_('Update PISI database for repository %s?') % name):
-                pisi.api.update_repo(repo)
+                pisi.api.update_repo(name)
             self.finalize()
         else:
             self.help()
