@@ -148,6 +148,13 @@ class InstallDB:
             
         self.d[pkg] = InstallInfo(state, version, release, build, distro)
 
+    def clear_pending(self, pkg):
+        pkg = str(pkg)
+        info = self.d[pkg]
+        assert info.state == 'ip'
+        info.state = 'i'
+        self.d[pkg] = info
+
     def remove(self, pkg):
         pkg = str(pkg)
         info = self.d[pkg]

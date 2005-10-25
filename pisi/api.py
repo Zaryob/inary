@@ -174,6 +174,7 @@ def configure_pending():
         import pisi.comariface as comariface
         for x in order:
             comariface.run_postinstall(x)
+            ctx.installdb.clear_pending(x)
     except ImportError:
         raise Error(_("COMAR: comard not fully installed"))
     
