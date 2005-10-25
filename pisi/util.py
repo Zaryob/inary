@@ -282,8 +282,8 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
         except FileError, e:
             if os.path.islink(f):
                 ctx.ui.warning(_('Ignoring "external" link %s') % f)
-            else:
-                raise e
+#            else:
+#                raise e
             return None
 
     # also handle single files
