@@ -140,7 +140,7 @@ def package_graph(A, ignore_installed = False):
         B = Bp
     return G_f
 
-def postpone(package):
+def postpone_postinstall(package):
      try:
         import pisi.comariface as comariface
         comariface.register(package)

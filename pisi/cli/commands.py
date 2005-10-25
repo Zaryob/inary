@@ -336,7 +336,7 @@ class PackageOp(Command):
         p = self.parser
         p.add_option("-B", "--ignore-comar", action="store_true",
                      default=False, help=_("bypass comar configuration agent"))
-        p.add_option("-V", "--postpone", action="store_true",
+        p.add_option("", "--postpone-postinstall", action="store_true",
                               default=False, help=_("Postpone postinstall script"))
         ignoredep_opt(self)
 
