@@ -140,6 +140,12 @@ def package_graph(A, ignore_installed = False):
         B = Bp
     return G_f
 
+def postpone(package):
+     try:
+        import pisi.comariface as comariface
+        comariface.register(package)
+     except ImportError:
+        raise Error(_("COMAR: comard not fully installed"))
 
 def configure_pending():
     # start with pending packages

@@ -82,9 +82,10 @@ class Install(AtomicOperation):
         self.extract_install()
         self.store_pisi_files()
         if ctx.comar:
-            self.register_comar_scripts()
             import pisi.comariface as comariface
-            comariface.run_postinstall(self.pkginfo.name)
+            self.register_comar_scripts()
+            if not ctx.config.options.postpone:
+                comariface.run_postinstall(self.pkginfo.name)
         self.update_databases()
         self.update_environment()
                         

@@ -140,7 +140,7 @@ class InstallDB:
         pkg = str(pkg)
         if self.is_installed(pkg):
             raise InstallDBError(_("Already installed"))
-        if ctx.config.get_option('ignore_comar'):
+        if ctx.config.get_option('postpone'):
             state = 'ip'
             self.dp[pkg] = True
         else:
