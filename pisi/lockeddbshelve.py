@@ -30,7 +30,7 @@ class Error(pisi.Error):
 class LockedDBShelf(shelve.DBShelf):
     """A simple wrapper to implement locking for bsddb's dbshelf"""
 
-    def __init__(self, dbname, mode=0744,
+    def __init__(self, dbname, mode=0644,
                  filetype=db.DB_HASH, dbenv=None):
         shelve.DBShelf.__init__(self, dbenv)
         filename = os.path.join( pisi.context.config.db_dir(), dbname + '.bdb')
@@ -46,7 +46,7 @@ class LockedDBShelf(shelve.DBShelf):
         # superclass does something funky, we don't need that
         pass
         
-    def open(self, filename, dbname, filetype, flags=db.DB_CREATE, mode=0744):
+    def open(self, filename, dbname, filetype, flags=db.DB_CREATE, mode=0644):
         self.filename = filename        
         self.closed = False
         #print 'open', filename
