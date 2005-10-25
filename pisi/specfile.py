@@ -35,11 +35,9 @@ _ = __trans.ugettext
 import pisi
 from pisi.xmlext import *
 from pisi.xmlfile import XmlFile
+import pisi.xmlfile as xmlfile
 from pisi.dependency import DepInfo
 from pisi.util import Checks
-
-#class Packager:
-#    __metaclass__ = xmlfile.autoxml
 
 class PackagerInfo:
     def __init__(self, node = None):

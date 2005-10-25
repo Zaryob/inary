@@ -33,12 +33,12 @@ __metaclass__ = xmlfile.autoxml
 
 
 class Packager:
-    t_Name = [types.StringType, xmlfile.mandatory]
-    t_Email = [types.StringType, xmlfile.mandatory]
+    t_Name = [xmlfile.String, xmlfile.mandatory]
+    t_Email = [xmlfile.String, xmlfile.mandatory]
     def __str__(self):
         s = "%s <%s>" % (self.name, self.email)
         return s
-        
+
         
 class AdditionalFileInfo:
     s_Filename = xmlfile.mandatory

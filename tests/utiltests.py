@@ -32,3 +32,4 @@ class UtilTestCase(unittest.TestCase):
 
 
 suite = unittest.makeSuite(UtilTestCase)
+

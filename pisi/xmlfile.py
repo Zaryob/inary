@@ -51,11 +51,14 @@ import pisi.util as util
 class Error(pisi.Error):
     pass
 
+# requirement specs
+
 mandatory, optional = range(2) # poor man's enum
 
 # basic types
 
-Text = types.StringType
+String = types.StringType
+Text = types.UnicodeType
 Integer = types.IntType
 
 #class datatype(type):
@@ -602,6 +605,7 @@ class autoxml(type):
 
     basic_cons_map = {
         types.StringType : str,
+        types.UnicodeType : unicode,
         types.IntType : int
         }
 

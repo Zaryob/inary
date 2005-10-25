@@ -18,58 +18,33 @@ import locale
 sys.path.append('.')
 sys.path.append('..')
 
-runTestSuite = lambda(x): unittest.TextTestRunner(verbosity=2).run(x)
+def run_test_suite(testsuite):
+    unittest.TextTestRunner(verbosity=2).run(testsuite)
 
 def run_all():
 
-    import utiltests
-    import xmlfiletests
-    import specfiletests
-    import metadatatests
-    import constantstests
-    import fetchertests
-    import archivetests
-    import installdbtests
-    import sourcedbtests
-    import packagedbtests
-    import actionsapitests
-    import graphtests
-    import versiontests
-    import configfiletests
-    import packagetests
-    import dependency
+    print '** Running all tests'
+    #testsuite = unittest.TestSuite()
+    for root, dirs, files in os.walk('tests'):
+        testsources = filter(lambda x:x.endswith('tests.py'), files)
+        for testsource in testsources:
+            module = __import__(testsource[:len(testsource)-3])
+            #testsuite.add(module.suite)
+            print '\n* Running tests in', testsource
+            run_test_suite(module.suite)
 
-    alltests = unittest.TestSuite((
-        utiltests.suite, 
-        xmlfiletests.suite,
-        specfiletests.suite,
-        metadatatests.suite,
-        constantstests.suite,
-        fetchertests.suite,
-        archivetests.suite,
-        installdbtests.suite,
-        sourcedbtests.suite,
-        packagedbtests.suite,
-# FIXME: actionsapitests requires tester to run a specific command first.
-#        actionsapitests.suite,
-        graphtests.suite,
-        versiontests.suite,
-        configfiletests.suite,
-        packagetests.suite,
-        dependencytests.suite
-        ))
-
-    runTestSuite(alltests)
+    #run_test_suite(unittest.TestSuite(tests))
 
 if __name__ == "__main__":
+
     locale.setlocale(locale.LC_ALL, '')
     args = sys.argv
     if len(args) > 1: # run modules given from the command line
         tests = sys.argv[1:]
         for test in tests:
-            module = __import__(test + 'tests')
-            print "\nRunning tests in '%s'...\n" % (test)
-            runTestSuite(module.suite)
+            test += 'tests'
+            module = __import__(test)
+            print "* Running tests in '%s'" % (test)
+            run_test_suite(module.suite)
     else: # run all tests
-        print "\nRunning all tests in order...\n"
         run_all()
