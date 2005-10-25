@@ -154,6 +154,7 @@ class InstallDB:
         assert info.state == 'ip'
         info.state = 'i'
         self.d[pkg] = info
+        del self.dp[pkg]
 
     def remove(self, pkg):
         pkg = str(pkg)
