@@ -21,7 +21,6 @@ class SpecFileNewTestCase(unittest.TestCase):
         self.spec.read("tests/popt/pspec.xml")
     
     def testReadSpec(self):
-        print 'GOTVEREN SENI'
         self.assertEqual(self.spec.source.name, "popt")
 
         self.assertEqual(self.spec.source.version, "1.7")

@@ -40,7 +40,7 @@ class Packager:
         return s
 
         
-class AdditionalFileInfo:
+class AdditionalFile:
     s_Filename = xmlfile.mandatory
     a_Target = [xmlfile.String, xmlfile.mandatory]
     a_Permission = [xmlfile.String, xmlfile.optional]
@@ -146,14 +146,9 @@ class Source:
     t_IsA = [ [xmlfile.String], xmlfile.mandatory]
     t_PartOf = [xmlfile.String, xmlfile.mandatory]
     t_Archive = [Archive, xmlfile.mandatory ]
-    t_Patch = [ [Patch], xmlfile.mandatory, "Patches/Patch"]
-    t_BuildDep = [ [Dependency], xmlfile.mandatory, "BuildDependencies/Dependency"]
-    t_History = [ [Update], xmlfile.mandatory, "History/Update"]
+    t_Patch = [ [Patch], xmlfile.mandatory, "Patch"]
+    t_BuildDep = [ [Dependency], xmlfile.mandatory, "Dependency"]
 
-class AdditionalFile:
-    s_filename = [xmlfile.String, xmlfile.mandatory]
-    a_target = [xmlfile.String, xmlfile.mandatory]
-    a_permission = [xmlfile.String, xmlfile.mandatory]
 
 class Package:
 
@@ -162,9 +157,109 @@ class Package:
     t_Description = [ xmlfile.String, xmlfile.mandatory ]
     t_IsA = [ [xmlfile.String], xmlfile.mandatory]
     t_PartOf = [xmlfile.String, xmlfile.mandatory]
-    t_History = [ [Update], xmlfile.mandatory, "History/Update"]
-    t_Conflicts = [ [xmlfile.String], xmlfile.mandatory, "Conflicts/Package"]
-    t_ProvidesComar = [ [ComarProvide], xmlfile.mandatory, "Provides/COMAR"]
-    t_RequriesComar = [ [xmlfile.String], xmlfile.mandatory, "Requires/COMAR"]
-    t_AdditionalFiles = [ [AdditionalFile], xmlfile.mandatory, "AdditionalFiles/AdditionalFile"]
+    t_Conflicts = [ [xmlfile.String], xmlfile.mandatory, "Package"]
+    t_ProvidesComar = [ [ComarProvide], xmlfile.mandatory, "COMAR"]
+    #t_RequriesComar = [ [xmlfile.String], xmlfile.mandatory, "Requires/COMAR"]
+    t_AdditionalFiles = [ [AdditionalFile], xmlfile.mandatory, "AdditionalFile"]
     
+
+class SpecFile(XmlFile):
+    t_Source = [ [Source], xmlfile.mandatory, "Source"]
+    t_Packages = [ [Package], xmlfile.mandatory, "Package"]
+    t_History = [ [Update], xmlfile.mandatory, "Update"]
+
+    def read(self, filename):
+        """Read PSPEC file"""
+        
+        XmlFile.__init__(self,"PISI")
+        self.readxml(filename)
+        
+        errs = []
+        self.decode(self.rootNode(), errs)
+
+        self.merge_tags()
+        self.override_tags()
+
+        #FIXME: copy only needed information
+        # no need to keep full history with comments in metadata.xml
+        self.source.history = self.history
+        for p in self.packages:
+            p.history = self.history
+
+        self.unlink()
+
+ 
+        errs = self.has_errors()
+        if errs:
+            e = ""
+            for x in errs:
+                e += x + "\n"
+            raise XmlError(_("File '%s' has errors:\n%s") % (filename, e))
+
+    def override_tags(self):
+        """Override tags from Source in Packages. Some tags in Packages
+        overrides the tags from Source. There is a more detailed
+        description in documents."""
+
+        tmp = []
+        for pkg in self.packages:
+
+            if not pkg.summary:
+                pkg.summary = self.source.summary
+
+            if not pkg.description:
+                pkg.description = self.source.description
+
+            if not pkg.partof:
+                pkg.partof = self.source.partof
+
+            if not pkg.license:
+                pkg.license = self.source.license
+
+            if not pkg.icon:
+                pkg.icon = self.source.icon
+
+            tmp.append(pkg)
+
+        self.packages = tmp
+        
+    def merge_tags(self):
+        """Merge tags from Source in Packages. Some tags in Packages merged
+        with the tags from Source. There is a more detailed
+        description in documents."""
+
+        tmp = []
+        for pkg in self.packages:
+
+            if pkg.isa and self.source.isa:
+                pkg.isa.append(self.source.isa)
+            elif not pkg.isa and self.source.isa:
+                pkg.isa = self.source.isa
+
+            tmp.append(pkg)
+
+        self.packages = tmp
+
+    def has_errors(self):
+        """Return errors of the PSPEC file if there are any."""
+        #FIXME: has_errors name is misleading for a function that does
+        #not just return a boolean value. check() would be better - exa
+        err = Checks()
+        err.join(self.source.has_errors())
+        if len(self.packages) <= 0:
+            errs.add(_("There should be at least one Package section"))
+        for p in self.packages:
+            err.join(p.has_errors())
+        if len(self.history) <= 0:
+            err.add(_("Source needs some education in History :)"))
+        for update in self.history:
+            err.join(update.has_errors())
+        return err.list
+    
+    def write(self, filename):
+        """Write PSPEC file"""
+        self.newDOM()
+        self.addChild(self.source.elt(self))
+        for pkg in self.packages:
+            self.addChild(pkg.elt(self))
+        self.writexml(filename)
