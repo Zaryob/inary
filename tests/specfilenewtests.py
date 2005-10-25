@@ -11,16 +11,17 @@
 import unittest
 import os
 
-from pisi import specfile
+import pisi.specfilenew as specfile
 from pisi.config import config
 import pisi.util as util
 
-class SpecFileTestCase(unittest.TestCase):
+class SpecFileNewTestCase(unittest.TestCase):
     def setUp(self):
         self.spec = specfile.SpecFile()
         self.spec.read("tests/popt/pspec.xml")
     
     def testReadSpec(self):
+        print 'GOTVEREN SENI'
         self.assertEqual(self.spec.source.name, "popt")
 
         self.assertEqual(self.spec.source.version, "1.7")
@@ -77,4 +78,4 @@ class SpecFileTestCase(unittest.TestCase):
         self.spec.write(os.path.join(config.tmp_dir(), 'popt-copy.pspec.xml'))
 
 
-suite = unittest.makeSuite(SpecFileTestCase)
+suite = unittest.makeSuite(SpecFileNewTestCase)

@@ -25,7 +25,7 @@ from os.path import basename
 from pisi.xmlext import *
 import pisi.xmlfile as xmlfile
 from pisi.xmlfile import XmlFile
-from pisi.ui import ui
+import pisi.context as ctx
 from pisi.dependency import DepInfo
 from pisi.util import Checks
 
@@ -42,8 +42,8 @@ class Packager:
         
 class AdditionalFileInfo:
     s_Filename = xmlfile.mandatory
-    a_Target = [types.StringType, xmlfile.mandatory]
-    a_Permission = [types.StringType, xmlfile.optional]
+    a_Target = [xmlfile.String, xmlfile.mandatory]
+    a_Permission = [xmlfile.String, xmlfile.optional]
 
     def __str__(self):
         s = "%s -> %s " % (self.filename, self.target)
@@ -54,9 +54,9 @@ class AdditionalFileInfo:
         
 class Patch:
     s_Filename = xmlfile.mandatory
-    a_compressionType = [types.StringType, xmlfile.optional]
-    a_level = [types.StringType, xmlfile.optional]
-    a_target = [types.StringType, xmlfile.optional]
+    a_compressionType = [xmlfile.String, xmlfile.optional]
+    a_level = [xmlfile.String, xmlfile.optional]
+    a_target = [xmlfile.String, xmlfile.optional]
 
     def __str__(self):
         s = self.filename
@@ -71,10 +71,10 @@ class Patch:
         
 class Update:
 
-    t_Date = [types.StringType, xmlfile.mandatory]
-    t_Version = [types.StringType, xmlfile.mandatory]
-    t_Release = [types.StringType, xmlfile.mandatory]
-    t_Type = [types.StringType, xmlfile.optional]
+    t_Date = [xmlfile.String, xmlfile.mandatory]
+    t_Version = [xmlfile.String, xmlfile.mandatory]
+    t_Release = [xmlfile.String, xmlfile.mandatory]
+    t_Type = [xmlfile.String, xmlfile.optional]
 
     def __str__(self):
         s = self.date
@@ -86,20 +86,37 @@ class Update:
 
         
 class Path:
-
     s_Path = xmlfile.mandatory
-    a_fileType =  [types.StringType, xmlfile.optional]
+    a_fileType =  [xmlfile.String, xmlfile.optional]
 
     def __str__(self):
-        s = self.pathname
+        s = self.path
         s += ", type=" + self.fileType
         return s
 
+class Dependency:
+    t_Package = [xmlfile.String, xmlfile.mandatory]
+    a_versionFrom = [xmlfile.String, xmlfile.optional]
+    a_versionTo = [xmlfile.String, xmlfile.optional]
+    a_releaseFrom = [xmlfile.String, xmlfile.optional]
+    a_releaseTo = [xmlfile.String, xmlfile.optional]
+
+    def __str__(self):
+        s = self.package
+        if self.versionFrom:
+            s += 'ver >= ' + self.versionFrom
+        if self.versionTo:
+            s += 'ver <= ' + self.versionTo
+        if self.releaseFrom:
+            s += 'rel >= ' + self.releaseFrom
+        if self.releaseTo:
+            s += 'rel <= ' + self.releaseTo
+        return s
 
 class ComarProvide:
 
-    s_om = [types.StringType, xmlfile.mandatory]
-    a_script = [types.StringType, xmlfile.mandatory]
+    s_om = [xmlfile.String, xmlfile.mandatory]
+    a_script = [xmlfile.String, xmlfile.mandatory]
 
     def __str__(self):
         # FIXME: descriptive enough?
@@ -110,9 +127,9 @@ class ComarProvide:
         
 class Archive:
 
-    s_uri = [ types.StringType, xmlfile.mandatory ]
-    a_type =[ types.StringType, xmlfile.mandatory ]
-    a_sha1sum =[ types.StringType, xmlfile.mandatory ]
+    s_uri = [ xmlfile.String, xmlfile.mandatory ]
+    a_type =[ xmlfile.String, xmlfile.mandatory ]
+    a_sha1sum =[ xmlfile.String, xmlfile.mandatory ]
 
     def decode_post(self):
         self.name = basename(self.uri)
@@ -120,30 +137,34 @@ class Archive:
 
 class Source:
 
-    t_Name = [types.StringType, xmlfile.mandatory]
-    t_HomePage = [types.StringType, xmlfile.mandatory]
+    t_Name = [xmlfile.String, xmlfile.mandatory]
+    t_HomePage = [xmlfile.String, xmlfile.mandatory]
     t_Packager = [Packager, xmlfile.mandatory]
-    t_Summary = [types.StringType, xmlfile.mandatory]
-    t_Description = [types.StringType, xmlfile.mandatory]
-    t_License = [ [types.StringType], xmlfile.mandatory]
-    t_IsA = [ [types.StringType], xmlfile.mandatory]
-    t_PartOf = [types.StringType, xmlfile.mandatory]
+    t_Summary = [xmlfile.String, xmlfile.mandatory]
+    t_Description = [xmlfile.String, xmlfile.mandatory]
+    t_License = [ [xmlfile.String], xmlfile.mandatory]
+    t_IsA = [ [xmlfile.String], xmlfile.mandatory]
+    t_PartOf = [xmlfile.String, xmlfile.mandatory]
     t_Archive = [Archive, xmlfile.mandatory ]
     t_Patch = [ [Patch], xmlfile.mandatory, "Patches/Patch"]
     t_BuildDep = [ [Dependency], xmlfile.mandatory, "BuildDependencies/Dependency"]
     t_History = [ [Update], xmlfile.mandatory, "History/Update"]
 
+class AdditionalFile:
+    s_filename = [xmlfile.String, xmlfile.mandatory]
+    a_target = [xmlfile.String, xmlfile.mandatory]
+    a_permission = [xmlfile.String, xmlfile.mandatory]
 
 class Package:
 
-    t_Name = [ types.StringType, xmlfile.mandatory ]
-    t_Summary = [ types.StringType, xmlfile.mandatory ]
-    t_Description = [ types.StringType, xmlfile.mandatory ]
-    t_IsA = [ [types.StringType], xmlfile.mandatory]
-    t_PartOf = [types.StringType, xmlfile.mandatory]
+    t_Name = [ xmlfile.String, xmlfile.mandatory ]
+    t_Summary = [ xmlfile.String, xmlfile.mandatory ]
+    t_Description = [ xmlfile.String, xmlfile.mandatory ]
+    t_IsA = [ [xmlfile.String], xmlfile.mandatory]
+    t_PartOf = [xmlfile.String, xmlfile.mandatory]
     t_History = [ [Update], xmlfile.mandatory, "History/Update"]
-    t_Conflicts = [ [types.StringType], xmlfile.mandatory, "Conflicts/Package"]
+    t_Conflicts = [ [xmlfile.String], xmlfile.mandatory, "Conflicts/Package"]
     t_ProvidesComar = [ [ComarProvide], xmlfile.mandatory, "Provides/COMAR"]
-    t_RequriesComar = [ [types.StringType], xmlfile.mandatory, "Requires/COMAR"]
+    t_RequriesComar = [ [xmlfile.String], xmlfile.mandatory, "Requires/COMAR"]
     t_AdditionalFiles = [ [AdditionalFile], xmlfile.mandatory, "AdditionalFiles/AdditionalFile"]
     
