@@ -76,6 +76,7 @@ class XmlFileTestCase(unittest.TestCase):
         a2.encode(xml, xml.rootNode(), errs3)
         print 'errs3', errs3
         xml.writexml('/tmp/a2.xml')
+        print a2.check()
         #string = a2.format(errs3)
 
 suite = unittest.makeSuite(XmlFileTestCase)
