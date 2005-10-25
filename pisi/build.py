@@ -375,7 +375,7 @@ class Builder:
                 try: # broken links can cause problem
                     fsize = str(os.path.getsize(fpath))
                 except OSError:
-                    fsize = "0"
+                    fsize = None
                 d[frpath] = FileInfo(frpath, ftype, fsize, fhash)
         for (p, fileinfo) in d.iteritems():
             files.append(fileinfo)
