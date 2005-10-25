@@ -71,10 +71,10 @@ class Checks:
 # string/list/functional#
 #########################
 
-def every(seq, pred):
+def every(pred, seq):
     return reduce(operator.and_, map(pred, seq))
 
-def any(seq, pred):
+def any(pred, seq):
     return reduce(operator.or_, map(pred, seq))
 
 def unzip(seq):

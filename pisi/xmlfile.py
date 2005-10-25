@@ -46,6 +46,7 @@ _ = __trans.ugettext
 import pisi
 from pisi.xmlext import *
 import pisi.context as ctx
+import pisi.util as util
 
 class Error(pisi.Error):
     pass
@@ -97,6 +98,13 @@ class LocalText(object):
             newtext = newTextNode(node, self.locs[key])
             newnode.appendChild(newtext)
             node.appendChild(newnode)
+    
+    def check(self):
+        errs = []
+        langs = [ locale.getlocale()[0][0:2], 'tr', 'en' ]
+        if not util.any(lambda x : self.locs.has_key(x), langs):
+            errs.append(_("Tag should have at least an English or Turkish version"))
+        return errs
     
     def format(self, f, errs):
         L = locale.getlocale()[0][0:2] # try to read language, pathetic isn't it?
@@ -205,6 +213,7 @@ class autoxml(type):
         inits = []
         decoders = []
         encoders = []
+        checkers = []
         formatters = []
         order = dict.keys()
         order.sort()
@@ -215,10 +224,11 @@ class autoxml(type):
                     x = autoxml.gen_attr_member(cls, name)
                 elif var.startswith('t_'):
                     x = autoxml.gen_tag_member(cls, name)
-                (init, decoder, encoder, formatter) = x
+                (init, decoder, encoder, checker, formatter) = x
                 inits.append(init)
                 decoders.append(decoder)
                 encoders.append(encoder)
+                checkers.append(checker)
                 formatters.append(formatter)
 
         # generate top-level helper functions
@@ -240,6 +250,14 @@ class autoxml(type):
             for encode_member in self.__class__.encoders:
                 encode_member(self, xml, node, errs)
         cls.encode = encode
+
+        cls.checkers = checkers
+        def check(self):
+            errs = []
+            for checker in self.__class__.checkers:
+                errs.extend(checker(self))
+            return errs
+        cls.check = check
 
         cls.formatters = formatters
         def format(self, f, errs):
@@ -308,7 +326,7 @@ class autoxml(type):
         name = cls.mixed_case(token)
         token_type = spec[0]
         req = spec[1]
-        (init_a, decode_a, encode_a, format_a) = anonfuns
+        (init_a, decode_a, encode_a, check_a, format_a) = anonfuns
 
         def init(self):
             """initialize component"""
@@ -326,15 +344,25 @@ class autoxml(type):
                 value = None
             encode_a(xml, node, value, errs)
             
+        def check(self):
+            errs = []
+            if hasattr(self, name):
+                value = getattr(self,name)
+                errs.extend(check_a(value))
+            else:
+                if req == mandatory:
+                    errs.append(_('Mandatory variable %s not available') % name)
+            return errs
+            
         def format(self, f, errs):
             if hasattr(self, name):
                 value = getattr(self,name)
                 f.add_literal_data('%s: %s\n' % (token, format_a(value, f, errs)))
             else:
                 if req == mandatory:
-                    raise Error(_('Mandatory variable %s not available') % name)
+                    errs.append(_('Mandatory variable %s not available') % name)
             
-        return (init, decode, encode, format)
+        return (init, decode, encode, check, format)
 
     def mixed_case(cls, identifier):
         """helper function to turn token name into mixed case"""
@@ -402,11 +430,17 @@ class autoxml(type):
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
 
+        def check(value):
+            errs = []
+            if not isinstance(value, token_type):
+                errs.append(_('Type mismatch'))
+            return errs
+
         def format(value, f, errs):
             """format value for pretty printing"""
             f.add_literal_data(unicode(value))
 
-        return initialize, decode, encode, format
+        return initialize, decode, encode, check, format
 
     def gen_class_tag(cls, tag, spec):
         """generate a class datatype"""
@@ -448,14 +482,17 @@ class autoxml(type):
             else:
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
-                
+        
+        def check(obj):
+            return obj.check()
+        
         def format(obj, f, errs):
             try:
                 obj.format(f, errs)
             except Error:
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
-        return (init, decode, encode, format)
+        return (init, decode, encode, check, format)
 
     def gen_list_tag(cls, tag, spec):
         """generate a list datatype. stores comps in tag/comp_tag"""
@@ -466,7 +503,7 @@ class autoxml(type):
             raise Error(_('List type must contain only one element'))
 
         x = cls.gen_tag(comp_tag, [tag_type[0], mandatory])
-        (init_item, decode_item, encode_item, format_item) = x
+        (init_item, decode_item, encode_item, check_item, format_item) = x
 
         def init():
             return []
@@ -493,6 +530,12 @@ class autoxml(type):
                 if req is mandatory:
                     errs.append(_('Mandatory list empty'))
 
+        def check(l):
+            errs = []
+            for ix in range(len(l)):
+                errs.extend(check_item(l[ix]))
+            return errs
+
         def format(l, f, errs):
             # indent here
             for ix in range(len(l)):
@@ -501,7 +544,7 @@ class autoxml(type):
                 if ix != len(l)-1:
                     f.add_flowing_data(', ')
 
-        return (init, decode, encode, format)
+        return (init, decode, encode, check, format)
 
     def gen_insetclass_tag(cls, tag, spec):
         """generate a class datatype that is highly integrated
@@ -544,7 +587,10 @@ class autoxml(type):
             else:
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
-                
+
+        def check(obj):
+            return obj.check()
+
         def format(obj, f, errs):
             try:
                 obj.format(f, errs)
@@ -552,7 +598,7 @@ class autoxml(type):
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
 
-        return (init, decode, encode, format)
+        return (init, decode, encode, check, format)
 
     basic_cons_map = {
         types.StringType : str,
