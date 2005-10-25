@@ -19,6 +19,7 @@
 #
 #[general]
 #destinationdirectory = /tmp
+#autoclean = False
 #
 #[build]
 #host = i686-pc-linux-gnu
@@ -51,6 +52,7 @@ class GeneralDefaults:
     """Default values for [general] section"""
 #    destinationdirectory = os.getcwd() + "/tmp" # FOR ALPHA
     destinationdirectory = "/"
+    autoclean = True
     distribution = "Pardus"
     distribution_release = "0.1"
 
