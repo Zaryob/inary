@@ -241,13 +241,11 @@ def dir_size(dir):
     # installed size. Gettin a sum of all files' sizes if far from
     # being true. Using 'du' command (like Debian does) can be a
     # better solution :(.
-    getsize = os.path.getsize
+    # Not really, du calculates size on disk, this is much better -- exa
+    from os.path import getsize, islink, isdir, exists
     join = join_path
-    islink = os.path.islink
-    isdir = os.path.isdir
-    exist = os.path.exists
 
-    if exist(dir) and (not isdir(dir) and not islink(dir)):
+    if exists(dir) and (not isdir(dir) and not islink(dir)):
         #so, this is not a directory but file..
         return getsize(dir)
 
@@ -262,7 +260,10 @@ def copy_file(src,dest):
     check_dir(os.path.dirname(dest))
     shutil.copyfile(src, dest)
 
-def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
+# FIXME: this should be done in a much much simpler way
+# as it stands, it seems to be a kludge to solve
+# an unrelated problem
+def get_file_hashes(top, exclude_prefix=None, remove_prefix=None):
     """Generator function iterates over a toplevel path and returns the
     (filePath, sha1Hash) tuples for all files. If excludePrefixes list
     is given as a parameter, function will exclude the filePaths
@@ -294,8 +295,8 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
         return
 
     def has_excluded_prefix(filename):
-        if exclude_prefix and removePrefix:
-            tempfnam = remove_prefix(removePrefix, filename)
+        if exclude_prefix and remove_prefix:
+            tempfnam = remove_prefix(remove_prefix, filename)
             for p in exclude_prefix:
                 if tempfnam.startswith(p):
                     return 1
@@ -307,7 +308,7 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
             #yield the symlink..
             #bug 373
             yield (root, sha1_sum(os.readlink(root), True))
-            exclude_prefix.append(remove_prefix(removePrefix, root) + "/")
+            exclude_prefix.append(remove_prefix(remove_prefix, root) + "/")
             continue
 
         #bug 397
@@ -315,7 +316,7 @@ def get_file_hashes(top, exclude_prefix=None, removePrefix=None):
             d = join_path(root, dir)
             if os.path.islink(d) and not has_excluded_prefix(d):
                 yield (d, sha1_sum(os.readlink(d), True))
-                exclude_prefix.append(remove_prefix(removePrefix, d) + "/")
+                exclude_prefix.append(remove_prefix(remove_prefix, d) + "/")
 
         #bug 340
         if os.path.isdir(root) and not has_excluded_prefix(root):
@@ -355,7 +356,7 @@ def sha1_file(filename):
             m.update(line)
         return m.hexdigest()
     except IOError:
-        raise FileError(_("Cannot calculate SHA1 hash of %s") % filename)
+        raise FileError(_("I/O Error: Cannot calculate SHA1 hash of %s") % filename)
 
 def sha1_data(data):
     """calculate sha1 hash of given data"""
@@ -477,6 +478,22 @@ def clean_locks(top = '.'):
 
 def package_name(name, version, release):
     return  name + '-' + version + '-' + release + ctx.const.package_prefix
+
+def is_package_name(fn, package_name = None):
+    "check if fn is a valid filename for given package_name"
+    "if not given a package name, see if fn fits the package name rules"
+    if (package_name==None) or fn.startswith(package_name + '-'):
+        if fn.endswith(ctx.const.package_prefix):
+            # get version string, skip separator '-'
+            verstr = fn[len(package_name) + 1:
+                        len(fn)-len(ctx.const.package_prefix)]
+            import string
+            for x in verstr.split('-'):
+                # weak rule: version components after '-' start with a digit
+                if x is '' or (not x[0] in string.digits):
+                    return False
+            return True
+    return False
 
 def env_update():
 

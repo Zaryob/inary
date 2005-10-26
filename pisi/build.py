@@ -16,6 +16,7 @@
 # python standard library
 import os
 import sys
+import glob
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -73,8 +74,8 @@ def check_path_collision(package, pkgList):
                 # path.pathname: /usr/share/doc
                 if util.subpath(pinfo.pathname, path.pathname):
                     collisions.append(path.pathname)
-                    ctx.ui.debug(_('Path %s belongs in multiple packages') %
-                             path.pathname)
+                    ctx.ui.error(_('Path %s belongs in multiple packages') %
+                                 path.pathname)
     return collisions
 
 # a dynamic build context
@@ -356,27 +357,38 @@ class Builder:
         self.metadata = metadata
 
     def gen_files_xml(self, package):
-        """Generetes files.xml using the path definitions in specfile and
-        generated files by the build system."""
+        """Generates files.xml using the path definitions in specfile and
+        the files produced by the build system."""
         files = Files()
         install_dir = self.bctx.pkg_install_dir()
 
+        # FIXME: We need to expand globs before trying to calculate hashes
+        # Not on the fly like now.
+
         # we'll exclude collisions in get_file_hashes. Having a
         # collisions list is not wrong, we must just handle it :).
-        collisions = check_path_collision(package,
-                                          self.spec.packages)
+        # sure -- exa
+        collisions = check_path_collision(package, self.spec.packages)
+        # FIXME: material collisions after expanding globs must be
+        # reported as errors, and an exception must be raised
 
         d = {}
-        for pinfo in package.paths:
-            path = install_dir + pinfo.pathname
+        def add_path(path):
+            # add the files under material path 
             for fpath, fhash in util.get_file_hashes(path, collisions, install_dir):
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
                 ftype = get_file_type(frpath, package.paths)
-                try: # broken links can cause problem
+                try: # broken links and empty dirs can cause problem
                     fsize = str(os.path.getsize(fpath))
                 except OSError:
                     fsize = None
                 d[frpath] = FileInfo(frpath, ftype, fsize, fhash)
+
+        for pinfo in package.paths:
+            wildcard_path = util.join_path(install_dir, pinfo.pathname)
+            for path in glob.glob(wildcard_path):
+                add_path(path)
+
         for (p, fileinfo) in d.iteritems():
             files.append(fileinfo)
 
@@ -387,69 +399,29 @@ class Builder:
     def calc_build_no(self, package_name):
         """Calculate build number"""
 
-        def found_package(fn):
-            "did we find the filename we were looking for?"
-            if fn.startswith(package_name + '-'):
-                if fn.endswith(ctx.const.package_prefix):
-                    # get version string, skip separator '-'
-                    verstr = fn[len(package_name) + 1:
-                                len(fn)-len(ctx.const.package_prefix)]
-                    import string
-                    for x in verstr.split('-'):
-                        # weak rule: version components start with a digit
-                        if x is '' or (not x[0] in string.digits):
-                            return False
-                    return True
-            return False
+        # find previous build in output dir and packages dir
+        found = []        
+        def locate_package_names(files):
+             for fn in files:
+                 fn = fn.decode('utf-8')
+                 if util.is_package_name(fn, package_name):
+                     old_package_fn = os.path.join(root, fn)
+                     ctx.ui.info('(found old version %s)' % old_package_fn)
+                     old_pkg = Package(old_package_fn, 'r')
+                     old_pkg.read(os.path.join(ctx.config.tmp_dir(), 'oldpkg'))
+                     if str(old_pkg.metadata.package.name) != package_name:
+                         ctx.ui.warning('Skipping %s with wrong pkg name ' %
+                                        old_package_fn)
+                         continue
+                     old_build = old_pkg.metadata.package.build
+                     found.append( (old_package_fn, old_build) )
 
-        # find previous build in ctx.config.options.output_dir
-        found = []
-#        for root, dirs, files in os.walk(ctx.config.options.output_dir):
-#             for fn in files:
-#                 fn = fn.decode('utf-8')
-#                 if found_package(fn):
-#                     old_package_fn = os.path.join(root, fn)
-#                     ctx.ui.info('(found old version %s)' % old_package_fn)
-#                     old_pkg = Package(old_package_fn, 'r')
-#                     old_pkg.read(os.path.join(ctx.config.tmp_dir(), 'oldpkg'))
-#                     if str(old_pkg.metadata.package.name) != package_name:
-#                         ctx.ui.warning('Skipping %s with wrong pkg name ' %
-#                                        old_package_fn)
-#                         continue
-#                     old_build = old_pkg.metadata.package.build
-#                     found.append( (old_package_fn, old_build) )
-#
-# FIXME: Following dirty lines of code just search in the output_dir and
-# packages dir for previous packages. But we should find a neat way
-# for this...
-        files = []
-        for f in os.listdir(ctx.config.options.output_dir):
-            fp = os.path.join(ctx.config.options.output_dir, f)
-            if os.path.isfile(fp):
-                files.append(fp)
+        for root, dirs, files in os.walk(ctx.config.options.output_dir):
+            dirs = [] # don't recurse
+            locate_package_names(files)
+        for root, dirs, files in os.walk(ctx.config.packages_dir()):
+            locate_package_names(files)
 
-        packages_dir = ctx.config.packages_dir()
-        # FIXME: packages_dir() should be there!
-        if not os.path.exists(packages_dir):
-            os.makedirs(packages_dir)
-        for f in os.listdir(packages_dir):
-            fp = os.path.join(packages_dir, f)
-            if os.path.isfile(fp):
-                files.append(fp)
-
-        for fn in files:
-            fn = fn.decode('utf-8')
-            if found_package(os.path.basename(fn)):
-                old_package_fn = fn
-                ctx.ui.info(_('(found old version %s)') % old_package_fn)
-                old_pkg = Package(old_package_fn, 'r')
-                old_pkg.read(os.path.join(ctx.config.tmp_dir(), 'oldpkg'))
-                if str(old_pkg.metadata.package.name) != package_name:
-                    ctx.ui.warning(_('Skipping %s with wrong pkg name ') %
-                                   old_package_fn)
-                    continue
-                old_build = old_pkg.metadata.package.build
-                found.append( (old_package_fn, old_build) )
         if not found:
             return 0
             ctx.ui.warning(_('(no previous build found, setting build no to 0.)'))
