@@ -76,19 +76,19 @@ class LocalText(object):
         self.req = spec[1]
         self.locs = {}
     
-    def decode(self, node, errs):
+    def decode(self, node, errs, where = ""):
         # flags, tag name, instance attribute
         nodes = getAllNodes(node, self.tag)
         if not nodes:
             if self.req == mandatory:
-                errs.append(_("LocalText '%s' should have at least one '%s' tag\n") %
+                errs.append(where + _("LocalText '%s' should have at least one '%s' tag\n") %
                              self.tag)
         else:
             for node in nodes:
                 lang = getNodeAttribute(node, "xml:lang")
                 c = getNodeText(node)
                 if not c:
-                    errs.append(_("'%s' language of tag '%s' should have some text data\n") %
+                    errs.append(where + _("'%s' language of tag '%s' should have some text data\n") %
                                 (lang, self.tag))
                 # FIXME: check for dups and 'en'
                 if not lang:
@@ -103,11 +103,11 @@ class LocalText(object):
             newnode.appendChild(newtext)
             node.appendChild(newnode)
     
-    def check(self):
+    def check(self, where = unicode()):
         errs = []
         langs = [ locale.getlocale()[0][0:2], 'tr', 'en' ]
         if not util.any(lambda x : self.locs.has_key(x), langs):
-            errs.append(_("Tag should have at least an English or Turkish version"))
+            errs.append( where + _("Tag should have at least an English or Turkish version"))
         return errs
     
     def format(self, f, errs):
@@ -252,9 +252,9 @@ class autoxml(oo.autosuper):
         cls.__init__ = initialize
 
         cls.decoders = decoders
-        def decode(self, node, errs):
+        def decode(self, node, errs, where = unicode()):
             for decode_member in self.__class__.decoders:
-                decode_member(self, node, errs)
+                decode_member(self, node, errs, where)
         cls.decode = decode
 
         cls.encoders = encoders
@@ -264,10 +264,10 @@ class autoxml(oo.autosuper):
         cls.encode = encode
 
         cls.checkers = checkers
-        def check(self):
+        def check(self, where = unicode()):
             errs = []
             for checker in self.__class__.checkers:
-                errs.extend(checker(self))
+                errs.extend(checker(self), where)
             return errs
         cls.check = check
 
@@ -344,9 +344,9 @@ class autoxml(oo.autosuper):
             """initialize component"""
             setattr(self, name, init_a())
             
-        def decode(self, node, errs):
+        def decode(self, node, errs, where):
             """decode component from DOM node"""
-            setattr(self, name, decode_a(node, errs))
+            setattr(self, name, decode_a(node, errs, where + unicode(name) + " "))
             
         def encode(self, xml, node, errs):
             """encode self inside, possibly new, DOM node using xml"""
@@ -356,14 +356,14 @@ class autoxml(oo.autosuper):
                 value = None
             encode_a(xml, node, value, errs)
             
-        def check(self):
+        def check(self, where):
             errs = []
             if hasattr(self, name):
                 value = getattr(self,name)
-                errs.extend(check_a(value))
+                errs.extend(check_a(value, unicode("%s: " %name)))
             else:
                 if req == mandatory:
-                    errs.append(_('Mandatory variable %s not available') % name)
+                    errs.append(where + _('Mandatory variable %s not available') % name)
             return errs
             
         def format(self, f, errs):
@@ -417,7 +417,7 @@ class autoxml(oo.autosuper):
             """default value for all basic types is None"""
             return None
 
-        def decode(node, errs):
+        def decode(node, errs, where):
             """decode from DOM node, the value, watching the spec"""
             text = readtext(node, token)
             #print 'read text ', text
@@ -426,7 +426,7 @@ class autoxml(oo.autosuper):
                     value = autoxml.basic_cons_map[token_type](text)
                 except Error:
                     value = None
-                    errs.append(_('Type mismatch: read text cannot be decoded'))
+                    errs.append(where + _('Type mismatch: read text cannot be decoded'))
                 return value
             else:
                 if req == mandatory:
@@ -442,10 +442,10 @@ class autoxml(oo.autosuper):
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
 
-        def check(value):
+        def check(value, where):
             errs = []
             if not isinstance(value, token_type):
-                errs.append(_('Type mismatch'))
+                errs.append(where + _('Type mismatch'))
             return errs
 
         def format(value, f, errs):
@@ -466,18 +466,18 @@ class autoxml(oo.autosuper):
         def init():
             return make_object()
 
-        def decode(node, errs):
+        def decode(node, errs, where):
             node = getNode(node, tag)
             if node:
                 try:
                     obj = make_object()
-                    obj.decode(node, errs)
+                    obj.decode(node, errs, where + unicode("Class %s :") % tag)
                     return obj
                 except Error:
-                    errs.append(_('Type mismatch: DOM cannot be decoded'))
+                    errs.append(where + _('Type mismatch: DOM cannot be decoded'))
             else:
                 if req == mandatory:
-                    errs.append(_('Mandatory argument not available'))
+                    errs.append(where + _('Mandatory argument not available'))
             return None
         
         def encode(xml, node, obj, errs):
@@ -495,8 +495,8 @@ class autoxml(oo.autosuper):
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
         
-        def check(obj):
-            return obj.check()
+        def check(obj, where):
+            return obj.check(where)
         
         def format(obj, f, errs):
             try:
@@ -520,16 +520,17 @@ class autoxml(oo.autosuper):
         def init():
             return []
 
-        def decode(node, errs):
+        def decode(node, errs, where):
             l = []
             nodes = getAllNodes(node, tag + '/' + comp_tag)
             #print node, tag + '/' + comp_tag, nodes
             if len(nodes) is 0 and req is mandatory:
-                errs.append(_('Mandatory list empty'))
-            for node in nodes:
+                errs.append(where + _('Mandatory list empty'))
+            for ix in range(len(nodes)):
+                node = nodes[ix]
                 dummy = node.ownerDocument.createElement("Dummy")
                 dummy.appendChild(node)
-                l.append(decode_item(dummy, errs))
+                l.append(decode_item(dummy, errs, where + unicode("[%s]" % ix)))
             return l
 
         def encode(xml, node, l, errs):
@@ -542,10 +543,10 @@ class autoxml(oo.autosuper):
                 if req is mandatory:
                     errs.append(_('Mandatory list empty'))
 
-        def check(l):
+        def check(l, where):
             errs = []
             for ix in range(len(l)):
-                errs.extend(check_item(l[ix]))
+                errs.extend(check_item(l[ix], unicode(ix)))
             return errs
 
         def format(l, f, errs):
@@ -574,17 +575,17 @@ class autoxml(oo.autosuper):
         def init():
             return make_object()
 
-        def decode(node, errs):
+        def decode(node, errs, where):
             if node:
                 try:
                     obj = make_object()
-                    obj.decode(node, errs)
+                    obj.decode(node, errs, where)
                     return obj
                 except Error:
-                    errs.append(_('Type mismatch: DOM cannot be decoded'))
+                    errs.append(where + _('Type mismatch: DOM cannot be decoded'))
             else:
                 if req == mandatory:
-                    errs.append(_('Mandatory argument not available'))
+                    errs.append(where + _('Mandatory argument not available'))
             return None
 
         def encode(xml, node, obj, errs):
@@ -600,8 +601,8 @@ class autoxml(oo.autosuper):
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
 
-        def check(obj):
-            return obj.check()
+        def check(obj, where):
+            return obj.check(where)
 
         def format(obj, f, errs):
             try:

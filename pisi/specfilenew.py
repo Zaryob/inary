@@ -29,6 +29,9 @@ import pisi.context as ctx
 from pisi.dependency import DepInfo
 from pisi.util import Checks
 
+class Error(pisi.Error):
+    pass
+
 __metaclass__ = xmlfile.autoxml
 
 class Packager:
@@ -70,9 +73,9 @@ class Patch:
         
 class Update:
 
+    a_Release = [xmlfile.String, xmlfile.mandatory]
     t_Date = [xmlfile.String, xmlfile.mandatory]
     t_Version = [xmlfile.String, xmlfile.mandatory]
-    t_Release = [xmlfile.String, xmlfile.mandatory]
     t_Type = [xmlfile.String, xmlfile.optional]
 
     def __str__(self):
@@ -180,6 +183,8 @@ class SpecFile(XmlFile):
         
         errs = []
         self.decode(self.rootNode(), errs)
+        if errs:
+            raise Error(*errs)
 
         self.merge_tags()
         self.override_tags()
