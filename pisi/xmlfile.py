@@ -237,9 +237,10 @@ class autoxml(type):
         # generate top-level helper functions
         cls.initializers = inits
         def initialize(self, tag = None, spec = None):
-#            XmlFile.__init__(self, cls.tag)
+            XmlFile.__init__(self, cls.tag)
             for init in self.__class__.initializers:
                 init(self)
+            
         cls.__init__ = initialize
 
         cls.decoders = decoders
