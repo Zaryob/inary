@@ -397,6 +397,8 @@ class autoxml(oo.autosuper):
 
         if len(spec)>=3:
             path = spec[2]               # an alternative path specified
+        elif type(token_type) is autoxml:
+            path = token_type.tag + '/' + token
         else:
             path = token                 # otherwise it's the same name as
                                          # the token
@@ -422,7 +424,7 @@ class autoxml(oo.autosuper):
             if text:
                 try:
                     value = autoxml.basic_cons_map[token_type](text)
-                except Error:
+                except:
                     value = None
                     errs.append(where + _('Type mismatch: read text cannot be decoded'))
                 return value

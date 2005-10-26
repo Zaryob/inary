@@ -35,7 +35,7 @@ class Error(pisi.Error):
 __metaclass__ = xmlfile.autoxml
 
 class Packager:
-    t_Name = [xmlfile.String, xmlfile.mandatory]
+    t_Name = [xmlfile.Text, xmlfile.mandatory]
     t_Email = [xmlfile.String, xmlfile.mandatory]
     def __str__(self):
         s = "%s <%s>" % (self.name, self.email)
@@ -140,7 +140,7 @@ class Archive:
 class Source:
 
     t_Name = [xmlfile.String, xmlfile.mandatory]
-    t_HomePage = [xmlfile.String, xmlfile.mandatory]
+    t_Homepage = [xmlfile.String, xmlfile.mandatory]
     t_Packager = [Packager, xmlfile.mandatory]
     t_Summary = [xmlfile.String, xmlfile.mandatory]
     t_Description = [xmlfile.String, xmlfile.mandatory]
@@ -148,8 +148,8 @@ class Source:
     t_IsA = [ [xmlfile.String], xmlfile.mandatory]
     t_PartOf = [xmlfile.String, xmlfile.mandatory]
     t_Archive = [Archive, xmlfile.mandatory ]
-    t_Patch = [ [Patch], xmlfile.mandatory, "Patch"]
-    t_BuildDep = [ [Dependency], xmlfile.mandatory, "Dependency"]
+    t_Patches = [ [Patch], xmlfile.mandatory]
+    t_BuildDependencies = [ [Dependency], xmlfile.mandatory]
 
 
 class Package:
@@ -157,12 +157,12 @@ class Package:
     t_Name = [ xmlfile.String, xmlfile.mandatory ]
     t_Summary = [ xmlfile.String, xmlfile.mandatory ]
     t_Description = [ xmlfile.String, xmlfile.mandatory ]
-    t_IsA = [ [xmlfile.String], xmlfile.mandatory]
-    t_PartOf = [xmlfile.String, xmlfile.mandatory]
-    t_Conflicts = [ [xmlfile.String], xmlfile.mandatory, "Package"]
-    t_ProvidesComar = [ [ComarProvide], xmlfile.mandatory, "COMAR"]
+    t_PartOf = [xmlfile.String, xmlfile.optional]
+    t_IsA = [ [xmlfile.String], xmlfile.optional]
+    t_Conflicts = [ [xmlfile.String], xmlfile.optional, "Conflicts/Package"]
+    t_ProvidesComar = [ [ComarProvide], xmlfile.optional, "Provides/COMAR"]
     #t_RequriesComar = [ [xmlfile.String], xmlfile.mandatory, "Requires/COMAR"]
-    t_AdditionalFiles = [ [AdditionalFile], xmlfile.mandatory, "AdditionalFile"]
+    t_AdditionalFiles = [ [AdditionalFile], xmlfile.optional]
     
 
 class SpecFile(XmlFile):
@@ -172,8 +172,9 @@ class SpecFile(XmlFile):
 
     t_Source = [ Source, xmlfile.mandatory]
     t_Packages = [ [Package], xmlfile.mandatory, "Package"]
-    t_History = [ [Update], xmlfile.mandatory, "Update"]
+    t_History = [ [Update], xmlfile.mandatory, "History/Update"]
 
+    #we're not doing this with the init hook right now
     #def init(self, tag = "PISI"):
         #ignore tag
         #XmlFile.__init__(self, tag)
