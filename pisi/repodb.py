@@ -103,16 +103,20 @@ class RepoDB(object):
 db = None
 
 def init():
-    if pisi.repodb.db:
-        return pisi.repodb.db
+    global db
 
-    pisi.repodb.db = RepoDB()
-    pisi.repodb.db.init_dbs()
-    return pisi.repodb.db
+    if db:
+        return db
+
+    db = RepoDB()
+    db.init_dbs()
+    return db
     
 def finalize():
     global db
-    if pisi.repodb.db:
+
+    if db:
         db.close()
+        db = None
 
 

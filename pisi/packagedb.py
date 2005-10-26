@@ -143,17 +143,28 @@ def remove_package(name):
 
 thirdparty_packagedb = inst_packagedb = None
 
-def init_db():   
-    if not pisi.packagedb.thirdparty_packagedb:
-        pisi.packagedb.thirdparty_packagedb = PackageDB('thirdparty')
+def init_db():
+    global thirdparty_packagedb
+    global inst_packagedb
+
+    if not thirdparty_packagedb:
+        thirdparty_packagedb = PackageDB('thirdparty')
     if not pisi.packagedb.inst_packagedb:
-        pisi.packagedb.inst_packagedb = PackageDB('installed')
+        inst_packagedb = PackageDB('installed')
 
 def finalize_db():
-    if pisi.packagedb.thirdparty_packagedb:
-        pisi.packagedb.thirdparty_packagedb.close()
-    if pisi.packagedb.inst_packagedb:
-        pisi.packagedb.inst_packagedb.close()
-    if pisi.packagedb.packagedbs:
-        del pisi.packagedb.packagedbs
+    global thirdparty_packagedb
+    global inst_packagedb
+    global packagedbs
+
+    if thirdparty_packagedb:
+        thirdparty_packagedb.close()
+        thirdparty_packagedb = None
+
+    if inst_packagedb:
+        inst_packagedb.close()
+        inst_packagedb = None
+
+    if packagedbs:
+        del packagedbs
 

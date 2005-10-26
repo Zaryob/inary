@@ -182,4 +182,5 @@ def finalize():
     global db
     if db:
         db.close()
+        db = None
 
