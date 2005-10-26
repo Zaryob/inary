@@ -29,11 +29,8 @@ def run_all():
         testsources = filter(lambda x:x.endswith('tests.py'), files)
         for testsource in testsources:
             module = __import__(testsource[:len(testsource)-3])
-            #testsuite.add(module.suite)
             print '\n* Running tests in', testsource
             run_test_suite(module.suite)
-
-    #run_test_suite(unittest.TestSuite(tests))
 
 if __name__ == "__main__":
 

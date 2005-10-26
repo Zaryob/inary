@@ -31,7 +31,6 @@ from pisi.util import Checks
 
 __metaclass__ = xmlfile.autoxml
 
-
 class Packager:
     t_Name = [xmlfile.String, xmlfile.mandatory]
     t_Email = [xmlfile.String, xmlfile.mandatory]
@@ -164,14 +163,19 @@ class Package:
     
 
 class SpecFile(XmlFile):
+    __metaclass__ = xmlfile.autoxml #needed when we specify a superclass
+
     t_Source = [ [Source], xmlfile.mandatory, "Source"]
     t_Packages = [ [Package], xmlfile.mandatory, "Package"]
     t_History = [ [Update], xmlfile.mandatory, "Update"]
 
+    #def init(self, tag = "PISI"):
+        #ignore tag
+        #XmlFile.__init__(self, tag)
+
     def read(self, filename):
         """Read PSPEC file"""
         
-        XmlFile.__init__(self,"PISI")
         self.readxml(filename)
         
         errs = []

@@ -28,13 +28,13 @@ class XmlFileTestCase(unittest.TestCase):
     
     def testMetaClass(self):
 
-        class OtherInfo:
+        class OtherInfo(object):
             __metaclass__ = xmlfile.autoxml
             t_BirthDate = [types.StringType, xmlfile.mandatory]
             t_Interest = [types.StringType, xmlfile.optional]
             t_CodesWith = [ [types.StringType], xmlfile.optional, 'Person']
         
-        class A:
+        class A(xmlfile.XmlFile):
             __metaclass__ = xmlfile.autoxml
             t_Name = [types.StringType, xmlfile.mandatory]
             t_Description = [xmlfile.LocalText, xmlfile.mandatory]
@@ -45,6 +45,7 @@ class XmlFileTestCase(unittest.TestCase):
             t_OtherInfo = [ OtherInfo, xmlfile.optional ]
 
         a = A()
+        print A.__class__
         self.assertEqual(a.href, None)
         dom = mdom.parse('tests/a.xml')
         node = getNode(dom, 'A')

@@ -47,6 +47,7 @@ import pisi
 from pisi.xmlext import *
 import pisi.context as ctx
 import pisi.util as util
+import pisi.oo as oo
 
 class Error(pisi.Error):
     pass
@@ -122,7 +123,7 @@ class LocalText(object):
         else:
             errs.append(_("Tag should have at least an English or Turkish version"))
             
-class autoxml(type):
+class autoxml(oo.autosuper):
     """High-level automatic XML transformation interface for xmlfile.
     The idea is to declare a class for each XML tag. Inside the
     class the tags and attributes nested in the tag are further
@@ -197,7 +198,7 @@ class autoxml(type):
         """entry point for metaclass code"""
         #print 'generating class', name
 
-        # add XmlFile as one of the superclasses, we're smart
+        # add XmlFile as one of the superclasses of cls
         bases = list(bases)
         if not XmlFile in bases:
             bases.append(XmlFile)
@@ -237,10 +238,17 @@ class autoxml(type):
         # generate top-level helper functions
         cls.initializers = inits
         def initialize(self, tag = None, spec = None):
-            XmlFile.__init__(self, cls.tag)
+            #FIXME: what the hell is spec? :(
+            if not tag:
+                tag = cls.tag
+            #self.__super.__init__(tag = tag) #FIXME: doesn't work, why? :(
+            super(cls, self).__init__(tag = tag)
             for init in self.__class__.initializers:
                 init(self)
-            
+            # init hook
+            if hasattr(self, 'init'):
+                self.init(tag)
+
         cls.__init__ = initialize
 
         cls.decoders = decoders
@@ -614,8 +622,8 @@ class autoxml(type):
 class XmlFile(object):
     """A class to help reading and writing an XML file"""
 
-    def __init__(self, rootTag):
-        self.rootTag = rootTag
+    def __init__(self, tag):
+        self.rootTag = tag
         self.newDOM()
 
     def newDOM(self):
