@@ -492,11 +492,7 @@ class Builder:
                     os.chmod(dest, int(afile.permission, 8))
 
             os.chdir(c)
-
-            name = util.package_name(package.name,
-                                     self.spec.source.version,
-                                     self.spec.source.release)
-            
+           
             ctx.ui.action(_("** Building package %s") % package.name);
 
             ctx.ui.info(_("Generating %s,") % ctx.const.files_xml)
@@ -507,6 +503,10 @@ class Builder:
 
             ctx.ui.info(_("Creating PISI package %s.") % name)
 
+            name = util.package_name(package.name,
+                                     self.spec.source.version,
+                                     self.spec.source.release,
+                                     self.metadata.build)
             pkg = Package(name, 'w')
 
             # add comar files to package

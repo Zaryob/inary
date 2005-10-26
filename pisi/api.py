@@ -180,7 +180,7 @@ def configure_pending():
     
 
 def info(package):
-    if package.endswith(ctx.const.package_prefix):
+    if package.endswith(ctx.const.package_suffix):
         return info_file(package)
     else:
         return info_name(package)

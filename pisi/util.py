@@ -476,17 +476,21 @@ def clean_locks(top = '.'):
 # Package/Repository Related Functions #
 ########################################
 
-def package_name(name, version, release):
-    return  name + '-' + version + '-' + release + ctx.const.package_prefix
+def package_name(name, version, release, build):
+    fn = name + '-' + version + '-' + release
+    if build:
+        fn += '-' + build
+    fn += ctx.const.package_suffix
+    return fn
 
 def is_package_name(fn, package_name = None):
     "check if fn is a valid filename for given package_name"
     "if not given a package name, see if fn fits the package name rules"
     if (package_name==None) or fn.startswith(package_name + '-'):
-        if fn.endswith(ctx.const.package_prefix):
+        if fn.endswith(ctx.const.package_suffix):
             # get version string, skip separator '-'
             verstr = fn[len(package_name) + 1:
-                        len(fn)-len(ctx.const.package_prefix)]
+                        len(fn)-len(ctx.const.package_suffix)]
             import string
             for x in verstr.split('-'):
                 # weak rule: version components after '-' start with a digit

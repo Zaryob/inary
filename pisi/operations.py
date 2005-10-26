@@ -60,7 +60,7 @@ def install_pkg_files(package_URIs):
     ctx.ui.debug('A = %s' % str(package_URIs))
 
     for x in package_URIs:
-        if not x.endswith(ctx.const.package_prefix):
+        if not x.endswith(ctx.const.package_suffix):
             raise Error(_('Mixing file names and package names not supported yet.'))
 
     if ctx.config.get_option('ignore_dependency'):

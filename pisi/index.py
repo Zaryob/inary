@@ -71,7 +71,7 @@ class Index(XmlFile):
         self.repo_dir = repo_uri
         for root, dirs, files in os.walk(repo_uri):
             for fn in files:
-                if fn.endswith(ctx.const.package_prefix):
+                if fn.endswith(ctx.const.package_suffix):
                     ctx.ui.info(_('Adding %s  to package index') %fn)
                     self.add_package(os.path.join(root, fn), repo_uri)
 

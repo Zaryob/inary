@@ -10,6 +10,9 @@
 #
 # Please read the COPYING file.
 
+'''supports globs in sourceFile arguments'''
+
+
 # Standart Python Modules
 import os
 import glob
@@ -35,7 +38,6 @@ from pisi.actionsapi import error
 
 def dobin(sourceFile, destinationDirectory = '/usr/bin'):
     '''insert a executable file into /bin or /usr/bin'''
-
     ''' example call: pisitools.dobin("bin/xloadimage", "/bin", "xload") '''
     executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
  
@@ -56,7 +58,7 @@ def doexe(sourceFile, destinationDirectory):
 def dohard(sourceFile, destinationFile):
     '''creates hard link between sourceFile and destinationFile'''
     #FIXME: How can i use hard-links in Python?
-    pass
+    ctx.ui.warning('*** Hard links not implemented yet')
 
 def dohtml(*sourceFiles):
     '''inserts the files in the list of files into /usr/share/doc/PACKAGE/html'''

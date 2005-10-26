@@ -19,7 +19,7 @@ class ContextTestCase(unittest.TestCase):
 
         # test if we can get a const attribute?
         try:
-            test = const.package_prefix
+            test = const.package_suffix
             self.assertNotEqual(test, "")
         except AttributeError:
             self.fail("Couldn't get const attribute")

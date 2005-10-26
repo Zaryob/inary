@@ -46,7 +46,7 @@ class Constants:
 
     def __init__(self):
         # prefix for package names
-        self.__c.package_prefix = ".pisi"
+        self.__c.package_suffix = ".pisi"
 
         # directory suffixes for build
         self.__c.work_dir_suffix = "/work"

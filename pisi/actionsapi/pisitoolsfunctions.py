@@ -50,6 +50,7 @@ def executable_insinto(destinationDirectory, *sourceFiles):
 
     for sourceFile in sourceFiles:
         for source in glob.glob(sourceFile):
+            # FIXME: use an internal install routine for these
             system('install -m0755 -o root -g root %s %s' % (source, destinationDirectory))
 
 def readable_insinto(destinationDirectory, *sourceFiles):
