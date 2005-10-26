@@ -97,7 +97,7 @@ class ArchiveFileTestCase(testcase.TestCase):
         bctx = BuildContext("tests/pccts/pspec.xml")
         url = uri.URI(bctx.spec.source.archiveUri)
         targetDir = bctx.pkg_work_dir()
-        filePath = join(config.archives_dir(), url.filename())
+        filePath = join(ctx.config.archives_dir(), url.filename())
 
         # check cached
         if util.sha1_file(filePath) != bctx.spec.source.archiveSHA1:
