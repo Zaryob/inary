@@ -21,13 +21,6 @@
             <Dependency>unzip</Dependency>
             <Dependency>patch</Dependency>
         </BuildDependencies>
-        <History>
-            <Update>
-                <Date>2005-09-16</Date>
-                <Version>1.33.33</Version>
-                <Release>1</Release>
-            </Update>
-        </History>
     </Source>
     <Package>
         <Name>pccts</Name>
@@ -38,4 +31,12 @@
           <Path fileType="man">/usr/share/man</Path>
         </Files>
   </Package>
+
+    <History>
+      <Update release="1">
+        <Date>2005-09-16</Date>
+        <Version>1.33.33</Version>
+      </Update>
+    </History>
+
 </PISI>
