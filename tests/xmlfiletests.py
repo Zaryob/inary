@@ -55,6 +55,7 @@ class XmlFileTestCase(unittest.TestCase):
         self.assert_(a.href.startswith('http'))
         self.assertEqual(a.number, 868)
         self.assertEqual(a.name, 'Eray Ozkural')
+        self.assertEqual(len(a.projects), 3)
         #string = a.format(errs)
         #print '*', string
         a.print_text()
