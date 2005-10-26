@@ -27,14 +27,23 @@ Sample data files are located in the same directory with test modules.
 
 For running the entire test suite, use the following command:
 
-$ ./unittests/run.py
+$ ./tests/run.py
 
 If you know what you are doing, you can run the tests seperately. But
 keep in your mind that tests can depend on each other. (?) The unit test
 system doesn't know about that. The following command will run tests
 in specfiletests and archivetests in unittests dir:
 
-$ ./unittests/run.py specfile archive
+$ ./tests/run.py specfile archive
+
+Do not depend on the output of unittests. Instead of producing an
+output message/data in your tests, check the data internally. By
+definition, unittest should just report succeeding and failing cases.
+
+If you didn't, take a look at the links below for having an idea of
+unit testing.
+http://www.extremeprogramming.org/rules/unittests.html
+http://www.extremeprogramming.org/rules/unittests2.html
 
 
 Misc. Suggestions
