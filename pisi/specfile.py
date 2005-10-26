@@ -278,7 +278,7 @@ class SourceInfo:
         if (not self.archiveUri) or (not self.archiveType):
             err.add(_("Source archive URI and type should be given"))
         if not self.archiveSHA1:
-            errd.add(_("Source archive should have a SHA1 sum"))
+            err.add(_("Source archive should have a SHA1 sum"))
         
         err.join(self.packager.has_errors())
         for patch in self.patches:
