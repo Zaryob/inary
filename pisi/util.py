@@ -479,7 +479,7 @@ def clean_locks(top = '.'):
 def package_name(name, version, release, build):
     fn = name + '-' + version + '-' + release
     if build:
-        fn += '-' + build
+        fn += '-' + str(build)
     fn += ctx.const.package_suffix
     return fn
 
