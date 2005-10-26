@@ -501,12 +501,12 @@ class Builder:
             ctx.ui.info(_("Generating %s,") % ctx.const.metadata_xml)
             self.gen_metadata_xml(package)
 
-            ctx.ui.info(_("Creating PISI package %s.") % name)
+            ctx.ui.info(_("Creating PISI package %s.") % package.name)
 
             name = util.package_name(package.name,
                                      self.spec.source.version,
                                      self.spec.source.release,
-                                     self.metadata.build)
+                                     self.metadata.package.build)
             pkg = Package(name, 'w')
 
             # add comar files to package
