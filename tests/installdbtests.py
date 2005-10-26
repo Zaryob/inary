@@ -20,22 +20,25 @@ class InstallDBTestCase(unittest.TestCase):
 
     def setUp(self):
         pisi.api.init(database = True, comar = False)
-        self.installdb = ctx.installdb
+
 
     def testRemoveDummy(self):
-        self.installdb.remove('installtest')
-        self.assert_(not self.installdb.is_installed('installtest'))
+        ctx.installdb.remove('installtest')
+        self.assert_(not ctx.installdb.is_installed('installtest'))
+        pisi.api.finalize()
         
     def testInstall(self):
-        self.installdb.purge('installtest')
-        self.installdb.install('installtest', '0.1', '2', '3')
+        ctx.installdb.purge('installtest')
+        ctx.installdb.install('installtest', '0.1', '2', '3')
+        pisi.api.finalize()
 
     def testRemovePurge(self):
-        self.installdb.install('installtest', '0.1', '2', '3')
-        self.assert_(self.installdb.is_installed('installtest'))
-        self.installdb.remove('installtest')
-        self.assert_(self.installdb.is_removed('installtest'))
-        self.installdb.purge('installtest')
-        self.assert_(not self.installdb.is_recorded('installtest'))
+        ctx.installdb.install('installtest', '0.1', '2', '3')
+        self.assert_(ctx.installdb.is_installed('installtest'))
+        ctx.installdb.remove('installtest')
+        self.assert_(ctx.installdb.is_removed('installtest'))
+        ctx.installdb.purge('installtest')
+        self.assert_(not ctx.installdb.is_recorded('installtest'))
+        pisi.api.finalize()
 
 suite = unittest.makeSuite(InstallDBTestCase)
