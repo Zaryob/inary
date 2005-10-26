@@ -35,6 +35,7 @@ import pisi.operations as operations
 import pisi.packagedb as packagedb
 import pisi.repodb
 import pisi.installdb
+import pisi.sourcedb
 from pisi.index import Index
 import pisi.cli
 from pisi.operations import install, remove, upgrade
