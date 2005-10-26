@@ -18,9 +18,10 @@ from pisi import fetcher
 from pisi import util
 from pisi import uri
 
-class FetcherTestCase(unittest.TestCase):
+import testcase
+class FetcherTestCase(testcase.TestCase):
     def setUp(self):
-        pisi.api.init(database = False, comar = False)
+        testcase.TestCase.setUp(self, database = False)
 
         self.spec = SpecFile()
         self.spec.read("tests/popt/pspec.xml")

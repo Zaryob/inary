@@ -17,8 +17,6 @@ sys.path.append('.')
 import pisi.uri
 import pisi.specfile
 import pisi.util as util
-
-from pisi.config import config
 from pisi.fetcher import fetch_url
 
 def scanPSPEC(folder):
@@ -50,7 +48,7 @@ if __name__ == "__main__":
         if not isCached(URI.filename(), spec.source.archiveSHA1):
             print URI, " -> " , os.path.join(config.archives_dir(), URI.filename())
             try:
-	            fetch_url(URI, config.archives_dir())
+                fetch_url(URI, config.archives_dir())
             except pisi.fetcher.FetchError, e:
                 print e
                 pass

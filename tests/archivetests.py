@@ -20,12 +20,11 @@ from pisi import sourcearchive
 from pisi import fetcher
 from pisi import util
 from pisi.build import BuildContext
-from pisi.config import config
 from pisi import uri 
 
-class ArchiveFileTestCase(unittest.TestCase):
-    def setUp(self):
-        pisi.api.init(comar = False)
+import testcase
+
+class ArchiveFileTestCase(testcase.TestCase):
 
     def testUnpackTar(self):
         bctx = BuildContext("tests/popt/pspec.xml")
@@ -52,8 +51,6 @@ class ArchiveFileTestCase(unittest.TestCase):
         self.assertEqual(util.sha1_file(testfile),
              "5af9dd7d754f788cf511c57ce0af3d555fed009d")
 
-        pisi.api.finalize()
-
     def testUnpackZip(self):
         bctx = BuildContext("tests/pccts/pspec.xml")
 
@@ -72,8 +69,6 @@ class ArchiveFileTestCase(unittest.TestCase):
         # check file integrity
         self.assertEqual(util.sha1_file(testfile),
              "f2be0f9783e84e98fe4e2b8201a8f506fcc07a4d")
-
-        pisi.api.finalize()
 
 # TODO: no link file in pccts package. Need to find a ZIP file
 # containing a symlink
@@ -97,8 +92,6 @@ class ArchiveFileTestCase(unittest.TestCase):
         zip.close()
 
         #TODO: do some more work to test the integrity of new zip file
-
-        pisi.api.finalize()
     
     def testUnpackZipCond(self):
         bctx = BuildContext("tests/pccts/pspec.xml")
@@ -117,7 +110,5 @@ class ArchiveFileTestCase(unittest.TestCase):
         assert pathexists(targetDir + "/pccts")
         testfile = targetDir + "/pccts/history.txt"
         assert pathexists(testfile)
-
-        pisi.api.finalize()
 
 suite = unittest.makeSuite(ArchiveFileTestCase)

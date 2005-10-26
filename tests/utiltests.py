@@ -15,6 +15,7 @@ from pisi import version
 from pisi.util import *
 
 class UtilTestCase(unittest.TestCase):
+
     def setUp(self):
         pass
         
@@ -32,4 +33,3 @@ class UtilTestCase(unittest.TestCase):
 
 
 suite = unittest.makeSuite(UtilTestCase)
-

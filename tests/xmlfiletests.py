@@ -17,14 +17,13 @@ import types
 import pisi
 import pisi.api
 from pisi import xmlfile
-from pisi.config import config
+import pisi.context as ctx
 import pisi.util as util
 from pisi.xmlext import *
 
-class XmlFileTestCase(unittest.TestCase):
+import testcase
 
-    def setUp(self):
-        pisi.api.init(database = False, comar = False)
+class XmlFileTestCase(testcase.TestCase):
     
     def testMetaClass(self):
 

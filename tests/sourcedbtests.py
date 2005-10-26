@@ -17,10 +17,11 @@ import pisi.sourcedb
 from pisi import util
 from pisi.specfile import SpecFile
 
-class SourceDBTestCase(unittest.TestCase):
+import testcase
+class SourceDBTestCase(testcase.TestCase):
 
     def setUp(self):
-        pisi.api.init(comar = False)
+        testcase.TestCase.setUp(self)
 
         self.sourcedb = pisi.sourcedb.init()
         self.spec = SpecFile()

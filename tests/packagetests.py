@@ -12,20 +12,21 @@ import unittest
 import os
 
 from pisi import util
-from pisi.config import config
+import pisi.context as ctx
 from pisi import package
 
-
-class PackageTestCase(unittest.TestCase):
+import testcase
+class PackageTestCase(testcase.TestCase):
 
     def setUp(self):
+        testcase.TestCase.setUp(self)
         self.pkgName = util.package_name("testing",
                                          "5.1",
                                          "2")
 
     def testAddExtract(self):
         cur = os.getcwd()
-        tmpdir = config.tmp_dir()
+        tmpdir = ctx.config.tmp_dir()
         testdir = os.path.join(cur, "tests/popt")
 
         pkg_path = os.path.join(tmpdir, self.pkgName)

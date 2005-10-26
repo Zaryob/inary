@@ -12,7 +12,6 @@ import unittest
 import os
 
 from pisi import graph
-from pisi.config import config
 
 class GraphTestCase(unittest.TestCase):
     def setUp(self):

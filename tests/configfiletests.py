@@ -12,6 +12,7 @@ import unittest
 
 from pisi.configfile import ConfigurationFile
 
+# NB: no need for pisi testcase in these things that do well without pisi init
 class ConfigFileTestCase(unittest.TestCase):
 
     def setUp(self):

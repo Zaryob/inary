@@ -17,11 +17,11 @@ from pisi.packagedb import PackageDB
 from pisi import util
 from pisi.specfile import SpecFile
 
-class PackageDBTestCase(unittest.TestCase):
+import testcase
+class PackageDBTestCase(testcase.TestCase):
 
     def setUp(self):
-        pisi.api.init(comar = False)
-
+        testcase.TestCase.setUp(self)
         self.spec = SpecFile()
         self.spec.read('tests/popt/pspec.xml')
 
@@ -32,13 +32,10 @@ class PackageDBTestCase(unittest.TestCase):
         self.assert_(self.pdb.has_package('popt-libs'))
         # close the database and remove lock
         self.pdb.close()
-        pisi.api.finalize()
     
     def testRemove(self):
         self.pdb.remove_package('popt-libs')
         self.assert_(not self.pdb.has_package('popt-libs'))
         self.pdb.close()
-        pisi.api.finalize()
 
 suite = unittest.makeSuite(PackageDBTestCase)
-

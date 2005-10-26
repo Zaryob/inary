@@ -30,10 +30,17 @@ from pisi.util import join_path as join
 class Error(pisi.Error):
     pass
 
+class Options(object):
+    def __getattr__(self, name):
+        if not self.__dict__.has_key(name):
+            return None
+        else:
+            return self.__dict__[name]
+
 class Config(object):
     """Config Singleton"""
     
-    def __init__(self, options = None):
+    def __init__(self, options = Options()):
         self.options = options
         self.values = ConfigurationFile("/etc/pisi/pisi.conf")
 
@@ -56,7 +63,8 @@ class Config(object):
             dir = self.values.general.destinationdirectory
         import os.path
         if not os.path.exists(dir):
-            raise Error, _('Destination directory %s does not exist') % dir
+            ctx.ui.warning( _('Destination directory %s does not exist. Creating it.') % dir)
+            os.makedirs(dir)
         return dir
 
     def subdir(self, path):

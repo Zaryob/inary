@@ -13,12 +13,11 @@ import os
 
 from pisi import metadata
 from pisi import util
-from pisi.config import config
+import pisi.context as ctx
 
-class MetaDataTestCase(unittest.TestCase):
-    def setUp(self):
-        pass
-        
+import testcase
+class MetaDataTestCase(testcase.TestCase):
+
     def testRead(self):
         md = metadata.MetaData()
         md.read('tests/popt/metadata.xml')
@@ -32,7 +31,7 @@ class MetaDataTestCase(unittest.TestCase):
     
     def testWrite(self):
         md = self.testRead()
-        md.write(os.path.join(config.tmp_dir(),'metadata-test.xml' ))
+        md.write(os.path.join(ctx.config.tmp_dir(),'metadata-test.xml' ))
 
     def testVerify(self):
         md = self.testRead()

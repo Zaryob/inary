@@ -16,21 +16,16 @@ import pisi.api
 import pisi.installdb
 from pisi import util
 
-class InstallDBTestCase(unittest.TestCase):
-
-    def setUp(self):
-        pisi.api.init(database = True, comar = False)
-
+import testcase
+class InstallDBTestCase(testcase.TestCase):
 
     def testRemoveDummy(self):
         ctx.installdb.remove('installtest')
         self.assert_(not ctx.installdb.is_installed('installtest'))
-        pisi.api.finalize()
         
     def testInstall(self):
         ctx.installdb.purge('installtest')
         ctx.installdb.install('installtest', '0.1', '2', '3')
-        pisi.api.finalize()
 
     def testRemovePurge(self):
         ctx.installdb.install('installtest', '0.1', '2', '3')
@@ -39,6 +34,5 @@ class InstallDBTestCase(unittest.TestCase):
         self.assert_(ctx.installdb.is_removed('installtest'))
         ctx.installdb.purge('installtest')
         self.assert_(not ctx.installdb.is_recorded('installtest'))
-        pisi.api.finalize()
 
 suite = unittest.makeSuite(InstallDBTestCase)

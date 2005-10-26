@@ -10,8 +10,11 @@
 import unittest
 import zipfile
 
-class ActionsAPITestCase(unittest.TestCase):
+import testcase
+
+class ActionsAPITestCase(testcase.TestCase):
     def setUp(self):
+        testcase.TestCase.setUp(self)
         self.f = zipfile.ZipFile("helloworld-0.1-1.pisi", "r")
         self.filelist = []
     
