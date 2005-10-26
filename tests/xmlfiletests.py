@@ -45,10 +45,6 @@ class XmlFileTestCase(unittest.TestCase):
             t_OtherInfo = [ OtherInfo, xmlfile.optional ]
 
         a = A()
-        print A.__class__
-        print super(A)
-        print A.__dict__
-        print OtherInfo.__dict__
         self.assertEqual(a.href, None)
         dom = mdom.parse('tests/a.xml')
         node = getNode(dom, 'A')

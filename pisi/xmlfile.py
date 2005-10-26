@@ -198,12 +198,6 @@ class autoxml(oo.autosuper):
         """entry point for metaclass code"""
         #print 'generating class', name
 
-        # add XmlFile as one of the superclasses of cls
-        #bases = list(bases)
-        #if not XmlFile in bases:
-        #    bases.append(XmlFile)
-        bases = (XmlFile)
-
         # standard initialization
         super(autoxml, cls).__init__(name, bases, dict)
 
@@ -243,7 +237,7 @@ class autoxml(oo.autosuper):
             if not tag:
                 tag = cls.tag
             #self.__super.__init__(tag = tag) #FIXME: doesn't work, why? :(
-            super(cls, self).__init__(tag = tag)
+            super(cls, self).__init__(tag = tag) # tag for XmlFile support
             for init in self.__class__.initializers:
                 init(self)
             # init hook
@@ -269,6 +263,8 @@ class autoxml(oo.autosuper):
             errs = []
             for checker in self.__class__.checkers:
                 errs.extend(checker(self, where))
+            if hasattr(self, 'check_hook'):
+                errs.extend(self.check_hook(where))
             return errs
         cls.check = check
 
@@ -287,8 +283,8 @@ class autoxml(oo.autosuper):
                 for x in errs:
                     ctx.ui.warning(x)
         cls.print_text = print_text
-        #if not dict.has_key('__str__'):
-        #    cls.__str__ = str
+        if not dict.has_key('__str__'):
+            cls.__str__ = print_text
 
     def gen_attr_member(cls, attr):
         """generate readers and writers for an attribute member"""
