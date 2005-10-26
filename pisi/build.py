@@ -563,9 +563,8 @@ class Builder:
             util.xterm_title_reset()
             ctx.ui.info(_("Done."))
            
-            if ctx.config.values.general.autoclean is True:
-                ctx.ui.info(_("Cleaning Build Directory..."))
-                util.clean_dir(self.bctx.pkg_dir())
-            else:
-                ctx.ui.info(_("Keeping Build Directory"))
-    
+        if ctx.config.values.general.autoclean is True:
+            ctx.ui.info(_("Cleaning Build Directory..."))
+            util.clean_dir(self.bctx.pkg_dir())
+        else:
+            ctx.ui.info(_("Keeping Build Directory"))
