@@ -32,7 +32,7 @@ class XmlFileTestCase(unittest.TestCase):
             __metaclass__ = xmlfile.autoxml
             t_BirthDate = [types.StringType, xmlfile.mandatory]
             t_Interest = [types.StringType, xmlfile.optional]
-            t_CodesWith = [ [types.StringType], xmlfile.optional, 'Person']
+            t_CodesWith = [ [types.StringType], xmlfile.optional, 'CodesWith/Person']
         
         class A(xmlfile.XmlFile):
             __metaclass__ = xmlfile.autoxml
@@ -41,14 +41,14 @@ class XmlFileTestCase(unittest.TestCase):
             t_Number = [types.IntType, xmlfile.optional]
             t_Email = [types.StringType, xmlfile.optional]
             a_href = [types.StringType, xmlfile.mandatory]
-            t_Projects = [ [types.StringType], xmlfile.mandatory, 'Project', '']
+            t_Projects = [ [types.StringType], xmlfile.mandatory, 'Project']
             t_OtherInfo = [ OtherInfo, xmlfile.optional ]
 
         a = A()
         self.assertEqual(a.href, None)
         dom = mdom.parse('tests/a.xml')
         node = getNode(dom, 'A')
-        self.assert_(len(A.decoders)>0)
+        self.assertEqual(len(A.decoders), 4)
         errs = []
         print 'errs', errs
         a.decode(node, errs)

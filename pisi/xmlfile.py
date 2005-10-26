@@ -505,8 +505,12 @@ class autoxml(oo.autosuper):
 
     def gen_list_tag(cls, tag, spec):
         """generate a list datatype. stores comps in tag/comp_tag"""
-        name, tag_type, req, comp_tag = cls.parse_spec(tag, spec)
+        name, tag_type, req, path = cls.parse_spec(tag, spec)
         #head, last = cls.tagpath_head_last(path)
+        pathcomps = path.split('/')
+        list_tagpath = path[:path.rfind('/')]
+        comp_tag = pathcomps[len(pathcomps)-1]
+        #TODO: make default path ... tag + '/' + comp_tag when comp is class!
 
         if len(tag_type) != 1:
             raise Error(_('List type must contain only one element'))
@@ -519,7 +523,7 @@ class autoxml(oo.autosuper):
 
         def decode(node, errs, where):
             l = []
-            nodes = getAllNodes(node, tag + '/' + comp_tag)
+            nodes = getAllNodes(node, path)
             #print node, tag + '/' + comp_tag, nodes
             if len(nodes) is 0 and req is mandatory:
                 errs.append(where + _('Mandatory list empty'))
@@ -531,11 +535,13 @@ class autoxml(oo.autosuper):
             return l
 
         def encode(xml, node, l, errs):
+            dom = node.ownerDocument
             if l and len(l) > 0:
-                listnode = xml.newNode(tag)
                 for item in l:
+                    listnode = xml.newNode("Dummy")
                     encode_item(xml, listnode, item, errs)
-                node.appendChild(listnode)
+                    node = getNode(listnode, comp_tag)
+                    addNode(dom, node, path)
             else:
                 if req is mandatory:
                     errs.append(_('Mandatory list empty'))
