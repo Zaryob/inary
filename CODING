@@ -4,28 +4,46 @@ Oooooo. "Coding Standards".
 Guidelines
 ----------
 
+0. Before reading any further please observe 
+   PEP 8: Style Guide for Python Code 
+   http://www.python.org/peps/pep-0008.html
 1. When using dirnames, don't expect the dir to end
    with a trailing slash, and please use the dirnames
-   in pisiconfig
-2. Python indentation is usually 4 chars.
+   in pisiconfig. Use util.join_path instead of os.path.join
+2. Python indentation is usually 4 spaces.
 3. Follow python philosophy of 'batteries included'
-4. Don't make the code have runtime dependencies on
-   a particular distribution (as much as possible)
-5. Don't assume narrow use cases.
-6. If you are changing something, check if that change
+4. Use exceptions, don't return error codes
+5. Don't make the PISI code have runtime dependencies on
+   a particular distribution (as much as possible).
+6. Don't assume narrow use cases. Allow for a mediocre
+   amount of generalization in your code, for pieces that
+   will be required later.
+7. If you are changing something, check if that change
    breaks anything and fix breakage. For instance a
    name. Running the tests is not always enough!
-7. We all know, you're using LISP but didn't want to tell 
-   us. Don't scare, as a success story and for your encouregment
-   there are tens of people on somewhere with LISP releated jobs.
-8. If you are studying Data structures and Algorithms, and if
-   your first assignment is implementing a basic stack for 
-   presedence, don't implement it. Just show your teacher the
-   syntax of LISP, tell him how beatifull it is, and show how can 
-   otistic person can count lots of paranthesis with "one second" look,
-   probably you'll get A+.
-9. If you are interesting with "Playstation 2 Linux Games Programming" 
-   or "How to extend C programs with Guile", please don't.
+8. A good design ensures separation of concerns. Every module
+   has a specific documented responsibility. Don't make the 
+   horse clean your windows.
+9. To ensure readability avoid nesting python constructs
+   more than 3 levels deep. Python is a good language (unlike C),
+   so you can define inner functions in a convenient way, use
+   such decomposition techniques to break down your code into
+   manageable chunks. The worst code you can write is one huge
+   procedure that goes on for 1000 (or more) lines.
+10. Use a particular abstraction like a class or function only
+   if it makes sense. Don't just define things because they can
+   be defined. Define only things that will/may be used.
+11. If you are doing an expensive task like searching through 
+   10000 text chunks, please use an efficient data structure
+   and algorithm. We are not MS engineers who know no data
+   structure beyond doubly linked lists and no algorithm beyond
+   quicksort.
+12. Resist the temptation to develop kludges and workarounds in
+   response to pressure. Take your time to solve the problems by
+   the book. The payoff comes later.
+13. Same thing goes for premature optimizations. Knuth and Dijkstra
+   are watching over your shoulder. :)
+
 
 Unit testing
 ------------
