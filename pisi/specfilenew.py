@@ -73,7 +73,7 @@ class Patch:
         
 class Update:
 
-    a_Release = [xmlfile.String, xmlfile.mandatory]
+    a_release = [xmlfile.String, xmlfile.mandatory]
     t_Date = [xmlfile.String, xmlfile.mandatory]
     t_Version = [xmlfile.String, xmlfile.mandatory]
     t_Type = [xmlfile.String, xmlfile.optional]
@@ -168,7 +168,9 @@ class Package:
 class SpecFile(XmlFile):
     __metaclass__ = xmlfile.autoxml #needed when we specify a superclass
 
-    t_Source = [ [Source], xmlfile.mandatory, "Source"]
+    tag = "PISI"
+
+    t_Source = [ Source, xmlfile.mandatory]
     t_Packages = [ [Package], xmlfile.mandatory, "Package"]
     t_History = [ [Update], xmlfile.mandatory, "Update"]
 

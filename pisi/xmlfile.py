@@ -199,9 +199,10 @@ class autoxml(oo.autosuper):
         #print 'generating class', name
 
         # add XmlFile as one of the superclasses of cls
-        bases = list(bases)
-        if not XmlFile in bases:
-            bases.append(XmlFile)
+        #bases = list(bases)
+        #if not XmlFile in bases:
+        #    bases.append(XmlFile)
+        bases = (XmlFile)
 
         # standard initialization
         super(autoxml, cls).__init__(name, bases, dict)
@@ -267,7 +268,7 @@ class autoxml(oo.autosuper):
         def check(self, where = unicode()):
             errs = []
             for checker in self.__class__.checkers:
-                errs.extend(checker(self), where)
+                errs.extend(checker(self, where))
             return errs
         cls.check = check
 
