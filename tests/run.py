@@ -44,7 +44,7 @@ if __name__ == "__main__":
         for test in tests:
             test += 'tests'
             module = __import__(test)
-            print "* Running tests in '%s'" % (test)
+            print "* Running tests in", test
             run_test_suite(module.suite)
     else: # run all tests
         run_all()
