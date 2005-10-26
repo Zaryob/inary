@@ -179,11 +179,12 @@ class autoxml(oo.autosuper):
 
     class Company:
         __metaclass__ = autoxml
-        t_Employees = [ [Employee], xmlfile.mandatory, 'Employee']
+        t_Employees = [ [Employee], xmlfile.mandatory, 'Employees/Employee']
 
     Logically, inside the Company/Employees tag, we will have several
-    Employes tags, which are inserted to the Employees instance variable of
-    Company in order of appearance.
+    Employee tags, which are inserted to the Employees instance variable of
+    Company in order of appearance. We can define lists of any other valid
+    type. Here we used a list of an autoxml class defined above.
 
     The mandatory flag here asserts that at least one such record
     is to be found.
