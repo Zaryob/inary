@@ -54,12 +54,10 @@ class FileInfo:
         typeElt = dom.createElement("Type")
         typeElt.appendChild(dom.createTextNode(self.type))
         elt.appendChild(typeElt)
-        sizeElt = dom.createElement("Size")
-        size = "0"
         if self.size:
-            size = self.size
-        sizeElt.appendChild(dom.createTextNode(size))
-        elt.appendChild(sizeElt)
+            sizeElt = dom.createElement("Size")
+            sizeElt.appendChild(dom.createTextNode(self.size))
+            elt.appendChild(sizeElt)
         if self.hash:
             hashElt = dom.createElement("SHA1Sum")
             hashElt.appendChild(dom.createTextNode(self.hash))
