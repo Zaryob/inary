@@ -263,7 +263,7 @@ def copy_file(src,dest):
 # FIXME: this should be done in a much much simpler way
 # as it stands, it seems to be a kludge to solve
 # an unrelated problem
-def get_file_hashes(top, exclude_prefix=None, remove_prefix=None):
+def get_file_hashes(top, excludePrefix=None, removePrefix=None):
     """Generator function iterates over a toplevel path and returns the
     (filePath, sha1Hash) tuples for all files. If excludePrefixes list
     is given as a parameter, function will exclude the filePaths
@@ -295,9 +295,9 @@ def get_file_hashes(top, exclude_prefix=None, remove_prefix=None):
         return
 
     def has_excluded_prefix(filename):
-        if exclude_prefix and remove_prefix:
-            tempfnam = remove_prefix(remove_prefix, filename)
-            for p in exclude_prefix:
+        if excludePrefix and removePrefix:
+            tempfnam = remove_prefix(removePrefix, filename)
+            for p in excludePrefix:
                 if tempfnam.startswith(p):
                     return 1
         return 0
@@ -308,7 +308,7 @@ def get_file_hashes(top, exclude_prefix=None, remove_prefix=None):
             #yield the symlink..
             #bug 373
             yield (root, sha1_sum(os.readlink(root), True))
-            exclude_prefix.append(remove_prefix(remove_prefix, root) + "/")
+            excludePrefix.append(remove_prefix(removePrefix, root) + "/")
             continue
 
         #bug 397
@@ -316,7 +316,7 @@ def get_file_hashes(top, exclude_prefix=None, remove_prefix=None):
             d = join_path(root, dir)
             if os.path.islink(d) and not has_excluded_prefix(d):
                 yield (d, sha1_sum(os.readlink(d), True))
-                exclude_prefix.append(remove_prefix(remove_prefix, d) + "/")
+                excludePrefix.append(remove_prefix(removePrefix, d) + "/")
 
         #bug 340
         if os.path.isdir(root) and not has_excluded_prefix(root):
