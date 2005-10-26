@@ -40,10 +40,8 @@ For running the entire test suite, use the following command:
 
 $ ./tests/run.py
 
-If you know what you are doing, you can run the tests seperately. But
-keep in your mind that tests can depend on each other. (?) The unit test
-system doesn't know about that. The following command will run tests
-in specfiletests and archivetests in unittests dir:
+The following command will run tests in specfiletests and archivetests
+in unittests dir:
 
 $ ./tests/run.py specfile archive
 
