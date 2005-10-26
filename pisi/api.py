@@ -64,11 +64,8 @@ def init(database = True, options = None, ui = None, comar = True):
         ctx.repodb = pisi.repodb.init()
         ctx.installdb = pisi.installdb.init()
         ctx.filesdb = pisi.files.FilesDB()
-
         packagedb.init_db()
-        #TODO: sourcedb
-#        import pisi.sourcedb
-#        pisi.sourcedb.init()
+        pisi.sourcedb.init()
     else:
         ctx.repodb = None
         ctx.installdb = None
@@ -82,6 +79,7 @@ def finalize():
         ctx.filesdb.close()
 
     packagedb.finalize_db()
+    pisi.sourcedb.finalize()
     ctx.ui.debug('PISI API finalized')
 
 def list_upgradable():

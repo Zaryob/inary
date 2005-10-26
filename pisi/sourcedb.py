@@ -36,7 +36,7 @@ class SourceDB(object):
     def __init__(self):
         self.d = shelve.LockedDBShelf('source')
 
-    def __del__(self):
+    def close(self):
         self.d.close()
 
     def has_source(self, name):
@@ -65,4 +65,10 @@ def init():
 
     sourcedb = SourceDB()
     return sourcedb
-    
+
+def finalize():
+    global sourcedb
+    if sourcedb:
+        sourcedb.close()
+        sourcedb = None
+
