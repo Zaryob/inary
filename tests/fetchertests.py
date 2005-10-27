@@ -24,7 +24,7 @@ class FetcherTestCase(testcase.TestCase):
         testcase.TestCase.setUp(self, database = False)
 
         self.spec = SpecFile()
-        self.spec.read("tests/popt/pspec.xml")
+        self.spec.read("tests/helloworld/pspec.xml")
         self.url = uri.URI(self.spec.source.archiveUri)
         self.destpath = ctx.config.archives_dir()
         self.fetch = fetcher.Fetcher(self.url, self.destpath)
