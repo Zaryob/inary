@@ -16,13 +16,6 @@
         <Summary xml:lang="en">Dummy HelloWorld for testing ActionsAPI</Summary>
         <Description xml:lang="en">Dummy HelloWorld for testing ActionsAPI</Description>
         <Archive type="targz" sha1sum="6242681ee0bceb820eb6e8544ad1bb3d0ba3ee78">http://cekirdek.uludag.org.tr/~caglar/helloworld.tar.gz</Archive>
-        <History>
-            <Update>
-                <Date>2005-08-21</Date>
-                <Version>0.1</Version>
-                <Release>1</Release>
-            </Update>
-        </History>
     </Source>
 
     <Package>
@@ -31,5 +24,12 @@
             <Path fileType="binary">/</Path>
         </Files>
   </Package>
+
+          <History>
+            <Update release="1">
+                <Date>2005-08-21</Date>
+                <Version>0.1</Version>
+            </Update>
+        </History>
 </PISI>
 
