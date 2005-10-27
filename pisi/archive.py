@@ -25,7 +25,6 @@ _ = __trans.ugettext
 import pisi
 import pisi.util as util
 
-
 class ArchiveError(pisi.Error):
     pass
 

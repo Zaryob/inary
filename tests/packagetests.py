@@ -22,7 +22,7 @@ class PackageTestCase(testcase.TestCase):
         testcase.TestCase.setUp(self)
         self.pkgName = util.package_name("testing",
                                          "5.1",
-                                         "2")
+                                         "2", 3)
 
     def testAddExtract(self):
         cur = os.getcwd()

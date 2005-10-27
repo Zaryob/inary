@@ -72,6 +72,7 @@ def init(database = True, options = None, ui = None, comar = True):
         ctx.installdb = None
         ctx.filesdb = None
     ctx.ui.debug('PISI API initialized')
+    ctx.initialized = True
 
 def finalize():
     pisi.repodb.finalize()
@@ -82,6 +83,7 @@ def finalize():
     packagedb.finalize_db()
     pisi.sourcedb.finalize()
     ctx.ui.debug('PISI API finalized')
+    ctx.initialized = False
 
 def list_upgradable():
     ignore_build = ctx.config.options and ctx.config.options.ignore_build_no

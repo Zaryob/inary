@@ -34,6 +34,8 @@ repodb = None
 
 comar = None
 
+initialized = False
+
 #def register(_impl):
 #    """ Register a UI implementation"""
 #    ui = _impl

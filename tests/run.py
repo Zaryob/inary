@@ -18,8 +18,13 @@ import locale
 sys.path.append('.')
 sys.path.append('..')
 
+import pisi.api
+import pisi.context as ctx
+
 def run_test_suite(testsuite):
     unittest.TextTestRunner(verbosity=2).run(testsuite)
+    if ctx.initialized:
+        pisi.api.finalize()
 
 def run_all():
 
