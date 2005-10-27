@@ -84,6 +84,8 @@
 <!ELEMENT COMAR (#PCDATA)>
 <!ATTLIST COMAR script CDATA #IMPLIED>
 
+<!ELEMENT Conflicts (#PCDATA)>
+
 <!ELEMENT AdditionalFiles (AdditionalFile+)>
 <!ELEMENT AdditionalFile (#PCDATA)>
 <!ATTLIST AdditionalFile target CDATA #REQUIRED>
