@@ -75,6 +75,7 @@
 	Description |
 	RuntimeDependencies |
 	Files |
+	Conflicts |
 	AdditionalFiles |
 	Provides
 )*>
@@ -89,7 +90,7 @@
 <!ATTLIST AdditionalFile permission CDATA #IMPLIED>
 <!ATTLIST AdditionalFile owner CDATA #IMPLIED>
 
-<!ELEMENT RuntimeDependencies (Dependency+)>
+<!ELEMENT RuntimeDependencies (Dependency*)>
 
 <!ELEMENT Files (Path)+>
 
