@@ -6,18 +6,19 @@
 <!-- Source Section -->
 
 <!ELEMENT Source (
-	Name,
-	Homepage,
-	Packager,
-	License+,
-	IsA*,
-	PartOf*,
-	Summary+,
-	Description+,
-	Archive,
-	Patches?,
-	BuildDependencies?
-)>
+	#PCDATA |
+	Name |
+	Homepage |
+	Packager |
+	License |
+	IsA |
+	PartOf |
+	Summary |
+	Description |
+	Archive |
+	Patches |
+	BuildDependencies
+)*>
 
 <!ELEMENT Name (#PCDATA)>
 
@@ -33,8 +34,10 @@
 <!ELEMENT PartOf (#PCDATA)>
 
 <!ELEMENT Summary (#PCDATA)>
+<!ATTLIST Summary xml:lang CDATA #IMPLIED>
 
 <!ELEMENT Description (#PCDATA)>
+<!ATTLIST Description xml:lang CDATA #IMPLIED>
 
 <!ELEMENT Archive (#PCDATA)>
 <!ATTLIST Archive sha1sum CDATA #REQUIRED>
@@ -60,17 +63,18 @@
 <!-- Package Section -->
 
 <!ELEMENT Package (
-	Name?,
-	License*,
-	IsA*,
-	PartOf*,
-	Summary*,
-	Description*,
-	RuntimeDependencies?,
-	Files,
-	AdditionalFiles?,
-	Provides?
-)>
+	#PCDATA |
+	Name |
+	License |
+	IsA |
+	PartOf |
+	Summary |
+	Description |
+	RuntimeDependencies |
+	Files |
+	AdditionalFiles |
+	Provides
+)*>
 
 <!ELEMENT Provides (COMAR)+>
 <!ELEMENT COMAR (#PCDATA)>
@@ -97,7 +101,7 @@
 
 <!ELEMENT History (Update+)>
 
-<!ELEMENT Update (Date, Version, Comment, Name, Email)>
+<!ELEMENT Update (#PCDATA | Date | Version | Comment | Name | Email)*>
 <!ATTLIST Update release CDATA #REQUIRED>
 <!-- FIXME: valid types must be used instead of CDATA -->
 <!ATTLIST Update type CDATA #IMPLIED>
