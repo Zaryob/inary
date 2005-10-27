@@ -9,6 +9,7 @@
 	#PCDATA |
 	Name |
 	Homepage |
+	Icon |
 	Packager |
 	License |
 	IsA |
@@ -23,6 +24,8 @@
 <!ELEMENT Name (#PCDATA)>
 
 <!ELEMENT Homepage (#PCDATA)>
+
+<!ELEMENT Icon (#PCDATA)>
 
 <!ELEMENT Packager (Name, Email)>
 <!ELEMENT Email (#PCDATA)>
@@ -44,7 +47,7 @@
 <!-- NOTE: we can limit possible types here to the ones that pisi know -->
 <!ATTLIST Archive type CDATA #REQUIRED>
 
-<!ELEMENT BuildDependencies (Dependency+)>
+<!ELEMENT BuildDependencies (Dependency*)>
 
 <!ELEMENT Dependency (#PCDATA)>
 <!ATTLIST Dependency versionFrom CDATA #IMPLIED>
@@ -52,7 +55,7 @@
 <!ATTLIST Dependency version CDATA #IMPLIED>
 <!-- NOTE: release number dependencies? -->
 
-<!ELEMENT Patches (Patch+)>
+<!ELEMENT Patches (Patch*)>
 
 <!ELEMENT Patch (#PCDATA)>
 <!ATTLIST Patch compressionType CDATA #IMPLIED>
