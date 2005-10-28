@@ -9,6 +9,7 @@
 #
 
 import unittest
+import shutil
 import os
 
 import pisi.context as ctx
@@ -28,12 +29,23 @@ class FetcherTestCase(testcase.TestCase):
         self.url = uri.URI(self.spec.source.archiveUri)
         self.destpath = ctx.config.archives_dir()
         self.fetch = fetcher.Fetcher(self.url, self.destpath)
-    
+
     def testFetch(self):
         self.fetch.fetch()
         fetchedFile = os.path.join(self.destpath, self.url.filename())
         if os.access(fetchedFile, os.R_OK):
             self.assertEqual(util.sha1_file(fetchedFile),
                              self.spec.source.archiveSHA1)
+        os.remove(fetchedFile)
+
+    def testResume(self):
+        resume_test_file = "tests/helloworld/hello-1.3.tar.gz.part"
+        shutil.copy(resume_test_file, ctx.config.archives_dir())
+        self.fetch.fetch()
+        fetchedFile = os.path.join(self.destpath, self.url.filename())
+        if os.access(fetchedFile, os.R_OK):
+            self.assertEqual(util.sha1_file(fetchedFile),
+                             self.spec.source.archiveSHA1)
+        os.remove(fetchedFile)
 
 suite = unittest.makeSuite(FetcherTestCase)
