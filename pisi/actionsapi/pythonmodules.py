@@ -46,7 +46,7 @@ class RunTimeError(pisi.actionsapi.Error):
 
 def compile(parameters = ''):
     '''compile source with given parameters.'''
-    if system('python setup.py build %s' % (get.installDIR(), parameters)):
+    if system('python setup.py build %s' % (parameters)):
         raise CompileError, _('Make failed.')
 
 def install(parameters = ''):
