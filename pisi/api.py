@@ -16,7 +16,7 @@
 
 import os
 import sys
-from os.path import join, exists
+from os.path import exists
 
 ver = sys.version_info
 if ver[0] <= 2 and ver[1] < 4:
@@ -338,7 +338,7 @@ def delete_cache():
 def resurrect_package(package_fn):
     """Resurrect the package in the PiSi databases"""
 
-    metadata_xml = join(ctx.config.lib_dir(), package_fn, ctx.const.metadata_xml)
+    metadata_xml = util.join_path(ctx.config.lib_dir(), package_fn, ctx.const.metadata_xml)
     if not exists(metadata_xml):
        return
 
@@ -350,7 +350,7 @@ def resurrect_package(package_fn):
        util.Checks.print_errors(errs)
        raise Error, _("MetaData format wrong")
     
-    files_xml = join(ctx.config.lib_dir(), package_fn, ctx.const.files_xml)
+    files_xml = util.join_path(ctx.config.lib_dir(), package_fn, ctx.const.files_xml)
     if not exists(files_xml):
        return
 
