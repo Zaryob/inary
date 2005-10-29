@@ -16,6 +16,8 @@
 
 import os
 import sys
+from os.path import join, exists
+
 ver = sys.version_info
 if ver[0] <= 2 and ver[1] < 4:
     from sets import Set as set
@@ -39,6 +41,8 @@ import pisi.sourcedb
 from pisi.index import Index
 import pisi.cli
 from pisi.operations import install, remove, upgrade
+from pisi.metadata import MetaData
+from pisi.files import Files
 
 class Error(pisi.Error):
     pass
@@ -178,7 +182,6 @@ def configure_pending():
             ctx.installdb.clear_pending(x)
     except ImportError:
         raise Error(_("COMAR: comard not fully installed"))
-    
 
 def info(package):
     if package.endswith(ctx.const.package_suffix):
@@ -331,3 +334,43 @@ def delete_cache():
     util.clean_dir(ctx.config.packages_dir())
     util.clean_dir(ctx.config.archives_dir())
     util.clean_dir(ctx.config.tmp_dir())
+
+def resurrect_package(package_fn):
+    """Resurrect the package in the PiSi databases"""
+
+    metadata_xml = join(ctx.config.lib_dir(), package_fn, ctx.const.metadata_xml)
+    if not exists(metadata_xml):
+       return
+
+    metadata = MetaData()
+    metadata.read(metadata_xml)
+
+    errs = metadata.has_errors()
+    if errs:   
+       util.Checks.print_errors(errs)
+       raise Error, _("MetaData format wrong")
+    
+    files_xml = join(ctx.config.lib_dir(), package_fn, ctx.const.files_xml)
+    if not exists(files_xml):
+       return
+
+    files = Files()
+    files.read(files_xml)
+
+    if files.has_errors():
+       raise Error, _("Invalid %s") % ctx.const.files_xml
+
+    pkginfo = metadata.package
+    
+    # installdb
+    ctx.installdb.install(metadata.package.name,
+                         metadata.package.version,
+                         metadata.package.release,
+                         metadata.package.build,
+                         metadata.package.distribution)
+
+    # filesdb
+    ctx.filesdb.add_files(metadata.package.name, files)
+    
+    # installed packages
+    packagedb.inst_packagedb.add_package(pkginfo)

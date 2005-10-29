@@ -581,6 +581,41 @@ Usage: list-installed
                 ctx.ui.info('%15s - %s ' % (package.name, package.summary))
         self.finalize()
 
+class RebuildDb(Command):
+    """Rebuild Databases
+
+Usage: rebuilddb
+
+Rebuilds the PiSi databases
+"""
+    __metaclass__ = autocommand
+
+    def __init__(self):
+        super(RebuildDb, self).__init__()
+
+    name = ("rebuilddb", "rd")
+
+    def run(self):
+       self.init()
+
+       #FIXME: Confirm icin init, unlink icin finalize, rebuild_db icin init lazim :)
+       if ctx.ui.confirm(_('Rebuild PISI databases? ')):
+           self.finalize()
+           import os
+           for db in os.listdir(ctx.config.db_dir()):
+               os.unlink(os.path.join(ctx.config.db_dir(), db))
+               
+           self.init()
+           self.rebuild_db()
+
+       self.finalize()
+               
+    def rebuild_db(self):
+       import os
+       for root, dirs, files in os.walk(ctx.config.lib_dir()):
+           for package_fn in dirs:
+               ctx.ui.debug(package_fn)
+               pisi.api.resurrect_package(package_fn)
 
 class UpdateRepo(Command):
     """Update repository databases
