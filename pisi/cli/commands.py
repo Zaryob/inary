@@ -603,7 +603,7 @@ Rebuilds the PiSi databases
            self.finalize()
            import os
            for db in os.listdir(ctx.config.db_dir()):
-               os.unlink(os.path.join(ctx.config.db_dir(), db))
+               os.unlink(pisi.util.join_path(ctx.config.db_dir(), db))
                
            self.init()
            self.rebuild_db()
