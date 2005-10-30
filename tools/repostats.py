@@ -13,6 +13,7 @@ import sys
 import os
 import codecs
 import re
+import getopt
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -23,12 +24,24 @@ from svn import core, client
 sys.path.append('.')
 import pisi.specfile
 import pisi.uri
+import pisi.package
+import pisi.metadata
+import pisi.files
 from pisi.cli import printu
 
 # default html templates
 
 def_table_html = u"""
 <tr><td>%s</td><td>%s</td></tr>
+"""
+
+def_repo_sizes_html = u"""
+<h3>Boyutlar</h3>
+<p>Toplam kurulu boyut %(total)s</p>
+<p>Dosya tiplerine göre liste:</p>
+<table><tbody>
+%(sizes)s
+</table></tbody>
 """
 
 def_repo_html = u"""
@@ -58,6 +71,8 @@ Depoda toplam %(nr_source)d
 <h3>Eksik ikili paketler</h3><p><table><tbody>
 %(missing)s
 </tbody></table></p>
+
+%(sizes)s
 
 <h3>Paketçiler:</h3><p><table><tbody>
 %(packagers)s
@@ -333,6 +348,7 @@ class Package:
         self.pakspec = pakspec
         self.revBuildDeps = []
         self.revRuntimeDeps = []
+        self.installedSize = 0
     
     def markDeps(self):
         # mark reverse build dependencies
@@ -353,27 +369,6 @@ class Package:
                 if not missing.has_key(p):
                     Missing(p)
                 missing[p].revRuntimeDeps.append(self.name)
-    
-    def report(self):
-        source = self.source.spec.source
-        printu(_("Binary package: %s\n") % self.name)
-        printu(_("  Version %s release %s\n") % (source.version, source.release))
-        printu(_("  Packager: %s <%s>\n") % (
-            source.packager.name, source.packager.email))
-        printu(_("  Build dependencies:\n"))
-        for d in source.buildDeps:
-            printu("    %s\n" % d.package)
-        printu(_("  Runtime dependencies:\n"))
-        for d in self.pakspec.runtimeDeps:
-            printu("    %s\n" % d.package)
-        if self.revBuildDeps:
-            printu(_("  Reverse build dependencies:\n"))
-            for d in self.revBuildDeps:
-                printu("    %s\n" % d)
-        if self.revRuntimeDeps:
-            printu(_("  Reverse runtime dependencies:\n"))
-            for d in self.revRuntimeDeps:
-                printu("    %s\n" % d)
     
     def report_html(self):
         source = self.source.spec.source
@@ -503,19 +498,6 @@ class Packager:
             for update in spec.history:
                 Packager(spec, update)
     
-    def report(self):
-        printu(_("Packager: %s <%s>\n") % (self.name, self.email))
-        if self.errors:
-            printu(_("  Errors:\n"))
-            for e in self.errors:
-                printu("    %s\n" % e)
-        printu(_("  Source packages (%d):\n") % len(self.sources))
-        for s in self.sources:
-            printu("    %s\n" % s)
-        printu(_("  Updates (%d):\n") % len(self.updates))
-        for s in self.updates:
-            printu("    %s (%s): %s\n" % s)
-    
     def report_html(self):
         srcs = map(lambda x: "<a href='./source-%s.html'>%s</a>" % (x, x), self.sources)
         srcs.sort()
@@ -541,6 +523,8 @@ class Repository:
         self.mostpatched = Histogram()
         self.longpy = Histogram()
         self.cscripts = Histogram()
+        self.total_installed_size = 0
+        self.installed_sizes = {}
     
     def processPspec(self, path, spec):
         # new classes
@@ -580,36 +564,30 @@ class Repository:
         for p in packages.values():
             p.markDeps()
     
-    def report(self):
-        printu(_("Repository Statistics:\n"))
-        # general stats
-        printu(_("  Total of %d source packages, and %d binary packages.\n") % (
-            self.nr_sources, self.nr_packages))
-        printu(_("  There are %d patches applied.\n") % self.nr_patches)
-        # problems
-        if missing:
-            printu(_("  Missing packages (%d):\n") % len(missing))
-            for m in missing.values():
-                printu("    %s\n" % m.name)
-        # trivia
-        printu(_("  Top five most patched source:\n"))
-        for p in self.mostpatched.get_list(5):
-            printu("   %4d %s\n" % (p[1], p[0]))
-        printu(_("  Top five longest action.py scripts:\n"))
-        for p in self.longpy.get_list(5):
-            printu("   %4d %s\n" % (p[1], p[0]))
-        # lists
-        printu(_("  COMAR scripts:\n"))
-        for cs in self.cscripts.get_list():
-            printu("   %4d %s\n" % (cs[1], cs[0]))
-        people = self.people.get_list()
-        printu(_("  Packagers (%d):\n") % len(people))
-        for p in people:
-            printu("   %4d %s\n" % (p[1], p[0]))
-        licenses = self.licenses.get_list()
-        printu(_("   Licenses (%d):\n") % len(licenses))
-        for p in licenses:
-            printu("   %4d %s\n" % (p[1], p[0]))
+    def processPisi(self, path):
+        p = pisi.package.Package(path)
+        p.extract_files(["metadata.xml", "files.xml"], ".")
+        md = pisi.metadata.MetaData()
+        md.read("metadata.xml")
+        self.total_installed_size += md.package.installedSize
+        if packages.has_key(md.package.name):
+            # FIXME: check version/release match too?
+            packages[md.package.name].installed_size = md.package.installedSize
+        else:
+            printu("Binary package '%s' has no source package in repository %s\n" % (path, self.path))
+        fd = pisi.files.Files()
+        fd.read("files.xml")
+        for f in fd.list:
+            if self.installed_sizes.has_key(f.type):
+                self.installed_sizes[f.type] += int(f.size)
+            else:
+                self.installed_sizes[f.type] = int(f.size)
+    
+    def scan_bins(self, binpath):
+        for root, dirs, files in os.walk(binpath):
+            for fn in files:
+                if fn.endswith(".pisi"):
+                    self.processPisi(os.path.join(root, fn))
     
     def report_html(self):
         miss = map(lambda x: "<tr><td><a href='./package-%s.html'>%s</a></td></tr>" % (x, x), missing.keys())
@@ -626,6 +604,13 @@ class Repository:
         ulongpy = []
         for p in self.longpy.get_list(5):
             ulongpy.append(("<a href='./source-%s.html'>%s</a>" % (p[0], p[0]), p[1]))
+        if self.total_installed_size:
+            items = self.installed_sizes.items()
+            items.sort(valuesort)
+            elts = "".join(map(lambda x: "<tr><td>%s</td><td>%d</td></tr>" % (x[0], x[1]), items))
+            sizes = template_get("repo_sizes") % { "total": self.total_installed_size, "sizes": elts }
+        else:
+            sizes = ""
         dict = {
             "nr_source": self.nr_sources,
             "nr_packages": self.nr_packages,
@@ -634,6 +619,7 @@ class Repository:
             "longpy": template_table("table", ulongpy),
             "packagers": template_table("table", upeople),
             "missing": "\n".join(miss),
+            "sizes": sizes,
             "errors": e
         }
         template_write("paksite/index.html", "repo", dict)
@@ -647,41 +633,51 @@ class Repository:
 
 # command line driver
 
-if len(sys.argv) < 2:
-    printu(_("Usage: repostats.py source-repo-path [ command [arg] ]\n"))
+def usage():
+    printu(_("Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"))
+    printu("  -t, --test-only:    %s" % _("Dont generate the web site.\n"))
     sys.exit(0)
 
-repo = Repository(sys.argv[1])
-printu(_("Scanning source repository...\n"))
-repo.scan()
-
-if errors:
-    printu("***\n")
-    printu(_("Encountered %d errors! Fix them immediately!\n") % len(errors))
-    for e in errors:
-        printu(e)
-    printu("\n")
-    printu("***\n")
-
-if len(sys.argv) > 2:
-    if sys.argv[2] == "check":
-        sys.exit(0)
-    elif sys.argv[2] == "packager":
-        if len(sys.argv) > 3:
-            packagers[unicode(sys.argv[3].decode('utf-8'))].report()
-            sys.exit(0)
-        else:
-            for p in packagers.values():
-                printu(_("%s <%s>, %s source package\n") % (p.name, p.email, len(p.sources)))
-            sys.exit(0)
-    elif sys.argv[2] == "package":
-        if len(sys.argv) > 3:
-            packages[unicode(sys.argv[3].decode('utf-8'))].report()
-            sys.exit(0)
-        else:
-            printu(_("Which package?\n"))
-            sys.exit(0)
-    elif sys.argv[2] == "html":
+if __name__ == "__main__":
+    try:
+        opts, args = getopt.gnu_getopt(sys.argv[1:], "ht", ["help", "test-only"])
+    except:
+        usage()
+    
+    if args == []:
+        usage()
+    
+    do_web = True
+    
+    for o, v in opts:
+        if o in ("-h", "--help"):
+            usage()
+        if o in ("-t", "--test-only"):
+            do_web = False
+    
+    repo = Repository(args[0])
+    printu(_("Scanning source repository...\n"))
+    repo.scan()
+    
+    if len(args) > 1:
+        printu(_("Scanning binary packages...\n"))
+        repo.scan_bins(args[1])
+    
+    if errors:
+        printu("***\n")
+        printu(_("Encountered %d errors! Fix them immediately!\n") % len(errors))
+        for e in errors:
+            printu(e)
+            printu("\n")
+        printu("\n")
+        printu("***\n")
+    
+    if missing:
+        printu(_("These dependencies are not available in repository:\n"))
+        for m in missing.keys():
+            printu("  %s\n" % m)
+    
+    if do_web:
         try:
             os.mkdir("paksite")
         except:
@@ -695,6 +691,3 @@ if len(sys.argv) > 2:
             p.report_html()
         for p in sources.values():
             p.report_html()
-        sys.exit(0)
-
-repo.report()
