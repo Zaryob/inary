@@ -579,7 +579,9 @@ class Repository:
         fd.read("files.xml")
         for f in fd.list:
             if self.installed_sizes.has_key(f.type):
-                self.installed_sizes[f.type] += int(f.size)
+                # Emtpy directories and symlinks has None size
+                if not f.size is None:
+                    self.installed_sizes[f.type] += int(f.size)
             else:
                 self.installed_sizes[f.type] = int(f.size)
     
