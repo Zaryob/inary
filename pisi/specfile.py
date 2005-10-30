@@ -38,6 +38,8 @@ from pisi.xmlfile import XmlFile
 import pisi.xmlfile as xmlfile
 from pisi.dependency import DepInfo
 from pisi.util import Checks
+import pisi.util as util
+import pisi.context as ctx
 
 class PackagerInfo:
     def __init__(self, node = None):
@@ -380,7 +382,7 @@ class PackageInfo:
                      + self.version + '-' \
                      + self.release
 
-        return join( config.lib_dir(), packageDir)
+        return util.join_path( ctx.config.lib_dir(), packageDir)
 
     def installable(self):
         """calculate if pkg is installable currently"""
