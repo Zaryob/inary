@@ -12,9 +12,7 @@ def saveMetadata(data, file):
         f = codecs.open(file, 'w', "utf-8")
         f.write(data)
         f.close()
-        return 0
-    else:
-        return 1
+        return True
 
 def getNodeText(node, tag, default=None):
     try   : c = getTags(node, tag)[0].firstChild.data
@@ -52,14 +50,12 @@ def fixMetadata(metadata):
     return dom.toxml()
 
 def findMetadata():
-    m = []
     for root, dirs, files in os.walk(folder):
         if "metadata.xml" in files:
-            m.append(root + '/metadata.xml')
-    return m
+            yield (root + '/metadata.xml')
 
 for file in findMetadata():
-    if not saveMetadata(fixMetadata(file), file):
-        print "Guncellendi          : ", file
+    if saveMetadata(fixMetadata(file), file):
+        print "Güncellendi          : ", file
     else:
         print "Hiç bir şey yapılmadı: ", file
