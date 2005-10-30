@@ -186,6 +186,13 @@ def install_pkg_names(A):
     if len(A)==0:
         ctx.ui.info(_('No packages to install.'))
         return
+
+    if ctx.config.get_option('ignore_dependency'):
+        # simple code path then
+        for x in A:
+            atomicoperations.install_single_name(x)
+        return # short circuit
+
     
     # try to construct a pisi graph of packages to
     # install / reinstall
