@@ -91,7 +91,9 @@ def_package_html = u"""
 </head><body>
 
 <h1>İkili paket: %(name)s</h1>
-<h2>Versiyon %(version)s, sürüm %(release)s</h2>
+<h2>Kaynak versiyon %(version)s, depo sürümü %(release)s</h2>
+
+<h3>Kaynak paket <a href="./source-%(source)s.html">%(source)s</a></h3>
 
 <h3>Derlemek için gerekenler:</h3>
 <p>%(buildDeps)s</p>
@@ -383,6 +385,7 @@ class Package:
         rrDeps = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x), self.revRuntimeDeps)
         dict = {
             "name": self.name,
+            "source": source.name,
             "version": source.version,
             "release": source.release,
             "buildDeps": ", ".join(bDeps),
@@ -450,7 +453,8 @@ class Source:
         paks = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x),
             (map(lambda x: x.name, self.spec.packages)))
         histdata = map(lambda x: (x.release, x.date, x.name, x.name, x.comment), self.spec.history)
-        ptch = map(lambda x: x.filename, source.patches)
+        ptch = map(lambda x: "<a href='%s/files/%s'>%s</a>" % (self.uri,
+            x.filename, x.filename), source.patches)
         dict = {
             "name": self.name,
             "homepage": source.homepage,
