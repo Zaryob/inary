@@ -27,10 +27,12 @@ class VersionTestCase(unittest.TestCase):
         v2 = Version("0.3.5")
         v3 = Version("1.5.2-4")
         v4 = Version("0.3.1-1")
+        v5 = Version("2.07")
         self.assert_(v1 < v2)
         self.assert_(v3 > v2)
         self.assert_(v1 <= v3)
         self.assert_(v4 >= v4)
+        self.assert_(v5 > v3)
 
     def testOpsKeywords(self):
         # with keywords
