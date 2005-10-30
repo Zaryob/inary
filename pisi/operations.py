@@ -413,3 +413,50 @@ in the respective order to satisfy dependencies:
             atomicoperations.remove_single(x)
         else:
             ctx.ui.info(_('Package %s is not installed. Cannot remove.') % x)
+
+def __is_virtual_upgrade(metadata):
+
+    pkg = metadata.package
+
+    (iversion, irelease, ibuild) = ctx.installdb.get_version(pkg.name)
+    
+    upgrade = False
+    if pkg.version > iversion:
+	upgrade = True
+    elif pkg.release > irelease:
+	upgrade = True
+    elif (ibuild and pkg.build
+	  and pkg.build > ibuild):
+	upgrade = True
+    
+    return upgrade
+
+def virtual_install(metadata, files):
+    """Recreate the package info for rebuilddb command"""
+    pkg = metadata.package
+
+    # normally this can't be true. Just for backward compatibility
+    # TODO: for speed only ctx.installdb.install exception can be
+    # handled but this is much cleaner
+    if ctx.installdb.is_installed(pkg.name):
+        if __is_virtual_upgrade(metadata):
+	    ctx.installdb.remove(pkg.name)
+	    packagedb.remove_package(pkg.name)
+	    #FIXME: files ne oluyor?
+	else:
+	    return
+
+    pkginfo = metadata.package
+    
+    # installdb
+    ctx.installdb.install(metadata.package.name,
+                         metadata.package.version,
+                         metadata.package.release,
+                         metadata.package.build,
+                         metadata.package.distribution)
+
+    # filesdb
+    ctx.filesdb.add_files(metadata.package.name, files)
+    
+    # installed packages
+    packagedb.inst_packagedb.add_package(pkginfo)

@@ -40,7 +40,7 @@ import pisi.installdb
 import pisi.sourcedb
 from pisi.index import Index
 import pisi.cli
-from pisi.operations import install, remove, upgrade
+from pisi.operations import install, remove, upgrade, virtual_install
 from pisi.metadata import MetaData
 from pisi.files import Files
 
@@ -335,53 +335,6 @@ def delete_cache():
     util.clean_dir(ctx.config.archives_dir())
     util.clean_dir(ctx.config.tmp_dir())
 
-def __is_virtual_upgrade(metadata):
-
-    pkg = metadata.package
-
-    (iversion, irelease, ibuild) = ctx.installdb.get_version(pkg.name)
-    
-    upgrade = False
-    if pkg.version > iversion:
-	upgrade = True
-    elif pkg.release > irelease:
-	upgrade = True
-    elif (ibuild and pkg.build
-	  and pkg.build > ibuild):
-	upgrade = True
-    
-    return upgrade
-
-def __virtual_install(metadata, files):
-
-    pkg = metadata.package
-
-    # normally this can't be true. Just for backward compatibility
-    # TODO: for speed only ctx.installdb.install exception can be
-    # handled but this is much cleaner
-    if ctx.installdb.is_installed(pkg.name):
-        if __is_virtual_upgrade(metadata):
-	    ctx.installdb.remove(pkg.name)
-	    packagedb.remove_package(pkg.name)
-	    #FIXME: files ne oluyor?
-	else:
-	    return
-
-    pkginfo = metadata.package
-    
-    # installdb
-    ctx.installdb.install(metadata.package.name,
-                         metadata.package.version,
-                         metadata.package.release,
-                         metadata.package.build,
-                         metadata.package.distribution)
-
-    # filesdb
-    ctx.filesdb.add_files(metadata.package.name, files)
-    
-    # installed packages
-    packagedb.inst_packagedb.add_package(pkginfo)
-
 def resurrect_package(package_fn):
     """Resurrect the package in the PiSi databases"""
 
@@ -407,4 +360,5 @@ def resurrect_package(package_fn):
     if files.has_errors():
        raise Error, _("Invalid %s") % ctx.const.files_xml
 
-    __virtual_install(metadata, files)
+    virtual_install(metadata, files)
+
