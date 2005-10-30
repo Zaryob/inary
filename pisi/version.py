@@ -50,15 +50,22 @@ class VersionItem:
 
     def __init__(self, itemstring):
 
-        for keyword in keywords.keys():
-            if itemstring.startswith(keyword):
+        # special-case: 1.5p
+        # here "p" comes as a separate itemstring and conflicts with
+        # keyword "p". But keyword should allways contain an integer prefix.
+        # So, skipping looking for keywords if the length() is 1 makes the
+        # trick.
+        if len(itemstring) > 1:
 
-                if self._keyword == "NOKEY":
-                    self._keyword = keyword
-                else:
-                    # longer match is correct
-                    if len(keyword) > len(self._keyword):
+            for keyword in keywords.keys():
+                if itemstring.startswith(keyword):
+
+                    if self._keyword == "NOKEY":
                         self._keyword = keyword
+                    else:
+                        # longer match is correct
+                        if len(keyword) > len(self._keyword):
+                            self._keyword = keyword
         
         if self._keyword == "NOKEY":
             if len(itemstring) == 1 and itemstring in string.ascii_letters:
