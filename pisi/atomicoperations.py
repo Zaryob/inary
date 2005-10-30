@@ -293,6 +293,7 @@ class Remove(AtomicOperation):
     def run(self):
         """Remove a single package"""
         inst_packagedb = packagedb.inst_packagedb
+        self.package = packagedb.get_package(self.package_name)
        
         ctx.ui.info(_('Removing package %s') % self.package_name)
         if not ctx.installdb.is_installed(self.package_name):
@@ -307,6 +308,7 @@ class Remove(AtomicOperation):
             self.remove_file(fileinfo)
     
         self.remove_db()
+        self.remove_pisi_files()
 
     def check_dependencies(self):
         #we only have to check the dependencies to ensure the
@@ -341,6 +343,9 @@ class Remove(AtomicOperation):
         else:
             # TODO: store this somewhere
             pass
+
+    def remove_pisi_files(self):
+        util.clean_dir(self.package.pkg_dir())
     
     def remove_db(self):
         ctx.installdb.remove(self.package_name)
