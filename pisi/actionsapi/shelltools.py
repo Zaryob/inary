@@ -206,6 +206,6 @@ def system(command):
         line = p.readline()
         if not line:
             break
-        ctx.ui.debug(line[0:len(line)-1])
+        ctx.ui.debug(line[:-1])
 
     return p.close()
