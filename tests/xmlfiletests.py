@@ -25,7 +25,7 @@ import testcase
 
 class XmlFileTestCase(testcase.TestCase):
     
-    def testMetaClass(self):
+    def testAutoXml(self):
 
         class OtherInfo:
             __metaclass__ = xmlfile.autoxml
@@ -43,11 +43,16 @@ class XmlFileTestCase(testcase.TestCase):
             t_Projects = [ [types.StringType], xmlfile.mandatory, 'Project']
             t_OtherInfo = [ OtherInfo, xmlfile.optional ]
 
+        self.assertEqual(len(A.decoders), 7) # we have seven fields
+
         a = A()
+        
+        # test initializer
         self.assertEqual(a.href, None)
+        
+        # test decode
         dom = mdom.parse('tests/a.xml')
         node = getNode(dom, 'A')
-        self.assertEqual(len(A.decoders), 4)
         errs = []
         print 'errs', errs
         a.decode(node, errs)
@@ -55,6 +60,8 @@ class XmlFileTestCase(testcase.TestCase):
         self.assertEqual(a.number, 868)
         self.assertEqual(a.name, 'Eray Ozkural')
         self.assertEqual(len(a.projects), 3)
+        self.assertEqual(len(a.otherInfo.codesWith), 4)
+
         #string = a.format(errs)
         #print '*', string
         a.print_text()
