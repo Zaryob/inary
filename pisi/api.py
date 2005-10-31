@@ -348,7 +348,9 @@ def resurrect_package(package_fn):
     errs = metadata.has_errors()
     if errs:   
        util.Checks.print_errors(errs)
-       raise Error, _("MetaData format wrong")
+       raise Error, _("MetaData format wrong (%s)") % package_fn
+    
+    ctx.ui.info(_('* Adding \'%s\' to db... ') % (metadata.package.name), noln=True)
     
     files_xml = util.join_path(ctx.config.lib_dir(), package_fn, ctx.const.files_xml)
     if not exists(files_xml):
@@ -361,4 +363,5 @@ def resurrect_package(package_fn):
        raise Error, _("Invalid %s") % ctx.const.files_xml
 
     virtual_install(metadata, files)
+    ctx.ui.info(_('OK.'))
 

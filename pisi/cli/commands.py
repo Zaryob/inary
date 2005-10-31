@@ -604,17 +604,16 @@ Rebuilds the PiSi databases
            import os
            for db in os.listdir(ctx.config.db_dir()):
                os.unlink(pisi.util.join_path(ctx.config.db_dir(), db))
-               
+
            self.init()
            self.rebuild_db()
 
        self.finalize()
-               
+
     def rebuild_db(self):
        import os
        for root, dirs, files in os.walk(ctx.config.lib_dir()):
            for package_fn in dirs:
-               ctx.ui.debug(package_fn)
                pisi.api.resurrect_package(package_fn)
 
 class UpdateRepo(Command):
