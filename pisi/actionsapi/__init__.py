@@ -11,7 +11,7 @@
 #
 
 # pisi.actionsapi version
-__version__ = '1.0_alpha5'
+__version__ = '1.0_alpha8'
 
 import pisi
 
