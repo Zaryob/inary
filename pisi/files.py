@@ -112,6 +112,10 @@ class FilesDB(shelve.LockedDBShelf):
         for x in files.list:
             self[str(x.path)] = (pkg_name, x)
 
+    def remove_files(self, files):
+	for x in files.list:
+	    self.delete(str(x.path))
+
     def has_file(self, path):
         return self.has_key(str(path))
 

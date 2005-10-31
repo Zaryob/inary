@@ -349,6 +349,7 @@ class Remove(AtomicOperation):
     
     def remove_db(self):
         ctx.installdb.remove(self.package_name)
+        ctx.filesdb.remove_files(ctx.installdb.files(self.package_name))
         #FIXME: this looks like a mistake!
         packagedb.remove_package(self.package_name)
 
