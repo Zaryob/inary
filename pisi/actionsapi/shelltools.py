@@ -198,6 +198,7 @@ def dirName(sourceFile):
     return os.path.dirname(sourceFile)
 
 def system(command):
+    #FIXME: might be better to merge this with util.run_batch
     #FIXME: String formatting
     command = command.replace("                 ", " ")
     ctx.ui.debug(_('executing %s') % command)
