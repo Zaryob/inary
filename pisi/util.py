@@ -534,7 +534,6 @@ def env_update():
     f = open(profile_file, "w")
     for key in keys:
         f.write("export %s=\"%s\"\n" % (key, keys[key]))
-    f.write("source /etc/profile")    
     f.close()
 
     # generate ld.so.conf
