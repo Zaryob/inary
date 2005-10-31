@@ -23,9 +23,10 @@ from pisi.xmlext import *
 
 import testcase
 
-class XmlFileTestCase(testcase.TestCase):
-    
-    def testAutoXml(self):
+class AutoXmlTestCase(testcase.TestCase):
+
+    def setUp(self):
+        testcase.TestCase.setUp(self, database=False)
 
         class OtherInfo:
             __metaclass__ = xmlfile.autoxml
@@ -42,10 +43,15 @@ class XmlFileTestCase(testcase.TestCase):
             a_href = [types.StringType, xmlfile.mandatory]
             t_Projects = [ [types.StringType], xmlfile.mandatory, 'Project']
             t_OtherInfo = [ OtherInfo, xmlfile.optional ]
+        
+        self.A = A
 
-        self.assertEqual(len(A.decoders), 7) # we have seven fields
+    def testDeclaration(self):
+        self.assertEqual(len(self.A.decoders), 7) # we have seven fields
+        self.assert_(hasattr(self.A, 'encode'))
 
-        a = A()
+    def testReadWrite(self):
+        a = self.A()
         
         # test initializer
         self.assertEqual(a.href, None)
@@ -74,16 +80,19 @@ class XmlFileTestCase(testcase.TestCase):
         xml.writexml('/tmp/a.xml')
         print '/tmp/a.xml written'
         xml = xmlfile.XmlFile('A')
-        a2 = A()
+        
+    def testCopy(self):
+        a2 = self.A()
         a2.name = "Baris Metin"
         a2.email = "baris@uludag.org.tr"
         a2.href = 'http://cekirdek.uludag.org.tr/~baris'
         a2.projects = [ 'pisi', 'tasma', 'plasma' ]
         errs3 = []
+        xml = xmlfile.XmlFile('A')
         a2.encode(xml, xml.rootNode(), errs3)
         print 'errs3', errs3
         xml.writexml('/tmp/a2.xml')
         print a2.check()
         #string = a2.format(errs3)
 
-suite = unittest.makeSuite(XmlFileTestCase)
+suite = unittest.makeSuite(AutoXmlTestCase)
