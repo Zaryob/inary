@@ -479,7 +479,6 @@ class autoxml(oo.autosuper):
         def encode(xml, node, value, errs):
             """encode given value inside DOM node"""
             if value:
-                #FIXME: unicode() here?
                 writetext(xml, node, token, unicode(value))
             else:
                 if req == mandatory:
@@ -487,8 +486,9 @@ class autoxml(oo.autosuper):
 
         def check(value, where):
             errs = []
-            if not isinstance(value, token_type):
-                errs.append(where + _('Type mismatch'))
+            if value and not isinstance(value, token_type):
+                errs.append(where + _('Type mismatch. Expected %s, got %s') % 
+                                    (token_type, type(value)) )                
             return errs
 
         def format(value, f, errs):
