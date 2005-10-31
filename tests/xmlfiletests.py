@@ -43,11 +43,12 @@ class AutoXmlTestCase(testcase.TestCase):
             a_href = [types.StringType, xmlfile.mandatory]
             t_Projects = [ [types.StringType], xmlfile.mandatory, 'Project']
             t_OtherInfo = [ OtherInfo, xmlfile.optional ]
+            s_Comment = [ xmlfile.Text, xmlfile.mandatory]
         
         self.A = A
 
     def testDeclaration(self):
-        self.assertEqual(len(self.A.decoders), 7) # we have seven fields
+        self.assertEqual(len(self.A.decoders), 8) # how many fields in A?
         self.assert_(hasattr(self.A, 'encode'))
 
     def testReadWrite(self):

@@ -37,6 +37,8 @@ from xml.parsers.expat import ExpatError
 import locale
 import codecs
 import types
+import formatter
+import sys
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -94,7 +96,7 @@ class LocalText(object):
                 if not lang:
                     lang = 'en'
                 self.locs[lang] = c
-            
+
     def encode(self, xml, node, errs):
         for key in self.locs.iterkeys():
             newnode = newNode(node, self.tag)
@@ -122,6 +124,23 @@ class LocalText(object):
             f.add_flowing_data(self.locs['tr'])
         else:
             errs.append(_("Tag should have at least an English or Turkish version"))
+            
+class Writer(formatter.DumbWriter):
+    """adds unicode support"""
+
+    def __init__(self, file=None, maxcol=78):
+        formatter.DumbWriter.__init__(self, file, maxcol)
+
+    def send_literal_data(self, data):
+        self.file.write(data.encode("utf-8"))
+        i = data.rfind('\n')
+        if i >= 0:
+            self.col = 0
+            data = data[i+1:]
+        data = data.expandtabs()
+        self.col = self.col + len(data)
+        self.atbreak = 0
+
             
 class autoxml(oo.autosuper):
     """High-level automatic XML transformation interface for xmlfile.
@@ -218,18 +237,20 @@ class autoxml(oo.autosuper):
         order = dict.keys()
         order.sort()
         for var in order:
-            if var.startswith('t_') or var.startswith('a_'):
+            if var.startswith('t_') or var.startswith('a_') or var.startswith('s_'):
                 name = var[2:]
                 if var.startswith('a_'):
                     x = autoxml.gen_attr_member(cls, name)
                 elif var.startswith('t_'):
                     x = autoxml.gen_tag_member(cls, name)
-                (init, decoder, encoder, checker, formatter) = x
+                elif var.startswith('s_'):
+                    x = autoxml.gen_str_member(cls, name)
+                (init, decoder, encoder, checker, format_x) = x
                 inits.append(init)
                 decoders.append(decoder)
                 encoders.append(encoder)
                 checkers.append(checker)
-                formatters.append(formatter)
+                formatters.append(format_x)
 
         # generate top-level helper functions
         cls.initializers = inits
@@ -275,8 +296,7 @@ class autoxml(oo.autosuper):
                 formatter(self, f, errs)
         cls.format = format
         def print_text(self):
-            import formatter
-            w = formatter.DumbWriter() # plain text
+            w = Writer() # plain text
             f = formatter.AbstractFormatter(w)
             errs = []
             self.format(f, errs)
@@ -307,7 +327,7 @@ class autoxml(oo.autosuper):
         spec = getattr(cls, 't_' + tag)
         anonfuns = cls.gen_tag(tag, spec)
         return cls.gen_named_comp(tag, spec, anonfuns)
-                    
+
     def gen_tag(cls, tag, spec):
         """generate readers and writers for the tag"""
         tag_type = spec[0]
@@ -329,6 +349,19 @@ class autoxml(oo.autosuper):
         else:
             raise Error(_('gen_tag: unrecognized tag type %s in spec') %
                         str(tag_type))
+
+    def gen_str_member(cls, token):
+        """generate readers and writers for a string member"""
+        spec = getattr(cls, 's_' + token)
+        tag_type = spec[0]
+        assert type(tag_type) == type(type)
+        def readtext(node, blah):
+            node.normalize()
+            return getNodeText(node)
+        def writetext(xml, node, blah, text):
+            addText(node, "", text)
+        anonfuns = cls.gen_anon_basic(token, spec, readtext, writetext)
+        return cls.gen_named_comp(token, spec, anonfuns)
 
     def gen_named_comp(cls, token, spec, anonfuns):
         """generate a named component tag/attr. a decoration of
@@ -430,14 +463,14 @@ class autoxml(oo.autosuper):
                 return value
             else:
                 if req == mandatory:
-                    errs.append(_('Mandatory token %s not available') % token)
+                    errs.append(where + _('Mandatory token %s not available') % token)
                 return None
 
         def encode(xml, node, value, errs):
             """encode given value inside DOM node"""
             if value:
                 #FIXME: unicode() here?
-                writetext(xml, node, token, str(value))
+                writetext(xml, node, token, unicode(value))
             else:
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
@@ -528,7 +561,7 @@ class autoxml(oo.autosuper):
             l = []
             nodes = getAllNodes(node, path)
             #print node, tag + '/' + comp_tag, nodes
-            if len(nodes) is 0 and req is mandatory:
+            if len(nodes)==0 and req==mandatory:
                 errs.append(where + _('Mandatory list empty'))
             for ix in range(len(nodes)):
                 node = nodes[ix]

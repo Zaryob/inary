@@ -24,7 +24,7 @@ class SpecFileNewTestCase(testcase.TestCase):
         self.spec = specfile.SpecFile()
         self.spec.read("tests/popt/pspec.xml")
     
-    def testReadSpec(self):
+    def testFields(self):
         self.assertEqual(self.spec.source.name, "popt")
 
         self.assertEqual(self.spec.source.version, "1.7")
@@ -32,7 +32,7 @@ class SpecFileNewTestCase(testcase.TestCase):
         self.assertEqual(self.spec.source.release, "3")
 
         self.assertEqual(self.spec.source.archiveSHA1,
-                "66f3c77b87a160951b180447f4a6dce68ad2f71b")
+                         "66f3c77b87a160951b180447f4a6dce68ad2f71b")
 
         patches = self.spec.source.patches
         self.assertEqual(len(patches), 1)
@@ -72,7 +72,7 @@ class SpecFileNewTestCase(testcase.TestCase):
             self.fail("Failed to match PartOf in Package")
         
     def testVerify(self):
-        if self.spec.has_errors():
+        if self.spec.check() != []:
             self.fail("Failed to verify specfile")
 
     def testCopy(self):

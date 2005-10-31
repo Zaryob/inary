@@ -97,7 +97,7 @@ class Path:
         return s
 
 class Dependency:
-    t_Package = [xmlfile.String, xmlfile.mandatory]
+    s_Package = [xmlfile.String, xmlfile.mandatory]
     a_versionFrom = [xmlfile.String, xmlfile.optional]
     a_versionTo = [xmlfile.String, xmlfile.optional]
     a_releaseFrom = [xmlfile.String, xmlfile.optional]
