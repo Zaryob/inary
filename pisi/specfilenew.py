@@ -18,6 +18,10 @@
  provides read and write routines for PSPEC files.
 """
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 # standard python modules
 from os.path import basename
 
@@ -149,9 +153,10 @@ class Source:
     t_Packager = [Packager, xmlfile.mandatory]
     t_Summary = [xmlfile.String, xmlfile.mandatory]
     t_Description = [xmlfile.String, xmlfile.mandatory]
-    t_License = [ [xmlfile.String], xmlfile.mandatory]
     t_IsA = [ [xmlfile.String], xmlfile.mandatory]
     t_PartOf = [xmlfile.String, xmlfile.mandatory]
+    t_Icon = [ xmlfile.String, xmlfile.optional]
+    t_License = [ [xmlfile.String], xmlfile.mandatory]
     t_Archive = [Archive, xmlfile.mandatory ]
     t_Patches = [ [Patch], xmlfile.optional]
     t_BuildDependencies = [ [Dependency], xmlfile.optional]
@@ -162,12 +167,17 @@ class Package:
     t_Name = [ xmlfile.String, xmlfile.mandatory ]
     t_Summary = [ xmlfile.String, xmlfile.mandatory ]
     t_Description = [ xmlfile.String, xmlfile.mandatory ]
-    t_PartOf = [xmlfile.String, xmlfile.optional]
     t_IsA = [ [xmlfile.String], xmlfile.optional]
+    t_PartOf = [xmlfile.String, xmlfile.optional]
+    t_License = [ [xmlfile.String], xmlfile.optional]
+    t_Icon = [ xmlfile.String, xmlfile.optional]
+    t_RuntimeDependencies = [ [Dependency], xmlfile.optional]
+    t_Files = [ [Path], xmlfile.optional]    
     t_Conflicts = [ [xmlfile.String], xmlfile.optional, "Conflicts/Package"]
     t_ProvidesComar = [ [ComarProvide], xmlfile.optional, "Provides/COMAR"]
-    #t_RequriesComar = [ [xmlfile.String], xmlfile.mandatory, "Requires/COMAR"]
+    #t_RequiresComar = [ [xmlfile.String], xmlfile.mandatory, "Requires/COMAR"]
     t_AdditionalFiles = [ [AdditionalFile], xmlfile.optional]
+    t_History = [ [Update], xmlfile.optional]
     
 
 class SpecFile(XmlFile):
@@ -177,7 +187,7 @@ class SpecFile(XmlFile):
 
     t_Source = [ Source, xmlfile.mandatory]
     t_Packages = [ [Package], xmlfile.mandatory, "Package"]
-    t_History = [ [Update], xmlfile.mandatory, "History/Update"]
+    t_History = [ [Update], xmlfile.mandatory]
 
     #we're not doing this with the init hook right now
     #def init(self, tag = "PISI"):
@@ -205,13 +215,12 @@ class SpecFile(XmlFile):
 
         self.unlink()
 
- 
-        errs = self.has_errors()
+        errs = self.check()
         if errs:
             e = ""
             for x in errs:
                 e += x + "\n"
-            raise XmlError(_("File '%s' has errors:\n%s") % (filename, e))
+            raise Error(_("File '%s' has errors:\n%s") % (filename, e))
 
     def override_tags(self):
         """Override tags from Source in Packages. Some tags in Packages
@@ -227,8 +236,8 @@ class SpecFile(XmlFile):
             if not pkg.description:
                 pkg.description = self.source.description
 
-            if not pkg.partof:
-                pkg.partof = self.source.partof
+            if not pkg.partOf:
+                pkg.partOf = self.source.partOf
 
             if not pkg.license:
                 pkg.license = self.source.license
@@ -248,30 +257,14 @@ class SpecFile(XmlFile):
         tmp = []
         for pkg in self.packages:
 
-            if pkg.isa and self.source.isa:
-                pkg.isa.append(self.source.isa)
-            elif not pkg.isa and self.source.isa:
-                pkg.isa = self.source.isa
+            if pkg.isA and self.source.isA:
+                pkg.isA.append(self.source.isA)
+            elif not pkg.isA and self.source.isA:
+                pkg.isA = self.source.isA
 
             tmp.append(pkg)
 
         self.packages = tmp
-
-    def has_errors(self):
-        """Return errors of the PSPEC file if there are any."""
-        #FIXME: has_errors name is misleading for a function that does
-        #not just return a boolean value. check() would be better - exa
-        err = Checks()
-        err.join(self.source.has_errors())
-        if len(self.packages) <= 0:
-            errs.add(_("There should be at least one Package section"))
-        for p in self.packages:
-            err.join(p.has_errors())
-        if len(self.history) <= 0:
-            err.add(_("Source needs some education in History :)"))
-        for update in self.history:
-            err.join(update.has_errors())
-        return err.list
 
     def write(self, filename):
         """Write PSPEC file"""
