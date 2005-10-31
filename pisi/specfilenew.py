@@ -43,7 +43,7 @@ class Packager:
 
         
 class AdditionalFile:
-    s_Filename = xmlfile.mandatory
+    s_Filename = [xmlfile.String, xmlfile.mandatory]
     a_Target = [xmlfile.String, xmlfile.mandatory]
     a_Permission = [xmlfile.String, xmlfile.optional]
 
@@ -55,7 +55,7 @@ class AdditionalFile:
 
         
 class Patch:
-    s_Filename = xmlfile.mandatory
+    s_Filename = [xmlfile.String, xmlfile.mandatory]
     a_compressionType = [xmlfile.String, xmlfile.optional]
     a_level = [xmlfile.String, xmlfile.optional]
     a_target = [xmlfile.String, xmlfile.optional]
@@ -88,7 +88,7 @@ class Update:
 
         
 class Path:
-    s_Path = xmlfile.mandatory
+    s_Path = [xmlfile.String, xmlfile.mandatory]
     a_fileType =  [xmlfile.String, xmlfile.optional]
 
     def __str__(self):
