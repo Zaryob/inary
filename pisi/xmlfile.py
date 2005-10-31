@@ -391,7 +391,7 @@ class autoxml(oo.autosuper):
             errs = []
             if hasattr(self, name):
                 value = getattr(self,name)
-                errs.extend(check_a(value, unicode("%s: " %name)))
+                errs.extend(check_a(value, where + name + ': ' ))
             else:
                 if req == mandatory:
                     errs.append(where + _('Mandatory variable %s not available') % name)
@@ -595,7 +595,7 @@ class autoxml(oo.autosuper):
         def check(l, where):
             errs = []
             for ix in range(len(l)):
-                errs.extend(check_item(l[ix], unicode(ix)))
+                errs.extend(check_item(l[ix], where + '[%s]' % ix))
             return errs
 
         def format(l, f, errs):

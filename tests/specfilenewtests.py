@@ -31,7 +31,7 @@ class SpecFileNewTestCase(testcase.TestCase):
 
         self.assertEqual(self.spec.source.release, "3")
 
-        self.assertEqual(self.spec.source.archiveSHA1,
+        self.assertEqual(self.spec.source.archive.sha1sum,
                          "66f3c77b87a160951b180447f4a6dce68ad2f71b")
 
         patches = self.spec.source.patches
@@ -47,7 +47,7 @@ class SpecFileNewTestCase(testcase.TestCase):
 
         # search for a path in package.paths
         pn = "/usr/lib"
-        matched = [p for p in package.paths if p.pathname == pn]
+        matched = [p for p in package.files if p.path == pn]
         if not matched:
             self.fail("Failed to match pathname: %s" %pn)
 

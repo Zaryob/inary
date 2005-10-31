@@ -160,6 +160,8 @@ class Source:
     t_Archive = [Archive, xmlfile.mandatory ]
     t_Patches = [ [Patch], xmlfile.optional]
     t_BuildDependencies = [ [Dependency], xmlfile.optional]
+    t_Version = [ xmlfile.String, xmlfile.optional]
+    t_Release = [ xmlfile.String, xmlfile.optional]
 
 
 class Package:
@@ -207,20 +209,12 @@ class SpecFile(XmlFile):
         self.merge_tags()
         self.override_tags()
 
-        #FIXME: copy only needed information
-        # no need to keep full history with comments in metadata.xml
-        self.source.history = self.history
-        for p in self.packages:
-            p.history = self.history
-
         self.unlink()
 
         errs = self.check()
         if errs:
-            e = ""
-            for x in errs:
-                e += x + "\n"
-            raise Error(_("File '%s' has errors:\n%s") % (filename, e))
+            errs.append(_("File '%s' has errors") % filename)
+            raise Error(*errs)
 
     def override_tags(self):
         """Override tags from Source in Packages. Some tags in Packages
@@ -229,41 +223,41 @@ class SpecFile(XmlFile):
 
         tmp = []
         for pkg in self.packages:
-
             if not pkg.summary:
                 pkg.summary = self.source.summary
-
             if not pkg.description:
                 pkg.description = self.source.description
-
             if not pkg.partOf:
                 pkg.partOf = self.source.partOf
-
             if not pkg.license:
                 pkg.license = self.source.license
-
             if not pkg.icon:
                 pkg.icon = self.source.icon
-
             tmp.append(pkg)
-
         self.packages = tmp
-        
+
     def merge_tags(self):
         """Merge tags from Source in Packages. Some tags in Packages merged
         with the tags from Source. There is a more detailed
         description in documents."""
 
+        # FIXME: copy only needed information
+        # no need to keep full history with comments in metadata.xml
+        self.source.history = self.history
+
+        # To avoid tag duplication in PSPEC we need to get 
+        # the last version and release information
+        # from the most recent History/Update.
+        if not self.source.version:
+            self.source.version = self.history[0].version
+        if not self.source.release:
+            self.source.release = self.history[0].release
+
         tmp = []
         for pkg in self.packages:
-
-            if pkg.isA and self.source.isA:
-                pkg.isA.append(self.source.isA)
-            elif not pkg.isA and self.source.isA:
-                pkg.isA = self.source.isA
-
+            pkg.isA.extend(self.source.isA)
+            pkg.history = self.history
             tmp.append(pkg)
-
         self.packages = tmp
 
     def write(self, filename):
