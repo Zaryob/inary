@@ -593,19 +593,18 @@ Rebuilds the PiSi databases
     def __init__(self):
         super(RebuildDb, self).__init__()
 
-    name = ("rebuilddb", "rd")
+    name = ("rebuild-db", "rdb")
 
     def run(self):
-       self.init()
+       self.init(database=False)
 
        #FIXME: Confirm icin init, unlink icin finalize, rebuild_db icin init lazim :)
-       if ctx.ui.confirm(_('Rebuild PISI databases? ')):
+       if ctx.ui.confirm(_('Rebuild PISI databases?')):
            self.finalize()
            import os
            for db in os.listdir(ctx.config.db_dir()):
                os.unlink(pisi.util.join_path(ctx.config.db_dir(), db))
-
-           self.init()
+           self.init(database=True)
            self.rebuild_db()
 
        self.finalize()

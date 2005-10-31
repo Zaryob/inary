@@ -40,7 +40,8 @@ import pisi.installdb
 import pisi.sourcedb
 from pisi.index import Index
 import pisi.cli
-from pisi.operations import install, remove, upgrade, virtual_install
+from pisi.operations import install, remove, upgrade
+from pisi.atomicoperations import resurrect_package
 from pisi.metadata import MetaData
 from pisi.files import Files
 
@@ -334,34 +335,3 @@ def delete_cache():
     util.clean_dir(ctx.config.packages_dir())
     util.clean_dir(ctx.config.archives_dir())
     util.clean_dir(ctx.config.tmp_dir())
-
-def resurrect_package(package_fn):
-    """Resurrect the package in the PiSi databases"""
-
-    metadata_xml = util.join_path(ctx.config.lib_dir(), package_fn, ctx.const.metadata_xml)
-    if not exists(metadata_xml):
-       return
-
-    metadata = MetaData()
-    metadata.read(metadata_xml)
-
-    errs = metadata.has_errors()
-    if errs:   
-       util.Checks.print_errors(errs)
-       raise Error, _("MetaData format wrong (%s)") % package_fn
-    
-    ctx.ui.info(_('* Adding \'%s\' to db... ') % (metadata.package.name), noln=True)
-    
-    files_xml = util.join_path(ctx.config.lib_dir(), package_fn, ctx.const.files_xml)
-    if not exists(files_xml):
-       return
-
-    files = Files()
-    files.read(files_xml)
-
-    if files.has_errors():
-       raise Error, _("Invalid %s") % ctx.const.files_xml
-
-    virtual_install(metadata, files)
-    ctx.ui.info(_('OK.'))
-
