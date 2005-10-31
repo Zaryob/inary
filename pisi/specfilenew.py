@@ -35,14 +35,16 @@ class Error(pisi.Error):
 __metaclass__ = xmlfile.autoxml
 
 class Packager:
+
     t_Name = [xmlfile.Text, xmlfile.mandatory]
     t_Email = [xmlfile.String, xmlfile.mandatory]
     def __str__(self):
         s = "%s <%s>" % (self.name, self.email)
         return s
 
-        
+
 class AdditionalFile:
+
     s_Filename = [xmlfile.String, xmlfile.mandatory]
     a_Target = [xmlfile.String, xmlfile.mandatory]
     a_Permission = [xmlfile.String, xmlfile.optional]
@@ -55,6 +57,7 @@ class AdditionalFile:
 
         
 class Patch:
+    
     s_Filename = [xmlfile.String, xmlfile.mandatory]
     a_compressionType = [xmlfile.String, xmlfile.optional]
     a_level = [xmlfile.String, xmlfile.optional]
@@ -70,9 +73,9 @@ class Patch:
             s += ' target:' + self.target
         return s
 
-        
-class Update:
 
+class Update:
+    
     a_release = [xmlfile.String, xmlfile.mandatory]
     t_Date = [xmlfile.String, xmlfile.mandatory]
     t_Version = [xmlfile.String, xmlfile.mandatory]
@@ -88,6 +91,7 @@ class Update:
 
         
 class Path:
+
     s_Path = [xmlfile.String, xmlfile.mandatory]
     a_fileType =  [xmlfile.String, xmlfile.optional]
 
@@ -97,6 +101,7 @@ class Path:
         return s
 
 class Dependency:
+
     s_Package = [xmlfile.String, xmlfile.mandatory]
     a_versionFrom = [xmlfile.String, xmlfile.optional]
     a_versionTo = [xmlfile.String, xmlfile.optional]
@@ -148,8 +153,8 @@ class Source:
     t_IsA = [ [xmlfile.String], xmlfile.mandatory]
     t_PartOf = [xmlfile.String, xmlfile.mandatory]
     t_Archive = [Archive, xmlfile.mandatory ]
-    t_Patches = [ [Patch], xmlfile.mandatory]
-    t_BuildDependencies = [ [Dependency], xmlfile.mandatory]
+    t_Patches = [ [Patch], xmlfile.optional]
+    t_BuildDependencies = [ [Dependency], xmlfile.optional]
 
 
 class Package:
@@ -267,7 +272,7 @@ class SpecFile(XmlFile):
         for update in self.history:
             err.join(update.has_errors())
         return err.list
-    
+
     def write(self, filename):
         """Write PSPEC file"""
         self.newDOM()

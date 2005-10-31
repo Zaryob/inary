@@ -432,8 +432,16 @@ class autoxml(oo.autosuper):
 
         if len(spec)>=3:
             path = spec[2]               # an alternative path specified
+        elif type(token_type) is type([]):
+            if type(token_type[0]) is autoxml:
+                # if list of class, by default nested like in most PSPEC
+                path = token + '/' + token_type[0].tag
+            else:
+                # if list of ordinary type, just take the name for 
+                path = token
         elif type(token_type) is autoxml:
-            path = token_type.tag + '/' + token
+            # if a class, by default its tag
+            path = token_type.tag
         else:
             path = token                 # otherwise it's the same name as
                                          # the token
