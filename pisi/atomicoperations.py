@@ -281,7 +281,7 @@ def install_single_name(name, upgrade = False):
         # Package will handle remote file for us!
         install_single_file(pkg_path, upgrade)
     else:
-        raise Error(_("Package %s not found in any active repository.") % pkg)
+        raise Error(_("Package %s not found in any active repository.") % name)
 
 
 class Remove(AtomicOperation):
