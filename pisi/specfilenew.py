@@ -268,8 +268,9 @@ class SpecFile(XmlFile):
 
     def write(self, filename):
         """Write PSPEC file"""
+        errs = []
         self.newDOM()
-        self.addChild(self.source.elt(self))
-        for pkg in self.packages:
-            self.addChild(pkg.elt(self))
+        self.encode(self, self.rootNode(), errs)
+        if errs:
+            raise Error(*errs)
         self.writexml(filename)
