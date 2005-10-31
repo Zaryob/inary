@@ -72,7 +72,7 @@ class Install(AtomicOperation):
 
     def install(self, ask_reinstall = True):
         "entry point"
-        ctx.ui.info(_('Installing %s, version %s, release %s, build %s') %
+        ctx.ui.info(_('\nInstalling %s, version %s, release %s, build %s') %
                 (self.pkginfo.name, self.pkginfo.version,
                  self.pkginfo.release, self.pkginfo.build))
         self.ask_reinstall = ask_reinstall
