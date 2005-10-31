@@ -20,7 +20,7 @@ import testcase
 class SpecFileNewTestCase(testcase.TestCase):
 
     def setUp(self):
-        testcase.TestCase.setUp(self)
+        testcase.TestCase.setUp(self, database=False)
         self.spec = specfile.SpecFile()
         self.spec.read("tests/popt/pspec.xml")
     
@@ -53,22 +53,22 @@ class SpecFileNewTestCase(testcase.TestCase):
 
     def testIsAPartOf(self):
         # test existence in Source
-        if not "library:util:optparser" in self.spec.source.isa:
+        if not "library:util:optparser" in self.spec.source.isA:
             self.fail("Failed to match IsA in Source")
-        if not isinstance(self.spec.source.isa, list):
-            self.fail("source.isa is not a list, but it must be...")
+        if not isinstance(self.spec.source.isA, list):
+            self.fail("source.isA is not a list, but it must be...")
 
-        if "rpm:archive" != self.spec.source.partof:
+        if "rpm:archive" != self.spec.source.partOf:
             self.fail("Failed to match PartOf in Source")
 
         # test existence in Package
         pkg = self.spec.packages[0]
-        if not "library:util:optparser" in pkg.isa:
+        if not "library:util:optparser" in pkg.isA:
             self.fail("Failed to match IsA in Package")
-        if not isinstance(pkg.isa, list):
-            self.fail("source.isa is not a list, but it must be...")
+        if not isinstance(pkg.isA, list):
+            self.fail("source.isA is not a list, but it must be...")
 
-        if "rpm:archive" != pkg.partof:
+        if "rpm:archive" != pkg.partOf:
             self.fail("Failed to match PartOf in Package")
         
     def testVerify(self):
