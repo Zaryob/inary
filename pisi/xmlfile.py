@@ -400,7 +400,9 @@ class autoxml(oo.autosuper):
         def format(self, f, errs):
             if hasattr(self, name):
                 value = getattr(self,name)
-                f.add_literal_data('%s: %s\n' % (token, format_a(value, f, errs)))
+                f.add_literal_data(token + ': ')
+                format_a(value, f, errs)
+                f.add_line_break()
             else:
                 if req == mandatory:
                     errs.append(_('Mandatory variable %s not available') % name)
