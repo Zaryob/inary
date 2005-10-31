@@ -46,8 +46,14 @@ class I18nInstall(install):
         for lang in i18n_languages.split(' '):
             print "Installing '%s' translations..." % lang
             os.popen("msgfmt po/%s.po -o po/%s.mo" % (lang, lang))
-            shutil.copy("po/%s.mo" % lang,
-                "/usr/share/locale/%s/LC_MESSAGES/%s.mo" % (lang, i18n_domain))
+            if not self.root:
+                self.root = "/"
+            destpath = os.path.join(self.root, "usr/share/locale/%s/LC_MESSAGES" % lang)
+            try:
+                os.makedirs(destpath)
+            except:
+                pass
+            shutil.copy("po/%s.mo" % lang, os.path.join(destpath, "%s.mo" % i18n_domain))
 
 setup(name="pisi",
     version= getVersion(),
