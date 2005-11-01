@@ -221,6 +221,8 @@ class autoxml(oo.autosuper):
         # standard initialization
         super(autoxml, cls).__init__(name, bases, dict)
 
+        xmlfile_support = XmlFile in bases
+
         #TODO: initialize class attribute __xml_tags
         #setattr(cls, 'xml_variables', [])
 
@@ -306,6 +308,38 @@ class autoxml(oo.autosuper):
         cls.print_text = print_text
         if not dict.has_key('__str__'):
             cls.__str__ = print_text
+            
+        if xmlfile_support:
+            def read(self, filename):
+                self.readxml(filename)
+                errs = []
+                self.decode(self.rootNode(), errs)
+                if hasattr(self, 'read_hook'):
+                    self.read_hook(errs)
+                if errs:
+                    errs.append(_("autoxml.read: File '%s' has errors") % filename)
+                    raise Error(*errs)
+
+                self.unlink()
+
+                errs = self.check()
+                if errs:
+                    errs.append(_("autoxml.read: File '%s' has errors") % filename)
+                    raise Error(*errs)
+                    
+            def write(self, filename):
+                errs = []
+                self.newDOM()
+                self.encode(self, self.rootNode(), errs)
+                if hasattr(self, 'write_hook'):
+                    self.write_hook(errs)
+                if errs:
+                    errs.append(_("autoxml.write: File '%s' has errors") % filename)
+                    raise Error(*errs)
+                self.writexml(filename)
+            
+            cls.read = read
+            cls.write = write
 
     def gen_attr_member(cls, attr):
         """generate readers and writers for an attribute member"""

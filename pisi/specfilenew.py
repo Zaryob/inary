@@ -196,45 +196,10 @@ class SpecFile(XmlFile):
         #ignore tag
         #XmlFile.__init__(self, tag)
 
-    def read(self, filename):
+    def read_hook(self, errs):
         """Read PSPEC file"""
-        
-        self.readxml(filename)
-        
-        errs = []
-        self.decode(self.rootNode(), errs)
-        if errs:
-            raise Error(*errs)
-
         self.merge_tags()
         self.override_tags()
-
-        self.unlink()
-
-        errs = self.check()
-        if errs:
-            errs.append(_("File '%s' has errors") % filename)
-            raise Error(*errs)
-
-    def override_tags(self):
-        """Override tags from Source in Packages. Some tags in Packages
-        overrides the tags from Source. There is a more detailed
-        description in documents."""
-
-        tmp = []
-        for pkg in self.packages:
-            if not pkg.summary:
-                pkg.summary = self.source.summary
-            if not pkg.description:
-                pkg.description = self.source.description
-            if not pkg.partOf:
-                pkg.partOf = self.source.partOf
-            if not pkg.license:
-                pkg.license = self.source.license
-            if not pkg.icon:
-                pkg.icon = self.source.icon
-            tmp.append(pkg)
-        self.packages = tmp
 
     def merge_tags(self):
         """Merge tags from Source in Packages. Some tags in Packages merged
@@ -260,11 +225,22 @@ class SpecFile(XmlFile):
             tmp.append(pkg)
         self.packages = tmp
 
-    def write(self, filename):
-        """Write PSPEC file"""
-        errs = []
-        self.newDOM()
-        self.encode(self, self.rootNode(), errs)
-        if errs:
-            raise Error(*errs)
-        self.writexml(filename)
+    def override_tags(self):
+        """Override tags from Source in Packages. Some tags in Packages
+        overrides the tags from Source. There is a more detailed
+        description in documents."""
+
+        tmp = []
+        for pkg in self.packages:
+            if not pkg.summary:
+                pkg.summary = self.source.summary
+            if not pkg.description:
+                pkg.description = self.source.description
+            if not pkg.partOf:
+                pkg.partOf = self.source.partOf
+            if not pkg.license:
+                pkg.license = self.source.license
+            if not pkg.icon:
+                pkg.icon = self.source.icon
+            tmp.append(pkg)
+        self.packages = tmp
