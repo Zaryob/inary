@@ -57,43 +57,31 @@ class AutoXmlTestCase(testcase.TestCase):
         # test initializer
         self.assertEqual(a.href, None)
         
-        # test decode
-        dom = mdom.parse('tests/a.xml')
-        node = getNode(dom, 'A')
-        errs = []
-        print 'errs', errs
-        a.decode(node, errs)
+        # test read
+        a.read('tests/a.xml')
         self.assert_(a.href.startswith('http'))
         self.assertEqual(a.number, 868)
         self.assertEqual(a.name, 'Eray Ozkural')
         self.assertEqual(len(a.projects), 3)
         self.assertEqual(len(a.otherInfo.codesWith), 4)
 
-        #string = a.format(errs)
-        #print '*', string
+        self.assert_(not a.check())
+
         a.print_text()
         #self.assert_(string.startswith('Name'))
-        xml = xmlfile.XmlFile('A')
-        xml.newDOM()
-        errs2 = []
-        a.encode(xml, xml.rootNode(), errs2)
-        print 'errs2', errs2
-        xml.writexml('/tmp/a.xml')
-        print '/tmp/a.xml written'
-        xml = xmlfile.XmlFile('A')
+        a.write('/tmp/a.xml')
         
-    def testCopy(self):
-        a2 = self.A()
-        a2.name = "Baris Metin"
-        a2.email = "baris@uludag.org.tr"
-        a2.href = 'http://cekirdek.uludag.org.tr/~baris'
-        a2.projects = [ 'pisi', 'tasma', 'plasma' ]
-        errs3 = []
-        xml = xmlfile.XmlFile('A')
-        a2.encode(xml, xml.rootNode(), errs3)
-        print 'errs3', errs3
-        xml.writexml('/tmp/a2.xml')
-        print a2.check()
-        #string = a2.format(errs3)
+    def testWriteRead(self):
+        a = self.A()
+        a.name = "Baris Metin"
+        a.email = "baris@uludag.org.tr"
+        a.description['tr'] = u'Melek, melek'
+        a.comment = u'Bu da zibidi aslinda ama caktirmiyor'
+        a.href = 'http://cekirdek.uludag.org.tr/~baris'
+        a.projects = [ 'pisi', 'tasma', 'plasma' ]
+        errs = a.check()
+        if errs:
+            self.fail( 'We got a bunch of errors: ' + str(errs)) 
+        a.write('/tmp/a2.xml')
 
 suite = unittest.makeSuite(AutoXmlTestCase)
