@@ -385,9 +385,9 @@ def virtual_install(metadata, files):
         if __is_virtual_upgrade(metadata):
             ctx.installdb.remove(pkg.name)
             packagedb.remove_package(pkg.name)
-            #FIXME: files ne oluyor?
-    #else:
-    #    return
+	    ctx.filesdb.remove_files(ctx.installdb.files(pkg.name))
+        else:
+            return
 
     pkginfo = metadata.package
     
