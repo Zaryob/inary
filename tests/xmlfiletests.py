@@ -67,8 +67,9 @@ class AutoXmlTestCase(testcase.TestCase):
 
         self.assert_(not a.check())
 
-        a.print_text()
-        #self.assert_(string.startswith('Name'))
+        a.print_text(file('/tmp/a', 'w'))
+        la = file('/tmp/a').readlines()
+        self.assert_( util.any(lambda x:x.find('18071976')!=-1, la) )
         a.write('/tmp/a.xml')
         
     def testWriteRead(self):

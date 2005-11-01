@@ -298,8 +298,8 @@ class autoxml(oo.autosuper):
             for formatter in self.__class__.formatters:
                 formatter(self, f, errs)
         cls.format = format
-        def print_text(self):
-            w = Writer() # plain text
+        def print_text(self, file = sys.stdout):
+            w = Writer(file) # plain text
             f = formatter.AbstractFormatter(w)
             errs = []
             self.format(f, errs)
