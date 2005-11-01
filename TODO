@@ -75,6 +75,15 @@ Legend:
 
  * medium priority
  
+ / autoxml: automated xml processing (eray)
+   + design
+   + basic types
+   + list type
+   + class type
+   + localtext/text types
+   + revised interface
+   + xmlfile support
+   - revise writing and tests
  / components and distribution (eray)
    + requirements
    / xml format
@@ -150,12 +159,6 @@ Legend:
    + comar OM information (Provides)
    + find package by name, display summary/description
    + info --files option (like rpm -ql, but better of course)
- + autoxml: automated xml processing (eray)
-   + design
-   + basic types
-   + list type
-   + class type
-   + localtext type
  + implement missing unit tests
    + sourcedb
    + package (baris)
