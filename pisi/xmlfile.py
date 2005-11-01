@@ -70,13 +70,14 @@ Integer = types.IntType
 #        # standard initialization
 #        super(autoxml, cls).__init__(name, bases, dict)
 
-class LocalText(object):
+class LocalText(dict):
     """Handles XML tags with localized text"""
 
     def __init__(self, tag, spec):
         self.tag = tag
         self.req = spec[1]
-        self.locs = {}
+        dict.__init__(self)
+        #self.locs = {}
     
     def decode(self, node, errs, where = ""):
         # flags, tag name, instance attribute
@@ -95,33 +96,33 @@ class LocalText(object):
                 # FIXME: check for dups and 'en'
                 if not lang:
                     lang = 'en'
-                self.locs[lang] = c
+                self[lang] = c
 
     def encode(self, xml, node, errs):
-        for key in self.locs.iterkeys():
+        for key in self.iterkeys():
             newnode = newNode(node, self.tag)
             newnode.setAttribute('xml:lang', key)     
-            newtext = newTextNode(node, self.locs[key])
+            newtext = newTextNode(node, self[key])
             newnode.appendChild(newtext)
             node.appendChild(newnode)
     
     def check(self, where = unicode()):
         errs = []
         langs = [ locale.getlocale()[0][0:2], 'tr', 'en' ]
-        if not util.any(lambda x : self.locs.has_key(x), langs):
+        if not util.any(lambda x : self.has_key(x), langs):
             errs.append( where + _("Tag should have at least an English or Turkish version"))
         return errs
     
     def format(self, f, errs):
         L = locale.getlocale()[0][0:2] # try to read language, pathetic isn't it?
-        if self.locs.has_key(L):
-            f.add_flowing_data(self.locs[L])
-        elif self.locs.has_key('en'):
+        if self.has_key(L):
+            f.add_flowing_data(self[L])
+        elif self.has_key('en'):
             # fallback to English, blah
-            f.add_flowing_data(self.locs['en'])
-        elif self.locs.has_key('tr'):
+            f.add_flowing_data(self['en'])
+        elif self.has_key('tr'):
             # fallback to Turkish
-            f.add_flowing_data(self.locs['tr'])
+            f.add_flowing_data(self['tr'])
         else:
             errs.append(_("Tag should have at least an English or Turkish version"))
             
@@ -328,13 +329,17 @@ class autoxml(oo.autosuper):
                     raise Error(*errs)
                     
             def write(self, filename):
+                errs = self.check()
+                if errs:
+                    errs.append(_("autoxml.write: object validation has failed"))
+                    raise Error(*errs)
                 errs = []
                 self.newDOM()
                 self.encode(self, self.rootNode(), errs)
                 if hasattr(self, 'write_hook'):
                     self.write_hook(errs)
                 if errs:
-                    errs.append(_("autoxml.write: File '%s' has errors") % filename)
+                    errs.append(_("autoxml.write: File encoding '%s' has errors") % filename)
                     raise Error(*errs)
                 self.writexml(filename)
             
