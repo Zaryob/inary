@@ -85,5 +85,8 @@ class AutoXmlTestCase(testcase.TestCase):
         if errs:
             self.fail( 'We got a bunch of errors: ' + str(errs)) 
         a.write('/tmp/a2.xml')
+        a2 = self.A()
+        a2.read('/tmp/a2.xml')
+        self.assertEqual(a, a2)
 
 suite = unittest.makeSuite(AutoXmlTestCase)
