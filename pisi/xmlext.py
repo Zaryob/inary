@@ -132,9 +132,8 @@ def addTagPath(dom, node, tags, newnode=None):
     return node    
 
 def addNode(dom, node, tagpath, newnode = None):
-    """add a new node at the end of the tree
-    if newnode is given adds that node, too
-    returns the last node processed"""
+    """add a new node at the end of the tree and returns it
+    if newnode is given adds that node, too."""
 
     assert type(tagpath)==str
     tags = []
@@ -147,23 +146,15 @@ def addNode(dom, node, tagpath, newnode = None):
     assert len(tags)>0                  # we want a chain
 
     # iterative code to search for the path
-        
-    # get DOM for top node
-    nodeList = getTagByName(node, tags[0])
-    
-    if len(nodeList) == 0:
-        return addTagPath(dom, node, tags, newnode)
-    
-    node = nodeList[len(nodeList)-1]              # discard other matches
-    tags.pop(0)
-    while len(tags)>0:
+
+    while len(tags) > 1:
         tag = tags.pop(0)
         nodeList = getTagByName(node, tag)
         if len(nodeList) == 0:          # couldn't find
             tags.insert(0, tag)         # put it back in
             return addTagPath(dom, node, tags, newnode)
         else:
-            node = nodeList[len(nodeList)-1]
+            node = nodeList[len(nodeList)-1]           # discard other matches
     else:
         # had only one tag..
         return addTagPath(dom, node, tags, newnode)
