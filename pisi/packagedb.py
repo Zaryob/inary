@@ -90,14 +90,14 @@ class PackageDB(object):
 packagedbs = {}
 
 def add_db(name):
-    packagedbs[name] = PackageDB('repo-' + name)
+    pisi.packagedb.packagedbs[name] = PackageDB('repo-' + name)
 
 def get_db(name):
-    return packagedbs[name]
+    return pisi.packagedb.packagedbs[name]
 
 def remove_db(name):
-    del packagedbs[name]
-    #erase database file
+    del pisi.packagedb.packagedbs[name]
+    #FIXME: erase database file?
     
 def has_package(name):
     repo = which_repo(name)

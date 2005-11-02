@@ -48,7 +48,7 @@ class SourceDB(object):
         return self.d[name]
 
     def add_source(self, source_info):
-        assert not source_info.has_errors()
+        assert not source_info.errors()
         name = str(source_info.name)
         self.d[name] = source_info
 
