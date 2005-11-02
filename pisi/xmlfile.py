@@ -591,11 +591,10 @@ class autoxml(oo.autosuper):
     def gen_list_tag(cls, tag, spec):
         """generate a list datatype. stores comps in tag/comp_tag"""
         name, tag_type, req, path = cls.parse_spec(tag, spec)
-        #head, last = cls.tagpath_head_last(path)
+
         pathcomps = path.split('/')
-        list_tagpath = path[:path.rfind('/')]
-        comp_tag = pathcomps[len(pathcomps)-1]
-        #TODO: make default path ... tag + '/' + comp_tag when comp is class!
+        comp_tag = pathcomps.pop()
+        list_tagpath = util.makepath(pathcomps, sep='/', relative=True)
 
         if len(tag_type) != 1:
             raise Error(_('List type must contain only one element'))
@@ -623,7 +622,10 @@ class autoxml(oo.autosuper):
             dom = node.ownerDocument
             if l and len(l) > 0:
                 for item in l:
-                    listnode = addNode(dom, node, list_tagpath)
+                    if list_tagpath:
+                        listnode = addNode(dom, node, list_tagpath)
+                    else:
+                        listnode = node
                     encode_item(xml, listnode, item, errs)
             else:
                 if req is mandatory:

@@ -82,7 +82,7 @@ def unzip(seq):
 
 def concat(l):
     '''concatenate a list of lists'''
-    return reduce( lambda x,y: x+y, l )
+    return reduce( operator.concat, l )
 
 def strlist(l):
     """concatenate string reps of l's elements"""
@@ -168,6 +168,14 @@ def splitpath(a):
     if comps[len(comps)-1]=='':
         comps.pop()
     return comps
+
+def makepath(comps, relative = False, sep = os.path.sep):
+    """reconstruct a path from components"""
+    path = reduce(lambda x,y: x + sep + y, comps, '')
+    if relative:
+        return path[len(sep):]
+    else:
+        return path
 
 # I'm not sure how necessary this is. Ahem.
 def commonprefix(l):
