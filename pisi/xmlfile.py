@@ -623,10 +623,8 @@ class autoxml(oo.autosuper):
             dom = node.ownerDocument
             if l and len(l) > 0:
                 for item in l:
-                    listnode = xml.newNode("Dummy")
+                    listnode = addNode(dom, node, list_tagpath)
                     encode_item(xml, listnode, item, errs)
-                    node = getNode(listnode, comp_tag)
-                    addNode(dom, node, path)
             else:
                 if req is mandatory:
                     errs.append(_('Mandatory list empty'))

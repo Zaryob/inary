@@ -132,7 +132,9 @@ def addTagPath(dom, node, tags, newnode=None):
     return node    
 
 def addNode(dom, node, tagpath, newnode = None):
-    """add a new node at the end of the tree"""
+    """add a new node at the end of the tree
+    if newnode is given adds that node, too
+    returns the last node processed"""
 
     assert type(tagpath)==str
     tags = []
@@ -140,7 +142,7 @@ def addNode(dom, node, tagpath, newnode = None):
         tags = tagpath.split('/')           # tag chain
     else:
         addTagPath(dom, node, [], newnode)
-        return node
+        return node #FIXME: is this correct!?!?
         
     assert len(tags)>0                  # we want a chain
 
