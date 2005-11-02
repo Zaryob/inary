@@ -115,23 +115,24 @@ def getAllNodes(node, tagPath):
 
     return nodeList
 
-def createTagPath(dom, node, tags):
+def createTagPath(node, tags):
     """create new child at the end of a tag chain starting from node
     no matter what"""
     if len(tags)==0:
         return node
+    dom = node.ownerDocument
     for tag in tags:
         node = node.appendChild(dom.createElement(tag))
     return node
 
-def addTagPath(dom, node, tags, newnode=None):
+def addTagPath(node, tags, newnode=None):
     """add newnode at the end of a tag chain, smart one"""
-    node = createTagPath(dom, node, tags)
+    node = createTagPath(node, tags)
     if newnode:                     # node to add specified
         node.appendChild(newnode)
     return node    
 
-def addNode(dom, node, tagpath, newnode = None):
+def addNode(node, tagpath, newnode = None):
     """add a new node at the end of the tree and returns it
     if newnode is given adds that node, too."""
 
@@ -140,7 +141,7 @@ def addNode(dom, node, tagpath, newnode = None):
     if tagpath != "":
         tags = tagpath.split('/')           # tag chain
     else:
-        addTagPath(dom, node, [], newnode)
+        addTagPath(node, [], newnode)
         return node #FIXME: is this correct!?!?
         
     assert len(tags)>0                  # we want a chain
@@ -152,12 +153,12 @@ def addNode(dom, node, tagpath, newnode = None):
         nodeList = getTagByName(node, tag)
         if len(nodeList) == 0:          # couldn't find
             tags.insert(0, tag)         # put it back in
-            return addTagPath(dom, node, tags, newnode)
+            return addTagPath(node, tags, newnode)
         else:
             node = nodeList[len(nodeList)-1]           # discard other matches
     else:
         # had only one tag..
-        return addTagPath(dom, node, tags, newnode)
+        return addTagPath(node, tags, newnode)
 
     return node
 
@@ -169,4 +170,4 @@ def newTextNode(node, text):
 
 def addText(node, tagPath, text):
     newnode = newTextNode(node, text)
-    addNode(node.ownerDocument, node, tagPath, newnode)
+    addNode(node, tagPath, newnode)

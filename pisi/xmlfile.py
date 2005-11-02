@@ -623,7 +623,7 @@ class autoxml(oo.autosuper):
             if l and len(l) > 0:
                 for item in l:
                     if list_tagpath:
-                        listnode = addNode(dom, node, list_tagpath)
+                        listnode = addNode(node, list_tagpath)
                     else:
                         listnode = node
                     encode_item(xml, listnode, item, errs)
@@ -803,13 +803,12 @@ class XmlFile(object):
     def addNode(self, tagPath, newnode = None):
         "this adds the newnode under given tag path"
         self.verifyRootTag()
-        return addNode(self.dom, self.dom.documentElement, tagPath,
-                       newnode)
+        return addNode(self.dom.documentElement, tagPath, newnode)
 
     def addNodeUnder(self, node, tagPath, newnode = None):
         "this adds the new stuff under node and then following tag path"
         self.verifyRootTag()
-        return addNode(self.dom, node, tagPath, newnode)
+        return addNode(node, tagPath, newnode)
 
     def addChild(self, newnode):
         "add a new child node right under root element document"
