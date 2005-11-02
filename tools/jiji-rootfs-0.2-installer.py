@@ -12,6 +12,17 @@
 #         kalite@uludag.org.tr
 #           pisi@uludag.org.tr
 #
+#
+#
+#   Dikkat:
+#
+# 1. Elinizde yoksa, RootFS 0.2'yi bir yere indirin.
+# 2. Eğer yoksa boş bir partition yaratın, ya da bir
+# disk bölümünüzü kurulum için belirleyin ve formatlayın.
+# 3. Bu disk bölümünü bir yere mount edin.
+# 4. Betiği çalıştırın..
+# 5. Bol şans ve teşekkürler.
+#
 
 import os
 import sys 
