@@ -23,6 +23,17 @@ class autosuper(type):
         
 class autosuprop(autosuper, autoprop):
     pass
-    
+
+class autoeq(type):
+    "useful for structures"
+    def __init__(cls, name, bases, dict):
+        super(autoeq, cls).__init__(name, bases, dict)
+        def equal(self, other):
+            return self.__dict__ == other.__dict__
+        cls.__eq__ = equal
+
 class Struct:
-    def __init__(self, **entries): self.__dict__.update(entries)
+    __metaclass__ = autoeq
+    
+    def __init__(self, **entries):
+        self.__dict__.update(entries)

@@ -143,7 +143,7 @@ class Writer(formatter.DumbWriter):
         self.atbreak = 0
 
             
-class autoxml(oo.autosuper):
+class autoxml(oo.autosuper, oo.autoprop, oo.autoeq):
     """High-level automatic XML transformation interface for xmlfile.
     The idea is to declare a class for each XML tag. Inside the
     class the tags and attributes nested in the tag are further

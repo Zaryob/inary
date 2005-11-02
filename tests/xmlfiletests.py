@@ -87,6 +87,11 @@ class AutoXmlTestCase(testcase.TestCase):
         a.write('/tmp/a2.xml')
         a2 = self.A()
         a2.read('/tmp/a2.xml')
-        self.assertEqual(a, a2)
+        self.assertEqual(a.name, a2.name)
+        self.assertEqual(a.email, a2.email)
+        self.assertEqual(a.description, a2.description)
+        self.assertEqual(a.comment, a2.comment)
+        self.assertEqual(a.href, a2.href)
+        self.assertEqual(a.otherInfo, a2.otherInfo)
 
 suite = unittest.makeSuite(AutoXmlTestCase)
