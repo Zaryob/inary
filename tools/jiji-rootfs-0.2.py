@@ -6,7 +6,7 @@
 #
 #          meren@uludag.org.tr
 #
-# Pardusla ilgili diğer tüm sorularınızı,
+# Pardus'la ilgili diğer tüm sorularınız için:
 #
 #  pardus-teknik@uludag.org.tr
 #         kalite@uludag.org.tr
@@ -2363,22 +2363,29 @@ if __name__ == "__main__":
           ((100 * (rootPartitionAvSize - getPartitionAvSize(rootPartition))) / rootFsSize))
         sys.stdout.flush()
         time.sleep(2)
+    sys.stderr.write("\r    Kurulum Tamamlandı : %%%d\n" % 100)
+    print "    Ayarlar yapılıyor...\n"
 
-    sys.stderr.write("\r    Yaklaşık Tamamlanan: %%%d\n" % 100)
-    print "    Kurulum Bitti. Ayarlar yapılıyor.\n"
+    #--
 
-    print "    Uludağ kullanıcısının ev dizini ayarlanıyor..\n"
+    print "    * Uludağ kullanıcısının ev dizini ayarlanıyor.."
     os.system("sudo chown -R uludag:users %s/home/uludag" % installDir)
 
-    print "    /etc/fstab ayarlanıyor.."
+    #--
+
+    print "    * /etc/fstab ayarlanıyor.."
     os.system("sudo sed -i 's/ROOT/%s/g' %s/etc/fstab" % \
              (os.path.basename(rootPartition), installDir))
-    os.system("sudo sed -i 's/SWAP/%s/g' %s/etc/fstab" % \
-             (swapPartition, installDir))
-    os.system("sudo sed -i 's/reiserfs/%s/g' %s/etc/fstab" % \
-             (rootPartitionType, installDir))
+    if swapPartition:
+        os.system("sudo sed -i 's/SWAP/%s/g' %s/etc/fstab" % \
+                 (swapPartition, installDir))
+    if rootPartitionType:
+        os.system("sudo sed -i 's/reiserfs/%s/g' %s/etc/fstab" % \
+                 (rootPartitionType, installDir))
 
-    print "    /boot/grub/grub.conf ayarlanıyor.."
+    #--
+
+    print "    * /boot/grub/grub.conf ayarlanıyor.."
     os.system("sudo sed -i 's/root\=ROOT/root\=\/%s\/%s/g' %s/boot/grub/grub.conf" % \
              (rootPartition.split("/")[1], rootPartition.split("/")[2], installDir))
     os.system("sudo sed -i 's/ROOT\/grub/(%s)\/boot\/grub/g' %s/boot/grub/grub.conf" % \
@@ -2386,6 +2393,7 @@ if __name__ == "__main__":
     os.system("sudo sed -i 's/ROOT/(%s)/g' %s/boot/grub/grub.conf" % \
              (getGrubStyle(os.path.basename(rootPartition)), installDir))
     
+    #--
 
     print "\n    Kurulum ve yapılandırmalar sona erdi. Eğer bilgisayarınızı yeniden başlatmadan önce grub'ı MBR'a yazdırmanız gerekiyorsa, lütfen nasıl yapıldığını araştırın ya da bize sorun. Tüm sorularınızı irc.freenode.org'daki #pardus-devel kanalında ya da http://liste.uludag.org.tr/ adresinden ulaşabileceğiniz pardus-teknik e-posta listesinde sorabilirsiniz.\n    Desteğiniz için teşekkürler."
 
