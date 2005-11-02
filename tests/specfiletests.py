@@ -11,16 +11,12 @@
 import unittest
 import os
 
-import pisi.specfilenew as specfile
-import pisi.context as ctx
+import pisi.specfile as specfile
 import pisi.util as util
 
-import testcase
-
-class SpecFileNewTestCase(testcase.TestCase):
+class SpecFileNewTestCase(unittest.TestCase):
 
     def setUp(self):
-        testcase.TestCase.setUp(self, database=False)
         self.spec = specfile.SpecFile()
         self.spec.read("tests/popt/pspec.xml")
     
@@ -76,8 +72,7 @@ class SpecFileNewTestCase(testcase.TestCase):
             self.fail("Failed to verify specfile")
 
     def testCopy(self):
-        util.check_dir(ctx.config.tmp_dir())
         self.spec.read("tests/popt/pspec.xml")
-        self.spec.write(os.path.join(ctx.config.tmp_dir(), 'popt-copy.pspec.xml'))
+        self.spec.write('/tmp/popt-copy.pspec.xml')
 
 suite = unittest.makeSuite(SpecFileNewTestCase)

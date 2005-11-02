@@ -278,12 +278,16 @@ class autoxml(oo.autosuper, oo.autoprop):
         def decode(self, node, errs, where = unicode()):
             for decode_member in self.__class__.decoders:
                 decode_member(self, node, errs, where)
+            if hasattr(self, 'decode_hook'):
+                errs.extend(self.decode_hook(node, errs, where))
         cls.decode = decode
 
         cls.encoders = encoders
         def encode(self, xml, node, errs):
             for encode_member in self.__class__.encoders:
                 encode_member(self, xml, node, errs)
+            if hasattr(self, 'encode_hook'):
+                errs.extend(self.encode_hook(xml, node, errs))
         cls.encode = encode
 
         cls.checkers = checkers

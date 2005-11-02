@@ -25,89 +25,60 @@ _ = __trans.ugettext
 
 import pisi.context as ctx
 import pisi.specfile as specfile
-from pisi.xmlfile import *
+import pisi.xmlfile as xmlfile
 from pisi.util import Checks
 
-class SourceInfo:
+class Source:
+    __metaclass__ = xmlfile.autoxml
 
-    def __init__(self, node=None):
-        if node:
-            self.name = getNodeText(node, "Name")
-            self.homepage = getNodeText(node, "HomePage")
-            self.packager = specfile.PackagerInfo(getNode(node, "Packager"))
-        else:
-            self.homepage = None
+    t_Name = [xmlfile.String, xmlfile.mandatory]
+    t_Homepage = [xmlfile.String, xmlfile.mandatory]
+    t_Packager = [specfile.Packager, xmlfile.mandatory]
 
-    def elt(self, xml):
-        node = xml.newNode("Source")
-        xml.addTextNodeUnder(node, "Name", self.name)
-        if self.homepage:
-            xml.addTextNodeUnder(node, "Homepage", self.homepage)
-        node.appendChild(self.packager.elt(xml))
-        return node
+# FIXME: make inheritance work with autoxml (specfile.Package)
+class Package:
+    __metaclass__ = xmlfile.autoxml
 
-    def has_errors(self):
-        if not self.name:
-            return [ _("SourceInfo should have a Name") ]
-        return []
+    t_Name = [ xmlfile.String, xmlfile.mandatory ]
+    t_Summary = [ xmlfile.String, xmlfile.mandatory ]
+    t_Description = [ xmlfile.String, xmlfile.mandatory ]
+    t_IsA = [ [xmlfile.String], xmlfile.optional]
+    t_PartOf = [xmlfile.String, xmlfile.optional]
+    t_License = [ [xmlfile.String], xmlfile.optional]
+    t_Icon = [ xmlfile.String, xmlfile.optional]
+    t_RuntimeDependencies = [ [specfile.Dependency], xmlfile.optional]
+    t_Files = [ [specfile.Path], xmlfile.optional]    
+    t_Conflicts = [ [xmlfile.String], xmlfile.optional, "Conflicts/Package"]
+    t_ProvidesComar = [ [specfile.ComarProvide], xmlfile.optional, "Provides/COMAR"]
+    #t_RequiresComar = [ [xmlfile.String], xmlfile.mandatory, "Requires/COMAR"]
+    t_AdditionalFiles = [ [specfile.AdditionalFile], xmlfile.optional]
+    t_History = [ [specfile.Update], xmlfile.optional]
+    t_Build = [ xmlfile.Integer, xmlfile.optional]
+    t_Distribution = [ xmlfile.String, xmlfile.mandatory]
+    t_DistributionRelease = [ xmlfile.String, xmlfile.mandatory]
+    t_Architecture = [ xmlfile.String, xmlfile.mandatory]
+    t_InstalledSize = [ xmlfile.Integer, xmlfile.mandatory]
+    t_PackageURI = [ xmlfile.Integer, xmlfile.optional]
 
-
-class PackageInfo(specfile.PackageInfo):
-
-    def __init__(self, node = None):
-        if node:
-            specfile.PackageInfo.__init__(self, node)
-            self.version = getNodeText(node, "History/Update/Version")
-            self.release = getNodeAttribute(getNode(node, "History/Update"), "release")
-            #FIXME: Support Build No under History/Update/Build
-            build_ = getNodeText(node, "Build")
-            if build_ != None:
-                self.build = int(build_)
-            else:
-                self.build = None
-            self.distribution = getNodeText(node, "Distribution")
-            self.distributionRelease = getNodeText(node, "DistributionRelease")
-            self.architecture = getNodeText(node, "Architecture")
-            self.installedSize = int(getNodeText(node, "InstalledSize"))
-            self.packageURI = getNodeText(node, "PackageURI")
-        else:
-            self.packageURI = None
-
-    def elt(self, xml):
-        node = specfile.PackageInfo.elt(self, xml)
-        if self.build != None:
-            xml.addTextNodeUnder(node, "Build", str(self.build))
-        xml.addTextNodeUnder(node, "Distribution", self.distribution)
-        xml.addTextNodeUnder(node, "DistributionRelease", self.distributionRelease)
-        xml.addTextNodeUnder(node, "Architecture", self.architecture)
-        xml.addTextNodeUnder(node, "InstalledSize", str(self.installedSize))
-        if self.packageURI:
-            xml.addTextNodeUnder(node, "PackageURI", str(self.packageURI))
-        return node
-
-    def has_errors(self):
-        # FIXME: there should be real error msgs
-        # and comment the logic here please, it isn't very clear -gurer
-        err = Checks()
-        err.join(specfile.PackageInfo.has_errors(self))
-        err.has_tag(self.version, 'Package', 'Version')
-        err.has_tag(self.release, 'Package', 'Release')
-        err.has_tag(self.distribution, 'Package', 'Distribution')
-        err.has_tag(self.distributionRelease, 'Package', 'DistributionRelease')
-        err.has_tag(self.architecture, 'Package', 'Architecture')
-        err.has_tag(self.installedSize, 'Package', 'InstalledSize')
-        return err.list
+    def decode_hook(self, node, errs, where):
+        self.version = self.history[0].version
+        self.release = self.history[0].release
 
     def __str__(self):
-        s = specfile.PackageInfo.__str__(self)
+        s = specfile.Package.__str__(self)
         return s
 
-class MetaData(XmlFile):
+class MetaData(xmlfile.XmlFile):
     """Package metadata. Metadata is composed of Specfile and various
     other information. A metadata has two parts, Source and Package."""
 
-    def __init__(self):
-        XmlFile.__init__(self, "PISI")
+    __metaclass__ = xmlfile.autoxml
+
+    tag = "PISI"
+
+    t_Source = [ Source, xmlfile.mandatory]
+    t_Package = [ Package, xmlfile.mandatory]
+    #t_History = [ [Update], xmlfile.mandatory]
 
     def from_spec(self, src, pkg):
         self.source = SourceInfo()
@@ -136,26 +107,3 @@ class MetaData(XmlFile):
         self.source.release = src.release
         self.package.version = src.version
         self.package.release = src.release
-
-    def read(self, filename):
-        self.readxml(filename)
-        self.source = SourceInfo(self.getNode("Source"))
-        self.package = PackageInfo(self.getNode("Package"))
-
-    def write(self, filename):
-        self.newDOM()
-        self.addChild(self.source.elt(self))
-        self.addChild(self.package.elt(self))
-        self.writexml(filename)
-
-    def has_errors(self):
-        err = Checks()
-        # FIXME: is this an internal error?? -gurer
-        if not hasattr(self, 'source'):
-            err.add(_("Metadata should have source"))
-        err.join(self.source.has_errors())
-        
-        if not self.package:
-            err.add(_("Metadata should have a package"))
-        err.join(self.package.has_errors())
-        return err.list

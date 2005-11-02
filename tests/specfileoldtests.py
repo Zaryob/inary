@@ -11,7 +11,7 @@
 import unittest
 import os
 
-from pisi import specfile
+from pisi import specfileold as specfile
 import pisi.context as ctx
 import pisi.util as util
 
