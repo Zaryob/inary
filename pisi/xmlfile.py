@@ -143,7 +143,7 @@ class Writer(formatter.DumbWriter):
         self.atbreak = 0
 
             
-class autoxml(oo.autosuper, oo.autoprop, oo.autoeq):
+class autoxml(oo.autosuper, oo.autoprop):
     """High-level automatic XML transformation interface for xmlfile.
     The idea is to declare a class for each XML tag. Inside the
     class the tags and attributes nested in the tag are further
@@ -232,6 +232,7 @@ class autoxml(oo.autosuper, oo.autoprop, oo.autoeq):
             cls.tag = name
 
         # generate helper routines, for each XML component
+        names = []
         inits = []
         decoders = []
         encoders = []
@@ -239,6 +240,7 @@ class autoxml(oo.autosuper, oo.autoprop, oo.autoeq):
         formatters = []
         order = dict.keys()
         order.sort()
+        #TODO: there should be at most one str member, and it should be the first
         for var in order:
             if var.startswith('t_') or var.startswith('a_') or var.startswith('s_'):
                 name = var[2:]
@@ -248,7 +250,8 @@ class autoxml(oo.autosuper, oo.autoprop, oo.autoeq):
                     x = autoxml.gen_tag_member(cls, name)
                 elif var.startswith('s_'):
                     x = autoxml.gen_str_member(cls, name)
-                (init, decoder, encoder, checker, format_x) = x
+                (name, init, decoder, encoder, checker, format_x) = x
+                names.append(name)
                 inits.append(init)
                 decoders.append(decoder)
                 encoders.append(encoder)
@@ -309,6 +312,20 @@ class autoxml(oo.autosuper, oo.autoprop, oo.autoeq):
         cls.print_text = print_text
         if not dict.has_key('__str__'):
             cls.__str__ = print_text
+        
+        if not dict.has_key('__eq__'):
+            def equal(self, other):
+                for name in names:
+                    try:
+                        if getattr(self, name) != getattr(other, name):
+                            return False
+                    except:
+                        return False
+                return True
+            def notequal(self, other):
+                return not self.__eq__(other)
+            cls.__eq__ = equal
+            cls.__ne__ = notequal            
             
         if xmlfile_support:
             def read(self, filename):
@@ -345,6 +362,7 @@ class autoxml(oo.autosuper, oo.autoprop, oo.autoeq):
             
             cls.read = read
             cls.write = write
+            
 
     def gen_attr_member(cls, attr):
         """generate readers and writers for an attribute member"""
@@ -446,7 +464,7 @@ class autoxml(oo.autosuper, oo.autoprop, oo.autoeq):
                 if req == mandatory:
                     errs.append(_('Mandatory variable %s not available') % name)
             
-        return (init, decode, encode, check, format)
+        return (name, init, decode, encode, check, format)
 
     def mixed_case(cls, identifier):
         """helper function to turn token name into mixed case"""
