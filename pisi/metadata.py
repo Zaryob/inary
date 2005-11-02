@@ -32,7 +32,7 @@ class Source:
     __metaclass__ = xmlfile.autoxml
 
     t_Name = [xmlfile.String, xmlfile.mandatory]
-    t_Homepage = [xmlfile.String, xmlfile.mandatory]
+    t_Homepage = [xmlfile.String, xmlfile.optional]
     t_Packager = [specfile.Packager, xmlfile.mandatory]
 
 # FIXME: make inheritance work with autoxml (specfile.Package)

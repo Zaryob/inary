@@ -106,7 +106,7 @@ class LocalText(dict):
             newnode.appendChild(newtext)
             node.appendChild(newnode)
     
-    def check(self, where = unicode()):
+    def errors(self, where = unicode()):
         errs = []
         langs = [ locale.getlocale()[0][0:2], 'tr', 'en' ]
         if not util.any(lambda x : self.has_key(x), langs):
@@ -236,7 +236,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         inits = []
         decoders = []
         encoders = []
-        checkers = []
+        errorss = []
         formatters = []
         order = dict.keys()
         order.sort()
@@ -250,12 +250,12 @@ class autoxml(oo.autosuper, oo.autoprop):
                     x = autoxml.gen_tag_member(cls, name)
                 elif var.startswith('s_'):
                     x = autoxml.gen_str_member(cls, name)
-                (name, init, decoder, encoder, checker, format_x) = x
+                (name, init, decoder, encoder, errors, format_x) = x
                 names.append(name)
                 inits.append(init)
                 decoders.append(decoder)
                 encoders.append(encoder)
-                checkers.append(checker)
+                errorss.append(errors)
                 formatters.append(format_x)
 
         # generate top-level helper functions
@@ -279,7 +279,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             for decode_member in self.__class__.decoders:
                 decode_member(self, node, errs, where)
             if hasattr(self, 'decode_hook'):
-                errs.extend(self.decode_hook(node, errs, where))
+                self.decode_hook(node, errs, where)
         cls.decode = decode
 
         cls.encoders = encoders
@@ -287,18 +287,18 @@ class autoxml(oo.autosuper, oo.autoprop):
             for encode_member in self.__class__.encoders:
                 encode_member(self, xml, node, errs)
             if hasattr(self, 'encode_hook'):
-                errs.extend(self.encode_hook(xml, node, errs))
+                self.encode_hook(xml, node, errs)
         cls.encode = encode
 
-        cls.checkers = checkers
-        def check(self, where = unicode()):
+        cls.errorss = errorss
+        def errors(self, where = unicode()):
             errs = []
-            for checker in self.__class__.checkers:
-                errs.extend(checker(self, where))
-            if hasattr(self, 'check_hook'):
-                errs.extend(self.check_hook(where))
+            for errors in self.__class__.errorss:
+                errs.extend(errors(self, where))
+            if hasattr(self, 'errors_hook'):
+                errs.extend(self.errors_hook(where))
             return errs
-        cls.check = check
+        cls.errors = errors
 
         cls.formatters = formatters
         def format(self, f, errs):
@@ -344,13 +344,13 @@ class autoxml(oo.autosuper, oo.autoprop):
 
                 self.unlink()
 
-                errs = self.check()
+                errs = self.errors()
                 if errs:
                     errs.append(_("autoxml.read: File '%s' has errors") % filename)
                     raise Error(*errs)
                     
             def write(self, filename):
-                errs = self.check()
+                errs = self.errors()
                 if errs:
                     errs.append(_("autoxml.write: object validation has failed"))
                     raise Error(*errs)
@@ -430,7 +430,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         name = cls.mixed_case(token)
         token_type = spec[0]
         req = spec[1]
-        (init_a, decode_a, encode_a, check_a, format_a) = anonfuns
+        (init_a, decode_a, encode_a, errors_a, format_a) = anonfuns
 
         def init(self):
             """initialize component"""
@@ -448,11 +448,11 @@ class autoxml(oo.autosuper, oo.autoprop):
                 value = None
             encode_a(xml, node, value, errs)
             
-        def check(self, where):
+        def errors(self, where):
             errs = []
             if hasattr(self, name):
                 value = getattr(self,name)
-                errs.extend(check_a(value, where + name + ': ' ))
+                errs.extend(errors_a(value, where + name + ': ' ))
             else:
                 if req == mandatory:
                     errs.append(where + _('Mandatory variable %s not available') % name)
@@ -468,7 +468,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if req == mandatory:
                     errs.append(_('Mandatory variable %s not available') % name)
             
-        return (name, init, decode, encode, check, format)
+        return (name, init, decode, encode, errors, format)
 
     def mixed_case(cls, identifier):
         """helper function to turn token name into mixed case"""
@@ -545,7 +545,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if req == mandatory:
                     errs.append(_('Mandatory token %s not available') % token)
 
-        def check(value, where):
+        def errors(value, where):
             errs = []
             if value and not isinstance(value, token_type):
                 errs.append(where + _('Type mismatch. Expected %s, got %s') % 
@@ -556,7 +556,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             """format value for pretty printing"""
             f.add_literal_data(unicode(value))
 
-        return initialize, decode, encode, check, format
+        return initialize, decode, encode, errors, format
 
     def gen_class_tag(cls, tag, spec):
         """generate a class datatype"""
@@ -599,8 +599,8 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
         
-        def check(obj, where):
-            return obj.check(where)
+        def errors(obj, where):
+            return obj.errors(where)
         
         def format(obj, f, errs):
             try:
@@ -608,7 +608,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             except Error:
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
-        return (init, decode, encode, check, format)
+        return (init, decode, encode, errors, format)
 
     def gen_list_tag(cls, tag, spec):
         """generate a list datatype. stores comps in tag/comp_tag"""
@@ -622,7 +622,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             raise Error(_('List type must contain only one element'))
 
         x = cls.gen_tag(comp_tag, [tag_type[0], mandatory])
-        (init_item, decode_item, encode_item, check_item, format_item) = x
+        (init_item, decode_item, encode_item, errors_item, format_item) = x
 
         def init():
             return []
@@ -653,10 +653,10 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if req is mandatory:
                     errs.append(_('Mandatory list empty'))
 
-        def check(l, where):
+        def errors(l, where):
             errs = []
             for ix in range(len(l)):
-                errs.extend(check_item(l[ix], where + '[%s]' % ix))
+                errs.extend(errors_item(l[ix], where + '[%s]' % ix))
             return errs
 
         def format(l, f, errs):
@@ -667,7 +667,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if ix != len(l)-1:
                     f.add_flowing_data(', ')
 
-        return (init, decode, encode, check, format)
+        return (init, decode, encode, errors, format)
 
     def gen_insetclass_tag(cls, tag, spec):
         """generate a class datatype that is highly integrated
@@ -711,8 +711,8 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
 
-        def check(obj, where):
-            return obj.check(where)
+        def errors(obj, where):
+            return obj.errors(where)
 
         def format(obj, f, errs):
             try:
@@ -721,7 +721,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
 
-        return (init, decode, encode, check, format)
+        return (init, decode, encode, errors, format)
 
     basic_cons_map = {
         types.StringType : str,

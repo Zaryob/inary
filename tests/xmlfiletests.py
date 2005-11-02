@@ -65,7 +65,7 @@ class AutoXmlTestCase(testcase.TestCase):
         self.assertEqual(len(a.projects), 3)
         self.assertEqual(len(a.otherInfo.codesWith), 4)
 
-        self.assert_(not a.check())
+        self.assert_(not a.errors())
 
         a.print_text(file('/tmp/a', 'w'))
         la = file('/tmp/a').readlines()
@@ -81,7 +81,7 @@ class AutoXmlTestCase(testcase.TestCase):
         a.href = 'http://cekirdek.uludag.org.tr/~baris'
         a.otherInfo.birthDate = '30101979'
         a.projects = [ 'pisi', 'tasma', 'plasma' ]
-        errs = a.check()
+        errs = a.errors()
         if errs:
             self.fail( 'We got a bunch of errors: ' + str(errs)) 
         a.write('/tmp/a2.xml')
