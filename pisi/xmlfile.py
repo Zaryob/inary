@@ -521,7 +521,7 @@ class autoxml(oo.autosuper):
                 writetext(xml, node, token, unicode(value))
             else:
                 if req == mandatory:
-                    errs.append(_('Mandatory argument not available'))
+                    errs.append(_('Mandatory token %s not available') % token)
 
         def check(value, where):
             errs = []

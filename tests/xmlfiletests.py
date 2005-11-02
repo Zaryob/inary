@@ -79,6 +79,7 @@ class AutoXmlTestCase(testcase.TestCase):
         a.description['tr'] = u'Melek, melek'
         a.comment = u'Bu da zibidi aslinda ama caktirmiyor'
         a.href = 'http://cekirdek.uludag.org.tr/~baris'
+        a.otherInfo.birthDate = '30101979'
         a.projects = [ 'pisi', 'tasma', 'plasma' ]
         errs = a.check()
         if errs:
