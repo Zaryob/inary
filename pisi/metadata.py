@@ -49,10 +49,13 @@ class Package(specfile.Package):
         self.version = self.history[0].version
         self.release = self.history[0].release
 
-        #def __str__(self):
-        #s = specfile.Package.__str__(self)
-        #return s
-
+    def __str__(self):
+        s = specfile.Package.__str__(self)
+        s += _('Build: % s, Distribution: %s, Dist. Release: %s\n') % \
+              (self.build, self.distribution, self.distributionRelease)
+        s += _('Architecture: %s, Installed Size: %s\n') % \
+            (self.architecture, self.installedSize)
+        return s
 
 class MetaData(xmlfile.XmlFile):
     """Package metadata. Metadata is composed of Specfile and various

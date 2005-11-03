@@ -44,6 +44,7 @@ class Packager:
 
     t_Name = [xmlfile.Text, xmlfile.mandatory]
     t_Email = [xmlfile.String, xmlfile.mandatory]
+
     def __str__(self):
         s = "%s <%s>" % (self.name, self.email)
         return s
@@ -132,6 +133,10 @@ class Archive:
     def decode_hook(self, node, errs, where):
         self.name = basename(self.uri)
 
+    def __str__(self):
+        s = _('URI: %s, type: %, sha1sum: %s') % (self.uri, self.type, self.sha1sum)
+        return s
+
 
 class Source:
 
@@ -179,6 +184,18 @@ class Package:
         """calculate if pkg is installable currently"""
         deps = self.runtimeDependencies
         return pisi.dependency.satisfies_dependencies(self.name, deps)
+
+    def __str__(self):
+        s = _('Name: %s, version: %s, release: %s, build %s\n') % (
+              self.name, self.version, self.release, self.build)
+        s += _('Summary: %s\n') % unicode(self.summary)
+        s += _('Description: %s\n') % unicode(self.description)
+        s += _('Component: %s\n') % unicode(self.partOf)
+        s += _('Provides: ')
+        for x in self.providesComar:
+           s += x.om
+        return s + '\n'
+
 
 class SpecFile(XmlFile):
     __metaclass__ = xmlfile.autoxml #needed when we specify a superclass

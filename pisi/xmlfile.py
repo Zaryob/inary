@@ -129,6 +129,22 @@ class LocalText(dict):
         else:
             errs.append(_("Tag should have at least an English or Turkish version"))
 
+    #FIXME: factor out these common routines
+    def print_text(self, file = sys.stdout):
+        w = Writer(file) # plain text
+        f = formatter.AbstractFormatter(w)
+        errs = []
+        self.format(f, errs)
+        if errs:
+            for x in errs:
+                ctx.ui.warning(x)
+
+    def str(self):
+        strfile = StringIO()
+        self.print_text(strfile)
+        str = strfile.getvalue()
+        strfile.close()
+        return str
 
 class Writer(formatter.DumbWriter):
     """adds unicode support"""
