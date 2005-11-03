@@ -16,7 +16,7 @@ pisi-cli -Dtmp list-repo
 #echo "*** package ops"
 pisi-cli -Dtmp list-available
 pisi-cli -Dtmp info python
-pisi-cli -Dtmp -y install python
+pisi-cli -Dtmp -By install python
 
 echo "*** database contents"
 for x in `find tmp -iname '*.bdb'`; do

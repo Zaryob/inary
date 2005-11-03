@@ -157,25 +157,22 @@ def configure_pending():
     # start with pending packages
     # configure them in reverse topological order of dependency
     A = ctx.installdb.list_pending()
-    #print A
     G_f = pgraph.PGraph(packagedb)               # construct G_f
     for x in A:
         G_f.add_package(x)
     B = A
-    #state = {}
     while len(B) > 0:
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            #print pkg
             for dep in pkg.runtimeDependencies:
                 if dep.package in G_f.vertices():
                     G_f.add_dep(x, dep)
         B = Bp
-    G_f.write_graphviz(sys.stdout)
+    if ctx.get_option('debug'):
+        G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
-    #print order
     try:
         import pisi.comariface as comariface
         for x in order:

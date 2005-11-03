@@ -102,7 +102,7 @@ class LocalText(dict):
                     lang = 'en'
                 self[lang] = c
 
-    def encode(self, xml, node, errs):
+    def encode(self, node, errs):
         assert self.tag != ''
         for key in self.iterkeys():
             newnode = newNode(node, self.tag)
@@ -321,13 +321,13 @@ class autoxml(oo.autosuper, oo.autoprop):
         cls.decode = decode
 
         cls.encoders = encoders
-        def encode(self, xml, node, errs):
+        def encode(self, node, errs):
             for base in cls.autoxml_bases:
-                base.encode(self, xml, node, errs)
+                base.encode(self, node, errs)
             for encode_member in encoders:#self.__class__.encoders:
-                encode_member(self, xml, node, errs)
+                encode_member(self, node, errs)
             if hasattr(self, 'encode_hook'):
-                self.encode_hook(xml, node, errs)
+                self.encode_hook(node, errs)
         cls.encode = encode
 
         cls.errorss = errorss
@@ -406,7 +406,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                     raise Error(*errs)
                 errs = []
                 self.newDOM()
-                self.encode(self, self.rootNode(), errs)
+                self.encode(self.rootNode(), errs)
                 if hasattr(self, 'write_hook'):
                     self.write_hook(errs)
                 if errs:
@@ -426,7 +426,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         assert type(tag_type) == type(type)
         def readtext(node, attr):
             return getNodeAttribute(node, attr)
-        def writetext(xml, node, attr, text):
+        def writetext(node, attr, text):
             #print 'write attr', attr, text
             node.setAttribute(attr, text)
         anonfuns = cls.gen_anon_basic(attr, spec, readtext, writetext)
@@ -447,9 +447,9 @@ class autoxml(oo.autosuper, oo.autoprop):
             def readtext(node, tagpath):
                 #print 'read tag', node, tagpath
                 return getNodeText(node, tagpath)
-            def writetext(xml, node, tagpath, text):
+            def writetext(node, tagpath, text):
                 #print 'write tag', node, tagpath, text
-                xml.addTextNodeUnder(node, tagpath, text)
+                addText(node, tagpath, text)
             return cls.gen_anon_basic(tag, spec, readtext, writetext)
         elif type(tag_type) is types.ListType:
             return cls.gen_list_tag(tag, spec)
@@ -469,7 +469,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         def readtext(node, blah):
             node.normalize()
             return getNodeText(node)
-        def writetext(xml, node, blah, text):
+        def writetext(node, blah, text):
             addText(node, "", text)
         anonfuns = cls.gen_anon_basic(token, spec, readtext, writetext)
         return cls.gen_named_comp(token, spec, anonfuns)
@@ -490,13 +490,13 @@ class autoxml(oo.autosuper, oo.autoprop):
             """decode component from DOM node"""
             setattr(self, name, decode_a(node, errs, where + unicode(name) + " "))
             
-        def encode(self, xml, node, errs):
+        def encode(self, node, errs):
             """encode self inside, possibly new, DOM node using xml"""
             if hasattr(self, name):
                 value = getattr(self, name)
             else:
                 value = None
-            encode_a(xml, node, value, errs)
+            encode_a(node, value, errs)
             
         def errors(self, where):
             errs = []
@@ -587,10 +587,10 @@ class autoxml(oo.autosuper, oo.autoprop):
                     errs.append(where + _('Mandatory token %s not available') % token)
                 return None
 
-        def encode(xml, node, value, errs):
+        def encode(node, value, errs):
             """encode given value inside DOM node"""
             if value:
-                writetext(xml, node, token, unicode(value))
+                writetext(node, token, unicode(value))
             else:
                 if req == mandatory:
                     errs.append(_('Mandatory token %s not available') % token)
@@ -634,12 +634,12 @@ class autoxml(oo.autosuper, oo.autoprop):
                     errs.append(where + _('Mandatory argument not available'))
             return None
         
-        def encode(xml, node, obj, errs):
+        def encode(node, obj, errs):
             if node and obj:
                 try:
                     #FIXME: this doesn't look pretty
                     classnode = node.ownerDocument.createElement(tag)
-                    obj.encode(xml, classnode, errs)
+                    obj.encode(classnode, errs)
                     node.appendChild(classnode)
                 except Error:
                     if req == mandatory:
@@ -690,7 +690,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 l.append(decode_item(dummy, errs, where + unicode("[%s]" % ix)))
             return l
 
-        def encode(xml, node, l, errs):
+        def encode(node, l, errs):
             dom = node.ownerDocument
             if l and len(l) > 0:
                 for item in l:
@@ -698,7 +698,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                         listnode = addNode(node, list_tagpath)
                     else:
                         listnode = node
-                    encode_item(xml, listnode, item, errs)
+                    encode_item(listnode, item, errs)
             else:
                 if req is mandatory:
                     errs.append(_('Mandatory list empty'))
@@ -748,11 +748,11 @@ class autoxml(oo.autosuper, oo.autoprop):
                     errs.append(where + _('Mandatory argument not available'))
             return None
 
-        def encode(xml, node, obj, errs):
+        def encode(node, obj, errs):
             if node and obj:
                 try:
                     #FIXME: this doesn't look pretty
-                    obj.encode(xml, node, errs)
+                    obj.encode(node, errs)
                 except Error:
                     if req == mandatory:
                         # note: we can receive an error if obj has no content
