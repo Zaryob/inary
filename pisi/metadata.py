@@ -52,19 +52,7 @@ class Package(specfile.Package):
         #def __str__(self):
         #s = specfile.Package.__str__(self)
         #return s
-    
-    def pkg_dir(self):
-        packageDir = self.name + '-' \
-                     + self.version + '-' \
-                     + self.release
 
-        return util.join_path( ctx.config.lib_dir(), packageDir)
-
-    def installable(self):
-        """calculate if pkg is installable currently"""
-        import pisi.dependency
-        deps = self.runtimeDependencies
-        return pisi.dependency.satisfies_dependencies(self.name, deps)
 
 class MetaData(xmlfile.XmlFile):
     """Package metadata. Metadata is composed of Specfile and various
