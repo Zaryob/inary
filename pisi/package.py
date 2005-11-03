@@ -107,7 +107,7 @@ class Package:
 
         self.files = Files()
         self.files.read( join(outdir, ctx.const.files_xml) )
-        if self.files.has_errors():
+        if self.files.errors():
             raise Error, _("Invalid %s") % ctx.const.files_xml
         
     def pkg_dir(self):

@@ -416,7 +416,7 @@ def resurrect_package(package_fn):
     metadata = MetaData()
     metadata.read(metadata_xml)
 
-    errs = metadata.has_errors()
+    errs = metadata.errors()
     if errs:   
        util.Checks.print_errors(errs)
        raise Error, _("MetaData format wrong (%s)") % package_fn
@@ -430,7 +430,7 @@ def resurrect_package(package_fn):
     files = Files()
     files.read(files_xml)
 
-    if files.has_errors():
+    if files.errors():
        raise Error, _("Invalid %s") % ctx.const.files_xml
 
     import pisi.atomicoperations
