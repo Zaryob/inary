@@ -7,6 +7,6 @@ if [ ${argNUM} -lt 1 ] ; then
 fi
 
 for x in "$@" ; do
-    ./pisi-cli graph `./pisi-cli list-available $x | tail -n+3 | xargs`
+    pisi graph `pisi --no-color la ${x} | tail -n+1 | awk -F " - " '{print $1}' | sed -e "s/ //g"`
     dot -Tpng pgraph.dot -o ~/packageDEP4${x}.png
 done
