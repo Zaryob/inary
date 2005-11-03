@@ -39,6 +39,7 @@ import codecs
 import types
 import formatter
 import sys
+from StringIO import StringIO
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -330,7 +331,13 @@ class autoxml(oo.autosuper, oo.autoprop):
                     ctx.ui.warning(x)
         cls.print_text = print_text
         if not dict.has_key('__str__'):
-            cls.__str__ = print_text
+            def str(self):
+                strfile = StringIO()
+                self.print_text(strfile)
+                str = strfile.getvalue()
+                strfile.close()
+                return str
+            cls.__str__ = str
         
         if not dict.has_key('__eq__'):
             def equal(self, other):
