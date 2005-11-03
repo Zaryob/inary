@@ -35,25 +35,8 @@ class Source:
     t_Homepage = [xmlfile.String, xmlfile.optional]
     t_Packager = [specfile.Packager, xmlfile.mandatory]
 
-# FIXME: make inheritance work with autoxml (specfile.Package)
-class Package:
+class Package(specfile.Package):
     __metaclass__ = xmlfile.autoxml
-
-    # FIXME: copied attributes
-    t_Name = [ xmlfile.String, xmlfile.mandatory ]
-    t_Summary = [ xmlfile.LocalText, xmlfile.optional ]
-    t_Description = [ xmlfile.LocalText, xmlfile.optional ]
-    t_IsA = [ [xmlfile.String], xmlfile.optional]
-    t_PartOf = [xmlfile.String, xmlfile.optional]
-    t_License = [ [xmlfile.String], xmlfile.optional]
-    t_Icon = [ xmlfile.String, xmlfile.optional]
-    t_RuntimeDependencies = [ [specfile.Dependency], xmlfile.optional]
-    t_Files = [ [specfile.Path], xmlfile.optional]    
-    t_Conflicts = [ [xmlfile.String], xmlfile.optional, "Conflicts/Package"]
-    t_ProvidesComar = [ [specfile.ComarProvide], xmlfile.optional, "Provides/COMAR"]
-    #t_RequiresComar = [ [xmlfile.String], xmlfile.mandatory, "Requires/COMAR"]
-    t_AdditionalFiles = [ [specfile.AdditionalFile], xmlfile.optional]
-    t_History = [ [specfile.Update], xmlfile.optional]
 
     t_Build = [ xmlfile.Integer, xmlfile.optional]
     t_Distribution = [ xmlfile.String, xmlfile.mandatory]
@@ -66,9 +49,9 @@ class Package:
         self.version = self.history[0].version
         self.release = self.history[0].release
 
-    def __str__(self):
-        s = specfile.Package.__str__(self)
-        return s
+        #def __str__(self):
+        #s = specfile.Package.__str__(self)
+        #return s
     
     def pkg_dir(self):
         packageDir = self.name + '-' \

@@ -85,8 +85,10 @@ Legend:
    + improved error handling, check routines, hooks, format/print routines 
    + xmlfile support (read/write)
    + string member, in addition to tag/attribute members
-   / replace specfile with new specfile using autoxml
-   - revise writing, error checking, printing and tests
+   + replace specfile with new specfile using autoxml
+   + autoxmlize: metadata, index, dependency and related code paths
+   + inheritance support
+   / revise writing, error checking, printing and tests
  / components and distribution (eray)
    + requirements
    / xml format

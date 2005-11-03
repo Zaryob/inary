@@ -226,6 +226,8 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         xmlfile_support = XmlFile in bases
 
+        cls.autoxml_bases = filter(lambda base: isinstance(base, autoxml), bases)
+
         #TODO: initialize class attribute __xml_tags
         #setattr(cls, 'xml_variables', [])
 
@@ -266,9 +268,12 @@ class autoxml(oo.autosuper, oo.autoprop):
             #FIXME: what the hell is spec? :(
             if not tag:
                 tag = cls.tag
-            #self.__super.__init__(tag = tag) #FIXME: doesn't work, why? :(
-            super(cls, self).__init__(tag = tag) # tag for XmlFile support
-            for init in self.__class__.initializers:
+            if xmlfile_support:
+                XmlFile.__init__(self, tag = tag) 
+            for base in cls.autoxml_bases:
+                base.__init__(self)
+            #super(cls, self).__init__(tag = tag) cooperative shit disabled for now
+            for init in inits:#self.__class__.initializers:
                 init(self)
             # init hook
             if hasattr(self, 'init'):
@@ -278,7 +283,9 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         cls.decoders = decoders
         def decode(self, node, errs, where = unicode()):
-            for decode_member in self.__class__.decoders:
+            for base in cls.autoxml_bases:
+                base.decode(self, node, errs, where)
+            for decode_member in decoders:#self.__class__.decoders:
                 decode_member(self, node, errs, where)
             if hasattr(self, 'decode_hook'):
                 self.decode_hook(node, errs, where)
@@ -286,7 +293,9 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         cls.encoders = encoders
         def encode(self, xml, node, errs):
-            for encode_member in self.__class__.encoders:
+            for base in cls.autoxml_bases:
+                base.encode(self, xml, node, errs)
+            for encode_member in encoders:#self.__class__.encoders:
                 encode_member(self, xml, node, errs)
             if hasattr(self, 'encode_hook'):
                 self.encode_hook(xml, node, errs)
@@ -295,7 +304,9 @@ class autoxml(oo.autosuper, oo.autoprop):
         cls.errorss = errorss
         def errors(self, where = unicode()):
             errs = []
-            for errors in self.__class__.errorss:
+            for base in cls.autoxml_bases:
+                errs.extend(base.errors(self, where))
+            for errors in errorss:#self.__class__.errorss:
                 errs.extend(errors(self, where))
             if hasattr(self, 'errors_hook'):
                 errs.extend(self.errors_hook(where))
@@ -304,7 +315,9 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         cls.formatters = formatters
         def format(self, f, errs):
-            for formatter in self.__class__.formatters:
+            for base in cls.autoxml_bases:
+                base.format(self, f, errs)
+            for formatter in formatters:#self.__class__.formatters:
                 formatter(self, f, errs)
         cls.format = format
         def print_text(self, file = sys.stdout):
