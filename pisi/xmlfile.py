@@ -84,14 +84,14 @@ class LocalText(dict):
         nodes = getAllNodes(node, self.tag)
         if not nodes:
             if self.req == mandatory:
-                errs.append(where + _("LocalText '%s' should have at least one '%s' tag\n") %
-                             self.tag)
+                errs.append(where + _(" At least one '%s' tag should have local text") %
+                                    self.tag )
         else:
             for node in nodes:
                 lang = getNodeAttribute(node, "xml:lang")
                 c = getNodeText(node)
                 if not c:
-                    errs.append(where + _("'%s' language of tag '%s' should have some text data\n") %
+                    errs.append(where + _("'%s' language of tag '%s' is empty") %
                                 (lang, self.tag))
                 # FIXME: check for dups and 'en'
                 if not lang:

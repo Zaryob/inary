@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-11-02, 20:32:59 -->
-<!-- Copyright (C) 2005 PiSi Development Team,  -->
+<!-- Saved: 2005-11-03, 02:14:40 -->
+<!-- Copyright (C) 2005 PiSi Development Team, pisi@uludag.org.tr -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
   <UIType>Qt</UIType>
   <Description>The package management software of Pardus distribution.
 </Description>
+  <Version></Version>
   <Author>PiSi Development Team</Author>
-  <Email></Email>
+  <Email>pisi@uludag.org.tr</Email>
   <Sources>
     <Source>
       <Dir>tools</Dir>
@@ -372,6 +373,14 @@
       <Dir>tests</Dir>
       <Name>xmlexttests.py</Name>
     </Source>
+    <Source>
+      <Dir>tests</Dir>
+      <Name>specfileoldtests.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Name>specfileold.py</Name>
+    </Source>
   </Sources>
   <Forms>
   </Forms>
@@ -409,10 +418,10 @@
     <VcsOtherData>{'standardLayout': 1}</VcsOtherData>
   </Vcs>
   <FiletypeAssociations>
-    <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
     <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
     <FiletypeAssociation pattern="*.ui" type="FORMS" />
-    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
   </FiletypeAssociations>
 </Project>

@@ -395,20 +395,22 @@ def uncompress(patchFile, compressType="gz", targetDir=None):
     return filePath
 
 
-def do_patch(sourceDir, patchFile, level, target = ''):
+def do_patch(sourceDir, patchFile, level = 0, target = ''):
     """simple function to apply patches.."""
     cwd = os.getcwd()
     os.chdir(sourceDir)
+    
+    if level == None:
+        level = 0
+    if target == None:
+        target = ''
 
     check_file(patchFile)
-    level = int(level)
-    cmd = "patch -p%d %s< %s" % (level, target, patchFile)
-    p = os.popen(cmd)
-    o = p.readlines()
-    retval = p.close()
-    if retval:
+    (successful, lines) = run_batch("patch -p%d %s< %s" % 
+                                    (level, target, patchFile))
+    if not successful:
         raise Error(_("ERROR: patch (%s) failed: %s") % (patchFile,
-                                                         strlist (o)))
+                                                         strlist (lines)))
 
     os.chdir(cwd)
 

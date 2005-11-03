@@ -50,8 +50,8 @@ def get_file_type(path, pinfoList):
     ftype = ""
     path = "/"+path # we need a real path.
     for pinfo in pinfoList:
-        if util.subpath(pinfo.pathname, path):
-            length = len(pinfo.pathname)
+        if util.subpath(pinfo.path, path):
+            length = len(pinfo.path)
             if depth < length:
                 depth = length
                 ftype = pinfo.fileType
@@ -62,20 +62,20 @@ def check_path_collision(package, pkgList):
     the paths of packages in pkgList. The return value will be the
     list containing the paths that collide."""
     collisions = []
-    for pinfo in package.paths:
+    for pinfo in package.files:
         for pkg in pkgList:
             if pkg is package:
                 continue
-            for path in pkg.paths:
-                # if pinfo.pathname is a subpath of path.pathname like
-                # the example below. path.patname is marked as a
+            for path in pkg.files:
+                # if pinfo.path is a subpath of path.path like
+                # the example below. path.path is marked as a
                 # collide. Exp:
-                # pinfo.pathname: /usr/share
-                # path.pathname: /usr/share/doc
-                if util.subpath(pinfo.pathname, path.pathname):
-                    collisions.append(path.pathname)
+                # pinfo.path: /usr/share
+                # path.path: /usr/share/doc
+                if util.subpath(pinfo.path, path.path):
+                    collisions.append(path.path)
                     ctx.ui.error(_('Path %s belongs in multiple packages') %
-                                 path.pathname)
+                                 path.path)
     return collisions
 
 # a dynamic build context
@@ -191,10 +191,10 @@ class Builder:
             ctx.ui.info(_("CCache detected..."))
 
     def fetch_source_archive(self):
-        ctx.ui.info(_("Fetching source from: %s") % self.spec.source.archiveUri)
+        ctx.ui.info(_("Fetching source from: %s") % self.spec.source.archive.uri)
         self.sourceArchive.fetch()
         ctx.ui.info(_("Source archive is stored: %s/%s")
-                %(ctx.config.archives_dir(), self.spec.source.archiveName))
+                %(ctx.config.archives_dir(), self.spec.source.archive.name))
 
     def unpack_source_archive(self):
         ctx.ui.info(_("Unpacking archive..."))
@@ -274,7 +274,7 @@ class Builder:
 
         # find out the build dependencies that are not satisfied...
         dep_unsatis = []
-        for dep in self.spec.source.buildDeps:
+        for dep in self.spec.source.buildDependencies:
             if not dependency.installed_satisfies_dep(dep):
                 dep_unsatis.append(dep)
     
@@ -340,8 +340,8 @@ class Builder:
         
         size, d = 0, self.bctx.pkg_install_dir()
 
-        for path in package.paths:
-             size += util.dir_size(util.join_path(d, path.pathname))
+        for path in package.files:
+             size += util.dir_size(util.join_path(d, path.path))
 
         metadata.package.installedSize = str(size)
         
@@ -377,15 +377,15 @@ class Builder:
             # add the files under material path 
             for fpath, fhash in util.get_file_hashes(path, collisions, install_dir):
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
-                ftype = get_file_type(frpath, package.paths)
+                ftype = get_file_type(frpath, package.files)
                 try: # broken links and empty dirs can cause problem
                     fsize = str(os.path.getsize(fpath))
                 except OSError:
                     fsize = None
                 d[frpath] = FileInfo(frpath, ftype, fsize, fhash)
 
-        for pinfo in package.paths:
-            wildcard_path = util.join_path(install_dir, pinfo.pathname)
+        for pinfo in package.files:
+            wildcard_path = util.join_path(install_dir, pinfo.path)
             for path in glob.glob(wildcard_path):
                 add_path(path)
 

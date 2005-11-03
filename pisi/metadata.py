@@ -39,9 +39,10 @@ class Source:
 class Package:
     __metaclass__ = xmlfile.autoxml
 
+    # FIXME: copied attributes
     t_Name = [ xmlfile.String, xmlfile.mandatory ]
-    t_Summary = [ xmlfile.String, xmlfile.mandatory ]
-    t_Description = [ xmlfile.String, xmlfile.mandatory ]
+    t_Summary = [ xmlfile.LocalText, xmlfile.optional ]
+    t_Description = [ xmlfile.LocalText, xmlfile.optional ]
     t_IsA = [ [xmlfile.String], xmlfile.optional]
     t_PartOf = [xmlfile.String, xmlfile.optional]
     t_License = [ [xmlfile.String], xmlfile.optional]
@@ -53,6 +54,7 @@ class Package:
     #t_RequiresComar = [ [xmlfile.String], xmlfile.mandatory, "Requires/COMAR"]
     t_AdditionalFiles = [ [specfile.AdditionalFile], xmlfile.optional]
     t_History = [ [specfile.Update], xmlfile.optional]
+
     t_Build = [ xmlfile.Integer, xmlfile.optional]
     t_Distribution = [ xmlfile.String, xmlfile.mandatory]
     t_DistributionRelease = [ xmlfile.String, xmlfile.mandatory]
@@ -81,25 +83,23 @@ class MetaData(xmlfile.XmlFile):
     #t_History = [ [Update], xmlfile.mandatory]
 
     def from_spec(self, src, pkg):
-        self.source = SourceInfo()
         self.source.name = src.name
         self.source.homepage = src.homepage
         self.source.packager = src.packager
-        self.package = PackageInfo()
         self.package.name = pkg.name
         self.package.summary = pkg.summary
         self.package.description = pkg.description
         self.package.icon = pkg.icon
-        self.package.isa = pkg.isa
-        self.package.partof = pkg.partof
+        self.package.isA = pkg.isA
+        self.package.partOf = pkg.partOf
         self.package.license = pkg.license
-        self.package.runtimeDeps = pkg.runtimeDeps
-        self.package.paths = pkg.paths
+        self.package.runtimeDependencies = pkg.runtimeDependencies
+        self.package.files = pkg.files
         # FIXME: no need to copy full history with comments
         self.package.history = src.history
         self.package.conflicts = pkg.conflicts
         self.package.providesComar = pkg.providesComar
-        self.package.requiresComar = pkg.requiresComar
+        #self.package.requiresComar = pkg.requiresComar
         self.package.additionalFiles = pkg.additionalFiles
 
         # FIXME: right way to do it?

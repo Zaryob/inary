@@ -36,11 +36,9 @@ class SourceArchive:
     """source archive. this is a class responsible for fetching
     and unpacking a source archive"""
     def __init__(self, bctx):
-        self.url = URI(bctx.spec.source.archiveUri)
+        self.url = URI(bctx.spec.source.archive.uri)
         self.archiveFile = join(ctx.config.archives_dir(), self.url.filename())
-        self.archiveName = bctx.spec.source.archiveName
-        self.archiveType = bctx.spec.source.archiveType
-        self.archiveSHA1 = bctx.spec.source.archiveSHA1
+        self.archive = bctx.spec.source.archive
         self.bctx = bctx
 
     def fetch(self, interactive=True):
@@ -55,18 +53,18 @@ class SourceArchive:
             return False
 
         # check hash
-        if util.check_file_hash(self.archiveFile, self.archiveSHA1):
+        if util.check_file_hash(self.archiveFile, self.archive.sha1sum):
             if interactive:
-                ctx.ui.info(_('%s [cached]') % self.archiveName)
+                ctx.ui.info(_('%s [cached]') % self.archive.name)
             return True
 
         return False
 
-    def unpack(self, cleanDir=True):
+    def unpack(self, clean_dir=True):
 
         # check archive file's integrity
-        if not util.check_file_hash(self.archiveFile, self.archiveSHA1):
+        if not util.check_file_hash(self.archiveFile, self.archive.sha1sum):
             raise Error, _("unpack: check_file_hash failed")
             
-        archive = Archive(self.archiveFile, self.archiveType)
-        archive.unpack(self.bctx.pkg_work_dir(), cleanDir)
+        archive = Archive(self.archiveFile, self.archive.type)
+        archive.unpack(self.bctx.pkg_work_dir(), clean_dir)
