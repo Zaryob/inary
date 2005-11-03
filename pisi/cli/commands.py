@@ -264,17 +264,34 @@ conflicts relations starting from given packages.
 
     def __init__(self):
         super(Graph, self).__init__()
+    
+    def options(self):
+        self.parser.add_option("-a", "--all", action="store_true",
+                               default=False,
+                               help=_("graph all available packages"))
 
     name = ("graph", None)
 
+    def all_packages(self):
+        a = set()
+        from pisi import packagedb
+        for repo in ctx.repodb.list():
+            pkg_db = packagedb.get_db(repo)
+            a = a.union(pkg_db.list_packages())
+        return a
+
     def run(self):
         self.init()
-        if self.args:
-            a = self.args
+        if ctx.get_option('all'):
+            ctx.ui.info(_('Plotting a graph of relations among all available packages'))
+            a = self.all_packages()
         else:
-            # if A is empty, then graph all packages
-            ctx.ui.info(_('Plotting a graph of relations among all packages'))
-            a = ctx.installdb.list_installed()
+            if self.args:
+                a = self.args
+            else:
+                # if A is empty, then graph all packages
+                ctx.ui.info(_('Plotting a graph of relations among all installed packages'))
+                a = ctx.installdb.list_installed()
         g = pisi.api.package_graph(a)
         g.write_graphviz(file('pgraph.dot', 'w'))
         self.finalize()
