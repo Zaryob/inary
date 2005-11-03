@@ -28,7 +28,8 @@ import pisi.context as ctx
 import pisi.dependency as dependency
 import pisi.operations as operations
 from pisi.sourcearchive import SourceArchive
-from pisi.files import Files, FileInfo
+from pisi.files import Files, File as FileInfo
+from pisi.files import Files
 from pisi.metadata import MetaData
 from pisi.package import Package
 

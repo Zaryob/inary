@@ -15,93 +15,32 @@
 
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 
-from pisi.xmlext import *
-from pisi.xmlfile import XmlFile
+import pisi.xmlfile as xmlfile
 from pisi.util import Checks
 import pisi.lockeddbshelve as shelve
 
-class FileInfo:
-    """FileInfo holds the information for a File node/tag in files.xml"""
-    def __init__(self, _path = "", _type = "", _size = "", _hash = None):
-        self.path = _path
-        self.type = _type
-        self.size = _size
-        self.hash = _hash
+class File:
+    """File holds the information for a File node/tag in files.xml"""
 
-    def readnew(node):
-        f = FileInfo()
-        f.read(node)
-        return f
-    readnew = staticmethod(readnew)
+    __metaclass__ = xmlfile.autoxml
 
-    def read(self, node):
-        self.path = getNodeText(getNode(node, "Path"))
-        self.type = getNodeText(getNode(node, "Type"))
-        self.size = getNodeText(getNode(node, "Size"))
-        hashnode = getNode(node, "SHA1Sum")
-        if hashnode:
-            self.hash = getNodeText(hashnode)
-        else:
-            self.hash = None
+    t_Path = [ xmlfile.String, xmlfile.mandatory ]
+    t_Type = [ xmlfile.String, xmlfile.mandatory ]
+    t_Size = [ xmlfile.Integer, xmlfile.mandatory ]
+    t_Hash = [ xmlfile.String, xmlfile.optional, "SHA1Sum" ]
 
-    def elt(self, dom):
-        ## FIXME: looking for a better way to do it
-        ## could apparently use helper functions to do this shorter
-        elt = dom.createElement("File")
-        pathElt = dom.createElement("Path")
-        pathElt.appendChild(dom.createTextNode(self.path))
-        elt.appendChild(pathElt)
-        typeElt = dom.createElement("Type")
-        typeElt.appendChild(dom.createTextNode(self.type))
-        elt.appendChild(typeElt)
-        if self.size:
-            sizeElt = dom.createElement("Size")
-            sizeElt.appendChild(dom.createTextNode(self.size))
-            elt.appendChild(sizeElt)
-        if self.hash:
-            hashElt = dom.createElement("SHA1Sum")
-            hashElt.appendChild(dom.createTextNode(self.hash))
-            elt.appendChild(hashElt)
-        return elt
-
-    def has_errors(self):
-        err = Checks()
-        err.has_tag(self.path, "File", "Path")
-        err.has_tag(self.type, "File", "Type")
-        return err.list
-        
     def __str__(self):
         s = "%s, type: %s, size: %s, sha1sum: %s" %  (self.path, self.type,
                                                       self.size, self.hash)
         return s
 
-class Files(XmlFile):
-    
-    def __init__(self):
-        XmlFile.__init__(self, "Files")
-        self.list = []
+class Files(xmlfile.XmlFile):
 
-    def append(self, fileinfo):
-        self.list.append(fileinfo)
+    __metaclass__ = xmlfile.autoxml
 
-    def read(self, filename):
-        self.readxml(filename)
+    tag = "Files"
 
-        fileElts = self.getAllNodes("File")
-        self.list = [FileInfo.readnew(x) for x in fileElts]
-
-    def write(self, filename):
-        self.newDOM()
-        document = self.dom.documentElement
-        for x in self.list:
-            document.appendChild(x.elt(self.dom))
-        self.writexml(filename)
-
-    def has_errors(self):
-        err = Checks()
-        for finfo in self.list:
-            err.join(finfo.has_errors())
-        return err.list
+    t_List = [ [File], xmlfile.optional, "File"]
 
 class FilesDB(shelve.LockedDBShelf):
 
@@ -113,8 +52,8 @@ class FilesDB(shelve.LockedDBShelf):
             self[str(x.path)] = (pkg_name, x)
 
     def remove_files(self, files):
-	for x in files.list:
-	    self.delete(str(x.path))
+        for x in files.list:
+            self.delete(str(x.path))
 
     def has_file(self, path):
         return self.has_key(str(path))

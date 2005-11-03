@@ -292,9 +292,8 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         # generate top-level helper functions
         cls.initializers = inits
-        def initialize(self, tag = None, spec = None):
-            #FIXME: what the hell is spec? :(
-            if not tag:
+        def initialize(self, **args):
+            if not args.has_key('tag'):
                 tag = cls.tag
             if xmlfile_support:
                 XmlFile.__init__(self, tag = tag) 
@@ -303,6 +302,8 @@ class autoxml(oo.autosuper, oo.autoprop):
             #super(cls, self).__init__(tag = tag) cooperative shit disabled for now
             for init in inits:#self.__class__.initializers:
                 init(self)
+            for x in args.iterkeys():
+                setattr(self, x, args[x])
             # init hook
             if hasattr(self, 'init'):
                 self.init(tag)
@@ -613,7 +614,7 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         def make_object():
             obj = tag_type.__new__(tag_type)
-            obj.__init__(tag, spec)
+            obj.__init__(tag=tag, req=req)
             return obj
 
         def init():
@@ -728,7 +729,7 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         def make_object():
             obj = tag_type.__new__(tag_type)
-            obj.__init__(tag, spec)
+            obj.__init__(tag=tag, req=req)
             return obj
 
         def init():
