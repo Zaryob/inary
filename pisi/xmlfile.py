@@ -116,6 +116,7 @@ class LocalText(dict):
         langs = [ locale.getlocale()[0][0:2], 'tr', 'en' ]
         if not util.any(lambda x : self.has_key(x), langs):
             errs.append( where + _("Tag should have at least an English or Turkish version"))
+        #FIXME: check if all entries are unicode
         return errs
     
     def format(self, f, errs):
@@ -142,11 +143,18 @@ class LocalText(dict):
                 ctx.ui.warning(x)
 
     def __str__(self):
-        strfile = StringIO()
-        self.print_text(strfile)
-        str = strfile.getvalue()
-        strfile.close()
-        return str
+        L = locale.getlocale()[0][0:2] # try to read language, pathetic isn't it?
+        if self.has_key(L):
+            return unicode(self[L])
+        elif self.has_key('en'):
+            # fallback to English, blah
+            return unicode(self['en'])
+        elif self.has_key('tr'):
+            # fallback to Turkish
+            return unicode(self['tr'])
+        else:
+            return ''
+            #ctx.ui.warning(_("Tag should have at least an English or Turkish version"))
 
 class Writer(formatter.DumbWriter):
     """adds unicode support"""

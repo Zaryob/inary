@@ -773,7 +773,7 @@ Gives a brief list of PiSi components published in the repository.
                 pstr = p
                 if p in installed_list:
                     pstr = colorize(p, "cyan")
-                ctx.ui.info('%15s - %s ' % (pstr, package.summary))
+                ctx.ui.info('%15s - %s ' % (pstr, unicode(package.summary)))
                 
 
 class ListUpgrades(Command):
