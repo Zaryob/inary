@@ -254,7 +254,7 @@ class DeleteCache(Command):
 
 class Graph(Command):
     """Graph package relations.
-Usage: graph <package1> <package2> ...
+Usage: graph [<package1> <package2> ...]
 
 Write a graph of package relations, tracking dependency and
 conflicts relations starting from given packages.
@@ -270,8 +270,13 @@ conflicts relations starting from given packages.
     def run(self):
         self.init()
         if self.args:
-            g = pisi.api.package_graph(self.args)
-            g.write_graphviz(file('pgraph.dot', 'w'))
+            a = self.args
+        else:
+            # if A is empty, then graph all packages
+            ctx.ui.info(_('Plotting a graph of relations among all packages'))
+            a = ctx.installdb.list_installed()
+        g = pisi.api.package_graph(a)
+        g.write_graphviz(file('pgraph.dot', 'w'))
         self.finalize()
 
 # option mixins
