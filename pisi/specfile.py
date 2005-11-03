@@ -101,7 +101,7 @@ class Update:
             s += ", type=" + self.type
         return s
 
-        
+
 class Path:
 
     s_Path = [xmlfile.String, xmlfile.mandatory]
@@ -111,6 +111,7 @@ class Path:
         s = self.path
         s += ", type=" + self.fileType
         return s
+
 
 class ComarProvide:
 
