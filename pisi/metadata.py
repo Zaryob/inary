@@ -42,7 +42,7 @@ class Package(specfile.Package):
     t_Distribution = [ xmlfile.String, xmlfile.mandatory]
     t_DistributionRelease = [ xmlfile.String, xmlfile.mandatory]
     t_Architecture = [ xmlfile.String, xmlfile.mandatory]
-    t_InstalledSize = [ xmlfile.Integer, xmlfile.mandatory]
+    t_InstalledSize = [ xmlfile.Long, xmlfile.mandatory]
     t_PackageURI = [ xmlfile.String, xmlfile.optional]
 
     def decode_hook(self, node, errs, where):

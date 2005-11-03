@@ -26,7 +26,7 @@ class File:
 
     t_Path = [ xmlfile.String, xmlfile.mandatory ]
     t_Type = [ xmlfile.String, xmlfile.mandatory ]
-    t_Size = [ xmlfile.Integer, xmlfile.mandatory ]
+    t_Size = [ xmlfile.Long, xmlfile.mandatory ]
     t_Hash = [ xmlfile.String, xmlfile.optional, "SHA1Sum" ]
 
     def __str__(self):
@@ -41,6 +41,9 @@ class Files(xmlfile.XmlFile):
     tag = "Files"
 
     t_List = [ [File], xmlfile.optional, "File"]
+
+    def append(self, fileinfo):
+        self.list.append(fileinfo)
 
 class FilesDB(shelve.LockedDBShelf):
 

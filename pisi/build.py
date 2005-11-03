@@ -344,8 +344,8 @@ class Builder:
         for path in package.files:
              size += util.dir_size(util.join_path(d, path.path))
 
-        metadata.package.installedSize = int(size) # should be enough for everyone!
-                                                   # mwahahah! FIXME: really?
+        metadata.package.installedSize = size
+
         # build no
         if ctx.config.options.ignore_build_no:
             metadata.package.build = None  # means, build no information n/a
@@ -380,10 +380,10 @@ class Builder:
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
                 ftype = get_file_type(frpath, package.files)
                 try: # broken links and empty dirs can cause problem
-                    fsize = str(os.path.getsize(fpath))
+                    fsize = os.path.getsize(fpath)
                 except OSError:
                     fsize = None
-                d[frpath] = FileInfo(frpath, ftype, fsize, fhash)
+                d[frpath] = FileInfo(path=frpath, type=ftype, size=fsize, hash=fhash)
 
         for pinfo in package.files:
             wildcard_path = util.join_path(install_dir, pinfo.path)
@@ -424,8 +424,8 @@ class Builder:
             locate_package_names(files)
 
         if not found:
-            return 0
-            ctx.ui.warning(_('(no previous build found, setting build no to 0.)'))
+            return 1
+            ctx.ui.warning(_('(no previous build found, setting build no to 1.)'))
         else:
             a = filter(lambda (x,y): y != None, found)
             ctx.ui.debug(str(a))
