@@ -76,14 +76,15 @@ Float = types.FloatType
 class LocalText(dict):
     """Handles XML tags with localized text"""
 
-    def __init__(self, tag, spec):
+    def __init__(self, tag = "", req = optional):
         self.tag = tag
-        self.req = spec[1]
+        self.req = req
         dict.__init__(self)
         #self.locs = {}
     
     def decode(self, node, errs, where = ""):
         # flags, tag name, instance attribute
+        assert self.tag != ''
         nodes = getAllNodes(node, self.tag)
         if not nodes:
             if self.req == mandatory:
@@ -102,6 +103,7 @@ class LocalText(dict):
                 self[lang] = c
 
     def encode(self, xml, node, errs):
+        assert self.tag != ''
         for key in self.iterkeys():
             newnode = newNode(node, self.tag)
             newnode.setAttribute('xml:lang', key)     
@@ -139,7 +141,7 @@ class LocalText(dict):
             for x in errs:
                 ctx.ui.warning(x)
 
-    def str(self):
+    def __str__(self):
         strfile = StringIO()
         self.print_text(strfile)
         str = strfile.getvalue()

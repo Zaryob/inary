@@ -91,10 +91,11 @@ class LocalTextTestCase(unittest.TestCase):
         a = xmlfile.LocalText()
         a['tr'] = u'Zibidi'
         a['en'] = u'ingiliz hiyarlari ne anlar zibididen'
+        self.a = a
 
     def testStr(self):
-        s = str(a)
-        self.assert_(a != None and len(a)>=6)
+        s = str(self.a)
+        self.assert_(s!= None and len(s)>=6)
 
 suite1 = unittest.makeSuite(AutoXmlTestCase)
 suite2 = unittest.makeSuite(LocalTextTestCase)
