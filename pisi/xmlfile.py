@@ -63,6 +63,8 @@ mandatory, optional = range(2) # poor man's enum
 String = types.StringType
 Text = types.UnicodeType
 Integer = types.IntType
+Long = types.LongType
+Float = types.FloatType
 
 #class datatype(type):
 #    def __init__(cls, name, bases, dict):
@@ -726,7 +728,9 @@ class autoxml(oo.autosuper, oo.autoprop):
     basic_cons_map = {
         types.StringType : str,
         types.UnicodeType : unicode,
-        types.IntType : int
+        types.IntType : int,
+        types.FloatType : float,
+        types.LongType : long
         }
 
 

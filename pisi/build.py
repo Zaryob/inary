@@ -343,8 +343,8 @@ class Builder:
         for path in package.files:
              size += util.dir_size(util.join_path(d, path.path))
 
-        metadata.package.installedSize = str(size)
-        
+        metadata.package.installedSize = int(size) # should be enough for everyone!
+                                                   # mwahahah! FIXME: really?
         # build no
         if ctx.config.options.ignore_build_no:
             metadata.package.build = None  # means, build no information n/a
