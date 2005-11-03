@@ -33,7 +33,7 @@ import pisi.context as ctx
 from pisi.dependency import Dependency
 import pisi.dependency
 from pisi.util import Checks
-import pisi.specfile as specfile
+import pisi.util as util
 
 class Error(pisi.Error):
     pass
