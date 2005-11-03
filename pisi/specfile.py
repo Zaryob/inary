@@ -64,8 +64,13 @@ class Patch:
     
     s_Filename = [xmlfile.String, xmlfile.mandatory]
     a_compressionType = [xmlfile.String, xmlfile.optional]
-    a_level = [xmlfile.String, xmlfile.optional]
+    a_level = [xmlfile.Integer, xmlfile.optional]
     a_target = [xmlfile.String, xmlfile.optional]
+
+    #FIXME: what's the cleanest way to give a default value for reading level?
+    #def decode_hook(self, node, errs, where):
+    #    if self.level == None:
+    #        self.level = 0
 
     def __str__(self):
         s = self.filename
@@ -142,17 +147,17 @@ class Archive:
     a_type =[ xmlfile.String, xmlfile.mandatory ]
     a_sha1sum =[ xmlfile.String, xmlfile.mandatory ]
 
-    def decode_post(self):
+    def decode_hook(self, node, errs, where):
         self.name = basename(self.uri)
 
 
 class Source:
 
     t_Name = [xmlfile.String, xmlfile.mandatory]
-    t_Homepage = [xmlfile.String, xmlfile.mandatory]
+    t_Homepage = [xmlfile.String, xmlfile.optional]
     t_Packager = [Packager, xmlfile.mandatory]
-    t_Summary = [xmlfile.String, xmlfile.mandatory]
-    t_Description = [xmlfile.String, xmlfile.mandatory]
+    t_Summary = [xmlfile.LocalText, xmlfile.mandatory]
+    t_Description = [xmlfile.LocalText, xmlfile.mandatory]
     t_IsA = [ [xmlfile.String], xmlfile.mandatory]
     t_PartOf = [xmlfile.String, xmlfile.mandatory]
     t_Icon = [ xmlfile.String, xmlfile.optional]
@@ -167,8 +172,8 @@ class Source:
 class Package:
 
     t_Name = [ xmlfile.String, xmlfile.mandatory ]
-    t_Summary = [ xmlfile.String, xmlfile.mandatory ]
-    t_Description = [ xmlfile.String, xmlfile.mandatory ]
+    t_Summary = [ xmlfile.LocalText, xmlfile.optional ]
+    t_Description = [ xmlfile.LocalText, xmlfile.optional ]
     t_IsA = [ [xmlfile.String], xmlfile.optional]
     t_PartOf = [xmlfile.String, xmlfile.optional]
     t_License = [ [xmlfile.String], xmlfile.optional]
