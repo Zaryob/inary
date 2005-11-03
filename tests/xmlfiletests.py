@@ -17,16 +17,12 @@ import types
 import pisi
 import pisi.api
 from pisi import xmlfile
-import pisi.context as ctx
 import pisi.util as util
 from pisi.xmlext import *
 
-import testcase
-
-class AutoXmlTestCase(testcase.TestCase):
+class AutoXmlTestCase(unittest.TestCase):
 
     def setUp(self):
-        testcase.TestCase.setUp(self, database=False)
 
         class OtherInfo:
             __metaclass__ = xmlfile.autoxml
@@ -89,4 +85,17 @@ class AutoXmlTestCase(testcase.TestCase):
         a2.read('/tmp/a2.xml')
         self.assertEqual(a, a2)
 
-suite = unittest.makeSuite(AutoXmlTestCase)
+class LocalTextTestCase(unittest.TestCase):
+
+    def setUp(self):
+        a = xmlfile.LocalText()
+        a['tr'] = u'Zibidi'
+        a['en'] = u'ingiliz hiyarlari ne anlar zibididen'
+
+    def testStr(self):
+        s = str(a)
+        self.assert_(a != None and len(a)>=6)
+
+suite1 = unittest.makeSuite(AutoXmlTestCase)
+suite2 = unittest.makeSuite(LocalTextTestCase)
+suite = unittest.TestSuite((suite1, suite2))
