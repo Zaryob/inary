@@ -60,7 +60,7 @@ class Package:
     t_DistributionRelease = [ xmlfile.String, xmlfile.mandatory]
     t_Architecture = [ xmlfile.String, xmlfile.mandatory]
     t_InstalledSize = [ xmlfile.Integer, xmlfile.mandatory]
-    t_PackageURI = [ xmlfile.Integer, xmlfile.optional]
+    t_PackageURI = [ xmlfile.String, xmlfile.optional]
 
     def decode_hook(self, node, errs, where):
         self.version = self.history[0].version

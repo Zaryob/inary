@@ -21,29 +21,36 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
+import pisi
 import pisi.context as ctx
+import pisi.specfile as specfile
 import pisi.metadata as metadata
 import pisi.packagedb as packagedb
 import pisi.util as util
 from pisi.package import Package
 from pisi.xmlfile import XmlFile
+import pisi.xmlfile as xmlfile
 from pisi.uri import URI
 
+class Error(pisi.Error):
+    pass
+
 class Index(XmlFile):
+    __metaclass__ = xmlfile.autoxml
 
-    def __init__(self):
-        XmlFile.__init__(self,"PISI")
-        self.sources = []
-        self.packages = []
+    tag = "PISI"
 
-    def read(self, filename, repo = None):
+    t_Sources = [ [specfile.Source], xmlfile.optional, "Source"]
+    t_Packages = [ [metadata.Package], xmlfile.optional, "Package"]
+
+    def read_uri(self, filename, repo = None):
         """Read PSPEC file"""
 
         self.filepath = filename
         url = URI(filename)
         if url.is_remote_file():
             from fetcher import fetch_url
-
+            assert repo
             dest = os.path.join(ctx.config.index_dir(), repo)
             if not os.path.exists(dest):
                 os.makedirs(dest)
@@ -51,22 +58,8 @@ class Index(XmlFile):
 
             self.filepath = os.path.join(dest, url.filename())
 
-        self.readxml(self.filepath)
+        self.read(self.filepath)
 
-        # find all binary packages
-        packageElts = self.getAllNodes("Package")
-        self.packages = [metadata.PackageInfo(p) for p in packageElts]
-        
-        self.unlink()
-    
-    def write(self, filename):
-        """Write index file"""
-        self.newDOM()
-        for pkg in self.packages:
-            self.addChild(pkg.elt(self))
-        self.writexml(filename)
-        self.unlink()
-        
     def index(self, repo_uri):
         self.repo_dir = repo_uri
         for root, dirs, files in os.walk(repo_uri):
@@ -97,7 +90,12 @@ class Index(XmlFile):
             # function.
             md.package.packageURI = util.removepathprefix(repo_uri, path)
         # check package semantics
-        if md.has_errors():
+        errs = md.errors()
+        if md.errors():
             ctx.ui.error(_('Package %s: metadata corrupt') % md.package.name)
+            ctx.ui.error(str(Error(*errs)))
         else:
             self.packages.append(md.package)
+
+    #TODO: add source
+    
