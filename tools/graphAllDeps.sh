@@ -8,5 +8,5 @@ fi
 
 for x in "$@" ; do
     pisi graph `pisi --no-color la ${x} | tail -n+1 | awk -F " - " '{print $1}' | sed -e "s/ //g"`
-    dot -Tpng pgraph.dot -o ~/packageDEP4${x}.png
+    fdp -Tpng pgraph.dot -o ~/packageDEP4${x}.png
 done
