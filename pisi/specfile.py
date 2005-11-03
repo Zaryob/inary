@@ -30,7 +30,8 @@ from pisi.xmlext import *
 import pisi.xmlfile as xmlfile
 from pisi.xmlfile import XmlFile
 import pisi.context as ctx
-from pisi.dependency import DepInfo
+from pisi.dependency import Dependency
+import pisi.dependency
 from pisi.util import Checks
 
 class Error(pisi.Error):
@@ -109,26 +110,6 @@ class Path:
         s += ", type=" + self.fileType
         return s
 
-class Dependency:
-
-    s_Package = [xmlfile.String, xmlfile.mandatory]
-    a_versionFrom = [xmlfile.String, xmlfile.optional]
-    a_versionTo = [xmlfile.String, xmlfile.optional]
-    a_releaseFrom = [xmlfile.String, xmlfile.optional]
-    a_releaseTo = [xmlfile.String, xmlfile.optional]
-
-    def __str__(self):
-        s = self.package
-        if self.versionFrom:
-            s += 'ver >= ' + self.versionFrom
-        if self.versionTo:
-            s += 'ver <= ' + self.versionTo
-        if self.releaseFrom:
-            s += 'rel >= ' + self.releaseFrom
-        if self.releaseTo:
-            s += 'rel <= ' + self.releaseTo
-        return s
-
 class ComarProvide:
 
     s_om = [xmlfile.String, xmlfile.mandatory]
@@ -186,6 +167,17 @@ class Package:
     t_AdditionalFiles = [ [AdditionalFile], xmlfile.optional]
     t_History = [ [Update], xmlfile.optional]
     
+    def pkg_dir(self):
+        packageDir = self.name + '-' \
+                     + self.version + '-' \
+                     + self.release
+
+        return util.join_path( ctx.config.lib_dir(), packageDir)
+
+    def installable(self):
+        """calculate if pkg is installable currently"""
+        deps = self.runtimeDependencies
+        return pisi.dependency.satisfies_dependencies(self.name, deps)
 
 class SpecFile(XmlFile):
     __metaclass__ = xmlfile.autoxml #needed when we specify a superclass

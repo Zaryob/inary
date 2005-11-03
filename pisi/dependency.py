@@ -21,39 +21,30 @@ _ = __trans.ugettext
 import pisi.context as ctx
 import pisi.packagedb as packagedb
 from pisi.version import Version
-from pisi.xmlext import *
-from pisi.xmlfile import XmlFile
+import pisi.xmlfile as xmlfile
 from pisi.util import Checks
 
-class DepInfo:
-    def __init__(self, node = None):
-        if node:
-            self.package = getNodeText(node).strip()
-            self.versionFrom = getNodeAttribute(node, "versionFrom")
-            self.versionTo = getNodeAttribute(node, "versionTo")
-            self.releaseFrom = getNodeAttribute(node, "releaseFrom")
-            self.releaseTo = getNodeAttribute(node, "releaseTo")
-        else:
-            self.versionFrom = self.versionTo = None
-            self.releaseFrom = self.releaseTo = None
+class Dependency:
 
-    def elt(self, xml):
-        node = xml.newNode("Dependency")
-        xml.addText(node, self.package)
+    __metaclass__ = xmlfile.autoxml
+    
+    s_Package = [xmlfile.String, xmlfile.mandatory]
+    a_versionFrom = [xmlfile.String, xmlfile.optional]
+    a_versionTo = [xmlfile.String, xmlfile.optional]
+    a_releaseFrom = [xmlfile.String, xmlfile.optional]
+    a_releaseTo = [xmlfile.String, xmlfile.optional]
+
+    def __str__(self):
+        s = self.package
         if self.versionFrom:
-            node.setAttribute("versionFrom", self.versionFrom)
+            s += 'ver >= ' + self.versionFrom
         if self.versionTo:
-            node.setAttribute("versionTo", self.versionTo)
+            s += 'ver <= ' + self.versionTo
         if self.releaseFrom:
-            node.setAttribute("releaseFrom", self.versionFrom)
+            s += 'rel >= ' + self.releaseFrom
         if self.releaseTo:
-            node.setAttribute("releaseTo", self.versionTo)
-        return node
-
-    def has_errors(self):
-        if not self.package:
-            return [ _("Dependency should have a package string") ]
-        return []
+            s += 'rel <= ' + self.releaseTo
+        return s
 
     def satisfies(self, pkg_name, version, release):
         """determine if a package ver. satisfies given dependency spec"""
@@ -68,18 +59,6 @@ class DepInfo:
         if self.releaseTo:
             ret &= v <= Version(self.releaseTo)       
         return ret
-        
-    def __str__(self):
-        s = self.package
-        if self.versionFrom:
-            s += 'ver >= ' + self.versionFrom
-        if self.versionTo:
-            s += 'ver <= ' + self.versionTo
-        if self.releaseFrom:
-            s += 'rel >= ' + self.releaseFrom
-        if self.releaseTo:
-            s += 'rel <= ' + self.releaseTo
-        return s
 
 def dict_satisfies_dep(dict, depinfo):
     """determine if a package in a dictionary satisfies given dependency spec"""
@@ -122,7 +101,7 @@ def satisfies_dependencies(pkg, deps, sat = installed_satisfies_dep):
     return True
 
 def satisfies_runtime_deps(pkg):
-    deps = packagedb.get_package(pkg).runtimeDeps
+    deps = packagedb.get_package(pkg).runtimeDependencies
     return satisfies_dependencies(pkg, deps)
 
 def installable(pkg):
@@ -135,4 +114,3 @@ def installable(pkg):
         return True
     else:
         return False
-

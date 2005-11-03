@@ -72,7 +72,7 @@ class PackageDB(object):
     def add_package(self, package_info):
         name = str(package_info.name)
         self.d[name] = package_info
-        for dep in package_info.runtimeDeps:
+        for dep in package_info.runtimeDependencies:
             dep_name = str(dep.package)
             if self.dr.has_key(dep_name):
                 self.dr[dep_name].append( (name, dep) )

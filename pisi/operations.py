@@ -92,7 +92,7 @@ def install_pkg_files(package_URIs):
     dep_unsatis = []
     for name in d_t.keys():
         pkg = d_t[name]
-        deps = pkg.runtimeDeps
+        deps = pkg.runtimeDependencies
         for dep in deps:
             if not satisfiesDep(dep):
                 dep_unsatis.append(dep)
@@ -136,7 +136,7 @@ in the respective order to satisfy extra dependencies:
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            for dep in pkg.runtimeDeps:
+            for dep in pkg.runtimeDependencies:
                 if dependency.dict_satisfies_dep(d_t, dep):
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
@@ -209,7 +209,7 @@ def install_pkg_names(A):
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            for dep in pkg.runtimeDeps:
+            for dep in pkg.runtimeDependencies:
                 ctx.ui.debug('checking %s' % str(dep))
                 # we don't deal with already *satisfied* dependencies
                 if not dependency.installed_satisfies_dep(dep):
@@ -311,7 +311,7 @@ version %s, release %s, build %s.')
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            for dep in pkg.runtimeDeps:
+            for dep in pkg.runtimeDependencies:
                 # add packages that can be upgraded
                 if dependency.repo_satisfies_dep(dep):
                     #TODO: distinguish must upgrade and upgradable

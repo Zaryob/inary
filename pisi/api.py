@@ -136,7 +136,7 @@ def package_graph(A, ignore_installed = False):
         for x in B:
             pkg = packagedb.get_package(x)
             #print pkg
-            for dep in pkg.runtimeDeps:
+            for dep in pkg.runtimeDependencies:
                 if ignore_installed:
                     if dependency.installed_satisfies_dep(dep):
                         continue
@@ -168,7 +168,7 @@ def configure_pending():
         for x in B:
             pkg = packagedb.get_package(x)
             #print pkg
-            for dep in pkg.runtimeDeps:
+            for dep in pkg.runtimeDependencies:
                 if dep.package in G_f.vertices():
                     G_f.add_dep(x, dep)
         B = Bp
