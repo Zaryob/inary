@@ -128,7 +128,8 @@ class LocalText(dict):
             f.add_flowing_data(self['tr'])
         else:
             errs.append(_("Tag should have at least an English or Turkish version"))
-            
+
+
 class Writer(formatter.DumbWriter):
     """adds unicode support"""
 
