@@ -269,6 +269,9 @@ conflicts relations starting from given packages.
         self.parser.add_option("-a", "--all", action="store_true",
                                default=False,
                                help=_("graph all available packages"))
+        self.parser.add_option("-o", "--output", action="store",
+                               default='pgraph.dot',
+                               help=_("dot output file"))
 
     name = ("graph", None)
 
@@ -293,7 +296,7 @@ conflicts relations starting from given packages.
                 ctx.ui.info(_('Plotting a graph of relations among all installed packages'))
                 a = ctx.installdb.list_installed()
         g = pisi.api.package_graph(a)
-        g.write_graphviz(file('pgraph.dot', 'w'))
+        g.write_graphviz(file(ctx.get_option('output'), 'w'))
         self.finalize()
 
 # option mixins
