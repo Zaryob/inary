@@ -636,8 +636,8 @@ Rebuilds the PiSi databases
 
     def rebuild_db(self):
        import os
-       for root, dirs, files in os.walk(ctx.config.lib_dir()):
-           for package_fn in dirs:
+       for package_fn in os.listdir(ctx.config.lib_dir()):
+           if not package_fn == "scripts":
                pisi.api.resurrect_package(package_fn)
 
 class UpdateRepo(Command):
