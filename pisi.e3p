@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-11-03, 22:44:51 -->
+<!-- Saved: 2005-11-04, 03:15:17 -->
 <!-- Copyright (C) 2005 PiSi Development Team, pisi@uludag.org.tr -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -318,10 +318,6 @@
       <Name>colors.py</Name>
     </Source>
     <Source>
-      <Dir>pisi</Dir>
-      <Name>data.py</Name>
-    </Source>
-    <Source>
       <Name>pisi-cli</Name>
     </Source>
     <Source>
@@ -375,11 +371,14 @@
     </Source>
     <Source>
       <Dir>tests</Dir>
-      <Name>specfileoldtests.py</Name>
+      <Name>filestests.py</Name>
     </Source>
     <Source>
-      <Dir>tests</Dir>
-      <Name>filestests.py</Name>
+      <Name>component.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Name>component.py</Name>
     </Source>
   </Sources>
   <Forms>
@@ -422,10 +421,10 @@
     <VcsOtherData>{'standardLayout': 1}</VcsOtherData>
   </Vcs>
   <FiletypeAssociations>
-    <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
     <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
     <FiletypeAssociation pattern="*.ui" type="FORMS" />
-    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
   </FiletypeAssociations>
 </Project>

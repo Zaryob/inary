@@ -17,9 +17,14 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
+import pisi
 import pisi.xmlfile
 
+class Error(pisi.Error):
+    pass
+
 __metaclass__ = xmlfile.autoxml
+
 
 class Distribution:
     t_Name = [xmlfile.Text, xmlfile.mandatory]
@@ -28,18 +33,27 @@ class Distribution:
     t_Type =  [xmlfile.Text, xmlfile.mandatory]
     t_Dependencies = [ [xmlfile.Text], xmlfile.optional, "Distribution"]
 
-class Component:
+
+class Component(xmlfile.XmlFile):
     "part-of representation for component declarations"
+
+    __metaclass__ = xmlfile.autoxml
+
+    tag = "PISI"
     
     t_Name = [xmlfile.Text, xmlfile.mandatory]     # fully qualified name
     t_PartOf = [xmlfile.Text, xmlfile.mandatory]
     t_LocalName = [xmlfile.LocalText, xmlfile.mandatory]
     t_Description = [xmlfile.LocalText, xmlfile.mandatory]
     #t_Icon = [xmlfile.Binary, xmlfile.mandatory]
-    t_Dependencies = [ [xmlfile.String], xmlfile.optional, "Component"]
+    t_Dependencies = [ [xmlfile.String], xmlfile.optional, "Dependencies/Component"]
 
-class ComponentTree:
+
+class ComponentTree(xmlfile.XmlFile):
     "index representation for the component structure"
+
+    __metaclass__ = xmlfile.autoxml
+
     tag = "Component"
     
     t_Name = [xmlfile.Text, xmlfile.mandatory]    # fully qualified name
