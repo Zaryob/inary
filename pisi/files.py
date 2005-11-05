@@ -26,7 +26,7 @@ class File:
 
     t_Path = [ xmlfile.String, xmlfile.mandatory ]
     t_Type = [ xmlfile.String, xmlfile.mandatory ]
-    t_Size = [ xmlfile.Long, xmlfile.mandatory ]
+    t_Size = [ xmlfile.Long, xmlfile.optional ]
     t_Hash = [ xmlfile.String, xmlfile.optional, "SHA1Sum" ]
 
     def __str__(self):
