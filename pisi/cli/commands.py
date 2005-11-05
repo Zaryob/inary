@@ -609,9 +609,11 @@ Usage: list-installed
 class RebuildDb(Command):
     """Rebuild Databases
 
-Usage: rebuilddb
+Usage: rebuilddb [ <package1> <package2> ... <packagen> ]
 
 Rebuilds the PiSi databases
+
+If package specs are given, they should be the names of package dirs under /var/lib/pisi
 """
     __metaclass__ = autocommand
 
@@ -621,24 +623,29 @@ Rebuilds the PiSi databases
     name = ("rebuild-db", "rdb")
 
     def run(self):
-       self.init(database=False)
+    
+        self.init()
+        
+        if self.args:
+            for package_fn in self.args:
+                pisi.api.resurrect_package(package_fn)
+        else:
+            #FIXME: Confirm icin init, unlink icin finalize, rebuild_db icin init lazim :)
+            if ctx.ui.confirm(_('Rebuild PISI databases?')):
+                self.finalize()
+                import os
+                for db in os.listdir(ctx.config.db_dir()):
+                    os.unlink(pisi.util.join_path(ctx.config.db_dir(), db))
+                self.init(database=True)
+                self.rebuild_db()
 
-       #FIXME: Confirm icin init, unlink icin finalize, rebuild_db icin init lazim :)
-       if ctx.ui.confirm(_('Rebuild PISI databases?')):
-           self.finalize()
-           import os
-           for db in os.listdir(ctx.config.db_dir()):
-               os.unlink(pisi.util.join_path(ctx.config.db_dir(), db))
-           self.init(database=True)
-           self.rebuild_db()
-
-       self.finalize()
+        self.finalize()
 
     def rebuild_db(self):
-       import os
-       for package_fn in os.listdir(ctx.config.lib_dir()):
-           if not package_fn == "scripts":
-               pisi.api.resurrect_package(package_fn)
+        import os
+        for package_fn in os.listdir(ctx.config.lib_dir()):
+            if not package_fn == "scripts":
+                pisi.api.resurrect_package(package_fn)
 
 class UpdateRepo(Command):
     """Update repository databases
