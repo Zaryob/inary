@@ -688,7 +688,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             if len(nodes)==0 and req==mandatory:
                 errs.append(where + _('Mandatory list empty'))
             ix = 1
-            for node in range(nodes):
+            for node in nodes:
                 dummy = node.ownerDocument.createElement("Dummy")
                 dummy.appendChild(node)
                 l.append(decode_item(dummy, errs, where + unicode("[%s]" % ix)))
