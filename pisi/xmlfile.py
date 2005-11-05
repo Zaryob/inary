@@ -525,7 +525,11 @@ class autoxml(oo.autosuper, oo.autoprop):
         if identifier is "":
             return ""
         else:
-            return identifier[0].lower() + identifier[1:]
+            if identifier[0]=='I':
+              lowly = 'i'   # because of pythonic idiots we can't choose locale in lower
+            else:
+              lowly = identifier[0].lower()
+            return lowly + identifier[1:]
 
     def tagpath_head_last(cls, tagpath):
         "returns split of the tag path into last tag and the rest"
