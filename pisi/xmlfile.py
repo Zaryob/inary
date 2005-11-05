@@ -687,11 +687,12 @@ class autoxml(oo.autosuper, oo.autoprop):
             #print node, tag + '/' + comp_tag, nodes
             if len(nodes)==0 and req==mandatory:
                 errs.append(where + _('Mandatory list empty'))
-            for ix in range(len(nodes)):
-                node = nodes[ix]
+            ix = 1
+            for node in range(nodes):
                 dummy = node.ownerDocument.createElement("Dummy")
                 dummy.appendChild(node)
                 l.append(decode_item(dummy, errs, where + unicode("[%s]" % ix)))
+                ix += 1
             return l
 
         def encode(node, l, errs):
