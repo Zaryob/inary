@@ -710,17 +710,22 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         def errors(l, where):
             errs = []
-            for ix in range(len(l)):
-                errs.extend(errors_item(l[ix], where + '[%s]' % ix))
+            ix = 1
+            for node in l:
+                errs.extend(errors_item(node, where + '[%s]' % ix))
+                ix += 1
             return errs
 
         def format(l, f, errs):
-            # indent here
-            for ix in range(len(l)):
-                f.add_flowing_data(str(ix+1) + ': ')
-                format_item(l[ix], f, errs)
-                if ix != len(l)-1:
+            # TODO: indent here
+            ix = 1
+            length = len(l)
+            for node in l:
+                f.add_flowing_data(str(ix) + ': ')
+                format_item(node, f, errs)
+                if ix != length:
                     f.add_flowing_data(', ')
+                ix += 1
 
         return (init, decode, encode, errors, format)
 

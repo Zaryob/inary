@@ -431,12 +431,14 @@ reinstall a package from a pisi file, use the install command."""
                                default=False, help=_("eager upgrades"))
 
     def run(self):
-        if not self.args:
-            self.help()
-            return
-
         self.init()
-        pisi.api.upgrade(self.args)
+ 
+        if not self.args:
+            packages = ctx.installdb.list_installed()
+        else:
+            packages = self.args
+
+        pisi.api.upgrade(packages)
         self.finalize()
 
 
