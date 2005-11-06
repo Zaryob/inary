@@ -50,9 +50,8 @@ class Error(pisi.Error):
 
 class GeneralDefaults:
     """Default values for [general] section"""
-#    destinationdirectory = os.getcwd() + "/tmp" # FOR ALPHA
     destinationdirectory = "/"
-    autoclean = True
+    autoclean = False
     distribution = "Pardus"
     distribution_release = "0.1"
 
