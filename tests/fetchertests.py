@@ -26,7 +26,7 @@ class FetcherTestCase(testcase.TestCase):
 
         self.spec = SpecFile()
         self.spec.read("tests/helloworld/pspec.xml")
-        self.url = uri.URI(self.spec.source.archiveUri)
+        self.url = uri.URI(self.spec.source.archive.uri)
         self.destpath = ctx.config.archives_dir()
         self.fetch = fetcher.Fetcher(self.url, self.destpath)
 
@@ -35,7 +35,7 @@ class FetcherTestCase(testcase.TestCase):
         fetchedFile = os.path.join(self.destpath, self.url.filename())
         if os.access(fetchedFile, os.R_OK):
             self.assertEqual(util.sha1_file(fetchedFile),
-                             self.spec.source.archiveSHA1)
+                             self.spec.source.archive.sha1sum)
         os.remove(fetchedFile)
 
     def testResume(self):
@@ -45,7 +45,7 @@ class FetcherTestCase(testcase.TestCase):
         fetchedFile = os.path.join(self.destpath, self.url.filename())
         if os.access(fetchedFile, os.R_OK):
             self.assertEqual(util.sha1_file(fetchedFile),
-                             self.spec.source.archiveSHA1)
+                             self.spec.source.archive.sha1sum)
         os.remove(fetchedFile)
 
 suite = unittest.makeSuite(FetcherTestCase)

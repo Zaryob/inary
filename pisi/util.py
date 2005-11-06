@@ -511,6 +511,7 @@ def is_package_name(fn, package_name = None):
 
 def env_update():
 
+    ctx.ui.info(_('Updating environment...'))
     env_dir = join_path(ctx.config.dest_dir(), "/etc/env.d")
     profile_file = join_path(ctx.config.dest_dir(), "/etc/profile.env")
     ldconf_file = join_path(ctx.config.dest_dir(), "/etc/ld.so.conf")

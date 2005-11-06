@@ -20,7 +20,7 @@ class DependencyTestCase(unittest.TestCase):
 
     def testDep(self):
         # a real life story bug #603
-        gtkmmdep = DepInfo()
+        gtkmmdep = Dependency()
         gtkmmdep.versionFrom = '1.9.1'
         gtkmmdep.package = 'atk'
         self.assert_( not gtkmmdep.satisfies('atk', '1.8.0', 1) )

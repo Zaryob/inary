@@ -31,7 +31,7 @@ class ArchiveFileTestCase(testcase.TestCase):
 
         achv = sourcearchive.SourceArchive(bctx)
     
-        assert bctx.spec.source.archiveType == "targz"
+        assert bctx.spec.source.archive.type == "targz"
 
         # skip fetching and directly unpack the previously fetched (by
         # fetchertests) archive
@@ -54,11 +54,11 @@ class ArchiveFileTestCase(testcase.TestCase):
     def testUnpackZip(self):
         bctx = BuildContext("tests/pccts/pspec.xml")
 
-        assert bctx.spec.source.archiveType == "zip"
+        assert bctx.spec.source.archive.type == "zip"
 
         achv = sourcearchive.SourceArchive(bctx)
         achv.fetch(interactive=False)
-        achv.unpack(cleanDir=True)
+        achv.unpack(clean_dir=True)
 
         targetDir = bctx.pkg_work_dir()
         assert pathexists(targetDir + "/pccts")
@@ -82,7 +82,7 @@ class ArchiveFileTestCase(testcase.TestCase):
         targetDir = bctx.pkg_work_dir()
         achv = sourcearchive.SourceArchive(bctx)
         achv.fetch(interactive=False)
-        achv.unpack(cleanDir=True)
+        achv.unpack(clean_dir=True)
         del achv
 
         newZip = targetDir + "/new.zip"
@@ -95,17 +95,17 @@ class ArchiveFileTestCase(testcase.TestCase):
     
     def testUnpackZipCond(self):
         bctx = BuildContext("tests/pccts/pspec.xml")
-        url = uri.URI(bctx.spec.source.archiveUri)
+        url = uri.URI(bctx.spec.source.archive.uri)
         targetDir = bctx.pkg_work_dir()
         filePath = join(ctx.config.archives_dir(), url.filename())
 
         # check cached
-        if util.sha1_file(filePath) != bctx.spec.source.archiveSHA1:
-            fetch = fetcher.Fetcher(bctx.spec.source.archiveUri, targetDir)
+        if util.sha1_file(filePath) != bctx.spec.source.archive.sha1sum:
+            fetch = fetcher.Fetcher(bctx.spec.source.archive.uri, targetDir)
             fetch.fetch()
-        assert bctx.spec.source.archiveType == "zip"
+        assert bctx.spec.source.archive.type == "zip"
 
-        achv = archive.Archive(filePath, bctx.spec.source.archiveType)
+        achv = archive.Archive(filePath, bctx.spec.source.archive.type)
         achv.unpack_files(["pccts/history.txt"], targetDir)
         assert pathexists(targetDir + "/pccts")
         testfile = targetDir + "/pccts/history.txt"
