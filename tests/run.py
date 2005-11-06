@@ -15,8 +15,8 @@ import sys
 import os
 import locale
 
-sys.path.append('.')
-sys.path.append('..')
+sys.path.insert(0, '.')
+sys.path.insert(0, '..')
 
 import pisi.api
 import pisi.context as ctx
