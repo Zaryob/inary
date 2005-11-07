@@ -52,6 +52,9 @@
       <Path fileType="localedata">/usr/share/locale</Path>
       <Path fileType="header">/usr/include/popt.h</Path>
     </Files>
+    <AdditionalFiles>
+      <AdditionalFile owner="root" permission="0755" target="/etc/init.d/acpid">acpid.rc6</AdditionalFile>
+    </AdditionalFiles>
   </Package>
   
   <History>
