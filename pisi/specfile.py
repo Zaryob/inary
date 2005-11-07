@@ -53,8 +53,8 @@ class Packager:
 class AdditionalFile:
 
     s_Filename = [xmlfile.String, xmlfile.mandatory]
-    a_Target = [xmlfile.String, xmlfile.mandatory]
-    a_Permission = [xmlfile.String, xmlfile.optional]
+    a_target = [xmlfile.String, xmlfile.mandatory]
+    a_permission = [xmlfile.String, xmlfile.optional]
 
     def __str__(self):
         s = "%s -> %s " % (self.filename, self.target)
