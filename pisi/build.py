@@ -485,12 +485,17 @@ class Builder:
             os.chdir(self.pspecDir)
             install_dir = self.bctx.pkg_dir() + ctx.const.install_dir_suffix
             for afile in package.additionalFiles:
-                src = os.path.join(ctx.const.files_dir, afile.filename)
-                dest = os.path.join(install_dir + os.path.dirname(afile.target), os.path.basename(afile.target))
-                util.copy_file(src, dest)
-                if afile.permission:
-                    # mode is octal!
-                    os.chmod(dest, int(afile.permission, 8))
+                wildcard_path = util.join_path(ctx.const.files_dir, afile.filename)
+                destdir = util.join_path(install_dir, os.path.dirname(afile.target))
+                for src in glob.glob(wildcard_path):
+                    destfile = os.path.basename(afile.target)
+                    if not destfile: destfile = os.path.basename(src)
+                    ctx.ui.debug(_("Copying additional file: '%s' to '%s' as '%s'") \
+                                                          % (src, destdir, destfile))
+                    util.copy_file(src, util.join_path(destdir, destfile))
+                    if afile.permission:
+                        # mode is octal!
+                        os.chmod(util.join_path(destdir, destfile), int(afile.permission, 8))
 
             os.chdir(c)
            
