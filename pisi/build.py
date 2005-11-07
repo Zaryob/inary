@@ -107,9 +107,8 @@ class BuildContext(object):
         "package build directory"
         packageDir = self.spec.source.name + '-' + \
                      self.spec.source.version + '-' + self.spec.source.release
-        from pisi.util import join_path as join
-        return join( ctx.config.dest_dir(), ctx.config.values.dirs.tmp_dir,
-                     packageDir )
+        return util.join_path(ctx.config.dest_dir(), ctx.config.values.dirs.tmp_dir,
+                     packageDir)
    
     def pkg_work_dir(self):
         return self.pkg_dir() + ctx.const.work_dir_suffix
@@ -133,11 +132,11 @@ class Builder:
         self.srcDir = None
 
     def set_state(self, state):
-        stateFile = os.path.join(self.bctx.pkg_work_dir(), "pisiBuildState")
+        stateFile = util.join_path(self.bctx.pkg_work_dir(), "pisiBuildState")
         open(stateFile, "w").write(state)
 
     def get_state(self):
-        stateFile = os.path.join(self.bctx.pkg_work_dir(), "pisiBuildState")
+        stateFile = util.join_path(self.bctx.pkg_work_dir(), "pisiBuildState")
         if not os.path.exists(stateFile): # no state
             return None
         return open(stateFile, "r").read()
@@ -228,7 +227,7 @@ class Builder:
     def compile_action_script(self):
         """Compiles actions.py and sets the actionLocals and actionGlobals"""
         specdir = os.path.dirname(self.bctx.pspecfile)
-        scriptfile = os.path.join(specdir, ctx.const.actions_file)
+        scriptfile = util.join_path(specdir, ctx.const.actions_file)
         try:
             localSymbols = globalSymbols = {}
             buf = open(scriptfile).read()
@@ -249,7 +248,7 @@ class Builder:
         except KeyError:
             workdir = self.spec.source.name + "-" + self.spec.source.version
                     
-        return os.path.join(self.bctx.pkg_work_dir(), workdir)
+        return util.join_path(self.bctx.pkg_work_dir(), workdir)
 
     def run_action_function(self, func, mandatory=False):
         """Calls the corresponding function in actions.py. 
@@ -296,19 +295,19 @@ class Builder:
     def patch_exists(self):
         """check existence of patch files declared in PSPEC"""
 
-        files_dir = os.path.abspath(os.path.join(self.pspecDir,
+        files_dir = os.path.abspath(util.join_path(self.pspecDir,
                                                  ctx.const.files_dir))
         for patch in self.spec.source.patches:
-            patchFile = os.path.join(files_dir, patch.filename)
+            patchFile = util.join_path(files_dir, patch.filename)
             if not os.access(patchFile, os.F_OK):
                 raise Error(_("Patch file is missing: %s\n") % patch.filename)
 
     def apply_patches(self):
-        files_dir = os.path.abspath(os.path.join(self.pspecDir,
+        files_dir = os.path.abspath(util.join_path(self.pspecDir,
                                                  ctx.const.files_dir))
 
         for patch in self.spec.source.patches:
-            patchFile = os.path.join(files_dir, patch.filename)
+            patchFile = util.join_path(files_dir, patch.filename)
             if patch.compressionType:
                 patchFile = util.uncompress(patchFile,
                                             compressType=patch.compressionType,
@@ -353,7 +352,7 @@ class Builder:
         else:
             metadata.package.build = self.calc_build_no(metadata.package.name)
 
-        metadata_xml_path = os.path.join(self.bctx.pkg_dir(), ctx.const.metadata_xml)
+        metadata_xml_path = util.join_path(self.bctx.pkg_dir(), ctx.const.metadata_xml)
         metadata.write(metadata_xml_path)
         self.metadata = metadata
 
@@ -393,7 +392,7 @@ class Builder:
         for (p, fileinfo) in d.iteritems():
             files.append(fileinfo)
 
-        files_xml_path = os.path.join(self.bctx.pkg_dir(), ctx.const.files_xml)
+        files_xml_path = util.join_path(self.bctx.pkg_dir(), ctx.const.files_xml)
         files.write(files_xml_path)
         self.files = files
 
@@ -406,10 +405,10 @@ class Builder:
              for fn in files:
                  fn = fn.decode('utf-8')
                  if util.is_package_name(fn, package_name):
-                     old_package_fn = os.path.join(root, fn)
+                     old_package_fn = util.join_path(root, fn)
                      ctx.ui.info('(found old version %s)' % old_package_fn)
                      old_pkg = Package(old_package_fn, 'r')
-                     old_pkg.read(os.path.join(ctx.config.tmp_dir(), 'oldpkg'))
+                     old_pkg.read(util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
                      if str(old_pkg.metadata.package.name) != package_name:
                          ctx.ui.warning('Skipping %s with wrong pkg name ' %
                                         old_package_fn)
@@ -438,7 +437,7 @@ class Builder:
 
             # compare old files.xml with the new one..
             old_pkg = Package(old_package_fn, 'r')
-            old_pkg.read(os.path.join(ctx.config.tmp_dir(), 'oldpkg'))
+            old_pkg.read(util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
 
             # FIXME: TAKE INTO ACCOUNT MINOR CHANGES IN METADATA
             changed = False
@@ -485,9 +484,8 @@ class Builder:
             os.chdir(self.pspecDir)
             install_dir = self.bctx.pkg_dir() + ctx.const.install_dir_suffix
             for afile in package.additionalFiles:
-                wildcard_path = util.join_path(ctx.const.files_dir, afile.filename)
                 destdir = util.join_path(install_dir, os.path.dirname(afile.target))
-                for src in glob.glob(wildcard_path):
+                for src in glob.glob(util.join_path(ctx.const.files_dir, afile.filename)):
                     destfile = os.path.basename(afile.target)
                     if not destfile: destfile = os.path.basename(src)
                     ctx.ui.debug(_("Copying additional file: '%s' to '%s' as '%s'") \
@@ -518,7 +516,7 @@ class Builder:
             # add comar files to package
             os.chdir(self.pspecDir)
             for pcomar in package.providesComar:
-                fname = os.path.join(ctx.const.comar_dir,
+                fname = util.join_path(ctx.const.comar_dir,
                                      pcomar.script)
                 pkg.add_to_package(fname)
 
