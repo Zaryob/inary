@@ -18,12 +18,10 @@ import exceptions
 import pisi.ui
 import pisi.context as ctx
 from pisi.cli.pisicli import PisiCLI
-from pisi.xmlext import XmlError
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
-
 
 def handle_exception(exception, value, tb):
 
