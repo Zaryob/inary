@@ -25,6 +25,7 @@ _ = __trans.ugettext
 import pisi
 import pisi.context as ctx
 from pisi.ui import UI
+import pisi.ui as ui
 from pisi.cli.colors import colorize
 
 
@@ -121,3 +122,16 @@ class CLI(UI):
         out = '\r%-30.30s %3d%% %12.2f %s' % \
             (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
         self.output(out)
+
+    def status(self, msg = None):
+        if msg:
+            self.output(colorize(msg + '\n', 'purple'))
+
+    def notify(self, event, **keywords):
+        if event == ui.installed:
+            msg = _('Installed %s') % keywords['package'].name
+        elif event == ui.removed:
+            msg = _('Removed %s') % keywords['package'].name
+        elif event == ui.upgraded:
+            msg = _('Upgraded %s') % keywords['package'].name
+        self.output(colorize(msg + '\n', 'cyan'))

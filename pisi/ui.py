@@ -19,6 +19,8 @@ import sys
 import pisi
 import pisi.context as ctx
 
+installed, upgraded, removed  = range(3)
+
 class UI(object):
     "Abstract class for UI operations, derive from this."
 
@@ -70,6 +72,7 @@ class UI(object):
         "inform a (possibly fatal) error"
         pass
 
+    #FIXME: merge this with info, this just means "important message"
     def action(self,msg):
         "uh?"
         pass
@@ -84,4 +87,12 @@ class UI(object):
 
     def display_progress(self, pd):
         "display progress"
+        pass
+
+    def status(self, msg = None):
+        "set status, if not given clear it"
+        pass
+        
+    def notify(self, event, **keywords):
+        "notify UI of a significant event"
         pass

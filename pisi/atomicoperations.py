@@ -38,6 +38,7 @@ from pisi.package import Package
 from pisi.metadata import MetaData
 from pisi.files import Files
 from pisi.uri import URI
+import pisi.ui
 #import conflicts
 
 class Error(pisi.Error):
@@ -73,7 +74,7 @@ class Install(AtomicOperation):
 
     def install(self, ask_reinstall = True):
         "entry point"
-        ctx.ui.info(_('Installing %s, version %s, release %s, build %s') %
+        ctx.ui.status(_('Installing %s, version %s, release %s, build %s') %
                 (self.pkginfo.name, self.pkginfo.version,
                  self.pkginfo.release, self.pkginfo.build))
         self.ask_reinstall = ask_reinstall
@@ -89,7 +90,13 @@ class Install(AtomicOperation):
                 comariface.run_postinstall(self.pkginfo.name)
         self.update_databases()
         self.update_environment()
-                        
+        ctx.ui.status()
+        if self.upgrade:
+            event = pisi.ui.upgraded
+        else:
+            event = pisi.ui.installed
+        ctx.ui.notify(event, package = self.pkginfo, files = self.files)
+
     def check_requirements(self):
         """check system requirements"""
         #TODO: IS THERE ENOUGH SPACE?
@@ -121,6 +128,7 @@ class Install(AtomicOperation):
         pkg = self.pkginfo
 
         self.reinstall = False
+        self.upgrade = False
         if ctx.installdb.is_installed(pkg.name): # is this a reinstallation?
             (iversion, irelease, ibuild) = ctx.installdb.get_version(pkg.name)
 
@@ -153,6 +161,7 @@ class Install(AtomicOperation):
                        and pkg.build > ibuild):
                     ctx.ui.info(_('Upgrading to new distribution build'))
                     upgrade = True
+                self.upgrade = upgrade
 
                 # is this a downgrade? confirm this action.
                 if self.ask_reinstall and (not upgrade):
@@ -164,6 +173,7 @@ class Install(AtomicOperation):
                         x = _('Downgrade to old distribution build?')
                     if not ctx.ui.confirm(x):
                         raise Error(_('Package downgrade declined'))
+
 
             # schedule for reinstall
             self.old_files = ctx.installdb.files(pkg.name)
@@ -297,8 +307,9 @@ class Remove(AtomicOperation):
         """Remove a single package"""
         inst_packagedb = packagedb.inst_packagedb
         self.package = packagedb.get_package(self.package_name)
+        self.files = ctx.installdb.files(self.package_name)
        
-        ctx.ui.info(_('Removing package %s') % self.package_name)
+        ctx.ui.status(_('Removing package %s') % self.package_name)
         if not ctx.installdb.is_installed(self.package_name):
             raise Exception(_('Trying to remove nonexistent package ')
                             + self.package_name)
@@ -307,11 +318,13 @@ class Remove(AtomicOperation):
             
         self.run_preremove()
             
-        for fileinfo in ctx.installdb.files(self.package_name).list:
+        for fileinfo in self.files.list:
             self.remove_file(fileinfo)
     
         self.remove_db()
         self.remove_pisi_files()
+        ctx.ui.status()
+        ctx.ui.notify(pisi.ui.removed, package = self.pkginfo, files = self.files)
 
     def check_dependencies(self):
         #we only have to check the dependencies to ensure the

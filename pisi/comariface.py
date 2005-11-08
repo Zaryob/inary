@@ -26,6 +26,7 @@ class Error(pisi.Error):
 
 def make_com():
     # FIXME: just try for others (that don't use comar)
+    # what does this mean? -- exa
     try:
         import comar
         comard = comar.Link()
