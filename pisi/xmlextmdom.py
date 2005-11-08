@@ -11,11 +11,13 @@
 #
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 #           Baris Metin <baris@uludag.org.tr
+#           Gurer Ozen <gurer@uludag.org.tr>
 
 """
- some helper functions for using minidom
+ some helper functions implemented with minidom
  function names are mixedCase for compatibility with minidom,
- an old library
+ an 'old library'
+ note: this is a particularly inefficient implementation of xmlext.
 """
 
 import gettext
@@ -28,17 +30,19 @@ class XmlError(pisi.Error):
     "named this way because the class if mostly used with an import *"
     pass
 
-#FIXME: these Node's in the following routines seem redundant
-
 def getNodeAttribute(node, attrname):
     """get named attribute from DOM node"""
     if not node.hasAttribute(attrname):
         return None
     return node.getAttribute(attrname)
 
+def getChildElts(node):
+    """get only child elements"""
+    return filter(lambda x:x.nodeType == x.ELEMENT_NODE, node.childNodes)
+
 def getTagByName(parent, childName):
     return [x for x in parent.childNodes
-            if x.nodeType == x.ELEMENT_NODE if x.tagName == childName]
+            if x.nodeType == x.ELEMENT_NODE and x.tagName == childName]
 
 def getNodeText(node, tagpath = ""):
     """get the first child and expect it to be text!"""
@@ -63,10 +67,6 @@ def getChildText(node_s, tagpath):
         return None
     return getNodeText(node)
 
-def getChildElts(node):
-    """get only child elements"""
-    return filter(lambda x:x.nodeType == x.ELEMENT_NODE, node.childNodes)
-
 def getNode(node, tagpath):
     """returns the *first* matching node for given tag path."""
 
@@ -75,35 +75,24 @@ def getNode(node, tagpath):
     assert len(tags)>0
 
     # iterative code to search for the path
-        
-    # get DOM for top node
-    nodeList = getTagByName(node, tags[0])
-    if len(nodeList) == 0:
-        return None                 # not found
-
-    node = nodeList[0]              # discard other matches
-    for tag in tags[1:]:
-        nodeList = getTagByName(node, tag)
-        if len(nodeList) == 0:
-            return None
-        else:
-            node = nodeList[0]
-
-    return node
+    for tag in tags:
+        for child in node.childNodes:
+            if child.nodeType == node.ELEMENT_NODE and child.tagName == tag:
+                return child
+        return None
 
 def getAllNodes(node, tagPath):
     """retrieve all nodes that match a given tag path."""
 
+    #FIXME: better tag split
     tags = tagPath.split('/')
 
     if len(tags) == 0:
         return []
 
-    nodeList = getTagByName(node, tags[0])
-    if len(nodeList) == 0:
-        return []
+    nodeList = [node] # basis case
 
-    for tag in tags[1:]:
+    for tag in tags:
         results = map(lambda x: getTagByName(x, tag), nodeList)
         nodeList = []
         for x in results:
