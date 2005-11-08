@@ -18,7 +18,6 @@ import pisi
 import pisi.api
 from pisi import xmlfile
 import pisi.util as util
-from pisi.xmlext import *
 
 class AutoXmlTestCase(unittest.TestCase):
 

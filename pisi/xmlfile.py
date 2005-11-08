@@ -47,7 +47,8 @@ _ = __trans.ugettext
 
 # PiSi
 import pisi
-from pisi.xmlext import *
+# TODO: find the appropriate xmlext implementation and import from there
+from pisi.xmlextmdom import *
 import pisi.context as ctx
 import pisi.util as util
 import pisi.oo as oo

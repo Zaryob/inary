@@ -26,7 +26,6 @@ _ = __trans.ugettext
 from os.path import basename
 
 # pisi modules
-from pisi.xmlext import *
 import pisi.xmlfile as xmlfile
 from pisi.xmlfile import XmlFile
 import pisi.context as ctx
