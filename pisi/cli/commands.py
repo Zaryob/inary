@@ -905,13 +905,18 @@ Finds the installed package which contains the specified file.
                                default=False, help="show in long format")
     
     def search_exact(path):
+        import os.path
+
         path = path.lstrip('/') #FIXME: this shouldn't be necessary :/
-        if ctx.filesdb.has_file(path):
-            (pkg_name, file_info) = ctx.filesdb.get_file(path)
-            ctx.ui.info(_('Package: %s') % pkg_name)
-            if ctx.config.options.long:
-                ctx.ui.info(_('Type: %s, Hash: %s') % (file_info.type,
-                                                      file_info.hash) )
+        files = ctx.filesdb.get_files(path)
+
+        if files:
+            for (pkg_name, file_info) in files:
+                #FIXME: there can be a prettier info line
+                ctx.ui.info(_('Package: %s has File: %s') % (pkg_name, file_info.path))
+                if ctx.config.options.long:
+                    ctx.ui.info(_('Type: %s, Hash: %s') % (file_info.type,
+							   file_info.hash) )
         else:
             ctx.ui.error(_('Path %s does not belong to an installed package') % path)
     search_exact=staticmethod(search_exact)
