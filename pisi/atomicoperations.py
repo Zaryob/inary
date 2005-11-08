@@ -240,10 +240,12 @@ class Install(AtomicOperation):
             if x.path.endswith('.so') or x.path.startswith('/etc/env.d'):
                 shared = True
                 break
-        if shared:
-            ctx.ui.info("Regenerating /etc/ld.so.cache...")
-            util.env_update()
-
+        if not ctx.get_option('bypass_ldconfig'):
+            if shared:
+                ctx.ui.info(_("Regenerating /etc/ld.so.cache..."))
+                util.env_update()
+        else:
+            ctx.ui.warning(_("Bypassing ldconfig"))
 
 def install_single(pkg, upgrade = False):
     """install a single package from URI or ID"""

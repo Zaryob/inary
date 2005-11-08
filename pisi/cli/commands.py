@@ -390,6 +390,9 @@ specified a package name, it should exist in a specified repository.
 
     def options(self):
         super(Install, self).options()
+        p = self.parser
+        p.add_option("", "--bypass-ldconfig", action="store_true",
+                              default=False, help=_("Bypass ldconfig phase"))
         buildno_opts(self)
 
     def run(self):
@@ -427,6 +430,9 @@ reinstall a package from a pisi file, use the install command."""
     def options(self):
         super(Upgrade, self).options()
         buildno_opts(self)
+        p = self.parser
+        p.add_option("", "--bypass-ldconfig", action="store_true",
+                              default=False, help=_("Bypass ldconfig phase"))
         self.parser.add_option("-e", "--eager", action="store_true",
                                default=False, help=_("eager upgrades"))
 
