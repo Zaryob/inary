@@ -462,7 +462,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         tag_type = spec[0]
         assert type(tag_type) == type(type)
         def readtext(node, blah):
-            node.normalize()
+            #node.normalize() # piksemel doesn't have this
             return getNodeText(node)
         def writetext(node, blah, text):
             addText(node, "", text)
@@ -687,6 +687,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 dummy = node.ownerDocument.createElement("Dummy")
                 dummy.appendChild(node)
                 l.append(decode_item(dummy, errs, where + unicode("[%s]" % ix)))
+                #l.append(decode_item(node, errs, where + unicode("[%s]" % ix)))
                 ix += 1
             return l
 
@@ -699,6 +700,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                     else:
                         listnode = node
                     encode_item(listnode, item, errs)
+                    #encode_item(node, item, errs)
             else:
                 if req is mandatory:
                     errs.append(_('Mandatory list empty'))

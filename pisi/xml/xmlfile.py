@@ -12,7 +12,7 @@
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 
 try:
-    #horagata # comment out to disable piks
+    horagata # comment out to disable piks
     from xmlextpiks import *
     from xmlfilepiks import *
 except:
