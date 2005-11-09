@@ -34,7 +34,7 @@ class XmlExtTestCase(testcase.TestCase):
         self.assertEqual(xmlext.getNodeText(codeswith[2]), 'Caglar')
         
     def testAdd(self):
-        node = xmlext.newDocument('team')
+        node = xmlext.newDocument('pardus')
         #node = a.documentElement
         xmlext.addText(node, 'team/coder', 'zibidi1')
         xmlext.addText(node, 'team/coder', 'zibidi2')

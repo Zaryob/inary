@@ -12,9 +12,9 @@
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 
 try:
-    #from xmlextpiks import *
-    #from xmlfilepiks import *
-    horagata
+    #horagata # comment out to disable piks
+    from xmlextpiks import *
+    from xmlfilepiks import *
 except:
     print 'xmlfile: piksemel implementation cannot be loaded, falling back to minidom'
     from xmlfilemdom import *

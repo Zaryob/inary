@@ -195,4 +195,4 @@ def addNode(node, tagpath, newnode = None, branch=True):
 
 def addText(node, tagPath, text, branch = True):
     newnode = newTextNode(node, text)
-    addNode(node, tagPath, newnode, branch)
+    return addNode(node, tagPath, newnode, branch = branch)

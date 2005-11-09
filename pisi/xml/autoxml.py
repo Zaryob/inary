@@ -25,14 +25,14 @@
 """
 
 # System
-import xml.dom.minidom as mdom
-from xml.parsers.expat import ExpatError
 import locale
 import codecs
 import types
 import formatter
 import sys
 from StringIO import StringIO
+#import xml.dom.minidom as mdom
+#from xml.parsers.expat import ExpatError
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -105,7 +105,7 @@ class LocalText(dict):
             newtext = newTextNode(node, self[key])
             newnode.appendChild(newtext)
             node.appendChild(newnode)
-    
+
     def errors(self, where = unicode()):
         errs = []
         langs = [ locale.getlocale()[0][0:2], 'tr', 'en' ]

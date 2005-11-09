@@ -39,10 +39,10 @@ def getNodeAttribute(node, attrname):
 
 def getChildElts(node):
     """get only child elements"""
-    return [x for x in parent.childNodes if x.type == TAG ]
+    return [x for x in parent.childNodes if x.type() == TAG ]
 
 def getTagByName(parent, childName):
-    return [x for x in parent if x.type == TAG and x.name == childName]
+    return [x for x in parent if x.type() == TAG and x.name() == childName]
 
 def getNodeText(node, tagpath = ""):
     """get the first child and expect it to be text!"""
@@ -110,7 +110,7 @@ def createTagPath(node, tags):
     if len(tags)==0:
         return node
     for tag in tags:
-        node = node.appendTag(Node(tag))
+        node = node.appendTag(tag)
     return node
 
 def addTagPath(node, tags, newnode=None):
@@ -163,6 +163,7 @@ def addNode(node, tagpath, newnode = None, branch=True):
 #def newTextNode(node, text):
 #    return Node(text)
 
+
 def addText(node, tagPath, text, branch = True):
-    newnode = newTextNode(node, text)
-    addNode(node, tagPath, newnode, branch)
+    node = addNode(node, tagPath, branch = branch)
+    return node.appendData(text)
