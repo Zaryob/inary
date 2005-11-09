@@ -10,16 +10,12 @@
 
 import unittest
 import os
-import xml.dom.minidom as mdom
-from xml.parsers.expat import ExpatError
-import types
 
 import pisi
 import pisi.api
-from pisi import xmlfile
 import pisi.context as ctx
 import pisi.util as util
-from pisi.xmlext import *
+from pisi.xml import xmlext
 
 import testcase
 
@@ -29,22 +25,21 @@ class XmlExtTestCase(testcase.TestCase):
         testcase.TestCase.setUp(self, database=False)
 
     def testGet(self):
-        self.a = mdom.parse('tests/a.xml')
-        self.doc = self.a.documentElement
-        self.assertEqual(getNodeText(self.doc, 'Number'), '868')
-        self.assertEqual(getNodeText(self.doc, 'OtherInfo/BirthDate'), '18071976')
-        codeswith = getAllNodes(self.doc, 'OtherInfo/CodesWith/Person')
+        self.doc = xmlext.parse('tests/a.xml')
+        #self.doc = self.a.documentElement
+        self.assertEqual(xmlext.getNodeText(self.doc, 'Number'), '868')
+        self.assertEqual(xmlext.getNodeText(self.doc, 'OtherInfo/BirthDate'), '18071976')
+        codeswith = xmlext.getAllNodes(self.doc, 'OtherInfo/CodesWith/Person')
         self.assertEqual(len(codeswith), 4)
-        self.assertEqual(getNodeText(codeswith[2]), 'Caglar')
+        self.assertEqual(xmlext.getNodeText(codeswith[2]), 'Caglar')
         
     def testAdd(self):
-        impl = mdom.getDOMImplementation()
-        a = impl.createDocument(None, 'team', None)
-        node = a.documentElement
-        addText(node, 'team/coder', 'zibidi1')
-        addText(node, 'team/coder', 'zibidi2')
-        addText(node, 'team/coder', 'zibidi3')
-        reada = getAllNodes(node, 'team/coder')
+        node = xmlext.newDocument('team')
+        #node = a.documentElement
+        xmlext.addText(node, 'team/coder', 'zibidi1')
+        xmlext.addText(node, 'team/coder', 'zibidi2')
+        xmlext.addText(node, 'team/coder', 'zibidi3')
+        reada = xmlext.getAllNodes(node, 'team/coder')
         self.assertEqual(len(reada), 3)
 
         pass

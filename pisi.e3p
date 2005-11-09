@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-11-08, 18:14:10 -->
+<!-- Saved: 2005-11-09, 19:48:27 -->
 <!-- Copyright (C) 2005 PiSi Development Team,  -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -173,10 +173,6 @@
     <Source>
       <Dir>pisi</Dir>
       <Name>build.py</Name>
-    </Source>
-    <Source>
-      <Dir>pisi</Dir>
-      <Name>xmlfile.py</Name>
     </Source>
     <Source>
       <Dir>pisi</Dir>
@@ -376,6 +372,30 @@
       <Dir>pisi</Dir>
       <Name>xmlextmdom.py</Name>
     </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Name>xmlext.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Name>xmlextpiks.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Name>xmlfile.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Name>xmlfilepiks.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Name>xmlfilemdom.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Name>autoxml.py</Name>
+    </Source>
   </Sources>
   <Forms>
   </Forms>
@@ -418,9 +438,9 @@
   </Vcs>
   <FiletypeAssociations>
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.ui" type="FORMS" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
-    <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
   </FiletypeAssociations>
 </Project>

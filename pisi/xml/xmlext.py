@@ -11,4 +11,8 @@
 #
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 
-from xmlextmdom import *
+try:
+    from xmlextpiks import *
+except:
+    print 'xmlext: piksemel implementation cannot be loaded, falling back to minidom'
+    from xmlextmdom import *

@@ -27,7 +27,7 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
-import piksemel as iks
+from piksemel import *
 
 class XmlError(pisi.Error):
     "named this way because the class if mostly used with an import *"
@@ -35,31 +35,28 @@ class XmlError(pisi.Error):
 
 def getNodeAttribute(node, attrname):
     """get named attribute from DOM node"""
-    if not node.hasAttribute(attrname):
-        return None
     return node.getAttribute(attrname)
 
 def getChildElts(node):
     """get only child elements"""
-    return filter(lambda x:x.nodeType == x.ELEMENT_NODE, node.childNodes)
+    return [x for x in parent.childNodes if x.type == TAG ]
 
 def getTagByName(parent, childName):
-    return [x for x in parent.childNodes
-            if x.nodeType == x.ELEMENT_NODE and x.tagName == childName]
+    return [x for x in parent if x.type == TAG and x.name == childName]
 
 def getNodeText(node, tagpath = ""):
     """get the first child and expect it to be text!"""
     if tagpath!="":
         node = getNode(node, tagpath)
     try:
-        child = node.childNodes[0]
+        child = node.firstChild()
     except IndexError:
         return None
     except AttributeError: # no node by that name
         return None
-    if child.nodeType == child.TEXT_NODE:
+    if child.nodeType == CDATA: #FIXME: ??? TEXT type?
         # in any case, strip whitespaces...
-        return child.data.strip()
+        return child.getTagData().strip()
     else:
         raise XmlError(_("getNodeText: Expected text node, got something else!"))
 
@@ -79,8 +76,8 @@ def getNode(node, tagpath):
 
     # iterative code to search for the path
     for tag in tags:
-        for child in node.childNodes:
-            if child.nodeType == node.ELEMENT_NODE and child.tagName == tag:
+        for child in node:
+            if child.type == TAG and child.name == tag:
                 return child
         return None
 
@@ -112,16 +109,15 @@ def createTagPath(node, tags):
     no matter what"""
     if len(tags)==0:
         return node
-    dom = node.ownerDocument
     for tag in tags:
-        node = node.appendChild(dom.createElement(tag))
+        node = node.appendTag(Node(tag))
     return node
 
 def addTagPath(node, tags, newnode=None):
     """add newnode at the end of a tag chain, smart one"""
     node = createTagPath(node, tags)
     if newnode:                     # node to add specified
-        node.appendChild(newnode)
+        node.appendTag(newnode)
     return node    
 
 def addNode(node, tagpath, newnode = None, branch=True):
@@ -160,10 +156,10 @@ def addNode(node, tagpath, newnode = None, branch=True):
     return node
 
 def newNode(node, tag):
-    return node.ownerDocument.createElement(tag)
+    return Node(tag)
 
 def newTextNode(node, text):
-    return node.ownerDocument.createTextNode(text)
+    return Node(text)
 
 def addText(node, tagPath, text, branch = True):
     newnode = newTextNode(node, text)
