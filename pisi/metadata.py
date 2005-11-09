@@ -25,7 +25,7 @@ _ = __trans.ugettext
 
 import pisi.context as ctx
 import pisi.specfile as specfile
-import pisi.xmlfile as xmlfile
+import pisi.xml.xmlfile as xmlfile
 import pisi.xml.autoxml as autoxml
 import pisi.util as util
 
@@ -58,7 +58,7 @@ class Package(specfile.Package):
             (self.architecture, self.installedSize)
         return s
 
-class MetaData(autoxml.XmlFile):
+class MetaData(xmlfile.XmlFile):
     """Package metadata. Metadata is composed of Specfile and various
     other information. A metadata has two parts, Source and Package."""
 

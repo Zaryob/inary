@@ -31,6 +31,8 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
+import xml.dom.minidom as mdom
+
 import pisi
 
 class XmlError(pisi.Error):
