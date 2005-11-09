@@ -26,7 +26,7 @@ _ = __trans.ugettext
 import pisi.context as ctx
 import pisi.specfile as specfile
 import pisi.xmlfile as xmlfile
-import pisi.autoxml as autoxml
+import pisi.xml.autoxml as autoxml
 import pisi.util as util
 
 class Source:
