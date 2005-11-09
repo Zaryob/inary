@@ -29,19 +29,19 @@ import pisi.packagedb as packagedb
 import pisi.util as util
 from pisi.package import Package
 from pisi.xmlfile import XmlFile
-import pisi.xmlfile as xmlfile
+import pisi.autoxml as autoxml
 from pisi.uri import URI
 
 class Error(pisi.Error):
     pass
 
 class Index(XmlFile):
-    __metaclass__ = xmlfile.autoxml
+    __metaclass__ = autoxml.autoxml
 
     tag = "PISI"
 
-    t_Sources = [ [specfile.Source], xmlfile.optional, "Source"]
-    t_Packages = [ [metadata.Package], xmlfile.optional, "Package"]
+    t_Sources = [ [specfile.Source], autoxml.optional, "Source"]
+    t_Packages = [ [metadata.Package], autoxml.optional, "Package"]
 
     def read_uri(self, filename, repo = None):
         """Read PSPEC file"""

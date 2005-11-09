@@ -26,24 +26,25 @@ _ = __trans.ugettext
 import pisi.context as ctx
 import pisi.specfile as specfile
 import pisi.xmlfile as xmlfile
+import pisi.autoxml as autoxml
 import pisi.util as util
 
 class Source:
-    __metaclass__ = xmlfile.autoxml
+    __metaclass__ = autoxml.autoxml
 
-    t_Name = [xmlfile.String, xmlfile.mandatory]
-    t_Homepage = [xmlfile.String, xmlfile.optional]
-    t_Packager = [specfile.Packager, xmlfile.mandatory]
+    t_Name = [autoxml.String, autoxml.mandatory]
+    t_Homepage = [autoxml.String, autoxml.optional]
+    t_Packager = [specfile.Packager, autoxml.mandatory]
 
 class Package(specfile.Package):
-    __metaclass__ = xmlfile.autoxml
+    __metaclass__ = autoxml.autoxml
 
-    t_Build = [ xmlfile.Integer, xmlfile.optional]
-    t_Distribution = [ xmlfile.String, xmlfile.mandatory]
-    t_DistributionRelease = [ xmlfile.String, xmlfile.mandatory]
-    t_Architecture = [ xmlfile.String, xmlfile.mandatory]
-    t_InstalledSize = [ xmlfile.Long, xmlfile.mandatory]
-    t_PackageURI = [ xmlfile.String, xmlfile.optional]
+    t_Build = [ autoxml.Integer, autoxml.optional]
+    t_Distribution = [ autoxml.String, autoxml.mandatory]
+    t_DistributionRelease = [ autoxml.String, autoxml.mandatory]
+    t_Architecture = [ autoxml.String, autoxml.mandatory]
+    t_InstalledSize = [ autoxml.Long, autoxml.mandatory]
+    t_PackageURI = [ autoxml.String, autoxml.optional]
 
     def decode_hook(self, node, errs, where):
         self.version = self.history[0].version
@@ -57,17 +58,17 @@ class Package(specfile.Package):
             (self.architecture, self.installedSize)
         return s
 
-class MetaData(xmlfile.XmlFile):
+class MetaData(autoxml.XmlFile):
     """Package metadata. Metadata is composed of Specfile and various
     other information. A metadata has two parts, Source and Package."""
 
-    __metaclass__ = xmlfile.autoxml
+    __metaclass__ = autoxml.autoxml
 
     tag = "PISI"
 
-    t_Source = [ Source, xmlfile.mandatory]
-    t_Package = [ Package, xmlfile.mandatory]
-    #t_History = [ [Update], xmlfile.mandatory]
+    t_Source = [ Source, autoxml.mandatory]
+    t_Package = [ Package, autoxml.mandatory]
+    #t_History = [ [Update], autoxml.mandatory]
 
     def from_spec(self, src, pkg):
         self.source.name = src.name

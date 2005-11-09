@@ -21,18 +21,18 @@ _ = __trans.ugettext
 import pisi.context as ctx
 import pisi.packagedb as packagedb
 from pisi.version import Version
-import pisi.xmlfile as xmlfile
+import pisi.autoxml as autoxml
 from pisi.util import Checks
 
 class Dependency:
 
-    __metaclass__ = xmlfile.autoxml
+    __metaclass__ = autoxml.autoxml
     
-    s_Package = [xmlfile.String, xmlfile.mandatory]
-    a_versionFrom = [xmlfile.String, xmlfile.optional]
-    a_versionTo = [xmlfile.String, xmlfile.optional]
-    a_releaseFrom = [xmlfile.String, xmlfile.optional]
-    a_releaseTo = [xmlfile.String, xmlfile.optional]
+    s_Package = [autoxml.String, autoxml.mandatory]
+    a_versionFrom = [autoxml.String, autoxml.optional]
+    a_versionTo = [autoxml.String, autoxml.optional]
+    a_releaseFrom = [autoxml.String, autoxml.optional]
+    a_releaseTo = [autoxml.String, autoxml.optional]
 
     def __str__(self):
         s = self.package

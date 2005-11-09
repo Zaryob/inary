@@ -15,32 +15,32 @@
 
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 
-import pisi.xmlfile as xmlfile
+import pisi.autoxml as autoxml
 from pisi.util import Checks
 import pisi.lockeddbshelve as shelve
 
 class File:
     """File holds the information for a File node/tag in files.xml"""
 
-    __metaclass__ = xmlfile.autoxml
+    __metaclass__ = autoxml.autoxml
 
-    t_Path = [ xmlfile.String, xmlfile.mandatory ]
-    t_Type = [ xmlfile.String, xmlfile.mandatory ]
-    t_Size = [ xmlfile.Long, xmlfile.optional ]
-    t_Hash = [ xmlfile.String, xmlfile.optional, "SHA1Sum" ]
+    t_Path = [ autoxml.String, autoxml.mandatory ]
+    t_Type = [ autoxml.String, autoxml.mandatory ]
+    t_Size = [ autoxml.Long, autoxml.optional ]
+    t_Hash = [ autoxml.String, autoxml.optional, "SHA1Sum" ]
 
     def __str__(self):
         s = "%s, type: %s, size: %s, sha1sum: %s" %  (self.path, self.type,
                                                       self.size, self.hash)
         return s
 
-class Files(xmlfile.XmlFile):
+class Files(autoxml.XmlFile):
 
-    __metaclass__ = xmlfile.autoxml
+    __metaclass__ = autoxml.autoxml
 
     tag = "Files"
 
-    t_List = [ [File], xmlfile.optional, "File"]
+    t_List = [ [File], autoxml.optional, "File"]
 
     def append(self, fileinfo):
         self.list.append(fileinfo)

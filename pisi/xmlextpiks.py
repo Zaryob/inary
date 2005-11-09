@@ -14,17 +14,12 @@
 #           Gurer Ozen <gurer@uludag.org.tr>
 
 """
- xmlext is a helper module for accessing XML files using
- xml.dom.minidom.
+ some helper functions for high-level access to XML structures
 
- XmlFile class further abstracts a dom object using the
- high-level dom functions provided in xmlext module (and sorely lacking
- in xml.dom :( )
+ this implementation uses piksemel, a fast C-based XML library
 
  function names are mixedCase for compatibility with minidom,
- an 'old library'
-
- note: this is a particularly inefficient implementation of xmlext.
+ an old library
 """
 
 import gettext
@@ -32,6 +27,7 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
+import piksemel as iks
 
 class XmlError(pisi.Error):
     "named this way because the class if mostly used with an import *"

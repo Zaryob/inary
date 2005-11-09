@@ -26,8 +26,8 @@ _ = __trans.ugettext
 from os.path import basename
 
 # pisi modules
-import pisi.xmlfile as xmlfile
 from pisi.xmlfile import XmlFile
+import pisi.autoxml as autoxml
 import pisi.context as ctx
 from pisi.dependency import Dependency
 import pisi.dependency
@@ -37,12 +37,12 @@ import pisi.util as util
 class Error(pisi.Error):
     pass
 
-__metaclass__ = xmlfile.autoxml
+__metaclass__ = autoxml.autoxml
 
 class Packager:
 
-    t_Name = [xmlfile.Text, xmlfile.mandatory]
-    t_Email = [xmlfile.String, xmlfile.mandatory]
+    t_Name = [autoxml.Text, autoxml.mandatory]
+    t_Email = [autoxml.String, autoxml.mandatory]
 
     def __str__(self):
         s = "%s <%s>" % (self.name, self.email)
@@ -51,9 +51,9 @@ class Packager:
 
 class AdditionalFile:
 
-    s_Filename = [xmlfile.String, xmlfile.mandatory]
-    a_target = [xmlfile.String, xmlfile.mandatory]
-    a_permission = [xmlfile.String, xmlfile.optional]
+    s_Filename = [autoxml.String, autoxml.mandatory]
+    a_target = [autoxml.String, autoxml.mandatory]
+    a_permission = [autoxml.String, autoxml.optional]
 
     def __str__(self):
         s = "%s -> %s " % (self.filename, self.target)
@@ -64,10 +64,10 @@ class AdditionalFile:
         
 class Patch:
     
-    s_Filename = [xmlfile.String, xmlfile.mandatory]
-    a_compressionType = [xmlfile.String, xmlfile.optional]
-    a_level = [xmlfile.Integer, xmlfile.optional]
-    a_target = [xmlfile.String, xmlfile.optional]
+    s_Filename = [autoxml.String, autoxml.mandatory]
+    a_compressionType = [autoxml.String, autoxml.optional]
+    a_level = [autoxml.Integer, autoxml.optional]
+    a_target = [autoxml.String, autoxml.optional]
 
     #FIXME: what's the cleanest way to give a default value for reading level?
     #def decode_hook(self, node, errs, where):
@@ -87,10 +87,10 @@ class Patch:
 
 class Update:
     
-    a_release = [xmlfile.String, xmlfile.mandatory]
-    t_Date = [xmlfile.String, xmlfile.mandatory]
-    t_Version = [xmlfile.String, xmlfile.mandatory]
-    t_Type = [xmlfile.String, xmlfile.optional]
+    a_release = [autoxml.String, autoxml.mandatory]
+    t_Date = [autoxml.String, autoxml.mandatory]
+    t_Version = [autoxml.String, autoxml.mandatory]
+    t_Type = [autoxml.String, autoxml.optional]
 
     def __str__(self):
         s = self.date
@@ -103,8 +103,8 @@ class Update:
 
 class Path:
 
-    s_Path = [xmlfile.String, xmlfile.mandatory]
-    a_fileType =  [xmlfile.String, xmlfile.optional]
+    s_Path = [autoxml.String, autoxml.mandatory]
+    a_fileType =  [autoxml.String, autoxml.optional]
 
     def __str__(self):
         s = self.path
@@ -114,8 +114,8 @@ class Path:
 
 class ComarProvide:
 
-    s_om = [xmlfile.String, xmlfile.mandatory]
-    a_script = [xmlfile.String, xmlfile.mandatory]
+    s_om = [autoxml.String, autoxml.mandatory]
+    a_script = [autoxml.String, autoxml.mandatory]
 
     def __str__(self):
         # FIXME: descriptive enough?
@@ -126,9 +126,9 @@ class ComarProvide:
         
 class Archive:
 
-    s_uri = [ xmlfile.String, xmlfile.mandatory ]
-    a_type =[ xmlfile.String, xmlfile.mandatory ]
-    a_sha1sum =[ xmlfile.String, xmlfile.mandatory ]
+    s_uri = [ autoxml.String, autoxml.mandatory ]
+    a_type =[ autoxml.String, autoxml.mandatory ]
+    a_sha1sum =[ autoxml.String, autoxml.mandatory ]
 
     def decode_hook(self, node, errs, where):
         self.name = basename(self.uri)
@@ -140,38 +140,38 @@ class Archive:
 
 class Source:
 
-    t_Name = [xmlfile.String, xmlfile.mandatory]
-    t_Homepage = [xmlfile.String, xmlfile.optional]
-    t_Packager = [Packager, xmlfile.mandatory]
-    t_Summary = [xmlfile.LocalText, xmlfile.mandatory]
-    t_Description = [xmlfile.LocalText, xmlfile.mandatory]
-    t_IsA = [ [xmlfile.String], xmlfile.mandatory]
-    t_PartOf = [xmlfile.String, xmlfile.mandatory]
-    t_Icon = [ xmlfile.String, xmlfile.optional]
-    t_License = [ [xmlfile.String], xmlfile.mandatory]
-    t_Archive = [Archive, xmlfile.mandatory ]
-    t_Patches = [ [Patch], xmlfile.optional]
-    t_BuildDependencies = [ [Dependency], xmlfile.optional]
-    t_Version = [ xmlfile.String, xmlfile.optional]
-    t_Release = [ xmlfile.String, xmlfile.optional]
+    t_Name = [autoxml.String, autoxml.mandatory]
+    t_Homepage = [autoxml.String, autoxml.optional]
+    t_Packager = [Packager, autoxml.mandatory]
+    t_Summary = [autoxml.LocalText, autoxml.mandatory]
+    t_Description = [autoxml.LocalText, autoxml.mandatory]
+    t_IsA = [ [autoxml.String], autoxml.mandatory]
+    t_PartOf = [autoxml.String, autoxml.mandatory]
+    t_Icon = [ autoxml.String, autoxml.optional]
+    t_License = [ [autoxml.String], autoxml.mandatory]
+    t_Archive = [Archive, autoxml.mandatory ]
+    t_Patches = [ [Patch], autoxml.optional]
+    t_BuildDependencies = [ [Dependency], autoxml.optional]
+    t_Version = [ autoxml.String, autoxml.optional]
+    t_Release = [ autoxml.String, autoxml.optional]
 
 
 class Package:
 
-    t_Name = [ xmlfile.String, xmlfile.mandatory ]
-    t_Summary = [ xmlfile.LocalText, xmlfile.optional ]
-    t_Description = [ xmlfile.LocalText, xmlfile.optional ]
-    t_IsA = [ [xmlfile.String], xmlfile.optional]
-    t_PartOf = [xmlfile.String, xmlfile.optional]
-    t_License = [ [xmlfile.String], xmlfile.optional]
-    t_Icon = [ xmlfile.String, xmlfile.optional]
-    t_RuntimeDependencies = [ [Dependency], xmlfile.optional]
-    t_Files = [ [Path], xmlfile.optional]    
-    t_Conflicts = [ [xmlfile.String], xmlfile.optional, "Conflicts/Package"]
-    t_ProvidesComar = [ [ComarProvide], xmlfile.optional, "Provides/COMAR"]
-    #t_RequiresComar = [ [xmlfile.String], xmlfile.mandatory, "Requires/COMAR"]
-    t_AdditionalFiles = [ [AdditionalFile], xmlfile.optional]
-    t_History = [ [Update], xmlfile.optional]
+    t_Name = [ autoxml.String, autoxml.mandatory ]
+    t_Summary = [ autoxml.LocalText, autoxml.optional ]
+    t_Description = [ autoxml.LocalText, autoxml.optional ]
+    t_IsA = [ [autoxml.String], autoxml.optional]
+    t_PartOf = [autoxml.String, autoxml.optional]
+    t_License = [ [autoxml.String], autoxml.optional]
+    t_Icon = [ autoxml.String, autoxml.optional]
+    t_RuntimeDependencies = [ [Dependency], autoxml.optional]
+    t_Files = [ [Path], autoxml.optional]    
+    t_Conflicts = [ [autoxml.String], autoxml.optional, "Conflicts/Package"]
+    t_ProvidesComar = [ [ComarProvide], autoxml.optional, "Provides/COMAR"]
+    #t_RequiresComar = [ [autoxml.String], autoxml.mandatory, "Requires/COMAR"]
+    t_AdditionalFiles = [ [AdditionalFile], autoxml.optional]
+    t_History = [ [Update], autoxml.optional]
     
     def pkg_dir(self):
         packageDir = self.name + '-' \
@@ -198,18 +198,18 @@ class Package:
 
 
 class SpecFile(XmlFile):
-    __metaclass__ = xmlfile.autoxml #needed when we specify a superclass
+    __metaclass__ = autoxml.autoxml #needed when we specify a superclass
 
     tag = "PISI"
 
-    t_Source = [ Source, xmlfile.mandatory]
-    t_Packages = [ [Package], xmlfile.mandatory, "Package"]
-    t_History = [ [Update], xmlfile.mandatory]
+    t_Source = [ Source, autoxml.mandatory]
+    t_Packages = [ [Package], autoxml.mandatory, "Package"]
+    t_History = [ [Update], autoxml.mandatory]
 
     #we're not doing this with the init hook right now
     #def init(self, tag = "PISI"):
         #ignore tag
-        #XmlFile.__init__(self, tag)
+        #autoxml.__init__(self, tag)
 
     def read_hook(self, errs):
         """Read PSPEC file"""
