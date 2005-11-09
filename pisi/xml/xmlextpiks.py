@@ -154,12 +154,14 @@ def addNode(node, tagpath, newnode = None, branch=True):
         return addTagPath(node, tags, newnode)
 
     return node
+    
+# cannot be implemented with piksemel
+#def newNode(node, tag):
+#    return Node(tag)
 
-def newNode(node, tag):
-    return Node(tag)
-
-def newTextNode(node, text):
-    return Node(text)
+# cannot be implemented with piksemel :(
+#def newTextNode(node, text):
+#    return Node(text)
 
 def addText(node, tagPath, text, branch = True):
     newnode = newTextNode(node, text)

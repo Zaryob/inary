@@ -12,7 +12,8 @@
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 
 try:
-    from xmlextpiks import *
+    #from xmlextpiks import *
+    zimbabwe
 except:
     print 'xmlext: piksemel implementation cannot be loaded, falling back to minidom'
     from xmlextmdom import *

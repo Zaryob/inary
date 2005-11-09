@@ -42,6 +42,4 @@ class XmlExtTestCase(testcase.TestCase):
         reada = xmlext.getAllNodes(node, 'team/coder')
         self.assertEqual(len(reada), 3)
 
-        pass
-
 suite = unittest.makeSuite(XmlExtTestCase)

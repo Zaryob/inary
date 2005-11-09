@@ -12,8 +12,9 @@
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 
 try:
-    from xmlextpiks import *
-    from xmlfilepiks import *
+    #from xmlextpiks import *
+    #from xmlfilepiks import *
+    horagata
 except:
     print 'xmlfile: piksemel implementation cannot be loaded, falling back to minidom'
     from xmlfilemdom import *

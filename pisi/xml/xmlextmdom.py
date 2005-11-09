@@ -15,11 +15,9 @@
 
 """
  xmlext is a helper module for accessing XML files using
- xml.dom.minidom.
-
- XmlFile class further abstracts a dom object using the
- high-level dom functions provided in xmlext module (and sorely lacking
- in xml.dom :( )
+ xml.dom.minidom . It is a convenient wrapper for some
+ DOM functions, and provides path based get/add functions
+ as in KDE API.
 
  function names are mixedCase for compatibility with minidom,
  an 'old library'
@@ -32,12 +30,36 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import xml.dom.minidom as mdom
+from xml.parsers.expat import ExpatError
 
 import pisi
 
 class XmlError(pisi.Error):
     "named this way because the class if mostly used with an import *"
     pass
+
+# Document wrappers
+
+def newDocument(tag):
+    impl = mdom.getDOMImplementation()
+    dom = impl.createDocument(None, tag, None)
+    return dom.documentElement
+
+def parse(filename):
+    try:
+        dom = mdom.parse(filename)
+        return dom.documentElement
+    except ExpatError, inst:
+        raise Error(_("File '%s' has invalid XML: %s\n") % (fileName,
+                                                            str(inst)))
+
+def newNode(node, tag):
+    return node.ownerDocument.createElement(tag)
+
+def newTextNode(node, text):
+    return node.ownerDocument.createTextNode(text)
+
+# Node related wrappers
 
 def getNodeAttribute(node, attrname):
     """get named attribute from DOM node"""
@@ -85,10 +107,16 @@ def getNode(node, tagpath):
 
     # iterative code to search for the path
     for tag in tags:
+        currentNode = None
         for child in node.childNodes:
             if child.nodeType == node.ELEMENT_NODE and child.tagName == tag:
-                return child
-        return None
+                currentNode = child
+                break
+        if not currentNode:
+            return None
+        else:
+            node = currentNode
+    return currentNode
 
 def getAllNodes(node, tagPath):
     """retrieve all nodes that match a given tag path."""
@@ -164,12 +192,6 @@ def addNode(node, tagpath, newnode = None, branch=True):
         return addTagPath(node, tags, newnode)
 
     return node
-
-def newNode(node, tag):
-    return node.ownerDocument.createElement(tag)
-
-def newTextNode(node, text):
-    return node.ownerDocument.createTextNode(text)
 
 def addText(node, tagPath, text, branch = True):
     newnode = newTextNode(node, text)

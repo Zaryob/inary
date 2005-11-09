@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-11-09, 19:48:27 -->
+<!-- Saved: 2005-11-09, 22:55:46 -->
 <!-- Copyright (C) 2005 PiSi Development Team,  -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -370,31 +370,43 @@
     </Source>
     <Source>
       <Dir>pisi</Dir>
+      <Dir>xml</Dir>
       <Name>xmlextmdom.py</Name>
     </Source>
     <Source>
       <Dir>pisi</Dir>
-      <Name>xmlext.py</Name>
-    </Source>
-    <Source>
-      <Dir>pisi</Dir>
-      <Name>xmlextpiks.py</Name>
-    </Source>
-    <Source>
-      <Dir>pisi</Dir>
-      <Name>xmlfile.py</Name>
-    </Source>
-    <Source>
-      <Dir>pisi</Dir>
-      <Name>xmlfilepiks.py</Name>
-    </Source>
-    <Source>
-      <Dir>pisi</Dir>
+      <Dir>xml</Dir>
       <Name>xmlfilemdom.py</Name>
     </Source>
     <Source>
       <Dir>pisi</Dir>
+      <Dir>xml</Dir>
+      <Name>xmlextpiks.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Dir>xml</Dir>
+      <Name>xmlfilepiks.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Dir>xml</Dir>
+      <Name>xmlext.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Dir>xml</Dir>
       <Name>autoxml.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Dir>xml</Dir>
+      <Name>xmlfile.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Dir>xml</Dir>
+      <Name>__init__.py</Name>
     </Source>
   </Sources>
   <Forms>
@@ -438,9 +450,9 @@
   </Vcs>
   <FiletypeAssociations>
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
     <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
     <FiletypeAssociation pattern="*.py" type="SOURCES" />
   </FiletypeAssociations>
 </Project>
