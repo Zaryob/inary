@@ -47,7 +47,6 @@ def register(pcomar, name, path):
         else:
             raise Error, _("COMAR.register ERROR!")
 
-
 def run_postinstall(package_name):
     "run postinstall scripts trough COMAR"
 
