@@ -121,7 +121,7 @@ def addTagPath(node, tags, newnode=None):
         node.appendChild(newnode)
     return node    
 
-def addNode(node, tagpath, newnode = None):
+def addNode(node, tagpath, newnode = None, branch=True):
     """add a new node at the end of the tree and returns it
     if newnode is given adds that node, too."""
 
@@ -137,7 +137,12 @@ def addNode(node, tagpath, newnode = None):
 
     # iterative code to search for the path
 
-    while len(tags) > 1:
+    if branch:
+        rem = 1
+    else:
+        rem = 0
+
+    while len(tags) > rem:
         tag = tags.pop(0)
         nodeList = getTagByName(node, tag)
         if len(nodeList) == 0:          # couldn't find
@@ -157,6 +162,6 @@ def newNode(node, tag):
 def newTextNode(node, text):
     return node.ownerDocument.createTextNode(text)
 
-def addText(node, tagPath, text):
+def addText(node, tagPath, text, branch = True):
     newnode = newTextNode(node, text)
-    addNode(node, tagPath, newnode)
+    addNode(node, tagPath, newnode, branch)
