@@ -21,7 +21,7 @@ _ = __trans.ugettext
 import pisi.context as ctx
 import pisi.packagedb as packagedb
 from pisi.version import Version
-import pisi.autoxml as autoxml
+import pisi.xml.autoxml as autoxml
 from pisi.util import Checks
 
 class Dependency:
