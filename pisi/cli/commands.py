@@ -903,20 +903,26 @@ Finds the installed package which contains the specified file.
     def options(self):
         self.parser.add_option("-l", "--long", action="store_true",
                                default=False, help="show in long format")
+        self.parser.add_option("-f", "--fuzzy", action="store_true",
+                               default=False, help=_("fuzzy search"))
     
     def search_exact(path):
-        import os.path
-
+        files = []
         path = path.lstrip('/') #FIXME: this shouldn't be necessary :/
-        files = ctx.filesdb.get_files(path)
+
+        if not ctx.config.options.fuzzy:
+            if ctx.filesdb.has_file(path):
+                files.append(ctx.filesdb.get_file(path))
+        else:
+            files = ctx.filesdb.get_files(path)
 
         if files:
             for (pkg_name, file_info) in files:
-                #FIXME: there can be a prettier info line
+                #FIXME: files of the same package can be grouped under package name
                 ctx.ui.info(_('Package: %s has File: %s') % (pkg_name, file_info.path))
                 if ctx.config.options.long:
                     ctx.ui.info(_('Type: %s, Hash: %s') % (file_info.type,
-							   file_info.hash) )
+                                                           file_info.hash))
         else:
             ctx.ui.error(_('Path %s does not belong to an installed package') % path)
     search_exact=staticmethod(search_exact)

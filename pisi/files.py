@@ -68,12 +68,13 @@ class FilesDB(shelve.LockedDBShelf):
         else:
             return self[path]
 
-    def get_files(self, file):
-        infos = []
-        file = str(file)
+    def get_files(self, glob):
+        import fnmatch
 
+        glob = str(glob)
+        infos = []
         for key in self.keys():
-            if key.find(file) >= 0:
+            if fnmatch.fnmatch(key, glob):
                 infos.append(self[key])
 
         return infos
