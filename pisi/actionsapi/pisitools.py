@@ -179,7 +179,7 @@ def dosed(sourceFiles, findPattern, replacePattern = ''):
 
     for sourceFile in glob.glob(sourceFiles):
         if can_access_file(sourceFile):
-            for line in fileinput.input(str(sourceFile), inplace = 1):
+            for line in fileinput.input(sourceFile, inplace = 1):
                 #FIXME: In-place filtering is disabled when standard input is read
                 line = re.sub(findPattern, replacePattern, line)
                 sys.stdout.write(line)
