@@ -16,7 +16,8 @@ import types
 
 import pisi
 import pisi.api
-from pisi import xmlfile
+from pisi.xml import xmlfile
+from pisi.xml import autoxml
 import pisi.util as util
 
 class AutoXmlTestCase(unittest.TestCase):
@@ -24,21 +25,21 @@ class AutoXmlTestCase(unittest.TestCase):
     def setUp(self):
 
         class OtherInfo:
-            __metaclass__ = xmlfile.autoxml
-            t_BirthDate = [types.StringType, xmlfile.mandatory]
-            t_Interest = [types.StringType, xmlfile.optional]
-            t_CodesWith = [ [types.StringType], xmlfile.optional, 'CodesWith/Person']
+            __metaclass__ = autoxml.autoxml
+            t_BirthDate = [types.StringType, autoxml.mandatory]
+            t_Interest = [types.StringType, autoxml.optional]
+            t_CodesWith = [ [types.StringType], autoxml.optional, 'CodesWith/Person']
         
         class A(xmlfile.XmlFile):
-            __metaclass__ = xmlfile.autoxml
-            t_Name = [types.StringType, xmlfile.mandatory]
-            t_Description = [xmlfile.LocalText, xmlfile.mandatory]
-            t_Number = [types.IntType, xmlfile.optional]
-            t_Email = [types.StringType, xmlfile.optional]
-            a_href = [types.StringType, xmlfile.mandatory]
-            t_Projects = [ [types.StringType], xmlfile.mandatory, 'Project']
-            t_OtherInfo = [ OtherInfo, xmlfile.optional ]
-            s_Comment = [ xmlfile.Text, xmlfile.mandatory]
+            __metaclass__ = autoxml.autoxml
+            t_Name = [types.StringType, autoxml.mandatory]
+            t_Description = [autoxml.LocalText, autoxml.mandatory]
+            t_Number = [types.IntType, autoxml.optional]
+            t_Email = [types.StringType, autoxml.optional]
+            a_href = [types.StringType, autoxml.mandatory]
+            t_Projects = [ [types.StringType], autoxml.mandatory, 'Project']
+            t_OtherInfo = [ OtherInfo, autoxml.optional ]
+            s_Comment = [ autoxml.Text, autoxml.mandatory]
         
         self.A = A
 
@@ -87,7 +88,7 @@ class AutoXmlTestCase(unittest.TestCase):
 class LocalTextTestCase(unittest.TestCase):
 
     def setUp(self):
-        a = xmlfile.LocalText()
+        a = autoxml.LocalText()
         a['tr'] = u'Zibidi'
         a['en'] = u'ingiliz hiyarlari ne anlar zibididen'
         self.a = a
