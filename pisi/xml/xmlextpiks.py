@@ -54,9 +54,9 @@ def getNodeText(node, tagpath = ""):
         return None
     except AttributeError: # no node by that name
         return None
-    if child.nodeType == CDATA: #FIXME: ??? TEXT type?
-        # in any case, strip whitespaces...
-        return child.getTagData().strip()
+    if child.type() == CDATA: #FIXME: ??? TEXT type?
+        # in any case, strip whitespaces... :/ you don't like it?
+        return child.data().strip()
     else:
         raise XmlError(_("getNodeText: Expected text node, got something else!"))
 
@@ -76,10 +76,16 @@ def getNode(node, tagpath):
 
     # iterative code to search for the path
     for tag in tags:
-        for child in node:
-            if child.type == TAG and child.name == tag:
-                return child
-        return None
+        currentNode = None
+        for child in node.tags():
+            if child.name() == tag:
+                currentNode = child
+                break
+        if not currentNode:
+            return None
+        else:
+            node = currentNode
+    return currentNode
 
 def getAllNodes(node, tagPath):
     """retrieve all nodes that match a given tag path."""
@@ -154,6 +160,11 @@ def addNode(node, tagpath, newnode = None, branch=True):
         return addTagPath(node, tags, newnode)
 
     return node
+
+def addText(node, tagPath, text, branch = True):
+    node = addNode(node, tagPath, branch = branch)
+    return node.appendData(text)
+
     
 # cannot be implemented with piksemel
 #def newNode(node, tag):
@@ -162,8 +173,3 @@ def addNode(node, tagpath, newnode = None, branch=True):
 # cannot be implemented with piksemel :(
 #def newTextNode(node, text):
 #    return Node(text)
-
-
-def addText(node, tagPath, text, branch = True):
-    node = addNode(node, tagPath, branch = branch)
-    return node.appendData(text)
