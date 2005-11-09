@@ -701,7 +701,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             if l and len(l) > 0:
                 for item in l:
                     if list_tagpath:
-                        listnode = addNode(node, list_tagpath)
+                        listnode = addNode(node, list_tagpath, branch = False)
                     else:
                         listnode = node
                     encode_item(listnode, item, errs)
