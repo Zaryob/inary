@@ -35,6 +35,10 @@ import Ft
 from Ft.Xml.Domlette import implementation
 from Ft.Xml import ParsePath
 from Ft.Xml.Domlette import NonvalidatingReader
+from xml.dom import XHTML_NAMESPACE, XML_NAMESPACE
+
+XHTML_NS = unicode(XHTML_NAMESPACE)
+XML_NS = unicode(XML_NAMESPACE)
 
 import pisi
 
@@ -67,10 +71,10 @@ def newTextNode(node, text):
 
 def getNodeAttribute(node, attrname):
     """get named attribute from DOM node"""
-    if not node.hasAttributeNS(None, attrname):
+    if not node.hasAttributeNS(XML_NS, attrname):
         return None
     else:
-        return node.getAttributeNS(None, attrname)
+        return node.getAttributeNS(XML_NS, attrname)
 
 def getChildElts(node):
     """get only child elements"""

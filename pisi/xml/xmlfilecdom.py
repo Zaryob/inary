@@ -36,6 +36,10 @@ from Ft.Xml.Domlette import implementation
 from Ft.Xml.Domlette import NonvalidatingReader
 from Ft.Xml import Parse, ParsePath
 from Ft.Xml.Domlette import Print, PrettyPrint
+from xml.dom import XHTML_NAMESPACE, XML_NAMESPACE
+
+XHTML_NS = unicode(XHTML_NAMESPACE)
+XML_NS = unicode(XML_NAMESPACE)
 
 import pisi
 

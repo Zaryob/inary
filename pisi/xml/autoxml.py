@@ -101,7 +101,7 @@ class LocalText(dict):
         assert self.tag != ''
         for key in self.iterkeys():
             newnode = newNode(node, self.tag)
-            newnode.setAttributeNS(None, 'xml:lang', key)     
+            newnode.setAttributeNS(XML_NS, 'xml:lang', key)     
             newtext = newTextNode(node, self[key])
             newnode.appendChild(newtext)
             node.appendChild(newnode)
@@ -423,7 +423,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             return getNodeAttribute(node, attr)
         def writetext(node, attr, text):
             #print 'write attr', attr, text
-            node.setAttributeNS(None, attr, text)
+            node.setAttributeNS(XML_NS, attr, text)
         anonfuns = cls.gen_anon_basic(attr, spec, readtext, writetext)
         return cls.gen_named_comp(attr, spec, anonfuns)
 
