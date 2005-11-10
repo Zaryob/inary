@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-11-09, 22:55:46 -->
+<!-- Saved: 2005-11-10, 04:01:23 -->
 <!-- Copyright (C) 2005 PiSi Development Team,  -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -283,10 +283,6 @@
       <Name>api.py</Name>
     </Source>
     <Source>
-      <Dir>tests</Dir>
-      <Name>xmlfiletests.py</Name>
-    </Source>
-    <Source>
       <Name>TODO</Name>
     </Source>
     <Source>
@@ -408,6 +404,20 @@
       <Dir>xml</Dir>
       <Name>__init__.py</Name>
     </Source>
+    <Source>
+      <Dir>tests</Dir>
+      <Name>autoxmltests.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Dir>xml</Dir>
+      <Name>xmlfilecdom.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Dir>xml</Dir>
+      <Name>xmlextcdom.py</Name>
+    </Source>
   </Sources>
   <Forms>
   </Forms>
@@ -449,10 +459,10 @@
     <VcsOtherData>{'standardLayout': 1}</VcsOtherData>
   </Vcs>
   <FiletypeAssociations>
-    <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.ui" type="FORMS" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
-    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
     <FiletypeAssociation pattern="*.py" type="SOURCES" />
+    <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
   </FiletypeAssociations>
 </Project>
