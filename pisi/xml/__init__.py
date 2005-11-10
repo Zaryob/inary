@@ -17,13 +17,7 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-
 import pisi
-#import pisi.context as ctx
-#from pisi.ui import UI
-#import pisi.ui as ui
-#from pisi.cli.colors import colorize
-
 
 class Error(pisi.Error):
     pass

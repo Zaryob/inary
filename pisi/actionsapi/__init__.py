@@ -10,9 +10,6 @@
 # Please read the COPYING file.
 #
 
-# pisi.actionsapi version
-__version__ = '1.0_alpha8'
-
 import pisi
 
 class Error(pisi.Error):

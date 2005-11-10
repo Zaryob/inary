@@ -10,17 +10,12 @@
 # Please read the COPYING file.
 #
 
-# pisi.cli package version
-__version__ = "1.0_alpha8"
-
 import sys
 import locale
-
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
-
 
 import pisi
 import pisi.context as ctx
