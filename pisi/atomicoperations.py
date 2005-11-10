@@ -324,7 +324,7 @@ class Remove(AtomicOperation):
         self.remove_db()
         self.remove_pisi_files()
         ctx.ui.status()
-        ctx.ui.notify(pisi.ui.removed, package = self.pkginfo, files = self.files)
+        ctx.ui.notify(pisi.ui.removed, package = self.package, files = self.files)
 
     def check_dependencies(self):
         #we only have to check the dependencies to ensure the
