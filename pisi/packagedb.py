@@ -163,6 +163,6 @@ def finalize_db():
 
     if inst_packagedb:
         inst_packagedb.close()
-        inst_packagedb = None\
+        inst_packagedb = None
     
     packagedbs.clear()
