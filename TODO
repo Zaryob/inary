@@ -38,6 +38,7 @@ Legend:
  + Package/Files
 
 2. Alpha
+
  + multi-package dependency analysis (eray)
    + design a package operation planner
    + install/remove operations (eray)
@@ -102,6 +103,10 @@ Legend:
 
  * finished tasks
 
+ + refactor xml support and implement multiple backends
+   + 4suite support (initial patch by faik, completed by eray)
+   + piksemel support (eray)
+   + fix autoxml implementation to use 4suite by default
  + partial caching and automatic resume for file download (meren)
    + use a '.part' extension
  + search-file command (eray)
@@ -172,13 +177,13 @@ Legend:
      - in particular evaluate soundex and metaphone
      - research if there are language independent phonetic encodings
      - implement as an option (or make it possible to turn it off if it works well :))
-   - fault tolerant search in package names (bir sekilde)
+   - fault tolerant search in package names (somehow)
  / overhaul installdb (try to merge its use with packagedb) (eray)
  / verify metodlari
    + SpecFile
    + MetaData
    + Files
-   - Index (o kadar onemli degil)
+   - Index (somebody should write one :} )
  ? non-interactive use (baris)
 
 5. Post Release
@@ -201,4 +206,3 @@ Legend:
    - cross-platform building support
  - incremental build/fetch for repository index (pisi-index.xml)
    - diffsets (caglar)
-
