@@ -71,10 +71,10 @@ def newTextNode(node, text):
 
 def getNodeAttribute(node, attrname):
     """get named attribute from DOM node"""
-    if not node.hasAttributeNS(XML_NS, attrname):
+    if not node.hasAttributeNS(None, attrname):
         return None
     else:
-        return node.getAttributeNS(XML_NS, attrname)
+        return node.getAttributeNS(None, attrname)
 
 def getChildElts(node):
     """get only child elements"""
