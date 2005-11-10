@@ -53,6 +53,7 @@ class XmlFile(object):
     def unlink(self):
         """deallocate DOM structure"""
         self.doc.unlink()
+        del self.doc
 
     def rootNode(self):
         """returns root document element"""
