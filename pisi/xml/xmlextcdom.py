@@ -24,7 +24,7 @@
  an 'old library'
 
  this implementation uses cDomlette from 4suite.org
- adapted from the minidom implementation by Faik Uygur.
+ adapted from the minidom implementation by Faik Uygur and fixed by Eray
 """
 
 import gettext
