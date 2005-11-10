@@ -113,10 +113,12 @@ class CLI(UI):
 
             return False
             
-    def display_progress(self, pd):
+    def display_progress(self, **ka):
         out = '\r%-30.30s %3d%% %12.2f %s' % \
-            (pd['filename'], pd['percent'], pd['rate'], pd['symbol'])
+            (ka['filename'], ka['percent'], ka['rate'], ka['symbol'])
         self.output(out)
+        if ka['percent'] == 100:
+            self.output(colorize(' [complete]\n', 'gray'))
 
     def status(self, msg = None):
         if msg:

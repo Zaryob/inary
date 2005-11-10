@@ -98,6 +98,7 @@ class Fetcher:
         if self.progress:
             p = self.progress(totalsize, existsize)
             self.percent = p.update(size)
+            self.complete = False
         while chunk:
             dest.write(chunk)
             chunk = fileURI.read(bs)
@@ -113,11 +114,13 @@ class Fetcher:
             if self.progress:
                 if p.update(size):
                     self.percent = p.percent
-                    retval = {'filename': self.url.filename(), 
-                              'percent' : self.percent,
-                              'rate': self.rate,
-                              'symbol': symbol}
-                    ctx.ui.display_progress(retval)
+                    if not self.complete:
+                        ctx.ui.display_progress(filename = self.url.filename(),
+                                                percent = self.percent,
+                                                rate = self.rate,
+                                                symbol = symbol)
+                        if self.percent == 100: #FIXME: will be superseded by a
+                            self.complete = True # working progress interface
 
         dest.close()
 
