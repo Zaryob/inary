@@ -378,7 +378,8 @@ class autoxml(oo.autosuper, oo.autoprop):
             cls.__ne__ = notequal            
             
         if xmlfile_support:
-            def read(self, filename):
+            def read(self, filename, eraseDoc = False):
+                "read XML file and decode it into a python object"
                 self.readxml(filename)
                 errs = []
                 self.decode(self.rootNode(), errs)
@@ -388,14 +389,16 @@ class autoxml(oo.autosuper, oo.autoprop):
                     errs.append(_("autoxml.read: File '%s' has errors") % filename)
                     raise Error(*errs)
 
-                self.unlink()
+                if eraseDoc:
+                    self.unlink() # get rid of the tree
 
                 errs = self.errors()
                 if errs:
                     errs.append(_("autoxml.read: File '%s' has errors") % filename)
                     raise Error(*errs)
                     
-            def write(self, filename):
+            def write(self, filename, eraseDoc = False):
+                "encode the contents of the python object into an XML file"
                 errs = self.errors()
                 if errs:
                     errs.append(_("autoxml.write: object validation has failed"))
@@ -409,6 +412,8 @@ class autoxml(oo.autosuper, oo.autoprop):
                     errs.append(_("autoxml.write: File encoding '%s' has errors") % filename)
                     raise Error(*errs)
                 self.writexml(filename)
+                if eraseDoc:
+                    self.unlink() # get rid of the tree
             
             cls.read = read
             cls.write = write

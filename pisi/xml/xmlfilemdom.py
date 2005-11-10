@@ -48,26 +48,26 @@ class XmlFile(object):
     def newDocument(self):
         """clear DOM"""
         impl = mdom.getDOMImplementation()
-        self.dom = impl.createDocument(None, self.rootTag, None)
+        self.doc = impl.createDocument(None, self.rootTag, None)
 
     def unlink(self):
         """deallocate DOM structure"""
-        self.dom.unlink()
+        self.doc.unlink()
 
     def rootNode(self):
         """returns root document element"""
-        return self.dom.documentElement
+        return self.doc.documentElement
 
     def readxml(self, fileName):
         try:
-            self.dom = mdom.parse(fileName)
+            self.doc = mdom.parse(fileName)
         except ExpatError, inst:
             raise Error(_("File '%s' has invalid XML: %s\n") % (fileName,
                                                                 str(inst)))
 
     def writexml(self, fileName):
         f = codecs.open(fileName,'w', "utf-8")
-        f.write(self.dom.toprettyxml())
+        f.write(self.doc.toprettyxml())
         f.close()
 
     def verifyRootTag(self):
@@ -79,20 +79,20 @@ class XmlFile(object):
     # construction helpers
 
     def newNode(self, tag):
-        return self.dom.createElement(tag)
+        return self.doc.createElement(tag)
 
     def newTextNode(self, text):
-        return self.dom.createTextNode(text)
+        return self.doc.createTextNode(text)
 
     def newAttribute(self, attr):
-        return self.dom.createAttribute(attr)
+        return self.doc.createAttribute(attr)
 
     # read helpers
 
     def getNode(self, tagPath = ""):
         """returns the *first* matching node for given tag path."""
         self.verifyRootTag()
-        return getNode(self.dom.documentElement, tagPath)
+        return getNode(self.doc.documentElement, tagPath)
 
     def getNodeText(self, tagPath):
         """returns the text of *first* matching node for given tag path."""
@@ -104,7 +104,7 @@ class XmlFile(object):
     def getAllNodes(self, tagPath):
         """returns all nodes matching a given tag path."""
         self.verifyRootTag()
-        return getAllNodes(self.dom.documentElement, tagPath)
+        return getAllNodes(self.doc.documentElement, tagPath)
 
     def getChildren(self, tagpath):
         """ returns the children of the given path"""
@@ -133,7 +133,7 @@ class XmlFile(object):
     def addNode(self, tagPath, newnode = None):
         "this adds the newnode under given tag path"
         self.verifyRootTag()
-        return addNode(self.dom.documentElement, tagPath, newnode)
+        return addNode(self.doc.documentElement, tagPath, newnode)
 
     def addNodeUnder(self, node, tagPath, newnode = None):
         "this adds the new stuff under node and then following tag path"
@@ -142,7 +142,7 @@ class XmlFile(object):
 
     def addChild(self, newnode):
         "add a new child node right under root element document"
-        self.dom.documentElement.appendChild(newnode)
+        self.doc.documentElement.appendChild(newnode)
 
     def addText(self, node, text):
         "add text to node"
