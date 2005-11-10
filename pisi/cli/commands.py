@@ -810,11 +810,12 @@ Gives a brief list of PiSi components published in the repository.
             if self.options.long:
                 ctx.ui.info(unicode(package))
             else:
-                pstr = p
+                lenp = len(p)
                 if p in installed_list:
-                    pstr = colorize(p, "cyan")
-                ctx.ui.info('%15s - %s ' % (pstr, unicode(package.summary)))
-                
+                    p = colorize(p, 'cyan')
+                p = p + ' ' * max(0, 15 - lenp)
+                ctx.ui.info('%s - %s ' % (p, unicode(package.summary)))
+
 
 class ListUpgrades(Command):
     """List packages to be upgraded
