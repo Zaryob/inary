@@ -15,5 +15,8 @@ try:
     zimbabwe # comment out to disable piks
     from xmlextpiks import *
 except:
-    print 'xmlext: piksemel implementation cannot be loaded, falling back to minidom'
-    from xmlextmdom import *
+    try:
+        from xmlextcdom import  *
+    except:
+        print 'xmlext: cDomlette/piksemel implementation cannot be loaded, falling back to minidom'
+        from xmlextmdom import *

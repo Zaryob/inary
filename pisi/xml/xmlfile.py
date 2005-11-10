@@ -13,8 +13,10 @@
 
 try:
     horagata # comment out to disable piks
-    from xmlextpiks import *
-    from xmlfilepiks import *
+    #from xmlfilepiks import *
 except:
-    print 'xmlfile: piksemel implementation cannot be loaded, falling back to minidom'
-    from xmlfilemdom import *
+    try:
+        from xmlfilecdom import *
+    except:
+        print 'xmlext: cDomlette/piksemel implementation cannot be loaded, falling back to minidom'
+        from xmlfilemdom import *

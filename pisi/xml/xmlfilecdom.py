@@ -10,22 +10,34 @@
 # Please read the COPYING file.
 #
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
-#           Gurer Ozen <gurer@uludag.org.tr>
 #           Baris Metin <baris@uludag.org.tr
+#           Faik Uygur <faikuygur@gmail.com>
 
 """
  XmlFile class further abstracts a dom object using the
- high-level dom functions provided in xmlext module
+ high-level dom functions provided in xmlext module (and sorely lacking
+ in xml.dom :( )
 
- this implementation uses piksemel, a fast C-based XML library
+ function names are mixedCase for compatibility with minidom,
+ an 'old library'
+
+ this implementation uses cDomlette from 4suite.org
+ adapted from the minidom implementation by Faik Uygur.
 """
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
+import codecs
+
+import Ft
+from Ft.Xml.Domlette import implementation
+from Ft.Xml.Domlette import NonvalidatingReader
+from Ft.Xml import Parse, ParsePath
+from Ft.Xml.Domlette import Print, PrettyPrint
+
 import pisi
-from piksemel import *
 
 class Error(pisi.Error):
     "named this way because the class if mostly used with an import *"
@@ -40,26 +52,27 @@ class XmlFile(object):
 
     def newDocument(self):
         """clear DOM"""
-        self.doc = newDocument(self.rootTag)
+        self.doc = implementation.createDocument(None, self.rootTag, None)
 
     def unlink(self):
         """deallocate DOM structure"""
-        pass # piksemel is garbage collected!
+        #del self.doc
+        self.doc = None # why?
 
     def rootNode(self):
         """returns root document element"""
-        return self.doc
+        return self.doc.documentElement
 
-    def readxml(self, fileName):
+    def readxml(self, path):
         try:
-            self.doc = parse(fileName)
-        except ParseError, inst:
-            raise XmlError(_("File '%s' has invalid XML: %s\n") % (fileName,
-                                                                   str(inst)))
+            self.doc = ParsePath(path)
+            return self.doc.documentElement
+        except Ft.FtException, e:
+            raise Error(_("File '%s' has invalid XML:") % (path, str(e)) )
 
-    def writexml(self, fileName):
-        f = codecs.open(fileName,'w', "utf-8")
-        f.write(self.doc.toPrettyString())
+    def writexml(self, path):
+        f = file(path, 'w')
+        Print(self.rootNode(), stream = f)
         f.close()
 
     def verifyRootTag(self):
@@ -70,21 +83,21 @@ class XmlFile(object):
 
     # construction helpers
 
-    #def newNode(self, tag):
-    #    return self.dom.createElement(tag)
+    def newNode(self, tag):
+        return self.dom.createElementNS(None, tag)
 
-    #def newTextNode(self, text):
-    #    return self.dom.createTextNode(text)
+    def newTextNode(self, text):
+        return self.dom.createTextNode(text)
 
-    #def newAttribute(self, attr):
-    #    return self.dom.createAttribute(attr)
+    def newAttribute(self, attr):
+        return self.dom.createAttribute(attr)
 
     # read helpers
 
     def getNode(self, tagPath = ""):
         """returns the *first* matching node for given tag path."""
         self.verifyRootTag()
-        return getNode(self.doc, tagPath)
+        return getNode(self.dom.documentElement, tagPath)
 
     def getNodeText(self, tagPath):
         """returns the text of *first* matching node for given tag path."""
@@ -96,24 +109,36 @@ class XmlFile(object):
     def getAllNodes(self, tagPath):
         """returns all nodes matching a given tag path."""
         self.verifyRootTag()
-        return getAllNodes(self.doc, tagPath)
+        return getAllNodes(self.dom.documentElement, tagPath)
 
     def getChildren(self, tagpath):
         """ returns the children of the given path"""
         node = self.getNode(tagpath)
-        return [x for x in parent.childNodes]
+        return node.childNodes
+
+    # get only elements of a given type
+    #FIXME:  this doesn't work
+    def getChildrenWithType(self, tagpath, type):
+        """ returns the children of the given path, only with given type """
+        node = self.getNode(tagpath)
+        return filter(lambda x:x.nodeType == type, node.childNodes)
 
     # get only child elements
     def getChildElts(self, tagpath):
         """ returns the children of the given path, only with given type """
-        return getChildElts(self.getNode(tagpath))
+        node = self.getNode(tagpath)
+        try:
+            return filter(lambda x:x.nodeType == x.ELEMENT_NODE,
+                          node.childNodes)
+        except AttributeError:
+            return None
 
     # write helpers
 
     def addNode(self, tagPath, newnode = None):
         "this adds the newnode under given tag path"
         self.verifyRootTag()
-        return addNode(self.doc, tagPath, newnode)
+        return addNode(self.dom.documentElement, tagPath, newnode)
 
     def addNodeUnder(self, node, tagPath, newnode = None):
         "this adds the new stuff under node and then following tag path"
@@ -126,16 +151,13 @@ class XmlFile(object):
 
     def addText(self, node, text):
         "add text to node"
-        raise Error('NOT IMPLEMENTED')
-        #node.appendChild(self.newTextNode(text))
+        node.appendChild(self.newTextNode(text))
 
     def addTextNode(self, tagPath, text):
         "add a text node with given tag path"
-        raise Error('NOT IMPLEMENTED')
-        #node = self.addNode(tagPath, self.newTextNode(text))
-        #return node
+        node = self.addNode(tagPath, self.newTextNode(text))
+        return node
 
     def addTextNodeUnder(self, node, tagPath, text):
         "add a text node under given node with tag path (phew)"
-        raise Error('NOT IMPLEMENTED')
-        #return self.addNodeUnder(node, tagPath, self.newTextNode(text))
+        return self.addNodeUnder(node, tagPath, self.newTextNode(text))

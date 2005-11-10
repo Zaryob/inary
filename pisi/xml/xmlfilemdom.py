@@ -43,9 +43,9 @@ class XmlFile(object):
 
     def __init__(self, tag):
         self.rootTag = tag
-        self.newDOM()
+        self.newDocument()
 
-    def newDOM(self):
+    def newDocument(self):
         """clear DOM"""
         impl = mdom.getDOMImplementation()
         self.dom = impl.createDocument(None, self.rootTag, None)

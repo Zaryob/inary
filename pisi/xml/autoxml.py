@@ -101,7 +101,7 @@ class LocalText(dict):
         assert self.tag != ''
         for key in self.iterkeys():
             newnode = newNode(node, self.tag)
-            newnode.setAttribute('xml:lang', key)     
+            newnode.setAttributeNS(None, 'xml:lang', key)     
             newtext = newTextNode(node, self[key])
             newnode.appendChild(newtext)
             node.appendChild(newnode)
@@ -400,7 +400,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                     errs.append(_("autoxml.write: object validation has failed"))
                     raise Error(*errs)
                 errs = []
-                self.newDOM()
+                self.newDocument()
                 self.encode(self.rootNode(), errs)
                 if hasattr(self, 'write_hook'):
                     self.write_hook(errs)
@@ -423,7 +423,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             return getNodeAttribute(node, attr)
         def writetext(node, attr, text):
             #print 'write attr', attr, text
-            node.setAttribute(attr, text)
+            node.setAttributeNS(None, attr, text)
         anonfuns = cls.gen_anon_basic(attr, spec, readtext, writetext)
         return cls.gen_named_comp(attr, spec, anonfuns)
 
@@ -637,7 +637,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             if node and obj:
                 try:
                     #FIXME: this doesn't look pretty
-                    classnode = node.ownerDocument.createElement(tag)
+                    classnode = newNode(node, tag)
                     obj.encode(classnode, errs)
                     node.appendChild(classnode)
                 except Error:
@@ -684,7 +684,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 errs.append(where + _('Mandatory list empty'))
             ix = 1
             for node in nodes:
-                dummy = node.ownerDocument.createElement("Dummy")
+                dummy = newNode(node, "Dummy")
                 dummy.appendChild(node)
                 l.append(decode_item(dummy, errs, where + unicode("[%s]" % ix)))
                 #l.append(decode_item(node, errs, where + unicode("[%s]" % ix)))
