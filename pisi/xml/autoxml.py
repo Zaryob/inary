@@ -87,7 +87,8 @@ class LocalText(dict):
                                     self.tag )
         else:
             for node in nodes:
-                lang = getNodeAttribute(node, "xml:lang")
+                #lang = getNodeAttribute(node, "xml:lang")
+                lang = node.getAttributeNS(XML_NS, 'lang')
                 c = getNodeText(node)
                 if not c:
                     errs.append(where + _("'%s' language of tag '%s' is empty") %
