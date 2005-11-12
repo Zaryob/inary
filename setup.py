@@ -64,7 +64,7 @@ setup(name="pisi",
     author_email="pisi@uludag.org.tr",
     url="http://www.uludag.org.tr/eng/pisi/",
     package_dir = {'': ''},
-    packages = ['pisi', 'pisi.cli', 'pisi.actionsapi'],
+    packages = ['pisi', 'pisi.cli', 'pisi.actionsapi', 'pisi.pxml'],
     scripts = ['pisi-cli'],
     cmdclass = {
         'install' : I18nInstall

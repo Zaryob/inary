@@ -18,7 +18,7 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
-import pisi.xmlfile
+import pisi.pxml.xmlfile as xmlfile
 
 class Error(pisi.Error):
     pass

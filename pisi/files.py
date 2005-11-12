@@ -15,7 +15,7 @@
 
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 
-import pisi.xml.autoxml as autoxml
+import pisi.pxml.autoxml as autoxml
 from pisi.util import Checks
 import pisi.lockeddbshelve as shelve
 

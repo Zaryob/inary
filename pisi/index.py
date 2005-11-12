@@ -28,8 +28,8 @@ import pisi.metadata as metadata
 import pisi.packagedb as packagedb
 import pisi.util as util
 from pisi.package import Package
-from pisi.xml.xmlfile import XmlFile
-import pisi.xml.autoxml as autoxml
+from pisi.pxml.xmlfile import XmlFile
+import pisi.pxml.autoxml as autoxml
 from pisi.uri import URI
 
 class Error(pisi.Error):
