@@ -131,4 +131,7 @@ class CLI(UI):
             msg = _('Removed %s') % keywords['package'].name
         elif event == ui.upgraded:
             msg = _('Upgraded %s') % keywords['package'].name
-        self.output(colorize(msg + '\n', 'cyan'))
+        else:
+            msg = None
+        if msg:
+            self.output(colorize(msg + '\n', 'cyan'))

@@ -50,7 +50,7 @@ class Command(object):
             return Command.cmd_dict[cmd]()
     
         if fail:
-            raise Error(_("Unrecognized command: ") + cmd)
+            raise Error(_("Unrecognized command: %s") % cmd)
         else:
             return None
     get_command = staticmethod(get_command)
