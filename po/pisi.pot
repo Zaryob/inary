@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2005-11-13 13:24+EET\n"
+"POT-Creation-Date: 2005-11-13 14:13+EET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,6 +14,37 @@ msgstr ""
 "Content-Transfer-Encoding: ENCODING\n"
 "Generated-By: pygettext.py 1.5\n"
 
+
+#: pisi-cli:31
+msgid "Keyboard Interrupt: Exiting..."
+msgstr ""
+
+#: pisi-cli:34
+msgid "Fatal Error. Program Terminated."
+msgstr ""
+
+#: pisi-cli:38
+msgid ""
+"\n"
+"Unhandled internal exception.\n"
+"Please file a bug report. (http://bugs.uludag.org.tr)"
+msgstr ""
+
+#: pisi-cli:45
+msgid "System Error. Program Terminated."
+msgstr ""
+
+#: pisi-cli:49
+msgid "Please use 'pisi help' for general help."
+msgstr ""
+
+#: pisi-cli:52
+msgid "Traceback:"
+msgstr ""
+
+#: pisi-cli:55
+msgid "Use --debug to see a traceback."
+msgstr ""
 
 #: pisi/actionsapi/autotools.py:36
 msgid ""
@@ -1479,5 +1510,79 @@ msgstr ""
 
 #: pisi/util.py:514
 msgid "Updating environment..."
+msgstr ""
+
+#: tools/repostats.py:337
+msgid ""
+"Duplicate binary packages:\n"
+"%s\n"
+"%s\n"
+msgstr ""
+
+#: tools/repostats.py:342
+msgid "Unknown file type '%s' in package '%s'"
+msgstr ""
+
+#: tools/repostats.py:398
+msgid ""
+"Duplicate source packages:\n"
+"%s\n"
+"%s\n"
+msgstr ""
+
+#: tools/repostats.py:418
+msgid "Source package '%s' has wrong date format '%s'"
+msgstr ""
+
+#: tools/repostats.py:431
+msgid "Source package '%s' has wrong release numbers"
+msgstr ""
+
+#: tools/repostats.py:435
+msgid "Source package '%s' lacks release %d"
+msgstr ""
+
+#: tools/repostats.py:443
+msgid "Source package '%s' has no first release"
+msgstr ""
+
+#: tools/repostats.py:478
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgstr ""
+
+#: tools/repostats.py:561
+msgid ""
+"Cannot parse '%s':\n"
+"%s\n"
+msgstr ""
+
+#: tools/repostats.py:639
+msgid ""
+"Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
+msgstr ""
+
+#: tools/repostats.py:640
+msgid ""
+"Dont generate the web site.\n"
+msgstr ""
+
+#: tools/repostats.py:661
+msgid ""
+"Scanning source repository...\n"
+msgstr ""
+
+#: tools/repostats.py:665
+msgid ""
+"Scanning binary packages...\n"
+msgstr ""
+
+#: tools/repostats.py:670
+msgid ""
+"Encountered %d errors! Fix them immediately!\n"
+msgstr ""
+
+#: tools/repostats.py:678
+msgid ""
+"These dependencies are not available in repository:\n"
 msgstr ""
 

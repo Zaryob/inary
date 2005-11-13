@@ -1,18 +1,53 @@
+# translation of tr.po to Türkçe
 # PiSi Translation
 # Copyright (C) 2005 Free Software Foundation, Inc.
 # Eray Ozkural <eray@uludag.org.tr>
 #
+# Eray Özkural <eray@uludag.org.tr>, 2005.
+# Eray Özkural <eray@uludag.org.tr>, 2005.
 msgid ""
 msgstr ""
-"Project-Id-Version: PISI 1.0_alpha4\n"
-"POT-Creation-Date: 2005-11-13 13:24+EET\n"
-"PO-Revision-Date: 2005-10-04 17:07+0300\n"
-"Last-Translator: Eray Ozkural <eray@uludag.org.tr>\n"
-"Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
+"Project-Id-Version: tr\n"
+"POT-Creation-Date: 2005-11-13 14:04+EET\n"
+"PO-Revision-Date: 2005-11-13 14:36+0200\n"
+"Last-Translator: Eray Özkural <eray@uludag.org.tr>\n"
+"Language-Team: Türkçe <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: KBabel 1.11\n"
+
+#: pisi-cli:31
+msgid "Keyboard Interrupt: Exiting..."
+msgstr "Klavye kesmesi: Çıkıyor... "
+
+#: pisi-cli:34
+msgid "Fatal Error. Program Terminated."
+msgstr "Düzeltilemeyen Hata: Program Sonlandırıldı."
+
+#: pisi-cli:38
+msgid ""
+"\n"
+"Unhandled internal exception.\n"
+"Please file a bug report. (http://bugs.uludag.org.tr)"
+msgstr ""
+
+#: pisi-cli:45
+msgid "System Error. Program Terminated."
+msgstr "Sistem Hatası: Program Sonlandırıldı. "
+
+#: pisi-cli:49
+msgid "Please use 'pisi help' for general help."
+msgstr "Genel yardım için lütfen 'pisi help' komutunu kullanınız. "
+
+#: pisi-cli:52
+msgid "Traceback:"
+msgstr "Geri-iz: "
+
+#: pisi-cli:55
+msgid "Use --debug to see a traceback."
+msgstr "Bir geri iz (traceback) görmek için lütfen --debug seçeneğini kullanın. "
 
 #: pisi/actionsapi/autotools.py:36
 msgid ""
@@ -80,12 +115,12 @@ msgid "Warning: %s does not exist, using plain name %s"
 msgstr "Uyarı: %s yok, düz ad %s kullanılıyor"
 
 #: pisi/actionsapi/kde.py:35
-#, fuzzy
 msgid ""
 "\n"
 "!!! Please attach the config.log to your bug report:\n"
 "%s/config.log"
 msgstr ""
+"\n"
 "Lütfen hata raporunuza config.log'u iliştiriniz:\n"
 "%s/config.log"
 
@@ -199,9 +234,8 @@ msgid "ActionsAPI [copy]: File %s does not exist."
 msgstr "ActionsAPI [copy]: %s dosyası bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:141
-#, fuzzy
 msgid "ActionsAPI [copytree] %s to %s: %s"
-msgstr "ActionsAPI [copytree]: Erişim engellendi: %s -< %s"
+msgstr "ActionsAPI [copytree]: %s den %s'e: %s"
 
 #: pisi/actionsapi/shelltools.py:143
 msgid "ActionsAPI [copytree]: Directory %s doesn't exists."
@@ -244,7 +278,6 @@ msgid "Repo %s removed from system."
 msgstr "Depo %s sistemden çıkarıldı."
 
 #: pisi/api.py:237
-#, fuzzy
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "Depo %s yok. Kaldırılamıyor."
 
@@ -253,11 +286,12 @@ msgid "* Updating repository: %s"
 msgstr "Depo %s güncelleniyor."
 
 #: pisi/api.py:246
-#, fuzzy
 msgid ""
 "\n"
 "* Package database updated."
-msgstr "* Paket veritabani güncellendi."
+msgstr ""
+"\n"
+"* Paket veritabani güncellendi."
 
 #: pisi/archive.py:83
 msgid "Archive type not recognized"
@@ -356,28 +390,24 @@ msgid "Trying to remove nonexistent package "
 msgstr "Var olmayan paket kaldırılmaya çalışıldı."
 
 #: pisi/atomicoperations.py:352
-#, fuzzy
 msgid "Not removing non-file, non-link %s"
 msgstr "Dosya ya da bağ olmayan %d kaldırılmıyor."
 
 #: pisi/atomicoperations.py:430
-#, fuzzy
 msgid "Metadata XML '%s' cannot be found"
-msgstr "Araç %s bulunamıyor"
+msgstr "Metadata XML %s bulunamıyor"
 
 #: pisi/atomicoperations.py:438
-#, fuzzy
 msgid "MetaData format wrong (%s)"
-msgstr "MetaData biçimi yanlış"
+msgstr "MetaData biçimi yanlış (%s)"
 
 #: pisi/atomicoperations.py:440
 msgid "* Adding '%s' to db... "
 msgstr "* '%s' veritabanına ekleniyor... "
 
 #: pisi/atomicoperations.py:444
-#, fuzzy
 msgid "Files XML '%s' cannot be found"
-msgstr "Araç %s bulunamıyor"
+msgstr "Files XML '%s' bulunamıyor"
 
 #: pisi/atomicoperations.py:450 pisi/package.py:111
 msgid "Invalid %s"
@@ -452,24 +482,20 @@ msgid "Unsatisfied Build Dependencies:"
 msgstr "Sağlanmamış inşa bağımlılıkları"
 
 #: pisi/build.py:287
-#, fuzzy
 msgid "Do you want to install the unsatisfied build dependencies"
-msgstr "Sağlanmamış inşa bağımlılıkları yüzünden paket inşa edilemiyor"
+msgstr "Sağlanmamış inşa bağımlılıklarını kurmak istiyor musunuz? "
 
 #: pisi/build.py:288
-#, fuzzy
 msgid "Installing build dependencies."
-msgstr "Sağlanmamış inşa bağımlılıkları"
+msgstr "İnşa bağımlılıklarını kuruyor. "
 
 #: pisi/build.py:291
-#, fuzzy
 msgid "Cannot build package due to unsatisfied build dependencies"
 msgstr "Sağlanmamış inşa bağımlılıkları yüzünden paket inşa edilemiyor"
 
 #: pisi/build.py:293
-#, fuzzy
 msgid "Ignoring build dependencies."
-msgstr "Sağlanmamış inşa bağımlılıkları"
+msgstr "İnşa bağımlılıkları yoksayılıyor."
 
 #: pisi/build.py:303
 msgid "Patch file is missing: %s\n"
@@ -488,9 +514,8 @@ msgid "build number is not available."
 msgstr "inşa sayısı (build number) bulunamadı"
 
 #: pisi/build.py:427
-#, fuzzy
 msgid "(no previous build found, setting build no to 1.)"
-msgstr "(önceki bir inşa bulunamadı, inşa numarası 0 yapılıyor)"
+msgstr "(önceki bir inşa bulunamadı, inşa numarası 1 yapılıyor)"
 
 #: pisi/build.py:464
 msgid "(old package lacks a build no, setting build no to 0.)"
@@ -526,14 +551,12 @@ msgid "Done."
 msgstr "Bitti."
 
 #: pisi/build.py:543
-#, fuzzy
 msgid "Cleaning Build Directory..."
-msgstr "dizini değiştir"
+msgstr "İnşa dizini siliniyor..."
 
 #: pisi/build.py:546
-#, fuzzy
 msgid "Keeping Build Directory"
-msgstr "dizini değiştir"
+msgstr "İnşa dizini bırakılıyor "
 
 #: pisi/cli/__init__.py:75
 msgid "Warning: "
@@ -548,14 +571,12 @@ msgid "(yes/no)"
 msgstr "(evet/hayır)"
 
 #: pisi/cli/__init__.py:129
-#, fuzzy
 msgid "Installed %s"
-msgstr "yerleşik"
+msgstr "%s yerleştirildi "
 
 #: pisi/cli/__init__.py:131
-#, fuzzy
 msgid "Removed %s"
-msgstr "kaldırılmış"
+msgstr "%s kaldırıldı"
 
 #: pisi/cli/__init__.py:133
 msgid "Upgraded %s"
@@ -566,9 +587,8 @@ msgid "generic help string for any command"
 msgstr "herhangi bir komut yardımı için yer tutucu"
 
 #: pisi/cli/commands.py:53 pisi/cli/pisicli.py:99
-#, fuzzy
 msgid "Unrecognized command: %s"
-msgstr "Başarısız komut: %s"
+msgstr "Tanınmayan komut: %s"
 
 #: pisi/cli/commands.py:74
 msgid "common options"
@@ -605,9 +625,8 @@ msgid ""
 msgstr ""
 
 #: pisi/cli/commands.py:109
-#, fuzzy
 msgid "Destination directory %s does not exist. Creating directory.\n"
-msgstr "Hedef dizini %s bulunamadı."
+msgstr "Hedef dizini %s bulunamadı. Dizin yaratılıyor.\n"
 
 #: pisi/cli/commands.py:132
 msgid "Password: "
@@ -634,7 +653,6 @@ msgid "Command terminated abnormally."
 msgstr "Program anormal biçimde sonlandı."
 
 #: pisi/cli/commands.py:179
-#, fuzzy
 msgid "Command lacks name"
 msgstr "Komut adı eksik"
 
@@ -665,7 +683,6 @@ msgid "Delete cache files"
 msgstr "Önbellek dosyalarını sil"
 
 #: pisi/cli/commands.py:256
-#, fuzzy
 msgid ""
 "Graph package relations.\n"
 "Usage: graph [<package1> <package2> ...]\n"
@@ -684,18 +701,16 @@ msgid "graph all available packages"
 msgstr "Bulunan bütün paketlerin çizgesini oluştur"
 
 #: pisi/cli/commands.py:274
-#, fuzzy
 msgid "dot output file"
-msgstr "detaylı çıktı"
+msgstr "dot çıktı dosyası"
 
 #: pisi/cli/commands.py:289
 msgid "Plotting a graph of relations among all available packages"
 msgstr "Bulunan bütün paketlerin arasındaki ilişkilerin bir çizgesi basılıyor"
 
 #: pisi/cli/commands.py:296
-#, fuzzy
 msgid "Plotting a graph of relations among all installed packages"
-msgstr "Yol %s yerleştirilmiş bir pakete ait değil"
+msgstr "Bütün kurulu paketler arasındaki ilişiklerin bir çizgesi hazırlanıyor "
 
 #: pisi/cli/commands.py:307
 msgid "do not take build no into account."
@@ -738,9 +753,8 @@ msgid "bypass comar configuration agent"
 msgstr "çomar yapılandırma aygıtını kullanma"
 
 #: pisi/cli/commands.py:365
-#, fuzzy
 msgid "Postpone postinstall script"
-msgstr "%s için yerleştirme-sonrası betiği çalıştırılıyor."
+msgstr "yerleştirme-sonrası betiğini ertele"
 
 #: pisi/cli/commands.py:377
 msgid ""
@@ -892,10 +906,8 @@ msgstr ""
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/commands.py:603 pisi/cli/commands.py:845
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr ""
-"Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr "Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
 
 #: pisi/cli/commands.py:618
 msgid ""
@@ -910,12 +922,10 @@ msgid ""
 msgstr ""
 
 #: pisi/cli/commands.py:642
-#, fuzzy
 msgid "Rebuild PISI databases?"
-msgstr "Veritabanlarını güncelle?"
+msgstr "PİSİ veritabanlarını güncelle?"
 
 #: pisi/cli/commands.py:659
-#, fuzzy
 msgid ""
 "Update repository databases\n"
 "\n"
@@ -1001,7 +1011,6 @@ msgstr ""
 "Depoda yayımlanmış olan PİSİ bileşenlerinin kısa bir listesini verir.\n"
 
 #: pisi/cli/commands.py:796
-#, fuzzy
 msgid "Repository : %s\n"
 msgstr "Depo: %s\n"
 
@@ -1022,7 +1031,6 @@ msgid "show detailed install info"
 msgstr "detaylı yükleme bilgisi göster"
 
 #: pisi/cli/commands.py:861
-#, fuzzy
 msgid "List pending packages"
 msgstr "Yapılandırma bekleyen paketleri listele"
 
@@ -1054,16 +1062,14 @@ msgid "fuzzy search"
 msgstr "yaklaşık arama"
 
 #: pisi/cli/commands.py:923
-#, fuzzy
 msgid "Package: %s has File: %s"
-msgstr "Paket içinde dosyalar olmalı"
+msgstr "Paket %s içinde dosya %s var"
 
 #: pisi/cli/commands.py:925
 msgid "Type: %s, Hash: %s"
 msgstr "Tip: %s, Hash: %s"
 
 #: pisi/cli/commands.py:928
-#, fuzzy
 msgid "Path %s does not belong to an installed package"
 msgstr "Yol %s yerleştirilmiş bir pakete ait değil"
 
@@ -1213,9 +1219,8 @@ msgid "Unregistering COMAR scripts for %s"
 msgstr "%s'in COMAR betikleri kayıttan siliniyor."
 
 #: pisi/config.py:66
-#, fuzzy
 msgid "Destination directory %s does not exist. Creating it."
-msgstr "Hedef dizini %s bulunamadı."
+msgstr "Hedef dizini %s bulunamadı. Yaratılıyor."
 
 #: pisi/configfile.py:89
 msgid "No section by name '%s'"
@@ -1266,7 +1271,6 @@ msgid "Requested range not satisfiable"
 msgstr "İstenen aralık sağlanamıyor."
 
 #: pisi/fetcher.py:241 pisi/fetcher.py:245
-#, fuzzy
 msgid "Requested Range Not Satisfiable"
 msgstr "İstenen aralık sağlanamıyor."
 
@@ -1319,8 +1323,7 @@ msgid "Cannot attain read or write access to database %s"
 msgstr "Veritabanı %s için okuma ya da yazma erişimi edinilemedi"
 
 #: pisi/lockeddbshelve.py:66
-msgid ""
-"Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
+msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
 msgstr ""
 "Bayraklar 'r', 'w', 'c' or 'n'den birisi olmalı ya da bsddb.db.DB_* "
 "bayraklarını kullanmalı"
@@ -1330,28 +1333,24 @@ msgid "Another instance of PISI is running. Try later!"
 msgstr "PISI bir yerde daha çalışıyor. Yine deneyin!"
 
 #: pisi/metadata.py:55
-#, fuzzy
 msgid "Build: % s, Distribution: %s, Dist. Release: %s\n"
 msgstr "İnşa: %s, Dağıtım: %s, Dağıtım Sürümü: %s\n"
 
 #: pisi/metadata.py:57
-#, fuzzy
 msgid "Architecture: %s, Installed Size: %s\n"
-msgstr "Dağıtım: %s, Yerleştime Zamanı: %s\n"
+msgstr "Mimari: %s, Yerleşik boyut: %s\n"
 
 #: pisi/operations.py:64
-#, fuzzy
 msgid "Mixing file names and package names not supported yet."
-msgstr "Dosya ve paket adlarını karıştırma henüz desteklenmiyor"
+msgstr "Dosya ve paket adlarını karıştırma henüz desteklenmiyor."
 
 #: pisi/operations.py:106
-#, fuzzy
 msgid ""
 "The following packages will be installed\n"
 "in the respective order to satisfy extra dependencies:\n"
 msgstr ""
-"Bağımlılıkları sağlamak için bu minimal paket listesi verilen sırada "
-"yerleştirilecek:"
+"Bağımlılıkları sağlamak için bu minimal paket listesi\n verilen sırada "
+"yerleştirilecek:\n"
 
 #: pisi/operations.py:109 pisi/operations.py:229
 msgid "Do you want to continue?"
@@ -1375,16 +1374,14 @@ msgid "Selected packages %s and %s are in conflict."
 msgstr "Seçili paketler %s ve %s çakışıyorlar."
 
 #: pisi/operations.py:173
-#, fuzzy
 msgid "Remove the following conflicting packages?"
-msgstr "Tek bir paketi kaldır"
+msgstr "Bu çatışan paketleri kaldırayım mı?"
 
 #: pisi/operations.py:175
 msgid "Conflicts remain"
 msgstr "Çakışmalar var"
 
 #: pisi/operations.py:225
-#, fuzzy
 msgid ""
 "The following minimal list of packages will be installed\n"
 "in the respective order to satisfy dependencies:\n"
@@ -1409,14 +1406,12 @@ msgid "No packages to upgrade."
 msgstr "Yükseltilecek paket yok."
 
 #: pisi/operations.py:329 pisi/operations.py:345
-#, fuzzy
 msgid "Reverse dependency %s cannot be satisfied"
-msgstr "Dış bağımlılıklar sağlanmadı."
+msgstr "Ters bağımlılık %s sağlanamadı"
 
 #: pisi/operations.py:360
-#, fuzzy
 msgid "The following packages will be upgraded:\n"
-msgstr "Bu paketler yükseltilecek:"
+msgstr "Bu paketler yükseltilecek: \n"
 
 #: pisi/operations.py:378
 msgid "Package %s does not exist. Cannot remove."
@@ -1427,7 +1422,6 @@ msgid "No packages to remove."
 msgstr "Kaldıracak paket yok."
 
 #: pisi/operations.py:411
-#, fuzzy
 msgid ""
 "The following minimal list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
@@ -1436,9 +1430,8 @@ msgstr ""
 "kaldırılacak:\n"
 
 #: pisi/operations.py:416
-#, fuzzy
 msgid "Package removal declined"
-msgstr "Paket yeniden yerleştirmeye izin verilmedi."
+msgstr "Paket kaldırmaya izin verilmedi."
 
 #: pisi/operations.py:422
 msgid "Package %s is not installed. Cannot remove."
@@ -1470,11 +1463,8 @@ msgid "Tag should have at least an English or Turkish version"
 msgstr "Etiketin en azından bir Türkçe ya da İngilizce versiyonu bulunmalı"
 
 #: pisi/pxml/autoxml.py:389 pisi/pxml/autoxml.py:397
-#, fuzzy
 msgid "autoxml.read: File '%s' has errors"
-msgstr ""
-"Dosya '%s' hatalara sahip:\n"
-"%s"
+msgstr "autoxml.read: Dosya '%s' hatalara sahip"
 
 #: pisi/pxml/autoxml.py:404
 msgid "autoxml.write: object validation has failed"
@@ -1530,7 +1520,6 @@ msgid "Mandatory list empty"
 msgstr "Zorunlu (mandatory) liste boş"
 
 #: pisi/pxml/xmlextcdom.py:58
-#, fuzzy
 msgid "File '%s' has invalid XML: %s"
 msgstr "'%s' dosyasının XML sözdizimi geçersiz: %s"
 
@@ -1545,7 +1534,6 @@ msgid "File '%s' has invalid XML: %s\n"
 msgstr "'%s' dosyasının XML sözdizimi geçersiz: %s\n"
 
 #: pisi/pxml/xmlfilecdom.py:75
-#, fuzzy
 msgid "File '%s' has invalid XML:"
 msgstr "'%s' dosyasının XML sözdizimi geçersiz: %s"
 
@@ -1571,37 +1559,24 @@ msgid "URI: %s, type: %, sha1sum: %s"
 msgstr ""
 
 #: pisi/specfile.py:189
-#, fuzzy
 msgid "Name: %s, version: %s, release: %s, build %s\n"
 msgstr "Ad: %s, versiyon %s, sürüm %s, inşa %s\n"
 
 #: pisi/specfile.py:191
-#, fuzzy
 msgid "Summary: %s\n"
-msgstr ""
-"\n"
-"Özet: "
+msgstr "Özet: %s\n"
 
 #: pisi/specfile.py:192
-#, fuzzy
 msgid "Description: %s\n"
-msgstr ""
-"\n"
-"Tanım: "
+msgstr "Tanım: %s\n"
 
 #: pisi/specfile.py:193
-#, fuzzy
 msgid "Component: %s\n"
-msgstr ""
-"\n"
-"Bileşen: "
+msgstr "Bileşen: %s\n"
 
 #: pisi/specfile.py:194
-#, fuzzy
 msgid "Provides: "
-msgstr ""
-"\n"
-"Sağladıkları: "
+msgstr "Sağladıkları: "
 
 #: pisi/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
@@ -1616,7 +1591,6 @@ msgid "running "
 msgstr "çalıştırıyor "
 
 #: pisi/util.py:134
-#, fuzzy
 msgid "return value %s"
 msgstr "dönüş değeri %s"
 
@@ -1629,9 +1603,8 @@ msgid "Ignoring \"external\" link %s"
 msgstr "Harici bağ %s işlenmiyor"
 
 #: pisi/util.py:295
-#, fuzzy
 msgid "Ignoring directory %s"
-msgstr "%s dizini yaratılamıyor."
+msgstr "%s dizini esgeçiliyor"
 
 #: pisi/util.py:367
 msgid "I/O Error: Cannot calculate SHA1 hash of %s"
@@ -1657,222 +1630,76 @@ msgstr "Kilit %s kaldırılıyor."
 msgid "Updating environment..."
 msgstr "Çevre güncelleniyor..."
 
-#~ msgid "Unrecognized command: "
-#~ msgstr "Tanınmayan komut: %s"
+#: tools/repostats.py:337
+msgid ""
+"Duplicate binary packages:\n"
+"%s\n"
+"%s\n"
+msgstr ""
+"Kopyalanmış ikili paketler:\n"
+"%s\n"
+"%s\n"
 
+#: tools/repostats.py:342
+msgid "Unknown file type '%s' in package '%s'"
+msgstr "Bilinmeyen dosya tiği '%s', '%s' paketi içinde bulundu. "
+
+#: tools/repostats.py:398
 #, fuzzy
-#~ msgid "Package: %s"
-#~ msgstr "Paket: %s"
+msgid ""
+"Duplicate source packages:\n"
+"%s\n"
+"%s\n"
+msgstr "PISI kaynak paketi inşa ediliyor: %s\n"
 
-#~ msgid "Destination directory %s does not exist"
-#~ msgstr "Hedef dizini %s bulunamadı."
+#: tools/repostats.py:418
+msgid "Source package '%s' has wrong date format '%s'"
+msgstr ""
 
-#~ msgid "SourceInfo should have a Name"
-#~ msgstr "SourceInfo'nun Name'i olmalı"
+#: tools/repostats.py:431
+msgid "Source package '%s' has wrong release numbers"
+msgstr ""
 
-#~ msgid "Metadata should have source"
-#~ msgstr "Metadata'da bir kaynak yer almalı."
+#: tools/repostats.py:435
+msgid "Source package '%s' lacks release %d"
+msgstr ""
 
-#~ msgid "Metadata should have a package"
-#~ msgstr "Metadata'da bir paket yer almalı"
+#: tools/repostats.py:443
+msgid "Source package '%s' has no first release"
+msgstr ""
 
-#~ msgid "AdditionalFile should have file name string"
-#~ msgstr "AdditionalFile bir dosyaadı içermeli"
+#: tools/repostats.py:478
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgstr ""
 
-#~ msgid "AdditionalFile should have a target attribute"
-#~ msgstr "AdditionalFile bir hedef attribute'u içermeli"
-
-#~ msgid "Patch should have a filename string"
-#~ msgstr "Patch'in dosya adı olmalı"
-
+#: tools/repostats.py:561
 #, fuzzy
-#~ msgid "Update must have a release attribute"
-#~ msgstr "AdditionalFile bir hedef attribute'u içermeli"
+msgid ""
+"Cannot parse '%s':\n"
+"%s\n"
+msgstr "%s indirilemiyor; %s"
 
-#~ msgid "Path tag should have a name string"
-#~ msgstr "Yol etiketi bir ada sahip olmalı"
+#: tools/repostats.py:639
+msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
+msgstr ""
 
-#~ msgid "COMAR provide should have something :)"
-#~ msgstr "ÇOMAR birşey sağlamalı :)"
+#: tools/repostats.py:640
+msgid "Dont generate the web site.\n"
+msgstr ""
 
-#~ msgid "Source archive URI and type should be given"
-#~ msgstr "Kaynak arşivi URI ve tipi verilmeli"
+#: tools/repostats.py:661
+msgid "Scanning source repository...\n"
+msgstr ""
 
-#~ msgid "Source archive should have a SHA1 sum"
-#~ msgstr "Kaynak arşivi bir SHA1sum'a sahip olmalı"
+#: tools/repostats.py:665
+msgid "Scanning binary packages...\n"
+msgstr ""
 
-#~ msgid "There should be at least one Package section"
-#~ msgstr "En azından bir tane Package bölümü bulunmalı."
+#: tools/repostats.py:670
+msgid "Encountered %d errors! Fix them immediately!\n"
+msgstr ""
 
-#~ msgid "Source needs some education in History :)"
-#~ msgstr "Bir tarih bölümü bulunmalı"
+#: tools/repostats.py:678
+msgid "These dependencies are not available in repository:\n"
+msgstr ""
 
-#~ msgid "LocalText '%s' should have at least one '%s' tag\n"
-#~ msgstr "LocalText '%s'in en azından bir tag'i bulunmalı.\n"
-
-#~ msgid "Type mismatch"
-#~ msgstr "Tip uyumsuzluğu"
-
-#~ msgid "(found old version %s)"
-#~ msgstr "(eski versiyon %s bulundu)"
-
-#~ msgid "Skipping %s with wrong pkg name "
-#~ msgstr "Yanlış paket adına sahip %s atlanıyor"
-
-# pisi/actionsapi/autotools.py:77 :87
-#~ msgid "generates a configure script"
-#~ msgstr "yapılandırma betiği yaratır."
-
-#~ msgid "returns current work directory's path"
-#~ msgstr "çalışma dizinini döndürür"
-
-#~ msgid "Package is not installable."
-#~ msgstr "Paket yerleştirilebilir durumda değil."
-
-#~ msgid "install a number of pisi package files"
-#~ msgstr "..."
-
-#~ msgid ""
-#~ "Re-installs packages from the repository, trying to perform\n"
-#~ "    a maximum number of upgrades."
-#~ msgstr ""
-#~ "Maximum sayıda yükseltme yaparak paketleri depodan yeniden yerleştirir."
-
-#, fuzzy
-#~ msgid "fail if dependencies not satisfied"
-#~ msgstr "bağımlılıklar sağlanamazsa çık."
-
-#~ msgid ""
-#~ "Build each package defined in PSPEC file. After this process there\n"
-#~ "        will be .pisi files hanging around, AS INTENDED ;)"
-#~ msgstr "PSPEC dosyalarıyl tanımlanmış her paketi inşa et"
-
-#~ msgid "Command Line Interface"
-#~ msgstr "Komut Satırı Arayüzü"
-
-#~ msgid ""
-#~ "Upgrade system\n"
-#~ "\n"
-#~ "Usage: Upgrade\n"
-#~ "\n"
-#~ "Upgrade the entire system.\n"
-#~ msgstr ""
-#~ "Sistemi yükselt\n"
-#~ "\n"
-#~ "Kullanım: Upgrade\n"
-#~ "\n"
-#~ "Bütün sistemi yükselt.\n"
-
-#, fuzzy
-#~ msgid "run postinstall scripts trough COMAR"
-#~ msgstr "%s için yerleştirme-sonrası betiği çalıştırılıyor."
-
-#, fuzzy
-#~ msgid "PISI source/package index"
-#~ msgstr "PISI kaynak paketi inşa ediliyor: %s"
-
-#, fuzzy
-#~ msgid "register COMAR scripts"
-#~ msgstr "COMAR betiği %s kayıt ediliyor"
-
-#~ msgid "install package with specific version, release, build"
-#~ msgstr "yerleştiiir"
-
-#~ msgid "Some error in package metadata"
-#~ msgstr "Paket metaverisinde (metadata) bir hata tespit edildi."
-
-#, fuzzy
-#~ msgid "install a package file"
-#~ msgstr "paketteki dosyaların bir listesini göster"
-
-#, fuzzy
-#~ msgid "install a single package from ID"
-#~ msgstr "Aynı versiyona sahip paketi yeniden yerleştireyim mi?"
-
-#~ msgid "Cannot lock PackageDB: %s"
-#~ msgstr "Paket veritabanını kilitleyemiyor: %s"
-
-#, fuzzy
-#~ msgid "show debugging info"
-#~ msgstr "hata ayıklama bilgisini göster"
-
-#~ msgid "ask a yes/no question"
-#~ msgstr "evet/hayır sorusu"
-
-#, fuzzy
-#~ msgid "strip a file"
-#~ msgstr "sembolleri temizle"
-
-# pisi/actionsapi/autotools.py:75 :85
-#, fuzzy
-#~ msgid "!!! Configure failed...\n"
-#~ msgstr "Yapılandırma başarısızlığa uğradı."
-
-# pisi/actionsapi/autotools.py:77 :87
-#, fuzzy
-#~ msgid "!!! No configure script found...\n"
-#~ msgstr "Yapılandırma betiği bulunamadı."
-
-#, fuzzy
-#~ msgid "!!! Make failed...\n"
-#~ msgstr "İnşa başarısızlığa uğradı."
-
-# pisi/actionsapi/autotools.py:119 :127
-#, fuzzy
-#~ msgid "!!! Install failed...\n"
-#~ msgstr "Yerleştirme başarısızlığa uğgradı."
-
-# pisi/actionsapi/autotools.py:121 :129
-#, fuzzy
-#~ msgid "!!! No Makefile found...\n"
-#~ msgstr "Makefile bulunamadı"
-
-#~ msgid ""
-#~ "do not perform any action, just show what                     would be "
-#~ "done"
-#~ msgstr "bir eylem gerçekleşirme, sadece ne yapılacağını göster"
-
-#~ msgid "Source hosts"
-#~ msgstr "Kaynak sunucuları"
-
-#~ msgid "Packagers"
-#~ msgstr "Paketleyiciler"
-
-#~ msgid "Licenses"
-#~ msgstr "Lisanslar"
-
-#~ msgid "Categories"
-#~ msgstr "Kategoriler"
-
-#~ msgid "Dependencies"
-#~ msgstr "Bağımlılıklar"
-
-#~ msgid "Releases"
-#~ msgstr "Sürümler"
-
-#~ msgid "File types"
-#~ msgstr "Dosya tipleri"
-
-#~ msgid "Top five most patched source"
-#~ msgstr "En çok yamalanmiş beş kaynak"
-
-#~ msgid "Top five longest action.py scripts"
-#~ msgstr "En uzun beş action.py betiği"
-
-#~ msgid "<h1>Dependencies<br>"
-#~ msgstr "<h1>Bağımlılıklar<br>"
-
-#~ msgid "y"
-#~ msgstr "e"
-
-#~ msgid "Y"
-#~ msgstr "E"
-
-#~ msgid "n"
-#~ msgstr "h"
-
-#~ msgid "N"
-#~ msgstr "H"
-
-#~ msgid "skipping COMAR connection for now..."
-#~ msgstr "COMAR baglantısı şimdilik geçiliyor"
