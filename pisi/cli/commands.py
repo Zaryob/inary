@@ -850,6 +850,7 @@ Gives a brief list of PiSi components published in the repositories.
                 ctx.ui.info('%s - %s ' % (component.name, unicode(component.summary)))
         self.finalize()
 
+
 class ListUpgrades(Command):
     """List packages to be upgraded
 

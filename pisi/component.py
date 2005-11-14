@@ -56,9 +56,9 @@ class Component(xmlfile.XmlFile):
     # Dependencies to other components
     t_Dependencies = [ [autoxml.String], autoxml.optional, "Dependencies/Component"]
 
-    # the components contained by this guy. 
+    # the parts of this component. 
     # to be filled by the component database, thus it is optional.
-    t_Components = [ [autoxml.String], autoxml.optional, "Components/Component"]
+    t_Packages = [ [autoxml.String], autoxml.optional, "Parts/Package"]
 
     # TODO: this is probably not necessary since we use fully qualified 
     # module names (like in Java)
@@ -106,14 +106,14 @@ class ComponentDB(object):
         if not self.has_component(component_name):
             raise Error(_('Information for component %s not available') % component_name)
         component = self.get_component(component_name)
-        component.components.append(package)
+        component.packages.append(package)
         self.d[component_name] = component # update
 
     def remove_package(self, component_name, package):
         if not self.has_component(component_name):
             raise Error(_('Information for component %s not available') % component_name)
         component = self.get_component(component_name)
-        component.components.remove(package)
+        component.packages.remove(package)
         self.d[component_name] = component # update
 
     def clear(self):
