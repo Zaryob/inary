@@ -36,19 +36,30 @@ class Distribution:
 
 
 class Component(xmlfile.XmlFile):
-    "part-of representation for component declarations"
+    "representation for component declarations"
 
     __metaclass__ = autoxml.autoxml
 
     tag = "PISI"
     
-    t_Name = [autoxml.Text, autoxml.mandatory]     # fully qualified name
-    #t_PartOf = [autoxml.Text, autoxml.mandatory]
+    t_Name = [autoxml.String, autoxml.mandatory]     # fully qualified name
+
+    # component name in other languages, for instance in Turkish
+    # LocalName for system.base could be sistem.taban or "Taban Sistem",
+    # this could be useful for GUIs
     t_LocalName = [autoxml.LocalText, autoxml.mandatory]
+    
+    # Information about the component
+    t_Summary = [autoxml.LocalText, autoxml.mandatory]
     t_Description = [autoxml.LocalText, autoxml.mandatory]
     #t_Icon = [autoxml.Binary, autoxml.mandatory]
+    
+    # Dependencies to other components
     t_Dependencies = [ [autoxml.String], autoxml.optional, "Dependencies/Component"]
 
+    # TODO: this is probably not necessary since we use fully qualified 
+    # module names (like in Java)
+    #t_PartOf = [autoxml.Text, autoxml.mandatory]
 
 #FIXME: recursive declarations do not work!
 #class ComponentTree(xmlfile.XmlFile):

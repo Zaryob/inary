@@ -32,6 +32,7 @@ from pisi.files import Files, File as FileInfo
 from pisi.files import Files
 from pisi.metadata import MetaData
 from pisi.package import Package
+import pisi.component as component
 
 
 class Error(pisi.Error):
@@ -84,7 +85,7 @@ from pisi.specfile import SpecFile
 
 
 class BuildContext(object):
-    """Build Context Singleton"""
+    """Build Context"""
 
     def __init__(self, pspecfile):
         super(BuildContext, self).__init__()
@@ -94,9 +95,6 @@ class BuildContext(object):
         self.pspecfile = pspecfile
         spec = SpecFile()
         spec.read(pspecfile)
-        # FIXME: following checks the integrity but does nothing when it is wrong
-        # -gurer
-        #spec.verify()    # check pspec integrity
         self.spec = spec
 
     # directory accessor functions
@@ -121,7 +119,7 @@ class Builder:
     """Provides the package build and creation routines"""
     def __init__(self, pspec):
         self.bctx = BuildContext(pspec)
-        self.pspecDir = os.path.dirname(os.path.realpath(self.bctx.pspecfile))
+        self.pspecdir = os.path.dirname(os.path.realpath(self.bctx.pspecfile))
         self.spec = self.bctx.spec
         self.sourceArchive = SourceArchive(self.bctx)
 
@@ -153,7 +151,9 @@ class Builder:
         self.patch_exists()
 
         self.check_build_dependencies()
-
+        
+        self.fetch_component()
+        
         self.fetch_source_archive()
         self.unpack_source_archive()
 
@@ -189,6 +189,19 @@ class Builder:
             # Add ccache directory for support Compiler Cache :)
             os.environ["PATH"] = "/usr/lib/ccache/bin/:" + os.environ["PATH"]
             ctx.ui.info(_("CCache detected..."))
+
+    def fetch_component(self):
+        if not self.spec.source.partOf:
+            parentdir = os.path.realpath(self.pspecdir + '/../')
+            url = util.join_path(parentdir, 'component.xml')
+            from pisi.fetcher import fetch_url
+            progress = ctx.ui.Progress
+            fetch_url(url, self.bctx.pkg_work_dir(), progress)
+            comp = component.Component()
+            comp.read(util.join_path(self.bctx.pkg_work_dir(), 'component.xml'))
+            ctx.ui.info(_('Source is part of %s component') % comp.name)
+            self.spec.source.partOf = comp.name
+            self.spec.override_tags()
 
     def fetch_source_archive(self):
         ctx.ui.info(_("Fetching source from: %s") % self.spec.source.archive.uri)
@@ -295,7 +308,7 @@ class Builder:
     def patch_exists(self):
         """check existence of patch files declared in PSPEC"""
 
-        files_dir = os.path.abspath(util.join_path(self.pspecDir,
+        files_dir = os.path.abspath(util.join_path(self.pspecdir,
                                                  ctx.const.files_dir))
         for patch in self.spec.source.patches:
             patchFile = util.join_path(files_dir, patch.filename)
@@ -303,7 +316,7 @@ class Builder:
                 raise Error(_("Patch file is missing: %s\n") % patch.filename)
 
     def apply_patches(self):
-        files_dir = os.path.abspath(util.join_path(self.pspecDir,
+        files_dir = os.path.abspath(util.join_path(self.pspecdir,
                                                  ctx.const.files_dir))
 
         for patch in self.spec.source.patches:
@@ -484,7 +497,7 @@ class Builder:
         for package in self.spec.packages:
             # store additional files
             c = os.getcwd()
-            os.chdir(self.pspecDir)
+            os.chdir(self.pspecdir)
             install_dir = self.bctx.pkg_dir() + ctx.const.install_dir_suffix
             tmp_aF = []
             for afile in package.additionalFiles:
@@ -524,7 +537,7 @@ class Builder:
             package_names.append(name)
 
             # add comar files to package
-            os.chdir(self.pspecDir)
+            os.chdir(self.pspecdir)
             for pcomar in package.providesComar:
                 fname = util.join_path(ctx.const.comar_dir,
                                      pcomar.script)

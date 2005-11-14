@@ -45,7 +45,8 @@ class SourceArchive:
         if not self.is_cached(interactive):
             if interactive:
                 progress = ctx.ui.Progress
-            else: progress = None
+            else:
+                progress = None
             fetch_url(self.url, ctx.config.archives_dir(), progress)
         
     def is_cached(self, interactive=True):

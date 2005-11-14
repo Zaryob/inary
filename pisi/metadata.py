@@ -71,6 +71,7 @@ class MetaData(xmlfile.XmlFile):
     #t_History = [ [Update], autoxml.mandatory]
 
     def from_spec(self, src, pkg):
+        # this just copies fields, it doesn't fix every necessary field
         self.source.name = src.name
         self.source.homepage = src.homepage
         self.source.packager = src.packager
