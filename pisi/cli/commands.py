@@ -565,14 +565,11 @@ source and binary packages.
         
         self.init()
         from pisi.api import index
-        if len(self.args)==1:
-            index(self.args[0], ctx.get_option('output'))
+        if len(self.args)>0:
+            index(self.args, ctx.get_option('output'))
         elif len(self.args)==0:
             ctx.ui.info( _('Indexing current directory.'))
             index('.', ctx.get_option('output'))
-        else:
-            ctx.ui.info( _('Indexing only a single directory supported.'))
-            return
         self.finalize()
 
 

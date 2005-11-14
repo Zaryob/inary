@@ -9,9 +9,7 @@
 #
 # Please read the COPYING file.
 #
-# Authors:  Eray Ozkural <eray@uludag.org.tr>
-
-"""a placeholder for data types, might factor elsewhere later"""
+# Author:  Eray Ozkural <eray@uludag.org.tr>
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -20,6 +18,7 @@ _ = __trans.ugettext
 import pisi
 import pisi.pxml.xmlfile as xmlfile
 import pisi.pxml.autoxml as autoxml
+import pisi.lockeddbshelve as shelve
 
 class Error(pisi.Error):
     pass
@@ -57,6 +56,10 @@ class Component(xmlfile.XmlFile):
     # Dependencies to other components
     t_Dependencies = [ [autoxml.String], autoxml.optional, "Dependencies/Component"]
 
+    # the components contained by this guy. 
+    # to be filled by the component database, thus it is optional.
+    t_Components = [ [autoxml.String], autoxml.optional, "Components/Component"]
+
     # TODO: this is probably not necessary since we use fully qualified 
     # module names (like in Java)
     #t_PartOf = [autoxml.Text, autoxml.mandatory]
@@ -74,3 +77,48 @@ class Component(xmlfile.XmlFile):
 #    t_Dependencies = [ [autoxml.Text], autoxml.optional, "Component"]
 #    #t_Parts = [ [pisi.component.ComponentTree], autoxml.optional, "Component"]
 
+class ComponentDB(object):
+    """a database of components"""
+    
+    #FIXME: we might need a database per repo in the future
+    def __init__(self):
+        self.d = shelve.LockedDBShelf('components')
+
+    def close(self):
+        self.d.close()
+
+    def has_component(self, name):
+        return self.d.has_key(name)
+
+    def get_component(self, name):
+        return self.d[name]
+
+    def list_components(self):
+        list = []
+        for (pkg, x) in self.d.iteritems():
+            list.append(pkg)
+        return list
+
+    def add_component(self, component):
+        self.d[name] = component.name
+
+    def add_package(self, component_name, package):
+        if not self.has_component(component_name):
+            raise Error(_('Information for component %s not available') % component_name)
+        component = self.get_component(component_name)
+        component.components.append(package)
+        self.d[component_name] = component # update
+
+    def remove_package(self, component_name, package):
+        if not self.has_component(component_name):
+            raise Error(_('Information for component %s not available') % component_name)
+        component = self.get_component(component_name)
+        component.components.remove(package)
+        self.d[component_name] = component # update
+
+    def clear(self):
+        self.d.clear()
+
+    def remove_component(self, name):
+        name = str(name)
+        del self.d[name]

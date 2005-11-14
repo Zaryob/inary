@@ -78,6 +78,8 @@ class PackageDB(object):
                 self.dr[dep_name].append( (name, dep) )
             else:
                 self.dr[dep_name] = [ (name, dep) ]
+        # add component
+        ctx.componentdb.add_package(package_info.partOf, package_info.name)
 
     def clear(self):
         self.d.clear()
@@ -85,7 +87,8 @@ class PackageDB(object):
     def remove_package(self, name):
         name = str(name)
         del self.d[name]
-
+        #FIXME: what's happening to dr?
+        ctx.componentdb.remove_package(package_info.partOf, package_info.name)
 
 packagedbs = {}
 

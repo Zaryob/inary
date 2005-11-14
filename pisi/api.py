@@ -38,6 +38,7 @@ import pisi.packagedb as packagedb
 import pisi.repodb
 import pisi.installdb
 import pisi.sourcedb
+import pisi.component as component
 from pisi.index import Index
 import pisi.cli
 from pisi.operations import install, remove, upgrade
@@ -70,12 +71,14 @@ def init(database = True, options = None, ui = None, comar = True):
         ctx.repodb = pisi.repodb.init()
         ctx.installdb = pisi.installdb.init()
         ctx.filesdb = pisi.files.FilesDB()
+        ctx.componentdb = pisi.component.ComponentDB()
         packagedb.init_db()
         pisi.sourcedb.init()
     else:
         ctx.repodb = None
         ctx.installdb = None
         ctx.filesdb = None
+        ctx.componentdb = None
     ctx.ui.debug('PISI API initialized')
     ctx.initialized = True
 
@@ -84,7 +87,8 @@ def finalize():
     pisi.installdb.finalize()
     if ctx.filesdb != None:
         ctx.filesdb.close()
-
+    if ctx.componentdb != None:
+        ctx.componentdb.close()
     packagedb.finalize_db()
     pisi.sourcedb.finalize()
     ctx.ui.debug('PISI API finalized')
@@ -223,11 +227,13 @@ def info_name(package_name):
     else:
         raise Error(_('Package %s not found') % package_name)
 
-def index(repo_dir = '.', output = 'pisi-index.xml'):
-
-    ctx.ui.info(_('* Building index of PISI files under %s') % repo_dir)
+def index(dirs, output = 'pisi-index.xml'):
     index = Index()
-    index.index(repo_dir)
+    if not dirs:
+        dirs = ['.']
+    for repo_dir in dirs:
+        ctx.ui.info(_('* Building index of PISI files under %s') % repo_dir)
+        index.index(repo_dir)
     index.write(output)
     ctx.ui.info(_('* Index file written'))
 

@@ -79,10 +79,10 @@ class Index(XmlFile):
     def update_db(self, repo):
         pkgdb = packagedb.get_db(repo)
         pkgdb.clear()
+        for comp in self.components:
+            compdb.add_component(pkg)
         for pkg in self.packages:
             pkgdb.add_package(pkg)
-        #for comp in self.components:
-        #    compdb.add_component(pkg)
 
     def add_package(self, path, repo_uri):
         package = Package(path, 'r')
