@@ -952,6 +952,8 @@ Finds the installed package which contains the specified file.
         self.parser.add_option("-f", "--fuzzy", action="store_true",
                                default=False, help=_("fuzzy search"))
     
+    # and what does exact mean? -- exa
+    @staticmethod #fuck python 2.3 compatibility I don't care about it
     def search_exact(path):
         files = []
         path = path.lstrip('/') #FIXME: this shouldn't be necessary :/
@@ -960,18 +962,18 @@ Finds the installed package which contains the specified file.
             if ctx.filesdb.has_file(path):
                 files.append(ctx.filesdb.get_file(path))
         else:
+            #FIXME: this linear search thing is not working well -- exa
             files = ctx.filesdb.get_files(path)
 
         if files:
             for (pkg_name, file_info) in files:
                 #FIXME: files of the same package can be grouped under package name
-                ctx.ui.info(_('Package: %s has File: %s') % (pkg_name, file_info.path))
+                ctx.ui.info(_("Package %s has file %s") % (pkg_name, file_info.path))
                 if ctx.config.options.long:
                     ctx.ui.info(_('Type: %s, Hash: %s') % (file_info.type,
                                                            file_info.hash))
         else:
-            ctx.ui.error(_('Path %s does not belong to an installed package') % path)
-    search_exact=staticmethod(search_exact)
+            ctx.ui.error(_("Path '%s' does not belong to an installed package") % path)
 
     def run(self):
 

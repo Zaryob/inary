@@ -45,7 +45,7 @@ class Package:
             dest = ctx.config.packages_dir()
             self.filepath = join(dest, url.filename())
             
-            # FIXME: exists is not enough, also sha1sum check needed \
+            # FIXME: exists is not enough, also sha1sum check needed
             #        when implemented in pisi-index.xml
             if not exists(self.filepath):
                 fetch_url(url, dest, ctx.ui.Progress)
