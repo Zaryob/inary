@@ -439,8 +439,18 @@ def resurrect_package(package_fn):
     if errs:   
        util.Checks.print_errors(errs)
        raise Error, _("MetaData format wrong (%s)") % package_fn
+
+    # FIXME: there won't be any previous versions of the same package under /var/lib/pisi
+    # therefore there won't be any need for this check and __is_virtual_upgrade function
+    # this is just for backward compatibility for sometime
+
+    # yes, this is an ugly hack
+    passed = False
+    if ctx.installdb.is_installed(metadata.package.name):
+        passed = True
     
-    ctx.ui.info(_('* Adding \'%s\' to db... ') % (metadata.package.name), noln=True)
+    if not passed:
+        ctx.ui.info(_('* Adding \'%s\' to db... ') % (metadata.package.name), noln=True)
     
     files_xml = util.join_path(ctx.config.lib_dir(), package_fn, ctx.const.files_xml)
     if not exists(files_xml):
@@ -454,4 +464,5 @@ def resurrect_package(package_fn):
 
     import pisi.atomicoperations
     pisi.atomicoperations.virtual_install(metadata, files)
-    ctx.ui.info(_('OK.'))
+    if not passed:
+        ctx.ui.info(_('OK.'))
