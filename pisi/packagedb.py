@@ -86,6 +86,7 @@ class PackageDB(object):
 
     def remove_package(self, name):
         name = str(name)
+        package_info = self.d[name]
         del self.d[name]
         #FIXME: what's happening to dr?
         ctx.componentdb.remove_package(package_info.partOf, package_info.name)

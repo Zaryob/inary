@@ -174,13 +174,22 @@ def check_conflicts(order):
             #raise Error(_("Package %s conflicts installed package %s") % (x, pkg))
             raise Error(_("Conflicts remain"))
 
+def expand_components(A):
+    Ap = set()
+    for x in A:
+        if ctx.componentdb.has_component(x):
+            Ap = Ap.union(ctx.componentdb.get_component(x).packages)
+        else:
+            Ap.append(x)
+    return Ap
+
 def install_pkg_names(A):
     """This is the real thing. It installs packages from
     the repository, trying to perform a minimum number of
     installs"""
 
-    A_0 = A = set(A) # A was a list, remove duplicates
-
+    # A was a list, remove duplicates and expand components
+    A_0 = A = expand_components(set(A))
     ctx.ui.debug('A = %s' % str(A))
 
     if len(A)==0:
@@ -245,7 +254,7 @@ def upgrade_pkg_names(A = []):
         A = ctx.installdb.list_installed()
 
     # filter packages that are not upgradable
-    A_0 = A = set(A)
+    A_0 = A = expand_components(set(A))
     Ap = []
     for x in A:
         if x.endswith('.pisi'):
@@ -369,7 +378,7 @@ def remove(A):
     """remove set A of packages from system (A is a list of package names)"""
     
     # filter packages that are not installed
-    A_0 = A = set(A)
+    A_0 = A = expand_components(set(A))
     Ap = []
     for x in A:
         if ctx.installdb.is_installed(x):
