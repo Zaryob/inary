@@ -768,7 +768,7 @@ class ListAvailable(Command):
 
 Usage: list-available [ <repo1> <repo2> ... repon ]
 
-Gives a brief list of PiSi components published in the repository.
+Gives a brief list of PiSi packages published in the repository.
 """
     __metaclass__ = autocommand
 
@@ -814,6 +814,41 @@ Gives a brief list of PiSi components published in the repository.
                 p = p + ' ' * max(0, 15 - lenp)
                 ctx.ui.info('%s - %s ' % (p, unicode(package.summary)))
 
+class ListComponents(Command):
+    """List available components
+
+Usage: list-components
+
+Gives a brief list of PiSi components published in the repositories.
+"""
+    __metaclass__ = autocommand
+
+    def __init__(self):
+        super(ListComponents, self).__init__()
+
+    name = ("list-components", "lc")
+
+    def options(self):
+        self.parser.add_option("-l", "--long", action="store_true",
+                               default=False, help="show in long format")
+
+    def run(self):
+
+        self.init(True)
+
+        list = ctx.componentdb.list_components()
+        list.sort()
+        for p in list:
+            component = ctx.componentdb.get_component(p)
+            if self.options.long:
+                ctx.ui.info(unicode(component))
+            else:
+                lenp = len(p)
+                #if p in installed_list:
+                #    p = colorize(p, 'cyan')
+                p = p + ' ' * max(0, 15 - lenp)
+                ctx.ui.info('%s - %s ' % (component.name, unicode(component.summary)))
+        self.finalize()
 
 class ListUpgrades(Command):
     """List packages to be upgraded
