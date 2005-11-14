@@ -177,6 +177,7 @@ class Install(AtomicOperation):
 
             # schedule for reinstall
             self.old_files = ctx.installdb.files(pkg.name)
+            self.old_path = ctx.installdb.pkg_dir(pkg.name, iversion, irelease)
             self.reinstall = True
             Remove(pkg.name).run_preremove()
 
@@ -228,6 +229,7 @@ class Install(AtomicOperation):
 
         if self.reinstall:
             Remove(self.metadata.package.name).remove_db()
+            Remove.remove_pisi_files(self.old_path)
 
         # installdb
         ctx.installdb.install(self.metadata.package.name,
@@ -322,7 +324,7 @@ class Remove(AtomicOperation):
             self.remove_file(fileinfo)
     
         self.remove_db()
-        self.remove_pisi_files()
+        self.remove_pisi_files(self.package.pkg_dir())
         ctx.ui.status()
         ctx.ui.notify(pisi.ui.removed, package = self.package, files = self.files)
 
@@ -360,8 +362,10 @@ class Remove(AtomicOperation):
             # TODO: store this somewhere
             pass
 
-    def remove_pisi_files(self):
-        util.clean_dir(self.package.pkg_dir())
+    def remove_pisi_files(path):
+        util.clean_dir(path)
+
+    remove_pisi_files = staticmethod(remove_pisi_files)
     
     def remove_db(self):
         ctx.installdb.remove(self.package_name)

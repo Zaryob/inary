@@ -28,6 +28,7 @@ import pisi.context as ctx
 import pisi.lockeddbshelve as shelve
 from pisi.files import Files
 import pisi.util as util
+from pisi.util import join_path as join
 
 
 class InstallDBError(pisi.Error):
@@ -75,15 +76,14 @@ class InstallDB:
     def __init__(self):
         self.d = shelve.LockedDBShelf('install')
         self.dp = shelve.LockedDBShelf('configpending')
-        self.files_dir = pisi.util.join_path(ctx.config.db_dir(), 'files')
+        self.files_dir = join(ctx.config.db_dir(), 'files')
 
     def close(self):
         self.d.close()
         self.dp.close()
 
     def files_name(self, pkg, version, release):
-        from pisi.util import join_path as join
-        pkg_dir = join(ctx.config.lib_dir(), pkg + '-' + version + '-' + release)
+        pkg_dir = self.pkg_dir(pkg, version, release)
         return join(pkg_dir, ctx.const.files_xml)
 
     def files(self, pkg):
@@ -92,6 +92,9 @@ class InstallDB:
         files = Files()
         files.read(self.files_name(pkg,pkginfo.version,pkginfo.release))
         return files
+
+    def pkg_dir(self, pkg, version, release):
+        return join(ctx.config.lib_dir(), pkg + '-' + version + '-' + release)
 
     def is_recorded(self, pkg):
         pkg = str(pkg)
