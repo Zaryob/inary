@@ -383,8 +383,8 @@ def remove(A):
     if not ctx.get_option('bypass_safety'):
         if ctx.componentdb.has_component('system.base'):
             refused = A.intersection(set(ctx.componentdb.get_component('system.base').packages))
-            ctx.ui.warning(_('Safety switch: cannot remove the following packages in system.base: ' +
-                           util.strlist(list(refused))))
+            ctx.ui.warning(_('Safety switch: cannot remove the following packages in system.base: ') +
+                           util.strlist(refused))
             A = A - set(ctx.componentdb.get_component('system.base').packages)
         else:
             ctx.ui.warning(_('Safety switch: the component system.base cannot be found'))
