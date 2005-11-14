@@ -75,7 +75,6 @@ class LocalText(dict):
         self.tag = tag
         self.req = req
         dict.__init__(self)
-        #self.locs = {}
     
     def decode(self, node, errs, where = ""):
         # flags, tag name, instance attribute
@@ -109,14 +108,20 @@ class LocalText(dict):
 
     def errors(self, where = unicode()):
         errs = []
-        langs = [ locale.getlocale()[0][0:2], 'tr', 'en' ]
+        try:
+            langs = [ locale.getlocale()[0][0:2], 'tr', 'en' ]
+        except:
+            raise Error(_('LocalText: locale not initialized'))
         if not util.any(lambda x : self.has_key(x), langs):
-            errs.append( where + _("Tag should have at least an English or Turkish version"))
+            errs.append( where + _("Tag should have at least the current locale, or failing that an English or Turkish version"))
         #FIXME: check if all entries are unicode
         return errs
     
     def format(self, f, errs):
-        L = locale.getlocale()[0][0:2] # try to read language, pathetic isn't it?
+        try:
+            L = locale.getlocale()[0][0:2] # try to read language, pathetic isn't it?
+        except:
+            raise Error(_('LocalText: locale not initialized'))
         if self.has_key(L):
             f.add_flowing_data(self[L])
         elif self.has_key('en'):
@@ -126,7 +131,7 @@ class LocalText(dict):
             # fallback to Turkish
             f.add_flowing_data(self['tr'])
         else:
-            errs.append(_("Tag should have at least an English or Turkish version"))
+            errs.append(_("Tag should have at least the current locale, or failing that an English or Turkish version"))
 
     #FIXME: factor out these common routines
     def print_text(self, file = sys.stdout):
@@ -139,7 +144,10 @@ class LocalText(dict):
                 ctx.ui.warning(x)
 
     def __str__(self):
-        L = locale.getlocale()[0][0:2] # try to read language, pathetic isn't it?
+        try:
+            L = locale.getlocale()[0][0:2] # try to read language, pathetic isn't it?
+        except:
+            raise Error(_('LocalText: locale not initialized'))
         if self.has_key(L):
             return unicode(self[L])
         elif self.has_key('en'):
@@ -150,7 +158,6 @@ class LocalText(dict):
             return unicode(self['tr'])
         else:
             return ''
-            #ctx.ui.warning(_("Tag should have at least an English or Turkish version"))
 
 class Writer(formatter.DumbWriter):
     """adds unicode support"""
