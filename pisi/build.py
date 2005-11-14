@@ -285,9 +285,23 @@ class Builder:
     def check_build_dependencies(self):
         """fail if dependencies not satisfied"""
 
+        build_deps = set(self.spec.source.buildDependencies)
+
+        if not ctx.get_option('bypass_safety'):
+            if ctx.componentdb.has_component('system.devel'):
+                build_deps_names = set([x.package for x in build_deps])
+                devel_deps_names = set(ctx.componentdb.get_component('system.devel').packages)
+                extra_names = devel_deps_names - build_deps_names
+                ctx.ui.warning(_('Safety switch: following extra packages in system.devel will be installed: ') +
+                           util.strlist(extra_names))
+                extra_deps = [dependency.Dependency(package = x) for x in extra_names]
+                build_deps = build_deps.union(extra_deps)
+            else:
+                ctx.ui.warning(_('Safety switch: the component system.devel cannot be found'))
+
         # find out the build dependencies that are not satisfied...
         dep_unsatis = []
-        for dep in self.spec.source.buildDependencies:
+        for dep in build_deps:
             if not dependency.installed_satisfies_dep(dep):
                 dep_unsatis.append(dep)
     

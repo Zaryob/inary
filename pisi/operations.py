@@ -180,7 +180,7 @@ def expand_components(A):
         if ctx.componentdb.has_component(x):
             Ap = Ap.union(ctx.componentdb.get_component(x).packages)
         else:
-            Ap.append(x)
+            Ap.add(x)
     return Ap
 
 def install_pkg_names(A):
@@ -379,6 +379,16 @@ def remove(A):
     
     # filter packages that are not installed
     A_0 = A = expand_components(set(A))
+
+    if not ctx.get_option('bypass_safety'):
+        if ctx.componentdb.has_component('system.base'):
+            refused = A.intersection(set(ctx.componentdb.get_component('system.base').packages))
+            ctx.ui.warning(_('Safety switch: cannot remove the following packages in system.base: ' +
+                           util.strlist(list(refused))))
+            A = A - set(ctx.componentdb.get_component('system.base').packages)
+        else:
+            ctx.ui.warning(_('Safety switch: the component system.base cannot be found'))
+
     Ap = []
     for x in A:
         if ctx.installdb.is_installed(x):
