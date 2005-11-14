@@ -19,44 +19,47 @@ _ = __trans.ugettext
 
 import pisi
 import pisi.pxml.xmlfile as xmlfile
+import pisi.pxml.autoxml as autoxml
 
 class Error(pisi.Error):
     pass
 
-__metaclass__ = xmlfile.autoxml
+__metaclass__ = autoxml.autoxml
 
 
 class Distribution:
-    t_Name = [xmlfile.Text, xmlfile.mandatory]
-    t_Description = [xmlfile.LocalText, xmlfile.mandatory]
-    t_Version = [xmlfile.Text, xmlfile.mandatory]
-    t_Type =  [xmlfile.Text, xmlfile.mandatory]
-    t_Dependencies = [ [xmlfile.Text], xmlfile.optional, "Distribution"]
+    t_Name = [autoxml.Text, autoxml.mandatory]
+    t_Description = [autoxml.LocalText, autoxml.mandatory]
+    t_Version = [autoxml.Text, autoxml.mandatory]
+    t_Type =  [autoxml.Text, autoxml.mandatory]
+    t_Dependencies = [ [autoxml.Text], autoxml.optional, "Dependencies/Distribution"]
 
 
 class Component(xmlfile.XmlFile):
     "part-of representation for component declarations"
 
-    __metaclass__ = xmlfile.autoxml
+    __metaclass__ = autoxml.autoxml
 
     tag = "PISI"
     
-    t_Name = [xmlfile.Text, xmlfile.mandatory]     # fully qualified name
-    t_PartOf = [xmlfile.Text, xmlfile.mandatory]
-    t_LocalName = [xmlfile.LocalText, xmlfile.mandatory]
-    t_Description = [xmlfile.LocalText, xmlfile.mandatory]
-    #t_Icon = [xmlfile.Binary, xmlfile.mandatory]
-    t_Dependencies = [ [xmlfile.String], xmlfile.optional, "Dependencies/Component"]
+    t_Name = [autoxml.Text, autoxml.mandatory]     # fully qualified name
+    t_PartOf = [autoxml.Text, autoxml.mandatory]
+    t_LocalName = [autoxml.LocalText, autoxml.mandatory]
+    t_Description = [autoxml.LocalText, autoxml.mandatory]
+    #t_Icon = [autoxml.Binary, autoxml.mandatory]
+    t_Dependencies = [ [autoxml.String], autoxml.optional, "Dependencies/Component"]
 
 
-class ComponentTree(xmlfile.XmlFile):
-    "index representation for the component structure"
+#FIXME: recursive declarations do not work!
+#class ComponentTree(xmlfile.XmlFile):
+#    "index representation for the component structure"
+#
+#    __metaclass__ = autoxml.autoxml
+#
+#    tag = "Component"
+#    
+#    t_Name = [autoxml.Text, autoxml.mandatory]    # fully qualified name
+#    #t_Icon = [autoxml.Binary, autoxml.mandatory]
+#    t_Dependencies = [ [autoxml.Text], autoxml.optional, "Component"]
+#    #t_Parts = [ [pisi.component.ComponentTree], autoxml.optional, "Component"]
 
-    __metaclass__ = xmlfile.autoxml
-
-    tag = "Component"
-    
-    t_Name = [xmlfile.Text, xmlfile.mandatory]    # fully qualified name
-    #t_Icon = [xmlfile.Binary, xmlfile.mandatory]
-    t_Dependencies = [ [xmlfile.Text], xmlfile.optional, "Component"]
-    t_Parts = [ [ComponentTree], xmlfile.optional, "Component"]

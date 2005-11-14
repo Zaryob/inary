@@ -31,8 +31,10 @@ import pisi.pxml.autoxml as autoxml
 import pisi.context as ctx
 from pisi.dependency import Dependency
 import pisi.dependency
+import pisi.component as component
 from pisi.util import Checks
 import pisi.util as util
+
 
 class Error(pisi.Error):
     pass
@@ -205,6 +207,7 @@ class SpecFile(XmlFile):
     t_Source = [ Source, autoxml.mandatory]
     t_Packages = [ [Package], autoxml.mandatory, "Package"]
     t_History = [ [Update], autoxml.mandatory]
+    t_Components = [ [component.Component], autoxml.optional, "Component"]
 
     #we're not doing this with the init hook right now
     #def init(self, tag = "PISI"):
