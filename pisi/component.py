@@ -100,7 +100,7 @@ class ComponentDB(object):
         return list
 
     def add_component(self, component):
-        self.d[name] = component.name
+        self.d[component.name] = component
 
     def add_package(self, component_name, package):
         if not self.has_component(component_name):

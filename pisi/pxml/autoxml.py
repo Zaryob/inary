@@ -297,10 +297,16 @@ class autoxml(oo.autosuper, oo.autoprop):
         # generate top-level helper functions
         cls.initializers = inits
         def initialize(self, **args):
-            if not args.has_key('tag'):
-                tag = cls.tag
             if xmlfile_support:
-                XmlFile.__init__(self, tag = tag) 
+                # totally dailywtf
+                #if args.has_key('tag'):
+                #    tag = args['tag']
+                #else:
+                #    tag = self.__class__.tag # ought to be autoxml
+                #XmlFile.__init__(self, tag = tag)
+                #workaround: init only top level xmlfile, not the parts
+                if not args.has_key('tag'):
+                    XmlFile.__init__(self, tag = cls.tag) 
             for base in cls.autoxml_bases:
                 base.__init__(self)
             #super(cls, self).__init__(tag = tag) cooperative shit disabled for now
