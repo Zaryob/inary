@@ -165,7 +165,7 @@ class Builder:
         self.run_install_action()
 
         # after all, we are ready to build/prepare the packages
-        self.build_packages()
+        return self.build_packages()
 
     def set_environment_vars(self):
         """Sets the environment variables for actions API to use"""
@@ -479,6 +479,8 @@ class Builder:
         # Strip install directory before building .pisi packages.
         self.strip_install_dir()
 
+        package_names = []
+
         for package in self.spec.packages:
             # store additional files
             c = os.getcwd()
@@ -519,6 +521,7 @@ class Builder:
                                      self.spec.source.release,
                                      self.metadata.package.build)
             pkg = Package(name, 'w')
+            package_names.append(name)
 
             # add comar files to package
             os.chdir(self.pspecDir)
@@ -551,3 +554,5 @@ class Builder:
             util.clean_dir(self.bctx.pkg_dir())
         else:
             ctx.ui.info(_("Keeping Build Directory"))
+
+        return package_names
