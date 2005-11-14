@@ -148,7 +148,7 @@ class Source:
     t_Summary = [autoxml.LocalText, autoxml.mandatory]
     t_Description = [autoxml.LocalText, autoxml.mandatory]
     t_IsA = [ [autoxml.String], autoxml.mandatory]
-    t_PartOf = [autoxml.String, autoxml.mandatory]
+    t_PartOf = [autoxml.String, autoxml.optional]
     t_Icon = [ autoxml.String, autoxml.optional]
     t_License = [ [autoxml.String], autoxml.mandatory]
     t_Archive = [Archive, autoxml.mandatory ]

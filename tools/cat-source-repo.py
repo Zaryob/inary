@@ -1,4 +1,6 @@
 #! /usr/bin/python
+# a simple tool to list stuff in source repository
+# author: exa
 
 import sys
 import os
@@ -11,7 +13,7 @@ import pisi.context as ctx
 import pisi.util
 
 options = pisi.config.Options()
-if len(sys.argv)>2:
+if len(sys.argv) > 2:
     options.destdir=sys.argv[2]
 else:
     options.destdir = '/'
