@@ -76,7 +76,11 @@ Legend:
 
  * medium priority
  
- / autoxml: automated xml processing (eray)
+ - a helper script for finding dependencies (eray)
+
+ * finished tasks
+
+ + autoxml: automated xml processing (eray)
    + design
    + basic types
    + list type
@@ -89,11 +93,7 @@ Legend:
    + replace specfile with new specfile using autoxml
    + autoxmlize: metadata, index, dependency and related code paths
    + inheritance support
-   / revise writing, error checking, printing and tests
- - a helper script for finding dependencies (eray)
-
- * finished tasks
-
+   + revise writing, error reporting, tests
  + components and distribution (eray)
    + requirements
    + xml format, add to PSPEC
@@ -189,7 +189,10 @@ Legend:
    + MetaData
    + Files
    - Index (somebody should write one :} )
- ? non-interactive use (baris)
+ - autoxml:
+   - revise error checking, printing and tests
+   - make autoxml dependent on only xmlext and xmlfile interfaces
+ ? non-interactive use
 
 5. Post Release
 
