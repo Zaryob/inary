@@ -90,7 +90,11 @@ Legend:
    + autoxmlize: metadata, index, dependency and related code paths
    + inheritance support
    / revise writing, error checking, printing and tests
- / components and distribution (eray)
+ - a helper script for finding dependencies (eray)
+
+ * finished tasks
+
+ + components and distribution (eray)
    + requirements
    + xml format, add to PSPEC
    + index component.xml's and make use of them in build
@@ -100,14 +104,10 @@ Legend:
      + index: update component database(s)
      + bug fixing
    + install/remove/upgrade components
-   - safety switch: preserve system.base, install system.devel for build, etc. 
+   + safety switch: preserve system.base, install system.devel for build, etc. 
  + multiple package repository (eray)
    + decide how to implement
    + support repo order
- - a helper script for finding dependencies (eray)
-
- * finished tasks
-
  + refactor xml support and implement multiple backends
    + 4suite support (initial patch by faik, completed by eray)
    + piksemel support (eray)
