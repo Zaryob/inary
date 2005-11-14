@@ -146,24 +146,17 @@ def package_graph(A, ignore_installed = False):
         B = Bp
     return G_f
 
-def postpone_postinstall(package):
-     try:
-        import pisi.comariface as comariface
-        comariface.register(package)
-     except ImportError:
-        raise Error(_("COMAR: comard not fully installed"))
-
 def configure_pending():
     # start with pending packages
     # configure them in reverse topological order of dependency
     A = ctx.installdb.list_pending()
     G_f = pgraph.PGraph(packagedb)               # construct G_f
-    for x in A:
+    for x in A.keys():
         G_f.add_package(x)
     B = A
     while len(B) > 0:
         Bp = set()
-        for x in B:
+        for x in B.keys():
             pkg = packagedb.get_package(x)
             for dep in pkg.runtimeDependencies:
                 if dep.package in G_f.vertices():
@@ -176,7 +169,22 @@ def configure_pending():
     try:
         import pisi.comariface as comariface
         for x in order:
-            comariface.run_postinstall(x)
+            pkginfo = A[x]
+            pkgname = util.package_name(x, pkginfo.version,
+                                        pkginfo.release,
+                                        pkginfo.build,
+                                        False)
+            pkg_path = util.join_path(ctx.config.lib_dir(),
+                                           pkgname)
+            m = MetaData()
+            metadata_path = util.join_path(pkg_path, ctx.const.metadata_xml)
+            m.read(metadata_path)
+            for pcomar in m.package.providesComar:
+                scriptPath = util.join_path(pkg_path,
+                                            ctx.const.comar_dir,
+                                            pcomar.script)
+                comariface.register(pcomar, x, scriptPath)
+                comariface.run_postinstall(x)
             ctx.installdb.clear_pending(x)
     except ImportError:
         raise Error(_("COMAR: comard not fully installed"))

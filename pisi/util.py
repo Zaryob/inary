@@ -486,11 +486,12 @@ def clean_locks(top = '.'):
 # Package/Repository Related Functions #
 ########################################
 
-def package_name(name, version, release, build):
+def package_name(name, version, release, build, prependSuffix=True):
     fn = name + '-' + version + '-' + release
     if build:
         fn += '-' + str(build)
-    fn += ctx.const.package_suffix
+    if prependSuffix:
+        fn += ctx.const.package_suffix
     return fn
 
 def is_package_name(fn, package_name = None):

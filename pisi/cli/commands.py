@@ -361,8 +361,6 @@ class PackageOp(Command):
         p = self.parser
         p.add_option("-B", "--ignore-comar", action="store_true",
                      default=False, help=_("bypass comar configuration agent"))
-        p.add_option("", "--postpone-postinstall", action="store_true",
-                              default=False, help=_("Postpone postinstall script"))
         ignoredep_opt(self)
 
     def init(self):
@@ -871,8 +869,7 @@ class ListPending(Command):
         self.init(True)
 
         list = ctx.installdb.list_pending()
-        list.sort()
-        for p in list:
+        for p in list.keys():
             print p
 
         self.finalize()

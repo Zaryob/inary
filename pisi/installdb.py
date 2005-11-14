@@ -113,10 +113,11 @@ class InstallDB:
         return list
 
     def list_pending(self):
-        list = []
+        dict = {}
         for (pkg, x) in self.dp.iteritems():
-            list.append(pkg)
-        return list
+            pkginfo = self.d[pkg]
+            dict[pkg] = pkginfo
+        return dict
 
     def get_info(self, pkg):
         pkg = str(pkg)
@@ -140,8 +141,7 @@ class InstallDB:
         pkg = str(pkg)
         if self.is_installed(pkg):
             raise InstallDBError(_("Already installed"))
-        if ctx.config.get_option('ignore_comar') or \
-           ctx.config.get_option('postpone_postinstall'):
+        if ctx.config.get_option('ignore_comar'):
             state = 'ip'
             self.dp[pkg] = True
         else:
