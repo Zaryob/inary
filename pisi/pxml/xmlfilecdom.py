@@ -44,7 +44,6 @@ XML_NS = unicode(XML_NAMESPACE)
 import pisi
 
 class Error(pisi.Error):
-    "named this way because the class if mostly used with an import *"
     pass
 
 class XmlFile(object):
@@ -71,7 +70,7 @@ class XmlFile(object):
             self.doc = ParsePath(path)
             return self.doc.documentElement
         except Ft.FtException, e:
-            raise Error(_("File '%s' has invalid XML:") % (path, str(e)) )
+            raise Error(_("File '%s' has invalid XML: %s") % (path, str(e)) )
 
     def writexml(self, path):
         f = file(path, 'w')
