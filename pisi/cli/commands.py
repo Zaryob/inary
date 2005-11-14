@@ -380,6 +380,9 @@ Usage: install <package1> <package2> ... <packagen>
 
 You may use filenames, URIs or package names for packages. If you have
 specified a package name, it should exist in a specified repository.
+
+You can also specify components instead of package names, which will be
+expanded to package names.
 """
     __metaclass__ = autocommand
 
@@ -418,7 +421,11 @@ You may use only package names to specify packages because
 the package upgrade operation is defined only with respect 
 to repositories. If you have specified a package name, it
 should exist in the package repositories. If you just want to
-reinstall a package from a pisi file, use the install command."""
+reinstall a package from a pisi file, use the install command.
+
+You can also specify components instead of package names, which will be
+expanded to package names.
+"""
 
     __metaclass__ = autocommand
 
@@ -454,6 +461,9 @@ class Remove(PackageOp):
 Usage: remove <package1> <package2> ... <packagen>
 
 Remove package(s) from your system. Just give the package names to remove.
+
+You can also specify components instead of package names, which will be
+expanded to package names.
 """
     __metaclass__ = autocommand
 
