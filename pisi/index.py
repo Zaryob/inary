@@ -31,6 +31,8 @@ from pisi.package import Package
 from pisi.pxml.xmlfile import XmlFile
 import pisi.pxml.autoxml as autoxml
 from pisi.uri import URI
+import pisi.component as component
+import pisi.specfile as specfile
 
 class Error(pisi.Error):
     pass
@@ -42,6 +44,7 @@ class Index(XmlFile):
 
     t_Sources = [ [specfile.Source], autoxml.optional, "Source"]
     t_Packages = [ [metadata.Package], autoxml.optional, "Package"]
+    t_Components = [ [component.Component], autoxml.optional, "Component"]
 
     def read_uri(self, filename, repo = None):
         """Read PSPEC file"""
@@ -65,14 +68,21 @@ class Index(XmlFile):
         for root, dirs, files in os.walk(repo_uri):
             for fn in files:
                 if fn.endswith(ctx.const.package_suffix):
-                    ctx.ui.info(_('Adding %s  to package index') %fn)
+                    ctx.ui.info(_('Adding %s to package index') % fn)
                     self.add_package(os.path.join(root, fn), repo_uri)
+                if fn == 'component.xml':
+                    ctx.ui.info(_('Adding %s to component index') % fn)
+                    self.add_component(os.path.join(root, fn))
+                #if fn == 'pspec.xml':
+                #    self.add_source(os.path.join(root, fn), repo_uri)
 
     def update_db(self, repo):
         pkgdb = packagedb.get_db(repo)
         pkgdb.clear()
         for pkg in self.packages:
             pkgdb.add_package(pkg)
+        #for comp in self.components:
+        #    compdb.add_component(pkg)
 
     def add_package(self, path, repo_uri):
         package = Package(path, 'r')
@@ -97,5 +107,24 @@ class Index(XmlFile):
         else:
             self.packages.append(md.package)
 
+    def add_component(self, path):
+        comp = component.Component()
+        try:
+            comp.read(path)
+            self.components.append(comp)
+        except:
+            ctx.ui.error(_('Component in %s is corrupt') % path)
+            #ctx.ui.error(str(Error(*errs)))
+
+    def add_source(self, path):
+        ctx.ui.info(_('Adding %s to source index') % fn)
+        sf = specfile.SpecFile()
+        sf.read(path)
+        errs = sf.errors()
+        if sf.errors():
+            ctx.ui.error(_('SpecFile in %s is corrupt') % path)
+            ctx.ui.error(str(Error(*errs)))
+        else:
+            self.sources.append(sf.source)
+
     #TODO: add source
-    

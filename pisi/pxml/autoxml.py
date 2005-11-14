@@ -106,22 +106,26 @@ class LocalText(dict):
             newnode.appendChild(newtext)
             node.appendChild(newnode)
 
+    @staticmethod
+    def get_lang():
+        try:
+            (lang, encoding) = locale.getlocale()
+            if not lang:
+                (lang, encoding) = locale.getdefaultlocale()
+            return lang[0:2]
+        except:
+            raise Error(_('LocalText: unable to get either current or default locale'))
+
     def errors(self, where = unicode()):
         errs = []
-        try:
-            langs = [ locale.getlocale()[0][0:2], 'tr', 'en' ]
-        except:
-            raise Error(_('LocalText: locale not initialized'))
+        langs = [ LocalText.get_lang(), 'tr', 'en' ]
         if not util.any(lambda x : self.has_key(x), langs):
             errs.append( where + _("Tag should have at least the current locale, or failing that an English or Turkish version"))
         #FIXME: check if all entries are unicode
         return errs
-    
+
     def format(self, f, errs):
-        try:
-            L = locale.getlocale()[0][0:2] # try to read language, pathetic isn't it?
-        except:
-            raise Error(_('LocalText: locale not initialized'))
+        L = LocalText.get_lang()
         if self.has_key(L):
             f.add_flowing_data(self[L])
         elif self.has_key('en'):
@@ -144,10 +148,7 @@ class LocalText(dict):
                 ctx.ui.warning(x)
 
     def __str__(self):
-        try:
-            L = locale.getlocale()[0][0:2] # try to read language, pathetic isn't it?
-        except:
-            raise Error(_('LocalText: locale not initialized'))
+        L = LocalText.get_lang()
         if self.has_key(L):
             return unicode(self[L])
         elif self.has_key('en'):

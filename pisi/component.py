@@ -43,7 +43,7 @@ class Component(xmlfile.XmlFile):
     tag = "PISI"
     
     t_Name = [autoxml.Text, autoxml.mandatory]     # fully qualified name
-    t_PartOf = [autoxml.Text, autoxml.mandatory]
+    #t_PartOf = [autoxml.Text, autoxml.mandatory]
     t_LocalName = [autoxml.LocalText, autoxml.mandatory]
     t_Description = [autoxml.LocalText, autoxml.mandatory]
     #t_Icon = [autoxml.Binary, autoxml.mandatory]

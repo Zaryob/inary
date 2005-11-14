@@ -557,16 +557,19 @@ source and binary packages.
         self.parser.add_option("-a", "--absolute-uris", action="store_true",
                                default=False,
                                help=_("store absolute links for indexed files."))
+        self.parser.add_option("-o", "--output", action="store",
+                               default='pisi-index.xml',
+                               help=_("index output file"))
 
     def run(self):
         
         self.init()
         from pisi.api import index
         if len(self.args)==1:
-            index(self.args[0])
+            index(self.args[0], ctx.get_option('output'))
         elif len(self.args)==0:
             ctx.ui.info( _('Indexing current directory.'))
-            index()
+            index('.', ctx.get_option('output'))
         else:
             ctx.ui.info( _('Indexing only a single directory supported.'))
             return

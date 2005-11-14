@@ -223,14 +223,13 @@ def info_name(package_name):
     else:
         raise Error(_('Package %s not found') % package_name)
 
-def index(repo_dir = '.'):
+def index(repo_dir = '.', output = 'pisi-index.xml'):
 
     ctx.ui.info(_('* Building index of PISI files under %s') % repo_dir)
     index = Index()
     index.index(repo_dir)
-    index.write(ctx.const.pisi_index)
+    index.write(output)
     ctx.ui.info(_('* Index file written'))
-
 
 def add_repo(name, indexuri):
     repo = pisi.repodb.Repo(URI(indexuri))
