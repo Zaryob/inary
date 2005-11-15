@@ -23,9 +23,11 @@ from pisi.cli import printu
 from pisi.uri import URI
 from pisi.cli.commands import *
 
-class ParserError(Exception):
+class ParserError(pisi.Exception):
     pass
 
+class Error(pisi.Error):
+    pass
 
 class PreParser(OptionParser):
     """consumes any options, and finds arguments from command line"""
@@ -87,19 +89,20 @@ class PisiCLI(object):
                 if 'version' in opts:
                     self.parser.print_version()
                     sys.exit(0)
-                printu(_('No command given'))
-                self.die()
+                raise Error(_('No command given'))
+                #self.die()
             cmd_name = args[0]
         except ParserError:
-            printu(_('Command line parsing error'))
-            self.die()
+            raise Error(_('Command line parsing error'))
+            #self.die()
 
         self.command = Command.get_command(cmd_name)
         if not self.command:
-            printu(_("Unrecognized command: %s") % cmd_name)
-            self.die()
+            raise Error(_("Unrecognized command: %s") % cmd_name)
+            #self.die()
 
     def die(self):
+        #raise Error('')
         printu('\n' + self.parser.format_help())
         sys.exit(1)
 
