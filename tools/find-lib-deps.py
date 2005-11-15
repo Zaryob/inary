@@ -38,7 +38,7 @@ deps = set()
 needed = set()
 for file in package.files.list:
     #print file.path, file.type
-    if file.type == 'binary':
+    if file.type == 'executable':
         (ret, lines) = util.run_batch('objdump -p %s' % util.join_path('/tmp/install', file.path))
         for x in lines:
             if x.startswith('  NEEDED'):
@@ -53,7 +53,12 @@ for lib in needed:
     try:
         (pkg_name, file_info) = ctx.filesdb.get_file(path)
         ctx.ui.info("Library dependency: '%s' due to library '%s'" % (pkg_name, file_info.path))
+        deps.add(pkg_name)
     except:
         ctx.ui.warning('Cannot find an installed package for library %s' % lib)
 
+ctx.ui.info('Found deps:')
+for x in deps:
+    ctx.ui.info(x)
+        
 pisi.api.finalize()
