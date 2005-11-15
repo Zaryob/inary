@@ -80,7 +80,7 @@ class Index(XmlFile):
         pkgdb = packagedb.get_db(repo)
         pkgdb.clear()
         for comp in self.components:
-            ctx.componentdb.add_component(comp)
+            ctx.componentdb.update_component(comp)
         for pkg in self.packages:
             pkgdb.add_package(pkg)
 

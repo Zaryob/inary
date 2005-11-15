@@ -91,6 +91,8 @@ class ComponentDB(object):
         return self.d.has_key(name)
 
     def get_component(self, name):
+        if not self.has_component(name):
+            self.d[name] = Component(name = name)
         return self.d[name]
 
     def list_components(self):
@@ -99,12 +101,13 @@ class ComponentDB(object):
             list.append(pkg)
         return list
 
-    def add_component(self, component):
+    def update_component(self, component):
+        if self.d.has_key(component.name):
+            # preserve the list of packages
+            component.packages = self.d[component.name].packages
         self.d[component.name] = component
 
     def add_package(self, component_name, package):
-        if not self.has_component(component_name):
-            raise Error(_('Information for component %s not available') % component_name)
         component = self.get_component(component_name)
         component.packages.append(package)
         self.d[component_name] = component # update

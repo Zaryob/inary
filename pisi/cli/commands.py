@@ -21,7 +21,9 @@ import pisi
 import pisi.cli
 import pisi.context as ctx
 from pisi.uri import URI
-
+import pisi.util as util
+import pisi.api as api
+import pisi.packagedb as packagedb
 
 class Error(pisi.Error):
     pass
@@ -536,6 +538,8 @@ Usage: info <package1> <package2> ... <packagen>
 
         metadata, files = pisi.api.info(arg)
         ctx.ui.info(unicode(metadata.package))
+        revdeps =  [x[0] for x in packagedb.get_rev_deps(arg)]
+        ctx.ui.info( _('Reverse Dependencies: ') + util.strlist(revdeps) )
         if self.options.files or self.options.files_path:
             if files:
                 ctx.ui.info(_('\nFiles:'))
