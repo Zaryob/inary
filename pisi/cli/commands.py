@@ -530,19 +530,24 @@ Usage: info <package1> <package2> ... <packagen>
 
         self.init(True)
         for arg in self.args:
-            self.printinfo(arg)
+            if ctx.componentdb.has_component(arg):
+                component = ctx.componentdb.get_component(arg)
+                #if self.options.long:
+                ctx.ui.info(unicode(component))
+            else: # then assume it was a package
+                self.printinfo_package(arg)
         self.finalize()
 
-    def printinfo(self, arg):
+    def printinfo_package(self, arg):
         import os.path
 
         metadata, files = pisi.api.info(arg)
         ctx.ui.info(unicode(metadata.package))
         revdeps =  [x[0] for x in packagedb.get_rev_deps(arg)]
-        ctx.ui.info( _('Reverse Dependencies: ') + util.strlist(revdeps) )
+        print _('Reverse Dependencies:'), util.strlist(revdeps)
         if self.options.files or self.options.files_path:
             if files:
-                ctx.ui.info(_('\nFiles:'))
+                print _('\nFiles:')
                 for fileinfo in files.list:
                     if self.options.files:
                         print fileinfo
