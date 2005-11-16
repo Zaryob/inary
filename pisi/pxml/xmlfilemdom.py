@@ -43,7 +43,6 @@ class XmlFile(object):
 
     def __init__(self, tag):
         self.rootTag = tag
-        self.newDocument()
 
     def newDocument(self):
         """clear DOM"""

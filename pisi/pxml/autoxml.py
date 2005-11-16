@@ -304,10 +304,8 @@ class autoxml(oo.autosuper, oo.autoprop):
                 #else:
                 #    tag = self.__class__.tag # ought to be autoxml
                 #XmlFile.__init__(self, tag = tag)
-                #workaround: init only top level xmlfile, not the parts
                 if not args.has_key('tag'):
-                    #XmlFile.__init__(self, tag = cls.tag)
-                   pass # disable xmlfile support in constructor entirely! 
+                    XmlFile.__init__(self, tag = cls.tag)
             for base in cls.autoxml_bases:
                 base.__init__(self)
             #super(cls, self).__init__(tag = tag) cooperative shit disabled for now
