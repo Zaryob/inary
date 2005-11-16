@@ -5,7 +5,6 @@
 \author{Eray \"Ozkural and T. Bar\i{}\c s Metin}
 
 
-
 \begin{document}
 \maketitle
 
@@ -62,9 +61,9 @@ versioning scheme.
 
 \subsection{Source Version}
 
-Source version is the version number provided is provided by the
-upstream maintainer of the source archive used in package. It must be
-always the same as the upstream version used.
+Source version is the version number provided by the
+upstream maintainer of the source archive used in package. It must 
+always be the same as the upstream version used.
 
 \textbf{Example}: If the upstream archive name is
 \emph{bash-3.0.tar.gz} the version number of the package is \emph{3.0}
@@ -92,25 +91,25 @@ The basic order of the priorities for suffixes is:\newline
 \emph{p $>$ (no suffix) $>$ rc $>$ pre $>$ beta $>$ alpha}.
 
 The scope of a source version string is global in the literal
-sense.
+sense. It shall not vary from repository to repository.
 
 The support for these special suffixes as well as usual alphanumeric
 version string ordering has been implemented in P\.IS\.I.
 
 \section{Identifying Package Sources}
 
-A PISI source has three identity elements written under
+A P\.IS\.I source has three identity elements written under
 \texttt{SOURCE} tag: name, source version, and source release number.
 We usually say just version and release number/release instead of
 source version and source release number, respectively. Name is available in
 the \texttt{<Name>} tag. Version and release are available in the last
-\texttt{<Update>} element of \texttt{<History>} tag.
+\texttt{<Update>} element of \texttt{<History>} tag of a \texttt{PSPEC}.
 
 The name of a source package is constant throughout its revision
 history. The version is the original version, given by its
-programmers. Release is a nonnegative integer.  Name and release is sufficient to uniquely identify a
-particular PISI source revision.  That is, version and release are
-independent.
+programmers. Release is a positive integer.  Name and release 
+is sufficient to uniquely identify a particular PISI source revision.
+That is, version and release are independent.
 
 \subsection{Release Number}
 
@@ -121,19 +120,19 @@ the actions.py, pspec.xml or any file in the source package
 directory. This change is indicated in \texttt{<Update>} tags manually
 by the package maintainer.
 
-The initial release of a package is by default \texttt{0}. The release
+The initial release of a package is by default \texttt{1}. The release
 number always increments by $1$ in each revision in the
 \texttt{History}, even the slightest ones, but it never decrements.
 
 The scope of the release number is a given distribution, regardless of
 its version, e.g. Pardus.
 
-In the near future, PISI will have strict checks for release numbers.
+In the future, PISI will have strict checks for release numbers.
 
 \subsection{Dependency Specifications}
 
 We allow a package to use both source version and release to identify
-a particular or a range of package versions.
+a particular version or a range of package versions.
 
 \section{Identifying Binary packages}
 
@@ -153,17 +152,22 @@ architecture regardless of the source version.
 Similarly to source release number, binary build number is the number
 of changes that are made to a binary package. By change, we mean any
 bit change.  The existence of a change is tested by comparing the
-cryptographic checksums in files.xml with the previous build, and the
+cryptographic checksums in files.xml with those of the previous build, and the
 build number is automatically determined by the P\.IS\.I build system.
+The build number starts from $1$ as in release number, and increments
+by one with each binary change.
 
 The user never interferes with the build number himself. However, if
 the user fails to provide the previous build, then a package without
-a build number is built.
+a build number is built. A package without a build number is evaluated
+on the basis of release number, which is guaranteed to exist.
 
 The scope of a build number is a given distribution build environment
-for a particular architecture. Therefore, it is not used in dependency
-specifications.
- 
+for a particular architecture, which may vary from repository to 
+repository. Therefore, it is not used in dependency
+specifications. However, the system does assume that a build of a  
+given package and architecture is unique in a given repository.
+
 \section{Package File Names}
 
 A P\.IS\.I binary package file name contains all the components relevant
@@ -176,6 +180,7 @@ to its identification, separated by dashes:
 
 In the future, it may be necessary to extend the notion of release
 number and build number to support branches and forks of a
-distribution. A proposal was to have CVS-like branching.
+distribution. A proposal was to have CVS-like branching, but it
+was dismissed as unnecessary.
 
 \end{document}
