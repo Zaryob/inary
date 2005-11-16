@@ -74,6 +74,7 @@ Legend:
 
 3. Beta
 
+ + info cmd: reverse dependencies of a package
  + a helper script for finding dependencies (eray)
  + autoxml: automated xml processing (eray)
    + design
@@ -100,6 +101,8 @@ Legend:
      + bug fixing
    + install/remove/upgrade components
    + safety switch: preserve system.base, install system.devel for build, etc. 
+   + info <component>
+   + started documentation
  + multiple package repository (eray)
    + decide how to implement
    + support repo order
