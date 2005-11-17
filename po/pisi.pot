@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2005-11-17 02:44+EET\n"
+"POT-Creation-Date: 2005-11-17 15:44+EET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -399,157 +399,165 @@ msgstr ""
 msgid "OK."
 msgstr ""
 
-#: pisi/build.py:79
+#: pisi/build.py:80
 msgid "Path %s belongs in multiple packages"
 msgstr ""
 
-#: pisi/build.py:145
+#: pisi/build.py:146
 msgid "Building PISI source package: %s"
 msgstr ""
 
-#: pisi/build.py:146
+#: pisi/build.py:147
 msgid ""
 "Building PISI source package: %s\n"
 msgstr ""
 
-#: pisi/build.py:187
+#: pisi/build.py:188
 msgid "IceCream detected. Make sure your daemon is up and running..."
 msgstr ""
 
-#: pisi/build.py:191
+#: pisi/build.py:192
 msgid "CCache detected..."
 msgstr ""
 
-#: pisi/build.py:202
-msgid "Source is part of %s component"
+#: pisi/build.py:196
+msgid "PartOf tag not defined, looking for component"
 msgstr ""
 
-#: pisi/build.py:207
-msgid "Fetching source from: %s"
+#: pisi/build.py:205
+msgid "Cannot find component.xml in upper directory"
 msgstr ""
 
 #: pisi/build.py:209
+msgid "Source is part of %s component"
+msgstr ""
+
+#: pisi/build.py:214
+msgid "Fetching source from: %s"
+msgstr ""
+
+#: pisi/build.py:216
 msgid "Source archive is stored: %s/%s"
 msgstr ""
 
-#: pisi/build.py:213
+#: pisi/build.py:220
 msgid "Unpacking archive..."
 msgstr ""
 
-#: pisi/build.py:215
+#: pisi/build.py:222
 msgid " unpacked (%s)"
 msgstr ""
 
-#: pisi/build.py:220
+#: pisi/build.py:227
 msgid "Setting up source..."
 msgstr ""
 
-#: pisi/build.py:225
+#: pisi/build.py:232
 msgid "Building source..."
 msgstr ""
 
-#: pisi/build.py:230
+#: pisi/build.py:237
 msgid "Installing..."
 msgstr ""
 
-#: pisi/build.py:249
+#: pisi/build.py:256
 msgid "Unable to read Action Script (%s): %s"
 msgstr ""
 
-#: pisi/build.py:251
+#: pisi/build.py:258
 msgid "SyntaxError in Action Script (%s): %s"
 msgstr ""
 
-#: pisi/build.py:281
+#: pisi/build.py:288
 msgid "unable to call function from actions: %s"
 msgstr ""
 
-#: pisi/build.py:295
+#: pisi/build.py:302
 msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 
-#: pisi/build.py:300
+#: pisi/build.py:307
 msgid "Safety switch: the component system.devel cannot be found"
 msgstr ""
 
-#: pisi/build.py:309
+#: pisi/build.py:316
 msgid "Unsatisfied Build Dependencies:"
 msgstr ""
 
-#: pisi/build.py:314
+#: pisi/build.py:321
 msgid "Do you want to install the unsatisfied build dependencies"
 msgstr ""
 
-#: pisi/build.py:315
+#: pisi/build.py:322
 msgid "Installing build dependencies."
 msgstr ""
 
-#: pisi/build.py:318
+#: pisi/build.py:325
 msgid "Cannot build package due to unsatisfied build dependencies"
 msgstr ""
 
-#: pisi/build.py:320
+#: pisi/build.py:327
 msgid "Ignoring build dependencies."
 msgstr ""
 
-#: pisi/build.py:330
+#: pisi/build.py:337
 msgid ""
 "Patch file is missing: %s\n"
 msgstr ""
 
-#: pisi/build.py:343
+#: pisi/build.py:350
 msgid "* Applying patch: %s"
 msgstr ""
 
-#: pisi/build.py:348
+#: pisi/build.py:355
 msgid "Stripping files.."
 msgstr ""
 
-#: pisi/build.py:378
+#: pisi/build.py:385
 msgid "build number is not available."
 msgstr ""
 
-#: pisi/build.py:454
+#: pisi/build.py:461
 msgid "(no previous build found, setting build no to 1.)"
 msgstr ""
 
-#: pisi/build.py:491
+#: pisi/build.py:498
 msgid "(old package lacks a build no, setting build no to 0.)"
 msgstr ""
 
-#: pisi/build.py:494
+#: pisi/build.py:501
 msgid "There are changes, incrementing build no to %d"
 msgstr ""
 
-#: pisi/build.py:497
+#: pisi/build.py:504
 msgid "There is no change from previous build %d "
 msgstr ""
 
-#: pisi/build.py:525
+#: pisi/build.py:532
 msgid "Copying additional file: '%s' to '%s' as '%s'"
 msgstr ""
 
-#: pisi/build.py:536
+#: pisi/build.py:543
 msgid "** Building package %s"
 msgstr ""
 
-#: pisi/build.py:538 pisi/build.py:541
+#: pisi/build.py:545 pisi/build.py:548
 msgid "Generating %s,"
 msgstr ""
 
-#: pisi/build.py:544
+#: pisi/build.py:551
 msgid "Creating PISI package %s."
 msgstr ""
 
-#: pisi/build.py:577
+#: pisi/build.py:584
 msgid "Done."
 msgstr ""
 
-#: pisi/build.py:580
+#: pisi/build.py:587
 msgid "Cleaning Build Directory..."
 msgstr ""
 
-#: pisi/build.py:583
+#: pisi/build.py:590
 msgid "Keeping Build Directory"
 msgstr ""
 
@@ -1273,12 +1281,12 @@ msgstr ""
 msgid "Another instance of PISI is running. Try later!"
 msgstr ""
 
-#: pisi/metadata.py:55
+#: pisi/metadata.py:58
 msgid ""
 "Build: % s, Distribution: %s, Dist. Release: %s\n"
 msgstr ""
 
-#: pisi/metadata.py:57
+#: pisi/metadata.py:60
 msgid ""
 "Architecture: %s, Installed Size: %s\n"
 msgstr ""
@@ -1548,11 +1556,11 @@ msgid "Failed command: %s"
 msgstr ""
 
 #: pisi/util.py:293
-msgid "Ignoring \"external\" link %s"
+msgid "Including external link '%s'"
 msgstr ""
 
 #: pisi/util.py:295
-msgid "Ignoring directory %s"
+msgid "Including directory '%s'"
 msgstr ""
 
 #: pisi/util.py:367
