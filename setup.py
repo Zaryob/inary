@@ -11,6 +11,7 @@
 
 import os
 import shutil
+import glob
 from distutils.core import setup
 from distutils.command.install import install
 
@@ -40,9 +41,12 @@ def getVersion():
 i18n_domain = "pisi"
 i18n_languages = "tr"
 
-class I18nInstall(install):
+class Install(install):
     def run(self):
         install.run(self)
+        self.installi18n()
+    
+    def installi18n(self):
         for lang in i18n_languages.split(' '):
             print "Installing '%s' translations..." % lang
             os.popen("msgfmt po/%s.po -o po/%s.mo" % (lang, lang))
@@ -55,6 +59,11 @@ class I18nInstall(install):
                 pass
             shutil.copy("po/%s.mo" % lang, os.path.join(destpath, "%s.mo" % i18n_domain))
 
+    def installdoc(self): #TODO: not decided if we have to
+        pass
+        #for tex in glob.glob('doc/*.tex'):
+        #    print tex
+            
 setup(name="pisi",
     version= getVersion(),
     description="PISI (Packages Installed Successfully as Intended)",
@@ -65,8 +74,9 @@ setup(name="pisi",
     url="http://www.uludag.org.tr/eng/pisi/",
     package_dir = {'': ''},
     packages = ['pisi', 'pisi.cli', 'pisi.actionsapi', 'pisi.pxml'],
-    scripts = ['pisi-cli'],
+    scripts = ['pisi-cli', 'tools/ebuild2pisi.py', 'tools/repostats.py',
+               'tools/find-lib-deps.py', 'tools/update-environ.py'],
     cmdclass = {
-        'install' : I18nInstall
+        'install' : Install
     }
     )
