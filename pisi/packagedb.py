@@ -135,7 +135,7 @@ def get_rev_deps(name):
     if inst_packagedb.has_package(name):
         return inst_packagedb.get_rev_deps(name)
 
-    return None
+    return []
 
 def remove_package(name):
     # remove the guy from the tracking databases

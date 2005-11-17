@@ -88,7 +88,7 @@ class ComponentDB(object):
         self.d.close()
 
     def has_component(self, name):
-        return self.d.has_key(name)
+        return self.d.has_key(str(name))
 
     def get_component(self, name):
         if not self.has_component(name):
