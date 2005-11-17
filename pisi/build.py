@@ -29,7 +29,8 @@ import pisi.dependency as dependency
 import pisi.operations as operations
 from pisi.sourcearchive import SourceArchive
 from pisi.files import Files, File as FileInfo
-from pisi.files import Files
+from pisi.fetcher import fetch_url
+from pisi.uri import URI
 from pisi.metadata import MetaData
 from pisi.package import Package
 import pisi.component as component
@@ -152,7 +153,7 @@ class Builder:
 
         self.check_build_dependencies()
         
-        self.fetch_component()
+        self.get_component()
         
         self.fetch_source_archive()
         self.unpack_source_archive()
@@ -190,15 +191,21 @@ class Builder:
             os.environ["PATH"] = "/usr/lib/ccache/bin/:" + os.environ["PATH"]
             ctx.ui.info(_("CCache detected..."))
 
-    def fetch_component(self):
+    def get_component(self):
         if not self.spec.source.partOf:
+            ctx.ui.warning(_('PartOf tag not defined, looking for component'))
             parentdir = os.path.realpath(self.pspecdir + '/../')
             url = util.join_path(parentdir, 'component.xml')
-            from pisi.fetcher import fetch_url
             progress = ctx.ui.Progress
-            fetch_url(url, self.bctx.pkg_work_dir(), progress)
+            if URI(url).is_remote_file():
+                fetch_url(url, self.bctx.pkg_work_dir(), progress)
+                path = util.join_path(self.bctx.pkg_work_dir(), 'component.xml')
+            else:
+                if not os.path.exists(url):
+                    raise Exception(_('Cannot find component.xml in upper directory'))
+                path = url
             comp = component.Component()
-            comp.read(util.join_path(self.bctx.pkg_work_dir(), 'component.xml'))
+            comp.read(path)
             ctx.ui.info(_('Source is part of %s component') % comp.name)
             self.spec.source.partOf = comp.name
             self.spec.override_tags()
