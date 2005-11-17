@@ -2,6 +2,8 @@
 # a script to preare PiSi source tarball from svn
 # author: exa
 
+#TODO: arguments for svn snapshot with rev number, or a tag to override default
+
 import sys
 import os
 import shutil
