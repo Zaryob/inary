@@ -26,6 +26,7 @@ for root, dirs, files in os.walk(repo_uri):
             #ctx.ui.info(_('Adding %s to package index') % fn)
             sf = specfile.SpecFile()
             sf.read(pisi.util.join_path(root, fn))
-            print sf.source.name, sf.source.partOf
+            sf.check()
+            print sf.source.name
 
 pisi.api.finalize()
