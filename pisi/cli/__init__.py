@@ -106,7 +106,7 @@ class CLI(UI):
             import re
             yesexpr = re.compile(locale.nl_langinfo(locale.YESEXPR))
 
-            prompt = msg + colorize(_('(yes/no)'), 'red')
+            prompt = msg + colorize(_(' (yes/no)'), 'red')
             s = raw_input(prompt.encode('utf-8'))
             if yesexpr.search(s):
                 return True
@@ -118,7 +118,7 @@ class CLI(UI):
             (ka['filename'], ka['percent'], ka['rate'], ka['symbol'])
         self.output(out)
         if ka['percent'] == 100:
-            self.output(colorize(' [complete]\n', 'gray'))
+            self.output(colorize(_(' [complete]\n'), 'gray'))
 
     def status(self, msg = None):
         if msg:
