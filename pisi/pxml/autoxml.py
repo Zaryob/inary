@@ -350,6 +350,12 @@ class autoxml(oo.autosuper, oo.autoprop):
                 errs.extend(self.errors_hook(where))
             return errs
         cls.errors = errors
+        def check(self):
+            errs = self.errors()
+            if errs:
+                errs.append(_("autoxml.check: '%s' errors") % len(errs))
+                raise Error(*errs)
+        cls.check = check
 
         cls.formatters = formatters
         def format(self, f, errs):

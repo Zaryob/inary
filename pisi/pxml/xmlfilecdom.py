@@ -43,6 +43,7 @@ XHTML_NS = unicode(XHTML_NAMESPACE)
 XML_NS = unicode(XML_NAMESPACE)
 
 import pisi
+from pisi.pxml.xmlextcdom import *
 
 class Error(pisi.Error):
     pass
