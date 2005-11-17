@@ -8,35 +8,18 @@
 # any later version.
 #
 # Please read the COPYING file.
+#
+# Authors: {eray,gurer}@uludag.org.tr
 
 import os
 import shutil
 import glob
+import sys
 from distutils.core import setup
 from distutils.command.install import install
 
-PISI_VERSION = "0.1"
-
-def getRevision():
-    import os
-    try:
-        p = os.popen("svn info 2> /dev/null")
-        for line in p.readlines():
-            line = line.strip()
-            if line.startswith("Revision:"):
-                return line.split(":")[1].strip()
-    except:
-        pass
-
-    # doesn't working in a Subversion directory
-    return None
-
-def getVersion():
-    rev = getRevision()
-    if rev:
-        return "-r".join([PISI_VERSION, rev])
-    else:
-        return PISI_VERSION
+sys.path.insert(0, '.')
+import pisi
 
 i18n_domain = "pisi"
 i18n_languages = "tr"
@@ -78,7 +61,7 @@ class Install(install):
         os.chdir('..')
 
 setup(name="pisi",
-    version= getVersion(),
+    version= pisi.__version__,
     description="PISI (Packages Installed Successfully as Intended)",
     long_description="PISI is the package management system of Pardus Linux.",
     license="GNU GPL2",
@@ -93,3 +76,30 @@ setup(name="pisi",
         'install' : Install
     }
     )
+
+# the below stuff is really nice but we already have a version
+# we can use this stuff for svn snapshots in a separate
+# script -- exa
+
+PISI_VERSION = pisi.__version__
+
+def getRevision():
+    import os
+    try:
+        p = os.popen("svn info 2> /dev/null")
+        for line in p.readlines():
+            line = line.strip()
+            if line.startswith("Revision:"):
+                return line.split(":")[1].strip()
+    except:
+        pass
+
+    # doesn't working in a Subversion directory
+    return None
+
+def getVersion():
+    rev = getRevision()
+    if rev:
+        return "-r".join([PISI_VERSION, rev])
+    else:
+        return PISI_VERSION
