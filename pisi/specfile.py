@@ -136,7 +136,7 @@ class Archive:
         self.name = basename(self.uri)
 
     def __str__(self):
-        s = _('URI: %s, type: %, sha1sum: %s') % (self.uri, self.type, self.sha1sum)
+        s = _('URI: %s, type: %s, sha1sum: %s') % (self.uri, self.type, self.sha1sum)
         return s
 
 

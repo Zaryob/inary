@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2005-11-17 15:31+EET\n"
-"PO-Revision-Date: 2005-11-17 15:49+0200\n"
+"POT-Creation-Date: 2005-11-17 16:25+EET\n"
+"PO-Revision-Date: 2005-11-17 16:59+0200\n"
 "Last-Translator: Eray Özkural <eray@uludag.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -494,7 +494,9 @@ msgstr "fonksiyon eylemlerden çağırılamıyor: %s"
 
 #: pisi/build.py:302
 msgid "Safety switch: following extra packages in system.devel will be installed: "
-msgstr "Emniyet mandalı: taban geliştirme sistemi system.devel'den izleyen paketler ek olarak yüklenecek:"
+msgstr ""
+"Emniyet mandalı: taban geliştirme sistemi system.devel'den izleyen paketler "
+"ek olarak yüklenecek:"
 
 #: pisi/build.py:307
 msgid "Safety switch: the component system.devel cannot be found"
@@ -777,10 +779,9 @@ msgstr "çomar yapılandırma aygıtını kullanma"
 
 #: pisi/cli/commands.py:367
 msgid "bypass safety switch"
-msgstr ""
+msgstr "emniyet mandalını esgeç"
 
 #: pisi/cli/commands.py:379
-#, fuzzy
 msgid ""
 "Install PISI packages\n"
 "\n"
@@ -798,13 +799,13 @@ msgstr ""
 "\n"
 "Paketler için dosya adları, URI'lar veya paket adları kullanabilirsiniz.\n"
 "Eğer bir paket adı verdiyseniz, paket deposunda bulunmalı.\n"
+"Paket adları yerine bileşenler de verebilirsiniz.\n"
 
 #: pisi/cli/commands.py:400 pisi/cli/commands.py:444
 msgid "Bypass ldconfig phase"
 msgstr "ldconfig safhasını esgeç"
 
 #: pisi/cli/commands.py:414
-#, fuzzy
 msgid ""
 "Upgrade PISI packages\n"
 "\n"
@@ -829,14 +830,14 @@ msgstr ""
 "\n"
 "Paketleri belirtmek için şimdilik sadece paket adları kullanabilirsiniz\n"
 "Verdiğiniz paket adları depolarda yer almalıdır. Eğer sadece\n"
-"bir dosyayı yeniden kurmak istiyorsanız install komutunu kullanın."
+"bir dosyayı yeniden kurmak istiyorsanız install komutunu kullanın. \n"
+"Paket adları yerine bileşenler de verebilirsiniz.\n"
 
 #: pisi/cli/commands.py:446
 msgid "eager upgrades"
 msgstr "istekli yükseltmeler"
 
 #: pisi/cli/commands.py:461
-#, fuzzy
 msgid ""
 "Remove PISI packages\n"
 "\n"
@@ -853,6 +854,7 @@ msgstr ""
 "\n"
 "Paket(leri) sisteminizden kaldırır. Sadece kaldırılacak paketlerin adlarını "
 "verin.\n"
+"Paket adları yerine bileşenler de verebilirsiniz.\n"
 
 #: pisi/cli/commands.py:488
 msgid ""
@@ -883,9 +885,8 @@ msgid "Show only paths."
 msgstr "Sadece yolları göster"
 
 #: pisi/cli/commands.py:547
-#, fuzzy
 msgid "Reverse Dependencies:"
-msgstr "Sağlanmamış inşa bağımlılıkları"
+msgstr "Ters bağımlılıklar"
 
 #: pisi/cli/commands.py:550
 msgid ""
@@ -924,9 +925,8 @@ msgid "store absolute links for indexed files."
 msgstr "indekslenmiş dosyalar için mutlak bağlar sakla"
 
 #: pisi/cli/commands.py:583
-#, fuzzy
 msgid "index output file"
-msgstr "dot çıktı dosyası"
+msgstr "index çıktı dosyası"
 
 #: pisi/cli/commands.py:592
 msgid "Indexing current directory."
@@ -960,6 +960,14 @@ msgid ""
 "If package specs are given, they should be the names of package dirs under /"
 "var/lib/pisi\n"
 msgstr ""
+"Veritabanlarını yeniden inşa et\n"
+"\n"
+"Kullanım: rebuilddb [ <paket1> <paket2> ... <paketn> ]\n"
+"\n"
+"PİSİ veritabanlarını yeniden inşa eder\n"
+"\n"
+"Eğer paket tanımları verildiyse /var/lib/pisi altındaki paket dizinlerinin "
+"adları olmalılar\n"
 
 #: pisi/cli/commands.py:661
 msgid "Rebuild PISI databases?"
@@ -1037,7 +1045,6 @@ msgstr ""
 "Şu anda izlenen bütün depoları gösterir.\n"
 
 #: pisi/cli/commands.py:788
-#, fuzzy
 msgid ""
 "List available packages in the repositories\n"
 "\n"
@@ -1056,7 +1063,6 @@ msgid "Repository : %s\n"
 msgstr "Depo: %s\n"
 
 #: pisi/cli/commands.py:839
-#, fuzzy
 msgid ""
 "List available components\n"
 "\n"
@@ -1064,9 +1070,9 @@ msgid ""
 "\n"
 "Gives a brief list of PiSi components published in the repositories.\n"
 msgstr ""
-"Depolardaki paketleri gösterir\n"
+"Depolardaki bileşenleri gösterir\n"
 "\n"
-"Kullanım: list-available [ <depo1> <depo2> ... depon ]\n"
+"Kullanım: list-components [ <depo1> <depo2> ... depon ]\n"
 "\n"
 "Depoda yayımlanmış olan PİSİ bileşenlerinin kısa bir listesini verir.\n"
 
@@ -1098,6 +1104,11 @@ msgid ""
 "\n"
 "#FIXME: fill this later\n"
 msgstr ""
+"Paketleri ara\n"
+"\n"
+"Kullanım: search <terim1> \n"
+"\n"
+"#FIXME: fill this later\n"
 
 #: pisi/cli/commands.py:945
 msgid ""
@@ -1118,7 +1129,6 @@ msgid "fuzzy search"
 msgstr "yaklaşık arama"
 
 #: pisi/cli/commands.py:980
-#, fuzzy
 msgid "Package %s has file %s"
 msgstr "Paket %s içinde dosya %s var"
 
@@ -1127,12 +1137,10 @@ msgid "Type: %s, Hash: %s"
 msgstr "Tip: %s, Hash: %s"
 
 #: pisi/cli/commands.py:985
-#, fuzzy
 msgid "Path '%s' does not belong to an installed package"
-msgstr "Yol %s yerleştirilmiş bir pakete ait değil"
+msgstr "Yol '%s' yerleştirilmiş bir pakete ait değil"
 
 #: pisi/cli/commands.py:997
-#, fuzzy
 msgid "Searching for %s"
 msgstr "%s'i arıyor"
 
@@ -1277,9 +1285,8 @@ msgid "Unregistering COMAR scripts for %s"
 msgstr "%s'in COMAR betikleri kayıttan siliniyor."
 
 #: pisi/component.py:117
-#, fuzzy
 msgid "Information for component %s not available"
-msgstr "Gerekli im %s bulunamadı."
+msgstr "Bileşen %s için bilgi bulunamadı"
 
 #: pisi/config.py:66
 msgid "Destination directory %s does not exist. Creating it."
@@ -1342,32 +1349,28 @@ msgid "ftp error"
 msgstr "ftp hatası"
 
 #: pisi/index.py:71
-#, fuzzy
 msgid "Adding %s to package index"
 msgstr "%s paket indexine ekleniyor"
 
 #: pisi/index.py:74
-#, fuzzy
 msgid "Adding %s to component index"
-msgstr "%s paket indexine ekleniyor"
+msgstr "%s bileşen dizinine ekleniyor"
 
 #: pisi/index.py:105
 msgid "Package %s: metadata corrupt"
 msgstr "Paket %s: metadata bozuk"
 
 #: pisi/index.py:116
-#, fuzzy
 msgid "Component in %s is corrupt"
-msgstr "Bileşen: %s\n"
+msgstr "Bileşen: %s bozuk"
 
 #: pisi/index.py:120
-#, fuzzy
 msgid "Adding %s to source index"
-msgstr "%s paket indexine ekleniyor"
+msgstr "%s kaynak dizinine ekleniyor"
 
 #: pisi/index.py:125
 msgid "SpecFile in %s is corrupt"
-msgstr ""
+msgstr "SpecFile %s bozuk"
 
 #: pisi/installdb.py:60
 msgid "installed"
@@ -1499,10 +1502,12 @@ msgstr "Bu paketler yükseltilecek: \n"
 #: pisi/operations.py:386
 msgid "Safety switch: cannot remove the following packages in system.base: "
 msgstr ""
+"Emniyet mandalı: taban sistem system.base deki izleyen paketleri "
+"kaldırılamıyor"
 
 #: pisi/operations.py:390
 msgid "Safety switch: the component system.base cannot be found"
-msgstr ""
+msgstr "Emniyet mandalı: taban sistem bileşeni system.base bulunamadı"
 
 #: pisi/operations.py:397
 msgid "Package %s does not exist. Cannot remove."
@@ -1541,25 +1546,26 @@ msgid "get_package: package %s not found"
 msgstr "get_package: paket %s bulunamadı"
 
 #: pisi/pxml/autoxml.py:85
-#, fuzzy
 msgid "At least one '%s' tag should have local text"
 msgstr "En azından bir tane '%s' etiketi yerel metne sahip olmalı"
 
 #: pisi/pxml/autoxml.py:93
-#, fuzzy
 msgid "'%s' language of tag '%s' is empty"
-msgstr "tag '%s'in '%s' dili metin verisine sahip olmalı\n"
+msgstr "'%s' dili metni, etiket %s içerisinde, boş"
 
 #: pisi/pxml/autoxml.py:117
 msgid "LocalText: unable to get either current or default locale"
 msgstr ""
+"LocalText: şu andaki ya da ön tanımlı yerelleştirme seçenekleri (locale) "
+"bulunamıyor"
 
 #: pisi/pxml/autoxml.py:123 pisi/pxml/autoxml.py:138
-#, fuzzy
 msgid ""
 "Tag should have at least the current locale, or failing that an English or "
 "Turkish version"
-msgstr "Etiketin en azından bir Türkçe ya da İngilizce versiyonu bulunmalı"
+msgstr ""
+"Etiket en azından şu andaki yerel (locale) için bir girdiye, o olmazsa bir "
+"Türkçe ya da İngilizce versiyona sahip olmalı"
 
 #: pisi/pxml/autoxml.py:402 pisi/pxml/autoxml.py:410
 msgid "autoxml.read: File '%s' has errors"
@@ -1633,9 +1639,8 @@ msgid "File '%s' has invalid XML: %s\n"
 msgstr "'%s' dosyasının XML sözdizimi geçersiz: %s\n"
 
 #: pisi/pxml/xmlfilecdom.py:75
-#, fuzzy
 msgid "File '%s' not found"
-msgstr "Dosya %s bulunamadı."
+msgstr "Dosya '%s' bulunamadı"
 
 #: pisi/pxml/xmlfilecdom.py:85 pisi/pxml/xmlfilemdom.py:76
 #: pisi/pxml/xmlfilepiks.py:67
@@ -1655,8 +1660,8 @@ msgid "Fetching %s"
 msgstr "%s'i indiriyor"
 
 #: pisi/specfile.py:139
-msgid "URI: %s, type: %, sha1sum: %s"
-msgstr ""
+msgid "URI: %s, type: %s, sha1sum: %s"
+msgstr "URI: %s, tip: %s, sha1sum: %s"
 
 #: pisi/specfile.py:192
 msgid "Name: %s, version: %s, release: %s, build %s\n"
@@ -1699,14 +1704,12 @@ msgid "Failed command: %s"
 msgstr "Başarısız komut: %s"
 
 #: pisi/util.py:293
-#, fuzzy
 msgid "Including external link '%s'"
-msgstr "Harici bağ %s işlenmiyor"
+msgstr "Harici bağ %s içeriliyor"
 
 #: pisi/util.py:295
-#, fuzzy
 msgid "Including directory '%s'"
-msgstr "%s dizini esgeçiliyor"
+msgstr "%s dizini içeriliyor"
 
 #: pisi/util.py:367
 msgid "I/O Error: Cannot calculate SHA1 hash of %s"
@@ -1747,16 +1750,18 @@ msgid "Unknown file type '%s' in package '%s'"
 msgstr "Bilinmeyen dosya tiği '%s', '%s' paketi içinde bulundu. "
 
 #: tools/repostats.py:398
-#, fuzzy
 msgid ""
 "Duplicate source packages:\n"
 "%s\n"
 "%s\n"
-msgstr "PISI kaynak paketi inşa ediliyor: %s\n"
+msgstr ""
+"Kopyalanmış kaynak paketleri:\n"
+"%s\n"
+"%s\n"
 
 #: tools/repostats.py:418
 msgid "Source package '%s' has wrong date format '%s'"
-msgstr ""
+msgstr "Kaynak paketi '%s' yanlış tarih biçimlendirmesine sahip: '%s'"
 
 #: tools/repostats.py:431
 msgid "Source package '%s' has wrong release numbers"
