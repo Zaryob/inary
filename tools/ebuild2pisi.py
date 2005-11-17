@@ -30,6 +30,8 @@ PSPEC_TEMPLATE='''<?xml version="1.0" encoding="utf-8" standalone="no"?>
             <Email>PACKAGER_EMAIL</Email>
         </Packager>
         <License>%(license)s</License>
+        <IsA></IsA>
+        <PartOf></PartOf>
         <Summary xml:lang="en">%(description)s</Summary>
         <Description xml:lang="en">%(description)s</Description>
         <Archive type="%(archiveType)s" sha1sum="SUM">%(archiveUri)s</Archive>
