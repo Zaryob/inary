@@ -101,7 +101,7 @@ def satisfies_dependencies(pkg, deps, sat = installed_satisfies_dep):
     return True
 
 def satisfies_runtime_deps(pkg):
-    deps = packagedb.get_package(pkg).runtimeDependencies
+    deps = packagedb.get_package(pkg).runtimeDependencies()
     return satisfies_dependencies(pkg, deps)
 
 def installable(pkg):

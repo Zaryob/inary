@@ -167,7 +167,7 @@ class Package:
     t_PartOf = [autoxml.String, autoxml.optional]
     t_License = [ [autoxml.String], autoxml.optional]
     t_Icon = [ autoxml.String, autoxml.optional]
-    t_RuntimeDependencies = [ [Dependency], autoxml.optional]
+    t_PackageDependencies = [ [Dependency], autoxml.optional, "RuntimeDependencies/Dependency"]
     t_ComponentDependencies = [ [autoxml.String], autoxml.optional, "RuntimeDependencies/Component"]
     t_Files = [ [Path], autoxml.optional]
     t_Conflicts = [ [autoxml.String], autoxml.optional, "Conflicts/Package"]
@@ -175,7 +175,12 @@ class Package:
     #t_RequiresComar = [ [autoxml.String], autoxml.mandatory, "Requires/COMAR"]
     t_AdditionalFiles = [ [AdditionalFile], autoxml.optional]
     t_History = [ [Update], autoxml.optional]
-    
+
+    def runtimeDependencies(self):
+        deps = self.packageDependencies
+        deps += [ ctx.componentdb.get_component[x].packages for x in self.componentDependencies ]
+        return deps
+
     def pkg_dir(self):
         packageDir = self.name + '-' \
                      + self.version + '-' \
@@ -185,7 +190,7 @@ class Package:
 
     def installable(self):
         """calculate if pkg is installable currently"""
-        deps = self.runtimeDependencies
+        deps = self.runtimeDependencies()
         return pisi.dependency.satisfies_dependencies(self.name, deps)
 
     def __str__(self):
