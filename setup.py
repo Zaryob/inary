@@ -45,6 +45,7 @@ class Install(install):
     def run(self):
         install.run(self)
         self.installi18n()
+        self.installdoc()
     
     def installi18n(self):
         for lang in i18n_languages.split(' '):
@@ -60,10 +61,22 @@ class Install(install):
             shutil.copy("po/%s.mo" % lang, os.path.join(destpath, "%s.mo" % i18n_domain))
 
     def installdoc(self): #TODO: not decided if we have to
-        pass
-        #for tex in glob.glob('doc/*.tex'):
-        #    print tex
-            
+        os.chdir('doc')
+        for tex in glob.glob('*.tex'):
+            print 'Compiling', tex
+            os.system('latex %s' % tex)
+            dvi = tex[:-3] + 'dvi'
+            ps = tex[:-3] + 'ps'
+            os.system('dvips %s -o %s' % (dvi, ps))
+            destpath = os.path.join(self.root, "usr/share/doc/pisi")
+            try:
+                os.makedirs(destpath)
+            except:
+                pass
+            print 'Installing', ps          
+            shutil.copy(ps, os.path.join(destpath, ps))
+        os.chdir('..')
+
 setup(name="pisi",
     version= getVersion(),
     description="PISI (Packages Installed Successfully as Intended)",
