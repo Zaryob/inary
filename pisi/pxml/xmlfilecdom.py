@@ -30,6 +30,7 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import codecs
+import exceptions
 
 import Ft
 from Ft.Xml.Domlette import implementation
@@ -70,6 +71,8 @@ class XmlFile(object):
             return self.doc.documentElement
         except Ft.FtException, e:
             raise Error(_("File '%s' has invalid XML: %s") % (path, str(e)) )
+        except exceptions.ValueError, e:
+            raise Error(_("File '%s' not found") % path )
 
     def writexml(self, path):
         f = file(path, 'w')
