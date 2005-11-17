@@ -290,9 +290,9 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
             return func(f)
         except FileError, e:
             if os.path.islink(f):
-                ctx.ui.warning(_('Ignoring "external" link %s') % f)
+                ctx.ui.info(_("Including external link '%s'") % f)
             elif os.path.isdir(f):
-                ctx.ui.warning(_('Ignoring directory %s') % f)
+                ctx.ui.info(_("Including directory '%s'") % f)
             else:
                 raise e
             return None
