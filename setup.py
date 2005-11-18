@@ -43,21 +43,16 @@ class Install(install):
                 pass
             shutil.copy("po/%s.mo" % lang, os.path.join(destpath, "%s.mo" % i18n_domain))
 
-    def installdoc(self): #TODO: not decided if we have to
+    def installdoc(self):
+        destpath = os.path.join(self.root, "usr/share/doc/pisi")
+        try:
+            os.makedirs(destpath)
+        except:
+            pass
         os.chdir('doc')
-        for tex in glob.glob('*.tex'):
-            print 'Compiling', tex
-            os.system('latex %s' % tex)
-            dvi = tex[:-3] + 'dvi'
-            ps = tex[:-3] + 'ps'
-            os.system('dvips %s -o %s' % (dvi, ps))
-            destpath = os.path.join(self.root, "usr/share/doc/pisi")
-            try:
-                os.makedirs(destpath)
-            except:
-                pass
-            print 'Installing', ps          
-            shutil.copy(ps, os.path.join(destpath, ps))
+        for pdf in glob.glob('*.pdf'):
+            print 'Installing', pdf          
+            shutil.copy(pdf, os.path.join(destpath, pdf))
         os.chdir('..')
 
 setup(name="pisi",
