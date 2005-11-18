@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2005-11-17 16:25+EET\n"
+"POT-Creation-Date: 2005-11-18 16:13+EET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -275,7 +275,7 @@ msgid ""
 "* Package database updated."
 msgstr ""
 
-#: pisi/archive.py:83
+#: pisi/archive.py:84
 msgid "Archive type not recognized"
 msgstr ""
 
@@ -570,7 +570,12 @@ msgid "Error: "
 msgstr ""
 
 #: pisi/cli/__init__.py:109
-msgid "(yes/no)"
+msgid " (yes/no)"
+msgstr ""
+
+#: pisi/cli/__init__.py:121
+msgid ""
+" [complete]\n"
 msgstr ""
 
 #: pisi/cli/__init__.py:129
@@ -1301,7 +1306,8 @@ msgid ""
 "in the respective order to satisfy extra dependencies:\n"
 msgstr ""
 
-#: pisi/operations.py:109 pisi/operations.py:238
+#: pisi/operations.py:109 pisi/operations.py:238 pisi/operations.py:372
+#: pisi/operations.py:434
 msgid "Do you want to continue?"
 msgstr ""
 
@@ -1418,60 +1424,64 @@ msgstr ""
 msgid "Tag should have at least the current locale, or failing that an English or Turkish version"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:402 pisi/pxml/autoxml.py:410
+#: pisi/pxml/autoxml.py:356
+msgid "autoxml.check: '%s' errors"
+msgstr ""
+
+#: pisi/pxml/autoxml.py:408 pisi/pxml/autoxml.py:416
 msgid "autoxml.read: File '%s' has errors"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:417
+#: pisi/pxml/autoxml.py:423
 msgid "autoxml.write: object validation has failed"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:425
+#: pisi/pxml/autoxml.py:431
 msgid "autoxml.write: File encoding '%s' has errors"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:475
+#: pisi/pxml/autoxml.py:481
 msgid "gen_tag: unrecognized tag type %s in spec"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:522 pisi/pxml/autoxml.py:533
+#: pisi/pxml/autoxml.py:528 pisi/pxml/autoxml.py:539
 msgid "Mandatory variable %s not available"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:601
+#: pisi/pxml/autoxml.py:607
 msgid "Type mismatch: read text cannot be decoded"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:605 pisi/pxml/autoxml.py:614
+#: pisi/pxml/autoxml.py:611 pisi/pxml/autoxml.py:620
 msgid "Mandatory token %s not available"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:619
+#: pisi/pxml/autoxml.py:625
 msgid "Type mismatch. Expected %s, got %s"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:649 pisi/pxml/autoxml.py:771
+#: pisi/pxml/autoxml.py:655 pisi/pxml/autoxml.py:777
 msgid "Type mismatch: DOM cannot be decoded"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:652 pisi/pxml/autoxml.py:668 pisi/pxml/autoxml.py:678
-#: pisi/pxml/autoxml.py:774 pisi/pxml/autoxml.py:788 pisi/pxml/autoxml.py:798
+#: pisi/pxml/autoxml.py:658 pisi/pxml/autoxml.py:674 pisi/pxml/autoxml.py:684
+#: pisi/pxml/autoxml.py:780 pisi/pxml/autoxml.py:794 pisi/pxml/autoxml.py:804
 msgid "Mandatory argument not available"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:665 pisi/pxml/autoxml.py:785
+#: pisi/pxml/autoxml.py:671 pisi/pxml/autoxml.py:791
 msgid "Object cannot be encoded"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:690
+#: pisi/pxml/autoxml.py:696
 msgid "List type must contain only one element"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:703 pisi/pxml/autoxml.py:725
+#: pisi/pxml/autoxml.py:709 pisi/pxml/autoxml.py:731
 msgid "Mandatory list empty"
 msgstr ""
 
-#: pisi/pxml/xmlextcdom.py:58 pisi/pxml/xmlfilecdom.py:73
+#: pisi/pxml/xmlextcdom.py:58 pisi/pxml/xmlfilecdom.py:74
 msgid "File '%s' has invalid XML: %s"
 msgstr ""
 
@@ -1480,17 +1490,17 @@ msgstr ""
 msgid "getNodeText: Expected text node, got something else!"
 msgstr ""
 
-#: pisi/pxml/xmlextmdom.py:53 pisi/pxml/xmlfilemdom.py:65
+#: pisi/pxml/xmlextmdom.py:53 pisi/pxml/xmlfilemdom.py:66
 #: pisi/pxml/xmlfilepiks.py:56
 msgid ""
 "File '%s' has invalid XML: %s\n"
 msgstr ""
 
-#: pisi/pxml/xmlfilecdom.py:75
+#: pisi/pxml/xmlfilecdom.py:76
 msgid "File '%s' not found"
 msgstr ""
 
-#: pisi/pxml/xmlfilecdom.py:85 pisi/pxml/xmlfilemdom.py:76
+#: pisi/pxml/xmlfilecdom.py:86 pisi/pxml/xmlfilemdom.py:77
 #: pisi/pxml/xmlfilepiks.py:67
 msgid "Root tagname %s not identical to %s as expected"
 msgstr ""
@@ -1511,27 +1521,27 @@ msgstr ""
 msgid "URI: %s, type: %s, sha1sum: %s"
 msgstr ""
 
-#: pisi/specfile.py:192
+#: pisi/specfile.py:197
 msgid ""
 "Name: %s, version: %s, release: %s, build %s\n"
 msgstr ""
 
-#: pisi/specfile.py:194
+#: pisi/specfile.py:199
 msgid ""
 "Summary: %s\n"
 msgstr ""
 
-#: pisi/specfile.py:195
+#: pisi/specfile.py:200
 msgid ""
 "Description: %s\n"
 msgstr ""
 
-#: pisi/specfile.py:196
+#: pisi/specfile.py:201
 msgid ""
 "Component: %s\n"
 msgstr ""
 
-#: pisi/specfile.py:197
+#: pisi/specfile.py:202
 msgid "Provides: "
 msgstr ""
 

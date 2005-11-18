@@ -369,7 +369,7 @@ version %s, release %s, build %s.')
     ctx.ui.info(_("""The following packages will be upgraded:\n""") +
                 util.strlist(order))
     if len(order) > len(A_0):
-        if not ctx.ui.confirm('Do you want to continue?'):
+        if not ctx.ui.confirm(_('Do you want to continue?')):
             return False
     for x in order:
         atomicoperations.install_single_name(x, True)
@@ -431,7 +431,7 @@ def remove(A):
 in the respective order to satisfy dependencies:
 """) + util.strlist(order))
     if len(order) > len(A_0):
-        if not ctx.ui.confirm('Do you want to continue?'):
+        if not ctx.ui.confirm(_('Do you want to continue?')):
             ctx.ui.warning(_('Package removal declined'))
             return False
     for x in order:

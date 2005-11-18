@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2005-11-17 16:25+EET\n"
-"PO-Revision-Date: 2005-11-17 22:28+0200\n"
+"POT-Creation-Date: 2005-11-18 16:13+EET\n"
+"PO-Revision-Date: 2005-11-18 15:23+0200\n"
 "Last-Translator: Eray Özkural <eray@uludag.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -50,7 +50,8 @@ msgstr "Geri-iz: "
 
 #: pisi-cli:55
 msgid "Use --debug to see a traceback."
-msgstr "Bir geri iz (traceback) görmek için lütfen --debug seçeneğini kullanın. "
+msgstr ""
+"Bir geri iz (traceback) görmek için lütfen --debug seçeneğini kullanın. "
 
 #: pisi/actionsapi/autotools.py:36
 msgid ""
@@ -296,7 +297,7 @@ msgstr ""
 "\n"
 "* Paket veritabani güncellendi."
 
-#: pisi/archive.py:83
+#: pisi/archive.py:84
 msgid "Archive type not recognized"
 msgstr "Arşiv tipi tanınmadı"
 
@@ -434,7 +435,8 @@ msgstr "PISI kaynak paketi inşa ediliyor: %s\n"
 
 #: pisi/build.py:188
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr "IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
+msgstr ""
+"IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
 
 #: pisi/build.py:192
 msgid "CCache detected..."
@@ -493,7 +495,8 @@ msgid "unable to call function from actions: %s"
 msgstr "fonksiyon eylemlerden çağırılamıyor: %s"
 
 #: pisi/build.py:302
-msgid "Safety switch: following extra packages in system.devel will be installed: "
+msgid ""
+"Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Emniyet mandalı: taban geliştirme sistemi system.devel'den izleyen paketler "
 "ek olarak yüklenecek:"
@@ -592,8 +595,12 @@ msgid "Error: "
 msgstr "Hata: "
 
 #: pisi/cli/__init__.py:109
-msgid "(yes/no)"
-msgstr "(evet/hayır)"
+msgid " (yes/no)"
+msgstr " (evet/hayır)"
+
+#: pisi/cli/__init__.py:121
+msgid " [complete]\n"
+msgstr " [bitti]\n"
 
 #: pisi/cli/__init__.py:129
 msgid "Installed %s"
@@ -946,8 +953,10 @@ msgstr ""
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/commands.py:622 pisi/cli/commands.py:900
-msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr "Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
+msgid ""
+"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr ""
+"Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
 
 #: pisi/cli/commands.py:637
 msgid ""
@@ -1409,7 +1418,8 @@ msgid "Cannot attain read or write access to database %s"
 msgstr "Veritabanı %s için okuma ya da yazma erişimi edinilemedi"
 
 #: pisi/lockeddbshelve.py:66
-msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
+msgid ""
+"Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
 msgstr ""
 "Bayraklar 'r', 'w', 'c' or 'n'den birisi olmalı ya da bsddb.db.DB_* "
 "bayraklarını kullanmalı"
@@ -1438,7 +1448,8 @@ msgstr ""
 "Bağımlılıkları sağlamak için bu minimal paket listesi\n"
 " verilen sırada yerleştirilecek:\n"
 
-#: pisi/operations.py:109 pisi/operations.py:238
+#: pisi/operations.py:109 pisi/operations.py:238 pisi/operations.py:372
+#: pisi/operations.py:434
 msgid "Do you want to continue?"
 msgstr "Devam etmek istiyor musunuz?"
 
@@ -1567,64 +1578,68 @@ msgstr ""
 "Etiket en azından şu andaki yerel (locale) için bir girdiye, o olmazsa bir "
 "Türkçe ya da İngilizce versiyona sahip olmalı"
 
-#: pisi/pxml/autoxml.py:402 pisi/pxml/autoxml.py:410
+#: pisi/pxml/autoxml.py:356
+msgid "autoxml.check: '%s' errors"
+msgstr "autoxml.check: %s hata"
+
+#: pisi/pxml/autoxml.py:408 pisi/pxml/autoxml.py:416
 msgid "autoxml.read: File '%s' has errors"
 msgstr "autoxml.read: Dosya '%s' hatalara sahip"
 
-#: pisi/pxml/autoxml.py:417
+#: pisi/pxml/autoxml.py:423
 msgid "autoxml.write: object validation has failed"
 msgstr "autoxml.write: nesne doğrulaması başarısızlığa uğradı"
 
-#: pisi/pxml/autoxml.py:425
+#: pisi/pxml/autoxml.py:431
 msgid "autoxml.write: File encoding '%s' has errors"
 msgstr "autoxml.write: Dosya biçimlendirmesi '%s' hatalara sahip"
 
-#: pisi/pxml/autoxml.py:475
+#: pisi/pxml/autoxml.py:481
 msgid "gen_tag: unrecognized tag type %s in spec"
 msgstr "gen_tag: tanınmayan tag tipi %s"
 
-#: pisi/pxml/autoxml.py:522 pisi/pxml/autoxml.py:533
+#: pisi/pxml/autoxml.py:528 pisi/pxml/autoxml.py:539
 msgid "Mandatory variable %s not available"
 msgstr "Gerekli değişken %s bulunamadı"
 
-#: pisi/pxml/autoxml.py:601
+#: pisi/pxml/autoxml.py:607
 msgid "Type mismatch: read text cannot be decoded"
 msgstr "Tip uyumsuzluğu: okunan metin deşifre edilemedi"
 
-#: pisi/pxml/autoxml.py:605 pisi/pxml/autoxml.py:614
+#: pisi/pxml/autoxml.py:611 pisi/pxml/autoxml.py:620
 msgid "Mandatory token %s not available"
 msgstr "Gerekli im %s bulunamadı."
 
-#: pisi/pxml/autoxml.py:619
+#: pisi/pxml/autoxml.py:625
 msgid "Type mismatch. Expected %s, got %s"
 msgstr "Tip uyumsuzluğu. %s beklerken, %s bulundu"
 
 # pisi/xmlfile.py:420 :521
-#: pisi/pxml/autoxml.py:649 pisi/pxml/autoxml.py:771
+#: pisi/pxml/autoxml.py:655 pisi/pxml/autoxml.py:777
 msgid "Type mismatch: DOM cannot be decoded"
 msgstr "Tip uyumsuzluğu: DOM deşifre edilemiyor"
 
 # pisi/xmlfile.py:392 :423 :439 :446 :524 :538 :545
-#: pisi/pxml/autoxml.py:652 pisi/pxml/autoxml.py:668 pisi/pxml/autoxml.py:678
-#: pisi/pxml/autoxml.py:774 pisi/pxml/autoxml.py:788 pisi/pxml/autoxml.py:798
+#: pisi/pxml/autoxml.py:658 pisi/pxml/autoxml.py:674 pisi/pxml/autoxml.py:684
+#: pisi/pxml/autoxml.py:780 pisi/pxml/autoxml.py:794 pisi/pxml/autoxml.py:804
 msgid "Mandatory argument not available"
 msgstr "Gerekli argüman bulunamadı"
 
 # pisi/xmlfile.py:436 :535
-#: pisi/pxml/autoxml.py:665 pisi/pxml/autoxml.py:785
+#: pisi/pxml/autoxml.py:671 pisi/pxml/autoxml.py:791
 msgid "Object cannot be encoded"
 msgstr "Nesne kodlanamadı"
 
-#: pisi/pxml/autoxml.py:690
+#: pisi/pxml/autoxml.py:696
 msgid "List type must contain only one element"
 msgstr "'List' tipi sadece bir eleman içermeli"
 
 # pisi/xmlfile.py:470 :485
-#: pisi/pxml/autoxml.py:703 pisi/pxml/autoxml.py:725
+#: pisi/pxml/autoxml.py:709 pisi/pxml/autoxml.py:731
 msgid "Mandatory list empty"
 msgstr "Zorunlu (mandatory) liste boş"
 
-#: pisi/pxml/xmlextcdom.py:58 pisi/pxml/xmlfilecdom.py:73
+#: pisi/pxml/xmlextcdom.py:58 pisi/pxml/xmlfilecdom.py:74
 msgid "File '%s' has invalid XML: %s"
 msgstr "'%s' dosyasının XML sözdizimi geçersiz: %s"
 
@@ -1633,16 +1648,16 @@ msgstr "'%s' dosyasının XML sözdizimi geçersiz: %s"
 msgid "getNodeText: Expected text node, got something else!"
 msgstr "getNodeText: metin bekliyorken başka birşey aldık!"
 
-#: pisi/pxml/xmlextmdom.py:53 pisi/pxml/xmlfilemdom.py:65
+#: pisi/pxml/xmlextmdom.py:53 pisi/pxml/xmlfilemdom.py:66
 #: pisi/pxml/xmlfilepiks.py:56
 msgid "File '%s' has invalid XML: %s\n"
 msgstr "'%s' dosyasının XML sözdizimi geçersiz: %s\n"
 
-#: pisi/pxml/xmlfilecdom.py:75
+#: pisi/pxml/xmlfilecdom.py:76
 msgid "File '%s' not found"
 msgstr "Dosya '%s' bulunamadı"
 
-#: pisi/pxml/xmlfilecdom.py:85 pisi/pxml/xmlfilemdom.py:76
+#: pisi/pxml/xmlfilecdom.py:86 pisi/pxml/xmlfilemdom.py:77
 #: pisi/pxml/xmlfilepiks.py:67
 msgid "Root tagname %s not identical to %s as expected"
 msgstr "Kök tag adı %s beklendiği gibi %s'le aynı değil."
@@ -1663,23 +1678,23 @@ msgstr "%s'i indiriyor"
 msgid "URI: %s, type: %s, sha1sum: %s"
 msgstr "URI: %s, tip: %s, sha1sum: %s"
 
-#: pisi/specfile.py:192
+#: pisi/specfile.py:197
 msgid "Name: %s, version: %s, release: %s, build %s\n"
 msgstr "Ad: %s, versiyon %s, sürüm %s, inşa %s\n"
 
-#: pisi/specfile.py:194
+#: pisi/specfile.py:199
 msgid "Summary: %s\n"
 msgstr "Özet: %s\n"
 
-#: pisi/specfile.py:195
+#: pisi/specfile.py:200
 msgid "Description: %s\n"
 msgstr "Tanım: %s\n"
 
-#: pisi/specfile.py:196
+#: pisi/specfile.py:201
 msgid "Component: %s\n"
 msgstr "Bileşen: %s\n"
 
-#: pisi/specfile.py:197
+#: pisi/specfile.py:202
 msgid "Provides: "
 msgstr "Sağladıkları: "
 
@@ -1776,7 +1791,8 @@ msgid "Source package '%s' has no first release"
 msgstr ""
 
 #: tools/repostats.py:478
-msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgid ""
+"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 
 #: tools/repostats.py:561
@@ -1809,4 +1825,3 @@ msgstr ""
 #: tools/repostats.py:678
 msgid "These dependencies are not available in repository:\n"
 msgstr ""
-
