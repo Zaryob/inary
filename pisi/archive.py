@@ -14,6 +14,7 @@
 
 # standard library modules
 import os
+import stat
 import tarfile
 import zipfile
 
@@ -115,6 +116,8 @@ class ArchiveZip(ArchiveBase):
         file_name = str(file_name)
         if os.path.isdir(file_name) and not os.path.islink(file_name):
             self.zip_obj.writestr(file_name + '/', '')
+            attr_obj = self.zip_obj.getinfo(file_name + '/')
+            attr_obj.external_attr = stat.S_IMODE(os.stat(file_name)[0]) << 16L
             for f in os.listdir(file_name):
                 self.add_to_archive(os.path.join(file_name, f))
         else:
