@@ -172,7 +172,7 @@ class ArchiveZip(ArchiveBase):
                     if not os.path.isdir(d):
                         os.makedirs(d)
                         perm = info.external_attr
-                        perm &= 0x08FF0000
+                        perm &= 0xFFFF0000
                         perm >>= 16
                         perm |= 0x00000100
                         os.chmod(d, perm)
