@@ -463,9 +463,10 @@ class Builder:
             a = filter(lambda (x,y): y != None, found)
             ctx.ui.debug(str(a))
             if a:
+                # sort in order of increasing build number
                 a.sort(lambda x,y : cmp(x[1],y[1]))
-                old_package_fn = a[0][0]
-                old_build = a[0][1]
+                old_package_fn = a[-1][0]   # get the last one
+                old_build = a[-1][1]
             else:
                 old_build = None
 
@@ -492,7 +493,8 @@ class Builder:
                         if fo.hash != fn.hash:
                             changed = True
                             break
-
+            ctx.ui.debug('old build number: %s' % old_build)
+                            
             # set build number
             if old_build is None:
                 ctx.ui.warning(_('(old package lacks a build no, setting build no to 0.)'))
