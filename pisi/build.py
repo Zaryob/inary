@@ -17,18 +17,21 @@
 import os
 import sys
 import glob
+from os.path import basename, dirname
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
+from pisi.specfile import SpecFile
 import pisi.util as util
+from pisi.util import join_path as join
 import pisi.context as ctx
 import pisi.dependency as dependency
 import pisi.operations as operations
 from pisi.sourcearchive import SourceArchive
-from pisi.files import Files, File as FileInfo
+from pisi.files import Files, FileInfo
 from pisi.fetcher import fetch_url
 from pisi.uri import URI
 from pisi.metadata import MetaData
@@ -38,6 +41,74 @@ import pisi.component as component
 
 class Error(pisi.Error):
     pass
+
+class SourceFetcher(object):
+    def __init__(self, url, authInfo=None):
+        self.url = url
+        if authInfo:
+            self.url.set_auth_info(authInfo)
+        self.location = dirname(self.url.uri)
+
+        pkgname = basename(dirname(self.url.path()))
+        self.dest = join(ctx.config.tmp_dir(), pkgname)
+        
+    def fetch_all(self):
+        # fetch pspec file
+        self.fetch()
+        pspec = join(self.dest, self.url.filename())
+        self.spec = SpecFile()
+        self.spec.read(pspec)
+
+        self.fetch_actionsfile()
+        self.fetch_patches()
+        self.fetch_comarfiles()
+        self.fetch_additionalFiles()
+
+        return URI(pspec)
+
+    def fetch_actionsfile(self):
+        actionsuri = join(self.location, ctx.const.actions_file)
+        self.url.uri = actionsuri
+        self.fetch()
+        
+    def fetch_patches(self):
+        spec = self.spec
+        for patch in spec.source.patches:
+            file_name = basename(patch.filename)
+            dir_name = dirname(patch.filename)
+            patchuri = join(self.location, 
+                            ctx.const.files_dir, dir_name, file_name)
+            self.url.uri = patchuri
+            target_dir = join(ctx.const.files_dir, dir_name)
+            self.fetch(target_dir)
+
+    def fetch_comarfiles(self):
+        spec = self.spec
+        for package in spec.packages:
+            for pcomar in package.providesComar:
+                comaruri = join(self.location,
+                                ctx.const.comar_dir, pcomar.script)
+                self.url.uri = comaruri
+                self.fetch(ctx.const.comar_dir)
+
+    def fetch_additionalFiles(self):
+        spec = self.spec
+        for pkg in spec.packages:
+            for afile in pkg.additionalFiles:
+                file_name = basename(afile.filename)
+                dir_name = dirname(afile.filename)
+                afileuri = join(self.location, 
+                                ctx.const.files_dir, dir_name, file_name)
+                self.url.uri = afileuri
+                target_dir = join(ctx.const.files_dir, dir_name)
+                self.fetch(target_dir)
+
+    def fetch(self, appendDest=""):
+        from fetcher import fetch_url
+
+        ctx.ui.info(_("Fetching %s") % self.url.uri)
+        dest = join(self.dest, appendDest)
+        fetch_url(self.url, dest)
 
 
 # Helper Functions
@@ -81,21 +152,34 @@ def check_path_collision(package, pkgList):
                                  path.path)
     return collisions
 
-# a dynamic build context
-from pisi.specfile import SpecFile
 
+class Builder:
+    """Provides the package build and creation routines"""
+    #FIXME: this class and every other class must use URLs as paths!
 
-class BuildContext(object):
-    """Build Context"""
+    def __init__(self, pspecuri, authinfo = None):
 
-    def __init__(self, pspecfile):
-        super(BuildContext, self).__init__()
-        self.set_spec_file(pspecfile)
+        if not isinstance(pspecuri, URI):
+            pspecuri = URI(pspecuri)
 
-    def set_spec_file(self, pspecfile):
-        self.pspecfile = pspecfile
+        if pspecuri.is_remote_file():
+            fs = SourceFetcher(pspecuri, authinfo)
+            #make local here and fuck up
+            pspecuri = fs.fetch_all()
+
+        self.set_spec_file(pspecuri)
+        self.specdir = os.path.dirname(os.path.realpath(pspecuri.get_uri()))
+        self.sourceArchive = SourceArchive(self.spec, self.pkg_work_dir())
+
+        self.set_environment_vars()
+
+        self.actionLocals = None
+        self.actionGlobals = None
+        self.srcDir = None
+
+    def set_spec_file(self, pspecuri):
         spec = SpecFile()
-        spec.read(pspecfile)
+        spec.read(pspecuri, ctx.config.tmp_dir())
         self.spec = spec
 
     # directory accessor functions
@@ -115,28 +199,12 @@ class BuildContext(object):
     def pkg_install_dir(self):
         return self.pkg_dir() + ctx.const.install_dir_suffix
 
-
-class Builder:
-    """Provides the package build and creation routines"""
-    #FIXME: this class and every other class must use URLs as paths!
-    def __init__(self, pspec):
-        self.bctx = BuildContext(pspec)
-        self.pspecdir = os.path.dirname(os.path.realpath(self.bctx.pspecfile))
-        self.spec = self.bctx.spec
-        self.sourceArchive = SourceArchive(self.bctx)
-
-        self.set_environment_vars()
-
-        self.actionLocals = None
-        self.actionGlobals = None
-        self.srcDir = None
-
     def set_state(self, state):
-        stateFile = util.join_path(self.bctx.pkg_work_dir(), "pisiBuildState")
+        stateFile = util.join_path(self.pkg_work_dir(), "pisiBuildState")
         open(stateFile, "w").write(state)
 
     def get_state(self):
-        stateFile = util.join_path(self.bctx.pkg_work_dir(), "pisiBuildState")
+        stateFile = util.join_path(self.pkg_work_dir(), "pisiBuildState")
         if not os.path.exists(stateFile): # no state
             return None
         return open(stateFile, "r").read()
@@ -172,9 +240,9 @@ class Builder:
     def set_environment_vars(self):
         """Sets the environment variables for actions API to use"""
         evn = {
-            "PKG_DIR": self.bctx.pkg_dir(),
-            "WORK_DIR": self.bctx.pkg_work_dir(),
-            "INSTALL_DIR": self.bctx.pkg_install_dir(),
+            "PKG_DIR": self.pkg_dir(),
+            "WORK_DIR": self.pkg_work_dir(),
+            "INSTALL_DIR": self.pkg_install_dir(),
             "SRC_NAME": self.spec.source.name,
             "SRC_VERSION": self.spec.source.version,
             "SRC_RELEASE": self.spec.source.release
@@ -195,12 +263,12 @@ class Builder:
     def get_component(self):
         if not self.spec.source.partOf:
             ctx.ui.warning(_('PartOf tag not defined, looking for component'))
-            parentdir = os.path.realpath(self.pspecdir + '/../')
+            parentdir = os.path.realpath(self.specdir + '/../')
             url = util.join_path(parentdir, 'component.xml')
             progress = ctx.ui.Progress
             if URI(url).is_remote_file():
-                fetch_url(url, self.bctx.pkg_work_dir(), progress)
-                path = util.join_path(self.bctx.pkg_work_dir(), 'component.xml')
+                fetch_url(url, self.pkg_work_dir(), progress)
+                path = util.join_path(self.pkg_work_dir(), 'component.xml')
             else:
                 if not os.path.exists(url):
                     raise Exception(_('Cannot find component.xml in upper directory'))
@@ -220,7 +288,7 @@ class Builder:
     def unpack_source_archive(self):
         ctx.ui.info(_("Unpacking archive..."))
         self.sourceArchive.unpack()
-        ctx.ui.info(_(" unpacked (%s)") % self.bctx.pkg_work_dir())
+        ctx.ui.info(_(" unpacked (%s)") % self.pkg_work_dir())
         self.set_state("unpack")
 
     def run_setup_action(self):
@@ -238,8 +306,8 @@ class Builder:
         ctx.ui.action(_("Installing..."))
         
         # Before install make sure install_dir is clean 
-        if os.path.exists(self.bctx.pkg_install_dir()):
-            util.clean_dir(self.bctx.pkg_install_dir())
+        if os.path.exists(self.pkg_install_dir()):
+            util.clean_dir(self.pkg_install_dir())
             
         # install function is mandatory!
         self.run_action_function(ctx.const.install_func, True)
@@ -247,8 +315,7 @@ class Builder:
 
     def compile_action_script(self):
         """Compiles actions.py and sets the actionLocals and actionGlobals"""
-        specdir = os.path.dirname(self.bctx.pspecfile)
-        scriptfile = util.join_path(specdir, ctx.const.actions_file)
+        scriptfile = util.join_path(self.specdir, ctx.const.actions_file)
         try:
             localSymbols = globalSymbols = {}
             buf = open(scriptfile).read()
@@ -269,7 +336,7 @@ class Builder:
         except KeyError:
             workdir = self.spec.source.name + "-" + self.spec.source.version
                     
-        return util.join_path(self.bctx.pkg_work_dir(), workdir)
+        return util.join_path(self.pkg_work_dir(), workdir)
 
     def run_action_function(self, func, mandatory=False):
         """Calls the corresponding function in actions.py. 
@@ -330,7 +397,7 @@ class Builder:
     def patch_exists(self):
         """check existence of patch files declared in PSPEC"""
 
-        files_dir = os.path.abspath(util.join_path(self.pspecdir,
+        files_dir = os.path.abspath(util.join_path(self.specdir,
                                                  ctx.const.files_dir))
         for patch in self.spec.source.patches:
             patchFile = util.join_path(files_dir, patch.filename)
@@ -338,7 +405,7 @@ class Builder:
                 raise Error(_("Patch file is missing: %s\n") % patch.filename)
 
     def apply_patches(self):
-        files_dir = os.path.abspath(util.join_path(self.pspecdir,
+        files_dir = os.path.abspath(util.join_path(self.specdir,
                                                  ctx.const.files_dir))
 
         for patch in self.spec.source.patches:
@@ -354,7 +421,7 @@ class Builder:
     def strip_install_dir(self):
         """strip install directory"""
         ctx.ui.action(_("Stripping files.."))
-        install_dir = self.bctx.pkg_install_dir()
+        install_dir = self.pkg_install_dir()
         try:
             nostrip = self.actionGlobals['NoStrip']
             util.strip_directory(install_dir, nostrip)
@@ -373,7 +440,7 @@ class Builder:
         metadata.package.distributionRelease = ctx.config.values.general.distribution_release
         metadata.package.architecture = "Any"
         
-        size, d = 0, self.bctx.pkg_install_dir()
+        size, d = 0, self.pkg_install_dir()
 
         for path in package.files:
              size += util.dir_size(util.join_path(d, path.path))
@@ -387,7 +454,7 @@ class Builder:
         else:
             metadata.package.build = self.calc_build_no(metadata.package.name)
 
-        metadata_xml_path = util.join_path(self.bctx.pkg_dir(), ctx.const.metadata_xml)
+        metadata_xml_path = util.join_path(self.pkg_dir(), ctx.const.metadata_xml)
         metadata.write(metadata_xml_path)
         self.metadata = metadata
 
@@ -395,7 +462,7 @@ class Builder:
         """Generates files.xml using the path definitions in specfile and
         the files produced by the build system."""
         files = Files()
-        install_dir = self.bctx.pkg_install_dir()
+        install_dir = self.pkg_install_dir()
 
         # FIXME: We need to expand globs before trying to calculate hashes
         # Not on the fly like now.
@@ -427,7 +494,7 @@ class Builder:
         for (p, fileinfo) in d.iteritems():
             files.append(fileinfo)
 
-        files_xml_path = util.join_path(self.bctx.pkg_dir(), ctx.const.files_xml)
+        files_xml_path = util.join_path(self.pkg_dir(), ctx.const.files_xml)
         files.write(files_xml_path)
         self.files = files
 
@@ -521,8 +588,8 @@ class Builder:
         for package in self.spec.packages:
             # store additional files
             c = os.getcwd()
-            os.chdir(self.pspecdir)
-            install_dir = self.bctx.pkg_dir() + ctx.const.install_dir_suffix
+            os.chdir(self.specdir)
+            install_dir = self.pkg_dir() + ctx.const.install_dir_suffix
             tmp_aF = []
             for afile in package.additionalFiles:
                 destdir = util.join_path(install_dir, os.path.dirname(afile.target))
@@ -561,14 +628,14 @@ class Builder:
             package_names.append(name)
 
             # add comar files to package
-            os.chdir(self.pspecdir)
+            os.chdir(self.specdir)
             for pcomar in package.providesComar:
                 fname = util.join_path(ctx.const.comar_dir,
                                      pcomar.script)
                 pkg.add_to_package(fname)
 
             # add xmls and files
-            os.chdir(self.bctx.pkg_dir())
+            os.chdir(self.pkg_dir())
         
             pkg.add_to_package(ctx.const.metadata_xml)
             pkg.add_to_package(ctx.const.files_xml)
@@ -588,8 +655,79 @@ class Builder:
            
         if ctx.config.values.general.autoclean is True:
             ctx.ui.info(_("Cleaning Build Directory..."))
-            util.clean_dir(self.bctx.pkg_dir())
+            util.clean_dir(self.pkg_dir())
         else:
             ctx.ui.info(_("Keeping Build Directory"))
 
         return package_names
+
+
+# build functions...
+
+def build(pspecfile, authinfo=None):
+    pb = pisi.build.Builder(pspecfile, authinfo)
+    pb.build()
+
+order = {"none": 0,
+         "unpack": 1,
+         "setupaction": 2,
+         "buildaction": 3,
+         "installaction": 4,
+         "buildpackages": 5}
+
+def __buildState_unpack(pb):
+    # unpack is the first state to run.
+    pb.fetch_source_archive()
+    pb.unpack_source_archive()
+    pb.apply_patches()
+
+def __buildState_setupaction(pb, last):
+
+    if order[last] < order["unpack"]:
+        __buildState_unpack(pb)
+    pb.run_setup_action()
+
+def __buildState_buildaction(pb, last):
+
+    if order[last] < order["setupaction"]:
+        __buildState_setupaction(pb, last)
+    pb.run_build_action()
+
+def __buildState_installaction(pb, last):
+    
+    if order[last] < order["buildaction"]:
+        __buildState_buildaction(pb, last)
+    pb.run_install_action()
+
+def __buildState_buildpackages(pb, last):
+
+    if order[last] < order["installaction"]:
+        __buildState_installaction(pb, last)
+    pb.build_packages()
+
+def build_until(pspecfile, state, authInfo=None):
+    pb = pisi.build.Builder(pspecfile, authinfo)
+    pb.compile_action_script()
+    
+    last = pb.get_state()
+    ctx.ui.info("Last state was %s"%last)
+
+    if not last: last = "none"
+
+    if state == "unpack":
+        __buildState_unpack(pb)
+        return
+
+    if state == "setupaction":
+        __buildState_setupaction(pb, last)
+        return
+    
+    if state == "buildaction":
+        __buildState_buildaction(pb, last)
+        return
+
+    if state == "installaction":
+        __buildState_installaction(pb, last)
+        return
+
+    __buildState_buildpackages(pb, last)

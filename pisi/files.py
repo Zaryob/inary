@@ -19,7 +19,7 @@ import pisi.pxml.autoxml as autoxml
 from pisi.util import Checks
 import pisi.lockeddbshelve as shelve
 
-class File:
+class FileInfo:
     """File holds the information for a File node/tag in files.xml"""
 
     __metaclass__ = autoxml.autoxml
@@ -40,7 +40,7 @@ class Files(autoxml.XmlFile):
 
     tag = "Files"
 
-    t_List = [ [File], autoxml.optional, "File"]
+    t_List = [ [FileInfo], autoxml.optional, "File"]
 
     def append(self, fileinfo):
         self.list.append(fileinfo)

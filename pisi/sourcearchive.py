@@ -35,11 +35,11 @@ class Error(pisi.Error):
 class SourceArchive:
     """source archive. this is a class responsible for fetching
     and unpacking a source archive"""
-    def __init__(self, bctx):
-        self.url = URI(bctx.spec.source.archive.uri)
+    def __init__(self, spec, pkg_work_dir):
+        self.url = URI(spec.source.archive.uri)
+        self.pkg_work_dir = pkg_work_dir
         self.archiveFile = join(ctx.config.archives_dir(), self.url.filename())
-        self.archive = bctx.spec.source.archive
-        self.bctx = bctx
+        self.archive = spec.source.archive
 
     def fetch(self, interactive=True):
         if not self.is_cached(interactive):
@@ -48,7 +48,7 @@ class SourceArchive:
             else:
                 progress = None
             fetch_url(self.url, ctx.config.archives_dir(), progress)
-        
+
     def is_cached(self, interactive=True):
         if not access(self.archiveFile, R_OK):
             return False
@@ -68,4 +68,4 @@ class SourceArchive:
             raise Error, _("unpack: check_file_hash failed")
             
         archive = Archive(self.archiveFile, self.archive.type)
-        archive.unpack(self.bctx.pkg_work_dir(), clean_dir)
+        archive.unpack(self.pkg_work_dir, clean_dir)

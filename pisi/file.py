@@ -47,13 +47,15 @@ class File:
         return uri
 
     @staticmethod
-    def download(self, uri, transfer_dir = "/tmp"):
+    def download(uri, transfer_dir = "/tmp"):
+        assert type(uri == URI)
         if uri.is_remote_file():
             ctx.ui.info(_("Fetching %s") % uri.get_uri())
             localfile = join(transfer_dir, uri.filename())
             fetch_url(uri, transfer_dir) # FIXME: localfile would look better for fetch iface?
         else:
             localfile = uri.get_uri() #TODO: use a special function here?
+        return localfile
 
     def __init__(self, uri, mode, transfer_dir = "/tmp"):
         "it is pointless to open a file without a URI and a mode"

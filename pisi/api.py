@@ -42,6 +42,7 @@ import pisi.component as component
 from pisi.index import Index
 import pisi.cli
 from pisi.operations import install, remove, upgrade
+from pisi.build import build, build_until
 from pisi.atomicoperations import resurrect_package
 from pisi.metadata import MetaData
 from pisi.files import Files
@@ -257,89 +258,6 @@ def update_repo(repo):
     index.read_uri(ctx.repodb.get_repo(repo).indexuri.get_uri(), repo)
     index.update_db(repo)
     ctx.ui.info(_('\n* Package database updated.'))
-
-
-# build functions...
-def prepare_for_build(pspecfile, authInfo=None):
-
-    url = URI(pspecfile)
-    if url.is_remote_file():
-        from sourcefetcher import SourceFetcher
-        fs = SourceFetcher(url, authInfo)
-        url.uri = fs.fetch_all()
-
-    import pisi.build
-    pb = pisi.build.Builder(url.uri)
-
-    return pb
-
-def build(pspecfile, authInfo=None):
-    pb = prepare_for_build(pspecfile, authInfo)
-    pb.build()
-
-order = {"none": 0,
-         "unpack": 1,
-         "setupaction": 2,
-         "buildaction": 3,
-         "installaction": 4,
-         "buildpackages": 5}
-
-def __buildState_unpack(pb):
-    # unpack is the first state to run.
-    pb.fetch_source_archive()
-    pb.unpack_source_archive()
-    pb.apply_patches()
-
-def __buildState_setupaction(pb, last):
-
-    if order[last] < order["unpack"]:
-        __buildState_unpack(pb)
-    pb.run_setup_action()
-
-def __buildState_buildaction(pb, last):
-
-    if order[last] < order["setupaction"]:
-        __buildState_setupaction(pb, last)
-    pb.run_build_action()
-
-def __buildState_installaction(pb, last):
-    
-    if order[last] < order["buildaction"]:
-        __buildState_buildaction(pb, last)
-    pb.run_install_action()
-
-def __buildState_buildpackages(pb, last):
-
-    if order[last] < order["installaction"]:
-        __buildState_installaction(pb, last)
-    pb.build_packages()
-
-def build_until(pspecfile, state, authInfo=None):
-    pb = prepare_for_build(pspecfile, authInfo)
-    pb.compile_action_script()
-    
-    last = pb.get_state()
-    ctx.ui.info("Last state was %s"%last)
-
-    if not last: last = "none"
-
-    if state == "unpack":
-        __buildState_unpack(pb)
-        return
-
-    if state == "setupaction":
-        __buildState_setupaction(pb, last)
-        return
-    
-    if state == "buildaction":
-        __buildState_buildaction(pb, last)
-        return
-
-    if state == "installaction":
-        __buildState_installaction(pb, last)
-        return
-
-    __buildState_buildpackages(pb, last)
 
 def delete_cache():
     util.clean_dir(ctx.config.packages_dir())

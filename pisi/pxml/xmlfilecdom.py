@@ -80,7 +80,7 @@ class XmlFile(object):
             raise Error(_("File '%s' not found") % path )
 
     def writexml(self, uri, tmpDir = '/tmp'):
-        f = file(path, 'w')
+        f = file(uri, 'w')
         PrettyPrint(self.rootNode(), stream = f)
         f.close()
 
