@@ -397,9 +397,9 @@ class autoxml(oo.autosuper, oo.autoprop):
             cls.__ne__ = notequal            
             
         if xmlfile_support:
-            def read(self, filename, keepDoc = False):
+            def read(self, uri, keepDoc = False, tmpDir = '/tmp'):
                 "read XML file and decode it into a python object"
-                self.readxml(filename)
+                self.readxml(uri, tmpDir)
                 errs = []
                 self.decode(self.rootNode(), errs)
                 if hasattr(self, 'read_hook'):
@@ -416,7 +416,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                     errs.append(_("autoxml.read: File '%s' has errors") % filename)
                     raise Error(*errs)
                     
-            def write(self, filename, keepDoc = False):
+            def write(self, uri, keepDoc = False, tmpDir = '/tmp'):
                 "encode the contents of the python object into an XML file"
                 errs = self.errors()
                 if errs:
@@ -430,7 +430,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if errs:
                     errs.append(_("autoxml.write: File encoding '%s' has errors") % filename)
                     raise Error(*errs)
-                self.writexml(filename)
+                self.writexml(uri, tmpDir)
                 if not keepDoc:
                     self.unlink() # get rid of the tree
             

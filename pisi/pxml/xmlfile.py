@@ -18,5 +18,6 @@ except:
     try:
         from xmlfilecdom import *
     except:
+        raise Error('cannot find 4suite implementation')
         print 'xmlext: cDomlette/piksemel implementation cannot be loaded, falling back to minidom'
         from xmlfilemdom import *

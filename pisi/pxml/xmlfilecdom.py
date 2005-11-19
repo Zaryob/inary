@@ -44,6 +44,8 @@ XML_NS = unicode(XML_NAMESPACE)
 
 import pisi
 from pisi.pxml.xmlextcdom import *
+from pisi.file import File
+from pisi.util import join_path as join
 
 class Error(pisi.Error):
     pass
@@ -66,16 +68,18 @@ class XmlFile(object):
         """returns root document element"""
         return self.doc.documentElement
 
-    def readxml(self, path):
+    def readxml(self, uri, tmpDir = '/tmp'):
+        uri = File.make_uri(uri)
+        localpath = File.download(uri, tmpDir)
         try:
-            self.doc = ParsePath(path)
+            self.doc = ParsePath(localpath)
             return self.doc.documentElement
         except Ft.FtException, e:
             raise Error(_("File '%s' has invalid XML: %s") % (path, str(e)) )
         except exceptions.ValueError, e:
             raise Error(_("File '%s' not found") % path )
 
-    def writexml(self, path):
+    def writexml(self, uri, tmpDir = '/tmp'):
         f = file(path, 'w')
         PrettyPrint(self.rootNode(), stream = f)
         f.close()
