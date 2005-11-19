@@ -118,6 +118,7 @@ class BuildContext(object):
 
 class Builder:
     """Provides the package build and creation routines"""
+    #FIXME: this class and every other class must use URLs as paths!
     def __init__(self, pspec):
         self.bctx = BuildContext(pspec)
         self.pspecdir = os.path.dirname(os.path.realpath(self.bctx.pspecfile))
