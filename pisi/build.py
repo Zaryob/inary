@@ -26,7 +26,8 @@ _ = __trans.ugettext
 import pisi
 from pisi.specfile import SpecFile
 import pisi.util as util
-from pisi.util import join_path as join
+from pisi.util import join_path as join, parenturi
+from pisi.file import File
 import pisi.context as ctx
 import pisi.dependency as dependency
 import pisi.operations as operations
@@ -42,71 +43,13 @@ import pisi.component as component
 class Error(pisi.Error):
     pass
 
+
 class SourceFetcher(object):
-    def __init__(self, url, authInfo=None):
-        self.url = url
-        if authInfo:
-            self.url.set_auth_info(authInfo)
-        self.location = dirname(self.url.uri)
 
-        pkgname = basename(dirname(self.url.path()))
-        self.dest = join(ctx.config.tmp_dir(), pkgname)
-        
-    def fetch_all(self):
-        # fetch pspec file
-        self.fetch()
-        pspec = join(self.dest, self.url.filename())
-        self.spec = SpecFile()
-        self.spec.read(pspec)
-
-        self.fetch_actionsfile()
-        self.fetch_patches()
-        self.fetch_comarfiles()
-        self.fetch_additionalFiles()
-
-        return URI(pspec)
-
-    def fetch_actionsfile(self):
-        actionsuri = join(self.location, ctx.const.actions_file)
-        self.url.uri = actionsuri
-        self.fetch()
-        
-    def fetch_patches(self):
-        spec = self.spec
-        for patch in spec.source.patches:
-            file_name = basename(patch.filename)
-            dir_name = dirname(patch.filename)
-            patchuri = join(self.location, 
-                            ctx.const.files_dir, dir_name, file_name)
-            self.url.uri = patchuri
-            target_dir = join(ctx.const.files_dir, dir_name)
-            self.fetch(target_dir)
-
-    def fetch_comarfiles(self):
-        spec = self.spec
-        for package in spec.packages:
-            for pcomar in package.providesComar:
-                comaruri = join(self.location,
-                                ctx.const.comar_dir, pcomar.script)
-                self.url.uri = comaruri
-                self.fetch(ctx.const.comar_dir)
-
-    def fetch_additionalFiles(self):
-        spec = self.spec
-        for pkg in spec.packages:
-            for afile in pkg.additionalFiles:
-                file_name = basename(afile.filename)
-                dir_name = dirname(afile.filename)
-                afileuri = join(self.location, 
-                                ctx.const.files_dir, dir_name, file_name)
-                self.url.uri = afileuri
-                target_dir = join(ctx.const.files_dir, dir_name)
-                self.fetch(target_dir)
-
-    def fetch(self, appendDest=""):
+    def fetch(self, url, appendDest=""):
         from fetcher import fetch_url
 
-        ctx.ui.info(_("Fetching %s") % self.url.uri)
+        ctx.ui.info(_("Fetching %s") % url.get_uri())
         dest = join(self.dest, appendDest)
         fetch_url(self.url, dest)
 
@@ -157,18 +100,25 @@ class Builder:
     """Provides the package build and creation routines"""
     #FIXME: this class and every other class must use URLs as paths!
 
-    def __init__(self, pspecuri, authinfo = None):
+    def __init__(self, specuri, authinfo = None):
 
-        if not isinstance(pspecuri, URI):
-            pspecuri = URI(pspecuri)
+        # process args
+        if not isinstance(specuri, URI):
+            specuri = URI(specuri)
+        if authinfo:
+            specuri.set_auth_info(authInfo)
 
-        if pspecuri.is_remote_file():
-            fs = SourceFetcher(pspecuri, authinfo)
+        self.authinfo = authinfo
+
+        # read spec file, we'll need it :)
+        self.set_spec_file(specuri)
+
+        if specuri.is_remote_file():
             #make local here and fuck up
-            pspecuri = fs.fetch_all()
+            self.specdir = self.fetch_files()
+        else:
+            self.specdir = dirname(self.specuri)
 
-        self.set_spec_file(pspecuri)
-        self.specdir = os.path.dirname(os.path.realpath(pspecuri.get_uri()))
         self.sourceArchive = SourceArchive(self.spec, self.pkg_work_dir())
 
         self.set_environment_vars()
@@ -177,9 +127,10 @@ class Builder:
         self.actionGlobals = None
         self.srcDir = None
 
-    def set_spec_file(self, pspecuri):
+    def set_spec_file(self, specuri):
+        self.specuri = specuri
         spec = SpecFile()
-        spec.read(pspecuri, ctx.config.tmp_dir())
+        spec.read(specuri, ctx.config.tmp_dir())
         self.spec = spec
 
     # directory accessor functions
@@ -221,9 +172,8 @@ class Builder:
         self.patch_exists()
 
         self.check_build_dependencies()
-        
-        self.get_component()
-        
+        self.fetch_files()
+        self.fetch_component()
         self.fetch_source_archive()
         self.unpack_source_archive()
 
@@ -260,10 +210,62 @@ class Builder:
             os.environ["PATH"] = "/usr/lib/ccache/bin/:" + os.environ["PATH"]
             ctx.ui.info(_("CCache detected..."))
 
-    def get_component(self):
+    def fetch_files(self):
+        self.specdiruri = dirname(self.specuri.get_uri())
+        pkgname = basename(self.specdiruri)
+        self.destdir = join(ctx.config.tmp_dir(), pkgname)
+        #self.location = dirname(self.url.uri)
+
+        self.fetch_actionsfile()
+        self.fetch_patches()
+        self.fetch_comarfiles()
+        self.fetch_additionalFiles()
+
+        return self.destdir
+
+    def fetch_actionsfile(self):
+        actionsuri = join(self.specdiruri, ctx.const.actions_file)
+        self.download(actionsuri, self.destdir)
+        
+    def fetch_patches(self):
+        spec = self.spec
+        for patch in spec.source.patches:
+            file_name = basename(patch.filename)
+            dir_name = dirname(patch.filename)
+            patchuri = join(self.location, 
+                            ctx.const.files_dir, dir_name, file_name)
+            self.download(patchuri, join(self.destdir, ctx.const.files_dir, dir_name))
+
+    def fetch_comarfiles(self):
+        spec = self.spec
+        for package in spec.packages:
+            for pcomar in package.providesComar:
+                comaruri = join(self.location,
+                                ctx.const.comar_dir, pcomar.script)
+                self.download(comaruri, join(self.destdir, ctx.const.comar_dir))
+
+    def fetch_additionalFiles(self):
+        spec = self.spec
+        for pkg in spec.packages:
+            for afile in pkg.additionalFiles:
+                file_name = basename(afile.filename)
+                dir_name = dirname(afile.filename)
+                afileuri = join(self.location, 
+                                ctx.const.files_dir, dir_name, file_name)
+                self.download(afileuri, join(self.destdir, ctx.const.files_dir, dir_name))
+
+    def download(self, uri, transferdir):
+        # fix auth info and download
+        uri = File.make_uri(uri)
+        if self.authinfo:
+            uri.set_auth_info(self.authinfo)
+        File.download(uri, transferdir)
+
+    def fetch_component(self):
         if not self.spec.source.partOf:
             ctx.ui.warning(_('PartOf tag not defined, looking for component'))
-            parentdir = os.path.realpath(self.specdir + '/../')
+            diruri = parenturi(self.specuri.get_uri())
+            parentdir = parenturi(diruri)
             url = util.join_path(parentdir, 'component.xml')
             progress = ctx.ui.Progress
             if URI(url).is_remote_file():

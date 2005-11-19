@@ -177,6 +177,14 @@ def makepath(comps, relative = False, sep = os.path.sep):
     else:
         return path
 
+def parentpath(a, sep = os.path.sep):
+    # remove trailing '/'
+    a = a.lstrip(sep)
+    return a[:a.rfind(sep)]
+
+def parenturi(a):
+    return parentpath(a, '/')
+
 # I'm not sure how necessary this is. Ahem.
 def commonprefix(l):
     """an improved version of os.path.commonprefix,

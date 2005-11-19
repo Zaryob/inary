@@ -75,9 +75,9 @@ class XmlFile(object):
             self.doc = ParsePath(localpath)
             return self.doc.documentElement
         except Ft.FtException, e:
-            raise Error(_("File '%s' has invalid XML: %s") % (path, str(e)) )
+            raise Error(_("File '%s' has invalid XML: %s") % (localpath, str(e)) )
         except exceptions.ValueError, e:
-            raise Error(_("File '%s' not found") % path )
+            raise Error(_("File '%s' not found") % localpath )
 
     def writexml(self, uri, tmpDir = '/tmp'):
         f = file(uri, 'w')
