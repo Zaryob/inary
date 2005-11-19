@@ -74,6 +74,11 @@ Legend:
 
 3. Beta
 
+ - improve url support, it's a little dumb at the moment
+   - devise a File class that works with URLs
+   - consider adding "other" protocols
+     - removable media: media://
+
  + info cmd: reverse dependencies of a package
  + a helper script for finding dependencies (eray)
  + autoxml: automated xml processing (eray)
@@ -174,10 +179,6 @@ Legend:
 
  * low priority 
  
- - improve url support, it's a little dumb at the moment
-   - devise a File class that works with URLs
-   - consider adding "other" protocols
-     - removable media: media://
  - search command: (eray)
    - implement an inverted index (if there's a good one, just use it)
    - search in either summary, or description
