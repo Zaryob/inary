@@ -179,7 +179,7 @@ def makepath(comps, relative = False, sep = os.path.sep):
 
 def parentpath(a, sep = os.path.sep):
     # remove trailing '/'
-    a = a.lstrip(sep)
+    a = a.rstrip(sep)
     return a[:a.rfind(sep)]
 
 def parenturi(a):

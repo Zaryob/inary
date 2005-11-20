@@ -106,7 +106,7 @@ class Builder:
         if not isinstance(specuri, URI):
             specuri = URI(specuri)
         if authinfo:
-            specuri.set_auth_info(authInfo)
+            specuri.set_auth_info(authinfo)
 
         self.authinfo = authinfo
 
@@ -117,7 +117,7 @@ class Builder:
             #make local here and fuck up
             self.specdir = self.fetch_files()
         else:
-            self.specdir = dirname(self.specuri)
+            self.specdir = dirname(self.specuri.get_uri())
 
         self.sourceArchive = SourceArchive(self.spec, self.pkg_work_dir())
 
@@ -707,7 +707,7 @@ def __buildState_buildpackages(pb, last):
         __buildState_installaction(pb, last)
     pb.build_packages()
 
-def build_until(pspecfile, state, authInfo=None):
+def build_until(pspecfile, state, authinfo=None):
     pb = pisi.build.Builder(pspecfile, authinfo)
     pb.compile_action_script()
     
