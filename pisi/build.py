@@ -128,13 +128,15 @@ class Builder:
         self.srcDir = None
 
     def set_spec_file(self, specuri):
+        if not specuri.is_remote_file():
+            specuri = URI(os.path.realpath(specuri.get_uri()))  # FIXME: doesn't work for file://
         self.specuri = specuri
         spec = SpecFile()
         spec.read(specuri, ctx.config.tmp_dir())
         self.spec = spec
 
     # directory accessor functions
-        
+
     # pkg_x_dir: per package directory for storing info type x
 
     def pkg_dir(self):
