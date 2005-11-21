@@ -27,6 +27,7 @@ from mimetools import Message
 from base64 import encodestring
 from shutil import move
 from time import time
+from time import gmtime
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -63,6 +64,7 @@ class Fetcher:
         self.url = url
         self.filedest = dest
         util.check_dir(self.filedest)
+        self.eta = '??:??:??'
         self.percent = 0
         self.rate = 0.0
         self.progress = None
@@ -90,15 +92,19 @@ class Fetcher:
     def _do_grab(self, fileURI, dest, totalsize):
         symbols = [' B/s', 'KB/s', 'MB/s', 'GB/s']
         bs, tt, = 1024, int(time())
+        s_time = time()
+        Tdiff = lambda: time() - s_time
         size = existsize = self.existsize
         symbol, depth = "B/s", 0
         st = time()
         chunk = fileURI.read(bs)
         size += len(chunk)
+
         if self.progress:
             p = self.progress(totalsize, existsize)
             self.percent = p.update(size)
             self.complete = False
+
         while chunk:
             dest.write(chunk)
             chunk = fileURI.read(bs)
@@ -106,11 +112,18 @@ class Fetcher:
             ct = time()
             if int(tt) != int(ct):
                 self.rate = (size - existsize) / (ct - st)
+
+                if self.percent:
+                    self.eta  = '%02d:%02d:%02d' %\
+                    tuple([i for i in gmtime((Tdiff() * (100 - self.percent)) / self.percent)[3:6]])
+
                 while self.rate > 1000 and depth < 3:
                     self.rate /= 1024
                     depth += 1
+
                 symbol, depth = symbols[depth], 0
                 tt = time()
+
             if self.progress:
                 if p.update(size):
                     self.percent = p.percent
@@ -118,6 +131,7 @@ class Fetcher:
                         ctx.ui.display_progress(filename = self.url.filename(),
                                                 percent = self.percent,
                                                 rate = self.rate,
+                                                eta = self.eta,
                                                 symbol = symbol)
                         if self.percent == 100: #FIXME: will be superseded by a
                             self.complete = True # working progress interface
