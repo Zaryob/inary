@@ -624,8 +624,7 @@ class Builder:
 
             name = util.package_name(package.name,
                                      self.spec.source.version,
-                                     self.spec.source.release,
-                                     self.metadata.package.build)
+                                     self.spec.source.release)
             pkg = Package(name, 'w')
             package_names.append(name)
 
