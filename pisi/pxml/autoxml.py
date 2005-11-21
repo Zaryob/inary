@@ -405,7 +405,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if hasattr(self, 'read_hook'):
                     self.read_hook(errs)
                 if errs:
-                    errs.append(_("autoxml.read: File '%s' has errors") % filename)
+                    errs.append(_("autoxml.read: File '%s' has errors") % uri)
                     raise Error(*errs)
 
                 if not keepDoc:
@@ -413,7 +413,7 @@ class autoxml(oo.autosuper, oo.autoprop):
 
                 errs = self.errors()
                 if errs:
-                    errs.append(_("autoxml.read: File '%s' has errors") % filename)
+                    errs.append(_("autoxml.read: File '%s' has errors") % uri)
                     raise Error(*errs)
                     
             def write(self, uri, keepDoc = False, tmpDir = '/tmp'):
@@ -428,7 +428,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if hasattr(self, 'write_hook'):
                     self.write_hook(errs)
                 if errs:
-                    errs.append(_("autoxml.write: File encoding '%s' has errors") % filename)
+                    errs.append(_("autoxml.write: File encoding '%s' has errors") % uri)
                     raise Error(*errs)
                 self.writexml(uri, tmpDir)
                 if not keepDoc:
