@@ -72,7 +72,7 @@ class Dirs:
     defaultprefix = 'usr'
 
     #FIXME: Get these from config or somewhere else!
-    kde = '/usr/kde/3.4'
+    kde = '/usr/kde/3.5'
     qt = '/usr/qt/3'
 
 def initVariables():
