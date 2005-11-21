@@ -177,6 +177,7 @@ def configure_pending():
             pkginfo = A[x]
             pkgname = util.package_name(x, pkginfo.version,
                                         pkginfo.release,
+                                        pkginfo.build,
                                         False)
             pkg_path = util.join_path(ctx.config.lib_dir(),
                                            pkgname)
