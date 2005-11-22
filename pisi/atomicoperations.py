@@ -342,7 +342,7 @@ class Remove(AtomicOperation):
         # we'll have a plan for these configuration files.
         if fileinfo.type == ctx.const.conf:
             if os.path.isfile(fpath):
-                os.rename(fpath, fpath + ".pisi")
+                os.rename(fpath, fpath + ".oldconfig")
         else:
             # check if file is removed manually.
             # And we don't remove directories!
