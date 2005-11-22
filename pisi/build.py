@@ -538,32 +538,33 @@ class Builder:
                 a.sort(lambda x,y : cmp(x[1],y[1]))
                 old_package_fn = a[-1][0]   # get the last one
                 old_build = a[-1][1]
-            else:
-                old_build = None
 
-            # compare old files.xml with the new one..
-            old_pkg = Package(old_package_fn, 'r')
-            old_pkg.read(util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
-
-            # FIXME: TAKE INTO ACCOUNT MINOR CHANGES IN METADATA
-            changed = False
-            fnew = self.files.list
-            fold = old_pkg.files.list
-            fold.sort(lambda x,y : cmp(x.path,y.path))
-            fnew.sort(lambda x,y : cmp(x.path,y.path))
-            if len(fnew) != len(fold):
-                changed = True
-            else:
-                for i in range(len(fold)):
-                    fo = fold.pop(0)
-                    fn = fnew.pop(0)
-                    if fo.path != fn.path:
-                        changed = True
-                        break
-                    else:
-                        if fo.hash != fn.hash:
+                # compare old files.xml with the new one..
+                old_pkg = Package(old_package_fn, 'r')
+                old_pkg.read(util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
+    
+                # FIXME: TAKE INTO ACCOUNT MINOR CHANGES IN METADATA
+                changed = False
+                fnew = self.files.list
+                fold = old_pkg.files.list
+                fold.sort(lambda x,y : cmp(x.path,y.path))
+                fnew.sort(lambda x,y : cmp(x.path,y.path))
+                if len(fnew) != len(fold):
+                    changed = True
+                else:
+                    for i in range(len(fold)):
+                        fo = fold.pop(0)
+                        fn = fnew.pop(0)
+                        if fo.path != fn.path:
                             changed = True
                             break
+                        else:
+                            if fo.hash != fn.hash:
+                                changed = True
+                                break
+            else: # no old build had a build number
+                old_build = None
+
             ctx.ui.debug('old build number: %s' % old_build)
                             
             # set build number
@@ -650,7 +651,7 @@ class Builder:
             files = Files()
             files.read(ctx.const.files_xml)
             for finfo in files.list:
-                pkg.add_to_package("install/" + finfo.path)
+                pkg.add_to_package(join("install", finfo.path))
 
             pkg.close()
             os.chdir(c)
