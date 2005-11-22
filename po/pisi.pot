@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2005-11-22 15:09+EET\n"
+"POT-Creation-Date: 2005-11-22 18:15+EET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,34 +15,34 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: pisi-cli:31
+#: pisi-cli:36
 msgid "Keyboard Interrupt: Exiting..."
 msgstr ""
 
-#: pisi-cli:34
+#: pisi-cli:39
 msgid "Fatal Error. Program Terminated."
 msgstr ""
 
-#: pisi-cli:38
+#: pisi-cli:43
 msgid ""
 "\n"
 "Unhandled internal exception.\n"
 "Please file a bug report. (http://bugs.uludag.org.tr)"
 msgstr ""
 
-#: pisi-cli:45
+#: pisi-cli:50
 msgid "System Error. Program Terminated."
 msgstr ""
 
-#: pisi-cli:49
+#: pisi-cli:58
 msgid "Please use 'pisi help' for general help."
 msgstr ""
 
-#: pisi-cli:52
+#: pisi-cli:61
 msgid "Traceback:"
 msgstr ""
 
-#: pisi-cli:55
+#: pisi-cli:64
 msgid "Use --debug to see a traceback."
 msgstr ""
 
@@ -233,43 +233,43 @@ msgstr ""
 msgid "executing %s"
 msgstr ""
 
-#: pisi/api.py:196 pisi/comariface.py:33
+#: pisi/api.py:197 pisi/comariface.py:33
 msgid "COMAR: comard not fully installed"
 msgstr ""
 
-#: pisi/api.py:208
+#: pisi/api.py:209
 msgid "File %s not found"
 msgstr ""
 
-#: pisi/api.py:230
+#: pisi/api.py:231
 msgid "Package %s not found"
 msgstr ""
 
-#: pisi/api.py:237
+#: pisi/api.py:238
 msgid "* Building index of PISI files under %s"
 msgstr ""
 
-#: pisi/api.py:240
+#: pisi/api.py:241
 msgid "* Index file written"
 msgstr ""
 
-#: pisi/api.py:245
+#: pisi/api.py:246
 msgid "Repo %s added to system."
 msgstr ""
 
-#: pisi/api.py:250
+#: pisi/api.py:251
 msgid "Repo %s removed from system."
 msgstr ""
 
-#: pisi/api.py:252
+#: pisi/api.py:253
 msgid "Repository %s does not exist. Cannot remove."
 msgstr ""
 
-#: pisi/api.py:257
+#: pisi/api.py:258
 msgid "* Updating repository: %s"
 msgstr ""
 
-#: pisi/api.py:261
+#: pisi/api.py:262
 msgid ""
 "\n"
 "* Package database updated."
@@ -520,43 +520,43 @@ msgstr ""
 msgid "(no previous build found, setting build no to 1.)"
 msgstr ""
 
-#: pisi/build.py:571
+#: pisi/build.py:572
 msgid "(old package lacks a build no, setting build no to 1.)"
 msgstr ""
 
-#: pisi/build.py:574
+#: pisi/build.py:575
 msgid "There are changes, incrementing build no to %d"
 msgstr ""
 
-#: pisi/build.py:577
+#: pisi/build.py:578
 msgid "There is no change from previous build %d"
 msgstr ""
 
-#: pisi/build.py:607
+#: pisi/build.py:608
 msgid "Copying additional file: '%s' to '%s' as '%s'"
 msgstr ""
 
-#: pisi/build.py:618
+#: pisi/build.py:619
 msgid "** Building package %s"
 msgstr ""
 
-#: pisi/build.py:620 pisi/build.py:623
+#: pisi/build.py:621 pisi/build.py:624
 msgid "Generating %s,"
 msgstr ""
 
-#: pisi/build.py:626
+#: pisi/build.py:627
 msgid "Creating PISI package %s."
 msgstr ""
 
-#: pisi/build.py:658
+#: pisi/build.py:659
 msgid "Done."
 msgstr ""
 
-#: pisi/build.py:661
+#: pisi/build.py:662
 msgid "Cleaning Build Directory..."
 msgstr ""
 
-#: pisi/build.py:664
+#: pisi/build.py:665
 msgid "Keeping Build Directory"
 msgstr ""
 
@@ -1198,23 +1198,23 @@ msgstr ""
 msgid "Cannot fetch %s; value error: %s"
 msgstr ""
 
-#: pisi/fetcher.py:170 pisi/fetcher.py:172
+#: pisi/fetcher.py:170 pisi/fetcher.py:172 pisi/fetcher.py:174
 msgid "Cannot fetch %s; %s"
 msgstr ""
 
-#: pisi/fetcher.py:174
+#: pisi/fetcher.py:176
 msgid "Cannot fetch %s; (%s): %s"
 msgstr ""
 
-#: pisi/fetcher.py:216
+#: pisi/fetcher.py:218
 msgid "Requested range not satisfiable"
 msgstr ""
 
-#: pisi/fetcher.py:255 pisi/fetcher.py:259
+#: pisi/fetcher.py:257 pisi/fetcher.py:261
 msgid "Requested Range Not Satisfiable"
 msgstr ""
 
-#: pisi/fetcher.py:275 pisi/fetcher.py:296 pisi/fetcher.py:309
+#: pisi/fetcher.py:277 pisi/fetcher.py:298 pisi/fetcher.py:311
 msgid "ftp error"
 msgstr ""
 
