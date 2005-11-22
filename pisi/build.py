@@ -568,13 +568,13 @@ class Builder:
                             
             # set build number
             if old_build is None:
-                ctx.ui.warning(_('(old package lacks a build no, setting build no to 0.)'))
-                return 0
+                ctx.ui.warning(_('(old package lacks a build no, setting build no to 1.)'))
+                return 1
             elif changed:
                 ctx.ui.info(_('There are changes, incrementing build no to %d') % (old_build + 1))
                 return old_build + 1
             else:
-                ctx.ui.info(_('There is no change from previous build %d ') % old_build)
+                ctx.ui.info(_('There is no change from previous build %d') % old_build)
                 return old_build
 
     def build_packages(self):
