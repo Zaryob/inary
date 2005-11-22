@@ -14,7 +14,6 @@
 
 """Top level PISI interfaces. a facade to the entire PISI system"""
 
-import os
 import sys
 from os.path import exists
 
