@@ -71,9 +71,9 @@ class Dirs:
     localstate = 'var/lib'
     defaultprefix = 'usr'
 
-    #FIXME: Get these from config or somewhere else!
-    kde = '/usr/kde/3.5'
-    qt = '/usr/qt/3'
+    values = ctx.config.values
+    kde = values.dirs.kde_dir
+    qt = values.dirs.qt_dir
 
 def initVariables():
     ctx.env = Env()

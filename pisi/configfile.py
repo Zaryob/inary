@@ -35,6 +35,8 @@
 #index_dir = /var/cache/pisi/index
 #tmp_dir = /var/tmp/pisi
 #icon_theme_dir = /usr/share/icons/Tulliana-1.0
+#kde_dir = /usr/kde/3.5
+#qt_dir = /usr/qt/3
 
 import os
 from ConfigParser import ConfigParser, NoSectionError
@@ -71,7 +73,8 @@ class DirsDefaults:
     index_dir = "/var/cache/pisi/index"
     tmp_dir =  "/var/tmp/pisi"
     icon_theme_dir = "/usr/share/icons/Tulliana-1.0"
-
+    kde_dir = "/usr/kde/3.5"
+    qt_dir = "/usr/qt/3"
 
 class ConfigurationSection(object):
     """ConfigurationSection class defines a section in the configuration
