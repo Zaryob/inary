@@ -51,8 +51,7 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
 
     v = ''
     for e in value.args:
-        v += str(e) + ', '
-    v = v.strip(', ')
+        v += str(e) + '\n'
         
     ui.error("%s: %s\n" % (exception, v))
 
