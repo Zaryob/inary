@@ -23,13 +23,18 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
+
+def exit():
+    pisi.api.finalize()
+    sys.exit(1)
+
 def handle_exception(exception, value, tb):
 
     ui = pisi.cli.CLI() # make a temporary UI
     show_traceback = False
     if exception == exceptions.KeyboardInterrupt:
         ui.error(_("Keyboard Interrupt: Exiting..."))
-        sys.exit(1)
+        exit()
     elif isinstance(value, pisi.Error):
         ui.error(_("Fatal Error. Program Terminated."))
         show_traceback = ctx.get_option('debug')
@@ -54,8 +59,8 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
     else:
         ui.info(_("Use --debug to see a traceback."))
 
-    sys.exit(1)
-
+    exit()
+    
 if __name__ == "__main__":
    
     sys.excepthook = handle_exception

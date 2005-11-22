@@ -84,17 +84,18 @@ def init(database = True, options = None, ui = None, comar = True):
     ctx.initialized = True
 
 def finalize():
-    pisi.repodb.finalize()
-    pisi.installdb.finalize()
-    if ctx.filesdb != None:
-        ctx.filesdb.close()
-    if ctx.componentdb != None:
-        ctx.componentdb.close()
-    packagedb.finalize_db()
-    pisi.sourcedb.finalize()
-    ctx.ui.debug('PISI API finalized')
-    ctx.ui.close()
-    ctx.initialized = False
+    if ctx.initialized:
+        pisi.repodb.finalize()
+        pisi.installdb.finalize()
+        if ctx.filesdb != None:
+            ctx.filesdb.close()
+        if ctx.componentdb != None:
+            ctx.componentdb.close()
+        packagedb.finalize_db()
+        pisi.sourcedb.finalize()
+        ctx.ui.debug('PISI API finalized')
+        ctx.ui.close()
+        ctx.initialized = False
 
 def list_upgradable():
     ignore_build = ctx.config.options and ctx.config.options.ignore_build_no
