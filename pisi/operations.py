@@ -48,7 +48,7 @@ def install(packages):
     from pisi.atomicoperations import Error as InstallError
 
     # determine if this is a list of files/urls or names
-    if packages[0].endswith('.pisi'): # they all have to!
+    if packages[0].endswith(ctx.const.package_suffix): # they all have to!
         return install_pkg_files(packages)
     else:
         return install_pkg_names(packages)
@@ -257,7 +257,7 @@ def upgrade_pkg_names(A = []):
     A_0 = A = expand_components(set(A))
     Ap = []
     for x in A:
-        if x.endswith('.pisi'):
+        if x.endswith(ctx.const.package_suffix):
             ctx.ui.debug(_("Warning: package *name* ends with '.pisi'"))
         if not ctx.installdb.is_installed(x):
             ctx.ui.info(_('Package %s is not installed.') % x)
