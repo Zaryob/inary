@@ -53,7 +53,7 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
     for e in value.args:
         v += str(e) + '\n'
         
-    ui.error("%s: %s\n" % (exception, v))
+    ui.error("%s: %s" % (exception, v))
 
     ui.info(_("Please use 'pisi help' for general help."))
 
