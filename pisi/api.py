@@ -93,6 +93,7 @@ def finalize():
     packagedb.finalize_db()
     pisi.sourcedb.finalize()
     ctx.ui.debug('PISI API finalized')
+    ctx.ui.close()
     ctx.initialized = False
 
 def list_upgradable():

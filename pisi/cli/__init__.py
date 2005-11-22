@@ -21,6 +21,7 @@ import pisi
 import pisi.context as ctx
 from pisi.ui import UI
 import pisi.ui as ui
+import pisi.util as util
 from pisi.cli.colors import colorize
 
 
@@ -47,6 +48,9 @@ class CLI(UI):
 
     def __init__(self, show_debug = False, show_verbose = False):
         super(CLI, self).__init__(show_debug, show_verbose)
+
+    def close(self):
+        util.xterm_title_reset()
 
     def output(self, msg, err = False):
         if type(msg)==type(unicode()):
@@ -123,6 +127,7 @@ class CLI(UI):
     def status(self, msg = None):
         if msg:
             self.output(colorize(msg + '\n', 'purple'))
+            util.xterm_title(msg)
 
     def notify(self, event, **keywords):
         if event == ui.installed:

@@ -165,8 +165,7 @@ class Builder:
     def build(self):
         """Build the package in one shot."""
 
-        ctx.ui.info(_("Building PISI source package: %s") % self.spec.source.name)
-        util.xterm_title(_("Building PISI source package: %s\n") % self.spec.source.name)
+        ctx.ui.status(_("Building PISI source package: %s") % self.spec.source.name)
         
         self.compile_action_script()
    
@@ -584,6 +583,8 @@ class Builder:
 
         from copy import deepcopy
 
+        self.fetch_component() # bug 856
+
         # Strip install directory before building .pisi packages.
         self.strip_install_dir()
 
@@ -654,7 +655,6 @@ class Builder:
             pkg.close()
             os.chdir(c)
             self.set_state("buildpackages")
-            util.xterm_title_reset()
             ctx.ui.info(_("Done."))
            
         if ctx.config.values.general.autoclean is True:

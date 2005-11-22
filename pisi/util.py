@@ -137,11 +137,15 @@ def run_batch(cmd):
       ctx.ui.error(_('Failed command: %s') % cmd + strlist(lines))
     return (successful,lines)
 
+######################
+# Terminal functions #
+######################
+
+def has_xterm():
+    return os.environ.has_key("TERM") and sys.stderr.isatty()
+    
 def xterm_title(message):
     """sets message as a console window's title"""
-    return
-    #TODO: the last thing needed in util probably
-    #this is going to be moved to pisi.cli later
     if os.environ.has_key("TERM") and sys.stderr.isatty():
         terminalType = os.environ["TERM"]
         for term in ["xterm", "Eterm", "aterm", "rxvt", "screen", "kterm", "rxvt-unicode"]:
@@ -152,11 +156,11 @@ def xterm_title(message):
 
 def xterm_title_reset():
     """resets console window's title"""
-    #TODO: this, too.
     if os.environ.has_key("TERM"):
         terminalType = os.environ["TERM"]
         xterm_title(os.environ["TERM"])
 
+    
 #############################
 # Path Processing Functions #
 #############################

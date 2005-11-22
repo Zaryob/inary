@@ -44,6 +44,10 @@ class UI(object):
     def __init__(self, debuggy = False, verbose = False):
         self.show_debug = debuggy
         self.show_verbose = verbose
+        
+    def close(self):
+        "cleanup stuff here"
+        pass
 
     def set_verbose(self, flag):
         self.show_verbose = flag
