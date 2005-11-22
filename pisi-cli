@@ -49,7 +49,7 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
         show_traceback = ctx.get_option('debug')
         ui.error(_("System Error. Program Terminated."))
 
-    ui.error("%s: %s\n" % (exception, value[-1]))
+    ui.error("%s: %s\n" % (exception, value))
 
     ui.info(_("Please use 'pisi help' for general help."))
 
