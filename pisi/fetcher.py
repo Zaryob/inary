@@ -166,8 +166,10 @@ class Fetcher:
             headers = fileObj.info()
         except ValueError, e:
             self.err(_('Cannot fetch %s; value error: %s') % (uri, e))
-        except IOError, e:
+        except urllib2.HTTPError, e:
             self.err(_('Cannot fetch %s; %s') % (uri, e))
+        except urllib2.URLError, e:
+            self.err(_('Cannot fetch %s; %s') % (uri, e[-1][-1]))
         except OSError, e:
             self.err(_('Cannot fetch %s; %s') % (uri, e))
         except HTTPException, e:
