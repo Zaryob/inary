@@ -346,7 +346,7 @@ fetch all necessary files and build the package for you.
             return
 
         self.init(database = True)
-        ctx.ui.info('Output directory: %s\n' % ctx.config.options.output_dir)
+        ctx.ui.info(_('Output directory: %s') % ctx.config.options.output_dir)
         for arg in self.args:
             pisi.api.build(arg, self.authInfo)
         self.finalize()

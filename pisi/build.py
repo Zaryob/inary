@@ -44,16 +44,6 @@ class Error(pisi.Error):
     pass
 
 
-class SourceFetcher(object):
-
-    def fetch(self, url, appendDest=""):
-        from fetcher import fetch_url
-
-        ctx.ui.info(_("Fetching %s") % url.get_uri())
-        dest = join(self.dest, appendDest)
-        fetch_url(self.url, dest)
-
-
 # Helper Functions
 def get_file_type(path, pinfoList):
     """Return the file type of a path according to the given PathInfo
@@ -289,7 +279,7 @@ class Builder:
                 %(ctx.config.archives_dir(), self.spec.source.archive.name))
 
     def unpack_source_archive(self):
-        ctx.ui.info(_("Unpacking archive..."))
+        ctx.ui.info(_("Unpacking archive..."), noln = True)
         self.sourceArchive.unpack()
         ctx.ui.info(_(" unpacked (%s)") % self.pkg_work_dir())
         self.set_state("unpack")
@@ -363,17 +353,21 @@ class Builder:
     def check_build_dependencies(self):
         """fail if dependencies not satisfied"""
 
-        build_deps = set(self.spec.source.buildDependencies)
+        build_deps = self.spec.source.buildDependencies
 
         if not ctx.get_option('bypass_safety'):
             if ctx.componentdb.has_component('system.devel'):
                 build_deps_names = set([x.package for x in build_deps])
                 devel_deps_names = set(ctx.componentdb.get_component('system.devel').packages)
                 extra_names = devel_deps_names - build_deps_names
-                ctx.ui.warning(_('Safety switch: following extra packages in system.devel will be installed: ') +
-                           util.strlist(extra_names))
-                extra_deps = [dependency.Dependency(package = x) for x in extra_names]
-                build_deps = build_deps.union(extra_deps)
+                extra_names = filter(lambda x: not ctx.installdb.is_installed(x), extra_names)
+                if extra_names:
+                    ctx.ui.warning(_('Safety switch: following extra packages in system.devel will be installed: ') +
+                               util.strlist(extra_names))
+                    extra_deps = [dependency.Dependency(package = x) for x in extra_names]
+                    build_deps.extend(extra_deps)
+                else:
+                    ctx.ui.warning(_('Safety switch: system.devel is already installed'))
             else:
                 ctx.ui.warning(_('Safety switch: the component system.devel cannot be found'))
 
@@ -507,19 +501,23 @@ class Builder:
         # find previous build in output dir and packages dir
         found = []        
         def locate_package_names(files):
-             for fn in files:
-                 fn = fn.decode('utf-8')
-                 if util.is_package_name(fn, package_name):
-                     old_package_fn = util.join_path(root, fn)
-                     ctx.ui.info('(found old version %s)' % old_package_fn)
-                     old_pkg = Package(old_package_fn, 'r')
-                     old_pkg.read(util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
-                     if str(old_pkg.metadata.package.name) != package_name:
-                         ctx.ui.warning('Skipping %s with wrong pkg name ' %
-                                        old_package_fn)
-                         continue
-                     old_build = old_pkg.metadata.package.build
-                     found.append( (old_package_fn, old_build) )
+            for fn in files:
+                fn = fn.decode('utf-8')
+                if util.is_package_name(fn, package_name):
+                    old_package_fn = util.join_path(root, fn)
+                    try:
+                        old_pkg = Package(old_package_fn, 'r')
+                        old_pkg.read(util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
+                        ctx.ui.info(_('(found old version %s)') % old_package_fn)
+                        if str(old_pkg.metadata.package.name) != package_name:
+                            ctx.ui.warning(_('Skipping %s with wrong pkg name ') %
+                                           old_package_fn)
+                            continue
+                        old_build = old_pkg.metadata.package.build
+                        found.append( (old_package_fn, old_build) )
+                    except:
+                        ctx.ui.warning('Package file %s may be corrupt. Skipping.' % old_package_fn)
+                        continue
 
         for root, dirs, files in os.walk(ctx.config.options.output_dir):
             dirs = [] # don't recurse
