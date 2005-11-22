@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2005-11-22 19:33+EET\n"
+"POT-Creation-Date: 2005-11-22 19:49+EET\n"
 "PO-Revision-Date: 2005-11-22 19:37+0200\n"
 "Last-Translator: Eray Özkural <eray@uludag.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
@@ -27,30 +27,25 @@ msgid "Fatal Error. Program Terminated."
 msgstr "Düzeltilemeyen Hata: Program Sonlandırıldı."
 
 #: pisi-cli:43
-msgid ""
-"\n"
-"Unhandled internal exception.\n"
-"Please file a bug report. (http://bugs.uludag.org.tr)"
+msgid "Unhandled internal exception."
 msgstr ""
-"\n"
-"Dahili hata.\n"
-"Lütfen bir hata raporu hazırlayınız. (http://bugs.uludag.org.tr) "
 
-#: pisi-cli:50
+#: pisi-cli:48
 msgid "System Error. Program Terminated."
 msgstr "Sistem Hatası: Program Sonlandırıldı. "
 
-#: pisi-cli:58
+#: pisi-cli:56
 msgid "Please use 'pisi help' for general help."
 msgstr "Genel yardım için lütfen 'pisi help' komutunu kullanınız. "
 
-#: pisi-cli:61
+#: pisi-cli:59
 msgid "Traceback:"
 msgstr "Geri-iz: "
 
-#: pisi-cli:64
+#: pisi-cli:62
 msgid "Use --debug to see a traceback."
-msgstr "Bir geri iz (traceback) görmek için lütfen --debug seçeneğini kullanın. "
+msgstr ""
+"Bir geri iz (traceback) görmek için lütfen --debug seçeneğini kullanın. "
 
 #: pisi/actionsapi/autotools.py:36
 msgid ""
@@ -430,7 +425,8 @@ msgstr "PİSİ kaynak paketi %s inşa ediliyor"
 
 #: pisi/build.py:198
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr "IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
+msgstr ""
+"IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
 
 #: pisi/build.py:202
 msgid "CCache detected..."
@@ -489,14 +485,16 @@ msgid "unable to call function from actions: %s"
 msgstr "fonksiyon eylemlerden çağırılamıyor: %s"
 
 #: pisi/build.py:365
-msgid "Safety switch: following extra packages in system.devel will be installed: "
+msgid ""
+"Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Emniyet mandalı: taban geliştirme sistemi system.devel'den izleyen paketler "
 "ek olarak yüklenecek:"
 
 #: pisi/build.py:370
 msgid "Safety switch: system.devel is already installed"
-msgstr "Emniyet mandalı: taban geliştirme sistemi system.devel halihazırda kurulu"
+msgstr ""
+"Emniyet mandalı: taban geliştirme sistemi system.devel halihazırda kurulu"
 
 #: pisi/build.py:372
 msgid "Safety switch: the component system.devel cannot be found"
@@ -962,8 +960,10 @@ msgstr ""
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/commands.py:622 pisi/cli/commands.py:900
-msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr "Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
+msgid ""
+"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr ""
+"Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
 
 #: pisi/cli/commands.py:637
 msgid ""
@@ -1441,7 +1441,8 @@ msgid "Cannot attain read or write access to database %s"
 msgstr "Veritabanı %s için okuma ya da yazma erişimi edinilemedi"
 
 #: pisi/lockeddbshelve.py:66
-msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
+msgid ""
+"Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
 msgstr ""
 "Bayraklar 'r', 'w', 'c' or 'n'den birisi olmalı ya da bsddb.db.DB_* "
 "bayraklarını kullanmalı"
@@ -1809,7 +1810,8 @@ msgid "Source package '%s' has no first release"
 msgstr ""
 
 #: tools/repostats.py:478
-msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgid ""
+"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 
 #: tools/repostats.py:561
@@ -1844,3 +1846,11 @@ msgstr ""
 msgid "These dependencies are not available in repository:\n"
 msgstr ""
 
+#~ msgid ""
+#~ "\n"
+#~ "Unhandled internal exception.\n"
+#~ "Please file a bug report. (http://bugs.uludag.org.tr)"
+#~ msgstr ""
+#~ "\n"
+#~ "Dahili hata.\n"
+#~ "Lütfen bir hata raporu hazırlayınız. (http://bugs.uludag.org.tr) "
