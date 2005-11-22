@@ -27,6 +27,8 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
+import pisi
+
 import pisi.context as ctx
 import pisi.packagedb as packagedb
 import pisi.dependency as dependency
