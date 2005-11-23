@@ -74,12 +74,9 @@ Legend:
 
 3. Beta
 
- / improve url support, it's a little dumb at the moment
+ + improve url support, it's a little dumb at the moment
    + devise a File class that works with URLs
    + add URL support to autoxml
-   ? consider adding "other" protocols
-     - removable media: media://
-
  + info cmd: reverse dependencies of a package
  + a helper script for finding dependencies (eray)
  + autoxml: automated xml processing (eray)
@@ -174,8 +171,10 @@ Legend:
 
  * medium priority
  
+ / high-level build commands
+   - install build dependencies
  - component improvements (optional)
-   - if comp a has comp b, then it must have all packages in b
+   ? if comp a has comp b, then it must have all packages in b
    - maintain a list if components each component has
 
  * low priority 
@@ -204,7 +203,6 @@ Legend:
 5. Post Release
 
  - high-level build commands
-   - install build dependencies
    - build-all (or build-distro) command
    - an emerge command, just for fun
  - more support for categories:
@@ -213,6 +211,8 @@ Legend:
  / make a package and sourcedb for each repo
    + packagedb
    - sourceb
+ - improve url support: consider adding "other" protocols
+   - removable media: media://
  - transaction stuff for database (eray)
  - multi-architecture support (baris, caglar)
    / design decisions
