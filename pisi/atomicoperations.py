@@ -101,7 +101,10 @@ class Install(AtomicOperation):
         """check system requirements"""
         #TODO: IS THERE ENOUGH SPACE?
         # what to do if / is split into /usr, /var, etc.
-        pass
+        # check comar
+        if ctx.comar:
+            import pisi.comariface as comariface
+            com = comariface.make_com()
 
     def check_relations(self):
         # check conflicts
