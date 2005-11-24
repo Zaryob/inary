@@ -29,6 +29,7 @@ def exportFlags():
     environ['CFLAGS'] = values.build.cflags
     environ['CXXFLAGS'] = values.build.cxxflags
     environ['LDFLAGS'] = values.build.ldflags
+    environ['JOBS'] = values.build.jobs
 
 class Env(object):
     '''General environment variables used in actions API'''
@@ -46,7 +47,8 @@ class Env(object):
             'host': 'HOST',
             'cflags': 'CFLAGS',
             'cxxflags': 'CXXFLAGS',
-            'ldflags': 'LDFLAGS'
+            'ldflags': 'LDFLAGS',
+            'jobs': 'JOBS'
         }
 
     def __getattr__(self, attr):

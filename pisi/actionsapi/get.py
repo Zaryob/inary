@@ -104,6 +104,9 @@ def CXXFLAGS():
 def LDFLAGS():
     return env.ldflags
 
+def makeJOBS():
+    return env.jobs
+
 # Directory Related Functions
 
 def docDIR():

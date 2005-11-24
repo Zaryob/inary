@@ -92,7 +92,7 @@ def compile(parameters = ''):
 
 def make(parameters = ''):
     '''make source with given parameters = "all" || "doc" etc.'''
-    if system('make %s' % parameters):
+    if system('make %s %s' % (get.makeJOBS(), parameters)):
             raise MakeError(_('Make failed.'))
 
 def install(parameters = '', argument = 'install'):
