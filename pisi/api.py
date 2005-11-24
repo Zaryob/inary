@@ -176,22 +176,23 @@ def configure_pending():
     try:
         import pisi.comariface as comariface
         for x in order:
-            pkginfo = A[x]
-            pkgname = util.package_name(x, pkginfo.version,
+            if ctx.installdb.is_installed(x):
+                pkginfo = A[x]
+                pkgname = util.package_name(x, pkginfo.version,
                                         pkginfo.release,
                                         False,
                                         False)
-            pkg_path = util.join_path(ctx.config.lib_dir(),
+                pkg_path = util.join_path(ctx.config.lib_dir(),
                                            pkgname)
-            m = MetaData()
-            metadata_path = util.join_path(pkg_path, ctx.const.metadata_xml)
-            m.read(metadata_path)
-            for pcomar in m.package.providesComar:
-                scriptPath = util.join_path(pkg_path,
+                m = MetaData()
+                metadata_path = util.join_path(pkg_path, ctx.const.metadata_xml)
+                m.read(metadata_path)
+                for pcomar in m.package.providesComar:
+                    scriptPath = util.join_path(pkg_path,
                                             ctx.const.comar_dir,
                                             pcomar.script)
-                comariface.register(pcomar, x, scriptPath)
-                comariface.run_postinstall(x)
+                    comariface.register(pcomar, x, scriptPath)
+                    comariface.run_postinstall(x)
             ctx.installdb.clear_pending(x)
     except ImportError:
         raise Error(_("COMAR: comard not fully installed"))

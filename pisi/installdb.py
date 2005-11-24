@@ -155,8 +155,9 @@ class InstallDB:
     def clear_pending(self, pkg):
         pkg = str(pkg)
         info = self.d[pkg]
-        assert info.state == 'ip'
-        info.state = 'i'
+        if self.is_installed(pkg):
+            assert info.state == 'ip'
+            info.state = 'i'
         self.d[pkg] = info
         del self.dp[pkg]
 
