@@ -136,17 +136,17 @@ class Install(AtomicOperation):
             (iversion, irelease, ibuild) = ctx.installdb.get_version(pkg.name)
 
             # determine if same version
-            same_ver = False
+            self.same_ver = False
             ignore_build = ctx.config.options and ctx.config.options.ignore_build_no
             if (not ibuild) or (not pkg.build) or ignore_build:
                 # we don't look at builds to compare two package versions
                 if pkg.version == iversion and pkg.release == irelease:
-                    same_ver = True
+                    self.same_ver = True
             else:
                 if pkg.build == ibuild:
-                    same_ver = True
+                    self.same_ver = True
 
-            if same_ver:
+            if self.same_ver:
                 if self.ask_reinstall:
                     if not ctx.ui.confirm(_('Re-install same version package?')):
                         raise Error(_('Package re-install declined'))
@@ -232,7 +232,8 @@ class Install(AtomicOperation):
 
         if self.reinstall:
             Remove(self.metadata.package.name).remove_db()
-            Remove.remove_pisi_files(self.old_path)
+            if not self.same_ver:
+                Remove.remove_pisi_files(self.old_path)
 
         # installdb
         ctx.installdb.install(self.metadata.package.name,
