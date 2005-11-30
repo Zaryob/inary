@@ -23,6 +23,7 @@
 #
 #[build]
 #host = i686-pc-linux-gnu
+#debug = False
 #jobs = "-j1"
 #CFLAGS= -mtune=i686 -O2 -pipe -fomit-frame-pointer
 #CXXFLAGS= -mtune=i686 -O2 -pipe -fomit-frame-pointer
@@ -62,6 +63,7 @@ class BuildDefaults:
     """Default values for [build] section"""
     host = "i686-pc-linux-gnu"
     jobs = "-j1"   
+    debug = False
     CFLAGS = "-mtune=i686 -O2 -pipe -fomit-frame-pointer"
     CXXFLAGS = "-mtune=i686 -O2 -pipe -fomit-frame-pointer"
     LDFLAGS = ""

@@ -466,15 +466,32 @@ def strip_file(filepath):
         if ret:
             ctx.ui.warning(_("strip command failed for file '%s'!") % f)
 
+    def save_elf_debug(f):
+        """copy debug info into /debug/file.debug file"""
+        p = os.popen("objcopy --only-keep-debug %s /debug/%s.debug" % (f, os.path.basename(f)))
+        ret = p.close()
+        if ret:
+            ctx.ui.warning(_("objcopy (keep-debug) command failed for file '%s'!") % f)
+        
+        """mark binary/shared objects to use /debug/file.debug"""
+        p = os.popen("objcopy --add-gnu-debuglink=/debug/%s.debug %s" % (os.path.basename(f), f))
+        ret = p.close()
+        if ret:
+            ctx.ui.warning(_("objcopy (add-debuglink) command failed for file '%s'!") % f)
+
     if "current ar archive" in o:
         run_strip(filepath, "-g")
         return True
 
     elif "SB executable" in o:
+        if ctx.config.values.build.debug == "True":
+            save_elf_debug(filepath)
         run_strip(filepath)
         return True
 
     elif "SB shared object" in o:
+        if ctx.config.values.build.debug == "True":
+            save_elf_debug(filepath)
         run_strip(filepath, "--strip-unneeded")
         # FIXME: warn for TEXTREL
         return True
