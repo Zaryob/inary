@@ -173,9 +173,9 @@ def dosed(sourceFiles, findPattern, replacePattern = ''):
     '''replaces patterns in sourceFiles'''
     
     ''' example call: pisitools.dosed("/etc/passwd", "caglar", "cem")'''
-    ''' example call: pisitools.dosym("/etc/passwd", "caglar")'''
-    ''' example call: pisitools.dosym("/etc/pass*", "caglar")'''
-    ''' example call: pisitools.dosym("Makefile", "(?m)^(HAVE_PAM=.*)no", r"\1yes")'''
+    ''' example call: pisitools.dosed("/etc/passwd", "caglar")'''
+    ''' example call: pisitools.dosed("/etc/pass*", "caglar")'''
+    ''' example call: pisitools.dosed("Makefile", "(?m)^(HAVE_PAM=.*)no", r"\1yes")'''
 
     for sourceFile in glob.glob(sourceFiles):
         if can_access_file(sourceFile):
