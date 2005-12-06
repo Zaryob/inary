@@ -40,8 +40,7 @@ def handle_exception(exception, value, tb):
         show_traceback = ctx.get_option('debug')
     elif isinstance(value, pisi.Exception):
         show_traceback = True
-        ui.error(_("""
-Unhandled internal exception.
+        ui.error(_("""Unhandled internal exception.
 Please file a bug report. (http://bugs.uludag.org.tr)"""))
     else:
         # For any other exception (possibly Python exceptions) show
@@ -64,7 +63,7 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
         ui.info(_("Use --debug to see a traceback."))
 
     exit()
-    
+
 if __name__ == "__main__":
    
     sys.excepthook = handle_exception

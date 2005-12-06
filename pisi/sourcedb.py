@@ -33,8 +33,8 @@ import pisi.lockeddbshelve as shelve
 
 class SourceDB(object):
 
-    def __init__(self):
-        self.d = shelve.LockedDBShelf('source')
+    def __init__(self, id = 'repo'):
+        self.d = shelve.LockedDBShelf('source-%s' % id)
 
     def close(self):
         self.d.close()
@@ -72,3 +72,37 @@ def finalize():
         sourcedb.close()
         sourcedb = None
 
+sourcedbs = {}
+
+def add_db(name):
+    pisi.sourcedb.sourcedbs[name] = SourceDB('repo-' + name)
+
+def get_db(name):
+    return pisi.sourcedb.sourcedbs[name]
+
+def remove_db(name):
+    del pisi.sourcedb.sourcedbs[name]
+    #FIXME: erase database file?
+    
+def has_package(name):
+    repo = which_repo(name)
+    if repo:# or thirdparty_packagedb.has_package(name) or inst_packagedb.has_package(name):
+        return True
+    return False
+
+def which_repo(name):
+    import pisi.repodb
+    for repo in pisi.repodb.db.list():
+        if get_db(repo).has_source(name):
+            return repo
+    return None
+
+def get_package(name):
+    repo = which_repo(name)
+    if repo:
+        return get_db(repo).get_source(name)
+    if thirdparty_packagedb.has_source(name):
+        return thirdparty_packagedb.get_source(name)
+    if inst_packagedb.has_source(name):
+        return inst_packagedb.get_source(name)
+    raise Error(_('get_source: source %s not found') % name)
