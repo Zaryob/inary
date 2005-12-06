@@ -80,6 +80,13 @@ class PackageDB(object):
                 self.dr[dep_name] = [ (name, dep) ]
         # add component
         ctx.componentdb.add_package(package_info.partOf, package_info.name)
+        # index summary and description
+        for (lang, doc) in package_info.summary.iteritems():
+            if lang in ['en', 'tr']:
+                pisi.search.add_doc('summary', lang, package_info.name, doc)
+        for (lang, doc) in package_info.description.iteritems():
+            if lang in ['en', 'tr']:
+                pisi.search.add_doc('description', lang, package_info.name, doc)
 
     def clear(self):
         self.d.clear()

@@ -106,6 +106,7 @@ class LocalText(dict):
             newnode.appendChild(newtext)
             node.appendChild(newnode)
 
+    #FIXME: maybe more appropriate for pisi.util
     @staticmethod
     def get_lang():
         try:

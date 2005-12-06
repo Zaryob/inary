@@ -74,6 +74,7 @@ Legend:
 
 3. Beta
 
+ + build cmd: installl build deps
  + improve url support, it's a little dumb at the moment
    + devise a File class that works with URLs
    + add URL support to autoxml
@@ -169,26 +170,21 @@ Legend:
 
 4. Release
 
+ * high priority
+
+- transaction stuff for database (eray)
+
  * medium priority
  
- / high-level build commands
-   - install build dependencies
  - component improvements (optional)
    ? if comp a has comp b, then it must have all packages in b
-   - maintain a list if components each component has
+   - maintain a list of components each component has
 
  * low priority 
  
- - search command: (eray)
-   - implement an inverted index (if there's a good one, just use it)
-   - search in either summary, or description
-   - english stemming
-   - turkish stemming
-   - phonetic/syntactic fault tolerance (whichever works!)
-     - in particular evaluate soundex and metaphone
-     - research if there are language independent phonetic encodings
-     - implement as an option (or make it possible to turn it off if it works well :))
-   - fault tolerant search in package names (somehow)
+ + search command: (eray)
+   + implement an inverted index
+   + search in summary and description
  / overhaul installdb (try to merge its use with packagedb) (eray)
  / verify metodlari
    + SpecFile
@@ -203,7 +199,10 @@ Legend:
 5. Post Release
 
  - high-level build commands
-   - build-all (or build-distro) command
+   - build command enhancements:
+     - aware of repo sources
+     - full dependency analysis like install/upgrade etc.
+   - build-all (or build-distro) command, or as a separate tool
    - an emerge command, just for fun
  - more support for categories:
    - put categories into a database
@@ -213,10 +212,22 @@ Legend:
    - sourceb
  - improve url support: consider adding "other" protocols
    - removable media: media://
- - transaction stuff for database (eray)
  - multi-architecture support (baris, caglar)
    / design decisions
    / extend XML specs to support that
    - cross-platform building support
  - incremental build/fetch for repository index (pisi-index.xml)
    - diffsets (caglar)
+ - a command to check if repos are consistent wrt dep relations
+
+ * low priority
+
+ - search command: (eray)
+   - search components
+   - english stemming
+   - turkish stemming
+   - phonetic/syntactic fault tolerance (whichever works!)
+     - in particular evaluate soundex and metaphone
+     - research if there are language independent phonetic encodings
+     - implement as an option (or make it possible to turn it off if it works well :))
+   - fault tolerant search in package names (somehow)

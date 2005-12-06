@@ -25,6 +25,8 @@ def tokenize(lang, str):
             if len(token) > 0:
                 tokens.append(token)
                 token = unicode()
+        elif x in string.punctuation:
+            pass # eat punctuation
         else:
             token += x
 

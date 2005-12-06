@@ -46,6 +46,7 @@ from pisi.build import build, build_until
 from pisi.atomicoperations import resurrect_package
 from pisi.metadata import MetaData
 from pisi.files import Files
+import pisi.search
 
 class Error(pisi.Error):
     pass
@@ -75,6 +76,7 @@ def init(database = True, options = None, ui = None, comar = True):
         ctx.componentdb = pisi.component.ComponentDB()
         packagedb.init_db()
         pisi.sourcedb.init()
+        pisi.search.init(['summary', 'description'], ['en', 'tr'])
     else:
         ctx.repodb = None
         ctx.installdb = None
@@ -93,6 +95,7 @@ def finalize():
             ctx.componentdb.close()
         packagedb.finalize_db()
         pisi.sourcedb.finalize()
+        pisi.search.finalize()
         ctx.ui.debug('PISI API finalized')
         ctx.ui.close()
         ctx.initialized = False

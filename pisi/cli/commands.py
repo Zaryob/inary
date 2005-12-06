@@ -928,18 +928,56 @@ class ListPending(Command):
         list = ctx.installdb.list_pending()
         for p in list.keys():
             print p
-
         self.finalize()
 
 
-class Search(Command):
+class Search(Info):
     """Search packages
 
-Usage: search <search pattern>
+Usage: search <term1> <term2> ... <termn>
 
-#FIXME: fill this later
+Finds a package in repository containing specified search terms
 """
-    pass
+    __metaclass__ = autocommand
+
+    def __init__(self):
+        super(Search, self).__init__()
+        
+    name = ("search", "s")
+
+    def options(self):
+        super(Search, self).options()
+        self.parser.add_option("-l", "--language", action="store",
+                               help=_("set search language"))
+
+    def get_lang(self):
+        lang = ctx.get_option('language')
+        if not lang:
+            lang = pisi.pxml.autoxml.LocalText.get_lang()
+        if not lang in ['en', 'tr']:
+            lang = 'en'
+        return lang
+
+    def search(self, id, terms):
+        lang = self.get_lang()
+        return pisi.search.query(id, lang, terms)
+        
+    def run(self):
+
+        self.init(True)
+
+        if not self.args:
+            self.help()
+            return
+
+        r1 = self.search('summary', self.args)
+        r2 = self.search('description', self.args)
+        r = r1.union(r2)
+
+        for pkg in r:
+            self.printinfo_package(pkg)
+
+        self.finalize()
 
 class SearchFile(Command):
     """Search for a file
@@ -961,8 +999,8 @@ Finds the installed package which contains the specified file.
         self.parser.add_option("-f", "--fuzzy", action="store_true",
                                default=False, help=_("fuzzy search"))
     
-    # and what does exact mean? -- exa
-    @staticmethod #fuck python 2.3 compatibility I don't care about it
+    # what does exact mean? -- exa
+    @staticmethod
     def search_exact(path):
         files = []
         path = path.lstrip('/') #FIXME: this shouldn't be necessary :/

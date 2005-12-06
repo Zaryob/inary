@@ -55,4 +55,6 @@ def remove_doc(id, lang, docid, str):
     ctx.invidx[id][lang].remove_doc(docid)
 
 def query(id, lang, terms):
+    import preprocess as p
+    terms = map(lambda x: p.lower(lang, x), terms)
     return ctx.invidx[id][lang].query(terms)
