@@ -16,6 +16,7 @@ import bsddb.dbshelve as shelve
 import bsddb.db as db
 import os
 import fcntl
+import types
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -77,7 +78,6 @@ class LockedDBShelf(shelve.DBShelf):
         except IOError:
             raise Error(_("Another instance of PISI is running. Try later!"))
 
-
     def close(self):
         if self.closed:
             return
@@ -89,3 +89,13 @@ class LockedDBShelf(shelve.DBShelf):
     def unlock(self):
         self.lockfile.close()
         os.unlink(self.filename + '.lock')
+
+    @staticmethod
+    def encodekey(key):
+        '''utility method for dbs that must store unicodes in keys'''
+        if type(key)==types.UnicodeType:
+            return key.encode('utf-8')
+        elif type(key)==types.StringType:
+            return key
+        else:
+            raise Error('Key must be either string or unicode')

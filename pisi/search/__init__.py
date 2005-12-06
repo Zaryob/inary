@@ -13,6 +13,7 @@
 # Author:  Eray Ozkural <eray@uludag.org.tr>
 
 import pisi
+import pisi.context as ctx
 
 class Error(pisi.Error):
     pass
@@ -20,13 +21,16 @@ class Error(pisi.Error):
 class Exception(pisi.Exception):
     pass
 
-# API    
+# API
 
 from invertedindex import InvertedIndex
+from preprocess import preprocess
 
 def init(ids, langs):
     "initialize databases"
-    import pisi.context as ctx
+    
+    assert type(ids)==type([])
+    assert type(langs)==type([])
     
     ctx.invidx = {}
     for id in ids:
@@ -44,10 +48,11 @@ def finalize():
     ctx.invidx = {}    
     
 def add_doc(id, lang, docid, str):
-    pass
+    terms = preprocess(lang, str)
+    ctx.invidx[id][lang].add_doc(docid, terms)
 
 def remove_doc(id, lang, docid, str):
-    pass
+    ctx.invidx[id][lang].remove_doc(docid)
 
-def query_terms(id, lang, terms):
-    pass
+def query(id, lang, terms):
+    return ctx.invidx[id][lang].query(terms)

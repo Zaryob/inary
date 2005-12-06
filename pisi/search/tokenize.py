@@ -11,7 +11,21 @@
 #
 # Author:  Eray Ozkural <eray@uludag.org.tr>
 #
-# rev 1: very little tokenization, for testing
+# rev 1: very simple tokenization, for testing
 
-def tokenize(lang, string):
-    pass
+import string
+
+def tokenize(lang, str):
+    if type(str) != type(unicode()):
+        str = unicode(str)
+    tokens = []
+    token = unicode()
+    for x in str:
+        if x in string.whitespace:
+            if len(token) > 0:
+                tokens.append(token)
+                token = unicode()
+        else:
+            token += x
+
+    return tokens

@@ -11,6 +11,11 @@
 #
 # Author:  Eray Ozkural <eray@uludag.org.tr>
 
+import types
+
+import pisi.lockeddbshelve as shelve
+
+
 class InvertedIndex(object):
     """a database of term -> set of documents"""
     
@@ -21,13 +26,18 @@ class InvertedIndex(object):
         self.d.close()
 
     def has_term(self, term):
-        return self.d.has_key(str(term))
+        return self.d.has_key(shelve.LockedDBShelf.encodekey(term))
 
     def get_term(self, term):
-        term = str(term)
+        """get set of doc ids given term"""
+        term = shelve.LockedDBShelf.encodekey(term)
         if not self.has_term(term):
             self.d[term] = set()
         return self.d[term]
+
+    def query(self, terms):
+        docs = [ self.get_term(x) for x in terms ]
+        return reduce(lambda x,y: x.union(y), docs)
 
     def list_terms(self):
         list = []
@@ -37,12 +47,14 @@ class InvertedIndex(object):
 
     def add_doc(self, doc, terms):
         for term_i in terms:
+            term_i = shelve.LockedDBShelf.encodekey(term_i)
             term_i_docs = self.get_term(term_i)
             term_i_docs.add(doc)
             self.d[term_i] = term_i_docs # update
 
     def remove_doc(self, doc, terms):
         for term_i in terms:
+            term_i = shelve.LockedDBShelf.encodekey(term_i)            
             term_i_docs = self.get_term(term_i)
             term_i_docs.remove(doc)
             self.d[term_i] = term_i_docs # update
