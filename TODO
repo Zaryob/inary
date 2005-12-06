@@ -172,13 +172,13 @@ Legend:
 
  * high priority
 
-- transaction stuff for database (eray)
+ - transaction stuff for database (eray)
 
  * medium priority
  
  - component improvements (optional)
-   ? if comp a has comp b, then it must have all packages in b
    - maintain a list of components each component has
+   - maintain a list of packages 
 
  * low priority 
  
@@ -193,6 +193,9 @@ Legend:
    - Index (somebody should write one :} )
  - autoxml:
    - revise error checking, printing and tests
+   - uri type
+   - date type
+   - enum type
    - make autoxml dependent on only xmlext and xmlfile interfaces
  ? non-interactive use
 
@@ -212,6 +215,9 @@ Legend:
    - sourceb
  - improve url support: consider adding "other" protocols
    - removable media: media://
+       
+ * medium priority
+
  - multi-architecture support (baris, caglar)
    / design decisions
    / extend XML specs to support that
