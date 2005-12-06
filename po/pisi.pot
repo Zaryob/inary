@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2005-11-22 19:51+EET\n"
+"POT-Creation-Date: 2005-12-06 14:38+EET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,24 +25,23 @@ msgstr ""
 
 #: pisi-cli:43
 msgid ""
-"\n"
 "Unhandled internal exception.\n"
 "Please file a bug report. (http://bugs.uludag.org.tr)"
 msgstr ""
 
-#: pisi-cli:50
+#: pisi-cli:49
 msgid "System Error. Program Terminated."
 msgstr ""
 
-#: pisi-cli:58
+#: pisi-cli:57
 msgid "Please use 'pisi help' for general help."
 msgstr ""
 
-#: pisi-cli:61
+#: pisi-cli:60
 msgid "Traceback:"
 msgstr ""
 
-#: pisi-cli:64
+#: pisi-cli:63
 msgid "Use --debug to see a traceback."
 msgstr ""
 
@@ -96,11 +95,11 @@ msgstr ""
 msgid "Running autoheader failed."
 msgstr ""
 
-#: pisi/actionsapi/get.py:159
+#: pisi/actionsapi/get.py:162
 msgid "Util %s cannot be found"
 msgstr ""
 
-#: pisi/actionsapi/get.py:161
+#: pisi/actionsapi/get.py:164
 msgid "Warning: %s does not exist, using plain name %s"
 msgstr ""
 
@@ -233,43 +232,43 @@ msgstr ""
 msgid "executing %s"
 msgstr ""
 
-#: pisi/api.py:197 pisi/comariface.py:33
+#: pisi/api.py:198 pisi/comariface.py:33
 msgid "COMAR: comard not fully installed"
 msgstr ""
 
-#: pisi/api.py:209
+#: pisi/api.py:210
 msgid "File %s not found"
 msgstr ""
 
-#: pisi/api.py:231
+#: pisi/api.py:232
 msgid "Package %s not found"
 msgstr ""
 
-#: pisi/api.py:238
+#: pisi/api.py:239
 msgid "* Building index of PISI files under %s"
 msgstr ""
 
-#: pisi/api.py:241
+#: pisi/api.py:242
 msgid "* Index file written"
 msgstr ""
 
-#: pisi/api.py:246
+#: pisi/api.py:247
 msgid "Repo %s added to system."
 msgstr ""
 
-#: pisi/api.py:251
+#: pisi/api.py:252
 msgid "Repo %s removed from system."
 msgstr ""
 
-#: pisi/api.py:253
+#: pisi/api.py:254
 msgid "Repository %s does not exist. Cannot remove."
 msgstr ""
 
-#: pisi/api.py:258
+#: pisi/api.py:259
 msgid "* Updating repository: %s"
 msgstr ""
 
-#: pisi/api.py:262
+#: pisi/api.py:263
 msgid ""
 "\n"
 "* Package database updated."
@@ -283,119 +282,119 @@ msgstr ""
 msgid "Installing %s, version %s, release %s, build %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:110
+#: pisi/atomicoperations.py:115
 msgid "Package conflicts %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:115
+#: pisi/atomicoperations.py:120
 msgid "Dependencies for %s not satisfied"
 msgstr ""
 
-#: pisi/atomicoperations.py:117
+#: pisi/atomicoperations.py:122
 msgid "Package not installable"
 msgstr ""
 
-#: pisi/atomicoperations.py:148
+#: pisi/atomicoperations.py:153
 msgid "Re-install same version package?"
 msgstr ""
 
-#: pisi/atomicoperations.py:149
+#: pisi/atomicoperations.py:154
 msgid "Package re-install declined"
 msgstr ""
 
-#: pisi/atomicoperations.py:155
+#: pisi/atomicoperations.py:160
 msgid "Upgrading to new upstream version"
 msgstr ""
 
-#: pisi/atomicoperations.py:158
+#: pisi/atomicoperations.py:163
 msgid "Upgrading to new distribution release"
 msgstr ""
 
-#: pisi/atomicoperations.py:162
+#: pisi/atomicoperations.py:167
 msgid "Upgrading to new distribution build"
 msgstr ""
 
-#: pisi/atomicoperations.py:169
+#: pisi/atomicoperations.py:174
 msgid "Downgrade to old upstream version?"
 msgstr ""
 
-#: pisi/atomicoperations.py:171
+#: pisi/atomicoperations.py:176
 msgid "Downgrade to old distribution release?"
 msgstr ""
 
-#: pisi/atomicoperations.py:173
+#: pisi/atomicoperations.py:178
 msgid "Downgrade to old distribution build?"
 msgstr ""
 
-#: pisi/atomicoperations.py:175
+#: pisi/atomicoperations.py:180
 msgid "Package downgrade declined"
 msgstr ""
 
-#: pisi/atomicoperations.py:187
+#: pisi/atomicoperations.py:192
 msgid "Extracting files"
 msgstr ""
 
-#: pisi/atomicoperations.py:205
+#: pisi/atomicoperations.py:210
 msgid "Storing %s, "
 msgstr ""
 
-#: pisi/atomicoperations.py:208
+#: pisi/atomicoperations.py:213
 msgid "Storing %s."
 msgstr ""
 
-#: pisi/atomicoperations.py:215
+#: pisi/atomicoperations.py:220
 msgid "Storing %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:257
+#: pisi/atomicoperations.py:263
 msgid "Regenerating /etc/ld.so.cache..."
 msgstr ""
 
-#: pisi/atomicoperations.py:260
+#: pisi/atomicoperations.py:266
 msgid "Bypassing ldconfig"
 msgstr ""
 
-#: pisi/atomicoperations.py:294
+#: pisi/atomicoperations.py:300
 msgid "Package URI: %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:299
+#: pisi/atomicoperations.py:305
 msgid "Package %s not found in any active repository."
 msgstr ""
 
-#: pisi/atomicoperations.py:314
+#: pisi/atomicoperations.py:320
 msgid "Removing package %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:316
+#: pisi/atomicoperations.py:322
 msgid "Trying to remove nonexistent package "
 msgstr ""
 
-#: pisi/atomicoperations.py:353
+#: pisi/atomicoperations.py:359
 msgid "Not removing non-file, non-link %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:433
+#: pisi/atomicoperations.py:439
 msgid "Metadata XML '%s' cannot be found"
 msgstr ""
 
-#: pisi/atomicoperations.py:441
+#: pisi/atomicoperations.py:447
 msgid "MetaData format wrong (%s)"
 msgstr ""
 
-#: pisi/atomicoperations.py:453
+#: pisi/atomicoperations.py:459
 msgid "* Adding '%s' to db... "
 msgstr ""
 
-#: pisi/atomicoperations.py:457
+#: pisi/atomicoperations.py:463
 msgid "Files XML '%s' cannot be found"
 msgstr ""
 
-#: pisi/atomicoperations.py:463 pisi/package.py:111
+#: pisi/atomicoperations.py:469 pisi/package.py:111
 msgid "Invalid %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:468
+#: pisi/atomicoperations.py:474
 msgid "OK."
 msgstr ""
 
@@ -595,6 +594,10 @@ msgstr ""
 
 #: pisi/cli/__init__.py:138
 msgid "Upgraded %s"
+msgstr ""
+
+#: pisi/cli/__init__.py:140
+msgid "Configured %s"
 msgstr ""
 
 #: pisi/cli/commands.py:33
@@ -1174,7 +1177,7 @@ msgstr ""
 msgid "Destination directory %s does not exist. Creating it."
 msgstr ""
 
-#: pisi/configfile.py:92
+#: pisi/configfile.py:96
 msgid "No section by name '%s'"
 msgstr ""
 
@@ -1540,6 +1543,10 @@ msgstr ""
 msgid "unpack: check_file_hash failed"
 msgstr ""
 
+#: pisi/sourcedb.py:108
+msgid "get_source: source %s not found"
+msgstr ""
+
 #: pisi/specfile.py:139
 msgid "URI: %s, type: %s, sha1sum: %s"
 msgstr ""
@@ -1612,11 +1619,19 @@ msgstr ""
 msgid "strip command failed for file '%s'!"
 msgstr ""
 
-#: pisi/util.py:494
+#: pisi/util.py:474
+msgid "objcopy (keep-debug) command failed for file '%s'!"
+msgstr ""
+
+#: pisi/util.py:480
+msgid "objcopy (add-debuglink) command failed for file '%s'!"
+msgstr ""
+
+#: pisi/util.py:511
 msgid "Removing lock %s"
 msgstr ""
 
-#: pisi/util.py:527
+#: pisi/util.py:544
 msgid "Updating environment..."
 msgstr ""
 
