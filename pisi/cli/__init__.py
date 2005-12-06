@@ -136,6 +136,8 @@ class CLI(UI):
             msg = _('Removed %s') % keywords['package'].name
         elif event == ui.upgraded:
             msg = _('Upgraded %s') % keywords['package'].name
+        if event == ui.configured:
+            msg = _('Configured %s') % keywords['package'].name
         else:
             msg = None
         if msg:

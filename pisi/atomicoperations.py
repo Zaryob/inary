@@ -87,7 +87,9 @@ class Install(AtomicOperation):
         if ctx.comar:
             import pisi.comariface as comariface
             self.register_comar_scripts()
+            ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
             comariface.run_postinstall(self.pkginfo.name)
+            ctx.ui.notify(pisi.ui.configured, package = self.pkginfo, files = self.files)
         self.update_databases()
         self.update_environment()
         ctx.ui.status()

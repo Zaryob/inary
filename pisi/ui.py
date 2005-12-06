@@ -19,7 +19,8 @@ import sys
 import pisi
 import pisi.context as ctx
 
-installed, upgraded, removed, installing, removing  = range(5)
+(installed, upgraded, removed, installing, removing, 
+ configuring, configured)  = range(7)
 
 class UI(object):
     "Abstract class for UI operations, derive from this."
