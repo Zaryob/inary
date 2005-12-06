@@ -73,8 +73,8 @@ class Index(XmlFile):
                 if fn == 'component.xml':
                     ctx.ui.info(_('Adding %s to component index') % fn)
                     self.add_component(os.path.join(root, fn))
-                #if fn == 'pspec.xml':
-                #    self.add_source(os.path.join(root, fn), repo_uri)
+                if fn == 'pspec.xml':
+                    self.add_source(os.path.join(root, fn), repo_uri)
 
     def update_db(self, repo):
         pkgdb = packagedb.get_db(repo)
@@ -93,11 +93,11 @@ class Index(XmlFile):
         md = metadata.MetaData()
         md.read(os.path.join(ctx.config.install_dir(), ctx.const.metadata_xml))
         if ctx.config.options and ctx.config.options.absolute_uris:
+            # FIXME: the name "absolute_uris" does not seem to fit below :/
             md.package.packageURI = os.path.realpath(path)
         else:                           # create relative path by default
-            # TODO: in the future we'll do all of this with purl/pfile/&helpers
-            # After that, we'll remove the ugly repo_uri parameter from this
-            # function.
+            # TODO: in the future well do all of this with purl/pfile/&helpers
+            # really? heheh -- future exa
             md.package.packageURI = util.removepathprefix(repo_uri, path)
         # check package semantics
         errs = md.errors()
@@ -116,8 +116,8 @@ class Index(XmlFile):
             ctx.ui.error(_('Component in %s is corrupt') % path)
             #ctx.ui.error(str(Error(*errs)))
 
-    def add_source(self, path):
-        ctx.ui.info(_('Adding %s to source index') % fn)
+    def add_source(self, path, repo_uri):
+        ctx.ui.info(_('Adding %s to source index') % path)
         sf = specfile.SpecFile()
         sf.read(path)
         errs = sf.errors()
@@ -125,6 +125,8 @@ class Index(XmlFile):
             ctx.ui.error(_('SpecFile in %s is corrupt') % path)
             ctx.ui.error(str(Error(*errs)))
         else:
+            if ctx.config.options and ctx.config.options.absolute_uris:
+                sf.source.sourceURI = os.path.realpath(path)
+            else:                           # create relative path by default
+                sf.source.sourceURI = util.removepathprefix(repo_uri, path)
             self.sources.append(sf.source)
-
-    #TODO: add source

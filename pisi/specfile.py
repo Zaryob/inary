@@ -156,6 +156,7 @@ class Source:
     t_BuildDependencies = [ [Dependency], autoxml.optional]
     t_Version = [ autoxml.String, autoxml.optional]
     t_Release = [ autoxml.String, autoxml.optional]
+    t_SourceURI = [ autoxml.String, autoxml.optional ] # used in index
 
 
 class Package:

@@ -36,8 +36,8 @@ class Error(pisi.Error):
     pass
 
 class PackageDB(object):
-    """PackageDB class provides an interface to the package database with
-    a delegated dbshelve object"""
+    """PackageDB class provides an interface to the package database 
+    using shelf objects"""
     def __init__(self, id):
         self.d = shelve.LockedDBShelf('package-%s' % id )
         self.dr = shelve.LockedDBShelf('revdep-%s' % id )
