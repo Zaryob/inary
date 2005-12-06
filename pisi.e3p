@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-12-06, 17:06:16 -->
+<!-- Saved: 2005-12-06, 19:01:57 -->
 <!-- Copyright (C) 2005 PiSi Development Team,  -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -457,6 +457,10 @@
       <Dir>pisi</Dir>
       <Dir>search</Dir>
       <Name>preprocess.py</Name>
+    </Source>
+    <Source>
+      <Dir>tests</Dir>
+      <Name>searchtests.py</Name>
     </Source>
   </Sources>
   <Forms>
