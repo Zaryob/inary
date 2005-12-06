@@ -192,7 +192,9 @@ def configure_pending():
                                             ctx.const.comar_dir,
                                             pcomar.script)
                     comariface.register(pcomar, x, scriptPath)
+                    ctx.ui.notify(pisi.ui.configuring, package = pkginfo, files = self.files)
                     comariface.run_postinstall(x)
+                    ctx.ui.notify(pisi.ui.configured, package = pkginfo, files = self.files)
             ctx.installdb.clear_pending(x)
     except ImportError:
         raise Error(_("COMAR: comard not fully installed"))
