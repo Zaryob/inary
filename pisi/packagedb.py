@@ -19,9 +19,7 @@
 # we basically store everything in PackageInfo class
 # yes, we are cheap
 
-import bsddb.dbshelve as shelve
 import os, fcntl
-from bsddb import db
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)

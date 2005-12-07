@@ -12,7 +12,6 @@
 
 # Author: Eray Ozkural
 
-from bsddb import db
 import os, fcntl
 
 import gettext

@@ -18,10 +18,8 @@ we basically store everything in sourceinfo class
 yes, we are cheap
 """
 
-import bsddb.dbshelve as shelve
 import os
 import fcntl
-from bsddb import db
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)

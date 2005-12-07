@@ -41,11 +41,11 @@ def init(ids, langs):
 def finalize():
     import pisi.context as ctx
     
-    for id in ctx.invidx.iterkeys():
-        for lang in ctx.invidx[id].iterkeys():
-            ctx.invidx[id][lang].close()
-    
-    ctx.invidx = {}    
+    if ctx.invidx:
+        for id in ctx.invidx.iterkeys():
+            for lang in ctx.invidx[id].iterkeys():
+                ctx.invidx[id][lang].close()
+        ctx.invidx = {}    
     
 def add_doc(id, lang, docid, str):
     terms = preprocess(lang, str)

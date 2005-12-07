@@ -12,8 +12,8 @@
 #
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 
-import bsddb.dbshelve as shelve
-import bsddb.db as db
+import bsddb3.dbshelve as shelve
+import bsddb3.db as db
 import os
 import fcntl
 import types
@@ -32,7 +32,7 @@ class LockedDBShelf(shelve.DBShelf):
     """A simple wrapper to implement locking for bsddb's dbshelf"""
 
     def __init__(self, dbname, mode=0644,
-                 filetype=db.DB_HASH, dbenv=None):
+                 filetype=db.DB_BTREE, dbenv=None):
         shelve.DBShelf.__init__(self, dbenv)
         filename = os.path.join( pisi.context.config.db_dir(), dbname + '.bdb')
         if os.access(os.path.dirname(filename), os.W_OK):

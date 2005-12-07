@@ -12,7 +12,7 @@
 # Author: Eray Ozkural <eray@uludag.org.tr>
 
 import sys
-import bsddb.dbshelve as shelve
+import bsddb3.dbshelve as shelve
 
 sys.path.append('.')
 
