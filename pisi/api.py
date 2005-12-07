@@ -195,6 +195,9 @@ def configure_pending():
                                             ctx.const.comar_dir,
                                             pcomar.script)
                     comariface.register(pcomar, x, scriptPath)
+                    # FIXME: we need a full package info here!
+                    # Eray, please fix this
+                    pkginfo.name = x
                     ctx.ui.notify(pisi.ui.configuring, package = pkginfo, files = None)
                     comariface.run_postinstall(x)
                     ctx.ui.notify(pisi.ui.configured, package = pkginfo, files = None)
