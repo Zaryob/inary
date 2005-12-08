@@ -179,7 +179,6 @@ class Install(AtomicOperation):
                     if not ctx.ui.confirm(x):
                         raise Error(_('Package downgrade declined'))
 
-
             # schedule for reinstall
             self.old_files = ctx.installdb.files(pkg.name)
             self.old_path = ctx.installdb.pkg_dir(pkg.name, iversion, irelease)

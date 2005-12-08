@@ -67,24 +67,30 @@ class PackageDB(object):
 
     #TODO: list_upgrades?
 
-    def add_package(self, package_info):
+    def add_package(self, package_info, txn = None):
         name = str(package_info.name)
-        self.d[name] = package_info
-        for dep in package_info.runtimeDependencies():
-            dep_name = str(dep.package)
-            if self.dr.has_key(dep_name):
-                self.dr[dep_name].append( (name, dep) )
-            else:
-                self.dr[dep_name] = [ (name, dep) ]
-        # add component
-        ctx.componentdb.add_package(package_info.partOf, package_info.name)
-        # index summary and description
-        for (lang, doc) in package_info.summary.iteritems():
-            if lang in ['en', 'tr']:
-                pisi.search.add_doc('summary', lang, package_info.name, doc)
-        for (lang, doc) in package_info.description.iteritems():
-            if lang in ['en', 'tr']:
-                pisi.search.add_doc('description', lang, package_info.name, doc)
+        
+        def proc(txn):
+            self.d.put(name, package_info, txn)
+            for dep in package_info.runtimeDependencies():
+                dep_name = str(dep.package)
+                if self.dr.has_key(dep_name, txn):
+                    revdep = self.dr.get(dep_name, txn)
+                    revdep.append( (name, dep) )
+                    self.dr.put(dep_name, revdep, txn)
+                else:
+                    self.dr.put(dep_name, [ (name, dep) ], txn)
+            # add component
+            ctx.componentdb.add_package(package_info.partOf, package_info.name, txn)
+            # index summary and description
+            for (lang, doc) in package_info.summary.iteritems():
+                if lang in ['en', 'tr']:
+                    pisi.search.add_doc('summary', lang, package_info.name, doc)
+            for (lang, doc) in package_info.description.iteritems():
+                if lang in ['en', 'tr']:
+                    pisi.search.add_doc('description', lang, package_info.name, doc)
+
+        self.d.txn_proc(proc, txn)
 
     def clear(self):
         self.d.clear()

@@ -34,8 +34,10 @@ from pisi.uri import URI
 import pisi.component as component
 import pisi.specfile as specfile
 
+
 class Error(pisi.Error):
     pass
+
 
 class Index(XmlFile):
     __metaclass__ = autoxml.autoxml

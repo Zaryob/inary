@@ -96,26 +96,33 @@ class InstallDB:
     def pkg_dir(self, pkg, version, release):
         return join(ctx.config.lib_dir(), pkg + '-' + version + '-' + release)
 
-    def is_recorded(self, pkg):
+    def is_recorded(self, pkg, txn = None):
         pkg = str(pkg)
-        return self.d.has_key(pkg)
+        def proc(txn):
+            return self.d.has_key(pkg)
+        return self.d.txn_proc(proc, txn)
 
-    def is_installed(self, pkg):
+    def is_installed(self, pkg, txn = None):
         pkg = str(pkg)
-        if self.is_recorded(pkg):
-            info = self.d[pkg]
-            return info.state=='i' or info.state=='ip'
-        else:
-            return False
+        def proc(txn):
+            if self.is_recorded(pkg, txn):
+                info = self.d.get(pkg, txn)
+                return info.state=='i' or info.state=='ip'
+            else:
+                return False
+        return self.d.txn_proc(proc, txn)
 
-    def list_installed(self):
-        list = []
-        for (pkg, info) in self.d.items():
-            if info.state=='i' or info.state=='ip':
-                list.append(pkg)
-        return list
+    def list_installed(self, txn = None):
+        def proc(txn):
+            list = []
+            for (pkg, info) in self.d.items(txn):
+                if info.state=='i' or info.state=='ip':
+                    list.append(pkg)
+            return list
+        return self.d.txn_proc(proc, txn)
 
     def list_pending(self):
+        # warning: reads the entire db
         dict = {}
         for (pkg, x) in self.dp.items():
             pkginfo = self.d[pkg]
@@ -139,18 +146,20 @@ class InstallDB:
         else:
             return False
 
-    def install(self, pkg, version, release, build, distro = ""):
+    def install(self, pkg, version, release, build, distro = "", txn = None):
         """install package with specific version, release, build"""
         pkg = str(pkg)
-        if self.is_installed(pkg):
-            raise InstallDBError(_("Already installed"))
-        if ctx.config.get_option('ignore_comar'):
-            state = 'ip'
-            self.dp[pkg] = True
-        else:
-            state = 'i'
-            
-        self.d[pkg] = InstallInfo(state, version, release, build, distro)
+        def proc(txn):
+            if self.is_installed(pkg, txn):
+                raise InstallDBError(_("Already installed"))
+            if ctx.config.get_option('ignore_comar'):
+                state = 'ip'
+                self.dp.put(pkg, True, txn)
+            else:
+                state = 'i'
+            self.d.put(pkg, InstallInfo(state, version, release, build, distro), txn)
+
+        self.d.txn_proc(proc,txn)
 
     def clear_pending(self, pkg):
         pkg = str(pkg)
@@ -188,4 +197,3 @@ def finalize():
     if db:
         db.close()
         db = None
-

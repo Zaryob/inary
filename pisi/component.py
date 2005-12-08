@@ -87,13 +87,15 @@ class ComponentDB(object):
     def close(self):
         self.d.close()
 
-    def has_component(self, name):
-        return self.d.has_key(str(name))
+    def has_component(self, name, txn = None):
+        return self.d.has_key(str(name), txn)
 
-    def get_component(self, name):
-        if not self.has_component(name):
-            self.d[name] = Component(name = name)
-        return self.d[name]
+    def get_component(self, name, txn = None):
+        def proc(txn):
+            if not self.has_component(name):
+                self.d[name] = Component(name = name)
+            return self.d[name]
+        return self.d.txn_proc(proc, txn)
 
     def list_components(self):
         list = []
@@ -101,27 +103,33 @@ class ComponentDB(object):
             list.append(pkg)
         return list
 
-    def update_component(self, component):
-        if self.d.has_key(component.name):
-            # preserve the list of packages
-            component.packages = self.d[component.name].packages
-        self.d[component.name] = component
+    def update_component(self, component, txn = None):
+        def proc(txn):
+            if self.d.has_key(component.name):
+                # preserve the list of packages
+                component.packages = self.d[component.name].packages
+            self.d[component.name] = component
+        self.d.txn_proc(proc, txn)
 
-    def add_package(self, component_name, package):
-        component = self.get_component(component_name)
-        component.packages.append(package)
-        self.d[component_name] = component # update
+    def add_package(self, component_name, package, txn = None):
+        def proc(txn):
+            component = self.get_component(component_name, txn)
+            component.packages.append(package)
+            self.d.put(component_name, component, txn) # update
+        self.d.txn_proc(proc, txn)
 
-    def remove_package(self, component_name, package):
-        if not self.has_component(component_name):
-            raise Error(_('Information for component %s not available') % component_name)
-        component = self.get_component(component_name)
-        component.packages.remove(package)
-        self.d[component_name] = component # update
+    def remove_package(self, component_name, package, txn = None):
+        def proc(txn):
+            if not self.has_component(component_name, txn):
+                raise Error(_('Information for component %s not available') % component_name)
+            component = self.get_component(component_name, txn)
+            component.packages.remove(package)
+            self.d.put(component_name, component, txn) # update
+        self.d.txn_proc(proc, txn)
 
-    def clear(self):
-        self.d.clear()
+    def clear(self, txn = None):
+        self.d.clear(txn)
 
-    def remove_component(self, name):
+    def remove_component(self, name, txn = None):
         name = str(name)
-        del self.d[name]
+        self.d.delete(name, txn)

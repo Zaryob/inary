@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-12-06, 19:01:57 -->
+<!-- Saved: 2005-12-08, 18:50:27 -->
 <!-- Copyright (C) 2005 PiSi Development Team,  -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -462,6 +462,10 @@
       <Dir>tests</Dir>
       <Name>searchtests.py</Name>
     </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Name>dbshelve.py</Name>
+    </Source>
   </Sources>
   <Forms>
   </Forms>
@@ -503,10 +507,10 @@
     <VcsOtherData>{'standardLayout': 1}</VcsOtherData>
   </Vcs>
   <FiletypeAssociations>
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
     <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
     <FiletypeAssociation pattern="*.ui" type="FORMS" />
-    <FiletypeAssociation pattern="*.py" type="SOURCES" />
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
   </FiletypeAssociations>
 </Project>
