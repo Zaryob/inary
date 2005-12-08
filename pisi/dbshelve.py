@@ -25,6 +25,10 @@
 
 """Manage shelves of pickled objects using bsddb database files for the
 storage.
+
+Add transaction processing by default to dictionary ops also
+Also other minor improvements -- exa
+
 """
 
 #------------------------------------------------------------------------
