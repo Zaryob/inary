@@ -14,7 +14,7 @@
 
 __version__ = "1.0_beta4"
 
-__all__ = [ 'api', 'config', 'packagedb', 'installdb' ]
+__all__ = [ 'api', 'config', 'packagedb', 'installdb', 'search' ]
 
 class Exception(Exception):
     """Class of exceptions that must be caught and handled within PISI"""
