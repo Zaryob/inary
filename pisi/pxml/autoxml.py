@@ -297,7 +297,8 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         # generate top-level helper functions
         cls.initializers = inits
-        def initialize(self, **args):
+        def initialize(self, uri = None, keepDoc = False, tmpDir = '/tmp',
+                       **args):
             if xmlfile_support:
                 # totally dailywtf
                 #if args.has_key('tag'):
@@ -317,6 +318,8 @@ class autoxml(oo.autosuper, oo.autoprop):
             # init hook
             if hasattr(self, 'init'):
                 self.init(tag)
+            if uri:
+                self.read(uri, keepDoc, tmpDir)
 
         cls.__init__ = initialize
 
