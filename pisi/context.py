@@ -42,8 +42,9 @@ initialized = False
 #    """ Register a UI implementation"""
 #    ui = _impl
 
+import bsddb3.db as db
 
-def txn_proc(proc, txn):
+def txn_proc(proc, txn = None):
     # can be used to txn protect a method automatically
     assert dbenv
     if not txn:

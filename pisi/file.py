@@ -59,7 +59,7 @@ class File:
 
     def __init__(self, uri, mode, transfer_dir = "/tmp"):
         "it is pointless to open a file without a URI and a mode"
-        uri = make_uri(uri)
+        uri = File.make_uri(uri)
         if mode==File.read or mode==File.write:
             self.mode = mode
         else:

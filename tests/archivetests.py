@@ -19,7 +19,6 @@ from pisi import archive
 from pisi import sourcearchive
 from pisi import fetcher
 from pisi import util
-#from pisi.build import BuildContext
 from pisi.specfile import SpecFile
 from pisi import uri 
 

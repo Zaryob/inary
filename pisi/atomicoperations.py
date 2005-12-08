@@ -409,18 +409,18 @@ def __is_virtual_upgrade(metadata):
     
     return upgrade
 
-def virtual_install(metadata, files):
+def virtual_install(metadata, files, txn):
     """Recreate the package info for rebuilddb command"""
     pkg = metadata.package
 
     # normally this can't be true. Just for backward compatibility
     # TODO: for speed only ctx.installdb.install exception can be
     # handled but this is much cleaner
-    if ctx.installdb.is_installed(pkg.name):
+    if ctx.installdb.is_installed(pkg.name, txn):
         if __is_virtual_upgrade(metadata):
-            ctx.installdb.remove(pkg.name)
-            packagedb.remove_package(pkg.name)
-            ctx.filesdb.remove_files(ctx.installdb.files(pkg.name))
+            ctx.installdb.remove(pkg.name, txn)
+            packagedb.remove_package(pkg.name, txn)
+            ctx.filesdb.remove_files(ctx.installdb.files(pkg.name), txn)
         else:
             return
 
@@ -431,13 +431,14 @@ def virtual_install(metadata, files):
                          metadata.package.version,
                          metadata.package.release,
                          metadata.package.build,
-                         metadata.package.distribution)
+                         metadata.package.distribution,
+                         txn)
 
     # filesdb
-    ctx.filesdb.add_files(metadata.package.name, files)
+    ctx.filesdb.add_files(metadata.package.name, files, txn)
     
     # installed packages
-    packagedb.inst_packagedb.add_package(pkginfo)
+    packagedb.inst_packagedb.add_package(pkginfo, txn)
 
 def resurrect_package(package_fn):
     """Resurrect the package in the PiSi databases"""
@@ -479,6 +480,8 @@ def resurrect_package(package_fn):
        raise Error, _("Invalid %s") % ctx.const.files_xml
 
     import pisi.atomicoperations
-    pisi.atomicoperations.virtual_install(metadata, files)
+    def f(txn):
+        pisi.atomicoperations.virtual_install(metadata, files, txn)
+    ctx.txn_proc(f)
     if not passed:
         ctx.ui.info(_('OK.'))
