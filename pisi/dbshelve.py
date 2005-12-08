@@ -69,13 +69,13 @@ class DBShelf:
     def clear(self, txn = None):
         def proc(txn):
             for x in self.keys(txn):
-                self.delete(txn)
-        txn_proc(proc, txn)
+                self.db.delete(x, txn)
+        self.txn_proc(proc, txn)
         
-    def delete(self, txn):
+    def delete(self, x, txn):
         def proc(txn):
-            self.db.delete(txn)
-        txn_proc(proc, txn)
+            self.db.delete(x, txn)
+        self.txn_proc(proc, txn)
 
     # another lame pythonic implementation method:
     #def __getattr__(self, name):
