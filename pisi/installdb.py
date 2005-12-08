@@ -110,14 +110,14 @@ class InstallDB:
 
     def list_installed(self):
         list = []
-        for (pkg, info) in self.d.iteritems():
+        for (pkg, info) in self.d.items():
             if info.state=='i' or info.state=='ip':
                 list.append(pkg)
         return list
 
     def list_pending(self):
         dict = {}
-        for (pkg, x) in self.dp.iteritems():
+        for (pkg, x) in self.dp.items():
             pkginfo = self.d[pkg]
             dict[pkg] = pkginfo
         return dict

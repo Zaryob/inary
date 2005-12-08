@@ -97,7 +97,7 @@ class ComponentDB(object):
 
     def list_components(self):
         list = []
-        for (pkg, x) in self.d.iteritems():
+        for (pkg, x) in self.d.items():
             list.append(pkg)
         return list
 

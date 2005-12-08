@@ -47,6 +47,7 @@ from pisi.atomicoperations import resurrect_package
 from pisi.metadata import MetaData
 from pisi.files import Files
 import pisi.search
+import pisi.lockeddbshelve as shelve
 
 class Error(pisi.Error):
     pass
@@ -70,6 +71,7 @@ def init(database = True, options = None, ui = None, comar = True):
 
     # initialize repository databases
     if database:
+        shelve.init_dbenv()
         ctx.repodb = pisi.repodb.init()
         ctx.installdb = pisi.installdb.init()
         ctx.filesdb = pisi.files.FilesDB()
@@ -96,6 +98,8 @@ def finalize():
         packagedb.finalize_db()
         pisi.sourcedb.finalize()
         pisi.search.finalize()
+        if ctx.dbenv:
+            ctx.dbenv.close()
         ctx.ui.debug('PISI API finalized')
         ctx.ui.close()
         ctx.initialized = False

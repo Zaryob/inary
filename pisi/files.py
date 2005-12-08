@@ -56,7 +56,7 @@ class FilesDB(shelve.LockedDBShelf):
 
     def remove_files(self, files):
         for x in files.list:
-            self.delete(str(x.path))
+            del self[str(x.path)]
 
     def has_file(self, path):
         return self.has_key(str(path))

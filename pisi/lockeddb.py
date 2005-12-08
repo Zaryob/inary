@@ -13,9 +13,6 @@
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 
 import bsddb3.db as db
-import bsddb3.dbobj as dbobj
-#import bsddb3.dbshelve as shelve
-import pisi.dbshelve as shelve
 import os
 import fcntl
 import types
@@ -25,33 +22,18 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
-import pisi.context as ctx
-from pisi.util import join_path
-
+import pisi.context
 
 class Error(pisi.Error):
     pass
 
-
-def init_dbenv():
-    ctx.dbenv = dbobj.DBEnv()
-    ctx.dbenv.open(pisi.context.config.db_dir(),
-                   db.DB_CREATE | db.DB_INIT_MPOOL | db.DB_INIT_TXN | db.DB_INIT_LOG )
-
-#def open(filename, flags='r', mode = 0644, filetype = db.DB_BTREE):
-#    db = LockedDBShelf(None, mode, filetype, None, True)
-#    db.open(filename, filename, filetype, flags, mode)
-#    return db
-
-class LockedDBShelf(shelve.DBShelf):
-    """A simple wrapper to implement locking for bsddb's dbshelf"""
+class LockedDB:
 
     def __init__(self, dbname, mode=0644,
-                 filetype=db.DB_BTREE, dbenv = None):
-        if dbenv == None:
+                 filetype=db.DB_BTREE, dbenv=None):
+        if not dbenv:
             dbenv = ctx.dbenv
-        shelve.DBShelf.__init__(self, dbenv)
-        filename = join_path(pisi.context.config.db_dir(), dbname + '.bdb')
+        filename = os.path.join( pisi.context.config.db_dir(), dbname + '.bdb')
         if os.access(os.path.dirname(filename), os.W_OK):
             flags = 'w'
         elif os.access(filename, os.R_OK):
@@ -63,10 +45,11 @@ class LockedDBShelf(shelve.DBShelf):
     def __del__(self):
         # superclass does something funky, we don't need that
         pass
-
+        
     def open(self, filename, dbname, filetype, flags=db.DB_CREATE, mode=0644):
         self.filename = filename        
         self.closed = False
+        #print 'open', filename
         if type(flags) == type(''):
             sflag = flags
             if sflag == 'r':
@@ -81,26 +64,24 @@ class LockedDBShelf(shelve.DBShelf):
                 flags = db.DB_TRUNCATE | db.DB_CREATE
             else:
                 raise Error, _("Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags")
-        flags |= db.DB_AUTO_COMMIT
         self.flags = flags
-        if self.flags & db.DB_RDONLY == 0:
+        pisi.util.check_dir(pisi.context.config.db_dir())
+        if self.flags != db.DB_RDONLY:
             self.lock()
-        filename = os.path.realpath(filename) # we give absolute path due to dbenv
-        #print 'opening', filename, filetype, flags, mode
-        return self.db.open(filename, None, filetype, flags, mode)
+        return self.db.open(filename, dbname, filetype, flags, mode)
 
     def lock(self):
         self.lockfile = file(self.filename + '.lock', 'w')
         try:
             fcntl.flock(self.lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except IOError:
-            raise Error(_("Another instance of PISI is running. Only one instance is allowed to modify the PISI database at a time."))
+            raise Error(_("Another instance of PISI is running. Try later!"))
 
     def close(self):
         if self.closed:
             return
         self.db.close()
-        if self.flags & db.DB_RDONLY == 0:
+        if self.flags != db.DB_RDONLY:
             self.unlock()
         self.closed = True
 

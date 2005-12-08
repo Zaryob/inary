@@ -23,7 +23,6 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-
 def exit():
     pisi.api.finalize()
     sys.exit(1)

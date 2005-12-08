@@ -26,6 +26,8 @@ class InstallDBTestCase(testcase.TestCase):
     def testInstall(self):
         ctx.installdb.purge('installtest')
         ctx.installdb.install('installtest', '0.1', '2', '3')
+        self.assert_(ctx.installdb.is_recorded('installtest'))
+        self.assert_(ctx.installdb.is_installed('installtest'))
 
     def testRemovePurge(self):
         ctx.installdb.install('installtest', '0.1', '2', '3')

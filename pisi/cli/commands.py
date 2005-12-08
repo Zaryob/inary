@@ -628,9 +628,9 @@ Usage: list-installed
                 ctx.ui.info(unicode(package))
                 ctx.ui.info(unicode(inst_info))
             elif self.options.install_info:
-                ctx.ui.info('%-15s | %s ' % (package.name, inst_info.one_liner()))
+                ctx.ui.info('%-15s  |%s' % (package.name, inst_info.one_liner()))
             else:
-                ctx.ui.info('%15s - %s ' % (package.name, package.summary))
+                ctx.ui.info('%15s - %s' % (package.name, package.summary))
         self.finalize()
 
 class RebuildDb(Command):

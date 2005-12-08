@@ -13,14 +13,15 @@
 
 import sys
 import bsddb3.dbshelve as shelve
+import bsddb3.db as db
 
 sys.path.append('.')
 
 import pisi
 
-d = shelve.open( sys.argv[1], flags='r' )
+d = shelve.open( sys.argv[1], 'r', 0660, filetype = db.DB_BTREE )
 
-for (k, data) in d.iteritems():
-    print k, data
+for key, data in d.items():
+    print key, data
 
 d.close()

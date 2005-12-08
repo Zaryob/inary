@@ -172,7 +172,8 @@ Legend:
 
  * high priority
 
- / transaction stuff for database (eray)
+ + transaction stuff for database (eray)
+   + implement a simple (dandik) version for better reliability
 
  * medium priority
  
@@ -197,9 +198,10 @@ Legend:
    - date type
    - enum type
    - make autoxml dependent on only xmlext and xmlfile interfaces
- ? non-interactive use
 
 5. Post Release
+
+ * high priority
 
  - high-level build commands
    - build command enhancements:
@@ -215,9 +217,10 @@ Legend:
    - sourceb
  - improve url support: consider adding "other" protocols
    - removable media: media://
-       
+
  * medium priority
 
+ - non-interactive use
  - multi-architecture support (baris, caglar)
    / design decisions
    / extend XML specs to support that
