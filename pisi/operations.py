@@ -40,7 +40,7 @@ class Error(pisi.Error):
     pass
 
 # high level operations
-def install(packages):
+def install(packages, reinstall = False):
     """install a list of packages (either files/urls, or names)"""
 
     # FIXME: this function name "install" makes impossible to import
@@ -51,7 +51,7 @@ def install(packages):
     if packages[0].endswith(ctx.const.package_suffix): # they all have to!
         return install_pkg_files(packages)
     else:
-        return install_pkg_names(packages)
+        return install_pkg_names(packages, reinstall)
 
 def install_pkg_files(package_URIs):
     """install a number of pisi package files"""
@@ -183,7 +183,7 @@ def expand_components(A):
             Ap.add(x)
     return Ap
 
-def install_pkg_names(A):
+def install_pkg_names(A, reinstall = False):
     """This is the real thing. It installs packages from
     the repository, trying to perform a minimum number of
     installs"""
@@ -191,6 +191,15 @@ def install_pkg_names(A):
     # A was a list, remove duplicates and expand components
     A_0 = A = expand_components(set(A))
     ctx.ui.debug('A = %s' % str(A))
+
+    # filter packages that are already installed
+    if not reinstall:
+        Ap = set(filter(lambda x: not ctx.installdb.is_installed(x), A))
+        d = A - Ap
+        if len(d) > 0:
+            ctx.ui.warning(_('Not re-installing the following packages: ') +
+                           util.strlist(d))
+            A = Ap
 
     if len(A)==0:
         ctx.ui.info(_('No packages to install.'))

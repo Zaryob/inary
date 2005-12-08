@@ -397,7 +397,9 @@ expanded to package names.
         super(Install, self).options()
         p = self.parser
         p.add_option("", "--bypass-ldconfig", action="store_true",
-                              default=False, help=_("Bypass ldconfig phase"))
+                     default=False, help=_("Bypass ldconfig phase"))
+        p.add_option("", "--reinstall", action="store_true",
+                     default=False, help=_("Reinstall already installed packages"))
         buildno_opts(self)
 
     def run(self):
@@ -406,7 +408,7 @@ expanded to package names.
             return
 
         self.init()
-        pisi.api.install(self.args)
+        pisi.api.install(self.args, ctx.get_option('reinstall'))
         self.finalize()
 
 
