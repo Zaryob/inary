@@ -147,6 +147,10 @@ in the respective order to satisfy extra dependencies:
     order = G_f.topological_sort()
     order.reverse()
     ctx.ui.info(_('Installation order: ') + util.strlist(order) )
+
+    if ctx.get_option('dry_run'):
+        return
+
     for x in order:
         atomicoperations.install_single_file(dfn[x])
 
@@ -204,14 +208,27 @@ def install_pkg_names(A, reinstall = False):
     if len(A)==0:
         ctx.ui.info(_('No packages to install.'))
         return
+        
+    if not ctx.config.get_option('ignore_dependency'):
+        G_f, order = plan_install_pkg_names(A)
+    else:
+        G_f = None
+        order = A
 
-    if ctx.config.get_option('ignore_dependency'):
-        # simple code path then
-        for x in A:
-            atomicoperations.install_single_name(x)
-        return # short circuit
+    ctx.ui.info(_("""The following minimal list of packages will be installed
+in the respective order to satisfy dependencies:
+""") + util.strlist(order))
 
-    
+    if ctx.get_option('dry_run'):
+        return
+
+    if len(order) > len(A_0):
+        if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
+            return False
+    for x in order:
+        atomicoperations.install_single_name(x)
+
+def plan_install_pkg_names(A):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
@@ -240,14 +257,7 @@ def install_pkg_names(A, reinstall = False):
     order = G_f.topological_sort()
     order.reverse()
     check_conflicts(order)
-    ctx.ui.info(_("""The following minimal list of packages will be installed
-in the respective order to satisfy dependencies:
-""") + util.strlist(order))
-    if len(order) > len(A_0):
-        if not ctx.ui.confirm(_('Do you want to continue?')):
-            return False
-    for x in order:
-        atomicoperations.install_single_name(x)
+    return G_f, order
 
 def upgrade(A):
     upgrade_pkg_names(A)
@@ -298,6 +308,25 @@ version %s, release %s, build %s.')
 
     ctx.ui.debug('A = %s' % str(A))
     
+    if not ctx.config.get_option('ignore_dependency'):
+        G_f, order = plan_upgrade(A)
+    else:
+        G_f = None
+        order = A
+
+    ctx.ui.info(_("""The following packages will be upgraded:\n""") +
+                util.strlist(order))
+
+    if ctx.get_option('dry_run'):
+        return
+
+    if len(order) > len(A_0):
+        if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
+            return False
+    for x in order:
+        atomicoperations.install_single_name(x, True)
+
+def plan_upgrade(A):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
@@ -375,13 +404,7 @@ version %s, release %s, build %s.')
     order = G_f.topological_sort()
     order.reverse()
     check_conflicts(order)
-    ctx.ui.info(_("""The following packages will be upgraded:\n""") +
-                util.strlist(order))
-    if len(order) > len(A_0):
-        if not ctx.ui.confirm(_('Do you want to continue?')):
-            return False
-    for x in order:
-        atomicoperations.install_single_name(x, True)
+    return G_f, order
 
 def remove(A):
     """remove set A of packages from system (A is a list of package names)"""
@@ -409,7 +432,32 @@ def remove(A):
     if len(A)==0:
         ctx.ui.info(_('No packages to remove.'))
         return
-        
+
+    if not ctx.config.get_option('ignore_dependency'):
+        G_f, order = plan_upgrade(A)
+    else:
+        G_f = None
+        order = A
+
+    ctx.ui.info(_("""The following minimal list of packages will be removed
+in the respective order to satisfy dependencies:
+""") + util.strlist(order))
+    if len(order) > len(A_0):
+        if not ctx.ui.confirm(_('Do you want to continue?')):
+            ctx.ui.warning(_('Package removal declined'))
+            return False
+    
+    if ctx.get_option('dry_run'):
+        return
+    
+    for x in order:
+        if ctx.installdb.is_installed(x):
+            atomicoperations.remove_single(x)
+        else:
+            ctx.ui.info(_('Package %s is not installed. Cannot remove.') % x)
+
+
+def plan_remove(A):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
@@ -436,15 +484,4 @@ def remove(A):
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
-    ctx.ui.info(_("""The following minimal list of packages will be removed
-in the respective order to satisfy dependencies:
-""") + util.strlist(order))
-    if len(order) > len(A_0):
-        if not ctx.ui.confirm(_('Do you want to continue?')):
-            ctx.ui.warning(_('Package removal declined'))
-            return False
-    for x in order:
-        if ctx.installdb.is_installed(x):
-            atomicoperations.remove_single(x)
-        else:
-            ctx.ui.info(_('Package %s is not installed. Cannot remove.') % x)
+    return G_f, order

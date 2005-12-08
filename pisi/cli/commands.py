@@ -88,9 +88,6 @@ class Command(object):
                      help=_("detailed output"))
         p.add_option("-d", "--debug", action="store_true",
                      default=False, help=_("show debugging information"))
-#        p.add_option("-n", "--dry-run", action="store_true", default=False,
-#                     help = _("do not perform any action, just show what\
-#                     would be done"))
         p.add_option("-N", "--no-color", action="store_true", default=False,
                      help = _("print like a man"))
         return p
@@ -365,6 +362,8 @@ class PackageOp(Command):
                      default=False, help=_("bypass comar configuration agent"))
         p.add_option("-S", "--bypass-safety", action="store_true",
                      default=False, help=_("bypass safety switch"))
+        p.add_option("-n", "--dry-run", action="store_true", default=False,
+                     help = _("do not perform any action, just show what would be done"))
         ignoredep_opt(self)
 
     def init(self):

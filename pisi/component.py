@@ -88,13 +88,15 @@ class ComponentDB(object):
         self.d.close()
 
     def has_component(self, name, txn = None):
+        name = shelve.LockedDBShelf.encodekey(name)
         return self.d.has_key(str(name), txn)
 
     def get_component(self, name, txn = None):
+        name = shelve.LockedDBShelf.encodekey(name)
         def proc(txn):
-            if not self.has_component(name):
-                self.d[name] = Component(name = name)
-            return self.d[name]
+            if not self.has_component(name, txn):
+                self.d.put(name, Component(name = name), txn)
+            return self.d.get(name, txn)
         return self.d.txn_proc(proc, txn)
 
     def list_components(self):
