@@ -14,11 +14,12 @@
         <IsA>category</IsA>
         <PartOf>component</PartOf>
         <Summary xml:lang="en">Info ZIP (encryption support)</Summary>
+        <Summary xml:lang="tr">Info ZIP (şifre şeysi)</Summary>
         <Description xml:lang="en">Info ZIP (encryption support)</Description>
         <Archive type="targz" sha1sum="0600c93218e6acf1be75dd79da4244eabc8e16cf">ftp://ftp.linux.org.tr/pub/mirrors/gentoo/distfiles/zip23.tar.gz</Archive>
         <Patches>
-    		<Patch>zip-2.3-unix_configure-pic.patch</Patch>
-    		<Patch level="1">zip-CAN-2004-1010.patch</Patch>
+            <Patch>zip-2.3-unix_configure-pic.patch</Patch>
+            <Patch level="1">zip-CAN-2004-1010.patch</Patch>
             <Patch level="1">zcrypt.patch</Patch>
         </Patches>
         <BuildDependencies>
@@ -29,7 +30,7 @@
     <Package>
         <Name>zip</Name>
         <RuntimeDependencies>
-	    <Dependency>unzip</Dependency>
+        <Dependency>unzip</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="binary">/usr/bin</Path>
