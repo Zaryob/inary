@@ -41,3 +41,19 @@ initialized = False
 #def register(_impl):
 #    """ Register a UI implementation"""
 #    ui = _impl
+
+
+def txn_proc(proc, txn):
+    # can be used to txn protect a method automatically
+    assert dbenv
+    if not txn:
+        autotxn = dbenv.txn_begin()
+        try:
+            retval = proc(autotxn)
+        except db.DBError, e:
+            autotxn.abort()
+            raise e
+        autotxn.commit()
+        return retval
+    else:
+        return proc(txn)

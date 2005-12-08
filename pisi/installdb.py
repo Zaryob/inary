@@ -161,26 +161,31 @@ class InstallDB:
 
         self.d.txn_proc(proc,txn)
 
-    def clear_pending(self, pkg):
+    def clear_pending(self, pkg, txn = None):
         pkg = str(pkg)
-        info = self.d[pkg]
-        if self.is_installed(pkg):
-            assert info.state == 'ip'
-            info.state = 'i'
-        self.d[pkg] = info
-        del self.dp[pkg]
+        def proc(txn):
+            info = self.d.get(pkg, txn)
+            if self.is_installed(pkg, txn):
+                assert info.state == 'ip'
+                info.state = 'i'
+            self.d.put(pkg, info, txn)
+            self.dp.delete(pkg, txn)
+        self.d.txn_proc(proc,txn)
 
-    def remove(self, pkg):
+    def remove(self, pkg, txn = None):
         pkg = str(pkg)
-        info = self.d[pkg]
-        info.state = 'r'
-        self.d[pkg] = info
+        def proc(txn):
+            info = self.d.get(pkg, txn)
+            info.state = 'r'
+            self.d.put(pkg, info, txn)
+        self.d.txn_proc(proc, txn)
 
-    def purge(self, pkg):
+    def purge(self, pkg, txn = None):
         pkg = str(pkg)
-        if self.d.has_key(pkg):
-            del self.d[pkg]
-
+        def proc(txn):
+            if self.d.has_key(pkg, txn):
+                self.d.delete(pkg, txn)
+        self.d.txn_proc(proc, txn)
 
 db = None
 

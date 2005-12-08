@@ -36,7 +36,11 @@ class Error(pisi.Error):
 def init_dbenv():
     ctx.dbenv = dbobj.DBEnv()
     ctx.dbenv.open(pisi.context.config.db_dir(),
-                   db.DB_CREATE | db.DB_INIT_MPOOL | db.DB_INIT_TXN | db.DB_INIT_LOG )
+                   db.DB_CREATE |          # allow db to create files
+                   db.DB_INIT_MPOOL |      # cache
+                   db.DB_INIT_TXN |        # transaction subsystem
+                   db.DB_INIT_LOG |        # logging subsystem
+                   db.DB_RECOVER)    # run normal recovery
 
 #def open(filename, flags='r', mode = 0644, filetype = db.DB_BTREE):
 #    db = LockedDBShelf(None, mode, filetype, None, True)

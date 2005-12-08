@@ -9,26 +9,19 @@
 #
 # Please read the COPYING file.
 #
-
-# Package install operation
-
 # Author:  Eray Ozkural <eray@uludag.org.tr>
 
-
-# for python 2.3 compatibility
-import sys
-ver = sys.version_info
-if ver[0] <= 2 and ver[1] < 4:
-    from sets import Set as set
-
-import os
+"Atomic package operations such as install/remove/upgrade"
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import pisi
+import sys
+import os
+import bsddb3.db as db
 
+import pisi
 import pisi.context as ctx
 import pisi.packagedb as packagedb
 import pisi.dependency as dependency
@@ -78,6 +71,7 @@ class Install(AtomicOperation):
                 (self.pkginfo.name, self.pkginfo.version,
                  self.pkginfo.release, self.pkginfo.build))
         ctx.ui.notify(pisi.ui.installing, package = self.pkginfo, files = self.files)
+
         self.ask_reinstall = ask_reinstall
         self.check_requirements()
         self.check_relations()
@@ -90,7 +84,15 @@ class Install(AtomicOperation):
             ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
             comariface.run_postinstall(self.pkginfo.name)
             ctx.ui.notify(pisi.ui.configured, package = self.pkginfo, files = self.files)
-        self.update_databases()
+
+        txn = ctx.dbenv.txn_begin()
+        try:
+            self.update_databases(txn)
+            txn.commit()
+        except db.DBError, e:
+            txn.abort()
+            raise e
+
         self.update_environment()
         ctx.ui.status()
         if self.upgrade:
@@ -228,11 +230,10 @@ class Install(AtomicOperation):
             pisi.comariface.register(pcomar, self.metadata.package.name,
                                      scriptPath)
 
-    def update_databases(self):
+    def update_databases(self, txn):
         "update databases"
-
         if self.reinstall:
-            Remove(self.metadata.package.name).remove_db()
+            Remove(self.metadata.package.name).remove_db(txn)
             if not self.same_ver:
                 Remove.remove_pisi_files(self.old_path)
 
@@ -241,13 +242,14 @@ class Install(AtomicOperation):
                           self.metadata.package.version,
                           self.metadata.package.release,
                           self.metadata.package.build,
-                          self.metadata.package.distribution)
+                          self.metadata.package.distribution,
+                          txn)
 
         # filesdb
-        ctx.filesdb.add_files(self.metadata.package.name, self.files)
+        ctx.filesdb.add_files(self.metadata.package.name, self.files, txn)
 
         # installed packages
-        packagedb.inst_packagedb.add_package(self.pkginfo)
+        packagedb.inst_packagedb.add_package(self.pkginfo, txn)
 
     def update_environment(self):
         # check if we have any shared objects or anything under
@@ -327,8 +329,15 @@ class Remove(AtomicOperation):
             
         for fileinfo in self.files.list:
             self.remove_file(fileinfo)
-    
-        self.remove_db()
+
+        txn = ctx.dbenv.txn_begin()
+        try:
+            self.remove_db(txn)
+            txn.commit()
+        except db.DBError, e:
+            txn.abort()
+            raise e
+
         self.remove_pisi_files(self.package.pkg_dir())
         ctx.ui.status()
         ctx.ui.notify(pisi.ui.removed, package = self.package, files = self.files)
@@ -372,11 +381,13 @@ class Remove(AtomicOperation):
 
     remove_pisi_files = staticmethod(remove_pisi_files)
     
-    def remove_db(self):
-        ctx.installdb.remove(self.package_name)
-        ctx.filesdb.remove_files(ctx.installdb.files(self.package_name))
-        #FIXME: this looks like a mistake!
-        packagedb.remove_package(self.package_name)
+    def remove_db(self, txn):
+        ctx.installdb.remove(self.package_name, txn)
+        ctx.filesdb.remove_files(ctx.installdb.files(self.package_name), txn)
+        if packagedb.thirdparty_packagedb.has_package(self.package_name, txn):
+            packagedb.thirdparty_packagedb.remove_package(self.package_name, txn)
+        if packagedb.inst_packagedb.has_package(self.package_name, txn):
+            packagedb.inst_packagedb.remove_package(self.package_name, txn)
 
 
 def remove_single(package_name):

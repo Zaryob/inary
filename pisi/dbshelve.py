@@ -51,7 +51,7 @@ class DBShelf:
             return self.db.has_key(key, txn)
         else:
             return self.db.has_key(key)
-    
+
     def txn_proc(self, proc, txn):
         # can be used to txn protect a method automatically
         if not txn:

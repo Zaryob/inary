@@ -59,7 +59,7 @@ class RepoDB(object):
         l = self.list()
         return l[ix]
 
-    def swap(self, x,y):
+    def swap(self, x, y):
         l = self.d["order"]
         t = l[x]
         l[x] = l[y]

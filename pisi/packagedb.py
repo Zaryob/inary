@@ -44,9 +44,9 @@ class PackageDB(object):
         self.d.close()
         self.dr.close()
 
-    def has_package(self, name):
+    def has_package(self, name, txn = None):
         name = str(name)
-        return self.d.has_key(name)
+        return self.d.has_key(name, txn)
 
     def get_package(self, name):
         name = str(name)
@@ -95,12 +95,14 @@ class PackageDB(object):
     def clear(self):
         self.d.clear()
 
-    def remove_package(self, name):
+    def remove_package(self, name, txn = None):
         name = str(name)
-        package_info = self.d[name]
-        del self.d[name]
-        #FIXME: what's happening to dr?
-        ctx.componentdb.remove_package(package_info.partOf, package_info.name)
+        def proc(txn):
+            package_info = self.d.get(name, txn)
+            self.d.delete(name, txn)
+            #FIXME: what's happening to dr?
+            ctx.componentdb.remove_package(package_info.partOf, package_info.name, txn)
+        self.d.txn_proc(proc, txn)
 
 packagedbs = {}
 
@@ -114,18 +116,22 @@ def remove_db(name):
     del pisi.packagedb.packagedbs[name]
     #FIXME: erase database file?
     
-def has_package(name):
-    repo = which_repo(name)
-    if repo or thirdparty_packagedb.has_package(name) or inst_packagedb.has_package(name):
-        return True
-    return False
+def has_package(name, txn = None):
+    def proc(txn):
+        repo = which_repo(name)
+        if repo or thirdparty_packagedb.has_package(name, txn) or inst_packagedb.has_package(name, txn):
+            return True
+        return False
+    return ctx.txn_proc(proc, txn)
 
-def which_repo(name):
+def which_repo(name, txn = None):
     import pisi.repodb
-    for repo in pisi.repodb.db.list():
-        if get_db(repo).has_package(name):
-            return repo
-    return None
+    def proc(txn):
+        for repo in pisi.repodb.db.list():
+            if get_db(repo).has_package(name, txn):
+                return repo
+        return None
+    return ctx.txn_proc(proc, txn)
 
 def get_package(name):
     repo = which_repo(name)
