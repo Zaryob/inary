@@ -29,8 +29,10 @@ def get_option(opt):
 # default UI is CLI
 ui = None # not now
 
+dbenv = None
 installdb = None
 repodb = None
+invidx = None
 
 comar = None
 

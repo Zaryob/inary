@@ -589,7 +589,7 @@ source and binary packages.
         if len(self.args)>0:
             index(self.args, ctx.get_option('output'))
         elif len(self.args)==0:
-            ctx.ui.info( _('Indexing current directory.'))
+            ctx.ui.info(_('Indexing current directory.'))
             index('.', ctx.get_option('output'))
         self.finalize()
 
@@ -610,9 +610,9 @@ Usage: list-installed
 
     def options(self):
         self.parser.add_option("-l", "--long", action="store_true",
-                               default=False, help="show in long format")
+                               default=False, help=_("show in long format"))
         self.parser.add_option("-i", "--install-info", action="store_true",
-                               default=False, help="show detailed install info")
+                               default=False, help=_("show detailed install info"))
 
     def run(self):
         self.init(True)
@@ -800,7 +800,9 @@ Gives a brief list of PiSi packages published in the repository.
 
     def options(self):
         self.parser.add_option("-l", "--long", action="store_true",
-                               default=False, help="show in long format")
+                               default=False, help=_("show in long format"))
+        self.parser.add_option("-U", "--uninstalled", action="store_true",
+                               default=False, help=_("show uninstalled packages only"))
 
     def run(self):
 
@@ -831,6 +833,8 @@ Gives a brief list of PiSi packages published in the repository.
             else:
                 lenp = len(p)
                 if p in installed_list:
+                    if ctx.config.get_option('uninstalled'):
+                        continue
                     p = colorize(p, 'cyan')
                 p = p + ' ' * max(0, 15 - lenp)
                 ctx.ui.info('%s - %s ' % (p, unicode(package.summary)))
@@ -851,7 +855,7 @@ Gives a brief list of PiSi components published in the repositories.
 
     def options(self):
         self.parser.add_option("-l", "--long", action="store_true",
-                               default=False, help="show in long format")
+                               default=False, help=_("show in long format"))
 
     def run(self):
 
@@ -887,7 +891,7 @@ Usage: list-upgrades [ <repo1> <repo2> ... repon ]
 
     def options(self):
         self.parser.add_option("-l", "--long", action="store_true",
-                               default=False, help="show in long format")
+                               default=False, help=_("show in long format"))
         self.parser.add_option("-i", "--install-info", action="store_true",
                                default=False, help=_("show detailed install info"))
         buildno_opts(self)
@@ -995,7 +999,7 @@ Finds the installed package which contains the specified file.
 
     def options(self):
         self.parser.add_option("-l", "--long", action="store_true",
-                               default=False, help="show in long format")
+                               default=False, help=_("show in long format"))
         self.parser.add_option("-f", "--fuzzy", action="store_true",
                                default=False, help=_("fuzzy search"))
     
