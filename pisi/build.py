@@ -669,7 +669,7 @@ class Builder:
 
 def build(pspecfile, authinfo=None):
     pb = pisi.build.Builder(pspecfile, authinfo)
-    pb.build()
+    return pb.build()
 
 order = {"none": 0,
          "unpack": 1,
