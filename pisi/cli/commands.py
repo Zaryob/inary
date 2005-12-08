@@ -651,7 +651,7 @@ If package specs are given, they should be the names of package dirs under /var/
 
     def run(self):
     
-        self.init()
+        self.init(comar=False, database=False)
         
         if self.args:
             for package_fn in self.args:
@@ -661,6 +661,7 @@ If package specs are given, they should be the names of package dirs under /var/
             if ctx.ui.confirm(_('Rebuild PISI databases?')):
                 self.finalize()
                 import os
+                #FIXME: how good is deleting *all* databases?
                 for db in os.listdir(ctx.config.db_dir()):
                     os.unlink(pisi.util.join_path(ctx.config.db_dir(), db))
                 self.init(database=True)
