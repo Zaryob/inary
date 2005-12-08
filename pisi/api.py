@@ -267,10 +267,12 @@ def remove_repo(name):
                  % name)
 
 def update_repo(repo):
-
     ctx.ui.info(_('* Updating repository: %s') % repo)
     index = Index()
-    index.read_uri(ctx.repodb.get_repo(repo).indexuri.get_uri(), repo)
+    if ctx.repodb.has_repo(repo):
+        index.read_uri(ctx.repodb.get_repo(repo).indexuri.get_uri(), repo)
+    else:
+        raise Error(_('No repository named %s found.') % repo)
     index.update_db(repo)
     ctx.ui.info(_('\n* Package database updated.'))
 
