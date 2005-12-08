@@ -14,6 +14,7 @@ import unittest
 import os
 
 import pisi.search
+import pisi.lockeddbshelve
 
 import testcase
 
@@ -21,6 +22,7 @@ class SearchTestCase(testcase.TestCase):
 
     def setUp(self):
         testcase.TestCase.setUp(self, database = False)
+        pisi.lockeddbshelve.init_dbenv()
 
     def testSearch(self):
         doc1 = "A set object is an unordered collection of immutable values."
