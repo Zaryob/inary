@@ -47,14 +47,14 @@ def finalize():
                 ctx.invidx[id][lang].close()
         ctx.invidx = {}    
     
-def add_doc(id, lang, docid, str):
+def add_doc(id, lang, docid, str, txn = None):
     terms = preprocess(lang, str)
-    ctx.invidx[id][lang].add_doc(docid, terms)
+    ctx.invidx[id][lang].add_doc(docid, terms, txn)
 
-def remove_doc(id, lang, docid, str):
-    ctx.invidx[id][lang].remove_doc(docid)
+def remove_doc(id, lang, docid, str, txn = None):
+    ctx.invidx[id][lang].remove_doc(docid, txn)
 
-def query(id, lang, terms):
+def query(id, lang, terms, txn = None):
     import preprocess as p
     terms = map(lambda x: p.lower(lang, x), terms)
-    return ctx.invidx[id][lang].query(terms)
+    return ctx.invidx[id][lang].query(terms, txn)

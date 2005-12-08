@@ -85,10 +85,10 @@ class PackageDB(object):
             # index summary and description
             for (lang, doc) in package_info.summary.iteritems():
                 if lang in ['en', 'tr']:
-                    pisi.search.add_doc('summary', lang, package_info.name, doc)
+                    pisi.search.add_doc('summary', lang, package_info.name, doc, txn)
             for (lang, doc) in package_info.description.iteritems():
                 if lang in ['en', 'tr']:
-                    pisi.search.add_doc('description', lang, package_info.name, doc)
+                    pisi.search.add_doc('description', lang, package_info.name, doc, txn)
 
         self.d.txn_proc(proc, txn)
 

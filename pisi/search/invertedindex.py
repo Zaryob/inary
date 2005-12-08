@@ -15,7 +15,6 @@ import types
 
 import pisi.lockeddbshelve as shelve
 
-
 class InvertedIndex(object):
     """a database of term -> set of documents"""
     
@@ -25,36 +24,46 @@ class InvertedIndex(object):
     def close(self):
         self.d.close()
 
-    def has_term(self, term):
-        return self.d.has_key(shelve.LockedDBShelf.encodekey(term))
+    def has_term(self, term, txn = None):
+        return self.d.has_key(shelve.LockedDBShelf.encodekey(term), txn)
 
-    def get_term(self, term):
+    def get_term(self, term, txn = None):
         """get set of doc ids given term"""
         term = shelve.LockedDBShelf.encodekey(term)
-        if not self.has_term(term):
-            self.d[term] = set()
-        return self.d[term]
+        def proc(txn):
+            if not self.has_term(term, txn):
+                self.d.put(term, set(), txn)
+            return self.d.get(term, txn)
+        return self.d.txn_proc(proc, txn)
 
-    def query(self, terms):
-        docs = [ self.get_term(x) for x in terms ]
-        return reduce(lambda x,y: x.union(y), docs)
+    def query(self, terms, txn = None):
+        def proc(txn):
+            docs = [ self.get_term(x, txn) for x in terms ]
+            return reduce(lambda x,y: x.union(y), docs)
+        return self.d.txn_proc(proc, txn)
 
-    def list_terms(self):
+    def list_terms(self, txn= None):
         list = []
-        for term in self.d.iterkeys():
-            list.append(term)
-        return list
+        def f(txn):
+            for term in self.d.iterkeys(txn):
+                list.append(term)
+            return list
+        return self.d.txn_proc(f, txn)
 
-    def add_doc(self, doc, terms):
-        for term_i in terms:
-            term_i = shelve.LockedDBShelf.encodekey(term_i)
-            term_i_docs = self.get_term(term_i)
-            term_i_docs.add(doc)
-            self.d[term_i] = term_i_docs # update
+    def add_doc(self, doc, terms, txn = None):
+        def f(txn):
+            for term_i in terms:
+                term_i = shelve.LockedDBShelf.encodekey(term_i)
+                term_i_docs = self.get_term(term_i, txn)
+                term_i_docs.add(doc)
+                self.d.put(term_i, term_i_docs, txn) # update
+        return self.d.txn_proc(f, txn)
 
     def remove_doc(self, doc, terms):
-        for term_i in terms:
-            term_i = shelve.LockedDBShelf.encodekey(term_i)            
-            term_i_docs = self.get_term(term_i)
-            term_i_docs.remove(doc)
-            self.d[term_i] = term_i_docs # update
+        def f(txn):
+            for term_i in terms:
+                term_i = shelve.LockedDBShelf.encodekey(term_i)            
+                term_i_docs = self.get_term(term_i)
+                term_i_docs.remove(doc)
+                self.d.put(term_i, term_i_docs, txn) # update
+        return self.d.txn_proc(f, txn)
