@@ -651,7 +651,7 @@ If package specs are given, they should be the names of package dirs under /var/
 
     def run(self):
     
-        self.init(comar=False, database=False)
+        self.init(database=False)
         
         if self.args:
             for package_fn in self.args:
