@@ -14,6 +14,8 @@
 
 __version__ = "1.0_beta4"
 
+__dbversion__ = "1.0"
+
 __all__ = [ 'api', 'config', 'packagedb', 'installdb', 'search' ]
 
 class Exception(Exception):

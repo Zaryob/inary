@@ -28,6 +28,7 @@ import pisi
 import pisi.context as ctx
 from pisi.util import join_path
 
+from pisi.version import Version
 
 class Error(pisi.Error):
     pass
@@ -35,12 +36,35 @@ class Error(pisi.Error):
 
 def init_dbenv():
     ctx.dbenv = dbobj.DBEnv()
-    ctx.dbenv.open(pisi.context.config.db_dir(),
-                   db.DB_CREATE |          # allow db to create files
-                   db.DB_INIT_MPOOL |      # cache
-                   db.DB_INIT_TXN |        # transaction subsystem
-                   db.DB_INIT_LOG |        # logging subsystem
-                   db.DB_RECOVER)    # run normal recovery
+    flags =  (db.DB_INIT_MPOOL |      # cache
+              db.DB_INIT_TXN |        # transaction subsystem
+              db.DB_INIT_LOG )        # logging subsystem
+    if os.access(pisi.context.config.db_dir(), os.R_OK):
+        # try to read version
+        verfn = join_path(pisi.context.config.db_dir(), 'dbversion')
+        if os.path.exists(verfn):
+            verfile = file(verfn, 'r')
+            ls = verfile.readlines()
+            currver = Version(ls[0])
+            dbver = Version(pisi.__dbversion__)
+            if currver < dbver:
+                raise Error(_('Database version insufficient. Please run rebuild-db command.'))
+            elif currver > dbver:
+                raise Error(_('Database version greater than PiSi version. You need a newer PiSi.'))
+        else:
+            if os.access(pisi.context.config.db_dir(), os.W_OK):
+                ctx.ui.warning(_('Writing current database version'))
+                verfile = file(verfn, 'w')
+                verfile.write(pisi.__dbversion__)
+                verfile.close()
+            else:
+                raise Error(_('Cannot attain write access to database environment'))
+    else:
+        raise Error(_('Cannot attain read access to database environment'))
+    if os.access(pisi.context.config.db_dir(), os.W_OK):
+        flags |= (db.DB_RECOVER  |        # run normal recovery
+                  db.DB_CREATE)           # allow db to create files
+    ctx.dbenv.open(pisi.context.config.db_dir(), flags)
 
 #def open(filename, flags='r', mode = 0644, filetype = db.DB_BTREE):
 #    db = LockedDBShelf(None, mode, filetype, None, True)
