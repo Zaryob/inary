@@ -46,25 +46,36 @@ class DBShelf:
     #def __del__(self):
     #    self.close()
 
-    def has_key(self, key):
-        return self.db.has_key(key)
-        
-    def clear(self, txn = None):
-        if not txn:
-            txn = self.dbenv.txn_begin()
-            try:
-                for x in self.keys(txn):
-                    del self[x]
-            except db.DBError, e:
-                txn.abort()
-                raise e
-            txn.commit()
+    def has_key(self, key, txn = None):
+        if txn:
+            return self.db.has_key(key, txn)
         else:
+            return self.db.has_key(key)
+    
+    def txn_proc(self, proc, txn):
+        # can be used to txn protect a method automatically
+        if not txn:
+            autotxn = self.dbenv.txn_begin()
+            try:
+                retval = proc(autotxn)
+            except db.DBError, e:
+                autotxn.abort()
+                raise e
+            autotxn.commit()
+            return retval
+        else:
+            return proc(txn)
+
+    def clear(self, txn = None):
+        def proc(txn):
             for x in self.keys(txn):
-                del self[x]
+                self.delete(txn)
+        txn_proc(proc, txn)
         
-    #def delete(self, txn = None):
-    #    self.db.delete(self, txn
+    def delete(self, txn):
+        def proc(txn):
+            self.db.delete(txn)
+        txn_proc(proc, txn)
 
     # another lame pythonic implementation method:
     #def __getattr__(self, name):

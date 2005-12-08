@@ -712,6 +712,8 @@ Usage: add-repo <repo> <indexuri>
 <repo>: name of repository to add
 <indexuri>: URI of index file
 
+If no repo is given, add-repo pardus-devel repo is added by default
+
 NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 """
     __metaclass__ = autocommand
@@ -723,10 +725,14 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 
     def run(self):
 
-        if len(self.args)>=2:
+        if len(self.args)==2 or len(self.args)==0:
             self.init()
-            name = self.args[0]
-            indexuri = self.args[1]
+            if len(self.args)==2:
+                name = self.args[0]
+                indexuri = self.args[1]
+            else:
+                name = 'pardus-devel'
+                indexuri = 'http://paketler.uludag.org.tr/pardus-devel/pisi-index.xml'
             pisi.api.add_repo(name, indexuri)
             if ctx.ui.confirm(_('Update PISI database for repository %s?') % name):
                 pisi.api.update_repo(name)
@@ -1015,11 +1021,10 @@ Finds the installed package which contains the specified file.
                 files.append(ctx.filesdb.get_file(path))
         else:
             #FIXME: this linear search thing is not working well -- exa
-            files = ctx.filesdb.get_files(path)
+            files = ctx.filesdb.match_files(path)
 
         if files:
             for (pkg_name, file_info) in files:
-                #FIXME: files of the same package can be grouped under package name
                 ctx.ui.info(_("Package %s has file %s") % (pkg_name, file_info.path))
                 if ctx.config.options.long:
                     ctx.ui.info(_('Type: %s, Hash: %s') % (file_info.type,

@@ -9,15 +9,16 @@
 #
 # Please read the COPYING file.
 #
-
-# Files module provides access to files.xml. files.xml is genarated
-# during the build process of a package and used in installation.
-
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
+
+'''Files module provides access to files.xml. files.xml is generated
+during the build process of a package and used in installation.'''
+
 
 import pisi.pxml.autoxml as autoxml
 from pisi.util import Checks
 import pisi.lockeddbshelve as shelve
+
 
 class FileInfo:
     """File holds the information for a File node/tag in files.xml"""
@@ -34,6 +35,7 @@ class FileInfo:
                                                       self.size, self.hash)
         return s
 
+
 class Files(autoxml.XmlFile):
 
     __metaclass__ = autoxml.autoxml
@@ -45,30 +47,39 @@ class Files(autoxml.XmlFile):
     def append(self, fileinfo):
         self.list.append(fileinfo)
 
+
 class FilesDB(shelve.LockedDBShelf):
 
     def __init__(self):
         shelve.LockedDBShelf.__init__(self, 'files')
 
-    def add_files(self, pkg_name, files):
-        for x in files.list:
-            self[str(x.path)] = (pkg_name, x)
+    def add_files(self, pkg_name, files, txn = None):
+        def proc(txn):
+            for x in files.list:
+                self.put(str(x.path), (pkg_name, x), txn)
+        self.txn_proc(proc, txn)
 
-    def remove_files(self, files):
-        for x in files.list:
-            del self[str(x.path)]
+    def remove_files(self, files, txn = None):
+        def proc(txn):
+            for x in files.list:
+                self.delete(str(x.path), txn)
+        self.txn_proc(proc, txn)
 
-    def has_file(self, path):
-        return self.has_key(str(path))
+    def has_file(self, path, txn = None):
+        return self.has_key(str(path), txn)
 
-    def get_file(self, path):
+    def get_file(self, path, txn = None):
         path = str(path)
-        if not self.has_key(path):
-            return None
-        else:
-            return self[path]
+        def proc(txn):
+            if not self.has_key(path, txn):
+                return None
+            else:
+                return self.get(path, txn)
+        return self.txn_proc(proc, txn)
 
-    def get_files(self, glob):
+    def match_files(self, glob):
+        # NB: avoid using, this reads the entire db
+
         import fnmatch
 
         glob = str(glob)
