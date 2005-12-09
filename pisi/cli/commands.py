@@ -678,6 +678,7 @@ If package specs are given, they should be the names of package dirs under /var/
         import os
         for package_fn in os.listdir(ctx.config.lib_dir()):
             if not package_fn == "scripts":
+                ctx.ui.debug('Resurrecting %s' % package_fn)
                 pisi.api.resurrect_package(package_fn)
 
 class UpdateRepo(Command):
