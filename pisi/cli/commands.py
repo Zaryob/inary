@@ -652,14 +652,13 @@ If package specs are given, they should be the names of package dirs under /var/
     name = ("rebuild-db", "rdb")
 
     def run(self):
-    
-        self.init(database=False)
-        
+            
         if self.args:
+            self.init(database=True)
             for package_fn in self.args:
                 pisi.api.resurrect_package(package_fn)
         else:
-            #FIXME: Confirm icin init, unlink icin finalize, rebuild_db icin init lazim :)
+            self.init(database=False)
             if ctx.ui.confirm(_('Rebuild PISI databases?')):
                 self.finalize()
                 import os
