@@ -12,6 +12,7 @@
 
 # Standart Python Modules
 import os
+import sys
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -43,12 +44,8 @@ def curKERNEL():
     versionString = file("/proc/version").readline()
     return versionString.split()[2]
 
-#FIXME: misleading name, what does this mean?
-#we want the "pythonlibdir"
 def curPYTHON():
     ''' returns currently used python's version'''
-    # the method of reading symlink name was totally lame :) -- exa
-    import sys
     (a, b, c, x, y) = sys.version_info
     return 'python%s.%s' % (a, b)
 
