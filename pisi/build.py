@@ -447,7 +447,10 @@ class Builder:
         # build no
         if ctx.config.options.ignore_build_no:
             metadata.package.build = None  # means, build no information n/a
-            ctx.ui.warning(_('build number is not available.'))
+            ctx.ui.warning(_('Build number is not available due to --ignore-build'))
+        elif (not ctx.config.values.build.buildno):
+            metadata.package.build = None
+            ctx.ui.warning(_('Build number is not available. For repo builds you must enable buildno in pisi.conf.'))
         else:
             metadata.package.build = self.calc_build_no(metadata.package.name)
 

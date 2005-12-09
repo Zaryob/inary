@@ -28,6 +28,7 @@
 #CFLAGS= -mtune=i686 -O2 -pipe -fomit-frame-pointer
 #CXXFLAGS= -mtune=i686 -O2 -pipe -fomit-frame-pointer
 #LDFLAGS=
+#build=True     # necessary for generating build nos
 #
 #[directories]
 #lib_dir = /var/lib/pisi
@@ -67,6 +68,7 @@ class BuildDefaults:
     CFLAGS = "-mtune=i686 -O2 -pipe -fomit-frame-pointer"
     CXXFLAGS = "-mtune=i686 -O2 -pipe -fomit-frame-pointer"
     LDFLAGS = ""
+    buildno = False
 
 class DirsDefaults:
     "Default values for [directories] section"
