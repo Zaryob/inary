@@ -335,8 +335,8 @@ fetch all necessary files and build the package for you.
         self.parser.add_option("-A", "--ignore-action-errors",
                                action="store_true", default=False,
                                help=_("bypass errors from ActionsAPI"))
-        p.add_option("-B", "--ignore-comar", action="store_true",
-                     default=False, help=_("bypass comar configuration agent"))
+        self.parser.add_option("-B", "--ignore-comar", action="store_true",
+                               default=False, help=_("bypass comar configuration agent"))
 
     def run(self):
         if not self.args:
