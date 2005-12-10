@@ -243,6 +243,16 @@ def info_name(package_name):
     else:
         raise Error(_('Package %s not found') % package_name)
 
+def search_package(terms, lang = None):
+    if not lang:
+        lang = pisi.pxml.autoxml.LocalText.get_lang()
+    def search(self, id, terms):
+        return pisi.search.query(id, lang, terms)
+    r1 = pisi.search.query('summary', lang, terms)
+    r2 = pisi.search.query('description', lang, terms)
+    r = r1.union(r2)
+    return r
+
 def index(dirs, output = 'pisi-index.xml'):
     index = Index()
     if not dirs:

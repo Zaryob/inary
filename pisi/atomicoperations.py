@@ -190,7 +190,7 @@ class Install(AtomicOperation):
     def extract_install(self):
         "unzip package in place"
 
-        ctx.ui.info(_('Extracting files'))
+        ctx.ui.notify(pisi.ui.extracting, package = self.pkginfo, files = self.files)
         self.package.extract_dir_flat('install', ctx.config.dest_dir())
 
         if self.reinstall:

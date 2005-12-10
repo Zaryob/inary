@@ -975,15 +975,6 @@ Finds a package in repository containing specified search terms
             lang = 'en'
         return lang
 
-    def search_package(terms, lang = None):
-        if not lang:
-            lang = pisi.pxml.autoxml.LocalText.get_lang()
-        def search(self, id, terms):
-            return pisi.search.query(id, lang, terms)
-        r1 = pisi.search.query('summary', lang, terms)
-        r2 = pisi.search.query('description', lang, terms)
-        r = r1.union(r2)
-        return r
 
     def run(self):
 
@@ -993,7 +984,7 @@ Finds a package in repository containing specified search terms
             self.help()
             return
 
-        r = search_package(self.args, self.get_lang())
+        r = pisi.api.search_package(self.args, self.get_lang())
 
         for pkg in r:
             self.printinfo_package(pkg)
