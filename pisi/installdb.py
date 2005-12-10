@@ -40,14 +40,13 @@ class InstallInfo:
     # we store as an object, hey, we can waste O(1) space.
     # this is also easier to modify in the future, without
     # requiring database upgrades! wow!
-    def __init__(self, state, version, release, build, distribution):
+    def __init__(self, state, version, release, build, distribution, time):
         self.state = state
         self.version = version
         self.release = release
         self.build = build
         self.distribution = distribution
-        import time
-        self.time = time.localtime()
+        self.time = time
 
     def one_liner(self):
         import time
@@ -146,7 +145,7 @@ class InstallDB:
         else:
             return False
 
-    def install(self, pkg, version, release, build, distro = "", txn = None):
+    def install(self, pkg, version, release, build, distro = "", rebuild=False, txn = None):
         """install package with specific version, release, build"""
         pkg = str(pkg)
         def proc(txn):
@@ -157,7 +156,15 @@ class InstallDB:
                 self.dp.put(pkg, True, txn)
             else:
                 state = 'i'
-            self.d.put(pkg, InstallInfo(state, version, release, build, distro), txn)
+
+            if not rebuild:
+                import time
+                ctime = time.localtime()
+            else:
+                files_xml = self.files_name(pkg, version, release)
+                ctime = util.creation_time(files_xml)
+
+            self.d.put(pkg, InstallInfo(state, version, release, build, distro, ctime), txn)
 
         self.d.txn_proc(proc,txn)
 

@@ -243,6 +243,7 @@ class Install(AtomicOperation):
                           self.metadata.package.release,
                           self.metadata.package.build,
                           self.metadata.package.distribution,
+                          False,
                           txn)
 
         # filesdb
@@ -432,6 +433,7 @@ def virtual_install(metadata, files, txn):
                          metadata.package.release,
                          metadata.package.build,
                          metadata.package.distribution,
+                         True,
                          txn)
 
     # filesdb

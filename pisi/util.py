@@ -254,6 +254,13 @@ def clean_dir(path):
     if os.path.exists(path):
         shutil.rmtree(path)
 
+def creation_time(file):
+    """returns the creation time of the given file"""
+    if check_file(file):
+        import time
+        st = os.stat(file)
+        return time.localtime(st.st_ctime)
+
 def dir_size(dir):
     """ calculate the size of files under a dir
     based on the os module example"""
