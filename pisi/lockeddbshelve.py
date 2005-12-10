@@ -33,12 +33,13 @@ from pisi.version import Version
 class Error(pisi.Error):
     pass
 
-
 def init_dbenv():
     ctx.dbenv = dbobj.DBEnv()
     flags =  (db.DB_INIT_MPOOL |      # cache
               db.DB_INIT_TXN |        # transaction subsystem
-              db.DB_INIT_LOG )        # logging subsystem
+              db.DB_INIT_LOG |        # logging subsystem
+              db.DB_RECOVER |         # run normal recovery
+              db.DB_CREATE)           # allow db to create files
     if os.access(pisi.context.config.db_dir(), os.R_OK):
         # try to read version
         verfn = join_path(pisi.context.config.db_dir(), 'dbversion')
@@ -62,8 +63,7 @@ def init_dbenv():
     else:
         raise Error(_('Cannot attain read access to database environment'))
     if os.access(pisi.context.config.db_dir(), os.W_OK):
-        flags |= (db.DB_RECOVER  |        # run normal recovery
-                  db.DB_CREATE)           # allow db to create files
+        pass # TODO: is it possible to have read-only txnal dbs?
     ctx.dbenv.open(pisi.context.config.db_dir(), flags)
 
 #def open(filename, flags='r', mode = 0644, filetype = db.DB_BTREE):
