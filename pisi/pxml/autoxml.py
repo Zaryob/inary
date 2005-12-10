@@ -113,7 +113,10 @@ class LocalText(dict):
             (lang, encoding) = locale.getlocale()
             if not lang:
                 (lang, encoding) = locale.getdefaultlocale()
-            return lang[0:2]
+            if lang==None: # stupid python means it is C locale
+                return 'en'
+            else:
+                return lang[0:2]
         except:
             raise Error(_('LocalText: unable to get either current or default locale'))
 
