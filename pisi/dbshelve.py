@@ -59,13 +59,16 @@ class DBShelf:
     def txn_proc(self, proc, txn):
         # can be used to txn protect a method automatically
         if not txn:
-            autotxn = self.dbenv.txn_begin()
-            try:
-                retval = proc(autotxn)
-            except db.DBError, e:
-                autotxn.abort()
-                raise e
-            autotxn.commit()
+            if self.dbenv:
+                autotxn = self.dbenv.txn_begin()
+                try:
+                    retval = proc(autotxn)
+                except db.DBError, e:
+                    autotxn.abort()
+                    raise e
+                autotxn.commit()
+            else: # execute without transactions
+                proc(None)
             return retval
         else:
             return proc(txn)
@@ -96,26 +99,16 @@ class DBShelf:
         return len(self.db)
         
     def __getitem__(self, key):
-        txn = self.dbenv.txn_begin()
-        try:
+        def proc(txn):
             data = self.db.get(key)
-        except db.DBError, e:
-            txn.abort()
-            raise e
-        txn.commit()
-        return cPickle.loads(data)
+            return cPickle.loads(data)
+        return self.txn_proc(proc, txn)
 
     def __setitem__(self, key, value):
         # hyperdandik transactions
-        txn = self.dbenv.txn_begin()
-        data = cPickle.dumps(value, self.binary)
-        try:
+        def proc(txn):
             self.db.put(key,data,txn)
-            #print 'put', value
-        except db.DBError, e:
-            txn.abort()
-            raise e
-        txn.commit()
+        return self.txn_proc(proc, txn)
 
     def __delitem__(self, key):
         txn = self.dbenv.txn_begin()

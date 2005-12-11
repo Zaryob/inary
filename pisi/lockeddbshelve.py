@@ -34,12 +34,6 @@ class Error(pisi.Error):
     pass
 
 def init_dbenv():
-    ctx.dbenv = dbobj.DBEnv()
-    flags =  (db.DB_INIT_MPOOL |      # cache
-              db.DB_INIT_TXN |        # transaction subsystem
-              db.DB_INIT_LOG |        # logging subsystem
-              db.DB_RECOVER |         # run normal recovery
-              db.DB_CREATE)           # allow db to create files
     if os.access(pisi.context.config.db_dir(), os.R_OK):
         # try to read version
         verfn = join_path(pisi.context.config.db_dir(), 'dbversion')
@@ -63,8 +57,15 @@ def init_dbenv():
     else:
         raise Error(_('Cannot attain read access to database environment'))
     if os.access(pisi.context.config.db_dir(), os.W_OK):
-        pass # TODO: is it possible to have read-only txnal dbs?
-    ctx.dbenv.open(pisi.context.config.db_dir(), flags)
+        ctx.dbenv = dbobj.DBEnv()
+        flags =  (db.DB_INIT_MPOOL |      # cache
+                  db.DB_INIT_TXN |        # transaction subsystem
+                  db.DB_INIT_LOG |        # logging subsystem
+                  db.DB_RECOVER |         # run normal recovery
+                  db.DB_CREATE)           # allow db to create files
+        ctx.dbenv.open(pisi.context.config.db_dir(), flags)
+    else:
+        ctx.dbenv = None
 
 #def open(filename, flags='r', mode = 0644, filetype = db.DB_BTREE):
 #    db = LockedDBShelf(None, mode, filetype, None, True)
@@ -82,6 +83,8 @@ class LockedDBShelf(shelve.DBShelf):
         filename = join_path(pisi.context.config.db_dir(), dbname + '.bdb')
         if os.access(os.path.dirname(filename), os.W_OK):
             flags = 'w'
+            if not self.dbenv:
+                raise Error(_('Database writes not allowed without transactions'))
         elif os.access(filename, os.R_OK):
             flags = 'r'
         else:
