@@ -116,7 +116,8 @@ class ComponentDB(object):
     def add_package(self, component_name, package, txn = None):
         def proc(txn):
             component = self.get_component(component_name, txn)
-            component.packages.append(package)
+            if not package in component.packages:
+                component.packages.append(package)
             self.d.put(component_name, component, txn) # update
         self.d.txn_proc(proc, txn)
 
