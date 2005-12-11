@@ -46,15 +46,17 @@ import bsddb3.db as db
 
 def txn_proc(proc, txn = None):
     # can be used to txn protect a method automatically
-    assert dbenv
     if not txn:
-        autotxn = dbenv.txn_begin()
-        try:
-            retval = proc(autotxn)
-        except db.DBError, e:
-            autotxn.abort()
-            raise e
-        autotxn.commit()
+        if dbenv:
+            autotxn = dbenv.txn_begin()
+            try:
+                retval = proc(autotxn)
+            except db.DBError, e:
+                autotxn.abort()
+                raise e
+            autotxn.commit()
+        else:
+            retval = proc(None)
         return retval
     else:
         return proc(txn)

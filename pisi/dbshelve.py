@@ -43,7 +43,11 @@ class DBShelf:
     """
     def __init__(self, dbenv = None):
         self.dbenv = dbenv
-        self.db = dbobj.DB(dbenv)
+        # how lame is bsddb3?
+        if self.dbenv:
+            self.db = dbobj.DB(dbenv)
+        else:
+            self.db = db.DB(None)
         self.binary = 1
 
     # it is better to explicitly close a shelf
@@ -68,7 +72,7 @@ class DBShelf:
                     raise e
                 autotxn.commit()
             else: # execute without transactions
-                proc(None)
+                retval = proc(None)
             return retval
         else:
             return proc(txn)
@@ -102,13 +106,13 @@ class DBShelf:
         def proc(txn):
             data = self.db.get(key)
             return cPickle.loads(data)
-        return self.txn_proc(proc, txn)
+        return self.txn_proc(proc, None)
 
     def __setitem__(self, key, value):
         # hyperdandik transactions
         def proc(txn):
             self.db.put(key,data,txn)
-        return self.txn_proc(proc, txn)
+        return self.txn_proc(proc, None)
 
     def __delitem__(self, key):
         txn = self.dbenv.txn_begin()

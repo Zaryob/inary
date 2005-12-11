@@ -65,6 +65,7 @@ def init_dbenv():
                   db.DB_CREATE)           # allow db to create files
         ctx.dbenv.open(pisi.context.config.db_dir(), flags)
     else:
+        ctx.ui.warning(_('Opening PİSİ database in read-only mode. Operations that require write access will fail.'))
         ctx.dbenv = None
 
 #def open(filename, flags='r', mode = 0644, filetype = db.DB_BTREE):
@@ -112,9 +113,9 @@ class LockedDBShelf(shelve.DBShelf):
                 flags = db.DB_TRUNCATE | db.DB_CREATE
             else:
                 raise Error, _("Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags")
-        flags |= db.DB_AUTO_COMMIT
         self.flags = flags
         if self.flags & db.DB_RDONLY == 0:
+            flags |= db.DB_AUTO_COMMIT # use txn subsystem in write mode
             self.lock()
         filename = os.path.realpath(filename) # we give absolute path due to dbenv
         #print 'opening', filename, filetype, flags, mode
