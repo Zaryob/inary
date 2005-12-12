@@ -111,6 +111,7 @@ class DBShelf:
     def __setitem__(self, key, value):
         # hyperdandik transactions
         def proc(txn):
+            data = cPickle.dumps(value, self.binary)
             self.db.put(key,data,txn)
         return self.txn_proc(proc, None)
 
