@@ -434,7 +434,7 @@ def do_patch(sourceDir, patchFile, level = 0, target = ''):
     os.chdir(cwd)
 
 
-def strip_directory(top, excludelist=[]):
+def strip_directory(top, package_name, excludelist=[]):
     for root, dirs, files in os.walk(top):
         for fn in files:
             frpath = join_path(root, fn)
@@ -458,11 +458,11 @@ def strip_directory(top, excludelist=[]):
                     ctx.ui.debug("%s [%s]" %(p, "NoStrip"))
 
             if strip:
-                if strip_file(frpath):
+                if strip_file(frpath, package_name):
                     ctx.ui.debug("%s [%s]" %(p, "stripped"))
                 
 
-def strip_file(filepath):
+def strip_file(filepath, package_name):
     """strip a file"""
     p = os.popen("file \"%s\"" % filepath)
     o = p.read()
@@ -473,15 +473,19 @@ def strip_file(filepath):
         if ret:
             ctx.ui.warning(_("strip command failed for file '%s'!") % f)
 
-    def save_elf_debug(f):
-        """copy debug info into /debug/file.debug file"""
-        p = os.popen("objcopy --only-keep-debug %s /debug/%s.debug" % (f, os.path.basename(f)))
+    def save_elf_debug(f, package_name):
+        """copy debug info into /debug/PACKAGE_NAME/file.debug file"""
+        try:
+            os.makedirs("/debug/%s" % package_name)
+        except OSError:
+            pass
+        p = os.popen("objcopy --only-keep-debug %s /debug/%s/%s.debug" % (f, package_name, os.path.basename(f)))
         ret = p.close()
         if ret:
             ctx.ui.warning(_("objcopy (keep-debug) command failed for file '%s'!") % f)
         
-        """mark binary/shared objects to use /debug/file.debug"""
-        p = os.popen("objcopy --add-gnu-debuglink=/debug/%s.debug %s" % (os.path.basename(f), f))
+        """mark binary/shared objects to use /debug/PACKAGE_NAME/file.debug"""
+        p = os.popen("objcopy --add-gnu-debuglink=/debug/%s/%s.debug %s" % (package_name, os.path.basename(f), f))
         ret = p.close()
         if ret:
             ctx.ui.warning(_("objcopy (add-debuglink) command failed for file '%s'!") % f)
@@ -492,13 +496,13 @@ def strip_file(filepath):
 
     elif "SB executable" in o:
         if ctx.config.values.build.debug == "True":
-            save_elf_debug(filepath)
+            save_elf_debug(filepath, package_name)
         run_strip(filepath)
         return True
 
     elif "SB shared object" in o:
         if ctx.config.values.build.debug == "True":
-            save_elf_debug(filepath)
+            save_elf_debug(filepath, package_name)
         run_strip(filepath, "--strip-unneeded")
         # FIXME: warn for TEXTREL
         return True
