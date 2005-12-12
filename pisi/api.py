@@ -246,20 +246,16 @@ def info_name(package_name):
 def search_package_terms(terms, lang = None):
     if not lang:
         lang = pisi.pxml.autoxml.LocalText.get_lang()
-    def search(self, id, terms):
-        return pisi.search.query(id, lang, terms)
     r1 = pisi.search.query_terms('summary', lang, terms)
     r2 = pisi.search.query_terms('description', lang, terms)
     r = r1.union(r2)
     return r
 
-def search_package(terms, lang = None):
+def search_package(query, lang = None):
     if not lang:
         lang = pisi.pxml.autoxml.LocalText.get_lang()
-    def search(self, id, terms):
-        return pisi.search.query(id, lang, terms)
-    r1 = pisi.search.query('summary', lang, terms)
-    r2 = pisi.search.query('description', lang, terms)
+    r1 = pisi.search.query('summary', lang, query)
+    r2 = pisi.search.query('description', lang, query)
     r = r1.union(r2)
     return r
 
