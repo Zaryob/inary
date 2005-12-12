@@ -29,6 +29,6 @@ def tokenize(lang, str):
             token += x
             
     if token:
-        tokens.append(x)
+        tokens.append(token)
 
     return tokens
