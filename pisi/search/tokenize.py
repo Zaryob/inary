@@ -21,13 +21,14 @@ def tokenize(lang, str):
     tokens = []
     token = unicode()
     for x in str:
-        if x in string.whitespace:
+        if x in string.whitespace or x in string.punctuation:
             if len(token) > 0:
                 tokens.append(token)
                 token = unicode()
-        elif x in string.punctuation:
-            pass # eat punctuation
         else:
             token += x
+            
+    if token:
+        tokens.append(x)
 
     return tokens
