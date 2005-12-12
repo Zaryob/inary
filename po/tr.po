@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "POT-Creation-Date: Mon Dec 12 16:41:45 2005\n"
-"PO-Revision-Date: 2005-12-09 04:19+0200\n"
+"PO-Revision-Date: 2005-12-12 16:46+0200\n"
 "Last-Translator: Eray Ozkural <eray@uludag.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -48,8 +48,7 @@ msgstr "Geri-iz:"
 
 #: pisi-cli:62
 msgid "Use --debug to see a traceback."
-msgstr ""
-"Bir geri iz (traceback) görmek için lütfen --debug seçeneğini kullanın. "
+msgstr "Bir geri iz (traceback) görmek için lütfen --debug seçeneğini kullanın. "
 
 #: pisi/actionsapi/autotools.py:36
 msgid ""
@@ -429,8 +428,7 @@ msgstr "PİSİ kaynak paketi %s inşa ediliyor"
 
 #: pisi/build.py:198
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr ""
-"IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
+msgstr "IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
 
 #: pisi/build.py:202
 msgid "CCache detected..."
@@ -489,16 +487,14 @@ msgid "unable to call function from actions: %s"
 msgstr "fonksiyon eylemlerden çağırılamıyor: %s"
 
 #: pisi/build.py:365
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Emniyet mandalı: taban geliştirme sistemi system.devel'den izleyen paketler "
 "ek olarak yüklenecek:"
 
 #: pisi/build.py:370
 msgid "Safety switch: system.devel is already installed"
-msgstr ""
-"Emniyet mandalı: taban geliştirme sistemi system.devel halihazırda kurulu"
+msgstr "Emniyet mandalı: taban geliştirme sistemi system.devel halihazırda kurulu"
 
 #: pisi/build.py:372
 msgid "Safety switch: the component system.devel cannot be found"
@@ -509,9 +505,8 @@ msgid "Unsatisfied Build Dependencies:"
 msgstr "Sağlanmamış inşa bağımlılıkları"
 
 #: pisi/build.py:385
-#, fuzzy
 msgid "Build dependency %s cannot be satisfied"
-msgstr "Ters bağımlılık %s sağlanamadı"
+msgstr "İnşa bağımlılığı %s sağlanamadı"
 
 #: pisi/build.py:390
 msgid "Do you want to install the unsatisfied build dependencies"
@@ -640,9 +635,8 @@ msgid "Configured %s"
 msgstr "%s yapılandırıldı"
 
 #: pisi/cli/__init__.py:142
-#, fuzzy
 msgid "Extracting the files of %s"
-msgstr "Dosyalar arşivden çıkartılıyor."
+msgstr "%s paketinin dosyaları arşivden çıkartılıyor"
 
 #: pisi/cli/commands.py:33
 msgid "generic help string for any command"
@@ -1004,10 +998,8 @@ msgstr "detaylı yükleme bilgisi göster"
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/commands.py:624 pisi/cli/commands.py:917
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr ""
-"Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr "Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
 
 #: pisi/cli/commands.py:639
 msgid ""
@@ -1489,8 +1481,7 @@ msgstr "Halihazırda yerleştirilmiş."
 
 #: pisi/lockeddbshelve.py:46
 msgid "Database version insufficient. Please run rebuild-db command."
-msgstr ""
-"Veritabanı versiyonu yetersiz. Lütfen rebuild-db komutunu çalıştırınız."
+msgstr "Veritabanı versiyonu yetersiz. Lütfen rebuild-db komutunu çalıştırınız."
 
 #: pisi/lockeddbshelve.py:48
 msgid "Database version greater than PiSi version. You need a newer PiSi."
@@ -1514,19 +1505,18 @@ msgstr "Veritabanı %s için okuma erişimi edinilemedi"
 msgid ""
 "Opening PİSİ database in read-only mode. Operations that require write "
 "access will fail."
-msgstr ""
+msgstr "PİSİ veritabanı sadece okuma kipinde açılıyor. Yazma erişimi gerektiren işlemler başarısızlığa uğrayacaktır. Endişelenmeyin. Sakin olun."
 
 #: pisi/lockeddbshelve.py:88
 msgid "Database writes not allowed without transactions"
-msgstr ""
+msgstr "PROGRAMLAMA HATASI: Veritabanına yazma transaction desteği olmadan izin verilmemektedir"
 
 #: pisi/lockeddbshelve.py:92
 msgid "Cannot attain read or write access to database %s"
 msgstr "Veritabanı %s için okuma ya da yazma erişimi edinilemedi"
 
 #: pisi/lockeddbshelve.py:115
-msgid ""
-"Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
+msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
 msgstr ""
 "Bayraklar 'r', 'w', 'c' or 'n'den birisi olmalı ya da bsddb.db.DB_* "
 "bayraklarını kullanmalı"
@@ -1913,8 +1903,7 @@ msgid "Source package '%s' has no first release"
 msgstr ""
 
 #: tools/repostats.py:478
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 
 #: tools/repostats.py:561
@@ -1948,3 +1937,4 @@ msgstr ""
 #: tools/repostats.py:678
 msgid "These dependencies are not available in repository:\n"
 msgstr ""
+
