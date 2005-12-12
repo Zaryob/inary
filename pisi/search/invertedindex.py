@@ -32,7 +32,7 @@ class InvertedIndex(object):
         term = shelve.LockedDBShelf.encodekey(term)
         def proc(txn):
             if not self.has_term(term, txn):
-                self.d.put(term, set(), txn)
+                return set()
             return self.d.get(term, txn)
         return self.d.txn_proc(proc, txn)
 
