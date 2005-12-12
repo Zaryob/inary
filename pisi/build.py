@@ -378,9 +378,13 @@ class Builder:
                 dep_unsatis.append(dep)
     
         if dep_unsatis:
-            ctx.ui.info(_("Unsatisfied Build Dependencies:"))
+            ctx.ui.info(_("Unsatisfied Build Dependencies:") + ' '
+                        + util.strlist([str(x) for x in dep_unsatis]) )
             for dep in dep_unsatis:
+                if not dependency.repo_satisfies_dep(dep):
+                    raise Error(_('Build dependency %s cannot be satisfied') % str(dep))
                 ctx.ui.warning(str(dep))
+                
             if not ctx.config.get_option('ignore_dependency'):
                 if ctx.ui.confirm(
                 _('Do you want to install the unsatisfied build dependencies')):

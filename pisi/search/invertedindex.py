@@ -39,7 +39,7 @@ class InvertedIndex(object):
     def query(self, terms, txn = None):
         def proc(txn):
             docs = [ self.get_term(x, txn) for x in terms ]
-            return reduce(lambda x,y: x.union(y), docs)
+            return reduce(lambda x,y: x.intersection(y), docs)
         return self.d.txn_proc(proc, txn)
 
     def list_terms(self, txn= None):
