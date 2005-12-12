@@ -559,6 +559,29 @@ Usage: info <package1> <package2> ... <packagen>
                 ctx.ui.warning(_('File information not available'))
 
 
+class Check(Command):
+    """Verify installation
+
+Usage: check <package1> <package2> ... <packagen>
+"""
+    __metaclass__ = autocommand
+
+    def __init__(self):
+        super(Check, self).__init__()
+
+    name = ("check", "c")
+
+    def run(self):
+        if not self.args:
+            self.help()
+            return
+
+        self.init(True)
+        for arg in self.args:
+            pisi.api.check(arg)
+        self.finalize()
+
+
 class Index(Command):
     """Index PISI files in a given directory
 

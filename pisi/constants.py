@@ -67,6 +67,7 @@ class Constants:
         self.__c.install_func = "install"
 
         # file types
+        # FIXME: these are redundant
         self.__c.doc = "doc"
         self.__c.man = "man"
         self.__c.info = "info"

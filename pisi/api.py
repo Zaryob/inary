@@ -253,6 +253,20 @@ def search_package(terms, lang = None):
     r = r1.union(r2)
     return r
 
+def check(package):
+    md, files = info(package)
+    corrupt = []
+    for file in files.list:
+        if file.hash and file.type != "config" \
+           and not os.path.islink('/' + file.path):
+            ctx.ui.info(_("Checking %s...") % file.path, True, True) 
+            if file.hash != util.sha1_file('/' + file.path):
+                corrupt.append(file)
+                ctx.ui.info("Corrupt file: %s" % file)
+            else:
+                ctx.ui.info("OK", True)
+    return corrupt
+
 def index(dirs, output = 'pisi-index.xml'):
     index = Index()
     if not dirs:
