@@ -61,4 +61,4 @@ def query_terms(id, lang, terms, txn = None):
 
 def query(id, lang, str, txn = None):
     terms = preprocess(lang, str)
-    return query(id, lang, terms, txn)
+    return query_terms(id, lang, terms, txn)
