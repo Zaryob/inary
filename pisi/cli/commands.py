@@ -1007,7 +1007,7 @@ Finds a package in repository containing specified search terms
             self.help()
             return
 
-        r = pisi.api.search_package(self.args, self.get_lang())
+        r = pisi.api.search_package_terms(self.args, self.get_lang())
 
         for pkg in r:
             self.printinfo_package(pkg)
