@@ -126,7 +126,8 @@ class ComponentDB(object):
             if not self.has_component(component_name, txn):
                 raise Error(_('Information for component %s not available') % component_name)
             component = self.get_component(component_name, txn)
-            component.packages.remove(package)
+            if package in component.packages:
+                component.packages.remove(package)
             self.d.put(component_name, component, txn) # update
         self.d.txn_proc(proc, txn)
 
