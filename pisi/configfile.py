@@ -65,9 +65,9 @@ class BuildDefaults:
     host = "i686-pc-linux-gnu"
     jobs = "-j1"   
     debug = False
-    CFLAGS = "-mtune=i686 -O2 -pipe -fomit-frame-pointer"
-    CXXFLAGS = "-mtune=i686 -O2 -pipe -fomit-frame-pointer"
-    LDFLAGS = ""
+    cflags = "-mtune=i686 -O2 -pipe -fomit-frame-pointer"
+    cxxflags = "-mtune=i686 -O2 -pipe -fomit-frame-pointer"
+    ldflags = ""
     buildno = False
 
 class DirsDefaults:
