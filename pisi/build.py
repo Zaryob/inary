@@ -587,8 +587,6 @@ class Builder:
         """Build each package defined in PSPEC file. After this process there
         will be .pisi files hanging around, AS INTENDED ;)"""
 
-        from copy import deepcopy
-
         self.fetch_component() # bug 856
 
         # Strip install directory before building .pisi packages.
@@ -601,23 +599,13 @@ class Builder:
             c = os.getcwd()
             os.chdir(self.specdir)
             install_dir = self.pkg_dir() + ctx.const.install_dir_suffix
-            tmp_aF = []
             for afile in package.additionalFiles:
-                destdir = util.join_path(install_dir, os.path.dirname(afile.target))
-                for src in glob.glob(util.join_path(ctx.const.files_dir, afile.filename)):
-                    tmp_afile_obj = deepcopy(afile)
-                    tmp_afile_obj.filename = src[len(ctx.const.files_dir) + 1:]
-                    tmp_aF.append(tmp_afile_obj)
-                    destfile = os.path.basename(afile.target)
-                    if not destfile: destfile = os.path.basename(src)
-                    ctx.ui.debug(_("Copying additional file: '%s' to '%s' as '%s'") \
-                                                          % (src, destdir, destfile))
-                    util.copy_file(src, util.join_path(destdir, destfile))
-                    if afile.permission:
-                        # mode is octal!
-                        os.chmod(util.join_path(destdir, destfile), int(afile.permission, 8))
-
-            package.additionalFiles = tmp_aF
+                src = os.path.join(ctx.const.files_dir, afile.filename)
+                dest = os.path.join(install_dir + os.path.dirname(afile.target), os.path.basename(afile.target))
+                util.copy_file(src, dest)
+                if afile.permission:
+                    # mode is octal!
+                    os.chmod(util.join_path(destdir, destfile), int(afile.permission, 8))
 
             os.chdir(c)
            
