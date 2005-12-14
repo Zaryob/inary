@@ -1754,7 +1754,7 @@ msgstr "'%s' dosyasının XML sözdizimi geçersiz: %s"
 #: pisi/pxml/xmlextcdom.py:97 pisi/pxml/xmlextmdom.py:92
 #: pisi/pxml/xmlextpiks.py:61
 msgid "getNodeText: Expected text node, got something else!"
-msgstr "getNodeText: metin bekliyorken başka birşey aldık!"
+msgstr "getNodeText: metin beklenirken başka bir veri alındı"
 
 #: pisi/pxml/xmlextmdom.py:53 pisi/pxml/xmlfilemdom.py:66
 #: pisi/pxml/xmlfilepiks.py:56
@@ -1768,7 +1768,7 @@ msgstr "Dosya '%s' bulunamadı"
 #: pisi/pxml/xmlfilecdom.py:90 pisi/pxml/xmlfilemdom.py:77
 #: pisi/pxml/xmlfilepiks.py:67
 msgid "Root tagname %s not identical to %s as expected"
-msgstr "Kök tag adı %s beklendiği gibi %s'le aynı değil."
+msgstr "Kök tag adı %s beklendiği gibi %s ile aynı değil."
 
 #: pisi/repodb.py:81
 msgid "Repository %s already exists"
@@ -1792,7 +1792,7 @@ msgstr "Özet: %s\n"
 
 #: pisi/specfile.py:201
 msgid "Description: %s\n"
-msgstr "Tanım: %s\n"
+msgstr "Açıklama: %s\n"
 
 #: pisi/specfile.py:202
 msgid "Component: %s\n"
@@ -1824,7 +1824,7 @@ msgstr "Başarısız komut: %s"
 
 #: pisi/util.py:312
 msgid "Including external link '%s'"
-msgstr "Harici bağ %s ekleniyor"
+msgstr "'%s' harici bağı ekleniyor"
 
 #: pisi/util.py:314
 msgid "Including directory '%s'"
@@ -1832,11 +1832,11 @@ msgstr "%s dizini içeriliyor"
 
 #: pisi/util.py:386
 msgid "I/O Error: Cannot calculate SHA1 hash of %s"
-msgstr "Girdi/Çıktı hatası: %s 'in SHA1 hash'i hesaplanamıyor"
+msgstr "Girdi/Çıktı hatası: %s dosyasının SHA1 bilgisi hesaplanamıyor"
 
 #: pisi/util.py:395
 msgid "Cannot calculate SHA1 hash of given data"
-msgstr "Verinin SHA1 hash'i hesaplanamıyor"
+msgstr "Verinin SHA1 bilgisi hesaplanamıyor"
 
 #: pisi/util.py:431
 msgid "ERROR: patch (%s) failed: %s"
@@ -1856,7 +1856,7 @@ msgstr "objcopy (add-debuglink) komutu %s dosyası için çalışmadı!"
 
 #: pisi/util.py:522
 msgid "Removing lock %s"
-msgstr "Kilit %s kaldırılıyor."
+msgstr "'%s' kilidi kaldırılıyor"
 
 #: pisi/util.py:555
 msgid "Updating environment..."
@@ -1868,7 +1868,7 @@ msgid ""
 "%s\n"
 "%s\n"
 msgstr ""
-"Kopyalanmış ikili paketler:\n"
+"İki yerde aynı ikili paket var:\n"
 "%s\n"
 "%s\n"
 
@@ -1882,7 +1882,7 @@ msgid ""
 "%s\n"
 "%s\n"
 msgstr ""
-"Kopyalanmış kaynak paketleri:\n"
+"İki yerde aynı kaynak paketi var:\n"
 "%s\n"
 "%s\n"
 
@@ -1892,7 +1892,7 @@ msgstr "Kaynak paketi '%s' yanlış tarih biçimlendirmesine sahip: '%s'"
 
 #: tools/repostats.py:431
 msgid "Source package '%s' has wrong release numbers"
-msgstr ""
+msgstr "'%s' kaynak paketi hatalı sürüm bilgisine sahip"
 
 #: tools/repostats.py:435
 msgid "Source package '%s' lacks release %d"
@@ -1900,7 +1900,7 @@ msgstr ""
 
 #: tools/repostats.py:443
 msgid "Source package '%s' has no first release"
-msgstr ""
+msgstr "'%s' kaynak paketinin ilk sürüm bilgisi yok"
 
 #: tools/repostats.py:478
 msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
@@ -1920,21 +1920,21 @@ msgstr ""
 
 #: tools/repostats.py:640
 msgid "Dont generate the web site.\n"
-msgstr ""
+msgstr "Web sayfasını oluşturma.\n"
 
 #: tools/repostats.py:661
 msgid "Scanning source repository...\n"
-msgstr ""
+msgstr "Kaynak deposu taranıyor...\n"
 
 #: tools/repostats.py:665
 msgid "Scanning binary packages...\n"
-msgstr ""
+msgstr "İkili dosyalar taranıyor...\n"
 
 #: tools/repostats.py:670
 msgid "Encountered %d errors! Fix them immediately!\n"
-msgstr ""
+msgstr "%d hata ile karşılaşıldı. Lütfen bunları en kısa zamanda düzeltin.\n"
 
 #: tools/repostats.py:678
 msgid "These dependencies are not available in repository:\n"
-msgstr ""
+msgstr "Bağımlılığa neden olan bu paketler depoda bulunmuyor:\n"
 
