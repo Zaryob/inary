@@ -67,7 +67,7 @@ setup(name="pisi",
     packages = ['pisi', 'pisi.cli', 'pisi.actionsapi', 'pisi.pxml', 'pisi.search'],
     scripts = ['pisi-cli', 'tools/ebuild2pisi.py', 'tools/repostats.py',
                'tools/find-lib-deps.py', 'tools/update-environ.py', 
-               'tools/lspisi'],
+               'tools/lspisi', 'tools/calc-build-order.py'],
     cmdclass = {
         'install' : Install
     }
