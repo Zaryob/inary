@@ -16,15 +16,15 @@ try:
     from xmlextpiks import *
 except:
     try:
-        gibidi
-        if pisi.context.use_mdom:
-            raise Error('zibidi')
+        #if pisi.context.use_mdom:
+        #    gibidi
+        #else:
+            
         from xmlextcdom import  *
     except:
         #raise Error('cannot find 4suite implementation')
         print 'xmlext: cDomlette/piksemel implementation cannot be loaded, falling back to minidom'
         from xmlextmdom import *
-
 
 from xml.dom import XHTML_NAMESPACE, XML_NAMESPACE
 XHTML_NS = unicode(XHTML_NAMESPACE)

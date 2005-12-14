@@ -33,7 +33,6 @@ from xml.parsers.expat import ExpatError
 import codecs
 
 import pisi
-from pisi.pxml.xmlextcdom import *
 from pisi.file import File
 
 class Error(pisi.Error):

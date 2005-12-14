@@ -4,12 +4,10 @@
 
 import sys
 import os
-
 sys.path.insert(0, '.')
 
 import pisi.context as ctx
-ctx.usemdom = True
-print 'hobarey'
+#ctx.usemdom = True
 import pisi
 import pisi.api
 import pisi.config
@@ -35,26 +33,18 @@ for root, dirs, files in os.walk(repo_uri):
             sf.read(pisi.util.join_path(root, fn))
             sf.check()
             print 'read %s: %s' % (sf.source.name, sf.source.version)
-            
             specfiles.append(sf)
-
-#print specfiles
 
 def plan_build(specfiles):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
-    G_f = Digraph()
-    #pgraph.PGraph(packagedb)               # construct G_f
-    
+    G_f = Digraph()    
     pkgtosrc = {}
-
     for sf in specfiles:
         for pkg in sf.packages:
             pkgtosrc[str(pkg.name)] = str(sf.source.name) 
     
-    # find the "install closure" graph of G_f by package 
-    # set A using packagedb
     for x in specfiles:
         #G_f.add_package(x)
         src = x.source
