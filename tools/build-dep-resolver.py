@@ -11,7 +11,6 @@ import xml.dom.minidom as mdom
 import sys
 import os
 
-
 Get   = lambda j, w: \
           [x for x in j.childNodes \
               if x.nodeType == x.ELEMENT_NODE \
@@ -71,6 +70,21 @@ def buildDepResolver(pspeclist):
     else:
         return pspeclist
 
+def runtimeDepResolver(pspeclist):
+    """arranges the order of the pspec's in the pspeclist to satisfy runtime deps"""
+    clean = True
+    for i in range(0, pspeccount):
+        pspec = pspeclist[i]
+        for p in rdepmap.get(pspec):
+            for j in range(i+1, pspeccount):
+                if p in namemap.get(pspeclist[j]):
+                    pspeclist.insert(j+1, pspeclist.pop(i))
+                    clean = False
+    if not clean:
+        return False
+    else:
+        return pspeclist
+
 
 pspeclist = findPspecs()
 
@@ -80,6 +94,7 @@ for pspec in pspeclist: bdepmap[pspec]  = getBuildDependencies(pspec)
 for pspec in pspeclist: rdepmap[pspec]  = getRuntimeDependencies(pspec)
 for pspec in pspeclist: namemap[pspec] = getPackageNames(pspec)
 
-while not buildDepResolver(pspeclist): pass
+#poor man's brute force..
+while (not buildDepResolver(pspeclist)) and (not runtimeDepResolver(pspeclist)): pass
 
 print pspeclist
