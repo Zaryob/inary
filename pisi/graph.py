@@ -12,18 +12,21 @@
 # the most simple minded digraph class ever
 
 
-# for python 2.3 compatibility
 import sys
-ver = sys.version_info
-if ver[0] <= 2 and ver[1] < 4:
-    from sets import Set as set
-
 import pisi
+
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
 
 # not an error!
 
 class CycleException(pisi.Exception):
-    pass
+    def __init__(self, cycle):
+        self.cycle = cycle
+
+    def __str__(self):
+        return _('encountered cycle %s') % self.cycle
 
 class Digraph(object):
 
@@ -115,7 +118,12 @@ class Digraph(object):
                 self.p[v] = u
                 self.dfs_visit(v, finish_hook)
             elif self.color[v] == 'g':  # cycle detected
-                raise CycleException
+                cycle = [v, u]
+                while self.p[u]:
+                    u = self.p[u]
+                    cycle.append(u)
+                cycle.reverse()
+                raise CycleException(cycle)
         self.color[u] = 'b'             # mark black (completed)
         if finish_hook:
             finish_hook(u)

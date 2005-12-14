@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-12-08, 18:50:27 -->
+<!-- Saved: 2005-12-14, 21:35:34 -->
 <!-- Copyright (C) 2005 PiSi Development Team,  -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -9,7 +9,7 @@
   <Description>The package management software of Pardus distribution.
 </Description>
   <Author>PiSi Development Team</Author>
-  <Email></Email>
+  <EmaIl></EmaIl>
   <Sources>
     <Source>
       <Dir>tools</Dir>
@@ -466,6 +466,14 @@
       <Dir>pisi</Dir>
       <Name>dbshelve.py</Name>
     </Source>
+    <Source>
+      <Dir>tools</Dir>
+      <Name>calc-build-order.py</Name>
+    </Source>
+    <Source>
+      <Dir>tools</Dir>
+      <Name>repo-dep-resolver.py</Name>
+    </Source>
   </Sources>
   <Forms>
   </Forms>
@@ -507,10 +515,10 @@
     <VcsOtherData>{'standardLayout': 1}</VcsOtherData>
   </Vcs>
   <FiletypeAssociations>
-    <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
     <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
   </FiletypeAssociations>
 </Project>

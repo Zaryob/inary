@@ -75,7 +75,7 @@ setup(name="pisi",
 
 # the below stuff is really nice but we already have a version
 # we can use this stuff for svn snapshots in a separate
-# script -- exa
+# script, or with a parameter I don't know -- exa
 
 PISI_VERSION = pisi.__version__
 
