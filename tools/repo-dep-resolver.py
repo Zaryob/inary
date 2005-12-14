@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# basic build dependency resolver..
+# basic dependency solver..
 #
 # example usage:
-#     ./build-dep-resolver.py pardus-devel/desktop/kde/
+#     ./repo-dep-resolver.py pardus-devel/desktop/kde/
 
 
 import xml.dom.minidom as mdom
