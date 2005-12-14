@@ -526,7 +526,7 @@ Usage: info <package1> <package2> ... <packagen>
                                help=_("Show only paths."))
 
     def run(self):
-        if not self.args:
+        if len(self.args) != 2:
             self.help()
             return
 
