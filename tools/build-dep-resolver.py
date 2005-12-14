@@ -25,6 +25,22 @@ def getBuildDependencies(pspec):
     except:
         return ['']
 
+def getRuntimeDependencies(pspec):
+    rdeps = []
+    dom = mdom.parse(pspec)
+    try:
+        for p in Get(dom.documentElement, "Package"):
+            rdeps += [bdep.firstChild.wholeText for bdep in Get(Get(p, "RuntimeDependencies")[0], 'Dependency')]
+    except:
+        pass
+
+    #remove duplicated entries..
+    for d in rdeps:
+        for i in range(0, rdeps.count(d)-1):
+            rdeps.remove(d)
+
+    return rdeps
+
 def getPackageNames(pspec):
     packages = []
     dom = mdom.parse(pspec)
@@ -45,7 +61,7 @@ def buildDepResolver(pspeclist):
     clean = True
     for i in range(0, pspeccount):
         pspec = pspeclist[i]
-        for p in depmap.get(pspec):
+        for p in bdepmap.get(pspec):
             for j in range(i+1, pspeccount):
                 if p in namemap.get(pspeclist[j]):
                     pspeclist.insert(j+1, pspeclist.pop(i))
@@ -55,14 +71,15 @@ def buildDepResolver(pspeclist):
     else:
         return pspeclist
 
+
 pspeclist = findPspecs()
 
-depmap, namemap, pspeccount = {}, {}, len(pspeclist)
-for pspec in pspeclist: depmap[pspec]  = getBuildDependencies(pspec)
+bdepmap, rdepmap, namemap, pspeccount = {}, {}, {}, len(pspeclist)
+
+for pspec in pspeclist: bdepmap[pspec]  = getBuildDependencies(pspec)
+for pspec in pspeclist: rdepmap[pspec]  = getRuntimeDependencies(pspec)
 for pspec in pspeclist: namemap[pspec] = getPackageNames(pspec)
 
-
 while not buildDepResolver(pspeclist): pass
-
 
 print pspeclist
