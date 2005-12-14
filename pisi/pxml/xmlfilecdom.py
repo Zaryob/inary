@@ -34,8 +34,7 @@ import exceptions
 
 import Ft
 from Ft.Xml.Domlette import implementation
-from Ft.Xml.Domlette import NonvalidatingReader
-from Ft.Xml import Parse, ParsePath
+from Ft.Xml.Domlette import NoExtDtdReader
 from Ft.Xml.Domlette import Print, PrettyPrint
 from xml.dom import XHTML_NAMESPACE, XML_NAMESPACE
 
@@ -72,7 +71,7 @@ class XmlFile(object):
         uri = File.make_uri(uri)
         localpath = File.download(uri, tmpDir)
         try:
-            self.doc = ParsePath(localpath)
+            self.doc = NoExtDtdReader.parseUri(Ft.Lib.Uri.OsPathToUri(localpath))
             return self.doc.documentElement
         except Ft.FtException, e:
             raise Error(_("File '%s' has invalid XML: %s") % (localpath, str(e)) )

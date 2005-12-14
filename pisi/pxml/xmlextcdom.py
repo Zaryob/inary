@@ -33,9 +33,8 @@ _ = __trans.ugettext
 
 import Ft
 from Ft.Xml.Domlette import implementation
-from Ft.Xml import ParsePath
-from Ft.Xml.Domlette import NonvalidatingReader
-
+from Ft.Xml.Domlette import NoExtDtdReader
+import Ft.Lib
 import pisi
 
 class XmlError(pisi.Error):
@@ -52,7 +51,7 @@ def newDocument(tag):
 def parse(filename):
     # parse file and return document root
     try:
-        doc = ParsePath(filename)
+        doc = NoExtDtdReader.parseUri(Ft.Lib.Uri.OsPathToUri(filename))
         return doc.documentElement
     except Ft.FtException, e:
         raise Error(_("File '%s' has invalid XML: %s") % (filename, str(e)))
