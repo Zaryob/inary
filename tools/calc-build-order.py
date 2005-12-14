@@ -1,5 +1,7 @@
 #! /usr/bin/python
-# a simple tool to list stuff in source repository
+# a simple tool to find the correct build order of source
+# packages in the repository. this one works really fast.
+# just give it the repository directory as an argument
 # author: exa
 
 import sys
@@ -11,7 +13,6 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi.context as ctx
-#ctx.usemdom = True
 import pisi
 import pisi.api
 import pisi.config
@@ -37,7 +38,8 @@ for root, dirs, files in os.walk(repo_uri):
             sf = specfile.SpecFile()
             sf.read(pisi.util.join_path(root, fn))
             sf.check()
-            #print 'read %s: %s' % (sf.source.name, sf.source.version)
+            sys.stdout.write('.')
+            sys.stdout.flush()
             specfiles.append(sf)
 
 def plan_build(specfiles):
@@ -69,6 +71,7 @@ def plan_build(specfiles):
     order.reverse()
     return G_f, order
 
+print "planning build order"
 try:
     G_f, order = plan_build(specfiles)
     print order 
