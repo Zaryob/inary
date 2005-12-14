@@ -65,10 +65,7 @@ def buildDepResolver(pspeclist):
                 if p in namemap.get(pspeclist[j]):
                     pspeclist.insert(j+1, pspeclist.pop(i))
                     clean = False
-    if not clean:
-        return False
-    else:
-        return pspeclist
+    return clean
 
 def runtimeDepResolver(pspeclist):
     """arranges the order of the pspec's in the pspeclist to satisfy runtime deps"""
@@ -80,10 +77,7 @@ def runtimeDepResolver(pspeclist):
                 if p in namemap.get(pspeclist[j]):
                     pspeclist.insert(j+1, pspeclist.pop(i))
                     clean = False
-    if not clean:
-        return False
-    else:
-        return pspeclist
+    return clean
 
 
 pspeclist = findPspecs()
