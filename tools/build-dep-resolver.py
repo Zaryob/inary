@@ -51,7 +51,7 @@ def buildDepResolver(pspeclist):
                     pspeclist.insert(j+1, pspeclist.pop(i))
                     clean = False
     if not clean:
-        return -1
+        return False
     else:
         return pspeclist
 
@@ -62,7 +62,7 @@ for pspec in pspeclist: depmap[pspec]  = getBuildDependencies(pspec)
 for pspec in pspeclist: namemap[pspec] = getPackageNames(pspec)
 
 
-while buildDepResolver(pspeclist) == -1: pass
+while not buildDepResolver(pspeclist): pass
 
 
 print pspeclist
