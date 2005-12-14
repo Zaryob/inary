@@ -34,6 +34,7 @@ import codecs
 
 import pisi
 from pisi.pxml.xmlextcdom import *
+from pisi.file import File
 
 class Error(pisi.Error):
     "named this way because the class if mostly used with an import *"
@@ -59,9 +60,12 @@ class XmlFile(object):
         """returns root document element"""
         return self.doc.documentElement
 
-    def readxml(self, fileName):
+    def readxml(self, uri, tmpDir = '/tmp'):
+        uri = File.make_uri(uri)
+        localpath = File.download(uri, tmpDir)
+
         try:
-            self.doc = mdom.parse(fileName)
+            self.doc = mdom.parse(localpath)
         except ExpatError, inst:
             raise Error(_("File '%s' has invalid XML: %s\n") % (fileName,
                                                                 str(inst)))

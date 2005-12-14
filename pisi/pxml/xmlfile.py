@@ -11,13 +11,20 @@
 #
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 
+import pisi.context
+
 try:
     horagata # comment out to disable piks
     #from xmlfilepiks import *
 except:
     try:
+        zibidi
+        if pisi.context.use_mdom:
+            raise Error('zibidi')
         from xmlfilecdom import *
     except:
-        raise Error('cannot find 4suite implementation')
+        #raise Error('cannot find 4suite implementation')
         print 'xmlext: cDomlette/piksemel implementation cannot be loaded, falling back to minidom'
         from xmlfilemdom import *
+
+print 'gumburdop'

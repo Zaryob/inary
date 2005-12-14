@@ -16,9 +16,12 @@ try:
     from xmlextpiks import *
 except:
     try:
+        gibidi
+        if pisi.context.use_mdom:
+            raise Error('zibidi')
         from xmlextcdom import  *
     except:
-        raise Error('cannot find 4suite implementation')
+        #raise Error('cannot find 4suite implementation')
         print 'xmlext: cDomlette/piksemel implementation cannot be loaded, falling back to minidom'
         from xmlextmdom import *
 

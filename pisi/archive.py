@@ -145,8 +145,10 @@ class ArchiveZip(ArchiveBase):
         os.chdir(cwd)
 
     def unpack_file_cond(self, pred, target_dir, archive_root = ''):
-        """Unpack/Extract a file according to predicate function filename ->
-        bool"""
+        """Unpack/Extract files according to predicate function
+        pred: filename -> bool 
+        unpacks stuff into target_dir and only extracts files
+        from archive_root, treating it as the archive root"""
         zip_obj = self.zip_obj
         for info in zip_obj.infolist():
             if pred(info.filename):   # check if condition holds
