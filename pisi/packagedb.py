@@ -74,8 +74,9 @@ class PackageDB(object):
             self.d.put(name, package_info, txn)
             for dep in package_info.runtimeDependencies():
                 dep_name = str(dep.package)
-                if self.dr.has_key(dep_name, txn):
+                if not self.dr.has_key(dep_name, txn):
                     revdep = self.dr.get(dep_name, txn)
+                    revdep = revdep.filter(lambda (n,d):n!=name, revdep)
                     revdep.append( (name, dep) )
                     self.dr.put(dep_name, revdep, txn)
                 else:
