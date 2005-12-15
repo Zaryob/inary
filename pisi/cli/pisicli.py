@@ -37,7 +37,7 @@ class PreParser(OptionParser):
 
     def error(self, msg):
         raise ParserError, msg
-        
+
     def parse_args(self, args=None):
         self.opts = []
         self.rargs = self._get_args(args)
