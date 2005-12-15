@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "POT-Creation-Date: Thu Dec 15 04:04:03 2005\n"
-"PO-Revision-Date: 2005-12-15 02:25+0200\n"
+"PO-Revision-Date: 2005-12-15 04:05+0200\n"
 "Last-Translator: Eray Ozkural <eray@uludag.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -48,8 +48,7 @@ msgstr "Geri-iz:"
 
 #: pisi-cli:62
 msgid "Use --debug to see a traceback."
-msgstr ""
-"Bir geri iz (traceback) görmek için lütfen --debug seçeneğini kullanın. "
+msgstr "Bir geri iz (traceback) görmek için lütfen --debug seçeneğini kullanın. "
 
 #: pisi/actionsapi/autotools.py:36
 msgid ""
@@ -264,9 +263,8 @@ msgid "Package %s not found"
 msgstr "Paket %s bulunamadı."
 
 #: pisi/api.py:268
-#, fuzzy
 msgid "Checking %s..."
-msgstr "%s'i indiriyor"
+msgstr "%s kontrol ediliyor"
 
 #: pisi/api.py:281
 msgid "* Building index of PISI files under %s"
@@ -434,8 +432,7 @@ msgstr "PİSİ kaynak paketi %s inşa ediliyor"
 
 #: pisi/build.py:197
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr ""
-"IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
+msgstr "IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
 
 #: pisi/build.py:201
 msgid "CCache detected..."
@@ -494,16 +491,14 @@ msgid "unable to call function from actions: %s"
 msgstr "fonksiyon eylemlerden çağırılamıyor: %s"
 
 #: pisi/build.py:364
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Emniyet mandalı: taban geliştirme sistemi system.devel'den izleyen paketler "
 "ek olarak yüklenecek:"
 
 #: pisi/build.py:369
 msgid "Safety switch: system.devel is already installed"
-msgstr ""
-"Emniyet mandalı: taban geliştirme sistemi system.devel halihazırda kurulu"
+msgstr "Emniyet mandalı: taban geliştirme sistemi system.devel halihazırda kurulu"
 
 #: pisi/build.py:371
 msgid "Safety switch: the component system.devel cannot be found"
@@ -949,16 +944,14 @@ msgid "File information not available"
 msgstr "Dosya bilgisi bulunamadı"
 
 #: pisi/cli/commands.py:565
-#, fuzzy
 msgid ""
 "Verify installation\n"
 "\n"
 "Usage: check <package1> <package2> ... <packagen>\n"
 msgstr ""
-"Paket bilgisini göster\n"
+"Kurulumu doğrula\n"
 "\n"
-"Kullanım: info <package1> <package2> ... <packagen>\n"
-"\n"
+"Kullanım: check <package1> <package2> ... <packagen>\n"
 
 #: pisi/cli/commands.py:588
 msgid ""
@@ -1015,10 +1008,8 @@ msgstr "detaylı yükleme bilgisi göster"
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/commands.py:649 pisi/cli/commands.py:942
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr ""
-"Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr "Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
 
 #: pisi/cli/commands.py:664
 msgid ""
@@ -1444,7 +1435,7 @@ msgstr "Uzağa yazmalar henüz programlanmadı"
 
 #: pisi/graph.py:29
 msgid "Encountered cycle %s"
-msgstr ""
+msgstr "Çember ile karşılaşıldı: %s"
 
 #: pisi/index.py:73
 msgid "Adding %s to package index"
@@ -1504,8 +1495,7 @@ msgstr "Halihazırda yerleştirilmiş."
 
 #: pisi/lockeddbshelve.py:46
 msgid "Database version insufficient. Please run rebuild-db command."
-msgstr ""
-"Veritabanı versiyonu yetersiz. Lütfen rebuild-db komutunu çalıştırınız."
+msgstr "Veritabanı versiyonu yetersiz. Lütfen rebuild-db komutunu çalıştırınız."
 
 #: pisi/lockeddbshelve.py:48
 msgid "Database version greater than PiSi version. You need a newer PiSi."
@@ -1544,8 +1534,7 @@ msgid "Cannot attain read or write access to database %s"
 msgstr "Veritabanı %s için okuma ya da yazma erişimi edinilemedi"
 
 #: pisi/lockeddbshelve.py:115
-msgid ""
-"Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
+msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
 msgstr ""
 "Bayraklar 'r', 'w', 'c' or 'n'den birisi olmalı ya da bsddb.db.DB_* "
 "bayraklarını kullanmalı"
@@ -1932,8 +1921,7 @@ msgid "Source package '%s' has no first release"
 msgstr "'%s' kaynak paketinin ilk sürüm bilgisi yok"
 
 #: tools/repostats.py:478
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 
 #: tools/repostats.py:561
@@ -1968,5 +1956,3 @@ msgstr "%d hata ile karşılaşıldı. Lütfen bunları en kısa zamanda düzelt
 msgid "These dependencies are not available in repository:\n"
 msgstr "Bağımlılığa neden olan bu paketler depoda bulunmuyor:\n"
 
-#~ msgid "Copying additional file: '%s' to '%s' as '%s'"
-#~ msgstr "Ek dosya kopyalanıyor: '%s' den '%s' e '%s' olarak"
