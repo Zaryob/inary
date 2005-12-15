@@ -370,7 +370,7 @@ class Remove(AtomicOperation):
     remove_file = staticmethod(remove_file)
     
     def run_preremove(self):
-        if ctx.comar:
+        if ctx.comar and self.package.providesComar:
             import pisi.comariface as comariface
             comariface.run_preremove(self.package_name)
         else:
