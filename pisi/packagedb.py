@@ -37,6 +37,7 @@ class PackageDB(object):
     """PackageDB class provides an interface to the package database 
     using shelf objects"""
     def __init__(self, id):
+        self.id = id
         self.d = shelve.LockedDBShelf('package-%s' % id )
         self.dr = shelve.LockedDBShelf('revdep-%s' % id )
 
@@ -102,7 +103,9 @@ class PackageDB(object):
             package_info = self.d.get(name, txn)
             self.d.delete(name, txn)
             #FIXME: what's happening to dr?
-            ctx.componentdb.remove_package(package_info.partOf, package_info.name, txn)
+            #WORKAROUND: do not remove component if it is not in repo
+            if self.id.startswith('repo'):
+                ctx.componentdb.remove_package(package_info.partOf, package_info.name, txn)
         self.d.txn_proc(proc, txn)
 
 packagedbs = {}
