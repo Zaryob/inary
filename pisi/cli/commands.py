@@ -529,7 +529,7 @@ Usage: info <package1> <package2> ... <packagen>
 
         self.init(True)
         
-        if len(self.args) != 1:
+        if len(self.args) == 0:
             self.help()
             return
         
