@@ -118,7 +118,7 @@ class Digraph(object):
                 self.p[v] = u
                 self.dfs_visit(v, finish_hook)
             elif self.color[v] == 'g':  # cycle detected
-                cycle = [v, u]
+                cycle = [u]
                 while self.p[u]:
                     u = self.p[u]
                     cycle.append(u)
