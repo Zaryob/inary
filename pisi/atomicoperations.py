@@ -312,12 +312,12 @@ class Remove(AtomicOperation):
     def __init__(self, package_name, ignore_dep = None):
         super(Remove, self).__init__(ignore_dep)
         self.package_name = package_name
+        self.package = packagedb.get_package(self.package_name)
+        self.files = ctx.installdb.files(self.package_name)
         
     def run(self):
         """Remove a single package"""
         inst_packagedb = packagedb.inst_packagedb
-        self.package = packagedb.get_package(self.package_name)
-        self.files = ctx.installdb.files(self.package_name)
        
         ctx.ui.status(_('Removing package %s') % self.package_name)
         if not ctx.installdb.is_installed(self.package_name):
