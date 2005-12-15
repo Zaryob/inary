@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: Thu Dec 15 04:04:03 2005\n"
+"POT-Creation-Date: Thu Dec 15 15:43:39 2005\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -232,51 +232,51 @@ msgstr ""
 msgid "executing %s"
 msgstr ""
 
-#: pisi/api.py:210 pisi/comariface.py:33
+#: pisi/api.py:219 pisi/comariface.py:33
 msgid "COMAR: comard not fully installed"
 msgstr ""
 
-#: pisi/api.py:222
+#: pisi/api.py:231
 msgid "File %s not found"
 msgstr ""
 
-#: pisi/api.py:244
+#: pisi/api.py:253
 msgid "Package %s not found"
 msgstr ""
 
-#: pisi/api.py:268
+#: pisi/api.py:277
 msgid "Checking %s..."
 msgstr ""
 
-#: pisi/api.py:281
+#: pisi/api.py:290
 msgid "* Building index of PISI files under %s"
 msgstr ""
 
-#: pisi/api.py:284
+#: pisi/api.py:293
 msgid "* Index file written"
 msgstr ""
 
-#: pisi/api.py:289
+#: pisi/api.py:298
 msgid "Repo %s added to system."
 msgstr ""
 
-#: pisi/api.py:294
+#: pisi/api.py:303
 msgid "Repo %s removed from system."
 msgstr ""
 
-#: pisi/api.py:296
+#: pisi/api.py:305
 msgid "Repository %s does not exist. Cannot remove."
 msgstr ""
 
-#: pisi/api.py:300
+#: pisi/api.py:309
 msgid "* Updating repository: %s"
 msgstr ""
 
-#: pisi/api.py:305
+#: pisi/api.py:314
 msgid "No repository named %s found."
 msgstr ""
 
-#: pisi/api.py:307
+#: pisi/api.py:316
 msgid ""
 "\n"
 "* Package database updated."
@@ -370,35 +370,35 @@ msgstr ""
 msgid "Removing package %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:324
+#: pisi/atomicoperations.py:325
 msgid "Trying to remove nonexistent package "
 msgstr ""
 
-#: pisi/atomicoperations.py:368
+#: pisi/atomicoperations.py:369
 msgid "Not removing non-file, non-link %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:452
+#: pisi/atomicoperations.py:453
 msgid "Metadata XML '%s' cannot be found"
 msgstr ""
 
-#: pisi/atomicoperations.py:460
+#: pisi/atomicoperations.py:461
 msgid "MetaData format wrong (%s)"
 msgstr ""
 
-#: pisi/atomicoperations.py:472
+#: pisi/atomicoperations.py:473
 msgid "* Adding '%s' to db... "
 msgstr ""
 
-#: pisi/atomicoperations.py:476
+#: pisi/atomicoperations.py:477
 msgid "Files XML '%s' cannot be found"
 msgstr ""
 
-#: pisi/atomicoperations.py:482 pisi/package.py:111
+#: pisi/atomicoperations.py:483 pisi/package.py:111
 msgid "Invalid %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:489
+#: pisi/atomicoperations.py:490
 msgid "OK."
 msgstr ""
 
@@ -1516,7 +1516,7 @@ msgstr ""
 msgid "MetaData format wrong"
 msgstr ""
 
-#: pisi/packagedb.py:145
+#: pisi/packagedb.py:148
 msgid "get_package: package %s not found"
 msgstr ""
 

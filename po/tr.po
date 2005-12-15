@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: Thu Dec 15 04:04:03 2005\n"
+"POT-Creation-Date: Thu Dec 15 15:43:39 2005\n"
 "PO-Revision-Date: 2005-12-15 04:33+0200\n"
 "Last-Translator: Eray Ozkural <eray@uludag.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
@@ -48,7 +48,8 @@ msgstr "Geri-iz:"
 
 #: pisi-cli:62
 msgid "Use --debug to see a traceback."
-msgstr "Bir geri iz (traceback) görmek için lütfen --debug seçeneğini kullanın. "
+msgstr ""
+"Bir geri iz (traceback) görmek için lütfen --debug seçeneğini kullanın. "
 
 #: pisi/actionsapi/autotools.py:36
 msgid ""
@@ -250,51 +251,51 @@ msgstr "ActionsAPI [touch]: Erişim engellendi: %s"
 msgid "executing %s"
 msgstr "%s çalıştırılıyor"
 
-#: pisi/api.py:210 pisi/comariface.py:33
+#: pisi/api.py:219 pisi/comariface.py:33
 msgid "COMAR: comard not fully installed"
 msgstr "COMAR: comard tam olarak yerleştirilememiş"
 
-#: pisi/api.py:222
+#: pisi/api.py:231
 msgid "File %s not found"
 msgstr "Dosya %s bulunamadı."
 
-#: pisi/api.py:244
+#: pisi/api.py:253
 msgid "Package %s not found"
 msgstr "Paket %s bulunamadı."
 
-#: pisi/api.py:268
+#: pisi/api.py:277
 msgid "Checking %s..."
 msgstr "%s kontrol ediliyor"
 
-#: pisi/api.py:281
+#: pisi/api.py:290
 msgid "* Building index of PISI files under %s"
 msgstr "* %s altındaki PİSİ dosyalarının bir indexi yapılıyor."
 
-#: pisi/api.py:284
+#: pisi/api.py:293
 msgid "* Index file written"
 msgstr "* İndex dosyası yazıldı."
 
-#: pisi/api.py:289
+#: pisi/api.py:298
 msgid "Repo %s added to system."
 msgstr "Depo %s sisteme eklendi."
 
-#: pisi/api.py:294
+#: pisi/api.py:303
 msgid "Repo %s removed from system."
 msgstr "Depo %s sistemden çıkarıldı."
 
-#: pisi/api.py:296
+#: pisi/api.py:305
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "Depo %s yok. Kaldırılamıyor."
 
-#: pisi/api.py:300
+#: pisi/api.py:309
 msgid "* Updating repository: %s"
 msgstr "Depo %s güncelleniyor."
 
-#: pisi/api.py:305
+#: pisi/api.py:314
 msgid "No repository named %s found."
 msgstr "%s adında bir depo bulunamadı."
 
-#: pisi/api.py:307
+#: pisi/api.py:316
 msgid ""
 "\n"
 "* Package database updated."
@@ -390,35 +391,35 @@ msgstr "Paket %s hiç bir etkin depoda bulunamadı."
 msgid "Removing package %s"
 msgstr "%s paketi kaldırılıyor."
 
-#: pisi/atomicoperations.py:324
+#: pisi/atomicoperations.py:325
 msgid "Trying to remove nonexistent package "
 msgstr "Varolmayan paket kaldırılmaya çalışıldı."
 
-#: pisi/atomicoperations.py:368
+#: pisi/atomicoperations.py:369
 msgid "Not removing non-file, non-link %s"
 msgstr "Dosya ya da bağ olmayan '%s' kaldırılmıyor."
 
-#: pisi/atomicoperations.py:452
+#: pisi/atomicoperations.py:453
 msgid "Metadata XML '%s' cannot be found"
 msgstr "Metadata XML '%s' bulunamıyor"
 
-#: pisi/atomicoperations.py:460
+#: pisi/atomicoperations.py:461
 msgid "MetaData format wrong (%s)"
 msgstr "MetaData biçimi yanlış (%s)"
 
-#: pisi/atomicoperations.py:472
+#: pisi/atomicoperations.py:473
 msgid "* Adding '%s' to db... "
 msgstr "* '%s' veritabanına ekleniyor... "
 
-#: pisi/atomicoperations.py:476
+#: pisi/atomicoperations.py:477
 msgid "Files XML '%s' cannot be found"
 msgstr "Files XML '%s' bulunamıyor"
 
-#: pisi/atomicoperations.py:482 pisi/package.py:111
+#: pisi/atomicoperations.py:483 pisi/package.py:111
 msgid "Invalid %s"
 msgstr "Geçersiz %s"
 
-#: pisi/atomicoperations.py:489
+#: pisi/atomicoperations.py:490
 msgid "OK."
 msgstr "Tamam."
 
@@ -432,7 +433,8 @@ msgstr "PİSİ kaynak paketi %s inşa ediliyor"
 
 #: pisi/build.py:197
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr "IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
+msgstr ""
+"IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
 
 #: pisi/build.py:201
 msgid "CCache detected..."
@@ -491,14 +493,16 @@ msgid "unable to call function from actions: %s"
 msgstr "fonksiyon eylemlerden çağırılamıyor: %s"
 
 #: pisi/build.py:364
-msgid "Safety switch: following extra packages in system.devel will be installed: "
+msgid ""
+"Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Emniyet mandalı: taban geliştirme sistemi system.devel'den izleyen paketler "
 "ek olarak yüklenecek:"
 
 #: pisi/build.py:369
 msgid "Safety switch: system.devel is already installed"
-msgstr "Emniyet mandalı: taban geliştirme sistemi system.devel halihazırda kurulu"
+msgstr ""
+"Emniyet mandalı: taban geliştirme sistemi system.devel halihazırda kurulu"
 
 #: pisi/build.py:371
 msgid "Safety switch: the component system.devel cannot be found"
@@ -1008,8 +1012,10 @@ msgstr "detaylı yükleme bilgisi göster"
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/commands.py:649 pisi/cli/commands.py:942
-msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr "Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
+msgid ""
+"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr ""
+"Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
 
 #: pisi/cli/commands.py:664
 msgid ""
@@ -1495,7 +1501,8 @@ msgstr "Halihazırda yerleştirilmiş."
 
 #: pisi/lockeddbshelve.py:46
 msgid "Database version insufficient. Please run rebuild-db command."
-msgstr "Veritabanı versiyonu yetersiz. Lütfen rebuild-db komutunu çalıştırınız."
+msgstr ""
+"Veritabanı versiyonu yetersiz. Lütfen rebuild-db komutunu çalıştırınız."
 
 #: pisi/lockeddbshelve.py:48
 msgid "Database version greater than PiSi version. You need a newer PiSi."
@@ -1534,7 +1541,8 @@ msgid "Cannot attain read or write access to database %s"
 msgstr "Veritabanı %s için okuma ya da yazma erişimi edinilemedi"
 
 #: pisi/lockeddbshelve.py:115
-msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
+msgid ""
+"Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
 msgstr ""
 "Bayraklar 'r', 'w', 'c' or 'n'den birisi olmalı ya da bsddb.db.DB_* "
 "bayraklarını kullanmalı"
@@ -1678,7 +1686,7 @@ msgstr "%s [önbellekte]"
 msgid "MetaData format wrong"
 msgstr "MetaData biçimi yanlış"
 
-#: pisi/packagedb.py:145
+#: pisi/packagedb.py:148
 msgid "get_package: package %s not found"
 msgstr "get_package: paket %s bulunamadı"
 
@@ -1921,7 +1929,8 @@ msgid "Source package '%s' has no first release"
 msgstr "'%s' kaynak paketinin ilk sürüm bilgisi yok"
 
 #: tools/repostats.py:478
-msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgid ""
+"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 
 #: tools/repostats.py:561
@@ -1955,4 +1964,3 @@ msgstr "%d hata ile karşılaşıldı. Lütfen bunları en kısa zamanda düzelt
 #: tools/repostats.py:678
 msgid "These dependencies are not available in repository:\n"
 msgstr "Bağımlılığa neden olan bu paketler depoda bulunmuyor:\n"
-
