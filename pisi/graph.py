@@ -26,7 +26,7 @@ class CycleException(pisi.Exception):
         self.cycle = cycle
 
     def __str__(self):
-        return _('encountered cycle %s') % self.cycle
+        return _('Encountered cycle %s') % self.cycle
 
 class Digraph(object):
 
