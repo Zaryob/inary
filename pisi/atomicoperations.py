@@ -78,7 +78,7 @@ class Install(AtomicOperation):
         self.check_reinstall()
         self.extract_install()
         self.store_pisi_files()
-        if ctx.comar:
+        if self.metadata.package.providesComar and ctx.comar:
             import pisi.comariface as comariface
             self.register_comar_scripts()
             ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
@@ -106,7 +106,7 @@ class Install(AtomicOperation):
         #TODO: IS THERE ENOUGH SPACE?
         # what to do if / is split into /usr, /var, etc.
         # check comar
-        if ctx.comar:
+        if self.metadata.package.providesComar and ctx.comar:
             import pisi.comariface as comariface
             com = comariface.make_com()
 
