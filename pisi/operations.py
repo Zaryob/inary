@@ -434,7 +434,7 @@ def remove(A):
         return
 
     if not ctx.config.get_option('ignore_dependency'):
-        G_f, order = plan_upgrade(A)
+        G_f, order = plan_remove(A)
     else:
         G_f = None
         order = A
