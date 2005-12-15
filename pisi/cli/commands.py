@@ -526,11 +526,13 @@ Usage: info <package1> <package2> ... <packagen>
                                help=_("Show only paths."))
 
     def run(self):
-        if len(self.args) != 2:
-            self.help()
-            return
 
         self.init(True)
+        
+        if len(self.args) != 1:
+            self.help()
+            return
+        
         for arg in self.args:
             if ctx.componentdb.has_component(arg):
                 component = ctx.componentdb.get_component(arg)
