@@ -320,6 +320,7 @@ class Remove(AtomicOperation):
         inst_packagedb = packagedb.inst_packagedb
        
         ctx.ui.status(_('Removing package %s') % self.package_name)
+        ctx.ui.notify(pisi.ui.removing, package = self.package, files = self.files)
         if not ctx.installdb.is_installed(self.package_name):
             raise Exception(_('Trying to remove nonexistent package ')
                             + self.package_name)
