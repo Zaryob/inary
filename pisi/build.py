@@ -163,7 +163,6 @@ class Builder:
         self.patch_exists()
 
         self.check_build_dependencies()
-        self.fetch_files()
         self.fetch_component()
         self.fetch_source_archive()
         self.unpack_source_archive()
