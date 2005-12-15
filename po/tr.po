@@ -1832,11 +1832,11 @@ msgstr "%s dizini içeriliyor"
 
 #: pisi/util.py:386
 msgid "I/O Error: Cannot calculate SHA1 hash of %s"
-msgstr "Girdi/Çıktı hatası: %s dosyasının SHA1 bilgisi hesaplanamıyor"
+msgstr "Girdi/Çıktı hatası: %s dosyasının SHA1 kontrol toplamı hesaplanamıyor"
 
 #: pisi/util.py:395
 msgid "Cannot calculate SHA1 hash of given data"
-msgstr "Verinin SHA1 bilgisi hesaplanamıyor"
+msgstr "Verinin SHA1 kontrol toplamı hesaplanamıyor"
 
 #: pisi/util.py:431
 msgid "ERROR: patch (%s) failed: %s"
@@ -1868,7 +1868,7 @@ msgid ""
 "%s\n"
 "%s\n"
 msgstr ""
-"İki yerde aynı ikili paket var:\n"
+"Birden çok yerde aynı ikili paket var:\n"
 "%s\n"
 "%s\n"
 
@@ -1882,7 +1882,7 @@ msgid ""
 "%s\n"
 "%s\n"
 msgstr ""
-"İki yerde aynı kaynak paketi var:\n"
+"Birden çok yerde aynı kaynak paketi var:\n"
 "%s\n"
 "%s\n"
 
