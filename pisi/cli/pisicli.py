@@ -88,21 +88,18 @@ class PisiCLI(object):
             if len(args)==0: # more explicit than using IndexError
                 if 'version' in opts:
                     self.parser.print_version()
-                    sys.exit(0)
+                elif 'help' in opts:
+                    self.die()
                 raise Error(_('No command given'))
-                #self.die()
             cmd_name = args[0]
         except ParserError:
             raise Error(_('Command line parsing error'))
-            #self.die()
 
         self.command = Command.get_command(cmd_name)
         if not self.command:
             raise Error(_("Unrecognized command: %s") % cmd_name)
-            #self.die()
 
     def die(self):
-        #raise Error('')
         printu('\n' + self.parser.format_help())
         sys.exit(1)
 
