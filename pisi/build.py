@@ -604,7 +604,7 @@ class Builder:
                 util.copy_file(src, dest)
                 if afile.permission:
                     # mode is octal!
-                    os.chmod(util.join_path(destdir, destfile), int(afile.permission, 8))
+                    os.chmod(dest, int(afile.permission, 8))
 
             os.chdir(c)
            
