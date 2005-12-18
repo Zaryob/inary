@@ -37,15 +37,18 @@ class Command(object):
     cmd = []
     cmd_dict = {}
 
+    @staticmethod
     def commands_string():
         s = ''
         list = [x.name[0] for x in Command.cmd]
         list.sort()
-        for x in list:
-            s += x + '\n'
+        for name in list:
+            command = Command.get_command(name)
+            summary = command.__doc__.split('\n')[0]
+            s += '%25s - %s\n' % (command.format_name(), summary)
         return s
-    commands_string = staticmethod(commands_string)
-    
+
+    @staticmethod
     def get_command(cmd, fail=False):
     
         if Command.cmd_dict.has_key(cmd):
@@ -55,7 +58,6 @@ class Command(object):
             raise Error(_("Unrecognized command: %s") % cmd)
         else:
             return None
-    get_command = staticmethod(get_command)
 
     # instance variabes
 
@@ -205,6 +207,7 @@ If run without parameters, it prints the general help."""
     name = ("help", "h")
 
     def run(self):
+
         if not self.args:
             self.parser.set_usage(usage_text)
             pisi.cli.printu(self.parser.format_help())
