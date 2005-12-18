@@ -145,18 +145,22 @@ class InstallDB:
         else:
             return False
 
-    def install(self, pkg, version, release, build, distro = "", rebuild=False, txn = None):
+    def install(self, pkg, version, release, build, distro = "", 
+                config_later = False, rebuild=False, txn = None):
         """install package with specific version, release, build"""
         pkg = str(pkg)
         def proc(txn):
             if self.is_installed(pkg, txn):
                 raise InstallDBError(_("Already installed"))
-            if ctx.config.get_option('ignore_comar'):
+            if config_later:
                 state = 'ip'
                 self.dp.put(pkg, True, txn)
             else:
                 state = 'i'
 
+            # FIXME: it might be more appropriate to pass date
+            # as an argument, or installation data afterwards
+            # to do this -- exa
             if not rebuild:
                 import time
                 ctime = time.localtime()

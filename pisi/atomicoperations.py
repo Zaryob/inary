@@ -81,10 +81,16 @@ class Install(AtomicOperation):
         if self.metadata.package.providesComar and ctx.comar:
             import pisi.comariface as comariface
             self.register_comar_scripts()
-            ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
-            comariface.run_postinstall(self.pkginfo.name)
-            ctx.ui.notify(pisi.ui.configured, package = self.pkginfo, files = self.files)
 
+        self.config_later = False
+        if 'Comar' in self.metadata.package.providesComar:
+            if ctx.comar:
+                ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
+                comariface.run_postinstall(self.pkginfo.name)
+                ctx.ui.notify(pisi.ui.configured, package = self.pkginfo, files = self.files)
+            else:
+                self.config_later = True
+        
         txn = ctx.dbenv.txn_begin()
         try:
             self.update_databases(txn)
@@ -243,6 +249,7 @@ class Install(AtomicOperation):
                           self.metadata.package.release,
                           self.metadata.package.build,
                           self.metadata.package.distribution,
+                          self.config_later, 
                           False,
                           txn)
 
@@ -430,12 +437,13 @@ def virtual_install(metadata, files, txn):
     
     # installdb
     ctx.installdb.install(metadata.package.name,
-                         metadata.package.version,
-                         metadata.package.release,
-                         metadata.package.build,
-                         metadata.package.distribution,
-                         True,
-                         txn)
+                          metadata.package.version,
+                          metadata.package.release,
+                          metadata.package.build,
+                          metadata.package.distribution,
+                          False,
+                          True,
+                          txn)
 
     # filesdb
     ctx.filesdb.add_files(metadata.package.name, files, txn)
