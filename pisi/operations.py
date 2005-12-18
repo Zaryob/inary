@@ -323,8 +323,11 @@ version %s, release %s, build %s.')
     if len(order) > len(A_0):
         if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
             return False
-    for x in order:
-        atomicoperations.install_single_name(x, True)
+
+    install_ops = [atomicoperations.Install.from_name(x) for x in order]
+    
+    for install in install_ops:
+        install.install(True)
 
 def plan_upgrade(A):
     # try to construct a pisi graph of packages to

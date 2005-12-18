@@ -56,6 +56,29 @@ class AtomicOperation(object):
 class Install(AtomicOperation):
     "Install class, provides install routines for pisi packages"
 
+    @staticmethod
+    def from_name(name):
+        # download package and return an installer object
+        # find package in repository
+        repo = packagedb.which_repo(name)
+        if repo:
+            repo = ctx.repodb.get_repo(repo)
+            pkg = packagedb.get_package(name)
+    
+            # FIXME: let pkg.packageURI be stored as URI type rather than string
+            pkg_uri = URI(pkg.packageURI)
+            if pkg_uri.is_absolute_path():
+                pkg_path = str(pkg.packageURI)
+            else:
+                pkg_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
+                                        str(pkg_uri.path()))
+    
+            ctx.ui.debug(_("Package URI: %s") % pkg_path)
+    
+            return Install(pkg_path)
+        else:
+            raise Error(_("Package %s not found in any active repository.") % name)
+
     def __init__(self, package_fname, ignore_dep = None):
         "initialize from a file name"
         super(Install, self).__init__(ignore_dep)
@@ -292,27 +315,8 @@ def install_single_file(pkg_location, upgrade = False):
 
 def install_single_name(name, upgrade = False):
     """install a single package from ID"""
-    # find package in repository
-    repo = packagedb.which_repo(name)
-    if repo:
-        repo = ctx.repodb.get_repo(repo)
-        pkg = packagedb.get_package(name)
-
-        # FIXME: let pkg.packageURI be stored as URI type rather than string
-        pkg_uri = URI(pkg.packageURI)
-        if pkg_uri.is_absolute_path():
-            pkg_path = str(pkg.packageURI)
-        else:
-            pkg_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
-                                    str(pkg_uri.path()))
-
-        ctx.ui.debug(_("Package URI: %s") % pkg_path)
-
-        # Package will handle remote file for us!
-        install_single_file(pkg_path, upgrade)
-    else:
-        raise Error(_("Package %s not found in any active repository.") % name)
-
+    install = Install.from_name(name)
+    install.install(not upgrade)
 
 class Remove(AtomicOperation):
     
