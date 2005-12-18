@@ -52,6 +52,7 @@ def init_dbenv():
                 verfile = file(verfn, 'w')
                 verfile.write(pisi.__dbversion__)
                 verfile.close()
+                ctx.ui.warning(_('If you are upgrading from an older version, you may have to run rebuild-db.'))
             else:
                 raise Error(_('Cannot attain write access to database environment'))
     else:
