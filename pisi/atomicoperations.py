@@ -106,14 +106,14 @@ class Install(AtomicOperation):
             self.register_comar_scripts()
 
         self.config_later = False
-        if self.metadata.package.providesComar:
+        if 'Package' in self.metadata.package.providesComar:
             if ctx.comar:
                 ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
                 comariface.run_postinstall(self.pkginfo.name)
                 ctx.ui.notify(pisi.ui.configured, package = self.pkginfo, files = self.files)
             else:
                 self.config_later = True
-        
+
         txn = ctx.dbenv.txn_begin()
         try:
             self.update_databases(txn)
