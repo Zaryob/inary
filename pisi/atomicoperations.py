@@ -106,7 +106,7 @@ class Install(AtomicOperation):
             self.register_comar_scripts()
 
         self.config_later = False
-        if 'Package' in self.metadata.package.providesComar:
+        if 'System.Package' in [x.om for x in self.metadata.package.providesComar]:
             if ctx.comar:
                 ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
                 comariface.run_postinstall(self.pkginfo.name)
