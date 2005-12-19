@@ -1,31 +1,31 @@
+# translation of tr.po to
 # translation of tr.po to Türkçe
 # PiSi Translation
 # Copyright (C) 2005 Free Software Foundation, Inc.
 # Eray Ozkural <eray@uludag.org.tr>
-#
 # Eray Özkural <eray@uludag.org.tr>, 2005.
 # Eray Ozkural <eray@uludag.org.tr>, 2005.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "POT-Creation-Date: 2005-12-19 17:22+EET\n"
-"PO-Revision-Date: 2005-12-15 04:33+0200\n"
+"PO-Revision-Date: 2005-12-19 17:26+0200\n"
 "Last-Translator: Eray Ozkural <eray@uludag.org.tr>\n"
-"Language-Team: Türkçe <tr@li.org>\n"
+"Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=1; plural=0;\n"
-"X-Generator: KBabel 1.11\n"
+"X-Generator: KBabel 1.10.2\n"
 
 #: pisi-cli:35
 msgid "Keyboard Interrupt: Exiting..."
 msgstr "Klavye kesmesi: Çıkıyor..."
 
 #: pisi-cli:38
-#, fuzzy
 msgid "Program Terminated."
-msgstr "Düzeltilemeyen Hata: Program Sonlandırıldı."
+msgstr "Program sonlandırıldı."
 
 #: pisi-cli:42
 msgid ""
@@ -49,8 +49,7 @@ msgstr "Geri-iz:"
 
 #: pisi-cli:65
 msgid "Use --debug to see a traceback."
-msgstr ""
-"Bir geri iz (traceback) görmek için lütfen --debug seçeneğini kullanın. "
+msgstr "Bir geri iz (traceback) görmek için lütfen --debug seçeneğini kullanın. "
 
 #: pisi/actionsapi/autotools.py:36
 msgid ""
@@ -434,8 +433,7 @@ msgstr "PİSİ kaynak paketi %s inşa ediliyor"
 
 #: pisi/build.py:197
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr ""
-"IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
+msgstr "IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
 
 #: pisi/build.py:201
 msgid "CCache detected..."
@@ -494,16 +492,14 @@ msgid "unable to call function from actions: %s"
 msgstr "fonksiyon eylemlerden çağırılamıyor: %s"
 
 #: pisi/build.py:364
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Emniyet mandalı: taban geliştirme sistemi system.devel'den izleyen paketler "
 "ek olarak yüklenecek:"
 
 #: pisi/build.py:369
 msgid "Safety switch: system.devel is already installed"
-msgstr ""
-"Emniyet mandalı: taban geliştirme sistemi system.devel halihazırda kurulu"
+msgstr "Emniyet mandalı: taban geliştirme sistemi system.devel halihazırda kurulu"
 
 #: pisi/build.py:371
 msgid "Safety switch: the component system.devel cannot be found"
@@ -1013,10 +1009,8 @@ msgstr "detaylı yükleme bilgisi göster"
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/commands.py:653 pisi/cli/commands.py:946
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr ""
-"Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr "Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
 
 #: pisi/cli/commands.py:668
 msgid ""
@@ -1502,8 +1496,7 @@ msgstr "Halihazırda yerleştirilmiş."
 
 #: pisi/lockeddbshelve.py:46
 msgid "Database version insufficient. Please run rebuild-db command."
-msgstr ""
-"Veritabanı versiyonu yetersiz. Lütfen rebuild-db komutunu çalıştırınız."
+msgstr "Veritabanı versiyonu yetersiz. Lütfen rebuild-db komutunu çalıştırınız."
 
 #: pisi/lockeddbshelve.py:48
 msgid "Database version greater than PiSi version. You need a newer PiSi."
@@ -1542,8 +1535,7 @@ msgid "Cannot attain read or write access to database %s"
 msgstr "Veritabanı %s için okuma ya da yazma erişimi edinilemedi"
 
 #: pisi/lockeddbshelve.py:115
-msgid ""
-"Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
+msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
 msgstr ""
 "Bayraklar 'r', 'w', 'c' or 'n'den birisi olmalı ya da bsddb.db.DB_* "
 "bayraklarını kullanmalı"
@@ -1923,15 +1915,14 @@ msgstr "'%s' kaynak paketi hatalı sürüm bilgisine sahip"
 
 #: tools/repostats.py:435
 msgid "Source package '%s' lacks release %d"
-msgstr ""
+msgstr "Kaynak paketi '%s' sürüm %d'ye sahip değil"
 
 #: tools/repostats.py:443
 msgid "Source package '%s' has no first release"
 msgstr "'%s' kaynak paketinin ilk sürüm bilgisi yok"
 
 #: tools/repostats.py:478
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 
 #: tools/repostats.py:561
@@ -1965,3 +1956,4 @@ msgstr "%d hata ile karşılaşıldı. Lütfen bunları en kısa zamanda düzelt
 #: tools/repostats.py:678
 msgid "These dependencies are not available in repository:\n"
 msgstr "Bağımlılığa neden olan bu paketler depoda bulunmuyor:\n"
+
