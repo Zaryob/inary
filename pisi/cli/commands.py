@@ -70,7 +70,8 @@ class Command(object):
         self.options()
         self.commonopts()
         (self.options, self.args) = self.parser.parse_args()
-        self.args.pop(0)                # exclude command arg
+        if self.args:
+            self.args.pop(0)                # exclude command arg
         
         self.process_opts()
 
