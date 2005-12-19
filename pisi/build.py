@@ -553,6 +553,7 @@ class Builder:
                 fold = old_pkg.files.list
                 fold.sort(lambda x,y : cmp(x.path,y.path))
                 fnew.sort(lambda x,y : cmp(x.path,y.path))
+                    
                 if len(fnew) != len(fold):
                     changed = True
                 else:
@@ -563,6 +564,9 @@ class Builder:
                             changed = True
                             break
                         else:
+                            #FIXME: workaround for .a issue, skip .a files
+                            if fn.path.endswith('.a') and fn.type=='library':
+                                continue
                             if fo.hash != fn.hash:
                                 changed = True
                                 break
