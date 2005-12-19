@@ -43,9 +43,9 @@ class Command(object):
         list = [x.name[0] for x in Command.cmd]
         list.sort()
         for name in list:
-            command = Command.get_command(name)
-            summary = command.__doc__.split('\n')[0]
-            s += '%25s - %s\n' % (command.format_name(), summary)
+            commandcls = Command.cmd_dict[name]
+            summary = commandcls.__doc__.split('\n')[0]
+            s += '%20s - %s\n' % (commandcls.name[0], summary)
         return s
 
     @staticmethod
