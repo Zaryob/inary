@@ -266,7 +266,7 @@ def upgrade_pkg_names(A = []):
     """Re-installs packages from the repository, trying to perform
     a maximum number of upgrades."""
     
-    ignore_build = ctx.get_option('build_no')
+    ignore_build = ctx.get_option('ignore_build_no')
 
     if not A:
         # if A is empty, then upgrade all packages
