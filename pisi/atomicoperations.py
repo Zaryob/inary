@@ -173,7 +173,7 @@ class Install(AtomicOperation):
             ignore_build = ctx.config.options and ctx.config.options.ignore_build_no
             if (not ibuild) or (not pkg.build) or ignore_build:
                 # we don't look at builds to compare two package versions
-                if pkg.version == iversion and pkg.release == irelease:
+                if pkg.release == irelease:
                     self.same_ver = True
             else:
                 if pkg.build == ibuild:
