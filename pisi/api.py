@@ -274,12 +274,12 @@ def check(package):
     for file in files.list:
         if file.hash and file.type != "config" \
            and not os.path.islink('/' + file.path):
-            ctx.ui.info(_("Checking %s...") % file.path, True, True) 
+            ctx.ui.info(_("Checking %s...") % file.path, False, True) 
             if file.hash != util.sha1_file('/' + file.path):
                 corrupt.append(file)
                 ctx.ui.info("Corrupt file: %s" % file)
             else:
-                ctx.ui.info("OK", True)
+                ctx.ui.info("OK", False)
     return corrupt
 
 def index(dirs, output = 'pisi-index.xml'):
