@@ -284,7 +284,7 @@ def upgrade_pkg_names(A = []):
         (version, release, build) = ctx.installdb.get_version(x)
         pkg = packagedb.get_package(x)
 
-        if ignore_build or (not build):
+        if ignore_build or (not build) or (not pkg.build):
             if release < pkg.release:
                 Ap.append(x)
             else:
