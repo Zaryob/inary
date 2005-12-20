@@ -324,7 +324,11 @@ class Remove(AtomicOperation):
         super(Remove, self).__init__(ignore_dep)
         self.package_name = package_name
         self.package = packagedb.get_package(self.package_name)
-        self.files = ctx.installdb.files(self.package_name)
+        try:
+            self.files = ctx.installdb.files(self.package_name)
+        except:
+            # for some reason file was deleted, we still allow removes!
+            self.files = Files()
         
     def run(self):
         """Remove a single package"""
@@ -396,7 +400,7 @@ class Remove(AtomicOperation):
     
     def remove_db(self, txn):
         ctx.installdb.remove(self.package_name, txn)
-        ctx.filesdb.remove_files(ctx.installdb.files(self.package_name), txn)
+        ctx.filesdb.remove_files(self.files, txn)
         if packagedb.thirdparty_packagedb.has_package(self.package_name, txn):
             packagedb.thirdparty_packagedb.remove_package(self.package_name, txn)
         if packagedb.inst_packagedb.has_package(self.package_name, txn):
