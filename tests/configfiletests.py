@@ -47,8 +47,8 @@ class ConfigFileTestCase(unittest.TestCase):
         cf = self.cf
         
         #build
-        self.assert_(cf.build.CFLAGS)
-        self.assert_(cf.build.CXXFLAGS)
+        self.assert_(cf.build.cflags)
+        self.assert_(cf.build.cxxflags)
 
         #general
         self.assert_(cf.general.destinationdirectory)

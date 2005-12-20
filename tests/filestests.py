@@ -25,7 +25,7 @@ class FilesTestCase(testcase.TestCase):
         testcase.TestCase.setUp(self, database=False)
     
     def testFileInfo(self):
-        f1 = files.File(path = '/usr/bin/zibidi')
-        f2 = files.File(path = '/usr/bin/kopus', type='exec', size=13, hash="abugubu")
+        f1 = files.FileInfo(path = '/usr/bin/zibidi')
+        f2 = files.FileInfo(path = '/usr/bin/kopus', type='exec', size=13, hash="abugubu")
 
 suite = unittest.makeSuite(FilesTestCase)
