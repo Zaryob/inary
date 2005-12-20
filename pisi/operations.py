@@ -289,13 +289,13 @@ def upgrade_pkg_names(A = []):
                 Ap.append(x)
             else:
                 ctx.ui.info(_('Package %s is already at the latest release %s.')
-                            % pkg.release)
+                            % (pkg.name, pkg.release))
         else:
             if build < pkg.build:
                 Ap.append(x)
             else:
                 ctx.ui.info(_('Package %s is already at the latest build %s.')
-                            % pkg.build)
+                            % (pkg.name, pkg.build))
     A = set(Ap)
 
     if len(A)==0:
