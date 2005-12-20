@@ -15,6 +15,7 @@
 # standard library modules
 import os
 import stat
+import shutil
 import tarfile
 import zipfile
 
@@ -179,16 +180,18 @@ class ArchiveZip(ArchiveBase):
                         perm |= 0x00000100
                         os.chmod(d, perm)
                     continue
-
+                    
                 # check that output dir is present
                 util.check_dir(os.path.dirname(ofile))
 
                 # remove output file we might be overwriting.
                 # (also check for islink? for broken symlinks...)
-                if os.path.exists(ofile) or os.path.islink(ofile):
+                if os.path.isfile(ofile) or os.path.islink(ofile):
                     os.remove(ofile)
- 
+                     
                 if info.external_attr == self.symmagic:
+                    if os.path.isdir(ofile):
+                        shutil.rmtree(ofile) # a rare case, the file used to be a dir, now it is a symlink!
                     target = zip_obj.read(info.filename)
                     os.symlink(target, ofile)
                 else:
