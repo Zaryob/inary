@@ -694,12 +694,9 @@ If package specs are given, they should be the names of package dirs under /var/
                 #FIXME: how good is deleting *all* databases?
                 for db in os.listdir(ctx.config.db_dir()):
                     os.unlink(pisi.util.join_path(ctx.config.db_dir(), db))
+                # construct new database version
                 self.init(database=True)
                 self.rebuild_db()
-                verfn = util.join_path(pisi.context.config.db_dir(), 'dbversion')
-                verfile = file(verfn, 'w')
-                verfile.write(pisi.__dbversion__)
-                verfile.close()
 
         self.finalize()
 
