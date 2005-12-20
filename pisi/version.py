@@ -33,8 +33,9 @@ keywords = {"alpha": 0,
             "beta" : 1,
             "pre"  : 2,
             "rc"   : 3,
-            "NOKEY" : 4,
-            "p"    : 5}
+            "m"    : 4,
+            "NOKEY" : 5,
+            "p"    : 6}
 
 # helper functions
 def has_keyword(versionitem):
