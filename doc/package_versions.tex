@@ -79,6 +79,7 @@ take.
   \item \textbf{pre} Source/Pacgage passed the beta state but stable
     version is not relased yet.
   \item \textbf{rc} Source/Package is a release-candidate.
+  \item \textbf{m} Source/Package is a milestone before stable version.
   \item \textbf{p} Source/Package is released and some patches are
     applied after the release. This is the patch level.
 \end{itemize}
@@ -88,7 +89,7 @@ character \textbf{\_}. And there must allways be a number after a
 suffix. \textbf{Example}: packagename-1.0\_beta1
 
 The basic order of the priorities for suffixes is:\newline
-\emph{p $>$ (no suffix) $>$ rc $>$ pre $>$ beta $>$ alpha}.
+\emph{p $>$ (no suffix) $>$ m $>$ rc $>$ pre $>$ beta $>$ alpha}.
 
 The scope of a source version string is global in the literal
 sense. It shall not vary from repository to repository.
