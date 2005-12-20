@@ -114,14 +114,12 @@ def list_available():
     return available
 
 def list_upgradable():
-    ignore_build = ctx.config.options and ctx.config.options.ignore_build_no
+    ignore_build = ctx.get_option('ignore_build_no')
 
     A = ctx.installdb.list_installed()
     # filter packages that are not upgradable
     Ap = []
     for x in A:
-        if not ctx.installdb.is_installed(x):
-            continue
         (version, release, build) = ctx.installdb.get_version(x)
         pkg = packagedb.get_package(x)
         if ignore_build or (not build):
