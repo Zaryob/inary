@@ -266,7 +266,7 @@ def upgrade_pkg_names(A = []):
     """Re-installs packages from the repository, trying to perform
     a maximum number of upgrades."""
     
-    ignore_build = ctx.config.options and ctx.config.options.ignore_build_no
+    ignore_build = ctx.get_option('build_no')
 
     if not A:
         # if A is empty, then upgrade all packages
@@ -284,19 +284,12 @@ def upgrade_pkg_names(A = []):
         (version, release, build) = ctx.installdb.get_version(x)
         pkg = packagedb.get_package(x)
 
-        # First check version. If they are same, check release. Again
-        # if releases are same and checking buildno is premitted,
-        # check build number.
-        if version < pkg.version:
-            Ap.append(x)
-        elif version == pkg.version:
+        if ignore_build or (not build):
             if release < pkg.release:
                 Ap.append(x)
-            if release == pkg.release and build and not ignore_build:
-                if build < pkg.build:
-                    Ap.append(x)
+        elif build < pkg.build:
+                Ap.append(x)
         else:
-            #ctx.ui.info('Package %s cannot be upgraded. ' % x)
             ctx.ui.info(_('Package %s is already at its latest \
 version %s, release %s, build %s.')
                     % (x, pkg.version, pkg.release, pkg.build))
