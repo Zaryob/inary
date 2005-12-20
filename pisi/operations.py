@@ -287,12 +287,15 @@ def upgrade_pkg_names(A = []):
         if ignore_build or (not build):
             if release < pkg.release:
                 Ap.append(x)
-        elif build < pkg.build:
-                Ap.append(x)
+            else:
+                ctx.ui.info(_('Package %s is already at the latest release %s.')
+                            % pkg.release)
         else:
-            ctx.ui.info(_('Package %s is already at its latest \
-version %s, release %s, build %s.')
-                    % (x, pkg.version, pkg.release, pkg.build))
+            if build < pkg.build:
+                Ap.append(x)
+            else:
+                ctx.ui.info(_('Package %s is already at the latest build %s.')
+                            % pkg.build)
     A = set(Ap)
 
     if len(A)==0:
