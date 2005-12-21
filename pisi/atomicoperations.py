@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright (C) 2005, TUBITAK/UEKAE
 #
@@ -326,10 +327,12 @@ class Remove(AtomicOperation):
         self.package = packagedb.get_package(self.package_name)
         try:
             self.files = ctx.installdb.files(self.package_name)
-        except:
+        except pisi.Error, e:
             # for some reason file was deleted, we still allow removes!
+            ctx.ui.error(e)
+            ctx.ui.warning(_('File list could not be read for package %s, continuing removal.') % package_name)
             self.files = Files()
-        
+
     def run(self):
         """Remove a single package"""
         inst_packagedb = packagedb.inst_packagedb
@@ -393,10 +396,10 @@ class Remove(AtomicOperation):
             # TODO: store this somewhere
             pass
 
+    @staticmethod
     def remove_pisi_files(path):
+        #TODO: what does this have to do with pisi files??
         util.clean_dir(path)
-
-    remove_pisi_files = staticmethod(remove_pisi_files)
     
     def remove_db(self, txn):
         ctx.installdb.remove(self.package_name, txn)
