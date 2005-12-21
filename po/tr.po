@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2005-12-21 00:28+EET\n"
+"POT-Creation-Date: 2005-12-21 19:16+EET\n"
 "PO-Revision-Date: 2005-12-21 00:30+0200\n"
 "Last-Translator: Eray Ozkural <eray@uludag.org.tr>\n"
 "Language-Team:  <en@li.org>\n"
@@ -49,7 +49,8 @@ msgstr "Geri-iz:"
 
 #: pisi-cli:65
 msgid "Use --debug to see a traceback."
-msgstr "Bir geri iz (traceback) görmek için lütfen --debug seçeneğini kullanın. "
+msgstr ""
+"Bir geri iz (traceback) görmek için lütfen --debug seçeneğini kullanın. "
 
 #: pisi/actionsapi/autotools.py:36
 msgid ""
@@ -307,119 +308,123 @@ msgstr ""
 msgid "Archive type not recognized"
 msgstr "Arşiv tipi tanınmadı"
 
-#: pisi/atomicoperations.py:76
+#: pisi/atomicoperations.py:77
 msgid "Package URI: %s"
 msgstr "Paket URI'ı: %s"
 
-#: pisi/atomicoperations.py:80
+#: pisi/atomicoperations.py:81
 msgid "Package %s not found in any active repository."
 msgstr "Paket %s hiç bir etkin depoda bulunamadı."
 
-#: pisi/atomicoperations.py:93
+#: pisi/atomicoperations.py:94
 msgid "Installing %s, version %s, release %s, build %s"
 msgstr "%s paketi, versiyon %s, sürüm %s, inşa %s yerleştiriliyor."
 
-#: pisi/atomicoperations.py:146
+#: pisi/atomicoperations.py:147
 msgid "Package conflicts %s"
 msgstr "Paket %s ile çatışmakta."
 
-#: pisi/atomicoperations.py:151
+#: pisi/atomicoperations.py:152
 msgid "Dependencies for %s not satisfied"
 msgstr "%s için bağımlılıklar sağlanmadı."
 
-#: pisi/atomicoperations.py:153
+#: pisi/atomicoperations.py:154
 msgid "Package not installable"
 msgstr "Paket yerleştirilebilir durumda değil."
 
-#: pisi/atomicoperations.py:184
+#: pisi/atomicoperations.py:185
 msgid "Re-install same version package?"
 msgstr "Aynı versiyona sahip paketi yeniden yerleştireyim mi?"
 
-#: pisi/atomicoperations.py:185
+#: pisi/atomicoperations.py:186
 msgid "Package re-install declined"
 msgstr "Paket yeniden yerleştirmeye izin verilmedi."
 
-#: pisi/atomicoperations.py:191
+#: pisi/atomicoperations.py:192
 msgid "Upgrading to new upstream version"
 msgstr "Yeni versiyona yukseltiliyor."
 
-#: pisi/atomicoperations.py:194
+#: pisi/atomicoperations.py:195
 msgid "Upgrading to new distribution release"
 msgstr "Yeni dağıtım sürümüne yukseltiliyor."
 
-#: pisi/atomicoperations.py:198
+#: pisi/atomicoperations.py:199
 msgid "Upgrading to new distribution build"
 msgstr "Yeni dağıtım inşasına yukseltiliyor."
 
-#: pisi/atomicoperations.py:205
+#: pisi/atomicoperations.py:206
 msgid "Downgrade to old upstream version?"
 msgstr "Eski kaynak versiyonuna dönülsün mu?"
 
-#: pisi/atomicoperations.py:207
+#: pisi/atomicoperations.py:208
 msgid "Downgrade to old distribution release?"
 msgstr "Eski dağıtım sürümüne dönülsün mu?"
 
-#: pisi/atomicoperations.py:209
+#: pisi/atomicoperations.py:210
 msgid "Downgrade to old distribution build?"
 msgstr "Eski dağıtım inşasına dönülsün mu?"
 
-#: pisi/atomicoperations.py:211
+#: pisi/atomicoperations.py:212
 msgid "Package downgrade declined"
 msgstr "Paket eskileştirilmesine izin verilmedi."
 
-#: pisi/atomicoperations.py:240
+#: pisi/atomicoperations.py:241
 msgid "Storing %s, "
 msgstr "%s saklanıyor, "
 
-#: pisi/atomicoperations.py:243
+#: pisi/atomicoperations.py:244
 msgid "Storing %s."
 msgstr "%s saklanıyor."
 
-#: pisi/atomicoperations.py:250
+#: pisi/atomicoperations.py:251
 msgid "Storing %s"
 msgstr "%s saklanıyor"
 
-#: pisi/atomicoperations.py:295
+#: pisi/atomicoperations.py:296
 msgid "Regenerating /etc/ld.so.cache..."
 msgstr "/etc/ld.so.cache yeniden yaratılıyor..."
 
-#: pisi/atomicoperations.py:298
+#: pisi/atomicoperations.py:299
 msgid "Bypassing ldconfig"
 msgstr "ldconfig esgeçiliyor"
 
-#: pisi/atomicoperations.py:337
+#: pisi/atomicoperations.py:333
+msgid "File list could not be read for package %s, continuing removal."
+msgstr ""
+
+#: pisi/atomicoperations.py:340
 msgid "Removing package %s"
 msgstr "%s paketi kaldırılıyor."
 
-#: pisi/atomicoperations.py:340
+#: pisi/atomicoperations.py:343
 msgid "Trying to remove nonexistent package "
 msgstr "Varolmayan paket kaldırılmaya çalışıldı."
 
-#: pisi/atomicoperations.py:384
+#: pisi/atomicoperations.py:387
 msgid "Not removing non-file, non-link %s"
 msgstr "Dosya ya da bağ olmayan '%s' kaldırılmıyor."
 
-#: pisi/atomicoperations.py:469
+#: pisi/atomicoperations.py:472
 msgid "Metadata XML '%s' cannot be found"
 msgstr "Metadata XML '%s' bulunamıyor"
 
-#: pisi/atomicoperations.py:477
+#: pisi/atomicoperations.py:480
 msgid "MetaData format wrong (%s)"
 msgstr "MetaData biçimi yanlış (%s)"
 
-#: pisi/atomicoperations.py:489
+#: pisi/atomicoperations.py:492
 msgid "* Adding '%s' to db... "
 msgstr "* '%s' veritabanına ekleniyor... "
 
-#: pisi/atomicoperations.py:493
+#: pisi/atomicoperations.py:496
 msgid "Files XML '%s' cannot be found"
 msgstr "Files XML '%s' bulunamıyor"
 
-#: pisi/atomicoperations.py:499 pisi/package.py:111
+#: pisi/atomicoperations.py:502 pisi/package.py:111
 msgid "Invalid %s"
 msgstr "Geçersiz %s"
 
-#: pisi/atomicoperations.py:506
+#: pisi/atomicoperations.py:509
 msgid "OK."
 msgstr "Tamam."
 
@@ -433,7 +438,8 @@ msgstr "PİSİ kaynak paketi %s inşa ediliyor"
 
 #: pisi/build.py:197
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr "IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
+msgstr ""
+"IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
 
 #: pisi/build.py:201
 msgid "CCache detected..."
@@ -492,14 +498,16 @@ msgid "unable to call function from actions: %s"
 msgstr "fonksiyon eylemlerden çağırılamıyor: %s"
 
 #: pisi/build.py:364
-msgid "Safety switch: following extra packages in system.devel will be installed: "
+msgid ""
+"Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Emniyet mandalı: taban geliştirme sistemi system.devel'den izleyen paketler "
 "ek olarak yüklenecek:"
 
 #: pisi/build.py:369
 msgid "Safety switch: system.devel is already installed"
-msgstr "Emniyet mandalı: taban geliştirme sistemi system.devel halihazırda kurulu"
+msgstr ""
+"Emniyet mandalı: taban geliştirme sistemi system.devel halihazırda kurulu"
 
 #: pisi/build.py:371
 msgid "Safety switch: the component system.devel cannot be found"
@@ -1009,8 +1017,10 @@ msgstr "detaylı yükleme bilgisi göster"
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/commands.py:653 pisi/cli/commands.py:943
-msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr "Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
+msgid ""
+"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr ""
+"Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
 
 #: pisi/cli/commands.py:668
 msgid ""
@@ -1496,7 +1506,8 @@ msgstr "Halihazırda yerleştirilmiş."
 
 #: pisi/lockeddbshelve.py:46
 msgid "Database version insufficient. Please run rebuild-db command."
-msgstr "Veritabanı versiyonu yetersiz. Lütfen rebuild-db komutunu çalıştırınız."
+msgstr ""
+"Veritabanı versiyonu yetersiz. Lütfen rebuild-db komutunu çalıştırınız."
 
 #: pisi/lockeddbshelve.py:48
 msgid "Database version greater than PiSi version. You need a newer PiSi."
@@ -1535,7 +1546,8 @@ msgid "Cannot attain read or write access to database %s"
 msgstr "Veritabanı %s için okuma ya da yazma erişimi edinilemedi"
 
 #: pisi/lockeddbshelve.py:115
-msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
+msgid ""
+"Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
 msgstr ""
 "Bayraklar 'r', 'w', 'c' or 'n'den birisi olmalı ya da bsddb.db.DB_* "
 "bayraklarını kullanmalı"
@@ -1926,7 +1938,8 @@ msgid "Source package '%s' has no first release"
 msgstr "'%s' kaynak paketinin ilk sürüm bilgisi yok"
 
 #: tools/repostats.py:478
-msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgid ""
+"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 
 #: tools/repostats.py:561
@@ -1960,4 +1973,3 @@ msgstr "%d hata ile karşılaşıldı. Lütfen bunları en kısa zamanda düzelt
 #: tools/repostats.py:678
 msgid "These dependencies are not available in repository:\n"
 msgstr "Bağımlılığa neden olan bu paketler depoda bulunmuyor:\n"
-
