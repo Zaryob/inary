@@ -73,23 +73,23 @@ class Fetcher:
         """Return value: Fetched file's full path.."""
 
         if not self.url.filename():
-            self.err(_("Filename error"))
+            self.err(_('Filename error'))
 
         if not os.access(self.filedest, os.W_OK):
-            self.err(_("Access denied to write to dest dir"))
+            self.err(_('Access denied to write to destination directory'))
 
         archivefile = os.path.join(self.filedest, self.url.filename())
 
         if self.url.is_local_file():
-            self.fetchLocalFile(archivefile + ".part")
+            self.fetchLocalFile(archivefile + '.part')
         else:
-            self.fetchRemoteFile(archivefile + ".part")
+            self.fetchRemoteFile(archivefile + '.part')
 
-        if os.stat(archivefile + ".part").st_size == 0:
+        if os.stat(archivefile + '.part').st_size == 0:
             os.remove(archivefile + '.part')
             self.err(_('A problem occured. Please check the archive address and/or permissions again.'))
         else:
-            move(archivefile + ".part", archivefile)
+            move(archivefile + '.part', archivefile)
 
         return archivefile 
 
@@ -99,7 +99,7 @@ class Fetcher:
         s_time = time()
         Tdiff = lambda: time() - s_time
         size = existsize = self.existsize
-        symbol, depth = "B/s", 0
+        symbol, depth = 'B/s', 0
         st = time()
         chunk = fileURI.read(bs)
         size += len(chunk)
@@ -146,9 +146,9 @@ class Fetcher:
         url = self.url
 
         if not os.access(url.path(), os.F_OK):
-            self.err(_("No such file or no permission to read"))
+            self.err(_('No such file or no permission to read'))
 
-        dest = open(archivefile, "w")
+        dest = open(archivefile, 'w')
         totalsize = os.path.getsize(url.path())
         fileObj = open(url.path())
         self._do_grab(fileObj, dest, totalsize)
@@ -157,11 +157,11 @@ class Fetcher:
         from httplib import HTTPException
 
         if os.path.exists(archivefile):
-            if self.scheme == "http" or self.scheme == "https" or self.scheme == "ftp":
+            if self.scheme == 'http' or self.scheme == 'https' or self.scheme == 'ftp':
                 self.existsize = os.path.getsize(archivefile)
-                dest = open(archivefile, "ab")
+                dest = open(archivefile, 'ab')
         else:
-            dest = open(archivefile, "wb")
+            dest = open(archivefile, 'wb')
  
         uri = self.url.uri
 
@@ -195,7 +195,7 @@ class Fetcher:
 
     def formatRequest(self, request):
         if self.url.auth_info():
-            enc = encodestring("%s:%s" % self.url.auth_info())
+            enc = encodestring('%s:%s' % self.url.auth_info())
             request.add_header('Authorization', 'Basic %s' % enc)
 
         range_handlers = {
@@ -216,7 +216,7 @@ class Fetcher:
 
 class HTTPRangeHandler(urllib2.BaseHandler):
     """ 
-    "to override the urllib2 error: 'Error 206: Partial Content'
+    to override the urllib2 error: 'Error 206: Partial Content'
     this reponse from the HTTP server is already what we expected to get.
     Don't give up, resume downloading..
     """
@@ -271,12 +271,12 @@ class FTPRangeHandler(urllib2.FTPHandler):
                 # beginning of range is larger than file
                 raise FetchError(_('Requested Range Not Satisfiable'))
             
-            headers = ""
+            headers = ''
             mtype = guess_type(req.get_full_url())[0]
             if mtype:
-                headers += "Content-Type: %s\n" % mtype
+                headers += 'Content-Type: %s\n' % mtype
             if retrlen is not None and retrlen >= 0:
-                headers += "Content-Length: %d\n" % retrlen
+                headers += 'Content-Length: %d\n' % retrlen
 
             try:    
                 from cStringIO import StringIO
