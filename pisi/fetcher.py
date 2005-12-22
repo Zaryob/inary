@@ -85,7 +85,12 @@ class Fetcher:
         else:
             self.fetchRemoteFile(archivefile + ".part")
 
-        move(archivefile + ".part", archivefile)
+        if os.stat(archivefile + ".part").st_size == 0:
+            os.remove(archivefile + '.part')
+            self.err(_('A problem occured. Please check the archive address and/or permissions again.'))
+        else:
+            move(archivefile + ".part", archivefile)
+
         return archivefile 
 
     def _do_grab(self, fileURI, dest, totalsize):
@@ -160,20 +165,27 @@ class Fetcher:
  
         uri = self.url.uri
 
+        flag = 1
         try:
-            fileObj = urllib2.urlopen(self.formatRequest(urllib2.Request(uri)))
-            headers = fileObj.info()
-        except ValueError, e:
-            self.err(_('Cannot fetch %s; value error: %s') % (uri, e))
-        except urllib2.HTTPError, e:
-            self.err(_('Cannot fetch %s; %s') % (uri, e))
-        except urllib2.URLError, e:
-            self.err(_('Cannot fetch %s; %s') % (uri, e[-1][-1]))
-        except OSError, e:
-            self.err(_('Cannot fetch %s; %s') % (uri, e))
-        except HTTPException, e:
-            self.err(_('Cannot fetch %s; (%s): %s') % (uri, e.__class__.__name__, e))
-
+            try:
+                fileObj = urllib2.urlopen(self.formatRequest(urllib2.Request(uri)))
+                headers = fileObj.info()
+                flag = 0
+            except ValueError, e:
+                self.err(_('Cannot fetch %s; value error: %s') % (uri, e))
+            except urllib2.HTTPError, e:
+                self.err(_('Cannot fetch %s; %s') % (uri, e))
+            except urllib2.URLError, e:
+                self.err(_('Cannot fetch %s; %s') % (uri, e[-1][-1]))
+            except OSError, e:
+                self.err(_('Cannot fetch %s; %s') % (uri, e))
+            except HTTPException, e:
+                self.err(_('Cannot fetch %s; (%s): %s') % (uri, e.__class__.__name__, e))
+        finally:
+            if flag:
+                if os.stat(archivefile).st_size == 0:
+                    os.remove(archivefile)
+            
         try:
             totalsize = int(headers['Content-Length']) + self.existsize
         except:
