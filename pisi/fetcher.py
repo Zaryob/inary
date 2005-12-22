@@ -50,7 +50,6 @@ def fetch_url(url, dest, progress=None):
     fetch.fetch()
     if progress:
         pass
-        #ctx.ui.info('\n')
 
 
 class Fetcher:
