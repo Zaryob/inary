@@ -44,10 +44,13 @@ class Error(pisi.Error):
     pass
 
 
+# this DAILYWTF approach will be removed in the next release.
+
 # Helper Functions
 def get_file_type(path, pinfoList):
     """Return the file type of a path according to the given PathInfo
     list"""
+    # not only confusing but totally non-deterministic behavior -- exa
     # The usage of depth is somewhat confusing. It is used for finding
     # the best match to paths(in pinfolist). For an example, if paths
     # contain ['/usr/share','/usr/share/doc'] and path is
@@ -55,6 +58,7 @@ def get_file_type(path, pinfoList):
     # the second item.
     depth = 0
     ftype = ""
+    permanent = False
     path = "/"+path # we need a real path.
     for pinfo in pinfoList:
         if util.subpath(pinfo.path, path):
@@ -62,7 +66,8 @@ def get_file_type(path, pinfoList):
             if depth < length:
                 depth = length
                 ftype = pinfo.fileType
-    return ftype
+                permanent = pinfo.permanent
+    return ftype, permanent
 
 def check_path_collision(package, pkgList):
     """This function will check for collision of paths in a package with
@@ -482,12 +487,13 @@ class Builder:
             # add the files under material path 
             for fpath, fhash in util.get_file_hashes(path, collisions, install_dir):
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
-                ftype = get_file_type(frpath, package.files)
+                ftype, permanent = get_file_type(frpath, package.files)
                 try: # broken links and empty dirs can cause problem
                     fsize = os.path.getsize(fpath)
                 except OSError:
                     fsize = None
-                d[frpath] = FileInfo(path=frpath, type=ftype, size=fsize, hash=fhash)
+                d[frpath] = FileInfo(path=frpath, type=ftype, permanent=permanent, 
+                                     size=fsize, hash=fhash)
 
         for pinfo in package.files:
             wildcard_path = util.join_path(install_dir, pinfo.path)
