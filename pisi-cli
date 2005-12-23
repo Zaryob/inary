@@ -14,6 +14,7 @@ import sys
 import locale
 import traceback
 import exceptions
+import bsddb3.db as db
 
 import pisi.ui
 import pisi.context as ctx
@@ -37,6 +38,10 @@ def handle_exception(exception, value, tb):
     elif isinstance(value, pisi.Error):
         ui.error(_("Program Terminated."))
         show_traceback = ctx.get_option('debug')
+    elif isinstance(value, db.DBRunRecoveryError):
+        ui.error(_("""A database operation has been aborted. You should run pisi
+again for normal DB recovery procedure. Make sure you have free disk space. 
+You only have to run rebuild-db if there is file corruption."""))
     elif isinstance(value, pisi.Exception):
         show_traceback = True
         ui.error(_("""Unhandled internal exception.
