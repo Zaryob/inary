@@ -374,6 +374,10 @@ class Remove(AtomicOperation):
         # usage. Currently we'are doing it like rpm does, saving
         # with a prefix and leaving the user to edit it. In the future
         # we'll have a plan for these configuration files.
+        if fileinfo.permanent:
+            # do not remove precious files :)
+            # just write anything permanent="true" for instance
+            return
         if fileinfo.type == "config":
             if os.path.isfile(fpath):
                 os.rename(fpath, fpath + ".oldconfig")
