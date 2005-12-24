@@ -474,8 +474,9 @@ def plan_remove(A):
             pkg = packagedb.get_package(x)
             rev_deps = packagedb.get_rev_deps(x)
             for (rev_dep, depinfo) in rev_deps:
-                # we don't deal with unsatisfied dependencies
-                if packagedb.has_package(rev_dep) and \
+                # we don't deal with uninstalled rev deps
+                # and unsatisfied dependencies (this is important, too)
+                if packagedb.inst_packagedb.has_package(rev_dep) and \
                    dependency.installed_satisfies_dep(depinfo):
                     if not rev_dep in G_f.vertices():
                         Bp.add(rev_dep)
