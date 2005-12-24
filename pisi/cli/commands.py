@@ -545,7 +545,7 @@ Usage: info <package1> <package2> ... <packagen>
                 #if self.options.long:
                 ctx.ui.info(unicode(component))
             else: # then assume it was a package                
-                info_package(arg)
+                self.info_package(arg)
         self.finalize()
 
 
