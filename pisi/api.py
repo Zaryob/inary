@@ -197,7 +197,7 @@ def configure_pending():
                                         False,
                                         False)
                 pkg_path = util.join_path(ctx.config.lib_dir(),
-                                          'package/' + pkgname)
+                                          'package', pkgname)
                 m = MetaData()
                 metadata_path = util.join_path(pkg_path, ctx.const.metadata_xml)
                 m.read(metadata_path)
