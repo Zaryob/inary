@@ -217,11 +217,6 @@ class SpecFile(XmlFile):
     t_History = [ [Update], autoxml.mandatory]
     t_Components = [ [component.Component], autoxml.optional, "Component"]
 
-    #we're not doing this with the init hook right now
-    #def init(self, tag = "PISI"):
-        #ignore tag
-        #autoxml.__init__(self, tag)
-
     def read_hook(self, errs):
         """Read PSPEC file"""
         self.merge_tags()
