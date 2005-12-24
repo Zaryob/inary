@@ -63,7 +63,7 @@ class AdditionalFile:
             s += '(%s)' % self.permission
         return s
 
-        
+
 class Patch:
     
     s_Filename = [autoxml.String, autoxml.mandatory]
