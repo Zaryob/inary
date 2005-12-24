@@ -98,24 +98,24 @@ class Fetcher:
         bs, tt, = 1024, int(time())
         s_time = time()
         Tdiff = lambda: time() - s_time
-        size = existsize = self.existsize
+        downloadedsize = existsize = self.existsize
         symbol, depth = 'B/s', 0
         st = time()
         chunk = fileURI.read(bs)
-        size += len(chunk)
+        downloadedsize += len(chunk)
 
         if self.progress:
             p = self.progress(totalsize, existsize)
-            self.percent = p.update(size)
+            self.percent = p.update(downloadedsize)
             self.complete = False
 
         while chunk:
             dest.write(chunk)
             chunk = fileURI.read(bs)
-            size += len(chunk)
+            downloadedsize += len(chunk)
             ct = time()
             if int(tt) != int(ct):
-                self.rate = (size - existsize) / (ct - st)
+                self.rate = (downloadedsize - existsize) / (ct - st)
 
                 if self.percent:
                     self.eta  = '%02d:%02d:%02d' %\
@@ -129,11 +129,13 @@ class Fetcher:
                 tt = time()
 
             if self.progress:
-                if p.update(size):
+                if p.update(downloadedsize):
                     self.percent = p.percent
                     if not self.complete:
                         ctx.ui.display_progress(filename = self.url.filename(),
                                                 percent = self.percent,
+                                                totalsize = totalsize,
+                                                downloadedsize = downloadedsize,
                                                 rate = self.rate,
                                                 eta = self.eta,
                                                 symbol = symbol)
