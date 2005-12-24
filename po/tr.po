@@ -34,6 +34,11 @@ msgid ""
 "space. \n"
 "You only have to run rebuild-db if there is file corruption."
 msgstr ""
+"Bir veritabanı işlemi yarıda kesildi. PİSİ'yi normal veritabanı  \n"
+"düzeltme işlemi için yeniden çalıştırmalısınız. Boş disk \n"
+"alanınız olması gerekir. Sadece dosya bozulması olduğu \n"
+"zaman rebuild-db komutunu kullanmanız gerekir."
+
 
 #: pisi-cli:47
 msgid ""
@@ -1970,6 +1975,7 @@ msgid ""
 "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 
+
 #: tools/repostats.py:561
 msgid ""
 "Cannot parse '%s':\n"
@@ -1980,7 +1986,7 @@ msgstr ""
 
 #: tools/repostats.py:639
 msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-msgstr ""
+msgstr "Kullanım: repostats.py [SEÇENEKLER] source-repo-path [ikili-depo-adresi]\n"
 
 #: tools/repostats.py:640
 msgid "Dont generate the web site.\n"
