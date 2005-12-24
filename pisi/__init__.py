@@ -12,7 +12,7 @@
 
 # PiSi version
 
-__version__ = "1.0"
+__version__ = "1.0.1"
 
 __dbversion__ = "1.0.2"
 
