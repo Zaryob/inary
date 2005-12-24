@@ -513,6 +513,8 @@ class Info(Command):
 
 Usage: info <package1> <package2> ... <packagen>
 
+<packagei> is either a package name or a .pisi file, 
+
 """
     __metaclass__ = autocommand
 
@@ -542,16 +544,31 @@ Usage: info <package1> <package2> ... <packagen>
                 component = ctx.componentdb.get_component(arg)
                 #if self.options.long:
                 ctx.ui.info(unicode(component))
-            else: # then assume it was a package
-                self.printinfo_package(arg)
+            else: # then assume it was a package                
+                info_package(arg)
         self.finalize()
 
-    def printinfo_package(self, arg):
+
+    def info_package(self, arg):
+        if arg.endswith(ctx.const.package_suffix):
+            metadata, files = pisi.api.info_file(arg)
+            ctx.ui.info(_('Package file: %s') % arg)
+            self.print_pkginfo(metadata, files)
+        else:
+            if ctx.installdb.is_installed(arg, True):
+                metadata, files = pisi.api.info_name(arg)
+                ctx.ui.info(_('Installed package:'))
+                self.print_pkginfo(metadata, files)
+            if packagedb.has_package(arg):
+                metadata, files = pisi.api.info_name(arg, False)
+                ctx.ui.info(_('Package found in repository:'))
+                self.print_pkginfo(metadata, files)
+
+    def print_pkginfo(self, metadata, files):
         import os.path
 
-        metadata, files = pisi.api.info(arg)
         ctx.ui.info(unicode(metadata.package))
-        revdeps =  [x[0] for x in packagedb.get_rev_deps(arg)]
+        revdeps =  [x[0] for x in packagedb.get_rev_deps(metadata.package.name)]
         print _('Reverse Dependencies:'), util.strlist(revdeps)
         if self.options.files or self.options.files_path:
             if files:
@@ -563,6 +580,7 @@ Usage: info <package1> <package2> ... <packagen>
                         print fileinfo.path
             else:
                 ctx.ui.warning(_('File information not available'))
+        print
 
 
 class Check(Command):
@@ -1013,7 +1031,7 @@ Finds a package in repository containing specified search terms
         r = pisi.api.search_package_terms(self.args, self.get_lang())
 
         for pkg in r:
-            self.printinfo_package(pkg)
+            self.info_package(pkg)
 
         self.finalize()
 
