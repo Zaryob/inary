@@ -67,7 +67,7 @@ class Fetcher:
         self.percent = 0
         self.rate = 0.0
         self.progress = None
-        self.existsize = 0
+        self.exist_size = 0
 
     def fetch (self):
         """Return value: Fetched file's full path.."""
@@ -78,44 +78,44 @@ class Fetcher:
         if not os.access(self.filedest, os.W_OK):
             self.err(_('Access denied to write to destination directory'))
 
-        archivefile = os.path.join(self.filedest, self.url.filename())
+        archive_file = os.path.join(self.filedest, self.url.filename())
 
         if self.url.is_local_file():
-            self.fetchLocalFile(archivefile + '.part')
+            self.fetchLocalFile(archive_file + '.part')
         else:
-            self.fetchRemoteFile(archivefile + '.part')
+            self.fetchRemoteFile(archive_file + '.part')
 
-        if os.stat(archivefile + '.part').st_size == 0:
-            os.remove(archivefile + '.part')
+        if os.stat(archive_file + '.part').st_size == 0:
+            os.remove(archive_file + '.part')
             self.err(_('A problem occured. Please check the archive address and/or permissions again.'))
         else:
-            move(archivefile + '.part', archivefile)
+            move(archive_file + '.part', archive_file)
 
-        return archivefile 
+        return archive_file 
 
-    def _do_grab(self, fileURI, dest, totalsize):
+    def _do_grab(self, fileURI, dest, total_size):
         symbols = [' B/s', 'KB/s', 'MB/s', 'GB/s']
         bs, tt, = 1024, int(time())
         s_time = time()
         Tdiff = lambda: time() - s_time
-        downloadedsize = existsize = self.existsize
+        downloaded_size = exist_size = self.exist_size
         symbol, depth = 'B/s', 0
         st = time()
         chunk = fileURI.read(bs)
-        downloadedsize += len(chunk)
+        downloaded_size += len(chunk)
 
         if self.progress:
-            p = self.progress(totalsize, existsize)
-            self.percent = p.update(downloadedsize)
+            p = self.progress(total_size, exist_size)
+            self.percent = p.update(downloaded_size)
             self.complete = False
 
         while chunk:
             dest.write(chunk)
             chunk = fileURI.read(bs)
-            downloadedsize += len(chunk)
+            downloaded_size += len(chunk)
             ct = time()
             if int(tt) != int(ct):
-                self.rate = (downloadedsize - existsize) / (ct - st)
+                self.rate = (downloaded_size - exist_size) / (ct - st)
 
                 if self.percent:
                     self.eta  = '%02d:%02d:%02d' %\
@@ -129,13 +129,13 @@ class Fetcher:
                 tt = time()
 
             if self.progress:
-                if p.update(downloadedsize):
+                if p.update(downloaded_size):
                     self.percent = p.percent
                     if not self.complete:
                         ctx.ui.display_progress(filename = self.url.filename(),
                                                 percent = self.percent,
-                                                totalsize = totalsize,
-                                                downloadedsize = downloadedsize,
+                                                total_size = total_size,
+                                                downloaded_size = downloaded_size,
                                                 rate = self.rate,
                                                 eta = self.eta,
                                                 symbol = symbol)
@@ -144,26 +144,26 @@ class Fetcher:
 
         dest.close()
 
-    def fetchLocalFile (self, archivefile):
+    def fetchLocalFile (self, archive_file):
         url = self.url
 
         if not os.access(url.path(), os.F_OK):
             self.err(_('No such file or no permission to read'))
 
-        dest = open(archivefile, 'w')
-        totalsize = os.path.getsize(url.path())
+        dest = open(archive_file, 'w')
+        total_size = os.path.getsize(url.path())
         fileObj = open(url.path())
-        self._do_grab(fileObj, dest, totalsize)
+        self._do_grab(fileObj, dest, total_size)
 
-    def fetchRemoteFile (self, archivefile):
+    def fetchRemoteFile (self, archive_file):
         from httplib import HTTPException
 
-        if os.path.exists(archivefile):
+        if os.path.exists(archive_file):
             if self.scheme == 'http' or self.scheme == 'https' or self.scheme == 'ftp':
-                self.existsize = os.path.getsize(archivefile)
-                dest = open(archivefile, 'ab')
+                self.exist_size = os.path.getsize(archive_file)
+                dest = open(archive_file, 'ab')
         else:
-            dest = open(archivefile, 'wb')
+            dest = open(archive_file, 'wb')
  
         uri = self.url.uri
 
@@ -185,15 +185,15 @@ class Fetcher:
                 self.err(_('Cannot fetch %s; (%s): %s') % (uri, e.__class__.__name__, e))
         finally:
             if flag:
-                if os.stat(archivefile).st_size == 0:
-                    os.remove(archivefile)
+                if os.stat(archive_file).st_size == 0:
+                    os.remove(archive_file)
             
         try:
-            totalsize = int(headers['Content-Length']) + self.existsize
+            total_size = int(headers['Content-Length']) + self.exist_size
         except:
-            totalsize = 0
+            total_size = 0
 
-        self._do_grab(fileObj, dest, totalsize)
+        self._do_grab(fileObj, dest, total_size)
 
     def formatRequest(self, request):
         if self.url.auth_info():
@@ -206,10 +206,10 @@ class Fetcher:
             'ftp'  : FTPRangeHandler
         }
 
-        if self.existsize and range_handlers.has_key(self.scheme):
+        if self.exist_size and range_handlers.has_key(self.scheme):
             opener = urllib2.build_opener(range_handlers.get(self.scheme)())
             urllib2.install_opener(opener)
-            request.add_header('Range', 'bytes=%d-' % self.existsize)
+            request.add_header('Range', 'bytes=%d-' % self.exist_size)
 
         return request
 
