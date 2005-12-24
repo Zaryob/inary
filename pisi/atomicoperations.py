@@ -471,7 +471,7 @@ def resurrect_package(package_fn):
 
     from os.path import exists
 
-    metadata_xml = util.join_path(ctx.config.lib_dir(), package_fn, ctx.const.metadata_xml)
+    metadata_xml = util.join_path(ctx.config.lib_dir(), 'package/' + package_fn, ctx.const.metadata_xml)
     if not exists(metadata_xml):
        raise Error, _("Metadata XML '%s' cannot be found") % metadata_xml
 
@@ -495,7 +495,7 @@ def resurrect_package(package_fn):
     if not passed:
         ctx.ui.info(_('* Adding \'%s\' to db... ') % (metadata.package.name), noln=True)
     
-    files_xml = util.join_path(ctx.config.lib_dir(), package_fn, ctx.const.files_xml)
+    files_xml = util.join_path(ctx.config.lib_dir(), 'package/' + package_fn, ctx.const.files_xml)
     if not exists(files_xml):
        raise Error, _("Files XML '%s' cannot be found") % files_xml
 

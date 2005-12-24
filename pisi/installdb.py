@@ -93,7 +93,7 @@ class InstallDB:
         return files
 
     def pkg_dir(self, pkg, version, release):
-        return join(ctx.config.lib_dir(), pkg + '-' + version + '-' + release)
+        return join(ctx.config.lib_dir(), 'package/' + pkg + '-' + version + '-' + release)
 
     def is_recorded(self, pkg, txn = None):
         pkg = str(pkg)

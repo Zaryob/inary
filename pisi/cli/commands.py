@@ -720,7 +720,8 @@ If package specs are given, they should be the names of package dirs under /var/
 
     def rebuild_db(self):
         import os
-        for package_fn in os.listdir(ctx.config.lib_dir()):
+        for package_fn in os.listdir( pisi.util.join_path( ctx.config.lib_dir(),
+                                                           'package' ) ):
             if not package_fn == "scripts":
                 ctx.ui.debug('Resurrecting %s' % package_fn)
                 pisi.api.resurrect_package(package_fn)

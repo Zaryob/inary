@@ -188,7 +188,7 @@ class Package:
                      + self.version + '-' \
                      + self.release
 
-        return util.join_path( ctx.config.lib_dir(), packageDir)
+        return util.join_path( ctx.config.lib_dir(), 'package', packageDir)
 
     def installable(self):
         """calculate if pkg is installable currently"""
