@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2005-12-24 15:11+EET\n"
+"POT-Creation-Date: 2005-12-26 01:09+EET\n"
 "PO-Revision-Date: 2005-12-21 19:18+0200\n"
 "Last-Translator: Eray Ozkural <eray@uludag.org.tr>\n"
 "Language-Team:  <en@li.org>\n"
@@ -38,7 +38,6 @@ msgstr ""
 "düzeltme işlemi için yeniden çalıştırmalısınız. Boş disk \n"
 "alanınız olması gerekir. Sadece dosya bozulması olduğu \n"
 "zaman rebuild-db komutunu kullanmanız gerekir."
-
 
 #: pisi-cli:47
 msgid ""
@@ -265,51 +264,51 @@ msgstr "ActionsAPI [touch]: Erişim engellendi: %s"
 msgid "executing %s"
 msgstr "%s çalıştırılıyor"
 
-#: pisi/api.py:217 pisi/comariface.py:33
+#: pisi/api.py:218 pisi/comariface.py:33
 msgid "COMAR: comard not fully installed"
 msgstr "COMAR: comard tam olarak yerleştirilememiş"
 
-#: pisi/api.py:229
+#: pisi/api.py:230
 msgid "File %s not found"
 msgstr "Dosya %s bulunamadı."
 
-#: pisi/api.py:255
+#: pisi/api.py:256
 msgid "Package %s not found"
 msgstr "Paket %s bulunamadı."
 
-#: pisi/api.py:279
+#: pisi/api.py:280
 msgid "Checking %s..."
 msgstr "%s kontrol ediliyor"
 
-#: pisi/api.py:292
+#: pisi/api.py:293
 msgid "* Building index of PISI files under %s"
 msgstr "* %s altındaki PİSİ dosyalarının bir indexi yapılıyor."
 
-#: pisi/api.py:295
+#: pisi/api.py:296
 msgid "* Index file written"
 msgstr "* İndex dosyası yazıldı."
 
-#: pisi/api.py:300
+#: pisi/api.py:301
 msgid "Repo %s added to system."
 msgstr "Depo %s sisteme eklendi."
 
-#: pisi/api.py:305
+#: pisi/api.py:306
 msgid "Repo %s removed from system."
 msgstr "Depo %s sistemden çıkarıldı."
 
-#: pisi/api.py:307
+#: pisi/api.py:308
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "Depo %s yok. Kaldırılamıyor."
 
-#: pisi/api.py:311
+#: pisi/api.py:312
 msgid "* Updating repository: %s"
 msgstr "Depo %s güncelleniyor."
 
-#: pisi/api.py:316
+#: pisi/api.py:317
 msgid "No repository named %s found."
 msgstr "%s adında bir depo bulunamadı."
 
-#: pisi/api.py:318
+#: pisi/api.py:319
 msgid ""
 "\n"
 "* Package database updated."
@@ -333,112 +332,112 @@ msgstr "Paket %s hiç bir etkin depoda bulunamadı."
 msgid "Installing %s, version %s, release %s, build %s"
 msgstr "%s paketi, versiyon %s, sürüm %s, inşa %s yerleştiriliyor."
 
-#: pisi/atomicoperations.py:147
+#: pisi/atomicoperations.py:152
 msgid "Package conflicts %s"
 msgstr "Paket %s ile çatışmakta."
 
-#: pisi/atomicoperations.py:152
+#: pisi/atomicoperations.py:157
 msgid "Dependencies for %s not satisfied"
 msgstr "%s için bağımlılıklar sağlanmadı."
 
-#: pisi/atomicoperations.py:154
+#: pisi/atomicoperations.py:159
 msgid "Package not installable"
 msgstr "Paket yerleştirilebilir durumda değil."
 
-#: pisi/atomicoperations.py:185
+#: pisi/atomicoperations.py:190
 msgid "Re-install same version package?"
 msgstr "Aynı versiyona sahip paketi yeniden yerleştireyim mi?"
 
-#: pisi/atomicoperations.py:186
+#: pisi/atomicoperations.py:191
 msgid "Package re-install declined"
 msgstr "Paket yeniden yerleştirmeye izin verilmedi."
 
-#: pisi/atomicoperations.py:192
+#: pisi/atomicoperations.py:197
 msgid "Upgrading to new upstream version"
 msgstr "Yeni versiyona yukseltiliyor."
 
-#: pisi/atomicoperations.py:195
+#: pisi/atomicoperations.py:200
 msgid "Upgrading to new distribution release"
 msgstr "Yeni dağıtım sürümüne yukseltiliyor."
 
-#: pisi/atomicoperations.py:199
+#: pisi/atomicoperations.py:204
 msgid "Upgrading to new distribution build"
 msgstr "Yeni dağıtım inşasına yukseltiliyor."
 
-#: pisi/atomicoperations.py:206
+#: pisi/atomicoperations.py:211
 msgid "Downgrade to old upstream version?"
 msgstr "Eski kaynak versiyonuna dönülsün mu?"
 
-#: pisi/atomicoperations.py:208
+#: pisi/atomicoperations.py:213
 msgid "Downgrade to old distribution release?"
 msgstr "Eski dağıtım sürümüne dönülsün mu?"
 
-#: pisi/atomicoperations.py:210
+#: pisi/atomicoperations.py:215
 msgid "Downgrade to old distribution build?"
 msgstr "Eski dağıtım inşasına dönülsün mu?"
 
-#: pisi/atomicoperations.py:212
+#: pisi/atomicoperations.py:217
 msgid "Package downgrade declined"
 msgstr "Paket eskileştirilmesine izin verilmedi."
 
-#: pisi/atomicoperations.py:241
+#: pisi/atomicoperations.py:246
 msgid "Storing %s, "
 msgstr "%s saklanıyor, "
 
-#: pisi/atomicoperations.py:244
+#: pisi/atomicoperations.py:249
 msgid "Storing %s."
 msgstr "%s saklanıyor."
 
-#: pisi/atomicoperations.py:251
+#: pisi/atomicoperations.py:256
 msgid "Storing %s"
 msgstr "%s saklanıyor"
 
-#: pisi/atomicoperations.py:296
+#: pisi/atomicoperations.py:301
 msgid "Regenerating /etc/ld.so.cache..."
 msgstr "/etc/ld.so.cache yeniden yaratılıyor..."
 
-#: pisi/atomicoperations.py:299
+#: pisi/atomicoperations.py:304
 msgid "Bypassing ldconfig"
 msgstr "ldconfig esgeçiliyor"
 
-#: pisi/atomicoperations.py:333
+#: pisi/atomicoperations.py:338
 msgid "File list could not be read for package %s, continuing removal."
 msgstr ""
 "Paket %s için dosya listesi okunamadı, kaldırma işlemine devam ediliyor. "
 
-#: pisi/atomicoperations.py:340
+#: pisi/atomicoperations.py:345
 msgid "Removing package %s"
 msgstr "%s paketi kaldırılıyor."
 
-#: pisi/atomicoperations.py:343
+#: pisi/atomicoperations.py:348
 msgid "Trying to remove nonexistent package "
 msgstr "Varolmayan paket kaldırılmaya çalışıldı."
 
-#: pisi/atomicoperations.py:391
+#: pisi/atomicoperations.py:396
 msgid "Not removing non-file, non-link %s"
 msgstr "Dosya ya da bağ olmayan '%s' kaldırılmıyor."
 
-#: pisi/atomicoperations.py:476
+#: pisi/atomicoperations.py:482
 msgid "Metadata XML '%s' cannot be found"
 msgstr "Metadata XML '%s' bulunamıyor"
 
-#: pisi/atomicoperations.py:484
+#: pisi/atomicoperations.py:490
 msgid "MetaData format wrong (%s)"
 msgstr "MetaData biçimi yanlış (%s)"
 
-#: pisi/atomicoperations.py:496
+#: pisi/atomicoperations.py:502
 msgid "* Adding '%s' to db... "
 msgstr "* '%s' veritabanına ekleniyor... "
 
-#: pisi/atomicoperations.py:500
+#: pisi/atomicoperations.py:507
 msgid "Files XML '%s' cannot be found"
 msgstr "Files XML '%s' bulunamıyor"
 
-#: pisi/atomicoperations.py:506 pisi/package.py:111
+#: pisi/atomicoperations.py:513 pisi/package.py:111
 msgid "Invalid %s"
 msgstr "Geçersiz %s"
 
-#: pisi/atomicoperations.py:513
+#: pisi/atomicoperations.py:520
 msgid "OK."
 msgstr "Tamam."
 
@@ -1433,31 +1432,31 @@ msgid ""
 "A problem occured. Please check the archive address and/or permissions again."
 msgstr ""
 
-#: pisi/fetcher.py:149
+#: pisi/fetcher.py:151
 msgid "No such file or no permission to read"
 msgstr "Öyle bir dosya yok ya da okuma izni yok."
 
-#: pisi/fetcher.py:175
+#: pisi/fetcher.py:177
 msgid "Cannot fetch %s; value error: %s"
 msgstr "%s indirilemiyor, hata: %s"
 
-#: pisi/fetcher.py:177 pisi/fetcher.py:179 pisi/fetcher.py:181
+#: pisi/fetcher.py:179 pisi/fetcher.py:181 pisi/fetcher.py:183
 msgid "Cannot fetch %s; %s"
 msgstr "%s indirilemiyor; %s"
 
-#: pisi/fetcher.py:183
+#: pisi/fetcher.py:185
 msgid "Cannot fetch %s; (%s): %s"
 msgstr "%s indirilemiyor; (%s): %s"
 
-#: pisi/fetcher.py:229
+#: pisi/fetcher.py:231
 msgid "Requested range not satisfiable"
 msgstr "İstenen aralık sağlanamıyor."
 
-#: pisi/fetcher.py:268 pisi/fetcher.py:272
+#: pisi/fetcher.py:270 pisi/fetcher.py:274
 msgid "Requested Range Not Satisfiable"
 msgstr "İstenen aralık sağlanamıyor."
 
-#: pisi/fetcher.py:288 pisi/fetcher.py:309 pisi/fetcher.py:322
+#: pisi/fetcher.py:290 pisi/fetcher.py:311 pisi/fetcher.py:324
 msgid "ftp error"
 msgstr "ftp hatası"
 
@@ -1533,7 +1532,7 @@ msgstr ""
 msgid "Distribution: %s, Install Time: %s\n"
 msgstr "Dağıtım: %s, Yerleştime Zamanı: %s\n"
 
-#: pisi/installdb.py:154
+#: pisi/installdb.py:155
 msgid "Already installed"
 msgstr "Halihazırda yerleştirilmiş."
 
@@ -1975,7 +1974,6 @@ msgid ""
 "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 
-
 #: tools/repostats.py:561
 msgid ""
 "Cannot parse '%s':\n"
@@ -1986,7 +1984,8 @@ msgstr ""
 
 #: tools/repostats.py:639
 msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-msgstr "Kullanım: repostats.py [SEÇENEKLER] source-repo-path [ikili-depo-adresi]\n"
+msgstr ""
+"Kullanım: repostats.py [SEÇENEKLER] source-repo-path [ikili-depo-adresi]\n"
 
 #: tools/repostats.py:640
 msgid "Dont generate the web site.\n"
