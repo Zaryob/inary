@@ -555,8 +555,8 @@ Usage: info <package1> <package2> ... <packagen>
             ctx.ui.info(_('Package file: %s') % arg)
             self.print_pkginfo(metadata, files)
         else:
-            if ctx.installdb.is_installed(arg, True):
-                metadata, files = pisi.api.info_name(arg)
+            if ctx.installdb.is_installed(arg):
+                metadata, files = pisi.api.info_name(arg, True)
                 ctx.ui.info(_('Installed package:'))
                 self.print_pkginfo(metadata, files)
             if packagedb.has_package(arg):
