@@ -102,12 +102,17 @@ class Install(AtomicOperation):
         self.check_reinstall()
         self.extract_install()
         self.store_pisi_files()
-        if self.metadata.package.providesComar and ctx.comar:
-            import pisi.comariface as comariface
-            self.register_comar_scripts()
 
         self.config_later = False
+
         if self.metadata.package.providesComar:
+            if ctx.comar:
+                import pisi.comariface as comariface
+                self.register_comar_scripts()
+            else:
+                self.config_later = True # configure-pending will register scripts later
+
+        if 'System.Package' in [x.om for x in self.metadata.package.providesComar]:
             if ctx.comar:
                 ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
                 comariface.run_postinstall(self.pkginfo.name)
