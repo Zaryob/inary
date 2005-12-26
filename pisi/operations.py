@@ -35,6 +35,7 @@ import pisi.installdb
 from pisi.index import Index
 import pisi.cli
 import pisi.atomicoperations as atomicoperations
+import pisi.ui as ui
 
 class Error(pisi.Error):
     pass
