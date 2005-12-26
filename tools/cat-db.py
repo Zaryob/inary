@@ -23,6 +23,6 @@ import pisi.cli
 d = shelve.open( sys.argv[1], 'r', 0660, filetype = db.DB_BTREE )
 
 for key, data in d.items():
-    pisi.cli.printu(u'%s: %s' % (key, data))
+    pisi.cli.printu(u'%s: %s\n' % (key, data))
 
 d.close()
