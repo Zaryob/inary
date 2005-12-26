@@ -18,10 +18,11 @@ import bsddb3.db as db
 sys.path.append('.')
 
 import pisi
+import pisi.cli
 
 d = shelve.open( sys.argv[1], 'r', 0660, filetype = db.DB_BTREE )
 
 for key, data in d.items():
-    print key, data
+    pisi.cli.printu(u'%s: %s' % (key, data))
 
 d.close()
