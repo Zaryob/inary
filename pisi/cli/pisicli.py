@@ -88,6 +88,7 @@ class PisiCLI(object):
             if len(args)==0: # more explicit than using IndexError
                 if 'version' in opts:
                     self.parser.print_version()
+                    sys.exit(0)
                 elif 'help' in opts:
                     self.die()
                 raise Error(_('No command given'))
