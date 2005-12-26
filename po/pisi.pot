@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2005-12-26 06:12+EET\n"
+"POT-Creation-Date: 2005-12-26 06:49+EET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -239,51 +239,51 @@ msgstr ""
 msgid "executing %s"
 msgstr ""
 
-#: pisi/api.py:218 pisi/comariface.py:33
+#: pisi/api.py:214 pisi/comariface.py:33
 msgid "COMAR: comard not fully installed"
 msgstr ""
 
-#: pisi/api.py:230
+#: pisi/api.py:226
 msgid "File %s not found"
 msgstr ""
 
-#: pisi/api.py:256
+#: pisi/api.py:252
 msgid "Package %s not found"
 msgstr ""
 
-#: pisi/api.py:280
+#: pisi/api.py:276
 msgid "Checking %s..."
 msgstr ""
 
-#: pisi/api.py:293
+#: pisi/api.py:289
 msgid "* Building index of PISI files under %s"
 msgstr ""
 
-#: pisi/api.py:296
+#: pisi/api.py:292
 msgid "* Index file written"
 msgstr ""
 
-#: pisi/api.py:301
+#: pisi/api.py:297
 msgid "Repo %s added to system."
 msgstr ""
 
-#: pisi/api.py:306
+#: pisi/api.py:302
 msgid "Repo %s removed from system."
 msgstr ""
 
-#: pisi/api.py:308
+#: pisi/api.py:304
 msgid "Repository %s does not exist. Cannot remove."
 msgstr ""
 
-#: pisi/api.py:312
+#: pisi/api.py:308
 msgid "* Updating repository: %s"
 msgstr ""
 
-#: pisi/api.py:317
+#: pisi/api.py:313
 msgid "No repository named %s found."
 msgstr ""
 
-#: pisi/api.py:319
+#: pisi/api.py:315
 msgid ""
 "\n"
 "* Package database updated."
@@ -1401,7 +1401,7 @@ msgid "Cannot attain read access to database environment"
 msgstr ""
 
 #: pisi/lockeddbshelve.py:69
-msgid "Opening P\304\260S\304\260 database in read-only mode. Operations that require write access will fail."
+msgid "Opening PISI database in read-only mode. Operations that require write access will fail."
 msgstr ""
 
 #: pisi/lockeddbshelve.py:89

@@ -66,7 +66,7 @@ def init_dbenv():
         ctx.dbenv.open(pisi.context.config.db_dir(), flags)
         ctx.dbenv.set_flags(db.DB_LOG_AUTOREMOVE, 1) # clear inactive logs automatically
     else:
-        ctx.ui.warning(_('Opening PİSİ database in read-only mode. Operations that require write access will fail.'))
+        ctx.ui.warning(_("Opening PISI database in read-only mode. Operations that require write access will fail."))
         ctx.dbenv = None
 
 #def open(filename, flags='r', mode = 0644, filetype = db.DB_BTREE):
