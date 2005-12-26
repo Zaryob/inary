@@ -44,7 +44,8 @@ class Command(object):
         list.sort()
         for name in list:
             commandcls = Command.cmd_dict[name]
-            summary = commandcls.__doc__.split('\n')[0]
+            trans = gettext.translation('pisi', fallback=True)
+            summary = trans.ugettext(commandcls.__doc__).split('\n')[0]
             s += '%20s - %s\n' % (commandcls.name[0], summary)
         return s
 
