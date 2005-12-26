@@ -84,6 +84,7 @@ class Install(AtomicOperation):
         "initialize from a file name"
         super(Install, self).__init__(ignore_dep)
         self.package = Package(package_fname)
+        ctx.ui.notify(pisi.ui.downloading, url = package_fname)        
         self.package.read()
         self.metadata = self.package.metadata
         self.files = self.package.files
