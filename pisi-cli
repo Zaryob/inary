@@ -52,6 +52,8 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
         show_traceback = ctx.get_option('debug')
         ui.error(_("System Error. Program Terminated."))
 
+    # NB: we know this breaks latin-1, it was added by meren
+    # to circumvent turkish errors when printing python exceptions
     v = ''
     for e in value.args:
         v += str(e) + '\n'
