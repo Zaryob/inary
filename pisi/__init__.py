@@ -21,11 +21,11 @@ __all__ = [ 'api', 'config', 'packagedb', 'installdb', 'search' ]
 class Exception(Exception):
     """Class of exceptions that must be caught and handled within PISI"""
     def __str__(self):
-        s = ''
+        s = u''
         for x in self.args:
             if s != '':
                 s += '\n'
-            s += x.encode('utf-8')
+            s += unicode(x)
         return s
 
 class Error(Exception):
