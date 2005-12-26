@@ -217,11 +217,11 @@ def configure_pending():
     except ImportError:
         raise Error(_("COMAR: comard not fully installed"))
 
-def info(package):
+def info(package, installed = False):
     if package.endswith(ctx.const.package_suffix):
         return info_file(package)
     else:
-        return info_name(package)
+        return info_name(package, installed)
     
 def info_file(package_fn):
     from package import Package
@@ -272,7 +272,7 @@ def search_package(query, lang = None):
     return r
 
 def check(package):
-    md, files = info(package)
+    md, files = info(package, True)
     corrupt = []
     for file in files.list:
         if file.hash and file.type != "config" \

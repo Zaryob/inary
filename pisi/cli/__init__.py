@@ -130,6 +130,7 @@ class CLI(UI):
             util.xterm_title(msg)
 
     def notify(self, event, **keywords):
+        print 'notify', event
         if event == ui.installed:
             msg = _('Installed %s') % keywords['package'].name
         elif event == ui.removed:
