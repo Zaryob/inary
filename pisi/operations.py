@@ -151,6 +151,8 @@ in the respective order to satisfy extra dependencies:
     if ctx.get_option('dry_run'):
         return
 
+    ctx.ui.notify(ui.packagestogo, order = order)
+        
     for x in order:
         atomicoperations.install_single_file(dfn[x])
 
@@ -225,6 +227,9 @@ in the respective order to satisfy dependencies:
     if len(order) > len(A_0):
         if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
             return False
+            
+    ctx.ui.notify(ui.packagestogo, order = order)
+            
     for x in order:
         atomicoperations.install_single_name(x)
 
@@ -320,6 +325,8 @@ def upgrade_pkg_names(A = []):
         if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
             return False
 
+    ctx.ui.notify(ui.packagestogo, order = order)
+            
     install_ops = [atomicoperations.Install.from_name(x) for x in order]
     
     for install in install_ops:
@@ -449,13 +456,14 @@ in the respective order to satisfy dependencies:
     
     if ctx.get_option('dry_run'):
         return
-    
+
+    ctx.ui.notify(ui.packagestogo, order = order)
+
     for x in order:
         if ctx.installdb.is_installed(x):
             atomicoperations.remove_single(x)
         else:
             ctx.ui.info(_('Package %s is not installed. Cannot remove.') % x)
-
 
 def plan_remove(A):
     # try to construct a pisi graph of packages to
