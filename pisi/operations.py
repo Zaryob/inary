@@ -395,7 +395,7 @@ def plan_upgrade(A):
                     # add unsatisfied reverse dependencies
                     if packagedb.has_package(rev_dep) and \
                        (not dependency.installed_satisfies_dep(depinfo)):
-                        if not dependency.repo_satisfies_dep(dep):
+                        if not dependency.repo_satisfies_dep(depinfo):
                             raise Error(_("Reverse dependency %s cannot be satisfied") % rev_dep)
                         if not rev_dep in G_f.vertices():
                             Bp.add(rev_dep)
