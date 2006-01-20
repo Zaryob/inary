@@ -337,7 +337,7 @@ class Package:
             errors.append(_("Duplicate binary packages:\n%s\n%s\n") % (
                 source.name, packages[name].source.name))
             return
-        for p in pakspec.paths:
+        for p in pakspec.files:
             if p.fileType not in valid_filetypes:
                 e = _("Unknown file type '%s' in package '%s'") % (
                     p.fileType, source.name)
@@ -352,7 +352,7 @@ class Package:
     
     def markDeps(self):
         # mark reverse build dependencies
-        for d in self.source.spec.source.buildDeps:
+        for d in self.source.spec.source.buildDependencies:
             p = d.package
             if packages.has_key(p):
                 packages[p].revBuildDeps.append(self.name)
@@ -361,7 +361,7 @@ class Package:
                     Missing(p)
                 missing[p].revBuildDeps.append(self.name)
         # mark reverse runtime dependencies
-        for d in self.pakspec.runtimeDeps:
+        for d in self.pakspec.packageDependencies:
             p = d.package
             if packages.has_key(p):
                 packages[p].revRuntimeDeps.append(self.name)
@@ -373,9 +373,9 @@ class Package:
     def report_html(self):
         source = self.source.spec.source
         bDeps = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x),
-            (map(lambda x: x.package, source.buildDeps)))
+            (map(lambda x: x.package, source.buildDependencies)))
         rDeps = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x),
-            (map(lambda x: x.package, self.pakspec.runtimeDeps)))
+            (map(lambda x: x.package, self.pakspec.packageDependencies)))
         rbDeps = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x), self.revBuildDeps)
         rrDeps = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x), self.revRuntimeDeps)
         dict = {

@@ -93,6 +93,9 @@ class Update:
     t_Date = [autoxml.String, autoxml.mandatory]
     t_Version = [autoxml.String, autoxml.mandatory]
     t_Type = [autoxml.String, autoxml.optional]
+    t_Name = [autoxml.String, autoxml.optional]
+    t_Email = [autoxml.String, autoxml.optional]
+    t_Comment = [autoxml.String, autoxml.optional]
 
     def __str__(self):
         s = self.date
