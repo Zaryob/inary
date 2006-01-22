@@ -12,6 +12,7 @@
 #
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 #           Gurer Ozen <gurer@uludag.org.tr>
+#           Bahadir Kandemir <bahadir@haftalik.net>
 #           Baris Metin <baris@uludag.org.tr>
 
 
@@ -278,9 +279,32 @@ class autoxml(oo.autosuper, oo.autoprop):
         encoders = []
         errorss = []
         formatters = []
-        order = dict.keys()
-        order.sort()
-        #TODO: there should be at most one str member, and it should be the first
+        #order = dict.keys()  
+        #order.sort()        
+
+        # read declaration order from source
+        # code contributed by bahadir kandemir
+        from inspect import getsourcelines
+        from itertools import ifilter
+        import re
+        
+        fn = re.compile('\s*([tas]_[a-zA-Z]+).*').findall
+
+        lines = filter(fn, getsourcelines(cls)[0])
+        decl_order = map(lambda x:x.split()[0], lines)
+        
+        # there should be at most one str member, and it should be 
+        # the first to process
+        
+        order = filter(lambda x: not x.startswith('s_'), decl_order)
+        
+        # find string member
+        str_members = filter(lambda x:x.startswith('s_'), decl_order)
+        if len(str_members)>1:
+            raise Error('Only one str member can be defined')
+        elif len(str_members)==1:
+            order.insert(0, str_members[0])
+        
         for var in order:
             if var.startswith('t_') or var.startswith('a_') or var.startswith('s_'):
                 name = var[2:]
