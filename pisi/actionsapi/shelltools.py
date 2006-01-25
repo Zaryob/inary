@@ -29,6 +29,7 @@ import pisi.actionsapi
 import pisi.actionsapi.get
 
 from pisi.actionsapi import error
+from pisi.util import run_batch
 
 def can_access_file(sourceFile):
     '''test the existence of file'''
@@ -198,15 +199,5 @@ def dirName(sourceFile):
     return os.path.dirname(sourceFile)
 
 def system(command):
-    #FIXME: might be better to merge this with util.run_batch
-    #FIXME: String formatting
-    command = command.replace("                 ", " ")
-    ctx.ui.debug(_('executing %s') % command)
-    p = os.popen(command)
-    while 1:
-        line = p.readline()
-        if not line:
-            break
-        ctx.ui.debug(line[:-1])
-
-    return p.close()
+    command = command.replace("  ", "")
+    run_batch(command)
