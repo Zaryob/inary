@@ -211,6 +211,25 @@ class Fetcher:
             urllib2.install_opener(opener)
             request.add_header('Range', 'bytes=%d-' % self.exist_size)
 
+        proxy_handler = None
+
+        if ctx.config.values.general.http_proxy and self.url.scheme() == "http":
+            http_proxy = ctx.config.values.general.http_proxy
+            proxy_handler = urllib2.ProxyHandler({URI(http_proxy).scheme(): http_proxy})
+
+        elif ctx.config.values.general.https_proxy and self.url.scheme() == "https":
+            https_proxy = ctx.config.values.general.https_proxy
+            proxy_handler = urllib2.ProxyHandler({URI(https_proxy): https_proxy})
+
+        elif ctx.config.values.general.ftp_proxy and self.url.scheme() == "ftp":
+            ftp_proxy = ctx.config.values.general.ftp_proxy
+            proxy_handler = urllib2.ProxyHandler({URI(http_proxy): ftp_proxy})
+
+        if proxy_handler:
+            ctx.ui.info(_("Proxy configuration has been found for '%s' protocol") % self.url.scheme())
+            opener = urllib2.build_opener(proxy_handler)
+            urllib2.install_opener(opener)
+
         return request
 
     def err (self, error):
