@@ -448,7 +448,8 @@ class Builder:
         size, d = 0, self.pkg_install_dir()
 
         for path in package.files:
-             size += util.dir_size(util.join_path(d, path.path))
+            for p in glob.glob(util.join_path(d, path.path)):
+                size += util.dir_size(p)
 
         metadata.package.installedSize = size
 
