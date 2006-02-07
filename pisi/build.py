@@ -67,6 +67,10 @@ def get_file_type(path, pinfoList):
                 depth = length
                 ftype = pinfo.fileType
                 permanent = pinfo.permanent
+        #2049
+        else:
+            ftype = pinfo.fileType
+            permanent = pinfo.permanent
     return ftype, permanent
 
 def check_path_collision(package, pkgList):
