@@ -276,6 +276,9 @@ def dir_size(dir):
         #so, this is not a directory but file..
         return getsize(dir)
 
+    if islink(dir):
+        return long(len(os.readlink(dir)))
+
     def sizes():
         for root, dirs, files in os.walk(dir):
             yield sum([getsize(join(root, name)) for name in files if not islink(join(root,name))])
