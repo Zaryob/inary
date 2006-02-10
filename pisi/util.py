@@ -316,11 +316,6 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
                 raise e
             return None
 
-    # also handle single files
-    if os.path.isfile(top):
-        yield (top, sha1_sum(top))
-        return
-
     def has_excluded_prefix(filename):
         if excludePrefix and removePrefix:
             tempfnam = remove_prefix(removePrefix, filename)
@@ -328,6 +323,16 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
                 if tempfnam.startswith(p):
                     return 1
         return 0
+
+    # handle single file
+    if os.path.isfile(top):
+        yield (top, sha1_sum(top))
+        return
+
+    # handle single symlink declaration here.
+    if os.path.islink(top):
+        yield (top, sha1_sum(os.readlink(top), True))
+        return
 
     for root, dirs, files in os.walk(top, topdown=False):
         #bug 339
