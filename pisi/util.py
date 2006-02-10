@@ -373,10 +373,7 @@ def copy_dir(src, dest):
 
 def check_file_hash(filename, hash):
     """Check the files integrity with a given hash"""
-    if sha1_file(filename) == hash:
-        return True
-
-    return False
+    return sha1_file(filename) == hash
 
 def sha1_file(filename):
     """calculate sha1 hash of filename"""
