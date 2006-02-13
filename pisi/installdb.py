@@ -11,8 +11,6 @@
 #
 #
 # installation database
-#
-# Author:  Eray Ozkural <eray@uludag.org.tr>
 
 # System
 import os

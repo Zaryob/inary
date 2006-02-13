@@ -8,8 +8,6 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
-# Author:  Eray Ozkural <eray@uludag.org.tr>
 
 """
 generic file abstraction that allows us to use URIs for everything

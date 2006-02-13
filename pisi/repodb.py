@@ -8,9 +8,6 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
-
-# Author: Eray Ozkural
 
 import os, fcntl
 

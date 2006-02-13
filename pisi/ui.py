@@ -10,9 +10,6 @@
 # Please read the COPYING file.
 #
 # generic user interface
-#
-# Authors:  Eray Ozkural <eray@uludag.org.tr>
-#           A. Murat Eren <meren@uludag.org.tr>
 
 import sys
 

@@ -11,7 +11,6 @@
 #
 
 # package bulding stuff
-# maintainer: baris and meren
 
 # python standard library
 import os
