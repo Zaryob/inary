@@ -8,10 +8,6 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
-# Authors:  Eray Ozkural <eray@uludag.org.tr>
-#           Baris Metin <baris@uludag.org.tr
-#           Gurer Ozen <gurer@uludag.org.tr>
 
 """
  xmlext is a helper module for accessing XML files using

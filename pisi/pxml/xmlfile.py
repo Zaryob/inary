@@ -8,8 +8,6 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
-# Authors:  Eray Ozkural <eray@uludag.org.tr>
 
 import pisi.context
 
