@@ -200,4 +200,4 @@ def dirName(sourceFile):
 
 def system(command):
     command = command.replace("  ", "")
-    run_batch(command)
+    run_batch(command, True)

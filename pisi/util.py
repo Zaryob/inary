@@ -125,16 +125,24 @@ def remove_prefix(a,b):
 # Process Releated Functions #
 ##############################
 
-def run_batch(cmd):
-    """run command non-interactively and report return value and output"""
+def run_batch(cmd, realtime = False):
+    """run command non-interactively/realtime and report return value and output"""
     ctx.ui.info(_('running ') + cmd)
-    a = os.popen(cmd)
-    lines = a.readlines()
-    ret = a.close()
+    p = os.popen(cmd)
+    if realtime:
+        while 1:
+            line = p.readline()
+            if not line:
+                break
+            ctx.ui.debug(line[:-1])
+        return p.close()
+    else:
+        lines = p.readlines()
+    ret = p.close()
     ctx.ui.debug(_('return value %s') % ret)
     successful = ret == None
     if not successful:
-      ctx.ui.error(_('Failed command: %s') % cmd + strlist(lines))
+        ctx.ui.error(_('Failed command: %s') % cmd + strlist(lines))
     return (successful,lines)
 
 ######################
