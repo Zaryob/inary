@@ -8,7 +8,6 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
 
 import pisi
 
