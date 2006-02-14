@@ -958,6 +958,8 @@ Usage: list-upgrades [ <repo1> <repo2> ... repon ]
     def run(self):
         self.init(True)
         list = pisi.api.list_upgradable()
+        if not list:
+            ctx.ui.info(_('No packages to upgrade.')) 
         list.sort()
         if self.options.install_info:
             ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
