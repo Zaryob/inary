@@ -185,6 +185,11 @@ Legend:
 
  * high priority
 
+ - package signing
+   - a flag to sign package after building
+   - code to check if the package has a valid signature
+ - cli improvements
+   - non interactive mode (similar to --auto in urpmi)
  - high-level build commands
    - build command enhancements:
      - aware of repo sources
