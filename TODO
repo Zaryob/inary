@@ -173,20 +173,53 @@ Legend:
  * high priority
 
  + transaction stuff for database (eray)
-   + implement a simple (dandik) version for better reliability
  + database version file
 
- * medium priority
- 
- - component improvements (optional)
-   - maintain a list of components each component has
-   - maintain a list of packages 
+ * low priority
 
- * low priority 
- 
  + search command: (eray)
    + implement an inverted index
    + search in summary and description
+
+5. Post Release
+
+ * high priority
+
+ - high-level build commands
+   - build command enhancements:
+     - aware of repo sources
+     - full dependency analysis like install/upgrade etc.
+   - build-all (or build-distro) command, or as a separate tool
+   - an emerge command, just for fun
+ / make a package and sourcedb for each repo
+   + packagedb
+   - sourceb
+ - improve url support: consider adding "other" protocols
+   - removable media: media://
+ - examples:
+   - PSPEC i18n example for our great project with Bahadir :)
+
+ * medium priority
+
+ - UI impl: non-interactive use that selects defaults and logs output
+ - UI impl: a general purpose Qt UI
+ / multi-architecture support
+   + design decisions
+   + extend XML specs to support that
+   - cross-platform building support
+ - incremental build/fetch for repository index (pisi-index.xml)
+ - xdelta support (caglar)
+   - diffsets
+ - a command (check-repo) to check if repos are consistent wrt dep relations
+ - component improvements (optional)
+   - maintain a list of components each component has
+   - maintain a list of packages 
+ - more support for categories:
+   - put categories into a database
+   - fast search for categories
+
+ * low priority
+
  / overhaul installdb (try to merge its use with packagedb) (eray)
  / verify metodlari
    + SpecFile
@@ -199,41 +232,6 @@ Legend:
    - date type
    - enum type
    - make autoxml dependent on only xmlext and xmlfile interfaces
-
-5. Post Release
-
- * high priority
-
- - high-level build commands
-   - build command enhancements:
-     - aware of repo sources
-     - full dependency analysis like install/upgrade etc.
-   - build-all (or build-distro) command, or as a separate tool
-   - an emerge command, just for fun
- - more support for categories:
-   - put categories into a database
-   - fast search for categories
- / make a package and sourcedb for each repo
-   + packagedb
-   - sourceb
- - improve url support: consider adding "other" protocols
-   - removable media: media://
- - examples:
-   - PSPEC i18n example for our great project with Bahadir :)
-
- * medium priority
-
- - non-interactive use
- - multi-architecture support (baris, caglar)
-   / design decisions
-   / extend XML specs to support that
-   - cross-platform building support
- - incremental build/fetch for repository index (pisi-index.xml)
-   - diffsets (caglar)
- - a command to check if repos are consistent wrt dep relations
-
- * low priority
-
  - search command: (eray)
    - search components
    - english stemming
