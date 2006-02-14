@@ -8,6 +8,7 @@
 # any later version.
 #
 # Please read the COPYING file.
+#
 
 # Colors module provides some color codes for console output.
 

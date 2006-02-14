@@ -14,7 +14,6 @@
 import os
 import glob
 import shutil
-import string
 import pwd
 import grp
 
@@ -200,5 +199,5 @@ def dirName(sourceFile):
     return os.path.dirname(sourceFile)
 
 def system(command):
-    command = string.join(string.split(command))
+    command = command.replace("  ", "")
     run_batch(command, True)

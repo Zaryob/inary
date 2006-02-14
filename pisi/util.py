@@ -12,6 +12,11 @@
 
 # misc. utility functions, including process and file utils
 
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
+#           Baris Metin <baris@uludag.org.tr>
+#           S. Caglar Onur <caglar@uludag.org.tr>
+#           A. Murat Eren <meren@uludag.org.tr>
+
 # standard python modules
 import os
 import re

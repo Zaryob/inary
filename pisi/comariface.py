@@ -8,6 +8,9 @@
 # any later version.
 #
 # Please read the COPYING file.
+#
+# Authors: Baris Metin <baris@uludag.org.tr>
+#          Gurer Ozen <gurer@uludag.org.tr>
 
 import comar
 

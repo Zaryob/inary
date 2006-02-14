@@ -12,6 +12,9 @@
 
 # Context module.
 
+# Authors: Baris Metin <baris@uludag.org.tr
+#          Eray Ozkural <eray@uludag.org.tr>
+
 # global variables here
 
 import pisi.constants

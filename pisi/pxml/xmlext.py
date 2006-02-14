@@ -8,6 +8,8 @@
 # any later version.
 #
 # Please read the COPYING file.
+#
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
 
 try:
     zimbabwe # comment out to disable piks

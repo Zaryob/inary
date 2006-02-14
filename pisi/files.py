@@ -8,6 +8,8 @@
 # any later version.
 #
 # Please read the COPYING file.
+#
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
 
 '''Files module provides access to files.xml. files.xml is generated
 during the build process of a package and used in installation.'''

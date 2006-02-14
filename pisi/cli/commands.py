@@ -8,6 +8,7 @@
 # any later version.
 #
 # Please read the COPYING file.
+#
 
 import sys
 from optparse import OptionParser

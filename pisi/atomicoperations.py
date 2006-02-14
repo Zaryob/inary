@@ -9,6 +9,8 @@
 # any later version.
 #
 # Please read the COPYING file.
+#
+# Author:  Eray Ozkural <eray@uludag.org.tr>
 
 "Atomic package operations such as install/remove/upgrade"
 

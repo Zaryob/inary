@@ -9,6 +9,8 @@
 #
 # Please read the COPYING file.
 #
+# Author:  Eray Ozkural <eray@uludag.org.tr>
+#
 # rev 1: very simple tokenization, for testing
 
 import string

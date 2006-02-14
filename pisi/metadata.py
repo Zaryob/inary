@@ -8,6 +8,9 @@
 # any later version.
 #
 # Please read the COPYING file.
+#
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
+#           Baris Metin <baris@uludag.org.tr
 
 """
 Metadata module provides access to metadata.xml. metadata.xml is

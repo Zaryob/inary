@@ -8,6 +8,9 @@
 # any later version.
 #
 # Please read the COPYING file.
+#
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
+#           Baris Metin <baris@uludag.org.tr>
 
 """Top level PISI interfaces. a facade to the entire PISI system"""
 

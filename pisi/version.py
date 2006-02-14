@@ -8,7 +8,10 @@
 # any later version.
 #
 # Please read the COPYING file.
-
+#
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
+#           Baris Metin <baris@uludag.org.tr>
+#
 # History:
 # Eray wrote the first version
 # Baris added support for the fancy keywords and

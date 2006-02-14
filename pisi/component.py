@@ -8,6 +8,8 @@
 # any later version.
 #
 # Please read the COPYING file.
+#
+# Author:  Eray Ozkural <eray@uludag.org.tr>
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)

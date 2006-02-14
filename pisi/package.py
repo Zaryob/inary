@@ -13,6 +13,8 @@
 # package abstraction
 # provides methods to add/remove files, extract control files
 
+# maintainer: baris and meren
+
 from os.path import join, exists
 
 import gettext

@@ -8,6 +8,13 @@
 # any later version.
 #
 # Please read the COPYING file.
+#
+#
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
+#           Gurer Ozen <gurer@uludag.org.tr>
+#           Bahadir Kandemir <bahadir@haftalik.net>
+#           Baris Metin <baris@uludag.org.tr>
+
 
 """
  autoxml is a metaclass for automatic XML translation, using

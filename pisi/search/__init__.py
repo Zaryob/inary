@@ -8,6 +8,9 @@
 # any later version.
 #
 # Please read the COPYING file.
+#
+#
+# Author:  Eray Ozkural <eray@uludag.org.tr>
 
 import pisi
 import pisi.context as ctx

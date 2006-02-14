@@ -8,6 +8,10 @@
 # any later version.
 #
 # Please read the COPYING file.
+#
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
+#           Baris Metin <baris@uludag.org.tr
+#           Gurer Ozen <gurer@uludag.org.tr>
 
 """
  some helper functions for high-level access to XML structures

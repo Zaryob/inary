@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- conding: utf-8 -*-
 #
 # Copyright (C) 2005, TUBITAK/UEKAE
 #

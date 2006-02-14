@@ -8,6 +8,9 @@
 # any later version.
 #
 # Please read the COPYING file.
+#
+#
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
 
 import bsddb3.db as db
 import bsddb3.dbobj as dbobj

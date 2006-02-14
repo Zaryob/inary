@@ -13,6 +13,9 @@
 # package database
 # interface for update/query to local package repository
 
+# Authors:  Eray Ozkural <eray@uludag.org.tr>
+#           Baris Metin <baris@uludag.org.tr>
+
 # we basically store everything in PackageInfo class
 # yes, we are cheap
 

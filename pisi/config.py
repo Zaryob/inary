@@ -8,6 +8,9 @@
 # any later version.
 #
 # Please read the COPYING file.
+#
+# Authors: Baris Metin <baris@uludag.org.tr>
+#          Eray Ozkural <eray@uludag.org.tr>
 
 """
 PISI Configuration module is used for gathering and providing
