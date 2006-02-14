@@ -16,11 +16,14 @@ import zipfile
 
 def openZip(fileName):
     if not zipfile.is_zipfile(fileName):
-        print "ZIP file required..."
-        sys.exit()
-    else:
-        f = zipfile.ZipFile(fileName, "r")
+        usage("ZIP file required...")
+
+    f = zipfile.ZipFile(fileName, "r")
+
+    if [True for file in f.namelist() if file == "files.xml"]:
         return f
+    else:
+        usage("'%s' is not a PiSi package" % (fileName))
 
 def fillFileList(zipFile):
     filelist = []
@@ -33,9 +36,23 @@ def fillFileList(zipFile):
 
 def uniq(alist):
     set = {}
-    return [set.setdefault(e,e) for e in alist if e not in set]
+    return [set.setdefault(e, e) for e in alist if e not in set]
 
-if __name__ == "__main__":
+def usage(errmsg):
+    print """
+    Error: %s
+    
+    Usage:
+      lspisi PiSi_package.PiSi         (lists the content of package)
+      lspisi dirs PiSi_package.PiSi    (lists directories in the package for the package developer)
+    """ % (errmsg)
+
+    sys.exit(1)
+
+def main():
+
+    if len(sys.argv) < 2 or ("dirs" in sys.argv and len(sys.argv) < 3):
+        usage("PiSi package required..")
 
     if sys.argv[1] == "dirs":
         f = openZip(sys.argv[2])
@@ -45,13 +62,16 @@ if __name__ == "__main__":
     
         for dir in uniq(dirlist):
             print "<Path fileType=\"\">" + dir.replace("install/", "/") + "</Path>"
-    elif sys.argv[1]:
+
+    else:
         f = openZip(sys.argv[1])
         for file in fillFileList(f):
             if f.getinfo(file).external_attr == 2716663808:
                 print file + " --> " + f.read(file)
             else:
                 print file
-    else:
-        print "pisi file name required..."
-        sys.exit()
+
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())
