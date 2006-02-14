@@ -244,6 +244,9 @@ class Install(AtomicOperation):
         """put files.xml, metadata.xml, actions.py and COMAR scripts
         somewhere in the file system. We'll need these in future..."""
 
+        if self.reinstall:
+            util.clean_dir(self.old_path)
+        
         ctx.ui.info(_('Storing %s, ') % ctx.const.files_xml)
         self.package.extract_file(ctx.const.files_xml, self.package.pkg_dir())
 
@@ -270,8 +273,6 @@ class Install(AtomicOperation):
         "update databases"
         if self.reinstall:
             Remove(self.metadata.package.name).remove_db(txn)
-            if not self.same_ver:
-                Remove.remove_pisi_files(self.old_path)
 
         # installdb
         ctx.installdb.install(self.metadata.package.name,
@@ -364,7 +365,7 @@ class Remove(AtomicOperation):
             txn.abort()
             raise e
 
-        self.remove_pisi_files(self.package.pkg_dir())
+        self.remove_pisi_files()
         ctx.ui.status()
         ctx.ui.notify(pisi.ui.removed, package = self.package, files = self.files)
 
@@ -407,9 +408,8 @@ class Remove(AtomicOperation):
             pass
 
     @staticmethod
-    def remove_pisi_files(path):
-        #TODO: what does this have to do with pisi files??
-        util.clean_dir(path)
+    def remove_pisi_files():
+        util.clean_dir(self.package.pkg_dir())
     
     def remove_db(self, txn):
         ctx.installdb.remove(self.package_name, txn)
@@ -443,7 +443,7 @@ def virtual_install(metadata, files, txn):
     """Recreate the package info for rebuilddb command"""
     pkg = metadata.package
 
-    # normally this can't be true. Just for backward compatibility
+    # normally this can't be true. Just for backwards compatibility
     # TODO: for speed only ctx.installdb.install exception can be
     # handled but this is much cleaner
     if ctx.installdb.is_installed(pkg.name, txn):
