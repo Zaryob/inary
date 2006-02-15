@@ -104,22 +104,8 @@ class Install(AtomicOperation):
         self.extract_install()
         self.store_pisi_files()
 
-        self.config_later = False
-
-        if self.metadata.package.providesComar:
-            if ctx.comar:
-                import pisi.comariface as comariface
-                self.register_comar_scripts()
-            else:
-                self.config_later = True # configure-pending will register scripts later
-
-        if 'System.Package' in [x.om for x in self.metadata.package.providesComar]:
-            if ctx.comar:
-                ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
-                comariface.run_postinstall(self.pkginfo.name)
-                ctx.ui.notify(pisi.ui.configured, package = self.pkginfo, files = self.files)
-            else:
-                self.config_later = True
+        self.register_comar()
+        self.postinstall()
 
         txn = ctx.dbenv.txn_begin()
         try:
@@ -136,7 +122,7 @@ class Install(AtomicOperation):
         else:
             event = pisi.ui.installed
         ctx.ui.notify(event, package = self.pkginfo, files = self.files)
-
+        
     def check_requirements(self):
         """check system requirements"""
         #TODO: IS THERE ENOUGH SPACE?
@@ -221,8 +207,28 @@ class Install(AtomicOperation):
             self.old_files = ctx.installdb.files(pkg.name)
             self.old_path = ctx.installdb.pkg_dir(pkg.name, iversion, irelease)
             self.reinstall = True
-            Remove(pkg.name).run_preremove()
+            self.remove_old = Remove(pkg.name)
+            self.remove_old.run_preremove()
 
+    def register_comar(self):
+        self.config_later = False
+
+        if self.metadata.package.providesComar:
+            if ctx.comar:
+                import pisi.comariface as comariface
+                self.register_comar_scripts()
+            else:
+                self.config_later = True # configure-pending will register scripts later
+
+    def postinstall(self):
+        if 'System.Package' in [x.om for x in self.metadata.package.providesComar]:
+            if ctx.comar:
+                ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
+                comariface.run_postinstall(self.pkginfo.name)
+                ctx.ui.notify(pisi.ui.configured, package = self.pkginfo, files = self.files)
+            else:
+                self.config_later = True
+            
     def extract_install(self):
         "unzip package in place"
 
@@ -272,7 +278,7 @@ class Install(AtomicOperation):
     def update_databases(self, txn):
         "update databases"
         if self.reinstall:
-            Remove(self.metadata.package.name).remove_db(txn)
+            self.remove_old.remove_db(txn)
 
         # installdb
         ctx.installdb.install(self.metadata.package.name,

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2005-12-15, 04:01:47 -->
-<!-- Copyright (C) 2005 PiSi Development Team,  -->
+<!-- Saved: 2006-02-15, 02:00:52 -->
+<!-- Copyright (C) 2006 PiSi Development Team,  -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
   <UIType>Qt</UIType>
@@ -11,10 +11,6 @@
   <Author>PiSi Development Team</Author>
   <EmaIl></EmaIl>
   <Sources>
-    <Source>
-      <Dir>tools</Dir>
-      <Name>ebuild2pisi.py</Name>
-    </Source>
     <Source>
       <Dir>tools</Dir>
       <Name>cat-db.py</Name>
@@ -512,9 +508,9 @@
   </Vcs>
   <FiletypeAssociations>
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
     <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
     <FiletypeAssociation pattern="*.py" type="SOURCES" />
   </FiletypeAssociations>
 </Project>
