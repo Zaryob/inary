@@ -23,6 +23,7 @@ import re
 import sys
 import sha
 import shutil
+import string
 import statvfs
 import operator
 
