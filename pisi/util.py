@@ -610,3 +610,15 @@ def env_update():
 
     # run ldconfig
     run_batch("/sbin/ldconfig -X -r %s" % ctx.config.dest_dir())
+    
+def pure_package_name(package_name):
+    "return pure package name from given string"
+    "ex: package_name=tasma-1.0.3-5-2.pisi, returns tasma"
+ 
+    if package_name.endswith(ctx.const.package_suffix):
+        package_name = package_name.strip(ctx.const.package_suffix)
+
+    return '-'.join([part for part in package_name.split('-') if part[0] not in string.digits])
+ 
+def generate_pisi_file(patchFile, fromFile, toFile):
+    run_batch("xdelta patch %s %s %s" % (patchFile, fromFile, toFile))

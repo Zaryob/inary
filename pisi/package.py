@@ -15,7 +15,7 @@
 
 # maintainer: baris and meren
 
-from os.path import join, exists
+from os.path import join, exists, basename, dirname
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -39,16 +39,51 @@ class Package:
     def __init__(self, packagefn, mode='r'):
         self.filepath = packagefn
         url = URI(packagefn)
-
+        
         if url.is_remote_file():
-            from fetcher import fetch_url
+            from fetcher import fetch_url, FetchError
             dest = ctx.config.packages_dir()
             self.filepath = join(dest, url.filename())
-            
+
+            # get current package name without version info (like tasma)
+            current_pkg = util.pure_package_name(url.filename())
+
+            # if package is installed (which means we are upgrading it),
+            # calculate needed info
+            if ctx.installdb.is_installed(current_pkg):   
+                installed = True
+
+                # calculate currently installed package's name and pisi file's location
+                (version, release, build) = ctx.installdb.get_version(current_pkg)
+                current = util.package_name(current_pkg, version, release, build, prependSuffix=False)
+                current_fn = join(dest, current) + ctx.const.package_suffix
+
+                # calculate xdelta file location (format: oldpackage_newpackage.xdelta)
+                # ex: tasma-1.0.2-4-1_tasma-1.0.3-5-2.xdelta
+                delta = basename(url.filename()).strip(ctx.const.package_suffix)
+                delta = "%s_%s" % (current, delta) + ctx.const.xdelta_suffix
+                
+                # create xdelta_url for fetching
+                xdelta_url = URI(join(dirname(str(url)), delta))
+                xdelta_fn = join(dest, xdelta_url.filename())
+            else:
+                installed = False
+                
             # FIXME: exists is not enough, also sha1sum check needed
             #        when implemented in pisi-index.xml
             if not exists(self.filepath):
-                fetch_url(url, dest, ctx.ui.Progress)
+                if installed and exists(current_fn):
+                    # if package is installed and old pisi file exists, fetch xdelta
+                    if not exists(xdelta_fn):
+                        ctx.ui.debug(_("Package xdelta URI: %s") % xdelta_url)
+                        try:
+                            fetch_url(xdelta_url, dest, ctx.ui.Progress)
+                        except FetchError:
+                            pass
+                    # generate new one using old pisi file and xdelta
+                    util.generate_pisi_file(xdelta_fn, current_fn, self.filepath)
+                else: 
+                    fetch_url(url, dest, ctx.ui.Progress)
             else:
                 ctx.ui.info(_('%s [cached]') % url.filename())
                 
