@@ -60,7 +60,7 @@ class Package:
 
                 # calculate xdelta file location (format: oldpackage_newpackage.xdelta)
                 # ex: tasma-1.0.2-4-1_tasma-1.0.3-5-2.xdelta
-                delta = basename(url.filename()).strip(ctx.const.package_suffix)
+                delta = basename(url.filename()).rstrip(ctx.const.package_suffix)
                 delta = "%s_%s" % (current, delta) + ctx.const.xdelta_suffix
                 
                 # create xdelta_url for fetching
