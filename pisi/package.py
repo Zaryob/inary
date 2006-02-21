@@ -72,6 +72,8 @@ class Package:
             # FIXME: exists is not enough, also sha1sum check needed
             #        when implemented in pisi-index.xml
             if not exists(self.filepath):
+                fetch_url(url, dest, ctx.ui.Progress)
+
                 if installed and exists(current_fn):
                     # if package is installed and old pisi file exists, fetch xdelta
                     if not exists(xdelta_fn):
@@ -81,9 +83,8 @@ class Package:
                         except FetchError:
                             pass
                     # generate new one using old pisi file and xdelta
+                    # baris: but why do we generate this here?
                     util.generate_pisi_file(xdelta_fn, current_fn, self.filepath)
-                else: 
-                    fetch_url(url, dest, ctx.ui.Progress)
             else:
                 ctx.ui.info(_('%s [cached]') % url.filename())
                 
