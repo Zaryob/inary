@@ -223,6 +223,7 @@ class Install(AtomicOperation):
     def postinstall(self):
         if 'System.Package' in [x.om for x in self.metadata.package.providesComar]:
             if ctx.comar:
+                import pisi.comariface as comariface
                 ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
                 comariface.run_postinstall(self.pkginfo.name)
                 ctx.ui.notify(pisi.ui.configured, package = self.pkginfo, files = self.files)
