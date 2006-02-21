@@ -617,7 +617,7 @@ def pure_package_name(package_name):
     "ex: package_name=tasma-1.0.3-5-2.pisi, returns tasma"
  
     if package_name.endswith(ctx.const.package_suffix):
-        package_name = package_name.strip(ctx.const.package_suffix)
+        package_name = package_name.rstrip(ctx.const.package_suffix)
 
     return '-'.join([part for part in package_name.split('-') if part[0] not in string.digits])
  
