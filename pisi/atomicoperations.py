@@ -414,8 +414,7 @@ class Remove(AtomicOperation):
             # TODO: store this somewhere
             pass
 
-    @staticmethod
-    def remove_pisi_files():
+    def remove_pisi_files(self):
         util.clean_dir(self.package.pkg_dir())
     
     def remove_db(self, txn):
