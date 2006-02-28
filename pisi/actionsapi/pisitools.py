@@ -150,11 +150,11 @@ def domove(sourceFile, destination, destinationFile = ''):
     ''' example call: pisitools.domove("/usr/bin/", "/usr/sbin")'''
     makedirs(join_path(get.installDIR(), destination))
         
-    for file in glob.glob(join_path(get.installDIR(), sourceFile)):
+    for filePath in glob.glob(join_path(get.installDIR(), sourceFile)):
         if not destinationFile:
-            move(file, join_path(get.installDIR(), join_path(destination, os.path.basename(file))))
+            move(filePath, join_path(get.installDIR(), join_path(destination, os.path.basename(filePath))))
         else:
-            move(file, join_path(get.installDIR(), join_path(destination, destinationFile)))
+            move(filePath, join_path(get.installDIR(), join_path(destination, destinationFile)))
 
 def rename(sourceFile, destinationFile):
     ''' renames sourceFile as destinationFile'''
@@ -208,9 +208,9 @@ def insinto(destinationDirectory, sourceFile,  destinationFile = ''):
     makedirs(join_path(get.installDIR(), destinationDirectory))
 
     if not destinationFile:
-        for file in glob.glob(sourceFile):
-            if can_access_file(file):
-                copy(file, join_path(get.installDIR(), join_path(destinationDirectory, os.path.basename(file))))
+        for filePath in glob.glob(sourceFile):
+            if can_access_file(filePath):
+                copy(filePath, join_path(get.installDIR(), join_path(destinationDirectory, os.path.basename(filePath))))
     else:
         copy(sourceFile, join_path(get.installDIR(), join_path(destinationDirectory, destinationFile)))
 
@@ -231,8 +231,8 @@ def newman(sourceFile, destinationFile):
 
 def remove(sourceFile):
     '''removes sourceFile'''
-    for file in glob.glob(join_path(get.installDIR(), sourceFile)):
-        unlink(file)
+    for filePath in glob.glob(join_path(get.installDIR(), sourceFile)):
+        unlink(filePath)
 
 def removeDir(destinationDirectory):
     '''removes destinationDirectory and its subtrees'''
