@@ -172,7 +172,7 @@ class Builder:
 
     def set_environment_vars(self):
         """Sets the environment variables for actions API to use"""
-        evn = {
+        env = {
             "PKG_DIR": self.pkg_dir(),
             "WORK_DIR": self.pkg_work_dir(),
             "INSTALL_DIR": self.pkg_install_dir(),
@@ -180,7 +180,7 @@ class Builder:
             "SRC_VERSION": self.spec.source.version,
             "SRC_RELEASE": self.spec.source.release
             }
-        os.environ.update(evn)
+        os.environ.update(env)
 
         # First check icecream, if not found use ccache, no need to use both
         # together (according to kde-wiki it cause performance loss)
