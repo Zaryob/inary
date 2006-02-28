@@ -44,24 +44,17 @@ class Error(pisi.Error):
     pass
 
 
-# this DAILYWTF approach will be removed in the next release.
-
 # Helper Functions
 def get_file_type(path, pinfo_list, install_dir):
     """Return the file type of a path according to the given PathInfo
     list"""
-    # not only confusing but totally non-deterministic behavior -- exa
-    # It is used for finding the best match to paths(in pinfolist).
-    # For an example, if paths contain ['/usr/share','/usr/share/doc']
-    # and path is /usr/share/doc/filename our iteration over paths should
-    # match the second item.
-    path = "/" + path # we need a real path.
-    try:
-        matched_paths = [pinfo.path for pinfo in pinfo_list if (install_dir + path).find(glob.glob(install_dir + pinfo.path)[0]) > -1]
-    except IndexError:
-        raise Error(_("Path decleration '%s' couldn't find in the install directory (%s)") % (pinfo.path, install_dir + pinfo.path))
-    matched_paths.sort()
-    info = [pinfo for pinfo in pinfo_list if matched_paths[-1] == pinfo.path][0]
+    
+    Match = lambda x: [match for match in glob.glob(install_dir + x) if join(install_dir, path).find(match) > -1]
+    Sort = lambda x: o(x.sort(), x)
+    o = lambda oo, o:o
+    
+    best_matched_path = Sort([pinfo.path for pinfo in pinfo_list if Match(pinfo.path)])[0]
+    info = [pinfo for pinfo in pinfo_list if best_matched_path == pinfo.path][0]
     return info.fileType, info.permanent
 
 def check_path_collision(package, pkgList):
