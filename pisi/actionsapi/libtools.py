@@ -41,12 +41,12 @@ def preplib(sourceDirectory = '/usr/lib'):
 def gnuconfig_update():
     ''' copy newest config.* onto source\'s '''
     for root, dirs, files in os.walk(os.getcwd()):
-        for file in files:
-            if file in ['config.sub', 'config.guess']:
-                targetFile = os.path.join(root, file)
+        for fileName in files:
+            if fileName in ['config.sub', 'config.guess']:
+                targetFile = os.path.join(root, fileName)
                 if os.path.islink(targetFile):
                     unlink(targetFile)
-                copy('/usr/share/gnuconfig/%s' % file, join_path(root, file))
+                copy('/usr/share/gnuconfig/%s' % fileName, join_path(root, fileName))
                 ctx.ui.info(_('GNU Config Update Finished.'))
 
 def libtoolize(parameters = ''):
