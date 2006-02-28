@@ -47,31 +47,22 @@ class Error(pisi.Error):
 # this DAILYWTF approach will be removed in the next release.
 
 # Helper Functions
-def get_file_type(path, pinfoList):
+def get_file_type(path, pinfo_list, install_dir):
     """Return the file type of a path according to the given PathInfo
     list"""
     # not only confusing but totally non-deterministic behavior -- exa
-    # The usage of depth is somewhat confusing. It is used for finding
-    # the best match to paths(in pinfolist). For an example, if paths
-    # contain ['/usr/share','/usr/share/doc'] and path is
-    # /usr/share/doc/filename our iteration over paths should match
-    # the second item.
-    depth = 0
-    ftype = ""
-    permanent = False
-    path = "/"+path # we need a real path.
-    for pinfo in pinfoList:
-        if util.subpath(pinfo.path, path):
-            length = len(pinfo.path)
-            if depth < length:
-                depth = length
-                ftype = pinfo.fileType
-                permanent = pinfo.permanent
-        #2049
-        else:
-            ftype = pinfo.fileType
-            permanent = pinfo.permanent
-    return ftype, permanent
+    # It is used for finding the best match to paths(in pinfolist).
+    # For an example, if paths contain ['/usr/share','/usr/share/doc']
+    # and path is /usr/share/doc/filename our iteration over paths should
+    # match the second item.
+    path = "/" + path # we need a real path.
+    try:
+        matched_paths = [pinfo.path for pinfo in pinfo_list if (install_dir + path).find(glob.glob(install_dir + pinfo.path)[0]) > -1]
+    except IndexError:
+        raise Error(_("Path decleration '%s' couldn't find in the install directory (%s)") % (pinfo.path, install_dir + pinfo.path))
+    matched_paths.sort()
+    info = [pinfo for pinfo in pinfo_list if matched_paths[-1] == pinfo.path][0]
+    return info.fileType, info.permanent
 
 def check_path_collision(package, pkgList):
     """This function will check for collision of paths in a package with
@@ -492,7 +483,7 @@ class Builder:
             # add the files under material path 
             for fpath, fhash in util.get_file_hashes(path, collisions, install_dir):
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
-                ftype, permanent = get_file_type(frpath, package.files)
+                ftype, permanent = get_file_type(frpath, package.files, install_dir)
                 try: # broken links and empty dirs can cause problem
                     fsize = os.path.getsize(fpath)
                 except OSError:
