@@ -31,6 +31,7 @@ import pisi.actionsapi.get
 
 from pisi.actionsapi import error
 from pisi.util import run_batch
+from pisi.util import join_path
 
 def can_access_file(sourceFile):
     '''test the existence of file'''
@@ -124,11 +125,17 @@ def move(sourceFile, destinationFile):
 def copy(sourceFile, destinationFile):
     '''recursively copy a sourceFile or directory to destinationFile'''
     for file in glob.glob(sourceFile):
-        if isFile(file) or isLink(file):
+        if isFile(file) and not isLink(file):
             try:
                 shutil.copy(file, destinationFile)
             except IOError:
                 error(_('ActionsAPI [copy]: Permission denied: %s to %s') % (file, destinationFile))
+        elif isLink(file):
+            if isDirectory(destinationFile):
+                os.symlink(os.readlink(file), join_path(destinationFile, os.path.basename(file)))
+            if isFile(destinationFile):
+                os.remove(destinationFile)
+                os.symlink(os.readlink(file), destinationFile)
         elif isDirectory(file):
             copytree(file, destinationFile)
         else:
@@ -136,7 +143,10 @@ def copy(sourceFile, destinationFile):
 
 def copytree(source, destination, sym = False):
     '''recursively copy an entire directory tree rooted at source'''
-    if isDirectory(source) or isLink(source):
+    if isDirectory(source):
+        if os.path.exists(destination):
+            copytree(source, join_path(destination, os.path.basename(source)))
+            return
         try:
             shutil.copytree(source, destination, sym)
         except OSError, e:
