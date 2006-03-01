@@ -59,15 +59,15 @@ def echo(destionationFile, content):
 
 def chmod(filePath, mode = 0755):
     '''change the mode of filePath to the mode'''
-    for filePath in glob.glob(filePath):
-        if can_access_file(filePath):
+    for fileName in glob.glob(filePath):
+        if can_access_file(fileName):
             try:
-                os.chmod(filePath, mode)
+                os.chmod(fileName, mode)
             except OSError:
                 ctx.ui.error(_('ActionsAPI [chmod]: Operation not permitted: %s (mode: %s)') \
-                                                                % (filePath, mode))
+                                                                % (fileName, mode))
         else:
-            ctx.ui.error(_('ActionsAPI [chmod]: File %s doesn\'t exists.') % (filePath))
+            ctx.ui.error(_('ActionsAPI [chmod]: File %s doesn\'t exists.') % (fileName))
 
 def chown(filePath, uid = "root", gid = "root"):
     '''change the owner and group id of filePath to uid and gid'''
