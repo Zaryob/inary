@@ -211,4 +211,4 @@ def dirName(filePath):
 
 def system(command):
     command = string.join(string.split(command))
-    run_batch(command, True)
+    return run_batch(command, True)
