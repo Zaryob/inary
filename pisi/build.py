@@ -441,6 +441,8 @@ class Builder:
 
         metadata.package.installedSize = size
 
+        old_build = None
+
         # build no
         if ctx.config.options.ignore_build_no:
             metadata.package.build = None  # means, build no information n/a
@@ -449,11 +451,12 @@ class Builder:
             metadata.package.build = None
             ctx.ui.warning(_('Build number is not available. For repo builds you must enable buildno in pisi.conf.'))
         else:
-            metadata.package.build = self.calc_build_no(metadata.package.name)
+            metadata.package.build, old_build = self.calc_build_no(metadata.package.name)
 
         metadata_xml_path = util.join_path(self.pkg_dir(), ctx.const.metadata_xml)
         metadata.write(metadata_xml_path)
         self.metadata = metadata
+        return metadata.package.build, old_build
 
     def gen_files_xml(self, package):
         """Generates files.xml using the path definitions in specfile and
@@ -527,7 +530,7 @@ class Builder:
             locate_package_names(files)
 
         if not found:
-            return 1
+            return (1, None)
             ctx.ui.warning(_('(no previous build found, setting build no to 1.)'))
         else:
             a = filter(lambda (x,y): y != None, found)
@@ -573,13 +576,13 @@ class Builder:
             # set build number
             if old_build is None:
                 ctx.ui.warning(_('(old package lacks a build no, setting build no to 1.)'))
-                return 1
+                return (1, None)
             elif changed:
                 ctx.ui.info(_('There are changes, incrementing build no to %d') % (old_build + 1))
-                return old_build + 1
+                return (old_build + 1, old_build)
             else:
                 ctx.ui.info(_('There is no change from previous build %d') % old_build)
-                return old_build
+                return (old_build, old_build)
 
     def build_packages(self):
         """Build each package defined in PSPEC file. After this process there
@@ -591,8 +594,10 @@ class Builder:
         self.strip_install_dir()
 
         package_names = []
+        old_package_names = []
 
         for package in self.spec.packages:
+            old_package_name = None
             # store additional files
             c = os.getcwd()
             os.chdir(self.specdir)
@@ -613,7 +618,7 @@ class Builder:
             self.gen_files_xml(package)
 
             ctx.ui.info(_("Generating %s,") % ctx.const.metadata_xml)
-            self.gen_metadata_xml(package)
+            build_number, old_build_number = self.gen_metadata_xml(package)
 
             ctx.ui.info(_("Creating PISI package %s.") % package.name)
 
@@ -621,8 +626,15 @@ class Builder:
                                      self.spec.source.version,
                                      self.spec.source.release,
                                      self.metadata.package.build)
+
+            if old_build_number:
+                old_package_name = util.package_name(package.name,
+                                     self.spec.source.version,
+                                     self.spec.source.release,
+                                     old_build_number)
             pkg = Package(name, 'w')
             package_names.append(name)
+            old_package_names.append(old_package_name)
 
             # add comar files to package
             os.chdir(self.specdir)
@@ -655,7 +667,7 @@ class Builder:
         else:
             ctx.ui.info(_("Keeping Build Directory"))
 
-        return package_names
+        return package_names, old_package_names
 
 
 # build functions...
