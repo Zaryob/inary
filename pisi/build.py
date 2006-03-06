@@ -480,10 +480,7 @@ class Builder:
             for fpath, fhash in util.get_file_hashes(path, collisions, install_dir):
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
                 ftype, permanent = get_file_type(frpath, package.files, install_dir)
-                try: # broken links and empty dirs can cause problem
-                    fsize = os.path.getsize(fpath)
-                except OSError:
-                    fsize = None
+                fsize = util.dir_size(fpath)
                 d[frpath] = FileInfo(path=frpath, type=ftype, permanent=permanent, 
                                      size=fsize, hash=fhash)
 
