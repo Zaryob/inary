@@ -291,6 +291,7 @@ def dir_size(dir):
     def sizes():
         for root, dirs, files in os.walk(dir):
             yield sum([getsize(join(root, name)) for name in files if not islink(join(root,name))])
+            yield sum([long(len(os.readlink((join(root, name))))) for name in files if islink(join(root,name))])
     return sum( sizes() )
 
 def copy_file(src,dest):
