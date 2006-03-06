@@ -136,12 +136,14 @@ def copy(source, destination):
             if isFile(destination):
                 os.remove(destination)
                 os.symlink(os.readlink(filePath), destination)
+            else:
+                os.symlink(os.readlink(filePath), destination)
         elif isDirectory(filePath):
             copytree(filePath, destination)
         else:
             error(_('ActionsAPI [copy]: File %s does not exist.') % filePath)
 
-def copytree(source, destination, sym = False):
+def copytree(source, destination, sym = True):
     '''recursively copy an entire directory tree rooted at source'''
     if isDirectory(source):
         if os.path.exists(destination):
