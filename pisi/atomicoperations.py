@@ -392,7 +392,7 @@ class Remove(AtomicOperation):
             # do not remove precious files :)
             # just write anything permanent="true" for instance
             return
-        if fileinfo.type == "config":
+        if fileinfo.type == ctx.const.conf:
             if os.path.isfile(fpath):
                 os.rename(fpath, fpath + ".oldconfig")
         else:
