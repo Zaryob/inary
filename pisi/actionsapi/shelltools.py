@@ -133,10 +133,9 @@ def copy(source, destination):
         elif isLink(filePath):
             if isDirectory(destination):
                 os.symlink(os.readlink(filePath), join_path(destination, os.path.basename(filePath)))
-            if isFile(destination):
-                os.remove(destination)
-                os.symlink(os.readlink(filePath), destination)
             else:
+                if isFile(destination):
+                    os.remove(destination)
                 os.symlink(os.readlink(filePath), destination)
         elif isDirectory(filePath):
             copytree(filePath, destination)
