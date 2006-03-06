@@ -50,7 +50,7 @@ def get_file_type(path, pinfo_list, install_dir):
     list"""
     
     Match = lambda x: [match for match in glob.glob(install_dir + x) if join(install_dir, path).find(match) > -1]
-    Sort = lambda x: o(x.sort(), x)
+    Sort = lambda x: o(x.reverse(), x)
     o = lambda oo, o:o
     
     best_matched_path = Sort([pinfo.path for pinfo in pinfo_list if Match(pinfo.path)])[0]
