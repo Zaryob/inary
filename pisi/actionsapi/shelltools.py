@@ -122,7 +122,7 @@ def move(source, destination):
         else:
             error(_('ActionsAPI [move]: File %s doesn\'t exists.') % (filePath))
 
-def copy(source, destination):
+def copy(source, destination, sym = True):
     '''recursively copy a "source" file or directory to "destination"'''
     for filePath in glob.glob(source):
         if isFile(filePath) and not isLink(filePath):
@@ -130,15 +130,17 @@ def copy(source, destination):
                 shutil.copy(filePath, destination)
             except IOError:
                 error(_('ActionsAPI [copy]: Permission denied: %s to %s') % (filePath, destination))
-        elif isLink(filePath):
+        elif isLink(filePath) and sym:
             if isDirectory(destination):
                 os.symlink(os.readlink(filePath), join_path(destination, os.path.basename(filePath)))
             else:
                 if isFile(destination):
                     os.remove(destination)
                 os.symlink(os.readlink(filePath), destination)
+        elif isLink(filePath) and not sym:
+            shutil.copy(os.readlink(filePath), destination)
         elif isDirectory(filePath):
-            copytree(filePath, destination)
+            copytree(filePath, destination, sym)
         else:
             error(_('ActionsAPI [copy]: File %s does not exist.') % filePath)
 

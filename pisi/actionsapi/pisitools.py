@@ -203,16 +203,16 @@ def dosym(sourceFile, destinationFile):
     except OSError:
         error(_('ActionsAPI [dosym]: File exists: %s') % (sourceFile))
 
-def insinto(destinationDirectory, sourceFile,  destinationFile = ''):
+def insinto(destinationDirectory, sourceFile,  destinationFile = '', sym = True):
     '''insert a sourceFile into destinationDirectory as a destinationFile with same uid/guid/permissions'''
     makedirs(join_path(get.installDIR(), destinationDirectory))
 
     if not destinationFile:
         for filePath in glob.glob(sourceFile):
             if can_access_file(filePath):
-                copy(filePath, join_path(get.installDIR(), join_path(destinationDirectory, os.path.basename(filePath))))
+                copy(filePath, join_path(get.installDIR(), join_path(destinationDirectory, os.path.basename(filePath))), sym)
     else:
-        copy(sourceFile, join_path(get.installDIR(), join_path(destinationDirectory, destinationFile)))
+        copy(sourceFile, join_path(get.installDIR(), join_path(destinationDirectory, destinationFile)), sym)
 
 def newdoc(sourceFile, destinationFile):
     '''inserts a sourceFile into /usr/share/doc/PACKAGE/ directory as a destinationFile'''
