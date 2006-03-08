@@ -578,7 +578,7 @@ def expand_src_components(A):
 ##    check_conflicts(order)
 ##    return G_f, order
 
-def emerge(A):
+def emerge(A, rebuild_all = False):
 
     # A was a list, remove duplicates and expand components
     A_0 = A = expand_src_components(set(A))
@@ -589,29 +589,39 @@ def emerge(A):
         return
         
     if not ctx.config.get_option('ignore_dependency'):
-        G_f, order = plan_emerge(A)
+        G_f, order_inst, order_build = plan_emerge(A, rebuild_all)
     else:
         G_f = None
         order_inst = []
+        order_build = A
 
+    if order_inst:
+        ctx.ui.info(_("""The following minimal list of packages will be installed 
+from repository in the respective order to satisfy dependencies:
+""") + util.strlist(order_inst))
     ctx.ui.info(_("""The following minimal list of packages will be built and
 installed in the respective order to satisfy dependencies:
-""") + util.strlist(order))
+""") + util.strlist(order_build))
 
     if ctx.get_option('dry_run'):
         return
 
-    if len(order) > len(A_0):
+    if len(order_inst) + len(order_build) > len(A_0):
         if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
             return False
             
-    ctx.ui.notify(ui.packagestogo, order = order)
-            
-    for x in order:
+    ctx.ui.notify(ui.packagestogo, order = order_inst)
+
+    for x in order_inst:
+        atomicoperations.install_single_name(x)
+
+    #ctx.ui.notify(ui.packagestogo, order = order_build)
+    
+    for x in order_build:
         package_names, blah = atomicoperations.build(x)
         install_pkg_files(package_names) # handle inter-package deps here
 
-def plan_emerge(A):
+def plan_emerge(A, rebuild_all):
 
     # try to construct a pisi graph of packages to
     # install / reinstall
@@ -635,6 +645,8 @@ def plan_emerge(A):
     #specfiles = [ ctx.sourcedb.get_source(x)[1] for x in A ]
     #pkgtosrc = {}
     B = A
+
+    install_list = []
     
     while len(B) > 0:
         Bp = set()
@@ -644,28 +656,32 @@ def plan_emerge(A):
             add_src(src)
 
             # add dependencies
-
-            for builddep in src.buildDependencies:
-                if not dependency.installed_satisfies_dep(builddep):
-                    srcdep = pkgtosrc(builddep.package)
-                    add_src(get_src(srcdep))
+            
+            def process_dep(dep):
+                if not dependency.installed_satisfies_dep(dep):
+                    if dependency.repo_satisfies_dep(dep):
+                        install_list.append(dep.package)
+                        return
+                    srcdep = pkgtosrc(dep.package)
                     if not srcdep in G_f.vertices():
                         Bp.add(srcdep)
-                    G_f.add_edge(src.name, srcdep)
+                        add_src(get_src(srcdep))
+                    if not src.name == srcdep: # firefox - firefox-devel thing
+                        G_f.add_edge(src.name, srcdep)
+
+            for builddep in src.buildDependencies:
+                process_dep(builddep)
                 
             for pkg in sf.packages:
                 for rtdep in pkg.packageDependencies:
-                    if not dependency.installed_satisfies_dep(rtdep):
-                        srcdep = pkgtosrc(rtdep.package)
-                        add_src(get_src(srcdep))
-                        if not srcdep in G_f.vertices():
-                            Bp.add(srcdep)
-                        if not src.name == srcdep: # firefox - firefox-devel thing
-                            G_f.add_edge(src.name, srcdep)
+                    process_dep(rtdep)
         B = Bp
     
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
-    order = G_f.topological_sort()
-    order.reverse()
-    return G_f, order
+    order_build = G_f.topological_sort()
+    order_build.reverse()
+    
+    G_f2, order_inst = plan_install_pkg_names(install_list)
+    
+    return G_f, order_inst, order_build
