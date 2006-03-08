@@ -150,6 +150,13 @@ class Install(AtomicOperation):
         if not packagedb.has_package(self.pkginfo.name):
             db = packagedb.thirdparty_packagedb
             db.add_package(self.pkginfo)
+        
+        # check file conflicts
+        for file in self.files.list:
+            if ctx.filesdb.has_file(file.path):
+                pkg, existing_file = ctx.filesdb.get_file(file.path)
+                if pkg != self.pkginfo.name:
+                    raise Error(_('Trying to overwrite an existing file: %s') % file.path) 
 
     def check_reinstall(self):
         "check reinstall, confirm action, and schedule reinstall"
