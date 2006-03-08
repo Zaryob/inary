@@ -296,13 +296,13 @@ def upgrade_pkg_names(A = []):
                 Ap.append(x)
             else:
                 ctx.ui.info(_('Package %s is already at the latest release %s.')
-                            % (pkg.name, pkg.release))
+                            % (pkg.name, pkg.release), True)
         else:
             if build < pkg.build:
                 Ap.append(x)
             else:
                 ctx.ui.info(_('Package %s is already at the latest build %s.')
-                            % (pkg.name, pkg.build))
+                            % (pkg.name, pkg.build), True)
     A = set(Ap)
 
     if len(A)==0:
@@ -583,7 +583,7 @@ def emerge(A):
     # A was a list, remove duplicates and expand components
     A_0 = A = expand_src_components(set(A))
     ctx.ui.debug('A = %s' % str(A))
-
+   
     if len(A)==0:
         ctx.ui.info(_('No packages to emerge.'))
         return
