@@ -607,36 +607,59 @@ installed in the respective order to satisfy dependencies:
             
     ctx.ui.notify(ui.packagestogo, order = order)
             
+    ctx.config.output_dir = ctx.config.packages_dir()
     for x in order:
-        atomicoperations.install_single_name(x)
+        package_names, blah = atomicoperations.build(x)
+        install(package_names) # handle inter-package deps here
 
 def plan_emerge(A):
+
     # try to construct a pisi graph of packages to
     # install / reinstall
 
-    G_f = pgraph.PGraph(packagedb)               # construct G_f
+    G_f = pisi.graph.Digraph()    
 
-    # find the "install closure" graph of G_f by package 
-    # set A using packagedb
-    for x in A:
-        G_f.add_package(x)
+    def get_src(name):
+        return ctx.sourcedb.get_source(sf)[1].source
+    def add_src(name):
+        if not str(src.name) in G_f.vertices():
+            G_f.add_vertex(str(src.name), (src.version, src.release))
+            #for pkg in sf.packages:
+            #    pkgtosrc[str(pkg.name)] = str(src.name) 
+    def pkgtosrc(pkg):
+        return ctx.sourcedb.pkgtosrc(pkg) 
+    
+    # setup first
+    #specfiles = [ ctx.sourcedb.get_source(x)[1] for x in A ]
+    #pkgtosrc = {}
     B = A
     
     while len(B) > 0:
         Bp = set()
         for x in B:
-            pkg = packagedb.get_package(x)
-            for dep in pkg.runtimeDependencies():
-                ctx.ui.debug('checking %s' % str(dep))
-                # we don't deal with already *satisfied* dependencies
-                if not dependency.installed_satisfies_dep(dep):
-                    if not dep.package in G_f.vertices():
-                        Bp.add(str(dep.package))
-                    G_f.add_dep(x, dep)
+            src = get_src(x)
+            add_src(src)
+
+            # add dependencies
+            for builddep in src.buildDependencies:
+                srcdep = pkgtosrc(builddep.package)
+                add_src(srcdep)
+                if not dep.package in G_f.vertices():
+                    Bp.add(srcdep)
+                G_f.add_edge(src.name, srcdep)
+            for pkg in x.packages:
+                for rtdep in pkg.packageDependencies:
+                    if not dependency.installed_satisfies_dep(rtdep):
+                        srcdep = pkgtosrc(rtdep.package)
+                        add_src(srcdep)
+                        if not dep.package in G_f.vertices():
+                            Bp.add(srcdep)
+                        if not src.name == srcdep: # firefox - firefox-devel thing
+                            G_f.add_edge(src.name, srcdep )
         B = Bp
+    
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
-    check_conflicts(order)
     return G_f, order

@@ -651,6 +651,7 @@ class Builder:
 
             ctx.ui.info(_("Creating PISI package %s.") % name)
 
+            # somebody explain to me why this is done here -- exa
             if old_build_number:
                 old_package_name = util.package_name(package.name,
                                      self.spec.source.version,

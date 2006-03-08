@@ -37,6 +37,7 @@ class SourceDB(object):
 
     def __init__(self):
         self.d = shelve.LockedDBShelf('source')
+        self.dpkgtosrc = shelve.LockedDBShelf('pkgtosrc')
 
     def close(self):
         self.d.close()
@@ -59,6 +60,10 @@ class SourceDB(object):
             if s.has_key(repo):
                 return (s[repo], repo) 
         return None
+
+    def pkgtosrc(self, name):
+        name = str(name)
+        return self.dpkgtosrc[name]
         
     def add_source(self, source_info, repo, txn = None):
         assert not source_info.errors()
@@ -68,9 +73,11 @@ class SourceDB(object):
             if not self.d.has_key(name):
                 s = dict()
             else:
-                s = self.d[name]
+                s = self.d.get(name, txn)
             s[repo] = source_info
-            self.d[name] = s
+            self.d.put(name, s, txn)
+            for pkg in source_info.packages:
+                self.dpkgtosrc.put(pkg.name, name, txn)
         self.d.txn_proc(proc, txn)
         
     def remove_source(self, name, repo):
