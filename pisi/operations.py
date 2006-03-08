@@ -618,13 +618,14 @@ def plan_emerge(A):
 
     G_f = pisi.graph.Digraph()    
 
-    def get_src(name):
-        return ctx.sourcedb.get_source(sf)[1].source
-    def add_src(name):
+    def get_spec(name):
+        if ctx.sourcedb.has_spec(name):
+            return ctx.sourcedb.get_spec(name)[1]
+        else:
+            raise Error(_('Cannot find source package: %s') % name)
+    def add_src(src):
         if not str(src.name) in G_f.vertices():
             G_f.add_vertex(str(src.name), (src.version, src.release))
-            #for pkg in sf.packages:
-            #    pkgtosrc[str(pkg.name)] = str(src.name) 
     def pkgtosrc(pkg):
         return ctx.sourcedb.pkgtosrc(pkg) 
     
@@ -636,8 +637,8 @@ def plan_emerge(A):
     while len(B) > 0:
         Bp = set()
         for x in B:
-            src = get_src(x)
-            add_src(src)
+            sf = get_spec(x)
+            add_src(sf.source)
 
             # add dependencies
             for builddep in src.buildDependencies:

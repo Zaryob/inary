@@ -41,6 +41,7 @@ class SourceDB(object):
 
     def close(self):
         self.d.close()
+        self.dpkgtosrc.close()
 
     def list(self):
         list = []
