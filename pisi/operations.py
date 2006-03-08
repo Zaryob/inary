@@ -646,11 +646,12 @@ def plan_emerge(A):
             # add dependencies
 
             for builddep in src.buildDependencies:
-                srcdep = pkgtosrc(builddep.package)
-                add_src(get_src(srcdep))
-                if not srcdep in G_f.vertices():
-                    Bp.add(srcdep)
-                G_f.add_edge(src.name, srcdep)
+                if not dependency.installed_satisfies_dep(builddep):
+                    srcdep = pkgtosrc(builddep.package)
+                    add_src(get_src(srcdep))
+                    if not srcdep in G_f.vertices():
+                        Bp.add(srcdep)
+                    G_f.add_edge(src.name, srcdep)
                 
             for pkg in sf.packages:
                 for rtdep in pkg.packageDependencies:
