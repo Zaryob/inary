@@ -94,6 +94,7 @@ class Fetcher:
         return archive_file 
 
     def _do_grab(self, fileURI, dest, total_size):
+        ctx.ui.notify(pisi.ui.downloading, url = fileURI)
         symbols = [' B/s', 'KB/s', 'MB/s', 'GB/s']
         bs, tt, = 1024, int(time())
         s_time = time()
