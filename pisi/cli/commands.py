@@ -378,7 +378,7 @@ downloaded from a repository containing sources.
     def __init__(self):
         super(Emerge, self).__init__()
 
-    name = ("Emerge", "em")
+    name = ("emerge", "em")
 
     def run(self):
         if not self.args:
