@@ -585,7 +585,7 @@ def emerge(A):
     ctx.ui.debug('A = %s' % str(A))
 
     if len(A)==0:
-        ctx.ui.info(_('No packages to build.'))
+        ctx.ui.info(_('No packages to emerge.'))
         return
         
     if not ctx.config.get_option('ignore_dependency'):

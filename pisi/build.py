@@ -640,12 +640,16 @@ class Builder:
             ctx.ui.info(_("Generating %s,") % ctx.const.metadata_xml)
             build_number, old_build_number = self.gen_metadata_xml(package)
 
-            ctx.ui.info(_("Creating PISI package %s.") % package.name)
-
-            name = util.package_name(package.name,
+            name =  util.package_name(package.name,
                                      self.spec.source.version,
                                      self.spec.source.release,
                                      self.metadata.package.build)
+
+            outdir = ctx.get_option('output_dir')
+            if outdir:
+                name = pisi.util.join_path(outdir, name)
+
+            ctx.ui.info(_("Creating PISI package %s.") % name)
 
             if old_build_number:
                 old_package_name = util.package_name(package.name,
