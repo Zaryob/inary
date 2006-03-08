@@ -191,11 +191,11 @@ Legend:
  - cli improvements
    - non interactive mode (similar to --auto in urpmi)
  / high-level build commands
+   + an emerge command, just for fun
+     + make use of binary repo to satisfy dependencies in emerge
    / build command enhancements:
      + aware of repo sources
      ? full dependency analysis like install/upgrade etc.
-   + an emerge command, just for fun
-   - make use of binary repo to satisfy dependencies in emerge
    ? build-all (or build-distro) command, or as a separate tool
  + make a package and sourcedb for each repo
    + packagedb
