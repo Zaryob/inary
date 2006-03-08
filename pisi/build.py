@@ -43,7 +43,7 @@ import pisi.component as component
 class Error(pisi.Error):
     pass
 
-
+    
 # Helper Functions
 def get_file_type(path, pinfo_list, install_dir):
     """Return the file type of a path according to the given PathInfo

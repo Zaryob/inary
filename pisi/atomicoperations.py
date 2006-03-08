@@ -429,6 +429,14 @@ class Remove(AtomicOperation):
 def remove_single(package_name):
     Remove(package_name).run()
 
+def build(package, authinfo=None):
+    # wrapper for build op`
+    if package.endswith('.xml'):
+        import pisi.build
+        pisi.build.build(package, authinfo)
+    #else:
+    #    ...
+
 def __is_virtual_upgrade(metadata):
 
     pkg = metadata.package

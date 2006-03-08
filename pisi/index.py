@@ -26,6 +26,7 @@ import pisi.context as ctx
 import pisi.specfile as specfile
 import pisi.metadata as metadata
 import pisi.packagedb as packagedb
+import pisi.sourcedb as sourcedb
 import pisi.util as util
 from pisi.package import Package
 from pisi.pxml.xmlfile import XmlFile
@@ -85,6 +86,8 @@ class Index(XmlFile):
             ctx.componentdb.update_component(comp)
         for pkg in self.packages:
             pkgdb.add_package(pkg)
+        for src in self.sources:
+            ctx.sourcedb.add_source(src, repo)
 
     def add_package(self, path, repo_uri):
         package = Package(path, 'r')

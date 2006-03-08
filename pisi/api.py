@@ -37,9 +37,9 @@ import pisi.sourcedb
 import pisi.component as component
 from pisi.index import Index
 import pisi.cli
-from pisi.operations import install, remove, upgrade
-from pisi.build import build, build_until
-from pisi.atomicoperations import resurrect_package
+from pisi.operations import install, remove, upgrade, emerge
+from pisi.build import build_until
+from pisi.atomicoperations import resurrect_package, build
 from pisi.metadata import MetaData
 from pisi.files import Files
 import pisi.search
@@ -73,13 +73,14 @@ def init(database = True, options = None, ui = None, comar = True):
         ctx.filesdb = pisi.files.FilesDB()
         ctx.componentdb = pisi.component.ComponentDB()
         packagedb.init_db()
-        pisi.sourcedb.init()
+        ctx.sourcedb = pisi.sourcedb.init()
         pisi.search.init(['summary', 'description'], ['en', 'tr'])
     else:
         ctx.repodb = None
         ctx.installdb = None
         ctx.filesdb = None
         ctx.componentdb = None
+        ctx.sourcedb = None
     ctx.ui.debug('PISI API initialized')
     ctx.initialized = True
 

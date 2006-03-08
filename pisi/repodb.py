@@ -51,7 +51,7 @@ class RepoDB(object):
         # initialize package/source dbs
         for x in self.list():
             packagedb.add_db(x)
-
+            
     def close(self):
         self.d.close()
 

@@ -320,10 +320,14 @@ def ignoredep_opt(self):
 class Build(Command):
     """Build a PISI package using a pspec.xml file
 
-Usage: build <pspec.xml>
+Usage: build [<pspec.xml> | <sourcename>] ...
 
 You can give a URI of the pspec.xml file. PISI will
 fetch all necessary files and build the package for you.
+
+Alternatively, you can give the name of a source package
+to be downloaded from a repository containing sources.
+
 """
     __metaclass__ = autocommand
 
@@ -350,8 +354,8 @@ fetch all necessary files and build the package for you.
 
         self.init(database = True)
         ctx.ui.info(_('Output directory: %s') % ctx.config.options.output_dir)
-        for arg in self.args:
-            pisi.api.build(arg, self.authInfo)
+        for x in self.args:
+            pisi.api.build(x, self.authInfo)
         self.finalize()
 
 
@@ -934,6 +938,42 @@ Gives a brief list of PiSi components published in the repositories.
                 ctx.ui.info('%s - %s ' % (component.name, unicode(component.summary)))
         self.finalize()
 
+
+class ListSources(Command):
+    """List available sources
+
+Usage: list-sources
+
+Gives a brief list of sources published in the repositories.
+"""
+    __metaclass__ = autocommand
+
+    def __init__(self):
+        super(ListSources, self).__init__()
+
+    name = ("list-sources", "ls")
+
+    def options(self):
+        self.parser.add_option("-l", "--long", action="store_true",
+                               default=False, help=_("show in long format"))
+
+    def run(self):
+
+        self.init(True)
+
+        list = ctx.sourcedb.list()
+        list.sort()
+        for p in list:
+            source = ctx.sourcedb.get_source(p)
+            if self.options.long:
+                ctx.ui.info(unicode(component))
+            else:
+                lenp = len(p)
+                #if p in installed_list:
+                #    p = colorize(p, 'cyan')
+                p = p + ' ' * max(0, 15 - lenp)
+                ctx.ui.info('%s - %s ' % (source.name, unicode(source.summary)))
+        self.finalize()
 
 class ListUpgrades(Command):
     """List packages to be upgraded

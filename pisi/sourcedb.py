@@ -16,6 +16,9 @@ package source database
 interface for update/query to local package repository
 we basically store everything in sourceinfo class
 yes, we are cheap
+to handle multiple repositories, for sources, we 
+store a set of repositories in which the source appears.
+the actual guy to take is determined from the repo order.
 """
 
 import os
@@ -28,14 +31,21 @@ _ = __trans.ugettext
 import pisi.util as util
 import pisi.context as ctx
 import pisi.lockeddbshelve as shelve
+import pisi.repodb
 
 class SourceDB(object):
 
-    def __init__(self, id = 'repo'):
-        self.d = shelve.LockedDBShelf('source-%s' % id)
+    def __init__(self):
+        self.d = shelve.LockedDBShelf('source')
 
     def close(self):
         self.d.close()
+
+    def list(self):
+        list = []
+        for (pkg, x) in self.d.items():
+            list.append(pkg) # for some reason we couldn't return self.d.items()!! --exa
+        return list
 
     def has_source(self, name):
         name = str(name)
@@ -43,16 +53,38 @@ class SourceDB(object):
 
     def get_source(self, name):
         name = str(name)
-        return self.d[name]
+        s = self.d[name]
+        order = ctx.repodb.list()
+        for repo in order:
+            if s.has_key(repo):
+                return s[repo] 
+        return None
 
-    def add_source(self, source_info):
+    def add_source(self, source_info, repo, txn = None):
         assert not source_info.errors()
         name = str(source_info.name)
-        self.d[name] = source_info
-
-    def remove_source(self, name):
+        repo = str(repo)
+        def proc(txn):
+            if not self.d.has_key(name):
+                s = dict()
+            else:
+                s = self.d[name]
+            s[repo] = source_info
+            self.d[name] = s
+        self.d.txn_proc(proc, txn)
+        
+    def remove_source(self, name, repo):
         name = str(name)
-        del self.d[name]
+        repo = str(repo)
+        def proc(txn):
+        #assert self.has_source(name)
+            s = self.d[name]
+            s.remove(repo)
+            if (len(s)==0):
+                del self.d[name]
+            else:
+                self.d[name] = s
+        self.d.txn_proc(proc, txn)
 
 sourcedb = None
 
