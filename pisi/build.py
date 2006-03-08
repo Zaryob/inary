@@ -85,6 +85,27 @@ class Builder:
     """Provides the package build and creation routines"""
     #FIXME: this class and every other class must use URLs as paths!
 
+    @staticmethod
+    def from_name(name, authinfo = None):
+        # download package and return an installer object
+        # find package in repository
+        src, reponame = ctx.sourcedb.get_source(name)
+        if src:    
+
+            src_uri = URI(src.sourceURI)
+            if src_uri.is_absolute_path():
+                pkg_path = str(src_uri)
+            else:
+                repo = ctx.repodb.get_repo(reponame)
+                src_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
+                                        str(src_uri.path()))
+    
+            ctx.ui.debug(_("Source URI: %s") % src_path)
+    
+            return Builder(src_path, authinfo)
+        else:
+            raise Error(_("Source %s not found in any active repository.") % name)
+    
     def __init__(self, specuri, authinfo = None):
 
         # process args
@@ -671,8 +692,11 @@ class Builder:
 
 # build functions...
 
-def build(pspecfile, authinfo=None):
-    pb = pisi.build.Builder(pspecfile, authinfo)
+def build(pspec, authinfo=None):
+    if pspec.endswith('.xml'):
+        pb = Builder(pspec, authinfo)
+    else:
+        pb = Builder.from_name(pspec, authinfo)
     return pb.build()
 
 order = {"none": 0,

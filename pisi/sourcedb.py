@@ -57,9 +57,9 @@ class SourceDB(object):
         order = ctx.repodb.list()
         for repo in order:
             if s.has_key(repo):
-                return s[repo] 
+                return (s[repo], repo) 
         return None
-
+        
     def add_source(self, source_info, repo, txn = None):
         assert not source_info.errors()
         name = str(source_info.name)

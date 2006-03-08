@@ -964,9 +964,10 @@ Gives a brief list of sources published in the repositories.
         list = ctx.sourcedb.list()
         list.sort()
         for p in list:
-            source = ctx.sourcedb.get_source(p)
+            source, repo = ctx.sourcedb.get_source(p)
             if self.options.long:
-                ctx.ui.info(unicode(component))
+                ctx.ui.info('[Repository: ' + repo + ']')
+                ctx.ui.info(unicode(source))
             else:
                 lenp = len(p)
                 #if p in installed_list:
