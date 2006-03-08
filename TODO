@@ -190,19 +190,17 @@ Legend:
    - code to check if the package has a valid signature
  - cli improvements
    - non interactive mode (similar to --auto in urpmi)
- - high-level build commands
-   - build command enhancements:
-     - aware of repo sources
-     - full dependency analysis like install/upgrade etc.
-   - build-all (or build-distro) command, or as a separate tool
-   - an emerge command, just for fun
- / make a package and sourcedb for each repo
+ / high-level build commands
+   / build command enhancements:
+     + aware of repo sources
+     ? full dependency analysis like install/upgrade etc.
+   / an emerge command, just for fun
+   ? build-all (or build-distro) command, or as a separate tool
+ + make a package and sourcedb for each repo
    + packagedb
-   - sourceb
- - improve url support: consider adding "other" protocols
+   + sourceb
+ ? improve url support: consider adding "other" protocols
    - removable media: media://
- - examples:
-   - PSPEC i18n example for our great project with Bahadir :)
 
  * medium priority
 
@@ -213,7 +211,7 @@ Legend:
    + extend XML specs to support that
    - cross-platform building support
  - incremental build/fetch for repository index (pisi-index.xml)
- - xdelta support (caglar)
+ / xdelta support (caglar)
    - diffsets
  - a command (check-repo) to check if repos are consistent wrt dep relations
  - component improvements (optional)
