@@ -741,7 +741,6 @@ If package specs are given, they should be the names of package dirs under /var/
     name = ("rebuild-db", "rdb")
 
     def run(self):
-            
         if self.args:
             self.init(database=True)
             for package_fn in self.args:
@@ -1001,16 +1000,16 @@ Gives a brief list of sources published in the repositories.
         list = ctx.sourcedb.list()
         list.sort()
         for p in list:
-            source, repo = ctx.sourcedb.get_source(p)
+            sf, repo = ctx.sourcedb.get_spec(p)
             if self.options.long:
                 ctx.ui.info('[Repository: ' + repo + ']')
-                ctx.ui.info(unicode(source))
+                ctx.ui.info(unicode(sf.source))
             else:
                 lenp = len(p)
                 #if p in installed_list:
                 #    p = colorize(p, 'cyan')
                 p = p + ' ' * max(0, 15 - lenp)
-                ctx.ui.info('%s - %s ' % (source.name, unicode(source.summary)))
+                ctx.ui.info('%s - %s' % (sf.source.name, unicode(sf.source.summary)))
         self.finalize()
 
 class ListUpgrades(Command):

@@ -89,7 +89,8 @@ class Builder:
     def from_name(name, authinfo = None):
         # download package and return an installer object
         # find package in repository
-        src, reponame = ctx.sourcedb.get_source(name)
+        sf, reponame = ctx.sourcedb.get_spec(name)
+        src = sf.source
         if src:    
 
             src_uri = URI(src.sourceURI)

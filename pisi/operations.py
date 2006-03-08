@@ -620,9 +620,11 @@ def plan_emerge(A):
 
     def get_spec(name):
         if ctx.sourcedb.has_spec(name):
-            return ctx.sourcedb.get_spec(name)[1]
+            return ctx.sourcedb.get_spec(name)[0]
         else:
             raise Error(_('Cannot find source package: %s') % name)
+    def get_src(name):
+        return get_spec(name).source
     def add_src(src):
         if not str(src.name) in G_f.vertices():
             G_f.add_vertex(str(src.name), (src.version, src.release))
@@ -638,24 +640,27 @@ def plan_emerge(A):
         Bp = set()
         for x in B:
             sf = get_spec(x)
-            add_src(sf.source)
+            src = sf.source
+            add_src(src)
 
             # add dependencies
+
             for builddep in src.buildDependencies:
                 srcdep = pkgtosrc(builddep.package)
-                add_src(srcdep)
-                if not dep.package in G_f.vertices():
+                add_src(get_src(srcdep))
+                if not srcdep in G_f.vertices():
                     Bp.add(srcdep)
                 G_f.add_edge(src.name, srcdep)
-            for pkg in x.packages:
+                
+            for pkg in sf.packages:
                 for rtdep in pkg.packageDependencies:
                     if not dependency.installed_satisfies_dep(rtdep):
                         srcdep = pkgtosrc(rtdep.package)
-                        add_src(srcdep)
-                        if not dep.package in G_f.vertices():
+                        add_src(get_src(srcdep))
+                        if not srcdep in G_f.vertices():
                             Bp.add(srcdep)
                         if not src.name == srcdep: # firefox - firefox-devel thing
-                            G_f.add_edge(src.name, srcdep )
+                            G_f.add_edge(src.name, srcdep)
         B = Bp
     
     if ctx.config.get_option('debug'):

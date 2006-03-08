@@ -438,7 +438,7 @@ def remove_single(package_name):
 def build(package, authinfo=None):
     # wrapper for build op
     import pisi.build
-    pisi.build.build(package, authinfo)
+    return pisi.build.build(package, authinfo)
 
 def __is_virtual_upgrade(metadata):
 
