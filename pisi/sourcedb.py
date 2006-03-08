@@ -48,11 +48,11 @@ class SourceDB(object):
             list.append(pkg) # for some reason we couldn't return self.d.items()!! --exa
         return list
 
-    def has_source(self, name):
+    def has_spec(self, name):
         name = str(name)
         return self.d.has_key(name)
 
-    def get_source(self, name):
+    def get_spec(self, name):
         name = str(name)
         s = self.d[name]
         order = ctx.repodb.list()
@@ -65,22 +65,22 @@ class SourceDB(object):
         name = str(name)
         return self.dpkgtosrc[name]
         
-    def add_source(self, source_info, repo, txn = None):
-        assert not source_info.errors()
-        name = str(source_info.name)
+    def add_spec(self, spec, repo, txn = None):
+        assert not spec.errors()
+        name = str(spec.source.name)
         repo = str(repo)
         def proc(txn):
             if not self.d.has_key(name):
                 s = dict()
             else:
                 s = self.d.get(name, txn)
-            s[repo] = source_info
+            s[repo] = spec
             self.d.put(name, s, txn)
-            for pkg in source_info.packages:
+            for pkg in spec.packages:
                 self.dpkgtosrc.put(pkg.name, name, txn)
         self.d.txn_proc(proc, txn)
         
-    def remove_source(self, name, repo):
+    def remove_specfile(self, name, repo):
         name = str(name)
         repo = str(repo)
         def proc(txn):

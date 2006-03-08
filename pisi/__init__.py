@@ -12,9 +12,9 @@
 
 # PiSi version
 
-__version__ = "1.0.4"
+__version__ = "1.0.5"
 
-__dbversion__ = "1.0.4"
+__dbversion__ = "1.0.5"
 
 __all__ = [ 'api', 'config', 'packagedb', 'installdb', 'search' ]
 

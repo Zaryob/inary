@@ -607,10 +607,9 @@ installed in the respective order to satisfy dependencies:
             
     ctx.ui.notify(ui.packagestogo, order = order)
             
-    ctx.config.output_dir = ctx.config.packages_dir()
     for x in order:
         package_names, blah = atomicoperations.build(x)
-        install(package_names) # handle inter-package deps here
+        install_pkg_files(package_names) # handle inter-package deps here
 
 def plan_emerge(A):
 

@@ -339,7 +339,7 @@ to be downloaded from a repository containing sources.
     def options(self):
         buildno_opts(self)
         ignoredep_opt(self)
-        self.parser.add_option("-O", "--output-dir", action="store", default=".",
+        self.parser.add_option("-O", "--output-dir", action="store", default=None,
                                help=_("output directory for produced packages"))
         self.parser.add_option("-A", "--ignore-action-errors",
                                action="store_true", default=False,
@@ -353,9 +353,46 @@ to be downloaded from a repository containing sources.
             return
 
         self.init(database = True)
-        ctx.ui.info(_('Output directory: %s') % ctx.config.options.output_dir)
+        if ctx.get_option('output_dir'):
+            ctx.ui.info(_('Output directory: %s') % ctx.config.options.output_dir)
+        else:
+            ctx.ui.info(_('Outputting packages in the working directory.'))
+            ctx.config.options.output_dir = '.'
+
         for x in self.args:
             pisi.api.build(x, self.authInfo)
+        self.finalize()
+
+        
+class Emerge(Build):
+    """Build and install a PISI source package from repository
+
+Usage: build <sourcename> ...
+
+You should give the name of a source package to be 
+downloaded from a repository containing sources.
+
+"""
+    __metaclass__ = autocommand
+
+    def __init__(self):
+        super(Emerge, self).__init__()
+
+    name = ("Emerge", "em")
+
+    def run(self):
+        if not self.args:
+            self.help()
+            return
+
+        self.init(database = True)
+        if ctx.get_option('output_dir'):
+            ctx.ui.info(_('Output directory: %s') % ctx.config.options.output_dir)
+        else:
+            ctx.ui.info(_('Outputting binary packages in the package cache.'))
+            ctx.config.options.output_dir = ctx.config.packages_dir()
+
+        pisi.api.emerge(self.args)
         self.finalize()
 
 

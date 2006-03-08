@@ -45,7 +45,7 @@ class Index(XmlFile):
 
     tag = "PISI"
 
-    t_Sources = [ [specfile.Source], autoxml.optional, "Source"]
+    t_Specs = [ [specfile.SpecFile], autoxml.optional, "SpecFile"]
     t_Packages = [ [metadata.Package], autoxml.optional, "Package"]
     t_Components = [ [component.Component], autoxml.optional, "Component"]
 
@@ -77,7 +77,7 @@ class Index(XmlFile):
                     ctx.ui.info(_('Adding %s to component index') % fn)
                     self.add_component(os.path.join(root, fn))
                 if fn == 'pspec.xml':
-                    self.add_source(os.path.join(root, fn), repo_uri)
+                    self.add_spec(os.path.join(root, fn), repo_uri)
 
     def update_db(self, repo):
         pkgdb = packagedb.get_db(repo)
@@ -86,8 +86,8 @@ class Index(XmlFile):
             ctx.componentdb.update_component(comp)
         for pkg in self.packages:
             pkgdb.add_package(pkg)
-        for src in self.sources:
-            ctx.sourcedb.add_source(src, repo)
+        for sf in self.specs:
+            ctx.sourcedb.add_spec(sf, repo)
 
     def add_package(self, path, repo_uri):
         package = Package(path, 'r')
@@ -121,7 +121,7 @@ class Index(XmlFile):
             ctx.ui.error(_('Component in %s is corrupt') % path)
             #ctx.ui.error(str(Error(*errs)))
 
-    def add_source(self, path, repo_uri):
+    def add_spec(self, path, repo_uri):
         ctx.ui.info(_('Adding %s to source index') % path)
         sf = specfile.SpecFile()
         sf.read(path)
@@ -134,4 +134,4 @@ class Index(XmlFile):
                 sf.source.sourceURI = os.path.realpath(path)
             else:                           # create relative path by default
                 sf.source.sourceURI = util.removepathprefix(repo_uri, path)
-            self.sources.append(sf.source)
+            self.specs.append(sf)
