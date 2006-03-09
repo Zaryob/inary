@@ -53,24 +53,23 @@ def main():
         print "'%s' dizini yok. Paket build edilmemiş olabilir.." % (install_dir)
         return
 
+    unowned_files = []
     all_paths_in_packages = []
-    all_files_under_install_dir = []
     files_already_in_any_package = []
 
     for package in spec.packages:
         for path in package.files:
             all_paths_in_packages.append(util.join_path(install_dir + path.path))
 
-    for r, d, f in os.walk(install_dir):
-        for fi in f:
-            all_files_under_install_dir.append(util.join_path(r, fi))
-
-    for file_ in all_files_under_install_dir:
-        for path_ in all_paths_in_packages:
-            if not file_.find(path_):
-                files_already_in_any_package.append(file_)
-
-    unowned_files = set(all_files_under_install_dir) - set(files_already_in_any_package)
+    for root, dirs, files in os.walk(install_dir):
+        for file_ in files:
+            already_in_package = False
+            fpath = util.join_path(root, file_)
+            for path in all_paths_in_packages:
+                if not fpath.find(path):
+                    already_in_package = True
+            if not already_in_package:
+                unowned_files.append(fpath)
 
     if unowned_files:
         print
