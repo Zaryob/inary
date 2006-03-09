@@ -310,6 +310,11 @@ def buildno_opts(self):
                            default=False,
                            help=_("do not take build no into account."))
 
+def abandoned_files_opt(self):
+    self.parser.add_option("", "--show-abandoned-files", action="store_true",
+                           default=False,
+                           help=_("show abandoned files under the install directory after build."))
+
 def ignoredep_opt(self):
     p = self.parser
     p.add_option("-E", "--ignore-dependency", action="store_true",
@@ -338,6 +343,7 @@ to be downloaded from a repository containing sources.
 
     def options(self):
         buildno_opts(self)
+        abandoned_files_opt(self)
         ignoredep_opt(self)
         self.parser.add_option("-O", "--output-dir", action="store", default=None,
                                help=_("output directory for produced packages"))
@@ -347,12 +353,13 @@ to be downloaded from a repository containing sources.
         self.parser.add_option("-B", "--ignore-comar", action="store_true",
                                default=False, help=_("bypass comar configuration agent"))
 
+
     def run(self):
         if not self.args:
             self.help()
             return
 
-        self.init(database = True)
+        self.init(database = True) 
         if ctx.get_option('output_dir'):
             ctx.ui.info(_('Output directory: %s') % ctx.config.options.output_dir)
         else:
