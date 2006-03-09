@@ -155,7 +155,8 @@ class Install(AtomicOperation):
             if ctx.filesdb.has_file(file.path):
                 pkg, existing_file = ctx.filesdb.get_file(file.path)
                 if pkg != self.pkginfo.name:
-                    raise Error(_('Trying to overwrite an existing file: %s') % file.path) 
+                    #raise Error(_('Trying to overwrite an existing file: %s') % file.path) 
+                    ctx.ui.warning(_('Trying to overwrite an existing file: %s') % file.path) 
 
     def check_reinstall(self):
         "check reinstall, confirm action, and schedule reinstall"
@@ -402,13 +403,12 @@ class Remove(AtomicOperation):
             if os.path.isfile(fpath):
                 os.rename(fpath, fpath + ".oldconfig")
         else:
-            # check if file is removed manually.
-            # And we don't remove directories!
-            # TODO: remove directory if there is nothing under it?
             if os.path.isfile(fpath) or os.path.islink(fpath):
                 os.unlink(fpath)
+            elif os.path.isdir(fpath) and os.listdir(fpath)==[]:
+                os.rmdir(fpath)   # remove directory if there is nothing under it
             else:
-                ctx.ui.warning(_('Not removing non-file, non-link %s') % fpath)
+                ctx.ui.warning(_('Not removing non-file, non-link %s') % fpath, True)
 
     remove_file = staticmethod(remove_file)
     
