@@ -646,7 +646,7 @@ def plan_emerge(A, rebuild_all):
     #pkgtosrc = {}
     B = A
 
-    install_list = []
+    install_list = set()
     
     while len(B) > 0:
         Bp = set()
@@ -660,7 +660,7 @@ def plan_emerge(A, rebuild_all):
             def process_dep(dep):
                 if not dependency.installed_satisfies_dep(dep):
                     if dependency.repo_satisfies_dep(dep):
-                        install_list.append(dep.package)
+                        install_list.add(dep.package)
                         return
                     srcdep = pkgtosrc(dep.package)
                     if not srcdep in G_f.vertices():

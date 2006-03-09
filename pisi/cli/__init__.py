@@ -52,15 +52,16 @@ class CLI(UI):
     def close(self):
         util.xterm_title_reset()
 
-    def output(self, msg, err = False):
-        if type(msg)==type(unicode()):
-            msg = msg.encode('utf-8')
-        if err:
-            out = sys.stderr
-        else:
-            out = sys.stdout
-        out.write(msg)
-        out.flush()
+    def output(self, msg, err = False, verbose = False):
+        if (verbose and self.show_verbose) or (not verbose):                
+            if type(msg)==type(unicode()):
+                msg = msg.encode('utf-8')
+            if err:
+                out = sys.stderr
+            else:
+                out = sys.stdout
+            out.write(msg)
+            out.flush()
 
     def info(self, msg, verbose = False, noln = False):
         # TODO: need to look at more kinds of info messages
@@ -69,24 +70,21 @@ class CLI(UI):
             msgend = ''
         else:
             msgend = '\n'
-        if verbose and self.show_verbose:
-            self.output(msg + msgend)
-        elif not verbose:
-            self.output(msg + msgend)
+        self.output(msg + msgend, verbose=verbose)
 
-    def warning(self,msg):
+    def warning(self, msg, verbose = False):
         if ctx.get_option('no_color'):
-            self.output(_('Warning: ') + msg + '\n', err=True)
+            self.output(_('Warning: ') + msg + '\n', err=True, verbose=verbose)
         else:
-            self.output(colorize(msg + '\n', 'purple'), err=True)
+            self.output(colorize(msg + '\n', 'purple'), err=True, verbose=verbose)
 
-    def error(self,msg):
+    def error(self, msg):
         if ctx.get_option('no_color'):
             self.output(_('Error: ') + msg + '\n', err=True)
         else:
             self.output(colorize(msg + '\n', 'red'), err=True)
 
-    def action(self,msg):
+    def action(self, msg, verbose = False):
         #TODO: this seems quite redundant?
         self.output(colorize(msg + '\n', 'green'))
 
