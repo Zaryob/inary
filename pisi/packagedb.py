@@ -44,6 +44,10 @@ class PackageDB(object):
     def close(self):
         self.d.close()
         self.dr.close()
+        
+    def destroy(self):
+        self.d.destroy()
+        self.dr.destroy()
 
     def has_package(self, name, txn = None):
         name = str(name)
@@ -118,8 +122,8 @@ def get_db(name):
 
 def remove_db(name):
     pisi.packagedb.packagedbs[name].close()
+    pisi.packagedb.packagedbs[name].destroy()
     del pisi.packagedb.packagedbs[name]
-    #FIXME: erase database file?
     
 def has_package(name, txn = None):
     def proc(txn):

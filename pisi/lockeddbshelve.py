@@ -93,6 +93,9 @@ class LockedDBShelf(shelve.DBShelf):
             raise Error(_('Cannot attain read or write access to database %s') % dbname)
         self.open(filename, dbname, filetype, flags, mode)
 
+    def destroy(self):
+        os.unlink(self.filename)
+
     def __del__(self):
         # superclass does something funky, we don't need that
         pass
