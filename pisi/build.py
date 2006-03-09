@@ -614,9 +614,6 @@ class Builder:
                             changed = True
                             break
                         else:
-                            #FIXME: workaround for .a issue, skip .a files
-                            if fn.path.endswith('.a') and fn.type=='library':
-                                continue
                             if fo.hash != fn.hash:
                                 changed = True
                                 break

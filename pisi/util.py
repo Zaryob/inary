@@ -300,6 +300,19 @@ def copy_file(src,dest):
     check_dir(os.path.dirname(dest))
     shutil.copyfile(src, dest)
 
+def clean_ar_timestamps(ar_file):
+    """clean the timestamps of the ar files"""
+    content = open(ar_file).readlines()
+    if not content[0].strip() == '!<arch>':
+        return
+    fp = open(ar_file, 'w')
+    for line in content:
+        pos = line.rfind(chr(32) + chr(96))
+        if pos > -1 and line[pos - 57:pos + 2].find(chr(47)) > -1:
+             line = line[:pos - 41] + '0000000000' + line[pos - 31:]
+        fp.write(line)
+    fp.close()
+
 # FIXME: this should be done in a much much simpler way
 # as it stands, it seems to be a kludge to solve
 # an unrelated problem
@@ -312,7 +325,14 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
     given."""
 
     def sha1_sum(f, data=False):
+        if not data and f.endswith('.a'):
+            #workaround for .a issue..
+            #don't skip .a files,
+            #but pad their timestamps with '0'..
+            clean_ar_timestamps(f)
+
         func = None
+
         if data:
             func = sha1_data
         else:
