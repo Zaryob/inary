@@ -117,6 +117,7 @@ def get_db(name):
     return pisi.packagedb.packagedbs[name]
 
 def remove_db(name):
+    pisi.packagedb.packagedbs[name].close()
     del pisi.packagedb.packagedbs[name]
     #FIXME: erase database file?
     

@@ -103,7 +103,8 @@ class RepoDB(object):
             self.d.delete("repo-" + name, txn)
             list = self.d.get("order", txn)
             list.remove(name)
-            self.d.put("order", list, txn) 
+            self.d.put("order", list, txn)
+            packagedb.remove_db(name)
         self.d.txn_proc(proc, txn)
 
 db = None
