@@ -21,11 +21,10 @@ class RepoDBTestCase(testcase.TestCase):
 
     def testAddRemoveCycle(self):
         # written by cartman the celebrity, for bug #1909 
-        pisi.api.add_repo("foo","bar")
         
         for i in range(2):
             print '\nTest %d\n' % (i)
-            pisi.api.remove_repo("foo")
             pisi.api.add_repo("foo","bar")
+            pisi.api.remove_repo("foo")
 
 suite = unittest.makeSuite(RepoDBTestCase)

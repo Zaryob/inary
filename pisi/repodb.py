@@ -42,10 +42,12 @@ class Repo:
 class RepoDB(object):
     """RepoDB maps repo ids to repository information"""
 
-    def __init__(self):
+    def __init__(self, txn = None):
         self.d = shelve.LockedDBShelf("repo")
-        if not self.d.has_key("order"):
-            self.d["order"] = []
+        def proc(txn):
+            if not self.d.has_key("order", txn):
+                self.d.put("order", [], txn)
+        self.d.txn_proc(proc, txn)
 
     def init_dbs(self):
         # initialize package/source dbs
@@ -60,11 +62,13 @@ class RepoDB(object):
         return l[ix]
 
     def swap(self, x, y):
-        l = self.d["order"]
-        t = l[x]
-        l[x] = l[y]
-        l[y] = t
-        self.d["order"] = l
+        def proc(txn):
+            l = self.d.get("order", txn)
+            t = l[x]
+            l[x] = l[y]
+            l[y] = t
+            self.d.put("order", l, txn)
+        self.d.txn_proc(proc, txn)
 
     def has_repo(self, name):
         name = str(name)
@@ -74,16 +78,18 @@ class RepoDB(object):
         name = str(name)
         return self.d["repo-" + name]
 
-    def add_repo(self, name, repo_info):
+    def add_repo(self, name, repo_info, txn = None):
         name = str(name)
         assert (isinstance(repo_info,Repo))
-        if self.d.has_key("repo-" + name):
-            raise Error(_('Repository %s already exists') % name)
-        self.d["repo-" + name] = repo_info
-        order = self.d["order"]
-        order.append(name)
-        self.d["order"] = order
-        packagedb.add_db(name)
+        def proc(txn):
+            if self.d.has_key("repo-" + name, txn):
+                raise Error(_('Repository %s already exists') % name)
+            self.d.put("repo-" + name, repo_info, txn)
+            order = self.d.get("order", txn)
+            order.append(name)
+            self.d.put("order", order, txn)
+            packagedb.add_db(name)
+        self.d.txn_proc(proc, txn)
 
     def list(self):
         return self.d["order"]
@@ -91,13 +97,14 @@ class RepoDB(object):
     def clear(self):
         self.d.clear()
 
-    def remove_repo(self, name):
+    def remove_repo(self, name, txn = None):
         name = str(name)
-        del self.d["repo-" + name]
-        l = self.d["order"]
-        l.remove(name)
-        self.d["order"] = l
-        
+        def proc(txn):
+            self.d.delete("repo-" + name, txn)
+            list = self.d.get("order", txn)
+            list.remove(name)
+            self.d.put("order", list, txn) 
+        self.d.txn_proc(proc, txn)
 
 db = None
 
@@ -117,5 +124,3 @@ def finalize():
     if db:
         db.close()
         db = None
-
-
