@@ -138,7 +138,10 @@ def copy(source, destination, sym = True):
                     os.remove(destination)
                 os.symlink(os.readlink(filePath), destination)
         elif isLink(filePath) and not sym:
-            shutil.copy(os.readlink(filePath), destination)
+            if isDirectory(os.readlink(filePath)):
+                copytree(os.readlink(filePath), destination)
+            else:
+                shutil.copy(os.readlink(filePath), destination)
         elif isDirectory(filePath):
             copytree(filePath, destination, sym)
         else:
@@ -148,8 +151,12 @@ def copytree(source, destination, sym = True):
     '''recursively copy an entire directory tree rooted at source'''
     if isDirectory(source):
         if os.path.exists(destination):
-            copytree(source, join_path(destination, os.path.basename(source)))
-            return
+            if isDirectory(destination):
+                copytree(source, join_path(destination, os.path.basename(source.strip('/'))))
+                return
+            else:
+                copytree(source, join_path(destination, os.path.basename(source)))
+                return
         try:
             shutil.copytree(source, destination, sym)
         except OSError, e:
