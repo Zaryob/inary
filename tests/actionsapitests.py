@@ -9,6 +9,8 @@
 
 import unittest
 import zipfile
+import shutil
+import os
 
 import testcase
 
@@ -54,5 +56,53 @@ class ActionsAPITestCase(testcase.TestCase):
         '''check file content'''
         for file in self.filelist:
             self.assert_(fileContent.__contains__(file))
+
+    def testShellToolsCopy(self):
+        from pisi.actionsapi.shelltools import copy
+
+        copy('tests/actionsapitests/brokenlink', 'tests/actionsapitests/brokenlink-copy')
+        self.assertEqual(os.path.islink('tests/actionsapitests/brokenlink-copy'), True)
+        os.remove('tests/actionsapitests/brokenlink-copy')
+
+        copy('tests/actionsapitests/brokenlink', 'tests/actionsapitests/adirectory')
+        self.assertEqual(os.path.islink('tests/actionsapitests/adirectory/brokenlink'), True)
+
+        copy('tests/actionsapitests/brokenlink', 'tests/actionsapitests/adirectory/bl')
+        self.assertEqual(os.path.islink('tests/actionsapitests/adirectory/bl'), True)
+        os.remove('tests/actionsapitests/adirectory/bl')
+
+        self.assertEqual(os.readlink('tests/actionsapitests/adirectory/brokenlink'), '/no/such/place')
+        os.remove('tests/actionsapitests/adirectory/brokenlink')
+
+        copy('tests/actionsapitests/linktoadirectory', 'tests/actionsapitests/adirectory/', False)
+        self.assertEqual(os.path.exists('tests/actionsapitests/adirectory/linkeddir/file'), True)
+        self.assertEqual(os.path.getsize('tests/actionsapitests/adirectory/linkeddir/file'), 321)
+        shutil.rmtree('tests/actionsapitests/adirectory/linkeddir')
+
+        copy('tests/actionsapitests/file', 'tests/actionsapitests/adirectory')
+        self.assertEqual(os.path.isfile('tests/actionsapitests/adirectory/file'), True)
+        #overwrite..
+        copy('tests/actionsapitests/file', 'tests/actionsapitests/adirectory')
+        os.remove('tests/actionsapitests/adirectory/file')
+
+        copy('tests/actionsapitests/linktoafile', 'tests/actionsapitests/adirectory', False)
+        self.assertEqual(os.path.exists('tests/actionsapitests/adirectory/%s' % (os.path.basename(os.readlink('tests/actionsapitests/linktoafile')))), True)
+        os.remove('tests/actionsapitests/adirectory/%s' % (os.path.basename(os.readlink('tests/actionsapitests/linktoafile'))))
+
+        copy('tests/actionsapitests/file', 'tests/actionsapitests/file-copy')
+        self.assertEqual(os.path.exists('tests/actionsapitests/file-copy'), True)
+        os.remove('tests/actionsapitests/file-copy')
+
+        copy('tests/actionsapitests/file', 'tests/actionsapitests/adirectory/filewithanothername')
+        self.assertEqual(os.path.exists('tests/actionsapitests/adirectory/filewithanothername'), True)
+        os.remove('tests/actionsapitests/adirectory/filewithanothername')
+
+        copy('tests/actionsapitests/linkeddir', 'tests/actionsapitests/adirectory')
+        self.assertEqual(os.path.exists('tests/actionsapitests/adirectory/linkeddir/file'), True)
+        shutil.rmtree('tests/actionsapitests/adirectory/linkeddir')
+
+        copy('tests/actionsapitests/linkeddir', 'tests/actionsapitests/adirectory/withanothername')
+        self.assertEqual(os.path.exists('tests/actionsapitests/adirectory/withanothername/file'), True)
+        shutil.rmtree('tests/actionsapitests/adirectory/withanothername')
 
 suite = unittest.makeSuite(ActionsAPITestCase)
