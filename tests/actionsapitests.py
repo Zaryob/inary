@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright (C) 2005, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
@@ -57,7 +58,7 @@ class ActionsAPITestCase(testcase.TestCase):
         for file in self.filelist:
             self.assert_(fileContent.__contains__(file))
 
-    def testShellToolsCopy(self):
+    def testShelltoolsCopy(self):
         from pisi.actionsapi.shelltools import copy
 
         copy('tests/actionsapitests/brokenlink', 'tests/actionsapitests/brokenlink-copy')
@@ -67,9 +68,9 @@ class ActionsAPITestCase(testcase.TestCase):
         copy('tests/actionsapitests/brokenlink', 'tests/actionsapitests/adirectory')
         self.assertEqual(os.path.islink('tests/actionsapitests/adirectory/brokenlink'), True)
 
-        copy('tests/actionsapitests/brokenlink', 'tests/actionsapitests/adirectory/bl')
-        self.assertEqual(os.path.islink('tests/actionsapitests/adirectory/bl'), True)
-        os.remove('tests/actionsapitests/adirectory/bl')
+        copy('tests/actionsapitests/brokenlink', 'tests/actionsapitests/adirectory/brknlnk')
+        self.assertEqual(os.path.islink('tests/actionsapitests/adirectory/brknlnk'), True)
+        os.remove('tests/actionsapitests/adirectory/brknlnk')
 
         self.assertEqual(os.readlink('tests/actionsapitests/adirectory/brokenlink'), '/no/such/place')
         os.remove('tests/actionsapitests/adirectory/brokenlink')
@@ -105,4 +106,37 @@ class ActionsAPITestCase(testcase.TestCase):
         self.assertEqual(os.path.exists('tests/actionsapitests/adirectory/withanothername/file'), True)
         shutil.rmtree('tests/actionsapitests/adirectory/withanothername')
 
+    def testShelltoolsCanAccessFile(self):
+        from pisi.actionsapi.shelltools import can_access_file
+
+        self.assertEqual(can_access_file('tests/actionsapitests/file'), True)
+        self.assertEqual(can_access_file('tests/actionsapitests/fileX'), False)
+        self.assertEqual(can_access_file('tests/actionsapitests/linktoafile'), False)
+
+    def testShelltoolsCanAccessDir(self):
+        from pisi.actionsapi.shelltools import can_access_directory
+
+        self.assertEqual(can_access_directory('tests/actionsapitests/adirectory'), True)
+        self.assertEqual(can_access_directory('tests/actionsapitests/adirectoryX'), False)
+        self.assertEqual(can_access_directory('tests/actionsapitests/linktoadirectory'), False)
+
+        
+    def testShelltoolsMakedirs(self):
+        from pisi.actionsapi.shelltools import makedirs
+
+        makedirs('tests/actionsapitests/testdirectory/into/a/directory')
+        self.assertEqual(os.path.exists('tests/actionsapitests/testdirectory/into/a/directory'), True)
+        shutil.rmtree('tests/actionsapitests/testdirectory')
+
+    def testShelltoolsEcho(self):
+        from pisi.actionsapi.shelltools import echo
+
+        echo('tests/actionsapitests/echo-file', 'hububat fiyatları')
+        self.assertEqual(os.path.exists('tests/actionsapitests/echo-file'), True)
+        self.assertEqual(open('tests/actionsapitests/echo-file').readlines()[0].strip(), "hububat fiyatları")
+        echo('tests/actionsapitests/echo-file', 'fiyat hububatları')
+        self.assertEqual(open('tests/actionsapitests/echo-file').readlines()[1].strip(), "fiyat hububatları")
+        os.remove('tests/actionsapitests/echo-file')
+
+        
 suite = unittest.makeSuite(ActionsAPITestCase)
