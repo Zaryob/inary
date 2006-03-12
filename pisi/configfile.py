@@ -18,7 +18,8 @@
 # having an INI like format like below.
 #
 #[general]
-#destinationdirectory = /tmp
+#destinationdirectory = /
+#buildhelper = None / ccache / icecream
 #autoclean = False
 #
 #[build]
@@ -56,9 +57,10 @@ class Error(pisi.Error):
 class GeneralDefaults:
     """Default values for [general] section"""
     destinationdirectory = "/"
+    buildhelper = None
     autoclean = False
     distribution = "Pardus"
-    distribution_release = "0.1"
+    distribution_release = "1.0"
     http_proxy = os.getenv("HTTP_PROXY") or None
     https_proxy = os.getenv("HTTPS_PROXY") or None
     ftp_proxy = os.getenv("FTP_PROXY") or None
