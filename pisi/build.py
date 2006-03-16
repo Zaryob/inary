@@ -324,16 +324,17 @@ class Builder:
         self.run_action_function(ctx.const.install_func, True)
         self.set_state("installaction")
 
-    def check_abandoned_files(self):
-        # show the files those are not collected from the install dir
+    def get_abandoned_files(self):
+        # return the files those are not collected from the install dir
 
         install_dir = self.pkg_dir() + ctx.const.install_dir_suffix
         abandoned_files = []
         all_paths_in_packages = []
 
+
         for package in self.spec.packages:
             for path in package.files:
-                all_paths_in_packages.append(util.join_path(install_dir + path.path))
+                map(lambda p: all_paths_in_packages.append(p), [p for p in glob.glob(install_dir + path.path)])
 
         for root, dirs, files in os.walk(install_dir):
             for file_ in files:
@@ -345,14 +346,7 @@ class Builder:
                 if not already_in_package:
                     abandoned_files.append(fpath)
 
-        if abandoned_files:
-            ctx.ui.warning(_('Abandoned files under the install dir (%s):' \
-                                                            % (install_dir)))
-            for f in abandoned_files:
-                ctx.ui.info('    - %s' % (f))
-        else:
-            ctx.ui.info(_('All of the files under the install dir (%s) has been collected by package(s)' \
-                                                            % (install_dir)))
+        return abandoned_files
 
 
     def compile_action_script(self):
@@ -719,9 +713,15 @@ class Builder:
 
         #show the files those are not collected from the install dir
         if ctx.get_option('show_abandoned_files') or ctx.get_option('debug'):
-            self.check_abandoned_files()
+            abandoned_files = self.get_abandoned_files()
+            if abandoned_files:
+                ctx.ui.warning(_('Abandoned files under the install dir (%s):' % (install_dir)))
+                for f in abandoned_files:
+                    ctx.ui.info('    - %s' % (f))
+            else:
+                ctx.ui.warning(_('All of the files under the install dir (%s) has been collected by package(s)' \
+                                                                % (install_dir)))
             
-
         if ctx.config.values.general.autoclean is True:
             ctx.ui.info(_("Cleaning Build Directory..."))
             util.clean_dir(self.pkg_dir())
