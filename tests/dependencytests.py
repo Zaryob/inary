@@ -18,11 +18,18 @@ class DependencyTestCase(unittest.TestCase):
     def setUp(self):
         pass
 
-    def testDep(self):
+    def test603(self):
         # a real life story bug #603
         gtkmmdep = Dependency()
         gtkmmdep.versionFrom = '1.9.1'
         gtkmmdep.package = 'atk'
-        self.assert_( not gtkmmdep.satisfies('atk', '1.8.0', 1) )
-        
+        self.assert_( not gtkmmdep.satisfies('atk', '1.8.0', '1') )
+
+    def test2294(self):
+        # releaseFrom isn't taken into account
+        dep = Dependency()
+        dep.releaseFrom = '121'
+        dep.package = 'dbus'
+        self.assert_(not dep.satisfies('dbus', '1.2', '2'))
+    
 suite = unittest.makeSuite(DependencyTestCase)
