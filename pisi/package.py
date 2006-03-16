@@ -69,21 +69,23 @@ class Package:
             else:
                 installed = False
                 
+            if installed and exists(current_fn):
+                # if package is installed and old pisi file exists, fetch xdelta
+                if not exists(xdelta_fn):
+                    ctx.ui.info(_("Trying to fetch xdelta: %s") % xdelta_url)
+                    try:
+                        fetch_url(xdelta_url, dest, ctx.ui.Progress)
+                    except FetchError,e:
+                        ctx.ui.error(_('XDelta %s: not exists') % xdelta_url)
+                    else:
+                        # generate new one using old pisi file and xdelta
+                        util.generate_pisi_file(xdelta_fn, current_fn, self.filepath)
+                else:
+                    util.generate_pisi_file(xdelta_fn, current_fn, self.filepath)
+                        
             # FIXME: exists is not enough, also sha1sum check needed
             #        when implemented in pisi-index.xml
             if not exists(self.filepath):
-                if installed and exists(current_fn):
-                    # if package is installed and old pisi file exists, fetch xdelta
-                    if not exists(xdelta_fn):
-                        ctx.ui.info(_("Trying to fetch xdelta: %s") % xdelta_url)
-                        try:
-                            fetch_url(xdelta_url, dest, ctx.ui.Progress)
-                        except FetchError,e:
-                            ctx.ui.error(_('XDelta %s: not exists') % xdelta_url)
-                        else:
-                            # generate new one using old pisi file and xdelta
-                            # baris: but why do we generate this here?
-                            util.generate_pisi_file(xdelta_fn, current_fn, self.filepath)
                 fetch_url(url, dest, ctx.ui.Progress)
             else:
                 ctx.ui.info(_('%s [cached]') % url.filename())
