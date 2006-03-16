@@ -136,15 +136,12 @@ def defaultprefixDIR():
     return dirs.defaultprefix
 
 def kdeDIR():
-    # FIXME: Get followings from env.d or somewhere else
     return dirs.kde
 
 def qtDIR():
-    # FIXME: Get followings from env.d or somewhere else
     return dirs.qt
 
 def qtLIBDIR():
-    # FIXME: Get followings from env.d or somewhere else
     return '%s/lib/' % qtDIR()
 
 # Binutils Variables
