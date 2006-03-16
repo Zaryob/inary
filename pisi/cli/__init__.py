@@ -70,7 +70,7 @@ class CLI(UI):
             msgend = ''
         else:
             msgend = '\n'
-        self.output(msg + msgend, verbose=verbose)
+        self.output('%s %s' % (msg, msgend), verbose=verbose)
 
     def warning(self, msg, verbose = False):
         if ctx.get_option('no_color'):
