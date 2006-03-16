@@ -554,7 +554,10 @@ class Builder:
         found = []        
         def locate_package_names(files):
             for fn in files:
-                fn = fn.decode('utf-8')
+                try:
+                    fn = fn.decode('utf-8') # FIXME: why is this necessary?
+                except: # fix 1088
+                    continue
                 if util.is_package_name(fn, package_name):
                     old_package_fn = util.join_path(root, fn)
                     try:
