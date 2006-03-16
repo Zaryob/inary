@@ -17,6 +17,8 @@ PISI Configuration module is used for gathering and providing
 regular PISI configurations.
 """
 
+from os import getcwd
+
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
@@ -58,7 +60,10 @@ class Config(object):
     def dest_dir(self):
         dir = self.get_option('destdir')
         if dir:
-            dir = str(dir)
+            if dir.strip()[0] == '/':
+                dir = str(dir)
+            else:
+                dir = join(getcwd(), dir)
         else:
             dir = self.values.general.destinationdirectory
         import os.path
