@@ -131,6 +131,8 @@ class ArchiveZip(ArchiveBase):
                 self.zip_obj.writestr(attr, dest)
             else:
                 self.zip_obj.write(file_name, file_name, zipfile.ZIP_DEFLATED)
+                zinfo = self.zip_obj.getinfo(file_name)
+                zinfo.create_system = 3
 
     def add_basename_to_archive(self, file_name):
         """Add only the basepath to the zip file. For example; if the given
