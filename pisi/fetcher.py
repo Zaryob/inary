@@ -95,12 +95,11 @@ class Fetcher:
 
     def _do_grab(self, fileURI, dest, total_size):
         ctx.ui.notify(pisi.ui.downloading, url = fileURI)
-        symbols = [' B/s', 'KB/s', 'MB/s', 'GB/s']
         bs, tt, = 1024, int(time())
         s_time = time()
         Tdiff = lambda: time() - s_time
         downloaded_size = exist_size = self.exist_size
-        symbol, depth = 'B/s', 0
+        symbol = 'B/s'
         st = time()
         chunk = fileURI.read(bs)
         downloaded_size += len(chunk)
@@ -122,11 +121,8 @@ class Fetcher:
                     self.eta  = '%02d:%02d:%02d' %\
                     tuple([i for i in gmtime((Tdiff() * (100 - self.percent)) / self.percent)[3:6]])
 
-                while self.rate > 1000 and depth < 3:
-                    self.rate /= 1024
-                    depth += 1
+                self.rate, symbol = util.human_readable_rate(self.rate)
 
-                symbol, depth = symbols[depth], 0
                 tt = time()
 
             if self.progress:

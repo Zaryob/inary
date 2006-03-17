@@ -121,6 +121,18 @@ def remove_prefix(a,b):
     assert prefix(a,b)
     return b[len(a):]
 
+def human_readable_size(size = 0):
+    symbols, depth = [' B', 'KB', 'MB', 'GB'], 0
+
+    while size > 1000 and depth < 3:
+        size = float(size / 1024)
+        depth += 1
+
+    return size, symbols[depth]
+
+def human_readable_rate(size = 0):
+    x = human_readable_size(size)
+    return x[0], x[1] + '/s'
 
 ##############################
 # Process Releated Functions #
@@ -644,3 +656,4 @@ def pure_package_name(package_name):
  
 def generate_pisi_file(patchFile, fromFile, toFile):
     run_batch("xdelta patch %s %s %s" % (patchFile, fromFile, toFile))
+
