@@ -29,8 +29,10 @@ class Dependency:
     __metaclass__ = autoxml.autoxml
     
     s_Package = [autoxml.String, autoxml.mandatory]
+    a_version = [autoxml.String, autoxml.optional]
     a_versionFrom = [autoxml.String, autoxml.optional]
     a_versionTo = [autoxml.String, autoxml.optional]
+    a_release = [autoxml.String, autoxml.optional]
     a_releaseFrom = [autoxml.String, autoxml.optional]
     a_releaseTo = [autoxml.String, autoxml.optional]
 
@@ -50,14 +52,19 @@ class Dependency:
         """determine if a package ver. satisfies given dependency spec"""
         ret = True
         v = Version(version)
+        if self.version:
+            ret &= v == Version(self.version)
         if self.versionFrom:
             ret &= v >= Version(self.versionFrom)
         if self.versionTo:
-            ret &= v <= Version(self.versionTo)        
+            ret &= v <= Version(self.versionTo)
+        r = Version(release)
+        if self.release:
+            ret &= r == Version(self.release)        
         if self.releaseFrom:
-            ret &= v <= Version(self.releaseFrom)        
+            ret &= r >= Version(self.releaseFrom)        
         if self.releaseTo:
-            ret &= v <= Version(self.releaseTo)       
+            ret &= r <= Version(self.releaseTo)       
         return ret
 
 def dict_satisfies_dep(dict, depinfo):
