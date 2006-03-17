@@ -68,7 +68,7 @@ msgid ""
 "Please attach the config.log to your bug report:\n"
 "%s/config.log"
 msgstr ""
-"Lütfen hata raporunuza config.log'u iliştiriniz:\n"
+"Lütfen hata raporunuza config.log dosyasını ekleyin:\n"
 "%s/config.log"
 
 # pisi/actionsapi/autotools.py:75 :85
@@ -135,7 +135,7 @@ msgid ""
 "%s/config.log"
 msgstr ""
 "\n"
-"Lütfen hata raporunuza config.log'u iliştiriniz:\n"
+"Lütfen hata raporunuza config.log dosyasını ekleyin:\n"
 "%s/config.log"
 
 #: pisi/actionsapi/libtools.py:39
@@ -162,7 +162,7 @@ msgstr "perl install başarısızlığa uğgradı."
 
 #: pisi/actionsapi/pisitools.py:132
 msgid "ActionsAPI [doman]: Wrong man page file: %s"
-msgstr "ActionsAPI [doman]: Yanlış man sayfası dosyası: %s"
+msgstr "ActionsAPI [doman]: Yanlış kılavuz sayfası dosyası: %s"
 
 #: pisi/actionsapi/pisitools.py:170
 msgid "ActionsAPI [rename]: No such file or directory: %s"
@@ -249,7 +249,7 @@ msgstr "ActionsAPI [copy]: %s dosyası bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:141
 msgid "ActionsAPI [copytree] %s to %s: %s"
-msgstr "ActionsAPI [copytree]: %s'den %s'e: %s"
+msgstr "ActionsAPI [copytree]: %s konumundan %s konumuna: %s"
 
 #: pisi/actionsapi/shelltools.py:143
 msgid "ActionsAPI [copytree]: Directory %s doesn't exists."
@@ -285,27 +285,27 @@ msgstr "* %s altındaki PİSİ dosyalarının bir indexi yapılıyor."
 
 #: pisi/api.py:292
 msgid "* Index file written"
-msgstr "* İndex dosyası yazıldı."
+msgstr "* İndeks dosyası yazıldı."
 
 #: pisi/api.py:297
 msgid "Repo %s added to system."
-msgstr "Depo %s sisteme eklendi."
+msgstr "'%s' isimli depo sisteme eklendi."
 
 #: pisi/api.py:302
 msgid "Repo %s removed from system."
-msgstr "Depo %s sistemden çıkarıldı."
+msgstr "'%s' isimli depo sistemden çıkarıldı."
 
 #: pisi/api.py:304
 msgid "Repository %s does not exist. Cannot remove."
-msgstr "Depo %s yok. Kaldırılamıyor."
+msgstr "'%s' deposu yok. Kaldırılamıyor."
 
 #: pisi/api.py:308
 msgid "* Updating repository: %s"
-msgstr "Depo %s güncelleniyor."
+msgstr "'%s' deposu güncelleniyor."
 
 #: pisi/api.py:313
 msgid "No repository named %s found."
-msgstr "%s adında bir depo bulunamadı."
+msgstr "'%s' adında bir depo bulunamadı."
 
 #: pisi/api.py:315
 msgid ""
@@ -313,7 +313,7 @@ msgid ""
 "* Package database updated."
 msgstr ""
 "\n"
-"* Paket veritabani güncellendi."
+"* Paket veritabanı güncellendi."
 
 #: pisi/archive.py:85
 msgid "Archive type not recognized"
@@ -321,15 +321,15 @@ msgstr "Arşiv tipi tanınmadı"
 
 #: pisi/atomicoperations.py:77
 msgid "Package URI: %s"
-msgstr "Paket URI'ı: %s"
+msgstr "Paket adresi: %s"
 
 #: pisi/atomicoperations.py:81
 msgid "Package %s not found in any active repository."
-msgstr "Paket %s hiç bir etkin depoda bulunamadı."
+msgstr "'%s' isimli paket hiç bir etkin depoda bulunamadı."
 
 #: pisi/atomicoperations.py:95
 msgid "Installing %s, version %s, release %s, build %s"
-msgstr "%s paketi, versiyon %s, sürüm %s, inşa %s yerleştiriliyor."
+msgstr "'%s' paketi, versiyon %s, sürüm %s, inşa %s sisteme yerleştiriliyor."
 
 #: pisi/atomicoperations.py:153
 msgid "Package conflicts %s"
@@ -337,7 +337,7 @@ msgstr "Paket %s ile çatışmakta."
 
 #: pisi/atomicoperations.py:158
 msgid "Dependencies for %s not satisfied"
-msgstr "%s için bağımlılıklar sağlanmadı."
+msgstr "'%s' paketi için bağımlılıklar sağlanmadı."
 
 #: pisi/atomicoperations.py:160
 msgid "Package not installable"
@@ -397,15 +397,15 @@ msgstr "/etc/ld.so.cache yeniden yaratılıyor..."
 
 #: pisi/atomicoperations.py:305
 msgid "Bypassing ldconfig"
-msgstr "ldconfig esgeçiliyor"
+msgstr "ldconfig işlemi atlanıyor"
 
 #: pisi/atomicoperations.py:339
 msgid "File list could not be read for package %s, continuing removal."
-msgstr "Paket %s için dosya listesi okunamadı, kaldırma işlemine devam ediliyor. "
+msgstr "'%s' paketi için dosya listesi okunamadı, kaldırma işlemine devam ediliyor. "
 
 #: pisi/atomicoperations.py:346
 msgid "Removing package %s"
-msgstr "%s paketi kaldırılıyor."
+msgstr "'%s' paketi kaldırılıyor."
 
 #: pisi/atomicoperations.py:349
 msgid "Trying to remove nonexistent package "
@@ -417,7 +417,7 @@ msgstr "Dosya ya da bağ olmayan '%s' kaldırılmıyor."
 
 #: pisi/atomicoperations.py:483
 msgid "Metadata XML '%s' cannot be found"
-msgstr "Metadata XML '%s' bulunamıyor"
+msgstr "'%s' isimli metadata XML bulunamıyor"
 
 #: pisi/atomicoperations.py:491
 msgid "MetaData format wrong (%s)"
@@ -453,7 +453,7 @@ msgstr "IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin 
 
 #: pisi/build.py:206
 msgid "CCache detected..."
-msgstr "CCache bulundu..."
+msgstr "Derleme zamanını kısaltan ccache bulundu..."
 
 #: pisi/build.py:261
 msgid "PartOf tag not defined, looking for component"
@@ -566,12 +566,12 @@ msgid ""
 "Build number is not available. For repo builds you must enable buildno in "
 "pisi.conf."
 msgstr ""
-"İnşa (build) sayısı koyulmayacak. Depo inşaları için buildno yu pisi.conf "
+"İnşa (build) sayısı koyulmayacak. Depo inşaları için 'buildno' numarasını pisi.conf "
 "dosyasında tanımlamalısınız."
 
 #: pisi/build.py:523
 msgid "(found old version %s)"
-msgstr "(eski versiyon %s bulundu)"
+msgstr "('%s' numaralı eski versiyon bulundu)"
 
 #: pisi/build.py:525
 msgid "Skipping %s with wrong pkg name "
@@ -587,11 +587,11 @@ msgstr "(önceki paketin bir inşa numarası yok, inşa numarası 1 yapılıyor)
 
 #: pisi/build.py:589
 msgid "There are changes, incrementing build no to %d"
-msgstr "Değişiklikler var, inşa nosu bir arttırılarak %d yapıldı."
+msgstr "Değişiklikler var, inşa numarası bir arttırılarak %d yapıldı."
 
 #: pisi/build.py:592
 msgid "There is no change from previous build %d"
-msgstr "Bir önceki %d nolu inşadan beri bir değişiklik yok."
+msgstr "Bir önceki %d numaralı inşadan beri bir değişiklik yok."
 
 #: pisi/build.py:621
 msgid "** Building package %s"
@@ -604,7 +604,7 @@ msgstr "%s yaratılıyor,"
 
 #: pisi/build.py:629
 msgid "Creating PISI package %s."
-msgstr "PİSİ paketi %s yaratılıyor."
+msgstr "'%s' PİSİ paketi yaratılıyor."
 
 #: pisi/build.py:661
 msgid "Done."
@@ -636,24 +636,24 @@ msgstr " [bitti]\n"
 
 #: pisi/cli/__init__.py:134
 msgid "Installed %s"
-msgstr "%s yerleştirildi "
+msgstr "'%s' paketi yerleştirildi "
 
 #: pisi/cli/__init__.py:136
 msgid "Removed %s"
-msgstr "%s kaldırıldı"
+msgstr "'%s' paketi kaldırıldı"
 
 #: pisi/cli/__init__.py:138
 msgid "Upgraded %s"
-msgstr "%s yükseltildi"
+msgstr "'%s' paketi yükseltildi"
 
 # pisi/actionsapi/autotools.py:75 :85
 #: pisi/cli/__init__.py:140
 msgid "Configured %s"
-msgstr "%s yapılandırıldı"
+msgstr "'%s' paketi yapılandırıldı"
 
 #: pisi/cli/__init__.py:142
 msgid "Extracting the files of %s"
-msgstr "%s paketinin dosyaları arşivden çıkartılıyor"
+msgstr "'%s' paketinin dosyaları arşivden çıkartılıyor"
 
 #: pisi/cli/commands.py:33
 msgid "generic help string for any command"
@@ -689,7 +689,7 @@ msgstr "hata ayıklama bilgisini göster"
 
 #: pisi/cli/commands.py:96
 msgid "print like a man"
-msgstr "adam gibi yaz"
+msgstr "renk kullanma"
 
 #: pisi/cli/commands.py:100
 msgid ""
@@ -699,7 +699,7 @@ msgstr ""
 
 #: pisi/cli/commands.py:112
 msgid "Destination directory %s does not exist. Creating directory.\n"
-msgstr "Hedef dizini %s bulunamadı. Dizin yaratılıyor.\n"
+msgstr "'%s' isimli hedef dizin bulunamadı. Dizin yaratılıyor.\n"
 
 #: pisi/cli/commands.py:135
 msgid "Password: "
@@ -707,7 +707,7 @@ msgstr "Parola: "
 
 #: pisi/cli/commands.py:141
 msgid "initialize PiSi components"
-msgstr ""
+msgstr "PiSi bileşenlerini hazırla"
 
 #: pisi/cli/commands.py:149
 msgid "do cleanup work for PiSi components"
@@ -854,7 +854,7 @@ msgstr ""
 "Kullanım: install <package1> <package2> ... <packagen>\n"
 "\n"
 "Paketler için dosya adları, URI'lar veya paket adları kullanabilirsiniz.\n"
-"Eğer bir paket adı verdiyseniz, paket deposunda bulunmalı.\n"
+"Eğer bir paket adı verdiyseniz, bu paket depoda bulunmalıdır.\n"
 "Paket adları yerine bileşenler de verebilirsiniz.\n"
 
 #: pisi/cli/commands.py:405 pisi/cli/commands.py:451
@@ -995,14 +995,14 @@ msgid ""
 "named by default 'pisi-index.xml'. In particular, it indexes both\n"
 "source and binary packages.\n"
 msgstr ""
-"Verilen bir dizindeki PİSİ dosyalarının endeksle\n"
+"Verilen bir dizindeki PİSİ dosyalarının indeksle\n"
 "\n"
 "Kullanım: index <directory>\n"
 "\n"
 "Bu komut bir dizindeki bütüm PİSİ dosyalarını arastırır, PİSİ\n"
 "etiketlerini toplar ve bilgiyi çıktı, varsayılan adı 'pisi-index.xml',olan "
 "XML dosyasında birleştirir. Özellikle, hem ikili hem kaynak\n"
-"paketlerini endeksler.\n"
+"paketlerini indeksler.\n"
 
 #: pisi/cli/commands.py:630
 msgid "store absolute links for indexed files."
@@ -1064,7 +1064,7 @@ msgstr ""
 
 #: pisi/cli/commands.py:710
 msgid "Rebuild PISI databases?"
-msgstr "PİSİ veritabanlarını güncelle?"
+msgstr "PİSİ veritabanı güncellensin mi?"
 
 #: pisi/cli/commands.py:731
 msgid ""
@@ -1102,15 +1102,15 @@ msgstr ""
 "Kullanım: add-repo <depo> <indexuri>\n"
 "\n"
 "<depo>: eklenecek deponun adı\n"
-"<indexuri>: endeks dosyasının URI'ı\n"
+"<indexuri>: indeks dosyasının URI'ı\n"
 "\n"
-"Eğer depo verilmezse pardus-devel deposu öntanımlı olarak eklenirNot: "
-"Şimdilik sadece lokal dosyaları (e.g., /a/b/c) ve http:// URI'larını\n"
-"destekliyoruz\n"
+"Eğer depo verilmezse pardus-devel deposu öntanımlı olarak eklenir. Not: \n"
+"Şimdilik sadece yerel dosyalar (örn. /a/b/c) ve http:// veya ftp:// türü \n"
+"adresler desteklenir\n"
 
 #: pisi/cli/commands.py:789
 msgid "Update PISI database for repository %s?"
-msgstr "Depo %s için PİSİ veritabanını güncellensin mi?"
+msgstr "'%s' isimli depo için PİSİ veritabanını güncellensin mi?"
 
 #: pisi/cli/commands.py:798
 msgid ""
@@ -1230,7 +1230,7 @@ msgstr "yaklaşık arama"
 
 #: pisi/cli/commands.py:1075
 msgid "Package %s has file %s"
-msgstr "Paket %s içinde dosya %s var"
+msgstr "'%s' paketi içinde '%s' dosyası var"
 
 #: pisi/cli/commands.py:1077
 msgid "Type: %s, Hash: %s"
@@ -1422,7 +1422,7 @@ msgstr "Hedef dizine yazmaya izin verilmedi."
 
 #: pisi/fetcher.py:90
 msgid "A problem occured. Please check the archive address and/or permissions again."
-msgstr ""
+msgstr "Bir hata oluştu. Lütfen arşiv adresini ve/veya kullanıcı izinlerini yeniden kontrol edin."
 
 #: pisi/fetcher.py:151
 msgid "No such file or no permission to read"
@@ -1966,8 +1966,8 @@ msgid ""
 "Cannot parse '%s':\n"
 "%s\n"
 msgstr ""
-"%s ayrıştırılamıyor:\n"
-"%s\n"
+"'%s' ayrıştırılamıyor:\n"
+"'%s'\n"
 
 #: tools/repostats.py:639
 msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
