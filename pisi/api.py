@@ -17,13 +17,13 @@
 import os
 import sys
 from os.path import exists
+import bsddb3.db as db
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
-
 import pisi.context as ctx
 from pisi.uri import URI
 import pisi.util as util
@@ -321,29 +321,36 @@ def delete_cache():
     util.clean_dir(ctx.config.archives_dir())
     util.clean_dir(ctx.config.tmp_dir())
 
-    
-    
-def rebuild_db():
+def rebuild_db(files=False):
 
-    def destroy():
-        #FIXME: how good is deleting *all* databases?
+    def destroy(files):
         for db in os.listdir(ctx.config.db_dir()):
-            os.unlink(pisi.util.join_path(ctx.config.db_dir(), db))
+            if db.startswith('files') or db.startswith('filesdbversion'):
+                clean = files
+            else:
+                clean = True
+            if clean:
+                os.unlink(pisi.util.join_path(ctx.config.db_dir(), db))
 
-    def reload():
-        import os
+    def reload(files, txn):
         for package_fn in os.listdir( pisi.util.join_path( ctx.config.lib_dir(),
                                                            'package' ) ):
             if not package_fn == "scripts":
                 ctx.ui.debug('Resurrecting %s' % package_fn)
-                pisi.api.resurrect_package(package_fn)
+                pisi.api.resurrect_package(package_fn, files, txn)
 
     # save parameters and shutdown pisi
     options = ctx.config.options
     ui = ctx.ui
     comar = ctx.comar
     finalize()
-    destroy() # bye bye
+
+    try:
+        pisi.lockeddbshelve.check_dbversion('filesdbversion', pisi.__filesdbversion__, write=False)
+    except:
+        files = True # exception means the files db version was wrong
+    destroy(files) # bye bye
     # construct new database version
     init(database=True, options=options, ui=ui, comar=comar)
-    reload()
+    #ctx.txn_proc(reload)
+    reload(files, None)

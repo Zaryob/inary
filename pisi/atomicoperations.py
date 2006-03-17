@@ -484,13 +484,14 @@ def virtual_install(metadata, files, txn):
                           txn)
 
     # filesdb
-    ctx.filesdb.add_files(metadata.package.name, files, txn)
-    
+    if files:
+        ctx.filesdb.add_files(metadata.package.name, files, txn)
+
     # installed packages
     packagedb.inst_packagedb.add_package(pkginfo, txn)
 
-def resurrect_package(package_fn):
-    """Resurrect the package in the PiSi databases"""
+def resurrect_package(package_fn, write_files, txn = None):
+    """Resurrect the package from xml files"""
 
     from os.path import exists
 
@@ -519,20 +520,23 @@ def resurrect_package(package_fn):
     if not passed:
         ctx.ui.info(_('* Adding \'%s\' to db... ') % (metadata.package.name), noln=True)
     
-    files_xml = util.join_path(ctx.config.lib_dir(), 'package',
-                               package_fn, ctx.const.files_xml)
-    if not exists(files_xml):
-       raise Error, _("Files XML '%s' cannot be found") % files_xml
+    if write_files:
+        files_xml = util.join_path(ctx.config.lib_dir(), 'package',
+                                   package_fn, ctx.const.files_xml)
+        if not exists(files_xml):
+           raise Error, _("Files XML '%s' cannot be found") % files_xml
+    
+        files = Files()
+        files.read(files_xml)
+        if files.errors():
+            raise Error, _("Invalid %s") % ctx.const.files_xml
+    else:
+        files = None
 
-    files = Files()
-    files.read(files_xml)
+    #import pisi.atomicoperations
+    def f(t):
+        pisi.atomicoperations.virtual_install(metadata, files, t)
+    ctx.txn_proc(f, txn)
 
-    if files.errors():
-       raise Error, _("Invalid %s") % ctx.const.files_xml
-
-    import pisi.atomicoperations
-    def f(txn):
-        pisi.atomicoperations.virtual_install(metadata, files, txn)
-    ctx.txn_proc(f)
     if not passed:
         ctx.ui.info(_('OK.'))
