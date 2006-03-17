@@ -100,7 +100,7 @@ class LockedDBShelf(shelve.DBShelf):
         self.open(filename, dbname, filetype, flags, mode)
 
     def destroy(self):
-        os.unlink(self.filename)
+        self.remove(self.filename)
 
     def __del__(self):
         # superclass does something funky, we don't need that

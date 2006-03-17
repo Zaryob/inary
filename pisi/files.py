@@ -57,7 +57,9 @@ class FilesDB(shelve.LockedDBShelf):
     def add_files(self, pkg_name, files, txn = None):
         def proc(txn):
             for x in files.list:
-                self.put(str(x.path), (pkg_name, x), txn)
+                path = x.path
+                del x.path
+                self.put(path, (pkg_name, x), txn)
         self.txn_proc(proc, txn)
 
     def remove_files(self, files, txn = None):
@@ -76,18 +78,17 @@ class FilesDB(shelve.LockedDBShelf):
             if not self.has_key(path, txn):
                 return None
             else:
-                return self.get(path, txn)
+                (name, fileinfo) = self.get(path, txn)
+                fileinfo.path = path
+                return (name, fileinfo)
         return self.txn_proc(proc, txn)
 
     def match_files(self, glob):
         # NB: avoid using, this reads the entire db
-
         import fnmatch
-
         glob = str(glob)
         infos = []
         for key in self.keys():
             if fnmatch.fnmatch(key, glob):
                 infos.append(self[key])
-
         return infos

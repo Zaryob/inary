@@ -747,15 +747,19 @@ If package specs are given, they should be the names of package dirs under /var/
 
     name = ("rebuild-db", "rdb")
 
+    def options(self):
+        self.parser.add_option("-f", "--files", action="store_true",
+                               default=False, help=_("rebuild files database"))
+    
     def run(self):
         if self.args:
             self.init(database=True)
             for package_fn in self.args:
-                pisi.api.resurrect_package(package_fn)
+                pisi.api.resurrect_package(package_fn, ctx.get_option('files`'))
         else:
             self.init(database=False)
             if ctx.ui.confirm(_('Rebuild PISI databases?')):
-                pisi.api.rebuild_db()
+                pisi.api.rebuild_db(ctx.get_option('files'))
 
         self.finalize()
 
