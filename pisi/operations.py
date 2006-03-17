@@ -223,6 +223,16 @@ def install_pkg_names(A, reinstall = False):
 in the respective order to satisfy dependencies:
 """) + util.strlist(order))
 
+    #this silly try/except block will be removed soon..
+    try:
+        total_size = sum([packagedb.get_package(p).packageSize for p in order])
+    except:
+        total_size = 0
+
+    if total_size:
+        total_size, symbol = util.human_readable_size(total_size)
+        ctx.ui.warning(_('Total size of packages: %.2f %s' % (total_size, symbol)))
+
     if ctx.get_option('dry_run'):
         return
 

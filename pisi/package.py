@@ -24,6 +24,7 @@ _ = __trans.ugettext
 import pisi
 import pisi.context as ctx
 import pisi.archive as archive
+from pisi.packagedb import get_package
 from pisi.uri import URI
 from pisi.metadata import MetaData
 from pisi.files import Files
@@ -48,9 +49,14 @@ class Package:
             # get current package name without version info (like tasma)
             current_pkg = util.pure_package_name(url.filename())
 
+            package_size = get_package(current_pkg).packageSize
+            if package_size:
+                package_size, symbol = util.human_readable_size(package_size)
+                ctx.ui.warning(_("Package size: %.2f %s" % (package_size, symbol)))
+
             # if package is installed (which means we are upgrading it),
             # calculate needed info
-            if ctx.installdb.is_installed(current_pkg):   
+            if ctx.installdb.is_installed(current_pkg): 
                 installed = True
 
                 # calculate currently installed package's name and pisi file's location
