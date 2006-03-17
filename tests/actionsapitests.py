@@ -138,5 +138,15 @@ class ActionsAPITestCase(testcase.TestCase):
         self.assertEqual(open('tests/actionsapitests/echo-file').readlines()[1].strip(), "fiyat hububatları")
         os.remove('tests/actionsapitests/echo-file')
 
+
+    def testShelltoolsSystem(self):
+        from pisi.actionsapi.shelltools import system as s
+
+        self.assertEqual(os.path.exists('tests/actionsapitests/systest'), False)
+        s('touch tests/actionsapitests/systest')
+        self.assertEqual(os.path.exists('tests/actionsapitests/systest'), True)
+        os.remove('tests/actionsapitests/systest')
+
         
+
 suite = unittest.makeSuite(ActionsAPITestCase)
