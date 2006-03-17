@@ -66,6 +66,7 @@ def init(database = True, options = None, ui = None, comar = True):
         pisi.context.ui = ui
 
     # initialize repository databases
+    ctx.database = database
     if database:
         shelve.init_dbenv()
         ctx.repodb = pisi.repodb.init()
@@ -319,3 +320,30 @@ def delete_cache():
     util.clean_dir(ctx.config.packages_dir())
     util.clean_dir(ctx.config.archives_dir())
     util.clean_dir(ctx.config.tmp_dir())
+
+    
+    
+def rebuild_db():
+
+    def destroy():
+        #FIXME: how good is deleting *all* databases?
+        for db in os.listdir(ctx.config.db_dir()):
+            os.unlink(pisi.util.join_path(ctx.config.db_dir(), db))
+
+    def reload():
+        import os
+        for package_fn in os.listdir( pisi.util.join_path( ctx.config.lib_dir(),
+                                                           'package' ) ):
+            if not package_fn == "scripts":
+                ctx.ui.debug('Resurrecting %s' % package_fn)
+                pisi.api.resurrect_package(package_fn)
+
+    # save parameters and shutdown pisi
+    options = ctx.config.options
+    ui = ctx.ui
+    comar = ctx.comar
+    finalize()
+    destroy() # bye bye
+    # construct new database version
+    init(database=True, options=options, ui=ui, comar=comar)
+    reload()

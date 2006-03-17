@@ -755,24 +755,10 @@ If package specs are given, they should be the names of package dirs under /var/
         else:
             self.init(database=False)
             if ctx.ui.confirm(_('Rebuild PISI databases?')):
-                self.finalize()
-                import os
-                #FIXME: how good is deleting *all* databases?
-                for db in os.listdir(ctx.config.db_dir()):
-                    os.unlink(pisi.util.join_path(ctx.config.db_dir(), db))
-                # construct new database version
-                self.init(database=True)
-                self.rebuild_db()
+                pisi.api.rebuild_db()
 
         self.finalize()
 
-    def rebuild_db(self):
-        import os
-        for package_fn in os.listdir( pisi.util.join_path( ctx.config.lib_dir(),
-                                                           'package' ) ):
-            if not package_fn == "scripts":
-                ctx.ui.debug('Resurrecting %s' % package_fn)
-                pisi.api.resurrect_package(package_fn)
 
 class UpdateRepo(Command):
     """Update repository databases
