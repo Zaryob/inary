@@ -324,13 +324,17 @@ def delete_cache():
 def rebuild_db(files=False):
 
     def destroy(files):
+        from pisi.lockeddbshelve import LockedDBShelf
         for db in os.listdir(ctx.config.db_dir()):
-            if db.startswith('files') or db.startswith('filesdbversion'):
-                clean = files
-            else:
-                clean = True
-            if clean:
-                os.unlink(pisi.util.join_path(ctx.config.db_dir(), db))
+            if db.endswith('.bdb'):  # delete only db files
+                if db.startswith('files') or db.startswith('filesdbversion'):
+                    clean = files
+                else:
+                    clean = True
+                if clean:
+                    fn = pisi.util.join_path(ctx.config.db_dir(), db)
+                    #ctx.dbenv.dbremove(fn)
+                    os.unlink(fn)
 
     def reload(files, txn):
         for package_fn in os.listdir( pisi.util.join_path( ctx.config.lib_dir(),
@@ -339,17 +343,18 @@ def rebuild_db(files=False):
                 ctx.ui.debug('Resurrecting %s' % package_fn)
                 pisi.api.resurrect_package(package_fn, files, txn)
 
+    try:
+        pisi.lockeddbshelve.check_dbversion('filesdbversion', pisi.__filesdbversion__, write=False)
+    except:
+        files = True # exception means the files db version was wrong
+    pisi.lockeddbshelve.init_dbenv()
+    destroy(files) # bye bye
+    ctx.dbenv.close()
     # save parameters and shutdown pisi
     options = ctx.config.options
     ui = ctx.ui
     comar = ctx.comar
     finalize()
-
-    try:
-        pisi.lockeddbshelve.check_dbversion('filesdbversion', pisi.__filesdbversion__, write=False)
-    except:
-        files = True # exception means the files db version was wrong
-    destroy(files) # bye bye
     # construct new database version
     init(database=True, options=options, ui=ui, comar=comar)
     #ctx.txn_proc(reload)
