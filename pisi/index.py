@@ -97,6 +97,7 @@ class Index(XmlFile):
 
         md = metadata.MetaData()
         md.read(os.path.join(ctx.config.install_dir(), ctx.const.metadata_xml))
+        md.package.packageSize = os.path.getsize(path)
         if ctx.config.options and ctx.config.options.absolute_uris:
             # FIXME: the name "absolute_uris" does not seem to fit below :/
             md.package.packageURI = os.path.realpath(path)

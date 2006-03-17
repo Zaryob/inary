@@ -47,6 +47,7 @@ class Package(specfile.Package):
     t_DistributionRelease = [ autoxml.String, autoxml.mandatory]
     t_Architecture = [ autoxml.String, autoxml.mandatory]
     t_InstalledSize = [ autoxml.Long, autoxml.mandatory]
+    t_PackageSize = [ autoxml.Long, autoxml.optional]
     t_PackageURI = [ autoxml.String, autoxml.optional]
 
     def decode_hook(self, node, errs, where):
