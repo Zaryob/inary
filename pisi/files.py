@@ -58,8 +58,9 @@ class FilesDB(shelve.LockedDBShelf):
         def proc(txn):
             for x in files.list:
                 path = x.path
-                del x.path
+                del x.path # don't store redundant attribute in db
                 self.put(path, (pkg_name, x), txn)
+                x.path = path # store it back in
         self.txn_proc(proc, txn)
 
     def remove_files(self, files, txn = None):
