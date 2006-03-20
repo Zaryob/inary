@@ -17,7 +17,7 @@ PISI Configuration module is used for gathering and providing
 regular PISI configurations.
 """
 
-from os import getcwd
+import os
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -46,6 +46,20 @@ class Config(object):
         self.options = options
         self.values = ConfigurationFile("/etc/pisi/pisi.conf")
 
+        destdir = self.get_option('destdir')
+        if destdir:
+            if destdir.strip().startswith('/'):
+                self.destdir = destdir
+            else:
+                self.destdir = join(os.getcwd(), destdir)
+        else:
+            self.destdir = self.values.general.destinationdirectory
+
+        if not os.path.exists(self.destdir):
+            ctx.ui.warning( _('Destination directory %s does not exist. Creating it.') % self.destdir)
+            os.makedirs(self.destdir)
+
+
     def get_option(self, opt):
         if self.options:
             if hasattr(self.options, opt):
@@ -58,19 +72,7 @@ class Config(object):
     # pkg_x_dir: per package directory for storing info type x
 
     def dest_dir(self):
-        dir = self.get_option('destdir')
-        if dir:
-            if dir.strip()[0] == '/':
-                dir = str(dir)
-            else:
-                dir = join(getcwd(), dir)
-        else:
-            dir = self.values.general.destinationdirectory
-        import os.path
-        if not os.path.exists(dir):
-            ctx.ui.warning( _('Destination directory %s does not exist. Creating it.') % dir)
-            os.makedirs(dir)
-        return dir
+        return self.destdir
 
     def subdir(self, path):
         dir = join(self.dest_dir(), path)
