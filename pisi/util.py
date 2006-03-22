@@ -312,11 +312,14 @@ def copy_file(src,dest):
     check_dir(os.path.dirname(dest))
     shutil.copyfile(src, dest)
 
+def is_ar_file(file_path):
+    return  open(file_path).readline().strip() == '!<arch>'
+
 def clean_ar_timestamps(ar_file):
     """clean the timestamps of the ar files"""
-    content = open(ar_file).readlines()
-    if not content[0].strip() == '!<arch>':
+    if not is_ar_file(ar_file):
         return
+    content = open(ar_file).readlines()
     fp = open(ar_file, 'w')
     for line in content:
         pos = line.rfind(chr(32) + chr(96))

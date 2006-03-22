@@ -45,9 +45,13 @@ class Constants:
     __c = _constant()
 
     def __init__(self):
-        # prefix for package names
+        # suffix for package names
         self.__c.package_suffix = ".pisi"
         self.__c.xdelta_suffix = ".xdelta"
+
+        # suffix for auto generated ar packages
+        self.__c.static_name_suffix = "-static"
+        self.__c.ar_file_suffix = ".a"
 
         # directory suffixes for build
         self.__c.work_dir_suffix = "/work"

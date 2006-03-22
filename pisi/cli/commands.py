@@ -352,6 +352,8 @@ to be downloaded from a repository containing sources.
                                help=_("bypass errors from ActionsAPI"))
         self.parser.add_option("-B", "--ignore-comar", action="store_true",
                                default=False, help=_("bypass comar configuration agent"))
+        self.parser.add_option("-S", "--create-static", action="store_true",
+                               default=False, help=_("automatically create a *-static package with ar files"))
 
 
     def run(self):
