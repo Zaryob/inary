@@ -243,7 +243,7 @@ def info_file(package_fn):
 def info_name(package_name, installed=False):
     """fetch package information for a package"""
     if ctx.packagedb.has_package(package_name):
-        package, repo = pkgdb.get_package(package_name)
+        package, repo = ctx.packagedb.get_package_repo(package_name)
 
         if (not installed) and (repo==pisi.itembyrepodb.installed):
             raise Error(_('Package %s not found') % package_name)

@@ -66,9 +66,10 @@ class PackageDB(object):
         return self.d.which_repo(name, repo, txn)
 
     def get_rev_deps(self, name):
-        x = self.dr.get_item(self, name)
-        if not x:
-            x = []
+        if self.dr.has_key(name):
+            return self.dr.get_item(name)
+        else:
+            return []
 
     def list_packages(self, repo=None):
         return self.d.list(repo)
