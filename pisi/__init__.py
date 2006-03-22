@@ -33,5 +33,7 @@ class Error(Exception):
     """Class of exceptions that lead to program termination"""
     pass
 
+import pisi.api
+
 # FIXME: can't do this due to name clashes in config and other singletons booo
-#from pisi.api import *
+#pisi.api import *

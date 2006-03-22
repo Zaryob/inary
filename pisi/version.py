@@ -192,3 +192,6 @@ class Version:
 
     def __eq__(self,rhs):
         return self.compare(rhs) == 0
+
+    def __str__(self):
+        return self.verstring

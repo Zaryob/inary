@@ -48,7 +48,7 @@ import pisi.lockeddbshelve as shelve
 class Error(pisi.Error):
     pass
 
-def init(database = True, options = None, ui = None, comar = True):
+def init(database = True, write = False, options = None, ui = None, comar = True):
     """Initialize PiSi subsystem"""
 
     # UI comes first
@@ -71,7 +71,7 @@ def init(database = True, options = None, ui = None, comar = True):
     # initialize repository databases
     ctx.database = database
     if database:
-        shelve.init_dbenv()
+        shelve.init_dbenv(write=write)
         ctx.repodb = pisi.repodb.init()
         ctx.installdb = pisi.installdb.init()
         ctx.filesdb = pisi.files.FilesDB()
@@ -93,14 +93,18 @@ def finalize():
     if ctx.initialized:
         pisi.repodb.finalize()
         pisi.installdb.finalize()
-        if ctx.filesdb:
+        if ctx.filesdb != None:
             ctx.filesdb.close()
-        if ctx.componentdb:
+            ctx.filesdb = None
+        if ctx.componentdb != None:
             ctx.componentdb.close()
+            ctx.componentdb = None
         if ctx.packagedb:
             packagedb.finalize_db()
             ctx.packagedb = None
-        pisi.sourcedb.finalize()
+        if ctx.sourcedb:
+            pisi.sourcedb.finalize()
+            ctx.sourcedb = None
         pisi.search.finalize()
         if ctx.dbenv:
             ctx.dbenv.close()
@@ -328,8 +332,10 @@ def delete_cache():
 
 def rebuild_db(files=False):
 
+    assert ctx.database == False
+
     def destroy(files):
-        from pisi.lockeddbshelve import LockedDBShelf
+        #from pisi.lockeddbshelve import LockedDBShelf
         for db in os.listdir(ctx.config.db_dir()):
             if db.endswith('.bdb'):  # delete only db files
                 if db.startswith('files') or db.startswith('filesdbversion'):
@@ -348,13 +354,15 @@ def rebuild_db(files=False):
                 ctx.ui.debug('Resurrecting %s' % package_fn)
                 pisi.api.resurrect_package(package_fn, files, txn)
 
+    # check db schema versions
     try:
         pisi.lockeddbshelve.check_dbversion('filesdbversion', pisi.__filesdbversion__, write=False)
     except:
         files = True # exception means the files db version was wrong
-    pisi.lockeddbshelve.init_dbenv()
     destroy(files) # bye bye
-    ctx.dbenv.close()
+    pisi.lockeddbshelve.check_dbversion('dbversion', pisi.__dbversion__, write=True, force=True)
+    pisi.lockeddbshelve.check_dbversion('filesdbversion', pisi.__filesdbversion__, write=True, force=True)
+
     # save parameters and shutdown pisi
     options = ctx.config.options
     ui = ctx.ui
