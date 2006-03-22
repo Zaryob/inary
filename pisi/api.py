@@ -51,19 +51,22 @@ class Error(pisi.Error):
 def init(database = True, options = None, ui = None, comar = True):
     """Initialize PiSi subsystem"""
 
+    # UI comes first
+        
+    if ui is None:
+        from pisi.cli import CLI
+        if options:
+            ctx.ui = CLI(options.debug)
+        else:
+            ctx.ui = CLI()
+    else:
+        ctx.ui = ui
+
     import pisi.config
     ctx.config = pisi.config.Config(options)
 
     # TODO: this is definitely not dynamic beyond this point!
     ctx.comar = comar and not ctx.config.get_option('ignore_comar')
-
-    if ui is None:
-        if options:
-            pisi.context.ui = pisi.cli.CLI(options.debug)
-        else:
-            pisi.context.ui = pisi.cli.CLI()
-    else:
-        pisi.context.ui = ui
 
     # initialize repository databases
     ctx.database = database
@@ -73,7 +76,7 @@ def init(database = True, options = None, ui = None, comar = True):
         ctx.installdb = pisi.installdb.init()
         ctx.filesdb = pisi.files.FilesDB()
         ctx.componentdb = pisi.component.ComponentDB()
-        packagedb.init_db()
+        ctx.packagedb = packagedb.init_db()
         ctx.sourcedb = pisi.sourcedb.init()
         pisi.search.init(['summary', 'description'], ['en', 'tr'])
     else:
@@ -81,6 +84,7 @@ def init(database = True, options = None, ui = None, comar = True):
         ctx.installdb = None
         ctx.filesdb = None
         ctx.componentdb = None
+        ctx.packagedb = None
         ctx.sourcedb = None
     ctx.ui.debug('PISI API initialized')
     ctx.initialized = True
@@ -89,11 +93,13 @@ def finalize():
     if ctx.initialized:
         pisi.repodb.finalize()
         pisi.installdb.finalize()
-        if ctx.filesdb != None:
+        if ctx.filesdb:
             ctx.filesdb.close()
-        if ctx.componentdb != None:
+        if ctx.componentdb:
             ctx.componentdb.close()
-        packagedb.finalize_db()
+        if ctx.packagedb:
+            packagedb.finalize_db()
+            ctx.packagedb = None
         pisi.sourcedb.finalize()
         pisi.search.finalize()
         if ctx.dbenv:
@@ -107,8 +113,7 @@ def list_available():
 
     available = set()
     for repo in pisi.context.repodb.list():
-        pkg_db = pisi.packagedb.get_db(repo)
-        available.update(pkg_db.list_packages())
+        available.update(ctx.packagedb.list_packages())
     return available
 
 def list_upgradable():
@@ -119,7 +124,7 @@ def list_upgradable():
     Ap = []
     for x in A:
         (version, release, build) = ctx.installdb.get_version(x)
-        pkg = packagedb.get_package(x)
+        pkg = ctx.packagedb.get_package(x)
         if ignore_build or (not build):
             if release < pkg.release:
                 Ap.append(x)
@@ -142,7 +147,7 @@ def package_graph(A, ignore_installed = False):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
-    G_f = pgraph.PGraph(packagedb)               # construct G_f
+    G_f = pgraph.PGraph(ctx.packagedb)               # construct G_f
 
     # find the "install closure" graph of G_f by package 
     # set A using packagedb
@@ -153,7 +158,7 @@ def package_graph(A, ignore_installed = False):
     while len(B) > 0:
         Bp = set()
         for x in B:
-            pkg = packagedb.get_package(x)
+            pkg = ctx.packagedb.get_package(x)
             #print pkg
             for dep in pkg.runtimeDependencies():
                 if ignore_installed:
@@ -169,14 +174,14 @@ def configure_pending():
     # start with pending packages
     # configure them in reverse topological order of dependency
     A = ctx.installdb.list_pending()
-    G_f = pgraph.PGraph(packagedb)               # construct G_f
+    G_f = pgraph.PGraph(ctx.packagedb)               # construct G_f
     for x in A.keys():
         G_f.add_package(x)
     B = A
     while len(B) > 0:
         Bp = set()
         for x in B.keys():
-            pkg = packagedb.get_package(x)
+            pkg = ctx.packagedb.get_package(x)
             for dep in pkg.runtimeDependencies():
                 if dep.package in G_f.vertices():
                     G_f.add_dep(x, dep)
@@ -233,12 +238,12 @@ def info_file(package_fn):
 
 def info_name(package_name, installed=False):
     """fetch package information for a package"""
-    if installed:
-        pkgdb = packagedb.inst_packagedb
-    else:
-        pkgdb = packagedb
-    if pkgdb.has_package(package_name):
-        package = pkgdb.get_package(package_name)
+    if ctx.packagedb.has_package(package_name):
+        package, repo = pkgdb.get_package(package_name)
+
+        if (not installed) and (repo==pisi.itembyrepodb.installed):
+            raise Error(_('Package %s not found') % package_name)
+        
         from pisi.metadata import MetaData
         metadata = MetaData()
         metadata.package = package
@@ -313,7 +318,7 @@ def update_repo(repo):
         index.read_uri(ctx.repodb.get_repo(repo).indexuri.get_uri(), repo)
     else:
         raise Error(_('No repository named %s found.') % repo)
-    index.update_db(repo)
+    ctx.txn_proc(lambda txn : index.update_db(repo, txn=txn))
     ctx.ui.info(_('\n* Package database updated.'))
 
 def delete_cache():

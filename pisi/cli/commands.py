@@ -283,8 +283,7 @@ conflicts relations starting from given packages.
         a = set()
         from pisi import packagedb
         for repo in ctx.repodb.list():
-            pkg_db = packagedb.get_db(repo)
-            a = a.union(pkg_db.list_packages())
+            a = a.union(ctx.packagedb.list_packages(repo))
         return a
 
     def run(self):
@@ -610,7 +609,7 @@ Usage: info <package1> <package2> ... <packagen>
                 metadata, files = pisi.api.info_name(arg, True)
                 ctx.ui.info(_('Installed package:'))
                 self.print_pkginfo(metadata, files)
-            if packagedb.has_package(arg):
+            elif ctx.packagedb.has_package(arg):
                 metadata, files = pisi.api.info_name(arg, False)
                 ctx.ui.info(_('Package found in repository:'))
                 self.print_pkginfo(metadata, files)
@@ -619,7 +618,7 @@ Usage: info <package1> <package2> ... <packagen>
         import os.path
 
         ctx.ui.info(unicode(metadata.package))
-        revdeps =  [x[0] for x in packagedb.get_rev_deps(metadata.package.name)]
+        revdeps =  [x[0] for x in ctx.packagedb.get_rev_deps(metadata.package.name)]
         print _('Reverse Dependencies:'), util.strlist(revdeps)
         if self.options.files or self.options.files_path:
             if files:
@@ -722,7 +721,7 @@ Usage: list-installed
             ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
             print         '========================================================================'
         for pkg in list:
-            package = pisi.packagedb.inst_packagedb.get_package(pkg)
+            package = ctx.packagedb.get_package(pkg, pisi.itembyrepodb.installed)
             inst_info = ctx.installdb.get_info(pkg)
             if self.options.long:
                 ctx.ui.info(unicode(package))
@@ -730,7 +729,7 @@ Usage: list-installed
             elif self.options.install_info:
                 ctx.ui.info('%-15s  |%s' % (package.name, inst_info.one_liner()))
             else:
-                ctx.ui.info('%15s - %s' % (package.name, package.summary))
+                ctx.ui.info('%15s - %s' % (package.name, unicode(package.summary)))
         self.finalize()
 
 class RebuildDb(Command):
@@ -924,12 +923,11 @@ Gives a brief list of PiSi packages published in the repository.
         from pisi import packagedb
         from colors import colorize
 
-        pkg_db = packagedb.get_db(repo)
-        list = pkg_db.list_packages()
+        list = ctx.packagedb.list_packages(repo)
         installed_list = ctx.installdb.list_installed()
         list.sort()
         for p in list:
-            package = pkg_db.get_package(p)
+            package = ctx.packagedb.get_package(p)
             if self.options.long:
                 ctx.ui.info(unicode(package))
             else:
@@ -1045,7 +1043,7 @@ Usage: list-upgrades [ <repo1> <repo2> ... repon ]
             ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
             print         '========================================================================'
         for pkg in list:
-            package = pisi.packagedb.inst_packagedb.get_package(pkg)
+            package = ctx.packagedb.get_package(pkg, pisi.itembyrepodb.installed)
             inst_info = ctx.installdb.get_info(pkg)
             if self.options.long:
                 ctx.ui.info(package)

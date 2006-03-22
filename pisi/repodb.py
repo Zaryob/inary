@@ -49,11 +49,6 @@ class RepoDB(object):
                 self.d.put("order", [], txn)
         self.d.txn_proc(proc, txn)
 
-    def init_dbs(self):
-        # initialize package/source dbs
-        for x in self.list():
-            packagedb.add_db(x)
-            
     def close(self):
         self.d.close()
 
@@ -88,7 +83,6 @@ class RepoDB(object):
             order = self.d.get("order", txn)
             order.append(name)
             self.d.put("order", order, txn)
-            packagedb.add_db(name)
         self.d.txn_proc(proc, txn)
 
     def list(self):
@@ -104,7 +98,7 @@ class RepoDB(object):
             list = self.d.get("order", txn)
             list.remove(name)
             self.d.put("order", list, txn)
-            packagedb.remove_db(name)
+            ctx.packagedb.remove_repo(name, txn=txn)
         self.d.txn_proc(proc, txn)
 
 db = None
@@ -116,7 +110,6 @@ def init():
         return db
 
     db = RepoDB()
-    db.init_dbs()
     return db
     
 def finalize():

@@ -345,7 +345,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             # init hook
             if hasattr(self, 'init'):
                 self.init(tag)
-            if uri:
+            if xmlfile_support and uri:
                 self.read(uri, keepDoc, tmpDir)
 
         cls.__init__ = initialize

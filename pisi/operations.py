@@ -168,7 +168,7 @@ def check_conflicts(order):
     while len(B) > 0:
         Bp = set()
         for x in B:
-            pkg = packagedb.get_package(x) # get latest version!
+            pkg = ctx.packagedb.get_package(x) # get latest version!
             #TODO: read conflicts from a conflicts db...
             for conflict in pkg.conflicts:
                 if ctx.installdb.is_installed(self.pkginfo):
@@ -249,7 +249,7 @@ def plan_install_pkg_names(A):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
-    G_f = pgraph.PGraph(packagedb)               # construct G_f
+    G_f = pgraph.PGraph(ctx.packagedb)               # construct G_f
 
     # find the "install closure" graph of G_f by package 
     # set A using packagedb
@@ -260,7 +260,7 @@ def plan_install_pkg_names(A):
     while len(B) > 0:
         Bp = set()
         for x in B:
-            pkg = packagedb.get_package(x)
+            pkg = ctx.packagedb.get_package(x)
             for dep in pkg.runtimeDependencies():
                 ctx.ui.debug('checking %s' % str(dep))
                 # we don't deal with already *satisfied* dependencies
@@ -299,7 +299,7 @@ def upgrade_pkg_names(A = []):
             ctx.ui.info(_('Package %s is not installed.') % x)
             continue
         (version, release, build) = ctx.installdb.get_version(x)
-        pkg = packagedb.get_package(x)
+        pkg = ctx.packagedb.get_package(x)
 
         if ignore_build or (not build) or (not pkg.build):
             if release < pkg.release:
@@ -348,7 +348,7 @@ def plan_upgrade(A):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
-    G_f = pgraph.PGraph(packagedb)               # construct G_f
+    G_f = pgraph.PGraph(ctx.packagedb)               # construct G_f
 
     # find the "install closure" graph of G_f by package 
     # set A using packagedb
@@ -481,7 +481,7 @@ def plan_remove(A):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
-    G_f = pgraph.PGraph(packagedb)               # construct G_f
+    G_f = pgraph.PGraph(ctx.packagedb)               # construct G_f
 
     # find the (install closure) graph of G_f by package 
     # set A using packagedb
@@ -491,12 +491,12 @@ def plan_remove(A):
     while len(B) > 0:
         Bp = set()
         for x in B:
-            pkg = packagedb.get_package(x)
-            rev_deps = packagedb.get_rev_deps(x)
+            pkg = ctx.packagedb.get_package(x)
+            rev_deps = ctx.packagedb.get_rev_deps(x)
             for (rev_dep, depinfo) in rev_deps:
                 # we don't deal with uninstalled rev deps
                 # and unsatisfied dependencies (this is important, too)
-                if packagedb.inst_packagedb.has_package(rev_dep) and \
+                if ctx.packagedb.has_package(rev_dep, pisi.itembyrepodb.installed) and \
                    dependency.installed_satisfies_dep(depinfo):
                     if not rev_dep in G_f.vertices():
                         Bp.add(rev_dep)

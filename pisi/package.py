@@ -24,7 +24,6 @@ _ = __trans.ugettext
 import pisi
 import pisi.context as ctx
 import pisi.archive as archive
-from pisi.packagedb import get_package
 from pisi.uri import URI
 from pisi.metadata import MetaData
 from pisi.files import Files

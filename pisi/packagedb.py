@@ -29,6 +29,7 @@ import pisi
 import pisi.util as util
 import pisi.context as ctx
 import pisi.lockeddbshelve as shelve
+from pisi.itembyrepodb import ItemByRepoDB
 
 class Error(pisi.Error):
     pass
@@ -36,10 +37,10 @@ class Error(pisi.Error):
 class PackageDB(object):
     """PackageDB class provides an interface to the package database 
     using shelf objects"""
-    def __init__(self, id):
-        self.id = id
-        self.d = shelve.LockedDBShelf('package-%s' % id )
-        self.dr = shelve.LockedDBShelf('revdep-%s' % id )
+    
+    def __init__(self):
+        self.d = ItemByRepoDB('package') 
+        self.dr = ItemByRepoDB('revdep')
 
     def close(self):
         self.d.close()
@@ -49,43 +50,43 @@ class PackageDB(object):
         self.d.destroy()
         self.dr.destroy()
 
-    def has_package(self, name, txn = None):
-        name = str(name)
-        return self.d.has_key(name, txn)
+    def has_package(self, name, repo=None, txn = None):
+        return self.d.has_key(name, repo, txn)
 
-    def get_package(self, name):
-        name = str(name)
-        return self.d[name]
+    def get_package(self, name, repo=None, txn = None):
+        try:
+            return self.d.get_item(name, repo, txn)
+        except pisi.itembyrepodb.NotfoundError, e:
+            raise Error(_('Package %s not found') % name)
+
+    def get_package_repo(self, name, repo=None, txn = None):
+        return self.d.get_item_repo(name, repo, txn)
+
+    def which_repo(self, name, repo=None, txn = None):
+        return self.d.which_repo(name, repo, txn)
 
     def get_rev_deps(self, name):
-        name = str(name)
-        if self.dr.has_key(name):
-            return self.dr[name]
-        else:
-            return []
+        x = self.dr.get_item(self, name)
+        if not x:
+            x = []
 
-    def list_packages(self):
-        list = []
-        for (pkg, x) in self.d.items():
-            list.append(pkg)
-        return list
+    def list_packages(self, repo=None):
+        return self.d.list(repo)
 
-    #TODO: list_upgrades?
-
-    def add_package(self, package_info, txn = None):
+    def add_package(self, package_info, repo, txn = None):
         name = str(package_info.name)
         
         def proc(txn):
-            self.d.put(name, package_info, txn)
+            self.d.add_item(name, package_info, repo, txn)
             for dep in package_info.runtimeDependencies():
                 dep_name = str(dep.package)
-                if self.dr.has_key(dep_name, txn):
-                    revdep = self.dr.get(dep_name, txn)
+                if self.dr.has_key(dep_name, None, txn):
+                    revdep = self.dr.get_item(dep_name, None, txn)
                     revdep = filter(lambda (n,d):n!=name, revdep)
                     revdep.append( (name, dep) )
-                    self.dr.put(dep_name, revdep, txn)
+                    self.dr.add_item(dep_name, revdep, repo, txn)
                 else:
-                    self.dr.put(dep_name, [ (name, dep) ], txn)
+                    self.dr.add_item(dep_name, [ (name, dep) ], repo, txn)
             # add component
             ctx.componentdb.add_package(package_info.partOf, package_info.name, txn)
             # index summary and description
@@ -96,103 +97,44 @@ class PackageDB(object):
                 if lang in ['en', 'tr']:
                     pisi.search.add_doc('description', lang, package_info.name, doc, txn)
 
-        self.d.txn_proc(proc, txn)
+        ctx.txn_proc(proc, txn)
 
-    def clear(self):
+    def clear(self, txn = None):
         self.d.clear()
+        self.dr.clear()
 
-    def remove_package(self, name, txn = None):
+    def remove_package(self, name, repo = None, txn = None):
         name = str(name)
         def proc(txn):
-            package_info = self.d.get(name, txn)
-            self.d.delete(name, txn)
+            package_info = self.d.get_item_repo(name, repo, txn)
+            self.d.remove_item(name, repo, txn)
             #FIXME: what's happening to dr?
             #WORKAROUND: do not remove component if it is not in repo
-            if self.id.startswith('repo'):
+            if type(repo)==types.StringType:
                 ctx.componentdb.remove_package(package_info.partOf, package_info.name, txn)
         self.d.txn_proc(proc, txn)
+        
+    def remove_repo(self, repo, txn = None):
+        def proc(txn):
+            self.d.remove_repo(repo, txn=txn)
+            self.dr.remove_repo(repo, txn=txn)            
+        self.d.txn_proc(proc, txn)
 
-packagedbs = {}
+pkgdb = None
 
-def add_db(name):
-    pisi.packagedb.packagedbs[name] = PackageDB('repo-' + name)
-
-def get_db(name):
-    return pisi.packagedb.packagedbs[name]
-
-def remove_db(name):
-    pisi.packagedb.packagedbs[name].close()
-    pisi.packagedb.packagedbs[name].destroy()
-    del pisi.packagedb.packagedbs[name]
-    
-def has_package(name, txn = None):
-    def proc(txn):
-        repo = which_repo(name)
-        if repo or thirdparty_packagedb.has_package(name, txn) or inst_packagedb.has_package(name, txn):
-            return True
-        return False
-    return ctx.txn_proc(proc, txn)
-
-def which_repo(name, txn = None):
-    import pisi.repodb
-    def proc(txn):
-        for repo in pisi.repodb.db.list():
-            if get_db(repo).has_package(name, txn):
-                return repo
-        return None
-    return ctx.txn_proc(proc, txn)
-
-def get_package(name):
-    repo = which_repo(name)
-    if repo:
-        return get_db(repo).get_package(name)
-    if thirdparty_packagedb.has_package(name):
-        return thirdparty_packagedb.get_package(name)
-    if inst_packagedb.has_package(name):
-        return inst_packagedb.get_package(name)
-    raise Error(_('get_package: package %s not found') % name)
-
-def get_rev_deps(name):
-    repo = which_repo(name)
-    if repo:
-        return get_db(repo).get_rev_deps(name)
-    if thirdparty_packagedb.has_package(name):
-        return thirdparty_packagedb.get_rev_deps(name)    
-    if inst_packagedb.has_package(name):
-        return inst_packagedb.get_rev_deps(name)
-
-    return []
-
-def remove_package(name, txn = None):
+def remove_tracking_package(name, txn = None):
     # remove the guy from the tracking databases
-    inst_packagedb.remove_package(name, txn)
-    if thirdparty_packagedb.has_package(name, txn):
-        thirdparty_packagedb.remove_package(name, txn)
-
-# tracking databases for non-repository information
-
-thirdparty_packagedb = inst_packagedb = None
+    if pkgdb.has_package(name, itembyrepodb.installed, txn):
+        pkgdb.remove_package(name, itembyrepodb.installed, txn=txn)
+    if pkgdb.has_package(name, itembyrepodb.thirdparty, txn):
+        pkgdb.remove_package(name, itembyrepodb.thirdparty, txn=txn)
 
 def init_db():
-    global thirdparty_packagedb
-    global inst_packagedb
-
-    if not thirdparty_packagedb:
-        thirdparty_packagedb = PackageDB('thirdparty')
-    if not pisi.packagedb.inst_packagedb:
-        inst_packagedb = PackageDB('installed')
+    global pkgdb
+    pkgdb = PackageDB()
+    return pkgdb
 
 def finalize_db():
-    global thirdparty_packagedb
-    global inst_packagedb
-    global packagedbs
-
-    if thirdparty_packagedb:
-        thirdparty_packagedb.close()
-        thirdparty_packagedb = None
-
-    if inst_packagedb:
-        inst_packagedb.close()
-        inst_packagedb = None
-    
-    packagedbs.clear()
+    global pkgdb
+    if pkgdb:
+        pkgdb.close()

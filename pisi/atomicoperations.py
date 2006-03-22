@@ -28,7 +28,7 @@ import pisi.packagedb as packagedb
 import pisi.dependency as dependency
 import pisi.util as util
 from pisi.specfile import *
-from pisi.package import Package
+#from pisi.package import Package
 from pisi.metadata import MetaData
 from pisi.files import Files
 from pisi.uri import URI
@@ -36,6 +36,9 @@ import pisi.ui
 #import conflicts
 
 class Error(pisi.Error):
+    pass
+
+class NotfoundError(pisi.Error):
     pass
 
 # single package operations
@@ -61,10 +64,10 @@ class Install(AtomicOperation):
     def from_name(name):
         # download package and return an installer object
         # find package in repository
-        repo = packagedb.which_repo(name)
+        repo = ctx.packagedb.which_repo(name)
         if repo:
             repo = ctx.repodb.get_repo(repo)
-            pkg = packagedb.get_package(name)
+            pkg = ctx.packagedb.get_package(name)
     
             # FIXME: let pkg.packageURI be stored as URI type rather than string
             pkg_uri = URI(pkg.packageURI)
@@ -83,7 +86,7 @@ class Install(AtomicOperation):
     def __init__(self, package_fname, ignore_dep = None):
         "initialize from a file name"
         super(Install, self).__init__(ignore_dep)
-        self.package = Package(package_fname)
+        self.package = pisi.package.Package(package_fname)
         self.package.read()
         self.metadata = self.package.metadata
         self.files = self.package.files
@@ -146,9 +149,8 @@ class Install(AtomicOperation):
 
         # check if package is in database
         # If it is not, put it into 3rd party packagedb
-        if not packagedb.has_package(self.pkginfo.name):
-            db = packagedb.thirdparty_packagedb
-            db.add_package(self.pkginfo)
+        if not ctx.packagedb.has_package(self.pkginfo.name):
+            ctx.packagedb.add_package(self.pkginfo, pisi.itembyrepodb.thirdparty)
         
         # check file conflicts
         for file in self.files.list:
@@ -299,10 +301,10 @@ class Install(AtomicOperation):
                           txn)
 
         # filesdb
-        ctx.filesdb.add_files(self.metadata.package.name, self.files, txn)
+        ctx.filesdb.add_files(self.metadata.package.name, self.files, txn=txn)
 
         # installed packages
-        packagedb.inst_packagedb.add_package(self.pkginfo, txn)
+        ctx.packagedb.add_package(self.pkginfo, pisi.itembyrepodb.installed, txn=txn)
 
     def update_environment(self):
         # check if we have any shared objects or anything under
@@ -345,7 +347,7 @@ class Remove(AtomicOperation):
     def __init__(self, package_name, ignore_dep = None):
         super(Remove, self).__init__(ignore_dep)
         self.package_name = package_name
-        self.package = packagedb.get_package(self.package_name)
+        self.package = ctx.packagedb.get_package(self.package_name)
         try:
             self.files = ctx.installdb.files(self.package_name)
         except pisi.Error, e:
@@ -356,8 +358,7 @@ class Remove(AtomicOperation):
 
     def run(self):
         """Remove a single package"""
-        inst_packagedb = packagedb.inst_packagedb
-       
+        
         ctx.ui.status(_('Removing package %s') % self.package_name)
         ctx.ui.notify(pisi.ui.removing, package = self.package, files = self.files)
         if not ctx.installdb.is_installed(self.package_name):
@@ -426,11 +427,7 @@ class Remove(AtomicOperation):
     def remove_db(self, txn):
         ctx.installdb.remove(self.package_name, txn)
         ctx.filesdb.remove_files(self.files, txn)
-        if packagedb.thirdparty_packagedb.has_package(self.package_name, txn):
-            packagedb.thirdparty_packagedb.remove_package(self.package_name, txn)
-        if packagedb.inst_packagedb.has_package(self.package_name, txn):
-            packagedb.inst_packagedb.remove_package(self.package_name, txn)
-
+        ctx.packagedb.remove_tracking_package(self.package_name, txn)
 
 def remove_single(package_name):
     Remove(package_name).run()
@@ -466,8 +463,8 @@ def virtual_install(metadata, files, txn):
     if ctx.installdb.is_installed(pkg.name, txn):
         if __is_virtual_upgrade(metadata):
             ctx.installdb.remove(pkg.name, txn)
-            packagedb.remove_package(pkg.name, txn)
-            ctx.filesdb.remove_files(ctx.installdb.files(pkg.name), txn)
+            ctx.packagedb.remove_package(pkg.name, txn=txn)
+            ctx.filesdb.remove_files(ctx.installdb.files(pkg.name), txn=txn)
         else:
             return
 
@@ -488,7 +485,7 @@ def virtual_install(metadata, files, txn):
         ctx.filesdb.add_files(metadata.package.name, files, txn)
 
     # installed packages
-    packagedb.inst_packagedb.add_package(pkginfo, txn)
+    ctx.packagedb.add_package(pkginfo, pisi.itembyrepodb.installed, txn=txn)
 
 def resurrect_package(package_fn, write_files, txn = None):
     """Resurrect the package from xml files"""

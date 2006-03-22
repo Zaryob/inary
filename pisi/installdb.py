@@ -36,7 +36,7 @@ class InstallDBError(pisi.Error):
 
 
 class InstallInfo:
-    # some data is replicated from packagedb.inst_packagedb
+    # some data is replicated from packagedb 
     # we store as an object, hey, we can waste O(1) space.
     # this is also easier to modify in the future, without
     # requiring database upgrades! wow!

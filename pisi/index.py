@@ -79,15 +79,14 @@ class Index(XmlFile):
                 if fn == 'pspec.xml':
                     self.add_spec(os.path.join(root, fn), repo_uri)
 
-    def update_db(self, repo):
-        pkgdb = packagedb.get_db(repo)
-        pkgdb.clear()
+    def update_db(self, repo, txn = None):
         for comp in self.components:
-            ctx.componentdb.update_component(comp)
+            ctx.componentdb.update_component(comp, txn=txn)
+        ctx.packagedb.remove_repo(repo, txn=txn)
         for pkg in self.packages:
-            pkgdb.add_package(pkg)
+            ctx.packagedb.add_package(pkg, repo, txn=txn)
         for sf in self.specs:
-            ctx.sourcedb.add_spec(sf, repo)
+            ctx.sourcedb.add_spec(sf, repo, txn=txn)
 
     def add_package(self, path, repo_uri):
         package = Package(path, 'r')

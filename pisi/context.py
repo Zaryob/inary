@@ -33,6 +33,7 @@ ui = None # not now
 
 dbenv = None
 installdb = None
+packagedb = None
 repodb = None
 invidx = None
 

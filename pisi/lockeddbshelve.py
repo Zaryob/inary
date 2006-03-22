@@ -9,16 +9,22 @@
 #
 # Please read the COPYING file.
 #
-#
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
+
+"""
+By default, cPickle + 7zip compression is used
+"""
+
+import os
+import fcntl
+import types
+import cPickle
 
 import bsddb3.db as db
 import bsddb3.dbobj as dbobj
 #import bsddb3.dbshelve as shelve
 import pisi.dbshelve as shelve
-import os
-import fcntl
-import types
+import pylzma
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -83,6 +89,15 @@ def init_dbenv():
 class LockedDBShelf(shelve.DBShelf):
     """A simple wrapper to implement locking for bsddb's dbshelf"""
 
+#    def decode(self, data):
+#        try:
+#            return cPickle.loads(pylzma.decompress(data))
+#        except:
+#            raise shelve.CodingError()
+
+#    def encode(self, obj):
+#        return pylzma.compress(cPickle.dumps(obj, 1), algorithm=0)
+    
     def __init__(self, dbname, mode=0644,
                  filetype=db.DB_BTREE, dbenv = None):
         if dbenv == None:
