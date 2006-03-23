@@ -61,11 +61,11 @@ def check_dbversion(versionfile, ver, write=False, force=False):
         else:
             raise Error(_('Cannot attain write access to database environment'))
 
-def init_dbenv(write=False):
+def init_dbenv(write=False, writeversion=False):
     if os.access(pisi.context.config.db_dir(), os.R_OK):
         # try to read version
-        check_dbversion('dbversion', pisi.__dbversion__, write=write)
-        check_dbversion('filesdbversion', pisi.__filesdbversion__, write=write)
+        check_dbversion('dbversion', pisi.__dbversion__, write=writeversion)
+        check_dbversion('filesdbversion', pisi.__filesdbversion__, write=writeversion)
     else:
         raise Error(_('Cannot attain read access to database environment'))
     if os.access(pisi.context.config.db_dir(), os.W_OK):

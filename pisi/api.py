@@ -336,16 +336,22 @@ def rebuild_db(files=False):
 
     def destroy(files):
         #from pisi.lockeddbshelve import LockedDBShelf
+        #TODO: either don't delete version files here, or remove force flag...
+        import bsddb3.db
+        pisi.lockeddbshelve.init_dbenv(write=True)
         for db in os.listdir(ctx.config.db_dir()):
-            if db.endswith('.bdb'):  # delete only db files
+            if db.endswith('.bdb') or db.startswith('log'):  # delete only db files
                 if db.startswith('files') or db.startswith('filesdbversion'):
                     clean = files
                 else:
                     clean = True
                 if clean:
                     fn = pisi.util.join_path(ctx.config.db_dir(), db)
-                    #ctx.dbenv.dbremove(fn)
+                    #FIXME: there is a bug with bsddb3
+                    #ctx.dbenv.dbremove(fn, "", None, bsddb3.db.DB_AUTO_COMMIT)
+#                    ctx.dbenv.dbremove(file=fn, flags=bsddb3.db.DB_AUTO_COMMIT)
                     os.unlink(fn)
+        #ctx.dbenv.close()
 
     def reload(files, txn):
         for package_fn in os.listdir( pisi.util.join_path( ctx.config.lib_dir(),

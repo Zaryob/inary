@@ -145,7 +145,9 @@ class ItemByRepoDB(object):
         repo = str(repo)
         def proc(txn):
             s = self.d.get(name, txn)
-            del s[self.repo_str(repo)]
+            repostr = self.repo_str(repo)
+            if s.has_key(repostr):
+                del s[repostr]
             if (len(s)==0):
                 self.d.delete(name, txn)
             else:
