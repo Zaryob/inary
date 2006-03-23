@@ -48,7 +48,7 @@ import pisi.lockeddbshelve as shelve
 class Error(pisi.Error):
     pass
 
-def init(database = True, write = False, options = None, ui = None, comar = True):
+def init(database = True, write = True, options = None, ui = None, comar = True):
     """Initialize PiSi subsystem"""
 
     # UI comes first
@@ -366,8 +366,8 @@ def rebuild_db(files=False):
     except:
         files = True # exception means the files db version was wrong
     destroy(files) # bye bye
-    pisi.lockeddbshelve.check_dbversion('dbversion', pisi.__dbversion__, write=True, force=True)
-    pisi.lockeddbshelve.check_dbversion('filesdbversion', pisi.__filesdbversion__, write=True, force=True)
+    pisi.lockeddbshelve.check_dbversion('dbversion', pisi.__dbversion__, write=True, update=True)
+    pisi.lockeddbshelve.check_dbversion('filesdbversion', pisi.__filesdbversion__, write=True, update=True)
 
     # save parameters and shutdown pisi
     options = ctx.config.options

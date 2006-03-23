@@ -38,20 +38,26 @@ from pisi.version import Version
 class Error(pisi.Error):
     pass
 
-def check_dbversion(versionfile, ver, write=False, force=False):
+# check database version
+# if write is given it knows it has write access
+# if force is given it updates the specified db version
+def check_dbversion(versionfile, ver, write=False, update=False):
     verfn = join_path(pisi.context.config.db_dir(), versionfile)
+    firsttime = False
     if os.path.exists(verfn):
         verfile = file(verfn, 'r')
         ls = verfile.readlines()
         currver = Version(ls[0])
         dbver = Version(ver)
-        if currver < dbver and not force:
+        if currver < dbver and not update:
             raise Error(_('Database version for %s insufficient. Please run rebuild-db command.') % versionfile)
         elif currver > dbver:
             raise Error(_('Database version for %s greater than PiSi version. You need a newer PiSi.') % versionfile)
-        elif not force:
-            return True # return if force not set and db version ok
-    if write:
+        else:
+            return True  # db version is OK
+    else:
+        firsttime = True
+    if writen and (update or firsttime):
         if os.access(pisi.context.config.db_dir(), os.W_OK):
             ctx.ui.warning(_('Writing current database version for %s') % versionfile)
             verfile = file(verfn, 'w')
@@ -62,11 +68,13 @@ def check_dbversion(versionfile, ver, write=False, force=False):
     else:
         raise Error(_('Database version %s not present.') % versionfile)
 
+# write: write access to database environment
+# writeversion: would you like to be able 
 def init_dbenv(write=False, writeversion=False):
     if os.access(pisi.context.config.db_dir(), os.R_OK):
         # try to read version
-        check_dbversion('dbversion', pisi.__dbversion__, write=writeversion)
-        check_dbversion('filesdbversion', pisi.__filesdbversion__, write=writeversion)
+        check_dbversion('dbversion', pisi.__dbversion__, write=write, update=writeversion)
+        check_dbversion('filesdbversion', pisi.__filesdbversion__, write=write, update=writeversion)
     else:
         raise Error(_('Cannot attain read access to database environment'))
     if os.access(pisi.context.config.db_dir(), os.W_OK):
