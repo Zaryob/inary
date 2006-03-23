@@ -642,7 +642,7 @@ def plan_emerge(A, rebuild_all):
 
     def get_spec(name):
         if ctx.sourcedb.has_spec(name):
-            return ctx.sourcedb.get_spec(name)[0]
+            return ctx.sourcedb.get_spec(name)
         else:
             raise Error(_('Cannot find source package: %s') % name)
     def get_src(name):
