@@ -54,12 +54,14 @@ def check_dbversion(versionfile, ver, write=False, force=False):
             return True # return if force not set and db version ok
     if write:
         if os.access(pisi.context.config.db_dir(), os.W_OK):
-            ctx.ui.warning(_('Writing current database version'))
+            ctx.ui.warning(_('Writing current database version for %s') % versionfile)
             verfile = file(verfn, 'w')
             verfile.write(ver)
             verfile.close()
         else:
             raise Error(_('Cannot attain write access to database environment'))
+    else:
+        raise Error(_('Database version %s not present.') % versionfile)
 
 def init_dbenv(write=False, writeversion=False):
     if os.access(pisi.context.config.db_dir(), os.R_OK):

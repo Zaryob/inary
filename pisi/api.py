@@ -336,9 +336,9 @@ def rebuild_db(files=False):
 
     def destroy(files):
         #from pisi.lockeddbshelve import LockedDBShelf
+        #pisi.lockeddbshelve.init_dbenv(write=True)
         #TODO: either don't delete version files here, or remove force flag...
         import bsddb3.db
-        pisi.lockeddbshelve.init_dbenv(write=True)
         for db in os.listdir(ctx.config.db_dir()):
             if db.endswith('.bdb') or db.startswith('log'):  # delete only db files
                 if db.startswith('files') or db.startswith('filesdbversion'):
