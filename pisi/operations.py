@@ -348,7 +348,9 @@ def plan_upgrade(A):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
-    G_f = pgraph.PGraph(ctx.packagedb)               # construct G_f
+    packagedb = ctx.packagedb
+    
+    G_f = pgraph.PGraph(packagedb)               # construct G_f
 
     # find the "install closure" graph of G_f by package 
     # set A using packagedb
