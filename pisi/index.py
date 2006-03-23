@@ -85,6 +85,7 @@ class Index(XmlFile):
         ctx.packagedb.remove_repo(repo, txn=txn)
         for pkg in self.packages:
             ctx.packagedb.add_package(pkg, repo, txn=txn)
+        ctx.sourcedb.remove_repo(repo, txn=txn)
         for sf in self.specs:
             ctx.sourcedb.add_spec(sf, repo, txn=txn)
 
