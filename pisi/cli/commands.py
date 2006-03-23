@@ -680,6 +680,9 @@ source and binary packages.
         self.parser.add_option("-o", "--output", action="store",
                                default='pisi-index.xml',
                                help=_("index output file"))
+        self.parser.add_option("-S", "--skip-sources", action="store_true",
+                               default=False,
+                               help=_("do not index pisi spec files."))
 
     def run(self):
         
@@ -689,7 +692,7 @@ source and binary packages.
             index(self.args, ctx.get_option('output'))
         elif len(self.args)==0:
             ctx.ui.info(_('Indexing current directory.'))
-            index('.', ctx.get_option('output'))
+            index('.', ctx.get_option('output'), skip_sources = ctx.get_option('skip_sources'))
         self.finalize()
 
 

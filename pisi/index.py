@@ -66,7 +66,7 @@ class Index(XmlFile):
 
         self.read(self.filepath)
 
-    def index(self, repo_uri):
+    def index(self, repo_uri, skip_sources=False):
         self.repo_dir = repo_uri
         for root, dirs, files in os.walk(repo_uri):
             for fn in files:
@@ -76,7 +76,7 @@ class Index(XmlFile):
                 if fn == 'component.xml':
                     ctx.ui.info(_('Adding %s to component index') % fn)
                     self.add_component(os.path.join(root, fn))
-                if fn == 'pspec.xml':
+                if fn == 'pspec.xml' and not skip_sources:
                     self.add_spec(os.path.join(root, fn), repo_uri)
 
     def update_db(self, repo, txn = None):

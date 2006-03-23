@@ -292,13 +292,13 @@ def check(package):
                 ctx.ui.info("OK", False)
     return corrupt
 
-def index(dirs, output = 'pisi-index.xml'):
+def index(dirs, output = 'pisi-index.xml', skip_sources=False):
     index = Index()
     if not dirs:
         dirs = ['.']
     for repo_dir in dirs:
         ctx.ui.info(_('* Building index of PISI files under %s') % repo_dir)
-        index.index(repo_dir)
+        index.index(repo_dir, skip_sources)
     index.write(output)
     ctx.ui.info(_('* Index file written'))
 
