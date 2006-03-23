@@ -90,6 +90,12 @@ class SourceDB(object):
             
         self.d.txn_proc(proc, txn)
 
+    def remove_repo(self, repo, txn = None):
+        def proc(txn):
+            self.d.remove_repo(repo, txn=txn)
+            self.dpkgtosrc.remove_repo(repo, txn=txn)            
+        self.d.txn_proc(proc, txn)
+
 sourcedb = None
 
 def init():

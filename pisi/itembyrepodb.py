@@ -143,7 +143,6 @@ class ItemByRepoDB(object):
         
     def remove_item(self, name, repo, txn = None):
         name = str(name)
-        repo = str(repo)
         def proc(txn):
             s = self.d.get(name, txn)
             repostr = self.repo_str(repo)
@@ -157,9 +156,6 @@ class ItemByRepoDB(object):
 
     def remove_repo(self, repo, txn = None):
         def proc(txn):
-            repostr = self.repo_str(repo)
-            for (key, s) in self.d.items():
-                if s.has_key(repostr):
-                    del s[repostr]
-                self.d.put(repo, s, txn)
+            for key in self.d.keys():
+                self.remove_item(key, repo, txn=txn)
         self.d.txn_proc(proc, txn)
