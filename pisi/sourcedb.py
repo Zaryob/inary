@@ -32,66 +32,56 @@ import pisi.util as util
 import pisi.context as ctx
 import pisi.lockeddbshelve as shelve
 import pisi.repodb
+from pisi.itembyrepodb import ItemByRepoDB
+
+class NotfoundError(pisi.Error):
+    def __init__(self, spec):
+        pisi.Error.__init__("Package %s not found" % spec)
+        self.spec = spec
 
 class SourceDB(object):
 
     def __init__(self):
-        self.d = shelve.LockedDBShelf('source')
-        self.dpkgtosrc = shelve.LockedDBShelf('pkgtosrc')
+        self.d = ItemByRepoDB('source')
+        self.dpkgtosrc = ItemByRepoDB('pkgtosrc')
 
     def close(self):
         self.d.close()
         self.dpkgtosrc.close()
 
     def list(self):
-        list = []
-        for (pkg, x) in self.d.items():
-            list.append(pkg) # for some reason we couldn't return self.d.items()!! --exa
-        return list
+        return self.d.list()
 
-    def has_spec(self, name):
-        name = str(name)
-        return self.d.has_key(name)
+    def has_spec(self, name, repo=None, txn=None):
+        return self.d.has_key(name, repo, txn)
 
-    def get_spec(self, name):
-        name = str(name)
-        s = self.d[name]
-        order = ctx.repodb.list()
-        for repo in order:
-            if s.has_key(repo):
-                return (s[repo], repo) 
-        return None
+    def get_spec(self, name, repo=None, txn = None):
+        try:
+            return self.d.get_item(name, repo, txn)
+        except pisi.itembyrepodb.NotfoundError, e:
+            raise NotfoundError(name)
 
     def pkgtosrc(self, name):
-        name = str(name)
         return self.dpkgtosrc[name]
         
     def add_spec(self, spec, repo, txn = None):
         assert not spec.errors()
         name = str(spec.source.name)
-        repo = str(repo)
         def proc(txn):
-            if not self.d.has_key(name):
-                s = dict()
-            else:
-                s = self.d.get(name, txn)
-            s[repo] = spec
-            self.d.put(name, s, txn)
+            self.d.add_item(name, spec, repo, txn)            
             for pkg in spec.packages:
-                self.dpkgtosrc.put(pkg.name, name, txn)
+                self.dpkgtosrc.add_item(pkg.name, name, repo, txn)
         self.d.txn_proc(proc, txn)
         
-    def remove_specfile(self, name, repo):
+    def remove_specfile(self, name, repo, txn = None):
         name = str(name)
-        repo = str(repo)
         def proc(txn):
-        #assert self.has_source(name)
-            s = self.d[name]
-            s.remove(repo)
-            if (len(s)==0):
-                del self.d[name]
-            else:
-                self.d[name] = s
+            assert self.has_spec(name, txn=txn)
+            spec = self.d.get_item_repo(name, repo, txn)
+            self.d.remove_item(name, repo, txn=txn)
+            for pkg in spec.packages:
+                self.dpkgtosrc.remove_item(pkg.name, name, repo, txn)
+            
         self.d.txn_proc(proc, txn)
 
 sourcedb = None

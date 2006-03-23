@@ -1001,7 +1001,7 @@ Gives a brief list of sources published in the repositories.
         list = ctx.sourcedb.list()
         list.sort()
         for p in list:
-            sf, repo = ctx.sourcedb.get_spec(p)
+            sf, repo = ctx.sourcedb.get_spec_repo(p)
             if self.options.long:
                 ctx.ui.info('[Repository: ' + repo + ']')
                 ctx.ui.info(unicode(sf.source))

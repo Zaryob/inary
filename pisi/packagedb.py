@@ -37,6 +37,11 @@ import pisi.itembyrepodb as itembyrepodb
 class Error(pisi.Error):
     pass
 
+class NotfoundError(pisi.Error):
+    def __init__(self, pkg):
+        pisi.Error.__init__("Package %s not found" % pkg)
+        self.pkg = pkg
+
 class PackageDB(object):
     """PackageDB class provides an interface to the package database 
     using shelf objects"""
