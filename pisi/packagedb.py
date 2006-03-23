@@ -19,7 +19,9 @@
 # we basically store everything in PackageInfo class
 # yes, we are cheap
 
-import os, fcntl
+import os
+import fcntl
+import types
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -30,6 +32,7 @@ import pisi.util as util
 import pisi.context as ctx
 import pisi.lockeddbshelve as shelve
 from pisi.itembyrepodb import ItemByRepoDB
+import pisi.itembyrepodb as itembyrepodb
 
 class Error(pisi.Error):
     pass

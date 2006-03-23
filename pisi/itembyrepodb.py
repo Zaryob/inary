@@ -89,10 +89,11 @@ class ItemByRepoDB(object):
 
     def has_key(self, name, repo = None, txn = None):
         name = str(name)
+        haskey = self.d.has_key(name, txn)
         if not repo:
-            return self.d.has_key(name, txn)
+            return haskey
         else:
-            return self.d.has_key(name, txn).has_key(repo)
+            return haskey and self.d.get(name, txn).has_key(repo)
 
     def get_item_repo(self, name, repo = None, txn = None):
         name = str(name)

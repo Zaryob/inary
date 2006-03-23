@@ -168,12 +168,18 @@ class Install(AtomicOperation):
         self.reinstall = False
         self.upgrade = False
         if ctx.installdb.is_installed(pkg.name): # is this a reinstallation?
+        
+            #FIXME: consider REPOSITORY instead of DISTRIBUTION -- exa
+            #ipackage = ctx.packagedb.get_package(pkg.name, pisi.itembyrepodb.installed)
+            ipkg = ctx.installdb.get_info(pkg.name)
+            repomismatch = ipkg.distribution != pkg.distribution
+
             (iversion, irelease, ibuild) = ctx.installdb.get_version(pkg.name)
 
             # determine if same version
             self.same_ver = False
             ignore_build = ctx.config.options and ctx.config.options.ignore_build_no
-            if (not ibuild) or (not pkg.build) or ignore_build:
+            if repomismatch or (not ibuild) or (not pkg.build) or ignore_build:
                 # we don't look at builds to compare two package versions
                 if pkg.release == irelease:
                     self.same_ver = True
@@ -296,9 +302,8 @@ class Install(AtomicOperation):
                           self.metadata.package.release,
                           self.metadata.package.build,
                           self.metadata.package.distribution,
-                          self.config_later, 
-                          False,
-                          txn)
+                          config_later = self.config_later, 
+                          txn = txn)
 
         # filesdb
         ctx.filesdb.add_files(self.metadata.package.name, self.files, txn=txn)
@@ -427,7 +432,7 @@ class Remove(AtomicOperation):
     def remove_db(self, txn):
         ctx.installdb.remove(self.package_name, txn)
         ctx.filesdb.remove_files(self.files, txn)
-        ctx.packagedb.remove_tracking_package(self.package_name, txn)
+        pisi.packagedb.remove_tracking_package(self.package_name, txn)
 
 def remove_single(package_name):
     Remove(package_name).run()
@@ -476,9 +481,8 @@ def virtual_install(metadata, files, txn):
                           metadata.package.release,
                           metadata.package.build,
                           metadata.package.distribution,
-                          False,
-                          True,
-                          txn)
+                          rebuild=True,
+                          txn=txn)
 
     # filesdb
     if files:
