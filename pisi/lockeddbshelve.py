@@ -57,7 +57,7 @@ def check_dbversion(versionfile, ver, write=False, update=False):
             return True  # db version is OK
     else:
         firsttime = True
-    if writen and (update or firsttime):
+    if write and (update or firsttime):
         if os.access(pisi.context.config.db_dir(), os.W_OK):
             ctx.ui.warning(_('Writing current database version for %s') % versionfile)
             verfile = file(verfn, 'w')
