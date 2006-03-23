@@ -61,6 +61,12 @@ class SourceDB(object):
         except pisi.itembyrepodb.NotfoundError, e:
             raise NotfoundError(name)
 
+    def get_spec_repo(self, name, repo=None, txn = None):
+        try:
+            return self.d.get_item_repo(name, repo, txn)
+        except pisi.itembyrepodb.NotfoundError, e:
+            raise NotfoundError(name)
+
     def pkgtosrc(self, name):
         return self.dpkgtosrc[name]
         
