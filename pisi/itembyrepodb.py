@@ -155,9 +155,10 @@ class ItemByRepoDB(object):
                 self.d.put(name, s, txn)
         self.d.txn_proc(p, txn)
 
-    def remove_item(self, name, txn = None):
+    def remove_item(self, name, repo = None, txn = None):
         def p(txn):
-            repo = self.which_repo(name, txn=txn)
+            if repo == None:
+                repo = self.which_repo(name, txn=txn)
             self.remove_item_repo(name, repo, txn=txn)
         self.d.txn_proc(p, txn)
 
