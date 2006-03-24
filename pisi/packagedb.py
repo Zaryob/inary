@@ -115,9 +115,9 @@ class PackageDB(object):
     def remove_package(self, name, repo = None, txn = None):
         name = str(name)
         def proc(txn):
-            package_info = self.d.get_item_repo(name, repo, txn)
+            package_info = self.d.get_item(name, repo, txn)
             self.d.remove_item(name, repo, txn)
-            #FIXME: what's happening to dr?
+            self.dr.remove_item(name, repo, txn)
             #WORKAROUND: do not remove component if it is not in repo
             if type(repo)==types.StringType:
                 ctx.componentdb.remove_package(package_info.partOf, package_info.name, txn)

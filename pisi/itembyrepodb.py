@@ -109,7 +109,8 @@ class ItemByRepoDB(object):
                 repostr = self.repo_str(repo)
                 if s.has_key(repostr):
                     return (s[repostr], repo)
-            return None
+            raise NotfoundError(_('Key %s in repo %s not found') % (name, repo))
+            #return None
             
         return self.d.txn_proc(proc, txn)
 
@@ -144,7 +145,10 @@ class ItemByRepoDB(object):
     def remove_item(self, name, repo, txn = None):
         name = str(name)
         def proc(txn):
-            s = self.d.get(name, txn)
+            if repo:
+                s = self.d.get(name, txn)
+            else:
+                s, repo = self.get_item_repo(name, txn=txn)
             repostr = self.repo_str(repo)
             if s.has_key(repostr):
                 del s[repostr]

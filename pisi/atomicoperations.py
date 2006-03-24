@@ -465,9 +465,9 @@ def virtual_install(metadata, files, txn):
     # normally this can't be true. Just for backwards compatibility
     # TODO: for speed only ctx.installdb.install exception can be
     # handled but this is much cleaner
-    if ctx.installdb.is_installed(pkg.name, txn):
+    if ctx.installdb.is_installed(pkg.name, txn=txn):
         if __is_virtual_upgrade(metadata):
-            ctx.installdb.remove(pkg.name, txn)
+            ctx.installdb.remove(pkg.name, txn=txn)
             ctx.packagedb.remove_package(pkg.name, txn=txn)
             ctx.filesdb.remove_files(ctx.installdb.files(pkg.name), txn=txn)
         else:
@@ -486,7 +486,7 @@ def virtual_install(metadata, files, txn):
 
     # filesdb
     if files:
-        ctx.filesdb.add_files(metadata.package.name, files, txn)
+        ctx.filesdb.add_files(metadata.package.name, files, txn=txn)
 
     # installed packages
     ctx.packagedb.add_package(pkginfo, pisi.itembyrepodb.installed, txn=txn)
