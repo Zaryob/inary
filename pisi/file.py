@@ -35,7 +35,9 @@ class Error(pisi.Error):
     pass
 
 class File:
+
     (read, write) = range(2) # modes
+    (xmill, sevenzip) = range(2) # compress enums
 
     @staticmethod
     def make_uri(uri):
@@ -47,7 +49,8 @@ class File:
         return uri
 
     @staticmethod
-    def download(uri, transfer_dir = "/tmp"):
+    def download(uri, transfer_dir = "/tmp", 
+                 sha1sum = False, compress = None, sign = None):
         assert type(uri == URI)
         if uri.is_remote_file():
             ctx.ui.info(_("Fetching %s") % uri.get_uri())
@@ -57,8 +60,10 @@ class File:
             localfile = uri.get_uri() #TODO: use a special function here?
         return localfile
 
-    def __init__(self, uri, mode, transfer_dir = "/tmp"):
+    def __init__(self, uri, mode, transfer_dir = "/tmp", 
+                 sha1sum = False, compress = None, sign = None):
         "it is pointless to open a file without a URI and a mode"
+        self.sha1sum = sha1sum
         uri = File.make_uri(uri)
         if mode==File.read or mode==File.write:
             self.mode = mode
@@ -79,6 +84,7 @@ class File:
         else:
             access = 'w'
         self.__file__ = file(localfile, access)
+        self.localfile = localfile
 
     def local_file(self):
         "returns the underlying file object"
@@ -87,6 +93,12 @@ class File:
     def close(self, delete_transfer = False):
         "this method must be called at the end of operation"
         self.__file__.close()
+        if self.mode == File.write:
+            if self.sha1sum:
+                sha1 = pisi.util.sha1_file(self.localfile)
+                cs = file(self.localfile + '.sha1sum', 'w')
+                cs.write(sha1)
+                cs.close()
     
     def flush(self):
         self.__file__.flush()

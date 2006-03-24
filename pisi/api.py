@@ -299,7 +299,7 @@ def index(dirs, output = 'pisi-index.xml', skip_sources=False):
     for repo_dir in dirs:
         ctx.ui.info(_('* Building index of PISI files under %s') % repo_dir)
         index.index(repo_dir, skip_sources)
-    index.write(output)
+    index.write(output, sha1sum=True)
     ctx.ui.info(_('* Index file written'))
 
 def add_repo(name, indexuri):
@@ -336,11 +336,11 @@ def rebuild_db(files=False):
 
     def destroy(files):
         #from pisi.lockeddbshelve import LockedDBShelf
-        #pisi.lockeddbshelve.init_dbenv(write=True)
+        pisi.lockeddbshelve.init_dbenv(write=True)
         #TODO: either don't delete version files here, or remove force flag...
         import bsddb3.db
         for db in os.listdir(ctx.config.db_dir()):
-            if db.endswith('.bdb') or db.startswith('log'):  # delete only db files
+            if db.endswith('.bdb'):# or db.startswith('log'):  # delete only db files
                 if db.startswith('files') or db.startswith('filesdbversion'):
                     clean = files
                 else:
@@ -349,9 +349,9 @@ def rebuild_db(files=False):
                     fn = pisi.util.join_path(ctx.config.db_dir(), db)
                     #FIXME: there is a bug with bsddb3
                     #ctx.dbenv.dbremove(fn, "", None, bsddb3.db.DB_AUTO_COMMIT)
-#                    ctx.dbenv.dbremove(file=fn, flags=bsddb3.db.DB_AUTO_COMMIT)
-                    os.unlink(fn)
-        #ctx.dbenv.close()
+                    ctx.dbenv.dbremove(file=fn, flags=bsddb3.db.DB_AUTO_COMMIT)
+                    #os.unlink(fn)
+        ctx.dbenv.close()
 
     def reload(files, txn):
         for package_fn in os.listdir( pisi.util.join_path( ctx.config.lib_dir(),

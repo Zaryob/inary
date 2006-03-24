@@ -67,9 +67,9 @@ class XmlFile(object):
         """returns root document element"""
         return self.doc.documentElement
 
-    def readxml(self, uri, tmpDir = '/tmp'):
+    def readxml(self, uri, tmpDir = '/tmp', sha1sum=False, compress=None):
         uri = File.make_uri(uri)
-        localpath = File.download(uri, tmpDir)
+        localpath = File.download(uri, tmpDir,sha1sum=sha1sum,compress=compress)
         try:
             self.doc = NoExtDtdReader.parseUri(Ft.Lib.Uri.OsPathToUri(localpath))
             return self.doc.documentElement
@@ -78,8 +78,8 @@ class XmlFile(object):
         except exceptions.ValueError, e:
             raise Error(_("File '%s' not found") % localpath )
 
-    def writexml(self, uri, tmpDir = '/tmp'):
-        f = file(uri, 'w')
+    def writexml(self, uri, tmpDir = '/tmp', sha1sum=False, compress=None):
+        f = File(uri, File.write, sha1sum=sha1sum, compress=compress)
         PrettyPrint(self.rootNode(), stream = f)
         f.close()
 

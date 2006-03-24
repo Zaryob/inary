@@ -136,3 +136,4 @@ class Index(XmlFile):
             else:                           # create relative path by default
                 sf.source.sourceURI = util.removepathprefix(repo_uri, path)
             self.specs.append(sf)
+
