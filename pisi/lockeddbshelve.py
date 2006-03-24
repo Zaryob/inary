@@ -84,6 +84,7 @@ def init_dbenv(write=False, writeversion=False):
                   db.DB_INIT_LOG |        # logging subsystem
                   db.DB_RECOVER |         # run normal recovery
                   db.DB_CREATE)           # allow db to create files
+        ctx.dbenv.set_cachesize(0, 32*1024*1024)
         ctx.dbenv.open(pisi.context.config.db_dir(), flags)
         ctx.dbenv.set_flags(db.DB_LOG_AUTOREMOVE, 1) # clear inactive logs automatically
     else:
