@@ -31,6 +31,12 @@ from pisi.util import join_path as join
 from pisi.fetcher import fetch_url
 import pisi.context as ctx
 
+class AlreadyHaveException(pisi.Exception):
+    def __init__(self, url, localfile):
+        pisi.Exception.__init__(self, "URL %s already downloaded as %s" % (url, localfile))
+        self.url = url 
+        self.localfile = localfile
+
 class Error(pisi.Error):
     pass
 
@@ -51,13 +57,35 @@ class File:
     @staticmethod
     def download(uri, transfer_dir = "/tmp", 
                  sha1sum = False, compress = None, sign = None):
+
         assert type(uri == URI)
+        if sha1sum:
+            sha1filename = File.download(URI(uri.get_uri() + '.sha1sum'), transfer_dir)
+            sha1f = file(sha1filename)
+            newsha1 = sha1f.readlines()[0]
+
         if uri.is_remote_file():
             ctx.ui.info(_("Fetching %s") % uri.get_uri())
             localfile = join(transfer_dir, uri.filename())
             fetch_url(uri, transfer_dir) # FIXME: localfile would look better for fetch iface?
+            
+            # TODO: code to use old .sha1sum file, is this a necessary optimization?
+            #oldsha1fn = localfile + '.sha1sum'
+            #if os.exists(oldsha1fn):
+                #oldsha1 = file(oldsha1fn).readlines()[0]
+            if sha1sum and os.path.exists(localfile):
+                oldsha1 = pisi.util.sha1_file(localfile)
+                if (newsha1 == oldsha1):
+                    # early terminate, we already got it ;)
+                    raise AlreadyHaveException(uri, localfile)
         else:
             localfile = uri.get_uri() #TODO: use a special function here?
+
+        if sha1sum:        
+        
+            if (pisi.util.sha1_file(localfile) != newsha1):
+                raise Error(_("File integrity of %s compromised.") % uri)
+
         return localfile
 
     def __init__(self, uri, mode, transfer_dir = "/tmp", 
