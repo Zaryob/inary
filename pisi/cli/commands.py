@@ -375,7 +375,7 @@ to be downloaded from a repository containing sources.
 class Emerge(Build):
     """Build and install a PISI source package from repository
 
-Usage: build <sourcename> ...
+Usage: emerge <sourcename> ...
 
 You should give the name of a source package to be 
 downloaded from a repository containing sources.
