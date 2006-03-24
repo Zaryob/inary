@@ -11,10 +11,6 @@
 #
 # Authors:  Eray Ozkural <eray@uludag.org.tr>
 
-"""
-By default, cPickle + 7zip compression is used
-"""
-
 import os
 import fcntl
 import types
