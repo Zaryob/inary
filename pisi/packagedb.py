@@ -63,15 +63,15 @@ class PackageDB(object):
 
     def get_package(self, name, repo=None, txn = None):
         try:
-            return self.d.get_item(name, repo, txn)
+            return self.d.get_item(name, repo, txn=txn)
         except pisi.itembyrepodb.NotfoundError, e:
             raise Error(_('Package %s not found') % name)
 
     def get_package_repo(self, name, repo=None, txn = None):
-        return self.d.get_item_repo(name, repo, txn)
+        return self.d.get_item_repo(name, repo, txn=txn)
 
-    def which_repo(self, name, repo=None, txn = None):
-        return self.d.which_repo(name, repo, txn)
+    def which_repo(self, name, txn = None):
+        return self.d.which_repo(name, txn=txn)
 
     def get_rev_deps(self, name):
         if self.dr.has_key(name):

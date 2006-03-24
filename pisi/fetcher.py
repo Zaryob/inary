@@ -79,6 +79,9 @@ class Fetcher:
             self.err(_('Access denied to write to destination directory'))
 
         archive_file = os.path.join(self.filedest, self.url.filename())
+        
+        if os.path.exists(self.filedest) and not os.access(self.filedest, os.W_OK):
+            self.err(_('Access denied to destination file'))
 
         if self.url.is_local_file():
             self.fetchLocalFile(archive_file + '.part')
@@ -162,7 +165,7 @@ class Fetcher:
         else:
             dest = open(archive_file, 'wb')
  
-        uri = self.url.uri
+        uri = self.url.get_uri()
 
         flag = 1
         try:

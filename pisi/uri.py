@@ -27,7 +27,7 @@ class URI(object):
 
     def __init__(self, uri=None):
         if uri:
-            self.set_uri(uri)
+            self.set_uri(str(uri))
         else:
             self.__scheme = None
             self.__location = None
@@ -47,6 +47,7 @@ class URI(object):
 
     def set_uri(self, uri):
         # (scheme, location, path, params, query, fragment)
+        uri = str(uri)
         u = urlparse(uri, "file")
         self.__scheme = u[0]
         self.__location = u[1]

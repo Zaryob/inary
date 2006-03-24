@@ -51,20 +51,8 @@ class Index(XmlFile):
 
     def read_uri(self, filename, repo = None):
         """Read PSPEC file"""
-
-        self.filepath = filename
-        url = URI(filename)
-        if url.is_remote_file():
-            from fetcher import fetch_url
-            assert repo
-            dest = os.path.join(ctx.config.index_dir(), repo)
-            if not os.path.exists(dest):
-                os.makedirs(dest)
-            fetch_url(url, dest, ctx.ui.Progress)
-
-            self.filepath = os.path.join(dest, url.filename())
-
-        self.read(self.filepath)
+        tmpdir = os.path.join(ctx.config.index_dir(), repo)
+        self.read(filename, tmpdir, sha1sum=True)
 
     def index(self, repo_uri, skip_sources=False):
         self.repo_dir = repo_uri

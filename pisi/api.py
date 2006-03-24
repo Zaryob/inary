@@ -319,11 +319,14 @@ def update_repo(repo):
     ctx.ui.info(_('* Updating repository: %s') % repo)
     index = Index()
     if ctx.repodb.has_repo(repo):
-        index.read_uri(ctx.repodb.get_repo(repo).indexuri.get_uri(), repo)
+        try:
+            index.read_uri(ctx.repodb.get_repo(repo).indexuri.get_uri(), repo)
+            ctx.txn_proc(lambda txn : index.update_db(repo, txn=txn))
+            ctx.ui.info(_('* Package database updated.'))
+        except pisi.file.AlreadyHaveException, e:
+            ctx.ui.info(_('No updates available for repository %s.' % repo))
     else:
         raise Error(_('No repository named %s found.') % repo)
-    ctx.txn_proc(lambda txn : index.update_db(repo, txn=txn))
-    ctx.ui.info(_('\n* Package database updated.'))
 
 def delete_cache():
     util.clean_dir(ctx.config.packages_dir())
