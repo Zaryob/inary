@@ -123,8 +123,8 @@ class ItemByRepoDB(object):
         else:
             return None
 
-    def which_repo(self, name, repo = None, txn = None):
-        x = self.get_item_repo(name, repo, txn)
+    def which_repo(self, name, txn = None):
+        x = self.get_item_repo(name, txn=txn)
         if x:
             item, repo = x
             return repo
@@ -155,12 +155,17 @@ class ItemByRepoDB(object):
                 self.d.put(name, s, txn)
         self.d.txn_proc(p, txn)
 
-    def remove_item(self, name, repo = None, txn = None):
+    def remove_item_only(self, name, txn = None):
         def p(txn):
-            if repo == None:
-                repo = self.which_repo(name, txn=txn)
+            repo = self.which_repo(name, txn=txn)
             self.remove_item_repo(name, repo, txn=txn)
         self.d.txn_proc(p, txn)
+
+    def remove_item(self, name, repo=None, txn=None):
+        if repo:
+            self.remove_item_repo(name,repo,txn=txn)
+        else:
+            self.remove_item_only(name,txn=txn)
 
     def remove_repo(self, repo, txn = None):
         def proc(txn):
