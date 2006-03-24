@@ -84,9 +84,9 @@ class SourceDB(object):
         def proc(txn):
             assert self.has_spec(name, txn=txn)
             spec = self.d.get_item_repo(name, repo, txn)
-            self.d.remove_item(name, repo, txn=txn)
+            self.d.remove_item(name, txn=txn)
             for pkg in spec.packages:
-                self.dpkgtosrc.remove_item(pkg.name, name, repo, txn)
+                self.dpkgtosrc.remove_item_repo(pkg.name, name, repo, txn)
             
         self.d.txn_proc(proc, txn)
 

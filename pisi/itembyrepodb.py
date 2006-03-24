@@ -142,24 +142,27 @@ class ItemByRepoDB(object):
             self.d.put(name, s, txn)
         self.d.txn_proc(proc, txn)
         
-    def remove_item(self, name, repo, txn = None):
+    def remove_item_repo(self, name, repo, txn = None):
         name = str(name)
-        def proc(txn):
-            if repo:
-                s = self.d.get(name, txn)
-            else:
-                s, repo = self.get_item_repo(name, txn=txn)
-            repostr = self.repo_str(repo)
+        def p(txn):
+            s = self.d.get(name, txn)
+            repostr = self.repo_str(repo)            
             if s.has_key(repostr):
                 del s[repostr]
             if (len(s)==0):
                 self.d.delete(name, txn)
             else:
                 self.d.put(name, s, txn)
-        self.d.txn_proc(proc, txn)
+        self.d.txn_proc(p, txn)
+
+    def remove_item(self, name, txn = None):
+        def p(txn):
+            repo = self.which_repo(name, txn=txn)
+            self.remove_item_repo(name, repo, txn=txn)
+        self.d.txn_proc(p, txn)
 
     def remove_repo(self, repo, txn = None):
         def proc(txn):
             for key in self.d.keys():
-                self.remove_item(key, repo, txn=txn)
+                self.remove_item_repo(key, repo, txn=txn)
         self.d.txn_proc(proc, txn)
