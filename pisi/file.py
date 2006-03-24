@@ -65,9 +65,7 @@ class File:
             newsha1 = sha1f.readlines()[0]
 
         if uri.is_remote_file():
-            ctx.ui.info(_("Fetching %s") % uri.get_uri())
             localfile = join(transfer_dir, uri.filename())
-            fetch_url(uri, transfer_dir) # FIXME: localfile would look better for fetch iface?
             
             # TODO: code to use old .sha1sum file, is this a necessary optimization?
             #oldsha1fn = localfile + '.sha1sum'
@@ -78,6 +76,9 @@ class File:
                 if (newsha1 == oldsha1):
                     # early terminate, we already got it ;)
                     raise AlreadyHaveException(uri, localfile)
+
+            ctx.ui.info(_("Fetching %s") % uri.get_uri())
+            fetch_url(uri, transfer_dir)
         else:
             localfile = uri.get_uri() #TODO: use a special function here?
 

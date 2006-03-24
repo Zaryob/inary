@@ -52,7 +52,7 @@ class Index(XmlFile):
     def read_uri(self, filename, repo = None):
         """Read PSPEC file"""
         tmpdir = os.path.join(ctx.config.index_dir(), repo)
-        self.read(filename, tmpdir, sha1sum=True)
+        self.read(filename, tmpDir=tmpdir, sha1sum=True)
 
     def index(self, repo_uri, skip_sources=False):
         self.repo_dir = repo_uri

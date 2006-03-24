@@ -67,7 +67,7 @@ class XmlFile(object):
         """returns root document element"""
         return self.doc.documentElement
 
-    def readxml(self, uri, tmpDir = '/tmp', sha1sum=False, compress=None):
+    def readxml(self, uri, tmpDir='/tmp', sha1sum=False, compress=None):
         uri = File.make_uri(uri)
         localpath = File.download(uri, tmpDir,sha1sum=sha1sum,compress=compress)
         try:
