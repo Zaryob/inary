@@ -42,10 +42,14 @@ from pisi.uri import URI
 class FetchError(pisi.Error):
     pass
 
+class RangeError(pisi.Error):
+    pass
 
 # helper functions
-def fetch_url(url, dest, progress=None):
-    fetch = Fetcher(url, dest)
+def fetch_url(url, destdir, progress=None, resume=True):
+    fetch = Fetcher(url, destdir)
+    if not resume:
+        fetch.resume = False
     fetch.progress = progress
     fetch.fetch()
     if progress:
@@ -55,14 +59,15 @@ def fetch_url(url, dest, progress=None):
 class Fetcher:
     """Fetcher can fetch a file from various sources using various
     protocols."""
-    def __init__(self, url, dest):
+    def __init__(self, url, destdir, resume = True):
         if not isinstance(url, URI):
             url = URI(url)
  
+        self.resume = resume
         self.scheme = url.scheme()
         self.url = url
-        self.filedest = dest
-        util.check_dir(self.filedest)
+        self.destdir = destdir
+        util.check_dir(self.destdir)
         self.eta = '??:??:??'
         self.percent = 0
         self.rate = 0.0
@@ -75,24 +80,26 @@ class Fetcher:
         if not self.url.filename():
             self.err(_('Filename error'))
 
-        if not os.access(self.filedest, os.W_OK):
-            self.err(_('Access denied to write to destination directory'))
+        if not os.access(self.destdir, os.W_OK):
+            self.err(_('Access denied to write to destination directory: "%s"' % (self.destdir)))
 
-        archive_file = os.path.join(self.filedest, self.url.filename())
+        archive_file = os.path.join(self.destdir, self.url.filename())
         
-        if os.path.exists(self.filedest) and not os.access(self.filedest, os.W_OK):
-            self.err(_('Access denied to destination file'))
+        if os.path.exists(archive_file) and not os.access(archive_file, os.W_OK):
+            self.err(_('Access denied to destination file: "%s"' % (archive_file)))
+
+        partial_file = archive_file + '.part'
 
         if self.url.is_local_file():
-            self.fetchLocalFile(archive_file + '.part')
+            self.fetchLocalFile(partial_file)
         else:
-            self.fetchRemoteFile(archive_file + '.part')
+            self.fetchRemoteFile(partial_file)
 
-        if os.stat(archive_file + '.part').st_size == 0:
-            os.remove(archive_file + '.part')
+        if os.stat(partial_file).st_size == 0:
+            os.remove(partial_file)
             self.err(_('A problem occured. Please check the archive address and/or permissions again.'))
-        else:
-            move(archive_file + '.part', archive_file)
+
+        move(partial_file, archive_file)
 
         return archive_file 
 
@@ -158,19 +165,25 @@ class Fetcher:
     def fetchRemoteFile (self, archive_file):
         from httplib import HTTPException
 
-        if os.path.exists(archive_file):
+        if os.path.exists(archive_file) and self.resume:
             if self.scheme == 'http' or self.scheme == 'https' or self.scheme == 'ftp':
                 self.exist_size = os.path.getsize(archive_file)
                 dest = open(archive_file, 'ab')
         else:
             dest = open(archive_file, 'wb')
- 
+
         uri = self.url.get_uri()
 
         flag = 1
         try:
             try:
-                fileObj = urllib2.urlopen(self.formatRequest(urllib2.Request(uri)))
+                try:
+                    fileObj = urllib2.urlopen(self.formatRequest(urllib2.Request(uri)))
+                except RangeError:
+                    ctx.ui.info(_('Requested range not satisfiable, starting again.'))
+                    dest = open(archive_file, 'wb')
+                    self.exist_size = 0
+                    fileObj = urllib2.urlopen(self.formatRequest(urllib2.Request(uri)))
                 headers = fileObj.info()
                 flag = 0
             except ValueError, e:
@@ -247,7 +260,7 @@ class HTTPRangeHandler(urllib2.BaseHandler):
 
     def http_error_416(self, request, fp, errcode, msg, headers):
         # HTTP 1.1's 'Range Not Satisfiable' error..
-        raise FetchError(_('Requested range not satisfiable'))
+        raise RangeError
 
 
 class FTPRangeHandler(urllib2.FTPHandler):
@@ -264,6 +277,7 @@ class FTPRangeHandler(urllib2.FTPHandler):
             host = socket.gethostbyname(host)
         except socket.error, msg:
             raise FetchError(msg)
+
         path, attrs = urllib.splitattr(req.get_selector())
         dirs = path.split('/')
         dirs = map(urllib.unquote, dirs)
@@ -278,19 +292,22 @@ class FTPRangeHandler(urllib2.FTPHandler):
                 if attr.lower() == 'type' and \
                    value in ('a', 'A', 'i', 'I', 'd', 'D'):
                     type = value.upper()
-            
+         
             rawr = req.headers.get('Range', None)
-            rest = int(rawr.split("=")[1].rstrip("-"))
-            
+            if rawr:
+                rest = int(rawr.split("=")[1].rstrip("-"))
+            else:
+                rest = 0
+
             fp, retrlen = fw.retrfile(file, type, rest)
             
             fb, lb = rest, retrlen
             if retrlen is None or retrlen == 0:
-                raise FetchError(_('Requested Range Not Satisfiable'))
+                raise RangeError
             retrlen = lb - fb
             if retrlen < 0:
                 # beginning of range is larger than file
-                raise FetchError(_('Requested Range Not Satisfiable'))
+                raise RangeError
             
             headers = ''
             mtype = guess_type(req.get_full_url())[0]
