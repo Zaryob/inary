@@ -607,6 +607,8 @@ Usage: info <package1> <package2> ... <packagen>
         self.parser.add_option("-F", "--files-path", action="store_true",
                                default=False,
                                help=_("Show only paths."))
+        self.parser.add_option("-s", "--short", action="store_true",
+                               default=False, help=_("show in short format"))
 
     def run(self):
 
@@ -634,19 +636,29 @@ Usage: info <package1> <package2> ... <packagen>
         else:
             if ctx.installdb.is_installed(arg):
                 metadata, files = pisi.api.info_name(arg, True)
-                ctx.ui.info(_('Installed package:'))
+                if ctx.get_option('short'):
+                    ctx.ui.info(_('[inst] '), noln=True)
+                else:
+                    ctx.ui.info(_('Installed package:'))
                 self.print_pkginfo(metadata, files)
             elif ctx.packagedb.has_package(arg):
                 metadata, files = pisi.api.info_name(arg, False)
-                ctx.ui.info(_('Package found in repository:'))
+                if ctx.get_option('short'):
+                    ctx.ui.info(_('[repo] '), noln=True)
+                else:
+                    ctx.ui.info(_('Package found in repository:'))
                 self.print_pkginfo(metadata, files)
 
     def print_pkginfo(self, metadata, files):
         import os.path
 
-        ctx.ui.info(unicode(metadata.package))
-        revdeps =  [x[0] for x in ctx.packagedb.get_rev_deps(metadata.package.name)]
-        print _('Reverse Dependencies:'), util.strlist(revdeps)
+        if ctx.get_option('short'):
+            pkg = metadata.package
+            ctx.ui.info('%15s - %s' % (pkg.name, unicode(pkg.summary)))
+        else:
+            ctx.ui.info(unicode(metadata.package))
+            revdeps =  [x[0] for x in ctx.packagedb.get_rev_deps(metadata.package.name)]
+            print _('Reverse Dependencies:'), util.strlist(revdeps)
         if self.options.files or self.options.files_path:
             if files:
                 print _('\nFiles:')
@@ -657,7 +669,8 @@ Usage: info <package1> <package2> ... <packagen>
                         print fileinfo.path
             else:
                 ctx.ui.warning(_('File information not available'))
-        print
+        if not ctx.get_option('short'):
+            print
 
 
 class Check(Command):
@@ -1139,7 +1152,6 @@ Finds a package in repository containing specified search terms
             lang = 'en'
         return lang
 
-
     def run(self):
 
         self.init(True)
@@ -1149,6 +1161,7 @@ Finds a package in repository containing specified search terms
             return
 
         r = pisi.api.search_package_terms(self.args, self.get_lang())
+        ctx.ui.info(_('%s packages found') % len(r))
 
         for pkg in r:
             self.info_package(pkg)
