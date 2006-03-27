@@ -383,7 +383,7 @@ unpack, setup, build, install, package
 
         for x in self.args:
             if ctx.get_option('until'):
-                pisi.api.build(x, ctx.get_option('until'), self.authInfo)                
+                pisi.api.build_until(x, ctx.get_option('until'), self.authInfo)                
             else:
                 pisi.api.build(x, self.authInfo)
         self.finalize()
