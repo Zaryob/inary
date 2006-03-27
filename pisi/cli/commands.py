@@ -801,6 +801,11 @@ If no repository is given, all repositories are updated.
 
     name = ("update-repo", "ur")
 
+    def options(self):
+        self.parser.add_option("-f", "--force", action="store_true",
+                               default=False, 
+                               help=_("update database in any case"))
+
     def run(self):
         self.init(database = True)
 
@@ -810,7 +815,7 @@ If no repository is given, all repositories are updated.
             repos = ctx.repodb.list()
 
         for repo in repos:
-            pisi.api.update_repo(repo)
+            pisi.api.update_repo(repo, ctx.get_option('force'))
         self.finalize()
 
 

@@ -42,6 +42,7 @@ from pisi.build import build_until
 from pisi.atomicoperations import resurrect_package, build
 from pisi.metadata import MetaData
 from pisi.files import Files
+from pisi.file import File
 import pisi.search
 import pisi.lockeddbshelve as shelve
 
@@ -299,7 +300,7 @@ def index(dirs, output = 'pisi-index.xml', skip_sources=False):
     for repo_dir in dirs:
         ctx.ui.info(_('* Building index of PISI files under %s') % repo_dir)
         index.index(repo_dir, skip_sources)
-    index.write(output, sha1sum=True)
+    index.write(output, sha1sum=True, compress=File.xmill)
     ctx.ui.info(_('* Index file written'))
 
 def add_repo(name, indexuri):
@@ -315,7 +316,7 @@ def remove_repo(name):
         ctx.ui.error(_('Repository %s does not exist. Cannot remove.') 
                  % name)
 
-def update_repo(repo):
+def update_repo(repo, force=False):
     ctx.ui.info(_('* Updating repository: %s') % repo)
     index = Index()
     if ctx.repodb.has_repo(repo):
@@ -325,6 +326,9 @@ def update_repo(repo):
             ctx.ui.info(_('* Package database updated.'))
         except pisi.file.AlreadyHaveException, e:
             ctx.ui.info(_('No updates available for repository %s.' % repo))
+            if force:
+                ctx.ui.info(_('Updating database at any rate as requested'))
+                raise Error(_('OPTION NOT IMPLEMENTED YET'))
     else:
         raise Error(_('No repository named %s found.') % repo)
 

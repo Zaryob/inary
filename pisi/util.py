@@ -140,7 +140,7 @@ def human_readable_rate(size = 0):
 
 def run_batch(cmd, realtime = False):
     """run command non-interactively/realtime and report return value and output"""
-    ctx.ui.info(_('running ') + cmd)
+    ctx.ui.info(_('Running ') + cmd, verbose=True)
     p = os.popen(cmd)
     if realtime:
         while 1:

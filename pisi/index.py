@@ -30,6 +30,7 @@ import pisi.sourcedb as sourcedb
 import pisi.util as util
 from pisi.package import Package
 from pisi.pxml.xmlfile import XmlFile
+from pisi.file import File
 import pisi.pxml.autoxml as autoxml
 from pisi.uri import URI
 import pisi.component as component
@@ -52,7 +53,7 @@ class Index(XmlFile):
     def read_uri(self, filename, repo = None):
         """Read PSPEC file"""
         tmpdir = os.path.join(ctx.config.index_dir(), repo)
-        self.read(filename, tmpDir=tmpdir, sha1sum=True)
+        self.read(filename, tmpDir=tmpdir, sha1sum=True, compress=File.xmill)
 
     def index(self, repo_uri, skip_sources=False):
         self.repo_dir = repo_uri

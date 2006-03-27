@@ -55,6 +55,17 @@ class File:
         return uri
 
     @staticmethod
+    def decompress(localfile, compress):
+        if compress == File.xmill:
+            pisi.util.run_batch('xdemill -f ' + localfile)
+            if not localfile.endswith('.xmi'):
+                raise Error(_("xmill compressed filename must end with '.xmi'"))
+            localfile = localfile[:-4] + '.xml'
+        elif compress == File.sevenzip:
+            raise Error(_("sevenzip compression not supported yet"))
+        return localfile
+
+    @staticmethod
     def download(uri, transfer_dir = "/tmp", 
                  sha1sum = False, compress = None, sign = None):
 
@@ -81,18 +92,23 @@ class File:
             fetch_url(uri, transfer_dir)
         else:
             localfile = uri.get_uri() #TODO: use a special function here?
+            localfile = File.decompress(localfile, self.compress)
 
         if sha1sum:        
         
             if (pisi.util.sha1_file(localfile) != newsha1):
                 raise Error(_("File integrity of %s compromised.") % uri)
 
+        localfile = File.decompress(localfile, compress)
+
         return localfile
+
 
     def __init__(self, uri, mode, transfer_dir = "/tmp", 
                  sha1sum = False, compress = None, sign = None):
         "it is pointless to open a file without a URI and a mode"
         self.sha1sum = sha1sum
+        self.compress = compress
         uri = File.make_uri(uri)
         if mode==File.read or mode==File.write:
             self.mode = mode
@@ -100,9 +116,7 @@ class File:
             raise Error(_("File mode must be either File.read or File.write"))
         if uri.is_remote_file():
             if self.mode == File.read:
-                ctx.ui.info(_("Fetching %s") % uri.get_uri())
-                localfile = join(transfer_dir, uri.filename())
-                fetch_url(uri, transfer_dir) # FIXME: localfile would look better for fetch iface?
+                localfile = File.download(uri, transfer_dir, sha1sum, compress, sign)
             else:
                 raise Error(_("Remote write not implemented"))
         else:
@@ -122,6 +136,11 @@ class File:
     def close(self, delete_transfer = False):
         "this method must be called at the end of operation"
         self.__file__.close()
+        if self.compress == File.xmill:
+            pisi.util.run_batch('xcmill -9 -d -f ' + self.localfile)
+            self.localfile = self.localfile[:-4] + '.xmi'
+        elif self.compress == File.sevenzip:
+            raise Error(_("sevenzip compression not supported yet"))
         if self.mode == File.write:
             if self.sha1sum:
                 sha1 = pisi.util.sha1_file(self.localfile)
