@@ -73,12 +73,14 @@ class CLI(UI):
         self.output( unicode(msg) + msgend, verbose=verbose)
 
     def warning(self, msg, verbose = False):
+        msg = unicode(msg)
         if ctx.get_option('no_color'):
             self.output(_('Warning: ') + msg + '\n', err=True, verbose=verbose)
         else:
             self.output(colorize(msg + '\n', 'purple'), err=True, verbose=verbose)
 
     def error(self, msg):
+        msg = unicode(msg)
         if ctx.get_option('no_color'):
             self.output(_('Error: ') + msg + '\n', err=True)
         else:
@@ -86,6 +88,7 @@ class CLI(UI):
 
     def action(self, msg, verbose = False):
         #TODO: this seems quite redundant?
+        msg = unicode(msg)
         self.output(colorize(msg + '\n', 'green'))
 
     def choose(self, msg, opts):
@@ -102,6 +105,7 @@ class CLI(UI):
                 pass
         
     def confirm(self, msg):
+        msg = unicode(msg)
         if ctx.config.options and ctx.config.options.yes_all:
             return True
         while True:
@@ -124,6 +128,7 @@ class CLI(UI):
 
     def status(self, msg = None):
         if msg:
+            msg = unicode(msg)
             self.output(colorize(msg + '\n', 'purple'))
             util.xterm_title(msg)
 

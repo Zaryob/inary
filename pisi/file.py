@@ -18,7 +18,7 @@ we are just encapsulating a common pattern in our program, nothing big.
 like all pisi classes, it has been programmed in a non-restricting way
 """
 
-import os.path
+import os, os.path
 import types
 
 import gettext
@@ -37,13 +37,25 @@ class AlreadyHaveException(pisi.Exception):
         self.url = url 
         self.localfile = localfile
 
+class NoSignatureFound(pisi.Exception):
+    def __init__(self, url):
+        pisi.Exception.__init__(self, "No signature found for %s" % url)
+        self.url = url
+        
 class Error(pisi.Error):
     pass
+
+class InvalidSignature(pisi.Error):
+    def __init__(self, url):
+        pisi.Exception.__init__(self, " invalid for %s" % url)
+        self.url = url
 
 class File:
 
     (read, write) = range(2) # modes
     (xmill, sevenzip) = range(2) # compress enums
+
+    (detached, whatelse) = range(2)
 
     @staticmethod
     def make_uri(uri):
@@ -70,6 +82,7 @@ class File:
                  sha1sum = False, compress = None, sign = None):
 
         assert type(uri == URI)
+
         if sha1sum:
             sha1filename = File.download(URI(uri.get_uri() + '.sha1sum'), transfer_dir)
             sha1f = file(sha1filename)
@@ -106,8 +119,13 @@ class File:
     def __init__(self, uri, mode, transfer_dir = "/tmp", 
                  sha1sum = False, compress = None, sign = None):
         "it is pointless to open a file without a URI and a mode"
+
+        self.transfer_dir = transfer_dir
         self.sha1sum = sha1sum
         self.compress = compress
+        self.sign = sign
+        
+
         uri = File.make_uri(uri)
         if mode==File.read or mode==File.write:
             self.mode = mode
@@ -137,18 +155,31 @@ class File:
     def close(self, delete_transfer = False):
         "this method must be called at the end of operation"
         self.__file__.close()
-        if self.compress == File.xmill:
-            pisi.util.run_batch('xcmill -9 -f ' + self.localfile)
-            self.localfile = self.localfile[:-4] + '.xmi'
-        elif self.compress == File.sevenzip:
-            raise Error(_("sevenzip compression not supported yet"))
         if self.mode == File.write:
+            if self.compress == File.xmill:
+                pisi.util.run_batch('xcmill -9 -f ' + self.localfile)
+                self.localfile = self.localfile[:-4] + '.xmi'
+            elif self.compress == File.sevenzip:
+                raise Error(_("sevenzip compression not supported yet"))
             if self.sha1sum:
                 sha1 = pisi.util.sha1_file(self.localfile)
                 cs = file(self.localfile + '.sha1sum', 'w')
                 cs.write(sha1)
                 cs.close()
-    
+            if self.sign==File.detached:
+                pisi.util.run_batch('gpg --detach-sig ' + self.localfile)
+                
+    @staticmethod
+    def check_signature(uri, transfer_dir, sign=detached):
+        if sign==File.detached:
+            try:
+                sigfilename = File.download(URI(uri + '.sig'), transfer_dir)
+            except:
+                raise NoSignatureFound(uri)
+            if os.system('gpg --verify ' + sigfilename) != 0:
+                raise InvalidSignature(uri)
+            # everything is all right here
+                
     def flush(self):
         self.__file__.flush()
 

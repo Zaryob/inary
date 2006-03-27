@@ -50,10 +50,16 @@ class Index(XmlFile):
     t_Packages = [ [metadata.Package], autoxml.optional, "Package"]
     t_Components = [ [component.Component], autoxml.optional, "Component"]
 
-    def read_uri(self, filename, repo = None):
+    # read index for a given repo, force means download even if remote not updated
+    def read_uri(self, filename, repo = None, force = False):
         """Read PSPEC file"""
         tmpdir = os.path.join(ctx.config.index_dir(), repo)
-        self.read(filename, tmpDir=tmpdir, sha1sum=True, compress=File.xmill)
+        self.read(filename, tmpDir=tmpdir, sha1sum=not force, 
+                  compress=File.xmill, sign=File.detached)
+                  
+    def check_signature(self, filename, repo):
+        tmpdir = os.path.join(ctx.config.index_dir(), repo)
+        File.check_signature(filename, tmpdir)
 
     def index(self, repo_uri, skip_sources=False):
         self.repo_dir = repo_uri

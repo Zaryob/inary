@@ -301,7 +301,7 @@ def index(dirs, output = 'pisi-index.xml', skip_sources=False):
         repo_dir = str(repo_dir)
         ctx.ui.info(_('* Building index of PISI files under %s') % repo_dir)
         index.index(repo_dir, skip_sources)
-    index.write(output, sha1sum=True, compress=File.xmill)
+    index.write(output, sha1sum=True, compress=File.xmill, sign=File.detached)
     ctx.ui.info(_('* Index file written'))
 
 def add_repo(name, indexuri):
@@ -321,15 +321,22 @@ def update_repo(repo, force=False):
     ctx.ui.info(_('* Updating repository: %s') % repo)
     index = Index()
     if ctx.repodb.has_repo(repo):
+        repouri = ctx.repodb.get_repo(repo).indexuri.get_uri()
         try:
-            index.read_uri(ctx.repodb.get_repo(repo).indexuri.get_uri(), repo)
-            ctx.txn_proc(lambda txn : index.update_db(repo, txn=txn))
-            ctx.ui.info(_('* Package database updated.'))
+            index.read_uri(repouri, repo)
         except pisi.file.AlreadyHaveException, e:
             ctx.ui.info(_('No updates available for repository %s.' % repo))
             if force:
                 ctx.ui.info(_('Updating database at any rate as requested'))
-                raise Error(_('OPTION NOT IMPLEMENTED YET'))
+                index.read_uri(repouri, repo, force = force)
+            else:
+                return
+        try:
+            index.check_signature(repouri, repo)
+        except pisi.file.NoSignatureFound, e:
+            ctx.ui.warning(e)
+        ctx.txn_proc(lambda txn : index.update_db(repo, txn=txn))
+        ctx.ui.info(_('* Package database updated.'))            
     else:
         raise Error(_('No repository named %s found.') % repo)
 
