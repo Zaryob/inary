@@ -52,13 +52,33 @@ class ItemByRepoDB(object):
 
     def items(self):
         return self.d.items()
-        
-    def list(self, repo = None):
+            
+    def list(self, repo = None, show_tracking = False):
         if repo:
             return [ k for k,data in self.d.items() if data.has_key(self.repo_str(repo))]
         else:
-            return [ pkg for pkg in self.d.keys() ]
-        
+            if show_tracking:
+                return [ pkg for pkg in self.d.keys() ]
+            else:
+                def not_just_tracking(k, data):
+                    keys = data.keys()
+                    if len(keys)==1:
+                        if 'trdparty' in keys or 'inst' in keys:
+                            return False
+                    elif len(keys)==2:
+                        if 'trdparty' in keys and 'inst' in keys:
+                            return False
+                    return True
+                    #below is a slower way
+                    #for x in data.keys():
+                    #    if x.startsWith('repo-'):
+                    #        return False
+                    #return True
+                return self.list_if(not_just_tracking)
+
+    def list_if(self, pred):
+        return [ k for k,data in self.d.items() if pred(k, data)]
+
     # TODO: carry this to repodb, really :/
     def order(self):
         import pisi.repodb
