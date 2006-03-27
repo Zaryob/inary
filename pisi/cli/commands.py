@@ -513,6 +513,8 @@ expanded to package names.
         super(Upgrade, self).options()
         buildno_opts(self)
         p = self.parser
+        p.add_option("-r", "--bypass-update-repo", action="store_true",
+                              default=False, help=_("Do not update repositories"))
         p.add_option("", "--bypass-ldconfig", action="store_true",
                               default=False, help=_("Bypass ldconfig phase"))
         self.parser.add_option("-e", "--eager", action="store_true",
@@ -520,6 +522,14 @@ expanded to package names.
 
     def run(self):
         self.init()
+ 
+        if not ctx.get_option('bypass_update_repo'):
+            ctx.ui.info(_('Updating repositories'))
+            repos = ctx.repodb.list()
+            for repo in repos:
+                pisi.api.update_repo(repo)
+        else:
+            ctx.ui.info(_('Will not update repositories'))
  
         if not self.args:
             packages = ctx.installdb.list_installed()
