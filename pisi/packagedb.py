@@ -59,7 +59,7 @@ class PackageDB(object):
         self.dr.destroy()
 
     def has_package(self, name, repo=None, txn = None):
-        return self.d.has_key(name, repo, txn)
+        return self.d.has_key(name, repo, txn=txn)
 
     def get_package(self, name, repo=None, txn = None):
         try:
@@ -117,7 +117,8 @@ class PackageDB(object):
         def proc(txn):
             package_info = self.d.get_item(name, repo, txn=txn)
             self.d.remove_item(name, repo, txn=txn)
-            self.dr.remove_item(name, repo, txn=txn)
+            if self.dr.has_item(name, repo, txn=txn):
+                self.dr.remove_item(name, repo, txn=txn)
             #WORKAROUND: do not remove component if it is not in repo
             if type(repo)==types.StringType:
                 ctx.componentdb.remove_package(package_info.partOf, package_info.name, txn)
@@ -133,9 +134,9 @@ pkgdb = None
 
 def remove_tracking_package(name, txn = None):
     # remove the guy from the tracking databases
-    if pkgdb.has_package(name, itembyrepodb.installed, txn):
+    if pkgdb.has_package(name, itembyrepodb.installed, txn=txn):
         pkgdb.remove_package(name, itembyrepodb.installed, txn=txn)
-    if pkgdb.has_package(name, itembyrepodb.thirdparty, txn):
+    if pkgdb.has_package(name, itembyrepodb.thirdparty, txn=txn):
         pkgdb.remove_package(name, itembyrepodb.thirdparty, txn=txn)
 
 def init_db():
