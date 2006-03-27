@@ -332,6 +332,9 @@ fetch all necessary files and build the package for you.
 Alternatively, you can give the name of a source package
 to be downloaded from a repository containing sources.
 
+If you would like to run the build process partially, 
+provide the --until <state> option where <state> is one of 
+unpack, setup, build, install, package
 """
     __metaclass__ = autocommand
 
@@ -340,12 +343,18 @@ to be downloaded from a repository containing sources.
 
     name = ("build", "bi")
 
+    steps = ('unpack', 'setup', 'build', 'install', 'package')
+    
     def options(self):
         buildno_opts(self)
         abandoned_files_opt(self)
         ignoredep_opt(self)
         self.parser.add_option("-O", "--output-dir", action="store", default=None,
                                help=_("output directory for produced packages"))
+        #self.parser.add_option("-s", "--step", action="store", default=None,
+        #                       help=_("perform only specified step"))
+        self.parser.add_option("-U", "--until", action="store", default=None,
+                               help=_("perform until and including specified step"))
         self.parser.add_option("-A", "--ignore-action-errors",
                                action="store_true", default=False,
                                help=_("bypass errors from ActionsAPI"))
@@ -360,6 +369,11 @@ to be downloaded from a repository containing sources.
             self.help()
             return
 
+            
+        if ctx.get_option('until'):
+            if ctx.get_option('until') in Build.steps:
+                raise Error(_('Step must be one of %s ') % pisi.util.strlist(Build.steps))
+
         self.init(database = True) 
         if ctx.get_option('output_dir'):
             ctx.ui.info(_('Output directory: %s') % ctx.config.options.output_dir)
@@ -368,7 +382,10 @@ to be downloaded from a repository containing sources.
             ctx.config.options.output_dir = '.'
 
         for x in self.args:
-            pisi.api.build(x, self.authInfo)
+            if ctx.get_option('until'):
+                pisi.api.build(x, ctx.get_option('until'), self.authInfo)                
+            else:
+                pisi.api.build(x, self.authInfo)
         self.finalize()
 
         
@@ -1180,174 +1197,8 @@ Finds the installed package which contains the specified file.
 
         self.finalize()
 
-
-# Partial build commands        
-
-
-class BuildUntil(Build):
-    """Run the build process partially
-
-Usage: -sStateName build-until <pspec file>
-
-where states are:
-unpack, setupaction, buildaction, installaction, buildpackages
-
-You can give an URI of the pspec.xml file. PISI will fetch all
-necessary files and unpack the source and prepare a source directory
-for you.
-"""
-    __metaclass__ = autocommand
-
-    def __init__(self):
-        super(BuildUntil, self).__init__()
-
-    name = ("build-until", "bu")
-
-    def options(self):
-        super(BuildUntil, self).options()        
-        self.parser.add_option("-s", action="store", dest="state")
-
-    def run(self):
-
-        if not self.args:
-            self.help()
-            return
-
-        self.init()
-        state = self.options.state
-
-        for arg in self.args:
-            pisi.api.build_until(arg, state, self.authInfo)
-        self.finalize()
-
-
-class BuildUnpack(Build):
-    """Unpack the source archive
-
-Usage: build-unpack <pspec file>
-
-TODO: desc.
-"""
-    __metaclass__ = autocommand
-
-    def __init__(self):
-        super(BuildUnpack, self).__init__()
-
-    name = ("build-unpack", "biu")
-
-    def run(self):
-        if not self.args:
-            self.help()
-            return
-
-        self.init()
-        for arg in self.args:
-            pisi.api.build_until(arg, "unpack", self.authInfo)
-        self.finalize()
-
-
-class BuildSetup(Build):
-    """Setup the source
-
-Usage: build-setup <pspec file>
-
-TODO: desc.
-"""
-    __metaclass__ = autocommand
-
-    def __init__(self):
-        super(BuildSetup, self).__init__()
-
-    name = ("build-setup", "bis")
-
-    def run(self):
-        if not self.args:
-            self.help()
-            return
-
-        self.init()
-        for arg in self.args:
-            pisi.api.build_until(arg, "setupaction",
-                                      self.authInfo)
-        self.finalize()
-
-
-class BuildBuild(Build):
-    """Setup the source
-
-Usage: build-build <pspec file>
-
-TODO: desc.
-"""
-    __metaclass__ = autocommand
-
-    def __init__(self):
-        super(BuildBuild, self).__init__()
-
-    name = ("build-build", "bib")
-
-    def run(self):
-        if not self.args:
-            self.help()
-            return
-
-        self.init()
-        for arg in self.args:
-            pisi.api.build_until(arg, "buildaction", self.authInfo)
-        self.finalize()
-
-
-class BuildInstall(Build):
-    """Install to the sandbox
-
-Usage: build-install <pspec file>
-
-TODO: desc.
-"""
-    __metaclass__ = autocommand
-
-    def __init__(self):
-        super(BuildInstall, self).__init__()
-
-    name = ("build-install", "bii")
-
-    def run(self):
-        if not self.args:
-            self.help()
-            return
-
-        self.init()
-        for arg in self.args:
-            pisi.api.build_until(arg, "installaction",
-                                      self.authInfo)
-        self.finalize()
-
-
-class BuildPackage(Build):
-    """Setup the source
-
-Usage: build-build <pspec file>
-
-TODO: desc.
-"""
-
-    __metaclass__ = autocommand
-
-    def __init__(self):
-        super(BuildPackage, self).__init__()
-
-    name = ("build-package", "bip")
-
-    def run(self):
-        if not self.args:
-            self.help()
-            return
-
-        self.init()
-        for arg in self.args:
-            pisi.api.build_until(arg, "buildpackages", self.authInfo)
-        self.finalize()
-
+# texts
+        
 usage_text1 = _("""%prog [options] <command> [arguments]
 
 where <command> is one of:

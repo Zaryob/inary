@@ -832,15 +832,15 @@ def build_until(pspecfile, state, authinfo=None):
         __buildState_unpack(pb)
         return
 
-    if state == "setupaction":
+    if state == "setup":
         __buildState_setupaction(pb, last)
         return
     
-    if state == "buildaction":
+    if state == "build":
         __buildState_buildaction(pb, last)
         return
 
-    if state == "installaction":
+    if state == "install":
         __buildState_installaction(pb, last)
         return
 
