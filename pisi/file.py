@@ -92,7 +92,6 @@ class File:
             fetch_url(uri, transfer_dir)
         else:
             localfile = uri.get_uri() #TODO: use a special function here?
-            localfile = File.decompress(localfile, self.compress)
 
         if sha1sum:        
         
@@ -121,6 +120,7 @@ class File:
                 raise Error(_("Remote write not implemented"))
         else:
             localfile = uri.get_uri() #TODO: use a special function here?
+            localfile = File.decompress(localfile, self.compress)
 
         if self.mode == File.read:
             access = 'r'
