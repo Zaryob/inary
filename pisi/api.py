@@ -298,6 +298,7 @@ def index(dirs, output = 'pisi-index.xml', skip_sources=False):
     if not dirs:
         dirs = ['.']
     for repo_dir in dirs:
+        repo_dir = str(repo_dir)
         ctx.ui.info(_('* Building index of PISI files under %s') % repo_dir)
         index.index(repo_dir, skip_sources)
     index.write(output, sha1sum=True, compress=File.xmill)

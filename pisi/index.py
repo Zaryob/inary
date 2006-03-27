@@ -98,7 +98,7 @@ class Index(XmlFile):
         errs = md.errors()
         if md.errors():
             ctx.ui.error(_('Package %s: metadata corrupt') % md.package.name)
-            ctx.ui.error(str(Error(*errs)))
+            ctx.ui.error(unicode(Error(*errs)))
         else:
             self.packages.append(md.package)
 

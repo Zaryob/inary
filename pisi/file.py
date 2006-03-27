@@ -119,8 +119,9 @@ class File:
             else:
                 raise Error(_("Remote write not implemented"))
         else:
-            localfile = uri.get_uri() #TODO: use a special function here?
-            localfile = File.decompress(localfile, self.compress)
+            localfile = uri.get_uri()
+            if self.mode == File.read:
+                localfile = File.decompress(localfile, self.compress)
 
         if self.mode == File.read:
             access = 'r'
