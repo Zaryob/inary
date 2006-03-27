@@ -24,6 +24,8 @@ class DependencyTestCase(unittest.TestCase):
         gtkmmdep.versionFrom = '1.9.1'
         gtkmmdep.package = 'atk'
         self.assert_( not gtkmmdep.satisfies('atk', '1.8.0', '1') )
+        self.assert_( gtkmmdep.satisfies('atk', '1.9.1', '2') )
+        self.assert_( gtkmmdep.satisfies('atk', '1.10.5', '3') )
 
     def testReleaseFrom(self):
         # releaseFrom isn't taken into account #2294
