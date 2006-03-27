@@ -678,8 +678,11 @@ Usage: check <package1> <package2> ... <packagen>
             return
 
         self.init(True)
-        for arg in self.args:
-            pisi.api.check(arg)
+        for pkg in self.args:
+            if ctx.installdb.is_installed(pkg):
+                pisi.api.check(pkg)
+            else:
+                ctx.ui.info(_('Package %s not installed') % pkg)
         self.finalize()
 
 
