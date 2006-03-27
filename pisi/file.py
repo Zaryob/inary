@@ -137,7 +137,7 @@ class File:
         "this method must be called at the end of operation"
         self.__file__.close()
         if self.compress == File.xmill:
-            pisi.util.run_batch('xcmill -9 -d -f ' + self.localfile)
+            pisi.util.run_batch('xcmill -9 -f ' + self.localfile)
             self.localfile = self.localfile[:-4] + '.xmi'
         elif self.compress == File.sevenzip:
             raise Error(_("sevenzip compression not supported yet"))
