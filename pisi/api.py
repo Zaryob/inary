@@ -305,9 +305,12 @@ def index(dirs, output = 'pisi-index.xml', skip_sources=False):
     ctx.ui.info(_('* Index file written'))
 
 def add_repo(name, indexuri):
-    repo = pisi.repodb.Repo(URI(indexuri))
-    ctx.repodb.add_repo(name, repo)
-    ctx.ui.info(_('Repo %s added to system.') % name)
+    if ctx.repodb.has_repo(name):
+        raise Error(_('Repo %s already present.') % name)
+    else:
+        repo = pisi.repodb.Repo(URI(indexuri))
+        ctx.repodb.add_repo(name, repo)
+        ctx.ui.info(_('Repo %s added to system.') % name)
 
 def remove_repo(name):
     if ctx.repodb.has_repo(name):

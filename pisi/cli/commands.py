@@ -874,8 +874,8 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
                 name = self.args[0]
                 indexuri = self.args[1]
             else:
-                name = 'pardus'
-                indexuri = 'http://paketler.uludag.org.tr/pardus-1.0/pisi-index.xml'
+                name = 'pardus-1-test'
+                indexuri = 'http://paketler.uludag.org.tr/pardus-1-test/pisi-index.xmi'
             pisi.api.add_repo(name, indexuri)
             if ctx.ui.confirm(_('Update PISI database for repository %s?') % name):
                 pisi.api.update_repo(name)
