@@ -29,6 +29,7 @@ def exportFlags():
     environ['CFLAGS'] = values.build.cflags
     environ['CXXFLAGS'] = values.build.cxxflags
     environ['LDFLAGS'] = values.build.ldflags
+    environ['USER_LDFLAGS'] = values.build.ldflags
     environ['JOBS'] = values.build.jobs
 
 class Env(object):
