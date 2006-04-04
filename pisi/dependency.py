@@ -38,13 +38,13 @@ class Dependency:
     def __str__(self):
         s = self.package
         if self.versionFrom:
-            s += 'ver >= ' + self.versionFrom
+            s += _(" version >= ") + self.versionFrom
         if self.versionTo:
-            s += 'ver <= ' + self.versionTo
+            s += _(" version <= ") + self.versionTo
         if self.releaseFrom:
-            s += 'rel >= ' + self.releaseFrom
+            s += _(" release >= ") + self.releaseFrom
         if self.releaseTo:
-            s += 'rel <= ' + self.releaseTo
+            s += _(" release <= ") + self.releaseTo
         return s
 
     def satisfies(self, pkg_name, version, release):
