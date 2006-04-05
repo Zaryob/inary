@@ -123,7 +123,7 @@ class LocalText(dict):
 
     def errors(self, where = unicode()):
         errs = []
-        langs = [ LocalText.get_lang(), 'tr', 'en' ]
+        langs = [ LocalText.get_lang(), 'en', 'tr', ]
         if not util.any(lambda x : self.has_key(x), langs):
             errs.append( where + ': ' + _("Tag should have at least the current locale, or failing that an English or Turkish version"))
         #FIXME: check if all entries are unicode
@@ -163,7 +163,7 @@ class LocalText(dict):
             # fallback to Turkish
             return unicode(self['tr'])
         else:
-            return ''
+            return unicode()
 
 class Writer(formatter.DumbWriter):
     """adds unicode support"""
@@ -434,11 +434,11 @@ class autoxml(oo.autosuper, oo.autoprop):
                 self.readxml(uri, tmpDir, sha1sum=sha1sum, compress=compress, sign=sign)
                 errs = []
                 self.decode(self.rootNode(), errs)
-                if hasattr(self, 'read_hook'):
-                    self.read_hook(errs)
                 if errs:
                     errs.append(_("autoxml.read: File '%s' has errors") % uri)
                     raise Error(*errs)
+                if hasattr(self, 'read_hook'):
+                    self.read_hook(errs)
 
                 if not keepDoc:
                     self.unlink() # get rid of the tree
@@ -552,8 +552,9 @@ class autoxml(oo.autosuper, oo.autoprop):
             encode_a(node, value, errs)
             
         def errors(self, where):
+            """return errors in the object"""
             errs = []
-            if hasattr(self, name):
+            if hasattr(self, name) and getattr(self, name) != None:
                 value = getattr(self,name)
                 errs.extend(errors_a(value, where + '.' + name))
             else:
