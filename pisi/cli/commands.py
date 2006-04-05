@@ -488,7 +488,7 @@ class Upgrade(PackageOp):
 
 Usage: Upgrade [<package1> <package2> ... <packagen>]
 
-<packagen>: package name
+<packagei>: package name
 
 Upgrades the entire system if no package names are given
 
@@ -590,7 +590,7 @@ class Info(Command):
 
 Usage: info <package1> <package2> ... <packagen>
 
-<packagen> is either a package name or a .pisi file, 
+<packagei> is either a package name or a .pisi file, 
 
 """
     __metaclass__ = autocommand
