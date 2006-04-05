@@ -121,7 +121,6 @@ def getNode(node, tagpath):
 def getAllNodes(node, tagPath):
     """retrieve all nodes that match a given tag path."""
 
-    #FIXME: better tag split
     tags = tagPath.split('/')
 
     if len(tags) == 0:

@@ -26,12 +26,20 @@ class Error(pisi.Error):
 __metaclass__ = autoxml.autoxml
 
 
-class Distribution:
-    t_Name = [autoxml.Text, autoxml.mandatory]
+class Distribution(xmlfile.XmlFile):
+
+    __metaclass__ = autoxml.autoxml
+
+    tag = "PISI"
+
+    t_SourceName = [autoxml.Text, autoxml.mandatory] # name of distribution (source)
     t_Description = [autoxml.LocalText, autoxml.mandatory]
     t_Version = [autoxml.Text, autoxml.mandatory]
     t_Type =  [autoxml.Text, autoxml.mandatory]
     t_Dependencies = [ [autoxml.Text], autoxml.optional, "Dependencies/Distribution"]
+
+    t_BinaryName = [autoxml.Text, autoxml.optional] # name of repository (binary distro) 
+    t_Architecture = [autoxml.Text, autoxml.optional] # architecture identifier
 
 
 class Component(xmlfile.XmlFile):
@@ -46,6 +54,7 @@ class Component(xmlfile.XmlFile):
     # component name in other languages, for instance in Turkish
     # LocalName for system.base could be sistem.taban or "Taban Sistem",
     # this could be useful for GUIs
+    
     t_LocalName = [autoxml.LocalText, autoxml.mandatory]
     
     # Information about the component

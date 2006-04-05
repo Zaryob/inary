@@ -14,7 +14,6 @@
 
 """PISI source/package index"""
 
-
 import os
 
 import gettext
@@ -46,17 +45,31 @@ class Index(XmlFile):
 
     tag = "PISI"
 
+    t_Distribution = [ component.Distribution, autoxml.optional ]
     t_Specs = [ [specfile.SpecFile], autoxml.optional, "SpecFile"]
     t_Packages = [ [metadata.Package], autoxml.optional, "Package"]
     t_Components = [ [component.Component], autoxml.optional, "Component"]
 
+    def name():
+        return self.distribution.name + self.distribution.repositoryname
+
     # read index for a given repo, force means download even if remote not updated
     def read_uri(self, filename, repo = None, force = False):
         """Read PSPEC file"""
-        tmpdir = os.path.join(ctx.config.index_dir(), repo)
+        if repo:
+            tmpdir = os.path.join(ctx.config.index_dir(), repo)
+        else:
+            tmpdir = os.path.join(ctx.config.tmp_dir(), 'index')
+            pisi.util.clean_dir(tmpdir)
+        pisi.util.check_dir(tmpdir)
+        urlfile = file(pisi.util.join_path(tmpdir, 'uri'), 'w')
+        urlfile.write(filename) # uri
         self.read(filename, tmpDir=tmpdir, sha1sum=not force, 
                   compress=File.xmill, sign=File.detached)
-                  
+        if not repo:
+            repo = self.distribution.name()
+            
+
     def check_signature(self, filename, repo):
         tmpdir = os.path.join(ctx.config.index_dir(), repo)
         File.check_signature(filename, tmpdir)
@@ -73,6 +86,8 @@ class Index(XmlFile):
                     self.add_component(os.path.join(root, fn))
                 if fn == 'pspec.xml' and not skip_sources:
                     self.add_spec(os.path.join(root, fn), repo_uri)
+                if fn == 'distribution.xml':
+                    self.add_distro(os.path.join(root, fn))
 
     def update_db(self, repo, txn = None):
         for comp in self.components:
@@ -117,6 +132,15 @@ class Index(XmlFile):
             ctx.ui.error(_('Component in %s is corrupt') % path)
             #ctx.ui.error(str(Error(*errs)))
 
+    def add_distro(self, path):
+        distro = component.Distribution()
+        try:
+            distro.read(path)
+            self.distribution = distro
+        except:
+            ctx.ui.error(_('Distribution in %s is corrupt') % path)
+            #ctx.ui.error(str(Error(*errs)))
+
     def add_spec(self, path, repo_uri):
         ctx.ui.info(_('Adding %s to source index') % path)
         sf = specfile.SpecFile()
@@ -131,4 +155,3 @@ class Index(XmlFile):
             else:                           # create relative path by default
                 sf.source.sourceURI = util.removepathprefix(repo_uri, path)
             self.specs.append(sf)
-

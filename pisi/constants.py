@@ -10,9 +10,9 @@
 # Please read the COPYING file.
 #
 
-# PISI constants. 
-# If you have a "magic" constant value this is where it should be
-# defined.
+"""PISI constants. 
+If you have a "magic" constant value this is where it should be
+defined."""
 
 # Author: Baris Metin <baris@uludag.org.tr
 
@@ -50,21 +50,25 @@ class Constants:
         self.__c.xdelta_suffix = ".xdelta"
 
         # suffix for auto generated ar packages
-        self.__c.static_name_suffix = "-static"
-        self.__c.ar_file_suffix = ".a"
+        self.__c.static_name_suffix = "-static"  # an admissible use of constant
+        self.__c.ar_file_suffix = ".a" 
 
         # directory suffixes for build
-        self.__c.work_dir_suffix = "/work"
+        self.__c.work_dir_suffix = "/work"       # these, too, because we might wanna change 'em
         self.__c.install_dir_suffix  = "/install"
 
         # file/directory names
+        #note: these don't seem very well, constants are used
+        #when it is easier/more meaningful to write the constant name, or 
+        #when the constant is bound to change later on.
+        #in some places literals are just as good, for instance 
+        #when constant is the same as string. readability is important...
         self.__c.actions_file = "actions.py"
         self.__c.files_dir = "files"
         self.__c.metadata_dir = "metadata"
         self.__c.comar_dir = "comar"
         self.__c.files_xml = "files.xml"
         self.__c.metadata_xml = "metadata.xml"
-        self.__c.pisi_index = "pisi-index.xml"
 
         # functions in actions_file
         self.__c.setup_func = "setup"
@@ -72,7 +76,7 @@ class Constants:
         self.__c.install_func = "install"
 
         # file types
-        # FIXME: these are redundant
+        # FIXME: these seem redundant
         self.__c.doc = "doc"
         self.__c.man = "man"
         self.__c.info = "info"

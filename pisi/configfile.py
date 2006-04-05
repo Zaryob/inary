@@ -81,7 +81,7 @@ class DirsDefaults:
     db_dir = "/var/db/pisi"
     archives_dir = "/var/cache/pisi/archives"
     packages_dir = "/var/cache/pisi/packages"
-    index_dir = "/var/cache/pisi/index"
+    index_dir = "/var/lib/pisi/index"
     tmp_dir =  "/var/tmp/pisi"
     icon_theme_dir = "/usr/share/icons/Tulliana-1.0"
     kde_dir = "/usr/kde/3.5"
