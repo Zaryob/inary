@@ -34,7 +34,7 @@ class Distribution(xmlfile.XmlFile):
 
     t_SourceName = [autoxml.Text, autoxml.mandatory] # name of distribution (source)
     t_Description = [autoxml.LocalText, autoxml.mandatory]
-    t_Version = [autoxml.Text, autoxml.mandatory]
+    t_Version = [autoxml.Text, autoxml.optional]
     t_Type =  [autoxml.Text, autoxml.mandatory]
     t_Dependencies = [ [autoxml.Text], autoxml.optional, "Dependencies/Distribution"]
 

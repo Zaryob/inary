@@ -68,7 +68,6 @@ class Index(XmlFile):
                   compress=File.xmill, sign=File.detached)
         if not repo:
             repo = self.distribution.name()
-            
 
     def check_signature(self, filename, repo):
         tmpdir = os.path.join(ctx.config.index_dir(), repo)
@@ -118,27 +117,27 @@ class Index(XmlFile):
         # check package semantics
         errs = md.errors()
         if md.errors():
-            ctx.ui.error(_('Package %s: metadata corrupt') % md.package.name)
+            ctx.ui.error(_('Package %s: metadata corrupt, skipping...') % md.package.name)
             ctx.ui.error(unicode(Error(*errs)))
         else:
             self.packages.append(md.package)
 
     def add_component(self, path):
         comp = component.Component()
-        try:
-            comp.read(path)
-            self.components.append(comp)
-        except:
-            ctx.ui.error(_('Component in %s is corrupt') % path)
+        #try:
+        comp.read(path)
+        self.components.append(comp)
+        #except:
+        #    raise Error(_('Component in %s is corrupt') % path)
             #ctx.ui.error(str(Error(*errs)))
 
     def add_distro(self, path):
         distro = component.Distribution()
-        try:
-            distro.read(path)
-            self.distribution = distro
-        except:
-            ctx.ui.error(_('Distribution in %s is corrupt') % path)
+        #try:
+        distro.read(path)
+        self.distribution = distro
+        #except:
+        #    raise Error(_('Distribution in %s is corrupt') % path)
             #ctx.ui.error(str(Error(*errs)))
 
     def add_spec(self, path, repo_uri):
@@ -147,7 +146,7 @@ class Index(XmlFile):
         sf.read(path)
         errs = sf.errors()
         if sf.errors():
-            ctx.ui.error(_('SpecFile in %s is corrupt') % path)
+            ctx.ui.error(_('SpecFile in %s is corrupt, skipping...') % path)
             ctx.ui.error(str(Error(*errs)))
         else:
             if ctx.config.options and ctx.config.options.absolute_uris:
