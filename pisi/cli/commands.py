@@ -732,10 +732,10 @@ source and binary packages.
         self.init()
         from pisi.api import index
         if len(self.args)>0:
-            index(self.args, ctx.get_option('output'))
+            index(self.args, ctx.get_option('output'), skip_sources = ctx.get_option('skip_sources'))
         elif len(self.args)==0:
             ctx.ui.info(_('Indexing current directory.'))
-            index('.', ctx.get_option('output'), skip_sources = ctx.get_option('skip_sources'))
+            index(['.'], ctx.get_option('output'), skip_sources = ctx.get_option('skip_sources'))
         self.finalize()
 
 

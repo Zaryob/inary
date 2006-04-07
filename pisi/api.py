@@ -293,7 +293,8 @@ def check(package):
                 ctx.ui.info("OK", False)
     return corrupt
 
-def index(dirs, output = 'pisi-index.xml', skip_sources=False):
+def index(dirs=None, output = 'pisi-index.xml', skip_sources=False):
+    """accumulate PISI XML files in a directory"""
     index = Index()
     if not dirs:
         dirs = ['.']
