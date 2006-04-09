@@ -26,14 +26,13 @@ class SourceDBTestCase(testcase.TestCase):
         self.sourcedb = pisi.sourcedb.init()
         self.spec = SpecFile()
         self.spec.read("tests/popt/pspec.xml")
-        
-    def testAdd(self):
-        self.sourcedb.add_source(self.spec.source)
-        self.assert_(self.sourcedb.has_source("popt"))
-    
-    def testRemove(self):
-        self.testAdd()
-        self.sourcedb.remove_source("popt")
-        self.assert_(not self.sourcedb.has_source("popt"))
+        if not ctx.repodb.has_repo('test'):
+            ctx.repodb.add_repo('test', pisi.repodb.Repo(pisi.uri.URI('fakerepo.xml')) )
+
+    def testAddRemove(self):
+        self.sourcedb.add_spec(self.spec, 'test')
+        self.assert_(self.sourcedb.has_spec("popt"))
+        self.sourcedb.remove_spec("popt", 'test')
+        self.assert_(not self.sourcedb.has_spec("popt"))
 
 suite = unittest.makeSuite(SourceDBTestCase)

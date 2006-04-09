@@ -256,7 +256,7 @@ def info_name(package_name, installed=False):
         metadata.package = package
         #FIXME: get it from sourcedb if available
         metadata.source = None
-        #TODO: fetch the files from server if possible (wow, you maniac -- exa)
+        #TODO: fetch the files from server if possible (wow, you maniac -- future exa)
         if installed and ctx.installdb.is_installed(package.name):
             files = ctx.installdb.files(package.name)
         else:
