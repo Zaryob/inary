@@ -278,10 +278,7 @@ class Histogram:
         if value:
             self.list[name] = value
         else:
-            if self.list.has_key(name):
-                self.list[name] = self.list[name] + 1
-            else:
-                self.list[name] = 1
+            self.list[name] = self.list.get(name, 0) + 1
     
     def note(self, name):
         if not self.list.has_key(name):
