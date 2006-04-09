@@ -286,9 +286,8 @@ msgid "* Index file written"
 msgstr "* İndeks dosyası yazıldı."
 
 #: pisi/api.py:312
-#, fuzzy
 msgid "Repo %s already present."
-msgstr "Depo %s halihazırda var"
+msgstr "Depo %s halihazırda var."
 
 #: pisi/api.py:316
 msgid "Repo %s added to system."
@@ -307,20 +306,16 @@ msgid "* Updating repository: %s"
 msgstr "'%s' deposu güncelleniyor."
 
 #: pisi/api.py:335
-#, fuzzy
 msgid "No updates available for repository %s."
-msgstr "'%s' isimli depo için PİSİ veritabanını güncellensin mi?"
+msgstr "'%s' isimli depo için güncelleme yok."
 
 #: pisi/api.py:337
 msgid "Updating database at any rate as requested"
 msgstr ""
 
 #: pisi/api.py:346
-#, fuzzy
 msgid "* Package database updated."
-msgstr ""
-"\n"
-"* Paket veritabanı güncellendi."
+msgstr "* Paket veritabanı güncellendi."
 
 #: pisi/api.py:348
 msgid "No repository named %s found."
@@ -355,9 +350,8 @@ msgid "Package not installable"
 msgstr "Paket yerleştirilebilir durumda değil."
 
 #: pisi/atomicoperations.py:161
-#, fuzzy
 msgid "Trying to overwrite an existing file: %s"
-msgstr "Varolmayan paket kaldırılmaya çalışıldı."
+msgstr "Mevcut bir paket üzerine yazmaya çalıştı: %s"
 
 #: pisi/atomicoperations.py:192
 msgid "Re-install same version package?"
@@ -461,9 +455,8 @@ msgid "Path %s belongs in multiple packages"
 msgstr "Yol %s birden çok pakete ait"
 
 #: pisi/build.py:109
-#, fuzzy
 msgid "Source URI: %s"
-msgstr "Paket adresi: %s"
+msgstr "Kaynak adresi: %s"
 
 #: pisi/build.py:113
 #, fuzzy
@@ -969,23 +962,20 @@ msgstr ""
 "Paket adları yerine bileşenler de verebilirsiniz.\n"
 
 #: pisi/cli/commands.py:517
-#, fuzzy
 msgid "Do not update repositories"
-msgstr "'%s' deposu güncelleniyor."
+msgstr "Depoları güncelleme"
 
 #: pisi/cli/commands.py:521
 msgid "eager upgrades"
 msgstr "istekli yükseltmeler"
 
 #: pisi/cli/commands.py:527
-#, fuzzy
 msgid "Updating repositories"
-msgstr "'%s' deposu güncelleniyor."
+msgstr "Depolar güncelleniyor"
 
 #: pisi/cli/commands.py:532
-#, fuzzy
 msgid "Will not update repositories"
-msgstr "'%s' deposu güncelleniyor."
+msgstr "Depolar güncellenmeyecek"
 
 #: pisi/cli/commands.py:544
 msgid ""
@@ -1037,9 +1027,8 @@ msgid "Show only paths."
 msgstr "Sadece yolları göster"
 
 #: pisi/cli/commands.py:611
-#, fuzzy
 msgid "show in short format"
-msgstr "uzun biçimde göster"
+msgstr "kısa biçimde göster"
 
 #: pisi/cli/commands.py:634
 msgid "Package file: %s"
@@ -1088,9 +1077,8 @@ msgstr ""
 "Kullanım: check <package1> <package2> ... <packagen>\n"
 
 #: pisi/cli/commands.py:698
-#, fuzzy
 msgid "Package %s not installed"
-msgstr "Paket %s yerleştirilmemis."
+msgstr "Paket %s yerleştirilmemiş"
 
 #: pisi/cli/commands.py:703
 msgid ""
@@ -1354,9 +1342,8 @@ msgid "set search language"
 msgstr "arama dilini seç"
 
 #: pisi/cli/commands.py:1164
-#, fuzzy
 msgid "%s packages found"
-msgstr "Paket %s bulunamadı."
+msgstr "%s paket bulundu"
 
 #: pisi/cli/commands.py:1172
 msgid ""
@@ -1506,14 +1493,12 @@ msgid "Filename error"
 msgstr "Dosya adı hatası"
 
 #: pisi/fetcher.py:84
-#, fuzzy
 msgid "Access denied to write to destination directory: \"%s\""
-msgstr "Hedef dizine yazmaya izin verilmedi."
+msgstr "\"%s\" hedef dizine yazmaya izin verilmedi."
 
 #: pisi/fetcher.py:89
-#, fuzzy
 msgid "Access denied to destination file: \"%s\""
-msgstr "Hedef dizine yazmaya izin verilmedi."
+msgstr "\"%s\" hedef dizinine erişmeye izin verilmedi."
 
 #: pisi/fetcher.py:100
 msgid ""
@@ -1778,9 +1763,8 @@ msgstr ""
 "yerleştirilecek:\n"
 
 #: pisi/operations.py:234
-#, fuzzy
 msgid "Total size of packages: %.2f %s"
-msgstr "paketteki dosyaların bir listesini göster"
+msgstr "Paketlerin toplam boyu: %.2f %s"
 
 #: pisi/operations.py:240 pisi/operations.py:337 pisi/operations.py:622
 msgid "There are extra packages due to dependencies. Do you want to continue?"
@@ -1873,9 +1857,8 @@ msgid "Cannot find source package: %s"
 msgstr "PİSİ kaynak paketi %s inşa ediliyor"
 
 #: pisi/package.py:55
-#, fuzzy
 msgid "Package size: %.2f %s"
-msgstr "Paket dosyası: %s"
+msgstr "Paket boyu: %.2f %s"
 
 #: pisi/package.py:81
 msgid "Trying to fetch xdelta: %s"
@@ -2040,9 +2023,8 @@ msgid "%s section should have a '%s' tag"
 msgstr "'%s' bölümünün bir '%s' etiketi olmalı"
 
 #: pisi/util.py:143
-#, fuzzy
 msgid "Running "
-msgstr "çalıştırıyor "
+msgstr "Çalışıyor: "
 
 #: pisi/util.py:155
 msgid "return value %s"
@@ -2401,100 +2383,3 @@ msgstr "%d hata ile karşılaşıldı. Lütfen bunları en kısa zamanda düzelt
 #: tools/repostats.py:678
 msgid "These dependencies are not available in repository:\n"
 msgstr "Bağımlılığa neden olan bu paketler depoda bulunmuyor:\n"
-
-#~ msgid "executing %s"
-#~ msgstr "%s çalıştırılıyor"
-
-#~ msgid ""
-#~ "Build a PISI package using a pspec.xml file\n"
-#~ "\n"
-#~ "Usage: build <pspec.xml>\n"
-#~ "\n"
-#~ "You can give a URI of the pspec.xml file. PISI will\n"
-#~ "fetch all necessary files and build the package for you.\n"
-#~ msgstr ""
-#~ "pspec.xml kullanarak bir PİSİ paketi inşa et\n"
-#~ "\n"
-#~ "Kullanım: build <pspec.xml>\n"
-#~ "\n"
-#~ "pspec.xml dosyasının URI'ını verebilirsiniz. PİSİ sizin\n"
-#~ "için gerekli tüm dosyaları çekip inşa edecektir.\n"
-
-#~ msgid ""
-#~ "Run the build process partially\n"
-#~ "\n"
-#~ "Usage: -sStateName build-until <pspec file>\n"
-#~ "\n"
-#~ "where states are:\n"
-#~ "unpack, setupaction, buildaction, installaction, buildpackages\n"
-#~ "\n"
-#~ "You can give an URI of the pspec.xml file. PISI will fetch all\n"
-#~ "necessary files and unpack the source and prepare a source directory\n"
-#~ "for you.\n"
-#~ msgstr ""
-#~ "İnşa işlevini kısmen çalıştır\n"
-#~ "\n"
-#~ "Kullanım: -s<Adım> build-until <pspec file>\n"
-#~ "\n"
-#~ "Adım aşağıdakilerden birisi olabilir:\n"
-#~ "unpack, setupaction, buildaction, installaction, buildpackages\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "Unpack the source archive\n"
-#~ "\n"
-#~ "Usage: build-unpack <pspec file>\n"
-#~ "\n"
-#~ "TODO: desc.\n"
-#~ msgstr ""
-#~ "Kaynak arşivini açar\n"
-#~ "\n"
-#~ "Kullanım: build-unpack <pspec file>\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "Setup the source\n"
-#~ "\n"
-#~ "Usage: build-setup <pspec file>\n"
-#~ "\n"
-#~ "TODO: desc.\n"
-#~ msgstr ""
-#~ "Kaynağı kurar\n"
-#~ "\n"
-#~ "Kullanım: build-setup <pspec file>\n"
-#~ "\n"
-
-# pisi/cli/commands.py:866 :917
-#~ msgid ""
-#~ "Setup the source\n"
-#~ "\n"
-#~ "Usage: build-build <pspec file>\n"
-#~ "\n"
-#~ "TODO: desc.\n"
-#~ msgstr ""
-#~ "Kaynağı inşa eder\n"
-#~ "\n"
-#~ "Kullanım: build-build <pspec file>\n"
-#~ "\n"
-#~ "TODO: desc.\n"
-
-#~ msgid ""
-#~ "Install to the sandbox\n"
-#~ "\n"
-#~ "Usage: build-install <pspec file>\n"
-#~ "\n"
-#~ "TODO: desc.\n"
-#~ msgstr ""
-#~ "Kaynağı sandbox'a kurar\n"
-#~ "\n"
-#~ "Kullanım: build-install <pspec file>\n"
-#~ "\n"
-
-#~ msgid "Requested Range Not Satisfiable"
-#~ msgstr "İstenen aralık sağlanamıyor."
-
-#~ msgid "Component in %s is corrupt"
-#~ msgstr "Bileşen: %s bozuk"
-
-#~ msgid "get_package: package %s not found"
-#~ msgstr "get_package: paket %s bulunamadı"
