@@ -121,7 +121,7 @@ class ItemByRepoDB(object):
             if not self.d.has_key(name, txn=txn):
                 raise NotfoundError(_('Key %s not found') % name)
             s = self.d.get(name, txn=txn)
-            if not repo:
+            if repo == None:
                 for repostr in self.order():
                     if s.has_key(repostr):
                         return (s[repostr], self.str_repo(repostr))
