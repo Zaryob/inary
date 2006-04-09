@@ -24,7 +24,7 @@ import pisi.util as util
 import pisi.context as ctx
 import pisi.lockeddbshelve as shelve
 
-installed, thirdparty = range(2)
+installed, thirdparty = range(1, 3)
 
 class Error(pisi.Error):
     pass
