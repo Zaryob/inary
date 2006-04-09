@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2006-03-24, 04:11:49 -->
-<!-- Copyright (C) 2006 PiSi Development Team, pisi@pardus.org.tr -->
+<!-- Saved: 2006-04-09, 18:34:30 -->
+<!-- Copyright (C) 2006 PiSi Development Team,  -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
   <UIType>Console</UIType>
   <Description>The package management software of Pardus distribution.
 </Description>
-  <VersIon></VersIon>
   <Author>PiSi Development Team</Author>
-  <EmaIl>pisi@pardus.org.tr</EmaIl>
+  <EmaIl></EmaIl>
   <Sources>
     <Source>
       <Dir>tools</Dir>
@@ -479,6 +478,14 @@
       <Dir>pisi</Dir>
       <Name>itembyrepodb.py</Name>
     </Source>
+    <Source>
+      <Dir>tests</Dir>
+      <Name>buildtests.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Name>zipfileext.py</Name>
+    </Source>
   </Sources>
   <Forms>
   </Forms>
@@ -521,9 +528,9 @@
   </Vcs>
   <FiletypeAssociations>
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
     <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
     <FiletypeAssociation pattern="*.py" type="SOURCES" />
   </FiletypeAssociations>
 </Project>
