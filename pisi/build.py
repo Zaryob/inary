@@ -757,12 +757,12 @@ class Builder:
         if ctx.get_option('show_abandoned_files') or ctx.get_option('debug'):
             abandoned_files = self.get_abandoned_files()
             if abandoned_files:
-                ctx.ui.warning(_('Abandoned files under the install dir (%s):' % (install_dir)))
+                ctx.ui.warning(_('Abandoned files under the install dir (%s):') % (install_dir))
                 for f in abandoned_files:
                     ctx.ui.info('    - %s' % (f))
             else:
-                ctx.ui.warning(_('All of the files under the install dir (%s) has been collected by package(s)' \
-                                                                % (install_dir)))
+                ctx.ui.warning(_('All of the files under the install dir (%s) has been collected by package(s)') 
+                                                                % (install_dir))
             
         if ctx.config.values.general.autoclean is True:
             ctx.ui.info(_("Cleaning Build Directory..."))

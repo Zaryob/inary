@@ -52,7 +52,7 @@ class Package:
                 package_size = ctx.packagedb.get_package(current_pkg).packageSize
                 if package_size:
                     package_size, symbol = util.human_readable_size(package_size)
-                    ctx.ui.warning(_("Package size: %.2f %s" % (package_size, symbol)))
+                    ctx.ui.warning(_("Package size: %.2f %s") % (package_size, symbol))
 
             # if package is installed (which means we are upgrading it),
             # calculate needed info

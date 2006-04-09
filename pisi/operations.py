@@ -231,7 +231,7 @@ in the respective order to satisfy dependencies:
 
     if total_size:
         total_size, symbol = util.human_readable_size(total_size)
-        ctx.ui.warning(_('Total size of packages: %.2f %s' % (total_size, symbol)))
+        ctx.ui.warning(_('Total size of packages: %.2f %s') % (total_size, symbol))
 
     if ctx.get_option('dry_run'):
         return

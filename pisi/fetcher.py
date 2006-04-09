@@ -81,12 +81,12 @@ class Fetcher:
             self.err(_('Filename error'))
 
         if not os.access(self.destdir, os.W_OK):
-            self.err(_('Access denied to write to destination directory: "%s"' % (self.destdir)))
+            self.err(_('Access denied to write to destination directory: "%s"') % (self.destdir))
 
         archive_file = os.path.join(self.destdir, self.url.filename())
         
         if os.path.exists(archive_file) and not os.access(archive_file, os.W_OK):
-            self.err(_('Access denied to destination file: "%s"' % (archive_file)))
+            self.err(_('Access denied to destination file: "%s"') % (archive_file))
 
         partial_file = archive_file + '.part'
 
