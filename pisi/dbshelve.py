@@ -38,6 +38,7 @@ Now added support for overriding the marshalling method
 import cPickle
 import bsddb3.db as db
 import bsddb3.dbobj as dbobj
+import string
 
 import pisi
 
@@ -60,6 +61,10 @@ class DBShelf:
     #def __del__(self):
     #    self.close()
 
+    allowed_chars = string.letters + string.digits + '-'
+    def check_key(key):
+        return pisi.util.all(lambda x: x in allowed_chars, key)
+    
     def has_key(self, key, txn = None):
         if txn:
             return self.db.has_key(key, txn)
