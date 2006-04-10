@@ -22,6 +22,7 @@ import pisi.context as ctx
 from pisi.version import Version
 import pisi.pxml.autoxml as autoxml
 from pisi.util import Checks
+import pisi.itembyrepodb
 
 class Dependency:
 
@@ -83,7 +84,7 @@ dependency spec"""
     if not ctx.installdb.is_installed(pkg_name):
         return False
     else:
-        pkg = ctx.packagedb.get_package(pkg_name)
+        pkg = ctx.packagedb.get_package(pkg_name, pisi.itembyrepodb.installed)
         (version, release) = (pkg.version, pkg.release)
         return depinfo.satisfies(pkg_name, version, release)
 
