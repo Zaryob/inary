@@ -15,11 +15,31 @@ import os
 from pisi import version
 from pisi.util import *
 
-class UtilTestCase(unittest.TestCase):
+import testcase
+
+
+def get_svn_paths(path):
+    svn_paths = []
+    for root, dirs, files in os.walk(path):
+        for d in dirs:
+            if d.find(".svn") > -1:
+                svn_paths.append(os.path.join(root, d))
+                continue
+        continue
+    return svn_paths
+
+def move_svn_paths(paths):
+    [shutil.move(d, '/tmp/' + os.path.dirname(d).replace('/', '_')) for d in paths]
+
+def restore_svn_paths(paths):
+    [shutil.move('/tmp/' + os.path.dirname(d).replace('/', '_'), d) for d in paths]
+
+
+class UtilTestCase(testcase.TestCase):
 
     def setUp(self):
-        pass
-        
+        testcase.TestCase.setUp(self, database = False)
+
     def testSubPath(self):
         self.assert_(subpath('usr', 'usr'))
         self.assert_(subpath('usr', 'usr/local/src'))
@@ -43,18 +63,24 @@ class UtilTestCase(unittest.TestCase):
         os.remove('tests/utilfiles/cleanedarfile.a')
 
     def testDirSize(self):
+        svn_paths = get_svn_paths('tests/utilfiles')
+        move_svn_paths(svn_paths)
         self.assertEqual(dir_size('tests/utilfiles/arfilewithtimestamps.a'), 74536)
         self.assertEqual(dir_size('tests/utilfiles/linktonowhere'), 23)
         self.assertEqual(dir_size('tests/utilfiles/directory'), 74536)
         self.assertEqual(dir_size('tests/utilfiles/linktoarfile'), 22)
         self.assertEqual(dir_size('tests/utilfiles/'), 149117)
+        restore_svn_paths(svn_paths)
 
     def testGetFileHashes(self):
+        svn_paths = get_svn_paths('tests/utilfiles')
+        move_svn_paths(svn_paths)
         self.assertEqual(len([x for x in get_file_hashes('tests/utilfiles/')]), 4)
         for tpl in get_file_hashes('tests/utilfiles/'):
             if os.path.basename(tpl[0]) == 'linktonowhere':
                 self.assertEqual(tpl[1], '2d3732ababb24b5dd040a192dc72841cb9684d4e')
             if os.path.basename(tpl[0]) == 'linktoarfile':
                 self.assertEqual(tpl[1], '8be108bc4bfb7d18a10da6d6b76060f0409dc7c6')
+        restore_svn_paths(svn_paths)
 
 suite = unittest.makeSuite(UtilTestCase)
