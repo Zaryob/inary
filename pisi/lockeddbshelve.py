@@ -45,11 +45,14 @@ def check_dbversion(versionfile, ver, write=False, update=False):
         ls = verfile.readlines()
         currver = Version(ls[0])
         dbver = Version(ver)
-        if currver < dbver and not update:
-            raise Error(_('Database version for %s insufficient. Please run rebuild-db command.') % versionfile)
+        if currver < dbver:
+            if not update:
+                raise Error(_('Database version for %s insufficient. Please run rebuild-db command.') % versionfile)
+            else:
+                pass # continue to update, then
         elif currver > dbver:
             raise Error(_('Database version for %s greater than PiSi version. You need a newer PiSi.') % versionfile)
-        else:
+        elif not update:
             return True  # db version is OK
     else:
         firsttime = True
