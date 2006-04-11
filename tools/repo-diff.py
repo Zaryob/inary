@@ -61,7 +61,7 @@ if __name__ == "__main__":
     try:
         postfix = sys.argv[2]
     except IndexError:
-        postfix = "system/devel"
+        postfix = ""
 
     tag = getVersion(findPspec(join_path(svnRoot, "tags/pardus-1.0/", postfix)))
     stable = getVersion(findPspec(join_path(svnRoot,"stable/pardus-1/", postfix)))
