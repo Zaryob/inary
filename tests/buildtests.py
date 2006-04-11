@@ -17,7 +17,9 @@ from pisi.build import *
 
 class BuildTestCase(testcase.TestCase):
     def setUp(self):
-        testcase.TestCase.setUp(self)
+        options = pisi.config.Options()
+        options.ignore_build_no = False
+        testcase.TestCase.setUp(self, options = options)
 
     def testBasicBuild(self):
         shutil.copy('tests/buildtests/a/actions.py-1', 'tests/buildtests/a/actions.py')
