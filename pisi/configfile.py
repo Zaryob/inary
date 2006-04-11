@@ -60,7 +60,7 @@ class GeneralDefaults:
     buildhelper = None
     autoclean = False
     distribution = "Pardus"
-    distribution_release = "1.0"
+    distribution_release = "1.1"
     http_proxy = os.getenv("HTTP_PROXY") or None
     https_proxy = os.getenv("HTTPS_PROXY") or None
     ftp_proxy = os.getenv("FTP_PROXY") or None
