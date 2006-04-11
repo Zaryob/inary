@@ -608,7 +608,9 @@ class Builder:
                         ctx.ui.warning('Package file %s may be corrupt. Skipping.' % old_package_fn)
                         continue
 
-        for root, dirs, files in os.walk(ctx.config.options.output_dir):
+        outdir = ctx.config.options.output_dir or '.'
+
+        for root, dirs, files in os.walk(outdir):
             dirs = [] # don't recurse
             locate_package_names(files)
         for root, dirs, files in os.walk(ctx.config.packages_dir()):
