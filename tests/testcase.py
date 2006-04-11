@@ -15,7 +15,6 @@ import pisi
 import pisi.api
 import pisi.util
 import pisi.config
-import pisi.context as ctx
 
 class TestCase(unittest.TestCase):
 
