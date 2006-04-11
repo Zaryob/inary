@@ -411,8 +411,12 @@ class Remove(AtomicOperation):
         else:
             if os.path.isfile(fpath) or os.path.islink(fpath):
                 os.unlink(fpath)
-            elif os.path.isdir(fpath) and os.listdir(fpath)==[]:
-                os.rmdir(fpath)   # remove directory if there is nothing under it
+		dpath = os.path.dirname(fpath)
+		while dpath != '/' and not os.listdir(dpath):
+		    os.rmdir(dpath)
+		    dpath = os.path.dirname(dpath)
+	    elif os.path.isdir(fpath) and not os.listdir(fpath):
+		os.rmdir(fpath)
             else:
                 ctx.ui.warning(_('Not removing non-file, non-link %s') % fpath, True)
 
