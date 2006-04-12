@@ -113,7 +113,8 @@ class ItemByRepoDB(object):
         if not repo:
             return haskey
         else:
-            return haskey and self.d.get(name, txn).has_key(repo)
+            repostr = self.repo_str(repo)
+            return haskey and self.d.get(name, txn).has_key(repostr)
 
     def get_item_repo(self, name, repo = None, txn = None):
         name = str(name)
