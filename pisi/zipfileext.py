@@ -18,6 +18,7 @@
 import os
 import struct
 import time
+import binascii
 
 from zipfile import *
 
@@ -40,6 +41,54 @@ ZIP_BZIP2 = 12
 ZIP_7ZIP = 255
 
 compression_methods = [ZIP_STORED, ZIP_DEFLATED, ZIP_BZIP2, ZIP_7ZIP]
+
+class SevenZipFileEntry:
+    """File-like object used to read a 7zip entry in a ZipFile"""
+
+    def __init__(self, fp, length):
+        self.fp = fp
+        self.returnedBytes = 0
+        self.readBytes = 0
+        self.decomp = pylzma.decompressobj()
+        self.buffer = ""
+        self.length = length
+        self.finished = 0
+        
+    def tell(self):
+        return self.returnedBytes
+    
+    def read(self, n=None):
+        if self.finished:
+            return ""
+        if n is None:
+            result = [self.buffer,]
+            result.append(self.decomp.decompress(self.fp.read(self.length - self.readBytes)))
+            result.append(self.decomp.flush())
+            self.buffer = ""
+            self.finished = 1
+            result = "".join(result)
+            self.returnedBytes += len(result)
+            return result
+        else:
+            while len(self.buffer) < n:
+                data = self.fp.read(min(n, 1024, self.length - self.readBytes))
+                self.readBytes += len(data)
+                if not data:
+                    result = self.buffer + self.decomp.decompress() + self.decomp.flush()
+                    self.finished = 1
+                    self.buffer = ""
+                    self.returnedBytes += len(result)
+                    return result
+                else:
+                    self.buffer += self.decomp.decompress(data)
+            result = self.buffer[:n]
+            self.buffer = self.buffer[n:]
+            self.returnedBytes += len(result)
+            return result
+    
+    def close(self):
+        self.finished = 1
+        del self.fp
 
 class ZipFileExt(ZipFile):
 
@@ -98,6 +147,9 @@ class ZipFileExt(ZipFile):
             if zinfo.compress_type == ZIP_DEFLATED:
                 cmpr = zlib.compressobj(zlib.Z_DEFAULT_COMPRESSION,
                                         zlib.DEFLATED, -15)            
+	    else:
+		cmpr = None
+		
             while 1:
                 buf = fp.read(1024 * 8)
                 if not buf:
@@ -116,12 +168,14 @@ class ZipFileExt(ZipFile):
                 zinfo.compress_size = compress_size
             else:
                 zinfo.compress_size = file_size
+
+        # unfortunately pylzma.compressobj is not implemented yet
         elif zinfo.compress_type == ZIP_7ZIP:
             cmp_fp = pylzma.compressfile(fp, eos=1)
             compressed = ''
             while True:
-                tmp = cmp_fp.read(1)
-                if not tmp: 
+                tmp = cmp_fp.read(1024 * 8)
+                if not tmp:
                     break
                 compressed += tmp
             self.fp.write(compressed)
@@ -137,3 +191,39 @@ class ZipFileExt(ZipFile):
         self.fp.seek(position, 0)
         self.filelist.append(zinfo)
         self.NameToInfo[zinfo.filename] = zinfo
+
+    def readfile(self, name):
+        """Return file-like object for name."""
+        if self.mode not in ("r", "a"):
+            raise RuntimeError, 'read() requires mode "r" or "a"'
+        if not self.fp:
+            raise RuntimeError, \
+                  "Attempt to read ZIP archive that was already closed"
+        zinfo = self.getinfo(name)
+        self.fp.seek(zinfo.file_offset, 0)
+        if zinfo.compress_type == ZIP_STORED:
+            return ZipFileEntry(self.fp, zinfo.compress_size)
+        elif zinfo.compress_type == ZIP_DEFLATED:
+            if not zlib:
+                raise RuntimeError, \
+                      "De-compression requires the (missing) zlib module"
+            return DeflatedZipFileEntry(self.fp, zinfo.compress_size)
+        elif zinfo.compress_type == ZIP_7ZIP:
+            if not pylzma:
+                raise RuntimeError, \
+                      "De-compression requires the (missing) pylzma module"
+	    return SevenZipFileEntry(self.fp, zinfo.compress_size)
+        else:
+            raise BadZipfile, \
+                  "Unsupported compression method %d for file %s" % \
+            (zinfo.compress_type, name)
+
+    def read(self, name):
+        """Return file bytes (as a string) for name."""
+        f = self.readfile(name)
+        zinfo = self.getinfo(name)
+        bytes = f.read()
+        crc = binascii.crc32(bytes)
+        if crc != zinfo.CRC:
+            raise BadZipfile, "Bad CRC-32 for file %s" % name
+        return bytes
