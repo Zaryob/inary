@@ -9,7 +9,7 @@
 #
 # Please read the COPYING file.
 #
-# Authors: {eray,gurer}@uludag.org.tr
+# Authors: {eray,gurer}@pardus.org.tr
 
 import os
 import shutil
@@ -61,8 +61,8 @@ setup(name="pisi",
     long_description="PISI is the package management system of Pardus Linux.",
     license="GNU GPL2",
     author="Pardus Developers",
-    author_email="pisi@uludag.org.tr",
-    url="http://www.uludag.org.tr/eng/pisi/",
+    author_email="pisi@pardus.org.tr",
+    url="http://www.pardus.org.tr/eng/pisi/",
     package_dir = {'': ''},
     packages = ['pisi', 'pisi.cli', 'pisi.actionsapi', 'pisi.pxml', 'pisi.search'],
     scripts = ['pisi-cli', 'tools/repostats.py', 'tools/find-lib-deps.py', 
