@@ -161,11 +161,12 @@ class File:
         self.__file__.close()
         if self.mode == File.write:
             if self.compress == File.bz2:
-                bc = bz2.BZ2Compressor()
-                bc.compress(open(self.localfile).read())
+                bz2file = self.localfile + ".bz2"
+                bz2.BZ2File(bz2file, "w").write(open(self.localfile, "r").read())
 
-                self.localfile = self.localfile + ".bz2"
-                open(self.localfile, "w").write(bc.flush())
+                # FIXME: I hate side effects, but this is designed
+                # that way :(. -- baris
+                self.localfile = bz2file
 
             elif self.compress == File.sevenzip:
                 raise Error(_("sevenzip compression not supported yet"))
