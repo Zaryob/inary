@@ -18,7 +18,7 @@ we are just encapsulating a common pattern in our program, nothing big.
 like all pisi classes, it has been programmed in a non-restricting way
 """
 
-import os, os.path
+import os
 import types
 
 import gettext
@@ -62,7 +62,7 @@ class File:
         "handle URI arg"
         if type(uri) == types.StringType or type(uri) == types.UnicodeType:
             uri = URI(uri)
-        elif type(uri) != URI:
+        elif isinstance(uri, URI):
             raise Error(_("uri must have type either URI or string"))
         return uri
 
@@ -81,7 +81,7 @@ class File:
     def download(uri, transfer_dir = "/tmp", 
                  sha1sum = False, compress = None, sign = None):
 
-        assert type(uri == URI)
+        assert isinstance(uri, URI)
 
         if sha1sum:
             sha1filename = File.download(URI(uri.get_uri() + '.sha1sum'), transfer_dir)
