@@ -9,8 +9,8 @@
 #
 # Please read the COPYING file.
 #
-# Authors: Baris Metin <baris@uludag.org.tr>
-#          Gurer Ozen <gurer@uludag.org.tr>
+# Authors: Baris Metin <baris@pardus.org.tr>
+#          Gurer Ozen <gurer@pardus.org.tr>
 
 import comar
 

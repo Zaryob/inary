@@ -12,8 +12,8 @@
 
 # Context module.
 
-# Authors: Baris Metin <baris@uludag.org.tr
-#          Eray Ozkural <eray@uludag.org.tr>
+# Authors: Baris Metin <baris@pardus.org.tr
+#          Eray Ozkural <eray@pardus.org.tr>
 
 # global variables here
 

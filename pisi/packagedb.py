@@ -13,8 +13,8 @@
 # package database
 # interface for update/query to local package repository
 
-# Authors:  Eray Ozkural <eray@uludag.org.tr>
-#           Baris Metin <baris@uludag.org.tr>
+# Authors:  Eray Ozkural <eray@pardus.org.tr>
+#           Baris Metin <baris@pardus.org.tr>
 
 # we basically store everything in PackageInfo class
 # yes, we are cheap

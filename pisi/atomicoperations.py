@@ -10,7 +10,7 @@
 #
 # Please read the COPYING file.
 #
-# Author:  Eray Ozkural <eray@uludag.org.tr>
+# Author:  Eray Ozkural <eray@pardus.org.tr>
 
 "Atomic package operations such as install/remove/upgrade"
 

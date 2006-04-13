@@ -10,7 +10,7 @@
 # Please read the COPYING file.
 #
 #
-# Author:  Eray Ozkural <eray@uludag.org.tr>
+# Author:  Eray Ozkural <eray@pardus.org.tr>
 
 import pisi
 import pisi.context as ctx

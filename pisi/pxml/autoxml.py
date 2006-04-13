@@ -10,10 +10,10 @@
 # Please read the COPYING file.
 #
 #
-# Authors:  Eray Ozkural <eray@uludag.org.tr>
-#           Gurer Ozen <gurer@uludag.org.tr>
+# Authors:  Eray Ozkural <eray@pardus.org.tr>
+#           Gurer Ozen <gurer@pardus.org.tr>
 #           Bahadir Kandemir <bahadir@haftalik.net>
-#           Baris Metin <baris@uludag.org.tr>
+#           Baris Metin <baris@pardus.org.tr>
 
 
 """
