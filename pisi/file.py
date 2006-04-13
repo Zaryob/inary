@@ -63,7 +63,7 @@ class File:
         "handle URI arg"
         if type(uri) == types.StringType or type(uri) == types.UnicodeType:
             uri = URI(uri)
-        elif isinstance(uri, URI):
+        elif not isinstance(uri, URI):
             raise Error(_("uri must have type either URI or string"))
         return uri
 
