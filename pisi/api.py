@@ -304,7 +304,7 @@ def index(dirs=None, output = 'pisi-index.xml', skip_sources=False):
         repo_dir = str(repo_dir)
         ctx.ui.info(_('* Building index of PISI files under %s') % repo_dir)
         index.index(repo_dir, skip_sources)
-    index.write(output, sha1sum=True, compress=File.xmill, sign=File.detached)
+    index.write(output, sha1sum=True, compress=File.bz2, sign=File.detached)
     ctx.ui.info(_('* Index file written'))
 
 def add_repo(name, indexuri):

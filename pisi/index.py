@@ -65,7 +65,7 @@ class Index(XmlFile):
         urlfile = file(pisi.util.join_path(tmpdir, 'uri'), 'w')
         urlfile.write(filename) # uri
         self.read(filename, tmpDir=tmpdir, sha1sum=not force, 
-                  compress=File.xmill, sign=File.detached)
+                  compress=File.bz2, sign=File.detached)
         if not repo:
             repo = self.distribution.name()
 

@@ -20,6 +20,7 @@ like all pisi classes, it has been programmed in a non-restricting way
 
 import os
 import types
+import bz2
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -53,7 +54,7 @@ class InvalidSignature(pisi.Error):
 class File:
 
     (read, write) = range(2) # modes
-    (xmill, sevenzip) = range(2) # compress enums
+    (bz2, sevenzip) = range(2) # compress enums
 
     (detached, whatelse) = range(2)
 
@@ -68,13 +69,16 @@ class File:
 
     @staticmethod
     def decompress(localfile, compress):
-        if compress == File.xmill:
-            pisi.util.run_batch('xdemill -f ' + localfile)
-            if not localfile.endswith('.xmi'):
-                raise Error(_("xmill compressed filename must end with '.xmi'"))
-            localfile = localfile[:-4] + '.xml'
+        if compress == File.bz2:
+            if not localfile.endswith(".bz2"):
+                raise Error(_("bz2 compressed filename must end with '.bz2'"))
+            
+            open(localfile[:-4], "w").write(bz2.BZ2File(localfile).read())
+            localfile = localfile[:-4]
+
         elif compress == File.sevenzip:
             raise Error(_("sevenzip compression not supported yet"))
+
         return localfile
 
     @staticmethod
@@ -156,16 +160,22 @@ class File:
         "this method must be called at the end of operation"
         self.__file__.close()
         if self.mode == File.write:
-            if self.compress == File.xmill:
-                pisi.util.run_batch('xcmill -9 -f ' + self.localfile)
-                self.localfile = self.localfile[:-4] + '.xmi'
+            if self.compress == File.bz2:
+                bc = bz2.BZ2Compressor()
+                bc.compress(open(self.localfile).read())
+
+                self.localfile = self.localfile + ".bz2"
+                open(self.localfile, "w").write(bc.flush())
+
             elif self.compress == File.sevenzip:
                 raise Error(_("sevenzip compression not supported yet"))
+
             if self.sha1sum:
                 sha1 = pisi.util.sha1_file(self.localfile)
                 cs = file(self.localfile + '.sha1sum', 'w')
                 cs.write(sha1)
                 cs.close()
+
             if self.sign==File.detached:
                 pisi.util.run_batch('gpg --detach-sig ' + self.localfile)
                 
