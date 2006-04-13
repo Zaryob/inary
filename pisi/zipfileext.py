@@ -90,6 +90,84 @@ class SevenZipFileEntry:
         self.finished = 1
         del self.fp
 
+class ZipFileEntry:
+    """File-like object used to read an uncompressed entry in a ZipFile"""
+    
+    def __init__(self, fp, length):
+        self.fp = fp
+        self.readBytes = 0
+        self.length = length
+        self.finished = 0
+        
+    def tell(self):
+        return self.readBytes
+    
+    def read(self, n=None):
+        if n is None:
+            n = self.length - self.readBytes
+        if n == 0 or self.finished:
+            return ''
+        
+        data = self.fp.read(n)
+        self.readBytes += len(data)
+        if self.readBytes == self.length or len(data) <  n:
+            self.finished = 1
+        return data
+
+    def close(self):
+        self.finished = 1
+        del self.fp
+
+
+class DeflatedZipFileEntry:
+    """File-like object used to read a deflated entry in a ZipFile"""
+    
+    def __init__(self, fp, length):
+        self.fp = fp
+        self.returnedBytes = 0
+        self.readBytes = 0
+        self.decomp = zlib.decompressobj(-15)
+        self.buffer = ""
+        self.length = length
+        self.finished = 0
+        
+    def tell(self):
+        return self.returnedBytes
+    
+    def read(self, n=None):
+        if self.finished:
+            return ""
+        if n is None:
+            result = [self.buffer,]
+            result.append(self.decomp.decompress(self.fp.read(self.length - self.readBytes)))
+            result.append(self.decomp.decompress("Z"))
+            result.append(self.decomp.flush())
+            self.buffer = ""
+            self.finished = 1
+            result = "".join(result)
+            self.returnedBytes += len(result)
+            return result
+        else:
+            while len(self.buffer) < n:
+                data = self.fp.read(min(n, 1024, self.length - self.readBytes))
+                self.readBytes += len(data)
+                if not data:
+                    result = self.buffer + self.decomp.decompress("Z") + self.decomp.flush()
+                    self.finished = 1
+                    self.buffer = ""
+                    self.returnedBytes += len(result)
+                    return result
+                else:
+                    self.buffer += self.decomp.decompress(data)
+            result = self.buffer[:n]
+            self.buffer = self.buffer[n:]
+            self.returnedBytes += len(result)
+            return result
+    
+    def close(self):
+        self.finished = 1
+        del self.fp
+
 class ZipFileExt(ZipFile):
 
     def _writecheck(self, zinfo):
@@ -148,7 +226,7 @@ class ZipFileExt(ZipFile):
                 cmpr = zlib.compressobj(zlib.Z_DEFAULT_COMPRESSION,
                                         zlib.DEFLATED, -15)            
 	    else:
-		cmpr = None
+                cmpr = None
 		
             while 1:
                 buf = fp.read(1024 * 8)
@@ -169,15 +247,13 @@ class ZipFileExt(ZipFile):
             else:
                 zinfo.compress_size = file_size
 
-        # unfortunately pylzma.compressobj is not implemented yet
         elif zinfo.compress_type == ZIP_7ZIP:
-            cmp_fp = pylzma.compressfile(fp, eos=1)
-            compressed = ''
-            while True:
-                tmp = cmp_fp.read(1024 * 8)
-                if not tmp:
-                    break
-                compressed += tmp
+            # unfortunately pylzma.compressobj is not implemented yet.
+            # So in order to calculate the CRC, we are going to read
+            # all the file at once until it is implemented.
+            buf = fp.read()
+            CRC = binascii.crc32(buf, CRC)
+            compressed = pylzma.compress(buf, eos=1)
             self.fp.write(compressed)
             zinfo.compress_size = len(compressed)
 

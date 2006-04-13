@@ -17,7 +17,7 @@ import os
 import stat
 import shutil
 import tarfile
-import zipfile
+import zipfileext
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -105,7 +105,7 @@ class ArchiveZip(ArchiveBase):
     def __init__(self, file_path, arch_type = "zip", mode = 'r'):
         super(ArchiveZip, self).__init__(file_path, arch_type)
 
-        self.zip_obj = zipfile.ZipFile(self.file_path, mode)
+        self.zip_obj = zipfileext.ZipFileExt(self.file_path, mode)
 
     def close(self):
         """Close the zip archive."""
@@ -124,13 +124,13 @@ class ArchiveZip(ArchiveBase):
         else:
             if os.path.islink(file_name):
                 dest = os.readlink(file_name)
-                attr = zipfile.ZipInfo()
+                attr = zipfileext.ZipInfo()
                 attr.filename = file_name
                 attr.create_system = 3
                 attr.external_attr = self.symmagic 
                 self.zip_obj.writestr(attr, dest)
             else:
-                self.zip_obj.write(file_name, file_name, zipfile.ZIP_DEFLATED)
+                self.zip_obj.write(file_name, file_name, zipfileext.ZIP_7ZIP)
                 zinfo = self.zip_obj.getinfo(file_name)
                 zinfo.create_system = 3
 
