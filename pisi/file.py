@@ -109,6 +109,8 @@ class File:
             fetch_url(uri, transfer_dir)
         else:
             localfile = uri.get_uri() #TODO: use a special function here?
+            if not os.path.exists(localfile):
+                raise Error(_("Localfile does not exist"))
 
         if sha1sum:        
         
