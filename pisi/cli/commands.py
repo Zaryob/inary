@@ -137,12 +137,12 @@ class Command(object):
         else:
             self.authInfo = None
 
-    def init(self, database = True):
+    def init(self, database = True, write = True):
         """initialize PiSi components"""
         
         # NB: command imports here or in the command class run fxns
         import pisi.api
-        pisi.api.init(database = database, options = self.options,
+        pisi.api.init(database = database, write = write, options = self.options,
                       comar = self.comar)
 
     def finalize(self):
