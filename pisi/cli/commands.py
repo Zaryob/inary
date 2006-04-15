@@ -402,6 +402,7 @@ downloaded from a repository containing sources.
 
     def __init__(self):
         super(Emerge, self).__init__()
+        self.comar = True
 
     name = ("emerge", "em")
 
