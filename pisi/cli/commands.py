@@ -374,7 +374,7 @@ unpack, setup, build, install, package
             if ctx.get_option('until') in Build.steps:
                 raise Error(_('Step must be one of %s ') % pisi.util.strlist(Build.steps))
 
-        self.init(database = True, write = False) 
+        self.init()
         if ctx.get_option('output_dir'):
             ctx.ui.info(_('Output directory: %s') % ctx.config.options.output_dir)
         else:
