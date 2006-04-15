@@ -459,7 +459,6 @@ msgid "Source URI: %s"
 msgstr "Kaynak adresi: %s"
 
 #: pisi/build.py:113
-#, fuzzy
 msgid "Source %s not found in any active repository."
 msgstr "'%s' isimli paket hiç bir etkin depoda bulunamadı."
 
@@ -1166,9 +1165,8 @@ msgstr ""
 "adları olmalılar\n"
 
 #: pisi/cli/commands.py:799
-#, fuzzy
 msgid "rebuild files database"
-msgstr "PİSİ veritabanı güncellensin mi?"
+msgstr "dosya veritabanını güncelle"
 
 #: pisi/cli/commands.py:808
 msgid "Rebuild PISI databases?"
@@ -1289,7 +1287,6 @@ msgstr ""
 "Depoda yayımlanmış olan PİSİ bileşenlerinin kısa bir listesini verir.\n"
 
 #: pisi/cli/commands.py:1031
-#, fuzzy
 msgid ""
 "List available sources\n"
 "\n"
@@ -1297,11 +1294,11 @@ msgid ""
 "\n"
 "Gives a brief list of sources published in the repositories.\n"
 msgstr ""
-"Depolardaki bileşenleri gösterir\n"
+"Kullanılabilir kaynakları gösterir\n"
 "\n"
-"Kullanım: list-components [ <depo1> <depo2> ... depon ]\n"
+"Kullanım: list-sources\n"
 "\n"
-"Depoda yayımlanmış olan PİSİ bileşenlerinin kısa bir listesini verir.\n"
+"Depolarda bulunan kaynakların kısa bir listesini verir.\n"
 
 #: pisi/cli/commands.py:1068
 msgid ""
@@ -1512,9 +1509,8 @@ msgid "No such file or no permission to read"
 msgstr "Öyle bir dosya yok ya da okuma izni yok."
 
 #: pisi/fetcher.py:183
-#, fuzzy
 msgid "Requested range not satisfiable, starting again."
-msgstr "İstenen aralık sağlanamıyor."
+msgstr "İstenen aralık sağlanamıyor, yeniden başlatılıyor"
 
 #: pisi/fetcher.py:190
 msgid "Cannot fetch %s; value error: %s"
@@ -1577,18 +1573,16 @@ msgid "Adding %s to component index"
 msgstr "%s bileşen dizinine ekleniyor"
 
 #: pisi/index.py:120
-#, fuzzy
 msgid "Package %s: metadata corrupt, skipping..."
-msgstr "Paket %s: metadata bozuk"
+msgstr "Paket %s: metadata bozuk, atlanıyor..."
 
 #: pisi/index.py:144
 msgid "Adding %s to source index"
 msgstr "%s kaynak dizinine ekleniyor"
 
 #: pisi/index.py:149
-#, fuzzy
 msgid "SpecFile in %s is corrupt, skipping..."
-msgstr "SpecFile %s bozuk"
+msgstr "SpecFile %s bozuk, atlanıyor..."
 
 #: pisi/installdb.py:59
 msgid "installed"
@@ -1623,9 +1617,8 @@ msgid "Already installed"
 msgstr "Halihazırda yerleştirilmiş."
 
 #: pisi/itembyrepodb.py:108
-#, fuzzy
 msgid "Invalid repository string"
-msgstr "'%s' deposu güncelleniyor."
+msgstr "Geçersiz depo adı"
 
 #: pisi/itembyrepodb.py:122
 #, fuzzy
@@ -1638,18 +1631,15 @@ msgid "Key %s in repo %s not found"
 msgstr "Dosya %s bulunamadı."
 
 #: pisi/lockeddbshelve.py:49
-#, fuzzy
 msgid "Database version for %s insufficient. Please run rebuild-db command."
 msgstr ""
-"Veritabanı versiyonu yetersiz. Lütfen rebuild-db komutunu çalıştırınız."
+"Veritabanı versiyonu (%s) yetersiz. Lütfen rebuild-db komutunu çalıştırınız."
 
 #: pisi/lockeddbshelve.py:51
-#, fuzzy
 msgid ""
 "Database version for %s greater than PiSi version. You need a newer PiSi."
 msgstr ""
-"Veritabanı versiyonu PİSİ versiyonundan büyük. Yeni bir PİSİye "
-"gereksiniminiz var."
+"Veritabanı versiyonu (%s) PİSİ versiyonundan büyük. Yeni bir PİSİ'ye gereksiniminiz var."
 
 #: pisi/lockeddbshelve.py:58
 #, fuzzy
