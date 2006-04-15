@@ -584,14 +584,10 @@ class Builder:
     def calc_build_no(self, package_name):
         """Calculate build number"""
 
-        # find previous build in output dir and packages dir
+        # find previous build in packages dir
         found = []        
         def locate_package_names(files):
             for fn in files:
-                try:
-                    fn = fn.decode('utf-8') # FIXME: why is this necessary?
-                except: # fix 1088
-                    continue
                 if util.is_package_name(fn, package_name):
                     old_package_fn = util.join_path(root, fn)
                     try:
@@ -610,9 +606,6 @@ class Builder:
 
         outdir = ctx.config.options.output_dir or '.'
 
-        for root, dirs, files in os.walk(outdir):
-            dirs = [] # don't recurse
-            locate_package_names(files)
         for root, dirs, files in os.walk(ctx.config.packages_dir()):
             locate_package_names(files)
 
