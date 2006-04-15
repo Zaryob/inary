@@ -110,7 +110,7 @@ class File:
         else:
             localfile = uri.get_uri() #TODO: use a special function here?
             if not os.path.exists(localfile):
-                raise Error(_("Localfile does not exist"))
+                raise Error(_("Localfile %s does not exist" % localfile))
 
         if sha1sum:        
         
