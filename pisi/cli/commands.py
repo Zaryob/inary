@@ -988,7 +988,7 @@ Gives a brief list of PiSi packages published in the repository.
                 if p in installed_list:
                     if ctx.config.get_option('uninstalled'):
                         continue
-                    p = colorize(p, 'cyan')
+                    p = colorize(p, 'green')
                 p = p + ' ' * max(0, 15 - lenp)
                 ctx.ui.info('%s - %s ' % (p, unicode(package.summary)))
 
