@@ -449,39 +449,8 @@ def build(package, authinfo=None):
     import pisi.build
     return pisi.build.build(package, authinfo)
 
-def __is_virtual_upgrade(metadata):
-
-    pkg = metadata.package
-
-    (iversion, irelease, ibuild) = ctx.installdb.get_version(pkg.name)
-    
-    upgrade = False
-    if pkg.version > iversion:
-        upgrade = True
-    elif pkg.release > irelease:
-        upgrade = True
-    elif (ibuild and pkg.build and pkg.build > ibuild):
-        upgrade = True  
-    
-    return upgrade
-
 def virtual_install(metadata, files, txn):
     """Recreate the package info for rebuilddb command"""
-    pkg = metadata.package
-
-    # normally this can't be true. Just for backwards compatibility
-    # TODO: for speed only ctx.installdb.install exception can be
-    # handled but this is much cleaner
-    if ctx.installdb.is_installed(pkg.name, txn=txn):
-        if __is_virtual_upgrade(metadata):
-            ctx.installdb.remove(pkg.name, txn=txn)
-            ctx.packagedb.remove_package(pkg.name, txn=txn)
-            ctx.filesdb.remove_files(ctx.installdb.files(pkg.name), txn=txn)
-        else:
-            return
-
-    pkginfo = metadata.package
-    
     # installdb
     ctx.installdb.install(metadata.package.name,
                           metadata.package.version,
@@ -496,7 +465,7 @@ def virtual_install(metadata, files, txn):
         ctx.filesdb.add_files(metadata.package.name, files, txn=txn)
 
     # installed packages
-    ctx.packagedb.add_package(pkginfo, pisi.itembyrepodb.installed, txn=txn)
+    ctx.packagedb.add_package(metadata.package, pisi.itembyrepodb.installed, txn=txn)
 
 def resurrect_package(package_fn, write_files, txn = None):
     """Resurrect the package from xml files"""
@@ -506,33 +475,23 @@ def resurrect_package(package_fn, write_files, txn = None):
     metadata_xml = util.join_path(ctx.config.lib_dir(), 'package', 
                                   package_fn, ctx.const.metadata_xml)
     if not exists(metadata_xml):
-       raise Error, _("Metadata XML '%s' cannot be found") % metadata_xml
-
+        raise Error, _("Metadata XML '%s' cannot be found") % metadata_xml
+    
     metadata = MetaData()
     metadata.read(metadata_xml)
-
+    
     errs = metadata.errors()
     if errs:   
-       util.Checks.print_errors(errs)
-       raise Error, _("MetaData format wrong (%s)") % package_fn
-
-    # FIXME: there won't be any previous versions of the same package under /var/lib/pisi
-    # therefore there won't be any need for this check and __is_virtual_upgrade function
-    # this is just for backward compatibility for sometime
-
-    # yes, this is an ugly hack
-    passed = False
-    if ctx.installdb.is_installed(metadata.package.name):
-        passed = True
+        util.Checks.print_errors(errs)
+        raise Error, _("MetaData format wrong (%s)") % package_fn
     
-    if not passed:
-        ctx.ui.info(_('* Adding \'%s\' to db... ') % (metadata.package.name), noln=True)
-    
+    ctx.ui.info(_('* Adding \'%s\' to db... ') % (metadata.package.name), noln=True)
+
     if write_files:
         files_xml = util.join_path(ctx.config.lib_dir(), 'package',
-                                   package_fn, ctx.const.files_xml)
+                                package_fn, ctx.const.files_xml)
         if not exists(files_xml):
-           raise Error, _("Files XML '%s' cannot be found") % files_xml
+            raise Error, _("Files XML '%s' cannot be found") % files_xml
     
         files = Files()
         files.read(files_xml)
@@ -546,5 +505,4 @@ def resurrect_package(package_fn, write_files, txn = None):
         pisi.atomicoperations.virtual_install(metadata, files, t)
     ctx.txn_proc(f, txn)
 
-    if not passed:
-        ctx.ui.info(_('OK.'))
+    ctx.ui.info(_('OK.'))
