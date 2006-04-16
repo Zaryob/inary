@@ -361,7 +361,9 @@ unpack, setup, build, install, package
         self.parser.add_option("-B", "--ignore-comar", action="store_true",
                                default=False, help=_("bypass comar configuration agent"))
         self.parser.add_option("-S", "--create-static", action="store_true",
-                               default=False, help=_("automatically create a *-static package with ar files"))
+                               default=False, help=_("automatically create a static package with ar files"))
+        self.parser.add_option("-g", "--create-debug", action="store_true",
+                               default=False, help=_("automatically create a debug package with debug files"))
 
 
     def run(self):

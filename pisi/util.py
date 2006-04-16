@@ -525,13 +525,13 @@ def strip_file(filepath):
 
     def save_elf_debug(f):
         """copy debug info into file.debug file"""
-        p = os.popen("objcopy --only-keep-debug %s %s.debug" % (f, f))
+        p = os.popen("objcopy --only-keep-debug %s %s%s" % (f, f, ctx.const.debug_file_suffix))
         ret = p.close()
         if ret:
             ctx.ui.warning(_("objcopy (keep-debug) command failed for file '%s'!") % f)
         
         """mark binary/shared objects to use file.debug"""
-        p = os.popen("objcopy --add-gnu-debuglink=%s.debug %s" % (f, f))
+        p = os.popen("objcopy --add-gnu-debuglink=%s%s %s" % (f, ctx.const.debug_file_suffix, f))
         ret = p.close()
         if ret:
             ctx.ui.warning(_("objcopy (add-debuglink) command failed for file '%s'!") % f)
@@ -541,13 +541,13 @@ def strip_file(filepath):
         return True
 
     elif "SB executable" in o:
-        if ctx.config.values.build.debug == "True":
+        if ctx.get_option('create_debug'):
             save_elf_debug(filepath)
         run_strip(filepath)
         return True
 
     elif "SB shared object" in o:
-        if ctx.config.values.build.debug == "True":
+        if ctx.get_option('create_debug'):
             save_elf_debug(filepath)
         run_strip(filepath, "--strip-unneeded")
         # FIXME: warn for TEXTREL

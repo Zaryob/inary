@@ -75,8 +75,9 @@ def check_path_collision(package, pkgList):
                 # collide. Exp:
                 # pinfo.path: /usr/share
                 # path.path: /usr/share/doc
-                if path.path.endswith(ctx.const.ar_file_suffix) and ctx.get_option('create_static'):
-                    # don't throw collision error for ar files. 
+                if (path.path.endswith(ctx.const.ar_file_suffix) and ctx.get_option('create_static')) or \
+                   (path.path.endswith(ctx.const.debug_file_suffix) and ctx.get_option('create_debug')):
+                    # don't throw collision error for these files. 
                     # we'll handle this in gen_files_xml..
                     continue
                 if util.subpath(pinfo.path, path.path):
@@ -488,6 +489,28 @@ class Builder:
 
         return static_package_obj
 
+    def generate_debug_package_object(self):
+        debug_files = []
+        for root, dirs, files in os.walk(self.pkg_install_dir()):
+            for f in files:
+                if f.endswith(ctx.const.debug_file_suffix):
+                    debug_files.append(util.join_path(root, f))
+
+        if not len(debug_files):
+            return None
+
+        static_package_obj = pisi.specfile.Package()
+        static_package_obj.name = self.spec.source.name + ctx.const.debug_name_suffix
+        # FIXME: find a better way to deal with the summary and description constants.
+        static_package_obj.summary['en'] = u'Debug files for %s' % (self.spec.source.name)
+        static_package_obj.description['en'] = u'Debug files for %s' % (self.spec.source.name)
+        static_package_obj.partOf = 'library:debug'
+        for f in debug_files:
+            static_package_obj.files.append(pisi.specfile.Path(path = f[len(self.pkg_install_dir()):], fileType = "debug"))
+        static_package_obj.packageDependencies.append(pisi.dependency.Dependency(package = self.spec.source.name))
+
+        return static_package_obj
+
     def strip_install_dir(self):
         """strip install directory"""
         ctx.ui.action(_("Stripping files.."))
@@ -555,11 +578,17 @@ class Builder:
         def add_path(path):
             # add the files under material path 
             for fpath, fhash in util.get_file_hashes(path, collisions, install_dir):
-                if  ctx.get_option('create_static') \
+                if ctx.get_option('create_static') \
                     and fpath.endswith(ctx.const.ar_file_suffix) \
                     and not package.name.endswith(ctx.const.static_name_suffix) \
                     and util.is_ar_file(fpath):
-                    # if this is an ar file, and this package is not a -static package,
+                    # if this is an ar file, and this package is not a static package,
+                    # don't include this file into the package.
+                    continue
+                if ctx.get_option('create_debug') \
+                    and fpath.endswith(ctx.const.debug_file_suffix) \
+                    and not package.name.endswith(ctx.const.debug_name_suffix):
+                    # if this is a debug file, and this package is not a debug package,
                     # don't include this file into the package.
                     continue
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
@@ -669,6 +698,11 @@ class Builder:
 
         if ctx.get_option('create_static'):
             obj = self.generate_static_package_object()
+            if obj:
+                self.spec.packages.append(obj)
+
+        if ctx.get_option('create_debug'):
+            obj = self.generate_debug_package_object()
             if obj:
                 self.spec.packages.append(obj)
 
