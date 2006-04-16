@@ -35,9 +35,7 @@ import pisi.repodb
 from pisi.itembyrepodb import ItemByRepoDB
 
 class NotfoundError(pisi.Error):
-    def __init__(self, spec):
-        pisi.Error.__init__("Package %s not found" % spec)
-        self.spec = spec
+    pass
 
 class SourceDB(object):
 
@@ -59,13 +57,13 @@ class SourceDB(object):
         try:
             return self.d.get_item(name, repo, txn)
         except pisi.itembyrepodb.NotfoundError, e:
-            raise NotfoundError(name)
+            raise NotfoundError(_("Source package %s not found" % name))
 
     def get_spec_repo(self, name, repo=None, txn = None):
         try:
             return self.d.get_item_repo(name, repo, txn)
         except pisi.itembyrepodb.NotfoundError, e:
-            raise NotfoundError(name)
+            raise NotfoundError(_("Source package %s not found" % name))
 
     def pkgtosrc(self, name, txn = None):
         return self.dpkgtosrc.get_item(name, txn=txn)
