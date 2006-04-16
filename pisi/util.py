@@ -530,7 +530,7 @@ def strip_file(filepath):
         if ret:
             ctx.ui.warning(_("objcopy (keep-debug) command failed for file '%s'!") % f)
         
-        """mark binary/shared objects to use /debug/PACKAGE_NAME/file.debug"""
+        """mark binary/shared objects to use file.debug"""
         p = os.popen("objcopy --add-gnu-debuglink=%s.debug %s" % (f, f))
         ret = p.close()
         if ret:
