@@ -642,7 +642,8 @@ Usage: info <package1> <package2> ... <packagen>
                 else:
                     ctx.ui.info(_('Installed package:'))
                 self.print_pkginfo(metadata, files)
-            elif ctx.packagedb.has_package(arg):
+                
+            if ctx.packagedb.has_package(arg):
                 metadata, files = pisi.api.info_name(arg, False)
                 if ctx.get_option('short'):
                     ctx.ui.info(_('[repo] '), noln=True)
