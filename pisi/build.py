@@ -492,12 +492,11 @@ class Builder:
         """strip install directory"""
         ctx.ui.action(_("Stripping files.."))
         install_dir = self.pkg_install_dir()
-        pkg_name = self.spec.source.name + '-' + self.spec.source.version + '-' + self.spec.source.release
         try:
             nostrip = self.actionGlobals['NoStrip']
-            util.strip_directory(install_dir, pkg_name, nostrip)
+            util.strip_directory(install_dir, nostrip)
         except KeyError:
-            util.strip_directory(install_dir, pkg_name)
+            util.strip_directory(install_dir)
 
     def gen_metadata_xml(self, package):
         """Generate the metadata.xml file for build source.
