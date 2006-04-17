@@ -23,7 +23,7 @@ import pisi.actionsapi
 import pisi.context as ctx
 
 # ActionsAPI Modules
-from variables import glb
+import pisi.actionsapi.variables
 
 class BinutilsError(pisi.actionsapi.Error):
     def __init__(self, value=''):
@@ -32,8 +32,8 @@ class BinutilsError(pisi.actionsapi.Error):
         ctx.ui.error(value)
 
 # Globals                                
-env = glb.env
-dirs = glb.dirs
+env = pisi.actionsapi.variables.glb.env
+dirs = pisi.actionsapi.variables.glb.dirs
 
 def curDIR():
     '''returns current work directory's path'''

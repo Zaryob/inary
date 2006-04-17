@@ -74,13 +74,25 @@ class Dirs:
     localstate = 'var/lib'
     defaultprefix = 'usr'
 
-    values = ctx.config.values
-    kde = values.dirs.kde_dir
-    qt = values.dirs.qt_dir
+    # These should be owned by object not the class. Or else Python
+    # will bug us with NoneType errors because of uninitialized
+    # context (ctx) because of the import in build.py.
+    def __init__(self):
+        self.values = ctx.config.values
+        self.kde = self.values.dirs.kde_dir
+        self.qt = self.values.dirs.qt_dir
+
+
+# As we import this module from build.py, we can't init glb as a
+# singleton here.  Or else Python will bug us with NoneType errors
+# because of uninitialized context (ctx) because of exportFlags().
+#
+# We import this modue from build.py becase we need to reset/init glb
+# for each build. # See bug #2575
+glb = None
 
 def initVariables():
+    global glb
     ctx.env = Env()
     ctx.dirs = Dirs()
-    return ctx
-
-glb = initVariables()
+    glb = ctx

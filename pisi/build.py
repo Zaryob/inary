@@ -40,6 +40,8 @@ from pisi.metadata import MetaData
 from pisi.package import Package
 import pisi.component as component
 
+import pisi.actionsapi.variables
+
 
 class Error(pisi.Error):
     pass
@@ -202,6 +204,11 @@ class Builder:
 
     def set_environment_vars(self):
         """Sets the environment variables for actions API to use"""
+
+        # Each time a builder is created we must reset
+        # environment. See bug #2575
+        pisi.actionsapi.variables.initVariables()
+
         env = {
             "PKG_DIR": self.pkg_dir(),
             "WORK_DIR": self.pkg_work_dir(),
