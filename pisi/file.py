@@ -162,13 +162,10 @@ class File:
         "this method must be called at the end of operation"
         self.__file__.close()
         if self.mode == File.write:
+            compressed_file = None
             if self.compress == File.bz2:
-                bz2file = self.localfile + ".bz2"
-                bz2.BZ2File(bz2file, "w").write(open(self.localfile, "r").read())
-
-                # FIXME: I hate side effects, but this is designed
-                # that way :(. -- baris
-                self.localfile = bz2file
+                compressed_file = self.localfile + ".bz2"
+                bz2.BZ2File(compressed_file, "w").write(open(self.localfile, "r").read())
 
             elif self.compress == File.sevenzip:
                 raise Error(_("sevenzip compression not supported yet"))
@@ -178,10 +175,17 @@ class File:
                 cs = file(self.localfile + '.sha1sum', 'w')
                 cs.write(sha1)
                 cs.close()
+                if compressed_file:
+                    sha1 = pisi.util.sha1_file(compressed_file)
+                    cs = file(compressed_file + '.sha1sum', 'w')
+                    cs.write(sha1)
+                    cs.close()
 
             if self.sign==File.detached:
                 pisi.util.run_batch('gpg --detach-sig ' + self.localfile)
-                
+                if compressed_file:
+                    pisi.util.run_batch('gpg --detach-sig ' + compressed_file)
+
     @staticmethod
     def check_signature(uri, transfer_dir, sign=detached):
         if sign==File.detached:

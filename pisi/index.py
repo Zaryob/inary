@@ -67,8 +67,18 @@ class Index(XmlFile):
 	    urlfile = file(pisi.util.join_path(tmpdir, 'uri'), 'w')
 	    urlfile.write(filename) # uri
 
-        self.read(filename, tmpDir=tmpdir, sha1sum=not force, 
-                  compress=File.bz2, sign=File.detached)
+
+        # FIXME: This is a mess, we have a compress flag and we have to
+        # use it with filename extention. Because File.decompress also
+        # checks the extension. We really have to go all over the code
+        # and simplify it. -- baris
+        if filename.endswith(".bz2"):
+            self.read(filename, tmpDir=tmpdir, sha1sum=not force, 
+                      compress=File.bz2, sign=File.detached)
+        else:
+            self.read(filename, tmpDir=tmpdir, sha1sum=not force,
+                      compress=None, sign=File.detached)
+
         if not repo:
             repo = self.distribution.name()
 
