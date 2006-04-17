@@ -347,6 +347,21 @@ def update_repo(repo, force=False):
     else:
         raise Error(_('No repository named %s found.') % repo)
 
+def rebuild_repo(repo):
+    ctx.ui.info(_('* Rebuilding \'%s\' named repo... ') % repo, noln=True)
+    
+    index = Index()
+    if ctx.repodb.has_repo(repo):
+        repouri = ctx.repodb.get_repo(repo).indexuri.get_uri()
+        indexname = os.path.basename(repouri)
+        repouri = pisi.util.join_path(ctx.config.lib_dir(), 'index', repo, indexname)
+        index.read_uri(repouri, repo, force = True)
+    else:
+        raise Error(_('No repository named %s found.') % repo)
+    
+    ctx.txn_proc(lambda txn : index.update_db(repo, txn=txn))
+    ctx.ui.info(_('OK.'))
+    
 def delete_cache():
     util.clean_dir(ctx.config.packages_dir())
     util.clean_dir(ctx.config.archives_dir())
@@ -375,12 +390,20 @@ def rebuild_db(files=False):
                     #os.unlink(fn)
         ctx.dbenv.close()
 
-    def reload(files, txn):
+    def reload_packages(files, txn):
         for package_fn in os.listdir( pisi.util.join_path( ctx.config.lib_dir(),
                                                            'package' ) ):
             if not package_fn == "scripts":
                 ctx.ui.debug('Resurrecting %s' % package_fn)
                 pisi.api.resurrect_package(package_fn, files, txn)
+
+    def reload_indexes(txn):
+        for repo in os.listdir( pisi.util.join_path( ctx.config.lib_dir(),
+                                                     'index' ) ):
+            indexuri = pisi.util.join_path(ctx.config.lib_dir(), 'index', repo, 'uri')
+            indexuri = open(indexuri, 'r').readline()
+            pisi.api.add_repo(repo, indexuri)
+            pisi.api.rebuild_repo(repo)
 
     # check db schema versions
     try:
@@ -399,4 +422,5 @@ def rebuild_db(files=False):
     # construct new database version
     init(database=True, options=options, ui=ui, comar=comar)
     #ctx.txn_proc(reload)
-    reload(files, None)
+    reload_packages(files, None)
+    reload_indexes(None)
