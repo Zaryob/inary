@@ -62,8 +62,11 @@ class Index(XmlFile):
             tmpdir = os.path.join(ctx.config.tmp_dir(), 'index')
             pisi.util.clean_dir(tmpdir)
         pisi.util.check_dir(tmpdir)
-        urlfile = file(pisi.util.join_path(tmpdir, 'uri'), 'w')
-        urlfile.write(filename) # uri
+
+	if not force:
+	    urlfile = file(pisi.util.join_path(tmpdir, 'uri'), 'w')
+	    urlfile.write(filename) # uri
+
         self.read(filename, tmpDir=tmpdir, sha1sum=not force, 
                   compress=File.bz2, sign=File.detached)
         if not repo:
