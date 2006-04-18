@@ -514,6 +514,9 @@ class Builder:
         static_package_obj.partOf = 'library:debug'
         for f in debug_files:
             static_package_obj.files.append(pisi.specfile.Path(path = f[len(self.pkg_install_dir()):], fileType = "debug"))
+
+        # FIXME: This cause a dependency problem for one source -> multi binary packages. For example mysql source package
+        # has mysql-lib, -server and -client but mysql-debug package depends mysql which is not exists so it cannot installed. 
         static_package_obj.packageDependencies.append(pisi.dependency.Dependency(package = self.spec.source.name))
 
         return static_package_obj
