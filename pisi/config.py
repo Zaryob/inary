@@ -95,7 +95,13 @@ class Config(object):
         return self.subdir(self.values.dirs.index_dir)
 
     def tmp_dir(self):
-        return self.subdir(self.values.dirs.tmp_dir)
+        sysdir = self.subdir(self.values.dirs.tmp_dir)
+        userdir = '/tmp/pisi-' + os.environ['USER'] # FIXME: too unix specific?
+        # check write access
+        if os.access(sysdir, os.W_OK):
+            return sysdir
+        else:
+            return userdir
 
     # bu dizini neden kullanıyoruz? Yalnızca index.py içerisinde
     # kullanılıyor ama /var/tmp/pisi/install gibi bir dizine niye
