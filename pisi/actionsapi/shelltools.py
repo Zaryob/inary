@@ -122,6 +122,7 @@ def move(source, destination):
         else:
             error(_('ActionsAPI [move]: File %s doesn\'t exists.') % (filePath))
 
+# FIXME: instead of passing a sym parameter, split copy and copytree into 4 different function
 def copy(source, destination, sym = True):
     '''recursively copy a "source" file or directory to "destination"'''
     for filePath in glob.glob(source):
@@ -138,10 +139,10 @@ def copy(source, destination, sym = True):
                     os.remove(destination)
                 os.symlink(os.readlink(filePath), destination)
         elif isLink(filePath) and not sym:
-            if isDirectory(os.readlink(filePath)):
-                copytree(os.readlink(filePath), destination)
+            if isDirectory(filePath):
+                copytree(filePath, destination)
             else:
-                shutil.copy(os.readlink(filePath), destination)
+                shutil.copy(filePath, destination)
         elif isDirectory(filePath):
             copytree(filePath, destination, sym)
         else:

@@ -55,11 +55,6 @@ def doexe(sourceFile, destinationDirectory):
     ''' example call: pisitools.doexe("kde-3.4.sh", "/etc/X11/Sessions")'''
     executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
 
-def dohard(sourceFile, destinationFile):
-    '''creates hard link between sourceFile and destinationFile'''
-    #FIXME: How can i use hard-links in Python?
-    ctx.ui.warning('*** Hard links not implemented yet')
-
 def dohtml(*sourceFiles):
     '''inserts the files in the list of files into /usr/share/doc/PACKAGE/html'''
  
