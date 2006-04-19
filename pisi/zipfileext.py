@@ -224,9 +224,9 @@ class ZipFileExt(ZipFile):
             if zinfo.compress_type == ZIP_DEFLATED:
                 cmpr = zlib.compressobj(zlib.Z_DEFAULT_COMPRESSION,
                                         zlib.DEFLATED, -15)            
-	    else:
+            else:
                 cmpr = None
-		
+
             while 1:
                 buf = fp.read(1024 * 8)
                 if not buf:
@@ -292,7 +292,7 @@ class ZipFileExt(ZipFile):
             if not pylzma:
                 raise RuntimeError, \
                       "De-compression requires the (missing) pylzma module"
-	    return LzmaFileEntry(self.fp, zinfo.compress_size)
+            return LzmaFileEntry(self.fp, zinfo.compress_size)
         else:
             raise BadZipfile, \
                   "Unsupported compression method %d for file %s" % \
