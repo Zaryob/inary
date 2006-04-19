@@ -12,7 +12,7 @@
 # Authors:  Eray Ozkural <eray@pardus.org.tr>
 #           Faik Uygur   <faik@pardus.org.tr>
 #
-# Extends zipfile module with LZMA and bzip2 support
+# Extends zipfile module with lzma and bzip2 support
 
 # python standard library modules
 import os
@@ -48,10 +48,11 @@ class FileEntry:
     def __init__(self, fp, length):
         self.fp = fp
         self.readBytes = 0
+        self.returnedBytes = 0
         self.length = length
         self.finished = 0
 
-class LZMAFileEntry(FileEntry):
+class LzmaFileEntry(FileEntry):
     """File-like object used to read a LZMA entry in a ZipFile"""
 
     def __init__(self, fp, length):
@@ -291,7 +292,7 @@ class ZipFileExt(ZipFile):
             if not pylzma:
                 raise RuntimeError, \
                       "De-compression requires the (missing) pylzma module"
-	    return LZMAFileEntry(self.fp, zinfo.compress_size)
+	    return LzmaFileEntry(self.fp, zinfo.compress_size)
         else:
             raise BadZipfile, \
                   "Unsupported compression method %d for file %s" % \
