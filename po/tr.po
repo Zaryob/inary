@@ -28,7 +28,6 @@ msgid "Program Terminated."
 msgstr "Program sonlandırıldı."
 
 #: pisi-cli:42
-#, fuzzy
 msgid ""
 "A database operation has been aborted. You should run pisi\n"
 "again for normal DB recovery procedure. Make sure you have free disk "
@@ -37,8 +36,9 @@ msgid ""
 msgstr ""
 "Bir veritabanı işlemi yarıda kesildi. PİSİ'yi normal veritabanı  \n"
 "düzeltme işlemi için yeniden çalıştırmalısınız. Boş disk \n"
-"alanınız olması gerekir. Sadece dosya bozulması olduğu \n"
-"zaman rebuild-db komutunu kullanmanız gerekir."
+"alanınızın bulunduğuna emin olun.\n"
+"Sadece dosya bozulması olduğu zaman rebuild-db komutunu \n"
+"kullanmanız gerekir."
 
 #: pisi-cli:47
 msgid ""
@@ -1621,14 +1621,12 @@ msgid "Invalid repository string"
 msgstr "Geçersiz depo adı"
 
 #: pisi/itembyrepodb.py:122
-#, fuzzy
 msgid "Key %s not found"
-msgstr "Dosya %s bulunamadı."
+msgstr "'%s' anahtarı bulunamadı."
 
 #: pisi/itembyrepodb.py:132
-#, fuzzy
 msgid "Key %s in repo %s not found"
-msgstr "Dosya %s bulunamadı."
+msgstr "'%s' anahtarı '%s' deposunda bulunamadı."
 
 #: pisi/lockeddbshelve.py:49
 msgid "Database version for %s insufficient. Please run rebuild-db command."
@@ -1852,11 +1850,11 @@ msgstr "Paket boyu: %.2f %s"
 
 #: pisi/package.py:81
 msgid "Trying to fetch xdelta: %s"
-msgstr ""
+msgstr "xdelta bilgisi alınıyor: %s"
 
 #: pisi/package.py:85
 msgid "XDelta %s: not exists"
-msgstr ""
+msgstr "XDelta %s: bulunamadı"
 
 #: pisi/package.py:97 pisi/sourcearchive.py:59
 msgid "%s [cached]"
@@ -2280,9 +2278,8 @@ msgid "Reading standard input"
 msgstr ""
 
 #: tools/pygettext.py:633
-#, fuzzy
 msgid "Working on %s"
-msgstr "%s saklanıyor"
+msgstr "%s üzerinde çalışma yapılıyor"
 
 #: tools/pygettext.py:666
 msgid "a unicode string"
