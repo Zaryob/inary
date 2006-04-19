@@ -49,7 +49,7 @@ def getNodeAttribute(node, attrname):
     """get named attribute from DOM node"""
     return node.getAttribute(attrname)
 
-def getChildElts(node):
+def getChildElts(parent):
     """get only child elements"""
     return [x for x in parent.tags()]
 
@@ -105,8 +105,8 @@ def addText(node, tagpath, text):
             if node.getTag(tag):
                 node = node.getTag(tag)
             else:
-                node = node.appendTag(tag)
-    node.appendData(text)
+                node = node.insertTag(tag)
+    node.insertData(text)
 
 def createTagPath(node, tags):
     """create new child at the end of a tag chain starting from node
@@ -114,7 +114,7 @@ def createTagPath(node, tags):
     if len(tags)==0:
         return node
     for tag in tags:
-        node = node.appendTag(tag)
+        node = node.insertTag(tag)
     return node
 
 def addTagPath(node, tags, newnode=None):
