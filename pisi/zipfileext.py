@@ -12,7 +12,7 @@
 # Authors:  Eray Ozkural <eray@pardus.org.tr>
 #           Faik Uygur   <faik@pardus.org.tr>
 #
-# Extends zipfile module with 7zip and bzip2 support
+# Extends zipfile module with LZMA and bzip2 support
 
 # python standard library modules
 import os
@@ -38,21 +38,26 @@ except ImportError:
     pylzma = None
 
 ZIP_BZIP2 = 12
-ZIP_7ZIP = 255
+ZIP_LZMA = 255
 
-compression_methods = [ZIP_STORED, ZIP_DEFLATED, ZIP_BZIP2, ZIP_7ZIP]
+compression_methods = [ZIP_STORED, ZIP_DEFLATED, ZIP_BZIP2, ZIP_LZMA]
 
-class SevenZipFileEntry:
-    """File-like object used to read a 7zip entry in a ZipFile"""
-
+class FileEntry:
+    """File-like object used to access entries in a ZipFile"""
+    
     def __init__(self, fp, length):
         self.fp = fp
-        self.returnedBytes = 0
         self.readBytes = 0
-        self.decomp = pylzma.decompressobj()
-        self.buffer = ""
         self.length = length
         self.finished = 0
+
+class LZMAFileEntry(FileEntry):
+    """File-like object used to read a LZMA entry in a ZipFile"""
+
+    def __init__(self, fp, length):
+        FileEntry.__init__(self, fp, length)
+        self.decomp = pylzma.decompressobj()
+        self.buffer = ""
         
     def tell(self):
         return self.returnedBytes
@@ -90,14 +95,11 @@ class SevenZipFileEntry:
         self.finished = 1
         del self.fp
 
-class ZipFileEntry:
+class ZipFileEntry(FileEntry):
     """File-like object used to read an uncompressed entry in a ZipFile"""
     
     def __init__(self, fp, length):
-        self.fp = fp
-        self.readBytes = 0
-        self.length = length
-        self.finished = 0
+        FileEntry.__init__(self, fp, length)
         
     def tell(self):
         return self.readBytes
@@ -119,17 +121,13 @@ class ZipFileEntry:
         del self.fp
 
 
-class DeflatedZipFileEntry:
+class DeflatedZipFileEntry(FileEntry):
     """File-like object used to read a deflated entry in a ZipFile"""
     
     def __init__(self, fp, length):
-        self.fp = fp
-        self.returnedBytes = 0
-        self.readBytes = 0
+        FileEntry.__init__(self, fp, length)
         self.decomp = zlib.decompressobj(-15)
         self.buffer = ""
-        self.length = length
-        self.finished = 0
         
     def tell(self):
         return self.returnedBytes
@@ -189,7 +187,7 @@ class ZipFileExt(ZipFile):
         if zinfo.compress_type == ZIP_BZIP2 and not bzip2:
             raise RuntimeError, \
                   "Compression requires the (missing) bzip2 module"
-        if zinfo.compress_type == ZIP_7ZIP and not pylzma:
+        if zinfo.compress_type == ZIP_LZMA and not pylzma:
             raise RuntimeError, \
                   "Compression requires the (missing) pylzma module"
 
@@ -247,7 +245,7 @@ class ZipFileExt(ZipFile):
             else:
                 zinfo.compress_size = file_size
 
-        elif zinfo.compress_type == ZIP_7ZIP:
+        elif zinfo.compress_type == ZIP_LZMA:
             # unfortunately pylzma.compressobj is not implemented yet.
             # So in order to calculate the CRC, we are going to read
             # all the file at once until it is implemented.
@@ -284,11 +282,16 @@ class ZipFileExt(ZipFile):
                 raise RuntimeError, \
                       "De-compression requires the (missing) zlib module"
             return DeflatedZipFileEntry(self.fp, zinfo.compress_size)
-        elif zinfo.compress_type == ZIP_7ZIP:
+##        elif zinfo.compress_type == ZIP_BZIP2:
+##            if not bzip2:
+##                raise RuntimeError, \
+##                      "De-compression requires the (missing) bzip2 module"
+##	    return LZMAFileEntry(self.fp, zinfo.compress_size)
+        elif zinfo.compress_type == ZIP_LZMA:
             if not pylzma:
                 raise RuntimeError, \
                       "De-compression requires the (missing) pylzma module"
-	    return SevenZipFileEntry(self.fp, zinfo.compress_size)
+	    return LZMAFileEntry(self.fp, zinfo.compress_size)
         else:
             raise BadZipfile, \
                   "Unsupported compression method %d for file %s" % \
