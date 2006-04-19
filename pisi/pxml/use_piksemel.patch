@@ -1,6 +1,6 @@
 diff -u pxml/autoxml.py zxml/autoxml.py
---- pxml/autoxml.py	2006-04-19 09:27:56.000000000 +0300
-+++ zxml/autoxml.py	2006-04-19 03:23:09.000000000 +0300
+--- pxml/autoxml.py	2006-04-19 11:17:50.000000000 +0300
++++ zxml/autoxml.py	2006-04-19 11:13:39.000000000 +0300
 @@ -11,7 +11,6 @@
  #
  #
@@ -56,9 +56,9 @@ diff -u pxml/autoxml.py zxml/autoxml.py
 -            newtext = newTextNode(node, self[key])
 -            newnode.appendChild(newtext)
 -            node.appendChild(newnode)
-+            tag = node.appendTag(self.tag)
++            tag = node.insertTag(self.tag)
 +            tag.setAttribute('xml:lang', key)
-+            tag.appendData(self[key])
++            tag.insertData(self[key])
  
      #FIXME: maybe more appropriate for pisi.util
      @staticmethod
@@ -80,20 +80,22 @@ diff -u pxml/autoxml.py zxml/autoxml.py
                  try:
                      #FIXME: this doesn't look pretty
 -                    classnode = newNode(node, tag)
-+                    classnode = node.appendTag(tag)
++                    classnode = node.insertTag(tag)
                      obj.encode(classnode, errs)
 -                    node.appendChild(classnode)
                  except Error:
                      if req == mandatory:
                          # note: we can receive an error if obj has no content
-@@ -743,15 +738,14 @@
+@@ -743,15 +738,16 @@
                  errs.append(where + ': ' + _('Mandatory list empty'))
              ix = 1
              for node in nodes:
 -                dummy = newNode(node, "Dummy")
 -                dummy.appendChild(node)
++                #print "[%s]" % node.toString()
 +                dummy = iks.newDocument("Dummy")
-+                dummy.appendNode(node)
++                dummy.insertNode(node)
++                #print "blaah"
                  l.append(decode_item(dummy, errs, where + unicode("[%s]" % ix)))
                  #l.append(decode_item(node, errs, where + unicode("[%s]" % ix)))
                  ix += 1
@@ -105,10 +107,9 @@ diff -u pxml/autoxml.py zxml/autoxml.py
                  for item in l:
                      if list_tagpath:
 Ortak alt dizinler: pxml/.svn ve zxml/.svn
-Yalnızca pxml/'da: use_piksemel.patch
 diff -u pxml/xmlext.py zxml/xmlext.py
---- pxml/xmlext.py	2006-04-19 09:27:56.000000000 +0300
-+++ zxml/xmlext.py	2006-04-19 09:30:11.000000000 +0300
+--- pxml/xmlext.py	2006-04-19 11:17:50.000000000 +0300
++++ zxml/xmlext.py	2006-04-19 09:30:53.000000000 +0300
 @@ -12,9 +12,10 @@
  # Authors:  Eray Ozkural <eray@pardus.org.tr>
  
@@ -132,8 +133,8 @@ diff -u pxml/xmlext.py zxml/xmlext.py
 +#XHTML_NS = unicode(XHTML_NAMESPACE)
 +#XML_NS = unicode(XML_NAMESPACE)
 diff -u pxml/xmlfile.py zxml/xmlfile.py
---- pxml/xmlfile.py	2006-04-19 09:27:56.000000000 +0300
-+++ zxml/xmlfile.py	2006-04-19 00:05:35.000000000 +0300
+--- pxml/xmlfile.py	2006-04-19 11:17:50.000000000 +0300
++++ zxml/xmlfile.py	2006-04-19 09:30:53.000000000 +0300
 @@ -14,8 +14,7 @@
  import pisi.context
  
