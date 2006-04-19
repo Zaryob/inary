@@ -322,9 +322,8 @@ msgid "No repository named %s found."
 msgstr "'%s' adında bir depo bulunamadı."
 
 #: pisi/api.py:369
-#, fuzzy
 msgid "* Rebuilding '%s' named repo... "
-msgstr "* '%s' veritabanına ekleniyor... "
+msgstr "* '%s' isimli depo yeniden inşa ediliyor... "
 
 #: pisi/api.py:381 pisi/atomicoperations.py:508
 msgid "OK."
@@ -1125,9 +1124,8 @@ msgid "do not sign index."
 msgstr ""
 
 #: pisi/cli/commands.py:738
-#, fuzzy
 msgid "do not recurse into directories."
-msgstr "Şu andaki dizini indeksliyor."
+msgstr "dizinlerin içine girme."
 
 #: pisi/cli/commands.py:750
 msgid "Indexing current directory."
@@ -1481,19 +1479,19 @@ msgstr "Sabit %s kaldırılamaz"
 
 #: pisi/dependency.py:42
 msgid " version >= "
-msgstr ""
+msgstr " versiyon >= "
 
 #: pisi/dependency.py:44
 msgid " version <= "
-msgstr ""
+msgstr " versiyon <= "
 
 #: pisi/dependency.py:46
 msgid " release >= "
-msgstr ""
+msgstr " sürüm >= "
 
 #: pisi/dependency.py:48
 msgid " release <= "
-msgstr ""
+msgstr " sürüm <= "
 
 #: pisi/dependency.py:105
 msgid "Package %s does not satisfy dependency %s"
@@ -1556,11 +1554,11 @@ msgstr "uri argümanı ya URI ya da string tipine sahip olmalı"
 
 #: pisi/file.py:74
 msgid "bz2 compressed filename must end with '.bz2'"
-msgstr ""
+msgstr "bz2 ile sıkıştırılmış dosyaların son eki '.bz2' ile bitmelidir"
 
 #: pisi/file.py:80 pisi/file.py:171
 msgid "sevenzip compression not supported yet"
-msgstr ""
+msgstr "sevenzip sıkıştırma henüz desteklenmiyor"
 
 #: pisi/file.py:108
 msgid "Fetching %s"
@@ -1669,26 +1667,26 @@ msgstr "Veritabanı %s için yazma erişimi edinilemedi"
 
 #: pisi/lockeddbshelve.py:68
 msgid "Database version %s not present."
-msgstr ""
+msgstr "Veritabanı versiyon %s bulunamadı."
 
 #: pisi/lockeddbshelve.py:75 pisi/lockeddbshelve.py:173
 msgid ""
 "Another instance of PISI is running. Only one instance is allowed to modify "
 "the PISI database at a time."
 msgstr ""
-"Başka bir yerde daha PISI çalışıyor. Sadece tek bir PISInin veritabanını "
+"Sistemde başka bir yerde daha PiSi çalışıyor. Sadece tek bir PiSi'nin veritabanını "
 "değiştirmesine izin verilir."
 
 #: pisi/lockeddbshelve.py:85
 msgid "Cannot attain read access to database environment"
-msgstr "Veritabanı %s için okuma erişimi edinilemedi"
+msgstr "Veritabanı ortamına okuma izni alınamadı"
 
 #: pisi/lockeddbshelve.py:100
 msgid ""
 "Opening PISI database in read-only mode. Operations that require write "
 "access will fail."
 msgstr ""
-"PİSİ veritabanı sadece okuma kipinde açılıyor. Yazma erişimi gerektiren "
+"PİSİ veritabanı sadece okuma izni ile açılıyor. Yazma erişimi gerektiren "
 "işlemler başarısızlığa uğrayacaktır."
 
 #: pisi/lockeddbshelve.py:131
@@ -1719,8 +1717,7 @@ msgid ""
 "The following packages will be installed\n"
 "in the respective order to satisfy extra dependencies:\n"
 msgstr ""
-"Bağımlılıkları sağlamak için bu minimal paket listesi\n"
-" verilen sırada yerleştirilecek:\n"
+"Ek bağımlılıkları sağlamak aşağıdaki paketler kurulacaktır:\n"
 
 #: pisi/operations.py:111 pisi/operations.py:467
 msgid "Do you want to continue?"
@@ -1760,8 +1757,7 @@ msgid ""
 "The following minimal list of packages will be installed\n"
 "in the respective order to satisfy dependencies:\n"
 msgstr ""
-"Bağımlılıkları sağlamak için bu minimal paket listesi verilen sırada\n"
-"yerleştirilecek:\n"
+"Bağımlılıkları sağlamak aşağıdaki paketler kurulacaktır:\n"
 
 #: pisi/operations.py:234
 msgid "Total size of packages: %.2f %s"
@@ -1777,7 +1773,7 @@ msgstr "Uyarı: paket *adı* '.pisi' ile bitiyor."
 
 #: pisi/operations.py:299
 msgid "Package %s is not installed."
-msgstr "Paket %s yerleştirilmemis."
+msgstr "Paket %s yerleştirilmemiş."
 
 #: pisi/operations.py:308
 msgid "Package %s is already at the latest release %s."
@@ -1789,7 +1785,7 @@ msgstr "Paket %s zaten en son inşa %s'de."
 
 #: pisi/operations.py:330
 msgid "The following packages will be upgraded:\n"
-msgstr "Bu paketler yükseltilecek: \n"
+msgstr "Bu paketler yükseltilecektir: \n"
 
 #: pisi/operations.py:396 pisi/operations.py:412
 msgid "Reverse dependency %s cannot be satisfied"
@@ -1818,8 +1814,7 @@ msgid ""
 "The following minimal list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
 msgstr ""
-"İzleyen (en az sayıdaki) paketler bağımlılıkları sağlamak amacıyla\n"
-"kaldırılacak:\n"
+"Bağımlılıkları sağlamak aşağıdaki paketler kaldırılacaktır:\n"
 
 #: pisi/operations.py:468
 msgid "Package removal declined"
@@ -1844,18 +1839,15 @@ msgstr ""
 "yerleştirilecek:\n"
 
 #: pisi/operations.py:614
-#, fuzzy
 msgid ""
 "The following minimal list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
 msgstr ""
-"Bağımlılıkları sağlamak için bu minimal paket listesi verilen sırada\n"
-"yerleştirilecek:\n"
+"Bağımlılıkları sağlamak aşağıdaki paketler kurulacak:\n"
 
 #: pisi/operations.py:647
-#, fuzzy
 msgid "Cannot find source package: %s"
-msgstr "PİSİ kaynak paketi %s inşa ediliyor"
+msgstr "Kaynak paket bulunamadı: %s"
 
 #: pisi/package.py:55
 msgid "Package size: %.2f %s"
@@ -1982,9 +1974,8 @@ msgid "Root tagname %s not identical to %s as expected"
 msgstr "Kök tag adı %s beklendiği gibi %s ile aynı değil."
 
 #: pisi/pxml/xmlfilepiks.py:65
-#, fuzzy
 msgid "File '%s' has invalid XML"
-msgstr "'%s' dosyasının XML sözdizimi geçersiz: %s"
+msgstr "'%s' dosyasının XML sözdizimi geçersiz"
 
 #: pisi/repodb.py:81
 msgid "Repository %s already exists"
@@ -2386,8 +2377,3 @@ msgstr "%d hata ile karşılaşıldı. Lütfen bunları en kısa zamanda düzelt
 #: tools/repostats.py:675
 msgid "These dependencies are not available in repository:\n"
 msgstr "Bağımlılığa neden olan bu paketler depoda bulunmuyor:\n"
-
-#~ msgid "Database writes not allowed without transactions"
-#~ msgstr ""
-#~ "PROGRAMLAMA HATASI: Veritabanına yazma transaction desteği olmadan izin "
-#~ "verilmemektedir"
