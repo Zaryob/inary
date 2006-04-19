@@ -41,7 +41,7 @@ def handle_exception(exception, value, tb):
     elif isinstance(value, db.DBRunRecoveryError):
         ui.error(_("""A database operation has been aborted. You should run pisi
 again for normal DB recovery procedure. Make sure you have free disk space. 
-You have to run rebuild-db only when there is file corruption."""))
+You have to run rebuild-db only when there is file corruption and database upgrades."""))
     elif isinstance(value, pisi.Exception):
         show_traceback = True
         ui.error(_("""Unhandled internal exception.

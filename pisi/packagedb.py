@@ -16,7 +16,7 @@
 # Authors:  Eray Ozkural <eray@pardus.org.tr>
 #           Baris Metin <baris@pardus.org.tr>
 
-# we basically store everything in PackageInfo class
+# we basically store everything in MetaData 
 # yes, we are cheap
 
 import os
@@ -33,6 +33,7 @@ import pisi.context as ctx
 import pisi.lockeddbshelve as shelve
 from pisi.itembyrepodb import ItemByRepoDB
 import pisi.itembyrepodb as itembyrepodb
+from pisi.metadata import MetaData
 
 class Error(pisi.Error):
     pass
@@ -58,17 +59,27 @@ class PackageDB(object):
         self.d.destroy()
         self.dr.destroy()
 
+    def has_metadata(self, name, repo=None, txn = None):
+        return self.d.has_key(name, repo, txn=txn)
+
     def has_package(self, name, repo=None, txn = None):
         return self.d.has_key(name, repo, txn=txn)
 
-    def get_package(self, name, repo=None, txn = None):
+    def get_metadata(self, name, repo=None, txn = None):
         try:
             return self.d.get_item(name, repo, txn=txn)
         except pisi.itembyrepodb.NotfoundError, e:
             raise Error(_('Package %s not found') % name)
 
-    def get_package_repo(self, name, repo=None, txn = None):
+    def get_package(self, name, repo=None, txn = None):
+        return self.get_metadata(name, repo, txn).package
+
+    def get_metadata_repo(self, name, repo=None, txn = None):
         return self.d.get_item_repo(name, repo, txn=txn)
+
+    def get_package_repo(self, name, repo=None, txn = None):
+        metadata, repo = self.get_metadata_repo(name, repo, txn=txn)
+        return metadata.package, repo
 
     def which_repo(self, name, txn = None):
         return self.d.which_repo(name, txn=txn)
@@ -79,14 +90,18 @@ class PackageDB(object):
         else:
             return []
 
-    def list_packages(self, repo=None, show_tracking=False):
+    def list_metadatas(self, repo=None, show_tracking=False):
         return self.d.list(repo, show_tracking=show_tracking)
 
-    def add_package(self, package_info, repo, txn = None):
+    def list_packages(self, repo=None, show_tracking=False):
+        return self.list_metadatas(repo, show_tracking)
+
+    def add_metadata(self, metadata, repo, txn = None):
+        package_info = metadata.package
         name = str(package_info.name)
         
         def proc(txn):
-            self.d.add_item(name, package_info, repo, txn)
+            self.d.add_item(name, metadata, repo, txn)
             for dep in package_info.runtimeDependencies():
                 dep_name = str(dep.package)
                 if self.dr.has_key(dep_name, None, txn):
@@ -105,17 +120,22 @@ class PackageDB(object):
             for (lang, doc) in package_info.description.iteritems():
                 if lang in ['en', 'tr']:
                     pisi.search.add_doc('description', lang, package_info.name, doc, txn)
-
         ctx.txn_proc(proc, txn)
+
+    def add_package(self, package_info, repo, txn = None):
+        metadata = MetaData()
+        metadata.package = package_info
+        self.add_metadata(metadata, repo, txn)
 
     def clear(self, txn = None):
         self.d.clear()
         self.dr.clear()
 
-    def remove_package(self, name, repo = None, txn = None):
+    def remove_metadata(self, name, repo = None, txn = None):
         name = str(name)
         def proc(txn):
-            package_info = self.d.get_item(name, repo, txn=txn)
+            metadata = self.d.get_item(name, repo, txn=txn)
+            package_info = metadata.package
             self.d.remove_item(name, repo, txn=txn)
             if self.dr.has_key(name, repo, txn=txn):
                 self.dr.remove_item(name, repo, txn=txn)
@@ -123,7 +143,10 @@ class PackageDB(object):
             if type(repo)==types.StringType:
                 ctx.componentdb.remove_package(package_info.partOf, package_info.name, txn)
         self.d.txn_proc(proc, txn)
-        
+
+    def remove_package(self, name, repo = None, txn = None):
+        return self.remove_metadata(name, repo. txn)
+
     def remove_repo(self, repo, txn = None):
         def proc(txn):
             self.d.remove_repo(repo, txn=txn)

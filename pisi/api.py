@@ -416,12 +416,13 @@ def rebuild_db(files=False):
                 pisi.api.resurrect_package(package_fn, files, txn)
 
     def reload_indexes(txn):
-        for repo in os.listdir( pisi.util.join_path( ctx.config.lib_dir(),
-                                                     'index' ) ):
-            indexuri = pisi.util.join_path(ctx.config.lib_dir(), 'index', repo, 'uri')
-            indexuri = open(indexuri, 'r').readline()
-            pisi.api.add_repo(repo, indexuri)
-            pisi.api.rebuild_repo(repo)
+        index_dir = ctx.config.index_dir()
+        if os.path.exists(index_dir):  # it may have been erased, or we may be upgrading from a previous version -- exa
+            for repo in os.listdir(index_dir):
+                indexuri = pisi.util.join_path(ctx.config.lib_dir(), 'index', repo, 'uri')
+                indexuri = open(indexuri, 'r').readline()
+                pisi.api.add_repo(repo, indexuri)
+                pisi.api.rebuild_repo(repo)
 
     # check db schema versions
     try:
