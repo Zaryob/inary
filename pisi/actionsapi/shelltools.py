@@ -222,4 +222,4 @@ def dirName(filePath):
 
 def system(command):
     command = string.join(string.split(command))
-    return run_batch(command, True)
+    return run_batch(command, True)[0]

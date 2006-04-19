@@ -26,6 +26,7 @@ import shutil
 import string
 import statvfs
 import operator
+import subprocess
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -141,22 +142,33 @@ def human_readable_rate(size = 0):
 def run_batch(cmd, realtime = False):
     """run command non-interactively/realtime and report return value and output"""
     ctx.ui.info(_('Running ') + cmd, verbose=True)
-    p = os.popen(cmd)
-    if realtime:
-        while 1:
-            line = p.readline()
-            if not line:
-                break
-            ctx.ui.debug(line[:-1])
-        return p.close()
+
+    if ctx.stdout:
+        stdout = ctx.stdout
     else:
-        lines = p.readlines()
-    ret = p.close()
-    ctx.ui.debug(_('return value %s') % ret)
-    successful = ret == None
-    if not successful:
-        ctx.ui.error(_('Failed command: %s') % cmd + strlist(lines))
-    return (successful,lines)
+        stdout = subprocess.PIPE
+
+    if ctx.stderr:
+        stderr = ctx.stderr
+    else:
+        stderr = subprocess.PIPE
+
+    out = err = ""
+    p = subprocess.Popen(cmd, shell=True, stdout=stdout, stderr=stderr)
+    if realtime and not ctx.stdout:
+        while p.poll() == None:
+            line = p.stdout.readline()
+            if line:
+                ctx.ui.debug(line[:-1])
+    else:
+        out, err = p.communicate()
+
+    ctx.ui.debug(_('return value %s') % p.returncode)
+    if p.returncode:
+        # Non-zero means failed.
+        ctx.ui.error(_('Failed command: %s') % cmd + strlist(out))
+
+    return (p.returncode, out)
 
 ######################
 # Terminal functions #
@@ -475,9 +487,9 @@ def do_patch(sourceDir, patchFile, level = 0, target = ''):
         target = ''
 
     check_file(patchFile)
-    (successful, lines) = run_batch("patch -p%d %s< %s" % 
+    (ret, out) = run_batch("patch -p%d %s< %s" % 
                                     (level, target, patchFile))
-    if not successful:
+    if ret:
         raise Error(_("ERROR: patch (%s) failed: %s") % (patchFile,
                                                          strlist (lines)))
 

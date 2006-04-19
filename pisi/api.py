@@ -49,7 +49,9 @@ import pisi.lockeddbshelve as shelve
 class Error(pisi.Error):
     pass
 
-def init(database = True, write = True, options = None, ui = None, comar = True):
+def init(database = True, write = True,
+         options = None, ui = None, comar = True,
+         stdout = None, stderr = None):
     """Initialize PiSi subsystem"""
 
     # UI comes first
@@ -62,6 +64,15 @@ def init(database = True, write = True, options = None, ui = None, comar = True)
             ctx.ui = CLI()
     else:
         ctx.ui = ui
+
+
+    # If given define stdout and stderr. Needed by buildfarm currently
+    # but others can benefit from this too.
+    if stdout:
+        ctx.stdout = stdout
+    if stderr:
+        ctx.stderr = stderr
+
 
     import pisi.config
     ctx.config = pisi.config.Config(options)

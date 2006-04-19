@@ -31,6 +31,10 @@ def get_option(opt):
 # default UI is CLI
 ui = None # not now
 
+# stdout, stderr for PiSi API
+stdout = None
+stderr = None
+
 dbenv = None
 installdb = None
 packagedb = None
