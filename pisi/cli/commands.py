@@ -733,6 +733,9 @@ source and binary packages.
         self.parser.add_option("-G", "--skip-signing", action="store_true",
                                default=False,
                                help=_("do not sign index."))
+        self.parser.add_option("-R", "--non-recursive", action="store_true",
+                               default=False,
+                               help=_("do not recurse into directories."))
 
     def run(self):
         
@@ -741,12 +744,14 @@ source and binary packages.
         if len(self.args)>0:
             index(self.args, ctx.get_option('output'),
                   skip_sources = ctx.get_option('skip_sources'),
-                  skip_signing = ctx.get_option('skip_signing'))
+                  skip_signing = ctx.get_option('skip_signing'),
+                  non_recursive = ctx.get_option('non_recursive'))
         elif len(self.args)==0:
             ctx.ui.info(_('Indexing current directory.'))
             index(['.'], ctx.get_option('output'),
                   skip_sources = ctx.get_option('skip_sources'),
-                  skip_signing = ctx.get_option('skip_signing'))
+                  skip_signing = ctx.get_option('skip_signing'),
+                  non_recursive = ctx.get_option('non_recursive'))
         self.finalize()
 
 
