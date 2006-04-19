@@ -28,7 +28,9 @@ import pisi.util as util
 
 
 # Basic rule is:
-# p > (no suffix) > rc > pre > beta > alpha
+# p > (no suffix) > m > rc > pre > beta > alpha
+# m: milestone. this was added for OO.o
+# p: patch-level
 keywords = {"alpha": 0,
             "beta" : 1,
             "pre"  : 2,
