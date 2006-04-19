@@ -109,6 +109,8 @@ def finalize():
         pisi.search.finalize()
         if ctx.dbenv:
             ctx.dbenv.close()
+            ctx.dbenv_lock.close()
+
         ctx.ui.debug('PISI API finalized')
         ctx.ui.close()
         ctx.initialized = False

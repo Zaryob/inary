@@ -67,6 +67,13 @@ def check_dbversion(versionfile, ver, write=False, update=False):
     else:
         raise Error(_('Database version %s not present.') % versionfile)
 
+def lock_dbenv():
+    ctx.dbenv_lock = file(join_path(pisi.context.config.db_dir(), 'dbenv.lock'), 'w')
+    try:
+        fcntl.flock(ctx.dbenv_lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except IOError:
+        raise Error(_("Another instance of PISI is running. Only one instance is allowed to modify the PISI database at a time."))
+
 # write: write access to database environment
 # writeversion: would you like to be able 
 def init_dbenv(write=False, writeversion=False):
@@ -77,6 +84,7 @@ def init_dbenv(write=False, writeversion=False):
     else:
         raise Error(_('Cannot attain read access to database environment'))
     if write and os.access(pisi.context.config.db_dir(), os.W_OK):
+        lock_dbenv()
         ctx.dbenv = dbobj.DBEnv()
         flags =  (db.DB_INIT_MPOOL |      # cache
                   db.DB_INIT_TXN |        # transaction subsystem
