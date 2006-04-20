@@ -67,7 +67,6 @@ class ZipFileEntry:
             result.append(self.decompress(compr_data))
             self.buffer = ""
             self.finished = 1
-            result = "".join(result)
             self.returnedBytes += len(result)
             return result
         else:
