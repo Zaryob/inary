@@ -54,7 +54,7 @@ class InvalidSignature(pisi.Error):
 class File:
 
     (read, write) = range(2) # modes
-    (bz2, sevenzip) = range(2) # compress enums
+    (bz2, lzma) = range(2) # compress enums
 
     (detached, whatelse) = range(2)
 
@@ -76,8 +76,8 @@ class File:
             open(localfile[:-4], "w").write(bz2.BZ2File(localfile).read())
             localfile = localfile[:-4]
 
-        elif compress == File.sevenzip:
-            raise Error(_("sevenzip compression not supported yet"))
+        elif compress == File.lzma:
+            raise Error(_("lzma compression not supported yet"))
 
         return localfile
 
@@ -167,8 +167,8 @@ class File:
                 compressed_file = self.localfile + ".bz2"
                 bz2.BZ2File(compressed_file, "w").write(open(self.localfile, "r").read())
 
-            elif self.compress == File.sevenzip:
-                raise Error(_("sevenzip compression not supported yet"))
+            elif self.compress == File.lzma:
+                raise Error(_("lzma compression not supported yet"))
 
             if self.sha1sum:
                 sha1 = pisi.util.sha1_file(self.localfile)
