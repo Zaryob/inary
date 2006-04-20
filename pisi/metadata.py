@@ -50,6 +50,8 @@ class Package(specfile.Package):
     t_PackageSize = [ autoxml.Long, autoxml.optional]
     t_PackageURI = [ autoxml.String, autoxml.optional]
 
+    t_Source = [ Source, autoxml.optional]
+    
     def decode_hook(self, node, errs, where):
         self.version = self.history[0].version
         self.release = self.history[0].release
@@ -79,6 +81,7 @@ class MetaData(xmlfile.XmlFile):
         self.source.name = src.name
         self.source.homepage = src.homepage
         self.source.packager = src.packager
+        self.package.source = self.source # FIXME: I know that replication sucks here, but this is the easiest for now-- exa
         self.package.name = pkg.name
         self.package.summary = pkg.summary
         self.package.description = pkg.description

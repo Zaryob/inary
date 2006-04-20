@@ -48,6 +48,7 @@ class Index(XmlFile):
     t_Distribution = [ component.Distribution, autoxml.optional ]
     t_Specs = [ [specfile.SpecFile], autoxml.optional, "SpecFile"]
     t_Packages = [ [metadata.Package], autoxml.optional, "Package"]
+    #t_Metadatas = [ [metadata.MetaData], autoxml.optional, "MetaData"]
     t_Components = [ [component.Component], autoxml.optional, "Component"]
 
     def name():
@@ -63,9 +64,9 @@ class Index(XmlFile):
             pisi.util.clean_dir(tmpdir)
         pisi.util.check_dir(tmpdir)
 
-	if not force:
-	    urlfile = file(pisi.util.join_path(tmpdir, 'uri'), 'w')
-	    urlfile.write(filename) # uri
+        if not force:
+            urlfile = file(pisi.util.join_path(tmpdir, 'uri'), 'w')
+            urlfile.write(filename) # uri
 
 
         # FIXME: This is a mess, we have a compress flag and we have to
