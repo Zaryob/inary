@@ -145,7 +145,7 @@ class PackageDB(object):
         self.d.txn_proc(proc, txn)
 
     def remove_package(self, name, repo = None, txn = None):
-        return self.remove_metadata(name, repo. txn)
+        return self.remove_metadata(name, repo, txn)
 
     def remove_repo(self, repo, txn = None):
         def proc(txn):
