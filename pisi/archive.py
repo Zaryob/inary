@@ -130,7 +130,7 @@ class ArchiveZip(ArchiveBase):
                 attr.external_attr = self.symmagic 
                 self.zip_obj.writestr(attr, dest)
             else:
-                self.zip_obj.write(file_name, file_name, zipfileext.ZIP_LZMA_BOGUS)
+                self.zip_obj.write(file_name, file_name, zipfileext.ZIP_LZMA)
                 zinfo = self.zip_obj.getinfo(file_name)
                 zinfo.create_system = 3
 
