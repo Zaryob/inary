@@ -372,11 +372,19 @@ def rebuild_repo(repo):
     if ctx.repodb.has_repo(repo):
         repouri = ctx.repodb.get_repo(repo).indexuri.get_uri()
         indexname = os.path.basename(repouri)
-        repouri = pisi.util.join_path(ctx.config.lib_dir(), 'index', repo, indexname)
-        index.read_uri(repouri, repo, force = True)
+        indexpath = pisi.util.join_path(ctx.config.lib_dir(), 'index', repo, indexname)
+
+        if os.path.exists(indexpath):
+            repouri = indexpath
+
+        try:
+            index.read_uri(repouri, repo, force = True)
+        except IOError:
+            ctx.ui.warning(_("Repo index file \'%s\' not found.") % repouri)
+            return
     else:
         raise Error(_('No repository named %s found.') % repo)
-    
+
     ctx.txn_proc(lambda txn : index.update_db(repo, txn=txn))
     ctx.ui.info(_('OK.'))
     
