@@ -492,7 +492,11 @@ class Builder:
         static_package_obj.partOf = 'library:static'
         for f in ar_files:
             static_package_obj.files.append(pisi.specfile.Path(path = f[len(self.pkg_install_dir()):], fileType = "library"))
-        static_package_obj.packageDependencies.append(pisi.dependency.Dependency(package = self.spec.source.name))
+
+        # append all generated packages to dependencies
+        for p in self.spec.packages:
+            static_package_obj.packageDependencies.append(
+                pisi.dependency.Dependency(package = p.name))
 
         return static_package_obj
 
@@ -515,9 +519,10 @@ class Builder:
         for f in debug_files:
             static_package_obj.files.append(pisi.specfile.Path(path = f[len(self.pkg_install_dir()):], fileType = "debug"))
 
-        # FIXME: This cause a dependency problem for one source -> multi binary packages. For example mysql source package
-        # has mysql-lib, -server and -client but mysql-debug package depends mysql which is not exists so it cannot installed. 
-        static_package_obj.packageDependencies.append(pisi.dependency.Dependency(package = self.spec.source.name))
+        # append all generated packages to dependencies
+        for p in self.spec.packages:
+            static_package_obj.packageDependencies.append(
+                pisi.dependency.Dependency(package = p.name))
 
         return static_package_obj
 
