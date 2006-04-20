@@ -9,11 +9,10 @@
 #
 # Please read the COPYING file.
 #
-# Authors:  Eray Ozkural <eray at pardus.org.tr>
-#                Faik Uygur   <faik at pardus.org.tr>
+# Authors:  Eray Ozkural <eray@pardus.org.tr>
+#           Faik Uygur   <faik@pardus.org.tr>
 #
-
-"""Extends zipfile module with lzma and bzip2 support"""
+# Extends zipfile module with lzma and bzip2 support
 
 # python standard library modules
 import os
@@ -29,9 +28,9 @@ except ImportError:
     zlib = None
 
 try:
-    import bz2
+    import bzip2
 except ImportError:
-    bz2 = None
+    bzip2 = None
 
 try:
     import pylzma
@@ -43,8 +42,7 @@ ZIP_LZMA = 255
 
 compression_methods = [ZIP_STORED, ZIP_DEFLATED, ZIP_BZIP2, ZIP_LZMA]
 
-
-class ZipFileEntry:
+class FileEntry:
     """File-like object used to access entries in a ZipFile"""
     
     def __init__(self, fp, length):
@@ -53,18 +51,25 @@ class ZipFileEntry:
         self.returnedBytes = 0
         self.length = length
         self.finished = 0
-        self.buffer = ""
 
+class LzmaFileEntry(FileEntry):
+    """File-like object used to read a LZMA entry in a ZipFile"""
+
+    def __init__(self, fp, length):
+        FileEntry.__init__(self, fp, length)
+        self.decomp = pylzma.decompressobj()
+        self.buffer = ""
+        
     def tell(self):
         return self.returnedBytes
-
+    
     def read(self, n=None):
         if self.finished:
             return ""
         if n is None:
             result = [self.buffer,]
-            compr_data = self.fp.read(self.length - self.readBytes)
-            result.append(self.decompress(compr_data))
+            result.append(self.decomp.decompress(self.fp.read(self.length - self.readBytes)))
+            result.append(self.decomp.flush())
             self.buffer = ""
             self.finished = 1
             result = "".join(result)
@@ -72,64 +77,30 @@ class ZipFileEntry:
             return result
         else:
             while len(self.buffer) < n:
-                compr_data = self.fp.read(min(n, 8192, self.length - self.readBytes))
-                self.readBytes += len(compr_data)
+                data = self.fp.read(min(n, 1024, self.length - self.readBytes))
+                self.readBytes += len(data)
                 if not data:
-                    result = self.buffer # + self.flush_decompressor()
+                    result = self.buffer + self.decomp.decompress() + self.decomp.flush()
                     self.finished = 1
                     self.buffer = ""
                     self.returnedBytes += len(result)
                     return result
                 else:
-                    self.buffer += self.decompress(data)
+                    self.buffer += self.decomp.decompress(data)
             result = self.buffer[:n]
             self.buffer = self.buffer[n:]
             self.returnedBytes += len(result)
             return result
- 
+    
     def close(self):
         self.finished = 1
         del self.fp
 
-
-class DeflatedZipFileEntry(ZipFileEntry):
-    """File-like object used to read a deflated entry in a ZipFile"""
-    
-    def __init__(self, fp, length):
-        ZipFileEntry.__init__(self, fp, length)
-        self.decomp = zlib.decompressobj(-15)
-        
-    def decompress(self, compr_data):
-        return self.decomp.decompress(compr_data) + self.decomp.decompress("Z") + self.decomp.flush()
-
-
-class Bzip2ZipFileEntry(ZipFileEntry):
-    """File-like object used to read a deflated entry in a ZipFile"""
-    
-    def __init__(self, fp, length):
-        ZipFileEntry.__init__(self, fp, length)
-        self.decomp = bz2.Decompressor()
-        
-    def decompress(self, compr_data):
-        return self.decomp.decompress(compr_data)
-
-
-class LzmaZipFileEntry(ZipFileEntry):
-    """File-like object used to read a LZMA entry in a ZipFile"""
-
-    def __init__(self, fp, length):
-        ZipFileEntry.__init__(self, fp, length)
-        self.decompressor = pylzma.decompressobj()
-    
-    def decompress(self, compr_data):
-        return self.decomp.decompress(compr_data) + self.decomp(flush)
-
-
-class StoredZipFileEntry(ZipFileEntry):
+class ZipFileEntry(FileEntry):
     """File-like object used to read an uncompressed entry in a ZipFile"""
     
     def __init__(self, fp, length):
-        ZipFileEntry.__init__(self, fp, length)
+        FileEntry.__init__(self, fp, length)
         
     def tell(self):
         return self.readBytes
@@ -151,6 +122,51 @@ class StoredZipFileEntry(ZipFileEntry):
         del self.fp
 
 
+class DeflatedZipFileEntry(FileEntry):
+    """File-like object used to read a deflated entry in a ZipFile"""
+    
+    def __init__(self, fp, length):
+        FileEntry.__init__(self, fp, length)
+        self.decomp = zlib.decompressobj(-15)
+        self.buffer = ""
+        
+    def tell(self):
+        return self.returnedBytes
+    
+    def read(self, n=None):
+        if self.finished:
+            return ""
+        if n is None:
+            result = [self.buffer,]
+            result.append(self.decomp.decompress(self.fp.read(self.length - self.readBytes)))
+            result.append(self.decomp.decompress("Z"))
+            result.append(self.decomp.flush())
+            self.buffer = ""
+            self.finished = 1
+            result = "".join(result)
+            self.returnedBytes += len(result)
+            return result
+        else:
+            while len(self.buffer) < n:
+                data = self.fp.read(min(n, 1024, self.length - self.readBytes))
+                self.readBytes += len(data)
+                if not data:
+                    result = self.buffer + self.decomp.decompress("Z") + self.decomp.flush()
+                    self.finished = 1
+                    self.buffer = ""
+                    self.returnedBytes += len(result)
+                    return result
+                else:
+                    self.buffer += self.decomp.decompress(data)
+            result = self.buffer[:n]
+            self.buffer = self.buffer[n:]
+            self.returnedBytes += len(result)
+            return result
+    
+    def close(self):
+        self.finished = 1
+        del self.fp
+
 class ZipFileExt(ZipFile):
 
     def _writecheck(self, zinfo):
@@ -169,9 +185,9 @@ class ZipFileExt(ZipFile):
         if zinfo.compress_type == ZIP_DEFLATED and not zlib:
             raise RuntimeError, \
                   "Compression requires the (missing) zlib module"
-        if zinfo.compress_type == ZIP_BZIP2 and not bz2:
+        if zinfo.compress_type == ZIP_BZIP2 and not bzip2:
             raise RuntimeError, \
-                  "Compression requires the (missing) bz2 module"
+                  "Compression requires the (missing) bzip2 module"
         if zinfo.compress_type == ZIP_LZMA and not pylzma:
             raise RuntimeError, \
                   "Compression requires the (missing) pylzma module"
@@ -261,22 +277,22 @@ class ZipFileExt(ZipFile):
         zinfo = self.getinfo(name)
         self.fp.seek(zinfo.file_offset, 0)
         if zinfo.compress_type == ZIP_STORED:
-            return StoredZipFileEntry(self.fp, zinfo.compress_size)
+            return ZipFileEntry(self.fp, zinfo.compress_size)
         elif zinfo.compress_type == ZIP_DEFLATED:
             if not zlib:
                 raise RuntimeError, \
                       "De-compression requires the (missing) zlib module"
             return DeflatedZipFileEntry(self.fp, zinfo.compress_size)
-        elif zinfo.compress_type == ZIP_BZIP2:
-            if not bzip2:
-                raise RuntimeError, \
-                      "De-compression requires the (missing) bzip2 module"
-            return Bzip2ZipFileEntry(self.fp, zinfo.compress_size)
+##        elif zinfo.compress_type == ZIP_BZIP2:
+##            if not bzip2:
+##                raise RuntimeError, \
+##                      "De-compression requires the (missing) bzip2 module"
+##	    return LZMAFileEntry(self.fp, zinfo.compress_size)
         elif zinfo.compress_type == ZIP_LZMA:
             if not pylzma:
                 raise RuntimeError, \
                       "De-compression requires the (missing) pylzma module"
-            return LzmaZipFileEntry(self.fp, zinfo.compress_size)
+            return LzmaFileEntry(self.fp, zinfo.compress_size)
         else:
             raise BadZipfile, \
                   "Unsupported compression method %d for file %s" % \
