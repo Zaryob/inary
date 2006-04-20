@@ -491,7 +491,7 @@ def do_patch(sourceDir, patchFile, level = 0, target = ''):
                                     (level, target, patchFile))
     if ret:
         raise Error(_("ERROR: patch (%s) failed: %s") % (patchFile,
-                                                         strlist (lines)))
+                                                         strlist (out)))
 
     os.chdir(cwd)
 
