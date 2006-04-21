@@ -251,6 +251,7 @@ class ZipFileExt(ZipFile):
             # So in order to calculate the CRC, we are going to read
             # all the file at once until it is implemented.
             buf = fp.read()
+            file_size = len(buf)
             CRC = binascii.crc32(buf, CRC)
             compressed = pylzma.compress(buf, eos=1)
             self.fp.write(compressed)
