@@ -166,7 +166,7 @@ def run_batch(cmd, realtime = False):
     ctx.ui.debug(_('return value %s') % p.returncode)
     if p.returncode:
         # Non-zero means failed.
-        ctx.ui.error(_('Failed command: %s') % cmd + strlist(out))
+        ctx.ui.error(_('Failed command: %s\n%s') % (cmd, out))
 
     return (p.returncode, out)
 
