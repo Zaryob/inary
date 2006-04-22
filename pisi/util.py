@@ -656,7 +656,7 @@ def env_update():
 
     # run ldconfig
     if run_batch("/sbin/ldconfig -X -r %s" % ctx.config.dest_dir())[0]:
-        raise Error(_("ERROR: /sbin/ldconfig -X -r %s failed" % ctx.config.dest_dir()))
+        raise Error(_("ERROR: /sbin/ldconfig -X -r %s failed") % ctx.config.dest_dir())
    
 def pure_package_name(package_name):
     "return pure package name from given string"
@@ -669,5 +669,5 @@ def pure_package_name(package_name):
  
 def generate_pisi_file(patchFile, fromFile, toFile):
     if run_batch("xdelta patch %s %s %s" % (patchFile, fromFile, toFile))[0]:
-        raise Error(_("ERROR: xdelta patch %s %s %s failed" % (patchFile, fromFile, toFile)))
+        raise Error(_("ERROR: xdelta patch %s %s %s failed") % (patchFile, fromFile, toFile))
 
