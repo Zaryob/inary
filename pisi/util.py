@@ -161,14 +161,12 @@ def run_batch(cmd, realtime = False):
             if line:
                 ctx.ui.debug(line[:-1])
     else:
+        # If the stdout/stderr argument is PIPE, this returns a file object that provides output from the child process. Otherwise, it is None. 
         out, err = p.communicate()
-
+    
     ctx.ui.debug(_('return value %s') % p.returncode)
-    if p.returncode:
-        # Non-zero means failed.
-        ctx.ui.error(_('Failed command: %s\n%s') % (cmd, out))
 
-    return (p.returncode, out)
+    return (p.returncode, out, err)
 
 ######################
 # Terminal functions #
@@ -487,11 +485,14 @@ def do_patch(sourceDir, patchFile, level = 0, target = ''):
         target = ''
 
     check_file(patchFile)
-    (ret, out) = run_batch("patch -p%d %s< %s" % 
+    (ret, out, err) = run_batch("patch -p%d %s < %s" % 
                                     (level, target, patchFile))
     if ret:
-        raise Error(_("ERROR: patch (%s) failed: %s") % (patchFile,
-                                                         strlist (out)))
+        if out is None and err is None:
+            # Which means stderr and stdout directed so they are None
+            raise Error(_("ERROR: patch (%s) failed") % (patchFile))
+        else:
+            raise Error(_("ERROR: patch (%s) failed: %s") % (patchFile, err))
 
     os.chdir(cwd)
 
@@ -654,8 +655,9 @@ def env_update():
     f.close()
 
     # run ldconfig
-    run_batch("/sbin/ldconfig -X -r %s" % ctx.config.dest_dir())
-    
+    if run_batch("/sbin/ldconfig -X -r %s" % ctx.config.dest_dir())[0]:
+        raise Error(_("ERROR: /sbin/ldconfig -X -r %s failed" % ctx.config.dest_dir()))
+   
 def pure_package_name(package_name):
     "return pure package name from given string"
     "ex: package_name=tasma-1.0.3-5-2.pisi, returns tasma"
@@ -666,5 +668,6 @@ def pure_package_name(package_name):
     return '-'.join([part for part in package_name.split('-') if part[0] not in string.digits])
  
 def generate_pisi_file(patchFile, fromFile, toFile):
-    run_batch("xdelta patch %s %s %s" % (patchFile, fromFile, toFile))
+    if run_batch("xdelta patch %s %s %s" % (patchFile, fromFile, toFile))[0]:
+        raise Error(_("ERROR: xdelta patch %s %s %s failed" % (patchFile, fromFile, toFile)))
 
