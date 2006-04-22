@@ -41,7 +41,7 @@ def curDIR():
 
 def curKERNEL():
     '''returns currently running kernel's version'''
-    return os.uname[2]
+    return os.uname()[2]
 
 def curPYTHON():
     ''' returns currently used python's version'''
