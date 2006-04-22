@@ -52,7 +52,7 @@ def makedirs(destinationDirectory):
 def echo(destionationFile, content):
     try:
         f = open(destionationFile, 'a')
-        f.write("%s\n" % content)
+        f.write('%s\n' % content)
         f.close()
     except IOError:
         error(_('ActionsAPI [echo]: Can\'t append to file %s.') % (destionationFile))

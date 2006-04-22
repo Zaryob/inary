@@ -41,8 +41,7 @@ def curDIR():
 
 def curKERNEL():
     '''returns currently running kernel's version'''
-    versionString = file("/proc/version").readline()
-    return versionString.split()[2]
+    return os.uname[2]
 
 def curPYTHON():
     ''' returns currently used python's version'''
@@ -82,10 +81,10 @@ def srcRELEASE():
     return env.src_release
 
 def srcTAG():
-    return "%s-%s-%s" % (env.src_name, env.src_version, env.src_release)
+    return '%s-%s-%s' % (env.src_name, env.src_version, env.src_release)
 
 def srcDIR():
-    return "%s-%s" % (env.src_name, env.src_version)
+    return '%s-%s' % (env.src_name, env.src_version)
 
 # Build Related Functions
         
