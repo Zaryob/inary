@@ -434,7 +434,9 @@ class Remove(AtomicOperation):
             pass
 
     def remove_pisi_files(self):
-        util.clean_dir(self.package.pkg_dir())
+        (iversion, irelease, ibuild) = ctx.installdb.get_version(self.package_name)
+        path = ctx.installdb.pkg_dir(self.package_name, iversion, irelease)
+        util.clean_dir(path)
     
     def remove_db(self, txn):
         ctx.installdb.remove(self.package_name, txn)
