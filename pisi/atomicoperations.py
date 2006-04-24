@@ -352,7 +352,7 @@ class Remove(AtomicOperation):
     def __init__(self, package_name, ignore_dep = None):
         super(Remove, self).__init__(ignore_dep)
         self.package_name = package_name
-        self.package = ctx.packagedb.get_package(self.package_name)
+        self.package = ctx.packagedb.get_package(self.package_name, pisi.itembyrepodb.installed)
         try:
             self.files = ctx.installdb.files(self.package_name)
         except pisi.Error, e:
@@ -434,10 +434,8 @@ class Remove(AtomicOperation):
             pass
 
     def remove_pisi_files(self):
-        (iversion, irelease, ibuild) = ctx.installdb.get_version(self.package_name)
-        path = ctx.installdb.pkg_dir(self.package_name, iversion, irelease)
-        util.clean_dir(path)
-    
+        util.clean_dir(self.package.pkg_dir())
+
     def remove_db(self, txn):
         ctx.installdb.remove(self.package_name, txn)
         ctx.filesdb.remove_files(self.files, txn)
