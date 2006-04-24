@@ -259,8 +259,9 @@ class Install(AtomicOperation):
             old_fileinfo = {}
             for fileinfo in self.old_files.list:
                 old_fileinfo[str(fileinfo.path)] = fileinfo
-            for path in leftover:
-                Remove.remove_file( old_fileinfo[path] )
+            for path in old:
+                if path in leftover or old_fileinfo[path].type == ctx.const.conf:
+                    Remove.remove_file( old_fileinfo[path] )
 
     def store_pisi_files(self):
         """put files.xml, metadata.xml, actions.py and COMAR scripts
