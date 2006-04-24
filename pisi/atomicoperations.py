@@ -249,7 +249,6 @@ class Install(AtomicOperation):
         "unzip package in place"
 
         ctx.ui.notify(pisi.ui.extracting, package = self.pkginfo, files = self.files)
-        self.package.extract_dir_flat('install', ctx.config.dest_dir())
 
         if self.reinstall:
             # remove left over files
@@ -262,6 +261,8 @@ class Install(AtomicOperation):
             for path in old:
                 if path in leftover or old_fileinfo[path].type == ctx.const.conf:
                     Remove.remove_file( old_fileinfo[path] )
+
+        self.package.extract_dir_flat('install', ctx.config.dest_dir())
 
     def store_pisi_files(self):
         """put files.xml, metadata.xml, actions.py and COMAR scripts
