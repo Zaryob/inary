@@ -190,7 +190,10 @@ def calculate_conflicts(order, packagedb):
     return (C, D, pkg_conflicts)
 
 def check_conflicts(order, packagedb):
-    
+    """check if upgrading to the latest versions will cause havoc
+    done in a simple minded way without regard for dependencies of
+    conflicts, etc."""
+
     (C, D, pkg_conflicts) = calculate_conflicts(order, packagedb)
 
     if D:
