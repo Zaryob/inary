@@ -147,6 +147,7 @@ in the respective order to satisfy extra dependencies:
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
+    check_conflicts(order, packagedb)
     order.reverse()
     ctx.ui.info(_('Installation order: ') + util.strlist(order) )
 
@@ -158,28 +159,56 @@ in the respective order to satisfy extra dependencies:
     for x in order:
         atomicoperations.install_single_file(dfn[x])
 
-def check_conflicts(order):
-    """check if upgrading to the latest versions will cause havoc
-    done in a simple minded way without regard for dependencies of
-    conflicts, etc."""
-    B_0 = B = set(order)
-    C = set()
-    # calculate conflict closure
-    while len(B) > 0:
-        Bp = set()
-        for x in B:
-            pkg = ctx.packagedb.get_package(x) # get latest version!
-            #TODO: read conflicts from a conflicts db...
-            for conflict in pkg.conflicts:
-                if ctx.installdb.is_installed(self.pkginfo):
-                    Bp.add(conflict)
-                    C.add(conflict)
-        B = Bp
-    if B_0.intersection(C):
-        raise Error(_("Selected packages %s and %s are in conflict.") % (x, pkg))
-    if C:
+def check_conflict(pkg):
+    conflicts = []
+
+    for c in pkg.conflicts:
+        if ctx.installdb.is_installed(c):
+            conflicts.append(c)
+
+    return conflicts
+
+def calculate_conflicts(order, packagedb):
+    B_0 = set(order)
+    C = D = set()
+    pkg_conflicts = {}
+
+    for x in order:
+        pkg = packagedb.get_package(x)
+        B_p = set(check_conflict(pkg))
+        if B_p:
+            pkg_conflicts[x] = B_p
+            C = C.union(B_p)
+
+        B_i = B_0.intersection(set(pkg.conflicts))
+        # check if there are any conflicts within the packages that are
+        # going to be installed
+        if B_i:
+            D = D.union(B_i)
+            D.add(pkg.name)
+
+    return (C, D, pkg_conflicts)
+
+def check_conflicts(order, packagedb):
+    
+    (C, D, pkg_conflicts) = calculate_conflicts(order, packagedb)
+
+    if D:
+        raise Error(_("Selected packages [%s] are in conflict with each other.") % 
+                    util.strlist(list(D)))
+
+    if pkg_conflicts:
+        conflicts = ""
+        for pkg in pkg_conflicts.keys():
+            conflicts += "[%s conflicts with: %s]" % (pkg, util.strlist(pkg_conflicts[pkg]))
+
+        ctx.ui.info(_("The following packages have conflicts: %s") %
+                    conflicts)
+
         if not ctx.ui.confirm(_('Remove the following conflicting packages?')):
-            #raise Error(_("Package %s conflicts installed package %s") % (x, pkg))
+            raise Error(_("Conflicts remain"))
+
+        if remove(list(C)) == False:
             raise Error(_("Conflicts remain"))
 
 def expand_components(A):
@@ -273,7 +302,7 @@ def plan_install_pkg_names(A):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
-    check_conflicts(order)
+    check_conflicts(order, ctx.packagedb)
     return G_f, order
 
 def upgrade(A):
@@ -423,7 +452,7 @@ def plan_upgrade(A):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
-    check_conflicts(order)
+    check_conflicts(order, ctx.packagedb)
     return G_f, order
 
 def remove(A):
