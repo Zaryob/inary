@@ -8,13 +8,13 @@ set -x # xtrace
 set -e # errexit
 rm -rf tmp
 #echo "*** build tests"
-pisi-cli -Dtmp build http://svn.uludag.org.tr/pardus/pardus-devel/system/base/zip/pspec.xml http://svn.uludag.org.tr/pardus/pardus-devel/system/base/unzip/pspec.xml
+pisi-cli -Dtmp build http://svn.uludag.org.tr/pardus/devel/system/base/zip/pspec.xml http://svn.uludag.org.tr/pardus/devel/system/base/unzip/pspec.xml
 
 #partial-builds
-pisi-cli -Dtmp build-setup http://svn.uludag.org.tr/pardus/pardus-devel/system/base/hdparm/pspec.xml
-pisi-cli -Dtmp build-build http://svn.uludag.org.tr/pardus/pardus-devel/system/base/hdparm/pspec.xml
-pisi-cli -Dtmp build-install http://svn.uludag.org.tr/pardus/pardus-devel/system/base/hdparm/pspec.xml
-pisi-cli -Dtmp build-package http://svn.uludag.org.tr/pardus/pardus-devel/system/base/hdparm/pspec.xml
+pisi-cli -Dtmp build --until=setup http://svn.uludag.org.tr/pardus/devel/system/base/hdparm/pspec.xml
+pisi-cli -Dtmp build --until=build http://svn.uludag.org.tr/pardus/devel/system/base/hdparm/pspec.xml
+pisi-cli -Dtmp build --until=install http://svn.uludag.org.tr/pardus/devel/system/base/hdparm/pspec.xml
+pisi-cli -Dtmp build --until=package http://svn.uludag.org.tr/pardus/devel/system/base/hdparm/pspec.xml
 
 #echo "*** repository tests"
 
