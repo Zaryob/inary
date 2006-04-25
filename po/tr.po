@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2006-04-25 16:19+EEST\n"
+"POT-Creation-Date: 2006-04-26 00:44+EEST\n"
 "PO-Revision-Date: 2005-12-26 06:53+0200\n"
 "Last-Translator: Eray Ozkural <eray@uludag.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
@@ -33,13 +33,13 @@ msgid ""
 "again for normal DB recovery procedure. Make sure you have free disk "
 "space. \n"
 "You have to run rebuild-db only when there is file corruption and database "
-"upgrades.\n"
+"upgrades."
 msgstr ""
 "Bir veritabanı işlemi yarıda kesildi. PİSİ'yi normal veritabanı  \n"
 "düzeltme işlemi için yeniden çalıştırmalısınız. Boş disk \n"
 "alanınızın bulunduğuna emin olun.\n"
-"Sadece dosya bozulması ve veritabanı versiyon değişimi oluğu zaman rebuild-db "
-"komutunu kullanmanız gerekir.\n"
+"Sadece dosya bozulması ve veritabanı versiyon değişimi oluğu zaman rebuild-"
+"db komutunu kullanmanız gerekir."
 
 #: pisi-cli:47
 msgid ""
@@ -1751,6 +1751,10 @@ msgstr "Yerleştirme sırası: "
 msgid "Selected packages [%s] are in conflict with each other."
 msgstr "Seçili paketler [%s] birbirleriyle çakışıyorlar."
 
+#: pisi/operations.py:206
+msgid "[%s conflicts with: %s]"
+msgstr "[%s: %s ile çatışıyor]"
+
 #: pisi/operations.py:208
 msgid "The following packages have conflicts: %s"
 msgstr "Aşağıdaki paketlerde çakışmalar bulunuyor: %s"
@@ -1853,7 +1857,8 @@ msgstr ""
 msgid ""
 "The following minimal list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
-msgstr "Bağımlılıkları sağlamak için aşağıdaki paketler verilen sırada\n"
+msgstr ""
+"Bağımlılıkları sağlamak için aşağıdaki paketler verilen sırada\n"
 "derlenip, yerleştirilecek:\n"
 
 #: pisi/operations.py:679

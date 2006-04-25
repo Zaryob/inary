@@ -203,7 +203,7 @@ def check_conflicts(order, packagedb):
     if pkg_conflicts:
         conflicts = ""
         for pkg in pkg_conflicts.keys():
-            conflicts += "[%s conflicts with: %s]" % (pkg, util.strlist(pkg_conflicts[pkg]))
+            conflicts += _("[%s conflicts with: %s]") % (pkg, util.strlist(pkg_conflicts[pkg]))
 
         ctx.ui.info(_("The following packages have conflicts: %s") %
                     conflicts)
@@ -484,7 +484,7 @@ def remove(A):
 
     if len(A)==0:
         ctx.ui.info(_('No packages to remove.'))
-        return
+        return False
 
     if not ctx.config.get_option('ignore_dependency'):
         G_f, order = plan_remove(A)
