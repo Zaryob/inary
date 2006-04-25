@@ -17,7 +17,10 @@ import testcase
 
 class ActionsAPITestCase(testcase.TestCase):
     def setUp(self):
+        from pisi.actionsapi.variables import initVariables
+
         testcase.TestCase.setUp(self)
+        initVariables()
         #FIXME: test incomplete
         return
         self.f = zipfile.ZipFile("helloworld-0.1-1.pisi", "r")
