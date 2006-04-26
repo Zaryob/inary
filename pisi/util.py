@@ -161,7 +161,6 @@ def run_batch(cmd, realtime = False):
             if line:
                 ctx.ui.debug(line[:-1])
     else:
-        # If the stdout/stderr argument is PIPE, this returns a file object that provides output from the child process. Otherwise, it is None. 
         out, err = p.communicate()
     
     ctx.ui.debug(_('return value %s') % p.returncode)
