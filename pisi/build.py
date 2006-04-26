@@ -407,7 +407,7 @@ class Builder:
         os.chdir(curDir)
 
     def check_build_dependencies(self):
-        """fail if dependencies not satisfied"""
+        """check and try to install build dependencies, otherwise fail."""
 
         build_deps = self.spec.source.buildDependencies
 
@@ -436,7 +436,13 @@ class Builder:
         if dep_unsatis:
             ctx.ui.info(_("Unsatisfied Build Dependencies:") + ' '
                         + util.strlist([str(x) for x in dep_unsatis]) )
+
+            def fail():
+                raise Error(_('Cannot build package due to unsatisfied build dependencies'))
                 
+            if ctx.config.get_option('no_install'):
+                fail()
+
             if not ctx.config.get_option('ignore_dependency'):
                 for dep in dep_unsatis:
                     if not dependency.repo_satisfies_dep(dep):
@@ -446,7 +452,7 @@ class Builder:
                     ctx.ui.info(_('Installing build dependencies.'))
                     operations.install([dep.package for dep in dep_unsatis])
                 else:
-                    raise Error(_('Cannot build package due to unsatisfied build dependencies'))
+                    fail()
             else:
                 ctx.ui.warning(_('Ignoring build dependencies.'))
 

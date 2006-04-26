@@ -364,6 +364,8 @@ unpack, setup, build, install, package
                                default=True, help=_("automatically create a static package with ar files"))
         self.parser.add_option("-g", "--create-debug", action="store_true",
                                default=True, help=_("automatically create a debug package with debug files"))
+        self.parser.add_option("", "--no-install", action="store_true",
+                               default=False, help=_("don't install build dependencies, fail if a build dependency is present"))
 
 
     def run(self):
@@ -371,12 +373,17 @@ unpack, setup, build, install, package
             self.help()
             return
 
-            
-        if ctx.get_option('until'):
-            if ctx.get_option('until') in Build.steps:
+        # We cant use ctx.get_option as we didn't init PiSi
+        # currently...
+        if self.options.until:
+            if not self.options.until in Build.steps:
                 raise Error(_('Step must be one of %s ') % pisi.util.strlist(Build.steps))
 
-        self.init()
+        if self.options.no_install:
+            self.init(database=True, write=False)
+        else:
+            self.init()
+
         if ctx.get_option('output_dir'):
             ctx.ui.info(_('Output directory: %s') % ctx.config.options.output_dir)
         else:
