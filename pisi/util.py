@@ -163,7 +163,7 @@ def run_batch(cmd, realtime = False):
     else:
         out, err = p.communicate()
     
-    ctx.ui.debug(_('return value %s') % p.returncode)
+    ctx.ui.debug(_('return value for %s is %s') % (cmd, p.returncode))
 
     return (p.returncode, out, err)
 
