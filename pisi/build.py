@@ -866,8 +866,12 @@ def __buildState_buildpackages(pb, last):
         __buildState_installaction(pb, last)
     pb.build_packages()
 
-def build_until(pspecfile, state, authinfo=None):
-    pb = pisi.build.Builder(pspecfile, authinfo)
+def build_until(pspec, state, authinfo=None):
+    if pspec.endswith('.xml'):
+        pb = Builder(pspec, authinfo)
+    else:
+        pb = Builder.from_name(pspec, authinfo)
+
     pb.compile_action_script()
     
     last = pb.get_state()
