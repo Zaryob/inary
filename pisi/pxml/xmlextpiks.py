@@ -98,16 +98,6 @@ def getNode(node, tagpath):
             node = currentNode
     return currentNode
 
-def addText(node, tagpath, text):
-    if tagpath != "":
-        tags = tagpath.split("/")
-        for tag in tags:
-            if node.getTag(tag):
-                node = node.getTag(tag)
-            else:
-                node = node.insertTag(tag)
-    node.insertData(text)
-
 def createTagPath(node, tags):
     """create new child at the end of a tag chain starting from node
     no matter what"""
@@ -121,7 +111,7 @@ def addTagPath(node, tags, newnode=None):
     """add newnode at the end of a tag chain, smart one"""
     node = createTagPath(node, tags)
     if newnode:                     # node to add specified
-        node.appendChild(newnode)
+        node.insertData(newnode)
     return node
 
 def addNode(node, tagpath, newnode = None, branch=True):
@@ -158,3 +148,6 @@ def addNode(node, tagpath, newnode = None, branch=True):
         return addTagPath(node, tags, newnode)
 
     return node
+
+def addText(node, tagpath, text):
+    addNode(node, tagpath, text)
