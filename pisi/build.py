@@ -77,8 +77,8 @@ def check_path_collision(package, pkgList):
                 # collide. Exp:
                 # pinfo.path: /usr/share
                 # path.path: /usr/share/doc
-                if (path.path.endswith(ctx.const.ar_file_suffix) and ctx.get_option('create_static')) or \
-                   (path.path.endswith(ctx.const.debug_file_suffix) and ctx.get_option('create_debug')):
+                if (path.path.endswith(ctx.const.ar_file_suffix) and not ctx.get_option('no_static')) or \
+                   (path.path.endswith(ctx.const.debug_file_suffix) and not ctx.get_option('no_debug')):
                     # don't throw collision error for these files. 
                     # we'll handle this in gen_files_xml..
                     continue
@@ -611,14 +611,14 @@ class Builder:
         def add_path(path):
             # add the files under material path 
             for fpath, fhash in util.get_file_hashes(path, collisions, install_dir):
-                if ctx.get_option('create_static') \
+                if not ctx.get_option('no_static') \
                     and fpath.endswith(ctx.const.ar_file_suffix) \
                     and not package.name.endswith(ctx.const.static_name_suffix) \
                     and util.is_ar_file(fpath):
                     # if this is an ar file, and this package is not a static package,
                     # don't include this file into the package.
                     continue
-                if ctx.get_option('create_debug') \
+                if not ctx.get_option('no_debug') \
                     and fpath.endswith(ctx.const.debug_file_suffix) \
                     and not package.name.endswith(ctx.const.debug_name_suffix):
                     # if this is a debug file, and this package is not a debug package,
@@ -729,12 +729,12 @@ class Builder:
         # Strip install directory before building .pisi packages.
         self.strip_install_dir()
 
-        if ctx.get_option('create_static'):
+        if not ctx.get_option('no_static'):
             obj = self.generate_static_package_object()
             if obj:
                 self.spec.packages.append(obj)
 
-        if ctx.get_option('create_debug'):
+        if not ctx.get_option('no_debug'):
             obj = self.generate_debug_package_object()
             if obj:
                 self.spec.packages.append(obj)
