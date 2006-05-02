@@ -181,6 +181,10 @@ class Package:
     t_AdditionalFiles = [ [AdditionalFile], autoxml.optional]
     t_History = [ [Update], autoxml.optional]
 
+    # FIXME: needed in build process, to distinguish dynamically generated debug packages.
+    # find a better way to do this.
+    debug_package = False
+
     def runtimeDependencies(self):
         deps = self.packageDependencies
         deps += [ ctx.componentdb.get_component[x].packages for x in self.componentDependencies ]

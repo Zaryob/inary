@@ -511,7 +511,7 @@ class Builder:
 
     def generate_debug_package_object(self):
         debug_files = []
-        for root, dirs, files in os.walk(self.pkg_install_dir()):
+        for root, dirs, files in os.walk(self.pkg_debug_dir()):
             for f in files:
                 if f.endswith(ctx.const.debug_file_suffix):
                     debug_files.append(util.join_path(root, f))
@@ -520,13 +520,14 @@ class Builder:
             return None
 
         static_package_obj = pisi.specfile.Package()
+        static_package_obj.debug_package = True
         static_package_obj.name = self.spec.source.name + ctx.const.debug_name_suffix
         # FIXME: find a better way to deal with the summary and description constants.
         static_package_obj.summary['en'] = u'Debug files for %s' % (self.spec.source.name)
         static_package_obj.description['en'] = u'Debug files for %s' % (self.spec.source.name)
         static_package_obj.partOf = 'library:debug'
         for f in debug_files:
-            static_package_obj.files.append(pisi.specfile.Path(path = f[len(self.pkg_install_dir()):], fileType = "debug"))
+            static_package_obj.files.append(pisi.specfile.Path(path = f[len(self.pkg_debug_dir()):], fileType = "debug"))
 
         # append all generated packages to dependencies
         for p in self.spec.packages:
@@ -557,7 +558,11 @@ class Builder:
         metadata.package.distributionRelease = ctx.config.values.general.distribution_release
         metadata.package.architecture = "Any"
         
-        size, d = 0, self.pkg_install_dir()
+        size = 0
+        if package.debug_package:
+            d = self.pkg_debug_dir()
+        else:
+            d = self.pkg_install_dir()
 
         for path in package.files:
             for p in glob.glob(util.join_path(d, path.path)):
@@ -586,7 +591,11 @@ class Builder:
         """Generates files.xml using the path definitions in specfile and
         the files produced by the build system."""
         files = Files()
-        install_dir = self.pkg_install_dir()
+
+        if package.debug_package:
+            install_dir = self.pkg_debug_dir()
+        else:
+            install_dir = self.pkg_install_dir()
 
         # FIXME: We need to expand globs before trying to calculate hashes
         # Not on the fly like now.
@@ -796,7 +805,10 @@ class Builder:
             files = Files()
             files.read(ctx.const.files_xml)
             for finfo in files.list:
-                pkg.add_to_package(join("install", finfo.path))
+                orgname = arcname = join("install", finfo.path)
+                if package.debug_package:
+                    orgname = join("debug", finfo.path)
+                pkg.add_to_package(orgname, arcname)
 
             pkg.close()
             os.chdir(c)
