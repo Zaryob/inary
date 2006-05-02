@@ -111,7 +111,7 @@ class ArchiveZip(ArchiveBase):
         """Close the zip archive."""
         self.zip_obj.close()
 
-    def add_to_archive(self, file_name):
+    def add_to_archive(self, file_name, arc_name=None):
         """Add file or directory path to the zip file"""
         # It's a pity that zipfile can't handle unicode strings. Grrr!
         file_name = str(file_name)
@@ -130,8 +130,11 @@ class ArchiveZip(ArchiveBase):
                 attr.external_attr = self.symmagic 
                 self.zip_obj.writestr(attr, dest)
             else:
-                self.zip_obj.write(file_name, file_name, zipfileext.ZIP_LZMA)
-                zinfo = self.zip_obj.getinfo(file_name)
+                self.zip_obj.write(file_name, arc_name, zipfileext.ZIP_LZMA)
+                if not arc_name:
+                    zinfo = self.zip_obj.getinfo(file_name)
+                else:
+                    zinfo = self.zip_obj.getinfo(arc_name)
                 zinfo.create_system = 3
 
     def add_basename_to_archive(self, file_name):
