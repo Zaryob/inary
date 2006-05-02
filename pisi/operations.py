@@ -313,7 +313,7 @@ def upgrade(A):
 
 def upgrade_pkg_names(A = []):
     """Re-installs packages from the repository, trying to perform
-    a maximum number of upgrades."""
+    a minimum or maximum number of upgrades according to options."""
     
     ignore_build = ctx.get_option('ignore_build_no')
 
