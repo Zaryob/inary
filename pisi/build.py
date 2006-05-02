@@ -618,12 +618,6 @@ class Builder:
                     # if this is an ar file, and this package is not a static package,
                     # don't include this file into the package.
                     continue
-                if not ctx.get_option('no_debug') \
-                    and fpath.endswith(ctx.const.debug_file_suffix) \
-                    and not package.name.endswith(ctx.const.debug_name_suffix):
-                    # if this is a debug file, and this package is not a debug package,
-                    # don't include this file into the package.
-                    continue
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
                 ftype, permanent = get_file_type(frpath, package.files, install_dir)
                 fsize = util.dir_size(fpath)
