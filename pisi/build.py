@@ -164,6 +164,9 @@ class Builder:
     def pkg_work_dir(self):
         return self.pkg_dir() + ctx.const.work_dir_suffix
 
+    def pkg_debug_dir(self):
+        return self.pkg_dir() + ctx.const.debug_dir_suffix
+
     def pkg_install_dir(self):
         return self.pkg_dir() + ctx.const.install_dir_suffix
 

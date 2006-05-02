@@ -60,6 +60,7 @@ class Constants:
         # directory suffixes for build
         self.__c.work_dir_suffix = "/work"       # these, too, because we might wanna change 'em
         self.__c.install_dir_suffix  = "/install"
+        self.__c.debug_dir_suffix  = "/debug"
 
         # file/directory names
         #note: these don't seem very well, constants are used
