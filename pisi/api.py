@@ -16,6 +16,7 @@
 
 import os
 import sys
+import syslog
 from os.path import exists
 import bsddb3.db as db
 
@@ -65,6 +66,7 @@ def init(database = True, write = True,
     else:
         ctx.ui = ui
 
+    syslog.openlog('pisi') # initialize log
 
     # If given define stdout and stderr. Needed by buildfarm currently
     # but others can benefit from this too.
@@ -72,7 +74,6 @@ def init(database = True, write = True,
         ctx.stdout = stdout
     if stderr:
         ctx.stderr = stderr
-
 
     import pisi.config
     ctx.config = pisi.config.Config(options)
@@ -103,6 +104,9 @@ def init(database = True, write = True,
 
 def finalize():
     if ctx.initialized:
+    
+        syslog.closelog()
+    
         pisi.repodb.finalize()
         pisi.installdb.finalize()
         if ctx.filesdb != None:
