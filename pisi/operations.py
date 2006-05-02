@@ -36,6 +36,7 @@ from pisi.index import Index
 import pisi.cli
 import pisi.atomicoperations as atomicoperations
 import pisi.ui as ui
+from pisi.version import Version
 
 class Error(pisi.Error):
     pass
@@ -334,7 +335,7 @@ def upgrade_pkg_names(A = []):
         pkg = ctx.packagedb.get_package(x)
 
         if ignore_build or (not build) or (not pkg.build):
-            if release < pkg.release:
+            if Version(release) < Version(pkg.release):
                 Ap.append(x)
             else:
                 ctx.ui.info(_('Package %s is already at the latest release %s.')
@@ -354,7 +355,7 @@ def upgrade_pkg_names(A = []):
     ctx.ui.debug('A = %s' % str(A))
     
     if not ctx.config.get_option('ignore_dependency'):
-        G_f, order = plan_upgrade(A)
+        G_f, order = plan_upgrade(A, ignore_build)
     else:
         G_f = None
         order = A
@@ -376,7 +377,7 @@ def upgrade_pkg_names(A = []):
     for install in install_ops:
         install.install(True)
 
-def plan_upgrade(A):
+def plan_upgrade(A, ignore_build = False):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
@@ -398,7 +399,7 @@ def plan_upgrade(A):
                       rep_pkg.build)
         if ignore_build or (not b) or (not bp):
             # if we can't look at build
-            if r >= rp:     # installed already new
+            if Version(r) >= Version(rp):     # installed already new
                 return False
         elif b and bp and b >= bp:
             return False

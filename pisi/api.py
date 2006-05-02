@@ -46,6 +46,7 @@ from pisi.files import Files
 from pisi.file import File
 import pisi.search
 import pisi.lockeddbshelve as shelve
+from pisi.version import Version
 
 class Error(pisi.Error):
     pass
@@ -146,13 +147,14 @@ def list_upgradable():
     ignore_build = ctx.get_option('ignore_build_no')
 
     A = ctx.installdb.list_installed()
+
     # filter packages that are not upgradable
     Ap = []
     for x in A:
         (version, release, build) = ctx.installdb.get_version(x)
         pkg = ctx.packagedb.get_package(x)
-        if ignore_build or (not build):
-            if release < pkg.release:
+        if ignore_build or (not build) or (not pkg.build):
+            if Version(release) < Version(pkg.release):
                 Ap.append(x)
         elif build < pkg.build:
                 Ap.append(x)
@@ -160,7 +162,6 @@ def list_upgradable():
             pass
             #ctx.ui.info('Package %s cannot be upgraded. ' % x)
     return Ap
-
 
 def package_graph(A, ignore_installed = False):
     """Construct a package relations graph, containing
