@@ -67,11 +67,15 @@ def init(database = True, write = True,
     else:
         ctx.ui = ui
 
-    logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(levelname)-8s %(message)s',
-                    datefmt='%a, %d %b %Y %H:%M:%S',
-                    filename='/var/log/pisi.log',
-                    filemode='w')
+    
+    if os.access('/var/log', os.W_OK):
+        ctx.log = True
+        logging.basicConfig(level=logging.DEBUG,
+            format='%(asctime)s %(levelname)-8s %(message)s',
+            datefmt='%a, %d %b %Y %H:%M:%S',
+            filename='/var/log/pisi.log')
+    else:
+        ctx.log = False
 
     # If given define stdout and stderr. Needed by buildfarm currently
     # but others can benefit from this too.
@@ -110,7 +114,8 @@ def init(database = True, write = True,
 def finalize():
     if ctx.initialized:
     
-        logging.shutdown()
+        if ctx.log:
+            logging.shutdown()
     
         pisi.repodb.finalize()
         pisi.installdb.finalize()
