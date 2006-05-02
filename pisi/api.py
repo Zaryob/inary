@@ -142,7 +142,7 @@ def finalize():
 
 def list_available(repo = None):
     '''returns a set of available package names'''
-    return ctx.packagedb.list_packages(repo = repo)
+    return set(ctx.packagedb.list_packages(repo = repo))
 
 def list_upgradable():
     ignore_build = ctx.get_option('ignore_build_no')
