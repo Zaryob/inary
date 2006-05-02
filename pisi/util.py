@@ -500,6 +500,9 @@ def strip_directory(top, excludelist=[]):
     for root, dirs, files in os.walk(top):
         for fn in files:
             frpath = join_path(root, fn)
+            drpath = join_path(os.path.dirname(top), 
+                               ctx.const.debug_dir_suffix, 
+                               remove_prefix(top, frpath))
             
             # Some upstream sources have buggy libtool and ltmain.sh with them, 
             # which causes wrong path entries in *.la files. And these wrong path
@@ -520,11 +523,11 @@ def strip_directory(top, excludelist=[]):
                     ctx.ui.debug("%s [%s]" %(p, "NoStrip"))
 
             if strip:
-                if strip_file(frpath):
+                if strip_file(frpath, drpath):
                     ctx.ui.debug("%s [%s]" %(p, "stripped"))
                 
 
-def strip_file(filepath):
+def strip_file(filepath, outpath):
     """strip a file"""
     p = os.popen("file \"%s\"" % filepath)
     o = p.read()
@@ -535,15 +538,15 @@ def strip_file(filepath):
         if ret:
             ctx.ui.warning(_("strip command failed for file '%s'!") % f)
 
-    def save_elf_debug(f):
+    def save_elf_debug(f, o):
         """copy debug info into file.debug file"""
-        p = os.popen("objcopy --only-keep-debug %s %s%s" % (f, f, ctx.const.debug_file_suffix))
+        p = os.popen("objcopy --only-keep-debug %s %s%s" % (f, o, ctx.const.debug_file_suffix))
         ret = p.close()
         if ret:
             ctx.ui.warning(_("objcopy (keep-debug) command failed for file '%s'!") % f)
         
         """mark binary/shared objects to use file.debug"""
-        p = os.popen("objcopy --add-gnu-debuglink=%s%s %s" % (f, ctx.const.debug_file_suffix, f))
+        p = os.popen("objcopy --add-gnu-debuglink=%s%s %s" % (o, ctx.const.debug_file_suffix, f))
         ret = p.close()
         if ret:
             ctx.ui.warning(_("objcopy (add-debuglink) command failed for file '%s'!") % f)
@@ -554,13 +557,15 @@ def strip_file(filepath):
 
     elif "SB executable" in o:
         if ctx.get_option('create_debug'):
-            save_elf_debug(filepath)
+            check_dir(os.path.dirname(outpath))
+            save_elf_debug(filepath, outpath)
         run_strip(filepath)
         return True
 
     elif "SB shared object" in o:
         if ctx.get_option('create_debug'):
-            save_elf_debug(filepath)
+            check_dir(os.path.dirname(outpath))
+            save_elf_debug(filepath, outpath)
         run_strip(filepath, "--strip-unneeded")
         # FIXME: warn for TEXTREL
         return True
