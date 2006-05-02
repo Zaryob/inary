@@ -26,6 +26,7 @@ _ = __trans.ugettext
 # PiSi modules
 import pisi
 import pisi.util as util
+import pisi.context as ctx
 
 class ArchiveError(pisi.Error):
     pass
@@ -101,6 +102,7 @@ class ArchiveZip(ArchiveBase):
     zip archives."""
     
     symmagic = 2716663808 #long of hex val '0xA1ED0000L'
+    comp_method = {'lzma': zipfileext.ZIP_LZMA, 'deflated': zipfileext.ZIP_DEFLATED}
     
     def __init__(self, file_path, arch_type = "zip", mode = 'r'):
         super(ArchiveZip, self).__init__(file_path, arch_type)
@@ -130,7 +132,8 @@ class ArchiveZip(ArchiveBase):
                 attr.external_attr = self.symmagic 
                 self.zip_obj.writestr(attr, dest)
             else:
-                self.zip_obj.write(file_name, arc_name, zipfileext.ZIP_LZMA)
+                self.zip_obj.write(file_name, arc_name, 
+                                   self.comp_method[ctx.get_option('compression_method')])
                 if not arc_name:
                     zinfo = self.zip_obj.getinfo(file_name)
                 else:

@@ -344,6 +344,8 @@ unpack, setup, build, install, package
     name = ("build", "bi")
 
     steps = ('unpack', 'setup', 'build', 'install', 'package')
+
+    compression_methods = ('deflated', 'lzma')
     
     def options(self):
         buildno_opts(self)
@@ -355,6 +357,8 @@ unpack, setup, build, install, package
         #                       help=_("perform only specified step"))
         self.parser.add_option("-U", "--until", action="store", default=None,
                                help=_("perform until and including specified step"))
+        self.parser.add_option("-C", "--compression-method", action="store", default='lzma',
+                               help=_("package compression method"))
         self.parser.add_option("-A", "--ignore-action-errors",
                                action="store_true", default=False,
                                help=_("bypass errors from ActionsAPI"))
@@ -383,6 +387,9 @@ unpack, setup, build, install, package
             self.init(database=True, write=False)
         else:
             self.init()
+
+        if ctx.get_option('compression_method') not in Build.compression_methods:
+                raise Error(_('compression_method must be one of %s ') % pisi.util.strlist(Build.compression_methods))
 
         if ctx.get_option('output_dir'):
             ctx.ui.info(_('Output directory: %s') % ctx.config.options.output_dir)
