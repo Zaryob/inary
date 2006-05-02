@@ -140,13 +140,9 @@ def finalize():
         ctx.ui.close()
         ctx.initialized = False
 
-def list_available():
+def list_available(repo = None):
     '''returns a set of available package names'''
-
-    available = set()
-    for repo in pisi.context.repodb.list():
-        available.update(ctx.packagedb.list_packages())
-    return available
+    return ctx.packagedb.list_packages(repo = repo)
 
 def list_upgradable():
     ignore_build = ctx.get_option('ignore_build_no')
