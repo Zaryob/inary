@@ -11,7 +11,7 @@
 #
 
 import sys
-import syslog
+import logging
 import locale
 
 import gettext
@@ -67,7 +67,6 @@ class CLI(UI):
     def info(self, msg, verbose = False, noln = False):
         # TODO: need to look at more kinds of info messages
         # let's cheat from KDE :)
-        #syslog.syslog(syslog.LOG_INFO, msg)
         if noln:
             msgend = ''
         else:
@@ -76,7 +75,7 @@ class CLI(UI):
 
     def warning(self, msg, verbose = False):
         msg = unicode(msg)
-        syslog.syslog(syslog.LOG_WARNING, msg)
+        logging.warning(msg)
         if ctx.get_option('no_color'):
             self.output(_('Warning: ') + msg + '\n', err=True, verbose=verbose)
         else:
@@ -84,7 +83,7 @@ class CLI(UI):
 
     def error(self, msg):
         msg = unicode(msg)
-        syslog.syslog(syslog.LOG_ERROR, msg)
+        logging.error(msg)
         if ctx.get_option('no_color'):
             self.output(_('Error: ') + msg + '\n', err=True)
         else:
@@ -93,7 +92,7 @@ class CLI(UI):
     def action(self, msg, verbose = False):
         #TODO: this seems quite redundant?
         msg = unicode(msg)
-        syslog.syslog(syslog.LOG_INFO, msg)
+        logging.info(msg)
         self.output(colorize(msg + '\n', 'green'))
 
     def choose(self, msg, opts):
@@ -152,4 +151,4 @@ class CLI(UI):
             msg = None
         if msg:
             self.output(colorize(msg + '\n', 'cyan'))
-            syslog.syslog(syslog.LOG_NOTICE, msg)
+            logging.info(msg)
