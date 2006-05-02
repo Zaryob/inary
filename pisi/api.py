@@ -288,20 +288,33 @@ def info_name(package_name, installed=False):
     else:
         raise Error(_('Package %s not found') % package_name)
 
-def search_package_terms(terms, lang = None):
+def search_package_names(query):
+    r = set()
+    packages = ctx.packagedb.list_packages()
+    for pkgname in packages:
+        if query in pkgname:
+            r.add(pkgname)
+    return r
+
+def search_package_terms(terms, lang = None, search_names = True):
     if not lang:
         lang = pisi.pxml.autoxml.LocalText.get_lang()
     r1 = pisi.search.query_terms('summary', lang, terms)
     r2 = pisi.search.query_terms('description', lang, terms)
     r = r1.union(r2)
+    if search_names:
+        for term in terms:
+            r |= search_package_names(term)
     return r
 
-def search_package(query, lang = None):
+def search_package(query, lang = None, search_names = True):
     if not lang:
         lang = pisi.pxml.autoxml.LocalText.get_lang()
     r1 = pisi.search.query('summary', lang, query)
     r2 = pisi.search.query('description', lang, query)
     r = r1.union(r2)
+    if search_names:
+        r |= search_package_names(query)
     return r
 
 def check(package):
