@@ -17,6 +17,7 @@
 import os
 import sys
 import logging
+import logging.handlers
 from os.path import exists
 import bsddb3.db as db
 
@@ -67,17 +68,15 @@ def init(database = True, write = True,
     else:
         ctx.ui = ui
 
-    
     if os.access('/var/log', os.W_OK):
-        # FIXME: Breaks buildfarm 
-        #ctx.log = True
-        ctx.log = False
-        logging.basicConfig(level=logging.DEBUG,
-            format='%(asctime)s %(levelname)-8s %(message)s',
-            datefmt='%a, %d %b %Y %H:%M:%S',
-            filename='/var/log/pisi.log')
+        handler = logging.handlers.RotatingFileHandler('/var/log/pisi.log')
+        handler.setLevel(logging.DEBUG)
+        formatter = logging.Formatter('%(asctime)-12s: %(levelname)-8s %(message)s')
+        handler.setFormatter(formatter)
+        ctx.log = logging.getLogger('pisi')
+        ctx.log.addHandler(handler)
     else:
-        ctx.log = False
+        ctx.log = None
 
     # If given define stdout and stderr. Needed by buildfarm currently
     # but others can benefit from this too.
@@ -118,7 +117,7 @@ def finalize():
     
         if ctx.log:
             logging.shutdown()
-    
+
         pisi.repodb.finalize()
         pisi.installdb.finalize()
         if ctx.filesdb != None:

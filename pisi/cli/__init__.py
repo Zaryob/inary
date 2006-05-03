@@ -76,7 +76,7 @@ class CLI(UI):
     def warning(self, msg, verbose = False):
         msg = unicode(msg)
         if ctx.log:
-            logging.warning(msg)
+            ctx.log.warning(msg)
         if ctx.get_option('no_color'):
             self.output(_('Warning: ') + msg + '\n', err=True, verbose=verbose)
         else:
@@ -85,7 +85,7 @@ class CLI(UI):
     def error(self, msg):
         msg = unicode(msg)
         if ctx.log:
-            logging.error(msg)
+            ctx.log.error(msg)
         if ctx.get_option('no_color'):
             self.output(_('Error: ') + msg + '\n', err=True)
         else:
@@ -95,7 +95,7 @@ class CLI(UI):
         #TODO: this seems quite redundant?
         msg = unicode(msg)
         if ctx.log:
-            logging.info(msg)
+            ctx.log.info(msg)
         self.output(colorize(msg + '\n', 'green'))
 
     def choose(self, msg, opts):
@@ -155,4 +155,4 @@ class CLI(UI):
         if msg:
             self.output(colorize(msg + '\n', 'cyan'))
             if ctx.log:
-                logging.info(msg)
+                ctx.log.info(msg)
