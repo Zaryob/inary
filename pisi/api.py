@@ -70,11 +70,13 @@ def init(database = True, write = True,
 
     if os.access('/var/log', os.W_OK):
         handler = logging.handlers.RotatingFileHandler('/var/log/pisi.log')
-        handler.setLevel(logging.DEBUG)
+        #handler.setLevel(logging.DEBUG)
         formatter = logging.Formatter('%(asctime)-12s: %(levelname)-8s %(message)s')
         handler.setFormatter(formatter)
         ctx.log = logging.getLogger('pisi')
         ctx.log.addHandler(handler)
+        ctx.loghandler = handler
+        ctx.log.setLevel(logging.DEBUG)
     else:
         ctx.log = None
 
@@ -116,7 +118,8 @@ def finalize():
     if ctx.initialized:
     
         if ctx.log:
-            logging.shutdown()
+            ctx.loghandler.flush()
+            ctx.log.removeHandler(ctx.loghandler)
 
         pisi.repodb.finalize()
         pisi.installdb.finalize()
