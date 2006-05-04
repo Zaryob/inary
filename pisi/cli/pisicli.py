@@ -53,8 +53,12 @@ class PreParser(OptionParser):
             arg = rargs[0]
             def option():
                 if not self.allow_interspersed_args and first_arg:
-                    self.error_(('Options must precede non-option arguments'))
-                self.opts.append(rargs[0][2:])
+                    self.error(_('Options must precede non-option arguments'))
+                arg = rargs[0]
+                if arg.startswith('--'):
+                    self.opts.append(arg[2:])
+                else:
+                    self.opts.append(arg[1:])
                 del rargs[0]
                 return
             # We handle bare "--" explicitly, and bare "-" is handled by the
@@ -89,7 +93,7 @@ class PisiCLI(object):
                 if 'version' in opts:
                     self.parser.print_version()
                     sys.exit(0)
-                elif 'help' in opts:
+                elif 'help' in opts or 'h' in opts:
                     self.die()
                 raise Error(_('No command given'))
             cmd_name = args[0]
