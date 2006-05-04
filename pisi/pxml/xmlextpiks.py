@@ -29,6 +29,9 @@ _ = __trans.ugettext
 import pisi
 import piksemel as iks
 
+parse = iks.parse
+newDocument = iks.newDocument
+
 def getAllNodes(node, tagPath):
     """retrieve all nodes that match a given tag path."""
     tags = tagPath.split('/')
