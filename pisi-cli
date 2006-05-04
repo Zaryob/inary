@@ -14,6 +14,7 @@ import sys
 import locale
 import traceback
 import exceptions
+import signal
 import bsddb3.db as db
 
 import pisi.ui
@@ -29,7 +30,7 @@ def exit():
     sys.exit(1)
 
 def handle_exception(exception, value, tb):
-
+    signal.signal(signal.SIGINT, signal.SIG_IGN)   # disable further interrupts
     ui = pisi.cli.CLI() # make a temporary UI
     show_traceback = False
     if exception == exceptions.KeyboardInterrupt:
