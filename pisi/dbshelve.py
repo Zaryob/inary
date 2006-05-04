@@ -81,6 +81,9 @@ class DBShelf:
                 except db.DBError, e:
                     autotxn.abort()
                     raise e
+                except Exception, e:
+                    autotxn.abort()
+                    raise e
                 autotxn.commit()
             else: # execute without transactions
                 retval = proc(None)

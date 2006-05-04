@@ -63,6 +63,9 @@ def txn_proc(proc, txn = None):
             except db.DBError, e:
                 autotxn.abort()
                 raise e
+            except Exception, e:
+                autotxn.abort()
+                raise e
             autotxn.commit()
         else:
             retval = proc(None)
