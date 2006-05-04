@@ -13,10 +13,12 @@ import unittest
 import pisi.api
 import pisi
 
-class ConflictTestCase(unittest.TestCase):
+import testcase
+
+class ConflictTestCase(testcase.TestCase):
     def setUp(self):
-        pisi.api.init(write=False)
-        
+        testcase.TestCase.setUp(self)
+
         d_t = {}
         packages = {"a": ["z", "t", "d"],
                     "b": ["a", "e", "f"],
