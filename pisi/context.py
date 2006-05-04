@@ -23,6 +23,8 @@ const = pisi.constants.Constants()
 
 config = None
 
+log = None
+
 use_mdom = False
 
 def get_option(opt):
