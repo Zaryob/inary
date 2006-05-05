@@ -614,54 +614,15 @@ def is_package_name(fn, package_name = None):
     return False
 
 def env_update():
-
+    import pisi.environment
     ctx.ui.info(_('Updating environment...'))
-    env_dir = join_path(ctx.config.dest_dir(), "/etc/env.d")
-    profile_file = join_path(ctx.config.dest_dir(), "/etc/profile.env")
-    ldconf_file = join_path(ctx.config.dest_dir(), "/etc/ld.so.conf")
 
+    env_dir = join_path(ctx.config.dest_dir(), "/etc/env.d")
     if not os.path.exists(env_dir):
         os.makedirs(env_dir, 0755)
 
-    list = []
-    for file in os.listdir(env_dir):
-        if not os.path.isdir(join_path(env_dir, file)):
-            list.append(file)
+    pisi.environment(ctx.config.dest_dir())
 
-    list.sort()
-
-    keys = {}
-    for file in list:
-        f = open(join_path(env_dir, file), "r")
-        for line in f:
-            if not re.search("^#", line.strip()):
-                currentLine = line.strip().split("=")
-
-                try:
-                    if keys.has_key(currentLine[0]):
-                        keys[currentLine[0]] += ":" + currentLine[1].replace("\"", "")
-                    else:
-                        keys[currentLine[0]] = currentLine[1].replace("\"", "")
-                except IndexError:
-                    pass
-
-    # generate profile.env
-    f = open(profile_file, "w")
-    for key in keys:
-        f.write("export %s=\"%s\"\n" % (key, keys[key]))
-    f.close()
-
-    # generate ld.so.conf
-    f = open(ldconf_file, "w")
-    if keys.has_key("LDPATH"):
-        for path in keys["LDPATH"].split(":"):
-            f.write("%s\n" % path)
-    f.close()
-
-    # run ldconfig
-    if run_batch("/sbin/ldconfig -X -r %s" % ctx.config.dest_dir())[0]:
-        raise Error(_("ERROR: /sbin/ldconfig -X -r %s failed") % ctx.config.dest_dir())
-   
 def pure_package_name(package_name):
     "return pure package name from given string"
     "ex: package_name=tasma-1.0.3-5-2.pisi, returns tasma"
