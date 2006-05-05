@@ -162,7 +162,6 @@ class InstallDB:
             # FIXME: it might be more appropriate to pass date
             # as an argument, or installation data afterwards
             # to do this -- exa
-            # dailywtf. this does not look good -- exa
             if not rebuild:
                 import time
                 ctime = time.localtime()

@@ -162,10 +162,9 @@ def list_upgradable():
             if Version(release) < Version(pkg.release):
                 Ap.append(x)
         elif build < pkg.build:
-                Ap.append(x)
+            Ap.append(x)
         else:
             pass
-            #ctx.ui.info('Package %s cannot be upgraded. ' % x)
     return Ap
 
 def package_graph(A, ignore_installed = False):

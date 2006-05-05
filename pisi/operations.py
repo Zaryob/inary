@@ -224,15 +224,51 @@ def expand_components(A):
             Ap.add(x)
     return Ap
 
-def install_pkg_names(A, reinstall = False):
+def is_upgradable(name, ignore_build = False):
+    if not ctx.installdb.is_installed(name):
+        return False
+    (version, release, build) = ctx.installdb.get_version(name)
+    pkg = ctx.packagedb.get_package(name)
+    if ignore_build or (not build) or (not pkg.build):
+        if Version(release) < Version(pkg.release):
+            return True
+    elif build < pkg.build:
+        return True
+    else:
+        return False
+
+def upgrade_base(A = set()):
+    ignore_build = ctx.get_option('ignore_build_no')
+    if not ctx.get_option('bypass_safety'):
+        if ctx.componentdb.has_component('system.base'):
+            extra_packages = set(ctx.componentdb.get_component('system.base').packages) - A
+            extra_installs = filter(lambda x: not ctx.installdb.is_installed(x), extra_packages)
+            if extra_installs:
+                ctx.ui.warning(_('Safety switch: Following extra packages in system.base will be installed: ') +
+                               util.strlist(extra_installs))
+                install_pkg_names(extra_installs, bypass_safety=True)
+                #A |= extra_installs
+            extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), extra_packages)
+            if extra_upgrades:
+                ctx.ui.warning(_('Safety switch: Following extra packages in system.base will be upgraded: ') +
+                               util.strlist(extra_upgrades))
+                upgrade_pkg_names(extra_upgrades, bypass_safety=True)
+        else:
+            ctx.ui.warning(_('Safety switch: the component system.base cannot be found'))
+
+def install_pkg_names(A, reinstall = False, bypass_safety = False):
     """This is the real thing. It installs packages from
     the repository, trying to perform a minimum number of
     installs"""
 
+    A = [str(x) for x in A] #FIXME: why do we still get unicode input here? :/ -- exa
     # A was a list, remove duplicates and expand components
     A_0 = A = expand_components(set(A))
     ctx.ui.debug('A = %s' % str(A))
 
+    if not bypass_safety:
+        upgrade_base(A)
+    
     # filter packages that are already installed
     if not reinstall:
         Ap = set(filter(lambda x: not ctx.installdb.is_installed(x), A))
@@ -245,7 +281,7 @@ def install_pkg_names(A, reinstall = False):
     if len(A)==0:
         ctx.ui.info(_('No packages to install.'))
         return
-        
+
     if not ctx.config.get_option('ignore_dependency'):
         G_f, order = plan_install_pkg_names(A)
     else:
@@ -264,7 +300,7 @@ in the respective order to satisfy dependencies:
 
     if total_size:
         total_size, symbol = util.human_readable_size(total_size)
-        ctx.ui.warning(_('Total size of packages: %.2f %s') % (total_size, symbol))
+        ctx.ui.info(_('Total size of packages: %.2f %s') % (total_size, symbol))
 
     if ctx.get_option('dry_run'):
         return
@@ -312,7 +348,7 @@ def plan_install_pkg_names(A):
 def upgrade(A):
     upgrade_pkg_names(A)
 
-def upgrade_pkg_names(A = []):
+def upgrade_pkg_names(A = [], bypass_safety = False):
     """Re-installs packages from the repository, trying to perform
     a minimum or maximum number of upgrades according to options."""
     
@@ -324,6 +360,10 @@ def upgrade_pkg_names(A = []):
 
     # filter packages that are not upgradable
     A_0 = A = expand_components(set(A))
+
+    if not bypass_safety:
+        upgrade_base(A)
+
     Ap = []
     for x in A:
         if x.endswith(ctx.const.package_suffix):
@@ -347,7 +387,7 @@ def upgrade_pkg_names(A = []):
                 ctx.ui.info(_('Package %s is already at the latest build %s.')
                             % (pkg.name, pkg.build), True)
     A = set(Ap)
-
+    
     if len(A)==0:
         ctx.ui.info(_('No packages to upgrade.'))
         return True
@@ -360,7 +400,7 @@ def upgrade_pkg_names(A = []):
         G_f = None
         order = A
 
-    ctx.ui.info(_("""The following packages will be upgraded:\n""") +
+    ctx.ui.info(_('The following packages will be upgraded: ') +
                 util.strlist(order))
 
     if ctx.get_option('dry_run'):
