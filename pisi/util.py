@@ -621,7 +621,7 @@ def env_update():
     if not os.path.exists(env_dir):
         os.makedirs(env_dir, 0755)
 
-    pisi.environment(ctx.config.dest_dir())
+    pisi.environment.update_environment(ctx.config.dest_dir())
 
 def pure_package_name(package_name):
     "return pure package name from given string"
