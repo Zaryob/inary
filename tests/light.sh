@@ -3,10 +3,8 @@
 pwd
 PATH=$PATH:.
 set -x
+rm -rf tmp
 mkdir tmp
-pisi-cli -Dtmp clean
-pisi-cli -B -Dtmp remove unzip
-pisi-cli -Dtmp remove-repo repo1
 set -e
 pisi-cli -Dtmp -E --ignore-build-no build tests/zip/pspec.xml tests/unzip/pspec.xml
 pisi-cli -Dtmp index .
@@ -21,3 +19,5 @@ pisi-cli -Dtmp info zip*.pisi
 pisi-cli -d -Dtmp --ignore-comar -y install zip*.pisi
 pisi-cli -Dtmp list-pending
 pisi-cli -Dtmp configure-pending
+pisi-cli -Dtmp remove-repo repo1
+pisi-cli -Dtmp clean
