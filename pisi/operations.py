@@ -244,13 +244,13 @@ def upgrade_base(A = set()):
             extra_packages = set(ctx.componentdb.get_component('system.base').packages) - A
             extra_installs = filter(lambda x: not ctx.installdb.is_installed(x), extra_packages)
             if extra_installs:
-                ctx.ui.warning(_('Safety switch: Following extra packages in system.base will be installed: ') +
+                ctx.ui.warning(_('Safety switch: Following packages in system.base will be installed: ') +
                                util.strlist(extra_installs))
                 install_pkg_names(extra_installs, bypass_safety=True)
                 #A |= extra_installs
             extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), extra_packages)
             if extra_upgrades:
-                ctx.ui.warning(_('Safety switch: Following extra packages in system.base will be upgraded: ') +
+                ctx.ui.warning(_('Safety switch: Following packages in system.base will be upgraded: ') +
                                util.strlist(extra_upgrades))
                 upgrade_pkg_names(extra_upgrades, bypass_safety=True)
         else:
