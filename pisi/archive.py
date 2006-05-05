@@ -132,8 +132,12 @@ class ArchiveZip(ArchiveBase):
                 attr.external_attr = self.symmagic 
                 self.zip_obj.writestr(attr, dest)
             else:
-                self.zip_obj.write(file_name, arc_name, 
-                                   self.comp_method[ctx.get_option('compression_method')])
+                method = ctx.get_option('compression_method')
+                if not method:
+                    self.zip_obj.write(file_name, arc_name, zipfileext.ZIP_LZMA)
+                else:
+                    self.zip_obj.write(file_name, arc_name, self.comp_method[method])
+
                 if not arc_name:
                     zinfo = self.zip_obj.getinfo(file_name)
                 else:
