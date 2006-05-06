@@ -21,7 +21,7 @@ import testcase
 class SearchTestCase(testcase.TestCase):
 
     def setUp(self):
-        testcase.TestCase.setUp(self, database = False)
+        testcase.TestCase.setUp(self, database = True)
         pisi.lockeddbshelve.init_dbenv()
 
     def testSearch(self):
