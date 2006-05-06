@@ -22,7 +22,6 @@ class SearchTestCase(testcase.TestCase):
 
     def setUp(self):
         testcase.TestCase.setUp(self, database = True)
-        pisi.lockeddbshelve.init_dbenv()
 
     def testSearch(self):
         doc1 = "A set object is an unordered collection of immutable values."
