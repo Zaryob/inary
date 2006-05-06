@@ -20,6 +20,7 @@ class BuildTestCase(testcase.TestCase):
         options = pisi.config.Options()
         options.ignore_build_no = False
         testcase.TestCase.setUp(self, options = options)
+        pisi.context.config.values.build.buildno = True
 
     def testBasicBuild(self):
         shutil.copy('tests/buildtests/a/actions.py-1', 'tests/buildtests/a/actions.py')

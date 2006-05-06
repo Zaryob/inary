@@ -574,7 +574,7 @@ class Builder:
 
         # build no
         if ctx.config.options.ignore_build_no:
-            metadata.package.build = None  # means, build no information n/a
+            metadata.package.build = None
             ctx.ui.warning(_('Build number is not available due to --ignore-build'))
         elif (not ctx.config.values.build.buildno):
             metadata.package.build = None
@@ -602,10 +602,9 @@ class Builder:
 
         # we'll exclude collisions in get_file_hashes. Having a
         # collisions list is not wrong, we must just handle it :).
-        # sure -- exa
         collisions = check_path_collision(package, self.spec.packages)
-        # FIXME: material collisions after expanding globs must be
-        # reported as errors, and an exception must be raised
+        # FIXME: material collisions after expanding globs could be
+        # reported as errors
 
         d = {}
         def add_path(path):
@@ -616,7 +615,7 @@ class Builder:
                     and not package.name.endswith(ctx.const.static_name_suffix) \
                     and util.is_ar_file(fpath):
                     # if this is an ar file, and this package is not a static package,
-                    # don't include this file into the package.
+                    # don't include this file into the package.
                     continue
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
                 ftype, permanent = get_file_type(frpath, package.files, install_dir)
@@ -643,6 +642,7 @@ class Builder:
         found = []        
         def locate_package_names(files):
             for fn in files:
+                #print 'looking', fn
                 if util.is_package_name(fn, package_name):
                     old_package_fn = util.join_path(root, fn)
                     try:
@@ -661,6 +661,15 @@ class Builder:
 
         for root, dirs, files in os.walk(ctx.config.packages_dir()):
             locate_package_names(files)
+
+        outdir=ctx.get_option('output_dir')
+        if not outdir:
+            outdir = '.'
+        files = [join(outdir,entry) for entry in os.listdir(outdir)
+                 if os.path.isfile(entry)]
+        #print os.listdir(outdir)
+        #print files
+        locate_package_names(files)
 
         if not found:
             return (1, None)
