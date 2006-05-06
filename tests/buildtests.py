@@ -11,14 +11,23 @@
 
 import unittest
 import shutil
+import glob
+import os
 
 import testcase
 from pisi.build import *
 
 class BuildTestCase(testcase.TestCase):
+
+    def cleanOutput(self):
+        for x in glob.glob('tmp/a*.pisi'):
+            os.unlink(x)
+
     def setUp(self):
         options = pisi.config.Options()
         options.ignore_build_no = False
+        options.output_dir = 'tmp'
+        self.cleanOutput()
         testcase.TestCase.setUp(self, options = options)
         pisi.context.config.values.build.buildno = True
 
@@ -27,23 +36,23 @@ class BuildTestCase(testcase.TestCase):
         pspec = 'tests/buildtests/a/pspec.xml'
         pb = Builder(pspec, None)
         pb.build()
-        self.assertEqual(os.path.exists('a-1.0-1-1.pisi'), True)
-        shutil.move('a-1.0-1-1.pisi', 'tests/buildtests/a/a-1.0-1-1.pisi')
+        self.assert_(os.path.exists('tmp/a-1.0-1-1.pisi'))
 
     def testBuildNumber(self):
+        self.cleanOutput()
+        self.testBasicBuild()
+        
         pspec = 'tests/buildtests/a/pspec.xml'
-        pb = Builder(pspec, None)
-
         shutil.copy('tests/buildtests/a/actions.py-2', 'tests/buildtests/a/actions.py')
+        pb = Builder(pspec, None)
         pb.build()
-        self.assertEqual(os.path.exists('a-1.0-1-2.pisi'), True)
-
-        shutil.copy('tests/buildtests/a/actions.py-3', 'tests/buildtests/a/actions.py')
+        self.assert_(os.path.exists('tmp/a-1.0-1-2.pisi'))
+        
         pb.build()
-        self.assertEqual(os.path.exists('a-1.0-1-3.pisi'), False)
- 
+        # because nothing is changed
+        self.assert_(not os.path.exists('tmp/a-1.0-1-3.pisi'))
+        
         os.remove('tests/buildtests/a/actions.py')
-        os.remove('a-1.0-1-2.pisi')
-        os.remove('tests/buildtests/a/a-1.0-1-1.pisi')
+        os.remove('tmp/a-1.0-1-2.pisi')
 
 suite = unittest.makeSuite(BuildTestCase)

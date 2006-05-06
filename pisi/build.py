@@ -637,39 +637,33 @@ class Builder:
 
     def calc_build_no(self, package_name):
         """Calculate build number"""
-
         # find previous build in packages dir
         found = []        
-        def locate_package_names(files):
-            for fn in files:
-                #print 'looking', fn
-                if util.is_package_name(fn, package_name):
-                    old_package_fn = util.join_path(root, fn)
-                    try:
-                        old_pkg = Package(old_package_fn, 'r')
-                        old_pkg.read(util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
-                        ctx.ui.info(_('(found old version %s)') % old_package_fn)
-                        if str(old_pkg.metadata.package.name) != package_name:
-                            ctx.ui.warning(_('Skipping %s with wrong pkg name ') %
-                                           old_package_fn)
-                            continue
-                        old_build = old_pkg.metadata.package.build
-                        found.append( (old_package_fn, old_build) )
-                    except:
-                        ctx.ui.warning('Package file %s may be corrupt. Skipping.' % old_package_fn)
-                        continue
+        def locate_old_package(old_package_fn):
+            if util.is_package_name(os.path.basename(old_package_fn), package_name):
+                try:
+                    old_pkg = Package(old_package_fn, 'r')
+                    old_pkg.read(util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
+                    ctx.ui.info(_('(found old version %s)') % old_package_fn)
+                    if str(old_pkg.metadata.package.name) != package_name:
+                        ctx.ui.warning(_('Skipping %s with wrong pkg name ') %
+                                                old_package_fn)
+                        return
+                    old_build = old_pkg.metadata.package.build
+                    found.append( (old_package_fn, old_build) )
+                except:
+                    ctx.ui.warning('Package file %s may be corrupt. Skipping.' % old_package_fn)
 
         for root, dirs, files in os.walk(ctx.config.packages_dir()):
-            locate_package_names(files)
+            for file in files:
+                locate_old_package(join(root,file))
 
         outdir=ctx.get_option('output_dir')
         if not outdir:
             outdir = '.'
-        files = [join(outdir,entry) for entry in os.listdir(outdir)
-                 if os.path.isfile(entry)]
-        #print os.listdir(outdir)
-        #print files
-        locate_package_names(files)
+        for file in [join(outdir,entry) for entry in os.listdir(outdir)]:
+            if os.path.isfile(file):
+                locate_old_package(file)
 
         if not found:
             return (1, None)
