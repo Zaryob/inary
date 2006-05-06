@@ -23,7 +23,8 @@ class TestCase(unittest.TestCase):
             options = pisi.config.Options()
             options.ignore_build_no = False
         options.destdir = 'tmp'
-        pisi.api.init(options = options, comar = comar, database = database)
+        pisi.api.init(options = options, comar = comar,
+                      database = database, write = database)
 
     def tearDown(self, ):
         pisi.api.finalize()
