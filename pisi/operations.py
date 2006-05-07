@@ -230,12 +230,9 @@ def is_upgradable(name, ignore_build = False):
     (version, release, build) = ctx.installdb.get_version(name)
     pkg = ctx.packagedb.get_package(name)
     if ignore_build or (not build) or (not pkg.build):
-        if Version(release) < Version(pkg.release):
-            return True
-    elif build < pkg.build:
-        return True
+        return Version(release) < Version(pkg.release)
     else:
-        return False
+        return build < pkg.build
 
 def upgrade_base(A = set()):
     ignore_build = ctx.get_option('ignore_build_no')
@@ -431,20 +428,6 @@ def plan_upgrade(A, ignore_build = False):
         G_f.add_package(x)
     B = A
     
-    def upgradable(dep):
-        #pre dep.package is installed
-        (v,r,b) = ctx.installdb.get_version(dep.package)
-        rep_pkg = packagedb.get_package(dep.package)
-        (vp,rp,bp) = (rep_pkg.version, rep_pkg.release, 
-                      rep_pkg.build)
-        if ignore_build or (not b) or (not bp):
-            # if we can't look at build
-            if Version(r) >= Version(rp):     # installed already new
-                return False
-        elif b and bp and b >= bp:
-            return False
-        return True
-
     # TODO: conflicts
 
     while len(B) > 0:
@@ -456,7 +439,7 @@ def plan_upgrade(A, ignore_build = False):
                 if dependency.repo_satisfies_dep(dep):
                     if ctx.installdb.is_installed(dep.package):
                         if ctx.get_option('eager'):
-                            if not upgradable(dep):
+                            if not is_upgradable(dep.package):
                                 continue
                         else:
                             if dependency.installed_satisfies_dep(dep):
@@ -476,19 +459,21 @@ def plan_upgrade(A, ignore_build = False):
             pkg = packagedb.get_package(x)
             rev_deps = packagedb.get_rev_deps(x)
             for (rev_dep, depinfo) in rev_deps:
-                if not ctx.get_option('eager'):
-                    # add unsatisfied reverse dependencies
-                    if packagedb.has_package(rev_dep) and \
+                if ctx.get_option('eager'):
+                    # add all upgradable reverse deps
+                    if is_upgradable(rev_dep): 
+                        if not rev_dep in G_f.vertices():
+                            Bp.add(rev_dep)
+                            G_f.add_plain_dep(rev_dep, x)
+                else:
+                    # add only installed but unsatisfied reverse dependencies
+                    if ctx.installdb.is_installed(rev_dep) and \
                        (not dependency.installed_satisfies_dep(depinfo)):
                         if not dependency.repo_satisfies_dep(depinfo):
                             raise Error(_('Reverse dependency %s cannot be satisfied') % rev_dep)
                         if not rev_dep in G_f.vertices():
                             Bp.add(rev_dep)
                             G_f.add_plain_dep(rev_dep, x)
-                else:
-                    if not rev_dep in G_f.vertices():
-                        Bp.add(rev_dep)
-                        G_f.add_plain_dep(rev_dep, x)
         B = Bp
 
     if ctx.config.get_option('debug'):
