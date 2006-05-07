@@ -19,6 +19,8 @@ import pisi
 import pisi.pxml.xmlfile as xmlfile
 import pisi.pxml.autoxml as autoxml
 import pisi.lockeddbshelve as shelve
+from pisi.itembyrepodb import ItemByRepoDB
+import pisi.itembyrepodb as itembyrepodb
 
 class Error(pisi.Error):
     pass
@@ -91,58 +93,72 @@ class ComponentDB(object):
     
     #FIXME: we might need a database per repo in the future
     def __init__(self):
-        self.d = shelve.LockedDBShelf('components')
+        self.d = ItemByRepoDB('component')
 
     def close(self):
         self.d.close()
 
-    def has_component(self, name, txn = None):
-        name = shelve.LockedDBShelf.encodekey(name)
-        return self.d.has_key(str(name), txn)
+    def destroy(self):
+        self.d.destroy()
 
-    def get_component(self, name, txn = None):
-        name = shelve.LockedDBShelf.encodekey(name)
+    def has_component(self, name, repo = None, txn = None):
+        #name = shelve.LockedDBShelf.encodekey(name)
+        name = str(name)
+        return self.d.has_key(name, repo, txn)
+
+    def get_component(self, name, repo=None, txn = None):
+        try:
+            return self.d.get_item(name, repo, txn=txn)
+        except pisi.itembyrepodb.NotfoundError, e:
+            raise Error(_('Component %s not found') % name)
+
+    def get_component_repo(self, name, repo=None, txn = None):
+        #name = shelve.LockedDBShelf.encodekey(name)
+        try:
+            return self.d.get_item_repo(name, repo, txn=txn)
+        except pisi.itembyrepodb.NotfoundError, e:
+            raise Error(_('Component %s not found') % name)
+
+    def list_components(self, repo=None, show_tracking=False):
+        return self.d.list(repo, show_tracking=show_tracking)
+
+    def update_component(self, component, repo, txn = None):
         def proc(txn):
-            if not self.has_component(name, txn):
-                self.d.put(name, Component(name = name), txn)
-            return self.d.get(name, txn)
-        return self.d.txn_proc(proc, txn)
-
-    def list_components(self):
-        list = []
-        for (pkg, x) in self.d.items():
-            list.append(pkg)
-        return list
-
-    def update_component(self, component, txn = None):
-        def proc(txn):
-            if self.d.has_key(component.name):
+            if self.has_component(component.name, repo, txn):
                 # preserve the list of packages
-                component.packages = self.d[component.name].packages
-            self.d[component.name] = component
+                component.packages = self.d.get_item(component.name, repo, txn).packages
+            self.d.add_item(component.name, component, repo, txn)
         self.d.txn_proc(proc, txn)
 
-    def add_package(self, component_name, package, txn = None):
+    def add_package(self, component_name, package, repo, txn = None):
         def proc(txn):
-            component = self.get_component(component_name, txn)
+            if self.has_component(component_name, repo, txn):
+                component = self.get_component(component_name, repo, txn)
+            else:
+                component = Component( name = component_name )
             if not package in component.packages:
                 component.packages.append(package)
-            self.d.put(component_name, component, txn) # update
+            self.d.add_item(component_name, component, repo, txn) # update
         self.d.txn_proc(proc, txn)
 
-    def remove_package(self, component_name, package, txn = None):
+    def remove_package(self, component_name, package, repo = None, txn = None):
         def proc(txn):
-            if not self.has_component(component_name, txn):
+            if not self.has_component(component_name, repo, txn):
                 raise Error(_('Information for component %s not available') % component_name)
-            component = self.get_component(component_name, txn)
+            if not repo:
+                repo = self.d.which_repo(component_name, txn=txn) # get default repo then
+            component = self.get_component(component_name, repo, txn)
             if package in component.packages:
                 component.packages.remove(package)
-            self.d.put(component_name, component, txn) # update
+            self.d.add_item(component_name, component, repo, txn) # update
         self.d.txn_proc(proc, txn)
 
     def clear(self, txn = None):
         self.d.clear(txn)
 
-    def remove_component(self, name, txn = None):
+    def remove_component(self, name, repo = None, txn = None):
         name = str(name)
-        self.d.delete(name, txn)
+        self.d.remove_item(name, repo, txn)
+
+    def remove_repo(self, repo, txn = None):
+        self.d.remove_repo(repo, txn=txn)

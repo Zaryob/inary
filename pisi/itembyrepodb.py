@@ -48,7 +48,7 @@ class ItemByRepoDB(object):
         self.d.clear(txn=txn)
 
     def txn_proc(self, proc, txn):
-        self.d.txn_proc(proc, txn)
+        return self.d.txn_proc(proc, txn)
 
     def items(self):
         return self.d.items()

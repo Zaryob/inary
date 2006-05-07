@@ -97,7 +97,7 @@ class PackageDB(object):
                 else:
                     self.dr.add_item(dep_name, [ (name, dep) ], repo, txn)
             # add component
-            ctx.componentdb.add_package(package_info.partOf, package_info.name, txn)
+            ctx.componentdb.add_package(package_info.partOf, package_info.name, repo, txn)
             # index summary and description
             for (lang, doc) in package_info.summary.iteritems():
                 if lang in ['en', 'tr']:
@@ -120,8 +120,7 @@ class PackageDB(object):
             if self.dr.has_key(name, repo, txn=txn):
                 self.dr.remove_item(name, repo, txn=txn)
             #WORKAROUND: do not remove component if it is not in repo
-            if type(repo)==types.StringType:
-                ctx.componentdb.remove_package(package_info.partOf, package_info.name, txn)
+            ctx.componentdb.remove_package(package_info.partOf, package_info.name, repo, txn)
         self.d.txn_proc(proc, txn)
         
     def remove_repo(self, repo, txn = None):

@@ -106,7 +106,7 @@ class Index(XmlFile):
 
     def update_db(self, repo, txn = None):
         for comp in self.components:
-            ctx.componentdb.update_component(comp, txn=txn)
+            ctx.componentdb.update_component(comp, repo, txn)
         ctx.packagedb.remove_repo(repo, txn=txn)
         for pkg in self.packages:
             ctx.packagedb.add_package(pkg, repo, txn=txn)
