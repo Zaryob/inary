@@ -39,7 +39,8 @@ import cPickle
 import bsddb3.db as db
 import bsddb3.dbobj as dbobj
 import string
-
+import sys
+import traceback
 import pisi
 
 class CodingError(pisi.Error):
@@ -83,6 +84,7 @@ class DBShelf:
                     raise e
                 except Exception, e:
                     autotxn.abort()
+                    #e.args += tuple(traceback.format_tb(sys.exc_traceback))
                     raise e
                 autotxn.commit()
             else: # execute without transactions
