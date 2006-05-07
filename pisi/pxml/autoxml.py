@@ -475,7 +475,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             return getNodeAttribute(node, attr)
         def writetext(node, attr, text):
             #print 'write attr', attr, text
-            node.setAttributeNS(XML_NS, attr, text)
+            setNodeAttribute(node, attr, text)
         anonfuns = cls.gen_anon_basic(attr, spec, readtext, writetext)
         return cls.gen_named_comp(attr, spec, anonfuns)
 
@@ -692,7 +692,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                     #FIXME: this doesn't look pretty
                     classnode = newNode(node, tag)
                     obj.encode(classnode, errs)
-                    node.appendChild(classnode)
+                    addNode(node, '', classnode)
                 except Error:
                     if req == mandatory:
                         # note: we can receive an error if obj has no content
@@ -738,14 +738,13 @@ class autoxml(oo.autosuper, oo.autoprop):
             ix = 1
             for node in nodes:
                 dummy = newNode(node, "Dummy")
-                dummy.appendChild(node)
+                addNode(dummy, '', node)
                 l.append(decode_item(dummy, errs, where + unicode("[%s]" % ix)))
                 #l.append(decode_item(node, errs, where + unicode("[%s]" % ix)))
                 ix += 1
             return l
 
         def encode(node, l, errs):
-            dom = node.ownerDocument
             if l and len(l) > 0:
                 for item in l:
                     if list_tagpath:

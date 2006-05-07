@@ -14,8 +14,7 @@
 import pisi.context
 
 try:
-    horagata # comment out to disable piks
-    #from xmlfilepiks import *
+    from xmlfilepiks import *
 except:
     try:
         #if pisi.context.use_mdom:
@@ -26,5 +25,3 @@ except:
         #raise Error('cannot find 4suite implementation')
         print 'xmlext: cDomlette/piksemel implementation cannot be loaded, falling back to minidom'
         from xmlfilemdom import *
-
-#print 'gumburdop'

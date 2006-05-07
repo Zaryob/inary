@@ -52,6 +52,10 @@ def getNodeAttribute(node, attrname):
     """get named attribute from DOM node"""
     return node.getAttribute(attrname)
 
+def setNodeAttribute(node, attrname, value):
+    """get named attribute from DOM node"""
+    return node.setAttribute(attrname, value)
+
 def getChildElts(parent):
     """get only child elements"""
     return [x for x in parent.tags()]
@@ -84,6 +88,9 @@ def getChildText(node_s, tagpath):
 def getNode(node, tagpath):
     """returns the *first* matching node for given tag path."""
 
+    if tagpath == "":
+        return node
+    
     assert type(tagpath)==str
     tags = tagpath.split('/')
     assert len(tags)>0
@@ -114,7 +121,7 @@ def addTagPath(node, tags, newnode=None):
     """add newnode at the end of a tag chain, smart one"""
     node = createTagPath(node, tags)
     if newnode:                     # node to add specified
-        node.insertData(newnode)
+        node.insertNode(newnode)
     return node
 
 def addNode(node, tagpath, newnode = None, branch=True):
@@ -153,4 +160,8 @@ def addNode(node, tagpath, newnode = None, branch=True):
     return node
 
 def addText(node, tagpath, text):
-    addNode(node, tagpath, text)
+    node = addNode(node, tagpath)
+    node.insertData(text)
+
+def newNode(node, tag):
+    return iks.newDocument(tag)

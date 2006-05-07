@@ -12,14 +12,11 @@
 # Authors:  Eray Ozkural <eray@pardus.org.tr>
 
 try:
-    zimbabwe # comment out to disable piks
     from xmlextpiks import *
 except:
     try:
         #if pisi.context.use_mdom:
         #    gibidi
-        #else:
-            
         from xmlextcdom import  *
     except:
         #raise Error('cannot find 4suite implementation')
