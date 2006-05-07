@@ -119,7 +119,6 @@ class PackageDB(object):
             self.d.remove_item(name, repo, txn=txn)
             if self.dr.has_key(name, repo, txn=txn):
                 self.dr.remove_item(name, repo, txn=txn)
-            #WORKAROUND: do not remove component if it is not in repo
             ctx.componentdb.remove_package(package_info.partOf, package_info.name, repo, txn)
         self.d.txn_proc(proc, txn)
         
