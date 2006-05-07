@@ -156,7 +156,7 @@ class ComponentDB(object):
             self.d.add_item(component_name, component, repo, txn) # update
         self.d.txn_proc(proc, txn)
 
-    def remove_package(self, component_name, package, repo, txn = None):
+    def remove_package(self, component_name, package, repo = None, txn = None):
         def proc(txn, repo):
             if not self.has_component(component_name, repo, txn):
                 raise Error(_('Information for component %s not available') % component_name)
