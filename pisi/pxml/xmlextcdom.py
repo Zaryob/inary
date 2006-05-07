@@ -37,6 +37,10 @@ from Ft.Xml.Domlette import NoExtDtdReader
 import Ft.Lib
 import pisi
 
+from xml.dom import XHTML_NAMESPACE, XML_NAMESPACE
+XHTML_NS = unicode(XHTML_NAMESPACE)
+XML_NS = unicode(XML_NAMESPACE)
+
 class XmlError(pisi.Error):
     "named this way because the class if mostly used with an import *"
     pass
@@ -66,10 +70,23 @@ def newTextNode(node, text):
 
 def getNodeAttribute(node, attrname):
     """get named attribute from DOM node"""
-    if not node.hasAttributeNS(None, attrname):
-        return None
+    if attrname.startswith('xml:'):
+        if node.hasAttributeNS(XML_NS, attrname[4:]):
+            return node.getAttributeNS(XML_NS, attrname[4:])
+        else:
+            return None
     else:
-        return node.getAttributeNS(None, attrname)
+        if not node.hasAttributeNS(None, attrname):
+            return None
+        else:
+            return node.getAttributeNS(None, attrname)
+
+def setNodeAttribute(node, attrname, value):
+    """get named attribute from DOM node"""
+    if attrname.startswith('xml:'):
+        node.setAttributeNS(XML_NS, attrname, value)
+    else:
+        node.setAttributeNS(None, attrname, value)
 
 def getChildElts(node):
     """get only child elements"""

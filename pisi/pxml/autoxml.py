@@ -32,8 +32,6 @@ import types
 import formatter
 import sys
 from StringIO import StringIO
-#import xml.dom.minidom as mdom
-#from xml.parsers.expat import ExpatError
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -41,7 +39,6 @@ _ = __trans.ugettext
 
 # PiSi
 import pisi
-# TODO: find the appropriate xmlext implementation and import from there
 from pisi.pxml.xmlext import *
 from pisi.pxml.xmlfile import XmlFile
 import pisi.context as ctx
@@ -87,8 +84,7 @@ class LocalText(dict):
                                     self.tag )
         else:
             for node in nodes:
-                #lang = getNodeAttribute(node, "xml:lang")
-                lang = node.getAttributeNS(XML_NS, 'lang')
+                lang = getNodeAttribute(node, 'xml:lang')
                 c = getNodeText(node)
                 if not c:
                     errs.append(where + ': ' + _("'%s' language of tag '%s' is empty") %
@@ -101,11 +97,9 @@ class LocalText(dict):
     def encode(self, node, errs):
         assert self.tag != ''
         for key in self.iterkeys():
-            newnode = newNode(node, self.tag)
-            newnode.setAttributeNS(XML_NS, 'xml:lang', key)     
-            newtext = newTextNode(node, self[key])
-            newnode.appendChild(newtext)
-            node.appendChild(newnode)
+            newnode = addNode(node, self.tag)
+            setNodeAttribute(newnode, 'xml:lang', key)
+            addText(newnode, '',  self[key])
 
     #FIXME: maybe more appropriate for pisi.util
     @staticmethod

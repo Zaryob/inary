@@ -23,9 +23,5 @@ except:
         from xmlextcdom import  *
     except:
         #raise Error('cannot find 4suite implementation')
-        print 'xmlext: cDomlette/piksemel implementation cannot be loaded, falling back to minidom'
+        print 'xmlext: piksemel or cDomlette implementation cannot be loaded, falling back to minidom'
         from xmlextmdom import *
-
-from xml.dom import XHTML_NAMESPACE, XML_NAMESPACE
-XHTML_NS = unicode(XHTML_NAMESPACE)
-XML_NS = unicode(XML_NAMESPACE)
