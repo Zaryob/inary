@@ -637,10 +637,9 @@ Usage: info <package1> <package2> ... <packagen>
         
         for arg in self.args:
             if ctx.componentdb.has_component(arg):
-                component, repo = ctx.componentdb.get_component_repo(arg)
+                component = ctx.componentdb.get_union_comp(arg)
                 #if self.options.long:
-                if repo != pisi.itembyrepodb.installed:
-                    ctx.ui.info(unicode(component))
+                ctx.ui.info(unicode(component))
             else: # then assume it was a package                
                 self.info_package(arg)
         self.finalize()

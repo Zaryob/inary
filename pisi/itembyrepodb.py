@@ -80,9 +80,11 @@ class ItemByRepoDB(object):
         return [ k for k,data in self.d.items() if pred(k, data)]
 
     # TODO: carry this to repodb, really :/
-    def order(self):
+    def order(self, tracking = True):
         import pisi.repodb
-        order = [ 'repo-' + x for x in ctx.repodb.list() ] + ['trdparty', 'inst']
+        order = [ 'repo-' + x for x in ctx.repodb.list() ]
+        if tracking:
+            order += ['trdparty', 'inst']
         return order
 
 #    def list_repo(self, repo):
