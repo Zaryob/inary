@@ -79,9 +79,9 @@ class ActionsAPITestCase(testcase.TestCase):
         os.remove('tests/actionsapitests/adirectory/brokenlink')
 
         copy('tests/actionsapitests/linktoadirectory', 'tests/actionsapitests/adirectory/', False)
-        self.assertEqual(os.path.exists('tests/actionsapitests/adirectory/linkeddir/file'), True)
-        self.assertEqual(os.path.getsize('tests/actionsapitests/adirectory/linkeddir/file'), 321)
-        shutil.rmtree('tests/actionsapitests/adirectory/linkeddir')
+        self.assertEqual(os.path.exists('tests/actionsapitests/adirectory/linktoadirectory/file'), True)
+        self.assertEqual(os.path.getsize('tests/actionsapitests/adirectory/linktoadirectory/file'), 321)
+        shutil.rmtree('tests/actionsapitests/adirectory/linktoadirectory')
 
         copy('tests/actionsapitests/file', 'tests/actionsapitests/adirectory')
         self.assertEqual(os.path.isfile('tests/actionsapitests/adirectory/file'), True)
@@ -90,8 +90,9 @@ class ActionsAPITestCase(testcase.TestCase):
         os.remove('tests/actionsapitests/adirectory/file')
 
         copy('tests/actionsapitests/linktoafile', 'tests/actionsapitests/adirectory', False)
-        self.assertEqual(os.path.exists('tests/actionsapitests/adirectory/%s' % (os.path.basename(os.readlink('tests/actionsapitests/linktoafile')))), True)
-        os.remove('tests/actionsapitests/adirectory/%s' % (os.path.basename(os.readlink('tests/actionsapitests/linktoafile'))))
+        ourguy = 'tests/actionsapitests/%s' % os.readlink('tests/actionsapitests/linktoafile')
+        self.assert_(os.path.exists(ourguy))
+        os.remove(ourguy)
 
         copy('tests/actionsapitests/file', 'tests/actionsapitests/file-copy')
         self.assertEqual(os.path.exists('tests/actionsapitests/file-copy'), True)
@@ -112,16 +113,16 @@ class ActionsAPITestCase(testcase.TestCase):
     def testShelltoolsCanAccessFile(self):
         from pisi.actionsapi.shelltools import can_access_file
 
-        self.assertEqual(can_access_file('tests/actionsapitests/file'), True)
-        self.assertEqual(can_access_file('tests/actionsapitests/fileX'), False)
-        self.assertEqual(can_access_file('tests/actionsapitests/linktoafile'), False)
+        self.assert_(can_access_file('tests/actionsapitests/file'))
+        self.assert_(not can_access_file('tests/actionsapitests/fileX'))
+        self.assert_(can_access_file('tests/actionsapitests/linktoafile'))
 
     def testShelltoolsCanAccessDir(self):
         from pisi.actionsapi.shelltools import can_access_directory
 
-        self.assertEqual(can_access_directory('tests/actionsapitests/adirectory'), True)
-        self.assertEqual(can_access_directory('tests/actionsapitests/adirectoryX'), False)
-        self.assertEqual(can_access_directory('tests/actionsapitests/linktoadirectory'), False)
+        self.assert_(can_access_directory('tests/actionsapitests/adirectory'))
+        self.assert_(not can_access_directory('tests/actionsapitests/adirectoryX'))
+        self.assert_(can_access_directory('tests/actionsapitests/linktoadirectory'))
 
         
     def testShelltoolsMakedirs(self):
