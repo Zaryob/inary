@@ -272,7 +272,7 @@ def info_file(package_fn):
 
 def info_name(package_name, installed=False):
     """fetch package information for a package"""
-    if ctx.packagedb.has_package(package_name):
+    if ctx.packagedb.has_package(package_name, pisi.itembyrepodb.all):
         if installed:
             package = ctx.packagedb.get_package(package_name, pisi.itembyrepodb.installed)
         else:
