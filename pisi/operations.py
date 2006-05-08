@@ -492,16 +492,19 @@ def plan_upgrade(A, ignore_build = False):
 def remove(A):
     """remove set A of packages from system (A is a list of package names)"""
     
+    A = [str(x) for x in A]
+    
     # filter packages that are not installed
     A_0 = A = expand_components(set(A))
 
     if not ctx.get_option('bypass_safety'):
         if ctx.componentdb.has_component('system.base'):
-            refused = A.intersection(set(ctx.componentdb.get_component('system.base').packages))
+            systembase = set(ctx.componentdb.get_union_comp('system.base').packages)
+            refused = A.intersection(systembase)
             if refused:
                 ctx.ui.warning(_('Safety switch: cannot remove the following packages in system.base: ') +
                                util.strlist(refused))
-                A = A - set(ctx.componentdb.get_component('system.base').packages)
+                A = A - systembase
         else:
             ctx.ui.warning(_('Safety switch: the component system.base cannot be found'))
 

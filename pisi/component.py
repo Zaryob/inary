@@ -102,7 +102,7 @@ class ComponentDB(object):
     def destroy(self):
         self.d.destroy()
 
-    def has_component(self, name, repo = None, txn = None):
+    def has_component(self, name, repo = pisi.itembyrepodb.repos, txn = None):
         #name = shelve.LockedDBShelf.encodekey(name)
         name = str(name)
         return self.d.has_key(name, repo, txn)

@@ -100,6 +100,7 @@ class RepoDB(object):
             self.d.put("order", list, txn)
             ctx.packagedb.remove_repo(name, txn=txn)
             ctx.sourcedb.remove_repo(name, txn=txn)
+            ctx.componentdb.remove_repo(name, txn=txn)
         self.d.txn_proc(proc, txn)
 
 db = None
