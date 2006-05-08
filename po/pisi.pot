@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2006-05-08 22:12+EEST\n"
+"POT-Creation-Date: 2006-05-09 20:20+EEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1227,7 +1227,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: pisi/cli/commands.py:1121 pisi/operations.py:383
+#: pisi/cli/commands.py:1121 pisi/operations.py:387
 msgid "No packages to upgrade."
 msgstr ""
 
@@ -1322,27 +1322,35 @@ msgstr ""
 msgid "COMAR.register ERROR!"
 msgstr ""
 
-#: pisi/comariface.py:59
+#: pisi/comariface.py:75
 msgid "Running post-install script for %s"
 msgstr ""
 
-#: pisi/comariface.py:68
+#: pisi/comariface.py:85
+msgid "Could not restart Comar"
+msgstr ""
+
+#: pisi/comariface.py:88
+msgid "Comar daemon closed the connection"
+msgstr ""
+
+#: pisi/comariface.py:94
 msgid "COMAR.call_package(System.Package.postInstall, %s) failed!: %s"
 msgstr ""
 
-#: pisi/comariface.py:72 pisi/comariface.py:93
+#: pisi/comariface.py:98 pisi/comariface.py:119
 msgid "COMAR.call_package ERROR: %d"
 msgstr ""
 
-#: pisi/comariface.py:80
+#: pisi/comariface.py:106
 msgid "Running pre-remove script for %s"
 msgstr ""
 
-#: pisi/comariface.py:89
+#: pisi/comariface.py:115
 msgid "COMAR.call_package(System.Package.preRemove, %s) failed!: %s"
 msgstr ""
 
-#: pisi/comariface.py:96
+#: pisi/comariface.py:122
 msgid "Unregistering COMAR scripts for %s"
 msgstr ""
 
@@ -1529,15 +1537,15 @@ msgstr ""
 msgid "Already installed"
 msgstr ""
 
-#: pisi/itembyrepodb.py:110
+#: pisi/itembyrepodb.py:121
 msgid "Invalid repository string"
 msgstr ""
 
-#: pisi/itembyrepodb.py:125
+#: pisi/itembyrepodb.py:143
 msgid "Key %s not found"
 msgstr ""
 
-#: pisi/itembyrepodb.py:135
+#: pisi/itembyrepodb.py:153
 msgid "Key %s in repo %s not found"
 msgstr ""
 
@@ -1601,7 +1609,7 @@ msgid ""
 "in the respective order to satisfy extra dependencies:\n"
 msgstr ""
 
-#: pisi/operations.py:112 pisi/operations.py:526
+#: pisi/operations.py:112 pisi/operations.py:530
 msgid "Do you want to continue?"
 msgstr ""
 
@@ -1645,7 +1653,7 @@ msgstr ""
 msgid "Safety switch: Following packages in system.base will be upgraded: "
 msgstr ""
 
-#: pisi/operations.py:254 pisi/operations.py:502
+#: pisi/operations.py:254 pisi/operations.py:506
 msgid "Safety switch: the component system.base cannot be found"
 msgstr ""
 
@@ -1659,11 +1667,11 @@ msgid ""
 "in the respective order to satisfy dependencies:\n"
 msgstr ""
 
-#: pisi/operations.py:294 pisi/operations.py:399
+#: pisi/operations.py:294 pisi/operations.py:403
 msgid "Total size of packages: %.2f %s"
 msgstr ""
 
-#: pisi/operations.py:300 pisi/operations.py:405 pisi/operations.py:681
+#: pisi/operations.py:300 pisi/operations.py:409 pisi/operations.py:685
 msgid "There are extra packages due to dependencies. Do you want to continue?"
 msgstr ""
 
@@ -1675,69 +1683,73 @@ msgstr ""
 msgid "Package %s is not installed."
 msgstr ""
 
-#: pisi/operations.py:372
+#: pisi/operations.py:369
+msgid "Package %s is not available in repositories."
+msgstr ""
+
+#: pisi/operations.py:376
 msgid "Package %s is already at the latest release %s."
 msgstr ""
 
-#: pisi/operations.py:378
+#: pisi/operations.py:382
 msgid "Package %s is already at the latest build %s."
 msgstr ""
 
-#: pisi/operations.py:394
+#: pisi/operations.py:398
 msgid "The following packages will be upgraded: "
 msgstr ""
 
-#: pisi/operations.py:453
+#: pisi/operations.py:457
 msgid "Dependency %s of %s cannot be satisfied"
 msgstr ""
 
-#: pisi/operations.py:475
+#: pisi/operations.py:479
 msgid "Reverse dependency %s of %s cannot be satisfied"
 msgstr ""
 
-#: pisi/operations.py:498
+#: pisi/operations.py:502
 msgid "Safety switch: cannot remove the following packages in system.base: "
 msgstr ""
 
-#: pisi/operations.py:509
+#: pisi/operations.py:513
 msgid "Package %s does not exist. Cannot remove."
 msgstr ""
 
-#: pisi/operations.py:513
+#: pisi/operations.py:517
 msgid "No packages to remove."
 msgstr ""
 
-#: pisi/operations.py:522
+#: pisi/operations.py:526
 msgid ""
 "The following minimal list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
 msgstr ""
 
-#: pisi/operations.py:527
+#: pisi/operations.py:531
 msgid "Package removal declined"
 msgstr ""
 
-#: pisi/operations.py:539
+#: pisi/operations.py:543
 msgid "Package %s is not installed. Cannot remove."
 msgstr ""
 
-#: pisi/operations.py:659
+#: pisi/operations.py:663
 msgid "No packages to emerge."
 msgstr ""
 
-#: pisi/operations.py:670
+#: pisi/operations.py:674
 msgid ""
 "The following minimal list of packages will be installed \n"
 "from repository in the respective order to satisfy dependencies:\n"
 msgstr ""
 
-#: pisi/operations.py:673
+#: pisi/operations.py:677
 msgid ""
 "The following minimal list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
 msgstr ""
 
-#: pisi/operations.py:706
+#: pisi/operations.py:710
 msgid "Cannot find source package: %s"
 msgstr ""
 
