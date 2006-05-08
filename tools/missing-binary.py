@@ -60,5 +60,5 @@ if __name__ == "__main__":
 
     print "Missing binary packages:"
     for p, v, s in packages:
-        if not [i for i in binaries if i.startswith("%s-%s" % (p, v))]:
+        if not filter(lambda x: x.startswith("%s-%s" % (p, v)), binaries):
             print "    %s (%s)" % (p, s)
