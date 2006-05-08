@@ -446,7 +446,7 @@ def plan_upgrade(A, ignore_build = False):
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
                 else:
-                    raise Error(_('Dependency %s cannot be satisfied') % rev_dep)
+                    raise Error(_('Dependency %s of %s cannot be satisfied') % (dep, x))
         B = Bp
     # now, search reverse dependencies to see if anything
     # should be upgraded
@@ -468,7 +468,7 @@ def plan_upgrade(A, ignore_build = False):
                     if ctx.installdb.is_installed(rev_dep) and \
                        (not dependency.installed_satisfies_dep(depinfo)):
                         if not dependency.repo_satisfies_dep(depinfo):
-                            raise Error(_('Reverse dependency %s cannot be satisfied') % rev_dep)
+                            raise Error(_('Reverse dependency %s of %s cannot be satisfied') % (rev_dep, x))
                         if not rev_dep in G_f.vertices():
                             Bp.add(rev_dep)
                             G_f.add_plain_dep(rev_dep, x)
