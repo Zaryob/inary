@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2006-04-09, 18:34:30 -->
+<!-- Saved: 2006-05-08, 09:53:27 -->
 <!-- Copyright (C) 2006 PiSi Development Team,  -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -486,6 +486,26 @@
       <Dir>pisi</Dir>
       <Name>zipfileext.py</Name>
     </Source>
+    <Source>
+      <Dir>tools</Dir>
+      <Name>pygettext.py</Name>
+    </Source>
+    <Source>
+      <Dir>tools</Dir>
+      <Name>repo-diff.py</Name>
+    </Source>
+    <Source>
+      <Dir>tests</Dir>
+      <Name>conflicttests.py</Name>
+    </Source>
+    <Source>
+      <Dir>tests</Dir>
+      <Name>zipfileexttests.py</Name>
+    </Source>
+    <Source>
+      <Dir>pisi</Dir>
+      <Name>environment.py</Name>
+    </Source>
   </Sources>
   <Forms>
   </Forms>
@@ -527,10 +547,10 @@
     <VcsOtherData>{'standardLayout': 1}</VcsOtherData>
   </Vcs>
   <FiletypeAssociations>
-    <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.ui" type="FORMS" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
-    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
     <FiletypeAssociation pattern="*.py" type="SOURCES" />
+    <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
   </FiletypeAssociations>
 </Project>
