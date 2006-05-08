@@ -498,7 +498,7 @@ class Builder:
         # FIXME: find a better way to deal with the summary and description constants.
         static_package_obj.summary['en'] = u'Ar files for %s' % (self.spec.source.name)
         static_package_obj.description['en'] = u'Ar files for %s' % (self.spec.source.name)
-        static_package_obj.partOf = 'library:static'
+        static_package_obj.partOf = self.spec.source.partOf
         for f in ar_files:
             static_package_obj.files.append(pisi.specfile.Path(path = f[len(self.pkg_install_dir()):], fileType = "library"))
 
@@ -525,7 +525,7 @@ class Builder:
         # FIXME: find a better way to deal with the summary and description constants.
         static_package_obj.summary['en'] = u'Debug files for %s' % (self.spec.source.name)
         static_package_obj.description['en'] = u'Debug files for %s' % (self.spec.source.name)
-        static_package_obj.partOf = 'library:debug'
+        static_package_obj.partOf = self.spec.source.partOf
         for f in debug_files:
             static_package_obj.files.append(pisi.specfile.Path(path = f[len(self.pkg_debug_dir()):], fileType = "debug"))
 
