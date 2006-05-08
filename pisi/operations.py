@@ -285,19 +285,13 @@ def install_pkg_names(A, reinstall = False, bypass_safety = False):
         G_f = None
         order = A
 
-    ctx.ui.info(_("""The following minimal list of packages will be installed
+    ctx.ui.info(_("""Following packages will be installed
 in the respective order to satisfy dependencies:
 """) + util.strlist(order))
 
-    #this silly try/except block will be removed soon..
-    try:
-        total_size = sum([packagedb.get_package(p).packageSize for p in order])
-    except:
-        total_size = 0
-
-    if total_size:
-        total_size, symbol = util.human_readable_size(total_size)
-        ctx.ui.info(_('Total size of packages: %.2f %s') % (total_size, symbol))
+    total_size = sum([ctx.packagedb.get_package(p).packageSize for p in order])
+    total_size, symbol = util.human_readable_size(total_size)
+    ctx.ui.info(_('Total size of packages: %.2f %s') % (total_size, symbol))
 
     if ctx.get_option('dry_run'):
         return
@@ -400,6 +394,10 @@ def upgrade_pkg_names(A = [], bypass_safety = False):
     ctx.ui.info(_('The following packages will be upgraded: ') +
                 util.strlist(order))
 
+    total_size = sum([ctx.packagedb.get_package(p).packageSize for p in order])
+    total_size, symbol = util.human_readable_size(total_size)
+    ctx.ui.info(_('Total size of packages: %.2f %s') % (total_size, symbol))
+    
     if ctx.get_option('dry_run'):
         return
 

@@ -127,7 +127,7 @@ class CLI(UI):
             return False
             
     def display_progress(self, **ka):
-        totalsize = '%4.1f %s' % pisi.util.human_readable_size(ka['total_size']) 
+        totalsize = '%.1f %s' % pisi.util.human_readable_size(ka['total_size']) 
         out = '\r%-30.30s (%s)%3d%% %9.2f %s [%s]' % \
             (ka['filename'], totalsize, ka['percent'], 
              ka['rate'], ka['symbol'], ka['eta'])
