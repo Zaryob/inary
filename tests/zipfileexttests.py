@@ -28,7 +28,7 @@ class ZipFileExtCase(testcase.TestCase):
 
     def makeRandomFile(self, fn):
         random.seed()
-        str = listtostr( [ random.randint(0, 255) for x in range(2048) ] )
+        str = listtostr( [ random.randint(0, 255) for x in range(18888) ] )
         f = file(fn, 'w')
         f.write(str)
         return str
