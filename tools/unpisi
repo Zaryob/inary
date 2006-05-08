@@ -13,6 +13,7 @@
 import sys
 
 from pisi.archive import ArchiveZip
+from pisi.zipfileext import BadZipfile
 
 def usage(errmsg):
     print """
@@ -29,7 +30,12 @@ def main():
     if len(sys.argv) < 2:
         usage("PiSi package required..")
 
-    arc = ArchiveZip(sys.argv[1], 'zip', 'r')
+    try:
+        arc = ArchiveZip(sys.argv[1], 'zip', 'r')
+    except BadZipfile, e:
+        print e
+        sys.exit(1)
+
     arc.unpack_files(['files.xml', 'metadata.xml'], '.')
     arc.unpack_dir_flat('comar','comar')
     arc.unpack_dir_flat('install','.')
