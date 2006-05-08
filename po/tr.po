@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2006-05-05 16:52+EEST\n"
+"POT-Creation-Date: 2006-05-08 11:25+EEST\n"
 "PO-Revision-Date: 2005-12-26 06:53+0200\n"
 "Last-Translator: Eray Ozkural <eray@uludag.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
@@ -600,61 +600,61 @@ msgstr ""
 "İnşa (build) sayısı koyulmayacak. Depo inşaları için 'buildno' numarasını "
 "pisi.conf dosyasında tanımlamalısınız."
 
-#: pisi/build.py:651
+#: pisi/build.py:647
 msgid "(found old version %s)"
 msgstr "('%s' numaralı eski versiyon bulundu)"
 
-#: pisi/build.py:653
+#: pisi/build.py:649
 msgid "Skipping %s with wrong pkg name "
 msgstr "Yanlış paket adına sahip %s atlanıyor"
 
-#: pisi/build.py:667
+#: pisi/build.py:670
 msgid "(no previous build found, setting build no to 1.)"
 msgstr "(önceki bir inşa bulunamadı, inşa numarası 1 yapılıyor)"
 
-#: pisi/build.py:708
+#: pisi/build.py:711
 msgid "(old package lacks a build no, setting build no to 1.)"
 msgstr "(önceki paketin bir inşa numarası yok, inşa numarası 1 yapılıyor)"
 
-#: pisi/build.py:711
+#: pisi/build.py:714
 msgid "There are changes, incrementing build no to %d"
 msgstr "Değişiklikler var, inşa numarası bir arttırılarak %d yapıldı."
 
-#: pisi/build.py:714
+#: pisi/build.py:717
 msgid "There is no change from previous build %d"
 msgstr "Bir önceki %d numaralı inşadan beri bir değişiklik yok."
 
-#: pisi/build.py:755
+#: pisi/build.py:758
 msgid "** Building package %s"
 msgstr "* Paket %s inşa ediliyor"
 
 # pisi/build.py:503 :506
-#: pisi/build.py:757 pisi/build.py:760
+#: pisi/build.py:760 pisi/build.py:763
 msgid "Generating %s,"
 msgstr "%s yaratılıyor,"
 
-#: pisi/build.py:772
+#: pisi/build.py:775
 msgid "Creating PISI package %s."
 msgstr "'%s' PİSİ paketi yaratılıyor."
 
-#: pisi/build.py:810
+#: pisi/build.py:813
 msgid "Done."
 msgstr "Bitti."
 
-#: pisi/build.py:816
+#: pisi/build.py:819
 msgid "Abandoned files under the install dir (%s):"
 msgstr ""
 
-#: pisi/build.py:820
+#: pisi/build.py:823
 msgid ""
 "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 
-#: pisi/build.py:824
+#: pisi/build.py:827
 msgid "Cleaning Build Directory..."
 msgstr "İnşa dizini siliniyor..."
 
-#: pisi/build.py:827
+#: pisi/build.py:830
 msgid "Keeping Build Directory"
 msgstr "İnşa dizini bırakılıyor "
 
@@ -1047,12 +1047,14 @@ msgid "show a list of package files."
 msgstr "paketteki dosyaların bir listesini göster"
 
 #: pisi/cli/commands.py:626
-msgid "Show only paths."
+#, fuzzy
+msgid "show only paths."
 msgstr "Sadece yolları göster"
 
 #: pisi/cli/commands.py:628
-msgid "show in short format"
-msgstr "kısa biçimde göster"
+#, fuzzy
+msgid "show details"
+msgstr "detaylı yükleme bilgisi göster"
 
 #: pisi/cli/commands.py:651
 msgid "Package file: %s"
@@ -1345,7 +1347,7 @@ msgstr ""
 "Kullanım: list-upgrades [ <depo1> <depo2> ... depon ]\n"
 "\n"
 
-#: pisi/cli/commands.py:1121 pisi/operations.py:392
+#: pisi/cli/commands.py:1121 pisi/operations.py:389
 msgid "No packages to upgrade."
 msgstr "Yükseltilecek paket yok."
 
@@ -1478,7 +1480,12 @@ msgstr "COMAR.call_package(System.Package.preRemove, %s) başarısız!: %s"
 msgid "Unregistering COMAR scripts for %s"
 msgstr "%s'in COMAR betikleri kayıttan siliniyor."
 
-#: pisi/component.py:136
+#: pisi/component.py:114 pisi/component.py:121
+#, fuzzy
+msgid "Component %s not found"
+msgstr "'%s' anahtarı bulunamadı."
+
+#: pisi/component.py:162
 msgid "Information for component %s not available"
 msgstr "Bileşen %s için bilgi bulunamadı"
 
@@ -1661,15 +1668,15 @@ msgstr "Dağıtım: %s, Yerleştime Zamanı: %s\n"
 msgid "Already installed"
 msgstr "Halihazırda yerleştirilmiş."
 
-#: pisi/itembyrepodb.py:108
+#: pisi/itembyrepodb.py:110
 msgid "Invalid repository string"
 msgstr "Geçersiz depo adı"
 
-#: pisi/itembyrepodb.py:123
+#: pisi/itembyrepodb.py:125
 msgid "Key %s not found"
 msgstr "'%s' anahtarı bulunamadı."
 
-#: pisi/itembyrepodb.py:133
+#: pisi/itembyrepodb.py:135
 msgid "Key %s in repo %s not found"
 msgstr "'%s' anahtarı '%s' deposunda bulunamadı."
 
@@ -1746,7 +1753,7 @@ msgid ""
 "in the respective order to satisfy extra dependencies:\n"
 msgstr "Ek bağımlılıkları sağlamak için aşağıdaki paketler kurulacaktır:\n"
 
-#: pisi/operations.py:112 pisi/operations.py:540
+#: pisi/operations.py:112 pisi/operations.py:524
 msgid "Do you want to continue?"
 msgstr "Devam etmek istiyor musunuz?"
 
@@ -1755,7 +1762,7 @@ msgid "External dependencies not satisfied"
 msgstr "Dış bağımlılıklar sağlanmadı."
 
 # pisi/api.py:168 :215
-#: pisi/operations.py:125 pisi/operations.py:282
+#: pisi/operations.py:125 pisi/operations.py:279
 msgid "No packages to install."
 msgstr "Yerleştirilecek paket yok."
 
@@ -1783,100 +1790,105 @@ msgstr "Bu çakışan paketler kaldırılsın mı?"
 msgid "Conflicts remain"
 msgstr "Çakışmalar var"
 
-#: pisi/operations.py:247
+#: pisi/operations.py:244
 #, fuzzy
 msgid "Safety switch: Following packages in system.base will be installed: "
 msgstr ""
 "Emniyet mandalı: taban geliştirme sistemi system.devel'den izleyen paketler "
 "ek olarak yüklenecek:"
 
-#: pisi/operations.py:253
+#: pisi/operations.py:250
 #, fuzzy
 msgid "Safety switch: Following packages in system.base will be upgraded: "
 msgstr ""
 "Emniyet mandalı: taban geliştirme sistemi system.devel'den izleyen paketler "
 "ek olarak yüklenecek:"
 
-#: pisi/operations.py:257 pisi/operations.py:516
+#: pisi/operations.py:254 pisi/operations.py:500
 msgid "Safety switch: the component system.base cannot be found"
 msgstr "Emniyet mandalı: taban sistem bileşeni system.base bulunamadı"
 
-#: pisi/operations.py:277
+#: pisi/operations.py:274
 msgid "Not re-installing the following packages: "
 msgstr "İzleyen paketleri yeniden yerleştirmiyorum:"
 
-#: pisi/operations.py:291
+#: pisi/operations.py:288
 msgid ""
 "The following minimal list of packages will be installed\n"
 "in the respective order to satisfy dependencies:\n"
 msgstr "Bağımlılıkları sağlamak için aşağıdaki paketler kurulacaktır:\n"
 
-#: pisi/operations.py:303
+#: pisi/operations.py:300
 msgid "Total size of packages: %.2f %s"
 msgstr "Paketlerin toplam boyu: %.2f %s"
 
-#: pisi/operations.py:309 pisi/operations.py:410 pisi/operations.py:695
+#: pisi/operations.py:306 pisi/operations.py:407 pisi/operations.py:679
 msgid "There are extra packages due to dependencies. Do you want to continue?"
 msgstr "Bağımlılıklar yüzünden ek paketler var. Devam etmek istiyor musunuz?"
 
-#: pisi/operations.py:370
+#: pisi/operations.py:367
 msgid "Warning: package *name* ends with '.pisi'"
 msgstr "Uyarı: paket *adı* '.pisi' ile bitiyor."
 
-#: pisi/operations.py:372
+#: pisi/operations.py:369
 msgid "Package %s is not installed."
 msgstr "Paket %s yerleştirilmemiş."
 
-#: pisi/operations.py:381
+#: pisi/operations.py:378
 msgid "Package %s is already at the latest release %s."
 msgstr "Paket %s zaten en son sürüm %s'de"
 
-#: pisi/operations.py:387
+#: pisi/operations.py:384
 msgid "Package %s is already at the latest build %s."
 msgstr "Paket %s zaten en son inşa %s'de."
 
-#: pisi/operations.py:403
+#: pisi/operations.py:400
 #, fuzzy
 msgid "The following packages will be upgraded: "
 msgstr "Bu paketler yükseltilecektir: \n"
 
-#: pisi/operations.py:469 pisi/operations.py:485
+#: pisi/operations.py:451
+#, fuzzy
+msgid "Dependency %s cannot be satisfied"
+msgstr "İnşa bağımlılığı %s sağlanamadı"
+
+#: pisi/operations.py:473
 msgid "Reverse dependency %s cannot be satisfied"
 msgstr "Ters bağımlılık %s sağlanamadı"
 
-#: pisi/operations.py:512
+#: pisi/operations.py:496
 msgid "Safety switch: cannot remove the following packages in system.base: "
 msgstr ""
 "Emniyet mandalı: taban sistem system.base deki izleyen sistem bütünlüğü "
 "açısından önemli paketler kaldırılamıyor: "
 
-#: pisi/operations.py:523
+#: pisi/operations.py:507
 msgid "Package %s does not exist. Cannot remove."
 msgstr "Olmayan paket %s kaldırılamıyor."
 
-#: pisi/operations.py:527
+#: pisi/operations.py:511
 msgid "No packages to remove."
 msgstr "Kaldıracak paket yok."
 
-#: pisi/operations.py:536
+#: pisi/operations.py:520
 msgid ""
 "The following minimal list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
 msgstr "Bağımlılıkları sağlamak için aşağıdaki paketler kaldırılacaktır:\n"
 
-#: pisi/operations.py:541
+#: pisi/operations.py:525
 msgid "Package removal declined"
 msgstr "Paket kaldırmaya izin verilmedi."
 
-#: pisi/operations.py:553
+#: pisi/operations.py:537
 msgid "Package %s is not installed. Cannot remove."
 msgstr "Paket %s kurulu değil. Kaldırılamıyor."
 
-#: pisi/operations.py:673
+#: pisi/operations.py:657
 msgid "No packages to emerge."
 msgstr "Derlenip, kurulacak paket yok."
 
-#: pisi/operations.py:684
+#: pisi/operations.py:668
 msgid ""
 "The following minimal list of packages will be installed \n"
 "from repository in the respective order to satisfy dependencies:\n"
@@ -1884,7 +1896,7 @@ msgstr ""
 "Bağımlılıkları sağlamak için bu minimal paket listesi verilen sırada\n"
 "yerleştirilecek:\n"
 
-#: pisi/operations.py:687
+#: pisi/operations.py:671
 msgid ""
 "The following minimal list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
@@ -1892,7 +1904,7 @@ msgstr ""
 "Bağımlılıkları sağlamak için aşağıdaki paketler verilen sırada\n"
 "derlenip, yerleştirilecek:\n"
 
-#: pisi/operations.py:720
+#: pisi/operations.py:704
 msgid "Cannot find source package: %s"
 msgstr "Kaynak paket bulunamadı: %s"
 
@@ -1916,21 +1928,21 @@ msgstr "%s [önbellekte]"
 msgid "MetaData format wrong"
 msgstr "MetaData biçimi yanlış"
 
-#: pisi/pxml/autoxml.py:84
+#: pisi/pxml/autoxml.py:83
 msgid "At least one '%s' tag should have local text"
 msgstr "En azından bir tane '%s' etiketi yerel metne sahip olmalı"
 
-#: pisi/pxml/autoxml.py:92
+#: pisi/pxml/autoxml.py:90
 msgid "'%s' language of tag '%s' is empty"
 msgstr "'%s' dili metni, etiket %s içerisinde, boş"
 
-#: pisi/pxml/autoxml.py:118
+#: pisi/pxml/autoxml.py:116
 msgid "LocalText: unable to get either current or default locale"
 msgstr ""
 "LocalText: şu andaki ya da ön tanımlı yerelleştirme seçenekleri (locale) "
 "bulunamıyor"
 
-#: pisi/pxml/autoxml.py:124 pisi/pxml/autoxml.py:139
+#: pisi/pxml/autoxml.py:122 pisi/pxml/autoxml.py:137
 msgid ""
 "Tag should have at least the current locale, or failing that an English or "
 "Turkish version"
@@ -1938,73 +1950,73 @@ msgstr ""
 "Etiket en azından şu andaki yerel (locale) için bir girdiye, o olmazsa bir "
 "Türkçe ya da İngilizce versiyona sahip olmalı"
 
-#: pisi/pxml/autoxml.py:383
+#: pisi/pxml/autoxml.py:381
 msgid "autoxml.check: '%s' errors"
 msgstr "autoxml.check: %s hata"
 
-#: pisi/pxml/autoxml.py:434 pisi/pxml/autoxml.py:444
+#: pisi/pxml/autoxml.py:432 pisi/pxml/autoxml.py:442
 msgid "autoxml.read: File '%s' has errors"
 msgstr "autoxml.read: Dosya '%s' hatalara sahip"
 
-#: pisi/pxml/autoxml.py:452
+#: pisi/pxml/autoxml.py:450
 msgid "autoxml.write: object validation has failed"
 msgstr "autoxml.write: nesne doğrulaması başarısızlığa uğradı"
 
-#: pisi/pxml/autoxml.py:460
+#: pisi/pxml/autoxml.py:458
 msgid "autoxml.write: File encoding '%s' has errors"
 msgstr "autoxml.write: Dosya biçimlendirmesi '%s' hatalara sahip"
 
-#: pisi/pxml/autoxml.py:510
+#: pisi/pxml/autoxml.py:508
 msgid "gen_tag: unrecognized tag type %s in spec"
 msgstr "gen_tag: tanınmayan tag tipi %s"
 
-#: pisi/pxml/autoxml.py:558 pisi/pxml/autoxml.py:569
+#: pisi/pxml/autoxml.py:556 pisi/pxml/autoxml.py:567
 msgid "Mandatory variable %s not available"
 msgstr "Gerekli değişken %s bulunamadı"
 
-#: pisi/pxml/autoxml.py:637
+#: pisi/pxml/autoxml.py:635
 msgid "Type mismatch: read text cannot be decoded"
 msgstr "Tip uyumsuzluğu: okunan metin deşifre edilemedi"
 
-#: pisi/pxml/autoxml.py:641 pisi/pxml/autoxml.py:650
+#: pisi/pxml/autoxml.py:639 pisi/pxml/autoxml.py:648
 msgid "Mandatory token %s not available"
 msgstr "Gerekli im %s bulunamadı."
 
-#: pisi/pxml/autoxml.py:655
+#: pisi/pxml/autoxml.py:653
 msgid "Type mismatch. Expected %s, got %s"
 msgstr "Tip uyumsuzluğu. %s beklerken, %s bulundu"
 
 # pisi/xmlfile.py:420 :521
-#: pisi/pxml/autoxml.py:685 pisi/pxml/autoxml.py:807
+#: pisi/pxml/autoxml.py:683 pisi/pxml/autoxml.py:804
 msgid "Type mismatch: DOM cannot be decoded"
 msgstr "Tip uyumsuzluğu: DOM deşifre edilemiyor"
 
 # pisi/xmlfile.py:392 :423 :439 :446 :524 :538 :545
-#: pisi/pxml/autoxml.py:688 pisi/pxml/autoxml.py:703 pisi/pxml/autoxml.py:713
-#: pisi/pxml/autoxml.py:810 pisi/pxml/autoxml.py:824 pisi/pxml/autoxml.py:834
+#: pisi/pxml/autoxml.py:686 pisi/pxml/autoxml.py:702 pisi/pxml/autoxml.py:712
+#: pisi/pxml/autoxml.py:807 pisi/pxml/autoxml.py:821 pisi/pxml/autoxml.py:831
 msgid "Mandatory argument not available"
 msgstr "Gerekli argüman bulunamadı"
 
 # pisi/xmlfile.py:436 :535
-#: pisi/pxml/autoxml.py:700 pisi/pxml/autoxml.py:821
+#: pisi/pxml/autoxml.py:699 pisi/pxml/autoxml.py:818
 msgid "Object cannot be encoded"
 msgstr "Nesne kodlanamadı"
 
-#: pisi/pxml/autoxml.py:725
+#: pisi/pxml/autoxml.py:724
 msgid "List type must contain only one element"
 msgstr "'List' tipi sadece bir eleman içermeli"
 
 # pisi/xmlfile.py:470 :485
-#: pisi/pxml/autoxml.py:738 pisi/pxml/autoxml.py:761
+#: pisi/pxml/autoxml.py:737 pisi/pxml/autoxml.py:758
 msgid "Mandatory list empty"
 msgstr "Zorunlu (mandatory) liste boş"
 
-#: pisi/pxml/xmlextcdom.py:57 pisi/pxml/xmlfilecdom.py:77
+#: pisi/pxml/xmlextcdom.py:61 pisi/pxml/xmlfilecdom.py:77
 msgid "File '%s' has invalid XML: %s"
 msgstr "'%s' dosyasının XML sözdizimi geçersiz: %s"
 
-#: pisi/pxml/xmlextcdom.py:96 pisi/pxml/xmlextmdom.py:92
-#: pisi/pxml/xmlextpiks.py:75
+#: pisi/pxml/xmlextcdom.py:113 pisi/pxml/xmlextmdom.py:92
+#: pisi/pxml/xmlextpiks.py:83
 msgid "getNodeText: Expected text node, got something else!"
 msgstr "getNodeText: metin beklenirken başka bir veri alındı"
 
@@ -2433,6 +2445,9 @@ msgstr "%d hata ile karşılaşıldı. Lütfen bunları en kısa zamanda düzelt
 #: tools/repostats.py:675
 msgid "These dependencies are not available in repository:\n"
 msgstr "Bağımlılığa neden olan bu paketler depoda bulunmuyor:\n"
+
+#~ msgid "show in short format"
+#~ msgstr "kısa biçimde göster"
 
 #~ msgid "Failed command: %s"
 #~ msgstr "Başarısız komut: %s"
