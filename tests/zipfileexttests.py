@@ -35,10 +35,10 @@ class ZipFileExtCase(testcase.TestCase):
     
     def genericTestZipUnzip(self, compress_type):
         str = self.makeRandomFile('tmp/random')
-        zipfile = ZipFile('tmp/test.zip', 'w')
+        zipfile = ZipFileExt('tmp/test.zip', 'w')
         zipfile.write('tmp/random', compress_type = compress_type)
         zipfile.close()
-        zipfile2 = ZipFile('tmp/test.zip', 'r')
+        zipfile2 = ZipFileExt('tmp/test.zip', 'r')
         str2 = zipfile2.read('tmp/random')
         self.assertEqual(str, str2)
 
@@ -48,5 +48,7 @@ class ZipFileExtCase(testcase.TestCase):
     def testDeflateZipUnzip(self):
         self.genericTestZipUnzip(ZIP_DEFLATED)
 
+    def testLzmaZipUnzip(self):
+        self.genericTestZipUnzip(ZIP_LZMA)
 
 suite = unittest.makeSuite(ZipFileExtCase)
