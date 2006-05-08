@@ -44,6 +44,7 @@ repodb = None
 invidx = None
 
 comar = None
+comar_sockname = None
 
 initialized = False
 

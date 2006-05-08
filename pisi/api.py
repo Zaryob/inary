@@ -54,7 +54,8 @@ class Error(pisi.Error):
 
 def init(database = True, write = True,
          options = None, ui = None, comar = True,
-         stdout = None, stderr = None):
+         stdout = None, stderr = None,
+         comar_sockname = None):
     """Initialize PiSi subsystem"""
 
     # UI comes first
@@ -92,6 +93,8 @@ def init(database = True, write = True,
 
     # TODO: this is definitely not dynamic beyond this point!
     ctx.comar = comar and not ctx.config.get_option('ignore_comar')
+    # This is for YALI, used in comariface.py:make_com()
+    ctx.comar_sockname = comar_sockname
 
     # initialize repository databases
     ctx.database = database

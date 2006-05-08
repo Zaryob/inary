@@ -27,7 +27,10 @@ class Error(pisi.Error):
 def make_com():
     try:
         import comar
-        comard = comar.Link()
+        if ctx.comar_sockname:
+            comard = comar.Link()
+        else:
+            comard = comar.Link(sockname=ctx.comar_sockname)
         return comard
     except ImportError:
         raise Error(_("COMAR: comard not fully installed"))
