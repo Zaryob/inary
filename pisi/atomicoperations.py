@@ -62,7 +62,7 @@ class Install(AtomicOperation):
     "Install class, provides install routines for pisi packages"
 
     @staticmethod
-    def from_name(name):
+    def from_name(name, ignore_dep = None):
         # download package and return an installer object
         # find package in repository
         repo = ctx.packagedb.which_repo(name)
@@ -80,13 +80,14 @@ class Install(AtomicOperation):
     
             ctx.ui.debug(_("Package URI: %s") % pkg_path)
     
-            return Install(pkg_path)
+            return Install(pkg_path, ignore_dep)
         else:
             raise Error(_("Package %s not found in any active repository.") % name)
 
     def __init__(self, package_fname, ignore_dep = None):
         "initialize from a file name"
         super(Install, self).__init__(ignore_dep)
+        self.package_fname = package_fname
         self.package = pisi.package.Package(package_fname)
         self.package.read()
         self.metadata = self.package.metadata

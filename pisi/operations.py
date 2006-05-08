@@ -9,7 +9,7 @@
 #
 # Please read the COPYING file.
 #
-# Author:  Eray Ozkural <eray@pardus.org.tr>
+# Author:  Eray Ozkural <eray at pardus.org.tr>
 
 "Package Operations: install/remove/upgrade"
 
@@ -406,11 +406,15 @@ def upgrade_pkg_names(A = [], bypass_safety = False):
             return False
 
     ctx.ui.notify(ui.packagestogo, order = order)
-            
-    install_ops = [atomicoperations.Install.from_name(x) for x in order]
-    
-    for install in install_ops:
-        install.install(True)
+
+    paths = []
+    for x in order:
+        install_op = atomicoperations.Install.from_name(x)
+        paths.append(install_op.package_fname)
+   
+    for path in paths:
+        install_op = atomicoperations.Install(path)
+        install_op.install(True)
 
 def plan_upgrade(A, ignore_build = False):
     # try to construct a pisi graph of packages to
