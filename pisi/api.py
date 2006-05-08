@@ -287,7 +287,11 @@ def info_name(package_name, installed=False):
         metadata.source = None
         #TODO: fetch the files from server if possible (wow, you maniac -- future exa)
         if installed and ctx.installdb.is_installed(package.name):
-            files = ctx.installdb.files(package.name)
+            try:
+                files = ctx.installdb.files(package.name)
+            except pisi.Error, e:
+                ctx.ui.warning(e)
+                files = None
         else:
             files = None
         return metadata, files

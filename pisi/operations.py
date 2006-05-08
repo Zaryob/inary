@@ -114,7 +114,7 @@ in the respective order to satisfy extra dependencies:
         install_pkg_names(extra_packages)
 
     class PackageDB:
-        def get_package(self, key):
+        def get_package(self, key, repo = None):
             return d_t[str(key)]
     
     packagedb = PackageDB()
@@ -546,7 +546,7 @@ def plan_remove(A):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
-    G_f = pgraph.PGraph(ctx.packagedb)               # construct G_f
+    G_f = pgraph.PGraph(ctx.packagedb, pisi.itembyrepodb.installed)               # construct G_f
 
     # find the (install closure) graph of G_f by package 
     # set A using packagedb
