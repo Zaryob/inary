@@ -623,9 +623,9 @@ Usage: info <package1> <package2> ... <packagen>
                                help=_("show a list of package files."))
         self.parser.add_option("-F", "--files-path", action="store_true",
                                default=False,
-                               help=_("Show only paths."))
-        self.parser.add_option("-s", "--short", action="store_true",
-                               default=False, help=_("show in short format"))
+                               help=_("show only paths."))
+        self.parser.add_option("-L", "--long", action="store_true",
+                               default=False, help=_("show details"))
 
     def run(self):
 
@@ -653,7 +653,7 @@ Usage: info <package1> <package2> ... <packagen>
         else:
             if ctx.installdb.is_installed(arg):
                 metadata, files = pisi.api.info_name(arg, True)
-                if ctx.get_option('short'):
+                if not ctx.get_option('long'):
                     ctx.ui.info(_('[inst] '), noln=True)
                 else:
                     ctx.ui.info(_('Installed package:'))
@@ -661,7 +661,7 @@ Usage: info <package1> <package2> ... <packagen>
                 
             if ctx.packagedb.has_package(arg):
                 metadata, files = pisi.api.info_name(arg, False)
-                if ctx.get_option('short'):
+                if not ctx.get_option('long'):
                     ctx.ui.info(_('[repo] '), noln=True)
                 else:
                     ctx.ui.info(_('Package found in repository:'))
@@ -670,7 +670,7 @@ Usage: info <package1> <package2> ... <packagen>
     def print_pkginfo(self, metadata, files):
         import os.path
 
-        if ctx.get_option('short'):
+        if not ctx.get_option('long'):
             pkg = metadata.package
             ctx.ui.info('%15s - %s' % (pkg.name, unicode(pkg.summary)))
         else:
@@ -687,7 +687,7 @@ Usage: info <package1> <package2> ... <packagen>
                         print fileinfo.path
             else:
                 ctx.ui.warning(_('File information not available'))
-        if not ctx.get_option('short'):
+        if ctx.get_option('long'):
             print
 
 
