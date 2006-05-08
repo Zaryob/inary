@@ -120,13 +120,13 @@ class ComponentDB(object):
         except pisi.itembyrepodb.NotfoundError, e:
             raise Error(_('Component %s not found') % name)
 
-    def get_union_comp(self, name, txn = None, tracking = False):
+    def get_union_comp(self, name, txn = None, repo = pisi.itembyrepodb.repos ):
         """get a union of all repository components packages, not just the first repo in order.
         get only basic repo info from the first repo"""
         def proc(txn):
             s = self.d.d.get(name, txn=txn)
             pkgs = set()
-            for repostr in self.d.order(tracking = tracking):
+            for repostr in self.d.order(repo = repo):
                 if s.has_key(repostr):
                     pkgs |= set(s[repostr].packages)
             comp = self.get_component(name)
@@ -134,8 +134,8 @@ class ComponentDB(object):
             return comp
         return self.d.txn_proc(proc, txn)
 
-    def list_components(self, repo=None, show_tracking=False):
-        return self.d.list(repo, show_tracking=show_tracking)
+    def list_components(self, repo=None):
+        return self.d.list(repo)
 
     def update_component(self, component, repo, txn = None):
         def proc(txn):

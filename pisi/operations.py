@@ -363,7 +363,11 @@ def upgrade_pkg_names(A = [], bypass_safety = False):
             ctx.ui.info(_('Package %s is not installed.') % x)
             continue
         (version, release, build) = ctx.installdb.get_version(x)
-        pkg = ctx.packagedb.get_package(x)
+        if ctx.packagedb.has_package(x):
+            pkg = ctx.packagedb.get_package(x)
+        else:
+            ctx.ui.info(_('Package %s is not available in repositories.') % x, True)
+            continue
 
         if ignore_build or (not build) or (not pkg.build):
             if Version(release) < Version(pkg.release):

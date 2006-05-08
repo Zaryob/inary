@@ -79,8 +79,8 @@ class PackageDB(object):
         else:
             return []
 
-    def list_packages(self, repo=None, show_tracking=False):
-        return self.d.list(repo, show_tracking=show_tracking)
+    def list_packages(self, repo=None):
+        return self.d.list(repo)
 
     def add_package(self, package_info, repo, txn = None):
         name = str(package_info.name)
