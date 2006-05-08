@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2006-05-08 11:25+EEST\n"
+"POT-Creation-Date: 2006-05-08 22:12+EEST\n"
 "PO-Revision-Date: 2005-12-26 06:53+0200\n"
 "Last-Translator: Eray Ozkural <eray@uludag.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
@@ -262,75 +262,75 @@ msgstr "ActionsAPI [copytree]: %s dizini bulunamadı."
 msgid "ActionsAPI [touch]: Permission denied: %s"
 msgstr "ActionsAPI [touch]: Erişim engellendi: %s"
 
-#: pisi/api.py:252 pisi/comariface.py:33
+#: pisi/api.py:255 pisi/comariface.py:37
 msgid "COMAR: comard not fully installed"
 msgstr "COMAR: comard tam olarak yerleştirilememiş"
 
-#: pisi/api.py:264
+#: pisi/api.py:267
 msgid "File %s not found"
 msgstr "Dosya %s bulunamadı."
 
-#: pisi/api.py:278 pisi/api.py:292 pisi/packagedb.py:68
+#: pisi/api.py:281 pisi/api.py:295 pisi/packagedb.py:68
 msgid "Package %s not found"
 msgstr "Paket %s bulunamadı."
 
-#: pisi/api.py:329
+#: pisi/api.py:332
 msgid "Checking %s..."
 msgstr "%s kontrol ediliyor"
 
-#: pisi/api.py:345
+#: pisi/api.py:348
 msgid "* Building index of PISI files under %s"
 msgstr "* %s altındaki PİSİ dosyalarının bir indexi yapılıyor."
 
-#: pisi/api.py:352
+#: pisi/api.py:355
 msgid "* Index file written"
 msgstr "* İndeks dosyası yazıldı."
 
-#: pisi/api.py:356
+#: pisi/api.py:359
 msgid "Repo %s already present."
 msgstr "Depo %s halihazırda var."
 
-#: pisi/api.py:360
+#: pisi/api.py:363
 msgid "Repo %s added to system."
 msgstr "'%s' isimli depo sisteme eklendi."
 
-#: pisi/api.py:366
+#: pisi/api.py:369
 msgid "Repo %s removed from system."
 msgstr "'%s' isimli depo sistemden çıkarıldı."
 
-#: pisi/api.py:368
+#: pisi/api.py:371
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "'%s' deposu yok. Kaldırılamıyor."
 
-#: pisi/api.py:372
+#: pisi/api.py:375
 msgid "* Updating repository: %s"
 msgstr "'%s' deposu güncelleniyor."
 
-#: pisi/api.py:379
+#: pisi/api.py:382
 msgid "No updates available for repository %s."
 msgstr "'%s' isimli depo için güncelleme yok."
 
-#: pisi/api.py:381
+#: pisi/api.py:384
 msgid "Updating database at any rate as requested"
 msgstr ""
 
-#: pisi/api.py:390
+#: pisi/api.py:393
 msgid "* Package database updated."
 msgstr "* Paket veritabanı güncellendi."
 
-#: pisi/api.py:392 pisi/api.py:412
+#: pisi/api.py:395 pisi/api.py:415
 msgid "No repository named %s found."
 msgstr "'%s' adında bir depo bulunamadı."
 
-#: pisi/api.py:395
+#: pisi/api.py:398
 msgid "* Rebuilding '%s' named repo... "
 msgstr "* '%s' isimli depo yeniden inşa ediliyor... "
 
-#: pisi/api.py:409
+#: pisi/api.py:412
 msgid "Repo index file '%s' not found."
 msgstr "Depo index dosyası '%s' bulunamadı."
 
-#: pisi/api.py:415 pisi/atomicoperations.py:511
+#: pisi/api.py:418 pisi/atomicoperations.py:512
 msgid "OK."
 msgstr "Tamam."
 
@@ -346,116 +346,116 @@ msgstr "Paket adresi: %s"
 msgid "Package %s not found in any active repository."
 msgstr "'%s' isimli paket hiç bir etkin depoda bulunamadı."
 
-#: pisi/atomicoperations.py:98
+#: pisi/atomicoperations.py:99
 msgid "Installing %s, version %s, release %s, build %s"
 msgstr "'%s' paketi, versiyon %s, sürüm %s, inşa %s sisteme yerleştiriliyor."
 
-#: pisi/atomicoperations.py:142
+#: pisi/atomicoperations.py:143
 msgid "Package conflicts %s"
 msgstr "Paket %s ile çatışmakta."
 
-#: pisi/atomicoperations.py:147
+#: pisi/atomicoperations.py:148
 msgid "Dependencies for %s not satisfied"
 msgstr "'%s' paketi için bağımlılıklar sağlanmadı."
 
-#: pisi/atomicoperations.py:149
+#: pisi/atomicoperations.py:150
 msgid "Package not installable"
 msgstr "Paket yerleştirilebilir durumda değil."
 
-#: pisi/atomicoperations.py:162
+#: pisi/atomicoperations.py:163
 msgid "Trying to overwrite an existing file: %s"
 msgstr "Mevcut bir paket üzerine yazmaya çalıştı: %s"
 
-#: pisi/atomicoperations.py:193
+#: pisi/atomicoperations.py:194
 msgid "Re-install same version package?"
 msgstr "Aynı versiyona sahip paketi yeniden yerleştireyim mi?"
 
-#: pisi/atomicoperations.py:194
+#: pisi/atomicoperations.py:195
 msgid "Package re-install declined"
 msgstr "Paket yeniden yerleştirmeye izin verilmedi."
 
-#: pisi/atomicoperations.py:200
+#: pisi/atomicoperations.py:201
 msgid "Upgrading to new upstream version"
 msgstr "Yeni versiyona yukseltiliyor."
 
-#: pisi/atomicoperations.py:203
+#: pisi/atomicoperations.py:204
 msgid "Upgrading to new distribution release"
 msgstr "Yeni dağıtım sürümüne yukseltiliyor."
 
-#: pisi/atomicoperations.py:207
+#: pisi/atomicoperations.py:208
 msgid "Upgrading to new distribution build"
 msgstr "Yeni dağıtım inşasına yukseltiliyor."
 
-#: pisi/atomicoperations.py:214
+#: pisi/atomicoperations.py:215
 msgid "Downgrade to old upstream version?"
 msgstr "Eski kaynak versiyonuna dönülsün mu?"
 
-#: pisi/atomicoperations.py:216
+#: pisi/atomicoperations.py:217
 msgid "Downgrade to old distribution release?"
 msgstr "Eski dağıtım sürümüne dönülsün mu?"
 
-#: pisi/atomicoperations.py:218
+#: pisi/atomicoperations.py:219
 msgid "Downgrade to old distribution build?"
 msgstr "Eski dağıtım inşasına dönülsün mu?"
 
-#: pisi/atomicoperations.py:220
+#: pisi/atomicoperations.py:221
 msgid "Package downgrade declined"
 msgstr "Paket eskileştirilmesine izin verilmedi."
 
-#: pisi/atomicoperations.py:275
+#: pisi/atomicoperations.py:276
 msgid "Storing %s, "
 msgstr "%s saklanıyor, "
 
-#: pisi/atomicoperations.py:278
+#: pisi/atomicoperations.py:279
 msgid "Storing %s."
 msgstr "%s saklanıyor."
 
-#: pisi/atomicoperations.py:285
+#: pisi/atomicoperations.py:286
 msgid "Storing %s"
 msgstr "%s saklanıyor"
 
-#: pisi/atomicoperations.py:327
+#: pisi/atomicoperations.py:328
 msgid "Regenerating /etc/ld.so.cache..."
 msgstr "/etc/ld.so.cache yeniden yaratılıyor..."
 
-#: pisi/atomicoperations.py:330
+#: pisi/atomicoperations.py:331
 msgid "Bypassing ldconfig"
 msgstr "ldconfig işlemi atlanıyor"
 
-#: pisi/atomicoperations.py:364
+#: pisi/atomicoperations.py:365
 msgid "File list could not be read for package %s, continuing removal."
 msgstr ""
 "'%s' paketi için dosya listesi okunamadı, kaldırma işlemine devam ediliyor. "
 
-#: pisi/atomicoperations.py:370
+#: pisi/atomicoperations.py:371
 msgid "Removing package %s"
 msgstr "'%s' paketi kaldırılıyor."
 
-#: pisi/atomicoperations.py:373
+#: pisi/atomicoperations.py:374
 msgid "Trying to remove nonexistent package "
 msgstr "Varolmayan paket kaldırılmaya çalışıldı."
 
-#: pisi/atomicoperations.py:420
+#: pisi/atomicoperations.py:421
 msgid "Not removing non-file, non-link %s"
 msgstr "Dosya ya da bağ olmayan '%s' kaldırılmıyor."
 
-#: pisi/atomicoperations.py:481
+#: pisi/atomicoperations.py:482
 msgid "Metadata XML '%s' cannot be found"
 msgstr "'%s' isimli metadata XML bulunamıyor"
 
-#: pisi/atomicoperations.py:489
+#: pisi/atomicoperations.py:490
 msgid "MetaData format wrong (%s)"
 msgstr "MetaData biçimi yanlış (%s)"
 
-#: pisi/atomicoperations.py:491
+#: pisi/atomicoperations.py:492
 msgid "* Adding '%s' to db... "
 msgstr "* '%s' veritabanına ekleniyor... "
 
-#: pisi/atomicoperations.py:497
+#: pisi/atomicoperations.py:498
 msgid "Files XML '%s' cannot be found"
 msgstr "Files XML '%s' bulunamıyor"
 
-#: pisi/atomicoperations.py:502 pisi/package.py:155
+#: pisi/atomicoperations.py:503 pisi/package.py:149
 msgid "Invalid %s"
 msgstr "Geçersiz %s"
 
@@ -670,28 +670,28 @@ msgstr "Hata: "
 msgid " (yes/no)"
 msgstr " (evet/hayır)"
 
-#: pisi/cli/__init__.py:134
+#: pisi/cli/__init__.py:136
 msgid " [complete]\n"
 msgstr " [bitti]\n"
 
-#: pisi/cli/__init__.py:144
+#: pisi/cli/__init__.py:146
 msgid "Installed %s"
 msgstr "'%s' paketi yerleştirildi "
 
-#: pisi/cli/__init__.py:146
+#: pisi/cli/__init__.py:148
 msgid "Removed %s"
 msgstr "'%s' paketi kaldırıldı"
 
-#: pisi/cli/__init__.py:148
+#: pisi/cli/__init__.py:150
 msgid "Upgraded %s"
 msgstr "'%s' paketi yükseltildi"
 
 # pisi/actionsapi/autotools.py:75 :85
-#: pisi/cli/__init__.py:150
+#: pisi/cli/__init__.py:152
 msgid "Configured %s"
 msgstr "'%s' paketi yapılandırıldı"
 
-#: pisi/cli/__init__.py:152
+#: pisi/cli/__init__.py:154
 msgid "Extracting the files of %s"
 msgstr "'%s' paketinin dosyaları arşivden çıkartılıyor"
 
@@ -1347,7 +1347,7 @@ msgstr ""
 "Kullanım: list-upgrades [ <depo1> <depo2> ... depon ]\n"
 "\n"
 
-#: pisi/cli/commands.py:1121 pisi/operations.py:389
+#: pisi/cli/commands.py:1121 pisi/operations.py:383
 msgid "No packages to upgrade."
 msgstr "Yükseltilecek paket yok."
 
@@ -1443,40 +1443,40 @@ msgstr "Komut verilmedi"
 msgid "Command line parsing error"
 msgstr "Komut satırı ayrıştırma hatası"
 
-#: pisi/comariface.py:35
+#: pisi/comariface.py:39
 msgid "COMAR: comard not running or defunct"
 msgstr "COMAR: comard calışmıyor ya da bozuk"
 
-#: pisi/comariface.py:38
+#: pisi/comariface.py:42
 msgid "Registering COMAR script %s"
 msgstr "COMAR betiği %s kayıt ediliyor"
 
-#: pisi/comariface.py:48
+#: pisi/comariface.py:52
 msgid "COMAR.register ERROR!"
 msgstr "COMAR kayıt hatası!"
 
-#: pisi/comariface.py:55
+#: pisi/comariface.py:59
 msgid "Running post-install script for %s"
 msgstr "%s için yerleştirme-sonrası betiği çalıştırılıyor."
 
-#: pisi/comariface.py:64
+#: pisi/comariface.py:68
 msgid "COMAR.call_package(System.Package.postInstall, %s) failed!: %s"
 msgstr "COMAR: call_package(System.Package.postInstall, %s) başarısız!: %s"
 
 # pisi/comariface.py:45 :65
-#: pisi/comariface.py:68 pisi/comariface.py:89
+#: pisi/comariface.py:72 pisi/comariface.py:93
 msgid "COMAR.call_package ERROR: %d"
 msgstr "COMAR.call_package hata: %d"
 
-#: pisi/comariface.py:76
+#: pisi/comariface.py:80
 msgid "Running pre-remove script for %s"
 msgstr "%s için kaldırma-öncesi betiği çalıştırılıyor."
 
-#: pisi/comariface.py:85
+#: pisi/comariface.py:89
 msgid "COMAR.call_package(System.Package.preRemove, %s) failed!: %s"
 msgstr "COMAR.call_package(System.Package.preRemove, %s) başarısız!: %s"
 
-#: pisi/comariface.py:92
+#: pisi/comariface.py:96
 msgid "Unregistering COMAR scripts for %s"
 msgstr "%s'in COMAR betikleri kayıttan siliniyor."
 
@@ -1753,7 +1753,7 @@ msgid ""
 "in the respective order to satisfy extra dependencies:\n"
 msgstr "Ek bağımlılıkları sağlamak için aşağıdaki paketler kurulacaktır:\n"
 
-#: pisi/operations.py:112 pisi/operations.py:524
+#: pisi/operations.py:112 pisi/operations.py:526
 msgid "Do you want to continue?"
 msgstr "Devam etmek istiyor musunuz?"
 
@@ -1804,7 +1804,7 @@ msgstr ""
 "Emniyet mandalı: taban geliştirme sistemi system.devel'den izleyen paketler "
 "ek olarak yüklenecek:"
 
-#: pisi/operations.py:254 pisi/operations.py:500
+#: pisi/operations.py:254 pisi/operations.py:502
 msgid "Safety switch: the component system.base cannot be found"
 msgstr "Emniyet mandalı: taban sistem bileşeni system.base bulunamadı"
 
@@ -1813,82 +1813,84 @@ msgid "Not re-installing the following packages: "
 msgstr "İzleyen paketleri yeniden yerleştirmiyorum:"
 
 #: pisi/operations.py:288
+#, fuzzy
 msgid ""
-"The following minimal list of packages will be installed\n"
+"Following packages will be installed\n"
 "in the respective order to satisfy dependencies:\n"
-msgstr "Bağımlılıkları sağlamak için aşağıdaki paketler kurulacaktır:\n"
+msgstr "Ek bağımlılıkları sağlamak için aşağıdaki paketler kurulacaktır:\n"
 
-#: pisi/operations.py:300
+#: pisi/operations.py:294 pisi/operations.py:399
 msgid "Total size of packages: %.2f %s"
 msgstr "Paketlerin toplam boyu: %.2f %s"
 
-#: pisi/operations.py:306 pisi/operations.py:407 pisi/operations.py:679
+#: pisi/operations.py:300 pisi/operations.py:405 pisi/operations.py:681
 msgid "There are extra packages due to dependencies. Do you want to continue?"
 msgstr "Bağımlılıklar yüzünden ek paketler var. Devam etmek istiyor musunuz?"
 
-#: pisi/operations.py:367
+#: pisi/operations.py:361
 msgid "Warning: package *name* ends with '.pisi'"
 msgstr "Uyarı: paket *adı* '.pisi' ile bitiyor."
 
-#: pisi/operations.py:369
+#: pisi/operations.py:363
 msgid "Package %s is not installed."
 msgstr "Paket %s yerleştirilmemiş."
 
-#: pisi/operations.py:378
+#: pisi/operations.py:372
 msgid "Package %s is already at the latest release %s."
 msgstr "Paket %s zaten en son sürüm %s'de"
 
-#: pisi/operations.py:384
+#: pisi/operations.py:378
 msgid "Package %s is already at the latest build %s."
 msgstr "Paket %s zaten en son inşa %s'de."
 
-#: pisi/operations.py:400
+#: pisi/operations.py:394
 #, fuzzy
 msgid "The following packages will be upgraded: "
 msgstr "Bu paketler yükseltilecektir: \n"
 
-#: pisi/operations.py:451
+#: pisi/operations.py:453
 #, fuzzy
-msgid "Dependency %s cannot be satisfied"
+msgid "Dependency %s of %s cannot be satisfied"
 msgstr "İnşa bağımlılığı %s sağlanamadı"
 
-#: pisi/operations.py:473
-msgid "Reverse dependency %s cannot be satisfied"
+#: pisi/operations.py:475
+#, fuzzy
+msgid "Reverse dependency %s of %s cannot be satisfied"
 msgstr "Ters bağımlılık %s sağlanamadı"
 
-#: pisi/operations.py:496
+#: pisi/operations.py:498
 msgid "Safety switch: cannot remove the following packages in system.base: "
 msgstr ""
 "Emniyet mandalı: taban sistem system.base deki izleyen sistem bütünlüğü "
 "açısından önemli paketler kaldırılamıyor: "
 
-#: pisi/operations.py:507
+#: pisi/operations.py:509
 msgid "Package %s does not exist. Cannot remove."
 msgstr "Olmayan paket %s kaldırılamıyor."
 
-#: pisi/operations.py:511
+#: pisi/operations.py:513
 msgid "No packages to remove."
 msgstr "Kaldıracak paket yok."
 
-#: pisi/operations.py:520
+#: pisi/operations.py:522
 msgid ""
 "The following minimal list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
 msgstr "Bağımlılıkları sağlamak için aşağıdaki paketler kaldırılacaktır:\n"
 
-#: pisi/operations.py:525
+#: pisi/operations.py:527
 msgid "Package removal declined"
 msgstr "Paket kaldırmaya izin verilmedi."
 
-#: pisi/operations.py:537
+#: pisi/operations.py:539
 msgid "Package %s is not installed. Cannot remove."
 msgstr "Paket %s kurulu değil. Kaldırılamıyor."
 
-#: pisi/operations.py:657
+#: pisi/operations.py:659
 msgid "No packages to emerge."
 msgstr "Derlenip, kurulacak paket yok."
 
-#: pisi/operations.py:668
+#: pisi/operations.py:670
 msgid ""
 "The following minimal list of packages will be installed \n"
 "from repository in the respective order to satisfy dependencies:\n"
@@ -1896,7 +1898,7 @@ msgstr ""
 "Bağımlılıkları sağlamak için bu minimal paket listesi verilen sırada\n"
 "yerleştirilecek:\n"
 
-#: pisi/operations.py:671
+#: pisi/operations.py:673
 msgid ""
 "The following minimal list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
@@ -1904,27 +1906,23 @@ msgstr ""
 "Bağımlılıkları sağlamak için aşağıdaki paketler verilen sırada\n"
 "derlenip, yerleştirilecek:\n"
 
-#: pisi/operations.py:704
+#: pisi/operations.py:706
 msgid "Cannot find source package: %s"
 msgstr "Kaynak paket bulunamadı: %s"
 
-#: pisi/package.py:55
-msgid "Package size: %.2f %s"
-msgstr "Paket boyu: %.2f %s"
-
-#: pisi/package.py:81
+#: pisi/package.py:75
 msgid "Trying to fetch xdelta: %s"
 msgstr "xdelta bilgisi alınıyor: %s"
 
-#: pisi/package.py:85
+#: pisi/package.py:79
 msgid "XDelta %s: not exists"
 msgstr "XDelta %s: bulunamadı"
 
-#: pisi/package.py:97 pisi/sourcearchive.py:59
+#: pisi/package.py:91 pisi/sourcearchive.py:59
 msgid "%s [cached]"
 msgstr "%s [önbellekte]"
 
-#: pisi/package.py:150
+#: pisi/package.py:144
 msgid "MetaData format wrong"
 msgstr "MetaData biçimi yanlış"
 
@@ -2445,6 +2443,14 @@ msgstr "%d hata ile karşılaşıldı. Lütfen bunları en kısa zamanda düzelt
 #: tools/repostats.py:675
 msgid "These dependencies are not available in repository:\n"
 msgstr "Bağımlılığa neden olan bu paketler depoda bulunmuyor:\n"
+
+#~ msgid ""
+#~ "The following minimal list of packages will be installed\n"
+#~ "in the respective order to satisfy dependencies:\n"
+#~ msgstr "Bağımlılıkları sağlamak için aşağıdaki paketler kurulacaktır:\n"
+
+#~ msgid "Package size: %.2f %s"
+#~ msgstr "Paket boyu: %.2f %s"
 
 #~ msgid "show in short format"
 #~ msgstr "kısa biçimde göster"
