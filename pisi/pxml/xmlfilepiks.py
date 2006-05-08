@@ -49,7 +49,7 @@ class XmlFile(object):
 
     def unlink(self):
         """deallocate DOM structure"""
-        pass # piksemel isnt as lame as minidom
+        del self.doc
 
     def rootNode(self):
         """returns root document element"""
