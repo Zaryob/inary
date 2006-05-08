@@ -51,6 +51,22 @@ def register(pcomar, name, path):
         else:
             raise Error, _("COMAR.register ERROR!")
 
+def wait_comar():
+    import socket, time
+    sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    timeout = 5
+    while timeout > 0:
+        try:
+            if ctx.comar_sockname:
+                sock.connect(sockname=ctx.comar_sockname)
+            else:
+                sock.connect("/var/run/comar.socket")
+            return True
+        except:
+            timeout -= 0.2
+        time.sleep(0.2)
+    return False
+
 def run_postinstall(package_name):
     "run postinstall scripts trough COMAR"
 
@@ -59,7 +75,17 @@ def run_postinstall(package_name):
     ctx.ui.info(_("Running post-install script for %s") % package_name)
     com.call_package("System.Package.postInstall", package_name)
     while 1:
-        reply = com.read_cmd()
+        try:
+            reply = com.read_cmd()
+        except:
+            # Comar postInstall does a "service comar restart" which cuts
+            # our precious communication link, so we waitsss
+            if package_name == "comar":
+                if not wait_comar():
+                    raise Error, _("Could not restart Comar")
+                return
+            else:
+                raise Error, _("Comar daemon closed the connection")
         if reply[0] == com.RESULT:
             break
         elif reply[0] == com.NONE: # package has no postInstall script
