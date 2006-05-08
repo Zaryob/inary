@@ -360,7 +360,7 @@ def upgrade_pkg_names(A = [], bypass_safety = False):
         if x.endswith(ctx.const.package_suffix):
             ctx.ui.debug(_("Warning: package *name* ends with '.pisi'"))
         if not ctx.installdb.is_installed(x):
-            ctx.ui.info(_('Package %s is not installed.') % x)
+            ctx.ui.info(_('Package %s is not installed.') % x, True)
             continue
         (version, release, build) = ctx.installdb.get_version(x)
         if ctx.packagedb.has_package(x):
