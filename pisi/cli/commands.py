@@ -364,7 +364,7 @@ unpack, setup, build, install, package
                                help=_("bypass errors from ActionsAPI"))
         self.parser.add_option("-B", "--ignore-comar", action="store_true",
                                default=False, help=_("bypass comar configuration agent"))
-        self.parser.add_option("", "--no-static", action="store_true",
+        self.parser.add_option("", "--create-static", action="store_true",
                                default=False, help=_("don't create a static package with ar files"))
         self.parser.add_option("", "--no-debug", action="store_true",
                                default=False, help=_("don't create a debug package with debug files"))
