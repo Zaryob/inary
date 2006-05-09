@@ -633,7 +633,7 @@ def pure_package_name(package_name):
     return parse_package_name(package_name)[0]
 
 def parse_package_name(package_name):
-    "return pure package name from given string"
+    "return package name and version string"
     "ex: package_name=tasma-1.0.3-5-2, returns (tasma, 1.0.3-5-2)"
 
     name = '-'.join([part for part in package_name.split('-') if part[0] not in string.digits])
