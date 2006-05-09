@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 #
 # Copyright (C) 2005, TUBITAK/UEKAE
@@ -65,9 +66,9 @@ setup(name="pisi",
     url="http://www.pardus.org.tr/eng/pisi/",
     package_dir = {'': ''},
     packages = ['pisi', 'pisi.cli', 'pisi.actionsapi', 'pisi.pxml', 'pisi.search'],
-    scripts = ['pisi-cli', 'tools/repostats.py', 'tools/find-lib-deps.py', 
-               'tools/update-environ.py', 'tools/lspisi', 'tools/unpisi',
-               'tools/calc-build-order.py'],
+    scripts = ['pisi-cli', 'scripts/repostats.py', 'scripts/find-lib-deps.py', 
+               'scripts/update-environ.py', 'scripts/lspisi', 'scripts/unpisi',
+               'scripts/calc-build-order.py'],
     cmdclass = {
         'install' : Install
     }
