@@ -246,7 +246,7 @@ class Install(AtomicOperation):
                     comariface.run_postinstall(self.pkginfo.name)
                 except Exception, e:
                     if ctx.get_option('ignore_script_errors'):
-                        ctx.ui.warning(_('Ignoring script error: ' + unicode(e)))
+                        ctx.ui.warning(_('Ignoring script error: ') + unicode(e))
                     else:
                         raise e
                 ctx.ui.notify(pisi.ui.configured, package = self.pkginfo, files = self.files)
@@ -442,7 +442,7 @@ class Remove(AtomicOperation):
                 comariface.run_preremove(self.package_name)
             except Exception, e:
                 if ctx.get_option('ignore_script_errors'):
-                    ctx.ui.warning(_('Ignoring script error: ' + unicode(e)))
+                    ctx.ui.warning(_('Ignoring script error: ') + unicode(e))
                 else:
                     raise e
         else:

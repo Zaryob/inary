@@ -1167,7 +1167,8 @@ class Search(Info):
 
 Usage: search <term1> <term2> ... <termn>
 
-Finds a package in repository containing specified search terms
+Finds a package containing specified search terms
+in summary, description, and package name fields.
 """
     __metaclass__ = autocommand
 

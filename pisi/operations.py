@@ -48,7 +48,7 @@ class PisiUpgradeException(pisi.Exception):
         pisi.Exception.__init__(self, _("Upgrading PISI requires database rebuild and restart"))
 
 def upgrade_pisi():
-    ctx.ui.warning(_("PISI package has been upgraded. Rebuilding database."))
+    ctx.ui.warning(_("PISI package has been upgraded. Rebuilding PISI database."))
     pisi.api.finalize()
     os.system('pisi rebuild-db -y')
     #reload(pisi)
