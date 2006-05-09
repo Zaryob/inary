@@ -426,6 +426,10 @@ def upgrade_pkg_names(A = [], bypass_safety = False):
         
     #if 'pisi' in order:
     #    ctx.ui.warning(_("PISI package has been upgraded. You should run rebuild-db."))
+    #    pisi.api.finalize()
+    #    reload(pisi)
+    #    pisi.api.init()
+    #    pisi.api.rebuild_db()
     #    raise PisiUpgradeException()
 
 def plan_upgrade(A, ignore_build = False):
