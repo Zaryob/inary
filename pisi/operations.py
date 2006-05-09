@@ -41,6 +41,10 @@ from pisi.version import Version
 class Error(pisi.Error):
     pass
 
+class PisiUpgradeException(pisi.Exception):
+    def __init__(self):
+        pisi.Exception.__init__(self, _("Upgrading PISI requires database rebuild and restart"))
+
 # high level operations
 
 def install(packages, reinstall = False):
@@ -419,6 +423,10 @@ def upgrade_pkg_names(A = [], bypass_safety = False):
     for path in paths:
         install_op = atomicoperations.Install(path)
         install_op.install(True)
+        
+    if 'pisi' in order:
+        ctx.ui.warning(_("PISI package has been upgraded. Updating database and restarting. Please wait."))
+        raise PisiUpgradeException()
 
 def plan_upgrade(A, ignore_build = False):
     # try to construct a pisi graph of packages to

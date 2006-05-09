@@ -38,9 +38,9 @@ except ImportError:
     pylzma = None
 
 ZIP_BZIP2 = 12
-ZIP_LZMA = 255
+ZIP_LZMA_BOGUS = 255
 
-compression_methods = [ZIP_STORED, ZIP_DEFLATED, ZIP_BZIP2, ZIP_LZMA]
+compression_methods = [ZIP_STORED, ZIP_DEFLATED, ZIP_BZIP2, ZIP_LZMA_BOGUS]
 
 class FileEntry:
     """File-like object used to access entries in a ZipFile"""
@@ -188,7 +188,7 @@ class ZipFileExt(ZipFile):
         if zinfo.compress_type == ZIP_BZIP2 and not bzip2:
             raise RuntimeError, \
                   "Compression requires the (missing) bzip2 module"
-        if zinfo.compress_type == ZIP_LZMA and not pylzma:
+        if zinfo.compress_type == ZIP_LZMA_BOGUS and not pylzma:
             raise RuntimeError, \
                   "Compression requires the (missing) pylzma module"
 
@@ -246,7 +246,7 @@ class ZipFileExt(ZipFile):
             else:
                 zinfo.compress_size = file_size
 
-        elif zinfo.compress_type == ZIP_LZMA:
+        elif zinfo.compress_type == ZIP_LZMA_BOGUS:
             # unfortunately pylzma.compressobj is not implemented yet.
             # So in order to calculate the CRC, we are going to read
             # all the file at once until it is implemented.
@@ -288,8 +288,8 @@ class ZipFileExt(ZipFile):
 ##            if not bzip2:
 ##                raise RuntimeError, \
 ##                      "De-compression requires the (missing) bzip2 module"
-##	    return LZMAFileEntry(self.fp, zinfo.compress_size)
-        elif zinfo.compress_type == ZIP_LZMA:
+##          return LZMAFileEntry(self.fp, zinfo.compress_size)
+        elif zinfo.compress_type == ZIP_LZMA_BOGUS:
             if not pylzma:
                 raise RuntimeError, \
                       "De-compression requires the (missing) pylzma module"
