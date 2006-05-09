@@ -424,9 +424,9 @@ def upgrade_pkg_names(A = [], bypass_safety = False):
         install_op = atomicoperations.Install(path)
         install_op.install(True)
         
-    if 'pisi' in order:
-        ctx.ui.warning(_("PISI package has been upgraded. Updating database and restarting. Please wait."))
-        raise PisiUpgradeException()
+    #if 'pisi' in order:
+    #    ctx.ui.warning(_("PISI package has been upgraded. You should run rebuild-db."))
+    #    raise PisiUpgradeException()
 
 def plan_upgrade(A, ignore_build = False):
     # try to construct a pisi graph of packages to
