@@ -630,7 +630,16 @@ def pure_package_name(package_name):
     if package_name.endswith(ctx.const.package_suffix):
         package_name = package_name.rstrip(ctx.const.package_suffix)
 
-    return '-'.join([part for part in package_name.split('-') if part[0] not in string.digits])
+    return parse_package_name(package_name)[0]
+
+def parse_package_name(package_name):
+    "return pure package name from given string"
+    "ex: package_name=tasma-1.0.3-5-2, returns (tasma, 1.0.3-5-2)"
+
+    name = '-'.join([part for part in package_name.split('-') if part[0] not in string.digits])
+    version = package_name[len(name + '-'):]
+    
+    return (name, version)
  
 def generate_pisi_file(patchFile, fromFile, toFile):
     if run_batch("xdelta patch %s %s %s" % (patchFile, fromFile, toFile))[0]:
