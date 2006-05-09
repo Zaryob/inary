@@ -48,14 +48,13 @@ class PisiUpgradeException(pisi.Exception):
         pisi.Exception.__init__(self, _("Upgrading PISI requires database rebuild and restart"))
 
 def upgrade_pisi():
-    ctx.ui.warning(_("PISI package has been upgraded. Rebuilding database and restarting."))
+    ctx.ui.warning(_("PISI package has been upgraded. Rebuilding database."))
     pisi.api.finalize()
     os.system('pisi rebuild-db -y')
     #reload(pisi)
     #pisi.api.init()
     #pisi.api.rebuild_db()
     raise PisiUpgradeException()
-
 
 # high level operations
 
@@ -323,7 +322,7 @@ in the respective order to satisfy dependencies:
     for x in order:
         atomicoperations.install_single_name(x)
         
-    if 'pisi' in order and ctx.installdb.is_installed('pisi'):
+    if not bypass_safety and 'pisi' in order and ctx.installdb.is_installed('pisi'):
         upgrade_pisi()
 
 def plan_install_pkg_names(A):
@@ -441,7 +440,7 @@ def upgrade_pkg_names(A = [], bypass_safety = False):
         install_op = atomicoperations.Install(path)
         install_op.install(True)
         
-    if 'pisi' in order:
+    if not bypass_safety and 'pisi' in order:
         upgrade_pisi()
 
 def plan_upgrade(A, ignore_build = False):
