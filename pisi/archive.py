@@ -102,7 +102,7 @@ class ArchiveZip(ArchiveBase):
     zip archives."""
     
     symmagic = 2716663808 #long of hex val '0xA1ED0000L'
-    comp_method = {'lzma': zipfileext.ZIP_LZMA, 'deflated': zipfileext.ZIP_DEFLATED}
+    comp_method = {'lzma': zipfileext.ZIP_LZMA_BOGUS, 'deflated': zipfileext.ZIP_DEFLATED}
     
     def __init__(self, file_path, arch_type = "zip", mode = 'r'):
         super(ArchiveZip, self).__init__(file_path, arch_type)
@@ -134,7 +134,7 @@ class ArchiveZip(ArchiveBase):
             else:
                 method = ctx.get_option('compression_method')
                 if not method:
-                    self.zip_obj.write(file_name, arc_name, zipfileext.ZIP_LZMA)
+                    self.zip_obj.write(file_name, arc_name, zipfileext.ZIP_LZMA_BOGUS)
                 else:
                     self.zip_obj.write(file_name, arc_name, self.comp_method[method])
 

@@ -49,6 +49,6 @@ class ZipFileExtCase(testcase.TestCase):
         self.genericTestZipUnzip(ZIP_DEFLATED)
 
     def testLzmaZipUnzip(self):
-        self.genericTestZipUnzip(ZIP_LZMA)
+        self.genericTestZipUnzip(ZIP_LZMA_BOGUS)
 
 suite = unittest.makeSuite(ZipFileExtCase)
