@@ -257,14 +257,13 @@ def upgrade_base(A = set()):
     ignore_build = ctx.get_option('ignore_build_no')
     if not ctx.get_option('bypass_safety'):
         if ctx.componentdb.has_component('system.base'):
-            extra_packages = set(ctx.componentdb.get_component('system.base').packages) - A
-            extra_installs = filter(lambda x: not ctx.installdb.is_installed(x), extra_packages)
+            systembase = set(ctx.componentdb.get_union_comp('system.base').packages)
+            extra_installs = filter(lambda x: not ctx.installdb.is_installed(x), systembase - A)
             if extra_installs:
                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be installed: ') +
                                util.strlist(extra_installs))
                 install_pkg_names(extra_installs, bypass_safety=True)
-                #A |= extra_installs
-            extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), extra_packages)
+            extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase)
             if extra_upgrades:
                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be upgraded: ') +
                                util.strlist(extra_upgrades))
