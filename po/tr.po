@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2006-05-09 20:30+EEST\n"
-"PO-Revision-Date: 2006-05-09 20:22+0300\n"
+"POT-Creation-Date: 2006-05-10 20:42+EEST\n"
+"PO-Revision-Date: 2006-05-10 20:39+0300\n"
 "Last-Translator: Eray Ozkural <eray@pardus.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -405,7 +405,7 @@ msgstr "Paket eskileştirilmesine izin verilmedi."
 
 #: pisi/atomicoperations.py:249 pisi/atomicoperations.py:445
 msgid "Ignoring script error: "
-msgstr ""
+msgstr "Betik hatası esgeçiliyor:"
 
 #: pisi/atomicoperations.py:282
 msgid "Storing %s, "
@@ -891,9 +891,8 @@ msgid "bypass comar configuration agent"
 msgstr "çomar yapılandırma aygıtını kullanma"
 
 #: pisi/cli/commands.py:366
-#, fuzzy
 msgid "create a static package with ar files"
-msgstr "ar dosyaları içeren statik bir paket yaratma"
+msgstr "ar dosyaları içeren bir statik paket yarat"
 
 #: pisi/cli/commands.py:368
 msgid "don't create a debug package with debug files"
@@ -943,7 +942,7 @@ msgstr ""
 
 #: pisi/cli/commands.py:428 pisi/cli/commands.py:462
 msgid "Ignore errors from scripts"
-msgstr ""
+msgstr "Betiklerden kaynaklanan hataları esgeç"
 
 #: pisi/cli/commands.py:439
 msgid "Outputting binary packages in the package cache."
@@ -1386,7 +1385,6 @@ msgid "List pending packages"
 msgstr "Yapılandırma bekleyen paketleri listele"
 
 #: pisi/cli/commands.py:1166
-#, fuzzy
 msgid ""
 "Search packages\n"
 "\n"
@@ -1395,11 +1393,12 @@ msgid ""
 "Finds a package containing specified search terms\n"
 "in summary, description, and package name fields.\n"
 msgstr ""
-"Dosya araştır\n"
+"Paketleri araştır\n"
 "\n"
 "Kullanım: search <terim1> <terim2> ... <terimn>\n"
 "\n"
-"Belirtilen arama terimlerini içeren paketleri bulur.\n"
+"Belirtilen arama terimlerini özet, tanım ve paket adı \n"
+"alanlarında içeren paketleri bulur.\n"
 
 #: pisi/cli/commands.py:1183
 msgid "set search language"
@@ -1785,10 +1784,12 @@ msgstr "Mimari: %s, Yerleşik boyut: %s\n"
 #: pisi/operations.py:48
 msgid "Upgrading PISI requires database rebuild and restart"
 msgstr ""
+"PİSİ'yi yükseltmek veritabanının yeniden inşa edilmesini ve uygulamayı "
+"yeniden başlatmayı gerektirir"
 
 #: pisi/operations.py:51
 msgid "PISI package has been upgraded. Rebuilding PISI database."
-msgstr ""
+msgstr "PİSİ paketi yükseltilmiştir. PİSİ veritabanı yeniden inşa ediliyor."
 
 #: pisi/operations.py:82
 msgid "Mixing file names and package names not supported yet."
@@ -2077,9 +2078,8 @@ msgid "Root tagname %s not identical to %s as expected"
 msgstr "Kök tag adı %s beklendiği gibi %s ile aynı değil."
 
 #: pisi/pxml/xmlfilepiks.py:63
-#, fuzzy
 msgid "Cannot access URI %s"
-msgstr "%s indirilemiyor; %s"
+msgstr "%s URI ına erişilemiyor"
 
 #: pisi/pxml/xmlfilepiks.py:68
 msgid "File '%s' has invalid XML"
@@ -2340,32 +2340,6 @@ msgid ""
 "\"Content-Transfer-Encoding: ENCODING\\n\"\n"
 "\"Generated-By: pygettext.py %(version)s\\n\"\n"
 "\n"
-msgstr ""
-
-#: tools/pygettext.py:261
-msgid "Check whether 'str' contains ANY of the chars in 'set'"
-msgstr ""
-
-#: tools/pygettext.py:266
-msgid "Helper for getFilesForName()."
-msgstr ""
-
-#: tools/pygettext.py:285
-msgid ""
-"Get the filesystem path for a module or a package.\n"
-"\n"
-"    Return the file system path to a file for a module, and to a directory "
-"for\n"
-"    a package. Return None if the name is not found, or is a builtin or\n"
-"    extension module.\n"
-"    "
-msgstr ""
-
-#: tools/pygettext.py:324
-msgid ""
-"Get a list of module files for a filename, a module or package name,\n"
-"    or a directory.\n"
-"    "
 msgstr ""
 
 #: tools/pygettext.py:426
