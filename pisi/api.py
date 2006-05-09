@@ -154,21 +154,7 @@ def list_available(repo = None):
 def list_upgradable():
     ignore_build = ctx.get_option('ignore_build_no')
 
-    A = ctx.installdb.list_installed()
-
-    # filter packages that are not upgradable
-    Ap = []
-    for x in A:
-        (version, release, build) = ctx.installdb.get_version(x)
-        pkg = ctx.packagedb.get_package(x)
-        if ignore_build or (not build) or (not pkg.build):
-            if Version(release) < Version(pkg.release):
-                Ap.append(x)
-        elif build < pkg.build:
-            Ap.append(x)
-        else:
-            pass
-    return Ap
+    return filter(pisi.operations.is_upgradable, ctx.installdb.list_installed())
 
 def package_graph(A, ignore_installed = False):
     """Construct a package relations graph, containing

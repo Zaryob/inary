@@ -161,10 +161,10 @@ class Command(object):
 
     def help(self):
         """print help for the command"""
-        ctx.ui.info(self.format_name() + ': ')
+        print self.format_name() + ': '
         trans = gettext.translation('pisi', fallback=True)
-        ctx.ui.info(trans.ugettext(self.__doc__) + '\n')
-        ctx.ui.info(self.parser.format_option_help())
+        print trans.ugettext(self.__doc__) + '\n'
+        print self.parser.format_option_help()
 
     def die(self):
         """exit program"""
@@ -357,19 +357,19 @@ unpack, setup, build, install, package
         #                       help=_("perform only specified step"))
         self.parser.add_option("-U", "--until", action="store", default=None,
                                help=_("perform until and including specified step"))
-        self.parser.add_option("-C", "--compression-method", action="store", default='lzma',
-                               help=_("package compression method"))
         self.parser.add_option("-A", "--ignore-action-errors",
                                action="store_true", default=False,
                                help=_("bypass errors from ActionsAPI"))
         self.parser.add_option("-B", "--ignore-comar", action="store_true",
                                default=False, help=_("bypass comar configuration agent"))
         self.parser.add_option("", "--create-static", action="store_true",
-                               default=False, help=_("don't create a static package with ar files"))
+                               default=False, help=_("create a static package with ar files"))
         self.parser.add_option("", "--no-debug", action="store_true",
                                default=False, help=_("don't create a debug package with debug files"))
         self.parser.add_option("", "--no-install", action="store_true",
                                default=False, help=_("don't install build dependencies, fail if a build dependency is present"))
+        self.parser.add_option("-C", "--compression-method", action="store", default='lzma',
+                               help=_("package compression method"))
 
 
     def run(self):
@@ -422,6 +422,11 @@ downloaded from a repository containing sources.
 
     name = ("emerge", "em")
 
+    def options(self):
+        Build.options(self)
+        self.parser.add_option("", "--ignore-script-errors", action="store_true",
+                     default=False, help=_("Ignore errors from scripts"))
+    
     def run(self):
         if not self.args:
             self.help()
@@ -453,6 +458,8 @@ class PackageOp(Command):
                      default=False, help=_("bypass safety switch"))
         p.add_option("-n", "--dry-run", action="store_true", default=False,
                      help = _("do not perform any action, just show what would be done"))
+        p.add_option("", "--ignore-script-errors", action="store_true",
+                     default=False, help=_("Ignore errors from scripts"))
         ignoredep_opt(self)
 
     def init(self):
@@ -531,11 +538,11 @@ expanded to package names.
         buildno_opts(self)
         p = self.parser
         p.add_option("-r", "--bypass-update-repo", action="store_true",
-                              default=False, help=_("Do not update repositories"))
+                     default=False, help=_("Do not update repositories"))
         p.add_option("", "--bypass-ldconfig", action="store_true",
-                              default=False, help=_("Bypass ldconfig phase"))
-        self.parser.add_option("-e", "--eager", action="store_true",
-                               default=False, help=_("eager upgrades"))
+                     default=False, help=_("Bypass ldconfig phase"))
+        p.add_option("-e", "--eager", action="store_true",
+                     default=False, help=_("eager upgrades"))
 
     def run(self):
         self.init()

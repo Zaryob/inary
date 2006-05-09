@@ -242,7 +242,13 @@ class Install(AtomicOperation):
             if ctx.comar:
                 import pisi.comariface as comariface
                 ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
-                comariface.run_postinstall(self.pkginfo.name)
+                try:
+                    comariface.run_postinstall(self.pkginfo.name)
+                except Exception, e:
+                    if ctx.get_option('ignore_script_errors'):
+                        ctx.ui.warning(_('Ignoring script error: ' + unicode(e)))
+                    else:
+                        raise e
                 ctx.ui.notify(pisi.ui.configured, package = self.pkginfo, files = self.files)
             else:
                 self.config_later = True
@@ -432,7 +438,13 @@ class Remove(AtomicOperation):
     def run_preremove(self):
         if ctx.comar and self.package.providesComar:
             import pisi.comariface as comariface
-            comariface.run_preremove(self.package_name)
+            try:
+                comariface.run_preremove(self.package_name)
+            except Exception, e:
+                if ctx.get_option('ignore_script_errors'):
+                    ctx.ui.warning(_('Ignoring script error: ' + unicode(e)))
+                else:
+                    raise e
         else:
             # TODO: store this somewhere
             pass

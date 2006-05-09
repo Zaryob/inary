@@ -42,8 +42,20 @@ class Error(pisi.Error):
     pass
 
 class PisiUpgradeException(pisi.Exception):
+    """application must reload all pisi modules it imported after receiving
+       this exception"""
     def __init__(self):
         pisi.Exception.__init__(self, _("Upgrading PISI requires database rebuild and restart"))
+
+def upgrade_pisi():
+    ctx.ui.warning(_("PISI package has been upgraded. Rebuilding database and restarting."))
+    pisi.api.finalize()
+    os.system('pisi rebuild-db -y')
+    #reload(pisi)
+    #pisi.api.init()
+    #pisi.api.rebuild_db()
+    raise PisiUpgradeException()
+
 
 # high level operations
 
@@ -232,7 +244,10 @@ def is_upgradable(name, ignore_build = False):
     if not ctx.installdb.is_installed(name):
         return False
     (version, release, build) = ctx.installdb.get_version(name)
-    pkg = ctx.packagedb.get_package(name)
+    try:
+        pkg = ctx.packagedb.get_package(name)
+    except:
+        return False
     if ignore_build or (not build) or (not pkg.build):
         return Version(release) < Version(pkg.release)
     else:
@@ -308,6 +323,9 @@ in the respective order to satisfy dependencies:
             
     for x in order:
         atomicoperations.install_single_name(x)
+        
+    if 'pisi' in order and ctx.installdb.is_installed('pisi'):
+        upgrade_pisi()
 
 def plan_install_pkg_names(A):
     # try to construct a pisi graph of packages to
@@ -424,13 +442,8 @@ def upgrade_pkg_names(A = [], bypass_safety = False):
         install_op = atomicoperations.Install(path)
         install_op.install(True)
         
-    #if 'pisi' in order:
-    #    ctx.ui.warning(_("PISI package has been upgraded. You should run rebuild-db."))
-    #    pisi.api.finalize()
-    #    reload(pisi)
-    #    pisi.api.init()
-    #    pisi.api.rebuild_db()
-    #    raise PisiUpgradeException()
+    if 'pisi' in order:
+        upgrade_pisi()
 
 def plan_upgrade(A, ignore_build = False):
     # try to construct a pisi graph of packages to
@@ -710,6 +723,9 @@ installed in the respective order to satisfy dependencies:
     for x in order_build:
         package_names, blah = atomicoperations.build(x)
         install_pkg_files(package_names) # handle inter-package deps here
+
+    if 'pisi' in order_build or ('pisi' in order_inst and ctx.installdb.is_installed('pisi')):
+        upgrade_pisi()
 
 def plan_emerge(A, rebuild_all):
 
