@@ -59,7 +59,7 @@ class XmlFile(object):
         uri = File.make_uri(uri)
         try:
             localpath = File.download(uri, tmpDir,sha1sum=sha1sum,compress=compress,sign=sign)
-        except Exception, e:
+        except IOError:
             raise Error(_("Cannot access URI %s") % (uri) )
         try:
             self.doc = iks.parse(localpath)
