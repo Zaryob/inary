@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2006-05-10 20:42+EEST\n"
+"POT-Creation-Date: 2006-05-10 20:55+EEST\n"
 "PO-Revision-Date: 2006-05-10 20:39+0300\n"
 "Last-Translator: Eray Ozkural <eray@pardus.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
@@ -2185,7 +2185,7 @@ msgstr "Çevre güncelleniyor..."
 msgid "ERROR: xdelta patch %s %s %s failed"
 msgstr "HATA: xdelta yaması %s %s %s başarısız"
 
-#: tools/repostats.py:334
+#: scripts/repostats.py:334
 msgid ""
 "Duplicate binary packages:\n"
 "%s\n"
@@ -2195,11 +2195,11 @@ msgstr ""
 "%s\n"
 "%s\n"
 
-#: tools/repostats.py:339
+#: scripts/repostats.py:339
 msgid "Unknown file type '%s' in package '%s'"
 msgstr "Bilinmeyen dosya tipi '%s', '%s' paketi içinde bulundu. "
 
-#: tools/repostats.py:395
+#: scripts/repostats.py:395
 msgid ""
 "Duplicate source packages:\n"
 "%s\n"
@@ -2209,28 +2209,28 @@ msgstr ""
 "%s\n"
 "%s\n"
 
-#: tools/repostats.py:415
+#: scripts/repostats.py:415
 msgid "Source package '%s' has wrong date format '%s'"
 msgstr "Kaynak paketi '%s' yanlış tarih biçimlendirmesine sahip: '%s'"
 
-#: tools/repostats.py:428
+#: scripts/repostats.py:428
 msgid "Source package '%s' has wrong release numbers"
 msgstr "'%s' kaynak paketi hatalı sürüm bilgisine sahip"
 
-#: tools/repostats.py:432
+#: scripts/repostats.py:432
 msgid "Source package '%s' lacks release %d"
 msgstr "Kaynak paketi '%s' sürüm %d'ye sahip değil"
 
-#: tools/repostats.py:440
+#: scripts/repostats.py:440
 msgid "Source package '%s' has no first release"
 msgstr "'%s' kaynak paketinin ilk sürüm bilgisi yok"
 
-#: tools/repostats.py:475
+#: scripts/repostats.py:475
 msgid ""
 "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 
-#: tools/repostats.py:558
+#: scripts/repostats.py:558
 msgid ""
 "Cannot parse '%s':\n"
 "%s\n"
@@ -2238,28 +2238,28 @@ msgstr ""
 "'%s' ayrıştırılamıyor:\n"
 "'%s'\n"
 
-#: tools/repostats.py:636
+#: scripts/repostats.py:636
 msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
 msgstr ""
 "Kullanım: repostats.py [SEÇENEKLER] source-repo-path [ikili-depo-adresi]\n"
 
-#: tools/repostats.py:637
+#: scripts/repostats.py:637
 msgid "Dont generate the web site.\n"
 msgstr "Web sayfasını oluşturma.\n"
 
-#: tools/repostats.py:658
+#: scripts/repostats.py:658
 msgid "Scanning source repository...\n"
 msgstr "Kaynak deposu taranıyor...\n"
 
-#: tools/repostats.py:662
+#: scripts/repostats.py:662
 msgid "Scanning binary packages...\n"
 msgstr "İkili dosyalar taranıyor...\n"
 
-#: tools/repostats.py:667
+#: scripts/repostats.py:667
 msgid "Encountered %d errors! Fix them immediately!\n"
 msgstr "%d hata ile karşılaşıldı. Lütfen bunları en kısa zamanda düzeltin.\n"
 
-#: tools/repostats.py:675
+#: scripts/repostats.py:675
 msgid "These dependencies are not available in repository:\n"
 msgstr "Bağımlılığa neden olan bu paketler depoda bulunmuyor:\n"
 
