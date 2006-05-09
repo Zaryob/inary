@@ -107,7 +107,9 @@ class Install(AtomicOperation):
         self.check_reinstall()
         self.extract_install()
         self.store_pisi_files()
+
         self.register_comar()
+        self.postinstall()
 
         txn = ctx.dbenv.txn_begin()
         try:
@@ -117,7 +119,6 @@ class Install(AtomicOperation):
             txn.abort()
             raise e
 
-        self.postinstall()
         self.update_environment()
         ctx.ui.status()
         if self.upgrade:
