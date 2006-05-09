@@ -416,6 +416,28 @@ def rebuild_db(files=False):
 
     assert ctx.database == False
 
+    # Bug 2596
+    # finds and cleans duplicate package directories under '/var/lib/pisi/package'
+    # deletes the _older_ versioned package directories.
+    def clean_duplicates():
+        i_version = {} # installed versions
+        replica = []
+        for pkg in os.listdir(pisi.util.join_path(pisi.api.ctx.config.lib_dir(), 'package')):
+            (name, ver) = util.parse_package_name(pkg)
+            if i_version.has_key(name):
+                if Version(ver) > Version(i_version[name]):
+                    # found a greater version, older one is a replica
+                    replica.append(name + '-' + i_version[name])
+                    i_version[name] = ver
+                else:
+                    # found an older version which is a replica
+                    replica.append(name + '-' + ver)
+            else:
+                i_version[name] = ver
+
+        for pkg in replica:
+            pisi.util.clean_dir(pisi.util.join_path(pisi.api.ctx.config.lib_dir(), 'package', pkg))
+
     def destroy(files):
         #from pisi.lockeddbshelve import LockedDBShelf
         pisi.lockeddbshelve.init_dbenv(write=True, writeversion=True)
@@ -468,5 +490,6 @@ def rebuild_db(files=False):
     # construct new database version
     init(database=True, options=options, ui=ui, comar=comar)
     #ctx.txn_proc(reload)
+    clean_duplicates()
     reload_packages(files, None)
     reload_indexes(None)
