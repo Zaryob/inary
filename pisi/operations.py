@@ -318,11 +318,13 @@ in the respective order to satisfy dependencies:
             return False
             
     ctx.ui.notify(ui.packagestogo, order = order)
-            
+
+    pisi_installed = ctx.installdb.is_installed('pisi')
+    
     for x in order:
         atomicoperations.install_single_name(x)
         
-    if not bypass_safety and 'pisi' in order and ctx.installdb.is_installed('pisi'):
+    if not bypass_safety and 'pisi' in order and pisi_installed:
         upgrade_pisi()
 
 def plan_install_pkg_names(A):
@@ -713,6 +715,8 @@ installed in the respective order to satisfy dependencies:
             
     ctx.ui.notify(ui.packagestogo, order = order_inst)
 
+    pisi_installed = ctx.installdb.is_installed('pisi')
+
     for x in order_inst:
         atomicoperations.install_single_name(x)
 
@@ -722,7 +726,7 @@ installed in the respective order to satisfy dependencies:
         package_names, blah = atomicoperations.build(x)
         install_pkg_files(package_names) # handle inter-package deps here
 
-    if 'pisi' in order_build or ('pisi' in order_inst and ctx.installdb.is_installed('pisi')):
+    if 'pisi' in order_build or ( ('pisi' in order_inst + order_build) and pisi_installed):
         upgrade_pisi()
 
 def plan_emerge(A, rebuild_all):
