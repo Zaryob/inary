@@ -636,8 +636,16 @@ def parse_package_name(package_name):
     "return package name and version string"
     "ex: package_name=tasma-1.0.3-5-2, returns (tasma, 1.0.3-5-2)"
 
-    name = '-'.join([part for part in package_name.split('-') if part[0] not in string.digits])
-    version = package_name[len(name + '-'):]
+    # but we should handle package names like 855resolution
+    name = []
+    for part in package_name.split("-"):
+        if name != [] and part[0] in string.digits:
+            break
+        else:
+            name.append(part)
+    name = "-".join(name)
+    print name
+    version = package_name[len(name) + 1:]
     
     return (name, version)
  
