@@ -156,7 +156,7 @@ def list_upgradable():
 
     return filter(pisi.operations.is_upgradable, ctx.installdb.list_installed())
 
-def package_graph(A, ignore_installed = False):
+def package_graph(A, repo = pisi.itembyrepodb.installed, ignore_installed = False):
     """Construct a package relations graph, containing
     all dependencies of packages A, if ignore_installed
     option is True, then only uninstalled deps will
@@ -167,7 +167,7 @@ def package_graph(A, ignore_installed = False):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
-    G_f = pgraph.PGraph(ctx.packagedb)               # construct G_f
+    G_f = pgraph.PGraph(ctx.packagedb, repo)             # construct G_f
 
     # find the "install closure" graph of G_f by package 
     # set A using packagedb
@@ -178,7 +178,7 @@ def package_graph(A, ignore_installed = False):
     while len(B) > 0:
         Bp = set()
         for x in B:
-            pkg = ctx.packagedb.get_package(x)
+            pkg = ctx.packagedb.get_package(x, repo)
             #print pkg
             for dep in pkg.runtimeDependencies():
                 if ignore_installed:

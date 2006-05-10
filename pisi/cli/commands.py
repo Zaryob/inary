@@ -261,7 +261,9 @@ class Graph(Command):
 Usage: graph [<package1> <package2> ...]
 
 Write a graph of package relations, tracking dependency and
-conflicts relations starting from given packages.
+conflicts relations starting from given packages. By default
+shows the package relations among repository packages, and writes
+the package in graphviz format to 'pgraph.dot'.
 """
 
     __metaclass__ = autocommand
@@ -270,27 +272,34 @@ conflicts relations starting from given packages.
         super(Graph, self).__init__()
     
     def options(self):
-        self.parser.add_option("-a", "--all", action="store_true",
+        self.parser.add_option("-r", "--repository", action="store",
+                               default=None,
+                               help=_("specify a particular repository"))
+        self.parser.add_option("-i", "--installed", action="store_true",
                                default=False,
-                               help=_("graph all available packages"))
+                               help=_("graph of installed packages"))
+        self.parser.add_option("", "--ignore-installed", action="store_true",
+                               default=False,
+                               help=_("do not show installed packages"))
         self.parser.add_option("-o", "--output", action="store",
                                default='pgraph.dot',
                                help=_("dot output file"))
 
     name = ("graph", None)
 
-    def all_packages(self):
-        a = set()
-        from pisi import packagedb
-        for repo in ctx.repodb.list():
-            a = a.union(ctx.packagedb.list_packages(repo))
-        return a
-
     def run(self):
         self.init()
-        if ctx.get_option('all'):
-            ctx.ui.info(_('Plotting a graph of relations among all available packages'))
-            a = self.all_packages()
+        if not ctx.get_option('installed'):
+            if ctx.get_option('repository'):
+                repo = ctx.get_option('repository')
+                ctx.ui.info(_('Plotting packages in repository %s') % repo)
+            else:
+                repo = pisi.itembyrepodb.repos
+            if self.args:
+                a = self.args
+            else:
+                ctx.ui.info(_('Plotting a graph of relations among all repository packages'))
+                a = ctx.packagedb.list_packages(repo)
         else:
             if self.args:
                 a = self.args
@@ -298,7 +307,9 @@ conflicts relations starting from given packages.
                 # if A is empty, then graph all packages
                 ctx.ui.info(_('Plotting a graph of relations among all installed packages'))
                 a = ctx.installdb.list_installed()
-        g = pisi.api.package_graph(a)
+            repo = pisi.itembyrepodb.installed
+        g = pisi.api.package_graph(a, repo = repo, 
+                                   ignore_installed = ctx.get_option('ignore_installed'))
         g.write_graphviz(file(ctx.get_option('output'), 'w'))
         self.finalize()
 
