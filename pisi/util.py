@@ -644,7 +644,6 @@ def parse_package_name(package_name):
         else:
             name.append(part)
     name = "-".join(name)
-    print name
     version = package_name[len(name) + 1:]
     
     return (name, version)
