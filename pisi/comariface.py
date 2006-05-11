@@ -58,7 +58,7 @@ def wait_comar():
     while timeout > 0:
         try:
             if ctx.comar_sockname:
-                sock.connect(sockname=ctx.comar_sockname)
+                sock.connect(ctx.comar_sockname)
             else:
                 sock.connect("/var/run/comar.socket")
             return True
