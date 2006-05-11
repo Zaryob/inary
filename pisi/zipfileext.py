@@ -192,7 +192,7 @@ class ZipFileExt(ZipFile):
             raise RuntimeError, \
                   "Compression requires the (missing) pylzma module"
 
-    def write(self, filename, arcname=None, compress_type=None):
+    def write(self, filename, arcname=None, compress_type=None, **kwargs):
         """Put the bytes from filename into the archive under the name
         arcname."""
         st = os.stat(filename)
@@ -253,7 +253,7 @@ class ZipFileExt(ZipFile):
             buf = fp.read()
             file_size = len(buf)
             CRC = binascii.crc32(buf, CRC)
-            compressed = pylzma.compress(buf, eos=1)
+            compressed = pylzma.compress(buf, **kwargs)
             self.fp.write(compressed)
             zinfo.compress_size = len(compressed)
 
@@ -284,11 +284,6 @@ class ZipFileExt(ZipFile):
                 raise RuntimeError, \
                       "De-compression requires the (missing) zlib module"
             return DeflatedZipFileEntry(self.fp, zinfo.compress_size)
-##        elif zinfo.compress_type == ZIP_BZIP2:
-##            if not bzip2:
-##                raise RuntimeError, \
-##                      "De-compression requires the (missing) bzip2 module"
-##          return LZMAFileEntry(self.fp, zinfo.compress_size)
         elif zinfo.compress_type == ZIP_LZMA_BOGUS:
             if not pylzma:
                 raise RuntimeError, \

@@ -258,31 +258,27 @@ def info_file(package_fn):
 
 def info_name(package_name, installed=False):
     """fetch package information for a package"""
-    if ctx.packagedb.has_package(package_name, pisi.itembyrepodb.all):
-        if installed:
-            package = ctx.packagedb.get_package(package_name, pisi.itembyrepodb.installed)
-        else:
-            package, repo = ctx.packagedb.get_package_repo(package_name)
-            if repo==pisi.itembyrepodb.installed:
-                raise Error(_('Package %s not found') % package_name)
-
-        from pisi.metadata import MetaData
-        metadata = MetaData()
-        metadata.package = package
-        #FIXME: get it from sourcedb if available
-        metadata.source = None
-        #TODO: fetch the files from server if possible (wow, you maniac -- future exa)
-        if installed and ctx.installdb.is_installed(package.name):
-            try:
-                files = ctx.installdb.files(package.name)
-            except pisi.Error, e:
-                ctx.ui.warning(e)
-                files = None
-        else:
-            files = None
-        return metadata, files
+    if installed:
+        package = ctx.packagedb.get_package(package_name, pisi.itembyrepodb.installed)
     else:
-        raise Error(_('Package %s not found') % package_name)
+        package, repo = ctx.packagedb.get_package_repo(package_name, pisi.itembyrepodb.repos)
+        repostr = repo
+ 
+    from pisi.metadata import MetaData
+    metadata = MetaData()
+    metadata.package = package
+    #FIXME: get it from sourcedb if available
+    metadata.source = None
+    #TODO: fetch the files from server if possible (wow, you maniac -- future exa)
+    if installed and ctx.installdb.is_installed(package.name):
+        try:
+            files = ctx.installdb.files(package.name)
+        except pisi.Error, e:
+            ctx.ui.warning(e)
+            files = None
+    else:
+        files = None
+    return metadata, files
 
 def search_package_names(query):
     r = set()

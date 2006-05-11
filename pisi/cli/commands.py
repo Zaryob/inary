@@ -675,7 +675,7 @@ Usage: info <package1> <package2> ... <packagen>
                     ctx.ui.info(_('[inst] '), noln=True)
                 else:
                     ctx.ui.info(_('Installed package:'))
-                self.print_pkginfo(metadata, files)
+                self.print_pkginfo(metadata, files,pisi.itembyrepodb.installed)
                 
             if ctx.packagedb.has_package(arg):
                 metadata, files = pisi.api.info_name(arg, False)
@@ -683,9 +683,9 @@ Usage: info <package1> <package2> ... <packagen>
                     ctx.ui.info(_('[repo] '), noln=True)
                 else:
                     ctx.ui.info(_('Package found in repository:'))
-                self.print_pkginfo(metadata, files)
+                self.print_pkginfo(metadata, files, pisi.itembyrepodb.repos)
 
-    def print_pkginfo(self, metadata, files):
+    def print_pkginfo(self, metadata, files, repo = None):
         import os.path
 
         if not ctx.get_option('long'):
@@ -693,8 +693,10 @@ Usage: info <package1> <package2> ... <packagen>
             ctx.ui.info('%15s - %s' % (pkg.name, unicode(pkg.summary)))
         else:
             ctx.ui.info(unicode(metadata.package))
-            revdeps =  [x[0] for x in ctx.packagedb.get_rev_deps(metadata.package.name)]
-            print _('Reverse Dependencies:'), util.strlist(revdeps)
+            if repo:
+                revdeps =  [x[0] for x in 
+                            ctx.packagedb.get_rev_deps(metadata.package.name, repo)]
+                print _('Reverse Dependencies:'), util.strlist(revdeps)
         if self.options.files or self.options.files_path:
             if files:
                 print _('\nFiles:')

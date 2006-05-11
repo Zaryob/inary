@@ -117,8 +117,13 @@ class PackageDB(object):
         def proc(txn):
             package_info = self.d.get_item(name, repo, txn=txn)
             self.d.remove_item(name, repo, txn=txn)
+            for dep in package_info.runtimeDependencies():
+                dep_name = str(dep.package)
+                if self.dr.has_key(dep_name, repo, txn):
+                    revdep = self.dr.get_item(dep_name, repo, txn)
+                    revdep = filter(lambda (n,d):n!=name, revdep)
+                    self.dr.add_item(dep_name, revdep, repo, txn)
             if self.dr.has_key(name, repo, txn=txn):
-                
                 self.dr.remove_item(name, repo, txn=txn)
             ctx.componentdb.remove_package(package_info.partOf, package_info.name, repo, txn)
         self.d.txn_proc(proc, txn)

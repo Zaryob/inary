@@ -134,7 +134,10 @@ class ArchiveZip(ArchiveBase):
             else:
                 method = ctx.get_option('compression_method')
                 if not method:
-                    self.zip_obj.write(file_name, arc_name, zipfileext.ZIP_LZMA_BOGUS)
+                    method = 'lzma'
+                if method == 'lzma':
+                    self.zip_obj.write(file_name, arc_name, zipfileext.ZIP_LZMA_BOGUS,
+                                       dictionary = 26, fastBytes = 64)
                 else:
                     self.zip_obj.write(file_name, arc_name, self.comp_method[method])
 
