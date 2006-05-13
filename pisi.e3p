@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2006-05-08, 09:53:27 -->
+<!-- Saved: 2006-05-10, 19:58:06 -->
 <!-- Copyright (C) 2006 PiSi Development Team,  -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -11,10 +11,6 @@
   <Author>PiSi Development Team</Author>
   <EmaIl></EmaIl>
   <Sources>
-    <Source>
-      <Dir>tools</Dir>
-      <Name>cat-db.py</Name>
-    </Source>
     <Source>
       <Dir>tests</Dir>
       <Dir>popt</Dir>
@@ -263,10 +259,6 @@
       <Name>pisitoolsfunctions.py</Name>
     </Source>
     <Source>
-      <Dir>tools</Dir>
-      <Name>repostats.py</Name>
-    </Source>
-    <Source>
       <Dir>pisi</Dir>
       <Name>uri.py</Name>
     </Source>
@@ -276,10 +268,6 @@
     </Source>
     <Source>
       <Name>TODO</Name>
-    </Source>
-    <Source>
-      <Dir>tools</Dir>
-      <Name>fetchAll.py</Name>
     </Source>
     <Source>
       <Dir>pisi</Dir>
@@ -317,14 +305,6 @@
       <Name>oo.py</Name>
     </Source>
     <Source>
-      <Dir>tools</Dir>
-      <Name>update-environ.py</Name>
-    </Source>
-    <Source>
-      <Dir>tools</Dir>
-      <Name>convert_history.py</Name>
-    </Source>
-    <Source>
       <Dir>tests</Dir>
       <Name>dependencytests.py</Name>
     </Source>
@@ -339,10 +319,6 @@
     <Source>
       <Dir>tests</Dir>
       <Name>testcase.py</Name>
-    </Source>
-    <Source>
-      <Dir>tools</Dir>
-      <Name>fix_old_metadata_files.py</Name>
     </Source>
     <Source>
       <Dir>tests</Dir>
@@ -412,19 +388,7 @@
     </Source>
     <Source>
       <Dir>tools</Dir>
-      <Name>find-lib-deps.py</Name>
-    </Source>
-    <Source>
-      <Dir>tools</Dir>
       <Name>svndist.py</Name>
-    </Source>
-    <Source>
-      <Dir>tools</Dir>
-      <Name>rmcomp-source-repo.py</Name>
-    </Source>
-    <Source>
-      <Dir>tools</Dir>
-      <Name>check-source-repo.py</Name>
     </Source>
     <Source>
       <Dir>tests</Dir>
@@ -463,14 +427,6 @@
       <Name>dbshelve.py</Name>
     </Source>
     <Source>
-      <Dir>tools</Dir>
-      <Name>calc-build-order.py</Name>
-    </Source>
-    <Source>
-      <Dir>tools</Dir>
-      <Name>find_unowned_files.py</Name>
-    </Source>
-    <Source>
       <Dir>tests</Dir>
       <Name>repodbtests.py</Name>
     </Source>
@@ -489,10 +445,6 @@
     <Source>
       <Dir>tools</Dir>
       <Name>pygettext.py</Name>
-    </Source>
-    <Source>
-      <Dir>tools</Dir>
-      <Name>repo-diff.py</Name>
     </Source>
     <Source>
       <Dir>tests</Dir>
@@ -547,10 +499,10 @@
     <VcsOtherData>{'standardLayout': 1}</VcsOtherData>
   </Vcs>
   <FiletypeAssociations>
-    <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
     <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
   </FiletypeAssociations>
 </Project>
