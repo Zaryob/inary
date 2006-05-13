@@ -21,6 +21,7 @@ like all pisi classes, it has been programmed in a non-restricting way
 import os
 import types
 import bz2
+import shutil
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -111,6 +112,10 @@ class File:
             localfile = uri.get_uri() #TODO: use a special function here?
             if not os.path.exists(localfile):
                 raise IOError(_("File \'%s\' not found.") % localfile)
+            if not os.access(localfile, os.W_OK):
+                oldfn = localfile
+                localfile = join(transfer_dir, os.path.basename(localfile))
+                shutil.copy(oldfn, localfile)
 
         if sha1sum:        
         
