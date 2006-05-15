@@ -79,6 +79,13 @@ class PackageDB(object):
         else:
             return []
 
+    def get_deps(self, name, repo = None, txn = None):
+        if self.d.has_key(name, repo, txn=txn):
+            pinfo =  self.d.get_item(name, repo, txn=txn)
+            return pinfo.packageDependencies
+        else:
+            return []
+
     def list_packages(self, repo=None):
         return self.d.list(repo)
 
