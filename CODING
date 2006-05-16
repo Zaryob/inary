@@ -1,5 +1,5 @@
 Like every serious project, there are guidelines.
-Oooooo. "Coding Standards".
+"Coding Standards" for serious.
 
 Guidelines
 ----------
@@ -7,6 +7,9 @@ Guidelines
 0. Before reading any further please observe 
    PEP 8: Style Guide for Python Code 
    http://www.python.org/peps/pep-0008.html
+
+   In particular this means no lameCaps
+
 1. When using dirnames, don't expect the dir to end
    with a trailing slash, and please use the dirnames
    in pisiconfig. Use util.join_path instead of os.path.join
@@ -43,6 +46,8 @@ Guidelines
    the book. The payoff comes later.
 13. Same thing goes for premature optimizations. Knuth and Dijkstra
    are watching over your shoulder. :)
+14. Always run the unit tests before committing changes to the
+   mainline development branch in svn trunk.
 
 
 Unit testing
