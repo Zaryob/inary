@@ -261,7 +261,7 @@ def upgrade_base(A = set()):
             if extra_installs:
                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be installed: ') +
                                util.strlist(extra_installs))
-            G_f, install_order = plan_install_pkg_names(A)
+            G_f, install_order = plan_install_pkg_names(extra_installs)
             extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase - set(install_order))
             if extra_upgrades:
                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be upgraded: ') +
@@ -686,6 +686,7 @@ def expand_src_components(A):
 def emerge(A, rebuild_all = False, bypass_safety = False):
 
     # A was a list, remove duplicates and expand components
+    A = [str(x) for x in A]
     A_0 = A = expand_src_components(set(A))
     ctx.ui.debug('A = %s' % str(A))
    
@@ -693,8 +694,8 @@ def emerge(A, rebuild_all = False, bypass_safety = False):
         ctx.ui.info(_('No packages to emerge.'))
         return
 
-    if not bypass_safety:
-        A |= upgrade_base(A)
+    #if not bypass_safety:
+    #    A |= upgrade_base(A)
         
     if not ctx.config.get_option('ignore_dependency'):
         G_f, order_inst, order_build = plan_emerge(A, rebuild_all)
