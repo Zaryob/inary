@@ -606,7 +606,7 @@ def expand_src_components(A):
     Ap = set()
     for x in A:
         if ctx.componentdb.has_component(x):
-            Ap = Ap.union(ctx.componentdb.get_component(x).sources)
+            Ap = Ap.union(ctx.componentdb.get_union_comp(x).sources)
         else:
             Ap.add(x)
     return Ap
