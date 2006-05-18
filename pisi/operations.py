@@ -234,7 +234,7 @@ def expand_components(A):
     Ap = set()
     for x in A:
         if ctx.componentdb.has_component(x):
-            Ap = Ap.union(ctx.componentdb.get_component(x).packages)
+            Ap = Ap.union(ctx.componentdb.get_union_comp(x).packages)
         else:
             Ap.add(x)
     return Ap
@@ -261,12 +261,14 @@ def upgrade_base(A = set()):
             if extra_installs:
                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be installed: ') +
                                util.strlist(extra_installs))
-                install_pkg_names(extra_installs, bypass_safety=True)
-            extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase)
+            G_f, install_order = plan_install_pkg_names(A)
+            extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase - set(install_order))
             if extra_upgrades:
                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be upgraded: ') +
                                util.strlist(extra_upgrades))
                 upgrade_pkg_names(extra_upgrades, bypass_safety=True)
+            # return packages that must be added to any installation
+            return set(install_order + extra_upgrades)
         else:
             ctx.ui.warning(_('Safety switch: the component system.base cannot be found'))
 
@@ -279,9 +281,6 @@ def install_pkg_names(A, reinstall = False, bypass_safety = False):
     # A was a list, remove duplicates and expand components
     A_0 = A = expand_components(set(A))
     ctx.ui.debug('A = %s' % str(A))
-
-    if not bypass_safety:
-        upgrade_base(A)
     
     # filter packages that are already installed
     if not reinstall:
@@ -296,6 +295,9 @@ def install_pkg_names(A, reinstall = False, bypass_safety = False):
         ctx.ui.info(_('No packages to install.'))
         return
 
+    if not bypass_safety:
+        A |= upgrade_base(A)
+        
     if not ctx.config.get_option('ignore_dependency'):
         G_f, order = plan_install_pkg_names(A)
     else:
@@ -322,7 +324,7 @@ in the respective order to satisfy dependencies:
     pisi_installed = ctx.installdb.is_installed('pisi')
     
     for x in order:
-        atomicoperations.install_single_name(x)
+        atomicoperations.install_single_name(x, True)  # allow reinstalls here
         
     if not bypass_safety and 'pisi' in order and pisi_installed:
         upgrade_pisi()
@@ -374,9 +376,6 @@ def upgrade_pkg_names(A = [], bypass_safety = False):
     # filter packages that are not upgradable
     A_0 = A = expand_components(set(A))
 
-    if not bypass_safety:
-        upgrade_base(A)
-
     Ap = []
     for x in A:
         if x.endswith(ctx.const.package_suffix):
@@ -409,6 +408,9 @@ def upgrade_pkg_names(A = [], bypass_safety = False):
         ctx.ui.info(_('No packages to upgrade.'))
         return True
 
+    if not bypass_safety:
+        A |= upgrade_base(A)
+        
     ctx.ui.debug('A = %s' % str(A))
     
     if not ctx.config.get_option('ignore_dependency'):
@@ -690,6 +692,9 @@ def emerge(A, rebuild_all = False):
     if len(A)==0:
         ctx.ui.info(_('No packages to emerge.'))
         return
+
+    if not bypass_safety:
+        A |= upgrade_base(A)
         
     if not ctx.config.get_option('ignore_dependency'):
         G_f, order_inst, order_build = plan_emerge(A, rebuild_all)
