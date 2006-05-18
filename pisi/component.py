@@ -72,6 +72,8 @@ class Component(xmlfile.XmlFile):
     # to be filled by the component database, thus it is optional.
     t_Packages = [ [autoxml.String], autoxml.optional, "Parts/Package"]
 
+    t_Sources = [ [autoxml.String], autoxml.optional, "Parts/Source"]
+
     # TODO: this is probably not necessary since we use fully qualified 
     # module names (like in Java)
     #t_PartOf = [autoxml.Text, autoxml.mandatory]
