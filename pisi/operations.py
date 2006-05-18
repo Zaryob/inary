@@ -683,7 +683,7 @@ def expand_src_components(A):
 ##    check_conflicts(order)
 ##    return G_f, order
 
-def emerge(A, rebuild_all = False):
+def emerge(A, rebuild_all = False, bypass_safety = False):
 
     # A was a list, remove duplicates and expand components
     A_0 = A = expand_src_components(set(A))
