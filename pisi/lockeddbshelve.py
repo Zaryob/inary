@@ -108,15 +108,6 @@ def init_dbenv(write=False, writeversion=False):
 class LockedDBShelf(shelve.DBShelf):
     """A simple wrapper to implement locking for bsddb's dbshelf"""
 
-#    def decode(self, data):
-#        try:
-#            return cPickle.loads(pylzma.decompress(data))
-#        except:
-#            raise shelve.CodingError()
-
-#    def encode(self, obj):
-#        return pylzma.compress(cPickle.dumps(obj, 1), algorithm=0)
-    
     def __init__(self, dbname, mode=0644,
                  filetype=db.DB_BTREE, dbenv = None):
         if dbenv == None:

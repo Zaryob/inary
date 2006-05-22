@@ -17,7 +17,7 @@ import os
 import stat
 import shutil
 import tarfile
-import zipfileext
+import zipfile
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -102,12 +102,11 @@ class ArchiveZip(ArchiveBase):
     zip archives."""
     
     symmagic = 2716663808 #long of hex val '0xA1ED0000L'
-    comp_method = {'lzma': zipfileext.ZIP_LZMA_BOGUS, 'deflated': zipfileext.ZIP_DEFLATED}
     
     def __init__(self, file_path, arch_type = "zip", mode = 'r'):
         super(ArchiveZip, self).__init__(file_path, arch_type)
 
-        self.zip_obj = zipfileext.ZipFileExt(self.file_path, mode)
+        self.zip_obj = zipfile.ZipFile(self.file_path, mode)
 
     def close(self):
         """Close the zip archive."""
@@ -126,20 +125,13 @@ class ArchiveZip(ArchiveBase):
         else:
             if os.path.islink(file_name):
                 dest = os.readlink(file_name)
-                attr = zipfileext.ZipInfo()
+                attr = zipfile.ZipInfo()
                 attr.filename = file_name
                 attr.create_system = 3
                 attr.external_attr = self.symmagic 
                 self.zip_obj.writestr(attr, dest)
             else:
-                method = ctx.get_option('compression_method')
-                if not method:
-                    method = 'lzma'
-                if method == 'lzma':
-                    self.zip_obj.write(file_name, arc_name, zipfileext.ZIP_LZMA_BOGUS,
-                                       dictionary = 26, fastBytes = 64)
-                else:
-                    self.zip_obj.write(file_name, arc_name, self.comp_method[method])
+                self.zip_obj.write(file_name, arc_name, zipfile.ZIP_DEFLATED)
 
                 if not arc_name:
                     zinfo = self.zip_obj.getinfo(file_name)
