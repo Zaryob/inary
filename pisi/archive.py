@@ -70,10 +70,12 @@ class ArchiveTar(ArchiveBase):
     This class provides the unpack magic for tar archives."""
     def __init__(self, file_path, arch_type = "tar"):
         super(ArchiveTar, self).__init__(file_path, arch_type)
+        self.tar = None
 
     def unpack(self, target_dir, clean_dir = False):
         """Unpack tar archive to a given target directory(target_dir)."""
-        super(ArchiveTar, self).unpack(target_dir, clean_dir)
+#       FIX: do we need this for tar archives?
+#       super(ArchiveTar, self).unpack(target_dir, clean_dir)
 
         rmode = ""
         if self.type == 'tar':
@@ -82,17 +84,44 @@ class ArchiveTar(ArchiveBase):
             rmode = 'r:gz'
         elif self.type == 'tarbz2':
             rmode = 'r:bz2'
+        elif self.type == 'tar7z':
+            rmode = 'r:'
+            os.system("7z e -y -o%s %s" % (ctx.config.tmp_dir(), self.file_path))
+            self.file_path = self.file_path.rstrip('.7z')
         else:
             raise ArchiveError(_("Archive type not recognized"))
 
-        tar = tarfile.open(self.file_path, rmode)
+        self.tar = tarfile.open(self.file_path, rmode)
         oldwd = os.getcwd()
-        os.chdir(self.target_dir)
-        for tarinfo in tar:
-            tar.extract(tarinfo)
+        os.chdir(target_dir)
+        for tarinfo in self.tar:
+            self.tar.extract(tarinfo)
         os.chdir(oldwd)
-        tar.close()
+        self.close()
 
+    def add_to_archive(self, file_name, arc_name=None):
+        """Add file or directory path to the tar archive"""
+        if not self.tar:
+            if self.type == 'tar':
+                wmode = 'w:'
+            elif self.type == 'targz':
+                wmode = 'w:gz'
+            elif self.type == 'tarbz2':
+                wmode = 'w:bz2'
+            elif self.type == 'tar7z':
+                wmode = 'w:'
+                self.file_path = self.file_path.rstrip('.7z')
+            else:
+                raise ArchiveError(_("Archive type not recognized"))
+            self.tar = tarfile.open(self.file_path, wmode)
+            
+        self.tar.add(file_name, arc_name)
+
+    def close(self):
+        if self.tar.mode == 'wb' and self.type == 'tar7z':
+            os.system("7z a -mx=9 %s %s" % (self.file_path + '.7z', self.file_path))
+
+        self.tar.close()
 
 class ArchiveZip(ArchiveBase):
     """ArchiveZip handles zip archives. 

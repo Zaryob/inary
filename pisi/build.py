@@ -39,7 +39,7 @@ from pisi.uri import URI
 from pisi.metadata import MetaData
 from pisi.package import Package
 import pisi.component as component
-
+import pisi.archive as archive
 import pisi.actionsapi.variables
 
 
@@ -801,11 +801,14 @@ class Builder:
             # created files.xml
             files = Files()
             files.read(ctx.const.files_xml)
+            tar = archive.ArchiveTar("install.tar.7z", "tar7z")
             for finfo in files.list:
                 orgname = arcname = join("install", finfo.path)
                 if package.debug_package:
                     orgname = join("debug", finfo.path)
-                pkg.add_to_package(orgname, arcname)
+                tar.add_to_archive(orgname, arcname.lstrip("install"))
+            tar.close()
+            pkg.add_to_package("install.tar.7z")
 
             pkg.close()
             os.chdir(c)

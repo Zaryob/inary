@@ -117,6 +117,11 @@ class Package:
         copies the directory archiveroot/dir to outdir"""
         self.impl.unpack_dir(dir, outdir)
 
+    def extract_install(self):
+        self.extract_file('install.tar.7z', ctx.config.tmp_dir())
+        tar = archive.ArchiveTar(join(ctx.config.tmp_dir(), 'install.tar.7z'), 'tar7z')
+        tar.unpack(ctx.config.dest_dir())
+        
     def extract_dir_flat(self, dir, outdir):
         """Extract directory recursively, this function
         unpacks the *contents* of directory archiveroot/dir inside outdir
