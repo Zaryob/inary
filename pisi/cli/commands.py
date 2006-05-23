@@ -634,8 +634,8 @@ Usage: info <package1> <package2> ... <packagen>
         self.parser.add_option("-F", "--files-path", action="store_true",
                                default=False,
                                help=_("show only paths."))
-        self.parser.add_option("-L", "--long", action="store_true",
-                               default=False, help=_("show details"))
+        self.parser.add_option("-s", "--short", action="store_true",
+                               default=False, help=_("do not show details"))
 
     def run(self):
 
@@ -663,7 +663,7 @@ Usage: info <package1> <package2> ... <packagen>
         else:
             if ctx.installdb.is_installed(arg):
                 metadata, files = pisi.api.info_name(arg, True)
-                if not ctx.get_option('long'):
+                if ctx.get_option('short'):
                     ctx.ui.info(_('[inst] '), noln=True)
                 else:
                     ctx.ui.info(_('Installed package:'))
@@ -671,7 +671,7 @@ Usage: info <package1> <package2> ... <packagen>
                 
             if ctx.packagedb.has_package(arg):
                 metadata, files = pisi.api.info_name(arg, False)
-                if not ctx.get_option('long'):
+                if ctx.get_option('short'):
                     ctx.ui.info(_('[repo] '), noln=True)
                 else:
                     ctx.ui.info(_('Package found in repository:'))
@@ -1188,6 +1188,9 @@ in summary, description, and package name fields.
         super(Search, self).options()
         self.parser.add_option("-l", "--language", action="store",
                                help=_("set search language"))
+        self.parser.remove_option("--short")
+        self.parser.add_option("-L", "--long", action="store_true",
+                               default=False, help=_("show details"))
 
     def get_lang(self):
         lang = ctx.get_option('language')
@@ -1208,6 +1211,7 @@ in summary, description, and package name fields.
         r = pisi.api.search_package_terms(self.args, self.get_lang())
         ctx.ui.info(_('%s packages found') % len(r))
 
+        ctx.config.options.short = not ctx.config.options.long
         for pkg in r:
             self.info_package(pkg)
 
