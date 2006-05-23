@@ -122,5 +122,32 @@ def update_environment(prefix):
     update_file(join(prefix, "etc/profile.env"), generate_profile_env(env))
     update_file(join(prefix, "etc/csh.env"), generate_profile_env(env, 'setenv %s %s\n'))
     if env.has_key("LDPATH"):
-        if update_file(join(prefix, "etc/ld.so.conf"), generate_ld_so_conf(env)):
-            subprocess.call(["/sbin/ldconfig", "-X", "-r", prefix])
+        update_file(join(prefix, "etc/ld.so.conf"), generate_ld_so_conf(env))
+        subprocess.call(["/sbin/ldconfig", "-X", "-r", prefix])
+
+#
+# Command line driver
+#
+
+def usage():
+    print "update-environment [--destdir <prefix>]"
+
+def main(argv):
+    prefix = "/"
+    
+    try:
+        opts, args = getopt.gnu_getopt(argv, "h", [ "help", "destdir=" ])
+    except getopt.GetoptError:
+        usage()
+    
+    for o, a in opts:
+        if o in ("-h", "--help"):
+            usage()
+            sys.exit(0)
+        if o in ("--destdir"):
+            prefix = a
+    
+    update_environment(prefix)
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
