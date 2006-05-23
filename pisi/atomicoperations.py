@@ -270,7 +270,7 @@ class Install(AtomicOperation):
                 if path in leftover or old_fileinfo[path].type == ctx.const.conf:
                     Remove.remove_file( old_fileinfo[path] )
 
-        self.package.extract_install()
+        self.package.extract_install(ctx.config.dest_dir())
 
     def store_pisi_files(self):
         """put files.xml, metadata.xml, actions.py and COMAR scripts
