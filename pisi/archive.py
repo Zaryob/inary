@@ -74,9 +74,10 @@ class ArchiveTar(ArchiveBase):
 
     def unpack(self, target_dir, clean_dir = False):
         """Unpack tar archive to a given target directory(target_dir)."""
-#       FIX: do we need this for tar archives?
-#       super(ArchiveTar, self).unpack(target_dir, clean_dir)
+        super(ArchiveTar, self).unpack(target_dir, clean_dir)
+        self.unpack_dir(target_dir)
 
+    def unpack_dir(self, target_dir):
         rmode = ""
         if self.type == 'tar':
             rmode = 'r:'
