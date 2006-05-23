@@ -266,7 +266,7 @@ def upgrade_base(A = set()):
             if extra_upgrades:
                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be upgraded: ') +
                                util.strlist(extra_upgrades))
-                upgrade_pkg_names(extra_upgrades, bypass_safety=True)
+                upgrade_pkg_names(extra_upgrades)
             # return packages that must be added to any installation
             return set(install_order + extra_upgrades)
         else:
@@ -326,7 +326,7 @@ in the respective order to satisfy dependencies:
     for x in order:
         atomicoperations.install_single_name(x, True)  # allow reinstalls here
         
-    if not bypass_safety and 'pisi' in order and pisi_installed:
+    if 'pisi' in order and pisi_installed:
         upgrade_pisi()
 
 def plan_install_pkg_names(A):
@@ -443,7 +443,7 @@ def upgrade_pkg_names(A = []):
         install_op = atomicoperations.Install(path)
         install_op.install(True)
         
-    if not bypass_safety and 'pisi' in order:
+    if 'pisi' in order:
         upgrade_pisi()
 
 def plan_upgrade(A, ignore_build = False):
