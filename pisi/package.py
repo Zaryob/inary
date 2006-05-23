@@ -118,10 +118,13 @@ class Package:
         self.impl.unpack_dir(dir, outdir)
 
     def extract_install(self, outdir):
-        self.extract_file('install.tar.lzma', ctx.config.tmp_dir())
-        tar = archive.ArchiveTar(join(ctx.config.tmp_dir(), 'install.tar.lzma'), 'tarlzma')
-        tar.unpack_dir(outdir)
-        
+        if self.impl.has_file('install.tar.lzma'):
+            self.extract_file('install.tar.lzma', ctx.config.tmp_dir())
+            tar = archive.ArchiveTar(join(ctx.config.tmp_dir(), 'install.tar.lzma'), 'tarlzma')
+            tar.unpack_dir(outdir)
+        else:
+            self.extract_dir_flat('install', outdir)
+
     def extract_dir_flat(self, dir, outdir):
         """Extract directory recursively, this function
         unpacks the *contents* of directory archiveroot/dir inside outdir
