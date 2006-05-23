@@ -801,14 +801,14 @@ class Builder:
             # created files.xml
             files = Files()
             files.read(ctx.const.files_xml)
-            tar = archive.ArchiveTar("install.tar.7z", "tar7z")
+            tar = archive.ArchiveTar("install.tar.lzma", "tarlzma")
             for finfo in files.list:
                 orgname = arcname = join("install", finfo.path)
                 if package.debug_package:
                     orgname = join("debug", finfo.path)
                 tar.add_to_archive(orgname, arcname.lstrip("install"))
             tar.close()
-            pkg.add_to_package("install.tar.7z")
+            pkg.add_to_package("install.tar.lzma")
 
             pkg.close()
             os.chdir(c)

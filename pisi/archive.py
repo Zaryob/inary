@@ -84,10 +84,10 @@ class ArchiveTar(ArchiveBase):
             rmode = 'r:gz'
         elif self.type == 'tarbz2':
             rmode = 'r:bz2'
-        elif self.type == 'tar7z':
+        elif self.type == 'tarlzma':
             rmode = 'r:'
-            os.system("7z e -y -o%s %s" % (ctx.config.tmp_dir(), self.file_path))
-            self.file_path = self.file_path.rstrip('.7z')
+            self.file_path = self.file_path.rstrip('.lzma')
+            util.run_batch("lzma d %s %s" % (self.file_path + '.lzma', self.file_path))
         else:
             raise ArchiveError(_("Archive type not recognized"))
 
@@ -108,9 +108,9 @@ class ArchiveTar(ArchiveBase):
                 wmode = 'w:gz'
             elif self.type == 'tarbz2':
                 wmode = 'w:bz2'
-            elif self.type == 'tar7z':
+            elif self.type == 'tarlzma':
                 wmode = 'w:'
-                self.file_path = self.file_path.rstrip('.7z')
+                self.file_path = self.file_path.rstrip('.lzma')
             else:
                 raise ArchiveError(_("Archive type not recognized"))
             self.tar = tarfile.open(self.file_path, wmode)
@@ -118,8 +118,8 @@ class ArchiveTar(ArchiveBase):
         self.tar.add(file_name, arc_name)
 
     def close(self):
-        if self.tar.mode == 'wb' and self.type == 'tar7z':
-            os.system("7z a -mx=9 %s %s" % (self.file_path + '.7z', self.file_path))
+        if self.tar.mode == 'wb' and self.type == 'tarlzma':
+            util.run_batch("lzma e -a2 -d26 -fb64 %s %s" % (self.file_path, self.file_path + '.lzma'))
 
         self.tar.close()
 

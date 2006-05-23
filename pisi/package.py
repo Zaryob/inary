@@ -118,8 +118,8 @@ class Package:
         self.impl.unpack_dir(dir, outdir)
 
     def extract_install(self, outdir):
-        self.extract_file('install.tar.7z', ctx.config.tmp_dir())
-        tar = archive.ArchiveTar(join(ctx.config.tmp_dir(), 'install.tar.7z'), 'tar7z')
+        self.extract_file('install.tar.lzma', ctx.config.tmp_dir())
+        tar = archive.ArchiveTar(join(ctx.config.tmp_dir(), 'install.tar.lzma'), 'tarlzma')
         tar.unpack(outdir)
         
     def extract_dir_flat(self, dir, outdir):
