@@ -182,6 +182,10 @@ class ArchiveZip(ArchiveBase):
         self.add_to_archive(file_name)
         os.chdir(cwd)
 
+    def has_file(self, file_path):
+        """ Returns true if file_path is member of the zip archive"""
+        return file_path in self.zip_obj.namelist()
+
     def unpack_file_cond(self, pred, target_dir, archive_root = ''):
         """Unpack/Extract files according to predicate function
         pred: filename -> bool 
