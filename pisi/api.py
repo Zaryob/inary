@@ -357,6 +357,9 @@ def remove_repo(name):
         ctx.ui.error(_('Repository %s does not exist. Cannot remove.') 
                  % name)
 
+def list_repos():
+    return ctx.repodb.list()
+
 def update_repo(repo, force=False):
     ctx.ui.info(_('* Updating repository: %s') % repo)
     index = Index()
