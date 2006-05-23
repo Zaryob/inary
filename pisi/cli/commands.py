@@ -625,7 +625,7 @@ Usage: info <package1> <package2> ... <packagen>
     def __init__(self):
         super(Info, self).__init__()
 
-    name = ("info")
+    name = ("info", None)
 
     def options(self):
         self.parser.add_option("-f", "--files", action="store_true",
