@@ -119,10 +119,10 @@ class ArchiveTar(ArchiveBase):
         self.tar.add(file_name, arc_name)
 
     def close(self):
+        self.tar.close()
+
         if self.tar.mode == 'wb' and self.type == 'tarlzma':
             util.run_batch("lzma e -a2 -d26 -fb64 %s %s" % (self.file_path, self.file_path + '.lzma'))
-
-        self.tar.close()
 
 class ArchiveZip(ArchiveBase):
     """ArchiveZip handles zip archives. 
