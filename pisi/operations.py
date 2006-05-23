@@ -271,8 +271,9 @@ def upgrade_base(A = set()):
             return set(install_order + extra_upgrades)
         else:
             ctx.ui.warning(_('Safety switch: the component system.base cannot be found'))
+    return set()
 
-def install_pkg_names(A, reinstall = False, bypass_safety = False):
+def install_pkg_names(A, reinstall = False):
     """This is the real thing. It installs packages from
     the repository, trying to perform a minimum number of
     installs"""
@@ -295,8 +296,7 @@ def install_pkg_names(A, reinstall = False, bypass_safety = False):
         ctx.ui.info(_('No packages to install.'))
         return
 
-    if not bypass_safety:
-        A |= upgrade_base(A)
+    A |= upgrade_base(A)
         
     if not ctx.config.get_option('ignore_dependency'):
         G_f, order = plan_install_pkg_names(A)
@@ -363,7 +363,7 @@ def plan_install_pkg_names(A):
 def upgrade(A):
     upgrade_pkg_names(A)
 
-def upgrade_pkg_names(A = [], bypass_safety = False):
+def upgrade_pkg_names(A = []):
     """Re-installs packages from the repository, trying to perform
     a minimum or maximum number of upgrades according to options."""
     
@@ -408,8 +408,7 @@ def upgrade_pkg_names(A = [], bypass_safety = False):
         ctx.ui.info(_('No packages to upgrade.'))
         return True
 
-    if not bypass_safety:
-        A |= upgrade_base(A)
+    A |= upgrade_base(A)
         
     ctx.ui.debug('A = %s' % str(A))
     
