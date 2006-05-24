@@ -52,7 +52,8 @@ def add_doc(id, lang, docid, str, repo = None, txn = None):
     ctx.invidx[id][lang].add_doc(docid, terms, repo=repo, txn=txn)
 
 def remove_doc(id, lang, docid, str, repo = None, txn = None):
-    ctx.invidx[id][lang].remove_doc(docid, repo = repo, txn = txn)
+    terms = p.preprocess(lang, str)    
+    ctx.invidx[id][lang].remove_doc(docid, terms, repo = repo, txn = txn)
 
 def query_terms(id, lang, terms, repo = None, txn = None):
     terms = map(lambda x: p.lower(lang, x), terms)

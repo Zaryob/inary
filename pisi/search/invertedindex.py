@@ -39,7 +39,7 @@ class InvertedIndex(object):
         return self.d.txn_proc(proc, txn)
 
     def get_union_term(self, name, txn = None, repo = itembyrepodb.repos ):
-        """get a union of all repository components packages, not just the first repo in order.
+        """get a union of all repository terms, not just the first repo in order.
         get only basic repo info from the first repo"""
         name = shelve.LockedDBShelf.encodekey(name)
         def proc(txn):
