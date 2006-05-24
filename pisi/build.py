@@ -812,9 +812,9 @@ class Builder:
                     tar.add_to_archive(orgname, arcname.lstrip("install"))
                 tar.close()
                 pkg.add_to_package("install.tar.lzma")
+                pkg.close()
                 os.unlink("install.tar")
                 os.unlink("install.tar.lzma")
-                pkg.close()
             else:
                 for finfo in files.list:
                     orgname = arcname = join("install", finfo.path)
