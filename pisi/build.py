@@ -812,16 +812,17 @@ class Builder:
                     tar.add_to_archive(orgname, arcname.lstrip("install"))
                 tar.close()
                 pkg.add_to_package("install.tar.lzma")
+                os.unlink("install.tar")
+                os.unlink("install.tar.lzma")
+                pkg.close()
             else:
                 for finfo in files.list:
                     orgname = arcname = join("install", finfo.path)
                     if package.debug_package:
                         orgname = join("debug", finfo.path)
                     pkg.add_to_package(orgname, arcname)
+                pkg.close()
 
-            pkg.close()
-            os.unlink("install.tar")
-            os.unlink("install.tar.lzma")
             os.chdir(c)
             self.set_state("buildpackages")
             ctx.ui.info(_("Done."))
