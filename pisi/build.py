@@ -557,6 +557,7 @@ class Builder:
         metadata.package.distribution = ctx.config.values.general.distribution
         metadata.package.distributionRelease = ctx.config.values.general.distribution_release
         metadata.package.architecture = "Any"
+        metadata.package.packageFormat = ctx.get_option('package_format')
         
         size = 0
         if package.debug_package:
@@ -801,14 +802,22 @@ class Builder:
             # created files.xml
             files = Files()
             files.read(ctx.const.files_xml)
-            tar = archive.ArchiveTar("install.tar.lzma", "tarlzma")
-            for finfo in files.list:
-                orgname = arcname = join("install", finfo.path)
-                if package.debug_package:
-                    orgname = join("debug", finfo.path)
-                tar.add_to_archive(orgname, arcname.lstrip("install"))
-            tar.close()
-            pkg.add_to_package("install.tar.lzma")
+
+            if ctx.get_option('package_format') == "1.1":
+                tar = archive.ArchiveTar("install.tar.lzma", "tarlzma")
+                for finfo in files.list:
+                    orgname = arcname = join("install", finfo.path)
+                    if package.debug_package:
+                        orgname = join("debug", finfo.path)
+                    tar.add_to_archive(orgname, arcname.lstrip("install"))
+                tar.close()
+                pkg.add_to_package("install.tar.lzma")
+            else:
+                for finfo in files.list:
+                    orgname = arcname = join("install", finfo.path)
+                    if package.debug_package:
+                        orgname = join("debug", finfo.path)
+                    pkg.add_to_package(orgname, arcname)
 
             pkg.close()
             os.chdir(c)
