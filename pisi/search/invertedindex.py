@@ -78,6 +78,7 @@ class InvertedIndex(object):
             for term_i in terms:
                 term_i = shelve.LockedDBShelf.encodekey(term_i)            
                 term_i_docs = self.get_term(term_i,repo=repo, txn=txn)
-                term_i_docs.remove(doc)
+                if doc in term_i_docs:
+                    term_i_docs.remove(doc)
                 self.d.add_item(term_i, term_i_docs, repo=repo, txn=txn) # update
         return self.d.txn_proc(f, txn)
