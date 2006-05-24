@@ -820,6 +820,8 @@ class Builder:
                     pkg.add_to_package(orgname, arcname)
 
             pkg.close()
+            os.unlink("install.tar")
+            os.unlink("install.tar.lzma")
             os.chdir(c)
             self.set_state("buildpackages")
             ctx.ui.info(_("Done."))
