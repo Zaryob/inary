@@ -288,22 +288,22 @@ def search_package_names(query):
             r.add(pkgname)
     return r
 
-def search_package_terms(terms, lang = None, search_names = True):
+def search_package_terms(terms, lang = None, search_names = True, repo = pisi.itembyrepodb.all):
     if not lang:
         lang = pisi.pxml.autoxml.LocalText.get_lang()
-    r1 = pisi.search.query_terms('summary', lang, terms)
-    r2 = pisi.search.query_terms('description', lang, terms)
+    r1 = pisi.search.query_terms('summary', lang, terms, repo = repo)
+    r2 = pisi.search.query_terms('description', lang, terms, repo = repo)
     r = r1.union(r2)
     if search_names:
         for term in terms:
             r |= search_package_names(term)
     return r
 
-def search_package(query, lang = None, search_names = True):
+def search_package(query, lang = None, search_names = True, repo = pisi.itembyrepodb.all):
     if not lang:
         lang = pisi.pxml.autoxml.LocalText.get_lang()
-    r1 = pisi.search.query('summary', lang, query)
-    r2 = pisi.search.query('description', lang, query)
+    r1 = pisi.search.query('sumdesc', lang, query, repo = repo)
+    r2 = pisi.search.query('description', lang, query, repo = repo)
     r = r1.union(r2)
     if search_names:
         r |= search_package_names(query)

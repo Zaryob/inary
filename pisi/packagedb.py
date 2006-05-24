@@ -9,15 +9,15 @@
 #
 # Please read the COPYING file.
 #
-
-# package database
-# interface for update/query to local package repository
-
 # Authors:  Eray Ozkural <eray at pardus.org.tr>
 #           Baris Metin <baris at pardus.org.tr>
 
-# we basically store everything in PackageInfo class
-# yes, we are cheap
+"""package database
+interface for update/query to local package repository
+
+we basically store everything in PackageInfo class
+yes, we are cheap
+"""
 
 import os
 import fcntl
@@ -108,10 +108,10 @@ class PackageDB(object):
             # index summary and description
             for (lang, doc) in package_info.summary.iteritems():
                 if lang in ['en', 'tr']:
-                    pisi.search.add_doc('summary', lang, package_info.name, doc, txn)
+                    pisi.search.add_doc('summary', lang, package_info.name, doc, repo=repo, txn=txn)
             for (lang, doc) in package_info.description.iteritems():
                 if lang in ['en', 'tr']:
-                    pisi.search.add_doc('description', lang, package_info.name, doc, txn)
+                    pisi.search.add_doc('description', lang, package_info.name, doc, repo=repo, txn=txn)
 
         ctx.txn_proc(proc, txn)
 
@@ -133,6 +133,12 @@ class PackageDB(object):
             if self.dr.has_key(name, repo, txn=txn):
                 self.dr.remove_item(name, repo, txn=txn)
             ctx.componentdb.remove_package(package_info.partOf, package_info.name, repo, txn)
+            for (lang, doc) in package_info.summary.iteritems():
+                if lang in ['en', 'tr']:
+                    pisi.search.remove_doc('summary', lang, package_info.name, doc, repo=repo, txn=txn)
+            for (lang, doc) in package_info.description.iteritems():
+                if lang in ['en', 'tr']:
+                    pisi.search.remove_doc('description', lang, package_info.name, doc, repo=repo, txn=txn)
         self.d.txn_proc(proc, txn)
 
     def remove_repo(self, repo, txn = None):

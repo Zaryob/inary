@@ -47,17 +47,17 @@ def finalize():
                 ctx.invidx[id][lang].close()
         ctx.invidx = {}    
     
-def add_doc(id, lang, docid, str, txn = None):
+def add_doc(id, lang, docid, str, repo = None, txn = None):
     terms = p.preprocess(lang, str)
-    ctx.invidx[id][lang].add_doc(docid, terms, txn)
+    ctx.invidx[id][lang].add_doc(docid, terms, repo=repo, txn=txn)
 
-def remove_doc(id, lang, docid, str, txn = None):
-    ctx.invidx[id][lang].remove_doc(docid, txn)
+def remove_doc(id, lang, docid, str, repo = None, txn = None):
+    ctx.invidx[id][lang].remove_doc(docid, repo = repo, txn = txn)
 
-def query_terms(id, lang, terms, txn = None):
+def query_terms(id, lang, terms, repo = None, txn = None):
     terms = map(lambda x: p.lower(lang, x), terms)
-    return ctx.invidx[id][lang].query(terms, txn)
+    return ctx.invidx[id][lang].query(terms, repo = repo, txn = txn)
 
-def query(id, lang, str, txn = None):
+def query(id, lang, str, repo = None, txn = None):
     terms = p.preprocess(lang, str)
-    return query_terms(id, lang, terms, txn)
+    return query_terms(id, lang, terms, repo = repo, txn = txn)
