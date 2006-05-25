@@ -123,7 +123,7 @@ def update_environment(prefix):
     update_file(join(prefix, "etc/csh.env"), generate_profile_env(env, 'setenv %s %s\n'))
     if env.has_key("LDPATH"):
         update_file(join(prefix, "etc/ld.so.conf"), generate_ld_so_conf(env))
-        subprocess.call(["/sbin/ldconfig", "-X", "-r", prefix])
+        subprocess.call(["/sbin/ldconfig", "-r", prefix])
 
 #
 # Command line driver
