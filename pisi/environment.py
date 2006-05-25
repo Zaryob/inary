@@ -106,14 +106,9 @@ def generate_ld_so_conf(envdict):
     return tmp + "\n"
 
 def update_file(path, content):
-    if os.path.exists(path):
-        data = file(path).read()
-        if data == content:
-            return False
     f = file(path, "w")
     f.write(content)
     f.close()
-    return True
 
 def update_environment(prefix):
     join = os.path.join
