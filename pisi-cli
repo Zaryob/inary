@@ -70,12 +70,6 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
 
 if __name__ == "__main__":
    
-    try:
-        import psyco
-        psyco.full()
-    except ImportError:
-        pass
-
     sys.excepthook = handle_exception
 
     locale.setlocale(locale.LC_ALL, '')

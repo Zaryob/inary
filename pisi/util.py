@@ -139,6 +139,10 @@ def human_readable_rate(size = 0):
 # Process Releated Functions #
 ##############################
 
+#FIXME: the added flags make out and err defunct, they should be 
+#split to another function if needed, this function runs a command
+#noninteractively, then returns return value, standard output and 
+# error. the return spec must not change.
 def run_batch(cmd, realtime = False):
     """run command non-interactively/realtime and report return value and output"""
     ctx.ui.info(_('Running ') + cmd, verbose=True)
@@ -151,7 +155,7 @@ def run_batch(cmd, realtime = False):
     if ctx.stderr:
         stderr = ctx.stderr
     else:
-        stderr = subprocess.STDOUT
+        stderr = subprocess.PIPE
 
     out = err = ""
     p = subprocess.Popen(cmd, shell=True, stdout=stdout, stderr=stderr)

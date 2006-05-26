@@ -31,6 +31,9 @@ import pisi.context as ctx
 class ArchiveError(pisi.Error):
     pass
 
+class LZMAError(pisi.Error):
+    def __init__(self, err):
+        pisi.Error.__init__(self, _("An error has occured while running LZMA:\n%s") % err)
 
 class ArchiveBase(object):
     """Base class for Archive classes."""
@@ -88,7 +91,9 @@ class ArchiveTar(ArchiveBase):
         elif self.type == 'tarlzma':
             rmode = 'r:'
             self.file_path = self.file_path.rstrip('.lzma')
-            util.run_batch("lzma d %s %s" % (self.file_path + '.lzma', self.file_path))
+            ret, out, err = util.run_batch("lzma d %s %s" % (self.file_path + '.lzma', self.file_path))
+            if ret != 0:
+                raise LZMAError(err)
         else:
             raise ArchiveError(_("Archive type not recognized"))
 
@@ -122,7 +127,9 @@ class ArchiveTar(ArchiveBase):
         self.tar.close()
 
         if self.tar.mode == 'wb' and self.type == 'tarlzma':
-            util.run_batch("lzma e -a2 -d26 -fb64 %s %s" % (self.file_path, self.file_path + '.lzma'))
+            ret, out, err = util.run_batch("lzma e -a2 -d26 -fb64 %s %s" % (self.file_path, self.file_path + '.lzma'))
+            if ret != 0:
+                raise LZMAError(err)
 
 class ArchiveZip(ArchiveBase):
     """ArchiveZip handles zip archives. 
