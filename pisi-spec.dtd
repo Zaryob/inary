@@ -104,7 +104,7 @@ suck anyway -->
 <!ELEMENT Path (#PCDATA)>
 <!-- NOTE: is this list correct? -->
 <!ATTLIST Path fileType
-	(executable|library|data|config|doc|man|info|localedata|header|all)
+	(executable|library|data|config|doc|man|info|localedata|header)
 	#REQUIRED>
 <!ATTLIST Path permanent (false|true) #IMPLIED>
 
