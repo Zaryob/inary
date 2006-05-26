@@ -64,24 +64,23 @@ class Index(XmlFile):
             pisi.util.clean_dir(tmpdir)
         pisi.util.check_dir(tmpdir)
 
-        if not force:
-            urlfile = file(pisi.util.join_path(tmpdir, 'uri'), 'w')
-            urlfile.write(filename) # uri
+        # write uri
+        urlfile = file(pisi.util.join_path(tmpdir, 'uri'), 'w')
+        urlfile.write(filename) # uri
 
-
-        # FIXME: This is a mess, we have a compress flag and we have to
-        # use it with filename extention. Because File.decompress also
-        # checks the extension. We really have to go all over the code
-        # and simplify it. -- baris
         if filename.endswith(".bz2"):
             self.read(filename, tmpDir=tmpdir, sha1sum=not force, 
-                      compress=File.bz2, sign=File.detached)
+                      compress=File.bz2, sign=File.detached, copylocal = True)
         else:
             self.read(filename, tmpDir=tmpdir, sha1sum=not force,
-                      compress=None, sign=File.detached)
+                      compress=None, sign=File.detached, copylocal = True)
 
         if not repo:
             repo = self.distribution.name()
+            # and what do we do with it? move it to index dir properly
+            newtmpdir = os.path.join(ctx.config.index_dir(), repo)
+            pisi.util.clean_dir(newtmpdir) # replace newtmpdir
+            shutil.move(tmpdir, newtmpdir) 
 
     def check_signature(self, filename, repo):
         tmpdir = os.path.join(ctx.config.index_dir(), repo)

@@ -71,20 +71,16 @@ class File:
     @staticmethod
     def decompress(localfile, compress):
         if compress == File.bz2:
-            if not localfile.endswith(".bz2"):
-                raise Error(_("bz2 compressed filename must end with '.bz2'"))
-            
             open(localfile[:-4], "w").write(bz2.BZ2File(localfile).read())
             localfile = localfile[:-4]
-
         elif compress == File.zip:
             raise Error(_("zip compression not supported yet"))
 
         return localfile
 
     @staticmethod
-    def download(uri, transfer_dir = "/tmp", 
-                 sha1sum = False, compress = None, sign = None):
+    def download(uri, transfer_dir = "/tmp", sha1sum = False, 
+                 compress = None, sign = None, copylocal = False):
 
         assert isinstance(uri, URI)
 
@@ -93,9 +89,9 @@ class File:
             sha1f = file(sha1filename)
             newsha1 = sha1f.readlines()[0]
 
-        if uri.is_remote_file():
+        if uri.is_remote_file() or copylocal:
             localfile = join(transfer_dir, uri.filename())
-            
+
             # TODO: code to use old .sha1sum file, is this a necessary optimization?
             #oldsha1fn = localfile + '.sha1sum'
             #if os.exists(oldsha1fn):
@@ -106,8 +102,12 @@ class File:
                     # early terminate, we already got it ;)
                     raise AlreadyHaveException(uri, localfile)
 
-            ctx.ui.info(_("Fetching %s") % uri.get_uri())
-            fetch_url(uri, transfer_dir)
+            if uri.is_remote_file():
+                ctx.ui.info(_("Fetching %s") % uri.get_uri())
+                fetch_url(uri, transfer_dir)
+            else:
+                ctx.ui.info(_("Copying %s to transfer dir") % uri.get_uri())
+                shutil.copy(uri.get_uri(), transfer_dir)
         else:
             localfile = uri.get_uri() #TODO: use a special function here?
             if not os.path.exists(localfile):

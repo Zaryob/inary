@@ -9,9 +9,11 @@
 #
 # Please read the COPYING file.
 #
+# Authors: Baris Metin <baris at pardus.org.tr>
+#          A. Murat Eren <meren at pardus.org.tr>
+#          Eray Ozkural <eray at pardus.org.tr>
 
-# package bulding stuff
-# maintainer: baris and meren
+"""package building code"""
 
 # python standard library
 import os

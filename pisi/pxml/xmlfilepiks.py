@@ -55,10 +55,12 @@ class XmlFile(object):
         """returns root document element"""
         return self.doc
 
-    def readxml(self, uri, tmpDir='/tmp', sha1sum=False, compress=None, sign=None):
+    def readxml(self, uri, tmpDir='/tmp', sha1sum=False, 
+                compress=None, sign=None, copylocal = False):
         uri = File.make_uri(uri)
         try:
-            localpath = File.download(uri, tmpDir,sha1sum=sha1sum,compress=compress,sign=sign)
+            localpath = File.download(uri, tmpDir, sha1sum=sha1sum, 
+                                      compress=compress,sign=sign, copylocal=copylocal)
         except IOError:
             raise Error(_("Cannot access URI %s") % (uri) )
         try:
