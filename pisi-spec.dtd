@@ -1,5 +1,5 @@
 <!-- Document Type Declaration file for PISI pspec.xml files -->
-<!-- http://www.uludag.org.tr/projeler/pisi/ -->
+<!-- http://www.pardus.org.tr/projeler/pisi/ -->
 
 <!ELEMENT PISI (Source,Package+,History)>
 
@@ -53,7 +53,9 @@
 <!ATTLIST Dependency versionFrom CDATA #IMPLIED>
 <!ATTLIST Dependency versionTo CDATA #IMPLIED>
 <!ATTLIST Dependency version CDATA #IMPLIED>
-<!-- NOTE: release number dependencies? -->
+<!ATTLIST Dependency releaseFrom CDATA #IMPLIED>
+<!ATTLIST Dependency releaseTo CDATA #IMPLIED>
+<!ATTLIST Dependency release CDATA #IMPLIED>
 
 <!ELEMENT Patches (Patch*)>
 
@@ -84,7 +86,10 @@
 <!ELEMENT COMAR (#PCDATA)>
 <!ATTLIST COMAR script CDATA #IMPLIED>
 
-<!ELEMENT Conflicts (#PCDATA)>
+<!ELEMENT Conflicts (Package)+>
+<!-- we have a problem here, this Package tag only contains a package name
+while dtd treats this as another Package section, who said dtd doesnt
+suck anyway -->
 
 <!ELEMENT AdditionalFiles (AdditionalFile+)>
 <!ELEMENT AdditionalFile (#PCDATA)>
@@ -101,6 +106,7 @@
 <!ATTLIST Path fileType
 	(executable|library|data|config|doc|man|info|localedata|header|all)
 	#REQUIRED>
+<!ATTLIST Path permanent (false|true) #IMPLIED>
 
 
 <!-- History Section -->
