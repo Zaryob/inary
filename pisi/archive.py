@@ -100,8 +100,14 @@ class ArchiveTar(ArchiveBase):
         self.tar = tarfile.open(self.file_path, rmode)
         oldwd = os.getcwd()
         os.chdir(target_dir)
+
+        install_tar_path = util.join_path(ctx.config.tmp_dir(), "install.tar")
         for tarinfo in self.tar:
+            # zlib bug...
+            if self.file_path == install_tar_path and os.path.exists(tarinfo.name):
+                os.unlink(tarinfo.name)
             self.tar.extract(tarinfo)
+
         os.chdir(oldwd)
         self.close()
 
