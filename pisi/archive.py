@@ -103,7 +103,15 @@ class ArchiveTar(ArchiveBase):
 
         install_tar_path = util.join_path(ctx.config.tmp_dir(), "install.tar")
         for tarinfo in self.tar:
-            # zlib bug...
+            # Installing packages (especially shared libraries) is a
+            # bit tricky. You should also change the inode if you
+            # change the file, cause the file is opened allready and
+            # accessed. Removing and creating the file will also
+            # change the inode and will do the trick (in fact, old
+            # file will be deleted only when its closed).
+            # 
+            # Also, tar.extract() doesn't write on symlinks... Not any
+            # more :).
             if self.file_path == install_tar_path and os.path.exists(tarinfo.name):
                 os.unlink(tarinfo.name)
             self.tar.extract(tarinfo)
