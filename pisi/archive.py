@@ -35,6 +35,7 @@ class LZMAError(pisi.Error):
     def __init__(self, err):
         pisi.Error.__init__(self, _("An error has occured while running LZMA:\n%s") % err)
 
+        
 class ArchiveBase(object):
     """Base class for Archive classes."""
     def __init__(self, file_path, atype):
@@ -296,6 +297,7 @@ class Archive:
         handlers = {
             'targz': ArchiveTar, 
             'tarbz2': ArchiveTar,
+            'tarlzma': ArchiveTar,
             'tar': ArchiveTar,
             'zip': ArchiveZip,
             'binary': ArchiveBinary
