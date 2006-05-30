@@ -83,22 +83,22 @@ def init_dbenv(write=False, writeversion=False):
         check_dbversion('filesdbversion', pisi.__filesdbversion__, write=write, update=writeversion)
     else:
         raise Error(_('Cannot attain read access to database environment'))
-    if write and os.access(pisi.context.config.db_dir(), os.W_OK):
-        lock_dbenv()
-        ctx.dbenv = dbobj.DBEnv()
-        flags =  (db.DB_INIT_MPOOL |      # cache
-                  db.DB_INIT_TXN |        # transaction subsystem
-                  db.DB_INIT_LOG |        # logging subsystem
-                  db.DB_RECOVER |         # run normal recovery
-                  db.DB_CREATE)           # allow db to create files
-        ctx.dbenv.set_cachesize(0, 4*1024*1024)
-        ctx.dbenv.open(pisi.context.config.db_dir(), flags)
-        ctx.dbenv.set_flags(db.DB_LOG_AUTOREMOVE, 1) # clear inactive logs automatically
+    if write:
+        if os.access(pisi.context.config.db_dir(), os.W_OK):
+            lock_dbenv()
+            ctx.dbenv = dbobj.DBEnv()
+            flags =  (db.DB_INIT_MPOOL |      # cache
+                      db.DB_INIT_TXN |        # transaction subsystem
+                      db.DB_INIT_LOG |        # logging subsystem
+                      db.DB_RECOVER |         # run normal recovery
+                      db.DB_CREATE)           # allow db to create files
+            ctx.dbenv.set_cachesize(0, 4*1024*1024)
+            ctx.dbenv.open(pisi.context.config.db_dir(), flags)
+            ctx.dbenv.set_flags(db.DB_LOG_AUTOREMOVE, 1) # clear inactive logs automatically
+        else:
+            raise Error(_("Cannot write to PISI database."))
     else:
-        # Warn if not on purpose
-        if write:
-            ctx.ui.warning(_("Opening PISI database in read-only mode. Operations that require write access will fail."))
-        ctx.dbenv = None
+        ctx.dbenv = None # read-only access to database
 
 #def open(filename, flags='r', mode = 0644, filetype = db.DB_BTREE):
 #    db = LockedDBShelf(None, mode, filetype, None, True)
