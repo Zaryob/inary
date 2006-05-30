@@ -143,7 +143,13 @@ class ArchiveTar(ArchiveBase):
         self.tar.close()
 
         if self.tar.mode == 'wb' and self.type == 'tarlzma':
-            ret, out, err = util.run_batch("lzma e -a2 -d26 -fb64 %s %s" % (self.file_path, self.file_path + '.lzma'))
+            batch = None
+            if ctx.get_option('compression_level'):
+                batch = "lzmash -k -%s %s" % (ctx.get_option('compression_level'), self.file_path)
+            else:
+                batch = "lzmash -k %s" % self.file_path
+
+            ret, out, err = util.run_batch(batch)
             if ret != 0:
                 raise LZMAError(err)
 
