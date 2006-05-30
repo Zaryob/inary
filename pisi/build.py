@@ -86,7 +86,7 @@ def check_path_collision(package, pkgList):
                     continue
                 if util.subpath(pinfo.path, path.path):
                     collisions.append(path.path)
-                    ctx.ui.error(_('Path %s belongs in multiple packages') %
+                    ctx.ui.debug(_('Path %s belongs in multiple packages') %
                                  path.path)
     return collisions
 
