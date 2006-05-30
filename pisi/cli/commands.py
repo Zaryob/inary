@@ -381,6 +381,8 @@ unpack, setup, build, install, package
                                default=False, help=_("don't install build dependencies, fail if a build dependency is present"))
         self.parser.add_option("-F", "--package-format", action="store", default='1.1',
                                help=_("pisi package format"))
+        self.parser.add_option("-c", "--compression-level", action="store", default=None,
+                               help=_("LZMA compression level, 1 through 9"))
 
     def run(self):
         if not self.args:
