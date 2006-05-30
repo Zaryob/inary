@@ -108,6 +108,7 @@ class Builder:
                 pkg_path = str(src_uri)
             else:
                 repo = ctx.repodb.get_repo(reponame)
+                #FIXME: don't use dirname to work on URLs
                 src_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
                                         str(src_uri.path()))
     
