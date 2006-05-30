@@ -687,7 +687,7 @@ Usage: info <package1> <package2> ... <packagen>
     def print_pkginfo(self, metadata, files, repo = None):
         import os.path
 
-        if not ctx.get_option('long'):
+        if ctx.get_option('short'):
             pkg = metadata.package
             ctx.ui.info('%15s - %s' % (pkg.name, unicode(pkg.summary)))
         else:
