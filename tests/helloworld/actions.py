@@ -16,7 +16,7 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import libtools
 from pisi.actionsapi import get
 
-WorkDir = "helloworld"
+WorkDir = "hello-1.3"
 
 def setup():
     autotools.configure()
