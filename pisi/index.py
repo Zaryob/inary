@@ -54,6 +54,10 @@ class Index(XmlFile):
     def name():
         return self.distribution.name + self.distribution.repositoryname
 
+    def read(filename, tmpdir):
+        XmlFile.read(filename, tmpDir=tmpdir, sha1sum=not force, 
+                     compress=File.auto, sign=File.detached, copylocal = True)
+
     # read index for a given repo, force means download even if remote not updated
     def read_uri(self, filename, repo = None, force = False):
         """Read PSPEC file"""
@@ -68,12 +72,7 @@ class Index(XmlFile):
         urlfile = file(pisi.util.join_path(tmpdir, 'uri'), 'w')
         urlfile.write(filename) # uri
 
-        if filename.endswith(".bz2"):
-            self.read(filename, tmpDir=tmpdir, sha1sum=not force, 
-                      compress=File.bz2, sign=File.detached, copylocal = True)
-        else:
-            self.read(filename, tmpDir=tmpdir, sha1sum=not force,
-                      compress=None, sign=File.detached, copylocal = True)
+        self.read(filename, tmpdir)
 
         if not repo:
             repo = self.distribution.name()

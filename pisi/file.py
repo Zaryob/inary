@@ -55,8 +55,7 @@ class InvalidSignature(pisi.Error):
 class File:
 
     (read, write) = range(2) # modes
-    (bz2, zip) = range(2) # compress enums
-
+    (bz2, gzip, auto) = range(3) # compress enums
     (detached, whatelse) = range(2)
 
     @staticmethod
@@ -67,15 +66,28 @@ class File:
         elif not isinstance(uri, URI):
             raise Error(_("uri must have type either URI or string"))
         return uri
+        
+    @staticmethod
+    def choose_method(filename, compress):
+        # this is really simple (^_^) -- exa
+        if compress == File.auto:
+            if filename.endswith('.bz2'):
+                return File.bz2
+            elif filename.endswith('.gz'):
+                return File.gzip
+            else:
+                return None
+        else:
+            return compress
 
     @staticmethod
     def decompress(localfile, compress):
+        compress = File.choose_method(localfile, compress)
         if compress == File.bz2:
             open(localfile[:-4], "w").write(bz2.BZ2File(localfile).read())
             localfile = localfile[:-4]
-        elif compress == File.zip:
+        elif compress == File.gzip:
             raise Error(_("zip compression not supported yet"))
-
         return localfile
 
     @staticmethod
@@ -113,7 +125,7 @@ class File:
         else:
             localfile = uri.get_uri() #TODO: use a special function here?
             if not os.path.exists(localfile):
-                raise IOError(_("File \'%s\' not found.") % localfile)
+                raise IOError(_("File '%s' not found.") % localfile)
             if not os.access(localfile, os.W_OK):
                 oldfn = localfile
                 localfile = join(transfer_dir, os.path.basename(localfile))
@@ -174,8 +186,8 @@ class File:
                 compressed_file = self.localfile + ".bz2"
                 bz2.BZ2File(compressed_file, "w").write(open(self.localfile, "r").read())
 
-            elif self.compress == File.zip:
-                raise Error(_("zip compression not supported yet"))
+            elif self.compress == File.gzip:
+                raise Error(_("gzip compression not supported yet"))
 
             if self.sha1sum:
                 sha1 = pisi.util.sha1_file(self.localfile)

@@ -383,35 +383,30 @@ def update_repo(repo, force=False):
     else:
         raise Error(_('No repository named %s found.') % repo)
 
-def rebuild_repo(repo):
-    ctx.ui.info(_('* Rebuilding \'%s\' named repo... ') % repo, noln=True)
-    
-    index = Index()
-    if ctx.repodb.has_repo(repo):
-        repouri = URI(ctx.repodb.get_repo(repo).indexuri.get_uri())
-        
-        indexname = repouri.filename()
-        indexpath = pisi.util.join_path(ctx.config.lib_dir(), 'index', repo, indexname)
-
-        uri_str = repouri.get_uri()
-        if os.path.exists(indexpath):
-            uri_str = indexpath
-
-        try:
-            index.read_uri(uri_str, repo, force = True)
-        except IOError:
-            ctx.ui.warning(_("Repo index file \'%s\' not found.") % uri_str)
-            return
-    else:
-        raise Error(_('No repository named %s found.') % repo)
-
-    ctx.txn_proc(lambda txn : index.update_db(repo, txn=txn))
-    ctx.ui.info(_('OK.'))
-    
 def delete_cache():
     util.clean_dir(ctx.config.packages_dir())
     util.clean_dir(ctx.config.archives_dir())
     util.clean_dir(ctx.config.tmp_dir())
+
+def rebuild_repo(repo):
+    ctx.ui.info(_('* Rebuilding \'%s\' named repo... ') % repo, noln=True)
+    
+    if ctx.repodb.has_repo(repo):
+        repouri = URI(ctx.repodb.get_repo(repo).indexuri.get_uri())
+        indexname = repouri.filename()
+        index = Index()
+        indexpath = pisi.util.join_path(ctx.config.index_dir(), repo, indexname)
+        tmpdir = os.path.join(ctx.config.tmp_dir(), 'index')
+        pisi.util.clean_dir(tmpdir)
+        try:
+            index.read(indexpath, tmpdir)
+        except IOError:
+            ctx.ui.warning(_("Repo index file '%s' not found.") % uri_str)
+            return
+        ctx.txn_proc(lambda txn : index.update_db(repo, txn=txn))
+        ctx.ui.info(_('OK.'))
+    else:
+        raise Error(_('No repository named %s found.') % repo)
 
 def rebuild_db(files=False):
 
@@ -465,7 +460,7 @@ def rebuild_db(files=False):
                 ctx.ui.debug('Resurrecting %s' % package_fn)
                 pisi.api.resurrect_package(package_fn, files, txn)
 
-    def reload_indexes(txn):
+    def reload_indices(txn):
         index_dir = ctx.config.index_dir()
         if os.path.exists(index_dir):  # it may have been erased, or we may be upgrading from a previous version -- exa
             for repo in os.listdir(index_dir):
@@ -493,4 +488,4 @@ def rebuild_db(files=False):
     #ctx.txn_proc(reload)
     clean_duplicates()
     reload_packages(files, None)
-    reload_indexes(None)
+    reload_indices(None)
