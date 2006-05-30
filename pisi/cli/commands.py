@@ -381,8 +381,6 @@ unpack, setup, build, install, package
                                default=False, help=_("don't install build dependencies, fail if a build dependency is present"))
         self.parser.add_option("-F", "--package-format", action="store", default='1.1',
                                help=_("pisi package format"))
-        self.parser.add_option("-c", "--compression-level", action="store", default=None,
-                               help=_("LZMA compression level, 1 through 9"))
 
     def run(self):
         if not self.args:
@@ -403,16 +401,6 @@ unpack, setup, build, install, package
         if ctx.get_option('package_format') not in Build.package_formats:
             raise Error(_('package_format must be one of %s ') % pisi.util.strlist(Build.package_formats))
         
-        if ctx.get_option('compression_level'):
-            if ctx.get_option('package_format') != "1.1":
-                raise Error(_('compression level is for lzma compression'))
-            
-            try:
-                if int(ctx.get_option('compression_level')) not in range(1, 10):
-                    raise Error(_('compression level must be between 1 and 9'))
-            except ValueError:
-                raise Error(_('compression level must be an integer'))
-
         if ctx.get_option('output_dir'):
             ctx.ui.info(_('Output directory: %s') % ctx.config.options.output_dir)
         else:

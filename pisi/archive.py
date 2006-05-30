@@ -144,8 +144,8 @@ class ArchiveTar(ArchiveBase):
 
         if self.tar.mode == 'wb' and self.type == 'tarlzma':
             batch = None
-            if ctx.get_option('compression_level'):
-                batch = "lzmash -k -%s %s" % (ctx.get_option('compression_level'), self.file_path)
+            if ctx.config.values.build.compressionlevel:
+                batch = "lzmash -k -%s %s" % (ctx.config.values.build.compressionlevel, self.file_path)
             else:
                 batch = "lzmash -k %s" % self.file_path
 

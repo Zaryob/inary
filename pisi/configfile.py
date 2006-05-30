@@ -19,7 +19,6 @@
 #
 #[general]
 #destinationdirectory = /
-#buildhelper = None / ccache / icecream
 #autoclean = False
 #
 #[build]
@@ -30,6 +29,8 @@
 #CXXFLAGS= -mtune=i686 -O2 -pipe -fomit-frame-pointer
 #LDFLAGS=
 #buildno=True     # necessary for generating build nos
+#buildhelper = None / ccache / icecream
+#compressionlevel = 7
 #
 #[directories]
 #lib_dir = /var/lib/pisi
@@ -57,7 +58,6 @@ class Error(pisi.Error):
 class GeneralDefaults:
     """Default values for [general] section"""
     destinationdirectory = "/"
-    buildhelper = None
     autoclean = False
     distribution = "Pardus"
     distribution_release = "1.1"
@@ -74,6 +74,8 @@ class BuildDefaults:
     cxxflags = "-mtune=i686 -O2 -pipe -fomit-frame-pointer"
     ldflags = ""
     buildno = False
+    buildhelper = None
+    compressionlevel = 7
 
 class DirsDefaults:
     "Default values for [directories] section"
