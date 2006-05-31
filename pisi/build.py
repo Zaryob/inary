@@ -806,7 +806,14 @@ class Builder:
             files = Files()
             files.read(ctx.const.files_xml)
 
-            if ctx.get_option('package_format') == "1.1":
+            if ctx.get_option('package_format') == "1.0":
+                for finfo in files.list:
+                    orgname = arcname = join("install", finfo.path)
+                    if package.debug_package:
+                        orgname = join("debug", finfo.path)
+                    pkg.add_to_package(orgname, arcname)
+                pkg.close()
+            else: # default package format is 1.1, so make it fallback.
                 tar = archive.ArchiveTar("install.tar.lzma", "tarlzma")
                 for finfo in files.list:
                     orgname = arcname = join("install", finfo.path)
@@ -818,13 +825,6 @@ class Builder:
                 pkg.close()
                 os.unlink("install.tar")
                 os.unlink("install.tar.lzma")
-            else:
-                for finfo in files.list:
-                    orgname = arcname = join("install", finfo.path)
-                    if package.debug_package:
-                        orgname = join("debug", finfo.path)
-                    pkg.add_to_package(orgname, arcname)
-                pkg.close()
 
             os.chdir(c)
             self.set_state("buildpackages")
