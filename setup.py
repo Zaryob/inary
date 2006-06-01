@@ -15,6 +15,7 @@ import os
 import shutil
 import glob
 import sys
+import inspect
 from distutils.core import setup
 from distutils.command.install import install
 
@@ -29,6 +30,7 @@ class Install(install):
         install.run(self)
         self.installi18n()
         self.installdoc()
+        self.generateConfigFile()
     
     def installi18n(self):
         for lang in i18n_languages.split(' '):
@@ -54,6 +56,32 @@ class Install(install):
             print 'Installing', pdf          
             shutil.copy(pdf, os.path.join(destpath, pdf))
         os.chdir('..')
+
+    def generateConfigFile(self):
+        import pisi.configfile
+        destpath = os.path.join(self.root, "etc/pisi/")
+        try:
+            os.makedirs(destpath)
+        except:
+            pass
+        pisiconf = open(os.path.join(destpath, "pisi.conf"), "w")
+
+        klasses = inspect.getmembers(pisi.configfile, inspect.isclass)
+        defaults = [klass for klass in klasses if klass[0].endswith('Defaults')]
+
+        for d in defaults:
+            section_name = d[0][:-len('Defaults')].lower()
+            pisiconf.write("[%s]\n" % section_name)
+            
+            section_members = [m for m in inspect.getmembers(d[1]) \
+                               if not m[0].startswith('__') \
+                               and not m[0].endswith('__')]
+        
+            for member in section_members:
+                pisiconf.write("# %s = %s\n" % (member[0], member[1]))
+
+            pisiconf.write('\n')
+
 
 setup(name="pisi",
     version= pisi.__version__,
