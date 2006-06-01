@@ -77,7 +77,7 @@ class BuildDefaults:
     buildhelper = None
     compressionlevel = 7
 
-class DirsDefaults:
+class DirectoriesDefaults:
     "Default values for [directories] section"
     lib_dir = "/var/lib/pisi"
     db_dir = "/var/db/pisi"
@@ -100,7 +100,7 @@ class ConfigurationSection(object):
         elif section == "build":
             self.defaults = BuildDefaults
         elif section == "directories":
-            self.defaults = DirsDefaults
+            self.defaults = DirectoriesDefaults
         else:
             e = _("No section by name '%s'") % section
             raise Error, e
