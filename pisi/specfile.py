@@ -210,7 +210,13 @@ class Package:
         s += _('Component: %s\n') % unicode(self.partOf)
         s += _('Provides: ')
         for x in self.providesComar:
-           s += x.om
+           s += x.om + ' '
+        s += '\n'
+        s += _('Dependencies: ')
+        for x in self.componentDependencies:
+           s += x.package + ' '
+        for x in self.packageDependencies:
+           s += x.package + ' '
         return s + '\n'
 
 

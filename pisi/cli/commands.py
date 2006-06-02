@@ -693,8 +693,6 @@ Usage: info <package1> <package2> ... <packagen>
         else:
             ctx.ui.info(unicode(metadata.package))
             if repo:
-                deps = [x.package for x in ctx.packagedb.get_deps(metadata.package.name, repo)]
-                print _('Dependencies:'), util.strlist(deps)
                 revdeps =  [x[0] for x in 
                             ctx.packagedb.get_rev_deps(metadata.package.name, repo)]
                 print _('Reverse Dependencies:'), util.strlist(revdeps)
