@@ -113,9 +113,13 @@ class ArchiveTar(ArchiveBase):
             # 
             # Also, tar.extract() doesn't write on symlinks... Not any
             # more :).
-            if self.file_path == install_tar_path and os.path.exists(tarinfo.name) \
-                    and not os.path.isdir(tarinfo.name):
-                os.unlink(tarinfo.name)
+            if self.file_path == install_tar_path:
+                if os.path.isfile(tarinfo.name) or os.path.islink(tarinfo.name):
+                    try:
+                        os.unlink(tarinfo.name)
+                    except OSError, e:
+                        ctx.ui.warning(e)
+
             self.tar.extract(tarinfo)
 
         os.chdir(oldwd)
