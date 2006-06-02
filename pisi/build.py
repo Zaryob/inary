@@ -823,7 +823,6 @@ class Builder:
                 tar.close()
                 pkg.add_to_package("install.tar.lzma")
                 pkg.close()
-                os.unlink("install.tar")
                 os.unlink("install.tar.lzma")
 
             os.chdir(c)
