@@ -94,7 +94,7 @@ class ArchiveTar(ArchiveBase):
             self.file_path = self.file_path.rstrip('.lzma')
             ret, out, err = util.run_batch("lzma d %s %s" % (self.file_path + '.lzma', self.file_path))
             if ret != 0:
-                raise LZMAError(err)
+                raise LZMAError(out)
         else:
             raise ArchiveError(_("Archive type not recognized"))
 
@@ -155,7 +155,7 @@ class ArchiveTar(ArchiveBase):
 
             ret, out, err = util.run_batch(batch)
             if ret != 0:
-                raise LZMAError(err)
+                raise LZMAError(out)
 
 class ArchiveZip(ArchiveBase):
     """ArchiveZip handles zip archives. 
