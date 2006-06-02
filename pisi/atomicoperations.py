@@ -106,6 +106,7 @@ class Install(AtomicOperation):
         self.check_reinstall()
         self.extract_install()
         self.store_pisi_files()
+        self.update_environment()
 
         self.register_comar()
         self.postinstall()
@@ -118,7 +119,6 @@ class Install(AtomicOperation):
             txn.abort()
             raise e
 
-        self.update_environment()
         ctx.ui.status()
         if self.upgrade:
             event = pisi.ui.upgraded
