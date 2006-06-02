@@ -91,8 +91,9 @@ class ArchiveTar(ArchiveBase):
             rmode = 'r:bz2'
         elif self.type == 'tarlzma':
             rmode = 'r:'
-            self.file_path = self.file_path.rstrip('.lzma')
-            ret, out, err = util.run_batch("lzma d %s %s" % (self.file_path + '.lzma', self.file_path))
+            self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
+            ret, out, err = util.run_batch("lzma d %s %s" % (self.file_path + ctx.const.lzma_suffix,
+                                                             self.file_path))
             if ret != 0:
                 #FIXME: see bug #2836
                 raise LZMAError(out)
@@ -103,7 +104,7 @@ class ArchiveTar(ArchiveBase):
         oldwd = os.getcwd()
         os.chdir(target_dir)
 
-        install_tar_path = util.join_path(ctx.config.tmp_dir(), "install.tar")
+        install_tar_path = util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar)
         for tarinfo in self.tar:
             # Installing packages (especially shared libraries) is a
             # bit tricky. You should also change the inode if you
@@ -137,7 +138,7 @@ class ArchiveTar(ArchiveBase):
                 wmode = 'w:bz2'
             elif self.type == 'tarlzma':
                 wmode = 'w:'
-                self.file_path = self.file_path.rstrip('.lzma')
+                self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
             else:
                 raise ArchiveError(_("Archive type not recognized"))
             self.tar = tarfile.open(self.file_path, wmode)

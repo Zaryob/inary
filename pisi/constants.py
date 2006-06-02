@@ -49,6 +49,9 @@ class Constants:
         self.__c.package_suffix = ".pisi"
         self.__c.xdelta_suffix = ".xdelta"
 
+        # suffix for lzma
+        self.__c.lzma_suffix = ".lzma"
+
         # suffix for auto generated debug packages
         self.__c.debug_name_suffix = "-debug"
         self.__c.debug_file_suffix = ".debug"
@@ -74,6 +77,8 @@ class Constants:
         self.__c.comar_dir = "comar"
         self.__c.files_xml = "files.xml"
         self.__c.metadata_xml = "metadata.xml"
+        self.__c.install_tar = "install.tar"
+        self.__c.install_tar_lzma = "install.tar.lzma"
 
         # functions in actions_file
         self.__c.setup_func = "setup"

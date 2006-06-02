@@ -118,9 +118,9 @@ class Package:
         self.impl.unpack_dir(dir, outdir)
 
     def extract_install(self, outdir):
-        if self.impl.has_file('install.tar.lzma'):
-            self.extract_file('install.tar.lzma', ctx.config.tmp_dir())
-            tar = archive.ArchiveTar(join(ctx.config.tmp_dir(), 'install.tar.lzma'), 'tarlzma')
+        if self.impl.has_file(ctx.const.install_tar_lzma):
+            self.extract_file(ctx.const.install_tar_lzma, ctx.config.tmp_dir())
+            tar = archive.ArchiveTar(join(ctx.config.tmp_dir(), ctx.const.install_tar_lzma), 'tarlzma')
             tar.unpack_dir(outdir)
         else:
             self.extract_dir_flat('install', outdir)
