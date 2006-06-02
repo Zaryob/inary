@@ -814,6 +814,7 @@ class Builder:
                     pkg.add_to_package(orgname, arcname)
                 pkg.close()
             else: # default package format is 1.1, so make it fallback.
+                ctx.build_leftover = join(self.pkg_dir(), "install.tar.lzma")
                 tar = archive.ArchiveTar("install.tar.lzma", "tarlzma")
                 for finfo in files.list:
                     orgname = arcname = join("install", finfo.path)
@@ -824,6 +825,7 @@ class Builder:
                 pkg.add_to_package("install.tar.lzma")
                 pkg.close()
                 os.unlink("install.tar.lzma")
+                ctx.build_leftover = None
 
             os.chdir(c)
             self.set_state("buildpackages")

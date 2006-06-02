@@ -48,6 +48,12 @@ comar_sockname = None
 
 initialized = False
 
+# Bug #2879
+# FIXME: Maybe we can create a simple rollback mechanism. There are other
+# places which need this, too.
+# this is needed in build process to clean after if something goes wrong.
+build_leftover = None
+
 #def register(_impl):
 #    """ Register a UI implementation"""
 #    ui = _impl

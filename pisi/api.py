@@ -142,6 +142,8 @@ def finalize():
         if ctx.dbenv:
             ctx.dbenv.close()
             ctx.dbenv_lock.close()
+        if ctx.build_leftover and os.path.exists(ctx.build_leftover):
+            os.unlink(ctx.build_leftover)
 
         ctx.ui.debug('PISI API finalized')
         ctx.ui.close()
