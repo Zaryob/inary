@@ -740,7 +740,7 @@ class Builder:
             if obj:
                 self.spec.packages.append(obj)
 
-        package_names = []
+        new_package_names = []
         old_package_names = []
 
         for package in self.spec.packages:
@@ -767,10 +767,20 @@ class Builder:
             ctx.ui.info(_("Generating %s,") % ctx.const.metadata_xml)
             build_number, old_build_number = self.gen_metadata_xml(package)
 
+            # Calculate new and oldpackage names for buildfarm
             name =  util.package_name(package.name,
                                      self.spec.source.version,
                                      self.spec.source.release,
                                      self.metadata.package.build)
+
+            if old_build_number:
+                old_package_name = util.package_name(package.name,
+                                     self.spec.source.version,
+                                     self.spec.source.release,
+                                     old_build_number)
+
+            new_package_names.append(name)
+            old_package_names.append(old_package_name)
 
             outdir = ctx.get_option('output_dir')
             if outdir:
@@ -778,15 +788,7 @@ class Builder:
 
             ctx.ui.info(_("Creating PISI package %s.") % name)
 
-            # somebody explain to me why this is done here -- exa
-            if old_build_number:
-                old_package_name = util.package_name(package.name,
-                                     self.spec.source.version,
-                                     self.spec.source.release,
-                                     old_build_number)
             pkg = Package(name, 'w')
-            package_names.append(name)
-            old_package_names.append(old_package_name)
 
             # add comar files to package
             os.chdir(self.specdir)
@@ -848,7 +850,7 @@ class Builder:
         else:
             ctx.ui.info(_("Keeping Build Directory"))
 
-        return package_names, old_package_names
+        return new_package_names, old_package_names
 
 
 # build functions...
