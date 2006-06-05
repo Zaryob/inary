@@ -206,7 +206,7 @@ If run without parameters, it prints the general help."""
         #self.__doc__ += commands_string()
         super(Help, self).__init__()
 
-    name = ("help", "h")
+    name = ("help", "?")
 
     def run(self):
 
@@ -249,7 +249,7 @@ class DeleteCache(Command):
     def __init__(self):
         super(DeleteCache, self).__init__()
 
-    name = ("delete-cache", None)
+    name = ("delete-cache", "dc")
 
     def run(self):
         self.init(database=False, write=True)
@@ -1183,7 +1183,7 @@ in summary, description, and package name fields.
     def __init__(self):
         super(Search, self).__init__()
         
-    name = ("search", None)
+    name = ("search", "sr")
 
     def options(self):
         super(Search, self).options()

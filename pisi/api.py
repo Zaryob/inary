@@ -368,12 +368,12 @@ def update_repo(repo, force=False):
     if ctx.repodb.has_repo(repo):
         repouri = ctx.repodb.get_repo(repo).indexuri.get_uri()
         try:
-            index.read_uri(repouri, repo)
+            index.read_uri_of_repo(repouri, repo)
         except pisi.file.AlreadyHaveException, e:
             ctx.ui.info(_('No updates available for repository %s.') % repo)
             if force:
                 ctx.ui.info(_('Updating database at any rate as requested'))
-                index.read_uri(repouri, repo, force = force)
+                index.read_uri_of_repo(repouri, repo, force = force)
             else:
                 return
         try:
@@ -400,10 +400,11 @@ def rebuild_repo(repo):
         indexpath = pisi.util.join_path(ctx.config.index_dir(), repo, indexname)
         tmpdir = os.path.join(ctx.config.tmp_dir(), 'index')
         pisi.util.clean_dir(tmpdir)
+        pisi.util.check_dir(tmpdir)
         try:
-            index.read(indexpath, tmpdir)
-        except IOError:
-            ctx.ui.warning(_("Repo index file '%s' not found.") % uri_str)
+            index.read_uri(indexpath, tmpdir, force=True) # don't look for sha1sum there
+        except IOError, e:
+            ctx.ui.warning(_("Input/Output error while reading %s: %s") % (indexpath, unicode(e)))
             return
         ctx.txn_proc(lambda txn : index.update_db(repo, txn=txn))
         ctx.ui.info(_('OK.'))
@@ -487,7 +488,6 @@ def rebuild_db(files=False):
     finalize()
     # construct new database version
     init(database=True, options=options, ui=ui, comar=comar)
-    #ctx.txn_proc(reload)
     clean_duplicates()
     reload_packages(files, None)
     reload_indices(None)

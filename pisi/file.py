@@ -118,10 +118,10 @@ class File:
                 ctx.ui.info(_("Fetching %s") % uri.get_uri())
                 fetch_url(uri, transfer_dir)
             else:
-                # copy to transfer dir, it's okay if transfer_dir is the same
-                if not os.path.samefile(uri.get_uri(), join(transfer_dir, uri.filename())):
-                    ctx.ui.info(_("Copying %s to transfer dir") % uri.get_uri())
-                    shutil.copy(uri.get_uri(), transfer_dir)
+                # copy to transfer dir,
+                localfile = join(transfer_dir, uri.filename())
+                ctx.ui.info(_("Copying %s to transfer dir") % uri.get_uri())
+                shutil.copy(uri.get_uri(), transfer_dir)
         else:
             localfile = uri.get_uri() #TODO: use a special function here?
             if not os.path.exists(localfile):
@@ -132,7 +132,6 @@ class File:
                 shutil.copy(oldfn, localfile)
 
         if sha1sum:        
-        
             if (pisi.util.sha1_file(localfile) != newsha1):
                 raise Error(_("File integrity of %s compromised.") % uri)
 

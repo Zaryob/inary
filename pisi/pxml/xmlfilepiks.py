@@ -58,11 +58,11 @@ class XmlFile(object):
     def readxml(self, uri, tmpDir='/tmp', sha1sum=False, 
                 compress=None, sign=None, copylocal = False):
         uri = File.make_uri(uri)
-        try:
-            localpath = File.download(uri, tmpDir, sha1sum=sha1sum, 
-                                      compress=compress,sign=sign, copylocal=copylocal)
-        except IOError:
-            raise Error(_("Cannot access URI %s") % (uri) )
+        #try:
+        localpath = File.download(uri, tmpDir, sha1sum=sha1sum, 
+                                  compress=compress,sign=sign, copylocal=copylocal)
+        #except IOError, e:
+        #    raise Error(_("Cannot read URI %s: %s") % (uri, unicode(e)) )
         try:
             self.doc = iks.parse(localpath)
             return self.doc
