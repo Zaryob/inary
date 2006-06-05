@@ -215,7 +215,7 @@ If run without parameters, it prints the general help."""
             pisi.cli.printu(self.parser.format_help())
             return
             
-        self.init(database = False)
+        self.init(database = False, write = False)
         
         for arg in self.args:
             obj = Command.get_command(arg, True)
@@ -252,7 +252,7 @@ class DeleteCache(Command):
     name = ("delete-cache", None)
 
     def run(self):
-        self.init(database=False)
+        self.init(database=False, write=True)
         pisi.api.delete_cache()
 
 
@@ -288,7 +288,7 @@ the package in graphviz format to 'pgraph.dot'.
     name = ("graph", None)
 
     def run(self):
-        self.init()
+        self.init(write=False)
         if not ctx.get_option('installed'):
             if ctx.get_option('repository'):
                 repo = ctx.get_option('repository')
@@ -720,7 +720,7 @@ Usage: check <package1> <package2> ... <packagen>
     def __init__(self):
         super(Check, self).__init__()
 
-    name = ("check", "c")
+    name = ("check", None)
 
     def run(self):
         if not self.args:
@@ -915,7 +915,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 
     def run(self):
 
-        self.init(database=False)
+        self.init()
 
         if len(self.args)==2 or len(self.args)==0:
             self.init()
@@ -950,7 +950,7 @@ Remove all repository information from the system.
 
     def run(self):
 
-        self.init(database=False)
+        self.init(database=True)
 
         if len(self.args)>=1:
             self.init()
@@ -1187,7 +1187,7 @@ in summary, description, and package name fields.
     def __init__(self):
         super(Search, self).__init__()
         
-    name = ("search", "s")
+    name = ("search", None)
 
     def options(self):
         super(Search, self).options()
