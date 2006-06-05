@@ -266,7 +266,7 @@ def upgrade_base(A = set()):
             if extra_upgrades:
                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be upgraded: ') +
                                util.strlist(extra_upgrades))
-                upgrade_pkg_names(extra_upgrades)
+                upgrade_pkg_names(extra_upgrades, bypass_safety=True)
             # return packages that must be added to any installation
             return set(install_order + extra_upgrades)
         else:
@@ -363,7 +363,7 @@ def plan_install_pkg_names(A):
 def upgrade(A):
     upgrade_pkg_names(A)
 
-def upgrade_pkg_names(A = []):
+def upgrade_pkg_names(A = [], bypass_safety=False):
     """Re-installs packages from the repository, trying to perform
     a minimum or maximum number of upgrades according to options."""
     
@@ -408,7 +408,8 @@ def upgrade_pkg_names(A = []):
         ctx.ui.info(_('No packages to upgrade.'))
         return True
 
-    A |= upgrade_base(A)
+    if not bypass_safety:
+        A |= upgrade_base(A)
         
     ctx.ui.debug('A = %s' % str(A))
     
