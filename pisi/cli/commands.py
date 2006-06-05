@@ -550,6 +550,8 @@ expanded to package names.
         super(Upgrade, self).options()
         buildno_opts(self)
         p = self.parser
+        p.add_option("", "--security", action="store_true",
+                     default=False, help=_("select only security upgrades"))
         p.add_option("-r", "--bypass-update-repo", action="store_true",
                      default=False, help=_("Do not update repositories"))
         p.add_option("", "--bypass-ldconfig", action="store_true",

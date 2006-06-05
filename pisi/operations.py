@@ -369,18 +369,19 @@ def upgrade_pkg_names(A = []):
     a minimum or maximum number of upgrades according to options."""
     
     ignore_build = ctx.get_option('ignore_build_no')
+    security = ctx.get_option('security')
 
     if not A:
         # if A is empty, then upgrade all packages
         A = ctx.installdb.list_installed()
-
-    # filter packages that are not upgradable
+        
     A_0 = A = expand_components(set(A))
 
     Ap = []
     for x in A:
         if x.endswith(ctx.const.package_suffix):
             ctx.ui.debug(_("Warning: package *name* ends with '.pisi'"))
+            
         if not ctx.installdb.is_installed(x):
             ctx.ui.info(_('Package %s is not installed.') % x, True)
             continue
@@ -391,6 +392,9 @@ def upgrade_pkg_names(A = []):
             ctx.ui.info(_('Package %s is not available in repositories.') % x, True)
             continue
 
+        if security and pkg.history[0].type != 'security':
+            continue
+            
         if ignore_build or (not build) or (not pkg.build):
             if Version(release) < Version(pkg.release):
                 Ap.append(x)
@@ -403,6 +407,8 @@ def upgrade_pkg_names(A = []):
             else:
                 ctx.ui.info(_('Package %s is already at the latest build %s.')
                             % (pkg.name, pkg.build), True)
+        
+        
     A = set(Ap)
     
     if len(A)==0:
