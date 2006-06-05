@@ -809,7 +809,6 @@ msgid "Delete cache files"
 msgstr "Önbellek dosyalarını sil"
 
 #: pisi/cli/commands.py:263
-#, fuzzy
 msgid ""
 "Graph package relations.\n"
 "Usage: graph [<package1> <package2> ...]\n"
@@ -824,10 +823,12 @@ msgstr ""
 "\n"
 "Paket ilişkilerinin bir çizgesini, bağımlılık ve çatışma\n"
 "ilişkilerini verilen paketlerden takip ederek yaz.\n"
+"Öntanımlı olarak depo paketlerdeki paket ilişkilerini gösterir\n"
+"ve paketi graphviz biçiminde 'pgraph.dot' dosyasına yazar.\n"
 
 #: pisi/cli/commands.py:280
 msgid "specify a particular repository"
-msgstr ""
+msgstr "bir depoyu belirt"
 
 #: pisi/cli/commands.py:283
 msgid "graph of installed packages"
@@ -842,9 +843,8 @@ msgid "dot output file"
 msgstr "dot çıktı dosyası"
 
 #: pisi/cli/commands.py:298
-#, fuzzy
 msgid "Plotting packages in repository %s"
-msgstr "Paket depoda bulundu:"
+msgstr "%s deposundaki paketler çiziliyor"
 
 #: pisi/cli/commands.py:304
 #, fuzzy
@@ -932,12 +932,11 @@ msgstr "pisi paketi biçimi"
 
 #: pisi/cli/commands.py:397
 msgid "Step must be one of %s "
-msgstr "Adım %s den birisi olmalı"
+msgstr "Adım bunlardan birisi olmalı: %s"
 
 #: pisi/cli/commands.py:405
-#, fuzzy
 msgid "package_format must be one of %s "
-msgstr "Adım %s den birisi olmalı"
+msgstr "package_format, bunlardan birisi olmalı: %s"
 
 #: pisi/cli/commands.py:408 pisi/cli/commands.py:450
 msgid "Output directory: %s"
@@ -1768,7 +1767,7 @@ msgstr "Şu andaki veritabanı versiyonu %s yazılıyor"
 
 #: pisi/lockeddbshelve.py:66
 msgid "Cannot attain write access to database environment"
-msgstr "Veritabanı için yazma erişimi edinilemedi"
+msgstr "Veritabanına yazılamıyor"
 
 #: pisi/lockeddbshelve.py:68
 msgid "Database version %s not present."
@@ -1787,13 +1786,12 @@ msgid "Cannot attain read access to database environment"
 msgstr "Veritabanı ortamına okuma izni alınamadı"
 
 #: pisi/lockeddbshelve.py:99
-#, fuzzy
 msgid "Cannot write to PISI database."
-msgstr "Veritabanı %s için okuma ya da yazma erişimi edinilemedi"
+msgstr "PİSİ veritabanına yazılamıyor"
 
 #: pisi/lockeddbshelve.py:122
 msgid "Cannot attain read or write access to database %s"
-msgstr "Veritabanı %s için okuma ya da yazma erişimi edinilemedi"
+msgstr "Veritabanı %s için okuma ya da yazma erişimi alınamadı"
 
 #: pisi/lockeddbshelve.py:150
 msgid ""
@@ -1803,19 +1801,16 @@ msgstr ""
 "bayraklarını kullanmalı"
 
 #: pisi/metadata.py:62
-#, fuzzy
 msgid "Distribution: %s, Dist. Release: %s\n"
-msgstr "İnşa: %s, Dağıtım: %s, Dağıtım Sürümü: %s\n"
+msgstr "Dağıtım: %s, Dağıtım Sürümü: %s\n"
 
 #: pisi/metadata.py:64
-#, fuzzy
 msgid "Architecture: %s, Installed Size: %s"
-msgstr "Mimari: %s, Yerleşik boyut: %s\n"
+msgstr "Mimari: %s, Yerleşik Boyut: %s"
 
 #: pisi/operations.py:48
 msgid "Upgrading PISI requires database rebuild and restart"
-msgstr ""
-"PİSİ'yi yükseltmek veritabanının yeniden inşa edilmesini ve uygulamayı "
+msgstr "PİSİ'yi yükseltmek veritabanının yeniden inşa edilmesini ve uygulamayı "
 "yeniden başlatmayı gerektirir"
 
 #: pisi/operations.py:51
