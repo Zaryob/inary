@@ -49,7 +49,7 @@ class Command(object):
             name = commandcls.name[0]
             if commandcls.name[1]:
                 name += ' (%s)' % commandcls.name[1]
-            s += '%20s - %s\n' % (name, summary)
+            s += '%21s - %s\n' % (name, summary)
         return s
 
     @staticmethod
