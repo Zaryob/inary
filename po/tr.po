@@ -830,14 +830,12 @@ msgid "specify a particular repository"
 msgstr ""
 
 #: pisi/cli/commands.py:283
-#, fuzzy
 msgid "graph of installed packages"
-msgstr "sadece yerleşik olmayan paketleri göster"
+msgstr "kurulu paketlerin çizelgesi"
 
 #: pisi/cli/commands.py:286
-#, fuzzy
 msgid "do not show installed packages"
-msgstr "sadece yerleşik olmayan paketleri göster"
+msgstr "kurulu paketleri gösterme"
 
 #: pisi/cli/commands.py:289
 msgid "dot output file"
@@ -929,9 +927,8 @@ msgstr ""
 "inşa bağımlılıklarını kurma, eğer bir inşa bağımlılığı yoksa hatayla çık"
 
 #: pisi/cli/commands.py:386
-#, fuzzy
 msgid "pisi package format"
-msgstr "%s paket bulundu"
+msgstr "pisi paketi biçimi"
 
 #: pisi/cli/commands.py:397
 msgid "Step must be one of %s "
@@ -1109,9 +1106,8 @@ msgid "show only paths."
 msgstr "sadece yolları göster"
 
 #: pisi/cli/commands.py:648
-#, fuzzy
 msgid "do not show details"
-msgstr "detayları göster"
+msgstr "detayları gösterme"
 
 #: pisi/cli/commands.py:671
 msgid "Package file: %s"
@@ -1651,9 +1647,8 @@ msgid "uri must have type either URI or string"
 msgstr "uri argümanı ya URI ya da string tipine sahip olmalı"
 
 #: pisi/file.py:90
-#, fuzzy
 msgid "zip compression not supported yet"
-msgstr "lzma sıkıştırma henüz desteklenmiyor"
+msgstr "zip sıkıştırma henüz desteklenmiyor"
 
 #: pisi/file.py:118
 msgid "Fetching %s"
@@ -1680,9 +1675,8 @@ msgid "Remote write not implemented"
 msgstr "Uzağa yazmalar henüz programlanmadı"
 
 #: pisi/file.py:189
-#, fuzzy
 msgid "gzip compression not supported yet"
-msgstr "lzma sıkıştırma henüz desteklenmiyor"
+msgstr "gzip sıkıştırma henüz desteklenmiyor"
 
 #: pisi/file.py:204 pisi/file.py:207
 msgid "ERROR: gpg --detach-sig %s failed"
@@ -2159,9 +2153,8 @@ msgid "Provides: "
 msgstr "Sağladıkları: "
 
 #: pisi/specfile.py:215
-#, fuzzy
 msgid "Dependencies: "
-msgstr "Ters bağımlılıklar:"
+msgstr "Bağımlılıklar:"
 
 #: pisi/uri.py:79
 msgid "setAuthInfo needs a tuple (user, pass)"
@@ -2304,40 +2297,3 @@ msgstr "%d hata ile karşılaşıldı. Lütfen bunları en kısa zamanda düzelt
 #: scripts/repostats.py:675
 msgid "These dependencies are not available in repository:\n"
 msgstr "Bağımlılığa neden olan bu paketler depoda bulunmuyor:\n"
-
-#~ msgid "Repo index file '%s' not found."
-#~ msgstr "Depo index dosyası '%s' bulunamadı."
-
-#, fuzzy
-#~ msgid "compression level must be between 1 and 9"
-#~ msgstr "sıkıştırma metodu %s den birisi olmalı"
-
-#, fuzzy
-#~ msgid "compression level must be an integer"
-#~ msgstr "sıkıştırma metodu %s den birisi olmalı"
-
-#~ msgid "Cannot access URI %s"
-#~ msgstr "%s URI ına erişilemiyor"
-
-#~ msgid ""
-#~ "Opening PISI database in read-only mode. Operations that require write "
-#~ "access will fail."
-#~ msgstr ""
-#~ "PİSİ veritabanı sadece okuma izni ile açılıyor. Yazma erişimi gerektiren "
-#~ "işlemler başarısızlığa uğrayacaktır."
-
-#~ msgid "package compression method"
-#~ msgstr "paket sıkıştırma metodu"
-
-#~ msgid "bz2 compressed filename must end with '.bz2'"
-#~ msgstr "bz2 ile sıkıştırılmış dosyaların son eki '.bz2' ile bitmelidir"
-
-#~ msgid "graph all available packages"
-#~ msgstr "Bulunan bütün paketlerin çizgesini oluştur"
-
-#~ msgid "Plotting a graph of relations among all available packages"
-#~ msgstr ""
-#~ "Bulunan bütün paketlerin arasındaki ilişkilerin bir çizgesi basılıyor"
-
-#~ msgid "Working on %s"
-#~ msgstr "%s üzerinde çalışma yapılıyor"
