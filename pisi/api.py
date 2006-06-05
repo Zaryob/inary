@@ -304,7 +304,7 @@ def search_package_terms(terms, lang = None, search_names = True, repo = pisi.it
 def search_package(query, lang = None, search_names = True, repo = pisi.itembyrepodb.all):
     if not lang:
         lang = pisi.pxml.autoxml.LocalText.get_lang()
-    r1 = pisi.search.query('sumdesc', lang, query, repo = repo)
+    r1 = pisi.search.query('summary', lang, query, repo = repo)
     r2 = pisi.search.query('description', lang, query, repo = repo)
     r = r1.union(r2)
     if search_names:
