@@ -74,10 +74,10 @@ class Checks:
 #########################
 
 def every(pred, seq):
-    return reduce(operator.and_, map(pred, seq))
+    return reduce(operator.and_, map(pred, seq), True)
 
 def any(pred, seq):
-    return reduce(operator.or_, map(pred, seq))
+    return reduce(operator.or_, map(pred, seq), False)
 
 def unzip(seq):
     return zip(*seq)

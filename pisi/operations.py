@@ -392,8 +392,10 @@ def upgrade_pkg_names(A = []):
             ctx.ui.info(_('Package %s is not available in repositories.') % x, True)
             continue
 
-        if security and pkg.history[0].type != 'security':
-            continue
+        if security: # below is a readable functional code, don't overflow lines!
+            updates = [x for x in pkg.history if Version(x.release) > Version(release)]
+            if not pisi.util.any(lambda x:x.type == 'security', updates):
+                continue
             
         if ignore_build or (not build) or (not pkg.build):
             if Version(release) < Version(pkg.release):
