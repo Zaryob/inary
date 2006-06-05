@@ -915,8 +915,6 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 
     def run(self):
 
-        self.init()
-
         if len(self.args)==2 or len(self.args)==0:
             self.init()
             if len(self.args)==2:
@@ -949,8 +947,6 @@ Remove all repository information from the system.
     name = ("remove-repo", "rr")
 
     def run(self):
-
-        self.init(database=True)
 
         if len(self.args)>=1:
             self.init()
