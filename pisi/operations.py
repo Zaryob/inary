@@ -263,12 +263,13 @@ def upgrade_base(A = set()):
                                util.strlist(extra_installs))
             G_f, install_order = plan_install_pkg_names(extra_installs)
             extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase - set(install_order))
+            upgrade_order = []
             if extra_upgrades:
                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be upgraded: ') +
                                util.strlist(extra_upgrades))
-                upgrade_pkg_names(extra_upgrades, bypass_safety=True)
+                G_f, upgrade_order = plan_upgrade(extra_upgrades, ignore_build)
             # return packages that must be added to any installation
-            return set(install_order + extra_upgrades)
+            return set(install_order + upgrade_order)
         else:
             ctx.ui.warning(_('Safety switch: the component system.base cannot be found'))
     return set()
@@ -363,7 +364,7 @@ def plan_install_pkg_names(A):
 def upgrade(A):
     upgrade_pkg_names(A)
 
-def upgrade_pkg_names(A = [], bypass_safety=False):
+def upgrade_pkg_names(A = []):
     """Re-installs packages from the repository, trying to perform
     a minimum or maximum number of upgrades according to options."""
     
@@ -408,8 +409,7 @@ def upgrade_pkg_names(A = [], bypass_safety=False):
         ctx.ui.info(_('No packages to upgrade.'))
         return True
 
-    if not bypass_safety:
-        A |= upgrade_base(A)
+    A |= upgrade_base(A)
         
     ctx.ui.debug('A = %s' % str(A))
     
@@ -683,7 +683,7 @@ def expand_src_components(A):
 ##    check_conflicts(order)
 ##    return G_f, order
 
-def emerge(A, rebuild_all = False, bypass_safety = False):
+def emerge(A, rebuild_all = False):
 
     # A was a list, remove duplicates and expand components
     A = [str(x) for x in A]
@@ -693,9 +693,8 @@ def emerge(A, rebuild_all = False, bypass_safety = False):
     if len(A)==0:
         ctx.ui.info(_('No packages to emerge.'))
         return
-
-    #if not bypass_safety:
-    #    A |= upgrade_base(A)
+    
+    #A |= upgrade_base(A)
         
     if not ctx.config.get_option('ignore_dependency'):
         G_f, order_inst, order_build = plan_emerge(A, rebuild_all)
