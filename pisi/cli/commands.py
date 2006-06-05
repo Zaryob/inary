@@ -46,7 +46,10 @@ class Command(object):
             commandcls = Command.cmd_dict[name]
             trans = gettext.translation('pisi', fallback=True)
             summary = trans.ugettext(commandcls.__doc__).split('\n')[0]
-            s += '%20s - %s\n' % (commandcls.name[0], summary)
+            name = commandcls.name[0]
+            if commandcls.name[1]:
+                name += ' (%s)' % commandcls.name[1]
+            s += '%20s - %s\n' % (name, summary)
         return s
 
     @staticmethod
