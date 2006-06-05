@@ -203,8 +203,12 @@ class Package:
         return pisi.dependency.satisfies_dependencies(self.name, deps)
 
     def __str__(self):
+        if self.build:
+            build = self.build
+        else:
+            build = '--'
         s = _('Name: %s, version: %s, release: %s, build %s\n') % (
-              self.name, self.version, self.release, self.build)
+              self.name, self.version, self.release, build)
         s += _('Summary: %s\n') % unicode(self.summary)
         s += _('Description: %s\n') % unicode(self.description)
         s += _('Component: %s\n') % unicode(self.partOf)
