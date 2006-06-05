@@ -59,8 +59,8 @@ class Package(specfile.Package):
 
     def __str__(self):
         s = specfile.Package.__str__(self)
-        s += _('Build: % s, Distribution: %s, Dist. Release: %s\n') % \
-              (self.build, self.distribution, self.distributionRelease)
+        s += _('Distribution: %s, Dist. Release: %s\n') % \
+              (self.distribution, self.distributionRelease)
         s += _('Architecture: %s, Installed Size: %s') % \
             (self.architecture, self.installedSize)
         return s
