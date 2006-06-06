@@ -730,7 +730,7 @@ class Builder:
             if obj:
                 self.spec.packages.append(obj)
 
-        new_package_names = []
+        new_packages = []
         old_package_names = []
 
         for package in self.spec.packages:
@@ -775,13 +775,12 @@ class Builder:
                                      self.spec.source.version,
                                      self.spec.source.release,
                                      old_build_no)
-
-            new_package_names.append(name)
             old_package_names.append(old_package_name)
 
             outdir = ctx.get_option('output_dir')
             if outdir:
                 name = pisi.util.join_path(outdir, name)
+            new_packages.append(name)
 
             ctx.ui.info(_("Creating PISI package %s.") % name)
 
@@ -847,7 +846,7 @@ class Builder:
         else:
             ctx.ui.info(_("Keeping Build Directory"))
 
-        return new_package_names, old_package_names
+        return new_packages, old_package_names
 
 
 # build functions...
