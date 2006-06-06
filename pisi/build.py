@@ -549,7 +549,7 @@ class Builder:
         except KeyError:
             util.strip_directory(install_dir)
 
-    def gen_metadata_xml(self, package):
+    def gen_metadata_xml(self, package, build_no=None):
         """Generate the metadata.xml file for build source.
 
         metadata.xml is composed of the information from specfile plus
@@ -574,22 +574,12 @@ class Builder:
 
         metadata.package.installedSize = size
 
-        old_build = None
-
-        # build no
-        if ctx.config.options.ignore_build_no:
-            metadata.package.build = None
-            ctx.ui.warning(_('Build number is not available due to --ignore-build'))
-        elif (not ctx.config.values.build.buildno):
-            metadata.package.build = None
-            ctx.ui.warning(_('Build number is not available. For repo builds you must enable buildno in pisi.conf.'))
-        else:
-            metadata.package.build, old_build = self.calc_build_no(metadata.package.name)
+        metadata.package.build = build_no
 
         metadata_xml_path = util.join_path(self.pkg_dir(), ctx.const.metadata_xml)
         metadata.write(metadata_xml_path)
         self.metadata = metadata
-        return metadata.package.build, old_build
+
 
     def gen_files_xml(self, package):
         """Generates files.xml using the path definitions in specfile and
@@ -756,7 +746,6 @@ class Builder:
                 if afile.permission:
                     # mode is octal!
                     os.chmod(dest, int(afile.permission, 8))
-
             os.chdir(c)
            
             ctx.ui.action(_("** Building package %s") % package.name);
@@ -764,8 +753,16 @@ class Builder:
             ctx.ui.info(_("Generating %s,") % ctx.const.files_xml)
             self.gen_files_xml(package)
 
+
+            # build number
+            if ctx.config.options.ignore_build_no or not ctx.config.values.build.buildno:
+                build_no = old_build_no = None
+                ctx.ui.warning(_('Build number is not available. For repo builds you must enable buildno in pisi.conf.'))
+            else:
+                build_no, old_build_no = self.calc_build_no(metadata.package.name)
+
             ctx.ui.info(_("Generating %s,") % ctx.const.metadata_xml)
-            build_number, old_build_number = self.gen_metadata_xml(package)
+            self.gen_metadata_xml(package, build_no)
 
             # Calculate new and oldpackage names for buildfarm
             name =  util.package_name(package.name,
@@ -773,11 +770,11 @@ class Builder:
                                      self.spec.source.release,
                                      self.metadata.package.build)
 
-            if old_build_number:
+            if old_build_no:
                 old_package_name = util.package_name(package.name,
                                      self.spec.source.version,
                                      self.spec.source.release,
-                                     old_build_number)
+                                     old_build_no)
 
             new_package_names.append(name)
             old_package_names.append(old_package_name)
