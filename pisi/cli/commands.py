@@ -228,7 +228,7 @@ If run without parameters, it prints the general help."""
 
 
 class Clean(Command):
-    """Clean stale locks.
+    """Clean stale locks
 
 Usage: clean
 
@@ -251,7 +251,7 @@ This command deletes unused locks from the database directory."""
 class DeleteCache(Command):
     """Delete cache files
     
-Usage:
+Usage: delete-cache
 
 Sources, packages and temporary files are stored
 under /var directory. Since these accumulate they can 
@@ -270,7 +270,7 @@ consume a lot of disk space."""
 
 
 class Graph(Command):
-    """Graph package relations.
+    """Graph package relations
 
 Usage: graph [<package1> <package2> ...]
 
@@ -617,13 +617,13 @@ expanded to package names.
 
 
 class ConfigurePending(PackageOp):
-    """configure pending packages
+    """Configure pending packages
 
 If COMAR configuration of some packages were not
 done at installation time, they are added to a list
 of packages waiting to be configured. This command
 configures those packages.    
-    """
+"""
     
     __metaclass__ = autocommand
 
@@ -645,7 +645,6 @@ class Info(Command):
 Usage: info <package1> <package2> ... <packagen>
 
 <packagei> is either a package name or a .pisi file, 
-
 """
     __metaclass__ = autocommand
 
@@ -895,6 +894,7 @@ class UpdateRepo(Command):
 Usage: update-repo [<repo1> <repo2> ... <repon>]
 
 <repoi>: repository name
+
 Synchronizes the PISI databases with the current repository.
 If no repository is given, all repositories are updated.
 """
@@ -1147,7 +1147,6 @@ class ListUpgrades(Command):
 Usage: list-upgrades
 
 Lists the packages that will be upgraded.
-
 """
     __metaclass__ = autocommand
 
@@ -1188,7 +1187,8 @@ Lists the packages that will be upgraded.
 class ListPending(Command):
     """List pending packages
     
-Lists packages waiting to be configured."""
+Lists packages waiting to be configured.
+"""
 
     __metaclass__ = autocommand
 
