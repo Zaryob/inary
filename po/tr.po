@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "POT-Creation-Date: 2006-06-06 12:44+EEST\n"
-"PO-Revision-Date: 2006-06-06 13:58+0300\n"
+"PO-Revision-Date: 2006-06-06 14:27+0300\n"
 "Last-Translator: Eray Ozkural <eray@pardus.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1594,17 +1594,15 @@ msgstr "Dosya adı hatası"
 
 #: pisi/fetcher.py:84
 msgid "Access denied to write to destination directory: \"%s\""
-msgstr "\"%s\" hedef dizine yazmaya izin verilmedi."
+msgstr "\"%s\" hedef dizinine yazmaya izin verilmedi."
 
 #: pisi/fetcher.py:89
 msgid "Access denied to destination file: \"%s\""
-msgstr "\"%s\" hedef dizinine erişmeye izin verilmedi."
+msgstr "\"%s\" hedef dosyasına erişim engellendi."
 
 #: pisi/fetcher.py:100
 msgid "A problem occured. Please check the archive address and/or permissions again."
-msgstr ""
-"Bir hata oluştu. Lütfen arşiv adresini ve/veya kullanıcı izinlerini yeniden "
-"kontrol edin."
+msgstr "Bir hata oluştu. Lütfen arşiv adresini ve/veya kullanıcı izinlerini yeniden kontrol edin."
 
 #: pisi/fetcher.py:158
 msgid "No such file or no permission to read"
@@ -1628,7 +1626,7 @@ msgstr "%s indirilemiyor; (%s): %s"
 
 #: pisi/fetcher.py:242
 msgid "Proxy configuration has been found for '%s' protocol"
-msgstr "'%s' protokolü için proxy yapılandırması bulundu"
+msgstr "'%s' protokolü için vekil (proxy) yapılandırması bulundu"
 
 #: pisi/fetcher.py:326 pisi/fetcher.py:347 pisi/fetcher.py:360
 msgid "ftp error"
@@ -1648,7 +1646,7 @@ msgstr "%s'i indiriyor"
 
 #: pisi/file.py:123
 msgid "Copying %s to transfer dir"
-msgstr ""
+msgstr "%s aktarım dizinine kopyalanıyor"
 
 #: pisi/file.py:128
 msgid "File '%s' not found."
@@ -1680,11 +1678,11 @@ msgstr "Çember ile karşılaşıldı: %s"
 
 #: pisi/index.py:94
 msgid "Adding %s to package index"
-msgstr "%s paket indexine ekleniyor"
+msgstr "%s paket indeksine ekleniyor"
 
 #: pisi/index.py:97
 msgid "Adding %s to component index"
-msgstr "%s bileşen dizinine ekleniyor"
+msgstr "%s bileşen indeksine ekleniyor"
 
 #: pisi/index.py:135
 msgid "Package %s: metadata corrupt, skipping..."
@@ -1692,7 +1690,7 @@ msgstr "Paket %s: metadata bozuk, atlanıyor..."
 
 #: pisi/index.py:159
 msgid "Adding %s to source index"
-msgstr "%s kaynak dizinine ekleniyor"
+msgstr "%s kaynak indeksine ekleniyor"
 
 #: pisi/index.py:164
 msgid "SpecFile in %s is corrupt, skipping..."
@@ -1700,11 +1698,11 @@ msgstr "SpecFile %s bozuk, atlanıyor..."
 
 #: pisi/installdb.py:59
 msgid "installed"
-msgstr "yerleşik"
+msgstr "kurulu"
 
 #: pisi/installdb.py:59
 msgid "installed-pending"
-msgstr "yerleşik-beklemede"
+msgstr "kurulu-beklemede"
 
 #: pisi/installdb.py:60
 msgid "purged"
@@ -1736,20 +1734,20 @@ msgstr "Geçersiz depo adı"
 
 #: pisi/itembyrepodb.py:143
 msgid "Key %s not found"
-msgstr "'%s' anahtarı bulunamadı."
+msgstr "%s anahtarı bulunamadı"
 
 #: pisi/itembyrepodb.py:153
 msgid "Key %s in repo %s not found"
-msgstr "'%s' anahtarı '%s' deposunda bulunamadı."
+msgstr "%s anahtarı %s deposunda bulunamadı"
 
 #: pisi/lockeddbshelve.py:50
 msgid "Database version for %s insufficient. Please run rebuild-db command."
-msgstr "Veritabanı versiyonu (%s) yetersiz. Lütfen rebuild-db komutunu çalıştırınız."
+msgstr "Veritabanı versiyonu %s yetersiz. Lütfen rebuild-db komutunu çalıştırınız."
 
 #: pisi/lockeddbshelve.py:54
 msgid "Database version for %s greater than PiSi version. You need a newer PiSi."
 msgstr ""
-"Veritabanı versiyonu (%s) PİSİ versiyonundan büyük. Yeni bir PİSİ'ye "
+"Veritabanı versiyonu %s PİSİ versiyonundan büyük. Yeni bir PİSİ'ye "
 "gereksiniminiz var."
 
 #: pisi/lockeddbshelve.py:61
@@ -1758,11 +1756,11 @@ msgstr "Şu andaki veritabanı versiyonu %s yazılıyor"
 
 #: pisi/lockeddbshelve.py:66
 msgid "Cannot attain write access to database environment"
-msgstr "Veritabanına yazılamıyor"
+msgstr "Veritabanı ortamına yazma erişimi sağlanamadı"
 
 #: pisi/lockeddbshelve.py:68
 msgid "Database version %s not present."
-msgstr "Veritabanı versiyon %s bulunamadı."
+msgstr "Veritabanı versiyonu %s bulunamadı."
 
 #: pisi/lockeddbshelve.py:75 pisi/lockeddbshelve.py:164
 msgid ""
@@ -1774,15 +1772,15 @@ msgstr ""
 
 #: pisi/lockeddbshelve.py:85
 msgid "Cannot attain read access to database environment"
-msgstr "Veritabanı ortamına okuma izni alınamadı"
+msgstr "Veritabanı ortamına okuma erişimi sağlanamadı"
 
 #: pisi/lockeddbshelve.py:99
 msgid "Cannot write to PISI database."
-msgstr "PİSİ veritabanına yazılamıyor"
+msgstr "PİSİ veritabanına yazılamıyor."
 
 #: pisi/lockeddbshelve.py:122
 msgid "Cannot attain read or write access to database %s"
-msgstr "Veritabanı %s için okuma ya da yazma izni alınamadı"
+msgstr "Veritabanı %s için okuma ya da yazma erişimi sağlanamadı"
 
 #: pisi/lockeddbshelve.py:150
 msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
@@ -1801,7 +1799,7 @@ msgstr "Mimari: %s, Yerleşik Boyut: %s"
 #: pisi/operations.py:48
 msgid "Upgrading PISI requires database rebuild and restart"
 msgstr ""
-"PİSİ'yi yükseltmek veritabanının yeniden inşa edilmesini ve uygulamayı "
+"PİSİ'yi yükseltmek veritabanını yeniden inşa etmeyi ve uygulamayı "
 "yeniden başlatmayı gerektirir"
 
 #: pisi/operations.py:51
@@ -1810,13 +1808,13 @@ msgstr "PİSİ paketi yükseltilmiştir. PİSİ veritabanı yeniden inşa ediliy
 
 #: pisi/operations.py:82
 msgid "Mixing file names and package names not supported yet."
-msgstr "Dosya ve paket adlarını karıştırma henüz desteklenmiyor."
+msgstr "Dosya ve paket adlarını karıştırmak henüz desteklenmiyor."
 
 #: pisi/operations.py:124
 msgid ""
 "The following packages will be installed\n"
 "in the respective order to satisfy extra dependencies:\n"
-msgstr "Ek bağımlılıkları sağlamak için aşağıdaki paketler kurulacaktır:\n"
+msgstr "Ek bağımlılıkları sağlamak için bu paketler verilen sırada kurulacaktır:\n"
 
 #: pisi/operations.py:127 pisi/operations.py:568
 msgid "Do you want to continue?"
@@ -1824,16 +1822,16 @@ msgstr "Devam etmek istiyor musunuz?"
 
 #: pisi/operations.py:128
 msgid "External dependencies not satisfied"
-msgstr "Dış bağımlılıklar sağlanmadı."
+msgstr "Dış bağımlılıklar sağlanamadı"
 
 # pisi/api.py:168 :215
 #: pisi/operations.py:140 pisi/operations.py:297
 msgid "No packages to install."
-msgstr "Yerleştirilecek paket yok."
+msgstr "Kurulacak paket yok."
 
 #: pisi/operations.py:168
 msgid "Installation order: "
-msgstr "Yerleştirme sırası: "
+msgstr "Kurulum sırası: "
 
 #: pisi/operations.py:216
 msgid "Selected packages [%s] are in conflict with each other."
@@ -1857,15 +1855,11 @@ msgstr "Çakışmalar var"
 
 #: pisi/operations.py:262
 msgid "Safety switch: Following packages in system.base will be installed: "
-msgstr ""
-"Emniyet mandalı: taban geliştirme sistemi system.devel'den bu paketler "
-"kurulacak:"
+msgstr "Emniyet mandalı: taban sistem system.base'den bu paketler kurulacak:"
 
 #: pisi/operations.py:268
 msgid "Safety switch: Following packages in system.base will be upgraded: "
-msgstr ""
-"Emniyet mandalı: taban geliştirme sistemi system.devel'den izleyen paketler "
-"yükseltilecek:"
+msgstr "Emniyet mandalı: taban sistem system.base'den bu paketler yükseltilecek:"
 
 #: pisi/operations.py:274 pisi/operations.py:544
 msgid "Safety switch: the component system.base cannot be found"
@@ -1873,7 +1867,7 @@ msgstr "Emniyet mandalı: taban sistem bileşeni system.base bulunamadı"
 
 #: pisi/operations.py:292
 msgid "Not re-installing the following packages: "
-msgstr "İzleyen paketleri yeniden yerleştirmiyorum:"
+msgstr "İzleyen paketleri yeniden kurmuyorum: "
 
 #: pisi/operations.py:308
 msgid ""
@@ -1895,11 +1889,11 @@ msgstr "Uyarı: paket *adı* '.pisi' ile bitiyor."
 
 #: pisi/operations.py:386
 msgid "Package %s is not installed."
-msgstr "Paket %s yerleştirilmemiş."
+msgstr "Paket %s kurulmamış."
 
 #: pisi/operations.py:392
 msgid "Package %s is not available in repositories."
-msgstr "Paket %s depolarda mevcut değil"
+msgstr "Paket %s depolarda mevcut değil."
 
 #: pisi/operations.py:404
 msgid "Package %s is already at the latest release %s."
@@ -1923,9 +1917,7 @@ msgstr "Ters bağımlılık %s, %s paketi için sağlanamadı"
 
 #: pisi/operations.py:540
 msgid "Safety switch: cannot remove the following packages in system.base: "
-msgstr ""
-"Emniyet mandalı: taban sistem system.base deki izleyen sistem bütünlüğü "
-"açısından önemli paketler kaldırılamıyor: "
+msgstr "Emniyet mandalı: taban sistem system.base deki bu paketler kaldırılamıyor: "
 
 #: pisi/operations.py:551
 msgid "Package %s does not exist. Cannot remove."
@@ -1939,7 +1931,7 @@ msgstr "Kaldıracak paket yok."
 msgid ""
 "The following minimal list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
-msgstr "Bağımlılıkları sağlamak için aşağıdaki paketler kaldırılacaktır:\n"
+msgstr "Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:\n"
 
 #: pisi/operations.py:569
 msgid "Package removal declined"
@@ -1957,17 +1949,13 @@ msgstr "Derlenip, kurulacak paket yok."
 msgid ""
 "The following minimal list of packages will be installed \n"
 "from repository in the respective order to satisfy dependencies:\n"
-msgstr ""
-"Bağımlılıkları sağlamak için bu minimal paket listesi verilen sırada\n"
-"yerleştirilecek:\n"
+msgstr "Bağımlılıkları sağlamak için bu paketler verilen sırada kurulacak:\n"
 
 #: pisi/operations.py:718
 msgid ""
 "The following minimal list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
-msgstr ""
-"Bağımlılıkları sağlamak için aşağıdaki paketler verilen sırada\n"
-"derlenip, yerleştirilecek:\n"
+msgstr "Bağımlılıkları sağlamak için aşağıdaki paketler verilen sırada derlenip, kurulacak:\n"
 
 #: pisi/operations.py:756
 msgid "Cannot find source package: %s"
@@ -1975,7 +1963,7 @@ msgstr "Kaynak paket bulunamadı: %s"
 
 #: pisi/package.py:75
 msgid "Trying to fetch xdelta: %s"
-msgstr "xdelta bilgisi alınıyor: %s"
+msgstr "xdelta bilgisi indirmeye çalışılıyor: %s"
 
 #: pisi/package.py:79
 msgid "XDelta %s: not exists"
@@ -1991,7 +1979,7 @@ msgstr "MetaData biçimi yanlış"
 
 #: pisi/packagedb.py:68
 msgid "Package %s not found"
-msgstr "Paket %s bulunamadı."
+msgstr "Paket %s bulunamadı"
 
 #: pisi/pxml/autoxml.py:83
 msgid "At least one '%s' tag should have local text"
@@ -1999,25 +1987,21 @@ msgstr "En azından bir tane '%s' etiketi yerel metne sahip olmalı"
 
 #: pisi/pxml/autoxml.py:90
 msgid "'%s' language of tag '%s' is empty"
-msgstr "'%s' dili metni, etiket %s içerisinde, boş"
+msgstr "'%s' dili metni, etiket %s içerisinde boş"
 
 #: pisi/pxml/autoxml.py:116
 msgid "LocalText: unable to get either current or default locale"
-msgstr ""
-"LocalText: şu andaki ya da ön tanımlı yerelleştirme seçenekleri (locale) "
-"bulunamıyor"
+msgstr "LocalText: şu andaki ya da ön tanımlı yerelleştirme seçenekleri (locale) bulunamıyor"
 
 #: pisi/pxml/autoxml.py:122 pisi/pxml/autoxml.py:137
 msgid ""
 "Tag should have at least the current locale, or failing that an English or "
 "Turkish version"
-msgstr ""
-"Etiket en azından şu andaki yerel (locale) için bir girdiye, o olmazsa bir "
-"Türkçe ya da İngilizce versiyona sahip olmalı"
+msgstr "Etiket en azından şu andaki yerelleştirme seçenekleri (locale) için bir girdiye, o olmazsa bir Türkçe ya da İngilizce versiyona sahip olmalı"
 
 #: pisi/pxml/autoxml.py:381
 msgid "autoxml.check: '%s' errors"
-msgstr "autoxml.check: %s hata"
+msgstr "autoxml.check: '%s' hatalar"
 
 #: pisi/pxml/autoxml.py:433 pisi/pxml/autoxml.py:443
 msgid "autoxml.read: File '%s' has errors"
@@ -2033,7 +2017,7 @@ msgstr "autoxml.write: Dosya biçimlendirmesi '%s' hatalara sahip"
 
 #: pisi/pxml/autoxml.py:509
 msgid "gen_tag: unrecognized tag type %s in spec"
-msgstr "gen_tag: tanınmayan tag tipi %s"
+msgstr "gen_tag: tanınmayan im tipi %s"
 
 #: pisi/pxml/autoxml.py:557 pisi/pxml/autoxml.py:568
 msgid "Mandatory variable %s not available"
@@ -2041,11 +2025,11 @@ msgstr "Gerekli değişken %s bulunamadı"
 
 #: pisi/pxml/autoxml.py:636
 msgid "Type mismatch: read text cannot be decoded"
-msgstr "Tip uyumsuzluğu: okunan metin deşifre edilemedi"
+msgstr "Tip uyumsuzluğu: okunan metin çözülemedi"
 
 #: pisi/pxml/autoxml.py:640 pisi/pxml/autoxml.py:649
 msgid "Mandatory token %s not available"
-msgstr "Gerekli im %s bulunamadı."
+msgstr "Gerekli im %s bulunamadı"
 
 #: pisi/pxml/autoxml.py:654
 msgid "Type mismatch. Expected %s, got %s"
@@ -2054,7 +2038,7 @@ msgstr "Tip uyumsuzluğu. %s beklerken, %s bulundu"
 # pisi/xmlfile.py:420 :521
 #: pisi/pxml/autoxml.py:684 pisi/pxml/autoxml.py:805
 msgid "Type mismatch: DOM cannot be decoded"
-msgstr "Tip uyumsuzluğu: DOM deşifre edilemiyor"
+msgstr "Tip uyumsuzluğu: DOM okunamıyor"
 
 # pisi/xmlfile.py:392 :423 :439 :446 :524 :538 :545
 #: pisi/pxml/autoxml.py:687 pisi/pxml/autoxml.py:703 pisi/pxml/autoxml.py:713
@@ -2069,7 +2053,7 @@ msgstr "Nesne kodlanamadı"
 
 #: pisi/pxml/autoxml.py:725
 msgid "List type must contain only one element"
-msgstr "'List' tipi sadece bir eleman içermeli"
+msgstr "List tipi sadece bir eleman içermeli"
 
 # pisi/xmlfile.py:470 :485
 #: pisi/pxml/autoxml.py:738 pisi/pxml/autoxml.py:759
@@ -2083,7 +2067,7 @@ msgstr "'%s' dosyasının XML sözdizimi geçersiz: %s"
 #: pisi/pxml/xmlextcdom.py:113 pisi/pxml/xmlextmdom.py:92
 #: pisi/pxml/xmlextpiks.py:83
 msgid "getNodeText: Expected text node, got something else!"
-msgstr "getNodeText: metin beklenirken başka bir veri alındı"
+msgstr "getNodeText: metin beklenirken başka birşey alındı!"
 
 #: pisi/pxml/xmlextmdom.py:53 pisi/pxml/xmlfilemdom.py:69
 msgid "File '%s' has invalid XML: %s\n"
@@ -2095,7 +2079,7 @@ msgstr "Dosya '%s' bulunamadı"
 
 #: pisi/pxml/xmlfilecdom.py:89 pisi/pxml/xmlfilemdom.py:80
 msgid "Root tagname %s not identical to %s as expected"
-msgstr "Kök tag adı %s beklendiği gibi %s ile aynı değil."
+msgstr "Kök im adı %s beklendiği gibi %s ile aynı değil"
 
 #: pisi/pxml/xmlfilepiks.py:70
 msgid "File '%s' has invalid XML"
@@ -2111,7 +2095,7 @@ msgstr "unpack: check_file_hash başarısızlığa uğradı"
 
 #: pisi/sourcedb.py:60 pisi/sourcedb.py:66
 msgid "Source package %s not found"
-msgstr "Kaynak paket %s bulunamadı."
+msgstr "Kaynak paketi %s bulunamadı."
 
 #: pisi/specfile.py:143
 msgid "URI: %s, type: %s, sha1sum: %s"
@@ -2163,7 +2147,7 @@ msgstr "'%s' harici bağı ekleniyor"
 
 #: pisi/util.py:375
 msgid "Including directory '%s'"
-msgstr "%s dizini içeriliyor"
+msgstr "'%s' dizini içeriliyor"
 
 #: pisi/util.py:449
 msgid "I/O Error: Cannot calculate SHA1 hash of %s"
@@ -2175,27 +2159,27 @@ msgstr "Verinin SHA1 kontrol toplamı hesaplanamıyor"
 
 #: pisi/util.py:496
 msgid "ERROR: patch (%s) failed"
-msgstr "Yama (%s) başarısız."
+msgstr "HATA: Yama (%s) başarısız"
 
 #: pisi/util.py:498
 msgid "ERROR: patch (%s) failed: %s"
-msgstr "Yama (%s) başarısız: %s"
+msgstr "HATA: Yama (%s) başarısız: %s"
 
 #: pisi/util.py:543
 msgid "strip command failed for file '%s'!"
-msgstr "strip komutu %s dosyası için çalışmadı!"
+msgstr "strip komutu '%s' dosyası için çalışmadı!"
 
 #: pisi/util.py:550
 msgid "objcopy (keep-debug) command failed for file '%s'!"
-msgstr "objcopy (keep-debug) komutu %s dosyası için çalışmadı!"
+msgstr "objcopy (keep-debug) komutu '%s' dosyası için çalışmadı!"
 
 #: pisi/util.py:556
 msgid "objcopy (add-debuglink) command failed for file '%s'!"
-msgstr "objcopy (add-debuglink) komutu %s dosyası için çalışmadı!"
+msgstr "objcopy (add-debuglink) komutu '%s' dosyası için çalışmadı!"
 
 #: pisi/util.py:589
 msgid "Removing lock %s"
-msgstr "'%s' kilidi kaldırılıyor"
+msgstr "%s kilidi kaldırılıyor"
 
 #: pisi/util.py:622
 msgid "Updating environment..."
@@ -2235,7 +2219,7 @@ msgstr "Kaynak paketi '%s' yanlış tarih biçimlendirmesine sahip: '%s'"
 
 #: scripts/repostats.py:428
 msgid "Source package '%s' has wrong release numbers"
-msgstr "'%s' kaynak paketi hatalı sürüm bilgisine sahip"
+msgstr "Kaynak paketi '%s' hatalı sürüme sahip"
 
 #: scripts/repostats.py:432
 msgid "Source package '%s' lacks release %d"
