@@ -759,7 +759,7 @@ class Builder:
                 build_no = old_build_no = None
                 ctx.ui.warning(_('Build number is not available. For repo builds you must enable buildno in pisi.conf.'))
             else:
-                build_no, old_build_no = self.calc_build_no(metadata.package.name)
+                build_no, old_build_no = self.calc_build_no(package.name)
 
             ctx.ui.info(_("Generating %s,") % ctx.const.metadata_xml)
             self.gen_metadata_xml(package, build_no)
