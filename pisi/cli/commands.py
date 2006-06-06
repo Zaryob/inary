@@ -116,7 +116,6 @@ class Command(object):
                 os.makedirs(dir)
             self.options.destdir = os.path.realpath(dir)
 
-
     def check_auth_info(self):
         username = self.options.username
         password = self.options.password
@@ -195,7 +194,7 @@ class autocommand(type):
             
 
 class Help(Command):
-    """Prints help for given commands.
+    """Prints help for given commands
 
 Usage: help [ <command1> <command2> ... <commandn> ]
 
@@ -229,7 +228,12 @@ If run without parameters, it prints the general help."""
 
 
 class Clean(Command):
-    """Clean stale locks."""
+    """Clean stale locks.
+
+Usage: clean
+
+PISI uses filesystem locks for managing database access.
+This command deletes unused locks from the database directory."""
 
     __metaclass__ = autocommand
 
@@ -245,7 +249,13 @@ class Clean(Command):
 
 
 class DeleteCache(Command):
-    """Delete cache files"""
+    """Delete cache files
+    
+Usage:
+
+Sources, packages and temporary files are stored
+under /var directory. Since these accumulate they can 
+consume a lot of disk space."""
 
     __metaclass__ = autocommand
 
@@ -261,6 +271,7 @@ class DeleteCache(Command):
 
 class Graph(Command):
     """Graph package relations.
+
 Usage: graph [<package1> <package2> ...]
 
 Write a graph of package relations, tracking dependency and
@@ -336,7 +347,7 @@ def ignoredep_opt(self):
 
 
 class Build(Command):
-    """Build a PISI package using a pspec.xml file
+    """Build PISI packages
 
 Usage: build [<pspec.xml> | <sourcename>] ...
 
@@ -348,7 +359,7 @@ to be downloaded from a repository containing sources.
 
 If you would like to run the build process partially, 
 provide the --until <state> option where <state> is one of 
-unpack, setup, build, install, package
+unpack, setup, build, install, package.
 """
     __metaclass__ = autocommand
 
@@ -419,13 +430,12 @@ unpack, setup, build, install, package
 
         
 class Emerge(Build):
-    """Build and install a PISI source package from repository
+    """Build and install PISI source packages from repository
 
 Usage: emerge <sourcename> ...
 
 You should give the name of a source package to be 
 downloaded from a repository containing sources.
-
 """
     __metaclass__ = autocommand
 
@@ -488,7 +498,7 @@ class Install(PackageOp):
 
 Usage: install <package1> <package2> ... <packagen>
 
-You may use filenames, URIs or package names for packages. If you have
+You may use filenames, URI's or package names for packages. If you have
 specified a package name, it should exist in a specified repository.
 
 You can also specify components instead of package names, which will be
@@ -608,6 +618,11 @@ expanded to package names.
 
 class ConfigurePending(PackageOp):
     """configure pending packages
+
+If COMAR configuration of some packages were not
+done at installation time, they are added to a list
+of packages waiting to be configured. This command
+configures those packages.    
     """
     
     __metaclass__ = autocommand
@@ -719,6 +734,12 @@ class Check(Command):
     """Verify installation
 
 Usage: check <package1> <package2> ... <packagen>
+
+<packagei>: package name
+
+A cryptographic checksum is stored for each installed
+file. Check command uses the checksums to verify a package.
+Just give the names of packages.
 """
     __metaclass__ = autocommand
 
@@ -744,12 +765,15 @@ Usage: check <package1> <package2> ... <packagen>
 class Index(Command):
     """Index PISI files in a given directory
 
-Usage: index <directory>
+Usage: index <directory> ...
 
-This command searches for all PiSi files in a directory, collects PiSi
+This command searches for all PISI files in a directory, collects PISI
 tags from them and accumulates the information in an output XML file,
 named by default 'pisi-index.xml'. In particular, it indexes both
 source and binary packages.
+
+If you give multiple directories, the command still works, but puts
+everything in a single index file.
 """
     __metaclass__ = autocommand
 
@@ -797,7 +821,6 @@ class ListInstalled(Command):
     """Print the list of all installed packages  
 
 Usage: list-installed
-
 """
 
     __metaclass__ = autocommand
@@ -837,9 +860,10 @@ class RebuildDb(Command):
 
 Usage: rebuilddb [ <package1> <package2> ... <packagen> ]
 
-Rebuilds the PiSi databases
+Rebuilds the PISI databases
 
-If package specs are given, they should be the names of package dirs under /var/lib/pisi
+If package specs are given, they should be the names of package 
+dirs under /var/lib/pisi
 """
     __metaclass__ = autocommand
 
@@ -871,7 +895,7 @@ class UpdateRepo(Command):
 Usage: update-repo [<repo1> <repo2> ... <repon>]
 
 <repoi>: repository name
-Synchronizes the PiSi databases with the current repository.
+Synchronizes the PISI databases with the current repository.
 If no repository is given, all repositories are updated.
 """
     __metaclass__ = autocommand
@@ -991,7 +1015,9 @@ class ListAvailable(Command):
 
 Usage: list-available [ <repo1> <repo2> ... repon ]
 
-Gives a brief list of PiSi packages published in the repository.
+Gives a brief list of PISI packages published in the specified
+repositories. If no repository is specified, we list packages in
+all repositories. 
 """
     __metaclass__ = autocommand
 
@@ -1045,7 +1071,8 @@ class ListComponents(Command):
 
 Usage: list-components
 
-Gives a brief list of PiSi components published in the repositories.
+Gives a brief list of PISI components published in the 
+repositories.
 """
     __metaclass__ = autocommand
 
@@ -1117,7 +1144,9 @@ Gives a brief list of sources published in the repositories.
 class ListUpgrades(Command):
     """List packages to be upgraded
 
-Usage: list-upgrades [ <repo1> <repo2> ... repon ]
+Usage: list-upgrades
+
+Lists the packages that will be upgraded.
 
 """
     __metaclass__ = autocommand
@@ -1157,7 +1186,9 @@ Usage: list-upgrades [ <repo1> <repo2> ... repon ]
 
 
 class ListPending(Command):
-    """List pending packages"""
+    """List pending packages
+    
+Lists packages waiting to be configured."""
 
     __metaclass__ = autocommand
 
