@@ -480,7 +480,8 @@ def rebuild_db(files=False):
     ui = ctx.ui
     comar = ctx.comar
     finalize()
-    # construct new database version
+
+    # construct new database
     init(database=True, options=options, ui=ui, comar=comar)
     clean_duplicates()
     reload_packages(files, None)
