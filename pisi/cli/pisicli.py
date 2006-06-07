@@ -100,7 +100,7 @@ class PisiCLI(object):
         except ParserError:
             raise Error(_('Command line parsing error'))
 
-        self.command = Command.get_command(cmd_name, args)
+        self.command = Command.get_command(cmd_name, args=args)
         if not self.command:
             raise Error(_("Unrecognized command: %s") % cmd_name)
 

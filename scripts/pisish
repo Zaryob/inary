@@ -58,9 +58,9 @@ Copyright 2006 (c) Pardus
             signal.signal(signal.SIGINT, signal.SIG_IGN)   # disable further interrupts
             ui = pisi.cli.CLI() # make a temporary UI
             show_traceback = False
+            pisi.api.finalize()
             if isinstance(value, exceptions.KeyboardInterrupt):
                 ui.error(_("Keyboard Interrupt: Exiting..."))
-                pisi.api.finalize()
                 sys.exit(1)
             elif isinstance(value, pisi.Error):
                 ui.error(_("Program Terminated."))
