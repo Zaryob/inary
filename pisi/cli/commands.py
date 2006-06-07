@@ -24,6 +24,7 @@ from pisi.uri import URI
 import pisi.util as util
 import pisi.api as api
 import pisi.packagedb as packagedb
+from colors import colorize
 
 class Error(pisi.Error):
     pass
@@ -1036,6 +1037,9 @@ all repositories.
 
         self.init(database = True, write = False)
 
+        if not (ctx.get_option('no_color') or ctx.config.get_option('uninstalled')):
+            ctx.ui.info(colorize(_('Installed packages are shown in this color'), 'green'))
+        
         if self.args:
             for arg in self.args:
                 self.print_packages(arg)
@@ -1048,7 +1052,6 @@ all repositories.
 
     def print_packages(self, repo):
         from pisi import packagedb
-        from colors import colorize
 
         list = ctx.packagedb.list_packages(repo)
         installed_list = ctx.installdb.list_installed()
