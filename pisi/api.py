@@ -438,8 +438,6 @@ def rebuild_db(files=False):
             pisi.util.clean_dir(pisi.util.join_path(pisi.api.ctx.config.lib_dir(), 'package', pkg))
 
     def destroy(files):
-        #from pisi.lockeddbshelve import LockedDBShelf
-        pisi.lockeddbshelve.init_dbenv(write=True, writeversion=True)
         #TODO: either don't delete version files here, or remove force flag...
         import bsddb3.db
         for db in os.listdir(ctx.config.db_dir()):
@@ -450,11 +448,8 @@ def rebuild_db(files=False):
                     clean = True
                 if clean:
                     fn = pisi.util.join_path(ctx.config.db_dir(), db)
-                    #FIXME: there is a bug with bsddb3
-                    #ctx.dbenv.dbremove(fn, "", None, bsddb3.db.DB_AUTO_COMMIT)
+                    #NB: there is a parameter bug with python-bsddb3, fixed in pardus
                     ctx.dbenv.dbremove(file=fn, flags=bsddb3.db.DB_AUTO_COMMIT)
-                    #os.unlink(fn)
-        ctx.dbenv.close()
 
     def reload_packages(files, txn):
         for package_fn in os.listdir( pisi.util.join_path( ctx.config.lib_dir(),
@@ -477,9 +472,8 @@ def rebuild_db(files=False):
         pisi.lockeddbshelve.check_dbversion('filesdbversion', pisi.__filesdbversion__, write=False)
     except:
         files = True # exception means the files db version was wrong
+    pisi.lockeddbshelve.init_dbenv(write=True, writeversion=True)
     destroy(files) # bye bye
-    pisi.lockeddbshelve.check_dbversion('dbversion', pisi.__dbversion__, write=True, update=True)
-    pisi.lockeddbshelve.check_dbversion('filesdbversion', pisi.__filesdbversion__, write=True, update=True)
 
     # save parameters and shutdown pisi
     options = ctx.config.options
