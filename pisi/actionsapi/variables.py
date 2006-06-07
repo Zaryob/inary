@@ -11,8 +11,7 @@
 # Please read the COPYING file.
 
 # Standard Python Modules
-from os import getenv
-from os import environ
+import os
 from copy import deepcopy
 
 # Pisi-Core Modules
@@ -24,19 +23,18 @@ def exportFlags():
     '''General flags used in actions API.'''
 
     # first reset environ
-    environ = {}
-    environ = deepcopy(ctx.config.environ)
+    os.environ = {}
+    os.environ = deepcopy(ctx.config.environ)
 
     # Build systems depend on these environment variables. That is why
     # we export them instead of using as (instance) variables.
     values = ctx.config.values
-    environ['HOST'] =  values.build.host
-    environ['CFLAGS'] = values.build.cflags
-    environ['CXXFLAGS'] = values.build.cxxflags
-    environ['LDFLAGS'] = values.build.ldflags
-    environ['USER_LDFLAGS'] = values.build.ldflags
-    environ['JOBS'] = values.build.jobs
-    
+    os.environ['HOST'] =  values.build.host
+    os.environ['CFLAGS'] = values.build.cflags
+    os.environ['CXXFLAGS'] = values.build.cxxflags
+    os.environ['LDFLAGS'] = values.build.ldflags
+    os.environ['USER_LDFLAGS'] = values.build.ldflags
+    os.environ['JOBS'] = values.build.jobs
 
 class Env(object):
     '''General environment variables used in actions API'''
@@ -63,7 +61,7 @@ class Env(object):
         # Using environment variables is somewhat tricky. Each time
         # you need them you need to check for their value.
         if self.__vars.has_key(attr):
-            return getenv(self.__vars[attr])
+            return os.getenv(self.__vars[attr])
         else:
             return None
 
