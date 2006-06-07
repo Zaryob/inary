@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "POT-Creation-Date: 2006-06-06 16:27+EEST\n"
-"PO-Revision-Date: 2006-06-06 16:43+0300\n"
+"PO-Revision-Date: 2006-06-07 13:12+0300\n"
 "Last-Translator: Eray Ozkural <eray@pardus.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -102,7 +102,7 @@ msgstr "İnşa başarısızlığa uğradı."
 #: pisi/actionsapi/kde.py:80 pisi/actionsapi/pythonmodules.py:55
 #: pisi/actionsapi/scons.py:44
 msgid "Install failed."
-msgstr "Yerleştirme başarısızlığa uğradı."
+msgstr "Kurulum başarısızlığa uğradı."
 
 # pisi/actionsapi/autotools.py:121 :129
 #: pisi/actionsapi/autotools.py:121 pisi/actionsapi/autotools.py:129
@@ -368,7 +368,7 @@ msgstr "%s paketi için bağımlılıklar sağlanmadı"
 
 #: pisi/atomicoperations.py:149
 msgid "Package not installable"
-msgstr "Paket yerleştirilebilir durumda değil"
+msgstr "Paket kurulabilir durumda değil"
 
 #: pisi/atomicoperations.py:162
 msgid "Trying to overwrite an existing file: %s"
@@ -550,7 +550,7 @@ msgstr "fonksiyon eylemlerden çağırılamıyor: %s"
 msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Emniyet mandalı: taban geliştirme sistemi system.devel içindeki bu paketler "
-"ek olarak yüklenecek:"
+"ek olarak kurulacak:"
 
 #: pisi/build.py:432
 msgid "Safety switch: system.devel is already installed"
@@ -1014,7 +1014,7 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
-"PİSİ paketlerini yükle\n"
+"PİSİ paketlerini kur\n"
 "\n"
 "Kullanım: install <package1> <package2> ... <packagen>\n"
 "\n"
@@ -1269,7 +1269,7 @@ msgstr "uzun biçimde göster"
 
 #: pisi/cli/commands.py:836 pisi/cli/commands.py:1162
 msgid "show detailed install info"
-msgstr "detaylı yükleme bilgisi göster"
+msgstr "detaylı kurulum bilgisi göster"
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/commands.py:843 pisi/cli/commands.py:1172
