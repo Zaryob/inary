@@ -67,11 +67,9 @@ class CLI(UI):
     def info(self, msg, verbose = False, noln = False):
         # TODO: need to look at more kinds of info messages
         # let's cheat from KDE :)
-        if noln:
-            msgend = ''
-        else:
-            msgend = '\n'
-        self.output( unicode(msg) + msgend, verbose=verbose)
+        if not noln:
+            msg += '\n'
+        self.output(unicode(msg), verbose=verbose)
 
     def warning(self, msg, verbose = False):
         msg = unicode(msg)

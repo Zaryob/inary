@@ -82,13 +82,12 @@ class PreParser(OptionParser):
 
 class PisiCLI(object):
 
-    def __init__(self, args=None):
+    def __init__(self, orig_args=None):
         # first construct a parser for common options
         # this is really dummy
         self.parser = PreParser(version="%prog " + pisi.__version__)
-
         try:
-            opts, args = self.parser.parse_args(args=args)
+            opts, args = self.parser.parse_args(args=orig_args)
             if len(args)==0: # more explicit than using IndexError
                 if 'version' in opts:
                     self.parser.print_version()
@@ -100,7 +99,7 @@ class PisiCLI(object):
         except ParserError:
             raise Error(_('Command line parsing error'))
 
-        self.command = Command.get_command(cmd_name, args=args)
+        self.command = Command.get_command(cmd_name, args=orig_args)
         if not self.command:
             raise Error(_("Unrecognized command: %s") % cmd_name)
 

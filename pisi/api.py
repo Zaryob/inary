@@ -63,7 +63,7 @@ def init(database = True, write = True,
     if ui is None:
         from pisi.cli import CLI
         if options:
-            ctx.ui = CLI(options.debug)
+            ctx.ui = CLI(options.debug, options.verbose)
         else:
             ctx.ui = CLI()
     else:
@@ -317,12 +317,12 @@ def check(package):
     for file in files.list:
         if file.hash and file.type != "config" \
            and not os.path.islink('/' + file.path):
-            ctx.ui.info(_("Checking %s...") % file.path, False, True) 
+            ctx.ui.info(_("Checking %s...") % file.path, noln=False, verbose=True) 
             if file.hash != util.sha1_file('/' + file.path):
                 corrupt.append(file)
                 ctx.ui.info("Corrupt file: %s" % file)
             else:
-                ctx.ui.info("OK", False)
+                ctx.ui.info("OK", verbose=True)
     return corrupt
 
 def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=False, 
