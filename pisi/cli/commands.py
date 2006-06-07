@@ -54,10 +54,10 @@ class Command(object):
         return s
 
     @staticmethod
-    def get_command(cmd, fail=False):
+    def get_command(cmd, fail=False, args=None):
     
         if Command.cmd_dict.has_key(cmd):
-            return Command.cmd_dict[cmd]()
+            return Command.cmd_dict[cmd](args)
     
         if fail:
             raise Error(_("Unrecognized command: %s") % cmd)
@@ -66,7 +66,7 @@ class Command(object):
 
     # instance variabes
 
-    def __init__(self):
+    def __init__(self, args = None):
         # now for the real parser
         import pisi
         self.comar = False
@@ -74,7 +74,7 @@ class Command(object):
                                    version="%prog " + pisi.__version__)
         self.options()
         self.commonopts()
-        (self.options, self.args) = self.parser.parse_args()
+        (self.options, self.args) = self.parser.parse_args(args)
         if self.args:
             self.args.pop(0)                # exclude command arg
         
@@ -203,11 +203,11 @@ If run without parameters, it prints the general help."""
 
     __metaclass__ = autocommand
 
-    def __init__(self):
+    def __init__(self, args = None):
         #TODO? Discard Help's own usage doc in favor of general usage doc
         #self.__doc__ = usage_text
         #self.__doc__ += commands_string()
-        super(Help, self).__init__()
+        super(Help, self).__init__(args)
 
     name = ("help", "?")
 
@@ -238,8 +238,8 @@ This command deletes unused locks from the database directory."""
 
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(Clean, self).__init__()
+    def __init__(self, args=None):
+        super(Clean, self).__init__(args)
 
     name = ("clean", None)
 
@@ -260,8 +260,8 @@ consume a lot of disk space."""
 
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(DeleteCache, self).__init__()
+    def __init__(self, args=None):
+        super(DeleteCache, self).__init__(args)
 
     name = ("delete-cache", "dc")
 
@@ -283,8 +283,8 @@ the package in graphviz format to 'pgraph.dot'.
 
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(Graph, self).__init__()
+    def __init__(self, args=None):
+        super(Graph, self).__init__(args)
     
     def options(self):
         self.parser.add_option("-r", "--repository", action="store",
@@ -364,8 +364,8 @@ unpack, setup, build, install, package.
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(Build, self).__init__()
+    def __init__(self, args):
+        super(Build, self).__init__(args)
 
     name = ("build", "bi")
 
@@ -440,8 +440,8 @@ downloaded from a repository containing sources.
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(Emerge, self).__init__()
+    def __init__(self, args):
+        super(Emerge, self).__init__(args)
         self.comar = True
 
     name = ("emerge", "em")
@@ -470,8 +470,8 @@ downloaded from a repository containing sources.
 class PackageOp(Command):
     """Abstract package operation command"""
 
-    def __init__(self):
-        super(PackageOp, self).__init__()
+    def __init__(self, args):
+        super(PackageOp, self).__init__(args)
         self.comar = True
 
     def options(self):
@@ -507,8 +507,8 @@ expanded to package names.
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(Install, self).__init__()
+    def __init__(self, args):
+        super(Install, self).__init__(args)
 
     name = "install", "it"
 
@@ -552,8 +552,8 @@ expanded to package names.
 
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(Upgrade, self).__init__()
+    def __init__(self, args):
+        super(Upgrade, self).__init__(args)
 
     name = ("upgrade", "up")
 
@@ -602,8 +602,8 @@ expanded to package names.
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(Remove, self).__init__()
+    def __init__(self, args):
+        super(Remove, self).__init__(args)
 
     name = ("remove", "rm")
 
@@ -628,8 +628,8 @@ configures those packages.
     
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(ConfigurePending, self).__init__()
+    def __init__(self, args):
+        super(ConfigurePending, self).__init__(args)
 
     name = ("configure-pending", "cp")
 
@@ -649,8 +649,8 @@ Usage: info <package1> <package2> ... <packagen>
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(Info, self).__init__()
+    def __init__(self, args):
+        super(Info, self).__init__(args)
 
     name = ("info", None)
 
@@ -743,8 +743,8 @@ Just give the names of packages.
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(Check, self).__init__()
+    def __init__(self, args):
+        super(Check, self).__init__(args)
 
     name = ("check", None)
 
@@ -777,8 +777,8 @@ everything in a single index file.
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(Index, self).__init__()
+    def __init__(self, args):
+        super(Index, self).__init__(args)
 
     name = ("index", "ix")
 
@@ -825,8 +825,8 @@ Usage: list-installed
 
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(ListInstalled, self).__init__()
+    def __init__(self, args):
+        super(ListInstalled, self).__init__(args)
 
     name = ("list-installed", "li")
 
@@ -867,8 +867,8 @@ dirs under /var/lib/pisi
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(RebuildDb, self).__init__()
+    def __init__(self, args):
+        super(RebuildDb, self).__init__(args)
 
     name = ("rebuild-db", "rdb")
 
@@ -901,8 +901,8 @@ If no repository is given, all repositories are updated.
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(UpdateRepo, self).__init__()
+    def __init__(self,args):
+        super(UpdateRepo, self).__init__(args)
 
     name = ("update-repo", "ur")
 
@@ -938,8 +938,8 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(AddRepo, self).__init__()
+    def __init__(self, args):
+        super(AddRepo, self).__init__(args)
 
     name = ("add-repo", "ar")
 
@@ -971,8 +971,8 @@ Remove all repository information from the system.
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(RemoveRepo, self).__init__()
+    def __init__(self,args):
+        super(RemoveRepo, self).__init__(args)
 
     name = ("remove-repo", "rr")
 
@@ -997,8 +997,8 @@ Lists currently tracked repositories.
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(ListRepo, self).__init__()
+    def __init__(self, args):
+        super(ListRepo, self).__init__(args)
 
     name = ("list-repo", "lr")
 
@@ -1022,8 +1022,8 @@ all repositories.
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(ListAvailable, self).__init__()
+    def __init__(self, args):
+        super(ListAvailable, self).__init__(args)
 
     name = ("list-available", "la")
 
@@ -1079,8 +1079,8 @@ repositories.
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(ListComponents, self).__init__()
+    def __init__(self, args):
+        super(ListComponents, self).__init__(args)
 
     name = ("list-components", "lc")
 
@@ -1116,8 +1116,8 @@ Gives a brief list of sources published in the repositories.
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(ListSources, self).__init__()
+    def __init__(self, args):
+        super(ListSources, self).__init__(args)
 
     name = ("list-sources", "ls")
 
@@ -1153,8 +1153,8 @@ Lists the packages that will be upgraded.
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(ListUpgrades, self).__init__()
+    def __init__(self, args):
+        super(ListUpgrades, self).__init__(args)
 
     name = ("list-upgrades", "lu")
 
@@ -1195,8 +1195,8 @@ Lists packages waiting to be configured.
 
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(ListPending, self).__init__()
+    def __init__(self, args):
+        super(ListPending, self).__init__(args)
     
     name = ("list-pending", "lp")
 
@@ -1219,8 +1219,8 @@ in summary, description, and package name fields.
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(Search, self).__init__()
+    def __init__(self, args):
+        super(Search, self).__init__(args)
         
     name = ("search", "sr")
 
@@ -1266,8 +1266,8 @@ Finds the installed package which contains the specified file.
 """
     __metaclass__ = autocommand
 
-    def __init__(self):
-        super(SearchFile, self).__init__()
+    def __init__(self, args):
+        super(SearchFile, self).__init__(args)
     
     name = ("search-file", "sf")
 

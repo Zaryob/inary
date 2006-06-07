@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2006-05-25, 16:13:51 -->
+<!-- Saved: 2006-06-07, 18:20:43 -->
 <!-- Copyright (C) 2006 PiSi Development Team,  -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -447,10 +447,6 @@
       <Name>conflicttests.py</Name>
     </Source>
     <Source>
-      <Dir>tests</Dir>
-      <Name>zipfileexttests.py</Name>
-    </Source>
-    <Source>
       <Dir>pisi</Dir>
       <Name>environment.py</Name>
     </Source>
@@ -569,6 +565,10 @@
       <Dir>scripts</Dir>
       <Name>lspisi</Name>
     </Source>
+    <Source>
+      <Dir>scripts</Dir>
+      <Name>pisish</Name>
+    </Source>
   </Sources>
   <Forms>
   </Forms>
@@ -613,7 +613,7 @@
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
     <FiletypeAssociation pattern="*.ui" type="FORMS" />
     <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
-    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
     <FiletypeAssociation pattern="*.py" type="SOURCES" />
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
   </FiletypeAssociations>
 </Project>
