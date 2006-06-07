@@ -733,13 +733,15 @@ Usage: info <package1> <package2> ... <packagen>
 class Check(Command):
     """Verify installation
 
-Usage: check <package1> <package2> ... <packagen>
+Usage: check [<package1> <package2> ... <packagen>]
 
 <packagei>: package name
 
 A cryptographic checksum is stored for each installed
 file. Check command uses the checksums to verify a package.
 Just give the names of packages.
+
+If no packages are given, checks all installed packages.
 """
     __metaclass__ = autocommand
 
@@ -749,14 +751,17 @@ Just give the names of packages.
     name = ("check", None)
 
     def run(self):
-        if not self.args:
-            self.help()
-            return
-
         self.init(database = True, write = False)
-        for pkg in self.args:
+        if self.args:
+            pkgs = self.args
+        else:
+            ctx.ui.info(_('Checking all installed packages'))
+            pkgs = ctx.installdb.list_installed()
+        for pkg in pkgs:
             if ctx.installdb.is_installed(pkg):
-                pisi.api.check(pkg)
+                corrupt = pisi.api.check(pkg)
+                if corrupt:
+                    ctx.ui.info(_('Package %s is corrupt.') % pkg)
             else:
                 ctx.ui.info(_('Package %s not installed') % pkg)
         self.finalize()

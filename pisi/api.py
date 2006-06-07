@@ -317,7 +317,7 @@ def check(package):
     for file in files.list:
         if file.hash and file.type != "config" \
            and not os.path.islink('/' + file.path):
-            ctx.ui.info(_("Checking %s...") % file.path, noln=False, verbose=True) 
+            ctx.ui.info(_("Checking %s ") % file.path, noln=True, verbose=True) 
             if file.hash != util.sha1_file('/' + file.path):
                 corrupt.append(file)
                 ctx.ui.info("Corrupt file: %s" % file)
