@@ -13,6 +13,8 @@
 
 
 import sys
+import string
+
 import pisi
 
 import gettext
@@ -143,8 +145,12 @@ class Digraph(object):
         return list
 
     def id_str(self, u):
-        s = str(u)
-        return s.replace('-', '_')
+        def repl(char):
+            if char in string.punctuation:
+                return '_'
+            else:
+                return char
+        return pisi.util.concat(map(repl, str(u)))
 
     def write_graphviz(self, f):
         f.write('digraph G {\n')

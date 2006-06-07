@@ -10,7 +10,9 @@
 # Please read the COPYING file.
 #
 
-# PISI package relation graph that represents the state of packagedb
+"""PISI package relation graph that represents the state of packagedb"""
+
+import string
 
 from graph import *
 
