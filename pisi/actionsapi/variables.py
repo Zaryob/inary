@@ -13,6 +13,7 @@
 # Standard Python Modules
 from os import getenv
 from os import environ
+from copy import deepcopy
 
 # Pisi-Core Modules
 import pisi.context as ctx
@@ -21,6 +22,10 @@ import pisi.context as ctx
 
 def exportFlags():
     '''General flags used in actions API.'''
+
+    # first reset environ
+    environ = {}
+    environ = deepcopy(ctx.config.environ)
 
     # Build systems depend on these environment variables. That is why
     # we export them instead of using as (instance) variables.
@@ -31,6 +36,7 @@ def exportFlags():
     environ['LDFLAGS'] = values.build.ldflags
     environ['USER_LDFLAGS'] = values.build.ldflags
     environ['JOBS'] = values.build.jobs
+    
 
 class Env(object):
     '''General environment variables used in actions API'''

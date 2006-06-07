@@ -18,6 +18,7 @@ regular PISI configurations.
 """
 
 import os
+from copy import deepcopy
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -58,6 +59,10 @@ class Config(object):
         if not os.path.exists(self.destdir):
             ctx.ui.warning( _('Destination directory %s does not exist. Creating it.') % self.destdir)
             os.makedirs(self.destdir)
+
+        # get the initial environment variables. this is needed for
+        # build process.
+        self.environ = deepcopy(os.environ)
 
 
     def get_option(self, opt):
