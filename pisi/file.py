@@ -131,7 +131,8 @@ class File:
                 localfile = join(transfer_dir, os.path.basename(localfile))
                 shutil.copy(oldfn, localfile)
 
-        if sha1sum:        
+        if sha1sum:
+            print newsha1
             if (pisi.util.sha1_file(localfile) != newsha1):
                 raise Error(_("File integrity of %s compromised.") % uri)
 
