@@ -437,6 +437,8 @@ Usage: emerge <sourcename> ...
 
 You should give the name of a source package to be 
 downloaded from a repository containing sources.
+
+You can also give the name of a component.
 """
     __metaclass__ = autocommand
 
