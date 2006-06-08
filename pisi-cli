@@ -19,7 +19,7 @@ import bsddb3.db as db
 
 import pisi.ui
 import pisi.context as ctx
-from pisi.cli.pisicli import PisiCLI, CLIError
+import pisi.cli.pisicli as pisicli
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -64,7 +64,7 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
         ui.info(_("Traceback:"))
         traceback.print_tb(tb)
     else:
-        if not exception is CLIError:
+        if not exception is pisicli.Error:
             ui.info(_("Use --debug to see a traceback."))
 
     exit()
@@ -74,7 +74,7 @@ if __name__ == "__main__":
     sys.excepthook = handle_exception
 
     locale.setlocale(locale.LC_ALL, '')
-    cli = PisiCLI()
+    cli = pisicli.PisiCLI()
     try:
         cli.run_command()
     except pisi.operations.PisiUpgradeException, e:
