@@ -47,6 +47,19 @@ Guidelines
 13. Same thing goes for premature optimizations. Knuth and Dijkstra
    are watching over your shoulder. :)
 
+Branches and SVN
+----------------
+
+There are two branches of pisi, one is called pisi-devel and 
+new features that are large enough to cause instability go 
+into that branch. The trunk version is supposed to be stable at
+all times. This means that you *must* run unit tests and other 
+test scripts after committing any change that cannot be tested
+in isolation. Run the unit tests periodically to catch unseen
+bugs. A release from the stable branch *must not* break any tests
+whatsoever, so extensive use of the test suite must precede any
+release.
+
 
 Unit testing
 ------------
@@ -75,6 +88,14 @@ unit testing.
 http://www.extremeprogramming.org/rules/unittests.html
 http://www.extremeprogramming.org/rules/unittests2.html
 
+
+Other tests
+-----------
+
+There are a couple of nice test scripts for testing the basic
+capabilities of the command line interface such as building and
+upgrading. Unlike unit tests, you have to take a look at the output
+to understand that the scripts are doing well :)
 
 Misc. Suggestions
 -----------------
