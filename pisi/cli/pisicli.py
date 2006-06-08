@@ -29,6 +29,10 @@ class ParserError(pisi.Exception):
 class Error(pisi.Error):
     pass
 
+class CLIError(Error):
+    pass
+
+
 class PreParser(OptionParser):
     """consumes any options, and finds arguments from command line"""
 
@@ -94,14 +98,14 @@ class PisiCLI(object):
                     sys.exit(0)
                 elif 'help' in opts or 'h' in opts:
                     self.die()
-                raise Error(_('No command given'))
+                raise CLIError(_('No command given'))
             cmd_name = args[0]
         except ParserError:
-            raise Error(_('Command line parsing error'))
+            raise CLIError(_('Command line parsing error'))
 
         self.command = Command.get_command(cmd_name, args=orig_args)
         if not self.command:
-            raise Error(_("Unrecognized command: %s") % cmd_name)
+            raise CLIError(_("Unrecognized command: %s") % cmd_name)
 
     def die(self):
         printu('\n' + self.parser.format_help())

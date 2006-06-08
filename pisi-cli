@@ -19,7 +19,7 @@ import bsddb3.db as db
 
 import pisi.ui
 import pisi.context as ctx
-from pisi.cli.pisicli import PisiCLI
+from pisi.cli.pisicli import PisiCLI, CLIError
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -64,7 +64,8 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
         ui.info(_("Traceback:"))
         traceback.print_tb(tb)
     else:
-        ui.info(_("Use --debug to see a traceback."))
+        if not exception is CLIError:
+            ui.info(_("Use --debug to see a traceback."))
 
     exit()
 
