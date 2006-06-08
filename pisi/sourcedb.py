@@ -75,6 +75,7 @@ class SourceDB(object):
             self.d.add_item(name, spec, repo, txn)            
             for pkg in spec.packages:
                 self.dpkgtosrc.add_item(pkg.name, name, repo, txn)
+            ctx.componentdb.add_spec(spec.source.partOf, spec.source.name, repo, txn)
         self.d.txn_proc(proc, txn)
         
     def remove_spec(self, name, repo, txn = None):
@@ -85,6 +86,7 @@ class SourceDB(object):
             self.d.remove_item(name, txn=txn)
             for pkg in spec.packages:
                 self.dpkgtosrc.remove_item_repo(pkg.name, repo, txn)
+            ctx.componentdb.remove_spec(spec.source.partOf, spec.source.name, repo, txn)
             
         self.d.txn_proc(proc, txn)
 

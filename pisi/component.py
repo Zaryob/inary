@@ -9,7 +9,7 @@
 #
 # Please read the COPYING file.
 #
-# Author:  Eray Ozkural <eray@pardus.org.tr>
+# Author:  Eray Ozkural <eray at pardus.org.tr>
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -149,6 +149,7 @@ class ComponentDB(object):
 
     def add_package(self, component_name, package, repo, txn = None):
         def proc(txn):
+            assert component_name
             if self.has_component(component_name, repo, txn):
                 component = self.get_component(component_name, repo, txn)
             else:
@@ -171,6 +172,31 @@ class ComponentDB(object):
             
         ctx.txn_proc(lambda x: proc(txn, repo), txn)
 
+    def add_spec(self, component_name, spec, repo, txn = None):
+        def proc(txn):
+            assert component_name
+            if self.has_component(component_name, repo, txn):
+                component = self.get_component(component_name, repo, txn)
+            else:
+                component = Component( name = component_name )
+            if not spec in component.sources:
+                component.sources.append(spec)
+            self.d.add_item(component_name, component, repo, txn) # update
+        self.d.txn_proc(proc, txn)
+
+    def remove_spec(self, component_name, spec, repo = None, txn = None):
+        def proc(txn, repo):
+            if not self.has_component(component_name, repo, txn):
+                raise Error(_('Information for component %s not available') % component_name)
+            if not repo:
+                repo = self.d.which_repo(component_name, txn=txn) # get default repo then
+            component = self.get_component(component_name, repo, txn)
+            if spec in component.sources:
+                component.packages.remove(spec)
+            self.d.add_item(component_name, component, repo, txn) # update
+            
+        ctx.txn_proc(lambda x: proc(txn, repo), txn)
+        
     def clear(self, txn = None):
         self.d.clear(txn)
 

@@ -38,7 +38,7 @@ import pisi.specfile as specfile
 
 class Error(pisi.Error):
     pass
-
+    
 
 class Index(XmlFile):
     __metaclass__ = autoxml.autoxml
@@ -156,16 +156,20 @@ class Index(XmlFile):
             #ctx.ui.error(str(Error(*errs)))
 
     def add_spec(self, path, repo_uri):
+        import pisi.build
         ctx.ui.info(_('Adding %s to source index') % path)
-        sf = specfile.SpecFile()
-        sf.read(path)
-        errs = sf.errors()
-        if sf.errors():
-            ctx.ui.error(_('SpecFile in %s is corrupt, skipping...') % path)
-            ctx.ui.error(str(Error(*errs)))
-        else:
-            if ctx.config.options and ctx.config.options.absolute_uris:
-                sf.source.sourceURI = os.path.realpath(path)
-            else:                           # create relative path by default
-                sf.source.sourceURI = util.removepathprefix(repo_uri, path)
-            self.specs.append(sf)
+        builder = pisi.build.Builder(path)
+        #sf = specfile.SpecFile()
+        #sf.read(path)
+        #errs = sf.errors()
+        #if sf.errors():
+            #ctx.ui.error(_('SpecFile in %s is corrupt, skipping...') % path)
+            #ctx.ui.error(str(Error(*errs)))
+        builder.fetch_component()
+        sf = builder.spec
+        if ctx.config.options and ctx.config.options.absolute_uris:
+            sf.source.sourceURI = os.path.realpath(path)
+        else:                           # create relative path by default
+            sf.source.sourceURI = util.removepathprefix(repo_uri, path)
+            # check component
+        self.specs.append(sf)
