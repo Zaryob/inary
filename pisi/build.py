@@ -846,6 +846,14 @@ class Builder:
         else:
             ctx.ui.info(_("Keeping Build Directory"))
 
+
+        # reset environment variables after build.  this one is for
+        # buildfarm actually. buildfarm re-inits pisi for each build
+        # and left environment variables go directly into initial dict
+        # making actionsapi.variables.exportFlags() useless...
+        os.environ = {}
+        os.environ = deepcopy(ctx.config.environ)
+
         return new_packages, old_package_names
 
 
