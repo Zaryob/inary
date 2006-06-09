@@ -91,5 +91,12 @@ class FilesDB(shelve.LockedDBShelf):
         infos = []
         for key in self.keys():
             if fnmatch.fnmatch(key, glob):
-                infos.append(self[key])
+
+                # FIXME: Why should we assign path attribute manually
+                # in fileinfo? This is also done in get_file(), seems
+                # like a dirty workaround... - baris
+                name = self[key][0]
+                fileinfo = self[key][1]
+                fileinfo.path = key
+                infos.append((name, fileinfo))
         return infos
