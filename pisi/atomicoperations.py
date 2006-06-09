@@ -406,6 +406,15 @@ class Remove(AtomicOperation):
 
     def remove_file(fileinfo):
         fpath = pisi.util.join_path(ctx.config.dest_dir(), fileinfo.path)
+
+        # we should check if the file is also provided by another
+        # package (this is clearly the package's fault but we
+        # shouldn't left system in an inconsistent state).
+        if ctx.filesdb.has_file(fpath):
+            pkg, existing_file = ctx.filesdb.get_file(fpath)
+            if pkg != self.package_name:
+                ctx.ui.warning(_('Not removing conflicted file : %s') % fpath) 
+
         # TODO: We have to store configuration files for futher
         # usage. Currently we'are doing it like rpm does, saving
         # with a prefix and leaving the user to edit it. In the future
