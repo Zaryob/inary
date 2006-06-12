@@ -329,6 +329,7 @@ def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=F
           non_recursive=False):
     """accumulate PISI XML files in a directory"""
     index = Index()
+    index.distribution = None
     if not dirs:
         dirs = ['.']
     for repo_dir in dirs:
