@@ -721,6 +721,7 @@ Usage: info <package1> <package2> ... <packagen>
         if self.options.files or self.options.files_path:
             if files:
                 print _('\nFiles:')
+                files.list.sort(key = lambda x:x.path)
                 for fileinfo in files.list:
                     if self.options.files:
                         print fileinfo
