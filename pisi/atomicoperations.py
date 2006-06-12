@@ -414,6 +414,7 @@ class Remove(AtomicOperation):
             pkg, existing_file = ctx.filesdb.get_file(fpath)
             if pkg != self.package_name:
                 ctx.ui.warning(_('Not removing conflicted file : %s') % fpath) 
+                return
 
         # TODO: We have to store configuration files for futher
         # usage. Currently we'are doing it like rpm does, saving
