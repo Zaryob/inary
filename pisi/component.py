@@ -128,11 +128,14 @@ class ComponentDB(object):
         def proc(txn):
             s = self.d.d.get(name, txn=txn)
             pkgs = set()
+            srcs = set()
             for repostr in self.d.order(repo = repo):
                 if s.has_key(repostr):
                     pkgs |= set(s[repostr].packages)
+                    srcs |= set(s[repostr].sources)
             comp = self.get_component(name)
             comp.packages = list(pkgs)
+            comp.sources = list(srcs)
             return comp
         return self.d.txn_proc(proc, txn)
 
