@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project pisi -->
-<!-- Saved: 2006-06-07, 18:20:43 -->
+<!-- Saved: 2006-06-12, 19:40:22 -->
 <!-- Copyright (C) 2006 PiSi Development Team,  -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -9,7 +9,7 @@
   <Description>The package management software of Pardus distribution.
 </Description>
   <Author>PiSi Development Team</Author>
-  <EmaIl></EmaIl>
+  <Email></Email>
   <Sources>
     <Source>
       <Dir>tests</Dir>
@@ -569,6 +569,10 @@
       <Dir>scripts</Dir>
       <Name>pisish</Name>
     </Source>
+    <Source>
+      <Dir>scripts</Dir>
+      <Name>pisimedia</Name>
+    </Source>
   </Sources>
   <Forms>
   </Forms>
@@ -611,9 +615,9 @@
   </Vcs>
   <FiletypeAssociations>
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.ui" type="FORMS" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
-    <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
   </FiletypeAssociations>
 </Project>
