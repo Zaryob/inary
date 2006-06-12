@@ -273,8 +273,6 @@ class autoxml(oo.autosuper, oo.autoprop):
         encoders = []
         errorss = []
         formatters = []
-        #order = dict.keys()  
-        #order.sort()        
 
         # read declaration order from source
         # code contributed by bahadir kandemir
@@ -321,13 +319,9 @@ class autoxml(oo.autosuper, oo.autoprop):
         def initialize(self, uri = None, keepDoc = False, tmpDir = '/tmp',
                        **args):
             if xmlfile_support:
-                # totally dailywtf
-                #if args.has_key('tag'):
-                #    tag = args['tag']
-                #else:
-                #    tag = self.__class__.tag # ought to be autoxml
-                #XmlFile.__init__(self, tag = tag)
-                if not args.has_key('tag'):
+                if args.has_key('tag'):
+                    XmlFile.__init__(self, tag = args['tag'])
+                else:
                     XmlFile.__init__(self, tag = cls.tag)
             for base in cls.autoxml_bases:
                 base.__init__(self)
@@ -409,6 +403,9 @@ class autoxml(oo.autosuper, oo.autoprop):
         
         if not dict.has_key('__eq__'):
             def equal(self, other):
+                # handle None
+                if other ==None:
+                    return False # well, must be False at this point :)
                 for name in names:
                     try:
                         if getattr(self, name) != getattr(other, name):
