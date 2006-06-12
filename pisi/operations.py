@@ -15,9 +15,6 @@
 
 import os
 import sys
-ver = sys.version_info
-if ver[0] <= 2 and ver[1] < 4:
-    from sets import Set as set
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
