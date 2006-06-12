@@ -154,12 +154,17 @@ class Install(AtomicOperation):
             ctx.packagedb.add_package(self.pkginfo, pisi.itembyrepodb.thirdparty)
         
         # check file conflicts
+        file_conflicts = []
         for file in self.files.list:
             if ctx.filesdb.has_file(file.path):
                 pkg, existing_file = ctx.filesdb.get_file(file.path)
                 if pkg != self.pkginfo.name:
-                    #raise Error(_('Trying to overwrite an existing file: %s') % file.path) 
-                    ctx.ui.warning(_('Trying to overwrite an existing file: %s') % file.path) 
+                    file_conflicts.append( (pkg, existing_file) )
+        if file_conflicts:
+            file_conflicts_str = ""
+            for (pkg, existing_file) in file_conflicts:
+                file_conflicts_str += _("%s from %s package") % (existing_file.path, pkg) 
+            raise Error(_('File conflicts:\n%s') % file_conflicts_str) 
 
     def check_reinstall(self):
         "check reinstall, confirm action, and schedule reinstall"
