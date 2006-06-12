@@ -46,6 +46,7 @@ try:
     pisi.api.install(packages, reinstall=True)
 except Exception, e:
     ctx.ui.error(e)
-    if ctx.repodb.has_repo(tmprepo):
-        pisi.api.remove_repo(tmprepo)
+    
+if ctx.repodb.has_repo(tmprepo):
+    pisi.api.remove_repo(tmprepo)
 pisi.api.finalize()
