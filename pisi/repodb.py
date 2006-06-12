@@ -73,7 +73,8 @@ class RepoDB(object):
         name = str(name)
         return self.d["repo-" + name]
 
-    def add_repo(self, name, repo_info, txn = None):
+    def add_repo(self, name, repo_info, txn = None, at = None):
+        """add repository with name and repo_info at a given optional position"""
         name = str(name)
         assert (isinstance(repo_info,Repo))
         def proc(txn):
@@ -81,7 +82,13 @@ class RepoDB(object):
                 raise Error(_('Repository %s already exists') % name)
             self.d.put("repo-" + name, repo_info, txn)
             order = self.d.get("order", txn)
-            order.append(name)
+            if at:
+                if at<0 or at>len(order):
+                    raise Error(_("Cannot add repository at position %s" % at))
+                order.insert(name, at)
+            else:
+                order.append(name)
+            
             self.d.put("order", order, txn)
         self.d.txn_proc(proc, txn)
 
