@@ -521,6 +521,8 @@ expanded to package names.
                      default=False, help=_("Bypass ldconfig phase"))
         p.add_option("", "--reinstall", action="store_true",
                      default=False, help=_("Reinstall already installed packages"))
+        p.add_option("", "--ignore-file-conflicts", action="store_true",
+                     default=False, help=_("Ignore file conflicts"))
         buildno_opts(self)
 
     def run(self):
@@ -915,8 +917,8 @@ If no repository is given, all repositories are updated.
     name = ("update-repo", "ur")
 
     def options(self):
-        self.parser.add_option("-f", "--force", action="store_true",
-                               default=False, 
+        self.parser.add_option("-f", "--force", action="store",
+                               default=0, 
                                help=_("update database in any case"))
 
     def run(self):
@@ -951,6 +953,11 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 
     name = ("add-repo", "ar")
 
+    def options(self):
+        self.parser.add_option("", "--at", action="store",
+                               type="int", default=False, 
+                               help=_("add repository at given position (0 is first)"))
+
     def run(self):
 
         if len(self.args)==2 or len(self.args)==0:
@@ -961,7 +968,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
             else:
                 name = 'pardus-1-test'
                 indexuri = 'http://paketler.pardus.org.tr/pardus-1-test/pisi-index.xml.bz2'
-            pisi.api.add_repo(name, indexuri)
+            pisi.api.add_repo(name, indexuri, ctx.get_option('at'))
             if ctx.ui.confirm(_('Update PISI database for repository %s?') % name):
                 pisi.api.update_repo(name)
             self.finalize()

@@ -163,8 +163,12 @@ class Install(AtomicOperation):
         if file_conflicts:
             file_conflicts_str = ""
             for (pkg, existing_file) in file_conflicts:
-                file_conflicts_str += _("%s from %s package") % (existing_file.path, pkg) 
-            raise Error(_('File conflicts:\n%s') % file_conflicts_str) 
+                file_conflicts_str += _("%s from %s package") % (existing_file.path, pkg)
+            msg = _('File conflicts:\n%s') % file_conflicts_str
+            if ctx.get_option('ignore_file_conflicts'):
+                ctx.ui.warning(msg)
+            else:
+                raise Error(msg) 
 
     def check_reinstall(self):
         "check reinstall, confirm action, and schedule reinstall"

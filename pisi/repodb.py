@@ -82,13 +82,12 @@ class RepoDB(object):
                 raise Error(_('Repository %s already exists') % name)
             self.d.put("repo-" + name, repo_info, txn)
             order = self.d.get("order", txn)
-            if at:
+            if at == None:
+                order.append(name)
+            else:
                 if at<0 or at>len(order):
                     raise Error(_("Cannot add repository at position %s" % at))
-                order.insert(name, at)
-            else:
-                order.append(name)
-            
+                order.insert(at, name)
             self.d.put("order", order, txn)
         self.d.txn_proc(proc, txn)
 
