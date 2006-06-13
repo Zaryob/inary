@@ -955,7 +955,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 
     def options(self):
         self.parser.add_option("", "--at", action="store",
-                               type="int", default=False, 
+                               type="int", default=None, 
                                help=_("add repository at given position (0 is first)"))
 
     def run(self):
