@@ -39,6 +39,6 @@ def make(parameters = ''):
     if system('scons %s' % parameters):
         raise MakeError(_('Make failed.'))
 
-def install(parameters = 'install', prefix = get.installDIR()):
-    if system('scons prefix=%s %s' % (prefix, parameters)):
+def install(parameters = 'install', prefix = get.installDIR(), argument='prefix'):
+    if system('scons %s=%s %s' % (argument, prefix, parameters)):
         raise InstallError(_('Install failed.'))
