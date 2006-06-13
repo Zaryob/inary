@@ -349,7 +349,7 @@ class Install(AtomicOperation):
                 ctx.ui.info(_("Regenerating /etc/ld.so.cache..."), verbose=True)
                 util.env_update()
         else:
-            ctx.ui.info(_("Bypassing ldconfig"), verbose=True)
+            ctx.ui.warning(_("Bypassing ldconfig"), verbose=True)
 
 def install_single(pkg, upgrade = False):
     """install a single package from URI or ID"""
@@ -449,7 +449,7 @@ class Remove(AtomicOperation):
             elif os.path.isdir(fpath) and not os.listdir(fpath):
                 os.rmdir(fpath)
             else:
-                ctx.ui.warning(_('Not removing non-file, non-link %s') % fpath, True)
+                ctx.ui.warning(_('Not removing non-file, non-link %s') % fpath, verbose=True)
                 return
 
             # remove emptied directories
