@@ -333,7 +333,7 @@ class Install(AtomicOperation):
     def update_info(self):
         for x in self.files.list:
             if x.type == 'info':
-                pisi.util.run_batch('install-info /%s /usr/share/info/dir' % x.path)
+                pisi.util.run_batch('LC_ALL=C install-info /%s /usr/share/info/dir' % x.path)
         
     def update_environment(self):
         # check if we have any shared objects or anything under
@@ -484,7 +484,7 @@ class Remove(AtomicOperation):
     def update_info(self):
         for x in self.files.list:
             if x.type == 'info':
-                pisi.util.run_batch('install-info --delete /%s /usr/share/info/dir ' % x.path)
+                pisi.util.run_batch('LC_ALL=C install-info --delete /%s /usr/share/info/dir ' % x.path)
         
 
 def remove_single(package_name):

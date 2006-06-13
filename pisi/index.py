@@ -104,6 +104,7 @@ class Index(XmlFile):
                 del dirs[0:]
 
     def update_db(self, repo, txn = None):
+        ctx.componentdb.remove_repo(repo, txn=txn)
         for comp in self.components:
             ctx.componentdb.update_component(comp, repo, txn)
         ctx.packagedb.remove_repo(repo, txn=txn)
