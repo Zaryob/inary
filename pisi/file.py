@@ -15,7 +15,7 @@
 generic file abstraction that allows us to use URIs for everything
 we support only the simple read case ATM
 we are just encapsulating a common pattern in our program, nothing big.
-like all pisi classes, it has been programmed in a non-restricting way
+like all pisi classes, it has been programmed in a non-restrictive way
 """
 
 import os
@@ -115,12 +115,12 @@ class File:
                     raise AlreadyHaveException(uri, localfile)
 
             if uri.is_remote_file():
-                ctx.ui.info(_("Fetching %s") % uri.get_uri())
+                ctx.ui.info(_("Fetching %s") % uri.get_uri(), verbose=True)
                 fetch_url(uri, transfer_dir)
             else:
                 # copy to transfer dir,
                 localfile = join(transfer_dir, uri.filename())
-                ctx.ui.info(_("Copying %s to transfer dir") % uri.get_uri())
+                ctx.ui.info(_("Copying %s to transfer dir") % uri.get_uri(), verbose=True)
                 shutil.copy(uri.get_uri(), transfer_dir)
         else:
             localfile = uri.get_uri() #TODO: use a special function here?

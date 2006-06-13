@@ -221,12 +221,13 @@ class Install(AtomicOperation):
                 # is this a downgrade? confirm this action.
                 if self.ask_reinstall and (not upgrade):
                     if Version(pkg.version) < Version(iversion):
-                        x = _('Downgrade to old upstream version?')
+                        #x = _('Downgrade to old upstream version?')
+                        x = None
                     elif Version(pkg.release) < Version(irelease):
                         x = _('Downgrade to old distribution release?')
                     else:
                         x = _('Downgrade to old distribution build?')
-                    if not ctx.ui.confirm(x):
+                    if x and not ctx.ui.confirm(x):
                         raise Error(_('Package downgrade declined'))
 
             # schedule for reinstall
@@ -288,17 +289,17 @@ class Install(AtomicOperation):
         if self.reinstall:
             util.clean_dir(self.old_path)
         
-        ctx.ui.info(_('Storing %s, ') % ctx.const.files_xml)
+        ctx.ui.info(_('Storing %s, ') % ctx.const.files_xml, verbose=True)
         self.package.extract_file(ctx.const.files_xml, self.package.pkg_dir())
 
-        ctx.ui.info(_('Storing %s.') % ctx.const.metadata_xml)
+        ctx.ui.info(_('Storing %s.') % ctx.const.metadata_xml, verbose=True)
         self.package.extract_file(ctx.const.metadata_xml, self.package.pkg_dir())
 
         for pcomar in self.metadata.package.providesComar:
             fpath = os.path.join(ctx.const.comar_dir, pcomar.script)
             # comar prefix is added to the pkg_dir while extracting comar
             # script file. so we'll use pkg_dir as destination.
-            ctx.ui.info(_('Storing %s') % fpath)
+            ctx.ui.info(_('Storing %s') % fpath, verbose=True)
             self.package.extract_file(fpath, self.package.pkg_dir())
 
     def register_comar_scripts(self):
@@ -345,10 +346,10 @@ class Install(AtomicOperation):
                 break
         if not ctx.get_option('bypass_ldconfig'):
             if shared:
-                ctx.ui.info(_("Regenerating /etc/ld.so.cache..."))
+                ctx.ui.info(_("Regenerating /etc/ld.so.cache..."), verbose=True)
                 util.env_update()
         else:
-            ctx.ui.warning(_("Bypassing ldconfig"))
+            ctx.ui.info(_("Bypassing ldconfig"), verbose=True)
 
 def install_single(pkg, upgrade = False):
     """install a single package from URI or ID"""
