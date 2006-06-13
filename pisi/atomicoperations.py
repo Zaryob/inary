@@ -107,6 +107,7 @@ class Install(AtomicOperation):
         self.extract_install()
         self.store_pisi_files()
         self.update_environment()
+        self.update_info()
 
         self.register_comar()
         self.postinstall()
@@ -329,6 +330,11 @@ class Install(AtomicOperation):
         # installed packages
         ctx.packagedb.add_package(self.pkginfo, pisi.itembyrepodb.installed, txn=txn)
 
+    def update_info(self):
+        for x in self.files.list:
+            if x.type == 'info':
+                os.system('install-info /%s /usr/share/info/dir' % x.path)
+        
     def update_environment(self):
         # check if we have any shared objects or anything under
         # /etc/env.d
@@ -391,7 +397,7 @@ class Remove(AtomicOperation):
         self.check_dependencies()
             
         self.run_preremove()
-            
+        self.update_info()
         for fileinfo in self.files.list:
             self.remove_file(fileinfo)
 
@@ -474,6 +480,12 @@ class Remove(AtomicOperation):
         ctx.installdb.remove(self.package_name, txn)
         ctx.filesdb.remove_files(self.files, txn)
         pisi.packagedb.remove_tracking_package(self.package_name, txn)
+
+    def update_info(self):
+        for x in self.files.list:
+            if x.type == 'info':
+                os.system('install-info --delete /%s /usr/share/info/dir ' % x.path)
+        
 
 def remove_single(package_name):
     Remove(package_name).run()
