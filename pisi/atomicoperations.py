@@ -64,6 +64,7 @@ class Install(AtomicOperation):
         # find package in repository
         repo = ctx.packagedb.which_repo(name)
         if repo:
+            ctx.ui.info(_("Package %s found in repository %s") % (name, repo))
             repo = ctx.repodb.get_repo(repo)
             pkg = ctx.packagedb.get_package(name)
     
@@ -75,7 +76,7 @@ class Install(AtomicOperation):
                 pkg_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
                                         str(pkg_uri.path()))
     
-            ctx.ui.debug(_("Package URI: %s") % pkg_path)
+            ctx.ui.info(_("Package URI: %s") % pkg_path, verbose=True)
     
             return Install(pkg_path, ignore_dep)
         else:
