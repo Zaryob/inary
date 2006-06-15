@@ -699,6 +699,7 @@ Usage: info <package1> <package2> ... <packagen>
                 else:
                     ctx.ui.info(_('Installed package:'))
                 self.print_pkginfo(metadata, files,pisi.itembyrepodb.installed)
+                print
                 
             if ctx.packagedb.has_package(arg):
                 metadata, files = pisi.api.info_name(arg, False)
@@ -707,6 +708,7 @@ Usage: info <package1> <package2> ... <packagen>
                 else:
                     ctx.ui.info(_('Package found in repository:'))
                 self.print_pkginfo(metadata, files, pisi.itembyrepodb.repos)
+                print
 
     def print_pkginfo(self, metadata, files, repo = None):
         import os.path
