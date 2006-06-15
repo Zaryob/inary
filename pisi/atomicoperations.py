@@ -27,13 +27,11 @@ import pisi.packagedb as packagedb
 import pisi.dependency as dependency
 import pisi.util as util
 from pisi.specfile import *
-#from pisi.package import Package
 from pisi.metadata import MetaData
 from pisi.files import Files
 from pisi.uri import URI
 import pisi.ui
 from pisi.version import Version
-#import conflicts
 
 class Error(pisi.Error):
     pass
@@ -268,6 +266,7 @@ class Install(AtomicOperation):
 
         ctx.ui.notify(pisi.ui.extracting, package = self.pkginfo, files = self.files)
 
+        config_changed = []
         if self.reinstall:
             # remove left over files
             new = set(map(lambda x: str(x.path), self.files.list))
@@ -276,11 +275,46 @@ class Install(AtomicOperation):
             old_fileinfo = {}
             for fileinfo in self.old_files.list:
                 old_fileinfo[str(fileinfo.path)] = fileinfo
-            for path in old:
-                if path in leftover or old_fileinfo[path].type == ctx.const.conf:
+            for path in leftover:
                     Remove.remove_file( old_fileinfo[path] )
+                    
+            # handle special cases for upgrades
+            overlap = old & new
+            self.files.list.sort(key=lambda x:x.path)
+            self.old_files.list.sort(key=lambda x:x.path)
+            def get_upgrades(list):
+                return filter(lambda x : str(x.path) in overlap, list)
+            (upgrade_new, upgrade_old) = map(get_upgrades, [self.files.list, self.old_files.list])
+            for newf, oldf in zip(upgrade_new, upgrade_old):
+                assert newf.path == oldf.path
+                if newf.type == 'config' and oldf.type == 'config': # config upgrade
+                    fpath = pisi.util.join_path(ctx.config.dest_dir(), oldf.path)
+                    if os.path.exists(fpath) and pisi.util.sha1_file(fpath) != oldf.hash:
+                        # old config file changed, don't overwrite                        
+                        config_changed.append(fpath)
+                        if os.path.exists(fpath + '.old'):
+                            os.unlink(fpath + '.old')
+                        os.rename(fpath, fpath + '.old')
+                    else:
+                        # old config file not changed, overwrite
+                        pass
+        else:
+            for file in self.files.list:
+                if file.type == 'config':
+                    fpath = pisi.util.join_path(ctx.config.dest_dir(), file.path)
+                    if os.path.exists(fpath): # there is an old config file lying around
+                        config_changed.append(fpath)
+                        if os.path.exists(fpath + '.old'):
+                            os.unlink(fpath + '.old')
+                        os.rename(fpath, fpath + '.old')
 
         self.package.extract_install(ctx.config.dest_dir())
+        
+        for path in config_changed:
+            if os.path.exists(path + '.new'):
+                os.unlink(path + '.new')
+            os.rename(path, path + '.new')
+            os.rename(path + '.old', path)
 
     def store_pisi_files(self):
         """put files.xml, metadata.xml, actions.py and COMAR scripts
@@ -415,13 +449,18 @@ class Remove(AtomicOperation):
         ctx.ui.notify(pisi.ui.removed, package = self.package, files = self.files)
 
     def check_dependencies(self):
+        #FIXME: why is this not implemented? -- exa
         #we only have to check the dependencies to ensure the
         #system will be consistent after this removal
         pass
         # is there any package who depends on this package?
 
+    @staticmethod
     def remove_file(fileinfo):
         fpath = pisi.util.join_path(ctx.config.dest_dir(), fileinfo.path)
+
+        # FIXME: the following is obsolete becuase --ignore-file-conflicts
+        # is just a workaround that will be removed soon. --exa
 
         # we should check if the file is also provided by another
         # package (this is clearly the package's fault but we
@@ -432,17 +471,14 @@ class Remove(AtomicOperation):
                 ctx.ui.warning(_('Not removing conflicted file : %s') % fpath) 
                 return
 
-        # TODO: We have to store configuration files for futher
-        # usage. Currently we'are doing it like rpm does, saving
-        # with a prefix and leaving the user to edit it. In the future
-        # we'll have a plan for these configuration files.
         if fileinfo.permanent:
             # do not remove precious files :)
-            # just write anything permanent="true" for instance
-            return
-        if fileinfo.type == ctx.const.conf:
-            if os.path.isfile(fpath):
-                os.rename(fpath, fpath + ".oldconfig")
+            pass
+        elif fileinfo.type == ctx.const.conf:
+            # config files are precious, leave them as they are
+            # unless they are the same as provided by package.
+            if os.path.exists(fpath) and pisi.util.sha1_file(fpath) == fileinfo.hash:
+                os.unlink(fpath)
         else:
             if os.path.isfile(fpath) or os.path.islink(fpath):
                 os.unlink(fpath)
@@ -458,8 +494,6 @@ class Remove(AtomicOperation):
                 os.rmdir(dpath)
                 dpath = os.path.dirname(dpath)
 
-    remove_file = staticmethod(remove_file)
-    
     def run_preremove(self):
         if ctx.comar and self.package.providesComar:
             import pisi.comariface as comariface
@@ -471,7 +505,7 @@ class Remove(AtomicOperation):
                 else:
                     raise e
         else:
-            # TODO: store this somewhere
+            # FIXME: store this somewhere
             pass
 
     def remove_pisi_files(self):
