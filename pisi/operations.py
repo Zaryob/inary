@@ -446,7 +446,7 @@ def upgrade_pkg_names(A = []):
         paths.append(install_op.package_fname)
    
     for path in paths:
-        install_op = atomicoperations.Install(path)
+        install_op = atomicoperations.Install(path, ignore_file_conflicts = True)
         install_op.install(True)
         
     if 'pisi' in order:

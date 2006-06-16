@@ -82,9 +82,12 @@ class Install(AtomicOperation):
         else:
             raise Error(_("Package %s not found in any active repository.") % name)
 
-    def __init__(self, package_fname, ignore_dep = None):
+    def __init__(self, package_fname, ignore_dep = None, ignore_file_conflicts = None):
         "initialize from a file name"
         super(Install, self).__init__(ignore_dep)
+        if not ignore_file_conflicts:
+            ignore_file_conflicts = ctx.get_option('ignore_file_conflicts')
+        self.ignore_file_conflicts = ignore_file_conflicts
         self.package_fname = package_fname
         self.package = pisi.package.Package(package_fname)
         self.package.read()
@@ -165,10 +168,10 @@ class Install(AtomicOperation):
             for (pkg, existing_file) in file_conflicts:
                 file_conflicts_str += _("%s from %s package") % (existing_file.path, pkg)
             msg = _('File conflicts:\n%s') % file_conflicts_str
-            if ctx.get_option('ignore_file_conflicts'):
+            if self.ignore_file_conflicts:
                 ctx.ui.warning(msg)
             else:
-                raise Error(msg) 
+                raise Error(msg)
 
     def check_reinstall(self):
         "check reinstall, confirm action, and schedule reinstall"
@@ -460,12 +463,10 @@ class Remove(AtomicOperation):
     def remove_file(fileinfo):
         fpath = pisi.util.join_path(ctx.config.dest_dir(), fileinfo.path)
 
-        # FIXME: the following is obsolete becuase --ignore-file-conflicts
-        # is just a workaround that will be removed soon. --exa
-
-        # we should check if the file is also provided by another
-        # package (this is clearly the package's fault but we
-        # shouldn't left system in an inconsistent state).
+        # we should check if the file belongs to another
+        # package (this can legitimately occur while upgrading
+        # two packages such that a file has moved from one package to
+        # another as in #2911)
         if ctx.filesdb.has_file(fpath):
             pkg, existing_file = ctx.filesdb.get_file(fpath)
             if pkg != self.package_name:
