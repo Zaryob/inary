@@ -479,7 +479,7 @@ class Remove(AtomicOperation):
         elif fileinfo.type == ctx.const.conf:
             # config files are precious, leave them as they are
             # unless they are the same as provided by package.
-            if os.path.exists(fpath) and pisi.util.sha1_file(fpath) == fileinfo.hash:
+            if (os.path.isfile(fpath) or os.path.islink(fpath)) and os.path.exists(fpath) and pisi.util.sha1_file(fpath) == fileinfo.hash:
                 os.unlink(fpath)
         else:
             if os.path.isfile(fpath) or os.path.islink(fpath):
