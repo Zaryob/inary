@@ -667,6 +667,8 @@ Usage: info <package1> <package2> ... <packagen>
                                help=_("show only paths."))
         self.parser.add_option("-s", "--short", action="store_true",
                                default=False, help=_("do not show details"))
+        self.parser.add_option("", "--xml", action="store_true",
+                               default=False, help=_("output in xml format"))
 
     def run(self):
 
@@ -675,14 +677,31 @@ Usage: info <package1> <package2> ... <packagen>
         if len(self.args) == 0:
             self.help()
             return
+            
+        index = pisi.index.Index()
+        index.distribution = None
         
         for arg in self.args:
             if ctx.componentdb.has_component(arg):
                 component = ctx.componentdb.get_union_comp(arg)
-                #if self.options.long:
-                ctx.ui.info(unicode(component))
-            else: # then assume it was a package                
-                self.info_package(arg)
+                if self.options.xml:
+                    index.add_component(component)
+                else:
+                    if not self.options.short:
+                        ctx.ui.info(unicode(component))
+                    else:
+                        ctx.ui.info("%s - %s" % (component.name, component.summary)) 
+            else: # then assume it was a package 
+                if self.options.xml:
+                    index.packages.append(pisi.api.info(arg)[0].package)
+                else:
+                    self.info_package(arg)
+        if self.options.xml:
+            errs = []
+            index.newDocument()
+            index.encode(index.rootNode(), errs)
+            index.writexmlfile(sys.stdout)
+            sys.stdout.write('\n')
         self.finalize()
 
 
@@ -694,21 +713,19 @@ Usage: info <package1> <package2> ... <packagen>
         else:
             if ctx.installdb.is_installed(arg):
                 metadata, files = pisi.api.info_name(arg, True)
-                if ctx.get_option('short'):
+                if self.options.short:
                     ctx.ui.info(_('[inst] '), noln=True)
                 else:
                     ctx.ui.info(_('Installed package:'))
                 self.print_pkginfo(metadata, files,pisi.itembyrepodb.installed)
-                print
                 
             if ctx.packagedb.has_package(arg):
                 metadata, files = pisi.api.info_name(arg, False)
-                if ctx.get_option('short'):
+                if self.options.short:
                     ctx.ui.info(_('[repo] '), noln=True)
                 else:
                     ctx.ui.info(_('Package found in repository:'))
                 self.print_pkginfo(metadata, files, pisi.itembyrepodb.repos)
-                print
 
     def print_pkginfo(self, metadata, files, repo = None):
         import os.path
@@ -733,7 +750,7 @@ Usage: info <package1> <package2> ... <packagen>
                         print fileinfo.path
             else:
                 ctx.ui.warning(_('File information not available'))
-        if ctx.get_option('long'):
+        if not self.options.short:
             print
 
 
@@ -867,6 +884,7 @@ Usage: list-installed
                 ctx.ui.info('%15s - %s' % (package.name, unicode(package.summary)))
         self.finalize()
 
+        
 class RebuildDb(Command):
     """Rebuild Databases
 
@@ -1086,6 +1104,7 @@ all repositories.
                 p = p + ' ' * max(0, 15 - lenp)
                 ctx.ui.info('%s - %s ' % (p, unicode(package.summary)))
 
+                
 class ListComponents(Command):
     """List available components
 

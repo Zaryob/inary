@@ -155,7 +155,7 @@ def run_batch(cmd, realtime = False):
     if ctx.stderr:
         stderr = ctx.stderr
     else:
-        stderr = subprocess.STDOUT
+        stderr = subprocess.PIPE
 
     out = err = ""
     p = subprocess.Popen(cmd, shell=True, stdout=stdout, stderr=stderr)

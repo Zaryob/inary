@@ -54,6 +54,15 @@ class XmlFile(object):
     def rootNode(self):
         """returns root document element"""
         return self.doc
+        
+    def readxmlfile(self, file):
+        raise Exception("not implemented")
+        try:
+            self.doc = iks.parse(file)
+            return self.doc
+        except Exception, e:
+            raise Error(_("File '%s' has invalid XML") % (localpath) )
+
 
     def readxml(self, uri, tmpDir='/tmp', sha1sum=False, 
                 compress=None, sign=None, copylocal = False):
@@ -73,3 +82,6 @@ class XmlFile(object):
         f = File(uri, File.write, sha1sum=sha1sum, compress=compress, sign=sign)
         f.write(self.doc.toPrettyString())
         f.close()
+
+    def writexmlfile(self, f):
+        f.write(self.doc.toPrettyString())
