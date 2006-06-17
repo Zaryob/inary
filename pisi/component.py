@@ -195,7 +195,7 @@ class ComponentDB(object):
                 repo = self.d.which_repo(component_name, txn=txn) # get default repo then
             component = self.get_component(component_name, repo, txn)
             if spec in component.sources:
-                component.packages.remove(spec)
+                component.sources.remove(spec)
             self.d.add_item(component_name, component, repo, txn) # update
             
         ctx.txn_proc(lambda x: proc(txn, repo), txn)
