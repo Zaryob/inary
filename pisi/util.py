@@ -159,7 +159,7 @@ class TeeOutFile:
 
 # TODO: it might be worthwhile to try to remove the
 # use of ctx.stdout, and use run_batch()'s return
-# values instead.
+# values instead. but this is good enough :)
 def run_logged(cmd):
     """run command and get return value"""
     ctx.ui.info(_('Running ') + cmd, verbose=True)
@@ -173,7 +173,10 @@ def run_logged(cmd):
     if ctx.stderr:
         stderr = ctx.stderr
     else:
-        stderr = None
+        if ctx.get_option('debug'):
+            stderr = None
+        else:
+            stderr = subprocess.STDOUT
 
     p = subprocess.Popen(cmd, shell=True, stdout=stdout, stderr=stderr)
     out, err = p.communicate()    
