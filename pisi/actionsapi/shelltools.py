@@ -30,7 +30,7 @@ import pisi.actionsapi
 import pisi.actionsapi.get
 
 from pisi.actionsapi import error
-from pisi.util import run_batch
+from pisi.util import run_logged
 from pisi.util import join_path
 
 def can_access_file(filePath):
@@ -222,4 +222,4 @@ def dirName(filePath):
 
 def system(command):
     command = string.join(string.split(command))
-    return pisi.util.run_logged(command)
+    return run_logged(command)
