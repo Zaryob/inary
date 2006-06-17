@@ -139,38 +139,49 @@ def human_readable_rate(size = 0):
 # Process Releated Functions #
 ##############################
 
-#FIXME: the added flags make out and err defunct, they should be 
-#split to another function if needed, this function runs a command
-#noninteractively, then returns return value, standard output and 
-# error. the return spec must not change.
-def run_batch(cmd, realtime = False):
-    """run command non-interactively/realtime and report return value and output"""
+def run_batch(cmd):
+    """run command and report return value and output"""
     ctx.ui.info(_('Running ') + cmd, verbose=True)
+    p = subprocess.Popen(cmd, shell=True, 
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out, err = p.communicate()
+    ctx.ui.debug(_('return value for "%s" is %s') % (cmd, p.returncode))
+    return (p.returncode, out, err)
 
+# you can't use the following for Popen, oops
+class TeeOutFile:
+    def __init__(self, file):
+        self.file = file
+    
+    def write(self, str):
+        self.write(str)
+        ctx.ui.debug(str)
+
+# TODO: it might be worthwhile to try to remove the
+# use of ctx.stdout, and use run_batch()'s return
+# values instead.
+def run_logged(cmd):
+    """run command and get return value"""
+    ctx.ui.info(_('Running ') + cmd, verbose=True)
     if ctx.stdout:
         stdout = ctx.stdout
     else:
-        stdout = subprocess.PIPE
-
+        if ctx.get_option('debug'):
+            stdout = None
+        else:
+            stdout = subprocess.PIPE
     if ctx.stderr:
         stderr = ctx.stderr
     else:
-        stderr = subprocess.PIPE
+        stderr = None
 
-    out = err = ""
     p = subprocess.Popen(cmd, shell=True, stdout=stdout, stderr=stderr)
-    if realtime and not ctx.stdout:
-        while p.poll() == None:
-            line = p.stdout.readline()
-            if line:
-                ctx.ui.debug(line[:-1])
-    else:
-        out, err = p.communicate()
-    
+    out, err = p.communicate()    
     ctx.ui.debug(_('return value for "%s" is %s') % (cmd, p.returncode))
 
-    return (p.returncode, out, err)
+    return p.returncode
 
+    
 ######################
 # Terminal functions #
 ######################
