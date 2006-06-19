@@ -293,14 +293,17 @@ class Install(AtomicOperation):
                 assert newf.path == oldf.path
                 if newf.type == 'config' and oldf.type == 'config': # config upgrade
                     fpath = pisi.util.join_path(ctx.config.dest_dir(), oldf.path)
-                    if (os.path.isfile(fpath) or os.path.islink(fpath) and not os.path.isdir(fpath)) and os.path.exists(fpath) and pisi.util.sha1_file(fpath) == fileinfo.hash:
-                        # old config file changed, don't overwrite                        
-                        config_changed.append(fpath)
-                        if os.path.exists(fpath + '.old'):
-                            os.unlink(fpath + '.old')
-                        os.rename(fpath, fpath + '.old')
-                    else:
-                        # old config file not changed, overwrite
+                    try:
+                        if pisi.util.sha1_file(fpath) == fileinfo.hash:
+                            # old config file changed, don't overwrite                        
+                            config_changed.append(fpath)
+                            if os.path.exists(fpath + '.old'):
+                                os.unlink(fpath + '.old')
+                            os.rename(fpath, fpath + '.old')
+                        else:
+                            # old config file not changed, overwrite
+                            pass
+                    except pisi.util.FileError, e:
                         pass
         else:
             for file in self.files.list:
@@ -479,8 +482,11 @@ class Remove(AtomicOperation):
         elif fileinfo.type == ctx.const.conf:
             # config files are precious, leave them as they are
             # unless they are the same as provided by package.
-            if (os.path.isfile(fpath) or os.path.islink(fpath)) and os.path.exists(fpath) and pisi.util.sha1_file(fpath) == fileinfo.hash:
-                os.unlink(fpath)
+            try:
+                if pisi.util.sha1_file(fpath) == fileinfo.hash:
+                    os.unlink(fpath)
+            except pisi.util.FileError, e:
+                pass
         else:
             if os.path.isfile(fpath) or os.path.islink(fpath):
                 os.unlink(fpath)
