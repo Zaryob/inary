@@ -526,22 +526,22 @@ class Builder:
         if not len(debug_files):
             return None
 
-        static_package_obj = pisi.specfile.Package()
-        static_package_obj.debug_package = True
-        static_package_obj.name = self.spec.source.name + ctx.const.debug_name_suffix
+        debug_package_obj = pisi.specfile.Package()
+        debug_package_obj.debug_package = True
+        debug_package_obj.name = self.spec.source.name + ctx.const.debug_name_suffix
         # FIXME: find a better way to deal with the summary and description constants.
-        static_package_obj.summary['en'] = u'Debug files for %s' % (self.spec.source.name)
-        static_package_obj.description['en'] = u'Debug files for %s' % (self.spec.source.name)
-        static_package_obj.partOf = self.spec.source.partOf
+        debug_package_obj.summary['en'] = u'Debug files for %s' % (self.spec.source.name)
+        debug_package_obj.description['en'] = u'Debug files for %s' % (self.spec.source.name)
+        debug_package_obj.partOf = self.spec.source.partOf + '-debug'
         for f in debug_files:
-            static_package_obj.files.append(pisi.specfile.Path(path = f[len(self.pkg_debug_dir()):], fileType = "debug"))
+            debug_package_obj.files.append(pisi.specfile.Path(path = f[len(self.pkg_debug_dir()):], fileType = "debug"))
 
         # append all generated packages to dependencies
         for p in self.spec.packages:
-            static_package_obj.packageDependencies.append(
+            debug_package_obj.packageDependencies.append(
                 pisi.dependency.Dependency(package = p.name))
 
-        return static_package_obj
+        return debug_package_obj
 
     def strip_install_dir(self):
         """strip install directory"""
