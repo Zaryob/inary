@@ -294,7 +294,7 @@ class Install(AtomicOperation):
                 if newf.type == 'config' and oldf.type == 'config': # config upgrade
                     fpath = pisi.util.join_path(ctx.config.dest_dir(), oldf.path)
                     try:
-                        if pisi.util.sha1_file(fpath) == fileinfo.hash:
+                        if pisi.util.sha1_file(fpath) != fileinfo.hash:
                             # old config file changed, don't overwrite                        
                             config_changed.append(fpath)
                             if os.path.exists(fpath + '.old'):
