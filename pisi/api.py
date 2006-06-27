@@ -377,10 +377,12 @@ def update_repo(repo, force=False):
                 index.read_uri_of_repo(repouri, repo, force = force)
             else:
                 return
+
         try:
             index.check_signature(repouri, repo)
         except pisi.file.NoSignatureFound, e:
             ctx.ui.warning(e)
+
         ctx.txn_proc(lambda txn : index.update_db(repo, txn=txn))
         ctx.ui.info(_('* Package database updated.'))            
     else:

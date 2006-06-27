@@ -63,6 +63,9 @@ class Fetcher:
         if not isinstance(url, URI):
             url = URI(url)
  
+        if ctx.config.options.authinfo:
+            url.set_auth_info(ctx.config.options.authinfo)
+
         self.resume = resume
         self.scheme = url.scheme()
         self.url = url

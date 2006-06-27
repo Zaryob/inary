@@ -130,15 +130,15 @@ class Command(object):
         #                                  someauthconfig.password)
         #                 return
         if username and password:
-            self.authInfo = (username, password)
+            self.options.authinfo = (username, password)
             return
         
         if username and self.options.getpass:
             from getpass import getpass
             password = getpass(_("Password: "))
-            self.authInfo = (username, password)
+            self.options.authinfo = (username, password)
         else:
-            self.authInfo = None
+            self.options.authinfo = None
 
     def init(self, database = True, write = True):
         """initialize PiSi components"""
@@ -424,9 +424,9 @@ unpack, setup, build, install, package.
 
         for x in self.args:
             if ctx.get_option('until'):
-                pisi.api.build_until(x, ctx.get_option('until'), self.authInfo)                
+                pisi.api.build_until(x, ctx.get_option('until'))                
             else:
-                pisi.api.build(x, self.authInfo)
+                pisi.api.build(x)
         self.finalize()
 
         

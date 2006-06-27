@@ -96,7 +96,7 @@ class Builder:
     #FIXME: this class and every other class must use URLs as paths!
 
     @staticmethod
-    def from_name(name, authinfo = None):
+    def from_name(name):
         # download package and return an installer object
         # find package in repository
         sf, reponame = ctx.sourcedb.get_spec_repo(name)
@@ -114,19 +114,15 @@ class Builder:
     
             ctx.ui.debug(_("Source URI: %s") % src_path)
     
-            return Builder(src_path, authinfo)
+            return Builder(src_path)
         else:
             raise Error(_("Source %s not found in any active repository.") % name)
     
-    def __init__(self, specuri, authinfo = None):
+    def __init__(self, specuri):
 
         # process args
         if not isinstance(specuri, URI):
             specuri = URI(specuri)
-        if authinfo:
-            specuri.set_auth_info(authinfo)
-
-        self.authinfo = authinfo
 
         # read spec file, we'll need it :)
         self.set_spec_file(specuri)
@@ -285,8 +281,6 @@ class Builder:
     def download(self, uri, transferdir):
         # fix auth info and download
         uri = File.make_uri(uri)
-        if self.authinfo:
-            uri.set_auth_info(self.authinfo)
         File.download(uri, transferdir)
 
     def fetch_component(self):
@@ -863,11 +857,11 @@ class Builder:
 
 # build functions...
 
-def build(pspec, authinfo=None):
+def build(pspec):
     if pspec.endswith('.xml'):
-        pb = Builder(pspec, authinfo)
+        pb = Builder(pspec)
     else:
-        pb = Builder.from_name(pspec, authinfo)
+        pb = Builder.from_name(pspec)
     return pb.build()
 
 order = {"none": 0,
@@ -907,11 +901,11 @@ def __buildState_buildpackages(pb, last):
         __buildState_installaction(pb, last)
     pb.build_packages()
 
-def build_until(pspec, state, authinfo=None):
+def build_until(pspec, state):
     if pspec.endswith('.xml'):
-        pb = Builder(pspec, authinfo)
+        pb = Builder(pspec)
     else:
-        pb = Builder.from_name(pspec, authinfo)
+        pb = Builder.from_name(pspec)
 
     pb.compile_action_script()
     
