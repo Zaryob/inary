@@ -736,7 +736,7 @@ installed in the respective order to satisfy dependencies:
         package_names, blah = atomicoperations.build(x)
         install_pkg_files(package_names) # handle inter-package deps here
 
-    if 'pisi' in order_build or ( ('pisi' in order_inst + order_build) and pisi_installed):
+    if 'pisi' in order_build or ( ('pisi' in order_build.union(order_inst)) and pisi_installed):
         upgrade_pisi()
 
 def plan_emerge(A, rebuild_all):
