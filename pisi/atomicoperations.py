@@ -320,9 +320,9 @@ class Install(AtomicOperation):
         self.package.extract_install(ctx.config.dest_dir())
         
         for path in config_changed:
-            if os.path.exists(path + '.new'):
-                os.unlink(path + '.new')
-            os.rename(path, path + '.new')
+            if os.path.exists(path + '.newconfig'):
+                os.unlink(path + '.newconfig')
+            os.rename(path, path + '.newconfig')
             os.rename(path + '.old', path)
 
     def store_pisi_files(self):
