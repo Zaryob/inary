@@ -96,7 +96,7 @@ class DBShelf:
     def decode(self, data):
         try:
             return cPickle.loads(data)
-        except:
+        except cPickle.UnpicklingError:
             raise CodingError()
 
     def encode(self, obj):
