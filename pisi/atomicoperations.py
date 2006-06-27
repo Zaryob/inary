@@ -535,10 +535,10 @@ class Remove(AtomicOperation):
 def remove_single(package_name):
     Remove(package_name).run()
 
-def build(package, authinfo=None):
+def build(package):
     # wrapper for build op
     import pisi.build
-    return pisi.build.build(package, authinfo)
+    return pisi.build.build(package)
 
 def virtual_install(metadata, files, txn):
     """Recreate the package info for rebuilddb command"""
