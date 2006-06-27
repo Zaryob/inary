@@ -105,7 +105,7 @@ class Builder:
 
             src_uri = URI(src.sourceURI)
             if src_uri.is_absolute_path():
-                pkg_path = str(src_uri)
+                src_path = str(src_uri)
             else:
                 repo = ctx.repodb.get_repo(reponame)
                 #FIXME: don't use dirname to work on URLs
