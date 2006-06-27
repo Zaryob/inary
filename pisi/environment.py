@@ -58,8 +58,9 @@ def read_env_d(envdir):
         # skip backup and version control files
         if name.endswith("~") or name.endswith(".bak") or name.endswith(",v"):
             continue
-        # skip pisi's new config files
-        if name.endswith(".new"):
+        # skip pisi's config file backups
+        # .oldconfig is obsolete, but checked anyway cause it may still exist at old systems
+        if name.endswith(".oldconfig") or name.endswith(".newconfig"):
             continue
         paths.append(path)
     paths.sort()
