@@ -336,10 +336,6 @@ class Builder:
         # install function is mandatory!
         self.run_action_function(ctx.const.install_func, True)
         self.set_state("installaction")
-        
-        infodir = join(self.pkg_install_dir(), '/usr/share/info/dir')
-        if os.path.exists(infodir):
-            os.unlink(infodir)
 
     def get_abandoned_files(self):
         # return the files those are not collected from the install dir

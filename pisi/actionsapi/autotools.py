@@ -25,6 +25,7 @@ import pisi.actionsapi
 import pisi.actionsapi.get as get
 from pisi.actionsapi.shelltools import system
 from pisi.actionsapi.shelltools import can_access_file
+from pisi.actionsapi.shelltools import unlink
 from pisi.actionsapi.libtools import gnuconfig_update
 
 class ConfigureError(pisi.actionsapi.Error):
@@ -95,6 +96,11 @@ def make(parameters = ''):
     if system('make %s %s' % (get.makeJOBS(), parameters)):
             raise MakeError(_('Make failed.'))
 
+def fixInfoDir():
+    infoDir = "%s/usr/share/info/dir" % get.installDIR()
+    if can_access_file(infoDir):
+        unlink(infoDir)
+
 def install(parameters = '', argument = 'install'):
     '''install source into install directory with given parameters'''
     if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
@@ -120,6 +126,8 @@ def install(parameters = '', argument = 'install'):
     else:
         raise InstallError(_('No Makefile found.'))
 
+    fixInfoDir()
+
 def rawInstall(parameters = '', argument = 'install'):
     '''install source into install directory with given parameters = PREFIX=%s % get.installDIR()'''
     if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
@@ -127,6 +135,8 @@ def rawInstall(parameters = '', argument = 'install'):
             raise InstallError(_('Install failed.'))
     else:
         raise InstallError(_('No Makefile found.'))
+
+    fixInfoDir()
 
 def aclocal(parameters = ''):
     '''generates an aclocal.m4 based on the contents of configure.in.'''    
