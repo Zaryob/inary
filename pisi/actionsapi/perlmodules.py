@@ -74,7 +74,13 @@ def install(parameters = 'install'):
         if system('perl Build install'):
             raise MakeError, _('perl install failed.')
 
-    podFile = "%s/usr/lib/perl5/%s/i686-linux/perllocal.pod" % (get.installDIR(), get.curPERL())
+    fixLocalPod()
 
-    if can_access_file(podFile):
-        unlink(podFile)
+def fixLocalPod():
+    podFiles = [ "%s/usr/lib/perl5/vendor_perl/%s/i686-linux/perllocal.pod" % (get.installDIR(), get.curPERL()),
+                "%s/usr/lib/perl5/%s/i686-linux/perllocal.pod" % (get.installDIR(), get.curPERL()),
+                "%s/usr/lib/perl5/site_perl/%s/perllocal.pod" % (get.installDIR(), get.curPERL())]
+
+    for podFile in podFiles:
+        if can_access_file(podFile):
+            unlink(podFile)
