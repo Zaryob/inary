@@ -26,6 +26,7 @@ import pisi.actionsapi.get as get
 from pisi.actionsapi.shelltools import system
 from pisi.actionsapi.shelltools import can_access_file
 from pisi.actionsapi.shelltools import export
+from pisi.actionsapi.shelltools import unlink
 
 class ConfigureError(pisi.actionsapi.Error):
     def __init__(self, value=''):
@@ -73,4 +74,7 @@ def install(parameters = 'install'):
         if system('perl Build install'):
             raise MakeError, _('perl install failed.')
 
-# FIXME: fix_local_pod % update_pod
+    podFile = "%s/usr/lib/perl5/%s/i686-linux/perllocal.pod" % (get.installDIR(), get.curPERL())
+
+    if can_access_file(podFile):
+        unlink(podFile)

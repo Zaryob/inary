@@ -48,6 +48,10 @@ def curPYTHON():
     (a, b, c, x, y) = sys.version_info
     return 'python%s.%s' % (a, b)
 
+def curPERL():
+    ''' returns currently used perl's version'''
+    return os.path.realpath("/usr/bin/perl").split("perl")[1]
+
 def ENV(environ):
     '''returns any given environ variable'''
     try:
