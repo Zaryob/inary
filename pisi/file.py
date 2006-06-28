@@ -116,7 +116,7 @@ class File:
 
             if uri.is_remote_file():
                 ctx.ui.info(_("Fetching %s") % uri.get_uri(), verbose=True)
-                fetch_url(uri, transfer_dir)
+                fetch_url(uri, transfer_dir, ctx.ui.Progress)
             else:
                 # copy to transfer dir,
                 localfile = join(transfer_dir, uri.filename())
