@@ -701,6 +701,8 @@ def emerge(A, rebuild_all = False):
     
     #A |= upgrade_base(A)
         
+    # FIXME: Errr... order_build changes type conditionally and this
+    # is not good. - baris
     if not ctx.config.get_option('ignore_dependency'):
         G_f, order_inst, order_build = plan_emerge(A, rebuild_all)
     else:
@@ -733,10 +735,14 @@ installed in the respective order to satisfy dependencies:
     #ctx.ui.notify(ui.packagestogo, order = order_build)
     
     for x in order_build:
-        package_names, blah = atomicoperations.build(x)
+        package_names = atomicoperations.build(x)[0]
         install_pkg_files(package_names) # handle inter-package deps here
 
-    if 'pisi' in order_build or ( ('pisi' in order_build.union(order_inst)) and pisi_installed):
+    # FIXME: take a look at the fixme above :(, we have to be sure
+    # that order_build is a known type...
+    U = set(order_build)
+    U.update(order_inst)
+    if 'pisi' in order_build or (('pisi' in U) and pisi_installed):
         upgrade_pisi()
 
 def plan_emerge(A, rebuild_all):
