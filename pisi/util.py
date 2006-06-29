@@ -522,16 +522,6 @@ def strip_directory(top, excludelist=[]):
                                ctx.const.debug_dir_suffix, 
                                remove_prefix(top, frpath))
             
-            # Some upstream sources have buggy libtool and ltmain.sh with them, 
-            # which causes wrong path entries in *.la files. And these wrong path
-            # entries sometimes triggers compile-time errors or linkage problems. 
-            # Instead of patching all these buggy sources and maintain these patches,
-            # PISI removes wrong paths...
-            extension = os.path.splitext(frpath)[1]
-            if extension == ".la":
-                # FIXME: I'm regular expr. idiot, so one can convert this to python...
-                os.system("sed -i -e 's~-L/var/tmp/pisi/[[:graph:]]* ~~g' %s" % frpath)
-                
             # real path in .pisi package
             p = '/' + removepathprefix(top, frpath)
             strip = True
