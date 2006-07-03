@@ -50,8 +50,9 @@ def_repo_html = u"""
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
 </head><body>
-<div id="header">
+<div id="header-bugzilla">
 </div>
+<div id="packets">
 <p>
 Depoda toplam %(nr_source)d
 <a href="./sources.html">kaynak paket</a>, ve bu paketlerden oluşturulacak
@@ -197,7 +198,7 @@ def_missing_html = u"""
 
 <h3>Bağımlı paketler (çalışmak için):</h3>
 <p>%(revRuntimeDeps)s</p>
-
+</div>
 </body></html>
 """
 
