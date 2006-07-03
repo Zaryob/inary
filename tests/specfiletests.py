@@ -25,7 +25,7 @@ class SpecFileNewTestCase(unittest.TestCase):
 
         self.assertEqual(self.spec.source.version, "1.7")
 
-        self.assertEqual(self.spec.source.release, "3")
+        self.assertEqual(self.spec.source.release, "1")
 
         self.assertEqual(self.spec.source.archive.sha1sum,
                          "66f3c77b87a160951b180447f4a6dce68ad2f71b")
@@ -37,8 +37,8 @@ class SpecFileNewTestCase(unittest.TestCase):
         self.assertEqual(patch.compressionType, "gz")
 
         packages = self.spec.packages
-        self.assertEqual(len(packages), 1)
-        package = packages[0] # get the first and the only package
+        self.assertEqual(len(packages), 2)
+        package = packages[1]
         self.assertEqual(package.name, "popt-libs")
 
         # search for a path in package.paths
@@ -49,22 +49,22 @@ class SpecFileNewTestCase(unittest.TestCase):
 
     def testIsAPartOf(self):
         # test existence in Source
-        if not "library:util:optparser" in self.spec.source.isA:
+        if not "app:console" in self.spec.source.isA:
             self.fail("Failed to match IsA in Source")
         if not isinstance(self.spec.source.isA, list):
             self.fail("source.isA is not a list, but it must be...")
-
-        if "rpm:archive" != self.spec.source.partOf:
+        
+        if "system.base" != self.spec.source.partOf:
             self.fail("Failed to match PartOf in Source")
 
         # test existence in Package
         pkg = self.spec.packages[0]
-        if not "library:util:optparser" in pkg.isA:
+        if not "app:console" in pkg.isA:
             self.fail("Failed to match IsA in Package")
         if not isinstance(pkg.isA, list):
             self.fail("source.isA is not a list, but it must be...")
 
-        if "rpm:archive" != pkg.partOf:
+        if "system.base" != pkg.partOf:
             self.fail("Failed to match PartOf in Package")
         
     def testVerify(self):

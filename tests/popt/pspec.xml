@@ -23,6 +23,12 @@
             into argv[] style arrays
         </Description>
         <Archive sha1sum="66f3c77b87a160951b180447f4a6dce68ad2f71b" type="targz">ftp://ftp.pardus.org.tr/pub/pisi/source/popt-1.7.tar.gz</Archive>
+        <Patches>
+          <Patch compressionType="gz" level="1">popt-1.7-uclibc.patch.gz</Patch>
+        </Patches>
+        <BuildDependencies>
+          <Dependency versionFrom="1.8"> make </Dependency>
+        </BuildDependencies>
     </Source>
 
     <Package>
@@ -40,6 +46,26 @@
             <Path fileType="localedata">/usr/share/locale</Path>
             <Path fileType="header">/usr/include/popt.h</Path>
         </Files>
+    </Package>
+
+    <Package>
+      <Name>popt-libs</Name>
+      <Summary xml:lang="en">Command line option parsing library</Summary>
+      <Summary xml:lang="tr">Komut satırı seçenekleri işleme kütüphanesi</Summary>
+      <RuntimeDependencies>
+        <Dependency>gettext</Dependency>
+      </RuntimeDependencies>
+      <Description>library files for popt</Description>
+      <Files>
+        <Path fileType="sharedLib">/usr/lib</Path>
+        <Path fileType="doc">/usr/share/doc</Path>
+        <Path fileType="doc">/usr/share/man</Path>
+        <Path fileType="localedata">/usr/share/locale</Path>
+        <Path fileType="header">/usr/include/popt.h</Path>
+      </Files>
+      <AdditionalFiles>
+        <AdditionalFile owner="root" permission="0755" target="/etc/init.d/acpid">acpid.rc6</AdditionalFile>
+      </AdditionalFiles>
     </Package>
 
     <History>
