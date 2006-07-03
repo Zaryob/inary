@@ -224,7 +224,7 @@ def check_conflicts(order, packagedb):
         if not ctx.ui.confirm(_('Remove the following conflicting packages?')):
             raise Error(_("Conflicts remain"))
 
-        if remove(list(C)) == False:
+        if remove(list(C), True) == False:
             raise Error(_("Conflicts remain"))
 
 def expand_components(A):
@@ -521,7 +521,7 @@ def plan_upgrade(A, ignore_build = False):
     check_conflicts(order, ctx.packagedb)
     return G_f, order
 
-def remove(A):
+def remove(A, ignore_dep = None):
     """remove set A of packages from system (A is a list of package names)"""
     
     A = [str(x) for x in A]
@@ -552,7 +552,7 @@ def remove(A):
         ctx.ui.info(_('No packages to remove.'))
         return False
 
-    if not ctx.config.get_option('ignore_dependency'):
+    if not ctx.config.get_option('ignore_dependency') and not ignore_dep:
         G_f, order = plan_remove(A)
     else:
         G_f = None
