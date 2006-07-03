@@ -48,8 +48,10 @@ def_repo_html = u"""
 <html><head>
     <title>Depo istatistikleri</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
 </head><body>
-
+<div id="header">
+</div>
 <p>
 Depoda toplam %(nr_source)d
 <a href="./sources.html">kaynak paket</a>, ve bu paketlerden oluşturulacak
