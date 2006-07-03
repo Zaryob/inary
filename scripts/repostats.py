@@ -81,7 +81,7 @@ Depoda toplam %(nr_source)d
 %(packagers)s
 </tbody></table></p>
 
-
+</div>
 </body></html>
 """
 
@@ -89,7 +89,11 @@ def_packager_html = u"""
 <html><head>
     <title>Paketçi %(name)s</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
 </head><body>
+<div id="header-bugzilla">
+</div>
+<div id="packets">
 
 <h1>%(name)s &lt;%(email)s&gt;</h1>
 
@@ -98,7 +102,7 @@ def_packager_html = u"""
 
 <h3>Güncellemeler:</h3>
 <p>%(updates)s</p>
-
+</div>
 </body></html>
 """
 
@@ -106,7 +110,12 @@ def_package_html = u"""
 <html><head>
     <title>İkili paket %(name)s</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
+
 </head><body>
+<div id="header-bugzilla">
+</div>
+<div id="packets">
 
 <h1>İkili paket: %(name)s</h1>
 <h2>Kaynak versiyon %(version)s, depo sürümü %(release)s</h2>
@@ -124,7 +133,7 @@ def_package_html = u"""
 
 <h3>Bağımlı paketler (çalışmak için):</h3>
 <p>%(revRuntimeDeps)s</p>
-
+</div>
 </body></html>
 """
 
@@ -140,7 +149,12 @@ def_source_html = u"""
 <html><head>
     <title>Kaynak paket %(name)s</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
+
 </head><body>
+<div id="header-bugzilla">
+</div>
+<div id="packets">
 
 <h1>Kaynak paket: %(name)s</h1>
 <h2>Kaynak versiyon %(version)s, depo sürümü %(release)s</h2>
@@ -165,7 +179,7 @@ Hata kayıtlarına bak</a></p>
 
 <h3>Yamalar</h3>
 %(patches)s
-
+</div>
 </body></html>
 """
 
@@ -173,7 +187,12 @@ def_sources_html = u"""
 <html><head>
     <title>Kaynak paketler listesi</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
+
 </head><body>
+<div id="header-bugzilla">
+</div>
+<div id="packets">
 
 <h1>Kaynak paketler listesi</h1>
 <hr>
@@ -181,7 +200,7 @@ def_sources_html = u"""
 <p>
 %(source_list)s
 </p>
-
+</div>
 </body></html>
 """
 
@@ -189,7 +208,12 @@ def_missing_html = u"""
 <html><head>
     <title>Eksik ikili paket %(name)s</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
+
 </head><body>
+<div id="header-bugzilla">
+</div>
+<div id="packets">
 
 <h1>Eksik ikili paket: %(name)s</h1>
 
