@@ -34,7 +34,7 @@ class BuildTestCase(testcase.TestCase):
     def testBasicBuild(self):
         shutil.copy('tests/buildtests/a/actions.py-1', 'tests/buildtests/a/actions.py')
         pspec = 'tests/buildtests/a/pspec.xml'
-        pb = Builder(pspec, None)
+        pb = Builder(pspec)
         pb.build()
         self.assert_(os.path.exists('tmp/a-1.0-1-1.pisi'))
 
@@ -44,10 +44,11 @@ class BuildTestCase(testcase.TestCase):
         
         pspec = 'tests/buildtests/a/pspec.xml'
         shutil.copy('tests/buildtests/a/actions.py-2', 'tests/buildtests/a/actions.py')
-        pb = Builder(pspec, None)
+        pb = Builder(pspec)
         pb.build()
         self.assert_(os.path.exists('tmp/a-1.0-1-2.pisi'))
-        
+
+        pb = Builder(pspec)
         pb.build()
         # because nothing is changed
         self.assert_(not os.path.exists('tmp/a-1.0-1-3.pisi'))
