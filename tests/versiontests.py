@@ -42,6 +42,8 @@ class VersionTestCase(unittest.TestCase):
         v4 = Version("2.23_p1")
         v5 = Version("2.23_beta1")
         v6 = Version("2.23_m1")
+        v7 = Version("2.23_rc1")
+        v8 = Version("2.23_rc2")
         self.assert_(v1 < v2)
         self.assert_(v1 > v3)
         self.assert_(v1 < v4)
@@ -50,6 +52,8 @@ class VersionTestCase(unittest.TestCase):
         self.assert_(v2 > v5)
         self.assert_(v6 < v4)
         self.assert_(v6 > v5)
+        self.assert_(v7 > v5)
+        self.assert_(v8 > v7)
 
         v1 = Version("1.0_alpha1")
         v2 = Version("1.0_alpha2")
