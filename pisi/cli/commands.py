@@ -450,8 +450,6 @@ You can also give the name of a component.
 
     def options(self):
         Build.options(self)
-        self.parser.add_option("", "--ignore-script-errors", action="store_true",
-                     default=False, help=_("Ignore errors from scripts"))
     
     def run(self):
         if not self.args:
@@ -484,8 +482,6 @@ class PackageOp(Command):
                      default=False, help=_("bypass safety switch"))
         p.add_option("-n", "--dry-run", action="store_true", default=False,
                      help = _("do not perform any action, just show what would be done"))
-        p.add_option("", "--ignore-script-errors", action="store_true",
-                     default=False, help=_("Ignore errors from scripts"))
         ignoredep_opt(self)
 
     def init(self):
@@ -517,8 +513,6 @@ expanded to package names.
     def options(self):
         super(Install, self).options()
         p = self.parser
-        p.add_option("", "--bypass-ldconfig", action="store_true",
-                     default=False, help=_("Bypass ldconfig phase"))
         p.add_option("", "--reinstall", action="store_true",
                      default=False, help=_("Reinstall already installed packages"))
         p.add_option("", "--ignore-file-conflicts", action="store_true",
@@ -569,8 +563,6 @@ expanded to package names.
                      default=False, help=_("select only security upgrades"))
         p.add_option("-r", "--bypass-update-repo", action="store_true",
                      default=False, help=_("Do not update repositories"))
-        p.add_option("", "--bypass-ldconfig", action="store_true",
-                     default=False, help=_("Bypass ldconfig phase"))
         p.add_option("-e", "--eager", action="store_true",
                      default=False, help=_("eager upgrades"))
 
