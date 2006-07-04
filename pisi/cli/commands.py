@@ -89,8 +89,6 @@ class Command(object):
                      default=False, help = _("assume yes in all yes/no queries"))
         p.add_option("-u", "--username", action="store")
         p.add_option("-p", "--password", action="store")
-        p.add_option("-P", action="store_true", dest="getpass", default=False,
-                     help=_("get password from the command line"))
         p.add_option("-v", "--verbose", action="store_true",
                      dest="verbose", default=False,
                      help=_("detailed output"))
@@ -133,7 +131,7 @@ class Command(object):
             self.options.authinfo = (username, password)
             return
         
-        if username and self.options.getpass:
+        if username and not password:
             from getpass import getpass
             password = getpass(_("Password: "))
             self.options.authinfo = (username, password)
