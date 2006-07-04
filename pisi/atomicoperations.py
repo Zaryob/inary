@@ -108,10 +108,7 @@ class Install(AtomicOperation):
         self.check_reinstall()
         self.extract_install()
         self.store_pisi_files()
-        self.update_environment()
-        self.update_info()
 
-        self.register_comar()
         self.postinstall()
 
         txn = ctx.dbenv.txn_begin()
@@ -240,32 +237,22 @@ class Install(AtomicOperation):
             self.remove_old = Remove(pkg.name)
             self.remove_old.run_preremove()
 
-    def register_comar(self):
-        self.config_later = False
-
-        if self.metadata.package.providesComar:
-            if ctx.comar:
-                import pisi.comariface as comariface
-                self.register_comar_scripts()
-            else:
-                self.config_later = True # configure-pending will register scripts later
-
     def postinstall(self):
-        if 'System.Package' in [x.om for x in self.metadata.package.providesComar]:
-            if ctx.comar:
-                import pisi.comariface as comariface
-                ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
-                try:
-                    comariface.run_postinstall(self.pkginfo.name)
-                except Exception, e:
-                    if ctx.get_option('ignore_script_errors'):
-                        ctx.ui.warning(_('Ignoring script error: ') + unicode(e))
-                    else:
-                        raise e
-                ctx.ui.notify(pisi.ui.configured, package = self.pkginfo, files = self.files)
-            else:
-                self.config_later = True
-            
+        self.config_later = False
+        if ctx.comar:
+            import pisi.comariface
+            ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
+            pisi.comariface.post_install(
+                self.pkginfo.name,
+                self.metadata.package.providesComar,
+                self.package.comar_dir(),
+                os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
+                os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+            )
+            ctx.ui.notify(pisi.ui.configured, package = self.pkginfo, files = self.files)
+        else:
+            self.config_later = True
+
     def extract_install(self):
         "unzip package in place"
 
@@ -346,15 +333,6 @@ class Install(AtomicOperation):
             ctx.ui.info(_('Storing %s') % fpath, verbose=True)
             self.package.extract_file(fpath, self.package.pkg_dir())
 
-    def register_comar_scripts(self):
-        "register COMAR scripts"
-
-        for pcomar in self.metadata.package.providesComar:
-            scriptPath = os.path.join(self.package.comar_dir(),pcomar.script)
-            import pisi.comariface
-            pisi.comariface.register(pcomar, self.metadata.package.name,
-                                     scriptPath)
-
     def update_databases(self, txn):
         "update databases"
         if self.reinstall:
@@ -375,25 +353,6 @@ class Install(AtomicOperation):
         # installed packages
         ctx.packagedb.add_package(self.pkginfo, pisi.itembyrepodb.installed, txn=txn)
 
-    def update_info(self):
-        for x in self.files.list:
-            if x.type == 'info':
-                pisi.util.run_batch('LC_ALL=C install-info /%s /usr/share/info/dir' % x.path)
-        
-    def update_environment(self):
-        # check if we have any shared objects or anything under
-        # /etc/env.d
-        shared = False
-        for x in self.files.list:
-            if x.path.endswith('.so') or x.path.startswith('/etc/env.d'):
-                shared = True
-                break
-        if not ctx.get_option('bypass_ldconfig'):
-            if shared:
-                ctx.ui.info(_("Regenerating /etc/ld.so.cache..."), verbose=True)
-                util.env_update()
-        else:
-            ctx.ui.warning(_("Bypassing ldconfig"), verbose=True)
 
 def install_single(pkg, upgrade = False):
     """install a single package from URI or ID"""
@@ -442,7 +401,6 @@ class Remove(AtomicOperation):
         self.check_dependencies()
             
         self.run_preremove()
-        self.update_info()
         for fileinfo in self.files.list:
             self.remove_file(fileinfo)
 
@@ -506,18 +464,13 @@ class Remove(AtomicOperation):
                 dpath = os.path.dirname(dpath)
 
     def run_preremove(self):
-        if ctx.comar and self.package.providesComar:
-            import pisi.comariface as comariface
-            try:
-                comariface.run_preremove(self.package_name)
-            except Exception, e:
-                if ctx.get_option('ignore_script_errors'):
-                    ctx.ui.warning(_('Ignoring script error: ') + unicode(e))
-                else:
-                    raise e
-        else:
-            # FIXME: store this somewhere
-            pass
+        if ctx.comar:
+            import pisi.comariface
+            pisi.comariface.pre_remove(
+                self.package_name,
+                os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
+                os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+            )
 
     def remove_pisi_files(self):
         util.clean_dir(self.package.pkg_dir())
@@ -527,11 +480,6 @@ class Remove(AtomicOperation):
         ctx.filesdb.remove_files(self.files, txn)
         pisi.packagedb.remove_tracking_package(self.package_name, txn)
 
-    def update_info(self):
-        for x in self.files.list:
-            if x.type == 'info':
-                pisi.util.run_batch('LC_ALL=C install-info --delete /%s /usr/share/info/dir ' % x.path)
-        
 
 def remove_single(package_name):
     Remove(package_name).run()
