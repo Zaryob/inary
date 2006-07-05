@@ -384,6 +384,8 @@ unpack, setup, build, install, package.
         self.parser.add_option("-A", "--ignore-action-errors",
                                action="store_true", default=False,
                                help=_("bypass errors from ActionsAPI"))
+        p.add_option("-S", "--bypass-safety", action="store_true",
+                     default=False, help=_("bypass safety switch"))
         self.parser.add_option("-B", "--ignore-comar", action="store_true",
                                default=False, help=_("bypass comar configuration agent"))
         self.parser.add_option("", "--create-static", action="store_true",
