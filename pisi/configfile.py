@@ -20,6 +20,7 @@
 #[general]
 #destinationdirectory = /
 #autoclean = False
+#xdelta = False
 #
 #[build]
 #host = i686-pc-linux-gnu
@@ -59,6 +60,7 @@ class GeneralDefaults:
     """Default values for [general] section"""
     destinationdirectory = "/"
     autoclean = False
+    xdelta = False
     distribution = "Pardus"
     distribution_release = "1.1"
     http_proxy = os.getenv("HTTP_PROXY") or None

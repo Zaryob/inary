@@ -50,7 +50,7 @@ class Package:
 
             # if package is installed (which means we are upgrading it),
             # calculate needed info
-            if ctx.installdb.is_installed(current_pkg): 
+            if ctx.installdb.is_installed(current_pkg) and ctx.config.values.general.xdelta: 
                 installed = True
 
                 # calculate currently installed package's name and pisi file's location
@@ -69,7 +69,7 @@ class Package:
             else:
                 installed = False
                 
-            if installed and exists(current_fn):
+            if installed and exists(current_fn) and ctx.config.values.general.xdelta:
                 # if package is installed and old pisi file exists, fetch xdelta
                 if not exists(xdelta_fn):
                     ctx.ui.info(_("Trying to fetch xdelta: %s") % xdelta_url)
