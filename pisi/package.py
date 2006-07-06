@@ -76,7 +76,7 @@ class Package:
                     try:
                         fetch_url(xdelta_url, dest, ctx.ui.Progress)
                     except FetchError,e:
-                        ctx.ui.error(_('XDelta %s: not exists') % xdelta_url)
+                        ctx.ui.warning(_('XDelta %s: not exists') % xdelta_url)
                     else:
                         # generate new one using old pisi file and xdelta
                         util.generate_pisi_file(xdelta_fn, current_fn, self.filepath)
