@@ -116,6 +116,8 @@ class ConfigurationSection(object):
         if self.items:
             for item in self.items:
                 if item[0] == attr:
+                    # all values are returned as string types by ConfigParser.
+                    # evaluate "True" or "False" strings to boolean.
                     if item[1] in ["True", "False"]:
                         return eval(item[1])
                     else:
