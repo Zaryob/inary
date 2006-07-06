@@ -160,7 +160,8 @@ in the respective order to satisfy extra dependencies:
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
-    check_conflicts(order, packagedb)
+    if not ctx.get_option('ignore_file_conflicts'):
+        check_conflicts(order, packagedb)
     order.reverse()
     ctx.ui.info(_('Installation order: ') + util.strlist(order) )
 
@@ -355,7 +356,8 @@ def plan_install_pkg_names(A):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
-    check_conflicts(order, ctx.packagedb)
+    if not ctx.get_option('ignore_file_conflicts'):
+        check_conflicts(order, ctx.packagedb)
     return G_f, order
 
 def upgrade(A):
@@ -519,7 +521,8 @@ def plan_upgrade(A, ignore_build = False):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
-    check_conflicts(order, ctx.packagedb)
+    if not ctx.get_option('ignore_file_conflicts'):
+        check_conflicts(order, ctx.packagedb)
     return G_f, order
 
 def remove(A, ignore_dep = None):
