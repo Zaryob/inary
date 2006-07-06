@@ -454,7 +454,7 @@ class Remove(AtomicOperation):
             elif os.path.isdir(fpath) and not os.listdir(fpath):
                 os.rmdir(fpath)
             else:
-                ctx.ui.warning(_('Not removing non-file, non-link %s') % fpath, verbose=True)
+                ctx.ui.warning(_('Not removing non-file, non-link %s') % fpath)
                 return
 
             # remove emptied directories
