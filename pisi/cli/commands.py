@@ -390,8 +390,6 @@ unpack, setup, build, install, package.
                                default=False, help=_("bypass comar configuration agent"))
         self.parser.add_option("", "--create-static", action="store_true",
                                default=False, help=_("create a static package with ar files"))
-        self.parser.add_option("", "--no-debug", action="store_true",
-                               default=False, help=_("don't create a debug package with debug files"))
         self.parser.add_option("", "--no-install", action="store_true",
                                default=False, help=_("don't install build dependencies, fail if a build dependency is present"))
         self.parser.add_option("-F", "--package-format", action="store", default='1.1',

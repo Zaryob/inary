@@ -575,14 +575,14 @@ def strip_file(filepath, outpath):
         return True
 
     elif "SB executable" in o:
-        if not ctx.get_option('no_debug'):
+        if not ctx.config.values.build.generatedebug:
             check_dir(os.path.dirname(outpath))
             save_elf_debug(filepath, outpath)
         run_strip(filepath)
         return True
 
     elif "SB shared object" in o:
-        if not ctx.get_option('no_debug'):
+        if not ctx.config.values.build.generatedebug:
             check_dir(os.path.dirname(outpath))
             save_elf_debug(filepath, outpath)
         run_strip(filepath, "--strip-unneeded")

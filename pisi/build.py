@@ -80,7 +80,7 @@ def check_path_collision(package, pkgList):
                 # pinfo.path: /usr/share
                 # path.path: /usr/share/doc
                 if (path.path.endswith(ctx.const.ar_file_suffix) and ctx.get_option('create_static')) or \
-                   (path.path.endswith(ctx.const.debug_file_suffix) and not ctx.get_option('no_debug')):
+                   (path.path.endswith(ctx.const.debug_file_suffix) and not ctx.config.values.build.generatedebug):
                     # don't throw collision error for these files. 
                     # we'll handle this in gen_files_xml..
                     continue
@@ -719,7 +719,7 @@ class Builder:
             if obj:
                 self.spec.packages.append(obj)
 
-        if not ctx.get_option('no_debug'):
+        if not ctx.config.values.build.generatedebug:
             obj = self.generate_debug_package_object()
             if obj:
                 self.spec.packages.append(obj)
