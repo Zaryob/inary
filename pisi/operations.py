@@ -486,7 +486,8 @@ def plan_upgrade(A, ignore_build = False):
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
                 else:
-                    raise Error(_('Dependency %s of %s cannot be satisfied') % (dep, x))
+                    ctx.ui.error(_('Dependency %s of %s cannot be satisfied') % (dep, x))
+                    raise Error(_("Upgrade is not possible."))
         B = Bp
     # now, search reverse dependencies to see if anything
     # should be upgraded
