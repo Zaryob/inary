@@ -386,6 +386,8 @@ unpack, setup, build, install, package.
                                help=_("bypass errors from ActionsAPI"))
         self.parser.add_option("-S", "--bypass-safety", action="store_true",
                      default=False, help=_("bypass safety switch"))
+        self.parser.add_option("", "--ignore-file-conflicts", action="store_true",
+                     default=False, help=_("Ignore file conflicts"))
         self.parser.add_option("-B", "--ignore-comar", action="store_true",
                                default=False, help=_("bypass comar configuration agent"))
         self.parser.add_option("", "--create-static", action="store_true",
@@ -561,6 +563,8 @@ expanded to package names.
                      default=False, help=_("select only security upgrades"))
         p.add_option("-r", "--bypass-update-repo", action="store_true",
                      default=False, help=_("Do not update repositories"))
+        p.add_option("", "--ignore-file-conflicts", action="store_true",
+                     default=False, help=_("Ignore file conflicts"))
         p.add_option("-e", "--eager", action="store_true",
                      default=False, help=_("eager upgrades"))
 
