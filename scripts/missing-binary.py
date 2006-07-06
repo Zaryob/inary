@@ -15,7 +15,7 @@ import re
 import sys
 
 from pisi.specfile import SpecFile
-from pisi.util import join_path, pure_package_name
+from pisi.util import join_path
 
 def findPspec(folder):
     pspecList = []
@@ -32,7 +32,9 @@ def getPackages(pspecList):
     for pspec in pspecList:
         specFile = SpecFile(join_path(pspec, "pspec.xml"))
         for p in specFile.packages:
-            packages += [(p.name, specFile.source.name)]
+            packages += [(p.name,
+                "%s-%s" % (specFile.history[0].version, specFile.history[0].release),
+                specFile.source.name)]
     return packages
 
 def usage(miniMe):
@@ -54,9 +56,9 @@ if __name__ == "__main__":
         usage(sys.argv[0])
 
     packages = getPackages(findPspec(repSRC))
-    binaries = map(pure_package_name, filter(lambda x: x.endswith(".pisi"), os.listdir(repBIN)))
+    binaries = os.listdir(repBIN)
 
     print "Missing binary packages:"
-    for p, s in packages:
-        if not p in binaries:
+    for p, v, s in packages:
+        if not filter(lambda x: x.startswith("%s-%s" % (p, v)), binaries):
             print "    %s (%s)" % (p, s)
