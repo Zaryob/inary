@@ -116,7 +116,10 @@ class ConfigurationSection(object):
         if self.items:
             for item in self.items:
                 if item[0] == attr:
-                    return item[1]
+                    if item[1] in ["True", "False"]:
+                        return eval(item[1])
+                    else:
+                        return item[1]
 
         # then fall back to defaults
         if hasattr(self.defaults, attr):
