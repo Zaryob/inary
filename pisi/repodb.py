@@ -86,7 +86,7 @@ class RepoDB(object):
                 order.append(name)
             else:
                 if at<0 or at>len(order):
-                    raise Error(_("Cannot add repository at position %s" % at))
+                    raise Error(_("Cannot add repository at position %s") % at)
                 order.insert(at, name)
             self.d.put("order", order, txn)
         self.d.txn_proc(proc, txn)
