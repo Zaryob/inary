@@ -93,18 +93,18 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath)
     com = make_com()
     
     for script in provided_scripts:
-        ctx.ui.info(_("Registering %s comar script") % script.om)
+        ctx.ui.debug(_("Registering %s comar script") % script.om)
         if script.om == "System.Package":
             self_post = True
         com.register(script.om, package_name, os.path.join(scriptpath, script.script))
         wait_for_result(com)
     
-    ctx.ui.info(_("Calling post install handlers"))
+    ctx.ui.debug(_("Calling post install handlers"))
     com.call("System.PackageHandler.setupPackage", [ "metapath", metapath, "filepath", filepath ])
     wait_for_result(com)
     
     if self_post:
-        ctx.ui.info(_("Running package's post install script"))
+        ctx.ui.debug(_("Running package's post install script"))
         com.call_package("System.Package.postInstall", package_name)
         wait_for_result(com, package_name)
 
@@ -112,14 +112,14 @@ def pre_remove(package_name, metapath, filepath):
     ctx.ui.info(_("Configuring package for removal"))
     com = make_com()
     
-    ctx.ui.info(_("Running package's pre remove script"))
+    ctx.ui.debug(_("Running package's pre remove script"))
     com.call_package("System.Package.preRemove", package_name)
     wait_for_result(com)
     
-    ctx.ui.info(_("Calling pre remove handlers"))
+    ctx.ui.debug(_("Calling pre remove handlers"))
     com.call("System.PackageHandler.cleanupPackage", [ "metapath", metapath, "filepath", filepath ])
     wait_for_result(com)
     
-    ctx.ui.info(_("Unregistering comar scripts"))
+    ctx.ui.debug(_("Unregistering comar scripts"))
     com.remove(package_name)
     wait_for_result(com)
