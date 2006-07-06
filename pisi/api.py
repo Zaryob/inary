@@ -240,7 +240,7 @@ def configure_pending():
                     ctx.ui.notify(pisi.ui.configured, package = pkginfo, files = None)
             ctx.installdb.clear_pending(x)
     except ImportError:
-        raise Error(_("COMAR: comard not fully installed"))
+        raise Error(_("comar package is not fully installed"))
 
 def info(package, installed = False):
     if package.endswith(ctx.const.package_suffix):
