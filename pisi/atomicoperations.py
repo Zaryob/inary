@@ -260,15 +260,6 @@ class Install(AtomicOperation):
 
         config_changed = []
         if self.reinstall:
-            # remove left over files
-            new = set(map(lambda x: str(x.path), self.files.list))
-            old = set(map(lambda x: str(x.path), self.old_files.list))
-            leftover = old - new
-            old_fileinfo = {}
-            for fileinfo in self.old_files.list:
-                old_fileinfo[str(fileinfo.path)] = fileinfo
-            for path in leftover:
-                    Remove.remove_file( old_fileinfo[path] )
                     
             # handle special cases for upgrades
             overlap = old & new
@@ -312,6 +303,18 @@ class Install(AtomicOperation):
                 os.unlink(path + '.newconfig')
             os.rename(path, path + '.newconfig')
             os.rename(path + '.old', path)
+
+        if self.reinstall:
+            # remove left over files
+            new = set(map(lambda x: str(x.path), self.files.list))
+            old = set(map(lambda x: str(x.path), self.old_files.list))
+            leftover = old - new
+            old_fileinfo = {}
+            for fileinfo in self.old_files.list:
+                old_fileinfo[str(fileinfo.path)] = fileinfo
+            for path in leftover:
+                    Remove.remove_file( old_fileinfo[path] )
+
 
     def store_pisi_files(self):
         """put files.xml, metadata.xml, actions.py and COMAR scripts
