@@ -226,18 +226,17 @@ def configure_pending():
                 m = MetaData()
                 metadata_path = util.join_path(pkg_path, ctx.const.metadata_xml)
                 m.read(metadata_path)
-                for pcomar in m.package.providesComar:
-                    scriptPath = util.join_path(pkg_path,
-                                            ctx.const.comar_dir,
-                                            pcomar.script)
-                    comariface.register(pcomar, x, scriptPath)
-                    # FIXME: we need a full package info here!
-                    # Eray, please fix this
-                    # your wish is a command, darling -- eray
-                    pkginfo.name = x
-                    ctx.ui.notify(pisi.ui.configuring, package = pkginfo, files = None)
-                    comariface.run_postinstall(x)
-                    ctx.ui.notify(pisi.ui.configured, package = pkginfo, files = None)
+                # FIXME: we need a full package info here!
+                pkginfo.name = x
+                ctx.ui.notify(pisi.ui.configuring, package = pkginfo, files = None)
+                pisi.comariface.post_install(
+                    pkginfo.name,
+                    m.package.providesComar,
+                    util.join_path(pkg_path, ctx.const.comar_dir),
+                    util.join_path(pkg_path, ctx.const.metadata_xml),
+                    util.join_path(pkg_path, ctx.const.files_xml),
+                )
+                ctx.ui.notify(pisi.ui.configured, package = pkginfo, files = None)
             ctx.installdb.clear_pending(x)
     except ImportError:
         raise Error(_("comar package is not fully installed"))
