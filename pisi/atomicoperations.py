@@ -260,7 +260,9 @@ class Install(AtomicOperation):
 
         config_changed = []
         if self.reinstall:
-                    
+            new = set(map(lambda x: str(x.path), self.files.list))
+            old = set(map(lambda x: str(x.path), self.old_files.list))
+            
             # handle special cases for upgrades
             overlap = old & new
             self.files.list.sort(key=lambda x:x.path)
