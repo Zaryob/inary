@@ -16,7 +16,6 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import comar
 import pisi
 import pisi.context as ctx
 
@@ -27,6 +26,9 @@ class Error(pisi.Error):
 
 def make_com():
     try:
+        import comar
+        if not wait_comar():
+            raise comar.Error
         if ctx.comar_sockname:
             com = comar.Link(sockname=ctx.comar_sockname)
         else:
