@@ -181,6 +181,8 @@ class MyZipFile(zipfile.ZipFile):
             total_read = 0
             crc = None
             while total_read < zinfo.compress_size:
+                if zinfo.compress_size - total_read < block_size:
+                    block_size = zinfo.compress_size - total_read
                 buff = self.fp.read(block_size)
                 destfile.write(buff)
                 total_read += (block_size)
@@ -190,7 +192,7 @@ class MyZipFile(zipfile.ZipFile):
                     crc = binascii.crc32(buff)
             destfile.close()
             self.fp.seek(filepos, 0)
-            if crc != zinfo.CRC:
+            if crc and crc != zinfo.CRC:
                 raise zipfile.BadZipfile, "Bad CRC-32 for file %s" % name
             return
         elif zinfo.compress_type != zipfile.ZIP_DEFLATED:
@@ -207,8 +209,8 @@ class MyZipFile(zipfile.ZipFile):
         total_read = 0
         crc = None
         while total_read < zinfo.compress_size:
-            if name == "install.tar.lzma":
-                print "blalalall", zinfo.compress_size
+            if zinfo.compress_size - total_read < block_size:
+                block_size = zinfo.compress_size - total_read
             buff = self.fp.read(block_size)
             dcbuff = dc.decompress(dc.unconsumed_tail + buff)
             destfile.write(dcbuff)
@@ -227,7 +229,7 @@ class MyZipFile(zipfile.ZipFile):
                 crc = binascii.crc32(ex)
             destfile.write(ex)
         
-        if crc != zinfo.CRC:
+        if crc and crc != zinfo.CRC:
             raise zipfile.BadZipfile, "Bad CRC-32 for file %s" % name
         
         destfile.close()
