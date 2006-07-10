@@ -102,9 +102,9 @@ class Config(object):
     def tmp_dir(self):
         sysdir = self.subdir(self.values.dirs.tmp_dir)
         if os.environ.has_key('USER'):
-            userdir = '/tmp/pisi-' + os.environ['USER']
+            userdir = self.subdir('/tmp/pisi-' + os.environ['USER'])
         else:
-            userdir = '/tmp/pisi-root'
+            userdir = self.subdir('/tmp/pisi-root')
         # check write access
         if os.access(sysdir, os.W_OK):
             return sysdir
