@@ -869,6 +869,7 @@ order = {"none": 0,
 
 def __buildState_unpack(pb):
     # unpack is the first state to run.
+    pb.patch_exists()
     pb.fetch_source_archive()
     pb.unpack_source_archive()
     pb.apply_patches()
