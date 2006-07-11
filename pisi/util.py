@@ -642,15 +642,6 @@ def env_update():
 
     pisi.environment.update_environment(ctx.config.dest_dir())
 
-def pure_package_name(package_name):
-    "return pure package name from given string"
-    "ex: package_name=tasma-1.0.3-5-2.pisi, returns tasma"
- 
-    if package_name.endswith(ctx.const.package_suffix):
-        package_name = package_name.rstrip(ctx.const.package_suffix)
-
-    return parse_package_name(package_name)[0]
-
 def parse_package_name(package_name):
     "return package name and version string"
     "ex: package_name=tasma-1.0.3-5-2, returns (tasma, 1.0.3-5-2)"
@@ -666,8 +657,3 @@ def parse_package_name(package_name):
     version = package_name[len(name) + 1:]
     
     return (name, version)
- 
-def generate_pisi_file(patchFile, fromFile, toFile):
-    if run_batch("xdelta patch %s %s %s" % (patchFile, fromFile, toFile))[0]:
-        raise Error(_("ERROR: xdelta patch %s %s %s failed") % (patchFile, fromFile, toFile))
-
