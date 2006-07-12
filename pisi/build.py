@@ -568,10 +568,6 @@ class Builder:
 
         metadata.package.installedSize = size
 
-        metadata.package.build = build_no
-
-        metadata_xml_path = util.join_path(self.pkg_dir(), ctx.const.metadata_xml)
-        metadata.write(metadata_xml_path)
         self.metadata = metadata
 
 
@@ -625,6 +621,16 @@ class Builder:
 
     def calc_build_no(self, package_name):
         """Calculate build number"""
+
+        def metadata_changed(old_metadata, new_metadata):
+            old_metadata.package.build = None
+            for key in old_metadata.package.__dict__.keys():
+                if old_metadata.package.__dict__[key] != new_metadata.package.__dict__[key]:
+                    if key != "build":
+                        return True
+
+            return False
+            
         # find previous build in packages dir
         found = []        
         def locate_old_package(old_package_fn):
@@ -669,7 +675,6 @@ class Builder:
                 old_pkg = Package(old_package_fn, 'r')
                 old_pkg.read(util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
     
-                # FIXME: TAKE INTO ACCOUNT MINOR CHANGES IN METADATA
                 changed = False
                 fnew = self.files.list
                 fold = old_pkg.files.list
@@ -689,6 +694,10 @@ class Builder:
                             if fo.hash != fn.hash:
                                 changed = True
                                 break
+                
+                if metadata_changed(old_pkg.metadata, self.metadata):
+                    changed = True
+
             else: # no old build had a build number
                 old_build = None
 
@@ -747,6 +756,8 @@ class Builder:
             ctx.ui.info(_("Generating %s,") % ctx.const.files_xml)
             self.gen_files_xml(package)
 
+            ctx.ui.info(_("Generating %s,") % ctx.const.metadata_xml)
+            self.gen_metadata_xml(package)
 
             # build number
             if ctx.config.options.ignore_build_no or not ctx.config.values.build.buildno:
@@ -754,9 +765,9 @@ class Builder:
                 ctx.ui.warning(_('Build number is not available. For repo builds you must enable buildno in pisi.conf.'))
             else:
                 build_no, old_build_no = self.calc_build_no(package.name)
-
-            ctx.ui.info(_("Generating %s,") % ctx.const.metadata_xml)
-            self.gen_metadata_xml(package, build_no)
+            
+            self.metadata.package.build = build_no
+            self.metadata.write(util.join_path(self.pkg_dir(), ctx.const.metadata_xml))
 
             # Calculate new and oldpackage names for buildfarm
             name =  util.package_name(package.name,
