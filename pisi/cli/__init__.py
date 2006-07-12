@@ -68,7 +68,7 @@ class CLI(UI):
         # TODO: need to look at more kinds of info messages
         # let's cheat from KDE :)
         if not noln:
-            msg += '\n'
+            msg = '%s\n' % msg
         self.output(unicode(msg), verbose=verbose)
 
     def warning(self, msg, verbose = False):
