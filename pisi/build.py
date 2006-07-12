@@ -623,7 +623,6 @@ class Builder:
         """Calculate build number"""
 
         def metadata_changed(old_metadata, new_metadata):
-            old_metadata.package.build = None
             for key in old_metadata.package.__dict__.keys():
                 if old_metadata.package.__dict__[key] != new_metadata.package.__dict__[key]:
                     if key != "build":
