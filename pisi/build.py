@@ -697,6 +697,7 @@ class Builder:
                 if metadata_changed(old_pkg.metadata, self.metadata):
                     changed = True
 
+                self.old_packages.append(os.path.basename(old_package_fn))
             else: # no old build had a build number
                 old_build = None
 
@@ -732,8 +733,8 @@ class Builder:
             if obj:
                 self.spec.packages.append(obj)
 
-        new_packages = []
-        old_package_names = []
+        self.new_packages = []
+        self.old_packages = []
 
         for package in self.spec.packages:
             old_package_name = None
@@ -774,17 +775,10 @@ class Builder:
                                      self.spec.source.release,
                                      self.metadata.package.build)
 
-            if old_build_no:
-                old_package_name = util.package_name(package.name,
-                                     self.spec.source.version,
-                                     self.spec.source.release,
-                                     old_build_no)
-            old_package_names.append(old_package_name)
-
             outdir = ctx.get_option('output_dir')
             if outdir:
                 name = pisi.util.join_path(outdir, name)
-            new_packages.append(name)
+            self.new_packages.append(name)
 
             ctx.ui.info(_("Creating PISI package %s.") % name)
 
@@ -858,7 +852,7 @@ class Builder:
         os.environ = {}
         os.environ = deepcopy(ctx.config.environ)
 
-        return new_packages, old_package_names
+        return self.new_packages, self.old_packages
 
 
 # build functions...
