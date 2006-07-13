@@ -644,7 +644,7 @@ class Builder:
                         return
                     old_build = old_pkg.metadata.package.build
                     found.append( (old_package_fn, old_build) )
-                except:
+                except Error:
                     ctx.ui.warning('Package file %s may be corrupt. Skipping.' % old_package_fn)
 
         for root, dirs, files in os.walk(ctx.config.packages_dir()):
