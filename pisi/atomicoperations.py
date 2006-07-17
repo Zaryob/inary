@@ -67,7 +67,7 @@ class Install(AtomicOperation):
             ctx.ui.info(_("Package %s found in repository %s") % (name, repo))
             repo = ctx.repodb.get_repo(repo)
             pkg = ctx.packagedb.get_package(name)
-    
+
             # FIXME: let pkg.packageURI be stored as URI type rather than string
             pkg_uri = URI(pkg.packageURI)
             if pkg_uri.is_absolute_path():
@@ -75,9 +75,9 @@ class Install(AtomicOperation):
             else:
                 pkg_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
                                         str(pkg_uri.path()))
-    
+
             ctx.ui.info(_("Package URI: %s") % pkg_path, verbose=True)
-    
+
             return Install(pkg_path, ignore_dep)
         else:
             raise Error(_("Package %s not found in any active repository.") % name)
@@ -125,7 +125,7 @@ class Install(AtomicOperation):
         else:
             event = pisi.ui.installed
         ctx.ui.notify(event, package = self.pkginfo, files = self.files)
-        
+
     def check_requirements(self):
         """check system requirements"""
         #TODO: IS THERE ENOUGH SPACE?
@@ -152,7 +152,7 @@ class Install(AtomicOperation):
         # If it is not, put it into 3rd party packagedb
         if not ctx.packagedb.has_package(self.pkginfo.name):
             ctx.packagedb.add_package(self.pkginfo, pisi.itembyrepodb.thirdparty)
-        
+
         # check file conflicts
         file_conflicts = []
         for file in self.files.list:
@@ -164,7 +164,7 @@ class Install(AtomicOperation):
         if file_conflicts:
             file_conflicts_str = ""
             for (pkg, existing_file) in file_conflicts:
-                file_conflicts_str += _("%s from %s package") % (existing_file.path, pkg)
+                file_conflicts_str += _("/%s from %s package\n") % (existing_file.path, pkg)
             msg = _('File conflicts:\n%s') % file_conflicts_str
             if self.ignore_file_conflicts:
                 ctx.ui.warning(msg)
@@ -179,7 +179,7 @@ class Install(AtomicOperation):
         self.reinstall = False
         self.upgrade = False
         if ctx.installdb.is_installed(pkg.name): # is this a reinstallation?
-        
+
             #FIXME: consider REPOSITORY instead of DISTRIBUTION -- exa
             #ipackage = ctx.packagedb.get_package(pkg.name, pisi.itembyrepodb.installed)
             ipkg = ctx.installdb.get_info(pkg.name)
@@ -262,7 +262,7 @@ class Install(AtomicOperation):
         if self.reinstall:
             new = set(map(lambda x: str(x.path), self.files.list))
             old = set(map(lambda x: str(x.path), self.old_files.list))
-            
+
             # handle special cases for upgrades
             overlap = old & new
             self.files.list.sort(key=lambda x:x.path)
@@ -276,7 +276,7 @@ class Install(AtomicOperation):
                     fpath = pisi.util.join_path(ctx.config.dest_dir(), oldf.path)
                     try:
                         if pisi.util.sha1_file(fpath) != oldf.hash:
-                            # old config file changed, don't overwrite                        
+                            # old config file changed, don't overwrite
                             config_changed.append(fpath)
                             if os.path.exists(fpath + '.old'):
                                 os.unlink(fpath + '.old')
@@ -299,7 +299,7 @@ class Install(AtomicOperation):
                             pass
 
         self.package.extract_install(ctx.config.dest_dir())
-        
+
         for path in config_changed:
             if os.path.exists(path + '.newconfig'):
                 os.unlink(path + '.newconfig')
@@ -324,7 +324,7 @@ class Install(AtomicOperation):
 
         if self.reinstall:
             util.clean_dir(self.old_path)
-        
+
         ctx.ui.info(_('Storing %s, ') % ctx.const.files_xml, verbose=True)
         self.package.extract_file(ctx.const.files_xml, self.package.pkg_dir())
 
@@ -349,7 +349,7 @@ class Install(AtomicOperation):
                           self.metadata.package.release,
                           self.metadata.package.build,
                           self.metadata.package.distribution,
-                          config_later = self.config_later, 
+                          config_later = self.config_later,
                           txn = txn)
 
         # filesdb
@@ -381,7 +381,7 @@ def install_single_name(name, upgrade = False):
     install.install(not upgrade)
 
 class Remove(AtomicOperation):
-    
+
     def __init__(self, package_name, ignore_dep = None):
         super(Remove, self).__init__(ignore_dep)
         self.package_name = package_name
@@ -396,15 +396,15 @@ class Remove(AtomicOperation):
 
     def run(self):
         """Remove a single package"""
-        
+
         ctx.ui.status(_('Removing package %s') % self.package_name)
         ctx.ui.notify(pisi.ui.removing, package = self.package, files = self.files)
         if not ctx.installdb.is_installed(self.package_name):
             raise Exception(_('Trying to remove nonexistent package ')
                             + self.package_name)
-                            
+
         self.check_dependencies()
-            
+
         self.run_preremove()
         for fileinfo in self.files.list:
             self.remove_file(fileinfo)
@@ -439,7 +439,7 @@ class Remove(AtomicOperation):
         if ctx.filesdb.has_file(fpath):
             pkg, existing_file = ctx.filesdb.get_file(fpath)
             if pkg != self.package_name:
-                ctx.ui.warning(_('Not removing conflicted file : %s') % fpath) 
+                ctx.ui.warning(_('Not removing conflicted file : %s') % fpath)
                 return
 
         if fileinfo.permanent:
@@ -517,19 +517,19 @@ def resurrect_package(package_fn, write_files, txn = None):
 
     from os.path import exists
 
-    metadata_xml = util.join_path(ctx.config.lib_dir(), 'package', 
+    metadata_xml = util.join_path(ctx.config.lib_dir(), 'package',
                                   package_fn, ctx.const.metadata_xml)
     if not exists(metadata_xml):
         raise Error, _("Metadata XML '%s' cannot be found") % metadata_xml
-    
+
     metadata = MetaData()
     metadata.read(metadata_xml)
-    
+
     errs = metadata.errors()
-    if errs:   
+    if errs:
         util.Checks.print_errors(errs)
         raise Error, _("MetaData format wrong (%s)") % package_fn
-    
+
     ctx.ui.info(_('* Adding \'%s\' to db... ') % (metadata.package.name), noln=True)
 
     if write_files:
@@ -537,7 +537,7 @@ def resurrect_package(package_fn, write_files, txn = None):
                                 package_fn, ctx.const.files_xml)
         if not exists(files_xml):
             raise Error, _("Files XML '%s' cannot be found") % files_xml
-    
+
         files = Files()
         files.read(files_xml)
         if files.errors():
