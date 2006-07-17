@@ -49,7 +49,7 @@ def main():
             dirlist.append(os.path.dirname(file))
 
         for dir in uniq(dirlist):
-            print "<Path fileType=\"\">%s</Path>" % dir
+            print "<Path fileType=\"\">/%s</Path>" % dir
         
     else:
         for file in show_info(sys.argv[1]):
