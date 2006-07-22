@@ -45,12 +45,35 @@ class PisiUpgradeException(pisi.Exception):
         pisi.Exception.__init__(self, _("Upgrading PISI requires database rebuild and restart"))
 
 def upgrade_pisi():
-    ctx.ui.warning(_("PISI package has been upgraded. Rebuilding PISI database."))
+    """forces to reload pisi modules and runs rebuild-db if needed."""
+
+    old_filesdbversion = pisi.__filesdbversion__
+    old_dbversion = pisi.__dbversion__
+
+    def rebuild_db():
+        """rebuild_db is necessary if database structures has changed."""
+        from pisi.version import Version
+        import pisi.context as ctx
+
+        if Version(pisi.__filesdbversion__) > Version(old_filesdbversion) or \
+           Version(pisi.__dbversion__) > Version(old_dbversion):
+            pisi.api.init(database=False)
+            ctx.ui.info(_("* PISI database version has changed. Rebuilding database..."))
+            pisi.api.rebuild_db()
+            ctx.ui.info(_("* Database rebuild operation is completed succesfully."))
+            pisi.api.finalize()
+
+    def reload_pisi():
+        for module in sys.modules.keys():
+            if module.startswith("pisi."):
+                """removal from sys.modules forces reload via import"""
+                del(sys.modules[module])
+        reload(pisi)
+
     pisi.api.finalize()
-    os.system('pisi rebuild-db -y')
-    #reload(pisi)
-    #pisi.api.init()
-    #pisi.api.rebuild_db()
+    reload_pisi()
+    rebuild_db()
+    pisi.api.init()
     raise PisiUpgradeException()
 
 # high level operations
