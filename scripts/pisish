@@ -52,8 +52,6 @@ Copyright 2006 (c) Pardus.
         try:
             cli = PisiCLI(cmd.split())
             cli.run_command()
-        except pisi.operations.PisiUpgradeException, e:
-            print _('PISI has been upgraded.')
         except Exception, value:
             signal.signal(signal.SIGINT, signal.SIG_IGN)   # disable further interrupts
             ui = pisi.cli.CLI() # make a temporary UI

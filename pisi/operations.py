@@ -38,12 +38,6 @@ from pisi.version import Version
 class Error(pisi.Error):
     pass
 
-class PisiUpgradeException(pisi.Exception):
-    """application must reload all pisi modules it imported after receiving
-       this exception"""
-    def __init__(self):
-        pisi.Exception.__init__(self, _("Upgrading PISI requires database rebuild and restart"))
-
 def upgrade_pisi():
     """forces to reload pisi modules and runs rebuild-db if needed."""
 
@@ -74,7 +68,6 @@ def upgrade_pisi():
     reload_pisi()
     rebuild_db()
     pisi.api.init()
-    raise PisiUpgradeException()
 
 # high level operations
 

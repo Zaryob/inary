@@ -75,7 +75,4 @@ if __name__ == "__main__":
 
     locale.setlocale(locale.LC_ALL, '')
     cli = pisicli.PisiCLI()
-    try:
-        cli.run_command()
-    except pisi.operations.PisiUpgradeException, e:
-        print _('PISI has been upgraded.')
+    cli.run_command()
