@@ -173,6 +173,11 @@ in the respective order to satisfy extra dependencies:
     for x in order:
         atomicoperations.install_single_file(dfn[x])
 
+    pisi_installed = ctx.installdb.is_installed('pisi')
+    
+    if 'pisi' in order and pisi_installed:
+        upgrade_pisi()
+
 def check_conflict(pkg):
     conflicts = []
 
