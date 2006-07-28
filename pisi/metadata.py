@@ -38,10 +38,7 @@ class Source:
 
 class Package(specfile.Package):
     __metaclass__ = autoxml.autoxml
-    
-    # if this is working autoxml r0Xx0rz
-    t_PartOf = [autoxml.String, autoxml.mandatory]
-    
+
     t_Build = [ autoxml.Integer, autoxml.optional]
     t_Distribution = [ autoxml.String, autoxml.mandatory]
     t_DistributionRelease = [ autoxml.String, autoxml.mandatory]
