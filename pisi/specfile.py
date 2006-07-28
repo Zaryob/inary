@@ -90,9 +90,9 @@ class Patch:
 class Update:
     
     a_release = [autoxml.String, autoxml.mandatory]
+    a_Type = [autoxml.String, autoxml.optional]
     t_Date = [autoxml.String, autoxml.mandatory]
     t_Version = [autoxml.String, autoxml.mandatory]
-    t_Type = [autoxml.String, autoxml.optional]
     t_Name = [autoxml.Text, autoxml.optional]
     t_Email = [autoxml.String, autoxml.optional]
     t_Comment = [autoxml.String, autoxml.optional]
