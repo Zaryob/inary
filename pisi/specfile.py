@@ -90,7 +90,7 @@ class Patch:
 class Update:
     
     a_release = [autoxml.String, autoxml.mandatory]
-    a_Type = [autoxml.String, autoxml.optional]
+    a_type = [autoxml.String, autoxml.optional]
     t_Date = [autoxml.String, autoxml.mandatory]
     t_Version = [autoxml.String, autoxml.mandatory]
     t_Name = [autoxml.Text, autoxml.optional]
