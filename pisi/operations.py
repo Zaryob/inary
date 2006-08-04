@@ -413,8 +413,8 @@ def upgrade_pkg_names(A = []):
             continue
 
         if security: # below is a readable functional code, don't overflow lines!
-            updates = [x for x in pkg.history if Version(x.release) > Version(release)]
-            if not pisi.util.any(lambda x:x.type == 'security', updates):
+            updates = [i for i in pkg.history if Version(i.release) > Version(release)]
+            if not pisi.util.any(lambda i:i.type == 'security', updates):
                 continue
             
         if ignore_build or (not build) or (not pkg.build):
