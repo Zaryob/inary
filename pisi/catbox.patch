@@ -1,0 +1,33 @@
+--- build.py	2006-08-10 15:13:09.000000000 +0300
++++ boxbuild.py	2006-08-10 15:13:05.000000000 +0300
+@@ -197,13 +197,27 @@
+         # apply the patches and prepare a source directory for build.
+         self.apply_patches()
+ 
+-        self.run_setup_action()
+-        self.run_build_action()
+-        self.run_install_action()
++        import catbox
++        ret = catbox.run(
++            self.sandboxed,
++            ["/var/tmp/pisi", "/tmp", "/dev/tty", "/dev/null"],
++            logger = self.sandbox_logger
++        )
++        if ret != 0:
++            raise Error, "actions.py borked"
+ 
+         # after all, we are ready to build/prepare the packages
+         return self.build_packages()
+ 
++    def sandbox_logger(self, event, data):
++        if event == "denied":
++            ctx.ui.error("Access denied to '%s'" % data)
++
++    def sandboxed(self):
++        self.run_setup_action()
++        self.run_build_action()
++        self.run_install_action()
++
+     def set_environment_vars(self):
+         """Sets the environment variables for actions API to use"""
+ 
