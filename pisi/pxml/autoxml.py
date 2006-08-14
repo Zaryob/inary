@@ -764,15 +764,10 @@ class autoxml(oo.autosuper, oo.autoprop):
             return errs
 
         def format(l, f, errs):
-            # TODO: indent here
-            ix = 1
-            length = len(l)
+            l.sort()
             for node in l:
-                f.add_flowing_data(str(ix) + ': ')
                 format_item(node, f, errs)
-                if ix != length:
-                    f.add_flowing_data(', ')
-                ix += 1
+                f.add_literal_data(' ')
 
         return (init, decode, encode, errors, format)
 
