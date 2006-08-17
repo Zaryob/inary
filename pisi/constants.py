@@ -79,9 +79,6 @@ class Constants:
         self.__c.install_tar = "install.tar"
         self.__c.install_tar_lzma = "install.tar.lzma"
 
-        #file/directory permissions
-        self.__c.umask = 0022
-
         # functions in actions_file
         self.__c.setup_func = "setup"
         self.__c.build_func = "build"
