@@ -123,6 +123,12 @@ class ArchiveTar(ArchiveBase):
 
             self.tar.extract(tarinfo)
 
+            # tarfile.extract does not honor umask. It must be honored explicitly.
+            # see --no-same-permissions option of tar(1), which is the deafult
+            # behaviour.
+            if not os.path.islink(tarinfo.name):
+                os.chmod(tarinfo.name, tarinfo.mode & ~ctx.const.umask)
+
         os.chdir(oldwd)
         self.close()
 
