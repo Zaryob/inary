@@ -14,7 +14,7 @@
 
 # python standard library
 
-from os.path import join
+from os.path import join, basename
 from os import access, R_OK
 
 import gettext
@@ -47,7 +47,15 @@ class SourceArchive:
                 progress = ctx.ui.Progress
             else:
                 progress = None
-            fetch_url(self.url, ctx.config.archives_dir(), progress)
+            try:
+                fetch_url(self.url, ctx.config.archives_dir(), progress)
+            except pisi.fetcher.FetchError:
+                # if archive can not be reached from the url, try the fallback 
+                # address.
+                if ctx.config.values.build.fallback:
+                    archive = basename(self.url.get_uri())
+                    src = join(ctx.config.values.build.fallback, archive)
+                    fetch_url(src, ctx.config.archives_dir(), progress)
 
     def is_cached(self, interactive=True):
         if not access(self.archiveFile, R_OK):

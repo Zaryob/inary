@@ -31,6 +31,7 @@
 #buildno=True     # necessary for generating build nos
 #buildhelper = None / ccache / icecream
 #compressionlevel = 7
+#fallback = "ftp://ftp.pardus.org.tr/pub/pisi/source"
 #
 #[directories]
 #lib_dir = /var/lib/pisi
@@ -75,6 +76,7 @@ class BuildDefaults:
     buildno = False
     buildhelper = None
     compressionlevel = 7
+    fallback = "ftp://ftp.pardus.org.tr/pub/pisi/source"
 
 class DirectoriesDefaults:
     "Default values for [directories] section"
