@@ -56,6 +56,8 @@ class SourceArchive:
                     archive = basename(self.url.get_uri())
                     src = join(ctx.config.values.build.fallback, archive)
                     fetch_url(src, ctx.config.archives_dir(), progress)
+                else:
+                    raise
 
     def is_cached(self, interactive=True):
         if not access(self.archiveFile, R_OK):
