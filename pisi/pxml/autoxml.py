@@ -732,7 +732,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             nodes = getAllNodes(node, path)
             #print node, tag + '/' + comp_tag, nodes
             if len(nodes)==0 and req==mandatory:
-                errs.append(where + ': ' + _('Mandatory list empty'))
+                errs.append(where + ': ' + _('Mandatory list "%s" under "%s" node is empty.') % (path, node.name()))
             ix = 1
             for node in nodes:
                 dummy = newNode(node, "Dummy")
@@ -753,7 +753,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                     #encode_item(node, item, errs)
             else:
                 if req is mandatory:
-                    errs.append(_('Mandatory list empty'))
+                    errs.append(_('Mandatory list "%s" under "%s" node is empty.') % (path, node.name()))
 
         def errors(l, where):
             errs = []
