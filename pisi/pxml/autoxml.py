@@ -118,8 +118,8 @@ class LocalText(dict):
     def errors(self, where = unicode()):
         errs = []
         langs = [ LocalText.get_lang(), 'en', 'tr', ]
-        if not util.any(lambda x : self.has_key(x), langs):
-            errs.append( where + ': ' + _("Tag should have at least the current locale, or failing that an English or Turkish version"))
+        if self.keys() and not util.any(lambda x : self.has_key(x), langs):
+                errs.append( where + ': ' + _("Tag should have at least the current locale, or failing that an English or Turkish version"))
         #FIXME: check if all entries are unicode
         return errs
 
