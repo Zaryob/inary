@@ -1,9 +1,11 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import os
 import sys
 import string
 import pisi.util as util
+from pisi.version import Version
 
 def findUnneededFiles():
     listdir = os.listdir("/var/cache/pisi/packages")
@@ -11,11 +13,16 @@ def findUnneededFiles():
 
     dict = {}
     for file in listdir:
-        name, version = util.parse_package_name(file)
-        dict[name] = version
+        name, ver = util.parse_package_name(file)
+        version = ver[:-5]
+        if dict.has_key(name):
+            if Version(dict[name]) < Version(version):
+                dict[name] = version
+        else:
+            dict[name] = version
 
     for file in dict:
-        listdir.remove("%s-%s" % (file, dict[file]))
+        listdir.remove("%s-%s.pisi" % (file, dict[file]))
 
     return listdir
 
