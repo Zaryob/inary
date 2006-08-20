@@ -22,7 +22,7 @@ def let_repo_had(package, *args):
     repo_added_package(package, *args)
     repo_updated_index()
 
-def let_pisi_had(*pkg):
+def let_pisi_had(*args):
     url = os.path.join(os.getcwd(), consts.repo_url)
     pisi_added_repo(consts.repo_name, url)
-    pisi_installed(pkg)
+    pisi_installed(*args)

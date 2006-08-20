@@ -28,11 +28,8 @@ def pisi_added_repo(name, url):
 def pisi_updated_repo():
     os.system("pisi -D%s update-repo" % consts.pisi_db)
 
-def pisi_installed(*pkg):
-    if type(pkg[0]) == tuple:
-        packages = util.strlist(pkg[0]).rstrip()
-    else:
-        packages = util.strlist(pkg).rstrip()
+def pisi_installed(*args):
+    packages = util.strlist(args).rstrip()
     os.system("pisi -D%s install %s" % (consts.pisi_db, packages))
 
 def pisi_reinstalled(package):
