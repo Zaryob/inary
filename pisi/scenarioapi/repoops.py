@@ -53,12 +53,7 @@ def repo_version_bumped(package, *args):
         raise Exception(_("Repo does not have package named %s.") % package)
 
     old_file = repodb[package].get_file_name()
-
-    if args:
-        repodb[package].version_bump(args)
-    else:
-        repodb[package].version_bump()
-
+    repodb[package].version_bump(*args)
     os.unlink(os.path.join(consts.repo_path, old_file))
 
 def repo_updated_index():

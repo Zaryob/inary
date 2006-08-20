@@ -64,12 +64,6 @@ class Package:
         
     def version_bump(self, *args):
         if args:
-
-            if type(args[0]) == tuple:
-                withs = args[0]
-            else:
-                withs = args
-
             for with in withs:
                 if with.types == CONFLICT and with.action == ADDED:
                     self.pspec.add_conflicts(with.pkgs)
