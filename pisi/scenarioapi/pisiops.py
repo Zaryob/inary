@@ -17,7 +17,7 @@ import pisi.util as util
 from pisi.scenarioapi.constants import *
 
 def pisi_upgraded():
-    os.system("pisi -D%s upgrade --ignore-file-conflicts" % consts.pisi_db)
+    os.system("pisi -D%s upgrade" % consts.pisi_db)
 
 def pisi_removed(*pkg):
     os.system("pisi -D%s remove %s" % (consts.pisi_db, util.strlist(pkg).rstrip()))
