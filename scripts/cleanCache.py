@@ -14,7 +14,7 @@ def findUnneededFiles():
     dict = {}
     for file in listdir:
         name, ver = util.parse_package_name(file)
-        version = ver[:-5]
+        version = ver.rstrip(".pisi")
         if dict.has_key(name):
             if Version(dict[name]) < Version(version):
                 dict[name] = version
