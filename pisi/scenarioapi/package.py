@@ -20,6 +20,10 @@ from pisi.scenarioapi.actions import Actions
 from pisi.scenarioapi.constants import *
 from pisi.scenarioapi.withops import *
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 class Package:
     def __init__(self, name, deps = [], cons = [], date = "2006-18-18", ver = "1.0"):
         self.name = name
@@ -54,13 +58,14 @@ class Package:
 
     def get_file_name(self):
         # use glob. there may be buildnos at the end of the package name
-        pkg = glob.glob(consts.repo_path + 
-                        self.name + "-" +
-                        self.version + "-" + 
-                        self.pspec.pspec.history[0].release +
-                        consts.glob_pisis)[0]
+        pkg = consts.repo_path + self.name + "-" + \
+              self.version + "-" + self.pspec.pspec.history[0].release
 
-        return os.path.basename(pkg)
+        found = glob.glob(pkg + consts.glob_pisis)
+        if not found:
+            raise Exception(_("No pisi package: %s* found.") % pkg)
+
+        return os.path.basename(found[0])
         
     def version_bump(self, *args):
         for with in args:
