@@ -59,7 +59,7 @@ def repo_updated_index():
     cur = os.getcwd()
     path = os.path.join(cur, consts.repo_path)
     os.chdir(consts.repo_path)
-    os.system("pisi index %s >/dev/null 2>&1" % path)
+    os.system("pisi index --skip-signing %s >/dev/null 2>&1" % path)
     os.chdir(cur)
 
 def repo_get_url():
