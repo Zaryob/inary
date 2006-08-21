@@ -63,19 +63,18 @@ class Package:
         return os.path.basename(pkg)
         
     def version_bump(self, *args):
-        if args:
-            for with in args:
-                if with.types == CONFLICT and with.action == ADDED:
-                    self.pspec.add_conflicts(with.pkgs)
+        for with in args:
+            if with.types == CONFLICT and with.action == ADDED:
+                self.pspec.add_conflicts(with.pkgs)
 
-                if with.types == CONFLICT and with.action == REMOVED:
-                    self.pspec.remove_conflicts(with.pkgs)
+            if with.types == CONFLICT and with.action == REMOVED:
+                self.pspec.remove_conflicts(with.pkgs)
 
-                if with.types == DEPENDENCY and with.action == ADDED:
-                    self.pspec.add_dependencies(with.pkgs)
-
-                if with.types == DEPENDENCY and with.action == REMOVED:
-                    self.pspec.remove_dependencies(with.pkgs)
+            if with.types == DEPENDENCY and with.action == ADDED:
+                self.pspec.add_dependencies(with.pkgs)
+                    
+            if with.types == DEPENDENCY and with.action == REMOVED:
+                self.pspec.remove_dependencies(with.pkgs)
 
         self.pspec.update_history(self.date, self.version)
         self.actions.name = self.name

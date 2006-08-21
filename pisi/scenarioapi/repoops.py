@@ -31,13 +31,12 @@ def repo_added_package(package, *args):
     dependencies = None
     conflicts = None
     
-    if args:
-        for with in args:
-            if with.types == CONFLICT and with.action == INIT:
-                conflicts = with.pkgs
+    for with in args:
+        if with.types == CONFLICT and with.action == INIT:
+            conflicts = with.pkgs
             
-            if with.types == DEPENDENCY and with.action == INIT:
-                dependencies = with.pkgs
+        if with.types == DEPENDENCY and with.action == INIT:
+            dependencies = with.pkgs
 
     repodb[package] = Package(package, dependencies, conflicts)
 
