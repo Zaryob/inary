@@ -12,8 +12,8 @@ def findUnneededFiles():
     listdir.sort()
 
     dict = {}
-    for file in listdir:
-        name, ver = util.parse_package_name(file)
+    for f in listdir:
+        name, ver = util.parse_package_name(f)
         version = ver.rstrip(".pisi")
         if dict.has_key(name):
             if Version(dict[name]) < Version(version):
@@ -21,8 +21,8 @@ def findUnneededFiles():
         else:
             dict[name] = version
 
-    for file in dict:
-        listdir.remove("%s-%s.pisi" % (file, dict[file]))
+    for f in dict:
+        listdir.remove("%s-%s.pisi" % (f, dict[f]))
 
     return listdir
 
