@@ -70,16 +70,19 @@ class Package:
     def version_bump(self, *args):
         for with in args:
             if with.types == CONFLICT and with.action == ADDED:
-                self.pspec.add_conflicts(with.pkgs)
+                self.pspec.add_conflicts(with.data)
 
             if with.types == CONFLICT and with.action == REMOVED:
-                self.pspec.remove_conflicts(with.pkgs)
+                self.pspec.remove_conflicts(with.data)
 
             if with.types == DEPENDENCY and with.action == ADDED:
-                self.pspec.add_dependencies(with.pkgs)
+                self.pspec.add_dependencies(with.data)
                     
             if with.types == DEPENDENCY and with.action == REMOVED:
-                self.pspec.remove_dependencies(with.pkgs)
+                self.pspec.remove_dependencies(with.data)
+
+            if with.types == VERSION and with.action == INIT:
+                self.version = with.data
 
         self.pspec.update_history(self.date, self.version)
         self.actions.name = self.name

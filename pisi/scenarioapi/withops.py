@@ -13,18 +13,21 @@
 # Authors:  Faik Uygur <faik@pardus.org.tr>
 
 ADDED, REMOVED, INIT = range(3)
-CONFLICT, DEPENDENCY = range(2)
+VERSION, CONFLICT, DEPENDENCY = range(3)
 
 class with:
     def __init__(self):
         pass
 
-def with_action(types, action, pkgs):
+def with_action(types, action, data):
     w = with()
     w.types = types
     w.action = action
-    w.pkgs = pkgs
+    w.data = data
     return w
+
+def with_version(version):
+    return with_action(VERSION, INIT, version)
 
 def with_conflicts(*cons):
     return with_action(CONFLICT, INIT, cons)

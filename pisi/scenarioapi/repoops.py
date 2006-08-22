@@ -33,12 +33,15 @@ def repo_added_package(package, *args):
     
     for with in args:
         if with.types == CONFLICT and with.action == INIT:
-            conflicts = with.pkgs
+            conflicts = with.data
             
         if with.types == DEPENDENCY and with.action == INIT:
-            dependencies = with.pkgs
+            dependencies = with.data
 
-    repodb[package] = Package(package, dependencies, conflicts)
+        if with.types == VERSION and with.action == INIT:
+            version = with.data
+
+    repodb[package] = Package(package, dependencies, conflicts, ver=version)
 
 def repo_removed_package(package):
     if not repodb.has_key(package):
