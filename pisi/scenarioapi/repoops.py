@@ -28,6 +28,7 @@ def repo_added_package(package, *args):
     if repodb.has_key(package):
         raise Exception(_("Repo already has package named %s.") % package)
 
+    version = "1.0"
     dependencies = None
     conflicts = None
     

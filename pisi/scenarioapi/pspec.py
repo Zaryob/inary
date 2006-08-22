@@ -50,6 +50,16 @@ class Pspec:
         return tmp
 
     def add_dependencies(self, dependencies):
+        # special case of given one dependency package
+        # with depedency versioning info [**kw, name]
+        # [{"versionFrom":"0.4.2"}, "udev"]
+        if type(dependencies[0]) == dict:
+            dep = Dependency()
+            (kw, dep.package) = dependencies
+            dep.__dict__[kw.keys()[0]] = kw.values()[0]
+            self.package.packageDependencies.append(dep)
+            return
+
         for depname in dependencies:
             dep = Dependency()
             dep.package = depname
