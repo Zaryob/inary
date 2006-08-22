@@ -34,8 +34,8 @@
 
 from pisi.scenarioapi.scenario import *
 
-VALGRIND = "valgriind"
-OPENMPI = "openmpii"
+VALGRIND = "valgrind"
+OPENMPI = "openmpi"
 
 let_repo_had(VALGRIND, with_dependencies(OPENMPI))
 let_repo_had(OPENMPI)

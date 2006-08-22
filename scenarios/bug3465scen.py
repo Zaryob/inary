@@ -27,7 +27,7 @@
 
 from pisi.scenarioapi.scenario import *
 
-WORMUX = "w0rmux"
+WORMUX = "wormux"
 
 let_repo_had(WORMUX)
 let_pisi_had(WORMUX)
