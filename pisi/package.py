@@ -41,18 +41,27 @@ class Package:
         url = URI(packagefn)
         
         if url.is_remote_file():
-            from fetcher import fetch_url
-            dest = ctx.config.packages_dir()
-            self.filepath = join(dest, url.filename())
-
-            # FIXME: exists is not enough, also sha1sum check needed
-            #        when implemented in pisi-index.xml
-            if not exists(self.filepath):
-                fetch_url(url, dest, ctx.ui.Progress)
-            else:
-                ctx.ui.info(_('%s [cached]') % url.filename())
+            self.fetch_remote_file(url)
                 
         self.impl = archive.ArchiveZip(self.filepath, 'zip', mode)
+
+    def fetch_remote_file(self, url):
+        from fetcher import fetch_url
+        dest = ctx.config.packages_dir()
+        self.filepath = join(dest, url.filename())
+        
+        #FIXME: also check sha1sum
+        if not exists(self.filepath):
+            try:
+                fetch_url(url, dest, ctx.ui.Progress)
+            except pisi.fetcher.FetchError:
+                # Bug 3465
+                if ctx.get_option('reinstall'):
+                    raise Error(_("There was a problem while fetching '%s'.\nThe package "
+                    "may have been upgraded. Please try to upgrade the package.") % url);
+                raise
+        else:
+            ctx.ui.info(_('%s [cached]') % url.filename())
 
     def add_to_package(self, fn, an=None):
         """Add a file or directory to package"""
