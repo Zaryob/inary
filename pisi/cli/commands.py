@@ -567,6 +567,8 @@ expanded to package names.
                      default=False, help=_("Ignore file conflicts"))
         p.add_option("-e", "--eager", action="store_true",
                      default=False, help=_("eager upgrades"))
+        p.add_option("-f", "--fetch-only", action="store_true",
+                     default=False, help=_("Fetch upgrades but do not install."))
 
     def run(self):
         self.init()

@@ -467,6 +467,10 @@ def upgrade_pkg_names(A = []):
     for x in order:
         install_op = atomicoperations.Install.from_name(x)
         paths.append(install_op.package_fname)
+
+    # fetch to be upgraded packages but do not install them.
+    if ctx.get_option('fetch_only'):
+        return
    
     for path in paths:
         install_op = atomicoperations.Install(path, ignore_file_conflicts = True)
