@@ -29,8 +29,8 @@ def repo_added_package(package, *args):
         raise Exception(_("Repo already has package named %s.") % package)
 
     version = "1.0"
-    dependencies = None
-    conflicts = None
+    dependencies = []
+    conflicts = []
     
     for with in args:
         if with.types == CONFLICT and with.action == INIT:
