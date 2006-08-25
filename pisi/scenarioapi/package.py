@@ -25,12 +25,13 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 class Package:
-    def __init__(self, name, deps = [], cons = [], date = "2006-18-18", ver = "1.0"):
+    def __init__(self, name, deps = [], cons = [], date = "2006-18-18", ver = "1.0", partOf="None"):
         self.name = name
         self.dependencies = deps
         self.conflicts = cons
         self.version = ver
         self.date = date
+        self.partOf = partOf
         self.pspec = None
         self.actions = None
         self.create_package()
@@ -40,7 +41,8 @@ class Package:
 
     def create_package(self):
         pspec = Pspec(self.name, consts.pspec_path)
-        pspec.set_source(consts.homepage, consts.summary % self.name, consts.description % self.name, consts.license)
+        pspec.set_source(consts.homepage, consts.summary % self.name, 
+                         consts.description % self.name, consts.license, self.partOf)
         pspec.set_packager(consts.packager_name, consts.packager_email)
         pspec.set_archive(consts.skel_sha1sum, consts.skel_type, consts.skel_uri)
         pspec.set_package(self.dependencies, self.conflicts)

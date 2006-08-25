@@ -13,7 +13,7 @@
 # Authors:  Faik Uygur <faik@pardus.org.tr>
 
 ADDED, REMOVED, INIT = range(3)
-VERSION, CONFLICT, DEPENDENCY = range(3)
+PARTOF, VERSION, CONFLICT, DEPENDENCY = range(4)
 
 class with:
     def __init__(self):
@@ -25,6 +25,9 @@ def with_action(types, action, data):
     w.action = action
     w.data = data
     return w
+
+def with_partof(partof):
+    return with_action(PARTOF, INIT, partof)
 
 def with_version(version):
     return with_action(VERSION, INIT, version)

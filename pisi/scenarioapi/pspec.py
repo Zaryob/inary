@@ -91,11 +91,11 @@ class Pspec:
         self.pspec.history.reverse()
         self.write()
 
-    def set_source(self, homepage, summary, description, license):
+    def set_source(self, homepage, summary, description, license, partOf):
         self.pspec.source.name = self.name
         self.pspec.source.homepage = homepage
         self.pspec.source.license = license
-        self.pspec.source.partOf = "None"
+        self.pspec.source.partOf = partOf
         self.pspec.source.summary = LocalText("Summary")
         self.pspec.source.description = LocalText("Description")
         self.pspec.source.summary["en"] = summary

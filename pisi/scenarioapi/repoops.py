@@ -29,6 +29,7 @@ def repo_added_package(package, *args):
         raise Exception(_("Repo already has package named %s.") % package)
 
     version = "1.0"
+    partOf = "None"
     dependencies = []
     conflicts = []
     
@@ -42,7 +43,10 @@ def repo_added_package(package, *args):
         if with.types == VERSION and with.action == INIT:
             version = with.data
 
-    repodb[package] = Package(package, dependencies, conflicts, ver=version)
+        if with.types == PARTOF and with.action == INIT:
+            partOf = with.data
+
+    repodb[package] = Package(package, dependencies, conflicts, ver=version, partOf=partOf)
 
 def repo_removed_package(package):
     if not repodb.has_key(package):
