@@ -3,12 +3,13 @@
 
 import os
 import sys
+import glob
 import string
 import pisi.util as util
 from pisi.version import Version
 
 def findUnneededFiles():
-    listdir = os.listdir("/var/cache/pisi/packages")
+    listdir = map(lambda x: os.path.basename(x), glob.glob("/var/cache/pisi/packages/*.pisi"))
     listdir.sort()
 
     dict = {}
