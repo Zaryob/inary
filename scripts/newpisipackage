@@ -1,15 +1,20 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+#
+# just put a .pisipackager file in your home and fill it like
+#
+# name = Onur Küçük
+# email = onur@pardus.org.tr
+#
 
 import os
 import sys
 import time
 import string
 
-data = {"packager_name": "Onur Küçük",
-        "packager_email": "onur@pardus.org.tr",
-        "date": time.strftime("%Y-%m-%d"),
-}
+packagerfile = ".pisipackager"
+
+data = {"date": time.strftime("%Y-%m-%d")}
 
 temp_pspec = '''<?xml version="1.0" ?>
 <!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
@@ -154,6 +159,22 @@ def create_dirs():
         print "Could not make directory %s" % target
         sys.exit(1)
 
+def readConfig():
+    home = os.getenv("HOME", "")
+    cfg = "%s/%s" % (home, packagerfile)
+    d = {"name": "", "email": ""}
+
+    if home != "" and os.path.exists(cfg):
+        for line in file(cfg):
+            if line != "" and not line.startswith("#") and "=" in line:
+                k, v = line.split("=", 1)
+                if k.strip() in ["name", "email"]:
+                    if v.startswith('"') or v.startswith("'"):
+                        v = v.strip()[1:-1]
+                    d[k.strip()] = v.strip()
+
+    return d["name"], d["email"]
+
 # some checks
 if len(sys.argv) < 2:
     print "Usage : %s NewPackageDir" % sys.argv[0]
@@ -171,6 +192,7 @@ elif " " in data["package"]:
     sys.exit(1)
 
 # here we go
+data["packager_name"], data["packager_email"] = readConfig()
 create_dirs()
 write("pspec.xml", temp_pspec % data)
 write("actions.py", temp_actions % data)
