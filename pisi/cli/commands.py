@@ -569,6 +569,42 @@ expanded to package names.
                      default=False, help=_("eager upgrades"))
         p.add_option("-f", "--fetch-only", action="store_true",
                      default=False, help=_("Fetch upgrades but do not install."))
+        p.add_option("-x", "--exclude", action="append",
+                     default=None, help=_("When upgrading system, ignore packages and components whose basenames match pattern."))
+        p.add_option("", "--exclude-from", action="store",
+                     default=None, help=_("When upgrading system, ignore packages and components whose basenames \
+                     match any pattern contained in file."))
+
+    def exclude_from(self, packages):
+        import os
+
+        patterns = []
+        file = ctx.get_option('exclude_from')
+        if os.path.exists(file):
+            for line in open(file, "r").readlines():
+                if not line.startswith('#') and not line == '\n':
+                    patterns.append(line.strip())
+            if patterns:
+                return self.exclude(packages, patterns)
+
+        return packages
+
+    def exclude(self, packages, patterns):
+        from sets import Set as set
+        import fnmatch
+
+        packages = set(packages)
+        for pattern in patterns:
+            # match pattern in package names
+            match = fnmatch.filter(packages, pattern)
+            packages = packages - set(match)
+
+            if not match:
+                # match pattern in component names
+                for cmp in fnmatch.filter(ctx.componentdb.list_components(), pattern):
+                    packages = packages - set(ctx.componentdb.get_component(cmp).packages)
+
+        return list(packages)
 
     def run(self):
         self.init()
@@ -585,6 +621,13 @@ expanded to package names.
             packages = ctx.installdb.list_installed()
         else:
             packages = self.args
+
+        if ctx.get_option('exclude_from'):
+            packages = self.exclude_from(packages)
+
+        if ctx.get_option('exclude'):
+            patterns = ctx.get_option('exclude')
+            packages = self.exclude(packages, patterns)
 
         pisi.api.upgrade(packages)
         self.finalize()
