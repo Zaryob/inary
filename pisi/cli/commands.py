@@ -786,7 +786,7 @@ Usage: info <package1> <package2> ... <packagen>
                     if self.options.files:
                         print fileinfo
                     else:
-                        print fileinfo.path
+                        print "/" + fileinfo.path
             else:
                 ctx.ui.warning(_('File information not available'))
         if not self.options.short:

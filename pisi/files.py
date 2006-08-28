@@ -31,7 +31,7 @@ class FileInfo:
     t_Permanent = [ autoxml.String, autoxml.optional ]
 
     def __str__(self):
-        s = "%s, type: %s, size: %s, sha1sum: %s" %  (self.path, self.type,
+        s = "/%s, type: %s, size: %s, sha1sum: %s" %  (self.path, self.type,
                                                       self.size, self.hash)
         return s
 
