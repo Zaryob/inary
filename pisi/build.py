@@ -128,7 +128,6 @@ class Builder:
         self.set_spec_file(specuri)
 
         if specuri.is_remote_file():
-            #make local here and fuck up
             self.specdir = self.fetch_files()
         else:
             self.specdir = dirname(self.specuri.get_uri())
