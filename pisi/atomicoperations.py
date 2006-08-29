@@ -279,8 +279,8 @@ class Install(AtomicOperation):
                 oldconfig = path + '.old'
                 if os.path.exists(newconfig):
                     os.unlink(newconfig)
-                    os.rename(path, newconfig)
-                    os.rename(oldconfig, path)
+                os.rename(path, newconfig)
+                os.rename(oldconfig, path)
 
         # remove left over files from the old package.
         def clean_leftovers():
@@ -294,23 +294,23 @@ class Install(AtomicOperation):
                     Remove.remove_file( old_fileinfo[path] )
         
         if self.reinstall:
-            new = set(map(lambda x: str(x.path), self.files.list))
-            old = set(map(lambda x: str(x.path), self.old_files.list))
+            # get 'config' typed file objects
+            new = filter(lambda x: x.type == 'config', self.files.list)
+            old = filter(lambda x: x.type == 'config', self.old_files.list)
 
-            # handle special cases for upgrades
-            overlap = old & new
-            self.files.list.sort(key=lambda x:x.path)
-            self.old_files.list.sort(key=lambda x:x.path)
-            def get_upgrades(list):
-                return filter(lambda x : str(x.path) in overlap, list)
-            (upgrade_new, upgrade_old) = map(get_upgrades, [self.files.list, self.old_files.list])
-            for newf, oldf in zip(upgrade_new, upgrade_old):
-                assert newf.path == oldf.path
-                if newf.type == 'config' and oldf.type == 'config': # config upgrade
-                    check_config_changed(oldf)
+            # get config path lists
+            newconfig = set(map(lambda x: str(x.path), new))
+            oldconfig = set(map(lambda x: str(x.path), old))
+            
+            config_overlaps = newconfig & oldconfig
+            if config_overlaps:
+                files = filter(lambda x: x.path in config_overlaps, old)
+                for file in files:
+                    check_config_changed(file)
         else:
             for file in self.files.list:
                 if file.type == 'config':
+                    # there may be left over config files
                     check_config_changed(file)
 
         self.package.extract_install(ctx.config.dest_dir())
