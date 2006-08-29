@@ -325,8 +325,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                     XmlFile.__init__(self, tag = cls.tag)
             for base in cls.autoxml_bases:
                 base.__init__(self)
-            #super(cls, self).__init__(tag = tag) cooperative shit disabled for now
-            for init in inits:#self.__class__.initializers:
+            for init in inits:
                 init(self)
             for x in args.iterkeys():
                 setattr(self, x, args[x])
