@@ -259,6 +259,18 @@ class Install(AtomicOperation):
         ctx.ui.notify(pisi.ui.extracting, package = self.pkginfo, files = self.files)
 
         config_changed = []
+        def check_config_changed(config):
+            fpath = pisi.util.join_path(ctx.config.dest_dir(), config.path)
+            if os.path.exists(fpath):
+                try:
+                    if pisi.util.sha1_file(fpath) != config.hash:
+                        config_changed.append(fpath)
+                        if os.path.exists(fpath + '.old'):
+                            os.unlink(fpath + '.old')
+                        os.rename(fpath, fpath + '.old')
+                except pisi.util.FileError, e:
+                    pass
+        
         if self.reinstall:
             new = set(map(lambda x: str(x.path), self.files.list))
             old = set(map(lambda x: str(x.path), self.old_files.list))
@@ -273,38 +285,23 @@ class Install(AtomicOperation):
             for newf, oldf in zip(upgrade_new, upgrade_old):
                 assert newf.path == oldf.path
                 if newf.type == 'config' and oldf.type == 'config': # config upgrade
-                    fpath = pisi.util.join_path(ctx.config.dest_dir(), oldf.path)
-                    try:
-                        if pisi.util.sha1_file(fpath) != oldf.hash:
-                            # old config file changed, don't overwrite
-                            config_changed.append(fpath)
-                            if os.path.exists(fpath + '.old'):
-                                os.unlink(fpath + '.old')
-                            os.rename(fpath, fpath + '.old')
-                        # otherwise, old config file not changed, overwrite
-                    except pisi.util.FileError, e:
-                        pass
+                    check_config_changed(oldf)
         else:
             for file in self.files.list:
                 if file.type == 'config':
-                    fpath = pisi.util.join_path(ctx.config.dest_dir(), file.path)
-                    if os.path.exists(fpath): # there is an old config file lying around
-                        try:
-                            if pisi.util.sha1_file(fpath) != file.hash:
-                                config_changed.append(fpath)
-                                if os.path.exists(fpath + '.old'):
-                                    os.unlink(fpath + '.old')
-                                os.rename(fpath, fpath + '.old')
-                        except pisi.util.FileError, e:
-                            pass
+                    check_config_changed(file)
 
         self.package.extract_install(ctx.config.dest_dir())
 
         for path in config_changed:
-            if os.path.exists(path + '.newconfig'):
-                os.unlink(path + '.newconfig')
-            os.rename(path, path + '.newconfig')
-            os.rename(path + '.old', path)
+            newconfig = path + '.newconfig'
+            oldconfig = path + '.old'
+
+            if os.path.exists(newconfig):
+                os.unlink(newconfig)
+
+            os.rename(path, newconfig)
+            os.rename(oldconfig, path)
 
         if self.reinstall:
             # remove left over files
