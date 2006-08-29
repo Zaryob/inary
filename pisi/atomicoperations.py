@@ -262,14 +262,11 @@ class Install(AtomicOperation):
         def check_config_changed(config):
             fpath = pisi.util.join_path(ctx.config.dest_dir(), config.path)
             if os.path.exists(fpath):
-                try:
-                    if pisi.util.sha1_file(fpath) != config.hash:
-                        config_changed.append(fpath)
-                        if os.path.exists(fpath + '.old'):
-                            os.unlink(fpath + '.old')
-                        os.rename(fpath, fpath + '.old')
-                except pisi.util.FileError, e:
-                    pass
+                if pisi.util.sha1_file(fpath) != config.hash:
+                    config_changed.append(fpath)
+                    if os.path.exists(fpath + '.old'):
+                        os.unlink(fpath + '.old')
+                    os.rename(fpath, fpath + '.old')
                 
         # old config files are kept as they are. New config files from the installed
         # packages are saved with ".newconfig" string appended to their names.
