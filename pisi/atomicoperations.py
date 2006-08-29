@@ -270,6 +270,28 @@ class Install(AtomicOperation):
                         os.rename(fpath, fpath + '.old')
                 except pisi.util.FileError, e:
                     pass
+                
+        # old config files are kept as they are. New config files from the installed
+        # packages are saved with ".newconfig" string appended to their names.
+        def rename_configs():
+            for path in config_changed:
+                newconfig = path + '.newconfig'
+                oldconfig = path + '.old'
+                if os.path.exists(newconfig):
+                    os.unlink(newconfig)
+                    os.rename(path, newconfig)
+                    os.rename(oldconfig, path)
+
+        # remove left over files from the old package.
+        def clean_leftovers():
+            new = set(map(lambda x: str(x.path), self.files.list))
+            old = set(map(lambda x: str(x.path), self.old_files.list))
+            leftover = old - new
+            old_fileinfo = {}
+            for fileinfo in self.old_files.list:
+                old_fileinfo[str(fileinfo.path)] = fileinfo
+            for path in leftover:
+                    Remove.remove_file( old_fileinfo[path] )
         
         if self.reinstall:
             new = set(map(lambda x: str(x.path), self.files.list))
@@ -293,26 +315,11 @@ class Install(AtomicOperation):
 
         self.package.extract_install(ctx.config.dest_dir())
 
-        for path in config_changed:
-            newconfig = path + '.newconfig'
-            oldconfig = path + '.old'
-
-            if os.path.exists(newconfig):
-                os.unlink(newconfig)
-
-            os.rename(path, newconfig)
-            os.rename(oldconfig, path)
+        if config_changed:
+            rename_configs()
 
         if self.reinstall:
-            # remove left over files
-            new = set(map(lambda x: str(x.path), self.files.list))
-            old = set(map(lambda x: str(x.path), self.old_files.list))
-            leftover = old - new
-            old_fileinfo = {}
-            for fileinfo in self.old_files.list:
-                old_fileinfo[str(fileinfo.path)] = fileinfo
-            for path in leftover:
-                    Remove.remove_file( old_fileinfo[path] )
+            clean_leftovers()
 
 
     def store_pisi_files(self):
