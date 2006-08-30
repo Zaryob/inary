@@ -72,9 +72,10 @@ class ArchiveTar(ArchiveBase):
     type. Provides access to tar, tar.gz and tar.bz2 files. 
 
     This class provides the unpack magic for tar archives."""
-    def __init__(self, file_path, arch_type = "tar"):
+    def __init__(self, file_path, arch_type = "tar", no_same_permissions = True):
         super(ArchiveTar, self).__init__(file_path, arch_type)
         self.tar = None
+        self.no_same_permissions = no_same_permissions
 
     def unpack(self, target_dir, clean_dir = False):
         """Unpack tar archive to a given target directory(target_dir)."""
@@ -126,7 +127,10 @@ class ArchiveTar(ArchiveBase):
             # tarfile.extract does not honor umask. It must be honored explicitly.
             # see --no-same-permissions option of tar(1), which is the deafult
             # behaviour.
-            if not os.path.islink(tarinfo.name):
+            #
+            # Note: This is no good while installing a pisi package. Thats why
+            # this is optional.
+            if self.no_same_permissions and not os.path.islink(tarinfo.name):
                 os.chmod(tarinfo.name, tarinfo.mode & ~ctx.const.umask)
 
         os.chdir(oldwd)
