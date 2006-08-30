@@ -167,10 +167,12 @@ def readConfig():
     if home != "" and os.path.exists(cfg):
         for line in file(cfg):
             if line != "" and not line.startswith("#") and "=" in line:
-                k, v = line.split("=", 1)
-                if k.strip() in ["name", "email"]:
+                l, m = line.split("=", 1)
+                k = l.strip()
+                v = m.strip()
+                if k in ["name", "email"]:
                     if v.startswith('"') or v.startswith("'"):
-                        v = v.strip()[1:-1]
+                        v = v[1:-1]
                     d[k.strip()] = v.strip()
 
     return d["name"], d["email"]
