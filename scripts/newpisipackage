@@ -52,7 +52,9 @@ temp_pspec = '''<?xml version="1.0" ?>
             <Path fileType="data">/</Path>
         </Files>
         <AdditionalFiles>
+        <!--
             <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/%(package)s.desktop">%(package)s.desktop</AdditionalFile>
+        -->
         </AdditionalFiles>
         <Provides>
             <COMAR script="package.py">System.Package</COMAR>
@@ -111,7 +113,7 @@ Icon=%(package)s
 Exec=%(package)s
 Terminal=false
 StartupNotify=false
-Categories=Application;Game;Arcade
+Categories=Application;Game;ArcadeGame
 '''
 
 temp_service = '''serviceType = "local"
