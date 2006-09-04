@@ -9,8 +9,6 @@
 #
 # Please read the COPYING file.
 #
-# Authors:  Eray Ozkural <eray at pardus.org.tr>
-#           Baris Metin <baris at pardus.org.tr>
 
 """package database
 interface for update/query to local package repository

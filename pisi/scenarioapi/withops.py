@@ -10,7 +10,6 @@
 #
 # Please read the COPYING file.
 #
-# Authors:  Faik Uygur <faik@pardus.org.tr>
 
 ADDED, REMOVED, INIT = range(3)
 PARTOF, VERSION, CONFLICT, DEPENDENCY = range(4)

@@ -9,10 +9,6 @@
 #
 # Please read the COPYING file.
 #
-# Authors: Eray Ozkural <eray at pardus.org.tr>
-#               Gurer Ozen <gurer at pardus.org.tr>
-#
-# piksemel written by Gurer Ozen <gurer at pardus.org.tr>
 
 """
  xmlext is a helper module for accessing XML files using

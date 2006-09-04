@@ -10,7 +10,6 @@
 #
 # Please read the COPYING file.
 #
-# Authors:  Faik Uygur <faik@pardus.org.tr>
 
 import os
 import pisi.util as util

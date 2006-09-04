@@ -9,7 +9,6 @@
 #
 # Please read the COPYING file.
 #
-# Author:  Eray Ozkural <eray@pardus.org.tr>
 
 """
 package source database

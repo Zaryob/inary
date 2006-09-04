@@ -9,9 +9,8 @@
 #
 # Please read the COPYING file.
 #
-# Author:  Eray Ozkural <eray at pardus.org.tr>
 
-"Package Operations: install/remove/upgrade"
+"""Package Operations: install/remove/upgrade"""
 
 import os
 import sys

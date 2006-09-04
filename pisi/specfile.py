@@ -9,8 +9,6 @@
 #
 # Please read the COPYING file.
 #
-# Authors:  Eray Ozkural <eray@pardus.org.tr>
-#           Baris Metin <baris@pardus.org.tr>
 
 """
  Specfile module is our handler for PSPEC files. PSPEC (PISI SPEC)

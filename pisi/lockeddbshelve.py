@@ -9,7 +9,6 @@
 #
 # Please read the COPYING file.
 #
-# Authors:  Eray Ozkural <eray@pardus.org.tr>
 
 import os
 import fcntl

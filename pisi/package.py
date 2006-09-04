@@ -10,10 +10,7 @@
 # Please read the COPYING file.
 #
 
-# package abstraction
-# provides methods to add/remove files, extract control files
-
-# maintainer: baris and meren
+"""package abstraction methods to add/remove files, extract control files"""
 
 from os.path import join, exists, basename, dirname
 

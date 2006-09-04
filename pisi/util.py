@@ -10,12 +10,7 @@
 # Please read the COPYING file.
 #
 
-# misc. utility functions, including process and file utils
-
-# Authors:  Eray Ozkural <eray@pardus.org.tr>
-#           Baris Metin <baris@pardus.org.tr>
-#           S. Caglar Onur <caglar@pardus.org.tr>
-#           A. Murat Eren <meren@pardus.org.tr>
+"""misc. utility functions, including process and file utils"""
 
 # standard python modules
 import os

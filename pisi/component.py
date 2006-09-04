@@ -9,7 +9,6 @@
 #
 # Please read the COPYING file.
 #
-# Author:  Eray Ozkural <eray at pardus.org.tr>
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)

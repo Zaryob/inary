@@ -9,8 +9,9 @@
 #
 # Please read the COPYING file.
 #
-# Simplifies working with URLs, purl module provides common URL
-# parsing and processing
+
+"""Simplifies working with URLs, purl module provides common URL
+parsing and processing"""
 
 from urlparse import urlparse
 from os.path import basename

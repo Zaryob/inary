@@ -8,10 +8,6 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
-# Authors: Baris Metin <baris at pardus.org.tr>
-#          A. Murat Eren <meren at pardus.org.tr>
-#          Eray Ozkural <eray at pardus.org.tr>
 
 """package building code"""
 

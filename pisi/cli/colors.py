@@ -10,7 +10,7 @@
 # Please read the COPYING file.
 #
 
-# Colors module provides some color codes for console output.
+"""Colors module provides some color codes for console output."""
 
 import pisi.context as ctx
 

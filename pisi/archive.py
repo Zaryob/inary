@@ -9,8 +9,8 @@
 #
 # Please read the COPYING file.
 #
-# Archive module provides access to regular archive file types.
-# maintainer baris and meren
+
+"""Archive module provides access to regular archive file types."""
 
 # standard library modules
 import os

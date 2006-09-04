@@ -9,9 +9,6 @@
 #
 # Please read the COPYING file.
 #
-# Authors:  Eray Ozkural <eray@pardus.org.tr>
-#           Baris Metin <baris@pardus.org.tr
-#           Faik Uygur <faik@pardus.org.tr>
 
 """
  XmlFile class further abstracts a dom object using the

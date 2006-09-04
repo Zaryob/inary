@@ -9,7 +9,6 @@
 #
 # Please read the COPYING file.
 #
-# Authors:  Faik Uygur <faik@pardus.org.tr>
 
 class Actions:
 

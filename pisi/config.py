@@ -9,8 +9,6 @@
 #
 # Please read the COPYING file.
 #
-# Authors: Baris Metin <baris@pardus.org.tr>
-#          Eray Ozkural <eray@pardus.org.tr>
 
 """
 PISI Configuration module is used for gathering and providing

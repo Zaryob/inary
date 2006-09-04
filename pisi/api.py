@@ -8,9 +8,6 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
-# Authors:  Eray Ozkural <eray at pardus.org.tr>
-#           Baris Metin <baris at pardus.org.tr>
 
 """Top level PISI interfaces. a facade to the entire PISI system"""
 

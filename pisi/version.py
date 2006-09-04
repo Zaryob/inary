@@ -9,17 +9,8 @@
 #
 # Please read the COPYING file.
 #
-# Authors:  Eray Ozkural <eray@pardus.org.tr>
-#           Baris Metin <baris@pardus.org.tr>
-#
-# History:
-# Eray wrote the first version
-# Baris added support for the fancy keywords and
-# alphanumeric version string components
-
 
 """version structure"""
-
 
 import re
 import string

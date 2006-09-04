@@ -9,8 +9,6 @@
 #
 # Please read the COPYING file.
 #
-# Authors:  Eray Ozkural <eray@pardus.org.tr>
-#           Baris Metin <baris@pardus.org.tr
 
 """
 Metadata module provides access to metadata.xml. metadata.xml is

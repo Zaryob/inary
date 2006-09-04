@@ -9,12 +9,6 @@
 #
 # Please read the COPYING file.
 #
-#
-# Authors:  Eray Ozkural <eray@pardus.org.tr>
-#           Gurer Ozen <gurer@pardus.org.tr>
-#           Bahadir Kandemir <bahadir@haftalik.net>
-#           Baris Metin <baris@pardus.org.tr>
-
 
 """
  autoxml is a metaclass for automatic XML translation, using

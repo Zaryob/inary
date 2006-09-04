@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+n# -*- coding: utf-8 -*-
 #
 # Copyright (C) 2005, TUBITAK/UEKAE
 #
@@ -9,8 +9,6 @@
 #
 # Please read the COPYING file.
 #
-#
-# Author:  Eray Ozkural <eray@pardus.org.tr>
 
 import pisi
 import pisi.context as ctx

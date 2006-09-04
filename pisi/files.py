@@ -9,7 +9,6 @@
 #
 # Please read the COPYING file.
 #
-# Authors:  Eray Ozkural <eray@pardus.org.tr>
 
 '''Files module provides access to files.xml. files.xml is generated
 during the build process of a package and used in installation.'''

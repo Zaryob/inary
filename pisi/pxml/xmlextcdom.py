@@ -9,10 +9,6 @@
 #
 # Please read the COPYING file.
 #
-# Authors:  Eray Ozkural <eray@pardus.org.tr>
-#           Baris Metin <baris@pardus.org.tr
-#           Gurer Ozen <gurer@pardus.org.tr>
-#           Faik Uygur <faik@pardus.org.tr>
 
 """
  xmlext is a helper module for accessing XML files using

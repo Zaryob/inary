@@ -11,8 +11,6 @@
 #
 # generic user interface
 #
-# Authors:  Eray Ozkural <eray@pardus.org.tr>
-#           A. Murat Eren <meren@pardus.org.tr>
 
 import sys
 

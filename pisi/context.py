@@ -10,11 +10,6 @@
 # Please read the COPYING file.
 #
 
-# Context module.
-
-# Authors: Baris Metin <baris@pardus.org.tr
-#          Eray Ozkural <eray@pardus.org.tr>
-
 # global variables here
 
 import pisi.constants

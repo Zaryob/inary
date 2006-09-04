@@ -9,7 +9,6 @@
 #
 # Please read the COPYING file.
 #
-# Authors:  Faik Uygur <faik@pardus.org.tr>
 
 from pisi.specfile import SpecFile, Package, Update, Path
 from pisi.dependency import Dependency

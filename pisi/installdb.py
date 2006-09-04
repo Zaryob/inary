@@ -12,7 +12,6 @@
 #
 # installation database
 #
-# Author:  Eray Ozkural <eray@pardus.org.tr>
 
 # System
 import os

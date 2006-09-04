@@ -8,9 +8,6 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
-# Authors: Baris Metin <baris@pardus.org.tr>
-#          Eray Ozkural <eray@pardus.org.tr>
 
 # python standard library
 

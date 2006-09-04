@@ -9,9 +9,6 @@
 #
 # Please read the COPYING file.
 #
-# Author:  Eray Ozkural <eray@pardus.org.tr>
-#
-# rev 1: very simple tokenization, for testing
 
 import string
 

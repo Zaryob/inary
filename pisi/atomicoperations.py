@@ -8,10 +8,8 @@
 # any later version.
 #
 # Please read the COPYING file.
-#
-# Author:  Eray Ozkural <eray@pardus.org.tr>
 
-"Atomic package operations such as install/remove/upgrade"
+"""Atomic package operations such as install/remove/upgrade"""
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
