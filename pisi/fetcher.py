@@ -52,9 +52,6 @@ def fetch_url(url, destdir, progress=None, resume=True):
         fetch.resume = False
     fetch.progress = progress
     fetch.fetch()
-    if progress:
-        pass
-
 
 class Fetcher:
     """Fetcher can fetch a file from various sources using various
