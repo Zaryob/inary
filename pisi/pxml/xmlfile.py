@@ -16,11 +16,7 @@ try:
     from xmlfilepiks import *
 except:
     try:
-        #if pisi.context.use_mdom:
-        #    zibidi
-        #else:
         from xmlfilecdom import *
     except:
-        #raise Error('cannot find 4suite implementation')
         print 'xmlext: cDomlette/piksemel implementation cannot be loaded, falling back to minidom'
         from xmlfilemdom import *
