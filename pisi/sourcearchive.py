@@ -28,6 +28,7 @@ import pisi.context as ctx
 from pisi.archive import Archive
 from pisi.uri import URI
 from pisi.fetcher import fetch_url
+from pisi.mirrors import Mirrors
 
 class Error(pisi.Error):
     pass
@@ -44,20 +45,47 @@ class SourceArchive:
     def fetch(self, interactive=True):
         if not self.is_cached(interactive):
             if interactive:
-                progress = ctx.ui.Progress
+                self.progress = ctx.ui.Progress
             else:
-                progress = None
+                self.progress = None
+
             try:
-                fetch_url(self.url, ctx.config.archives_dir(), progress)
+                if self.url.get_uri().startswith("mirrors://"):
+                    self.fetch_from_mirror()
+                else:
+                    fetch_url(self.url, ctx.config.archives_dir(), self.progress)
             except pisi.fetcher.FetchError:
-                # if archive can not be reached from the url, try the fallback 
-                # address.
                 if ctx.config.values.build.fallback:
-                    archive = basename(self.url.get_uri())
-                    src = join(ctx.config.values.build.fallback, archive)
-                    fetch_url(src, ctx.config.archives_dir(), progress)
+                    self.fetch_from_fallback()
                 else:
                     raise
+
+    def fetch_from_fallback(self):
+        archive = basename(self.url.get_uri())
+        src = join(ctx.config.values.build.fallback, archive)
+        ctx.ui.warning(_('Trying fallback address: %s') % src)
+        fetch_url(src, ctx.config.archives_dir(), self.progress)
+
+    def fetch_from_mirror(self):
+        uri = self.url.get_uri()
+        sep = uri[len("mirrors://"):].split("/")
+        name = sep.pop(0)
+        archive = "/".join(sep)
+
+        mirrors = Mirrors().get_mirrors(name)
+        if not mirrors:
+            raise Error(_("%s mirrors are not defined.") % name)
+
+        for mirror in mirrors:
+            try:
+                url = join(mirror, archive)
+                ctx.ui.warning(_('Fetching source from mirror: %s') % url)
+                fetch_url(url, ctx.config.archives_dir(), self.progress)
+                return
+            except pisi.fetcher.FetchError:
+                pass
+
+        raise pisi.fetcher.FetchError(_('Could not fetch source from %s mirrors.') % name);
 
     def is_cached(self, interactive=True):
         if not access(self.archiveFile, R_OK):

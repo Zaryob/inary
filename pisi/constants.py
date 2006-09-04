@@ -78,6 +78,7 @@ class Constants:
         self.__c.metadata_xml = "metadata.xml"
         self.__c.install_tar = "install.tar"
         self.__c.install_tar_lzma = "install.tar.lzma"
+        self.__c.mirrors_conf = "/etc/pisi/mirrors.conf"
 
         #file/directory permissions
         self.__c.umask = 0022
