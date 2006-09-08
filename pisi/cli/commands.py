@@ -1371,7 +1371,7 @@ Finds the installed package which contains the specified file.
         if files:
             for (pkg_name, file_info) in files:
                 if ctx.config.options.quiet:
-                    ctx.ui.info("%s" % pkg_name)
+                    ctx.ui.info(pkg_name)
                 else:
                     ctx.ui.info(_("Package %s has file %s") % (pkg_name, file_info.path))
                     if ctx.config.options.long:
