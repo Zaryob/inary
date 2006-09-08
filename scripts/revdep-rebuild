@@ -184,6 +184,6 @@ else
     done
     cat $LLIST.tmp | uniq | sort > $LLIST.4_names
     rm -f $LLIST.tmp
-	echo -e " done.\n  ($LIST.4_names)"
+    echo -e " done.\n  ($LIST.4_names)"
 fi
 cat $LLIST.4_names
