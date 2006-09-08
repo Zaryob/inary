@@ -130,7 +130,7 @@ if [ -f $LIST.1_files ] ; then
 	echo " using existing $LIST.1_files."
 else
 	set_trap "$LIST.1_files"
-	find $SEARCH_DIRS -type f \( -perm +u+x -o -name '*.so' -o -name '*.so.*' \) 2>/dev/null >$LIST.1_files
+	find $SEARCH_DIRS -type f \( -perm /+u+x -o -name '*.so' -o -name '*.so.*' \) 2>/dev/null >$LIST.1_files
 	echo -e " done.\n  ($LIST.1_files)"
 fi
 
