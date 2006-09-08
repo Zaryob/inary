@@ -1351,6 +1351,9 @@ Finds the installed package which contains the specified file.
                                default=False, help=_("show in long format"))
         self.parser.add_option("-f", "--fuzzy", action="store_true",
                                default=False, help=_("fuzzy search"))
+        self.parser.add_option("-q", "--quiet", action="store_true",
+                               default=False, help=_("show only package name"))
+
     
     # what does exact mean? -- exa
     @staticmethod
@@ -1367,9 +1370,12 @@ Finds the installed package which contains the specified file.
 
         if files:
             for (pkg_name, file_info) in files:
-                ctx.ui.info(_("Package %s has file %s") % (pkg_name, file_info.path))
-                if ctx.config.options.long:
-                    ctx.ui.info(_('Type: %s, Hash: %s') % (file_info.type,
+                if ctx.config.options.quiet:
+                    ctx.ui.info(_("%s") % (pkg_name))
+                else:
+                    ctx.ui.info(_("Package %s has file %s") % (pkg_name, file_info.path))
+                    if ctx.config.options.long:
+                        ctx.ui.info(_('Type: %s, Hash: %s') % (file_info.type,
                                                            file_info.hash))
         else:
             ctx.ui.error(_("Path '%s' does not belong to an installed package") % path)
@@ -1384,7 +1390,8 @@ Finds the installed package which contains the specified file.
        
         # search among existing files
         for path in self.args:
-            ctx.ui.info(_('Searching for %s') % path)
+            if not ctx.config.options.quiet:
+                ctx.ui.info(_('Searching for %s') % path)
             import os.path
             if os.path.exists(path):
                 path = os.path.realpath(path)
