@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 # revdep-rebuild: Reverse dependency rebuilder.
 # Author: Stanislav Brabec <utx@gentoo.org>
@@ -8,8 +8,7 @@ LD_LIBRARY_MASK="libodbcinst.so libodbc.so libjava.so libjvm.so"
 
 # List of directories to be searched (feel free to edit it)
 # Note /usr/libexec and /usr/local/subprefix cotradicts FHS, but are present
-# /var/something is for cgi and similar scripts
-SEARCH_DIRS="/lib /bin /sbin /usr/lib /usr/bin /usr/sbin /usr/libexec /usr/X11R6/lib /usr/X11R6/bin /usr/X11R6/sbin  /usr/e1* /usr/local /usr/qt* /usr/kde/*/lib /usr/*-*-linux-gnu /opt /var/qmail /var/vpopmail /home/httpd/cgi-bin"
+SEARCH_DIRS="/lib /bin /sbin /usr/lib /usr/bin /usr/sbin /usr/libexec /usr/local /usr/qt* /usr/kde/*/lib /usr/*-*-linux-gnu /opt"
 
 # Base of temporary files names.
 LIST=~/.revdep-rebuild
@@ -28,7 +27,6 @@ BL="\x1b[34;01m"
 
 alias echo_v=echo
 
-PACKAGE_NAMES=false
 SONAME="not found"
 SONAME_GREP=fgrep
 SEARCH_BROKEN=true
@@ -36,11 +34,10 @@ SEARCH_BROKEN=true
 while : ; do
 	case "$1" in
 	-h | --help )
-		echo "Usage: $0 [OPTIONS] [--] [EMERGE_OPTIONS]"
+		echo "Usage: $0 [OPTIONS] [--]"
 		echo
 		echo "Broken reverse dependency rebuilder."
 		echo
-		echo "  -X, --package-names  recompile based on package names, not exact versions"
 		echo "      --soname SONAME  recompile packages using library with SONAME instead"
 		echo "                       of broken library (SONAME providing library must be"
 		echo "                       present in the system)"
@@ -48,14 +45,7 @@ while : ; do
 		echo "                       the same as --soname, but accepts grep-style regexp"
 		echo "  -q, --quiet          be less verbose"
 		echo
-		echo "Calls emerge, all other options are used for it (e. g. -p, --pretend)."
-		echo
-		echo "Report bugs to <utx@gentoo.org>"
 		exit 0
-		;;
-	-X | --package-names )
-		PACKAGE_NAMES=true
-		shift
 		;;
 	-q | --quiet )
 		alias echo_v=:
@@ -180,3 +170,20 @@ else
 	done
 	echo -e " done.\n  ($LLIST.3_rebuild)"
 fi
+
+echo
+echo -n -e "${GR}Determining package names$WORKING_TEXT...${NO}"
+if [ -f $LLIST.4_names ] ; then
+	echo " using existing $LLIST.4_names."
+else
+    echo_v
+    set_trap "$LLIST.4_names"
+    for i in `cat $LLIST.3_rebuild`
+    do
+        /usr/bin/pisi -q search-file $i >> $LLIST.tmp
+    done
+    cat $LLIST.tmp | uniq | sort > $LLIST.4_names
+    rm -f $LLIST.tmp
+	echo -e " done.\n  ($LIST.4_names)"
+fi
+cat $LLIST.4_names
