@@ -53,7 +53,7 @@ msgid "Use --debug to see a traceback."
 msgstr ""
 
 #: pisi-cli:81
-msgid "PISI has been upgraded."
+msgid "PiSi has been upgraded."
 msgstr ""
 
 #: pisi/actionsapi/autotools.py:37
@@ -252,7 +252,7 @@ msgid "Checking %s "
 msgstr ""
 
 #: pisi/api.py:337
-msgid "* Building index of PISI files under %s"
+msgid "* Building index of PiSi files under %s"
 msgstr ""
 
 #: pisi/api.py:344
@@ -452,7 +452,7 @@ msgid "Source %s not found in any active repository."
 msgstr ""
 
 #: pisi/build.py:185
-msgid "Building PISI source package: %s"
+msgid "Building PiSi source package: %s"
 msgstr ""
 
 #: pisi/build.py:230
@@ -601,7 +601,7 @@ msgid "Build number is not available. For repo builds you must enable buildno in
 msgstr ""
 
 #: pisi/build.py:779
-msgid "Creating PISI package %s."
+msgid "Creating PiSi package %s."
 msgstr ""
 
 #: pisi/build.py:824
@@ -760,7 +760,7 @@ msgid ""
 "\n"
 "Usage: clean\n"
 "\n"
-"PISI uses filesystem locks for managing database access.\n"
+"PiSi uses filesystem locks for managing database access.\n"
 "This command deletes unused locks from the database directory."
 msgstr ""
 
@@ -832,11 +832,11 @@ msgstr ""
 #: pisi/cli/commands.py:349
 #, docstring
 msgid ""
-"Build PISI packages\n"
+"Build PiSi packages\n"
 "\n"
 "Usage: build [<pspec.xml> | <sourcename>] ...\n"
 "\n"
-"You can give a URI of the pspec.xml file. PISI will\n"
+"You can give a URI of the pspec.xml file. PiSi will\n"
 "fetch all necessary files and build the package for you.\n"
 "\n"
 "Alternatively, you can give the name of a source package\n"
@@ -902,7 +902,7 @@ msgstr ""
 #: pisi/cli/commands.py:434
 #, docstring
 msgid ""
-"Build and install PISI source packages from repository\n"
+"Build and install PiSi source packages from repository\n"
 "\n"
 "Usage: emerge <sourcename> ...\n"
 "\n"
@@ -928,7 +928,7 @@ msgstr ""
 #: pisi/cli/commands.py:496
 #, docstring
 msgid ""
-"Install PISI packages\n"
+"Install PiSi packages\n"
 "\n"
 "Usage: install <package1> <package2> ... <packagen>\n"
 "\n"
@@ -950,7 +950,7 @@ msgstr ""
 #: pisi/cli/commands.py:533
 #, docstring
 msgid ""
-"Upgrade PISI packages\n"
+"Upgrade PiSi packages\n"
 "\n"
 "Usage: Upgrade [<package1> <package2> ... <packagen>]\n"
 "\n"
@@ -991,7 +991,7 @@ msgstr ""
 #: pisi/cli/commands.py:590
 #, docstring
 msgid ""
-"Remove PISI packages\n"
+"Remove PiSi packages\n"
 "\n"
 "Usage: remove <package1> <package2> ... <packagen>\n"
 "\n"
@@ -1103,11 +1103,11 @@ msgstr ""
 #: pisi/cli/commands.py:787
 #, docstring
 msgid ""
-"Index PISI files in a given directory\n"
+"Index PiSi files in a given directory\n"
 "\n"
 "Usage: index <directory> ...\n"
 "\n"
-"This command searches for all PISI files in a directory, collects PISI\n"
+"This command searches for all PiSi files in a directory, collects PiSi\n"
 "tags from them and accumulates the information in an output XML file,\n"
 "named by default 'pisi-index.xml'. In particular, it indexes both\n"
 "source and binary packages.\n"
@@ -1169,7 +1169,7 @@ msgid ""
 "\n"
 "Usage: rebuilddb [ <package1> <package2> ... <packagen> ]\n"
 "\n"
-"Rebuilds the PISI databases\n"
+"Rebuilds the PiSi databases\n"
 "\n"
 "If package specs are given, they should be the names of package \n"
 "dirs under /var/lib/pisi\n"
@@ -1180,7 +1180,7 @@ msgid "rebuild files database"
 msgstr ""
 
 #: pisi/cli/commands.py:908
-msgid "Rebuild PISI databases?"
+msgid "Rebuild PiSi databases?"
 msgstr ""
 
 #: pisi/cli/commands.py:915
@@ -1192,7 +1192,7 @@ msgid ""
 "\n"
 "<repoi>: repository name\n"
 "\n"
-"Synchronizes the PISI databases with the current repository.\n"
+"Synchronizes the PiSi databases with the current repository.\n"
 "If no repository is given, all repositories are updated.\n"
 msgstr ""
 
@@ -1220,7 +1220,7 @@ msgid "add repository at given position (0 is first)"
 msgstr ""
 
 #: pisi/cli/commands.py:984
-msgid "Update PISI database for repository %s?"
+msgid "Update PiSi database for repository %s?"
 msgstr ""
 
 #: pisi/cli/commands.py:993
@@ -1250,7 +1250,7 @@ msgid ""
 "\n"
 "Usage: list-available [ <repo1> <repo2> ... repon ]\n"
 "\n"
-"Gives a brief list of PISI packages published in the specified\n"
+"Gives a brief list of PiSi packages published in the specified\n"
 "repositories. If no repository is specified, we list packages in\n"
 "all repositories. \n"
 msgstr ""
@@ -1275,7 +1275,7 @@ msgid ""
 "\n"
 "Usage: list-components\n"
 "\n"
-"Gives a brief list of PISI components published in the \n"
+"Gives a brief list of PiSi components published in the \n"
 "repositories.\n"
 msgstr ""
 
@@ -1666,7 +1666,7 @@ msgid "Database version %s not present."
 msgstr ""
 
 #: pisi/lockeddbshelve.py:75 pisi/lockeddbshelve.py:164
-msgid "Another instance of PISI is running. Only one instance is allowed to modify the PISI database at a time."
+msgid "Another instance of PiSi is running. Only one instance is allowed to modify the PiSi database at a time."
 msgstr ""
 
 #: pisi/lockeddbshelve.py:85
@@ -1674,7 +1674,7 @@ msgid "Cannot attain read access to database environment"
 msgstr ""
 
 #: pisi/lockeddbshelve.py:99
-msgid "Cannot write to PISI database."
+msgid "Cannot write to PiSi database."
 msgstr ""
 
 #: pisi/lockeddbshelve.py:122
@@ -1695,11 +1695,11 @@ msgid "Architecture: %s, Installed Size: %s"
 msgstr ""
 
 #: pisi/operations.py:45
-msgid "Upgrading PISI requires database rebuild and restart"
+msgid "Upgrading PiSi requires database rebuild and restart"
 msgstr ""
 
 #: pisi/operations.py:48
-msgid "PISI package has been upgraded. Rebuilding PISI database."
+msgid "PiSi package has been upgraded. Rebuilding PiSi database."
 msgstr ""
 
 #: pisi/operations.py:79

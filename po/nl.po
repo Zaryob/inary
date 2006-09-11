@@ -63,8 +63,8 @@ msgid "Use --debug to see a traceback."
 msgstr "Gebruik --debug om een traceback te zien."
 
 #: pisi-cli:81
-msgid "PISI has been upgraded."
-msgstr "PISI is opgewaardeerd."
+msgid "PiSi has been upgraded."
+msgstr "PiSi is opgewaardeerd."
 
 #: pisi/actionsapi/autotools.py:37
 msgid ""
@@ -285,8 +285,8 @@ msgid "Checking %s "
 msgstr "%s controleren "
 
 #: pisi/api.py:337
-msgid "* Building index of PISI files under %s"
-msgstr "* Index aanmaken van PISI-bestanden aan onder %s"
+msgid "* Building index of PiSi files under %s"
+msgstr "* Index aanmaken van PiSi-bestanden aan onder %s"
 
 #: pisi/api.py:344
 msgid "* Index file written"
@@ -493,8 +493,8 @@ msgid "Source %s not found in any active repository."
 msgstr "Bron %s niet gevonden in aanwezige actieve repositories."
 
 #: pisi/build.py:185
-msgid "Building PISI source package: %s"
-msgstr "PISI-bronpakketten compileren: %s "
+msgid "Building PiSi source package: %s"
+msgstr "PiSi-bronpakketten compileren: %s "
 
 #: pisi/build.py:230
 msgid "IceCream detected. Make sure your daemon is up and running..."
@@ -643,8 +643,8 @@ msgid "Build number is not available. For repo builds you must enable buildno in
 msgstr "Compilatienummer is niet aanwezig. Bij repo-compilaties moet u 'buildno' inschakelen in pisi.conf"
 
 #: pisi/build.py:779
-msgid "Creating PISI package %s."
-msgstr "PISI-pakket %s aanmaken."
+msgid "Creating PiSi package %s."
+msgstr "PiSi-pakket %s aanmaken."
 
 #: pisi/build.py:824
 msgid "Done."
@@ -754,11 +754,11 @@ msgstr "Wachtwoord: "
 
 #: pisi/cli/commands.py:142
 msgid "initialize PiSi components"
-msgstr "PISI-componenten initialiseren"
+msgstr "PiSi-componenten initialiseren"
 
 #: pisi/cli/commands.py:150
 msgid "do cleanup work for PiSi components"
-msgstr "opruimwerk voor PISI-componenten uitvoeren"
+msgstr "opruimwerk voor PiSi-componenten uitvoeren"
 
 #: pisi/cli/commands.py:164
 msgid "print help for the command"
@@ -800,14 +800,14 @@ msgid ""
 "\n"
 "Usage: clean\n"
 "\n"
-"PISI uses filesystem locks for managing database access.\n"
+"PiSi uses filesystem locks for managing database access.\n"
 "This command deletes unused locks from the database directory."
 msgstr ""
 "Oude sloten opruimen\n"
 "\n"
 "Gebruik: clean\n"
 "\n"
-"PISI gebruikt bestandssysteemsloten voor het beheren van de databasetoegang\n"
+"PiSi gebruikt bestandssysteemsloten voor het beheren van de databasetoegang\n"
 "Dit commando verwijdert ongebruikte sloten in de databasemap."
 
 #: pisi/cli/commands.py:251
@@ -890,11 +890,11 @@ msgstr "geen rekening houden met afhankelijkheidsinformatie"
 
 #: pisi/cli/commands.py:349
 msgid ""
-"Build PISI packages\n"
+"Build PiSi packages\n"
 "\n"
 "Usage: build [<pspec.xml> | <sourcename>] ...\n"
 "\n"
-"You can give a URI of the pspec.xml file. PISI will\n"
+"You can give a URI of the pspec.xml file. PiSi will\n"
 "fetch all necessary files and build the package for you.\n"
 "\n"
 "Alternatively, you can give the name of a source package\n"
@@ -904,11 +904,11 @@ msgid ""
 "provide the --until <state> option where <state> is one of \n"
 "unpack, setup, build, install, package.\n"
 msgstr ""
-"PISI-pakket compileren\n"
+"PiSi-pakket compileren\n"
 "\n "
 "Gebruik: build [<pspec.xml> | <broncodenaam>] ...\n"
 "\n"
-"U kunt een URL van het pspec.xml bestand geven. PISI zal\n"
+"U kunt een URL van het pspec.xml bestand geven. PiSi zal\n"
 "all de benodigde bestanden samenvoegen en een pakket bouwen.\n"
 "\n"
 "Als alternatief kunt u de naam van het bronpakket opgeven\n"
@@ -975,7 +975,7 @@ msgstr "Pakketten uitvoeren naar de werkmap."
 
 #: pisi/cli/commands.py:434
 msgid ""
-"Build and install PISI source packages from repository\n"
+"Build and install PiSi source packages from repository\n"
 "\n"
 "Usage: emerge <sourcename> ...\n"
 "\n"
@@ -984,7 +984,7 @@ msgid ""
 "\n"
 "You can also give the name of a component.\n"
 msgstr ""
-"Compileer en installleer PISI pakketten van de repository\n"
+"Compileer en installleer PiSi pakketten van de repository\n"
 "\n"
 "Gebruik:  emerge <bronnaam> ...\n"
 "\n"
@@ -1007,7 +1007,7 @@ msgstr "geen handeling uitvoeren, alleen tonen wat er zal gebeuren"
 
 #: pisi/cli/commands.py:496
 msgid ""
-"Install PISI packages\n"
+"Install PiSi packages\n"
 "\n"
 "Usage: install <package1> <package2> ... <packagen>\n"
 "\n"
@@ -1017,7 +1017,7 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
-"PISI pakketten installeren\n"
+"PiSi pakketten installeren\n"
 "\n"
 "Gebruik: install <pakket1> <pakket2> ... <pakketn>\n"
 "\n"
@@ -1037,7 +1037,7 @@ msgstr "Bestandsconflicten negeren"
 
 #: pisi/cli/commands.py:533
 msgid ""
-"Upgrade PISI packages\n"
+"Upgrade PiSi packages\n"
 "\n"
 "Usage: Upgrade [<package1> <package2> ... <packagen>]\n"
 "\n"
@@ -1054,7 +1054,7 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
-"PISI-pakketten opwaarderen\n"
+"PiSi-pakketten opwaarderen\n"
 "\n"
 "gebruik: Upgrade [<pakket1> <pakket2> ... <pakketn>]\n"
 "\n"
@@ -1092,7 +1092,7 @@ msgstr "Zal repositories niet bijwerken"
 
 #: pisi/cli/commands.py:590
 msgid ""
-"Remove PISI packages\n"
+"Remove PiSi packages\n"
 "\n"
 "Usage: remove <package1> <package2> ... <packagen>\n"
 "\n"
@@ -1101,7 +1101,7 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
-"PISI-pakketten verwijderen\n"
+"PiSi-pakketten verwijderen\n"
 "\n"
 "Gebruik: remove <pakket1> <pakket2> ... <pakketn>\n"
 "\n"
@@ -1232,11 +1232,11 @@ msgstr "Pakket %s is niet geïnstalleerd"
 
 #: pisi/cli/commands.py:787
 msgid ""
-"Index PISI files in a given directory\n"
+"Index PiSi files in a given directory\n"
 "\n"
 "Usage: index <directory> ...\n"
 "\n"
-"This command searches for all PISI files in a directory, collects PISI\n"
+"This command searches for all PiSi files in a directory, collects PiSi\n"
 "tags from them and accumulates the information in an output XML file,\n"
 "named by default 'pisi-index.xml'. In particular, it indexes both\n"
 "source and binary packages.\n"
@@ -1244,11 +1244,11 @@ msgid ""
 "If you give multiple directories, the command still works, but puts\n"
 "everything in a single index file.\n"
 msgstr ""
-"Indexeer PISI-bestanden in een opgegeven map\n"
+"Indexeer PiSi-bestanden in een opgegeven map\n"
 "\n"
 "Gebruik: index <map> ...\n"
 "\n"
-"Dit commando zoekt naar alle PISI-bestanden in een map, verzamelt PISI-\n"
+"Dit commando zoekt naar alle PiSi-bestanden in een map, verzamelt PiSi-\n"
 "tags en zet de verkregen informatie in een XML-bestand, standaard pisi-index.xml\n"
 "genoemd. In het bijzonder indexeert het zowel bron- als binaire pakketten.\n"
 "\n"
@@ -1315,7 +1315,7 @@ msgid ""
 "\n"
 "Usage: rebuilddb [ <package1> <package2> ... <packagen> ]\n"
 "\n"
-"Rebuilds the PISI databases\n"
+"Rebuilds the PiSi databases\n"
 "\n"
 "If package specs are given, they should be the names of package \n"
 "dirs under /var/lib/pisi\n"
@@ -1324,7 +1324,7 @@ msgstr ""
 "\n"
 "Gebruik: rebuilddb [ <pakket1> <pakket2> ... <pakketn> ]\n"
 "\n"
-"Herbouwt de PISI-databases\n"
+"Herbouwt de PiSi-databases\n"
 "\n"
 "Als u pakketspecificaties opgeeft, geef dan de namen van de pakketmappen\n"
 "onder de map /var/lib/pisi op.\n"
@@ -1334,8 +1334,8 @@ msgid "rebuild files database"
 msgstr "bestanden database herbouwen"
 
 #: pisi/cli/commands.py:908
-msgid "Rebuild PISI databases?"
-msgstr "PISI-databases herbouwen?"
+msgid "Rebuild PiSi databases?"
+msgstr "PiSi-databases herbouwen?"
 
 #: pisi/cli/commands.py:915
 msgid ""
@@ -1345,7 +1345,7 @@ msgid ""
 "\n"
 "<repoi>: repository name\n"
 "\n"
-"Synchronizes the PISI databases with the current repository.\n"
+"Synchronizes the PiSi databases with the current repository.\n"
 "If no repository is given, all repositories are updated.\n"
 msgstr ""
 "Repositorydatabases bijwerken\n"
@@ -1354,7 +1354,7 @@ msgstr ""
 "\n"
 "<repo*>: repositorynaam\n"
 "\n"
-"Synchroniseert de PISI-databases met de huidige repository.\n"
+"Synchroniseert de PiSi-databases met de huidige repository.\n"
 "Indien geen repository opgegeven is worden alle repositories bijgewerkt.\n"
 
 #: pisi/cli/commands.py:934
@@ -1390,8 +1390,8 @@ msgid "add repository at given position (0 is first)"
 msgstr "repository toevoegen op opgegeven positie (0 is eerst)"
 
 #: pisi/cli/commands.py:984
-msgid "Update PISI database for repository %s?"
-msgstr "PISI-database bijwerken voor repository %s?"
+msgid "Update PiSi database for repository %s?"
+msgstr "PiSi-database bijwerken voor repository %s?"
 
 #: pisi/cli/commands.py:993
 msgid ""
@@ -1427,7 +1427,7 @@ msgid ""
 "\n"
 "Usage: list-available [ <repo1> <repo2> ... repon ]\n"
 "\n"
-"Gives a brief list of PISI packages published in the specified\n"
+"Gives a brief list of PiSi packages published in the specified\n"
 "repositories. If no repository is specified, we list packages in\n"
 "all repositories. \n"
 msgstr ""
@@ -1435,7 +1435,7 @@ msgstr ""
 "\n"
 "Gebruik: list-available [ <repo1> <repo2> ... repon ]\n"
 "\n"
-"Geeft een korte lijst van PISI-pakketten gepubliceerd in de\n"
+"Geeft een korte lijst van PiSi-pakketten gepubliceerd in de\n"
 "opgegeven repositories. Indien geen repository\n"
 "opgegeven is worden de pakketten uit alle repositories\n"
 "opgesomd. \n"
@@ -1458,14 +1458,14 @@ msgid ""
 "\n"
 "Usage: list-components\n"
 "\n"
-"Gives a brief list of PISI components published in the \n"
+"Gives a brief list of PiSi components published in the \n"
 "repositories.\n"
 msgstr ""
 "Beschikbare componenten opsommen\n"
 "\n"
 "Gebruik: list-components\n"
 "\n"
-"Geeft een korte lijst van PISI-componenten gepubliceerd in \n"
+"Geeft een korte lijst van PiSi-componenten gepubliceerd in \n"
 "de repositories.\n"
 
 #: pisi/cli/commands.py:1139
@@ -1876,7 +1876,7 @@ msgstr "Databaseversie van %s is niet toereikend. Voer a.u.b. het commando rebui
 
 #: pisi/lockeddbshelve.py:54
 msgid "Database version for %s greater than PiSi version. You need a newer PiSi."
-msgstr "Databaseversie van %s is hoger dan de PISI-versie. Een nieuwere versie van PISI is nodig."
+msgstr "Databaseversie van %s is hoger dan de PiSi-versie. Een nieuwere versie van PiSi is nodig."
 
 #: pisi/lockeddbshelve.py:61
 msgid "Writing current database version for %s"
@@ -1892,16 +1892,16 @@ msgstr "Databaseversie %s niet aanwezig."
 
 #: pisi/lockeddbshelve.py:75
 #: pisi/lockeddbshelve.py:164
-msgid "Another instance of PISI is running. Only one instance is allowed to modify the PISI database at a time."
-msgstr "Er draait nog een exemplaar van PISI.  Er kan slechts één PISI tegelijk de database aanpassen."
+msgid "Another instance of PiSi is running. Only one instance is allowed to modify the PiSi database at a time."
+msgstr "Er draait nog een exemplaar van PiSi.  Er kan slechts één PiSi tegelijk de database aanpassen."
 
 #: pisi/lockeddbshelve.py:85
 msgid "Cannot attain read access to database environment"
 msgstr "Kan geen leestoegang tot de databaseomgeving krijgen"
 
 #: pisi/lockeddbshelve.py:99
-msgid "Cannot write to PISI database."
-msgstr "Kan niet naar de PISI-database schrijven."
+msgid "Cannot write to PiSi database."
+msgstr "Kan niet naar de PiSi-database schrijven."
 
 #: pisi/lockeddbshelve.py:122
 msgid "Cannot attain read or write access to database %s"
@@ -1920,12 +1920,12 @@ msgid "Architecture: %s, Installed Size: %s"
 msgstr "Architectuur: %s, installatiegrootte: %s"
 
 #: pisi/operations.py:45
-msgid "Upgrading PISI requires database rebuild and restart"
-msgstr "Het opwaarderen van PISI vereist het herbouwen van de database en een herstart"
+msgid "Upgrading PiSi requires database rebuild and restart"
+msgstr "Het opwaarderen van PiSi vereist het herbouwen van de database en een herstart"
 
 #: pisi/operations.py:48
-msgid "PISI package has been upgraded. Rebuilding PISI database."
-msgstr "PISI-pakket is opgewaardeerd. PISI-database wordt opnieuw opgebouwd."
+msgid "PiSi package has been upgraded. Rebuilding PiSi database."
+msgstr "PiSi-pakket is opgewaardeerd. PiSi-database wordt opnieuw opgebouwd."
 
 #: pisi/operations.py:79
 msgid "Mixing file names and package names not supported yet."
