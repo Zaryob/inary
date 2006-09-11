@@ -116,7 +116,7 @@ class Index(XmlFile):
         package = Package(path, 'r')
         # extract control files
         util.clean_dir(ctx.config.install_dir())
-        package.extract_PiSi_files(ctx.config.install_dir())
+        package.extract_PISI_files(ctx.config.install_dir())
 
         md = metadata.MetaData()
         md.read(os.path.join(ctx.config.install_dir(), ctx.const.metadata_xml))
