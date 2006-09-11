@@ -231,7 +231,7 @@ class Clean(Command):
 
 Usage: clean
 
-PISI uses filesystem locks for managing database access.
+PiSi uses filesystem locks for managing database access.
 This command deletes unused locks from the database directory."""
 
     __metaclass__ = autocommand
@@ -346,11 +346,11 @@ def ignoredep_opt(self):
 
 
 class Build(Command):
-    """Build PISI packages
+    """Build PiSi packages
 
 Usage: build [<pspec.xml> | <sourcename>] ...
 
-You can give a URI of the pspec.xml file. PISI will
+You can give a URI of the pspec.xml file. PiSi will
 fetch all necessary files and build the package for you.
 
 Alternatively, you can give the name of a source package
@@ -431,7 +431,7 @@ unpack, setup, build, install, package.
 
         
 class Emerge(Build):
-    """Build and install PISI source packages from repository
+    """Build and install PiSi source packages from repository
 
 Usage: emerge <sourcename> ...
 
@@ -493,7 +493,7 @@ class PackageOp(Command):
 
 
 class Install(PackageOp):
-    """Install PISI packages
+    """Install PiSi packages
 
 Usage: install <package1> <package2> ... <packagen>
 
@@ -530,7 +530,7 @@ expanded to package names.
 
 
 class Upgrade(PackageOp):
-    """Upgrade PISI packages
+    """Upgrade PiSi packages
 
 Usage: Upgrade [<package1> <package2> ... <packagen>]
 
@@ -634,7 +634,7 @@ expanded to package names.
 
 
 class Remove(PackageOp):
-    """Remove PISI packages
+    """Remove PiSi packages
 
 Usage: remove <package1> <package2> ... <packagen>
 
@@ -831,11 +831,11 @@ If no packages are given, checks all installed packages.
 
 
 class Index(Command):
-    """Index PISI files in a given directory
+    """Index PiSi files in a given directory
 
 Usage: index <directory> ...
 
-This command searches for all PISI files in a directory, collects PISI
+This command searches for all PiSi files in a directory, collects PiSi
 tags from them and accumulates the information in an output XML file,
 named by default 'pisi-index.xml'. In particular, it indexes both
 source and binary packages.
@@ -929,7 +929,7 @@ class RebuildDb(Command):
 
 Usage: rebuilddb [ <package1> <package2> ... <packagen> ]
 
-Rebuilds the PISI databases
+Rebuilds the PiSi databases
 
 If package specs are given, they should be the names of package 
 dirs under /var/lib/pisi
@@ -952,7 +952,7 @@ dirs under /var/lib/pisi
                 pisi.api.resurrect_package(package_fn, ctx.get_option('files`'))
         else:
             self.init(database=False)
-            if ctx.ui.confirm(_('Rebuild PISI databases?')):
+            if ctx.ui.confirm(_('Rebuild PiSi databases?')):
                 pisi.api.rebuild_db(ctx.get_option('files'))
 
         self.finalize()
@@ -965,7 +965,7 @@ Usage: update-repo [<repo1> <repo2> ... <repon>]
 
 <repoi>: repository name
 
-Synchronizes the PISI databases with the current repository.
+Synchronizes the PiSi databases with the current repository.
 If no repository is given, all repositories are updated.
 """
     __metaclass__ = autocommand
@@ -1028,7 +1028,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
                 name = 'pardus-1-test'
                 indexuri = 'http://paketler.pardus.org.tr/pardus-1-test/pisi-index.xml.bz2'
             pisi.api.add_repo(name, indexuri, ctx.get_option('at'))
-            if ctx.ui.confirm(_('Update PISI database for repository %s?') % name):
+            if ctx.ui.confirm(_('Update PiSi database for repository %s?') % name):
                 pisi.api.update_repo(name)
             self.finalize()
         else:
@@ -1090,7 +1090,7 @@ class ListAvailable(Command):
 
 Usage: list-available [ <repo1> <repo2> ... repon ]
 
-Gives a brief list of PISI packages published in the specified
+Gives a brief list of PiSi packages published in the specified
 repositories. If no repository is specified, we list packages in
 all repositories. 
 """
@@ -1149,7 +1149,7 @@ class ListComponents(Command):
 
 Usage: list-components
 
-Gives a brief list of PISI components published in the 
+Gives a brief list of PiSi components published in the 
 repositories.
 """
     __metaclass__ = autocommand

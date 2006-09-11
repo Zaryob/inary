@@ -51,7 +51,7 @@ def upgrade_pisi():
         if Version(pisi.__filesdbversion__) > Version(old_filesdbversion) or \
            Version(pisi.__dbversion__) > Version(old_dbversion):
             pisi.api.init(database=False)
-            ctx.ui.info(_("* PISI database version has changed. Rebuilding database..."))
+            ctx.ui.info(_("* PiSi database version has changed. Rebuilding database..."))
             pisi.api.rebuild_db()
             ctx.ui.info(_("* Database rebuild operation is completed succesfully."))
             pisi.api.finalize()

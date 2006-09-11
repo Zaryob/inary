@@ -31,7 +31,7 @@ class Error(pisi.Error):
 
 
 class Package:
-    """PISI Package Class provides access to a pisi package (.pisi
+    """PiSi Package Class provides access to a pisi package (.pisi
     file)."""
     def __init__(self, packagefn, mode='r'):
         self.filepath = packagefn
@@ -100,7 +100,7 @@ class Package:
         self.impl.unpack_dir_flat(dir, outdir)
         
     def extract_PISI_files(self, outdir):
-        """Extract PISI control files: metadata.xml, files.xml,
+        """Extract PiSi control files: metadata.xml, files.xml,
         action scripts, etc."""
         self.extract_files([ctx.const.metadata_xml, ctx.const.files_xml], outdir)
         self.extract_dir('config', outdir)

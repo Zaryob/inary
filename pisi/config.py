@@ -11,8 +11,8 @@
 #
 
 """
-PISI Configuration module is used for gathering and providing
-regular PISI configurations.
+PiSi Configuration module is used for gathering and providing
+regular PiSi configurations.
 """
 
 import os

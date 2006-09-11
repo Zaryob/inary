@@ -21,7 +21,7 @@
 # 13-Dec-2000:  Updated to be used with the new bsddb3 package.
 #               Added DBShelfCursor class.
 #
-# 13-Dec-2005: Minor hacking by exa to make it work better with PISI
+# 13-Dec-2005: Minor hacking by exa to make it work better with PiSi
 #------------------------------------------------------------------------
 
 """Manage shelves of pickled objects using bsddb database files for the

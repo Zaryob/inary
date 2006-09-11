@@ -10,7 +10,7 @@
 # Please read the COPYING file.
 #
 
-"""PISI constants. 
+"""PiSi constants. 
 If you have a "magic" constant value this is where it should be
 defined."""
 

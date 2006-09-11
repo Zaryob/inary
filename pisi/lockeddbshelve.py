@@ -70,7 +70,7 @@ def lock_dbenv():
     try:
         fcntl.flock(ctx.dbenv_lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except IOError:
-        raise Error(_("Another instance of PISI is running. Only one instance is allowed to modify the PISI database at a time."))
+        raise Error(_("Another instance of PiSi is running. Only one instance is allowed to modify the PiSi database at a time."))
 
 # write: write access to database environment
 # writeversion: would you like to be able 
@@ -94,7 +94,7 @@ def init_dbenv(write=False, writeversion=False):
             ctx.dbenv.open(pisi.context.config.db_dir(), flags)
             ctx.dbenv.set_flags(db.DB_LOG_AUTOREMOVE, 1) # clear inactive logs automatically
         else:
-            raise Error(_("Cannot write to PISI database."))
+            raise Error(_("Cannot write to PiSi database."))
     else:
         ctx.dbenv = None # read-only access to database
 
@@ -159,7 +159,7 @@ class LockedDBShelf(shelve.DBShelf):
         try:
             fcntl.flock(self.lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except IOError:
-            raise Error(_("Another instance of PISI is running. Only one instance is allowed to modify the PISI database at a time."))
+            raise Error(_("Another instance of PiSi is running. Only one instance is allowed to modify the PiSi database at a time."))
 
     def close(self):
         if self.closed:

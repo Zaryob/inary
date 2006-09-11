@@ -249,7 +249,7 @@ class MyZipFile(zipfile.ZipFile):
 class ArchiveZip(ArchiveBase):
     """ArchiveZip handles zip archives. 
 
-    Being a zip archive PISI packages also use this class
+    Being a zip archive PiSi packages also use this class
     extensively. This class provides unpacking and packing magic for
     zip archives."""
     

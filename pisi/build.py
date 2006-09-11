@@ -177,7 +177,7 @@ class Builder:
     def build(self):
         """Build the package in one shot."""
 
-        ctx.ui.status(_("Building PISI source package: %s") % self.spec.source.name)
+        ctx.ui.status(_("Building PiSi source package: %s") % self.spec.source.name)
         
         self.compile_action_script()
    
@@ -775,7 +775,7 @@ class Builder:
                 name = pisi.util.join_path(outdir, name)
             self.new_packages.append(name)
 
-            ctx.ui.info(_("Creating PISI package %s.") % name)
+            ctx.ui.info(_("Creating PiSi package %s.") % name)
 
             pkg = Package(name, 'w')
 

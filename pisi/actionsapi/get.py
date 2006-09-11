@@ -18,7 +18,7 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-# PISI Modules
+# PiSi Modules
 import pisi.actionsapi
 import pisi.context as ctx
 

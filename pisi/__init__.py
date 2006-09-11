@@ -20,7 +20,7 @@ __filesdbversion__ = "1.0.5"         # yes, this is the real bottleneck
 __all__ = [ 'api', 'config', 'packagedb', 'installdb', 'search' ]
 
 class Exception(Exception):
-    """Class of exceptions that must be caught and handled within PISI"""
+    """Class of exceptions that must be caught and handled within PiSi"""
     def __str__(self):
         s = u''
         for x in self.args:

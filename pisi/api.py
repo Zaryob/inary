@@ -9,7 +9,7 @@
 #
 # Please read the COPYING file.
 
-"""Top level PISI interfaces. a facade to the entire PISI system"""
+"""Top level PiSi interfaces. a facade to the entire PiSi system"""
 
 import os
 import sys
@@ -111,7 +111,7 @@ def init(database = True, write = True,
         ctx.componentdb = None
         ctx.packagedb = None
         ctx.sourcedb = None
-    ctx.ui.debug('PISI API initialized')
+    ctx.ui.debug('PiSi API initialized')
     ctx.initialized = True
 
 def finalize():
@@ -142,7 +142,7 @@ def finalize():
         if ctx.build_leftover and os.path.exists(ctx.build_leftover):
             os.unlink(ctx.build_leftover)
 
-        ctx.ui.debug('PISI API finalized')
+        ctx.ui.debug('PiSi API finalized')
         ctx.ui.close()
         ctx.initialized = False
 
@@ -323,14 +323,14 @@ def check(package):
 
 def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=False, 
           non_recursive=False):
-    """accumulate PISI XML files in a directory"""
+    """accumulate PiSi XML files in a directory"""
     index = Index()
     index.distribution = None
     if not dirs:
         dirs = ['.']
     for repo_dir in dirs:
         repo_dir = str(repo_dir)
-        ctx.ui.info(_('* Building index of PISI files under %s') % repo_dir)
+        ctx.ui.info(_('* Building index of PiSi files under %s') % repo_dir)
         index.index(repo_dir, skip_sources, non_recursive)
 
     if skip_signing:

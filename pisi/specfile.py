@@ -11,8 +11,8 @@
 #
 
 """
- Specfile module is our handler for PSPEC files. PSPEC (PISI SPEC)
- files are specification files for PISI source packages. This module
+ Specfile module is our handler for PSPEC files. PSPEC (PiSi SPEC)
+ files are specification files for PiSi source packages. This module
  provides read and write routines for PSPEC files.
 """
 
