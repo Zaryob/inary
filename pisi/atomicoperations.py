@@ -297,12 +297,25 @@ class Install(AtomicOperation):
             for path in leftover:
                     Remove.remove_file( old_fileinfo[path] )
 
-        # You either upgrade/downgrade or install a new package, controls are same.
-        # If a 'config' typed file coming from the package and the same file 
-        # already exists on the system, it is either a left over from a previously
-        # uninstalled package or it is upgraded package's currently used config file.
-        for file in filter(lambda x: x.type == 'config', self.files.list):
-            check_config_changed(file)
+        if self.reinstall:
+            # get 'config' typed file objects
+            new = filter(lambda x: x.type == 'config', self.files.list)
+            old = filter(lambda x: x.type == 'config', self.old_files.list)
+
+            # get config path lists
+            newconfig = set(map(lambda x: str(x.path), new))
+            oldconfig = set(map(lambda x: str(x.path), old))
+            
+            config_overlaps = newconfig & oldconfig
+            if config_overlaps:
+                files = filter(lambda x: x.path in config_overlaps, old)
+                for file in files:
+                    check_config_changed(file)
+        else:
+            for file in self.files.list:
+                if file.type == 'config':
+                    # there may be left over config files
+                    check_config_changed(file)
 
         self.package.extract_install(ctx.config.dest_dir())
 
