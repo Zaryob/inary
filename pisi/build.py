@@ -860,23 +860,27 @@ def build(pspec):
     return pb.build()
 
 order = {"none": 0,
-         "unpack": 1,
-         "setupaction": 2,
-         "buildaction": 3,
-         "installaction": 4,
-         "buildpackages": 5}
+         "fetch": 1,
+         "unpack": 2,
+         "setupaction": 3,
+         "buildaction": 4,
+         "installaction": 5,
+         "buildpackages": 6}
 
-def __buildState_unpack(pb):
-    # unpack is the first state to run.
+def __buildState_fetch(pb):
+    # fetch is the first state to run.
     pb.patch_exists()
     pb.fetch_source_archive()
+
+def __buildState_unpack(pb, last):
+    if order[last] < order["fetch"]:
+        __buildState_fetch(pb)
     pb.unpack_source_archive()
     pb.apply_patches()
 
 def __buildState_setupaction(pb, last):
-
     if order[last] < order["unpack"]:
-        __buildState_unpack(pb)
+        __buildState_unpack(pb, last)
     pb.run_setup_action()
 
 def __buildState_buildaction(pb, last):
@@ -910,8 +914,12 @@ def build_until(pspec, state):
 
     if not last: last = "none"
 
+    if state == "fetch":
+        __buildState_fetch(pb)
+        return
+
     if state == "unpack":
-        __buildState_unpack(pb)
+        __buildState_unpack(pb, last)
         return
 
     if state == "setup":

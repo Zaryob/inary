@@ -367,7 +367,7 @@ unpack, setup, build, install, package.
 
     name = ("build", "bi")
 
-    steps = ('unpack', 'setup', 'build', 'install', 'package')
+    steps = ('fetch', 'unpack', 'setup', 'build', 'install', 'package')
 
     package_formats = ('1.0', '1.1')
 
