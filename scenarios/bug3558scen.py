@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #
-# Scenario : revdepscen.py
+# Scenario : bug3558scen.py
 #
-# Source   : caglar@pardus.org.tr
+# Source   : http://bugs.pardus.org.tr/show_bug.cgi?id=3558
 #
 # Problem  : reverse dependency information disappears
 #
@@ -21,7 +21,8 @@
 # 
 # Problem Description: 
 # 
-# Package's reverse dependencies disappears unexpectedly.
+# Package's reverse dependencies disappears unexpectedly. If a package which has reverse dependencies has been upgraded.
+# The revdep list is removed from revdep db. So upgraded package will have an empty revdep list.
 #
 # Expected:
 #
@@ -30,26 +31,17 @@
 
 from pisi.scenarioapi.scenario import *
 
-KDELIBS = "kdelibs"
-KOFFICE = "koffice"
-KFTPGRABBER = "kftpgrabber"
-KNETSTATS = "knetstats"
-KONVERSATION = "konversation"
-GWENVIEW = "gwenview"
+FLIGHTGEAR = "flightgear"
+FLIGHTGEAR_DATA = "flightgear-data"
 
-let_repo_had(KDELIBS)
-let_repo_had(KOFFICE, with_dependencies(KDELIBS))
-let_repo_had(GWENVIEW, with_dependencies(KDELIBS))
-let_repo_had(KFTPGRABBER, with_dependencies(KDELIBS))
-let_repo_had(KNETSTATS, with_dependencies(KDELIBS))
-let_repo_had(KONVERSATION, with_dependencies(KDELIBS))
+let_repo_had(FLIGHTGEAR, with_dependencies(FLIGHTGEAR_DATA))
+let_repo_had(FLIGHTGEAR_DATA)
 
-let_pisi_had(KDELIBS, KOFFICE, GWENVIEW, KFTPGRABBER, KNETSTATS, KONVERSATION)
+let_pisi_had(FLIGHTGEAR, FLIGHTGEAR_DATA)
 
 def run():
-    pisi_info(KDELIBS)
-    repo_version_bumped(KDELIBS)
+    pisi_info(FLIGHTGEAR_DATA)
+    repo_version_bumped(FLIGHTGEAR_DATA)
     repo_updated_index()
     pisi_upgraded()
-    pisi_info(KDELIBS)
-
+    pisi_info(FLIGHTGEAR_DATA)
