@@ -19,6 +19,9 @@ def pisi_upgraded(*args):
     packages = util.strlist(args).rstrip()
     os.system("pisi -D%s upgrade %s" % (consts.pisi_db, packages))
 
+def pisi_info(package):
+    os.system("pisi -D%s info %s" % (consts.pisi_db, package))
+
 def pisi_removed(*args):
     packages = util.strlist(args).rstrip()
     os.system("pisi -D%s remove %s" % (consts.pisi_db, packages))
