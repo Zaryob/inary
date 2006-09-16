@@ -50,7 +50,10 @@ def main():
 
         for dir in uniq(dirlist):
             print "<Path fileType=\"\">/%s</Path>" % dir
-        
+
+    elif not os.path.exists(sys.argv[1]):
+        print "File %s not found" % sys.argv[1]
+
     else:
         for file in show_info(sys.argv[1]):
             print "/%s" % file
