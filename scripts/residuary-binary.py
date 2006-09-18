@@ -15,7 +15,7 @@ import re
 import sys
 
 from pisi.specfile import SpecFile
-from pisi.util import join_path, pure_package_name
+from pisi.util import join_path, parse_package_name
 
 def findPspec(folder):
     pspecList = []
@@ -57,7 +57,7 @@ if __name__ == "__main__":
 
     binaries = {}
     for f in filter(lambda x: x.endswith(".pisi"), os.listdir(repBIN)):
-        binaries[pure_package_name(f)] = f
+        binaries[parse_package_name(f)[0]] = f
 
     print "Residuary binary packages:"
     for b in binaries:
