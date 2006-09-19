@@ -56,7 +56,7 @@ def cleanBuilds(clean, root = '/var/tmp/pisi'):
     for f in os.listdir(root):
         if os.path.isdir(os.path.join(root, f)):
              list.append(f)
-    print list
+
     l = findUnneededFiles(list)
     doit(root, l, clean)
 
