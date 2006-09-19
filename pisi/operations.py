@@ -323,13 +323,13 @@ def install_pkg_names(A, reinstall = False):
         G_f = None
         order = A
 
-    ctx.ui.info(_("""Following packages will be installed
-in the respective order to satisfy dependencies:
-""") + util.strlist(order))
+    if len(order) > 1:
+        ctx.ui.info(_("Following packages will be installed in the respective "
+                      "order to satisfy dependencies:\n") + util.strlist(order))
 
     total_size = sum([ctx.packagedb.get_package(p).packageSize for p in order])
     total_size, symbol = util.human_readable_size(total_size)
-    ctx.ui.info(_('Total size of packages: %.2f %s') % (total_size, symbol))
+    ctx.ui.info(_('Total size of package(s): %.2f %s') % (total_size, symbol))
 
     if ctx.get_option('dry_run'):
         return
