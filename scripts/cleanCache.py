@@ -8,10 +8,7 @@ import string
 import pisi.util as util
 from pisi.version import Version
 
-def findUnneededFiles():
-    listdir = map(lambda x: os.path.basename(x).split(".pisi")[0], glob.glob("/var/cache/pisi/packages/*.pisi"))
-    listdir.sort()
-
+def findUnneededFiles(listdir):
     dict = {}
     for f in listdir:
         try:
@@ -31,6 +28,35 @@ def findUnneededFiles():
 
     return listdir
 
+def doit(root, listdir, clean, suffix = ""):
+    print "Working in %s" % root
+    for f in listdir:
+        if os.path.exists("%s/%s%s" % (root, f, suffix)):
+            print "%s%s" % (f, suffix)
+            if clean == True:
+                try:
+                    os.remove("%s/%s" % (root, f))
+                except OSError:
+                    usage("Permission denied...")
+
+
+def cleanPisis(clean, root):
+    # pisi packages
+    root = "/var/cache/pisi/packages"
+    list = map(lambda x: os.path.basename(x).split(".pisi")[0], glob.glob("%s/*.pisi" % root))
+    l = findUnneededFiles(list)
+    doit(root, l, clean, ".pisi")
+
+def cleanBuilds(clean, root):
+    # Build remnant
+    root = "/var/tmp/pisi"
+    l = []
+    for f in os.listdir(root):
+        if os.path.isdir(os.path.join(root, f)):
+             l.append(f)
+    l = findUnneededFiles(list)
+    doit(root, l, clean)
+
 def usage(msg):
     print """
 Error: %s
@@ -48,18 +74,21 @@ if __name__ == "__main__":
     except IndexError:
         usage("Unsufficient arguments...")
 
-    root = "/var/cache/pisi/packages"
-
-    if sys.argv[1] == "--dry-run":
-        for i in findUnneededFiles():
-            if os.path.exists("%s/%s.pisi" % (root, i)):
-                print "%s.pisi" % i
-    elif sys.argv[1] == "--clean":
-        for i in findUnneededFiles():
-            if os.path.exists("%s/%s.pisi" % (root, i)):
-                try:
-                    os.remove("%s/%s.pisi" % (root, i))
-                except OSError:
-                    usage("Permission denied...")
+    if "--dry-run" in sys.argv:
+        print "Running in dry-run mode"
+        clean = False
+    elif "--clean" in sys.argv:
+        print "Say bye bye to your files"
+        clean = True
     else:
         usage("No command given...")
+        sys.exit(0)
+
+    if "builds" in sys.argv:
+        root = "/var/tmp/pisi"
+        cleanBuilds(clean, root)
+
+    else:
+        root = "/var/cache/pisi/packages"
+        cleanPisis(clean, root)
+
