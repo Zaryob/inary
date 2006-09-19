@@ -821,10 +821,13 @@ If no packages are given, checks all installed packages.
             ctx.ui.info(_('Checking all installed packages'))
             pkgs = ctx.installdb.list_installed()
         for pkg in pkgs:
+            ctx.ui.info(_('* Checking %s... ') % pkg, noln=True)
             if ctx.installdb.is_installed(pkg):
                 corrupt = pisi.api.check(pkg)
                 if corrupt:
-                    ctx.ui.info(_('Package %s is corrupt.') % pkg)
+                    ctx.ui.info(_('\nPackage %s is corrupt.') % pkg)
+                else:
+                    ctx.ui.info(_("OK"), verbose=False)
             else:
                 ctx.ui.info(_('Package %s not installed') % pkg)
         self.finalize()
