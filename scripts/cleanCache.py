@@ -14,13 +14,18 @@ def findUnneededFiles():
 
     dict = {}
     for f in listdir:
-        name, ver = util.parse_package_name(f)
-        version = ver.split(".pisi")[0]
-        if dict.has_key(name):
-            if Version(dict[name]) < Version(version):
-                dict[name] = version
-        else:
-            dict[name] = version
+        try:
+            name, ver = util.parse_package_name(f)
+            version = ver.split(".pisi")[0]
+            if dict.has_key(name):
+                if Version(dict[name]) < Version(version):
+                    dict[name] = version
+            else:
+                if version:
+                    dict[name] = version
+
+        except:
+            pass
 
     for f in dict:
         listdir.remove("%s-%s.pisi" % (f, dict[f]))
