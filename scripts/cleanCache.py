@@ -31,25 +31,27 @@ def findUnneededFiles(listdir):
 def doit(root, listdir, clean, suffix = ""):
     print "Working in %s" % root
     for f in listdir:
-        if os.path.exists("%s/%s%s" % (root, f, suffix)):
+        target = os.path.join(root, "%s%s" % (f, suffix))
+        if os.path.exists(target):
             print "%s%s" % (f, suffix)
             if clean == True:
                 try:
-                    os.remove("%s/%s" % (root, f))
+                    if os.isdir(target):
+                        os.removedirs(target)
+                    else:
+                        os.remove(target)
                 except OSError:
                     usage("Permission denied...")
 
 
-def cleanPisis(clean, root):
+def cleanPisis(clean, root = '/var/cache/pisi/packages'):
     # pisi packages
-    root = "/var/cache/pisi/packages"
     list = map(lambda x: os.path.basename(x).split(".pisi")[0], glob.glob("%s/*.pisi" % root))
     l = findUnneededFiles(list)
     doit(root, l, clean, ".pisi")
 
-def cleanBuilds(clean, root):
+def cleanBuilds(clean, root = '/var/tmp/pisi'):
     # Build remnant
-    root = "/var/tmp/pisi"
     l = []
     for f in os.listdir(root):
         if os.path.isdir(os.path.join(root, f)):
@@ -85,10 +87,8 @@ if __name__ == "__main__":
         sys.exit(0)
 
     if "builds" in sys.argv:
-        root = "/var/tmp/pisi"
-        cleanBuilds(clean, root)
+        cleanBuilds(clean)
 
     else:
-        root = "/var/cache/pisi/packages"
-        cleanPisis(clean, root)
+        cleanPisis(clean)
 
