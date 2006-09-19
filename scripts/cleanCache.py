@@ -52,10 +52,11 @@ def cleanPisis(clean, root = '/var/cache/pisi/packages'):
 
 def cleanBuilds(clean, root = '/var/tmp/pisi'):
     # Build remnant
-    l = []
+    list = []
     for f in os.listdir(root):
         if os.path.isdir(os.path.join(root, f)):
-             l.append(f)
+             list.append(f)
+    print list
     l = findUnneededFiles(list)
     doit(root, l, clean)
 
