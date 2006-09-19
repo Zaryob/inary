@@ -9,14 +9,13 @@ import pisi.util as util
 from pisi.version import Version
 
 def findUnneededFiles():
-    listdir = map(lambda x: os.path.basename(x), glob.glob("/var/cache/pisi/packages/*.pisi"))
+    listdir = map(lambda x: os.path.basename(x).split(".pisi")[0], glob.glob("/var/cache/pisi/packages/*.pisi"))
     listdir.sort()
 
     dict = {}
     for f in listdir:
         try:
-            name, ver = util.parse_package_name(f)
-            version = ver.split(".pisi")[0]
+            name, version = util.parse_package_name(f)
             if dict.has_key(name):
                 if Version(dict[name]) < Version(version):
                     dict[name] = version
