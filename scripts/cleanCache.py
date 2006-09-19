@@ -27,7 +27,7 @@ def findUnneededFiles():
             pass
 
     for f in dict:
-        listdir.remove("%s-%s.pisi" % (f, dict[f]))
+        listdir.remove("%s-%s" % (f, dict[f]))
 
     return listdir
 
@@ -48,15 +48,17 @@ if __name__ == "__main__":
     except IndexError:
         usage("Unsufficient arguments...")
 
+    root = "/var/cache/pisi/packages"
+
     if sys.argv[1] == "--dry-run":
         for i in findUnneededFiles():
-            if os.path.exists("/var/cache/pisi/packages/%s" % i):
-                print i
+            if os.path.exists("%s/%s.pisi" % (root, i)):
+                print "%s.pisi" % i
     elif sys.argv[1] == "--clean":
         for i in findUnneededFiles():
-            if os.path.exists("/var/cache/pisi/packages/%s" % i):
+            if os.path.exists("%s/%s.pisi" % (root, i)):
                 try:
-                    os.remove("/var/cache/pisi/packages/%s" % i)
+                    os.remove("%s/%s.pisi" % (root, i))
                 except OSError:
                     usage("Permission denied...")
     else:
