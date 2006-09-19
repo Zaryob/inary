@@ -36,7 +36,7 @@ def doit(root, listdir, clean, suffix = ""):
             print "%s%s" % (f, suffix)
             if clean == True:
                 try:
-                    if os.isdir(target):
+                    if os.path.isdir(target):
                         os.removedirs(target)
                     else:
                         os.remove(target)
