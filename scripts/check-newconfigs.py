@@ -54,23 +54,17 @@ def show_changes(package, changed):
         return
 
     for file in changed:
-        prompt = "    %s has changed. Would you like to overwrite new config file [N/y/?] " % file
-        answer = ask_action(prompt, ["y", "n", "?"], "n")
-
-        if answer == "y":
-            os.rename(file+".newconfig", file)
-        if answer == "n":
-            continue
-
-        while answer == "?":
-            os.system("diff -u %s %s | less" % (file, file + ".newconfig"))
+        answer = "?"
+        while answer == "?" or answer not in ["n", "y"]:
+            prompt = "    %s has changed. Would you like to overwrite new config file [N/y/?] " % file
             answer = ask_action(prompt, ["y", "n", "?"], "n")
 
             if answer == "y":
                 os.rename(file+".newconfig", file)
-                break
             if answer == "n":
                 break
+            if answer == "?":
+                os.system("diff -u %s %s | less" % (file, file + ".newconfig"))
 
 def check_package(package):
     changed = check_changed_config_files(package)
