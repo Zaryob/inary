@@ -66,6 +66,12 @@ def show_changes(package, changed):
             os.system("diff -u %s %s | less" % (file, file + ".newconfig"))
             answer = ask_action(prompt, ["y", "n", "?"], "n")
 
+            if answer == "y":
+                os.rename(file+".newconfig", file)
+                break
+            if answer == "n":
+                break
+
 def check_package(package):
     changed = check_changed_config_files(package)
     if changed:
