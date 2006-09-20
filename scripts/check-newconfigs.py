@@ -58,8 +58,7 @@ def show_changes(package, changed):
         answer = ask_action(prompt, ["y", "n", "?"], "n")
 
         if answer == "y":
-            #os.rename(file+".newconfig", file)
-            pass
+            os.rename(file+".newconfig", file)
         if answer == "n":
             continue
 
