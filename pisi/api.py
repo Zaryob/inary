@@ -146,6 +146,10 @@ def finalize():
         ctx.ui.close()
         ctx.initialized = False
 
+def list_installed():
+    '''returns a set of installed package names'''
+    return set(pisi.context.installdb.list_installed())
+
 def list_available(repo = None):
     '''returns a set of available package names'''
     return set(ctx.packagedb.list_packages(repo = repo))
