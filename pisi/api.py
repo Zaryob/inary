@@ -148,7 +148,7 @@ def finalize():
 
 def list_installed():
     '''returns a set of installed package names'''
-    return set(pisi.context.installdb.list_installed())
+    return set(ctx.installdb.list_installed())
 
 def list_available(repo = None):
     '''returns a set of available package names'''
