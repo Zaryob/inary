@@ -444,7 +444,7 @@ def upgrade_pkg_names(A = []):
         G_f, order = plan_upgrade(A, ignore_build)
     else:
         G_f = None
-        order = A
+        order = list(A)
 
     ctx.ui.info(_('The following packages will be upgraded: ') +
                 util.strlist(order))
@@ -456,7 +456,7 @@ def upgrade_pkg_names(A = []):
     if ctx.get_option('dry_run'):
         return
 
-    if len(order) > len(A_0):
+    if set(order) - A_0:
         if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
             return False
 
