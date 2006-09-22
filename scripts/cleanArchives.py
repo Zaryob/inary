@@ -54,7 +54,7 @@ if __name__ == "__main__":
         files.append(URI.filename())
 
     archiveFiles = os.listdir("/var/cache/pisi/archives/")
-    unneededFiles = set(archiveFiles) - set(files)
+    unneededFiles = filter(lambda x:x not in files, archiveFiles)
 
     for i in unneededFiles:
         if not clean:
