@@ -11,7 +11,7 @@
 #
 
 import sys
-from optparse import OptionParser
+from optparse import OptionParser, OptionGroup
     
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -83,19 +83,25 @@ class Command(object):
     def commonopts(self):
         '''common options'''
         p = self.parser
-        p.add_option("-D", "--destdir", action="store", default = None,
+
+        group = OptionGroup(self.parser, _("General Options"))
+
+        group.add_option("-D", "--destdir", action="store", default = None,
                      help = _("change the system root for pisi commands"))
-        p.add_option("-y", "--yes-all", action="store_true",
+        group.add_option("-y", "--yes-all", action="store_true",
                      default=False, help = _("assume yes in all yes/no queries"))
-        p.add_option("-u", "--username", action="store")
-        p.add_option("-p", "--password", action="store")
-        p.add_option("-v", "--verbose", action="store_true",
+        group.add_option("-u", "--username", action="store")
+        group.add_option("-p", "--password", action="store")
+        group.add_option("-v", "--verbose", action="store_true",
                      dest="verbose", default=False,
                      help=_("detailed output"))
-        p.add_option("-d", "--debug", action="store_true",
+        group.add_option("-d", "--debug", action="store_true",
                      default=False, help=_("show debugging information"))
-        p.add_option("-N", "--no-color", action="store_true", default=False,
+        group.add_option("-N", "--no-color", action="store_true", default=False,
                      help = _("print like a man"))
+
+        p.add_option_group(group)
+
         return p
 
     def options(self):
