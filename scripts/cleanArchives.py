@@ -27,7 +27,7 @@ def scanPSPEC(folder):
 
 def cleanArchives(file):
     try:
-        os.remove("/var/cache/pisi/archives/%s" % file)
+        os.remove(file)
     except OSError:
         print("Permission denied...")
 
