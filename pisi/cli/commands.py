@@ -1302,9 +1302,9 @@ Lists the packages that will be upgraded.
     def options(self):
         group = OptionGroup(self.parser, _("list-upgrades options"))
         buildno_opts(self, group)
-        self.parser.add_option("-l", "--long", action="store_true",
+        group.add_option("-l", "--long", action="store_true",
                                default=False, help=_("show in long format"))
-        self.parser.add_option("-i", "--install-info", action="store_true",
+        group.add_option("-i", "--install-info", action="store_true",
                                default=False, help=_("show detailed install info"))
         self.parser.add_option_group(group)
                                
