@@ -300,7 +300,7 @@ the package in graphviz format to 'pgraph.dot'.
         group.add_option("-i", "--installed", action="store_true",
                                default=False,
                                help=_("graph of installed packages"))
-        group.add_option("", "--ignore-installed", action="store_true",
+        group.add_option("--ignore-installed", action="store_true",
                                default=False,
                                help=_("do not show installed packages"))
         group.add_option("-o", "--output", action="store",
@@ -339,12 +339,12 @@ the package in graphviz format to 'pgraph.dot'.
 
 # option mixins
 def buildno_opts(self, group):
-    group.add_option("", "--ignore-build-no", action="store_true",
+    group.add_option("--ignore-build-no", action="store_true",
                            default=False,
                            help=_("do not take build no into account."))
 
 def ignoredep_opt(self, group):
-    group.add_option("", "--ignore-dependency", action="store_true",
+    group.add_option("--ignore-dependency", action="store_true",
                  default=False,
                  help=_("do not take dependency information into account"))
 
@@ -388,21 +388,21 @@ fetch, unpack, setup, build, install, package.
                                help=_("output directory for produced packages"))
         group.add_option("-U", "--until", action="store", default=None,
                                help=_("perform until and including specified step"))
-        group.add_option("", "--show-abandoned-files", action="store_true",
+        group.add_option("--show-abandoned-files", action="store_true",
                          default=False,
                          help=_("show abandoned files under the install directory after build."))
-        group.add_option("", "--ignore-action-errors",
+        group.add_option("--ignore-action-errors",
                                action="store_true", default=False,
                                help=_("bypass errors from ActionsAPI"))
-        group.add_option("", "--bypass-safety", action="store_true",
+        group.add_option("--bypass-safety", action="store_true",
                      default=False, help=_("bypass safety switch"))
-        group.add_option("", "--ignore-file-conflicts", action="store_true",
+        group.add_option("--ignore-file-conflicts", action="store_true",
                      default=False, help=_("Ignore file conflicts"))
-        group.add_option("", "--ignore-comar", action="store_true",
+        group.add_option("--ignore-comar", action="store_true",
                                default=False, help=_("bypass comar configuration agent"))
-        group.add_option("", "--create-static", action="store_true",
+        group.add_option("--create-static", action="store_true",
                                default=False, help=_("create a static package with ar files"))
-        group.add_option("", "--no-install", action="store_true",
+        group.add_option("--no-install", action="store_true",
                                default=False, help=_("don't install build dependencies, fail if a build dependency is present"))
         group.add_option("-F", "--package-format", action="store", default='1.1',
                                help=_("pisi package format"))
@@ -489,9 +489,9 @@ class PackageOp(Command):
 
     def options(self, group):
         ignoredep_opt(self, group)
-        group.add_option("", "--ignore-comar", action="store_true",
+        group.add_option("--ignore-comar", action="store_true",
                      default=False, help=_("bypass comar configuration agent"))
-        group.add_option("", "--bypass-safety", action="store_true",
+        group.add_option("--bypass-safety", action="store_true",
                      default=False, help=_("bypass safety switch"))
         group.add_option("-n", "--dry-run", action="store_true", default=False,
                      help = _("do not perform any action, just show what would be done"))
@@ -527,9 +527,9 @@ expanded to package names.
 
         super(Install, self).options(group)
         buildno_opts(self, group)
-        group.add_option("", "--reinstall", action="store_true",
+        group.add_option("--reinstall", action="store_true",
                      default=False, help=_("Reinstall already installed packages"))
-        group.add_option("", "--ignore-file-conflicts", action="store_true",
+        group.add_option("--ignore-file-conflicts", action="store_true",
                      default=False, help=_("Ignore file conflicts"))
         self.parser.add_option_group(group)
 
@@ -574,11 +574,11 @@ expanded to package names.
      
         super(Upgrade, self).options(group)
         buildno_opts(self, group)
-        group.add_option("", "--security", action="store_true",
+        group.add_option("--security", action="store_true",
                      default=False, help=_("select only security upgrades"))
         group.add_option("-r", "--bypass-update-repo", action="store_true",
                      default=False, help=_("Do not update repositories"))
-        group.add_option("", "--ignore-file-conflicts", action="store_true",
+        group.add_option("--ignore-file-conflicts", action="store_true",
                      default=False, help=_("Ignore file conflicts"))
         group.add_option("-e", "--eager", action="store_true",
                      default=False, help=_("eager upgrades"))
@@ -586,7 +586,7 @@ expanded to package names.
                      default=False, help=_("Fetch upgrades but do not install."))
         group.add_option("-x", "--exclude", action="append",
                      default=None, help=_("When upgrading system, ignore packages and components whose basenames match pattern."))
-        group.add_option("", "--exclude-from", action="store",
+        group.add_option("--exclude-from", action="store",
                      default=None, help=_("When upgrading system, ignore packages and components whose basenames \
                      match any pattern contained in file."))
 
@@ -739,7 +739,7 @@ Usage: info <package1> <package2> ... <packagen>
                                help=_("show only paths."))
         group.add_option("-s", "--short", action="store_true",
                                default=False, help=_("do not show details"))
-        group.add_option("", "--xml", action="store_true",
+        group.add_option("--xml", action="store_true",
                                default=False, help=_("output in xml format"))
 
     def run(self):
@@ -1071,7 +1071,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
     def options(self):
 
         group = OptionGroup(self.parser, _("add-repo options"))
-        group.add_option("", "--at", action="store",
+        group.add_option("--at", action="store",
                                type="int", default=None, 
                                help=_("add repository at given position (0 is first)"))
         self.parser.add_option_group(group)
