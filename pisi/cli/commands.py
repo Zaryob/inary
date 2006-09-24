@@ -84,7 +84,7 @@ class Command(object):
         '''common options'''
         p = self.parser
 
-        group = OptionGroup(self.parser, _("General Options"))
+        group = OptionGroup(self.parser, _("general options"))
 
         group.add_option("-D", "--destdir", action="store", default = None,
                      help = _("change the system root for pisi commands"))
@@ -364,7 +364,7 @@ to be downloaded from a repository containing sources.
 
 If you would like to run the build process partially, 
 provide the --until <state> option where <state> is one of 
-unpack, setup, build, install, package.
+fetch, unpack, setup, build, install, package.
 """
     __metaclass__ = autocommand
 
@@ -383,8 +383,6 @@ unpack, setup, build, install, package.
         ignoredep_opt(self)
         self.parser.add_option("-O", "--output-dir", action="store", default=None,
                                help=_("output directory for produced packages"))
-        #self.parser.add_option("-s", "--step", action="store", default=None,
-        #                       help=_("perform only specified step"))
         self.parser.add_option("-U", "--until", action="store", default=None,
                                help=_("perform until and including specified step"))
         self.parser.add_option("-A", "--ignore-action-errors",
