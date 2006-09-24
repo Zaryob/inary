@@ -896,15 +896,12 @@ everything in a single index file.
         group.add_option("-o", "--output", action="store",
                                default='pisi-index.xml',
                                help=_("index output file"))
-        group.add_option("-S", "--skip-sources", action="store_true",
+        group.add_option("--skip-sources", action="store_true",
                                default=False,
                                help=_("do not index pisi spec files."))
-        group.add_option("-G", "--skip-signing", action="store_true",
+        group.add_option("--skip-signing", action="store_true",
                                default=False,
                                help=_("do not sign index."))
-        group.add_option("-R", "--non-recursive", action="store_true",
-                               default=False,
-                               help=_("do not recurse into directories."))
 
         self.parser.add_option_group(group)
 
@@ -915,14 +912,12 @@ everything in a single index file.
         if len(self.args)>0:
             index(self.args, ctx.get_option('output'),
                   skip_sources = ctx.get_option('skip_sources'),
-                  skip_signing = ctx.get_option('skip_signing'),
-                  non_recursive = ctx.get_option('non_recursive'))
+                  skip_signing = ctx.get_option('skip_signing'))
         elif len(self.args)==0:
             ctx.ui.info(_('Indexing current directory.'))
             index(['.'], ctx.get_option('output'),
                   skip_sources = ctx.get_option('skip_sources'),
-                  skip_signing = ctx.get_option('skip_signing'),
-                  non_recursive = ctx.get_option('non_recursive'))
+                  skip_signing = ctx.get_option('skip_signing'))
         self.finalize()
 
 

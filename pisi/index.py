@@ -84,7 +84,7 @@ class Index(XmlFile):
         tmpdir = os.path.join(ctx.config.index_dir(), repo)
         File.check_signature(filename, tmpdir)
 
-    def index(self, repo_uri, skip_sources=False, non_recursive=False):
+    def index(self, repo_uri, skip_sources=False):
         self.repo_dir = repo_uri
         for root, dirs, files in os.walk(repo_uri):
             for fn in files:
@@ -98,8 +98,6 @@ class Index(XmlFile):
                     self.add_spec(os.path.join(root, fn), repo_uri)
                 if fn == 'distribution.xml':
                     self.add_distro(os.path.join(root, fn))
-            if non_recursive:
-                del dirs[0:]
 
     def update_db(self, repo, txn = None):
         ctx.componentdb.remove_repo(repo, txn=txn)

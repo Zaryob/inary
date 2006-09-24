@@ -325,8 +325,7 @@ def check(package):
                 ctx.ui.info(_("OK"), verbose=True)
     return corrupt
 
-def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=False, 
-          non_recursive=False):
+def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=False):
     """accumulate PiSi XML files in a directory"""
     index = Index()
     index.distribution = None
@@ -335,7 +334,7 @@ def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=F
     for repo_dir in dirs:
         repo_dir = str(repo_dir)
         ctx.ui.info(_('* Building index of PiSi files under %s') % repo_dir)
-        index.index(repo_dir, skip_sources, non_recursive)
+        index.index(repo_dir, skip_sources)
 
     if skip_signing:
         index.write(output, sha1sum=True, compress=File.bz2, sign=None)
