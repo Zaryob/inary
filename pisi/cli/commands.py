@@ -1370,11 +1370,11 @@ in summary, description, and package name fields.
     def options(self):
         group = OptionGroup(self.parser, _("search options"))
         super(Search, self).add_options(group)
-        group.add_option("-l", "--language", action="store",
+        group.add_option("-L", "--language", action="store",
                                help=_("set search language"))
         group.remove_option("--short")
         group.remove_option("--xml")
-        group.add_option("-L", "--long", action="store_true",
+        group.add_option("-l", "--long", action="store_true",
                                default=False, help=_("show details"))
         self.parser.add_option_group(group)
 
