@@ -307,7 +307,7 @@ def install_pkg_names(A, reinstall = False):
         Ap = set(filter(lambda x: not ctx.installdb.is_installed(x), A))
         d = A - Ap
         if len(d) > 0:
-            ctx.ui.warning(_("The following packages are already installed and are not going to be installed again:\n") +
+            ctx.ui.warning(_("The following package(s) are already installed and are not going to be installed again:\n") +
                              util.strlist(d))
             A = Ap
 
