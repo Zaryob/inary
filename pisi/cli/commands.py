@@ -344,7 +344,7 @@ def buildno_opts(self, group):
                            help=_("do not take build no into account."))
 
 def ignoredep_opt(self, group):
-    group.add_option("-E", "--ignore-dependency", action="store_true",
+    group.add_option("", "--ignore-dependency", action="store_true",
                  default=False,
                  help=_("do not take dependency information into account"))
 
@@ -391,14 +391,14 @@ fetch, unpack, setup, build, install, package.
         group.add_option("", "--show-abandoned-files", action="store_true",
                          default=False,
                          help=_("show abandoned files under the install directory after build."))
-        group.add_option("-A", "--ignore-action-errors",
+        group.add_option("", "--ignore-action-errors",
                                action="store_true", default=False,
                                help=_("bypass errors from ActionsAPI"))
-        group.add_option("-S", "--bypass-safety", action="store_true",
+        group.add_option("", "--bypass-safety", action="store_true",
                      default=False, help=_("bypass safety switch"))
         group.add_option("", "--ignore-file-conflicts", action="store_true",
                      default=False, help=_("Ignore file conflicts"))
-        group.add_option("-B", "--ignore-comar", action="store_true",
+        group.add_option("", "--ignore-comar", action="store_true",
                                default=False, help=_("bypass comar configuration agent"))
         group.add_option("", "--create-static", action="store_true",
                                default=False, help=_("create a static package with ar files"))
@@ -489,9 +489,9 @@ class PackageOp(Command):
 
     def options(self, group):
         ignoredep_opt(self, group)
-        group.add_option("-B", "--ignore-comar", action="store_true",
+        group.add_option("", "--ignore-comar", action="store_true",
                      default=False, help=_("bypass comar configuration agent"))
-        group.add_option("-S", "--bypass-safety", action="store_true",
+        group.add_option("", "--bypass-safety", action="store_true",
                      default=False, help=_("bypass safety switch"))
         group.add_option("-n", "--dry-run", action="store_true", default=False,
                      help = _("do not perform any action, just show what would be done"))
