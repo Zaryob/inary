@@ -1373,6 +1373,7 @@ in summary, description, and package name fields.
         group.add_option("-l", "--language", action="store",
                                help=_("set search language"))
         group.remove_option("--short")
+        group.remove_option("--xml")
         group.add_option("-L", "--long", action="store_true",
                                default=False, help=_("show details"))
         self.parser.add_option_group(group)
