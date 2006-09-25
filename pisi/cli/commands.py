@@ -359,10 +359,6 @@ fetch all necessary files and build the package for you.
 
 Alternatively, you can give the name of a source package
 to be downloaded from a repository containing sources.
-
-If you would like to run the build process partially, 
-provide the --until <state> option where <state> is one of 
-fetch, unpack, setup, build, install, package.
 """
     __metaclass__ = autocommand
 
