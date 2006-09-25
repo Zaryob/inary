@@ -574,8 +574,8 @@ expanded to package names.
      
         super(Upgrade, self).options(group)
         buildno_opts(self, group)
-        group.add_option("--security", action="store_true",
-                     default=False, help=_("select only security upgrades"))
+        group.add_option("--security-only", action="store_true",
+                     default=False, help=_("Security related package upgrades only"))
         group.add_option("-r", "--bypass-update-repo", action="store_true",
                      default=False, help=_("Do not update repositories"))
         group.add_option("--ignore-file-conflicts", action="store_true",

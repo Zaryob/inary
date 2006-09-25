@@ -388,7 +388,7 @@ def upgrade_pkg_names(A = []):
     a minimum or maximum number of upgrades according to options."""
     
     ignore_build = ctx.get_option('ignore_build_no')
-    security = ctx.get_option('security')
+    security_only = ctx.get_option('security_only')
 
     if not A:
         # if A is empty, then upgrade all packages
@@ -411,7 +411,7 @@ def upgrade_pkg_names(A = []):
             ctx.ui.info(_('Package %s is not available in repositories.') % x, True)
             continue
 
-        if security: # below is a readable functional code, don't overflow lines!
+        if security_only:
             updates = [i for i in pkg.history if Version(i.release) > Version(release)]
             if not pisi.util.any(lambda i:i.type == 'security', updates):
                 continue
