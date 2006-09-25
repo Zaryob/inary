@@ -1,6 +1,7 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005, TUBITAK/UEKAE
+# Copyright (C) 2005-2006, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -9,7 +10,6 @@
 #
 # Please read the COPYING file.
 #
-# Authors: {eray,gurer}@pardus.org.tr
 
 import os
 import shutil
@@ -22,9 +22,6 @@ from distutils.command.install import install
 sys.path.insert(0, '.')
 import pisi
 
-i18n_domain = "pisi"
-i18n_languages = "tr"
-
 class Install(install):
     def run(self):
         install.run(self)
@@ -33,24 +30,23 @@ class Install(install):
         self.generateConfigFile()
     
     def installi18n(self):
-        for lang in i18n_languages.split(' '):
+        for name in os.listdir('po'):
+            if not name.endswith('.po'):
+                continue
+            lang = name[:-3]
             print "Installing '%s' translations..." % lang
             os.popen("msgfmt po/%s.po -o po/%s.mo" % (lang, lang))
             if not self.root:
                 self.root = "/"
             destpath = os.path.join(self.root, "usr/share/locale/%s/LC_MESSAGES" % lang)
-            try:
+            if not os.path.exists(destpath):
                 os.makedirs(destpath)
-            except:
-                pass
-            shutil.copy("po/%s.mo" % lang, os.path.join(destpath, "%s.mo" % i18n_domain))
+            shutil.copy("po/%s.mo" % lang, os.path.join(destpath, "pisi.mo"))
 
     def installdoc(self):
         destpath = os.path.join(self.root, "usr/share/doc/pisi")
-        try:
+        if not os.path.exists(destpath):
             os.makedirs(destpath)
-        except:
-            pass
         os.chdir('doc')
         for pdf in glob.glob('*.pdf'):
             print 'Installing', pdf          
@@ -60,10 +56,8 @@ class Install(install):
     def generateConfigFile(self):
         import pisi.configfile
         destpath = os.path.join(self.root, "etc/pisi/")
-        try:
+        if not os.path.exists(destpath):
             os.makedirs(destpath)
-        except:
-            pass
         pisiconf = open(os.path.join(destpath, "pisi.conf"), "w")
 
         klasses = inspect.getmembers(pisi.configfile, inspect.isclass)
