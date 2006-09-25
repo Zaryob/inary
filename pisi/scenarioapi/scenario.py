@@ -25,4 +25,4 @@ def let_pisi_had(*args):
     url = os.path.join(os.getcwd(), consts.repo_url)
     pisi_added_repo(consts.repo_name, url)
     packages = util.strlist(args).rstrip()
-    os.system("pisi -D%s install -E %s" % (consts.pisi_db, packages))
+    os.system("pisi -D%s install --ignore-dependency %s" % (consts.pisi_db, packages))
