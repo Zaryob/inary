@@ -398,7 +398,7 @@ to be downloaded from a repository containing sources.
         group.add_option("--no-install", action="store_true",
                                default=False, help=_("don't install build dependencies, fail if a build dependency is present"))
         group.add_option("-F", "--package-format", action="store", default='1.1',
-                               help=_("pisi package format"))
+                               help=_("pisi binary package formats: '1.0', '1.1' (default)"))
 
     def add_steps_options(self):
         group = OptionGroup(self.parser, _("build steps"))
