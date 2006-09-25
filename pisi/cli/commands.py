@@ -23,7 +23,6 @@ import pisi.context as ctx
 from pisi.uri import URI
 import pisi.util as util
 import pisi.api as api
-import pisi.packagedb as packagedb
 from colors import colorize
 
 class Error(pisi.Error):
@@ -1163,6 +1162,8 @@ all repositories.
         group = OptionGroup(self.parser, _("list-available options"))
         group.add_option("-l", "--long", action="store_true",
                                default=False, help=_("show in long format"))
+        group.add_option("-c", "--component", action="store",
+                               default=None, help=_("list available packages under given component"))
         group.add_option("-U", "--uninstalled", action="store_true",
                                default=False, help=_("show uninstalled packages only"))
         self.parser.add_option_group(group)
@@ -1185,9 +1186,12 @@ all repositories.
         self.finalize()
 
     def print_packages(self, repo):
-        from pisi import packagedb
 
-        list = ctx.packagedb.list_packages(repo)
+        component = ctx.get_option('component')
+        if component:
+            list = ctx.componentdb.get_component(component, repo).packages
+        else:
+            list = ctx.packagedb.list_packages(repo)
         installed_list = ctx.installdb.list_installed()
         list.sort()
         for p in list:
