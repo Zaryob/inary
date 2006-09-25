@@ -119,8 +119,7 @@ class Index(XmlFile):
         md = metadata.MetaData()
         md.read(os.path.join(ctx.config.install_dir(), ctx.const.metadata_xml))
         md.package.packageSize = os.path.getsize(path)
-        if ctx.config.options and ctx.config.options.absolute_uris:
-            # FIXME: the name "absolute_uris" does not seem to fit below :/
+        if ctx.config.options and ctx.config.options.absolute_urls:
             md.package.packageURI = os.path.realpath(path)
         else:                           # create relative path by default
             # TODO: in the future well do all of this with purl/pfile/&helpers
@@ -161,7 +160,7 @@ class Index(XmlFile):
             #ctx.ui.error(str(Error(*errs)))
         builder.fetch_component()
         sf = builder.spec
-        if ctx.config.options and ctx.config.options.absolute_uris:
+        if ctx.config.options and ctx.config.options.absolute_urls:
             sf.source.sourceURI = os.path.realpath(path)
         else:                           # create relative path by default
             sf.source.sourceURI = util.removepathprefix(repo_uri, path)

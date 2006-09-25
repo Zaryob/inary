@@ -893,7 +893,7 @@ everything in a single index file.
 
         group = OptionGroup(self.parser, _("index options"))
 
-        group.add_option("-a", "--absolute-uris", action="store_true",
+        group.add_option("-a", "--absolute-urls", action="store_true",
                                default=False,
                                help=_("store absolute links for indexed files."))
         group.add_option("-o", "--output", action="store",
