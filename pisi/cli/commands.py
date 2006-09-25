@@ -1311,6 +1311,7 @@ Lists the packages that will be upgraded.
         group.add_option("-i", "--install-info", action="store_true",
                                default=False, help=_("show detailed install info"))
         self.parser.add_option_group(group)
+
     def run(self):
         self.init(database = True, write = False)
         upgradable_pkgs = pisi.api.list_upgradable()
