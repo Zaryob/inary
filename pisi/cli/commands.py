@@ -942,6 +942,8 @@ Usage: list-installed
 
         group.add_option("-l", "--long", action="store_true",
                                default=False, help=_("show in long format"))
+        group.add_option("-c", "--component", action="store",
+                               default=None, help=_("list installed packages under given component"))
         group.add_option("-i", "--install-info", action="store_true",
                                default=False, help=_("show detailed install info"))
 
@@ -949,12 +951,20 @@ Usage: list-installed
 
     def run(self):
         self.init(database = True, write = False)
-        list = ctx.installdb.list_installed()
-        list.sort()
+        installed = ctx.installdb.list_installed()
+
+        component = ctx.get_option('component')
+        if component:
+            #FIXME: pisi api is insufficient to do this
+            from sets import Set as set
+            component_pkgs = ctx.componentdb.get_component(component).packages
+            installed = list(set(installed) & set(component_pkgs))
+
+        installed.sort()
         if self.options.install_info:
             ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
             print         '========================================================================'
-        for pkg in list:
+        for pkg in installed:
             package = ctx.packagedb.get_package(pkg, pisi.itembyrepodb.installed)
             inst_info = ctx.installdb.get_info(pkg)
             if self.options.long:
@@ -1320,7 +1330,7 @@ Lists the packages that will be upgraded.
         if component:
             #FIXME: pisi api is insufficient to do this
             from sets import Set as set
-            component_pkgs = ctx.componentdb.get_component(component, None).packages
+            component_pkgs = ctx.componentdb.get_component(component).packages
             upgradable_pkgs = list(set(upgradable_pkgs) & set(component_pkgs))
 
         if not upgradable_pkgs:
