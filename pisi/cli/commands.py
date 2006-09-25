@@ -371,12 +371,11 @@ fetch, unpack, setup, build, install, package.
 
     name = ("build", "bi")
 
-    steps = ('fetch', 'unpack', 'setup', 'build', 'install', 'package')
-
     package_formats = ('1.0', '1.1')
 
     def options(self):
 
+        self.add_steps_options()
         group = OptionGroup(self.parser, _("build options"))
         self.add_options(group)
         self.parser.add_option_group(group)
@@ -386,8 +385,6 @@ fetch, unpack, setup, build, install, package.
         ignoredep_opt(self, group)
         group.add_option("-O", "--output-dir", action="store", default=None,
                                help=_("output directory for produced packages"))
-        group.add_option("-U", "--until", action="store", default=None,
-                               help=_("perform until and including specified step"))
         group.add_option("--show-abandoned-files", action="store_true",
                          default=False,
                          help=_("show abandoned files under the install directory after build."))
@@ -407,16 +404,26 @@ fetch, unpack, setup, build, install, package.
         group.add_option("-F", "--package-format", action="store", default='1.1',
                                help=_("pisi package format"))
 
+    def add_steps_options(self):
+        group = OptionGroup(self.parser, _("build steps"))
+        group.add_option("--fetch", dest="until", action="store_const", 
+                         const="fetch", help=_("break build after fetching the source archive"))
+        group.add_option("--unpack", dest="until", action="store_const", 
+                         const="unpack", help=_("break build after unpacking the source archive, checking sha1sum and applying patches"))
+        group.add_option("--setup", dest="until", action="store_const", 
+                         const="setup", help=_("break build after running configure step"))
+        group.add_option("--build", dest="until", action="store_const", 
+                         const="build", help=_("break build after running compile step"))
+        group.add_option("--install", dest="until", action="store_const", 
+                         const="install", help=_("break build after running install step"))
+        group.add_option("--package", dest="until", action="store_const", 
+                         const="package", help=_("create pisi package"))
+        self.parser.add_option_group(group)
+
     def run(self):
         if not self.args:
             self.help()
             return
-
-        # We cant use ctx.get_option as we didn't init PiSi
-        # currently...
-        if self.options.until:
-            if not self.options.until in Build.steps:
-                raise Error(_('Step must be one of %s ') % pisi.util.strlist(Build.steps))
 
         if self.options.no_install:
             self.init(database=True, write=False)
