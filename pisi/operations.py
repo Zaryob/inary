@@ -237,9 +237,9 @@ def check_conflicts(order, packagedb):
     if pkg_conflicts:
         conflicts = ""
         for pkg in pkg_conflicts.keys():
-            conflicts += _("[%s conflicts with: %s]") % (pkg, util.strlist(pkg_conflicts[pkg]))
+            conflicts += _("[%s conflicts with: %s]\n") % (pkg, util.strlist(pkg_conflicts[pkg]))
 
-        ctx.ui.info(_("The following packages have conflicts: %s") %
+        ctx.ui.info(_("The following packages have conflicts:\n%s") %
                     conflicts)
 
         if not ctx.ui.confirm(_('Remove the following conflicting packages?')):
