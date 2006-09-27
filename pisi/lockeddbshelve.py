@@ -13,11 +13,9 @@
 import os
 import fcntl
 import types
-import cPickle
 
 import bsddb3.db as db
 import bsddb3.dbobj as dbobj
-#import bsddb3.dbshelve as shelve
 import pisi.dbshelve as shelve
 
 import gettext
@@ -98,11 +96,6 @@ def init_dbenv(write=False, writeversion=False):
     else:
         ctx.dbenv = None # read-only access to database
 
-#def open(filename, flags='r', mode = 0644, filetype = db.DB_BTREE):
-#    db = LockedDBShelf(None, mode, filetype, None, True)
-#    db.open(filename, filename, filetype, flags, mode)
-#    return db
-
 class LockedDBShelf(shelve.DBShelf):
     """A simple wrapper to implement locking for bsddb's dbshelf"""
 
@@ -122,8 +115,6 @@ class LockedDBShelf(shelve.DBShelf):
 
     def destroy(self):
         os.unlink(self.filename)
-        #self.close()
-        #self.db.remove(self.filename)
 
     def __del__(self):
         # superclass does something funky, we don't need that
