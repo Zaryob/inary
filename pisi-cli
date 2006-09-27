@@ -22,6 +22,8 @@ import pisi.context as ctx
 import pisi.cli.pisicli as pisicli
 
 import gettext
+gettext.bindtextdomain('pisi', "/usr/share/locale")
+gettext.textdomain('pisi')
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 

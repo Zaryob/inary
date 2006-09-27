@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2006-09-26 11:05+EEST\n"
-"PO-Revision-Date: 2006-09-26 11:19+0300\n"
+"POT-Creation-Date: 2006-09-27 14:54+EEST\n"
+"PO-Revision-Date: 2006-09-27 15:02+0300\n"
 "Last-Translator: Faik Uygur <faik@pardus.org.tr>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,297 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=1; plural=0;\n"
 "X-Generator: KBabel 1.11.4\n"
+
+#: /usr/lib/python2.4/optparse.py:1
+msgid ""
+"optparse - a powerful, extensible, and easy-to-use option parser.\n"
+"\n"
+"By Greg Ward <gward@python.net>\n"
+"\n"
+"Originally distributed as Optik; see http://optik.sourceforge.net/ .\n"
+"\n"
+"If you have problems with this module, please do not file bugs,\n"
+"patches, or feature requests with Python; instead, use Optik's\n"
+"SourceForge project page:\n"
+"  http://sourceforge.net/projects/optik\n"
+"\n"
+"For support, use the optik-users@lists.sourceforge.net mailing list\n"
+"(http://lists.sourceforge.net/lists/listinfo/optik-users).\n"
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:93
+msgid ""
+"\n"
+"    Raised if an Option instance is created with invalid or\n"
+"    inconsistent arguments.\n"
+"    "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:109
+msgid ""
+"\n"
+"    Raised if conflicting options are added to an OptionParser.\n"
+"    "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:114
+msgid ""
+"\n"
+"    Raised if an invalid option value is encountered on the command\n"
+"    line.\n"
+"    "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:120
+msgid ""
+"\n"
+"    Raised if an invalid or ambiguous option is seen on the command-line.\n"
+"    "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:298 pisi/cli/commands.py:50
+msgid "Return a comma-separated list of option strings & metavariables."
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:317
+msgid ""
+"Format help with indented section bodies.\n"
+"    "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:329 pisi/cli/commands.py:44
+#, fuzzy
+msgid "usage: %s\n"
+msgstr "Özet: %s\n"
+
+#: /usr/lib/python2.4/optparse.py:336
+msgid ""
+"Format help with underlined section headers.\n"
+"    "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:348
+msgid "Usage"
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:354
+msgid "integer"
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:355
+msgid "long integer"
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:356
+msgid "floating-point"
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:357
+#, fuzzy
+msgid "complex"
+msgstr " [bitti]\n"
+
+#: /usr/lib/python2.4/optparse.py:365
+msgid "option %s: invalid %s value: %r"
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:373
+msgid "option %s: invalid choice: %r (choose from %s)"
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:382
+msgid ""
+"\n"
+"    Instance attributes:\n"
+"      _short_opts : [string]\n"
+"      _long_opts : [string]\n"
+"\n"
+"      action : string\n"
+"      type : string\n"
+"      dest : string\n"
+"      default : any\n"
+"      nargs : int\n"
+"      const : any\n"
+"      choices : [string]\n"
+"      callback : function\n"
+"      callback_args : (any*)\n"
+"      callback_kwargs : { string : any }\n"
+"      help : string\n"
+"      metavar : string\n"
+"    "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:779
+msgid ""
+"\n"
+"        Update the option values from an arbitrary dictionary, but only\n"
+"        use keys from dict that already have a corresponding attribute\n"
+"        in self.  Any keys in dict without a corresponding attribute\n"
+"        are silently ignored.\n"
+"        "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:792
+msgid ""
+"\n"
+"        Update the option values from an arbitrary dictionary,\n"
+"        using all keys from the dictionary regardless of whether\n"
+"        they have a corresponding attribute in self or not.\n"
+"        "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:924
+msgid ""
+"add_option(Option)\n"
+"           add_option(opt_str, ..., kwarg=val, ...)\n"
+"        "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:1136
+msgid "show this help message and exit"
+msgstr "bu yardım mesajını göster ve çık"
+
+#: /usr/lib/python2.4/optparse.py:1141
+msgid "show program's version number and exit"
+msgstr "program'ın versiyon numarasını göster ve çık"
+
+#: /usr/lib/python2.4/optparse.py:1164
+#, fuzzy
+msgid "%prog [options]"
+msgstr "emerge seçenekleri"
+
+#: /usr/lib/python2.4/optparse.py:1244
+msgid ""
+"\n"
+"        parse_args(args : [string] = sys.argv[1:],\n"
+"                   values : Values = None)\n"
+"        -> (values : Values, args : [string])\n"
+"\n"
+"        Parse the command-line options found in 'args' (default:\n"
+"        sys.argv[1:]).  Any errors result in a call to 'error()', which\n"
+"        by default prints the usage message to stderr and calls\n"
+"        sys.exit() with an error message.  On success returns a pair\n"
+"        (values, args) where 'values' is an Values instance (with all\n"
+"        your option values) and 'args' is the list of arguments left\n"
+"        over after parsing options.\n"
+"        "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:1283
+msgid ""
+"\n"
+"        check_values(values : Values, args : [string])\n"
+"        -> (values : Values, args : [string])\n"
+"\n"
+"        Check that the supplied option values and leftover arguments are\n"
+"        valid.  Returns the option values and leftover arguments\n"
+"        (possibly adjusted, possibly completely new -- whatever you\n"
+"        like).  Default implementation just returns the passed-in\n"
+"        values; subclasses may override as desired.\n"
+"        "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:1296
+msgid ""
+"_process_args(largs : [string],\n"
+"                         rargs : [string],\n"
+"                         values : Values)\n"
+"\n"
+"        Process command-line arguments and populate 'values', consuming\n"
+"        options and arguments from 'rargs'.  If 'allow_interspersed_args' "
+"is\n"
+"        false, stop at the first non-option argument.  If true, accumulate "
+"any\n"
+"        interspersed non-option arguments in 'largs'.\n"
+"        "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:1347
+msgid ""
+"_match_long_opt(opt : string) -> string\n"
+"\n"
+"        Determine which long option string 'opt' matches, ie. which one\n"
+"        it is an unambiguous abbrevation for.  Raises BadOptionError if\n"
+"        'opt' doesn't unambiguously match any long option string.\n"
+"        "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:1374 /usr/lib/python2.4/optparse.py:1413
+msgid "%s option requires an argument"
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:1376 /usr/lib/python2.4/optparse.py:1415
+msgid "%s option requires %d arguments"
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:1385
+msgid "%s option does not take a value"
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:1402 /usr/lib/python2.4/optparse.py:1556
+#, fuzzy
+msgid "no such option: %s"
+msgstr "search seçenekleri"
+
+#: /usr/lib/python2.4/optparse.py:1452
+msgid ""
+"error(msg : string)\n"
+"\n"
+"        Print a usage message incorporating 'msg' to stderr and exit.\n"
+"        If you override this in a subclass, it should not return -- it\n"
+"        should either exit or raise an exception.\n"
+"        "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:1469
+msgid ""
+"print_usage(file : file = stdout)\n"
+"\n"
+"        Print the usage message for the current program (self.usage) to\n"
+"        'file' (default stdout).  Any occurence of the string \"%prog\" in\n"
+"        self.usage is replaced with the name of the current program\n"
+"        (basename of sys.argv[0]).  Does nothing if self.usage is empty\n"
+"        or not defined.\n"
+"        "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:1487
+msgid ""
+"print_version(file : file = stdout)\n"
+"\n"
+"        Print the version message for this program (self.version) to\n"
+"        'file' (default stdout).  As with print_usage(), any occurence\n"
+"        of \"%prog\" in self.version is replaced by the current program's\n"
+"        name.  Does nothing if self.version is empty or undefined.\n"
+"        "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:1502
+msgid "options"
+msgstr "seçenekler"
+
+#: /usr/lib/python2.4/optparse.py:1526
+msgid ""
+"print_help(file : file = stdout)\n"
+"\n"
+"        Print an extended help message, listing all options and any\n"
+"        help text provided with them, to 'file' (default stdout).\n"
+"        "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:1539
+msgid ""
+"_match_abbrev(s : string, wordmap : {string : Option}) -> string\n"
+"\n"
+"    Return the string key in 'wordmap' for which 's' is an unambiguous\n"
+"    abbreviation.  If 's' is found to be ambiguous or doesn't match any of\n"
+"    'words', raise BadOptionError.\n"
+"    "
+msgstr ""
+
+#: /usr/lib/python2.4/optparse.py:1559
+msgid "ambiguous option: %s (%s?)"
+msgstr ""
 
 #: pisi-cli:37
 msgid "Keyboard Interrupt: Exiting..."
@@ -279,7 +570,7 @@ msgstr ""
 "\n"
 "Bozuk dosya: %s"
 
-#: pisi/api.py:325 pisi/cli/commands.py:865
+#: pisi/api.py:325 pisi/cli/commands.py:926
 msgid "OK"
 msgstr "Tamam"
 
@@ -705,86 +996,86 @@ msgstr "%s paketi yapılandırıldı"
 msgid "Extracting the files of %s"
 msgstr "%s paketinin dosyaları arşivden çıkartılıyor"
 
-#: pisi/cli/commands.py:33
+#: pisi/cli/commands.py:94
 msgid "generic help string for any command"
 msgstr "herhangi bir komut yardımı için yer tutucu"
 
-#: pisi/cli/commands.py:62 pisi/cli/pisicli.py:104
+#: pisi/cli/commands.py:123 pisi/cli/pisicli.py:104
 msgid "Unrecognized command: %s"
 msgstr "Tanınmayan komut: %s"
 
-#: pisi/cli/commands.py:83
+#: pisi/cli/commands.py:145
 msgid "common options"
 msgstr "ortak seçenekler"
 
 # pisi/build.py:503 :506
-#: pisi/cli/commands.py:86
+#: pisi/cli/commands.py:148
 msgid "general options"
 msgstr "genel seçenekler"
 
-#: pisi/cli/commands.py:89
+#: pisi/cli/commands.py:151
 msgid "change the system root for pisi commands"
 msgstr "pisi komutları için sistem kök dizinini değiştir"
 
-#: pisi/cli/commands.py:91
+#: pisi/cli/commands.py:153
 msgid "assume yes in all yes/no queries"
 msgstr "bütün evet/hayır sorularında evet varsay"
 
-#: pisi/cli/commands.py:96
+#: pisi/cli/commands.py:158
 msgid "detailed output"
 msgstr "detaylı çıktı"
 
-#: pisi/cli/commands.py:98
+#: pisi/cli/commands.py:160
 msgid "show debugging information"
 msgstr "hata ayıklama bilgisini göster"
 
-#: pisi/cli/commands.py:100
+#: pisi/cli/commands.py:162
 msgid "print like a man"
 msgstr "renkli yazma"
 
-#: pisi/cli/commands.py:107
+#: pisi/cli/commands.py:169
 msgid ""
 "This is a fall back function. If the implementer module provides an\n"
 "        options function it will be called"
 msgstr ""
 
-#: pisi/cli/commands.py:119
+#: pisi/cli/commands.py:181
 msgid "Destination directory %s does not exist. Creating directory.\n"
 msgstr "%s isimli hedef dizini bulunamadı. Dizin yaratılıyor.\n"
 
-#: pisi/cli/commands.py:141
+#: pisi/cli/commands.py:203
 msgid "Password: "
 msgstr "Parola: "
 
-#: pisi/cli/commands.py:147
+#: pisi/cli/commands.py:209
 msgid "initialize PiSi components"
 msgstr "PiSi bileşenlerini hazırla"
 
-#: pisi/cli/commands.py:155
+#: pisi/cli/commands.py:217
 msgid "do cleanup work for PiSi components"
 msgstr ""
 
-#: pisi/cli/commands.py:169
+#: pisi/cli/commands.py:231
 msgid "print help for the command"
 msgstr "komut için yardım yaz"
 
-#: pisi/cli/commands.py:176
+#: pisi/cli/commands.py:237
 msgid "exit program"
 msgstr "programdan çık"
 
-#: pisi/cli/commands.py:178
+#: pisi/cli/commands.py:239
 msgid "Command terminated abnormally."
 msgstr "Komut anormal biçimde sonlandı."
 
-#: pisi/cli/commands.py:188
+#: pisi/cli/commands.py:249
 msgid "Command lacks name"
 msgstr "Komut adı eksik"
 
-#: pisi/cli/commands.py:192
+#: pisi/cli/commands.py:253
 msgid "Duplicate command %s"
 msgstr "Aynı adlı komut: %s"
 
-#: pisi/cli/commands.py:201
+#: pisi/cli/commands.py:262
 msgid ""
 "Prints help for given commands\n"
 "\n"
@@ -798,7 +1089,7 @@ msgstr ""
 "\n"
 "Eğer parametre verilmezse genel yardımı yazar."
 
-#: pisi/cli/commands.py:235
+#: pisi/cli/commands.py:296
 msgid ""
 "Clean stale locks\n"
 "\n"
@@ -814,7 +1105,7 @@ msgstr ""
 "PiSi veritabanı erişimini yönetmek için dosyasistemi kilitlerini kullanır.\n"
 "Bu komut veritabanı dizinindeki kullanılmayan kilitleri siler."
 
-#: pisi/cli/commands.py:256
+#: pisi/cli/commands.py:317
 msgid ""
 "Delete cache files\n"
 "    \n"
@@ -831,7 +1122,7 @@ msgstr ""
 "Kaynaklar, paketler ve geçici dosyalar /var dizini altında \n"
 "saklanır. Bunlar biriktiğinden çok disk alanı kaplayabilirler."
 
-#: pisi/cli/commands.py:277
+#: pisi/cli/commands.py:338
 msgid ""
 "Graph package relations\n"
 "\n"
@@ -850,47 +1141,47 @@ msgstr ""
 "Öntanımlı olarak depo paketlerdeki paket ilişkilerini gösterir\n"
 "ve paketi graphviz biçiminde 'pgraph.dot' dosyasına yazar.\n"
 
-#: pisi/cli/commands.py:294
+#: pisi/cli/commands.py:355
 msgid "graph options"
 msgstr "graph seçenekleri"
 
-#: pisi/cli/commands.py:298
+#: pisi/cli/commands.py:359
 msgid "specify a particular repository"
 msgstr "bir depoyu belirt"
 
-#: pisi/cli/commands.py:301
+#: pisi/cli/commands.py:362
 msgid "graph of installed packages"
 msgstr "kurulu paketlerin çizgesi"
 
-#: pisi/cli/commands.py:304
+#: pisi/cli/commands.py:365
 msgid "do not show installed packages"
 msgstr "kurulu paketleri gösterme"
 
-#: pisi/cli/commands.py:307
+#: pisi/cli/commands.py:368
 msgid "dot output file"
 msgstr "dot çıktı dosyası"
 
-#: pisi/cli/commands.py:318
+#: pisi/cli/commands.py:379
 msgid "Plotting packages in repository %s"
 msgstr "%s deposundaki paketler çiziliyor"
 
-#: pisi/cli/commands.py:324
+#: pisi/cli/commands.py:385
 msgid "Plotting a graph of relations among all repository packages"
 msgstr "Depolardaki bütün paketlerin arasındaki ilişkiler çiziliyor"
 
-#: pisi/cli/commands.py:331
+#: pisi/cli/commands.py:392
 msgid "Plotting a graph of relations among all installed packages"
 msgstr "Bütün kurulu paketler arasındaki ilişkiler çiziliyor"
 
-#: pisi/cli/commands.py:343
+#: pisi/cli/commands.py:404
 msgid "do not take build no into account."
 msgstr "inşa numarasını dikkate alma"
 
-#: pisi/cli/commands.py:348
+#: pisi/cli/commands.py:409
 msgid "do not take dependency information into account"
 msgstr "bağımlılık bilgilerini dikkate alma"
 
-#: pisi/cli/commands.py:352
+#: pisi/cli/commands.py:413
 msgid ""
 "Build PiSi packages\n"
 "\n"
@@ -912,89 +1203,91 @@ msgstr ""
 "Yahut, kaynaklar içeren bir depodan indirilmesi için \n"
 "kaynak paketinin adını verebilirsiniz. \n"
 
-#: pisi/cli/commands.py:374
+#: pisi/cli/commands.py:435
 msgid "build options"
 msgstr "inşa seçenekleri"
 
-#: pisi/cli/commands.py:382
+#: pisi/cli/commands.py:443
 msgid "output directory for produced packages"
 msgstr "üretilecek paketler için çıktı dizini"
 
-#: pisi/cli/commands.py:385
+#: pisi/cli/commands.py:446
 msgid "show abandoned files under the install directory after build."
 msgstr "inşa sonrası kurulum dizini altındaki terkedilmiş dosyaları göster"
 
-#: pisi/cli/commands.py:388
+#: pisi/cli/commands.py:449
 msgid "bypass errors from ActionsAPI"
 msgstr "ActionsAPI kaynaklı hataları esgeç"
 
-#: pisi/cli/commands.py:390 pisi/cli/commands.py:497
+#: pisi/cli/commands.py:451 pisi/cli/commands.py:558
 msgid "bypass safety switch"
 msgstr "emniyet mandalını esgeç"
 
-#: pisi/cli/commands.py:392 pisi/cli/commands.py:535 pisi/cli/commands.py:584
+#: pisi/cli/commands.py:453 pisi/cli/commands.py:596 pisi/cli/commands.py:645
 msgid "Ignore file conflicts"
 msgstr "Dosya çakışmalarına aldırma"
 
-#: pisi/cli/commands.py:394 pisi/cli/commands.py:495
+#: pisi/cli/commands.py:455 pisi/cli/commands.py:556
 msgid "bypass comar configuration agent"
 msgstr "çomar yapılandırma aygıtını kullanma"
 
-#: pisi/cli/commands.py:396
+#: pisi/cli/commands.py:457
 msgid "create a static package with ar files"
 msgstr "ar dosyaları içeren bir statik paket yarat"
 
-#: pisi/cli/commands.py:398
+#: pisi/cli/commands.py:459
 msgid "don't install build dependencies, fail if a build dependency is present"
 msgstr "inşa bağımlılıklarını kurma, eğer bir inşa bağımlılığı yoksa hatayla çık"
 
-#: pisi/cli/commands.py:400
+#: pisi/cli/commands.py:461
 msgid "pisi binary package formats: '1.0', '1.1' (default)"
 msgstr "pisi ikili paket formatları: '1.0', '1.1' (öntanımlı)"
 
-#: pisi/cli/commands.py:403
+#: pisi/cli/commands.py:464
 msgid "build steps"
 msgstr "inşa adımları"
 
-#: pisi/cli/commands.py:405
+#: pisi/cli/commands.py:466
 msgid "break build after fetching the source archive"
 msgstr "kaynak arşivini indirdikten sonra inşa'yı sonlandır"
 
-#: pisi/cli/commands.py:407
+#: pisi/cli/commands.py:468
 msgid ""
 "break build after unpacking the source archive, checking sha1sum and "
 "applying patches"
-msgstr "kaynak arşivini açtıktan, sha1sum kontrolü yaptıktan ve yamaları uyguladıktan sonra inşa'yı sonlandır"
+msgstr ""
+"kaynak arşivini açtıktan, sha1sum kontrolü yaptıktan ve yamaları "
+"uyguladıktan sonra inşa'yı sonlandır"
 
-#: pisi/cli/commands.py:409
+#: pisi/cli/commands.py:470
 msgid "break build after running configure step"
 msgstr "yapılandırma adımından sonra inşa'yı sonlandır"
 
-#: pisi/cli/commands.py:411
+#: pisi/cli/commands.py:472
 msgid "break build after running compile step"
 msgstr "derleme adımından sonra inşa'yı sonlandır"
 
-#: pisi/cli/commands.py:413
+#: pisi/cli/commands.py:474
 msgid "break build after running install step"
 msgstr "kurulum adımından sonra inşa'yı sonlandır"
 
-#: pisi/cli/commands.py:415
+#: pisi/cli/commands.py:476
 msgid "create pisi package"
 msgstr "pisi paketini oluştur"
 
-#: pisi/cli/commands.py:429
+#: pisi/cli/commands.py:490
 msgid "package_format must be one of %s "
 msgstr "package_format, bunlardan birisi olmalı: %s"
 
-#: pisi/cli/commands.py:432 pisi/cli/commands.py:476
+#: pisi/cli/commands.py:493 pisi/cli/commands.py:537
 msgid "Output directory: %s"
 msgstr "Çıktı dizini: %s"
 
-#: pisi/cli/commands.py:434
+#: pisi/cli/commands.py:495
 msgid "Outputting packages in the working directory."
 msgstr "Paketler çalışma dizinine yazılıyor."
 
-#: pisi/cli/commands.py:446
+#: pisi/cli/commands.py:507
 msgid ""
 "Build and install PiSi source packages from repository\n"
 "\n"
@@ -1014,23 +1307,23 @@ msgstr ""
 "\n"
 "Bir bileşen adı da verebilirsiniz.\n"
 
-#: pisi/cli/commands.py:465
+#: pisi/cli/commands.py:526
 msgid "emerge options"
 msgstr "emerge seçenekleri"
 
-#: pisi/cli/commands.py:478
+#: pisi/cli/commands.py:539
 msgid "Outputting binary packages in the package cache."
 msgstr "İkili paketler paket cebine yazılıyor."
 
-#: pisi/cli/commands.py:486
+#: pisi/cli/commands.py:547
 msgid "Abstract package operation command"
 msgstr ""
 
-#: pisi/cli/commands.py:499
+#: pisi/cli/commands.py:560
 msgid "do not perform any action, just show what would be done"
 msgstr "hiç bir eylem gerçekleştirme, sadece ne yapılacağını göster"
 
-#: pisi/cli/commands.py:510
+#: pisi/cli/commands.py:571
 msgid ""
 "Install PiSi packages\n"
 "\n"
@@ -1051,15 +1344,15 @@ msgstr ""
 "\n"
 "Paket adları yerine bileşenler de verebilirsiniz.\n"
 
-#: pisi/cli/commands.py:528
+#: pisi/cli/commands.py:589
 msgid "install options"
 msgstr "install seçenekleri"
 
-#: pisi/cli/commands.py:533
+#: pisi/cli/commands.py:594
 msgid "Reinstall already installed packages"
 msgstr "Halihazırda kurulu paketi yeniden kur"
 
-#: pisi/cli/commands.py:549
+#: pisi/cli/commands.py:610
 msgid ""
 "Upgrade PiSi packages\n"
 "\n"
@@ -1087,27 +1380,27 @@ msgstr ""
 "bir dosyayı yeniden kurmak istiyorsanız install komutunu kullanın. \n"
 "Paket adları yerine bileşenler de verebilirsiniz.\n"
 
-#: pisi/cli/commands.py:575
+#: pisi/cli/commands.py:636
 msgid "upgrade options"
 msgstr "upgrade seçenekleri"
 
-#: pisi/cli/commands.py:580
+#: pisi/cli/commands.py:641
 msgid "Security related package upgrades only"
 msgstr "Sadece güvenlik ile alakalı güncellemeler"
 
-#: pisi/cli/commands.py:582
+#: pisi/cli/commands.py:643
 msgid "Do not update repositories"
 msgstr "Depoları güncelleme"
 
-#: pisi/cli/commands.py:586
+#: pisi/cli/commands.py:647
 msgid "eager upgrades"
 msgstr "istekli yükseltmeler"
 
-#: pisi/cli/commands.py:588
+#: pisi/cli/commands.py:649
 msgid "Fetch upgrades but do not install."
 msgstr "Yükseltilecekleri indir ama kurma"
 
-#: pisi/cli/commands.py:590
+#: pisi/cli/commands.py:651
 msgid ""
 "When upgrading system, ignore packages and components whose basenames match "
 "pattern."
@@ -1115,7 +1408,7 @@ msgstr ""
 "Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile "
 "eşleşenleri yok say"
 
-#: pisi/cli/commands.py:592
+#: pisi/cli/commands.py:653
 msgid ""
 "When upgrading system, ignore packages and components whose "
 "basenames                      match any pattern contained in file."
@@ -1123,15 +1416,15 @@ msgstr ""
 "Sistemi yükseltirken paket ya da bileşen isimlerinden dosya içerisinde "
 "verilen kalıplardan herhangi birisi ile eşleşenleri yok say"
 
-#: pisi/cli/commands.py:632
+#: pisi/cli/commands.py:693
 msgid "Updating repositories"
 msgstr "Depolar güncelleniyor"
 
-#: pisi/cli/commands.py:637
+#: pisi/cli/commands.py:698
 msgid "Will not update repositories"
 msgstr "Depolar güncellenmeyecek"
 
-#: pisi/cli/commands.py:656
+#: pisi/cli/commands.py:717
 msgid ""
 "Remove PiSi packages\n"
 "\n"
@@ -1150,11 +1443,11 @@ msgstr ""
 "verin.\n"
 "Paket adları yerine bileşenler de verebilirsiniz.\n"
 
-#: pisi/cli/commands.py:673
+#: pisi/cli/commands.py:734
 msgid "remove options"
 msgstr "remove seçenekler"
 
-#: pisi/cli/commands.py:688
+#: pisi/cli/commands.py:749
 msgid ""
 "Configure pending packages\n"
 "\n"
@@ -1169,11 +1462,11 @@ msgstr ""
 "yapılmadıysa, yapılandırmayı bekleyen paketler listesine eklenirler.\n"
 "Bu komut bekleyen paketleri yapılandırır.\n"
 
-#: pisi/cli/commands.py:704
+#: pisi/cli/commands.py:765
 msgid "configure-pending options"
 msgstr "configure-pending seçenekleri"
 
-#: pisi/cli/commands.py:716
+#: pisi/cli/commands.py:777
 msgid ""
 "Display package information\n"
 "\n"
@@ -1187,51 +1480,51 @@ msgstr ""
 "\n"
 "<paketi> ya bir paket adıdır ya da bir .pisi dosyasıdır.\n"
 
-#: pisi/cli/commands.py:731
+#: pisi/cli/commands.py:792
 msgid "info options"
 msgstr "info seçenekler"
 
-#: pisi/cli/commands.py:738
+#: pisi/cli/commands.py:799
 msgid "show a list of package files."
 msgstr "paketteki dosyaların bir listesini göster."
 
-#: pisi/cli/commands.py:741
+#: pisi/cli/commands.py:802
 msgid "show only paths."
 msgstr "sadece yolları göster"
 
-#: pisi/cli/commands.py:743
+#: pisi/cli/commands.py:804
 msgid "do not show details"
 msgstr "detayları gösterme"
 
-#: pisi/cli/commands.py:745
+#: pisi/cli/commands.py:806
 msgid "output in xml format"
 msgstr "xml biçiminde çıktı"
 
-#: pisi/cli/commands.py:785
+#: pisi/cli/commands.py:846
 msgid "Package file: %s"
 msgstr "Paket dosyası: %s"
 
-#: pisi/cli/commands.py:791
+#: pisi/cli/commands.py:852
 msgid "[inst] "
 msgstr "[yüklü]"
 
-#: pisi/cli/commands.py:793
+#: pisi/cli/commands.py:854
 msgid "Installed package:"
 msgstr "Yüklü paket:"
 
-#: pisi/cli/commands.py:799
+#: pisi/cli/commands.py:860
 msgid "[repo] "
 msgstr "[depo] "
 
-#: pisi/cli/commands.py:801
+#: pisi/cli/commands.py:862
 msgid "Package found in repository:"
 msgstr "Paket depoda bulundu:"
 
-#: pisi/cli/commands.py:815
+#: pisi/cli/commands.py:876
 msgid "Reverse Dependencies:"
 msgstr "Ters bağımlılıklar:"
 
-#: pisi/cli/commands.py:818
+#: pisi/cli/commands.py:879
 msgid ""
 "\n"
 "Files:"
@@ -1239,11 +1532,11 @@ msgstr ""
 "\n"
 "Dosyalar:"
 
-#: pisi/cli/commands.py:826
+#: pisi/cli/commands.py:887
 msgid "File information not available"
 msgstr "Dosya bilgisi bulunamadı"
 
-#: pisi/cli/commands.py:832
+#: pisi/cli/commands.py:893
 msgid ""
 "Verify installation\n"
 "\n"
@@ -1268,23 +1561,27 @@ msgstr ""
 "bu kontrol toplamlarını kullanır. \n"
 "Eğer paket belirtilmemiş ise tüm paketler üzerinde doğrulama yapar.\n"
 
-#: pisi/cli/commands.py:856
+#: pisi/cli/commands.py:917
 msgid "Checking all installed packages"
 msgstr "Tüm kurulu paketler denetleniyor"
 
-#: pisi/cli/commands.py:859
+#: pisi/cli/commands.py:920
 msgid "* Checking %s... "
 msgstr "* %s kontrol ediliyor... "
 
-#: pisi/cli/commands.py:863
-msgid "\nPackage %s is corrupt."
-msgstr "\nPaket %s bozuk."
+#: pisi/cli/commands.py:924
+msgid ""
+"\n"
+"Package %s is corrupt."
+msgstr ""
+"\n"
+"Paket %s bozuk."
 
-#: pisi/cli/commands.py:867
+#: pisi/cli/commands.py:928
 msgid "Package %s not installed"
 msgstr "Paket %s kurulmamış"
 
-#: pisi/cli/commands.py:872
+#: pisi/cli/commands.py:933
 msgid ""
 "Index PiSi files in a given directory\n"
 "\n"
@@ -1310,31 +1607,31 @@ msgstr ""
 "Eğer birden çok dizin verirseniz, komut hala çalışır, ama herşeyi\n"
 "tek bir indeks dosyasına koyar.\n"
 
-#: pisi/cli/commands.py:893
+#: pisi/cli/commands.py:954
 msgid "index options"
 msgstr "index seçenekleri"
 
-#: pisi/cli/commands.py:897
+#: pisi/cli/commands.py:958
 msgid "store absolute links for indexed files."
 msgstr "indekslenmiş dosyalar için mutlak bağlar sakla."
 
-#: pisi/cli/commands.py:900
+#: pisi/cli/commands.py:961
 msgid "index output file"
 msgstr "indeks çıktı dosyası"
 
-#: pisi/cli/commands.py:903
+#: pisi/cli/commands.py:964
 msgid "do not index pisi spec files."
 msgstr "pisi spec dosyalarını indeksleme."
 
-#: pisi/cli/commands.py:906
+#: pisi/cli/commands.py:967
 msgid "do not sign index."
 msgstr "indeksi imzalama."
 
-#: pisi/cli/commands.py:919
+#: pisi/cli/commands.py:980
 msgid "Indexing current directory."
 msgstr "Şu andaki dizini indeksliyor."
 
-#: pisi/cli/commands.py:927
+#: pisi/cli/commands.py:988
 msgid ""
 "Print the list of all installed packages  \n"
 "\n"
@@ -1344,30 +1641,30 @@ msgstr ""
 "\n"
 "Kullanım: list-installed\n"
 
-#: pisi/cli/commands.py:941
+#: pisi/cli/commands.py:1002
 msgid "list-installed options"
 msgstr "list-installed seçenekleri"
 
-#: pisi/cli/commands.py:944 pisi/cli/commands.py:1174
-#: pisi/cli/commands.py:1239 pisi/cli/commands.py:1278
-#: pisi/cli/commands.py:1318 pisi/cli/commands.py:1446
+#: pisi/cli/commands.py:1005 pisi/cli/commands.py:1235
+#: pisi/cli/commands.py:1300 pisi/cli/commands.py:1339
+#: pisi/cli/commands.py:1379 pisi/cli/commands.py:1507
 msgid "show in long format"
 msgstr "uzun biçimde göster"
 
-#: pisi/cli/commands.py:946
+#: pisi/cli/commands.py:1007
 msgid "list installed packages under given component"
 msgstr "bileşen altındaki kurulu paketleri listele"
 
-#: pisi/cli/commands.py:948 pisi/cli/commands.py:1322
+#: pisi/cli/commands.py:1009 pisi/cli/commands.py:1383
 msgid "show detailed install info"
 msgstr "detaylı kurulum bilgisi göster"
 
 # pisi/cli/commands.py:542 :729
-#: pisi/cli/commands.py:965 pisi/cli/commands.py:1341
+#: pisi/cli/commands.py:1026 pisi/cli/commands.py:1402
 msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
 msgstr "Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
 
-#: pisi/cli/commands.py:981
+#: pisi/cli/commands.py:1042
 msgid ""
 "Rebuild Databases\n"
 "\n"
@@ -1387,19 +1684,19 @@ msgstr ""
 "Eğer paket tanımları verildiyse /var/lib/pisi altındaki paket dizinlerinin "
 "adları olmalılar\n"
 
-#: pisi/cli/commands.py:999
+#: pisi/cli/commands.py:1060
 msgid "rebuild-db options"
 msgstr "rebuild-db seçenekleri"
 
-#: pisi/cli/commands.py:1002
+#: pisi/cli/commands.py:1063
 msgid "rebuild files database"
 msgstr "dosya veritabanını yeniden inşa et"
 
-#: pisi/cli/commands.py:1013
+#: pisi/cli/commands.py:1074
 msgid "Rebuild PiSi databases?"
 msgstr "PiSi veritabanı yeniden inşa edilsin mi?"
 
-#: pisi/cli/commands.py:1020
+#: pisi/cli/commands.py:1081
 msgid ""
 "Update repository databases\n"
 "\n"
@@ -1419,15 +1716,15 @@ msgstr ""
 "PiSi veritabanlarını depo ile eşzamanlı hale getirir.\n"
 " Eğer bir depo verilmediyse, bütün depolar güncellenir.\n"
 
-#: pisi/cli/commands.py:1038
+#: pisi/cli/commands.py:1099
 msgid "update-repo options"
 msgstr "update-repo seçenekleri"
 
-#: pisi/cli/commands.py:1042
+#: pisi/cli/commands.py:1103
 msgid "update database in any case"
 msgstr "veritabanını her halde güncelle"
 
-#: pisi/cli/commands.py:1060
+#: pisi/cli/commands.py:1121
 msgid ""
 "Add a repository\n"
 "\n"
@@ -1452,19 +1749,19 @@ msgstr ""
 "Şimdilik sadece yerel dosyalar (örn. /a/b/c) ve http:// veya ftp:// türü \n"
 "adresler desteklenir\n"
 
-#: pisi/cli/commands.py:1080
+#: pisi/cli/commands.py:1141
 msgid "add-repo options"
 msgstr "add-repo seçenekler"
 
-#: pisi/cli/commands.py:1083
+#: pisi/cli/commands.py:1144
 msgid "add repository at given position (0 is first)"
 msgstr "belirtilen pozisyona depo ekler (0 birinci)"
 
-#: pisi/cli/commands.py:1097
+#: pisi/cli/commands.py:1158
 msgid "Update PiSi database for repository %s?"
 msgstr "%s isimli depo için PiSi veritabanı güncellensin mi?"
 
-#: pisi/cli/commands.py:1106
+#: pisi/cli/commands.py:1167
 msgid ""
 "Remove repositories\n"
 "\n"
@@ -1478,7 +1775,7 @@ msgstr ""
 "\n"
 "Sistemden ilgili bütün depo bilgisini kaldır.\n"
 
-#: pisi/cli/commands.py:1132
+#: pisi/cli/commands.py:1193
 msgid ""
 "List repositories\n"
 "\n"
@@ -1492,7 +1789,7 @@ msgstr ""
 "\n"
 "Şu anda izlenen bütün depoları gösterir.\n"
 
-#: pisi/cli/commands.py:1155
+#: pisi/cli/commands.py:1216
 msgid ""
 "List available packages in the repositories\n"
 "\n"
@@ -1509,27 +1806,27 @@ msgstr ""
 "Depoda yayımlanmış olan PiSi bileşenlerinin kısa bir listesini verir.\n"
 "Eğer bir depo verilmediyse, bütün depolardaki paketleri listeler.\n"
 
-#: pisi/cli/commands.py:1172
+#: pisi/cli/commands.py:1233
 msgid "list-available options"
 msgstr "list-available seçenekleri"
 
-#: pisi/cli/commands.py:1176
+#: pisi/cli/commands.py:1237
 msgid "list available packages under given component"
 msgstr "bileşen altındaki paketleri listele"
 
-#: pisi/cli/commands.py:1178
+#: pisi/cli/commands.py:1239
 msgid "show uninstalled packages only"
 msgstr "sadece kurulu olmayan paketleri göster"
 
-#: pisi/cli/commands.py:1186
+#: pisi/cli/commands.py:1247
 msgid "Installed packages are shown in this color"
 msgstr "Kurulu paketler bu renkle gösterilir"
 
-#: pisi/cli/commands.py:1194
+#: pisi/cli/commands.py:1255
 msgid "Repository : %s\n"
 msgstr "Depo: %s\n"
 
-#: pisi/cli/commands.py:1222
+#: pisi/cli/commands.py:1283
 msgid ""
 "List available components\n"
 "\n"
@@ -1544,11 +1841,11 @@ msgstr ""
 "\n"
 "Depoda yayımlanmış olan PiSi bileşenlerinin kısa bir listesini verir.\n"
 
-#: pisi/cli/commands.py:1237
+#: pisi/cli/commands.py:1298
 msgid "list-components options"
 msgstr "list-components seçenekleri"
 
-#: pisi/cli/commands.py:1262
+#: pisi/cli/commands.py:1323
 msgid ""
 "List available sources\n"
 "\n"
@@ -1562,11 +1859,11 @@ msgstr ""
 "\n"
 "Depolarda bulunan kaynakların kısa bir listesini verir.\n"
 
-#: pisi/cli/commands.py:1276
+#: pisi/cli/commands.py:1337
 msgid "list-sources options"
 msgstr "list-sources seçenekleri"
 
-#: pisi/cli/commands.py:1301
+#: pisi/cli/commands.py:1362
 msgid ""
 "List packages to be upgraded\n"
 "\n"
@@ -1578,19 +1875,19 @@ msgstr ""
 "\n"
 "Kullanım: list-upgrades [ <depo1> <depo2> ... depon ]\n"
 
-#: pisi/cli/commands.py:1315
+#: pisi/cli/commands.py:1376
 msgid "list-upgrades options"
 msgstr "list-upgrades seçenekleri"
 
-#: pisi/cli/commands.py:1320
+#: pisi/cli/commands.py:1381
 msgid "list upgradable packages under given component"
 msgstr "bileşen altındaki güncellenebilir paketleri listele"
 
-#: pisi/cli/commands.py:1337 pisi/operations.py:436
+#: pisi/cli/commands.py:1398 pisi/operations.py:436
 msgid "No packages to upgrade."
 msgstr "Yükseltilecek paket yok."
 
-#: pisi/cli/commands.py:1357
+#: pisi/cli/commands.py:1418
 msgid ""
 "List pending packages\n"
 "    \n"
@@ -1600,7 +1897,7 @@ msgstr ""
 "\n"
 "Yapılandırmayı bekleyen paketlerin bir listesini verir.\n"
 
-#: pisi/cli/commands.py:1379
+#: pisi/cli/commands.py:1440
 msgid ""
 "Search packages\n"
 "\n"
@@ -1616,23 +1913,23 @@ msgstr ""
 "Belirtilen arama terimlerini özet, tanım ve paket adı \n"
 "alanlarında içeren paketleri bulur.\n"
 
-#: pisi/cli/commands.py:1394
+#: pisi/cli/commands.py:1455
 msgid "search options"
 msgstr "search seçenekleri"
 
-#: pisi/cli/commands.py:1397
+#: pisi/cli/commands.py:1458
 msgid "set search language"
 msgstr "arama dilini seç"
 
-#: pisi/cli/commands.py:1401
+#: pisi/cli/commands.py:1462
 msgid "show details"
 msgstr "detayları göster"
 
-#: pisi/cli/commands.py:1421
+#: pisi/cli/commands.py:1482
 msgid "%s packages found"
 msgstr "%s paket bulundu"
 
-#: pisi/cli/commands.py:1430
+#: pisi/cli/commands.py:1491
 msgid ""
 "Search for a file\n"
 "\n"
@@ -1646,35 +1943,35 @@ msgstr ""
 "\n"
 "Belirtilen dosyayı içeren paketi bulur.\n"
 
-#: pisi/cli/commands.py:1444
+#: pisi/cli/commands.py:1505
 msgid "search-file options"
 msgstr "search-file seçenekleri"
 
-#: pisi/cli/commands.py:1448
+#: pisi/cli/commands.py:1509
 msgid "fuzzy search"
 msgstr "yaklaşık arama"
 
-#: pisi/cli/commands.py:1450
+#: pisi/cli/commands.py:1511
 msgid "show only package name"
 msgstr "sadece paket ismi göster"
 
-#: pisi/cli/commands.py:1472
+#: pisi/cli/commands.py:1533
 msgid "Package %s has file %s"
 msgstr "%s paketi içinde %s dosyası var"
 
-#: pisi/cli/commands.py:1474
+#: pisi/cli/commands.py:1535
 msgid "Type: %s, Hash: %s"
 msgstr "Tip: %s, Hash: %s"
 
-#: pisi/cli/commands.py:1477
+#: pisi/cli/commands.py:1538
 msgid "Path '%s' does not belong to an installed package"
 msgstr "Yol '%s' yerleştirilmiş bir pakete ait değil"
 
-#: pisi/cli/commands.py:1490
+#: pisi/cli/commands.py:1551
 msgid "Searching for %s"
 msgstr "%s'i arıyor"
 
-#: pisi/cli/commands.py:1500
+#: pisi/cli/commands.py:1561
 msgid ""
 "%prog [options] <command> [arguments]\n"
 "\n"
@@ -1686,7 +1983,7 @@ msgstr ""
 "<komut> aşağıdakilerden birisi olabilir:\n"
 "\n"
 
-#: pisi/cli/commands.py:1506
+#: pisi/cli/commands.py:1567
 msgid ""
 "\n"
 "Use \"%prog help <command>\" for help on a specific command.\n"
@@ -1961,25 +2258,25 @@ msgstr "%s anahtarı bulunamadı"
 msgid "Key %s in repo %s not found"
 msgstr "%s anahtarı %s deposunda bulunamadı"
 
-#: pisi/lockeddbshelve.py:49
+#: pisi/lockeddbshelve.py:47
 msgid "Database version for %s insufficient. Please run rebuild-db command."
 msgstr "Veritabanı versiyonu %s yetersiz. Lütfen rebuild-db komutunu çalıştırınız."
 
-#: pisi/lockeddbshelve.py:53
+#: pisi/lockeddbshelve.py:51
 msgid "Database version for %s greater than PiSi version. You need a newer PiSi."
 msgstr ""
 "Veritabanı versiyonu %s PiSi versiyonundan büyük. Yeni bir PiSi'ye "
 "gereksiniminiz var."
 
-#: pisi/lockeddbshelve.py:64
+#: pisi/lockeddbshelve.py:62
 msgid "Cannot attain write access to database environment"
 msgstr "Veritabanı ortamına yazma erişimi sağlanamadı"
 
-#: pisi/lockeddbshelve.py:66
+#: pisi/lockeddbshelve.py:64
 msgid "Database version %s not present."
 msgstr "Veritabanı versiyonu %s bulunamadı."
 
-#: pisi/lockeddbshelve.py:73 pisi/lockeddbshelve.py:162
+#: pisi/lockeddbshelve.py:71 pisi/lockeddbshelve.py:153
 msgid ""
 "Another instance of PiSi is running. Only one instance is allowed to modify "
 "the PiSi database at a time."
@@ -1987,19 +2284,19 @@ msgstr ""
 "Sistemde başka bir yerde daha PiSi çalışıyor. Sadece tek bir PiSi'nin "
 "veritabanını değiştirmesine izin verilir."
 
-#: pisi/lockeddbshelve.py:83
+#: pisi/lockeddbshelve.py:81
 msgid "Cannot attain read access to database environment"
 msgstr "Veritabanı ortamına okuma erişimi sağlanamadı"
 
-#: pisi/lockeddbshelve.py:97
+#: pisi/lockeddbshelve.py:95
 msgid "Cannot write to PiSi database."
 msgstr "PiSi veritabanına yazılamıyor."
 
-#: pisi/lockeddbshelve.py:120
+#: pisi/lockeddbshelve.py:113
 msgid "Cannot attain read or write access to database %s"
 msgstr "Veritabanı %s için okuma ya da yazma erişimi sağlanamadı"
 
-#: pisi/lockeddbshelve.py:148
+#: pisi/lockeddbshelve.py:139
 msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
 msgstr ""
 "Bayraklar 'r', 'w', 'c' or 'n'den birisi olmalı ya da bsddb.db.DB_* "
@@ -2057,11 +2354,15 @@ msgid "Selected packages [%s] are in conflict with each other."
 msgstr "Seçili paketler [%s] birbirleriyle çakışıyorlar."
 
 #: pisi/operations.py:240
-msgid "[%s conflicts with: %s]"
+#, fuzzy
+msgid "[%s conflicts with: %s]\n"
 msgstr "[%s: %s ile çakışıyor]"
 
 #: pisi/operations.py:242
-msgid "The following packages have conflicts: %s"
+#, fuzzy
+msgid ""
+"The following packages have conflicts:\n"
+"%s"
 msgstr "Aşağıdaki paketlerde çakışmalar bulunuyor: %s"
 
 #: pisi/operations.py:245
@@ -2295,28 +2596,11 @@ msgstr "List tipi sadece bir eleman içermeli"
 msgid "Mandatory list \"%s\" under \"%s\" node is empty."
 msgstr "Zorunlu \"%s\" listesi \"%s\" içinde yok."
 
-#: pisi/pxml/xmlextcdom.py:57 pisi/pxml/xmlfilecdom.py:74
-msgid "File '%s' has invalid XML: %s"
-msgstr "'%s' dosyasının XML sözdizimi geçersiz: %s"
-
-#: pisi/pxml/xmlextcdom.py:109 pisi/pxml/xmlextmdom.py:89
-#: pisi/pxml/xmlextpiks.py:79
+#: pisi/pxml/xmlext.py:79
 msgid "getNodeText: Expected text node, got something else!"
 msgstr "getNodeText: metin beklenirken başka birşey alındı!"
 
-#: pisi/pxml/xmlextmdom.py:50 pisi/pxml/xmlfilemdom.py:66
-msgid "File '%s' has invalid XML: %s\n"
-msgstr "'%s' dosyasının XML sözdizimi geçersiz: %s\n"
-
-#: pisi/pxml/xmlfilecdom.py:76
-msgid "File '%s' not found"
-msgstr "Dosya '%s' bulunamadı"
-
-#: pisi/pxml/xmlfilecdom.py:86 pisi/pxml/xmlfilemdom.py:77
-msgid "Root tagname %s not identical to %s as expected"
-msgstr "Kök im adı %s beklendiği gibi %s ile aynı değil"
-
-#: pisi/pxml/xmlfilepiks.py:64 pisi/pxml/xmlfilepiks.py:79
+#: pisi/pxml/xmlfile.py:64 pisi/pxml/xmlfile.py:79
 msgid "File '%s' has invalid XML"
 msgstr "'%s' dosyasının XML sözdizimi geçersiz"
 
