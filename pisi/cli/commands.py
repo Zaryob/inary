@@ -11,7 +11,7 @@
 #
 
 import sys
-from optparse import OptionParser, OptionGroup
+from optparse import OptionParser, OptionGroup, HelpFormatter
     
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -27,6 +27,67 @@ from colors import colorize
 
 class Error(pisi.Error):
     pass
+
+class PisiHelpFormatter(HelpFormatter):
+    def __init__(self,
+                 indent_increment=1,
+                 max_help_position=32,
+                 width=None,
+                 short_first=1):
+        HelpFormatter.__init__(
+            self, indent_increment, max_help_position, width, short_first)
+
+        self._short_opt_fmt = "%s"
+        self._long_opt_fmt = "%s"
+
+    def format_usage(self, usage):
+        return _("usage: %s\n") % usage
+
+    def format_heading(self, heading):
+        return "%*s%s:\n" % (self.current_indent, "", heading)
+
+    def format_option_strings(self, option):
+        """Return a comma-separated list of option strings & metavariables."""
+        if option.takes_value():
+            short_opts = [self._short_opt_fmt % sopt
+                          for sopt in option._short_opts]
+            long_opts = [self._long_opt_fmt % lopt
+                         for lopt in option._long_opts]
+        else:
+            short_opts = option._short_opts
+            long_opts = option._long_opts
+
+        if long_opts and short_opts:
+            opt = "%s [%s]" % (short_opts[0], long_opts[0])
+        else:
+            opt = long_opts[0] or short_opts[0]
+
+        if option.takes_value():
+            opt += " arg"
+
+        return opt
+
+    def format_option(self, option):
+        import textwrap
+        result = []
+        opts = self.option_strings[option]
+        opt_width = self.help_position - self.current_indent - 2
+        if len(opts) > opt_width:
+            opts = "%*s%s\n" % (self.current_indent, "", opts)
+            indent_first = self.help_position
+        else:                       # start help on same line as opts
+            opts = "%*s%-*s  " % (self.current_indent, "", opt_width, opts)
+            indent_first = 0
+        result.append(opts)
+        if option.help:
+            help_text = self.expand_default(option)
+            help_lines = textwrap.wrap(help_text, self.help_width)
+            result.append(": %*s%s\n" % (indent_first, "", help_lines[0]))
+            result.extend(["  %*s%s\n" % (self.help_position, "", line)
+                           for line in help_lines[1:]])
+        elif opts[-1] != "\n":
+            result.append("\n")
+        return "".join(result)
 
 
 class Command(object):
@@ -70,7 +131,8 @@ class Command(object):
         import pisi
         self.comar = False
         self.parser = OptionParser(usage=getattr(self, "__doc__"),
-                                   version="%prog " + pisi.__version__)
+                                   version="%prog " + pisi.__version__,
+                                   formatter=PisiHelpFormatter())
         self.options()
         self.commonopts()
         (self.options, self.args) = self.parser.parse_args(args)
@@ -167,9 +229,8 @@ class Command(object):
 
     def help(self):
         """print help for the command"""
-        print self.format_name() + ': '
         trans = gettext.translation('pisi', fallback=True)
-        print trans.ugettext(self.__doc__) + '\n'
+        print "%s: %s\n" % (self.format_name(), trans.ugettext(self.__doc__))
         print self.parser.format_option_help()
 
     def die(self):
