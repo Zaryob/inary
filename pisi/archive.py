@@ -308,6 +308,9 @@ class ArchiveZip(ArchiveBase):
         """ Returns true if file_path is member of the zip archive"""
         return file_path in self.zip_obj.namelist()
 
+    def read_file(self, file_path):
+        return self.zip_obj.read(file_path)
+
     def unpack_file_cond(self, pred, target_dir, archive_root = ''):
         """Unpack/Extract files according to predicate function
         pred: filename -> bool 
