@@ -112,12 +112,7 @@ class Index(XmlFile):
 
     def add_package(self, path, repo_uri):
         package = Package(path, 'r')
-        # extract control files
-        util.clean_dir(ctx.config.install_dir())
-        package.extract_PISI_files(ctx.config.install_dir())
-
-        md = metadata.MetaData()
-        md.read(os.path.join(ctx.config.install_dir(), ctx.const.metadata_xml))
+        md = package.get_metadata()
         md.package.packageSize = os.path.getsize(path)
         if ctx.config.options and ctx.config.options.absolute_urls:
             md.package.packageURI = os.path.realpath(path)
