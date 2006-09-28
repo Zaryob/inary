@@ -99,7 +99,7 @@ class Package:
         this is the function used by the installer"""
         self.impl.unpack_dir_flat(dir, outdir)
         
-    def extract_PISI_files(self, outdir):
+    def extract_pisi_files(self, outdir):
         """Extract PiSi control files: metadata.xml, files.xml,
         action scripts, etc."""
         self.extract_files([ctx.const.metadata_xml, ctx.const.files_xml], outdir)
@@ -122,7 +122,7 @@ class Package:
             outdir = ctx.config.tmp_dir()
 
         # extract control files
-        self.extract_PISI_files(outdir)
+        self.extract_pisi_files(outdir)
 
         self.metadata = MetaData()
         self.metadata.read( join(outdir, ctx.const.metadata_xml) )
