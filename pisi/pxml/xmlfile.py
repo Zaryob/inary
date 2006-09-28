@@ -54,6 +54,14 @@ class XmlFile(object):
     def rootNode(self):
         """returns root document element"""
         return self.doc
+
+    def parsexml(self, xml):
+        """parses xml string and returns DOM"""
+        try:
+            self.doc = iks.parseString(xml)
+            return self.doc
+        except Exception, e:
+            raise Error(_("String '%s' has invalid XML") % (xml))
         
     def readxmlfile(self, file):
         raise Exception("not implemented")

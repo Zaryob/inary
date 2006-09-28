@@ -412,6 +412,24 @@ class autoxml(oo.autosuper, oo.autoprop):
             cls.__ne__ = notequal            
             
         if xmlfile_support:
+            def parse(self, xml, keepDoc = False):
+                "parse XML string and decode it into a python object"
+                self.parsexml(xml)
+                errs = []
+                self.decode(self.rootNode(), errs)
+                if errs:
+                    errs.append(_("autoxml.parse: String '%s' has errors") % xml)
+                    raise Error(*errs)
+                if hasattr(self, 'read_hook'):
+                    self.read_hook(errs)
+
+                if not keepDoc:
+                    self.unlink() # get rid of the tree
+
+                errs = self.errors()
+                if errs:
+                    errs.append(_("autoxml.parse: String '%s' has errors") % xml)
+
             def read(self, uri, keepDoc = False, tmpDir = '/tmp',
                      sha1sum = False, compress = None, sign = None, copylocal = False):
                 "read XML file and decode it into a python object"
@@ -454,6 +472,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             
             cls.read = read
             cls.write = write
+            cls.parse = parse
             
 
     def gen_attr_member(cls, attr):

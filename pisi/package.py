@@ -105,6 +105,18 @@ class Package:
         self.extract_files([ctx.const.metadata_xml, ctx.const.files_xml], outdir)
         self.extract_dir('config', outdir)
 
+    def get_metadata(self):
+        """reads metadata.xml from the PiSi package and returns MetaData object"""
+        md = MetaData()
+        md.parse(self.impl.read_file(ctx.const.metadata_xml))
+        return md
+
+    def get_files(self):
+        """reads files.xml from the PiSi package and returns Files object"""
+        files = Files()
+        files.parse(self.impl.read_file(ctx.const.files_xml))
+        return files
+
     def read(self, outdir = None):
         if not outdir:
             outdir = ctx.config.tmp_dir()
