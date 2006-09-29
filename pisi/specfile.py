@@ -148,7 +148,7 @@ class Source:
     t_Homepage = [autoxml.String, autoxml.optional]
     t_Packager = [Packager, autoxml.mandatory]
     t_Summary = [autoxml.LocalText, autoxml.mandatory]
-    t_Description = [autoxml.LocalText, autoxml.mandatory]
+    t_Description = [autoxml.LocalText, autoxml.optional]
     t_IsA = [ [autoxml.String], autoxml.optional]
     t_PartOf = [autoxml.String, autoxml.optional]
     t_Icon = [ autoxml.String, autoxml.optional]
@@ -280,3 +280,9 @@ class SpecFile(XmlFile):
                 pkg.icon = self.source.icon
             tmp.append(pkg)
         self.packages = tmp
+
+        #TODO: Description should be mandatory. Remove this crap when repo is ready.
+        #http://liste.pardus.org.tr/gelistirici/2006-September/002332.html
+        if not self.source.description:
+            self.source.description = autoxml.LocalText("Description")
+            self.source.description["en"] = self.source.summary["en"]
