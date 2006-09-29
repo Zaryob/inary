@@ -54,15 +54,6 @@ class RepoDB(object):
         l = self.list()
         return l[ix]
 
-    def swap(self, x, y):
-        def proc(txn):
-            l = self.d.get("order", txn)
-            t = l[x]
-            l[x] = l[y]
-            l[y] = t
-            self.d.put("order", l, txn)
-        self.d.txn_proc(proc, txn)
-
     def has_repo(self, name):
         name = str(name)
         return self.d.has_key("repo-" + name)
