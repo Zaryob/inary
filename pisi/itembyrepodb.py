@@ -193,7 +193,7 @@ class ItemByRepoDB(object):
             repostr = self.repo_str(repo)            
             if s.has_key(repostr):
                 del s[repostr]
-            if (len(s)==0):
+            if not len(s):
                 self.d.delete(name, txn)
             else:
                 self.d.put(name, s, txn)
