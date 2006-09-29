@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMI xmlns:UML="http://schema.omg.org/spec/UML/1.3" verified="false" timestamp="2006-09-29T16:31:01" xmi.version="1.2" >
+<XMI xmlns:UML="http://schema.omg.org/spec/UML/1.3" verified="false" timestamp="2006-09-29T21:06:38" xmi.version="1.2" >
  <XMI.header>
   <XMI.documentation>
    <XMI.exporter>umbrello uml modeller http://uml.sf.net</XMI.exporter>
@@ -195,7 +195,7 @@
       <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="205" aggregation="none" type="190" name="" />
      </UML:Association.connection>
     </UML:Association>
-    <UML:Association isSpecification="false" visibility="public" namespace="m1" xmi.id="222" name="1..n" >
+    <UML:Association isSpecification="false" visibility="public" namespace="m1" xmi.id="222" name="1..*" >
      <UML:Association.connection>
       <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="223" aggregation="composite" type="211" name="" />
       <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="224" aggregation="none" type="215" name="" />
@@ -205,7 +205,7 @@
   </UML:Model>
  </XMI.content>
  <XMI.extensions xmi.extender="umbrello" >
-  <docsettings viewid="1" documentation="" uniqueid="226" />
+  <docsettings viewid="209" documentation="" uniqueid="234" />
   <diagrams>
    <diagram snapgrid="0" showattsig="1" fillcolor="#ffffc0" linewidth="0" zoom="100" showgrid="0" showopsig="1" usefillcolor="1" snapx="10" canvaswidth="1012" snapy="10" showatts="1" xmi.id="1" documentation="" type="402" showops="1" showpackage="0" name="InstallDB" localid="900000" showstereotype="0" showscope="1" snapcsgrid="0" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="#ff0000" canvasheight="593" >
     <widgets>
@@ -243,8 +243,8 @@ The main purpose of the installdb is to hold the packages' version and status in
        <startpoint startx="239" starty="386" />
        <endpoint endx="543" endy="340" />
       </linepath>
-      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="391" y="363" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="178" text="1..*" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
-      <floatingtext usesdiagramfillcolour="1" width="56" usesdiagramusefillcolour="1" x="241" y="362" linewidth="none" posttext="" role="709" fillcolour="none" height="22" usefillcolor="1" pretext="+" isinstance="0" xmi.id="179" text="name" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="391" y="363" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="227" text="1..*" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+      <floatingtext usesdiagramfillcolour="1" width="56" usesdiagramusefillcolour="1" x="241" y="362" linewidth="none" posttext="" role="709" fillcolour="none" height="22" usefillcolor="1" pretext="+" isinstance="0" xmi.id="228" text="name" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      </assocwidget>
     </associations>
    </diagram>
@@ -270,7 +270,7 @@ key:&quot;repository name&quot; value:Repo
        <startpoint startx="174" starty="321" />
        <endpoint endx="538" endy="281" />
       </linepath>
-      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="356" y="301" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="180" text="1..*" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="356" y="301" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="229" text="1..*" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      </assocwidget>
     </associations>
    </diagram>
@@ -300,7 +300,7 @@ key:&quot;file path&quot; value: (packagename, FileInfo) tuple
        <startpoint startx="182" starty="360" />
        <endpoint endx="538" endy="305" />
       </linepath>
-      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="360" y="332" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="181" text="1..*" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="360" y="332" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="230" text="1..*" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      </assocwidget>
     </associations>
    </diagram>
@@ -329,7 +329,7 @@ The main purpose of the itembyrepo class is make it easier for holding datas by 
     <widgets>
      <notewidget usesdiagramfillcolour="1" width="453" usesdiagramusefillcolour="1" x="16" y="20" linewidth="none" fillcolour="none" height="108" usefillcolor="1" isinstance="0" xmi.id="154" text="component.py 
 
-The main purpose of the componentdb is hold the repositories component infos. " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+The main purpose of the componentdb is to hold the repositories component infos. " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      <classwidget usesdiagramfillcolour="1" width="130" showattsigs="601" usesdiagramusefillcolour="1" x="31" y="332" showopsigs="601" linewidth="none" fillcolour="none" height="47" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="155" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
      <notewidget usesdiagramfillcolour="1" width="401" usesdiagramusefillcolour="1" x="30" y="203" linewidth="none" fillcolour="none" height="112" usefillcolor="1" isinstance="0" xmi.id="157" showstereotype="1" text="@d: is a ItemByRepo object which contains component infos by repos. 
 
@@ -352,15 +352,15 @@ key: &quot;component name&quot; value: Component
        <startpoint startx="161" starty="355" />
        <endpoint endx="549" endy="393" />
       </linepath>
-      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="355" y="374" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="182" showstereotype="1" text="1..*" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="355" y="374" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="231" showstereotype="1" text="1..*" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      </assocwidget>
     </associations>
    </diagram>
-   <diagram snapgrid="0" showattsig="1" fillcolor="#ffffc0" linewidth="0" zoom="100" showgrid="0" showopsig="1" usefillcolor="1" snapx="10" canvaswidth="1061" snapy="10" showatts="1" xmi.id="184" documentation="" type="402" showops="1" showpackage="0" name="PackageDB" localid="900000" showstereotype="0" showscope="1" snapcsgrid="0" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="#ff0000" canvasheight="579" >
+   <diagram snapgrid="0" showattsig="1" fillcolor="#ffffc0" linewidth="0" zoom="100" showgrid="0" showopsig="1" usefillcolor="1" snapx="10" canvaswidth="1021" snapy="10" showatts="1" xmi.id="184" documentation="" type="402" showops="1" showpackage="0" name="PackageDB" localid="900000" showstereotype="0" showscope="1" snapcsgrid="0" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="#ff0000" canvasheight="579" >
     <widgets>
      <notewidget usesdiagramfillcolour="1" width="453" usesdiagramusefillcolour="1" x="16" y="20" linewidth="none" fillcolour="none" height="108" usefillcolor="1" isinstance="0" xmi.id="185" text="packagedb.py 
 
-The main purpose of the packagedb is hold package infos of the repositories and reverse dependency informations." font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+The main purpose of the packagedb is to hold package infos of the repositories and reverse dependency informations." font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      <classwidget usesdiagramfillcolour="1" width="125" showattsigs="601" usesdiagramusefillcolour="1" x="36" y="428" showopsigs="601" linewidth="none" fillcolour="none" height="63" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="186" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
      <notewidget usesdiagramfillcolour="1" width="418" usesdiagramusefillcolour="1" x="32" y="177" linewidth="none" fillcolour="none" height="235" usefillcolor="1" isinstance="0" xmi.id="189" showstereotype="1" text="@d: is a ItemByRepo object which holds the package informations of repos. 
 key:&quot;package name&quot; value:Package
@@ -386,7 +386,7 @@ key:&quot;dependency name&quot; value: [dependent package names list]
        <startpoint startx="161" starty="459" />
        <endpoint endx="557" endy="417" />
       </linepath>
-      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="359" y="438" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="208" showstereotype="112" text="1..*" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="359" y="438" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="232" showstereotype="1" text="1..*" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      </assocwidget>
     </associations>
    </diagram>
@@ -415,7 +415,7 @@ key: &quot;package name&quot; value:&quot;source package name&quot;
        <startpoint startx="208" starty="464" />
        <endpoint endx="666" endy="414" />
       </linepath>
-      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="437" y="439" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="226" showstereotype="208" text="1..n" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="437" y="439" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="233" showstereotype="1" text="1..*" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      </assocwidget>
     </associations>
    </diagram>
