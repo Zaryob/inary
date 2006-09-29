@@ -159,7 +159,7 @@ class Command(object):
         group.add_option("-d", "--debug", action="store_true",
                      default=False, help=_("show debugging information"))
         group.add_option("-N", "--no-color", action="store_true", default=False,
-                     help = _("print like a man"))
+                     help = _("Suppresses all coloring of PiSi's output"))
 
         p.add_option_group(group)
 
