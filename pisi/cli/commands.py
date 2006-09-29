@@ -148,16 +148,16 @@ class Command(object):
         group = OptionGroup(self.parser, _("general options"))
 
         group.add_option("-D", "--destdir", action="store", default = None,
-                     help = _("change the system root for pisi commands"))
+                     help = _("Change the system root for pisi commands"))
         group.add_option("-y", "--yes-all", action="store_true",
-                     default=False, help = _("assume yes in all yes/no queries"))
+                     default=False, help = _("Assume yes in all yes/no queries"))
         group.add_option("-u", "--username", action="store")
         group.add_option("-p", "--password", action="store")
         group.add_option("-v", "--verbose", action="store_true",
                      dest="verbose", default=False,
-                     help=_("detailed output"))
+                     help=_("Detailed output"))
         group.add_option("-d", "--debug", action="store_true",
-                     default=False, help=_("show debugging information"))
+                     default=False, help=_("Show debugging information"))
         group.add_option("-N", "--no-color", action="store_true", default=False,
                      help = _("Suppresses all coloring of PiSi's output"))
 
@@ -356,16 +356,16 @@ the package in graphviz format to 'pgraph.dot'.
 
         group.add_option("-r", "--repository", action="store",
                                default=None,
-                               help=_("specify a particular repository"))
+                               help=_("Specify a particular repository"))
         group.add_option("-i", "--installed", action="store_true",
                                default=False,
-                               help=_("graph of installed packages"))
+                               help=_("Graph of installed packages"))
         group.add_option("--ignore-installed", action="store_true",
                                default=False,
-                               help=_("do not show installed packages"))
+                               help=_("Do not show installed packages"))
         group.add_option("-o", "--output", action="store",
                                default='pgraph.dot',
-                               help=_("dot output file"))
+                               help=_("Dot output file"))
 
         self.parser.add_option_group(group)
 
@@ -401,12 +401,12 @@ the package in graphviz format to 'pgraph.dot'.
 def buildno_opts(self, group):
     group.add_option("--ignore-build-no", action="store_true",
                            default=False,
-                           help=_("do not take build no into account."))
+                           help=_("Do not take build no into account."))
 
 def ignoredep_opt(self, group):
     group.add_option("--ignore-dependency", action="store_true",
                  default=False,
-                 help=_("do not take dependency information into account"))
+                 help=_("Do not take dependency information into account"))
 
 
 class Build(Command):
@@ -440,38 +440,38 @@ to be downloaded from a repository containing sources.
         buildno_opts(self, group)
         ignoredep_opt(self, group)
         group.add_option("-O", "--output-dir", action="store", default=None,
-                               help=_("output directory for produced packages"))
+                               help=_("Output directory for produced packages"))
         group.add_option("--show-abandoned-files", action="store_true",
                          default=False,
-                         help=_("show abandoned files under the install directory after build."))
+                         help=_("Show abandoned files under the install directory after build."))
         group.add_option("--ignore-action-errors",
                                action="store_true", default=False,
-                               help=_("bypass errors from ActionsAPI"))
+                               help=_("Bypass errors from ActionsAPI"))
         group.add_option("--bypass-safety", action="store_true",
-                     default=False, help=_("bypass safety switch"))
+                     default=False, help=_("Bypass safety switch"))
         group.add_option("--ignore-file-conflicts", action="store_true",
                      default=False, help=_("Ignore file conflicts"))
         group.add_option("--ignore-comar", action="store_true",
-                               default=False, help=_("bypass comar configuration agent"))
+                               default=False, help=_("Bypass comar configuration agent"))
         group.add_option("--create-static", action="store_true",
-                               default=False, help=_("create a static package with ar files"))
+                               default=False, help=_("Create a static package with ar files"))
         group.add_option("--no-install", action="store_true",
-                               default=False, help=_("don't install build dependencies, fail if a build dependency is present"))
+                               default=False, help=_("Do not install build dependencies, fail if a build dependency is present"))
         group.add_option("-F", "--package-format", action="store", default='1.1',
-                               help=_("pisi binary package formats: '1.0', '1.1' (default)"))
+                               help=_("PiSi binary package formats: '1.0', '1.1' (default)"))
 
     def add_steps_options(self):
         group = OptionGroup(self.parser, _("build steps"))
         group.add_option("--fetch", dest="until", action="store_const", 
-                         const="fetch", help=_("break build after fetching the source archive"))
+                         const="fetch", help=_("Break build after fetching the source archive"))
         group.add_option("--unpack", dest="until", action="store_const", 
-                         const="unpack", help=_("break build after unpacking the source archive, checking sha1sum and applying patches"))
+                         const="unpack", help=_("Break build after unpacking the source archive, checking sha1sum and applying patches"))
         group.add_option("--setup", dest="until", action="store_const", 
-                         const="setup", help=_("break build after running configure step"))
+                         const="setup", help=_("Break build after running configure step"))
         group.add_option("--build", dest="until", action="store_const", 
-                         const="build", help=_("break build after running compile step"))
+                         const="build", help=_("Break build after running compile step"))
         group.add_option("--install", dest="until", action="store_const", 
-                         const="install", help=_("break build after running install step"))
+                         const="install", help=_("Break build after running install step"))
         group.add_option("--package", dest="until", action="store_const", 
                          const="package", help=_("create pisi package"))
         self.parser.add_option_group(group)
@@ -553,11 +553,11 @@ class PackageOp(Command):
     def options(self, group):
         ignoredep_opt(self, group)
         group.add_option("--ignore-comar", action="store_true",
-                     default=False, help=_("bypass comar configuration agent"))
+                     default=False, help=_("Bypass comar configuration agent"))
         group.add_option("--bypass-safety", action="store_true",
-                     default=False, help=_("bypass safety switch"))
+                     default=False, help=_("Bypass safety switch"))
         group.add_option("-n", "--dry-run", action="store_true", default=False,
-                     help = _("do not perform any action, just show what would be done"))
+                     help = _("Do not perform any action, just show what would be done"))
 
     def init(self):
         super(PackageOp, self).init(True)
@@ -796,14 +796,14 @@ Usage: info <package1> <package2> ... <packagen>
     def add_options(self, group):
         group.add_option("-f", "--files", action="store_true",
                                default=False,
-                               help=_("show a list of package files."))
+                               help=_("Show a list of package files."))
         group.add_option("-F", "--files-path", action="store_true",
                                default=False,
-                               help=_("show only paths."))
+                               help=_("Show only paths."))
         group.add_option("-s", "--short", action="store_true",
-                               default=False, help=_("do not show details"))
+                               default=False, help=_("Do not show details"))
         group.add_option("--xml", action="store_true",
-                               default=False, help=_("output in xml format"))
+                               default=False, help=_("Output in xml format"))
 
     def run(self):
 
@@ -955,16 +955,16 @@ everything in a single index file.
 
         group.add_option("-a", "--absolute-urls", action="store_true",
                                default=False,
-                               help=_("store absolute links for indexed files."))
+                               help=_("Store absolute links for indexed files."))
         group.add_option("-o", "--output", action="store",
                                default='pisi-index.xml',
-                               help=_("index output file"))
+                               help=_("Index output file"))
         group.add_option("--skip-sources", action="store_true",
                                default=False,
-                               help=_("do not index pisi spec files."))
+                               help=_("Do not index pisi spec files."))
         group.add_option("--skip-signing", action="store_true",
                                default=False,
-                               help=_("do not sign index."))
+                               help=_("Do not sign index."))
 
         self.parser.add_option_group(group)
 
@@ -1002,11 +1002,11 @@ Usage: list-installed
         group = OptionGroup(self.parser, _("list-installed options"))
 
         group.add_option("-l", "--long", action="store_true",
-                               default=False, help=_("show in long format"))
+                               default=False, help=_("Show in long format"))
         group.add_option("-c", "--component", action="store",
-                               default=None, help=_("list installed packages under given component"))
+                               default=None, help=_("List installed packages under given component"))
         group.add_option("-i", "--install-info", action="store_true",
-                               default=False, help=_("show detailed install info"))
+                               default=False, help=_("Show detailed install info"))
 
         self.parser.add_option_group(group)
 
@@ -1060,7 +1060,7 @@ dirs under /var/lib/pisi
         group = OptionGroup(self.parser, _("rebuild-db options"))
 
         group.add_option("-f", "--files", action="store_true",
-                               default=False, help=_("rebuild files database"))
+                               default=False, help=_("Rebuild files database"))
 
         self.parser.add_option_group(group)
     
@@ -1100,7 +1100,7 @@ If no repository is given, all repositories are updated.
 
         group.add_option("-f", "--force", action="store_true",
                                default=False, 
-                               help=_("update database in any case"))
+                               help=_("Update database in any case"))
 
         self.parser.add_option_group(group)
 
@@ -1141,7 +1141,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
         group = OptionGroup(self.parser, _("add-repo options"))
         group.add_option("--at", action="store",
                                type="int", default=None, 
-                               help=_("add repository at given position (0 is first)"))
+                               help=_("Add repository at given position (0 is first)"))
         self.parser.add_option_group(group)
 
     def run(self):
@@ -1232,11 +1232,11 @@ all repositories.
 
         group = OptionGroup(self.parser, _("list-available options"))
         group.add_option("-l", "--long", action="store_true",
-                               default=False, help=_("show in long format"))
+                               default=False, help=_("Show in long format"))
         group.add_option("-c", "--component", action="store",
-                               default=None, help=_("list available packages under given component"))
+                               default=None, help=_("List available packages under given component"))
         group.add_option("-U", "--uninstalled", action="store_true",
-                               default=False, help=_("show uninstalled packages only"))
+                               default=False, help=_("Show uninstalled packages only"))
         self.parser.add_option_group(group)
 
     def run(self):
@@ -1297,7 +1297,7 @@ repositories.
     def options(self):
         group = OptionGroup(self.parser, _("list-components options"))
         group.add_option("-l", "--long", action="store_true",
-                               default=False, help=_("show in long format"))
+                               default=False, help=_("Show in long format"))
         self.parser.add_option_group(group)
 
     def run(self):
@@ -1336,7 +1336,7 @@ Gives a brief list of sources published in the repositories.
     def options(self):
         group = OptionGroup(self.parser, _("list-sources options"))
         group.add_option("-l", "--long", action="store_true",
-                               default=False, help=_("show in long format"))
+                               default=False, help=_("Show in long format"))
         self.parser.add_option_group(group)
 
     def run(self):
@@ -1376,11 +1376,11 @@ Lists the packages that will be upgraded.
         group = OptionGroup(self.parser, _("list-upgrades options"))
         buildno_opts(self, group)
         group.add_option("-l", "--long", action="store_true",
-                               default=False, help=_("show in long format"))
+                               default=False, help=_("Show in long format"))
         group.add_option("-c", "--component", action="store",
-                               default=None, help=_("list upgradable packages under given component"))
+                               default=None, help=_("List upgradable packages under given component"))
         group.add_option("-i", "--install-info", action="store_true",
-                               default=False, help=_("show detailed install info"))
+                               default=False, help=_("Show detailed install info"))
         self.parser.add_option_group(group)
 
     def run(self):
@@ -1455,11 +1455,11 @@ in summary, description, and package name fields.
         group = OptionGroup(self.parser, _("search options"))
         super(Search, self).add_options(group)
         group.add_option("-L", "--language", action="store",
-                               help=_("set search language"))
+                               help=_("Set search language"))
         group.remove_option("--short")
         group.remove_option("--xml")
         group.add_option("-l", "--long", action="store_true",
-                               default=False, help=_("show details"))
+                               default=False, help=_("Show details"))
         self.parser.add_option_group(group)
 
     def get_lang(self):
@@ -1504,11 +1504,11 @@ Finds the installed package which contains the specified file.
     def options(self):
         group = OptionGroup(self.parser, _("search-file options"))
         group.add_option("-l", "--long", action="store_true",
-                               default=False, help=_("show in long format"))
+                               default=False, help=_("Show in long format"))
         group.add_option("-f", "--fuzzy", action="store_true",
-                               default=False, help=_("fuzzy search"))
+                               default=False, help=_("Fuzzy search"))
         group.add_option("-q", "--quiet", action="store_true",
-                               default=False, help=_("show only package name"))
+                               default=False, help=_("Show only package name"))
         self.parser.add_option_group(group)
 
     
