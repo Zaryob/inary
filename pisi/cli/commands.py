@@ -148,7 +148,7 @@ class Command(object):
         group = OptionGroup(self.parser, _("general options"))
 
         group.add_option("-D", "--destdir", action="store", default = None,
-                     help = _("Change the system root for pisi commands"))
+                     help = _("Change the system root for PiSi commands"))
         group.add_option("-y", "--yes-all", action="store_true",
                      default=False, help = _("Assume yes in all yes/no queries"))
         group.add_option("-u", "--username", action="store")
@@ -473,7 +473,7 @@ to be downloaded from a repository containing sources.
         group.add_option("--install", dest="until", action="store_const", 
                          const="install", help=_("Break build after running install step"))
         group.add_option("--package", dest="until", action="store_const", 
-                         const="package", help=_("create pisi package"))
+                         const="package", help=_("create PiSi package"))
         self.parser.add_option_group(group)
 
     def run(self):
@@ -619,7 +619,7 @@ You may use only package names to specify packages because
 the package upgrade operation is defined only with respect 
 to repositories. If you have specified a package name, it
 should exist in the package repositories. If you just want to
-reinstall a package from a pisi file, use the install command.
+reinstall a package from a PiSi file, use the install command.
 
 You can also specify components instead of package names, which will be
 expanded to package names.
@@ -961,7 +961,7 @@ everything in a single index file.
                                help=_("Index output file"))
         group.add_option("--skip-sources", action="store_true",
                                default=False,
-                               help=_("Do not index pisi spec files."))
+                               help=_("Do not index PiSi spec files."))
         group.add_option("--skip-signing", action="store_true",
                                default=False,
                                help=_("Do not sign index."))
@@ -1389,7 +1389,7 @@ Lists the packages that will be upgraded.
 
         component = ctx.get_option('component')
         if component:
-            #FIXME: pisi api is insufficient to do this
+            #FIXME: PiSi api is insufficient to do this
             from sets import Set as set
             component_pkgs = ctx.componentdb.get_component(component).packages
             upgradable_pkgs = list(set(upgradable_pkgs) & set(component_pkgs))
