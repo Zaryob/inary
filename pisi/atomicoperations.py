@@ -94,6 +94,9 @@ class Install(AtomicOperation):
         self.pkginfo = self.metadata.package
 
     def install(self, ask_reinstall = True):
+        if ctx.get_option('fetch_only'):
+            return
+
         "entry point"
         ctx.ui.status(_('Installing %s, version %s, release %s, build %s') %
                 (self.pkginfo.name, self.pkginfo.version,

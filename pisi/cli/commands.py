@@ -594,6 +594,8 @@ expanded to package names.
                      default=False, help=_("Reinstall already installed packages"))
         group.add_option("--ignore-file-conflicts", action="store_true",
                      default=False, help=_("Ignore file conflicts"))
+        group.add_option("-f", "--fetch-only", action="store_true",
+                     default=False, help=_("Fetch upgrades but do not install."))
         self.parser.add_option_group(group)
 
     def run(self):
