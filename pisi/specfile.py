@@ -266,6 +266,12 @@ class SpecFile(XmlFile):
         overrides the tags from Source. There is a more detailed
         description in documents."""
 
+        #TODO: Description should be mandatory. Remove this crap when repo is ready.
+        #http://liste.pardus.org.tr/gelistirici/2006-September/002332.html
+        if not self.source.description:
+            self.source.description = autoxml.LocalText("Description")
+            self.source.description["en"] = self.source.summary["en"]
+
         tmp = []
         for pkg in self.packages:
             if not pkg.summary:
@@ -280,9 +286,3 @@ class SpecFile(XmlFile):
                 pkg.icon = self.source.icon
             tmp.append(pkg)
         self.packages = tmp
-
-        #TODO: Description should be mandatory. Remove this crap when repo is ready.
-        #http://liste.pardus.org.tr/gelistirici/2006-September/002332.html
-        if not self.source.description:
-            self.source.description = autoxml.LocalText("Description")
-            self.source.description["en"] = self.source.summary["en"]
