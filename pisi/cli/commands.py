@@ -684,7 +684,7 @@ expanded to package names.
             if not match:
                 # match pattern in component names
                 for cmp in fnmatch.filter(ctx.componentdb.list_components(), pattern):
-                    packages = packages - set(ctx.componentdb.get_component(cmp).packages)
+                    packages = packages - set(ctx.componentdb.get_packages(cmp))
 
         return list(packages)
 
@@ -1020,7 +1020,7 @@ Usage: list-installed
         if component:
             #FIXME: pisi api is insufficient to do this
             from sets import Set as set
-            component_pkgs = ctx.componentdb.get_component(component).packages
+            component_pkgs = ctx.componentdb.get_packages(component)
             installed = list(set(installed) & set(component_pkgs))
 
         installed.sort()
@@ -1262,7 +1262,7 @@ all repositories.
 
         component = ctx.get_option('component')
         if component:
-            list = ctx.componentdb.get_component(component, repo).packages
+            list = ctx.componentdb.get_packages(component, repo)
         else:
             list = ctx.packagedb.list_packages(repo)
         installed_list = ctx.installdb.list_installed()
@@ -1393,7 +1393,7 @@ Lists the packages that will be upgraded.
         if component:
             #FIXME: PiSi api is insufficient to do this
             from sets import Set as set
-            component_pkgs = ctx.componentdb.get_component(component).packages
+            component_pkgs = ctx.componentdb.get_packages(component)
             upgradable_pkgs = list(set(upgradable_pkgs) & set(component_pkgs))
 
         if not upgradable_pkgs:
