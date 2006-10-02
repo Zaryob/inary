@@ -73,27 +73,9 @@ class Component(xmlfile.XmlFile):
 
     t_Sources = [ [autoxml.String], autoxml.optional, "Parts/Source"]
 
-    # TODO: this is probably not necessary since we use fully qualified 
-    # module names (like in Java)
-    #t_PartOf = [autoxml.Text, autoxml.mandatory]
-
-#FIXME: recursive declarations do not work!
-#class ComponentTree(xmlfile.XmlFile):
-#    "index representation for the component structure"
-#
-#    __metaclass__ = autoxml.autoxml
-#
-#    tag = "Component"
-#    
-#    t_Name = [autoxml.Text, autoxml.mandatory]    # fully qualified name
-#    #t_Icon = [autoxml.Binary, autoxml.mandatory]
-#    t_Dependencies = [ [autoxml.Text], autoxml.optional, "Component"]
-#    #t_Parts = [ [pisi.component.ComponentTree], autoxml.optional, "Component"]
-
 class ComponentDB(object):
     """a database of components"""
     
-    #FIXME: we might need a database per repo in the future
     def __init__(self):
         self.d = ItemByRepoDB('component')
 
@@ -104,7 +86,6 @@ class ComponentDB(object):
         self.d.destroy()
 
     def has_component(self, name, repo = pisi.itembyrepodb.repos, txn = None):
-        #name = shelve.LockedDBShelf.encodekey(name)
         name = str(name)
         return self.d.has_key(name, repo, txn)
 
@@ -115,7 +96,6 @@ class ComponentDB(object):
             raise Error(_('Component %s not found') % name)
 
     def get_component_repo(self, name, repo=None, txn = None):
-        #name = shelve.LockedDBShelf.encodekey(name)
         try:
             return self.d.get_item_repo(name, repo, txn=txn)
         except pisi.itembyrepodb.NotfoundError, e:
@@ -141,12 +121,41 @@ class ComponentDB(object):
     def list_components(self, repo=None):
         return self.d.list(repo)
 
+    def get_packages(self, component_name, repo=None, txn = None):
+        """returns the given component's and underlying recursive components' packages"""
+
+        packages = []
+        component = self.get_component(component_name, repo, txn)
+        packages.extend(component.packages)
+        for dep in component.dependencies:
+            packages.extend(self.get_packages(dep))
+
+        return packages
+
+    def add_child(self, component, repo, txn = None):
+        """update component tree"""
+        parent_name = ".".join(component.name.split(".")[:-1])
+        if not parent_name: # root component
+            return
+        
+        if self.has_component(parent_name, repo, txn):
+            parent = self.get_component(parent_name, repo, txn)
+        else:
+            parent = Component(name = parent_name)
+
+        if component.name not in parent.dependencies:
+            parent.dependencies.append(component.name)
+            self.d.add_item(parent_name, parent, repo, txn)
+
     def update_component(self, component, repo, txn = None):
         def proc(txn):
             if self.has_component(component.name, repo, txn):
-                # preserve the list of packages
-                component.packages = self.d.get_item(component.name, repo, txn).packages
+                # preserve list of packages and dependencies
+                current = self.d.get_item(component.name, repo, txn)
+                component.packages = current.packages
+                component.dependencies = current.dependencies
             self.d.add_item(component.name, component, repo, txn)
+            self.add_child(component, repo, txn)
         self.d.txn_proc(proc, txn)
 
     def add_package(self, component_name, package, repo, txn = None):
@@ -159,6 +168,7 @@ class ComponentDB(object):
             if not package in component.packages:
                 component.packages.append(package)
             self.d.add_item(component_name, component, repo, txn) # update
+            self.add_child(component, repo, txn)
         self.d.txn_proc(proc, txn)
 
     def remove_package(self, component_name, package, repo = None, txn = None):
