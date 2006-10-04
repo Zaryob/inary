@@ -75,6 +75,8 @@ if __name__ == "__main__":
    
     sys.excepthook = handle_exception
 
+    signal.signal(signal.SIGTERM, exit)
+
     locale.setlocale(locale.LC_ALL, '')
     cli = pisicli.PisiCLI()
     cli.run_command()
