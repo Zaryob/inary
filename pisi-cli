@@ -27,6 +27,10 @@ gettext.textdomain('pisi')
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
+def sig_handler(sig, frame):
+    if sig == signal.SIGTERM:
+        exit()
+
 def exit():
     pisi.api.finalize()
     sys.exit(1)
@@ -75,7 +79,7 @@ if __name__ == "__main__":
    
     sys.excepthook = handle_exception
 
-    signal.signal(signal.SIGTERM, exit)
+    signal.signal(signal.SIGTERM, sig_handler)
 
     locale.setlocale(locale.LC_ALL, '')
     cli = pisicli.PisiCLI()
