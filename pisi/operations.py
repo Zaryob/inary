@@ -245,7 +245,7 @@ def check_conflicts(order, packagedb):
         if not ctx.ui.confirm(_('Remove the following conflicting packages?')):
             raise Error(_("Conflicts remain"))
 
-        if remove(list(C), ignore_dep=True, bypass_safety=True) == False:
+        if remove(list(C), ignore_dep=True, ignore_safety=True) == False:
             raise Error(_("Conflicts remain"))
 
 def expand_components(A):
@@ -272,7 +272,7 @@ def is_upgradable(name, ignore_build = False):
 
 def upgrade_base(A = set()):
     ignore_build = ctx.get_option('ignore_build_no')
-    if not ctx.get_option('bypass_safety'):
+    if not ctx.get_option('ignore_safety'):
         if ctx.componentdb.has_component('system.base'):
             systembase = set(ctx.componentdb.get_union_comp('system.base').packages)
             extra_installs = filter(lambda x: not ctx.installdb.is_installed(x), systembase - A)
@@ -549,7 +549,7 @@ def plan_upgrade(A, ignore_build = False):
         check_conflicts(order, ctx.packagedb)
     return G_f, order
 
-def remove(A, ignore_dep = False, bypass_safety = False):
+def remove(A, ignore_dep = False, ignore_safety = False):
     """remove set A of packages from system (A is a list of package names)"""
     
     A = [str(x) for x in A]
@@ -557,7 +557,7 @@ def remove(A, ignore_dep = False, bypass_safety = False):
     # filter packages that are not installed
     A_0 = A = expand_components(set(A))
 
-    if not ctx.get_option('bypass_safety') and not bypass_safety:
+    if not ctx.get_option('ignore_safety') and not ignore_safety:
         if ctx.componentdb.has_component('system.base'):
             systembase = set(ctx.componentdb.get_union_comp('system.base').packages)
             refused = A.intersection(systembase)

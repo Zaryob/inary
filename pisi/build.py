@@ -406,7 +406,7 @@ class Builder:
 
         build_deps = self.spec.source.buildDependencies
 
-        if not ctx.get_option('bypass_safety'):
+        if not ctx.get_option('ignore_safety'):
             if ctx.componentdb.has_component('system.devel'):
                 build_deps_names = set([x.package for x in build_deps])
                 devel_deps_names = set(ctx.componentdb.get_component('system.devel').packages)

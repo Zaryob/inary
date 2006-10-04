@@ -447,7 +447,7 @@ to be downloaded from a repository containing sources.
         group.add_option("--ignore-action-errors",
                                action="store_true", default=False,
                                help=_("Bypass errors from ActionsAPI"))
-        group.add_option("--bypass-safety", action="store_true",
+        group.add_option("--ignore-safety", action="store_true",
                      default=False, help=_("Bypass safety switch"))
         group.add_option("--ignore-file-conflicts", action="store_true",
                      default=False, help=_("Ignore file conflicts"))
@@ -554,7 +554,7 @@ class PackageOp(Command):
         ignoredep_opt(self, group)
         group.add_option("--ignore-comar", action="store_true",
                      default=False, help=_("Bypass comar configuration agent"))
-        group.add_option("--bypass-safety", action="store_true",
+        group.add_option("--ignore-safety", action="store_true",
                      default=False, help=_("Bypass safety switch"))
         group.add_option("-n", "--dry-run", action="store_true", default=False,
                      help = _("Do not perform any action, just show what would be done"))
