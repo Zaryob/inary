@@ -441,18 +441,11 @@ to be downloaded from a repository containing sources.
         ignoredep_opt(self, group)
         group.add_option("-O", "--output-dir", action="store", default=None,
                                help=_("Output directory for produced packages"))
-        group.add_option("--show-abandoned-files", action="store_true",
-                         default=False,
-                         help=_("Show abandoned files under the install directory after build."))
         group.add_option("--ignore-action-errors",
                                action="store_true", default=False,
                                help=_("Bypass errors from ActionsAPI"))
         group.add_option("--ignore-safety", action="store_true",
                      default=False, help=_("Bypass safety switch"))
-        group.add_option("--ignore-file-conflicts", action="store_true",
-                     default=False, help=_("Ignore file conflicts"))
-        group.add_option("--ignore-comar", action="store_true",
-                               default=False, help=_("Bypass comar configuration agent"))
         group.add_option("--create-static", action="store_true",
                                default=False, help=_("Create a static package with ar files"))
         group.add_option("--no-install", action="store_true",
@@ -525,6 +518,12 @@ You can also give the name of a component.
         
         group = OptionGroup(self.parser, _("emerge options"))
         super(Emerge, self).add_options(group)
+        group.add_option("--ignore-file-conflicts", action="store_true",
+                     default=False, help=_("Ignore file conflicts"))
+        group.add_option("--ignore-package-conflicts", action="store_true",
+                     default=False, help=_("Ignore package conflicts"))
+        group.add_option("--ignore-comar", action="store_true",
+                               default=False, help=_("Bypass comar configuration agent"))
         self.parser.add_option_group(group)
     
     def run(self):
@@ -594,6 +593,8 @@ expanded to package names.
                      default=False, help=_("Reinstall already installed packages"))
         group.add_option("--ignore-file-conflicts", action="store_true",
                      default=False, help=_("Ignore file conflicts"))
+        group.add_option("--ignore-package-conflicts", action="store_true",
+                     default=False, help=_("Ignore package conflicts"))
         group.add_option("-f", "--fetch-only", action="store_true",
                      default=False, help=_("Fetch upgrades but do not install."))
         self.parser.add_option_group(group)
@@ -645,6 +646,8 @@ expanded to package names.
                      default=False, help=_("Do not update repositories"))
         group.add_option("--ignore-file-conflicts", action="store_true",
                      default=False, help=_("Ignore file conflicts"))
+        group.add_option("--ignore-package-conflicts", action="store_true",
+                     default=False, help=_("Ignore package conflicts"))
         group.add_option("-e", "--eager", action="store_true",
                      default=False, help=_("eager upgrades"))
         group.add_option("-f", "--fetch-only", action="store_true",

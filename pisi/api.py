@@ -15,8 +15,6 @@ import os
 import sys
 import logging
 import logging.handlers
-from os.path import exists
-import bsddb3.db as db
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)

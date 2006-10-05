@@ -823,7 +823,7 @@ class Builder:
             ctx.ui.info(_("Done."))
 
         #show the files those are not collected from the install dir
-        if ctx.get_option('show_abandoned_files') or ctx.get_option('debug'):
+        if ctx.get_option('debug'):
             abandoned_files = self.get_abandoned_files()
             if abandoned_files:
                 ctx.ui.warning(_('Abandoned files under the install dir (%s):') % (install_dir))
