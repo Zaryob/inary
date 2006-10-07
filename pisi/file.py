@@ -115,6 +115,7 @@ class File:
 
             if uri.is_remote_file():
                 ctx.ui.info(_("Fetching %s") % uri.get_uri(), verbose=True)
+                ctx.ui.notify(pisi.ui.downloading, name=os.path.basename(uri.get_uri()))
                 fetch_url(uri, transfer_dir, ctx.ui.Progress)
             else:
                 # copy to transfer dir,

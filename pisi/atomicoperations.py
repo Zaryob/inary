@@ -101,7 +101,7 @@ class Install(AtomicOperation):
         ctx.ui.status(_('Installing %s, version %s, release %s, build %s') %
                 (self.pkginfo.name, self.pkginfo.version,
                  self.pkginfo.release, self.pkginfo.build))
-        ctx.ui.notify(pisi.ui.installing, package = self.pkginfo, files = self.files)
+        ctx.ui.notify(pisi.ui.installing, name=self.pkginfo.name)
 
         self.ask_reinstall = ask_reinstall
         self.check_requirements()
