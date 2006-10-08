@@ -71,6 +71,7 @@ class Index(XmlFile):
         urlfile.write(uri) # uri
         urlfile.close()
 
+        ctx.ui.notify(pisi.ui.downloading, name=repo)
         self.read_uri(uri, tmpdir, force)
 
         if not repo:
