@@ -24,6 +24,7 @@ import pisi.actionsapi
 import pisi.actionsapi.get as get
 from pisi.actionsapi.shelltools import system
 from pisi.actionsapi.shelltools import can_access_file
+from pisi.actionsapi.shelltools import export
 
 class ConfigureError(pisi.actionsapi.Error):
     def __init__(self, value=''):
@@ -45,8 +46,13 @@ class InstallError(pisi.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
 
-def configure(parameters = ''):
+def configure(parameters = '', unsermake = False):
     ''' parameters = '--with-nls --with-libusb --with-something-usefull '''
+
+    ''' Check if any package wants to use unsermake as a build system'''
+    if not unsermake:
+        export("UNSERMAKE", "no")
+
     if can_access_file('configure'):
         args = './configure \
                 --prefix=%s \
