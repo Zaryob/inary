@@ -101,15 +101,30 @@ class Index(XmlFile):
                     self.add_distro(os.path.join(root, fn))
 
     def update_db(self, repo, txn = None):
+        # FIXME: updating db takes too much time. So a notify mechanism is used to inform the status
+        # of the operation.
+
+        self.progress = ctx.ui.Progress(len(self.components)+len(self.packages)+len(self.specs))
+        self.processed = 0
+
+        def update_progress():
+            self.processed += 1
+            ctx.ui.notify(pisi.ui.progressed, percent = self.progress.update(self.processed), 
+                          info = _("Updating package database of %s") % repo)
+
+        ctx.ui.notify(pisi.ui.updatingrepo, name = repo)
         ctx.componentdb.remove_repo(repo, txn=txn)
         for comp in self.components:
             ctx.componentdb.update_component(comp, repo, txn)
+            update_progress()
         ctx.packagedb.remove_repo(repo, txn=txn)
         for pkg in self.packages:
             ctx.packagedb.add_package(pkg, repo, txn=txn)
+            update_progress()
         ctx.sourcedb.remove_repo(repo, txn=txn)
         for sf in self.specs:
             ctx.sourcedb.add_spec(sf, repo, txn=txn)
+            update_progress()
 
     def add_package(self, path, repo_uri):
         package = Package(path, 'r')
