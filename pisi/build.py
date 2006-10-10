@@ -357,25 +357,21 @@ class Builder:
 
         return abandoned_files
 
-    def compile_script(self, fname):
-        """Compiles given string to check syntax error in it and sets the actionLocals and actionGlobals"""
+    def compile_action_script(self):
+        """Compiles given actions.py to check syntax error in it and sets the actionLocals and actionGlobals"""
+        fname = util.join_path(self.specdir, ctx.const.actions_file)
         try:
             localSymbols = globalSymbols = {}
             buf = open(fname).read()
             exec compile(buf, "error", "exec") in localSymbols, globalSymbols
         except IOError, e:
-            raise Error(_("Unable to read file (%s): %s") %(fname,e))
+            raise Error(_("Unable to read Actions Script (%s): %s") %(fname,e))
         except SyntaxError, e:
-            raise Error(_("SyntaxError in file (%s): %s") %(fname,e))
+            raise Error(_("SyntaxError in Actions Script (%s): %s") %(fname,e))
 
         self.actionLocals = localSymbols
         self.actionGlobals = globalSymbols
         self.srcDir = self.pkg_src_dir()
-
-    def compile_action_script(self):
-        """Compiles actions.py to check syntax errors"""
-        fname = util.join_path(self.specdir, ctx.const.actions_file)
-        self.compile_script(fname)
 
     def compile_comar_script(self):
         """Compiles comar scripts to check syntax errors"""
@@ -384,7 +380,13 @@ class Builder:
                 fname = util.join_path(ctx.const.comar_dir,
                                      pcomar.script)
 
-                self.compile_script(fname)
+                try:
+                    buf = open(fname).read()
+                    compile(buf, "error", "exec")
+                except IOError, e:
+                    raise Error(_("Unable to read COMAR script (%s): %s") %(fname,e))
+                except SyntaxError, e:
+                    raise Error(_("SyntaxError in COMAR file (%s): %s") %(fname,e))
 
     def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
