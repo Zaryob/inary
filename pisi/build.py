@@ -797,7 +797,6 @@ class Builder:
             for pcomar in package.providesComar:
                 fname = util.join_path(ctx.const.comar_dir,
                                      pcomar.script)
-#                self.compile_comar_script(fname)
                 pkg.add_to_package(fname)
 
             # add xmls and files
