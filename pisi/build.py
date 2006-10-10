@@ -180,6 +180,7 @@ class Builder:
         ctx.ui.status(_("Building PiSi source package: %s") % self.spec.source.name)
         
         self.compile_action_script()
+        self.compile_comar_script()
    
         # check if all patch files exists, if there are missing no need to unpack!
         self.patch_exists()
@@ -356,23 +357,35 @@ class Builder:
 
         return abandoned_files
 
-
-    def compile_action_script(self):
-        """Compiles actions.py and sets the actionLocals and actionGlobals"""
-        scriptfile = util.join_path(self.specdir, ctx.const.actions_file)
+    def compile_script(self, fname):
+        """Compiles given string to check syntax error in it and sets the actionLocals and actionGlobals"""
         try:
             localSymbols = globalSymbols = {}
-            buf = open(scriptfile).read()
+            buf = open(fname).read()
             exec compile(buf, "error", "exec") in localSymbols, globalSymbols
         except IOError, e:
-            raise Error(_("Unable to read Action Script (%s): %s") %(scriptfile,e))
+            raise Error(_("Unable to read file (%s): %s") %(fname,e))
         except SyntaxError, e:
-            raise Error(_("SyntaxError in Action Script (%s): %s") %(scriptfile,e))
+            raise Error(_("SyntaxError in file (%s): %s") %(fname,e))
 
         self.actionLocals = localSymbols
         self.actionGlobals = globalSymbols
         self.srcDir = self.pkg_src_dir()
-        
+
+    def compile_action_script(self):
+        """Compiles actions.py to check syntax errors"""
+        fname = util.join_path(self.specdir, ctx.const.actions_file)
+        self.compile_script(fname)
+
+    def compile_comar_script(self):
+        """Compiles comar scripts to check syntax errors"""
+        for package in self.spec.packages:
+            for pcomar in package.providesComar:
+                fname = util.join_path(ctx.const.comar_dir,
+                                     pcomar.script)
+
+                self.compile_script(fname)
+
     def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
         try:
@@ -784,6 +797,7 @@ class Builder:
             for pcomar in package.providesComar:
                 fname = util.join_path(ctx.const.comar_dir,
                                      pcomar.script)
+#                self.compile_comar_script(fname)
                 pkg.add_to_package(fname)
 
             # add xmls and files
@@ -908,6 +922,7 @@ def build_until(pspec, state):
         pb = Builder.from_name(pspec)
 
     pb.compile_action_script()
+    pb.compile_comar_script()
     
     last = pb.get_state()
     ctx.ui.info("Last state was %s"%last)
