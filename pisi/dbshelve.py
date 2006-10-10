@@ -80,11 +80,7 @@ class DBShelf:
                     retval = proc(autotxn)
                 except db.DBError, e:
                     autotxn.abort()
-                    raise e
-                except Exception, e:
-                    autotxn.abort()
-                    #e.args += tuple(traceback.format_tb(sys.exc_traceback))
-                    raise e
+                    raise pisi.Error, e
                 autotxn.commit()
             else: # execute without transactions
                 retval = proc(None)
