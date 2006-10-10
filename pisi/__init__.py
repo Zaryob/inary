@@ -19,6 +19,7 @@ __filesdbversion__ = "1.0.5"         # yes, this is the real bottleneck
 
 __all__ = [ 'api', 'config', 'packagedb', 'installdb', 'search' ]
 
+# FIXME: Exception shadows builtin Exception. This is no good.
 class Exception(Exception):
     """Class of exceptions that must be caught and handled within PiSi"""
     def __str__(self):
