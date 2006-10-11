@@ -108,7 +108,9 @@ class Index(XmlFile):
 
         def update_progress():
             self.processed += 1
-            ctx.ui.notify(pisi.ui.progressed, percent = self.progress.update(self.processed), 
+            ctx.ui.notify(pisi.ui.progressed, 
+                          operation = "updatingrepo",
+                          percent = self.progress.update(self.processed), 
                           info = _("Updating package database of %s") % repo)
 
         ctx.componentdb.remove_repo(repo, txn=txn)
