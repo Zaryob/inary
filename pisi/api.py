@@ -227,7 +227,7 @@ def configure_pending():
                 m.read(metadata_path)
                 # FIXME: we need a full package info here!
                 pkginfo.name = x
-                ctx.ui.notify(pisi.ui.configuring, package = pkginfo, files = None)
+                ctx.ui.notify(pisi.ui.configuring, name = pkginfo.name)
                 pisi.comariface.post_install(
                     pkginfo.name,
                     m.package.providesComar,

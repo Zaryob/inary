@@ -242,7 +242,7 @@ class Install(AtomicOperation):
         self.config_later = False
         if ctx.comar:
             import pisi.comariface
-            ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
+            ctx.ui.notify(pisi.ui.configuring, name = self.pkginfo.name)
             pisi.comariface.post_install(
                 self.pkginfo.name,
                 self.metadata.package.providesComar,
@@ -257,7 +257,7 @@ class Install(AtomicOperation):
     def extract_install(self):
         "unzip package in place"
 
-        ctx.ui.notify(pisi.ui.extracting, package = self.pkginfo, files = self.files)
+        ctx.ui.notify(pisi.ui.extracting, name = self.pkginfo.name)
 
         config_changed = []
         def check_config_changed(config):

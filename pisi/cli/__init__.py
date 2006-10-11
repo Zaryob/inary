@@ -149,7 +149,7 @@ class CLI(UI):
         elif event == ui.configured:
             msg = _('Configured %s') % keywords['package'].name
         elif event == ui.extracting:
-            msg = _('Extracting the files of %s') % keywords['package'].name
+            msg = _('Extracting the files of %s') % keywords['name']
         if event == ui.progressed:
             self.output("\r%s (%d%%)" % (keywords['info'], keywords['percent']))
             if keywords['percent'] == 100:
