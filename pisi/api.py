@@ -362,6 +362,7 @@ def list_repos():
 
 def update_repo(repo, force=False):
     ctx.ui.info(_('* Updating repository: %s') % repo)
+    ctx.ui.notify(pisi.ui.updatingrepo, name = repo)
     index = Index()
     if ctx.repodb.has_repo(repo):
         repouri = ctx.repodb.get_repo(repo).indexuri.get_uri()

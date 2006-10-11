@@ -71,7 +71,6 @@ class Index(XmlFile):
         urlfile.write(uri) # uri
         urlfile.close()
 
-        ctx.ui.notify(pisi.ui.downloading, name=repo)
         self.read_uri(uri, tmpdir, force)
 
         if not repo:
@@ -112,7 +111,6 @@ class Index(XmlFile):
             ctx.ui.notify(pisi.ui.progressed, percent = self.progress.update(self.processed), 
                           info = _("Updating package database of %s") % repo)
 
-        ctx.ui.notify(pisi.ui.updatingrepo, name = repo)
         ctx.componentdb.remove_repo(repo, txn=txn)
         for comp in self.components:
             ctx.componentdb.update_component(comp, repo, txn)
