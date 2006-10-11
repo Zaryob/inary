@@ -104,7 +104,7 @@ class Index(XmlFile):
         # FIXME: updating db takes too much time. So a notify mechanism is used to inform the status
         # of the operation.
 
-        self.progress = ctx.ui.Progress(len(self.components)+len(self.packages)+len(self.specs))
+        self.progress = ctx.ui.Progress(len(self.packages)+len(self.specs))
         self.processed = 0
 
         def update_progress():
@@ -116,7 +116,6 @@ class Index(XmlFile):
         ctx.componentdb.remove_repo(repo, txn=txn)
         for comp in self.components:
             ctx.componentdb.update_component(comp, repo, txn)
-            update_progress()
         ctx.packagedb.remove_repo(repo, txn=txn)
         for pkg in self.packages:
             ctx.packagedb.add_package(pkg, repo, txn=txn)
