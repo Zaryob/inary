@@ -377,7 +377,7 @@ class Builder:
         """Compiles comar scripts to check syntax errors"""
         for package in self.spec.packages:
             for pcomar in package.providesComar:
-                fname = util.join_path(ctx.const.comar_dir,
+                fname = util.join_path(self.specdir, ctx.const.comar_dir,
                                      pcomar.script)
 
                 try:
