@@ -66,11 +66,11 @@ class Install(install):
         for d in defaults:
             section_name = d[0][:-len('Defaults')].lower()
             pisiconf.write("[%s]\n" % section_name)
-            
+
             section_members = [m for m in inspect.getmembers(d[1]) \
                                if not m[0].startswith('__') \
                                and not m[0].endswith('__')]
-        
+
             for member in section_members:
                 pisiconf.write("# %s = %s\n" % (member[0], member[1]))
 
@@ -79,8 +79,8 @@ class Install(install):
 
 setup(name="pisi",
     version= pisi.__version__,
-    description="PISI (Packages Installed Successfully as Intended)",
-    long_description="PISI is the package management system of Pardus Linux.",
+    description="PiSi (Packages Installed Successfully as Intended)",
+    long_description="PiSi is the package management system of Pardus Linux.",
     license="GNU GPL2",
     author="Pardus Developers",
     author_email="pisi@pardus.org.tr",
