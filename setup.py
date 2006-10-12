@@ -87,7 +87,7 @@ setup(name="pisi",
     url="http://www.pardus.org.tr/eng/pisi/",
     package_dir = {'': ''},
     packages = ['pisi', 'pisi.cli', 'pisi.actionsapi', 'pisi.pxml', 'pisi.search', 'pisi.scenarioapi'],
-    scripts = ['pisi-cli', 'scripts/lspisi', 'scripts/unpisi', 'scripts/check-newconfigs.py'],
+    scripts = ['pisi-cli', 'scripts/lspisi', 'scripts/unpisi', 'scripts/check-newconfigs.py', 'scripts/revdep-rebuild'],
     cmdclass = {'install' : Install}
     )
 
