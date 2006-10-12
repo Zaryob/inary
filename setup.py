@@ -87,12 +87,8 @@ setup(name="pisi",
     url="http://www.pardus.org.tr/eng/pisi/",
     package_dir = {'': ''},
     packages = ['pisi', 'pisi.cli', 'pisi.actionsapi', 'pisi.pxml', 'pisi.search', 'pisi.scenarioapi'],
-    scripts = ['pisi-cli', 'scripts/repostats.py', 'scripts/find-lib-deps.py', 
-               'scripts/lspisi', 'scripts/unpisi', 'scripts/check-newconfigs.py',
-               'scripts/calc-build-order.py', 'scripts/pisish'],
-    cmdclass = {
-        'install' : Install
-    }
+    scripts = ['pisi-cli', 'scripts/find-lib-deps.py', 'scripts/lspisi', 'scripts/unpisi', 'scripts/check-newconfigs.py'],
+    cmdclass = {'install' : Install}
     )
 
 # the below stuff is really nice but we already have a version
