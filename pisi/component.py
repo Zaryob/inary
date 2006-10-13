@@ -110,7 +110,7 @@ class ComponentDB(object):
             srcs = set()
             for repostr in self.d.order(repo = repo):
                 if s.has_key(repostr):
-                    pkgs |= set(s[repostr].packages)
+                    pkgs |= set(self.get_packages(name, True, repo, txn))
                     srcs |= set(s[repostr].sources)
             comp = self.get_component(name)
             comp.packages = list(pkgs)
