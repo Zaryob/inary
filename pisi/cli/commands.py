@@ -1265,7 +1265,7 @@ all repositories.
 
         component = ctx.get_option('component')
         if component:
-            list = ctx.componentdb.get_packages(component, repo)
+            list = ctx.componentdb.get_packages(component, repo=repo)
         else:
             list = ctx.packagedb.list_packages(repo)
         installed_list = ctx.installdb.list_installed()

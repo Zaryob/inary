@@ -121,11 +121,16 @@ class ComponentDB(object):
     def list_components(self, repo=None):
         return self.d.list(repo)
 
-    def get_packages(self, component_name, repo=None, txn = None):
+    # Returns the package list of the component
+    # walk: walks through the underlying  components' packages
+    def get_packages(self, component_name, walk=False, repo=None, txn = None):
         """returns the given component's and underlying recursive components' packages"""
 
-        packages = []
         component = self.get_component(component_name, repo, txn)
+        if not walk:
+            return component.packages            
+
+        packages = []
         packages.extend(component.packages)
         for dep in component.dependencies:
             packages.extend(self.get_packages(dep))
