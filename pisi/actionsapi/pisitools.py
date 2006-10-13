@@ -42,7 +42,7 @@ def dobin(sourceFile, destinationDirectory = '/usr/bin'):
  
 def dodir(destinationDirectory):
     '''creates a directory tree'''
-    makedirs(join_path(get.installDIR(), destinationDirectory))
+    makedirs(join_path(destinationDirectory))
 
 def dodoc(*sourceFiles):
     '''inserts the files in the list of files into /usr/share/doc/PACKAGE''' 
