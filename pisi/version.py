@@ -14,9 +14,12 @@
 
 import re
 import string
+import exceptions
 
+import pisi
 import pisi.util as util
 
+maxdashes = 2
 
 # Basic rule is:
 # p > (no suffix) > m > rc > pre > beta > alpha
@@ -37,6 +40,9 @@ def has_keyword(versionitem):
 
     return False
 
+class VersionException(pisi.Exception):
+    def __init__(self, str):
+        pisi.Exception.__init__(self, str)
 
 class VersionItem:
     _keyword = "NOKEY"
@@ -129,12 +135,12 @@ class Version:
     def __init__(self, verstring):
         # PiSi version policy does not allow "-" in version strings.
         # They are special and used for build and release no separation.
-        if verstring.count("-") == 0:
-            (version, self.release, self.build) = (verstring, 0, 0)
-        elif verstring.count("-") == 1:
-            (version, self.release), self.build = (verstring.split("-"), 0)
-        else:
-            (version, self.release, self.build) = verstring.split("-")
+        if verstring.count("-") > maxdashes:
+            raise VersionException("%s is not a valid PiSi version format" % verstring)
+        
+        verchunks = verstring.split("-")
+        verchunks.extend("0" * (maxdashes - verstring.count("-")))
+        (version, release, build) = verchunks
 
         self.comps = []
         for i in util.multisplit(version,'._'):
@@ -151,6 +157,8 @@ class Version:
                 self.comps.append(VersionItem(i))
 
         self.verstring = verstring
+        self.release = VersionItem(release)
+        self.build = VersionItem(build)
 
     def string(self):
         return self.verstring
