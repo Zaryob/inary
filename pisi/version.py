@@ -127,8 +127,17 @@ class VersionItem:
 class Version:
 
     def __init__(self, verstring):
+        # PiSi version policy does not allow "-" in version strings.
+        # They are special and used for build and release no separation.
+        if verstring.count("-") == 0:
+            (version, self.release, self.build) = (verstring, 0, 0)
+        elif verstring.count("-") == 1:
+            (version, self.release), self.build = (verstring.split("-"), 0)
+        else:
+            (version, self.release, self.build) = verstring.split("-")
+
         self.comps = []
-        for i in util.multisplit(verstring,'.-_'):
+        for i in util.multisplit(version,'._'):
             # some version strings can contain ascii chars at the
             # back. As an example: 2.11a
             # We split '11a' as two items like '11' and 'a'
@@ -146,7 +155,7 @@ class Version:
     def string(self):
         return self.verstring
 
-    def compare(self, rhs):
+    def compare(self, ver):
         """this comparison routine is essentially a comparison routine
         for two rationals in (0,1) interval. we compare two sequences
         of digits one by one. We start with the leftmost digit
@@ -155,13 +164,21 @@ class Version:
         The result is, 0 if two are equal, -1 if self < rhs, and +1
         if self>rhs"""
         lhs = self.comps
-        rhs = rhs.comps
+        rhs = ver.comps
         # pad the short version string with zeros
         if len(lhs) < len(rhs):
             lhs.extend( [VersionItem('0')] * (len(rhs) - len(lhs)) )
         elif len(lhs) > len(rhs):            
             rhs.extend( [VersionItem('0')] * (len(lhs) - len(rhs)) )
-        # now let's iterate from left to right
+        # now let's iterate from left to right in version items
+        for (litem, ritem) in zip(lhs, rhs):
+            if litem < ritem:
+                return -1
+            elif litem > ritem:
+                return +1
+        # now let's compare release and build
+        lhs = (self.release, self.build)
+        rhs = (ver.release, ver.build)
         for (litem, ritem) in zip(lhs, rhs):
             if litem < ritem:
                 return -1
