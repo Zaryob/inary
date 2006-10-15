@@ -35,6 +35,8 @@ import pisi.component as component
 from pisi.index import Index
 import pisi.cli
 from pisi.operations import install, remove, upgrade, emerge
+from pisi.operations import plan_install_pkg_names as plan_install
+from pisi.operations import plan_remove, plan_upgrade, upgrade_base
 from pisi.build import build_until
 from pisi.atomicoperations import resurrect_package, build
 from pisi.metadata import MetaData
@@ -190,6 +192,31 @@ def package_graph(A, repo = pisi.itembyrepodb.installed, ignore_installed = Fals
                 G_f.add_dep(x, dep)
         B = Bp
     return G_f
+
+def generate_install_order(A):
+    # returns the install order of the given install package list with any extra
+    # dependency that is also going to be installed
+    G_f, order = plan_install(A)
+    return order
+
+def generate_remove_order(A):
+    # returns the remove order of the given removal package list with any extra
+    # reverse dependency that is also going to be removed
+    G_f, order = plan_remove(A)
+    return order
+
+def generate_upgrade_order(A):
+    # returns the upgrade order of the given upgrade package list with any needed extra
+    # dependency
+    G_f, order = plan_upgrade(A)
+    return order
+
+def generate_base_upgrade(A):
+    # all the packages of the system.base must be installed on the system.
+    # method returns the currently needed system.base component install and 
+    # upgrade needs
+    base = upgrade_base(A)
+    return list(base)
 
 def configure_pending():
     # start with pending packages
