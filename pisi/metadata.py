@@ -72,7 +72,7 @@ class MetaData(xmlfile.XmlFile):
     t_Package = [ Package, autoxml.mandatory]
     #t_History = [ [Update], autoxml.mandatory]
 
-    def from_spec(self, src, pkg):
+    def from_spec(self, src, pkg, history):
         # this just copies fields, it doesn't fix every necessary field
         self.source.name = src.name
         self.source.homepage = src.homepage
@@ -82,6 +82,8 @@ class MetaData(xmlfile.XmlFile):
         self.package.summary = pkg.summary
         self.package.description = pkg.description
         self.package.icon = pkg.icon
+        # merge pkg.isA with src.isA
+        pkg.isA.extend(src.isA)
         self.package.isA = pkg.isA
         self.package.partOf = pkg.partOf
         self.package.license = pkg.license
@@ -89,7 +91,7 @@ class MetaData(xmlfile.XmlFile):
         self.package.componentDependencies = pkg.componentDependencies
         self.package.files = pkg.files
         # FIXME: no need to copy full history with comments
-        self.package.history = src.history
+        self.package.history = history
         self.package.conflicts = pkg.conflicts
         self.package.providesComar = pkg.providesComar
         #self.package.requiresComar = pkg.requiresComar

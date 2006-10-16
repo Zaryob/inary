@@ -151,7 +151,7 @@ class Builder:
     def pkg_dir(self):
         "package build directory"
         packageDir = self.spec.source.name + '-' + \
-                     self.spec.source.version + '-' + self.spec.source.release
+                     self.spec.getSourceVersion() + '-' + self.spec.getSourceRelease()
         return util.join_path(ctx.config.dest_dir(), ctx.config.values.dirs.tmp_dir,
                      packageDir)
    
@@ -212,8 +212,8 @@ class Builder:
             "WORK_DIR": self.pkg_work_dir(),
             "INSTALL_DIR": self.pkg_install_dir(),
             "SRC_NAME": self.spec.source.name,
-            "SRC_VERSION": self.spec.source.version,
-            "SRC_RELEASE": self.spec.source.release
+            "SRC_VERSION": self.spec.getSourceVersion(),
+            "SRC_RELEASE": self.spec.getSourceRelease()
             }
         os.environ.update(env)
 
@@ -297,7 +297,6 @@ class Builder:
             comp.read(path)
             ctx.ui.info(_('Source is part of %s component') % comp.name)
             self.spec.source.partOf = comp.name
-            self.spec.override_tags()
 
     def fetch_source_archive(self):
         ctx.ui.info(_("Fetching source from: %s") % self.spec.source.archive.uri)
@@ -393,7 +392,7 @@ class Builder:
         try:
             workdir = self.actionGlobals['WorkDir']
         except KeyError:
-            workdir = self.spec.source.name + "-" + self.spec.source.version
+            workdir = self.spec.source.name + "-" + self.spec.getSourceVersion()
                     
         return util.join_path(self.pkg_work_dir(), workdir)
 
@@ -559,7 +558,7 @@ class Builder:
         metadata.xml is composed of the information from specfile plus
         some additional information."""
         metadata = MetaData()
-        metadata.from_spec(self.spec.source, package)
+        metadata.from_spec(self.spec.source, package, self.spec.history)
 
         metadata.package.distribution = ctx.config.values.general.distribution
         metadata.package.distributionRelease = ctx.config.values.general.distribution_release
@@ -747,6 +746,29 @@ class Builder:
         self.old_packages = []
 
         for package in self.spec.packages:
+
+            # removing "farce" in specfile.py:SpecFile.override_tags
+            # this block of code came here... SpecFile should never
+            # ever ruin the generated PSPEC file. If build process
+            # needs this, we should do it in here... (bug: #3773)
+            if not package.summary:
+                package.summary = self.spec.source.summary
+            if not package.description:
+                # TODO: remove this if statement with the part in
+                # specfile.py:SpecFile
+                if not self.spec.source.description:
+                    self.spec.dirtyWorkAround()
+
+                package.description = self.spec.source.description
+            if not package.partOf:
+                package.partOf = self.spec.source.partOf
+            if not package.license:
+                package.license = self.spec.source.license
+            if not package.icon:
+                package.icon = self.spec.source.icon
+
+
+
             old_package_name = None
             # store additional files
             c = os.getcwd()
@@ -781,8 +803,8 @@ class Builder:
 
             # Calculate new and oldpackage names for buildfarm
             name =  util.package_name(package.name,
-                                     self.spec.source.version,
-                                     self.spec.source.release,
+                                     self.spec.getSourceVersion(),
+                                     self.spec.getSourceRelease(),
                                      self.metadata.package.build)
 
             outdir = ctx.get_option('output_dir')

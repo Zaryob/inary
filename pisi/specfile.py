@@ -232,57 +232,14 @@ class SpecFile(XmlFile):
     t_History = [ [Update], autoxml.mandatory]
     t_Components = [ [component.Component], autoxml.optional, "Component"]
 
-    def read_hook(self, errs):
-        """Read PSPEC file"""
-        self.merge_tags()
-        self.override_tags()
+    def getSourceVersion(self):
+        return self.history[0].version
 
-    def merge_tags(self):
-        """Merge tags from Source in Packages. Some tags in Packages merged
-        with the tags from Source. There is a more detailed
-        description in documents."""
+    def getSourceRelease(self):
+        return self.history[0].release
 
-        # FIXME: copy only needed information
-        # no need to keep full history with comments in metadata.xml
-        self.source.history = self.history
-
-        # To avoid tag duplication in PSPEC we need to get 
-        # the last version and release information
-        # from the most recent History/Update.
-        if not self.source.version:
-            self.source.version = self.history[0].version
-        if not self.source.release:
-            self.source.release = self.history[0].release
-
-        tmp = []
-        for pkg in self.packages:
-            pkg.isA.extend(self.source.isA)
-            pkg.history = self.history
-            tmp.append(pkg)
-        self.packages = tmp
-
-    def override_tags(self):
-        """Override tags from Source in Packages. Some tags in Packages
-        overrides the tags from Source. There is a more detailed
-        description in documents."""
-
+    def dirtyWorkAround(self):
         #TODO: Description should be mandatory. Remove this crap when repo is ready.
         #http://liste.pardus.org.tr/gelistirici/2006-September/002332.html
-        if not self.source.description:
-            self.source.description = autoxml.LocalText("Description")
-            self.source.description["en"] = self.source.summary["en"]
-
-        tmp = []
-        for pkg in self.packages:
-            if not pkg.summary:
-                pkg.summary = self.source.summary
-            if not pkg.description:
-                pkg.description = self.source.description
-            if not pkg.partOf:
-                pkg.partOf = self.source.partOf
-            if not pkg.license:
-                pkg.license = self.source.license
-            if not pkg.icon:
-                pkg.icon = self.source.icon
-            tmp.append(pkg)
-        self.packages = tmp
+        self.source.description = autoxml.LocalText("Description")
+        self.source.description["en"] = self.source.summary["en"]
