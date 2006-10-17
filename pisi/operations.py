@@ -348,7 +348,7 @@ def install_pkg_names(A, reinstall = False):
     if 'pisi' in order and pisi_installed:
         upgrade_pisi()
 
-def plan_install_pkg_names(A):
+def plan_install_pkg_names(A, ignore_conflicts = False):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
@@ -376,7 +376,7 @@ def plan_install_pkg_names(A):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
-    if not ctx.get_option('ignore_package_conflicts'):
+    if not ctx.get_option('ignore_package_conflicts') and not ignore_conflicts:
         check_conflicts(order, ctx.packagedb)
     return G_f, order
 
@@ -478,7 +478,7 @@ def upgrade_pkg_names(A = []):
     if 'pisi' in order:
         upgrade_pisi()
 
-def plan_upgrade(A, ignore_build = False):
+def plan_upgrade(A, ignore_build = False, ignore_conflicts = False):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
@@ -545,7 +545,7 @@ def plan_upgrade(A, ignore_build = False):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
-    if not ctx.get_option('ignore_package_conflicts'):
+    if not ctx.get_option('ignore_package_conflicts') and not ignore_conflicts:
         check_conflicts(order, ctx.packagedb)
     return G_f, order
 

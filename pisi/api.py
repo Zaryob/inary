@@ -202,13 +202,13 @@ def generate_install_order(A):
 def generate_remove_order(A):
     # returns the remove order of the given removal package list with any extra
     # reverse dependency that is also going to be removed
-    G_f, order = plan_remove(A)
+    G_f, order = plan_remove(A, ignore_conflicts = True)
     return order
 
 def generate_upgrade_order(A):
     # returns the upgrade order of the given upgrade package list with any needed extra
     # dependency
-    G_f, order = plan_upgrade(A)
+    G_f, order = plan_upgrade(A, ignore_conflicts = True)
     return order
 
 def generate_base_upgrade(A):
