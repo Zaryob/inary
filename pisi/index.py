@@ -129,6 +129,7 @@ class Index(XmlFile):
         package = Package(path, 'r')
         md = package.get_metadata()
         md.package.packageSize = os.path.getsize(path)
+        md.package.packageHash = util.sha1_file(path)
         if ctx.config.options and ctx.config.options.absolute_urls:
             md.package.packageURI = os.path.realpath(path)
         else:                           # create relative path by default

@@ -43,6 +43,7 @@ class Package(specfile.Package):
     t_Architecture = [ autoxml.String, autoxml.mandatory]
     t_InstalledSize = [ autoxml.Long, autoxml.mandatory]
     t_PackageSize = [ autoxml.Long, autoxml.optional]
+    t_PackageHash = [ autoxml.String, autoxml.optional, "SHA1Sum" ]
     t_PackageURI = [ autoxml.String, autoxml.optional]
     t_PackageFormat = [ autoxml.String, autoxml.optional]
 
