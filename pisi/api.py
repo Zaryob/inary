@@ -196,13 +196,13 @@ def package_graph(A, repo = pisi.itembyrepodb.installed, ignore_installed = Fals
 def generate_install_order(A):
     # returns the install order of the given install package list with any extra
     # dependency that is also going to be installed
-    G_f, order = plan_install(A)
+    G_f, order = plan_install(A, ignore_conflicts = True)
     return order
 
 def generate_remove_order(A):
     # returns the remove order of the given removal package list with any extra
     # reverse dependency that is also going to be removed
-    G_f, order = plan_remove(A, ignore_conflicts = True)
+    G_f, order = plan_remove(A)
     return order
 
 def generate_upgrade_order(A):
