@@ -136,7 +136,7 @@ class CLI(UI):
                  ka['rate'], ka['symbol'], ka['eta'])
             self.output(out)
         else:
-            self.output("\r%s (%d%%)" % (keywords['info'], percent))
+            self.output("\r%s (%d%%)" % (ka['info'], percent))
 
         if percent == 100:
             self.output(colorize(_(' [complete]\n'), 'gray'))
