@@ -126,7 +126,7 @@ class CLI(UI):
 
     def display_progress(self, operation, percent, info="", **ka):
         """ display progress of any operation """
-
+        print operation
         if operation == "removing":
             return
         elif operation == "fetching":
@@ -136,7 +136,7 @@ class CLI(UI):
                  ka['rate'], ka['symbol'], ka['eta'])
             self.output(out)
         else:
-            self.output("\r%s (%d%%)" % (ka['info'], percent))
+            self.output("\r%s (%d%%)" % (info, percent))
 
         if percent == 100:
             self.output(colorize(_(' [complete]\n'), 'gray'))
