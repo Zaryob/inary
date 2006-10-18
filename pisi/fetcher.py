@@ -138,8 +138,9 @@ class Fetcher:
                 if p.update(downloaded_size):
                     self.percent = p.percent
                     if not self.complete:
-                        ctx.ui.display_progress(filename = self.url.filename(),
+                        ctx.ui.display_progress(operation = "fetching",
                                                 percent = self.percent,
+                                                filename = self.url.filename(),
                                                 total_size = total_size,
                                                 downloaded_size = downloaded_size,
                                                 rate = self.rate,

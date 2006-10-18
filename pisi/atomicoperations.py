@@ -423,10 +423,9 @@ class Remove(AtomicOperation):
         for fileinfo in self.files.list:
             self.remove_file(fileinfo)
             removed += 1
-            ctx.ui.notify(pisi.ui.progressed, 
-                          operation = "removing", 
-                          percent = progress.update(removed), 
-                          info = _("Removing package %s") % self.package_name)
+            ctx.ui.display_progress(operation = "removing", 
+                                    percent = progress.update(removed), 
+                                    info = _("Removing package %s") % self.package_name)
 
         txn = ctx.dbenv.txn_begin()
         try:

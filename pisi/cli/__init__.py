@@ -123,14 +123,22 @@ class CLI(UI):
                 return True
 
             return False
-            
-    def display_progress(self, **ka):
-        totalsize = '%.1f %s' % pisi.util.human_readable_size(ka['total_size']) 
-        out = '\r%-30.30s (%s)%3d%% %9.2f %s [%s]' % \
-            (ka['filename'], totalsize, ka['percent'], 
-             ka['rate'], ka['symbol'], ka['eta'])
-        self.output(out)
-        if ka['percent'] == 100:
+
+    def display_progress(self, operation, percent, info="", **ka):
+        """ display progress of any operation """
+
+        if operation == "removing":
+            return
+        elif operation == "fetching":
+            totalsize = '%.1f %s' % pisi.util.human_readable_size(ka['total_size']) 
+            out = '\r%-30.30s (%s)%3d%% %9.2f %s [%s]' % \
+                (ka['filename'], totalsize, percent,
+                 ka['rate'], ka['symbol'], ka['eta'])
+            self.output(out)
+        else:
+            self.output("\r%s (%d%%)" % (keywords['info'], percent))
+
+        if percent == 100:
             self.output(colorize(_(' [complete]\n'), 'gray'))
 
     def status(self, msg = None):
@@ -150,11 +158,6 @@ class CLI(UI):
             msg = _('Configured %s') % keywords['package'].name
         elif event == ui.extracting:
             msg = _('Extracting the files of %s') % keywords['name']
-        if event == ui.progressed:
-            self.output("\r%s (%d%%)" % (keywords['info'], keywords['percent']))
-            if keywords['percent'] == 100:
-                self.output(colorize(_(' [complete]\n'), 'gray'))
-            msg = None
         else:
             msg = None
         if msg:
