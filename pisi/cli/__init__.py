@@ -126,7 +126,6 @@ class CLI(UI):
 
     def display_progress(self, operation, percent, info="", **ka):
         """ display progress of any operation """
-        print operation
         if operation == "removing":
             return
         elif operation == "fetching":
