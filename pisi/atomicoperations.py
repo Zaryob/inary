@@ -93,7 +93,7 @@ class Install(AtomicOperation):
         self.files = self.package.files
         self.pkginfo = self.metadata.package
 
-        ctx.ui.notify(pisi.ui.installing, name=self.pkginfo.name)
+        ctx.ui.notify(pisi.ui.installing, package=self.pkginfo, files=self.files)
 
     def install(self, ask_reinstall = True):
         if ctx.get_option('fetch_only'):
@@ -242,7 +242,7 @@ class Install(AtomicOperation):
         self.config_later = False
         if ctx.comar:
             import pisi.comariface
-            ctx.ui.notify(pisi.ui.configuring, name = self.pkginfo.name)
+            ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
             pisi.comariface.post_install(
                 self.pkginfo.name,
                 self.metadata.package.providesComar,
@@ -257,7 +257,7 @@ class Install(AtomicOperation):
     def extract_install(self):
         "unzip package in place"
 
-        ctx.ui.notify(pisi.ui.extracting, name = self.pkginfo.name)
+        ctx.ui.notify(pisi.ui.extracting, package = self.pkginfo, files = self.files)
 
         config_changed = []
         def check_config_changed(config):
@@ -405,7 +405,7 @@ class Remove(AtomicOperation):
             ctx.ui.warning(_('File list could not be read for package %s, continuing removal.') % package_name)
             self.files = Files()
 
-        ctx.ui.notify(pisi.ui.removing, name=self.package_name)
+        ctx.ui.notify(pisi.ui.removing, package = self.package, files = self.files)
 
     def run(self):
         """Remove a single package"""

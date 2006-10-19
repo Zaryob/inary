@@ -156,7 +156,7 @@ class CLI(UI):
         elif event == ui.configured:
             msg = _('Configured %s') % keywords['package'].name
         elif event == ui.extracting:
-            msg = _('Extracting the files of %s') % keywords['name']
+            msg = _('Extracting the files of %s') % keywords['package'].name
         else:
             msg = None
         if msg:
