@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pisi\n"
-"POT-Creation-Date: 2006-10-17 16:46+EEST\n"
+"POT-Creation-Date: 2006-10-19 10:01+EEST\n"
 "PO-Revision-Date: 2006-09-09 06:53+0300\n"
 "Last-Translator: Willem Gielen <w.gielen@gmail.com>\n"
 "Language-Team: Nederlands <en@li.org>\n"
@@ -631,7 +631,7 @@ msgstr "* '%s' genaamd repo herstellen... "
 msgid "Input/Output error while reading %s: %s"
 msgstr "I/O-fout tijdens lezen van %s: %s"
 
-#: pisi/api.py:438 pisi/atomicoperations.py:572
+#: pisi/api.py:438 pisi/atomicoperations.py:571
 msgid "OK."
 msgstr "OK."
 
@@ -738,7 +738,7 @@ msgstr ""
 "Bestandslijst van pakket %s kon niet gelezen worden, verwijderen wordt "
 "voortgezet."
 
-#: pisi/atomicoperations.py:413 pisi/atomicoperations.py:429
+#: pisi/atomicoperations.py:413 pisi/atomicoperations.py:428
 msgid "Removing package %s"
 msgstr "Pakket %s wordt verwijderd"
 
@@ -746,31 +746,32 @@ msgstr "Pakket %s wordt verwijderd"
 msgid "Trying to remove nonexistent package "
 msgstr "Probeert niet-bestaand pakket te verwijderen "
 
-#: pisi/atomicoperations.py:461
+#: pisi/atomicoperations.py:460
 msgid "Not removing conflicted file : %s"
 msgstr "Dit conflicterend bestand wordt niet verwijderd: %s"
 
-#: pisi/atomicoperations.py:481
-msgid "Not removing non-file, non-link %s"
-msgstr "Dit/deze niet-bestand, niet-koppeling wordt niet verwijderd: %s"
+#: pisi/atomicoperations.py:480
+msgid ""
+"Installed file %s is not exists on system [Probably you manually deleted]"
+msgstr ""
 
-#: pisi/atomicoperations.py:542
+#: pisi/atomicoperations.py:541
 msgid "Metadata XML '%s' cannot be found"
 msgstr "Metadata-XML '%s' is niet gevonden"
 
-#: pisi/atomicoperations.py:550
+#: pisi/atomicoperations.py:549
 msgid "MetaData format wrong (%s)"
 msgstr "Onjuiste opmaak van Metadata (%s)"
 
-#: pisi/atomicoperations.py:552
+#: pisi/atomicoperations.py:551
 msgid "* Adding '%s' to db... "
 msgstr "* '%s' toevoegen aan db... "
 
-#: pisi/atomicoperations.py:558
+#: pisi/atomicoperations.py:557
 msgid "Files XML '%s' cannot be found"
 msgstr "XML-bestanden '%s' zijn niet gevonden"
 
-#: pisi/atomicoperations.py:563 pisi/package.py:137
+#: pisi/atomicoperations.py:562 pisi/package.py:137
 msgid "Invalid %s"
 msgstr "Onjuiste %s"
 
@@ -992,28 +993,28 @@ msgstr "Fout: "
 msgid " (yes/no)"
 msgstr " (ja/nee)"
 
-#: pisi/cli/__init__.py:134 pisi/cli/__init__.py:156
+#: pisi/cli/__init__.py:141
 msgid " [complete]\n"
 msgstr " [compleet]\n"
 
-#: pisi/cli/__init__.py:144
+#: pisi/cli/__init__.py:151
 msgid "Installed %s"
 msgstr "%s geïnstalleerd"
 
-#: pisi/cli/__init__.py:146
+#: pisi/cli/__init__.py:153
 msgid "Removed %s"
 msgstr "%s verwijderd"
 
-#: pisi/cli/__init__.py:148
+#: pisi/cli/__init__.py:155
 msgid "Upgraded %s"
 msgstr "%s opgewaardeerd"
 
 # pisi/actionsapi/autotools.py:75 :85
-#: pisi/cli/__init__.py:150
+#: pisi/cli/__init__.py:157
 msgid "Configured %s"
 msgstr "%s ingesteld"
 
-#: pisi/cli/__init__.py:152
+#: pisi/cli/__init__.py:159
 msgid "Extracting the files of %s"
 msgstr "Bestanden van %s uitpakken"
 
@@ -2236,31 +2237,31 @@ msgstr ""
 "Probleem plaatsgevonden. Controleer het archiefadres en/of de "
 "toegangsrechten opnieuw."
 
-#: pisi/fetcher.py:157
+#: pisi/fetcher.py:158
 msgid "No such file or no permission to read"
 msgstr "Bestand niet gevonden of geen leesrechten"
 
-#: pisi/fetcher.py:182
+#: pisi/fetcher.py:183
 msgid "Requested range not satisfiable, starting again."
 msgstr "Verzocht bereik niet verwezenlijkbaar, opnieuw gestart."
 
-#: pisi/fetcher.py:189
+#: pisi/fetcher.py:190
 msgid "Cannot fetch %s; value error: %s"
 msgstr "Kan %s niet ophalen. Foutcode: %s"
 
-#: pisi/fetcher.py:191 pisi/fetcher.py:193 pisi/fetcher.py:195
+#: pisi/fetcher.py:192 pisi/fetcher.py:194 pisi/fetcher.py:196
 msgid "Cannot fetch %s; %s"
 msgstr "Kan %s niet ophalen; %s"
 
-#: pisi/fetcher.py:197
+#: pisi/fetcher.py:198
 msgid "Cannot fetch %s; (%s): %s"
 msgstr "Kan %s; (%s) niet ophalen: %s"
 
-#: pisi/fetcher.py:241
+#: pisi/fetcher.py:242
 msgid "Proxy configuration has been found for '%s' protocol"
 msgstr "Proxy-configuratie gevonden voor protocol '%s'"
 
-#: pisi/fetcher.py:325 pisi/fetcher.py:346 pisi/fetcher.py:359
+#: pisi/fetcher.py:326 pisi/fetcher.py:347 pisi/fetcher.py:360
 msgid "ftp error"
 msgstr "ftp-fout"
 
@@ -2316,7 +2317,7 @@ msgstr "%s aan pakketindex toevoegen"
 msgid "Adding %s to component index"
 msgstr "%s aan componentindex toevoegen"
 
-#: pisi/index.py:114
+#: pisi/index.py:113
 #, fuzzy
 msgid "Updating package database of %s"
 msgstr "Huidige databaseversie voor %s schrijven"
@@ -2421,11 +2422,11 @@ msgstr ""
 "Opties moeten een van  'r', 'w', 'c' of 'n'  zijn of gebruik de opties bsddb."
 "db.DB_*"
 
-#: pisi/metadata.py:57
+#: pisi/metadata.py:58
 msgid "Distribution: %s, Dist. Release: %s\n"
 msgstr "Distributie: %s, distributie-uitgave: %s\n"
 
-#: pisi/metadata.py:59
+#: pisi/metadata.py:60
 msgid "Architecture: %s, Installed Size: %s"
 msgstr "Architectuur: %s, installatiegrootte: %s"
 
@@ -2964,6 +2965,9 @@ msgstr "%d problemen gevonden! Repareer ze onmiddellijk!\n"
 #: scripts/repostats.py:702
 msgid "These dependencies are not available in repository:\n"
 msgstr "Deze afhankelijkheden zijn niet beschikbaar in de repository:\n"
+
+#~ msgid "Not removing non-file, non-link %s"
+#~ msgstr "Dit/deze niet-bestand, niet-koppeling wordt niet verwijderd: %s"
 
 #, fuzzy
 #~ msgid "Show abandoned files under the install directory after build."

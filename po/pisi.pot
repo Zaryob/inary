@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2006-10-17 16:46+EEST\n"
+"POT-Creation-Date: 2006-10-19 10:01+EEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -616,7 +616,7 @@ msgstr ""
 msgid "Input/Output error while reading %s: %s"
 msgstr ""
 
-#: pisi/api.py:438 pisi/atomicoperations.py:572
+#: pisi/api.py:438 pisi/atomicoperations.py:571
 msgid "OK."
 msgstr ""
 
@@ -717,7 +717,7 @@ msgstr ""
 msgid "File list could not be read for package %s, continuing removal."
 msgstr ""
 
-#: pisi/atomicoperations.py:413 pisi/atomicoperations.py:429
+#: pisi/atomicoperations.py:413 pisi/atomicoperations.py:428
 msgid "Removing package %s"
 msgstr ""
 
@@ -725,31 +725,31 @@ msgstr ""
 msgid "Trying to remove nonexistent package "
 msgstr ""
 
-#: pisi/atomicoperations.py:461
+#: pisi/atomicoperations.py:460
 msgid "Not removing conflicted file : %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:481
-msgid "Not removing non-file, non-link %s"
+#: pisi/atomicoperations.py:480
+msgid "Installed file %s is not exists on system [Probably you manually deleted]"
 msgstr ""
 
-#: pisi/atomicoperations.py:542
+#: pisi/atomicoperations.py:541
 msgid "Metadata XML '%s' cannot be found"
 msgstr ""
 
-#: pisi/atomicoperations.py:550
+#: pisi/atomicoperations.py:549
 msgid "MetaData format wrong (%s)"
 msgstr ""
 
-#: pisi/atomicoperations.py:552
+#: pisi/atomicoperations.py:551
 msgid "* Adding '%s' to db... "
 msgstr ""
 
-#: pisi/atomicoperations.py:558
+#: pisi/atomicoperations.py:557
 msgid "Files XML '%s' cannot be found"
 msgstr ""
 
-#: pisi/atomicoperations.py:563 pisi/package.py:137
+#: pisi/atomicoperations.py:562 pisi/package.py:137
 msgid "Invalid %s"
 msgstr ""
 
@@ -958,28 +958,28 @@ msgstr ""
 msgid " (yes/no)"
 msgstr ""
 
-#: pisi/cli/__init__.py:134 pisi/cli/__init__.py:156
+#: pisi/cli/__init__.py:141
 msgid ""
 " [complete]\n"
 msgstr ""
 
-#: pisi/cli/__init__.py:144
+#: pisi/cli/__init__.py:151
 msgid "Installed %s"
 msgstr ""
 
-#: pisi/cli/__init__.py:146
+#: pisi/cli/__init__.py:153
 msgid "Removed %s"
 msgstr ""
 
-#: pisi/cli/__init__.py:148
+#: pisi/cli/__init__.py:155
 msgid "Upgraded %s"
 msgstr ""
 
-#: pisi/cli/__init__.py:150
+#: pisi/cli/__init__.py:157
 msgid "Configured %s"
 msgstr ""
 
-#: pisi/cli/__init__.py:152
+#: pisi/cli/__init__.py:159
 msgid "Extracting the files of %s"
 msgstr ""
 
@@ -1954,31 +1954,31 @@ msgstr ""
 msgid "A problem occured. Please check the archive address and/or permissions again."
 msgstr ""
 
-#: pisi/fetcher.py:157
+#: pisi/fetcher.py:158
 msgid "No such file or no permission to read"
 msgstr ""
 
-#: pisi/fetcher.py:182
+#: pisi/fetcher.py:183
 msgid "Requested range not satisfiable, starting again."
 msgstr ""
 
-#: pisi/fetcher.py:189
+#: pisi/fetcher.py:190
 msgid "Cannot fetch %s; value error: %s"
 msgstr ""
 
-#: pisi/fetcher.py:191 pisi/fetcher.py:193 pisi/fetcher.py:195
+#: pisi/fetcher.py:192 pisi/fetcher.py:194 pisi/fetcher.py:196
 msgid "Cannot fetch %s; %s"
 msgstr ""
 
-#: pisi/fetcher.py:197
+#: pisi/fetcher.py:198
 msgid "Cannot fetch %s; (%s): %s"
 msgstr ""
 
-#: pisi/fetcher.py:241
+#: pisi/fetcher.py:242
 msgid "Proxy configuration has been found for '%s' protocol"
 msgstr ""
 
-#: pisi/fetcher.py:325 pisi/fetcher.py:346 pisi/fetcher.py:359
+#: pisi/fetcher.py:326 pisi/fetcher.py:347 pisi/fetcher.py:360
 msgid "ftp error"
 msgstr ""
 
@@ -2034,7 +2034,7 @@ msgstr ""
 msgid "Adding %s to component index"
 msgstr ""
 
-#: pisi/index.py:114
+#: pisi/index.py:113
 msgid "Updating package database of %s"
 msgstr ""
 
@@ -2125,12 +2125,12 @@ msgstr ""
 msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
 msgstr ""
 
-#: pisi/metadata.py:57
+#: pisi/metadata.py:58
 msgid ""
 "Distribution: %s, Dist. Release: %s\n"
 msgstr ""
 
-#: pisi/metadata.py:59
+#: pisi/metadata.py:60
 msgid "Architecture: %s, Installed Size: %s"
 msgstr ""
 

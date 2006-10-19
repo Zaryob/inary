@@ -419,7 +419,7 @@ def delete_cache():
     util.clean_dir(ctx.config.tmp_dir())
 
 def rebuild_repo(repo):
-    ctx.ui.info(_('* Rebuilding \'%s\' named repo... ') % repo, noln=True)
+    ctx.ui.info(_('* Rebuilding \'%s\' named repo... ') % repo)
     
     if ctx.repodb.has_repo(repo):
         repouri = URI(ctx.repodb.get_repo(repo).indexuri.get_uri())
@@ -435,7 +435,6 @@ def rebuild_repo(repo):
             ctx.ui.warning(_("Input/Output error while reading %s: %s") % (indexpath, unicode(e)))
             return
         ctx.txn_proc(lambda txn : index.update_db(repo, txn=txn))
-        ctx.ui.info(_('OK.'))
     else:
         raise Error(_('No repository named %s found.') % repo)
 
