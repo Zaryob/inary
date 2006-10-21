@@ -444,28 +444,7 @@ class Source:
         # more checks can be added, i.e. valid day month ranges, etc
     
     def checkRelease(self):
-        # FIXME: this check also belongs to specfile
-        prev = None
-        prevDate = None
-        for h in self.spec.source.history:
-            if prev:
-                prev -= 1
-                self.validDate(h.date)
-                if prev <= 0:
-                    e = _("Source package '%s' has wrong release numbers") % self.name
-                    errors.append(e)
-                    return
-                if int(h.release) != prev:
-                    e = _("Source package '%s' lacks release %d") % (self.name, prev)
-                    errors.append(e)
-                    return
-            else:
-                prev = int(h.release)
-                prevDate = h.date
-                self.validDate(prevDate)
-        if prev != 1:
-            e = _("Source package '%s' has no first release") % self.name
-            errors.append(e)
+        pass
     
     def report_html(self):
         source = self.spec.source
