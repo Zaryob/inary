@@ -184,9 +184,6 @@ def run_logged(cmd):
 # Terminal functions #
 ######################
 
-def has_xterm():
-    return os.environ.has_key("TERM") and sys.stderr.isatty()
-    
 def xterm_title(message):
     """sets message as a console window's title"""
     if os.environ.has_key("TERM") and sys.stderr.isatty():
@@ -200,10 +197,8 @@ def xterm_title(message):
 def xterm_title_reset():
     """resets console window's title"""
     if os.environ.has_key("TERM"):
-        terminalType = os.environ["TERM"]
-        xterm_title(os.environ["TERM"])
+        xterm_title("")
 
-    
 #############################
 # Path Processing Functions #
 #############################

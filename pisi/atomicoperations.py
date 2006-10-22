@@ -120,7 +120,7 @@ class Install(AtomicOperation):
             txn.abort()
             raise e
 
-        ctx.ui.status()
+        ctx.ui.close()
         if self.upgrade:
             event = pisi.ui.upgraded
         else:
@@ -436,7 +436,7 @@ class Remove(AtomicOperation):
             raise e
 
         self.remove_pisi_files()
-        ctx.ui.status()
+        ctx.ui.close()
         ctx.ui.notify(pisi.ui.removed, package = self.package, files = self.files)
 
     def check_dependencies(self):
