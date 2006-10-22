@@ -174,7 +174,9 @@ in the respective order to satisfy extra dependencies:
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     if not ctx.get_option('ignore_package_conflicts'):
-        check_conflicts(order, packagedb)
+        conflicts = check_conflicts(order, packagedb)
+        if conflicts:
+            remove_conflicting_packages(conflicts)
     order.reverse()
     ctx.ui.info(_('Installation order: ') + util.strlist(order) )
 
@@ -221,6 +223,10 @@ def calculate_conflicts(order, packagedb):
 
     return (C, D, pkg_conflicts)
 
+def remove_conflicting_packages(conflicts):
+    if remove(conflicts, ignore_dep=True, ignore_safety=True) == False:
+        raise Error(_("Conflicts remain"))
+
 def check_conflicts(order, packagedb):
     """check if upgrading to the latest versions will cause havoc
     done in a simple minded way without regard for dependencies of
@@ -243,8 +249,7 @@ def check_conflicts(order, packagedb):
         if not ctx.ui.confirm(_('Remove the following conflicting packages?')):
             raise Error(_("Conflicts remain"))
 
-        if remove(list(C), ignore_dep=True, ignore_safety=True) == False:
-            raise Error(_("Conflicts remain"))
+    return list(C)
 
 def expand_components(A):
     Ap = set()
@@ -375,7 +380,9 @@ def plan_install_pkg_names(A, ignore_conflicts = False):
     order = G_f.topological_sort()
     order.reverse()
     if not ctx.get_option('ignore_package_conflicts') and not ignore_conflicts:
-        check_conflicts(order, ctx.packagedb)
+        conflicts = check_conflicts(order, ctx.packagedb)
+        if conflicts:
+            remove_conflicting_packages(conflicts)
     return G_f, order
 
 def upgrade(A):
@@ -444,6 +451,9 @@ def upgrade_pkg_names(A = []):
         G_f = None
         order = list(A)
 
+    if not ctx.get_option('ignore_package_conflicts'):
+        conflicts = check_conflicts(order, ctx.packagedb)
+
     ctx.ui.info(_('The following packages will be upgraded: ') +
                 util.strlist(order))
 
@@ -468,7 +478,11 @@ def upgrade_pkg_names(A = []):
     # fetch to be upgraded packages but do not install them.
     if ctx.get_option('fetch_only'):
         return
-   
+
+    if not ctx.get_option('ignore_package_conflicts'):
+        if conflicts:
+            remove_conflicting_packages(conflicts)
+
     for path in paths:
         install_op = atomicoperations.Install(path, ignore_file_conflicts = True)
         install_op.install(True)
@@ -543,8 +557,6 @@ def plan_upgrade(A, ignore_build = False, ignore_conflicts = False):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
-    if not ctx.get_option('ignore_package_conflicts') and not ignore_conflicts:
-        check_conflicts(order, ctx.packagedb)
     return G_f, order
 
 def remove(A, ignore_dep = False, ignore_safety = False):
