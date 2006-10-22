@@ -38,7 +38,6 @@ def findUnneededFiles(listdir):
     return listdir
 
 def doit(root, listdir, clean, suffix = ""):
-    print "Working in %s" % root
     for f in listdir:
         target = os.path.join(root, "%s%s" % (f, suffix))
         if os.path.exists(target):
@@ -88,10 +87,8 @@ if __name__ == "__main__":
         usage("Unsufficient arguments...")
 
     if "--dry-run" in sys.argv:
-        print "Running in dry-run mode"
         clean = False
     elif "--clean" in sys.argv:
-        print "Say bye bye to your files"
         clean = True
     else:
         usage("No command given...")
