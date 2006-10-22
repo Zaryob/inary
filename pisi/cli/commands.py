@@ -1161,7 +1161,11 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
                 indexuri = 'http://paketler.pardus.org.tr/pardus-1-test/pisi-index.xml.bz2'
             pisi.api.add_repo(name, indexuri, ctx.get_option('at'))
             if ctx.ui.confirm(_('Update PiSi database for repository %s?') % name):
-                pisi.api.update_repo(name)
+                try:
+                    pisi.api.update_repo(name)
+                except pisi.fetcher.FetchError:
+                    ctx.ui.warning(_("%s repository could not be reached. Removing %s from system.") % (name, name))
+                    pisi.api.remove_repo(name)
             self.finalize()
         else:
             self.help()
