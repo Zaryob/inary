@@ -78,6 +78,7 @@ while : ; do
 		;;
 	--force )
 		FORCE=true
+		shift
 		;;
 	-- )
 		shift
