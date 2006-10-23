@@ -60,7 +60,9 @@ def wait_for_result(com, package_name=None):
     while 1:
         try:
             reply = com.read_cmd()
-        except:
+        except KeyboardInterrupt:
+            raise
+        except Exception, e: #FIXME: what exception could we catch here, replace with that.
             # Comar postInstall does a "service comar restart" which cuts
             # our precious communication link, so we waitsss
             if package_name == "comar":
