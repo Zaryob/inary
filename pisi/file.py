@@ -210,7 +210,9 @@ class File:
         if sign==File.detached:
             try:
                 sigfilename = File.download(URI(uri + '.sig'), transfer_dir)
-            except:
+            except KeyboardInterrupt:
+                raise
+            except Exception, e: #FIXME: what exception could we catch here, replace with that.
                 raise NoSignatureFound(uri)
             if os.system('gpg --verify ' + sigfilename) != 0:
                 raise InvalidSignature(uri)

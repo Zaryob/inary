@@ -266,7 +266,9 @@ def is_upgradable(name, ignore_build = False):
     (version, release, build) = ctx.installdb.get_version(name)
     try:
         pkg = ctx.packagedb.get_package(name)
-    except:
+    except KeyboardInterrupt:
+        raise
+    except Exception, e: #FIXME: what exception could we catch here, replace with that.
         return False
     if ignore_build or (not build) or (not pkg.build):
         return Version(release) < Version(pkg.release)

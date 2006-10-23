@@ -106,7 +106,9 @@ class LocalText(dict):
                 return 'en'
             else:
                 return lang[0:2]
-        except:
+        except KeyboardInterrupt:
+            raise
+        except Exception, e: #FIXME: what exception could we catch here, replace with that.
             raise Error(_('LocalText: unable to get either current or default locale'))
 
     def errors(self, where = unicode()):
@@ -403,7 +405,9 @@ class autoxml(oo.autosuper, oo.autoprop):
                     try:
                         if getattr(self, name) != getattr(other, name):
                             return False
-                    except:
+                    except KeyboardInterrupt:
+                        raise
+                    except Exception, e: #FIXME: what exception could we catch here, replace with that.
                         return False
                 return True
             def notequal(self, other):
@@ -640,7 +644,9 @@ class autoxml(oo.autosuper, oo.autoprop):
             if text:
                 try:
                     value = autoxml.basic_cons_map[token_type](text)
-                except:
+                except KeyboardInterrupt:
+                    raise
+                except Exception, e: #FIXME: what exception could we catch here, replace with that.
                     value = None
                     errs.append(where + ': ' + _('Type mismatch: read text cannot be decoded'))
                 return value

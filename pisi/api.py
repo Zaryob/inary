@@ -497,7 +497,9 @@ def rebuild_db(files=False):
     # check db schema versions
     try:
         pisi.lockeddbshelve.check_dbversion('filesdbversion', pisi.__filesdbversion__, write=False)
-    except:
+    except KeyboardInterrupt:
+        raise
+    except Exception, e: #FIXME: what exception could we catch here, replace with that.
         files = True # exception means the files db version was wrong
     pisi.lockeddbshelve.init_dbenv(write=True, writeversion=True)
     destroy(files) # bye bye

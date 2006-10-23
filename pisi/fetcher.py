@@ -203,7 +203,9 @@ class Fetcher:
             
         try:
             total_size = int(headers['Content-Length']) + self.exist_size
-        except:
+        except KeyboardInterrupt:
+            raise
+        except Exception, e: #FIXME: what exception could we catch here, replace with that.
             total_size = 0
 
         self._do_grab(fileObj, dest, total_size)

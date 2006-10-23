@@ -50,7 +50,9 @@ def wait_comar():
             else:
                 sock.connect("/var/run/comar.socket")
             return True
-        except:
+        except KeyboardInterrupt:
+            raise
+        except Exception, e: #FIXME: what exception could we catch here, replace with that.
             timeout -= 0.2
         time.sleep(0.2)
     return False
