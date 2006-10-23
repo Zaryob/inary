@@ -38,6 +38,9 @@ while : ; do
 		echo
 		echo "Broken reverse dependency rebuilder."
 		echo
+		echo
+		echo "      --force"
+		echo
 		echo "      --soname SONAME  recompile packages using library with SONAME instead"
 		echo "                       of broken library (SONAME providing library must be"
 		echo "                       present in the system)"
@@ -73,6 +76,9 @@ while : ; do
 		SEARCH_BROKEN=false
 		shift 2
 		;;
+	--force )
+		FORCE=true
+		;;
 	-- )
 		shift
 		break
@@ -94,6 +100,10 @@ function rm_temp () {
 	echo
 	exit 1
 }
+
+if $FORCE ; then
+	rm -f "/root/.revdep-rebuild.*"
+fi
 
 if $SEARCH_BROKEN ; then
 	SONAME_SEARCH="$SONAME"
