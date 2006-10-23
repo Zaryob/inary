@@ -11,6 +11,7 @@
 
 # standard python modules
 import os
+import glob
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
