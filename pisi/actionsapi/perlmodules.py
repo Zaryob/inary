@@ -58,7 +58,7 @@ def configure(parameters = ''):
 def make(parameters = ''):
     '''make source with given parameters.'''
     if can_access_file('Makefile'):
-        if system('make %s' % parameters):                  
+        if system('make %s' % parameters):
             raise MakeError, _('Make failed.')
     else:
         if system('perl Build build'):
@@ -67,7 +67,7 @@ def make(parameters = ''):
 def install(parameters = 'install'):
     '''install source with given parameters.'''
     if can_access_file('Makefile'):
-        if system('make %s' % parameters):                  
+        if system('make %s' % parameters):
             raise InstallError, _('Make failed.')
     else:
         if system('perl Build install'):
@@ -76,9 +76,7 @@ def install(parameters = 'install'):
     fixLocalPod()
 
 def fixLocalPod():
-    podFiles = [ "%s/usr/lib/perl5/vendor_perl/%s/i686-linux/perllocal.pod" % (get.installDIR(), get.curPERL()),
-                "%s/usr/lib/perl5/%s/i686-linux/perllocal.pod" % (get.installDIR(), get.curPERL()),
-                "%s/usr/lib/perl5/site_perl/%s/perllocal.pod" % (get.installDIR(), get.curPERL())]
+    podFiles = glob.glob("%s/usr/lib/*/*/*/perllocal.pod" % get.installDIR())
 
     for podFile in podFiles:
         if can_access_file(podFile):
