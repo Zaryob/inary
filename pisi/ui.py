@@ -28,7 +28,7 @@ class UI(object):
             self.totalsize = totalsize
             try:
                 self.percent = (existsize * 100) / totalsize
-            except:
+            except ArithmeticError:
                 self.percent = 0
 
         def update(self, size):
@@ -36,7 +36,7 @@ class UI(object):
                 return 100
             try:
                 self.percent = (size * 100) / self.totalsize
-            except:
+            except ArithmeticError:
                 self.percent = 0
             return self.percent
 
