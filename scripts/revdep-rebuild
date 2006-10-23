@@ -103,7 +103,7 @@ function rm_temp () {
 }
 
 if $FORCE ; then
-	rm -f "/root/.revdep-rebuild.*"
+	rm -f /root/.revdep-rebuild*
 fi
 
 if $SEARCH_BROKEN ; then
