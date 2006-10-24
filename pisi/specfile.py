@@ -91,9 +91,9 @@ class Update:
     a_type = [autoxml.String, autoxml.optional]
     t_Date = [autoxml.String, autoxml.mandatory]
     t_Version = [autoxml.String, autoxml.mandatory]
+    t_Comment = [autoxml.String, autoxml.optional]
     t_Name = [autoxml.Text, autoxml.optional]
     t_Email = [autoxml.String, autoxml.optional]
-    t_Comment = [autoxml.String, autoxml.optional]
 
     def __str__(self):
         s = self.date
@@ -147,12 +147,12 @@ class Source:
     t_Name = [autoxml.String, autoxml.mandatory]
     t_Homepage = [autoxml.String, autoxml.optional]
     t_Packager = [Packager, autoxml.mandatory]
-    t_Summary = [autoxml.LocalText, autoxml.mandatory]
-    t_Description = [autoxml.LocalText, autoxml.optional]
+    t_License = [ [autoxml.String], autoxml.mandatory]
     t_IsA = [ [autoxml.String], autoxml.optional]
     t_PartOf = [autoxml.String, autoxml.optional]
+    t_Summary = [autoxml.LocalText, autoxml.mandatory]
+    t_Description = [autoxml.LocalText, autoxml.optional]
     t_Icon = [ autoxml.String, autoxml.optional]
-    t_License = [ [autoxml.String], autoxml.mandatory]
     t_Archive = [Archive, autoxml.mandatory ]
     t_Patches = [ [Patch], autoxml.optional]
     t_BuildDependencies = [ [Dependency], autoxml.optional]
