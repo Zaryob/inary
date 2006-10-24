@@ -12,9 +12,13 @@
 
 # global variables here
 
+import signal
+
 import pisi.constants
+import pisi.signalhandler
 
 const = pisi.constants.Constants()
+sig = pisi.signalhandler.SignalHandler()
 
 config = None
 
@@ -74,3 +78,15 @@ def txn_proc(proc, txn = None):
         return retval
     else:
         return proc(txn)
+
+def disable_keyboard_interrupts():
+    sig.disable_signal(signal.SIGINT)
+
+def enable_keyboard_interrupts():
+    sig.enable_signal(signal.SIGINT)
+
+def keyboard_interrupt_disabled():
+    return sig.signal_disabled(signal.SIGINT)
+
+def keyboard_interrupt_pending():
+    return sig.signal_pending(signal.SIGINT)

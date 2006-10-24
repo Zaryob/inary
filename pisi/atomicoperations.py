@@ -106,6 +106,9 @@ class Install(AtomicOperation):
         self.ask_reinstall = ask_reinstall
         self.check_requirements()
         self.check_relations()
+
+        ctx.disable_keyboard_interrupts()
+
         self.check_reinstall()
         self.extract_install()
         self.store_pisi_files()
@@ -119,6 +122,8 @@ class Install(AtomicOperation):
         except db.DBError, e:
             txn.abort()
             raise e
+
+        ctx.enable_keyboard_interrupts()
 
         ctx.ui.close()
         if self.upgrade:

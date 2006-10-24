@@ -65,6 +65,10 @@ def wait_for_result(com, package_name=None):
         except KeyboardInterrupt:
             raise
         except Exception, e: #FIXME: what exception could we catch here, replace with that.
+            # TODO: we return here but we can also set self.config_later?
+            if ctx.keyboard_interrupt_pending():
+                return
+
             # Comar postInstall does a "service comar restart" which cuts
             # our precious communication link, so we waitsss
             if package_name == "comar":
