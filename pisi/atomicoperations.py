@@ -106,13 +106,11 @@ class Install(AtomicOperation):
         self.ask_reinstall = ask_reinstall
         self.check_requirements()
         self.check_relations()
-
-        ctx.disable_keyboard_interrupts()
-
         self.check_reinstall()
         self.extract_install()
-        self.store_pisi_files()
 
+        ctx.disable_keyboard_interrupts()
+        self.store_pisi_files()
         self.postinstall()
 
         txn = ctx.dbenv.txn_begin()
