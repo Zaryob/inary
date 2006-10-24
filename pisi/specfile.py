@@ -154,8 +154,8 @@ class Source:
     t_Description = [autoxml.LocalText, autoxml.optional]
     t_Icon = [ autoxml.String, autoxml.optional]
     t_Archive = [Archive, autoxml.mandatory ]
-    t_Patches = [ [Patch], autoxml.optional]
     t_BuildDependencies = [ [Dependency], autoxml.optional]
+    t_Patches = [ [Patch], autoxml.optional]
     t_Version = [ autoxml.String, autoxml.optional]
     t_Release = [ autoxml.String, autoxml.optional]
     t_SourceURI = [ autoxml.String, autoxml.optional ] # used in index
