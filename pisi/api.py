@@ -116,7 +116,7 @@ def init(database = True, write = True,
 
 def finalize():
     if ctx.initialized:
-    
+        ctx.disable_keyboard_interrupts()
         if ctx.log:
             ctx.loghandler.flush()
             ctx.log.removeHandler(ctx.loghandler)
@@ -145,6 +145,7 @@ def finalize():
         ctx.ui.debug('PiSi API finalized')
         ctx.ui.close()
         ctx.initialized = False
+        ctx.enable_keyboard_interrupts()
 
 def list_installed():
     '''returns a set of installed package names'''

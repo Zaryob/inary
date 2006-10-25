@@ -16,39 +16,37 @@ exception = {
     signal.SIGINT:KeyboardInterrupt
     }
 
+class Signal:
+    def __init__(self, sig):
+        self.signal = sig
+        self.oldhandler = signal.getsignal(sig)
+        self.pending = False
+
 class SignalHandler:
 
     def __init__(self):
-        self.pending_signals = []
-        self.disabled_signals = []
+        self.signals = {}
 
     def signal_handler(self, sig, frame):
         signal.signal(sig, signal.SIG_IGN)
-        if sig not in self.pending_signals:
-            self.pending_signals.append(sig)
+        self.signals[sig].pending = True
             
-    def clear_pending_signal(self, sig):
-        if sig in self.pending_signals:
-            self.pending_signals.remove(sig)
-
     def disable_signal(self, sig):
-        signal.signal(sig, self.signal_handler)
-
-        if sig not in self.disabled_signals:
-            self.disabled_signals.append(sig)
+        if sig not in self.signals.keys():
+            self.signals[sig] = Signal(sig)
+            signal.signal(sig, self.signal_handler)
 
     def enable_signal(self, sig):
-        signal.signal(sig, signal.SIG_DFL)
-
-        if sig in self.disabled_signals:
-            self.disabled_signals.remove(sig)
-
-        if sig in self.pending_signals:
-            self.clear_pending_signal(sig)
-            raise exception[sig]
+        if sig in self.signals.keys():
+            oldhandler = self.signals[sig].oldhandler
+            pending = self.signals[sig].pending
+            del self.signals[sig]
+            signal.signal(sig, oldhandler)
+            if pending:
+                raise exception[sig]
 
     def signal_disabled(self, sig):
-        return sig in self.disabled_signals
+        return sig in self.signals.keys()
 
     def signal_pending(self, sig):
-        return sig in self.pending_signals
+        return self.signal_disabled(sig) and self.signals[sig].pending
