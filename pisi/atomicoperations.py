@@ -141,11 +141,6 @@ class Install(AtomicOperation):
             com = comariface.make_com()
 
     def check_relations(self):
-        # check conflicts
-        for conf in self.metadata.package.conflicts:
-            if pisi.conflict.installed_package_conflicts(conf):
-                raise Error(_("Package conflicts %s") % conf)
-
         # check dependencies
         if not ctx.config.get_option('ignore_dependency'):
             if not self.pkginfo.installable():
