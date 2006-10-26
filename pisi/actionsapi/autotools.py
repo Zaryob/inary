@@ -150,7 +150,7 @@ def autoconf(parameters = ''):
 def autoreconf(parameters = ''):
     '''re-generates a configure script'''
     if system('autoreconf %s' % parameters):
-        raise RunTimeError(_('Running autoconf failed.'))
+        raise RunTimeError(_('Running autoreconf failed.'))
 
 def automake(parameters = ''):
     '''generates a makefile'''
