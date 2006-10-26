@@ -29,6 +29,7 @@ let_repo_had(FAAD2, with_version("0.2.1"))
 let_pisi_had(LIBMP4V2, FAAD2)
 
 def run():
-    repo_version_bumped(LIBMP4V2, with_added_conflict(FAAD2, versionTo="0.2.1"))
+    repo_version_bumped(LIBMP4V2, with_added_conflict(FAAD2, versionTo="0.2.0"))
+    repo_version_bumped(FAAD2)
     repo_updated_index()
     pisi_upgraded()
