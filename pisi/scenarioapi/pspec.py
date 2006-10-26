@@ -83,7 +83,9 @@ class Pspec:
             return
 
         for con in conflicts:
-            self.package.conflicts.append(con)
+            conflict = Conflict()
+            conflict.package = con
+            self.package.conflicts.append(conflict)
 
     def remove_conflicts(self, conflicts):
         for con in conflicts:
