@@ -12,6 +12,7 @@
 
 from pisi.specfile import SpecFile, Package, Update, Path
 from pisi.dependency import Dependency
+from pisi.conflict import Conflict
 from pisi.pxml.autoxml import LocalText
 
 class Pspec:
@@ -71,6 +72,16 @@ class Pspec:
                     self.package.packageDependencies.remove(dep)
 
     def add_conflicts(self, conflicts):
+        # special case of given one conflict package
+        # with conflict versioning info [**kw, name]
+        # [{"versionFrom":"0.4.2"}, "udev"]
+        if type(conflicts[0]) == dict:
+            conf = Conflict()
+            (kw, conf.package) = conflicts
+            conf.__dict__[kw.keys()[0]] = kw.values()[0]
+            self.package.conflicts.append(conf)
+            return
+
         for con in conflicts:
             self.package.conflicts.append(con)
 

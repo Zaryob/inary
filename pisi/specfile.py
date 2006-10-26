@@ -28,6 +28,7 @@ from pisi.pxml.xmlfile import XmlFile
 import pisi.pxml.autoxml as autoxml
 import pisi.context as ctx
 from pisi.dependency import Dependency
+from pisi.conflict import Conflict
 import pisi.dependency
 import pisi.component as component
 from pisi.util import Checks
@@ -173,7 +174,7 @@ class Package:
     t_PackageDependencies = [ [Dependency], autoxml.optional, "RuntimeDependencies/Dependency"]
     t_ComponentDependencies = [ [autoxml.String], autoxml.optional, "RuntimeDependencies/Component"]
     t_Files = [ [Path], autoxml.optional]
-    t_Conflicts = [ [autoxml.String], autoxml.optional, "Conflicts/Package"]
+    t_Conflicts = [ [Conflict], autoxml.optional, "Conflicts/Package"]
     t_ProvidesComar = [ [ComarProvide], autoxml.optional, "Provides/COMAR"]
     #t_RequiresComar = [ [autoxml.String], autoxml.mandatory, "Requires/COMAR"]
     t_AdditionalFiles = [ [AdditionalFile], autoxml.optional]

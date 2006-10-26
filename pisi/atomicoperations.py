@@ -23,6 +23,7 @@ import pisi
 import pisi.context as ctx
 import pisi.packagedb as packagedb
 import pisi.dependency as dependency
+import pisi.conflict
 import pisi.util as util
 from pisi.specfile import *
 from pisi.metadata import MetaData
@@ -141,9 +142,9 @@ class Install(AtomicOperation):
 
     def check_relations(self):
         # check conflicts
-        for pkg in self.metadata.package.conflicts:
-            if ctx.installdb.is_installed(self.pkginfo):
-                raise Error(_("Package conflicts %s") % pkg)
+        for conf in self.metadata.package.conflicts:
+            if pisi.conflict.installed_package_conflicts(conf):
+                raise Error(_("Package conflicts %s") % conf)
 
         # check dependencies
         if not ctx.config.get_option('ignore_dependency'):

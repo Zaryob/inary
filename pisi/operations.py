@@ -22,6 +22,7 @@ import pisi.context as ctx
 from pisi.uri import URI
 import pisi.util as util
 import pisi.dependency as dependency
+import pisi.conflict
 import pisi.pgraph as pgraph
 import pisi.packagedb as packagedb
 import pisi.repodb
@@ -194,11 +195,11 @@ in the respective order to satisfy extra dependencies:
         upgrade_pisi()
 
 def check_conflict(pkg):
-    conflicts = []
+    conflicts = {}
 
     for c in pkg.conflicts:
-        if ctx.installdb.is_installed(c):
-            conflicts.append(c)
+        if pisi.conflict.installed_package_conflicts(c):
+            conflicts[c.package] = str(c)
 
     return conflicts
 
@@ -209,16 +210,23 @@ def calculate_conflicts(order, packagedb):
 
     for x in order:
         pkg = packagedb.get_package(x)
-        B_p = set(check_conflict(pkg))
+        B_p = check_conflict(pkg)
         if B_p:
-            pkg_conflicts[x] = B_p
-            C = C.union(B_p)
+            pkg_conflicts[x] = B_p.values()
+            C = C.union(B_p.keys())
 
-        B_i = B_0.intersection(set(pkg.conflicts))
+        B_i = B_0.intersection(set(map(lambda p:p.package, pkg.conflicts)))
+        D_i = set()
         # check if there are any conflicts within the packages that are
         # going to be installed
-        if B_i:
-            D = D.union(B_i)
+        for p in map(lambda x:packagedb.get_package(x), B_i):
+            # check if they are really conflicting
+            conflicted = pisi.conflict.package_conflicts(p, pkg.conflicts)
+            if conflicted:
+                D_i.add(str(conflicted))
+
+        if D_i:
+            D = D.union(D_i)
             D.add(pkg.name)
 
     return (C, D, pkg_conflicts)
