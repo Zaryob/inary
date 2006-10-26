@@ -194,11 +194,11 @@ in the respective order to satisfy extra dependencies:
     if 'pisi' in order and pisi_installed:
         upgrade_pisi()
 
-def check_conflict(pkg):
+def check_conflict(pkg, order):
     conflicts = []
 
     for conflict in pkg.conflicts:
-        if pisi.conflict.installed_package_conflicts(conflict):
+        if conflict.package not in order and pisi.conflict.installed_package_conflicts(conflict):
             conflicts.append(conflict)
 
     return conflicts
@@ -210,17 +210,17 @@ def calculate_conflicts(order, packagedb):
 
     for x in order:
         pkg = packagedb.get_package(x)
-        conflicts = check_conflict(pkg)
+
+        # check if any package has conflicts with the installed packages
+        conflicts = check_conflict(pkg, order)
         if conflicts:
             pkg_conflicts[x] = map(lambda c:str(c), conflicts)
             C = C.union(map(lambda c:c.package, conflicts))
 
+        # now check if any package has conflicts with each other
         B_i = B_0.intersection(set(map(lambda c:c.package, pkg.conflicts)))
         D_i = set()
-        # check if there are any conflicts within the packages that are
-        # going to be installed
         for p in map(lambda x:packagedb.get_package(x), B_i):
-            # check if they are really conflicting
             conflicted = pisi.conflict.package_conflicts(p, pkg.conflicts)
             if conflicted:
                 D_i.add(str(conflicted))
