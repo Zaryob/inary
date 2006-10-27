@@ -197,7 +197,7 @@ def package_graph(A, repo = pisi.itembyrepodb.installed, ignore_installed = Fals
 def generate_install_order(A):
     # returns the install order of the given install package list with any extra
     # dependency that is also going to be installed
-    G_f, order = plan_install(A, ignore_conflicts = True)
+    G_f, order = plan_install(A, ignore_package_conflicts = True)
     return order
 
 def generate_remove_order(A):
@@ -209,7 +209,7 @@ def generate_remove_order(A):
 def generate_upgrade_order(A):
     # returns the upgrade order of the given upgrade package list with any needed extra
     # dependency
-    G_f, order = plan_upgrade(A, ignore_conflicts = True)
+    G_f, order = plan_upgrade(A)
     return order
 
 def generate_base_upgrade(A):
