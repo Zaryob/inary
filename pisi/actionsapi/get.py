@@ -190,7 +190,7 @@ def RANLIB():
     return getBinutilsInfo('ranlib')
 
 def F77():
-    return getBinutilsInfo('f77')
+    return getBinutilsInfo('g77')
 
 def GCJ():
     return getBinutilsInfo('gcj')
