@@ -36,7 +36,7 @@ from pisi.index import Index
 import pisi.cli
 from pisi.operations import install, remove, upgrade, emerge
 from pisi.operations import plan_install_pkg_names as plan_install
-from pisi.operations import plan_remove, plan_upgrade, upgrade_base
+from pisi.operations import plan_remove, plan_upgrade, upgrade_base, calculate_conflicts
 from pisi.build import build_until
 from pisi.atomicoperations import resurrect_package, build
 from pisi.metadata import MetaData
@@ -218,6 +218,15 @@ def generate_base_upgrade(A):
     # upgrade needs
     base = upgrade_base(A, ignore_package_conflicts = True)
     return list(base)
+
+def generate_conflicts(A):
+    # returns the conflicting packages list of the to be installed packages.
+    # @C: conflicting and must be removed packages list to proceed
+    # @D: list of the conflicting packages _with each other_ in the to be installed list
+    # @E: dictionary that contains which package in the to be installed list conflicts
+    #     with which packages
+
+    (C, D, E) = calculate_conflicts(A, ctx.packagedb)
 
 def configure_pending():
     # start with pending packages
