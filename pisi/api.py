@@ -216,7 +216,7 @@ def generate_base_upgrade(A):
     # all the packages of the system.base must be installed on the system.
     # method returns the currently needed system.base component install and 
     # upgrade needs
-    base = upgrade_base(A)
+    base = upgrade_base(A, ignore_package_conflicts = True)
     return list(base)
 
 def configure_pending():
