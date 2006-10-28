@@ -227,6 +227,7 @@ def generate_conflicts(A):
     #     with which packages
 
     (C, D, E) = calculate_conflicts(A, ctx.packagedb)
+    return (C, D, E)
 
 def configure_pending():
     # start with pending packages
