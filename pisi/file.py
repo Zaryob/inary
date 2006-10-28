@@ -98,7 +98,7 @@ class File:
         if sha1sum:
             sha1filename = File.download(URI(uri.get_uri() + '.sha1sum'), transfer_dir)
             sha1f = file(sha1filename)
-            newsha1 = sha1f.readlines()[0]
+            newsha1 = sha1f.read().split("\n")[0]
 
         if uri.is_remote_file() or copylocal:
             localfile = join(transfer_dir, uri.filename())
