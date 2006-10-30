@@ -25,7 +25,7 @@ import pisi.lockeddbshelve as shelve
 
 installed, thirdparty, repos, all = range(1, 5)
 
-"""installed and thirdparty are special databases to keep track 
+"""installed and thirdparty are special databases to keep track
 of already installed stuff and third party stuff not in any real repository.
 repos means search in repositories only, and all means search in
 repositories and special databases (called tracking databases)
@@ -36,7 +36,7 @@ class Error(pisi.Error):
 
 class NotfoundError(pisi.Error):
     pass
-    
+
 class ItemByRepoDB(object):
 
     def __init__(self, name):
@@ -45,7 +45,7 @@ class ItemByRepoDB(object):
 
     def close(self):
         self.d.close()
-        
+
     def clear(self, txn = None):
         self.d.clear(txn=txn)
 
@@ -70,7 +70,7 @@ class ItemByRepoDB(object):
         #    if x.startsWith('repo-'):
         #        return True
         #return False
-        
+
     def list_if(self, pred):
         return [ k for k,data in self.d.items() if pred(k, data)]
 
@@ -108,7 +108,7 @@ class ItemByRepoDB(object):
             assert type(repo) == type("")
             repo='repo-'+repo
         return repo
-    
+
     def str_repo(self, str):
         if str.startswith('repo-'):
             return str[5:]
@@ -151,7 +151,7 @@ class ItemByRepoDB(object):
                     return (s[repostr], repo)
             raise NotfoundError(_('Key %s in repo %s not found') % (name, repo))
             #return None
-            
+
         return self.d.txn_proc(proc, txn)
 
     def get_item(self, name, repo = None, txn = None):
@@ -172,7 +172,7 @@ class ItemByRepoDB(object):
             return repo
         else:
             return None
-        
+
     def add_item(self, name, obj, repo, txn = None):
         assert not repo in [all, repos]
         repostr = self.repo_str(repo)
@@ -184,13 +184,13 @@ class ItemByRepoDB(object):
             s[ repostr ] = obj
             self.d.put(name, s, txn)
         self.d.txn_proc(proc, txn)
-        
+
     def remove_item_repo(self, name, repo, txn = None):
         assert not repo in [all, repos]
         name = str(name)
         def p(txn):
             s = self.d.get(name, txn)
-            repostr = self.repo_str(repo)            
+            repostr = self.repo_str(repo)
             if s.has_key(repostr):
                 del s[repostr]
             if not len(s):

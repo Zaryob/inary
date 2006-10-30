@@ -90,7 +90,7 @@ def getNode(node, tagpath):
 
     if tagpath == "":
         return node
-    
+
     assert type(tagpath)==str
     tags = tagpath.split('/')
     assert len(tags)>0
@@ -135,7 +135,7 @@ def addNode(node, tagpath, newnode = None, branch=True):
     else:
         addTagPath(node, [], newnode)
         return node #FIXME: is this correct!?!?
-        
+
     assert len(tags)>0                  # we want a chain
 
     # iterative code to search for the path

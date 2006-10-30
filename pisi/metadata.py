@@ -48,7 +48,7 @@ class Package(specfile.Package):
     t_PackageFormat = [ autoxml.String, autoxml.optional]
 
     t_Source = [ Source, autoxml.optional]
-    
+
     def decode_hook(self, node, errs, where):
         self.version = self.history[0].version
         self.release = self.history[0].release

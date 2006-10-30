@@ -39,24 +39,24 @@ def dobin(sourceFile, destinationDirectory = '/usr/bin'):
     '''insert a executable file into /bin or /usr/bin'''
     ''' example call: pisitools.dobin("bin/xloadimage", "/bin", "xload") '''
     executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
- 
+
 def dodir(destinationDirectory):
     '''creates a directory tree'''
     makedirs(join_path(get.installDIR(), destinationDirectory))
 
 def dodoc(*sourceFiles):
-    '''inserts the files in the list of files into /usr/share/doc/PACKAGE''' 
+    '''inserts the files in the list of files into /usr/share/doc/PACKAGE'''
     readable_insinto(join_path(get.installDIR(), join_path('/usr/share/doc', get.srcTAG())), *sourceFiles)
 
 def doexe(sourceFile, destinationDirectory):
     '''insert a executable file into destination directory'''
-    
+
     ''' example call: pisitools.doexe("kde-3.4.sh", "/etc/X11/Sessions")'''
     executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
 
 def dohtml(*sourceFiles):
     '''inserts the files in the list of files into /usr/share/doc/PACKAGE/html'''
- 
+
     ''' example call: pisitools.dohtml("doc/doxygen/html/*")'''
     destionationDirectory = join_path(get.installDIR(), 'usr/share/doc' ,get.srcTAG(), 'html')
 
@@ -83,17 +83,17 @@ def doinfo(*sourceFiles):
 
 def dolib(sourceFile, destinationDirectory = '/usr/lib'):
     '''insert the library into /usr/lib'''
-    
+
     '''example call: pisitools.dolib_a("libz.a")'''
     '''example call: pisitools.dolib_a("libz.so")'''
     sourceFile = join_path(os.getcwd(), sourceFile)
     destinationDirectory = join_path(get.installDIR(), destinationDirectory)
 
     lib_insinto(sourceFile, destinationDirectory, 755)
-    
+
 def dolib_a(sourceFile, destinationDirectory = '/usr/lib'):
     '''insert the static library into /usr/lib with permission 0644'''
-    
+
     '''example call: pisitools.dolib_a("staticlib/libvga.a")'''
     sourceFile = join_path(os.getcwd(), sourceFile)
     destinationDirectory = join_path(get.installDIR(), destinationDirectory)
@@ -102,7 +102,7 @@ def dolib_a(sourceFile, destinationDirectory = '/usr/lib'):
 
 def dolib_so(sourceFile, destinationDirectory = '/usr/lib'):
     '''insert the static library into /usr/lib with permission 0755'''
-    
+
     '''example call: pisitools.dolib_so("pppd/plugins/minconn.so")'''
     sourceFile = join_path(os.getcwd(), sourceFile)
     destinationDirectory = join_path(get.installDIR(), destinationDirectory)
@@ -124,8 +124,8 @@ def doman(*sourceFiles):
                                           source[source.rindex('.')+1:]
             except ValueError:
                 error(_('ActionsAPI [doman]: Wrong man page file: %s') % (source))
-                
-            makedirs(join_path(manDIR, '/man%s' % pageDirectory)) 
+
+            makedirs(join_path(manDIR, '/man%s' % pageDirectory))
             system('install -m0644 %s %s' % (source, join_path(manDIR, '/man%s' % pageDirectory)))
 
 def domo(sourceFile, locale, destinationFile ):
@@ -139,11 +139,11 @@ def domo(sourceFile, locale, destinationFile ):
 
 def domove(sourceFile, destination, destinationFile = ''):
     '''moves sourceFile/Directory into destinationFile/Directory'''
-    
+
     ''' example call: pisitools.domove("/usr/bin/bash", "/bin/bash")'''
     ''' example call: pisitools.domove("/usr/bin/", "/usr/sbin")'''
     makedirs(join_path(get.installDIR(), destination))
-        
+
     for filePath in glob.glob(join_path(get.installDIR(), sourceFile)):
         if not destinationFile:
             move(filePath, join_path(get.installDIR(), join_path(destination, os.path.basename(filePath))))
@@ -152,20 +152,20 @@ def domove(sourceFile, destination, destinationFile = ''):
 
 def rename(sourceFile, destinationFile):
     ''' renames sourceFile as destinationFile'''
-    
+
     ''' example call: pisitools.rename("/usr/bin/bash", "bash.old") '''
     ''' the result of the previous example would be "/usr/bin/bash.old" '''
 
     baseDir = os.path.dirname(sourceFile)
 
-    try:        
+    try:
         os.rename(join_path(get.installDIR(), sourceFile), join_path(get.installDIR(), baseDir, destinationFile))
     except OSError:
         error(_('ActionsAPI [rename]: No such file or directory: %s') % (sourceFile))
 
 def dosed(sourceFiles, findPattern, replacePattern = ''):
     '''replaces patterns in sourceFiles'''
-    
+
     ''' example call: pisitools.dosed("/etc/passwd", "caglar", "cem")'''
     ''' example call: pisitools.dosed("/etc/passwd", "caglar")'''
     ''' example call: pisitools.dosed("/etc/pass*", "caglar")'''
@@ -182,10 +182,10 @@ def dosed(sourceFiles, findPattern, replacePattern = ''):
 
 def dosbin(sourceFile, destinationDirectory = '/usr/sbin'):
     '''insert a executable file into /sbin or /usr/sbin'''
-    
+
     ''' example call: pisitools.dobin("bin/xloadimage", "/sbin") '''
     executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
-        
+
 def dosym(sourceFile, destinationFile):
     '''creates soft link between sourceFile and destinationFile'''
 

@@ -20,7 +20,7 @@ class autosuper(type):
     def __init__(cls, name, bases, dict):
         super(autosuper, cls).__init__(name, bases, dict)
         setattr(cls, "_%s__super" % name, super(cls))
-        
+
 class autosuprop(autosuper, autoprop):
     pass
 
@@ -34,6 +34,6 @@ class autoeq(type):
 
 class Struct:
     __metaclass__ = autoeq
-    
+
     def __init__(self, **entries):
         self.__dict__.update(entries)

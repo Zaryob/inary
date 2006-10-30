@@ -40,7 +40,7 @@ class Package:
 
     def create_package(self):
         pspec = Pspec(self.name, consts.pspec_path)
-        pspec.set_source(consts.homepage, consts.summary % self.name, 
+        pspec.set_source(consts.homepage, consts.summary % self.name,
                          consts.description % self.name, consts.license, self.partOf)
         pspec.set_packager(consts.packager_name, consts.packager_email)
         pspec.set_archive(consts.skel_sha1sum, consts.skel_type, consts.skel_uri)
@@ -67,7 +67,7 @@ class Package:
             raise Exception(_("No pisi package: %s* found.") % pkg)
 
         return os.path.basename(found[0])
-        
+
     def version_bump(self, *args):
         for with in args:
             if with.types == CONFLICT and with.action == ADDED:
@@ -78,7 +78,7 @@ class Package:
 
             if with.types == DEPENDENCY and with.action == ADDED:
                 self.pspec.add_dependencies(with.data)
-                    
+
             if with.types == DEPENDENCY and with.action == REMOVED:
                 self.pspec.remove_dependencies(with.data)
 
@@ -93,4 +93,3 @@ class Package:
 if __name__ == "__main__":
     p = Package("w0rmux", [], [], "0.7")
     p.version_bump()
-    

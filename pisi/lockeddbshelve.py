@@ -71,7 +71,7 @@ def lock_dbenv():
         raise Error(_("Another instance of PiSi is running. Only one instance is allowed to modify the PiSi database at a time."))
 
 # write: write access to database environment
-# writeversion: would you like to be able 
+# writeversion: would you like to be able
 def init_dbenv(write=False, writeversion=False):
     if os.access(pisi.context.config.db_dir(), os.R_OK):
         # try to read version
@@ -121,7 +121,7 @@ class LockedDBShelf(shelve.DBShelf):
         pass
 
     def open(self, filename, dbname, filetype, flags=db.DB_CREATE, mode=0644):
-        self.filename = filename        
+        self.filename = filename
         self.closed = False
         if type(flags) == type(''):
             sflag = flags

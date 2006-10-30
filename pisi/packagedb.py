@@ -41,17 +41,17 @@ class NotfoundError(pisi.Error):
         self.pkg = pkg
 
 class PackageDB(object):
-    """PackageDB class provides an interface to the package database 
+    """PackageDB class provides an interface to the package database
     using shelf objects"""
-    
+
     def __init__(self):
-        self.d = ItemByRepoDB('package') 
+        self.d = ItemByRepoDB('package')
         self.dr = ItemByRepoDB('revdep')
 
     def close(self):
         self.d.close()
         self.dr.close()
-        
+
     def destroy(self):
         self.d.destroy()
         self.dr.destroy()
@@ -89,7 +89,7 @@ class PackageDB(object):
 
     def add_package(self, package_info, repo, txn = None):
         name = str(package_info.name)
-        
+
         def proc(txn):
             self.d.add_item(name, package_info, repo, txn)
             for dep in package_info.runtimeDependencies():
@@ -129,9 +129,9 @@ class PackageDB(object):
                     revdep = filter(lambda (n,d):n!=name, revdep)
                     if revdep:
                         self.dr.add_item(dep_name, revdep, repo, txn)
-                    else: 
-                        # Bug 3558: removal of revdep list of a package from revdepdb 
-                        # should only be done by the list members (dep. packages), not 
+                    else:
+                        # Bug 3558: removal of revdep list of a package from revdepdb
+                        # should only be done by the list members (dep. packages), not
                         # the package itself. So if a package is removed, it is removed
                         # from packagedb but its revdepdb part may still exist, until
                         # all the list members are removed.
@@ -149,7 +149,7 @@ class PackageDB(object):
     def remove_repo(self, repo, txn = None):
         def proc(txn):
             self.d.remove_repo(repo, txn=txn)
-            self.dr.remove_repo(repo, txn=txn)            
+            self.dr.remove_repo(repo, txn=txn)
         self.d.txn_proc(proc, txn)
 
 pkgdb = None

@@ -62,7 +62,7 @@ class XmlFile(object):
             return self.doc
         except Exception, e:
             raise Error(_("String '%s' has invalid XML") % (xml))
-        
+
     def readxmlfile(self, file):
         raise Exception("not implemented")
         try:
@@ -72,11 +72,11 @@ class XmlFile(object):
             raise Error(_("File '%s' has invalid XML") % (localpath) )
 
 
-    def readxml(self, uri, tmpDir='/tmp', sha1sum=False, 
+    def readxml(self, uri, tmpDir='/tmp', sha1sum=False,
                 compress=None, sign=None, copylocal = False):
         uri = File.make_uri(uri)
         #try:
-        localpath = File.download(uri, tmpDir, sha1sum=sha1sum, 
+        localpath = File.download(uri, tmpDir, sha1sum=sha1sum,
                                   compress=compress,sign=sign, copylocal=copylocal)
         #except IOError, e:
         #    raise Error(_("Cannot read URI %s: %s") % (uri, unicode(e)) )

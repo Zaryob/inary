@@ -56,7 +56,7 @@ def init(database = True, write = True,
     """Initialize PiSi subsystem"""
 
     # UI comes first
-        
+
     if ui is None:
         from pisi.cli import CLI
         if options:
@@ -167,7 +167,7 @@ def package_graph(A, repo = pisi.itembyrepodb.installed, ignore_installed = Fals
     be added."""
 
     ctx.ui.debug('A = %s' % str(A))
-  
+
     # try to construct a pisi graph of packages to
     # install / reinstall
 
@@ -283,7 +283,7 @@ def info(package, installed = False):
         return info_file(package)
     else:
         return info_name(package, installed)
-    
+
 def info_file(package_fn):
     from package import Package
 
@@ -301,7 +301,7 @@ def info_name(package_name, installed=False):
     else:
         package, repo = ctx.packagedb.get_package_repo(package_name, pisi.itembyrepodb.repos)
         repostr = repo
- 
+
     from pisi.metadata import MetaData
     metadata = MetaData()
     metadata.package = package
@@ -353,7 +353,7 @@ def check(package):
     for file in files.list:
         if file.hash and file.type != "config" \
            and not os.path.islink('/' + file.path):
-            ctx.ui.info(_("Checking /%s ") % file.path, noln=True, verbose=True) 
+            ctx.ui.info(_("Checking /%s ") % file.path, noln=True, verbose=True)
             if file.hash != util.sha1_file('/' + file.path):
                 corrupt.append(file)
                 ctx.ui.info(_("\nCorrupt file: %s") % file, noln=True)
@@ -392,7 +392,7 @@ def remove_repo(name):
         pisi.util.clean_dir(os.path.join(ctx.config.index_dir(), name))
         ctx.ui.info(_('Repo %s removed from system.') % name)
     else:
-        ctx.ui.error(_('Repository %s does not exist. Cannot remove.') 
+        ctx.ui.error(_('Repository %s does not exist. Cannot remove.')
                  % name)
 
 def list_repos():
@@ -420,7 +420,7 @@ def update_repo(repo, force=False):
             ctx.ui.warning(e)
 
         ctx.txn_proc(lambda txn : index.update_db(repo, txn=txn))
-        ctx.ui.info(_('* Package database updated.'))            
+        ctx.ui.info(_('* Package database updated.'))
     else:
         raise Error(_('No repository named %s found.') % repo)
 
@@ -431,7 +431,7 @@ def delete_cache():
 
 def rebuild_repo(repo):
     ctx.ui.info(_('* Rebuilding \'%s\' named repo... ') % repo)
-    
+
     if ctx.repodb.has_repo(repo):
         repouri = URI(ctx.repodb.get_repo(repo).indexuri.get_uri())
         indexname = repouri.filename()

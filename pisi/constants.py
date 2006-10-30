@@ -10,7 +10,7 @@
 # Please read the COPYING file.
 #
 
-"""PiSi constants. 
+"""PiSi constants.
 If you have a "magic" constant value this is where it should be
 defined."""
 
@@ -66,9 +66,9 @@ class Constants:
 
         # file/directory names
         #note: these don't seem very well, constants are used
-        #when it is easier/more meaningful to write the constant name, or 
+        #when it is easier/more meaningful to write the constant name, or
         #when the constant is bound to change later on.
-        #in some places literals are just as good, for instance 
+        #in some places literals are just as good, for instance
         #when constant is the same as string. readability is important...
         self.__c.actions_file = "actions.py"
         self.__c.files_dir = "files"

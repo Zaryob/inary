@@ -25,6 +25,6 @@ def install():
     def __init__(self, name, filepath):
         self.name = name
         self.filepath = filepath
-    
+
     def write(self):
         open(self.filepath, "w").write(self.template % self.name)

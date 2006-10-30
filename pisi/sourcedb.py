@@ -15,7 +15,7 @@ package source database
 interface for update/query to local package repository
 we basically store everything in sourceinfo class
 yes, we are cheap
-to handle multiple repositories, for sources, we 
+to handle multiple repositories, for sources, we
 store a set of repositories in which the source appears.
 the actual guy to take is determined from the repo order.
 """
@@ -66,17 +66,17 @@ class SourceDB(object):
 
     def pkgtosrc(self, name, txn = None):
         return self.dpkgtosrc.get_item(name, txn=txn)
-        
+
     def add_spec(self, spec, repo, txn = None):
         assert not spec.errors()
         name = str(spec.source.name)
         def proc(txn):
-            self.d.add_item(name, spec, repo, txn)            
+            self.d.add_item(name, spec, repo, txn)
             for pkg in spec.packages:
                 self.dpkgtosrc.add_item(pkg.name, name, repo, txn)
             ctx.componentdb.add_spec(spec.source.partOf, spec.source.name, repo, txn)
         self.d.txn_proc(proc, txn)
-        
+
     def remove_spec(self, name, repo, txn = None):
         name = str(name)
         def proc(txn):
@@ -86,13 +86,13 @@ class SourceDB(object):
             for pkg in spec.packages:
                 self.dpkgtosrc.remove_item_repo(pkg.name, repo, txn)
             ctx.componentdb.remove_spec(spec.source.partOf, spec.source.name, repo, txn)
-            
+
         self.d.txn_proc(proc, txn)
 
     def remove_repo(self, repo, txn = None):
         def proc(txn):
             self.d.remove_repo(repo, txn=txn)
-            self.dpkgtosrc.remove_repo(repo, txn=txn)            
+            self.dpkgtosrc.remove_repo(repo, txn=txn)
         self.d.txn_proc(proc, txn)
 
 sourcedb = None

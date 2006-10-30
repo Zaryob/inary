@@ -24,7 +24,7 @@ def tokenize(lang, str):
                 token = unicode()
         else:
             token += x
-            
+
     if token:
         tokens.append(token)
 

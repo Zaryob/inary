@@ -35,14 +35,14 @@ import pisi.context as ctx
 class AlreadyHaveException(pisi.Exception):
     def __init__(self, url, localfile):
         pisi.Exception.__init__(self, "URL %s already downloaded as %s" % (url, localfile))
-        self.url = url 
+        self.url = url
         self.localfile = localfile
 
 class NoSignatureFound(pisi.Exception):
     def __init__(self, url):
         pisi.Exception.__init__(self, "No signature found for %s" % url)
         self.url = url
-        
+
 class Error(pisi.Error):
     pass
 
@@ -65,7 +65,7 @@ class File:
         elif not isinstance(uri, URI):
             raise Error(_("uri must have type either URI or string"))
         return uri
-        
+
     @staticmethod
     def choose_method(filename, compress):
         # this is really simple (^_^) -- exa
@@ -90,7 +90,7 @@ class File:
         return localfile
 
     @staticmethod
-    def download(uri, transfer_dir = "/tmp", sha1sum = False, 
+    def download(uri, transfer_dir = "/tmp", sha1sum = False,
                  compress = None, sign = None, copylocal = False):
 
         assert isinstance(uri, URI)
@@ -139,7 +139,7 @@ class File:
         return localfile
 
 
-    def __init__(self, uri, mode, transfer_dir = "/tmp", 
+    def __init__(self, uri, mode, transfer_dir = "/tmp",
                  sha1sum = False, compress = None, sign = None):
         "it is pointless to open a file without a URI and a mode"
 
@@ -147,7 +147,6 @@ class File:
         self.sha1sum = sha1sum
         self.compress = compress
         self.sign = sign
-        
 
         uri = File.make_uri(uri)
         if mode==File.read or mode==File.write:
@@ -217,7 +216,7 @@ class File:
             if os.system('gpg --verify ' + sigfilename) != 0:
                 raise InvalidSignature(uri)
             # everything is all right here
-                
+
     def flush(self):
         self.__file__.flush()
 
@@ -229,7 +228,7 @@ class File:
 
     def next(self):
         return self.__file__.next()
-    
+
     def read(self, size = None):
         if size:
             return self.__file__.read(size)
@@ -241,25 +240,25 @@ class File:
             return self.__file__.readline(size)
         else:
             return self.__file__.readline()
-    
+
     def readlines(self, size = None):
         if size:
             return self.__file__.readlines(size)
         else:
             return self.__file__.readlines()
-        
+
     def xreadlines(self):
         return self.__file__.xreadlines()
-    
+
     def seek(self, offset, whence=0):
         self.__file__.seek(offset, whence)
-    
+
     def tell(self):
         return self.__file__.tell()
-        
+
     def truncate(self):
         self.__file__.truncate()
-        
+
     def write(self, str):
         self.__file__.write(str)
 

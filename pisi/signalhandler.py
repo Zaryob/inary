@@ -30,7 +30,7 @@ class SignalHandler:
     def signal_handler(self, sig, frame):
         signal.signal(sig, signal.SIG_IGN)
         self.signals[sig].pending = True
-            
+
     def disable_signal(self, sig):
         if sig not in self.signals.keys():
             self.signals[sig] = Signal(sig)

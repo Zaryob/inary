@@ -66,7 +66,7 @@ class VersionItem:
                         # longer match is correct
                         if len(keyword) > len(self._keyword):
                             self._keyword = keyword
-        
+
         if self._keyword == "NOKEY":
             if len(itemstring) == 1 and itemstring in string.ascii_letters:
                 # single letter version item ('a' to 'Z')
@@ -137,7 +137,7 @@ class Version:
         # They are special and used for build and release no separation.
         if verstring.count("-") > maxdashes:
             raise VersionException("%s is not a valid PiSi version format" % verstring)
-        
+
         verchunks = verstring.split("-")
         verchunks.extend("0" * (maxdashes - verstring.count("-")))
         (version, release, build) = verchunks
@@ -176,7 +176,7 @@ class Version:
         # pad the short version string with zeros
         if len(lhs) < len(rhs):
             lhs.extend( [VersionItem('0')] * (len(rhs) - len(lhs)) )
-        elif len(lhs) > len(rhs):            
+        elif len(lhs) > len(rhs):
             rhs.extend( [VersionItem('0')] * (len(lhs) - len(rhs)) )
         # now let's iterate from left to right in version items
         for (litem, ritem) in zip(lhs, rhs):
@@ -201,7 +201,7 @@ class Version:
 
     def __le__(self,rhs):
         return self.compare(rhs) <= 0
-            
+
     def __gt__(self,rhs):
         return self.compare(rhs) > 0
 

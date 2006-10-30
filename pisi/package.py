@@ -36,17 +36,17 @@ class Package:
     def __init__(self, packagefn, mode='r'):
         self.filepath = packagefn
         url = URI(packagefn)
-        
+
         if url.is_remote_file():
             self.fetch_remote_file(url)
-                
+
         self.impl = archive.ArchiveZip(self.filepath, 'zip', mode)
 
     def fetch_remote_file(self, url):
         from fetcher import fetch_url
         dest = ctx.config.packages_dir()
         self.filepath = join(dest, url.filename())
-        
+
         #FIXME: also check sha1sum
         if not exists(self.filepath):
             try:
@@ -98,7 +98,7 @@ class Package:
         unpacks the *contents* of directory archiveroot/dir inside outdir
         this is the function used by the installer"""
         self.impl.unpack_dir_flat(dir, outdir)
-        
+
     def extract_pisi_files(self, outdir):
         """Extract PiSi control files: metadata.xml, files.xml,
         action scripts, etc."""
@@ -135,7 +135,7 @@ class Package:
         self.files.read( join(outdir, ctx.const.files_xml) )
         if self.files.errors():
             raise Error, _("Invalid %s") % ctx.const.files_xml
-        
+
     def pkg_dir(self):
         packageDir = self.metadata.package.name + '-' \
                      + self.metadata.package.version + '-' \

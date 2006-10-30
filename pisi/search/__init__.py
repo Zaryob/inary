@@ -26,10 +26,10 @@ import preprocess as p
 
 def init(ids, langs):
     "initialize databases"
-    
+
     assert type(ids)==type([])
     assert type(langs)==type([])
-    
+
     ctx.invidx = {}
     for id in ids:
         ctx.invidx[id] = {}
@@ -38,19 +38,19 @@ def init(ids, langs):
 
 def finalize():
     import pisi.context as ctx
-    
+
     if ctx.invidx:
         for id in ctx.invidx.iterkeys():
             for lang in ctx.invidx[id].iterkeys():
                 ctx.invidx[id][lang].close()
-        ctx.invidx = {}    
-    
+        ctx.invidx = {}
+
 def add_doc(id, lang, docid, str, repo = None, txn = None):
     terms = p.preprocess(lang, str)
     ctx.invidx[id][lang].add_doc(docid, terms, repo=repo, txn=txn)
 
 def remove_doc(id, lang, docid, str, repo = None, txn = None):
-    terms = p.preprocess(lang, str)    
+    terms = p.preprocess(lang, str)
     ctx.invidx[id][lang].remove_doc(docid, terms, repo = repo, txn = txn)
 
 def query_terms(id, lang, terms, repo = None, txn = None):

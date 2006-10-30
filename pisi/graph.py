@@ -37,7 +37,7 @@ class Digraph(object):
         self.__adj = {}
         self.__vdata = {}
         self.__edata = {}
-        
+
     def vertices(self):
         "return set of vertex descriptors"
         return self.__v

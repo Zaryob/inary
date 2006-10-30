@@ -74,7 +74,7 @@ def make(parameters = ''):
 def install(parameters = 'install'):
     if can_access_file('Makefile'):
         args = 'make DESTDIR=%s destdir=%s %s' % (get.installDIR(), get.installDIR(), parameters)
-        
+
         if system(args):
             raise InstallError(_('Install failed.'))
     else:

@@ -68,7 +68,7 @@ class GeneralDefaults:
 class BuildDefaults:
     """Default values for [build] section"""
     host = "i686-pc-linux-gnu"
-    jobs = "-j1"   
+    jobs = "-j1"
     generateDebug = False
     cflags = "-mtune=i686 -O2 -pipe -fomit-frame-pointer"
     cxxflags = "-mtune=i686 -O2 -pipe -fomit-frame-pointer"
@@ -94,7 +94,7 @@ class ConfigurationSection(object):
     file, using defaults (above) as a fallback."""
     def __init__(self, section, items=[]):
         self.items = items
-        
+
         if section == "general":
             self.defaults = GeneralDefaults
         elif section == "build":
@@ -131,7 +131,6 @@ class ConfigurationSection(object):
     # string. Like; ["default"]...
     def __getitem__(self, key):
         return self.__getattr__(key)
-        
 
 class ConfigurationFile(object):
     """Parse and get configuration values from the configuration file"""

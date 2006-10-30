@@ -75,7 +75,7 @@ def wait_for_result(com, package_name=None):
                 if ctx.keyboard_interrupt_pending():
                     return
                 raise Error, _("connection with comar unexpectedly closed")
-        
+
         cmd = reply[0]
         if cmd == com.RESULT and not multiple:
             return
@@ -99,18 +99,18 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath)
     ctx.ui.info(_("Configuring package"))
     self_post = False
     com = make_com()
-    
+
     for script in provided_scripts:
         ctx.ui.debug(_("Registering %s comar script") % script.om)
         if script.om == "System.Package":
             self_post = True
         com.register(script.om, package_name, os.path.join(scriptpath, script.script))
         wait_for_result(com)
-    
+
     ctx.ui.debug(_("Calling post install handlers"))
     com.call("System.PackageHandler.setupPackage", [ "metapath", metapath, "filepath", filepath ])
     wait_for_result(com)
-    
+
     if self_post:
         ctx.ui.debug(_("Running package's post install script"))
         com.call_package("System.Package.postInstall", package_name)
@@ -119,15 +119,15 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath)
 def pre_remove(package_name, metapath, filepath):
     ctx.ui.info(_("Configuring package for removal"))
     com = make_com()
-    
+
     ctx.ui.debug(_("Running package's pre remove script"))
     com.call_package("System.Package.preRemove", package_name)
     wait_for_result(com)
-    
+
     ctx.ui.debug(_("Calling pre remove handlers"))
     com.call("System.PackageHandler.cleanupPackage", [ "metapath", metapath, "filepath", filepath ])
     wait_for_result(com)
-    
+
     ctx.ui.debug(_("Unregistering comar scripts"))
     com.remove(package_name)
     wait_for_result(com)

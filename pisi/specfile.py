@@ -64,7 +64,7 @@ class AdditionalFile:
 
 
 class Patch:
-    
+
     s_Filename = [autoxml.String, autoxml.mandatory]
     a_compressionType = [autoxml.String, autoxml.optional]
     a_level = [autoxml.Integer, autoxml.optional]
@@ -87,7 +87,7 @@ class Patch:
 
 
 class Update:
-    
+
     a_release = [autoxml.String, autoxml.mandatory]
     a_type = [autoxml.String, autoxml.optional]
     t_Date = [autoxml.String, autoxml.mandatory]
@@ -128,7 +128,6 @@ class ComarProvide:
         s += ' (' + self.om + ')'
         return s
 
-        
 class Archive:
 
     s_uri = [ autoxml.String, autoxml.mandatory ]

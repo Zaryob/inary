@@ -26,7 +26,7 @@ import pisi.itembyrepodb
 class Dependency:
 
     __metaclass__ = autoxml.autoxml
-    
+
     s_Package = [autoxml.String, autoxml.mandatory]
     a_version = [autoxml.String, autoxml.optional]
     a_versionFrom = [autoxml.String, autoxml.optional]
@@ -59,11 +59,11 @@ class Dependency:
             ret &= v <= Version(self.versionTo)
         r = Version(release)
         if self.release:
-            ret &= r == Version(self.release)        
+            ret &= r == Version(self.release)
         if self.releaseFrom:
-            ret &= r >= Version(self.releaseFrom)        
+            ret &= r >= Version(self.releaseFrom)
         if self.releaseTo:
-            ret &= r <= Version(self.releaseTo)       
+            ret &= r <= Version(self.releaseTo)
         return ret
 
 def dict_satisfies_dep(dict, depinfo):
@@ -111,7 +111,7 @@ def satisfies_runtime_deps(pkg):
     return satisfies_dependencies(pkg, deps)
 
 def installable(pkg):
-    """calculate if pkg name is installable currently 
+    """calculate if pkg name is installable currently
     which means it has to satisfy both install and runtime dependencies"""
     if not ctx.packagedb.has_package(pkg):
         ctx.ui.info(_("Package %s is not present in the package database") % pkg);

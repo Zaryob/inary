@@ -17,7 +17,7 @@ import sys
 import pisi
 import pisi.context as ctx
 
-(installed, upgraded, removed, installing, removing, configuring, configured, extracting, 
+(installed, upgraded, removed, installing, removing, configuring, configured, extracting,
  downloading, packagestogo, updatingrepo)  = range(11)
 
 class UI(object):
@@ -43,7 +43,7 @@ class UI(object):
     def __init__(self, debuggy = False, verbose = False):
         self.show_debug = debuggy
         self.show_verbose = verbose
-        
+
     def close(self):
         "cleanup stuff here"
         pass
@@ -95,7 +95,7 @@ class UI(object):
     def status(self, msg = None):
         "set status, if not given clear it"
         pass
-        
+
     def notify(self, event, **keywords):
         "notify UI of a significant event"
         pass

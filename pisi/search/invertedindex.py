@@ -18,7 +18,7 @@ import pisi.itembyrepodb as itembyrepodb
 
 class InvertedIndex(object):
     """a database of term -> set of documents"""
-    
+
     def __init__(self, id, lang):
         self.d = ItemByRepoDB('ii-%s-%s' % (id, lang))
 
@@ -75,7 +75,7 @@ class InvertedIndex(object):
     def remove_doc(self, doc, terms,repo=None, txn=None):
         def f(txn):
             for term_i in terms:
-                term_i = shelve.LockedDBShelf.encodekey(term_i)            
+                term_i = shelve.LockedDBShelf.encodekey(term_i)
                 term_i_docs = self.get_term(term_i,repo=repo, txn=txn)
                 if doc in term_i_docs:
                     term_i_docs.remove(doc)

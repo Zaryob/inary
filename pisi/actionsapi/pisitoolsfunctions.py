@@ -31,7 +31,7 @@ class FileError(pisi.actionsapi.Error):
         pisi.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)
-        
+
 class ArgumentError(pisi.actionsapi.Error):
     def __init__(self, value=''):
         pisi.actionsapi.Error.__init__(self, value)
@@ -73,7 +73,7 @@ def lib_insinto(sourceFile, destinationDirectory, permission = 0644):
 
     if not can_access_directory(destinationDirectory):
         makedirs(destinationDirectory)
-    
+
     if os.path.islink(sourceFile):
         os.symlink(os.path.realpath(sourceFile), os.path.join(destinationDirectory, sourceFile))
     else:

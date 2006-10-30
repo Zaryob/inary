@@ -19,7 +19,7 @@ from graph import *
 # Cache the results from packagedb queries in a graph
 
 class PGraph(Digraph):
-    
+
     def __init__(self, packagedb, repo = pisi.itembyrepodb.repos):
         super(PGraph, self).__init__()
         self.packagedb = packagedb
@@ -37,7 +37,7 @@ class PGraph(Digraph):
         pkg2data = None
         if not pkg2name in self.vertices():
             pkg2 = self.packagedb.get_package(pkg2name, self.repo)
-            pkg2data = (pkg2.version, pkg2.release) 
+            pkg2data = (pkg2.version, pkg2.release)
         self.add_edge(str(pkg1name), str(pkg2name), ('d', None),
                       pkg1data, pkg2data )
 
@@ -45,7 +45,7 @@ class PGraph(Digraph):
         pkg1data = None
         if not pkg in self.vertices():
             pkg1 = self.packagedb.get_package(pkg, self.repo)
-            pkg1data = (pkg1.version, pkg1.release) 
+            pkg1data = (pkg1.version, pkg1.release)
         pkg2data = None
         if not depinfo.package in self.vertices():
             pkg2 = self.packagedb.get_package(depinfo.package, self.repo)
@@ -61,7 +61,7 @@ class PGraph(Digraph):
         pkg2data = None
         if not depinfo.package in self.vertices():
             pkg2 = self.packagedb.get_package(pkg, self.repo)
-            pkg2data = (pkg2.version, pkg2.release) 
+            pkg2data = (pkg2.version, pkg2.release)
         self.add_edge(str(depinfo.package), str(pkg), ('d', depinfo),
                       pkg1data, pkg2data )
 
@@ -69,7 +69,7 @@ class PGraph(Digraph):
         pkg1data = None
         if not pkg in self.vertices():
             pkg1 = self.packagedb.get_package(pkg, self.repo)
-            pkg1data = (pkg1.version, pkg1.release) 
+            pkg1data = (pkg1.version, pkg1.release)
         pkg2data = None
         if not pkg in self.vertices():
             pkg2 = self.packagedb.get_package(conflinfo.package, self.repo)

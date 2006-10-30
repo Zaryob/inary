@@ -106,7 +106,7 @@ def unlinkDir(sourceDirectory):
         except OSError:
             error(_('ActionsAPI [unlinkDir]: Operation not permitted: %s') % (sourceDirectory))
     elif isFile(sourceDirectory):
-        pass                                
+        pass
     else:
         error(_('ActionsAPI [unlinkDir]: Directory %s doesn\'t exists.') % (sourceDirectory))
 

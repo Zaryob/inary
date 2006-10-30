@@ -64,7 +64,7 @@ class DBShelf:
     allowed_chars = string.letters + string.digits + '-'
     def check_key(key):
         return pisi.util.all(lambda x: x in allowed_chars, key)
-    
+
     def has_key(self, key, txn = None):
         if txn:
             return self.db.has_key(key, txn)
@@ -87,7 +87,7 @@ class DBShelf:
             return retval
         else:
             return proc(txn)
-            
+
     def decode(self, data):
         try:
             return cPickle.loads(data)
@@ -102,7 +102,7 @@ class DBShelf:
             for x in self.keys(txn):
                 self.db.delete(x, txn)
         self.txn_proc(proc, txn)
-        
+
     def delete(self, x, txn):
         def proc(txn):
             self.db.delete(x, txn)
@@ -121,7 +121,7 @@ class DBShelf:
 
     def __len__(self):
         return len(self.db)
-        
+
     def __getitem__(self, key):
         def proc(txn):
             data = self.db.get(key)

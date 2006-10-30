@@ -56,8 +56,8 @@ def with_added_conflict(package, **kw):
         return with_action(CONFLICT, ADDED, [package])
 
     if (kw.has_key("versionFrom") or
-        kw.has_key("versionTo") or 
-        kw.has_key("version") or 
+        kw.has_key("versionTo") or
+        kw.has_key("version") or
         kw.has_key("releaseFrom") or
         kw.has_key("releaseTo") or
         kw.has_key("release")):
@@ -73,8 +73,8 @@ def with_added_dependency(package, **kw):
         return with_action(DEPENDENCY, ADDED, [package])
 
     if (kw.has_key("versionFrom") or
-        kw.has_key("versionTo") or 
-        kw.has_key("version") or 
+        kw.has_key("versionTo") or
+        kw.has_key("version") or
         kw.has_key("releaseFrom") or
         kw.has_key("releaseTo") or
         kw.has_key("release")):

@@ -19,12 +19,12 @@ def lowly_python(str):
         else:
             lowly = c.lower()
         return c
-    
+
     r = ""
     for c in str:
         r += lowly_char(c)
     return r
-    
+
 def lower(lang, str):
     if lang=='tr':
         return lowly_python(str)
@@ -33,8 +33,8 @@ def lower(lang, str):
 
 def preprocess(lang, str):
     terms = tokenize.tokenize(lang, str)
-    
+
     # normalize
     terms = map(lambda x: lower(lang, x), terms)
-    
+
     return terms

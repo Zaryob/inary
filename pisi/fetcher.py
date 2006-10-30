@@ -59,7 +59,7 @@ class Fetcher:
     def __init__(self, url, destdir, resume = True):
         if not isinstance(url, URI):
             url = URI(url)
- 
+
         if ctx.config.get_option("authinfo"):
             url.set_auth_info(ctx.config.get_option("authinfo"))
 
@@ -84,7 +84,7 @@ class Fetcher:
             self.err(_('Access denied to write to destination directory: "%s"') % (self.destdir))
 
         archive_file = os.path.join(self.destdir, self.url.filename())
-        
+
         if os.path.exists(archive_file) and not os.access(archive_file, os.W_OK):
             self.err(_('Access denied to destination file: "%s"') % (archive_file))
 
@@ -101,7 +101,7 @@ class Fetcher:
 
         move(partial_file, archive_file)
 
-        return archive_file 
+        return archive_file
 
     def _do_grab(self, fileURI, dest, total_size):
         bs, tt, = 1024, int(time())
@@ -200,7 +200,7 @@ class Fetcher:
             if flag:
                 if os.stat(archive_file).st_size == 0:
                     os.remove(archive_file)
-            
+
         try:
             total_size = int(headers['Content-Length']) + self.exist_size
         except KeyboardInterrupt:
@@ -251,7 +251,7 @@ class Fetcher:
         raise FetchError(error)
 
 class HTTPRangeHandler(urllib2.BaseHandler):
-    """ 
+    """
     to override the urllib2 error: 'Error 206: Partial Content'
     this reponse from the HTTP server is already what we expected to get.
     Don't give up, resume downloading..
@@ -294,7 +294,7 @@ class FTPRangeHandler(urllib2.FTPHandler):
                 if attr.lower() == 'type' and \
                    value in ('a', 'A', 'i', 'I', 'd', 'D'):
                     type = value.upper()
-         
+
             rawr = req.headers.get('Range', None)
             if rawr:
                 rest = int(rawr.split("=")[1].rstrip("-"))
@@ -302,7 +302,7 @@ class FTPRangeHandler(urllib2.FTPHandler):
                 rest = 0
 
             fp, retrlen = fw.retrfile(file, type, rest)
-            
+
             fb, lb = rest, retrlen
             if retrlen is None or retrlen == 0:
                 raise RangeError
@@ -310,7 +310,7 @@ class FTPRangeHandler(urllib2.FTPHandler):
             if retrlen < 0:
                 # beginning of range is larger than file
                 raise RangeError
-            
+
             headers = ''
             mtype = guess_type(req.get_full_url())[0]
             if mtype:
@@ -318,9 +318,9 @@ class FTPRangeHandler(urllib2.FTPHandler):
             if retrlen is not None and retrlen >= 0:
                 headers += 'Content-Length: %d\n' % retrlen
 
-            try:    
+            try:
                 from cStringIO import StringIO
-            except ImportError, msg: 
+            except ImportError, msg:
                 from StringIO import StringIO
 
             return urllib.addinfourl(fp, Message(StringIO(headers)), req.get_full_url())

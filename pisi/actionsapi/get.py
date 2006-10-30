@@ -30,7 +30,7 @@ class BinutilsError(pisi.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
 
-# Globals                                
+# Globals
 env = pisi.actionsapi.variables.glb.env
 dirs = pisi.actionsapi.variables.glb.dirs
 
@@ -62,7 +62,7 @@ def ENV(environ):
 
 def pkgDIR():
     '''returns the path of binary packages'''
-    '''Default: /var/cache/pisi/packages''' 
+    '''Default: /var/cache/pisi/packages'''
     return env.pkg_dir
 
 def workDIR():
@@ -90,13 +90,13 @@ def srcDIR():
     return '%s-%s' % (env.src_name, env.src_version)
 
 # Build Related Functions
-        
+
 def HOST():
     return env.host
 
 def CHOST():
     # FIXME: Currently it behave same as HOST,
-    # but will be used for cross-compiling when PİSİ ready...           
+    # but will be used for cross-compiling when PİSİ ready...
     return env.host
 
 def CFLAGS():

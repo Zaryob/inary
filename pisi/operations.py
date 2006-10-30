@@ -97,7 +97,7 @@ def install_pkg_files(package_URIs):
         for x in package_URIs:
             atomicoperations.install_single_file(x)
         return # short circuit
-            
+
     # read the package information into memory first
     # regardless of which distribution they come from
     d_t = {}
@@ -114,9 +114,9 @@ def install_pkg_files(package_URIs):
         # or packages to be installed?
         return dependency.installed_satisfies_dep(dep) \
                or dependency.dict_satisfies_dep(d_t, dep)
-            
+
     # for this case, we have to determine the dependencies
-    # that aren't already satisfied and try to install them 
+    # that aren't already satisfied and try to install them
     # from the repository
     dep_unsatis = []
     for name in d_t.keys():
@@ -142,21 +142,21 @@ in the respective order to satisfy extra dependencies:
     class PackageDB:
         def get_package(self, key, repo = None):
             return d_t[str(key)]
-    
+
     packagedb = PackageDB()
-   
+
     A = d_t.keys()
-   
+
     if len(A)==0:
         ctx.ui.info(_('No packages to install.'))
         return
-    
+
     # try to construct a pisi graph of packages to
     # install / reinstall
 
     G_f = pgraph.PGraph(packagedb)               # construct G_f
 
-    # find the "install closure" graph of G_f by package 
+    # find the "install closure" graph of G_f by package
     # set A using packagedb
     for x in A:
         G_f.add_package(x)
@@ -185,12 +185,12 @@ in the respective order to satisfy extra dependencies:
         return
 
     ctx.ui.notify(ui.packagestogo, order = order)
-        
+
     for x in order:
         atomicoperations.install_single_file(dfn[x])
 
     pisi_installed = ctx.installdb.is_installed('pisi')
-    
+
     if 'pisi' in order and pisi_installed:
         upgrade_pisi()
 
@@ -243,7 +243,7 @@ def check_conflicts(order, packagedb):
     (C, D, pkg_conflicts) = calculate_conflicts(order, packagedb)
 
     if D:
-        raise Error(_("Selected packages [%s] are in conflict with each other.") % 
+        raise Error(_("Selected packages [%s] are in conflict with each other.") %
                     util.strlist(list(D)))
 
     if pkg_conflicts:
@@ -314,7 +314,7 @@ def install_pkg_names(A, reinstall = False):
     # A was a list, remove duplicates and expand components
     A_0 = A = expand_components(set(A))
     ctx.ui.debug('A = %s' % str(A))
-    
+
     # filter packages that are already installed
     if not reinstall:
         Ap = set(filter(lambda x: not ctx.installdb.is_installed(x), A))
@@ -329,7 +329,7 @@ def install_pkg_names(A, reinstall = False):
         return
 
     A |= upgrade_base(A)
-        
+
     if not ctx.config.get_option('ignore_dependency'):
         G_f, order = plan_install_pkg_names(A)
     else:
@@ -350,14 +350,14 @@ def install_pkg_names(A, reinstall = False):
     if set(order) - A_0:
         if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
             return False
-            
+
     ctx.ui.notify(ui.packagestogo, order = order)
 
     pisi_installed = ctx.installdb.is_installed('pisi')
-    
+
     for x in order:
         atomicoperations.install_single_name(x, True)  # allow reinstalls here
-        
+
     if 'pisi' in order and pisi_installed:
         upgrade_pisi()
 
@@ -367,12 +367,12 @@ def plan_install_pkg_names(A, ignore_package_conflicts = False):
 
     G_f = pgraph.PGraph(ctx.packagedb)               # construct G_f
 
-    # find the "install closure" graph of G_f by package 
+    # find the "install closure" graph of G_f by package
     # set A using packagedb
     for x in A:
         G_f.add_package(x)
     B = A
-    
+
     while len(B) > 0:
         Bp = set()
         for x in B:
@@ -401,21 +401,21 @@ def upgrade(A):
 def upgrade_pkg_names(A = []):
     """Re-installs packages from the repository, trying to perform
     a minimum or maximum number of upgrades according to options."""
-    
+
     ignore_build = ctx.get_option('ignore_build_no')
     security_only = ctx.get_option('security_only')
 
     if not A:
         # if A is empty, then upgrade all packages
         A = ctx.installdb.list_installed()
-        
+
     A_0 = A = expand_components(set(A))
 
     Ap = []
     for x in A:
         if x.endswith(ctx.const.package_suffix):
             ctx.ui.debug(_("Warning: package *name* ends with '.pisi'"))
-            
+
         if not ctx.installdb.is_installed(x):
             ctx.ui.info(_('Package %s is not installed.') % x, True)
             continue
@@ -430,7 +430,7 @@ def upgrade_pkg_names(A = []):
             updates = [i for i in pkg.history if Version(i.release) > Version(release)]
             if not pisi.util.any(lambda i:i.type == 'security', updates):
                 continue
-            
+
         if ignore_build or (not build) or (not pkg.build):
             if Version(release) < Version(pkg.release):
                 Ap.append(x)
@@ -443,18 +443,18 @@ def upgrade_pkg_names(A = []):
             else:
                 ctx.ui.info(_('Package %s is already at the latest build %s.')
                             % (pkg.name, pkg.build), True)
-        
-        
+
+
     A = set(Ap)
-    
+
     if len(A)==0:
         ctx.ui.info(_('No packages to upgrade.'))
         return True
 
     A |= upgrade_base(A)
-        
+
     ctx.ui.debug('A = %s' % str(A))
-    
+
     if not ctx.config.get_option('ignore_dependency'):
         G_f, order = plan_upgrade(A, ignore_build)
     else:
@@ -470,7 +470,7 @@ def upgrade_pkg_names(A = []):
     total_size = sum([ctx.packagedb.get_package(p).packageSize for p in order])
     total_size, symbol = util.human_readable_size(total_size)
     ctx.ui.info(_('Total size of packages: %.2f %s') % (total_size, symbol))
-    
+
     if ctx.get_option('dry_run'):
         return
 
@@ -496,7 +496,7 @@ def upgrade_pkg_names(A = []):
     for path in paths:
         install_op = atomicoperations.Install(path, ignore_file_conflicts = True)
         install_op.install(True)
-        
+
     if 'pisi' in order:
         upgrade_pisi()
 
@@ -505,15 +505,15 @@ def plan_upgrade(A, ignore_build = False):
     # install / reinstall
 
     packagedb = ctx.packagedb
-    
+
     G_f = pgraph.PGraph(packagedb)               # construct G_f
 
-    # find the "install closure" graph of G_f by package 
+    # find the "install closure" graph of G_f by package
     # set A using packagedb
     for x in A:
         G_f.add_package(x)
     B = A
-    
+
     # TODO: conflicts
 
     while len(B) > 0:
@@ -571,9 +571,9 @@ def plan_upgrade(A, ignore_build = False):
 
 def remove(A, ignore_dep = False, ignore_safety = False):
     """remove set A of packages from system (A is a list of package names)"""
-    
+
     A = [str(x) for x in A]
-    
+
     # filter packages that are not installed
     A_0 = A = expand_components(set(A))
 
@@ -613,7 +613,7 @@ in the respective order to satisfy dependencies:
         if not ctx.ui.confirm(_('Do you want to continue?')):
             ctx.ui.warning(_('Package removal declined'))
             return False
-    
+
     if ctx.get_option('dry_run'):
         return
 
@@ -631,7 +631,7 @@ def plan_remove(A):
 
     G_f = pgraph.PGraph(ctx.packagedb, pisi.itembyrepodb.installed)               # construct G_f
 
-    # find the (install closure) graph of G_f by package 
+    # find the (install closure) graph of G_f by package
     # set A using packagedb
     for x in A:
         G_f.add_package(x)
@@ -670,13 +670,13 @@ def emerge(A, rebuild_all = False):
     A = [str(x) for x in A]
     A_0 = A = expand_src_components(set(A))
     ctx.ui.debug('A = %s' % str(A))
-   
+
     if len(A)==0:
         ctx.ui.info(_('No packages to emerge.'))
         return
-    
+
     #A |= upgrade_base(A)
-        
+
     # FIXME: Errr... order_build changes type conditionally and this
     # is not good. - baris
     if not ctx.config.get_option('ignore_dependency'):
@@ -687,7 +687,7 @@ def emerge(A, rebuild_all = False):
         order_build = A
 
     if order_inst:
-        ctx.ui.info(_("""The following minimal list of packages will be installed 
+        ctx.ui.info(_("""The following minimal list of packages will be installed
 from repository in the respective order to satisfy dependencies:
 """) + util.strlist(order_inst))
     ctx.ui.info(_("""The following minimal list of packages will be built and
@@ -700,7 +700,7 @@ installed in the respective order to satisfy dependencies:
     if len(order_inst) + len(order_build) > len(A_0):
         if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
             return False
-            
+
     ctx.ui.notify(ui.packagestogo, order = order_inst)
 
     pisi_installed = ctx.installdb.is_installed('pisi')
@@ -709,7 +709,7 @@ installed in the respective order to satisfy dependencies:
         atomicoperations.install_single_name(x)
 
     #ctx.ui.notify(ui.packagestogo, order = order_build)
-    
+
     for x in order_build:
         package_names = atomicoperations.build(x)[0]
         install_pkg_files(package_names) # handle inter-package deps here
@@ -726,7 +726,7 @@ def plan_emerge(A, rebuild_all):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
-    G_f = pisi.graph.Digraph()    
+    G_f = pisi.graph.Digraph()
 
     def get_spec(name):
         if ctx.sourcedb.has_spec(name):
@@ -739,15 +739,15 @@ def plan_emerge(A, rebuild_all):
         if not str(src.name) in G_f.vertices():
             G_f.add_vertex(str(src.name), (src.version, src.release))
     def pkgtosrc(pkg):
-        return ctx.sourcedb.pkgtosrc(pkg) 
-    
+        return ctx.sourcedb.pkgtosrc(pkg)
+
     # setup first
     #specfiles = [ ctx.sourcedb.get_source(x)[1] for x in A ]
     #pkgtosrc = {}
     B = A
 
     install_list = set()
-    
+
     while len(B) > 0:
         Bp = set()
         for x in B:
@@ -756,7 +756,7 @@ def plan_emerge(A, rebuild_all):
             add_src(src)
 
             # add dependencies
-            
+
             def process_dep(dep):
                 if not dependency.installed_satisfies_dep(dep):
                     if dependency.repo_satisfies_dep(dep):
@@ -771,17 +771,17 @@ def plan_emerge(A, rebuild_all):
 
             for builddep in src.buildDependencies:
                 process_dep(builddep)
-                
+
             for pkg in sf.packages:
                 for rtdep in pkg.packageDependencies:
                     process_dep(rtdep)
         B = Bp
-    
+
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
     order_build = G_f.topological_sort()
     order_build.reverse()
-    
+
     G_f2, order_inst = plan_install_pkg_names(install_list)
-    
+
     return G_f, order_inst, order_build

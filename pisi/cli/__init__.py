@@ -54,7 +54,7 @@ class CLI(UI):
         util.xterm_title_reset()
 
     def output(self, msg, err = False, verbose = False):
-        if (verbose and self.show_verbose) or (not verbose):                
+        if (verbose and self.show_verbose) or (not verbose):
             if type(msg)==type(unicode()):
                 msg = msg.encode('utf-8')
             if err:
@@ -108,7 +108,7 @@ class CLI(UI):
                     return opts(opt-1)
             except (Exception,e):
                 pass
-        
+
     def confirm(self, msg):
         msg = unicode(msg)
         if ctx.config.options and ctx.config.options.yes_all:
@@ -129,7 +129,7 @@ class CLI(UI):
         if operation == "removing":
             return
         elif operation == "fetching":
-            totalsize = '%.1f %s' % pisi.util.human_readable_size(ka['total_size']) 
+            totalsize = '%.1f %s' % pisi.util.human_readable_size(ka['total_size'])
             out = '\r%-30.30s (%s)%3d%% %9.2f %s [%s]' % \
                 (ka['filename'], totalsize, percent,
                  ka['rate'], ka['symbol'], ka['eta'])

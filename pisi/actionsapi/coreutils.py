@@ -74,7 +74,7 @@ class uniq:
                 if i == prev:
                     continue
             except NameError:
-                pass            
+                pass
             prev = i
             yield i
 uniq = uniq()

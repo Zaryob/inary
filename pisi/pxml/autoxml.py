@@ -16,7 +16,7 @@
  high-level XML processing prototype that Gurer prepared.
 
  Method names are mixedCase for compatibility with minidom,
- an old library. 
+ an old library.
 """
 
 # System
@@ -67,7 +67,7 @@ class LocalText(dict):
         self.tag = tag
         self.req = req
         dict.__init__(self)
-    
+
     def decode(self, node, errs, where = ""):
         # flags, tag name, instance attribute
         assert self.tag != ''
@@ -171,7 +171,6 @@ class Writer(formatter.DumbWriter):
         self.col = self.col + len(data)
         self.atbreak = 0
 
-            
 class autoxml(oo.autosuper, oo.autoprop):
     """High-level automatic XML transformation interface for xmlfile.
     The idea is to declare a class for each XML tag. Inside the
@@ -182,17 +181,17 @@ class autoxml(oo.autosuper, oo.autoprop):
          __metaclass__ = autoxml
          t_Name = [xmlfile.Text, xmlfile.mandatory]
          a_Type = [xmlfile.Integer, xmlfile.optional]
-    
-    This class defines a tag and an attribute nested in Employee 
+
+    This class defines a tag and an attribute nested in Employee
     class. Name is a string and type is an integer, called basic
     types.
     While the tag is mandatory, the attribute may be left out.
-    
+
     Other basic types supported are: xmlfile.Float, xmlfile.Double
     and (not implemented yet): xmlfile.Binary
 
     By default, the class name is taken as the corresponding tag,
-    which may be overridden by defining a tag attribute. Thus, 
+    which may be overridden by defining a tag attribute. Thus,
     the same tag may also be written as:
 
     class EmployeeXML:
@@ -240,9 +239,8 @@ class autoxml(oo.autosuper, oo.autoprop):
 
     You see, it works like magic, when it works of course. All of it
     done without a single brain exploding.
-        
-    """
 
+    """
 
     def __init__(cls, name, bases, dict):
         """entry point for metaclass code"""
@@ -259,7 +257,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         #setattr(cls, 'xml_variables', [])
 
         # default class tag is class name
-        if not dict.has_key('tag'): 
+        if not dict.has_key('tag'):
             cls.tag = name
 
         # generate helper routines, for each XML component
@@ -275,24 +273,24 @@ class autoxml(oo.autosuper, oo.autoprop):
         from inspect import getsourcelines
         from itertools import ifilter
         import re
-        
+
         fn = re.compile('\s*([tas]_[a-zA-Z]+).*').findall
 
         lines = filter(fn, getsourcelines(cls)[0])
         decl_order = map(lambda x:x.split()[0], lines)
-        
-        # there should be at most one str member, and it should be 
+
+        # there should be at most one str member, and it should be
         # the first to process
-        
+
         order = filter(lambda x: not x.startswith('s_'), decl_order)
-        
+
         # find string member
         str_members = filter(lambda x:x.startswith('s_'), decl_order)
         if len(str_members)>1:
             raise Error('Only one str member can be defined')
         elif len(str_members)==1:
             order.insert(0, str_members[0])
-        
+
         for var in order:
             if var.startswith('t_') or var.startswith('a_') or var.startswith('s_'):
                 name = var[2:]
@@ -395,7 +393,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 strfile.close()
                 return str
             cls.__str__ = str
-        
+
         if not dict.has_key('__eq__'):
             def equal(self, other):
                 # handle None
@@ -413,8 +411,8 @@ class autoxml(oo.autosuper, oo.autoprop):
             def notequal(self, other):
                 return not self.__eq__(other)
             cls.__eq__ = equal
-            cls.__ne__ = notequal            
-            
+            cls.__ne__ = notequal
+
         if xmlfile_support:
             def parse(self, xml, keepDoc = False):
                 "parse XML string and decode it into a python object"
@@ -454,7 +452,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if errs:
                     errs.append(_("autoxml.read: File '%s' has errors") % uri)
                     raise Error(*errs)
-                    
+
             def write(self, uri, keepDoc = False, tmpDir = '/tmp',
                       sha1sum = False, compress = None, sign = None):
                 "encode the contents of the python object into an XML file"
@@ -473,11 +471,10 @@ class autoxml(oo.autosuper, oo.autoprop):
                 self.writexml(uri, tmpDir, sha1sum=sha1sum, compress=compress, sign=sign)
                 if not keepDoc:
                     self.unlink() # get rid of the tree
-            
+
             cls.read = read
             cls.write = write
             cls.parse = parse
-            
 
     def gen_attr_member(cls, attr):
         """generate readers and writers for an attribute member"""
@@ -546,11 +543,11 @@ class autoxml(oo.autosuper, oo.autoprop):
         def init(self):
             """initialize component"""
             setattr(self, name, init_a())
-            
+
         def decode(self, node, errs, where):
             """decode component from DOM node"""
             setattr(self, name, decode_a(node, errs, where + '.' + unicode(name)))
-            
+
         def encode(self, node, errs):
             """encode self inside, possibly new, DOM node using xml"""
             if hasattr(self, name):
@@ -558,7 +555,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             else:
                 value = None
             encode_a(node, value, errs)
-            
+
         def errors(self, where):
             """return errors in the object"""
             errs = []
@@ -569,7 +566,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if req == mandatory:
                     errs.append(where + ': ' + _('Mandatory variable %s not available') % name)
             return errs
-            
+
         def format(self, f, errs):
             if hasattr(self, name):
                 value = getattr(self,name)
@@ -579,7 +576,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             else:
                 if req == mandatory:
                     errs.append(_('Mandatory variable %s not available') % name)
-            
+
         return (name, init, decode, encode, errors, format)
 
     def mixed_case(cls, identifier):
@@ -614,7 +611,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 # if list of class, by default nested like in most PSPEC
                 path = token + '/' + token_type[0].tag
             else:
-                # if list of ordinary type, just take the name for 
+                # if list of ordinary type, just take the name for
                 path = token
         elif type(token_type) is autoxml:
             # if a class, by default its tag
@@ -630,9 +627,9 @@ class autoxml(oo.autosuper, oo.autoprop):
         so that we can invoke it from the complex types such as Class
         and List. The readtext and writetext arguments achieve
         the DOM text access for this datatype."""
-        
+
         name, token_type, req, tagpath = cls.parse_spec(token, spec)
-       
+
         def initialize():
             """default value for all basic types is None"""
             return None
@@ -666,8 +663,8 @@ class autoxml(oo.autosuper, oo.autoprop):
         def errors(value, where):
             errs = []
             if value and not isinstance(value, token_type):
-                errs.append(where + ': ' + _('Type mismatch. Expected %s, got %s') % 
-                                    (token_type, type(value)) )                
+                errs.append(where + ': ' + _('Type mismatch. Expected %s, got %s') %
+                                    (token_type, type(value)) )
             return errs
 
         def format(value, f, errs):
@@ -701,7 +698,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if req == mandatory:
                     errs.append(where + ': ' + _('Mandatory argument not available'))
             return None
-        
+
         def encode(node, obj, errs):
             if node and obj:
                 try:
@@ -716,10 +713,10 @@ class autoxml(oo.autosuper, oo.autoprop):
             else:
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
-        
+
         def errors(obj, where):
             return obj.errors(where)
-        
+
         def format(obj, f, errs):
             try:
                 obj.format(f, errs)
@@ -792,8 +789,8 @@ class autoxml(oo.autosuper, oo.autoprop):
     def gen_insetclass_tag(cls, tag, spec):
         """generate a class datatype that is highly integrated
            don't worry if that means nothing to you. this is a silly
-           hack to implement local text quickly. it's not the most 
-           elegant thing in the world. it's basically a copy of 
+           hack to implement local text quickly. it's not the most
+           elegant thing in the world. it's basically a copy of
            class tag"""
         name, tag_type, req, path = cls.parse_spec(tag, spec)
 

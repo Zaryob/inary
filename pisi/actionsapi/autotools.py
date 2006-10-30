@@ -57,7 +57,7 @@ def configure(parameters = ''):
     '''configure source with given parameters = "--with-nls --with-libusb --with-something-usefull"'''
     if can_access_file('configure'):
         gnuconfig_update()
-        
+
         args = './configure \
                 --prefix=/%s \
                 --host=%s \
@@ -70,7 +70,7 @@ def configure(parameters = ''):
                        get.HOST(), get.manDIR(), \
                        get.infoDIR(), get.dataDIR(), \
                        get.confDIR(), get.localstateDIR(), parameters)
-    
+
         if system(args):
             raise ConfigureError(_('Configure failed.'))
     else:
@@ -138,7 +138,7 @@ def rawInstall(parameters = '', argument = 'install'):
     fixInfoDir()
 
 def aclocal(parameters = ''):
-    '''generates an aclocal.m4 based on the contents of configure.in.'''    
+    '''generates an aclocal.m4 based on the contents of configure.in.'''
     if system('aclocal %s' % parameters):
         raise RunTimeError(_('Running aclocal failed.'))
 

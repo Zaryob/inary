@@ -12,7 +12,7 @@
 
 import sys
 from optparse import OptionParser, OptionGroup, HelpFormatter
-    
+
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
@@ -115,10 +115,10 @@ class Command(object):
 
     @staticmethod
     def get_command(cmd, fail=False, args=None):
-    
+
         if Command.cmd_dict.has_key(cmd):
             return Command.cmd_dict[cmd](args)
-    
+
         if fail:
             raise Error(_("Unrecognized command: %s") % cmd)
         else:
@@ -138,7 +138,7 @@ class Command(object):
         (self.options, self.args) = self.parser.parse_args(args)
         if self.args:
             self.args.pop(0)                # exclude command arg
-        
+
         self.process_opts()
 
     def commonopts(self):
@@ -172,7 +172,7 @@ class Command(object):
 
     def process_opts(self):
         self.check_auth_info()
-        
+
         # make destdir absolute
         if self.options.destdir:
             dir = str(self.options.destdir)
@@ -197,7 +197,7 @@ class Command(object):
         if username and password:
             self.options.authinfo = (username, password)
             return
-        
+
         if username and not password:
             from getpass import getpass
             password = getpass(_("Password: "))
@@ -207,7 +207,7 @@ class Command(object):
 
     def init(self, database = True, write = True):
         """initialize PiSi components"""
-        
+
         # NB: command imports here or in the command class run fxns
         import pisi.api
         pisi.api.init(database = database, write = write, options = self.options,
@@ -216,7 +216,7 @@ class Command(object):
     def finalize(self):
         """do cleanup work for PiSi components"""
         pisi.api.finalize()
-        
+
     def get_name(self):
         return self.__class__.name
 
@@ -256,7 +256,7 @@ class autocommand(type):
         add_cmd(longname)
         if shortname:
             add_cmd(shortname)
-            
+
 
 class Help(Command):
     """Prints help for given commands
@@ -281,14 +281,14 @@ If run without parameters, it prints the general help."""
             self.parser.set_usage(usage_text)
             pisi.cli.printu(self.parser.format_help())
             return
-            
+
         self.init(database = False, write = False)
-        
+
         for arg in self.args:
             obj = Command.get_command(arg, True)
             obj.help()
             ctx.ui.info('')
-        
+
         self.finalize()
 
 
@@ -315,11 +315,11 @@ This command deletes unused locks from the database directory."""
 
 class DeleteCache(Command):
     """Delete cache files
-    
+
 Usage: delete-cache
 
 Sources, packages and temporary files are stored
-under /var directory. Since these accumulate they can 
+under /var directory. Since these accumulate they can
 consume a lot of disk space."""
 
     __metaclass__ = autocommand
@@ -349,7 +349,7 @@ the package in graphviz format to 'pgraph.dot'.
 
     def __init__(self, args=None):
         super(Graph, self).__init__(args)
-    
+
     def options(self):
 
         group = OptionGroup(self.parser, _("graph options"))
@@ -392,7 +392,7 @@ the package in graphviz format to 'pgraph.dot'.
                 ctx.ui.info(_('Plotting a graph of relations among all installed packages'))
                 a = ctx.installdb.list_installed()
             repo = pisi.itembyrepodb.installed
-        g = pisi.api.package_graph(a, repo = repo, 
+        g = pisi.api.package_graph(a, repo = repo,
                                    ignore_installed = ctx.get_option('ignore_installed'))
         g.write_graphviz(file(ctx.get_option('output'), 'w'))
         self.finalize()
@@ -455,17 +455,17 @@ to be downloaded from a repository containing sources.
 
     def add_steps_options(self):
         group = OptionGroup(self.parser, _("build steps"))
-        group.add_option("--fetch", dest="until", action="store_const", 
+        group.add_option("--fetch", dest="until", action="store_const",
                          const="fetch", help=_("Break build after fetching the source archive"))
-        group.add_option("--unpack", dest="until", action="store_const", 
+        group.add_option("--unpack", dest="until", action="store_const",
                          const="unpack", help=_("Break build after unpacking the source archive, checking sha1sum and applying patches"))
-        group.add_option("--setup", dest="until", action="store_const", 
+        group.add_option("--setup", dest="until", action="store_const",
                          const="setup", help=_("Break build after running configure step"))
-        group.add_option("--build", dest="until", action="store_const", 
+        group.add_option("--build", dest="until", action="store_const",
                          const="build", help=_("Break build after running compile step"))
-        group.add_option("--install", dest="until", action="store_const", 
+        group.add_option("--install", dest="until", action="store_const",
                          const="install", help=_("Break build after running install step"))
-        group.add_option("--package", dest="until", action="store_const", 
+        group.add_option("--package", dest="until", action="store_const",
                          const="package", help=_("create PiSi package"))
         self.parser.add_option_group(group)
 
@@ -481,7 +481,7 @@ to be downloaded from a repository containing sources.
 
         if ctx.get_option('package_format') not in Build.package_formats:
             raise Error(_('package_format must be one of %s ') % pisi.util.strlist(Build.package_formats))
-        
+
         if ctx.get_option('output_dir'):
             ctx.ui.info(_('Output directory: %s') % ctx.config.options.output_dir)
         else:
@@ -490,18 +490,17 @@ to be downloaded from a repository containing sources.
 
         for x in self.args:
             if ctx.get_option('until'):
-                pisi.api.build_until(x, ctx.get_option('until'))                
+                pisi.api.build_until(x, ctx.get_option('until'))
             else:
                 pisi.api.build(x)
         self.finalize()
 
-        
 class Emerge(Build):
     """Build and install PiSi source packages from repository
 
 Usage: emerge <sourcename> ...
 
-You should give the name of a source package to be 
+You should give the name of a source package to be
 downloaded from a repository containing sources.
 
 You can also give the name of a component.
@@ -515,7 +514,7 @@ You can also give the name of a component.
     name = ("emerge", "em")
 
     def options(self):
-        
+
         group = OptionGroup(self.parser, _("emerge options"))
         super(Emerge, self).add_options(group)
         group.add_option("--ignore-file-conflicts", action="store_true",
@@ -525,7 +524,7 @@ You can also give the name of a component.
         group.add_option("--ignore-comar", action="store_true",
                                default=False, help=_("Bypass comar configuration agent"))
         self.parser.add_option_group(group)
-    
+
     def run(self):
         if not self.args:
             self.help()
@@ -560,7 +559,7 @@ class PackageOp(Command):
 
     def init(self):
         super(PackageOp, self).init(True)
-                
+
     def finalize(self):
         #self.finalize_db()
         pass
@@ -619,7 +618,7 @@ Usage: Upgrade [<package1> <package2> ... <packagen>]
 Upgrades the entire system if no package names are given
 
 You may use only package names to specify packages because
-the package upgrade operation is defined only with respect 
+the package upgrade operation is defined only with respect
 to repositories. If you have specified a package name, it
 should exist in the package repositories. If you just want to
 reinstall a package from a PiSi file, use the install command.
@@ -637,7 +636,7 @@ expanded to package names.
 
     def options(self):
         group = OptionGroup(self.parser, _("upgrade options"))
-     
+
         super(Upgrade, self).options(group)
         buildno_opts(self, group)
         group.add_option("--security-only", action="store_true",
@@ -693,7 +692,7 @@ expanded to package names.
 
     def run(self):
         self.init()
- 
+
         if not ctx.get_option('bypass_update_repo'):
             ctx.ui.info(_('Updating repositories'))
             repos = ctx.repodb.list()
@@ -701,7 +700,7 @@ expanded to package names.
                 pisi.api.update_repo(repo)
         else:
             ctx.ui.info(_('Will not update repositories'))
- 
+
         if not self.args:
             packages = ctx.installdb.list_installed()
         else:
@@ -756,9 +755,9 @@ class ConfigurePending(PackageOp):
 If COMAR configuration of some packages were not
 done at installation time, they are added to a list
 of packages waiting to be configured. This command
-configures those packages.    
+configures those packages.
 """
-    
+
     __metaclass__ = autocommand
 
     def __init__(self, args):
@@ -783,7 +782,7 @@ class Info(Command):
 
 Usage: info <package1> <package2> ... <packagen>
 
-<packagei> is either a package name or a .pisi file, 
+<packagei> is either a package name or a .pisi file,
 """
     __metaclass__ = autocommand
 
@@ -793,7 +792,7 @@ Usage: info <package1> <package2> ... <packagen>
     name = ("info", None)
 
     def options(self):
-        
+
         group = OptionGroup(self.parser, _("info options"))
         self.add_options(group)
         self.parser.add_option_group(group)
@@ -813,14 +812,14 @@ Usage: info <package1> <package2> ... <packagen>
     def run(self):
 
         self.init(database = True, write = False)
-        
+
         if len(self.args) == 0:
             self.help()
             return
-            
+
         index = pisi.index.Index()
         index.distribution = None
-        
+
         for arg in self.args:
             if ctx.componentdb.has_component(arg):
                 component = ctx.componentdb.get_union_comp(arg)
@@ -830,8 +829,8 @@ Usage: info <package1> <package2> ... <packagen>
                     if not self.options.short:
                         ctx.ui.info(unicode(component))
                     else:
-                        ctx.ui.info("%s - %s" % (component.name, component.summary)) 
-            else: # then assume it was a package 
+                        ctx.ui.info("%s - %s" % (component.name, component.summary))
+            else: # then assume it was a package
                 if self.options.xml:
                     index.packages.append(pisi.api.info(arg)[0].package)
                 else:
@@ -858,7 +857,7 @@ Usage: info <package1> <package2> ... <packagen>
                 else:
                     ctx.ui.info(_('Installed package:'))
                 self.print_pkginfo(metadata, files,pisi.itembyrepodb.installed)
-                
+
             if ctx.packagedb.has_package(arg):
                 metadata, files = pisi.api.info_name(arg, False)
                 if self.options.short:
@@ -876,7 +875,7 @@ Usage: info <package1> <package2> ... <packagen>
         else:
             ctx.ui.info(unicode(metadata.package))
             if repo:
-                revdeps =  [x[0] for x in 
+                revdeps =  [x[0] for x in
                             ctx.packagedb.get_rev_deps(metadata.package.name, repo)]
                 print _('Reverse Dependencies:'), util.strlist(revdeps)
         if self.options.files or self.options.files_path:
@@ -974,7 +973,7 @@ everything in a single index file.
         self.parser.add_option_group(group)
 
     def run(self):
-        
+
         self.init(database = True, write = False)
         from pisi.api import index
         if len(self.args)>0:
@@ -990,7 +989,7 @@ everything in a single index file.
 
 
 class ListInstalled(Command):
-    """Print the list of all installed packages  
+    """Print the list of all installed packages
 
 Usage: list-installed
 """
@@ -1042,7 +1041,6 @@ Usage: list-installed
                 ctx.ui.info('%15s - %s' % (package.name, unicode(package.summary)))
         self.finalize()
 
-        
 class RebuildDb(Command):
     """Rebuild Databases
 
@@ -1050,7 +1048,7 @@ Usage: rebuilddb [ <package1> <package2> ... <packagen> ]
 
 Rebuilds the PiSi databases
 
-If package specs are given, they should be the names of package 
+If package specs are given, they should be the names of package
 dirs under /var/lib/pisi
 """
     __metaclass__ = autocommand
@@ -1068,7 +1066,7 @@ dirs under /var/lib/pisi
                                default=False, help=_("Rebuild files database"))
 
         self.parser.add_option_group(group)
-    
+
     def run(self):
         if self.args:
             self.init(database=True)
@@ -1100,11 +1098,11 @@ If no repository is given, all repositories are updated.
     name = ("update-repo", "ur")
 
     def options(self):
-        
+
         group = OptionGroup(self.parser, _("update-repo options"))
 
         group.add_option("-f", "--force", action="store_true",
-                               default=False, 
+                               default=False,
                                help=_("Update database in any case"))
 
         self.parser.add_option_group(group)
@@ -1145,7 +1143,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 
         group = OptionGroup(self.parser, _("add-repo options"))
         group.add_option("--at", action="store",
-                               type="int", default=None, 
+                               type="int", default=None,
                                help=_("Add repository at given position (0 is first)"))
         self.parser.add_option_group(group)
 
@@ -1228,7 +1226,7 @@ Usage: list-available [ <repo1> <repo2> ... repon ]
 
 Gives a brief list of PiSi packages published in the specified
 repositories. If no repository is specified, we list packages in
-all repositories. 
+all repositories.
 """
     __metaclass__ = autocommand
 
@@ -1254,7 +1252,7 @@ all repositories.
 
         if not (ctx.get_option('no_color') or ctx.config.get_option('uninstalled')):
             ctx.ui.info(colorize(_('Installed packages are shown in this color'), 'green'))
-        
+
         if self.args:
             for arg in self.args:
                 self.print_packages(arg)
@@ -1287,13 +1285,12 @@ all repositories.
                 p = p + ' ' * max(0, 15 - lenp)
                 ctx.ui.info('%s - %s ' % (p, unicode(package.summary)))
 
-                
 class ListComponents(Command):
     """List available components
 
 Usage: list-components
 
-Gives a brief list of PiSi components published in the 
+Gives a brief list of PiSi components published in the
 repositories.
 """
     __metaclass__ = autocommand
@@ -1404,7 +1401,7 @@ Lists the packages that will be upgraded.
             upgradable_pkgs = list(set(upgradable_pkgs) & set(component_pkgs))
 
         if not upgradable_pkgs:
-            ctx.ui.info(_('No packages to upgrade.')) 
+            ctx.ui.info(_('No packages to upgrade.'))
 
         upgradable_pkgs.sort()
         if self.options.install_info:
@@ -1425,7 +1422,7 @@ Lists the packages that will be upgraded.
 
 class ListPending(Command):
     """List pending packages
-    
+
 Lists packages waiting to be configured.
 """
 
@@ -1433,7 +1430,7 @@ Lists packages waiting to be configured.
 
     def __init__(self, args):
         super(ListPending, self).__init__(args)
-    
+
     name = ("list-pending", "lp")
 
     def run(self):
@@ -1457,7 +1454,7 @@ in summary, description, and package name fields.
 
     def __init__(self, args):
         super(Search, self).__init__(args)
-        
+
     name = ("search", "sr")
 
     def options(self):
@@ -1507,7 +1504,7 @@ Finds the installed package which contains the specified file.
 
     def __init__(self, args):
         super(SearchFile, self).__init__(args)
-    
+
     name = ("search-file", "sf")
 
     def options(self):
@@ -1520,7 +1517,6 @@ Finds the installed package which contains the specified file.
                                default=False, help=_("Show only package name"))
         self.parser.add_option_group(group)
 
-    
     # what does exact mean? -- exa
     @staticmethod
     def search_exact(path):
@@ -1552,8 +1548,8 @@ Finds the installed package which contains the specified file.
 
         if not self.args:
             self.help()
-            return        
-       
+            return
+
         # search among existing files
         for path in self.args:
             if not ctx.config.options.quiet:
@@ -1566,7 +1562,7 @@ Finds the installed package which contains the specified file.
         self.finalize()
 
 # texts
-        
+
 usage_text1 = _("""%prog [options] <command> [arguments]
 
 where <command> is one of:

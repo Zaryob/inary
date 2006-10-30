@@ -22,7 +22,7 @@ import pisi.context as ctx
 import pisi.packagedb as packagedb
 import pisi.util as util
 from pisi.uri import URI
-       
+
 class Error(pisi.Error):
     pass
 
@@ -108,7 +108,7 @@ def init():
 
     db = RepoDB()
     return db
-    
+
 def finalize():
     global db
 

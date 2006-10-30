@@ -307,7 +307,7 @@ class Install(AtomicOperation):
             # get config path lists
             newconfig = set(map(lambda x: str(x.path), new))
             oldconfig = set(map(lambda x: str(x.path), old))
-            
+
             config_overlaps = newconfig & oldconfig
             if config_overlaps:
                 files = filter(lambda x: x.path in config_overlaps, old)
@@ -422,8 +422,8 @@ class Remove(AtomicOperation):
         for fileinfo in self.files.list:
             self.remove_file(fileinfo)
             removed += 1
-            ctx.ui.display_progress(operation = "removing", 
-                                    percent = progress.update(removed), 
+            ctx.ui.display_progress(operation = "removing",
+                                    percent = progress.update(removed),
                                     info = _("Removing package %s") % self.package_name)
 
         txn = ctx.dbenv.txn_begin()

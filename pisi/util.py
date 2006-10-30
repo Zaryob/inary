@@ -45,20 +45,20 @@ class FileError(Error):
 class Checks:
     def __init__(self):
         self.list = []
-    
+
     def add(self, err):
         self.list.append(err)
-    
+
     def join(self, list):
         self.list.extend(list)
-    
+
     def has_tag(self, var, section, name):
         if not var:
             self.list.append(_("%s section should have a '%s' tag") % (section, name))
 
     def has_error():
         return len(self.list)>0
-        
+
     def print_errors(list):
         for x in list:
             ctx.ui.error(x)
@@ -137,7 +137,7 @@ def human_readable_rate(size = 0):
 def run_batch(cmd):
     """run command and report return value and output"""
     ctx.ui.info(_('Running ') + cmd, verbose=True)
-    p = subprocess.Popen(cmd, shell=True, 
+    p = subprocess.Popen(cmd, shell=True,
                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = p.communicate()
     ctx.ui.debug(_('return value for "%s" is %s') % (cmd, p.returncode))
@@ -147,7 +147,7 @@ def run_batch(cmd):
 class TeeOutFile:
     def __init__(self, file):
         self.file = file
-    
+
     def write(self, str):
         self.write(str)
         ctx.ui.debug(str)
@@ -174,12 +174,11 @@ def run_logged(cmd):
             stderr = subprocess.STDOUT
 
     p = subprocess.Popen(cmd, shell=True, stdout=stdout, stderr=stderr)
-    out, err = p.communicate()    
+    out, err = p.communicate()
     ctx.ui.debug(_('return value for "%s" is %s') % (cmd, p.returncode))
 
     return p.returncode
 
-    
 ######################
 # Terminal functions #
 ######################
@@ -487,14 +486,14 @@ def do_patch(sourceDir, patchFile, level = 0, target = ''):
     """simple function to apply patches.."""
     cwd = os.getcwd()
     os.chdir(sourceDir)
-    
+
     if level == None:
         level = 0
     if target == None:
         target = ''
 
     check_file(patchFile)
-    (ret, out, err) = run_batch("patch -p%d %s < %s" % 
+    (ret, out, err) = run_batch("patch -p%d %s < %s" %
                                     (level, target, patchFile))
     if ret:
         if out is None and err is None:
@@ -510,13 +509,13 @@ def strip_directory(top, excludelist=[]):
     for root, dirs, files in os.walk(top):
         for fn in files:
             frpath = join_path(root, fn)
-            drpath = join_path(os.path.dirname(top), 
-                               ctx.const.debug_dir_suffix, 
+            drpath = join_path(os.path.dirname(top),
+                               ctx.const.debug_dir_suffix,
                                remove_prefix(top, frpath))
 
-            # Some upstream sources have buggy libtool and ltmain.sh with them, 
+            # Some upstream sources have buggy libtool and ltmain.sh with them,
             # which causes wrong path entries in *.la files. And these wrong path
-            # entries sometimes triggers compile-time errors or linkage problems. 
+            # entries sometimes triggers compile-time errors or linkage problems.
             # Instead of patching all these buggy sources and maintain these patches,
             # PiSi removes wrong paths...
             extension = os.path.splitext(frpath)[1]
@@ -524,7 +523,7 @@ def strip_directory(top, excludelist=[]):
                 # FIXME: I'm regular expr. idiot, so one can convert this to python...
                 os.system("sed -i -e 's~-L/var/tmp/pisi/[[:graph:]]*~~g' %s" % frpath)
                 os.system("sed -i -e 's~/var/tmp/pisi/[[:graph:]]*/install/~/~g' %s" % frpath)
-            
+
             # real path in .pisi package
             p = '/' + removepathprefix(top, frpath)
             strip = True
@@ -536,7 +535,7 @@ def strip_directory(top, excludelist=[]):
             if strip:
                 if strip_file(frpath, drpath):
                     ctx.ui.debug("%s [%s]" %(p, "stripped"))
-                
+
 
 def strip_file(filepath, outpath):
     """strip a file"""
@@ -555,7 +554,7 @@ def strip_file(filepath, outpath):
         ret = p.close()
         if ret:
             ctx.ui.warning(_("objcopy (keep-debug) command failed for file '%s'!") % f)
-        
+
         """mark binary/shared objects to use file.debug"""
         p = os.popen("objcopy --add-gnu-debuglink=%s%s %s" % (o, ctx.const.debug_file_suffix, f))
         ret = p.close()
@@ -647,5 +646,5 @@ def parse_package_name(package_name):
             name.append(part)
     name = "-".join(name)
     version = package_name[len(name) + 1:]
-    
+
     return (name, version)

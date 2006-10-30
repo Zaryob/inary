@@ -44,18 +44,18 @@ import pisi.actionsapi.variables
 class Error(pisi.Error):
     pass
 
-    
+
 # Helper Functions
 def get_file_type(path, pinfo_list, install_dir):
     """Return the file type of a path according to the given PathInfo
     list"""
-    
+
     Match = lambda x: [match for match in glob.glob(install_dir + x) if join(install_dir, path).find(match) > -1]
 
     def Sort(x):
         x.sort(reverse=True)
         return x
-    
+
     best_matched_path = Sort([pinfo.path for pinfo in pinfo_list if Match(pinfo.path)])[0]
     info = [pinfo for pinfo in pinfo_list if best_matched_path == pinfo.path][0]
     return info.fileType, info.permanent
@@ -77,7 +77,7 @@ def check_path_collision(package, pkgList):
                 # path.path: /usr/share/doc
                 if (path.path.endswith(ctx.const.ar_file_suffix) and ctx.get_option('create_static')) or \
                    (path.path.endswith(ctx.const.debug_file_suffix) and ctx.config.values.build.generatedebug):
-                    # don't throw collision error for these files. 
+                    # don't throw collision error for these files.
                     # we'll handle this in gen_files_xml..
                     continue
                 if util.subpath(pinfo.path, path.path):
@@ -97,7 +97,7 @@ class Builder:
         # find package in repository
         sf, reponame = ctx.sourcedb.get_spec_repo(name)
         src = sf.source
-        if src:    
+        if src:
 
             src_uri = URI(src.sourceURI)
             if src_uri.is_absolute_path():
@@ -107,13 +107,13 @@ class Builder:
                 #FIXME: don't use dirname to work on URLs
                 src_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
                                         str(src_uri.path()))
-    
+
             ctx.ui.debug(_("Source URI: %s") % src_path)
-    
+
             return Builder(src_path)
         else:
             raise Error(_("Source %s not found in any active repository.") % name)
-    
+
     def __init__(self, specuri):
 
         # process args
@@ -154,7 +154,7 @@ class Builder:
                      self.spec.getSourceVersion() + '-' + self.spec.getSourceRelease()
         return util.join_path(ctx.config.dest_dir(), ctx.config.values.dirs.tmp_dir,
                      packageDir)
-   
+
     def pkg_work_dir(self):
         return self.pkg_dir() + ctx.const.work_dir_suffix
 
@@ -178,10 +178,10 @@ class Builder:
         """Build the package in one shot."""
 
         ctx.ui.status(_("Building PiSi source package: %s") % self.spec.source.name)
-        
+
         self.compile_action_script()
         self.compile_comar_script()
-   
+
         # check if all patch files exists, if there are missing no need to unpack!
         self.patch_exists()
 
@@ -246,13 +246,13 @@ class Builder:
     def fetch_actionsfile(self):
         actionsuri = join(self.specdiruri, ctx.const.actions_file)
         self.download(actionsuri, self.destdir)
-        
+
     def fetch_patches(self):
         spec = self.spec
         for patch in spec.source.patches:
             file_name = basename(patch.filename)
             dir_name = dirname(patch.filename)
-            patchuri = join(self.specdiruri, 
+            patchuri = join(self.specdiruri,
                             ctx.const.files_dir, dir_name, file_name)
             self.download(patchuri, join(self.destdir, ctx.const.files_dir, dir_name))
 
@@ -270,7 +270,7 @@ class Builder:
             for afile in pkg.additionalFiles:
                 file_name = basename(afile.filename)
                 dir_name = dirname(afile.filename)
-                afileuri = join(self.specdiruri, 
+                afileuri = join(self.specdiruri,
                                 ctx.const.files_dir, dir_name, file_name)
                 self.download(afileuri, join(self.destdir, ctx.const.files_dir, dir_name))
 
@@ -323,11 +323,11 @@ class Builder:
 
     def run_install_action(self):
         ctx.ui.action(_("Installing..."))
-        
-        # Before install make sure install_dir is clean 
+
+        # Before install make sure install_dir is clean
         if os.path.exists(self.pkg_install_dir()):
             util.clean_dir(self.pkg_install_dir())
-            
+
         # install function is mandatory!
         self.run_action_function(ctx.const.install_func, True)
         self.set_state("installaction")
@@ -393,11 +393,11 @@ class Builder:
             workdir = self.actionGlobals['WorkDir']
         except KeyError:
             workdir = self.spec.source.name + "-" + self.spec.getSourceVersion()
-                    
+
         return util.join_path(self.pkg_work_dir(), workdir)
 
     def run_action_function(self, func, mandatory=False):
-        """Calls the corresponding function in actions.py. 
+        """Calls the corresponding function in actions.py.
 
         If mandatory parameter is True, and function is not present in
         actionLocals pisi.build.Error will be raised."""
@@ -441,14 +441,14 @@ class Builder:
         for dep in build_deps:
             if not dependency.installed_satisfies_dep(dep):
                 dep_unsatis.append(dep)
-    
+
         if dep_unsatis:
             ctx.ui.info(_("Unsatisfied Build Dependencies:") + ' '
                         + util.strlist([str(x) for x in dep_unsatis]) )
 
             def fail():
                 raise Error(_('Cannot build package due to unsatisfied build dependencies'))
-                
+
             if ctx.config.get_option('no_install'):
                 fail()
 
@@ -564,7 +564,7 @@ class Builder:
         metadata.package.distributionRelease = ctx.config.values.general.distribution_release
         metadata.package.architecture = "Any"
         metadata.package.packageFormat = ctx.get_option('package_format')
-        
+
         size = 0
         if package.debug_package:
             d = self.pkg_debug_dir()
@@ -578,7 +578,6 @@ class Builder:
         metadata.package.installedSize = size
 
         self.metadata = metadata
-
 
     def gen_files_xml(self, package):
         """Generates files.xml using the path definitions in specfile and
@@ -601,7 +600,7 @@ class Builder:
 
         d = {}
         def add_path(path):
-            # add the files under material path 
+            # add the files under material path
             for fpath, fhash in util.get_file_hashes(path, collisions, install_dir):
                 if ctx.get_option('create_static') \
                     and fpath.endswith(ctx.const.ar_file_suffix) \
@@ -613,7 +612,7 @@ class Builder:
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
                 ftype, permanent = get_file_type(frpath, package.files, install_dir)
                 fsize = util.dir_size(fpath)
-                d[frpath] = FileInfo(path=frpath, type=ftype, permanent=permanent, 
+                d[frpath] = FileInfo(path=frpath, type=ftype, permanent=permanent,
                                      size=fsize, hash=fhash)
 
         for pinfo in package.files:
@@ -638,9 +637,9 @@ class Builder:
                         return True
 
             return False
-            
+
         # find previous build in packages dir
-        found = []        
+        found = []
         def locate_old_package(old_package_fn):
             if util.is_package_name(os.path.basename(old_package_fn), package_name):
                 try:
@@ -682,13 +681,13 @@ class Builder:
                 # compare old files.xml with the new one..
                 old_pkg = Package(old_package_fn, 'r')
                 old_pkg.read(util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
-    
+
                 changed = False
                 fnew = self.files.list
                 fold = old_pkg.files.list
                 fold.sort(lambda x,y : cmp(x.path,y.path))
                 fnew.sort(lambda x,y : cmp(x.path,y.path))
-                    
+
                 if len(fnew) != len(fold):
                     changed = True
                 else:
@@ -702,7 +701,7 @@ class Builder:
                             if fo.hash != fn.hash:
                                 changed = True
                                 break
-                
+
                 if metadata_changed(old_pkg.metadata, self.metadata):
                     changed = True
 
@@ -711,7 +710,7 @@ class Builder:
                 old_build = None
 
             ctx.ui.debug('old build number: %s' % old_build)
-                            
+
             # set build number
             if old_build is None:
                 ctx.ui.warning(_('(old package lacks a build no, setting build no to 1.)'))
@@ -782,7 +781,7 @@ class Builder:
                     # mode is octal!
                     os.chmod(dest, int(afile.permission, 8))
             os.chdir(c)
-           
+
             ctx.ui.action(_("** Building package %s") % package.name);
 
             ctx.ui.info(_("Generating %s,") % ctx.const.files_xml)
@@ -797,7 +796,7 @@ class Builder:
                 ctx.ui.warning(_('Build number is not available. For repo builds you must enable buildno in pisi.conf.'))
             else:
                 build_no, old_build_no = self.calc_build_no(package.name)
-            
+
             self.metadata.package.build = build_no
             self.metadata.write(util.join_path(self.pkg_dir(), ctx.const.metadata_xml))
 
@@ -825,7 +824,7 @@ class Builder:
 
             # add xmls and files
             os.chdir(self.pkg_dir())
-        
+
             pkg.add_to_package(ctx.const.metadata_xml)
             pkg.add_to_package(ctx.const.files_xml)
 
@@ -867,9 +866,9 @@ class Builder:
                 for f in abandoned_files:
                     ctx.ui.info('    - %s' % (f))
             else:
-                ctx.ui.warning(_('All of the files under the install dir (%s) has been collected by package(s)') 
+                ctx.ui.warning(_('All of the files under the install dir (%s) has been collected by package(s)')
                                                                 % (install_dir))
-            
+
         if ctx.config.values.general.autoclean is True:
             ctx.ui.info(_("Cleaning Build Directory..."))
             util.clean_dir(self.pkg_dir())
@@ -927,7 +926,7 @@ def __buildState_buildaction(pb, last):
     pb.run_build_action()
 
 def __buildState_installaction(pb, last):
-    
+
     if order[last] < order["buildaction"]:
         __buildState_buildaction(pb, last)
     pb.run_install_action()
@@ -946,7 +945,7 @@ def build_until(pspec, state):
 
     pb.compile_action_script()
     pb.compile_comar_script()
-    
+
     last = pb.get_state()
     ctx.ui.info("Last state was %s"%last)
 
@@ -963,7 +962,7 @@ def build_until(pspec, state):
     if state == "setup":
         __buildState_setupaction(pb, last)
         return
-    
+
     if state == "build":
         __buildState_buildaction(pb, last)
         return

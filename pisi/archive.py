@@ -35,7 +35,6 @@ class LZMAError(pisi.Error):
     def __init__(self, err):
         pisi.Error.__init__(self, _("An error has occured while running LZMA:\n%s") % err)
 
-        
 class ArchiveBase(object):
     """Base class for Archive classes."""
     def __init__(self, file_path, atype):
@@ -69,7 +68,7 @@ class ArchiveBinary(ArchiveBase):
 
 class ArchiveTar(ArchiveBase):
     """ArchiveTar handles tar archives depending on the compression
-    type. Provides access to tar, tar.gz and tar.bz2 files. 
+    type. Provides access to tar, tar.gz and tar.bz2 files.
 
     This class provides the unpack magic for tar archives."""
     def __init__(self, file_path, arch_type = "tar", no_same_permissions = True):
@@ -151,7 +150,7 @@ class ArchiveTar(ArchiveBase):
             else:
                 raise ArchiveError(_("Archive type not recognized"))
             self.tar = tarfile.open(self.file_path, wmode)
-            
+
         self.tar.add(file_name, arc_name)
 
     def close(self):
@@ -173,9 +172,9 @@ class MyZipFile(zipfile.ZipFile):
     def decompressToFile(self, name, outname):
         import zlib
         import binascii
-        
+
         block_size = 1024 * 1024 * 2
-        
+
         if self.mode not in ("r", "a"):
             raise RuntimeError, 'read() requires mode "r" or "a"'
         if not self.fp:
@@ -184,9 +183,9 @@ class MyZipFile(zipfile.ZipFile):
         zinfo = self.getinfo(name)
         filepos = self.fp.tell()
         self.fp.seek(zinfo.file_offset, 0)
-        
+
         destfile = file(outname, 'wb')
-        
+
         if zinfo.compress_type == zipfile.ZIP_STORED:
             total_read = 0
             crc = None
@@ -209,13 +208,13 @@ class MyZipFile(zipfile.ZipFile):
             raise BadZipfile, \
                   "Unsupported compression method %d for file %s" % \
             (zinfo.compress_type, name)
-        
+
         if not zlib:
             raise RuntimeError, \
                 "De-compression requires the (missing) zlib module"
         # zlib compress/decompress code by Jeremy Hylton of CNRI
         dc = zlib.decompressobj(-15)
-        
+
         total_read = 0
         crc = None
         while total_read < zinfo.compress_size:
@@ -229,7 +228,7 @@ class MyZipFile(zipfile.ZipFile):
                 crc = binascii.crc32(dcbuff, crc)
             else:
                 crc = binascii.crc32(dcbuff)
-        
+
         # need to feed in unused pad byte so that zlib won't choke
         ex = dc.decompress(dc.unconsumed_tail + 'Z') + dc.flush()
         if ex:
@@ -238,23 +237,23 @@ class MyZipFile(zipfile.ZipFile):
             else:
                 crc = binascii.crc32(ex)
             destfile.write(ex)
-        
+
         if crc and crc != zinfo.CRC:
             raise zipfile.BadZipfile, "Bad CRC-32 for file %s" % name
-        
+
         destfile.close()
         self.fp.seek(filepos, 0)
 
 
 class ArchiveZip(ArchiveBase):
-    """ArchiveZip handles zip archives. 
+    """ArchiveZip handles zip archives.
 
     Being a zip archive PiSi packages also use this class
     extensively. This class provides unpacking and packing magic for
     zip archives."""
-    
+
     symmagic = 2716663808 #long of hex val '0xA1ED0000L'
-    
+
     def __init__(self, file_path, arch_type = "zip", mode = 'r'):
         super(ArchiveZip, self).__init__(file_path, arch_type)
 
@@ -280,7 +279,7 @@ class ArchiveZip(ArchiveBase):
                 attr = zipfile.ZipInfo()
                 attr.filename = file_name
                 attr.create_system = 3
-                attr.external_attr = self.symmagic 
+                attr.external_attr = self.symmagic
                 self.zip_obj.writestr(attr, dest)
             else:
                 self.zip_obj.write(file_name, arc_name, zipfile.ZIP_DEFLATED)
@@ -313,7 +312,7 @@ class ArchiveZip(ArchiveBase):
 
     def unpack_file_cond(self, pred, target_dir, archive_root = ''):
         """Unpack/Extract files according to predicate function
-        pred: filename -> bool 
+        pred: filename -> bool
         unpacks stuff into target_dir and only extracts files
         from archive_root, treating it as the archive root"""
         zip_obj = self.zip_obj
@@ -322,7 +321,7 @@ class ArchiveZip(ArchiveBase):
 
                 # below code removes that, so we find it here
                 is_dir = info.filename.endswith('/')
-                
+
                 # calculate output file name
                 if archive_root == '':
                     outpath = info.filename
@@ -346,7 +345,7 @@ class ArchiveZip(ArchiveBase):
                         perm |= 0x00000100
                         os.chmod(d, perm)
                     continue
-                    
+
                 # check that output dir is present
                 util.check_dir(os.path.dirname(ofile))
 
@@ -354,7 +353,7 @@ class ArchiveZip(ArchiveBase):
                 # (also check for islink? for broken symlinks...)
                 if os.path.isfile(ofile) or os.path.islink(ofile):
                     os.remove(ofile)
-                     
+
                 if info.external_attr == self.symmagic:
                     if os.path.isdir(ofile):
                         shutil.rmtree(ofile) # a rare case, the file used to be a dir, now it is a symlink!
@@ -382,7 +381,7 @@ class ArchiveZip(ArchiveBase):
 
         self.unpack_file_cond(lambda f: True, target_dir)
         self.close()
-        return 
+        return
 
 
 class Archive:
@@ -394,7 +393,7 @@ class Archive:
         targz, tarbz2, zip, tar"""
 
         handlers = {
-            'targz': ArchiveTar, 
+            'targz': ArchiveTar,
             'tarbz2': ArchiveTar,
             'tarlzma': ArchiveTar,
             'tar': ArchiveTar,

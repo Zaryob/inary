@@ -101,6 +101,6 @@ class SourceArchive:
         # check archive file's integrity
         if not util.check_file_hash(self.archiveFile, self.archive.sha1sum):
             raise Error, _("unpack: check_file_hash failed")
-            
+
         archive = Archive(self.archiveFile, self.archive.type)
         archive.unpack(self.pkg_work_dir, clean_dir)

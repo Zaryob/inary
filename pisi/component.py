@@ -40,7 +40,7 @@ class Distribution(xmlfile.XmlFile):
     t_Type =  [autoxml.Text, autoxml.mandatory]
     t_Dependencies = [ [autoxml.Text], autoxml.optional, "Dependencies/Distribution"]
 
-    t_BinaryName = [autoxml.Text, autoxml.optional] # name of repository (binary distro) 
+    t_BinaryName = [autoxml.Text, autoxml.optional] # name of repository (binary distro)
     t_Architecture = [autoxml.Text, autoxml.optional] # architecture identifier
 
 
@@ -50,24 +50,24 @@ class Component(xmlfile.XmlFile):
     __metaclass__ = autoxml.autoxml
 
     tag = "PISI"
-    
+
     t_Name = [autoxml.String, autoxml.mandatory]     # fully qualified name
 
     # component name in other languages, for instance in Turkish
     # LocalName for system.base could be sistem.taban or "Taban Sistem",
     # this could be useful for GUIs
-    
+
     t_LocalName = [autoxml.LocalText, autoxml.mandatory]
-    
+
     # Information about the component
     t_Summary = [autoxml.LocalText, autoxml.mandatory]
     t_Description = [autoxml.LocalText, autoxml.mandatory]
     #t_Icon = [autoxml.Binary, autoxml.mandatory]
-    
+
     # Dependencies to other components
     t_Dependencies = [ [autoxml.String], autoxml.optional, "Dependencies/Component"]
 
-    # the parts of this component. 
+    # the parts of this component.
     # to be filled by the component database, thus it is optional.
     t_Packages = [ [autoxml.String], autoxml.optional, "Parts/Package"]
 
@@ -75,7 +75,7 @@ class Component(xmlfile.XmlFile):
 
 class ComponentDB(object):
     """a database of components"""
-    
+
     def __init__(self):
         self.d = ItemByRepoDB('component')
 
@@ -128,7 +128,7 @@ class ComponentDB(object):
 
         component = self.get_component(component_name, repo, txn)
         if not walk:
-            return component.packages            
+            return component.packages
 
         packages = []
         packages.extend(component.packages)
@@ -142,7 +142,7 @@ class ComponentDB(object):
         parent_name = ".".join(component.name.split(".")[:-1])
         if not parent_name: # root component
             return
-        
+
         if self.has_component(parent_name, repo, txn):
             parent = self.get_component(parent_name, repo, txn)
         else:
@@ -186,7 +186,7 @@ class ComponentDB(object):
             if package in component.packages:
                 component.packages.remove(package)
             self.d.add_item(component_name, component, repo, txn) # update
-            
+
         ctx.txn_proc(lambda x: proc(txn, repo), txn)
 
     def add_spec(self, component_name, spec, repo, txn = None):
@@ -211,9 +211,9 @@ class ComponentDB(object):
             if spec in component.sources:
                 component.sources.remove(spec)
             self.d.add_item(component_name, component, repo, txn) # update
-            
+
         ctx.txn_proc(lambda x: proc(txn, repo), txn)
-        
+
     def clear(self, txn = None):
         self.d.clear(txn)
 

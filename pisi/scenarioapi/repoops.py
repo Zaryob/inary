@@ -31,11 +31,11 @@ def repo_added_package(package, *args):
     partOf = "None"
     dependencies = []
     conflicts = []
-    
+
     for with in args:
         if with.types == CONFLICT and with.action == INIT:
             conflicts = with.data
-            
+
         if with.types == DEPENDENCY and with.action == INIT:
             dependencies = with.data
 

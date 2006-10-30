@@ -25,7 +25,7 @@ import pisi.itembyrepodb
 class Conflict:
 
     __metaclass__ = autoxml.autoxml
-    
+
     s_Package = [autoxml.String, autoxml.mandatory]
     a_version = [autoxml.String, autoxml.optional]
     a_versionFrom = [autoxml.String, autoxml.optional]
@@ -58,15 +58,15 @@ class Conflict:
             ret &= v <= Version(self.versionTo)
         r = Version(release)
         if self.release:
-            ret &= r == Version(self.release)        
+            ret &= r == Version(self.release)
         if self.releaseFrom:
-            ret &= r >= Version(self.releaseFrom)        
+            ret &= r >= Version(self.releaseFrom)
         if self.releaseTo:
-            ret &= r <= Version(self.releaseTo)       
+            ret &= r <= Version(self.releaseTo)
         return ret
 
 def installed_package_conflicts(confinfo):
-    """determine if an installed package in *repository* conflicts with 
+    """determine if an installed package in *repository* conflicts with
 given conflicting spec"""
     pkg_name = confinfo.package
     if not ctx.installdb.is_installed(pkg_name):

@@ -36,7 +36,6 @@ import pisi.specfile as specfile
 
 class Error(pisi.Error):
     pass
-    
 
 class Index(XmlFile):
     __metaclass__ = autoxml.autoxml
@@ -53,7 +52,7 @@ class Index(XmlFile):
         return self.distribution.name + self.distribution.repositoryname
 
     def read_uri(self, uri, tmpdir, force = False):
-        self.read(uri, tmpDir=tmpdir, sha1sum=not force, 
+        self.read(uri, tmpDir=tmpdir, sha1sum=not force,
                   compress=File.auto, sign=File.detached, copylocal = True)
 
     # read index for a given repo, force means download even if remote not updated
@@ -78,7 +77,7 @@ class Index(XmlFile):
             # and what do we do with it? move it to index dir properly
             newtmpdir = os.path.join(ctx.config.index_dir(), repo)
             pisi.util.clean_dir(newtmpdir) # replace newtmpdir
-            shutil.move(tmpdir, newtmpdir) 
+            shutil.move(tmpdir, newtmpdir)
 
     def check_signature(self, filename, repo):
         tmpdir = os.path.join(ctx.config.index_dir(), repo)
@@ -109,7 +108,7 @@ class Index(XmlFile):
         def update_progress():
             self.processed += 1
             ctx.ui.display_progress(operation = "updatingrepo",
-                                    percent = self.progress.update(self.processed), 
+                                    percent = self.progress.update(self.processed),
                                     info = _("Updating package database of %s") % repo)
 
         ctx.componentdb.remove_repo(repo, txn=txn)

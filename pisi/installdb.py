@@ -35,7 +35,7 @@ class InstallDBError(pisi.Error):
 
 
 class InstallInfo:
-    # some data is replicated from packagedb 
+    # some data is replicated from packagedb
     # we store as an object, hey, we can waste O(1) space.
     # this is also easier to modify in the future, without
     # requiring database upgrades! wow!
@@ -54,10 +54,10 @@ class InstallInfo:
                                    self.build, self.distribution,
                                    time_str)
         return s
-    
+
     state_map = { 'i': _('installed'), 'ip':_('installed-pending'),
                   'r':_('removed'), 'p': _('purged') }
-        
+
     def __str__(self):
         s = _("State: %s\nVersion: %s, Release: %s, Build: %s\n") % \
             (InstallInfo.state_map[self.state], self.version,
@@ -92,7 +92,7 @@ class InstallDB:
         return files
 
     def pkg_dir(self, pkg, version, release):
-        return join(ctx.config.lib_dir(), 'package', 
+        return join(ctx.config.lib_dir(), 'package',
                     pkg + '-' + version + '-' + release)
 
     def is_recorded(self, pkg, txn = None):
@@ -145,7 +145,7 @@ class InstallDB:
         else:
             return False
 
-    def install(self, pkg, version, release, build, distro = "", 
+    def install(self, pkg, version, release, build, distro = "",
                 config_later = False, rebuild=False, txn = None):
         """install package with specific version, release, build"""
         pkg = str(pkg)
