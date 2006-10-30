@@ -110,7 +110,7 @@ class ComponentDB(object):
             srcs = set()
             for repostr in self.d.order(repo = repo):
                 if s.has_key(repostr):
-                    pkgs |= set(self.get_packages(name, True, repo, txn))
+                    pkgs |= set(s[repostr].packages)
                     srcs |= set(s[repostr].sources)
             comp = self.get_component(name)
             comp.packages = list(pkgs)
@@ -125,7 +125,7 @@ class ComponentDB(object):
     # walk: walks through the underlying  components' packages
     def get_packages(self, component_name, walk=False, repo=None, txn = None):
         """returns the given component's and underlying recursive components' packages"""
-
+        
         component = self.get_component(component_name, repo, txn)
         if not walk:
             return component.packages
@@ -133,7 +133,7 @@ class ComponentDB(object):
         packages = []
         packages.extend(component.packages)
         for dep in component.dependencies:
-            packages.extend(self.get_packages(dep))
+            packages.extend(self.get_packages(dep, walk, repo, txn))
 
         return packages
 
