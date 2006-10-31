@@ -121,7 +121,22 @@ class ComponentDB(object):
     def list_components(self, repo=None):
         return self.d.list(repo)
 
-    # Returns the package list of the component
+    # walk: walks through the underlying  components' packages
+    def get_union_packages(self, component_name, walk=False, repo=pisi.itembyrepodb.repos, txn = None):
+        """returns union of all repository component's packages, not just the first repo's 
+        component's in order"""
+        
+        component = self.get_union_comp(component_name, txn, repo)
+        if not walk:
+            return component.packages
+
+        packages = []
+        packages.extend(component.packages)
+        for dep in component.dependencies:
+            packages.extend(self.get_union_packages(dep, walk, repo, txn))
+
+        return packages
+
     # walk: walks through the underlying  components' packages
     def get_packages(self, component_name, walk=False, repo=None, txn = None):
         """returns the given component's and underlying recursive components' packages"""
