@@ -12,7 +12,7 @@
 
 """package abstraction methods to add/remove files, extract control files"""
 
-from os.path import join, exists, basename, dirname
+from os.path import join, exists, basename, dirname, getsize
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -59,6 +59,7 @@ class Package:
                 raise
         else:
             ctx.ui.info(_('%s [cached]') % url.filename())
+            ctx.ui.notify(pisi.ui.cached, name = url.filename(), size = getsize(self.filepath))
 
     def add_to_package(self, fn, an=None):
         """Add a file or directory to package"""
