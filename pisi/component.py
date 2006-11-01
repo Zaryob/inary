@@ -62,7 +62,7 @@ class Component(xmlfile.XmlFile):
     # Information about the component
     t_Summary = [autoxml.LocalText, autoxml.mandatory]
     t_Description = [autoxml.LocalText, autoxml.mandatory]
-    #t_Icon = [autoxml.Binary, autoxml.mandatory]
+    t_Icon = [ autoxml.String, autoxml.optional]
 
     # Dependencies to other components
     t_Dependencies = [ [autoxml.String], autoxml.optional, "Dependencies/Component"]
