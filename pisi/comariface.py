@@ -67,6 +67,7 @@ def wait_for_result(com, package_name=None):
         except KeyboardInterrupt:
             raise
         except Exception, e: #FIXME: what exception could we catch here, replace with that.
+            ctx.ui.info("COMARDEBUG: waiting reply, but got %s: %s" % (e.__class__, e))
             # Comar postInstall does a "service comar restart" which cuts
             # our precious communication link, so we waitsss
             if package_name == "comar":
