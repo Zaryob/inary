@@ -43,16 +43,18 @@ def wait_comar():
     import socket, time
     sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     timeout = 5
+    sockname = "/var/run/comar.socket"
+    if ctx.comar_sockname:
+        sockname = ctx.comar_sockname
     while timeout > 0:
         try:
-            if ctx.comar_sockname:
-                sock.connect(ctx.comar_sockname)
-            else:
-                sock.connect("/var/run/comar.socket")
+            sock.connect(sockname)
             return True
         except KeyboardInterrupt:
             raise
         except Exception, e: #FIXME: what exception could we catch here, replace with that.
+            # DEBUG: remove before release
+            ctx.ui.info("COMARDEBUG: trying to connect '%s', but got %s: %s" % (sockname, e.__class__, e))
             timeout -= 0.2
         time.sleep(0.2)
     return False
