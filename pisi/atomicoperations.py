@@ -94,8 +94,6 @@ class Install(AtomicOperation):
         self.files = self.package.files
         self.pkginfo = self.metadata.package
 
-        ctx.ui.notify(pisi.ui.installing, package=self.pkginfo, files=self.files)
-
     def install(self, ask_reinstall = True):
         if ctx.get_option('fetch_only'):
             return
@@ -103,6 +101,7 @@ class Install(AtomicOperation):
         ctx.ui.status(_('Installing %s, version %s, release %s, build %s') %
                 (self.pkginfo.name, self.pkginfo.version,
                  self.pkginfo.release, self.pkginfo.build))
+        ctx.ui.notify(pisi.ui.installing, package=self.pkginfo, files=self.files)
 
         self.ask_reinstall = ask_reinstall
         self.check_requirements()
@@ -404,12 +403,11 @@ class Remove(AtomicOperation):
             ctx.ui.warning(_('File list could not be read for package %s, continuing removal.') % package_name)
             self.files = Files()
 
-        ctx.ui.notify(pisi.ui.removing, package = self.package, files = self.files)
-
     def run(self):
         """Remove a single package"""
 
         ctx.ui.status(_('Removing package %s') % self.package_name)
+        ctx.ui.notify(pisi.ui.removing, package = self.package, files = self.files)
         if not ctx.installdb.is_installed(self.package_name):
             raise Exception(_('Trying to remove nonexistent package ')
                             + self.package_name)
