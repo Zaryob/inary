@@ -417,14 +417,8 @@ class Remove(AtomicOperation):
         self.check_dependencies()
 
         self.run_preremove()
-        progress = ctx.ui.Progress(len(self.files.list))
-        removed = 0
         for fileinfo in self.files.list:
             self.remove_file(fileinfo)
-            removed += 1
-            ctx.ui.display_progress(operation = "removing",
-                                    percent = progress.update(removed),
-                                    info = _("Removing package %s") % self.package_name)
 
         txn = ctx.dbenv.txn_begin()
         try:
