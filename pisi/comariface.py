@@ -11,6 +11,7 @@
 #
 
 import os
+import time
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -27,19 +28,28 @@ class Error(pisi.Error):
 def make_com():
     try:
         import comar
-        if not wait_comar():
-            raise comar.CannotConnect
-        if ctx.comar_sockname:
-            com = comar.Link(sockname=ctx.comar_sockname)
-        else:
-            com = comar.Link()
-        return com
+        # FIXME: maybe we should reload if it is already imported
     except ImportError:
         raise Error(_("comar package is not fully installed"))
-    except comar.CannotConnect:
-        raise Error(_("cannot connect to comar"))
+    
+    sockname = "/var/run/comar.socket"
+    # This is used by YALI
+    if ctx.comar_sockname:
+        sockname = ctx.comar_sockname
+    
+    timeout = 7
+    while timeout > 0:
+        try:
+            com = comar.Link(sockname)
+            return com
+        except comar.CannotConnect:
+            pass
+        time.sleep(0.2)
+        timeout -= 0.2
+    raise Error(_("cannot connect to comar"))
 
 def wait_comar():
+    # FIXME: this function is redundant, use make_com in wait_for_result
     import socket, time
     sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     timeout = 5
