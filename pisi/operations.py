@@ -467,9 +467,9 @@ def upgrade_pkg_names(A = []):
     ctx.ui.info(_('The following packages will be upgraded: ') +
                 util.strlist(order))
 
-    total_size = sum([ctx.packagedb.get_package(p).packageSize for p in order])
+    total_size, cached_size = calculate_download_sizes(order)
     total_size, symbol = util.human_readable_size(total_size)
-    ctx.ui.info(_('Total size of packages: %.2f %s') % (total_size, symbol))
+    ctx.ui.info(_('Total size of package(s): %.2f %s') % (total_size, symbol))
 
     if ctx.get_option('dry_run'):
         return
@@ -785,3 +785,21 @@ def plan_emerge(A, rebuild_all):
     G_f2, order_inst = plan_install_pkg_names(install_list)
 
     return G_f, order_inst, order_build
+
+def calculate_download_sizes(order):
+    total_size = cached_size = 0
+
+    for pkg in [ctx.packagedb.get_package(name) for name in order]:
+
+        # get the cached package's path
+        fn = util.package_name(pkg.name, pkg.version, pkg.release, pkg.build, True)
+        path = util.join_path(ctx.config.packages_dir(), fn)
+
+        # check the file and sha1sum to be sure it _is_ the cached package
+        if os.path.exists(path) and util.sha1_file(path) == pkg.packageHash:
+            cached_size += pkg.packageSize
+
+        total_size += pkg.packageSize
+
+    ctx.ui.notify(ui.cached, total=total_size, cached=cached_size)
+    return total_size, cached_size

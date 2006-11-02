@@ -59,7 +59,6 @@ class Package:
                 raise
         else:
             ctx.ui.info(_('%s [cached]') % url.filename())
-            ctx.ui.notify(pisi.ui.cached, name = url.filename(), size = getsize(self.filepath))
 
     def add_to_package(self, fn, an=None):
         """Add a file or directory to package"""
