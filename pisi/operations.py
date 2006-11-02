@@ -340,7 +340,7 @@ def install_pkg_names(A, reinstall = False):
         ctx.ui.info(_("Following packages will be installed in the respective "
                       "order to satisfy dependencies:\n") + util.strlist(order))
 
-    total_size = sum([ctx.packagedb.get_package(p).packageSize for p in order])
+    total_size, cached_size = calculate_download_sizes(order)
     total_size, symbol = util.human_readable_size(total_size)
     ctx.ui.info(_('Total size of package(s): %.2f %s') % (total_size, symbol))
 
