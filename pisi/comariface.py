@@ -28,7 +28,7 @@ def make_com():
     try:
         import comar
         if not wait_comar():
-            raise comar.Error
+            raise comar.CannotConnect
         if ctx.comar_sockname:
             com = comar.Link(sockname=ctx.comar_sockname)
         else:
