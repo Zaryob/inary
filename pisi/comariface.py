@@ -36,7 +36,7 @@ def make_com():
         return com
     except ImportError:
         raise Error(_("comar package is not fully installed"))
-    except comar.Error:
+    except comar.CannotConnect:
         raise Error(_("cannot connect to comar"))
 
 def wait_comar():
@@ -50,11 +50,7 @@ def wait_comar():
         try:
             sock.connect(sockname)
             return True
-        except KeyboardInterrupt:
-            raise
-        except Exception, e: #FIXME: what exception could we catch here, replace with that.
-            # DEBUG: remove before release
-            ctx.ui.info("COMARDEBUG: trying to connect '%s', but got %s: %s" % (sockname, e.__class__, e))
+        except socket.error:
             timeout -= 0.2
         time.sleep(0.2)
     return False
@@ -64,10 +60,7 @@ def wait_for_result(com, package_name=None):
     while 1:
         try:
             reply = com.read_cmd()
-        except KeyboardInterrupt:
-            raise
-        except Exception, e: #FIXME: what exception could we catch here, replace with that.
-            ctx.ui.info("COMARDEBUG: waiting reply, but got %s: %s" % (e.__class__, e))
+        except comar.LinkClosed:
             # Comar postInstall does a "service comar restart" which cuts
             # our precious communication link, so we waitsss
             if package_name == "comar":
