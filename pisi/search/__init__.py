@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005, TUBITAK/UEKAE
+# Copyright (C) 2005-2006, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -54,7 +54,7 @@ def remove_doc(id, lang, docid, str, repo = None, txn = None):
     ctx.invidx[id][lang].remove_doc(docid, terms, repo = repo, txn = txn)
 
 def query_terms(id, lang, terms, repo = None, txn = None):
-    terms = map(lambda x: p.lower(lang, x), terms)
+    terms = p.normalize(lang, terms)
     return ctx.invidx[id][lang].query(terms, repo = repo, txn = txn)
 
 def query(id, lang, str, repo = None, txn = None):

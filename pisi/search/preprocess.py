@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005, TUBITAK/UEKAE
+# Copyright (C) 2005-2006, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -11,30 +11,17 @@
 #
 
 import tokenize
+import locale
 
-def lowly_python(str):
-    def lowly_char(c):
-        if c=='I':
-            lowly = 'i'   # because of some fools we can't choose locale in lower
-        else:
-            lowly = c.lower()
-        return c
-
-    r = ""
-    for c in str:
-        r += lowly_char(c)
-    return r
-
-def lower(lang, str):
-    if lang=='tr':
-        return lowly_python(str)
-    else:
-        return str.lower()
+def normalize(lang, terms):
+    if lang == "tr":
+        old_locale = locale.setlocale(locale.LC_CTYPE)
+        locale.setlocale(locale.LC_CTYPE, "tr_TR.UTF-8")
+    terms = map(lambda x: unicode(x).lower(), terms)
+    if lang == "tr":
+        locale.setlocale(locale.LC_CTYPE, old_locale)
+    return terms
 
 def preprocess(lang, str):
     terms = tokenize.tokenize(lang, str)
-
-    # normalize
-    terms = map(lambda x: lower(lang, x), terms)
-
-    return terms
+    return normalize(lang, terms)
