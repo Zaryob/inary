@@ -12,6 +12,7 @@
 
 import os
 import time
+import select
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -20,18 +21,15 @@ _ = __trans.ugettext
 import pisi
 import pisi.context as ctx
 
-
 class Error(pisi.Error):
     pass
 
+try:
+    import comar
+except ImportError:
+    raise Error(_("comar package is not fully installed"))
 
 def make_com():
-    try:
-        import comar
-        # FIXME: maybe we should reload if it is already imported
-    except ImportError:
-        raise Error(_("comar package is not fully installed"))
-    
     sockname = "/var/run/comar.socket"
     # This is used by YALI
     if ctx.comar_sockname:
@@ -50,7 +48,7 @@ def make_com():
 
 def wait_comar():
     # FIXME: this function is redundant, use make_com in wait_for_result
-    import socket, time
+    import socket
     sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     timeout = 5
     sockname = "/var/run/comar.socket"
@@ -70,6 +68,10 @@ def wait_for_result(com, package_name=None):
     while 1:
         try:
             reply = com.read_cmd()
+        except select.error:
+            if ctx.keyboard_interrupt_pending():
+                return
+            raise
         except comar.LinkClosed:
             # Comar postInstall does a "service comar restart" which cuts
             # our precious communication link, so we waitsss

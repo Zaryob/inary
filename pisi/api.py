@@ -52,7 +52,8 @@ class Error(pisi.Error):
 def init(database = True, write = True,
          options = None, ui = None, comar = True,
          stdout = None, stderr = None,
-         comar_sockname = None):
+         comar_sockname = None,
+         signal_handling = True):
     """Initialize PiSi subsystem"""
 
     # UI comes first
@@ -87,6 +88,9 @@ def init(database = True, write = True,
 
     import pisi.config
     ctx.config = pisi.config.Config(options)
+
+    if signal_handling:
+        ctx.sig = pisi.signalhandler.SignalHandler()
 
     # TODO: this is definitely not dynamic beyond this point!
     ctx.comar = comar and not ctx.config.get_option('ignore_comar')
