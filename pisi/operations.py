@@ -259,15 +259,6 @@ def check_conflicts(order, packagedb):
 
     return list(C)
 
-def expand_components(A):
-    Ap = set()
-    for x in A:
-        if ctx.componentdb.has_component(x):
-            Ap = Ap.union(ctx.componentdb.get_union_comp(x).packages)
-        else:
-            Ap.add(x)
-    return Ap
-
 def is_upgradable(name, ignore_build = False):
     if not ctx.installdb.is_installed(name):
         return False
@@ -311,9 +302,8 @@ def install_pkg_names(A, reinstall = False):
     installs"""
 
     A = [str(x) for x in A] #FIXME: why do we still get unicode input here? :/ -- exa
-    # A was a list, remove duplicates and expand components
-    A_0 = A = expand_components(set(A))
-    ctx.ui.debug('A = %s' % str(A))
+    # A was a list, remove duplicates
+    A_0 = A = set(A)
 
     # filter packages that are already installed
     if not reinstall:
@@ -409,7 +399,7 @@ def upgrade_pkg_names(A = []):
         # if A is empty, then upgrade all packages
         A = ctx.installdb.list_installed()
 
-    A_0 = A = expand_components(set(A))
+    A_0 = A = set(A)
 
     Ap = []
     for x in A:
@@ -575,7 +565,7 @@ def remove(A, ignore_dep = False, ignore_safety = False):
     A = [str(x) for x in A]
 
     # filter packages that are not installed
-    A_0 = A = expand_components(set(A))
+    A_0 = A = set(A)
 
     if not ctx.get_option('ignore_safety') and not ignore_safety:
         if ctx.componentdb.has_component('system.base'):
