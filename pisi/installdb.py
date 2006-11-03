@@ -189,6 +189,8 @@ class InstallDB:
             info = self.d.get(pkg, txn)
             info.state = 'r'
             self.d.put(pkg, info, txn)
+            if self.dp.has_key(pkg):
+                self.dp.delete(pkg, txn)
         self.d.txn_proc(proc, txn)
 
     def purge(self, pkg, txn = None):

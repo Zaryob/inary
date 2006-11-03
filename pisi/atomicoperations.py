@@ -240,15 +240,19 @@ class Install(AtomicOperation):
         self.config_later = False
         if ctx.comar:
             import pisi.comariface
-            ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
-            pisi.comariface.post_install(
-                self.pkginfo.name,
-                self.metadata.package.providesComar,
-                self.package.comar_dir(),
-                os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-                os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-            )
-            ctx.ui.notify(pisi.ui.configured, package = self.pkginfo, files = self.files)
+            try:
+                ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
+                pisi.comariface.post_install(
+                    self.pkginfo.name,
+                    self.metadata.package.providesComar,
+                    self.package.comar_dir(),
+                    os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
+                    os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+                    )
+                ctx.ui.notify(pisi.ui.configured, package = self.pkginfo, files = self.files)
+            except pisi.comariface.Error:
+                ctx.ui.warning(_('%s configuration failed.') % self.pkginfo.name)
+                self.config_later = True
         else:
             self.config_later = True
 
