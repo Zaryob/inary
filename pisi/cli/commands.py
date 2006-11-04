@@ -801,6 +801,8 @@ Usage: info <package1> <package2> ... <packagen>
         group.add_option("-f", "--files", action="store_true",
                                default=False,
                                help=_("Show a list of package files."))
+        group.add_option("-c", "--component", action="append",
+                               default=None, help=_("Info about the given component"))
         group.add_option("-F", "--files-path", action="store_true",
                                default=False,
                                help=_("Show only paths."))
@@ -813,28 +815,34 @@ Usage: info <package1> <package2> ... <packagen>
 
         self.init(database = True, write = False)
 
-        if len(self.args) == 0:
+        components = ctx.get_option('component')
+        if not components and not self.args:
             self.help()
             return
 
         index = pisi.index.Index()
         index.distribution = None
 
-        for arg in self.args:
-            if ctx.componentdb.has_component(arg):
-                component = ctx.componentdb.get_union_comp(arg)
-                if self.options.xml:
-                    index.add_component(component)
-                else:
-                    if not self.options.short:
-                        ctx.ui.info(unicode(component))
+        # info of components
+        if components:
+            for name in components:
+                if ctx.componentdb.has_component(name):
+                    component = ctx.componentdb.get_union_comp(name)
+                    if self.options.xml:
+                        index.add_component(component)
                     else:
-                        ctx.ui.info("%s - %s" % (component.name, component.summary))
-            else: # then assume it was a package
-                if self.options.xml:
-                    index.packages.append(pisi.api.info(arg)[0].package)
-                else:
-                    self.info_package(arg)
+                        if not self.options.short:
+                            ctx.ui.info(unicode(component))
+                        else:
+                            ctx.ui.info("%s - %s" % (component.name, component.summary))
+
+        # info of packages
+        for arg in self.args:
+            if self.options.xml:
+                index.packages.append(pisi.api.info(arg)[0].package)
+            else:
+                self.info_package(arg)
+
         if self.options.xml:
             errs = []
             index.newDocument()
@@ -1462,6 +1470,7 @@ in summary, description, and package name fields.
         super(Search, self).add_options(group)
         group.add_option("-L", "--language", action="store",
                                help=_("Set search language"))
+        group.remove_option("--component")
         group.remove_option("--short")
         group.remove_option("--xml")
         group.add_option("-l", "--long", action="store_true",
