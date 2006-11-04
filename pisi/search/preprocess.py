@@ -20,7 +20,10 @@ def normalize(lang, terms):
     terms = map(lambda x: unicode(x).lower(), terms)
     if lang == "tr":
         locale.setlocale(locale.LC_CTYPE, old_locale)
-    return terms
+    unique_terms = set()
+    for term in terms:
+        unique_terms.add(unicode(term))
+    return list(unique_terms)
 
 def preprocess(lang, str):
     terms = tokenize.tokenize(lang, str)
