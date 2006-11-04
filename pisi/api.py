@@ -107,7 +107,7 @@ def init(database = True, write = True,
         ctx.componentdb = pisi.component.ComponentDB()
         ctx.packagedb = packagedb.init_db()
         ctx.sourcedb = pisi.sourcedb.init()
-        pisi.search.init(['summary', 'description'], ['en', 'tr'])
+        pisi.search.init(['terms'], ['en', 'tr'])
     else:
         ctx.repodb = None
         ctx.installdb = None
@@ -333,9 +333,7 @@ def search_package_names(query):
 def search_package_terms(terms, lang = None, search_names = True, repo = pisi.itembyrepodb.all):
     if not lang:
         lang = pisi.pxml.autoxml.LocalText.get_lang()
-    r1 = pisi.search.query_terms('summary', lang, terms, repo = repo)
-    r2 = pisi.search.query_terms('description', lang, terms, repo = repo)
-    r = r1.union(r2)
+    r = pisi.search.query_terms('terms', lang, terms, repo = repo)
     if search_names:
         for term in terms:
             r |= search_package_names(term)
@@ -344,9 +342,7 @@ def search_package_terms(terms, lang = None, search_names = True, repo = pisi.it
 def search_package(query, lang = None, search_names = True, repo = pisi.itembyrepodb.all):
     if not lang:
         lang = pisi.pxml.autoxml.LocalText.get_lang()
-    r1 = pisi.search.query('summary', lang, query, repo = repo)
-    r2 = pisi.search.query('description', lang, query, repo = repo)
-    r = r1.union(r2)
+    r = pisi.search.query('terms', lang, query, repo = repo)
     if search_names:
         r |= search_package_names(query)
     return r
