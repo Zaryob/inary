@@ -355,11 +355,14 @@ def check(package):
         if file.hash and file.type != "config" \
            and not os.path.islink('/' + file.path):
             ctx.ui.info(_("Checking /%s ") % file.path, noln=True, verbose=True)
-            if file.hash != util.sha1_file('/' + file.path):
-                corrupt.append(file)
-                ctx.ui.info(_("\nCorrupt file: %s") % file, noln=True)
-            else:
-                ctx.ui.info(_("OK"), verbose=True)
+            try:
+                if file.hash != util.sha1_file('/' + file.path):
+                    corrupt.append(file)
+                    ctx.ui.info(_("\nCorrupt file: %s") % file, noln=True)
+                else:
+                    ctx.ui.info(_("OK"), verbose=True)
+            except pisi.util.FileError:
+                ctx.ui.error(_("\nI/O Error: Cannot calculate SHA1 hash of %s") % file)
     return corrupt
 
 def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=False):
