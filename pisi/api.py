@@ -361,8 +361,8 @@ def check(package):
                     ctx.ui.info(_("\nCorrupt file: %s") % file, noln=True)
                 else:
                     ctx.ui.info(_("OK"), verbose=True)
-            except pisi.util.FileError:
-                ctx.ui.error(_("\nI/O Error: Cannot calculate SHA1 hash of %s") % file)
+            except pisi.util.FileError,e:
+                ctx.ui.error("\n%s" % e)
     return corrupt
 
 def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=False):
