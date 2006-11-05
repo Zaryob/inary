@@ -300,7 +300,7 @@ class Install(AtomicOperation):
             for fileinfo in self.old_files.list:
                 old_fileinfo[str(fileinfo.path)] = fileinfo
             for path in leftover:
-                    Remove.remove_file( old_fileinfo[path] )
+                    Remove.remove_file(old_fileinfo[path], self.pkginfo.name)
 
         if self.reinstall:
             # get 'config' typed file objects
@@ -420,7 +420,7 @@ class Remove(AtomicOperation):
 
         self.run_preremove()
         for fileinfo in self.files.list:
-            self.remove_file(fileinfo)
+            self.remove_file(fileinfo, self.package_name)
 
         txn = ctx.dbenv.txn_begin()
         try:
@@ -442,16 +442,16 @@ class Remove(AtomicOperation):
         # is there any package who depends on this package?
 
     @staticmethod
-    def remove_file(fileinfo):
+    def remove_file(fileinfo, package_name):
         fpath = pisi.util.join_path(ctx.config.dest_dir(), fileinfo.path)
 
         # we should check if the file belongs to another
         # package (this can legitimately occur while upgrading
         # two packages such that a file has moved from one package to
         # another as in #2911)
-        if ctx.filesdb.has_file(fpath):
-            pkg, existing_file = ctx.filesdb.get_file(fpath)
-            if pkg != self.package_name:
+        if ctx.filesdb.has_file(fileinfo.path):
+            pkg, existing_file = ctx.filesdb.get_file(fileinfo.path)
+            if pkg != package_name:
                 ctx.ui.warning(_('Not removing conflicted file : %s') % fpath)
                 return
 
