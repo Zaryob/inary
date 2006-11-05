@@ -104,7 +104,7 @@ def wait_for_result(com, package_name=None):
             raise Error, _("comar denied our access")
 
 def post_install(package_name, provided_scripts, scriptpath, metapath, filepath):
-    ctx.ui.info(_("Configuring package"))
+    ctx.ui.info(_("Configuring %s package") % package_name)
     self_post = False
     com = make_com()
 
@@ -125,7 +125,7 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath)
         wait_for_result(com, package_name)
 
 def pre_remove(package_name, metapath, filepath):
-    ctx.ui.info(_("Configuring package for removal"))
+    ctx.ui.info(_("Configuring %s package for removal") % package_name)
     com = make_com()
 
     ctx.ui.debug(_("Running package's pre remove script"))
