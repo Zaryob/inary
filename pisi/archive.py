@@ -282,7 +282,10 @@ class ArchiveZip(ArchiveBase):
                 attr.external_attr = self.symmagic
                 self.zip_obj.writestr(attr, dest)
             else:
-                self.zip_obj.write(file_name, arc_name, zipfile.ZIP_DEFLATED)
+                comp_type = zipfile.ZIP_DEFLATED
+                if file_name.endswith(".lzma"):
+                    comp_type = zipfile.ZIP_STORED
+                self.zip_obj.write(file_name, arc_name, comp_type)
 
                 if not arc_name:
                     zinfo = self.zip_obj.getinfo(file_name)
