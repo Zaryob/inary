@@ -38,6 +38,9 @@ class Options(object):
         else:
             return self.__dict__[name]
 
+    def __setattr__(self, name, value):
+            self.__dict__[name] = value
+
 class Config(object):
     """Config Singleton"""
 
@@ -62,6 +65,8 @@ class Config(object):
         # build process.
         self.environ = deepcopy(os.environ)
 
+    def set_option(self, opt, val):
+        setattr(self.options, opt, val)
 
     def get_option(self, opt):
         if self.options:

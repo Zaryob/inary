@@ -69,8 +69,10 @@ def upgrade_pisi():
 
 # high level operations
 
-def install(packages, reinstall = False):
+def install(packages, reinstall = False, ignore_file_conflicts=False):
     """install a list of packages (either files/urls, or names)"""
+
+    ctx.set_option('ignore_file_conflicts', ignore_file_conflicts)
 
     # FIXME: this function name "install" makes impossible to import
     # and use install module directly.

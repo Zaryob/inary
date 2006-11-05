@@ -34,6 +34,7 @@ import pisi.sourcedb
 import pisi.component as component
 from pisi.index import Index
 import pisi.cli
+from pisi.config import Options
 from pisi.operations import install, remove, upgrade, emerge
 from pisi.operations import plan_install_pkg_names as plan_install
 from pisi.operations import plan_remove, plan_upgrade, upgrade_base, calculate_conflicts
@@ -50,7 +51,7 @@ class Error(pisi.Error):
     pass
 
 def init(database = True, write = True,
-         options = None, ui = None, comar = True,
+         options = Options(), ui = None, comar = True,
          stdout = None, stderr = None,
          comar_sockname = None,
          signal_handling = True):
