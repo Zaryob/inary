@@ -358,7 +358,7 @@ def check(package):
             try:
                 if file.hash != util.sha1_file('/' + file.path):
                     corrupt.append(file)
-                    ctx.ui.error(_("\nCorrupt file: %s") % file, noln=True)
+                    ctx.ui.error(_("\nCorrupt file: %s") % file)
                 else:
                     ctx.ui.info(_("OK"), verbose=True)
             except pisi.util.FileError,e:
