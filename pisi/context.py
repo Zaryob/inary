@@ -25,7 +25,7 @@ config = None
 log = None
 
 def set_option(opt, val):
-    return config and config.set_option(opt, val)
+    config.set_option(opt, val)
 
 def get_option(opt):
     return config and config.get_option(opt)
