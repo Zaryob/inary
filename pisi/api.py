@@ -494,11 +494,17 @@ def rebuild_db(files=False):
                     ctx.dbenv.dbremove(file=fn, flags=bsddb3.db.DB_AUTO_COMMIT)
 
     def reload_packages(files, txn):
-        for package_fn in os.listdir( pisi.util.join_path( ctx.config.lib_dir(),
-                                                           'package' ) ):
+        packages = os.listdir(pisi.util.join_path(ctx.config.lib_dir(), 'package'))
+        progress = ctx.ui.Progress(len(packages))
+        processed = 0
+        for package_fn in packages:
             if not package_fn == "scripts":
                 ctx.ui.debug('Resurrecting %s' % package_fn)
                 pisi.api.resurrect_package(package_fn, files, txn)
+                processed += 1
+                ctx.ui.display_progress(operation = "rebuilding-db",
+                                        percent = progress.update(processed),
+                                        info = _("Rebuilding package database"))
 
     def reload_indices(txn):
         index_dir = ctx.config.index_dir()

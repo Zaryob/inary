@@ -126,7 +126,7 @@ class CLI(UI):
 
     def display_progress(self, operation, percent, info="", **ka):
         """ display progress of any operation """
-        if operation == "removing":
+        if operation in ["removing", "rebuilding-db"]:
             return
         elif operation == "fetching":
             totalsize = '%.1f %s' % pisi.util.human_readable_size(ka['total_size'])
