@@ -28,12 +28,6 @@ from pisi.actionsapi.shelltools import can_access_file
 from pisi.actionsapi.shelltools import export
 from pisi.actionsapi.shelltools import unlink
 
-class CompileError(pisi.actionsapi.Error):
-    def __init__(self, value=''):
-        pisi.actionsapi.Error.__init__(self, value)
-        self.value = value
-        ctx.ui.error(value)
-
 class ConfigureError(pisi.actionsapi.Error):
     def __init__(self, value=''):
         pisi.actionsapi.Error.__init__(self, value)
@@ -57,10 +51,10 @@ def configure(parameters = ''):
     export('PERL_MM_USE_DEFAULT', '1')
     if can_access_file('Build.PL'):
         if system('perl Build.PL installdirs=vendor destdir=%s' % get.installDIR()):
-            raise CompileError, _('Configure failed.')
+            raise ConfigureError, _('Configure failed.')
     else:
         if system('perl Makefile.PL %s PREFIX=/usr INSTALLDIRS=vendor DESTDIR=%s' % (parameters, get.installDIR())):
-            raise CompileError, _('Configure failed.')
+            raise ConfigureError, _('Configure failed.')
 
 def make(parameters = ''):
     '''make source with given parameters.'''
