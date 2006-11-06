@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2006-11-05 15:01+EET\n"
+"POT-Creation-Date: 2006-11-06 22:23+EET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -558,66 +558,70 @@ msgstr ""
 msgid "Checking /%s "
 msgstr ""
 
-#: pisi/api.py:360
+#: pisi/api.py:361
 msgid ""
 "\n"
 "Corrupt file: %s"
 msgstr ""
 
-#: pisi/api.py:362 pisi/cli/commands.py:938
+#: pisi/api.py:363 pisi/cli/commands.py:959
 msgid "OK"
 msgstr ""
 
-#: pisi/api.py:373
+#: pisi/api.py:376
 msgid "* Building index of PiSi files under %s"
 msgstr ""
 
-#: pisi/api.py:380
+#: pisi/api.py:383
 msgid "* Index file written"
 msgstr ""
 
-#: pisi/api.py:384
+#: pisi/api.py:387
 msgid "Repo %s already present."
 msgstr ""
 
-#: pisi/api.py:388
+#: pisi/api.py:391
 msgid "Repo %s added to system."
 msgstr ""
 
-#: pisi/api.py:394
+#: pisi/api.py:397
 msgid "Repo %s removed from system."
 msgstr ""
 
-#: pisi/api.py:396
+#: pisi/api.py:399
 msgid "Repository %s does not exist. Cannot remove."
 msgstr ""
 
-#: pisi/api.py:403
+#: pisi/api.py:406
 msgid "* Updating repository: %s"
 msgstr ""
 
-#: pisi/api.py:411
+#: pisi/api.py:414
 msgid "No updates available for repository %s."
 msgstr ""
 
-#: pisi/api.py:413
+#: pisi/api.py:416
 msgid "Updating database at any rate as requested"
 msgstr ""
 
-#: pisi/api.py:424
+#: pisi/api.py:427
 msgid "* Package database updated."
 msgstr ""
 
-#: pisi/api.py:426 pisi/api.py:451
+#: pisi/api.py:429 pisi/api.py:454
 msgid "No repository named %s found."
 msgstr ""
 
-#: pisi/api.py:434
+#: pisi/api.py:437
 msgid "* Rebuilding '%s' named repo... "
 msgstr ""
 
-#: pisi/api.py:447
+#: pisi/api.py:450
 msgid "Input/Output error while reading %s: %s"
+msgstr ""
+
+#: pisi/api.py:507
+msgid "Rebuilding package database"
 msgstr ""
 
 #: pisi/archive.py:36
@@ -1258,11 +1262,11 @@ msgstr ""
 msgid "emerge options"
 msgstr ""
 
-#: pisi/cli/commands.py:521 pisi/cli/commands.py:594 pisi/cli/commands.py:647
+#: pisi/cli/commands.py:521 pisi/cli/commands.py:594 pisi/cli/commands.py:658
 msgid "Ignore file conflicts"
 msgstr ""
 
-#: pisi/cli/commands.py:523 pisi/cli/commands.py:596 pisi/cli/commands.py:649
+#: pisi/cli/commands.py:523 pisi/cli/commands.py:596 pisi/cli/commands.py:660
 msgid "Ignore package conflicts"
 msgstr ""
 
@@ -1305,11 +1309,15 @@ msgstr ""
 msgid "Reinstall already installed packages"
 msgstr ""
 
-#: pisi/cli/commands.py:598 pisi/cli/commands.py:653
+#: pisi/cli/commands.py:598
+msgid "Install component's and recursive component's packages"
+msgstr ""
+
+#: pisi/cli/commands.py:600 pisi/cli/commands.py:664
 msgid "Fetch upgrades but do not install."
 msgstr ""
 
-#: pisi/cli/commands.py:612
+#: pisi/cli/commands.py:623
 #, docstring
 msgid ""
 "Upgrade PiSi packages\n"
@@ -1330,39 +1338,39 @@ msgid ""
 "expanded to package names.\n"
 msgstr ""
 
-#: pisi/cli/commands.py:638
+#: pisi/cli/commands.py:649
 msgid "upgrade options"
 msgstr ""
 
-#: pisi/cli/commands.py:643
+#: pisi/cli/commands.py:654
 msgid "Security related package upgrades only"
 msgstr ""
 
-#: pisi/cli/commands.py:645
+#: pisi/cli/commands.py:656
 msgid "Do not update repositories"
 msgstr ""
 
-#: pisi/cli/commands.py:651
+#: pisi/cli/commands.py:662
 msgid "eager upgrades"
 msgstr ""
 
-#: pisi/cli/commands.py:655
+#: pisi/cli/commands.py:666
 msgid "When upgrading system, ignore packages and components whose basenames match pattern."
 msgstr ""
 
-#: pisi/cli/commands.py:657
+#: pisi/cli/commands.py:668
 msgid "When upgrading system, ignore packages and components whose basenames                      match any pattern contained in file."
 msgstr ""
 
-#: pisi/cli/commands.py:697
+#: pisi/cli/commands.py:708
 msgid "Updating repositories"
 msgstr ""
 
-#: pisi/cli/commands.py:702
+#: pisi/cli/commands.py:713
 msgid "Will not update repositories"
 msgstr ""
 
-#: pisi/cli/commands.py:721
+#: pisi/cli/commands.py:732
 #, docstring
 msgid ""
 "Remove PiSi packages\n"
@@ -1375,11 +1383,15 @@ msgid ""
 "expanded to package names.\n"
 msgstr ""
 
-#: pisi/cli/commands.py:738
+#: pisi/cli/commands.py:749
 msgid "remove options"
 msgstr ""
 
-#: pisi/cli/commands.py:753
+#: pisi/cli/commands.py:752
+msgid "Remove component's and recursive component's packages"
+msgstr ""
+
+#: pisi/cli/commands.py:774
 #, docstring
 msgid ""
 "Configure pending packages\n"
@@ -1390,11 +1402,11 @@ msgid ""
 "configures those packages.\n"
 msgstr ""
 
-#: pisi/cli/commands.py:769
+#: pisi/cli/commands.py:790
 msgid "configure-pending options"
 msgstr ""
 
-#: pisi/cli/commands.py:781
+#: pisi/cli/commands.py:802
 #, docstring
 msgid ""
 "Display package information\n"
@@ -1404,65 +1416,65 @@ msgid ""
 "<packagei> is either a package name or a .pisi file,\n"
 msgstr ""
 
-#: pisi/cli/commands.py:796
+#: pisi/cli/commands.py:817
 msgid "info options"
 msgstr ""
 
-#: pisi/cli/commands.py:803
+#: pisi/cli/commands.py:824
 msgid "Show a list of package files."
 msgstr ""
 
-#: pisi/cli/commands.py:805
+#: pisi/cli/commands.py:826
 msgid "Info about the given component"
 msgstr ""
 
-#: pisi/cli/commands.py:808
+#: pisi/cli/commands.py:829
 msgid "Show only paths."
 msgstr ""
 
-#: pisi/cli/commands.py:810
+#: pisi/cli/commands.py:831
 msgid "Do not show details"
 msgstr ""
 
-#: pisi/cli/commands.py:812
+#: pisi/cli/commands.py:833
 msgid "Output in xml format"
 msgstr ""
 
-#: pisi/cli/commands.py:858
+#: pisi/cli/commands.py:879
 msgid "Package file: %s"
 msgstr ""
 
-#: pisi/cli/commands.py:864
+#: pisi/cli/commands.py:885
 msgid "[inst] "
 msgstr ""
 
-#: pisi/cli/commands.py:866
+#: pisi/cli/commands.py:887
 msgid "Installed package:"
 msgstr ""
 
-#: pisi/cli/commands.py:872
+#: pisi/cli/commands.py:893
 msgid "[repo] "
 msgstr ""
 
-#: pisi/cli/commands.py:874
+#: pisi/cli/commands.py:895
 msgid "Package found in repository:"
 msgstr ""
 
-#: pisi/cli/commands.py:888
+#: pisi/cli/commands.py:909
 msgid "Reverse Dependencies:"
 msgstr ""
 
-#: pisi/cli/commands.py:891
+#: pisi/cli/commands.py:912
 msgid ""
 "\n"
 "Files:"
 msgstr ""
 
-#: pisi/cli/commands.py:899
+#: pisi/cli/commands.py:920
 msgid "File information not available"
 msgstr ""
 
-#: pisi/cli/commands.py:905
+#: pisi/cli/commands.py:926
 #, docstring
 msgid ""
 "Verify installation\n"
@@ -1478,25 +1490,25 @@ msgid ""
 "If no packages are given, checks all installed packages.\n"
 msgstr ""
 
-#: pisi/cli/commands.py:929
+#: pisi/cli/commands.py:950
 msgid "Checking all installed packages"
 msgstr ""
 
-#: pisi/cli/commands.py:932
+#: pisi/cli/commands.py:953
 msgid "* Checking %s... "
 msgstr ""
 
-#: pisi/cli/commands.py:936
+#: pisi/cli/commands.py:957
 msgid ""
 "\n"
 "Package %s is corrupt."
 msgstr ""
 
-#: pisi/cli/commands.py:940
+#: pisi/cli/commands.py:961
 msgid "Package %s not installed"
 msgstr ""
 
-#: pisi/cli/commands.py:945
+#: pisi/cli/commands.py:966
 #, docstring
 msgid ""
 "Index PiSi files in a given directory\n"
@@ -1512,31 +1524,31 @@ msgid ""
 "everything in a single index file.\n"
 msgstr ""
 
-#: pisi/cli/commands.py:966
+#: pisi/cli/commands.py:987
 msgid "index options"
 msgstr ""
 
-#: pisi/cli/commands.py:970
+#: pisi/cli/commands.py:991
 msgid "Store absolute links for indexed files."
 msgstr ""
 
-#: pisi/cli/commands.py:973
+#: pisi/cli/commands.py:994
 msgid "Index output file"
 msgstr ""
 
-#: pisi/cli/commands.py:976
+#: pisi/cli/commands.py:997
 msgid "Do not index PiSi spec files."
 msgstr ""
 
-#: pisi/cli/commands.py:979
+#: pisi/cli/commands.py:1000
 msgid "Do not sign index."
 msgstr ""
 
-#: pisi/cli/commands.py:992
+#: pisi/cli/commands.py:1013
 msgid "Indexing current directory."
 msgstr ""
 
-#: pisi/cli/commands.py:1000
+#: pisi/cli/commands.py:1021
 #, docstring
 msgid ""
 "Print the list of all installed packages\n"
@@ -1544,29 +1556,29 @@ msgid ""
 "Usage: list-installed\n"
 msgstr ""
 
-#: pisi/cli/commands.py:1014
+#: pisi/cli/commands.py:1035
 msgid "list-installed options"
 msgstr ""
 
-#: pisi/cli/commands.py:1017 pisi/cli/commands.py:1250
-#: pisi/cli/commands.py:1314 pisi/cli/commands.py:1353
-#: pisi/cli/commands.py:1393 pisi/cli/commands.py:1522
+#: pisi/cli/commands.py:1038 pisi/cli/commands.py:1271
+#: pisi/cli/commands.py:1335 pisi/cli/commands.py:1374
+#: pisi/cli/commands.py:1414 pisi/cli/commands.py:1543
 msgid "Show in long format"
 msgstr ""
 
-#: pisi/cli/commands.py:1019
+#: pisi/cli/commands.py:1040
 msgid "List installed packages under given component"
 msgstr ""
 
-#: pisi/cli/commands.py:1021 pisi/cli/commands.py:1397
+#: pisi/cli/commands.py:1042 pisi/cli/commands.py:1418
 msgid "Show detailed install info"
 msgstr ""
 
-#: pisi/cli/commands.py:1038 pisi/cli/commands.py:1416
+#: pisi/cli/commands.py:1059 pisi/cli/commands.py:1437
 msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
 msgstr ""
 
-#: pisi/cli/commands.py:1053
+#: pisi/cli/commands.py:1074
 #, docstring
 msgid ""
 "Rebuild Databases\n"
@@ -1579,19 +1591,19 @@ msgid ""
 "dirs under /var/lib/pisi\n"
 msgstr ""
 
-#: pisi/cli/commands.py:1071
+#: pisi/cli/commands.py:1092
 msgid "rebuild-db options"
 msgstr ""
 
-#: pisi/cli/commands.py:1074
+#: pisi/cli/commands.py:1095
 msgid "Rebuild files database"
 msgstr ""
 
-#: pisi/cli/commands.py:1085
+#: pisi/cli/commands.py:1106
 msgid "Rebuild PiSi databases?"
 msgstr ""
 
-#: pisi/cli/commands.py:1092
+#: pisi/cli/commands.py:1113
 #, docstring
 msgid ""
 "Update repository databases\n"
@@ -1604,15 +1616,15 @@ msgid ""
 "If no repository is given, all repositories are updated.\n"
 msgstr ""
 
-#: pisi/cli/commands.py:1110
+#: pisi/cli/commands.py:1131
 msgid "update-repo options"
 msgstr ""
 
-#: pisi/cli/commands.py:1114
+#: pisi/cli/commands.py:1135
 msgid "Update database in any case"
 msgstr ""
 
-#: pisi/cli/commands.py:1132
+#: pisi/cli/commands.py:1153
 #, docstring
 msgid ""
 "Add a repository\n"
@@ -1627,23 +1639,23 @@ msgid ""
 "NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment\n"
 msgstr ""
 
-#: pisi/cli/commands.py:1152
+#: pisi/cli/commands.py:1173
 msgid "add-repo options"
 msgstr ""
 
-#: pisi/cli/commands.py:1155
+#: pisi/cli/commands.py:1176
 msgid "Add repository at given position (0 is first)"
 msgstr ""
 
-#: pisi/cli/commands.py:1169
+#: pisi/cli/commands.py:1190
 msgid "Update PiSi database for repository %s?"
 msgstr ""
 
-#: pisi/cli/commands.py:1173
+#: pisi/cli/commands.py:1194
 msgid "%s repository could not be reached. Removing %s from system."
 msgstr ""
 
-#: pisi/cli/commands.py:1182
+#: pisi/cli/commands.py:1203
 #, docstring
 msgid ""
 "Remove repositories\n"
@@ -1653,7 +1665,7 @@ msgid ""
 "Remove all repository information from the system.\n"
 msgstr ""
 
-#: pisi/cli/commands.py:1208
+#: pisi/cli/commands.py:1229
 #, docstring
 msgid ""
 "List repositories\n"
@@ -1663,7 +1675,7 @@ msgid ""
 "Lists currently tracked repositories.\n"
 msgstr ""
 
-#: pisi/cli/commands.py:1231
+#: pisi/cli/commands.py:1252
 #, docstring
 msgid ""
 "List available packages in the repositories\n"
@@ -1675,28 +1687,28 @@ msgid ""
 "all repositories.\n"
 msgstr ""
 
-#: pisi/cli/commands.py:1248
+#: pisi/cli/commands.py:1269
 msgid "list-available options"
 msgstr ""
 
-#: pisi/cli/commands.py:1252
+#: pisi/cli/commands.py:1273
 msgid "List available packages under given component"
 msgstr ""
 
-#: pisi/cli/commands.py:1254
+#: pisi/cli/commands.py:1275
 msgid "Show uninstalled packages only"
 msgstr ""
 
-#: pisi/cli/commands.py:1262
+#: pisi/cli/commands.py:1283
 msgid "Installed packages are shown in this color"
 msgstr ""
 
-#: pisi/cli/commands.py:1270
+#: pisi/cli/commands.py:1291
 msgid ""
 "Repository : %s\n"
 msgstr ""
 
-#: pisi/cli/commands.py:1297
+#: pisi/cli/commands.py:1318
 #, docstring
 msgid ""
 "List available components\n"
@@ -1707,11 +1719,11 @@ msgid ""
 "repositories.\n"
 msgstr ""
 
-#: pisi/cli/commands.py:1312
+#: pisi/cli/commands.py:1333
 msgid "list-components options"
 msgstr ""
 
-#: pisi/cli/commands.py:1337
+#: pisi/cli/commands.py:1358
 #, docstring
 msgid ""
 "List available sources\n"
@@ -1721,11 +1733,11 @@ msgid ""
 "Gives a brief list of sources published in the repositories.\n"
 msgstr ""
 
-#: pisi/cli/commands.py:1351
+#: pisi/cli/commands.py:1372
 msgid "list-sources options"
 msgstr ""
 
-#: pisi/cli/commands.py:1376
+#: pisi/cli/commands.py:1397
 #, docstring
 msgid ""
 "List packages to be upgraded\n"
@@ -1735,19 +1747,19 @@ msgid ""
 "Lists the packages that will be upgraded.\n"
 msgstr ""
 
-#: pisi/cli/commands.py:1390
+#: pisi/cli/commands.py:1411
 msgid "list-upgrades options"
 msgstr ""
 
-#: pisi/cli/commands.py:1395
+#: pisi/cli/commands.py:1416
 msgid "List upgradable packages under given component"
 msgstr ""
 
-#: pisi/cli/commands.py:1412 pisi/operations.py:443
+#: pisi/cli/commands.py:1433 pisi/operations.py:448
 msgid "No packages to upgrade."
 msgstr ""
 
-#: pisi/cli/commands.py:1432
+#: pisi/cli/commands.py:1453
 #, docstring
 msgid ""
 "List pending packages\n"
@@ -1755,7 +1767,7 @@ msgid ""
 "Lists packages waiting to be configured.\n"
 msgstr ""
 
-#: pisi/cli/commands.py:1454
+#: pisi/cli/commands.py:1475
 #, docstring
 msgid ""
 "Search packages\n"
@@ -1766,23 +1778,23 @@ msgid ""
 "in summary, description, and package name fields.\n"
 msgstr ""
 
-#: pisi/cli/commands.py:1469
+#: pisi/cli/commands.py:1490
 msgid "search options"
 msgstr ""
 
-#: pisi/cli/commands.py:1472
+#: pisi/cli/commands.py:1493
 msgid "Set search language"
 msgstr ""
 
-#: pisi/cli/commands.py:1477
+#: pisi/cli/commands.py:1498
 msgid "Show details"
 msgstr ""
 
-#: pisi/cli/commands.py:1497
+#: pisi/cli/commands.py:1518
 msgid "%s packages found"
 msgstr ""
 
-#: pisi/cli/commands.py:1506
+#: pisi/cli/commands.py:1527
 #, docstring
 msgid ""
 "Search for a file\n"
@@ -1792,35 +1804,35 @@ msgid ""
 "Finds the installed package which contains the specified file.\n"
 msgstr ""
 
-#: pisi/cli/commands.py:1520
+#: pisi/cli/commands.py:1541
 msgid "search-file options"
 msgstr ""
 
-#: pisi/cli/commands.py:1524
+#: pisi/cli/commands.py:1545
 msgid "Fuzzy search"
 msgstr ""
 
-#: pisi/cli/commands.py:1526
+#: pisi/cli/commands.py:1547
 msgid "Show only package name"
 msgstr ""
 
-#: pisi/cli/commands.py:1547
+#: pisi/cli/commands.py:1568
 msgid "Package %s has file %s"
 msgstr ""
 
-#: pisi/cli/commands.py:1549
+#: pisi/cli/commands.py:1570
 msgid "Type: %s, Hash: %s"
 msgstr ""
 
-#: pisi/cli/commands.py:1552
+#: pisi/cli/commands.py:1573
 msgid "Path '%s' does not belong to an installed package"
 msgstr ""
 
-#: pisi/cli/commands.py:1565
+#: pisi/cli/commands.py:1586
 msgid "Searching for %s"
 msgstr ""
 
-#: pisi/cli/commands.py:1575
+#: pisi/cli/commands.py:1596
 msgid ""
 "%prog [options] <command> [arguments]\n"
 "\n"
@@ -1828,7 +1840,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: pisi/cli/commands.py:1581
+#: pisi/cli/commands.py:1602
 msgid ""
 "\n"
 "Use \"%prog help <command>\" for help on a specific command.\n"
@@ -2054,7 +2066,7 @@ msgstr ""
 msgid "Package %s: metadata corrupt, skipping..."
 msgstr ""
 
-#: pisi/index.py:165
+#: pisi/index.py:168
 msgid "Adding %s to source index"
 msgstr ""
 
@@ -2150,172 +2162,164 @@ msgstr ""
 msgid "Mirrors file %s does not exist. Could not resolve mirrors://"
 msgstr ""
 
-#: pisi/operations.py:53
-msgid "* PiSi database version has changed. Rebuilding database..."
-msgstr ""
-
-#: pisi/operations.py:55
-msgid "* Database rebuild operation is completed succesfully."
-msgstr ""
-
-#: pisi/operations.py:95
+#: pisi/operations.py:100
 msgid "Mixing file names and package names not supported yet."
 msgstr ""
 
-#: pisi/operations.py:137
+#: pisi/operations.py:142
 msgid ""
 "The following packages will be installed\n"
 "in the respective order to satisfy extra dependencies:\n"
 msgstr ""
 
-#: pisi/operations.py:140 pisi/operations.py:605
+#: pisi/operations.py:145 pisi/operations.py:610
 msgid "Do you want to continue?"
 msgstr ""
 
-#: pisi/operations.py:141
+#: pisi/operations.py:146
 msgid "External dependencies not satisfied"
 msgstr ""
 
-#: pisi/operations.py:153 pisi/operations.py:320
+#: pisi/operations.py:158 pisi/operations.py:325
 msgid "No packages to install."
 msgstr ""
 
-#: pisi/operations.py:184
+#: pisi/operations.py:189
 msgid "Installation order: "
 msgstr ""
 
-#: pisi/operations.py:238 pisi/operations.py:260
+#: pisi/operations.py:243 pisi/operations.py:265
 msgid "Conflicts remain"
 msgstr ""
 
-#: pisi/operations.py:248
+#: pisi/operations.py:253
 msgid "Selected packages [%s] are in conflict with each other."
 msgstr ""
 
-#: pisi/operations.py:254
+#: pisi/operations.py:259
 msgid ""
 "[%s conflicts with: %s]\n"
 msgstr ""
 
-#: pisi/operations.py:256
+#: pisi/operations.py:261
 msgid ""
 "The following packages have conflicts:\n"
 "%s"
 msgstr ""
 
-#: pisi/operations.py:259
+#: pisi/operations.py:264
 msgid "Remove the following conflicting packages?"
 msgstr ""
 
-#: pisi/operations.py:286
+#: pisi/operations.py:291
 msgid "Safety switch: Following packages in system.base will be installed: "
 msgstr ""
 
-#: pisi/operations.py:292
+#: pisi/operations.py:297
 msgid "Safety switch: Following packages in system.base will be upgraded: "
 msgstr ""
 
-#: pisi/operations.py:298 pisi/operations.py:581
+#: pisi/operations.py:303 pisi/operations.py:586
 msgid "Safety switch: the component system.base cannot be found"
 msgstr ""
 
-#: pisi/operations.py:315
+#: pisi/operations.py:320
 msgid ""
 "The following package(s) are already installed and are not going to be installed again:\n"
 msgstr ""
 
-#: pisi/operations.py:332
+#: pisi/operations.py:337
 msgid ""
 "Following packages will be installed in the respective order to satisfy dependencies:\n"
 msgstr ""
 
-#: pisi/operations.py:337 pisi/operations.py:464
+#: pisi/operations.py:342 pisi/operations.py:469
 msgid "Total size of package(s): %.2f %s"
 msgstr ""
 
-#: pisi/operations.py:343 pisi/operations.py:470 pisi/operations.py:693
+#: pisi/operations.py:348 pisi/operations.py:475 pisi/operations.py:698
 msgid "There are extra packages due to dependencies. Do you want to continue?"
 msgstr ""
 
-#: pisi/operations.py:409
+#: pisi/operations.py:414
 msgid "Warning: package *name* ends with '.pisi'"
 msgstr ""
 
-#: pisi/operations.py:412
+#: pisi/operations.py:417
 msgid "Package %s is not installed."
 msgstr ""
 
-#: pisi/operations.py:418
+#: pisi/operations.py:423
 msgid "Package %s is not available in repositories."
 msgstr ""
 
-#: pisi/operations.py:430
+#: pisi/operations.py:435
 msgid "Package %s is already at the latest release %s."
 msgstr ""
 
-#: pisi/operations.py:436
+#: pisi/operations.py:441
 msgid "Package %s is already at the latest build %s."
 msgstr ""
 
-#: pisi/operations.py:459
+#: pisi/operations.py:464
 msgid "The following packages will be upgraded: "
 msgstr ""
 
-#: pisi/operations.py:529
+#: pisi/operations.py:534
 msgid "Dependency %s of %s cannot be satisfied"
 msgstr ""
 
-#: pisi/operations.py:530
+#: pisi/operations.py:535
 msgid "Upgrade is not possible."
 msgstr ""
 
-#: pisi/operations.py:552
+#: pisi/operations.py:557
 msgid "Reverse dependency %s of %s cannot be satisfied"
 msgstr ""
 
-#: pisi/operations.py:577
+#: pisi/operations.py:582
 msgid "Safety switch: cannot remove the following packages in system.base: "
 msgstr ""
 
-#: pisi/operations.py:588
+#: pisi/operations.py:593
 msgid "Package %s does not exist. Cannot remove."
 msgstr ""
 
-#: pisi/operations.py:592
+#: pisi/operations.py:597
 msgid "No packages to remove."
 msgstr ""
 
-#: pisi/operations.py:601
+#: pisi/operations.py:606
 msgid ""
 "The following minimal list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
 msgstr ""
 
-#: pisi/operations.py:606
+#: pisi/operations.py:611
 msgid "Package removal declined"
 msgstr ""
 
-#: pisi/operations.py:618
+#: pisi/operations.py:623
 msgid "Package %s is not installed. Cannot remove."
 msgstr ""
 
-#: pisi/operations.py:667
+#: pisi/operations.py:672
 msgid "No packages to emerge."
 msgstr ""
 
-#: pisi/operations.py:682
+#: pisi/operations.py:687
 msgid ""
 "The following minimal list of packages will be installed\n"
 "from repository in the respective order to satisfy dependencies:\n"
 msgstr ""
 
-#: pisi/operations.py:685
+#: pisi/operations.py:690
 msgid ""
 "The following minimal list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
 msgstr ""
 
-#: pisi/operations.py:727
+#: pisi/operations.py:732
 msgid "Cannot find source package: %s"
 msgstr ""
 
