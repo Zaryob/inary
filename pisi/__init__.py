@@ -12,9 +12,9 @@
 
 # PiSi version
 
-__version__ = "1.1_rc6"
+__version__ = "1.1_rc7"
 
-__dbversion__ = "1.1_rc5"
+__dbversion__ = "1.1_rc7"
 __filesdbversion__ = "1.0.5"         # yes, this is the real bottleneck
 
 __all__ = [ 'api', 'config', 'packagedb', 'installdb', 'search' ]
