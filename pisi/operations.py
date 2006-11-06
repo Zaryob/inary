@@ -44,20 +44,24 @@ def upgrade_pisi():
 
     old_filesdbversion = pisi.__filesdbversion__
     old_dbversion = pisi.__dbversion__
+    # we have to keep old_ui or by calling raw init, we lose it
+    old_ui = ctx.ui
 
     def rebuild_db():
         """rebuild_db is necessary if database structures has changed."""
         if pisi.version.Version(pisi.__filesdbversion__) > pisi.version.Version(old_filesdbversion) or \
            pisi.version.Version(pisi.__dbversion__) > pisi.version.Version(old_dbversion):
-            pisi.api.init(database=False)
-            ctx.ui.info(_("* PiSi database version has changed. Rebuilding database..."))
+
+            pisi.api.init(database=False, ui=old_ui)
+            #FIXME: we can not use _( ) here or NoneType object is not callable error is seen from package-manager
+            ctx.ui.info("* PiSi database version has changed. Rebuilding database...")
             pisi.api.rebuild_db(files=True)
-            ctx.ui.info(_("* Database rebuild operation is completed succesfully."))
+            ctx.ui.info("* Database rebuild operation is completed succesfully.")
             pisi.api.finalize()
 
     def reload_pisi():
         for module in sys.modules.keys():
-            if not module.startswith("pisi.cli") and module.startswith("pisi."):
+            if not module.startswith("pisi.ui") and not module.startswith("pisi.cli") and module.startswith("pisi."):
                 """removal from sys.modules forces reload via import"""
                 del(sys.modules[module])
 
@@ -65,7 +69,7 @@ def upgrade_pisi():
     reload_pisi()
     reload(pisi)
     rebuild_db()
-    pisi.api.init()
+    pisi.api.init(ui=old_ui)
 
 # high level operations
 
