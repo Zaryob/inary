@@ -51,13 +51,13 @@ def upgrade_pisi():
            pisi.version.Version(pisi.__dbversion__) > pisi.version.Version(old_dbversion):
             pisi.api.init(database=False)
             ctx.ui.info(_("* PiSi database version has changed. Rebuilding database..."))
-            pisi.api.rebuild_db()
+            pisi.api.rebuild_db(files=True)
             ctx.ui.info(_("* Database rebuild operation is completed succesfully."))
             pisi.api.finalize()
 
     def reload_pisi():
         for module in sys.modules.keys():
-            if module.startswith("pisi."):
+            if not module.startswith("pisi.cli") and module.startswith("pisi."):
                 """removal from sys.modules forces reload via import"""
                 del(sys.modules[module])
 
