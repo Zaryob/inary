@@ -239,7 +239,7 @@ class SpecFile(XmlFile):
         return self.history[0].release
 
     def dirtyWorkAround(self):
-        #TODO: Description should be mandatory. Remove this crap when repo is ready.
+        #TODO: Description should be mandatory. Remove this code when repo is ready.
         #http://liste.pardus.org.tr/gelistirici/2006-September/002332.html
         self.source.description = autoxml.LocalText("Description")
         self.source.description["en"] = self.source.summary["en"]
