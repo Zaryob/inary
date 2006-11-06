@@ -28,6 +28,12 @@ from pisi.actionsapi.shelltools import can_access_file
 from pisi.actionsapi.shelltools import export
 from pisi.actionsapi.shelltools import unlink
 
+class CompileError(pisi.actionsapi.Error):
+    def __init__(self, value=''):
+        pisi.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
+
 class ConfigureError(pisi.actionsapi.Error):
     def __init__(self, value=''):
         pisi.actionsapi.Error.__init__(self, value)
