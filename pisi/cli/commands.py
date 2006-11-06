@@ -594,17 +594,28 @@ expanded to package names.
                      default=False, help=_("Ignore file conflicts"))
         group.add_option("--ignore-package-conflicts", action="store_true",
                      default=False, help=_("Ignore package conflicts"))
+        group.add_option("-c", "--component", action="append",
+                               default=None, help=_("Install component's and recursive component's packages"))
         group.add_option("-f", "--fetch-only", action="store_true",
                      default=False, help=_("Fetch upgrades but do not install."))
         self.parser.add_option_group(group)
 
     def run(self):
-        if not self.args:
+        self.init()
+
+        components = ctx.get_option('component')
+        if not components and not self.args:
             self.help()
             return
 
-        self.init()
-        pisi.api.install(self.args, ctx.get_option('reinstall'))
+        packages = []
+        if components:
+            for name in components:
+                if ctx.componentdb.has_component(name):
+                    packages.extend(ctx.componentdb.get_union_packages(name, walk=True))
+        packages.extend(self.args)
+
+        pisi.api.install(packages, ctx.get_option('reinstall'))
         self.finalize()
 
 
@@ -737,17 +748,27 @@ expanded to package names.
     def options(self):
         group = OptionGroup(self.parser, _("remove options"))
         super(Remove, self).options(group)
+        group.add_option("-c", "--component", action="append",
+                               default=None, help=_("Remove component's and recursive component's packages"))
         self.parser.add_option_group(group)
 
     def run(self):
-        if not self.args:
+        self.init()
+
+        components = ctx.get_option('component')
+        if not components and not self.args:
             self.help()
             return
 
-        self.init()
-        pisi.api.remove(self.args)
-        self.finalize()
+        packages = []
+        if components:
+            for name in components:
+                if ctx.componentdb.has_component(name):
+                    packages.extend(ctx.componentdb.get_union_packages(name, walk=True))
+        packages.extend(self.args)
 
+        pisi.api.remove(packages)
+        self.finalize()
 
 class ConfigurePending(PackageOp):
     """Configure pending packages
