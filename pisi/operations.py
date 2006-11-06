@@ -38,17 +38,17 @@ class Error(pisi.Error):
 
 def upgrade_pisi():
     """forces to reload pisi modules and runs rebuild-db if needed."""
+    import pisi
+    import pisi.context as ctx
+    import pisi.version
 
     old_filesdbversion = pisi.__filesdbversion__
     old_dbversion = pisi.__dbversion__
 
     def rebuild_db():
         """rebuild_db is necessary if database structures has changed."""
-        from pisi.version import Version
-        import pisi.context as ctx
-
-        if Version(pisi.__filesdbversion__) > Version(old_filesdbversion) or \
-           Version(pisi.__dbversion__) > Version(old_dbversion):
+        if pisi.version.Version(pisi.__filesdbversion__) > pisi.version.Version(old_filesdbversion) or \
+           pisi.version.Version(pisi.__dbversion__) > pisi.version.Version(old_dbversion):
             pisi.api.init(database=False)
             ctx.ui.info(_("* PiSi database version has changed. Rebuilding database..."))
             pisi.api.rebuild_db()
@@ -60,10 +60,10 @@ def upgrade_pisi():
             if module.startswith("pisi."):
                 """removal from sys.modules forces reload via import"""
                 del(sys.modules[module])
-        reload(pisi)
 
     pisi.api.finalize()
     reload_pisi()
+    reload(pisi)
     rebuild_db()
     pisi.api.init()
 
