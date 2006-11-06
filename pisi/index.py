@@ -140,6 +140,9 @@ class Index(XmlFile):
             ctx.ui.error(_('Package %s: metadata corrupt, skipping...') % md.package.name)
             ctx.ui.error(unicode(Error(*errs)))
         else:
+            # No need to carry these with index (#3965)
+            md.package.files = None
+            md.package.additionalFiles = None
             self.packages.append(md.package)
 
     def add_component(self, path):
