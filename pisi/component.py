@@ -170,9 +170,10 @@ class ComponentDB(object):
     def update_component(self, component, repo, txn = None):
         def proc(txn):
             if self.has_component(component.name, repo, txn):
-                # preserve list of packages and dependencies
+                # preserve list of sources, packages and dependencies
                 current = self.d.get_item(component.name, repo, txn)
                 component.packages = current.packages
+                component.sources = current.sources
                 component.dependencies = current.dependencies
             self.d.add_item(component.name, component, repo, txn)
             self.add_child(component, repo, txn)
@@ -214,6 +215,7 @@ class ComponentDB(object):
             if not spec in component.sources:
                 component.sources.append(spec)
             self.d.add_item(component_name, component, repo, txn) # update
+            self.add_child(component, repo, txn)
         self.d.txn_proc(proc, txn)
 
     def remove_spec(self, component_name, spec, repo = None, txn = None):
