@@ -84,7 +84,7 @@ def install(packages, reinstall = False, ignore_file_conflicts=False):
     from pisi.atomicoperations import Error as InstallError
 
     # determine if this is a list of files/urls or names
-    if packages[0].endswith(ctx.const.package_suffix): # they all have to!
+    if packages and packages[0].endswith(ctx.const.package_suffix): # they all have to!
         return install_pkg_files(packages)
     else:
         return install_pkg_names(packages, reinstall)
