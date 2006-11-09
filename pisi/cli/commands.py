@@ -595,7 +595,7 @@ expanded to package names.
         group.add_option("--ignore-package-conflicts", action="store_true",
                      default=False, help=_("Ignore package conflicts"))
         group.add_option("-c", "--component", action="append",
-                               default=None, help=_("Install component's and recursive component's packages"))
+                               default=None, help=_("Install component's and recursive components' packages"))
         group.add_option("-f", "--fetch-only", action="store_true",
                      default=False, help=_("Fetch upgrades but do not install."))
         self.parser.add_option_group(group)
@@ -749,7 +749,7 @@ expanded to package names.
         group = OptionGroup(self.parser, _("remove options"))
         super(Remove, self).options(group)
         group.add_option("-c", "--component", action="append",
-                               default=None, help=_("Remove component's and recursive component's packages"))
+                               default=None, help=_("Remove component's and recursive components' packages"))
         self.parser.add_option_group(group)
 
     def run(self):
