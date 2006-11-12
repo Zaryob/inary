@@ -95,7 +95,7 @@ def init(database = True, write = True,
 
     # TODO: this is definitely not dynamic beyond this point!
     ctx.comar = comar and not ctx.config.get_option('ignore_comar')
-    # This is for YALI, used in comariface.py:make_com()
+    # This is for YALI, used in comariface.py
     ctx.comar_sockname = comar_sockname
 
     # initialize repository databases
