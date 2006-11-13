@@ -46,7 +46,7 @@ class Digraph(object):
         "return a list of edge descriptors"
         list = []
         for u in self.__v:
-            for v in self.__u:
+            for v in self.__adj[u]:
                 list.append( (u,v) )
         return list
 
