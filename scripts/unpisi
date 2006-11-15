@@ -12,10 +12,10 @@
 
 import sys
 import os
+from zipfile import BadZipfile
 
 import pisi
 from pisi.archive import ArchiveZip, ArchiveTar
-from pisi.zipfileext import BadZipfile
 import pisi.context as ctx
 import pisi.util as util
 
