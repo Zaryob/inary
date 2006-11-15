@@ -205,7 +205,7 @@ class MyZipFile(zipfile.ZipFile):
                 raise zipfile.BadZipfile, "Bad CRC-32 for file %s" % name
             return
         elif zinfo.compress_type != zipfile.ZIP_DEFLATED:
-            raise BadZipfile, \
+            raise zipfile.BadZipfile, \
                   "Unsupported compression method %d for file %s" % \
             (zinfo.compress_type, name)
 
