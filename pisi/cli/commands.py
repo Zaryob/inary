@@ -1466,8 +1466,11 @@ Lists packages waiting to be configured.
         self.init(database = True, write = False)
 
         list = ctx.installdb.list_pending()
-        for p in list.keys():
-            print p
+        if len(list.keys()):
+            for p in list.keys():
+                print p
+        else:
+            ctx.ui.info(_('There are no packages waiting to be configured'))
         self.finalize()
 
 
