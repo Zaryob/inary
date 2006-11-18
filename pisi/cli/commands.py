@@ -895,6 +895,9 @@ Usage: info <package1> <package2> ... <packagen>
                     ctx.ui.info(_('Package found in repository:'))
                 self.print_pkginfo(metadata, files, pisi.itembyrepodb.repos)
 
+            if not (ctx.installdb.is_installed(arg) and ctx.packagedb.has_package(arg)):
+                ctx.ui.info(_("No package named %s found in repositories" % arg))
+
     def print_pkginfo(self, metadata, files, repo = None):
         import os.path
 
