@@ -14,6 +14,7 @@ import os
 import sys
 import glob
 import string
+import shutil
 import pisi.util as util
 from pisi.version import Version
 
@@ -45,11 +46,11 @@ def doit(root, listdir, clean, suffix = ""):
             if clean == True:
                 try:
                     if os.path.isdir(target):
-                        os.removedirs(target)
+                        shutil.rmtree(target)
                     else:
                         os.remove(target)
-                except OSError:
-                    usage("Permission denied...")
+                except OSError,e :
+                    usage("Permission denied: %s" % e)
 
 
 def cleanPisis(clean, root = '/var/cache/pisi/packages'):
