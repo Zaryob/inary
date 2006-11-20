@@ -521,12 +521,8 @@ def plan_upgrade(A, ignore_build = False):
                 # add packages that can be upgraded
                 if dependency.repo_satisfies_dep(dep):
                     if ctx.installdb.is_installed(dep.package):
-                        if ctx.get_option('eager'):
-                            if not is_upgradable(dep.package):
-                                continue
-                        else:
-                            if dependency.installed_satisfies_dep(dep):
-                                continue
+                        if not is_upgradable(dep.package):
+                            continue
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
@@ -543,21 +539,11 @@ def plan_upgrade(A, ignore_build = False):
             pkg = packagedb.get_package(x)
             rev_deps = packagedb.get_rev_deps(x)
             for (rev_dep, depinfo) in rev_deps:
-                if ctx.get_option('eager'):
-                    # add all upgradable reverse deps
-                    if is_upgradable(rev_dep): 
-                        if not rev_dep in G_f.vertices():
-                            Bp.add(rev_dep)
-                            G_f.add_plain_dep(rev_dep, x)
-                else:
-                    # add only installed but unsatisfied reverse dependencies
-                    if ctx.installdb.is_installed(rev_dep) and \
-                       (not dependency.installed_satisfies_dep(depinfo)):
-                        if not dependency.repo_satisfies_dep(depinfo):
-                            raise Error(_('Reverse dependency %s of %s cannot be satisfied') % (rev_dep, x))
-                        if not rev_dep in G_f.vertices():
-                            Bp.add(rev_dep)
-                            G_f.add_plain_dep(rev_dep, x)
+                # add all upgradable reverse deps
+                if is_upgradable(rev_dep): 
+                    if not rev_dep in G_f.vertices():
+                        Bp.add(rev_dep)
+                        G_f.add_plain_dep(rev_dep, x)
         B = Bp
 
     if ctx.config.get_option('debug'):

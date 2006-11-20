@@ -24,15 +24,30 @@ YAKUAKE = "yakuake"
 KDEBASE = "kdebase"
 KDELIBS = "kdelibs"
 
+XORG_SERVER = "xorg-server"
+XORG_INPUT = "xorg-input"
+XORG_VIDEO = "xorg-video"
+
 let_repo_had(YAKUAKE, with_dependencies(KDEBASE))
 let_repo_had(KDEBASE, with_dependencies(KDELIBS))
 let_repo_had(KDELIBS)
 
-let_pisi_had(YAKUAKE, KDEBASE, KDELIBS)
+let_repo_had(XORG_INPUT)
+let_repo_had(XORG_VIDEO)
+let_repo_had(XORG_SERVER, with_dependencies(XORG_INPUT, XORG_VIDEO))
+
+let_pisi_had(YAKUAKE, KDEBASE, KDELIBS, XORG_SERVER, XORG_INPUT, XORG_VIDEO)
 
 def run():
     repo_version_bumped(KDEBASE)
     repo_version_bumped(KDELIBS)
     repo_version_bumped(YAKUAKE)
+
+    repo_version_bumped(XORG_INPUT)
+    repo_version_bumped(XORG_VIDEO)
+    repo_version_bumped(XORG_SERVER)
+
     repo_updated_index()
-    pisi_upgraded(YAKUAKE)
+
+    pisi_upgraded(KDELIBS)
+    pisi_upgraded(XORG_SERVER)

@@ -658,8 +658,6 @@ expanded to package names.
                      default=False, help=_("Ignore file conflicts"))
         group.add_option("--ignore-package-conflicts", action="store_true",
                      default=False, help=_("Ignore package conflicts"))
-        group.add_option("-e", "--eager", action="store_true",
-                     default=False, help=_("eager upgrades"))
         group.add_option("-f", "--fetch-only", action="store_true",
                      default=False, help=_("Fetch upgrades but do not install."))
         group.add_option("-x", "--exclude", action="append",
