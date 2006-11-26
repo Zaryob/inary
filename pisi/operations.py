@@ -89,6 +89,20 @@ def install(packages, reinstall = False, ignore_file_conflicts=False):
     else:
         return install_pkg_names(packages, reinstall)
 
+def reorder_base_packages(order):
+    """system.base packages must be first in order"""
+    systembase = ctx.componentdb.get_union_comp('system.base').packages
+
+    systembase_order = []
+    nonbase_order = []
+    for pkg in order:
+        if pkg in systembase:
+            systembase_order.append(pkg)
+        else:
+            nonbase_order.append(pkg)
+
+    return systembase_order + nonbase_order
+
 def install_pkg_files(package_URIs):
     """install a number of pisi package files"""
     from package import Package
@@ -333,6 +347,10 @@ def install_pkg_names(A, reinstall = False):
         G_f = None
         order = list(A)
 
+    # Bug 4211
+    if ctx.componentdb.has_component('system.base'):
+        order = reorder_base_packages(order)
+
     if len(order) > 1:
         ctx.ui.info(_("Following packages will be installed in the respective "
                       "order to satisfy dependencies:\n") + util.strlist(order))
@@ -457,6 +475,10 @@ def upgrade_pkg_names(A = []):
     else:
         G_f = None
         order = list(A)
+
+    # Bug 4211
+    if ctx.componentdb.has_component('system.base'):
+        order = reorder_base_packages(order)
 
     if not ctx.get_option('ignore_package_conflicts'):
         conflicts = check_conflicts(order, ctx.packagedb)
