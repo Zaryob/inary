@@ -222,7 +222,7 @@ def generate_base_upgrade(A):
     # method returns the currently needed system.base component install and 
     # upgrade needs
     base = upgrade_base(A, ignore_package_conflicts = True)
-    return list(base)
+    return base
 
 def generate_conflicts(A):
     # returns the conflicting packages list of the to be installed packages.
