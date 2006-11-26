@@ -4,7 +4,7 @@
 #
 # Source   : http://bugs.pardus.org.tr/show_bug.cgi?id=4211
 #
-# Problem  : PISI does not upgrades or install system.base packages before any other package
+# Problem  : PISI does not upgrade or install system.base packages before any other package
 #
 # Bağımlılıkları sağlamak için bu paketler verilen sırada kurulacaktır:
 # util-macros xorg-proto xtrans libXdmcp libXau libX11 libXext libXp libICE libSM
@@ -41,7 +41,8 @@
 #
 # Problem Description: 
 # 
-# In an upgrade or installation PiSi does not upgrade or install system.base packages.
+# In an upgrade or installation PiSi does not upgrade or install system.base packages before any
+# other package.
 #
 # Expected:
 #
