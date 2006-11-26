@@ -298,7 +298,7 @@ def upgrade_base(A = set(), ignore_package_conflicts = False):
                                util.strlist(extra_upgrades))
                 G_f, upgrade_order = plan_upgrade(extra_upgrades, ignore_build)
             # return packages that must be added to any installation
-            return install_order + upgrade_order
+            return set(install_order + upgrade_order)
         else:
             ctx.ui.warning(_('Safety switch: the component system.base cannot be found'))
     return set()
@@ -325,15 +325,13 @@ def install_pkg_names(A, reinstall = False):
         ctx.ui.info(_('No packages to install.'))
         return
 
-    systembase_order = upgrade_base(A)
+    A |= upgrade_base(A)
 
     if not ctx.config.get_option('ignore_dependency'):
         G_f, order = plan_install_pkg_names(A)
     else:
         G_f = None
         order = list(A)
-
-    order = systembase_order + order
 
     if len(order) > 1:
         ctx.ui.info(_("Following packages will be installed in the respective "
@@ -450,7 +448,7 @@ def upgrade_pkg_names(A = []):
         ctx.ui.info(_('No packages to upgrade.'))
         return True
 
-    systembase_order = upgrade_base(A)
+    A |= upgrade_base(A)
 
     ctx.ui.debug('A = %s' % str(A))
 
@@ -459,8 +457,6 @@ def upgrade_pkg_names(A = []):
     else:
         G_f = None
         order = list(A)
-
-    order = systembase_order + order
 
     if not ctx.get_option('ignore_package_conflicts'):
         conflicts = check_conflicts(order, ctx.packagedb)
