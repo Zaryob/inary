@@ -17,6 +17,7 @@ import sys
 import glob
 from copy import deepcopy
 from os.path import basename, dirname
+from stat import S_IMODE
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -612,8 +613,10 @@ class Builder:
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
                 ftype, permanent = get_file_type(frpath, package.files, install_dir)
                 fsize = util.dir_size(fpath)
+                st = os.stat(fpath)
                 d[frpath] = FileInfo(path=frpath, type=ftype, permanent=permanent,
-                                     size=fsize, hash=fhash)
+                                     size=fsize, hash=fhash, uid=str(st.st_uid), gid=str(st.st_gid),
+                                     mode=oct(S_IMODE(st.st_mode)))
 
         for pinfo in package.files:
             wildcard_path = util.join_path(install_dir, pinfo.path)
