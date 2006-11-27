@@ -71,10 +71,11 @@ class ArchiveTar(ArchiveBase):
     type. Provides access to tar, tar.gz and tar.bz2 files.
 
     This class provides the unpack magic for tar archives."""
-    def __init__(self, file_path, arch_type = "tar", no_same_permissions = True):
+    def __init__(self, file_path, arch_type = "tar", no_same_permissions = True, no_same_owner = True):
         super(ArchiveTar, self).__init__(file_path, arch_type)
         self.tar = None
         self.no_same_permissions = no_same_permissions
+        self.no_same_owner = no_same_owner
 
     def unpack(self, target_dir, clean_dir = False):
         """Unpack tar archive to a given target directory(target_dir)."""
@@ -102,6 +103,9 @@ class ArchiveTar(ArchiveBase):
         self.tar = tarfile.open(self.file_path, rmode)
         oldwd = os.getcwd()
         os.chdir(target_dir)
+
+        uid = os.getuid()
+        gid = os.getgid()
 
         install_tar_path = util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar)
         for tarinfo in self.tar:
@@ -131,6 +135,9 @@ class ArchiveTar(ArchiveBase):
             # this is optional.
             if self.no_same_permissions and not os.path.islink(tarinfo.name):
                 os.chmod(tarinfo.name, tarinfo.mode & ~ctx.const.umask)
+
+            if self.no_same_owner and not os.path.islink(tarinfo.name):
+                os.chown(tarinfo.name, uid, gid)
 
         os.chdir(oldwd)
         self.close()

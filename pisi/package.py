@@ -88,7 +88,7 @@ class Package:
     def extract_install(self, outdir):
         if self.impl.has_file(ctx.const.install_tar_lzma):
             self.extract_file(ctx.const.install_tar_lzma, ctx.config.tmp_dir())
-            tar = archive.ArchiveTar(join(ctx.config.tmp_dir(), ctx.const.install_tar_lzma), 'tarlzma', False)
+            tar = archive.ArchiveTar(join(ctx.config.tmp_dir(), ctx.const.install_tar_lzma), 'tarlzma', False, False)
             tar.unpack_dir(outdir)
         else:
             self.extract_dir_flat('install', outdir)
