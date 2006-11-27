@@ -136,8 +136,11 @@ class ArchiveTar(ArchiveBase):
             if self.no_same_permissions and not os.path.islink(tarinfo.name):
                 os.chmod(tarinfo.name, tarinfo.mode & ~ctx.const.umask)
 
-            if self.no_same_owner and not os.path.islink(tarinfo.name):
-                os.chown(tarinfo.name, uid, gid)
+            if self.no_same_owner:
+                if not os.path.islink(tarinfo.name):
+                    os.chown(tarinfo.name, uid, gid)
+                else:
+                    os.lchown(tarinfo.name, uid, gid)
 
         os.chdir(oldwd)
         self.close()
