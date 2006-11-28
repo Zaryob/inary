@@ -50,7 +50,7 @@ def compile(parameters = ''):
 
 def install(parameters = ''):
     '''does python setup.py install'''
-    if system('python setup.py install --root=%s --no-compile %s' % (get.installDIR(), parameters)):
+    if system('python setup.py install --root=%s --no-compile -O0 %s' % (get.installDIR(), parameters)):
         raise InstallError, _('Install failed.')
 
     DDOCS = 'CHANGELOG COPYRIGHT KNOWN_BUGS MAINTAINERS PKG-INFO \
