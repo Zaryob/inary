@@ -22,7 +22,7 @@ import pisi.context as ctx
 # ActionsAPI Modules
 import pisi.actionsapi
 import pisi.actionsapi.get as get
-from pisi.actionsapi.shelltools import system, can_access_file
+from pisi.actionsapi.shelltools import system, can_access_file, unlink
 from pisi.actionsapi.pisitools import dodoc
 
 class CompileError(pisi.actionsapi.Error):
@@ -64,3 +64,11 @@ def run(parameters = ''):
     '''executes parameters with python'''
     if system('python %s' % (parameters)):
         raise RunTimeError, _('Running %s failed.') % parameters
+
+def fixCompiledPy():
+    ''' cleans *.py[co] from packages '''
+    for root, dirs, files in os.walk("%s/usr/lib/%s/" % (get.installDIR(), get.curPYTHON())):
+        for compiledFile in files:
+            if compiledFile.endswith(".pyc") or compiledFile.endswith(".pyo"):
+                if can_access_file("%s/%s" % (root,compiledFile)):
+                    unlink("%s/%s" % (root,compiledFile))
