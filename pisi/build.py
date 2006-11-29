@@ -613,7 +613,10 @@ class Builder:
                 frpath = util.removepathprefix(install_dir, fpath) # relative path
                 ftype, permanent = get_file_type(frpath, package.files, install_dir)
                 fsize = util.dir_size(fpath)
-                st = os.stat(fpath)
+                if not os.path.islink(fpath):
+                    st = os.stat(fpath)
+                else:
+                    st = os.lstat(fpath)
                 d[frpath] = FileInfo(path=frpath, type=ftype, permanent=permanent,
                                      size=fsize, hash=fhash, uid=str(st.st_uid), gid=str(st.st_gid),
                                      mode=oct(S_IMODE(st.st_mode)))
