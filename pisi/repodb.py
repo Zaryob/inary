@@ -62,6 +62,18 @@ class RepoDB(object):
         name = str(name)
         return self.d["repo-" + name]
 
+    def set_default_repo(self, name, txn = None):
+        name = str(name)
+        def proc(txn):
+            order = self.d.get("order", txn)
+            try:
+                index = order.index(name)
+                order[0], order[index] = order[index], order[0]
+                self.d.put("order", order, txn)
+            except ValueError:
+                raise Error(_('No repository named %s exists') % name)
+        self.d.txn_proc(proc, txn)
+
     def add_repo(self, name, repo_info, txn = None, at = None):
         """add repository with name and repo_info at a given optional position"""
         name = str(name)
