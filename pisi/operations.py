@@ -295,12 +295,12 @@ def is_upgradable(name, ignore_build = False):
     else:
         return build < pkg.build
 
-def upgrade_base(A = set(), ignore_package_conflicts = False):
+def upgrade_base(ignore_package_conflicts=False):
     ignore_build = ctx.get_option('ignore_build_no')
     if not ctx.get_option('ignore_safety'):
         if ctx.componentdb.has_component('system.base'):
             systembase = set(ctx.componentdb.get_union_comp('system.base').packages)
-            extra_installs = filter(lambda x: not ctx.installdb.is_installed(x), systembase - set(A))
+            extra_installs = filter(lambda x: not ctx.installdb.is_installed(x), systembase)
             if extra_installs:
                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be installed: ') +
                                util.strlist(extra_installs))
@@ -339,7 +339,7 @@ def install_pkg_names(A, reinstall = False):
         ctx.ui.info(_('No packages to install.'))
         return
 
-    A |= upgrade_base(A)
+    A |= upgrade_base()
 
     if not ctx.config.get_option('ignore_dependency'):
         G_f, order = plan_install_pkg_names(A)
@@ -466,7 +466,7 @@ def upgrade_pkg_names(A = []):
         ctx.ui.info(_('No packages to upgrade.'))
         return True
 
-    A |= upgrade_base(A)
+    A |= upgrade_base()
 
     ctx.ui.debug('A = %s' % str(A))
 
