@@ -217,11 +217,11 @@ def generate_upgrade_order(A):
     G_f, order = plan_upgrade(A)
     return order
 
-def generate_base_upgrade():
+def generate_base_upgrade(A):
     # all the packages of the system.base must be installed on the system.
     # method returns the currently needed system.base component install and 
     # upgrade needs
-    base = upgrade_base(ignore_package_conflicts=True)
+    base = upgrade_base(A, ignore_package_conflicts = True)
     return list(base)
 
 def generate_conflicts(A):
