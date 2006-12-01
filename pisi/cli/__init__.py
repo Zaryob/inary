@@ -78,7 +78,7 @@ class CLI(UI):
         if ctx.get_option('no_color'):
             self.output(_('Warning: ') + msg + '\n', err=True, verbose=verbose)
         else:
-            self.output(colorize(msg + '\n', 'purple'), err=True, verbose=verbose)
+            self.output(colorize(msg + '\n', 'brightred'), err=True, verbose=verbose)
 
     def error(self, msg):
         msg = unicode(msg)
@@ -94,7 +94,7 @@ class CLI(UI):
         msg = unicode(msg)
         if ctx.log:
             ctx.log.info(msg)
-        self.output(colorize(msg + '\n', 'green'))
+        self.output(colorize(msg + '\n', 'brightgreen'))
 
     def choose(self, msg, opts):
         print msg
@@ -143,7 +143,7 @@ class CLI(UI):
     def status(self, msg = None):
         if msg:
             msg = unicode(msg)
-            self.output(colorize(msg + '\n', 'purple'))
+            self.output(colorize(msg + '\n', 'green'))
             util.xterm_title(msg)
 
     def notify(self, event, **keywords):
