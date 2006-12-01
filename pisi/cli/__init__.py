@@ -94,7 +94,7 @@ class CLI(UI):
         msg = unicode(msg)
         if ctx.log:
             ctx.log.info(msg)
-        self.output(colorize(msg + '\n', 'brightgreen'))
+        self.output(colorize(msg + '\n', 'green'))
 
     def choose(self, msg, opts):
         print msg
@@ -143,7 +143,7 @@ class CLI(UI):
     def status(self, msg = None):
         if msg:
             msg = unicode(msg)
-            self.output(colorize(msg + '\n', 'green'))
+            self.output(colorize(msg + '\n', 'brightgreen'))
             util.xterm_title(msg)
 
     def notify(self, event, **keywords):
