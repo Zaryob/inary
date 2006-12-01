@@ -37,7 +37,7 @@ import pisi.cli
 from pisi.config import Options
 from pisi.operations import install, remove, upgrade, emerge
 from pisi.operations import plan_install_pkg_names as plan_install
-from pisi.operations import plan_remove, plan_upgrade, upgrade_base, calculate_conflicts
+from pisi.operations import plan_remove, plan_upgrade, upgrade_base, calculate_conflicts, reorder_base_packages
 from pisi.build import build_until
 from pisi.atomicoperations import resurrect_package, build
 from pisi.metadata import MetaData
@@ -254,6 +254,11 @@ def configure_pending():
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
+
+    # Bug 4211
+    if ctx.componentdb.has_component('system.base'):
+        order = reorder_base_packages(order)
+
     try:
         import pisi.comariface as comariface
         for x in order:
