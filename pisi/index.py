@@ -13,6 +13,7 @@
 """PiSi source/package index"""
 
 import os
+import shutil
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -48,7 +49,7 @@ class Index(XmlFile):
     #t_Metadatas = [ [metadata.MetaData], autoxml.optional, "MetaData"]
     t_Components = [ [component.Component], autoxml.optional, "Component"]
 
-    def name():
+    def name(self):
         return self.distribution.name + self.distribution.repositoryname
 
     def read_uri(self, uri, tmpdir, force = False):
