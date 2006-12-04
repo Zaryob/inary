@@ -63,13 +63,13 @@ class XmlFile(object):
         except Exception, e:
             raise Error(_("String '%s' has invalid XML") % (xml))
 
-    def readxmlfile(self, file):
+    def readxmlfile(self, f):
         raise Exception("not implemented")
         try:
-            self.doc = iks.parse(file)
+            self.doc = iks.parse(f)
             return self.doc
         except Exception, e:
-            raise Error(_("File '%s' has invalid XML") % (localpath) )
+            raise Error(_("File '%s' has invalid XML") % (f) )
 
 
     def readxml(self, uri, tmpDir='/tmp', sha1sum=False,
