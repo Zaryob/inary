@@ -56,7 +56,7 @@ class Checks:
         if not var:
             self.list.append(_("%s section should have a '%s' tag") % (section, name))
 
-    def has_error():
+    def has_error(self):
         return len(self.list)>0
 
     def print_errors(list):
