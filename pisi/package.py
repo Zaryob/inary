@@ -47,12 +47,7 @@ class Package:
         dest = ctx.config.packages_dir()
         self.filepath = join(dest, url.filename())
 
-        sha1sum = None
-        if exists(self.filepath):
-            sha1sum = util.sha1_file(self.filepath)
-
-        name, version = util.parse_package_name(basename(self.filepath))
-        if sha1sum != ctx.packagedb.get_package(name).packageHash:
+        if not exists(self.filepath):
             try:
                 fetch_url(url, dest, ctx.ui.Progress)
             except pisi.fetcher.FetchError:
