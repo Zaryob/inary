@@ -235,6 +235,7 @@ def generate_conflicts(A):
     return (C, D, E)
 
 def generate_pending_list():
+    # returns pending package list in reverse topological order of dependency
     A = ctx.installdb.list_pending()
     G_f = pgraph.PGraph(ctx.packagedb, pisi.itembyrepodb.installed) # construct G_f
     for x in A.keys():
