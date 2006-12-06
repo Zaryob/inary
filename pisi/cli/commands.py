@@ -309,9 +309,7 @@ This command deletes unused locks from the database directory."""
 
     def run(self):
         self.init()
-        pisi.util.clean_locks()
         self.finalize()
-
 
 class DeleteCache(Command):
     """Delete cache files
