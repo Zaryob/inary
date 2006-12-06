@@ -656,6 +656,8 @@ expanded to package names.
                      default=False, help=_("Ignore file conflicts"))
         group.add_option("--ignore-package-conflicts", action="store_true",
                      default=False, help=_("Ignore package conflicts"))
+        group.add_option("-c", "--component", action="append",
+                               default=None, help=_("Upgrade component's and recursive components' packages"))
         group.add_option("-f", "--fetch-only", action="store_true",
                      default=False, help=_("Fetch upgrades but do not install."))
         group.add_option("-x", "--exclude", action="append",
@@ -708,10 +710,13 @@ expanded to package names.
         else:
             ctx.ui.info(_('Will not update repositories'))
 
-        if not self.args:
-            packages = ctx.installdb.list_installed()
-        else:
-            packages = self.args
+        components = ctx.get_option('component')
+        packages = []
+        if components:
+            for name in components:
+                if ctx.componentdb.has_component(name):
+                    packages.extend(ctx.componentdb.get_union_packages(name, walk=True))
+        packages.extend(self.args)
 
         if ctx.get_option('exclude_from'):
             packages = self.exclude_from(packages)
