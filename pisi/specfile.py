@@ -55,13 +55,14 @@ class AdditionalFile:
     s_Filename = [autoxml.String, autoxml.mandatory]
     a_target = [autoxml.String, autoxml.mandatory]
     a_permission = [autoxml.String, autoxml.optional]
+    a_owner = [autoxml.String, autoxml.optional]
+    a_group = [autoxml.String, autoxml.optional]
 
     def __str__(self):
         s = "%s -> %s " % (self.filename, self.target)
         if self.permission:
             s += '(%s)' % self.permission
         return s
-
 
 class Patch:
 

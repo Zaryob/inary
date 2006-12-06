@@ -18,6 +18,8 @@ import glob
 from copy import deepcopy
 from os.path import basename, dirname
 from stat import S_IMODE
+from pwd import getpwnam
+from grp import getgrnam
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -786,6 +788,16 @@ class Builder:
                 if afile.permission:
                     # mode is octal!
                     os.chmod(dest, int(afile.permission, 8))
+                if afile.owner:
+                    try:
+                        os.chown(dest, getpwnam(afile.owner)[2], -1)
+                    except KeyError:
+                        ctx.ui.warning(_("No user named '%s' found on the system") % afile.owner)
+                if afile.group:
+                    try:
+                        os.chown(dest, -1, getgrnam(afile.group)[2])
+                    except KeyError:
+                        ctx.ui.warning(_("No group named '%s' found on the system") % afile.group)
             os.chdir(c)
 
             ctx.ui.action(_("** Building package %s") % package.name);
