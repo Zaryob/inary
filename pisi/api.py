@@ -263,6 +263,7 @@ def generate_pending_list():
 def configure_pending():
     # start with pending packages
     # configure them in reverse topological order of dependency
+    A = ctx.installdb.list_pending()
     order = generate_pending_list()
     try:
         import pisi.comariface as comariface
