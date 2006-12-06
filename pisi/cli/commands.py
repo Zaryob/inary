@@ -1472,7 +1472,8 @@ Lists packages waiting to be configured.
     def run(self):
         self.init(database = True, write = False)
 
-        order = api.generate_pending_list()
+        A = ctx.installdb.list_pending()
+        order = api.generate_pending_order(A)
 
         if len(order):
             for p in order:
