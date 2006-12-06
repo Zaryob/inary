@@ -234,9 +234,7 @@ def generate_conflicts(A):
     (C, D, E) = calculate_conflicts(A, ctx.packagedb)
     return (C, D, E)
 
-def configure_pending():
-    # start with pending packages
-    # configure them in reverse topological order of dependency
+def generate_pending_list():
     A = ctx.installdb.list_pending()
     G_f = pgraph.PGraph(ctx.packagedb, pisi.itembyrepodb.installed) # construct G_f
     for x in A.keys():
@@ -259,6 +257,12 @@ def configure_pending():
     if ctx.componentdb.has_component('system.base'):
         order = reorder_base_packages(order)
 
+    return order
+
+def configure_pending():
+    # start with pending packages
+    # configure them in reverse topological order of dependency
+    order = generate_pending_list()
     try:
         import pisi.comariface as comariface
         for x in order:
