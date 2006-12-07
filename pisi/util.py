@@ -518,11 +518,12 @@ def strip_directory(top, excludelist=[]):
             # entries sometimes triggers compile-time errors or linkage problems.
             # Instead of patching all these buggy sources and maintain these patches,
             # PiSi removes wrong paths...
-            extension = os.path.splitext(frpath)[1]
-            if extension == ".la":
-                # FIXME: I'm regular expr. idiot, so one can convert this to python...
-                os.system("sed -i -e 's~-L%s/[[:graph:]]*~~g' %s" % (ctx.config.tmp_dir(), frpath))
-                os.system("sed -i -e 's~%s/[[:graph:]]*/install/~/~g' %s" % (ctx.config.tmp_dir(), frpath))
+            if frpath.endswith(".la"):
+                ladata = file(frpath).read()
+                new_ladata = re.sub("-L%s/\S*" % ctx.config.tmp_dir(), "", ladata)
+                new_ladata = re.sub("%s/\S*/install/" % ctx.config.tmp_dir(), "/", new_ladata)
+                if new_ladata != ladata:
+                    file(frpath, "w").write(new_ladata)
             # real path in .pisi package
             p = '/' + removepathprefix(top, frpath)
             strip = True
