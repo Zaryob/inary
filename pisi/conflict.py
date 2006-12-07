@@ -19,7 +19,6 @@ _ = __trans.ugettext
 import pisi.context as ctx
 from pisi.version import Version
 import pisi.pxml.autoxml as autoxml
-from pisi.util import Checks
 import pisi.itembyrepodb
 
 class Conflict:

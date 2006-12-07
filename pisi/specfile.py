@@ -31,7 +31,6 @@ from pisi.dependency import Dependency
 from pisi.conflict import Conflict
 import pisi.dependency
 import pisi.component as component
-from pisi.util import Checks
 import pisi.util as util
 
 
