@@ -78,22 +78,22 @@ def unzip(seq):
     return zip(*seq)
 
 def concat(l):
-    '''concatenate a list of lists'''
+    """Concatenate a list of lists."""
     return reduce( operator.concat, l )
 
 def strlist(l):
-    """concatenate string reps of l's elements"""
+    """Concatenate string reps of l's elements."""
     return "".join(map(lambda x: str(x) + ' ', l))
 
 def multisplit(str, chars):
-    """ split str with any of chars"""
+    """Split str with any of the chars."""
     l = [str]
     for c in chars:
         l = concat(map(lambda x:x.split(c), l))
     return l
 
 def same(l):
-    '''check if all elements of a sequence are equal'''
+    """Check if all elements of a sequence are equal."""
     if len(l)==0:
         return True
     else:
@@ -104,7 +104,7 @@ def same(l):
         return True
 
 def prefix(a, b):
-    '''check if sequence a is a prefix of sequence b'''
+    """Check if sequence a is a prefix of sequence b."""
     if len(a)>len(b):
         return False
     for i in range(0,len(a)):
@@ -113,7 +113,7 @@ def prefix(a, b):
     return True
 
 def remove_prefix(a,b):
-    "remove prefix a from sequence b"
+    """Remove prefix a from sequence b."""
     assert prefix(a,b)
     return b[len(a):]
 
@@ -135,7 +135,7 @@ def human_readable_rate(size = 0):
 ##############################
 
 def run_batch(cmd):
-    """run command and report return value and output"""
+    """Run command and report return value and output."""
     ctx.ui.info(_('Running ') + cmd, verbose=True)
     p = subprocess.Popen(cmd, shell=True,
                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -184,7 +184,7 @@ def run_logged(cmd):
 ######################
 
 def xterm_title(message):
-    """sets message as a console window's title"""
+    """Set message as console window title."""
     if os.environ.has_key("TERM") and sys.stderr.isatty():
         terminalType = os.environ["TERM"]
         for term in ["xterm", "Eterm", "aterm", "rxvt", "screen", "kterm", "rxvt-unicode"]:
@@ -194,7 +194,7 @@ def xterm_title(message):
                 break
 
 def xterm_title_reset():
-    """resets console window's title"""
+    """Reset console window title."""
     if os.environ.has_key("TERM"):
         xterm_title("")
 
@@ -211,7 +211,7 @@ def splitpath(a):
     return comps
 
 def makepath(comps, relative = False, sep = os.path.sep):
-    """reconstruct a path from components"""
+    """Reconstruct a path from components."""
     path = reduce(lambda x,y: x + sep + y, comps, '')
     if relative:
         return path[len(sep):]
@@ -240,11 +240,11 @@ def commonprefix(l):
 
 # but this one is necessary
 def subpath(a, b):
-    "find if path a is before b in the directory tree"
+    """Find if path a is before b in the directory tree."""
     return prefix(splitpath(a), splitpath(b))
 
 def removepathprefix(prefix, path):
-    "remove path prefix a from b, finding the pathname rooted at a"
+    """Remove path prefix a from b, finding the pathname rooted at a."""
     comps = remove_prefix(splitpath(prefix), splitpath(path))
     if len(comps) > 0:
         return join_path(*tuple(comps))
@@ -252,7 +252,7 @@ def removepathprefix(prefix, path):
         return ""
 
 def absolute_path(path):
-    "determine if given @path is absolute"
+    """Determine if given path is absolute."""
     comps = splitpath(path)
     return comps[0] == ''
 
@@ -432,15 +432,15 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
                 yield (f, sha1_sum(f))
 
 def copy_dir(src, dest):
-    """copy source dir to destination dir recursively"""
+    """Copy source dir to destination dir recursively."""
     shutil.copytree(src, dest)
 
 def check_file_hash(filename, hash):
-    """Check the files integrity with a given hash"""
+    """Check the file's integrity with a given hash."""
     return sha1_file(filename) == hash
 
 def sha1_file(filename):
-    """calculate sha1 hash of filename"""
+    """Calculate sha1 hash of file."""
     # Broken links can cause problem!
     try:
         m = sha.new()
@@ -452,7 +452,7 @@ def sha1_file(filename):
         raise FileError(_("I/O Error: Cannot calculate SHA1 hash of %s") % filename)
 
 def sha1_data(data):
-    """calculate sha1 hash of given data"""
+    """Calculate sha1 hash of given data."""
     try:
         m = sha.new()
         m.update(data)
@@ -483,7 +483,7 @@ def uncompress(patchFile, compressType="gz", targetDir=None):
 
 
 def do_patch(sourceDir, patchFile, level = 0, target = ''):
-    """simple function to apply patches.."""
+    """Apply given patch to the sourceDir."""
     cwd = os.getcwd()
     os.chdir(sourceDir)
 
@@ -537,7 +537,7 @@ def strip_directory(top, excludelist=[]):
 
 
 def strip_file(filepath, outpath):
-    """strip a file"""
+    """Strip an elf file from debug symbols."""
     p = os.popen("file \"%s\"" % filepath)
     o = p.read()
 
@@ -582,7 +582,7 @@ def strip_file(filepath, outpath):
     return False
 
 def partition_freespace(directory):
-    """ returns free space of given directory's partition """
+    """Return free space of given directory's partition."""
     st = os.statvfs(directory)
     return st[statvfs.F_BSIZE] * st[statvfs.F_BFREE]
 
