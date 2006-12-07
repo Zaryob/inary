@@ -521,9 +521,8 @@ def strip_directory(top, excludelist=[]):
             extension = os.path.splitext(frpath)[1]
             if extension == ".la":
                 # FIXME: I'm regular expr. idiot, so one can convert this to python...
-                os.system("sed -i -e 's~-L/var/tmp/pisi/[[:graph:]]*~~g' %s" % frpath)
-                os.system("sed -i -e 's~/var/tmp/pisi/[[:graph:]]*/install/~/~g' %s" % frpath)
-
+                os.system("sed -i -e 's~-L%s/[[:graph:]]*~~g' %s" % (ctx.config.tmp_dir(), frpath))
+                os.system("sed -i -e 's~%s/[[:graph:]]*/install/~/~g' %s" % (ctx.config.tmp_dir(), frpath))
             # real path in .pisi package
             p = '/' + removepathprefix(top, frpath)
             strip = True

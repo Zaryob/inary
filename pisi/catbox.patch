@@ -10,7 +10,7 @@ Index: build.py
 +            import catbox
 +            ret = catbox.run(
 +                self.sandboxed,
-+                ["/var/tmp/pisi", "/tmp", "/dev/tty", "/dev/null"],
++                ["/var/pisi", "/tmp", "/dev/tty", "/dev/null"],
 +                logger = self.sandbox_logger
 +            )
 +            if ret != 0:
