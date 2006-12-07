@@ -257,8 +257,11 @@ def absolute_path(path):
     return comps[0] == ''
 
 def join_path(a, *p):
-    """Join two or more pathname components, inserting '/' as needed"""
-    """The python original version has a silly logic"""
+    """Join two or more pathname components.
+    
+    Python os.path.join cannot handle '/' at the start of latter components.
+    
+    """
     path = a
     for b in p:
         b = b.lstrip('/')
@@ -273,34 +276,33 @@ def join_path(a, *p):
 ####################################
 
 def check_file(file, mode = os.F_OK):
-    "shorthand to check if a file exists"
+    """Shorthand to check if a file exists."""
     if not os.access(file, mode):
         raise FileError("File " + file + " not found")
     return True
 
+# FIXME: check_dir is not a good name considering it can also create the dir
 def check_dir(dir):
-    """check if directory exists, and create if it doesn't.
-    works recursively"""
+    """Make sure given directory path exists."""
+    # FIXME: What is first strip doing there?
     dir = dir.strip().rstrip("/")
     if not os.access(dir, os.F_OK):
         os.makedirs(dir)
 
 def clean_dir(path):
-    "Remove all content of a directory (top)"
-    # don't reimplement the wheel
+    """Remove all content of a directory."""
     if os.path.exists(path):
         shutil.rmtree(path)
 
 def creation_time(file):
-    """returns the creation time of the given file"""
+    """Return the creation time of the given file."""
     if check_file(file):
         import time
         st = os.stat(file)
         return time.localtime(st.st_ctime)
 
 def dir_size(dir):
-    """ calculate the size of files under a dir
-    based on the os module example"""
+    """Calculate the size of files under a directory."""
     # It's really hard to give an approximate value for package's
     # installed size. Gettin a sum of all files' sizes if far from
     # being true. Using 'du' command (like Debian does) can be a
@@ -323,7 +325,7 @@ def dir_size(dir):
     return sum( sizes() )
 
 def copy_file(src,dest):
-    """copy source file to destination file"""
+    """Copy source file to the destination file."""
     check_file(src)
     check_dir(os.path.dirname(dest))
     shutil.copyfile(src, dest)
@@ -332,7 +334,7 @@ def is_ar_file(file_path):
     return  open(file_path).readline().strip() == '!<arch>'
 
 def clean_ar_timestamps(ar_file):
-    """clean the timestamps of the ar files"""
+    """Zero all timestamps in the ar files."""
     if not is_ar_file(ar_file):
         return
     content = open(ar_file).readlines()
@@ -348,12 +350,15 @@ def clean_ar_timestamps(ar_file):
 # as it stands, it seems to be a kludge to solve
 # an unrelated problem
 def get_file_hashes(top, excludePrefix=None, removePrefix=None):
-    """Generator function iterates over a toplevel path and returns the
+    """Iterate over given path and return a list of file hashes.
+    
+    Generator function iterates over a toplevel path and returns the
     (filePath, sha1Hash) tuples for all files. If excludePrefixes list
     is given as a parameter, function will exclude the filePaths
     matching those prefixes. The removePrefix string parameter will be
     used to remove prefix from filePath while matching excludes, if
-    given."""
+    given.
+    """
 
     def sha1_sum(f, data=False):
         if not data and f.endswith('.a'):
@@ -463,8 +468,7 @@ def sha1_data(data):
         raise Error(_("Cannot calculate SHA1 hash of given data"))
 
 def uncompress(patchFile, compressType="gz", targetDir=None):
-    """uncompresses a file and returns the path of the uncompressed
-    file"""
+    """Uncompress the file and return the new path."""
     if targetDir:
         filePath = join_path(targetDir,
                                 os.path.basename(patchFile))
@@ -600,8 +604,11 @@ def package_name(name, version, release, build, prependSuffix=True):
     return fn
 
 def is_package_name(fn, package_name = None):
-    "check if fn is a valid filename for given package_name"
-    "if not given a package name, see if fn fits the package name rules"
+    """Check if fn is a valid filename for given package_name.
+    
+    If not given a package name, see if fn fits the package name rules
+    
+    """
     if (package_name==None) or fn.startswith(package_name + '-'):
         if fn.endswith(ctx.const.package_suffix):
             # get version string, skip separator '-'
@@ -626,10 +633,12 @@ def env_update():
     pisi.environment.update_environment(ctx.config.dest_dir())
 
 def parse_package_name(package_name):
-    "return package name and version string"
-    "ex: package_name=tasma-1.0.3-5-2, returns (tasma, 1.0.3-5-2)"
-
-    # but we should handle package names like 855resolution
+    """Separate package name and version string.
+    
+    example: tasma-1.0.3-5-2 -> (tasma, 1.0.3-5-2)
+    
+    """
+    # We should handle package names like 855resolution
     name = []
     for part in package_name.split("-"):
         if name != [] and part[0] in string.digits:
