@@ -42,27 +42,10 @@ class FileError(Error):
 # spec validation utility #
 #########################
 
-class Checks:
-    def __init__(self):
-        self.list = []
+def print_errors(errlist):
+    for err in errlist:
+        ctx.ui.error(err)
 
-    def add(self, err):
-        self.list.append(err)
-
-    def join(self, list):
-        self.list.extend(list)
-
-    def has_tag(self, var, section, name):
-        if not var:
-            self.list.append(_("%s section should have a '%s' tag") % (section, name))
-
-    def has_error(self):
-        return len(self.list)>0
-
-    def print_errors(list):
-        for x in list:
-            ctx.ui.error(x)
-    print_errors = staticmethod(print_errors)
 
 #########################
 # string/list/functional#

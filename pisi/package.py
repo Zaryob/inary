@@ -127,7 +127,7 @@ class Package:
         self.metadata.read( join(outdir, ctx.const.metadata_xml) )
         errs = self.metadata.errors()
         if errs:
-            util.Checks.print_errors(errs)
+            util.print_errors(errs)
             raise Error, _("MetaData format wrong")
 
         self.files = Files()

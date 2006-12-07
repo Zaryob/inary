@@ -540,7 +540,7 @@ def resurrect_package(package_fn, write_files, txn = None):
 
     errs = metadata.errors()
     if errs:
-        util.Checks.print_errors(errs)
+        util.print_errors(errs)
         raise Error, _("MetaData format wrong (%s)") % package_fn
 
     ctx.ui.info(_('* Adding \'%s\' to db... ') % (metadata.package.name), noln=True)
