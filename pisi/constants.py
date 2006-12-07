@@ -14,8 +14,6 @@
 If you have a "magic" constant value this is where it should be
 defined."""
 
-# Author: Baris Metin <baris@pardus.org.tr
-
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
