@@ -55,7 +55,12 @@ def init(database = True, write = True,
          stdout = None, stderr = None,
          comar_sockname = None,
          signal_handling = True):
-    """Initialize PiSi subsystem"""
+    """Initialize PiSi subsystem.
+    
+    You should call finalize() when your work is finished. Otherwise
+    you can left the database in a bad state.
+    
+    """
 
     # UI comes first
 
@@ -120,6 +125,7 @@ def init(database = True, write = True,
     ctx.initialized = True
 
 def finalize():
+    """Close the database cleanly and do other cleanup."""
     if ctx.initialized:
         ctx.disable_keyboard_interrupts()
         if ctx.log:
@@ -153,11 +159,11 @@ def finalize():
         ctx.enable_keyboard_interrupts()
 
 def list_installed():
-    '''returns a set of installed package names'''
+    """Return a set of installed package names."""
     return set(ctx.installdb.list_installed())
 
 def list_available(repo = None):
-    '''returns a set of available package names'''
+    """Return a set of available package names."""
     return set(ctx.packagedb.list_packages(repo = repo))
 
 def list_upgradable():
@@ -166,10 +172,12 @@ def list_upgradable():
     return filter(pisi.operations.is_upgradable, ctx.installdb.list_installed())
 
 def package_graph(A, repo = pisi.itembyrepodb.installed, ignore_installed = False):
-    """Construct a package relations graph, containing
-    all dependencies of packages A, if ignore_installed
-    option is True, then only uninstalled deps will
-    be added."""
+    """Construct a package relations graph.
+    
+    Graph will contain all dependencies of packages A, if ignore_installed
+    option is True, then only uninstalled deps will be added.
+    
+    """
 
     ctx.ui.debug('A = %s' % str(A))
 
@@ -310,7 +318,7 @@ def info_file(package_fn):
     return package.metadata, package.files
 
 def info_name(package_name, installed=False):
-    """fetch package information for a package"""
+    """Fetch package information for the given package."""
     if installed:
         package = ctx.packagedb.get_package(package_name, pisi.itembyrepodb.installed)
     else:
@@ -376,7 +384,7 @@ def check(package):
     return corrupt
 
 def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=False):
-    """accumulate PiSi XML files in a directory"""
+    """Accumulate PiSi XML files in a directory, and write an index."""
     index = Index()
     index.distribution = None
     if not dirs:
