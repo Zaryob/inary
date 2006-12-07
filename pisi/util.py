@@ -156,7 +156,7 @@ class TeeOutFile:
 # use of ctx.stdout, and use run_batch()'s return
 # values instead. but this is good enough :)
 def run_logged(cmd):
-    """run command and get return value"""
+    """Run command and get the return value."""
     ctx.ui.info(_('Running ') + cmd, verbose=True)
     if ctx.stdout:
         stdout = ctx.stdout
