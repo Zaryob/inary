@@ -92,7 +92,7 @@ def init_dbenv(write=False, writeversion=False):
             ctx.dbenv.open(pisi.context.config.db_dir(), flags)
             ctx.dbenv.set_flags(db.DB_LOG_AUTOREMOVE, 1) # clear inactive logs automatically
         else:
-            raise Error(_("Cannot open PiSi database with write access. You have to be root for this operation."))
+            raise Error(_("Cannot attain write access to PiSi database. You have to be root for this operation."))
     else:
         ctx.dbenv = None # read-only access to database
 
