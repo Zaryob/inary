@@ -143,9 +143,8 @@ class Install(AtomicOperation):
         # check dependencies
         if not ctx.config.get_option('ignore_dependency'):
             if not self.pkginfo.installable():
-                ctx.ui.error(_('Dependencies for %s not satisfied') %
-                             self.pkginfo.name)
-                raise Error(_("Package not installable"))
+                raise Error(_("%s package cannot be installed unless the dependencies are satisfied") %
+                            self.pkginfo.name)
 
         # check if package is in database
         # If it is not, put it into 3rd party packagedb

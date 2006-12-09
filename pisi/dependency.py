@@ -104,8 +104,8 @@ dependency spec"""
 def satisfies_dependencies(pkg, deps, sat = installed_satisfies_dep):
     for dep in deps:
         if not sat(dep):
-            ctx.ui.error(_('Package %s does not satisfy dependency %s') %
-                     (pkg,dep))
+            ctx.ui.error(_('%s dependency of package %s is not satisfied') %
+                     (dep, pkg))
             return False
     return True
 
