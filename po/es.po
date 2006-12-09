@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
-"POT-Creation-Date: 2006-12-08 21:29+EET\n"
+"POT-Creation-Date: 2006-12-09 20:35+EET\n"
 "PO-Revision-Date: 2006-12-01 00:18-0400\n"
 "Last-Translator: Klemens Häckel <click3d@linuxmail.org>\n"
 "Language-Team: es <LL@li.org>\n"
@@ -808,19 +808,18 @@ msgid "Installing %s, version %s, release %s, build %s"
 msgstr "Instando %s, versión %s, release %s, build %s"
 
 #: pisi/atomicoperations.py:146
-msgid "Dependencies for %s not satisfied"
-msgstr "Dependencias para %s no se pueden cumplir"
-
-#: pisi/atomicoperations.py:148
-msgid "Package not installable"
-msgstr "No posible instalar paquete"
+#, fuzzy
+msgid "%s package cannot be installed unless the dependencies are satisfied"
+msgstr ""
+"Se instalarán los siguientes paquetes en el orden indicado para satisfacer "
+"las dependencias:\n"
 
 # check this ?? - probably ok, but see the context
-#: pisi/atomicoperations.py:166
+#: pisi/atomicoperations.py:165
 msgid "/%s from %s package\n"
 msgstr "/%s de paquete %s\n"
 
-#: pisi/atomicoperations.py:167
+#: pisi/atomicoperations.py:166
 msgid ""
 "File conflicts:\n"
 "%s"
@@ -828,99 +827,99 @@ msgstr ""
 "Archivo conflilcta:\n"
 "%s"
 
-#: pisi/atomicoperations.py:202
+#: pisi/atomicoperations.py:201
 msgid "Re-install same version package?"
 msgstr "Reinstalar el paquete de la misma versión ?"
 
-#: pisi/atomicoperations.py:203
+#: pisi/atomicoperations.py:202
 msgid "Package re-install declined"
 msgstr "Reinstalación de paquete rechazado"
 
-#: pisi/atomicoperations.py:209
+#: pisi/atomicoperations.py:208
 msgid "Upgrading to new upstream version"
 msgstr "Actualizando a nueva versión upstream"
 
-#: pisi/atomicoperations.py:212
+#: pisi/atomicoperations.py:211
 msgid "Upgrading to new distribution release"
 msgstr "Actualización a nueva versión de distribución"
 
-#: pisi/atomicoperations.py:216
+#: pisi/atomicoperations.py:215
 msgid "Upgrading to new distribution build"
 msgstr "Actualización a nuevo 'build' de distribución"
 
-#: pisi/atomicoperations.py:226
+#: pisi/atomicoperations.py:225
 msgid "Downgrade to old distribution release?"
 msgstr "Revertir hacia versión antigua de distribución ?"
 
-#: pisi/atomicoperations.py:228
+#: pisi/atomicoperations.py:227
 msgid "Downgrade to old distribution build?"
 msgstr "Revertir hacia 'build' antiguo de distribución ?"
 
-#: pisi/atomicoperations.py:230
+#: pisi/atomicoperations.py:229
 msgid "Package downgrade declined"
 msgstr "Reversión (downgrade) de paquetes rechazado"
 
-#: pisi/atomicoperations.py:254
+#: pisi/atomicoperations.py:253
 msgid "%s configuration failed."
 msgstr "Falló configuración %s ."
 
-#: pisi/atomicoperations.py:341
+#: pisi/atomicoperations.py:340
 msgid "Storing %s, "
 msgstr "Guardando %s, "
 
-#: pisi/atomicoperations.py:344
+#: pisi/atomicoperations.py:343
 msgid "Storing %s."
 msgstr "Guardando %s."
 
-#: pisi/atomicoperations.py:351
+#: pisi/atomicoperations.py:350
 msgid "Storing %s"
 msgstr "Guardando %s"
 
-#: pisi/atomicoperations.py:407
+#: pisi/atomicoperations.py:406
 msgid "File list could not be read for package %s, continuing removal."
 msgstr ""
 "Lista de archivos no se pudo leer para paquete %s, continuando eliminar."
 
-#: pisi/atomicoperations.py:413
+#: pisi/atomicoperations.py:412
 msgid "Removing package %s"
 msgstr "Eliminando paquete %s"
 
-#: pisi/atomicoperations.py:416
+#: pisi/atomicoperations.py:415
 msgid "Trying to remove nonexistent package "
 msgstr "Intentando remover paquete no-existente"
 
-#: pisi/atomicoperations.py:455
+#: pisi/atomicoperations.py:454
 msgid "Not removing conflicted file : %s"
 msgstr "No eliminado archivo conflictivo: %s"
 
-#: pisi/atomicoperations.py:475
+#: pisi/atomicoperations.py:474
 msgid ""
 "Installed file %s is not exists on system [Probably you manually deleted]"
 msgstr ""
 "Archivo instalado %s no existe en el sistema [Probablemente eliminado "
 "manualmente]"
 
-#: pisi/atomicoperations.py:536
+#: pisi/atomicoperations.py:535
 msgid "Metadata XML '%s' cannot be found"
 msgstr "Metadata XML '%s' no se puede encontrar"
 
-#: pisi/atomicoperations.py:544
+#: pisi/atomicoperations.py:543
 msgid "MetaData format wrong (%s)"
 msgstr "Formato MetaData equivocado (%s)"
 
-#: pisi/atomicoperations.py:546
+#: pisi/atomicoperations.py:545
 msgid "* Adding '%s' to db... "
 msgstr "* Agregando '%s' a db... "
 
-#: pisi/atomicoperations.py:552
+#: pisi/atomicoperations.py:551
 msgid "Files XML '%s' cannot be found"
 msgstr "Archivos XML '%s' no se pueden encontrar"
 
-#: pisi/atomicoperations.py:557 pisi/package.py:136
+#: pisi/atomicoperations.py:556 pisi/package.py:136
 msgid "Invalid %s"
 msgstr "%s Invalido"
 
-#: pisi/atomicoperations.py:566
+#: pisi/atomicoperations.py:565
 msgid "OK."
 msgstr "OK."
 
@@ -2345,11 +2344,21 @@ msgid " version <= "
 msgstr " version <= "
 
 #: pisi/conflict.py:43 pisi/dependency.py:44
+#, fuzzy
+msgid " version "
+msgstr " version <= "
+
+#: pisi/conflict.py:45 pisi/dependency.py:46
 msgid " release >= "
 msgstr " release >= "
 
-#: pisi/conflict.py:45 pisi/dependency.py:46
+#: pisi/conflict.py:47 pisi/dependency.py:48
 msgid " release <= "
+msgstr " release <= "
+
+#: pisi/conflict.py:49 pisi/dependency.py:50
+#, fuzzy
+msgid " release "
 msgstr " release <= "
 
 #: pisi/constants.py:30
@@ -2360,11 +2369,12 @@ msgstr ""
 msgid "Can't unbind constant: %s"
 msgstr ""
 
-#: pisi/dependency.py:103
-msgid "Package %s does not satisfy dependency %s"
-msgstr "Paquete %s no satiface dependencia %s"
+#: pisi/dependency.py:107
+#, fuzzy
+msgid "%s dependency of package %s is not satisfied"
+msgstr "Dependencias para %s no se pueden cumplir"
 
-#: pisi/dependency.py:116
+#: pisi/dependency.py:120
 msgid "Package %s is not present in the package database"
 msgstr "Paquete %s no figura en la base de datos de paquetes"
 
@@ -2399,9 +2409,13 @@ msgstr "Rango solicitado no posible satisfacer, iniciando otra vez."
 msgid "Cannot fetch %s; value error: %s"
 msgstr "Imposible traer %s; valor de error: %s"
 
-#: pisi/fetcher.py:192 pisi/fetcher.py:194 pisi/fetcher.py:196
+#: pisi/fetcher.py:192 pisi/fetcher.py:196
 msgid "Cannot fetch %s; %s"
 msgstr "No posible traer %s; %s"
+
+#: pisi/fetcher.py:194
+msgid "Please check your network connections and try again. (%s)"
+msgstr ""
 
 #: pisi/fetcher.py:198
 msgid "Cannot fetch %s; (%s): %s"
@@ -3077,6 +3091,12 @@ msgstr "%d errores encontrados! Corrígalos de inmediato!\n"
 #: scripts/repostats.py:681
 msgid "These dependencies are not available in repository:\n"
 msgstr "Las siguientes dependencias no están disponibles en el repositorio:\n"
+
+#~ msgid "Package not installable"
+#~ msgstr "No posible instalar paquete"
+
+#~ msgid "Package %s does not satisfy dependency %s"
+#~ msgstr "Paquete %s no satiface dependencia %s"
 
 #~ msgid "Cannot write to PiSi database."
 #~ msgstr "No posible escribir en base de datos PiSi"
