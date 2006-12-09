@@ -191,7 +191,7 @@ class Fetcher:
             except urllib2.HTTPError, e:
                 self.err(_('Cannot fetch %s; %s') % (uri, e))
             except urllib2.URLError, e:
-                self.err(_('Cannot fetch %s; %s') % (uri, e[-1][-1]))
+                self.err(_('Please check your network connections and try again. (%s)') % e[-1][-1])
             except OSError, e:
                 self.err(_('Cannot fetch %s; %s') % (uri, e))
             except HTTPException, e:
