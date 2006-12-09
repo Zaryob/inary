@@ -40,10 +40,14 @@ class Dependency:
             s += _(" version >= ") + self.versionFrom
         if self.versionTo:
             s += _(" version <= ") + self.versionTo
+        if self.version:
+            s += _(" version ") + self.version
         if self.releaseFrom:
             s += _(" release >= ") + self.releaseFrom
         if self.releaseTo:
             s += _(" release <= ") + self.releaseTo
+        if self.release:
+            s += _(" release ") + self.release
         return s
 
     def satisfies(self, pkg_name, version, release):
