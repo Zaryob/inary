@@ -62,3 +62,11 @@ out exact error is try to parse error string (which is localized).
 ==> database
 * brr...
 
+
+==> class attributes
+* In some classes there are some attributes assigned but never
+used. (see remove_unused_attributes.patch)
+
+* PiSi uses heavy classes and creates thousands of instances of them
+  (Package, Metadata, Dependency, ...). These classes should define
+  __slots__ to reduce the heap used.
