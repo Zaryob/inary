@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "POT-Creation-Date: 2006-12-09 20:35+EET\n"
-"PO-Revision-Date: 2006-12-05 22:33+0200\n"
+"PO-Revision-Date: 2006-12-13 06:52+0200\n"
 "Last-Translator: Willem Gielen <w.gielen@gmail.com>\n"
 "Language-Team: Nederlands <Pardus-translation-nl@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
@@ -798,11 +798,8 @@ msgid "Installing %s, version %s, release %s, build %s"
 msgstr "Installatie %s, versie %s, uitgave %s, compilatie %s"
 
 #: pisi/atomicoperations.py:146
-#, fuzzy
 msgid "%s package cannot be installed unless the dependencies are satisfied"
-msgstr ""
-"De volgende pakketten zullen geïnstalleerd worden in de respectievelijke "
-"volgorde voor de afhankelijkheden:\n"
+msgstr "%s pakket can niet geïnstalleerd worden als er niet aan de afhankelijkheden is voldaan"
 
 #: pisi/atomicoperations.py:165
 msgid "/%s from %s package\n"
@@ -884,8 +881,7 @@ msgid "Not removing conflicted file : %s"
 msgstr "Niet verwijderen conflicterend bestand: %s"
 
 #: pisi/atomicoperations.py:474
-msgid ""
-"Installed file %s is not exists on system [Probably you manually deleted]"
+msgid "Installed file %s is not exists on system [Probably you manually deleted]"
 msgstr ""
 "Genïstalleerd bestand %s bestaat niet op systeem [mogelijk met de hand "
 "verwijderd]"
@@ -999,8 +995,7 @@ msgid "unable to call function from actions: %s"
 msgstr "kan functie niet aanroepen vanuit actions: %s"
 
 #: pisi/build.py:433
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Veiligheidsprocedure: de volgende extra pakketten in system.devel zullen "
 "geïnstalleerd worden:"
@@ -1019,8 +1014,7 @@ msgstr "Niet-opgeloste compileerafhankelijkheden:"
 
 #: pisi/build.py:453
 msgid "Cannot build package due to unsatisfied build dependencies"
-msgstr ""
-"Kan pakket niet compileren wegens niet-opgeloste compileerafhankelijkheden"
+msgstr "Kan pakket niet compileren wegens niet-opgeloste compileerafhankelijkheden"
 
 #: pisi/build.py:461
 msgid "Build dependency %s cannot be satisfied"
@@ -1076,11 +1070,11 @@ msgstr "Er zijn geen wijzigingen sinds vorige compilatie %d"
 
 #: pisi/build.py:795
 msgid "No user named '%s' found on the system"
-msgstr ""
+msgstr "Geen gebruiker met de naam '%s' gevonden op het systeem"
 
 #: pisi/build.py:800
 msgid "No group named '%s' found on the system"
-msgstr ""
+msgstr "Geen groep met de naam '%s' gevonden op het systeem"
 
 #: pisi/build.py:803
 msgid "** Building package %s"
@@ -1112,10 +1106,8 @@ msgid "Abandoned files under the install dir (%s):"
 msgstr "Verlaten bestanden in de installatiemap (%s):"
 
 #: pisi/build.py:887
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
-msgstr ""
-"Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)."
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
+msgstr "Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)."
 
 #: pisi/build.py:891
 msgid "Cleaning Build Directory..."
@@ -1394,8 +1386,7 @@ msgid "Create a static package with ar files"
 msgstr "Maak een statisch pakket met ar-bestanden aan"
 
 #: pisi/cli/commands.py:450
-msgid ""
-"Do not install build dependencies, fail if a build dependency is present"
+msgid "Do not install build dependencies, fail if a build dependency is present"
 msgstr ""
 "Installeer geen compileerafhankelijkheden, stoppen als zich een "
 "compileerafhankelijkheid voordoet"
@@ -1586,9 +1577,8 @@ msgid "Do not update repositories"
 msgstr "Repositories niet bijwerken"
 
 #: pisi/cli/commands.py:660
-#, fuzzy
 msgid "Upgrade component's and recursive components' packages"
-msgstr "Verwijder componenten en de pakketten van recursieve componenten"
+msgstr "Opwaarderen componenten en recursieve componenten pakketten"
 
 #: pisi/cli/commands.py:664
 msgid ""
@@ -1722,14 +1712,12 @@ msgid "Package found in repository:"
 msgstr "Pakket gevonden in repository:"
 
 #: pisi/cli/commands.py:900
-#, fuzzy
 msgid "%s is not found in repositories"
-msgstr "Zal repositories niet bijwerken"
+msgstr "%s niet gevonden in de repositories"
 
 #: pisi/cli/commands.py:903
-#, fuzzy
 msgid "%s is not installed"
-msgstr "Pakket %s is niet geïnstalleerd."
+msgstr "%s is niet geïnstalleerd."
 
 #: pisi/cli/commands.py:916
 msgid "Reverse Dependencies:"
@@ -1874,10 +1862,8 @@ msgstr "Toon gedetailleerde installatie-informatie"
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/commands.py:1066 pisi/cli/commands.py:1444
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr ""
-"Pakketnaam     |St|   Versie|  Rel.| Compilatie|  Distro|             Datum"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr "Pakketnaam     |St|   Versie|  Rel.| Compilatie|  Distro|             Datum"
 
 #: pisi/cli/commands.py:1081
 msgid ""
@@ -2124,12 +2110,8 @@ msgstr ""
 "Toont pakketten wachtend op configuratie\n"
 
 #: pisi/cli/commands.py:1482
-#, fuzzy
 msgid "There are no packages waiting to be configured"
-msgstr ""
-"Toon wachtende pakketten\n"
-"\n"
-"Toont pakketten wachtend op configuratie\n"
+msgstr "Er zijn geen pakketten die wachten op configuratie"
 
 #: pisi/cli/commands.py:1487
 msgid ""
@@ -2319,9 +2301,8 @@ msgid " version <= "
 msgstr " versie <= "
 
 #: pisi/conflict.py:43 pisi/dependency.py:44
-#, fuzzy
 msgid " version "
-msgstr " versie <= "
+msgstr " versie "
 
 #: pisi/conflict.py:45 pisi/dependency.py:46
 msgid " release >= "
@@ -2332,9 +2313,8 @@ msgid " release <= "
 msgstr " uitgave <= "
 
 #: pisi/conflict.py:49 pisi/dependency.py:50
-#, fuzzy
 msgid " release "
-msgstr " uitgave <= "
+msgstr " uitgave "
 
 #: pisi/constants.py:30
 msgid "Can't rebind constant: %s"
@@ -2345,9 +2325,8 @@ msgid "Can't unbind constant: %s"
 msgstr "Kan niet ontkoppelen van contante: %s"
 
 #: pisi/dependency.py:107
-#, fuzzy
 msgid "%s dependency of package %s is not satisfied"
-msgstr "Omgekeerde afhankelijkheid %s van %s kan niet worden voldaan"
+msgstr "%s afhankelijkheid van pakket %s is niet bevredigend"
 
 #: pisi/dependency.py:120
 msgid "Package %s is not present in the package database"
@@ -2366,8 +2345,7 @@ msgid "Access denied to destination file: \"%s\""
 msgstr "Toegang geweigerd van doelbestand: \"%s\" "
 
 #: pisi/fetcher.py:100
-msgid ""
-"A problem occured. Please check the archive address and/or permissions again."
+msgid "A problem occured. Please check the archive address and/or permissions again."
 msgstr ""
 "Probleem plaatsgevonden. Controleer het archiefadres en/of de "
 "toegangsrechten opnieuw."
@@ -2390,7 +2368,7 @@ msgstr "Kan niet ophalen %s; %s"
 
 #: pisi/fetcher.py:194
 msgid "Please check your network connections and try again. (%s)"
-msgstr ""
+msgstr "Controleer uw netwerk verbindingen en probeer opnieuw. (%s)"
 
 #: pisi/fetcher.py:198
 msgid "Cannot fetch %s; (%s): %s"
@@ -2519,8 +2497,7 @@ msgstr ""
 "db uit."
 
 #: pisi/lockeddbshelve.py:51
-msgid ""
-"Database version for %s greater than PiSi version. You need a newer PiSi."
+msgid "Database version for %s greater than PiSi version. You need a newer PiSi."
 msgstr ""
 "Databaseversie van %s is hoger dan de PiSi-versie. Een nieuwere versie van "
 "PiSi is nodig."
@@ -2546,19 +2523,17 @@ msgid "Cannot attain read access to database environment"
 msgstr "Kan geen leestoegang tot de databaseomgeving krijgen"
 
 #: pisi/lockeddbshelve.py:95
-#, fuzzy
 msgid ""
 "Cannot attain write access to PiSi database. You have to be root for this "
 "operation."
-msgstr "Kan geen schrijftoegang tot de databaseomgeving krijgen"
+msgstr "Kan geen schrijftoegang tot de PiSi database krijgen. U dient root te zijn voor deze handeling."
 
 #: pisi/lockeddbshelve.py:113
 msgid "Cannot attain read or write access to database %s"
 msgstr "Kan geen lees- of schrijftoegang krijgen tot de database %s"
 
 #: pisi/lockeddbshelve.py:139
-msgid ""
-"Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
+msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
 msgstr ""
 "Opties moeten een van  'r', 'w', 'c' of 'n'  zijn of gebruik de opties bsddb."
 "db.DB_*"
@@ -2878,9 +2853,8 @@ msgid "File '%s' has invalid XML"
 msgstr "Bestand '%s' bevat ongeldige XML"
 
 #: pisi/repodb.py:74
-#, fuzzy
 msgid "No repository named %s exists"
-msgstr "Geen repository met de naam %s gevonden."
+msgstr "Er bestaat geen repository met de naam %s"
 
 #: pisi/repodb.py:83
 msgid "Repository %s already exists"
@@ -3035,10 +3009,8 @@ msgid "Source package '%s' has wrong date format '%s'"
 msgstr "Bronpakket '%s' heeft een onjuiste datumopmaak: '%s'"
 
 #: scripts/repostats.py:481
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-msgstr ""
-"Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgstr "Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
 
 #: scripts/repostats.py:564
 msgid ""
@@ -3072,23 +3044,3 @@ msgstr "%d problemen gevonden! Repareer ze onmiddellijk!\n"
 msgid "These dependencies are not available in repository:\n"
 msgstr "Deze afhankelijkheden zijn niet beschikbaar in de repository:\n"
 
-#~ msgid "Dependencies for %s not satisfied"
-#~ msgstr "Afhankelijkheden voor %s niet opgelost"
-
-#~ msgid "Package not installable"
-#~ msgstr "Pakket niet installeerbaar"
-
-#~ msgid "Package %s does not satisfy dependency %s"
-#~ msgstr "Pakket %s voldoet niet aan afhankelijkheid %s"
-
-#~ msgid "eager upgrades"
-#~ msgstr "belangrijke opwaarderingen"
-
-#~ msgid "Cannot write to PiSi database."
-#~ msgstr "Kan niet naar de PiSi-database schrijven."
-
-#~ msgid "%s section should have a '%s' tag"
-#~ msgstr "'%s' sectie zou een '%s' tag moeten hebben"
-
-#~ msgid "Removing lock %s"
-#~ msgstr "Vergrendeling %s verwijderen"
