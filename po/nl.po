@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "POT-Creation-Date: 2006-12-09 20:35+EET\n"
-"PO-Revision-Date: 2006-12-13 06:52+0200\n"
+"PO-Revision-Date: 2006-12-25 23:00+0200\n"
 "Last-Translator: Willem Gielen <w.gielen@gmail.com>\n"
 "Language-Team: Nederlands <Pardus-translation-nl@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
@@ -663,7 +663,7 @@ msgstr "ActionsAPI [unlinkDir]: map %s bestaat niet."
 
 #: pisi/actionsapi/shelltools.py:120
 msgid "ActionsAPI [move]: Permission denied: %s to %s"
-msgstr "ActionsAPI [move]: toegang geweigerd: %s -> %s"
+msgstr "ActionsAPI [move]: toegang geweigerd: %s naar %s"
 
 #: pisi/actionsapi/shelltools.py:122
 msgid "ActionsAPI [move]: File %s doesn't exists."
@@ -671,7 +671,7 @@ msgstr "ActionsAPI [move]: bestand %s bestaat niet."
 
 #: pisi/actionsapi/shelltools.py:132
 msgid "ActionsAPI [copy]: Permission denied: %s to %s"
-msgstr "ActionsAPI [copy]: toegang geweigerd: %s -> %s"
+msgstr "ActionsAPI [copy]: toegang geweigerd: %s naar %s"
 
 #: pisi/actionsapi/shelltools.py:148
 msgid "ActionsAPI [copy]: File %s does not exist."
@@ -743,7 +743,7 @@ msgstr "* Bijwerken repository: %s "
 
 #: pisi/api.py:432
 msgid "No updates available for repository %s."
-msgstr "Geen bijgewerkte bestanden beschikbaar op repository %s."
+msgstr "Geen bijgewerkte pakketten beschikbaar op repository %s."
 
 #: pisi/api.py:434
 msgid "Updating database at any rate as requested"
@@ -759,7 +759,7 @@ msgstr "Geen repository met de naam %s gevonden."
 
 #: pisi/api.py:455
 msgid "* Rebuilding '%s' named repo... "
-msgstr "* 'Opnieuw opbouwen %s' repo... "
+msgstr "* 'Opnieuw opbouwen '%s' repo... "
 
 #: pisi/api.py:468
 msgid "Input/Output error while reading %s: %s"
@@ -799,11 +799,11 @@ msgstr "Installatie %s, versie %s, uitgave %s, compilatie %s"
 
 #: pisi/atomicoperations.py:146
 msgid "%s package cannot be installed unless the dependencies are satisfied"
-msgstr "%s pakket can niet geïnstalleerd worden als er niet aan de afhankelijkheden is voldaan"
+msgstr "%s pakket kan niet geïnstalleerd worden als er niet aan de afhankelijkheden is voldaan"
 
 #: pisi/atomicoperations.py:165
 msgid "/%s from %s package\n"
-msgstr "%s van %s pakket\n"
+msgstr "/%s van %s pakket\n"
 
 #: pisi/atomicoperations.py:166
 msgid ""
@@ -843,7 +843,7 @@ msgstr "Terugwaarderen naar oude distributie compilatie?"
 
 #: pisi/atomicoperations.py:229
 msgid "Package downgrade declined"
-msgstr "Terugwaarderen van pakket geweigerd"
+msgstr "Pakket terugwaarderen geweigerd"
 
 # pisi/actionsapi/autotools.py:75 :85
 #: pisi/atomicoperations.py:253
@@ -883,7 +883,7 @@ msgstr "Niet verwijderen conflicterend bestand: %s"
 #: pisi/atomicoperations.py:474
 msgid "Installed file %s is not exists on system [Probably you manually deleted]"
 msgstr ""
-"Genïstalleerd bestand %s bestaat niet op systeem [mogelijk met de hand "
+"Geïnstalleerd bestand %s bestaat niet op systeem [mogelijk met de hand "
 "verwijderd]"
 
 #: pisi/atomicoperations.py:535
@@ -936,7 +936,7 @@ msgstr "Ccache gevonden..."
 
 #: pisi/build.py:287
 msgid "PartOf tag not defined, looking for component"
-msgstr "PartOf' tag is niet omschreven, zoeken naar component"
+msgstr "PartOf tag is niet omschreven, zoeken naar component"
 
 #: pisi/build.py:297
 msgid "Cannot find component.xml in upper directory"
@@ -988,7 +988,7 @@ msgstr "Kan COMAR script niet lezen (%s): %s"
 
 #: pisi/build.py:391
 msgid "SyntaxError in COMAR file (%s): %s"
-msgstr "Syntaxfout in COMARbestand (%s): %s"
+msgstr "Syntaxfout in COMAR bestand (%s): %s"
 
 #: pisi/build.py:417
 msgid "unable to call function from actions: %s"
@@ -1038,7 +1038,7 @@ msgstr "Patch-bestand ontbreekt: %s\n"
 
 #: pisi/build.py:492
 msgid "* Applying patch: %s"
-msgstr "* Patch toepassen: %s"
+msgstr "* Toepassen patch: %s"
 
 #: pisi/build.py:550
 msgid "Stripping files.."
