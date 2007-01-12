@@ -29,7 +29,7 @@ def getVersion(pspecList):
     sources = {}
     for pspec in pspecList:
         specFile = SpecFile(join_path(pspec, "pspec.xml"))
-        sources[specFile.source.name] = (specFile.source.version, specFile.source.release)
+        sources[specFile.source.name] = (specFile.getSourceVersion(), specFile.getSourceRelease())
     return sources
 
 def listIntersection(firstRepo, secondRepo):
@@ -63,21 +63,8 @@ if __name__ == "__main__":
     except IndexError:
         postfix = ""
 
-    tag = getVersion(findPspec(join_path(svnRoot, "tags/pardus-1.0/", postfix)))
-    stable = getVersion(findPspec(join_path(svnRoot,"stable/pardus-1/", postfix)))
+    stable = getVersion(findPspec(join_path(svnRoot,"2007/", postfix)))
     devel = getVersion(findPspec(join_path(svnRoot, "devel/", postfix)))
-
-    print "Tag --> Stable"
-    listIntersection(tag, stable)
-    print
-
-    print "Tag has, Stable hasn't"
-    listComplement(tag, stable)
-    print
-
-    print "Stable has, Tag hasn't"
-    listComplement(stable, tag)
-    print
 
     print "Stable --> Devel"
     listIntersection(stable, devel)
