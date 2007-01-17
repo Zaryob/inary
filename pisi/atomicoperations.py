@@ -42,12 +42,8 @@ class NotfoundError(pisi.Error):
 
 class AtomicOperation(object):
 
-    def __init__(self, ignore_dep = None):
-        #self.package = package
-        if ignore_dep==None:
-            self.ignore_dep = ctx.config.get_option('ignore_dependency')
-        else:
-            self.ignore_dep = ignore_dep
+    def __init__(self):
+        pass
 
     def run(self, package):
         "perform an atomic package operation"
@@ -58,7 +54,7 @@ class Install(AtomicOperation):
     "Install class, provides install routines for pisi packages"
 
     @staticmethod
-    def from_name(name, ignore_dep = None):
+    def from_name(name):
         # download package and return an installer object
         # find package in repository
         repo = ctx.packagedb.which_repo(name)
@@ -77,13 +73,13 @@ class Install(AtomicOperation):
 
             ctx.ui.info(_("Package URI: %s") % pkg_path, verbose=True)
 
-            return Install(pkg_path, ignore_dep)
+            return Install(pkg_path)
         else:
             raise Error(_("Package %s not found in any active repository.") % name)
 
-    def __init__(self, package_fname, ignore_dep = None, ignore_file_conflicts = None):
+    def __init__(self, package_fname, ignore_file_conflicts = None):
         "initialize from a file name"
-        super(Install, self).__init__(ignore_dep)
+        super(Install, self).__init__()
         if not ignore_file_conflicts:
             ignore_file_conflicts = ctx.get_option('ignore_file_conflicts')
         self.ignore_file_conflicts = ignore_file_conflicts
@@ -394,8 +390,8 @@ def install_single_name(name, upgrade = False):
 
 class Remove(AtomicOperation):
 
-    def __init__(self, package_name, ignore_dep = None):
-        super(Remove, self).__init__(ignore_dep)
+    def __init__(self, package_name):
+        super(Remove, self).__init__()
         self.package_name = package_name
         self.package = ctx.packagedb.get_package(self.package_name, pisi.itembyrepodb.installed)
         try:
