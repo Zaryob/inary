@@ -505,7 +505,7 @@ def strip_directory(top, excludelist=[]):
             # entries sometimes triggers compile-time errors or linkage problems.
             # Instead of patching all these buggy sources and maintain these patches,
             # PiSi removes wrong paths...
-            if frpath.endswith(".la"):
+            if frpath.endswith(".la") and not os.path.islink(frpath):
                 ladata = file(frpath).read()
                 new_ladata = re.sub("-L%s/\S*" % ctx.config.tmp_dir(), "", ladata)
                 new_ladata = re.sub("%s/\S*/install/" % ctx.config.tmp_dir(), "/", new_ladata)
