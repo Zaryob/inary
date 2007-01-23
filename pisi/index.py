@@ -86,11 +86,12 @@ class Index(XmlFile):
 
     def index(self, repo_uri, skip_sources=False):
         self.repo_dir = repo_uri
+
+        packages = []
         for root, dirs, files in os.walk(repo_uri):
             for fn in files:
                 if fn.endswith(ctx.const.package_suffix):
-                    ctx.ui.info(_('Adding %s to package index') % fn)
-                    self.add_package(os.path.join(root, fn), repo_uri)
+                    packages.append(os.path.join(root, fn))
                 if fn == 'component.xml':
                     ctx.ui.info(_('Adding %s to component index') % fn)
                     self.add_component(os.path.join(root, fn))
@@ -98,6 +99,10 @@ class Index(XmlFile):
                     self.add_spec(os.path.join(root, fn), repo_uri)
                 if fn == 'distribution.xml':
                     self.add_distro(os.path.join(root, fn))
+
+        for pkg in util.filter_latest_packages(packages):
+            ctx.ui.info(_('Adding %s to package index') % pkg)
+            self.add_package(pkg, repo_uri)
 
     def update_db(self, repo, txn = None):
         # FIXME: updating db takes too much time. So a notify mechanism is used to inform the status

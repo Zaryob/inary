@@ -632,3 +632,24 @@ def parse_package_name(package_name):
     version = package_name[len(name) + 1:]
 
     return (name, version)
+
+def filter_latest_packages(package_paths):
+    """ For a given pisi package paths list where there may also be multiple versions
+        of the same package, filters only the latest versioned ones """
+
+    from pisi.version import Version
+
+    latest = {}
+    for path in package_paths:
+
+        root = os.path.dirname(path)
+        name, version = parse_package_name(os.path.basename(path[:-len(".pisi")]))
+
+        if latest.has_key(name):
+            if Version(latest[name][2]) < Version(version):
+                latest[name] = (root, name, version)
+        else:
+            if version:
+                latest[name] = (root, name, version)
+
+    return map(lambda x:"%s/%s-%s.pisi" % x, latest.values())
