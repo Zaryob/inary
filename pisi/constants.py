@@ -46,6 +46,9 @@ class Constants:
         # suffix for package names
         self.__c.package_suffix = ".pisi"
 
+        # delta suffix for package names
+        self.__c.delta_package_suffix = ".delta.pisi"
+
         # suffix for lzma
         self.__c.lzma_suffix = ".lzma"
 
