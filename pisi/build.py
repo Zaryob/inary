@@ -635,16 +635,7 @@ class Builder:
         files.write(files_xml_path)
         self.files = files
 
-    def calc_build_no(self, package_name):
-        """Calculate build number"""
-
-        def metadata_changed(old_metadata, new_metadata):
-            for key in old_metadata.package.__dict__.keys():
-                if old_metadata.package.__dict__[key] != new_metadata.package.__dict__[key]:
-                    if key != "build":
-                        return True
-
-            return False
+    def find_old_package_info(self, package_name):
 
         # find previous build in packages dir
         found = []
@@ -674,61 +665,76 @@ class Builder:
             if os.path.isfile(file):
                 locate_old_package(file)
 
-        if not found:
-            return (1, None)
-            ctx.ui.warning(_('(no previous build found, setting build no to 1.)'))
-        else:
+        if found:
             a = filter(lambda (x,y): y != None, found)
             ctx.ui.debug(str(a))
+
             if a:
                 # sort in order of increasing build number
                 a.sort(lambda x,y : cmp(x[1],y[1]))
                 old_package_fn = a[-1][0]   # get the last one
                 old_build = a[-1][1]
+                return (old_package_fn, old_build)
 
-                # compare old files.xml with the new one..
-                old_pkg = Package(old_package_fn, 'r')
-                old_pkg.read(util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
+        return None
 
-                changed = False
-                fnew = self.files.list
-                fold = old_pkg.files.list
-                fold.sort(lambda x,y : cmp(x.path,y.path))
-                fnew.sort(lambda x,y : cmp(x.path,y.path))
+    def calc_build_no(self, old_package_info):
+        """Calculate build number"""
 
-                if len(fnew) != len(fold):
-                    changed = True
-                else:
-                    for i in range(len(fold)):
-                        fo = fold.pop(0)
-                        fn = fnew.pop(0)
-                        if fo.path != fn.path:
+        def metadata_changed(old_metadata, new_metadata):
+            for key in old_metadata.package.__dict__.keys():
+                if old_metadata.package.__dict__[key] != new_metadata.package.__dict__[key]:
+                    if key != "build":
+                        return True
+
+            return False
+
+        if not old_package_info:
+            return (1, None)
+            ctx.ui.warning(_('(no previous build no info found, setting build no to 1.)'))
+        else:
+            old_package_fn, old_build = old_package_info
+
+            # compare old files.xml with the new one..
+            old_pkg = Package(old_package_fn, 'r')
+            old_pkg.read(util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
+
+            changed = False
+            fnew = self.files.list
+            fold = old_pkg.files.list
+            fold.sort(lambda x,y : cmp(x.path,y.path))
+            fnew.sort(lambda x,y : cmp(x.path,y.path))
+
+            if len(fnew) != len(fold):
+                changed = True
+            else:
+                for i in range(len(fold)):
+                    fo = fold.pop(0)
+                    fn = fnew.pop(0)
+                    if fo.path != fn.path:
+                        changed = True
+                        break
+                    else:
+                        if fo.hash != fn.hash:
                             changed = True
                             break
-                        else:
-                            if fo.hash != fn.hash:
-                                changed = True
-                                break
 
-                if metadata_changed(old_pkg.metadata, self.metadata):
-                    changed = True
-
+            if metadata_changed(old_pkg.metadata, self.metadata):
+                changed = True
                 self.old_packages.append(os.path.basename(old_package_fn))
-            else: # no old build had a build number
-                old_build = None
 
-            ctx.ui.debug('old build number: %s' % old_build)
+        ctx.ui.debug('old build number: %s' % old_build)
 
-            # set build number
-            if old_build is None:
-                ctx.ui.warning(_('(old package lacks a build no, setting build no to 1.)'))
-                return (1, None)
-            elif changed:
-                ctx.ui.info(_('There are changes, incrementing build no to %d') % (old_build + 1))
-                return (old_build + 1, old_build)
-            else:
-                ctx.ui.info(_('There is no change from previous build %d') % old_build)
-                return (old_build, old_build)
+        # set build number
+        if old_build is None:
+            ctx.ui.warning(_('(old package lacks a build no, setting build no to 1.)'))
+            return (1, None)
+        elif changed:
+            ctx.ui.info(_('There are changes, incrementing build no to %d') % (old_build + 1))
+            return (old_build + 1, old_build)
+        else:
+            ctx.ui.info(_('There is no change from previous build %d') % old_build)
+            return (old_build, old_build)
 
     def build_packages(self):
         """Build each package defined in PSPEC file. After this process there
@@ -808,12 +814,16 @@ class Builder:
             ctx.ui.info(_("Generating %s,") % ctx.const.metadata_xml)
             self.gen_metadata_xml(package)
 
+            # find the latest build info if any with build no.
+            # old_package_info = (old_package_file_name, old_build_no)
+            old_package_info = self.find_old_package_info(package.name)
+
             # build number
             if ctx.config.options.ignore_build_no or not ctx.config.values.build.buildno:
                 build_no = old_build_no = None
                 ctx.ui.warning(_('Build number is not available. For repo builds you must enable buildno in pisi.conf.'))
             else:
-                build_no, old_build_no = self.calc_build_no(package.name)
+                build_no, old_build_no = self.calc_build_no(old_package_info)
 
             self.metadata.package.build = build_no
             self.metadata.write(util.join_path(self.pkg_dir(), ctx.const.metadata_xml))
