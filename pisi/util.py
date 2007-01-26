@@ -643,7 +643,7 @@ def filter_latest_packages(package_paths):
     for path in package_paths:
 
         root = os.path.dirname(path)
-        name, version = parse_package_name(os.path.basename(path[:-len(".pisi")]))
+        name, version = parse_package_name(os.path.basename(path[:-len(ctx.const.package_suffix)]))
 
         if latest.has_key(name):
             if Version(latest[name][2]) < Version(version):
