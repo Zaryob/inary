@@ -555,8 +555,8 @@ class PackageOp(Command):
         group.add_option("-n", "--dry-run", action="store_true", default=False,
                      help = _("Do not perform any action, just show what would be done"))
 
-    def init(self):
-        super(PackageOp, self).init(True)
+    def init(self, database=True, write=True):
+        super(PackageOp, self).init(database, write)
 
     def finalize(self):
         #self.finalize_db()
@@ -599,7 +599,11 @@ expanded to package names.
         self.parser.add_option_group(group)
 
     def run(self):
-        self.init()
+
+        if self.options.fetch_only:
+            self.init(database=True, write=False)
+        else:
+            self.init()
 
         components = ctx.get_option('component')
         if not components and not self.args:
@@ -700,7 +704,11 @@ expanded to package names.
         return list(packages)
 
     def run(self):
-        self.init()
+
+        if self.options.fetch_only:
+            self.init(database=True, write=False)
+        else:
+            self.init()
 
         if not ctx.get_option('bypass_update_repo'):
             ctx.ui.info(_('Updating repositories'))
