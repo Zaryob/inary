@@ -32,9 +32,9 @@ def create_delta_package(old_package, new_package):
     oldfiles = oldpkg.get_files()
     newfiles = newpkg.get_files()
 
-    files_all = set(map(lambda x:(x.path, x.hash), newfiles.list))
+    files_new = set(map(lambda x:(x.path, x.hash), newfiles.list))
     files_old = set(map(lambda x:(x.path, x.hash), oldfiles.list))
-    files_delta = files_all - files_old
+    files_delta = files_new - files_old
 
     if not files_delta:
         ctx.ui.info(_("Nothing has changed between builds, not creating a delta"))
