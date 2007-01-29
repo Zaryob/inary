@@ -64,9 +64,9 @@
       <optional>
 	<ref name="License"/>
       </optional>
-      <optional>
+      <zeroOrMore>
 	<ref name="IsA"/>
-      </optional>
+      </zeroOrMore>
       <optional>
 	<ref name="PartOf"/>
       </optional>
