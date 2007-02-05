@@ -146,7 +146,7 @@ class File:
                  sha1sum = False, compress = None, sign = None):
         "it is pointless to open a file without a URI and a mode"
 
-        if trasfer_dir:
+        if transfer_dir:
             self.transfer_dir = transfer_dir
         else:
             self.trasfer_dir = ctx.config.tmp_dir()
