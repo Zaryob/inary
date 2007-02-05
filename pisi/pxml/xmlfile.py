@@ -72,8 +72,12 @@ class XmlFile(object):
             raise Error(_("File '%s' has invalid XML") % (f) )
 
 
-    def readxml(self, uri, tmpDir='/tmp', sha1sum=False,
+    def readxml(self, uri, tmpDir=None, sha1sum=False,
                 compress=None, sign=None, copylocal = False):
+        
+        if not tmpDir:
+            tmpDir = ctx.config.tmp_dir()   
+
         uri = File.make_uri(uri)
         #try:
         localpath = File.download(uri, tmpDir, sha1sum=sha1sum,
@@ -86,7 +90,7 @@ class XmlFile(object):
         except Exception, e:
             raise Error(_("File '%s' has invalid XML") % (localpath) )
 
-    def writexml(self, uri, tmpDir = '/tmp', sha1sum=False, compress=None, sign=None):
+    def writexml(self, uri, tmpDir = None, sha1sum=False, compress=None, sign=None):
         f = File(uri, File.write, sha1sum=sha1sum, compress=compress, sign=sign)
         f.write(self.doc.toPrettyString())
         f.close()
