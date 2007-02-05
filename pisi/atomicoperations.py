@@ -337,7 +337,7 @@ class Install(AtomicOperation):
         if config_changed:
             rename_configs()
 
-        if self.package_fname.endswith(ctx.const.package_suffix):
+        if self.package_fname.endswith(ctx.const.delta_package_suffix):
             relocate_files()
 
         if self.reinstall:
