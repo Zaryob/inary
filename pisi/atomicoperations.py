@@ -286,6 +286,23 @@ class Install(AtomicOperation):
                 os.rename(path, newconfig)
                 os.rename(oldconfig, path)
 
+        # Delta package does not contain the files that have the same hash as in 
+        # the old package's. Because it means the file has not changed. But some 
+        # of these files may be relocated to some other directory in the new package. 
+        # We handle these cases here.
+        def relocate_files():
+            from shutil import move
+            from pisi.delta import find_relocations
+            
+            relocations = find_relocations(self.old_files, self.files)
+
+            for old_file, new_file in relocations:
+                path = "/%s" % os.path.dirname(new_file.path)
+                if not os.path.exists(path):
+                    os.makedirs(path)
+
+                move("/%s" % old_file.path, "/%s" % new_file.path)                
+
         # remove left over files from the old package.
         def clean_leftovers():
             new = set(map(lambda x: str(x.path), self.files.list))
@@ -321,6 +338,9 @@ class Install(AtomicOperation):
 
         if config_changed:
             rename_configs()
+
+        if self.package_fname.endswith(ctx.const.package_suffix):
+            relocate_files()
 
         if self.reinstall:
             clean_leftovers()
