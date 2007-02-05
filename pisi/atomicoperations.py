@@ -18,6 +18,7 @@ _ = __trans.ugettext
 import sys
 import os
 import bsddb3.db as db
+import shutil
 
 import pisi
 import pisi.context as ctx
@@ -31,6 +32,7 @@ from pisi.files import Files
 from pisi.uri import URI
 import pisi.ui
 from pisi.version import Version
+from pisi.delta import find_relocations
 
 class Error(pisi.Error):
     pass
@@ -291,17 +293,13 @@ class Install(AtomicOperation):
         # of these files may be relocated to some other directory in the new package. 
         # We handle these cases here.
         def relocate_files():
-            from shutil import move
-            from pisi.delta import find_relocations
-            
-            relocations = find_relocations(self.old_files, self.files)
 
-            for old_file, new_file in relocations:
-                path = "/%s" % os.path.dirname(new_file.path)
-                if not os.path.exists(path):
-                    os.makedirs(path)
+            for old_file, new_file in find_relocations(self.old_files, self.files):
+                destdir = "/" + os.path.dirname(new_file.path)
+                if not os.path.exists(destdir):
+                    os.makedirs(destdir)
 
-                move("/%s" % old_file.path, "/%s" % new_file.path)                
+                shutil.copy("/" + old_file.path, "/" + new_file.path)
 
         # remove left over files from the old package.
         def clean_leftovers():
