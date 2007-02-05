@@ -80,6 +80,14 @@ used. (see remove_unused_attributes.patch)
 * Maybe? Get rid of functional logic, switch to OO one
 * ActionsAPI still needs an updated API document
 
-==> PiSi API
 
+==> PiSi API
 * Write a real one
+
+
+==> Function parameters
+* Check function parameters and see if some parameters (especially the
+ones named tmpDir/tmp_dir/target_dir) are redundant now. See
+http://liste.uludag.org.tr/uludag-commits/2007-February/010070.html
+
+
