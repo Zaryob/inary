@@ -49,6 +49,10 @@ def create_delta_package(old_package, new_package):
     tar = archive.ArchiveTar(util.join_path(newpkg_path, ctx.const.install_tar_lzma), 'tarlzma', False, False)
     tar.unpack_dir(newpkg_path)
 
+    # symlinks should be in delta package
+    symlinks = filter(lambda x:os.path.islink(util.join_path(newpkg_path, x.path)), newfiles.list)
+    files_delta = set(files_delta + symlinks)
+
     # Create delta package
     deltaname = "%s-%s-%s%s" % (oldmd.package.name, oldmd.package.release, newmd.package.release, ".delta.pisi")
     
