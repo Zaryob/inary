@@ -105,7 +105,11 @@ def find_delta(oldfiles, newfiles):
     files_old = set(map(lambda x:x.hash, oldfiles.list))
     files_delta = files_new - files_old
 
-    return map(lambda x:hashto_files[x][0], files_delta)
+    deltas = []
+    for hash in files_delta:
+        deltas.extend(hashto_files[hash])
+
+    return deltas
 
 def find_relocations(oldfiles, newfiles):
 
@@ -126,6 +130,7 @@ def find_relocations(oldfiles, newfiles):
         if hash in files_old and files_new[hash][0].path != files_old[hash][0].path:
             # symlinks are not relocated, they already come with the delta package
             if not os.path.islink("/" + files_old[hash][0].path):
-                relocations.append((files_old[hash][0], files_new[hash][0]))
+                for i in range(len(files_new[hash])):
+                    relocations.append((files_old[hash][0], files_new[hash][i]))
 
     return relocations
