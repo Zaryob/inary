@@ -124,6 +124,8 @@ def find_relocations(oldfiles, newfiles):
     relocations = []
     for hash in files_new.keys():
         if hash in files_old and files_new[hash][0].path != files_old[hash][0].path:
-            relocations.append((files_old[hash][0], files_new[hash][0]))
+            # symlinks are not relocated, they already come with the delta package
+            if not os.path.islink("/" + files_old[hash][0].path):
+                relocations.append((files_old[hash][0], files_new[hash][0]))
 
     return relocations
