@@ -99,13 +99,13 @@ def find_delta(oldfiles, newfiles):
 
     hashto_files = {}
     for file in newfiles.list:
-        hashto_files[file.hash] = file
+        files_new.setdefault(file.hash, []).append(file)
 
     files_new = set(map(lambda x:x.hash, newfiles.list))
     files_old = set(map(lambda x:x.hash, oldfiles.list))
     files_delta = files_new - files_old
 
-    return map(lambda x:hashto_files[x], files_delta)
+    return map(lambda x:hashto_files[x][0], files_delta)
 
 def find_relocations(oldfiles, newfiles):
 
