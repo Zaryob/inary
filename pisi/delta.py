@@ -113,10 +113,6 @@ def find_delta(oldfiles, newfiles):
 
 def find_relocations(oldfiles, newfiles):
 
-# FIXME: A minor issue: Hash files may collide in any package (same file in different 
-# places in the same package.. ex. COPYING). Handle this case if check fails while installing. 
-# Because of that we do not use sets here but lists to append those files.
-
     files_new = {}
     for file in newfiles.list:
         files_new.setdefault(file.hash, []).append(file)
