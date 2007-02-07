@@ -79,7 +79,10 @@ def create_delta_package(old_package, new_package):
 
     deltapkg.close()
 
-    os.unlink(util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar_lzma))
+    tmp_file = util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar_lzma)
+    if os.path.exists(tmp_file):
+        os.unlink(tmp_file)
+
     ctx.build_leftover = None
     os.chdir(c)
 
