@@ -34,11 +34,6 @@ def create_delta_package(old_package, new_package):
 
     files_delta = find_delta(oldfiles, newfiles)
 
-    # FIXME: handle only metadata changed cases
-    if not files_delta:
-        ctx.ui.info(_("Nothing has changed between builds, not creating a delta"))
-        return
-
     ctx.ui.info(_("Creating delta PiSi package between %s %s") % (old_package, new_package))
 
     # Unpack new package to temp
@@ -74,15 +69,18 @@ def create_delta_package(old_package, new_package):
     deltapkg.add_to_package(ctx.const.metadata_xml)
     deltapkg.add_to_package(ctx.const.files_xml)
 
-    ctx.build_leftover = util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar_lzma)
+    # only metadata information may change in a package, so no install.tar.lzma added to delta package
+    if files_delta:
+        ctx.build_leftover = util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar_lzma)
 
-    tar = archive.ArchiveTar(util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar_lzma), "tarlzma")
-    for file in files_delta:
-        tar.add_to_archive(file.path)
-    tar.close()
+        tar = archive.ArchiveTar(util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar_lzma), "tarlzma")
+        for file in files_delta:
+            tar.add_to_archive(file.path)
+        tar.close()
 
-    os.chdir(ctx.config.tmp_dir())
-    deltapkg.add_to_package(ctx.const.install_tar_lzma)
+        os.chdir(ctx.config.tmp_dir())
+        deltapkg.add_to_package(ctx.const.install_tar_lzma)
+
     deltapkg.close()
 
     os.unlink(util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar_lzma))
