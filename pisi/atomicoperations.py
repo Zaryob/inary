@@ -300,8 +300,9 @@ class Install(AtomicOperation):
                 if not os.path.exists(destdir):
                     os.makedirs(destdir)
 
-                if os.path.islink(old_path):
-                    os.symlink(os.readlink(old_path), new_path)
+                if os.path.islink(old_path): 
+                    if not os.path.exists(new_path):
+                        os.symlink(os.readlink(old_path), new_path)
                 else:
                     shutil.copy(old_path, new_path)
 
