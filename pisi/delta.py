@@ -44,10 +44,6 @@ def create_delta_package(old_package, new_package):
     tar = archive.ArchiveTar(util.join_path(newpkg_path, ctx.const.install_tar_lzma), 'tarlzma', False, False)
     tar.unpack_dir(newpkg_path)
 
-    # symlinks should be in delta package
-    symlinks = filter(lambda x:os.path.islink(util.join_path(newpkg_path, x.path)), newfiles.list)
-    files_delta = set(files_delta + symlinks)
-
     # Create delta package
     deltaname = "%s-%s-%s%s" % (oldmd.package.name, oldmd.package.release, newmd.package.release, ".delta.pisi")
     
@@ -121,10 +117,9 @@ def find_relocations(oldfiles, newfiles):
 
     relocations = []
     for hash in files_new.keys():
-        if hash in files_old and files_new[hash][0].path != files_old[hash][0].path:
-            # symlinks are not relocated, they already come with the delta package
-            if not os.path.islink("/" + files_old[hash][0].path):
-                for i in range(len(files_new[hash])):
+        if hash in files_old:
+            for i in range(len(files_new[hash])):
+                if files_old[hash][0].path != files_new[hash][i].path:
                     relocations.append((files_old[hash][0], files_new[hash][i]))
 
     return relocations

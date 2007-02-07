@@ -293,13 +293,17 @@ class Install(AtomicOperation):
         # of these files may be relocated to some other directory in the new package. 
         # We handle these cases here.
         def relocate_files():
-
             for old_file, new_file in find_relocations(self.old_files, self.files):
-                destdir = "/" + os.path.dirname(new_file.path)
+                old_path, new_path = ("/" + old_file.path, "/" + new_file.path)
+
+                destdir = os.path.dirname(new_path)
                 if not os.path.exists(destdir):
                     os.makedirs(destdir)
 
-                shutil.copy("/" + old_file.path, "/" + new_file.path)
+                if os.path.islink(old_path):
+                    os.symlink(os.readlink(old_path), new_path)
+                else:
+                    shutil.copy(old_path, new_path)
 
         # remove left over files from the old package.
         def clean_leftovers():
