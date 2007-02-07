@@ -13,7 +13,7 @@ import os
 from sets import Set as set
 
 import gettext
-__trans = gettext.translation('pisi', fallback=True)
+__trans = gettext.translation("pisi", fallback=True)
 _ = __trans.ugettext
 
 import pisi.context as ctx
@@ -45,13 +45,13 @@ def create_delta_package(old_package, new_package):
     newpkg_path = util.join_path(ctx.config.tmp_dir(), newpkg_name)
     newpkg.extract_to(newpkg_path, True)
 
-    tar = archive.ArchiveTar(util.join_path(newpkg_path, ctx.const.install_tar_lzma), 'tarlzma', False, False)
+    tar = archive.ArchiveTar(util.join_path(newpkg_path, ctx.const.install_tar_lzma), "tarlzma", False, False)
     tar.unpack_dir(newpkg_path)
 
     # Create delta package
     deltaname = "%s-%s-%s%s" % (oldmd.package.name, oldmd.package.release, newmd.package.release, ctx.const.delta_package_suffix)
 
-    outdir = ctx.get_option('output_dir')
+    outdir = ctx.get_option("output_dir")
     if outdir:
         deltaname = util.join_path(outdir, deltaname)
 
