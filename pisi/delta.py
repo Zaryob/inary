@@ -117,7 +117,7 @@ def find_relocations(oldfiles, newfiles):
 
     relocations = []
     for hash in files_new.keys():
-        if hash in files_old:
+        if hash and hash in files_old:
             for i in range(len(files_new[hash])):
                 if files_old[hash][0].path != files_new[hash][i].path:
                     relocations.append((files_old[hash][0], files_new[hash][i]))
