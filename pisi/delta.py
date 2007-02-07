@@ -23,6 +23,10 @@ import pisi.archive as archive
 
 def create_delta_package(old_package, new_package):
 
+    if old_package == new_package:
+        ctx.ui.error(_("Cannot create delta for same package!"))
+        return
+
     oldpkg = Package(old_package, "r")
     newpkg = Package(new_package, "r")
 
@@ -46,7 +50,7 @@ def create_delta_package(old_package, new_package):
 
     # Create delta package
     deltaname = "%s-%s-%s%s" % (oldmd.package.name, oldmd.package.release, newmd.package.release, ".delta.pisi")
-    
+
     outdir = ctx.get_option('output_dir')
     if outdir:
         deltaname = util.join_path(outdir, deltaname)
