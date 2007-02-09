@@ -633,6 +633,18 @@ def parse_package_name(package_name):
 
     return (name, version)
 
+def parse_delta_package_name(package_name):
+    """Separate delta package name and release infos
+    
+    example: tasma-5-7.pisi.delta -> (tasma, 5, 7)
+    
+    """
+    name, release = parse_package_name(package_name)
+    release = release[:-len(ctx.const.delta_package_suffix)]
+    releaseFrom, releaseTo = release.split("-")
+    
+    return name, releaseFrom, releaseTo
+
 def filter_latest_packages(package_paths):
     """ For a given pisi package paths list where there may also be multiple versions
         of the same package, filters only the latest versioned ones """

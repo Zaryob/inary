@@ -27,6 +27,13 @@ import pisi.pxml.xmlfile as xmlfile
 import pisi.pxml.autoxml as autoxml
 import pisi.util as util
 
+class Delta:
+    __metaclass__ = autoxml.autoxml
+    
+    t_PackageURI = [ autoxml.String, autoxml.optional]
+    t_PackageSize = [ autoxml.Long, autoxml.optional]
+    a_releaseFrom = [autoxml.String, autoxml.optional]
+
 class Source:
     __metaclass__ = autoxml.autoxml
 
@@ -45,6 +52,7 @@ class Package(specfile.Package):
     t_PackageSize = [ autoxml.Long, autoxml.optional]
     t_PackageHash = [ autoxml.String, autoxml.optional, "SHA1Sum" ]
     t_PackageURI = [ autoxml.String, autoxml.optional]
+    t_DeltaPackages = [ [Delta], autoxml.optional]
     t_PackageFormat = [ autoxml.String, autoxml.optional]
 
     t_Source = [ Source, autoxml.optional]
