@@ -90,13 +90,10 @@ class File:
         return localfile
 
     @staticmethod
-    def download(uri, transfer_dir = None, sha1sum = False,
+    def download(uri, transfer_dir = "/tmp", sha1sum = False,
                  compress = None, sign = None, copylocal = False):
 
         assert isinstance(uri, URI)
-
-        if not transfer_dir:
-            transfer_dir = ctx.config.tmp_dir()
 
         if sha1sum:
             sha1filename = File.download(URI(uri.get_uri() + '.sha1sum'), transfer_dir)
@@ -142,14 +139,12 @@ class File:
         return localfile
 
 
-    def __init__(self, uri, mode, transfer_dir = None,
+    def __init__(self, uri, mode, transfer_dir = "/tmp",
                  sha1sum = False, compress = None, sign = None):
         "it is pointless to open a file without a URI and a mode"
 
-        if transfer_dir:
-            self.transfer_dir = transfer_dir
-        else:
-            self.trasfer_dir = ctx.config.tmp_dir()
+        self.transfer_dir = transfer_dir
+
         self.sha1sum = sha1sum
         self.compress = compress
         self.sign = sign

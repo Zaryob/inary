@@ -310,11 +310,8 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         # generate top-level helper functions
         cls.initializers = inits
-        def initialize(self, uri = None, keepDoc = False, tmpDir = None,
+        def initialize(self, uri = None, keepDoc = False, tmpDir = '/tmp',
                        **args):
-            if not tmpDir:
-                tmpDir = ctx.config.tmp_dir()
-
             if xmlfile_support:
                 if args.has_key('tag'):
                     XmlFile.__init__(self, tag = args['tag'])
@@ -435,13 +432,9 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if errs:
                     errs.append(_("autoxml.parse: String '%s' has errors") % xml)
 
-            def read(self, uri, keepDoc = False, tmpDir = None,
+            def read(self, uri, keepDoc = False, tmpDir = '/tmp',
                      sha1sum = False, compress = None, sign = None, copylocal = False):
                 "read XML file and decode it into a python object"
-                
-                if not tmpDir:
-                    tmpDir = ctx.config.tmp_dir()
-
                 self.readxml(uri, tmpDir, sha1sum=sha1sum, 
                              compress=compress, sign=sign, copylocal=copylocal)
                 errs = []
@@ -460,7 +453,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                     errs.append(_("autoxml.read: File '%s' has errors") % uri)
                     raise Error(*errs)
 
-            def write(self, uri, keepDoc = False, tmpDir = None,
+            def write(self, uri, keepDoc = False, tmpDir = '/tmp',
                       sha1sum = False, compress = None, sign = None):
                 "encode the contents of the python object into an XML file"
                 errs = self.errors()
@@ -468,10 +461,6 @@ class autoxml(oo.autosuper, oo.autoprop):
                     errs.append(_("autoxml.write: object validation has failed"))
                     raise Error(*errs)
                 errs = []
-
-                if not tmpDir:
-                    tmpDir = ctx.config.tmp_dir()
-
                 self.newDocument()
                 self.encode(self.rootNode(), errs)
                 if hasattr(self, 'write_hook'):
