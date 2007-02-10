@@ -58,8 +58,6 @@ html_header = """
 </body></html>
 """
 
-
-
 # default html templates (now obsolete)
 
 def_repo_sizes_html = u"""
@@ -69,28 +67,6 @@ def_repo_sizes_html = u"""
 <table><tbody>
 %(sizes)s
 </table></tbody>
-"""
-
-def_missing_html = u"""
-<html><head>
-    <title>Eksik ikili paket %(name)s</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
-
-</head><body>
-<div id="header-bugzilla">
-</div>
-<div id="packets">
-
-<h1>Eksik ikili paket: %(name)s</h1>
-
-<h3>Bağımlı paketler (derlenmek için):</h3>
-<p>%(revBuildDeps)s</p>
-
-<h3>Bağımlı paketler (çalışmak için):</h3>
-<p>%(revRuntimeDeps)s</p>
-</div>
-</body></html>
 """
 
 
@@ -107,14 +83,6 @@ def svn_uri(path):
     return uri
 
 
-def valuesort(x, y):
-    if x[1] > y[1]:
-        return -1
-    elif x[1] == y[1]:
-        return 0
-    else:
-        return 1
-
 def find_pspecs(folder):
     paks = []
     for root, dirs, files in os.walk(folder):
@@ -124,14 +92,6 @@ def find_pspecs(folder):
         if ".svn" in dirs:
             dirs.remove(".svn")
     return paks
-
-def template_get(tmpl_name):
-    return globals()["def_" + tmpl_name + "_html"]
-
-def template_write(filename, tmpl_name, dict):
-    f = codecs.open(filename, "w", "utf-8")
-    f.write(template_get(tmpl_name) % dict)
-    f.close()
 
 def write_html(filename, title, content):
     f = codecs.open(filename, "w", "utf-8")
@@ -189,7 +149,7 @@ class Histogram:
     
     def get_list(self, max=0):
         items = self.list.items()
-        items.sort(valuesort)
+        items.sort(key=lambda x: x[1], reverse=True)
         if max != 0:
             return items[:max]
         else:
@@ -218,16 +178,6 @@ class Missing:
         self.name = name
         self.revBuildDeps = []
         self.revRuntimeDeps = []
-    
-    def report_html(self):
-        bDeps = map(lambda x: "<a href='./%s.html'>%s</a>" % (x, x), self.revBuildDeps)
-        rDeps = map(lambda x: "<a href='./%s.html'>%s</a>" % (x, x), self.revRuntimeDeps)
-        dict = {
-            "name": self.name,
-            "revBuildDeps": ", ".join(bDeps),
-            "revRuntimeDeps": ", ".join(rDeps)
-        }
-        template_write("paksite/binary/%s.html" % self.name, "missing", dict)
 
 
 class Package:
@@ -531,7 +481,7 @@ class Repository:
             </p></div>
         """ % make_table(self.longpy.get_list(5))
         
-        write_html("paksite/index.html", "Depo İstatistikleri", html)
+        write_html("paksite/index.html", "Genel Bilgiler", html)
         
         titles = (
             "<a href='packagers_by_name.html'>Paketçi</a>",
@@ -600,8 +550,6 @@ if __name__ == "__main__":
         
         repo.report_html()
         for p in packagers.values():
-            p.report_html()
-        for p in missing.values():
             p.report_html()
         for p in packages.values():
             p.report_html()
