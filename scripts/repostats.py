@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005, TUBITAK/UEKAE
+# Copyright (C) 2005-2007, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -29,6 +29,42 @@ import pisi.metadata
 import pisi.files
 from pisi.cli import printu
 
+# Main HTML template
+
+html_header = """
+<html><head>
+    <title>%(title)s</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
+</head><body>
+<div id='header-bugzilla'>
+</div>
+
+<div class='statmenu'>
+<a href='index.html'>Genel Bilgiler</a>
+ | <a href='sources.html'>Kaynak Paketler</a>
+ | <a href='binaries.html'>İkili Paketler</a>
+ | <a href='packagers.html'>Paketçiler</a>
+</div>
+
+<hr>
+
+<h1 align='center'>%(title)s</h1>
+
+<div id='content'>
+%(content)s
+</div>
+
+</body></html>
+"""
+
+
+
+
+
+
+
+
 # default html templates
 
 def_table_html = u"""
@@ -42,47 +78,6 @@ def_repo_sizes_html = u"""
 <table><tbody>
 %(sizes)s
 </table></tbody>
-"""
-
-def_repo_html = u"""
-<html><head>
-    <title>Depo istatistikleri</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
-</head><body>
-<div id="header-bugzilla">
-</div>
-<div id="packets">
-<p>
-Depoda toplam %(nr_source)d
-<a href="./sources.html">kaynak paket</a>, ve bu paketlerden oluşturulacak
-%(nr_packages)d ikili paket bulunmaktadır. Toplam %(nr_patches)d yama mevcuttur.
-</p>
-
-<p>
-%(errors)s
-</p>
-
-<h3>En fazla yamalanmış 5 kaynak paket:</h3><p><table><tbody>
-%(most_patched)s
-</tbody></table></p>
-
-<h3>En uzun actions.py betikli 5 kaynak paket:</h3><p><table><tbody>
-%(longpy)s
-</tbody></table></p>
-
-<h3>Eksik ikili paketler</h3><p><table><tbody>
-%(missing)s
-</tbody></table></p>
-
-%(sizes)s
-
-<h3>Paketçiler:</h3><p><table><tbody>
-%(packagers)s
-</tbody></table></p>
-
-</div>
-</body></html>
 """
 
 def_packager_html = u"""
@@ -240,20 +235,6 @@ def svn_uri(path):
     return uri
 
 
-# FIXME: This check should be in specfile
-valid_filetypes = [
-    "executable",
-    "library",
-    "data",
-    "config",
-    "doc",
-    "man",
-    "info",
-    "localedata",
-    "header",
-    "all"
-]
-
 def valuesort(x, y):
     if x[1] > y[1]:
         return -1
@@ -285,6 +266,27 @@ def template_write(filename, tmpl_name, dict):
     f = codecs.open(filename, "w", "utf-8")
     f.write(template_get(tmpl_name) % dict)
     f.close()
+
+def write_html(filename, title, content):
+    f = codecs.open(filename, "w", "utf-8")
+    dict = {
+        "title": title,
+        "content": content,
+    }
+    f.write(html_header % dict)
+    f.close()
+
+def make_table(elements):
+    def make_row(element):
+        return "<td>%s" % "<td>".join(map(str, element))
+    
+    html = """
+        <table><tbody>
+        <tr>%s
+        </tbody></table>
+    """ % "<tr>".join(map(make_row, elements))
+    
+    return html
 
 def template_table(tmpl_name, list):
     tmpl = template_get(tmpl_name)
@@ -361,11 +363,6 @@ class Package:
             errors.append(_("Duplicate binary packages:\n%s\n%s\n") % (
                 source.name, packages[name].source.name))
             return
-        for p in pakspec.files:
-            if p.fileType not in valid_filetypes:
-                e = _("Unknown file type '%s' in package '%s'") % (
-                    p.fileType, source.name)
-                errors.append(e)
         packages[name] = self
         self.name = name
         self.source = source
@@ -429,22 +426,6 @@ class Source:
         self.uri = svn_uri(path)
         for p in spec.packages:
             Package(self, p)
-        self.checkRelease()
-    
-    def validDate(self, date):
-        # yyyy-mm-dd
-        err = 0
-        if len(date) != 10:
-            err = 1
-        if date[4] != '-' or date[7] != '-':
-            err = 1
-        if err:
-            e = _("Source package '%s' has wrong date format '%s'") % (self.name, date)
-            errors.append(e)
-        # more checks can be added, i.e. valid day month ranges, etc
-    
-    def checkRelease(self):
-        pass
     
     def report_html(self):
         source = self.spec.source
@@ -595,45 +576,46 @@ class Repository:
                     self.processPisi(os.path.join(root, fn))
     
     def report_html(self):
-        miss = map(lambda x: "<tr><td><a href='./binary/%s.html'>%s</a></td></tr>" % (x, x), missing.keys())
-        upeople = []
-        for p in self.people.get_list():
-            upeople.append(("<a href='./packager/%s.html'>%s</a>" % (p[0], p[0]), p[1]))
-        if errors:
-            e = "<br>".join(errors)
-        else:
-            e = ""
-        upatch = []
-        for p in self.mostpatched.get_list(5):
-            upatch.append(("<a href='./source/%s.html'>%s</a>" % (p[0], p[0]), p[1]))
-        ulongpy = []
-        for p in self.longpy.get_list(5):
-            ulongpy.append(("<a href='./source/%s.html'>%s</a>" % (p[0], p[0]), p[1]))
-        if self.total_installed_size:
-            items = self.installed_sizes.items()
-            items.sort(valuesort)
-            elts = "".join(map(lambda x: "<tr><td>%s</td><td>%d</td></tr>" % (x[0], x[1]), items))
-            sizes = template_get("repo_sizes") % { "total": self.total_installed_size, "sizes": elts }
-        else:
-            sizes = ""
-        dict = {
-            "nr_source": self.nr_sources,
-            "nr_packages": self.nr_packages,
-            "nr_patches": self.nr_patches,
-            "most_patched": template_table("table", upatch),
-            "longpy": template_table("table", ulongpy),
-            "packagers": template_table("table", upeople),
-            "missing": "\n".join(miss),
-            "sizes": sizes,
-            "errors": e
-        }
-        template_write("paksite/index.html", "repo", dict)
-        srclist = map(lambda x: "<a href='./source/%s.html'>%s</a>" % (x, x), sources)
-        srclist.sort()
-        dict = {
-            "source_list": "<br>".join(srclist)
-        }
-        template_write("paksite/sources.html", "sources", dict)
+        table = (
+            ("Kaynak paket sayısı", self.nr_sources),
+            ("İkili paket sayısı", self.nr_packages),
+            ("Yama sayısı", self.nr_patches),
+            ("Paketçi sayısı", len(self.people.list)),
+        )
+        html = make_table(table)
+        
+        html += """
+            <div class='statstat'>
+            <h3>En fazla yamalanmış beş kaynak paket:</h3><p>
+            %s
+            </p></div>
+        """ % make_table(self.mostpatched.get_list(5))
+        
+        html += """
+            <div class='statstat'>
+            <h3>En uzun inşa betikli beş kaynak paket:</h3><p>
+            %s
+            </p></div>
+        """ % make_table(self.longpy.get_list(5))
+        
+        write_html("paksite/index.html", "Depo İstatistikleri", html)
+        
+        people = self.people.get_list()
+        people = map(lambda x: ("<a href='./packager/%s.html'>%s</a>" % (x[0], x[0]), x[1]), people)
+        write_html("paksite/packagers.html", "Paketçiler (paket sayısına göre)", make_table(people))
+        
+        people.sort(key=lambda x: x[0])
+        write_html("paksite/packagers_by_name.html", "Paketçiler (isme göre)", make_table(people))
+        
+        srclist = map(lambda x: (x.name, x.spec.getSourceVersion(), x.spec.source.summary), sources.values())
+        srclist.sort(key=lambda x: x[0])
+        html = make_table(srclist)
+        write_html("paksite/sources.html", "Kaynak Paketler", html)
+        
+        binlist = map(lambda x: (x.name, x.source.spec.getSourceVersion(), x.source.spec.source.summary), packages.values())
+        binlist.sort(key=lambda x: x[0])
+        html = make_table(binlist)
+        write_html("paksite/binaries.html", "İkili Paketler", html)
 
 
 # command line driver
@@ -667,20 +649,6 @@ if __name__ == "__main__":
     if len(args) > 1:
         printu(_("Scanning binary packages...\n"))
         repo.scan_bins(args[1])
-    
-    if errors:
-        printu("***\n")
-        printu(_("Encountered %d errors! Fix them immediately!\n") % len(errors))
-        for e in errors:
-            printu(e)
-            printu("\n")
-        printu("\n")
-        printu("***\n")
-    
-    if missing:
-        printu(_("These dependencies are not available in repository:\n"))
-        for m in missing.keys():
-            printu("  %s\n" % m)
     
     if do_web:
         if not os.path.exists("paksite/packager"):
