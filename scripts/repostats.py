@@ -62,10 +62,6 @@ html_header = """
 
 # default html templates (now obsolete)
 
-def_table_html = u"""
-<tr><td>%s</td><td>%s</td></tr>
-"""
-
 def_repo_sizes_html = u"""
 <h3>Boyutlar</h3>
 <p>Toplam kurulu boyut %(total)s</p>
@@ -73,37 +69,6 @@ def_repo_sizes_html = u"""
 <table><tbody>
 %(sizes)s
 </table></tbody>
-"""
-
-def_package_html = u"""
-<html><head>
-    <title>İkili paket %(name)s</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
-
-</head><body>
-<div id="header-bugzilla">
-</div>
-<div id="packets">
-
-<h1>İkili paket: %(name)s</h1>
-<h2>Kaynak versiyon %(version)s, depo sürümü %(release)s</h2>
-
-<h3>Kaynak paket <a href="../source/%(source)s.html">%(source)s</a></h3>
-
-<h3>Derlemek için gerekenler:</h3>
-<p>%(buildDeps)s</p>
-
-<h3>Çalıştırmak için gerekenler:</h3>
-<p>%(runtimeDeps)s</p>
-
-<h3>Bağımlı paketler (derlenmek için):</h3>
-<p>%(revBuildDeps)s</p>
-
-<h3>Bağımlı paketler (çalışmak için):</h3>
-<p>%(revRuntimeDeps)s</p>
-</div>
-</body></html>
 """
 
 def_missing_html = u"""
@@ -203,13 +168,6 @@ def make_url(name, path="./"):
     if not path.endswith("/"):
         path += "/"
     return "<a href='%s%s.html'>%s</a>" % (path, name, name)
-
-def template_table(tmpl_name, list):
-    tmpl = template_get(tmpl_name)
-    data = ""
-    for item in list:
-        data += (tmpl % item)
-    return data
 
 def mangle_email(email):
     return re.sub("@", " [at] ", email)
@@ -315,17 +273,36 @@ class Package:
             (map(lambda x: x.package, self.pakspec.packageDependencies)))
         rbDeps = map(lambda x: "<a href='./%s.html'>%s</a>" % (x, x), self.revBuildDeps)
         rrDeps = map(lambda x: "<a href='./%s.html'>%s</a>" % (x, x), self.revRuntimeDeps)
-        dict = {
-            "name": self.name,
-            "source": source.name,
-            "version": self.source.spec.getSourceVersion(),
-            "release": self.source.spec.getSourceRelease(),
-            "buildDeps": ", ".join(bDeps),
-            "runtimeDeps": ", ".join(rDeps),
-            "revBuildDeps": ", ".join(rbDeps),
-            "revRuntimeDeps": ", ".join(rrDeps)
-        }
-        template_write("paksite/binary/%s.html" % self.name, "package", dict)
+        
+        html = """
+            <h1>İkili paket: %s</h1>
+            <h2>Kaynak versiyon %s, depo sürümü %s</h2>
+            
+            <h3>Kaynak paket: %s</h3>
+            
+            <h3>Derlemek için gerekenler:</h3>
+            <p>%s</p>
+            
+            <h3>Çalıştırmak için gerekenler:</h3>
+            <p>%s</p>
+            
+            <h3>Bağımlı paketler (derlenmek için):</h3>
+            <p>%s</p>
+            
+            <h3>Bağımlı paketler (çalışmak için):</h3>
+            <p>%s</p>
+        """ % (
+            self.name,
+            self.source.spec.getSourceVersion(),
+            self.source.spec.getSourceRelease(),
+            make_url(source.name, "../source/"),
+            ", ".join(bDeps),
+            ", ".join(rDeps),
+            ", ".join(rbDeps),
+            ", ".join(rrDeps),
+        )
+        
+        write_html("paksite/binary/%s.html" % self.name, self.name, html)
 
 
 class Source:
