@@ -100,9 +100,13 @@ class Index(XmlFile):
                 if fn == 'distribution.xml':
                     self.add_distro(os.path.join(root, fn))
 
+        conflict_list = map(str, self.distribution.conflicts)
+
         for pkg in util.filter_latest_packages(packages):
-            ctx.ui.info(_('Adding %s to package index') % pkg)
-            self.add_package(pkg, repo_uri)
+            pkg_name = util.parse_package_name(os.path.basename(pkg))[0]
+            if pkg_name not in conflicts_list:
+                ctx.ui.info(_('Adding %s to package index') % pkg)
+                self.add_package(pkg, repo_uri)
 
     def update_db(self, repo, txn = None):
         # FIXME: updating db takes too much time. So a notify mechanism is used to inform the status
