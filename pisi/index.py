@@ -104,7 +104,7 @@ class Index(XmlFile):
                 if fn == 'distribution.xml':
                     self.add_distro(os.path.join(root, fn))
 
-        conflict_list = map(str, self.distribution.conflicts)
+        conflicts_list = map(str, self.distribution.conflicts)
 
         for pkg in util.filter_latest_packages(packages):
             pkg_name = util.parse_package_name(os.path.basename(pkg))[0]
