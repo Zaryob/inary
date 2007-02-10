@@ -344,14 +344,14 @@ class Missing:
         self.revRuntimeDeps = []
     
     def report_html(self):
-        bDeps = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x), self.revBuildDeps)
-        rDeps = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x), self.revRuntimeDeps)
+        bDeps = map(lambda x: "<a href='./%s.html'>%s</a>" % (x, x), self.revBuildDeps)
+        rDeps = map(lambda x: "<a href='./%s.html'>%s</a>" % (x, x), self.revRuntimeDeps)
         dict = {
             "name": self.name,
             "revBuildDeps": ", ".join(bDeps),
             "revRuntimeDeps": ", ".join(rDeps)
         }
-        template_write("paksite/package-%s.html" % self.name, "missing", dict)
+        template_write("paksite/binary/%s.html" % self.name, "missing", dict)
 
 
 class Package:
@@ -396,12 +396,12 @@ class Package:
     
     def report_html(self):
         source = self.source.spec.source
-        bDeps = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x),
+        bDeps = map(lambda x: "<a href='./%s.html'>%s</a>" % (x, x),
             (map(lambda x: x.package, source.buildDependencies)))
-        rDeps = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x),
+        rDeps = map(lambda x: "<a href='./%s.html'>%s</a>" % (x, x),
             (map(lambda x: x.package, self.pakspec.packageDependencies)))
-        rbDeps = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x), self.revBuildDeps)
-        rrDeps = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x), self.revRuntimeDeps)
+        rbDeps = map(lambda x: "<a href='./%s.html'>%s</a>" % (x, x), self.revBuildDeps)
+        rrDeps = map(lambda x: "<a href='./%s.html'>%s</a>" % (x, x), self.revRuntimeDeps)
         dict = {
             "name": self.name,
             "source": source.name,
@@ -412,7 +412,7 @@ class Package:
             "revBuildDeps": ", ".join(rbDeps),
             "revRuntimeDeps": ", ".join(rrDeps)
         }
-        template_write("paksite/package-%s.html" % self.name, "package", dict)
+        template_write("paksite/binary/%s.html" % self.name, "package", dict)
 
 
 class Source:
@@ -448,7 +448,7 @@ class Source:
     
     def report_html(self):
         source = self.spec.source
-        paks = map(lambda x: "<a href='package-%s.html'>%s</a>" % (x, x),
+        paks = map(lambda x: "<a href='../binary/%s.html'>%s</a>" % (x, x),
             (map(lambda x: x.name, self.spec.packages)))
         histdata = map(lambda x: (x.release, x.date, x.name, x.name, x.comment), self.spec.history)
         ptch = map(lambda x: "<a href='%s/files/%s'>%s</a>" % (self.uri,
@@ -465,7 +465,7 @@ class Source:
             "patches": "<br>".join(ptch),
             "uri": self.uri
         }
-        template_write("paksite/source-%s.html" % self.name, "source", dict)
+        template_write("paksite/source/%s.html" % self.name, "source", dict)
 
 
 class Packager:
@@ -502,9 +502,9 @@ class Packager:
                 Packager(spec, update)
     
     def report_html(self):
-        srcs = map(lambda x: "<a href='./source-%s.html'>%s</a>" % (x, x), self.sources)
+        srcs = map(lambda x: "<a href='../source/%s.html'>%s</a>" % (x, x), self.sources)
         srcs.sort()
-        upds = map(lambda x: "<b><a href='./source-%s.html'>%s</a> (%s)</b><br>%s<br>" % (
+        upds = map(lambda x: "<b><a href='../source/%s.html'>%s</a> (%s)</b><br>%s<br>" % (
             x[0], x[0], x[1], x[2]), self.updates)
         dict = {
             "name": self.name,
@@ -512,7 +512,7 @@ class Packager:
             "sources": "<br>".join(srcs),
             "updates": " ".join(upds)
         }
-        template_write("paksite/%s.html" % self.name, "packager", dict)
+        template_write("paksite/packager/%s.html" % self.name, "packager", dict)
 
 
 class Repository:
@@ -595,20 +595,20 @@ class Repository:
                     self.processPisi(os.path.join(root, fn))
     
     def report_html(self):
-        miss = map(lambda x: "<tr><td><a href='./package-%s.html'>%s</a></td></tr>" % (x, x), missing.keys())
+        miss = map(lambda x: "<tr><td><a href='./binary/%s.html'>%s</a></td></tr>" % (x, x), missing.keys())
         upeople = []
         for p in self.people.get_list():
-            upeople.append(("<a href='./%s.html'>%s</a>" % (p[0], p[0]), p[1]))
+            upeople.append(("<a href='./packager/%s.html'>%s</a>" % (p[0], p[0]), p[1]))
         if errors:
             e = "<br>".join(errors)
         else:
             e = ""
         upatch = []
         for p in self.mostpatched.get_list(5):
-            upatch.append(("<a href='./source-%s.html'>%s</a>" % (p[0], p[0]), p[1]))
+            upatch.append(("<a href='./source/%s.html'>%s</a>" % (p[0], p[0]), p[1]))
         ulongpy = []
         for p in self.longpy.get_list(5):
-            ulongpy.append(("<a href='./source-%s.html'>%s</a>" % (p[0], p[0]), p[1]))
+            ulongpy.append(("<a href='./source/%s.html'>%s</a>" % (p[0], p[0]), p[1]))
         if self.total_installed_size:
             items = self.installed_sizes.items()
             items.sort(valuesort)
@@ -628,7 +628,7 @@ class Repository:
             "errors": e
         }
         template_write("paksite/index.html", "repo", dict)
-        srclist = map(lambda x: "<a href='./source-%s.html'>%s</a>" % (x, x), sources)
+        srclist = map(lambda x: "<a href='./source/%s.html'>%s</a>" % (x, x), sources)
         srclist.sort()
         dict = {
             "source_list": "<br>".join(srclist)
@@ -683,10 +683,13 @@ if __name__ == "__main__":
             printu("  %s\n" % m)
     
     if do_web:
-        try:
-            os.mkdir("paksite")
-        except:
-            pass
+        if not os.path.exists("paksite/packager"):
+            os.makedirs("paksite/packager")
+        if not os.path.exists("paksite/binary"):
+            os.makedirs("paksite/binary")
+        if not os.path.exists("paksite/source"):
+            os.makedirs("paksite/source")
+        
         repo.report_html()
         for p in packagers.values():
             p.report_html()
