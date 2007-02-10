@@ -276,15 +276,21 @@ def write_html(filename, title, content):
     f.write(html_header % dict)
     f.close()
 
-def make_table(elements):
+def make_table(elements, titles=None):
     def make_row(element):
         return "<td>%s" % "<td>".join(map(str, element))
     
+    title_html = ""
+    if titles:
+        title_html = """
+            <thead><tr><th>%s</tr></thead>
+        """ % "<th>".join(titles)
+    
     html = """
-        <table><tbody>
+        <table>%s<tbody>
         <tr>%s
         </tbody></table>
-    """ % "<tr>".join(map(make_row, elements))
+    """ % (title_html, "<tr>".join(map(make_row, elements)))
     
     return html
 
@@ -600,21 +606,28 @@ class Repository:
         
         write_html("paksite/index.html", "Depo İstatistikleri", html)
         
+        titles = (
+            "<a href='packagers_by_name.html'>Paketçi</a>",
+            "<a href='packagers.html'>Paket sayısı</a>"
+        )
+        
         people = self.people.get_list()
         people = map(lambda x: ("<a href='./packager/%s.html'>%s</a>" % (x[0], x[0]), x[1]), people)
-        write_html("paksite/packagers.html", "Paketçiler (paket sayısına göre)", make_table(people))
+        write_html("paksite/packagers.html", "Paketçiler (paket sayısına göre)", make_table(people, titles))
         
         people.sort(key=lambda x: x[0])
-        write_html("paksite/packagers_by_name.html", "Paketçiler (isme göre)", make_table(people))
+        write_html("paksite/packagers_by_name.html", "Paketçiler (isme göre)", make_table(people, titles))
+        
+        titles = "Paket adı", "Versiyon", "Açıklama"
         
         srclist = map(lambda x: (x.name, x.spec.getSourceVersion(), x.spec.source.summary), sources.values())
         srclist.sort(key=lambda x: x[0])
-        html = make_table(srclist)
+        html = make_table(srclist, titles)
         write_html("paksite/sources.html", "Kaynak Paketler", html)
         
         binlist = map(lambda x: (x.name, x.source.spec.getSourceVersion(), x.source.spec.source.summary), packages.values())
         binlist.sort(key=lambda x: x[0])
-        html = make_table(binlist)
+        html = make_table(binlist, titles)
         write_html("paksite/binaries.html", "İkili Paketler", html)
 
 
