@@ -347,7 +347,7 @@ class Source:
         source = self.spec.source
         paks = map(lambda x: "<a href='../binary/%s.html'>%s</a>" % (x, x),
             (map(lambda x: x.name, self.spec.packages)))
-        histdata = map(lambda x: (x.release, x.date, x.version, x.name, x.comment), self.spec.history)
+        histdata = map(lambda x: (x.release, x.date, x.version, make_url(x.name, "../packager/"), x.comment), self.spec.history)
         ptch = map(lambda x: "<a href='%s/files/%s'>%s</a>" % (self.uri,
             x.filename, x.filename), source.patches)
         
