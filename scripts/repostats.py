@@ -60,12 +60,7 @@ html_header = """
 
 
 
-
-
-
-
-
-# default html templates
+# default html templates (now obsolete)
 
 def_table_html = u"""
 <tr><td>%s</td><td>%s</td></tr>
@@ -107,73 +102,6 @@ def_package_html = u"""
 
 <h3>Bağımlı paketler (çalışmak için):</h3>
 <p>%(revRuntimeDeps)s</p>
-</div>
-</body></html>
-"""
-
-def_history_html= u"""
-<h5>Sürüm %s</h5><p>
-Tarih: %s<br>
-Yapan: <a href="../packager/%s.html">%s</a><br>
-Açıklama: %s
-</p>
-"""
-
-def_source_html = u"""
-<html><head>
-    <title>Kaynak paket %(name)s</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
-
-</head><body>
-<div id="header-bugzilla">
-</div>
-<div id="packets">
-
-<h1>Kaynak paket: %(name)s</h1>
-<h2>Kaynak versiyon %(version)s, depo sürümü %(release)s</h2>
-<h3><a href='%(homepage)s'>%(homepage)s</a></h3>
-
-<h3>Açıklama</h3>
-<p>%(summary)s</p>
-
-<h3>Lisanslar:</h3>
-<p>%(license)s</p>
-
-<h3>İşlemler:</h3>
-<p><a href="%(uri)s">Paket dosyalarına bak</a></p>
-<p><a href="http://bugs.uludag.org.tr/buglist.cgi?product=Paketler&component=%(name)s&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">
-Hata kayıtlarına bak</a></p>
-
-<h3>Bu kaynaktan derlenen ikili paketler:</h3>
-<p>%(packages)s</p>
-
-<h3>Tarihçe</h3>
-%(history)s
-
-<h3>Yamalar</h3>
-%(patches)s
-</div>
-</body></html>
-"""
-
-def_sources_html = u"""
-<html><head>
-    <title>Kaynak paketler listesi</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
-
-</head><body>
-<div id="header-bugzilla">
-</div>
-<div id="packets">
-
-<h1>Kaynak paketler listesi</h1>
-<hr>
-
-<p>
-%(source_list)s
-</p>
 </div>
 </body></html>
 """
@@ -233,13 +161,7 @@ def find_pspecs(folder):
     return paks
 
 def template_get(tmpl_name):
-    try:
-        f = codecs.open(tmpl_name + ".html", "r", "utf-8")
-        data = f.read()
-        f.close()
-        return data
-    except:
-        return globals()["def_" + tmpl_name + "_html"]
+    return globals()["def_" + tmpl_name + "_html"]
 
 def template_write(filename, tmpl_name, dict):
     f = codecs.open(filename, "w", "utf-8")
@@ -428,19 +350,52 @@ class Source:
         histdata = map(lambda x: (x.release, x.date, x.name, x.name, x.comment), self.spec.history)
         ptch = map(lambda x: "<a href='%s/files/%s'>%s</a>" % (self.uri,
             x.filename, x.filename), source.patches)
-        dict = {
-            "name": self.name,
-            "homepage": source.homepage,
-            "license": ", ".join(source.license),
-            "version": self.spec.getSourceVersion(),
-            "release": self.spec.getSourceRelease(),
-            "history": template_table("history", histdata),
-            "packages": "<br>".join(paks),
-            "summary": source.summary,
-            "patches": "<br>".join(ptch),
-            "uri": self.uri
-        }
-        template_write("paksite/source/%s.html" % self.name, "source", dict)
+        
+        history = """
+            <h5>Sürüm %s</h5><p>
+            Tarih: %s<br>
+            Yapan: <a href="../packager/%s.html">%s</a><br>
+            Açıklama: %s
+            </p>
+        """
+        hist = map(lambda x: history % x, histdata)
+        
+        html = """
+            <h1>Kaynak paket: %s</h1>
+            <h2>Kaynak versiyon %s, depo sürümü %s</h2>
+            <h3><a href='%s'>%s</a></h3>
+            <h3>Açıklama</h3>
+            <p>%s</p>
+            <h3>Lisanslar:</h3>
+            <p>%s</p>
+            <h3>İşlemler:</h3>
+            <p><a href="%s">Paket dosyalarına bak</a></p>
+            <p><a href="http://bugs.uludag.org.tr/buglist.cgi?product=Paketler&component=%s&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Hata kayıtlarına bak</a></p>
+            
+            <h3>Bu kaynaktan derlenen ikili paketler:</h3>
+            <p>%s</p>
+            
+            <h3>Tarihçe</h3>
+            %s
+            
+            <h3>Yamalar</h3>
+            %s
+        """ % (
+            self.name,
+            self.spec.getSourceVersion(),
+            self.spec.getSourceRelease(),
+            source.homepage,
+            source.homepage,
+            source.summary,
+            ", ".join(source.license),
+            self.uri,
+            self.name,
+            "<br>".join(paks),
+            "".join(hist),
+            "<br>".join(ptch),
+        )
+        
+        write_html("paksite/source/%s.html" % self.name, self.name, html)
 
 
 class Packager:
