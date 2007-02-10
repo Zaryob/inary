@@ -347,18 +347,12 @@ class Source:
         source = self.spec.source
         paks = map(lambda x: "<a href='../binary/%s.html'>%s</a>" % (x, x),
             (map(lambda x: x.name, self.spec.packages)))
-        histdata = map(lambda x: (x.release, x.date, x.name, x.name, x.comment), self.spec.history)
+        histdata = map(lambda x: (x.release, x.date, x.version, x.name, x.comment), self.spec.history)
         ptch = map(lambda x: "<a href='%s/files/%s'>%s</a>" % (self.uri,
             x.filename, x.filename), source.patches)
         
-        history = """
-            <h5>Sürüm %s</h5><p>
-            Tarih: %s<br>
-            Yapan: <a href="../packager/%s.html">%s</a><br>
-            Açıklama: %s
-            </p>
-        """
-        hist = map(lambda x: history % x, histdata)
+        titles = "Sürüm", "Sürüm Tarihi", "Versiyon", "Güncelleyen", "Açıklama"
+        hist = make_table(histdata, titles)
         
         html = """
             <h1>Kaynak paket: %s</h1>
