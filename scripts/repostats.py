@@ -120,7 +120,7 @@ def_package_html = u"""
 <h1>İkili paket: %(name)s</h1>
 <h2>Kaynak versiyon %(version)s, depo sürümü %(release)s</h2>
 
-<h3>Kaynak paket <a href="./source-%(source)s.html">%(source)s</a></h3>
+<h3>Kaynak paket <a href="../source/%(source)s.html">%(source)s</a></h3>
 
 <h3>Derlemek için gerekenler:</h3>
 <p>%(buildDeps)s</p>
@@ -140,7 +140,7 @@ def_package_html = u"""
 def_history_html= u"""
 <h5>Sürüm %s</h5><p>
 Tarih: %s<br>
-Yapan: <a href="./%s.html">%s</a><br>
+Yapan: <a href="../packager/%s.html">%s</a><br>
 Açıklama: %s
 </p>
 """
