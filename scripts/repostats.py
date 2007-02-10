@@ -511,14 +511,14 @@ class Repository:
             <h3>En fazla yamalanmış beş kaynak paket:</h3><p>
             %s
             </p></div>
-        """ % make_table(self.mostpatched.get_list(5))
+        """ % make_table(map(lambda x: (make_url(x[0], "./source/"), x[1]), self.mostpatched.get_list(5)))
         
         html += """
             <div class='statstat'>
             <h3>En uzun inşa betikli beş kaynak paket:</h3><p>
             %s
             </p></div>
-        """ % make_table(self.longpy.get_list(5))
+        """ % make_table(map(lambda x: (make_url(x[0], "./source/"), x[1]), self.longpy.get_list(5)))
         
         write_html("paksite/index.html", "Genel Bilgiler", html)
         
