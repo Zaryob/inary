@@ -121,10 +121,12 @@ Categories=Application;Game;ArcadeGame
 '''
 
 temp_service = '''serviceType = "local"
-serviceDesc = "%(package_cap)s"
-serviceDefault = "off"
-
 from comar.service import *
+
+serviceDefault = "off"
+serviceType = "local"
+serviceDesc = _({"en": "%(package_cap)s",
+                 "tr": "%(package_cap)s"})
 
 def start():
     if 0 == run('/sbin/start-stop-daemon --quiet --start --exec /usr/bin/%(package)s --pidfile /var/run/%(package)s.pid'):
