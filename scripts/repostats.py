@@ -41,10 +41,10 @@ html_header = """
 </div>
 
 <div class='statmenu'>
-<a href='index.html'>Genel Bilgiler</a>
- | <a href='sources.html'>Kaynak Paketler</a>
- | <a href='binaries.html'>İkili Paketler</a>
- | <a href='packagers.html'>Paketçiler</a>
+<a href='%(root)sindex.html'>Genel Bilgiler</a>
+ | <a href='%(root)ssources.html'>Kaynak Paketler</a>
+ | <a href='%(root)sbinaries.html'>İkili Paketler</a>
+ | <a href='%(root)spackagers.html'>Paketçiler</a>
 </div>
 
 <hr>
@@ -78,27 +78,6 @@ def_repo_sizes_html = u"""
 <table><tbody>
 %(sizes)s
 </table></tbody>
-"""
-
-def_packager_html = u"""
-<html><head>
-    <title>Paketçi %(name)s</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
-</head><body>
-<div id="header-bugzilla">
-</div>
-<div id="packets">
-
-<h1>%(name)s &lt;%(email)s&gt;</h1>
-
-<h3>Paketler:</h3>
-<p>%(sources)s</p>
-
-<h3>Güncellemeler:</h3>
-<p>%(updates)s</p>
-</div>
-</body></html>
 """
 
 def_package_html = u"""
@@ -269,9 +248,13 @@ def template_write(filename, tmpl_name, dict):
 
 def write_html(filename, title, content):
     f = codecs.open(filename, "w", "utf-8")
+    root = "./"
+    if len(filename.split("/")) > 2:
+        root = "../"
     dict = {
         "title": title,
         "content": content,
+        "root": root,
     }
     f.write(html_header % dict)
     f.close()
@@ -293,6 +276,11 @@ def make_table(elements, titles=None):
     """ % (title_html, "<tr>".join(map(make_row, elements)))
     
     return html
+
+def make_url(name, path="./"):
+    if not path.endswith("/"):
+        path += "/"
+    return "<a href='%s%s.html'>%s</a>" % (path, name, name)
 
 def template_table(tmpl_name, list):
     tmpl = template_get(tmpl_name)
@@ -489,17 +477,30 @@ class Packager:
                 Packager(spec, update)
     
     def report_html(self):
-        srcs = map(lambda x: "<a href='../source/%s.html'>%s</a>" % (x, x), self.sources)
+        srcs = map(lambda x: ("<a href='../source/%s.html'>%s</a>" % (x, x), ), self.sources)
         srcs.sort()
-        upds = map(lambda x: "<b><a href='../source/%s.html'>%s</a> (%s)</b><br>%s<br>" % (
-            x[0], x[0], x[1], x[2]), self.updates)
-        dict = {
-            "name": self.name,
-            "email": mangle_email(self.email),
-            "sources": "<br>".join(srcs),
-            "updates": " ".join(upds)
-        }
-        template_write("paksite/packager/%s.html" % self.name, "packager", dict)
+        upds = map(lambda x: (u"<b><a href='../source/%s.html'>%s</a> (%s)</b><br>%s<br>" % (
+            x[0], x[0], x[1], x[2]), ), self.updates)
+        
+        html = """
+            <p>Paketçi: %s (%s)</p>
+        """ % (self.name, mangle_email(self.email))
+        
+        html += """
+            <div class='statstat'>
+            <h3>Sahip olduğu paketler:</h3><p>
+            %s
+            </p></div>
+        """ % make_table(srcs)
+        
+        html += """
+            <div class='statstat'>
+            <h3>Yaptığı güncellemeler:</h3><p>
+            %s
+            </p></div>
+        """ % make_table(upds)
+        
+        write_html("paksite/packager/%s.html" % self.name, self.name, html)
 
 
 class Repository:
@@ -620,12 +621,12 @@ class Repository:
         
         titles = "Paket adı", "Versiyon", "Açıklama"
         
-        srclist = map(lambda x: (x.name, x.spec.getSourceVersion(), x.spec.source.summary), sources.values())
+        srclist = map(lambda x: (make_url(x.name, "source/"), x.spec.getSourceVersion(), x.spec.source.summary), sources.values())
         srclist.sort(key=lambda x: x[0])
         html = make_table(srclist, titles)
         write_html("paksite/sources.html", "Kaynak Paketler", html)
         
-        binlist = map(lambda x: (x.name, x.source.spec.getSourceVersion(), x.source.spec.source.summary), packages.values())
+        binlist = map(lambda x: (make_url(x.name, "binary/"), x.source.spec.getSourceVersion(), x.source.spec.source.summary), packages.values())
         binlist.sort(key=lambda x: x[0])
         html = make_table(binlist, titles)
         write_html("paksite/binaries.html", "İkili Paketler", html)
