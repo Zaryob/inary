@@ -341,7 +341,7 @@ class Source:
             <p>%s</p>
             <h3>İşlemler:</h3>
             <p><a href="%s">Paket dosyalarına bak</a></p>
-            <p><a href="http://bugs.uludag.org.tr/buglist.cgi?product=Paketler&component=%s&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Hata kayıtlarına bak</a></p>
+            <p><a href="http://bugs.pardus.org.tr/buglist.cgi?product=Paketler&component=%s&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Hata kayıtlarına bak</a></p>
             
             <h3>Bu kaynaktan derlenen ikili paketler:</h3>
             <p>%s</p>
