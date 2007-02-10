@@ -123,8 +123,9 @@ Categories=Application;Game;ArcadeGame
 temp_service = '''serviceType = "local"
 from comar.service import *
 
-serviceDefault = "off"
 serviceType = "local"
+serviceDefault = "off"
+
 serviceDesc = _({"en": "%(package_cap)s",
                  "tr": "%(package_cap)s"})
 
