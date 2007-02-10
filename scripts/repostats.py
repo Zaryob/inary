@@ -35,27 +35,66 @@ html_header = """
 <html><head>
     <title>%(title)s</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
+    <link href="%(root)sstil.css" rel="stylesheet" type="text/css">
 </head><body>
 <div id='header-bugzilla'>
 </div>
 
-<div class='statmenu'>
+<div class='menu'>
 <a href='%(root)sindex.html'>Genel Bilgiler</a>
  | <a href='%(root)ssources.html'>Kaynak Paketler</a>
  | <a href='%(root)sbinaries.html'>İkili Paketler</a>
  | <a href='%(root)spackagers.html'>Paketçiler</a>
 </div>
 
-<hr>
-
 <h1 align='center'>%(title)s</h1>
 
-<div id='content'>
+<div class='content'>
 %(content)s
 </div>
 
 </body></html>
+"""
+
+css_template = """
+body {
+    margin-left:0;
+    margin-top:0;
+    margin-right:0;
+    background-image:url('http://www.pardus.org.tr/styles/images/HeadTile.png');
+    background-repeat:repeat-x;
+    background-color: #FFF;
+}
+
+#header-bugzilla {
+    background-image:url('http://www.pardus.org.tr/styles/images/HeadLogo.png');
+    background-repeat:no-repeat;
+    background-position: 0px 0px;
+    height:119px;
+    padding-bottom:5px;
+}
+
+a {
+    color: #F55400;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #444;
+    background-color:#EEE;
+}
+
+.menu {
+    padding-left: 1em;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #CCC;
+    border-top: 1px solid #CCC;
+}
+
+.content {
+    margin: 0.5em;
+}
 """
 
 # default html templates (now obsolete)
@@ -547,6 +586,8 @@ if __name__ == "__main__":
             os.makedirs("paksite/binary")
         if not os.path.exists("paksite/source"):
             os.makedirs("paksite/source")
+        
+        file("paksite/stil.css", "w").write(css_template)
         
         repo.report_html()
         for p in packagers.values():
