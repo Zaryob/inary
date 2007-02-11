@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005, TUBITAK/UEKAE
+# Copyright (C) 2005-2007, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -29,11 +29,75 @@ import pisi.metadata
 import pisi.files
 from pisi.cli import printu
 
-# default html templates
+# Main HTML template
 
-def_table_html = u"""
-<tr><td>%s</td><td>%s</td></tr>
+html_header = """
+<html><head>
+    <title>%(title)s</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="%(root)sstil.css" rel="stylesheet" type="text/css">
+</head><body>
+<div id='header-bugzilla'>
+</div>
+
+<div class='menu'>
+<a href='%(root)sindex.html'>Genel Bilgiler</a>
+ | <a href='%(root)ssources.html'>Kaynak Paketler</a>
+ | <a href='%(root)sbinaries.html'>İkili Paketler</a>
+ | <a href='%(root)spackagers.html'>Paketçiler</a>
+</div>
+
+<h1 align='center'>%(title)s</h1>
+
+<div class='content'>
+%(content)s
+</div>
+
+</body></html>
 """
+
+css_template = """
+body {
+    margin-left:0;
+    margin-top:0;
+    margin-right:0;
+    background-image:url('http://www.pardus.org.tr/styles/images/HeadTile.png');
+    background-repeat:repeat-x;
+    background-color: #FFF;
+}
+
+#header-bugzilla {
+    background-image:url('http://www.pardus.org.tr/styles/images/HeadLogo.png');
+    background-repeat:no-repeat;
+    background-position: 0px 0px;
+    height:119px;
+    padding-bottom:5px;
+}
+
+a {
+    color: #F55400;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #444;
+    background-color:#EEE;
+}
+
+.menu {
+    padding-left: 1em;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #CCC;
+    border-top: 1px solid #CCC;
+}
+
+.content {
+    margin: 0.5em;
+}
+"""
+
+# default html templates (now obsolete)
 
 def_repo_sizes_html = u"""
 <h3>Boyutlar</h3>
@@ -42,188 +106,6 @@ def_repo_sizes_html = u"""
 <table><tbody>
 %(sizes)s
 </table></tbody>
-"""
-
-def_repo_html = u"""
-<html><head>
-    <title>Depo istatistikleri</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
-</head><body>
-<div id="header-bugzilla">
-</div>
-<div id="packets">
-<p>
-Depoda toplam %(nr_source)d
-<a href="./sources.html">kaynak paket</a>, ve bu paketlerden oluşturulacak
-%(nr_packages)d ikili paket bulunmaktadır. Toplam %(nr_patches)d yama mevcuttur.
-</p>
-
-<p>
-%(errors)s
-</p>
-
-<h3>En fazla yamalanmış 5 kaynak paket:</h3><p><table><tbody>
-%(most_patched)s
-</tbody></table></p>
-
-<h3>En uzun actions.py betikli 5 kaynak paket:</h3><p><table><tbody>
-%(longpy)s
-</tbody></table></p>
-
-<h3>Eksik ikili paketler</h3><p><table><tbody>
-%(missing)s
-</tbody></table></p>
-
-%(sizes)s
-
-<h3>Paketçiler:</h3><p><table><tbody>
-%(packagers)s
-</tbody></table></p>
-
-</div>
-</body></html>
-"""
-
-def_packager_html = u"""
-<html><head>
-    <title>Paketçi %(name)s</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
-</head><body>
-<div id="header-bugzilla">
-</div>
-<div id="packets">
-
-<h1>%(name)s &lt;%(email)s&gt;</h1>
-
-<h3>Paketler:</h3>
-<p>%(sources)s</p>
-
-<h3>Güncellemeler:</h3>
-<p>%(updates)s</p>
-</div>
-</body></html>
-"""
-
-def_package_html = u"""
-<html><head>
-    <title>İkili paket %(name)s</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
-
-</head><body>
-<div id="header-bugzilla">
-</div>
-<div id="packets">
-
-<h1>İkili paket: %(name)s</h1>
-<h2>Kaynak versiyon %(version)s, depo sürümü %(release)s</h2>
-
-<h3>Kaynak paket <a href="../source/%(source)s.html">%(source)s</a></h3>
-
-<h3>Derlemek için gerekenler:</h3>
-<p>%(buildDeps)s</p>
-
-<h3>Çalıştırmak için gerekenler:</h3>
-<p>%(runtimeDeps)s</p>
-
-<h3>Bağımlı paketler (derlenmek için):</h3>
-<p>%(revBuildDeps)s</p>
-
-<h3>Bağımlı paketler (çalışmak için):</h3>
-<p>%(revRuntimeDeps)s</p>
-</div>
-</body></html>
-"""
-
-def_history_html= u"""
-<h5>Sürüm %s</h5><p>
-Tarih: %s<br>
-Yapan: <a href="../packager/%s.html">%s</a><br>
-Açıklama: %s
-</p>
-"""
-
-def_source_html = u"""
-<html><head>
-    <title>Kaynak paket %(name)s</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
-
-</head><body>
-<div id="header-bugzilla">
-</div>
-<div id="packets">
-
-<h1>Kaynak paket: %(name)s</h1>
-<h2>Kaynak versiyon %(version)s, depo sürümü %(release)s</h2>
-<h3><a href='%(homepage)s'>%(homepage)s</a></h3>
-
-<h3>Açıklama</h3>
-<p>%(summary)s</p>
-
-<h3>Lisanslar:</h3>
-<p>%(license)s</p>
-
-<h3>İşlemler:</h3>
-<p><a href="%(uri)s">Paket dosyalarına bak</a></p>
-<p><a href="http://bugs.uludag.org.tr/buglist.cgi?product=Paketler&component=%(name)s&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">
-Hata kayıtlarına bak</a></p>
-
-<h3>Bu kaynaktan derlenen ikili paketler:</h3>
-<p>%(packages)s</p>
-
-<h3>Tarihçe</h3>
-%(history)s
-
-<h3>Yamalar</h3>
-%(patches)s
-</div>
-</body></html>
-"""
-
-def_sources_html = u"""
-<html><head>
-    <title>Kaynak paketler listesi</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
-
-</head><body>
-<div id="header-bugzilla">
-</div>
-<div id="packets">
-
-<h1>Kaynak paketler listesi</h1>
-<hr>
-
-<p>
-%(source_list)s
-</p>
-</div>
-</body></html>
-"""
-
-def_missing_html = u"""
-<html><head>
-    <title>Eksik ikili paket %(name)s</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="http://www.pardus.org.tr/styles/stil.css" rel="stylesheet" type="text/css">
-
-</head><body>
-<div id="header-bugzilla">
-</div>
-<div id="packets">
-
-<h1>Eksik ikili paket: %(name)s</h1>
-
-<h3>Bağımlı paketler (derlenmek için):</h3>
-<p>%(revBuildDeps)s</p>
-
-<h3>Bağımlı paketler (çalışmak için):</h3>
-<p>%(revRuntimeDeps)s</p>
-</div>
-</body></html>
 """
 
 
@@ -240,28 +122,6 @@ def svn_uri(path):
     return uri
 
 
-# FIXME: This check should be in specfile
-valid_filetypes = [
-    "executable",
-    "library",
-    "data",
-    "config",
-    "doc",
-    "man",
-    "info",
-    "localedata",
-    "header",
-    "all"
-]
-
-def valuesort(x, y):
-    if x[1] > y[1]:
-        return -1
-    elif x[1] == y[1]:
-        return 0
-    else:
-        return 1
-
 def find_pspecs(folder):
     paks = []
     for root, dirs, files in os.walk(folder):
@@ -272,26 +132,41 @@ def find_pspecs(folder):
             dirs.remove(".svn")
     return paks
 
-def template_get(tmpl_name):
-    try:
-        f = codecs.open(tmpl_name + ".html", "r", "utf-8")
-        data = f.read()
-        f.close()
-        return data
-    except:
-        return globals()["def_" + tmpl_name + "_html"]
-
-def template_write(filename, tmpl_name, dict):
+def write_html(filename, title, content):
     f = codecs.open(filename, "w", "utf-8")
-    f.write(template_get(tmpl_name) % dict)
+    root = "./"
+    if len(filename.split("/")) > 2:
+        root = "../"
+    dict = {
+        "title": title,
+        "content": content,
+        "root": root,
+    }
+    f.write(html_header % dict)
     f.close()
 
-def template_table(tmpl_name, list):
-    tmpl = template_get(tmpl_name)
-    data = ""
-    for item in list:
-        data += (tmpl % item)
-    return data
+def make_table(elements, titles=None):
+    def make_row(element):
+        return "<td>%s" % "<td>".join(map(str, element))
+    
+    title_html = ""
+    if titles:
+        title_html = """
+            <thead><tr><th>%s</tr></thead>
+        """ % "<th>".join(titles)
+    
+    html = """
+        <table>%s<tbody>
+        <tr>%s
+        </tbody></table>
+    """ % (title_html, "<tr>".join(map(make_row, elements)))
+    
+    return html
+
+def make_url(name, path="./"):
+    if not path.endswith("/"):
+        path += "/"
+    return "<a href='%s%s.html'>%s</a>" % (path, name, name)
 
 def mangle_email(email):
     return re.sub("@", " [at] ", email)
@@ -313,7 +188,7 @@ class Histogram:
     
     def get_list(self, max=0):
         items = self.list.items()
-        items.sort(valuesort)
+        items.sort(key=lambda x: x[1], reverse=True)
         if max != 0:
             return items[:max]
         else:
@@ -342,16 +217,6 @@ class Missing:
         self.name = name
         self.revBuildDeps = []
         self.revRuntimeDeps = []
-    
-    def report_html(self):
-        bDeps = map(lambda x: "<a href='./%s.html'>%s</a>" % (x, x), self.revBuildDeps)
-        rDeps = map(lambda x: "<a href='./%s.html'>%s</a>" % (x, x), self.revRuntimeDeps)
-        dict = {
-            "name": self.name,
-            "revBuildDeps": ", ".join(bDeps),
-            "revRuntimeDeps": ", ".join(rDeps)
-        }
-        template_write("paksite/binary/%s.html" % self.name, "missing", dict)
 
 
 class Package:
@@ -361,11 +226,6 @@ class Package:
             errors.append(_("Duplicate binary packages:\n%s\n%s\n") % (
                 source.name, packages[name].source.name))
             return
-        for p in pakspec.files:
-            if p.fileType not in valid_filetypes:
-                e = _("Unknown file type '%s' in package '%s'") % (
-                    p.fileType, source.name)
-                errors.append(e)
         packages[name] = self
         self.name = name
         self.source = source
@@ -402,17 +262,36 @@ class Package:
             (map(lambda x: x.package, self.pakspec.packageDependencies)))
         rbDeps = map(lambda x: "<a href='./%s.html'>%s</a>" % (x, x), self.revBuildDeps)
         rrDeps = map(lambda x: "<a href='./%s.html'>%s</a>" % (x, x), self.revRuntimeDeps)
-        dict = {
-            "name": self.name,
-            "source": source.name,
-            "version": self.source.spec.getSourceVersion(),
-            "release": self.source.spec.getSourceRelease(),
-            "buildDeps": ", ".join(bDeps),
-            "runtimeDeps": ", ".join(rDeps),
-            "revBuildDeps": ", ".join(rbDeps),
-            "revRuntimeDeps": ", ".join(rrDeps)
-        }
-        template_write("paksite/binary/%s.html" % self.name, "package", dict)
+        
+        html = """
+            <h1>İkili paket: %s</h1>
+            <h2>Kaynak versiyon %s, depo sürümü %s</h2>
+            
+            <h3>Kaynak paket: %s</h3>
+            
+            <h3>Derlemek için gerekenler:</h3>
+            <p>%s</p>
+            
+            <h3>Çalıştırmak için gerekenler:</h3>
+            <p>%s</p>
+            
+            <h3>Bağımlı paketler (derlenmek için):</h3>
+            <p>%s</p>
+            
+            <h3>Bağımlı paketler (çalışmak için):</h3>
+            <p>%s</p>
+        """ % (
+            self.name,
+            self.source.spec.getSourceVersion(),
+            self.source.spec.getSourceRelease(),
+            make_url(source.name, "../source/"),
+            ", ".join(bDeps),
+            ", ".join(rDeps),
+            ", ".join(rbDeps),
+            ", ".join(rrDeps),
+        )
+        
+        write_html("paksite/binary/%s.html" % self.name, self.name, html)
 
 
 class Source:
@@ -429,43 +308,54 @@ class Source:
         self.uri = svn_uri(path)
         for p in spec.packages:
             Package(self, p)
-        self.checkRelease()
-    
-    def validDate(self, date):
-        # yyyy-mm-dd
-        err = 0
-        if len(date) != 10:
-            err = 1
-        if date[4] != '-' or date[7] != '-':
-            err = 1
-        if err:
-            e = _("Source package '%s' has wrong date format '%s'") % (self.name, date)
-            errors.append(e)
-        # more checks can be added, i.e. valid day month ranges, etc
-    
-    def checkRelease(self):
-        pass
     
     def report_html(self):
         source = self.spec.source
         paks = map(lambda x: "<a href='../binary/%s.html'>%s</a>" % (x, x),
             (map(lambda x: x.name, self.spec.packages)))
-        histdata = map(lambda x: (x.release, x.date, x.name, x.name, x.comment), self.spec.history)
+        histdata = map(lambda x: (x.release, x.date, x.version, make_url(x.name, "../packager/"), x.comment), self.spec.history)
         ptch = map(lambda x: "<a href='%s/files/%s'>%s</a>" % (self.uri,
             x.filename, x.filename), source.patches)
-        dict = {
-            "name": self.name,
-            "homepage": source.homepage,
-            "license": ", ".join(source.license),
-            "version": self.spec.getSourceVersion(),
-            "release": self.spec.getSourceRelease(),
-            "history": template_table("history", histdata),
-            "packages": "<br>".join(paks),
-            "summary": source.summary,
-            "patches": "<br>".join(ptch),
-            "uri": self.uri
-        }
-        template_write("paksite/source/%s.html" % self.name, "source", dict)
+        
+        titles = "Sürüm", "Sürüm Tarihi", "Versiyon", "Güncelleyen", "Açıklama"
+        hist = make_table(histdata, titles)
+        
+        html = """
+            <h1>Kaynak paket: %s</h1>
+            <h2>Kaynak versiyon %s, depo sürümü %s</h2>
+            <h3><a href='%s'>%s</a></h3>
+            <h3>Açıklama</h3>
+            <p>%s</p>
+            <h3>Lisanslar:</h3>
+            <p>%s</p>
+            <h3>İşlemler:</h3>
+            <p><a href="%s">Paket dosyalarına bak</a></p>
+            <p><a href="http://bugs.pardus.org.tr/buglist.cgi?product=Paketler&component=%s&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Hata kayıtlarına bak</a></p>
+            
+            <h3>Bu kaynaktan derlenen ikili paketler:</h3>
+            <p>%s</p>
+            
+            <h3>Tarihçe</h3>
+            %s
+            
+            <h3>Yamalar</h3>
+            %s
+        """ % (
+            self.name,
+            self.spec.getSourceVersion(),
+            self.spec.getSourceRelease(),
+            source.homepage,
+            source.homepage,
+            source.summary,
+            ", ".join(source.license),
+            self.uri,
+            self.name,
+            "<br>".join(paks),
+            "".join(hist),
+            "<br>".join(ptch),
+        )
+        
+        write_html("paksite/source/%s.html" % self.name, self.name, html)
 
 
 class Packager:
@@ -502,17 +392,30 @@ class Packager:
                 Packager(spec, update)
     
     def report_html(self):
-        srcs = map(lambda x: "<a href='../source/%s.html'>%s</a>" % (x, x), self.sources)
+        srcs = map(lambda x: ("<a href='../source/%s.html'>%s</a>" % (x, x), ), self.sources)
         srcs.sort()
-        upds = map(lambda x: "<b><a href='../source/%s.html'>%s</a> (%s)</b><br>%s<br>" % (
-            x[0], x[0], x[1], x[2]), self.updates)
-        dict = {
-            "name": self.name,
-            "email": mangle_email(self.email),
-            "sources": "<br>".join(srcs),
-            "updates": " ".join(upds)
-        }
-        template_write("paksite/packager/%s.html" % self.name, "packager", dict)
+        upds = map(lambda x: (u"<b><a href='../source/%s.html'>%s</a> (%s)</b><br>%s<br>" % (
+            x[0], x[0], x[1], x[2]), ), self.updates)
+        
+        html = """
+            <p>Paketçi: %s (%s)</p>
+        """ % (self.name, mangle_email(self.email))
+        
+        html += """
+            <div class='statstat'>
+            <h3>Sahip olduğu paketler:</h3><p>
+            %s
+            </p></div>
+        """ % make_table(srcs)
+        
+        html += """
+            <div class='statstat'>
+            <h3>Yaptığı güncellemeler:</h3><p>
+            %s
+            </p></div>
+        """ % make_table(upds)
+        
+        write_html("paksite/packager/%s.html" % self.name, self.name, html)
 
 
 class Repository:
@@ -595,45 +498,53 @@ class Repository:
                     self.processPisi(os.path.join(root, fn))
     
     def report_html(self):
-        miss = map(lambda x: "<tr><td><a href='./binary/%s.html'>%s</a></td></tr>" % (x, x), missing.keys())
-        upeople = []
-        for p in self.people.get_list():
-            upeople.append(("<a href='./packager/%s.html'>%s</a>" % (p[0], p[0]), p[1]))
-        if errors:
-            e = "<br>".join(errors)
-        else:
-            e = ""
-        upatch = []
-        for p in self.mostpatched.get_list(5):
-            upatch.append(("<a href='./source/%s.html'>%s</a>" % (p[0], p[0]), p[1]))
-        ulongpy = []
-        for p in self.longpy.get_list(5):
-            ulongpy.append(("<a href='./source/%s.html'>%s</a>" % (p[0], p[0]), p[1]))
-        if self.total_installed_size:
-            items = self.installed_sizes.items()
-            items.sort(valuesort)
-            elts = "".join(map(lambda x: "<tr><td>%s</td><td>%d</td></tr>" % (x[0], x[1]), items))
-            sizes = template_get("repo_sizes") % { "total": self.total_installed_size, "sizes": elts }
-        else:
-            sizes = ""
-        dict = {
-            "nr_source": self.nr_sources,
-            "nr_packages": self.nr_packages,
-            "nr_patches": self.nr_patches,
-            "most_patched": template_table("table", upatch),
-            "longpy": template_table("table", ulongpy),
-            "packagers": template_table("table", upeople),
-            "missing": "\n".join(miss),
-            "sizes": sizes,
-            "errors": e
-        }
-        template_write("paksite/index.html", "repo", dict)
-        srclist = map(lambda x: "<a href='./source/%s.html'>%s</a>" % (x, x), sources)
-        srclist.sort()
-        dict = {
-            "source_list": "<br>".join(srclist)
-        }
-        template_write("paksite/sources.html", "sources", dict)
+        table = (
+            ("Kaynak paket sayısı", self.nr_sources),
+            ("İkili paket sayısı", self.nr_packages),
+            ("Yama sayısı", self.nr_patches),
+            ("Paketçi sayısı", len(self.people.list)),
+        )
+        html = make_table(table)
+        
+        html += """
+            <div class='statstat'>
+            <h3>En fazla yamalanmış beş kaynak paket:</h3><p>
+            %s
+            </p></div>
+        """ % make_table(map(lambda x: (make_url(x[0], "./source/"), x[1]), self.mostpatched.get_list(5)))
+        
+        html += """
+            <div class='statstat'>
+            <h3>En uzun inşa betikli beş kaynak paket:</h3><p>
+            %s
+            </p></div>
+        """ % make_table(map(lambda x: (make_url(x[0], "./source/"), x[1]), self.longpy.get_list(5)))
+        
+        write_html("paksite/index.html", "Genel Bilgiler", html)
+        
+        titles = (
+            "<a href='packagers_by_name.html'>Paketçi</a>",
+            "<a href='packagers.html'>Paket sayısı</a>"
+        )
+        
+        people = self.people.get_list()
+        people = map(lambda x: ("<a href='./packager/%s.html'>%s</a>" % (x[0], x[0]), x[1]), people)
+        write_html("paksite/packagers.html", "Paketçiler (paket sayısına göre)", make_table(people, titles))
+        
+        people.sort(key=lambda x: x[0])
+        write_html("paksite/packagers_by_name.html", "Paketçiler (isme göre)", make_table(people, titles))
+        
+        titles = "Paket adı", "Versiyon", "Açıklama"
+        
+        srclist = map(lambda x: (make_url(x.name, "source/"), x.spec.getSourceVersion(), x.spec.source.summary), sources.values())
+        srclist.sort(key=lambda x: x[0])
+        html = make_table(srclist, titles)
+        write_html("paksite/sources.html", "Kaynak Paketler", html)
+        
+        binlist = map(lambda x: (make_url(x.name, "binary/"), x.source.spec.getSourceVersion(), x.source.spec.source.summary), packages.values())
+        binlist.sort(key=lambda x: x[0])
+        html = make_table(binlist, titles)
+        write_html("paksite/binaries.html", "İkili Paketler", html)
 
 
 # command line driver
@@ -668,20 +579,6 @@ if __name__ == "__main__":
         printu(_("Scanning binary packages...\n"))
         repo.scan_bins(args[1])
     
-    if errors:
-        printu("***\n")
-        printu(_("Encountered %d errors! Fix them immediately!\n") % len(errors))
-        for e in errors:
-            printu(e)
-            printu("\n")
-        printu("\n")
-        printu("***\n")
-    
-    if missing:
-        printu(_("These dependencies are not available in repository:\n"))
-        for m in missing.keys():
-            printu("  %s\n" % m)
-    
     if do_web:
         if not os.path.exists("paksite/packager"):
             os.makedirs("paksite/packager")
@@ -690,10 +587,10 @@ if __name__ == "__main__":
         if not os.path.exists("paksite/source"):
             os.makedirs("paksite/source")
         
+        file("paksite/stil.css", "w").write(css_template)
+        
         repo.report_html()
         for p in packagers.values():
-            p.report_html()
-        for p in missing.values():
             p.report_html()
         for p in packages.values():
             p.report_html()
