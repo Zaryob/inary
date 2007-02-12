@@ -49,6 +49,7 @@ There is even a file.py module!
 * Would be very good if we can avoid "from x import y" form, it makes it
 harder to reload modules.
 
+* Convert all String Concatenation into "%s" % string form which is much faster, readable and correct
 
 ==> exceptions
 * Current model is bad. Exception names should tell what is the error type. Instead
