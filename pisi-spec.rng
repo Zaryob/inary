@@ -214,8 +214,16 @@
     <define name="attlist.Archive" combine="interleave">
         <group>
             <attribute name="sha1sum"/>
-            <!-- NOTE: we can limit possible types here to the ones that pisi know -->
-            <attribute name="type"/>
+            <attribute name="type">
+                <choice>
+                    <value>targz</value>
+                    <value>tarbz2</value>
+                    <value>tarlzma</value>
+                    <value>tar</value>
+                    <value>zip</value>
+                    <value>binary</value>
+                </choice>
+            </attribute>
         </group>
     </define>
 
@@ -440,9 +448,8 @@
 
     <!-- Date -->
     <define name="Date">
-        <!-- FIXME: Take a look at xmlschema data types at http://www.w3.org/TR/xmlschema-2/#dateTime -->
         <element name="Date">
-            <text/>
+            <data type="date" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
         </element>
     </define>
 
