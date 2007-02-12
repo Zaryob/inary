@@ -32,6 +32,9 @@ to give a more correct required disk size.
 def unzip(seq):
     return zip(*seq)
 
+* Why in a world like this there exists *parse_package* util functions? These must be all methods of package class
+
+* Remove all unneeded util functions, most of them belongs its classes
 
 ==> code readability
 * Public functions should contain doc strings.
