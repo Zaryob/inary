@@ -429,8 +429,14 @@
     <define name="attlist.Update" combine="interleave">
         <attribute name="release"/>
         <optional>
-            <!-- FIXME: valid types must be used instead of CDATA (a.k.a choice)-->
-            <attribute name="type"/>
+            <attribute name="type">
+                <choice>
+                    <value>security</value>
+                    <value>bug</value>
+                    <value>normal</value>
+                    <value>enhancement</value>
+                </choice>
+            </attribute>
         </optional>
     </define>
 
