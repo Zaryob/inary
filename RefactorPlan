@@ -101,3 +101,7 @@ conflicts method takes a pkg_name parameter but doesn't use it at all
 ==> Fixes (that need API breakage)
 * http://liste.uludag.org.tr/uludag-commits/2007-February/010117.html
 
+==> Logging
+
+* Improve logging with all needed update/downgrade/install/remove information so one can easily find the history of packages, 
+currently PiSi wrotes everyting into logs which is not usefull. Also this information can be used for rollback and reporting.
