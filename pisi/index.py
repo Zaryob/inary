@@ -104,11 +104,11 @@ class Index(XmlFile):
                 if fn == 'distribution.xml':
                     self.add_distro(os.path.join(root, fn))
 
-        conflicts_list = map(str, self.distribution.conflicts)
+        obsoletes_list = map(str, self.distribution.obsoletes)
 
         for pkg in util.filter_latest_packages(packages):
             pkg_name = util.parse_package_name(os.path.basename(pkg))[0]
-            if pkg_name not in conflicts_list:
+            if pkg_name not in obsoletes_list:
                 ctx.ui.info(_('Adding %s to package index') % pkg)
                 self.add_package(pkg, deltas, repo_uri)
 

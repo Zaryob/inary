@@ -21,13 +21,20 @@ import pisi.pxml.autoxml as autoxml
 import pisi.lockeddbshelve as shelve
 from pisi.itembyrepodb import ItemByRepoDB
 import pisi.itembyrepodb as itembyrepodb
-from pisi.conflict import Conflict
 
 class Error(pisi.Error):
     pass
 
 __metaclass__ = autoxml.autoxml
 
+class Obsolete:
+
+    __metaclass__ = autoxml.autoxml
+
+    s_Package = [autoxml.String, autoxml.mandatory]
+
+    def __str__(self):
+        return self.package
 
 class Distribution(xmlfile.XmlFile):
 
@@ -44,7 +51,7 @@ class Distribution(xmlfile.XmlFile):
     t_BinaryName = [autoxml.Text, autoxml.optional] # name of repository (binary distro)
     t_Architecture = [autoxml.Text, autoxml.optional] # architecture identifier
 
-    t_Conflicts = [ [Conflict], autoxml.optional, "Conflicts/Package"]
+    t_Obsoletes = [ [Obsolete], autoxml.optional, "Obsoletes/Package"]
 
 class Component(xmlfile.XmlFile):
     "representation for component declarations"
