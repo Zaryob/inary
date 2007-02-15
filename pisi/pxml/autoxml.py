@@ -268,16 +268,22 @@ class autoxml(oo.autosuper, oo.autoprop):
         errorss = []
         formatters = []
 
+        # FIXME: What is this? Remove this crap and try to fix autoxml, if can not be fixed then 
+        # really throw whole autoxml to junk. But not this.
+
         # read declaration order from source
         # code contributed by bahadir kandemir
-        from inspect import getsourcelines
-        from itertools import ifilter
-        import re
+        try:
+            from inspect import getsourcelines
+            from itertools import ifilter
+            import re
 
-        fn = re.compile('\s*([tas]_[a-zA-Z]+).*').findall
+            fn = re.compile('\s*([tas]_[a-zA-Z]+).*').findall
 
-        lines = filter(fn, getsourcelines(cls)[0])
-        decl_order = map(lambda x:x.split()[0], lines)
+            lines = filter(fn, getsourcelines(cls)[0])
+            decl_order = map(lambda x:x.split()[0], lines)
+        except IOError:
+            decl_order = dict.keys()
 
         # there should be at most one str member, and it should be
         # the first to process
