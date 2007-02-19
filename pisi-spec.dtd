@@ -121,8 +121,7 @@ suck anyway -->
 
 <!ELEMENT Update (#PCDATA | Date | Version | Comment | Name | Email)*>
 <!ATTLIST Update release CDATA #REQUIRED>
-<!-- FIXME: valid types must be used instead of CDATA -->
-<!ATTLIST Update type CDATA #IMPLIED>
+<!ATTLIST Update type (security|bug) #IMPLIED>
 
 <!ELEMENT Date (#PCDATA)>
 <!ELEMENT Version (#PCDATA)>
