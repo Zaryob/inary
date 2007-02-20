@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt_BR\n"
 "POT-Creation-Date: 2006-12-12 14:29+EET\n"
-"PO-Revision-Date: 2007-02-18 21:07-0300\n"
+"PO-Revision-Date: 2007-02-19 21:44-0300\n"
 "Last-Translator: Pedro Leite <pedro.leite@gmail.com>\n"
 "Language-Team: Brazillian Portuguese <http://liste.uludag.org.tr/mailman/listinfo/pardus-translation-ptbr>\n"
 "MIME-Version: 1.0\n"
@@ -32,6 +32,19 @@ msgid ""
 "For support, use the optik-users@lists.sourceforge.net mailing list\n"
 "(http://lists.sourceforge.net/lists/listinfo/optik-users).\n"
 msgstr ""
+"optparse - um analisador de opções poderoso, extensível a fácil de usar.\n"
+"\n"
+"Por Greg Ward <gward@python.net>\n"
+"\n"
+"Originalmente distribuido com Optik; veja http://optik.sourceforge.net/ .\n"
+"\n"
+"Se você tiver problemas com este módulo, por favor não reporte bugs,\n"
+"correções, ou pedidos de novas funcionalidadesao Python; em vez disso,\n"
+"use a página do projeto SourceForge do Optik's:"
+"  http://sourceforge.net/projects/optik\n"
+"\n"
+"Para suporte, use a lista de email optik-users@lists.sourceforge.net\n"
+"(http://lists.sourceforge.net/lists/listinfo/optik-users).\n"
 
 #: /usr/lib/python2.4/optparse.py:93
 #, docstring
@@ -41,6 +54,10 @@ msgid ""
 "    inconsistent arguments.\n"
 "    "
 msgstr ""
+"\n"
+"    Levantado se uma instância de Option é criada com argumentos\n"
+"    inválidos ou inconsistentes.\n"
+"    "
 
 #: /usr/lib/python2.4/optparse.py:109
 #, docstring
@@ -49,6 +66,9 @@ msgid ""
 "    Raised if conflicting options are added to an OptionParser.\n"
 "    "
 msgstr ""
+"\n"
+"    Levantado se opções conflitantes são adicionadas para um OptionParser.\n"
+"    "
 
 #: /usr/lib/python2.4/optparse.py:114
 #, docstring
@@ -58,6 +78,10 @@ msgid ""
 "    line.\n"
 "    "
 msgstr ""
+"\n"
+"    Levantado se um valor de opção inválida é econtrada na linha\n"
+"    de comando.\n"
+"    "
 
 #: /usr/lib/python2.4/optparse.py:120
 #, docstring
@@ -66,11 +90,14 @@ msgid ""
 "    Raised if an invalid or ambiguous option is seen on the command-line.\n"
 "    "
 msgstr ""
+"\n"
+"    Levantado se uma opção inválida ou ambígüa é vista na linha de comando.\n"
+"    "
 
 #: /usr/lib/python2.4/optparse.py:298 pisi/cli/commands.py:50
-#, docstring
+#, docstring, fuzzy
 msgid "Return a comma-separated list of option strings & metavariables."
-msgstr ""
+msgstr "Retorna uma lista separada por vírgulas de strings de opções & meta-variáveis."
 
 #: /usr/lib/python2.4/optparse.py:317
 #, docstring
@@ -78,10 +105,12 @@ msgid ""
 "Format help with indented section bodies.\n"
 "    "
 msgstr ""
+"Formatar ajuda com corpos de seções indentados.\n"
+"    "
 
 #: /usr/lib/python2.4/optparse.py:329 pisi/cli/commands.py:44
 msgid "usage: %s\n"
-msgstr ""
+msgstr "uso: %s\n"
 
 #: /usr/lib/python2.4/optparse.py:336
 #, docstring
@@ -89,34 +118,37 @@ msgid ""
 "Format help with underlined section headers.\n"
 "    "
 msgstr ""
+"Formatar ajuda com cabeçalhos de seções sublinhados.\n"
+"    "
 
 #: /usr/lib/python2.4/optparse.py:348
 msgid "Usage"
-msgstr ""
+msgstr "Uso"
 
 #: /usr/lib/python2.4/optparse.py:354
 msgid "integer"
-msgstr ""
+msgstr "inteiro"
 
 #: /usr/lib/python2.4/optparse.py:355
 msgid "long integer"
-msgstr ""
+msgstr "inteiro longo"
 
 #: /usr/lib/python2.4/optparse.py:356
 msgid "floating-point"
-msgstr ""
+msgstr "ponto flutuante"
 
 #: /usr/lib/python2.4/optparse.py:357
 msgid "complex"
-msgstr ""
+msgstr "complexo"
 
 #: /usr/lib/python2.4/optparse.py:365
 msgid "option %s: invalid %s value: %r"
-msgstr ""
+msgstr "opção %s: valor de %s inválido: %r"
 
 #: /usr/lib/python2.4/optparse.py:373
+#, fuzzy
 msgid "option %s: invalid choice: %r (choose from %s)"
-msgstr ""
+msgstr "opção %s: escolha inválida: %r (escolha de %s)"
 
 #: /usr/lib/python2.4/optparse.py:382
 #, docstring
@@ -140,6 +172,24 @@ msgid ""
 "      metavar : string\n"
 "    "
 msgstr ""
+"\n"
+"    Atributos de instâncias:\n"
+"      _short_opts : [string]\n"
+"      _long_opts : [string]\n"
+"\n"
+"      action : string\n"
+"      type : string\n"
+"      dest : string\n"
+"      default : any\n"
+"      nargs : int\n"
+"      const : any\n"
+"      choices : [string]\n"
+"      callback : function\n"
+"      callback_args : (any*)\n"
+"      callback_kwargs : { string : any }\n"
+"      help : string\n"
+"      metavar : string\n"
+"    "
 
 #: /usr/lib/python2.4/optparse.py:781
 #, docstring
@@ -151,6 +201,12 @@ msgid ""
 "        are silently ignored.\n"
 "        "
 msgstr ""
+"\n"
+"        Atualiza os valores das opções de um dicionário qualquer, porém\n"
+"        somente usa as chaves do dicionário que já tem um atributo\n"
+"        correspondente em si próprio.  Quaisquer chaves no dicionário\n"
+"        sem atributos correspondentes são ignoradas silenciosamente.\n"
+"        "
 
 #: /usr/lib/python2.4/optparse.py:794
 #, docstring
@@ -161,6 +217,11 @@ msgid ""
 "        they have a corresponding attribute in self or not.\n"
 "        "
 msgstr ""
+"\n"
+"        Atualiza os valores das opções de um dicionário qualquer\n"
+"        usando todas as chaves do dicionário, independentemente\n"
+"        deles terem ou não um atributo correspondente em si próprios.\n"
+"        "
 
 #: /usr/lib/python2.4/optparse.py:926
 #, docstring
@@ -169,18 +230,21 @@ msgid ""
 "           add_option(opt_str, ..., kwarg=val, ...)\n"
 "        "
 msgstr ""
+"add_option(Option)\n"
+"           add_option(opt_str, ..., kwarg=val, ...)\n"
+"        "
 
 #: /usr/lib/python2.4/optparse.py:1138
 msgid "show this help message and exit"
-msgstr ""
+msgstr "mostra esta mensagem de ajuda e sai"
 
 #: /usr/lib/python2.4/optparse.py:1143
 msgid "show program's version number and exit"
-msgstr ""
+msgstr "mostra o número da versão do programa e sai"
 
 #: /usr/lib/python2.4/optparse.py:1166
 msgid "%prog [options]"
-msgstr ""
+msgstr "%prog [opções]"
 
 #: /usr/lib/python2.4/optparse.py:1246
 #, docstring
@@ -199,6 +263,19 @@ msgid ""
 "        over after parsing options.\n"
 "        "
 msgstr ""
+"\n"
+"        parse_args(args : [string] = sys.argv[1:],\n"
+"                   values : Values = None)\n"
+"        -> (values : Values, args : [string])\n"
+"\n"
+"        Analisa as opções da linha de comando encontradas em 'args' (padrão:\n"
+"        sys.argv[1:]).  Quaisquer erros resultam numa chamada a 'error()', que\n"
+"        por padrão imprime a mensagem de uso para stderr e chama\n"
+"        sys.exit() com uma mensagem de erro.  No caso de sucesso, retorna\n"
+"        um par (values, args) onde 'values' é uma instância de Values (com \n"
+"        todos seus valores de opções) e 'args' é a lista de argumentos que\n"
+"        sobraram após a análise das opções.\n"
+"        "
 
 #: /usr/lib/python2.4/optparse.py:1285
 #, docstring
