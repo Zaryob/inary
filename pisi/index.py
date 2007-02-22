@@ -91,11 +91,13 @@ class Index(XmlFile):
         deltas = {}
         for root, dirs, files in os.walk(repo_uri):
             for fn in files:
+
                 if fn.endswith(ctx.const.delta_package_suffix):
                     name, version = util.parse_package_name(fn)
                     deltas.setdefault(name, []).append(os.path.join(root, fn))
-                if fn.endswith(ctx.const.package_suffix):
+                elif fn.endswith(ctx.const.package_suffix):
                     packages.append(os.path.join(root, fn))
+
                 if fn == 'component.xml':
                     ctx.ui.info(_('Adding %s to component index') % fn)
                     self.add_component(os.path.join(root, fn))
