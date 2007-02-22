@@ -57,6 +57,13 @@ class Package(specfile.Package):
 
     t_Source = [ Source, autoxml.optional]
 
+    def get_delta(self, releaseFrom):
+        for delta in self.deltaPackages:
+            if delta.releaseFrom == releaseFrom:
+                return delta
+        else:
+            return None
+
     def decode_hook(self, node, errs, where):
         self.version = self.history[0].version
         self.release = self.history[0].release

@@ -64,14 +64,25 @@ class Install(AtomicOperation):
             ctx.ui.info(_("Package %s found in repository %s") % (name, repo))
             repo = ctx.repodb.get_repo(repo)
             pkg = ctx.packagedb.get_package(name)
+            delta = None
 
-            # FIXME: let pkg.packageURI be stored as URI type rather than string
-            pkg_uri = URI(pkg.packageURI)
-            if pkg_uri.is_absolute_path():
-                pkg_path = str(pkg.packageURI)
+            # Package is installed. This is an upgrade. Check delta.
+            if ctx.installdb.is_installed(pkg.name):
+                (version, release, build) = ctx.installdb.get_version(pkg.name)
+                delta = pkg.get_delta(releaseFrom=release)
+
+            # If delta exists than use the delta uri.
+            if delta:
+                pkg_uri = delta.packageURI
+            else:
+                pkg_uri = pkg.packageURI
+
+            uri = URI(pkg_uri)
+            if uri.is_absolute_path():
+                pkg_path = str(pkg_uri)
             else:
                 pkg_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
-                                        str(pkg_uri.path()))
+                                        str(uri.path()))
 
             ctx.ui.info(_("Package URI: %s") % pkg_path, verbose=True)
 
