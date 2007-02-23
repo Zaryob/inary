@@ -165,6 +165,7 @@ class Index(XmlFile):
                     delta = metadata.Delta()
                     delta.packageURI = util.removepathprefix(repo_uri, delta_path)
                     delta.packageSize = os.path.getsize(delta_path)
+                    delta.packageHash = util.sha1_file(delta_path)
                     name, relFrom, relTo = util.parse_delta_package_name(delta_path)
                     delta.releaseFrom = relFrom
                     md.package.deltaPackages.append(delta)

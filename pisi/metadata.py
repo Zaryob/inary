@@ -32,6 +32,7 @@ class Delta:
     
     t_PackageURI = [ autoxml.String, autoxml.optional]
     t_PackageSize = [ autoxml.Long, autoxml.optional]
+    t_PackageHash = [ autoxml.String, autoxml.optional, "SHA1Sum" ]
     a_releaseFrom = [autoxml.String, autoxml.optional]
 
 class Source:
