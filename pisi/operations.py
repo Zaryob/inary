@@ -799,15 +799,27 @@ def calculate_download_sizes(order):
 
     for pkg in [ctx.packagedb.get_package(name) for name in order]:
 
-        # get the cached package's path
-        fn = util.package_name(pkg.name, pkg.version, pkg.release, pkg.build, True)
+        delta = None
+        if ctx.installdb.is_installed(pkg.name):
+            (version, release, build) = ctx.installdb.get_version(pkg.name)
+            delta = pkg.get_delta(releaseFrom=release)
+
+        if delta:
+            fn = os.path.basename(delta.packageURI)
+            pkg_hash = delta.packageHash
+            pkg_size = delta.packageSize
+        else:
+            fn = os.path.basename(pkg.packageURI)
+            pkg_hash = pkg.packageHash
+            pkg_size = pkg.packageSize
+
         path = util.join_path(ctx.config.packages_dir(), fn)
 
         # check the file and sha1sum to be sure it _is_ the cached package
-        if os.path.exists(path) and util.sha1_file(path) == pkg.packageHash:
-            cached_size += pkg.packageSize
+        if os.path.exists(path) and util.sha1_file(path) == pkg_hash:
+            cached_size += pkg_size
 
-        total_size += pkg.packageSize
+        total_size += pkg_size
 
     ctx.ui.notify(ui.cached, total=total_size, cached=cached_size)
     return total_size, cached_size
