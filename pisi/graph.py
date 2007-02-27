@@ -124,6 +124,8 @@ class Digraph(object):
                 while self.p[u]:
                     u = self.p[u]
                     cycle.append(u)
+                    if self.has_edge(cycle[0], u):
+                        break
                 cycle.reverse()
                 raise CycleException(cycle)
         self.color[u] = 'b'             # mark black (completed)
