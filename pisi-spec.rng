@@ -104,7 +104,7 @@
     <define name="Name">
         <element name="Name">
             <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-                <param name="pattern">[0-9a-zA-Z-]*</param>
+                <param name="pattern">[0-9a-zA-Z-_+]*</param>
                 <param name="maxLength">255</param>
             </data>
         </element>
