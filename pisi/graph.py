@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005, TUBITAK/UEKAE
+# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -124,6 +124,8 @@ class Digraph(object):
                 while self.p[u]:
                     u = self.p[u]
                     cycle.append(u)
+                    if self.has_edge(cycle[0], u):
+                        break
                 cycle.reverse()
                 raise CycleException(cycle)
         self.color[u] = 'b'             # mark black (completed)
