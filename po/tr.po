@@ -1,14 +1,15 @@
 # translation of tr.po to
 # Eray Ozkural <eray@pardus.org.tr>, 2005,2006.
 # Furkan Duman <coderlord@gmail.com>, 2006.
-# Faik Uygur <faik@pardus.org.tr>, 2006.
+# Faik Uygur <faik@pardus.org.tr>, 2006, 2007.
+# Ahmet AYGÜN <ahmet@pardusman.org>, 2006.
 # PiSi Translation
-# Copyright (C) 2005, 2006 Free Software Foundation, Inc.
+# Copyright (C) 2005, 2006, 2007 Free Software Foundation, Inc.
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2006-12-09 20:35+EET\n"
-"PO-Revision-Date: 2006-12-09 20:40+0200\n"
+"POT-Creation-Date: 2007-02-28 20:09+EET\n"
+"PO-Revision-Date: 2007-02-28 20:11+0200\n"
 "Last-Translator: Faik Uygur <faik@pardus.org.tr>\n"
 "Language-Team:  <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -350,7 +351,7 @@ msgstr "Geri-iz:"
 msgid "Use --debug to see a traceback."
 msgstr "Bir geri-iz (traceback) görmek için lütfen --debug seçeneğini kullanın."
 
-#: pisi/actionsapi/autotools.py:36
+#: pisi/actionsapi/autotools.py:36 pisi/actionsapi/cmaketools.py:36
 msgid ""
 "Please attach the config.log to your bug report:\n"
 "%s/config.log"
@@ -360,8 +361,8 @@ msgstr ""
 
 # pisi/actionsapi/autotools.py:75 :85
 #: pisi/actionsapi/autotools.py:75 pisi/actionsapi/autotools.py:85
-#: pisi/actionsapi/kde.py:65 pisi/actionsapi/perlmodules.py:54
-#: pisi/actionsapi/perlmodules.py:57
+#: pisi/actionsapi/cmaketools.py:67 pisi/actionsapi/kde.py:65
+#: pisi/actionsapi/perlmodules.py:54 pisi/actionsapi/perlmodules.py:57
 msgid "Configure failed."
 msgstr "Yapılandırma başarısızlığa uğradı."
 
@@ -371,14 +372,16 @@ msgstr "Yapılandırma başarısızlığa uğradı."
 msgid "No configure script found."
 msgstr "Yapılandırma betiği bulunamadı."
 
-#: pisi/actionsapi/autotools.py:96 pisi/actionsapi/kde.py:72
-#: pisi/actionsapi/perlmodules.py:63 pisi/actionsapi/perlmodules.py:72
-#: pisi/actionsapi/pythonmodules.py:49 pisi/actionsapi/scons.py:39
+#: pisi/actionsapi/autotools.py:96 pisi/actionsapi/cmaketools.py:75
+#: pisi/actionsapi/kde.py:72 pisi/actionsapi/perlmodules.py:63
+#: pisi/actionsapi/perlmodules.py:72 pisi/actionsapi/pythonmodules.py:49
+#: pisi/actionsapi/scons.py:39
 msgid "Make failed."
 msgstr "İnşa başarısızlığa uğradı."
 
 # pisi/actionsapi/autotools.py:119 :127
 #: pisi/actionsapi/autotools.py:124 pisi/actionsapi/autotools.py:134
+#: pisi/actionsapi/cmaketools.py:105 pisi/actionsapi/cmaketools.py:115
 #: pisi/actionsapi/kde.py:79 pisi/actionsapi/pythonmodules.py:54
 #: pisi/actionsapi/scons.py:43
 msgid "Install failed."
@@ -386,7 +389,8 @@ msgstr "Kurulum başarısızlığa uğradı."
 
 # pisi/actionsapi/autotools.py:121 :129
 #: pisi/actionsapi/autotools.py:126 pisi/actionsapi/autotools.py:136
-#: pisi/actionsapi/kde.py:81
+#: pisi/actionsapi/cmaketools.py:77 pisi/actionsapi/cmaketools.py:107
+#: pisi/actionsapi/cmaketools.py:117 pisi/actionsapi/kde.py:81
 msgid "No Makefile found."
 msgstr "Makefile bulunamadı."
 
@@ -411,6 +415,11 @@ msgstr "automake çalıştırılamadı."
 #: pisi/actionsapi/autotools.py:163
 msgid "Running autoheader failed."
 msgstr "autoheader çalıştırılamadı."
+
+# pisi/actionsapi/autotools.py:77 :87
+#: pisi/actionsapi/cmaketools.py:69
+msgid "No configure script found for cmake."
+msgstr "cmake için yapılandırma betiği bulunamadı."
 
 #: pisi/actionsapi/get.py:163
 msgid "Util %s cannot be found"
@@ -689,11 +698,11 @@ msgstr "Yeni orijinal versiyona yükseltiliyor"
 
 #: pisi/atomicoperations.py:211
 msgid "Upgrading to new distribution release"
-msgstr "Yeni dağıtım sürümüne yukseltiliyor"
+msgstr "Yeni dağıtım sürümüne yükseltiliyor"
 
 #: pisi/atomicoperations.py:215
 msgid "Upgrading to new distribution build"
-msgstr "Yeni dağıtım inşasına yukseltiliyor"
+msgstr "Yeni dağıtım inşasına yükseltiliyor"
 
 #: pisi/atomicoperations.py:225
 msgid "Downgrade to old distribution release?"
@@ -1331,7 +1340,7 @@ msgstr "Çomar yapılandırma aygıtını kullanma"
 
 #: pisi/cli/commands.py:535
 msgid "Outputting binary packages in the package cache."
-msgstr "İkili paketler paket cebine yazılıyor."
+msgstr "İkili paketler paket önbelleğine yazılıyor."
 
 #: pisi/cli/commands.py:543
 msgid "Abstract package operation command"
@@ -2106,11 +2115,11 @@ msgstr "Kaldırma öncesi betikleri çağrılıyor"
 msgid "Unregistering comar scripts"
 msgstr "comar betikleri siliniyor"
 
-#: pisi/component.py:97 pisi/component.py:103
+#: pisi/component.py:106 pisi/component.py:112
 msgid "Component %s not found"
 msgstr "%s bileşeni bulunamadı"
 
-#: pisi/component.py:199 pisi/component.py:225
+#: pisi/component.py:208 pisi/component.py:234
 msgid "Information for component %s not available"
 msgstr "Bileşen %s için bilgi bulunamadı"
 
@@ -2256,23 +2265,23 @@ msgstr "HATA: gpg --detach-sig %s çalışmadı"
 msgid "Encountered cycle %s"
 msgstr "Çember ile karşılaşıldı: %s"
 
-#: pisi/index.py:92
-msgid "Adding %s to package index"
-msgstr "%s paket indeksine ekleniyor"
-
-#: pisi/index.py:95
+#: pisi/index.py:96
 msgid "Adding %s to component index"
 msgstr "%s bileşen indeksine ekleniyor"
 
-#: pisi/index.py:113
+#: pisi/index.py:108
+msgid "Adding %s to package index"
+msgstr "%s paket indeksine ekleniyor"
+
+#: pisi/index.py:122
 msgid "Updating package database of %s"
 msgstr "%s paket veritabanı güncelleniyor"
 
-#: pisi/index.py:141
+#: pisi/index.py:150
 msgid "Package %s: metadata corrupt, skipping..."
 msgstr "Paket %s: metadata bozuk, atlanıyor..."
 
-#: pisi/index.py:169
+#: pisi/index.py:178
 msgid "Adding %s to source index"
 msgstr "%s kaynak indeksine ekleniyor"
 
@@ -2487,7 +2496,7 @@ msgstr "Bu paketler yükseltilecektir: "
 
 #: pisi/operations.py:552
 msgid "Dependency %s of %s cannot be satisfied"
-msgstr "İnşa bağımlılığı %s, %s paketi için sağlanamadı"
+msgstr "%s bağımlılığı, %s paketi için sağlanamadı"
 
 #: pisi/operations.py:553
 msgid "Upgrade is not possible."
@@ -2587,68 +2596,68 @@ msgstr ""
 "Etiket en azından şu andaki yerelleştirme seçenekleri (locale) için bir "
 "girdiye, o olmazsa bir Türkçe ya da İngilizce versiyona sahip olmalı"
 
-#: pisi/pxml/autoxml.py:368
+#: pisi/pxml/autoxml.py:374
 msgid "autoxml.check: '%s' errors"
 msgstr "autoxml.check: '%s' hatalar"
 
-#: pisi/pxml/autoxml.py:423 pisi/pxml/autoxml.py:433
+#: pisi/pxml/autoxml.py:429 pisi/pxml/autoxml.py:439
 msgid "autoxml.parse: String '%s' has errors"
 msgstr "autoxml.read: Dosya '%s' hatalara sahip"
 
-#: pisi/pxml/autoxml.py:443 pisi/pxml/autoxml.py:453
+#: pisi/pxml/autoxml.py:449 pisi/pxml/autoxml.py:459
 msgid "autoxml.read: File '%s' has errors"
 msgstr "autoxml.read: Dosya '%s' hatalara sahip"
 
-#: pisi/pxml/autoxml.py:461
+#: pisi/pxml/autoxml.py:467
 msgid "autoxml.write: object validation has failed"
 msgstr "autoxml.write: nesne doğrulaması başarısızlığa uğradı"
 
-#: pisi/pxml/autoxml.py:469
+#: pisi/pxml/autoxml.py:475
 msgid "autoxml.write: File encoding '%s' has errors"
 msgstr "autoxml.write: Dosya biçimlendirmesi '%s' hatalara sahip"
 
-#: pisi/pxml/autoxml.py:519
+#: pisi/pxml/autoxml.py:525
 msgid "gen_tag: unrecognized tag type %s in spec"
 msgstr "gen_tag: tanınmayan im tipi %s"
 
-#: pisi/pxml/autoxml.py:567 pisi/pxml/autoxml.py:578
+#: pisi/pxml/autoxml.py:573 pisi/pxml/autoxml.py:584
 msgid "Mandatory variable %s not available"
 msgstr "Gerekli değişken %s bulunamadı"
 
-#: pisi/pxml/autoxml.py:648
+#: pisi/pxml/autoxml.py:654
 msgid "Type mismatch: read text cannot be decoded"
 msgstr "Tip uyumsuzluğu: okunan metin çözülemedi"
 
-#: pisi/pxml/autoxml.py:652 pisi/pxml/autoxml.py:661
+#: pisi/pxml/autoxml.py:658 pisi/pxml/autoxml.py:667
 msgid "Mandatory token %s not available"
 msgstr "Gerekli im %s bulunamadı"
 
-#: pisi/pxml/autoxml.py:666
+#: pisi/pxml/autoxml.py:672
 msgid "Type mismatch. Expected %s, got %s"
 msgstr "Tip uyumsuzluğu. %s beklerken, %s bulundu"
 
 # pisi/xmlfile.py:420 :521
-#: pisi/pxml/autoxml.py:696 pisi/pxml/autoxml.py:812
+#: pisi/pxml/autoxml.py:702 pisi/pxml/autoxml.py:818
 msgid "Type mismatch: DOM cannot be decoded"
 msgstr "Tip uyumsuzluğu: DOM okunamıyor"
 
 # pisi/xmlfile.py:392 :423 :439 :446 :524 :538 :545
-#: pisi/pxml/autoxml.py:699 pisi/pxml/autoxml.py:715 pisi/pxml/autoxml.py:725
-#: pisi/pxml/autoxml.py:815 pisi/pxml/autoxml.py:829 pisi/pxml/autoxml.py:839
+#: pisi/pxml/autoxml.py:705 pisi/pxml/autoxml.py:721 pisi/pxml/autoxml.py:731
+#: pisi/pxml/autoxml.py:821 pisi/pxml/autoxml.py:835 pisi/pxml/autoxml.py:845
 msgid "Mandatory argument not available"
 msgstr "Gerekli argüman bulunamadı"
 
 # pisi/xmlfile.py:436 :535
-#: pisi/pxml/autoxml.py:712 pisi/pxml/autoxml.py:826
+#: pisi/pxml/autoxml.py:718 pisi/pxml/autoxml.py:832
 msgid "Object cannot be encoded"
 msgstr "Nesne kodlanamadı"
 
-#: pisi/pxml/autoxml.py:737
+#: pisi/pxml/autoxml.py:743
 msgid "List type must contain only one element"
 msgstr "List tipi sadece bir eleman içermeli"
 
 # pisi/xmlfile.py:470 :485
-#: pisi/pxml/autoxml.py:750 pisi/pxml/autoxml.py:771
+#: pisi/pxml/autoxml.py:756 pisi/pxml/autoxml.py:777
 msgid "Mandatory list \"%s\" under \"%s\" node is empty."
 msgstr "Zorunlu \"%s\" listesi \"%s\" içinde yok."
 
@@ -2792,7 +2801,7 @@ msgstr "objcopy (add-debuglink) komutu '%s' dosyası için çalışmadı!"
 msgid "Updating environment..."
 msgstr "Çevre güncelleniyor..."
 
-#: scripts/repostats.py:361
+#: scripts/repostats.py:226
 msgid ""
 "Duplicate binary packages:\n"
 "%s\n"
@@ -2802,11 +2811,7 @@ msgstr ""
 "%s\n"
 "%s\n"
 
-#: scripts/repostats.py:366
-msgid "Unknown file type '%s' in package '%s'"
-msgstr "Bilinmeyen dosya tipi '%s', '%s' paketi içinde bulundu. "
-
-#: scripts/repostats.py:422
+#: scripts/repostats.py:301
 msgid ""
 "Duplicate source packages:\n"
 "%s\n"
@@ -2816,15 +2821,11 @@ msgstr ""
 "%s\n"
 "%s\n"
 
-#: scripts/repostats.py:442
-msgid "Source package '%s' has wrong date format '%s'"
-msgstr "Kaynak paketi '%s' yanlış tarih biçimlendirmesine sahip: '%s'"
-
-#: scripts/repostats.py:481
+#: scripts/repostats.py:371
 msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 
-#: scripts/repostats.py:564
+#: scripts/repostats.py:467
 msgid ""
 "Cannot parse '%s':\n"
 "%s\n"
@@ -2832,27 +2833,19 @@ msgstr ""
 "'%s' ayrıştırılamıyor:\n"
 "'%s'\n"
 
-#: scripts/repostats.py:642
+#: scripts/repostats.py:553
 msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
 msgstr "Kullanım: repostats.py [SEÇENEKLER] source-repo-path [ikili-depo-adresi]\n"
 
-#: scripts/repostats.py:643
+#: scripts/repostats.py:554
 msgid "Dont generate the web site.\n"
 msgstr "Web sayfasını oluşturma.\n"
 
-#: scripts/repostats.py:664
+#: scripts/repostats.py:575
 msgid "Scanning source repository...\n"
 msgstr "Kaynak deposu taranıyor...\n"
 
-#: scripts/repostats.py:668
+#: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr "İkili dosyalar taranıyor...\n"
-
-#: scripts/repostats.py:673
-msgid "Encountered %d errors! Fix them immediately!\n"
-msgstr "%d hata ile karşılaşıldı. Lütfen bunları en kısa zamanda düzeltin.\n"
-
-#: scripts/repostats.py:681
-msgid "These dependencies are not available in repository:\n"
-msgstr "Bağımlılığa neden olan bu paketler depoda bulunmuyor:\n"
 
