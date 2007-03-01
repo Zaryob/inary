@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "POT-Creation-Date: 2006-12-09 20:35+EET\n"
-"PO-Revision-Date: 2007-02-18 03:02+0200\n"
+"PO-Revision-Date: 2007-03-01 21:49+0200\n"
 "Last-Translator: Willem Gielen <w.gielen@gmail.com>\n"
 "Language-Team: Nederlands <Pardus-translation-nl@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
@@ -444,7 +444,7 @@ msgstr "ambiguous option: %s (%s?)"
 
 #: pisi-cli:46
 msgid "Keyboard Interrupt: Exiting..."
-msgstr "Toetsenbord onderbreking: sluit af..."
+msgstr "Toetsenbord onderbreking: afsluiten..."
 
 #: pisi-cli:49
 msgid "Program Terminated."
@@ -501,7 +501,7 @@ msgstr ""
 #: pisi/actionsapi/kde.py:65 pisi/actionsapi/perlmodules.py:54
 #: pisi/actionsapi/perlmodules.py:57
 msgid "Configure failed."
-msgstr "Configuratie is mislukt."
+msgstr "Configuratie mislukt."
 
 # pisi/actionsapi/autotools.py:77 :87
 #: pisi/actionsapi/autotools.py:77 pisi/actionsapi/autotools.py:87
@@ -520,7 +520,7 @@ msgstr "Make mislukt."
 #: pisi/actionsapi/kde.py:79 pisi/actionsapi/pythonmodules.py:54
 #: pisi/actionsapi/scons.py:43
 msgid "Install failed."
-msgstr "Installatie mislukt."
+msgstr "Install mislukt."
 
 # pisi/actionsapi/autotools.py:121 :129
 #: pisi/actionsapi/autotools.py:126 pisi/actionsapi/autotools.py:136
@@ -739,19 +739,19 @@ msgstr "Repository %s bestaat niet. Kan niet verwijderen."
 
 #: pisi/api.py:424
 msgid "* Updating repository: %s"
-msgstr "* Bijwerken repository: %s "
+msgstr "* Updaten repository: %s "
 
 #: pisi/api.py:432
 msgid "No updates available for repository %s."
-msgstr "Geen bijgewerkte pakketten op repository %s."
+msgstr "Geen bijgewerkte pakketten in repository %s."
 
 #: pisi/api.py:434
 msgid "Updating database at any rate as requested"
-msgstr "Database bijwerken op elke snelheid zoals verzocht"
+msgstr "Updaten database op elke snelheid zoals verzocht"
 
 #: pisi/api.py:445
 msgid "* Package database updated."
-msgstr "* Pakketdatabase bijgewerkt."
+msgstr "* Pakketdatabase geupdate."
 
 #: pisi/api.py:447 pisi/api.py:472
 msgid "No repository named %s found."
@@ -1570,11 +1570,11 @@ msgstr "bijwerk opties"
 
 #: pisi/cli/commands.py:652
 msgid "Security related package upgrades only"
-msgstr "Alleen beveiligingspakketten bijwerken"
+msgstr "Alleen beveiligingspakketten opwaarderen"
 
 #: pisi/cli/commands.py:654
 msgid "Do not update repositories"
-msgstr "Repositories niet bijwerken"
+msgstr "Repositories niet updaten"
 
 #: pisi/cli/commands.py:660
 msgid "Upgrade component's and recursive components' packages"
@@ -1593,16 +1593,16 @@ msgid ""
 "When upgrading system, ignore packages and components whose "
 "basenames                      match any pattern contained in file."
 msgstr ""
-"Als het systeem bijgewerkt wordt, pakketten en componenten negeren waarbij "
+"Als het systeem opgewaardeerd wordt, pakketten en componenten negeren waarbij "
 "basenames                     overeenkomen met ieder patroon in bestand."
 
 #: pisi/cli/commands.py:706
 msgid "Updating repositories"
-msgstr "Bijwerken repositories"
+msgstr "Updaten repositories"
 
 #: pisi/cli/commands.py:711
 msgid "Will not update repositories"
-msgstr "Zal repositories niet bijwerken"
+msgstr "Zal repositories niet updaten"
 
 #: pisi/cli/commands.py:733
 msgid ""
@@ -1908,14 +1908,14 @@ msgid ""
 "Synchronizes the PiSi databases with the current repository.\n"
 "If no repository is given, all repositories are updated.\n"
 msgstr ""
-"Bijwerken repositorydatabases\n"
+"Update repositorydatabases\n"
 "\n"
 "Gebruik: update-repo [<repo1> <repo2> ... <repon>]\n"
 "\n"
 "<repo*>: repositorynaam\n"
 "\n"
 "Synchroniseert de PiSi-databases met de huidige repository.\n"
-"Indien geen repository opgegeven is worden alle repositories bijgewerkt.\n"
+"Indien geen repository opgegeven is worden alle repositories geupdate.\n"
 
 #: pisi/cli/commands.py:1138
 msgid "update-repo options"
@@ -1923,7 +1923,7 @@ msgstr "update-repo opties"
 
 #: pisi/cli/commands.py:1142
 msgid "Update database in any case"
-msgstr "Database altijd bijwerken"
+msgstr "Altijd database updaten"
 
 #: pisi/cli/commands.py:1160
 msgid ""
@@ -1962,7 +1962,7 @@ msgstr "Toevoegen repository op gegeven positie (0 is eerst)"
 
 #: pisi/cli/commands.py:1197
 msgid "Update PiSi database for repository %s?"
-msgstr "Bijwerken PiSi-database voor repository %s?"
+msgstr "Update PiSi-database voor repository %s?"
 
 #: pisi/cli/commands.py:1201
 msgid "%s repository could not be reached. Removing %s from system."
@@ -2436,7 +2436,7 @@ msgstr "Toevoegen %s aan componentindex"
 
 #: pisi/index.py:113
 msgid "Updating package database of %s"
-msgstr "Bijwerken pakketdatabase van %s"
+msgstr "Updaten pakketdatabase van %s"
 
 #: pisi/index.py:141
 msgid "Package %s: metadata corrupt, skipping..."
@@ -2741,7 +2741,7 @@ msgid ""
 "The package may have been upgraded. Please try to upgrade the package."
 msgstr ""
 "Er was een probleem bij ophalen van '%s'.\n"
-"Het pakket kan bijgewerkt zijn. Probeer het pakket bij te werken."
+"Het pakket kan opgewaardeerd zijn. Probeer het pakket op te waarderen."
 
 #: pisi/package.py:60 pisi/sourcearchive.py:94
 msgid "%s [cached]"
@@ -2978,7 +2978,7 @@ msgstr "Commando 'objcopy' (add-debuglink)  mislukte voor bestand '%s'!"
 
 #: pisi/util.py:610
 msgid "Updating environment..."
-msgstr "Omgeving bijwerken..."
+msgstr "Updaten omgeving..."
 
 #: scripts/repostats.py:361
 msgid ""
