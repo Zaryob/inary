@@ -1567,14 +1567,6 @@ in summary, description, and package name fields.
                                default=False, help=_("Show details"))
         self.parser.add_option_group(group)
 
-    def get_lang(self):
-        lang = ctx.get_option('language')
-        if not lang:
-            lang = pisi.pxml.autoxml.LocalText.get_lang()
-        if not lang in ['en', 'tr']:
-            lang = 'en'
-        return lang
-
     def run(self):
 
         self.init(database = True, write = False)
@@ -1583,7 +1575,7 @@ in summary, description, and package name fields.
             self.help()
             return
 
-        r = pisi.api.search_package_terms(self.args, self.get_lang())
+        r = pisi.api.search_package_terms(self.args)
         ctx.ui.info(_('%s packages found') % len(r))
 
         ctx.config.options.short = not ctx.config.options.long

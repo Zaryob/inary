@@ -43,7 +43,6 @@ from pisi.atomicoperations import resurrect_package, build
 from pisi.metadata import MetaData
 from pisi.files import Files
 from pisi.file import File
-import pisi.search
 import pisi.lockeddbshelve as shelve
 from pisi.version import Version
 
@@ -113,7 +112,6 @@ def init(database = True, write = True,
         ctx.componentdb = pisi.component.ComponentDB()
         ctx.packagedb = packagedb.init_db()
         ctx.sourcedb = pisi.sourcedb.init()
-        pisi.search.init(['terms'], ['en', 'tr'])
     else:
         ctx.repodb = None
         ctx.installdb = None
@@ -146,7 +144,6 @@ def finalize():
         if ctx.sourcedb:
             pisi.sourcedb.finalize()
             ctx.sourcedb = None
-        pisi.search.finalize()
         if ctx.dbenv:
             ctx.dbenv.close()
             ctx.dbenv_lock.close()
@@ -341,30 +338,22 @@ def info_name(package_name, installed=False):
         files = None
     return metadata, files
 
-def search_package_names(query):
-    r = set()
-    packages = ctx.packagedb.list_packages()
-    for pkgname in packages:
-        if query in pkgname:
-            r.add(pkgname)
-    return r
+def search_package_terms(terms, repo = pisi.itembyrepodb.all):
 
-def search_package_terms(terms, lang = None, search_names = True, repo = pisi.itembyrepodb.all):
-    if not lang:
-        lang = pisi.pxml.autoxml.LocalText.get_lang()
-    r = pisi.search.query_terms('terms', lang, terms, repo = repo)
-    if search_names:
-        for term in terms:
-            r |= search_package_names(term)
-    return r
+    def search(package, term):
+        term = unicode(term).lower()
+        if term in unicode(package.name).lower() or \
+                term in unicode(package.summary).lower() or \
+                term in unicode(package.description).lower():
+            return True
 
-def search_package(query, lang = None, search_names = True, repo = pisi.itembyrepodb.all):
-    if not lang:
-        lang = pisi.pxml.autoxml.LocalText.get_lang()
-    r = pisi.search.query('terms', lang, query, repo = repo)
-    if search_names:
-        r |= search_package_names(query)
-    return r
+    found = []
+    for name in ctx.packagedb.list_packages(repo):
+        pkg = ctx.packagedb.get_package(name, repo)
+        if terms == filter(lambda x:search(pkg, x), terms):
+            found.append(name)
+
+    return found
 
 def check(package):
     md, files = info(package, True)

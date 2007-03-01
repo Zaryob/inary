@@ -103,21 +103,7 @@ class PackageDB(object):
                     self.dr.add_item(dep_name, [ (name, dep) ], repo, txn)
             # add component
             ctx.componentdb.add_package(package_info.partOf, package_info.name, repo, txn)
-            # index summary and description
-            search_keys = {}
-            for (lang, doc) in package_info.summary.iteritems():
-                text = search_keys.get(lang, "")
-                text += " %s" % doc
-                search_keys[lang] = text
-            for (lang, doc) in package_info.description.iteritems():
-                text = search_keys.get(lang, "")
-                text += " %s" % doc
-                search_keys[lang] = text
-            for lang in search_keys:
-                text = search_keys[lang]
-                # FIXME: other languages should be searchable too
-                if lang in ('en', 'tr'):
-                    pisi.search.add_doc('terms', lang, package_info.name, doc, repo=repo, txn=txn)
+
         ctx.txn_proc(proc, txn)
 
     def clear(self, txn = None):
@@ -144,21 +130,6 @@ class PackageDB(object):
                         # all the list members are removed.
                         self.dr.remove_item(dep_name, repo, txn=txn)
 
-            ctx.componentdb.remove_package(package_info.partOf, package_info.name, repo, txn)
-            search_keys = {}
-            for (lang, doc) in package_info.summary.iteritems():
-                text = search_keys.get(lang, "")
-                text += " %s" % doc
-                search_keys[lang] = text
-            for (lang, doc) in package_info.description.iteritems():
-                text = search_keys.get(lang, "")
-                text += " %s" % doc
-                search_keys[lang] = text
-            for lang in search_keys:
-                text = search_keys[lang]
-                # FIXME: other languages should be searchable too
-                if lang in ('en', 'tr'):
-                    pisi.search.remove_doc('terms', lang, package_info.name, doc, repo=repo, txn=txn)
         self.d.txn_proc(proc, txn)
 
     def remove_repo(self, repo, txn = None):
