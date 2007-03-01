@@ -130,6 +130,9 @@ class PackageDB(object):
                         # all the list members are removed.
                         self.dr.remove_item(dep_name, repo, txn=txn)
 
+            # remove from component
+            ctx.componentdb.remove_package(package_info.partOf, package_info.name, repo, txn)
+
         self.d.txn_proc(proc, txn)
 
     def remove_repo(self, repo, txn = None):
