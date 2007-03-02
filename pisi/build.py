@@ -569,14 +569,8 @@ class Builder:
         metadata.package.packageFormat = ctx.get_option('package_format')
 
         size = 0
-        if package.debug_package:
-            d = self.pkg_debug_dir()
-        else:
-            d = self.pkg_install_dir()
-
-        for path in package.files:
-            for p in glob.glob(util.join_path(d, path.path)):
-                size += util.dir_size(p)
+        for fileinfo in self.files.list:
+            size += fileinfo.size
 
         metadata.package.installedSize = size
 
