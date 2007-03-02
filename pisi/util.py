@@ -433,8 +433,19 @@ def sha1_file(filename):
     try:
         m = sha.new()
         f = file(filename, 'rb')
-        for line in f:
-            m.update(line)
+        while True:
+            # 256 KB seems ideal for speed/memory tradeoff
+            # It wont get much faster with bigger blocks, but
+            # heap peak grows
+            block = f.read(256 * 1024)
+            if len(block) == 0:
+                # end of file
+                break
+            m.update(block)
+            # Simple trick to keep total heap even lower
+            # Delete the previous block, so while next one is read
+            # we wont have two allocated blocks with same size
+            del block
         return m.hexdigest()
     except IOError:
         raise FileError(_("I/O Error: Cannot calculate SHA1 hash of %s") % filename)
