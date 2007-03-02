@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "POT-Creation-Date: 2006-12-12 14:29+EET\n"
-"PO-Revision-Date: 2007-03-01 23:17+0200\n"
+"PO-Revision-Date: 2007-03-02 22:38+0200\n"
 "Last-Translator: Andrea Decorte <adecorte@gmail.com>\n"
 "Language-Team: italiano\n"
 "MIME-Version: 1.0\n"
@@ -243,19 +243,19 @@ msgstr ""
 
 #: /usr/lib/python2.4/optparse.py:1376 /usr/lib/python2.4/optparse.py:1415
 msgid "%s option requires an argument"
-msgstr ""
+msgstr "l'opzione %s richiede un argomento"
 
 #: /usr/lib/python2.4/optparse.py:1378 /usr/lib/python2.4/optparse.py:1417
 msgid "%s option requires %d arguments"
-msgstr ""
+msgstr "l'opzione %s richiede %d argomenti"
 
 #: /usr/lib/python2.4/optparse.py:1387
 msgid "%s option does not take a value"
-msgstr ""
+msgstr "l'opzione %s non richiede un parametro"
 
 #: /usr/lib/python2.4/optparse.py:1404 /usr/lib/python2.4/optparse.py:1558
 msgid "no such option: %s"
-msgstr ""
+msgstr "opzione non valida: %s"
 
 #: /usr/lib/python2.4/optparse.py:1454
 #, docstring
@@ -328,7 +328,7 @@ msgstr ""
 
 #: pisi-cli:49
 msgid "Program Terminated."
-msgstr ""
+msgstr "Programma terminato."
 
 #: pisi-cli:52
 msgid ""
@@ -342,14 +342,16 @@ msgid ""
 "Unhandled internal exception.\n"
 "Please file a bug report. (http://bugs.uludag.org.tr)"
 msgstr ""
+"Eccezione interna non gestita.\n"
+"Invia per piacere una segnalazione di un bug (http://bugs.uludag.org.tr)"
 
 #: pisi-cli:63
 msgid "System Error. Program Terminated."
-msgstr ""
+msgstr "Errore di sistema. Programma terminato."
 
 #: pisi-cli:70
 msgid "Please use 'pisi help' for general help."
-msgstr ""
+msgstr "Utilizza per favore 'pisi help' per un aiuto generico."
 
 #: pisi-cli:73
 msgid "Traceback:"
@@ -369,7 +371,7 @@ msgstr ""
 #: pisi/actionsapi/kde.py:65 pisi/actionsapi/perlmodules.py:54
 #: pisi/actionsapi/perlmodules.py:57
 msgid "Configure failed."
-msgstr ""
+msgstr "Configure fallito."
 
 #: pisi/actionsapi/autotools.py:77 pisi/actionsapi/autotools.py:87
 #: pisi/actionsapi/kde.py:67
@@ -646,11 +648,11 @@ msgstr "URI pacchetto: %s"
 
 #: pisi/atomicoperations.py:82
 msgid "Package %s not found in any active repository."
-msgstr ""
+msgstr "Il pacchetto %s non è stato trovato in alcun repository attivo."
 
 #: pisi/atomicoperations.py:101
 msgid "Installing %s, version %s, release %s, build %s"
-msgstr ""
+msgstr "Installazione di %s, versione %s, release %s, build %s"
 
 #: pisi/atomicoperations.py:146
 msgid "%s package cannot be installed unless the dependencies are satisfied"
@@ -668,7 +670,7 @@ msgstr ""
 
 #: pisi/atomicoperations.py:201
 msgid "Re-install same version package?"
-msgstr ""
+msgstr "Reinstallare la stessa versione del pacchetto?"
 
 #: pisi/atomicoperations.py:202
 msgid "Package re-install declined"
@@ -744,7 +746,7 @@ msgstr ""
 
 #: pisi/atomicoperations.py:545
 msgid "* Adding '%s' to db... "
-msgstr ""
+msgstr "* Aggiunta di %s al database... "
 
 #: pisi/atomicoperations.py:551
 msgid "Files XML '%s' cannot be found"
@@ -764,7 +766,7 @@ msgstr ""
 
 #: pisi/build.py:114
 msgid "Source URI: %s"
-msgstr ""
+msgstr "Uri di origine: %s"
 
 #: pisi/build.py:118
 msgid "Source %s not found in any active repository."
@@ -804,11 +806,11 @@ msgstr ""
 
 #: pisi/build.py:311
 msgid "Unpacking archive..."
-msgstr ""
+msgstr "Scompattazione archivio..."
 
 #: pisi/build.py:313
 msgid " unpacked (%s)"
-msgstr ""
+msgstr "scompattato (%s)"
 
 #: pisi/build.py:318
 msgid "Setting up source..."
@@ -936,7 +938,7 @@ msgstr ""
 
 #: pisi/build.py:832
 msgid "Creating PiSi package %s."
-msgstr ""
+msgstr "Creazione del pacchetto PiSi %s."
 
 #: pisi/build.py:877
 msgid "Done."
@@ -992,7 +994,7 @@ msgstr "Configurato %s"
 
 #: pisi/cli/__init__.py:159
 msgid "Extracting the files of %s"
-msgstr ""
+msgstr "Estrazione dei file di %s"
 
 #: pisi/cli/commands.py:94
 #, docstring
@@ -1001,7 +1003,7 @@ msgstr ""
 
 #: pisi/cli/commands.py:123 pisi/cli/pisicli.py:104
 msgid "Unrecognized command: %s"
-msgstr ""
+msgstr "Comando non riconosciuto %s"
 
 #: pisi/cli/commands.py:145
 #, docstring
@@ -1060,7 +1062,7 @@ msgstr ""
 #: pisi/cli/commands.py:231
 #, docstring
 msgid "print help for the command"
-msgstr ""
+msgstr "stampa l'aiuto per il comando"
 
 #: pisi/cli/commands.py:237
 #, docstring
@@ -1387,7 +1389,7 @@ msgstr ""
 
 #: pisi/cli/commands.py:750
 msgid "remove options"
-msgstr ""
+msgstr "opzioni di rimozione"
 
 #: pisi/cli/commands.py:753
 msgid "Remove component's and recursive components' packages"
@@ -1460,7 +1462,7 @@ msgstr ""
 
 #: pisi/cli/commands.py:896
 msgid "Package found in repository:"
-msgstr ""
+msgstr "Pacchetto trovato nel repository:"
 
 #: pisi/cli/commands.py:900
 msgid "%s is not found in repositories"
@@ -1472,7 +1474,7 @@ msgstr "%s non è installato"
 
 #: pisi/cli/commands.py:916
 msgid "Reverse Dependencies:"
-msgstr ""
+msgstr "Richiesto da:"
 
 #: pisi/cli/commands.py:919
 msgid ""
@@ -1714,11 +1716,11 @@ msgstr ""
 
 #: pisi/cli/commands.py:1282
 msgid "Show uninstalled packages only"
-msgstr ""
+msgstr "Mostra solo i pacchetti disinstallati"
 
 #: pisi/cli/commands.py:1290
 msgid "Installed packages are shown in this color"
-msgstr ""
+msgstr "I pacchetti installati sono mostrati in questa colore"
 
 #: pisi/cli/commands.py:1298
 msgid "Repository : %s\n"
@@ -1892,7 +1894,7 @@ msgstr ""
 
 #: pisi/comariface.py:90
 msgid "Configuration error: %s"
-msgstr ""
+msgstr "Errore di configurazione: %s"
 
 #: pisi/comariface.py:92
 msgid "Script error: %s"
@@ -1964,15 +1966,15 @@ msgstr " versione"
 
 #: pisi/conflict.py:45 pisi/dependency.py:46
 msgid " release >= "
-msgstr ""
+msgstr " release >= "
 
 #: pisi/conflict.py:47 pisi/dependency.py:48
 msgid " release <= "
-msgstr ""
+msgstr " release <= "
 
 #: pisi/conflict.py:49 pisi/dependency.py:50
 msgid " release "
-msgstr ""
+msgstr " release "
 
 #: pisi/constants.py:30
 msgid "Can't rebind constant: %s"
@@ -1984,7 +1986,7 @@ msgstr ""
 
 #: pisi/dependency.py:107
 msgid "%s dependency of package %s is not satisfied"
-msgstr ""
+msgstr "La dipendenza %s del pacchetto %s non è soddisfatta"
 
 #: pisi/dependency.py:120
 msgid "Package %s is not present in the package database"
@@ -1992,7 +1994,7 @@ msgstr ""
 
 #: pisi/fetcher.py:81
 msgid "Filename error"
-msgstr ""
+msgstr "Errore nel nome del file"
 
 #: pisi/fetcher.py:84
 msgid "Access denied to write to destination directory: \"%s\""
@@ -2185,11 +2187,11 @@ msgstr ""
 
 #: pisi/metadata.py:58
 msgid "Distribution: %s, Dist. Release: %s\n"
-msgstr ""
+msgstr "Distribuzione: %s, Dist. Release: %s\n"
 
 #: pisi/metadata.py:60
 msgid "Architecture: %s, Installed Size: %s"
-msgstr ""
+msgstr "Architettura: %s, Dimensione file installati: %s"
 
 #: pisi/mirrors.py:46
 msgid "Mirrors file %s does not exist. Could not resolve mirrors://"
@@ -2238,6 +2240,8 @@ msgid ""
 "The following packages have conflicts:\n"
 "%s"
 msgstr ""
+"I pacchetti seguenti hanno dei conflitti:\n"
+"%s"
 
 #: pisi/operations.py:278
 msgid "Remove the following conflicting packages?"
@@ -2269,7 +2273,7 @@ msgstr "Dimensione totale dei pacchetti: %.2f %s"
 
 #: pisi/operations.py:366 pisi/operations.py:497 pisi/operations.py:709
 msgid "There are extra packages due to dependencies. Do you want to continue?"
-msgstr ""
+msgstr "Sono inclusi dei pacchetti extra per via delle dipendenze. Desideri proseguire?"
 
 #: pisi/operations.py:432
 msgid "Warning: package *name* ends with '.pisi'"
@@ -2313,7 +2317,7 @@ msgstr ""
 
 #: pisi/operations.py:604
 msgid "Package %s does not exist. Cannot remove."
-msgstr ""
+msgstr "Il pacchetto %s non esiste. Impossibile rimuovere."
 
 #: pisi/operations.py:608
 msgid "No packages to remove."
@@ -2365,7 +2369,7 @@ msgstr "%s [nella cache]"
 
 #: pisi/package.py:131
 msgid "MetaData format wrong"
-msgstr ""
+msgstr "Formato MetaData errato"
 
 #: pisi/packagedb.py:66
 msgid "Package %s not found"
@@ -2413,7 +2417,7 @@ msgstr ""
 
 #: pisi/pxml/autoxml.py:567 pisi/pxml/autoxml.py:578
 msgid "Mandatory variable %s not available"
-msgstr ""
+msgstr "La variabile obbligatoria %s non è disponibile"
 
 #: pisi/pxml/autoxml.py:648
 msgid "Type mismatch: read text cannot be decoded"
@@ -2462,7 +2466,7 @@ msgstr ""
 
 #: pisi/repodb.py:74
 msgid "No repository named %s exists"
-msgstr ""
+msgstr "Non esiste alcun repository di nome %s"
 
 #: pisi/repodb.py:83
 msgid "Repository %s already exists"
@@ -2482,7 +2486,7 @@ msgstr ""
 
 #: pisi/scenarioapi/repoops.py:52 pisi/scenarioapi/repoops.py:59
 msgid "Repo does not have package named %s."
-msgstr ""
+msgstr "Il repository non ha un pacchetto di nome %s."
 
 #: pisi/sourcearchive.py:63
 msgid "Trying fallback address: %s"
