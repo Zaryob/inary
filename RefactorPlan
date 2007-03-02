@@ -64,7 +64,14 @@ out exact error is try to parse error string (which is localized).
 
 
 ==> database
-* brr...
+* Pickle Protokolü olarak "2" kullanılabilir, şu anda eski binary protokol "1" kullanılıyor.
+"2" protokolü %5-10 arası daha küçük pickled nesne üretiyor (dbshelve.py)
+
+* Package nesnesi içindeki History ve Summary-Description ayrı veritabanlarına konulmalı. 
+Hem aramalar, hem de paketlerin çeşitli nedenlerle seçilmesi işi hızlanır, bellek kullanımı iyileşir.
+
+* Bazı nesneler için kendi özel serializasyon metodları eklenebilir, Nesneler doğrudan pickle edilmez, 
+önce daha optimize bir nesneye yazılır, oradan db ye aktarılır vs. 
 
 
 ==> class attributes
