@@ -422,6 +422,7 @@ to be downloaded from a repository containing sources.
 
     def __init__(self, args):
         super(Build, self).__init__(args)
+        self.comar = True
 
     name = ("build", "bi")
 
