@@ -1559,8 +1559,6 @@ in summary, description, and package name fields.
     def options(self):
         group = OptionGroup(self.parser, _("search options"))
         super(Search, self).add_options(group)
-        group.add_option("-L", "--language", action="store",
-                               help=_("Set search language"))
         group.remove_option("--component")
         group.remove_option("--short")
         group.remove_option("--xml")
