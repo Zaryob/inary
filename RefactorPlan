@@ -16,7 +16,7 @@ python source.
 
 
 ==> Utility functions
-* sha1_file is suboptimal for binary files and sha1_data has some
+* sha1_file and sha1_data functions has some
 exception confusion. These two functions should be a lot simpler.
 
 * get_file_hashes is overly complex and contains strange code like:
