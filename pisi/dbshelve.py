@@ -95,7 +95,7 @@ class DBShelf:
             raise CodingError()
 
     def encode(self, obj):
-        return cPickle.dumps(obj, 1)
+        return cPickle.dumps(obj, 2)
 
     def clear(self, txn = None):
         def proc(txn):
