@@ -114,6 +114,7 @@ conflicts method takes a pkg_name parameter but doesn't use it at all
 
 * Improve logging with all needed update/downgrade/install/remove information so one can easily find the history of packages, 
 currently PiSi wrotes everyting into logs which is not usefull. Also this information can be used for rollback and reporting.
+
 ==> operations.py and atomicoperations.py
 
 * These modules have gone so big and become untraceable... divide all operations to their related modules
@@ -123,4 +124,8 @@ currently PiSi wrotes everyting into logs which is not usefull. Also this inform
 
 * we have some functions that goes pages long... divide all of them to small digestable chunks.. 
   avoid writing functions longer than your editor's screen.
+
+==> assertions
+
+* Lots of assertions used in the code with no following descriptive string information.
 
