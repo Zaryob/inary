@@ -42,7 +42,7 @@ def unzip(seq):
 * Python builtins like file, list, etc should be avoided in variable names.
 There is even a file.py module!
 
-* a,b,c,d,f,r,_i are equally bad.
+* a,b,c,d,f,r,_i,A,B,C,G are equally bad.
 
 * some import'ed modules are not used inside the importer modules, cleanup needed.
 
@@ -67,14 +67,16 @@ out exact error is try to parse error string (which is localized).
 * We should have a DB performance test suite to find important points to make faster,
 if we cannot measure, we cannot improve. 
  
-* We should use "2" as pickle protocol. currently we use old binary pickle protocol "1". New
+* [FIXED] We should use "2" as pickle protocol. currently we use old binary pickle protocol "1". New
 protocol generally produces more compact pickled objects (dbshelve.py)
 
 * History, and  Summary-Description objects should be kept in seperate db files. This way 
 we  can have faster searches and probably faster access to packages and better memory footprint
 
-* We ca 
+* For big objects with many member objects (Package, from pisi.metadata) we might investigate
+writing our own simple serialization routines for some objects like Conflicts or additionalfiles.
 
+* context singleton is a mess. Maybe we should consider another approach to access common db objects 
 
 ==> class attributes
 * In some classes there are some attributes assigned but never
