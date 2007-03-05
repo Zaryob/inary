@@ -541,5 +541,7 @@ def rebuild_db(files=False):
     # construct new database
     init(database=True, options=options, ui=ui, comar=comar)
     clean_duplicates()
-    reload_packages(files, None)
-    reload_indices(None)
+    txn = ctx.dbenv.txn_begin()
+    reload_packages(files, txn)
+    reload_indices(txn)
+    txn.commit()
