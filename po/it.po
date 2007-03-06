@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "POT-Creation-Date: 2006-12-12 14:29+EET\n"
-"PO-Revision-Date: 2007-03-02 22:38+0200\n"
+"PO-Revision-Date: 2007-03-06 09:52+0200\n"
 "Last-Translator: Andrea Decorte <adecorte@gmail.com>\n"
 "Language-Team: italiano\n"
 "MIME-Version: 1.0\n"
@@ -610,7 +610,7 @@ msgstr ""
 
 #: pisi/api.py:445
 msgid "* Package database updated."
-msgstr ""
+msgstr "* Database dei pacchetti aggiornato."
 
 #: pisi/api.py:447 pisi/api.py:472
 msgid "No repository named %s found."
@@ -656,11 +656,11 @@ msgstr "Installazione di %s, versione %s, release %s, build %s"
 
 #: pisi/atomicoperations.py:146
 msgid "%s package cannot be installed unless the dependencies are satisfied"
-msgstr ""
+msgstr "il pacchetto %s non può essere installato, a meno che le sue dipendenze vengano soddisfatte"
 
 #: pisi/atomicoperations.py:165
 msgid "/%s from %s package\n"
-msgstr ""
+msgstr "/%s dal pacchetto %s\n"
 
 #: pisi/atomicoperations.py:166
 msgid ""
@@ -774,7 +774,7 @@ msgstr ""
 
 #: pisi/build.py:183
 msgid "Building PiSi source package: %s"
-msgstr ""
+msgstr "Costruzione del pacchetto sorgente PiSi %s"
 
 #: pisi/build.py:229
 msgid "IceCream detected. Make sure your daemon is up and running..."
@@ -782,7 +782,7 @@ msgstr ""
 
 #: pisi/build.py:234
 msgid "CCache detected..."
-msgstr ""
+msgstr "CCache rilevato..."
 
 #: pisi/build.py:287
 msgid "PartOf tag not defined, looking for component"
@@ -894,7 +894,7 @@ msgstr ""
 
 #: pisi/build.py:656
 msgid "(found old version %s)"
-msgstr ""
+msgstr "(trovata vecchia versione %s)"
 
 #: pisi/build.py:658
 msgid "Skipping %s with wrong pkg name "
@@ -930,7 +930,7 @@ msgstr ""
 
 #: pisi/build.py:805 pisi/build.py:808
 msgid "Generating %s,"
-msgstr ""
+msgstr "Generazione di %s,"
 
 #: pisi/build.py:814
 msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
@@ -1024,15 +1024,15 @@ msgstr ""
 
 #: pisi/cli/commands.py:158
 msgid "Detailed output"
-msgstr ""
+msgstr "Output dettagliato"
 
 #: pisi/cli/commands.py:160
 msgid "Show debugging information"
-msgstr ""
+msgstr "Mostra informazioni di debug"
 
 #: pisi/cli/commands.py:162
 msgid "Suppresses all coloring of PiSi's output"
-msgstr ""
+msgstr "Annulla tutta la colorazione dell'output di PiSi"
 
 #: pisi/cli/commands.py:169
 #, docstring
@@ -1043,7 +1043,7 @@ msgstr ""
 
 #: pisi/cli/commands.py:181
 msgid "Destination directory %s does not exist. Creating directory.\n"
-msgstr ""
+msgstr "La cartella di destinazione %s non esiste. Creazione in corso...\n"
 
 #: pisi/cli/commands.py:203
 msgid "Password: "
@@ -1079,7 +1079,7 @@ msgstr ""
 
 #: pisi/cli/commands.py:253
 msgid "Duplicate command %s"
-msgstr ""
+msgstr "Comando duplicato %s"
 
 #: pisi/cli/commands.py:262
 #, docstring
@@ -1133,7 +1133,7 @@ msgstr ""
 
 #: pisi/cli/commands.py:357
 msgid "Specify a particular repository"
-msgstr ""
+msgstr "Specifica un repository particolare"
 
 #: pisi/cli/commands.py:360
 msgid "Graph of installed packages"
@@ -1141,7 +1141,7 @@ msgstr ""
 
 #: pisi/cli/commands.py:363
 msgid "Do not show installed packages"
-msgstr ""
+msgstr "Non mostrare i pacchetti installati"
 
 #: pisi/cli/commands.py:366
 msgid "Dot output file"
@@ -1268,11 +1268,11 @@ msgstr ""
 
 #: pisi/cli/commands.py:519 pisi/cli/commands.py:592 pisi/cli/commands.py:656
 msgid "Ignore file conflicts"
-msgstr ""
+msgstr "Ignora i conflitti tra i file"
 
 #: pisi/cli/commands.py:521 pisi/cli/commands.py:594 pisi/cli/commands.py:658
 msgid "Ignore package conflicts"
-msgstr ""
+msgstr "Ignora i conflitti tra i pacchetti"
 
 #: pisi/cli/commands.py:523 pisi/cli/commands.py:552
 msgid "Bypass comar configuration agent"
@@ -1664,7 +1664,7 @@ msgstr ""
 
 #: pisi/cli/commands.py:1183
 msgid "Add repository at given position (0 is first)"
-msgstr ""
+msgstr "Aggiunge il repository a una posizione specificata (0 è la prima)"
 
 #: pisi/cli/commands.py:1197
 msgid "Update PiSi database for repository %s?"
@@ -1902,7 +1902,7 @@ msgstr ""
 
 #: pisi/comariface.py:94
 msgid "comar denied our access"
-msgstr ""
+msgstr "comar ha negato l'accesso"
 
 #: pisi/comariface.py:99
 msgid "Configuring %s package"
@@ -1942,11 +1942,11 @@ msgstr "Componente %s non trovato"
 
 #: pisi/component.py:199 pisi/component.py:225
 msgid "Information for component %s not available"
-msgstr ""
+msgstr "Nessuna informazione disponibile per il pacchetto %s"
 
 #: pisi/config.py:61
 msgid "Destination directory %s does not exist. Creating it."
-msgstr ""
+msgstr "La cartella di destinazione %s non esiste. La sto creando."
 
 #: pisi/configfile.py:105
 msgid "No section by name '%s'"
@@ -2002,7 +2002,7 @@ msgstr ""
 
 #: pisi/fetcher.py:89
 msgid "Access denied to destination file: \"%s\""
-msgstr ""
+msgstr "Accesso negato al file di destinazione: \"%s\""
 
 #: pisi/fetcher.py:100
 msgid "A problem occured. Please check the archive address and/or permissions again."
