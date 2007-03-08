@@ -19,7 +19,7 @@ _ = __trans.ugettext
 import pisi.context as ctx
 from pisi.version import Version
 import pisi.pxml.autoxml as autoxml
-import pisi.itembyrepodb
+import pisi.db.itembyrepodb
 
 class Conflict:
 
@@ -75,7 +75,7 @@ given conflicting spec"""
     if not ctx.installdb.is_installed(pkg_name):
         return False
     else:
-        pkg = ctx.packagedb.get_package(pkg_name, pisi.itembyrepodb.installed)
+        pkg = ctx.packagedb.get_package(pkg_name, pisi.db.itembyrepodb.installed)
         (version, release) = (pkg.version, pkg.release)
         return confinfo.conflicts(pkg_name, version, release)
 

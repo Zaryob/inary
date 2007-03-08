@@ -24,10 +24,10 @@ _ = __trans.ugettext
 # PiSi
 import pisi
 import pisi.context as ctx
-import pisi.lockeddbshelve as shelve
+import pisi.db.lockeddbshelve as dbshelve
 from pisi.files import Files
 import pisi.util as util
-from pisi.util import join_path as join
+from pisi.util import join_path
 
 
 class InstallDBError(pisi.Error):
@@ -72,9 +72,9 @@ class InstallInfo:
 class InstallDB:
 
     def __init__(self):
-        self.d = shelve.LockedDBShelf('install')
-        self.dp = shelve.LockedDBShelf('configpending')
-        self.files_dir = join(ctx.config.db_dir(), 'files')
+        self.d = dbshelve.LockedDBShelf('install')
+        self.dp = dbshelve.LockedDBShelf('configpending')
+        self.files_dir = join_path(ctx.config.db_dir(), 'files')
 
     def close(self):
         self.d.close()
@@ -82,7 +82,7 @@ class InstallDB:
 
     def files_name(self, pkg, version, release):
         pkg_dir = self.pkg_dir(pkg, version, release)
-        return join(pkg_dir, ctx.const.files_xml)
+        return join_path(pkg_dir, ctx.const.files_xml)
 
     def files(self, pkg):
         pkg = str(pkg)
@@ -92,7 +92,7 @@ class InstallDB:
         return files
 
     def pkg_dir(self, pkg, version, release):
-        return join(ctx.config.lib_dir(), 'package',
+        return join_path(ctx.config.lib_dir(), 'package',
                     pkg + '-' + version + '-' + release)
 
     def is_recorded(self, pkg, txn = None):

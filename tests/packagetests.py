@@ -13,7 +13,8 @@ import os
 
 from pisi import util
 import pisi.context as ctx
-from pisi import package
+import pisi.db.packagedb
+import pisi.package
 
 import testcase
 class PackageTestCase(testcase.TestCase):

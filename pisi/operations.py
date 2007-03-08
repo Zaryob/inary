@@ -24,9 +24,9 @@ import pisi.util as util
 import pisi.dependency as dependency
 import pisi.conflict
 import pisi.pgraph as pgraph
-import pisi.packagedb as packagedb
-import pisi.repodb
-import pisi.installdb
+import pisi.db.packagedb as packagedb
+import pisi.db.repodb
+import pisi.db.installdb
 from pisi.index import Index
 import pisi.cli
 import pisi.atomicoperations as atomicoperations
@@ -442,6 +442,7 @@ def upgrade_pkg_names(A = []):
             continue
 
         if security_only:
+            pkg.history = ctx.packageDB.get_history(x)
             updates = [i for i in pkg.history if Version(i.release) > Version(release)]
             if not pisi.util.any(lambda i:i.type == 'security', updates):
                 continue
@@ -637,7 +638,7 @@ def plan_remove(A):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
-    G_f = pgraph.PGraph(ctx.packagedb, pisi.itembyrepodb.installed)               # construct G_f
+    G_f = pgraph.PGraph(ctx.packagedb, pisi.db.itembyrepodb.installed)               # construct G_f
 
     # find the (install closure) graph of G_f by package
     # set A using packagedb
@@ -647,12 +648,12 @@ def plan_remove(A):
     while len(B) > 0:
         Bp = set()
         for x in B:
-            pkg = ctx.packagedb.get_package(x, pisi.itembyrepodb.installed)
-            rev_deps = ctx.packagedb.get_rev_deps(x, pisi.itembyrepodb.installed)
+            pkg = ctx.packagedb.get_package(x, pisi.db.itembyrepodb.installed)
+            rev_deps = ctx.packagedb.get_rev_deps(x, pisi.db.itembyrepodb.installed)
             for (rev_dep, depinfo) in rev_deps:
                 # we don't deal with uninstalled rev deps
                 # and unsatisfied dependencies (this is important, too)
-                if ctx.packagedb.has_package(rev_dep, pisi.itembyrepodb.installed) and \
+                if ctx.packagedb.has_package(rev_dep, pisi.db.itembyrepodb.installed) and \
                    dependency.installed_satisfies_dep(depinfo):
                     if not rev_dep in G_f.vertices():
                         Bp.add(rev_dep)

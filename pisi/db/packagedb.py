@@ -28,9 +28,8 @@ _ = __trans.ugettext
 import pisi
 import pisi.util as util
 import pisi.context as ctx
-import pisi.lockeddbshelve as shelve
-from pisi.itembyrepodb import ItemByRepoDB
-import pisi.itembyrepodb as itembyrepodb
+import pisi.db.itembyrepodb as itembyrepodb
+
 
 class Error(pisi.Error):
     pass
@@ -45,16 +44,24 @@ class PackageDB(object):
     using shelf objects"""
 
     def __init__(self):
-        self.d = ItemByRepoDB('package')
-        self.dr = ItemByRepoDB('revdep')
+        self.d = itembyrepodb.ItemByRepoDB('package')
+        self.dbHistory = itembyrepodb.ItemByRepoDB('package_history')
+        self.dr = itembyrepodb.ItemByRepoDB('revdep')
 
     def close(self):
         self.d.close()
+        self.dbHistory.close()
         self.dr.close()
 
     def destroy(self):
         self.d.destroy()
+        self.dbHistory.destroy()
         self.dr.destroy()
+        
+    def clear(self, txn = None):
+        self.d.clear()
+        self.dbHistory.clear()
+        self.dr.clear()
 
     def has_package(self, name, repo=None, txn = None):
         return self.d.has_key(name, repo, txn=txn)
@@ -62,8 +69,14 @@ class PackageDB(object):
     def get_package(self, name, repo=None, txn = None):
         try:
             return self.d.get_item(name, repo, txn=txn)
-        except pisi.itembyrepodb.NotfoundError, e:
+        except pisi.db.itembyrepodb.NotfoundError, e:
             raise Error(_('Package %s not found') % name)
+
+    def get_history(self, name, repo=None, txn = None):
+        try:
+            return self.dbHistory.get_item(name, repo, txn=txn)
+        except pisi.db.itembyrepodb.NotfoundError, e:
+            raise Error(_('History for Package %s not found') % name)
 
     def get_package_repo(self, name, repo=None, txn = None):
         return self.d.get_item_repo(name, repo, txn=txn)
@@ -91,6 +104,8 @@ class PackageDB(object):
         name = str(package_info.name)
 
         def proc(txn):
+            self.dbHistory.add_item(name, package_info.history, repo, txn)
+            package_info.history = None
             self.d.add_item(name, package_info, repo, txn)
             for dep in package_info.runtimeDependencies():
                 dep_name = str(dep.package)
@@ -103,18 +118,14 @@ class PackageDB(object):
                     self.dr.add_item(dep_name, [ (name, dep) ], repo, txn)
             # add component
             ctx.componentdb.add_package(package_info.partOf, package_info.name, repo, txn)
-
         ctx.txn_proc(proc, txn)
-
-    def clear(self, txn = None):
-        self.d.clear()
-        self.dr.clear()
 
     def remove_package(self, name, repo = None, txn = None):
         name = str(name)
         def proc(txn):
             package_info = self.d.get_item(name, repo, txn=txn)
             self.d.remove_item(name, repo, txn=txn)
+            self.dbHistory.remove_item(name, repo, txn=txn)
             for dep in package_info.runtimeDependencies():
                 dep_name = str(dep.package)
                 if self.dr.has_key(dep_name, repo, txn):

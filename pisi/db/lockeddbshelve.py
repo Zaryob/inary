@@ -16,7 +16,7 @@ import types
 
 import bsddb3.db as db
 import bsddb3.dbobj as dbobj
-import pisi.dbshelve as shelve
+import pisi.db.dbshelve as dbshelve
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -24,7 +24,7 @@ _ = __trans.ugettext
 
 import pisi
 import pisi.context as ctx
-from pisi.util import join_path
+import pisi.util as util
 
 from pisi.version import Version
 
@@ -35,7 +35,7 @@ class Error(pisi.Error):
 # if write is given it knows it has write access
 # if force is given it updates the specified db version
 def check_dbversion(versionfile, ver, write=False, update=False):
-    verfn = join_path(pisi.context.config.db_dir(), versionfile)
+    verfn = util.join_path(ctx.config.db_dir(), versionfile)
     firsttime = False
     if os.path.exists(verfn):
         verfile = file(verfn, 'r')
@@ -64,7 +64,7 @@ def check_dbversion(versionfile, ver, write=False, update=False):
         raise Error(_('Database version %s not present.') % versionfile)
 
 def lock_dbenv():
-    ctx.dbenv_lock = file(join_path(pisi.context.config.db_dir(), 'dbenv.lock'), 'w')
+    ctx.dbenv_lock = file(util.join_path(pisi.context.config.db_dir(), 'dbenv.lock'), 'w')
     try:
         fcntl.flock(ctx.dbenv_lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except IOError:
@@ -96,15 +96,15 @@ def init_dbenv(write=False, writeversion=False):
     else:
         ctx.dbenv = None # read-only access to database
 
-class LockedDBShelf(shelve.DBShelf):
+class LockedDBShelf(dbshelve.DBShelf):
     """A simple wrapper to implement locking for bsddb's dbshelf"""
 
     def __init__(self, dbname, mode=0644,
                  filetype=db.DB_BTREE, dbenv = None):
         if dbenv == None:
             dbenv = ctx.dbenv
-        shelve.DBShelf.__init__(self, dbenv)
-        filename = join_path(pisi.context.config.db_dir(), dbname + '.bdb')
+        dbshelve.DBShelf.__init__(self, dbenv)
+        filename = util.join_path(pisi.context.config.db_dir(), dbname + '.bdb')
         if dbenv and os.access(os.path.dirname(filename), os.W_OK):
             flags = 'w'
         elif os.access(filename, os.R_OK):

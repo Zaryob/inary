@@ -10,18 +10,14 @@
 # Please read the COPYING file.
 #
 
-import os, fcntl
-
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
-import pisi.lockeddbshelve as shelve
+import pisi.db.lockeddbshelve as shelve
 import pisi.context as ctx
-import pisi.packagedb as packagedb
-import pisi.util as util
-from pisi.uri import URI
+import pisi.db.packagedb as packagedb
 
 class Error(pisi.Error):
     pass
