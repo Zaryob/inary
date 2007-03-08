@@ -343,6 +343,9 @@ def info_name(package_name, installed=False):
     return metadata, files
 
 def search_package_terms(terms, repo = pisi.db.itembyrepodb.all):
+    return search_in_packages(terms, ctx.packagedb.list_packages(repo), repo)
+
+def search_in_packages(terms, packages, repo = pisi.db.itembyrepodb.all):
 
     def search(package, term):
         term = unicode(term).lower()
@@ -352,7 +355,7 @@ def search_package_terms(terms, repo = pisi.db.itembyrepodb.all):
             return True
 
     found = []
-    for name in ctx.packagedb.list_packages(repo):
+    for name in packages:
         pkg = ctx.packagedb.get_package(name, repo)
         if terms == filter(lambda x:search(pkg, x), terms):
             found.append(name)
