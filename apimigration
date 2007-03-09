@@ -1,0 +1,34 @@
+Possible API Migrations
+=======================
+
+Pisi does not have an api. All the projects use its internal modules to do their
+jobs. This file holds a list of these usages for api migration.
+
+PiSi
+====
+
+Pisi itself also should not use internal db modules. It can also use this abstracted
+api layer from the needed places.
+
+Package Manager
+===============
+
+Package Manager should not use internal db modules of pisi. It should only use pisi 
+api.
+
+* repodb.get_repo
+* packagedb.get_package
+* componentdb.list_components
+* repodb.list
+* componentdb.get_union_comp
+* componentdb.get_union_packages
+
+Yali
+====
+
+Yali should not use internal db modules of pisi. It should only use pisi api.
+
+Buildfarm
+=========
+
+Buildfarm should not use internal db modules of pisi. It should only use pisi api.
