@@ -10,6 +10,53 @@ PiSi
 Pisi itself also should not use internal db modules. It can also use this abstracted
 api layer from the needed places.
 
+* packagedb.remove_repo
+* sourcedb.remove_repo
+* packagedb.which_repo
+* repodb.get_repo
+* packagedb.get_package
+* installdb.is_installed
+* packagedb.get_rev_deps
+* installdb.get_version
+* packagedb.has_package
+* packagedb.add_package
+* componentdb.add_package
+* filesdb.has_file
+* filesdb.get_file
+* installdb.get_info
+* installdb.files
+* installdb.pkg_dir
+* installdb.install
+* filesdb.add_files
+* componentdb.add_spec
+* sourcedb.add_spec
+* componentdb.get_union_comp
+* componentdb.remove_spec
+* installdb.get_version
+* componentdb.remove_repo
+* componentdb.remove_package
+* componentdb.update_component
+* componentdb.add_package
+* installdb.remove
+* filesdb.remove_files
+* sourcedb.pkgtosrc
+* sourcedb.get_spec
+* sourcedb.get_source
+* sourcedb.get_spec_repo
+* repodb.get_repo
+* componentdb.has_component
+* componentdb.get_component
+* installdb.is_installed
+* packagedb.list_packages
+* installdb.list_installed
+* componentdb.get_union_packages
+* componentdb.list_components
+* repodb.list
+* sourcedb.list
+* installdb.list_pending
+* filesdb.match_files
+* 
+
 Package Manager
 ===============
 
