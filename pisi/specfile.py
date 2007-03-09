@@ -182,7 +182,7 @@ class Package:
 
     def runtimeDependencies(self):
         deps = self.packageDependencies
-        deps += [ ctx.componentdb.get_component[x].packages for x in self.componentDependencies ]
+        deps += [ ctx.componentdb.get_component(x).packages for x in self.componentDependencies ]
         return deps
 
     def pkg_dir(self):
