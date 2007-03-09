@@ -17,7 +17,6 @@ Package Manager should not use internal db modules of pisi. It should only use p
 api.
 
 * repodb.get_repo
-
 * packagedb.get_package
 
   pisi.itemsbyrepo.installed or pisi.itemsbyrepo.repos should not be used by package manager.
@@ -33,6 +32,15 @@ Yali
 ====
 
 Yali should not use internal db modules of pisi. It should only use pisi api.
+
+* api.add_repo
+* api.update_repo
+* api.remove_repo
+* api.install
+* packagedb.list_packages
+* installdb.list_pending
+* api.configure_pending
+* packagedb.get_package
 
 Buildfarm
 =========
