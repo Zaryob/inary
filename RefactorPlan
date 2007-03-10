@@ -3,6 +3,9 @@ Here we take notes of the strange stuff, so we can refactor them after
 Pardus 2007 release.
 
 
+==> Python 2.5 support
+* We should use python2.5
+
 ==> Locale support
 * bindtextdomain and textdomain calls are not necessary, because
 gettext.translation() dont use them.
