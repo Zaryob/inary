@@ -84,6 +84,11 @@ writing our own simple serialization routines for some objects like Conflicts or
 * ComponentDB should not hold lists of Packages that belongs to it. A new index for components to package DB 
 should be enough.
   
+* Current implementation of repository system is suboptimal. We add every package to a Dictionary as a value 
+repository name as value and add that dictionary to db. For example if I am adding package foo to 
+packages db, I am actually adding, a Dictionary with [foo, "repotype"] to db.
+This is cheap, bloated and slow. We must have different repository databases for packages.
+
 ==> class attributes
 * In some classes there are some attributes assigned but never
 used. (see remove_unused_attributes.patch)
