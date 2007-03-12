@@ -49,6 +49,7 @@ from pisi.files import Files
 from pisi.file import File
 import pisi.db.lockeddbshelve as shelve
 from pisi.version import Version
+import delta
 
 class Error(pisi.Error):
     pass
@@ -580,3 +581,11 @@ def get_installed_package(name):
 ### Component Database Operations ###
 
 ### Files Database Operations ###
+
+### Delta Package Operations ###
+
+## Creates a delta package from the given .pisi package paths.
+#  @param old_package Path of the older package
+#  @param new_package Path of the newer package
+def create_delta_package(old_package, new_package):
+    delta.create_delta_package(old_package, new_package)
