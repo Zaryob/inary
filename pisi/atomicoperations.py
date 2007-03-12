@@ -63,7 +63,7 @@ class Install(AtomicOperation):
         if repo:
             ctx.ui.info(_("Package %s found in repository %s") % (name, repo))
             repo = ctx.repodb.get_repo(repo)
-            pkg = ctx.packagedb.get_package(name)
+            pkg = pisi.api.get_repo_package(name)
             delta = None
 
             # Package is installed. This is an upgrade. Check delta.
@@ -188,7 +188,6 @@ class Install(AtomicOperation):
         if ctx.installdb.is_installed(pkg.name): # is this a reinstallation?
 
             #FIXME: consider REPOSITORY instead of DISTRIBUTION -- exa
-            #ipackage = ctx.packagedb.get_package(pkg.name, pisi.db.itembyrepodb.installed)
             ipkg = ctx.installdb.get_info(pkg.name)
             repomismatch = ipkg.distribution != pkg.distribution
 
@@ -427,7 +426,7 @@ class Remove(AtomicOperation):
     def __init__(self, package_name):
         super(Remove, self).__init__()
         self.package_name = package_name
-        self.package = ctx.packagedb.get_package(self.package_name, pisi.db.itembyrepodb.installed)
+        self.package = pisi.api.get_installed_package(self.package_name)
         try:
             self.files = ctx.installdb.files(self.package_name)
         except pisi.Error, e:

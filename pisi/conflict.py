@@ -75,7 +75,7 @@ given conflicting spec"""
     if not ctx.installdb.is_installed(pkg_name):
         return False
     else:
-        pkg = ctx.packagedb.get_package(pkg_name, pisi.db.itembyrepodb.installed)
+        pkg = api.get_installed_package(pkg_name)
         (version, release) = (pkg.version, pkg.release)
         return confinfo.conflicts(pkg_name, version, release)
 

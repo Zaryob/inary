@@ -22,7 +22,6 @@ import pisi.cli
 import pisi.context as ctx
 from pisi.uri import URI
 import pisi.util as util
-import pisi.api as api
 from colors import colorize
 
 class Error(pisi.Error):
@@ -1124,7 +1123,7 @@ Usage: list-installed
             ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
             print         '========================================================================'
         for pkg in installed:
-            package = ctx.packagedb.get_package(pkg, pisi.db.itembyrepodb.installed)
+            package = pisi.api.get_installed_package(pkg)
             inst_info = ctx.installdb.get_info(pkg)
             if self.options.long:
                 ctx.ui.info(unicode(package))
@@ -1367,7 +1366,7 @@ all repositories.
         installed_list = ctx.installdb.list_installed()
         list.sort()
         for p in list:
-            package = ctx.packagedb.get_package(p)
+            package = pisi.api.get_repo_package(p)
             if self.options.long:
                 ctx.ui.info(unicode(package))
             else:
@@ -1502,7 +1501,7 @@ Lists the packages that will be upgraded.
             ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
             print         '========================================================================'
         for pkg in upgradable_pkgs:
-            package = ctx.packagedb.get_package(pkg, pisi.db.itembyrepodb.installed)
+            package = pisi.api.get_installed_package(pkg)
             inst_info = ctx.installdb.get_info(pkg)
             if self.options.long:
                 ctx.ui.info(package)

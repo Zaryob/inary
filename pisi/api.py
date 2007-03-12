@@ -196,7 +196,7 @@ def package_graph(A, repo = pisi.db.itembyrepodb.installed, ignore_installed = F
     while len(B) > 0:
         Bp = set()
         for x in B:
-            pkg = ctx.packagedb.get_package(x, repo)
+            pkg = get_repo_package(x, repo)
             #print pkg
             for dep in pkg.runtimeDependencies():
                 if ignore_installed:
@@ -252,7 +252,7 @@ def generate_pending_order(A):
     while len(B) > 0:
         Bp = set()
         for x in B.keys():
-            pkg = ctx.packagedb.get_package(x, pisi.db.itembyrepodb.installed)
+            pkg = get_installed_package(x)
             for dep in pkg.runtimeDependencies():
                 if dep.package in G_f.vertices():
                     G_f.add_dep(x, dep)
@@ -321,7 +321,7 @@ def info_file(package_fn):
 def info_name(package_name, installed=False):
     """Fetch package information for the given package."""
     if installed:
-        package = ctx.packagedb.get_package(package_name, pisi.db.itembyrepodb.installed)
+        package = get_installed_package(package_name)
     else:
         package, repo = ctx.packagedb.get_package_repo(package_name, pisi.db.itembyrepodb.repos)
         repostr = repo
@@ -356,7 +356,7 @@ def search_in_packages(terms, packages, repo = pisi.db.itembyrepodb.all):
 
     found = []
     for name in packages:
-        pkg = ctx.packagedb.get_package(name, repo)
+        pkg = get_repo_package(name, repo)
         if terms == filter(lambda x:search(pkg, x), terms):
             found.append(name)
 
@@ -552,3 +552,31 @@ def rebuild_db(files=False):
     reload_packages(files, txn)
     reload_indices(txn)
     txn.commit()
+
+############################ Under Construction ##############################
+
+### Package Database Operations ###
+
+## Returns the package informations of the given repository
+#  @param name Name of the package
+#  @param repo Name of the repository
+def get_repo_package(name, repo=pisi.db.itembyrepodb.repos):
+    # FIXME: * currently we return the first package in repo order
+    #        * we should get rid of itembyrepodb enums
+    #        * transparent transaction support
+    return ctx.packagedb.get_package(name, repo, txn=None)
+
+## Returns the installed package information
+#  @param name Name of the package
+def get_installed_package(name):
+    # FIXME: * we should get rid of itembyrepodb enums
+    #        * transparent transaction support
+    return ctx.packagedb.get_package(name, pisi.db.itembyrepodb.installed, txn=None)
+
+### Repo Database Operations ###
+
+### Source Database Operations ###
+
+### Component Database Operations ###
+
+### Files Database Operations ###

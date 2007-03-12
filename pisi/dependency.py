@@ -16,6 +16,7 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
+import pisi
 import pisi.context as ctx
 import pisi.db.packagedb as packagedb
 from pisi.version import Version
@@ -86,7 +87,7 @@ dependency spec"""
     if not ctx.installdb.is_installed(pkg_name):
         return False
     else:
-        pkg = ctx.packagedb.get_package(pkg_name, pisi.db.itembyrepodb.installed)
+        pkg = pisi.api.get_installed_package(pkg_name)
         (version, release) = (pkg.version, pkg.release)
         return depinfo.satisfies(pkg_name, version, release)
 
@@ -97,7 +98,7 @@ dependency spec"""
     if not ctx.packagedb.has_package(pkg_name):
         return False
     else:
-        pkg = ctx.packagedb.get_package(pkg_name)
+        pkg = pisi.api.get_repo_package(pkg_name)
         (version, release) = (pkg.version, pkg.release)
         return depinfo.satisfies(pkg_name, version, release)
 
@@ -110,7 +111,7 @@ def satisfies_dependencies(pkg, deps, sat = installed_satisfies_dep):
     return True
 
 def satisfies_runtime_deps(pkg):
-    deps = ctx.packagedb.get_package(pkg).runtimeDependencies()
+    deps = pisi.api.get_repo_package(pkg).runtimeDependencies()
     return satisfies_dependencies(pkg, deps)
 
 def installable(pkg):

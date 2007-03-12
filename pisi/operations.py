@@ -185,7 +185,7 @@ in the respective order to satisfy extra dependencies:
     while len(B) > 0:
         Bp = set()
         for x in B:
-            pkg = packagedb.get_package(x)
+            pkg = pisi.api.get_repo_package(x)
             for dep in pkg.runtimeDependencies():
                 if dependency.dict_satisfies_dep(d_t, dep):
                     if not dep.package in G_f.vertices():
@@ -230,7 +230,7 @@ def calculate_conflicts(order, packagedb):
     pkg_conflicts = {}
 
     for x in order:
-        pkg = packagedb.get_package(x)
+        pkg = pisi.api.get_repo_package(x)
 
         # check if any package has conflicts with the installed packages
         conflicts = check_conflict(pkg, order)
@@ -241,7 +241,7 @@ def calculate_conflicts(order, packagedb):
         # now check if any package has conflicts with each other
         B_i = B_0.intersection(set(map(lambda c:c.package, pkg.conflicts)))
         D_i = set()
-        for p in map(lambda x:packagedb.get_package(x), B_i):
+        for p in map(lambda x:pisi.api.get_repo_package(x), B_i):
             conflicted = pisi.conflict.package_conflicts(p, pkg.conflicts)
             if conflicted:
                 D_i.add(str(conflicted))
@@ -285,7 +285,7 @@ def is_upgradable(name, ignore_build = False):
         return False
     (version, release, build) = ctx.installdb.get_version(name)
     try:
-        pkg = ctx.packagedb.get_package(name)
+        pkg = pisi.api.get_repo_package(name)
     except KeyboardInterrupt:
         raise
     except Exception, e: #FIXME: what exception could we catch here, replace with that.
@@ -391,7 +391,7 @@ def plan_install_pkg_names(A, ignore_package_conflicts = False):
     while len(B) > 0:
         Bp = set()
         for x in B:
-            pkg = ctx.packagedb.get_package(x)
+            pkg = pisi.api.get_repo_package(x)
             for dep in pkg.runtimeDependencies():
                 ctx.ui.debug('checking %s' % str(dep))
                 # we don't deal with already *satisfied* dependencies
@@ -436,7 +436,7 @@ def upgrade_pkg_names(A = []):
             continue
         (version, release, build) = ctx.installdb.get_version(x)
         if ctx.packagedb.has_package(x):
-            pkg = ctx.packagedb.get_package(x)
+            pkg = pisi.api.get_repo_package(x)
         else:
             ctx.ui.info(_('Package %s is not available in repositories.') % x, True)
             continue
@@ -539,7 +539,7 @@ def plan_upgrade(A, ignore_build = False):
     while len(B) > 0:
         Bp = set()
         for x in B:
-            pkg = packagedb.get_package(x)
+            pkg = pisi.api.get_repo_package(x)
             for dep in pkg.runtimeDependencies():
                 # add packages that can be upgraded
                 if dependency.repo_satisfies_dep(dep):
@@ -559,7 +559,7 @@ def plan_upgrade(A, ignore_build = False):
     while len(B) > 0:
         Bp = set()
         for x in B:
-            pkg = packagedb.get_package(x)
+            pkg = pisi.api.get_repo_package(x)
             rev_deps = packagedb.get_rev_deps(x)
             for (rev_dep, depinfo) in rev_deps:
                 # add only installed but unsatisfied reverse dependencies
@@ -648,7 +648,7 @@ def plan_remove(A):
     while len(B) > 0:
         Bp = set()
         for x in B:
-            pkg = ctx.packagedb.get_package(x, pisi.db.itembyrepodb.installed)
+            pkg = pisi.api.get_installed_package(x)
             rev_deps = ctx.packagedb.get_rev_deps(x, pisi.db.itembyrepodb.installed)
             for (rev_dep, depinfo) in rev_deps:
                 # we don't deal with uninstalled rev deps
@@ -798,7 +798,7 @@ def plan_emerge(A, rebuild_all):
 def calculate_download_sizes(order):
     total_size = cached_size = 0
 
-    for pkg in [ctx.packagedb.get_package(name) for name in order]:
+    for pkg in [pisi.api.get_repo_package(name) for name in order]:
 
         delta = None
         if ctx.installdb.is_installed(pkg.name):
