@@ -524,7 +524,7 @@ class Remove(AtomicOperation):
     def remove_db(self, txn):
         ctx.installdb.remove(self.package_name, txn)
         ctx.filesdb.remove_files(self.files, txn)
-        ctx.packagedb.remove_tracking_package(self.package_name, txn)
+        pisi.db.packagedb.remove_tracking_package(self.package_name, txn)
 
 
 def remove_single(package_name):
