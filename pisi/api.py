@@ -397,23 +397,6 @@ def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=F
         index.write(output, sha1sum=True, compress=File.bz2, sign=File.detached)
     ctx.ui.info(_('* Index file written'))
 
-def add_repo(name, indexuri, at = None):
-    if ctx.repodb.has_repo(name):
-        raise Error(_('Repo %s already present.') % name)
-    else:
-        repo = pisi.db.repodb.Repo(URI(indexuri))
-        ctx.repodb.add_repo(name, repo, at = at)
-        ctx.ui.info(_('Repo %s added to system.') % name)
-
-def remove_repo(name):
-    if ctx.repodb.has_repo(name):
-        ctx.repodb.remove_repo(name)
-        pisi.util.clean_dir(os.path.join(ctx.config.index_dir(), name))
-        ctx.ui.info(_('Repo %s removed from system.') % name)
-    else:
-        ctx.ui.error(_('Repository %s does not exist. Cannot remove.')
-                 % name)
-
 def list_repos():
     return ctx.repodb.list()
 
@@ -527,7 +510,7 @@ def rebuild_db(files=False):
             for repo in os.listdir(index_dir):
                 indexuri = pisi.util.join_path(ctx.config.lib_dir(), 'index', repo, 'uri')
                 indexuri = open(indexuri, 'r').readline()
-                pisi.api.add_repo(repo, indexuri)
+                pisi.api.add_repository(repo, indexuri)
                 pisi.api.rebuild_repo(repo)
 
     # check db schema versions
@@ -575,6 +558,28 @@ def get_installed_package(name):
     return ctx.packagedb.get_package(name, pisi.db.itembyrepodb.installed, txn=None)
 
 ### Repo Database Operations ###
+
+## Adds a new repository to the pisi database
+#  @param name Name of the repository
+#  @param uri Repository location
+def add_repository(name, uri):
+    if ctx.repodb.has_repo(name):
+        raise Error(_('Repo %s already present.') % name)
+    else:
+        repo = pisi.db.repodb.Repo(URI(uri))
+        ctx.repodb.add_repo(name, repo)
+        ctx.ui.info(_('Repo %s added to system.') % name)
+
+## Removes an existing repository from the pisi database
+#  @param name Name of the repository
+def remove_repository(name):
+    if ctx.repodb.has_repo(name):
+        ctx.repodb.remove_repo(name)
+        pisi.util.clean_dir(os.path.join(ctx.config.index_dir(), name))
+        ctx.ui.info(_('Repo %s removed from system.') % name)
+    else:
+        ctx.ui.error(_('Repository %s does not exist. Cannot remove.')
+                     % name)
 
 ### Source Database Operations ###
 
