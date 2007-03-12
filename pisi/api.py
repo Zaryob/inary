@@ -134,12 +134,8 @@ def finalize():
             ctx.loghandler.flush()
             ctx.log.removeHandler(ctx.loghandler)
 
-        if ctx.repodb:
-            ctx.repodb.finalize()
-            ctx.repodb = None
-        if ctx.installdb:
-            ctx.installdb.finalize()
-            ctx.installdb = None    
+        pisi.db.repodb.finalize()
+        pisi.db.installdb.finalize()
         if ctx.filesdb != None:
             ctx.filesdb.close()
             ctx.filesdb = None
