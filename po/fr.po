@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "POT-Creation-Date: 2006-12-12 14:29+EET\n"
-"PO-Revision-Date: 2007-03-14 00:07+0200\n"
+"PO-Revision-Date: 2007-03-15 00:49+0200\n"
 "Last-Translator: Amine Chadly <amine.chadly@gmail.com>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -398,9 +398,9 @@ msgstr ""
 "\n"
 "        Affiche le message d'utilisation pour le programme courant (self.usage) \n"
 "        dans 'file' (par défaut stdout).  Toute occurence de la chaîne \"%prog\" dans\n"
-"        self.usage est remplacé par le nom du programme courant\n"
+"        self.usage est remplacée par le nom du programme courant\n"
 "        (nom de base de sys.argv[0]).  Ne fait rien si self.usage est vide\n"
-"        ou indéfini.\n"
+"        ou indéfinie.\n"
 "        "
 
 #: /usr/lib/python2.4/optparse.py:1489
@@ -414,10 +414,18 @@ msgid ""
 "        name.  Does nothing if self.version is empty or undefined.\n"
 "        "
 msgstr ""
+"print_version(file : file = stdout)\n"
+"\n"
+"        Affiche le message de version de ce programme (self.version)\n"
+"        dans le fichier 'file' (par défaut dans stdout). Comme pour \n"
+"        print_usage(), toute occurence de \"%prog\" dans self.version\n"
+"        sera remplacée par le nom du programme courant\n"
+"        Ne fait rien si self.version est vide ou indéfinie.\n"
+"        "
 
 #: /usr/lib/python2.4/optparse.py:1504
 msgid "options"
-msgstr ""
+msgstr "options"
 
 #: /usr/lib/python2.4/optparse.py:1528
 #, docstring
@@ -428,6 +436,12 @@ msgid ""
 "        help text provided with them, to 'file' (default stdout).\n"
 "        "
 msgstr ""
+"print_help(file : file = stdout)\n"
+"\n"
+"        Affiche un message d'aide étendu, listant toutes les options\n"
+"        ainsi que tout aide textuelle fournie avec elles dans 'file' \n"
+"        (stdout par défaut).\n"
+"        "
 
 #: /usr/lib/python2.4/optparse.py:1541
 #, docstring
@@ -439,18 +453,24 @@ msgid ""
 "    'words', raise BadOptionError.\n"
 "    "
 msgstr ""
+"_match_abbrev(s : string, wordmap : {string : Option}) -> string\n"
+"\n"
+"    Retourne la chaîne clef dans 'wordmap' pour laquelle 's' est une\n"
+"    abreviation sans ambiguité. Lève une BadOptionError si 's' est \n"
+"    ambigu ou ne correspond à aucun mot.\n"
+"    "
 
 #: /usr/lib/python2.4/optparse.py:1562
 msgid "ambiguous option: %s (%s?)"
-msgstr ""
+msgstr "option ambiguë : %s (%s?)"
 
 #: pisi-cli:46
 msgid "Keyboard Interrupt: Exiting..."
-msgstr ""
+msgstr "Interruption Clavier : Sortons..."
 
 #: pisi-cli:49
 msgid "Program Terminated."
-msgstr ""
+msgstr "Programme définitivement interrompu."
 
 #: pisi-cli:52
 msgid ""
@@ -458,90 +478,99 @@ msgid ""
 "again for normal DB recovery procedure. Make sure you have free disk space. \n"
 "You have to run rebuild-db only when there is file corruption and database upgrades."
 msgstr ""
+"Une opération relative à la base de données a été abandonnée.\n"
+"Veuillez lancer pisi une nouvelle fois afin de suivre la procédure normale de\n"
+"reprise DB. Faîtes bien en sorte d'avoir suffisamment d'espace disque.\n"
+"Vous ne devez lancer rebuild-db que lorsqu'un fichier est corrompu ou lors \n"
+"de mises à jour de la base."
 
 #: pisi-cli:57
 msgid ""
 "Unhandled internal exception.\n"
 "Please file a bug report. (http://bugs.uludag.org.tr)"
 msgstr ""
+"Exception interne non gérée.\n"
+"Veuillez signaler le disfonctionnement s'il vous plaît. (http://bugs.uludag.org.tr)"
 
 #: pisi-cli:63
 msgid "System Error. Program Terminated."
-msgstr ""
+msgstr "Erreur Système. Programme définitivement interrompu."
 
 #: pisi-cli:70
 msgid "Please use 'pisi help' for general help."
-msgstr ""
+msgstr "Veuillez utiliser 'pisi help' pour une aide généraliste."
 
 #: pisi-cli:73
 msgid "Traceback:"
-msgstr ""
+msgstr "Pile d'exécution : "
 
 #: pisi-cli:77
 msgid "Use --debug to see a traceback."
-msgstr ""
+msgstr "Utilser --debug pour voir une pile d'exécution."
 
 #: pisi/actionsapi/autotools.py:36
 msgid ""
 "Please attach the config.log to your bug report:\n"
 "%s/config.log"
 msgstr ""
+"Veuillez attacher le config.log à votre rapport de disfonctionnement s'il vous plaît :\n"
+"%s/config.log"
 
 #: pisi/actionsapi/autotools.py:75 pisi/actionsapi/autotools.py:85
 #: pisi/actionsapi/kde.py:65 pisi/actionsapi/perlmodules.py:54
 #: pisi/actionsapi/perlmodules.py:57
 msgid "Configure failed."
-msgstr ""
+msgstr "Echec du configure."
 
 #: pisi/actionsapi/autotools.py:77 pisi/actionsapi/autotools.py:87
 #: pisi/actionsapi/kde.py:67
 msgid "No configure script found."
-msgstr ""
+msgstr "Pas de script configure trouvé."
 
 #: pisi/actionsapi/autotools.py:96 pisi/actionsapi/kde.py:72
 #: pisi/actionsapi/perlmodules.py:63 pisi/actionsapi/perlmodules.py:72
 #: pisi/actionsapi/pythonmodules.py:49 pisi/actionsapi/scons.py:39
 msgid "Make failed."
-msgstr ""
+msgstr "Echec du make."
 
 #: pisi/actionsapi/autotools.py:124 pisi/actionsapi/autotools.py:134
 #: pisi/actionsapi/kde.py:79 pisi/actionsapi/pythonmodules.py:54
 #: pisi/actionsapi/scons.py:43
 msgid "Install failed."
-msgstr ""
+msgstr "Echec de l'installation."
 
 #: pisi/actionsapi/autotools.py:126 pisi/actionsapi/autotools.py:136
 #: pisi/actionsapi/kde.py:81
 msgid "No Makefile found."
-msgstr ""
+msgstr "Pas de Makefile trouvé."
 
 #: pisi/actionsapi/autotools.py:143
 msgid "Running aclocal failed."
-msgstr ""
+msgstr "L'exécution de aclocal a échoué."
 
 #: pisi/actionsapi/autotools.py:148
 msgid "Running autoconf failed."
-msgstr ""
+msgstr "L'exécution de autoconf a échoué."
 
 #: pisi/actionsapi/autotools.py:153
 msgid "Running autoreconf failed."
-msgstr ""
+msgstr "L'exécution de autoreconf a échoué."
 
 #: pisi/actionsapi/autotools.py:158
 msgid "Running automake failed."
-msgstr ""
+msgstr "L'exécution de automake a échoué."
 
 #: pisi/actionsapi/autotools.py:163
 msgid "Running autoheader failed."
-msgstr ""
+msgstr "L'exécution de autoheader a échoué."
 
 #: pisi/actionsapi/get.py:163
 msgid "Util %s cannot be found"
-msgstr ""
+msgstr "L'utilitaire %s n'a pu être trouvé"
 
 #: pisi/actionsapi/get.py:165
 msgid "Warning: %s does not exist, using plain name %s"
-msgstr ""
+msgstr "Attention : %s n'existe pas, utilisation du simple nom %s"
 
 #: pisi/actionsapi/kde.py:34
 msgid ""
@@ -549,266 +578,275 @@ msgid ""
 "!!! Please attach the config.log to your bug report:\n"
 "%s/config.log"
 msgstr ""
+"\n"
+"!!! Veuillez attacher le config.log à votre rapport de disfonctionnement s'il vous plaît :\n"
+"%s/config.log"
 
 #: pisi/actionsapi/libtools.py:38
 msgid "Running ldconfig failed."
-msgstr ""
+msgstr "L'exécution de ldconfig a échoué."
 
 #: pisi/actionsapi/libtools.py:49
 msgid "GNU Config Update Finished."
-msgstr ""
+msgstr "La mise à jour de GNU Config est maintenant terminée."
 
 #: pisi/actionsapi/libtools.py:53
 msgid "Running libtoolize failed."
-msgstr ""
+msgstr "L'exécution de libtoolize a échoué."
 
 #: pisi/actionsapi/perlmodules.py:66
 msgid "perl build failed."
-msgstr ""
+msgstr "la compilation de perl a échoué."
 
 #: pisi/actionsapi/perlmodules.py:75
 msgid "perl install failed."
-msgstr ""
+msgstr "L'installation de perl a échoué."
 
 #: pisi/actionsapi/pisitools.py:126
 msgid "ActionsAPI [doman]: Wrong man page file: %s"
-msgstr ""
+msgstr "ActionsAPI [doman]: Fichier de page de manuel incorrecte : %s"
 
 #: pisi/actionsapi/pisitools.py:164
 msgid "ActionsAPI [rename]: No such file or directory: %s"
-msgstr ""
+msgstr "ActionsAPI [rename]: Pas de fichier ou répertoire à ce nom : %s"
 
 #: pisi/actionsapi/pisitools.py:181
 msgid "File does not exist or permission denied: %s"
-msgstr ""
+msgstr "Le fichier n'existe pas ou la permission refusée : %s"
 
 #: pisi/actionsapi/pisitools.py:198
 msgid "ActionsAPI [dosym]: File exists: %s"
-msgstr ""
+msgstr "ActionsAPI [dosym]: Le fichier existe : %s"
 
 #: pisi/actionsapi/pisitoolsfunctions.py:45
 #: pisi/actionsapi/pisitoolsfunctions.py:59
 #: pisi/actionsapi/pisitoolsfunctions.py:72
 msgid "Insufficient arguments."
-msgstr ""
+msgstr "Pas assez d'arguments."
 
 #: pisi/actionsapi/pythonmodules.py:66
 msgid "Running %s failed."
-msgstr ""
+msgstr "L'exécution de %s a échoué."
 
 #: pisi/actionsapi/shelltools.py:49
 msgid "Cannot create directory %s"
-msgstr ""
+msgstr "Impossible de créer le répertoire %s"
 
 #: pisi/actionsapi/shelltools.py:57
 msgid "ActionsAPI [echo]: Can't append to file %s."
-msgstr ""
+msgstr "ActionsAPI [echo]: Impossible d'ajouter des données au fichier %s."
 
 #: pisi/actionsapi/shelltools.py:66
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: %s)"
-msgstr ""
+msgstr "ActionsAPI [chmod]: Operation non permise : %s (mode: %s)"
 
 #: pisi/actionsapi/shelltools.py:69
 msgid "ActionsAPI [chmod]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [chmod]: Le fichier %s n'existe pas."
 
 #: pisi/actionsapi/shelltools.py:77
 msgid "ActionsAPI [chown]: Operation not permitted: %s (uid: %s, gid: %s)"
-msgstr ""
+msgstr "ActionsAPI [chown]: Operation non permise : %s (uid: %s, gid: %s)"
 
 #: pisi/actionsapi/shelltools.py:80
 msgid "ActionsAPI [chown]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [chown]: Le fichier %s n'existe pas."
 
 #: pisi/actionsapi/shelltools.py:87
 msgid "ActionsAPI [sym]: Permission denied: %s to %s"
-msgstr ""
+msgstr "ActionsAPI [sym]: Permission refusée : %s à %s"
 
 #: pisi/actionsapi/shelltools.py:95
 msgid "ActionsAPI [unlink]: Permission denied: %s."
-msgstr ""
+msgstr "ActionsAPI [unlink]: Permission refusée : %s."
 
 #: pisi/actionsapi/shelltools.py:99
 msgid "ActionsAPI [unlink]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [unlink]: Le fichier %s n'existe pas."
 
 #: pisi/actionsapi/shelltools.py:107
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: %s"
-msgstr ""
+msgstr "ActionsAPI [unlinkDir]: Operation non permise : %s"
 
 #: pisi/actionsapi/shelltools.py:111
 msgid "ActionsAPI [unlinkDir]: Directory %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [unlinkDir]: Le repertoire %s n'existe pas."
 
 #: pisi/actionsapi/shelltools.py:120
 msgid "ActionsAPI [move]: Permission denied: %s to %s"
-msgstr ""
+msgstr "ActionsAPI [move]: Permission refusée : de %s à  %s"
 
 #: pisi/actionsapi/shelltools.py:122
 msgid "ActionsAPI [move]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [move]: Le fichier %s n'existe pas."
 
 #: pisi/actionsapi/shelltools.py:132
 msgid "ActionsAPI [copy]: Permission denied: %s to %s"
-msgstr ""
+msgstr "ActionsAPI [copy]: Permission refusée : de %s à %s"
 
 #: pisi/actionsapi/shelltools.py:148
 msgid "ActionsAPI [copy]: File %s does not exist."
-msgstr ""
+msgstr "ActionsAPI [copy]: Le fichier %s n'existe pas."
 
 #: pisi/actionsapi/shelltools.py:163
 msgid "ActionsAPI [copytree] %s to %s: %s"
-msgstr ""
+msgstr "ActionsAPI [copytree] %s à %s: %s"
 
 #: pisi/actionsapi/shelltools.py:165
 msgid "ActionsAPI [copytree]: Directory %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [copytree]: Le repertoire %s n'existe pas."
 
 #: pisi/actionsapi/shelltools.py:177
 msgid "ActionsAPI [touch]: Permission denied: %s"
-msgstr ""
+msgstr "ActionsAPI [touch]: Permission refusée : %s"
 
 #: pisi/api.py:302 pisi/comariface.py:30
 msgid "comar package is not fully installed"
-msgstr ""
+msgstr "Le paquet comar n'est pas entièrement installé"
 
 #: pisi/api.py:314
 msgid "File %s not found"
-msgstr ""
+msgstr "Le fichier %s est introuvable"
 
 #: pisi/api.py:375
 msgid "Checking /%s "
-msgstr ""
+msgstr "Vérification /%s "
 
 #: pisi/api.py:379
 msgid ""
 "\n"
 "Corrupt file: %s"
 msgstr ""
+"\n"
+"Fichier corrompu : %s"
 
 #: pisi/api.py:381 pisi/cli/commands.py:966
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: pisi/api.py:394
 msgid "* Building index of PiSi files under %s"
-msgstr ""
+msgstr "* Construction de l'index des fichiers PiSi sous %s"
 
 #: pisi/api.py:401
 msgid "* Index file written"
-msgstr ""
+msgstr "* Fichier d'index écrit"
 
 #: pisi/api.py:405
 msgid "Repo %s already present."
-msgstr ""
+msgstr "Le dépôt %s existe déjà."
 
 #: pisi/api.py:409
 msgid "Repo %s added to system."
-msgstr ""
+msgstr "Le dépôt %s a été ajouté au système."
 
 #: pisi/api.py:415
 msgid "Repo %s removed from system."
-msgstr ""
+msgstr "Le dépôt %s a été supprimé du système."
 
 #: pisi/api.py:417
 msgid "Repository %s does not exist. Cannot remove."
-msgstr ""
+msgstr "Le dépôt %s n'existe pas. Impossible de le supprimer."
 
 #: pisi/api.py:424
 msgid "* Updating repository: %s"
-msgstr ""
+msgstr "* Mise à jour du dépôt : %s"
 
 #: pisi/api.py:432
 msgid "No updates available for repository %s."
-msgstr ""
+msgstr "Pas de mise à jour pour le dépôt %s."
 
 #: pisi/api.py:434
 msgid "Updating database at any rate as requested"
-msgstr ""
+msgstr "Mise à jour de la base de données quoi qu'il arrive comme demandé"
 
 #: pisi/api.py:445
 msgid "* Package database updated."
-msgstr ""
+msgstr "* Base de données des paquets mise à jour."
 
 #: pisi/api.py:447 pisi/api.py:472
 msgid "No repository named %s found."
-msgstr ""
+msgstr "Pas de dépôt au nom %s trouvé."
 
 #: pisi/api.py:455
 msgid "* Rebuilding '%s' named repo... "
-msgstr ""
+msgstr "* Reconstruction du dépôt '%s'... "
 
 #: pisi/api.py:468
 msgid "Input/Output error while reading %s: %s"
-msgstr ""
+msgstr "Erreur d'entrée/sortie ors de la lecture de %s : %s"
 
 #: pisi/api.py:525
 msgid "Rebuilding package database"
-msgstr ""
+msgstr "Reconstruction de la base de données des paquets"
 
 #: pisi/archive.py:36
 msgid ""
 "An error has occured while running LZMA:\n"
 "%s"
 msgstr ""
+"Une erreur est survenue lors de l'exécutions de LZMA :\n"
+"%s"
 
 #: pisi/archive.py:101 pisi/archive.py:161
 msgid "Archive type not recognized"
-msgstr ""
+msgstr "Type d'archive non reconnue"
 
 #: pisi/atomicoperations.py:66
 msgid "Package %s found in repository %s"
-msgstr ""
+msgstr "Paquet %s trouvé dans le dépôt %s"
 
 #: pisi/atomicoperations.py:78
 msgid "Package URI: %s"
-msgstr ""
+msgstr "URI du paquet : %s"
 
 #: pisi/atomicoperations.py:82
 msgid "Package %s not found in any active repository."
-msgstr ""
+msgstr "Le paquet %s introuvable dans les dépôts actifs."
 
 #: pisi/atomicoperations.py:101
 msgid "Installing %s, version %s, release %s, build %s"
-msgstr ""
+msgstr "Installation de %s, version majeure %s, version mineure %s, build %s"
 
 #: pisi/atomicoperations.py:146
 msgid "%s package cannot be installed unless the dependencies are satisfied"
-msgstr ""
+msgstr "Le paquet %s ne peut être installé sans que les dépendances ne soient satisfaites"
 
 #: pisi/atomicoperations.py:165
 msgid "/%s from %s package\n"
-msgstr ""
+msgstr "/%s pour le paquet %s\n"
 
 #: pisi/atomicoperations.py:166
 msgid ""
 "File conflicts:\n"
 "%s"
 msgstr ""
+"Conflit de fichiers :\n"
+"%s"
 
 #: pisi/atomicoperations.py:201
 msgid "Re-install same version package?"
-msgstr ""
+msgstr "Ré-installer la même version du paquet ?"
 
 #: pisi/atomicoperations.py:202
 msgid "Package re-install declined"
-msgstr ""
+msgstr "Ré-installation du paquet déclinée"
 
 #: pisi/atomicoperations.py:208
 msgid "Upgrading to new upstream version"
-msgstr ""
+msgstr "Mise à jour vers une version ultérieure"
 
 #: pisi/atomicoperations.py:211
 msgid "Upgrading to new distribution release"
-msgstr ""
+msgstr "Mise à jour vers une nouvelle version de distribution"
 
 #: pisi/atomicoperations.py:215
 msgid "Upgrading to new distribution build"
-msgstr ""
+msgstr "Mise à jour vers un nouveau build de la distribution"
 
 #: pisi/atomicoperations.py:225
 msgid "Downgrade to old distribution release?"
-msgstr ""
+msgstr "Régresser vers une version de distribution plus récente ?"
 
 #: pisi/atomicoperations.py:227
 msgid "Downgrade to old distribution build?"
