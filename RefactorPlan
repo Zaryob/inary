@@ -152,4 +152,7 @@ currently PiSi wrotes everyting into logs which is not usefull. Also this inform
   This should also lead to some other problems but between these two not very good solutions this 
   seems to be the better one.
 
+==> autoxml
 
+* When setting a Long type attribute or tag of an autoxml class, value must be Long type. Otherwise, 
+  autoxml.write() fails in x86_64
