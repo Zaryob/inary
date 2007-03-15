@@ -57,9 +57,6 @@ def every(pred, seq):
 def any(pred, seq):
     return reduce(operator.or_, map(pred, seq), False)
 
-def unzip(seq):
-    return zip(*seq)
-
 def concat(l):
     """Concatenate a list of lists."""
     return reduce( operator.concat, l )

@@ -31,10 +31,6 @@ extra space at all. We can keep the number of file in the index though.
 That way we can calculate package size + (nr of files * inode size of fs)
 to give a more correct required disk size.
 
-* what the heck is unzip there? it is not even used at all and defined like:
-def unzip(seq):
-    return zip(*seq)
-
 * Why in a world like this there exists *parse_package* util functions? These must be all methods of package class
 
 * Remove all unneeded util functions, most of them belongs its classes
