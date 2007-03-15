@@ -24,7 +24,7 @@ class RepoDBTestCase(testcase.TestCase):
         
         for i in range(2):
             print '\nTest %d\n' % (i)
-            pisi.api.add_repo("foo","bar")
-            pisi.api.remove_repo("foo")
+            pisi.api.add_repository("foo","bar")
+            pisi.api.remove_repository("foo")
 
 suite = unittest.makeSuite(RepoDBTestCase)
