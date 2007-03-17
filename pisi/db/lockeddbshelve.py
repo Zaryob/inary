@@ -48,7 +48,7 @@ def check_dbversion(versionfile, ver, write=False, update=False):
             else:
                 pass # continue to update, then
         elif currver > dbver:
-            raise Error(_('Database version %s is too new for you PiSi version. You need to update PiSi.') % versionfile)
+            raise Error(_('Database version %s is too new for your PiSi version. You need to upgrade PiSi.') % versionfile)
         elif not update:
             return True  # db version is OK
     else:
