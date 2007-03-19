@@ -25,8 +25,8 @@ import pisi.db.lockeddbshelve as shelve
 
 installed, thirdparty, repos, all = range(1, 5)
 
-"""installed is a special database to keep track
-of already installed stuff not in any real repository.
+"""installed and thirdparty are special databases to keep track
+of already installed stuff and third party stuff not in any real repository.
 repos means search in repositories only, and all means search in
 repositories and special databases (called tracking databases)
 """
@@ -41,6 +41,7 @@ class ItemByRepoDB(object):
 
     def __init__(self, name):
         self.d = shelve.LockedDBShelf(name)
+        #self.dbyrepo = shelve.LockedDBShelf(name + '-byrepo')
 
     def close(self):
         self.d.close()
@@ -57,10 +58,18 @@ class ItemByRepoDB(object):
     @staticmethod
     def not_just_tracking(data):
         keys = data.keys()
-        for x in data.keys():
-            if x.startsWith('repo-'):
-                return True
-        return False
+        if len(keys)==1:
+            if 'trdparty' in keys or 'inst' in keys:
+                return False
+        elif len(keys)==2:
+            if 'trdparty' in keys and 'inst' in keys:
+                return False
+        return True
+        #below is a slower way
+        #for x in data.keys():
+        #    if x.startsWith('repo-'):
+        #        return True
+        #return False
 
     def list_if(self, pred):
         return [ k for k,data in self.d.items() if pred(k, data)]
@@ -83,14 +92,16 @@ class ItemByRepoDB(object):
         assert repo in [all, repos]
         order = [ 'repo-' + x for x in ctx.repodb.list() ]
         if repo == all:
-            order += ['inst']
+            order += ['trdparty', 'inst']
         return order
 
 #    def list_repo(self, repo):
 #        return self.dbyrepo[repo]
 
     def repo_str(self, repo):
-        if repo==installed:
+        if repo==thirdparty:
+            repo='trdparty'
+        elif repo==installed:
             repo='inst'
         else:
             assert type(repo) == type("")
@@ -100,6 +111,8 @@ class ItemByRepoDB(object):
     def str_repo(self, str):
         if str.startswith('repo-'):
             return str[5:]
+        elif str=='trdparty':
+            return thirdparty
         elif str=='inst':
             return installed
         else:

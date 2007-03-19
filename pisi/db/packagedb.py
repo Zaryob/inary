@@ -158,3 +158,5 @@ def remove_tracking_package(name, txn = None):
     # remove the guy from the tracking databases
     if pkgdb.has_package(name, itembyrepodb.installed, txn=txn):
         pkgdb.remove_package(name, itembyrepodb.installed, txn=txn)
+    if pkgdb.has_package(name, itembyrepodb.thirdparty, txn=txn):
+        pkgdb.remove_package(name, itembyrepodb.thirdparty, txn=txn)
