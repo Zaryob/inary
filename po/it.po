@@ -1,4 +1,4 @@
-# translation of it.po to italiano
+# translation of it.po to Italian
 # Copyright (C) YEAR ORGANIZATION
 #
 # Andrea Decorte <adecorte@gmail.com>, 2007.
@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "POT-Creation-Date: 2006-12-12 14:29+EET\n"
-"PO-Revision-Date: 2007-03-06 09:52+0200\n"
+"PO-Revision-Date: 2007-03-19 22:31+0200\n"
 "Last-Translator: Andrea Decorte <adecorte@gmail.com>\n"
-"Language-Team: italiano\n"
+"Language-Team: Italian <pardus-translation-it@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -320,11 +320,11 @@ msgstr ""
 
 #: /usr/lib/python2.4/optparse.py:1562
 msgid "ambiguous option: %s (%s?)"
-msgstr ""
+msgstr "opzione ambigua: %s (%s?)"
 
 #: pisi-cli:46
 msgid "Keyboard Interrupt: Exiting..."
-msgstr ""
+msgstr "Interruzione da tastiera: uscita..."
 
 #: pisi-cli:49
 msgid "Program Terminated."
@@ -336,6 +336,10 @@ msgid ""
 "again for normal DB recovery procedure. Make sure you have free disk space. \n"
 "You have to run rebuild-db only when there is file corruption and database upgrades."
 msgstr ""
+"Una operazione sul database è stata annullata. Dovresti lanciare\n"
+"nuovamente PiSi per la procedura di correzione del database. Assicurati\n"
+"di avere spazio libero a sufficienza. Devi eseguire rebuild-db solo quando si\n"
+"riscontra la corruzione di file o ci sono aggiornamenti del database."
 
 #: pisi-cli:57
 msgid ""
@@ -376,24 +380,24 @@ msgstr "Configure fallito."
 #: pisi/actionsapi/autotools.py:77 pisi/actionsapi/autotools.py:87
 #: pisi/actionsapi/kde.py:67
 msgid "No configure script found."
-msgstr ""
+msgstr "Nessun script configure trovato."
 
 #: pisi/actionsapi/autotools.py:96 pisi/actionsapi/kde.py:72
 #: pisi/actionsapi/perlmodules.py:63 pisi/actionsapi/perlmodules.py:72
 #: pisi/actionsapi/pythonmodules.py:49 pisi/actionsapi/scons.py:39
 msgid "Make failed."
-msgstr ""
+msgstr "Make fallito."
 
 #: pisi/actionsapi/autotools.py:124 pisi/actionsapi/autotools.py:134
 #: pisi/actionsapi/kde.py:79 pisi/actionsapi/pythonmodules.py:54
 #: pisi/actionsapi/scons.py:43
 msgid "Install failed."
-msgstr ""
+msgstr "Install fallito."
 
 #: pisi/actionsapi/autotools.py:126 pisi/actionsapi/autotools.py:136
 #: pisi/actionsapi/kde.py:81
 msgid "No Makefile found."
-msgstr ""
+msgstr "File makefile non trovato."
 
 #: pisi/actionsapi/autotools.py:143
 msgid "Running aclocal failed."
@@ -417,7 +421,7 @@ msgstr ""
 
 #: pisi/actionsapi/get.py:163
 msgid "Util %s cannot be found"
-msgstr ""
+msgstr "Utilità %s non trovata."
 
 #: pisi/actionsapi/get.py:165
 msgid "Warning: %s does not exist, using plain name %s"
@@ -470,7 +474,7 @@ msgstr ""
 #: pisi/actionsapi/pisitoolsfunctions.py:59
 #: pisi/actionsapi/pisitoolsfunctions.py:72
 msgid "Insufficient arguments."
-msgstr ""
+msgstr "Argomenti insufficienti."
 
 #: pisi/actionsapi/pythonmodules.py:66
 msgid "Running %s failed."
@@ -490,7 +494,7 @@ msgstr ""
 
 #: pisi/actionsapi/shelltools.py:69
 msgid "ActionsAPI [chmod]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [chmod]: Il file %s non esiste."
 
 #: pisi/actionsapi/shelltools.py:77
 msgid "ActionsAPI [chown]: Operation not permitted: %s (uid: %s, gid: %s)"
@@ -498,11 +502,11 @@ msgstr ""
 
 #: pisi/actionsapi/shelltools.py:80
 msgid "ActionsAPI [chown]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [chown]: Il file %s non esiste."
 
 #: pisi/actionsapi/shelltools.py:87
 msgid "ActionsAPI [sym]: Permission denied: %s to %s"
-msgstr ""
+msgstr "ActionsAPI [sym]: permesso negato: %s per %s"
 
 #: pisi/actionsapi/shelltools.py:95
 msgid "ActionsAPI [unlink]: Permission denied: %s."
@@ -510,7 +514,7 @@ msgstr ""
 
 #: pisi/actionsapi/shelltools.py:99
 msgid "ActionsAPI [unlink]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [unlink]: Il file %s non esiste."
 
 #: pisi/actionsapi/shelltools.py:107
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: %s"
@@ -518,7 +522,7 @@ msgstr ""
 
 #: pisi/actionsapi/shelltools.py:111
 msgid "ActionsAPI [unlinkDir]: Directory %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [unlinkDir]: La cartella %s non esiste."
 
 #: pisi/actionsapi/shelltools.py:120
 msgid "ActionsAPI [move]: Permission denied: %s to %s"
@@ -526,7 +530,7 @@ msgstr ""
 
 #: pisi/actionsapi/shelltools.py:122
 msgid "ActionsAPI [move]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [move]: Il file %s non esiste."
 
 #: pisi/actionsapi/shelltools.py:132
 msgid "ActionsAPI [copy]: Permission denied: %s to %s"
@@ -534,7 +538,7 @@ msgstr ""
 
 #: pisi/actionsapi/shelltools.py:148
 msgid "ActionsAPI [copy]: File %s does not exist."
-msgstr ""
+msgstr "ActionsAPI [copy]: Il file %s non esiste."
 
 #: pisi/actionsapi/shelltools.py:163
 msgid "ActionsAPI [copytree] %s to %s: %s"
@@ -542,11 +546,11 @@ msgstr ""
 
 #: pisi/actionsapi/shelltools.py:165
 msgid "ActionsAPI [copytree]: Directory %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [copytree]: La cartella %s non esiste."
 
 #: pisi/actionsapi/shelltools.py:177
 msgid "ActionsAPI [touch]: Permission denied: %s"
-msgstr ""
+msgstr "ActionsAPI [touch]: Permesso negato: %s"
 
 #: pisi/api.py:302 pisi/comariface.py:30
 msgid "comar package is not fully installed"
@@ -582,11 +586,11 @@ msgstr "* File di indice scritto"
 
 #: pisi/api.py:405
 msgid "Repo %s already present."
-msgstr ""
+msgstr "Il repository %s è già presente."
 
 #: pisi/api.py:409
 msgid "Repo %s added to system."
-msgstr ""
+msgstr "Il repository %s è stato aggiunto al sistema."
 
 #: pisi/api.py:415
 msgid "Repo %s removed from system."
@@ -598,11 +602,11 @@ msgstr ""
 
 #: pisi/api.py:424
 msgid "* Updating repository: %s"
-msgstr ""
+msgstr "* Aggiornamento del repository: %s"
 
 #: pisi/api.py:432
 msgid "No updates available for repository %s."
-msgstr ""
+msgstr "Nessun aggiornamento disponibile per il repository %s."
 
 #: pisi/api.py:434
 msgid "Updating database at any rate as requested"
@@ -640,7 +644,7 @@ msgstr "Tipo di archivio non riconosciuto"
 
 #: pisi/atomicoperations.py:66
 msgid "Package %s found in repository %s"
-msgstr ""
+msgstr "Pacchetto %s trovato nel repository %s"
 
 #: pisi/atomicoperations.py:78
 msgid "Package URI: %s"
@@ -838,7 +842,7 @@ msgstr ""
 
 #: pisi/build.py:391
 msgid "SyntaxError in COMAR file (%s): %s"
-msgstr ""
+msgstr "Errore di sintassi nel file COMAR (%s): %s"
 
 #: pisi/build.py:417
 msgid "unable to call function from actions: %s"
@@ -999,7 +1003,7 @@ msgstr "Estrazione dei file di %s"
 #: pisi/cli/commands.py:94
 #, docstring
 msgid "generic help string for any command"
-msgstr ""
+msgstr "testo di aiuto generico per qualsiasi comando"
 
 #: pisi/cli/commands.py:123 pisi/cli/pisicli.py:104
 msgid "Unrecognized command: %s"
@@ -1016,11 +1020,11 @@ msgstr "opzioni generali"
 
 #: pisi/cli/commands.py:151
 msgid "Change the system root for PiSi commands"
-msgstr ""
+msgstr "Cambia la root di sistema per i comandi PiSi"
 
 #: pisi/cli/commands.py:153
 msgid "Assume yes in all yes/no queries"
-msgstr ""
+msgstr "Assumi una risposta positiva in tutte le domande sì/no"
 
 #: pisi/cli/commands.py:158
 msgid "Detailed output"
@@ -1113,6 +1117,13 @@ msgid ""
 "under /var directory. Since these accumulate they can\n"
 "consume a lot of disk space."
 msgstr ""
+"Elimina file nella cache\n"
+"\n"
+"Utilizzo: delete-cache\n"
+"\n"
+"I sorgenti, i pacchetti e i file temporanei sono memorizzati\n"
+"nella cartella /var. Dato che questi file si accumulano col tempo\n"
+"possono a lungo andare consumare molto spazio su disco."
 
 #: pisi/cli/commands.py:336
 #, docstring
@@ -1705,6 +1716,13 @@ msgid ""
 "repositories. If no repository is specified, we list packages in\n"
 "all repositories.\n"
 msgstr ""
+"Elenca i pacchetti disponibili nei repository\n"
+"\n"
+"Utilizzo: list-available [ <repo1> <repo2> ... repon ]\n"
+"\n"
+"Fornisce una lista veloce dei pacchetti PiSi pubblicati nei \n"
+"repository specificati. Se non ne viene specificato nessuno,\n"
+"verrrà fornito una lista dei pacchetti di tutti i repository.\n"
 
 #: pisi/cli/commands.py:1276
 msgid "list-available options"
@@ -1890,7 +1908,7 @@ msgstr "impossibile riavviare comar"
 
 #: pisi/comariface.py:77
 msgid "connection with comar unexpectedly closed"
-msgstr ""
+msgstr "connessione con comar chiusa inaspettatamente"
 
 #: pisi/comariface.py:90
 msgid "Configuration error: %s"
@@ -1898,7 +1916,7 @@ msgstr "Errore di configurazione: %s"
 
 #: pisi/comariface.py:92
 msgid "Script error: %s"
-msgstr ""
+msgstr "Errore nello script: %s"
 
 #: pisi/comariface.py:94
 msgid "comar denied our access"
@@ -1998,7 +2016,7 @@ msgstr "Errore nel nome del file"
 
 #: pisi/fetcher.py:84
 msgid "Access denied to write to destination directory: \"%s\""
-msgstr ""
+msgstr "Accesso negato in scrittura nella cartella di destinazione: \"%s\""
 
 #: pisi/fetcher.py:89
 msgid "Access denied to destination file: \"%s\""
