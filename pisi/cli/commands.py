@@ -775,6 +775,9 @@ expanded to package names.
                     packages.extend(ctx.componentdb.get_union_packages(name, walk=True))
         packages.extend(self.args)
 
+        if packages = []:
+            packages = ctx.installdb.list_installed()
+
         if ctx.get_option('exclude_from'):
             packages = self.exclude_from(packages)
 
