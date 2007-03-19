@@ -155,11 +155,6 @@ class Install(AtomicOperation):
                 raise Error(_("%s package cannot be installed unless the dependencies are satisfied") %
                             self.pkginfo.name)
 
-        # check if package is in database
-        # If it is not, put it into 3rd party packagedb
-        if not ctx.packagedb.has_package(self.pkginfo.name):
-            ctx.packagedb.add_package(self.pkginfo, pisi.db.itembyrepodb.thirdparty)
-
         # check file conflicts
         file_conflicts = []
         for file in self.files.list:
