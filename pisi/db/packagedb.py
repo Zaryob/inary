@@ -28,6 +28,7 @@ _ = __trans.ugettext
 import pisi
 import pisi.util as util
 import pisi.context as ctx
+import pisi.oo
 import pisi.db.itembyrepodb as itembyrepodb
 
 
@@ -42,6 +43,7 @@ class NotfoundError(pisi.Error):
 class PackageDB(object):
     """PackageDB class provides an interface to the package database
     using shelf objects"""
+    __metaclass__ = pisi.oo.Singleton
 
     def __init__(self):
         self.d = itembyrepodb.ItemByRepoDB('package')
@@ -152,21 +154,9 @@ class PackageDB(object):
             self.dr.remove_repo(repo, txn=txn)
         self.d.txn_proc(proc, txn)
 
-pkgdb = None
-
 def remove_tracking_package(name, txn = None):
     # remove the guy from the tracking databases
     if pkgdb.has_package(name, itembyrepodb.installed, txn=txn):
         pkgdb.remove_package(name, itembyrepodb.installed, txn=txn)
     if pkgdb.has_package(name, itembyrepodb.thirdparty, txn=txn):
         pkgdb.remove_package(name, itembyrepodb.thirdparty, txn=txn)
-
-def init_db():
-    global pkgdb
-    pkgdb = PackageDB()
-    return pkgdb
-
-def finalize_db():
-    global pkgdb
-    if pkgdb:
-        pkgdb.close()

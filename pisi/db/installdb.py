@@ -24,11 +24,11 @@ _ = __trans.ugettext
 # PiSi
 import pisi
 import pisi.context as ctx
+import pisi.oo
 import pisi.db.lockeddbshelve as dbshelve
 from pisi.files import Files
 import pisi.util as util
 from pisi.util import join_path
-
 
 class InstallDBError(pisi.Error):
     pass
@@ -70,7 +70,8 @@ class InstallInfo:
 
 
 class InstallDB:
-
+    __metaclass__ = pisi.oo.Singleton
+    
     def __init__(self):
         self.d = dbshelve.LockedDBShelf('install')
         self.dp = dbshelve.LockedDBShelf('configpending')
@@ -199,19 +200,3 @@ class InstallDB:
             if self.d.has_key(pkg, txn):
                 self.d.delete(pkg, txn)
         self.d.txn_proc(proc, txn)
-
-db = None
-
-def init():
-    global db
-    if db:
-        return db
-
-    db = InstallDB()
-    return db
-
-def finalize():
-    global db
-    if db:
-        db.close()
-        db = None

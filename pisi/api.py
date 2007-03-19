@@ -111,12 +111,12 @@ def init(database = True, write = True,
     ctx.database = database
     if database:
         shelve.init_dbenv(write=write)
-        ctx.repodb = pisi.db.repodb.init()
-        ctx.installdb = pisi.db.installdb.init()
+        ctx.repodb = pisi.db.repodb.RepoDB()
+        ctx.installdb = pisi.db.installdb.InstallDB()
         ctx.filesdb = pisi.db.filesdb.FilesDB()
         ctx.componentdb = pisi.db.componentdb.ComponentDB()
-        ctx.packagedb = packagedb.init_db()
-        ctx.sourcedb = pisi.db.sourcedb.init()
+        ctx.packagedb = pisi.db.packagedb.PackageDB()
+        ctx.sourcedb = pisi.db.sourcedb.SourceDB()
     else:
         ctx.repodb = None
         ctx.installdb = None
@@ -134,9 +134,12 @@ def finalize():
         if ctx.log:
             ctx.loghandler.flush()
             ctx.log.removeHandler(ctx.loghandler)
-
-        pisi.db.repodb.finalize()
-        pisi.db.installdb.finalize()
+        if ctx.repodb != None:
+            ctx.repodb.close()
+            ctx.repodb = None
+        if ctx.installdb != None:
+            ctx.installdb.close()
+            ctx.installdb = None
         if ctx.filesdb != None:
             ctx.filesdb.close()
             ctx.filesdb = None
@@ -144,10 +147,10 @@ def finalize():
             ctx.componentdb.close()
             ctx.componentdb = None
         if ctx.packagedb:
-            packagedb.finalize_db()
+            ctx.packagedb.close()
             ctx.packagedb = None
-        if ctx.sourcedb:
-            pisi.db.sourcedb.finalize()
+        if ctx.sourcedb != None:
+            ctx.sourcedb.close()
             ctx.sourcedb = None
         if ctx.dbenv:
             ctx.dbenv.close()

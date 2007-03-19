@@ -18,6 +18,7 @@ import pisi
 import pisi.db.lockeddbshelve as shelve
 import pisi.context as ctx
 import pisi.db.packagedb as packagedb
+import pisi.oo
 
 class Error(pisi.Error):
     pass
@@ -35,7 +36,8 @@ class Repo:
 
 class RepoDB(object):
     """RepoDB maps repo ids to repository information"""
-
+    __metaclass__ = pisi.oo.Singleton
+    
     def __init__(self, txn = None):
         self.d = shelve.LockedDBShelf("repo")
         def proc(txn):
@@ -105,21 +107,3 @@ class RepoDB(object):
             ctx.sourcedb.remove_repo(name, txn=txn)
             ctx.componentdb.remove_repo(name, txn=txn)
         self.d.txn_proc(proc, txn)
-
-db = None
-
-def init():
-    global db
-
-    if db:
-        return db
-
-    db = RepoDB()
-    return db
-
-def finalize():
-    global db
-
-    if db:
-        db.close()
-        db = None
