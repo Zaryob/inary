@@ -1009,13 +1009,28 @@ If no packages are given, checks all installed packages.
 
     name = ("check", None)
 
+    def options(self):
+        group = OptionGroup(self.parser, _("check options"))
+        group.add_option("-c", "--component", action="store",
+                               default=None, help=_("Check installed packages under given component"))
+        self.parser.add_option_group(group)
+
     def run(self):
         self.init(database = True, write = False)
-        if self.args:
+
+        component = ctx.get_option('component')
+        if component:
+            #FIXME: pisi api is insufficient to do this
+            from sets import Set as set
+            installed = ctx.installdb.list_installed()
+            component_pkgs = ctx.componentdb.get_union_packages(component, walk=True)
+            pkgs = list(set(installed) & set(component_pkgs))
+        elif self.args:
             pkgs = self.args
         else:
             ctx.ui.info(_('Checking all installed packages'))
             pkgs = ctx.installdb.list_installed()
+
         for pkg in pkgs:
             ctx.ui.info(_('* Checking %s... ') % pkg, noln=True)
             if ctx.installdb.is_installed(pkg):
