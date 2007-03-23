@@ -98,6 +98,11 @@ class Package:
         this is the function used by the installer"""
         self.impl.unpack_dir_flat(dir, outdir)
 
+    def extract_to(self, outdir, clean_dir = False):
+        """Extracts contents of the archive to outdir. Before extracting if clean_dir 
+        is set, outdir is deleted with its contents"""
+        self.impl.unpack(outdir, clean_dir)
+
     def extract_pisi_files(self, outdir):
         """Extract PiSi control files: metadata.xml, files.xml,
         action scripts, etc."""

@@ -18,6 +18,7 @@ _ = __trans.ugettext
 import sys
 import os
 import bsddb3.db as db
+import shutil
 
 import pisi
 import pisi.context as ctx
@@ -31,6 +32,7 @@ from pisi.files import Files
 from pisi.uri import URI
 import pisi.ui
 from pisi.version import Version
+from pisi.delta import find_relocations
 
 class Error(pisi.Error):
     pass
@@ -66,14 +68,25 @@ class Install(AtomicOperation):
             ctx.ui.info(_("Package %s found in repository %s") % (name, repo))
             repo = ctx.repodb.get_repo(repo)
             pkg = ctx.packagedb.get_package(name)
+            delta = None
 
-            # FIXME: let pkg.packageURI be stored as URI type rather than string
-            pkg_uri = URI(pkg.packageURI)
-            if pkg_uri.is_absolute_path():
-                pkg_path = str(pkg.packageURI)
+            # Package is installed. This is an upgrade. Check delta.
+            if ctx.installdb.is_installed(pkg.name):
+                (version, release, build) = ctx.installdb.get_version(pkg.name)
+                delta = pkg.get_delta(buildFrom=build)
+
+            # If delta exists than use the delta uri.
+            if delta:
+                pkg_uri = delta.packageURI
+            else:
+                pkg_uri = pkg.packageURI
+
+            uri = URI(pkg_uri)
+            if uri.is_absolute_path():
+                pkg_path = str(pkg_uri)
             else:
                 pkg_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
-                                        str(pkg_uri.path()))
+                                        str(uri.path()))
 
             ctx.ui.info(_("Package URI: %s") % pkg_path, verbose=True)
 
@@ -287,8 +300,41 @@ class Install(AtomicOperation):
                 oldconfig = path + '.old'
                 if os.path.exists(newconfig):
                     os.unlink(newconfig)
-                os.rename(path, newconfig)
+
+                # In the case of delta packages: the old package and the new package
+                # may contain same config typed files with same hashes, so the delta
+                # package will not have that config file. In order to protect user
+                # changed config files, they are renamed with ".old" prefix in case
+                # of the hashes of these files on the filesystem and the new config 
+                # file that is coming from the new package. But in delta package case
+                # with the given scenario there wont be any, so we can pass this one.
+                # If the config files were not be the same between these packages the
+                # delta package would have it and extract it and the path would point
+                # to that new config file. If they are same and the user had changed 
+                # that file and using the changed config file, there is no problem 
+                # here.
+                if os.path.exists(path):
+                    os.rename(path, newconfig)
+
                 os.rename(oldconfig, path)
+
+        # Delta package does not contain the files that have the same hash as in 
+        # the old package's. Because it means the file has not changed. But some 
+        # of these files may be relocated to some other directory in the new package. 
+        # We handle these cases here.
+        def relocate_files():
+            for old_file, new_file in find_relocations(self.old_files, self.files):
+                old_path, new_path = ("/" + old_file.path, "/" + new_file.path)
+
+                destdir = os.path.dirname(new_path)
+                if not os.path.exists(destdir):
+                    os.makedirs(destdir)
+
+                if os.path.islink(old_path): 
+                    if not os.path.lexists(new_path):
+                        os.symlink(os.readlink(old_path), new_path)
+                else:
+                    shutil.copy(old_path, new_path)
 
         # remove left over files from the old package.
         def clean_leftovers():
@@ -320,6 +366,9 @@ class Install(AtomicOperation):
                 if file.type == 'config':
                     # there may be left over config files
                     check_config_changed(file)
+
+        if self.package_fname.endswith(ctx.const.delta_package_suffix):
+            relocate_files()
 
         self.package.extract_install(ctx.config.dest_dir())
 

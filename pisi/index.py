@@ -88,10 +88,16 @@ class Index(XmlFile):
         self.repo_dir = repo_uri
 
         packages = []
+        deltas = {}
         for root, dirs, files in os.walk(repo_uri):
             for fn in files:
-                if fn.endswith(ctx.const.package_suffix):
+
+                if fn.endswith(ctx.const.delta_package_suffix):
+                    name, version = util.parse_package_name(fn)
+                    deltas.setdefault(name, []).append(os.path.join(root, fn))
+                elif fn.endswith(ctx.const.package_suffix):
                     packages.append(os.path.join(root, fn))
+
                 if fn == 'component.xml':
                     ctx.ui.info(_('Adding %s to component index') % fn)
                     self.add_component(os.path.join(root, fn))
@@ -106,7 +112,7 @@ class Index(XmlFile):
             pkg_name = util.parse_package_name(os.path.basename(pkg))[0]
             if pkg_name not in obsoletes_list:
                 ctx.ui.info(_('Adding %s to package index') % pkg)
-                self.add_package(pkg, repo_uri)
+                self.add_package(pkg, deltas, repo_uri)
 
     def update_db(self, repo, txn = None):
         # FIXME: updating db takes too much time. So a notify mechanism is used to inform the status
@@ -133,7 +139,7 @@ class Index(XmlFile):
             ctx.sourcedb.add_spec(sf, repo, txn=txn)
             update_progress()
 
-    def add_package(self, path, repo_uri):
+    def add_package(self, path, deltas, repo_uri):
         package = Package(path, 'r')
         md = package.get_metadata()
         md.package.packageSize = os.path.getsize(path)
@@ -153,6 +159,17 @@ class Index(XmlFile):
             # No need to carry these with index (#3965)
             md.package.files = None
             md.package.additionalFiles = None
+
+            if md.package.name in deltas:
+                for delta_path in deltas[md.package.name]:
+                    delta = metadata.Delta()
+                    delta.packageURI = util.removepathprefix(repo_uri, delta_path)
+                    delta.packageSize = os.path.getsize(delta_path)
+                    delta.packageHash = util.sha1_file(delta_path)
+                    name, buildFrom, buildTo = util.parse_delta_package_name(delta_path)
+                    delta.buildFrom = buildFrom
+                    md.package.deltaPackages.append(delta)
+
             self.packages.append(md.package)
 
     def add_component(self, path):
