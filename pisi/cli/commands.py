@@ -444,6 +444,8 @@ to be downloaded from a repository containing sources.
                                help=_("Bypass errors from ActionsAPI"))
         group.add_option("--ignore-safety", action="store_true",
                      default=False, help=_("Bypass safety switch"))
+        group.add_option("--ignore-check", action="store_true",
+                     default=False, help=_("Bypass testing step"))
         group.add_option("--create-static", action="store_true",
                                default=False, help=_("Create a static package with ar files"))
         group.add_option("--no-install", action="store_true",

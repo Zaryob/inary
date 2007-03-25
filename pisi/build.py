@@ -198,7 +198,7 @@ class Builder:
 
         self.run_setup_action()
         self.run_build_action()
-        if ctx.get_option('debug'):
+        if ctx.get_option('debug') and not ctx.get_option('ignore_check'):
             self.run_check_action()
         self.run_install_action()
 
