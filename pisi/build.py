@@ -198,6 +198,8 @@ class Builder:
 
         self.run_setup_action()
         self.run_build_action()
+        if ctx.get_option('debug'):
+            self.run_check_action()
         self.run_install_action()
 
         # after all, we are ready to build/prepare the packages
@@ -323,6 +325,10 @@ class Builder:
         ctx.ui.action(_("Building source..."))
         self.run_action_function(ctx.const.build_func)
         self.set_state("buildaction")
+
+    def run_check_action(self):
+        ctx.ui.action(_("Testing package..."))
+        self.run_action_function(ctx.const.check_func)
 
     def run_install_action(self):
         ctx.ui.action(_("Installing..."))
@@ -947,6 +953,12 @@ def __buildState_buildaction(pb, last):
         __buildState_setupaction(pb, last)
     pb.run_build_action()
 
+def __buildState_checkaction(pb, last):
+
+    if order[last] < order["buildaction"]:
+        __buildState_buildaction(pb, last)
+    pb.run_check_action()
+
 def __buildState_installaction(pb, last):
 
     if order[last] < order["buildaction"]:
@@ -987,6 +999,10 @@ def build_until(pspec, state):
 
     if state == "build":
         __buildState_buildaction(pb, last)
+        return
+
+    if state == "check":
+        __buildState_checkaction(pb, last)
         return
 
     if state == "install":

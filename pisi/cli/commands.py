@@ -461,6 +461,8 @@ to be downloaded from a repository containing sources.
                          const="setup", help=_("Break build after running configure step"))
         group.add_option("--build", dest="until", action="store_const",
                          const="build", help=_("Break build after running compile step"))
+        group.add_option("--check", dest="until", action="store_const",
+                         const="check", help=_("Break build after running check step"))
         group.add_option("--install", dest="until", action="store_const",
                          const="install", help=_("Break build after running install step"))
         group.add_option("--package", dest="until", action="store_const",
