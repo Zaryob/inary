@@ -87,6 +87,7 @@ class Constants:
         # functions in actions_file
         self.__c.setup_func = "setup"
         self.__c.build_func = "build"
+        self.__c.check_func = "check"
         self.__c.install_func = "install"
 
         # file types
