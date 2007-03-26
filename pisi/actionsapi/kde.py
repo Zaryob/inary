@@ -54,12 +54,12 @@ def configure(parameters = ''):
                 --with-x \
                 --enable-mitshm \
                 --with-xinerama \
-                --with-qt-dir=%s \
+                --with-qt-dir=%s/lib \
                 --enable-mt \
                 --with-qt-libraries=%s \
                 --disable-dependency-tracking \
                 --disable-debug \
-                %s' % (get.kdeDIR(), get.HOST(), get.qtDIR(), get.qtLIBDIR(), parameters)
+                %s' % (get.kdeDIR(), get.HOST(), get.qtDIR(), get.qtDIR(), parameters)
 
         if system(args):
             raise ConfigureError(_('Configure failed.'))

@@ -143,9 +143,6 @@ def kdeDIR():
 def qtDIR():
     return dirs.qt
 
-def qtLIBDIR():
-    return '%s/lib/' % qtDIR()
-
 # Binutils Variables
 
 def existBinary(bin):
