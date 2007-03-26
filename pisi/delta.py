@@ -49,7 +49,7 @@ def create_delta_package(old_package, new_package):
     tar.unpack_dir(newpkg_path)
 
     # Create delta package
-    deltaname = "%s-%s-%s%s" % (oldmd.package.name, oldmd.package.release, newmd.package.release, ctx.const.delta_package_suffix)
+    deltaname = "%s-%s-%s%s" % (oldmd.package.name, oldmd.package.build, newmd.package.build, ctx.const.delta_package_suffix)
 
     outdir = ctx.get_option("output_dir")
     if outdir:

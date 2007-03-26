@@ -69,7 +69,7 @@ class Install(AtomicOperation):
             # Package is installed. This is an upgrade. Check delta.
             if ctx.installdb.is_installed(pkg.name):
                 (version, release, build) = ctx.installdb.get_version(pkg.name)
-                delta = pkg.get_delta(releaseFrom=release)
+                delta = pkg.get_delta(buildFrom=build)
 
             # If delta exists than use the delta uri.
             if delta:
@@ -295,7 +295,22 @@ class Install(AtomicOperation):
                 oldconfig = path + '.old'
                 if os.path.exists(newconfig):
                     os.unlink(newconfig)
-                os.rename(path, newconfig)
+
+                # In the case of delta packages: the old package and the new package
+                # may contain same config typed files with same hashes, so the delta
+                # package will not have that config file. In order to protect user
+                # changed config files, they are renamed with ".old" prefix in case
+                # of the hashes of these files on the filesystem and the new config 
+                # file that is coming from the new package. But in delta package case
+                # with the given scenario there wont be any, so we can pass this one.
+                # If the config files were not be the same between these packages the
+                # delta package would have it and extract it and the path would point
+                # to that new config file. If they are same and the user had changed 
+                # that file and using the changed config file, there is no problem 
+                # here.
+                if os.path.exists(path):
+                    os.rename(path, newconfig)
+
                 os.rename(oldconfig, path)
 
         # Delta package does not contain the files that have the same hash as in 
@@ -346,6 +361,9 @@ class Install(AtomicOperation):
                 if file.type == 'config':
                     # there may be left over config files
                     check_config_changed(file)
+
+        if self.package_fname.endswith(ctx.const.delta_package_suffix):
+            relocate_files()
 
         self.package.extract_install(ctx.config.dest_dir())
 

@@ -645,11 +645,11 @@ def parse_delta_package_name(package_name):
     example: tasma-5-7.pisi.delta -> (tasma, 5, 7)
     
     """
-    name, release = parse_package_name(package_name)
-    release = release[:-len(ctx.const.delta_package_suffix)]
-    releaseFrom, releaseTo = release.split("-")
+    name, build = parse_package_name(package_name)
+    build = build[:-len(ctx.const.delta_package_suffix)]
+    buildFrom, buildTo = build.split("-")
     
-    return name, releaseFrom, releaseTo
+    return name, buildFrom, buildTo
 
 def filter_latest_packages(package_paths):
     """ For a given pisi package paths list where there may also be multiple versions

@@ -803,7 +803,7 @@ def calculate_download_sizes(order):
         delta = None
         if ctx.installdb.is_installed(pkg.name):
             (version, release, build) = ctx.installdb.get_version(pkg.name)
-            delta = pkg.get_delta(releaseFrom=release)
+            delta = pkg.get_delta(buildFrom=build)
 
         if delta:
             fn = os.path.basename(delta.packageURI)
