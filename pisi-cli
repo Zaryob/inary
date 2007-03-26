@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Copyright (C) 2005, TUBITAK/UEKAE
+# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
