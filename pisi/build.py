@@ -721,7 +721,8 @@ class Builder:
 
             if metadata_changed(old_pkg.metadata, self.metadata):
                 changed = True
-                self.old_packages.append(os.path.basename(old_package_fn))
+            
+            self.old_packages.append(os.path.basename(old_package_fn))
 
         ctx.ui.debug('old build number: %s' % old_build)
 
