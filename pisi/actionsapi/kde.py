@@ -54,9 +54,9 @@ def configure(parameters = ''):
                 --with-x \
                 --enable-mitshm \
                 --with-xinerama \
-                --with-qt-dir=%s/lib \
+                --with-qt-dir=%s \
                 --enable-mt \
-                --with-qt-libraries=%s \
+                --with-qt-libraries=%s/lib \
                 --disable-dependency-tracking \
                 --disable-debug \
                 %s' % (get.kdeDIR(), get.HOST(), get.qtDIR(), get.qtDIR(), parameters)
