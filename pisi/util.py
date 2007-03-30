@@ -17,7 +17,6 @@ import os
 import re
 import sys
 import sha
-import magic
 import shutil
 import string
 import statvfs
@@ -533,9 +532,8 @@ def strip_directory(top, excludelist=[]):
 
 def strip_file(filepath, outpath):
     """Strip an elf file from debug symbols."""
-    ms = magic.open(magic.MAGIC_NONE)
-    ms.load()
-    o = ms.file(filepath)
+    p = os.popen("file \"%s\"" % filepath)
+    o = p.read()
 
     def run_strip(f, flags=""):
         p = os.popen("strip %s %s" %(flags, f))
