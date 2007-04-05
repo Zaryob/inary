@@ -496,7 +496,7 @@ class Builder:
                                             targetDir=ctx.config.tmp_dir())
 
             ctx.ui.action(_("* Applying patch: %s") % patch.filename)
-            util.do_patch(self.srcDir, patchFile, level=patch.level)
+            util.do_patch(self.srcDir, patchFile, level=patch.level, target=patch.target)
 
     def generate_static_package_object(self):
         ar_files = []
