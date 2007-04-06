@@ -465,6 +465,8 @@ def uncompress(patchFile, compressType="gz", targetDir=None):
                                 os.path.basename(patchFile))
     else:
         filePath = os.path.basename(patchFile)
+    # remove suffix from file cause its uncompressed now
+    filePath = filePath.split(".%s" % compressType)[0]
 
     if compressType == "gz":
         from gzip import GzipFile
