@@ -38,6 +38,7 @@
 #db_dir = /var/db/pisi
 #archives_dir = /var/cache/pisi/archives
 #packages_dir = /var/cache/pisi/packages
+#compiled_packages_dir = "/var/cache/pisi/packages"
 #index_dir = /var/cache/pisi/index
 #tmp_dir = /var/tmp/pisi
 #kde_dir = /usr/kde/3.5
@@ -84,6 +85,7 @@ class DirectoriesDefaults:
     db_dir = "/var/db/pisi"
     archives_dir = "/var/cache/pisi/archives"
     packages_dir = "/var/cache/pisi/packages"
+    compiled_packages_dir = "/var/cache/pisi/packages"
     index_dir = "/var/lib/pisi/index"
     tmp_dir =  "/var/pisi"
     kde_dir = "/usr/kde/3.5"
