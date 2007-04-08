@@ -99,6 +99,9 @@ class Config(object):
     def packages_dir(self):
         return self.subdir(self.values.dirs.packages_dir)
 
+    def compiled_packages_dir(self):
+        return self.subdir(self.values.dirs.compiled_packages_dir)
+
     def index_dir(self):
         return self.subdir(self.values.dirs.index_dir)
 
