@@ -64,6 +64,7 @@ class Constants:
         self.__c.work_dir_suffix = "/work"       # these, too, because we might wanna change 'em
         self.__c.install_dir_suffix  = "/install"
         self.__c.debug_dir_suffix  = "/debug"
+        self.__c.quilt_dir_suffix  = "/patches"
 
         # file/directory names
         #note: these don't seem very well, constants are used

@@ -488,7 +488,19 @@ def do_patch(sourceDir, patchFile, level = 0):
         level = 0
 
     check_file(patchFile)
-    (ret, out, err) = run_batch("patch -p%d < %s" %
+
+    if ctx.get_option('use_quilt'):
+        patchesDir = join_path(sourceDir, ctx.const.quilt_dir_suffix)
+        # Make sure sourceDir/patches directory exists and if not create one!
+        if not os.path.exists(patchesDir):
+            os.makedirs(patchesDir)
+        # Import original patch into quilt tree
+        (ret, out, err) = run_batch('quilt import -p %d -n %s %s' % (level, os.path.basename(patchFile), patchFile))
+        # run quilt push to apply original patch into tree
+        (ret, out, err) = run_batch('quilt push')
+    else:
+        # run GNU patch to apply original patch into tree
+        (ret, out, err) = run_batch("patch -p%d < %s" %
                                     (level, patchFile))
     if ret:
         if out is None and err is None:
