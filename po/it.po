@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "POT-Creation-Date: 2006-12-12 14:29+EET\n"
-"PO-Revision-Date: 2007-03-19 22:31+0200\n"
+"PO-Revision-Date: 2007-03-31 15:59+0200\n"
 "Last-Translator: Andrea Decorte <adecorte@gmail.com>\n"
 "Language-Team: Italian <pardus-translation-it@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
@@ -33,6 +33,19 @@ msgid ""
 "For support, use the optik-users@lists.sourceforge.net mailing list\n"
 "(http://lists.sourceforge.net/lists/listinfo/optik-users).\n"
 msgstr ""
+"optparse - un analizzatore (parser) di opzioni potente, estensibile e facile da utilizzare.\n"
+"\n"
+"Di Greg Ward <gward@python.net>\n"
+"\n"
+"Distribuito originariamente come Optik; guarda http://optik.sourceforge.net/ .\n"
+"\n"
+"Se hai dei problemi con questo modulo, per favore non inviare bug,\n"
+"patch, o richieste di nuove funzioni nella pagina di Python; usa invece la\n"
+"pagina di progetto di Optik su SourceForge:\n"
+"  http://sourceforge.net/projects/optik\n"
+"\n"
+"Per supporto, usa la mailing list optik-users@lists.sourceforge.net\n"
+"(http://lists.sourceforge.net/lists/listinfo/optik-users).\n"
 
 #: /usr/lib/python2.4/optparse.py:93
 #, docstring
@@ -101,11 +114,11 @@ msgstr "intero"
 
 #: /usr/lib/python2.4/optparse.py:355
 msgid "long integer"
-msgstr ""
+msgstr "intero lungo"
 
 #: /usr/lib/python2.4/optparse.py:356
 msgid "floating-point"
-msgstr ""
+msgstr "float"
 
 #: /usr/lib/python2.4/optparse.py:357
 msgid "complex"
@@ -113,14 +126,15 @@ msgstr "complesso"
 
 #: /usr/lib/python2.4/optparse.py:365
 msgid "option %s: invalid %s value: %r"
-msgstr ""
+msgstr "opzione %s: valore %s invalido: %r"
 
 #: /usr/lib/python2.4/optparse.py:373
 msgid "option %s: invalid choice: %r (choose from %s)"
-msgstr ""
+msgstr "opzione %s: scelta non valida: %r (scegli tra %s)"
 
 #: /usr/lib/python2.4/optparse.py:382
 #, docstring
+#, fuzzy
 msgid ""
 "\n"
 "    Instance attributes:\n"
@@ -141,6 +155,24 @@ msgid ""
 "      metavar : string\n"
 "    "
 msgstr ""
+"\n"
+"    Instance attributes:\n"
+"      _short_opts : [string]\n"
+"      _long_opts : [string]\n"
+"\n"
+"      action : string\n"
+"      type : string\n"
+"      dest : string\n"
+"      default : any\n"
+"      nargs : int\n"
+"      const : any\n"
+"      choices : [string]\n"
+"      callback : function\n"
+"      callback_args : (any*)\n"
+"      callback_kwargs : { string : any }\n"
+"      help : string\n"
+"      metavar : string\n"
+"    "
 
 #: /usr/lib/python2.4/optparse.py:781
 #, docstring
@@ -359,17 +391,19 @@ msgstr "Utilizza per favore 'pisi help' per un aiuto generico."
 
 #: pisi-cli:73
 msgid "Traceback:"
-msgstr ""
+msgstr "Traceback:"
 
 #: pisi-cli:77
 msgid "Use --debug to see a traceback."
-msgstr ""
+msgstr "Utilizza --debug per vedere il traceback."
 
 #: pisi/actionsapi/autotools.py:36
 msgid ""
 "Please attach the config.log to your bug report:\n"
 "%s/config.log"
 msgstr ""
+"Includi per favore anche il file config.log nella segnalazione di bug:\n"
+"%s/config.log"
 
 #: pisi/actionsapi/autotools.py:75 pisi/actionsapi/autotools.py:85
 #: pisi/actionsapi/kde.py:65 pisi/actionsapi/perlmodules.py:54
@@ -401,23 +435,23 @@ msgstr "File makefile non trovato."
 
 #: pisi/actionsapi/autotools.py:143
 msgid "Running aclocal failed."
-msgstr ""
+msgstr "Esecuzione di aclocal fallita."
 
 #: pisi/actionsapi/autotools.py:148
 msgid "Running autoconf failed."
-msgstr ""
+msgstr "Esecuzione di autoconf fallita."
 
 #: pisi/actionsapi/autotools.py:153
 msgid "Running autoreconf failed."
-msgstr ""
+msgstr "Esecuzione di autoreconf fallita."
 
 #: pisi/actionsapi/autotools.py:158
 msgid "Running automake failed."
-msgstr ""
+msgstr "Esecuzione di automake fallita."
 
 #: pisi/actionsapi/autotools.py:163
 msgid "Running autoheader failed."
-msgstr ""
+msgstr "Esecuzione di autoheader fallita."
 
 #: pisi/actionsapi/get.py:163
 msgid "Util %s cannot be found"
@@ -436,7 +470,7 @@ msgstr ""
 
 #: pisi/actionsapi/libtools.py:38
 msgid "Running ldconfig failed."
-msgstr ""
+msgstr "Esecuzione di ldconfig fallita."
 
 #: pisi/actionsapi/libtools.py:49
 msgid "GNU Config Update Finished."
@@ -444,7 +478,7 @@ msgstr ""
 
 #: pisi/actionsapi/libtools.py:53
 msgid "Running libtoolize failed."
-msgstr ""
+msgstr "Esecuzione di libtoolize fallita."
 
 #: pisi/actionsapi/perlmodules.py:66
 msgid "perl build failed."
@@ -456,7 +490,7 @@ msgstr ""
 
 #: pisi/actionsapi/pisitools.py:126
 msgid "ActionsAPI [doman]: Wrong man page file: %s"
-msgstr ""
+msgstr "ActionsAPI [doman]: file di pagina man sbagliato: %s"
 
 #: pisi/actionsapi/pisitools.py:164
 msgid "ActionsAPI [rename]: No such file or directory: %s"
@@ -464,11 +498,11 @@ msgstr ""
 
 #: pisi/actionsapi/pisitools.py:181
 msgid "File does not exist or permission denied: %s"
-msgstr ""
+msgstr "Il file non esiste o non si hanno i permessi necessari: %s"
 
 #: pisi/actionsapi/pisitools.py:198
 msgid "ActionsAPI [dosym]: File exists: %s"
-msgstr ""
+msgstr "ActionsAPI [dosym]: Il file esiste"
 
 #: pisi/actionsapi/pisitoolsfunctions.py:45
 #: pisi/actionsapi/pisitoolsfunctions.py:59
@@ -478,7 +512,7 @@ msgstr "Argomenti insufficienti."
 
 #: pisi/actionsapi/pythonmodules.py:66
 msgid "Running %s failed."
-msgstr ""
+msgstr "Esecuzione di %s fallita."
 
 #: pisi/actionsapi/shelltools.py:49
 msgid "Cannot create directory %s"
@@ -562,7 +596,7 @@ msgstr "File %s non trovato"
 
 #: pisi/api.py:375
 msgid "Checking /%s "
-msgstr ""
+msgstr "Verifica di /%s "
 
 #: pisi/api.py:379
 msgid ""
@@ -594,11 +628,11 @@ msgstr "Il repository %s è stato aggiunto al sistema."
 
 #: pisi/api.py:415
 msgid "Repo %s removed from system."
-msgstr ""
+msgstr "Il repository %s è stato rimosso dal sistema."
 
 #: pisi/api.py:417
 msgid "Repository %s does not exist. Cannot remove."
-msgstr ""
+msgstr "Il repository %s non esiste. Impossibile rimuovere."
 
 #: pisi/api.py:424
 msgid "* Updating repository: %s"
@@ -618,7 +652,7 @@ msgstr "* Database dei pacchetti aggiornato."
 
 #: pisi/api.py:447 pisi/api.py:472
 msgid "No repository named %s found."
-msgstr ""
+msgstr "Nessun repository di nome %s trovato."
 
 #: pisi/api.py:455
 msgid "* Rebuilding '%s' named repo... "
@@ -626,17 +660,19 @@ msgstr ""
 
 #: pisi/api.py:468
 msgid "Input/Output error while reading %s: %s"
-msgstr ""
+msgstr "Errore in Input/Output durante la lettura di %s: %s"
 
 #: pisi/api.py:525
 msgid "Rebuilding package database"
-msgstr ""
+msgstr "Ricostruzione del database dei pacchetti"
 
 #: pisi/archive.py:36
 msgid ""
 "An error has occured while running LZMA:\n"
 "%s"
 msgstr ""
+"Errore durante l'esecuzione di LZMA:\n"
+"%s"
 
 #: pisi/archive.py:101 pisi/archive.py:161
 msgid "Archive type not recognized"
@@ -758,7 +794,7 @@ msgstr ""
 
 #: pisi/atomicoperations.py:556 pisi/package.py:136
 msgid "Invalid %s"
-msgstr ""
+msgstr "%s non valido"
 
 #: pisi/atomicoperations.py:565
 msgid "OK."
@@ -854,11 +890,11 @@ msgstr ""
 
 #: pisi/build.py:438
 msgid "Safety switch: system.devel is already installed"
-msgstr ""
+msgstr "Switch di sicurezza: system.devel è già installato"
 
 #: pisi/build.py:440
 msgid "Safety switch: the component system.devel cannot be found"
-msgstr ""
+msgstr "Switch di sicurezza: il componente system.devel non è stato trovato"
 
 #: pisi/build.py:449
 msgid "Unsatisfied Build Dependencies:"
@@ -922,11 +958,11 @@ msgstr ""
 
 #: pisi/build.py:795
 msgid "No user named '%s' found on the system"
-msgstr ""
+msgstr "Utente '%s' non trovato nel sistema"
 
 #: pisi/build.py:800
 msgid "No group named '%s' found on the system"
-msgstr ""
+msgstr "Gruppo '%s' non trovato nel sistema"
 
 #: pisi/build.py:803
 msgid "** Building package %s"
@@ -1056,7 +1092,7 @@ msgstr "Password: "
 #: pisi/cli/commands.py:209
 #, docstring
 msgid "initialize PiSi components"
-msgstr ""
+msgstr "inizializza i componenti di PiSi"
 
 #: pisi/cli/commands.py:217
 #, docstring
@@ -1172,11 +1208,11 @@ msgstr ""
 
 #: pisi/cli/commands.py:402
 msgid "Do not take build no into account."
-msgstr ""
+msgstr "Non prendere in considerazione il numero di build."
 
 #: pisi/cli/commands.py:407
 msgid "Do not take dependency information into account"
-msgstr ""
+msgstr "Non prendere in considerazione le informazioni sulle dipendenze"
 
 #: pisi/cli/commands.py:411
 #, docstring
@@ -1198,7 +1234,7 @@ msgstr ""
 
 #: pisi/cli/commands.py:441
 msgid "Output directory for produced packages"
-msgstr ""
+msgstr "Cartella di output per i pacchetti prodotti"
 
 #: pisi/cli/commands.py:444
 msgid "Bypass errors from ActionsAPI"
@@ -1250,7 +1286,7 @@ msgstr "crea pacchetto PiSi"
 
 #: pisi/cli/commands.py:481
 msgid "package_format must be one of %s "
-msgstr ""
+msgstr "package formato deve essere uno tra %s"
 
 #: pisi/cli/commands.py:484 pisi/cli/commands.py:533
 msgid "Output directory: %s"
@@ -1275,7 +1311,7 @@ msgstr ""
 
 #: pisi/cli/commands.py:516
 msgid "emerge options"
-msgstr ""
+msgstr "opzioni di emerge"
 
 #: pisi/cli/commands.py:519 pisi/cli/commands.py:592 pisi/cli/commands.py:656
 msgid "Ignore file conflicts"
@@ -1322,7 +1358,7 @@ msgstr "opzioni di installazione"
 
 #: pisi/cli/commands.py:590
 msgid "Reinstall already installed packages"
-msgstr ""
+msgstr "Reinstalla i pacchetti già installati"
 
 #: pisi/cli/commands.py:596
 msgid "Install component's and recursive components' packages"
@@ -1383,7 +1419,7 @@ msgstr "Aggiornamento repository in corso"
 
 #: pisi/cli/commands.py:711
 msgid "Will not update repositories"
-msgstr ""
+msgstr "Non aggiornerà i repository"
 
 #: pisi/cli/commands.py:733
 #, docstring
@@ -1441,7 +1477,7 @@ msgstr "Mostra una lista dei files dei pacchetti."
 
 #: pisi/cli/commands.py:827
 msgid "Info about the given component"
-msgstr ""
+msgstr "Informazioni sul componente specificato"
 
 #: pisi/cli/commands.py:830
 msgid "Show only paths."
@@ -1754,6 +1790,11 @@ msgid ""
 "Gives a brief list of PiSi components published in the\n"
 "repositories.\n"
 msgstr ""
+"Elenca i componenti disponibili\n"
+"\n"
+"Uso: list-components\n"
+"\n"
+"Fornisce una breve lista dei componenti PiSi pubblicati nei repository.\n"
 
 #: pisi/cli/commands.py:1340
 msgid "list-components options"
@@ -2027,7 +2068,6 @@ msgid "A problem occured. Please check the archive address and/or permissions ag
 msgstr ""
 
 #: pisi/fetcher.py:158
-#, fuzzy
 msgid "No such file or no permission to read"
 msgstr "File non esistente o permesso di lettura negato"
 
@@ -2213,7 +2253,7 @@ msgstr "Architettura: %s, Dimensione file installati: %s"
 
 #: pisi/mirrors.py:46
 msgid "Mirrors file %s does not exist. Could not resolve mirrors://"
-msgstr ""
+msgstr "Il file dei mirror %s non esiste. Impossibile trovare mirrors://"
 
 #: pisi/operations.py:114
 msgid "Mixing file names and package names not supported yet."
@@ -2224,6 +2264,8 @@ msgid ""
 "The following packages will be installed\n"
 "in the respective order to satisfy extra dependencies:\n"
 msgstr ""
+"I seguenti pacchetti verranno installati nel\n"
+"rispettivo ordine per soddisfare le dipendenze aggiuntive:\n"
 
 #: pisi/operations.py:159 pisi/operations.py:621
 msgid "Do you want to continue?"
@@ -2279,11 +2321,13 @@ msgstr ""
 
 #: pisi/operations.py:334
 msgid "The following package(s) are already installed and are not going to be installed again:\n"
-msgstr ""
+msgstr "I seguenti pacchetti sono già installati e non verranno installati nuovamente:\n"
 
 #: pisi/operations.py:355
 msgid "Following packages will be installed in the respective order to satisfy dependencies:\n"
 msgstr ""
+"I seguenti pacchetti verranno installati nel\n"
+"rispettivo ordine per soddisfare le dipendenze:\n"
 
 #: pisi/operations.py:360 pisi/operations.py:491
 msgid "Total size of package(s): %.2f %s"
@@ -2307,11 +2351,11 @@ msgstr "Il pacchetto %s non è disponibile nei repository."
 
 #: pisi/operations.py:453
 msgid "Package %s is already at the latest release %s."
-msgstr ""
+msgstr "Il pacchetto %s è già alla versione più recente %s."
 
 #: pisi/operations.py:459
 msgid "Package %s is already at the latest build %s."
-msgstr ""
+msgstr "Il pacchetto %s è già alla build più recente %s."
 
 #: pisi/operations.py:486
 msgid "The following packages will be upgraded: "
@@ -2319,7 +2363,7 @@ msgstr "I seguenti pacchetti verranno aggiornati: "
 
 #: pisi/operations.py:552
 msgid "Dependency %s of %s cannot be satisfied"
-msgstr ""
+msgstr "Impossibile soddisfare la dipendenza %s di %s"
 
 #: pisi/operations.py:553
 msgid "Upgrade is not possible."
@@ -2353,7 +2397,7 @@ msgstr ""
 
 #: pisi/operations.py:634
 msgid "Package %s is not installed. Cannot remove."
-msgstr ""
+msgstr "Il pacchetto %s non è installato. Impossibile rimuovere."
 
 #: pisi/operations.py:683
 msgid "No packages to emerge."
@@ -2373,7 +2417,7 @@ msgstr ""
 
 #: pisi/operations.py:743
 msgid "Cannot find source package: %s"
-msgstr ""
+msgstr "Impossibile trovare il pacchetto di sorgenti: %s"
 
 #: pisi/package.py:56
 msgid ""
@@ -2456,7 +2500,7 @@ msgstr ""
 #: pisi/pxml/autoxml.py:699 pisi/pxml/autoxml.py:715 pisi/pxml/autoxml.py:725
 #: pisi/pxml/autoxml.py:815 pisi/pxml/autoxml.py:829 pisi/pxml/autoxml.py:839
 msgid "Mandatory argument not available"
-msgstr ""
+msgstr "Argomento obbligatorio non disponibile"
 
 #: pisi/pxml/autoxml.py:712 pisi/pxml/autoxml.py:826
 msgid "Object cannot be encoded"
@@ -2492,15 +2536,15 @@ msgstr "Il repository %s esiste già"
 
 #: pisi/repodb.py:90
 msgid "Cannot add repository at position %s"
-msgstr ""
+msgstr "Impossibile aggiungere un repository in posizione %s"
 
 #: pisi/scenarioapi/package.py:67
 msgid "No pisi package: %s* found."
-msgstr ""
+msgstr "Nessun pacchetto pisi: %s* trovato."
 
 #: pisi/scenarioapi/repoops.py:28
 msgid "Repo already has package named %s."
-msgstr ""
+msgstr "Il repository ha già un pacchetto di nome %s."
 
 #: pisi/scenarioapi/repoops.py:52 pisi/scenarioapi/repoops.py:59
 msgid "Repo does not have package named %s."
@@ -2508,7 +2552,7 @@ msgstr "Il repository non ha un pacchetto di nome %s."
 
 #: pisi/sourcearchive.py:63
 msgid "Trying fallback address: %s"
-msgstr ""
+msgstr "Tentativo con l'indirizzo di fallback: %s"
 
 #: pisi/sourcearchive.py:74
 msgid "%s mirrors are not defined."
@@ -2516,7 +2560,7 @@ msgstr "Mirror di %s non definiti."
 
 #: pisi/sourcearchive.py:79
 msgid "Fetching source from mirror: %s"
-msgstr ""
+msgstr "Prelevamento dei sorgenti dal mirror: %s"
 
 #: pisi/sourcearchive.py:85
 msgid "Could not fetch source from %s mirrors."
@@ -2560,15 +2604,15 @@ msgstr "Dipendenze: "
 
 #: pisi/uri.py:80
 msgid "setAuthInfo needs a tuple (user, pass)"
-msgstr ""
+msgstr "setAuthInfo vuole una tupla (utente, password)"
 
 #: pisi/util.py:122 pisi/util.py:143
 msgid "Running "
-msgstr ""
+msgstr "In esecuzione"
 
 #: pisi/util.py:126 pisi/util.py:161
 msgid "return value for \"%s\" is %s"
-msgstr ""
+msgstr "il valore di ritorno per \"%s\" è %s"
 
 #: pisi/util.py:364
 msgid "Including external link '%s'"
@@ -2580,11 +2624,11 @@ msgstr ""
 
 #: pisi/util.py:440
 msgid "I/O Error: Cannot calculate SHA1 hash of %s"
-msgstr ""
+msgstr "Errore I/O: Impossibile calcolare l'hash SHA1 di %s"
 
 #: pisi/util.py:451
 msgid "Cannot calculate SHA1 hash of given data"
-msgstr ""
+msgstr "Impossibile calcolare l'hash SHA1 dei dati forniti"
 
 #: pisi/util.py:488
 msgid "ERROR: patch (%s) failed"
@@ -2641,6 +2685,8 @@ msgid ""
 "Cannot parse '%s':\n"
 "%s\n"
 msgstr ""
+"Impossibile analizzare '%s':\n"
+"%s\n"
 
 #: scripts/repostats.py:642
 msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
