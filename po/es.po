@@ -1,4 +1,3 @@
-# translation of es.po to spanish
 # translation of es.po to
 # Copyright (C) YEAR ORGANIZATION
 #
@@ -9,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "POT-Creation-Date: 2006-12-09 20:35+EET\n"
-"PO-Revision-Date: 2007-04-15 14:07-0400\n"
-"Last-Translator: klemens <click3d at linuxmail org>\n"
-"Language-Team: spanish <es@li.org>\n"
+"PO-Revision-Date: 2007-04-18 22:25-0400\n"
+"Last-Translator: Christian Faure <christian.faurebouvard@laposte.net>\n"
+"Language-Team:  <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -41,9 +40,9 @@ msgstr ""
 "\n"
 "Por Greg Ward <gward@python.net>\n"
 "\n"
-"Distribuido originalmente como Optik; see http://optik.sourceforge.net/ .\n"
+"Distribuido originalmente como Optik; ver http://optik.sourceforge.net/ .\n"
 "\n"
-"Si tiene problemas con éste módulo, no envie reportes de fallas,\n"
+"Si tiene problemas con éste módulo, no envíe reportes de fallas,\n"
 "parches, o propuestas de mejora con Python. Por favor use la página \n"
 "del proyecto Optik en SourceForge:\n"
 "  http://sourceforge.net/projects/optik\n"
@@ -70,7 +69,7 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    Producido si al OptionParser se agregan opciones conflictivos.\n"
+"    Producido si al OptionParser se agregan opciones conflictivas.\n"
 "    "
 
 #: /usr/lib/python2.4/optparse.py:114
@@ -98,7 +97,7 @@ msgstr ""
 
 #: /usr/lib/python2.4/optparse.py:298 pisi/cli/commands.py:50
 msgid "Return a comma-separated list of option strings & metavariables."
-msgstr "Devolver una lista separado por comas, de cadenas de opciones & variables meta."
+msgstr "Devolver una lista separada por comas, de cadenas de opciones y meta-variables."
 
 #: /usr/lib/python2.4/optparse.py:317
 msgid ""
@@ -146,7 +145,7 @@ msgstr "opción %s: valor %s inválido: %r"
 
 #: /usr/lib/python2.4/optparse.py:373
 msgid "option %s: invalid choice: %r (choose from %s)"
-msgstr "opción %s: elección inválida: %r (seleccione de %s)"
+msgstr "opción %s: selección inválida: %r (seleccione de %s)"
 
 #: /usr/lib/python2.4/optparse.py:382
 msgid ""
@@ -198,9 +197,9 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"        Actualize los valores de opciones de cualquier diccionario, pero solamente\n"
-"        use claves del dict que ya tienen un atributo correspondiente\n"
-"        en si mismo. Cualquier clave en dict sin atributo correspondiente se \n"
+"        Actualice los valores de opciones de cualquier diccionario, pero solamente\n"
+"        use claves del diccionario que ya tienen un atributo correspondiente\n"
+"        en si mismo. Cualquier clave en diccionario sin atributo correspondiente se \n"
 "        va a ignorar silenciosamante.\n"
 "        "
 
@@ -213,9 +212,9 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"       Actualize los valores de opciones de cualquier diccionario, \n"
+"       Actualice los valores de opciones de cualquier diccionario, \n"
 "        usando todas las claves del diccionario sin importar si \n"
-"        tienen un atributo correspondiente en self o no.\n"
+"        tienen un atributo correspondiente o no.\n"
 "        "
 
 #: /usr/lib/python2.4/optparse.py:926
@@ -265,8 +264,8 @@ msgstr ""
 "        sys.argv[1:]).  Cualquier error produce una llamada a 'error()', que\n"
 "        por defecto imprime el mensaje de uso a la salida stderr y llama\n"
 "        sys.exit() con un mensaje de error. Si exitoso devuelve un par\n"
-"        (values, args) donde 'values' es una instalcia de Values (con todos\n"
-"        los valores de las opciones que le fueron pasado) y 'args' es la lista de argumentos \n"
+"        (values, args) donde 'values' es una instancia de Values (con todos\n"
+"        los valores de las opciones que le fueron pasadas) y 'args' es la lista de argumentos \n"
 "        que quedan luego de analizar las opciones.\n"
 "        "
 
@@ -287,11 +286,11 @@ msgstr ""
 "        check_values(values : Values, args : [string])\n"
 "        -> (values : Values, args : [string])\n"
 "\n"
-"        Verifica la válidez de los valores de las opciones indicadas y de los\n"
-"        argumentos sobrantes. Devuelve los valores de opcioines y argumentos sobrantes\n"
-"        (posiblemente corregidos, posiblemente completamente nuevo -- como le parezca\n"
-"        mejor).  La implementación por defecto simplemente devuelve los valores que se\n"
-"         le pasaron; subclases pueden sobreescribir según deseado.\n"
+"        Verifica la validéz de los valores de las opciones indicadas y de los\n"
+"        argumentos sobrantes. Devuelve los valores de opciones y argumentos sobrantes\n"
+"        (posiblemente corregidos, completamente nuevos -- como le parezca\n"
+"        mejor).  La implementación predeterminada simplemente devuelve los valores que se\n"
+"         le pasaron; las subclases se pueden sobreescribir.\n"
 "        "
 
 #: /usr/lib/python2.4/optparse.py:1298
@@ -312,10 +311,10 @@ msgstr ""
 "                         rargs : [string],\n"
 "                         values : Values)\n"
 "\n"
-"        Procesa argumentos de línea de comando y popula 'values', consumiendo\n"
+"        Procesa argumentos de línea de comando y carga 'values', consumiendo\n"
 "        opciones y argumentos de 'args'.  Si 'allow_interspersed_args' es\n"
 "        falso, para con el primer argumento que no es una opción.  Si verdadero, acumula los\n"
-"        argumentos entremedios que no son opciones en 'largs'.\n"
+"        argumentos intermedios que no son opciones en 'largs'.\n"
 "        "
 
 #: /usr/lib/python2.4/optparse.py:1349
@@ -336,15 +335,15 @@ msgstr ""
 
 #: /usr/lib/python2.4/optparse.py:1376 /usr/lib/python2.4/optparse.py:1415
 msgid "%s option requires an argument"
-msgstr "%s opción requiere un argumento"
+msgstr "la opción %s requiere un argumento"
 
 #: /usr/lib/python2.4/optparse.py:1378 /usr/lib/python2.4/optparse.py:1417
 msgid "%s option requires %d arguments"
-msgstr "opción %s require %d argumentos"
+msgstr "la opción %s requiere %d argumentos"
 
 #: /usr/lib/python2.4/optparse.py:1387
 msgid "%s option does not take a value"
-msgstr "opción %s no toma un valor"
+msgstr "ls opción %s no toma un valor"
 
 #: /usr/lib/python2.4/optparse.py:1404 /usr/lib/python2.4/optparse.py:1558
 msgid "no such option: %s"
@@ -362,7 +361,7 @@ msgid ""
 msgstr ""
 "error(msg : string)\n"
 "\n"
-"        Imprime un mensaje de uso incluyendo 'msg' hacia la salida stderr y salir.\n"
+"        Imprime un mensaje incluyendo 'msg' hacia la salida stderr y sale.\n"
 "        Si lo sobreescribe en una subclase no debería retornar -- \n"
 "        sino debería o salir o producir una excepción.\n"
 "        "
@@ -380,7 +379,7 @@ msgid ""
 msgstr ""
 "print_usage(file : file = stdout)\n"
 "\n"
-"        Imprime el mensaje de uso parra el programa actual (self.usage) a\n"
+"        Imprime el mensaje de uso para el programa actual (self.usage) a\n"
 "        'file' (por defecto stdout).  Cualquier ocurrencia de la cadena \"%prog\" en\n"
 "        self.usage es reemplazado por el nombre del programa actual\n"
 "        (nombre de base de sys.argv[0]). No hace nada si self.usage está vacío\n"
@@ -400,7 +399,7 @@ msgstr ""
 "print_version(file : file = stdout)\n"
 "\n"
 "        Imprime el mensaje de versión del programa actual (self.version) a\n"
-"        'file' (por defecto a stdout). Similar a print_usage(), cualquier occurencia\n"
+"        'file' (por defecto a stdout). Similar a print_usage(), cualquier ocurrencia\n"
 "        de \"%prog\" en self.version es reemplazado por el nombre del programa\n"
 "        actual. No hace nada si self.version está vacío o no definido.\n"
 "        "
@@ -460,7 +459,7 @@ msgid ""
 "upgrades."
 msgstr ""
 "Una operación de base de datos fue abortada. Debería ejecutar pisi\n"
-"de nuevo para el procedimiento de recuperación normal de DB. Asegurese de \n"
+"de nuevo para el procedimiento de recuperación normal de DB. Asegúrese de \n"
 "tener espacio disponible en disco.\n"
 " Debe ejecutar rebuild-db solamente en caso de corrupción de archivos y para actualización de base de datos"
 
@@ -469,8 +468,8 @@ msgid ""
 "Unhandled internal exception.\n"
 "Please file a bug report. (http://bugs.uludag.org.tr)"
 msgstr ""
-"Excepción interna no previsto.\n"
-"Favor envie un reporte de la falla. (http://bugs.uludag.org.tr)"
+"Excepción interna no prevista.\n"
+"Favor envíe un reporte de la falla. (http://bugs.uludag.org.tr)"
 
 #: pisi-cli:63
 msgid "System Error. Program Terminated."
@@ -482,11 +481,11 @@ msgstr "Favor use  'pisi help' para ayuda general."
 
 #: pisi-cli:73
 msgid "Traceback:"
-msgstr "Traceback:"
+msgstr "Registro:"
 
 #: pisi-cli:77
 msgid "Use --debug to see a traceback."
-msgstr "Use --debug para ver traceback."
+msgstr "Use --debug para ver registro."
 
 #: pisi/actionsapi/autotools.py:36
 msgid ""
@@ -612,7 +611,7 @@ msgstr "Ejecución de %s falló."
 
 #: pisi/actionsapi/shelltools.py:49
 msgid "Cannot create directory %s"
-msgstr "No posible crear carpeta %s"
+msgstr "No posible crear la carpeta %s"
 
 #: pisi/actionsapi/shelltools.py:57
 msgid "ActionsAPI [echo]: Can't append to file %s."
@@ -745,7 +744,7 @@ msgstr "Actualizando base de datos de todas formas según solicitado"
 
 #: pisi/api.py:445
 msgid "* Package database updated."
-msgstr "* Base de datos de paquetes actualizado."
+msgstr "* Base de datos de paquetes actualizada."
 
 #: pisi/api.py:447 pisi/api.py:472
 msgid "No repository named %s found."
@@ -757,7 +756,7 @@ msgstr "* Regenerando repositorio con nombre '%s' ... "
 
 #: pisi/api.py:468
 msgid "Input/Output error while reading %s: %s"
-msgstr "Error de Input/Output al leer %s: %s"
+msgstr "Error de Entrada/Salida al leer %s: %s"
 
 #: pisi/api.py:525
 msgid "Rebuilding package database"
@@ -786,7 +785,7 @@ msgstr "URI de paquete: %s"
 
 #: pisi/atomicoperations.py:82
 msgid "Package %s not found in any active repository."
-msgstr "Paquete %s no encontrado en ningun repositorio activo."
+msgstr "Paquete %s no encontrado en ningún repositorio activo."
 
 #: pisi/atomicoperations.py:101
 msgid "Installing %s, version %s, release %s, build %s"
@@ -794,7 +793,7 @@ msgstr "Instalando %s, versión %s, release %s, build %s"
 
 #: pisi/atomicoperations.py:146
 msgid "%s package cannot be installed unless the dependencies are satisfied"
-msgstr "paquete %s no se puede instalar sin las dependencias"
+msgstr "los paquetes %s no se puede instalar hasta que instale los paquetes requeridos"
 
 # check this ?? - probably ok, but see the context
 #: pisi/atomicoperations.py:165
@@ -816,7 +815,7 @@ msgstr "Reinstalar el paquete de la misma versión ?"
 #: pisi/atomicoperations.py:202
 # traducir mejor como rechazar o denegar ??
 msgid "Package re-install declined"
-msgstr "Reinstalación de paquete rechazado"
+msgstr "Reinstalación de paquete rechazada"
 
 #: pisi/atomicoperations.py:208
 msgid "Upgrading to new upstream version"
@@ -824,27 +823,27 @@ msgstr "Actualizando a nueva versión upstream"
 
 #: pisi/atomicoperations.py:211
 msgid "Upgrading to new distribution release"
-msgstr "Actualización a nueva release de distribución"
+msgstr "Actualización a nueva versión (release) de distribución"
 
 #: pisi/atomicoperations.py:215
 msgid "Upgrading to new distribution build"
-msgstr "Actualización a nuevo 'build' de distribución"
+msgstr "Actualización a nueva versión ('build') de distribución"
 
 #: pisi/atomicoperations.py:225
 msgid "Downgrade to old distribution release?"
-msgstr "Revertir hacia release antigua de distribución ?"
+msgstr "Revertir hacia versión (release) antigua de distribución ?"
 
 #: pisi/atomicoperations.py:227
 msgid "Downgrade to old distribution build?"
-msgstr "Revertir hacia 'build' antiguo de distribución ?"
+msgstr "Revertir hacia versión ('build') antigua de distribución ?"
 
 #: pisi/atomicoperations.py:229
 msgid "Package downgrade declined"
-msgstr "Revertir (downgrade) de paquete rechazado"
+msgstr "Revertir versión anterior (downgrade) de paquete rechazada"
 
 #: pisi/atomicoperations.py:253
 msgid "%s configuration failed."
-msgstr "Falló configuración %s ."
+msgstr "Falló la configuración %s ."
 
 #: pisi/atomicoperations.py:340
 msgid "Storing %s, "
@@ -860,7 +859,7 @@ msgstr "Guardando %s"
 
 #: pisi/atomicoperations.py:406
 msgid "File list could not be read for package %s, continuing removal."
-msgstr "Lista de archivos no se pudo leer para paquete %s, continuando eliminar."
+msgstr "La lista de archivos no se pudo leer para el paquete %s, continuando eliminación."
 
 #: pisi/atomicoperations.py:412
 msgid "Removing package %s"
@@ -872,7 +871,7 @@ msgstr "Intentando remover paquete no-existente"
 
 #: pisi/atomicoperations.py:454
 msgid "Not removing conflicted file : %s"
-msgstr "No eliminado archivo conflictivo: %s"
+msgstr "Archivo conflictivo: %s no eliminado "
 
 #: pisi/atomicoperations.py:474
 msgid "Installed file %s is not exists on system [Probably you manually deleted]"
@@ -896,7 +895,7 @@ msgstr "Archivos XML '%s' no se pueden encontrar"
 
 #: pisi/atomicoperations.py:556 pisi/package.py:136
 msgid "Invalid %s"
-msgstr "%s Invalido"
+msgstr "%s no es válido"
 
 #: pisi/atomicoperations.py:565
 msgid "OK."
@@ -913,7 +912,7 @@ msgstr "URI Fuente: %s"
 
 #: pisi/build.py:118
 msgid "Source %s not found in any active repository."
-msgstr "Fuente %s no encontrado en ningún repositorio activo."
+msgstr "Fuente %s no encontrada en repositorios activos."
 
 #: pisi/build.py:183
 msgid "Building PiSi source package: %s"
@@ -1012,7 +1011,7 @@ msgstr "Dependencias Build no satisfechas:"
 
 #: pisi/build.py:453
 msgid "Cannot build package due to unsatisfied build dependencies"
-msgstr "No posible generar el paquete por dependencias build no satisfechas"
+msgstr "No es posible generar el paquete por dependencias build no satisfechas"
 
 #: pisi/build.py:461
 msgid "Build dependency %s cannot be satisfied"
@@ -1032,7 +1031,7 @@ msgstr "Ignorando dependencias build"
 
 #: pisi/build.py:479
 msgid "Patch file is missing: %s\n"
-msgstr "Archivo de parche falta: %s\n"
+msgstr "Falta el archivo de parche: %s\n"
 
 #: pisi/build.py:492
 msgid "* Applying patch: %s"
@@ -1077,7 +1076,7 @@ msgstr "Nombre de grupo '%s' no encontrado en el sistema"
 #: pisi/build.py:803
 # oops, aqui falta traducir. pero como se puede decir ?
 msgid "** Building package %s"
-msgstr "** Building paquete %s"
+msgstr "** Construyendo paquete %s"
 
 #: pisi/build.py:805 pisi/build.py:808
 msgid "Generating %s,"
@@ -1180,7 +1179,7 @@ msgstr "Cambiar la raíz del sistema para los comandos PiSi"
 
 #: pisi/cli/commands.py:153
 msgid "Assume yes in all yes/no queries"
-msgstr "Asumir si (yes) en todas las consultas yes/no"
+msgstr "Asumir Sí (yes) en todas las consultas Sí/No (yes/no)"
 
 #: pisi/cli/commands.py:158
 msgid "Detailed output"
@@ -1568,9 +1567,9 @@ msgstr ""
 "Actualiza el sistema entero si no se indica el nombre de un paquete\n"
 "\n"
 "Se puede usar solamente nombres de paquetes para especificar paquetes\n"
-"porque la operación de actualización de paquetes solo está definido con \n"
+"porque la operación de actualización de paquetes solo está definida con \n"
 "respecto a repositorios. Para el nombre especificado debe existir\n"
-"el paquete correspondiente en los repositorios de paquetes. Si quiere solamente\n"
+"el paquete correspondiente en los repositorios. Si quiere solamente\n"
 " reinstalar un paquete de un archivo PiSi file, use el comando install.\n"
 "\n"
 "Tambien se pueden especificar componentes en vez de nombres de paquetes, que \n"
@@ -1598,7 +1597,7 @@ msgid ""
 "pattern."
 msgstr ""
 "Ignorar paquetes y componentes para la actualización, cuyo nombre base "
-"coincide con patrón."
+"coincide con el patrón."
 
 # translated as if "..whose basenames contain the pattern string"
 #: pisi/cli/commands.py:666
@@ -2440,7 +2439,6 @@ msgid "ERROR: gpg --detach-sig %s failed"
 msgstr "ERROR: gpg --detach-sig %s falló"
 
 #: pisi/graph.py:31
-
 msgid "Encountered cycle %s"
 msgstr "Encontrado ciclo (cycle) %s"
 
@@ -2690,7 +2688,7 @@ msgstr "Actualización no posible."
 
 #: pisi/operations.py:568
 msgid "Reverse dependency %s of %s cannot be satisfied"
-msgstr "Dependencia reversa %s de %s no puede ser satisfecha"
+msgstr "No se puede satisfacer la dependencia %s de %s"
 
 #: pisi/operations.py:593
 msgid "Safety switch: cannot remove the following packages in system.base: "
@@ -2709,7 +2707,7 @@ msgid ""
 "The following minimal list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
 msgstr ""
-"La siguiente lista mínimal de paquetes se removerán\n"
+"La siguiente lista mínima de paquetes se removerá\n"
 "en el orden indicado, para satisfacer las dependencias:\n"
 
 #: pisi/operations.py:622
@@ -2737,12 +2735,12 @@ msgid ""
 "The following minimal list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
 msgstr ""
-"La siguiente lista mínimal de paquetes se generarán e instalarán\n"
+"La siguiente lista mínima de paquetes se generará e instalará\n"
 "en el orden indicado, para satisfacer las dependencias:\n"
 
 #: pisi/operations.py:743
 msgid "Cannot find source package: %s"
-msgstr "No posible encontrar paquete de fuentes: %s"
+msgstr "No se ha encontrado paquete fuente: %s"
 
 #: pisi/package.py:56
 # en realidad no lo entiendo.., supongo que debe haber un error en el texto en ingles (la ultima frase)
@@ -2889,15 +2887,15 @@ msgstr "Intentando dirección de respaldo: %s"
 
 #: pisi/sourcearchive.py:74
 msgid "%s mirrors are not defined."
-msgstr "%s mirrors no están definidos."
+msgstr "%s repositorios no están definidos."
 
 #: pisi/sourcearchive.py:79
 msgid "Fetching source from mirror: %s"
-msgstr "Descargando fuente desde mirror: %s"
+msgstr "Descargando fuente desde %s"
 
 #: pisi/sourcearchive.py:85
 msgid "Could not fetch source from %s mirrors."
-msgstr "No posible descargar fuentes de %s mirrors."
+msgstr "No posible descargar fuentes desde %s."
 
 #: pisi/sourcearchive.py:103
 msgid "unpack: check_file_hash failed"
@@ -2938,7 +2936,7 @@ msgstr "Dependencias: "
 
 #: pisi/uri.py:80
 msgid "setAuthInfo needs a tuple (user, pass)"
-msgstr "setAuthInfo requiere un tuple (user, pass)"
+msgstr "setAuthInfo requiere un par (usuario,clave)"
 
 #: pisi/util.py:122 pisi/util.py:143
 msgid "Running "
@@ -3018,7 +3016,7 @@ msgstr "Paquete de fuente '%s' tiene formato de fecha incorrecto '%s'"
 
 #: scripts/repostats.py:481
 msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-msgstr "Desarollador '%s <%s>' tiene otra dirección email '%s' en archivo fuente '%s'"
+msgstr "Desarrollador '%s <%s>' tiene otra dirección email '%s' en archivo fuente '%s'"
 
 #: scripts/repostats.py:564
 msgid ""
@@ -3046,7 +3044,7 @@ msgstr "Buscando paquetes binarios...\n"
 
 #: scripts/repostats.py:673
 msgid "Encountered %d errors! Fix them immediately!\n"
-msgstr "%d errores encontrados! Corrígalos de inmediato!\n"
+msgstr "%d errores encontrados! Corríjalos de inmediato!\n"
 
 #: scripts/repostats.py:681
 msgid "These dependencies are not available in repository:\n"
