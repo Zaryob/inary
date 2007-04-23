@@ -65,9 +65,9 @@ def run(parameters = ''):
     if system('python %s' % (parameters)):
         raise RunTimeError, _('Running %s failed.') % parameters
 
-def fixCompiledPy():
+def fixCompiledPy(lookInto = "/usr/lib/%s/" % get.curPYTHON()):
     ''' cleans *.py[co] from packages '''
-    for root, dirs, files in os.walk("%s/usr/lib/%s/" % (get.installDIR(), get.curPYTHON())):
+    for root, dirs, files in os.walk("%s/%s" % (get.installDIR(),lookInto)):
         for compiledFile in files:
             if compiledFile.endswith(".pyc") or compiledFile.endswith(".pyo"):
                 if can_access_file("%s/%s" % (root,compiledFile)):
