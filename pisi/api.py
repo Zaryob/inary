@@ -326,9 +326,9 @@ def info_name(package_name, installed=False):
     """Fetch package information for the given package."""
     if installed:
         package = get_installed_package(package_name)
+        repo = None
     else:
         package, repo = ctx.packagedb.get_package_repo(package_name, pisi.db.itembyrepodb.repos)
-        repostr = repo
 
     from pisi.metadata import MetaData
     metadata = MetaData()
@@ -344,7 +344,7 @@ def info_name(package_name, installed=False):
             files = None
     else:
         files = None
-    return metadata, files
+    return metadata, files, repo
 
 def search_package_terms(terms, repo = pisi.db.itembyrepodb.all):
     return search_in_packages(terms, ctx.packagedb.list_packages(repo), repo)

@@ -947,7 +947,7 @@ Usage: info <package1> <package2> ... <packagen>
             self.print_pkginfo(metadata, files)
         else:
             if ctx.installdb.is_installed(arg):
-                metadata, files = pisi.api.info_name(arg, True)
+                metadata, files, repo = pisi.api.info_name(arg, True)
                 if self.options.short:
                     ctx.ui.info(_('[inst] '), noln=True)
                 else:
@@ -955,11 +955,11 @@ Usage: info <package1> <package2> ... <packagen>
                 self.print_pkginfo(metadata, files,pisi.db.itembyrepodb.installed)
 
             if ctx.packagedb.has_package(arg):
-                metadata, files = pisi.api.info_name(arg, False)
+                metadata, files, repo = pisi.api.info_name(arg, False)
                 if self.options.short:
                     ctx.ui.info(_('[repo] '), noln=True)
                 else:
-                    ctx.ui.info(_('Package found in repository:'))
+                    ctx.ui.info(_('Package found in %s repository:') % repo)
                 self.print_pkginfo(metadata, files, pisi.db.itembyrepodb.repos)
 
             if not ctx.packagedb.has_package(arg):
