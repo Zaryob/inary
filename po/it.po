@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "POT-Creation-Date: 2006-12-12 14:29+EET\n"
-"PO-Revision-Date: 2007-04-20 19:57+0200\n"
+"PO-Revision-Date: 2007-04-25 14:47+0200\n"
 "Last-Translator: Andrea Decorte <adecorte@gmail.com>\n"
 "Language-Team: Italian <pardus-translation-it@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
@@ -152,7 +152,6 @@ msgstr "opzione %s: scelta non valida: %r (scegli tra %s)"
 
 #: /usr/lib/python2.4/optparse.py:382
 #, docstring
-#, fuzzy
 msgid ""
 "\n"
 "    Instance attributes:\n"
@@ -1053,7 +1052,7 @@ msgstr "File abbandonati nella cartella di installazione (%s):"
 
 #: pisi/build.py:887
 msgid "All of the files under the install dir (%s) has been collected by package(s)"
-msgstr ""
+msgstr "Tutti i file nella cartella di installazione (%s) sono stati raccolti dai pacchetti"
 
 #: pisi/build.py:891
 msgid "Cleaning Build Directory..."
@@ -1211,6 +1210,12 @@ msgid ""
 "PiSi uses filesystem locks for managing database access.\n"
 "This command deletes unused locks from the database directory."
 msgstr ""
+"Pulisce i lock inutilizzati\n"
+"\n"
+"Utilizzo: clean\n"
+"\n"
+"PiSi utilizza dei lock sul filesystem per gestire gli accessi al database.\n"
+"Questo comando elimina i lock inutilizzati dalla cartella del database."
 
 #: pisi/cli/commands.py:315
 #, docstring
@@ -1395,6 +1400,14 @@ msgid ""
 "\n"
 "You can also give the name of a component.\n"
 msgstr ""
+"Costruisce e installa i pacchetti sorgenti PiSi da un repository\n"
+"\n"
+"Utilizzo: emerge <nomesorgente> ...\n"
+"\n"
+"Dovresti fornire il nome di un pacchetto sorgente da scaricare\n"
+"da un repository che contiene i sorgenti.\n"
+"\n"
+"Puoi anche fornire il nome di un componente.\n"
 
 #: pisi/cli/commands.py:516
 msgid "emerge options"
@@ -1458,7 +1471,7 @@ msgstr "Reinstalla i pacchetti già installati"
 
 #: pisi/cli/commands.py:596
 msgid "Install component's and recursive components' packages"
-msgstr ""
+msgstr "Installa i pacchetti del componente e dei componenti ricorsivi"
 
 #: pisi/cli/commands.py:598 pisi/cli/commands.py:662
 msgid "Fetch upgrades but do not install."
@@ -1515,15 +1528,17 @@ msgstr "Non aggiornare i repository"
 
 #: pisi/cli/commands.py:660
 msgid "Upgrade component's and recursive components' packages"
-msgstr ""
+msgstr "Aggiorna i pacchetti del componente e dei componenti ricorsivi"
 
 #: pisi/cli/commands.py:664
 msgid "When upgrading system, ignore packages and components whose basenames match pattern."
-msgstr ""
+msgstr "All'aggiornamento del sistema, ignora i pacchetti e i componenti i cui nomi base corrispondono al modello."
 
 #: pisi/cli/commands.py:666
 msgid "When upgrading system, ignore packages and components whose basenames                      match any pattern contained in file."
 msgstr ""
+"All'aggiornamento del sistema, ignora i pacchetti e i componenti i cui nomi base                      "
+"corrispondono a uno dei modelli contenuti nel file."
 
 #: pisi/cli/commands.py:706
 msgid "Updating repositories"
@@ -1545,6 +1560,14 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
+"Rimuove i pacchetti PiSi\n"
+"\n"
+"Utilizzo: remove <pacchetto1> <pacchetto2> ... <pacchetton>\n"
+"\n"
+"Rimuove uno o più pacchetti dal tuo sistema. Devi solo fornire i nomi dei pacchetti da rimuovere.\n"
+"\n"
+"Puoi anche specificare i componenti invece dei nomi dei pacchetti; essi verranno\n"
+"poi espansi per ottenere i nomi dei pacchetti.\n"
 
 #: pisi/cli/commands.py:750
 msgid "remove options"
@@ -1552,7 +1575,7 @@ msgstr "opzioni di rimozione"
 
 #: pisi/cli/commands.py:753
 msgid "Remove component's and recursive components' packages"
-msgstr ""
+msgstr "Rimuovi i pacchetti del componente e dei componenti ricorsivi"
 
 #: pisi/cli/commands.py:775
 #, docstring
@@ -1720,6 +1743,17 @@ msgid ""
 "If you give multiple directories, the command still works, but puts\n"
 "everything in a single index file.\n"
 msgstr ""
+"Indicizza i file PiSi in una cartella specificata\n"
+"\n"
+"Utilizzo: index <cartella> ...\n"
+"\n"
+"Questo comando cerca tutti i file PiSi nella cartella, raccoglie i loro tag\n"
+"PiSi e accumula le informazione in un file di output in formato XML,\n"
+"il cui nome predefinito è 'pisi-index.xml'. In particolare, indicizza sia i pacchetti\n"
+"sorgente che quelli binari.\n"
+"\n"
+"Se fornisci più cartelle, il comando funziona comunque, ma\n"
+"il risultato verrà scritto su un unico file di indice.\n"
 
 #: pisi/cli/commands.py:994
 msgid "index options"
@@ -2683,9 +2717,8 @@ msgid "autoxml.write: File encoding '%s' has errors"
 msgstr "autoxml.write: La codifica del file '%s' contiene degli errori"
 
 #: pisi/pxml/autoxml.py:519
-#, fuzzy
 msgid "gen_tag: unrecognized tag type %s in spec"
-msgstr "gen_tag: tipo di tag no riconosciuto %s in spec"
+msgstr "gen_tag: tipo di tag %s non riconosciuto in spec"
 
 #: pisi/pxml/autoxml.py:567 pisi/pxml/autoxml.py:578
 msgid "Mandatory variable %s not available"
@@ -2854,11 +2887,11 @@ msgstr ""
 
 #: pisi/util.py:543
 msgid "objcopy (keep-debug) command failed for file '%s'!"
-msgstr ""
+msgstr "comando objcopy (keep-debug) fallito per il file '%s'!"
 
 #: pisi/util.py:549
 msgid "objcopy (add-debuglink) command failed for file '%s'!"
-msgstr ""
+msgstr "comando objcopy (add-debuglink) fallito per il file '%s'!"
 
 #: pisi/util.py:610
 msgid "Updating environment..."
