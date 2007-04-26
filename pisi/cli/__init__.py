@@ -21,7 +21,7 @@ _ = __trans.ugettext
 import pisi
 import pisi.context as ctx
 import pisi.ui
-import pisi.util as util
+import pisi.util
 import pisi.cli.colors as colors
 
 class Error(pisi.Error):
@@ -49,7 +49,7 @@ class CLI(pisi.ui.UI):
         super(CLI, self).__init__(show_debug, show_verbose)
 
     def close(self):
-        util.xterm_title_reset()
+        pisi.util.xterm_title_reset()
 
     def output(self, msg, err = False, verbose = False):
         if (verbose and self.show_verbose) or (not verbose):
@@ -142,7 +142,7 @@ class CLI(pisi.ui.UI):
         if msg:
             msg = unicode(msg)
             self.output(colors.colorize(msg + '\n', 'brightgreen'))
-            util.xterm_title(msg)
+            pisi.util.xterm_title(msg)
 
     def notify(self, event, **keywords):
         if event == pisi.ui.installed:
