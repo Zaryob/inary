@@ -21,9 +21,9 @@ _ = __trans.ugettext
 import pisi
 import pisi.context as ctx
 import pisi.archive as archive
-from pisi.uri import URI
-from pisi.metadata import MetaData
-from pisi.files import Files
+import pisi.uri
+import pisi.metadata
+import pisi.files
 import pisi.util as util
 import fetcher
 
@@ -36,7 +36,7 @@ class Package:
     file)."""
     def __init__(self, packagefn, mode='r'):
         self.filepath = packagefn
-        url = URI(packagefn)
+        url = pisi.uri.URI(packagefn)
 
         if url.is_remote_file():
             self.fetch_remote_file(url)
@@ -111,13 +111,13 @@ class Package:
 
     def get_metadata(self):
         """reads metadata.xml from the PiSi package and returns MetaData object"""
-        md = MetaData()
+        md = pisi.metadata.MetaData()
         md.parse(self.impl.read_file(ctx.const.metadata_xml))
         return md
 
     def get_files(self):
         """reads files.xml from the PiSi package and returns Files object"""
-        files = Files()
+        files = pisi.files.Files()
         files.parse(self.impl.read_file(ctx.const.files_xml))
         return files
 
@@ -128,14 +128,14 @@ class Package:
         # extract control files
         self.extract_pisi_files(outdir)
 
-        self.metadata = MetaData()
+        self.metadata = pisi.metadata.MetaData()
         self.metadata.read( os.path.join(outdir, ctx.const.metadata_xml) )
         errs = self.metadata.errors()
         if errs:
             util.print_errors(errs)
             raise Error, _("MetaData format wrong")
 
-        self.files = Files()
+        self.files = pisi.files.Files()
         self.files.read( os.path.join(outdir, ctx.const.files_xml) )
         if self.files.errors():
             raise Error, _("Invalid %s") % ctx.const.files_xml
