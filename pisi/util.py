@@ -288,20 +288,18 @@ def dir_size(dir):
     # being true. Using 'du' command (like Debian does) can be a
     # better solution :(.
     # Not really, du calculates size on disk, this is much better -- exa
-    from os.path import getsize, islink, isdir, exists
-    join = join_path
 
-    if exists(dir) and (not isdir(dir) and not islink(dir)):
+    if os.path.exists(dir) and (not os.path.isdir(dir) and not os.path.islink(dir)):
         #so, this is not a directory but file..
-        return getsize(dir)
+        return os.path.getsize(dir)
 
-    if islink(dir):
+    if os.path.islink(dir):
         return 0
 
     def sizes():
         for root, dirs, files in os.walk(dir):
-            yield sum([getsize(join(root, name)) for name in files if not islink(join(root, name))])
-            yield sum([long(len(os.readlink((join(root, name))))) for name in files if islink(join(root, name))])
+            yield sum([os.path.getsize(join_path(root, name)) for name in files if not os.path.islink(join_path(root, name))])
+            yield sum([long(len(os.readlink((join_path(root, name))))) for name in files if os.path.islink(join_path(root, name))])
     return sum(sizes())
 
 def copy_file(src,dest):
@@ -469,11 +467,11 @@ def uncompress(patchFile, compressType="gz", targetDir=None):
     filePath = filePath.split(".%s" % compressType)[0]
 
     if compressType == "gz":
-        from gzip import GzipFile
-        obj = GzipFile(patchFile)
+        import gzip
+        obj = gzip.GzipFile(patchFile)
     elif compressType == "bz2":
-        from bz2 import BZ2File
-        obj = BZ2File(patchFile)
+        import bz2
+        obj = bz2.BZ2File(patchFile)
 
     open(filePath, "w").write(obj.read())
     return filePath
@@ -669,7 +667,7 @@ def filter_latest_packages(package_paths):
     """ For a given pisi package paths list where there may also be multiple versions
         of the same package, filters only the latest versioned ones """
 
-    from pisi.version import Version
+    import pisi.version
 
     latest = {}
     for path in package_paths:
@@ -678,7 +676,7 @@ def filter_latest_packages(package_paths):
         name, version = parse_package_name(os.path.basename(path[:-len(ctx.const.package_suffix)]))
 
         if latest.has_key(name):
-            if Version(latest[name][2]) < Version(version):
+            if pisi.version.Version(latest[name][2]) < pisi.version.Version(version):
                 latest[name] = (root, name, version)
         else:
             if version:
