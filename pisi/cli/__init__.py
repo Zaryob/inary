@@ -20,11 +20,9 @@ _ = __trans.ugettext
 
 import pisi
 import pisi.context as ctx
-from pisi.ui import UI
-import pisi.ui as ui
+import pisi.ui
 import pisi.util as util
-from pisi.cli.colors import colorize
-
+import pisi.cli.colors as colors
 
 class Error(pisi.Error):
     pass
@@ -44,7 +42,7 @@ def printu(obj, err = False):
     out.write(obj.encode('utf-8'))
     out.flush()
 
-class CLI(UI):
+class CLI(pisi.ui.UI):
     "Command Line Interface"
 
     def __init__(self, show_debug = False, show_verbose = False):
@@ -78,7 +76,7 @@ class CLI(UI):
         if ctx.get_option('no_color'):
             self.output(_('Warning: ') + msg + '\n', err=True, verbose=verbose)
         else:
-            self.output(colorize(msg + '\n', 'brightred'), err=True, verbose=verbose)
+            self.output(colors.colorize(msg + '\n', 'brightred'), err=True, verbose=verbose)
 
     def error(self, msg):
         msg = unicode(msg)
@@ -87,21 +85,21 @@ class CLI(UI):
         if ctx.get_option('no_color'):
             self.output(_('Error: ') + msg + '\n', err=True)
         else:
-            self.output(colorize(msg + '\n', 'red'), err=True)
+            self.output(colors.colorize(msg + '\n', 'red'), err=True)
 
     def action(self, msg, verbose = False):
         #TODO: this seems quite redundant?
         msg = unicode(msg)
         if ctx.log:
             ctx.log.info(msg)
-        self.output(colorize(msg + '\n', 'green'))
+        self.output(colors.colorize(msg + '\n', 'green'))
 
     def choose(self, msg, opts):
         print msg
         for i in range(0,len(opts)):
             print i + 1, opts(i)
         while True:
-            s = raw_input(msg + colorize('1-%d' % len(opts), 'red'))
+            s = raw_input(msg + colors.colorize('1-%d' % len(opts), 'red'))
             try:
                 opt = int(s)
                 if 1 <= opt and opt <= len(opts):
@@ -117,7 +115,7 @@ class CLI(UI):
             import re
             yesexpr = re.compile(locale.nl_langinfo(locale.YESEXPR))
 
-            prompt = msg + colorize(_(' (yes/no)'), 'red')
+            prompt = msg + colors.colorize(_(' (yes/no)'), 'red')
             s = raw_input(prompt.encode('utf-8'))
             if yesexpr.search(s):
                 return True
@@ -138,28 +136,28 @@ class CLI(UI):
             self.output("\r%s (%d%%)" % (info, percent))
 
         if percent == 100:
-            self.output(colorize(_(' [complete]\n'), 'gray'))
+            self.output(colors.colorize(_(' [complete]\n'), 'gray'))
 
     def status(self, msg = None):
         if msg:
             msg = unicode(msg)
-            self.output(colorize(msg + '\n', 'brightgreen'))
+            self.output(colors.colorize(msg + '\n', 'brightgreen'))
             util.xterm_title(msg)
 
     def notify(self, event, **keywords):
-        if event == ui.installed:
+        if event == pisi.ui.installed:
             msg = _('Installed %s') % keywords['package'].name
-        elif event == ui.removed:
+        elif event == pisi.ui.removed:
             msg = _('Removed %s') % keywords['package'].name
-        elif event == ui.upgraded:
+        elif event == pisi.ui.upgraded:
             msg = _('Upgraded %s') % keywords['package'].name
-        elif event == ui.configured:
+        elif event == pisi.ui.configured:
             msg = _('Configured %s') % keywords['package'].name
-        elif event == ui.extracting:
+        elif event == pisi.ui.extracting:
             msg = _('Extracting the files of %s') % keywords['package'].name
         else:
             msg = None
         if msg:
-            self.output(colorize(msg + '\n', 'cyan'))
+            self.output(colors.colorize(msg + '\n', 'cyan'))
             if ctx.log:
                 ctx.log.info(msg)
