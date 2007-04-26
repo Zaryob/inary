@@ -13,8 +13,8 @@
 """Simplifies working with URLs, purl module provides common URL
 parsing and processing"""
 
-from urlparse import urlparse
-from os.path import basename
+import urlparse
+import os.path
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -49,11 +49,11 @@ class URI(object):
     def set_uri(self, uri):
         # (scheme, location, path, params, query, fragment)
         uri = str(uri)
-        u = urlparse(uri, "file")
+        u = urlparse.urlparse(uri, "file")
         self.__scheme = u[0]
         self.__location = u[1]
         self.__path = u[2]
-        self.__filename = basename(self.__path)
+        self.__filename = os.path.basename(self.__path)
         self.__params = u[3]
         self.__query = u[4]
         self.__fragment = u[5]
