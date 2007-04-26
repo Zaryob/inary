@@ -16,7 +16,7 @@ regular PiSi configurations.
 """
 
 import os
-from copy import deepcopy
+import copy
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -24,9 +24,8 @@ _ = __trans.ugettext
 
 import pisi
 import pisi.context as ctx
-from pisi.configfile import ConfigurationFile
+import pisi.configfile
 import pisi.util
-from pisi.util import join_path as join
 
 class Error(pisi.Error):
     pass
@@ -46,14 +45,14 @@ class Config(object):
 
     def __init__(self, options = Options()):
         self.options = options
-        self.values = ConfigurationFile("/etc/pisi/pisi.conf")
+        self.values = pisi.configfile.ConfigurationFile("/etc/pisi/pisi.conf")
 
         destdir = self.get_option('destdir')
         if destdir:
             if destdir.strip().startswith('/'):
                 self.destdir = destdir
             else:
-                self.destdir = join(os.getcwd(), destdir)
+                self.destdir = pisi.util.join_path(os.getcwd(), destdir)
         else:
             self.destdir = self.values.general.destinationdirectory
 
@@ -63,7 +62,7 @@ class Config(object):
 
         # get the initial environment variables. this is needed for
         # build process.
-        self.environ = deepcopy(os.environ)
+        self.environ = copy.deepcopy(os.environ)
 
     def set_option(self, opt, val):
         setattr(self.options, opt, val)
@@ -83,7 +82,7 @@ class Config(object):
         return self.destdir
 
     def subdir(self, path):
-        dir = join(self.dest_dir(), path)
+        dir = pisi.util.join_path(self.dest_dir(), path)
         pisi.util.check_dir(dir)
         return dir
 
