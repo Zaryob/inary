@@ -38,7 +38,7 @@ class FileInfo:
         return s
 
 
-class Files(autoxml.XmlFile):
+class Files(autoxml.xmlfile.XmlFile):
 
     __metaclass__ = autoxml.autoxml
 
