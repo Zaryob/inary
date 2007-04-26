@@ -21,15 +21,14 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 # standard python modules
-from os.path import basename
+import os.path
 
 # pisi modules
-from pisi.pxml.xmlfile import XmlFile
+import pisi.pxml.xmlfile as xmlfile
 import pisi.pxml.autoxml as autoxml
 import pisi.context as ctx
-from pisi.dependency import Dependency
-from pisi.conflict import Conflict
 import pisi.dependency
+import pisi.conflict
 import pisi.component as component
 import pisi.util as util
 
@@ -132,7 +131,7 @@ class Archive:
     a_sha1sum =[ autoxml.String, autoxml.mandatory ]
 
     def decode_hook(self, node, errs, where):
-        self.name = basename(self.uri)
+        self.name = os.path.basename(self.uri)
 
     def __str__(self):
         s = _('URI: %s, type: %s, sha1sum: %s') % (self.uri, self.type, self.sha1sum)
@@ -151,7 +150,7 @@ class Source:
     t_Description = [autoxml.LocalText, autoxml.optional]
     t_Icon = [ autoxml.String, autoxml.optional]
     t_Archive = [Archive, autoxml.mandatory ]
-    t_BuildDependencies = [ [Dependency], autoxml.optional]
+    t_BuildDependencies = [ [pisi.dependency.Dependency], autoxml.optional]
     t_Patches = [ [Patch], autoxml.optional]
     t_Version = [ autoxml.String, autoxml.optional]
     t_Release = [ autoxml.String, autoxml.optional]
@@ -167,10 +166,10 @@ class Package:
     t_PartOf = [autoxml.String, autoxml.optional]
     t_License = [ [autoxml.String], autoxml.optional]
     t_Icon = [ autoxml.String, autoxml.optional]
-    t_PackageDependencies = [ [Dependency], autoxml.optional, "RuntimeDependencies/Dependency"]
+    t_PackageDependencies = [ [pisi.dependency.Dependency], autoxml.optional, "RuntimeDependencies/Dependency"]
     t_ComponentDependencies = [ [autoxml.String], autoxml.optional, "RuntimeDependencies/Component"]
     t_Files = [ [Path], autoxml.optional]
-    t_Conflicts = [ [Conflict], autoxml.optional, "Conflicts/Package"]
+    t_Conflicts = [ [pisi.conflict.Conflict], autoxml.optional, "Conflicts/Package"]
     t_ProvidesComar = [ [ComarProvide], autoxml.optional, "Provides/COMAR"]
     #t_RequiresComar = [ [autoxml.String], autoxml.mandatory, "Requires/COMAR"]
     t_AdditionalFiles = [ [AdditionalFile], autoxml.optional]
@@ -219,7 +218,7 @@ class Package:
         return s + '\n'
 
 
-class SpecFile(XmlFile):
+class SpecFile(xmlfile.XmlFile):
     __metaclass__ = autoxml.autoxml #needed when we specify a superclass
 
     tag = "PISI"
