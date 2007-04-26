@@ -22,8 +22,6 @@ import pisi.cli
 import pisi.context as ctx
 from pisi.uri import URI
 import pisi.util as util
-import pisi.api as api
-from colors import colorize
 
 class Error(pisi.Error):
     pass
@@ -1367,7 +1365,7 @@ all repositories.
         self.init(database = True, write = False)
 
         if not (ctx.get_option('no_color') or ctx.config.get_option('uninstalled')):
-            ctx.ui.info(colorize(_('Installed packages are shown in this color'), 'green'))
+            ctx.ui.info(util.colorize(_('Installed packages are shown in this color'), 'green'))
 
         if self.args:
             for arg in self.args:
@@ -1397,7 +1395,7 @@ all repositories.
                 if p in installed_list:
                     if ctx.config.get_option('uninstalled'):
                         continue
-                    p = colorize(p, 'green')
+                    p = util.colorize(p, 'green')
                 p = p + ' ' * max(0, 15 - lenp)
                 ctx.ui.info('%s - %s ' % (p, unicode(package.summary)))
 
@@ -1435,7 +1433,7 @@ repositories.
             else:
                 lenp = len(p)
                 #if p in installed_list:
-                #    p = colorize(p, 'cyan')
+                #    p = util.colorize(p, 'cyan')
                 p = p + ' ' * max(0, 15 - lenp)
                 ctx.ui.info('%s - %s ' % (component.name, unicode(component.summary)))
         self.finalize()
@@ -1475,7 +1473,7 @@ Gives a brief list of sources published in the repositories.
             else:
                 lenp = len(p)
                 #if p in installed_list:
-                #    p = colorize(p, 'cyan')
+                #    p = util.colorize(p, 'cyan')
                 p = p + ' ' * max(0, 15 - lenp)
                 ctx.ui.info('%s - %s' % (sf.source.name, unicode(sf.source.summary)))
         self.finalize()
