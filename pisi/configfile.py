@@ -45,7 +45,7 @@
 #qt_dir = /usr/qt/3
 
 import os
-from ConfigParser import ConfigParser, NoSectionError
+import ConfigParser
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -137,25 +137,25 @@ class ConfigurationSection(object):
 class ConfigurationFile(object):
     """Parse and get configuration values from the configuration file"""
     def __init__(self, filePath):
-        parser = ConfigParser()
+        parser = ConfigParser.ConfigParser()
         self.filePath = filePath
 
         parser.read(self.filePath)
 
         try:
             generalitems = parser.items("general")
-        except NoSectionError:
+        except ConfigParser.NoSectionError:
             generalitems = []
         self.general = ConfigurationSection("general", generalitems)
 
         try:
             builditems = parser.items("build")
-        except NoSectionError:
+        except ConfigParser.NoSectionError:
             builditems = []
         self.build = ConfigurationSection("build", builditems)
 
         try:
             dirsitems = parser.items("directories")
-        except NoSectionError:
+        except ConfigParser.NoSectionError:
             dirsitems = []
         self.dirs = ConfigurationSection("directories", dirsitems)
