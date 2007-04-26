@@ -682,3 +682,11 @@ def filter_latest_packages(package_paths):
                 latest[name] = (root, name, version)
 
     return map(lambda x:"%s/%s-%s.pisi" % x, latest.values())
+
+def colorize(msg, color):
+    """Colorize the given message for console output"""
+    if ctx.const.colors.has_key(color) and not ctx.get_option('no_color'):
+        return ctx.const.colors[color] + msg + ctx.const.colors['default']
+    else:
+        return msg
+

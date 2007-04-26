@@ -22,7 +22,6 @@ import pisi
 import pisi.context as ctx
 import pisi.ui
 import pisi.util
-import pisi.cli.colors as colors
 
 class Error(pisi.Error):
     pass
@@ -76,7 +75,7 @@ class CLI(pisi.ui.UI):
         if ctx.get_option('no_color'):
             self.output(_('Warning: ') + msg + '\n', err=True, verbose=verbose)
         else:
-            self.output(colors.colorize(msg + '\n', 'brightred'), err=True, verbose=verbose)
+            self.output(pisi.util.colorize(msg + '\n', 'brightred'), err=True, verbose=verbose)
 
     def error(self, msg):
         msg = unicode(msg)
@@ -85,21 +84,21 @@ class CLI(pisi.ui.UI):
         if ctx.get_option('no_color'):
             self.output(_('Error: ') + msg + '\n', err=True)
         else:
-            self.output(colors.colorize(msg + '\n', 'red'), err=True)
+            self.output(pisi.util.colorize(msg + '\n', 'red'), err=True)
 
     def action(self, msg, verbose = False):
         #TODO: this seems quite redundant?
         msg = unicode(msg)
         if ctx.log:
             ctx.log.info(msg)
-        self.output(colors.colorize(msg + '\n', 'green'))
+        self.output(pisi.util.colorize(msg + '\n', 'green'))
 
     def choose(self, msg, opts):
         print msg
         for i in range(0,len(opts)):
             print i + 1, opts(i)
         while True:
-            s = raw_input(msg + colors.colorize('1-%d' % len(opts), 'red'))
+            s = raw_input(msg + pisi.util.colorize('1-%d' % len(opts), 'red'))
             try:
                 opt = int(s)
                 if 1 <= opt and opt <= len(opts):
@@ -115,7 +114,7 @@ class CLI(pisi.ui.UI):
             import re
             yesexpr = re.compile(locale.nl_langinfo(locale.YESEXPR))
 
-            prompt = msg + colors.colorize(_(' (yes/no)'), 'red')
+            prompt = msg + pisi.util.colorize(_(' (yes/no)'), 'red')
             s = raw_input(prompt.encode('utf-8'))
             if yesexpr.search(s):
                 return True
@@ -136,12 +135,12 @@ class CLI(pisi.ui.UI):
             self.output("\r%s (%d%%)" % (info, percent))
 
         if percent == 100:
-            self.output(colors.colorize(_(' [complete]\n'), 'gray'))
+            self.output(pisi.util.colorize(_(' [complete]\n'), 'gray'))
 
     def status(self, msg = None):
         if msg:
             msg = unicode(msg)
-            self.output(colors.colorize(msg + '\n', 'brightgreen'))
+            self.output(pisi.util.colorize(msg + '\n', 'brightgreen'))
             pisi.util.xterm_title(msg)
 
     def notify(self, event, **keywords):
@@ -158,6 +157,6 @@ class CLI(pisi.ui.UI):
         else:
             msg = None
         if msg:
-            self.output(colors.colorize(msg + '\n', 'cyan'))
+            self.output(pisi.util.colorize(msg + '\n', 'cyan'))
             if ctx.log:
                 ctx.log.info(msg)
