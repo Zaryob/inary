@@ -12,7 +12,7 @@
 
 """package abstraction methods to add/remove files, extract control files"""
 
-from os.path import join, exists, basename, dirname, getsize
+import os.path
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -25,6 +25,7 @@ from pisi.uri import URI
 from pisi.metadata import MetaData
 from pisi.files import Files
 import pisi.util as util
+import fetcher
 
 class Error(pisi.Error):
     pass
@@ -43,13 +44,12 @@ class Package:
         self.impl = archive.ArchiveZip(self.filepath, 'zip', mode)
 
     def fetch_remote_file(self, url):
-        from fetcher import fetch_url
         dest = ctx.config.packages_dir()
-        self.filepath = join(dest, url.filename())
+        self.filepath = os.path.join(dest, url.filename())
 
-        if not exists(self.filepath):
+        if not os.path.exists(self.filepath):
             try:
-                fetch_url(url, dest, ctx.ui.Progress)
+                fetcher.fetch_url(url, dest, ctx.ui.Progress)
             except pisi.fetcher.FetchError:
                 # Bug 3465
                 if ctx.get_option('reinstall'):
@@ -87,7 +87,7 @@ class Package:
     def extract_install(self, outdir):
         if self.impl.has_file(ctx.const.install_tar_lzma):
             self.extract_file(ctx.const.install_tar_lzma, ctx.config.tmp_dir())
-            tar = archive.ArchiveTar(join(ctx.config.tmp_dir(), ctx.const.install_tar_lzma), 'tarlzma', False, False)
+            tar = archive.ArchiveTar(os.path.join(ctx.config.tmp_dir(), ctx.const.install_tar_lzma), 'tarlzma', False, False)
             tar.unpack_dir(outdir)
         else:
             self.extract_dir_flat('install', outdir)
@@ -129,14 +129,14 @@ class Package:
         self.extract_pisi_files(outdir)
 
         self.metadata = MetaData()
-        self.metadata.read( join(outdir, ctx.const.metadata_xml) )
+        self.metadata.read( os.path.join(outdir, ctx.const.metadata_xml) )
         errs = self.metadata.errors()
         if errs:
             util.print_errors(errs)
             raise Error, _("MetaData format wrong")
 
         self.files = Files()
-        self.files.read( join(outdir, ctx.const.files_xml) )
+        self.files.read( os.path.join(outdir, ctx.const.files_xml) )
         if self.files.errors():
             raise Error, _("Invalid %s") % ctx.const.files_xml
 
@@ -145,7 +145,7 @@ class Package:
                      + self.metadata.package.version + '-' \
                      + self.metadata.package.release
 
-        return join( ctx.config.lib_dir(), 'package', packageDir)
+        return os.path.join( ctx.config.lib_dir(), 'package', packageDir)
 
     def comar_dir(self):
-        return join(self.pkg_dir(), ctx.const.comar_dir)
+        return os.path.join(self.pkg_dir(), ctx.const.comar_dir)
