@@ -299,7 +299,6 @@ def dir_size(dir):
     def sizes():
         for root, dirs, files in os.walk(dir):
             yield sum([os.path.getsize(join_path(root, name)) for name in files if not os.path.islink(join_path(root, name))])
-            yield sum([long(len(os.readlink((join_path(root, name))))) for name in files if os.path.islink(join_path(root, name))])
     return sum(sizes())
 
 def copy_file(src,dest):
@@ -309,7 +308,7 @@ def copy_file(src,dest):
     shutil.copyfile(src, dest)
 
 def is_ar_file(file_path):
-    return  open(file_path).readline().strip() == '!<arch>'
+    return open(file_path).readline().strip() == '!<arch>'
 
 def clean_ar_timestamps(ar_file):
     """Zero all timestamps in the ar files."""
