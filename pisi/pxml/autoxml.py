@@ -25,7 +25,7 @@ import codecs
 import types
 import formatter
 import sys
-from StringIO import StringIO
+import StringIO
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -33,8 +33,8 @@ _ = __trans.ugettext
 
 # PiSi
 import pisi
-from pisi.pxml.xmlext import *
-from pisi.pxml.xmlfile import XmlFile
+import pisi.pxml.xmlext as xmlext
+import pisi.pxml.xmlfile as xmlfile
 import pisi.context as ctx
 import pisi.util as util
 import pisi.oo as oo
@@ -71,15 +71,15 @@ class LocalText(dict):
     def decode(self, node, errs, where = ""):
         # flags, tag name, instance attribute
         assert self.tag != ''
-        nodes = getAllNodes(node, self.tag)
+        nodes = xmlext.getAllNodes(node, self.tag)
         if not nodes:
             if self.req == mandatory:
                 errs.append(where + ': ' + _("At least one '%s' tag should have local text") %
                                     self.tag )
         else:
             for node in nodes:
-                lang = getNodeAttribute(node, 'xml:lang')
-                c = getNodeText(node)
+                lang = xmlext.getNodeAttribute(node, 'xml:lang')
+                c = xmlext.getNodeText(node)
                 if not c:
                     errs.append(where + ': ' + _("'%s' language of tag '%s' is empty") %
                                 (lang, self.tag))
@@ -91,9 +91,9 @@ class LocalText(dict):
     def encode(self, node, errs):
         assert self.tag != ''
         for key in self.iterkeys():
-            newnode = addNode(node, self.tag)
-            setNodeAttribute(newnode, 'xml:lang', key)
-            addText(newnode, '',  self[key])
+            newnode = xmlext.addNode(node, self.tag)
+            xmlext.setNodeAttribute(newnode, 'xml:lang', key)
+            xmlext.addText(newnode, '',  self[key])
 
     #FIXME: maybe more appropriate for pisi.util
     @staticmethod
@@ -249,7 +249,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         # standard initialization
         super(autoxml, cls).__init__(name, bases, dict)
 
-        xmlfile_support = XmlFile in bases
+        xmlfile_support = xmlfile.XmlFile in bases
 
         cls.autoxml_bases = filter(lambda base: isinstance(base, autoxml), bases)
 
@@ -320,9 +320,9 @@ class autoxml(oo.autosuper, oo.autoprop):
                        **args):
             if xmlfile_support:
                 if args.has_key('tag'):
-                    XmlFile.__init__(self, tag = args['tag'])
+                    xmlfile.XmlFile.__init__(self, tag = args['tag'])
                 else:
-                    XmlFile.__init__(self, tag = cls.tag)
+                    xmlfile.XmlFile.__init__(self, tag = cls.tag)
             for base in cls.autoxml_bases:
                 base.__init__(self)
             for init in inits:
@@ -393,7 +393,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         cls.print_text = print_text
         if not dict.has_key('__str__'):
             def str(self):
-                strfile = StringIO()
+                strfile = StringIO.StringIO()
                 self.print_text(strfile)
                 str = strfile.getvalue()
                 strfile.close()
@@ -489,10 +489,10 @@ class autoxml(oo.autosuper, oo.autoprop):
         tag_type = spec[0]
         assert type(tag_type) == type(type)
         def readtext(node, attr):
-            return getNodeAttribute(node, attr)
+            return xmlext.getNodeAttribute(node, attr)
         def writetext(node, attr, text):
             #print 'write attr', attr, text
-            setNodeAttribute(node, attr, text)
+            xmlext.setNodeAttribute(node, attr, text)
         anonfuns = cls.gen_anon_basic(attr, spec, readtext, writetext)
         return cls.gen_named_comp(attr, spec, anonfuns)
 
@@ -510,10 +510,10 @@ class autoxml(oo.autosuper, oo.autoprop):
            autoxml.basic_cons_map.has_key(tag_type):
             def readtext(node, tagpath):
                 #print 'read tag', node, tagpath
-                return getNodeText(node, tagpath)
+                return xmlext.getNodeText(node, tagpath)
             def writetext(node, tagpath, text):
                 #print 'write tag', node, tagpath, text
-                addText(node, tagpath, text)
+                xmlext.addText(node, tagpath, text)
             return cls.gen_anon_basic(tag, spec, readtext, writetext)
         elif type(tag_type) is types.ListType:
             return cls.gen_list_tag(tag, spec)
@@ -532,9 +532,9 @@ class autoxml(oo.autosuper, oo.autoprop):
         assert type(tag_type) == type(type)
         def readtext(node, blah):
             #node.normalize() # piksemel doesn't have this
-            return getNodeText(node)
+            return xmlext.getNodeText(node)
         def writetext(node, blah, text):
-            addText(node, "", text)
+            xmlext.addText(node, "", text)
         anonfuns = cls.gen_anon_basic(token, spec, readtext, writetext)
         return cls.gen_named_comp(token, spec, anonfuns)
 
@@ -709,9 +709,9 @@ class autoxml(oo.autosuper, oo.autoprop):
             if node and obj:
                 try:
                     #FIXME: this doesn't look pretty
-                    classnode = newNode(node, tag)
+                    classnode = xmlext.newNode(node, tag)
                     obj.encode(classnode, errs)
-                    addNode(node, '', classnode)
+                    xmlext.addNode(node, '', classnode)
                 except Error:
                     if req == mandatory:
                         # note: we can receive an error if obj has no content
@@ -750,14 +750,14 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         def decode(node, errs, where):
             l = []
-            nodes = getAllNodes(node, path)
+            nodes = xmlext.getAllNodes(node, path)
             #print node, tag + '/' + comp_tag, nodes
             if len(nodes)==0 and req==mandatory:
                 errs.append(where + ': ' + _('Mandatory list "%s" under "%s" node is empty.') % (path, node.name()))
             ix = 1
             for node in nodes:
-                dummy = newNode(node, "Dummy")
-                addNode(dummy, '', node)
+                dummy = xmlext.newNode(node, "Dummy")
+                xmlext.addNode(dummy, '', node)
                 l.append(decode_item(dummy, errs, where + unicode("[%s]" % ix)))
                 #l.append(decode_item(node, errs, where + unicode("[%s]" % ix)))
                 ix += 1
@@ -767,7 +767,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             if l and len(l) > 0:
                 for item in l:
                     if list_tagpath:
-                        listnode = addNode(node, list_tagpath, branch = False)
+                        listnode = xmlext.addNode(node, list_tagpath, branch = False)
                     else:
                         listnode = node
                     encode_item(listnode, item, errs)
