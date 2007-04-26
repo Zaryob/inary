@@ -692,7 +692,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             return make_object()
 
         def decode(node, errs, where):
-            node = getNode(node, tag)
+            node = xmlext.getNode(node, tag)
             if node:
                 try:
                     obj = make_object()
