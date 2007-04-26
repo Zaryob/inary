@@ -10,14 +10,14 @@
 # Please read the COPYING file.
 
 import os
-from sets import Set as set
+import sets
 
 import gettext
 __trans = gettext.translation("pisi", fallback=True)
 _ = __trans.ugettext
 
 import pisi.context as ctx
-from pisi.package import Package
+import pisi.package
 import pisi.util as util
 import pisi.archive as archive
 
@@ -27,8 +27,8 @@ def create_delta_package(old_package, new_package):
         ctx.ui.error(_("Cannot create delta for same package!"))
         return
 
-    oldpkg = Package(old_package, "r")
-    newpkg = Package(new_package, "r")
+    oldpkg = pisi.package.Package(old_package, "r")
+    newpkg = pisi.package.Package(new_package, "r")
 
     newmd = newpkg.get_metadata()
     oldmd = oldpkg.get_metadata()
@@ -55,7 +55,7 @@ def create_delta_package(old_package, new_package):
     if outdir:
         deltaname = util.join_path(outdir, deltaname)
 
-    deltapkg = Package(deltaname, "w")
+    deltapkg = pisi.package.Package(deltaname, "w")
 
     c = os.getcwd()
     os.chdir(newpkg_path)
@@ -102,8 +102,8 @@ def find_delta(oldfiles, newfiles):
     for file in newfiles.list:
         hashto_files.setdefault(file.hash, []).append(file)
 
-    files_new = set(map(lambda x:x.hash, newfiles.list))
-    files_old = set(map(lambda x:x.hash, oldfiles.list))
+    files_new = sets.Set(map(lambda x:x.hash, newfiles.list))
+    files_old = sets.Set(map(lambda x:x.hash, oldfiles.list))
     files_delta = files_new - files_old
 
     deltas = []
