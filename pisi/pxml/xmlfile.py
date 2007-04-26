@@ -31,8 +31,7 @@ import exceptions
 import piksemel as iks
 
 import pisi
-from pisi.file import File
-from pisi.util import join_path as join
+import pisi.file
 
 class Error(pisi.Error):
     pass
@@ -74,9 +73,9 @@ class XmlFile(object):
 
     def readxml(self, uri, tmpDir='/tmp', sha1sum=False,
                 compress=None, sign=None, copylocal = False):
-        uri = File.make_uri(uri)
+        uri = pisi.file.File.make_uri(uri)
         #try:
-        localpath = File.download(uri, tmpDir, sha1sum=sha1sum,
+        localpath = pisi.file.File.download(uri, tmpDir, sha1sum=sha1sum,
                                   compress=compress,sign=sign, copylocal=copylocal)
         #except IOError, e:
         #    raise Error(_("Cannot read URI %s: %s") % (uri, unicode(e)) )
@@ -87,7 +86,7 @@ class XmlFile(object):
             raise Error(_("File '%s' has invalid XML") % (localpath) )
 
     def writexml(self, uri, tmpDir = '/tmp', sha1sum=False, compress=None, sign=None):
-        f = File(uri, File.write, sha1sum=sha1sum, compress=compress, sign=sign)
+        f = pisi.file.File(uri, pisi.file.File.write, sha1sum=sha1sum, compress=compress, sign=sign)
         f.write(self.doc.toPrettyString())
         f.close()
 
