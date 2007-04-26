@@ -17,7 +17,7 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi.context as ctx
-from pisi.version import Version
+import pisi.version
 import pisi.pxml.autoxml as autoxml
 import pisi.db.itembyrepodb
 
@@ -52,20 +52,20 @@ class Conflict:
     def conflicts(self, pkg_name, version, release):
         """determine if a package ver. conflicts with given conflicting spec"""
         ret = True
-        v = Version(version)
+        v = pisi.version.Version(version)
         if self.version:
-            ret &= v == Version(self.version)
+            ret &= v == pisi.version.Version(self.version)
         if self.versionFrom:
-            ret &= v >= Version(self.versionFrom)
+            ret &= v >= pisi.version.Version(self.versionFrom)
         if self.versionTo:
-            ret &= v <= Version(self.versionTo)
-        r = Version(release)
+            ret &= v <= pisi.version.Version(self.versionTo)
+        r = pisi.version.Version(release)
         if self.release:
-            ret &= r == Version(self.release)
+            ret &= r == pisi.version.Version(self.release)
         if self.releaseFrom:
-            ret &= r >= Version(self.releaseFrom)
+            ret &= r >= pisi.version.Version(self.releaseFrom)
         if self.releaseTo:
-            ret &= r <= Version(self.releaseTo)
+            ret &= r <= pisi.version.Version(self.releaseTo)
         return ret
 
 def installed_package_conflicts(confinfo):
