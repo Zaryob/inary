@@ -14,11 +14,12 @@
 
 import string
 
-from graph import *
+import pisi.db
+import graph
 
 # Cache the results from packagedb queries in a graph
 
-class PGraph(Digraph):
+class PGraph(graph.Digraph):
 
     def __init__(self, packagedb, repo = pisi.db.itembyrepodb.repos):
         super(PGraph, self).__init__()
