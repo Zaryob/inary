@@ -26,6 +26,8 @@ import types
 import formatter
 import sys
 import StringIO
+import inspect
+import re
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -274,13 +276,9 @@ class autoxml(oo.autosuper, oo.autoprop):
         # read declaration order from source
         # code contributed by bahadir kandemir
         try:
-            from inspect import getsourcelines
-            from itertools import ifilter
-            import re
-
             fn = re.compile('\s*([tas]_[a-zA-Z]+).*').findall
 
-            lines = filter(fn, getsourcelines(cls)[0])
+            lines = filter(fn, inspect.getsourcelines(cls)[0])
             decl_order = map(lambda x:x.split()[0], lines)
         except IOError:
             decl_order = dict.keys()
