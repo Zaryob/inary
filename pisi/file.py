@@ -27,9 +27,9 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
-from pisi.uri import URI
-from pisi.util import join_path as join
-from pisi.fetcher import fetch_url
+import pisi.uri
+import pisi.util
+import pisi.fetcher
 import pisi.context as ctx
 
 class AlreadyHaveException(pisi.Exception):
@@ -61,8 +61,8 @@ class File:
     def make_uri(uri):
         "handle URI arg"
         if type(uri) == types.StringType or type(uri) == types.UnicodeType:
-            uri = URI(uri)
-        elif not isinstance(uri, URI):
+            uri = pisi.uri.URI(uri)
+        elif not isinstance(uri, pisi.uri.URI):
             raise Error(_("uri must have type either URI or string"))
         return uri
 
@@ -93,15 +93,15 @@ class File:
     def download(uri, transfer_dir = "/tmp", sha1sum = False,
                  compress = None, sign = None, copylocal = False):
 
-        assert isinstance(uri, URI)
+        assert isinstance(uri, pisi.uri.URI)
 
         if sha1sum:
-            sha1filename = File.download(URI(uri.get_uri() + '.sha1sum'), transfer_dir)
+            sha1filename = File.download(pisi.uri.URI(uri.get_uri() + '.sha1sum'), transfer_dir)
             sha1f = file(sha1filename)
             newsha1 = sha1f.read().split("\n")[0]
 
         if uri.is_remote_file() or copylocal:
-            localfile = join(transfer_dir, uri.filename())
+            localfile = pisi.util.join_path(transfer_dir, uri.filename())
 
             # TODO: code to use old .sha1sum file, is this a necessary optimization?
             #oldsha1fn = localfile + '.sha1sum'
@@ -115,10 +115,10 @@ class File:
 
             if uri.is_remote_file():
                 ctx.ui.info(_("Fetching %s") % uri.get_uri(), verbose=True)
-                fetch_url(uri, transfer_dir, ctx.ui.Progress)
+                pisi.fetcher.fetch_url(uri, transfer_dir, ctx.ui.Progress)
             else:
                 # copy to transfer dir,
-                localfile = join(transfer_dir, uri.filename())
+                localfile = pisi.util.join_path(transfer_dir, uri.filename())
                 ctx.ui.info(_("Copying %s to transfer dir") % uri.get_uri(), verbose=True)
                 shutil.copy(uri.get_uri(), transfer_dir)
         else:
@@ -127,7 +127,7 @@ class File:
                 raise IOError(_("File '%s' not found.") % localfile)
             if not os.access(localfile, os.W_OK):
                 oldfn = localfile
-                localfile = join(transfer_dir, os.path.basename(localfile))
+                localfile = pisi.util.join_path(transfer_dir, os.path.basename(localfile))
                 shutil.copy(oldfn, localfile)
 
         if sha1sum:
@@ -209,7 +209,7 @@ class File:
     def check_signature(uri, transfer_dir, sign=detached):
         if sign==File.detached:
             try:
-                sigfilename = File.download(URI(uri + '.sig'), transfer_dir)
+                sigfilename = File.download(pisi.uri.URI(uri + '.sig'), transfer_dir)
             except KeyboardInterrupt:
                 raise
             except Exception, e: #FIXME: what exception could we catch here, replace with that.
