@@ -11,9 +11,7 @@
 
 # python standard library
 
-from os.path import join, basename
-from os import access, R_OK
-
+import os
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
@@ -22,10 +20,10 @@ _ = __trans.ugettext
 import pisi
 import pisi.util as util
 import pisi.context as ctx
-from pisi.archive import Archive
-from pisi.uri import URI
-from pisi.fetcher import fetch_url
-from pisi.mirrors import Mirrors
+import pisi.archive
+import pisi.uri
+import pisi.fetcher
+import pisi.mirrors
 
 class Error(pisi.Error):
     pass
@@ -34,9 +32,9 @@ class SourceArchive:
     """source archive. this is a class responsible for fetching
     and unpacking a source archive"""
     def __init__(self, spec, pkg_work_dir):
-        self.url = URI(spec.source.archive.uri)
+        self.url = pisi.uri.URI(spec.source.archive.uri)
         self.pkg_work_dir = pkg_work_dir
-        self.archiveFile = join(ctx.config.archives_dir(), self.url.filename())
+        self.archiveFile = os.path.join(ctx.config.archives_dir(), self.url.filename())
         self.archive = spec.source.archive
 
     def fetch(self, interactive=True):
@@ -50,7 +48,7 @@ class SourceArchive:
                 if self.url.get_uri().startswith("mirrors://"):
                     self.fetch_from_mirror()
                 else:
-                    fetch_url(self.url, ctx.config.archives_dir(), self.progress)
+                    pisi.fetcher.fetch_url(self.url, ctx.config.archives_dir(), self.progress)
             except pisi.fetcher.FetchError:
                 if ctx.config.values.build.fallback:
                     self.fetch_from_fallback()
@@ -58,10 +56,10 @@ class SourceArchive:
                     raise
 
     def fetch_from_fallback(self):
-        archive = basename(self.url.get_uri())
-        src = join(ctx.config.values.build.fallback, archive)
+        archive = os.path.basename(self.url.get_uri())
+        src = os.path.join(ctx.config.values.build.fallback, archive)
         ctx.ui.warning(_('Trying fallback address: %s') % src)
-        fetch_url(src, ctx.config.archives_dir(), self.progress)
+        pisi.fetcher.fetch_url(src, ctx.config.archives_dir(), self.progress)
 
     def fetch_from_mirror(self):
         uri = self.url.get_uri()
@@ -69,15 +67,15 @@ class SourceArchive:
         name = sep.pop(0)
         archive = "/".join(sep)
 
-        mirrors = Mirrors().get_mirrors(name)
+        mirrors = pisi.mirrors.Mirrors().get_mirrors(name)
         if not mirrors:
             raise Error(_("%s mirrors are not defined.") % name)
 
         for mirror in mirrors:
             try:
-                url = join(mirror, archive)
+                url = os.path.join(mirror, archive)
                 ctx.ui.warning(_('Fetching source from mirror: %s') % url)
-                fetch_url(url, ctx.config.archives_dir(), self.progress)
+                pisi.fetcher.fetch_url(url, ctx.config.archives_dir(), self.progress)
                 return
             except pisi.fetcher.FetchError:
                 pass
@@ -85,7 +83,7 @@ class SourceArchive:
         raise pisi.fetcher.FetchError(_('Could not fetch source from %s mirrors.') % name);
 
     def is_cached(self, interactive=True):
-        if not access(self.archiveFile, R_OK):
+        if not os.access(self.archiveFile, os.R_OK):
             return False
 
         # check hash
@@ -102,5 +100,5 @@ class SourceArchive:
         if not util.check_file_hash(self.archiveFile, self.archive.sha1sum):
             raise Error, _("unpack: check_file_hash failed")
 
-        archive = Archive(self.archiveFile, self.archive.type)
+        archive = pisi.archive.Archive(self.archiveFile, self.archive.type)
         archive.unpack(self.pkg_work_dir, clean_dir)
