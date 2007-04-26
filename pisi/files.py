@@ -36,7 +36,7 @@ class FileInfo:
         return s
 
 
-class Files(autoxml.XmlFile):
+class Files(autoxml.xmlfile.XmlFile):
 
     __metaclass__ = autoxml.autoxml
 
@@ -46,3 +46,4 @@ class Files(autoxml.XmlFile):
 
     def append(self, fileinfo):
         self.list.append(fileinfo)
+
