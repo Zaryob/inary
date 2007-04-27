@@ -685,8 +685,8 @@ class Builder:
                 old_build = a[-1][1]
 
                 # compare old files.xml with the new one..
-                old_pkg = Package(old_package_fn, 'r')
-                old_pkg.read(util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
+                old_pkg = pisi.package.Package(old_package_fn, 'r')
+                old_pkg.read(pisi.util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
 
                 changed = False
                 fnew = self.files.list
