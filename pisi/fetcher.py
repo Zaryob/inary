@@ -22,12 +22,12 @@ import ftplib
 import os
 import socket
 import sys
-from mimetypes import guess_type
-from mimetools import Message
-from base64 import encodestring
-from shutil import move
-from time import time
-from time import gmtime
+import mimetypes
+import mimetools
+import base64
+import shutil
+import time
+import httplib
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -37,7 +37,7 @@ _ = __trans.ugettext
 import pisi
 import pisi.util as util
 import pisi.context as ctx
-from pisi.uri import URI
+import pisi.uri
 
 class FetchError(pisi.Error):
     pass
@@ -57,8 +57,8 @@ class Fetcher:
     """Fetcher can fetch a file from various sources using various
     protocols."""
     def __init__(self, url, destdir, resume = True):
-        if not isinstance(url, URI):
-            url = URI(url)
+        if not isinstance(url, pisi.uri.URI):
+            url = pisi.uri.URI(url)
 
         if ctx.config.get_option("authinfo"):
             url.set_auth_info(ctx.config.get_option("authinfo"))
@@ -99,17 +99,17 @@ class Fetcher:
             os.remove(partial_file)
             self.err(_('A problem occured. Please check the archive address and/or permissions again.'))
 
-        move(partial_file, archive_file)
+        shutil.move(partial_file, archive_file)
 
         return archive_file
 
     def _do_grab(self, fileURI, dest, total_size):
-        bs, tt, = 1024, int(time())
-        s_time = time()
-        Tdiff = lambda: time() - s_time
+        bs, tt, = 1024, int(time.time())
+        s_time = time.time()
+        Tdiff = lambda: time.time() - s_time
         downloaded_size = exist_size = self.exist_size
         symbol = 'B/s'
-        st = time()
+        st = time.time()
         chunk = fileURI.read(bs)
         downloaded_size += len(chunk)
 
@@ -122,17 +122,17 @@ class Fetcher:
             dest.write(chunk)
             chunk = fileURI.read(bs)
             downloaded_size += len(chunk)
-            ct = time()
+            ct = time.time()
             if int(tt) != int(ct):
                 self.rate = (downloaded_size - exist_size) / (ct - st)
 
                 if self.percent:
                     self.eta  = '%02d:%02d:%02d' %\
-                    tuple([i for i in gmtime((Tdiff() * (100 - self.percent)) / self.percent)[3:6]])
+                    tuple([i for i in time.gmtime((Tdiff() * (100 - self.percent)) / self.percent)[3:6]])
 
                 self.rate, symbol = util.human_readable_rate(self.rate)
 
-                tt = time()
+                tt = time.time()
 
             if self.progress:
                 if p.update(downloaded_size):
@@ -163,7 +163,6 @@ class Fetcher:
         self._do_grab(fileObj, dest, total_size)
 
     def fetchRemoteFile (self, archive_file):
-        from httplib import HTTPException
 
         if os.path.exists(archive_file) and self.resume:
             if self.scheme == 'http' or self.scheme == 'https' or self.scheme == 'ftp':
@@ -194,7 +193,7 @@ class Fetcher:
                 self.err(_('Please check your network connections and try again. (%s)') % e[-1][-1])
             except OSError, e:
                 self.err(_('Cannot fetch %s; %s') % (uri, e))
-            except HTTPException, e:
+            except httplib.HTTPException, e:
                 self.err(_('Cannot fetch %s; (%s): %s') % (uri, e.__class__.__name__, e))
         finally:
             if flag:
@@ -212,7 +211,7 @@ class Fetcher:
 
     def formatRequest(self, request):
         if self.url.auth_info():
-            enc = encodestring('%s:%s' % self.url.auth_info())
+            enc = base64.encodestring('%s:%s' % self.url.auth_info())
             request.add_header('Authorization', 'Basic %s' % enc)
 
         range_handlers = {
@@ -230,15 +229,15 @@ class Fetcher:
 
         if ctx.config.values.general.http_proxy and self.url.scheme() == "http":
             http_proxy = ctx.config.values.general.http_proxy
-            proxy_handler = urllib2.ProxyHandler({URI(http_proxy).scheme(): http_proxy})
+            proxy_handler = urllib2.ProxyHandler({pisi.uri.URI(http_proxy).scheme(): http_proxy})
 
         elif ctx.config.values.general.https_proxy and self.url.scheme() == "https":
             https_proxy = ctx.config.values.general.https_proxy
-            proxy_handler = urllib2.ProxyHandler({URI(https_proxy): https_proxy})
+            proxy_handler = urllib2.ProxyHandler({pisi.uri.URI(https_proxy): https_proxy})
 
         elif ctx.config.values.general.ftp_proxy and self.url.scheme() == "ftp":
             ftp_proxy = ctx.config.values.general.ftp_proxy
-            proxy_handler = urllib2.ProxyHandler({URI(http_proxy): ftp_proxy})
+            proxy_handler = urllib2.ProxyHandler({pisi.uri.URI(http_proxy): ftp_proxy})
 
         if proxy_handler:
             ctx.ui.info(_("Proxy configuration has been found for '%s' protocol") % self.url.scheme())
@@ -312,18 +311,18 @@ class FTPRangeHandler(urllib2.FTPHandler):
                 raise RangeError
 
             headers = ''
-            mtype = guess_type(req.get_full_url())[0]
+            mtype = mimetypes.guess_type(req.get_full_url())[0]
             if mtype:
                 headers += 'Content-Type: %s\n' % mtype
             if retrlen is not None and retrlen >= 0:
                 headers += 'Content-Length: %d\n' % retrlen
 
             try:
-                from cStringIO import StringIO
+                import cStringIO as StringIO
             except ImportError, msg:
-                from StringIO import StringIO
+                import StringIO
 
-            return urllib.addinfourl(fp, Message(StringIO(headers)), req.get_full_url())
+            return urllib.addinfourl(fp, mimetools.Message(StringIO.StringIO(headers)), req.get_full_url())
         except ftplib.all_errors, msg:
             raise IOError, (_('ftp error'), msg), sys.exc_info()[2]
 
