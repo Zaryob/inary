@@ -31,7 +31,7 @@ import pisi.util as util
 import pisi.context as ctx
 import pisi.lockeddbshelve as shelve
 import pisi.repodb
-from pisi.itembyrepodb import ItemByRepoDB
+import pisi.itembyrepodb
 
 class NotfoundError(pisi.Error):
     pass
@@ -39,8 +39,8 @@ class NotfoundError(pisi.Error):
 class SourceDB(object):
 
     def __init__(self):
-        self.d = ItemByRepoDB('source')
-        self.dpkgtosrc = ItemByRepoDB('pkgtosrc')
+        self.d = pisi.itembyrepodb.ItemByRepoDB('source')
+        self.dpkgtosrc = pisi.itembyrepodb.ItemByRepoDB('pkgtosrc')
 
     def close(self):
         self.d.close()
