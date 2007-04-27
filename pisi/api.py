@@ -22,35 +22,31 @@ _ = __trans.ugettext
 
 import pisi
 import pisi.context as ctx
-from pisi.uri import URI
-import pisi.util as util
+import pisi.uri
+import pisi.util
 import pisi.dependency as dependency
 import pisi.pgraph as pgraph
-import pisi.operations as operations
-import pisi.packagedb as packagedb
+import pisi.packagedb
 import pisi.repodb
 import pisi.installdb
 import pisi.sourcedb
-import pisi.component as component
-from pisi.index import Index
-import pisi.cli
-from pisi.config import Options
-from pisi.operations import install, remove, upgrade, emerge
-from pisi.operations import plan_install_pkg_names as plan_install
-from pisi.operations import plan_remove, plan_upgrade, upgrade_base, calculate_conflicts, reorder_base_packages
-from pisi.build import build_until
-from pisi.atomicoperations import resurrect_package, build
-from pisi.metadata import MetaData
-from pisi.files import Files
-from pisi.file import File
-import pisi.lockeddbshelve as shelve
-from pisi.version import Version
+import pisi.lockeddbshelve
+import pisi.index
+import pisi.config
+import pisi.metadata
+import pisi.file
+import pisi.version
+import pisi.operations
+import pisi.build
+import pisi.atomicoperations
+import pisi.delta
+import pisi.comariface
 
 class Error(pisi.Error):
     pass
 
 def init(database = True, write = True,
-         options = Options(), ui = None, comar = True,
+         options = pisi.config.Options(), ui = None, comar = True,
          stdout = None, stderr = None,
          comar_sockname = None,
          signal_handling = True):
@@ -64,11 +60,12 @@ def init(database = True, write = True,
     # UI comes first
 
     if ui is None:
-        from pisi.cli import CLI
+        # FIXME: api importing and using pisi.cli ????
+        import pisi.cli
         if options:
-            ctx.ui = CLI(options.debug, options.verbose)
+            ctx.ui = pisi.cli.CLI(options.debug, options.verbose)
         else:
-            ctx.ui = CLI()
+            ctx.ui = pisi.cli.CLI()
     else:
         ctx.ui = ui
 
@@ -91,7 +88,6 @@ def init(database = True, write = True,
     if stderr:
         ctx.stderr = stderr
 
-    import pisi.config
     ctx.config = pisi.config.Config(options)
 
     if signal_handling:
@@ -105,12 +101,12 @@ def init(database = True, write = True,
     # initialize repository databases
     ctx.database = database
     if database:
-        shelve.init_dbenv(write=write)
+        pisi.db.lockeddbshelve.init_dbenv(write=write)
         ctx.repodb = pisi.repodb.init()
         ctx.installdb = pisi.installdb.init()
         ctx.filesdb = pisi.files.FilesDB()
         ctx.componentdb = pisi.component.ComponentDB()
-        ctx.packagedb = packagedb.init_db()
+        ctx.packagedb = pisi.packagedb.init_db()
         ctx.sourcedb = pisi.sourcedb.init()
     else:
         ctx.repodb = None
@@ -139,7 +135,7 @@ def finalize():
             ctx.componentdb.close()
             ctx.componentdb = None
         if ctx.packagedb:
-            packagedb.finalize_db()
+            pisi.packagedb.finalize_db()
             ctx.packagedb = None
         if ctx.sourcedb:
             pisi.sourcedb.finalize()
@@ -270,18 +266,17 @@ def configure_pending():
     A = ctx.installdb.list_pending()
     order = generate_pending_order(A)
     try:
-        import pisi.comariface as comariface
         for x in order:
             if ctx.installdb.is_installed(x):
                 pkginfo = A[x]
-                pkgname = util.package_name(x, pkginfo.version,
+                pkgname = pisi.util.package_name(x, pkginfo.version,
                                         pkginfo.release,
                                         False,
                                         False)
-                pkg_path = util.join_path(ctx.config.lib_dir(),
+                pkg_path = pisi.util.join_path(ctx.config.lib_dir(),
                                           'package', pkgname)
-                m = MetaData()
-                metadata_path = util.join_path(pkg_path, ctx.const.metadata_xml)
+                m = pisi.metadata.MetaData()
+                metadata_path = pisi.util.join_path(pkg_path, ctx.const.metadata_xml)
                 m.read(metadata_path)
                 # FIXME: we need a full package info here!
                 pkginfo.name = x
@@ -289,9 +284,9 @@ def configure_pending():
                 pisi.comariface.post_install(
                     pkginfo.name,
                     m.package.providesComar,
-                    util.join_path(pkg_path, ctx.const.comar_dir),
-                    util.join_path(pkg_path, ctx.const.metadata_xml),
-                    util.join_path(pkg_path, ctx.const.files_xml),
+                    pisi.util.join_path(pkg_path, ctx.const.comar_dir),
+                    pisi.util.join_path(pkg_path, ctx.const.metadata_xml),
+                    pisi.util.join_path(pkg_path, ctx.const.files_xml),
                 )
                 ctx.ui.notify(pisi.ui.configured, package = pkginfo, files = None)
             ctx.installdb.clear_pending(x)
@@ -305,12 +300,11 @@ def info(package, installed = False):
         return info_name(package, installed)
 
 def info_file(package_fn):
-    from package import Package
 
     if not os.path.exists(package_fn):
         raise Error (_('File %s not found') % package_fn)
 
-    package = Package(package_fn)
+    package = pisi.package.Package(package_fn)
     package.read()
     return package.metadata, package.files
 
@@ -320,10 +314,8 @@ def info_name(package_name, installed=False):
         package = ctx.packagedb.get_package(package_name, pisi.itembyrepodb.installed)
     else:
         package, repo = ctx.packagedb.get_package_repo(package_name, pisi.itembyrepodb.repos)
-        repostr = repo
 
-    from pisi.metadata import MetaData
-    metadata = MetaData()
+    metadata = pisi.metadata.MetaData()
     metadata.package = package
     #FIXME: get it from sourcedb if available
     metadata.source = None
@@ -366,7 +358,7 @@ def check(package):
            and not os.path.islink('/' + file.path):
             ctx.ui.info(_("Checking /%s ") % file.path, noln=True, verbose=True)
             try:
-                if file.hash != util.sha1_file('/' + file.path):
+                if file.hash != pisi.util.sha1_file('/' + file.path):
                     corrupt.append(file)
                     ctx.ui.error(_("\nCorrupt file: %s") % file)
                 else:
@@ -377,7 +369,7 @@ def check(package):
 
 def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=False):
     """Accumulate PiSi XML files in a directory, and write an index."""
-    index = Index()
+    index = pisi.index.Index()
     index.distribution = None
     if not dirs:
         dirs = ['.']
@@ -387,16 +379,16 @@ def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=F
         index.index(repo_dir, skip_sources)
 
     if skip_signing:
-        index.write(output, sha1sum=True, compress=File.bz2, sign=None)
+        index.write(output, sha1sum=True, compress=pisi.file.File.bz2, sign=None)
     else:
-        index.write(output, sha1sum=True, compress=File.bz2, sign=File.detached)
+        index.write(output, sha1sum=True, compress=pisi.file.File.bz2, sign=pisi.file.File.detached)
     ctx.ui.info(_('* Index file written'))
 
 def add_repo(name, indexuri, at = None):
     if ctx.repodb.has_repo(name):
         raise Error(_('Repo %s already present.') % name)
     else:
-        repo = pisi.repodb.Repo(URI(indexuri))
+        repo = pisi.repodb.Repo(pisi.uri.URI(indexuri))
         ctx.repodb.add_repo(name, repo, at = at)
         ctx.ui.info(_('Repo %s added to system.') % name)
 
@@ -415,7 +407,7 @@ def list_repos():
 def update_repo(repo, force=False):
     ctx.ui.info(_('* Updating repository: %s') % repo)
     ctx.ui.notify(pisi.ui.updatingrepo, name = repo)
-    index = Index()
+    index = pisi.index.Index()
     if ctx.repodb.has_repo(repo):
         repouri = ctx.repodb.get_repo(repo).indexuri.get_uri()
         try:
@@ -439,17 +431,17 @@ def update_repo(repo, force=False):
         raise Error(_('No repository named %s found.') % repo)
 
 def delete_cache():
-    util.clean_dir(ctx.config.packages_dir())
-    util.clean_dir(ctx.config.archives_dir())
-    util.clean_dir(ctx.config.tmp_dir())
+    pisi.util.clean_dir(ctx.config.packages_dir())
+    pisi.util.clean_dir(ctx.config.archives_dir())
+    pisi.util.clean_dir(ctx.config.tmp_dir())
 
 def rebuild_repo(repo):
     ctx.ui.info(_('* Rebuilding \'%s\' named repo... ') % repo)
 
     if ctx.repodb.has_repo(repo):
-        repouri = URI(ctx.repodb.get_repo(repo).indexuri.get_uri())
+        repouri = pisi.uri.URI(ctx.repodb.get_repo(repo).indexuri.get_uri())
         indexname = repouri.filename()
-        index = Index()
+        index = pisi.index.Index()
         indexpath = pisi.util.join_path(ctx.config.index_dir(), repo, indexname)
         tmpdir = os.path.join(ctx.config.tmp_dir(), 'index')
         pisi.util.clean_dir(tmpdir)
@@ -474,9 +466,9 @@ def rebuild_db(files=False):
         i_version = {} # installed versions
         replica = []
         for pkg in os.listdir(pisi.util.join_path(pisi.api.ctx.config.lib_dir(), 'package')):
-            (name, ver) = util.parse_package_name(pkg)
+            (name, ver) = pisi.util.parse_package_name(pkg)
             if i_version.has_key(name):
-                if Version(ver) > Version(i_version[name]):
+                if pisi.version.Version(ver) > pisi.version.Version(i_version[name]):
                     # found a greater version, older one is a replica
                     replica.append(name + '-' + i_version[name])
                     i_version[name] = ver
@@ -544,5 +536,59 @@ def rebuild_db(files=False):
     # construct new database
     init(database=True, options=options, ui=ui, comar=comar)
     clean_duplicates()
-    reload_packages(files, None)
-    reload_indices(None)
+    txn = ctx.dbenv.txn_begin()
+    reload_packages(files, txn)
+    reload_indices(txn)
+    txn.commit()
+
+############# FIXME: this was a quick fix. ##############################
+
+# api was importing other module's functions and providing them as api functions. This is wrong.
+# these are quick fixes for this problem. The api functions should be in this module.
+
+# from pisi.operations import install, remove, upgrade, emerge
+# from pisi.operations import plan_install_pkg_names as plan_install
+# from pisi.operations import plan_remove, plan_upgrade, upgrade_base, calculate_conflicts, reorder_base_packages
+# from pisi.build import build_until
+# from pisi.atomicoperations import resurrect_package, build
+
+def install(*args, **kw):
+    pisi.operations.install(*args, **kw)
+
+def remove(*args, **kw):
+    pisi.operations.remove(*args, **kw)
+
+def upgrade(*args, **kw):
+    pisi.operations.upgrade(*args, **kw)
+
+def emerge(*args, **kw):
+    pisi.operations.emerge(*args, **kw)
+
+def plan_install(*args, **kw):
+    pisi.operations.plan_install_pkg_names(*args, **kw)
+
+def plan_remove(*args, **kw):
+    pisi.operations.plan_remove(*args, **kw)
+
+def plan_upgrade(*args, **kw):
+    pisi.operations.plan_upgrade(*args, **kw)
+
+def upgrade_base(*args, **kw):
+    pisi.operations.upgrade_base(*args, **kw)
+
+def calculate_conflicts(*args, **kw):
+    pisi.operations.calculate_conflicts(*args, **kw)
+
+def reorder_base_packages(*args, **kw):
+    pisi.operations.reorder_base_packages(*args, **kw)
+
+def build_until(*args, **kw):
+    pisi.build.build_until(*args, **kw)
+
+def build(*args, **kw):
+    pisi.atomicoperations.build(*args, **kw)
+
+def resurrect_package(*args, **kw):
+    pisi.atomicoperations.resurrect_package(*args, **kw)
+
+########################################################################
