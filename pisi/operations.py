@@ -18,8 +18,8 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
+import pisi.package
 import pisi.context as ctx
-from pisi.uri import URI
 import pisi.util as util
 import pisi.dependency as dependency
 import pisi.conflict
@@ -27,11 +27,9 @@ import pisi.pgraph as pgraph
 import pisi.db.packagedb as packagedb
 import pisi.db.repodb
 import pisi.db.installdb
-from pisi.index import Index
 import pisi.cli
 import pisi.atomicoperations as atomicoperations
 import pisi.ui as ui
-from pisi.version import Version
 
 class Error(pisi.Error):
     pass
@@ -79,10 +77,6 @@ def install(packages, reinstall = False, ignore_file_conflicts=False):
     if not ctx.get_option('ignore_file_conflicts'):
         ctx.set_option('ignore_file_conflicts', ignore_file_conflicts)
 
-    # FIXME: this function name "install" makes impossible to import
-    # and use install module directly.
-    from pisi.atomicoperations import Error as InstallError
-
     # determine if this is a list of files/urls or names
     if packages and packages[0].endswith(ctx.const.package_suffix): # they all have to!
         return install_pkg_files(packages)
@@ -105,7 +99,6 @@ def reorder_base_packages(order):
 
 def install_pkg_files(package_URIs):
     """install a number of pisi package files"""
-    from package import Package
 
     ctx.ui.debug('A = %s' % str(package_URIs))
 
@@ -124,7 +117,7 @@ def install_pkg_files(package_URIs):
     d_t = {}
     dfn = {}
     for x in package_URIs:
-        package = Package(x)
+        package = pisi.package.Package(x)
         package.read()
         name = str(package.metadata.package.name)
         d_t[name] = package.metadata.package
@@ -291,7 +284,7 @@ def is_upgradable(name, ignore_build = False):
     except Exception, e: #FIXME: what exception could we catch here, replace with that.
         return False
     if ignore_build or (not build) or (not pkg.build):
-        return Version(release) < Version(pkg.release)
+        return pisi.version.Version(release) < pisi.version.Version(pkg.release)
     else:
         return build < pkg.build
 
@@ -443,12 +436,12 @@ def upgrade_pkg_names(A = []):
 
         if security_only:
             history = ctx.packageDB.get_history(x)
-            updates = [i for i in history if Version(i.release) > Version(release)]
+            updates = [i for i in history if pisi.version.Version(i.release) > pisi.version.Version(release)]
             if not pisi.util.any(lambda i:i.type == 'security', updates):
                 continue
 
         if ignore_build or (not build) or (not pkg.build):
-            if Version(release) < Version(pkg.release):
+            if pisi.version.Version(release) < pisi.version.Version(pkg.release):
                 Ap.append(x)
             else:
                 ctx.ui.info(_('Package %s is already at the latest release %s.')
