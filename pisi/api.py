@@ -30,7 +30,7 @@ import pisi.packagedb
 import pisi.repodb
 import pisi.installdb
 import pisi.sourcedb
-import pisi.lockeddbshelve
+import pisi.lockeddbshelve as shelve
 import pisi.index
 import pisi.config
 import pisi.metadata
@@ -41,6 +41,7 @@ import pisi.build
 import pisi.atomicoperations
 import pisi.delta
 import pisi.comariface
+import pisi.signalhandler
 
 class Error(pisi.Error):
     pass
@@ -88,6 +89,8 @@ def init(database = True, write = True,
     if stderr:
         ctx.stderr = stderr
 
+    # FIXME: something is wrong here... see __init__.py also. Why do we import pisi.api in __init__.py
+    import pisi.config
     ctx.config = pisi.config.Config(options)
 
     if signal_handling:
@@ -101,7 +104,7 @@ def init(database = True, write = True,
     # initialize repository databases
     ctx.database = database
     if database:
-        pisi.lockeddbshelve.init_dbenv(write=write)
+        shelve.init_dbenv(write=write)
         ctx.repodb = pisi.repodb.init()
         ctx.installdb = pisi.installdb.init()
         ctx.filesdb = pisi.files.FilesDB()
@@ -519,12 +522,12 @@ def rebuild_db(files=False):
 
     # check db schema versions
     try:
-        pisi.lockeddbshelve.check_dbversion('filesdbversion', pisi.__filesdbversion__, write=False)
+        shelve.check_dbversion('filesdbversion', pisi.__filesdbversion__, write=False)
     except KeyboardInterrupt:
         raise
     except Exception, e: #FIXME: what exception could we catch here, replace with that.
         files = True # exception means the files db version was wrong
-    pisi.lockeddbshelve.init_dbenv(write=True, writeversion=True)
+    shelve.init_dbenv(write=True, writeversion=True)
     destroy(files) # bye bye
 
     # save parameters and shutdown pisi
