@@ -25,8 +25,7 @@ _ = __trans.ugettext
 import pisi
 import pisi.context as ctx
 import pisi.util as util
-
-from pisi.version import Version
+import pisi.version
 
 class Error(pisi.Error):
     pass
@@ -40,8 +39,8 @@ def check_dbversion(versionfile, ver, write=False, update=False):
     if os.path.exists(verfn):
         verfile = file(verfn, 'r')
         ls = verfile.readlines()
-        currver = Version(ls[0])
-        dbver = Version(ver)
+        currver = pisi.version.Version(ls[0])
+        dbver = pisi.version.Version(ver)
         if currver < dbver:
             if not update:
                 raise Error(_('Database version %s is obsolete. Please run the rebuild-db command.') % versionfile)
