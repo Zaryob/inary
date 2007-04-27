@@ -26,19 +26,17 @@ import pisi.metadata as metadata
 import pisi.db.packagedb as packagedb
 import pisi.db.sourcedb as sourcedb
 import pisi.util as util
-from pisi.package import Package
-from pisi.pxml.xmlfile import XmlFile
-from pisi.file import File
+import pisi.package
+import pisi.pxml.xmlfile as xmlfile
+import pisi.file
 import pisi.pxml.autoxml as autoxml
-from pisi.uri import URI
 import pisi.component as component
 import pisi.specfile as specfile
-
 
 class Error(pisi.Error):
     pass
 
-class Index(XmlFile):
+class Index(xmlfile.XmlFile):
     __metaclass__ = autoxml.autoxml
 
     tag = "PISI"
@@ -54,7 +52,7 @@ class Index(XmlFile):
 
     def read_uri(self, uri, tmpdir, force = False):
         self.read(uri, tmpDir=tmpdir, sha1sum=not force,
-                  compress=File.auto, sign=File.detached, copylocal = True)
+                  compress=pisi.file.File.auto, sign=pisi.file.File.detached, copylocal = True)
 
     # read index for a given repo, force means download even if remote not updated
     def read_uri_of_repo(self, uri, repo = None, force = False):
@@ -82,7 +80,7 @@ class Index(XmlFile):
 
     def check_signature(self, filename, repo):
         tmpdir = os.path.join(ctx.config.index_dir(), repo)
-        File.check_signature(filename, tmpdir)
+        pisi.file.File.check_signature(filename, tmpdir)
 
     def index(self, repo_uri, skip_sources=False):
         self.repo_dir = repo_uri
@@ -140,7 +138,7 @@ class Index(XmlFile):
             update_progress()
 
     def add_package(self, path, deltas, repo_uri):
-        package = Package(path, 'r')
+        package = pisi.package.Package(path, 'r')
         md = package.get_metadata()
         md.package.packageSize = os.path.getsize(path)
         md.package.packageHash = util.sha1_file(path)
