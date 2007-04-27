@@ -19,8 +19,7 @@ import pisi.context as ctx
 import pisi.pxml.xmlfile as xmlfile
 import pisi.pxml.autoxml as autoxml
 import pisi.lockeddbshelve as shelve
-from pisi.itembyrepodb import ItemByRepoDB
-import pisi.itembyrepodb as itembyrepodb
+import pisi.itembyrepodb
 
 class Error(pisi.Error):
     pass
@@ -87,7 +86,7 @@ class ComponentDB(object):
     """a database of components"""
 
     def __init__(self):
-        self.d = ItemByRepoDB('component')
+        self.d = pisi.itembyrepodb.ItemByRepoDB('component')
 
     def close(self):
         self.d.close()
