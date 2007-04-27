@@ -101,7 +101,7 @@ def init(database = True, write = True,
     # initialize repository databases
     ctx.database = database
     if database:
-        pisi.db.lockeddbshelve.init_dbenv(write=write)
+        pisi.lockeddbshelve.init_dbenv(write=write)
         ctx.repodb = pisi.repodb.init()
         ctx.installdb = pisi.installdb.init()
         ctx.filesdb = pisi.files.FilesDB()
