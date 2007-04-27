@@ -10,8 +10,8 @@
 # Please read the COPYING file.
 
 import os.path
+import pisi
 import pisi.context as ctx
-from pisi import Error
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -43,5 +43,5 @@ class Mirrors:
                       (name, url) = mirror
                       self._add_mirror(name, url)
         else:
-            raise Error(_('Mirrors file %s does not exist. Could not resolve mirrors://') % config)
+            raise pisi.Error(_('Mirrors file %s does not exist. Could not resolve mirrors://') % config)
 
