@@ -29,8 +29,7 @@ import pisi
 import pisi.util as util
 import pisi.context as ctx
 import pisi.lockeddbshelve as shelve
-from pisi.itembyrepodb import ItemByRepoDB
-import pisi.itembyrepodb as itembyrepodb
+import pisi.itembyrepodb
 
 class Error(pisi.Error):
     pass
@@ -45,8 +44,8 @@ class PackageDB(object):
     using shelf objects"""
 
     def __init__(self):
-        self.d = ItemByRepoDB('package')
-        self.dr = ItemByRepoDB('revdep')
+        self.d = pisi.itembyrepodb.ItemByRepoDB('package')
+        self.dr = pisi.itembyrepodb.ItemByRepoDB('revdep')
 
     def close(self):
         self.d.close()
@@ -145,10 +144,10 @@ pkgdb = None
 
 def remove_tracking_package(name, txn = None):
     # remove the guy from the tracking databases
-    if pkgdb.has_package(name, itembyrepodb.installed, txn=txn):
-        pkgdb.remove_package(name, itembyrepodb.installed, txn=txn)
-    if pkgdb.has_package(name, itembyrepodb.thirdparty, txn=txn):
-        pkgdb.remove_package(name, itembyrepodb.thirdparty, txn=txn)
+    if pkgdb.has_package(name, pisi.itembyrepodb.installed, txn=txn):
+        pkgdb.remove_package(name, pisi.itembyrepodb.installed, txn=txn)
+    if pkgdb.has_package(name, pisi.itembyrepodb.thirdparty, txn=txn):
+        pkgdb.remove_package(name, pisi.itembyrepodb.thirdparty, txn=txn)
 
 def init_db():
     global pkgdb
