@@ -25,14 +25,11 @@ _ = __trans.ugettext
 import pisi
 import pisi.context as ctx
 import pisi.lockeddbshelve as shelve
-from pisi.files import Files
-import pisi.util as util
-from pisi.util import join_path as join
-
+import pisi.files
+import pisi.util
 
 class InstallDBError(pisi.Error):
     pass
-
 
 class InstallInfo:
     # some data is replicated from packagedb
@@ -74,7 +71,7 @@ class InstallDB:
     def __init__(self):
         self.d = shelve.LockedDBShelf('install')
         self.dp = shelve.LockedDBShelf('configpending')
-        self.files_dir = join(ctx.config.db_dir(), 'files')
+        self.files_dir = pisi.util.join_path(ctx.config.db_dir(), 'files')
 
     def close(self):
         self.d.close()
@@ -82,17 +79,17 @@ class InstallDB:
 
     def files_name(self, pkg, version, release):
         pkg_dir = self.pkg_dir(pkg, version, release)
-        return join(pkg_dir, ctx.const.files_xml)
+        return pisi.util.join_path(pkg_dir, ctx.const.files_xml)
 
     def files(self, pkg):
         pkg = str(pkg)
         pkginfo = self.d[pkg]
-        files = Files()
+        files = pisi.files.Files()
         files.read(self.files_name(pkg,pkginfo.version,pkginfo.release))
         return files
 
     def pkg_dir(self, pkg, version, release):
-        return join(ctx.config.lib_dir(), 'package',
+        return pisi.util.join_path(ctx.config.lib_dir(), 'package',
                     pkg + '-' + version + '-' + release)
 
     def is_recorded(self, pkg, txn = None):
@@ -166,7 +163,7 @@ class InstallDB:
                 ctime = time.localtime()
             else:
                 files_xml = self.files_name(pkg, version, release)
-                ctime = util.creation_time(files_xml)
+                ctime = pisi.util.creation_time(files_xml)
 
             self.d.put(pkg, InstallInfo(state, version, release, build, distro, ctime), txn)
 
