@@ -26,13 +26,12 @@ import pisi.db.packagedb as packagedb
 import pisi.dependency as dependency
 import pisi.conflict
 import pisi.util as util
-from pisi.specfile import *
-from pisi.metadata import MetaData
-from pisi.files import Files
-from pisi.uri import URI
+import pisi.metadata
+import pisi.files
+import pisi.uri
 import pisi.ui
-from pisi.version import Version
-from pisi.delta import find_relocations
+import pisi.version
+import pisi.delta
 
 class Error(pisi.Error):
     pass
@@ -77,7 +76,7 @@ class Install(AtomicOperation):
             else:
                 pkg_uri = pkg.packageURI
 
-            uri = URI(pkg_uri)
+            uri = pisi.uri.URI(pkg_uri)
             if uri.is_absolute_path():
                 pkg_path = str(pkg_uri)
             else:
@@ -198,7 +197,7 @@ class Install(AtomicOperation):
             ignore_build = ctx.config.options and ctx.config.options.ignore_build_no
             if repomismatch or (not ibuild) or (not pkg.build) or ignore_build:
                 # we don't look at builds to compare two package versions
-                if Version(pkg.release) == Version(irelease):
+                if pisi.version.Version(pkg.release) == pisi.version.Version(irelease):
                     self.same_ver = True
             else:
                 if pkg.build == ibuild:
@@ -212,10 +211,10 @@ class Install(AtomicOperation):
                 upgrade = False
                 # is this an upgrade?
                 # determine and report the kind of upgrade: version, release, build
-                if Version(pkg.version) > Version(iversion):
+                if pisi.version.Version(pkg.version) > pisi.version.Version(iversion):
                     ctx.ui.info(_('Upgrading to new upstream version'))
                     upgrade = True
-                elif Version(pkg.release) > Version(irelease):
+                elif pisi.version.Version(pkg.release) > pisi.version.Version(irelease):
                     ctx.ui.info(_('Upgrading to new distribution release'))
                     upgrade = True
                 elif ((not ignore_build) and ibuild and pkg.build
@@ -226,10 +225,10 @@ class Install(AtomicOperation):
 
                 # is this a downgrade? confirm this action.
                 if self.ask_reinstall and (not upgrade):
-                    if Version(pkg.version) < Version(iversion):
+                    if pisi.version.Version(pkg.version) < pisi.version.Version(iversion):
                         #x = _('Downgrade to old upstream version?')
                         x = None
-                    elif Version(pkg.release) < Version(irelease):
+                    elif pisi.version.Version(pkg.release) < pisi.version.Version(irelease):
                         x = _('Downgrade to old distribution release?')
                     else:
                         x = _('Downgrade to old distribution build?')
@@ -318,7 +317,7 @@ class Install(AtomicOperation):
         # of these files may be relocated to some other directory in the new package. 
         # We handle these cases here.
         def relocate_files():
-            for old_file, new_file in find_relocations(self.old_files, self.files):
+            for old_file, new_file in pisi.delta.find_relocations(self.old_files, self.files):
                 old_path, new_path = ("/" + old_file.path, "/" + new_file.path)
 
                 destdir = os.path.dirname(new_path)
@@ -420,7 +419,7 @@ class Install(AtomicOperation):
 
 def install_single(pkg, upgrade = False):
     """install a single package from URI or ID"""
-    url = URI(pkg)
+    url = pisi.uri.URI(pkg)
     # Check if we are dealing with a remote file or a real path of
     # package filename. Otherwise we'll try installing a package from
     # the package repository.
@@ -451,7 +450,7 @@ class Remove(AtomicOperation):
             # for some reason file was deleted, we still allow removes!
             ctx.ui.error(unicode(e))
             ctx.ui.warning(_('File list could not be read for package %s, continuing removal.') % package_name)
-            self.files = Files()
+            self.files = pisi.files.Files()
 
     def run(self):
         """Remove a single package"""
@@ -574,14 +573,12 @@ def virtual_install(metadata, files, txn):
 def resurrect_package(package_fn, write_files, txn = None):
     """Resurrect the package from xml files"""
 
-    from os.path import exists
-
     metadata_xml = util.join_path(ctx.config.lib_dir(), 'package',
                                   package_fn, ctx.const.metadata_xml)
-    if not exists(metadata_xml):
+    if not os.path.exists(metadata_xml):
         raise Error, _("Metadata XML '%s' cannot be found") % metadata_xml
 
-    metadata = MetaData()
+    metadata = pisi.metadata.MetaData()
     metadata.read(metadata_xml)
 
     errs = metadata.errors()
@@ -594,10 +591,10 @@ def resurrect_package(package_fn, write_files, txn = None):
     if write_files:
         files_xml = util.join_path(ctx.config.lib_dir(), 'package',
                                 package_fn, ctx.const.files_xml)
-        if not exists(files_xml):
+        if not os.path.exists(files_xml):
             raise Error, _("Files XML '%s' cannot be found") % files_xml
 
-        files = Files()
+        files = pisi.files.Files()
         files.read(files_xml)
         if files.errors():
             raise Error, _("Invalid %s") % ctx.const.files_xml
