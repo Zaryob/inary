@@ -306,7 +306,8 @@ def info(package, installed = False):
     if package.endswith(ctx.const.package_suffix):
         return info_file(package)
     else:
-        return info_name(package, installed)
+        metadata, files, repo = info_name(package, installed)
+        return metadata, files
 
 def info_file(package_fn):
 
