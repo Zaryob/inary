@@ -191,9 +191,6 @@ class Builder:
         self.fetch_source_archive()
         self.unpack_source_archive()
 
-        # apply the patches and prepare a source directory for build.
-        self.apply_patches()
-
         self.run_setup_action()
         self.run_build_action()
         if ctx.get_option('debug') and not ctx.get_option('ignore_check'):
@@ -310,19 +307,21 @@ class Builder:
     def unpack_source_archive(self):
         ctx.ui.info(_("Unpacking archive..."), noln = True)
         self.sourceArchive.unpack()
-        ctx.ui.info(_(" unpacked (%s)") % self.pkg_work_dir())
-        self.set_state("unpack")
+        # apply the patches and prepare a source directory for build.
+        if self.apply_patches():
+            ctx.ui.info(_(" unpacked (%s)") % self.pkg_work_dir())
+            self.set_state("unpack")
 
     def run_setup_action(self):
         #  Run configure, build and install phase
         ctx.ui.action(_("Setting up source..."))
-        self.run_action_function(ctx.const.setup_func)
-        self.set_state("setupaction")
+        if self.run_action_function(ctx.const.setup_func):
+            self.set_state("setupaction")
 
     def run_build_action(self):
         ctx.ui.action(_("Building source..."))
-        self.run_action_function(ctx.const.build_func)
-        self.set_state("buildaction")
+        if self.run_action_function(ctx.const.build_func):
+            self.set_state("buildaction")
 
     def run_check_action(self):
         ctx.ui.action(_("Testing package..."))
@@ -336,8 +335,8 @@ class Builder:
             pisi.util.clean_dir(self.pkg_install_dir())
 
         # install function is mandatory!
-        self.run_action_function(ctx.const.install_func, True)
-        self.set_state("installaction")
+        if self.run_action_function(ctx.const.install_func, True):
+            self.set_state("installaction")
 
     def get_abandoned_files(self):
         # return the files those are not collected from the install dir
@@ -421,6 +420,7 @@ class Builder:
                 Error, _("unable to call function from actions: %s") %func
 
         os.chdir(curDir)
+        return True
 
     def check_build_dependencies(self):
         """check and try to install build dependencies, otherwise fail."""
@@ -495,6 +495,7 @@ class Builder:
 
             ctx.ui.action(_("* Applying patch: %s") % patch.filename)
             pisi.util.do_patch(self.srcDir, patchFile, level=patch.level)
+        return True
 
     def generate_static_package_object(self):
         ar_files = []
@@ -939,7 +940,6 @@ def __buildState_unpack(pb, last):
     if order[last] < order["fetch"]:
         __buildState_fetch(pb)
     pb.unpack_source_archive()
-    pb.apply_patches()
 
 def __buildState_setupaction(pb, last):
     if order[last] < order["unpack"]:
