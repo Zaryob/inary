@@ -606,42 +606,42 @@ def create_delta_package(old_package, new_package):
 # from pisi.atomicoperations import resurrect_package, build
 
 def install(*args, **kw):
-    pisi.operations.install(*args, **kw)
+    return pisi.operations.install(*args, **kw)
 
 def remove(*args, **kw):
-    pisi.operations.remove(*args, **kw)
+    return pisi.operations.remove(*args, **kw)
 
 def upgrade(*args, **kw):
-    pisi.operations.upgrade(*args, **kw)
+    return pisi.operations.upgrade(*args, **kw)
 
 def emerge(*args, **kw):
-    pisi.operations.emerge(*args, **kw)
+    return pisi.operations.emerge(*args, **kw)
 
 def plan_install(*args, **kw):
-    pisi.operations.plan_install_pkg_names(*args, **kw)
+    return pisi.operations.plan_install_pkg_names(*args, **kw)
 
 def plan_remove(*args, **kw):
-    pisi.operations.plan_remove(*args, **kw)
+    return pisi.operations.plan_remove(*args, **kw)
 
 def plan_upgrade(*args, **kw):
-    pisi.operations.plan_upgrade(*args, **kw)
+    return pisi.operations.plan_upgrade(*args, **kw)
 
 def upgrade_base(*args, **kw):
-    pisi.operations.upgrade_base(*args, **kw)
+    return pisi.operations.upgrade_base(*args, **kw)
 
 def calculate_conflicts(*args, **kw):
-    pisi.operations.calculate_conflicts(*args, **kw)
+    return pisi.operations.calculate_conflicts(*args, **kw)
 
 def reorder_base_packages(*args, **kw):
-    pisi.operations.reorder_base_packages(*args, **kw)
+    return pisi.operations.reorder_base_packages(*args, **kw)
 
 def build_until(*args, **kw):
-    pisi.build.build_until(*args, **kw)
+    return pisi.build.build_until(*args, **kw)
 
 def build(*args, **kw):
-    pisi.atomicoperations.build(*args, **kw)
+    return pisi.atomicoperations.build(*args, **kw)
 
 def resurrect_package(*args, **kw):
-    pisi.atomicoperations.resurrect_package(*args, **kw)
+    return pisi.atomicoperations.resurrect_package(*args, **kw)
 
 ########################################################################
