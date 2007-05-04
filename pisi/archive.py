@@ -64,6 +64,27 @@ class ArchiveBinary(ArchiveBase):
         target_file = os.path.join(target_dir, os.path.basename(self.file_path))
         shutil.copyfile(self.file_path, target_file)
 
+class ArchiveGzip(ArchiveBase):
+    """ArchiveGzip handles Gzip archive files"""
+    def __init__(self, file_path, arch_type = "gz"):
+        super(ArchiveGzip, self).__init__(file_path, arch_type)
+
+    def unpack(self, target_dir, clean_dir = False):
+        super(ArchiveGzip, self).unpack(target_dir, clean_dir)
+        self.unpack_dir(target_dir)
+
+    def unpack_dir(self, target_dir):
+        """Unpack Gzip archive to a given target directory(target_dir)."""
+        oldwd = os.getcwd()
+        os.chdir(target_dir)
+
+        self.gzip = gzip.GzipFile(self.file_path, "r")
+        self.output = open(os.path.basename(self.file_path.rstrip(".gz")), "w")
+        self.output.write(self.gzip.read())
+        self.output.close()
+        self.gzip.close()
+
+        os.chdir(oldwd)
 
 class ArchiveTar(ArchiveBase):
     """ArchiveTar handles tar archives depending on the compression
@@ -410,6 +431,7 @@ class Archive:
             'tarlzma': ArchiveTar,
             'tar': ArchiveTar,
             'zip': ArchiveZip,
+            'gzip': ArchiveGzip,
             'binary': ArchiveBinary
         }
 
