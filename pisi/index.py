@@ -23,15 +23,12 @@ import pisi
 import pisi.context as ctx
 import pisi.specfile as specfile
 import pisi.metadata as metadata
-import pisi.packagedb as packagedb
-import pisi.sourcedb as sourcedb
 import pisi.util as util
 import pisi.package
 import pisi.pxml.xmlfile as xmlfile
 import pisi.file
 import pisi.pxml.autoxml as autoxml
 import pisi.component as component
-import pisi.specfile as specfile
 
 class Error(pisi.Error):
     pass
