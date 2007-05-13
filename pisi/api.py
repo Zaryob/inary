@@ -90,7 +90,6 @@ def init(database = True, write = True,
         ctx.stderr = stderr
 
     # FIXME: something is wrong here... see __init__.py also. Why do we import pisi.api in __init__.py
-    import pisi.config
     ctx.config = pisi.config.Config(options)
 
     if signal_handling:
@@ -163,8 +162,6 @@ def list_available(repo = None):
     return set(ctx.packagedb.list_packages(repo = repo))
 
 def list_upgradable():
-    ignore_build = ctx.get_option('ignore_build_no')
-
     return filter(pisi.operations.is_upgradable, ctx.installdb.list_installed())
 
 def package_graph(A, repo = pisi.itembyrepodb.installed, ignore_installed = False):
@@ -358,14 +355,14 @@ def search_in_packages(terms, packages, repo = pisi.itembyrepodb.all):
 def check(package):
     md, files = info(package, True)
     corrupt = []
-    for file in files.list:
-        if file.hash and file.type != "config" \
-           and not os.path.islink('/' + file.path):
-            ctx.ui.info(_("Checking /%s ") % file.path, noln=True, verbose=True)
+    for f in files.list:
+        if f.hash and f.type != "config" \
+           and not os.path.islink('/' + f.path):
+            ctx.ui.info(_("Checking /%s ") % f.path, noln=True, verbose=True)
             try:
-                if file.hash != pisi.util.sha1_file('/' + file.path):
-                    corrupt.append(file)
-                    ctx.ui.error(_("\nCorrupt file: %s") % file)
+                if f.hash != pisi.util.sha1_file('/' + f.path):
+                    corrupt.append(f)
+                    ctx.ui.error(_("\nCorrupt file: %s") % f)
                 else:
                     ctx.ui.info(_("OK"), verbose=True)
             except pisi.util.FileError,e:
@@ -462,7 +459,7 @@ def rebuild_repo(repo):
 
 def rebuild_db(files=False):
 
-    assert ctx.database == False
+    assert not ctx.database
 
     # Bug 2596
     # finds and cleans duplicate package directories under '/var/lib/pisi/package'
@@ -513,7 +510,7 @@ def rebuild_db(files=False):
                                         percent = progress.update(processed),
                                         info = _("Rebuilding package database"))
 
-    def reload_indices(txn):
+    def reload_indices():
         index_dir = ctx.config.index_dir()
         if os.path.exists(index_dir):  # it may have been erased, or we may be upgrading from a previous version -- exa
             for repo in os.listdir(index_dir):
@@ -527,7 +524,7 @@ def rebuild_db(files=False):
         shelve.check_dbversion('filesdbversion', pisi.__filesdbversion__, write=False)
     except KeyboardInterrupt:
         raise
-    except Exception, e: #FIXME: what exception could we catch here, replace with that.
+    except Exception: #FIXME: what exception could we catch here, replace with that.
         files = True # exception means the files db version was wrong
     shelve.init_dbenv(write=True, writeversion=True)
     destroy(files) # bye bye
@@ -543,7 +540,7 @@ def rebuild_db(files=False):
     clean_duplicates()
     txn = ctx.dbenv.txn_begin()
     reload_packages(files, txn)
-    reload_indices(txn)
+    reload_indices()
     txn.commit()
 
 ############# FIXME: this was a quick fix. ##############################
