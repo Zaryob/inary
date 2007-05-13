@@ -24,7 +24,6 @@ import pisi.util as util
 import pisi.dependency as dependency
 import pisi.conflict
 import pisi.pgraph as pgraph
-import pisi.packagedb as packagedb
 import pisi.repodb
 import pisi.installdb
 import pisi.cli
@@ -246,7 +245,7 @@ def calculate_conflicts(order, packagedb):
     return (C, D, pkg_conflicts)
 
 def remove_conflicting_packages(conflicts):
-    if remove(conflicts, ignore_dep=True, ignore_safety=True) == False:
+    if not remove(conflicts, ignore_dep=True, ignore_safety=True):
         raise Error(_("Conflicts remain"))
 
 def check_conflicts(order, packagedb):
@@ -281,7 +280,7 @@ def is_upgradable(name, ignore_build = False):
         pkg = ctx.packagedb.get_package(name)
     except KeyboardInterrupt:
         raise
-    except Exception, e: #FIXME: what exception could we catch here, replace with that.
+    except Exception: #FIXME: what exception could we catch here, replace with that.
         return False
     if ignore_build or (not build) or (not pkg.build):
         return pisi.version.Version(release) < pisi.version.Version(pkg.release)
@@ -303,7 +302,7 @@ def upgrade_base(A = set(), ignore_package_conflicts = False):
             if extra_upgrades:
                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be upgraded: ') +
                                util.strlist(extra_upgrades))
-                G_f, upgrade_order = plan_upgrade(extra_upgrades, ignore_build)
+                G_f, upgrade_order = plan_upgrade(extra_upgrades)
             # return packages that must be added to any installation
             return set(install_order + upgrade_order)
         else:
@@ -465,7 +464,7 @@ def upgrade_pkg_names(A = []):
     ctx.ui.debug('A = %s' % str(A))
 
     if not ctx.config.get_option('ignore_dependency'):
-        G_f, order = plan_upgrade(A, ignore_build)
+        G_f, order = plan_upgrade(A)
     else:
         G_f = None
         order = list(A)
@@ -513,7 +512,7 @@ def upgrade_pkg_names(A = []):
     if 'pisi' in order:
         upgrade_pisi()
 
-def plan_upgrade(A, ignore_build = False):
+def plan_upgrade(A):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
@@ -641,7 +640,6 @@ def plan_remove(A):
     while len(B) > 0:
         Bp = set()
         for x in B:
-            pkg = ctx.packagedb.get_package(x, pisi.itembyrepodb.installed)
             rev_deps = ctx.packagedb.get_rev_deps(x, pisi.itembyrepodb.installed)
             for (rev_dep, depinfo) in rev_deps:
                 # we don't deal with uninstalled rev deps
@@ -666,7 +664,7 @@ def expand_src_components(A):
             Ap.add(x)
     return Ap
 
-def emerge(A, rebuild_all = False):
+def emerge(A):
 
     # A was a list, remove duplicates and expand components
     A = [str(x) for x in A]
@@ -682,7 +680,7 @@ def emerge(A, rebuild_all = False):
     # FIXME: Errr... order_build changes type conditionally and this
     # is not good. - baris
     if not ctx.config.get_option('ignore_dependency'):
-        G_f, order_inst, order_build = plan_emerge(A, rebuild_all)
+        G_f, order_inst, order_build = plan_emerge(A)
     else:
         G_f = None
         order_inst = []
@@ -723,7 +721,7 @@ installed in the respective order to satisfy dependencies:
     if 'pisi' in order_build or (('pisi' in U) and pisi_installed):
         upgrade_pisi()
 
-def plan_emerge(A, rebuild_all):
+def plan_emerge(A):
 
     # try to construct a pisi graph of packages to
     # install / reinstall
