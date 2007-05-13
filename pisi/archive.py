@@ -18,6 +18,7 @@ import stat
 import shutil
 import tarfile
 import zipfile
+import gzip
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
