@@ -17,12 +17,18 @@ we basically store everything in PackageInfo class
 yes, we are cheap
 """
 
+import os
+import fcntl
+import types
+
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
+import pisi.util as util
 import pisi.context as ctx
+import pisi.lockeddbshelve as shelve
 import pisi.itembyrepodb
 
 class Error(pisi.Error):
@@ -55,7 +61,7 @@ class PackageDB(object):
     def get_package(self, name, repo=None, txn = None):
         try:
             return self.d.get_item(name, repo, txn=txn)
-        except pisi.itembyrepodb.NotfoundError:
+        except pisi.itembyrepodb.NotfoundError, e:
             raise Error(_('Package %s not found') % name)
 
     def get_package_repo(self, name, repo=None, txn = None):

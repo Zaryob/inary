@@ -10,11 +10,16 @@
 # Please read the COPYING file.
 #
 
+import os
+import fcntl
+import types
+
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
+import pisi.util as util
 import pisi.context as ctx
 import pisi.lockeddbshelve as shelve
 
@@ -85,6 +90,7 @@ class ItemByRepoDB(object):
         if repo == None:
             repo = repos
         assert repo in [all, repos]
+        import pisi.repodb
         order = [ 'repo-' + x for x in ctx.repodb.list() ]
         if repo == all:
             order += ['trdparty', 'inst']

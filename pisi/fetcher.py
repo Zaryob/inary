@@ -282,17 +282,17 @@ class FTPRangeHandler(urllib2.FTPHandler):
         path, attrs = urllib.splitattr(req.get_selector())
         dirs = path.split('/')
         dirs = map(urllib.unquote, dirs)
-        dirs, f = dirs[:-1], dirs[-1]
+        dirs, file = dirs[:-1], dirs[-1]
         if dirs and not dirs[0]:
             dirs = dirs[1:]
         try:
             fw = self.connect_ftp('', '', host, port, dirs)
-            t = f and 'I' or 'D'
+            type = file and 'I' or 'D'
             for attr in attrs:
                 attr, value = urllib.splitattr(attr)
                 if attr.lower() == 'type' and \
                    value in ('a', 'A', 'i', 'I', 'd', 'D'):
-                    t = value.upper()
+                    type = value.upper()
 
             rawr = req.headers.get('Range', None)
             if rawr:
@@ -300,7 +300,7 @@ class FTPRangeHandler(urllib2.FTPHandler):
             else:
                 rest = 0
 
-            fp, retrlen = fw.retrfile(f, t, rest)
+            fp, retrlen = fw.retrfile(file, type, rest)
 
             fb, lb = rest, retrlen
             if retrlen is None or retrlen == 0:
@@ -327,7 +327,7 @@ class FTPRangeHandler(urllib2.FTPHandler):
             raise IOError, (_('ftp error'), msg), sys.exc_info()[2]
 
     def connect_ftp(self, user, passwd, host, port, dirs):
-        fw = ftpwrapper(user, passwd, host, port, dirs)
+        fw = ftpwrapper('', '', host, port, dirs)
         return fw
 
 class ftpwrapper(urllib.ftpwrapper):
@@ -355,7 +355,6 @@ class ftpwrapper(urllib.ftpwrapper):
                 if str(reason)[:3] == '501':
                     # workaround for REST not suported error
                     fp, retrlen = self.retrfile(file, type)
-                    # WTF? No global (RangeableFileObject) found. RangeableFileObject only defined in urlgrabber / caglar
                     fp = RangeableFileObject(fp, (rest,''))
                     return (fp, retrlen)
                 elif str(reason)[:3] != '550':

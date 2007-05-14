@@ -13,6 +13,7 @@
 
 # python standard library
 import os
+import sys
 import glob
 import copy
 import stat
@@ -416,7 +417,7 @@ class Builder:
             self.actionLocals[func]()
         else:
             if mandatory:
-                raise Error(_("unable to call function from actions: %s") % func)
+                Error, _("unable to call function from actions: %s") %func
 
         os.chdir(curDir)
         return True
@@ -559,7 +560,7 @@ class Builder:
         except KeyError:
             pisi.util.strip_directory(install_dir)
 
-    def gen_metadata_xml(self, package):
+    def gen_metadata_xml(self, package, build_no=None):
         """Generate the metadata.xml file for build source.
 
         metadata.xml is composed of the information from specfile plus
@@ -662,15 +663,15 @@ class Builder:
                     ctx.ui.warning('Package file %s may be corrupt. Skipping.' % old_package_fn)
 
         for root, dirs, files in os.walk(ctx.config.compiled_packages_dir()):
-            for f in files:
-                locate_old_package(pisi.util.join_path(root,f))
+            for file in files:
+                locate_old_package(pisi.util.join_path(root,file))
 
         outdir=ctx.get_option('output_dir')
         if not outdir:
             outdir = '.'
-        for f in [pisi.util.join_path(outdir,entry) for entry in os.listdir(outdir)]:
-            if os.path.isfile(f):
-                locate_old_package(f)
+        for file in [pisi.util.join_path(outdir,entry) for entry in os.listdir(outdir)]:
+            if os.path.isfile(file):
+                locate_old_package(file)
 
         if not found:
             return (1, None)

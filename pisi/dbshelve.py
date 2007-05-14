@@ -38,6 +38,8 @@ import cPickle
 import bsddb3.db as db
 import bsddb3.dbobj as dbobj
 import string
+import sys
+import traceback
 import pisi
 
 class CodingError(pisi.Error):

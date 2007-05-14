@@ -99,9 +99,9 @@ class Command(object):
     @staticmethod
     def commands_string():
         s = ''
-        l = [x.name[0] for x in Command.cmd]
-        l.sort()
-        for name in l:
+        list = [x.name[0] for x in Command.cmd]
+        list.sort()
+        for name in list:
             commandcls = Command.cmd_dict[name]
             trans = gettext.translation('pisi', fallback=True)
             summary = trans.ugettext(commandcls.__doc__).split('\n')[0]
@@ -173,12 +173,12 @@ class Command(object):
 
         # make destdir absolute
         if self.options.destdir:
-            d = str(self.options.destdir)
+            dir = str(self.options.destdir)
             import os.path
-            if not os.path.exists(d):
-                pisi.cli.printu(_('Destination directory %s does not exist. Creating directory.\n') % d)
-                os.makedirs(d)
-            self.options.destdir = os.path.realpath(d)
+            if not os.path.exists(dir):
+                pisi.cli.printu(_('Destination directory %s does not exist. Creating directory.\n') % dir)
+                os.makedirs(dir)
+            self.options.destdir = os.path.realpath(dir)
 
     def check_auth_info(self):
         username = self.options.username
@@ -528,7 +528,7 @@ and creates a delta pisi package with the changed files between two releases.
 
         self.init(database=False, write=False)
 
-        if len(self.args) != 2:
+        if len(self.args) is not 2:
             self.help()
             return
 
@@ -728,9 +728,9 @@ expanded to package names.
         import os
 
         patterns = []
-        f = ctx.get_option('exclude_from')
-        if os.path.exists(f):
-            for line in open(f, "r").readlines():
+        file = ctx.get_option('exclude_from')
+        if os.path.exists(file):
+            for line in open(file, "r").readlines():
                 if not line.startswith('#') and not line == '\n':
                     patterns.append(line.strip())
             if patterns:
@@ -750,8 +750,8 @@ expanded to package names.
 
             if not match:
                 # match pattern in component names
-                for compare in fnmatch.filter(ctx.componentdb.list_components(), pattern):
-                    packages = packages - set(ctx.componentdb.get_union_packages(compare, walk=True))
+                for cmp in fnmatch.filter(ctx.componentdb.list_components(), pattern):
+                    packages = packages - set(ctx.componentdb.get_union_packages(cmp, walk=True))
 
         return list(packages)
 
@@ -966,6 +966,8 @@ Usage: info <package1> <package2> ... <packagen>
                 ctx.ui.info(_("%s is not installed") % arg)
 
     def print_pkginfo(self, metadata, files, repo = None):
+        import os.path
+
         if ctx.get_option('short'):
             pkg = metadata.package
             ctx.ui.info('%15s - %s' % (pkg.name, unicode(pkg.summary)))
@@ -1379,12 +1381,12 @@ all repositories.
 
         component = ctx.get_option('component')
         if component:
-            l = ctx.componentdb.get_packages(component, walk=True, repo=repo)
+            list = ctx.componentdb.get_packages(component, walk=True, repo=repo)
         else:
-            l = ctx.packagedb.list_packages(repo)
+            list = ctx.packagedb.list_packages(repo)
         installed_list = ctx.installdb.list_installed()
-        l.sort()
-        for p in l:
+        list.sort()
+        for p in list:
             package = ctx.packagedb.get_package(p)
             if self.options.long:
                 ctx.ui.info(unicode(package))
@@ -1422,9 +1424,9 @@ repositories.
 
         self.init(database = True, write = False)
 
-        l = ctx.componentdb.list_components()
-        l.sort()
-        for p in l:
+        list = ctx.componentdb.list_components()
+        list.sort()
+        for p in list:
             component = ctx.componentdb.get_component(p)
             if self.options.long:
                 ctx.ui.info(unicode(component))
@@ -1461,9 +1463,9 @@ Gives a brief list of sources published in the repositories.
 
         self.init(database = True, write = False)
 
-        l = ctx.sourcedb.list()
-        l.sort()
-        for p in l:
+        list = ctx.sourcedb.list()
+        list.sort()
+        for p in list:
             sf, repo = ctx.sourcedb.get_spec_repo(p)
             if self.options.long:
                 ctx.ui.info('[Repository: ' + repo + ']')

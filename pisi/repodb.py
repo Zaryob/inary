@@ -10,6 +10,8 @@
 # Please read the COPYING file.
 #
 
+import os, fcntl
+
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
@@ -17,6 +19,8 @@ _ = __trans.ugettext
 import pisi
 import pisi.lockeddbshelve as shelve
 import pisi.context as ctx
+import pisi.packagedb as packagedb
+import pisi.util as util
 
 class Error(pisi.Error):
     pass
@@ -97,9 +101,9 @@ class RepoDB(object):
         name = str(name)
         def proc(txn):
             self.d.delete("repo-" + name, txn)
-            l = self.d.get("order", txn)
-            l.remove(name)
-            self.d.put("order", l, txn)
+            list = self.d.get("order", txn)
+            list.remove(name)
+            self.d.put("order", list, txn)
             ctx.packagedb.remove_repo(name, txn=txn)
             ctx.sourcedb.remove_repo(name, txn=txn)
             ctx.componentdb.remove_repo(name, txn=txn)

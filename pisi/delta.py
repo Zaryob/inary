@@ -74,8 +74,8 @@ def create_delta_package(old_package, new_package):
         ctx.build_leftover = util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar_lzma)
 
         tar = archive.ArchiveTar(util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar_lzma), "tarlzma")
-        for f in files_delta:
-            tar.add_to_archive(f.path)
+        for file in files_delta:
+            tar.add_to_archive(file.path)
         tar.close()
 
         os.chdir(ctx.config.tmp_dir())
@@ -99,34 +99,34 @@ def create_delta_package(old_package, new_package):
 def find_delta(oldfiles, newfiles):
 
     hashto_files = {}
-    for f in newfiles.list:
-        hashto_files.setdefault(f.hash, []).append(f)
+    for file in newfiles.list:
+        hashto_files.setdefault(file.hash, []).append(file)
 
     files_new = sets.Set(map(lambda x:x.hash, newfiles.list))
     files_old = sets.Set(map(lambda x:x.hash, oldfiles.list))
     files_delta = files_new - files_old
 
     deltas = []
-    for h in files_delta:
-        deltas.extend(hashto_files[h])
+    for hash in files_delta:
+        deltas.extend(hashto_files[hash])
 
     return deltas
 
 def find_relocations(oldfiles, newfiles):
 
     files_new = {}
-    for f in newfiles.list:
-        files_new.setdefault(f.hash, []).append(f)
+    for file in newfiles.list:
+        files_new.setdefault(file.hash, []).append(file)
 
     files_old = {}
-    for f in oldfiles.list:
-        files_old.setdefault(f.hash, []).append(f)
+    for file in oldfiles.list:
+        files_old.setdefault(file.hash, []).append(file)
 
     relocations = []
-    for h in files_new.keys():
-        if h and h in files_old:
-            for i in range(len(files_new[h])):
-                if files_old[h][0].path != files_new[h][i].path:
-                    relocations.append((files_old[h][0], files_new[h][i]))
+    for hash in files_new.keys():
+        if hash and hash in files_old:
+            for i in range(len(files_new[hash])):
+                if files_old[hash][0].path != files_new[hash][i].path:
+                    relocations.append((files_old[hash][0], files_new[hash][i]))
 
     return relocations

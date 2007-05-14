@@ -44,11 +44,11 @@ class Digraph(object):
 
     def edges(self):
         "return a list of edge descriptors"
-        l = []
+        list = []
         for u in self.__v:
             for v in self.__adj[u]:
-                l.append( (u,v) )
-        return l
+                list.append( (u,v) )
+        return list
 
     def from_list(self, el):
         "convert a list of edges (u,v) to graph"
