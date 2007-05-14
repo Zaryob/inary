@@ -34,6 +34,9 @@ import pisi.ui as ui
 class Error(pisi.Error):
     pass
 
+def __exec_string(s):
+    exec(s)
+
 def upgrade_pisi():
     """forces to reload pisi modules and runs rebuild-db if needed."""
     import pisi
@@ -62,6 +65,26 @@ def upgrade_pisi():
             if not module.startswith("pisi.ui") and not module.startswith("pisi.cli") and module.startswith("pisi."):
                 """removal from sys.modules forces reload via import"""
                 del(sys.modules[module])
+
+        global_keys = globals().keys()
+        for i in global_keys:
+            x = globals()[i]
+
+            try:
+                if x.__module__.startswith("pisi."):
+                    if sys.modules.has_key(x.__module__):
+                        reload(sys.modules[x.__module__])
+
+                    if hasattr(x, "__name__") and x.__name__ != i:
+#                        print "from %s import %s as %s" % (x.__module__, x.__name__, i)
+                        __exec_string("from %s import %s as %s" % (x.__module__, x.__name__, i))
+                    else:
+#                        print "from %s import %s" % (x.__module__, x.__name__)
+                        __exec_string("from %s import %s" % (x.__module__, x.__name__))
+            except AttributeError, e:
+                pass
+
+
 
     pisi.api.finalize()
     reload_pisi()
