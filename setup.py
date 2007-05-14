@@ -28,7 +28,7 @@ class Install(install):
         self.installi18n()
         self.installdoc()
         self.generateConfigFile()
-    
+
     def installi18n(self):
         for name in os.listdir('po'):
             if not name.endswith('.po'):
@@ -49,7 +49,7 @@ class Install(install):
             os.makedirs(destpath)
         os.chdir('doc')
         for pdf in glob.glob('*.pdf'):
-            print 'Installing', pdf          
+            print 'Installing', pdf
             shutil.copy(pdf, os.path.join(destpath, pdf))
         os.chdir('..')
 
@@ -58,8 +58,12 @@ class Install(install):
         destpath = os.path.join(self.root, "etc/pisi/")
         if not os.path.exists(destpath):
             os.makedirs(destpath)
-        pisiconf = open(os.path.join(destpath, "pisi.conf"), "w")
 
+        confFile = os.path.join(destpath, "pisi.conf")
+        if os.path.isfile(confFile): # Don't overwrite existing pisi.conf
+            return
+
+        pisiconf = open(confFile, "w")
         klasses = inspect.getmembers(pisi.configfile, inspect.isclass)
         defaults = [klass for klass in klasses if klass[0].endswith('Defaults')]
 
