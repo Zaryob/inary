@@ -278,6 +278,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         try:
             fn = re.compile('\s*([tas]_[a-zA-Z]+).*').findall
 
+            inspect.linecache.clearcache()
             lines = filter(fn, inspect.getsourcelines(cls)[0])
             decl_order = map(lambda x:x.split()[0], lines)
         except IOError:
