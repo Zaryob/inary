@@ -72,7 +72,7 @@ def multisplit(str, chars):
     """Split str with any of the chars."""
     l = [str]
     for c in chars:
-        l = concat(map(lambda x:x.split(c), l))
+        l = concat(map(lambda x:x.split(c)), l)
     return l
 
 def same(l):
@@ -265,12 +265,12 @@ def check_file(file, mode = os.F_OK):
     return True
 
 # FIXME: check_dir is not a good name considering it can also create the dir
-def check_dir(dir):
+def check_dir(d):
     """Make sure given directory path exists."""
     # FIXME: What is first strip doing there?
-    dir = dir.strip().rstrip("/")
-    if not os.access(dir, os.F_OK):
-        os.makedirs(dir)
+    d = d.strip().rstrip("/")
+    if not os.access(d, os.F_OK):
+        os.makedirs(d)
 
 def clean_dir(path):
     """Remove all content of a directory."""
@@ -393,8 +393,8 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
             continue
 
         #bug 397
-        for dir in dirs:
-            d = join_path(root, dir)
+        for directory in dirs:
+            d = join_path(root, directory)
             if os.path.islink(d) and not has_excluded_prefix(d):
                 yield (d, sha1_sum(os.readlink(d), True))
                 excludePrefix.append(remove_prefix(removePrefix, d) + "/")
@@ -455,7 +455,7 @@ def sha1_data(data):
         return m.hexdigest()
     except KeyboardInterrupt:
         raise
-    except Exception, e: #FIXME: what exception could we catch here, replace with that.
+    except Exception: #FIXME: what exception could we catch here, replace with that.
         raise Error(_("Cannot calculate SHA1 hash of given data"))
 
 def uncompress(patchFile, compressType="gz", targetDir=None):
@@ -607,10 +607,9 @@ def is_package_name(fn, package_name = None):
             # get version string, skip separator '-'
             verstr = fn[len(package_name) + 1:
                         len(fn)-len(ctx.const.package_suffix)]
-            import string
             for x in verstr.split('-'):
                 # weak rule: version components after '-' start with a digit
-                if x is '' or (not x[0] in string.digits):
+                if x == '' or (not x[0] in string.digits):
                     return False
             return True
     return False
