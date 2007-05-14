@@ -494,7 +494,7 @@ class Builder:
                                             targetDir=ctx.config.tmp_dir())
 
             ctx.ui.action(_("* Applying patch: %s") % patch.filename)
-            pisi.util.do_patch(self.srcDir, patchFile, level=patch.level, target=patch.target)
+            pisi.util.do_patch(self.srcDir, patchFile, level=patch.level)
         return True
 
     def generate_static_package_object(self):

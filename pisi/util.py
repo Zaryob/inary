@@ -479,19 +479,17 @@ def uncompress(patchFile, compressType="gz", targetDir=None):
     return filePath
 
 
-def do_patch(sourceDir, patchFile, level = 0, target = ''):
+def do_patch(sourceDir, patchFile, level = 0):
     """Apply given patch to the sourceDir."""
     cwd = os.getcwd()
     os.chdir(sourceDir)
 
     if level == None:
         level = 0
-    if target == None:
-        target = ''
 
     check_file(patchFile)
-    (ret, out, err) = run_batch("patch -p%d %s < %s" %
-                                    (level, target, patchFile))
+    (ret, out, err) = run_batch("patch -p%d < %s" %
+                                    (level, patchFile))
     if ret:
         if out is None and err is None:
             # Which means stderr and stdout directed so they are None

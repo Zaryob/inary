@@ -67,7 +67,6 @@ class Patch:
     s_Filename = [autoxml.String, autoxml.mandatory]
     a_compressionType = [autoxml.String, autoxml.optional]
     a_level = [autoxml.Integer, autoxml.optional]
-    a_target = [autoxml.String, autoxml.optional]
 
     #FIXME: what's the cleanest way to give a default value for reading level?
     #def decode_hook(self, node, errs, where):
@@ -80,8 +79,6 @@ class Patch:
             s += ' (' + self.compressionType + ')'
         if self.level:
             s += ' level:' + self.level
-        if self.target:
-            s += ' target:' + self.target
         return s
 
 
