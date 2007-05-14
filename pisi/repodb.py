@@ -97,9 +97,9 @@ class RepoDB(object):
         name = str(name)
         def proc(txn):
             self.d.delete("repo-" + name, txn)
-            list = self.d.get("order", txn)
-            list.remove(name)
-            self.d.put("order", list, txn)
+            l = self.d.get("order", txn)
+            l.remove(name)
+            self.d.put("order", l, txn)
             ctx.packagedb.remove_repo(name, txn=txn)
             ctx.sourcedb.remove_repo(name, txn=txn)
             ctx.componentdb.remove_repo(name, txn=txn)
