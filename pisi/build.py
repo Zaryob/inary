@@ -992,6 +992,9 @@ def build_until(pspec, state):
         __buildState_unpack(pb, last)
         return
 
+    # from now on build dependencies are needed
+    pb.check_build_dependencies()
+
     if state == "setup":
         __buildState_setupaction(pb, last)
         return
