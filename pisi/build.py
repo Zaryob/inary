@@ -305,7 +305,7 @@ class Builder:
                 %(ctx.config.archives_dir(), self.spec.source.archive.name))
 
     def unpack_source_archive(self):
-        ctx.ui.info(_("Unpacking archive..."), noln = True)
+        ctx.ui.info(_("Unpacking archive..."))
         self.sourceArchive.unpack()
         # apply the patches and prepare a source directory for build.
         if self.apply_patches():
