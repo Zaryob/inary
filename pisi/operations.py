@@ -435,8 +435,7 @@ def upgrade_pkg_names(A = []):
             continue
 
         if security_only:
-            history = ctx.packageDB.get_history(x)
-            updates = [i for i in history if pisi.version.Version(i.release) > pisi.version.Version(release)]
+            updates = [i for i in pkg.history if pisi.version.Version(i.release) > pisi.version.Version(release)]
             if not pisi.util.any(lambda i:i.type == 'security', updates):
                 continue
 
