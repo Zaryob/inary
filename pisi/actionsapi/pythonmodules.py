@@ -58,7 +58,7 @@ def install(parameters = ''):
 
     for doc in DDOCS:
         if can_access_file(doc):
-            pisitools.dodoc(doc)
+            dodoc(doc)
 
 def run(parameters = ''):
     '''executes parameters with python'''
