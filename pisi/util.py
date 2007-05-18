@@ -488,7 +488,7 @@ def do_patch(sourceDir, patchFile, level = 0):
         level = 0
 
     check_file(patchFile)
-    (ret, out, err) = run_batch("patch -p%d < %s" %
+    (ret, out, err) = run_batch("patch -p%d < \"%s\"" %
                                     (level, patchFile))
     if ret:
         if out is None and err is None:
