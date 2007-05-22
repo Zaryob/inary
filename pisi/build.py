@@ -13,7 +13,6 @@
 
 # python standard library
 import os
-import sys
 import glob
 import copy
 import stat
@@ -143,6 +142,9 @@ class Builder:
         self.specuri = specuri
         spec = pisi.specfile.SpecFile()
         spec.read(specuri, ctx.config.tmp_dir())
+#        spec.read(self.specuri, ctx.config.tmp_dir())
+#        diruri = os.path.dirname(self.specuri.get_uri())
+#        spec.read_translations(pisi.util.join_path(diruri, "translations.xml"))
         self.spec = spec
 
     # directory accessor functions
@@ -402,6 +404,9 @@ class Builder:
 
         return pisi.util.join_path(self.pkg_work_dir(), workdir)
 
+    def log_sandbox_violation(self, operation, path, canonical_path):
+        ctx.ui.error(_("Sandbox violation: %s (%s -> %s)") % (operation, path, canonical_path))
+
     def run_action_function(self, func, mandatory=False):
         """Calls the corresponding function in actions.py.
 
@@ -412,13 +417,32 @@ class Builder:
         curDir = os.getcwd()
         os.chdir(self.srcDir)
 
-
         if func in self.actionLocals:
-            self.actionLocals[func]()
+            if ctx.get_option('ignore_sandbox'):
+                self.actionLocals[func]()
+            else:
+                import catbox
+                # stupid autoconf family needs /usr/lib/conftest* and /usr/lib/cf* for some conftest,
+                # http://sources.gentoo.org/viewcvs.py/portage/trunk/sandbox/files/sandbox/sandbox.c also permits these
+                valid_dirs = [self.pkg_dir(), "/tmp/", "/var/tmp/", "/dev/tty", "/dev/pts/", "/dev/pty", "/dev/null", "/dev/zero", "/proc/", "/usr/lib/conftest", "/usr/lib/cf"]
+                if ctx.config.values.build.buildhelper == "ccache":
+                    valid_dirs.append("%s/.ccache" % os.environ["HOME"])
+                # every qt/KDE application check these
+                valid_dirs.append("%s/.qt/.qt_plugins_3.3rc.lock" % os.environ["HOME"])
+                valid_dirs.append("%s/.qt/.qtrc.lock" % os.environ["HOME"])
+                valid_dirs.append("%s/.qt/.qt_designerrc.lock" % os.environ["HOME"])
+                valid_dirs.append("/usr/qt/3/etc/settings/.qt_plugins_3.3rc.lock")
+                valid_dirs.append("/usr/qt/3/etc/settings/qt_plugins_3.3rc.tmp")
+                valid_dirs.append("/usr/qt/3/etc/settings/qt_plugins_3.3rc")
+                ret = catbox.run(self.actionLocals[func], valid_dirs, logger=self.log_sandbox_violation)
+                if ret.code == 1:
+                    raise RuntimeError
+                if ret.violations != []:
+                    ctx.ui.error(_("Sandbox violations!"))
         else:
             if mandatory:
-                Error, _("unable to call function from actions: %s") %func
-
+                raise Error(_("unable to call function from actions: %s") % func)
+        
         os.chdir(curDir)
         return True
 
@@ -496,6 +520,7 @@ class Builder:
             ctx.ui.action(_("* Applying patch: %s") % patch.filename)
             pisi.util.do_patch(self.srcDir, patchFile, level=patch.level)
         return True
+        return True
 
     def generate_static_package_object(self):
         ar_files = []
@@ -560,7 +585,7 @@ class Builder:
         except KeyError:
             pisi.util.strip_directory(install_dir)
 
-    def gen_metadata_xml(self, package, build_no=None):
+    def gen_metadata_xml(self, package):
         """Generate the metadata.xml file for build source.
 
         metadata.xml is composed of the information from specfile plus
@@ -663,15 +688,15 @@ class Builder:
                     ctx.ui.warning('Package file %s may be corrupt. Skipping.' % old_package_fn)
 
         for root, dirs, files in os.walk(ctx.config.compiled_packages_dir()):
-            for file in files:
-                locate_old_package(pisi.util.join_path(root,file))
+            for f in files:
+                locate_old_package(pisi.util.join_path(root,f))
 
         outdir=ctx.get_option('output_dir')
         if not outdir:
             outdir = '.'
-        for file in [pisi.util.join_path(outdir,entry) for entry in os.listdir(outdir)]:
-            if os.path.isfile(file):
-                locate_old_package(file)
+        for f in [pisi.util.join_path(outdir,entry) for entry in os.listdir(outdir)]:
+            if os.path.isfile(f):
+                locate_old_package(f)
 
         if not found:
             return (1, None)
