@@ -291,3 +291,6 @@ class ConfigurationFile(object):
         for sect in replacement:
             if sect is not None:
                 fp.write(sect.getvalue())
+
+        fp.close()
+        
