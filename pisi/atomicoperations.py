@@ -15,15 +15,12 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import sys
 import os
 import bsddb3.db as db
 import shutil
 
 import pisi
 import pisi.context as ctx
-import pisi.packagedb as packagedb
-import pisi.dependency as dependency
 import pisi.conflict
 import pisi.util as util
 import pisi.metadata
@@ -149,7 +146,7 @@ class Install(AtomicOperation):
         # check comar
         if self.metadata.package.providesComar and ctx.comar:
             import pisi.comariface as comariface
-            com = comariface.get_comar()
+            comariface.get_comar()
 
     def check_relations(self):
         # check dependencies
@@ -165,10 +162,10 @@ class Install(AtomicOperation):
 
         # check file conflicts
         file_conflicts = []
-        for file in self.files.list:
-            if ctx.filesdb.has_file(file.path):
-                pkg, existing_file = ctx.filesdb.get_file(file.path)
-                dst = pisi.util.join_path(ctx.config.dest_dir(), file.path)
+        for f in self.files.list:
+            if ctx.filesdb.has_file(f.path):
+                pkg, existing_file = ctx.filesdb.get_file(f.path)
+                dst = pisi.util.join_path(ctx.config.dest_dir(), f.path)
                 if pkg != self.pkginfo.name and not os.path.isdir(dst):
                     file_conflicts.append( (pkg, existing_file) )
         if file_conflicts:
@@ -278,8 +275,8 @@ class Install(AtomicOperation):
             fpath = pisi.util.join_path(ctx.config.dest_dir(), config.path)
             if os.path.exists(fpath) and not os.path.isdir(fpath):
                 if os.path.islink(fpath):
-                    file = os.readlink(fpath)
-                    if os.path.exists(file) and pisi.util.sha1_data(file) != config.hash:
+                    f = os.readlink(fpath)
+                    if os.path.exists(f) and pisi.util.sha1_data(f) != config.hash:
                         changed = True
                 else:
                     if pisi.util.sha1_file(fpath) != config.hash:
@@ -358,13 +355,13 @@ class Install(AtomicOperation):
             config_overlaps = newconfig & oldconfig
             if config_overlaps:
                 files = filter(lambda x: x.path in config_overlaps, old)
-                for file in files:
-                    check_config_changed(file)
+                for f in files:
+                    check_config_changed(f)
         else:
-            for file in self.files.list:
-                if file.type == 'config':
+            for f in self.files.list:
+                if f.type == 'config':
                     # there may be left over config files
-                    check_config_changed(file)
+                    check_config_changed(f)
 
         if self.package_fname.endswith(ctx.const.delta_package_suffix):
             relocate_files()
@@ -511,7 +508,7 @@ class Remove(AtomicOperation):
             try:
                 if pisi.util.sha1_file(fpath) == fileinfo.hash:
                     os.unlink(fpath)
-            except pisi.util.FileError, e:
+            except pisi.util.FileError:
                 pass
         else:
             if os.path.isfile(fpath) or os.path.islink(fpath):
@@ -543,6 +540,7 @@ class Remove(AtomicOperation):
     def remove_db(self, txn):
         ctx.installdb.remove(self.package_name, txn)
         ctx.filesdb.remove_files(self.files, txn)
+        import pisi.packagedb
         pisi.packagedb.remove_tracking_package(self.package_name, txn)
 
 
