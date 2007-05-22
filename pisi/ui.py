@@ -12,11 +12,6 @@
 # generic user interface
 #
 
-import sys
-
-import pisi
-import pisi.context as ctx
-
 (installed, upgraded, removed, installing, removing, configuring, configured, extracting,
  downloading, packagestogo, updatingrepo, cached)  = range(12)
 
