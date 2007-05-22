@@ -265,12 +265,12 @@ def check_file(file, mode = os.F_OK):
     return True
 
 # FIXME: check_dir is not a good name considering it can also create the dir
-def check_dir(dir):
+def check_dir(d):
     """Make sure given directory path exists."""
     # FIXME: What is first strip doing there?
-    dir = dir.strip().rstrip("/")
-    if not os.access(dir, os.F_OK):
-        os.makedirs(dir)
+    d = d.strip().rstrip("/")
+    if not os.access(d, os.F_OK):
+        os.makedirs(d)
 
 def clean_dir(path):
     """Remove all content of a directory."""
@@ -393,8 +393,8 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
             continue
 
         #bug 397
-        for dir in dirs:
-            d = join_path(root, dir)
+        for directory in dirs:
+            d = join_path(root, directory)
             if os.path.islink(d) and not has_excluded_prefix(d):
                 yield (d, sha1_sum(os.readlink(d), True))
                 excludePrefix.append(remove_prefix(removePrefix, d) + "/")
@@ -455,7 +455,7 @@ def sha1_data(data):
         return m.hexdigest()
     except KeyboardInterrupt:
         raise
-    except Exception, e: #FIXME: what exception could we catch here, replace with that.
+    except Exception: #FIXME: what exception could we catch here, replace with that.
         raise Error(_("Cannot calculate SHA1 hash of given data"))
 
 def uncompress(patchFile, compressType="gz", targetDir=None):
@@ -488,8 +488,20 @@ def do_patch(sourceDir, patchFile, level = 0):
         level = 0
 
     check_file(patchFile)
-    (ret, out, err) = run_batch("patch -p%d < \"%s\"" %
-                                    (level, patchFile))
+
+    if ctx.get_option('use_quilt'):
+        patchesDir = join_path(sourceDir, ctx.const.quilt_dir_suffix)
+        # Make sure sourceDir/patches directory exists and if not create one!
+        if not os.path.exists(patchesDir):
+            os.makedirs(patchesDir)
+        # Import original patch into quilt tree
+        (ret, out, err) = run_batch('quilt import -p %d -n %s \"%s\"' % (level, os.path.basename(patchFile), patchFile))
+        # run quilt push to apply original patch into tree
+        (ret, out, err) = run_batch('quilt push')
+    else:
+        # run GNU patch to apply original patch into tree
+        (ret, out, err) = run_batch("patch -p%d < \"%s\"" % (level, patchFile))
+
     if ret:
         if out is None and err is None:
             # Which means stderr and stdout directed so they are None
@@ -605,23 +617,12 @@ def is_package_name(fn, package_name = None):
             # get version string, skip separator '-'
             verstr = fn[len(package_name) + 1:
                         len(fn)-len(ctx.const.package_suffix)]
-            import string
             for x in verstr.split('-'):
                 # weak rule: version components after '-' start with a digit
-                if x is '' or (not x[0] in string.digits):
+                if x == '' or (not x[0] in string.digits):
                     return False
             return True
     return False
-
-def env_update():
-    import pisi.environment
-    ctx.ui.info(_('Updating environment...'))
-
-    env_dir = join_path(ctx.config.dest_dir(), "/etc/env.d")
-    if not os.path.exists(env_dir):
-        os.makedirs(env_dir, 0755)
-
-    pisi.environment.update_environment(ctx.config.dest_dir())
 
 def parse_package_name(package_name):
     """Separate package name and version string.
