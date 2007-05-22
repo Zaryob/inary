@@ -29,6 +29,7 @@ import pisi.uri
 import pisi.ui
 import pisi.version
 import pisi.delta
+import pisi.packagedb
 
 class Error(pisi.Error):
     pass
@@ -540,7 +541,7 @@ class Remove(AtomicOperation):
     def remove_db(self, txn):
         ctx.installdb.remove(self.package_name, txn)
         ctx.filesdb.remove_files(self.files, txn)
-        import pisi.packagedb
+        # FIXME: something goes wrong here, if we use ctx operations ends up with segmentation fault!
         pisi.packagedb.remove_tracking_package(self.package_name, txn)
 
 
