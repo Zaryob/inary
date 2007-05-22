@@ -13,10 +13,6 @@
 # installation database
 #
 
-# System
-import os
-import fcntl
-
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
@@ -110,20 +106,20 @@ class InstallDB:
 
     def list_installed(self, txn = None):
         def proc(txn):
-            list = []
+            l = []
             for (pkg, info) in self.d.items(txn):
                 if info.state=='i' or info.state=='ip':
-                    list.append(pkg)
-            return list
+                    l.append(pkg)
+            return l
         return self.d.txn_proc(proc, txn)
 
     def list_pending(self):
         # warning: reads the entire db
-        dict = {}
+        d = {}
         for (pkg, x) in self.dp.items():
             pkginfo = self.d[pkg]
-            dict[pkg] = pkginfo
-        return dict
+            d[pkg] = pkginfo
+        return d
 
     def get_info(self, pkg):
         pkg = str(pkg)
