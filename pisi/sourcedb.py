@@ -20,16 +20,11 @@ store a set of repositories in which the source appears.
 the actual guy to take is determined from the repo order.
 """
 
-import os
-import fcntl
-
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import pisi.util as util
 import pisi.context as ctx
-import pisi.lockeddbshelve as shelve
 import pisi.repodb
 import pisi.itembyrepodb
 
@@ -55,13 +50,13 @@ class SourceDB(object):
     def get_spec(self, name, repo=None, txn = None):
         try:
             return self.d.get_item(name, repo, txn)
-        except pisi.itembyrepodb.NotfoundError, e:
+        except pisi.itembyrepodb.NotfoundError:
             raise NotfoundError(_("Source package %s not found") % name)
 
     def get_spec_repo(self, name, repo=None, txn = None):
         try:
             return self.d.get_item_repo(name, repo, txn)
-        except pisi.itembyrepodb.NotfoundError, e:
+        except pisi.itembyrepodb.NotfoundError:
             raise NotfoundError(_("Source package %s not found") % name)
 
     def pkgtosrc(self, name, txn = None):
