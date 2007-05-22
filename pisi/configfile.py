@@ -67,6 +67,8 @@ class GeneralDefaults:
     http_proxy = (os.getenv("http_proxy") or os.getenv("HTTP_PROXY")) or None
     https_proxy = (os.getenv("https_proxy") or os.getenv("HTTPS_PROXY")) or None
     ftp_proxy = (os.getenv("ftp_proxy") or os.getenv("FTP_PROXY")) or None
+    package_cache = True
+    package_cache_limit = 0
 
 class BuildDefaults:
     """Default values for [build] section"""

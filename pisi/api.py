@@ -645,3 +645,73 @@ def resurrect_package(*args, **kw):
     return pisi.atomicoperations.resurrect_package(*args, **kw)
 
 ########################################################################
+
+## Deletes the cached pisi packages to keep the package cache dir within cache limits
+#  @param all When set all the cached packages will be deleted
+def clearCache(all=False):
+
+    import glob
+    from sets import Set as set
+
+    def getPackageLists(pkgList):
+        latest = {}
+        for f in pkgList:
+            try:
+                name, version = util.parse_package_name(f)
+                if latest.has_key(name):
+                    if Version(latest[name]) < Version(version):
+                        latest[name] = version
+                else:
+                    if version:
+                        latest[name] = version
+            except:
+                pass
+
+        latestVersions = []
+        for pkg in latest:
+            latestVersions.append("%s-%s" % (pkg, latest[pkg]))
+
+        oldVersions = list(set(pkgList) - set(latestVersions))
+        return oldVersions, latestVersions
+
+    def getRemoveOrder(cacheDir, pkgList):
+        sizes = {}
+        for pkg in pkgList:
+            sizes[pkg] = os.stat(os.path.join(cacheDir, pkg) + ".pisi").st_size
+
+        # sort dictionary by value from PEP-265
+        from operator import itemgetter
+        return sorted(sizes.iteritems(), key=itemgetter(1), reverse=False)
+
+    def removeOrderByLimit(cacheDir, order, limit):
+        totalSize = 0
+        for pkg, size in order:
+            totalSize += size
+            if totalSize >= limit:
+                try:
+                    os.remove(os.path.join(cacheDir, pkg) + ".pisi")
+                except exceptions.OSError:
+                    pass
+
+    def removeAll(cacheDir):
+        cached = glob.glob("%s/*.pisi" % cacheDir) + glob.glob("%s/*.part" % cacheDir)
+        for pkg in cached:
+            try:
+                os.remove(pkg)
+            except exceptions.OSError:
+                pass
+
+    cacheDir = ctx.config.packages_dir()
+
+    pkgList = map(lambda x: os.path.basename(x).split(".pisi")[0], glob.glob("%s/*.pisi" % cacheDir))
+    if not all:
+        # Cache limits from pisi.conf
+        limit = int(ctx.config.values.general.package_cache_limit) * 1024 * 1024 # is this safe?
+        if not limit:
+            return
+
+        old, latest = getPackageLists(pkgList)
+        order = getRemoveOrder(cacheDir, latest) + getRemoveOrder(cacheDir, old)
+        removeOrderByLimit(cacheDir, order, limit)
+    else:
+        removeAll(cacheDir)
