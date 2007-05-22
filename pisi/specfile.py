@@ -22,6 +22,7 @@ _ = __trans.ugettext
 
 # standard python modules
 import os.path
+import piksemel
 
 # pisi modules
 import pisi.pxml.xmlfile as xmlfile
@@ -239,3 +240,21 @@ class SpecFile(xmlfile.XmlFile):
         #http://liste.pardus.org.tr/gelistirici/2006-September/002332.html
         self.source.description = autoxml.LocalText("Description")
         self.source.description["en"] = self.source.summary["en"]
+
+    def _set_i18n(self, tag, inst):
+        for summary in tag.tags("Summary"):
+            inst.summary[summary.getAttribute("xml:lang")] = summary.firstChild().data()
+        for desc in tag.tags("Description"):
+            inst.description[desc.getAttribute("xml:lang")] = desc.firstChild().data()
+
+    def read_translations(self, path):
+        if not os.path.exists(path):
+            return
+        doc = piksemel.parse(path)
+
+        self._set_i18n(doc.getTag("Source"), self.source)
+        for pak in doc.tags("Package"):
+            for inst in self.packages:
+                if inst.name == pak.getTagData("Name"):
+                    break
+            self._set_i18n(pak, inst)
