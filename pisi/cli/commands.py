@@ -454,7 +454,7 @@ to be downloaded from a repository containing sources.
         group.add_option("--use-quilt", action="store_true", default=False,
                                help=_("Use quilt patch management system instead of GNU patch"))
         group.add_option("--ignore-sandbox", action="store_true", default=False,
-                               help=_("Constrain build process inside the build folder"))
+                               help=_("Do not constrain build process inside the build folder"))
 
     def add_steps_options(self):
         group = OptionGroup(self.parser, _("build steps"))
