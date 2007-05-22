@@ -17,7 +17,7 @@ __version__ = "1.1_20070305"
 __dbversion__ = "1.1_20070305"
 __filesdbversion__ = "1.0.5"         # yes, this is the real bottleneck
 
-__all__ = [ 'api', 'config', 'packagedb', 'installdb', 'search' ]
+__all__ = [ 'api', 'config', 'configfile', 'packagedb', 'installdb', 'search' ]
 
 # FIXME: Exception shadows builtin Exception. This is no good.
 class Exception(Exception):
