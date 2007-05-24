@@ -170,7 +170,10 @@ class ConfigurationFile(object):
     # sourceforge tracker id: #1410680, modified a little to make it turn into a function.
 
     def get(self, section, option):
-        return self.parser.get(section, option)
+        try:
+            return self.parser.get(section, option)
+        except ConfigParser.NoOptionError:
+            return None
 
     def set(self, section, option, value):
         self.parser.set(section, option, value)
