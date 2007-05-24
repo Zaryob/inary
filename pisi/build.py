@@ -128,6 +128,8 @@ class Builder:
         else:
             self.specdir = os.path.dirname(self.specuri.get_uri())
 
+        self.read_translations(self.specdir)
+
         self.sourceArchive = pisi.sourcearchive.SourceArchive(self.spec, self.pkg_work_dir())
 
         self.set_environment_vars()
@@ -141,11 +143,11 @@ class Builder:
             specuri = pisi.uri.URI(os.path.realpath(specuri.get_uri()))  # FIXME: doesn't work for file://
         self.specuri = specuri
         spec = pisi.specfile.SpecFile()
-        spec.read(specuri, ctx.config.tmp_dir())
-#        spec.read(self.specuri, ctx.config.tmp_dir())
-#        diruri = os.path.dirname(self.specuri.get_uri())
-#        spec.read_translations(pisi.util.join_path(diruri, "translations.xml"))
+        spec.read(self.specuri, ctx.config.tmp_dir())
         self.spec = spec
+
+    def read_translations(self, specdir):
+        self.spec.read_translations(pisi.util.join_path(specdir, ctx.const.translations_file))
 
     # directory accessor functions
 
@@ -239,6 +241,7 @@ class Builder:
         #self.location = os.path.dirname(self.url.uri)
 
         self.fetch_actionsfile()
+        self.fetch_translationsfile()
         self.fetch_patches()
         self.fetch_comarfiles()
         self.fetch_additionalFiles()
@@ -248,6 +251,10 @@ class Builder:
     def fetch_actionsfile(self):
         actionsuri = pisi.util.join_path(self.specdiruri, ctx.const.actions_file)
         self.download(actionsuri, self.destdir)
+
+    def fetch_translationsfile(self):
+        translationsuri = pisi.util.join_path(self.specdiruri, ctx.const.translations_file)
+        self.download(translationsuri, self.destdir)
 
     def fetch_patches(self):
         spec = self.spec
