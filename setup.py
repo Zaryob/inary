@@ -76,7 +76,7 @@ class Install(install):
                                and not m[0].endswith('__')]
 
             for member in section_members:
-                pisiconf.write("# %s = %s\n" % (member[0], member[1]))
+                pisiconf.write("%s = %s\n" % (member[0], member[1]))
 
             pisiconf.write('\n')
 
