@@ -493,7 +493,7 @@ def upgrade_pkg_names(A = []):
 
     paths = []
     for x in order:
-        ctx.ui.info(_("Downloading %d / %d") % (order.index(x)+1, len(order)))
+        ctx.ui.info(util.colorize(_("Downloading %d / %d") % (order.index(x)+1, len(order)), "yellow"))
         install_op = atomicoperations.Install.from_name(x)
         paths.append(install_op.package_fname)
 
@@ -506,7 +506,7 @@ def upgrade_pkg_names(A = []):
             remove_conflicting_packages(conflicts)
 
     for path in paths:
-        ctx.ui.info(_("Installing %d / %d") % (paths.index(path)+1, len(paths)))
+        ctx.ui.info(util.colorize(_("Installing %d / %d") % (paths.index(path)+1, len(paths)), "yellow"))
         install_op = atomicoperations.Install(path, ignore_file_conflicts = True)
         install_op.install(True)
 
