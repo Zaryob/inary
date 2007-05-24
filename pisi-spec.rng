@@ -32,9 +32,9 @@
             <optional>
                 <ref name="Icon"/>
             </optional>
-            <oneOrMore>
+            <zeroOrMore>
                 <ref name="IsA"/>
-            </oneOrMore>
+            </zeroOrMore>
             <optional>
                 <ref name="PartOf"/>
             </optional>
