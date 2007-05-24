@@ -67,7 +67,7 @@ class GeneralDefaults:
     http_proxy = os.getenv("HTTP_PROXY") or None
     https_proxy = os.getenv("HTTPS_PROXY") or None
     ftp_proxy = os.getenv("FTP_PROXY") or None
-    package_cache = True
+    package_cache = False
     package_cache_limit = 0
 
 class BuildDefaults:
