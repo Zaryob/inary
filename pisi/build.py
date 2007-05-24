@@ -254,11 +254,11 @@ class Builder:
 
     def fetch_translationsfile(self):
         translationsuri = pisi.util.join_path(self.specdiruri, ctx.const.translations_file)
-        # FIXME: This can be removed after 2007 repository received all translations.xml files from devel / caglar
         try:
             self.download(translationsuri, self.destdir)
         except pisi.fetcher.FetchError:
-            ctx.ui.error(_("This package has no translations.xml, please correct that one in repository!"))
+            # translations.xml is not mandatory for PiSi
+            pass
 
     def fetch_patches(self):
         spec = self.spec
