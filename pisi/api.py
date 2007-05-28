@@ -73,8 +73,12 @@ def init(database = True, write = True,
     else:
         ctx.ui = ui
 
-    if os.access('/var/log', os.W_OK):
-        handler = logging.handlers.RotatingFileHandler('/var/log/pisi.log')
+    destdir = ""
+    if ctx.get_option('destdir'):
+        destdir = ctx.get_option('destdir')
+
+    if os.access('%s/var/log' % destdir, os.W_OK):
+        handler = logging.handlers.RotatingFileHandler('%s/var/log/pisi.log' % destdir)
         #handler.setLevel(logging.DEBUG)
         formatter = logging.Formatter('%(asctime)-12s: %(levelname)-8s %(message)s')
         handler.setFormatter(formatter)
