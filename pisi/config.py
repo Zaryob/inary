@@ -86,6 +86,9 @@ class Config(object):
         pisi.util.check_dir(dir)
         return dir
 
+    def log_dir(self):
+        return self.subdir(self.values.dirs.log_dir)
+
     def lib_dir(self):
         return self.subdir(self.values.dirs.lib_dir)
 

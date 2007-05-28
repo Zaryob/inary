@@ -73,12 +73,12 @@ def init(database = True, write = True,
     else:
         ctx.ui = ui
 
-    destdir = ""
-    if ctx.get_option('destdir'):
-        destdir = ctx.get_option('destdir')
+    # FIXME: something is wrong here... see __init__.py also. Why do we import pisi.api in __init__.py
+    import pisi.config
+    ctx.config = pisi.config.Config(options)
 
-    if os.access('%s/var/log' % destdir, os.W_OK):
-        handler = logging.handlers.RotatingFileHandler('%s/var/log/pisi.log' % destdir)
+    if os.access('%s/var/log' % ctx.config.log_dir(), os.W_OK):
+        handler = logging.handlers.RotatingFileHandler('%s/var/log/pisi.log' % ctx.config.log_dir())
         #handler.setLevel(logging.DEBUG)
         formatter = logging.Formatter('%(asctime)-12s: %(levelname)-8s %(message)s')
         handler.setFormatter(formatter)
@@ -95,10 +95,6 @@ def init(database = True, write = True,
         ctx.stdout = stdout
     if stderr:
         ctx.stderr = stderr
-
-    # FIXME: something is wrong here... see __init__.py also. Why do we import pisi.api in __init__.py
-    import pisi.config
-    ctx.config = pisi.config.Config(options)
 
     if signal_handling:
         ctx.sig = pisi.signalhandler.SignalHandler()

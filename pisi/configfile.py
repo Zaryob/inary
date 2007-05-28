@@ -86,6 +86,7 @@ class BuildDefaults:
 class DirectoriesDefaults:
     "Default values for [directories] section"
     lib_dir = "/var/lib/pisi"
+    log_dir = "/var/log/pisi"
     db_dir = "/var/db/pisi"
     archives_dir = "/var/cache/pisi/archives"
     packages_dir = "/var/cache/pisi/packages"
