@@ -537,9 +537,10 @@ def plan_upgrade(A, ignore_build = False):
             pkg = pisi.api.get_repo_package(x)
             for dep in pkg.runtimeDependencies():
                 # add packages that can be upgraded
-                if dependency.repo_satisfies_dep(dep) or ctx.installdb.is_installed(dep.package):
-                    if dependency.installed_satisfies_dep(dep):
-                        continue
+                if ctx.installdb.is_installed(dep.package) and dependency.installed_satisfies_dep(dep):
+                    continue
+                
+                if dependency.repo_satisfies_dep(dep):
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
