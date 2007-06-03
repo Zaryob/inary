@@ -492,7 +492,7 @@ def do_patch(sourceDir, patchFile, level = 0):
         if not os.path.exists(patchesDir):
             os.makedirs(patchesDir)
         # Import original patch into quilt tree
-        (ret, out, err) = run_batch('quilt import -p %d -n %s \"%s\"' % (level, os.path.basename(patchFile), patchFile))
+        (ret, out, err) = run_batch('quilt import -p %d -P %s \"%s\"' % (level, os.path.basename(patchFile), patchFile))
         # run quilt push to apply original patch into tree
         (ret, out, err) = run_batch('quilt push')
     else:
