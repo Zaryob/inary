@@ -245,7 +245,7 @@ def calculate_conflicts(order, packagedb):
     return (C, D, pkg_conflicts)
 
 def remove_conflicting_packages(conflicts):
-    if not remove(conflicts, ignore_dep=True, ignore_safety=True):
+    if remove(conflicts, ignore_dep=True, ignore_safety=True):
         raise Error(_("Conflicts remain"))
 
 def check_conflicts(order, packagedb):
