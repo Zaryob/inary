@@ -17,57 +17,11 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi.context as ctx
-#import pisi.packagedb as packagedb
-import pisi.version
-import pisi.pxml.autoxml as autoxml
-import pisi.itembyrepodb
+import pisi.relation
 
-class Dependency:
-
-    __metaclass__ = autoxml.autoxml
-
-    s_Package = [autoxml.String, autoxml.mandatory]
-    a_version = [autoxml.String, autoxml.optional]
-    a_versionFrom = [autoxml.String, autoxml.optional]
-    a_versionTo = [autoxml.String, autoxml.optional]
-    a_release = [autoxml.String, autoxml.optional]
-    a_releaseFrom = [autoxml.String, autoxml.optional]
-    a_releaseTo = [autoxml.String, autoxml.optional]
-
-    def __str__(self):
-        s = self.package
-        if self.versionFrom:
-            s += _(" version >= ") + self.versionFrom
-        if self.versionTo:
-            s += _(" version <= ") + self.versionTo
-        if self.version:
-            s += _(" version ") + self.version
-        if self.releaseFrom:
-            s += _(" release >= ") + self.releaseFrom
-        if self.releaseTo:
-            s += _(" release <= ") + self.releaseTo
-        if self.release:
-            s += _(" release ") + self.release
-        return s
-
-    def satisfies(self, pkg_name, version, release):
-        """determine if a package ver. satisfies given dependency spec"""
-        ret = True
-        v = pisi.version.Version(version)
-        if self.version:
-            ret &= v == pisi.version.Version(self.version)
-        if self.versionFrom:
-            ret &= v >= pisi.version.Version(self.versionFrom)
-        if self.versionTo:
-            ret &= v <= pisi.version.Version(self.versionTo)
-        r = pisi.version.Version(release)
-        if self.release:
-            ret &= r == pisi.version.Version(self.release)
-        if self.releaseFrom:
-            ret &= r >= pisi.version.Version(self.releaseFrom)
-        if self.releaseTo:
-            ret &= r <= pisi.version.Version(self.releaseTo)
-        return ret
+""" Dependency relation """
+class Dependency(pisi.relation.Relation):
+    pass
 
 def dict_satisfies_dep(dict, depinfo):
     """determine if a package in a dictionary satisfies given dependency spec"""
@@ -77,18 +31,12 @@ def dict_satisfies_dep(dict, depinfo):
     else:
         pkg = dict[pkg_name]
         (version, release) = (pkg.version, pkg.release)
-        return depinfo.satisfies(pkg_name, version, release)
+        return depinfo.satisfies_relation(pkg_name, version, release)
 
 def installed_satisfies_dep(depinfo):
     """determine if a package in *repository* satisfies given
 dependency spec"""
-    pkg_name = depinfo.package
-    if not ctx.installdb.is_installed(pkg_name):
-        return False
-    else:
-        pkg = ctx.packagedb.get_package(pkg_name, pisi.itembyrepodb.installed)
-        (version, release) = (pkg.version, pkg.release)
-        return depinfo.satisfies(pkg_name, version, release)
+    return pisi.relation.installed_package_satisfies(depinfo)
 
 def repo_satisfies_dep(depinfo):
     """determine if a package in *repository* satisfies given
@@ -99,7 +47,7 @@ dependency spec"""
     else:
         pkg = ctx.packagedb.get_package(pkg_name)
         (version, release) = (pkg.version, pkg.release)
-        return depinfo.satisfies(pkg_name, version, release)
+        return depinfo.satisfies_relation(pkg_name, version, release)
 
 def satisfies_dependencies(pkg, deps, sat = installed_satisfies_dep):
     for dep in deps:

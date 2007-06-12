@@ -40,14 +40,17 @@ class PackageDB(object):
     def __init__(self):
         self.d = pisi.itembyrepodb.ItemByRepoDB('package')
         self.dr = pisi.itembyrepodb.ItemByRepoDB('revdep')
+        self.drp = pisi.itembyrepodb.ItemByRepoDB('replacement')
 
     def close(self):
         self.d.close()
         self.dr.close()
+        self.drp.close()
 
     def destroy(self):
         self.d.destroy()
         self.dr.destroy()
+        self.drp.destroy()
 
     def has_package(self, name, repo=None, txn = None):
         return self.d.has_key(name, repo, txn=txn)
@@ -77,6 +80,25 @@ class PackageDB(object):
         else:
             return []
 
+    # If an installed package is replaced by any package in repository, mark this 
+    # package for replacement in a later upgrade operation.
+    # @pkg: The package that replaces other packages
+    def mark_replaced_packages(self, pkg, repo, txn=None):
+        for repinfo in pkg.replaces:
+            # test if the package from this repo replaces an installed package
+            if pisi.replace.installed_package_replaced(repinfo):
+                replacedBy = pkg.name
+                self.drp.add_item(repinfo.package, replacedBy, repo, txn)
+
+    def has_replacement(self, name, repo=None, txn=None):
+        return self.drp.has_key(name, repo, txn=txn)
+
+    def get_replacement(self, name, repo=None, txn=None):
+        try:
+            return self.drp.get_item(name, repo, txn=txn)
+        except pisi.itembyrepodb.NotfoundError:
+            raise Error(_('Package %s has no replacement found in repository') % name)
+
     def list_packages(self, repo=None):
         return self.d.list(repo)
 
@@ -94,6 +116,10 @@ class PackageDB(object):
                     self.dr.add_item(dep_name, revdep, repo, txn)
                 else:
                     self.dr.add_item(dep_name, [ (name, dep) ], repo, txn)
+
+            if package_info.replaces:
+                mark_replaced_packages(self, package_info, repo, txn=None)
+            
             # add component
             ctx.componentdb.add_package(package_info.partOf, package_info.name, repo, txn)
 
@@ -122,6 +148,10 @@ class PackageDB(object):
                         # from packagedb but its revdepdb part may still exist, until
                         # all the list members are removed.
                         self.dr.remove_item(dep_name, repo, txn=txn)
+
+            # remove replace marker info for this package
+            if self.drp.has_key(name, repo, txn):
+                self.drp.remove_item(name, repo, txn=txn)
 
             # remove from component
             ctx.componentdb.remove_package(package_info.partOf, package_info.name, repo, txn)

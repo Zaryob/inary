@@ -29,6 +29,7 @@ import pisi.pxml.xmlfile as xmlfile
 import pisi.pxml.autoxml as autoxml
 import pisi.context as ctx
 import pisi.dependency
+import pisi.replace
 import pisi.conflict
 import pisi.component as component
 import pisi.util as util
@@ -171,8 +172,8 @@ class Package:
     t_ComponentDependencies = [ [autoxml.String], autoxml.optional, "RuntimeDependencies/Component"]
     t_Files = [ [Path], autoxml.optional]
     t_Conflicts = [ [pisi.conflict.Conflict], autoxml.optional, "Conflicts/Package"]
+    t_Replaces = [ [pisi.replace.Replace], autoxml.optional, "Replaces/Package"]
     t_ProvidesComar = [ [ComarProvide], autoxml.optional, "Provides/COMAR"]
-    #t_RequiresComar = [ [autoxml.String], autoxml.mandatory, "Requires/COMAR"]
     t_AdditionalFiles = [ [AdditionalFile], autoxml.optional]
     t_History = [ [Update], autoxml.optional]
 

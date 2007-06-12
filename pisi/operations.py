@@ -280,8 +280,12 @@ def is_upgradable(name, ignore_build = False):
         pkg = ctx.packagedb.get_package(name)
     except KeyboardInterrupt:
         raise
-    except Exception: #FIXME: what exception could we catch here, replace with that.
+    except pisi.itembyrepodb.NotfoundError:
+        # it may be a replaced package
+        if ctx.packagedb.has_replacement(name):
+            return True
         return False
+        
     if ignore_build or (not build) or (not pkg.build):
         return pisi.version.Version(release) < pisi.version.Version(pkg.release)
     else:
@@ -416,6 +420,8 @@ def upgrade_pkg_names(A = []):
         # if A is empty, then upgrade all packages
         A = ctx.installdb.list_installed()
 
+    replaced = []
+
     A_0 = A = set(A)
 
     Ap = []
@@ -429,6 +435,10 @@ def upgrade_pkg_names(A = []):
         (version, release, build) = ctx.installdb.get_version(x)
         if ctx.packagedb.has_package(x):
             pkg = ctx.packagedb.get_package(x)
+        elif ctx.packagedb.has_replacement(x):
+            Ap.append(ctx.packagedb.get_replacement(x))
+            replaced.append(x)
+            continue
         else:
             ctx.ui.info(_('Package %s is not available in repositories.') % x, True)
             continue
@@ -505,6 +515,10 @@ def upgrade_pkg_names(A = []):
         if conflicts:
             remove_conflicting_packages(conflicts)
 
+    # remove replaced or obsoleted packages
+    if replaced:
+        remove(replaced, ignore_dep=True, ignore_safety=True)
+    
     for path in paths:
         ctx.ui.info(util.colorize(_("Installing %d / %d") % (paths.index(path)+1, len(paths)), "yellow"))
         install_op = atomicoperations.Install(path, ignore_file_conflicts = True)
@@ -545,6 +559,7 @@ def plan_upgrade(A):
                 else:
                     ctx.ui.error(_('Dependency %s of %s cannot be satisfied') % (dep, x))
                     raise Error(_("Upgrade is not possible."))
+                
         B = Bp
     # now, search reverse dependencies to see if anything
     # should be upgraded
