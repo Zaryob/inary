@@ -99,15 +99,6 @@ suck anyway -->
 <!ATTLIST Package release CDATA #IMPLIED>
 
 <!ELEMENT Replaces (Package)+>
-<!-- we have a problem here, this Package tag only contains a package name
-while dtd treats this as another Package section, who said dtd doesnt
-suck anyway -->
-<!ATTLIST Package versionFrom CDATA #IMPLIED>
-<!ATTLIST Package versionTo CDATA #IMPLIED>
-<!ATTLIST Package version CDATA #IMPLIED>
-<!ATTLIST Package releaseFrom CDATA #IMPLIED>
-<!ATTLIST Package releaseTo CDATA #IMPLIED>
-<!ATTLIST Package release CDATA #IMPLIED>
 
 <!ELEMENT AdditionalFiles (AdditionalFile+)>
 <!ELEMENT AdditionalFile (#PCDATA)>
