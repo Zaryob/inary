@@ -356,6 +356,22 @@
         </element>
     </define>
 
+    <!-- Replaces -->
+    <define name="Replaces">
+        <element name="Replaces">
+            <oneOrMore>
+                <ref name="Replaces.Package"/>
+            </oneOrMore>
+        </element>
+    </define>
+
+    <define name="Replaces.Package">
+        <element name="Package">
+            <ref name="attlist.VersionReleaseToFrom"/>
+            <text />
+        </element>
+    </define>
+
     <!-- AdditionalFiles -->
     <define name="AdditionalFiles">
         <element name="AdditionalFiles">
