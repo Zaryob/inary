@@ -110,6 +110,7 @@ class MetaData(xmlfile.XmlFile):
         # FIXME: no need to copy full history with comments
         self.package.history = history
         self.package.conflicts = pkg.conflicts
+        self.package.replaces = pkg.replaces
         self.package.providesComar = pkg.providesComar
         #self.package.requiresComar = pkg.requiresComar
         self.package.additionalFiles = pkg.additionalFiles
