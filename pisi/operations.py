@@ -280,7 +280,7 @@ def is_upgradable(name, ignore_build = False):
         pkg = ctx.packagedb.get_package(name)
     except KeyboardInterrupt:
         raise
-    except pisi.itembyrepodb.NotfoundError:
+    except Exception, e: #FIXME: what exception could we catch here, replace with that.
         # it may be a replaced package
         if ctx.packagedb.has_replacement(name):
             return True
