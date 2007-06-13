@@ -118,7 +118,7 @@ class PackageDB(object):
                     self.dr.add_item(dep_name, [ (name, dep) ], repo, txn)
 
             if package_info.replaces:
-                mark_replaced_packages(self, package_info, repo, txn=None)
+                self.mark_replaced_packages(self, package_info, repo, txn=None)
             
             # add component
             ctx.componentdb.add_package(package_info.partOf, package_info.name, repo, txn)
