@@ -41,7 +41,7 @@ def calculate_conflicts(order, packagedb):
         conflicts = []
 
         for conflict in pkg.conflicts:
-            if conflict.package not in order and pisi.conflict.installed_package_conflicts(conflict):
+            if conflict.package not in order and installed_package_conflicts(conflict):
                 conflicts.append(conflict)
 
         return conflicts
@@ -63,7 +63,7 @@ def calculate_conflicts(order, packagedb):
         B_i = B_0.intersection(set(map(lambda c:c.package, pkg.conflicts)))
         conflicts_inorder_i = set()
         for p in map(lambda x:packagedb.get_package(x), B_i):
-            conflicted = pisi.conflict.package_conflicts(p, pkg.conflicts)
+            conflicted = package_conflicts(p, pkg.conflicts)
             if conflicted:
                 conflicts_inorder_i.add(str(conflicted))
 
