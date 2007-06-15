@@ -228,13 +228,13 @@ def generate_base_upgrade(A):
 
 def generate_conflicts(A):
     # returns the conflicting packages list of the to be installed packages.
-    # @C: conflicting and must be removed packages list to proceed
-    # @D: list of the conflicting packages _with each other_ in the to be installed list
-    # @E: dictionary that contains which package in the to be installed list conflicts
+    # @conflicting_pkgs: conflicting and must be removed packages list to proceed
+    # @conflicts_inorder: list of the conflicting packages _with each other_ in the to be installed list
+    # @conflicting_pairs: dictionary that contains which package in the to be installed list conflicts
     #     with which packages
 
-    (C, D, E) = calculate_conflicts(A, ctx.packagedb)
-    return (C, D, E)
+    (conflicting_pkgs, conflicts_inorder, conflicting_pairs) = pisi.conflict.calculate_conflicts(A, ctx.packagedb)
+    return (conflicting_pkgs, conflicts_inorder, conflicting_pairs)
 
 def generate_pending_order(A):
     # returns pending package list in reverse topological order of dependency
@@ -580,7 +580,7 @@ def upgrade_base(*args, **kw):
     return pisi.operations.upgrade_base(*args, **kw)
 
 def calculate_conflicts(*args, **kw):
-    return pisi.operations.calculate_conflicts(*args, **kw)
+    return pisi.conflict.calculate_conflicts(*args, **kw)
 
 def reorder_base_packages(*args, **kw):
     return pisi.operations.reorder_base_packages(*args, **kw)

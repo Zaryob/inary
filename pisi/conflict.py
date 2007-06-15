@@ -33,3 +33,42 @@ def package_conflicts(pkg, confs):
             return c
 
     return None
+
+def calculate_conflicts(order, packagedb):
+
+    # check conflicting packages in the installed system
+    def check_installed(pkg, order):
+        conflicts = []
+
+        for conflict in pkg.conflicts:
+            if conflict.package not in order and pisi.conflict.installed_package_conflicts(conflict):
+                conflicts.append(conflict)
+
+        return conflicts
+
+    B_0 = set(order)
+    conflicting_pkgs = conflicts_inorder = set()
+    conflicting_pairs = {}
+
+    for x in order:
+        pkg = packagedb.get_package(x)
+
+        # check if any package has conflicts with the installed packages
+        conflicts = check_installed(pkg, order)
+        if conflicts:
+            conflicting_pairs[x] = map(lambda c:str(c), conflicts)
+            conflicting_pkgs = conflicting_pkgs.union(map(lambda c:c.package, conflicts))
+
+        # now check if any package has conflicts with each other
+        B_i = B_0.intersection(set(map(lambda c:c.package, pkg.conflicts)))
+        conflicts_inorder_i = set()
+        for p in map(lambda x:packagedb.get_package(x), B_i):
+            conflicted = pisi.conflict.package_conflicts(p, pkg.conflicts)
+            if conflicted:
+                conflicts_inorder_i.add(str(conflicted))
+
+        if conflicts_inorder_i:
+            conflicts_inorder = conflicts_inorder.union(conflicts_inorder_i)
+            conflicts_inorder.add(pkg.name)
+
+    return (conflicting_pkgs, conflicts_inorder, conflicting_pairs)
