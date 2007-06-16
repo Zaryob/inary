@@ -162,6 +162,7 @@ class PackageDB(object):
         def proc(txn):
             self.d.remove_repo(repo, txn=txn)
             self.dr.remove_repo(repo, txn=txn)
+            self.drp.remove_repo(repo, txn=txn)
         self.d.txn_proc(proc, txn)
 
 pkgdb = None
