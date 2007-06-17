@@ -497,7 +497,7 @@ def do_patch(sourceDir, patchFile, level = 0):
         (ret, out, err) = run_batch('quilt push')
     else:
         # run GNU patch to apply original patch into tree
-        (ret, out, err) = run_batch("patch -p%d < \"%s\"" %
+        (ret, out, err) = run_batch("patch --remove-empty-files -p%d < \"%s\"" %
                                     (level, patchFile))
     if ret:
         if out is None and err is None:
