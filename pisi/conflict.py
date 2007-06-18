@@ -34,6 +34,16 @@ def package_conflicts(pkg, confs):
 
     return None
 
+""" A package in order may be conflicting with an installed package. In this
+    case pisi should upgrade that conflicting package to a non-conflicting
+    one if available, instead of yelling and removing the installed package. """
+def satisfying_upgrade_available(conflicting):
+    try:
+        pkg = pisi.packagedb.get_package(conflicting.package)
+        return not conflicting.satisfies_relation(pkg.name, pkg.version, pkg.release)
+    except pisi.packagedb.Error:
+        return False
+
 def calculate_conflicts(order, packagedb):
 
     # check conflicting packages in the installed system
