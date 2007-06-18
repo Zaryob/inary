@@ -161,13 +161,23 @@ class Install(AtomicOperation):
         if not ctx.packagedb.has_package(self.pkginfo.name):
             ctx.packagedb.add_package(self.pkginfo, pisi.itembyrepodb.thirdparty)
 
+        # If it is explicitly specified that package conflicts with this package and also
+        # we passed check_conflicts tests in operations.py than this means a non-conflicting
+        # pkg is in "order" to be installed that has no file conflict problem with this package. 
+        # PS: we need this because "order" generating code does not consider conflicts.
+        def really_conflicts(pkg):
+            if not self.pkginfo.conflicts:
+                return True
+
+            return not pkg in map(lambda x:x.package, self.pkginfo.conflicts)
+        
         # check file conflicts
         file_conflicts = []
         for f in self.files.list:
             if ctx.filesdb.has_file(f.path):
                 pkg, existing_file = ctx.filesdb.get_file(f.path)
                 dst = pisi.util.join_path(ctx.config.dest_dir(), f.path)
-                if pkg != self.pkginfo.name and not os.path.isdir(dst):
+                if pkg != self.pkginfo.name and not os.path.isdir(dst) and really_conflicts(pkg):
                     file_conflicts.append( (pkg, existing_file) )
         if file_conflicts:
             file_conflicts_str = ""
