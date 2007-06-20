@@ -345,8 +345,8 @@ class Install(AtomicOperation):
 
         # remove left over files from the old package.
         def clean_leftovers():
-            new = set(map(lambda x: str(x.path), self.files.list))
-            old = set(map(lambda x: str(x.path), self.old_files.list))
+            new = set(str(f.path) for f in self.files.list)
+            old = set(str(f.path) for f in self.old_files.list)
             leftover = old - new
             old_fileinfo = {}
             for fileinfo in self.old_files.list:
@@ -360,8 +360,8 @@ class Install(AtomicOperation):
             old = filter(lambda x: x.type == 'config', self.old_files.list)
 
             # get config path lists
-            newconfig = set(map(lambda x: str(x.path), new))
-            oldconfig = set(map(lambda x: str(x.path), old))
+            newconfig = set(str(x.path) for x in new)
+            oldconfig = set(str(x.path) for x in old)
 
             config_overlaps = newconfig & oldconfig
             if config_overlaps:
