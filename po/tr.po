@@ -1,16 +1,18 @@
-# translation of tr.po to
+# translation of pisitr.po to
 # Eray Ozkural <eray@pardus.org.tr>, 2005,2006.
 # Furkan Duman <coderlord@gmail.com>, 2006.
 # Faik Uygur <faik@pardus.org.tr>, 2006, 2007.
 # Ahmet AYGÜN <ahmet@pardusman.org>, 2006.
+# Serdar Soytetir <tulliana@gmail.com>, 2007.
+# translation of tr.po to
 # PiSi Translation
 # Copyright (C) 2005, 2006, 2007 Free Software Foundation, Inc.
 msgid ""
 msgstr ""
-"Project-Id-Version: tr\n"
+"Project-Id-Version: pisitr\n"
 "POT-Creation-Date: 2007-05-23 16:02+EEST\n"
-"PO-Revision-Date: 2007-05-13 23:10+0300\n"
-"Last-Translator: Faik Uygur <faik@pardus.org.tr>\n"
+"PO-Revision-Date: 2007-06-21 20:10+0300\n"
+"Last-Translator: Serdar Soytetir <tulliana@gmail.com>\n"
 "Language-Team:  <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,44 +76,48 @@ msgid ""
 "Format help with indented section bodies.\n"
 "    "
 msgstr ""
+"Yardımı bölüm metinlerini girintileyerek göster.\n"
+"..."
 
 #: /usr/lib/python2.4/optparse.py:329 pisi/cli/commands.py:42
 msgid "usage: %s\n"
-msgstr "kullanımı: %s\n"
+msgstr "kullanım: %s\n"
 
 #: /usr/lib/python2.4/optparse.py:336
 msgid ""
 "Format help with underlined section headers.\n"
 "    "
 msgstr ""
+"Yardımı altı çizili bölüm başlıkları kullanarak göster.\n"
+"..."
 
 #: /usr/lib/python2.4/optparse.py:348
 msgid "Usage"
-msgstr ""
+msgstr "Kullanım"
 
 #: /usr/lib/python2.4/optparse.py:354
 msgid "integer"
-msgstr ""
+msgstr "tamsayı"
 
 #: /usr/lib/python2.4/optparse.py:355
 msgid "long integer"
-msgstr ""
+msgstr "uzun tamsayı"
 
 #: /usr/lib/python2.4/optparse.py:356
 msgid "floating-point"
-msgstr ""
+msgstr "değişken"
 
 #: /usr/lib/python2.4/optparse.py:357
 msgid "complex"
-msgstr ""
+msgstr "karmaşık"
 
 #: /usr/lib/python2.4/optparse.py:365
 msgid "option %s: invalid %s value: %r"
-msgstr ""
+msgstr "seçenek %s: geçersiz %s değer: %r"
 
 #: /usr/lib/python2.4/optparse.py:373
 msgid "option %s: invalid choice: %r (choose from %s)"
-msgstr ""
+msgstr "seçenek %s: geçersiz seçim: %r (%s içinden seçin)"
 
 #: /usr/lib/python2.4/optparse.py:382
 msgid ""
@@ -160,6 +166,9 @@ msgid ""
 "           add_option(opt_str, ..., kwarg=val, ...)\n"
 "        "
 msgstr ""
+"add_option(Seçenek)\n"
+"           add_option(opt_str, ..., kwarg=val, ...)\n"
+"        "
 
 #: /usr/lib/python2.4/optparse.py:1138
 msgid "show this help message and exit"
@@ -231,15 +240,15 @@ msgstr ""
 
 #: /usr/lib/python2.4/optparse.py:1376 /usr/lib/python2.4/optparse.py:1415
 msgid "%s option requires an argument"
-msgstr ""
+msgstr "%s seçeneği bir argüman gerektirir"
 
 #: /usr/lib/python2.4/optparse.py:1378 /usr/lib/python2.4/optparse.py:1417
 msgid "%s option requires %d arguments"
-msgstr ""
+msgstr "%s seçeneği %d argüman gerektirir"
 
 #: /usr/lib/python2.4/optparse.py:1387
 msgid "%s option does not take a value"
-msgstr ""
+msgstr "%s seçeneği bir değer almaz"
 
 #: /usr/lib/python2.4/optparse.py:1404 /usr/lib/python2.4/optparse.py:1558
 msgid "no such option: %s"
@@ -303,7 +312,7 @@ msgstr ""
 
 #: /usr/lib/python2.4/optparse.py:1562
 msgid "ambiguous option: %s (%s?)"
-msgstr ""
+msgstr "belirsiz seçenek: %s (%s?)"
 
 #: pisi-cli:46
 msgid "Keyboard Interrupt: Exiting..."
@@ -349,8 +358,7 @@ msgstr "Geri-iz:"
 
 #: pisi-cli:77
 msgid "Use --debug to see a traceback."
-msgstr ""
-"Bir geri-iz (traceback) görmek için lütfen --debug seçeneğini kullanın."
+msgstr "Bir geri-iz (traceback) görmek için lütfen --debug seçeneğini kullanın."
 
 #: pisi/actionsapi/autotools.py:36 pisi/actionsapi/cmaketools.py:36
 msgid ""
@@ -595,7 +603,7 @@ msgstr "* İndeks dosyası yazıldı"
 
 #: pisi/api.py:392
 msgid "Repo %s already present."
-msgstr "Depo %s halihazırda var."
+msgstr "%s deposu zaten var."
 
 #: pisi/api.py:396
 msgid "Repo %s added to system."
@@ -611,7 +619,7 @@ msgstr "%s deposu yok. Kaldırılamıyor."
 
 #: pisi/api.py:411
 msgid "* Updating repository: %s"
-msgstr "* %s deposu güncelleniyor"
+msgstr "* Depo güncelleniyor: %s"
 
 #: pisi/api.py:419
 msgid "No updates available for repository %s."
@@ -651,7 +659,7 @@ msgstr ""
 
 #: pisi/archive.py:123 pisi/archive.py:183
 msgid "Archive type not recognized"
-msgstr "Arşiv tipi tanınmadı"
+msgstr "Arşiv tipi tanınamadı"
 
 #: pisi/atomicoperations.py:65
 msgid "Package %s found in repository %s"
@@ -736,8 +744,7 @@ msgstr "%s saklanıyor"
 
 #: pisi/atomicoperations.py:452
 msgid "File list could not be read for package %s, continuing removal."
-msgstr ""
-"%s paketi için dosya listesi okunamadı, kaldırma işlemine devam ediliyor. "
+msgstr "%s paketi için dosya listesi okunamadı, kaldırma işlemine devam ediliyor. "
 
 #: pisi/atomicoperations.py:458
 msgid "Removing package %s"
@@ -752,8 +759,7 @@ msgid "Not removing conflicted file : %s"
 msgstr "Çakışan dosya silinmiyor : %s"
 
 #: pisi/atomicoperations.py:520
-msgid ""
-"Installed file %s is not exists on system [Probably you manually deleted]"
+msgid "Installed file %s is not exists on system [Probably you manually deleted]"
 msgstr "Kurulmuş dosya %s sistemde bulunmuyor [Muhtemelen el ile silindi]"
 
 #: pisi/atomicoperations.py:580
@@ -798,8 +804,7 @@ msgstr "PiSi kaynak paketi %s inşa ediliyor"
 
 #: pisi/build.py:228
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr ""
-"IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
+msgstr "IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
 
 #: pisi/build.py:233
 msgid "CCache detected..."
@@ -867,28 +872,25 @@ msgstr "Action betiğinde sözdizimi hatası (%s): %s"
 
 #: pisi/build.py:408
 msgid "Sandbox violation: %s (%s -> %s)"
-msgstr ""
+msgstr "Sandbox kuralı çiğnendi: %s (%s -> %s)"
 
 #: pisi/build.py:441
-#, fuzzy
 msgid "Sandbox violations!"
-msgstr "index seçenekleri"
+msgstr "Sandbox kuralları çiğnendi!"
 
 #: pisi/build.py:444
 msgid "unable to call function from actions: %s"
 msgstr "fonksiyon eylemlerden çağırılamıyor: %s"
 
 #: pisi/build.py:461
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Emniyet mandalı: taban geliştirme sistemi system.devel içindeki bu paketler "
 "ek olarak kurulacak:"
 
 #: pisi/build.py:466
 msgid "Safety switch: system.devel is already installed"
-msgstr ""
-"Emniyet mandalı: taban geliştirme sistemi system.devel halihazırda kurulu"
+msgstr "Emniyet mandalı: taban geliştirme sistemi system.devel halihazırda kurulu"
 
 #: pisi/build.py:468
 msgid "Safety switch: the component system.devel cannot be found"
@@ -992,8 +994,7 @@ msgid "Abandoned files under the install dir (%s):"
 msgstr "kurulum dizini (%s) altındaki terkedilmiş dosyalar:"
 
 #: pisi/build.py:911
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Kurulum dizini (%s) altındaki bütün dosyalar paket(ler) tarafından "
 "toplanmıştır"
@@ -1070,7 +1071,7 @@ msgstr "Bütün evet/hayır sorularında evet varsay"
 
 #: pisi/cli/commands.py:156
 msgid "Detailed output"
-msgstr "Detaylı çıktı"
+msgstr "Ayrıntılı çıktı"
 
 #: pisi/cli/commands.py:158
 msgid "Show debugging information"
@@ -1100,7 +1101,7 @@ msgstr "PiSi bileşenlerini hazırla"
 
 #: pisi/cli/commands.py:215
 msgid "do cleanup work for PiSi components"
-msgstr ""
+msgstr "PiSi bileşenleri için temizleme işlemi yap"
 
 #: pisi/cli/commands.py:229
 msgid "print help for the command"
@@ -1275,10 +1276,8 @@ msgid "Create a static package with ar files"
 msgstr "Ar dosyaları içeren bir statik paket yarat"
 
 #: pisi/cli/commands.py:451
-msgid ""
-"Do not install build dependencies, fail if a build dependency is present"
-msgstr ""
-"İnşa bağımlılıklarını kurma, eğer bir inşa bağımlılığı yoksa hatayla çık"
+msgid "Do not install build dependencies, fail if a build dependency is present"
+msgstr "İnşa bağımlılıklarını kurma, eğer bir inşa bağımlılığı yoksa hatayla çık"
 
 #: pisi/cli/commands.py:453
 msgid "PiSi binary package formats: '1.0', '1.1' (default)"
@@ -1286,11 +1285,11 @@ msgstr "PiSi ikili paket formatları: '1.0', '1.1' (öntanımlı)"
 
 #: pisi/cli/commands.py:455
 msgid "Use quilt patch management system instead of GNU patch"
-msgstr ""
+msgstr "GNU patch yerine quilt yama yönetim sistemini kullan"
 
 #: pisi/cli/commands.py:457
 msgid "Do not constrain build process inside the build folder"
-msgstr ""
+msgstr "İnşa sürecini inşa dizininin içi ile sınırlama"
 
 #: pisi/cli/commands.py:460
 msgid "build steps"
@@ -1780,10 +1779,8 @@ msgstr "Detaylı kurulum bilgisi göster"
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/commands.py:1146 pisi/cli/commands.py:1524
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr ""
-"Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr "Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
 
 #: pisi/cli/commands.py:1161
 msgid ""
@@ -2262,8 +2259,7 @@ msgid "Access denied to destination file: \"%s\""
 msgstr "\"%s\" hedef dosyasına erişim engellendi."
 
 #: pisi/fetcher.py:100
-msgid ""
-"A problem occured. Please check the archive address and/or permissions again."
+msgid "A problem occured. Please check the archive address and/or permissions again."
 msgstr ""
 "Bir hata oluştu. Lütfen arşiv adresini ve/veya kullanıcı izinlerini yeniden "
 "kontrol edin."
@@ -2410,12 +2406,10 @@ msgstr "%s anahtarı %s deposunda bulunamadı"
 
 #: pisi/lockeddbshelve.py:46
 msgid "Database version for %s insufficient. Please run rebuild-db command."
-msgstr ""
-"Veritabanı versiyonu %s yetersiz. Lütfen rebuild-db komutunu çalıştırınız."
+msgstr "Veritabanı versiyonu %s yetersiz. Lütfen rebuild-db komutunu çalıştırınız."
 
 #: pisi/lockeddbshelve.py:50
-msgid ""
-"Database version for %s greater than PiSi version. You need a newer PiSi."
+msgid "Database version for %s greater than PiSi version. You need a newer PiSi."
 msgstr ""
 "Veritabanı versiyonu %s PiSi versiyonundan büyük. Yeni bir PiSi'ye "
 "gereksiniminiz var."
@@ -2444,16 +2438,14 @@ msgstr "Veritabanı ortamına okuma erişimi sağlanamadı"
 msgid ""
 "Cannot attain write access to PiSi database. You have to be root for this "
 "operation."
-msgstr ""
-"PiSi veritabanına yazma erişimi sağlanamadı. Bu işlem için root olmalısınız."
+msgstr "PiSi veritabanına yazma erişimi sağlanamadı. Bu işlem için root olmalısınız."
 
 #: pisi/lockeddbshelve.py:112
 msgid "Cannot attain read or write access to database %s"
 msgstr "Veritabanı %s için okuma ya da yazma erişimi sağlanamadı"
 
 #: pisi/lockeddbshelve.py:138
-msgid ""
-"Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
+msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
 msgstr ""
 "Bayraklar 'r', 'w', 'c' or 'n'den birisi olmalı ya da bsddb.db.DB_* "
 "bayraklarını kullanmalı"
@@ -2478,8 +2470,7 @@ msgstr "Dosya ve paket adlarını karıştırmak henüz desteklenmiyor."
 msgid ""
 "The following packages will be installed\n"
 "in the respective order to satisfy extra dependencies:\n"
-msgstr ""
-"Ek bağımlılıkları sağlamak için bu paketler verilen sırada kurulacaktır:\n"
+msgstr "Ek bağımlılıkları sağlamak için bu paketler verilen sırada kurulacaktır:\n"
 
 #: pisi/operations.py:151 pisi/operations.py:615
 msgid "Do you want to continue?"
@@ -2528,8 +2519,7 @@ msgstr "Emniyet mandalı: taban sistem system.base'den bu paketler kurulacak:"
 
 #: pisi/operations.py:303
 msgid "Safety switch: Following packages in system.base will be upgraded: "
-msgstr ""
-"Emniyet mandalı: taban sistem system.base'den bu paketler yükseltilecek:"
+msgstr "Emniyet mandalı: taban sistem system.base'den bu paketler yükseltilecek:"
 
 #: pisi/operations.py:309 pisi/operations.py:591
 msgid "Safety switch: the component system.base cannot be found"
@@ -2539,15 +2529,13 @@ msgstr "Emniyet mandalı: taban sistem bileşeni system.base bulunamadı"
 msgid ""
 "The following package(s) are already installed and are not going to be "
 "installed again:\n"
-msgstr ""
-"Aşağıdaki paket(ler) zaten sistemde kurulu ve yeniden kurulmayacak(lar):\n"
+msgstr "Aşağıdaki paket(ler) zaten sistemde kurulu ve yeniden kurulmayacak(lar):\n"
 
 #: pisi/operations.py:347
 msgid ""
 "Following packages will be installed in the respective order to satisfy "
 "dependencies:\n"
-msgstr ""
-"Bağımlılıkları sağlamak için bu paketler verilen sırada kurulacaktır:\n"
+msgstr "Bağımlılıkları sağlamak için bu paketler verilen sırada kurulacaktır:\n"
 
 #: pisi/operations.py:352 pisi/operations.py:483
 msgid "Total size of package(s): %.2f %s"
@@ -2583,12 +2571,11 @@ msgstr "Bu paketler yükseltilecektir: "
 
 #: pisi/operations.py:496
 msgid "Downloading %d / %d"
-msgstr ""
+msgstr "%d / %d indiriliyor"
 
 #: pisi/operations.py:509
-#, fuzzy
 msgid "Installing %d / %d"
-msgstr "%s paketi kuruldu"
+msgstr "%d / %d kuruluyor"
 
 #: pisi/operations.py:546
 msgid "Dependency %s of %s cannot be satisfied"
@@ -2604,8 +2591,7 @@ msgstr "Ters bağımlılık %s, %s paketi için sağlanamadı"
 
 #: pisi/operations.py:587
 msgid "Safety switch: cannot remove the following packages in system.base: "
-msgstr ""
-"Emniyet mandalı: taban sistem system.base deki bu paketler kaldırılamıyor: "
+msgstr "Emniyet mandalı: taban sistem system.base deki bu paketler kaldırılamıyor: "
 
 #: pisi/operations.py:598
 msgid "Package %s does not exist. Cannot remove."
@@ -2619,8 +2605,7 @@ msgstr "Kaldıracak paket yok."
 msgid ""
 "The following minimal list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
-msgstr ""
-"Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:\n"
+msgstr "Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:\n"
 
 #: pisi/operations.py:616
 msgid "Package removal declined"
@@ -2845,15 +2830,15 @@ msgstr "Sağladıkları: "
 
 #: pisi/specfile.py:214
 msgid "Dependencies: "
-msgstr "Bağımlılıklar:"
+msgstr "Bağımlılıklar: "
 
 #: pisi/uri.py:80
 msgid "setAuthInfo needs a tuple (user, pass)"
-msgstr "setAuthInfo bir (kullanıcı, parola) ikilisi ister"
+msgstr "setAuthInfo bir (kullanıcı, parola) ister"
 
 #: pisi/util.py:122 pisi/util.py:143
 msgid "Running "
-msgstr "Çalışıyor: "
+msgstr "Çalışıyor "
 
 #: pisi/util.py:126 pisi/util.py:161
 msgid "return value for \"%s\" is %s"
@@ -2916,9 +2901,8 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-msgstr ""
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgstr "Geliştirici '%s <%s>' başka bir e-posta adresi '%s' kullanmış, kaynak paket '%s'"
 
 #: scripts/repostats.py:467
 msgid ""
@@ -2930,8 +2914,7 @@ msgstr ""
 
 #: scripts/repostats.py:553
 msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-msgstr ""
-"Kullanım: repostats.py [SEÇENEKLER] source-repo-path [ikili-depo-adresi]\n"
+msgstr "Kullanım: repostats.py [SEÇENEKLER] source-repo-path [ikili-depo-adresi]\n"
 
 #: scripts/repostats.py:554
 msgid "Dont generate the web site.\n"
@@ -2945,5 +2928,3 @@ msgstr "Kaynak deposu taranıyor...\n"
 msgid "Scanning binary packages...\n"
 msgstr "İkili dosyalar taranıyor...\n"
 
-#~ msgid "Updating environment..."
-#~ msgstr "Çevre güncelleniyor..."
