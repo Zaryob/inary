@@ -31,7 +31,7 @@ class PackageTestCase(testcase.TestCase):
         testdir = os.path.join(cur, "tests/popt")
 
         pkg_path = os.path.join(tmpdir, self.pkgName)
-        pkg = package.Package(pkg_path, "w")
+        pkg = pisi.package.Package(pkg_path, "w")
 
         os.chdir(testdir)
         pkg.add_to_package("files.xml")
@@ -40,7 +40,7 @@ class PackageTestCase(testcase.TestCase):
 
         pkg.close()
 
-        pkg = package.Package(pkg_path)
+        pkg = pisi.package.Package(pkg_path)
         pkg.extract_file("files.xml", cur)
         if not os.path.exists("files.xml"):
             self.fail("Package extract error")
