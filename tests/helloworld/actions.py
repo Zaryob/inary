@@ -20,16 +20,16 @@ WorkDir = "hello-1.3"
 
 def setup():
     autotools.configure()
-    
+
 def build():
     autotools.make()
 
 def install():
-    autotools.install()            
+    autotools.install()
 
     '''/opt/helloworld/'''
     pisitools.dodir("/opt/helloworld")
-    
+
     '''/usr/share/doc/helloworld-0.1-1/Makefile.am'''
     pisitools.dodoc("Makefile.am")
 
@@ -58,7 +58,7 @@ def install():
     pisitools.dobin("src/helloworld")
     '''/bin/helloworld'''
     pisitools.dobin("src/helloworld", "/bin")
-    
+
     '''/usr/sbin/helloworld'''
     pisitools.dosbin("src/helloworld")
     '''/sbin/helloworld'''
@@ -97,6 +97,6 @@ def install():
     shelltools.unlink("%s/sys/helloworld/helloworld" % get.installDIR())
     '''delete /sys/helloworld'''
     shelltools.unlinkDir("%s/sys/helloworld" % get.installDIR())
-    
+
     '''generate /usr/lib/helloworld.o'''
     libtools.gen_usr_ldscript("helloworld.o")

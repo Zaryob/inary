@@ -35,7 +35,7 @@ class ConfigFileTestCase(unittest.TestCase):
         self.assertEqual(cf.dirs.archives_dir, "/disk2/pisi/archives")
 
         # test default values
-        self.assertEqual(cf.dirs.tmp_dir, "/var/tmp/pisi")
+        self.assertEqual(cf.dirs.tmp_dir, "/var/pisi")
 
     def testAccessMethods(self):
         cf = self.cf
