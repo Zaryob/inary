@@ -125,8 +125,9 @@ def find_relocations(oldfiles, newfiles):
     relocations = []
     for h in files_new.keys():
         if h and h in files_old:
+            old_paths = [x.path for x in files_old[h]]
             for i in range(len(files_new[h])):
-                if files_old[h][0].path != files_new[h][i].path:
+                if files_new[h][i].path not in old_paths:
                     relocations.append((files_old[h][0], files_new[h][i]))
 
     return relocations
