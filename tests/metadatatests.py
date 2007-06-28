@@ -44,7 +44,6 @@ class MetaDataTestCase(unittest.TestCase):
         md = metadata.MetaData()
         md.read('tests/popt/metadata.xml')
         for key in md.package.__dict__.keys():
-            print key
             if key not in ('installedSize', 'packageFormat', 'distributionRelease',
                            'license', 'architecture', 'distribution', 'partOf'):
                 self.assertEqual(md.package.__dict__[key], specmd.package.__dict__[key])
