@@ -244,9 +244,6 @@ def is_upgradable(name, ignore_build = False):
     except KeyboardInterrupt:
         raise
     except Exception, e: #FIXME: what exception could we catch here, replace with that.
-        # it may be a replaced package
-        if ctx.packagedb.has_replacement(name):
-            return True
         return False
         
     if ignore_build or (not build) or (not pkg.build):
@@ -398,10 +395,6 @@ def upgrade_pkg_names(A = []):
         (version, release, build) = ctx.installdb.get_version(x)
         if ctx.packagedb.has_package(x):
             pkg = ctx.packagedb.get_package(x)
-        elif ctx.packagedb.has_replacement(x):
-            Ap.append(ctx.packagedb.get_replacement(x))
-            replaced.append(x)
-            continue
         else:
             ctx.ui.info(_('Package %s is not available in repositories.') % x, True)
             continue
