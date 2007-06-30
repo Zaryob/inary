@@ -98,17 +98,17 @@ def install(parameters = '', argument = 'install'):
 
         if system(args):
             raise InstallError(_('Install failed.'))
+        else:
+            fixInfoDir()
     else:
         raise InstallError(_('No Makefile found.'))
-
-    fixInfoDir()
 
 def rawInstall(parameters = '', argument = 'install'):
     '''install source into install directory with given parameters = PREFIX=%s % get.installDIR()'''
     if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
         if system('make %s %s' % (parameters, argument)):
             raise InstallError(_('Install failed.'))
+        else:
+            fixInfoDir()
     else:
         raise InstallError(_('No Makefile found.'))
-
-    fixInfoDir()
