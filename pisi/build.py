@@ -440,6 +440,7 @@ class Builder:
                     valid_dirs.append("%s/.ccache" % os.environ["HOME"])
                 # every qt/KDE application check these
                 valid_dirs.append("%s/.qt/.qt_plugins_3.3rc.lock" % os.environ["HOME"])
+                valid_dirs.append("%s/.qt/qt_plugins_3.3rc.tmp" % os.environ["HOME"])
                 valid_dirs.append("%s/.qt/.qtrc.lock" % os.environ["HOME"])
                 valid_dirs.append("%s/.qt/.qt_designerrc.lock" % os.environ["HOME"])
                 valid_dirs.append("/usr/qt/3/etc/settings/.qt_plugins_3.3rc.lock")
