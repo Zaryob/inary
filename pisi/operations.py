@@ -207,6 +207,7 @@ in the respective order to satisfy extra dependencies:
     if 'pisi' in order and pisi_installed:
         upgrade_pisi()
 
+# FIXME: this should be done in atomicoperations automatically.
 def remove_replaced_packages(order, replaces):
 
     replaced = []
