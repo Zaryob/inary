@@ -390,6 +390,15 @@ def upgrade_pkg_names(A = []):
         if x.endswith(ctx.const.package_suffix):
             ctx.ui.debug(_("Warning: package *name* ends with '.pisi'"))
 
+        # Handling of replacement packages
+        if x in replaces.values():
+            Ap.append(x)
+            pkg = ctx.packagedb.get_package(x)
+            for r in pkg.replaces:
+                if pisi.replace.installed_package_replaced(r):
+                    replaced.append(r.package)
+            continue
+
         if x in replaces.keys():
             Ap.append(replaces[x])
             replaced.append(x)
