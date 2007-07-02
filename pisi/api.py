@@ -158,6 +158,10 @@ def list_installed():
     """Return a set of installed package names."""
     return set(ctx.installdb.list_installed())
 
+def list_replaces(repo = None):
+    """Returns a dict of the replaced packages."""
+    return ctx.packagedb.get_replaces(repo = repo)
+
 def list_available(repo = None):
     """Return a set of available package names."""
     return set(ctx.packagedb.list_packages(repo = repo))
