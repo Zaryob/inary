@@ -40,16 +40,19 @@ class PackageDB(object):
     def __init__(self):
         self.d = pisi.itembyrepodb.ItemByRepoDB('package')
         self.dr = pisi.itembyrepodb.ItemByRepoDB('revdep')
+        self.do = pisi.itembyrepodb.ItemByRepoDB('obsoleted')
         self.drp = pisi.itembyrepodb.ItemByRepoDB('replaces')
 
     def close(self):
         self.d.close()
         self.dr.close()
+        self.do.close()
         self.drp.close()
 
     def destroy(self):
         self.d.destroy()
         self.dr.destroy()
+        self.do.destroy()
         self.drp.destroy()
 
     def has_package(self, name, repo=None, txn = None):
@@ -67,6 +70,14 @@ class PackageDB(object):
     def which_repo(self, name, txn = None):
         return self.d.which_repo(name, txn=txn)
 
+    def get_obsoletes(self, repo=None):
+        obsoletes = []
+        for r in self.do.list(repo):
+            obsoletes.extend(self.do.get_item(r, repo))
+
+        replaces = self.get_replaces(repo)
+        return set(str(o) for o in obsoletes) - set(replaces.keys())
+    
     # replacesdb holds the info about the replaced packages (ex. gaim -> pidgin)
     def get_replaces(self, repo = None):
         pairs = {}
@@ -94,6 +105,11 @@ class PackageDB(object):
     def list_packages(self, repo=None):
         return self.d.list(repo)
 
+    def add_obsoletes(self, obsoletes, repo, txn = None):
+        def proc(txn):
+            self.do.add_item(repo, obsoletes, repo, txn)
+        ctx.txn_proc(proc, txn)
+
     def add_package(self, package_info, repo, txn = None):
         name = str(package_info.name)
 
@@ -120,6 +136,7 @@ class PackageDB(object):
     def clear(self, txn = None):
         self.d.clear()
         self.dr.clear()
+        self.do.clear()
         self.drp.clear()
 
     def remove_package(self, name, repo = None, txn = None):
@@ -151,6 +168,7 @@ class PackageDB(object):
         def proc(txn):
             self.d.remove_repo(repo, txn=txn)
             self.dr.remove_repo(repo, txn=txn)
+            self.do.remove_repo(repo, txn=txn)
             self.drp.remove_repo(repo, txn=txn)
         self.d.txn_proc(proc, txn)
 

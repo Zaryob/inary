@@ -226,6 +226,12 @@ def remove_conflicting_packages(conflicts):
     if remove(conflicts, ignore_dep=True, ignore_safety=True):
         raise Error(_("Conflicts remain"))
 
+def remove_obsoleted_packages():
+    obsoletes = filter(ctx.installdb.is_installed, ctx.packagedb.get_obsoletes())
+    if obsoletes:
+        if remove(obsoletes, ignore_dep=True, ignore_safety=True):
+            raise Error(_("Obsoleted packages remaining"))
+
 def check_conflicts(order, packagedb):
     """check if upgrading to the latest versions will cause havoc
     done in a simple minded way without regard for dependencies of
@@ -498,6 +504,8 @@ def upgrade_pkg_names(A = []):
 
     if replaces:
         remove_replaced_packages(order, replaces)
+
+    remove_obsoleted_packages()
     
     for path in paths:
         ctx.ui.info(util.colorize(_("Installing %d / %d") % (paths.index(path)+1, len(paths)), "yellow"))

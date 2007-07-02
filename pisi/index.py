@@ -126,6 +126,7 @@ class Index(xmlfile.XmlFile):
         for comp in self.components:
             ctx.componentdb.update_component(comp, repo, txn)
         ctx.packagedb.remove_repo(repo, txn=txn)
+        ctx.packagedb.add_obsoletes(self.distribution.obsoletes, repo, txn=txn)
         for pkg in self.packages:
             ctx.packagedb.add_package(pkg, repo, txn=txn)
             update_progress()
