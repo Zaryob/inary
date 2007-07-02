@@ -163,7 +163,7 @@ def list_available(repo = None):
     return set(ctx.packagedb.list_packages(repo = repo))
 
 def list_upgradable():
-    return filter(pisi.operations.is_upgradable, ctx.installdb.list_installed())
+    return filter(pisi.operations.is_upgradable, ctx.installdb.list_installed()) + ctx.packagedb.get_replaces().keys()
 
 def package_graph(A, repo = pisi.itembyrepodb.installed, ignore_installed = False):
     """Construct a package relations graph.

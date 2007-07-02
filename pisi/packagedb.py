@@ -67,6 +67,7 @@ class PackageDB(object):
     def which_repo(self, name, txn = None):
         return self.d.which_repo(name, txn=txn)
 
+    # replacesdb holds the info about the replaced packages (ex. gaim -> pidgin)
     def get_replaces(self, repo = None):
         pairs = {}
         for pkg_name in self.drp.list(repo):

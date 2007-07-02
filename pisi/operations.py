@@ -376,11 +376,12 @@ def upgrade_pkg_names(A = []):
     ignore_build = ctx.get_option('ignore_build_no')
     security_only = ctx.get_option('security_only')
 
+    replaced = []
+    replaces = ctx.packagedb.get_replaces()
+
     if not A:
         # if A is empty, then upgrade all packages
         A = ctx.installdb.list_installed()
-
-    replaced = []
 
     A_0 = A = set(A)
 
@@ -388,6 +389,11 @@ def upgrade_pkg_names(A = []):
     for x in A:
         if x.endswith(ctx.const.package_suffix):
             ctx.ui.debug(_("Warning: package *name* ends with '.pisi'"))
+
+        if x in replaces.keys():
+            Ap.append(replaces[x])
+            replaced.append(x)
+            continue
 
         if not ctx.installdb.is_installed(x):
             ctx.ui.info(_('Package %s is not installed.') % x, True)
@@ -417,7 +423,7 @@ def upgrade_pkg_names(A = []):
                 ctx.ui.info(_('Package %s is already at the latest build %s.')
                             % (pkg.name, pkg.build), True)
 
-
+                
     A = set(Ap)
 
     if len(A)==0:
@@ -451,7 +457,7 @@ def upgrade_pkg_names(A = []):
     if ctx.get_option('dry_run'):
         return
 
-    if set(order) - A_0:
+    if set(order) - A_0 - set(replaces.values()):
         if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
             return False
 
