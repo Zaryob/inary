@@ -207,6 +207,20 @@ in the respective order to satisfy extra dependencies:
     if 'pisi' in order and pisi_installed:
         upgrade_pisi()
 
+def remove_replaced_packages(order, replaces):
+
+    replaced = []
+    inorder = set(order).intersection(replaces.values())
+
+    if inorder:
+        for pkg in replaces.keys():
+            if replaces[pkg] in inorder:
+                replaced.append(pkg)
+
+    if replaced:
+        if remove(replaced, ignore_dep=True, ignore_safety=True):
+            raise Error(_("Replaced package remains"))
+
 def remove_conflicting_packages(conflicts):
     if remove(conflicts, ignore_dep=True, ignore_safety=True):
         raise Error(_("Conflicts remain"))
@@ -393,15 +407,10 @@ def upgrade_pkg_names(A = []):
         # Handling of replacement packages
         if x in replaces.values():
             Ap.append(x)
-            pkg = ctx.packagedb.get_package(x)
-            for r in pkg.replaces:
-                if pisi.replace.installed_package_replaced(r):
-                    replaced.append(r.package)
             continue
 
         if x in replaces.keys():
             Ap.append(replaces[x])
-            replaced.append(x)
             continue
 
         if not ctx.installdb.is_installed(x):
@@ -486,9 +495,8 @@ def upgrade_pkg_names(A = []):
         if conflicts:
             remove_conflicting_packages(conflicts)
 
-    # remove replaced or obsoleted packages
-    if replaced:
-        remove(replaced, ignore_dep=True, ignore_safety=True)
+    if replaces:
+        remove_replaced_packages(order, replaces)
     
     for path in paths:
         ctx.ui.info(util.colorize(_("Installing %d / %d") % (paths.index(path)+1, len(paths)), "yellow"))
