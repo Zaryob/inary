@@ -110,6 +110,9 @@ def find_delta(oldfiles, newfiles):
     for h in files_delta:
         deltas.extend(hashto_files[h])
 
+    # Directory hashes are None. There was a bug with PolicyKit that should have an empty directory.
+    deltas.extend(hashto_files[None])
+
     return deltas
 
 def find_relocations(oldfiles, newfiles):
