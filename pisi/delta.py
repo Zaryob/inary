@@ -111,7 +111,8 @@ def find_delta(oldfiles, newfiles):
         deltas.extend(hashto_files[h])
 
     # Directory hashes are None. There was a bug with PolicyKit that should have an empty directory.
-    deltas.extend(hashto_files[None])
+    if hashto_files.has_key(None):
+        deltas.extend(hashto_files[None])
 
     return deltas
 
