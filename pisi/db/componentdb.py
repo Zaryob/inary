@@ -17,6 +17,7 @@ _ = __trans.ugettext
 import pisi
 import pisi.db.lockeddbshelve as shelve
 import pisi.context as ctx
+import pisi.component
 
 class Error(pisi.Error):
     pass
@@ -109,7 +110,7 @@ class ComponentDB(object):
         if self.has_component(parent_name, repo, txn):
             parent = self.get_component(parent_name, repo, txn)
         else:
-            parent = Component(name = parent_name)
+            parent = pisi.component.Component(name = parent_name)
 
         if component.name not in parent.dependencies:
             parent.dependencies.append(component.name)
@@ -133,7 +134,7 @@ class ComponentDB(object):
             if self.has_component(component_name, repo, txn):
                 component = self.get_component(component_name, repo, txn)
             else:
-                component = Component( name = component_name )
+                component = pisi.component.Component( name = component_name )
             if not package in component.packages:
                 component.packages.append(package)
             self.d.add_item(component_name, component, repo, txn) # update
@@ -159,7 +160,7 @@ class ComponentDB(object):
             if self.has_component(component_name, repo, txn):
                 component = self.get_component(component_name, repo, txn)
             else:
-                component = Component( name = component_name )
+                component = pisi.component.Component( name = component_name )
             if not spec in component.sources:
                 component.sources.append(spec)
             self.d.add_item(component_name, component, repo, txn) # update
