@@ -24,8 +24,6 @@ import pisi.util as util
 import pisi.dependency as dependency
 import pisi.conflict
 import pisi.pgraph as pgraph
-import pisi.repodb
-import pisi.installdb
 import pisi.cli
 import pisi.atomicoperations as atomicoperations
 import pisi.ui as ui
