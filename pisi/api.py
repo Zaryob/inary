@@ -26,11 +26,13 @@ import pisi.uri
 import pisi.util
 import pisi.dependency as dependency
 import pisi.pgraph as pgraph
-import pisi.packagedb
-import pisi.repodb
-import pisi.installdb
-import pisi.sourcedb
-import pisi.lockeddbshelve as shelve
+import pisi.db.packagedb
+import pisi.db.repodb
+import pisi.db.filesdb
+import pisi.db.installdb
+import pisi.db.sourcedb
+import pisi.db.componentdb
+import pisi.db.lockeddbshelve as shelve
 import pisi.index
 import pisi.config
 import pisi.metadata
@@ -105,12 +107,12 @@ def init(database = True, write = True,
     ctx.database = database
     if database:
         shelve.init_dbenv(write=write)
-        ctx.repodb = pisi.repodb.init()
-        ctx.installdb = pisi.installdb.init()
-        ctx.filesdb = pisi.files.FilesDB()
-        ctx.componentdb = pisi.component.ComponentDB()
-        ctx.packagedb = pisi.packagedb.init_db()
-        ctx.sourcedb = pisi.sourcedb.init()
+        ctx.repodb = pisi.db.repodb.init()
+        ctx.installdb = pisi.db.installdb.init()
+        ctx.filesdb = pisi.db.filesdb.init()
+        ctx.componentdb = pisi.db.componentdb.init()
+        ctx.packagedb = pisi.db.packagedb.init()
+        ctx.sourcedb = pisi.db.sourcedb.init()
     else:
         ctx.repodb = None
         ctx.installdb = None
@@ -129,20 +131,14 @@ def finalize():
             ctx.loghandler.flush()
             ctx.log.removeHandler(ctx.loghandler)
 
-        pisi.repodb.finalize()
-        pisi.installdb.finalize()
-        if ctx.filesdb != None:
-            ctx.filesdb.close()
-            ctx.filesdb = None
-        if ctx.componentdb != None:
-            ctx.componentdb.close()
-            ctx.componentdb = None
-        if ctx.packagedb:
-            pisi.packagedb.finalize_db()
-            ctx.packagedb = None
-        if ctx.sourcedb:
-            pisi.sourcedb.finalize()
-            ctx.sourcedb = None
+
+        pisi.db.repodb.finalize()
+        pisi.db.installdb.finalize()
+        pisi.db.filesdb.finalize()
+        pisi.db.componentdb.finalize()
+        pisi.db.packagedb.finalize()
+        pisi.db.sourcedb.finalize()
+
         if ctx.dbenv:
             ctx.dbenv.close()
             ctx.dbenv_lock.close()
@@ -169,7 +165,7 @@ def list_available(repo = None):
 def list_upgradable():
     return filter(pisi.operations.is_upgradable, ctx.installdb.list_installed()) + ctx.packagedb.get_replaces().keys()
 
-def package_graph(A, repo = pisi.itembyrepodb.installed, ignore_installed = False):
+def package_graph(A, repo = pisi.db.itembyrepodb.installed, ignore_installed = False):
     """Construct a package relations graph.
     
     Graph will contain all dependencies of packages A, if ignore_installed
@@ -242,14 +238,14 @@ def generate_conflicts(A):
 
 def generate_pending_order(A):
     # returns pending package list in reverse topological order of dependency
-    G_f = pgraph.PGraph(ctx.packagedb, pisi.itembyrepodb.installed) # construct G_f
+    G_f = pgraph.PGraph(ctx.packagedb, pisi.db.itembyrepodb.installed) # construct G_f
     for x in A.keys():
         G_f.add_package(x)
     B = A
     while len(B) > 0:
         Bp = set()
         for x in B.keys():
-            pkg = ctx.packagedb.get_package(x, pisi.itembyrepodb.installed)
+            pkg = ctx.packagedb.get_package(x, pisi.db.itembyrepodb.installed)
             for dep in pkg.runtimeDependencies():
                 if dep.package in G_f.vertices():
                     G_f.add_dep(x, dep)
@@ -317,10 +313,10 @@ def info_file(package_fn):
 def info_name(package_name, installed=False):
     """Fetch package information for the given package."""
     if installed:
-        package = ctx.packagedb.get_package(package_name, pisi.itembyrepodb.installed)
+        package = ctx.packagedb.get_package(package_name, pisi.db.itembyrepodb.installed)
         repo = None
     else:
-        package, repo = ctx.packagedb.get_package_repo(package_name, pisi.itembyrepodb.repos)
+        package, repo = ctx.packagedb.get_package_repo(package_name, pisi.db.itembyrepodb.repos)
 
     metadata = pisi.metadata.MetaData()
     metadata.package = package
@@ -337,10 +333,10 @@ def info_name(package_name, installed=False):
         files = None
     return metadata, files, repo
 
-def search_package_terms(terms, repo = pisi.itembyrepodb.all):
+def search_package_terms(terms, repo = pisi.db.itembyrepodb.all):
     return search_in_packages(terms, ctx.packagedb.list_packages(repo), repo)
 
-def search_in_packages(terms, packages, repo = pisi.itembyrepodb.all):
+def search_in_packages(terms, packages, repo = pisi.db.itembyrepodb.all):
 
     def search(package, term):
         term = unicode(term).lower()
@@ -395,7 +391,7 @@ def add_repo(name, indexuri, at = None):
     if ctx.repodb.has_repo(name):
         raise Error(_('Repo %s already present.') % name)
     else:
-        repo = pisi.repodb.Repo(pisi.uri.URI(indexuri))
+        repo = pisi.db.repodb.Repo(pisi.uri.URI(indexuri))
         ctx.repodb.add_repo(name, repo, at = at)
         ctx.ui.info(_('Repo %s added to system.') % name)
 

@@ -20,7 +20,7 @@ _ = __trans.ugettext
 # PiSi
 import pisi
 import pisi.context as ctx
-import pisi.lockeddbshelve as shelve
+import pisi.db.lockeddbshelve as shelve
 import pisi.files
 import pisi.util
 

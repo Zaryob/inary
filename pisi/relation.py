@@ -17,7 +17,7 @@ _ = __trans.ugettext
 import pisi.context as ctx
 import pisi.version
 import pisi.pxml.autoxml as autoxml
-import pisi.itembyrepodb
+import pisi.db.itembyrepodb
 
 class Relation:
 
@@ -54,6 +54,6 @@ def installed_package_satisfies(relation):
     if not ctx.installdb.is_installed(pkg_name):
         return False
     else:
-        pkg = ctx.packagedb.get_package(pkg_name, pisi.itembyrepodb.installed)
+        pkg = ctx.packagedb.get_package(pkg_name, pisi.db.itembyrepodb.installed)
         (version, release) = (pkg.version, pkg.release)
         return relation.satisfies_relation(pkg_name, version, release)

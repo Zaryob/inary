@@ -15,7 +15,7 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
-import pisi.lockeddbshelve as shelve
+import pisi.db.lockeddbshelve as shelve
 import pisi.context as ctx
 
 class Error(pisi.Error):

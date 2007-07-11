@@ -374,7 +374,7 @@ the package in graphviz format to 'pgraph.dot'.
                 repo = ctx.get_option('repository')
                 ctx.ui.info(_('Plotting packages in repository %s') % repo)
             else:
-                repo = pisi.itembyrepodb.repos
+                repo = pisi.db.itembyrepodb.repos
             if self.args:
                 a = self.args
             else:
@@ -387,7 +387,7 @@ the package in graphviz format to 'pgraph.dot'.
                 # if A is empty, then graph all packages
                 ctx.ui.info(_('Plotting a graph of relations among all installed packages'))
                 a = ctx.installdb.list_installed()
-            repo = pisi.itembyrepodb.installed
+            repo = pisi.db.itembyrepodb.installed
         g = pisi.api.package_graph(a, repo = repo,
                                    ignore_installed = ctx.get_option('ignore_installed'))
         g.write_graphviz(file(ctx.get_option('output'), 'w'))
@@ -953,7 +953,7 @@ Usage: info <package1> <package2> ... <packagen>
                     ctx.ui.info(_('[inst] '), noln=True)
                 else:
                     ctx.ui.info(_('Installed package:'))
-                self.print_pkginfo(metadata, files,pisi.itembyrepodb.installed)
+                self.print_pkginfo(metadata, files,pisi.db.itembyrepodb.installed)
 
             if ctx.packagedb.has_package(arg):
                 metadata, files, repo = pisi.api.info_name(arg, False)
@@ -961,7 +961,7 @@ Usage: info <package1> <package2> ... <packagen>
                     ctx.ui.info(_('[repo] '), noln=True)
                 else:
                     ctx.ui.info(_('Package found in %s repository:') % repo)
-                self.print_pkginfo(metadata, files, pisi.itembyrepodb.repos)
+                self.print_pkginfo(metadata, files, pisi.db.itembyrepodb.repos)
 
             if not ctx.packagedb.has_package(arg):
                 ctx.ui.info(_("%s is not found in repositories") % arg)
@@ -1146,7 +1146,7 @@ Usage: list-installed
             ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
             print         '========================================================================'
         for pkg in installed:
-            package = ctx.packagedb.get_package(pkg, pisi.itembyrepodb.installed)
+            package = ctx.packagedb.get_package(pkg, pisi.db.itembyrepodb.installed)
             inst_info = ctx.installdb.get_info(pkg)
             if self.options.long:
                 ctx.ui.info(unicode(package))
@@ -1524,7 +1524,7 @@ Lists the packages that will be upgraded.
             ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
             print         '========================================================================'
         for pkg in upgradable_pkgs:
-            package = ctx.packagedb.get_package(pkg, pisi.itembyrepodb.installed)
+            package = ctx.packagedb.get_package(pkg, pisi.db.itembyrepodb.installed)
             inst_info = ctx.installdb.get_info(pkg)
             if self.options.long:
                 ctx.ui.info(package)

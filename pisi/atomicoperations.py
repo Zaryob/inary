@@ -29,7 +29,7 @@ import pisi.uri
 import pisi.ui
 import pisi.version
 import pisi.delta
-import pisi.packagedb
+import pisi.db.packagedb
 
 class Error(pisi.Error):
     pass
@@ -159,7 +159,7 @@ class Install(AtomicOperation):
         # check if package is in database
         # If it is not, put it into 3rd party packagedb
         if not ctx.packagedb.has_package(self.pkginfo.name):
-            ctx.packagedb.add_package(self.pkginfo, pisi.itembyrepodb.thirdparty)
+            ctx.packagedb.add_package(self.pkginfo, pisi.db.itembyrepodb.thirdparty)
 
         # If it is explicitly specified that package conflicts with this package and also
         # we passed check_conflicts tests in operations.py than this means a non-conflicting
@@ -199,7 +199,7 @@ class Install(AtomicOperation):
         if ctx.installdb.is_installed(pkg.name): # is this a reinstallation?
 
             #FIXME: consider REPOSITORY instead of DISTRIBUTION -- exa
-            #ipackage = ctx.packagedb.get_package(pkg.name, pisi.itembyrepodb.installed)
+            #ipackage = ctx.packagedb.get_package(pkg.name, pisi.db.itembyrepodb.installed)
             ipkg = ctx.installdb.get_info(pkg.name)
             repomismatch = ipkg.distribution != pkg.distribution
 
@@ -424,7 +424,7 @@ class Install(AtomicOperation):
         ctx.filesdb.add_files(self.metadata.package.name, self.files, txn=txn)
 
         # installed packages
-        ctx.packagedb.add_package(self.pkginfo, pisi.itembyrepodb.installed, txn=txn)
+        ctx.packagedb.add_package(self.pkginfo, pisi.db.itembyrepodb.installed, txn=txn)
 
 
 def install_single(pkg, upgrade = False):
@@ -453,7 +453,7 @@ class Remove(AtomicOperation):
     def __init__(self, package_name, ignore_dep = None):
         super(Remove, self).__init__(ignore_dep)
         self.package_name = package_name
-        self.package = ctx.packagedb.get_package(self.package_name, pisi.itembyrepodb.installed)
+        self.package = ctx.packagedb.get_package(self.package_name, pisi.db.itembyrepodb.installed)
         try:
             self.files = ctx.installdb.files(self.package_name)
         except pisi.Error, e:
@@ -552,7 +552,7 @@ class Remove(AtomicOperation):
         ctx.installdb.remove(self.package_name, txn)
         ctx.filesdb.remove_files(self.files, txn)
         # FIXME: something goes wrong here, if we use ctx operations ends up with segmentation fault!
-        pisi.packagedb.remove_tracking_package(self.package_name, txn)
+        pisi.db.packagedb.remove_tracking_package(self.package_name, txn)
 
 
 def remove_single(package_name):
@@ -579,7 +579,7 @@ def virtual_install(metadata, files, txn):
         ctx.filesdb.add_files(metadata.package.name, files, txn=txn)
 
     # installed packages
-    ctx.packagedb.add_package(metadata.package, pisi.itembyrepodb.installed, txn=txn)
+    ctx.packagedb.add_package(metadata.package, pisi.db.itembyrepodb.installed, txn=txn)
 
 def resurrect_package(package_fn, write_files, txn = None):
     """Resurrect the package from xml files"""

@@ -25,8 +25,7 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi.context as ctx
-import pisi.repodb
-import pisi.itembyrepodb
+import pisi.db.itembyrepodb
 
 class NotfoundError(pisi.Error):
     pass
@@ -34,8 +33,8 @@ class NotfoundError(pisi.Error):
 class SourceDB(object):
 
     def __init__(self):
-        self.d = pisi.itembyrepodb.ItemByRepoDB('source')
-        self.dpkgtosrc = pisi.itembyrepodb.ItemByRepoDB('pkgtosrc')
+        self.d = pisi.db.itembyrepodb.ItemByRepoDB('source')
+        self.dpkgtosrc = pisi.db.itembyrepodb.ItemByRepoDB('pkgtosrc')
 
     def close(self):
         self.d.close()
@@ -50,13 +49,13 @@ class SourceDB(object):
     def get_spec(self, name, repo=None, txn = None):
         try:
             return self.d.get_item(name, repo, txn)
-        except pisi.itembyrepodb.NotfoundError:
+        except pisi.db.itembyrepodb.NotfoundError:
             raise NotfoundError(_("Source package %s not found") % name)
 
     def get_spec_repo(self, name, repo=None, txn = None):
         try:
             return self.d.get_item_repo(name, repo, txn)
-        except pisi.itembyrepodb.NotfoundError:
+        except pisi.db.itembyrepodb.NotfoundError:
             raise NotfoundError(_("Source package %s not found") % name)
 
     def pkgtosrc(self, name, txn = None):
@@ -90,18 +89,18 @@ class SourceDB(object):
             self.dpkgtosrc.remove_repo(repo, txn=txn)
         self.d.txn_proc(proc, txn)
 
-sourcedb = None
+srcdb = None
 
 def init():
-    global sourcedb
-    if sourcedb:
-        return sourcedb
+    global srcdb
+    if srcdb:
+        return srcdb
 
-    sourcedb = SourceDB()
-    return sourcedb
+    srcdb = SourceDB()
+    return srcdb
 
 def finalize():
-    global sourcedb
-    if sourcedb:
-        sourcedb.close()
-        sourcedb = None
+    global srcdb
+    if srcdb:
+        srcdb.close()
+        srcdb = None

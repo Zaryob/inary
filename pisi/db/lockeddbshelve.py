@@ -16,7 +16,7 @@ import types
 
 import bsddb3.db as db
 import bsddb3.dbobj as dbobj
-import pisi.dbshelve as shelve
+import pisi.db.dbshelve as shelve
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)

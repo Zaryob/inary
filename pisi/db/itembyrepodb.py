@@ -16,7 +16,7 @@ _ = __trans.ugettext
 
 import pisi
 import pisi.context as ctx
-import pisi.lockeddbshelve as shelve
+import pisi.db.lockeddbshelve as shelve
 
 installed, thirdparty, repos, all = range(1, 5)
 

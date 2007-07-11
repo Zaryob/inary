@@ -23,7 +23,7 @@ _ = __trans.ugettext
 
 import pisi
 import pisi.context as ctx
-import pisi.itembyrepodb
+import pisi.db.itembyrepodb
 
 class Error(pisi.Error):
     pass
@@ -38,10 +38,10 @@ class PackageDB(object):
     using shelf objects"""
 
     def __init__(self):
-        self.d = pisi.itembyrepodb.ItemByRepoDB('package')
-        self.dr = pisi.itembyrepodb.ItemByRepoDB('revdep')
-        self.do = pisi.itembyrepodb.ItemByRepoDB('obsoleted')
-        self.drp = pisi.itembyrepodb.ItemByRepoDB('replaces')
+        self.d = pisi.db.itembyrepodb.ItemByRepoDB('package')
+        self.dr = pisi.db.itembyrepodb.ItemByRepoDB('revdep')
+        self.do = pisi.db.itembyrepodb.ItemByRepoDB('obsoleted')
+        self.drp = pisi.db.itembyrepodb.ItemByRepoDB('replaces')
 
     def close(self):
         self.d.close()
@@ -61,7 +61,7 @@ class PackageDB(object):
     def get_package(self, name, repo=None, txn = None):
         try:
             return self.d.get_item(name, repo, txn=txn)
-        except pisi.itembyrepodb.NotfoundError:
+        except pisi.db.itembyrepodb.NotfoundError:
             raise Error(_('Package %s not found') % name)
 
     def get_package_repo(self, name, repo=None, txn = None):
@@ -172,21 +172,22 @@ class PackageDB(object):
             self.drp.remove_repo(repo, txn=txn)
         self.d.txn_proc(proc, txn)
 
-pkgdb = None
-
 def remove_tracking_package(name, txn = None):
     # remove the guy from the tracking databases
-    if pkgdb.has_package(name, pisi.itembyrepodb.installed, txn=txn):
-        pkgdb.remove_package(name, pisi.itembyrepodb.installed, txn=txn)
-    if pkgdb.has_package(name, pisi.itembyrepodb.thirdparty, txn=txn):
-        pkgdb.remove_package(name, pisi.itembyrepodb.thirdparty, txn=txn)
+    if pkgdb.has_package(name, pisi.db.itembyrepodb.installed, txn=txn):
+        pkgdb.remove_package(name, pisi.db.itembyrepodb.installed, txn=txn)
+    if pkgdb.has_package(name, pisi.db.itembyrepodb.thirdparty, txn=txn):
+        pkgdb.remove_package(name, pisi.db.itembyrepodb.thirdparty, txn=txn)
 
-def init_db():
+pkgdb = None
+
+def init():
     global pkgdb
     pkgdb = PackageDB()
     return pkgdb
 
-def finalize_db():
+def finalize():
     global pkgdb
     if pkgdb:
         pkgdb.close()
+        pkgdb = None
