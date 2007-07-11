@@ -23,15 +23,12 @@ import pisi
 import pisi.context as ctx
 import pisi.specfile as specfile
 import pisi.metadata as metadata
-import pisi.db.packagedb as packagedb
-import pisi.db.sourcedb as sourcedb
 import pisi.util as util
 import pisi.package
 import pisi.pxml.xmlfile as xmlfile
 import pisi.file
 import pisi.pxml.autoxml as autoxml
 import pisi.component as component
-import pisi.specfile as specfile
 
 class Error(pisi.Error):
     pass
@@ -129,6 +126,7 @@ class Index(xmlfile.XmlFile):
         for comp in self.components:
             ctx.componentdb.update_component(comp, repo, txn)
         ctx.packagedb.remove_repo(repo, txn=txn)
+        ctx.packagedb.add_obsoletes(self.distribution.obsoletes, repo, txn=txn)
         for pkg in self.packages:
             ctx.packagedb.add_package(pkg, repo, txn=txn)
             update_progress()

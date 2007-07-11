@@ -41,6 +41,9 @@ dbenv = None
 installdb = None
 packagedb = None
 repodb = None
+sourcedb = None
+filesdb = None
+componentdb = None
 invidx = None
 
 comar = None

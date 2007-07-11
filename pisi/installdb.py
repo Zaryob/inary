@@ -13,10 +13,6 @@
 # installation database
 #
 
-# System
-import os
-import fcntl
-
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
@@ -24,8 +20,7 @@ _ = __trans.ugettext
 # PiSi
 import pisi
 import pisi.context as ctx
-import pisi.oo
-import pisi.db.lockeddbshelve as dbshelve
+import pisi.lockeddbshelve as shelve
 import pisi.files
 import pisi.util
 
@@ -68,11 +63,10 @@ class InstallInfo:
 
 
 class InstallDB:
-    __metaclass__ = pisi.oo.Singleton
-    
+
     def __init__(self):
-        self.d = dbshelve.LockedDBShelf('install')
-        self.dp = dbshelve.LockedDBShelf('configpending')
+        self.d = shelve.LockedDBShelf('install')
+        self.dp = shelve.LockedDBShelf('configpending')
         self.files_dir = pisi.util.join_path(ctx.config.db_dir(), 'files')
 
     def close(self):
@@ -112,20 +106,20 @@ class InstallDB:
 
     def list_installed(self, txn = None):
         def proc(txn):
-            list = []
+            l = []
             for (pkg, info) in self.d.items(txn):
                 if info.state=='i' or info.state=='ip':
-                    list.append(pkg)
-            return list
+                    l.append(pkg)
+            return l
         return self.d.txn_proc(proc, txn)
 
     def list_pending(self):
         # warning: reads the entire db
-        dict = {}
+        d = {}
         for (pkg, x) in self.dp.items():
             pkginfo = self.d[pkg]
-            dict[pkg] = pkginfo
-        return dict
+            d[pkg] = pkginfo
+        return d
 
     def get_info(self, pkg):
         pkg = str(pkg)
@@ -198,3 +192,19 @@ class InstallDB:
             if self.d.has_key(pkg, txn):
                 self.d.delete(pkg, txn)
         self.d.txn_proc(proc, txn)
+
+db = None
+
+def init():
+    global db
+    if db:
+        return db
+
+    db = InstallDB()
+    return db
+
+def finalize():
+    global db
+    if db:
+        db.close()
+        db = None

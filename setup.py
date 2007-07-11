@@ -64,6 +64,7 @@ class Install(install):
             return
 
         pisiconf = open(confFile, "w")
+
         klasses = inspect.getmembers(pisi.configfile, inspect.isclass)
         defaults = [klass for klass in klasses if klass[0].endswith('Defaults')]
 
@@ -76,8 +77,10 @@ class Install(install):
                                and not m[0].endswith('__')]
 
             for member in section_members:
-                pisiconf.write("%s = %s\n" % (member[0], member[1]))
-
+                if member[1] == None or member[1] == "":
+                    pisiconf.write("# %s = %s\n" % (member[0], member[1]))
+                else:
+                    pisiconf.write("%s = %s\n" % (member[0], member[1]))
             pisiconf.write('\n')
 
 
@@ -90,7 +93,7 @@ setup(name="pisi",
     author_email="pisi@pardus.org.tr",
     url="http://www.pardus.org.tr/eng/pisi/",
     package_dir = {'': ''},
-    packages = ['pisi', 'pisi.cli', 'pisi.db', 'pisi.actionsapi', 'pisi.pxml', 'pisi.scenarioapi'],
+    packages = ['pisi', 'pisi.cli', 'pisi.actionsapi', 'pisi.pxml', 'pisi.scenarioapi'],
     scripts = ['pisi-cli', 'scripts/lspisi', 'scripts/unpisi', 'scripts/check-newconfigs.py', 'scripts/revdep-rebuild'],
     cmdclass = {'install' : Install}
     )

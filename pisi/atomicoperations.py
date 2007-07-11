@@ -15,15 +15,12 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import sys
 import os
 import bsddb3.db as db
 import shutil
 
 import pisi
 import pisi.context as ctx
-import pisi.db.packagedb as packagedb
-import pisi.dependency as dependency
 import pisi.conflict
 import pisi.util as util
 import pisi.metadata
@@ -32,6 +29,7 @@ import pisi.uri
 import pisi.ui
 import pisi.version
 import pisi.delta
+import pisi.packagedb
 
 class Error(pisi.Error):
     pass
@@ -43,8 +41,12 @@ class NotfoundError(pisi.Error):
 
 class AtomicOperation(object):
 
-    def __init__(self):
-        pass
+    def __init__(self, ignore_dep = None):
+        #self.package = package
+        if ignore_dep==None:
+            self.ignore_dep = ctx.config.get_option('ignore_dependency')
+        else:
+            self.ignore_dep = ignore_dep
 
     def run(self, package):
         "perform an atomic package operation"
@@ -55,14 +57,14 @@ class Install(AtomicOperation):
     "Install class, provides install routines for pisi packages"
 
     @staticmethod
-    def from_name(name):
+    def from_name(name, ignore_dep = None):
         # download package and return an installer object
         # find package in repository
         repo = ctx.packagedb.which_repo(name)
         if repo:
             ctx.ui.info(_("Package %s found in repository %s") % (name, repo))
             repo = ctx.repodb.get_repo(repo)
-            pkg = pisi.api.get_repo_package(name)
+            pkg = ctx.packagedb.get_package(name)
             delta = None
 
             # Package is installed. This is an upgrade. Check delta.
@@ -85,13 +87,13 @@ class Install(AtomicOperation):
 
             ctx.ui.info(_("Package URI: %s") % pkg_path, verbose=True)
 
-            return Install(pkg_path)
+            return Install(pkg_path, ignore_dep)
         else:
             raise Error(_("Package %s not found in any active repository.") % name)
 
-    def __init__(self, package_fname, ignore_file_conflicts = None):
+    def __init__(self, package_fname, ignore_dep = None, ignore_file_conflicts = None):
         "initialize from a file name"
-        super(Install, self).__init__()
+        super(Install, self).__init__(ignore_dep)
         if not ignore_file_conflicts:
             ignore_file_conflicts = ctx.get_option('ignore_file_conflicts')
         self.ignore_file_conflicts = ignore_file_conflicts
@@ -145,7 +147,7 @@ class Install(AtomicOperation):
         # check comar
         if self.metadata.package.providesComar and ctx.comar:
             import pisi.comariface as comariface
-            com = comariface.get_comar()
+            comariface.get_comar()
 
     def check_relations(self):
         # check dependencies
@@ -157,15 +159,25 @@ class Install(AtomicOperation):
         # check if package is in database
         # If it is not, put it into 3rd party packagedb
         if not ctx.packagedb.has_package(self.pkginfo.name):
-            ctx.packagedb.add_package(self.pkginfo, pisi.db.itembyrepodb.thirdparty)
+            ctx.packagedb.add_package(self.pkginfo, pisi.itembyrepodb.thirdparty)
 
+        # If it is explicitly specified that package conflicts with this package and also
+        # we passed check_conflicts tests in operations.py than this means a non-conflicting
+        # pkg is in "order" to be installed that has no file conflict problem with this package. 
+        # PS: we need this because "order" generating code does not consider conflicts.
+        def really_conflicts(pkg):
+            if not self.pkginfo.conflicts:
+                return True
+
+            return not pkg in map(lambda x:x.package, self.pkginfo.conflicts)
+        
         # check file conflicts
         file_conflicts = []
-        for file in self.files.list:
-            if ctx.filesdb.has_file(file.path):
-                pkg, existing_file = ctx.filesdb.get_file(file.path)
-                dst = pisi.util.join_path(ctx.config.dest_dir(), file.path)
-                if pkg != self.pkginfo.name and not os.path.isdir(dst):
+        for f in self.files.list:
+            if ctx.filesdb.has_file(f.path):
+                pkg, existing_file = ctx.filesdb.get_file(f.path)
+                dst = pisi.util.join_path(ctx.config.dest_dir(), f.path)
+                if pkg != self.pkginfo.name and not os.path.isdir(dst) and really_conflicts(pkg):
                     file_conflicts.append( (pkg, existing_file) )
         if file_conflicts:
             file_conflicts_str = ""
@@ -187,6 +199,7 @@ class Install(AtomicOperation):
         if ctx.installdb.is_installed(pkg.name): # is this a reinstallation?
 
             #FIXME: consider REPOSITORY instead of DISTRIBUTION -- exa
+            #ipackage = ctx.packagedb.get_package(pkg.name, pisi.itembyrepodb.installed)
             ipkg = ctx.installdb.get_info(pkg.name)
             repomismatch = ipkg.distribution != pkg.distribution
 
@@ -273,8 +286,8 @@ class Install(AtomicOperation):
             fpath = pisi.util.join_path(ctx.config.dest_dir(), config.path)
             if os.path.exists(fpath) and not os.path.isdir(fpath):
                 if os.path.islink(fpath):
-                    file = os.readlink(fpath)
-                    if os.path.exists(file) and pisi.util.sha1_data(file) != config.hash:
+                    f = os.readlink(fpath)
+                    if os.path.exists(f) and pisi.util.sha1_data(f) != config.hash:
                         changed = True
                 else:
                     if pisi.util.sha1_file(fpath) != config.hash:
@@ -332,8 +345,8 @@ class Install(AtomicOperation):
 
         # remove left over files from the old package.
         def clean_leftovers():
-            new = set(map(lambda x: str(x.path), self.files.list))
-            old = set(map(lambda x: str(x.path), self.old_files.list))
+            new = set(str(f.path) for f in self.files.list)
+            old = set(str(f.path) for f in self.old_files.list)
             leftover = old - new
             old_fileinfo = {}
             for fileinfo in self.old_files.list:
@@ -347,19 +360,19 @@ class Install(AtomicOperation):
             old = filter(lambda x: x.type == 'config', self.old_files.list)
 
             # get config path lists
-            newconfig = set(map(lambda x: str(x.path), new))
-            oldconfig = set(map(lambda x: str(x.path), old))
+            newconfig = set(str(x.path) for x in new)
+            oldconfig = set(str(x.path) for x in old)
 
             config_overlaps = newconfig & oldconfig
             if config_overlaps:
                 files = filter(lambda x: x.path in config_overlaps, old)
-                for file in files:
-                    check_config_changed(file)
+                for f in files:
+                    check_config_changed(f)
         else:
-            for file in self.files.list:
-                if file.type == 'config':
+            for f in self.files.list:
+                if f.type == 'config':
                     # there may be left over config files
-                    check_config_changed(file)
+                    check_config_changed(f)
 
         if self.package_fname.endswith(ctx.const.delta_package_suffix):
             relocate_files()
@@ -368,9 +381,6 @@ class Install(AtomicOperation):
 
         if config_changed:
             rename_configs()
-
-        if self.package_fname.endswith(ctx.const.delta_package_suffix):
-            relocate_files()
 
         if self.reinstall:
             clean_leftovers()
@@ -414,7 +424,7 @@ class Install(AtomicOperation):
         ctx.filesdb.add_files(self.metadata.package.name, self.files, txn=txn)
 
         # installed packages
-        ctx.packagedb.add_package(self.pkginfo, pisi.db.itembyrepodb.installed, txn=txn)
+        ctx.packagedb.add_package(self.pkginfo, pisi.itembyrepodb.installed, txn=txn)
 
 
 def install_single(pkg, upgrade = False):
@@ -440,10 +450,10 @@ def install_single_name(name, upgrade = False):
 
 class Remove(AtomicOperation):
 
-    def __init__(self, package_name):
-        super(Remove, self).__init__()
+    def __init__(self, package_name, ignore_dep = None):
+        super(Remove, self).__init__(ignore_dep)
         self.package_name = package_name
-        self.package = pisi.api.get_installed_package(self.package_name)
+        self.package = ctx.packagedb.get_package(self.package_name, pisi.itembyrepodb.installed)
         try:
             self.files = ctx.installdb.files(self.package_name)
         except pisi.Error, e:
@@ -509,7 +519,7 @@ class Remove(AtomicOperation):
             try:
                 if pisi.util.sha1_file(fpath) == fileinfo.hash:
                     os.unlink(fpath)
-            except pisi.util.FileError, e:
+            except pisi.util.FileError:
                 pass
         else:
             if os.path.isfile(fpath) or os.path.islink(fpath):
@@ -541,7 +551,8 @@ class Remove(AtomicOperation):
     def remove_db(self, txn):
         ctx.installdb.remove(self.package_name, txn)
         ctx.filesdb.remove_files(self.files, txn)
-        pisi.db.packagedb.remove_tracking_package(self.package_name, txn)
+        # FIXME: something goes wrong here, if we use ctx operations ends up with segmentation fault!
+        pisi.packagedb.remove_tracking_package(self.package_name, txn)
 
 
 def remove_single(package_name):
@@ -568,7 +579,7 @@ def virtual_install(metadata, files, txn):
         ctx.filesdb.add_files(metadata.package.name, files, txn=txn)
 
     # installed packages
-    ctx.packagedb.add_package(metadata.package, pisi.db.itembyrepodb.installed, txn=txn)
+    ctx.packagedb.add_package(metadata.package, pisi.itembyrepodb.installed, txn=txn)
 
 def resurrect_package(package_fn, write_files, txn = None):
     """Resurrect the package from xml files"""

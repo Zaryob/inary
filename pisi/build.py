@@ -13,7 +13,6 @@
 
 # python standard library
 import os
-import sys
 import glob
 import copy
 import stat
@@ -129,6 +128,8 @@ class Builder:
         else:
             self.specdir = os.path.dirname(self.specuri.get_uri())
 
+        self.read_translations(self.specdir)
+
         self.sourceArchive = pisi.sourcearchive.SourceArchive(self.spec, self.pkg_work_dir())
 
         self.set_environment_vars()
@@ -142,8 +143,11 @@ class Builder:
             specuri = pisi.uri.URI(os.path.realpath(specuri.get_uri()))  # FIXME: doesn't work for file://
         self.specuri = specuri
         spec = pisi.specfile.SpecFile()
-        spec.read(specuri, ctx.config.tmp_dir())
+        spec.read(self.specuri, ctx.config.tmp_dir())
         self.spec = spec
+
+    def read_translations(self, specdir):
+        self.spec.read_translations(pisi.util.join_path(specdir, ctx.const.translations_file))
 
     # directory accessor functions
 
@@ -237,6 +241,7 @@ class Builder:
         #self.location = os.path.dirname(self.url.uri)
 
         self.fetch_actionsfile()
+        self.fetch_translationsfile()
         self.fetch_patches()
         self.fetch_comarfiles()
         self.fetch_additionalFiles()
@@ -246,6 +251,14 @@ class Builder:
     def fetch_actionsfile(self):
         actionsuri = pisi.util.join_path(self.specdiruri, ctx.const.actions_file)
         self.download(actionsuri, self.destdir)
+
+    def fetch_translationsfile(self):
+        translationsuri = pisi.util.join_path(self.specdiruri, ctx.const.translations_file)
+        try:
+            self.download(translationsuri, self.destdir)
+        except pisi.fetcher.FetchError:
+            # translations.xml is not mandatory for PiSi
+            pass
 
     def fetch_patches(self):
         spec = self.spec
@@ -402,6 +415,9 @@ class Builder:
 
         return pisi.util.join_path(self.pkg_work_dir(), workdir)
 
+    def log_sandbox_violation(self, operation, path, canonical_path):
+        ctx.ui.error(_("Sandbox violation: %s (%s -> %s)") % (operation, path, canonical_path))
+
     def run_action_function(self, func, mandatory=False):
         """Calls the corresponding function in actions.py.
 
@@ -412,13 +428,33 @@ class Builder:
         curDir = os.getcwd()
         os.chdir(self.srcDir)
 
-
         if func in self.actionLocals:
-            self.actionLocals[func]()
+            if ctx.get_option('ignore_sandbox'):
+                self.actionLocals[func]()
+            else:
+                import catbox
+                # stupid autoconf family needs /usr/lib/conftest* and /usr/lib/cf* for some conftest,
+                # http://sources.gentoo.org/viewcvs.py/portage/trunk/sandbox/files/sandbox/sandbox.c also permits these
+                valid_dirs = [self.pkg_dir(), "/tmp/", "/var/tmp/", "/dev/tty", "/dev/pts/", "/dev/pty", "/dev/null", "/dev/zero", "/dev/ptmx", "/proc/", "/usr/lib/conftest", "/usr/lib/cf"]
+                if ctx.config.values.build.buildhelper == "ccache":
+                    valid_dirs.append("%s/.ccache" % os.environ["HOME"])
+                # every qt/KDE application check these
+                valid_dirs.append("%s/.qt/.qt_plugins_3.3rc.lock" % os.environ["HOME"])
+                valid_dirs.append("%s/.qt/qt_plugins_3.3rc.tmp" % os.environ["HOME"])
+                valid_dirs.append("%s/.qt/.qtrc.lock" % os.environ["HOME"])
+                valid_dirs.append("%s/.qt/.qt_designerrc.lock" % os.environ["HOME"])
+                valid_dirs.append("/usr/qt/3/etc/settings/.qt_plugins_3.3rc.lock")
+                valid_dirs.append("/usr/qt/3/etc/settings/qt_plugins_3.3rc.tmp")
+                valid_dirs.append("/usr/qt/3/etc/settings/qt_plugins_3.3rc")
+                ret = catbox.run(self.actionLocals[func], valid_dirs, logger=self.log_sandbox_violation)
+                if ret.code == 1:
+                    raise RuntimeError
+                if ret.violations != []:
+                    ctx.ui.error(_("Sandbox violations!"))
         else:
             if mandatory:
-                Error, _("unable to call function from actions: %s") %func
-
+                raise Error(_("unable to call function from actions: %s") % func)
+        
         os.chdir(curDir)
         return True
 
@@ -496,6 +532,7 @@ class Builder:
             ctx.ui.action(_("* Applying patch: %s") % patch.filename)
             pisi.util.do_patch(self.srcDir, patchFile, level=patch.level)
         return True
+        return True
 
     def generate_static_package_object(self):
         ar_files = []
@@ -560,7 +597,7 @@ class Builder:
         except KeyError:
             pisi.util.strip_directory(install_dir)
 
-    def gen_metadata_xml(self, package, build_no=None):
+    def gen_metadata_xml(self, package):
         """Generate the metadata.xml file for build source.
 
         metadata.xml is composed of the information from specfile plus
@@ -634,7 +671,16 @@ class Builder:
         files.write(files_xml_path)
         self.files = files
 
-    def find_old_package_info(self, package_name):
+    def calc_build_no(self, package_name):
+        """Calculate build number"""
+
+        def metadata_changed(old_metadata, new_metadata):
+            for key in old_metadata.package.__dict__.keys():
+                if old_metadata.package.__dict__[key] != new_metadata.package.__dict__[key]:
+                    if key != "build":
+                        return True
+
+            return False
 
         # find previous build in packages dir
         found = []
@@ -654,87 +700,71 @@ class Builder:
                     ctx.ui.warning('Package file %s may be corrupt. Skipping.' % old_package_fn)
 
         for root, dirs, files in os.walk(ctx.config.compiled_packages_dir()):
-            for file in files:
-                locate_old_package(pisi.util.join_path(root,file))
+            for f in files:
+                locate_old_package(pisi.util.join_path(root,f))
 
         outdir=ctx.get_option('output_dir')
         if not outdir:
             outdir = '.'
-        for file in [pisi.util.join_path(outdir,entry) for entry in os.listdir(outdir)]:
-            if os.path.isfile(file):
-                locate_old_package(file)
+        for f in [pisi.util.join_path(outdir,entry) for entry in os.listdir(outdir)]:
+            if os.path.isfile(f):
+                locate_old_package(f)
 
-        if found:
+        if not found:
+            return (1, None)
+            ctx.ui.warning(_('(no previous build found, setting build no to 1.)'))
+        else:
             a = filter(lambda (x,y): y != None, found)
             ctx.ui.debug(str(a))
-
             if a:
                 # sort in order of increasing build number
                 a.sort(lambda x,y : cmp(x[1],y[1]))
                 old_package_fn = a[-1][0]   # get the last one
                 old_build = a[-1][1]
-                return (old_package_fn, old_build)
 
-        return None
+                # compare old files.xml with the new one..
+                old_pkg = pisi.package.Package(old_package_fn, 'r')
+                old_pkg.read(pisi.util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
 
-    def calc_build_no(self, old_package_info):
-        """Calculate build number"""
+                changed = False
+                fnew = self.files.list
+                fold = old_pkg.files.list
+                fold.sort(lambda x,y : cmp(x.path,y.path))
+                fnew.sort(lambda x,y : cmp(x.path,y.path))
 
-        def metadata_changed(old_metadata, new_metadata):
-            for key in old_metadata.package.__dict__.keys():
-                if old_metadata.package.__dict__[key] != new_metadata.package.__dict__[key]:
-                    if key != "build":
-                        return True
-
-            return False
-
-        if not old_package_info:
-            return (1, None)
-            ctx.ui.warning(_('(no previous build no info found, setting build no to 1.)'))
-        else:
-            old_package_fn, old_build = old_package_info
-
-            # compare old files.xml with the new one..
-            old_pkg = pisi.package.Package(old_package_fn, 'r')
-            old_pkg.read(pisi.util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
-
-            changed = False
-            fnew = self.files.list
-            fold = old_pkg.files.list
-            fold.sort(lambda x,y : cmp(x.path,y.path))
-            fnew.sort(lambda x,y : cmp(x.path,y.path))
-
-            if len(fnew) != len(fold):
-                changed = True
-            else:
-                for i in range(len(fold)):
-                    fo = fold.pop(0)
-                    fn = fnew.pop(0)
-                    if fo.path != fn.path:
-                        changed = True
-                        break
-                    else:
-                        if fo.hash != fn.hash:
+                if len(fnew) != len(fold):
+                    changed = True
+                else:
+                    for i in range(len(fold)):
+                        fo = fold.pop(0)
+                        fn = fnew.pop(0)
+                        if fo.path != fn.path:
                             changed = True
                             break
+                        else:
+                            if fo.hash != fn.hash:
+                                changed = True
+                                break
 
-            if metadata_changed(old_pkg.metadata, self.metadata):
-                changed = True
-            
-            self.old_packages.append(os.path.basename(old_package_fn))
+                if metadata_changed(old_pkg.metadata, self.metadata):
+                    changed = True
 
-        ctx.ui.debug('old build number: %s' % old_build)
+                self.old_packages.append(os.path.basename(old_package_fn))
+            else: # no old build had a build number
+                old_build = None
 
-        # set build number
-        if old_build is None:
-            ctx.ui.warning(_('(old package lacks a build no, setting build no to 1.)'))
-            return (1, None)
-        elif changed:
-            ctx.ui.info(_('There are changes, incrementing build no to %d') % (old_build + 1))
-            return (old_build + 1, old_build)
-        else:
-            ctx.ui.info(_('There is no change from previous build %d') % old_build)
-            return (old_build, old_build)
+            ctx.ui.debug('old build number: %s' % old_build)
+
+            # set build number
+            if old_build is None:
+                ctx.ui.warning(_('(old package lacks a build no, setting build no to 1.)'))
+                return (1, None)
+            elif changed:
+                ctx.ui.info(_('There are changes, incrementing build no to %d') % (old_build + 1))
+                return (old_build + 1, old_build)
+            else:
+                ctx.ui.info(_('There is no change from previous build %d') % old_build)
+                return (old_build, old_build)
 
     def build_packages(self):
         """Build each package defined in PSPEC file. After this process there
@@ -814,16 +844,12 @@ class Builder:
             ctx.ui.info(_("Generating %s,") % ctx.const.metadata_xml)
             self.gen_metadata_xml(package)
 
-            # find the latest build info if any with build no.
-            # old_package_info = (old_package_file_name, old_build_no)
-            old_package_info = self.find_old_package_info(package.name)
-
             # build number
             if ctx.config.options.ignore_build_no or not ctx.config.values.build.buildno:
                 build_no = old_build_no = None
                 ctx.ui.warning(_('Build number is not available. For repo builds you must enable buildno in pisi.conf.'))
             else:
-                build_no, old_build_no = self.calc_build_no(old_package_info)
+                build_no, old_build_no = self.calc_build_no(package.name)
 
             self.metadata.package.build = build_no
             self.metadata.write(pisi.util.join_path(self.pkg_dir(), ctx.const.metadata_xml))

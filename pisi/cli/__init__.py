@@ -103,7 +103,7 @@ class CLI(pisi.ui.UI):
                 opt = int(s)
                 if 1 <= opt and opt <= len(opts):
                     return opts(opt-1)
-            except (Exception,e):
+            except Exception:
                 pass
 
     def confirm(self, msg):

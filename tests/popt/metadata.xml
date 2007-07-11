@@ -1,87 +1,51 @@
-<?xml version="1.0" ?>
 <PISI>
     <Source>
-        <Name>
-            popt
-        </Name>
+        <Name>popt</Name>
+        <Homepage>http://www.rpm.org/</Homepage>
         <Packager>
-            <Name>
-                Kırmızı kafalar
-            </Name>
-            <Email>
-                hotmail@redhat.com
-            </Email>
+            <Name>Kırmızı kafalar</Name>
+            <Email>hotmail@redhat.com</Email>
         </Packager>
     </Source>
     <Package>
-        <Name>
-            popt-libs
-        </Name>
-        <Summary>
-            Command line option parsing library
-        </Summary>
-        <Description>
-            library files for popt
-        </Description>
-        <License>
-            As-Is
-        </License>
-        <IsA>
-            library:util:optparser
-        </IsA>
-        <PartOf>
-            rpm:archive
-        </PartOf>
+        <Name>popt</Name>
+        <Summary xml:lang="en">Command line option parsing library</Summary>
+        <Summary xml:lang="tr">Komut satırı seçenekleri işleme kütüphanesi</Summary>
+        <Description xml:lang="en">library files for popt</Description>
+        <IsA>app:console</IsA>
+        <PartOf>system.base</PartOf>
+        <License>as-is</License>
         <RuntimeDependencies>
-            <Dependency>
-                gettext
-            </Dependency>
+            <Dependency>gettext</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="sharedLib">
-                /usr/lib
-            </Path>
-            <Path fileType="doc">
-                /usr/share/doc
-            </Path>
-            <Path fileType="doc">
-                /usr/share/man
-            </Path>
-            <Path fileType="localedata">
-                /usr/share/locale
-            </Path>
-            <Path fileType="header">
-                /usr/include/popt.h
-            </Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="header">/usr/include/popt.h</Path>
         </Files>
         <History>
-            <Update release="3">
+            <Update release="1">
                 <Date>2005-06-14</Date>
                 <Version>1.7</Version>
-            </Update>
-            <Update release="2">
-                <Date>2005-06-10</Date>
-                <Version>1.7</Version>
-            </Update>
-            <Update release="3">
-                <Date>2005-05-05</Date>
-                <Version>1.7</Version>
+                <Comment>First release.</Comment>
+                <Name>Kırmızı kafalar</Name>
+                <Email>hotmail@redhat.com</Email>
             </Update>
         </History>
-        <Build>
-            0
-        </Build>
-        <Distribution>
-            Pardus
-        </Distribution>
-        <DistributionRelease>
-            0.1
-        </DistributionRelease>
-        <Architecture>
-            Any
-        </Architecture>
-        <InstalledSize>
-            149691
-        </InstalledSize>
+        <Distribution>Pardus</Distribution>
+        <DistributionRelease>2007</DistributionRelease>
+        <Architecture>Any</Architecture>
+        <InstalledSize>15982</InstalledSize>
+        <PackageFormat>1.1</PackageFormat>
+        <Source>
+            <Name>popt</Name>
+            <Homepage>http://www.rpm.org/</Homepage>
+            <Packager>
+                <Name>Kırmızı kafalar</Name>
+                <Email>hotmail@redhat.com</Email>
+            </Packager>
+        </Source>
     </Package>
 </PISI>

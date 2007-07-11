@@ -10,18 +10,13 @@
 # Please read the COPYING file.
 #
 
-import os
-import fcntl
-import types
-
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi
-import pisi.util as util
 import pisi.context as ctx
-import pisi.db.lockeddbshelve as shelve
+import pisi.lockeddbshelve as shelve
 
 installed, thirdparty, repos, all = range(1, 5)
 

@@ -13,6 +13,7 @@ import os
 
 from pisi import metadata
 from pisi import util
+from pisi import specfile
 
 class MetaDataTestCase(unittest.TestCase):
 
@@ -20,13 +21,13 @@ class MetaDataTestCase(unittest.TestCase):
         md = metadata.MetaData()
         md.read('tests/popt/metadata.xml')
 
-        self.assertEqual(md.package.license, ["As-Is"])
+        self.assertEqual(md.package.license, ["as-is"])
 
         self.assertEqual(md.package.version, "1.7")
 
-        self.assertEqual(md.package.installedSize, 149691)
+        self.assertEqual(md.package.installedSize, 15982)
         return md
-    
+
     def testWrite(self):
         md = self.testRead()
         md.write('/tmp/metadata-test.xml')
@@ -36,5 +37,15 @@ class MetaDataTestCase(unittest.TestCase):
         if md.errors():
             self.fail("Couldn't verify!")
 
+    def testFromSpec(self):
+        specmd = metadata.MetaData()
+        spec = specfile.SpecFile('tests/popt/pspec.xml')
+        specmd.from_spec(spec.source, spec.packages[0], spec.history)
+        md = metadata.MetaData()
+        md.read('tests/popt/metadata.xml')
+        for key in md.package.__dict__.keys():
+            if key not in ('installedSize', 'packageFormat', 'distributionRelease',
+                           'license', 'architecture', 'distribution', 'partOf'):
+                self.assertEqual(md.package.__dict__[key], specmd.package.__dict__[key])
 
 suite = unittest.makeSuite(MetaDataTestCase)

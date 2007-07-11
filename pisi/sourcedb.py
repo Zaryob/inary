@@ -25,19 +25,17 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi.context as ctx
-import pisi.db.repodb
-import pisi.db.itembyrepodb as itembyrepodb
-import pisi.oo
+import pisi.repodb
+import pisi.itembyrepodb
 
 class NotfoundError(pisi.Error):
     pass
 
 class SourceDB(object):
-    __metaclass__ = pisi.oo.Singleton
 
     def __init__(self):
-        self.d = itembyrepodb.ItemByRepoDB('source')
-        self.dpkgtosrc = itembyrepodb.ItemByRepoDB('pkgtosrc')
+        self.d = pisi.itembyrepodb.ItemByRepoDB('source')
+        self.dpkgtosrc = pisi.itembyrepodb.ItemByRepoDB('pkgtosrc')
 
     def close(self):
         self.d.close()
@@ -52,13 +50,13 @@ class SourceDB(object):
     def get_spec(self, name, repo=None, txn = None):
         try:
             return self.d.get_item(name, repo, txn)
-        except pisi.db.itembyrepodb.NotfoundError, e:
+        except pisi.itembyrepodb.NotfoundError:
             raise NotfoundError(_("Source package %s not found") % name)
 
     def get_spec_repo(self, name, repo=None, txn = None):
         try:
             return self.d.get_item_repo(name, repo, txn)
-        except pisi.db.itembyrepodb.NotfoundError, e:
+        except pisi.itembyrepodb.NotfoundError:
             raise NotfoundError(_("Source package %s not found") % name)
 
     def pkgtosrc(self, name, txn = None):
@@ -83,6 +81,7 @@ class SourceDB(object):
             for pkg in spec.packages:
                 self.dpkgtosrc.remove_item_repo(pkg.name, repo, txn)
             ctx.componentdb.remove_spec(spec.source.partOf, spec.source.name, repo, txn)
+
         self.d.txn_proc(proc, txn)
 
     def remove_repo(self, repo, txn = None):
@@ -90,3 +89,19 @@ class SourceDB(object):
             self.d.remove_repo(repo, txn=txn)
             self.dpkgtosrc.remove_repo(repo, txn=txn)
         self.d.txn_proc(proc, txn)
+
+sourcedb = None
+
+def init():
+    global sourcedb
+    if sourcedb:
+        return sourcedb
+
+    sourcedb = SourceDB()
+    return sourcedb
+
+def finalize():
+    global sourcedb
+    if sourcedb:
+        sourcedb.close()
+        sourcedb = None

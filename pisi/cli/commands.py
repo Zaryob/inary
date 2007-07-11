@@ -99,9 +99,9 @@ class Command(object):
     @staticmethod
     def commands_string():
         s = ''
-        list = [x.name[0] for x in Command.cmd]
-        list.sort()
-        for name in list:
+        l = [x.name[0] for x in Command.cmd]
+        l.sort()
+        for name in l:
             commandcls = Command.cmd_dict[name]
             trans = gettext.translation('pisi', fallback=True)
             summary = trans.ugettext(commandcls.__doc__).split('\n')[0]
@@ -173,12 +173,12 @@ class Command(object):
 
         # make destdir absolute
         if self.options.destdir:
-            dir = str(self.options.destdir)
+            d = str(self.options.destdir)
             import os.path
-            if not os.path.exists(dir):
-                pisi.cli.printu(_('Destination directory %s does not exist. Creating directory.\n') % dir)
-                os.makedirs(dir)
-            self.options.destdir = os.path.realpath(dir)
+            if not os.path.exists(d):
+                pisi.cli.printu(_('Destination directory %s does not exist. Creating directory.\n') % d)
+                os.makedirs(d)
+            self.options.destdir = os.path.realpath(d)
 
     def check_auth_info(self):
         username = self.options.username
@@ -374,7 +374,7 @@ the package in graphviz format to 'pgraph.dot'.
                 repo = ctx.get_option('repository')
                 ctx.ui.info(_('Plotting packages in repository %s') % repo)
             else:
-                repo = pisi.db.itembyrepodb.repos
+                repo = pisi.itembyrepodb.repos
             if self.args:
                 a = self.args
             else:
@@ -387,7 +387,7 @@ the package in graphviz format to 'pgraph.dot'.
                 # if A is empty, then graph all packages
                 ctx.ui.info(_('Plotting a graph of relations among all installed packages'))
                 a = ctx.installdb.list_installed()
-            repo = pisi.db.itembyrepodb.installed
+            repo = pisi.itembyrepodb.installed
         g = pisi.api.package_graph(a, repo = repo,
                                    ignore_installed = ctx.get_option('ignore_installed'))
         g.write_graphviz(file(ctx.get_option('output'), 'w'))
@@ -451,8 +451,10 @@ to be downloaded from a repository containing sources.
                                default=False, help=_("Do not install build dependencies, fail if a build dependency is present"))
         group.add_option("-F", "--package-format", action="store", default='1.1',
                                help=_("PiSi binary package formats: '1.0', '1.1' (default)"))
-        group.add_option("--use-quilt", action="store_true",
-                               default=False, help=_("Use quilt patch management system instead of GNU patch"))
+        group.add_option("--use-quilt", action="store_true", default=False,
+                               help=_("Use quilt patch management system instead of GNU patch"))
+        group.add_option("--ignore-sandbox", action="store_true", default=False,
+                               help=_("Do not constrain build process inside the build folder"))
 
     def add_steps_options(self):
         group = OptionGroup(self.parser, _("build steps"))
@@ -530,7 +532,7 @@ and creates a delta pisi package with the changed files between two releases.
 
         self.init(database=False, write=False)
 
-        if len(self.args) is not 2:
+        if len(self.args) != 2:
             self.help()
             return
 
@@ -730,9 +732,9 @@ expanded to package names.
         import os
 
         patterns = []
-        file = ctx.get_option('exclude_from')
-        if os.path.exists(file):
-            for line in open(file, "r").readlines():
+        f = ctx.get_option('exclude_from')
+        if os.path.exists(f):
+            for line in open(f, "r").readlines():
                 if not line.startswith('#') and not line == '\n':
                     patterns.append(line.strip())
             if patterns:
@@ -752,8 +754,8 @@ expanded to package names.
 
             if not match:
                 # match pattern in component names
-                for cmp in fnmatch.filter(ctx.componentdb.list_components(), pattern):
-                    packages = packages - set(ctx.componentdb.get_union_packages(cmp, walk=True))
+                for compare in fnmatch.filter(ctx.componentdb.list_components(), pattern):
+                    packages = packages - set(ctx.componentdb.get_union_packages(compare, walk=True))
 
         return list(packages)
 
@@ -951,7 +953,7 @@ Usage: info <package1> <package2> ... <packagen>
                     ctx.ui.info(_('[inst] '), noln=True)
                 else:
                     ctx.ui.info(_('Installed package:'))
-                self.print_pkginfo(metadata, files,pisi.db.itembyrepodb.installed)
+                self.print_pkginfo(metadata, files,pisi.itembyrepodb.installed)
 
             if ctx.packagedb.has_package(arg):
                 metadata, files, repo = pisi.api.info_name(arg, False)
@@ -959,7 +961,7 @@ Usage: info <package1> <package2> ... <packagen>
                     ctx.ui.info(_('[repo] '), noln=True)
                 else:
                     ctx.ui.info(_('Package found in %s repository:') % repo)
-                self.print_pkginfo(metadata, files, pisi.db.itembyrepodb.repos)
+                self.print_pkginfo(metadata, files, pisi.itembyrepodb.repos)
 
             if not ctx.packagedb.has_package(arg):
                 ctx.ui.info(_("%s is not found in repositories") % arg)
@@ -968,8 +970,6 @@ Usage: info <package1> <package2> ... <packagen>
                 ctx.ui.info(_("%s is not installed") % arg)
 
     def print_pkginfo(self, metadata, files, repo = None):
-        import os.path
-
         if ctx.get_option('short'):
             pkg = metadata.package
             ctx.ui.info('%15s - %s' % (pkg.name, unicode(pkg.summary)))
@@ -1017,7 +1017,7 @@ If no packages are given, checks all installed packages.
     def options(self):
         group = OptionGroup(self.parser, _("check options"))
         group.add_option("-c", "--component", action="store",
-                               default=None, help=_("Check installed packages under given component"))
+                              default=None, help=_("Check installed packages under given component"))
         self.parser.add_option_group(group)
 
     def run(self):
@@ -1146,7 +1146,7 @@ Usage: list-installed
             ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
             print         '========================================================================'
         for pkg in installed:
-            package = pisi.api.get_installed_package(pkg)
+            package = ctx.packagedb.get_package(pkg, pisi.itembyrepodb.installed)
             inst_info = ctx.installdb.get_info(pkg)
             if self.options.long:
                 ctx.ui.info(unicode(package))
@@ -1273,7 +1273,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
             else:
                 name = 'pardus-2007'
                 indexuri = 'http://paketler.pardus.org.tr/pardus-2007/pisi-index.xml.bz2'
-            pisi.api.add_repository(name, indexuri, ctx.get_option('at'))
+            pisi.api.add_repo(name, indexuri, ctx.get_option('at'))
             if ctx.ui.confirm(_('Update PiSi database for repository %s?') % name):
                 try:
                     pisi.api.update_repo(name)
@@ -1383,13 +1383,13 @@ all repositories.
 
         component = ctx.get_option('component')
         if component:
-            list = ctx.componentdb.get_packages(component, walk=True, repo=repo)
+            l = ctx.componentdb.get_packages(component, walk=True, repo=repo)
         else:
-            list = ctx.packagedb.list_packages(repo)
+            l = ctx.packagedb.list_packages(repo)
         installed_list = ctx.installdb.list_installed()
-        list.sort()
-        for p in list:
-            package = pisi.api.get_repo_package(p)
+        l.sort()
+        for p in l:
+            package = ctx.packagedb.get_package(p)
             if self.options.long:
                 ctx.ui.info(unicode(package))
             else:
@@ -1426,9 +1426,9 @@ repositories.
 
         self.init(database = True, write = False)
 
-        list = ctx.componentdb.list_components()
-        list.sort()
-        for p in list:
+        l = ctx.componentdb.list_components()
+        l.sort()
+        for p in l:
             component = ctx.componentdb.get_component(p)
             if self.options.long:
                 ctx.ui.info(unicode(component))
@@ -1465,9 +1465,9 @@ Gives a brief list of sources published in the repositories.
 
         self.init(database = True, write = False)
 
-        list = ctx.sourcedb.list()
-        list.sort()
-        for p in list:
+        l = ctx.sourcedb.list()
+        l.sort()
+        for p in l:
             sf, repo = ctx.sourcedb.get_spec_repo(p)
             if self.options.long:
                 ctx.ui.info('[Repository: ' + repo + ']')
@@ -1524,7 +1524,7 @@ Lists the packages that will be upgraded.
             ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
             print         '========================================================================'
         for pkg in upgradable_pkgs:
-            package = pisi.api.get_installed_package(pkg)
+            package = ctx.packagedb.get_package(pkg, pisi.itembyrepodb.installed)
             inst_info = ctx.installdb.get_info(pkg)
             if self.options.long:
                 ctx.ui.info(package)

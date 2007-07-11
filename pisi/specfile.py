@@ -22,12 +22,14 @@ _ = __trans.ugettext
 
 # standard python modules
 import os.path
+import piksemel
 
 # pisi modules
 import pisi.pxml.xmlfile as xmlfile
 import pisi.pxml.autoxml as autoxml
 import pisi.context as ctx
 import pisi.dependency
+import pisi.replace
 import pisi.conflict
 import pisi.component as component
 import pisi.util as util
@@ -170,8 +172,8 @@ class Package:
     t_ComponentDependencies = [ [autoxml.String], autoxml.optional, "RuntimeDependencies/Component"]
     t_Files = [ [Path], autoxml.optional]
     t_Conflicts = [ [pisi.conflict.Conflict], autoxml.optional, "Conflicts/Package"]
+    t_Replaces = [ [pisi.replace.Replace], autoxml.optional, "Replaces/Package"]
     t_ProvidesComar = [ [ComarProvide], autoxml.optional, "Provides/COMAR"]
-    #t_RequiresComar = [ [autoxml.String], autoxml.mandatory, "Requires/COMAR"]
     t_AdditionalFiles = [ [AdditionalFile], autoxml.optional]
     t_History = [ [Update], autoxml.optional]
 
@@ -181,7 +183,7 @@ class Package:
 
     def runtimeDependencies(self):
         deps = self.packageDependencies
-        deps += [ ctx.componentdb.get_component(x).packages for x in self.componentDependencies ]
+        deps += [ ctx.componentdb.get_component[x].packages for x in self.componentDependencies ]
         return deps
 
     def pkg_dir(self):
@@ -239,3 +241,21 @@ class SpecFile(xmlfile.XmlFile):
         #http://liste.pardus.org.tr/gelistirici/2006-September/002332.html
         self.source.description = autoxml.LocalText("Description")
         self.source.description["en"] = self.source.summary["en"]
+
+    def _set_i18n(self, tag, inst):
+        for summary in tag.tags("Summary"):
+            inst.summary[summary.getAttribute("xml:lang")] = summary.firstChild().data()
+        for desc in tag.tags("Description"):
+            inst.description[desc.getAttribute("xml:lang")] = desc.firstChild().data()
+
+    def read_translations(self, path):
+        if not os.path.exists(path):
+            return
+        doc = piksemel.parse(path)
+
+        self._set_i18n(doc.getTag("Source"), self.source)
+        for pak in doc.tags("Package"):
+            for inst in self.packages:
+                if inst.name == pak.getTagData("Name"):
+                    break
+            self._set_i18n(pak, inst)

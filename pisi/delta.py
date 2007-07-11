@@ -74,8 +74,8 @@ def create_delta_package(old_package, new_package):
         ctx.build_leftover = util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar_lzma)
 
         tar = archive.ArchiveTar(util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar_lzma), "tarlzma")
-        for file in files_delta:
-            tar.add_to_archive(file.path)
+        for f in files_delta:
+            tar.add_to_archive(f.path)
         tar.close()
 
         os.chdir(ctx.config.tmp_dir())
@@ -99,34 +99,39 @@ def create_delta_package(old_package, new_package):
 def find_delta(oldfiles, newfiles):
 
     hashto_files = {}
-    for file in newfiles.list:
-        hashto_files.setdefault(file.hash, []).append(file)
+    for f in newfiles.list:
+        hashto_files.setdefault(f.hash, []).append(f)
 
     files_new = sets.Set(map(lambda x:x.hash, newfiles.list))
     files_old = sets.Set(map(lambda x:x.hash, oldfiles.list))
     files_delta = files_new - files_old
 
     deltas = []
-    for hash in files_delta:
-        deltas.extend(hashto_files[hash])
+    for h in files_delta:
+        deltas.extend(hashto_files[h])
+
+    # Directory hashes are None. There was a bug with PolicyKit that should have an empty directory.
+    if hashto_files.has_key(None):
+        deltas.extend(hashto_files[None])
 
     return deltas
 
 def find_relocations(oldfiles, newfiles):
 
     files_new = {}
-    for file in newfiles.list:
-        files_new.setdefault(file.hash, []).append(file)
+    for f in newfiles.list:
+        files_new.setdefault(f.hash, []).append(f)
 
     files_old = {}
-    for file in oldfiles.list:
-        files_old.setdefault(file.hash, []).append(file)
+    for f in oldfiles.list:
+        files_old.setdefault(f.hash, []).append(f)
 
     relocations = []
-    for hash in files_new.keys():
-        if hash and hash in files_old:
-            for i in range(len(files_new[hash])):
-                if files_old[hash][0].path != files_new[hash][i].path:
-                    relocations.append((files_old[hash][0], files_new[hash][i]))
+    for h in files_new.keys():
+        if h and h in files_old:
+            old_paths = [x.path for x in files_old[h]]
+            for i in range(len(files_new[h])):
+                if files_new[h][i].path not in old_paths:
+                    relocations.append((files_old[h][0], files_new[h][i]))
 
     return relocations

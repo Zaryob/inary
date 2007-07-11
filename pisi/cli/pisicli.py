@@ -26,9 +26,6 @@ from pisi.cli.commands import *
 class ParserError(pisi.Exception):
     pass
 
-class Error(pisi.Error):
-    pass
-
 class PreParser(OptionParser):
     """consumes any options, and finds arguments from command line"""
 

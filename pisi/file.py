@@ -144,7 +144,6 @@ class File:
         "it is pointless to open a file without a URI and a mode"
 
         self.transfer_dir = transfer_dir
-
         self.sha1sum = sha1sum
         self.compress = compress
         self.sign = sign

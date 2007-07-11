@@ -14,8 +14,7 @@ import string
 
 packagerfile = ".pisipackager"
 
-data = {"date": time.strftime("%Y-%m-%d"),
-        "year": time.strftime("%Y")}
+data = {"date": time.strftime("%Y-%m-%d")}
 
 temp_pspec = '''<?xml version="1.0" ?>
 <!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
@@ -28,20 +27,21 @@ temp_pspec = '''<?xml version="1.0" ?>
             <Email>%(packager_email)s</Email>
         </Packager>
         <License>GPL-2</License>
-        <Icon>%(package)s</Icon>
         <IsA>app:gui</IsA>
         <Summary></Summary>
         <Description></Description>
+        <Summary xml:lang="tr"></Summary>
+        <Description xml:lang="tr"></Description>
         <Archive sha1sum="" type="targz"></Archive>
         <BuildDependencies>
             <Dependency versionFrom=""></Dependency>
             <Dependency></Dependency>
         </BuildDependencies>
-        <!--
         <Patches>
+        <!--
             <Patch level="1"></Patch>
-        </Patches>
         -->
+        </Patches>
     </Source>
 
     <Package>
@@ -51,17 +51,15 @@ temp_pspec = '''<?xml version="1.0" ?>
         <Files>
             <Path fileType="data">/</Path>
         </Files>
-        <!--
         <AdditionalFiles>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/%(package)s.desktop">%(package)s.desktop</AdditionalFile>
-        </AdditionalFiles>
-        -->
         <!--
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/%(package)s.desktop">%(package)s.desktop</AdditionalFile>
+        -->
+        </AdditionalFiles>
         <Provides>
             <COMAR script="package.py">System.Package</COMAR>
             <COMAR script="service.py">System.Service</COMAR>
         </Provides>
-        -->
     </Package>
 
     <History>
@@ -79,7 +77,7 @@ temp_pspec = '''<?xml version="1.0" ?>
 temp_actions = '''#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright %(year)s TUBITAK/UEKAE
+# Copyright 2006 TUBITAK/UEKAE
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
@@ -119,13 +117,10 @@ Categories=Application;Game;ArcadeGame
 '''
 
 temp_service = '''serviceType = "local"
-from comar.service import *
-
-serviceType = "local"
+serviceDesc = "%(package_cap)s"
 serviceDefault = "off"
 
-serviceDesc = _({"en": "%(package_cap)s",
-                 "tr": "%(package_cap)s"})
+from comar.service import *
 
 def start():
     if 0 == run('/sbin/start-stop-daemon --quiet --start --exec /usr/bin/%(package)s --pidfile /var/run/%(package)s.pid'):

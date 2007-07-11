@@ -82,9 +82,9 @@ class Config(object):
         return self.destdir
 
     def subdir(self, path):
-        dir = pisi.util.join_path(self.dest_dir(), path)
-        pisi.util.check_dir(dir)
-        return dir
+        subdir = pisi.util.join_path(self.dest_dir(), path)
+        pisi.util.check_dir(subdir)
+        return subdir
 
     def log_dir(self):
         return self.subdir(self.values.dirs.log_dir)

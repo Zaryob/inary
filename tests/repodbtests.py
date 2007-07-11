@@ -13,7 +13,7 @@ import os
 
 import pisi.context as ctx
 import pisi.api
-import pisi.db.installdb
+import pisi.installdb
 from pisi import util
 
 import testcase
@@ -24,7 +24,7 @@ class RepoDBTestCase(testcase.TestCase):
         
         for i in range(2):
             print '\nTest %d\n' % (i)
-            pisi.api.add_repository("foo","bar")
-            pisi.api.remove_repository("foo")
+            pisi.api.add_repo("foo","bar")
+            pisi.api.remove_repo("foo")
 
 suite = unittest.makeSuite(RepoDBTestCase)

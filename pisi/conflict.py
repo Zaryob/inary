@@ -16,23 +16,10 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import pisi.context as ctx
-import pisi.version
-import pisi.pxml.autoxml as autoxml
-import pisi.db.itembyrepodb
+import pisi.relation
 
-class Conflict:
-
-    __metaclass__ = autoxml.autoxml
-
-    s_Package = [autoxml.String, autoxml.mandatory]
-    a_version = [autoxml.String, autoxml.optional]
-    a_versionFrom = [autoxml.String, autoxml.optional]
-    a_versionTo = [autoxml.String, autoxml.optional]
-    a_release = [autoxml.String, autoxml.optional]
-    a_releaseFrom = [autoxml.String, autoxml.optional]
-    a_releaseTo = [autoxml.String, autoxml.optional]
-
+""" Conflict relation """
+class Conflict(pisi.relation.Relation):
     def __str__(self):
         s = self.package
         if self.versionFrom:
@@ -49,39 +36,53 @@ class Conflict:
             s += _(" release ") + self.release
         return s
 
-    def conflicts(self, pkg_name, version, release):
-        """determine if a package ver. conflicts with given conflicting spec"""
-        ret = True
-        v = pisi.version.Version(version)
-        if self.version:
-            ret &= v == pisi.version.Version(self.version)
-        if self.versionFrom:
-            ret &= v >= pisi.version.Version(self.versionFrom)
-        if self.versionTo:
-            ret &= v <= pisi.version.Version(self.versionTo)
-        r = pisi.version.Version(release)
-        if self.release:
-            ret &= r == pisi.version.Version(self.release)
-        if self.releaseFrom:
-            ret &= r >= pisi.version.Version(self.releaseFrom)
-        if self.releaseTo:
-            ret &= r <= pisi.version.Version(self.releaseTo)
-        return ret
-
 def installed_package_conflicts(confinfo):
     """determine if an installed package in *repository* conflicts with
 given conflicting spec"""
-    pkg_name = confinfo.package
-    if not ctx.installdb.is_installed(pkg_name):
-        return False
-    else:
-        pkg = api.get_installed_package(pkg_name)
-        (version, release) = (pkg.version, pkg.release)
-        return confinfo.conflicts(pkg_name, version, release)
+    return pisi.relation.installed_package_satisfies(confinfo)
 
 def package_conflicts(pkg, confs):
     for c in confs:
-        if pkg.name == c.package and c.conflicts(pkg.name, pkg.version, pkg.release):
+        if pkg.name == c.package and c.satisfies_relation(pkg.name, pkg.version, pkg.release):
             return c
 
     return None
+
+def calculate_conflicts(order, packagedb):
+
+    # check conflicting packages in the installed system
+    def check_installed(pkg, order):
+        conflicts = []
+
+        for conflict in pkg.conflicts:
+            if conflict.package not in order and installed_package_conflicts(conflict):
+                conflicts.append(conflict)
+
+        return conflicts
+
+    B_0 = set(order)
+    conflicting_pkgs = conflicts_inorder = set()
+    conflicting_pairs = {}
+
+    for x in order:
+        pkg = packagedb.get_package(x)
+
+        # check if any package has conflicts with the installed packages
+        conflicts = check_installed(pkg, order)
+        if conflicts:
+            conflicting_pairs[x] = map(lambda c:str(c), conflicts)
+            conflicting_pkgs = conflicting_pkgs.union(map(lambda c:c.package, conflicts))
+
+        # now check if any package has conflicts with each other
+        B_i = B_0.intersection(set(map(lambda c:c.package, pkg.conflicts)))
+        conflicts_inorder_i = set()
+        for p in map(lambda x:packagedb.get_package(x), B_i):
+            conflicted = package_conflicts(p, pkg.conflicts)
+            if conflicted:
+                conflicts_inorder_i.add(str(conflicted))
+
+        if conflicts_inorder_i:
+            conflicts_inorder = conflicts_inorder.union(conflicts_inorder_i)
+            conflicts_inorder.add(pkg.name)
+
+    return (conflicting_pkgs, conflicts_inorder, conflicting_pairs)

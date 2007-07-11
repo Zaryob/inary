@@ -14,14 +14,14 @@
 
 import string
 
-import pisi.db
+import pisi
 import graph
 
 # Cache the results from packagedb queries in a graph
 
 class PGraph(graph.Digraph):
 
-    def __init__(self, packagedb, repo = pisi.db.itembyrepodb.repos):
+    def __init__(self, packagedb, repo = pisi.itembyrepodb.repos):
         super(PGraph, self).__init__()
         self.packagedb = packagedb
         self.repo = repo
@@ -76,6 +76,7 @@ class PGraph(graph.Digraph):
             pkg2 = self.packagedb.get_package(conflinfo.package, self.repo)
             pkg2data = (pkg2.version, pkg2.release)
 
+        # FIXME: WTF? /usr/lib/pardus/pisi/pgraph.py:80: Invalid arguments to (add_biedge), got 5, expected between 2 and 3 / caglar
         self.add_biedge(str(pkg), str(conflinfo.package), ('c', conflinfo)
                         , pkg1data, pkg2data )
 

@@ -29,10 +29,10 @@ def get_svn_paths(path):
     return svn_paths
 
 def move_svn_paths(paths):
-    [shutil.move(d, '/tmp/' + os.path.dirname(d).replace('/', '_')) for d in paths]
+    [shutil.move(d, 'tmp/' + os.path.dirname(d).replace('/', '_')) for d in paths]
 
 def restore_svn_paths(paths):
-    [shutil.move('/tmp/' + os.path.dirname(d).replace('/', '_'), d) for d in paths]
+    [shutil.move('tmp/' + os.path.dirname(d).replace('/', '_'), d) for d in paths]
 
 
 class UtilTestCase(testcase.TestCase):
@@ -69,7 +69,7 @@ class UtilTestCase(testcase.TestCase):
         self.assertEqual(dir_size('tests/utilfiles/linktonowhere'), 23)
         self.assertEqual(dir_size('tests/utilfiles/directory'), 74536)
         self.assertEqual(dir_size('tests/utilfiles/linktoarfile'), 22)
-        self.assertEqual(dir_size('tests/utilfiles/'), 149117)
+        self.assertEqual(dir_size('tests/utilfiles/'), 149072)
         restore_svn_paths(svn_paths)
 
     def testGetFileHashes(self):
