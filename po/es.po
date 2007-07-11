@@ -1,3 +1,4 @@
+# translation of es.po to spanish
 # translation of es.po to
 # Copyright (C) YEAR ORGANIZATION
 #
@@ -8,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "POT-Creation-Date: 2007-07-05 09:54+EEST\n"
-"PO-Revision-Date: 2007-04-18 22:25-0400\n"
-"Last-Translator: Christian Faure <christian.faurebouvard@laposte.net>\n"
-"Language-Team:  <es@li.org>\n"
+"PO-Revision-Date: 2007-07-11 19:32-0400\n"
+"Last-Translator: klemens <click3d at linuxmail org>\n"
+"Language-Team: spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -570,9 +571,8 @@ msgid "Running autoheader failed."
 msgstr "Falló ejecución de autoheader."
 
 #: pisi/actionsapi/cmaketools.py:64
-#, fuzzy
 msgid "No configure script found for cmake."
-msgstr "Script de configuración no encontrado."
+msgstr "Script de configuración para cmake no encontrado."
 
 #: pisi/actionsapi/get.py:160
 msgid "Util %s cannot be found"
@@ -909,8 +909,7 @@ msgid "Not removing conflicted file : %s"
 msgstr "Archivo conflictivo: %s no eliminado "
 
 #: pisi/atomicoperations.py:530
-msgid ""
-"Installed file %s is not exists on system [Probably you manually deleted]"
+msgid "Installed file %s is not exists on system [Probably you manually deleted]"
 msgstr ""
 "Archivo instalado %s no existe en el sistema [Probablemente eliminado "
 "manualmente]"
@@ -958,8 +957,7 @@ msgstr "Generando paquete fuente PiSi: %s"
 
 #: pisi/build.py:230
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr ""
-"IceCream detectado. Asegurese que el demónio está activo y funcionando..."
+msgstr "IceCream detectado. Asegurese que el demónio está activo y funcionando..."
 
 #: pisi/build.py:235
 msgid "CCache detected..."
@@ -1002,9 +1000,8 @@ msgid "Building source..."
 msgstr "Generando fuente..."
 
 #: pisi/build.py:340
-#, fuzzy
 msgid "Testing package..."
-msgstr "Creando Paquete PiSi %s."
+msgstr "Verificando Paquete %s."
 
 #: pisi/build.py:344
 msgid "Installing..."
@@ -1027,14 +1024,12 @@ msgid "SyntaxError in COMAR file (%s): %s"
 msgstr "Error de Sintaxis en archivo COMAR (%s): %s"
 
 #: pisi/build.py:419
-#, fuzzy
 msgid "Sandbox violation: %s (%s -> %s)"
-msgstr "opción ambigua: %s (%s?)"
+msgstr "Violación de caja de arena (Sandbox): %s (%s -> %s)"
 
 #: pisi/build.py:453
-#, fuzzy
 msgid "Sandbox violations!"
-msgstr "opciones de indexar"
+msgstr "Violaciones de Sandbox!"
 
 # no suea bien, pero está correcto segun ingles. pero quizá querían decir otra cosa ?
 # quizá quieren decir: no posible llamar/ejecutar rutina del achivo de acciones ??
@@ -1044,8 +1039,7 @@ msgstr "no posible llamar función desde acciones: %s"
 
 # did I get "safety switch" right (in this context)?
 #: pisi/build.py:473
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Verificación de seguridad: Se instalarán los siguientes paquetes adicionales "
 "en system.devel:"
@@ -1056,8 +1050,7 @@ msgstr "Verificación de seguridad: system.devel ya está instalado"
 
 #: pisi/build.py:480
 msgid "Safety switch: the component system.devel cannot be found"
-msgstr ""
-"Verificación de seguridad: No posible encontrar el componente system.devel"
+msgstr "Verificación de seguridad: No posible encontrar el componente system.devel"
 
 # satisfechas - entiendo que se refiere a librerias necesarias para hacer el proceso build
 # quizá hay mejor manera de decirlo en español
@@ -1106,14 +1099,12 @@ msgid "Skipping %s with wrong pkg name "
 msgstr "Omitiendo %s con nombre de pkg incorrecto"
 
 #: pisi/build.py:715
-#, fuzzy
 msgid "(no previous build found, setting build no to 1.)"
-msgstr "(no se encontró build anterior, seteando número de build a 1.)"
+msgstr "(no se encontró build anterior, estableciendo número de build a 1.)"
 
 #: pisi/build.py:760
 msgid "(old package lacks a build no, setting build no to 1.)"
-msgstr ""
-"(paquete antiguo no tiene número de build, seteando número de build a 1.)"
+msgstr "(paquete antiguo no tiene número de build, seteando número de build a 1.)"
 
 #: pisi/build.py:763
 msgid "There are changes, incrementing build no to %d"
@@ -1163,8 +1154,7 @@ msgstr "Archivos abandonados en carpeta de instalación (%s):"
 
 # revisa este por favor
 #: pisi/build.py:923
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Todos los archivos de la carpeta de instalación (%s) se juntaron en los "
 "paquetes"
@@ -1394,8 +1384,7 @@ msgstr "Ploteando paquetes de repositorio %s"
 
 #: pisi/cli/commands.py:381
 msgid "Plotting a graph of relations among all repository packages"
-msgstr ""
-"Ploteando un gráfico de relaciones entre todos los paquetes en repositorio"
+msgstr "Ploteando un gráfico de relaciones entre todos los paquetes en repositorio"
 
 #: pisi/cli/commands.py:388
 msgid "Plotting a graph of relations among all installed packages"
@@ -1450,12 +1439,9 @@ msgstr "Omitir errores del ActionsAPI"
 msgid "Bypass safety switch"
 msgstr "Omitir la verificación de seguridad"
 
-# check?
-# tiene que ver con mensajes anteriores.. safety switch: xx.. (mensaje)
 #: pisi/cli/commands.py:447
-#, fuzzy
 msgid "Bypass testing step"
-msgstr "Omitir la verificación de seguridad"
+msgstr "Omitir paso de verificación"
 
 #: pisi/cli/commands.py:449
 msgid "Create a static package with ar files"
@@ -1463,8 +1449,7 @@ msgstr "Crear un paquete estático con archivos ar"
 
 # asi lo entiendo, favor verificar
 #: pisi/cli/commands.py:451
-msgid ""
-"Do not install build dependencies, fail if a build dependency is present"
+msgid "Do not install build dependencies, fail if a build dependency is present"
 msgstr ""
 "No instalar dependencias de build, producir una falla si una dependencia de "
 "build es necesaria"
@@ -1475,11 +1460,13 @@ msgstr "Formatos bínarios de paquetes PiSi: '1.0', '1.1' (default)"
 
 #: pisi/cli/commands.py:455
 msgid "Use quilt patch management system instead of GNU patch"
-msgstr ""
+msgstr "Use el sistema de parches quilt management en vez de GNU patch"
 
 #: pisi/cli/commands.py:457
+# no estoy seguro si capté la idea
+# i am not sure about the idea of the message
 msgid "Do not constrain build process inside the build folder"
-msgstr ""
+msgstr "No restringir proceso de build en carpeta de build"
 
 #: pisi/cli/commands.py:460
 msgid "build steps"
@@ -1506,9 +1493,8 @@ msgid "Break build after running compile step"
 msgstr "Interrumpir build luego de compilar"
 
 #: pisi/cli/commands.py:470
-#, fuzzy
 msgid "Break build after running check step"
-msgstr "Interrumpir build luego de compilar"
+msgstr "Interrumpir build luego de paso de verificación"
 
 #: pisi/cli/commands.py:472
 msgid "Break build after running install step"
@@ -1543,11 +1529,17 @@ msgid ""
 "releases.\n"
 "\n"
 msgstr ""
+"Crea paquetes PiSi delta\n"
+"\n"
+"Uso: delta oldpackage newpackage\n"
+"\n"
+"El comando Delta busca los archivos modificados entre los paquetes indicados comparando la sha1sum de los archivos\n"
+"y crea un paquete pisi delta con los archivos modificados entre las dos versiones de lanzamiento.\n"
+"\n"
 
 #: pisi/cli/commands.py:521
-#, fuzzy
 msgid "delta options"
-msgstr "opciones de indexar"
+msgstr "opciones de delta"
 
 #: pisi/cli/commands.py:553
 msgid ""
@@ -1823,9 +1815,8 @@ msgid "[repo] "
 msgstr "[repo] "
 
 #: pisi/cli/commands.py:963
-#, fuzzy
 msgid "Package found in %s repository:"
-msgstr "Paquete encontrado en repositorio:"
+msgstr "Paquete encontrado en %s repositorio:"
 
 #: pisi/cli/commands.py:967
 msgid "%s is not found in repositories"
@@ -1879,14 +1870,12 @@ msgstr ""
 "Sin nombre de paquete, el comando verifica todos los paquetes instalados.\n"
 
 #: pisi/cli/commands.py:1018
-#, fuzzy
 msgid "check options"
-msgstr "opciones de busqueda"
+msgstr "opciones de verificación"
 
 #: pisi/cli/commands.py:1020
-#, fuzzy
 msgid "Check installed packages under given component"
-msgstr "Listar paquetes instalados de componente "
+msgstr "Verificar paquetes instalados del componente"
 
 #: pisi/cli/commands.py:1036
 msgid "Checking all installed packages"
@@ -1989,10 +1978,8 @@ msgstr "Mostrar detalles de instalación"
 
 # I suppose here the position is important too ! Should be the same ok as in english
 #: pisi/cli/commands.py:1146 pisi/cli/commands.py:1524
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr ""
-"Nombre Paquete   |St|   Versión|  Rel.| Build|  Distro|            Fecha"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr "Nombre Paquete   |St|   Versión|  Rel.| Build|  Distro|            Fecha"
 
 #: pisi/cli/commands.py:1161
 msgid ""
@@ -2454,14 +2441,12 @@ msgid "Can't unbind constant: %s"
 msgstr "No posible unbind constant: %s"
 
 #: pisi/delta.py:27
-#, fuzzy
 msgid "Cannot create delta for same package!"
-msgstr "No posible crear la carpeta %s"
+msgstr "No posible crear delta para el mismo paquete!"
 
 #: pisi/delta.py:41
-#, fuzzy
 msgid "Creating delta PiSi package between %s %s"
-msgstr "Creando Paquete PiSi %s."
+msgstr "Creando Paquete PiSi delta entre %s %s."
 
 # satisfy - a traducir con "cumplir" ? como suena ?
 #: pisi/dependency.py:55
@@ -2485,8 +2470,7 @@ msgid "Access denied to destination file: \"%s\""
 msgstr "Acceso denegado a archivo de destino: \"%s\""
 
 #: pisi/fetcher.py:100
-msgid ""
-"A problem occured. Please check the archive address and/or permissions again."
+msgid "A problem occured. Please check the archive address and/or permissions again."
 msgstr ""
 "Ocurrió un problema. Favor verifique la ubicación y/o los permisos del "
 "paquete."
@@ -2635,16 +2619,13 @@ msgid "Key %s in repo %s not found"
 msgstr "Clave %s no encontrado en repositorio %s "
 
 #: pisi/lockeddbshelve.py:46
-#, fuzzy
 msgid "Database version for %s insufficient. Please run rebuild-db command."
 msgstr ""
-"Versión de base de datos %s insuficiente. Favor ejecute el comando rebuild-"
+"Versión de base de datos %s es insuficiente. Favor ejecute el comando rebuild-"
 "db."
 
 #: pisi/lockeddbshelve.py:50
-#, fuzzy
-msgid ""
-"Database version for %s greater than PiSi version. You need a newer PiSi."
+msgid "Database version for %s greater than PiSi version. You need a newer PiSi."
 msgstr ""
 "Versión de base de datos %s mayor que versión de PiSi. Necesita una versión "
 "PiSi más nueva."
@@ -2682,8 +2663,7 @@ msgid "Cannot attain read or write access to database %s"
 msgstr "No posible acceder a base de datos  %s para lectura o escritura"
 
 #: pisi/lockeddbshelve.py:138
-msgid ""
-"Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
+msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
 msgstr ""
 "Banderas deberían ser uno de 'r', 'w', 'c' or 'n' o use las banderas bsddb."
 "db.DB_* "
@@ -2703,8 +2683,7 @@ msgstr "Archivo %s no existe en mirror. No posible resolver mirrors://"
 
 #: pisi/operations.py:106
 msgid "Mixing file names and package names not supported yet."
-msgstr ""
-"Mezclando nombres de archivos y nombres de paquetes actualmente no soportado."
+msgstr "Mezclando nombres de archivos y nombres de paquetes actualmente no soportado."
 
 #: pisi/operations.py:148
 msgid ""
@@ -2732,7 +2711,7 @@ msgstr "Orden de instalación:"
 
 #: pisi/operations.py:223
 msgid "Replaced package remains"
-msgstr ""
+msgstr "Paquete reemplazado permanece"
 
 # might be slightly different. i should see the context
 #: pisi/operations.py:227 pisi/operations.py:255
@@ -2741,7 +2720,7 @@ msgstr "Conflictos quedan"
 
 #: pisi/operations.py:233
 msgid "Obsoleted packages remaining"
-msgstr ""
+msgstr "Paquetes obsoletos permanecen"
 
 #: pisi/operations.py:243
 msgid "Selected packages [%s] are in conflict with each other."
@@ -2779,15 +2758,13 @@ msgstr ""
 # should this say in english ? "Safety switch: the component cannot be found in system.base" ?? (i did in spanish like this)
 #: pisi/operations.py:294 pisi/operations.py:594
 msgid "Safety switch: the component system.base cannot be found"
-msgstr ""
-"Verificación de seguridad: No posible encontrar el componente system.base: "
+msgstr "Verificación de seguridad: No posible encontrar el componente system.base: "
 
 #: pisi/operations.py:311
 msgid ""
 "The following package(s) are already installed and are not going to be "
 "installed again:\n"
-msgstr ""
-"Los siguientes paquetes ya están instalados y no se instalarán de nuevo:\n"
+msgstr "Los siguientes paquetes ya están instalados y no se instalarán de nuevo:\n"
 
 #: pisi/operations.py:332
 msgid ""
@@ -2803,8 +2780,7 @@ msgstr "Tamaño total de paquete(s): %.2f %s"
 
 #: pisi/operations.py:343 pisi/operations.py:486 pisi/operations.py:705
 msgid "There are extra packages due to dependencies. Do you want to continue?"
-msgstr ""
-"Hay paquetes adicionales por motivo de dependencias. Quiere continuar ?"
+msgstr "Hay paquetes adicionales por motivo de dependencias. Quiere continuar ?"
 
 #: pisi/operations.py:412
 msgid "Warning: package *name* ends with '.pisi'"
@@ -2832,12 +2808,11 @@ msgstr "Se actualizarán los siguientes paquetes: "
 
 #: pisi/operations.py:493
 msgid "Downloading %d / %d"
-msgstr ""
+msgstr "Descargando %d / %d"
 
 #: pisi/operations.py:511
-#, fuzzy
 msgid "Installing %d / %d"
-msgstr "Instalado %s"
+msgstr "Instalado %d / %d"
 
 #: pisi/operations.py:548
 msgid "Dependency %s of %s cannot be satisfied"
@@ -2905,15 +2880,16 @@ msgstr ""
 msgid "Cannot find source package: %s"
 msgstr "No se ha encontrado paquete fuente: %s"
 
-# en realidad no lo entiendo.., supongo que debe haber un error en el texto en ingles (la ultima frase)
+# do you mean: maybe the file on the server is newer than the one in the pisi list ? 
+# using upgrade automatically takes the newest one from the server, 
+# while install tries to fetch the exact one ?
 #: pisi/package.py:56
-#, fuzzy
 msgid ""
 "There was a problem while fetching '%s'.\n"
 "The package may have been upgraded. Please try to upgrade the package."
 msgstr ""
-"Ocurrió un problema durante descarga de '%s'.\n"
-"El paquete puede ya estar actualizado. Por favor intente actualizar el "
+"Ocurrió un problema durante la descarga de '%s'.\n"
+"El paquete puede ya estar más actualizado. Por favor intente una actualizción del "
 "paquete."
 
 #: pisi/package.py:60 pisi/sourcearchive.py:92
@@ -3168,8 +3144,7 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 "Desarrollador '%s <%s>' tiene otra dirección email '%s' en archivo fuente '%"
 "s'"
@@ -3198,25 +3173,3 @@ msgstr "Buscando en repositorio de fuentes...\n"
 msgid "Scanning binary packages...\n"
 msgstr "Buscando paquetes binarios...\n"
 
-#, fuzzy
-#~ msgid "History for Package %s not found"
-#~ msgstr "Paquete %s no encontrado"
-
-#~ msgid "Updating environment..."
-#~ msgstr "Actualizando entorno..."
-
-#~ msgid "Set search language"
-#~ msgstr "Establecer idioma de búsqueda"
-
-#~ msgid "Unknown file type '%s' in package '%s'"
-#~ msgstr "Tipo de archivo '%s' desconocido en paquete '%s' "
-
-#~ msgid "Source package '%s' has wrong date format '%s'"
-#~ msgstr "Paquete de fuente '%s' tiene formato de fecha incorrecto '%s'"
-
-#~ msgid "Encountered %d errors! Fix them immediately!\n"
-#~ msgstr "%d errores encontrados! Corríjalos de inmediato!\n"
-
-#~ msgid "These dependencies are not available in repository:\n"
-#~ msgstr ""
-#~ "Las siguientes dependencias no están disponibles en el repositorio:\n"
