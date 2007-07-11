@@ -172,7 +172,7 @@ def xterm_title(message):
         terminalType = os.environ["TERM"]
         for term in ["xterm", "Eterm", "aterm", "rxvt", "screen", "kterm", "rxvt-unicode"]:
             if terminalType.startswith(term):
-                sys.stderr.write("\x1b]2;"+str(message)+"\x07")
+                sys.stderr.write("\x1b]2;"+unicode(message)+"\x07")
                 sys.stderr.flush()
                 break
 
@@ -241,9 +241,9 @@ def absolute_path(path):
 
 def join_path(a, *p):
     """Join two or more pathname components.
-    
+
     Python os.path.join cannot handle '/' at the start of latter components.
-    
+
     """
     path = a
     for b in p:
@@ -331,7 +331,7 @@ def clean_ar_timestamps(ar_file):
 # an unrelated problem
 def get_file_hashes(top, excludePrefix=None, removePrefix=None):
     """Iterate over given path and return a list of file hashes.
-    
+
     Generator function iterates over a toplevel path and returns the
     (filePath, sha1Hash) tuples for all files. If excludePrefixes list
     is given as a parameter, function will exclude the filePaths
@@ -608,9 +608,9 @@ def package_name(name, version, release, build, prependSuffix=True):
 
 def is_package_name(fn, package_name = None):
     """Check if fn is a valid filename for given package_name.
-    
+
     If not given a package name, see if fn fits the package name rules
-    
+
     """
     if (package_name==None) or fn.startswith(package_name + '-'):
         if fn.endswith(ctx.const.package_suffix):
@@ -626,9 +626,9 @@ def is_package_name(fn, package_name = None):
 
 def parse_package_name(package_name):
     """Separate package name and version string.
-    
+
     example: tasma-1.0.3-5-2 -> (tasma, 1.0.3-5-2)
-    
+
     """
     # We should handle package names like 855resolution
     name = []
@@ -644,14 +644,14 @@ def parse_package_name(package_name):
 
 def parse_delta_package_name(package_name):
     """Separate delta package name and release infos
-    
+
     example: tasma-5-7.pisi.delta -> (tasma, 5, 7)
-    
+
     """
     name, build = parse_package_name(package_name)
     build = build[:-len(ctx.const.delta_package_suffix)]
     buildFrom, buildTo = build.split("-")
-    
+
     return name, buildFrom, buildTo
 
 def filter_latest_packages(package_paths):

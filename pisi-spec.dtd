@@ -78,6 +78,7 @@
 	RuntimeDependencies |
 	Files |
 	Conflicts |
+	Replaces |
 	AdditionalFiles |
 	Provides
 )*>
@@ -90,6 +91,14 @@
 <!-- we have a problem here, this Package tag only contains a package name
 while dtd treats this as another Package section, who said dtd doesnt
 suck anyway -->
+<!ATTLIST Package versionFrom CDATA #IMPLIED>
+<!ATTLIST Package versionTo CDATA #IMPLIED>
+<!ATTLIST Package version CDATA #IMPLIED>
+<!ATTLIST Package releaseFrom CDATA #IMPLIED>
+<!ATTLIST Package releaseTo CDATA #IMPLIED>
+<!ATTLIST Package release CDATA #IMPLIED>
+
+<!ELEMENT Replaces (Package)+>
 
 <!ELEMENT AdditionalFiles (AdditionalFile+)>
 <!ELEMENT AdditionalFile (#PCDATA)>
@@ -115,8 +124,7 @@ suck anyway -->
 
 <!ELEMENT Update (#PCDATA | Date | Version | Comment | Name | Email)*>
 <!ATTLIST Update release CDATA #REQUIRED>
-<!-- FIXME: valid types must be used instead of CDATA -->
-<!ATTLIST Update type CDATA #IMPLIED>
+<!ATTLIST Update type (security|bug) #IMPLIED>
 
 <!ELEMENT Date (#PCDATA)>
 <!ELEMENT Version (#PCDATA)>
