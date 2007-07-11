@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "POT-Creation-Date: 2007-07-05 09:54+EEST\n"
-"PO-Revision-Date: 2007-04-25 14:47+0200\n"
+"PO-Revision-Date: 2007-07-11 21:08+0200\n"
 "Last-Translator: Andrea Decorte <adecorte@gmail.com>\n"
 "Language-Team: Italian <pardus-translation-it@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
@@ -511,9 +511,8 @@ msgid "Running autoheader failed."
 msgstr "Esecuzione di autoheader fallita."
 
 #: pisi/actionsapi/cmaketools.py:64
-#, fuzzy
 msgid "No configure script found for cmake."
-msgstr "Nessun script configure trovato."
+msgstr "Nessun script configure trovato per cmake."
 
 #: pisi/actionsapi/get.py:160
 msgid "Util %s cannot be found"
@@ -844,8 +843,7 @@ msgid "Not removing conflicted file : %s"
 msgstr "File in conflitto non rimossi: %s"
 
 #: pisi/atomicoperations.py:530
-msgid ""
-"Installed file %s is not exists on system [Probably you manually deleted]"
+msgid "Installed file %s is not exists on system [Probably you manually deleted]"
 msgstr ""
 "Il file installato %s non è presente nel sistema [Probabilmente è stato "
 "eliminato manualmente]"
@@ -892,8 +890,7 @@ msgstr "Costruzione del pacchetto sorgente PiSi %s"
 
 #: pisi/build.py:230
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr ""
-"Rilevato IceCream. Assicurati che il tuo demone sia in esecuzione e attivo..."
+msgstr "Rilevato IceCream. Assicurati che il tuo demone sia in esecuzione e attivo..."
 
 #: pisi/build.py:235
 msgid "CCache detected..."
@@ -936,9 +933,8 @@ msgid "Building source..."
 msgstr "Compilazione sorgente..."
 
 #: pisi/build.py:340
-#, fuzzy
 msgid "Testing package..."
-msgstr "Creazione del pacchetto PiSi %s."
+msgstr "Verifica del pacchetto..."
 
 #: pisi/build.py:344
 msgid "Installing..."
@@ -961,22 +957,19 @@ msgid "SyntaxError in COMAR file (%s): %s"
 msgstr "Errore di sintassi nel file COMAR (%s): %s"
 
 #: pisi/build.py:419
-#, fuzzy
 msgid "Sandbox violation: %s (%s -> %s)"
-msgstr "opzione ambigua: %s (%s?)"
+msgstr "Violazione ambiente protetto: %s (%s -> %s)"
 
 #: pisi/build.py:453
-#, fuzzy
 msgid "Sandbox violations!"
-msgstr "opzioni index"
+msgstr "Violazioni dell'ambiente protetto (sandbox)!"
 
 #: pisi/build.py:456
 msgid "unable to call function from actions: %s"
 msgstr "impossibile chiamare la funzione dalle azioni: %s"
 
 #: pisi/build.py:473
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Switch di sicurezza: i seguenti pacchetti aggiuntivi in system.devel "
 "verranno installati: "
@@ -995,8 +988,7 @@ msgstr "Dipendenze di compilazione non soddisfatte:"
 
 #: pisi/build.py:493
 msgid "Cannot build package due to unsatisfied build dependencies"
-msgstr ""
-"Impossibile compilare il pacchetto a casa di dipendenze non soddisfatte"
+msgstr "Impossibile compilare il pacchetto a casa di dipendenze non soddisfatte"
 
 #: pisi/build.py:501
 msgid "Build dependency %s cannot be satisfied"
@@ -1035,7 +1027,6 @@ msgid "Skipping %s with wrong pkg name "
 msgstr "Salto %s con nome del pacchetto errato"
 
 #: pisi/build.py:715
-#, fuzzy
 msgid "(no previous build found, setting build no to 1.)"
 msgstr "(nessuna build precedente trovata, imposto il numero di build a 1)"
 
@@ -1088,8 +1079,7 @@ msgid "Abandoned files under the install dir (%s):"
 msgstr "File abbandonati nella cartella di installazione (%s):"
 
 #: pisi/build.py:923
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Tutti i file nella cartella di installazione (%s) sono stati raccolti dai "
 "pacchetti"
@@ -1313,8 +1303,7 @@ msgstr "Disegno grafico dei pacchetti nel repository %s in corso"
 
 #: pisi/cli/commands.py:381
 msgid "Plotting a graph of relations among all repository packages"
-msgstr ""
-"Disegno di un grafico delle relazioni tra tutti i pacchetti del repository"
+msgstr "Disegno di un grafico delle relazioni tra tutti i pacchetti del repository"
 
 #: pisi/cli/commands.py:388
 msgid "Plotting a graph of relations among all installed packages"
@@ -1367,17 +1356,15 @@ msgid "Bypass safety switch"
 msgstr "Ignora switch di sicurezza"
 
 #: pisi/cli/commands.py:447
-#, fuzzy
 msgid "Bypass testing step"
-msgstr "Ignora switch di sicurezza"
+msgstr "Salta la fase di verifica"
 
 #: pisi/cli/commands.py:449
 msgid "Create a static package with ar files"
 msgstr "Crea un pacchetto statico con file ar"
 
 #: pisi/cli/commands.py:451
-msgid ""
-"Do not install build dependencies, fail if a build dependency is present"
+msgid "Do not install build dependencies, fail if a build dependency is present"
 msgstr ""
 "Non installare dipendenze di compilazione, fallisce se sono presenti delle "
 "dipendenze"
@@ -1388,7 +1375,7 @@ msgstr "Formati dei pacchetti binari PiSi: '1.0', '1.1' (predefinito)"
 
 #: pisi/cli/commands.py:455
 msgid "Use quilt patch management system instead of GNU patch"
-msgstr ""
+msgstr "Utilizza il sistema di gestione delle patch quilt anziché GNU patch"
 
 #: pisi/cli/commands.py:457
 msgid "Do not constrain build process inside the build folder"
@@ -1419,9 +1406,8 @@ msgid "Break build after running compile step"
 msgstr "Interrompi la costruzione dopo l'esecuzione del passo di compilazione"
 
 #: pisi/cli/commands.py:470
-#, fuzzy
 msgid "Break build after running check step"
-msgstr "Interrompi la costruzione dopo l'esecuzione del passo di compilazione"
+msgstr "Interrompi la costruzione dopo l'esecuzione del passo di verifica"
 
 #: pisi/cli/commands.py:472
 msgid "Break build after running install step"
@@ -1455,11 +1441,17 @@ msgid ""
 "releases.\n"
 "\n"
 msgstr ""
+"Crea pacchetti PiSi delta PiSi\n"
+"\n"
+"Utilizzo: delta vecchiopacchetto nuovopacchetto\n"
+"\n"
+"Il comando delta trova i file cambiati tra due pacchetti attraverso il confronto del sha1sum dei file\n"
+"e crea un pacchetto pisi delta con i file cambiati tra le due versioni.\n"
+"\n"
 
 #: pisi/cli/commands.py:521
-#, fuzzy
 msgid "delta options"
-msgstr "opzioni index"
+msgstr "opzioni delta"
 
 #: pisi/cli/commands.py:553
 msgid ""
@@ -1731,9 +1723,8 @@ msgid "[repo] "
 msgstr "[repo] "
 
 #: pisi/cli/commands.py:963
-#, fuzzy
 msgid "Package found in %s repository:"
-msgstr "Pacchetto trovato nel repository:"
+msgstr "Pacchetto trovato nel repository %s:"
 
 #: pisi/cli/commands.py:967
 msgid "%s is not found in repositories"
@@ -1788,14 +1779,12 @@ msgstr ""
 "pacchetti installati.\n"
 
 #: pisi/cli/commands.py:1018
-#, fuzzy
 msgid "check options"
-msgstr "opzioni di ricerca"
+msgstr "opzioni di verifica"
 
 #: pisi/cli/commands.py:1020
-#, fuzzy
 msgid "Check installed packages under given component"
-msgstr "Elenca i pacchetti installati sotto il componente fornito"
+msgstr "Verifica i pacchetti installati sotto il componente fornito"
 
 #: pisi/cli/commands.py:1036
 msgid "Checking all installed packages"
@@ -1897,10 +1886,8 @@ msgid "Show detailed install info"
 msgstr "Mostra informazione dettagliate sull'installazione"
 
 #: pisi/cli/commands.py:1146 pisi/cli/commands.py:1524
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr ""
-"Nome pacchetto     |St|   Versione|  Rel.| Build|  Distro|             Data"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr "Nome pacchetto     |St|   Versione|  Rel.| Build|  Distro|             Data"
 
 #: pisi/cli/commands.py:1161
 msgid ""
@@ -2358,14 +2345,12 @@ msgid "Can't unbind constant: %s"
 msgstr "Impossibile scollegare la costante: %s"
 
 #: pisi/delta.py:27
-#, fuzzy
 msgid "Cannot create delta for same package!"
-msgstr "Impossibile creare la cartella %s"
+msgstr "Impossibile creare delta per lo stesso pacchetto!"
 
 #: pisi/delta.py:41
-#, fuzzy
 msgid "Creating delta PiSi package between %s %s"
-msgstr "Creazione del pacchetto PiSi %s."
+msgstr "Creazione del pacchetto delta PiSi tra %s e %s"
 
 #: pisi/dependency.py:55
 msgid "%s dependency of package %s is not satisfied"
@@ -2388,8 +2373,7 @@ msgid "Access denied to destination file: \"%s\""
 msgstr "Accesso negato al file di destinazione: \"%s\""
 
 #: pisi/fetcher.py:100
-msgid ""
-"A problem occured. Please check the archive address and/or permissions again."
+msgid "A problem occured. Please check the archive address and/or permissions again."
 msgstr ""
 "C'è stato un problema. Controlla per favore di nuovo l'indirizzo "
 "dell'archivio e/o i permessi."
@@ -2535,16 +2519,13 @@ msgid "Key %s in repo %s not found"
 msgstr "Chiave %s nel repository %s non trovata"
 
 #: pisi/lockeddbshelve.py:46
-#, fuzzy
 msgid "Database version for %s insufficient. Please run rebuild-db command."
 msgstr ""
 "Versione del database per %s insufficiente. Lancia per favore il comando "
 "rebuild-db."
 
 #: pisi/lockeddbshelve.py:50
-#, fuzzy
-msgid ""
-"Database version for %s greater than PiSi version. You need a newer PiSi."
+msgid "Database version for %s greater than PiSi version. You need a newer PiSi."
 msgstr ""
 "La versione del database per %s è maggiore della versione di PiSi. Ti serve "
 "una versione più recente di PiSi."
@@ -2582,8 +2563,7 @@ msgid "Cannot attain read or write access to database %s"
 msgstr "Impossibile ottenere accesso in lettura o scrittura al database %s"
 
 #: pisi/lockeddbshelve.py:138
-msgid ""
-"Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
+msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
 msgstr ""
 "I flag devono essere uno di 'r', 'w, 'c', o 'n' oppure utilizza i flag bsddb."
 "db.DB_*"
@@ -2630,7 +2610,7 @@ msgstr "Ordine di installazione: "
 
 #: pisi/operations.py:223
 msgid "Replaced package remains"
-msgstr ""
+msgstr "Il pacchetto sostituito rimane"
 
 #: pisi/operations.py:227 pisi/operations.py:255
 msgid "Conflicts remain"
@@ -2638,7 +2618,7 @@ msgstr "Il conflitto rimane"
 
 #: pisi/operations.py:233
 msgid "Obsoleted packages remaining"
-msgstr ""
+msgstr "I pacchetti obsoleti rimangono"
 
 #: pisi/operations.py:243
 msgid "Selected packages [%s] are in conflict with each other."
@@ -2728,12 +2708,11 @@ msgstr "I seguenti pacchetti verranno aggiornati: "
 
 #: pisi/operations.py:493
 msgid "Downloading %d / %d"
-msgstr ""
+msgstr "Scaricamento di %d/%d"
 
 #: pisi/operations.py:511
-#, fuzzy
 msgid "Installing %d / %d"
-msgstr "Installato %s"
+msgstr "Installazione di %d/%d"
 
 #: pisi/operations.py:548
 msgid "Dependency %s of %s cannot be satisfied"
@@ -2744,7 +2723,6 @@ msgid "Upgrade is not possible."
 msgstr "L'aggiornamento non è possibile."
 
 #: pisi/operations.py:565
-#, fuzzy
 msgid "Reverse dependency %s of %s cannot be satisfied"
 msgstr "La dipendenza inversa %s di %s non può essere soddisfatta"
 
@@ -2803,7 +2781,6 @@ msgid "Cannot find source package: %s"
 msgstr "Impossibile trovare il pacchetto di sorgenti: %s"
 
 #: pisi/package.py:56
-#, fuzzy
 msgid ""
 "There was a problem while fetching '%s'.\n"
 "The package may have been upgraded. Please try to upgrade the package."
@@ -2834,8 +2811,7 @@ msgstr "lingua '%s' del tag '%s' è vuoto"
 
 #: pisi/pxml/autoxml.py:114
 msgid "LocalText: unable to get either current or default locale"
-msgstr ""
-"LocalText: impossibile ottenere sia il locale corrente che quello predefinito"
+msgstr "LocalText: impossibile ottenere sia il locale corrente che quello predefinito"
 
 #: pisi/pxml/autoxml.py:120 pisi/pxml/autoxml.py:135
 msgid ""
@@ -2875,8 +2851,7 @@ msgstr "La variabile obbligatoria %s non è disponibile"
 
 #: pisi/pxml/autoxml.py:653
 msgid "Type mismatch: read text cannot be decoded"
-msgstr ""
-"Errore non corrispondenza di tipo: impossibile decodificare il testo letto"
+msgstr "Errore non corrispondenza di tipo: impossibile decodificare il testo letto"
 
 #: pisi/pxml/autoxml.py:657 pisi/pxml/autoxml.py:666
 msgid "Mandatory token %s not available"
@@ -3064,8 +3039,7 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 "Lo sviluppatore '%s <%s>' ha un altro indirizzo di posta elettronica '%s' "
 "nel pacchetto sorgente '%s'"
@@ -3096,24 +3070,3 @@ msgstr "Scansione del repository sorgente in corso...\n"
 msgid "Scanning binary packages...\n"
 msgstr "Scansione dei pacchetti binari in corso...\n"
 
-#, fuzzy
-#~ msgid "History for Package %s not found"
-#~ msgstr "Pacchetto %s non trovato"
-
-#~ msgid "Updating environment..."
-#~ msgstr "Aggiornamento dell'ambiente..."
-
-#~ msgid "Set search language"
-#~ msgstr "Imposta lingua della ricerca"
-
-#~ msgid "Unknown file type '%s' in package '%s'"
-#~ msgstr "Tipo di file sconosciuto '%s' nel pacchetto '%s'"
-
-#~ msgid "Source package '%s' has wrong date format '%s'"
-#~ msgstr "Il pacchetto sorgente '%s' ha il formato della data errato '%s'"
-
-#~ msgid "Encountered %d errors! Fix them immediately!\n"
-#~ msgstr "Sono stati riscontrati %d errori! Correggili immediatamente!\n"
-
-#~ msgid "These dependencies are not available in repository:\n"
-#~ msgstr "Queste dipendenze non sono disponibili nel repository:\n"
