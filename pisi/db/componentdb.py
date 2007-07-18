@@ -194,7 +194,7 @@ componentdb = None
 
 def init():
     global componentdb
-    if componentdb:
+    if componentdb is not None:
         return componentdb
 
     componentdb = ComponentDB()
@@ -202,6 +202,6 @@ def init():
 
 def finalize():
     global componentdb
-    if componentdb:
+    if componentdb is not None:
         componentdb.close()
         componentdb = None

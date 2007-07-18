@@ -183,11 +183,16 @@ pkgdb = None
 
 def init():
     global pkgdb
+
+    if pkgdb is not None:
+        return pkgdb
+
     pkgdb = PackageDB()
     return pkgdb
 
 def finalize():
     global pkgdb
-    if pkgdb:
+
+    if pkgdb is not None:
         pkgdb.close()
         pkgdb = None

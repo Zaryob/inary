@@ -197,7 +197,7 @@ db = None
 
 def init():
     global db
-    if db:
+    if db is not None:
         return db
 
     db = InstallDB()
@@ -205,6 +205,6 @@ def init():
 
 def finalize():
     global db
-    if db:
+    if db is not None:
         db.close()
         db = None

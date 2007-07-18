@@ -76,7 +76,7 @@ filesdb = None
 
 def init():
     global filesdb
-    if filesdb:
+    if filesdb is not None:
         return filesdb
 
     filesdb = FilesDB()
@@ -84,6 +84,6 @@ def init():
 
 def finalize():
     global filesdb
-    if filesdb:
+    if filesdb is not None:
         filesdb.close()
         filesdb = None

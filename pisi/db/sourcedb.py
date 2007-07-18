@@ -93,7 +93,7 @@ srcdb = None
 
 def init():
     global srcdb
-    if srcdb:
+    if srcdb is not None:
         return srcdb
 
     srcdb = SourceDB()
@@ -101,6 +101,6 @@ def init():
 
 def finalize():
     global srcdb
-    if srcdb:
+    if srcdb is not None:
         srcdb.close()
         srcdb = None
