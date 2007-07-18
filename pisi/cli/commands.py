@@ -615,9 +615,7 @@ class PackageOp(Command):
         super(PackageOp, self).init(database, write)
 
     def finalize(self):
-        #self.finalize_db()
-        pass
-
+        pisi.api.finalize()
 
 class Install(PackageOp):
     """Install PiSi packages
