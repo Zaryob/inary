@@ -426,14 +426,9 @@ def sha1_file(filename):
 
 def sha1_data(data):
     """Calculate sha1 hash of given data."""
-    try:
-        m = sha.new()
-        m.update(data)
-        return m.hexdigest()
-    except KeyboardInterrupt:
-        raise
-    except Exception: #FIXME: what exception could we catch here, replace with that.
-        raise Error(_("Cannot calculate SHA1 hash of given data"))
+    m = sha.new()
+    m.update(data)
+    return m.hexdigest()
 
 def uncompress(patchFile, compressType="gz", targetDir=None):
     """Uncompress the file and return the new path."""
