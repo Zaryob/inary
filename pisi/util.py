@@ -329,12 +329,10 @@ def clean_ar_timestamps(ar_file):
 def calculate_hash(path):
     """Return a (path, hash) tuple for given path."""
     if os.path.islink(path):
-        try:
-            # For symlinks, path string is hashed instead of the content
-            value = sha1_data(os.readlink(path))
-        except FileError:
+        # For symlinks, path string is hashed instead of the content
+        value = sha1_data(os.readlink(path))
+        if not os.path.exists(path):
             ctx.ui.info(_("Including external link '%s'") % path)
-            value = None
     elif os.path.isdir(path):
         ctx.ui.info(_("Including directory '%s'") % path)
         value = None
