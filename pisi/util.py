@@ -311,7 +311,7 @@ def copy_file(src,dest):
     shutil.copyfile(src, dest)
 
 def is_ar_file(file_path):
-    return open(file_path).readline().strip() == '!<arch>'
+    return open(file_path).read(8) == '!<arch>\n'
 
 def clean_ar_timestamps(ar_file):
     """Zero all timestamps in the ar files."""
