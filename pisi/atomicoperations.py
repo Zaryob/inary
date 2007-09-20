@@ -260,6 +260,13 @@ class Install(AtomicOperation):
         if ctx.comar:
             import pisi.comariface
             try:
+                if self.upgrade:
+                    (iversion, irelease, ibuild) = ctx.installdb.get_version(self.pkginfo.name)
+                    fromVersion = iversion
+                    fromRelease = irelease
+                else:
+                    fromVersion = None
+                    fromRelease = None
                 ctx.ui.notify(pisi.ui.configuring, package = self.pkginfo, files = self.files)
                 pisi.comariface.post_install(
                     self.pkginfo.name,
@@ -267,6 +274,10 @@ class Install(AtomicOperation):
                     self.package.comar_dir(),
                     os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
                     os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+                    fromVersion,
+                    fromRelease,
+                    self.metadata.package.version,
+                    self.metadata.package.release
                     )
                 ctx.ui.notify(pisi.ui.configured, package = self.pkginfo, files = self.files)
             except pisi.comariface.Error:

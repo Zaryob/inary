@@ -288,6 +288,10 @@ def configure_pending():
                     pisi.util.join_path(pkg_path, ctx.const.comar_dir),
                     pisi.util.join_path(pkg_path, ctx.const.metadata_xml),
                     pisi.util.join_path(pkg_path, ctx.const.files_xml),
+                    None,
+                    None,
+                    m.package.version,
+                    m.package.release
                 )
                 ctx.ui.notify(pisi.ui.configured, package = pkginfo, files = None)
             ctx.installdb.clear_pending(x)

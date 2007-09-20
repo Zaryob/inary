@@ -93,7 +93,7 @@ def wait_for_result(com, package_name=None):
         elif cmd == com.DENIED:
             raise Error, _("comar denied our access")
 
-def post_install(package_name, provided_scripts, scriptpath, metapath, filepath):
+def post_install(package_name, provided_scripts, scriptpath, metapath, filepath, fromVersion, fromRelease, toVersion, toRelease):
     """Do package's post install operations"""
     
     ctx.ui.info(_("Configuring %s package") % package_name)
@@ -112,8 +112,14 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath)
     wait_for_result(com)
     
     if self_post:
+        args = {
+            "fromVersion": fromVersion,
+            "fromRelease": fromRelease,
+            "toVersion": toVersion,
+            "toRelease": toRelease,
+        }
         ctx.ui.debug(_("Running package's post install script"))
-        com.call_package("System.Package.postInstall", package_name)
+        com.call_package("System.Package.postInstall", package_name, args)
         wait_for_result(com, package_name)
 
 def pre_remove(package_name, metapath, filepath):
