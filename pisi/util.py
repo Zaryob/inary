@@ -637,8 +637,18 @@ def filter_latest_packages(package_paths):
         name, version = parse_package_name(os.path.basename(path[:-len(ctx.const.package_suffix)]))
 
         if latest.has_key(name):
-            if pisi.version.Version(latest[name][2]) < pisi.version.Version(version):
-                latest[name] = (root, name, version)
+            l_version = pisi.version.Version(latest[name][2])
+            r_version = pisi.version.Version(version)
+
+            # Bug 6352
+            # If version format changes in repo and a repo also keeps the old packages (bad.bad.bad.)
+            # than only use the build nos
+            if l_version.build and r_version.build:
+                if l_version.build < r_version.build:
+                    latest[name] = (root, name, version)
+            else:
+                if l_version < r_version:
+                    latest[name] = (root, name, version)
         else:
             if version:
                 latest[name] = (root, name, version)
