@@ -32,6 +32,7 @@ import pisi.util as util
 import pisi.context as ctx
 import pisi.uri
 
+
 class FetchError(pisi.Error):
     pass
 
@@ -58,8 +59,8 @@ class UIHandler:
         self.total_size = total_size
         self.text       = text
 
-        self.now   = lambda: time.time()
-        self.Tdiff = lambda: self.now() - self.s_time
+        self.now    = lambda: time.time()
+        self.t_diff = lambda: self.now() - self.s_time
 
         self.s_time = self.now()
 
@@ -70,7 +71,7 @@ class UIHandler:
         if int(self.now()) != int(self.last_updated) and size > 0:
             self.rate, self.symbol = util.human_readable_rate((size - self.exist_size) / (self.now() - self.s_time))
             self.eta  = '%02d:%02d:%02d' %\
-                    tuple([i for i in time.gmtime((self.Tdiff() * (100 - self.percent)) / self.percent)[3:6]])
+                    tuple([i for i in time.gmtime((self.t_diff() * (100 - self.percent)) / self.percent)[3:6]])
 
         self._update_ui()
 
