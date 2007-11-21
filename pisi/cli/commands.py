@@ -151,6 +151,8 @@ class Command(object):
                      default=False, help = _("Assume yes in all yes/no queries"))
         group.add_option("-u", "--username", action="store")
         group.add_option("-p", "--password", action="store")
+        group.add_option("-L", "--bandwidth-limit", action="store", default = 0,
+                     help = _("Keep bandwidth usage under specified KB's"))
         group.add_option("-v", "--verbose", action="store_true",
                      dest="verbose", default=False,
                      help=_("Detailed output"))

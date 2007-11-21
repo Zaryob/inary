@@ -136,6 +136,7 @@ class Fetcher:
                            http_headers = self._get_http_headers(),
                            ftp_headers  = self._get_ftp_headers(),
                            proxies      = self._get_proxies(),
+                           throttle     = self._get_bandwith_limit(),
                            user_agent   = 'PiSi Fetcher/' + pisi.__version__,
                            reget        = 'check_timestamp')
 
@@ -177,6 +178,14 @@ class Fetcher:
             ctx.ui.info(_("Proxy configuration has been found for '%s' protocol") % self.url.scheme())
 
         return proxies
+
+    def _get_bandwith_limit(self):
+        bandwidth_limit = ctx.config.options.bandwidth_limit or ctx.config.values.general.bandwidth_limit
+        if bandwidth_limit:
+            ctx.ui.warning(_("Bandwidth usage is limited to %s KB/s") % bandwidth_limit)
+            return 1024 * int(bandwidth_limit)
+        else:
+            return 0
 
 
 # helper function
