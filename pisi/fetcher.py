@@ -46,7 +46,7 @@ class UIHandler:
         self.percent         = None
         self.rate            = 0.0
         self.eta             = '--:--:--'
-        self.symbol          = None
+        self.symbol          = '--/-'
         self.last_updated    = 0
         self.exist_size      = 0
 
