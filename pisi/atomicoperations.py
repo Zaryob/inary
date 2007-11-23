@@ -240,6 +240,7 @@ class Install(AtomicOperation):
 
             # schedule for reinstall
             self.old_files = self.installdb.get_files(pkg.name)
+            self.old_version = self.installdb.get_version(pkg.name)
             self.old_path = self.installdb.pkg_dir(pkg.name, iversion, irelease)
             self.reinstall = True
             self.remove_old = Remove(pkg.name)
@@ -251,7 +252,7 @@ class Install(AtomicOperation):
             import pisi.comariface
             try:
                 if self.upgrade:
-                    (iversion, irelease, ibuild) = self.installdb.get_version(self.pkginfo.name)
+                    (iversion, irelease, ibuild) = self.old_version
                     fromVersion = iversion
                     fromRelease = irelease
                 else:
