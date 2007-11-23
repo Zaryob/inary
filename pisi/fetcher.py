@@ -118,19 +118,20 @@ class Fetcher:
             raise FetchError(_('Urlgrabber needs to be installed to run this command'))
 
         if not self.url.filename():
-            FetchError(_('Filename error'))
+            raise FetchError(_('Filename error'))
 
         if not os.access(self.destdir, os.W_OK):
-            FetchError(_('Access denied to write to destination directory: "%s"') % (self.destdir))
+            raise FetchError(_('Access denied to write to destination directory: "%s"') % (self.destdir))
 
         archive_file = os.path.join(self.destdir, self.url.filename())
 
         if os.path.exists(archive_file) and not os.access(archive_file, os.W_OK):
-            FetchError(_('Access denied to destination file: "%s"') % (archive_file))
+            raise FetchError(_('Access denied to destination file: "%s"') % (archive_file))
 
         partial_file = archive_file + '.part'
 
-        urlgrabber.urlgrab(self.url.get_uri(),
+        try:
+            urlgrabber.urlgrab(self.url.get_uri(),
                            partial_file,
                            progress_obj = UIHandler(self.progress),
                            http_headers = self._get_http_headers(),
@@ -139,6 +140,8 @@ class Fetcher:
                            throttle     = self._get_bandwith_limit(),
                            user_agent   = 'PiSi Fetcher/' + pisi.__version__,
                            reget        = 'check_timestamp')
+        except urlgrabber.grabber.URLGrabError:
+            raise FetchError(_('Could not fetch destination file: "%s"') % (archive_file))
 
         if os.stat(partial_file).st_size == 0:
             os.remove(partial_file)
