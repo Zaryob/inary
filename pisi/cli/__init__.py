@@ -121,20 +121,20 @@ class CLI(pisi.ui.UI):
 
             return False
 
-    def display_progress(self, operation, percent, info="", **ka):
+    def display_progress(self, **ka):
         """ display progress of any operation """
-        if operation in ["removing", "rebuilding-db"]:
+        if ka['operation'] in ["removing", "rebuilding-db"]:
             return
-        elif operation == "fetching":
+        elif ka['operation'] == "fetching":
             totalsize = '%.1f %s' % pisi.util.human_readable_size(ka['total_size'])
             out = '\r%-30.30s (%s)%3d%% %9.2f %s [%s]' % \
-                (ka['filename'], totalsize, percent,
+                (ka['filename'], totalsize, ka['percent'],
                  ka['rate'], ka['symbol'], ka['eta'])
             self.output(out)
         else:
-            self.output("\r%s (%d%%)" % (info, percent))
+            self.output("\r%s (%d%%)" % (ka['info'], ka['percent']))
 
-        if percent == 100:
+        if ka['percent'] == 100:
             self.output(pisi.util.colorize(_(' [complete]\n'), 'gray'))
 
     def status(self, msg = None):

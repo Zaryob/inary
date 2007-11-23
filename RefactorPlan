@@ -96,10 +96,6 @@ used. (see remove_unused_attributes.patch)
 ones named tmpDir/tmp_dir/target_dir) are redundant now. See
 http://liste.uludag.org.tr/uludag-commits/2007-February/010070.html
 
-* conflict.py
-conflicts method takes a pkg_name parameter but doesn't use it at all
-
-
 ==> Fixes (that need API breakage)
 * http://liste.uludag.org.tr/uludag-commits/2007-February/010117.html
 

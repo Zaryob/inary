@@ -29,12 +29,11 @@ import pisi
 import pisi.util as util
 import pisi.context as ctx
 
-class ArchiveError(pisi.Error):
+class UnknownArchiveType(Exception):
     pass
 
-class LZMAError(pisi.Error):
-    def __init__(self, err):
-        pisi.Error.__init__(self, _("An error has occured while running LZMA:\n%s") % err)
+class LzmaRuntimeError(Exception):
+    pass
 
 class ArchiveBase(object):
     """Base class for Archive classes."""
@@ -118,9 +117,9 @@ class ArchiveTar(ArchiveBase):
             ret, out, err = util.run_batch("lzma d %s %s" % (self.file_path + ctx.const.lzma_suffix,
                                                              self.file_path))
             if ret != 0:
-                raise LZMAError(err)
+                raise LzmaRuntimeError(err)
         else:
-            raise ArchiveError(_("Archive type not recognized"))
+            raise UnknownArchiveType
 
         self.tar = tarfile.open(self.file_path, rmode)
         oldwd = os.getcwd()
@@ -180,7 +179,7 @@ class ArchiveTar(ArchiveBase):
                 wmode = 'w:'
                 self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
             else:
-                raise ArchiveError(_("Archive type not recognized"))
+                raise UnknownArchiveType
             self.tar = tarfile.open(self.file_path, wmode)
 
         self.tar.add(file_name, arc_name)
@@ -197,7 +196,7 @@ class ArchiveTar(ArchiveBase):
 
             ret, out, err = util.run_batch(batch)
             if ret != 0:
-                raise LZMAError(err)
+                raise LzmaRunTimeError(err)
 
 
 class MyZipFile(zipfile.ZipFile):

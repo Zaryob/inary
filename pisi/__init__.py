@@ -12,10 +12,11 @@
 
 # PiSi version
 
-__version__ = "1.1.5"
+import os
+import atexit
+import logging
 
-__dbversion__ = "1.1.5"
-__filesdbversion__ = "1.0.5"         # yes, this is the real bottleneck
+__version__ = "1.1.5"
 
 __all__ = [ 'api', 'configfile', 'db']
 
@@ -35,6 +36,38 @@ class Error(Exception):
     pass
 
 import pisi.api
+import pisi.config
+import pisi.context as ctx
 
-# FIXME: can't do this due to name clashes in config and other singletons booo
-#pisi.api import *
+def init_logging():
+    log_dir = os.path.join(ctx.config.dest_dir(), ctx.config.log_dir())
+    if os.access(log_dir, os.W_OK):
+        handler = logging.handlers.RotatingFileHandler('%s/pisi.log' % log_dir)
+        formatter = logging.Formatter('%(asctime)-12s: %(levelname)-8s %(message)s')
+        handler.setFormatter(formatter)
+        ctx.log = logging.getLogger('pisi')
+        ctx.log.addHandler(handler)
+        ctx.loghandler = handler
+        ctx.log.setLevel(logging.DEBUG)
+
+def _cleanup():
+    """Close the database cleanly and do other cleanup."""
+    ctx.disable_keyboard_interrupts()
+    if ctx.log:
+        ctx.loghandler.flush()
+        ctx.log.removeHandler(ctx.loghandler)
+
+    filesdb = pisi.db.filesdb.FilesDB()
+    if filesdb.is_initialized():
+        filesdb.close()
+
+    if ctx.build_leftover and os.path.exists(ctx.build_leftover):
+        os.unlink(ctx.build_leftover)
+
+    ctx.ui.close()
+    ctx.enable_keyboard_interrupts()
+
+atexit.register(_cleanup)
+
+ctx.config = pisi.config.Config(pisi.config.Options())
+init_logging()

@@ -32,10 +32,6 @@ def sig_handler(sig, frame):
         exit()
 
 def exit():
-    try:
-        pisi.api.finalize()
-    except KeyboardInterrupt: # raised pending interrupt
-        pass
     sys.exit(1)
 
 def handle_exception(exception, value, tb):
@@ -73,7 +69,7 @@ Please file a bug report. (http://bugs.uludag.org.tr)"""))
         ui.info(_("Traceback:"))
         traceback.print_tb(tb)
     else:
-        if not exception is pisicli.Error:
+        if not exception is pisi.Error:
             ui.info(_("Use --debug to see a traceback."))
 
     exit()

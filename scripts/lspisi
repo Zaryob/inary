@@ -15,9 +15,7 @@ import sys
 import pisi
 
 def show_info(filename):
-    pisi.api.init(database=False, comar=False)
     metadata, files = pisi.api.info_file(filename)
-    pisi.api.finalize()
 
     paths = [fileinfo.path for fileinfo in files.list]
     paths.sort()

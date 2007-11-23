@@ -34,8 +34,6 @@ def main():
     if len(sys.argv) < 2:
         usage("PiSi package required..")
 
-    pisi.api.init(database=False, options='')
-
     try:
         arc = ArchiveZip(sys.argv[1], 'zip', 'r')
     except BadZipfile, e:
@@ -53,7 +51,6 @@ def main():
     os.unlink(tar_file)
     os.unlink(tar_file.rstrip('.lzma'))
 
-    pisi.api.finalize()            
     return 0
 
 if __name__ == "__main__":

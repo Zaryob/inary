@@ -17,182 +17,140 @@ we basically store everything in PackageInfo class
 yes, we are cheap
 """
 
+import re
+import gzip
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import pisi
-import pisi.context as ctx
-import pisi.db.itembyrepodb
+import piksemel
 
-class Error(pisi.Error):
-    pass
+import pisi.db
+import pisi.metadata
+import pisi.dependency
+import pisi.db.itembyrepo
+import pisi.db.lazydb as lazydb
 
-class NotfoundError(pisi.Error):
-    def __init__(self, pkg):
-        pisi.Error.__init__("Package %s not found" % pkg)
-        self.pkg = pkg
+class PackageDB(lazydb.LazyDB):
 
-class PackageDB(object):
-    """PackageDB class provides an interface to the package database
-    using shelf objects"""
+    def init(self):
 
-    def __init__(self):
-        self.d = pisi.db.itembyrepodb.ItemByRepoDB('package')
-        self.dr = pisi.db.itembyrepodb.ItemByRepoDB('revdep')
-        self.do = pisi.db.itembyrepodb.ItemByRepoDB('obsoleted')
-        self.drp = pisi.db.itembyrepodb.ItemByRepoDB('replaces')
+        self.__package_nodes = {} # Packages
+        self.__revdeps = {}       # Reverse dependencies 
+        self.__obsoletes = {}     # Obsoletes
+        self.__replaces = {}      # Replaces
 
-    def close(self):
-        self.d.close()
-        self.dr.close()
-        self.do.close()
-        self.drp.close()
+        repodb = pisi.db.repodb.RepoDB()
 
-    def destroy(self):
-        self.d.destroy()
-        self.dr.destroy()
-        self.do.destroy()
-        self.drp.destroy()
+        for repo in repodb.list_repos():
+            doc = repodb.get_repo_doc(repo)
+            self.__package_nodes[repo] = self.__generate_packages(doc)
+            self.__revdeps[repo] = self.__generate_revdeps(doc)
+            self.__obsoletes[repo] = self.__generate_obsoletes(doc)
+            self.__replaces[repo] = self.__generate_replaces(doc)
 
-    def has_package(self, name, repo=None, txn = None):
-        return self.d.has_key(name, repo, txn=txn)
+        self.pdb = pisi.db.itembyrepo.ItemByRepo(self.__package_nodes, compressed=True)
+        self.rvdb = pisi.db.itembyrepo.ItemByRepo(self.__revdeps)
+        self.odb = pisi.db.itembyrepo.ItemByRepo(self.__obsoletes)
+        self.rpdb = pisi.db.itembyrepo.ItemByRepo(self.__replaces)
 
-    def get_package(self, name, repo=None, txn = None):
-        try:
-            return self.d.get_item(name, repo, txn=txn)
-        except pisi.db.itembyrepodb.NotfoundError:
-            raise Error(_('Package %s not found') % name)
+    def __generate_replaces(self, doc):
+        return [x.getTagData("Name") for x in doc.tags("Package") if x.getTagData("Replaces")]
+        
+    def __generate_obsoletes(self, doc):
+        distribution = doc.getTag("Distribution")
+        obsoletes = distribution and distribution.getTag("Obsoletes")
 
-    def get_package_repo(self, name, repo=None, txn = None):
-        return self.d.get_item_repo(name, repo, txn=txn)
+        if not obsoletes:
+            return []
 
-    def which_repo(self, name, txn = None):
-        return self.d.which_repo(name, txn=txn)
+        return map(lambda x: x.firstChild().data(), obsoletes.tags("Package"))
+        
+    def __generate_packages(self, doc):
+        return dict(map(lambda x: (x.getTagData("Name"), gzip.zlib.compress(x.toString())), doc.tags("Package")))
+
+    def __generate_revdeps(self, doc):
+        revdeps = {}
+        for node in doc.tags("Package"):
+            name = node.getTagData('Name')
+            deps = node.getTag('RuntimeDependencies')
+            if deps:
+                for dep in deps.tags("Dependency"):
+                    revdeps.setdefault(dep.firstChild().data(), set()).add((name, dep.toString()))
+        return revdeps
+
+    def has_package(self, name, repo=None):
+        return self.pdb.has_item(name, repo)
+
+    def get_package(self, name, repo=None):
+        pkg, repo = self.get_package_repo(name, repo)
+        return pkg
+
+    def search_package(self, terms, lang=None, repo=None):
+        resum = '<Summary xml:lang="%s">.*?%s.*?</Summary>'
+        redesc = '<Description xml:lang="%s">.*?%s.*?</Description>'
+        if not lang:
+            lang = pisi.pxml.autoxml.LocalText.get_lang()
+        found = []
+        for name, xml in self.pdb.get_items_iter(repo):
+            if terms == filter(lambda term: re.compile(term, re.I).search(name) or \
+                                            re.compile(resum % (lang, term), re.I).search(xml) or \
+                                            re.compile(redesc % (lang, term), re.I).search(xml), terms):
+                found.append(name)
+        return found
+        
+    def get_version(self, name, repo):
+        if not self.has_package(name, repo):
+            raise Exception(_('Package %s not found.') % name)
+            
+        pkg_doc = piksemel.parseString(self.pdb.get_item(name, repo))
+        history = pkg_doc.getTag("History")
+        build = pkg_doc.getTagData("Build")
+        version = history.getTag("Update").getTagData("Version")
+        release = history.getTag("Update").getAttribute("release")
+
+        return version, release, build and int(build)
+
+    def get_package_repo(self, name, repo=None):
+        pkg, repo = self.pdb.get_item_repo(name, repo)
+        package = pisi.metadata.Package()
+        package.parse(pkg)
+        return package, repo
+
+    def which_repo(self, name):
+        return self.pdb.which_repo(name)
 
     def get_obsoletes(self, repo=None):
-        obsoletes = []
-        for r in self.do.list(repo):
-            obsoletes.extend(self.do.get_item(r, repo))
-
-        replaces = self.get_replaces(repo)
-        return set(str(o) for o in obsoletes) - set(replaces.keys())
+        return self.odb.get_list_item(repo)
     
+    def get_rev_deps(self, name, repo=None):
+        try:
+            rvdb = self.rvdb.get_item(name, repo)
+        except Exception: #FIXME: what exception could we catch here, replace with that.
+            return []
+
+        rev_deps = []
+        for pkg, dep in rvdb:
+            node = piksemel.parseString(dep)
+            dependency = pisi.dependency.Dependency()
+            dependency.package = node.firstChild().data()
+            if node.attributes():
+                attr = node.attributes()[0]
+                dependency.__dict__[attr] = node.getAttribute(attr)
+            rev_deps.append((pkg, dependency))
+        return rev_deps
+
     # replacesdb holds the info about the replaced packages (ex. gaim -> pidgin)
-    def get_replaces(self, repo = None):
+    def get_replaces(self, repo=None):
         pairs = {}
-        for pkg_name in self.drp.list(repo):
-            replaces = self.drp.get_item(pkg_name, repo)
+
+        for pkg_name in self.rpdb.get_list_item():
+            replaces = self.get_package(pkg_name).replaces
             for r in replaces:
                 if pisi.replace.installed_package_replaced(r):
                     pairs[r.package] = pkg_name
 
         return pairs
-    
-    def get_rev_deps(self, name, repo = None, txn = None):
-        if self.dr.has_key(name, repo, txn=txn):
-            return self.dr.get_item(name, repo, txn=txn)
-        else:
-            return []
 
-    def get_deps(self, name, repo = None, txn = None):
-        if self.d.has_key(name, repo, txn=txn):
-            pinfo =  self.d.get_item(name, repo, txn=txn)
-            return pinfo.packageDependencies
-        else:
-            return []
-
-    def list_packages(self, repo=None):
-        return self.d.list(repo)
-
-    def add_obsoletes(self, obsoletes, repo, txn = None):
-        def proc(txn):
-            self.do.add_item(repo, obsoletes, repo, txn)
-        ctx.txn_proc(proc, txn)
-
-    def add_package(self, package_info, repo, txn = None):
-        name = str(package_info.name)
-
-        def proc(txn):
-            self.d.add_item(name, package_info, repo, txn)
-            for dep in package_info.runtimeDependencies():
-                dep_name = str(dep.package)
-                if self.dr.has_key(dep_name, repo, txn):
-                    revdep = self.dr.get_item(dep_name, repo, txn)
-                    revdep = filter(lambda (n,d):n!=name, revdep)
-                    revdep.append( (name, dep) )
-                    self.dr.add_item(dep_name, revdep, repo, txn)
-                else:
-                    self.dr.add_item(dep_name, [ (name, dep) ], repo, txn)
-
-            if package_info.replaces:
-                self.drp.add_item(name, package_info.replaces, repo, txn)
-            
-            # add component
-            ctx.componentdb.add_package(package_info.partOf, package_info.name, repo, txn)
-
-        ctx.txn_proc(proc, txn)
-
-    def clear(self, txn = None):
-        self.d.clear()
-        self.dr.clear()
-        self.do.clear()
-        self.drp.clear()
-
-    def remove_package(self, name, repo = None, txn = None):
-        name = str(name)
-        def proc(txn):
-            package_info = self.d.get_item(name, repo, txn=txn)
-            self.d.remove_item(name, repo, txn=txn)
-            for dep in package_info.runtimeDependencies():
-                dep_name = str(dep.package)
-                if self.dr.has_key(dep_name, repo, txn):
-                    revdep = self.dr.get_item(dep_name, repo, txn)
-                    revdep = filter(lambda (n,d):n!=name, revdep)
-                    if revdep:
-                        self.dr.add_item(dep_name, revdep, repo, txn)
-                    else:
-                        # Bug 3558: removal of revdep list of a package from revdepdb
-                        # should only be done by the list members (dep. packages), not
-                        # the package itself. So if a package is removed, it is removed
-                        # from packagedb but its revdepdb part may still exist, until
-                        # all the list members are removed.
-                        self.dr.remove_item(dep_name, repo, txn=txn)
-
-            # remove from component
-            ctx.componentdb.remove_package(package_info.partOf, package_info.name, repo, txn)
-
-        self.d.txn_proc(proc, txn)
-
-    def remove_repo(self, repo, txn = None):
-        def proc(txn):
-            self.d.remove_repo(repo, txn=txn)
-            self.dr.remove_repo(repo, txn=txn)
-            self.do.remove_repo(repo, txn=txn)
-            self.drp.remove_repo(repo, txn=txn)
-        self.d.txn_proc(proc, txn)
-
-def remove_tracking_package(name, txn = None):
-    # remove the guy from the tracking databases
-    if pkgdb.has_package(name, pisi.db.itembyrepodb.installed, txn=txn):
-        pkgdb.remove_package(name, pisi.db.itembyrepodb.installed, txn=txn)
-    if pkgdb.has_package(name, pisi.db.itembyrepodb.thirdparty, txn=txn):
-        pkgdb.remove_package(name, pisi.db.itembyrepodb.thirdparty, txn=txn)
-
-pkgdb = None
-
-def init():
-    global pkgdb
-
-    if pkgdb is not None:
-        return pkgdb
-
-    pkgdb = PackageDB()
-    return pkgdb
-
-def finalize():
-    global pkgdb
-
-    if pkgdb is not None:
-        pkgdb.close()
-        pkgdb = None
+    def list_packages(self, repo):
+        return self.pdb.get_item_keys(repo)

@@ -49,7 +49,7 @@ class Index(xmlfile.XmlFile):
 
     def read_uri(self, uri, tmpdir, force = False):
         self.read(uri, tmpDir=tmpdir, sha1sum=not force,
-                  compress=pisi.file.File.auto, sign=pisi.file.File.detached, copylocal = True)
+                  compress=pisi.file.File.auto, sign=pisi.file.File.detached, copylocal = True, nodecode = True)
 
     # read index for a given repo, force means download even if remote not updated
     def read_uri_of_repo(self, uri, repo = None, force = False):
@@ -109,32 +109,6 @@ class Index(xmlfile.XmlFile):
                 ctx.ui.info(_('Adding %s to package index') % pkg)
                 self.add_package(pkg, deltas, repo_uri)
 
-    def update_db(self, repo, txn = None):
-        # FIXME: updating db takes too much time. So a notify mechanism is used to inform the status
-        # of the operation.
-
-        self.progress = ctx.ui.Progress(len(self.packages)+len(self.specs))
-        self.processed = 0
-
-        def update_progress():
-            self.processed += 1
-            ctx.ui.display_progress(operation = "updatingrepo",
-                                    percent = self.progress.update(self.processed),
-                                    info = _("Updating package database of %s") % repo)
-
-        ctx.componentdb.remove_repo(repo, txn=txn)
-        for comp in self.components:
-            ctx.componentdb.update_component(comp, repo, txn)
-        ctx.packagedb.remove_repo(repo, txn=txn)
-        ctx.packagedb.add_obsoletes(self.distribution.obsoletes, repo, txn=txn)
-        for pkg in self.packages:
-            ctx.packagedb.add_package(pkg, repo, txn=txn)
-            update_progress()
-        ctx.sourcedb.remove_repo(repo, txn=txn)
-        for sf in self.specs:
-            ctx.sourcedb.add_spec(sf, repo, txn=txn)
-            update_progress()
-
     def add_package(self, path, deltas, repo_uri):
         package = pisi.package.Package(path, 'r')
         md = package.get_metadata()
@@ -187,10 +161,10 @@ class Index(xmlfile.XmlFile):
             #ctx.ui.error(str(Error(*errs)))
 
     def add_spec(self, path, repo_uri):
-        import pisi.build
+        import pisi.operations.build
         ctx.ui.info(_('Adding %s to source index') % path)
         #TODO: may use try/except to handle this
-        builder = pisi.build.Builder(path)
+        builder = pisi.operations.build.Builder(path)
             #ctx.ui.error(_('SpecFile in %s is corrupt, skipping...') % path)
             #ctx.ui.error(str(Error(*errs)))
         builder.fetch_component()

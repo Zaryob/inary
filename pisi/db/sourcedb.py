@@ -10,97 +10,75 @@
 # Please read the COPYING file.
 #
 
-"""
-package source database
-interface for update/query to local package repository
-we basically store everything in sourceinfo class
-yes, we are cheap
-to handle multiple repositories, for sources, we
-store a set of repositories in which the source appears.
-the actual guy to take is determined from the repo order.
-"""
-
+import re
+import gzip
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import pisi.context as ctx
-import pisi.db.itembyrepodb
+import piksemel
 
-class NotfoundError(pisi.Error):
-    pass
+import pisi
+import pisi.specfile
+import pisi.db.lazydb as lazydb
 
-class SourceDB(object):
+class SourceDB(lazydb.LazyDB):
 
-    def __init__(self):
-        self.d = pisi.db.itembyrepodb.ItemByRepoDB('source')
-        self.dpkgtosrc = pisi.db.itembyrepodb.ItemByRepoDB('pkgtosrc')
+    def init(self):
 
-    def close(self):
-        self.d.close()
-        self.dpkgtosrc.close()
+        self.__source_nodes = {}
+        self.__pkgstosrc = {}
 
-    def list(self):
-        return self.d.list()
+        repodb = pisi.db.repodb.RepoDB()
 
-    def has_spec(self, name, repo=None, txn=None):
-        return self.d.has_key(name, repo, txn)
+        for repo in repodb.list_repos():
+            doc = repodb.get_repo_doc(repo)
+            self.__source_nodes[repo], self.__pkgstosrc[repo] = self.__generate_sources(doc)
 
-    def get_spec(self, name, repo=None, txn = None):
-        try:
-            return self.d.get_item(name, repo, txn)
-        except pisi.db.itembyrepodb.NotfoundError:
-            raise NotfoundError(_("Source package %s not found") % name)
+        self.sdb = pisi.db.itembyrepo.ItemByRepo(self.__source_nodes, compressed=True)
+        self.psdb = pisi.db.itembyrepo.ItemByRepo(self.__pkgstosrc)
 
-    def get_spec_repo(self, name, repo=None, txn = None):
-        try:
-            return self.d.get_item_repo(name, repo, txn)
-        except pisi.db.itembyrepodb.NotfoundError:
-            raise NotfoundError(_("Source package %s not found") % name)
+    def __generate_sources(self, doc):
 
-    def pkgtosrc(self, name, txn = None):
-        return self.dpkgtosrc.get_item(name, txn=txn)
+        sources = {}
+        pkgstosrc = {}
 
-    def add_spec(self, spec, repo, txn = None):
-        assert not spec.errors()
-        name = str(spec.source.name)
-        def proc(txn):
-            self.d.add_item(name, spec, repo, txn)
-            for pkg in spec.packages:
-                self.dpkgtosrc.add_item(pkg.name, name, repo, txn)
-            ctx.componentdb.add_spec(spec.source.partOf, spec.source.name, repo, txn)
-        self.d.txn_proc(proc, txn)
+        for spec in doc.tags("SpecFile"):
+            src_name = spec.getTag("Source").getTagData("Name")
+            sources[src_name] = gzip.zlib.compress(spec.toString())
+            for package in spec.tags("Package"):
+                pkgstosrc[package.getTagData("Name")] = src_name
+        
+        return sources, pkgstosrc
 
-    def remove_spec(self, name, repo, txn = None):
-        name = str(name)
-        def proc(txn):
-            assert self.has_spec(name, txn=txn)
-            spec = self.d.get_item(name, repo, txn)
-            self.d.remove_item(name, txn=txn)
-            for pkg in spec.packages:
-                self.dpkgtosrc.remove_item_repo(pkg.name, repo, txn)
-            ctx.componentdb.remove_spec(spec.source.partOf, spec.source.name, repo, txn)
+    def list_sources(self, repo=None):
+        return self.sdb.get_item_keys(repo)
 
-        self.d.txn_proc(proc, txn)
+    def has_spec(self, name, repo=None):
+        return self.sdb.has_item(name, repo)
 
-    def remove_repo(self, repo, txn = None):
-        def proc(txn):
-            self.d.remove_repo(repo, txn=txn)
-            self.dpkgtosrc.remove_repo(repo, txn=txn)
-        self.d.txn_proc(proc, txn)
+    def get_spec(self, name, repo=None):
+        spec, repo = self.get_spec_repo(name, repo)
+        return spec
 
-srcdb = None
+    def search_spec(self, terms, lang=None, repo=None):
+        resum = '<Summary xml:lang="%s">.*?%s.*?</Summary>'
+        redesc = '<Description xml:lang="%s">.*?%s.*?</Description>'
+        if not lang:
+            lang = pisi.pxml.autoxml.LocalText.get_lang()
+        found = []
+        for name, xml in self.sdb.get_items_iter(repo):
+            if terms == filter(lambda term: re.compile(term, re.I).search(name) or \
+                                            re.compile(resum % (lang, term), re.I).search(xml) or \
+                                            re.compile(redesc % (lang, term), re.I).search(xml), terms):
+                found.append(name)
+        return found
 
-def init():
-    global srcdb
-    if srcdb is not None:
-        return srcdb
+    def get_spec_repo(self, name, repo=None):
+        src, repo = self.sdb.get_item_repo(name, repo)
+        spec = pisi.specfile.SpecFile()
+        spec.parse(src)
+        return spec, repo
 
-    srcdb = SourceDB()
-    return srcdb
-
-def finalize():
-    global srcdb
-    if srcdb is not None:
-        srcdb.close()
-        srcdb = None
+    def pkgtosrc(self, name, repo=None):
+        return self.psdb.get_item(name, repo)

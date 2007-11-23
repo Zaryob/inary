@@ -74,7 +74,7 @@ class UI(object):
         "ask a yes/no question"
         pass
 
-    def display_progress(self, pd):
+    def display_progress(self, **ka):
         "display progress"
         pass
 

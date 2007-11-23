@@ -42,7 +42,7 @@ class Source:
     t_Homepage = [autoxml.String, autoxml.optional]
     t_Packager = [specfile.Packager, autoxml.mandatory]
 
-class Package(specfile.Package):
+class Package(specfile.Package, xmlfile.XmlFile):
     __metaclass__ = autoxml.autoxml
 
     t_Build = [ autoxml.Integer, autoxml.optional]

@@ -43,7 +43,7 @@ given conflicting spec"""
 
 def package_conflicts(pkg, confs):
     for c in confs:
-        if pkg.name == c.package and c.satisfies_relation(pkg.name, pkg.version, pkg.release):
+        if pkg.name == c.package and c.satisfies_relation(pkg.version, pkg.release):
             return c
 
     return None

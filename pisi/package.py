@@ -44,7 +44,7 @@ class Package:
         self.impl = archive.ArchiveZip(self.filepath, 'zip', mode)
 
     def fetch_remote_file(self, url):
-        dest = ctx.config.packages_dir()
+        dest = ctx.config.cached_packages_dir()
         self.filepath = os.path.join(dest, url.filename())
 
         if not os.path.exists(self.filepath):
@@ -145,7 +145,7 @@ class Package:
                      + self.metadata.package.version + '-' \
                      + self.metadata.package.release
 
-        return os.path.join( ctx.config.lib_dir(), 'package', packageDir)
+        return os.path.join(ctx.config.packages_dir(), packageDir)
 
     def comar_dir(self):
         return os.path.join(self.pkg_dir(), ctx.const.comar_dir)

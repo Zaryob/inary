@@ -14,10 +14,10 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import pisi.context as ctx
+import pisi
 import pisi.version
+import pisi.db
 import pisi.pxml.autoxml as autoxml
-import pisi.db.itembyrepodb
 
 class Relation:
 
@@ -31,7 +31,7 @@ class Relation:
     a_releaseFrom = [autoxml.String, autoxml.optional]
     a_releaseTo = [autoxml.String, autoxml.optional]
 
-    def satisfies_relation(self, pkg_name, version, release):
+    def satisfies_relation(self, version, release):
         ret = True
         v = pisi.version.Version(version)
         if self.version:
@@ -50,10 +50,11 @@ class Relation:
         return ret
 
 def installed_package_satisfies(relation):
+    installdb = pisi.db.installdb.InstallDB()
     pkg_name = relation.package
-    if not ctx.installdb.is_installed(pkg_name):
+    if not installdb.has_package(pkg_name):
         return False
     else:
-        pkg = ctx.packagedb.get_package(pkg_name, pisi.db.itembyrepodb.installed)
+        pkg = installdb.get_package(pkg_name)
         (version, release) = (pkg.version, pkg.release)
-        return relation.satisfies_relation(pkg_name, version, release)
+        return relation.satisfies_relation(version, release)

@@ -16,7 +16,6 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import os
-import bsddb3.db as db
 import shutil
 
 import pisi
@@ -28,8 +27,8 @@ import pisi.files
 import pisi.uri
 import pisi.ui
 import pisi.version
-import pisi.delta
-import pisi.db.packagedb
+import pisi.operations.delta
+import pisi.db
 
 class Error(pisi.Error):
     pass
@@ -58,18 +57,22 @@ class Install(AtomicOperation):
 
     @staticmethod
     def from_name(name, ignore_dep = None):
+        packagedb = pisi.db.packagedb.PackageDB()
         # download package and return an installer object
         # find package in repository
-        repo = ctx.packagedb.which_repo(name)
+        repo = packagedb.which_repo(name)
         if repo:
+            repodb = pisi.db.repodb.RepoDB()
             ctx.ui.info(_("Package %s found in repository %s") % (name, repo))
-            repo = ctx.repodb.get_repo(repo)
-            pkg = ctx.packagedb.get_package(name)
+
+            repo = repodb.get_repo(repo)
+            pkg = packagedb.get_package(name)
             delta = None
 
+            installdb = pisi.db.installdb.InstallDB()
             # Package is installed. This is an upgrade. Check delta.
-            if ctx.installdb.is_installed(pkg.name):
-                (version, release, build) = ctx.installdb.get_version(pkg.name)
+            if installdb.has_package(pkg.name):
+                (version, release, build) = installdb.get_version(pkg.name)
                 delta = pkg.get_delta(buildFrom=build)
 
             # If delta exists than use the delta uri.
@@ -103,6 +106,8 @@ class Install(AtomicOperation):
         self.metadata = self.package.metadata
         self.files = self.package.files
         self.pkginfo = self.metadata.package
+        self.filesdb = pisi.db.filesdb.FilesDB()
+        self.installdb = pisi.db.installdb.InstallDB()
 
     def install(self, ask_reinstall = True):
         if ctx.get_option('fetch_only'):
@@ -123,13 +128,7 @@ class Install(AtomicOperation):
         self.store_pisi_files()
         self.postinstall()
 
-        txn = ctx.dbenv.txn_begin()
-        try:
-            self.update_databases(txn)
-            txn.commit()
-        except db.DBError, e:
-            txn.abort()
-            raise e
+        self.update_databases()
 
         ctx.enable_keyboard_interrupts()
 
@@ -156,11 +155,6 @@ class Install(AtomicOperation):
                 raise Error(_("%s package cannot be installed unless the dependencies are satisfied") %
                             self.pkginfo.name)
 
-        # check if package is in database
-        # If it is not, put it into 3rd party packagedb
-        if not ctx.packagedb.has_package(self.pkginfo.name):
-            ctx.packagedb.add_package(self.pkginfo, pisi.db.itembyrepodb.thirdparty)
-
         # If it is explicitly specified that package conflicts with this package and also
         # we passed check_conflicts tests in operations.py than this means a non-conflicting
         # pkg is in "order" to be installed that has no file conflict problem with this package. 
@@ -174,15 +168,15 @@ class Install(AtomicOperation):
         # check file conflicts
         file_conflicts = []
         for f in self.files.list:
-            if ctx.filesdb.has_file(f.path):
-                pkg, existing_file = ctx.filesdb.get_file(f.path)
+            if self.filesdb.has_file(f.path):
+                pkg, existing_file = self.filesdb.get_file(f.path)
                 dst = pisi.util.join_path(ctx.config.dest_dir(), f.path)
                 if pkg != self.pkginfo.name and not os.path.isdir(dst) and really_conflicts(pkg):
                     file_conflicts.append( (pkg, existing_file) )
         if file_conflicts:
             file_conflicts_str = ""
             for (pkg, existing_file) in file_conflicts:
-                file_conflicts_str += _("/%s from %s package\n") % (existing_file.path, pkg)
+                file_conflicts_str += _("/%s from %s package\n") % (existing_file, pkg)
             msg = _('File conflicts:\n%s') % file_conflicts_str
             if self.ignore_file_conflicts:
                 ctx.ui.warning(msg)
@@ -196,14 +190,10 @@ class Install(AtomicOperation):
 
         self.reinstall = False
         self.upgrade = False
-        if ctx.installdb.is_installed(pkg.name): # is this a reinstallation?
-
-            #FIXME: consider REPOSITORY instead of DISTRIBUTION -- exa
-            #ipackage = ctx.packagedb.get_package(pkg.name, pisi.db.itembyrepodb.installed)
-            ipkg = ctx.installdb.get_info(pkg.name)
+        if self.installdb.has_package(pkg.name): # is this a reinstallation?
+            ipkg = self.installdb.get_info(pkg.name)
             repomismatch = ipkg.distribution != pkg.distribution
-
-            (iversion, irelease, ibuild) = ctx.installdb.get_version(pkg.name)
+            (iversion, irelease, ibuild) = self.installdb.get_version(pkg.name)
 
             # determine if same version
             self.same_ver = False
@@ -249,8 +239,8 @@ class Install(AtomicOperation):
                         raise Error(_('Package downgrade declined'))
 
             # schedule for reinstall
-            self.old_files = ctx.installdb.files(pkg.name)
-            self.old_path = ctx.installdb.pkg_dir(pkg.name, iversion, irelease)
+            self.old_files = self.installdb.get_files(pkg.name)
+            self.old_path = self.installdb.pkg_dir(pkg.name, iversion, irelease)
             self.reinstall = True
             self.remove_old = Remove(pkg.name)
             self.remove_old.run_preremove()
@@ -341,7 +331,7 @@ class Install(AtomicOperation):
         # of these files may be relocated to some other directory in the new package. 
         # We handle these cases here.
         def relocate_files():
-            for old_file, new_file in pisi.delta.find_relocations(self.old_files, self.files):
+            for old_file, new_file in pisi.operations.delta.find_relocations(self.old_files, self.files):
                 old_path, new_path = ("/" + old_file.path, "/" + new_file.path)
 
                 destdir = os.path.dirname(new_path)
@@ -417,26 +407,19 @@ class Install(AtomicOperation):
             ctx.ui.info(_('Storing %s') % fpath, verbose=True)
             self.package.extract_file(fpath, self.package.pkg_dir())
 
-    def update_databases(self, txn):
+    def update_databases(self):
         "update databases"
         if self.reinstall:
-            self.remove_old.remove_db(txn)
+            self.remove_old.remove_db()
 
-        # installdb
-        ctx.installdb.install(self.metadata.package.name,
-                          self.metadata.package.version,
-                          self.metadata.package.release,
-                          self.metadata.package.build,
-                          self.metadata.package.distribution,
-                          config_later = self.config_later,
-                          txn = txn)
+        if self.config_later:
+            self.installdb.mark_pending(self.pkginfo.name)
 
         # filesdb
-        ctx.filesdb.add_files(self.metadata.package.name, self.files, txn=txn)
+        self.filesdb.add_files(self.metadata.package.name, self.files)
 
         # installed packages
-        ctx.packagedb.add_package(self.pkginfo, pisi.db.itembyrepodb.installed, txn=txn)
-
+        self.installdb.add_package(self.pkginfo)
 
 def install_single(pkg, upgrade = False):
     """install a single package from URI or ID"""
@@ -463,10 +446,12 @@ class Remove(AtomicOperation):
 
     def __init__(self, package_name, ignore_dep = None):
         super(Remove, self).__init__(ignore_dep)
+        self.installdb = pisi.db.installdb.InstallDB()
+        self.filesdb = pisi.db.filesdb.FilesDB()
         self.package_name = package_name
-        self.package = ctx.packagedb.get_package(self.package_name, pisi.db.itembyrepodb.installed)
+        self.package = self.installdb.get_package(self.package_name)
         try:
-            self.files = ctx.installdb.files(self.package_name)
+            self.files = self.installdb.get_files(self.package_name)
         except pisi.Error, e:
             # for some reason file was deleted, we still allow removes!
             ctx.ui.error(unicode(e))
@@ -478,7 +463,7 @@ class Remove(AtomicOperation):
 
         ctx.ui.status(_('Removing package %s') % self.package_name)
         ctx.ui.notify(pisi.ui.removing, package = self.package, files = self.files)
-        if not ctx.installdb.is_installed(self.package_name):
+        if not self.installdb.has_package(self.package_name):
             raise Exception(_('Trying to remove nonexistent package ')
                             + self.package_name)
 
@@ -488,13 +473,7 @@ class Remove(AtomicOperation):
         for fileinfo in self.files.list:
             self.remove_file(fileinfo, self.package_name)
 
-        txn = ctx.dbenv.txn_begin()
-        try:
-            self.remove_db(txn)
-            txn.commit()
-        except db.DBError, e:
-            txn.abort()
-            raise e
+        self.remove_db()
 
         self.remove_pisi_files()
         ctx.ui.close()
@@ -511,12 +490,13 @@ class Remove(AtomicOperation):
     def remove_file(fileinfo, package_name):
         fpath = pisi.util.join_path(ctx.config.dest_dir(), fileinfo.path)
 
+        filesdb = pisi.db.filesdb.FilesDB()
         # we should check if the file belongs to another
         # package (this can legitimately occur while upgrading
         # two packages such that a file has moved from one package to
         # another as in #2911)
-        if ctx.filesdb.has_file(fileinfo.path):
-            pkg, existing_file = ctx.filesdb.get_file(fileinfo.path)
+        if filesdb.has_file(fileinfo.path):
+            pkg, existing_file = filesdb.get_file(fileinfo.path)
             if pkg != package_name:
                 ctx.ui.warning(_('Not removing conflicted file : %s') % fpath)
                 return
@@ -559,11 +539,12 @@ class Remove(AtomicOperation):
     def remove_pisi_files(self):
         util.clean_dir(self.package.pkg_dir())
 
-    def remove_db(self, txn):
-        ctx.installdb.remove(self.package_name, txn)
-        ctx.filesdb.remove_files(self.files, txn)
-        # FIXME: something goes wrong here, if we use ctx operations ends up with segmentation fault!
-        pisi.db.packagedb.remove_tracking_package(self.package_name, txn)
+    def remove_db(self):
+        self.installdb.remove_package(self.package_name)
+        self.filesdb.remove_files(self.files.list)
+# FIX:DB
+#         # FIXME: something goes wrong here, if we use ctx operations ends up with segmentation fault!
+#         pisi.db.packagedb.remove_tracking_package(self.package_name)
 
 
 def remove_single(package_name):
@@ -571,61 +552,5 @@ def remove_single(package_name):
 
 def build(package):
     # wrapper for build op
-    import pisi.build
-    return pisi.build.build(package)
-
-def virtual_install(metadata, files, txn):
-    """Recreate the package info for rebuilddb command"""
-    # installdb
-    ctx.installdb.install(metadata.package.name,
-                          metadata.package.version,
-                          metadata.package.release,
-                          metadata.package.build,
-                          metadata.package.distribution,
-                          rebuild=True,
-                          txn=txn)
-
-    # filesdb
-    if files:
-        ctx.filesdb.add_files(metadata.package.name, files, txn=txn)
-
-    # installed packages
-    ctx.packagedb.add_package(metadata.package, pisi.db.itembyrepodb.installed, txn=txn)
-
-def resurrect_package(package_fn, write_files, txn = None):
-    """Resurrect the package from xml files"""
-
-    metadata_xml = util.join_path(ctx.config.lib_dir(), 'package',
-                                  package_fn, ctx.const.metadata_xml)
-    if not os.path.exists(metadata_xml):
-        raise Error, _("Metadata XML '%s' cannot be found") % metadata_xml
-
-    metadata = pisi.metadata.MetaData()
-    metadata.read(metadata_xml)
-
-    errs = metadata.errors()
-    if errs:
-        util.print_errors(errs)
-        raise Error, _("MetaData format wrong (%s)") % package_fn
-
-    ctx.ui.info(_('* Adding \'%s\' to db... ') % (metadata.package.name), noln=True)
-
-    if write_files:
-        files_xml = util.join_path(ctx.config.lib_dir(), 'package',
-                                package_fn, ctx.const.files_xml)
-        if not os.path.exists(files_xml):
-            raise Error, _("Files XML '%s' cannot be found") % files_xml
-
-        files = pisi.files.Files()
-        files.read(files_xml)
-        if files.errors():
-            raise Error, _("Invalid %s") % ctx.const.files_xml
-    else:
-        files = None
-
-    #import pisi.atomicoperations
-    def f(t):
-        pisi.atomicoperations.virtual_install(metadata, files, t)
-    ctx.txn_proc(f, txn)
-
-    ctx.ui.info(_('OK.'))
+    import pisi.operations.build
+    return pisi.operations.build.build(package)

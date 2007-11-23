@@ -35,11 +35,12 @@
 #
 #[directories]
 #lib_dir = /var/lib/pisi
-#db_dir = /var/db/pisi
+#info_dir = "/var/lib/pisi/info"
 #archives_dir = /var/cache/pisi/archives
-#packages_dir = /var/cache/pisi/packages
+#cached_packages_dir = /var/cache/pisi/packages
 #compiled_packages_dir = "/var/cache/pisi/packages"
 #index_dir = /var/cache/pisi/index
+#packages_dir = /var/cache/pisi/package
 #tmp_dir = /var/pisi
 #kde_dir = /usr/kde/3.5
 #qt_dir = /usr/qt/3
@@ -64,6 +65,7 @@ class GeneralDefaults:
     autoclean = False
     distribution = "Pardus"
     distribution_release = "2007"
+    architecture = "i686"
     http_proxy = os.getenv("HTTP_PROXY") or None
     https_proxy = os.getenv("HTTPS_PROXY") or None
     ftp_proxy = os.getenv("FTP_PROXY") or None
@@ -87,10 +89,11 @@ class DirectoriesDefaults:
     "Default values for [directories] section"
     lib_dir = "/var/lib/pisi"
     log_dir = "/var/log"
-    db_dir = "/var/db/pisi"
+    info_dir = "/var/lib/pisi/info"
     archives_dir = "/var/cache/pisi/archives"
-    packages_dir = "/var/cache/pisi/packages"
+    cached_packages_dir = "/var/cache/pisi/packages"
     compiled_packages_dir = "/var/cache/pisi/packages"
+    packages_dir = "/var/lib/pisi/package"
     index_dir = "/var/lib/pisi/index"
     tmp_dir =  "/var/pisi"
     kde_dir = "/usr/kde/3.5"

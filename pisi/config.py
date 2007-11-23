@@ -92,14 +92,17 @@ class Config(object):
     def lib_dir(self):
         return self.subdir(self.values.dirs.lib_dir)
 
-    def db_dir(self):
-        return self.subdir(self.values.dirs.db_dir)
+    def info_dir(self):
+        return self.subdir(self.values.dirs.info_dir)
+
+    def packages_dir(self):
+        return self.subdir(self.values.dirs.packages_dir)
 
     def archives_dir(self):
         return self.subdir(self.values.dirs.archives_dir)
 
-    def packages_dir(self):
-        return self.subdir(self.values.dirs.packages_dir)
+    def cached_packages_dir(self):
+        return self.subdir(self.values.dirs.cached_packages_dir)
 
     def compiled_packages_dir(self):
         return self.subdir(self.values.dirs.compiled_packages_dir)

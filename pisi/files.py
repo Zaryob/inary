@@ -15,8 +15,6 @@ during the build process of a package and used in installation.'''
 
 
 import pisi.pxml.autoxml as autoxml
-import pisi.db.lockeddbshelve as shelve
-
 
 class FileInfo:
     """File holds the information for a File node/tag in files.xml"""

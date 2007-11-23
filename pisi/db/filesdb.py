@@ -9,81 +9,79 @@
 #
 # Please read the COPYING file.
 #
-
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
+import os
+import re
+import shelve
+import md5
+
 import pisi
-import pisi.db.lockeddbshelve as shelve
+import pisi.context as ctx
+import pisi.db.lazydb as lazydb
 
-class Error(pisi.Error):
-    pass
+# FIXME:
+# We could traverse through files.xml files of the packages to find the path and
+# the package - a linear search - as some well known package managers do. But the current 
+# file conflict mechanism of pisi prevents this and needs a fast has_file function. 
+# So currently filesdb is the only db and we cant still get rid of rebuild-db :/
 
-class FilesDB(shelve.LockedDBShelf):
+class FilesDB(lazydb.LazyDB):
 
-    def __init__(self):
-        shelve.LockedDBShelf.__init__(self, 'files')
+    def init(self):
+        self.filesdb = {}
+        self.__check_filesdb()
+    
+    def has_file(self, path):
+        return self.filesdb.has_key(md5.new(path).digest())
 
-    def add_files(self, pkg_name, files, txn = None):
-        def proc(txn):
-            for x in files.list:
-                path = x.path
-                del x.path # don't store redundant attribute in db
-                self.put(path, (pkg_name, x), txn)
-                x.path = path # store it back in
-        self.txn_proc(proc, txn)
+    def get_file(self, path):
+        return self.filesdb[md5.new(path).digest()], path
 
-    def remove_files(self, files, txn = None):
-        def proc(txn):
-            for x in files.list:
-                if self.has_key(x.path):
-                    self.delete(x.path, txn)
-        self.txn_proc(proc, txn)
+    def search_file(self, term):
+        installdb = pisi.db.installdb.InstallDB()
+        found = []
+        for pkg in installdb.list_installed():
+            files_xml = open(os.path.join(installdb.package_path(pkg), ctx.const.files_xml)).read()
+            paths = re.compile('<Path>(.*?%s.*?)</Path>' % term, re.I).findall(files_xml)
+            if paths:
+                found.append((pkg, paths))
+        return found
 
-    def has_file(self, path, txn = None):
-        return self.has_key(str(path), txn)
+    def add_files(self, pkg, files):
 
-    def get_file(self, path, txn = None):
-        path = str(path)
-        def proc(txn):
-            if not self.has_key(path, txn):
-                return None
-            else:
-                (name, fileinfo) = self.get(path, txn)
-                fileinfo.path = path
-                return (name, fileinfo)
-        return self.txn_proc(proc, txn)
+        self.__check_filesdb()
 
-    def match_files(self, glob):
-        # NB: avoid using, this reads the entire db
-        import fnmatch
-        glob = str(glob)
-        infos = []
-        for key in self.keys():
-            if fnmatch.fnmatch(key, glob):
+        for f in files.list:
+            self.filesdb[md5.new(f.path).digest()] = pkg
 
-                # FIXME: Why should we assign path attribute manually
-                # in fileinfo? This is also done in get_file(), seems
-                # like a dirty workaround... - baris
-                name = self[key][0]
-                fileinfo = self[key][1]
-                fileinfo.path = key
-                infos.append((name, fileinfo))
-        return infos
+    def remove_files(self, files):
+        for f in files:
+            if self.filesdb.has_key(md5.new(f.path).digest()):
+                del self.filesdb[md5.new(f.path).digest()]
 
-filesdb = None
+    def destroy(self):
+        files_db = os.path.join(ctx.config.info_dir(), ctx.const.files_db)
+        if os.path.exists(files_db):
+            os.unlink(files_db)
+    
+    def close(self):
+        if isinstance(self.filesdb, shelve.DbfilenameShelf):
+            self.filesdb.close()
 
-def init():
-    global filesdb
-    if filesdb is not None:
-        return filesdb
+    def __check_filesdb(self):
+        if isinstance(self.filesdb, shelve.DbfilenameShelf):
+            return
 
-    filesdb = FilesDB()
-    return filesdb
+        files_db = os.path.join(ctx.config.info_dir(), ctx.const.files_db)
 
-def finalize():
-    global filesdb
-    if filesdb is not None:
-        filesdb.close()
-        filesdb = None
+        if not os.path.exists(files_db):
+            flag = "n"
+        elif os.access(files_db, os.W_OK):
+            flag = "w"
+        else:
+            flag = "r"
+
+        self.filesdb = shelve.open(files_db, flag)

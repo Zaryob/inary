@@ -18,8 +18,6 @@ import pisi
 import pisi.context as ctx
 import pisi.pxml.xmlfile as xmlfile
 import pisi.pxml.autoxml as autoxml
-import pisi.db.lockeddbshelve as shelve
-import pisi.db.itembyrepodb
 
 class Error(pisi.Error):
     pass
@@ -72,9 +70,6 @@ class Component(xmlfile.XmlFile):
     t_Description = [autoxml.LocalText, autoxml.mandatory]
     t_Icon = [ autoxml.String, autoxml.optional]
     t_VisibleTo = [autoxml.String, autoxml.optional]
-
-    # Dependencies to other components
-    t_Dependencies = [ [autoxml.String], autoxml.optional, "Dependencies/Component"]
 
     # the parts of this component.
     # to be filled by the component database, thus it is optional.

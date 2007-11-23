@@ -1,11 +1,13 @@
-PISI test suite
----------------
 
+PiSi UnitTests
+##############
 
-There are python unit tests and shell scripts in this directory.
+Before running unittests you need to first go to repos directory and 
+create test repositories.
 
-Run the python tests with
+>>> pisi@pardus tests/repos# python createrepos.py
 
-$ tests/run.py
+Now you can return to tests folder and run tests.
 
-Shell scripts use the CLIs to perform package operations.
+>>> pisi@pardus tests # python runtests.py
+

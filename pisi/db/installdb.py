@@ -13,25 +13,29 @@
 # installation database
 #
 
+import os
+import re
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
+import piksemel
+
 # PiSi
 import pisi
 import pisi.context as ctx
-import pisi.db.lockeddbshelve as shelve
+import pisi.dependency
 import pisi.files
 import pisi.util
+import pisi.db.lazydb as lazydb
 
 class InstallDBError(pisi.Error):
     pass
 
 class InstallInfo:
-    # some data is replicated from packagedb
-    # we store as an object, hey, we can waste O(1) space.
-    # this is also easier to modify in the future, without
-    # requiring database upgrades! wow!
+
+    state_map = { 'i': _('installed'), 'ip':_('installed-pending') }
+
     def __init__(self, state, version, release, build, distribution, time):
         self.state = state
         self.version = version
@@ -48,9 +52,6 @@ class InstallInfo:
                                    time_str)
         return s
 
-    state_map = { 'i': _('installed'), 'ip':_('installed-pending'),
-                  'r':_('removed'), 'p': _('purged') }
-
     def __str__(self):
         s = _("State: %s\nVersion: %s, Release: %s, Build: %s\n") % \
             (InstallInfo.state_map[self.state], self.version,
@@ -61,150 +62,147 @@ class InstallInfo:
                                                           time_str)
         return s
 
+class InstallDB(lazydb.LazyDB):
 
-class InstallDB:
+    def init(self):
+        self.installed_db = self.__generate_installed_pkgs()
+        self.confing_pending_db = self.__generate_config_pending()
+        self.rev_deps_db = self.__generate_revdeps()
 
-    def __init__(self):
-        self.d = shelve.LockedDBShelf('install')
-        self.dp = shelve.LockedDBShelf('configpending')
-        self.files_dir = pisi.util.join_path(ctx.config.db_dir(), 'files')
+    def __generate_installed_pkgs(self):
+        return dict(map(lambda x:pisi.util.parse_package_name(x), os.listdir(ctx.config.packages_dir())))
 
-    def close(self):
-        self.d.close()
-        self.dp.close()
+    def __generate_config_pending(self):
+        pending_info_path = os.path.join(ctx.config.info_dir(), ctx.const.config_pending)
+        if os.path.exists(pending_info_path):
+            return open(pending_info_path, "r").read().split()
+        return []
 
-    def files_name(self, pkg, version, release):
-        pkg_dir = self.pkg_dir(pkg, version, release)
-        return pisi.util.join_path(pkg_dir, ctx.const.files_xml)
+    def __add_to_revdeps(self, package, revdeps):
+        metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+        meta_doc = piksemel.parse(metadata_xml)
+        name = meta_doc.getTag("Package").getTagData('Name')
+        deps = meta_doc.getTag("Package").getTag('RuntimeDependencies')
+        if deps:
+            for dep in deps.tags("Dependency"):
+                revdeps.setdefault(dep.firstChild().data(), set()).add((name, dep.toString()))
 
-    def files(self, pkg):
-        pkg = str(pkg)
-        pkginfo = self.d[pkg]
+    def __generate_revdeps(self):
+        revdeps = {}
+        for package in self.list_installed():
+            self.__add_to_revdeps(package, revdeps)
+        return revdeps
+        
+    def list_installed(self):
+        return self.installed_db.keys()
+ 
+    def has_package(self, package):
+        return self.installed_db.has_key(package)
+
+    def get_version(self, package):
+        metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+
+        meta_doc = piksemel.parse(metadata_xml)
+        history = meta_doc.getTag("Package").getTag("History")
+        build = meta_doc.getTag("Package").getTagData("Build")
+        version = history.getTag("Update").getTagData("Version")
+        release = history.getTag("Update").getAttribute("release")
+
+        return version, release, build and int(build)
+
+    def get_files(self, package):
         files = pisi.files.Files()
-        files.read(self.files_name(pkg,pkginfo.version,pkginfo.release))
+        files_xml = os.path.join(self.package_path(package), ctx.const.files_xml)
+        files.read(files_xml)
         return files
 
+    def search_package(self, terms, lang=None):
+        resum = '<Summary xml:lang="%s">.*?%s.*?</Summary>'
+        redesc = '<Description xml:lang="%s">.*?%s.*?</Description>'
+        if not lang:
+            lang = pisi.pxml.autoxml.LocalText.get_lang()
+        found = []
+        for name in self.list_installed():
+            xml = open(os.path.join(self.package_path(name), ctx.const.metadata_xml)).read()
+            if terms == filter(lambda term: re.compile(term, re.I).search(name) or \
+                                            re.compile(resum % (lang, term), re.I).search(xml) or \
+                                            re.compile(redesc % (lang, term), re.I).search(xml), terms):
+                found.append(name)
+        return found
+
+    def get_info(self, package):
+        files_xml = os.path.join(self.package_path(package), ctx.const.files_xml)
+        ctime = pisi.util.creation_time(files_xml)
+        pkg = self.get_package(package)
+        state = "i"
+        if pkg.name in self.list_pending():
+            state = "ip"
+        
+        info = InstallInfo(state,
+                           pkg.version,
+                           pkg.release,
+                           pkg.build,
+                           pkg.distribution,
+                           ctime)
+        return info
+
+    def get_rev_deps(self, name):
+        
+        rev_deps = []
+
+        if self.rev_deps_db.has_key(name):
+            for pkg, dep in self.rev_deps_db[name]:
+                node = piksemel.parseString(dep)
+                dependency = pisi.dependency.Dependency()
+                dependency.package = node.firstChild().data()
+                if node.attributes():
+                    attr = node.attributes()[0]
+                    dependency.__dict__[attr] = node.getAttribute(attr)
+                rev_deps.append((pkg, dependency))
+            
+        return rev_deps
+
     def pkg_dir(self, pkg, version, release):
-        return pisi.util.join_path(ctx.config.lib_dir(), 'package',
-                    pkg + '-' + version + '-' + release)
+        return pisi.util.join_path(ctx.config.packages_dir(), pkg + '-' + version + '-' + release)
 
-    def is_recorded(self, pkg, txn = None):
-        pkg = str(pkg)
-        def proc(txn):
-            return self.d.has_key(pkg)
-        return self.d.txn_proc(proc, txn)
+    def get_package(self, package):
+        metadata = pisi.metadata.MetaData()
+        metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+        metadata.read(metadata_xml)
+        return metadata.package
 
-    def is_installed(self, pkg, txn = None):
-        pkg = str(pkg)
-        def proc(txn):
-            if self.is_recorded(pkg, txn):
-                info = self.d.get(pkg, txn)
-                return info.state=='i' or info.state=='ip'
-            else:
-                return False
-        return self.d.txn_proc(proc, txn)
+    def mark_pending(self, package):
+        if package not in self.confing_pending_db:
+            self.confing_pending_db.append(package)
+            self.__write_config_pending()
 
-    def list_installed(self, txn = None):
-        def proc(txn):
-            l = []
-            for (pkg, info) in self.d.items(txn):
-                if info.state=='i' or info.state=='ip':
-                    l.append(pkg)
-            return l
-        return self.d.txn_proc(proc, txn)
+    def add_package(self, pkginfo):
+        self.installed_db[pkginfo.name] = "%s-%s" % (pkginfo.version, pkginfo.release)
+        self.__add_to_revdeps(pkginfo.name, self.rev_deps_db)
+        
+    def remove_package(self, package_name):
+        if self.installed_db.has_key(package_name):
+            del self.installed_db[package_name]
+        self.clear_pending(package_name)
 
     def list_pending(self):
-        # warning: reads the entire db
-        d = {}
-        for (pkg, x) in self.dp.items():
-            pkginfo = self.d[pkg]
-            d[pkg] = pkginfo
-        return d
+        return self.confing_pending_db
 
-    def get_info(self, pkg):
-        pkg = str(pkg)
-        return self.d[pkg]
+    def clear_pending(self, package):
+        if package in self.confing_pending_db:
+            self.confing_pending_db.remove(package)
+            self.__write_config_pending()
 
-    def get_version(self, pkg):
-        pkg = str(pkg)
-        info = self.d[pkg]
-        return (info.version, info.release, info.build)
+    def __write_config_pending(self):
+        pending_info_file = os.path.join(ctx.config.info_dir(), ctx.const.config_pending)
+        pending = open(pending_info_file, "w")
+        for pkg in set(self.confing_pending_db):
+            pending.write("%s\n" % pkg)
+        pending.close()
 
-    def is_removed(self, pkg):
-        pkg = str(pkg)
-        if self.is_recorded(pkg):
-            info = self.d[pkg]
-            return info.state=='r'
-        else:
-            return False
+    def package_path(self, package):
 
-    def install(self, pkg, version, release, build, distro = "",
-                config_later = False, rebuild=False, txn = None):
-        """install package with specific version, release, build"""
-        pkg = str(pkg)
-        def proc(txn):
-            if self.is_installed(pkg, txn):
-                raise InstallDBError(_("Already installed"))
-            if config_later:
-                state = 'ip'
-                self.dp.put(pkg, True, txn)
-            else:
-                state = 'i'
+        if self.installed_db.has_key(package):
+            return os.path.join(ctx.config.packages_dir(), "%s-%s" % (package, self.installed_db[package]))
 
-            # FIXME: it might be more appropriate to pass date
-            # as an argument, or installation data afterwards
-            # to do this -- exa
-            if not rebuild:
-                import time
-                ctime = time.localtime()
-            else:
-                files_xml = self.files_name(pkg, version, release)
-                ctime = pisi.util.creation_time(files_xml)
-
-            self.d.put(pkg, InstallInfo(state, version, release, build, distro, ctime), txn)
-
-        self.d.txn_proc(proc,txn)
-
-    def clear_pending(self, pkg, txn = None):
-        pkg = str(pkg)
-        def proc(txn):
-            info = self.d.get(pkg, txn)
-            if self.is_installed(pkg, txn):
-                assert info.state == 'ip'
-                info.state = 'i'
-            self.d.put(pkg, info, txn)
-            self.dp.delete(pkg, txn)
-        self.d.txn_proc(proc,txn)
-
-    def remove(self, pkg, txn = None):
-        pkg = str(pkg)
-        def proc(txn):
-            info = self.d.get(pkg, txn)
-            info.state = 'r'
-            self.d.put(pkg, info, txn)
-            if self.dp.has_key(pkg):
-                self.dp.delete(pkg, txn)
-        self.d.txn_proc(proc, txn)
-
-    def purge(self, pkg, txn = None):
-        pkg = str(pkg)
-        def proc(txn):
-            if self.d.has_key(pkg, txn):
-                self.d.delete(pkg, txn)
-        self.d.txn_proc(proc, txn)
-
-db = None
-
-def init():
-    global db
-    if db is not None:
-        return db
-
-    db = InstallDB()
-    return db
-
-def finalize():
-    global db
-    if db is not None:
-        db.close()
-        db = None
+        raise Exception(_('Package %s is not installed') % package)

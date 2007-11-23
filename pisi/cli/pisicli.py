@@ -11,7 +11,7 @@
 #
 
 import sys
-from optparse import OptionParser
+import optparse
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -19,18 +19,45 @@ _ = __trans.ugettext
 
 import pisi
 import pisi.cli
-from pisi.cli import printu
-from pisi.uri import URI
-from pisi.cli.commands import *
+import pisi.cli.command as command
+import pisi.cli.addrepo
+import pisi.cli.build
+import pisi.cli.check
+import pisi.cli.clean
+import pisi.cli.configurepending
+import pisi.cli.deletecache
+import pisi.cli.delta
+import pisi.cli.emerge
+import pisi.cli.graph
+import pisi.cli.index
+import pisi.cli.info
+import pisi.cli.install
+import pisi.cli.listavailable
+import pisi.cli.listcomponents
+import pisi.cli.listinstalled
+import pisi.cli.listpending
+import pisi.cli.listrepo
+import pisi.cli.listsources
+import pisi.cli.listupgrades
+import pisi.cli.rebuilddb
+import pisi.cli.remove
+import pisi.cli.removerepo
+import pisi.cli.searchfile
+import pisi.cli.search
+import pisi.cli.updaterepo
+import pisi.cli.upgrade
+
+#FIXME: why does this has to be imported last
+import pisi.cli.help
 
 class ParserError(pisi.Exception):
     pass
 
-class PreParser(OptionParser):
+class PreParser(optparse.OptionParser):
     """consumes any options, and finds arguments from command line"""
 
     def __init__(self, version):
-        OptionParser.__init__(self, usage=usage_text, version=version)
+        optparse.OptionParser.__init__(self, usage=pisi.cli.help.usage_text, version=version)
 
     def error(self, msg):
         raise ParserError, msg
@@ -91,17 +118,17 @@ class PisiCLI(object):
                     sys.exit(0)
                 elif 'help' in opts or 'h' in opts:
                     self.die()
-                raise Error(_('No command given'))
+                raise pisi.cli.Error(_('No command given'))
             cmd_name = args[0]
         except ParserError:
-            raise Error(_('Command line parsing error'))
+            raise pisi.cli.Error(_('Command line parsing error'))
 
-        self.command = Command.get_command(cmd_name, args=orig_args)
+        self.command = command.Command.get_command(cmd_name, args=orig_args)
         if not self.command:
-            raise Error(_("Unrecognized command: %s") % cmd_name)
+            raise pisi.cli.Error(_("Unrecognized command: %s") % cmd_name)
 
     def die(self):
-        printu('\n' + self.parser.format_help())
+        pisi.cli.printu('\n' + self.parser.format_help())
         sys.exit(1)
 
     def run_command(self):
