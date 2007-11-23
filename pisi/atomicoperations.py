@@ -251,7 +251,7 @@ class Install(AtomicOperation):
             import pisi.comariface
             try:
                 if self.upgrade:
-                    (iversion, irelease, ibuild) = ctx.installdb.get_version(self.pkginfo.name)
+                    (iversion, irelease, ibuild) = self.installdb.get_version(self.pkginfo.name)
                     fromVersion = iversion
                     fromRelease = irelease
                 else:
