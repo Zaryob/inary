@@ -32,9 +32,7 @@ def main():
     repo = sys.argv[1]
 
     try:    
-        pisi.api.init(write=True)
         ctx.repodb.set_default_repo(repo)
-        pisi.api.finalize()
     except pisi.lockeddbshelve.Error, e:
         print e
 

@@ -78,7 +78,6 @@ def check_changes():
 
 if __name__ == "__main__":
      sys.excepthook = handle_exception
-     pisi.api.init(write=False)
 
      if len(sys.argv) == 1:
          print "Checking all packages"
@@ -88,5 +87,3 @@ if __name__ == "__main__":
      if len(sys.argv) > 2:
          for pkg in sys.argv[1:]:
              check_package(pkg)
-
-     pisi.api.finalize()

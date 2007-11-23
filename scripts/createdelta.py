@@ -36,8 +36,6 @@ def minsandmaxes():
 
 if __name__ == "__main__":
 
-    pisi.api.init(write=False)
-
     mi, ma = minsandmaxes()
     for pkg in mi.keys():
         old_pkg = "%s-%s.pisi" % (pkg, str(mi[pkg]))
