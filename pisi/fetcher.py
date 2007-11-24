@@ -56,7 +56,7 @@ class UIHandler:
         self.filename   = basename
         self.url        = url
         self.basename   = basename
-        self.total_size = total_size
+        self.total_size = total_size or 0
         self.text       = text
 
         self.now    = lambda: time.time()
@@ -65,12 +65,17 @@ class UIHandler:
         self.s_time = self.now()
 
     def update(self, size):
-        self.size    = size
-        self.percent = (size * 100.0) / self.total_size
+        self.size = size
+
+        if self.total_size:
+            self.percent = (size * 100.0) / self.total_size
+        else:
+            self.percent = 0
 
         if int(self.now()) != int(self.last_updated) and size > 0:
             self.rate, self.symbol = util.human_readable_rate((size - self.exist_size) / (self.now() - self.s_time))
-            self.eta  = '%02d:%02d:%02d' %\
+            if self.total_size:
+                self.eta  = '%02d:%02d:%02d' %\
                     tuple([i for i in time.gmtime((self.t_diff() * (100 - self.percent)) / self.percent)[3:6]])
 
         self._update_ui()
@@ -82,7 +87,7 @@ class UIHandler:
         ctx.ui.display_progress(operation       = "fetching",
                                 percent         = self.percent,
                                 filename        = self.filename,
-                                total_size      = self.total_size,
+                                total_size      = self.total_size or self.size,
                                 downloaded_size = self.size,
                                 rate            = self.rate,
                                 eta             = self.eta,
@@ -103,6 +108,8 @@ class Fetcher:
 
         self.url      = url
         self.destdir  = destdir
+        self.archive_file = os.path.join(self.destdir, self.url.filename())
+        self.partial_file = self.archive_file + '.part'
         self.progress = None
 
         util.check_dir(self.destdir)
@@ -123,33 +130,29 @@ class Fetcher:
         if not os.access(self.destdir, os.W_OK):
             raise FetchError(_('Access denied to write to destination directory: "%s"') % (self.destdir))
 
-        archive_file = os.path.join(self.destdir, self.url.filename())
-
-        if os.path.exists(archive_file) and not os.access(archive_file, os.W_OK):
-            raise FetchError(_('Access denied to destination file: "%s"') % (archive_file))
-
-        partial_file = archive_file + '.part'
+        if os.path.exists(self.archive_file) and not os.access(self.archive_file, os.W_OK):
+            raise FetchError(_('Access denied to destination file: "%s"') % (self.archive_file))
 
         try:
             urlgrabber.urlgrab(self.url.get_uri(),
-                           partial_file,
+                           self.partial_file,
                            progress_obj = UIHandler(self.progress),
                            http_headers = self._get_http_headers(),
                            ftp_headers  = self._get_ftp_headers(),
                            proxies      = self._get_proxies(),
                            throttle     = self._get_bandwith_limit(),
-                           user_agent   = 'PiSi Fetcher/' + pisi.__version__,
-                           reget        = 'check_timestamp')
-        except urlgrabber.grabber.URLGrabError:
-            raise FetchError(_('Could not fetch destination file: "%s"') % (archive_file))
+                           reget        = self._test_range_support(),
+                           user_agent   = 'PiSi Fetcher/' + pisi.__version__)
+        except urlgrabber.grabber.URLGrabError, e:
+            raise FetchError(_('Could not fetch destination file "%s": %s') % (self.archive_file, e))
 
-        if os.stat(partial_file).st_size == 0:
-            os.remove(partial_file)
+        if os.stat(self.partial_file).st_size == 0:
+            os.remove(self.partial_file)
             FetchError(_('A problem occurred. Please check the archive address and/or permissions again.'))
 
-        shutil.move(partial_file, archive_file)
+        shutil.move(self.partial_file, self.archive_file)
 
-        return archive_file
+        return self.archive_file
 
     def _get_http_headers(self):
         headers = []
@@ -189,6 +192,21 @@ class Fetcher:
             return 1024 * int(bandwidth_limit)
         else:
             return 0
+
+    def _test_range_support(self):
+        if not os.path.exists(self.partial_file):
+            return None
+
+        import urllib2
+        file_obj = urllib2.urlopen(urllib2.Request(self.url.get_uri()))
+        headers = file_obj.info()
+        file_obj.close()
+        if headers.has_key('Content-Length'):
+            return 'check_timestamp'
+        else:
+            ctx.ui.debug(_("Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."))
+            os.remove(self.partial_file)
+            return None
 
 
 # helper function
