@@ -244,6 +244,7 @@ class Builder:
         self.destdir = pisi.util.join_path(ctx.config.tmp_dir(), pkgname)
         #self.location = os.path.dirname(self.url.uri)
 
+        self.fetch_pspecfile()
         self.fetch_actionsfile()
         self.fetch_translationsfile()
         self.fetch_patches()
@@ -251,6 +252,10 @@ class Builder:
         self.fetch_additionalFiles()
 
         return self.destdir
+
+    def fetch_pspecfile(self):
+        pspecuri = pisi.util.join_path(self.specdiruri, ctx.const.pspec_file)
+        self.download(pspecuri, self.destdir)
 
     def fetch_actionsfile(self):
         actionsuri = pisi.util.join_path(self.specdiruri, ctx.const.actions_file)

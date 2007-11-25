@@ -71,6 +71,7 @@ class Constants:
         #in some places literals are just as good, for instance
         #when constant is the same as string. readability is important...
         self.__c.actions_file = "actions.py"
+        self.__c.pspec_file = "pspec.xml"
         self.__c.files_dir = "files"
         self.__c.metadata_dir = "metadata"
         self.__c.translations_file = "translations.xml"
