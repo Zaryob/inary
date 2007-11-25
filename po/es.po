@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "POT-Creation-Date: 2007-11-24 03:24+EET\n"
-"PO-Revision-Date: 2007-07-15 21:29-0400\n"
-"Last-Translator: Klemens <click3d_at_linuxmail_org>\n"
+"PO-Revision-Date: 2007-11-25 20:52-0300\n"
+"Last-Translator: Klemens Häckel <click3d_at_linuxmail_org>\n"
 "Language-Team: español <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -902,8 +902,7 @@ msgid "Not removing conflicted file : %s"
 msgstr "Archivo conflictivo: %s no eliminado "
 
 #: pisi/atomicoperations.py:522
-msgid ""
-"Installed file %s is not exists on system [Probably you manually deleted]"
+msgid "Installed file %s is not exists on system [Probably you manually deleted]"
 msgstr ""
 "Archivo instalado %s no existe en el sistema [Probablemente eliminado "
 "manualmente]"
@@ -999,8 +998,7 @@ msgstr "Crear un paquete estático con archivos ar"
 
 # asi lo entiendo, favor verificar
 #: pisi/cli/build.py:70
-msgid ""
-"Do not install build dependencies, fail if a build dependency is present"
+msgid "Do not install build dependencies, fail if a build dependency is present"
 msgstr ""
 "No instalar dependencias de build, producir una falla si una dependencia de "
 "build es necesaria"
@@ -1013,12 +1011,10 @@ msgstr "Formatos bínarios de paquetes PiSi: '1.0', '1.1' (default)"
 msgid "Use quilt patch management system instead of GNU patch"
 msgstr "Use el sistema de parches quilt management en vez de GNU patch"
 
-# no estoy seguro si capté la idea
-# i am not sure about the idea of the message
+# favor verificar
 #: pisi/cli/build.py:76
-#, fuzzy
 msgid "Constrain build process inside the build folder"
-msgstr "No restringir proceso de build en carpeta de build"
+msgstr "Restringir proceso de build en carpeta de build"
 
 #: pisi/cli/build.py:79
 msgid "build steps"
@@ -1126,7 +1122,7 @@ msgstr "Asumir Sí (yes) en todas las consultas Sí/No (yes/no)"
 
 #: pisi/cli/command.py:104
 msgid "Keep bandwidth usage under specified KB's"
-msgstr ""
+msgstr "Mantener uso de ancho de banda por debajo de KB especificado"
 
 #: pisi/cli/command.py:107
 msgid "Detailed output"
@@ -1211,8 +1207,7 @@ msgstr "Ploteando paquetes de repositorio %s"
 
 #: pisi/cli/graph.py:73
 msgid "Plotting a graph of relations among all repository packages"
-msgstr ""
-"Ploteando un gráfico de relaciones entre todos los paquetes en repositorio"
+msgstr "Ploteando un gráfico de relaciones entre todos los paquetes en repositorio"
 
 #: pisi/cli/graph.py:87
 msgid "Plotting a graph of relations among all installed packages"
@@ -1381,10 +1376,8 @@ msgstr "Mostrar detalles de instalación"
 
 # I suppose here the position is important too ! Should be the same ok as in english
 #: pisi/cli/listinstalled.py:65 pisi/cli/listupgrades.py:69
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr ""
-"Nombre Paquete   |St|   Versión|  Rel.| Build|  Distro|            Fecha"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr "Nombre Paquete   |St|   Versión|  Rel.| Build|  Distro|            Fecha"
 
 #: pisi/cli/listpending.py:43
 msgid "There are no packages waiting to be configured"
@@ -1444,22 +1437,21 @@ msgid "search options"
 msgstr "opciones de búsqueda"
 
 #: pisi/cli/search.py:44
+# i suppose "language" refers to human language, not programming language
 msgid "Summary and description language"
-msgstr ""
+msgstr "Resumen e idioma de descripción"
 
 #: pisi/cli/search.py:46
 msgid "Name of the source or package repository"
-msgstr ""
+msgstr "Nombre del repositorio de fuentes o paquetes"
 
 #: pisi/cli/search.py:48
-#, fuzzy
 msgid "Search in installdb"
-msgstr "%s no está instalado"
+msgstr "Buscar en installdb"
 
 #: pisi/cli/search.py:50
-#, fuzzy
 msgid "Search in sourcedb"
-msgstr "Buscando %s"
+msgstr "Buscar en sourcedb"
 
 #: pisi/cli/searchfile.py:38
 msgid "search-file options"
@@ -1471,9 +1463,8 @@ msgstr "Mostrar solamente nombre de paquete"
 
 # i put in spanish "contains" instead of "has", ok ?
 #: pisi/cli/searchfile.py:49
-#, fuzzy
 msgid "Package %s has file /%s"
-msgstr "Paquete %s contiene archivo %s"
+msgstr "Paquete %s contiene archivo /%s"
 
 #: pisi/cli/searchfile.py:52
 msgid "Path '%s' does not belong to an installed package"
@@ -1654,29 +1645,24 @@ msgid "Distribution: %s, Install Time: %s\n"
 msgstr "Distribución: %s, Tiempo de Instalación: %s\n"
 
 #: pisi/db/installdb.py:208
-#, fuzzy
 msgid "Package %s is not installed"
-msgstr "Paquete %s no está instalado."
+msgstr "Paquete %s no está instalado"
 
 #: pisi/db/itembyrepo.py:41
-#, fuzzy
 msgid "Item not found"
-msgstr "Clave %s no encontrado"
+msgstr "Ítem no encontrado"
 
 #: pisi/db/itembyrepo.py:51
-#, fuzzy
 msgid "Repo item not found"
-msgstr "Clave %s no encontrado"
+msgstr "Ítem de repositorio no encontrado"
 
 #: pisi/db/itembyrepo.py:61 pisi/db/itembyrepo.py:72 pisi/db/itembyrepo.py:82
-#, fuzzy
 msgid "Repository %s does not exist."
-msgstr "Repositorio %s no existe. No posible remover."
+msgstr "Repositorio %s no existe."
 
 #: pisi/db/packagedb.py:104
-#, fuzzy
 msgid "Package %s not found."
-msgstr "Paquete %s no encontrado"
+msgstr "Paquete %s no encontrado."
 
 # satisfy - a traducir con "cumplir" ? como suena ?
 #: pisi/dependency.py:71
@@ -1689,7 +1675,7 @@ msgstr "Paquete %s no figura en la base de datos de paquetes"
 
 #: pisi/fetcher.py:125
 msgid "Urlgrabber needs to be installed to run this command"
-msgstr ""
+msgstr "Se requiere la instalación de Urlgrabber para ejecutar este comando"
 
 #: pisi/fetcher.py:128
 msgid "Filename error"
@@ -1704,18 +1690,14 @@ msgid "Access denied to destination file: \"%s\""
 msgstr "Acceso denegado a archivo de destino: \"%s\""
 
 #: pisi/fetcher.py:147
-#, fuzzy
 msgid "Could not fetch destination file \"%s\": %s"
-msgstr "Acceso denegado a archivo de destino: \"%s\""
+msgstr "No posible descargar archivo de destino \"%s\": %s"
 
 #: pisi/fetcher.py:151
-#, fuzzy
 msgid ""
 "A problem occurred. Please check the archive address and/or permissions "
 "again."
-msgstr ""
-"Ocurrió un problema. Favor verifique la ubicación y/o los permisos del "
-"paquete."
+msgstr "Ocurrió un problema. Favor verifique la ubicación y/o los permisos."
 
 #: pisi/fetcher.py:184
 msgid "Proxy configuration has been found for '%s' protocol"
@@ -1723,13 +1705,14 @@ msgstr "Configuración de proxy se detectó para protocolo '%s' "
 
 #: pisi/fetcher.py:191
 msgid "Bandwidth usage is limited to %s KB/s"
-msgstr ""
+msgstr "Uso de ancho de banda está limitado a %s KB/s"
 
 #: pisi/fetcher.py:207
+# favor verificar
 msgid ""
 "Server doesn't support partial downloads. Previously downloaded part of the "
 "file will be over-written."
-msgstr ""
+msgstr "Servidor no soporta descarga parciales. La parte del archivo descargado anteriormente será sobreescrito."
 
 #: pisi/file.py:66
 msgid "uri must have type either URI or string"
@@ -1825,8 +1808,7 @@ msgstr "Generando paquete fuente PiSi: %s"
 
 #: pisi/operations/build.py:234
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr ""
-"IceCream detectado. Asegúrese que el demónio está activo y funcionando..."
+msgstr "IceCream detectado. Asegúrese que el demónio está activo y funcionando..."
 
 #: pisi/operations/build.py:239
 msgid "CCache detected..."
@@ -1908,8 +1890,7 @@ msgstr "no posible llamar función desde acciones: %s"
 
 # did I get "safety switch" right (in this context)?
 #: pisi/operations/build.py:477
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Verificación de seguridad: Se instalarán los siguientes paquetes adicionales "
 "en system.devel:"
@@ -1920,8 +1901,7 @@ msgstr "Verificación de seguridad: system.devel ya está instalado"
 
 #: pisi/operations/build.py:484
 msgid "Safety switch: the component system.devel cannot be found"
-msgstr ""
-"Verificación de seguridad: No posible encontrar el componente system.devel"
+msgstr "Verificación de seguridad: No posible encontrar el componente system.devel"
 
 # satisfechas - entiendo que se refiere a librerias necesarias para hacer el proceso build
 # quizá hay mejor manera de decirlo en español
@@ -1975,8 +1955,7 @@ msgstr "(no se encontró build anterior, estableciendo número de build a 1.)"
 
 #: pisi/operations/build.py:764
 msgid "(old package lacks a build no, setting build no to 1.)"
-msgstr ""
-"(paquete antiguo no tiene número de build, seteando número de build a 1.)"
+msgstr "(paquete antiguo no tiene número de build, seteando número de build a 1.)"
 
 #: pisi/operations/build.py:767
 msgid "There are changes, incrementing build no to %d"
@@ -2025,8 +2004,7 @@ msgstr "Archivos abandonados en carpeta de instalación (%s):"
 
 # revisa este por favor
 #: pisi/operations/build.py:927
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Todos los archivos de la carpeta de instalación (%s) se juntaron en los "
 "paquetes"
@@ -2105,8 +2083,7 @@ msgstr "Conflictos continúan"
 msgid ""
 "The following package(s) are already installed and are not going to be "
 "installed again:\n"
-msgstr ""
-"Los siguientes paquetes ya están instalados y no se instalarán de nuevo:\n"
+msgstr "Los siguientes paquetes ya están instalados y no se instalarán de nuevo:\n"
 
 #: pisi/operations/install.py:62 pisi/operations/install.py:164
 msgid "No packages to install."
@@ -2126,8 +2103,7 @@ msgstr "Tamaño total de paquete(s): %.2f %s"
 
 #: pisi/operations/install.py:106
 msgid "Mixing file names and package names not supported yet."
-msgstr ""
-"Mezclando nombres de archivos y nombres de paquetes actualmente no soportado."
+msgstr "Mezclando nombres de archivos y nombres de paquetes actualmente no soportado."
 
 #: pisi/operations/install.py:148
 msgid ""
@@ -2158,8 +2134,7 @@ msgstr ""
 # should this say in english ? "Safety switch: the component cannot be found in system.base" ?? (i did in spanish like this)
 #: pisi/operations/remove.py:48 pisi/operations/upgrade.py:238
 msgid "Safety switch: the component system.base cannot be found"
-msgstr ""
-"Verificación de seguridad: No posible encontrar el componente system.base: "
+msgstr "Verificación de seguridad: No posible encontrar el componente system.base: "
 
 #: pisi/operations/remove.py:55
 msgid "Package %s does not exist. Cannot remove."
@@ -2494,8 +2469,7 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 "Desarrollador '%s <%s>' tiene otra dirección email '%s' en archivo fuente '%"
 "s'"
@@ -2524,665 +2498,3 @@ msgstr "Buscando en repositorio de fuentes...\n"
 msgid "Scanning binary packages...\n"
 msgstr "Buscando paquetes binarios...\n"
 
-#~ msgid "Rebuilding package database"
-#~ msgstr "Regenerando base de datos de paquetes"
-
-#~ msgid ""
-#~ "An error has occured while running LZMA:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Ocurrió un error al ejecutar LZMA:\n"
-#~ "%s"
-
-#~ msgid "Archive type not recognized"
-#~ msgstr "Tipo de archivo desconocido"
-
-#~ msgid "Metadata XML '%s' cannot be found"
-#~ msgstr "Metadata XML '%s' no encontrado"
-
-#~ msgid "MetaData format wrong (%s)"
-#~ msgstr "Formato de MetaData incorrecto (%s)"
-
-#~ msgid "Files XML '%s' cannot be found"
-#~ msgstr "Archivos XML '%s' no encontrado"
-
-#~ msgid "generic help string for any command"
-#~ msgstr "cadena de ayuda genérica para cualquier comando"
-
-#~ msgid "common options"
-#~ msgstr "opciones comunes"
-
-#~ msgid ""
-#~ "This is a fall back function. If the implementer module provides an\n"
-#~ "        options function it will be called"
-#~ msgstr ""
-#~ "Esto es una función de respaldo. Si el módulo que lo implemente provee \n"
-#~ "        una función de opciones, la va a llamar"
-
-#~ msgid "initialize PiSi components"
-#~ msgstr "inicializar componentes PiSi "
-
-#~ msgid "do cleanup work for PiSi components"
-#~ msgstr "hacer limpieza para los componentes PiSi"
-
-#~ msgid "print help for the command"
-#~ msgstr "imprimir ayuda para el comando"
-
-#~ msgid "exit program"
-#~ msgstr "salir del programa"
-
-#~ msgid ""
-#~ "Prints help for given commands\n"
-#~ "\n"
-#~ "Usage: help [ <command1> <command2> ... <commandn> ]\n"
-#~ "\n"
-#~ "If run without parameters, it prints the general help."
-#~ msgstr ""
-#~ "Imprime ayuda para comando determinado\n"
-#~ "\n"
-#~ "Uso: help [ <command1> <command2> ... <commandn> ]\n"
-#~ "\n"
-#~ "Cuando se ejecuta sin parámetros imprime la ayuda general."
-
-#~ msgid ""
-#~ "Clean stale locks\n"
-#~ "\n"
-#~ "Usage: clean\n"
-#~ "\n"
-#~ "PiSi uses filesystem locks for managing database access.\n"
-#~ "This command deletes unused locks from the database directory."
-#~ msgstr ""
-#~ "Limpiar archivos de bloqueo sin uso\n"
-#~ "\n"
-#~ "Uso: clean\n"
-#~ "\n"
-#~ "PiSi aplica bloqueos (locks) a nivel de sistema de archivos para "
-#~ "controlar el acceso a base de datos.\n"
-#~ "Este comando elimina archivos lock sin uso de la carpeta de la base de "
-#~ "datos."
-
-#~ msgid ""
-#~ "Delete cache files\n"
-#~ "\n"
-#~ "Usage: delete-cache\n"
-#~ "\n"
-#~ "Sources, packages and temporary files are stored\n"
-#~ "under /var directory. Since these accumulate they can\n"
-#~ "consume a lot of disk space."
-#~ msgstr ""
-#~ "Borrar archivos temporales\n"
-#~ "\n"
-#~ "Uso: delete-cache\n"
-#~ "\n"
-#~ "Fuentes, paquetes y archivos temporales varios se \n"
-#~ "guardan en la carpeta /var. Se acumulan y pueden\n"
-#~ "ocupar un gran espacio en disco."
-
-#~ msgid ""
-#~ "Graph package relations\n"
-#~ "\n"
-#~ "Usage: graph [<package1> <package2> ...]\n"
-#~ "\n"
-#~ "Write a graph of package relations, tracking dependency and\n"
-#~ "conflicts relations starting from given packages. By default\n"
-#~ "shows the package relations among repository packages, and writes\n"
-#~ "the package in graphviz format to 'pgraph.dot'.\n"
-#~ msgstr ""
-#~ "Graficar relaciones de paquetes\n"
-#~ "\n"
-#~ "Uso: graph [<package1> <package2> ...]\n"
-#~ "\n"
-#~ "Produce un gráfico de relaciones de paquetes, indicando dependencias\n"
-#~ "y conflictos iniciando de un paquete dado. Por defecto\n"
-#~ "muestra las relaciones de paquetes entre los paquetes del repositorio y\n"
-#~ "guarda el paquete en formato graphviz en 'pgraph.dot'.\n"
-
-#~ msgid ""
-#~ "Build PiSi packages\n"
-#~ "\n"
-#~ "Usage: build [<pspec.xml> | <sourcename>] ...\n"
-#~ "\n"
-#~ "You can give a URI of the pspec.xml file. PiSi will\n"
-#~ "fetch all necessary files and build the package for you.\n"
-#~ "\n"
-#~ "Alternatively, you can give the name of a source package\n"
-#~ "to be downloaded from a repository containing sources.\n"
-#~ msgstr ""
-#~ "Build PiSi paquetes\n"
-#~ "\n"
-#~ "Uso: build [<pspec.xml> | <sourcename>] ...\n"
-#~ "\n"
-#~ "Se puede indicar la URL de un archivo pspec.xml. PiSi va a\n"
-#~ "buscar todos los archivos necesarios y crear el paquete.\n"
-#~ "\n"
-#~ "Como alternativa se puede indicar la ubicación de un paquete de fuentes,\n"
-#~ " para descargarlo de un repositorio de fuentes.\n"
-
-#~ msgid ""
-#~ "Creates delta PiSi packages\n"
-#~ "\n"
-#~ "Usage: delta oldpackage newpackage\n"
-#~ "\n"
-#~ "Delta command finds the changed files between the given packages by "
-#~ "comparing the sha1sum of the files\n"
-#~ "and creates a delta pisi package with the changed files between two "
-#~ "releases.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Crea paquetes PiSi delta\n"
-#~ "\n"
-#~ "Uso: delta oldpackage newpackage\n"
-#~ "\n"
-#~ "El comando Delta busca los archivos modificados entre los paquetes "
-#~ "indicados comparando la sha1sum de los archivos\n"
-#~ "y crea un paquete pisi delta con los archivos modificados entre las dos "
-#~ "versiones de lanzamiento.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "Build and install PiSi source packages from repository\n"
-#~ "\n"
-#~ "Usage: emerge <sourcename> ...\n"
-#~ "\n"
-#~ "You should give the name of a source package to be\n"
-#~ "downloaded from a repository containing sources.\n"
-#~ "\n"
-#~ "You can also give the name of a component.\n"
-#~ msgstr ""
-#~ "Build e instalar paquetes PiSi de fuentes de repositorio\n"
-#~ "\n"
-#~ "Uso: emerge <sourcename> ...\n"
-#~ "\n"
-#~ "Se debe indicar el nombre de un paquete de fuentes \n"
-#~ "a ser descargado de un repositorio de fuentes.\n"
-#~ "\n"
-#~ "También puede dar el nombre de un componente.\n"
-
-#~ msgid "Abstract package operation command"
-#~ msgstr "Comando de operación de paquete abstracto"
-
-# espero que la idea está bien asi "expanded"
-#~ msgid ""
-#~ "Install PiSi packages\n"
-#~ "\n"
-#~ "Usage: install <package1> <package2> ... <packagen>\n"
-#~ "\n"
-#~ "You may use filenames, URI's or package names for packages. If you have\n"
-#~ "specified a package name, it should exist in a specified repository.\n"
-#~ "\n"
-#~ "You can also specify components instead of package names, which will be\n"
-#~ "expanded to package names.\n"
-#~ msgstr ""
-#~ "Instalar paquetes PiSi\n"
-#~ "\n"
-#~ "Uso: install <package1> <package2> ... <packagen>\n"
-#~ "\n"
-#~ "Se puede usar nombres de archivos, URL's o nombres de paquetes para los "
-#~ "paquetes. Si\n"
-#~ "se especifíca un nombre de paquete, éste debería existir en un "
-#~ "repositorio especificado.\n"
-#~ "\n"
-#~ "También se pueden indicar componentes en vez de nombres de paquetes, que "
-#~ "se\n"
-#~ "completarán a nombres de paquetes.\n"
-
-#~ msgid ""
-#~ "Upgrade PiSi packages\n"
-#~ "\n"
-#~ "Usage: Upgrade [<package1> <package2> ... <packagen>]\n"
-#~ "\n"
-#~ "<packagei>: package name\n"
-#~ "\n"
-#~ "Upgrades the entire system if no package names are given\n"
-#~ "\n"
-#~ "You may use only package names to specify packages because\n"
-#~ "the package upgrade operation is defined only with respect\n"
-#~ "to repositories. If you have specified a package name, it\n"
-#~ "should exist in the package repositories. If you just want to\n"
-#~ "reinstall a package from a PiSi file, use the install command.\n"
-#~ "\n"
-#~ "You can also specify components instead of package names, which will be\n"
-#~ "expanded to package names.\n"
-#~ msgstr ""
-#~ "Actualizar paquetes PiSi \n"
-#~ "\n"
-#~ "Uso: Upgrade [<package1> <package2> ... <packagen>]\n"
-#~ "\n"
-#~ "<packagei>: nombre de paquete\n"
-#~ "\n"
-#~ "Actualiza el sistema entero si no se indica el nombre de un paquete\n"
-#~ "\n"
-#~ "Se puede usar solamente nombres de paquetes para especificar paquetes\n"
-#~ "porque la operación de actualización de paquetes solo está definida con \n"
-#~ "respecto a repositorios. Para el nombre especificado debe existir\n"
-#~ "el paquete correspondiente en los repositorios. Si desea solamente\n"
-#~ " reinstalar un paquete de un archivo PiSi file, use el comando install.\n"
-#~ "\n"
-#~ "También se pueden especificar componentes en vez de nombres de paquetes, "
-#~ "que \n"
-#~ "se autocompletará a nombres de paquetes.\n"
-
-#~ msgid ""
-#~ "Remove PiSi packages\n"
-#~ "\n"
-#~ "Usage: remove <package1> <package2> ... <packagen>\n"
-#~ "\n"
-#~ "Remove package(s) from your system. Just give the package names to "
-#~ "remove.\n"
-#~ "\n"
-#~ "You can also specify components instead of package names, which will be\n"
-#~ "expanded to package names.\n"
-#~ msgstr ""
-#~ "Remover paquetes PiSi \n"
-#~ "\n"
-#~ "Uso: remove <package1> <package2> ... <packagen>\n"
-#~ "\n"
-#~ "Remover paquete(s) del sistema. Solamente indique el nombre de paquete a "
-#~ "remover.\n"
-#~ "\n"
-#~ "También se puede especificar componentes en vez de nombres de paquetes, "
-#~ "lo que \n"
-#~ "se autocompletará a nombres de paquetes.\n"
-
-#~ msgid ""
-#~ "Configure pending packages\n"
-#~ "\n"
-#~ "If COMAR configuration of some packages were not\n"
-#~ "done at installation time, they are added to a list\n"
-#~ "of packages waiting to be configured. This command\n"
-#~ "configures those packages.\n"
-#~ msgstr ""
-#~ "Configurar paquetes pendientes\n"
-#~ "\n"
-#~ "Si la configuración de COMAR de algunos paquetes no se \n"
-#~ "realizó durante la instalación, se les agrega a una lista\n"
-#~ "de paquetes pendientes a configurar. Este comando \n"
-#~ "configura los paquetes en esta situación.\n"
-
-#~ msgid ""
-#~ "Display package information\n"
-#~ "\n"
-#~ "Usage: info <package1> <package2> ... <packagen>\n"
-#~ "\n"
-#~ "<packagei> is either a package name or a .pisi file,\n"
-#~ msgstr ""
-#~ "Mostrar información de paquete\n"
-#~ "\n"
-#~ "Uso: info <package1> <package2> ... <packagen>\n"
-#~ "\n"
-#~ "<packagei> puede ser nombre de un paquete o de un archivo .pisi,\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Files:"
-#~ msgstr ""
-#~ "\n"
-#~ "Archivos:"
-
-#~ msgid "File information not available"
-#~ msgstr "Información de archivo no disponible"
-
-#~ msgid ""
-#~ "Verify installation\n"
-#~ "\n"
-#~ "Usage: check [<package1> <package2> ... <packagen>]\n"
-#~ "\n"
-#~ "<packagei>: package name\n"
-#~ "\n"
-#~ "A cryptographic checksum is stored for each installed\n"
-#~ "file. Check command uses the checksums to verify a package.\n"
-#~ "Just give the names of packages.\n"
-#~ "\n"
-#~ "If no packages are given, checks all installed packages.\n"
-#~ msgstr ""
-#~ "Verificar instalación\n"
-#~ "\n"
-#~ "Uso: check [<package1> <package2> ... <packagen>]\n"
-#~ "\n"
-#~ "<packagei>: nombre de paquete\n"
-#~ "\n"
-#~ "Para cada archivo se guarda un checksum criptográfico. El \n"
-#~ "comando check usa los checksum para verificar la integridad de \n"
-#~ "un paquete. Simplemente hay que indicar los nombre de los paquetes.\n"
-#~ "\n"
-#~ "Sin nombre de paquete, el comando verifica todos los paquetes "
-#~ "instalados.\n"
-
-#~ msgid ""
-#~ "Index PiSi files in a given directory\n"
-#~ "\n"
-#~ "Usage: index <directory> ...\n"
-#~ "\n"
-#~ "This command searches for all PiSi files in a directory, collects PiSi\n"
-#~ "tags from them and accumulates the information in an output XML file,\n"
-#~ "named by default 'pisi-index.xml'. In particular, it indexes both\n"
-#~ "source and binary packages.\n"
-#~ "\n"
-#~ "If you give multiple directories, the command still works, but puts\n"
-#~ "everything in a single index file.\n"
-#~ msgstr ""
-#~ "Indexar archivos PiSi de una carpeta específicada\n"
-#~ "\n"
-#~ "Uso: index <directory> ...\n"
-#~ "\n"
-#~ "Este comando busca todos los archivos PiSi de una carpeta, colecciona "
-#~ "sus\n"
-#~ "tags PiSi y junta la información en un archivo XML de salida,\n"
-#~ "que por defecto tiene el nombre 'pisi-index.xml'. El comando indexa\n"
-#~ "tanto a paquetes fuente como a binarios.\n"
-#~ "\n"
-#~ "Cuando se le indica al programa multiples carpetas, la operación funciona "
-#~ "igual, pero\n"
-#~ "se junta el resultado en un solo archivo del indexado.\n"
-
-#~ msgid ""
-#~ "Print the list of all installed packages\n"
-#~ "\n"
-#~ "Usage: list-installed\n"
-#~ msgstr ""
-#~ "Imprime una lista de todos los paquetes instalados\n"
-#~ "\n"
-#~ "Uso: list-installed\n"
-
-#~ msgid ""
-#~ "Rebuild Databases\n"
-#~ "\n"
-#~ "Usage: rebuilddb [ <package1> <package2> ... <packagen> ]\n"
-#~ "\n"
-#~ "Rebuilds the PiSi databases\n"
-#~ "\n"
-#~ "If package specs are given, they should be the names of package\n"
-#~ "dirs under /var/lib/pisi\n"
-#~ msgstr ""
-#~ "Regenerar Base de Datos\n"
-#~ "\n"
-#~ "Uso: rebuilddb [ <package1> <package2> ... <packagen> ]\n"
-#~ "\n"
-#~ "Regenera la base de datos PiSi\n"
-#~ "\n"
-#~ "Si se indican nombres de paquetes, deberían coincidir con \n"
-#~ "carpetas de paquetes en /var/lib/pisi\n"
-
-#~ msgid ""
-#~ "Update repository databases\n"
-#~ "\n"
-#~ "Usage: update-repo [<repo1> <repo2> ... <repon>]\n"
-#~ "\n"
-#~ "<repoi>: repository name\n"
-#~ "\n"
-#~ "Synchronizes the PiSi databases with the current repository.\n"
-#~ "If no repository is given, all repositories are updated.\n"
-#~ msgstr ""
-#~ "Actualizar bases de datos de repositorio\n"
-#~ "\n"
-#~ "Uso: update-repo [<repo1> <repo2> ... <repon>]\n"
-#~ "\n"
-#~ "<repoi>: nombre de repositorio\n"
-#~ "\n"
-#~ "Sinchroniza la base de datos PiSi con el repositorio actual.\n"
-#~ "Si no se indica un repositorio, se actualizan todos los repositorios.\n"
-
-#~ msgid ""
-#~ "Add a repository\n"
-#~ "\n"
-#~ "Usage: add-repo <repo> <indexuri>\n"
-#~ "\n"
-#~ "<repo>: name of repository to add\n"
-#~ "<indexuri>: URI of index file\n"
-#~ "\n"
-#~ "If no repo is given, add-repo pardus-devel repo is added by default\n"
-#~ "\n"
-#~ "NB: We support only local files (e.g., /a/b/c) and http:// URIs at the "
-#~ "moment\n"
-#~ msgstr ""
-#~ "Agregar un repositorio\n"
-#~ "\n"
-#~ "Uso: add-repo <repo> <indexuri>\n"
-#~ "\n"
-#~ "<repo>: nombre de repositorio a agregar\n"
-#~ "<indexuri>: URI de archivo indexador\n"
-#~ "\n"
-#~ "Si no se indica repo, add-repo agrega por defecto el repositorio pardus-"
-#~ "devel\n"
-#~ "\n"
-#~ "Obs.: Actualmente están soportados solamente archivos locales (ej., /a/b/"
-#~ "c) y URIs http:// \n"
-
-#~ msgid ""
-#~ "Remove repositories\n"
-#~ "\n"
-#~ "Usage: remove-repo <repo1> <repo2> ... <repon>\n"
-#~ "\n"
-#~ "Remove all repository information from the system.\n"
-#~ msgstr ""
-#~ "Remover repositorios\n"
-#~ "\n"
-#~ "Uso: remove-repo <repo1> <repo2> ... <repon>\n"
-#~ "\n"
-#~ "Remueve toda información de repositorio del sistema.\n"
-
-# i think translatioin ok, but maybe something nicer/better (in spanish) for "tracked" ?
-# observar, vigilar, o simplemente: registrados, configurados .. ??
-#~ msgid ""
-#~ "List repositories\n"
-#~ "\n"
-#~ "Usage: list-repo\n"
-#~ "\n"
-#~ "Lists currently tracked repositories.\n"
-#~ msgstr ""
-#~ "Lista repositorios\n"
-#~ "\n"
-#~ "Uso: list-repo\n"
-#~ "\n"
-#~ "Lista repositorios que están configurados actualmente.\n"
-
-#~ msgid ""
-#~ "List available packages in the repositories\n"
-#~ "\n"
-#~ "Usage: list-available [ <repo1> <repo2> ... repon ]\n"
-#~ "\n"
-#~ "Gives a brief list of PiSi packages published in the specified\n"
-#~ "repositories. If no repository is specified, we list packages in\n"
-#~ "all repositories.\n"
-#~ msgstr ""
-#~ "Lista paquetes disponibles en los repositorios\n"
-#~ "\n"
-#~ "Uso: list-available [ <repo1> <repo2> ... repon ]\n"
-#~ "\n"
-#~ "Da una lista breve de los paquetes PiSi publicados en los\n"
-#~ "repositorios especificados. Si no se especifica un repositorio, se "
-#~ "listan\n"
-#~ "los paquetes de todos los repositorios.\n"
-
-#~ msgid ""
-#~ "List available components\n"
-#~ "\n"
-#~ "Usage: list-components\n"
-#~ "\n"
-#~ "Gives a brief list of PiSi components published in the\n"
-#~ "repositories.\n"
-#~ msgstr ""
-#~ "Lista componentes disponibles\n"
-#~ "\n"
-#~ "Uso: list-components\n"
-#~ "\n"
-#~ "Da una lista breve de componentes PiSi publicados en los\n"
-#~ "repositorios.\n"
-
-#~ msgid ""
-#~ "List available sources\n"
-#~ "\n"
-#~ "Usage: list-sources\n"
-#~ "\n"
-#~ "Gives a brief list of sources published in the repositories.\n"
-#~ msgstr ""
-#~ "Lista fuentes disponibles\n"
-#~ "\n"
-#~ "Uso: list-sources\n"
-#~ "\n"
-#~ "Da una lista breve de los fuentes publicados en los repositorios.\n"
-
-#~ msgid ""
-#~ "List packages to be upgraded\n"
-#~ "\n"
-#~ "Usage: list-upgrades\n"
-#~ "\n"
-#~ "Lists the packages that will be upgraded.\n"
-#~ msgstr ""
-#~ "Listar paquetes a actualizar\n"
-#~ "\n"
-#~ "Uso: list-upgrades\n"
-#~ "\n"
-#~ "Lista los paquetes que se actualizarán.\n"
-
-#~ msgid ""
-#~ "List pending packages\n"
-#~ "\n"
-#~ "Lists packages waiting to be configured.\n"
-#~ msgstr ""
-#~ "Listar paquetes pendientes\n"
-#~ "\n"
-#~ "Lista paquetes pendientes a configurar.\n"
-
-#~ msgid ""
-#~ "Search packages\n"
-#~ "\n"
-#~ "Usage: search <term1> <term2> ... <termn>\n"
-#~ "\n"
-#~ "Finds a package containing specified search terms\n"
-#~ "in summary, description, and package name fields.\n"
-#~ msgstr ""
-#~ "Buscar paquetes\n"
-#~ "\n"
-#~ "Uso: search <term1> <term2> ... <termn>\n"
-#~ "\n"
-#~ "Busca paquetes con un patrón de búsqueda en\n"
-#~ "campos de resumen, descripción y nombre de paquete.\n"
-
-#~ msgid "Show details"
-#~ msgstr "Mostrar detalles"
-
-#~ msgid "%s packages found"
-#~ msgstr "%s paquetes encontrados"
-
-#~ msgid ""
-#~ "Search for a file\n"
-#~ "\n"
-#~ "Usage: search-file <path1> <path2> ... <pathn>\n"
-#~ "\n"
-#~ "Finds the installed package which contains the specified file.\n"
-#~ msgstr ""
-#~ "Buscar archivo\n"
-#~ "\n"
-#~ "Uso: search-file <path1> <path2> ... <pathn>\n"
-#~ "\n"
-#~ "Busca el paquete instalado que contiene el archivo indicado.\n"
-
-#~ msgid "Fuzzy search"
-#~ msgstr "Búsqueda difusa (fuzzy)"
-
-#~ msgid "Type: %s, Hash: %s"
-#~ msgstr "Tipo: %s, Hash: %s"
-
-# should it be "for" or "of" component ?
-#~ msgid "Information for component %s not available"
-#~ msgstr "Información para componente %s no disponible"
-
-#~ msgid "No such file or no permission to read"
-#~ msgstr "No existe el archivo o no hay permiso de lectura"
-
-#~ msgid "Requested range not satisfiable, starting again."
-#~ msgstr "Rango solicitado no posible satisfacer, iniciando otra vez."
-
-#~ msgid "Cannot fetch %s; value error: %s"
-#~ msgstr "Imposible descargar %s; valor de error: %s"
-
-#~ msgid "Cannot fetch %s; %s"
-#~ msgstr "No posible descargar %s; %s"
-
-#~ msgid "Please check your network connections and try again. (%s)"
-#~ msgstr "Favor verifique su conexión de red y luego intente de nuevo. (%s)"
-
-#~ msgid "Cannot fetch %s; (%s): %s"
-#~ msgstr "No posible descargar %s; (%s): %s"
-
-#~ msgid "ftp error"
-#~ msgstr "error ftp"
-
-#~ msgid "Updating package database of %s"
-#~ msgstr "Actualizando base de datos de paquetes de %s"
-
-# ok ?
-#~ msgid "purged"
-#~ msgstr "limpiado"
-
-#~ msgid "removed"
-#~ msgstr "removido"
-
-#~ msgid "Already installed"
-#~ msgstr "Ya instalado"
-
-#~ msgid "Invalid repository string"
-#~ msgstr "Cadena de repositorio inválida"
-
-#~ msgid "Key %s in repo %s not found"
-#~ msgstr "Clave %s no encontrado en repositorio %s "
-
-#~ msgid "Database version for %s insufficient. Please run rebuild-db command."
-#~ msgstr ""
-#~ "Versión de base de datos %s es insuficiente. Favor ejecute el comando "
-#~ "rebuild-db."
-
-#~ msgid ""
-#~ "Database version for %s greater than PiSi version. You need a newer PiSi."
-#~ msgstr ""
-#~ "Versión de base de datos %s mayor que versión de PiSi. Necesita una "
-#~ "versión PiSi más nueva."
-
-#~ msgid "Cannot attain write access to database environment"
-#~ msgstr "No posible acceder base de datos para escritura"
-
-#~ msgid "Database version %s not present."
-#~ msgstr "Versión de base de datos %s no disponible."
-
-#~ msgid ""
-#~ "Another instance of PiSi is running. Only one instance is allowed to "
-#~ "modify the PiSi database at a time."
-#~ msgstr ""
-#~ "Otra instancia de PiSi se está ejecutando en este momento. Solamente una "
-#~ "de las instancias puede realizar modificaciones en la base de datos de "
-#~ "PiSi."
-
-#~ msgid "Cannot attain read access to database environment"
-#~ msgstr "No posible acceder base de datos para lectura"
-
-#~ msgid ""
-#~ "Cannot attain write access to PiSi database. You have to be root for this "
-#~ "operation."
-#~ msgstr ""
-#~ "No posible escribir en base de datos PiSi. Debe ejecutar esta operación "
-#~ "como usuario root."
-
-#~ msgid "Cannot attain read or write access to database %s"
-#~ msgstr "No posible acceder a base de datos %s para lectura o escritura"
-
-#~ msgid ""
-#~ "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
-#~ msgstr ""
-#~ "Banderas deberían ser uno de 'r', 'w', 'c' or 'n' o use las banderas "
-#~ "bsddb.db.DB_* "
-
-#~ msgid "No repository named %s exists"
-#~ msgstr "No existe repositorio con nombre %s"
-
-#~ msgid "Repository %s already exists"
-#~ msgstr "Repositorio %s ya existe"
-
-#~ msgid "Cannot add repository at position %s"
-#~ msgstr "No posible agregar repositorio en posición %s"
-
-#~ msgid "Source package %s not found"
-#~ msgstr "Paquete fuente %s no encontrado"
-
-#~ msgid "Cannot calculate SHA1 hash of given data"
-#~ msgstr "No posible calcular hash SHA1 de datos indicados"
