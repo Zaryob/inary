@@ -77,7 +77,7 @@ def install(parameters = 'install'):
     fixLocalPod()
 
 def fixLocalPod():
-    podFiles = glob.glob("%s/usr/lib/*/*/*/perllocal.pod" % get.installDIR())
+    podFiles = glob.glob('%s/usr/lib/*/*/*/perllocal.pod' % get.installDIR())
 
     for podFile in podFiles:
         if can_access_file(podFile):

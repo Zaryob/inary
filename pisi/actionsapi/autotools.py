@@ -96,7 +96,7 @@ def make(parameters = ''):
             raise MakeError(_('Make failed.'))
 
 def fixInfoDir():
-    infoDir = "%s/usr/share/info/dir" % get.installDIR()
+    infoDir = '%s/usr/share/info/dir' % get.installDIR()
     if can_access_file(infoDir):
         unlink(infoDir)
 

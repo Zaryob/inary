@@ -91,7 +91,8 @@ class Dirs:
 # because of uninitialized context (ctx) because of exportFlags().
 #
 # We import this modue from build.py becase we need to reset/init glb
-# for each build. # See bug #2575
+# for each build.
+# See bug #2575
 glb = None
 
 def initVariables():

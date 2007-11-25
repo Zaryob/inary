@@ -72,7 +72,7 @@ def make(parameters = ''):
         raise InstallError(_('No Makefile found.'))
 
 def fixInfoDir():
-    infoDir = "%s/usr/share/info/dir" % get.installDIR()
+    infoDir = '%s/usr/share/info/dir' % get.installDIR()
     if can_access_file(infoDir):
         unlink(infoDir)
 

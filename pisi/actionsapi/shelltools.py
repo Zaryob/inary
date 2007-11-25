@@ -68,7 +68,7 @@ def chmod(filePath, mode = 0755):
         else:
             ctx.ui.error(_('ActionsAPI [chmod]: File %s doesn\'t exists.') % (fileName))
 
-def chown(filePath, uid = "root", gid = "root"):
+def chown(filePath, uid = 'root', gid = 'root'):
     '''change the owner and group id of filePath to uid and gid'''
     if can_access_file(filePath):
         try:
