@@ -199,8 +199,8 @@ def plan_upgrade(A):
             rev_deps = packagedb.get_rev_deps(x)
             for (rev_dep, depinfo) in rev_deps:
                 # add only installed but unsatisfied reverse dependencies
-                if installdb.has_package(rev_dep) and \
-                        (not dependency.installed_satisfies_dep(depinfo)):
+                if (installdb.has_package(rev_dep) and 
+                    not dependency.installed_satisfies_dep(depinfo) and is_upgradable(rev_dep)):
                     if not dependency.repo_satisfies_dep(depinfo):
                         raise Exception(_('Reverse dependency %s of %s cannot be satisfied') % (rev_dep, x))
                     if not rev_dep in G_f.vertices():
