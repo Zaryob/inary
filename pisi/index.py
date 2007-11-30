@@ -101,7 +101,10 @@ class Index(xmlfile.XmlFile):
                 if fn == 'distribution.xml':
                     self.add_distro(os.path.join(root, fn))
 
-        obsoletes_list = map(str, self.distribution.obsoletes)
+        try:
+            obsoletes_list = map(str, self.distribution.obsoletes)
+        except AttributeError:
+            obsoletes_list = []
 
         for pkg in util.filter_latest_packages(packages):
             pkg_name = util.parse_package_name(os.path.basename(pkg))[0]
