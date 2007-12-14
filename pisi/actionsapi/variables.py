@@ -75,6 +75,7 @@ class Dirs:
     data = 'usr/share'
     conf = 'etc'
     localstate = 'var/lib'
+    libexec = 'usr/libexec'
     defaultprefix = 'usr'
 
     # These should be owned by object not the class. Or else Python

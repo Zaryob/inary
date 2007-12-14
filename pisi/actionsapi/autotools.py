@@ -66,10 +66,11 @@ def configure(parameters = ''):
                 --datadir=/%s \
                 --sysconfdir=/%s \
                 --localstatedir=/%s \
+                --libexecdir=/%s \
                 %s' % (get.defaultprefixDIR(), \
                        get.HOST(), get.manDIR(), \
                        get.infoDIR(), get.dataDIR(), \
-                       get.confDIR(), get.localstateDIR(), parameters)
+                       get.confDIR(), get.localstateDIR(), get.libexecDIR(), parameters)
 
         if system(args):
             raise ConfigureError(_('Configure failed.'))

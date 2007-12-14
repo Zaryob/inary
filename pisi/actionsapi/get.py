@@ -134,6 +134,9 @@ def confDIR():
 def localstateDIR():
     return dirs.localstate
 
+def libexecDIR():
+    return dirs.libexec
+
 def defaultprefixDIR():
     return dirs.defaultprefix
 
