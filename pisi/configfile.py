@@ -25,8 +25,8 @@
 #host = i686-pc-linux-gnu
 #generateDebug = False
 #jobs = "-j1"
-#CFLAGS= -mtune=i686 -march=i686 -O2 -pipe -fomit-frame-pointer -Wstrict-overflow
-#CXXFLAGS= -mtune=i686 -march=i686 -O2 -pipe -fomit-frame-pointer -Wstrict-overflow
+#CFLAGS= -mtune=generic -mcpu=generic -march=i686 -O2 -pipe -fomit-frame-pointer -Wstrict-overflow
+#CXXFLAGS= -mtune=generic -mcpu=generic -march=i686 -O2 -pipe -fomit-frame-pointer -Wstrict-overflow
 #LDFLAGS=
 #buildno=True     # necessary for generating build nos
 #buildhelper = None / ccache / icecream
