@@ -92,6 +92,7 @@ Usage: info <package1> <package2> ... <packagen>
                 self.info_package(arg)
 
         if self.options.xml:
+            import sys
             errs = []
             index.newDocument()
             index.encode(index.rootNode(), errs)
