@@ -525,6 +525,13 @@ def strip_file(filepath, outpath):
         if ret:
             ctx.ui.warning(_("strip command failed for file '%s'!") % f)
 
+    def run_chrpath(f):
+        """ remove rpath info from binary """
+        p = os.popen("chrpath -d %s" % f)
+        ret = p.close()
+        if ret:
+            ctx.ui.warning(_("chrpath command failed for file '%s'!") % f)
+
     def save_elf_debug(f, o):
         """copy debug info into file.debug file"""
         p = os.popen("objcopy --only-keep-debug %s %s%s" % (f, o, ctx.const.debug_file_suffix))
@@ -547,6 +554,7 @@ def strip_file(filepath, outpath):
             check_dir(os.path.dirname(outpath))
             save_elf_debug(filepath, outpath)
         run_strip(filepath)
+        run_chrpath(filepath)
         return True
 
     elif "SB shared object" in o:
@@ -554,6 +562,7 @@ def strip_file(filepath, outpath):
             check_dir(os.path.dirname(outpath))
             save_elf_debug(filepath, outpath)
         run_strip(filepath, "--strip-unneeded")
+        run_chrpath(filepath)
         # FIXME: warn for TEXTREL
         return True
 
