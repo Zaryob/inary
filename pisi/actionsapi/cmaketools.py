@@ -56,7 +56,10 @@ class RunTimeError(pisi.actionsapi.Error):
 def configure(parameters = '', installPrefix = '/%s' % get.defaultprefixDIR(), sourceDir = '.'):
     '''configure source with given cmake parameters = "-DCMAKE_BUILD_TYPE -DCMAKE_CXX_FLAGS ... "'''
     if can_access_file(join_path(sourceDir, 'CMakeLists.txt')):
-        args = 'cmake -DCMAKE_INSTALL_PREFIX=%s %s %s' % (installPrefix, parameters, sourceDir)
+        args = 'cmake -DCMAKE_INSTALL_PREFIX=%s \
+                      -DCMAKE_C_FLAGS="%s" \
+                      -DCMAKE_CXX_FLAGS="%s" \
+                      -DCMAKE_LD_FLAGS="%s" %s %s' % (installPrefix, get.CFLAGS(), get.CXXFLAGS(), get.LDFLAGS(), parameters, sourceDir)
 
         if system(args):
             raise ConfigureError(_('Configure failed.'))
