@@ -554,7 +554,8 @@ def strip_file(filepath, outpath):
             check_dir(os.path.dirname(outpath))
             save_elf_debug(filepath, outpath)
         run_strip(filepath)
-        run_chrpath(filepath)
+        # FIXME: removing RPATH also causes problems, for details see gelistirici mailing list - caglar10ur
+        # run_chrpath(filepath)
         return True
 
     elif "SB shared object" in o:
