@@ -35,7 +35,7 @@ expanded to package names.
 
     def __init__(self, args):
         super(Remove, self).__init__(args)
-        self.component = pisi.db.componentdb.ComponentDB()
+        self.componentdb = pisi.db.componentdb.ComponentDB()
 
     name = ("remove", "rm")
 
