@@ -150,7 +150,7 @@ Index: comariface.py
 -        }
 +        if not fromVersion:
 +            fromVersion = ""
-+        if not fromRelease
++        if not fromRelease:
 +            fromRelease = ""
 +        
          ctx.ui.debug(_("Running package's post install script"))
