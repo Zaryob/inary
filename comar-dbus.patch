@@ -1,6 +1,6 @@
 Index: comariface.py
 ===================================================================
---- comariface.py	(revision 16684)
+--- comariface.py	(revision 16686)
 +++ comariface.py	(working copy)
 @@ -25,117 +25,126 @@
      pass
@@ -158,7 +158,7 @@ Index: comariface.py
 -        wait_for_result(com, package_name)
 +        try:
 +            iface = get_iface(object_name, "System.Package")
-+            iface.postInstall(fromVersion, toVersion, fromRelease, toRelease)
++            iface.postInstall(fromVersion, fromRelease, toVersion, toRelease)
 +        except dbus.DBusException, exception:
 +            raise Error, _("Script error: %s") % exception
  
