@@ -1,8 +1,8 @@
 Index: comariface.py
 ===================================================================
---- comariface.py	(revision 16677)
+--- comariface.py	(revision 16684)
 +++ comariface.py	(working copy)
-@@ -25,91 +25,87 @@
+@@ -25,117 +25,126 @@
      pass
  
  try:
@@ -142,10 +142,17 @@ Index: comariface.py
 +            raise Error, _("Script error: %s") % exception
      
      if self_post:
-         args = {
-@@ -119,23 +115,37 @@
-             "toRelease": toRelease,
-         }
+-        args = {
+-            "fromVersion": fromVersion,
+-            "fromRelease": fromRelease,
+-            "toVersion": toVersion,
+-            "toRelease": toRelease,
+-        }
++        if not fromVersion:
++            fromVersion = ""
++        if not fromRelease
++            fromRelease = ""
++        
          ctx.ui.debug(_("Running package's post install script"))
 -        com.call_package("System.Package.postInstall", package_name, args)
 -        wait_for_result(com, package_name)
