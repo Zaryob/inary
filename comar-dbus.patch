@@ -175,7 +175,7 @@ Index: comariface.py
 -    wait_for_result(com)
 +    if "System.Package" in sys_iface.listApplicationModels(object_name):
 +        ctx.ui.debug(_("Running package's pre remove script"))
-+        iface = get_iface(handler_application, "System.PackageHandler")
++        iface = get_iface(object_name, "System.PackageHandler")
 +        try:
 +            iface.preRemove()
 +        except dbus.DBusException, exception:
