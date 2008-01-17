@@ -1,6 +1,6 @@
 Index: comariface.py
 ===================================================================
---- comariface.py	(revision 16686)
+--- comariface.py	(revision 16699)
 +++ comariface.py	(working copy)
 @@ -25,117 +25,126 @@
      pass
@@ -198,3 +198,16 @@ Index: comariface.py
 +        sys_iface.remove(object_name)
 +    except dbus.DBusException, exception:
 +        raise Error, _("Script error: %s") % exception
+Index: atomicoperations.py
+===================================================================
+--- atomicoperations.py	(revision 16699)
++++ atomicoperations.py	(working copy)
+@@ -146,7 +146,7 @@
+         # check comar
+         if self.metadata.package.providesComar and ctx.comar:
+             import pisi.comariface as comariface
+-            comariface.get_comar()
++            comariface.get_iface()
+ 
+     def check_relations(self):
+         # check dependencies
