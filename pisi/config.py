@@ -95,6 +95,9 @@ class Config(object):
     def info_dir(self):
         return self.subdir(self.values.dirs.info_dir)
 
+    def history_dir(self):
+        return self.subdir(self.values.dirs.history_dir)
+
     def packages_dir(self):
         return self.subdir(self.values.dirs.packages_dir)
 
