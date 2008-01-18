@@ -10,6 +10,7 @@
 # Please read the COPYING file.
 #
 
+import time
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
@@ -54,3 +55,29 @@ class History(xmlfile.XmlFile):
     tag = "PISI"
 
     t_Operation = [Operation, autoxml.mandatory]
+
+    def initialize(self, operation):
+
+        if operation not in ["upgrade", "remove", "install"]:
+            raise Exception("Unknown package operation")
+
+        year, month, day, hour, minute = time.localtime()[0:5]
+        self.operation.type = operation
+        self.operation.date = "%s-%02d-%02d" % (year, month, day)
+        self.operation.time = "%02d:%02d" % (hour, minute)
+
+    def add_operation(self, pkgBefore=None, pkgAfter=None, operation=None):
+
+        if operation not in ["upgrade", "remove", "install"]:
+            raise Exception("Unknown package operation")
+
+        package = Package()
+        package.operation = operation
+
+        for histInfo, pkgInfo in [(package.before, pkgBefore), (package.after, pkgAfter)]:
+            if pkgInfo:
+                histInfo.version = pkgInfo.version
+                histInfo.release = pkgInfo.release
+                histInfo.build = pkgInfo.build
+
+        self.operation.packages.append(package)
