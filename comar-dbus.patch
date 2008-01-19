@@ -137,7 +137,7 @@ Index: comariface.py
 +    for handler in sys_iface.listModelApplications("System.PackageHandler"):
 +        iface = get_iface(handler, "System.PackageHandler")
 +        try:
-+            iface.setupPackage(metapath, filepath)
++            iface.setupPackage(metapath, filepath, timeout=300)
 +        except dbus.DBusException, exception:
 +            raise Error, _("Script error: %s") % exception
      
@@ -158,7 +158,7 @@ Index: comariface.py
 -        wait_for_result(com, package_name)
 +        try:
 +            iface = get_iface(object_name, "System.Package")
-+            iface.postInstall(fromVersion, fromRelease, toVersion, toRelease)
++            iface.postInstall(fromVersion, fromRelease, toVersion, toRelease, timeout=300)
 +        except dbus.DBusException, exception:
 +            raise Error, _("Script error: %s") % exception
  
@@ -177,7 +177,7 @@ Index: comariface.py
 +        ctx.ui.debug(_("Running package's pre remove script"))
 +        iface = get_iface(object_name, "System.Package")
 +        try:
-+            iface.preRemove()
++            iface.preRemove(timeout=300)
 +        except dbus.DBusException, exception:
 +            raise Error, _("Script error: %s") % exception
      
@@ -187,7 +187,7 @@ Index: comariface.py
 +    for handler in sys_iface.listModelApplications("System.PackageHandler"):
 +        iface = get_iface(handler, "System.PackageHandler")
 +        try:
-+            iface.cleanupPackage(metapath, filepath)
++            iface.cleanupPackage(metapath, filepath, timeout=300)
 +        except dbus.DBusException, exception:
 +            raise Error, _("Script error: %s") % exception
      
