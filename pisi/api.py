@@ -259,7 +259,25 @@ def search_file(term):
         term = term[1:]
     return filesdb.search_file(term)
 
-# ****** Danger Zone Below! Tressspassers eyes will be explode! ********** #
+
+def install(packages, reinstall=False, ignore_file_conflicts=False):
+    """
+    Returns True if no errors occured during the operation
+    @param packages: list of package names -> list_of_strings
+    @param reinstall: reinstalls already installed packages else ignores
+    @param ignore_file_conflicts: Ignores file conflicts during the installation and continues to install
+    packages.
+    """
+    if not ctx.get_option('ignore_file_conflicts'):
+        ctx.set_option('ignore_file_conflicts', ignore_file_conflicts)
+
+    # Install pisi package files or pisi packages from a repository
+    if packages and packages[0].endswith(ctx.const.package_suffix):
+        return pisi.operations.install.install_pkg_files(packages)
+    else:
+        return pisi.operations.install.install_pkg_names(packages, reinstall)
+
+# ****** Danger Zone Below! Tressspassers' eyes will explode! ********** #
 
 def package_graph(A, packagedb, ignore_installed = False):
     """Construct a package relations graph.
@@ -547,9 +565,6 @@ def rebuild_db(files=False):
 # from pisi.operations import plan_remove, plan_upgrade, upgrade_base, calculate_conflicts, reorder_base_packages
 # from pisi.build import build_until
 # from pisi.atomicoperations import resurrect_package, build
-
-def install(*args, **kw):
-    return pisi.operations.install.install(*args, **kw)
 
 def remove(*args, **kw):
     return pisi.operations.remove.remove(*args, **kw)

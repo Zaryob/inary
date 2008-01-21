@@ -26,18 +26,6 @@ import pisi.dependency as dependency
 import pisi.ui as ui
 import pisi.db
 
-def install(packages, reinstall = False, ignore_file_conflicts=False):
-    """install a list of packages (either files/urls, or names)"""
-
-    if not ctx.get_option('ignore_file_conflicts'):
-        ctx.set_option('ignore_file_conflicts', ignore_file_conflicts)
-
-    # determine if this is a list of files/urls or names
-    if packages and packages[0].endswith(ctx.const.package_suffix): # they all have to!
-        return install_pkg_files(packages)
-    else:
-        return install_pkg_names(packages, reinstall)
-
 def install_pkg_names(A, reinstall = False):
     """This is the real thing. It installs packages from
     the repository, trying to perform a minimum number of
@@ -60,7 +48,7 @@ def install_pkg_names(A, reinstall = False):
 
     if len(A)==0:
         ctx.ui.info(_('No packages to install.'))
-        return
+        return True
 
     A |= operations.upgrade.upgrade_base(A)
 
@@ -85,7 +73,7 @@ def install_pkg_names(A, reinstall = False):
     ctx.ui.info(_('Total size of package(s): %.2f %s') % (total_size, symbol))
 
     if ctx.get_option('dry_run'):
-        return
+        return True
 
     if set(order) - A_0:
         if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
@@ -95,6 +83,8 @@ def install_pkg_names(A, reinstall = False):
 
     for x in order:
         atomicoperations.install_single_name(x, True)  # allow reinstalls here
+
+    return True
 
 def install_pkg_files(package_URIs):
     """install a number of pisi package files"""
@@ -109,7 +99,7 @@ def install_pkg_files(package_URIs):
         # simple code path then
         for x in package_URIs:
             atomicoperations.install_single_file(x)
-        return # short circuit
+        return True
 
     # read the package information into memory first
     # regardless of which distribution they come from
@@ -195,12 +185,14 @@ in the respective order to satisfy extra dependencies:
     ctx.ui.info(_('Installation order: ') + util.strlist(order) )
 
     if ctx.get_option('dry_run'):
-        return
+        return True
 
     ctx.ui.notify(ui.packagestogo, order = order)
 
     for x in order:
         atomicoperations.install_single_file(dfn[x])
+
+    return True
 
 def plan_install_pkg_names(A, ignore_package_conflicts = False):
     # try to construct a pisi graph of packages to
