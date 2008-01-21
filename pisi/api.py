@@ -259,6 +259,8 @@ def search_file(term):
         term = term[1:]
     return filesdb.search_file(term)
 
+# ****** Danger Zone Below! Tressspassers eyes will be explode! ********** #
+
 def package_graph(A, packagedb, ignore_installed = False):
     """Construct a package relations graph.
     
