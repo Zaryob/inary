@@ -1,8 +1,8 @@
-Index: comariface.py
+Index: pisi/comariface.py
 ===================================================================
---- comariface.py	(revision 16699)
-+++ comariface.py	(working copy)
-@@ -25,117 +25,126 @@
+--- pisi/comariface.py	(revision 16759)
++++ pisi/comariface.py	(working copy)
+@@ -25,117 +25,137 @@
      pass
  
  try:
@@ -33,14 +33,17 @@ Index: comariface.py
 +def get_iface(package="", model=""):
 +    """Connect to the DBus daemon and return the system interface."""
      
-+    """
-     sockname = "/var/run/comar.socket"
+-    sockname = "/var/run/comar.socket"
++    sockname = "unix:path=/var/run/dbus/system_bus_socket"
      # YALI starts comar chrooted in the install target, but uses PiSi outside of
      # the chroot environment, so PiSi needs to use a different socket path to be
-     # able to connect true comar (usually /mnt/target/var/run/comar.socket).
-     if ctx.comar_sockname:
-         sockname = ctx.comar_sockname
-+    """
+-    # able to connect true comar (usually /mnt/target/var/run/comar.socket).
+-    if ctx.comar_sockname:
+-        sockname = ctx.comar_sockname
++    # able to connect true dbus (and comar).
++    # (usually unix:path=/var/run/dbus/system_bus_socket)
++    if ctx.dbus_sockname:
++        sockname = ctx.dbus_sockname
      
 +    if package:
 +        obj_path = "/package/%s" % package
@@ -60,7 +63,7 @@ Index: comariface.py
 -            com = comar.Link(sockname)
 -            return com
 -        except comar.CannotConnect:
-+            bus = dbus.SystemBus()
++            bus = dbus.bus.BusConnection(address_or_type=sockname)
 +            obj = bus.get_object("tr.org.pardus.comar", obj_path)
 +            iface = dbus.Interface(obj, dbus_interface=obj_interface)
 +            return iface
@@ -139,7 +142,10 @@ Index: comariface.py
 +        try:
 +            iface.setupPackage(metapath, filepath, timeout=300)
 +        except dbus.DBusException, exception:
-+            raise Error, _("Script error: %s") % exception
++            # Do nothing if setupPackage method is not defined in package script
++            if not (exception._dbus_error_name.startswith("tr.org.pardus.comar") and
++               exception._dbus_error_name.split('tr.org.pardus.comar.')[1] == 'python.missing'):
++                raise Error, _("Script error: %s") % exception
      
      if self_post:
 -        args = {
@@ -160,7 +166,10 @@ Index: comariface.py
 +            iface = get_iface(object_name, "System.Package")
 +            iface.postInstall(fromVersion, fromRelease, toVersion, toRelease, timeout=300)
 +        except dbus.DBusException, exception:
-+            raise Error, _("Script error: %s") % exception
++            # Do nothing if postInstall method is not defined in package script
++            if not (exception._dbus_error_name.startswith("tr.org.pardus.comar") and
++               exception._dbus_error_name.split('tr.org.pardus.comar.')[1] == 'python.missing'):
++                raise Error, _("Script error: %s") % exception
  
  def pre_remove(package_name, metapath, filepath):
      """Do package's pre removal operations"""
@@ -179,7 +188,10 @@ Index: comariface.py
 +        try:
 +            iface.preRemove(timeout=300)
 +        except dbus.DBusException, exception:
-+            raise Error, _("Script error: %s") % exception
++            # Do nothing if preRemove method is not defined in package script
++            if not (exception._dbus_error_name.startswith("tr.org.pardus.comar") and
++                exception._dbus_error_name.split('tr.org.pardus.comar.')[1] == 'python.missing'):
++                raise Error, _("Script error: %s") % exception
      
      ctx.ui.debug(_("Calling pre remove handlers"))
 -    com.call("System.PackageHandler.cleanupPackage", [ "metapath", metapath, "filepath", filepath ])
@@ -189,7 +201,10 @@ Index: comariface.py
 +        try:
 +            iface.cleanupPackage(metapath, filepath, timeout=300)
 +        except dbus.DBusException, exception:
-+            raise Error, _("Script error: %s") % exception
++            # Do nothing if cleanupPackage method is not defined in package script
++            if not (exception._dbus_error_name.startswith("tr.org.pardus.comar") and
++               exception._dbus_error_name.split('tr.org.pardus.comar.')[1] == 'python.missing'):
++                raise Error, _("Script error: %s") % exception
      
      ctx.ui.debug(_("Unregistering comar scripts"))
 -    com.remove(package_name)
@@ -198,10 +213,32 @@ Index: comariface.py
 +        sys_iface.remove(object_name)
 +    except dbus.DBusException, exception:
 +        raise Error, _("Script error: %s") % exception
-Index: atomicoperations.py
+Index: pisi/api.py
 ===================================================================
---- atomicoperations.py	(revision 16699)
-+++ atomicoperations.py	(working copy)
+--- pisi/api.py	(revision 16759)
++++ pisi/api.py	(working copy)
+@@ -70,13 +70,13 @@
+     """
+     ctx.comar = enable
+ 
+-def set_comar_sockname(sockname):
++def set_dbus_sockname(sockname):
+     """ 
+-    Set comar socket file
++    Set dbus socket file
+     Used by YALI
+-    @param sockname: Path to comar socket file
++    @param sockname: Path to dbus socket file
+     """
+-    ctx.comar_sockname = sockname
++    ctx.dbus_sockname = sockname
+ 
+ def set_options(options):
+     """ 
+Index: pisi/atomicoperations.py
+===================================================================
+--- pisi/atomicoperations.py	(revision 16759)
++++ pisi/atomicoperations.py	(working copy)
 @@ -146,7 +146,7 @@
          # check comar
          if self.metadata.package.providesComar and ctx.comar:
@@ -211,3 +248,16 @@ Index: atomicoperations.py
  
      def check_relations(self):
          # check dependencies
+Index: pisi/context.py
+===================================================================
+--- pisi/context.py	(revision 16759)
++++ pisi/context.py	(working copy)
+@@ -38,7 +38,7 @@
+ stderr = None
+ 
+ comar = True
+-comar_sockname = None
++dbus_sockname = None
+ 
+ # Bug #2879
+ # FIXME: Maybe we can create a simple rollback mechanism. There are other
