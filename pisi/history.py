@@ -76,8 +76,8 @@ class History(xmlfile.XmlFile):
 
         for histInfo, pkgInfo in [(package.before, pkgBefore), (package.after, pkgAfter)]:
             if pkgInfo:
-                histInfo.version = pkgInfo.version
-                histInfo.release = pkgInfo.release
-                histInfo.build = pkgInfo.build
+                histInfo.version = str(pkgInfo.version)
+                histInfo.release = str(pkgInfo.release)
+                histInfo.build = build and str(pkgInfo.build)
 
         self.operation.packages.append(package)
