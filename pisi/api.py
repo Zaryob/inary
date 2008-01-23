@@ -27,6 +27,7 @@ import pisi.db.packagedb
 import pisi.db.repodb
 import pisi.db.filesdb
 import pisi.db.installdb
+import pisi.db.historydb
 import pisi.db.sourcedb
 import pisi.db.componentdb
 import pisi.index
@@ -268,6 +269,9 @@ def install(packages, reinstall=False, ignore_file_conflicts=False):
     @param ignore_file_conflicts: Ignores file conflicts during the installation and continues to install
     packages.
     """
+
+    historydb = pisi.db.historydb.HistoryDB().create("install")
+
     if not ctx.get_option('ignore_file_conflicts'):
         ctx.set_option('ignore_file_conflicts', ignore_file_conflicts)
 
@@ -567,9 +571,11 @@ def rebuild_db(files=False):
 # from pisi.atomicoperations import resurrect_package, build
 
 def remove(*args, **kw):
+    pisi.db.historydb.HistoryDB().create("remove")
     return pisi.operations.remove.remove(*args, **kw)
 
 def upgrade(*args, **kw):
+    pisi.db.historydb.HistoryDB().create("upgrade")
     return pisi.operations.upgrade.upgrade(*args, **kw)
 
 def emerge(*args, **kw):

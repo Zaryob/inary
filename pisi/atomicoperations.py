@@ -47,6 +47,8 @@ class AtomicOperation(object):
         else:
             self.ignore_dep = ignore_dep
 
+        self.historydb = pisi.db.historydb.HistoryDB()
+
     def run(self, package):
         "perform an atomic package operation"
         pass

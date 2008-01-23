@@ -10,6 +10,7 @@
 # Please read the COPYING file.
 #
 
+import os
 import time
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -17,6 +18,7 @@ _ = __trans.ugettext
 
 import pisi.pxml.autoxml as autoxml
 import pisi.pxml.xmlfile as xmlfile
+import pisi.context as ctx
 
 __metaclass__ = autoxml.autoxml
 
@@ -56,28 +58,44 @@ class History(xmlfile.XmlFile):
 
     t_Operation = [Operation, autoxml.mandatory]
 
-    def initialize(self, operation):
+    def create(self, operation):
 
         if operation not in ["upgrade", "remove", "install"]:
             raise Exception("Unknown package operation")
+        
+        self.histfile = "%s_%s.xml" % (self._get_latest(), operation)
 
         year, month, day, hour, minute = time.localtime()[0:5]
         self.operation.type = operation
         self.operation.date = "%s-%02d-%02d" % (year, month, day)
         self.operation.time = "%02d:%02d" % (hour, minute)
 
-    def add_operation(self, pkgBefore=None, pkgAfter=None, operation=None):
+    def add(self, pkgBefore=None, pkgAfter=None, operation=None):
 
         if operation not in ["upgrade", "remove", "install"]:
             raise Exception("Unknown package operation")
 
         package = Package()
         package.operation = operation
+        package.name = (pkgAfter and pkgAfter.name) or (pkgBefore and pkgBefore.name)
 
         for histInfo, pkgInfo in [(package.before, pkgBefore), (package.after, pkgAfter)]:
             if pkgInfo:
                 histInfo.version = str(pkgInfo.version)
                 histInfo.release = str(pkgInfo.release)
-                histInfo.build = build and str(pkgInfo.build)
+                histInfo.build = pkgInfo.build and str(pkgInfo.build)
 
         self.operation.packages.append(package)
+
+    def update(self):
+        self.write(os.path.join("%s/%s", ctx.config.history_dir(), self.histfile))
+
+    def _get_latest(self):
+
+        files = filter(lambda h:h.endswith(".xml"), os.listdir(ctx.config.history_dir()))
+        if not files:
+            return "001"
+
+        files.sort()
+        no, opxml = files[-1].split("_")
+        return "%03d" % (int(no) + 1)

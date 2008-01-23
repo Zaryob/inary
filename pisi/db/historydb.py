@@ -15,7 +15,9 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import piksemel
+
 import pisi.db.lazydb as lazydb
+import pisi.history
 
 class HistoryDB(lazydb.LazyDB):
 
@@ -24,3 +26,11 @@ class HistoryDB(lazydb.LazyDB):
 
     def __generate_history(self, doc):
         pass
+
+    def create(self, operation):
+        self.history = pisi.history.History()
+        self.history.create(operation)
+
+    def update(self, pkgBefore=None, pkgAfter=None, operation=None):
+        self.history.add(pkgBefore, pkgAfter, operation)
+        self.history.update()
