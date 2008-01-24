@@ -131,6 +131,9 @@ def install_pkg_files(package_URIs):
 
     # now determine if these unsatisfied dependencies could
     # be satisfied by installing packages from the repo
+    for dep in dep_unsatis:
+        if not dependency.repo_satisfies_dep(dep):
+            raise Exception(_('External dependencies not satisfied'))
 
     # if so, then invoke install_pkg_names
     extra_packages = [x.package for x in dep_unsatis]
@@ -140,7 +143,7 @@ in the respective order to satisfy extra dependencies:
 """) + util.strlist(extra_packages))
         if not ctx.ui.confirm(_('Do you want to continue?')):
             raise Exception(_('External dependencies not satisfied'))
-        install_pkg_names(extra_packages)
+        install_pkg_names(extra_packages, reinstall=True)
 
     class PackageDB:
         def get_package(self, key, repo = None):
