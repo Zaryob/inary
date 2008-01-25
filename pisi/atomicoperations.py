@@ -53,6 +53,8 @@ class AtomicOperation(object):
         "perform an atomic package operation"
         pass
 
+# possible paths of install operation
+(INSTALL, REINSTALL, UPGRADE, DOWNGRADE) = range(4)
 
 class Install(AtomicOperation):
     "Install class, provides install routines for pisi packages"
@@ -110,6 +112,7 @@ class Install(AtomicOperation):
         self.pkginfo = self.metadata.package
         self.filesdb = pisi.db.filesdb.FilesDB()
         self.installdb = pisi.db.installdb.InstallDB()
+        self.operation = INSTALL
 
     def install(self, ask_reinstall = True):
         if ctx.get_option('fetch_only'):
@@ -123,7 +126,7 @@ class Install(AtomicOperation):
         self.ask_reinstall = ask_reinstall
         self.check_requirements()
         self.check_relations()
-        self.check_reinstall()
+        self.check_operation()
         self.extract_install()
 
         ctx.disable_keyboard_interrupts()
@@ -135,7 +138,7 @@ class Install(AtomicOperation):
         ctx.enable_keyboard_interrupts()
 
         ctx.ui.close()
-        if self.upgrade:
+        if self.operation == UPGRADE:
             event = pisi.ui.upgraded
         else:
             event = pisi.ui.installed
@@ -185,14 +188,11 @@ class Install(AtomicOperation):
             else:
                 raise Error(msg)
 
-    def check_reinstall(self):
-        "check reinstall, confirm action, and schedule reinstall"
+    def check_operation(self):
 
         self.old_pkginfo = None
         pkg = self.pkginfo
 
-        self.reinstall = False
-        self.upgrade = False
         if self.installdb.has_package(pkg.name): # is this a reinstallation?
             ipkg = self.installdb.get_info(pkg.name)
             repomismatch = ipkg.distribution != pkg.distribution
@@ -213,24 +213,23 @@ class Install(AtomicOperation):
                 if self.ask_reinstall:
                     if not ctx.ui.confirm(_('Re-install same version package?')):
                         raise Error(_('Package re-install declined'))
+                self.operation = REINSTALL
             else:
-                upgrade = False
                 # is this an upgrade?
                 # determine and report the kind of upgrade: version, release, build
                 if pisi.version.Version(pkg.version) > pisi.version.Version(iversion):
                     ctx.ui.info(_('Upgrading to new upstream version'))
-                    upgrade = True
+                    self.operation = UPGRADE
                 elif pisi.version.Version(pkg.release) > pisi.version.Version(irelease):
                     ctx.ui.info(_('Upgrading to new distribution release'))
-                    upgrade = True
+                    self.operation = UPGRADE
                 elif ((not ignore_build) and ibuild and pkg.build
                        and pkg.build > ibuild):
                     ctx.ui.info(_('Upgrading to new distribution build'))
-                    upgrade = True
-                self.upgrade = upgrade
+                    self.operation = UPGRADE
 
                 # is this a downgrade? confirm this action.
-                if self.ask_reinstall and (not upgrade):
+                if self.ask_reinstall and (not self.operation == UPGRADE):
                     if pisi.version.Version(pkg.version) < pisi.version.Version(iversion):
                         #x = _('Downgrade to old upstream version?')
                         x = None
@@ -240,21 +239,24 @@ class Install(AtomicOperation):
                         x = _('Downgrade to old distribution build?')
                     if x and not ctx.ui.confirm(x):
                         raise Error(_('Package downgrade declined'))
+                    self.operation = DOWNGRADE
 
             # schedule for reinstall
             self.old_files = self.installdb.get_files(pkg.name)
             self.old_pkginfo = self.installdb.get_info(pkg.name)
             self.old_path = self.installdb.pkg_dir(pkg.name, iversion, irelease)
-            self.reinstall = True
             self.remove_old = Remove(pkg.name)
             self.remove_old.run_preremove()
+
+    def reinstall(self):
+        return not self.operation == INSTALL
 
     def postinstall(self):
         self.config_later = False
         if ctx.comar:
             import pisi.comariface
             try:
-                if self.upgrade:
+                if self.operation == UPGRADE:
                     fromVersion = self.old_pkginfo.version
                     fromRelease = self.old_pkginfo.release
                 else:
@@ -358,7 +360,7 @@ class Install(AtomicOperation):
             for path in leftover:
                     Remove.remove_file(old_fileinfo[path], self.pkginfo.name)
 
-        if self.reinstall:
+        if self.reinstall():
             # get 'config' typed file objects
             new = filter(lambda x: x.type == 'config', self.files.list)
             old = filter(lambda x: x.type == 'config', self.old_files.list)
@@ -386,7 +388,7 @@ class Install(AtomicOperation):
         if config_changed:
             rename_configs()
 
-        if self.reinstall:
+        if self.reinstall():
             clean_leftovers()
 
 
@@ -394,7 +396,7 @@ class Install(AtomicOperation):
         """put files.xml, metadata.xml, actions.py and COMAR scripts
         somewhere in the file system. We'll need these in future..."""
 
-        if self.reinstall:
+        if self.reinstall():
             util.clean_dir(self.old_path)
 
         ctx.ui.info(_('Storing %s, ') % ctx.const.files_xml, verbose=True)
@@ -412,7 +414,7 @@ class Install(AtomicOperation):
 
     def update_databases(self):
         "update databases"
-        if self.reinstall:
+        if self.reinstall():
             self.remove_old.remove_db()
 
         if self.config_later:
