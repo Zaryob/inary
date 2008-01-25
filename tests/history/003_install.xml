@@ -7,8 +7,8 @@
       <After version="6.6" release="9" build="10"/>
     </Package>
 
-    <!-- Install operation with before and after. This is a reinstalled package. -->
-    <Package operation="install">
+    <!-- This is a reinstalled package. -->
+    <Package operation="reinstall">
       <Name>rsync</Name>
       <Before version="2.6.9" release="8" build="4"/>
       <After version="2.6.9" release="12" build="7"/>
