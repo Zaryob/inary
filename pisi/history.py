@@ -72,19 +72,25 @@ class History(xmlfile.XmlFile):
 
     def add(self, pkgBefore=None, pkgAfter=None, operation=None):
 
-        if operation not in ["upgrade", "remove", "install"]:
+        if operation not in ["upgrade", "remove", "install", "reinstall", "downgrade"]:
             raise Exception("Unknown package operation")
 
         package = Package()
         package.operation = operation
         package.name = (pkgAfter and pkgAfter.name) or (pkgBefore and pkgBefore.name)
 
+        if not pkgBefore:
+            package.before = None
+
+        if not pkgAfter:
+            package.after = None
+
         for histInfo, pkgInfo in [(package.before, pkgBefore), (package.after, pkgAfter)]:
             if pkgInfo:
                 histInfo.version = str(pkgInfo.version)
                 histInfo.release = str(pkgInfo.release)
                 histInfo.build = pkgInfo.build and str(pkgInfo.build)
-
+                
         self.operation.packages.append(package)
 
     def update(self):

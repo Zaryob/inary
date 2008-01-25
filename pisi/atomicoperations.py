@@ -54,7 +54,8 @@ class AtomicOperation(object):
         pass
 
 # possible paths of install operation
-(INSTALL, REINSTALL, UPGRADE, DOWNGRADE) = range(4)
+(INSTALL, REINSTALL, UPGRADE, DOWNGRADE, REMOVE) = range(5)
+opttostr = {INSTALL:"install", REMOVE:"remove", REINSTALL:"reinstall", UPGRADE:"upgrade", DOWNGRADE:"downgrade"}
 
 class Install(AtomicOperation):
     "Install class, provides install routines for pisi packages"
@@ -425,6 +426,8 @@ class Install(AtomicOperation):
 
         # installed packages
         self.installdb.add_package(self.pkginfo)
+        
+        self.historydb.update(pkgBefore=self.old_pkginfo, pkgAfter=self.pkginfo, operation=opttostr[self.operation])
 
 def install_single(pkg, upgrade = False):
     """install a single package from URI or ID"""
@@ -478,7 +481,7 @@ class Remove(AtomicOperation):
         for fileinfo in self.files.list:
             self.remove_file(fileinfo, self.package_name)
 
-        self.remove_db()
+        self.update_databases()
 
         self.remove_pisi_files()
         ctx.ui.close()
@@ -540,6 +543,10 @@ class Remove(AtomicOperation):
                 os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
                 os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
             )
+
+    def update_databases(self):
+        self.remove_db()
+        self.historydb.update(pkgBefore=self.package, operation="remove")        
 
     def remove_pisi_files(self):
         util.clean_dir(self.package.pkg_dir())
