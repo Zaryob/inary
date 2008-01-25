@@ -1,0 +1,30 @@
+<PISI>
+
+  <Operation type="install" date="2008-01-11" time="15:20">
+
+    <Package operation="install">
+      <Name>gdb</Name>
+      <After version="6.6" release="9" build="10"/>
+    </Package>
+
+    <!-- Install operation with before and after. This is a reinstalled package. -->
+    <Package operation="install">
+      <Name>rsync</Name>
+      <Before version="2.6.9" release="8" build="4"/>
+      <After version="2.6.9" release="12" build="7"/>
+    </Package>
+
+    <Package operation="install">
+      <Name>rsync</Name>
+      <After version="2.6.9" release="12" build="7"/>
+    </Package>
+
+    <!-- In an install operation this package is removed. Probably a conflicted package. -->
+    <Package operation="remove">
+      <Name>hashalot</Name>
+      <Before version="2.3.6" release="20" build="23"/>
+    </Package>
+
+  </Operation>
+
+</PISI>
