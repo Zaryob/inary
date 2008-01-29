@@ -1,7 +1,7 @@
-Index: pisi/comariface.py
+Index: comariface.py
 ===================================================================
---- pisi/comariface.py	(revision 16759)
-+++ pisi/comariface.py	(working copy)
+--- comariface.py	(revision 16886)
++++ comariface.py	(working copy)
 @@ -25,117 +25,137 @@
      pass
  
@@ -213,11 +213,11 @@ Index: pisi/comariface.py
 +        sys_iface.remove(object_name)
 +    except dbus.DBusException, exception:
 +        raise Error, _("Script error: %s") % exception
-Index: pisi/api.py
+Index: api.py
 ===================================================================
---- pisi/api.py	(revision 16759)
-+++ pisi/api.py	(working copy)
-@@ -70,13 +70,13 @@
+--- api.py	(revision 16886)
++++ api.py	(working copy)
+@@ -71,13 +71,13 @@
      """
      ctx.comar = enable
  
@@ -235,11 +235,11 @@ Index: pisi/api.py
  
  def set_options(options):
      """ 
-Index: pisi/atomicoperations.py
+Index: atomicoperations.py
 ===================================================================
---- pisi/atomicoperations.py	(revision 16759)
-+++ pisi/atomicoperations.py	(working copy)
-@@ -146,7 +146,7 @@
+--- atomicoperations.py	(revision 16886)
++++ atomicoperations.py	(working copy)
+@@ -152,7 +152,7 @@
          # check comar
          if self.metadata.package.providesComar and ctx.comar:
              import pisi.comariface as comariface
@@ -248,10 +248,10 @@ Index: pisi/atomicoperations.py
  
      def check_relations(self):
          # check dependencies
-Index: pisi/context.py
+Index: context.py
 ===================================================================
---- pisi/context.py	(revision 16759)
-+++ pisi/context.py	(working copy)
+--- context.py	(revision 16886)
++++ context.py	(working copy)
 @@ -38,7 +38,7 @@
  stderr = None
  
