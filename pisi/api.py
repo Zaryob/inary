@@ -489,7 +489,7 @@ def update_repo(repo, force=False):
         try:
             index.read_uri_of_repo(repouri, repo)
         except pisi.file.AlreadyHaveException, e:
-            ctx.ui.info(_('No updates available for repository %s.') % repo)
+            ctx.ui.info(_('%s repository information is up-to-date.') % repo)
             if force:
                 ctx.ui.info(_('Updating database at any rate as requested'))
                 index.read_uri_of_repo(repouri, repo, force = force)
