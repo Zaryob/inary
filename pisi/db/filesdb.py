@@ -45,7 +45,7 @@ class FilesDB(lazydb.LazyDB):
         found = []
         for pkg in installdb.list_installed():
             files_xml = open(os.path.join(installdb.package_path(pkg), ctx.const.files_xml)).read()
-            paths = re.compile('<Path>(.*?%s.*?)</Path>' % term, re.I).findall(files_xml)
+            paths = re.compile('<Path>(.*?%s.*?)</Path>' % re.escape(term), re.I).findall(files_xml)
             if paths:
                 found.append((pkg, paths))
         return found
