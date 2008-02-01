@@ -148,7 +148,7 @@ class Fetcher:
 
         if os.stat(self.partial_file).st_size == 0:
             os.remove(self.partial_file)
-            FetchError(_('A problem occurred. Please check the archive address and/or permissions again.'))
+            raise FetchError(_('A problem occurred. Please check the archive address and/or permissions again.'))
 
         shutil.move(self.partial_file, self.archive_file)
 
