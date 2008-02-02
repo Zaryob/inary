@@ -2,16 +2,15 @@
 # Andre van der Lubben <klikspin@gmail.com>, 2006.
 # Willem Gielen <w.gielen@gmail.com>, 2006, 2007.
 # Rinse de Vries <rinsedevries@kde.nl>, 2006.
-# W.P.M.H.I.A. Gielen <w.gielen@gmail.com>, 2006, 2007.
-# Copyright (C) 2005, 2006, 2007 Free Software Foundation, Inc.
+# W.P.M.H.I.A. Gielen <w.gielen@gmail.com>, 2006, 2007, 2008.
+# Copyright (C) 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "POT-Creation-Date: 2008-01-31 16:42+EET\n"
-"PO-Revision-Date: 2007-11-24 12:15+0100\n"
+"PO-Revision-Date: 2008-02-02 19:03+0100\n"
 "Last-Translator: W.P.M.H.I.A. Gielen <w.gielen@gmail.com>\n"
-"Language-Team: Nederlands <http://liste.pardus.org.tr/pardus-translation-nl/"
-">\n"
+"Language-Team: Nederlands <http://liste.pardus.org.tr/pardus-translation-nl/>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -752,7 +751,7 @@ msgstr "* Updaten repository: %s "
 
 #: pisi/api.py:492
 msgid "%s repository information is up-to-date."
-msgstr ""
+msgstr "%s repository informatie is nog recent."
 
 #: pisi/api.py:494
 msgid "Updating database at any rate as requested"
@@ -884,8 +883,7 @@ msgid "Not removing conflicted file : %s"
 msgstr "Niet verwijderen conflicterend bestand: %s"
 
 #: pisi/atomicoperations.py:529
-msgid ""
-"Installed file %s is not exists on system [Probably you manually deleted]"
+msgid "Installed file %s is not exists on system [Probably you manually deleted]"
 msgstr ""
 "Geïnstalleerd bestand %s bestaat niet op systeem [mogelijk met de hand "
 "verwijderd]"
@@ -977,8 +975,7 @@ msgid "Create a static package with ar files"
 msgstr "Maak een statisch pakket met ar-bestanden aan"
 
 #: pisi/cli/build.py:70
-msgid ""
-"Do not install build dependencies, fail if a build dependency is present"
+msgid "Do not install build dependencies, fail if a build dependency is present"
 msgstr ""
 "Installeer geen bouwafhankelijkheden, stoppen als zich een "
 "compileerafhankelijkheid voordoet"
@@ -1348,8 +1345,7 @@ msgstr "Toon gedetailleerde installatie-informatie"
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/listinstalled.py:65 pisi/cli/listupgrades.py:69
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
 msgstr "Pakketnaam     |St|   Versie|  Rel.| Bouw |  Distro|             Datum"
 
 #: pisi/cli/listpending.py:43
@@ -1855,8 +1851,7 @@ msgid "unable to call function from actions: %s"
 msgstr "kan functie niet aanroepen vanuit actions: %s"
 
 #: pisi/operations/build.py:482
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Veiligheidsprocedure: de volgende extra pakketten in system.devel zullen "
 "geïnstalleerd worden:"
@@ -1967,10 +1962,8 @@ msgid "Abandoned files under the install dir (%s):"
 msgstr "Verlaten bestanden in de installatiemap (%s):"
 
 #: pisi/operations/build.py:932
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
-msgstr ""
-"Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)."
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
+msgstr "Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)."
 
 #: pisi/operations/build.py:936
 msgid "Cleaning Build Directory..."
@@ -2404,9 +2397,8 @@ msgid "strip command failed for file '%s'!"
 msgstr "Commando 'strip' mislukte voor bestand '%s'!"
 
 #: pisi/util.py:533
-#, fuzzy
 msgid "chrpath command failed for file '%s'!"
-msgstr "Commando 'strip' mislukte voor bestand '%s'!"
+msgstr "chrpath commando 'mislukte voor bestand '%s'!"
 
 #: pisi/util.py:540
 msgid "objcopy (keep-debug) command failed for file '%s'!"
@@ -2437,10 +2429,8 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-msgstr ""
-"Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgstr "Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
 
 #: scripts/repostats.py:467
 msgid ""
@@ -2466,5 +2456,3 @@ msgstr "Scannen bron-repository...\n"
 msgid "Scanning binary packages...\n"
 msgstr "Scannen binaire pakketten...\n"
 
-#~ msgid "No updates available for repository %s."
-#~ msgstr "Geen bijgewerkte pakketten in repository %s."
