@@ -196,7 +196,7 @@ class ArchiveTar(ArchiveBase):
 
             ret, out, err = util.run_batch(batch)
             if ret != 0:
-                raise LzmaRunTimeError(err)
+                raise LzmaRuntimeError(err)
 
 
 class MyZipFile(zipfile.ZipFile):
