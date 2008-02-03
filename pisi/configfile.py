@@ -78,9 +78,9 @@ class BuildDefaults:
     host = "i686-pc-linux-gnu"
     jobs = "-j1"
     generateDebug = False
-    cflags = "-mtune=i686 -O2 -pipe -fomit-frame-pointer"
-    cxxflags = "-mtune=i686 -O2 -pipe -fomit-frame-pointer"
-    ldflags = ""
+    cflags = "-mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -fpie"
+    cxxflags = "-mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -fpie"
+    ldflags = "-pie -Wl,-z,relro"
     buildno = False
     buildhelper = None
     compressionlevel = 7
