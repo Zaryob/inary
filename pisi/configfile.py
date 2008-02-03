@@ -27,7 +27,7 @@
 #jobs = "-j1"
 #CFLAGS= -mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -fpie
 #CXXFLAGS= -mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -fpie
-#LDFLAGS= -pie -Wl,-z,relro
+#LDFLAGS= -pie -Wl,-O1 -Wl,-z,relro
 #buildno=True     # necessary for generating build nos
 #buildhelper = None / ccache / icecream
 #compressionlevel = 7
@@ -80,7 +80,7 @@ class BuildDefaults:
     generateDebug = False
     cflags = "-mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -fpie"
     cxxflags = "-mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -fpie"
-    ldflags = "-pie -Wl,-z,relro"
+    ldflags = "-pie -Wl,-O1 -Wl,-z,relro"
     buildno = False
     buildhelper = None
     compressionlevel = 7
