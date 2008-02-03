@@ -25,8 +25,8 @@
 #host = i686-pc-linux-gnu
 #generateDebug = False
 #jobs = "-j1"
-#CFLAGS= -mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -fpie
-#CXXFLAGS= -mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -fpie
+#CFLAGS= -mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -fpie -D_FORTIFY_SOURCE=2
+#CXXFLAGS= -mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -fpie -D_FORTIFY_SOURCE=2
 #LDFLAGS= -pie -Wl,-O1 -Wl,-z,relro
 #buildno=True     # necessary for generating build nos
 #buildhelper = None / ccache / icecream
@@ -78,8 +78,8 @@ class BuildDefaults:
     host = "i686-pc-linux-gnu"
     jobs = "-j1"
     generateDebug = False
-    cflags = "-mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -fpie"
-    cxxflags = "-mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -fpie"
+    cflags = "-mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -fpie -D_FORTIFY_SOURCE=2"
+    cxxflags = "-mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -fpie -D_FORTIFY_SOURCE=2"
     ldflags = "-pie -Wl,-O1 -Wl,-z,relro"
     buildno = False
     buildhelper = None
