@@ -26,6 +26,7 @@ from pisi.actionsapi.shelltools import system
 from pisi.actionsapi.shelltools import can_access_file
 from pisi.actionsapi.shelltools import unlink
 from pisi.actionsapi.libtools import gnuconfig_update
+from pisi.actionsapi.libtools import libtoolize
 
 class ConfigureError(pisi.actionsapi.Error):
     def __init__(self, value=''):
@@ -57,6 +58,9 @@ def configure(parameters = ''):
     '''configure source with given parameters = "--with-nls --with-libusb --with-something-usefull"'''
     if can_access_file('configure'):
         gnuconfig_update()
+
+    if can_access_file('ltmain.sh'):
+        libtoolize("--copy --force")
 
         args = './configure \
                 --prefix=/%s \
