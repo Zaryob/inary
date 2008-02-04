@@ -56,11 +56,12 @@ class RunTimeError(pisi.actionsapi.Error):
 
 def configure(parameters = ''):
     '''configure source with given parameters = "--with-nls --with-libusb --with-something-usefull"'''
-    if can_access_file('configure'):
-        gnuconfig_update()
 
     if can_access_file('ltmain.sh'):
         libtoolize("--copy --force")
+
+    if can_access_file('configure'):
+        gnuconfig_update()
 
         args = './configure \
                 --prefix=/%s \
