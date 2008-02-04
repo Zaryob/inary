@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005 - 2008, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -65,7 +65,7 @@ class GeneralDefaults:
     destinationdirectory = "/"
     autoclean = False
     distribution = "Pardus"
-    distribution_release = "2007"
+    distribution_release = "2008"
     architecture = "i686"
     http_proxy = os.getenv("HTTP_PROXY") or None
     https_proxy = os.getenv("HTTPS_PROXY") or None
