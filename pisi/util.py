@@ -563,7 +563,7 @@ def strip_file(filepath, outpath):
             check_dir(os.path.dirname(outpath))
             save_elf_debug(filepath, outpath)
         run_strip(filepath, "--strip-unneeded")
-        run_chrpath(filepath)
+        # run_chrpath(filepath)
         # FIXME: warn for TEXTREL
         return True
 
