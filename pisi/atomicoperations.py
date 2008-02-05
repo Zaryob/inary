@@ -230,7 +230,7 @@ class Install(AtomicOperation):
                     self.operation = UPGRADE
 
                 # is this a downgrade? confirm this action.
-                if self.ask_reinstall and (not self.operation == UPGRADE):
+                if not self.operation == UPGRADE:
                     if pisi.version.Version(pkg.version) < pisi.version.Version(iversion):
                         #x = _('Downgrade to old upstream version?')
                         x = None
@@ -238,7 +238,7 @@ class Install(AtomicOperation):
                         x = _('Downgrade to old distribution release?')
                     else:
                         x = _('Downgrade to old distribution build?')
-                    if x and not ctx.ui.confirm(x):
+                    if self.ask_reinstall and x and not ctx.ui.confirm(x):
                         raise Error(_('Package downgrade declined'))
                     self.operation = DOWNGRADE
 
