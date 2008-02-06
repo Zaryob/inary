@@ -116,21 +116,24 @@ Usage: info <package1> <package2> ... <packagen>
             else:
                 print "/" + fileinfo.path
 
-    def print_metadata(self, metadata, packagedb):
+    def print_metadata(self, metadata, packagedb=None):
         if ctx.get_option('short'):
             pkg = metadata.package
             ctx.ui.info('%15s - %s' % (pkg.name, unicode(pkg.summary)))
         else:
             ctx.ui.info(unicode(metadata.package))
-            
-            revdeps =  [name for name, dep in packagedb.get_rev_deps(metadata.package.name)]
-            print _('Reverse Dependencies:'), util.strlist(revdeps)
-            print
-            
+            if packagedb:
+                revdeps =  [name for name, dep in packagedb.get_rev_deps(metadata.package.name)]
+                print _('Reverse Dependencies:'), util.strlist(revdeps)
+                print
+
     def pisifile_info(self, package):
         metadata, files = pisi.api.info_file(package)
         ctx.ui.info(_('Package file: %s') % package)
-        self.print_pkginfo(metadata, files)
+
+        self.print_metadata(metadata)
+        if self.options.files or self.options.files_path:
+            self.print_files(files)
         
     def installdb_info(self, package):
         if self.installdb.has_package(package):
