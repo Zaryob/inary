@@ -697,7 +697,7 @@ class Builder:
             if pisi.util.is_package_name(os.path.basename(old_package_fn), package_name):
                 try:
                     old_pkg = pisi.package.Package(old_package_fn, 'r')
-                    old_pkg.read(pisi.util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
+                    old_pkg.read()
                     ctx.ui.info(_('(found old version %s)') % old_package_fn)
                     if str(old_pkg.metadata.package.name) != package_name:
                         ctx.ui.warning(_('Skipping %s with wrong pkg name ') %
@@ -733,7 +733,7 @@ class Builder:
 
                 # compare old files.xml with the new one..
                 old_pkg = pisi.package.Package(old_package_fn, 'r')
-                old_pkg.read(pisi.util.join_path(ctx.config.tmp_dir(), 'oldpkg'))
+                old_pkg.read()
 
                 changed = False
                 fnew = self.files.list

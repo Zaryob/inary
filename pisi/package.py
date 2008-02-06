@@ -121,24 +121,9 @@ class Package:
         files.parse(self.impl.read_file(ctx.const.files_xml))
         return files
 
-    def read(self, outdir = None):
-        if not outdir:
-            outdir = ctx.config.tmp_dir()
-
-        # extract control files
-        self.extract_pisi_files(outdir)
-
-        self.metadata = pisi.metadata.MetaData()
-        self.metadata.read( os.path.join(outdir, ctx.const.metadata_xml) )
-        errs = self.metadata.errors()
-        if errs:
-            util.print_errors(errs)
-            raise Error, _("MetaData format wrong")
-
-        self.files = pisi.files.Files()
-        self.files.read( os.path.join(outdir, ctx.const.files_xml) )
-        if self.files.errors():
-            raise Error, _("Invalid %s") % ctx.const.files_xml
+    def read(self):
+        self.files = self.get_files()
+        self.metadata = self.get_metadata()
 
     def pkg_dir(self):
         packageDir = self.metadata.package.name + '-' \
