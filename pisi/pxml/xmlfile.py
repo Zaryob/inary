@@ -62,23 +62,19 @@ class XmlFile(object):
         except Exception, e:
             raise Error(_("String '%s' has invalid XML") % (xml))
 
-    def readxmlfile(self, f):
-        raise Exception("not implemented")
-        try:
-            self.doc = iks.parse(f)
-            return self.doc
-        except Exception, e:
-            raise Error(_("File '%s' has invalid XML") % (f) )
-
-
     def readxml(self, uri, tmpDir='/tmp', sha1sum=False,
                 compress=None, sign=None, copylocal = False):
+
         uri = pisi.file.File.make_uri(uri)
-        #try:
-        localpath = pisi.file.File.download(uri, tmpDir, sha1sum=sha1sum,
-                                  compress=compress,sign=sign, copylocal=copylocal)
-        #except IOError, e:
-        #    raise Error(_("Cannot read URI %s: %s") % (uri, unicode(e)) )
+
+        if uri.is_local_file():
+            # this is a local file
+            localpath = uri.path()
+        else:
+            # this is a remote file, first download it into tmpDir
+            localpath = pisi.file.File.download(uri, tmpDir, sha1sum=sha1sum, 
+                                                compress=compress,sign=sign, copylocal=copylocal)
+
         try:
             self.doc = iks.parse(localpath)
             return self.doc
