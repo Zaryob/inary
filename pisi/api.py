@@ -86,11 +86,12 @@ def set_options(options):
     
            >>> options = pisi.config.Options()
     
-           options.destdir  # pisi destination directory where operations will take effect
-           options.username # username that for reaching remote repository
-           options.password # password that for reaching remote repository
-           options.debug    # flag controlling debug output
-           options.verbose  # flag controlling verbosity of the output messages
+           options.destdir     # pisi destination directory where operations will take effect
+           options.username    # username that for reaching remote repository
+           options.password    # password that for reaching remote repository
+           options.debug       # flag controlling debug output
+           options.verbose     # flag controlling verbosity of the output messages
+           options.output_dir  # build and delta operations package output directory
     """
     ctx.config = pisi.config.Config(options)
 
