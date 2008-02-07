@@ -86,9 +86,17 @@ class Package:
 
     def extract_install(self, outdir):
         if self.impl.has_file(ctx.const.install_tar_lzma):
+            lzmafile = os.path.join(ctx.config.tmp_dir(), ctx.const.install_tar_lzma)
             self.extract_file(ctx.const.install_tar_lzma, ctx.config.tmp_dir())
-            tar = archive.ArchiveTar(os.path.join(ctx.config.tmp_dir(), ctx.const.install_tar_lzma), 'tarlzma', False, False)
+            tar = archive.ArchiveTar(lzmafile, 'tarlzma', False, False)
             tar.unpack_dir(outdir)
+
+            # cleanup install.tar.lzma and install.tar after installing
+            if os.path.exists(lzmafile):
+                os.unlink(lzmafile)
+            lzmafile = lzmafile.rstrip(ctx.const.lzma_suffix)
+            if os.path.exists(lzmafile):
+                os.unlink(lzmafile.rstrip(lzmafile)
         else:
             self.extract_dir_flat('install', outdir)
 
