@@ -432,17 +432,20 @@ def check(package):
     md, files = info(package, True)
     corrupt = []
     for f in files.list:
-        if f.hash and f.type != "config" \
-           and not os.path.islink('/' + f.path):
-            ctx.ui.info(_("Checking /%s ") % f.path, noln=True, verbose=True)
-            try:
-                if f.hash != pisi.util.sha1_file('/' + f.path):
-                    corrupt.append(f)
-                    ctx.ui.error(_("\nCorrupt file: %s") % f)
-                else:
-                    ctx.ui.info(_("OK"), verbose=True)
-            except pisi.util.FileError,e:
-                ctx.ui.error("\n%s" % e)
+        ctx.ui.info(_("Checking /%s ") % f.path, noln=True, verbose=True)
+        if os.path.exists("/%s" % f.path):
+            if f.hash and f.type != "config" and not os.path.islink("/%s" % f.path):
+                try:
+                    if f.hash != pisi.util.sha1_file("/%s" % f.path):
+                        corrupt.append(f)
+                        ctx.ui.error(_("\nCorrupt file: %s") % ("/%s" %f.path))
+                    else:
+                        ctx.ui.info(_("OK"), verbose=True)
+                except pisi.util.FileError,e:
+                    ctx.ui.error("\n%s" % e)
+        else:
+            corrupt.append(f)
+            ctx.ui.error(_("\nMissing file: %s") % ("/%s" % f.path))
     return corrupt
 
 def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=False):
