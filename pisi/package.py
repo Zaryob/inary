@@ -96,7 +96,7 @@ class Package:
                 os.unlink(lzmafile)
             lzmafile = lzmafile.rstrip(ctx.const.lzma_suffix)
             if os.path.exists(lzmafile):
-                os.unlink(lzmafile.rstrip(lzmafile)
+                os.unlink(lzmafile)
         else:
             self.extract_dir_flat('install', outdir)
 
