@@ -29,10 +29,7 @@ class PackageInfo:
     a_build = [autoxml.String, autoxml.optional]
 
     def __str__(self):
-        vrb = self.version + "-" + self.release
-        if self.build:
-            vrb += "-" + self.build
-        return vrb
+        return self.version + "-" + self.release + "-" + (self.build or '?')
 
 class Package:
 
