@@ -29,7 +29,10 @@ class PackageInfo:
     a_build = [autoxml.String, autoxml.optional]
 
     def __str__(self):
-        return self.version + "-" + self.release + "-" + self.build
+        vrb = self.version + "-" + self.release
+        if self.build:
+            vrb += "-" + self.build
+        return vrb
 
 class Package:
 
@@ -38,6 +41,22 @@ class Package:
     t_Name = [autoxml.String, autoxml.mandatory]
     t_Before = [PackageInfo, autoxml.optional]
     t_After = [PackageInfo, autoxml.optional]
+
+    def __str__(self):
+        # "upgrade", "remove", "install", "reinstall", "downgrade"
+        operation = ""
+        if self.operation == "upgrade":
+            return "%s is upgraded from %s to %s." % (self.name, self.before, self.after)
+        elif self.operation == "remove":
+            return "%s %s is removed." % (self.name, self.before)
+        elif self.operation == "install":
+            return "%s %s is installed." % (self.name, self.after)
+        elif self.operation == "reinstall":
+            return "%s %s is reinstalled." % (self.name, self.after)
+        elif self.operation == "downgrade":
+            return "%s is downgraded from %s to %s." % (self.name, self.before, self.after)
+        else:
+            return ""
 
 class Operation:
 
