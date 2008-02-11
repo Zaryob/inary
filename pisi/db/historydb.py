@@ -31,15 +31,21 @@ class HistoryDB(lazydb.LazyDB):
         logs.sort()
         return logs
 
-    def create(self, operation):
+    def create_history(self, operation):
         self.history = pisi.history.History()
         self.history.create(operation)
 
-    def update(self, pkgBefore=None, pkgAfter=None, operation=None):
+    def add_and_update(self, pkgBefore=None, pkgAfter=None, operation=None):
+        self.add_package(pkgBefore, pkgAfter, operation)
+        self.update_history()
+
+    def add_package(self, pkgBefore=None, pkgAfter=None, operation=None):
         self.history.add(pkgBefore, pkgAfter, operation)
+
+    def update_history(self):
         self.history.update()
 
-    def latest_operations(self, count=0):
+    def get_last(self, count=0):
         if not count or count > len(self.__logs):
             count = len(self.__logs)
 

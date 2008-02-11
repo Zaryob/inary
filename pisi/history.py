@@ -76,7 +76,7 @@ class History(xmlfile.XmlFile):
 
     def create(self, operation):
 
-        if operation not in ["upgrade", "remove", "install"]:
+        if operation not in ["upgrade", "remove", "install", "snapshot"]:
             raise Exception("Unknown package operation")
         
         self.histfile = "%s_%s.xml" % (self._get_latest(), operation)
@@ -88,7 +88,7 @@ class History(xmlfile.XmlFile):
 
     def add(self, pkgBefore=None, pkgAfter=None, operation=None):
 
-        if operation not in ["upgrade", "remove", "install", "reinstall", "downgrade"]:
+        if operation not in ["upgrade", "remove", "install", "reinstall", "downgrade", "snapshot"]:
             raise Exception("Unknown package operation")
 
         package = Package()

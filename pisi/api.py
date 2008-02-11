@@ -262,7 +262,6 @@ def search_file(term):
         term = term[1:]
     return filesdb.search_file(term)
 
-
 def install(packages, reinstall=False, ignore_file_conflicts=False):
     """
     Returns True if no errors occured during the operation
@@ -272,7 +271,7 @@ def install(packages, reinstall=False, ignore_file_conflicts=False):
     packages.
     """
 
-    historydb = pisi.db.historydb.HistoryDB().create("install")
+    pisi.db.historydb.HistoryDB().create_history("install")
 
     if not ctx.get_option('ignore_file_conflicts'):
         ctx.set_option('ignore_file_conflicts', ignore_file_conflicts)
@@ -282,6 +281,23 @@ def install(packages, reinstall=False, ignore_file_conflicts=False):
         return pisi.operations.install.install_pkg_files(packages)
     else:
         return pisi.operations.install.install_pkg_names(packages, reinstall)
+
+def snapshot():
+    """
+    Takes snapshot of the system packages. The snapshot is only a record of which packages are currently
+    installed. The record is kept by pisi history mechanism as it works automatically on install, remove 
+    and upgrade operations.
+    """
+    
+    installdb = pisi.db.installdb.InstallDB() 
+    historydb = pisi.db.historydb.HistoryDB()
+    historydb.create_history("snapshot")
+
+    for name in installdb.list_installed():
+        package = installdb.get_package(name)
+        historydb.add_package(pkgBefore=package, operation="snapshot")
+
+    historydb.update_history()
 
 # ****** Danger Zone Below! Tressspassers' eyes will explode! ********** #
 
@@ -576,11 +592,11 @@ def rebuild_db(files=False):
 # from pisi.atomicoperations import resurrect_package, build
 
 def remove(*args, **kw):
-    pisi.db.historydb.HistoryDB().create("remove")
+    pisi.db.historydb.HistoryDB().create_history("remove")
     return pisi.operations.remove.remove(*args, **kw)
 
 def upgrade(*args, **kw):
-    pisi.db.historydb.HistoryDB().create("upgrade")
+    pisi.db.historydb.HistoryDB().create_history("upgrade")
     return pisi.operations.upgrade.upgrade(*args, **kw)
 
 def emerge(*args, **kw):

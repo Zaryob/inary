@@ -427,7 +427,7 @@ class Install(AtomicOperation):
         # installed packages
         self.installdb.add_package(self.pkginfo)
         
-        self.historydb.update(pkgBefore=self.old_pkginfo, pkgAfter=self.pkginfo, operation=opttostr[self.operation])
+        self.historydb.add_and_update(pkgBefore=self.old_pkginfo, pkgAfter=self.pkginfo, operation=opttostr[self.operation])
 
 def install_single(pkg, upgrade = False):
     """install a single package from URI or ID"""
@@ -546,7 +546,7 @@ class Remove(AtomicOperation):
 
     def update_databases(self):
         self.remove_db()
-        self.historydb.update(pkgBefore=self.package, operation="remove")        
+        self.historydb.add_and_update(pkgBefore=self.package, operation="remove")        
 
     def remove_pisi_files(self):
         util.clean_dir(self.package.pkg_dir())

@@ -46,13 +46,29 @@ Lists previous operations."""
     def add_options(self, group):
         group.add_option("-l", "--last", action="store", type="int", default=0,
                          help=_("Output only the last n operations"))
+        group.add_option("-s", "--snapshot", action="store_true", default=False,
+                         help=_("Take snapshot of the current system"))
+
+    def take_snapshot(self):
+        pisi.api.snapshot()
+
+    def print_history(self):
+        for operation in self.historydb.get_last(ctx.get_option('last')):
+            print _("Operation: %s") % operation.type
+            print _("Date: %s %s") % (operation.date, operation.time)
+            print
+
+            if operation.type == "snapshot":
+                print _("    * There are %d packages in this snapshot.") % len(operation.packages)
+            else:
+                for pkg in operation.packages:
+                    print "    *", pkg
+            print
 
     def run(self):
         self.init(database = False, write = False)
-        for operation in self.historydb.latest_operations(ctx.get_option('last')):
-            print "Operation: %s" % operation.type
-            print "Date: %s %s" % (operation.date, operation.time)
-            print
-            for pkg in operation.packages:
-                print "    *", pkg
-            print
+
+        if ctx.get_option('snapshot'):
+            self.take_snapshot()
+        else:
+            self.print_history()
