@@ -60,8 +60,9 @@ class PackageDB(lazydb.LazyDB):
     def __generate_obsoletes(self, doc):
         distribution = doc.getTag("Distribution")
         obsoletes = distribution and distribution.getTag("Obsoletes")
-
-        if not obsoletes:
+        src_repo = doc.getTag("SpecFile") is not None
+        
+        if not obsoletes or src_repo:
             return []
 
         return map(lambda x: x.firstChild().data(), obsoletes.tags("Package"))
