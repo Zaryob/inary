@@ -2,7 +2,7 @@ Index: pisi/comariface.py
 ===================================================================
 --- pisi/comariface.py	(revision 17117)
 +++ pisi/comariface.py	(working copy)
-@@ -25,117 +25,146 @@
+@@ -25,117 +25,151 @@
      pass
  
  try:
@@ -28,6 +28,8 @@ Index: pisi/comariface.py
 +    for char in package:
 +        if not is_char_valid(char):
 +            object = object.replace(char, '_')
++    if object[0].isdigit():
++        object = '_%s' % object
 +    return object
 +
 +def get_iface(package="", model=""):
@@ -179,6 +181,9 @@ Index: pisi/comariface.py
 +            if not (exception._dbus_error_name.startswith("tr.org.pardus.comar") and
 +               exception._dbus_error_name.split('tr.org.pardus.comar.')[1] == 'python.missing'):
 +                raise Error, _("Script error: %s") % exception
++    
++    if package_name == 'comar':
++        pisi.api.set_comar_destination('tr.org.pardus.comar.new')
  
  def pre_remove(package_name, metapath, filepath):
      """Do package's pre removal operations"""
