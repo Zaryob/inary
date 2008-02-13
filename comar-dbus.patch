@@ -196,7 +196,7 @@ Index: pisi/comariface.py
 +                except dbus.DBusException, exception:
 +                    raise Error, _("Script error: %s") % exception
 +    
-+    if package_name == 'kdemultimedia':
++    if package_name == 'comar':
 +        pisi.api.set_comar_destination('tr.org.pardus.comar.new')
  
  def pre_remove(package_name, metapath, filepath):
