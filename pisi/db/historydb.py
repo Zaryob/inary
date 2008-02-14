@@ -29,6 +29,7 @@ class HistoryDB(lazydb.LazyDB):
     def __generate_history(self):
         logs = os.listdir(ctx.config.history_dir())
         logs.sort()
+        logs.reverse()
         return logs
 
     def create_history(self, operation):
@@ -46,9 +47,7 @@ class HistoryDB(lazydb.LazyDB):
         self.history.update()
 
     def get_last(self, count=0):
-        if not count or count > len(self.__logs):
-            count = len(self.__logs)
-
-        for log in self.__logs[-count:]:
+        count = count or len(self.__logs)
+        for log in self.__logs[:count]:
             hist = pisi.history.History(os.path.join(ctx.config.history_dir(), log))
             yield hist.operation
