@@ -479,7 +479,7 @@ class Remove(AtomicOperation):
 
         self.run_preremove()
         for fileinfo in self.files.list:
-            self.remove_file(fileinfo, self.package_name)
+            self.remove_file(fileinfo, self.package_name, True)
 
         self.update_databases()
 
@@ -495,7 +495,11 @@ class Remove(AtomicOperation):
         # is there any package who depends on this package?
 
     @staticmethod
-    def remove_file(fileinfo, package_name):
+    def remove_file(fileinfo, package_name, remove_permanent=False):
+
+        if fileinfo.permanent and not remove_permanent:
+            return
+        
         fpath = pisi.util.join_path(ctx.config.dest_dir(), fileinfo.path)
 
         filesdb = pisi.db.filesdb.FilesDB()
@@ -509,10 +513,7 @@ class Remove(AtomicOperation):
                 ctx.ui.warning(_('Not removing conflicted file : %s') % fpath)
                 return
 
-        if fileinfo.permanent:
-            # do not remove precious files :)
-            pass
-        elif fileinfo.type == ctx.const.conf:
+        if fileinfo.type == ctx.const.conf:
             # config files are precious, leave them as they are
             # unless they are the same as provided by package.
             try:
