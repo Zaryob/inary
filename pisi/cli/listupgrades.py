@@ -10,6 +10,7 @@
 # Please read the COPYING file.
 #
 
+import os
 import optparse
 
 import gettext
@@ -50,6 +51,34 @@ Lists the packages that will be upgraded.
                                default=False, help=_("Show detailed install info"))
         self.parser.add_option_group(group)
 
+    def exclude_from(self, packages, exfrom):
+        patterns = []
+        if os.path.exists(exfrom):
+            for line in open(exfrom, "r").readlines():
+                if not line.startswith('#') and not line == '\n':
+                    patterns.append(line.strip())
+            if patterns:
+                return self.exclude(packages, patterns)
+
+        return packages
+
+    def exclude(self, packages, patterns):
+        from sets import Set as set
+        import fnmatch
+
+        packages = set(packages)
+        for pattern in patterns:
+            # match pattern in package names
+            match = fnmatch.filter(packages, pattern)
+            packages = packages - set(match)
+
+            if not match:
+                # match pattern in component names
+                for compare in fnmatch.filter(self.componentdb.list_components(), pattern):
+                    packages = packages - set(self.componentdb.get_union_packages(compare, walk=True))
+
+        return list(packages)
+
     def run(self):
         self.init(database = True, write = False)
         upgradable_pkgs = pisi.api.list_upgradable()
@@ -60,6 +89,9 @@ Lists the packages that will be upgraded.
             from sets import Set as set
             component_pkgs = self.componentdb.get_union_packages(component, walk=True)
             upgradable_pkgs = list(set(upgradable_pkgs) & set(component_pkgs))
+
+        if os.path.exists(ctx.const.blacklist):
+            upgradable_pkgs = self.exclude_from(upgradable_pkgs, ctx.const.blacklist)
 
         if not upgradable_pkgs:
             ctx.ui.info(_('No packages to upgrade.'))
