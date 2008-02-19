@@ -5,12 +5,13 @@
 # Mustafa M. Ölcerman <oelcerman@fussballkreis.org>, 2006.
 # Mustafa Muhammed Ölcerman <mustafa.oelcerman@fk-koeln.de>, 2007.
 # Mustafa Ölcerman <mustafa.oelcerman@fk-koeln.de>, 2007.
+# Mustafa Ölcerman <m.oelcerman@pardus-linux.de>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "POT-Creation-Date: 2008-01-31 16:42+EET\n"
-"PO-Revision-Date: 2007-12-17 03:29+0200\n"
-"Last-Translator: Mustafa Ölcerman <mustafa.oelcerman@fk-koeln.de>\n"
+"PO-Revision-Date: 2008-02-19 19:57+0200\n"
+"Last-Translator: Mustafa Ölcerman <m.oelcerman@pardus-linux.de>\n"
 "Language-Team: Deutsch <pardus-translation-de@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -762,7 +763,7 @@ msgstr "* Depot wird aktualisiert: %s"
 
 #: pisi/api.py:492
 msgid "%s repository information is up-to-date."
-msgstr ""
+msgstr "%s-Depotinformation ist aktuell."
 
 #: pisi/api.py:494
 msgid "Updating database at any rate as requested"
@@ -891,8 +892,7 @@ msgid "Not removing conflicted file : %s"
 msgstr "Konfliktierende Datei wird nicht entfernt: %s"
 
 #: pisi/atomicoperations.py:529
-msgid ""
-"Installed file %s is not exists on system [Probably you manually deleted]"
+msgid "Installed file %s is not exists on system [Probably you manually deleted]"
 msgstr ""
 "Installierte Datei %s existiert nicht in dem System [ist wahrscheinlich per "
 "Hand gelöscht worden]"
@@ -983,8 +983,7 @@ msgid "Create a static package with ar files"
 msgstr "Eine statisches Paket mit ar Dateien erstellen"
 
 #: pisi/cli/build.py:70
-msgid ""
-"Do not install build dependencies, fail if a build dependency is present"
+msgid "Do not install build dependencies, fail if a build dependency is present"
 msgstr ""
 "Build - Abhängigkeiten nicht installieren, Fehler bei Anwesenheit einer "
 "Build-Abhängigkeit"
@@ -1353,10 +1352,8 @@ msgid "Show detailed install info"
 msgstr "Detaillierte Installationsinfo anzeigen"
 
 #: pisi/cli/listinstalled.py:65 pisi/cli/listupgrades.py:69
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr ""
-"Paketname          |St|   Version|  Rel.| Build|  Distro|             Datum"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr "Paketname          |St|   Version|  Rel.| Build|  Distro|             Datum"
 
 #: pisi/cli/listpending.py:43
 msgid "There are no packages waiting to be configured"
@@ -1782,8 +1779,7 @@ msgstr "PiSi Quell-Paket wird konstruiert: %s"
 
 #: pisi/operations/build.py:234
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr ""
-"IceCream entdeckt. Stellen Sie sicher, dass Ihr Daemon gestartet ist..."
+msgstr "IceCream entdeckt. Stellen Sie sicher, dass Ihr Daemon gestartet ist..."
 
 #: pisi/operations/build.py:239
 msgid "CCache detected..."
@@ -1862,8 +1858,7 @@ msgid "unable to call function from actions: %s"
 msgstr "nicht in der Lage, die Funktion vom Vorgang aufzurufen: %s"
 
 #: pisi/operations/build.py:482
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Sicherheitsschalter: Folgende extra Pakete in system.devel werden "
 "installiert: "
@@ -1874,8 +1869,7 @@ msgstr "Sicherheitsschalter: system.devel ist bereits installiert"
 
 #: pisi/operations/build.py:489
 msgid "Safety switch: the component system.devel cannot be found"
-msgstr ""
-"Sicherheitsschalter: die Komponente system.devel konnte nicht gefunden werden"
+msgstr "Sicherheitsschalter: die Komponente system.devel konnte nicht gefunden werden"
 
 #: pisi/operations/build.py:498
 msgid "Unsatisfied Build Dependencies:"
@@ -1975,8 +1969,7 @@ msgstr "Verlassene Dateien im Installationsverzeichnis (%s):"
 
 # gesammelt hört sich komisch an
 #: pisi/operations/build.py:932
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Alle Dateien unter Installationsierzeichnis (%s) wurden von den Paketen "
 "gesammelt"
@@ -2108,8 +2101,7 @@ msgstr ""
 
 #: pisi/operations/remove.py:48 pisi/operations/upgrade.py:238
 msgid "Safety switch: the component system.base cannot be found"
-msgstr ""
-"Sicherheitsschalter: Die Komponente system.base kann nicht gefunden werden"
+msgstr "Sicherheitsschalter: Die Komponente system.base kann nicht gefunden werden"
 
 #: pisi/operations/remove.py:55
 msgid "Package %s does not exist. Cannot remove."
@@ -2189,13 +2181,11 @@ msgstr "Rückabhängigkeit %s von %s kann nicht zufriedenstellend sein"
 
 #: pisi/operations/upgrade.py:226
 msgid "Safety switch: Following packages in system.base will be installed: "
-msgstr ""
-"Sicherheitsschalter: Die folgenden Pakete in system.base serden installiert:"
+msgstr "Sicherheitsschalter: Die folgenden Pakete in system.base serden installiert:"
 
 #: pisi/operations/upgrade.py:232
 msgid "Safety switch: Following packages in system.base will be upgraded: "
-msgstr ""
-"Sicherheitsschalter: Die folgenden Pakete in system.base werden aktualisiert:"
+msgstr "Sicherheitsschalter: Die folgenden Pakete in system.base werden aktualisiert:"
 
 #: pisi/package.py:56
 msgid ""
@@ -2410,9 +2400,8 @@ msgid "strip command failed for file '%s'!"
 msgstr "strip Befehl für die Datei '%s' fehlgeschlagen!"
 
 #: pisi/util.py:533
-#, fuzzy
 msgid "chrpath command failed for file '%s'!"
-msgstr "strip Befehl für die Datei '%s' fehlgeschlagen!"
+msgstr "chrpath Befehl für die Datei '%s' fehlgeschlagen!"
 
 #: pisi/util.py:540
 msgid "objcopy (keep-debug) command failed for file '%s'!"
@@ -2443,8 +2432,7 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 "Entwickler '%s <%s>' hat eina andere email adresse '%s' im Quelltext-Paket '%"
 "s'"
@@ -2473,5 +2461,3 @@ msgstr "Suche im Quellcode - Depot...\n"
 msgid "Scanning binary packages...\n"
 msgstr "Suche im Binär - Depot...\n"
 
-#~ msgid "No updates available for repository %s."
-#~ msgstr "Es sind keine Updates für das Depot %s verfügbar"
