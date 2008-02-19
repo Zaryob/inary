@@ -50,4 +50,5 @@ class HistoryDB(lazydb.LazyDB):
         count = count or len(self.__logs)
         for log in self.__logs[:count]:
             hist = pisi.history.History(os.path.join(ctx.config.history_dir(), log))
+            hist.operation.no = int(log.split("_")[0])
             yield hist.operation

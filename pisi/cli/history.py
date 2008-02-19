@@ -54,7 +54,7 @@ Lists previous operations."""
 
     def print_history(self):
         for operation in self.historydb.get_last(ctx.get_option('last')):
-            print _("Operation: %s") % operation.type
+            print _("Operation #%03d: %s") % (operation.no, operation.type)
             print _("Date: %s %s") % (operation.date, operation.time)
             print
 
