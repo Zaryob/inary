@@ -600,6 +600,7 @@ def upgrade(*args, **kw):
     return pisi.operations.upgrade.upgrade(*args, **kw)
 
 def emerge(*args, **kw):
+    pisi.db.historydb.HistoryDB().create_history("emerge")
     return pisi.operations.emerge.emerge(*args, **kw)
 
 def calculate_conflicts(*args, **kw):
