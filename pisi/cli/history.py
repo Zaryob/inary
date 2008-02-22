@@ -48,7 +48,7 @@ Lists previous operations."""
                          help=_("Output only the last n operations"))
         group.add_option("-s", "--snapshot", action="store_true", default=False,
                          help=_("Take snapshot of the current system"))
-        group.add_option("-t", "--takeback", action="store", type="int", default=1,
+        group.add_option("-t", "--takeback", action="store", type="int", default=-1,
                          help=_("Takeback to the state after the given operation finished"))
 
     def take_snapshot(self):
@@ -75,7 +75,11 @@ Lists previous operations."""
 
         if ctx.get_option('snapshot'):
             self.take_snapshot()
+            return
         elif ctx.get_option('takeback'):
-            self.takeback(ctx.get_option('takeback'))
-        else:
-            self.print_history()
+            opno = ctx.get_option('takeback')
+            if opno != -1:
+                self.takeback(opno)
+                return
+
+        self.print_history()
