@@ -285,10 +285,11 @@ def install(packages, reinstall=False, ignore_file_conflicts=False):
 
 def takeback(operation):
     """
-    Takes the system back to the state after the given operation no from the pisi history.
-    @param operation: operation number -> integer
+    Takes back the system to a previous state. Uses pisi history to find out which packages were 
+    installed at the time _after_ the given operation that the system is requested to be taken back.
+    @param operation: number of the operation that the system will be taken back -> integer
     """
-    
+
     historydb = pisi.db.historydb.HistoryDB()
     historydb.create_history("takeback")
 
