@@ -39,6 +39,7 @@ import pisi.operations.delta
 import pisi.operations.remove
 import pisi.operations.upgrade
 import pisi.operations.install
+import pisi.operations.history
 import pisi.operations.helper
 import pisi.operations.emerge
 import pisi.operations.build
@@ -281,6 +282,17 @@ def install(packages, reinstall=False, ignore_file_conflicts=False):
         return pisi.operations.install.install_pkg_files(packages)
     else:
         return pisi.operations.install.install_pkg_names(packages, reinstall)
+
+def takeback(operation):
+    """
+    Takes the system back to the state after the given operation no from the pisi history.
+    @param operation: operation number -> integer
+    """
+    
+    historydb = pisi.db.historydb.HistoryDB()
+    historydb.create_history("takeback")
+
+    pisi.operations.history.takeback(operation)
 
 def snapshot():
     """

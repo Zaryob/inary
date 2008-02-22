@@ -48,9 +48,14 @@ Lists previous operations."""
                          help=_("Output only the last n operations"))
         group.add_option("-s", "--snapshot", action="store_true", default=False,
                          help=_("Take snapshot of the current system"))
+        group.add_option("-t", "--takeback", action="store", type="int", default=1,
+                         help=_("Takeback to the state after the given operation finished"))
 
     def take_snapshot(self):
         pisi.api.snapshot()
+
+    def takeback(self, operation):
+        pisi.api.takeback(operation)
 
     def print_history(self):
         for operation in self.historydb.get_last(ctx.get_option('last')):
@@ -62,7 +67,7 @@ Lists previous operations."""
                 print _("    * There are %d packages in this snapshot.") % len(operation.packages)
             else:
                 for pkg in operation.packages:
-                    print "    *", pkg
+                    print "    *",  pkg
             print
 
     def run(self):
@@ -70,5 +75,7 @@ Lists previous operations."""
 
         if ctx.get_option('snapshot'):
             self.take_snapshot()
+        elif ctx.get_option('takeback'):
+            self.takeback(ctx.get_option('takeback'))
         else:
             self.print_history()
