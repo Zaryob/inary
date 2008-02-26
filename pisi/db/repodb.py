@@ -112,10 +112,14 @@ class RepoDB(lazydb.LazyDB):
         return piksemel.parse(index_path)
     
     def get_repo(self, repo):
+        return Repo(pisi.uri.URI(self.get_repo_url(repo)))
+
+    #FIXME: this method is a quick hack around repo_info.indexuri.get_uri()
+    def get_repo_url(self, repo):
         urifile_path = pisi.util.join_path(ctx.config.index_dir(), repo, "uri")
         uri = open(urifile_path, "r").read()
-        return Repo(pisi.uri.URI(uri))
-        
+        return uri
+
     def add_repo(self, name, repo_info, at = None):
         repo_path = pisi.util.join_path(ctx.config.index_dir(), name)
         os.makedirs(repo_path)
