@@ -20,6 +20,9 @@ import pisi.db
 import pisi.fetcher
 
 def __listactions(actions):
+
+    installdb = pisi.db.installdb.InstallDB()
+    
     beinstalled = []
     beremoved = []
 
@@ -28,7 +31,8 @@ def __listactions(actions):
         if action == "install":
             beinstalled.append("%s-%s" % (pkg, version))
         else:
-            beremoved.append("%s" % pkg)
+            if installdb.has_package(pkg):
+                beremoved.append("%s" % pkg)
 
     return beinstalled, beremoved
 
