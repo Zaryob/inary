@@ -72,7 +72,7 @@ Lists previous operations."""
 
     def run(self):
         self.init(database = False, write = False)
-
+        ctx.set_option('ignore_build_no', True)
         if ctx.get_option('snapshot'):
             self.take_snapshot()
             return

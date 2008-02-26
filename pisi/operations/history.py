@@ -55,8 +55,10 @@ def fetch_remote_file(package, errors):
         except pisi.fetcher.FetchError, e:
             errors.append(package)
             ctx.ui.info(pisi.util.colorize(_("%s could not be found") % (package), "red"))
+            return False
     else:
         ctx.ui.info(_('%s [cached]') % uri.filename())
+    return True
 
 def takeback(operation):
 
@@ -88,11 +90,18 @@ def takeback(operation):
     paths = []
     for pkg in beinstalled:
         ctx.ui.info(pisi.util.colorize(_("Downloading %d / %d") % (beinstalled.index(pkg)+1, len(beinstalled)), "yellow"))
-        fetch_remote_file(pkg, errors)
-        paths.append(os.path.join(ctx.config.cached_packages_dir(), pkg))
+        pkg += ctx.const.package_suffix
+        if fetch_remote_file(pkg, errors):
+            paths.append(os.path.join(ctx.config.cached_packages_dir(), pkg))
 
     if errors:
         ctx.ui.info(_("\nFollowing packages could not be found in repositories and are not cached:\n") + 
                     pisi.util.strlist(errors))
         if not ctx.ui.confirm(_('Do you want to continue?')):
             return
+
+    if paths:
+        pisi.operations.install.install_pkg_files(paths)
+
+    if beremoved:
+        pisi.operations.remove.remove(beremoved)
