@@ -29,6 +29,8 @@ def __listactions(actions):
     for pkg in actions:
         action, version = actions[pkg]
         if action == "install":
+            if installdb.has_package(pkg) and str(version) == "%s-%s-%s" % installdb.get_version(pkg):
+                    continue
             beinstalled.append("%s-%s" % (pkg, version))
         else:
             if installdb.has_package(pkg):
@@ -72,7 +74,7 @@ def get_snapshot_actions(operation):
     for pkg in operation.packages:
         snapshot_pkgs.add(pkg.name)
         if installdb.has_package(pkg.name):
-            if not str(pkg.before) == str("%s-%s-%s" % installdb.get_version(pkg.name)):
+            if not str(pkg.before) == "%s-%s-%s" % installdb.get_version(pkg.name):
                 actions[pkg.name] = ("install", pkg.before)
         else:
             actions[pkg.name] = ("install", pkg.before)
