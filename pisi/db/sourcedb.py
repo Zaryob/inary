@@ -54,6 +54,13 @@ class SourceDB(lazydb.LazyDB):
     def list_sources(self, repo=None):
         return self.sdb.get_item_keys(repo)
 
+    def which_repo(self, name):
+        return self.sdb.which_repo(self.pkgtosrc(name))
+
+    def which_source_repo(self, name):
+        source = self.pkgtosrc(name)
+        return source, self.sdb.which_repo(source)
+
     def has_spec(self, name, repo=None):
         return self.sdb.has_item(name, repo)
 
