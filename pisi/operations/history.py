@@ -64,13 +64,30 @@ def fetch_remote_file(package, errors):
         ctx.ui.info(_('%s [cached]') % uri.filename())
     return True
 
-def takeback(operation):
-
-    historydb = pisi.db.historydb.HistoryDB()
+def get_snapshot_actions(operation):
     actions = {}
+    snapshot_pkgs = set()
+    installdb = pisi.db.installdb.InstallDB()
+
+    for pkg in operation.packages:
+        snapshot_pkgs.add(pkg.name)
+        if installdb.has_package(pkg.name):
+            if not str(pkg.before) == str("%s-%s-%s" % installdb.get_version(pkg.name)):
+                actions[pkg.name] = ("install", pkg.before)
+        else:
+            actions[pkg.name] = ("install", pkg.before)
+
+    for pkg in set(installdb.list_installed()) - snapshot_pkgs:
+        actions[pkg] = ("remove", None)
+
+    return actions
+
+def get_takeback_actions(operation):
+    actions = {}
+    historydb = pisi.db.historydb.HistoryDB()
 
     for operation in historydb.get_till_operation(operation):
-        if operation == "snapshot":
+        if operation.type == "snapshot":
             pass
 
         for pkg in operation.packages:
@@ -78,6 +95,18 @@ def takeback(operation):
                 actions[pkg.name] = ("install", pkg.before)
             if pkg.operation == "install":
                 actions[pkg.name] = ("remove", None)
+
+    return actions
+
+def takeback(operation):
+
+    historydb = pisi.db.historydb.HistoryDB()
+
+    op = historydb.get_operation(operation)
+    if op.type == "snapshot":
+        actions = get_snapshot_actions(op)
+    else:
+        actions = get_takeback_actions(operation)
 
     beinstalled, beremoved = __listactions(actions)
 
