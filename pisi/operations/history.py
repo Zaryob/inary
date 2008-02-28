@@ -19,19 +19,28 @@ import pisi.util
 import pisi.db
 import pisi.fetcher
 
-def __listactions(actions):
+installdb = pisi.db.installdb.InstallDB()
+historydb = pisi.db.historydb.HistoryDB()
 
-    installdb = pisi.db.installdb.InstallDB()
+def __pkg_already_installed(name, pkginfo):
+    ver, rel, build = str(pkginfo).split("-")
+    if build == '?':
+        build = None
+    else:
+        build = int(build)
+    return (ver, rel, build) == installdb.get_version(name)
+
+def __listactions(actions):
     
     beinstalled = []
     beremoved = []
 
     for pkg in actions:
-        action, version = actions[pkg]
+        action, pkginfo = actions[pkg]
         if action == "install":
-            if installdb.has_package(pkg) and str(version) == "%s-%s-%s" % installdb.get_version(pkg):
-                    continue
-            beinstalled.append("%s-%s" % (pkg, version))
+            if __pkg_already_installed(pkg, pkginfo):
+                continue
+            beinstalled.append("%s-%s" % (pkg, pkginfo))
         else:
             if installdb.has_package(pkg):
                 beremoved.append("%s" % pkg)
@@ -69,15 +78,10 @@ def fetch_remote_file(package, errors):
 def get_snapshot_actions(operation):
     actions = {}
     snapshot_pkgs = set()
-    installdb = pisi.db.installdb.InstallDB()
 
     for pkg in operation.packages:
         snapshot_pkgs.add(pkg.name)
-        if installdb.has_package(pkg.name):
-            if not str(pkg.before) == "%s-%s-%s" % installdb.get_version(pkg.name):
-                actions[pkg.name] = ("install", pkg.before)
-        else:
-            actions[pkg.name] = ("install", pkg.before)
+        actions[pkg.name] = ("install", pkg.before)
 
     for pkg in set(installdb.list_installed()) - snapshot_pkgs:
         actions[pkg] = ("remove", None)
@@ -86,7 +90,6 @@ def get_snapshot_actions(operation):
 
 def get_takeback_actions(operation):
     actions = {}
-    historydb = pisi.db.historydb.HistoryDB()
 
     for operation in historydb.get_till_operation(operation):
         if operation.type == "snapshot":
@@ -101,8 +104,6 @@ def get_takeback_actions(operation):
     return actions
 
 def takeback(operation):
-
-    historydb = pisi.db.historydb.HistoryDB()
 
     op = historydb.get_operation(operation)
     if op.type == "snapshot":
