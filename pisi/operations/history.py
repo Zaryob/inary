@@ -23,6 +23,9 @@ installdb = pisi.db.installdb.InstallDB()
 historydb = pisi.db.historydb.HistoryDB()
 
 def __pkg_already_installed(name, pkginfo):
+    if not installdb.has_package(name):
+        return False
+
     ver, rel, build = str(pkginfo).split("-")
     if build == '?':
         build = None
