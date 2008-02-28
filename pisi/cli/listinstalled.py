@@ -40,6 +40,8 @@ Usage: list-installed
 
         group = optparse.OptionGroup(self.parser, _("list-installed options"))
 
+        group.add_option("-b", "--without-buildno", action="store_true",
+                               default=False, help=_("Only list the installed packages without build nos"))
         group.add_option("-l", "--long", action="store_true",
                                default=False, help=_("Show in long format"))
         group.add_option("-c", "--component", action="store",
@@ -51,7 +53,11 @@ Usage: list-installed
 
     def run(self):
         self.init(database = True, write = False)
-        installed = self.installdb.list_installed()
+
+        if not ctx.get_option('without_buildno'):
+            installed = self.installdb.list_installed()
+        else:
+            installed = self.installdb.list_installed_without_buildno()
 
         component = ctx.get_option('component')
         if component:
