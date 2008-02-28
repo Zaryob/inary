@@ -22,7 +22,7 @@ import pisi.db
 import pisi.context as ctx
 import pisi.cli.command as command
 
-class History(command.Command):
+class History(command.PackageOp):
     """History of pisi operations
 
 Usage: history
