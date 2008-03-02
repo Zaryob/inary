@@ -1,6 +1,6 @@
 Index: pisi/comariface.py
 ===================================================================
---- pisi/comariface.py	(revision 17125)
+--- pisi/comariface.py	(revision 17303)
 +++ pisi/comariface.py	(working copy)
 @@ -13,6 +13,7 @@
  import os
@@ -10,7 +10,7 @@ Index: pisi/comariface.py
  
  import gettext
  __trans = gettext.translation('pisi', fallback=True)
-@@ -25,117 +26,157 @@
+@@ -25,117 +26,147 @@
      pass
  
  try:
@@ -131,10 +131,6 @@ Index: pisi/comariface.py
 +    object_name = make_object_path(package_name)
      
      for script in provided_scripts:
-+        # Other object models in stable repo. are not compatible with COMAR 2.0
-+        # TODO: Remove after 2007
-+        if script.om not in ["System.Service", "System.Package", "System.PackageHandler"]:
-+            continue
          ctx.ui.debug(_("Registering %s comar script") % script.om)
          if script.om == "System.Package":
              self_post = True
@@ -188,13 +184,7 @@ Index: pisi/comariface.py
 +            # Do nothing if postInstall method is not defined in package script
 +            if not (exception._dbus_error_name.startswith("tr.org.pardus.comar") and
 +               exception._dbus_error_name.split('tr.org.pardus.comar.')[1] == 'python.missing'):
-+                # Try again, this time without arguments.
-+                # TODO: Remove after 2007
-+                try:
-+                    iface = get_iface(object_name, "System.Package")
-+                    iface.postInstall(timeout=300)
-+                except dbus.DBusException, exception:
-+                    raise Error, _("Script error: %s") % exception
++                raise Error, _("Script error: %s") % exception
 +    
 +    if package_name == 'comar':
 +        pisi.api.set_comar_destination('tr.org.pardus.comar.new')
@@ -243,9 +233,9 @@ Index: pisi/comariface.py
 +        raise Error, _("Script error: %s") % exception
 Index: pisi/api.py
 ===================================================================
---- pisi/api.py	(revision 17125)
+--- pisi/api.py	(revision 17303)
 +++ pisi/api.py	(working copy)
-@@ -71,13 +71,20 @@
+@@ -72,13 +72,20 @@
      """
      ctx.comar = enable
  
@@ -272,7 +262,7 @@ Index: pisi/api.py
      """ 
 Index: pisi/atomicoperations.py
 ===================================================================
---- pisi/atomicoperations.py	(revision 17125)
+--- pisi/atomicoperations.py	(revision 17303)
 +++ pisi/atomicoperations.py	(working copy)
 @@ -152,7 +152,7 @@
          # check comar
@@ -285,7 +275,7 @@ Index: pisi/atomicoperations.py
          # check dependencies
 Index: pisi/context.py
 ===================================================================
---- pisi/context.py	(revision 17125)
+--- pisi/context.py	(revision 17303)
 +++ pisi/context.py	(working copy)
 @@ -38,7 +38,8 @@
  stderr = None
