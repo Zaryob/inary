@@ -10,6 +10,8 @@
 # Please read the COPYING file.
 #
 
+import os
+import sys
 import optparse
 
 import gettext
@@ -70,9 +72,15 @@ Lists previous operations."""
                     print "    *",  pkg
             print
 
+    def redirect_output(self):
+        if os.isatty(sys.stdout.fileno()):
+            output = os.popen("less","w")
+            sys.stdout =  sys.stderr = output
+
     def run(self):
         self.init(database = False, write = False)
         ctx.set_option('ignore_build_no', True)
+        self.redirect_output()
         if ctx.get_option('snapshot'):
             self.take_snapshot()
             return
