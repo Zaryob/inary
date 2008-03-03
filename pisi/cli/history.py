@@ -80,7 +80,6 @@ Lists previous operations."""
     def run(self):
         self.init(database = False, write = False)
         ctx.set_option('ignore_build_no', True)
-        self.redirect_output()
         if ctx.get_option('snapshot'):
             self.take_snapshot()
             return
@@ -90,4 +89,5 @@ Lists previous operations."""
                 self.takeback(opno)
                 return
 
+        self.redirect_output()
         self.print_history()
