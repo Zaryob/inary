@@ -44,7 +44,7 @@ class HistoryDB(lazydb.LazyDB):
         self.history.add(pkgBefore, pkgAfter, operation)
 
     def load_config(self, operation):
-        hist_dir = os.path.join(ctx.config.history_dir(), str(operation))
+        hist_dir = os.path.join(ctx.config.history_dir(), "%03d" % operation)
         if os.path.exists(hist_dir):
             import distutils.dir_util as dir_util
             dir_util.copy_tree(hist_dir, "/")
@@ -56,7 +56,7 @@ class HistoryDB(lazydb.LazyDB):
             return
 
         destdir = os.path.join(hist_dir, config_file[1:])
-        pisi.util.copy_file(config_file, destdir);
+        pisi.util.copy_file_stat(config_file, destdir);
 
     def update_history(self):
         self.history.update()

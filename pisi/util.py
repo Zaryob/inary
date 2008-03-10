@@ -310,6 +310,12 @@ def copy_file(src,dest):
     check_dir(os.path.dirname(dest))
     shutil.copyfile(src, dest)
 
+def copy_file_stat(src,dest):
+    """Copy source file to the destination file with all stat info."""
+    check_file(src)
+    check_dir(os.path.dirname(dest))
+    shutil.copy2(src, dest)
+
 def is_ar_file(file_path):
     return open(file_path).read(8) == '!<arch>\n'
 
