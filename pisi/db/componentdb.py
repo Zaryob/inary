@@ -91,6 +91,10 @@ class ComponentDB(lazydb.LazyDB):
 
         try:
             component.packages = self.cpdb.get_item(component_name, repo)
+        except Exception: #FIXME: what exception could we catch here, replace with that.
+            pass
+
+        try:
             component.sources = self.csdb.get_item(component_name, repo)
         except Exception: #FIXME: what exception could we catch here, replace with that.
             pass
@@ -106,6 +110,10 @@ class ComponentDB(lazydb.LazyDB):
         for repo in self.repodb.list_repos():
             try:
                 component.packages.extend(self.cpdb.get_item(component_name, repo))
+            except Exception: #FIXME: what exception could we catch here, replace with that.
+                pass
+
+            try:
                 component.sources.extend(self.csdb.get_item(component_name, repo))
             except Exception: #FIXME: what exception could we catch here, replace with that.
                 pass
@@ -152,3 +160,45 @@ class ComponentDB(lazydb.LazyDB):
                 pass
 
         return packages
+
+    # Returns sources of given component from given repo or first found component's packages in repo
+    # order if repo is None. 
+    # If walk is True than also the sub components' packages are returned
+    def get_sources(self, component_name, repo=None, walk=False):
+
+        component = self.get_component(component_name, repo)
+        if not walk:
+            return component.sources
+
+        sources = []
+        sources.extend(component.sources)
+
+        sub_components = filter(lambda x:x.startswith(component_name+"."), self.list_components(repo))
+        for sub in sub_components:
+            try:
+                sources.extend(self.get_component(sub, repo).sources)
+            except Exception: #FIXME: what exception could we catch here, replace with that.
+                pass
+
+        return sources
+
+    # Returns the component with combined packages and sources from all repos that contain this component
+    # If walk is True than also the sub components' sources from all repos are returned
+    def get_union_sources(self, component_name, walk=False):
+
+        component = self.get_union_component(component_name)
+        if not walk:
+            return component.sources
+
+        sources = []
+        sources.extend(component.sources)
+
+        sub_components = filter(lambda x:x.startswith(component_name+"."), self.list_components())
+        for sub in sub_components:
+            try:
+                sources.extend(self.get_union_component(sub).sources)
+            except Exception: #FIXME: what exception could we catch here, replace with that.
+                pass
+
+        return sources
+
