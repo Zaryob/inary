@@ -79,12 +79,14 @@ class History(xmlfile.XmlFile):
         if operation not in ["upgrade", "remove", "emerge", "install", "snapshot", "takeback"]:
             raise Exception("Unknown package operation")
         
-        self.histfile = "%s_%s.xml" % (self._get_latest(), operation)
+        opno = self._get_latest()
+        self.histfile = "%s_%s.xml" % (opno, operation)
 
         year, month, day, hour, minute = time.localtime()[0:5]
         self.operation.type = operation
         self.operation.date = "%s-%02d-%02d" % (year, month, day)
         self.operation.time = "%02d:%02d" % (hour, minute)
+        self.operation.no = opno
 
     def add(self, pkgBefore=None, pkgAfter=None, operation=None):
 

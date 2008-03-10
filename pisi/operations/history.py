@@ -144,3 +144,7 @@ def takeback(operation):
 
     if beremoved:
         pisi.operations.remove.remove(beremoved)
+
+    historydb.load_config(operation)
+    
+    

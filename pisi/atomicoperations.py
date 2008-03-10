@@ -302,6 +302,7 @@ class Install(AtomicOperation):
 
             if changed:
                 config_changed.append(fpath)
+                self.historydb.save_config(fpath)
                 if os.path.exists(fpath + '.old'):
                     os.unlink(fpath + '.old')
                 os.rename(fpath, fpath + '.old')
@@ -502,6 +503,7 @@ class Remove(AtomicOperation):
         
         fpath = pisi.util.join_path(ctx.config.dest_dir(), fileinfo.path)
 
+        historydb = pisi.db.historydb.HistoryDB()
         filesdb = pisi.db.filesdb.FilesDB()
         # we should check if the file belongs to another
         # package (this can legitimately occur while upgrading
@@ -519,6 +521,9 @@ class Remove(AtomicOperation):
             try:
                 if pisi.util.sha1_file(fpath) == fileinfo.hash:
                     os.unlink(fpath)
+                else:
+                    # keep changed file in history
+                    historydb.save_config(fpath)
             except pisi.util.FileError:
                 pass
         else:
