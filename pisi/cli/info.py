@@ -36,6 +36,7 @@ Usage: info <package1> <package2> ... <packagen>
         self.installdb = pisi.db.installdb.InstallDB()
         self.componentdb = pisi.db.componentdb.ComponentDB()
         self.packagedb = pisi.db.packagedb.PackageDB()
+        self.sourcedb = pisi.db.sourcedb.SourceDB()
 
     name = ("info", None)
 
@@ -107,6 +108,7 @@ Usage: info <package1> <package2> ... <packagen>
 
         self.installdb_info(arg)
         self.packagedb_info(arg)
+        self.sourcedb_info(arg)
 
     def print_files(self, files):
         files.list.sort(key = lambda x:x.path)
@@ -125,6 +127,17 @@ Usage: info <package1> <package2> ... <packagen>
             if packagedb:
                 revdeps =  [name for name, dep in packagedb.get_rev_deps(metadata.package.name)]
                 print _('Reverse Dependencies:'), util.strlist(revdeps)
+                print
+
+    def print_specdata(self, spec, sourcedb=None):
+        src = spec.source
+        if ctx.get_option('short'):
+            ctx.ui.info('%15s - %s' % (src.name, unicode(src.summary)))
+        else:
+            ctx.ui.info(unicode(spec))
+            if sourcedb:
+                revdeps =  [name for name, dep in sourcedb.get_rev_deps(spec.source.name)]
+                print _('Reverse Build Dependencies:'), util.strlist(revdeps)
                 print
 
     def pisifile_info(self, package):
@@ -156,9 +169,21 @@ Usage: info <package1> <package2> ... <packagen>
         if self.packagedb.has_package(package):
             metadata, files, repo = pisi.api.info_name(package, False)
             if self.options.short:
-                ctx.ui.info(_('[repo] '), noln=True)
+                ctx.ui.info(_('[binary] '), noln=True)
             else:
                 ctx.ui.info(_('Package found in %s repository:') % repo)
             self.print_metadata(metadata, self.packagedb)
+        else:
+            ctx.ui.info(_("%s is not found in repositories") % package)
+
+    def sourcedb_info(self, package):
+        if self.sourcedb.has_spec(package):
+            repo = self.sourcedb.which_repo(package)
+            spec = self.sourcedb.get_spec(package)
+            if self.options.short:
+                ctx.ui.info(_('[source] '), noln=True)
+            else:
+                ctx.ui.info(_('Package found in %s repository:') % repo)
+            self.print_specdata(spec, self.sourcedb)
         else:
             ctx.ui.info(_("%s is not found in repositories") % package)

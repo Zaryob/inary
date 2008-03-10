@@ -158,7 +158,6 @@ class Source:
     t_Release = [ autoxml.String, autoxml.optional]
     t_SourceURI = [ autoxml.String, autoxml.optional ] # used in index
 
-
 class Package:
 
     t_Name = [ autoxml.String, autoxml.mandatory ]
@@ -260,3 +259,14 @@ class SpecFile(xmlfile.XmlFile):
                 if inst.name == pak.getTagData("Name"):
                     break
             self._set_i18n(pak, inst)
+
+    def __str__(self):
+        s = _('Name: %s, version: %s, release: %s\n') % (
+              self.source.name, self.history[0].version, self.history[0].release)
+        s += _('Summary: %s\n') % unicode(self.source.summary)
+        s += _('Description: %s\n') % unicode(self.source.description)
+        s += _('Component: %s\n') % unicode(self.source.partOf)
+        s += _('Build Dependencies: ')
+        for x in self.source.buildDependencies:
+           s += x.package + ' '
+        return s
