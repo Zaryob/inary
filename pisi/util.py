@@ -672,3 +672,14 @@ def colorize(msg, color):
     else:
         return msg
 
+def config_changed(config_file):
+    fpath = pisi.util.join_path(ctx.config.dest_dir(), config_file.path)
+    if os.path.exists(fpath) and not os.path.isdir(fpath):
+        if os.path.islink(fpath):
+            f = os.readlink(fpath)
+            if os.path.exists(f) and pisi.util.sha1_data(f) != config_file.hash:
+                return True
+        else:
+            if pisi.util.sha1_file(fpath) != config_file.hash:
+                return True
+    return False

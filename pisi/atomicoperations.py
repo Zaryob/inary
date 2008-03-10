@@ -289,18 +289,8 @@ class Install(AtomicOperation):
 
         config_changed = []
         def check_config_changed(config):
-            changed = False
             fpath = pisi.util.join_path(ctx.config.dest_dir(), config.path)
-            if os.path.exists(fpath) and not os.path.isdir(fpath):
-                if os.path.islink(fpath):
-                    f = os.readlink(fpath)
-                    if os.path.exists(f) and pisi.util.sha1_data(f) != config.hash:
-                        changed = True
-                else:
-                    if pisi.util.sha1_file(fpath) != config.hash:
-                        changed = True
-
-            if changed:
+            if pisi.util.config_changed(config):
                 config_changed.append(fpath)
                 self.historydb.save_config(fpath)
                 if os.path.exists(fpath + '.old'):

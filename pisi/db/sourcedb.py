@@ -42,7 +42,6 @@ class SourceDB(lazydb.LazyDB):
         self.rvdb = pisi.db.itembyrepo.ItemByRepo(self.__revdeps)
 
     def __generate_sources(self, doc):
-
         sources = {}
         pkgstosrc = {}
 

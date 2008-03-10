@@ -309,6 +309,10 @@ def snapshot():
     for name in installdb.list_installed():
         package = installdb.get_package(name)
         historydb.add_package(pkgBefore=package, operation="snapshot")
+        # Save changed config files of the package in snapshot
+        for f in installdb.get_files(name).list:
+            if f.type == "config" and pisi.util.config_changed(f):
+                historydb.save_config("/%s" % f.path)
 
     historydb.update_history()
 
