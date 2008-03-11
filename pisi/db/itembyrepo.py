@@ -48,7 +48,7 @@ class ItemByRepo:
                 else:
                     return self.dbobj[r][item], r
 
-        raise Exception(_("Repo item not found"))
+        raise Exception(_("Repo item %s not found") % str(item))
 
     def get_item(self, item, repo=None):
         item, repo = self.get_item_repo(item, repo)
