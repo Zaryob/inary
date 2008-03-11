@@ -139,10 +139,10 @@ def takeback(operation):
         if not ctx.ui.confirm(_('Do you want to continue?')):
             return
 
+    if beremoved:
+        pisi.operations.remove.remove(beremoved, True, True)
+
     if paths:
         pisi.operations.install.install_pkg_files(paths)
-
-    if beremoved:
-        pisi.operations.remove.remove(beremoved)
 
     historydb.load_config(operation)
