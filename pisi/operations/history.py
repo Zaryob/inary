@@ -144,5 +144,3 @@ def takeback(operation):
 
     if paths:
         pisi.operations.install.install_pkg_files(paths)
-
-    historydb.load_config(operation)

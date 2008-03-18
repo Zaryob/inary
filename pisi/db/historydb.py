@@ -43,14 +43,24 @@ class HistoryDB(lazydb.LazyDB):
     def add_package(self, pkgBefore=None, pkgAfter=None, operation=None):
         self.history.add(pkgBefore, pkgAfter, operation)
 
-    def load_config(self, operation):
+    def load_config(self, operation, package=None):
+        def __load_config(path):
+            import distutils.dir_util as dir_util
+            dir_util.copy_tree(path, "/")
+
+        installdb = pisi.db.installdb.InstallDB()
         hist_dir = os.path.join(ctx.config.history_dir(), "%03d" % operation)
         if os.path.exists(hist_dir):
-            import distutils.dir_util as dir_util
-            dir_util.copy_tree(hist_dir, "/")
+            if not package:
+                for pkg in os.listdir(hist_dir):
+                    if installdb.has_package(pkg):
+                        __load_config(os.path.join(hist_dir, pkg))
+            else:
+                if installdb.has_package(pkg):
+                    __load_config(os.path.join(hist_dir, pkg))
 
-    def save_config(self, config_file):
-        hist_dir = os.path.join(ctx.config.history_dir(), self.history.operation.no)
+    def save_config(self, package, config_file):
+        hist_dir = os.path.join(ctx.config.history_dir(), self.history.operation.no, package)
         if os.path.isdir(config_file):
             os.makedirs(os.path.join(hist_dir, config_file))
             return
@@ -65,6 +75,7 @@ class HistoryDB(lazydb.LazyDB):
         for log in self.__logs:
             if log.startswith("%03d_" % operation):
                 hist = pisi.history.History(os.path.join(ctx.config.history_dir(), log))
+                hist.operation.no = int(log.split("_")[0])
                 return hist.operation
         return None
 
@@ -77,6 +88,7 @@ class HistoryDB(lazydb.LazyDB):
                 return
 
             hist = pisi.history.History(os.path.join(ctx.config.history_dir(), log))
+            hist.operation.no = int(log.split("_")[0])
             yield hist.operation
 
     def get_last(self, count=0):

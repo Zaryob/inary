@@ -292,7 +292,7 @@ class Install(AtomicOperation):
             fpath = pisi.util.join_path(ctx.config.dest_dir(), config.path)
             if pisi.util.config_changed(config):
                 config_changed.append(fpath)
-                self.historydb.save_config(fpath)
+                self.historydb.save_config(self.pkginfo.name, fpath)
                 if os.path.exists(fpath + '.old'):
                     os.unlink(fpath + '.old')
                 os.rename(fpath, fpath + '.old')
@@ -513,7 +513,7 @@ class Remove(AtomicOperation):
                     os.unlink(fpath)
                 else:
                     # keep changed file in history
-                    historydb.save_config(fpath)
+                    historydb.save_config(package_name, fpath)
             except pisi.util.FileError:
                 pass
         else:

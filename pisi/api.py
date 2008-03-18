@@ -312,7 +312,7 @@ def snapshot():
         # Save changed config files of the package in snapshot
         for f in installdb.get_files(name).list:
             if f.type == "config" and pisi.util.config_changed(f):
-                historydb.save_config("/%s" % f.path)
+                historydb.save_config(name, "/%s" % f.path)
 
     historydb.update_history()
 
