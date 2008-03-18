@@ -494,6 +494,7 @@ def strip_directory(top, excludelist=[]):
             frpath = join_path(root, fn)
             drpath = join_path(os.path.dirname(top),
                                ctx.const.debug_dir_suffix,
+                               ctx.const.debug_files_suffix,
                                remove_prefix(top, frpath))
 
             # Some upstream sources have buggy libtool and ltmain.sh with them,
