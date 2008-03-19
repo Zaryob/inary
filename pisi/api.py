@@ -34,6 +34,7 @@ import pisi.index
 import pisi.config
 import pisi.metadata
 import pisi.file
+import pisi.blacklist
 import pisi.atomicoperations
 import pisi.operations.delta
 import pisi.operations.remove
@@ -138,6 +139,10 @@ def list_upgradable():
     upgradable = filter(is_upgradable, installdb.list_installed())
     # replaced packages can not pass is_upgradable test, so we add them manually
     upgradable.extend(list_replaces())
+
+    # consider also blacklist filtering
+    upgradable = pisi.blacklist.exclude_from(upgradable, ctx.const.blacklist)
+
     return upgradable
 
 def list_repos():
