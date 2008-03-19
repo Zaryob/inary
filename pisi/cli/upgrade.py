@@ -102,8 +102,7 @@ expanded to package names.
         if packages == []:
             packages = pisi.api.list_installed()
 
-        if os.path.exists(ctx.const.blacklist):
-            packages = pisi.blacklist.exclude_from(packages, ctx.const.blacklist)
+        packages = pisi.blacklist.exclude_from(packages, ctx.const.blacklist)
 
         if ctx.get_option('exclude_from'):
             packages = pisi.blacklist.exclude_from(packages, ctx.get_option('exclude_from'))
