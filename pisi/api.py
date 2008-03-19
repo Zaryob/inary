@@ -586,6 +586,7 @@ def rebuild_db(files=False):
     comar = ctx.comar
     pisi._cleanup()
 
+    filesdb.close()
     filesdb.destroy()
     filesdb.init()
 
