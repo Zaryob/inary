@@ -10,6 +10,7 @@
 # Please read the COPYING file.
 #
 
+import os
 import sys
 import optparse
 
@@ -67,7 +68,7 @@ class Command(object):
             return Command.cmd_dict[cmd](args)
 
         if fail:
-            raise Error(_("Unrecognized command: %s") % cmd)
+            raise pisi.cli.Error(_("Unrecognized command: %s") % cmd)
         else:
             return None
 
@@ -161,6 +162,9 @@ class Command(object):
             ui = pisi.cli.CLI(self.options.debug, self.options.verbose)
         else:
             ui = pisi.cli.CLI()
+
+        if write and not os.access(pisi.context.config.packages_dir(), os.W_OK):
+            raise pisi.cli.Error(_("You have to be root for this operation."))
 
         pisi.api.set_userinterface(ui)
         pisi.api.set_options(self.options)
