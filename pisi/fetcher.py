@@ -170,7 +170,7 @@ class Fetcher:
 
     def _get_proxies(self):
         proxies = {}
-
+        
         if ctx.config.values.general.http_proxy and self.url.scheme() == "http":
             proxies[pisi.uri.URI(ctx.config.values.general.http_proxy).scheme()] = ctx.config.values.general.http_proxy
 

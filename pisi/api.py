@@ -73,20 +73,13 @@ def set_comar(enable):
     """
     ctx.comar = enable
 
-def set_comar_destination(destination):
+def set_comar_sockname(sockname):
     """ 
-    Set comar bus destination
-    @param destination: Path to bus destination of COMAR
-    """
-    ctx.comar_destination = destination
-
-def set_dbus_sockname(sockname):
-    """ 
-    Set dbus socket file
+    Set comar socket file
     Used by YALI
-    @param sockname: Path to dbus socket file
+    @param sockname: Path to comar socket file
     """
-    ctx.dbus_sockname = sockname
+    ctx.comar_sockname = sockname
 
 def set_options(options):
     """ 
@@ -245,6 +238,16 @@ def search_source(terms, lang=None, repo=None):
     """
     sourcedb = pisi.db.sourcedb.SourceDB()
     return sourcedb.search_spec(terms, lang, repo)
+
+def search_installed(terms, lang=None):
+    """
+    Return a list of components that contains all the given terms either in its name, summary or
+    description -> list_of_strings
+    @param terms: a list of terms used to search components -> list_of_strings
+    @param lang: language of the summary and description
+    """
+    installdb = pisi.db.installdb.InstallDB()
+    return installdb.search_package(terms, lang)
 
 def search_component(terms, lang=None, repo=None):
     """
