@@ -73,13 +73,20 @@ def set_comar(enable):
     """
     ctx.comar = enable
 
-def set_comar_sockname(sockname):
+def set_comar_destination(destination):
     """ 
-    Set comar socket file
-    Used by YALI
-    @param sockname: Path to comar socket file
+    Set comar bus destination
+    @param destination: Path to bus destination of COMAR
     """
-    ctx.comar_sockname = sockname
+    ctx.comar_destination = destination
+
+def set_dbus_sockname(sockname):
+    """ 
+    Set dbus socket file
+    Used by YALI
+    @param sockname: Path to dbus socket file
+    """
+    ctx.dbus_sockname = sockname
 
 def set_options(options):
     """ 
