@@ -81,6 +81,18 @@ def set_comar_sockname(sockname):
     """
     ctx.comar_sockname = sockname
 
+def set_signal_handling(enable):
+    """ 
+    Enable signal handling. Signal handling in pisi mostly used for disabling keyboard interrupts 
+    in critical paths.
+    Used by YALI
+    @param enable: Flag indicating signal handling usage
+    """
+    if enable:
+        ctx.sig = pisi.signalhandler.SignalHandler()
+    else:
+        ctx.sig = None
+
 def set_options(options):
     """ 
     Set various options of pisi
