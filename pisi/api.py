@@ -227,6 +227,16 @@ def search_package(terms, lang=None, repo=None):
     packagedb = pisi.db.packagedb.PackageDB()
     return packagedb.search_package(terms, lang, repo)
 
+def search_installed(terms, lang=None):
+    """
+    Return a list of components that contains all the given terms either in its name, summary or
+    description -> list_of_strings
+    @param terms: a list of terms used to search components -> list_of_strings
+    @param lang: language of the summary and description
+    """
+    installdb = pisi.db.installdb.InstallDB()
+    return installdb.search_package(terms, lang)
+
 def search_source(terms, lang=None, repo=None):
     """
     Return a list of source packages that contains all the given terms either in its name, summary or
