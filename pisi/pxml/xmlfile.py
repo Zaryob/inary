@@ -65,10 +65,11 @@ class XmlFile(object):
     def readxml(self, uri, tmpDir='/tmp', sha1sum=False,
                 compress=None, sign=None, copylocal = False):
 
+        uri = pisi.file.File.make_uri(uri)
+
         # workaround for repo index files to fix 
         # rev. 17027 regression (http://liste.pardus.org.tr/gelistirici/2008-February/011133.html)
-        compressed = uri.endswith(".bz2") or uri.endswith(".gz")
-        uri = pisi.file.File.make_uri(uri)
+        compressed = str(uri).endswith(".bz2") or str(uri).endswith(".gz")
 
         if uri.is_local_file() and not compressed:
             # this is a local file
