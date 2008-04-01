@@ -48,14 +48,6 @@ class Index(xmlfile.XmlFile):
         return self.distribution.name + self.distribution.repositoryname
 
     def read_uri(self, uri, tmpdir, force = False):
-        # A workaround for the side effect of commit revision 17027
-        # Someone should nuke pisi.file.File into pieces
-        fileuri = pisi.file.File.make_uri(uri)
-        if fileuri.is_local_file():
-            pisi.file.File.download(fileuri, tmpdir, not force, pisi.file.File.auto, pisi.file.File.detached, True)
-            uri = pisi.file.File.decompress(uri, pisi.file.File.auto)
-        ##
-
         self.read(uri, tmpDir=tmpdir, sha1sum=not force,
                   compress=pisi.file.File.auto, sign=pisi.file.File.detached, copylocal = True, nodecode = True)
 
