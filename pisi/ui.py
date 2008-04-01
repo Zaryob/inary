@@ -72,7 +72,8 @@ class UI(object):
 
     def confirm(self, msg):
         "ask a yes/no question"
-        pass
+        # default ui confirms everything
+        return True
 
     def display_progress(self, **ka):
         "display progress"
