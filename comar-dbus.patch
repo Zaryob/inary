@@ -1,6 +1,6 @@
 Index: pisi/comariface.py
 ===================================================================
---- pisi/comariface.py	(revision 17303)
+--- pisi/comariface.py	(revision 17555)
 +++ pisi/comariface.py	(working copy)
 @@ -13,6 +13,7 @@
  import os
@@ -137,7 +137,7 @@ Index: pisi/comariface.py
 -        com.register(script.om, package_name, os.path.join(scriptpath, script.script))
 -        wait_for_result(com)
 +        elif script.om == "System.Service":
-+            sys_service = False
++            sys_service = True
 +        try:
 +            sys_iface.register(object_name, script.om, os.path.join(scriptpath, script.script))
 +        except dbus.DBusException, exception:
@@ -233,9 +233,9 @@ Index: pisi/comariface.py
 +        raise Error, _("Script error: %s") % exception
 Index: pisi/api.py
 ===================================================================
---- pisi/api.py	(revision 17303)
+--- pisi/api.py	(revision 17555)
 +++ pisi/api.py	(working copy)
-@@ -72,13 +72,20 @@
+@@ -73,13 +73,20 @@
      """
      ctx.comar = enable
  
@@ -258,11 +258,11 @@ Index: pisi/api.py
 -    ctx.comar_sockname = sockname
 +    ctx.dbus_sockname = sockname
  
- def set_options(options):
+ def set_signal_handling(enable):
      """ 
 Index: pisi/atomicoperations.py
 ===================================================================
---- pisi/atomicoperations.py	(revision 17303)
+--- pisi/atomicoperations.py	(revision 17555)
 +++ pisi/atomicoperations.py	(working copy)
 @@ -152,7 +152,7 @@
          # check comar
@@ -275,7 +275,7 @@ Index: pisi/atomicoperations.py
          # check dependencies
 Index: pisi/context.py
 ===================================================================
---- pisi/context.py	(revision 17303)
+--- pisi/context.py	(revision 17555)
 +++ pisi/context.py	(working copy)
 @@ -38,7 +38,8 @@
  stderr = None
