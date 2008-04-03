@@ -43,4 +43,4 @@ configures those packages.
     def run(self):
 
         self.init()
-        pisi.api.configure_pending()
+        pisi.api.configure_pending(self.args)
