@@ -427,7 +427,7 @@ def configure_pending(packages=None):
     if not packages:
         packages = installdb.list_pending()
     else:
-        packages = set(packages) and set(installdb.list_pending())
+        packages = set(packages).intersection(installdb.list_pending())
 
     order = generate_pending_order(packages)
     try:
