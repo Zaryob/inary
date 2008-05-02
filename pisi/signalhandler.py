@@ -38,11 +38,9 @@ class SignalHandler:
 
     def enable_signal(self, sig):
         if sig in self.signals.keys():
-            oldie = self.signals[sig].oldhandler
-            oldhandler =  oldie if oldie else signal.SIG_DFL
             pending = self.signals[sig].pending
             del self.signals[sig]
-            signal.signal(sig, oldhandler)
+            signal.signal(sig, self.signals[sig].oldhandler or signal.SIG_DFL)
             if pending:
                 raise exception[sig]
 
