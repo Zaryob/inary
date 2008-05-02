@@ -104,7 +104,7 @@ def get_takeback_actions(operation):
             if pkg.operation in ["upgrade", "downgrade", "remove"]:
                 actions[pkg.name] = ("install", pkg.before, operation.no)
             if pkg.operation == "install":
-                actions[pkg.name] = ("remove", None)
+                actions[pkg.name] = ("remove", None, operation.no)
 
     return actions
 
