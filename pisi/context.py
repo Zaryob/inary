@@ -38,7 +38,9 @@ stdout = None
 stderr = None
 
 comar = True
-comar_sockname = None
+comar_destination = "tr.org.pardus.comar"
+dbus_sockname = None
+dbus_timeout = 300
 
 # Bug #2879
 # FIXME: Maybe we can create a simple rollback mechanism. There are other

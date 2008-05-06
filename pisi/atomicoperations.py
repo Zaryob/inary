@@ -152,7 +152,7 @@ class Install(AtomicOperation):
         # check comar
         if self.metadata.package.providesComar and ctx.comar:
             import pisi.comariface as comariface
-            comariface.get_comar()
+            comariface.get_iface()
 
     def check_relations(self):
         # check dependencies

@@ -13,6 +13,7 @@
 import os
 import time
 import select
+import string
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -25,19 +26,43 @@ class Error(pisi.Error):
     pass
 
 try:
-    import comar
+    import dbus
 except ImportError:
-    raise Error(_("comar package is not fully installed"))
+    raise Error(_("dbus-python package is not fully installed"))
 
-def get_comar():
-    """Connect to the comar daemon and return the handle"""
+def is_char_valid(char):
+    """Test if char is valid object path character."""
+    return char in string.ascii_letters + string.digits + "_"
+
+def make_object_path(package):
+    """Generates DBus object name from package name."""
+    object = package
+    for char in package:
+        if not is_char_valid(char):
+            object = object.replace(char, '_')
+    if object[0].isdigit():
+        object = '_%s' % object
+    return object
+
+def get_iface(package="", model=""):
+    """Connect to the DBus daemon and return the system interface."""
     
-    sockname = "/var/run/comar.socket"
+    sockname = "/var/run/dbus/system_bus_socket"
     # YALI starts comar chrooted in the install target, but uses PiSi outside of
     # the chroot environment, so PiSi needs to use a different socket path to be
-    # able to connect true comar (usually /mnt/target/var/run/comar.socket).
-    if ctx.comar_sockname:
-        sockname = ctx.comar_sockname
+    # able to connect true dbus (and comar).
+    # (usually /var/run/dbus/system_bus_socket)
+    if ctx.dbus_sockname:
+        sockname = ctx.dbus_sockname
+    
+    if package:
+        obj_path = "/package/%s" % package
+    else:
+        obj_path = "/"
+    if model:
+        obj_interface = "tr.org.pardus.comar.%s" % model
+    else:
+        obj_interface = "tr.org.pardus.comar"
     
     # This function is sometimes called when comar has recently started
     # or restarting after an update. So we give comar a chance to become
@@ -45,97 +70,103 @@ def get_comar():
     timeout = 7
     while timeout > 0:
         try:
-            com = comar.Link(sockname)
-            return com
-        except comar.CannotConnect:
+            bus = dbus.bus.BusConnection(address_or_type="unix:path=%s" % sockname)
+            obj = bus.get_object(ctx.comar_destination, obj_path, introspect=False)
+            iface = dbus.Interface(obj, dbus_interface=obj_interface)
+            return iface
+        except dbus.DBusException:
             pass
         time.sleep(0.2)
         timeout -= 0.2
-    raise Error(_("cannot connect to comar"))
-
-def wait_for_result(com, package_name=None):
-    multiple = False
-    while True:
-        try:
-            reply = com.read_cmd()
-        except select.error:
-            if ctx.keyboard_interrupt_pending():
-                return
-            raise
-        except comar.LinkClosed:
-            # Comar postInstall does a "service comar restart" which cuts
-            # our precious communication link, so we waitsss
-            if package_name == "comar":
-                try:
-                    get_comar()
-                except Error:
-                    raise Error, _("Could not restart comar")
-                return
-            else:
-                if ctx.keyboard_interrupt_pending():
-                    return
-                raise Error, _("connection with comar unexpectedly closed")
-        
-        cmd = reply[0]
-        if cmd == com.RESULT and not multiple:
-            return
-        elif cmd == com.NONE and not multiple:
-            # no post/pre function, that is ok
-            return
-        elif cmd == com.RESULT_START:
-            multiple = True
-        elif cmd == com.RESULT_END:
-            return
-        elif cmd == com.FAIL:
-            raise Error, _("Configuration error: %s") % reply[2]
-        elif cmd == com.ERROR:
-            raise Error, _("Script error: %s") % reply[2]
-        elif cmd == com.DENIED:
-            raise Error, _("comar denied our access")
+    raise Error(_("cannot connect to dbus"))
 
 def post_install(package_name, provided_scripts, scriptpath, metapath, filepath, fromVersion, fromRelease, toVersion, toRelease):
     """Do package's post install operations"""
     
     ctx.ui.info(_("Configuring %s package") % package_name)
     self_post = False
-    com = get_comar()
+    sys_service = False
+    sys_iface = get_iface()
+    object_name = make_object_path(package_name)
     
     for script in provided_scripts:
         ctx.ui.debug(_("Registering %s comar script") % script.om)
         if script.om == "System.Package":
             self_post = True
-        com.register(script.om, package_name, os.path.join(scriptpath, script.script))
-        wait_for_result(com)
+        elif script.om == "System.Service":
+            sys_service = True
+        try:
+            sys_iface.register(object_name, script.om, os.path.join(scriptpath, script.script))
+        except dbus.DBusException, exception:
+            raise Error, _("Script error: %s") % exception
+        if sys_service:
+            try:
+                iface = get_iface(object_name, "System.Service")
+                iface.registerState()
+            except dbus.DBusException, exception:
+                raise Error, _("Script error: %s") % exception
     
     ctx.ui.debug(_("Calling post install handlers"))
-    com.call("System.PackageHandler.setupPackage", [ "metapath", metapath, "filepath", filepath ])
-    wait_for_result(com)
+    for handler in sys_iface.listModelApplications("System.PackageHandler"):
+        iface = get_iface(handler, "System.PackageHandler")
+        try:
+            iface.setupPackage(metapath, filepath, timeout=ctx.dbus_timeout)
+        except dbus.DBusException, exception:
+            # Do nothing if setupPackage method is not defined in package script
+            if not (exception._dbus_error_name.startswith("tr.org.pardus.comar") and
+               exception._dbus_error_name.split('tr.org.pardus.comar.')[1] == 'python.missing'):
+                raise Error, _("Script error: %s") % exception
     
     if self_post:
-        args = {
-            "fromVersion": fromVersion,
-            "fromRelease": fromRelease,
-            "toVersion": toVersion,
-            "toRelease": toRelease,
-        }
+        if not fromVersion:
+            fromVersion = ""
+        if not fromRelease:
+            fromRelease = ""
+        
         ctx.ui.debug(_("Running package's post install script"))
-        com.call_package("System.Package.postInstall", package_name, args)
-        wait_for_result(com, package_name)
+        try:
+            iface = get_iface(object_name, "System.Package")
+            iface.postInstall(fromVersion, fromRelease, toVersion, toRelease, timeout=ctx.dbus_timeout)
+        except dbus.DBusException, exception:
+            # Do nothing if postInstall method is not defined in package script
+            if not (exception._dbus_error_name.startswith("tr.org.pardus.comar") and
+               exception._dbus_error_name.split('tr.org.pardus.comar.')[1] == 'python.missing'):
+                raise Error, _("Script error: %s") % exception
+    
+    if package_name == 'comar':
+        pisi.api.set_comar_destination('tr.org.pardus.comar.new')
 
 def pre_remove(package_name, metapath, filepath):
     """Do package's pre removal operations"""
     
     ctx.ui.info(_("Configuring %s package for removal") % package_name)
-    com = get_comar()
+    sys_iface = get_iface()
+    object_name = make_object_path(package_name)
     
-    ctx.ui.debug(_("Running package's pre remove script"))
-    com.call_package("System.Package.preRemove", package_name)
-    wait_for_result(com)
+    if "System.Package" in sys_iface.listApplicationModels(object_name):
+        ctx.ui.debug(_("Running package's pre remove script"))
+        iface = get_iface(object_name, "System.Package")
+        try:
+            iface.preRemove(timeout=ctx.dbus_timeout)
+        except dbus.DBusException, exception:
+            # Do nothing if preRemove method is not defined in package script
+            if not (exception._dbus_error_name.startswith("tr.org.pardus.comar") and
+                exception._dbus_error_name.split('tr.org.pardus.comar.')[1] == 'python.missing'):
+                raise Error, _("Script error: %s") % exception
     
     ctx.ui.debug(_("Calling pre remove handlers"))
-    com.call("System.PackageHandler.cleanupPackage", [ "metapath", metapath, "filepath", filepath ])
-    wait_for_result(com)
+    for handler in sys_iface.listModelApplications("System.PackageHandler"):
+        iface = get_iface(handler, "System.PackageHandler")
+        try:
+            iface.cleanupPackage(metapath, filepath, timeout=ctx.dbus_timeout)
+        except dbus.DBusException, exception:
+            # Do nothing if cleanupPackage method is not defined in package script
+            if not (exception._dbus_error_name.startswith("tr.org.pardus.comar") and
+               exception._dbus_error_name.split('tr.org.pardus.comar.')[1] == 'python.missing'):
+                raise Error, _("Script error: %s") % exception
     
     ctx.ui.debug(_("Unregistering comar scripts"))
-    com.remove(package_name)
-    wait_for_result(com)
+    try:
+        sys_iface.remove(object_name)
+    except dbus.DBusException, exception:
+        raise Error, _("Script error: %s") % exception

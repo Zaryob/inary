@@ -19,6 +19,7 @@ import shutil
 import tarfile
 import zipfile
 import gzip
+import struct
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -114,8 +115,7 @@ class ArchiveTar(ArchiveBase):
         elif self.type == 'tarlzma':
             rmode = 'r:'
             self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
-            ret, out, err = util.run_batch("lzma d %s %s" % (self.file_path + ctx.const.lzma_suffix,
-                                                             self.file_path))
+            ret, out, err = util.run_batch("lzma -k -f -d %s%s" % (self.file_path,ctx.const.lzma_suffix))
             if ret != 0:
                 raise LzmaRuntimeError(err)
         else:
@@ -190,9 +190,9 @@ class ArchiveTar(ArchiveBase):
         if self.tar.mode == 'wb' and self.type == 'tarlzma':
             batch = None
             if ctx.config.values.build.compressionlevel:
-                batch = "lzmash -%s %s" % (ctx.config.values.build.compressionlevel, self.file_path)
+                batch = "lzma -%s -z %s" % (ctx.config.values.build.compressionlevel, self.file_path)
             else:
-                batch = "lzmash %s" % self.file_path
+                batch = "lzma -z %s" % self.file_path
 
             ret, out, err = util.run_batch(batch)
             if ret != 0:
@@ -213,7 +213,23 @@ class MyZipFile(zipfile.ZipFile):
                   "Attempt to read ZIP archive that was already closed"
         zinfo = self.getinfo(name)
         filepos = self.fp.tell()
-        self.fp.seek(zinfo.file_offset, 0)
+
+        self.fp.seek(zinfo.header_offset, 0)
+
+        # Skip the file header:
+        fheader = self.fp.read(30)
+        if fheader[0:4] != zipfile.stringFileHeader:
+            raise BadZipfile, "Bad magic number for file header"
+
+        fheader = struct.unpack(zipfile.structFileHeader, fheader)
+        fname = self.fp.read(fheader[zipfile._FH_FILENAME_LENGTH])
+        if fheader[zipfile._FH_EXTRA_FIELD_LENGTH]:
+            self.fp.read(fheader[zipfile._FH_EXTRA_FIELD_LENGTH])
+
+        if fname != zinfo.orig_filename:
+            raise zipfile.BadZipfile, \
+                  'File name in directory "%s" and header "%s" differ.' % (
+                zinfo.orig_filename, fname)
 
         destfile = file(outname, 'wb')
 
