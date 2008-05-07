@@ -68,17 +68,22 @@ def get_iface(package="", model=""):
     # or restarting after an update. So we give comar a chance to become
     # active in a reasonable time.
     timeout = 7
+    exceptions = []
     while timeout > 0:
         try:
             bus = dbus.bus.BusConnection(address_or_type="unix:path=%s" % sockname)
             obj = bus.get_object(ctx.comar_destination, obj_path, introspect=False)
             iface = dbus.Interface(obj, dbus_interface=obj_interface)
             return iface
-        except dbus.DBusException:
+        except dbus.DBusException, e:
+            exceptions.append(str(e))
+            pass
+        except Exception, e:
+            exceptions.append(str(e))
             pass
         time.sleep(0.2)
         timeout -= 0.2
-    raise Error(_("cannot connect to dbus"))
+    raise Error(_("cannot connect to dbus: \n  %s\n") % "\n  ".join(exceptions))
 
 def post_install(package_name, provided_scripts, scriptpath, metapath, filepath, fromVersion, fromRelease, toVersion, toRelease):
     """Do package's post install operations"""
