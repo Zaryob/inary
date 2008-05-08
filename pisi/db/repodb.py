@@ -21,6 +21,9 @@ import pisi.index
 import pisi.context as ctx
 import pisi.db.lazydb as lazydb
 
+class RepoError(pisi.Error):
+    pass
+
 class Repo:
     def __init__(self, indexuri):
         self.indexuri = indexuri
@@ -40,7 +43,7 @@ class RepoOrder:
             repo_node = node.appendTag("Repo")
         except IndexError:
             repo_node = repo_doc.insertTag("Repo")
-        
+
         name_node = repo_node.insertTag("Name")
         name_node.insertData(repo_name)
 
@@ -81,7 +84,7 @@ class RepoOrder:
         if not os.path.exists(repos_file):
             return piksemel.newDocument("REPOS")
         return piksemel.parse(repos_file)
-    
+
     def _get_repos(self):
         repo_doc = self._get_doc()
         order = {}
@@ -109,8 +112,11 @@ class RepoDB(lazydb.LazyDB):
         if index_path.endswith("bz2"):
             index_path = index_path.split(".bz2")[0]
 
-        return piksemel.parse(index_path)
-    
+        try:
+            return piksemel.parse(index_path)
+        except Exception, e:
+            raise RepoError("Error parsing repository index information. Index file does not exist or is malformed.")
+
     def get_repo(self, repo):
         return Repo(pisi.uri.URI(self.get_repo_url(repo)))
 
