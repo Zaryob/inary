@@ -139,7 +139,7 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath,
                 raise Error, _("Script error: %s") % exception
     
     if package_name == 'comar':
-        pisi.api.set_comar_destination('tr.org.pardus.comar.new')
+        pisi.api.set_comar_destination('tr.org.pardus.comar2')
 
 def pre_remove(package_name, metapath, filepath):
     """Do package's pre removal operations"""
