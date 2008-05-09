@@ -752,12 +752,13 @@ def clearCache(all=False):
     pkgList = map(lambda x: os.path.basename(x).split(".pisi")[0], glob.glob("%s/*.pisi" % cacheDir))
     if not all:
         # Cache limits from pisi.conf
-        limit = int(ctx.config.values.general.package_cache_limit) * 1024 * 1024 # is this safe?
-        if not limit:
+        config = pisi.configfile.ConfigurationFile("/etc/pisi/pisi.conf")
+        cacheLimit = int(config.get("general", "package_cache_limit")) * 1024 * 1024 # is this safe?
+        if not cacheLimit:
             return
 
         old, latest = getPackageLists(pkgList)
         order = getRemoveOrder(cacheDir, latest) + getRemoveOrder(cacheDir, old)
-        removeOrderByLimit(cacheDir, order, limit)
+        removeOrderByLimit(cacheDir, order, cacheLimit)
     else:
         removeAll(cacheDir)
