@@ -444,7 +444,10 @@ class Builder:
                 import catbox
                 # stupid autoconf family needs /usr/lib/conftest* and /usr/lib/cf* for some conftest,
                 # http://sources.gentoo.org/viewcvs.py/portage/trunk/sandbox/files/sandbox/sandbox.c also permits these
-                valid_dirs = [self.pkg_dir(), "/tmp/", "/var/tmp/", "/dev/tty", "/dev/pts/", "/dev/pty", "/dev/null", "/dev/zero", "/dev/ptmx", "/proc/", "/usr/lib/conftest", "/usr/lib/cf"]
+                valid_dirs = [self.pkg_dir(), "/tmp/", "/var/tmp/", "/var/run/utmp", \
+                                            "/dev/tty", "/dev/pts/", "/dev/pty", \
+                                            "/dev/null", "/dev/zero", "/dev/ptmx", \
+                                            "/proc/", "/usr/lib/conftest", "/usr/lib/cf"]
                 if ctx.config.values.build.buildhelper == "ccache":
                     valid_dirs.append("%s/.ccache" % os.environ["HOME"])
                 # every qt/KDE application check these
@@ -456,10 +459,8 @@ class Builder:
                 valid_dirs.append("/usr/qt/3/etc/settings/qt_plugins_3.3rc.tmp")
                 valid_dirs.append("/usr/qt/3/etc/settings/qt_plugins_3.3rc")
                 ret = catbox.run(self.actionLocals[func], valid_dirs, logger=self.log_sandbox_violation)
-                if ret.code == 1:
-                    raise RuntimeError
-                if ret.violations != []:
-                    ctx.ui.error(_("Sandbox violations!"))
+                if ret.code == 1 or ret.violations != []:
+                    raise Error(_("Sandbox violaions!"))
         else:
             if mandatory:
                 raise Error(_("unable to call function from actions: %s") % func)
