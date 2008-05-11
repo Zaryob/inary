@@ -101,18 +101,18 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath,
         elif script.om == "System.Service":
             sys_service = True
         try:
-            sys_iface.register(object_name, script.om, os.path.join(scriptpath, script.script))
+            sys_iface.register(object_name, script.om, os.path.join(scriptpath, script.script), timeout=ctx.dbus_timeout)
         except dbus.DBusException, exception:
             raise Error, _("Script error: %s") % exception
         if sys_service:
             try:
                 iface = get_iface(object_name, "System.Service")
-                iface.registerState()
+                iface.registerState(timeout=ctx.dbus_timeout)
             except dbus.DBusException, exception:
                 raise Error, _("Script error: %s") % exception
     
     ctx.ui.debug(_("Calling post install handlers"))
-    for handler in sys_iface.listModelApplications("System.PackageHandler"):
+    for handler in sys_iface.listModelApplications("System.PackageHandler", timeout=ctx.dbus_timeout):
         iface = get_iface(handler, "System.PackageHandler")
         try:
             iface.setupPackage(metapath, filepath, timeout=ctx.dbus_timeout)
@@ -148,7 +148,7 @@ def pre_remove(package_name, metapath, filepath):
     sys_iface = get_iface()
     object_name = make_object_path(package_name)
     
-    if "System.Package" in sys_iface.listApplicationModels(object_name):
+    if "System.Package" in sys_iface.listApplicationModels(object_name, timeout=ctx.dbus_timeout):
         ctx.ui.debug(_("Running package's pre remove script"))
         iface = get_iface(object_name, "System.Package")
         try:
@@ -172,6 +172,6 @@ def pre_remove(package_name, metapath, filepath):
     
     ctx.ui.debug(_("Unregistering comar scripts"))
     try:
-        sys_iface.remove(object_name)
+        sys_iface.remove(object_name, timeout=ctx.dbus_timeout)
     except dbus.DBusException, exception:
         raise Error, _("Script error: %s") % exception
