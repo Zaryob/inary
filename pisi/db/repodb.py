@@ -104,6 +104,9 @@ class RepoDB(lazydb.LazyDB):
     def has_repo(self, name):
         return name in self.list_repos()
 
+    def has_repo_url(self, url):
+        return url in self.list_repo_urls()
+
     def get_repo_doc(self, repo_name):
         repo = self.get_repo(repo_name)
         index = os.path.basename(repo.indexuri.get_uri())
@@ -153,3 +156,9 @@ class RepoDB(lazydb.LazyDB):
 
     def list_repos(self):
         return self.repoorder.get_order()
+
+    def list_repo_urls(self):
+        repos = []
+        for r in self.list_repos():
+            repos.append(self.get_repo_url(r))
+        return repos
