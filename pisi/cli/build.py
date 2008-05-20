@@ -72,8 +72,8 @@ to be downloaded from a repository containing sources.
                                help=_("PiSi binary package formats: '1.0', '1.1' (default)"))
         group.add_option("--use-quilt", action="store_true", default=False,
                                help=_("Use quilt patch management system instead of GNU patch"))
-        group.add_option("--enable-sandbox", action="store_true", default=False,
-                               help=_("Constrain build process inside the build folder"))
+        group.add_option("--ignore-sandbox", action="store_true", default=False,
+                               help=_("Do not constrain build process inside the build folder"))
 
     def add_steps_options(self):
         group = optparse.OptionGroup(self.parser, _("build steps"))

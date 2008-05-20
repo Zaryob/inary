@@ -24,6 +24,7 @@
 #[build]
 #host = i686-pc-linux-gnu
 #generateDebug = False
+#enableSandbox = False
 #jobs = "-j1"
 #CFLAGS= -mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2
 #CXXFLAGS= -mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2
@@ -78,6 +79,7 @@ class BuildDefaults:
     host = "i686-pc-linux-gnu"
     jobs = "-j1"
     generateDebug = False
+    enableSandbox = False
     cflags = "-mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
     cxxflags = "-mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
     ldflags = "-Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu"

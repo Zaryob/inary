@@ -438,7 +438,7 @@ class Builder:
         os.chdir(self.srcDir)
 
         if func in self.actionLocals:
-            if not ctx.get_option('enable_sandbox'):
+            if ctx.get_option('ignore_sandbox') or not ctx.config.values.build.enablesandbox:
                 self.actionLocals[func]()
             else:
                 import catbox
