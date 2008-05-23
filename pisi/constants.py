@@ -82,6 +82,7 @@ class Constants:
         self.__c.install_tar = "install.tar"
         self.__c.install_tar_lzma = "install.tar.lzma"
         self.__c.mirrors_conf = "/etc/pisi/mirrors.conf"
+        self.__c.sandbox_conf = "/etc/pisi/sandbox.conf"
         self.__c.blacklist = "/etc/pisi/blacklist"
         self.__c.config_pending = "configpending"
         self.__c.files_db = "files.db"

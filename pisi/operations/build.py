@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005 - 2008, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -442,25 +442,25 @@ class Builder:
                 self.actionLocals[func]()
             else:
                 import catbox
-                # stupid autoconf family needs /usr/lib/conftest* and /usr/lib/cf* for some conftest,
-                # http://sources.gentoo.org/viewcvs.py/portage/trunk/sandbox/files/sandbox/sandbox.c also permits these
-                valid_dirs = [self.pkg_dir(), "/tmp/", "/var/tmp/", "/var/run/utmp", "/dev/tty", \
-                                            "/dev/pts/", "/dev/pty", "/dev/null", "/dev/zero",   \
-                                            "/dev/ptmx", "/dev/shm/", "/dev/full", "/proc/",     \
-                                            "/usr/lib/conftest", "/usr/lib/cf"]
+                
+                # Configure allowed paths from sandbox.conf
+                valid_paths = [ self.pkg_dir() ]
+                conf_file = ctx.const.sandbox_conf
+                if os.path.exists(conf_file):
+                    for line in file(conf_file):
+                        line = line.strip()
+                        if len(line) > 0 and not line.startswith("#"):
+                            if line.startswith("~"):
+                                line = os.environ["HOME"] + line[1:]
+                            valid_paths.append(line)
+                
+                # Extra path for ccache when needed
                 if ctx.config.values.build.buildhelper == "ccache":
                     valid_dirs.append("%s/.ccache" % os.environ["HOME"])
-                # every qt/KDE application check these
-                valid_dirs.append("%s/.qt/.qt_plugins_3.3rc.lock" % os.environ["HOME"])
-                valid_dirs.append("%s/.qt/qt_plugins_3.3rc.tmp" % os.environ["HOME"])
-                valid_dirs.append("%s/.qt/.qtrc.lock" % os.environ["HOME"])
-                valid_dirs.append("%s/.qt/.qt_designerrc.lock" % os.environ["HOME"])
-                valid_dirs.append("/usr/qt/3/etc/settings/.qt_plugins_3.3rc.lock")
-                valid_dirs.append("/usr/qt/3/etc/settings/qt_plugins_3.3rc.tmp")
-                valid_dirs.append("/usr/qt/3/etc/settings/qt_plugins_3.3rc")
-                ret = catbox.run(self.actionLocals[func], valid_dirs, logger=self.log_sandbox_violation)
+                
+                ret = catbox.run(self.actionLocals[func], valid_paths, logger=self.log_sandbox_violation)
                 if ret.code == 1 or ret.violations != []:
-                    raise Error(_("Sandbox violaions!"))
+                    raise Error(_("Sandbox violations!"))
         else:
             if mandatory:
                 raise Error(_("unable to call function from actions: %s") % func)
