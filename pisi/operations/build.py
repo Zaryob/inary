@@ -458,7 +458,7 @@ class Builder:
                 
                 # Extra path for ccache when needed
                 if ctx.config.values.build.buildhelper == "ccache":
-                    valid_dirs.append("%s/.ccache" % os.environ["HOME"])
+                    valid_paths.append("%s/.ccache" % os.environ["HOME"])
                 
                 ret = catbox.run(self.actionLocals[func], valid_paths, logger=self.log_sandbox_violation)
                 if ret.code == 1 or ret.violations != []:
