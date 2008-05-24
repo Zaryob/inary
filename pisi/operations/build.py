@@ -443,6 +443,8 @@ class Builder:
             else:
                 import catbox
                 
+                ctx.ui.info(_("Sandbox enabled build..."))
+
                 # Configure allowed paths from sandbox.conf
                 valid_paths = [ self.pkg_dir() ]
                 conf_file = ctx.const.sandbox_conf
