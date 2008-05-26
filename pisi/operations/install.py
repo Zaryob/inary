@@ -133,7 +133,7 @@ def install_pkg_files(package_URIs):
     # be satisfied by installing packages from the repo
     for dep in dep_unsatis:
         if not dependency.repo_satisfies_dep(dep):
-            raise Exception(_('External dependencies not satisfied: %s' % dep))
+            raise Exception(_('External dependencies not satisfied: %s') % dep)
 
     # if so, then invoke install_pkg_names
     extra_packages = [x.package for x in dep_unsatis]
