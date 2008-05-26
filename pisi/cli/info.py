@@ -163,7 +163,7 @@ Usage: info <package1> <package2> ... <packagen>
                 
             self.print_metadata(metadata, self.installdb)
         else:
-            ctx.ui.info(_("%s is not installed") % package)
+            ctx.ui.info(_("%s package is not installed") % package)
 
     def packagedb_info(self, package):
         if self.packagedb.has_package(package):
@@ -174,7 +174,7 @@ Usage: info <package1> <package2> ... <packagen>
                 ctx.ui.info(_('Package found in %s repository:') % repo)
             self.print_metadata(metadata, self.packagedb)
         else:
-            ctx.ui.info(_("%s is not found in repositories") % package)
+            ctx.ui.info(_("%s package is not found in binary repositories") % package)
 
     def sourcedb_info(self, package):
         if self.sourcedb.has_spec(package):
@@ -186,4 +186,4 @@ Usage: info <package1> <package2> ... <packagen>
                 ctx.ui.info(_('Package found in %s repository:') % repo)
             self.print_specdata(spec, self.sourcedb)
         else:
-            ctx.ui.info(_("%s is not found in repositories") % package)
+            ctx.ui.info(_("%s package is not found in source repositories") % package)
