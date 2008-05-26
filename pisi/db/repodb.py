@@ -115,6 +115,10 @@ class RepoDB(lazydb.LazyDB):
         if index_path.endswith("bz2"):
             index_path = index_path.split(".bz2")[0]
 
+        if not os.path.exists(index_path):
+            ctx.ui.warning("%s repository needs to be updated" % repo_name)
+            return piksemel.newDocument("PISI")
+
         try:
             return piksemel.parse(index_path)
         except Exception, e:
