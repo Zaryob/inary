@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
-"POT-Creation-Date: 2008-05-26 11:28+EEST\n"
+"POT-Creation-Date: 2008-05-26 12:02+EEST\n"
 "PO-Revision-Date: 2008-02-19 19:57+0200\n"
 "Last-Translator: Mustafa Ölcerman <m.oelcerman@pardus-linux.de>\n"
 "Language-Team: Deutsch <pardus-translation-de@pardus.org.tr>\n"
@@ -777,33 +777,62 @@ msgstr ""
 "\n"
 "Gebrauch \"%prog help <command>\" für Hilfe für einen bestimmten Befehl.\n"
 
-#: pisi/cli/history.py:44
+#: pisi/cli/history.py:28
+#, fuzzy
+msgid "emerge"
+msgstr "emerge Optionen"
+
+#: pisi/cli/history.py:28
+#, fuzzy
+msgid "install"
+msgstr "installiert"
+
+#: pisi/cli/history.py:28
+#, fuzzy
+msgid "remove"
+msgstr "%s entfernt"
+
+#: pisi/cli/history.py:28
+msgid "snapshot"
+msgstr ""
+
+#: pisi/cli/history.py:28
+#, fuzzy
+msgid "takeback"
+msgstr "Zurückfolge:"
+
+#: pisi/cli/history.py:28
+#, fuzzy
+msgid "upgrade"
+msgstr "%s aktualisiert"
+
+#: pisi/cli/history.py:47
 #, fuzzy
 msgid "history options"
 msgstr "Optionen list-sources"
 
-#: pisi/cli/history.py:50
+#: pisi/cli/history.py:53
 msgid "Output only the last n operations"
 msgstr ""
 
-#: pisi/cli/history.py:52
+#: pisi/cli/history.py:55
 msgid "Take snapshot of the current system"
 msgstr ""
 
-#: pisi/cli/history.py:54
+#: pisi/cli/history.py:57
 msgid "Takeback to the state after the given operation finished"
 msgstr ""
 
-#: pisi/cli/history.py:64
+#: pisi/cli/history.py:67
 #, fuzzy
 msgid "Operation #%d: %s"
 msgstr "Beschreibung: %s\n"
 
-#: pisi/cli/history.py:65
+#: pisi/cli/history.py:68
 msgid "Date: %s %s"
 msgstr ""
 
-#: pisi/cli/history.py:69
+#: pisi/cli/history.py:72
 msgid "    * There are %d packages in this snapshot."
 msgstr ""
 
@@ -1346,6 +1375,28 @@ msgstr "ERROR: gpg --detach-sig %s fehlgeschlagen"
 #: pisi/graph.py:31
 msgid "Encountered cycle %s"
 msgstr "Zusammengetroffener Zyklus %s"
+
+#: pisi/history.py:46
+msgid "%s is upgraded from %s to %s."
+msgstr ""
+
+#: pisi/history.py:48
+msgid "%s %s is removed."
+msgstr ""
+
+#: pisi/history.py:50
+#, fuzzy
+msgid "%s %s is installed."
+msgstr "%s ist nicht installiert worden"
+
+#: pisi/history.py:52
+#, fuzzy
+msgid "%s %s is reinstalled."
+msgstr "%s ist nicht installiert worden"
+
+#: pisi/history.py:54
+msgid "%s is downgraded from %s to %s."
+msgstr ""
 
 #: pisi/index.py:97
 msgid "Adding %s to component index"
@@ -2545,9 +2596,6 @@ msgstr "Suche im Binär - Depot...\n"
 #~ "freien Platz auf der Festplatte haben. Der Befehl rebuild-db braucht nur "
 #~ "ausgeführt werden bei beschädigten Dateien und Aktualisationen der "
 #~ "Datenbank."
-
-#~ msgid "%s is not installed"
-#~ msgstr "%s ist nicht installiert worden"
 
 #~ msgid "Could not restart comar"
 #~ msgstr "Comar konnte nicht neugestartet werden"

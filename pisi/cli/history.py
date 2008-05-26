@@ -24,6 +24,9 @@ import pisi.db
 import pisi.context as ctx
 import pisi.cli.command as command
 
+# Operation names for translation
+opttrans = {"upgrade":_("upgrade"),"remove":_("remove"),"emerge":_("emerge"), "install":_("install"), "snapshot":_("snapshot"), "takeback":_("takeback")}
+
 class History(command.PackageOp):
     """History of pisi operations
 
@@ -61,7 +64,7 @@ Lists previous operations."""
 
     def print_history(self):
         for operation in self.historydb.get_last(ctx.get_option('last')):
-            print _("Operation #%d: %s") % (operation.no, operation.type)
+            print _("Operation #%d: %s") % (operation.no, opttrans[operation.type])
             print _("Date: %s %s") % (operation.date, operation.time)
             print
 
