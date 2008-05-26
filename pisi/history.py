@@ -43,15 +43,15 @@ class Package:
         # "upgrade", "remove", "install", "reinstall", "downgrade"
         operation = ""
         if self.operation == "upgrade":
-            return "%s is upgraded from %s to %s." % (self.name, self.before, self.after)
+            return _("%s is upgraded from %s to %s.") % (self.name, self.before, self.after)
         elif self.operation == "remove":
-            return "%s %s is removed." % (self.name, self.before)
+            return _("%s %s is removed.") % (self.name, self.before)
         elif self.operation == "install":
-            return "%s %s is installed." % (self.name, self.after)
+            return _("%s %s is installed.") % (self.name, self.after)
         elif self.operation == "reinstall":
-            return "%s %s is reinstalled." % (self.name, self.after)
+            return _("%s %s is reinstalled.") % (self.name, self.after)
         elif self.operation == "downgrade":
-            return "%s is downgraded from %s to %s." % (self.name, self.before, self.after)
+            return _("%s is downgraded from %s to %s.") % (self.name, self.before, self.after)
         else:
             return ""
 
