@@ -187,7 +187,7 @@ class Fetcher:
 
     def _get_bandwith_limit(self):
         bandwidth_limit = ctx.config.options.bandwidth_limit or ctx.config.values.general.bandwidth_limit
-        if bandwidth_limit:
+        if bandwidth_limit and bandwidth_limit != "0":
             ctx.ui.warning(_("Bandwidth usage is limited to %s KB/s") % bandwidth_limit)
             return 1024 * int(bandwidth_limit)
         else:
