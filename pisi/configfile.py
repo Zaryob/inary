@@ -20,6 +20,7 @@
 #[general]
 #destinationdirectory = /
 #autoclean = False
+#bandwidth_limit = 0
 #
 #[build]
 #host = i686-pc-linux-gnu
@@ -73,6 +74,7 @@ class GeneralDefaults:
     ftp_proxy = os.getenv("FTP_PROXY") or None
     package_cache = False
     package_cache_limit = 0
+    bandwidth_limit = 0
 
 class BuildDefaults:
     """Default values for [build] section"""
