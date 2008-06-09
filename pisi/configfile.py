@@ -38,7 +38,7 @@
 #[directories]
 #lib_dir = /var/lib/pisi
 #info_dir = "/var/lib/pisi/info"
-#history_dir = /var/cache/pisi/history
+#history_dir = /var/lib/pisi/history
 #archives_dir = /var/cache/pisi/archives
 #cached_packages_dir = /var/cache/pisi/packages
 #compiled_packages_dir = "/var/cache/pisi/packages"
@@ -95,7 +95,7 @@ class DirectoriesDefaults:
     lib_dir = "/var/lib/pisi"
     log_dir = "/var/log"
     info_dir = "/var/lib/pisi/info"
-    history_dir = "/var/cache/pisi/history"
+    history_dir = "/var/lib/pisi/history"
     archives_dir = "/var/cache/pisi/archives"
     cached_packages_dir = "/var/cache/pisi/packages"
     compiled_packages_dir = "/var/cache/pisi/packages"
