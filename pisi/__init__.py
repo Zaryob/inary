@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+0;115;0c# -*- coding: utf-8 -*-
 #
 # Copyright (C) 2005 - 2007, TUBITAK/UEKAE
 #
@@ -16,7 +16,7 @@ import os
 import atexit
 import logging
 
-__version__ = "2.0_alpha8"
+__version__ = "2.0_beta1"
 
 __all__ = [ 'api', 'configfile', 'db']
 
