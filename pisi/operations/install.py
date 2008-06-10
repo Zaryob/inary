@@ -219,6 +219,8 @@ def plan_install_pkg_names(A, ignore_package_conflicts = False):
                 ctx.ui.debug('checking %s' % str(dep))
                 # we don't deal with already *satisfied* dependencies
                 if not dependency.installed_satisfies_dep(dep):
+                    if not dependency.repo_satisfies_dep(dep):
+                        raise Exception(_('%s dependency of package %s is not satisfied') % (dep, pkg.name))
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
