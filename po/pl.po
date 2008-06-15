@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-26 12:02+EEST\n"
+"POT-Creation-Date: 2008-06-15 15:38+EEST\n"
 "PO-Revision-Date: 2006-04-08 12:19+0900\n"
 "Last-Translator: Piotr Maliński <riklaunim@gmail.com>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -431,8 +431,9 @@ msgid "Not removing conflicted file : %s"
 msgstr "Nie usuwam kolidującego pliku : %s"
 
 #: pisi/atomicoperations.py:525
+#, fuzzy
 msgid ""
-"Installed file %s is not exists on system [Probably you manually deleted]"
+"Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
 "Zainstalowany plik %s nie istnieje w systemie [Prawdopodobnie został "
 "usunięty ręcznie]"
@@ -1161,7 +1162,7 @@ msgstr ""
 msgid "Destination directory %s does not exist. Creating it."
 msgstr ""
 
-#: pisi/configfile.py:119
+#: pisi/configfile.py:121
 msgid "No section by name '%s'"
 msgstr ""
 
@@ -1244,7 +1245,7 @@ msgstr "Repozytorium %s nie istnieje. Nie można usunąć."
 msgid "Package %s not found."
 msgstr "Plik %s nie został znaleziony"
 
-#: pisi/dependency.py:71
+#: pisi/dependency.py:71 pisi/operations/install.py:223
 msgid "%s dependency of package %s is not satisfied"
 msgstr ""
 

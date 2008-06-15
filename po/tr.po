@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2008-05-26 12:02+EEST\n"
+"POT-Creation-Date: 2008-06-15 15:38+EEST\n"
 "PO-Revision-Date: 2007-07-05 10:00+0300\n"
 "Last-Translator: Faik Uygur <faik@pardus.org.tr>\n"
 "Language-Team:  <tr@li.org>\n"
@@ -451,8 +451,9 @@ msgid "Not removing conflicted file : %s"
 msgstr "Çakışan dosya silinmiyor : %s"
 
 #: pisi/atomicoperations.py:525
+#, fuzzy
 msgid ""
-"Installed file %s is not exists on system [Probably you manually deleted]"
+"Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr "Kurulmuş dosya %s sistemde bulunmuyor [Muhtemelen el ile silindi]"
 
 #: pisi/cli/__init__.py:76
@@ -1193,7 +1194,7 @@ msgstr "comar betikleri siliniyor"
 msgid "Destination directory %s does not exist. Creating it."
 msgstr "Hedef dizini %s bulunamadı. Yaratılıyor."
 
-#: pisi/configfile.py:119
+#: pisi/configfile.py:121
 msgid "No section by name '%s'"
 msgstr "'%s' diye bir bölüm yok."
 
@@ -1273,7 +1274,7 @@ msgstr "%s deposu bulunmuyor."
 msgid "Package %s not found."
 msgstr "Paket %s bulunamadı"
 
-#: pisi/dependency.py:71
+#: pisi/dependency.py:71 pisi/operations/install.py:223
 msgid "%s dependency of package %s is not satisfied"
 msgstr "%s bağımlılığı %s paketi için sağlanamadı"
 

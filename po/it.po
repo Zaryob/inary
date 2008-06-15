@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
-"POT-Creation-Date: 2008-05-26 12:02+EEST\n"
+"POT-Creation-Date: 2008-06-15 15:38+EEST\n"
 "PO-Revision-Date: 2007-07-11 21:08+0200\n"
 "Last-Translator: Andrea Decorte <adecorte@gmail.com>\n"
 "Language-Team: Italian <pardus-translation-it@pardus.org.tr>\n"
@@ -439,8 +439,9 @@ msgid "Not removing conflicted file : %s"
 msgstr "File in conflitto non rimossi: %s"
 
 #: pisi/atomicoperations.py:525
+#, fuzzy
 msgid ""
-"Installed file %s is not exists on system [Probably you manually deleted]"
+"Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
 "Il file installato %s non è presente nel sistema [Probabilmente è stato "
 "eliminato manualmente]"
@@ -1203,7 +1204,7 @@ msgstr "Deregistrazionescript COMAR"
 msgid "Destination directory %s does not exist. Creating it."
 msgstr "La cartella di destinazione %s non esiste. La sto creando."
 
-#: pisi/configfile.py:119
+#: pisi/configfile.py:121
 msgid "No section by name '%s'"
 msgstr "Nessuna sezione di nome '%s'"
 
@@ -1288,7 +1289,7 @@ msgstr "Il repository %s non esiste. Impossibile rimuovere."
 msgid "Package %s not found."
 msgstr "Pacchetto %s non trovato"
 
-#: pisi/dependency.py:71
+#: pisi/dependency.py:71 pisi/operations/install.py:223
 msgid "%s dependency of package %s is not satisfied"
 msgstr "La dipendenza %s del pacchetto %s non è soddisfatta"
 

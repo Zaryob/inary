@@ -522,7 +522,7 @@ class Remove(AtomicOperation):
             elif os.path.isdir(fpath) and not os.listdir(fpath):
                 os.rmdir(fpath)
             else:
-                ctx.ui.warning(_('Installed file %s is not exists on system [Probably you manually deleted]') % fpath)
+                ctx.ui.warning(_('Installed file %s does not exist on system [Probably you manually deleted]') % fpath)
                 return
 
             # remove emptied directories
