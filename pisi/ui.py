@@ -26,6 +26,15 @@ class UI(object):
             except ArithmeticError:
                 self.percent = 0
 
+        def update(self, size):
+            if not self.totalsize:
+                return 100
+            try:
+                self.percent = (size * 100) / self.totalsize
+            except ArithmeticError:
+                self.percent = 0
+            return self.percent
+
     def __init__(self, debuggy = False, verbose = False):
         self.show_debug = debuggy
         self.show_verbose = verbose

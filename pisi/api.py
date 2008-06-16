@@ -353,11 +353,15 @@ def snapshot():
     installed. The record is kept by pisi history mechanism as it works automatically on install, remove 
     and upgrade operations.
     """
-    
-    installdb = pisi.db.installdb.InstallDB() 
+
+    installdb = pisi.db.installdb.InstallDB()
     historydb = pisi.db.historydb.HistoryDB()
     historydb.create_history("snapshot")
 
+    li = installdb.list_installed()
+    progress = ctx.ui.Progress(len(li))
+
+    processed = 0
     for name in installdb.list_installed():
         package = installdb.get_package(name)
         historydb.add_package(pkgBefore=package, operation="snapshot")
@@ -365,6 +369,11 @@ def snapshot():
         for f in installdb.get_files(name).list:
             if f.type == "config" and pisi.util.config_changed(f):
                 historydb.save_config(name, "/%s" % f.path)
+
+        processed += 1
+        ctx.ui.display_progress(operation = "snapshot",
+                                percent = progress.update(processed),
+                                info = _("Taking snapshot of the system"))
 
     historydb.update_history()
 
