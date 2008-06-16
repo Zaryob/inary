@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005 - 2008, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -55,8 +55,8 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
                 name = self.args[0]
                 indexuri = self.args[1]
             else:
-                name = 'pardus-2007'
-                indexuri = 'http://paketler.pardus.org.tr/pardus-2007/pisi-index.xml.bz2'
+                name = 'pardus-2008'
+                indexuri = 'http://paketler.pardus.org.tr/pardus-2008/pisi-index.xml.bz2'
             pisi.api.add_repo(name, indexuri, ctx.get_option('at'))
             if ctx.ui.confirm(_('Update PiSi database for repository %s?') % name):
                 try:
