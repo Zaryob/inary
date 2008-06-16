@@ -347,6 +347,16 @@ def takeback(operation):
 
     pisi.operations.history.takeback(operation)
 
+def get_takeback_plan(operation):
+    """
+    Calculates and returns the plan of the takeback operation that contains information of which
+    packages are going to be removed and which packages are going to be installed
+    @param operation: number of the operation that the system will be taken back -> integer
+    """
+
+    beinstalled, beremoved, configs = pisi.operations.history.plan_takeback(operation)
+    return beinstalled, beremoved
+
 def snapshot():
     """
     Takes snapshot of the system packages. The snapshot is only a record of which packages are currently

@@ -34,7 +34,7 @@ def __pkg_already_installed(name, pkginfo):
     return (ver, rel, build) == installdb.get_version(name)
 
 def __listactions(actions):
-    
+
     beinstalled = []
     beremoved = []
     configs = []
@@ -108,15 +108,18 @@ def get_takeback_actions(operation):
 
     return actions
 
-def takeback(operation):
-
+def plan_takeback(operation):
     op = historydb.get_operation(operation)
     if op.type == "snapshot":
         actions = get_snapshot_actions(op)
     else:
         actions = get_takeback_actions(operation)
 
-    beinstalled, beremoved, configs = __listactions(actions)
+    return __listactions(actions)
+
+def takeback(operation):
+
+    beinstalled, beremoved, configs = plan_takeback(operation)
 
     if beinstalled:
         ctx.ui.info(_("Following packages will be installed:\n") + pisi.util.strlist(beinstalled))
