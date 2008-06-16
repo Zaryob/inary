@@ -25,7 +25,7 @@ class HistoryDB(lazydb.LazyDB):
 
     def init(self):
         self.__logs = self.__generate_history()
-        
+
     def __generate_history(self):
         logs = filter(lambda x:x.endswith(".xml"), os.listdir(ctx.config.history_dir()))
         logs.sort()
@@ -68,6 +68,30 @@ class HistoryDB(lazydb.LazyDB):
                 hist.operation.no = int(log.split("_")[0])
                 return hist.operation
         return None
+
+    def get_package_config_files(self, operation, package):
+        package_path = os.path.join(ctx.config.history_dir(), "%03d/%s" % (operation, package))
+        if not os.path.exists(package_path):
+            return None
+
+        configs = []
+        for root, dirs, files in os.walk(package_path):
+            for f in files:
+                configs.append(("%s/%s" % (root, f)))
+
+        return configs
+
+    def get_config_files(self, operation):
+        config_path = os.path.join(ctx.config.history_dir(), "%03d" % operation)
+        if not os.path.exists(config_path):
+            return None
+
+        allconfigs = {}
+        packages = os.listdir(config_path)
+        for package in packages:
+            allconfigs[package] = self.get_package_config_files(operation, package)
+
+        return allconfigs
 
     def get_till_operation(self, operation):
         if not filter(lambda x:x.startswith("%03d_" % operation), self.__logs):
