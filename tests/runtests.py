@@ -25,13 +25,5 @@ from versiontest import VersionTestCase
 
 suite = unittest.TestSuite()
 
-# Database related test cases
-suite.addTests([LazyDBTestCase, RepoDBTestCase, ItemByRepoTestCase,
-                PackageDBTestCase, InstallDBTestCase, ComponentDBTestCase, 
-                FilesDBTestCase, SourceDBTestCase])
-
-# Pisi class tests
-suite.addTests([VersionTestCase])
-
 if __name__ == '__main__':
     unittest.main()
