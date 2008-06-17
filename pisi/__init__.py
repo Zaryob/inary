@@ -16,7 +16,7 @@ import os
 import atexit
 import logging
 
-__version__ = "2.0_beta1"
+__version__ = "2.0_beta2"
 
 __all__ = [ 'api', 'configfile', 'db']
 
