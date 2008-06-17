@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
-"POT-Creation-Date: 2008-06-15 15:38+EEST\n"
+"POT-Creation-Date: 2008-06-17 12:13+EEST\n"
 "PO-Revision-Date: 2007-07-11 21:08+0200\n"
 "Last-Translator: Andrea Decorte <adecorte@gmail.com>\n"
 "Language-Team: Italian <pardus-translation-it@pardus.org.tr>\n"
@@ -247,19 +247,23 @@ msgstr "ActionsAPI [copytree]: La cartella %s non esiste."
 msgid "ActionsAPI [touch]: Permission denied: %s"
 msgstr "ActionsAPI [touch]: Permesso negato: %s"
 
-#: pisi/api.py:477
+#: pisi/api.py:386
+msgid "Taking snapshot of the system"
+msgstr ""
+
+#: pisi/api.py:496
 msgid "comar package is not fully installed"
 msgstr "il pacchetto COMAR non è completamente installato"
 
-#: pisi/api.py:489
+#: pisi/api.py:508
 msgid "File %s not found"
 msgstr "File %s non trovato"
 
-#: pisi/api.py:525
+#: pisi/api.py:544
 msgid "Checking /%s "
 msgstr "Verifica di /%s "
 
-#: pisi/api.py:531
+#: pisi/api.py:550
 msgid ""
 "\n"
 "Corrupt file: %s"
@@ -267,74 +271,74 @@ msgstr ""
 "\n"
 "File corrotto: %s"
 
-#: pisi/api.py:533 pisi/cli/check.py:75
+#: pisi/api.py:552 pisi/cli/check.py:75
 msgid "OK"
 msgstr "OK"
 
-#: pisi/api.py:538
+#: pisi/api.py:557
 #, fuzzy
 msgid ""
 "\n"
 "Missing file: %s"
 msgstr "File pacchetto: %s"
 
-#: pisi/api.py:549
+#: pisi/api.py:568
 msgid "* Building index of PiSi files under %s"
 msgstr "* Costruzione dell'indice dei file PiSi in %s"
 
-#: pisi/api.py:556
+#: pisi/api.py:575
 msgid "* Index file written"
 msgstr "* File di indice scritto"
 
-#: pisi/api.py:561
+#: pisi/api.py:580
 msgid "Repo %s already present."
 msgstr "Il repository %s è già presente."
 
-#: pisi/api.py:565
+#: pisi/api.py:584
 msgid "Repo %s added to system."
 msgstr "Il repository %s è stato aggiunto al sistema."
 
-#: pisi/api.py:571
+#: pisi/api.py:590
 msgid "Repo %s removed from system."
 msgstr "Il repository %s è stato rimosso dal sistema."
 
-#: pisi/api.py:573
+#: pisi/api.py:592
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "Il repository %s non esiste. Impossibile rimuovere."
 
-#: pisi/api.py:577
+#: pisi/api.py:596
 msgid "* Updating repository: %s"
 msgstr "* Aggiornamento del repository: %s"
 
-#: pisi/api.py:586
+#: pisi/api.py:605
 msgid "%s repository information is up-to-date."
 msgstr ""
 
-#: pisi/api.py:588
+#: pisi/api.py:607
 msgid "Updating database at any rate as requested"
 msgstr "Aggiornamento del database alla frequenza richiesta"
 
-#: pisi/api.py:598
+#: pisi/api.py:617
 msgid "* Package database updated."
 msgstr "* Database dei pacchetti aggiornato."
 
-#: pisi/api.py:600 pisi/api.py:625
+#: pisi/api.py:619 pisi/api.py:644
 msgid "No repository named %s found."
 msgstr "Nessun repository di nome %s trovato."
 
-#: pisi/api.py:608
+#: pisi/api.py:627
 msgid "* Rebuilding '%s' named repo... "
 msgstr "* Ricostruzione del repository di nome '%s'... "
 
-#: pisi/api.py:622
+#: pisi/api.py:641
 msgid "Input/Output error while reading %s: %s"
 msgstr "Errore in Input/Output durante la lettura di %s: %s"
 
-#: pisi/api.py:635
+#: pisi/api.py:654
 msgid "* Adding '%s' to db... "
 msgstr "* Aggiunta di %s al database... "
 
-#: pisi/api.py:638
+#: pisi/api.py:657
 msgid "OK."
 msgstr "OK."
 
@@ -1735,26 +1739,26 @@ msgstr "Utilità %s non trovata"
 msgid "%s [cached]"
 msgstr "%s [nella cache]"
 
-#: pisi/operations/history.py:122
+#: pisi/operations/history.py:125
 #, fuzzy
 msgid "Following packages will be installed:\n"
 msgstr "I seguenti pacchetti verranno aggiornati: "
 
-#: pisi/operations/history.py:125
+#: pisi/operations/history.py:128
 #, fuzzy
 msgid "Following packages will be removed:\n"
 msgstr "I seguenti pacchetti verranno aggiornati: "
 
-#: pisi/operations/history.py:127 pisi/operations/history.py:141
+#: pisi/operations/history.py:130 pisi/operations/history.py:144
 #: pisi/operations/install.py:144 pisi/operations/remove.py:72
 msgid "Do you want to continue?"
 msgstr "Vuoi proseguire?"
 
-#: pisi/operations/history.py:133 pisi/operations/upgrade.py:136
+#: pisi/operations/history.py:136 pisi/operations/upgrade.py:136
 msgid "Downloading %d / %d"
 msgstr "Scaricamento di %d/%d"
 
-#: pisi/operations/history.py:139
+#: pisi/operations/history.py:142
 msgid ""
 "\n"
 "Following packages could not be found in repositories and are not cached:\n"
