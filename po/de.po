@@ -2,15 +2,14 @@
 # translation of de.po to
 # Copyright (C) YEAR ORGANIZATION
 #
-# Mustafa M. Ölcerman <oelcerman@fussballkreis.org>, 2006.
-# Mustafa Muhammed Ölcerman <mustafa.oelcerman@fk-koeln.de>, 2007.
+# Mustafa Ölcerman <oelcerman@fussballkreis.org>, 2006.
 # Mustafa Ölcerman <mustafa.oelcerman@fk-koeln.de>, 2007.
 # Mustafa Ölcerman <m.oelcerman@pardus-linux.de>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "POT-Creation-Date: 2008-06-17 12:13+EEST\n"
-"PO-Revision-Date: 2008-02-19 19:57+0200\n"
+"PO-Revision-Date: 2008-06-18 00:19+0200\n"
 "Last-Translator: Mustafa Ölcerman <m.oelcerman@pardus-linux.de>\n"
 "Language-Team: Deutsch <pardus-translation-de@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
@@ -279,11 +278,12 @@ msgid "OK"
 msgstr "OK"
 
 #: pisi/api.py:557
-#, fuzzy
 msgid ""
 "\n"
 "Missing file: %s"
-msgstr "Paket-Datei: %s"
+msgstr ""
+"\n"
+"Fehlende Datei: %s"
 
 #: pisi/api.py:568
 msgid "* Building index of PiSi files under %s"
@@ -444,12 +444,8 @@ msgid "Not removing conflicted file : %s"
 msgstr "Konfliktierende Datei wird nicht entfernt: %s"
 
 #: pisi/atomicoperations.py:525
-#, fuzzy
-msgid ""
-"Installed file %s does not exist on system [Probably you manually deleted]"
-msgstr ""
-"Installierte Datei %s existiert nicht in dem System [ist wahrscheinlich per "
-"Hand gelöscht worden]"
+msgid "Installed file %s does not exist on system [Probably you manually deleted]"
+msgstr "Installierte Datei %s existiert nicht mehr im System [vermutlich haben Sie es manuell gelöscht]"
 
 #: pisi/cli/__init__.py:76
 msgid "Warning: "
@@ -537,8 +533,7 @@ msgid "Create a static package with ar files"
 msgstr "Eine statisches Paket mit ar Dateien erstellen"
 
 #: pisi/cli/build.py:70
-msgid ""
-"Do not install build dependencies, fail if a build dependency is present"
+msgid "Do not install build dependencies, fail if a build dependency is present"
 msgstr ""
 "Build - Abhängigkeiten nicht installieren, Fehler bei Anwesenheit einer "
 "Build-Abhängigkeit"
@@ -552,9 +547,8 @@ msgid "Use quilt patch management system instead of GNU patch"
 msgstr "Verwende Quilt Patch-Management-System anstelle von GNU Patch"
 
 #: pisi/cli/build.py:76
-#, fuzzy
 msgid "Do not constrain build process inside the build folder"
-msgstr "Beschränke den Build-Prozess innerhalb des Build-Ordners"
+msgstr "Den Build-Prozess nicht in den Build-Ordner beschränlen"
 
 #: pisi/cli/build.py:79
 msgid "build steps"
@@ -671,7 +665,7 @@ msgstr "Debugger Informationen zeigen"
 # wenn dieser Text neben einer check-box steht müsste er ok sein
 #: pisi/cli/command.py:112
 msgid "Suppresses all coloring of PiSi's output"
-msgstr "PiSi Meldungen ohne Farben"
+msgstr "PiSi-Ausgaben erfolgen ohne farbliche Darstellungen"
 
 #: pisi/cli/command.py:131
 msgid "Destination directory %s does not exist. Creating directory.\n"
@@ -683,7 +677,7 @@ msgstr "Passwort:"
 
 #: pisi/cli/command.py:167
 msgid "You have to be root for this operation."
-msgstr ""
+msgstr "Sie müssen für diesen Vorgang root sein."
 
 #: pisi/cli/command.py:192
 msgid "Command terminated abnormally."
@@ -714,9 +708,8 @@ msgid "emerge options"
 msgstr "emerge Optionen"
 
 #: pisi/cli/emerge.py:47
-#, fuzzy
 msgid "Emerge available packages under given component"
-msgstr "Listet vorhandene Pakete unter einer gegebenen Komponente"
+msgstr "Verfügbare Pakete unter gegebener Komponente entstehen lassen"
 
 #: pisi/cli/emerge.py:49 pisi/cli/install.py:53 pisi/cli/upgrade.py:64
 msgid "Ignore file conflicts"
@@ -783,38 +776,32 @@ msgstr ""
 "Gebrauch \"%prog help <command>\" für Hilfe für einen bestimmten Befehl.\n"
 
 #: pisi/cli/history.py:28
-#, fuzzy
 msgid "emerge"
-msgstr "emerge Optionen"
+msgstr "emerge"
 
 #: pisi/cli/history.py:28
-#, fuzzy
 msgid "install"
-msgstr "installiert"
+msgstr "installieren"
 
 #: pisi/cli/history.py:28
-#, fuzzy
 msgid "remove"
-msgstr "%s entfernt"
+msgstr "entfernen"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
 msgstr ""
 
 #: pisi/cli/history.py:28
-#, fuzzy
 msgid "takeback"
-msgstr "Zurückfolge:"
+msgstr "zurückziehen"
 
 #: pisi/cli/history.py:28
-#, fuzzy
 msgid "upgrade"
-msgstr "%s aktualisiert"
+msgstr "Upgrade vornehmen"
 
 #: pisi/cli/history.py:47
-#, fuzzy
 msgid "history options"
-msgstr "Optionen list-sources"
+msgstr "Verlaufsoptionen"
 
 #: pisi/cli/history.py:53
 msgid "Output only the last n operations"
@@ -829,13 +816,12 @@ msgid "Takeback to the state after the given operation finished"
 msgstr ""
 
 #: pisi/cli/history.py:67
-#, fuzzy
 msgid "Operation #%d: %s"
-msgstr "Beschreibung: %s\n"
+msgstr "Vorgang #%d: %s"
 
 #: pisi/cli/history.py:68
 msgid "Date: %s %s"
-msgstr ""
+msgstr "Datum: %s %s"
 
 #: pisi/cli/history.py:72
 msgid "    * There are %d packages in this snapshot."
@@ -894,9 +880,8 @@ msgid "Reverse Dependencies:"
 msgstr "Rückabhängigkeiten:"
 
 #: pisi/cli/info.py:140
-#, fuzzy
 msgid "Reverse Build Dependencies:"
-msgstr "Rückabhängigkeiten:"
+msgstr "Entgegengesetzte Build-Abhängigkeiten:"
 
 #: pisi/cli/info.py:145
 msgid "Package file: %s"
@@ -911,33 +896,28 @@ msgid "Installed package:"
 msgstr "Installierte Pakete:"
 
 #: pisi/cli/info.py:166
-#, fuzzy
 msgid "%s package is not installed"
-msgstr "Paket %s nicht installiert"
+msgstr "%s Paket ist nicht installiert"
 
 #: pisi/cli/info.py:172
-#, fuzzy
 msgid "[binary] "
-msgstr "[inst] "
+msgstr "[binary] "
 
 #: pisi/cli/info.py:174 pisi/cli/info.py:186
 msgid "Package found in %s repository:"
 msgstr "Paket gefunden im %s Depot:"
 
 #: pisi/cli/info.py:177
-#, fuzzy
 msgid "%s package is not found in binary repositories"
-msgstr "%s wurde in den Depots nicht gefunden"
+msgstr "%s Paket ist in Binär-Depots nicht gefunden"
 
 #: pisi/cli/info.py:184
-#, fuzzy
 msgid "[source] "
-msgstr "[repo] "
+msgstr "[source] "
 
 #: pisi/cli/info.py:189
-#, fuzzy
 msgid "%s package is not found in source repositories"
-msgstr "%s wurde in den Depots nicht gefunden"
+msgstr "%s Paket ist in Quell-Depots nicht gefunden"
 
 #: pisi/cli/install.py:44
 msgid "install options"
@@ -1002,10 +982,8 @@ msgid "Show detailed install info"
 msgstr "Detaillierte Installationsinfo anzeigen"
 
 #: pisi/cli/listinstalled.py:71 pisi/cli/listupgrades.py:73
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr ""
-"Paketname          |St|   Version|  Rel.| Build|  Distro|             Datum"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr "Paketname          |St|   Version|  Rel.| Build|  Distro|             Datum"
 
 #: pisi/cli/listpending.py:43
 msgid "There are no packages waiting to be configured"
@@ -1449,8 +1427,7 @@ msgstr "PiSi Quell-Paket wird konstruiert: %s"
 
 #: pisi/operations/build.py:234
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr ""
-"IceCream entdeckt. Stellen Sie sicher, dass Ihr Daemon gestartet ist..."
+msgstr "IceCream entdeckt. Stellen Sie sicher, dass Ihr Daemon gestartet ist..."
 
 #: pisi/operations/build.py:239
 msgid "CCache detected..."
@@ -1533,8 +1510,7 @@ msgid "unable to call function from actions: %s"
 msgstr "nicht in der Lage, die Funktion vom Vorgang aufzurufen: %s"
 
 #: pisi/operations/build.py:485
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Sicherheitsschalter: Folgende extra Pakete in system.devel werden "
 "installiert: "
@@ -1545,8 +1521,7 @@ msgstr "Sicherheitsschalter: system.devel ist bereits installiert"
 
 #: pisi/operations/build.py:492
 msgid "Safety switch: the component system.devel cannot be found"
-msgstr ""
-"Sicherheitsschalter: die Komponente system.devel konnte nicht gefunden werden"
+msgstr "Sicherheitsschalter: die Komponente system.devel konnte nicht gefunden werden"
 
 #: pisi/operations/build.py:501
 msgid "Unsatisfied Build Dependencies:"
@@ -1646,8 +1621,7 @@ msgstr "Verlassene Dateien im Installationsverzeichnis (%s):"
 
 # gesammelt hört sich komisch an
 #: pisi/operations/build.py:939
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Alle Dateien unter Installationsierzeichnis (%s) wurden von den Paketen "
 "gesammelt"
@@ -1814,8 +1788,7 @@ msgstr ""
 
 #: pisi/operations/remove.py:48 pisi/operations/upgrade.py:238
 msgid "Safety switch: the component system.base cannot be found"
-msgstr ""
-"Sicherheitsschalter: Die Komponente system.base kann nicht gefunden werden"
+msgstr "Sicherheitsschalter: Die Komponente system.base kann nicht gefunden werden"
 
 #: pisi/operations/remove.py:55
 msgid "Package %s does not exist. Cannot remove."
@@ -1891,13 +1864,11 @@ msgstr "Rückabhängigkeit %s von %s kann nicht zufriedenstellend sein"
 
 #: pisi/operations/upgrade.py:226
 msgid "Safety switch: Following packages in system.base will be installed: "
-msgstr ""
-"Sicherheitsschalter: Die folgenden Pakete in system.base serden installiert:"
+msgstr "Sicherheitsschalter: Die folgenden Pakete in system.base serden installiert:"
 
 #: pisi/operations/upgrade.py:232
 msgid "Safety switch: Following packages in system.base will be upgraded: "
-msgstr ""
-"Sicherheitsschalter: Die folgenden Pakete in system.base werden aktualisiert:"
+msgstr "Sicherheitsschalter: Die folgenden Pakete in system.base werden aktualisiert:"
 
 #: pisi/package.py:56
 msgid ""
@@ -2142,8 +2113,7 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 "Entwickler '%s <%s>' hat eina andere email adresse '%s' im Quelltext-Paket '%"
 "s'"
@@ -2172,453 +2142,3 @@ msgstr "Suche im Quellcode - Depot...\n"
 msgid "Scanning binary packages...\n"
 msgstr "Suche im Binär - Depot...\n"
 
-#~ msgid ""
-#~ "optparse - a powerful, extensible, and easy-to-use option parser.\n"
-#~ "\n"
-#~ "By Greg Ward <gward@python.net>\n"
-#~ "\n"
-#~ "Originally distributed as Optik; see http://optik.sourceforge.net/ .\n"
-#~ "\n"
-#~ "If you have problems with this module, please do not file bugs,\n"
-#~ "patches, or feature requests with Python; instead, use Optik's\n"
-#~ "SourceForge project page:\n"
-#~ "  http://sourceforge.net/projects/optik\n"
-#~ "\n"
-#~ "For support, use the optik-users@lists.sourceforge.net mailing list\n"
-#~ "(http://lists.sourceforge.net/lists/listinfo/optik-users).\n"
-#~ msgstr ""
-#~ "optparse - ein robuster, erweiterbarer und einfach zu bedienender "
-#~ "Optionsparser.\n"
-#~ "\n"
-#~ "By Greg Ward <gward@python.net>\n"
-#~ "\n"
-#~ "Originalversion in Optik; see http://optik.sourceforge.net/ .\n"
-#~ "\n"
-#~ "Bei Problemen mit diesem Modul bitte keine Fehlermeldungen,\n"
-#~ "Programmkorrekturen, oder Feature requests schicken; Bitte dafür die \n"
-#~ "Projektseite von Optik in SourceForge aufsuchen:\n"
-#~ "  http://sourceforge.net/projects/optik\n"
-#~ "\n"
-#~ "Für support gibt es die optik-users@lists.sourceforge.net Mailing-Liste\n"
-#~ "(http://lists.sourceforge.net/lists/listinfo/optik-users).\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "    Raised if an Option instance is created with invalid or\n"
-#~ "    inconsistent arguments.\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "    Wird ausgegeben wenn eine Options-Instanz mit ungültigen\n"
-#~ "    oder inkonsistenten Argumenten gebildet wird.\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "    Raised if conflicting options are added to an OptionParser.\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "    Wird ausgegeben wenn einem OptionParser widersprüchliche Optionen "
-#~ "angegeben werden.\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "    Raised if an invalid option value is encountered on the command\n"
-#~ "    line.\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "    Wird ausgegeben, wenn in der Befehlszeile ein ungültiger "
-#~ "Optionswert \n"
-#~ "    gefunden wird.\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "    Raised if an invalid or ambiguous option is seen on the command-"
-#~ "line.\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "    Wird ausgegeben, wenn in der Befehlszeile eine ungültige oder "
-#~ "mehrdeutige Option angegeben ist.\n"
-#~ "    "
-
-#~ msgid "Return a comma-separated list of option strings & metavariables."
-#~ msgstr ""
-#~ "Gibt eine Komma-getrennte Liste zurück, mit den Optionstexten & "
-#~ "Metavariablen."
-
-#~ msgid ""
-#~ "Format help with indented section bodies.\n"
-#~ "    "
-#~ msgstr ""
-#~ "Formatierhilfe mit eingerückten Abschnitten.\n"
-#~ "    "
-
-#~ msgid ""
-#~ "Format help with underlined section headers.\n"
-#~ "    "
-#~ msgstr ""
-#~ "Formatierhilfe mit unterstrichenen Abschnittstiteln.\n"
-#~ "...."
-
-#~ msgid "Usage"
-#~ msgstr "Gebrauch"
-
-#~ msgid "integer"
-#~ msgstr "integer"
-
-#~ msgid "long integer"
-#~ msgstr "long integer"
-
-#~ msgid "floating-point"
-#~ msgstr "Fliesskomma"
-
-#~ msgid "complex"
-#~ msgstr "komplex"
-
-#~ msgid "option %s: invalid %s value: %r"
-#~ msgstr "Option %s: unzulässig %s Wert: %r"
-
-#~ msgid "option %s: invalid choice: %r (choose from %s)"
-#~ msgstr "Option %s: unzulässige Auswahl: %r (von %s auswählen)"
-
-#~ msgid ""
-#~ "\n"
-#~ "    Instance attributes:\n"
-#~ "      _short_opts : [string]\n"
-#~ "      _long_opts : [string]\n"
-#~ "\n"
-#~ "      action : string\n"
-#~ "      type : string\n"
-#~ "      dest : string\n"
-#~ "      default : any\n"
-#~ "      nargs : int\n"
-#~ "      const : any\n"
-#~ "      choices : [string]\n"
-#~ "      callback : function\n"
-#~ "      callback_args : (any*)\n"
-#~ "      callback_kwargs : { string : any }\n"
-#~ "      help : string\n"
-#~ "      metavar : string\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "    Attribute der Instanzen:\n"
-#~ "      _short_opts : [string]\n"
-#~ "      _long_opts : [string]\n"
-#~ "\n"
-#~ "      action : string\n"
-#~ "      type : string\n"
-#~ "      dest : string\n"
-#~ "      default : any\n"
-#~ "      nargs : int\n"
-#~ "      const : any\n"
-#~ "      choices : [string]\n"
-#~ "      callback : function\n"
-#~ "      callback_args : (any*)\n"
-#~ "      callback_kwargs : { string : any }\n"
-#~ "      help : string\n"
-#~ "      metavar : string\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "        Update the option values from an arbitrary dictionary, but only\n"
-#~ "        use keys from dict that already have a corresponding attribute\n"
-#~ "        in self.  Any keys in dict without a corresponding attribute\n"
-#~ "        are silently ignored.\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "        Optionswerte von einem beliebigen Wörterbuch aus aktualiseren, "
-#~ "aber\n"
-#~ "        nur Schlüssel des Wörterbuches benutzen, die ein entsprechendes "
-#~ "Attribut\n"
-#~ "        in self haben.  Schlüssel des Wörterbuches ohne ensprechende "
-#~ "Attribute\n"
-#~ "        werden stillschweigend ignoriert.\n"
-#~ "        "
-
-#~ msgid ""
-#~ "\n"
-#~ "        Update the option values from an arbitrary dictionary,\n"
-#~ "        using all keys from the dictionary regardless of whether\n"
-#~ "        they have a corresponding attribute in self or not.\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "        Optionswerte von einem beliebigen Wörterbuch aus aktualiseren.\n"
-#~ "        Alle Schlüssel des Wörterbuches werden verwertet, unabhängig ob "
-#~ "sie\n"
-#~ "        in self ein entsprechends Attribut haben oder nicht.\n"
-#~ "        "
-
-#~ msgid ""
-#~ "add_option(Option)\n"
-#~ "           add_option(opt_str, ..., kwarg=val, ...)\n"
-#~ "        "
-#~ msgstr ""
-#~ "add_option(Option)\n"
-#~ "           add_option(opt_str, ..., kwarg=val, ...)\n"
-#~ "        "
-
-#~ msgid "show this help message and exit"
-#~ msgstr "Diese Hilfe-Meldung anzeigen und beenden"
-
-#~ msgid "show program's version number and exit"
-#~ msgstr "Versionnr. des Programmes anzeigen und beenden"
-
-#~ msgid "%prog [options]"
-#~ msgstr "%prog [options]"
-
-#~ msgid ""
-#~ "\n"
-#~ "        parse_args(args : [string] = sys.argv[1:],\n"
-#~ "                   values : Values = None)\n"
-#~ "        -> (values : Values, args : [string])\n"
-#~ "\n"
-#~ "        Parse the command-line options found in 'args' (default:\n"
-#~ "        sys.argv[1:]).  Any errors result in a call to 'error()', which\n"
-#~ "        by default prints the usage message to stderr and calls\n"
-#~ "        sys.exit() with an error message.  On success returns a pair\n"
-#~ "        (values, args) where 'values' is an Values instance (with all\n"
-#~ "        your option values) and 'args' is the list of arguments left\n"
-#~ "        over after parsing options.\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "        parse_args(args : [string] = sys.argv[1:],\n"
-#~ "                   values : Values = None)\n"
-#~ "        -> (values : Values, args : [string])\n"
-#~ "\n"
-#~ "        Parst die Optionen der Befehlszeile in 'args' (standardmässig:\n"
-#~ "        sys.argv[1:]).  Ein eventueller Fehler produziert ein Aufruf von "
-#~ "'error()', der\n"
-#~ "        standardmässig die Gebrauchsanweisung nach stderr ausgibt und "
-#~ "ruft \n"
-#~ "        sys.exit() mit einer Fehlermeldung auf. Bei Erfolg gibt er ein "
-#~ "Wertepaar zurück\n"
-#~ "        (values, args), wobei 'values' eine Werte-Instanz ist (mit allen\n"
-#~ "        Optionswerten) und 'args' ist die Liste der übrigen Argumente\n"
-#~ "        nach dem parsen der Optionen.\n"
-#~ "        "
-
-#~ msgid ""
-#~ "\n"
-#~ "        check_values(values : Values, args : [string])\n"
-#~ "        -> (values : Values, args : [string])\n"
-#~ "\n"
-#~ "        Check that the supplied option values and leftover arguments are\n"
-#~ "        valid.  Returns the option values and leftover arguments\n"
-#~ "        (possibly adjusted, possibly completely new -- whatever you\n"
-#~ "        like).  Default implementation just returns the passed-in\n"
-#~ "        values; subclasses may override as desired.\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "        check_values(values : Values, args : [string])\n"
-#~ "        -> (values : Values, args : [string])\n"
-#~ "\n"
-#~ "        Prüfe die Gültigkeit der angegebenen Optionswerte und der "
-#~ "restlichen \n"
-#~ "        Argumente. Gibt die Optionswerte und restliche Argumente zurück\n"
-#~ "        (möglicherweise korregiert, komplett neu  -- was ihnen besser \n"
-#~ "        gefällt). Standardmässig werden nur die eingegebenen Werte "
-#~ "wieder \n"
-#~ "        ausgegeben; Subklassen können dieses Verhalten wie gewünscht "
-#~ "überschreiben.\n"
-#~ "        "
-
-#~ msgid ""
-#~ "_process_args(largs : [string],\n"
-#~ "                         rargs : [string],\n"
-#~ "                         values : Values)\n"
-#~ "\n"
-#~ "        Process command-line arguments and populate 'values', consuming\n"
-#~ "        options and arguments from 'rargs'.  If 'allow_interspersed_args' "
-#~ "is\n"
-#~ "        false, stop at the first non-option argument.  If true, "
-#~ "accumulate any\n"
-#~ "        interspersed non-option arguments in 'largs'.\n"
-#~ "        "
-#~ msgstr ""
-#~ "_process_args(largs : [string],\n"
-#~ "                         rargs : [string],\n"
-#~ "                         values : Values)\n"
-#~ "\n"
-#~ "        Argumente de Kommandozeile verarbeiten und fülle 'values'. "
-#~ "Optionen\n"
-#~ "        und Argumente aus 'rargs' werden verarbeitet. Wenn "
-#~ "'allow_interspersed_args' \n"
-#~ "        falsch ist, bricht es bei dem ersten nicht-Option Argument ab. "
-#~ "Wenn wahr, \n"
-#~ "        werden alle nicht-options Argumente in 'largs' gesammelt.\n"
-#~ "        "
-
-#~ msgid ""
-#~ "_match_long_opt(opt : string) -> string\n"
-#~ "\n"
-#~ "        Determine which long option string 'opt' matches, ie. which one\n"
-#~ "        it is an unambiguous abbrevation for.  Raises BadOptionError if\n"
-#~ "        'opt' doesn't unambiguously match any long option string.\n"
-#~ "        "
-#~ msgstr ""
-#~ "_match_long_opt(opt : string) -> string\n"
-#~ "\n"
-#~ "        Überprüft welcher long option string 'opt' übereinstimmt, d.h. "
-#~ "für welchen\n"
-#~ "        er eine eindeutigeg Abkürzung ist. Erzeugt BadOptionError wenn\n"
-#~ "        'opt' nicht eindeutig einem long option string zugeordnet werden "
-#~ "kann.\n"
-#~ "        "
-
-#~ msgid "%s option requires an argument"
-#~ msgstr "%s Option verlangt ein Argument"
-
-#~ msgid "%s option requires %d arguments"
-#~ msgstr "%s Option verlangt %d Argumente"
-
-#~ msgid "%s option does not take a value"
-#~ msgstr "Option %s übernimmt keinen Wert"
-
-#~ msgid "no such option: %s"
-#~ msgstr "keine derartige Option:%s"
-
-#~ msgid ""
-#~ "error(msg : string)\n"
-#~ "\n"
-#~ "        Print a usage message incorporating 'msg' to stderr and exit.\n"
-#~ "        If you override this in a subclass, it should not return -- it\n"
-#~ "        should either exit or raise an exception.\n"
-#~ "        "
-#~ msgstr ""
-#~ "error(msg : string)\n"
-#~ "\n"
-#~ "        Druckt eine Meldung mit Gebrauchsanweisung, die 'msg' beinhaltet "
-#~ "und bricht ab.\n"
-#~ "        Wenn man dieses in einer Subklasse überschreibt, sollte es nicht "
-#~ "normal enden -- es\n"
-#~ "        sollte entweder abbrechen oder eine Fehlermeldung erzeugen.\n"
-#~ "        "
-
-#~ msgid ""
-#~ "print_usage(file : file = stdout)\n"
-#~ "\n"
-#~ "        Print the usage message for the current program (self.usage) to\n"
-#~ "        'file' (default stdout).  Any occurence of the string \"%prog\" "
-#~ "in\n"
-#~ "        self.usage is replaced with the name of the current program\n"
-#~ "        (basename of sys.argv[0]).  Does nothing if self.usage is empty\n"
-#~ "        or not defined.\n"
-#~ "        "
-#~ msgstr ""
-#~ "print_usage(file : file = stdout)\n"
-#~ "\n"
-#~ "        Drucke den Gebrauchsanweisung für das aktualle Programm (self."
-#~ "usage) zu\n"
-#~ "        'file' (standardmässig stdout). Jedes Vorkommen des textes \"%prog"
-#~ "\" in\n"
-#~ "        self.usage wird durch den Namen des aktuellen Programmes ersetzt\n"
-#~ "        (Basisname von sys.argv[0]). Unternimmt nichts wenn self.usage "
-#~ "leer\n"
-#~ "        oder nicht definiert ist.\n"
-#~ "        "
-
-#~ msgid ""
-#~ "print_version(file : file = stdout)\n"
-#~ "\n"
-#~ "        Print the version message for this program (self.version) to\n"
-#~ "        'file' (default stdout).  As with print_usage(), any occurence\n"
-#~ "        of \"%prog\" in self.version is replaced by the current "
-#~ "program's\n"
-#~ "        name.  Does nothing if self.version is empty or undefined.\n"
-#~ "        "
-#~ msgstr ""
-#~ "print_version(file : file = stdout)\n"
-#~ "\n"
-#~ "        Drucke die Versionsinfo für das aktualle Programm (self.version) "
-#~ "zu\n"
-#~ "        'file' (standardmässig stdout). Wie bei print_usage() wird jedes "
-#~ "Vorkommen \n"
-#~ "        von \"%prog\" in self.usage durch den Namen des aktuellen "
-#~ "Programmes \n"
-#~ "        ersetzt. Unternimmt nichts wenn self.version leer\n"
-#~ "        oder nicht definiert ist.\n"
-#~ "        "
-
-#~ msgid "options"
-#~ msgstr "Optionen"
-
-#~ msgid ""
-#~ "print_help(file : file = stdout)\n"
-#~ "\n"
-#~ "        Print an extended help message, listing all options and any\n"
-#~ "        help text provided with them, to 'file' (default stdout).\n"
-#~ "        "
-#~ msgstr ""
-#~ "print_help(file : file = stdout)\n"
-#~ "\n"
-#~ "        Druckt eine erweiterte Hilfeinformation, mit einer Liste aller "
-#~ "Optionen \n"
-#~ "        und vorhandener Hilfetexte, zu 'file' (Defaultmässig stdout).\n"
-#~ "        "
-
-#~ msgid ""
-#~ "_match_abbrev(s : string, wordmap : {string : Option}) -> string\n"
-#~ "\n"
-#~ "    Return the string key in 'wordmap' for which 's' is an unambiguous\n"
-#~ "    abbreviation.  If 's' is found to be ambiguous or doesn't match any "
-#~ "of\n"
-#~ "    'words', raise BadOptionError.\n"
-#~ "    "
-#~ msgstr ""
-#~ "_match_abbrev(s : string, wordmap : {string : Option}) -> string\n"
-#~ "\n"
-#~ "        Gibt den Textschlüssel in 'wordmap' wieder, dessen eindeutige "
-#~ "Abürzung \n"
-#~ "        's' darstellt. Erzeugt BadOptionError, wenn 's' mehrdeutig ist "
-#~ "oder keinem \n"
-#~ "        von 'words' zugeordnet werden kann.\n"
-#~ "        "
-
-#~ msgid "ambiguous option: %s (%s?)"
-#~ msgstr "Mehrdeutige Option: %s (%s?)"
-
-#~ msgid ""
-#~ "A database operation has been aborted. You should run pisi\n"
-#~ "again for normal DB recovery procedure. Make sure you have free disk "
-#~ "space. \n"
-#~ "You have to run rebuild-db only when there is file corruption and "
-#~ "database upgrades."
-#~ msgstr ""
-#~ "Eine Datenbankoperation wurde abgebrochen. Bitte PiSi noch einmal\n"
-#~ "ausführen mit der normalen DB Wiederherstellungs-Prozedur. Vergewissern "
-#~ "Sis sich, dass Sie genügend \n"
-#~ "freien Platz auf der Festplatte haben. Der Befehl rebuild-db braucht nur "
-#~ "ausgeführt werden bei beschädigten Dateien und Aktualisationen der "
-#~ "Datenbank."
-
-#~ msgid "Could not restart comar"
-#~ msgstr "Comar konnte nicht neugestartet werden"
-
-#~ msgid "connection with comar unexpectedly closed"
-#~ msgstr "Verbindung mit Comar unerwartet abgebrochen"
-
-#~ msgid "Configuration error: %s"
-#~ msgstr "Konfigurationsfehler: %s"
-
-#~ msgid "comar denied our access"
-#~ msgstr "Comar hat uns den Zugriff verweigert"
-
-#~ msgid "Item not found"
-#~ msgstr "Gegenstand nicht gefunden"
-
-#~ msgid "MetaData format wrong"
-#~ msgstr "Format der Metadaten ist inkorrekt"
-
-#~ msgid "Invalid %s"
-#~ msgstr "Ungültig"
