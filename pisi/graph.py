@@ -50,11 +50,6 @@ class Digraph(object):
                 l.append( (u,v) )
         return l
 
-    def from_list(self, el):
-        "convert a list of edges (u,v) to graph"
-        for (u,v) in el:
-            self.add_edge(u,v)
-
     def add_vertex(self, u, data = None):
         "add vertex u, optionally with data"
         assert not u in self.__v
