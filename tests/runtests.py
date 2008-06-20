@@ -22,6 +22,7 @@ from database.filesdbtest import FilesDBTestCase
 from database.lazydbtest import LazyDBTestCase
 from database.itembyrepotest import ItemByRepoTestCase
 from versiontest import VersionTestCase
+from mirrorstest import MirrorsTestCase
 
 suite = unittest.TestSuite()
 
