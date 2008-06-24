@@ -23,6 +23,7 @@ from database.lazydbtest import LazyDBTestCase
 from database.itembyrepotest import ItemByRepoTestCase
 from versiontest import VersionTestCase
 from mirrorstest import MirrorsTestCase
+from relationtest import RelationTestCase
 
 suite = unittest.TestSuite()
 
