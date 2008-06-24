@@ -34,6 +34,9 @@ def main():
     if len(sys.argv) < 2:
         usage("PiSi package required..")
 
+    elif not os.path.exists(sys.argv[1]):
+        usage("File %s not found" % sys.argv[1])
+
     try:
         arc = ArchiveZip(sys.argv[1], 'zip', 'r')
     except BadZipfile, e:
