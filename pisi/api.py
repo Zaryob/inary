@@ -315,19 +315,24 @@ def search_file(term):
         term = term[1:]
     return filesdb.search_file(term)
 
-def install(packages, reinstall=False, ignore_file_conflicts=False):
+def install(packages, reinstall=False, ignore_file_conflicts=False, ignore_package_conflicts=False):
     """
     Returns True if no errors occured during the operation
     @param packages: list of package names -> list_of_strings
     @param reinstall: reinstalls already installed packages else ignores
     @param ignore_file_conflicts: Ignores file conflicts during the installation and continues to install
     packages.
+    @param ignore_package_conflicts: Ignores package conflicts during the installation and continues to
+    install packages.
     """
 
     pisi.db.historydb.HistoryDB().create_history("install")
 
     if not ctx.get_option('ignore_file_conflicts'):
         ctx.set_option('ignore_file_conflicts', ignore_file_conflicts)
+
+    if not ctx.get_option('ignore_package_conflicts'):
+        ctx.set_option('ignore_package_conflicts', ignore_package_conflicts)
 
     # Install pisi package files or pisi packages from a repository
     if packages and packages[0].endswith(ctx.const.package_suffix):
