@@ -24,6 +24,7 @@ from database.itembyrepotest import ItemByRepoTestCase
 from versiontest import VersionTestCase
 from mirrorstest import MirrorsTestCase
 from relationtest import RelationTestCase
+from replacetest import ReplaceTestCase
 
 suite = unittest.TestSuite()
 
