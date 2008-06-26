@@ -36,12 +36,12 @@ class HistoryDB(lazydb.LazyDB):
         self.history = pisi.history.History()
         self.history.create(operation)
 
-    def add_and_update(self, pkgBefore=None, pkgAfter=None, operation=None):
-        self.add_package(pkgBefore, pkgAfter, operation)
+    def add_and_update(self, pkgBefore=None, pkgAfter=None, operation=None, otype=None):
+        self.add_package(pkgBefore, pkgAfter, operation, otype)
         self.update_history()
 
-    def add_package(self, pkgBefore=None, pkgAfter=None, operation=None):
-        self.history.add(pkgBefore, pkgAfter, operation)
+    def add_package(self, pkgBefore=None, pkgAfter=None, operation=None, otype=None):
+        self.history.add(pkgBefore, pkgAfter, operation, otype)
 
     def load_config(self, operation, package):
         config_dir = os.path.join(ctx.config.history_dir(), "%03d" % operation, package)

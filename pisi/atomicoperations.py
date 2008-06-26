@@ -417,8 +417,9 @@ class Install(AtomicOperation):
 
         # installed packages
         self.installdb.add_package(self.pkginfo)
-        
-        self.historydb.add_and_update(pkgBefore=self.old_pkginfo, pkgAfter=self.pkginfo, operation=opttostr[self.operation])
+
+        otype = "delta" if self.package_fname.endswith("delta.pisi") else None
+        self.historydb.add_and_update(pkgBefore=self.old_pkginfo, pkgAfter=self.pkginfo, operation=opttostr[self.operation], otype=otype)
 
 def install_single(pkg, upgrade = False):
     """install a single package from URI or ID"""

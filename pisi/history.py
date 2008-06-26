@@ -34,6 +34,7 @@ class PackageInfo:
 class Package:
 
     a_operation = [autoxml.String, autoxml.mandatory]
+    a_type = [autoxml.String, autoxml.optional]
 
     t_Name = [autoxml.String, autoxml.mandatory]
     t_Before = [PackageInfo, autoxml.optional]
@@ -43,7 +44,10 @@ class Package:
         # "upgrade", "remove", "install", "reinstall", "downgrade"
         operation = ""
         if self.operation == "upgrade":
-            return _("%s is upgraded from %s to %s.") % (self.name, self.before, self.after)
+            if self.type == "delta":
+                return _("%s is upgraded from %s to %s with delta.") % (self.name, self.before, self.after)
+            else:
+                return _("%s is upgraded from %s to %s.") % (self.name, self.before, self.after)
         elif self.operation == "remove":
             return _("%s %s is removed.") % (self.name, self.before)
         elif self.operation == "install":
@@ -78,7 +82,7 @@ class History(xmlfile.XmlFile):
 
         if operation not in ["upgrade", "remove", "emerge", "install", "snapshot", "takeback"]:
             raise Exception("Unknown package operation")
-        
+
         opno = self._get_latest()
         self.histfile = "%s_%s.xml" % (opno, operation)
 
@@ -88,13 +92,15 @@ class History(xmlfile.XmlFile):
         self.operation.time = "%02d:%02d" % (hour, minute)
         self.operation.no = opno
 
-    def add(self, pkgBefore=None, pkgAfter=None, operation=None):
+    # @param otype is currently only used to hold if an upgrade is from "delta"
+    def add(self, pkgBefore=None, pkgAfter=None, operation=None, otype=None):
 
         if operation not in ["upgrade", "remove", "install", "reinstall", "downgrade", "snapshot"]:
             raise Exception("Unknown package operation")
 
         package = Package()
         package.operation = operation
+        package.type = otype
         package.name = (pkgAfter and pkgAfter.name) or (pkgBefore and pkgBefore.name)
 
         if not pkgBefore:
@@ -108,7 +114,7 @@ class History(xmlfile.XmlFile):
                 histInfo.version = str(pkgInfo.version)
                 histInfo.release = str(pkgInfo.release)
                 histInfo.build = pkgInfo.build and str(pkgInfo.build)
-                
+
         self.operation.packages.append(package)
 
     def update(self):
