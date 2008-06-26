@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-17 12:13+EEST\n"
+"POT-Creation-Date: 2008-06-26 09:45+EEST\n"
 "PO-Revision-Date: 2006-04-08 12:19+0900\n"
 "Last-Translator: Piotr Maliński <riklaunim@gmail.com>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -241,23 +241,23 @@ msgstr "ActionsAPI [copytree]: Katalog %s nie istnieje."
 msgid "ActionsAPI [touch]: Permission denied: %s"
 msgstr "ActionsAPI [touch]: Brak uprawnień: %s"
 
-#: pisi/api.py:386
+#: pisi/api.py:391
 msgid "Taking snapshot of the system"
 msgstr ""
 
-#: pisi/api.py:496
+#: pisi/api.py:501
 msgid "comar package is not fully installed"
 msgstr "pakiet comar nie jest w pełni zainstalowana"
 
-#: pisi/api.py:508
+#: pisi/api.py:513
 msgid "File %s not found"
 msgstr "Plik %s nie został znaleziony"
 
-#: pisi/api.py:544
+#: pisi/api.py:549
 msgid "Checking /%s "
 msgstr "Sprawdzanie /%s "
 
-#: pisi/api.py:550
+#: pisi/api.py:555
 msgid ""
 "\n"
 "Corrupt file: %s"
@@ -265,73 +265,73 @@ msgstr ""
 "\n"
 "Plik uszkodzony: %s"
 
-#: pisi/api.py:552 pisi/cli/check.py:75
+#: pisi/api.py:557 pisi/cli/check.py:75
 msgid "OK"
 msgstr "OK"
 
-#: pisi/api.py:557
+#: pisi/api.py:562
 msgid ""
 "\n"
 "Missing file: %s"
 msgstr ""
 
-#: pisi/api.py:568
+#: pisi/api.py:573
 msgid "* Building index of PiSi files under %s"
 msgstr "* Budowanie indeksu plików PiSi w %s"
 
-#: pisi/api.py:575
+#: pisi/api.py:580
 msgid "* Index file written"
 msgstr "* Indeks plików zapisany"
 
-#: pisi/api.py:580
+#: pisi/api.py:585
 msgid "Repo %s already present."
 msgstr "Repo %s już wcześniej zostało dodane."
 
-#: pisi/api.py:584
+#: pisi/api.py:589
 msgid "Repo %s added to system."
 msgstr "Repo %s zostało dodane do systemu."
 
-#: pisi/api.py:590
+#: pisi/api.py:595
 msgid "Repo %s removed from system."
 msgstr "Repo %s zostało usunięte z systemu."
 
-#: pisi/api.py:592
+#: pisi/api.py:597
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "Repozytorium %s nie istnieje. Nie można usunąć."
 
-#: pisi/api.py:596
+#: pisi/api.py:601
 msgid "* Updating repository: %s"
 msgstr "* Aktualizacja repozytorium: %s"
 
-#: pisi/api.py:605
+#: pisi/api.py:610
 msgid "%s repository information is up-to-date."
 msgstr ""
 
-#: pisi/api.py:607
+#: pisi/api.py:612
 msgid "Updating database at any rate as requested"
 msgstr "Aktualizacja bazy w każdym przypadku jak zarządano"
 
-#: pisi/api.py:617
+#: pisi/api.py:622
 msgid "* Package database updated."
 msgstr "* Baza pakietów zaktualizowana"
 
-#: pisi/api.py:619 pisi/api.py:644
+#: pisi/api.py:624 pisi/api.py:649
 msgid "No repository named %s found."
 msgstr "Nie znaleziono repozytoriów o nazwie %s"
 
-#: pisi/api.py:627
+#: pisi/api.py:632
 msgid "* Rebuilding '%s' named repo... "
 msgstr "* Przebudowywanie repozytorium o nazwie '%s'... "
 
-#: pisi/api.py:641
+#: pisi/api.py:646
 msgid "Input/Output error while reading %s: %s"
 msgstr "Błąd Wejścia/Wyjścia podczas czytania %s: %s"
 
-#: pisi/api.py:654
+#: pisi/api.py:659
 msgid "* Adding '%s' to db... "
 msgstr "* Dodawanie '%s' do bazy..."
 
-#: pisi/api.py:657
+#: pisi/api.py:662
 msgid "OK."
 msgstr "OK."
 
@@ -418,23 +418,23 @@ msgstr "Gromadzenie %s."
 msgid "Storing %s"
 msgstr "Gromadzenie %s"
 
-#: pisi/atomicoperations.py:457
+#: pisi/atomicoperations.py:458
 msgid "File list could not be read for package %s, continuing removal."
 msgstr "Nie można przeczytać listy plików dla pakietu %s, kontynuuje usuwanie"
 
-#: pisi/atomicoperations.py:463
+#: pisi/atomicoperations.py:464
 msgid "Removing package %s"
 msgstr "Usuwanie pakietu %s"
 
-#: pisi/atomicoperations.py:466
+#: pisi/atomicoperations.py:467
 msgid "Trying to remove nonexistent package "
 msgstr "Próba usunięcia nieistniejącego pakietu "
 
-#: pisi/atomicoperations.py:505
+#: pisi/atomicoperations.py:506
 msgid "Not removing conflicted file : %s"
 msgstr "Nie usuwam kolidującego pliku : %s"
 
-#: pisi/atomicoperations.py:525
+#: pisi/atomicoperations.py:526
 #, fuzzy
 msgid ""
 "Installed file %s does not exist on system [Probably you manually deleted]"
@@ -1341,25 +1341,29 @@ msgstr ""
 msgid "Encountered cycle %s"
 msgstr ""
 
-#: pisi/history.py:46
-msgid "%s is upgraded from %s to %s."
-msgstr ""
-
 #: pisi/history.py:48
-msgid "%s %s is removed."
+msgid "%s is upgraded from %s to %s with delta."
 msgstr ""
 
 #: pisi/history.py:50
+msgid "%s is upgraded from %s to %s."
+msgstr ""
+
+#: pisi/history.py:52
+msgid "%s %s is removed."
+msgstr ""
+
+#: pisi/history.py:54
 #, fuzzy
 msgid "%s %s is installed."
 msgstr "pakiet comar nie jest w pełni zainstalowana"
 
-#: pisi/history.py:52
+#: pisi/history.py:56
 #, fuzzy
 msgid "%s %s is reinstalled."
 msgstr "pakiet comar nie jest w pełni zainstalowana"
 
-#: pisi/history.py:54
+#: pisi/history.py:58
 msgid "%s is downgraded from %s to %s."
 msgstr ""
 

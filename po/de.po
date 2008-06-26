@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
-"POT-Creation-Date: 2008-06-17 12:13+EEST\n"
+"POT-Creation-Date: 2008-06-26 09:45+EEST\n"
 "PO-Revision-Date: 2008-06-25 19:49-0400\n"
 "Last-Translator: Klemens Häckel <click3d_at_linuxmail_org>\n"
 "Language-Team:  <es@li.org>\n"
@@ -249,23 +249,23 @@ msgstr "ActionsAPI [copytree]: Verzeichnis %s existiert nicht."
 msgid "ActionsAPI [touch]: Permission denied: %s"
 msgstr "ActionsAPI [touch]: Zugriff verweigert: %s"
 
-#: pisi/api.py:386
+#: pisi/api.py:391
 msgid "Taking snapshot of the system"
 msgstr "Schnappschuss des Systems wird gerade aufgenommen"
 
-#: pisi/api.py:496
+#: pisi/api.py:501
 msgid "comar package is not fully installed"
 msgstr "Comar-Paket wurde nicht vollständig installiert"
 
-#: pisi/api.py:508
+#: pisi/api.py:513
 msgid "File %s not found"
 msgstr "Datei %s nicht gefunden"
 
-#: pisi/api.py:544
+#: pisi/api.py:549
 msgid "Checking /%s "
 msgstr "/%s wird überprüft"
 
-#: pisi/api.py:550
+#: pisi/api.py:555
 msgid ""
 "\n"
 "Corrupt file: %s"
@@ -273,11 +273,11 @@ msgstr ""
 "\n"
 "Datei korrupt: %s"
 
-#: pisi/api.py:552 pisi/cli/check.py:75
+#: pisi/api.py:557 pisi/cli/check.py:75
 msgid "OK"
 msgstr "OK"
 
-#: pisi/api.py:557
+#: pisi/api.py:562
 msgid ""
 "\n"
 "Missing file: %s"
@@ -285,63 +285,63 @@ msgstr ""
 "\n"
 "Fehlende Datei: %s"
 
-#: pisi/api.py:568
+#: pisi/api.py:573
 msgid "* Building index of PiSi files under %s"
 msgstr "* Index von PiSi-Dateien unteeer %s werden konstruiert"
 
-#: pisi/api.py:575
+#: pisi/api.py:580
 msgid "* Index file written"
 msgstr "* Index-Datei geschrieben"
 
-#: pisi/api.py:580
+#: pisi/api.py:585
 msgid "Repo %s already present."
 msgstr "Depo %s bereits vorhanden"
 
-#: pisi/api.py:584
+#: pisi/api.py:589
 msgid "Repo %s added to system."
 msgstr "Depo %s in das System hinzugefügt"
 
-#: pisi/api.py:590
+#: pisi/api.py:595
 msgid "Repo %s removed from system."
 msgstr "Depo %s vom System entfernt."
 
-#: pisi/api.py:592
+#: pisi/api.py:597
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "Depot %s existiert nicht. Kann nicht entfernt werden."
 
-#: pisi/api.py:596
+#: pisi/api.py:601
 msgid "* Updating repository: %s"
 msgstr "* Depot wird aktualisiert: %s"
 
-#: pisi/api.py:605
+#: pisi/api.py:610
 msgid "%s repository information is up-to-date."
 msgstr "%s-Depotinformation ist aktuell."
 
-#: pisi/api.py:607
+#: pisi/api.py:612
 msgid "Updating database at any rate as requested"
 msgstr "Datenbank wird wunschgemäss auf jeden Fall aktualisiert"
 
-#: pisi/api.py:617
+#: pisi/api.py:622
 msgid "* Package database updated."
 msgstr "* Paket-Datenbank aktualisiert."
 
-#: pisi/api.py:619 pisi/api.py:644
+#: pisi/api.py:624 pisi/api.py:649
 msgid "No repository named %s found."
 msgstr "Kein %s genanntes Depot gefunden."
 
-#: pisi/api.py:627
+#: pisi/api.py:632
 msgid "* Rebuilding '%s' named repo... "
 msgstr "* '%s' genanntes Depo wird erneuert... "
 
-#: pisi/api.py:641
+#: pisi/api.py:646
 msgid "Input/Output error while reading %s: %s"
 msgstr "Ein-/Ausgabe Fehler während des Lesen's %s: %s"
 
-#: pisi/api.py:654
+#: pisi/api.py:659
 msgid "* Adding '%s' to db... "
 msgstr "* '%s' wird in db hinzugefügt... "
 
-#: pisi/api.py:657
+#: pisi/api.py:662
 msgid "OK."
 msgstr "OK."
 
@@ -425,27 +425,30 @@ msgstr "%s wird abgelegt"
 msgid "Storing %s"
 msgstr "%s wird abgelegt"
 
-#: pisi/atomicoperations.py:457
+#: pisi/atomicoperations.py:458
 msgid "File list could not be read for package %s, continuing removal."
 msgstr ""
 "Dateiliste für Paket %s konnte nicht gelesen werden, wird mit dem Entfernen "
 "fortgefahren."
 
-#: pisi/atomicoperations.py:463
+#: pisi/atomicoperations.py:464
 msgid "Removing package %s"
 msgstr "Paket %s wird entfernt"
 
-#: pisi/atomicoperations.py:466
+#: pisi/atomicoperations.py:467
 msgid "Trying to remove nonexistent package "
 msgstr "Nicht vorhandenes Paket wird versucht zu entfernen"
 
-#: pisi/atomicoperations.py:505
+#: pisi/atomicoperations.py:506
 msgid "Not removing conflicted file : %s"
 msgstr "Konfliktierende Datei wird nicht entfernt: %s"
 
-#: pisi/atomicoperations.py:525
-msgid "Installed file %s does not exist on system [Probably you manually deleted]"
-msgstr "Installierte Datei %s existiert nicht mehr im System [vermutlich haben Sie es manuell gelöscht]"
+#: pisi/atomicoperations.py:526
+msgid ""
+"Installed file %s does not exist on system [Probably you manually deleted]"
+msgstr ""
+"Installierte Datei %s existiert nicht mehr im System [vermutlich haben Sie "
+"es manuell gelöscht]"
 
 #: pisi/cli/__init__.py:76
 msgid "Warning: "
@@ -533,7 +536,8 @@ msgid "Create a static package with ar files"
 msgstr "Eine statisches Paket mit ar Dateien erstellen"
 
 #: pisi/cli/build.py:70
-msgid "Do not install build dependencies, fail if a build dependency is present"
+msgid ""
+"Do not install build dependencies, fail if a build dependency is present"
 msgstr ""
 "Build - Abhängigkeiten nicht installieren, Fehler bei Anwesenheit einer "
 "Build-Abhängigkeit"
@@ -982,8 +986,10 @@ msgid "Show detailed install info"
 msgstr "Detaillierte Installationsinfo anzeigen"
 
 #: pisi/cli/listinstalled.py:71 pisi/cli/listupgrades.py:73
-msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr "Paketname          |St|   Version|  Rel.| Build|  Distro|             Datum"
+msgid ""
+"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr ""
+"Paketname          |St|   Version|  Rel.| Build|  Distro|             Datum"
 
 #: pisi/cli/listpending.py:43
 msgid "There are no packages waiting to be configured"
@@ -1357,26 +1363,30 @@ msgstr "ERROR: gpg --detach-sig %s fehlgeschlagen"
 msgid "Encountered cycle %s"
 msgstr "Zusammengetroffener Zyklus %s"
 
-#: pisi/history.py:46
+#: pisi/history.py:48
+msgid "%s is upgraded from %s to %s with delta."
+msgstr ""
+
+#: pisi/history.py:50
 # evtl "wude aktualisiert" schreiben ?
 msgid "%s is upgraded from %s to %s."
 msgstr "%s ist aktualisiert von %s auf %s."
 
-#: pisi/history.py:48
+#: pisi/history.py:52
 # bitte nachlesen..
 msgid "%s %s is removed."
 msgstr "%s %s wurde entfernt."
 
-#: pisi/history.py:50
+#: pisi/history.py:54
 msgid "%s %s is installed."
 msgstr "%s %s ist installiert."
 
-#: pisi/history.py:52
+#: pisi/history.py:56
 # bitte nachlesen
 msgid "%s %s is reinstalled."
 msgstr "%s %s wurde wieder installiert."
 
-#: pisi/history.py:54
+#: pisi/history.py:58
 msgid "%s is downgraded from %s to %s."
 msgstr "%s wurde heruntergestuft von %s auf %s."
 
@@ -1426,7 +1436,8 @@ msgstr "PiSi Quell-Paket wird konstruiert: %s"
 
 #: pisi/operations/build.py:234
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr "IceCream entdeckt. Stellen Sie sicher, dass Ihr Daemon gestartet ist..."
+msgstr ""
+"IceCream entdeckt. Stellen Sie sicher, dass Ihr Daemon gestartet ist..."
 
 #: pisi/operations/build.py:239
 msgid "CCache detected..."
@@ -1509,7 +1520,8 @@ msgid "unable to call function from actions: %s"
 msgstr "nicht in der Lage, die Funktion vom Vorgang aufzurufen: %s"
 
 #: pisi/operations/build.py:485
-msgid "Safety switch: following extra packages in system.devel will be installed: "
+msgid ""
+"Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Sicherheitsschalter: Folgende extra Pakete in system.devel werden "
 "installiert: "
@@ -1520,7 +1532,8 @@ msgstr "Sicherheitsschalter: system.devel ist bereits installiert"
 
 #: pisi/operations/build.py:492
 msgid "Safety switch: the component system.devel cannot be found"
-msgstr "Sicherheitsschalter: die Komponente system.devel konnte nicht gefunden werden"
+msgstr ""
+"Sicherheitsschalter: die Komponente system.devel konnte nicht gefunden werden"
 
 #: pisi/operations/build.py:501
 msgid "Unsatisfied Build Dependencies:"
@@ -1620,7 +1633,8 @@ msgstr "Verlassene Dateien im Installationsverzeichnis (%s):"
 
 # gesammelt hört sich komisch an
 #: pisi/operations/build.py:939
-msgid "All of the files under the install dir (%s) has been collected by package(s)"
+msgid ""
+"All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Alle Dateien unter Installationsierzeichnis (%s) wurden von den Paketen "
 "gesammelt"
@@ -1786,7 +1800,8 @@ msgstr ""
 
 #: pisi/operations/remove.py:48 pisi/operations/upgrade.py:238
 msgid "Safety switch: the component system.base cannot be found"
-msgstr "Sicherheitsschalter: Die Komponente system.base kann nicht gefunden werden"
+msgstr ""
+"Sicherheitsschalter: Die Komponente system.base kann nicht gefunden werden"
 
 #: pisi/operations/remove.py:55
 msgid "Package %s does not exist. Cannot remove."
@@ -1862,11 +1877,13 @@ msgstr "Rückabhängigkeit %s von %s kann nicht zufriedenstellend sein"
 
 #: pisi/operations/upgrade.py:226
 msgid "Safety switch: Following packages in system.base will be installed: "
-msgstr "Sicherheitsschalter: Die folgenden Pakete in system.base serden installiert:"
+msgstr ""
+"Sicherheitsschalter: Die folgenden Pakete in system.base serden installiert:"
 
 #: pisi/operations/upgrade.py:232
 msgid "Safety switch: Following packages in system.base will be upgraded: "
-msgstr "Sicherheitsschalter: Die folgenden Pakete in system.base werden aktualisiert:"
+msgstr ""
+"Sicherheitsschalter: Die folgenden Pakete in system.base werden aktualisiert:"
 
 #: pisi/package.py:56
 msgid ""
@@ -2109,7 +2126,8 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgid ""
+"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 "Entwickler '%s <%s>' hat eina andere email adresse '%s' im Quelltext-Paket '%"
 "s'"
@@ -2137,4 +2155,3 @@ msgstr "Suche im Quellcode - Depot...\n"
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr "Suche im Binär - Depot...\n"
-

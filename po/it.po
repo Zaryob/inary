@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
-"POT-Creation-Date: 2008-06-17 12:13+EEST\n"
+"POT-Creation-Date: 2008-06-26 09:45+EEST\n"
 "PO-Revision-Date: 2007-07-11 21:08+0200\n"
 "Last-Translator: Andrea Decorte <adecorte@gmail.com>\n"
 "Language-Team: Italian <pardus-translation-it@pardus.org.tr>\n"
@@ -247,23 +247,23 @@ msgstr "ActionsAPI [copytree]: La cartella %s non esiste."
 msgid "ActionsAPI [touch]: Permission denied: %s"
 msgstr "ActionsAPI [touch]: Permesso negato: %s"
 
-#: pisi/api.py:386
+#: pisi/api.py:391
 msgid "Taking snapshot of the system"
 msgstr ""
 
-#: pisi/api.py:496
+#: pisi/api.py:501
 msgid "comar package is not fully installed"
 msgstr "il pacchetto COMAR non è completamente installato"
 
-#: pisi/api.py:508
+#: pisi/api.py:513
 msgid "File %s not found"
 msgstr "File %s non trovato"
 
-#: pisi/api.py:544
+#: pisi/api.py:549
 msgid "Checking /%s "
 msgstr "Verifica di /%s "
 
-#: pisi/api.py:550
+#: pisi/api.py:555
 msgid ""
 "\n"
 "Corrupt file: %s"
@@ -271,74 +271,74 @@ msgstr ""
 "\n"
 "File corrotto: %s"
 
-#: pisi/api.py:552 pisi/cli/check.py:75
+#: pisi/api.py:557 pisi/cli/check.py:75
 msgid "OK"
 msgstr "OK"
 
-#: pisi/api.py:557
+#: pisi/api.py:562
 #, fuzzy
 msgid ""
 "\n"
 "Missing file: %s"
 msgstr "File pacchetto: %s"
 
-#: pisi/api.py:568
+#: pisi/api.py:573
 msgid "* Building index of PiSi files under %s"
 msgstr "* Costruzione dell'indice dei file PiSi in %s"
 
-#: pisi/api.py:575
+#: pisi/api.py:580
 msgid "* Index file written"
 msgstr "* File di indice scritto"
 
-#: pisi/api.py:580
+#: pisi/api.py:585
 msgid "Repo %s already present."
 msgstr "Il repository %s è già presente."
 
-#: pisi/api.py:584
+#: pisi/api.py:589
 msgid "Repo %s added to system."
 msgstr "Il repository %s è stato aggiunto al sistema."
 
-#: pisi/api.py:590
+#: pisi/api.py:595
 msgid "Repo %s removed from system."
 msgstr "Il repository %s è stato rimosso dal sistema."
 
-#: pisi/api.py:592
+#: pisi/api.py:597
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "Il repository %s non esiste. Impossibile rimuovere."
 
-#: pisi/api.py:596
+#: pisi/api.py:601
 msgid "* Updating repository: %s"
 msgstr "* Aggiornamento del repository: %s"
 
-#: pisi/api.py:605
+#: pisi/api.py:610
 msgid "%s repository information is up-to-date."
 msgstr ""
 
-#: pisi/api.py:607
+#: pisi/api.py:612
 msgid "Updating database at any rate as requested"
 msgstr "Aggiornamento del database alla frequenza richiesta"
 
-#: pisi/api.py:617
+#: pisi/api.py:622
 msgid "* Package database updated."
 msgstr "* Database dei pacchetti aggiornato."
 
-#: pisi/api.py:619 pisi/api.py:644
+#: pisi/api.py:624 pisi/api.py:649
 msgid "No repository named %s found."
 msgstr "Nessun repository di nome %s trovato."
 
-#: pisi/api.py:627
+#: pisi/api.py:632
 msgid "* Rebuilding '%s' named repo... "
 msgstr "* Ricostruzione del repository di nome '%s'... "
 
-#: pisi/api.py:641
+#: pisi/api.py:646
 msgid "Input/Output error while reading %s: %s"
 msgstr "Errore in Input/Output durante la lettura di %s: %s"
 
-#: pisi/api.py:654
+#: pisi/api.py:659
 msgid "* Adding '%s' to db... "
 msgstr "* Aggiunta di %s al database... "
 
-#: pisi/api.py:657
+#: pisi/api.py:662
 msgid "OK."
 msgstr "OK."
 
@@ -424,25 +424,25 @@ msgstr "Salvataggio di %s."
 msgid "Storing %s"
 msgstr "Salvataggio di %s"
 
-#: pisi/atomicoperations.py:457
+#: pisi/atomicoperations.py:458
 msgid "File list could not be read for package %s, continuing removal."
 msgstr ""
 "Impossibile leggere la lista dei file per il pacchetto %s, proseguo con la "
 "rimozione."
 
-#: pisi/atomicoperations.py:463
+#: pisi/atomicoperations.py:464
 msgid "Removing package %s"
 msgstr "Rimozione del pacchetto %s in corso"
 
-#: pisi/atomicoperations.py:466
+#: pisi/atomicoperations.py:467
 msgid "Trying to remove nonexistent package "
 msgstr "Tentativo di rimozione di un pacchetto non esistente "
 
-#: pisi/atomicoperations.py:505
+#: pisi/atomicoperations.py:506
 msgid "Not removing conflicted file : %s"
 msgstr "File in conflitto non rimossi: %s"
 
-#: pisi/atomicoperations.py:525
+#: pisi/atomicoperations.py:526
 #, fuzzy
 msgid ""
 "Installed file %s does not exist on system [Probably you manually deleted]"
@@ -1389,25 +1389,29 @@ msgstr "ERRORE: gpg --detach-sig %s fallito"
 msgid "Encountered cycle %s"
 msgstr "Riscontrato ciclo %s"
 
-#: pisi/history.py:46
-msgid "%s is upgraded from %s to %s."
-msgstr ""
-
 #: pisi/history.py:48
-msgid "%s %s is removed."
+msgid "%s is upgraded from %s to %s with delta."
 msgstr ""
 
 #: pisi/history.py:50
+msgid "%s is upgraded from %s to %s."
+msgstr ""
+
+#: pisi/history.py:52
+msgid "%s %s is removed."
+msgstr ""
+
+#: pisi/history.py:54
 #, fuzzy
 msgid "%s %s is installed."
 msgstr "%s non è installato"
 
-#: pisi/history.py:52
+#: pisi/history.py:56
 #, fuzzy
 msgid "%s %s is reinstalled."
 msgstr "%s non è installato"
 
-#: pisi/history.py:54
+#: pisi/history.py:58
 msgid "%s is downgraded from %s to %s."
 msgstr ""
 

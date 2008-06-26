@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2008-06-17 12:13+EEST\n"
-"PO-Revision-Date: 2008-06-17 12:26+0300\n"
+"POT-Creation-Date: 2008-06-26 09:45+EEST\n"
+"PO-Revision-Date: 2008-06-26 09:46+0300\n"
 "Last-Translator: Faik Uygur <faik@pardus.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -260,23 +260,23 @@ msgstr "ActionsAPI [copytree]: %s dizini bulunamadı."
 msgid "ActionsAPI [touch]: Permission denied: %s"
 msgstr "ActionsAPI [touch]: Erişim engellendi: %s"
 
-#: pisi/api.py:386
+#: pisi/api.py:391
 msgid "Taking snapshot of the system"
 msgstr "Sistemin görüntüsü alınıyor"
 
-#: pisi/api.py:496
+#: pisi/api.py:501
 msgid "comar package is not fully installed"
 msgstr "comar paketi tam olarak kurulmamış"
 
-#: pisi/api.py:508
+#: pisi/api.py:513
 msgid "File %s not found"
 msgstr "Dosya %s bulunamadı."
 
-#: pisi/api.py:544
+#: pisi/api.py:549
 msgid "Checking /%s "
 msgstr "/%s kontrol ediliyor "
 
-#: pisi/api.py:550
+#: pisi/api.py:555
 msgid ""
 "\n"
 "Corrupt file: %s"
@@ -284,11 +284,11 @@ msgstr ""
 "\n"
 "Bozuk dosya: %s"
 
-#: pisi/api.py:552 pisi/cli/check.py:75
+#: pisi/api.py:557 pisi/cli/check.py:75
 msgid "OK"
 msgstr "Tamam"
 
-#: pisi/api.py:557
+#: pisi/api.py:562
 msgid ""
 "\n"
 "Missing file: %s"
@@ -296,63 +296,63 @@ msgstr ""
 "\n"
 "Eksik dosya: %s"
 
-#: pisi/api.py:568
+#: pisi/api.py:573
 msgid "* Building index of PiSi files under %s"
 msgstr "* %s altındaki PiSi dosyalarının bir indeksi yapılıyor"
 
-#: pisi/api.py:575
+#: pisi/api.py:580
 msgid "* Index file written"
 msgstr "* İndeks dosyası yazıldı"
 
-#: pisi/api.py:580
+#: pisi/api.py:585
 msgid "Repo %s already present."
 msgstr "Depo %s halihazırda var."
 
-#: pisi/api.py:584
+#: pisi/api.py:589
 msgid "Repo %s added to system."
 msgstr "%s isimli depo sisteme eklendi."
 
-#: pisi/api.py:590
+#: pisi/api.py:595
 msgid "Repo %s removed from system."
 msgstr "%s isimli depo sistemden çıkarıldı."
 
-#: pisi/api.py:592
+#: pisi/api.py:597
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "%s deposu yok. Kaldırılamıyor."
 
-#: pisi/api.py:596
+#: pisi/api.py:601
 msgid "* Updating repository: %s"
 msgstr "* %s deposu güncelleniyor"
 
-#: pisi/api.py:605
+#: pisi/api.py:610
 msgid "%s repository information is up-to-date."
 msgstr "%s depo bilgisi güncel."
 
-#: pisi/api.py:607
+#: pisi/api.py:612
 msgid "Updating database at any rate as requested"
 msgstr "Veritabanı istek üzerine güncelleniyor"
 
-#: pisi/api.py:617
+#: pisi/api.py:622
 msgid "* Package database updated."
 msgstr "* Paket veritabanı güncellendi."
 
-#: pisi/api.py:619 pisi/api.py:644
+#: pisi/api.py:624 pisi/api.py:649
 msgid "No repository named %s found."
 msgstr "%s adında bir depo bulunamadı."
 
-#: pisi/api.py:627
+#: pisi/api.py:632
 msgid "* Rebuilding '%s' named repo... "
 msgstr "* '%s' isimli depo yeniden inşa ediliyor... "
 
-#: pisi/api.py:641
+#: pisi/api.py:646
 msgid "Input/Output error while reading %s: %s"
 msgstr "%s okunurken girdi/çıktı hatası: %s"
 
-#: pisi/api.py:654
+#: pisi/api.py:659
 msgid "* Adding '%s' to db... "
 msgstr "* '%s' veritabanına ekleniyor... "
 
-#: pisi/api.py:657
+#: pisi/api.py:662
 msgid "OK."
 msgstr "Tamam."
 
@@ -437,23 +437,23 @@ msgstr "%s saklanıyor."
 msgid "Storing %s"
 msgstr "%s saklanıyor"
 
-#: pisi/atomicoperations.py:457
+#: pisi/atomicoperations.py:458
 msgid "File list could not be read for package %s, continuing removal."
 msgstr "%s paketi için dosya listesi okunamadı, kaldırma işlemine devam ediliyor. "
 
-#: pisi/atomicoperations.py:463
+#: pisi/atomicoperations.py:464
 msgid "Removing package %s"
 msgstr "%s paketi kaldırılıyor"
 
-#: pisi/atomicoperations.py:466
+#: pisi/atomicoperations.py:467
 msgid "Trying to remove nonexistent package "
 msgstr "Varolmayan paket kaldırılmaya çalışıldı"
 
-#: pisi/atomicoperations.py:505
+#: pisi/atomicoperations.py:506
 msgid "Not removing conflicted file : %s"
 msgstr "Çakışan dosya silinmiyor : %s"
 
-#: pisi/atomicoperations.py:525
+#: pisi/atomicoperations.py:526
 msgid "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr "Kurulmuş dosya %s sistemde bulunmuyor [Muhtemelen el ile silindi]"
 
@@ -1317,7 +1317,9 @@ msgstr "Bantgenişliği kullanımı %s KB/s ile sınırlı"
 msgid ""
 "Server doesn't support partial downloads. Previously downloaded part of the "
 "file will be over-written."
-msgstr "Sunucu parçalı indirimleri desteklemiyor. Dosyanın daha önce indirilen parçası üzerine yazılacak."
+msgstr ""
+"Sunucu parçalı indirimleri desteklemiyor. Dosyanın daha önce indirilen "
+"parçası üzerine yazılacak."
 
 #: pisi/file.py:66
 msgid "uri must have type either URI or string"
@@ -1363,23 +1365,27 @@ msgstr "HATA: gpg --detach-sig %s çalışmadı"
 msgid "Encountered cycle %s"
 msgstr "Çember ile karşılaşıldı: %s"
 
-#: pisi/history.py:46
-msgid "%s is upgraded from %s to %s."
-msgstr "%s %s dan %s sürümüne yükseltildi."
-
 #: pisi/history.py:48
+msgid "%s is upgraded from %s to %s with delta."
+msgstr "%s %s sürümünden %s sürümüne delta ile yükseltildi."
+
+#: pisi/history.py:50
+msgid "%s is upgraded from %s to %s."
+msgstr "%s %s sürümünden %s sürümüne yükseltildi."
+
+#: pisi/history.py:52
 msgid "%s %s is removed."
 msgstr "%s %s kaldırıldı."
 
-#: pisi/history.py:50
+#: pisi/history.py:54
 msgid "%s %s is installed."
 msgstr "%s %s kuruldu."
 
-#: pisi/history.py:52
+#: pisi/history.py:56
 msgid "%s %s is reinstalled."
 msgstr "%s %s yeniden kuruldu."
 
-#: pisi/history.py:54
+#: pisi/history.py:58
 msgid "%s is downgraded from %s to %s."
 msgstr "%s %s dan %s sürümüne indirildi."
 
