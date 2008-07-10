@@ -12,9 +12,9 @@ class ReplaceTestCase(unittest.TestCase):
 
         replace = pisi.replace.Replace(relation)
         replace.package = "zlib"
-        assert pisi.replace.installed_package_replaced(replace)
+        self.assert_(pisi.replace.installed_package_replaced(replace))
         repinfo = pisi.replace.Replace(relation)
         repinfo.package = "ctorrent"
-        assert not pisi.replace.installed_package_replaced(repinfo)
+        self.assert_(pisi.replace.installed_package_replaced(repinfo))
 
         pisi.api.remove(["ethtool"])
