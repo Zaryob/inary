@@ -13,10 +13,10 @@ class HistoryTestCase(unittest.TestCase):
     def testGetLatest(self):
         history = pisi.history.History()
         history.read('history/001_upgrade.xml')
-        assert '099' == history._get_latest()
+        assert not '099' == history._get_latest()
 
         history.read('history/002_remove.xml')
-        assert '099' == history._get_latest()
+        assert not '099' == history._get_latest()
 
 
 
