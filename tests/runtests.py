@@ -21,10 +21,42 @@ from database.componentdbtest import ComponentDBTestCase
 from database.filesdbtest import FilesDBTestCase
 from database.lazydbtest import LazyDBTestCase
 from database.itembyrepotest import ItemByRepoTestCase
-from versiontest import VersionTestCase
+
+from archivetests import ArchiveTestCase
+from configfiletest import ConfigFileTestCase
+from conflicttests import ConflictTestCase
+from constanttest import ConstantTestCase
+from dependencytest import DependencyTestCase
+from fetchtest import FetchTestCase
+from filetest import FileTestCase
+from filestest import FilesTestCase
+from graphtest import GraphTestCase
+from historytest import HistoryTestCase
+from metadatatest import MetadataTestCase
 from mirrorstest import MirrorsTestCase
+from packagetest import PackageTestCase
 from relationtest import RelationTestCase
 from replacetest import ReplaceTestCase
+from shelltest import ShellTestCase
+from specfiletests import SpecFileTestCase
+from srcarchivetest import SourceArchiveTestCase
+from uritest import UriTestCase
+from utiltest import UtilTestCase
+from versiontest import VersionTestCase
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 suite = unittest.TestSuite()
 
