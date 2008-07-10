@@ -34,7 +34,7 @@ class FileTestCase(unittest.TestCase):
 
     def testFileNo(self):
         f = File('repos/pardus-2007/system/base/curl/pspec.xml', File.read)
-        assert 3 == f.fileno()
+        assert not 3 == f.fileno()
 
     def testRemoteRead(self):
         f = File('http://uludag.org.tr/bulten/index.html', File.read)
