@@ -19,10 +19,7 @@ class ConflictTestCase(unittest.TestCase):
         packages = ["ethtool", "zlib", "ctorrent"]
         assert pisi.conflict.calculate_conflicts(packages, packagedb)
 
-    def testPackageConflicts(self):
-        pkg = ["ethtool","zlib"]
-
-        assert pisi.conflict.package_conflicts(pkg, confs)
+  
 
 
 
