@@ -71,7 +71,11 @@ all repositories.
 
         component = ctx.get_option('component')
         if component:
-            l = self.componentdb.get_packages(component, repo=repo, walk=True)
+            try:
+                l = self.componentdb.get_packages(component, repo=repo, walk=True)
+            except Exception, e:
+                ctx.ui.info(_("Component %s not found in %s repository") % (component, repo))
+                return
         else:
             l = pisi.api.list_available(repo)
         installed_list = pisi.api.list_installed()
