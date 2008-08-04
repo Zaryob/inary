@@ -28,7 +28,7 @@ class HistoryDB(lazydb.LazyDB):
 
     def __generate_history(self):
         logs = filter(lambda x:x.endswith(".xml"), os.listdir(ctx.config.history_dir()))
-        logs.sort()
+        logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
         logs.reverse()
         return logs
 

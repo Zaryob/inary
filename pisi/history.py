@@ -126,6 +126,6 @@ class History(xmlfile.XmlFile):
         if not files:
             return "001"
 
-        files.sort()
+        files.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
         no, opxml = files[-1].split("_")
         return "%03d" % (int(no) + 1)
