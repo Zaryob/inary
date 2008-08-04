@@ -74,7 +74,6 @@ all repositories.
             try:
                 l = self.componentdb.get_packages(component, repo=repo, walk=True)
             except Exception, e:
-                ctx.ui.info(_("Component %s not found in %s repository") % (component, repo))
                 return
         else:
             l = pisi.api.list_available(repo)
