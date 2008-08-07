@@ -127,7 +127,7 @@ class CLI(pisi.ui.UI):
             return
         elif ka['operation'] == "fetching":
             totalsize = '%.1f %s' % pisi.util.human_readable_size(ka['total_size'])
-            out = '\r%-30.30s (%s)%3d%% %9.2f %s [%s]' % \
+            out = '\r%-30.50s (%s)%3d%% %9.2f %s [%s]' % \
                 (ka['filename'], totalsize, ka['percent'],
                  ka['rate'], ka['symbol'], ka['eta'])
             self.output(out)
