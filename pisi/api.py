@@ -583,6 +583,9 @@ def add_repo(name, indexuri, at = None):
     repodb = pisi.db.repodb.RepoDB()
     if repodb.has_repo(name):
         raise pisi.Error(_('Repo %s already present.') % name)
+    elif repodb.has_repo_url(indexuri):
+        repo = repodb.get_repo_by_url(indexuri)
+        raise pisi.Error(_('Repo already present with name %s.') % repo)
     else:
         repo = pisi.db.repodb.Repo(pisi.uri.URI(indexuri))
         repodb.add_repo(name, repo, at = at)

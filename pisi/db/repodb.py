@@ -166,3 +166,11 @@ class RepoDB(lazydb.LazyDB):
         for r in self.list_repos():
             repos.append(self.get_repo_url(r))
         return repos
+
+    def get_repo_by_url(self, url):
+        if not self.has_repo_url(url):
+            return None
+
+        for r in self.list_repos():
+            if self.get_repo_url(r) == url:
+                return r
