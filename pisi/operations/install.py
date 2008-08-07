@@ -126,7 +126,7 @@ def install_pkg_files(package_URIs):
         pkg = d_t[name]
         deps = pkg.runtimeDependencies()
         for dep in deps:
-            if not satisfiesDep(dep):
+            if not satisfiesDep(dep) and dep not in dep_unsatis:
                 dep_unsatis.append(dep)
 
     # now determine if these unsatisfied dependencies could
