@@ -141,7 +141,10 @@ class Index(xmlfile.XmlFile):
                     delta.packageHash = util.sha1_file(delta_path)
                     name, buildFrom, buildTo = util.parse_delta_package_name(delta_path)
                     delta.buildFrom = buildFrom
-                    md.package.deltaPackages.append(delta)
+
+                    # Add only delta to latest build of the package
+                    if int(buildTo) == int(md.package.build):
+                        md.package.deltaPackages.append(delta)
 
             self.packages.append(md.package)
 
