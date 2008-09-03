@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
-"POT-Creation-Date: 2008-06-26 09:45+EEST\n"
+"POT-Creation-Date: 2008-09-03 15:33+EEST\n"
 "PO-Revision-Date: 2007-07-11 21:08+0200\n"
 "Last-Translator: Andrea Decorte <adecorte@gmail.com>\n"
 "Language-Team: Italian <pardus-translation-it@pardus.org.tr>\n"
@@ -247,23 +247,23 @@ msgstr "ActionsAPI [copytree]: La cartella %s non esiste."
 msgid "ActionsAPI [touch]: Permission denied: %s"
 msgstr "ActionsAPI [touch]: Permesso negato: %s"
 
-#: pisi/api.py:391
+#: pisi/api.py:392
 msgid "Taking snapshot of the system"
 msgstr ""
 
-#: pisi/api.py:501
+#: pisi/api.py:502
 msgid "comar package is not fully installed"
 msgstr "il pacchetto COMAR non è completamente installato"
 
-#: pisi/api.py:513
+#: pisi/api.py:514
 msgid "File %s not found"
 msgstr "File %s non trovato"
 
-#: pisi/api.py:549
+#: pisi/api.py:550
 msgid "Checking /%s "
 msgstr "Verifica di /%s "
 
-#: pisi/api.py:555
+#: pisi/api.py:556
 msgid ""
 "\n"
 "Corrupt file: %s"
@@ -271,74 +271,83 @@ msgstr ""
 "\n"
 "File corrotto: %s"
 
-#: pisi/api.py:557 pisi/cli/check.py:75
+#: pisi/api.py:558 pisi/cli/check.py:75
 msgid "OK"
 msgstr "OK"
 
-#: pisi/api.py:562
+#: pisi/api.py:563
 #, fuzzy
 msgid ""
 "\n"
 "Missing file: %s"
 msgstr "File pacchetto: %s"
 
-#: pisi/api.py:573
+#: pisi/api.py:574
 msgid "* Building index of PiSi files under %s"
 msgstr "* Costruzione dell'indice dei file PiSi in %s"
 
-#: pisi/api.py:580
+#: pisi/api.py:581
 msgid "* Index file written"
 msgstr "* File di indice scritto"
 
 #: pisi/api.py:585
+msgid "Not a valid repo name."
+msgstr ""
+
+#: pisi/api.py:588
 msgid "Repo %s already present."
 msgstr "Il repository %s è già presente."
 
-#: pisi/api.py:589
+#: pisi/api.py:591
+#, fuzzy
+msgid "Repo already present with name %s."
+msgstr "Il repository %s è già presente."
+
+#: pisi/api.py:595
 msgid "Repo %s added to system."
 msgstr "Il repository %s è stato aggiunto al sistema."
 
-#: pisi/api.py:595
+#: pisi/api.py:601
 msgid "Repo %s removed from system."
 msgstr "Il repository %s è stato rimosso dal sistema."
 
-#: pisi/api.py:597
+#: pisi/api.py:603
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "Il repository %s non esiste. Impossibile rimuovere."
 
-#: pisi/api.py:601
+#: pisi/api.py:607
 msgid "* Updating repository: %s"
 msgstr "* Aggiornamento del repository: %s"
 
-#: pisi/api.py:610
+#: pisi/api.py:616
 msgid "%s repository information is up-to-date."
 msgstr ""
 
-#: pisi/api.py:612
+#: pisi/api.py:618
 msgid "Updating database at any rate as requested"
 msgstr "Aggiornamento del database alla frequenza richiesta"
 
-#: pisi/api.py:622
+#: pisi/api.py:628
 msgid "* Package database updated."
 msgstr "* Database dei pacchetti aggiornato."
 
-#: pisi/api.py:624 pisi/api.py:649
+#: pisi/api.py:630 pisi/api.py:655
 msgid "No repository named %s found."
 msgstr "Nessun repository di nome %s trovato."
 
-#: pisi/api.py:632
+#: pisi/api.py:638
 msgid "* Rebuilding '%s' named repo... "
 msgstr "* Ricostruzione del repository di nome '%s'... "
 
-#: pisi/api.py:646
+#: pisi/api.py:652
 msgid "Input/Output error while reading %s: %s"
 msgstr "Errore in Input/Output durante la lettura di %s: %s"
 
-#: pisi/api.py:659
+#: pisi/api.py:665
 msgid "* Adding '%s' to db... "
 msgstr "* Aggiunta di %s al database... "
 
-#: pisi/api.py:662
+#: pisi/api.py:668
 msgid "OK."
 msgstr "OK."
 
@@ -1427,7 +1436,7 @@ msgstr "Aggiunta di %s all'indice dei pacchetti"
 msgid "Package %s: metadata corrupt, skipping..."
 msgstr "Pacchetto %s: metadata corrotti, lo salto..."
 
-#: pisi/index.py:168
+#: pisi/index.py:171
 msgid "Adding %s to source index"
 msgstr "Aggiunta di %s all'indice dei sorgenti"
 

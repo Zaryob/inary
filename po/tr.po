@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2008-06-26 09:45+EEST\n"
-"PO-Revision-Date: 2008-06-26 09:46+0300\n"
+"POT-Creation-Date: 2008-09-03 15:33+EEST\n"
+"PO-Revision-Date: 2008-09-03 15:34+0300\n"
 "Last-Translator: Faik Uygur <faik@pardus.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -260,23 +260,23 @@ msgstr "ActionsAPI [copytree]: %s dizini bulunamadı."
 msgid "ActionsAPI [touch]: Permission denied: %s"
 msgstr "ActionsAPI [touch]: Erişim engellendi: %s"
 
-#: pisi/api.py:391
+#: pisi/api.py:392
 msgid "Taking snapshot of the system"
 msgstr "Sistemin görüntüsü alınıyor"
 
-#: pisi/api.py:501
+#: pisi/api.py:502
 msgid "comar package is not fully installed"
 msgstr "comar paketi tam olarak kurulmamış"
 
-#: pisi/api.py:513
+#: pisi/api.py:514
 msgid "File %s not found"
 msgstr "Dosya %s bulunamadı."
 
-#: pisi/api.py:549
+#: pisi/api.py:550
 msgid "Checking /%s "
 msgstr "/%s kontrol ediliyor "
 
-#: pisi/api.py:555
+#: pisi/api.py:556
 msgid ""
 "\n"
 "Corrupt file: %s"
@@ -284,11 +284,11 @@ msgstr ""
 "\n"
 "Bozuk dosya: %s"
 
-#: pisi/api.py:557 pisi/cli/check.py:75
+#: pisi/api.py:558 pisi/cli/check.py:75
 msgid "OK"
 msgstr "Tamam"
 
-#: pisi/api.py:562
+#: pisi/api.py:563
 msgid ""
 "\n"
 "Missing file: %s"
@@ -296,63 +296,71 @@ msgstr ""
 "\n"
 "Eksik dosya: %s"
 
-#: pisi/api.py:573
+#: pisi/api.py:574
 msgid "* Building index of PiSi files under %s"
 msgstr "* %s altındaki PiSi dosyalarının bir indeksi yapılıyor"
 
-#: pisi/api.py:580
+#: pisi/api.py:581
 msgid "* Index file written"
 msgstr "* İndeks dosyası yazıldı"
 
 #: pisi/api.py:585
+msgid "Not a valid repo name."
+msgstr "Geçerli bir depo ismi değil."
+
+#: pisi/api.py:588
 msgid "Repo %s already present."
 msgstr "Depo %s halihazırda var."
 
-#: pisi/api.py:589
+#: pisi/api.py:591
+msgid "Repo already present with name %s."
+msgstr "Depo halihazırda %s ismi ile mevcut."
+
+#: pisi/api.py:595
 msgid "Repo %s added to system."
 msgstr "%s isimli depo sisteme eklendi."
 
-#: pisi/api.py:595
+#: pisi/api.py:601
 msgid "Repo %s removed from system."
 msgstr "%s isimli depo sistemden çıkarıldı."
 
-#: pisi/api.py:597
+#: pisi/api.py:603
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "%s deposu yok. Kaldırılamıyor."
 
-#: pisi/api.py:601
+#: pisi/api.py:607
 msgid "* Updating repository: %s"
 msgstr "* %s deposu güncelleniyor"
 
-#: pisi/api.py:610
+#: pisi/api.py:616
 msgid "%s repository information is up-to-date."
 msgstr "%s depo bilgisi güncel."
 
-#: pisi/api.py:612
+#: pisi/api.py:618
 msgid "Updating database at any rate as requested"
 msgstr "Veritabanı istek üzerine güncelleniyor"
 
-#: pisi/api.py:622
+#: pisi/api.py:628
 msgid "* Package database updated."
 msgstr "* Paket veritabanı güncellendi."
 
-#: pisi/api.py:624 pisi/api.py:649
+#: pisi/api.py:630 pisi/api.py:655
 msgid "No repository named %s found."
 msgstr "%s adında bir depo bulunamadı."
 
-#: pisi/api.py:632
+#: pisi/api.py:638
 msgid "* Rebuilding '%s' named repo... "
 msgstr "* '%s' isimli depo yeniden inşa ediliyor... "
 
-#: pisi/api.py:646
+#: pisi/api.py:652
 msgid "Input/Output error while reading %s: %s"
 msgstr "%s okunurken girdi/çıktı hatası: %s"
 
-#: pisi/api.py:659
+#: pisi/api.py:665
 msgid "* Adding '%s' to db... "
 msgstr "* '%s' veritabanına ekleniyor... "
 
-#: pisi/api.py:662
+#: pisi/api.py:668
 msgid "OK."
 msgstr "Tamam."
 
@@ -1401,7 +1409,7 @@ msgstr "%s paket indeksine ekleniyor"
 msgid "Package %s: metadata corrupt, skipping..."
 msgstr "Paket %s: metadata bozuk, atlanıyor..."
 
-#: pisi/index.py:168
+#: pisi/index.py:171
 msgid "Adding %s to source index"
 msgstr "%s kaynak indeksine ekleniyor"
 

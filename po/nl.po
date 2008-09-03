@@ -7,10 +7,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
-"POT-Creation-Date: 2008-06-26 09:45+EEST\n"
+"POT-Creation-Date: 2008-09-03 15:33+EEST\n"
 "PO-Revision-Date: 2008-06-26 09:48+0200\n"
 "Last-Translator: W.P.M.H.I.A. Gielen <w.gielen@gmail.com>\n"
-"Language-Team: Nederlands <http://liste.pardus.org.tr/pardus-translation-nl/>\n"
+"Language-Team: Nederlands <http://liste.pardus.org.tr/pardus-translation-nl/"
+">\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -261,23 +262,23 @@ msgstr "ActionsAPI [copytree]: map %s bestaat niet."
 msgid "ActionsAPI [touch]: Permission denied: %s"
 msgstr "ActionsAPI [touch]: toegang geweigerd: %s"
 
-#: pisi/api.py:391
+#: pisi/api.py:392
 msgid "Taking snapshot of the system"
 msgstr "Snapshot van het systeem nemen"
 
-#: pisi/api.py:501
+#: pisi/api.py:502
 msgid "comar package is not fully installed"
 msgstr "comar-pakket is niet volledig geïnstalleerd"
 
-#: pisi/api.py:513
+#: pisi/api.py:514
 msgid "File %s not found"
 msgstr "Bestand %s niet gevonden."
 
-#: pisi/api.py:549
+#: pisi/api.py:550
 msgid "Checking /%s "
 msgstr "Controle /%s "
 
-#: pisi/api.py:555
+#: pisi/api.py:556
 msgid ""
 "\n"
 "Corrupt file: %s"
@@ -285,11 +286,11 @@ msgstr ""
 "\n"
 "Bestand met fouten: %s"
 
-#: pisi/api.py:557 pisi/cli/check.py:75
+#: pisi/api.py:558 pisi/cli/check.py:75
 msgid "OK"
 msgstr "OK"
 
-#: pisi/api.py:562
+#: pisi/api.py:563
 msgid ""
 "\n"
 "Missing file: %s"
@@ -297,63 +298,72 @@ msgstr ""
 "\n"
 "Missend bestand: %s"
 
-#: pisi/api.py:573
+#: pisi/api.py:574
 msgid "* Building index of PiSi files under %s"
 msgstr "* Index aanmaken van PiSi-bestanden onder %s"
 
-#: pisi/api.py:580
+#: pisi/api.py:581
 msgid "* Index file written"
 msgstr "* Index-bestand geschreven"
 
 #: pisi/api.py:585
+msgid "Not a valid repo name."
+msgstr ""
+
+#: pisi/api.py:588
 msgid "Repo %s already present."
 msgstr "Repo %s is al aanwezig."
 
-#: pisi/api.py:589
+#: pisi/api.py:591
+#, fuzzy
+msgid "Repo already present with name %s."
+msgstr "Repo %s is al aanwezig."
+
+#: pisi/api.py:595
 msgid "Repo %s added to system."
 msgstr "Repo %s toegevoegd aan het systeem."
 
-#: pisi/api.py:595
+#: pisi/api.py:601
 msgid "Repo %s removed from system."
 msgstr "Repo %s verwijderd uit het systeem."
 
-#: pisi/api.py:597
+#: pisi/api.py:603
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "Repository %s bestaat niet. Kan niet verwijderen."
 
-#: pisi/api.py:601
+#: pisi/api.py:607
 msgid "* Updating repository: %s"
 msgstr "* Updaten repository: %s "
 
-#: pisi/api.py:610
+#: pisi/api.py:616
 msgid "%s repository information is up-to-date."
 msgstr "%s repository informatie is nog recent."
 
-#: pisi/api.py:612
+#: pisi/api.py:618
 msgid "Updating database at any rate as requested"
 msgstr "Updaten database op elke snelheid zoals verzocht"
 
-#: pisi/api.py:622
+#: pisi/api.py:628
 msgid "* Package database updated."
 msgstr "* Pakketdatabase geupdate."
 
-#: pisi/api.py:624 pisi/api.py:649
+#: pisi/api.py:630 pisi/api.py:655
 msgid "No repository named %s found."
 msgstr "Geen repository met de naam %s gevonden."
 
-#: pisi/api.py:632
+#: pisi/api.py:638
 msgid "* Rebuilding '%s' named repo... "
 msgstr "* 'Opnieuw opbouwen '%s' repo... "
 
-#: pisi/api.py:646
+#: pisi/api.py:652
 msgid "Input/Output error while reading %s: %s"
 msgstr "I/O-fout bij lezen van %s: %s"
 
-#: pisi/api.py:659
+#: pisi/api.py:665
 msgid "* Adding '%s' to db... "
 msgstr "* Toevoegen '%s' aan db... "
 
-#: pisi/api.py:662
+#: pisi/api.py:668
 msgid "OK."
 msgstr "OK."
 
@@ -459,7 +469,8 @@ msgid "Not removing conflicted file : %s"
 msgstr "Niet verwijderen conflicterend bestand: %s"
 
 #: pisi/atomicoperations.py:526
-msgid "Installed file %s does not exist on system [Probably you manually deleted]"
+msgid ""
+"Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
 "Geïnstalleerd bestand %s bestaat niet op systeem [waarschijnlijk handmatig "
 "verwijderd]"
@@ -551,7 +562,8 @@ msgid "Create a static package with ar files"
 msgstr "Maak een statisch pakket met ar-bestanden aan"
 
 #: pisi/cli/build.py:70
-msgid "Do not install build dependencies, fail if a build dependency is present"
+msgid ""
+"Do not install build dependencies, fail if a build dependency is present"
 msgstr ""
 "Installeer geen bouwafhankelijkheden, stoppen als zich een "
 "compileerafhankelijkheid voordoet"
@@ -1001,7 +1013,8 @@ msgstr "Toon gedetailleerde installatie-informatie"
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/listinstalled.py:71 pisi/cli/listupgrades.py:73
-msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgid ""
+"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
 msgstr "Pakketnaam     |St|   Versie|  Rel.| Bouw |  Distro|             Datum"
 
 #: pisi/cli/listpending.py:43
@@ -1411,7 +1424,7 @@ msgstr "Toevoegen %s aan pakketindex"
 msgid "Package %s: metadata corrupt, skipping..."
 msgstr "Pakket %s: metadata is corrupt, wordt overgeslagen..."
 
-#: pisi/index.py:168
+#: pisi/index.py:171
 msgid "Adding %s to source index"
 msgstr "Toevoegen %s aan bronindex"
 
@@ -1528,7 +1541,8 @@ msgid "unable to call function from actions: %s"
 msgstr "kan functie niet aanroepen vanuit actions: %s"
 
 #: pisi/operations/build.py:485
-msgid "Safety switch: following extra packages in system.devel will be installed: "
+msgid ""
+"Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Veiligheidsprocedure: de volgende extra pakketten in system.devel zullen "
 "geïnstalleerd worden:"
@@ -1639,8 +1653,10 @@ msgid "Abandoned files under the install dir (%s):"
 msgstr "Verlaten bestanden in de installatiemap (%s):"
 
 #: pisi/operations/build.py:939
-msgid "All of the files under the install dir (%s) has been collected by package(s)"
-msgstr "Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)."
+msgid ""
+"All of the files under the install dir (%s) has been collected by package(s)"
+msgstr ""
+"Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)."
 
 #: pisi/operations/build.py:943
 msgid "Cleaning Build Directory..."
@@ -2132,8 +2148,10 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-msgstr "Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
+msgid ""
+"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgstr ""
+"Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
 
 #: scripts/repostats.py:467
 msgid ""
@@ -2158,4 +2176,3 @@ msgstr "Scannen bron-repository...\n"
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr "Scannen binaire pakketten...\n"
-
