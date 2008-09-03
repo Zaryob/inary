@@ -13,6 +13,7 @@
 
 # python standard library
 import os
+import sys
 import glob
 import copy
 import stat
@@ -461,8 +462,17 @@ class Builder:
                     valid_paths.append("%s/.ccache" % os.environ["HOME"])
                 
                 ret = catbox.run(self.actionLocals[func], valid_paths, logger=self.log_sandbox_violation)
-                if ret.code == 1 or ret.violations != []:
+                # Retcode can be 0 while there is a sanbox violation, so only look for violations to correctly handle it
+                if ret.violations != []:
+                    ctx.ui.error(_("Sandbox violation result:"))
+                    for result in ret.violations:
+                        ctx.ui.error("* %s (%s -> %s)" % (result[0], result[1], result[2]))
                     raise Error(_("Sandbox violations!"))
+                else:
+                    # Retcode is 1 when there is a python exception.
+                    # This is for actionsapi's exceptions. Without this, when exception is raised, build process continues.
+                    if ret.code == 1:
+                        sys.exit(1)
         else:
             if mandatory:
                 raise Error(_("unable to call function from actions: %s") % func)
