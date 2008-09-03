@@ -38,7 +38,7 @@ class ItemByRepo:
             if self.dbobj.has_key(r) and self.dbobj[r].has_key(item):
                 return r
 
-        raise Exception(_("%s repository not found") % str(item))
+        raise Exception(_("%s not found in any repository.") % str(item))
 
     def get_item_repo(self, item, repo=None):
         for r in self.item_repos(repo):
