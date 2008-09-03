@@ -1,0 +1,10 @@
+pisi-2.0.1 (03-Sep-2008)
+        - pisi la -c fails if component not found in the first
+        repository (#7854)
+        - pisi history not showing +999 operations
+        - pisi it *.pisi could show same package name multiple
+        times as a dependency (#7929)
+        - Fix validity checks while adding a new repo (#5940, #5906)
+        - Increase console information line length (#5281)
+        - Only add delta packages to the latest build of package
+
