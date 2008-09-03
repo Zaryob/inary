@@ -55,11 +55,18 @@ def __listactions(actions):
 def __getpackageurl(package):
     packagedb = pisi.db.packagedb.PackageDB()
     repodb = pisi.db.repodb.RepoDB()
-
     pkg, ver = pisi.util.parse_package_name(package)
-    reponame = packagedb.which_repo(pkg)
-    repourl = repodb.get_repo_url(reponame)
 
+    reponame = None
+    try:
+        reponame = packagedb.which_repo(pkg)
+    except Exception:
+        # Maybe this package is obsoluted from repository
+        for repo in repodb.get_binary_repos():
+            if pkg in packagedb.get_obsoletes(repo):
+                reponame = repo
+
+    repourl = repodb.get_repo_url(reponame)
     ctx.ui.info(_("Package %s found in repository %s") % (pkg, reponame))
 
     #return _possible_ url for this package
