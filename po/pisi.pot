@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2008-09-03 15:33+EEST\n"
+"POT-Creation-Date: 2008-09-03 16:21+EEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -339,7 +339,7 @@ msgstr ""
 msgid "OK."
 msgstr ""
 
-#: pisi/atomicoperations.py:71 pisi/operations/history.py:63
+#: pisi/atomicoperations.py:71 pisi/operations/history.py:70
 msgid "Package %s found in repository %s"
 msgstr ""
 
@@ -1213,7 +1213,7 @@ msgid "Package %s is not installed"
 msgstr ""
 
 #: pisi/db/itembyrepo.py:41
-msgid "%s repository not found"
+msgid "%s not found in any repository."
 msgstr ""
 
 #: pisi/db/itembyrepo.py:51
@@ -1642,34 +1642,34 @@ msgstr ""
 msgid "Conflicts remain"
 msgstr ""
 
-#: pisi/operations/history.py:77
+#: pisi/operations/history.py:84
 msgid "%s could not be found"
 msgstr ""
 
-#: pisi/operations/history.py:80 pisi/package.py:60 pisi/sourcearchive.py:92
+#: pisi/operations/history.py:87 pisi/package.py:60 pisi/sourcearchive.py:92
 msgid "%s [cached]"
 msgstr ""
 
-#: pisi/operations/history.py:125
+#: pisi/operations/history.py:132
 msgid ""
 "Following packages will be installed:\n"
 msgstr ""
 
-#: pisi/operations/history.py:128
+#: pisi/operations/history.py:135
 msgid ""
 "Following packages will be removed:\n"
 msgstr ""
 
-#: pisi/operations/history.py:130 pisi/operations/history.py:144
+#: pisi/operations/history.py:137 pisi/operations/history.py:151
 #: pisi/operations/install.py:144 pisi/operations/remove.py:72
 msgid "Do you want to continue?"
 msgstr ""
 
-#: pisi/operations/history.py:136 pisi/operations/upgrade.py:136
+#: pisi/operations/history.py:143 pisi/operations/upgrade.py:136
 msgid "Downloading %d / %d"
 msgstr ""
 
-#: pisi/operations/history.py:142
+#: pisi/operations/history.py:149
 msgid ""
 "\n"
 "Following packages could not be found in repositories and are not cached:\n"

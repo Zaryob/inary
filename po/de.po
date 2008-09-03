@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
-"POT-Creation-Date: 2008-09-03 15:33+EEST\n"
+"POT-Creation-Date: 2008-09-03 16:21+EEST\n"
 "PO-Revision-Date: 2008-06-26 22:56+0200\n"
 "Last-Translator: Mustafa Ölcerman <m.oelcerman@pardus-linux.de>\n"
 "Language-Team: Deutsch <pardus-translation-de@pardus.org.tr>\n"
@@ -355,7 +355,7 @@ msgstr "* '%s' wird in db hinzugefügt... "
 msgid "OK."
 msgstr "OK."
 
-#: pisi/atomicoperations.py:71 pisi/operations/history.py:63
+#: pisi/atomicoperations.py:71 pisi/operations/history.py:70
 msgid "Package %s found in repository %s"
 msgstr "Paket %s im Depot %s gefunden"
 
@@ -1263,8 +1263,9 @@ msgid "Package %s is not installed"
 msgstr "Paket %s ist nicht installiert"
 
 #: pisi/db/itembyrepo.py:41
-msgid "%s repository not found"
-msgstr "Depot %s nicht gefunden."
+#, fuzzy
+msgid "%s not found in any repository."
+msgstr "Paket %s wurde in keinem der aktuellen Depot's gefunden."
 
 #: pisi/db/itembyrepo.py:51
 msgid "Repo item %s not found"
@@ -1721,33 +1722,33 @@ msgstr "Folgende widersprüchliche Pakete entfernen ?"
 msgid "Conflicts remain"
 msgstr "Es gibt immer noch Konflikte"
 
-#: pisi/operations/history.py:77
+#: pisi/operations/history.py:84
 msgid "%s could not be found"
 msgstr "%s konnte nicht gefunden werden"
 
-#: pisi/operations/history.py:80 pisi/package.py:60 pisi/sourcearchive.py:92
+#: pisi/operations/history.py:87 pisi/package.py:60 pisi/sourcearchive.py:92
 msgid "%s [cached]"
 msgstr "%s [cached]"
 
-#: pisi/operations/history.py:125
+#: pisi/operations/history.py:132
 msgid "Following packages will be installed:\n"
 msgstr "Folgende Pakete werden installiert:\n"
 
-#: pisi/operations/history.py:128
+#: pisi/operations/history.py:135
 msgid "Following packages will be removed:\n"
 msgstr "Folgende Pakete werden entfernt:\n"
 
-#: pisi/operations/history.py:130 pisi/operations/history.py:144
+#: pisi/operations/history.py:137 pisi/operations/history.py:151
 #: pisi/operations/install.py:144 pisi/operations/remove.py:72
 msgid "Do you want to continue?"
 msgstr "Wollen Sie fortfahren?"
 
-#: pisi/operations/history.py:136 pisi/operations/upgrade.py:136
+#: pisi/operations/history.py:143 pisi/operations/upgrade.py:136
 msgid "Downloading %d / %d"
 msgstr "Wird heruntergeladen %d / %d"
 
 # bitte nachlesen, ich habe den letzten Teil einfach weggelassen !!
-#: pisi/operations/history.py:142
+#: pisi/operations/history.py:149
 msgid ""
 "\n"
 "Following packages could not be found in repositories and are not cached:\n"
@@ -2166,3 +2167,6 @@ msgstr "Suche im Quellcode - Depot...\n"
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr "Suche im Binär - Depot...\n"
+
+#~ msgid "%s repository not found"
+#~ msgstr "Depot %s nicht gefunden."

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
-"POT-Creation-Date: 2008-09-03 15:33+EEST\n"
+"POT-Creation-Date: 2008-09-03 16:21+EEST\n"
 "PO-Revision-Date: 2008-06-26 09:48+0200\n"
 "Last-Translator: W.P.M.H.I.A. Gielen <w.gielen@gmail.com>\n"
 "Language-Team: Nederlands <http://liste.pardus.org.tr/pardus-translation-nl/"
@@ -367,7 +367,7 @@ msgstr "* Toevoegen '%s' aan db... "
 msgid "OK."
 msgstr "OK."
 
-#: pisi/atomicoperations.py:71 pisi/operations/history.py:63
+#: pisi/atomicoperations.py:71 pisi/operations/history.py:70
 msgid "Package %s found in repository %s"
 msgstr "Pakket %s gevonden in repository %s "
 
@@ -1277,8 +1277,9 @@ msgid "Package %s is not installed"
 msgstr "Pakket %s is niet geïnstalleerd"
 
 #: pisi/db/itembyrepo.py:41
-msgid "%s repository not found"
-msgstr "%s repository niet gevonden"
+#, fuzzy
+msgid "%s not found in any repository."
+msgstr "Bron %s niet gevonden in actieve repositories."
 
 #: pisi/db/itembyrepo.py:51
 msgid "Repo item %s not found"
@@ -1729,32 +1730,32 @@ msgstr "De volgende pakketten met conflicten verwijderen?"
 msgid "Conflicts remain"
 msgstr "Conflicten blijven bestaan"
 
-#: pisi/operations/history.py:77
+#: pisi/operations/history.py:84
 msgid "%s could not be found"
 msgstr "%s niet gevonden"
 
-#: pisi/operations/history.py:80 pisi/package.py:60 pisi/sourcearchive.py:92
+#: pisi/operations/history.py:87 pisi/package.py:60 pisi/sourcearchive.py:92
 msgid "%s [cached]"
 msgstr "%s [cached]"
 
-#: pisi/operations/history.py:125
+#: pisi/operations/history.py:132
 msgid "Following packages will be installed:\n"
 msgstr "Volgende pakketen zullen worden geïnstalleerd:\n"
 
-#: pisi/operations/history.py:128
+#: pisi/operations/history.py:135
 msgid "Following packages will be removed:\n"
 msgstr "Volgende pakketen zullen worden verwijderd:\n"
 
-#: pisi/operations/history.py:130 pisi/operations/history.py:144
+#: pisi/operations/history.py:137 pisi/operations/history.py:151
 #: pisi/operations/install.py:144 pisi/operations/remove.py:72
 msgid "Do you want to continue?"
 msgstr "Wilt u doorgaan?"
 
-#: pisi/operations/history.py:136 pisi/operations/upgrade.py:136
+#: pisi/operations/history.py:143 pisi/operations/upgrade.py:136
 msgid "Downloading %d / %d"
 msgstr "Downloaden %d / %d"
 
-#: pisi/operations/history.py:142
+#: pisi/operations/history.py:149
 msgid ""
 "\n"
 "Following packages could not be found in repositories and are not cached:\n"
@@ -2176,3 +2177,6 @@ msgstr "Scannen bron-repository...\n"
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr "Scannen binaire pakketten...\n"
+
+#~ msgid "%s repository not found"
+#~ msgstr "%s repository niet gevonden"

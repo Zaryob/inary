@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
-"POT-Creation-Date: 2008-09-03 15:33+EEST\n"
+"POT-Creation-Date: 2008-09-03 16:21+EEST\n"
 "PO-Revision-Date: 2007-07-11 21:08+0200\n"
 "Last-Translator: Andrea Decorte <adecorte@gmail.com>\n"
 "Language-Team: Italian <pardus-translation-it@pardus.org.tr>\n"
@@ -351,7 +351,7 @@ msgstr "* Aggiunta di %s al database... "
 msgid "OK."
 msgstr "OK."
 
-#: pisi/atomicoperations.py:71 pisi/operations/history.py:63
+#: pisi/atomicoperations.py:71 pisi/operations/history.py:70
 msgid "Package %s found in repository %s"
 msgstr "Pacchetto %s trovato nel repository %s"
 
@@ -1284,8 +1284,8 @@ msgstr "Il pacchetto %s non è installato."
 
 #: pisi/db/itembyrepo.py:41
 #, fuzzy
-msgid "%s repository not found"
-msgstr "Nessun repository di nome %s trovato."
+msgid "%s not found in any repository."
+msgstr "Il sorgente %s non è stato trovato in alcun repository attivo."
 
 #: pisi/db/itembyrepo.py:51
 #, fuzzy
@@ -1743,35 +1743,35 @@ msgstr "Rimuovere i seguenti pacchetti conflittanti?"
 msgid "Conflicts remain"
 msgstr "Il conflitto rimane"
 
-#: pisi/operations/history.py:77
+#: pisi/operations/history.py:84
 #, fuzzy
 msgid "%s could not be found"
 msgstr "Utilità %s non trovata"
 
-#: pisi/operations/history.py:80 pisi/package.py:60 pisi/sourcearchive.py:92
+#: pisi/operations/history.py:87 pisi/package.py:60 pisi/sourcearchive.py:92
 msgid "%s [cached]"
 msgstr "%s [nella cache]"
 
-#: pisi/operations/history.py:125
+#: pisi/operations/history.py:132
 #, fuzzy
 msgid "Following packages will be installed:\n"
 msgstr "I seguenti pacchetti verranno aggiornati: "
 
-#: pisi/operations/history.py:128
+#: pisi/operations/history.py:135
 #, fuzzy
 msgid "Following packages will be removed:\n"
 msgstr "I seguenti pacchetti verranno aggiornati: "
 
-#: pisi/operations/history.py:130 pisi/operations/history.py:144
+#: pisi/operations/history.py:137 pisi/operations/history.py:151
 #: pisi/operations/install.py:144 pisi/operations/remove.py:72
 msgid "Do you want to continue?"
 msgstr "Vuoi proseguire?"
 
-#: pisi/operations/history.py:136 pisi/operations/upgrade.py:136
+#: pisi/operations/history.py:143 pisi/operations/upgrade.py:136
 msgid "Downloading %d / %d"
 msgstr "Scaricamento di %d/%d"
 
-#: pisi/operations/history.py:142
+#: pisi/operations/history.py:149
 msgid ""
 "\n"
 "Following packages could not be found in repositories and are not cached:\n"
@@ -2195,6 +2195,10 @@ msgstr "Scansione del repository sorgente in corso...\n"
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr "Scansione dei pacchetti binari in corso...\n"
+
+#, fuzzy
+#~ msgid "%s repository not found"
+#~ msgstr "Nessun repository di nome %s trovato."
 
 #~ msgid ""
 #~ "optparse - a powerful, extensible, and easy-to-use option parser.\n"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-03 15:33+EEST\n"
+"POT-Creation-Date: 2008-09-03 16:21+EEST\n"
 "PO-Revision-Date: 2006-04-08 12:19+0900\n"
 "Last-Translator: Piotr Maliński <riklaunim@gmail.com>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -344,7 +344,7 @@ msgstr "* Dodawanie '%s' do bazy..."
 msgid "OK."
 msgstr "OK."
 
-#: pisi/atomicoperations.py:71 pisi/operations/history.py:63
+#: pisi/atomicoperations.py:71 pisi/operations/history.py:70
 msgid "Package %s found in repository %s"
 msgstr "Pakiet %s znaleziono w repozytorium %s"
 
@@ -1240,8 +1240,8 @@ msgstr "pakiet comar nie jest w pełni zainstalowana"
 
 #: pisi/db/itembyrepo.py:41
 #, fuzzy
-msgid "%s repository not found"
-msgstr "Nie znaleziono repozytoriów o nazwie %s"
+msgid "%s not found in any repository."
+msgstr "Źródło %s nie zostało znalezione w aktywnym repozytorium"
 
 #: pisi/db/itembyrepo.py:51
 #, fuzzy
@@ -1684,36 +1684,36 @@ msgstr ""
 msgid "Conflicts remain"
 msgstr ""
 
-#: pisi/operations/history.py:77
+#: pisi/operations/history.py:84
 #, fuzzy
 msgid "%s could not be found"
 msgstr "Narzędzie %s nie może zostać znalezione"
 
-#: pisi/operations/history.py:80 pisi/package.py:60 pisi/sourcearchive.py:92
+#: pisi/operations/history.py:87 pisi/package.py:60 pisi/sourcearchive.py:92
 msgid "%s [cached]"
 msgstr ""
 
-#: pisi/operations/history.py:125
+#: pisi/operations/history.py:132
 #, fuzzy
 msgid "Following packages will be installed:\n"
 msgstr ""
 "Przełącznik bezpieczeństwa: zostaną zainstalowane następujące dodatkowe "
 "pakiety z system.devel: "
 
-#: pisi/operations/history.py:128
+#: pisi/operations/history.py:135
 msgid "Following packages will be removed:\n"
 msgstr ""
 
-#: pisi/operations/history.py:130 pisi/operations/history.py:144
+#: pisi/operations/history.py:137 pisi/operations/history.py:151
 #: pisi/operations/install.py:144 pisi/operations/remove.py:72
 msgid "Do you want to continue?"
 msgstr ""
 
-#: pisi/operations/history.py:136 pisi/operations/upgrade.py:136
+#: pisi/operations/history.py:143 pisi/operations/upgrade.py:136
 msgid "Downloading %d / %d"
 msgstr ""
 
-#: pisi/operations/history.py:142
+#: pisi/operations/history.py:149
 msgid ""
 "\n"
 "Following packages could not be found in repositories and are not cached:\n"
@@ -2103,6 +2103,10 @@ msgstr ""
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr ""
+
+#, fuzzy
+#~ msgid "%s repository not found"
+#~ msgstr "Nie znaleziono repozytoriów o nazwie %s"
 
 #~ msgid ""
 #~ "optparse - a powerful, extensible, and easy-to-use option parser.\n"
