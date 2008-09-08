@@ -76,7 +76,7 @@ def upgrade_pkg_names(A = []):
             if not pisi.util.any(lambda i:i.type == 'security', updates):
                 continue
 
-        if pisi.util.any(lambda x:x.requires and "reverseDependencyUpdate" in x.requires.action, updates):
+        if pisi.util.any(lambda x:x.requires != None and "reverseDependencyUpdate" in x.requires.action, updates):
             Ap.extend(map(lambda d:d.package, packagedb.get_rev_deps(x)))
 
         if ignore_build or (not build) or (not pkg.build):
