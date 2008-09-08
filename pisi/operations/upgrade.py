@@ -71,10 +71,13 @@ def upgrade_pkg_names(A = []):
             ctx.ui.info(_('Package %s is not available in repositories.') % x, True)
             continue
 
+        updates = [i for i in pkg.history if pisi.version.Version(i.release) > pisi.version.Version(release)]
         if security_only:
-            updates = [i for i in pkg.history if pisi.version.Version(i.release) > pisi.version.Version(release)]
             if not pisi.util.any(lambda i:i.type == 'security', updates):
                 continue
+
+        if pisi.util.any(lambda x:x.requires and "reverseDependencyUpdate" in x.requires.action, updates):
+            Ap.extend(map(lambda d:d.package, packagedb.get_rev_deps(x)))
 
         if ignore_build or (not build) or (not pkg.build):
             if pisi.version.Version(release) < pisi.version.Version(pkg.release):
@@ -89,7 +92,6 @@ def upgrade_pkg_names(A = []):
                 ctx.ui.info(_('Package %s is already at the latest build %s.')
                             % (pkg.name, pkg.build), True)
 
-                
     A = set(Ap)
 
     if len(A)==0:

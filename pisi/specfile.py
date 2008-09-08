@@ -83,6 +83,15 @@ class Patch:
             s += ' level:' + self.level
         return s
 
+class Requires:
+
+    # Valid actions:
+    #
+    # reverseDependencyUpdate
+    # systemRestart
+    # serviceRestart
+
+    t_Action = [ [autoxml.String], autoxml.mandatory]
 
 class Update:
 
@@ -93,6 +102,7 @@ class Update:
     t_Comment = [autoxml.String, autoxml.optional]
     t_Name = [autoxml.Text, autoxml.optional]
     t_Email = [autoxml.String, autoxml.optional]
+    t_Requires = [Requires, autoxml.optional]
 
     def __str__(self):
         s = self.date
@@ -101,7 +111,6 @@ class Update:
         if self.type:
             s += ", type=" + self.type
         return s
-
 
 class Path:
 
