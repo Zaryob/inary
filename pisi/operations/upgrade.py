@@ -198,7 +198,7 @@ def plan_upgrade(A):
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            rev_deps = packagedb.get_rev_deps(x)
+            rev_deps = installdb.get_rev_deps(x)
             for (rev_dep, depinfo) in rev_deps:
                 # add only installed but unsatisfied reverse dependencies
                 if (installdb.has_package(rev_dep) and 
