@@ -77,7 +77,7 @@ def upgrade_pkg_names(A = []):
                 continue
 
         if pisi.util.any(lambda x:x.requires != None and "reverseDependencyUpdate" in x.requires.action, updates):
-            Ap.extend(map(lambda d:d.package, packagedb.get_rev_deps(x)))
+            Ap.extend(map(lambda d:d[0], packagedb.get_rev_deps(x)))
 
         if ignore_build or (not build) or (not pkg.build):
             if pisi.version.Version(release) < pisi.version.Version(pkg.release):
