@@ -1,14 +1,34 @@
-pisi-2.0.2 (?-?-2008)
-        - Fix for false sandbox violation errors by Eren Turkay (#7328)
-        - Allow dot in reponames
+2008-09-10 Fatih Aşıcı <fatih@pardus.org.tr>
+        * Add validation for sub packages having icons.
 
-pisi-2.0.1 (03-Sep-2008)
-        - pisi la -c fails if component not found in the first
-        repository (#7854)
-        - pisi history not showing +999 operations
-        - pisi it *.pisi could show same package name multiple
-        times as a dependency (#7929)
-        - Fix validity checks while adding a new repo (#5940, #5906)
-        - Increase console information line length (#5281)
-        - Only add delta packages to the latest build of package
-        - Obsoleted packages could not be found for takeback
+2008-09-10 Ozan Çağlayan <ozan@pardus.org.tr>
+        * Fix only the first unsatisfied runtime dependency being
+        resolved while building a standalone package.
+
+2008-09-08 Faik Uygur <faik@pardus.org.tr>
+        * Add Requires tag to Update with actions.
+
+2008-09-04 Faik Uygur <faik@pardus.org.tr>
+        * Allow dot in repo name fix.
+
+2008-09-03 Eren Türkay <turkay.eren@gmail.com>
+        * Fix for false sandbox violation errors. (#7328)
+
+2008-09-03 Faik Uygur <faik@pardus.org.tr>
+        * pisi-2.0.1
+
+2008-09-02 Faik Uygur <faik@pardus.org.tr>
+        * Only add delta packages to latest build of the package.
+
+2008-08-07 Faik Uygur <faik@pardus.org.tr>
+        * Fix validity checks while adding a new repo. (#5940, #5906)
+        * Increase console information line length. (#5281)
+        * pisi it *.pisi was showing same package name multiple times
+        as a dependency. (#7929)
+
+2008-08-04 Faik Uygur <faik@pardus.org.tr>
+        * Fix for pisi history not showing +999 operations bug.
+
+2008-07-31 Türker Sezer <turkersezer@tsdesign.info>
+        * Fix failing pisi la -c when component not found in the
+        first repository. (#7929)
