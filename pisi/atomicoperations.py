@@ -509,8 +509,12 @@ class Remove(AtomicOperation):
         if fileinfo.type == ctx.const.conf:
             # config files are precious, leave them as they are
             # unless they are the same as provided by package.
+            # remove symlinks as they are, cause if the hash of the
+            # file it links has changed, it will be kept as is,
+            # and when the package is reinstalled the symlink will
+            # link to that changed file again.
             try:
-                if pisi.util.sha1_file(fpath) == fileinfo.hash:
+                if os.path.islink(fpath) or pisi.util.sha1_file(fpath) == fileinfo.hash:
                     os.unlink(fpath)
                 else:
                     # keep changed file in history
