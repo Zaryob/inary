@@ -48,14 +48,14 @@ import pisi.operations.build
 import pisi.comariface
 
 def set_userinterface(ui):
-    """ 
+    """
     Set the user interface where the status information will be send
     @param ui: User interface
     """
     ctx.ui = ui
 
 def set_io_streams(stdout=None, stderr=None):
-    """ 
+    """
     Set standart i/o streams
     Used by Buildfarm
     @param stdout: Standart output
@@ -67,22 +67,22 @@ def set_io_streams(stdout=None, stderr=None):
         ctx.stderr = stderr
 
 def set_comar(enable):
-    """ 
-    Set comar usage 
+    """
+    Set comar usage
     False means no preremove and postinstall scripts will be run
     @param enable: Flag indicating comar usage
     """
     ctx.comar = enable
 
 def set_comar_destination(destination):
-    """ 
+    """
     Set comar bus destination
     @param destination: Path to bus destination of COMAR
     """
     ctx.comar_destination = destination
 
 def set_dbus_sockname(sockname):
-    """ 
+    """
     Set dbus socket file
     Used by YALI
     @param sockname: Path to dbus socket file
@@ -90,7 +90,7 @@ def set_dbus_sockname(sockname):
     ctx.dbus_sockname = sockname
 
 def set_dbus_timeout(timeout):
-    """ 
+    """
     Set dbus timeout
     Used by YALI
     @param timeout: Timeout in seconds
@@ -98,8 +98,8 @@ def set_dbus_timeout(timeout):
     ctx.dbus_timeout = timeout
 
 def set_signal_handling(enable):
-    """ 
-    Enable signal handling. Signal handling in pisi mostly used for disabling keyboard interrupts 
+    """
+    Enable signal handling. Signal handling in pisi mostly used for disabling keyboard interrupts
     in critical paths.
     Used by YALI
     @param enable: Flag indicating signal handling usage
@@ -110,12 +110,12 @@ def set_signal_handling(enable):
         ctx.sig = None
 
 def set_options(options):
-    """ 
+    """
     Set various options of pisi
     @param options: option set
-    
+
            >>> options = pisi.config.Options()
-    
+
            options.destdir     # pisi destination directory where operations will take effect
            options.username    # username that for reaching remote repository
            options.password    # password that for reaching remote repository
@@ -142,9 +142,9 @@ def list_replaces(repo=None):
     Return a dictionary of the replaced packages in the given repository
     @param repo: Repository of the replaced packages. If repo is None than returns
     a dictionary of all the replaced packages in all the repositories
-    
+
     {'gaim':'pidgin, 'actioncube':'assaultcube'}
-    
+
     gaim replaced by pidgin and actioncube replaced by assaultcube
     """
     return pisi.db.packagedb.PackageDB().get_replaces(repo)
@@ -163,7 +163,7 @@ def list_upgradable():
     """
     installdb = pisi.db.installdb.InstallDB()
     is_upgradable = lambda pkg: pisi.operations.upgrade.is_upgradable(pkg, ctx.get_option('ignore_build_no'))
-    
+
     upgradable = filter(is_upgradable, installdb.list_installed())
     # replaced packages can not pass is_upgradable test, so we add them manually
     upgradable.extend(list_replaces())
@@ -181,7 +181,7 @@ def list_repos():
 
 def get_install_order(packages):
     """
-    Return a list of packages in the installation order with extra needed 
+    Return a list of packages in the installation order with extra needed
     dependencies -> list_of_strings
     @param packages: list of package names -> list_of_strings
     """
@@ -210,7 +210,7 @@ def get_upgrade_order(packages):
 
 def get_base_upgrade_order(packages):
     """
-    Return a list of packages of the system.base component that needs to be upgraded 
+    Return a list of packages of the system.base component that needs to be upgraded
     or installed in install order -> list_of_strings
     All the packages of the system.base component must be installed on the system
     @param packages: list of package names -> list_of_strings
@@ -226,7 +226,7 @@ def get_conflicts(packages):
 
     >>> (pkgs, within, pairs) = pisi.api.get_conflicts(packages)
     >>>
-    >>> pkgs # list of packages that are installed and conflicts with the 
+    >>> pkgs # list of packages that are installed and conflicts with the
              # given packages list -> list_of_strings
     >>> [...]
     >>> within # list of packages that already conflict with each other
@@ -234,8 +234,8 @@ def get_conflicts(packages):
     >>> [...]
     >>> pairs # dictionary of conflict information that contains which package in the
               # given packages list conflicts with which of the installed packages
-              
-    >>> {'imlib2': <class pisi.conflict.Conflict>, 'valgrind': <class pisi.conflict.Conflict>, 
+
+    >>> {'imlib2': <class pisi.conflict.Conflict>, 'valgrind': <class pisi.conflict.Conflict>,
     'libmp4v2':'<class pisi.conflict.Conflict>}
 
     >>> print map(lambda c:str(pairs[c]), pairs)
@@ -249,7 +249,7 @@ def search_package(terms, lang=None, repo=None):
     description -> list_of_strings
     @param terms: a list of terms used to search package -> list_of_strings
     @param lang: language of the summary and description
-    @param repo: Repository of the packages. If repo is None than returns a list of all the packages 
+    @param repo: Repository of the packages. If repo is None than returns a list of all the packages
     in all the repositories that meets the search
     """
     packagedb = pisi.db.packagedb.PackageDB()
@@ -271,7 +271,7 @@ def search_source(terms, lang=None, repo=None):
     description -> list_of_strings
     @param terms: a list of terms used to search source package -> list_of_strings
     @param lang: language of the summary and description
-    @param repo: Repository of the source packages. If repo is None than returns a list of all the source 
+    @param repo: Repository of the source packages. If repo is None than returns a list of all the source
     packages in all the repositories that meets the search
     """
     sourcedb = pisi.db.sourcedb.SourceDB()
@@ -293,7 +293,7 @@ def search_component(terms, lang=None, repo=None):
     description -> list_of_strings
     @param terms: a list of terms used to search components -> list_of_strings
     @param lang: language of the summary and description
-    @param repo: Repository of the components. If repo is None than returns a list of all the components 
+    @param repo: Repository of the components. If repo is None than returns a list of all the components
     in all the repositories that meets the search
     """
     componentdb = pisi.db.componentdb.ComponentDB()
@@ -306,7 +306,7 @@ def search_file(term):
     @param term: used to search file -> list_of_strings
 
     >>> files = pisi.api.search_file("kvm-")
-    
+
     >>> print files
 
     >>> [("kvm", (["lib/modules/2.6.18.8-86/extra/kvm-amd.ko","lib/modules/2.6.18.8-86/extra/kvm-intel.ko"])),]
@@ -343,7 +343,7 @@ def install(packages, reinstall=False, ignore_file_conflicts=False, ignore_packa
 
 def takeback(operation):
     """
-    Takes back the system to a previous state. Uses pisi history to find out which packages were 
+    Takes back the system to a previous state. Uses pisi history to find out which packages were
     installed at the time _after_ the given operation that the system is requested to be taken back.
     @param operation: number of the operation that the system will be taken back -> integer
     """
@@ -366,7 +366,7 @@ def get_takeback_plan(operation):
 def snapshot():
     """
     Takes snapshot of the system packages. The snapshot is only a record of which packages are currently
-    installed. The record is kept by pisi history mechanism as it works automatically on install, remove 
+    installed. The record is kept by pisi history mechanism as it works automatically on install, remove
     and upgrade operations.
     """
 
@@ -397,10 +397,10 @@ def snapshot():
 
 def package_graph(A, packagedb, ignore_installed = False):
     """Construct a package relations graph.
-    
+
     Graph will contain all dependencies of packages A, if ignore_installed
     option is True, then only uninstalled deps will be added.
-    
+
     """
 
     ctx.ui.debug('A = %s' % str(A))
@@ -410,7 +410,7 @@ def package_graph(A, packagedb, ignore_installed = False):
 
     G_f = pgraph.PGraph(packagedb)             # construct G_f
 
-    # find the "install closure" graph of G_f by package 
+    # find the "install closure" graph of G_f by package
     # set A using packagedb
     for x in A:
         G_f.add_package(x)
