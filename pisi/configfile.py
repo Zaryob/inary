@@ -100,6 +100,7 @@ class DirectoriesDefaults:
     cached_packages_dir = "/var/cache/pisi/packages"
     compiled_packages_dir = "/var/cache/pisi/packages"
     packages_dir = "/var/lib/pisi/package"
+    lock_dir = "/var/lock/subsys"
     index_dir = "/var/lib/pisi/index"
     tmp_dir =  "/var/pisi"
     kde_dir = "/usr/kde/3.5"

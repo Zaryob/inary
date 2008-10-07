@@ -98,6 +98,9 @@ class Config(object):
     def history_dir(self):
         return self.subdir(self.values.dirs.history_dir)
 
+    def lock_dir(self):
+        return self.subdir(self.values.dirs.lock_dir)
+
     def packages_dir(self):
         return self.subdir(self.values.dirs.packages_dir)
 

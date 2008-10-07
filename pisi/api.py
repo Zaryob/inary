@@ -10,6 +10,7 @@
 # Please read the COPYING file.
 
 import os
+import fcntl
 import re
 import logging
 import logging.handlers
@@ -46,6 +47,24 @@ import pisi.operations.helper
 import pisi.operations.emerge
 import pisi.operations.build
 import pisi.comariface
+import pisi.errors
+
+def locked(func):
+    """
+    Decorator for synchronizing privileged functions
+    """
+    def wrapper(self,*__args,**__kw):
+        lock = file(pisi.util.join_path(pisi.context.config.lock_dir(), 'pisi'), 'w')
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            try:
+                return func(self,*__args,**__kw)
+            except Exception, e:
+                lock.close()
+                raise e
+        except IOError:
+            raise pisi.errors.AnotherInstanceError(_("Another instance of PiSi is running. Only one instance is allowed."))
+    return wrapper
 
 def set_userinterface(ui):
     """
@@ -316,6 +335,7 @@ def search_file(term):
         term = term[1:]
     return filesdb.search_file(term)
 
+@locked
 def install(packages, reinstall=False, ignore_file_conflicts=False, ignore_package_conflicts=False):
     """
     Returns True if no errors occured during the operation
@@ -341,6 +361,7 @@ def install(packages, reinstall=False, ignore_file_conflicts=False, ignore_packa
     else:
         return pisi.operations.install.install_pkg_names(packages, reinstall)
 
+@locked
 def takeback(operation):
     """
     Takes back the system to a previous state. Uses pisi history to find out which packages were
@@ -363,6 +384,7 @@ def get_takeback_plan(operation):
     beinstalled, beremoved, configs = pisi.operations.history.plan_takeback(operation)
     return beinstalled, beremoved
 
+@locked
 def snapshot():
     """
     Takes snapshot of the system packages. The snapshot is only a record of which packages are currently
@@ -459,6 +481,7 @@ def generate_pending_order(A):
 
     return order
 
+@locked
 def configure_pending(packages=None):
     # start with pending packages
     # configure them in reverse topological order of dependency
@@ -580,6 +603,7 @@ def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=F
         index.write(output, sha1sum=True, compress=pisi.file.File.bz2, sign=pisi.file.File.detached)
     ctx.ui.info(_('* Index file written'))
 
+@locked
 def add_repo(name, indexuri, at = None):
     if not re.match("^[a-zA-Z0-9\\-\\_\\.]*$", name):
         raise pisi.Error(_('Not a valid repo name.'))
@@ -594,6 +618,7 @@ def add_repo(name, indexuri, at = None):
         repodb.add_repo(name, repo, at = at)
         ctx.ui.info(_('Repo %s added to system.') % name)
 
+@locked
 def remove_repo(name):
     repodb = pisi.db.repodb.RepoDB()
     if repodb.has_repo(name):
@@ -603,6 +628,7 @@ def remove_repo(name):
         raise pisi.Error(_('Repository %s does not exist. Cannot remove.')
                  % name)
 
+@locked
 def update_repo(repo, force=False):
     ctx.ui.info(_('* Updating repository: %s') % repo)
     ctx.ui.notify(pisi.ui.updatingrepo, name = repo)
@@ -629,6 +655,7 @@ def update_repo(repo, force=False):
     else:
         raise pisi.Error(_('No repository named %s found.') % repo)
 
+@locked
 def delete_cache():
     pisi.util.clean_dir(ctx.config.cached_packages_dir())
     pisi.util.clean_dir(ctx.config.archives_dir())
@@ -655,6 +682,7 @@ def rebuild_repo(repo):
         raise pisi.Error(_('No repository named %s found.') % repo)
 
 # FIXME: rebuild_db is only here for filesdb and it really is ugly. we should not need any rebuild.
+@locked
 def rebuild_db(files=False):
 
     filesdb = pisi.db.filesdb.FilesDB()
@@ -696,14 +724,17 @@ def rebuild_db(files=False):
 # from pisi.build import build_until
 # from pisi.atomicoperations import resurrect_package, build
 
+@locked
 def remove(*args, **kw):
     pisi.db.historydb.HistoryDB().create_history("remove")
     return pisi.operations.remove.remove(*args, **kw)
 
+@locked
 def upgrade(*args, **kw):
     pisi.db.historydb.HistoryDB().create_history("upgrade")
     return pisi.operations.upgrade.upgrade(*args, **kw)
 
+@locked
 def emerge(*args, **kw):
     pisi.db.historydb.HistoryDB().create_history("emerge")
     return pisi.operations.emerge.emerge(*args, **kw)
@@ -714,9 +745,11 @@ def calculate_conflicts(*args, **kw):
 def reorder_base_packages(*args, **kw):
     return pisi.operations.helper.reorder_base_packages(*args, **kw)
 
+@locked
 def build_until(*args, **kw):
     return pisi.operations.build.build_until(*args, **kw)
 
+@locked
 def build(*args, **kw):
     return pisi.atomicoperations.build(*args, **kw)
 
@@ -724,6 +757,7 @@ def build(*args, **kw):
 
 ## Deletes the cached pisi packages to keep the package cache dir within cache limits
 #  @param all When set all the cached packages will be deleted
+@locked
 def clearCache(all=False):
 
     import glob
