@@ -16,11 +16,7 @@ import exceptions
 
 import pisi
 
-def handle_exception(exception, value, tb):
-    if exception == exceptions.KeyboardInterrupt:
-        pisi.api.finalize()
-        print("\n")
-        sys.exit()
+installdb = pisi.db.installdb.InstallDB()
 
 def ask_action(msg, actions, default):
     while True:
@@ -34,10 +30,11 @@ def ask_action(msg, actions, default):
         return s
 
 def get_installed_packages():
-    return pisi.context.installdb.list_installed()
+    return installdb.list_installed()
 
 def check_changed_config_files(package):
-    all_files = pisi.context.installdb.files(package)
+    
+    all_files = installdb.get_files(package)
     config_files = filter(lambda x: x.type == 'config', all_files.list)
     config_paths = map(lambda x: "/" + str(x.path), config_files)
 
@@ -77,8 +74,6 @@ def check_changes():
         check_package(pkg)
 
 if __name__ == "__main__":
-     sys.excepthook = handle_exception
-
      if len(sys.argv) == 1:
          print "Checking all packages"
          check_changes()
