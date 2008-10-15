@@ -25,7 +25,7 @@ _ = __trans.ugettext
 
 # Pisi Modules
 import pisi.context as ctx
-from pisi.util import join_path, remove_prefix
+from pisi.util import join_path, remove_prefix, uncompress
 
 # ActionsAPI Modules
 import pisi.actionsapi
@@ -121,14 +121,21 @@ def doman(*sourceFiles):
 
     for sourceFile in sourceFiles:
         for source in glob.glob(sourceFile):
+            compressed = source.endswith("gz") and source
+            if compressed:
+                source = source[:-3]
             try:
                 pageName, pageDirectory = source[:source.rindex('.')], \
                                           source[source.rindex('.')+1:]
             except ValueError:
                 error(_('ActionsAPI [doman]: Wrong man page file: %s') % (source))
 
-            makedirs(join_path(manDIR, '/man%s' % pageDirectory))
-            system('install -m0644 %s %s' % (source, join_path(manDIR, '/man%s' % pageDirectory)))
+            manPDIR = join_path(manDIR, '/man%s' % pageDirectory)
+            makedirs(manPDIR)
+            if not compressed:
+                system('install -m0644 %s %s' % (source, manPDIR))
+            else:
+                uncompress(compressed, targetDir=manPDIR)
 
 def domo(sourceFile, locale, destinationFile ):
     '''inserts the mo files in the list of files into /usr/share/locale/LOCALE/LC_MESSAGES'''
