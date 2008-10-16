@@ -53,12 +53,12 @@ def locked(func):
     """
     Decorator for synchronizing privileged functions
     """
-    def wrapper(self,*__args,**__kw):
+    def wrapper(*__args,**__kw):
         lock = file(pisi.util.join_path(pisi.context.config.lock_dir(), 'pisi'), 'w')
         try:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
             try:
-                return func(self,*__args,**__kw)
+                return func(*__args,**__kw)
             except Exception, e:
                 lock.close()
                 raise e
