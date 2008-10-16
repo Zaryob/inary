@@ -59,9 +59,8 @@ def locked(func):
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
             try:
                 return func(*__args,**__kw)
-            except Exception, e:
+            finally:
                 lock.close()
-                raise e
         except IOError:
             raise pisi.errors.AnotherInstanceError(_("Another instance of PiSi is running. Only one instance is allowed."))
     return wrapper
