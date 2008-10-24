@@ -63,7 +63,4 @@ Finds the installed package which contains the specified file.
         for path in self.args:
             if not ctx.config.options.quiet:
                 ctx.ui.info(_('Searching for %s') % path)
-            import os.path
-            if os.path.exists(path):
-                path = os.path.realpath(path)
             self.search_file(path)
