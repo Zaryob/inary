@@ -96,10 +96,7 @@ to be downloaded from a repository containing sources.
             self.help()
             return
 
-        if self.options.no_install:
-            self.init(database=True, write=False)
-        else:
-            self.init()
+        self.init()
 
         if ctx.get_option('package_format') not in Build.package_formats:
             raise Error(_('package_format must be one of %s ') % pisi.util.strlist(Build.package_formats))

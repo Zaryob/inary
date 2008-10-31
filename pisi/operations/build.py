@@ -514,9 +514,6 @@ class Builder:
             def fail():
                 raise Error(_('Cannot build package due to unsatisfied build dependencies'))
 
-            if ctx.config.get_option('no_install'):
-                fail()
-
             if not ctx.config.get_option('ignore_dependency'):
                 for dep in dep_unsatis:
                     if not dependency.repo_satisfies_dep(dep):
