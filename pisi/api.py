@@ -744,11 +744,9 @@ def calculate_conflicts(*args, **kw):
 def reorder_base_packages(*args, **kw):
     return pisi.operations.helper.reorder_base_packages(*args, **kw)
 
-@locked
 def build_until(*args, **kw):
     return pisi.operations.build.build_until(*args, **kw)
 
-@locked
 def build(*args, **kw):
     return pisi.atomicoperations.build(*args, **kw)
 
