@@ -702,7 +702,7 @@ class Builder:
             return False
 
         # find previous build in packages dir
-        found = []
+        found = set()
         def locate_old_package(old_package_fn):
             if not old_package_fn.endswith(ctx.const.package_suffix) or \
                     old_package_fn.endswith(ctx.const.delta_package_suffix):
@@ -718,13 +718,18 @@ class Builder:
                                                 old_package_fn)
                         return
                     old_build = old_pkg.metadata.package.build
-                    found.append( (old_package_fn, old_build) )
+                    found.add( (old_package_fn, old_build) )
                 except Error:
                     ctx.ui.warning('Package file %s may be corrupt. Skipping.' % old_package_fn)
 
-        for root, dirs, files in os.walk(ctx.config.compiled_packages_dir()):
-            for f in files:
-                locate_old_package(pisi.util.join_path(root,f))
+        def search_old_packages_in(paths):
+            for path in paths:
+                for root, dirs, files in os.walk(path):
+                    for f in files:
+                        locate_old_package(pisi.util.join_path(root,f))
+
+        search_old_packages_in([ctx.config.compiled_packages_dir(),
+                                ctx.config.debug_packages_dir()])
 
         outdir=ctx.get_option('output_dir')
         if not outdir:
