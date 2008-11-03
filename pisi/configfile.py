@@ -99,6 +99,7 @@ class DirectoriesDefaults:
     archives_dir = "/var/cache/pisi/archives"
     cached_packages_dir = "/var/cache/pisi/packages"
     compiled_packages_dir = "/var/cache/pisi/packages"
+    debug_packages_dir = "/var/cache/pisi/packages"
     packages_dir = "/var/lib/pisi/package"
     lock_dir = "/var/lock/subsys"
     index_dir = "/var/lib/pisi/index"
