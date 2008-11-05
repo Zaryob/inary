@@ -672,26 +672,6 @@ def delete_cache():
     pisi.util.clean_dir(ctx.config.archives_dir())
     pisi.util.clean_dir(ctx.config.tmp_dir())
 
-def rebuild_repo(repo):
-    ctx.ui.info(_('* Rebuilding \'%s\' named repo... ') % repo)
-
-    repodb = pisi.db.repodb.RepoDB()
-    if repodb.has_repo(repo):
-        repouri = pisi.uri.URI(repodb.get_repo(repo).indexuri.get_uri())
-        indexname = repouri.filename()
-        index = pisi.index.Index()
-        indexpath = pisi.util.join_path(ctx.config.index_dir(), repo, indexname)
-        tmpdir = os.path.join(ctx.config.tmp_dir(), 'index')
-        pisi.util.clean_dir(tmpdir)
-        pisi.util.check_dir(tmpdir)
-        try:
-            index.read_uri(indexpath, tmpdir, force=True) # don't look for sha1sum there
-        except IOError, e:
-            ctx.ui.warning(_("Input/Output error while reading %s: %s") % (indexpath, unicode(e)))
-            return
-    else:
-        raise pisi.Error(_('No repository named %s found.') % repo)
-
 # FIXME: rebuild_db is only here for filesdb and it really is ugly. we should not need any rebuild.
 @locked
 def rebuild_db(files=False):
