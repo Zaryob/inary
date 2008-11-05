@@ -114,27 +114,11 @@ def plan_remove(A):
     order = G_f.topological_sort()
     return G_f, order
 
-# FIXME: this should be done in atomicoperations automatically.
-def remove_replaced_packages(order, replaces):
-
-    replaced = []
-    inorder = set(order).intersection(replaces.values())
-
-    if inorder:
-        for pkg in replaces.keys():
-            if replaces[pkg] in inorder:
-                replaced.append(pkg)
-
-    if replaced:
-        if remove(replaced, ignore_dep=True, ignore_safety=True):
-            raise Exception(_("Replaced package remains"))
-
 def remove_conflicting_packages(conflicts):
     if remove(conflicts, ignore_dep=True, ignore_safety=True):
         raise Exception(_("Conflicts remain"))
 
 def remove_obsoleted_packages():
-
     installdb = pisi.db.installdb.InstallDB()
     packagedb = pisi.db.packagedb.PackageDB()
     obsoletes = filter(installdb.has_package, packagedb.get_obsoletes())

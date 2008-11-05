@@ -147,11 +147,8 @@ def upgrade_pkg_names(A = []):
         if conflicts:
             operations.remove.remove_conflicting_packages(conflicts)
 
-    if replaces:
-        operations.remove.remove_replaced_packages(order, replaces)
-
     operations.remove.remove_obsoleted_packages()
-    
+
     for path in paths:
         ctx.ui.info(util.colorize(_("Installing %d / %d") % (paths.index(path)+1, len(paths)), "yellow"))
         install_op = atomicoperations.Install(path, ignore_file_conflicts = True)
