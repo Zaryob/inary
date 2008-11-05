@@ -1,3 +1,7 @@
+2008-11-05 Faik Uygur <faik@pardus.org.tr>
+        * Force upgrade of replaced packages. Because they are also obsoleted packages,
+        they will be removed in any way. This is not wanted for replaced driver packages.
+
 2008-11-03 Faik Uygur <faik@pardus.org.tr>
         * debug_packages_dir config option is added to calculate build nos
         of debug packages if they are moved to somewhere than compiled_packages_dir.
