@@ -98,6 +98,10 @@ def upgrade_pkg_names(A = []):
         ctx.ui.info(_('No packages to upgrade.'))
         return True
 
+    # Force upgrading of installed but replaced packages or else they wil be removed (they are obsoleted also).
+    # This is not wanted for a replaced driver package (eg. nvidia-X).
+    A |= set(replaces.values())
+
     A |= upgrade_base(A)
 
     ctx.ui.debug('A = %s' % str(A))
