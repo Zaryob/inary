@@ -29,47 +29,42 @@ import pisi.db
 def upgrade(A):
     upgrade_pkg_names(A)
 
-def upgrade_pkg_names(A = []):
-    """Re-installs packages from the repository, trying to perform
-    a minimum or maximum number of upgrades according to options."""
-
-    ignore_build = ctx.get_option('ignore_build_no')
-    security_only = ctx.get_option('security_only')
-
+def find_upgrades(packages, replaces):
     packagedb = pisi.db.packagedb.PackageDB()
-    replaces = packagedb.get_replaces()
-
     installdb = pisi.db.installdb.InstallDB()
 
-    if not A:
-        # if A is empty, then upgrade all packages
-        A = installdb.list_installed()
-
-    A_0 = A = set(A)
+    security_only = ctx.get_option('security_only')
+    ignore_build = ctx.get_option('ignore_build_no')
 
     Ap = []
-    for x in A:
-        if x.endswith(ctx.const.package_suffix):
+    for i_pkg in packages:
+
+        u_pkg = i_pkg # upgrade package and installed package are the same if there is no replacement in place
+
+        if i_pkg.endswith(ctx.const.package_suffix):
             ctx.ui.debug(_("Warning: package *name* ends with '.pisi'"))
 
-        # Handling of replacement packages
-        if x in replaces.values():
-            Ap.append(x)
+        # pisi up has "installed to be replaced package" as argument
+        if i_pkg in replaces.keys():
+            u_pkg = replaces[i_pkg]
+
+        # pisi up has "not installed but replacement package" as argument
+        if i_pkg in replaces.values():
+            for i, u in replaces:
+                if i_pkg == u:
+                    i_pkg = i
+                    u_pkg = u
+
+        if not installdb.has_package(i_pkg):
+            ctx.ui.info(_('Package %s is not installed.') % i_pkg, True)
             continue
 
-        if x in replaces.keys():
-            Ap.append(replaces[x])
+        if not packagedb.has_package(i_pkg):
+            ctx.ui.info(_('Package %s is not available in repositories.') % i_pkg, True)
             continue
 
-        if not installdb.has_package(x):
-            ctx.ui.info(_('Package %s is not installed.') % x, True)
-            continue
-        (version, release, build) = installdb.get_version(x)
-        if packagedb.has_package(x):
-            pkg = packagedb.get_package(x)
-        else:
-            ctx.ui.info(_('Package %s is not available in repositories.') % x, True)
-            continue
+        pkg = packagedb.get_package(u_pkg)
+        (version, release, build) = installdb.get_version(i_pkg)
 
         updates = [i for i in pkg.history if pisi.version.Version(i.release) > pisi.version.Version(release)]
         if security_only:
@@ -77,21 +72,37 @@ def upgrade_pkg_names(A = []):
                 continue
 
         if pisi.util.any(lambda x:x.requires != None and "reverseDependencyUpdate" in x.requires.action, updates):
-            Ap.extend(map(lambda d:d[0], packagedb.get_rev_deps(x)))
+            Ap.extend(map(lambda d:d[0], packagedb.get_rev_deps(u_pkg)))
 
         if ignore_build or (not build) or (not pkg.build):
             if pisi.version.Version(release) < pisi.version.Version(pkg.release):
-                Ap.append(x)
+                Ap.append(u_pkg)
             else:
                 ctx.ui.info(_('Package %s is already at the latest release %s.')
                             % (pkg.name, pkg.release), True)
         else:
             if build < pkg.build:
-                Ap.append(x)
+                Ap.append(u_pkg)
             else:
                 ctx.ui.info(_('Package %s is already at the latest build %s.')
                             % (pkg.name, pkg.build), True)
 
+    return Ap
+
+def upgrade_pkg_names(A = []):
+    """Re-installs packages from the repository, trying to perform
+    a minimum or maximum number of upgrades according to options."""
+
+    packagedb = pisi.db.packagedb.PackageDB()
+    installdb = pisi.db.installdb.InstallDB()
+    replaces = packagedb.get_replaces()
+
+    if not A:
+        # if A is empty, then upgrade all packages
+        A = installdb.list_installed()
+
+    A_0 = A = set(A)
+    Ap = find_upgrades(A, replaces)
     A = set(Ap)
 
     if len(A)==0:
