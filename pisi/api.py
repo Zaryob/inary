@@ -155,6 +155,14 @@ def list_installed():
     """
     return pisi.db.installdb.InstallDB().list_installed()
 
+def list_obsoleted(repo=None):
+    """
+    Return a list of obsoleted packages -> list_of_strings
+    @param repo: Repository of the obsoleted packages. If repo is None than returns
+    a list of all the obsoleted packages in all the repositories
+    """
+    return pisi.db.packagedb.PackageDB().get_obsoletes(repo)
+
 def list_replaces(repo=None):
     """
     Return a dictionary of the replaced packages in the given repository
