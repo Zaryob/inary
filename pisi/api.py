@@ -54,7 +54,11 @@ def locked(func):
     Decorator for synchronizing privileged functions
     """
     def wrapper(*__args,**__kw):
-        lock = file(pisi.util.join_path(pisi.context.config.lock_dir(), 'pisi'), 'w')
+        try:
+            lock = file(pisi.util.join_path(pisi.context.config.lock_dir(), 'pisi'), 'w')
+        except IOError:
+            raise pisi.errors.PrivilegeError(_("You have to be root for this operation."))
+
         try:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
             try:

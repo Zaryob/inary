@@ -11,3 +11,6 @@
 
 class AnotherInstanceError(Exception):
     pass
+
+class PrivilegeError(Exception):
+    pass
