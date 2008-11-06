@@ -61,12 +61,13 @@ def locked(func):
 
         try:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-            try:
-                return func(*__args,**__kw)
-            finally:
-                lock.close()
         except IOError:
             raise pisi.errors.AnotherInstanceError(_("Another instance of PiSi is running. Only one instance is allowed."))
+
+        try:
+            return func(*__args,**__kw)
+        finally:
+            lock.close()
     return wrapper
 
 def set_userinterface(ui):
