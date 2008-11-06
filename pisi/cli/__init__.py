@@ -94,17 +94,14 @@ class CLI(pisi.ui.UI):
         self.output(pisi.util.colorize(msg + '\n', 'green'))
 
     def choose(self, msg, opts):
-        print msg
-        for i in range(0,len(opts)):
-            print i + 1, opts(i)
+        msg = unicode(msg)
+        import re
+        prompt = msg + pisi.util.colorize(_(' (%s)' % "/".join(opts)), 'red')
         while True:
-            s = raw_input(msg + pisi.util.colorize('1-%d' % len(opts), 'red'))
-            try:
-                opt = int(s)
-                if 1 <= opt and opt <= len(opts):
-                    return opts(opt-1)
-            except Exception:
-                pass
+            s = raw_input(prompt.encode('utf-8'))
+            for opt in opts:
+                if opt.startswith(s):
+                    return opt
 
     def confirm(self, msg):
         msg = unicode(msg)
