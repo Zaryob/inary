@@ -1,3 +1,7 @@
+2008-11-10 Türker Sezer <turkersezer@tsdesign.info>
+        * Do not ask to remove conflicting packages until it is time to remove them. The
+        message is misleading when --fetch-only is used. (#4539)
+
 2008-11-05 Faik Uygur <faik@pardus.org.tr>
         * Force upgrade of replaced packages. Because they are also obsoleted packages,
         they will be removed in any way. This is not wanted for replaced driver packages.
