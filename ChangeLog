@@ -1,3 +1,8 @@
+2008-11-10 Faik Uygur <faik@pardus.org.tr>
+        * If an unsatisfied build dep is found and another version of that package is installed
+        build asks to install the package but than exits complaining that the package is already
+        installed. (#8379)
+
 2008-11-10 Türker Sezer <turkersezer@tsdesign.info>
         * Do not ask to remove conflicting packages until it is time to remove them. The
         message is misleading when --fetch-only is used. (#4539)
