@@ -129,9 +129,6 @@ def upgrade_pkg_names(A = []):
     if componentdb.has_component('system.base'):
         order = operations.helper.reorder_base_packages(order)
 
-    if not ctx.get_option('ignore_package_conflicts'):
-        conflicts = operations.helper.check_conflicts(order, packagedb)
-
     ctx.ui.info(_('The following packages will be upgraded: ') +
                 util.strlist(order))
 
@@ -159,6 +156,7 @@ def upgrade_pkg_names(A = []):
         return
 
     if not ctx.get_option('ignore_package_conflicts'):
+        conflicts = operations.helper.check_conflicts(order, packagedb)
         if conflicts:
             operations.remove.remove_conflicting_packages(conflicts)
 
