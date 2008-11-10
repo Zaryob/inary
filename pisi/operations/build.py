@@ -521,7 +521,7 @@ class Builder:
                 if ctx.ui.confirm(
                 _('Do you want to install the unsatisfied build dependencies')):
                     ctx.ui.info(_('Installing build dependencies.'))
-                    pisi.api.install([dep.package for dep in dep_unsatis])
+                    pisi.api.install([dep.package for dep in dep_unsatis], reinstall=True)
                 else:
                     fail()
             else:
