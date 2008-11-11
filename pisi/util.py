@@ -209,18 +209,6 @@ def parentpath(a, sep = os.path.sep):
 def parenturi(a):
     return parentpath(a, '/')
 
-# I'm not sure how necessary this is. Ahem.
-def commonprefix(l):
-    """an improved version of os.path.commonprefix,
-    returns a list of path components"""
-    common = []
-    comps = map(splitpath, l)
-    for i in range(0, min(len,l)):
-        compi = map(lambda x: x[i], comps) # get ith slice
-        if same(compi):
-            common.append(compi[0])
-    return common
-
 # but this one is necessary
 def subpath(a, b):
     """Find if path a is before b in the directory tree."""
