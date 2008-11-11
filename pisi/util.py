@@ -222,11 +222,6 @@ def removepathprefix(prefix, path):
     else:
         return ""
 
-def absolute_path(path):
-    """Determine if given path is absolute."""
-    comps = splitpath(path)
-    return comps[0] == ''
-
 def join_path(a, *p):
     """Join two or more pathname components.
     

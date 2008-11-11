@@ -70,7 +70,7 @@ class URI(object):
         return not self.is_local_file()
 
     def is_absolute_path(self):
-        return util.absolute_path(self.__path)
+        return os.path.isabs(self.__path)
 
     def is_relative_path(self):
         return not self.is_absolute_path()
