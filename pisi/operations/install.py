@@ -95,7 +95,7 @@ def install_pkg_names(A, reinstall = False):
 
     for path in paths:
         ctx.ui.info(util.colorize(_("Installing %d / %d") % (paths.index(path)+1, len(paths)), "yellow"))
-        install_op = atomicoperations.Install(path, ignore_file_conflicts = True)
+        install_op = atomicoperations.Install(path)
         install_op.install(False)
 
     return True
