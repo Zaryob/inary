@@ -89,7 +89,7 @@ def install_pkg_names(A, reinstall = False):
         install_op = atomicoperations.Install.from_name(x)
         paths.append(install_op.package_fname)
 
-    # fetch to be upgraded packages but do not install them.
+    # fetch to be installed packages but do not install them.
     if ctx.get_option('fetch_only'):
         return
 
