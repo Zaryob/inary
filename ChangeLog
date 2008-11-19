@@ -1,3 +1,7 @@
+2008-11-19 Faik Uygur <faik@pardus.org.tr>
+        * Install operation should fetch all the packages before starting to install.
+        * Install operation should show the status of the operation (#8623)
+
 2008-11-10 Faik Uygur <faik@pardus.org.tr>
         * If an unsatisfied build dep is found and another version of that package is installed
         build asks to install the package but than exits complaining that the package is already
