@@ -1,5 +1,7 @@
 2008-11-21 Faik Uygur <faik@pardus.org.tr>
-       * Symlink files' existence should be checked not the linked file's. (#7336) 
+       * Symlink files' existence should be checked not the linked file's. (#7336)
+       * Check build dependencies before downloading all the patches of a
+        remote build operation (#5370)
 
 2008-11-19 Faik Uygur <faik@pardus.org.tr>
         * Install operation should fetch all the packages before starting to install.
