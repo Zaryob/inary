@@ -118,6 +118,9 @@ class Builder:
 
     def __init__(self, specuri):
 
+        self.componentdb = pisi.db.componentdb.ComponentDB()
+        self.installdb = pisi.db.installdb.InstallDB()
+
         # process args
         if not isinstance(specuri, pisi.uri.URI):
             specuri = pisi.uri.URI(specuri)
@@ -139,9 +142,6 @@ class Builder:
         self.actionLocals = None
         self.actionGlobals = None
         self.srcDir = None
-
-        self.componentdb = pisi.db.componentdb.ComponentDB()
-        self.installdb = pisi.db.installdb.InstallDB()
 
     def set_spec_file(self, specuri):
         if not specuri.is_remote_file():
@@ -247,6 +247,7 @@ class Builder:
 
         self.fetch_pspecfile()
         self.fetch_actionsfile()
+        self.check_build_dependencies()
         self.fetch_translationsfile()
         self.fetch_patches()
         self.fetch_comarfiles()
