@@ -583,10 +583,14 @@ def check(package):
     corrupt = []
     for f in files.list:
         ctx.ui.info(_("Checking /%s ") % f.path, noln=True, verbose=True)
-        if os.path.exists("/%s" % f.path):
-            if f.hash and f.type != "config" and not os.path.islink("/%s" % f.path):
+        if os.path.lexists("/%s" % f.path):
+            if f.hash and f.type != "config":
                 try:
-                    if f.hash != pisi.util.sha1_file("/%s" % f.path):
+                    if os.path.islink("/%s" % f.path):
+                        if f.hash != pisi.util.sha1_data(os.readlink("/%s" % f.path)):
+                            corrupt.append(f)
+                            ctx.ui.error(_("\nCorrupt file: %s") % ("/%s" %f.path))
+                    elif f.hash != pisi.util.sha1_file("/%s" % f.path):
                         corrupt.append(f)
                         ctx.ui.error(_("\nCorrupt file: %s") % ("/%s" %f.path))
                     else:
