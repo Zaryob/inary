@@ -245,7 +245,6 @@ class Builder:
         self.destdir = pisi.util.join_path(ctx.config.tmp_dir(), pkgname)
         #self.location = os.path.dirname(self.url.uri)
 
-        self.fetch_pspecfile()
         self.fetch_actionsfile()
         self.check_build_dependencies()
         self.fetch_translationsfile()
