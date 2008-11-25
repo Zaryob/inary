@@ -409,7 +409,7 @@ def sha1_file(filename):
             del block
         return m.hexdigest()
     except IOError:
-        raise FileError(_("I/O Error: Cannot calculate SHA1 hash of %s") % filename)
+        raise FileError(_("Cannot calculate SHA1 hash of %s") % filename)
 
 def sha1_data(data):
     """Calculate sha1 hash of given data."""
