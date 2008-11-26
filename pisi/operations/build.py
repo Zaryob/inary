@@ -480,6 +480,10 @@ class Builder:
         os.chdir(curDir)
         return True
 
+    def check_versioning(self, version):
+        if not pisi.version.Version.valid(version):
+            raise Error("%s is not a valid PiSi version format" % version)
+
     def check_build_dependencies(self):
         """check and try to install build dependencies, otherwise fail."""
 
@@ -881,6 +885,8 @@ class Builder:
 
             self.metadata.package.build = build_no
             self.metadata.write(pisi.util.join_path(self.pkg_dir(), ctx.const.metadata_xml))
+
+            self.check_versioning("%s-%s" % (self.spec.getSourceVersion(), self.spec.getSourceRelease()))
 
             # Calculate new and oldpackage names for buildfarm
             name =  pisi.util.package_name(package.name,

@@ -123,6 +123,7 @@ class Install(AtomicOperation):
 
         self.ask_reinstall = ask_reinstall
         self.check_requirements()
+        self.check_versioning("%s-%s" % (self.pkginfo.version, self.pkginfo.release))
         self.check_relations()
         self.check_operation()
         self.extract_install()
@@ -150,6 +151,10 @@ class Install(AtomicOperation):
         if self.metadata.package.providesComar and ctx.comar:
             import pisi.comariface as comariface
             comariface.get_iface()
+
+    def check_versioning(self, version):
+        if not pisi.version.Version.valid(version):
+            raise Error("%s is not a valid PiSi version format" % version)
 
     def check_relations(self):
         # check dependencies

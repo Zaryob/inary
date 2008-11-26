@@ -128,9 +128,15 @@ class VersionItem:
                 return True
         return False
 
-
-
 class Version:
+
+    @staticmethod
+    def valid(version):
+        try:
+            pisi.version.Version(version)
+        except pisi.version.VersionException, e:
+            return False
+        return True
 
     def __init__(self, verstring):
         # PiSi version policy does not allow "-" in version strings.
