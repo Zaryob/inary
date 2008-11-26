@@ -75,7 +75,7 @@ class CLI(pisi.ui.UI):
         if ctx.get_option('no_color'):
             self.output(_('Warning: ') + msg + '\n', err=True, verbose=verbose)
         else:
-            self.output(pisi.util.colorize(msg + '\n', 'brightred'), err=True, verbose=verbose)
+            self.output(pisi.util.colorize(msg + '\n', 'brightyellow'), err=True, verbose=verbose)
 
     def error(self, msg):
         msg = unicode(msg)
