@@ -108,9 +108,10 @@ class CLI(pisi.ui.UI):
         if ctx.config.options and ctx.config.options.yes_all:
             return True
         while True:
-            import re
+            import re, tty
             yesexpr = re.compile(locale.nl_langinfo(locale.YESEXPR))
 
+            tty.tcflush(sys.stdin.fileno(), 0)
             prompt = msg + pisi.util.colorize(_(' (yes/no)'), 'red')
             s = raw_input(prompt.encode('utf-8'))
             if yesexpr.search(s):
