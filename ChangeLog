@@ -1,6 +1,23 @@
+2008-11-27 Ozan Çağlayan <ozan@pardus.org.tr>
+        * (cli/__init__.py): Flush stdin buffer just before asking a question.
+
+2008-11-26 Faik Uygur <faik@pardus.org.tr>
+        * Check versioning of the package while building and installing. (#5493)
+
+2008-11-26 Faik Uygur <faik@pardus.org.tr>
+        * Make warning message color brightyellow instead of brightred. Red indicates
+        a fatal error. (#5619)
+
+2008-11-25 Faik Uygur <faik@pardus.org.tr>
+        * Fix fetching pspec.xml twice.
+
+2008-11-25 Faik Uygur <faik@pardus.org.tr>
+        * pisi cli does not have to give all user friendly messages. But "I/O Error"
+        is not necessary here. (#6402)
+
 2008-11-21 Faik Uygur <faik@pardus.org.tr>
-       * Symlink files' existence should be checked not the linked file's. (#7336)
-       * Check build dependencies before downloading all the patches of a
+        * Symlink files' existence should be checked not the linked file's. (#7336)
+        * Check build dependencies before downloading all the patches of a
         remote build operation (#5370)
 
 2008-11-19 Faik Uygur <faik@pardus.org.tr>
