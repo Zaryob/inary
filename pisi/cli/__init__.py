@@ -96,7 +96,7 @@ class CLI(pisi.ui.UI):
     def choose(self, msg, opts):
         msg = unicode(msg)
         import re
-        prompt = msg + pisi.util.colorize(_(' (%s)' % "/".join(opts)), 'red')
+        prompt = msg + pisi.util.colorize(' (%s)' % "/".join(opts), 'red')
         while True:
             s = raw_input(prompt.encode('utf-8'))
             for opt in opts:
