@@ -33,7 +33,7 @@ class FilesDB(lazydb.LazyDB):
     def init(self):
         self.filesdb = {}
         self.__check_filesdb()
-    
+
     def has_file(self, path):
         return self.filesdb.has_key(md5.new(path).digest())
 
@@ -41,6 +41,10 @@ class FilesDB(lazydb.LazyDB):
         return self.filesdb[md5.new(path).digest()], path
 
     def search_file(self, term):
+        if self.has_file(term):
+            pkg, path = self.get_file(term)
+            return [(pkg,[path])]
+
         installdb = pisi.db.installdb.InstallDB()
         found = []
         for pkg in installdb.list_installed():
