@@ -1440,6 +1440,9 @@
             <ref name="Comment"/>
             <ref name="Packager.Name"/>
             <ref name="Email"/>
+            <optional>
+                <ref name="Requires"/>
+            </optional>
         </element>
     </define>
     
@@ -1477,4 +1480,23 @@
         </element>
     </define>
 
+    <!-- Requires -->
+    <define name="Requires">
+        <element name="Requires">
+            <oneOrMore>
+                <ref name="Action"/>
+            </oneOrMore>
+        </element>
+    </define>
+
+    <!-- Action -->
+    <define name="Action">
+        <element name="Action">
+            <choice>
+                <value>revDepUpdates</value>
+                <value>systemRestart</value>
+                <value>serviceRestart</value>
+            </choice>
+        </element>
+    </define>
 </grammar>
