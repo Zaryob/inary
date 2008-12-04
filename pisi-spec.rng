@@ -1493,7 +1493,7 @@
     <define name="Action">
         <element name="Action">
             <choice>
-                <value>revDepUpdates</value>
+                <value>reverseDependencyUpdate</value>
                 <value>systemRestart</value>
                 <value>serviceRestart</value>
             </choice>
