@@ -47,6 +47,8 @@ If no packages are given, checks all installed packages.
         group = optparse.OptionGroup(self.parser, _("check options"))
         group.add_option("-c", "--component", action="store",
                               default=None, help=_("Check installed packages under given component"))
+        group.add_option("--config", action="store_true",
+                     default=False, help=_("Checks only changed config files of the packages"))
         self.parser.add_option_group(group)
 
     def run(self):
@@ -65,12 +67,17 @@ If no packages are given, checks all installed packages.
             ctx.ui.info(_('Checking all installed packages'))
             pkgs = pisi.api.list_installed()
 
+        check_config = ctx.get_option('config')
         for pkg in pkgs:
             ctx.ui.info(_('* Checking %s... ') % pkg, noln=True)
             if self.installdb.has_package(pkg):
-                corrupt = pisi.api.check(pkg)
-                if corrupt:
-                    ctx.ui.info(_('\nPackage %s is corrupt.') % pkg)
+                check_results = pisi.api.check(pkg, check_config)
+                corrupted = check_results['missing'] or check_results['corrupted']
+                if corrupted:
+                    if check_config:
+                        ctx.ui.info(_('\nPackage %s has changed config files.') % pkg)
+                    else:
+                        ctx.ui.info(_('\nPackage %s is corrupt.') % pkg)
                 else:
                     ctx.ui.info(_("OK"), verbose=False)
             else:

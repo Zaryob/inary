@@ -125,6 +125,10 @@ class InstallDB(lazydb.LazyDB):
         files.read(files_xml)
         return files
 
+    def get_config_files(self, package):
+        files = self.get_files(package)
+        return filter(lambda x: x.type == 'config', files.list)
+
     def search_package(self, terms, lang=None):
         resum = '<Summary xml:lang="%s">.*?%s.*?</Summary>'
         redesc = '<Description xml:lang="%s">.*?%s.*?</Description>'

@@ -44,6 +44,7 @@ import pisi.operations.upgrade
 import pisi.operations.install
 import pisi.operations.history
 import pisi.operations.helper
+import pisi.operations.check
 import pisi.operations.emerge
 import pisi.operations.build
 import pisi.comariface
@@ -273,6 +274,15 @@ def get_conflicts(packages):
     >>> ['imblib', 'callgrind', 'faad2 release >= 3']
     """
     return pisi.conflict.calculate_conflicts(packages, pisi.db.packagedb.PackageDB())
+
+def check(package, config=False):
+    """
+    Returns a dictionary that contains a list of both corrupted and missing files
+    @param package: name of the package to be checked
+    @param config: _only_ check the config files of the package, default behaviour is to check all the files
+    of the package but the config files
+    """
+    return pisi.operations.check.check_package(package, config)
 
 def search_package(terms, lang=None, repo=None):
     """
@@ -577,30 +587,6 @@ def info_name(package_name, useinstalldb=False):
     else:
         files = None
     return metadata, files, repo
-
-def check(package):
-    md, files = info(package, True)
-    corrupt = []
-    for f in files.list:
-        ctx.ui.info(_("Checking /%s ") % f.path, noln=True, verbose=True)
-        if os.path.lexists("/%s" % f.path):
-            if f.hash and f.type != "config":
-                try:
-                    if os.path.islink("/%s" % f.path):
-                        if f.hash != pisi.util.sha1_data(os.readlink("/%s" % f.path)):
-                            corrupt.append(f)
-                            ctx.ui.error(_("\nCorrupt file: %s") % ("/%s" %f.path))
-                    elif f.hash != pisi.util.sha1_file("/%s" % f.path):
-                        corrupt.append(f)
-                        ctx.ui.error(_("\nCorrupt file: %s") % ("/%s" %f.path))
-                    else:
-                        ctx.ui.info(_("OK"), verbose=True)
-                except pisi.util.FileError,e:
-                    ctx.ui.error("\n%s" % e)
-        else:
-            corrupt.append(f)
-            ctx.ui.error(_("\nMissing file: %s") % ("/%s" % f.path))
-    return corrupt
 
 def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=False):
     """Accumulate PiSi XML files in a directory, and write an index."""
