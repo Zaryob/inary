@@ -1440,14 +1440,14 @@
             <ref name="Date"/>
             <ref name="Version"/>
             <ref name="Comment"/>
-            <ref name="Packager.Name"/>
-            <ref name="Email"/>
             <optional>
                 <ref name="Requires"/>
             </optional>
+            <ref name="Packager.Name"/>
+            <ref name="Email"/>
         </element>
     </define>
-    
+
     <!-- attlist.Update -->
     <define name="attlist.Update" combine="interleave">
         <attribute name="release"/>
