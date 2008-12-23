@@ -50,7 +50,7 @@ def find_upgrades(packages, replaces):
 
         # pisi up has "not installed but replacement package" as argument
         if i_pkg in replaces.values():
-            for i, u in replaces:
+            for i, u in replaces.items():
                 if i_pkg == u:
                     i_pkg = i
                     u_pkg = u
@@ -59,8 +59,8 @@ def find_upgrades(packages, replaces):
             ctx.ui.info(_('Package %s is not installed.') % i_pkg, True)
             continue
 
-        if not packagedb.has_package(i_pkg):
-            ctx.ui.info(_('Package %s is not available in repositories.') % i_pkg, True)
+        if not packagedb.has_package(u_pkg):
+            ctx.ui.info(_('Package %s is not available in repositories.') % u_pkg, True)
             continue
 
         pkg = packagedb.get_package(u_pkg)
@@ -81,7 +81,7 @@ def find_upgrades(packages, replaces):
                 ctx.ui.info(_('Package %s is already at the latest release %s.')
                             % (pkg.name, pkg.release), True)
         else:
-            if build < pkg.build:
+            if build < pkg.build or u_pkg != i_pkg:
                 Ap.append(u_pkg)
             else:
                 ctx.ui.info(_('Package %s is already at the latest build %s.')
@@ -160,6 +160,7 @@ def upgrade_pkg_names(A = []):
         if conflicts:
             operations.remove.remove_conflicting_packages(conflicts)
 
+    operations.remove.remove_replaced_packages(replaces.keys())
     operations.remove.remove_obsoleted_packages()
 
     for path in paths:

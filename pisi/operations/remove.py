@@ -125,3 +125,7 @@ def remove_obsoleted_packages():
     if obsoletes:
         if remove(obsoletes, ignore_dep=True, ignore_safety=True):
             raise Exception(_("Obsoleted packages remaining"))
+
+def remove_replaced_packages(replaced):
+    if remove(replaced, ignore_dep=True, ignore_safety=True):
+        raise Exception(_("Replaced package remains"))
