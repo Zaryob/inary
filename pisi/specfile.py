@@ -64,6 +64,19 @@ class AdditionalFile:
             s += '(%s)' % self.permission
         return s
 
+class Action:
+
+    # Valid actions:
+    #
+    # reverseDependencyUpdate
+    # systemRestart
+    # serviceRestart
+
+    s_action = [autoxml.String, autoxml.mandatory]
+
+    def __str__(self):
+        return self.action
+
 class Patch:
 
     s_Filename = [autoxml.String, autoxml.mandatory]
@@ -83,16 +96,6 @@ class Patch:
             s += ' level:' + self.level
         return s
 
-class Requires:
-
-    # Valid actions:
-    #
-    # reverseDependencyUpdate
-    # systemRestart
-    # serviceRestart
-
-    t_Action = [ [autoxml.String], autoxml.mandatory]
-
 class Update:
 
     a_release = [autoxml.String, autoxml.mandatory]
@@ -102,7 +105,13 @@ class Update:
     t_Comment = [autoxml.String, autoxml.optional]
     t_Name = [autoxml.Text, autoxml.optional]
     t_Email = [autoxml.String, autoxml.optional]
-    t_Requires = [Requires, autoxml.optional]
+    t_Requires = [[Action], autoxml.optional]
+
+    def required_actions(self):
+        if self.requires != None:
+            return map(lambda x:str(x), self.requires)
+        else:
+            return []
 
     def __str__(self):
         s = self.date

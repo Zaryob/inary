@@ -71,7 +71,7 @@ def find_upgrades(packages, replaces):
             if not pisi.util.any(lambda i:i.type == 'security', updates):
                 continue
 
-        if pisi.util.any(lambda x:x.requires != None and "reverseDependencyUpdate" in x.requires.action, updates):
+        if pisi.util.any(lambda u:"reverseDependencyUpdate" in u.required_actions() , updates):
             Ap.extend(map(lambda d:d[0], packagedb.get_rev_deps(u_pkg)))
 
         if ignore_build or (not build) or (not pkg.build):
