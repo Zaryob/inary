@@ -53,10 +53,10 @@ def install(parameters = ''):
     if system('python setup.py install --root=%s --no-compile -O0 %s' % (get.installDIR(), parameters)):
         raise InstallError, _('Install failed.')
 
-    DDOCS = 'CHANGELOG COPYRIGHT KNOWN_BUGS MAINTAINERS PKG-INFO \
+    DDOCS = 'CHANGELOG COPYRIGHT KNOWN_BUGS MAINTAINERS PKG-INFO AUTHORS \
              CONTRIBUTORS LICENSE COPYING* Change* MANIFEST* README*'
 
-    for doc in DDOCS:
+    for doc in DDOCS.split():
         if can_access_file(doc):
             dodoc(doc)
 
