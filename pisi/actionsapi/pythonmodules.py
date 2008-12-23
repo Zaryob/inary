@@ -22,7 +22,7 @@ import pisi.context as ctx
 # ActionsAPI Modules
 import pisi.actionsapi
 import pisi.actionsapi.get as get
-from pisi.actionsapi.shelltools import system, can_access_file, unlink
+from pisi.actionsapi.shelltools import system, can_access_file, unlink, isEmpty
 from pisi.actionsapi.pisitools import dodoc
 
 class CompileError(pisi.actionsapi.Error):
@@ -57,7 +57,7 @@ def install(parameters = ''):
              CONTRIBUTORS LICENSE COPYING* Change* MANIFEST* README*'
 
     for doc in DDOCS.split():
-        if can_access_file(doc):
+        if can_access_file(doc) and not isEmpty(doc):
             dodoc(doc)
 
 def run(parameters = ''):

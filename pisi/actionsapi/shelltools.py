@@ -207,6 +207,10 @@ def isDirectory(filePath):
     '''Return True if filePath is an existing directory'''
     return os.path.isdir(filePath)
 
+def isEmpty(filePath):
+    '''Return True if filePath is an empty file'''
+    return os.path.getsize(filePath) == 0
+
 def realPath(filePath):
     '''return the canonical path of the specified filename, eliminating any symbolic links encountered in the path'''
     return os.path.realpath(filePath)
