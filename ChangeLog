@@ -1,5 +1,7 @@
 2008-12-23 Faik Uygur <faik@pardus.org.tr>
         * Fix replaced package upgrades regression. No upgrades was possible.
+        * Fix optional and mandatory problem of <Requires> <Action> tags when
+        pisi.spec.SpecFile is used.
 
 2008-12-22 Faik Uygur <faik@pardus.org.tr>
         * Fail if build dependency install is unsuccesful.
