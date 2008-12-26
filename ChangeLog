@@ -1,3 +1,6 @@
+2008-12-23 Gökmen Göksel <gokmen@pardus.org.tr>
+        * Fix dodoc for python
+
 2008-12-23 Faik Uygur <faik@pardus.org.tr>
         * Fix replaced package upgrades regression. No upgrades was possible.
         * Fix optional and mandatory problem of <Requires> <Action> tags when
@@ -5,6 +8,19 @@
 
 2008-12-22 Faik Uygur <faik@pardus.org.tr>
         * Fail if build dependency install is unsuccesful.
+
+2008-12-08 Ozan Çağlayan <ozan@pardus.org.tr>
+        * Added 4Suite and Qhull licenses
+
+2008-12-05 Faik Uygur <faik@pardus.org.tr>
+        * Add get_config_files helper to installdb
+        * Clean up pisi.api.check and move check to pisi.operations.check
+        * Added --config parameter to pisi check that now checks and finds any
+        changed config file (#8436)
+
+2008-12-02 Faik Uygur <faik@pardus.org.tr>
+        * If full path is given to pisi sf then lookup package in filesdb for
+        a quick search result.
 
 2008-12-01 Faik Uygur <faik@pardus.org.tr>
         * pisi-2.1.0
