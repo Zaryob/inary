@@ -66,9 +66,9 @@ class ComponentDB(lazydb.LazyDB):
         return self.cdb.get_item_keys(repo)
 
     def search_component(self, terms, lang=None, repo=None):
-        rename = '<LocalName xml:lang="%s">.*?%s.*?</LocalName>'
-        resum = '<Summary xml:lang="%s">.*?%s.*?</Summary>'
-        redesc = '<Description xml:lang="%s">.*?%s.*?</Description>'
+        rename = '<LocalName xml:lang="(%s|en)">.*?%s.*?</LocalName>'
+        resum = '<Summary xml:lang="(%s|en)">.*?%s.*?</Summary>'
+        redesc = '<Description xml:lang="(%s|en)">.*?%s.*?</Description>'
 
         if not lang:
             lang = pisi.pxml.autoxml.LocalText.get_lang()
