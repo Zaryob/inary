@@ -88,8 +88,8 @@ class PackageDB(lazydb.LazyDB):
         return pkg
 
     def search_package(self, terms, lang=None, repo=None):
-        resum = '<Summary xml:lang="%s">.*?%s.*?</Summary>'
-        redesc = '<Description xml:lang="%s">.*?%s.*?</Description>'
+        resum = '<Summary xml:lang="(%s|en)">.*?%s.*?</Summary>'
+        redesc = '<Description xml:lang="(%s|en)">.*?%s.*?</Description>'
         if not lang:
             lang = pisi.pxml.autoxml.LocalText.get_lang()
         found = []
@@ -99,11 +99,11 @@ class PackageDB(lazydb.LazyDB):
                                             re.compile(redesc % (lang, term), re.I).search(xml), terms):
                 found.append(name)
         return found
-        
+
     def get_version(self, name, repo):
         if not self.has_package(name, repo):
             raise Exception(_('Package %s not found.') % name)
-            
+
         pkg_doc = piksemel.parseString(self.pdb.get_item(name, repo))
         history = pkg_doc.getTag("History")
         build = pkg_doc.getTagData("Build")
