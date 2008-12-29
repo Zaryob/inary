@@ -180,7 +180,13 @@ def dosed(sourceFiles, findPattern, replacePattern = ''):
     ''' example call: pisitools.dosed("/etc/pass*", "caglar")'''
     ''' example call: pisitools.dosed("Makefile", "(?m)^(HAVE_PAM=.*)no", r"\1yes")'''
 
-    for sourceFile in glob.glob(sourceFiles):
+    sourceFilesGlob = glob.glob(sourceFiles)
+
+    #if there is no match, raise exception
+    if len(sourceFilesGlob) == 0:
+        raise FileError(_('No such file matching pattern: "%s"') % sourceFiles)
+
+    for sourceFile in sourceFilesGlob:
         if can_access_file(sourceFile):
             for line in fileinput.input(sourceFile, inplace = 1):
                 #FIXME: In-place filtering is disabled when standard input is read
