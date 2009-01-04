@@ -48,7 +48,11 @@ def executable_insinto(destinationDirectory, *sourceFiles):
         makedirs(destinationDirectory)
 
     for sourceFile in sourceFiles:
-        for source in glob.glob(sourceFile):
+        sourceFileGlob = glob.glob(sourceFile)
+        if len(sourceFileGlob) == 0:
+            raise FileError(_("No executable file matched pattern \"%s\"." % sourceFile))
+
+        for source in sourceFileGlob:
             # FIXME: use an internal install routine for these
             system('install -m0755 -o root -g root %s %s' % (source, destinationDirectory))
 
@@ -62,7 +66,11 @@ def readable_insinto(destinationDirectory, *sourceFiles):
         makedirs(destinationDirectory)
 
     for sourceFile in sourceFiles:
-        for source in glob.glob(sourceFile):
+        sourceFileGlob = glob.glob(sourceFile)
+        if len(sourceFileGlob) == 0:
+            raise FileError(_("No file matched pattern \"%s\"." % sourceFile))
+
+        for source in sourceFileGlob:
             system('install -m0644 "%s" %s' % (source, destinationDirectory))
 
 def lib_insinto(sourceFile, destinationDirectory, permission = 0644):

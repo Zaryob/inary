@@ -67,7 +67,11 @@ def dohtml(*sourceFiles):
     disallowed_directories = ['CVS']
 
     for sourceFile in sourceFiles:
-        for source in glob.glob(sourceFile):
+        sourceFileGlob = glob.glob(sourceFile)
+        if len(sourceFileGlob) == 0:
+            raise FileError(_("No file matched pattern \"%s\"" % sourceFile))
+
+        for source in sourceFileGlob:
             if os.path.isfile(source) and os.path.splitext(source)[1] in allowed_extensions:
                 system('install -m0644 "%s" %s' % (source, destionationDirectory))
             if os.path.isdir(source) and os.path.basename(source) not in disallowed_directories:
@@ -120,7 +124,11 @@ def doman(*sourceFiles):
         makedirs(manDIR)
 
     for sourceFile in sourceFiles:
-        for source in glob.glob(sourceFile):
+        sourceFileGlob = glob.glob(sourceFile)
+        if len(sourceFileGlob) == 0:
+            raise FileError(_("No file matched pattern \"%s\"" % sourceFile))
+
+        for source in sourceFileGlob:
             compressed = source.endswith("gz") and source
             if compressed:
                 source = source[:-3]
@@ -153,7 +161,11 @@ def domove(sourceFile, destination, destinationFile = ''):
     ''' example call: pisitools.domove("/usr/bin/", "/usr/sbin")'''
     makedirs(join_path(get.installDIR(), destination))
 
-    for filePath in glob.glob(join_path(get.installDIR(), sourceFile)):
+    sourceFileGlob = glob.glob(join_path(get.installDIR(), sourceFile))
+    if len(sourceFileGlob) == 0:
+        raise FileError(_("No file matched pattern \"%s\". 'domove' operation failed." % sourceFile))
+
+    for filePath in sourceFileGlob:
         if not destinationFile:
             move(filePath, join_path(get.installDIR(), join_path(destination, os.path.basename(filePath))))
         else:
@@ -184,7 +196,7 @@ def dosed(sourceFiles, findPattern, replacePattern = ''):
 
     #if there is no match, raise exception
     if len(sourceFilesGlob) == 0:
-        raise FileError(_('No such file matching pattern: "%s"') % sourceFiles)
+        raise FileError(_('No such file matching pattern: "%s". \'dosed\' operation failed.') % sourceFiles)
 
     for sourceFile in sourceFilesGlob:
         if can_access_file(sourceFile):
@@ -217,7 +229,11 @@ def insinto(destinationDirectory, sourceFile,  destinationFile = '', sym = True)
     makedirs(join_path(get.installDIR(), destinationDirectory))
 
     if not destinationFile:
-        for filePath in glob.glob(sourceFile):
+        sourceFileGlob = glob.glob(sourceFile)
+        if len(sourceFileGlob) == 0:
+            raise FileError(_("No file matched pattern \"%s\"." % sourceFile))
+
+        for filePath in sourceFileGlob:
             if can_access_file(filePath):
                 copy(filePath, join_path(get.installDIR(), join_path(destinationDirectory, os.path.basename(filePath))), sym)
     else:
@@ -240,10 +256,18 @@ def newman(sourceFile, destinationFile):
 
 def remove(sourceFile):
     '''removes sourceFile'''
-    for filePath in glob.glob(join_path(get.installDIR(), sourceFile)):
+    sourceFileGlob = glob.glob(join_path(get.installDIR(), sourceFile))
+    if len(sourceFileGlob) == 0:
+        raise FileError(_("No file matched pattern \"%s\". Remove operation failed." % sourceFile))
+
+    for filePath in sourceFileGlob:
         unlink(filePath)
 
 def removeDir(destinationDirectory):
     '''removes destinationDirectory and its subtrees'''
-    for directory in glob.glob(join_path(get.installDIR(), destinationDirectory)):
+    destdirGlob = glob.glob(join_path(get.installDIR(), destinationDirectory))
+    if len(destdirGlob) == 0:
+        raise FileError(_("No directory matched pattern \"%s\". Remove directory operation failed." % destinationDirectory))
+
+    for directory in destdirGlob:
         unlinkDir(directory)

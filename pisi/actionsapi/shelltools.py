@@ -58,7 +58,11 @@ def echo(destionationFile, content):
 
 def chmod(filePath, mode = 0755):
     '''change the mode of filePath to the mode'''
-    for fileName in glob.glob(filePath):
+    filePathGlob = glob.glob(filePath)
+    if len(filePathGlob) == 0:
+        error(_("ActionsAPI [chmod]: No file matched pattern \"%s\"." % filePath))
+
+    for fileName in filePathGlob:
         if can_access_file(fileName):
             try:
                 os.chmod(fileName, mode)
@@ -112,7 +116,11 @@ def unlinkDir(sourceDirectory):
 
 def move(source, destination):
     '''recursively move a "source" file or directory to "destination"'''
-    for filePath in glob.glob(source):
+    sourceGlob = glob.glob(source)
+    if len(sourceGlob) == 0:
+        error(_("ActionsAPI [move]: No file matched pattern \"%s\"." % source))
+
+    for filePath in sourceGlob:
         if isFile(filePath) or isLink(filePath) or isDirectory(filePath):
             try:
                 shutil.move(filePath, destination)
@@ -124,7 +132,11 @@ def move(source, destination):
 # FIXME: instead of passing a sym parameter, split copy and copytree into 4 different function
 def copy(source, destination, sym = True):
     '''recursively copy a "source" file or directory to "destination"'''
-    for filePath in glob.glob(source):
+    sourceGlob = glob.glob(source)
+    if len(sourceGlob) == 0:
+        error(_("ActionsAPI [copy]: No file matched pattern \"%s\"." % source))
+
+    for filePath in sourceGlob:
         if isFile(filePath) and not isLink(filePath):
             try:
                 shutil.copy(filePath, destination)
@@ -166,8 +178,13 @@ def copytree(source, destination, sym = True):
 
 def touch(filePath):
     '''changes the access time of the 'filePath', or creates it if it is not exist'''
-    if glob.glob(filePath):
-        for f in glob.glob(filePath):
+    filePathGlob = glob.glob(filePath)
+
+    if filePathGlob:
+        if len(filePathGlob) == 0:
+            error(_("ActionsAPI [touch]: No file matched pattern \"%s\"." % filePath))
+
+        for f in filePathGlob:
             os.utime(f, None)
     else:
         try:
