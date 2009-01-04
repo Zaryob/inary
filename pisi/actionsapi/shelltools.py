@@ -242,4 +242,10 @@ def dirName(filePath):
 
 def system(command):
     command = string.join(string.split(command))
-    return run_logged(command)
+    retValue = run_logged(command)
+
+    #if return value is different than 0, it means error, raise exception
+    if retValue != 0:
+        error(_("Command \"%s\" failed, return value was %d." % (command, retValue)))
+
+    return retValue
