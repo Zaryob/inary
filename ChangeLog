@@ -1,3 +1,11 @@
+2009-01-04 Gökçen Eraslan <gokcen@pardus.org.tr>
+        * (pisi/actionsapi/{pisitools.py, pisitoolsfunctions.py,
+        shelltools.py}): Check glob methods. This means, if any action in actions.py, operates
+        on files that do not exist, pisi raises an exception about that.
+        * (pisi/actionsapi/shelltools.py): Check return value of the given command of shelltools.system, raise
+        exception if it is not equal to zero. This also effects methods using system, like domo, dobin, doman etc.
+        * (pisi/actionsapi/pisitools.py): Raise exception, if dosed does not change anything in given file.
+
 2008-12-27 Ozan Çağlayan <ozan@pardus.org.tr>
         * (pisi/cli/command.py): Trivial cosmetic patch by Ömer Fadıl Usta
         to fix the layout issue of 'pisi help' (#8907).
