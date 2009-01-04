@@ -18,6 +18,7 @@ import glob
 import sys
 import fileinput
 import re
+import filecmp
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -192,6 +193,7 @@ def dosed(sourceFiles, findPattern, replacePattern = ''):
     ''' example call: pisitools.dosed("/etc/pass*", "caglar")'''
     ''' example call: pisitools.dosed("Makefile", "(?m)^(HAVE_PAM=.*)no", r"\1yes")'''
 
+    backupExtension = ".pisi-backup"
     sourceFilesGlob = glob.glob(sourceFiles)
 
     #if there is no match, raise exception
@@ -200,10 +202,16 @@ def dosed(sourceFiles, findPattern, replacePattern = ''):
 
     for sourceFile in sourceFilesGlob:
         if can_access_file(sourceFile):
-            for line in fileinput.input(sourceFile, inplace = 1):
+            backupFile = "%s%s" % (sourceFile, backupExtension)
+            for line in fileinput.input(sourceFile, inplace = 1, backup = backupExtension):
                 #FIXME: In-place filtering is disabled when standard input is read
                 line = re.sub(findPattern, replacePattern, line)
                 sys.stdout.write(line)
+            if can_access_file(backupFile):
+                if filecmp.cmp(sourceFile, backupFile):
+                    raise FileError(_('dosed method has not changed file \'%s\'.') % sourceFile)
+                else:
+                    os.unlink(backupFile)
         else:
             raise FileError(_('File does not exist or permission denied: %s') % sourceFile)
 
