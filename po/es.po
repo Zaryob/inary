@@ -8,12 +8,12 @@
 # Klemens Haeckel <click3d at linuxmail dot org>, 2008.
 # Klemens Haeckel <click3d at linuxmail org>, 2008.
 # Klemens Häckel <click3d at linuxmail dot org>, 2008.
-# Klemens Häckel <click3d at linuxmail dot com>, 2008.
+# Klemens Häckel <click3d at linuxmail dot com>, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "POT-Creation-Date: 2009-01-07 13:37+EET\n"
-"PO-Revision-Date: 2008-12-25 22:42-0300\n"
+"PO-Revision-Date: 2009-01-07 20:27-0300\n"
 "Last-Translator: Klemens Häckel <click3d at linuxmail dot com>\n"
 "Language-Team: español <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -157,18 +157,16 @@ msgid "perl install failed."
 msgstr "falló perl install."
 
 #: pisi/actionsapi/pisitools.py:73 pisi/actionsapi/pisitools.py:130
-#, fuzzy
 msgid "No file matched pattern \"%s\""
-msgstr "ActionsAPI [chmod]: Archivo %s no existe."
+msgstr "No hay archivos que coinciden con el patrón \"%s\""
 
 #: pisi/actionsapi/pisitools.py:140
 msgid "ActionsAPI [doman]: Wrong man page file: %s"
 msgstr "ActionsAPI [doman]: Archivo de ayuda man equivocado: %s"
 
 #: pisi/actionsapi/pisitools.py:167
-#, fuzzy
 msgid "No file matched pattern \"%s\". 'domove' operation failed."
-msgstr "ActionsAPI [chmod]: Archivo %s no existe."
+msgstr "No hay archivos que coinciden con el patrón \"%s\". Operación 'domove' terminada con falla."
 
 # directorio o carpeta ? creo que mezclé los términos
 #: pisi/actionsapi/pisitools.py:186
@@ -177,11 +175,12 @@ msgstr "ActionsAPI [rename]: No existe archivo o directorio: %s"
 
 #: pisi/actionsapi/pisitools.py:201
 msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
-msgstr ""
+msgstr "No hay archivos que coinciden con el patrón: \"%s\". Operación 'dosed' terminada con falla."
 
 #: pisi/actionsapi/pisitools.py:212
+# i suppose "dosed" is some special reserved word, i didn't translate
 msgid "dosed method has not changed file '%s'."
-msgstr ""
+msgstr "método dosed no realizó ninguna modificación en el archivo '%s'."
 
 #: pisi/actionsapi/pisitools.py:216
 msgid "File does not exist or permission denied: %s"
@@ -193,17 +192,15 @@ msgstr "ActionsAPI [dosym]: Archivo ya existe: %s"
 
 #: pisi/actionsapi/pisitools.py:242 pisi/actionsapi/pisitoolsfunctions.py:71
 msgid "No file matched pattern \"%s\"."
-msgstr ""
+msgstr "No hay archivos que coinciden con el patrón \"%s\"."
 
 #: pisi/actionsapi/pisitools.py:269
-#, fuzzy
 msgid "No file matched pattern \"%s\". Remove operation failed."
-msgstr "ActionsAPI [chmod]: Archivo %s no existe."
+msgstr "No hay archivos que coinciden con el patrón \"%s\". Operación Remove terminada con falla."
 
 #: pisi/actionsapi/pisitools.py:278
-#, fuzzy
 msgid "No directory matched pattern \"%s\". Remove directory operation failed."
-msgstr "ActionsAPI [chmod]: Archivo %s no existe."
+msgstr "No hay directorios que coinciden con el patrón \"%s\". Operación Remove directory terminada con falla."
 
 #: pisi/actionsapi/pisitoolsfunctions.py:45
 #: pisi/actionsapi/pisitoolsfunctions.py:63
@@ -213,7 +210,7 @@ msgstr "Argumentos insuficientes."
 
 #: pisi/actionsapi/pisitoolsfunctions.py:53
 msgid "No executable file matched pattern \"%s\"."
-msgstr ""
+msgstr "No hay archivos ejecutables que coinciden con el patrón \"%s\"."
 
 #: pisi/actionsapi/pythonmodules.py:66
 msgid "Running %s failed."
@@ -228,9 +225,8 @@ msgid "ActionsAPI [echo]: Can't append to file %s."
 msgstr "ActionsAPI [echo]: No posible anexar a archivo %s."
 
 #: pisi/actionsapi/shelltools.py:63
-#, fuzzy
 msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: Archivo %s no existe."
+msgstr "ActionsAPI [chmod]: No hay archivos que coinciden con el patrón \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:70
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: %s)"
@@ -269,9 +265,8 @@ msgid "ActionsAPI [unlinkDir]: Directory %s doesn't exists."
 msgstr "ActionsAPI [unlinkDir]: Carpeta %s no existe."
 
 #: pisi/actionsapi/shelltools.py:121
-#, fuzzy
 msgid "ActionsAPI [move]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: Archivo %s no existe."
+msgstr "ActionsAPI [move]: No hay archivos que coinciden con el patrón \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:128
 msgid "ActionsAPI [move]: Permission denied: %s to %s"
@@ -282,9 +277,8 @@ msgid "ActionsAPI [move]: File %s doesn't exists."
 msgstr "ActionsAPI [move]: Archivo %s no existe."
 
 #: pisi/actionsapi/shelltools.py:137
-#, fuzzy
 msgid "ActionsAPI [copy]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: Archivo %s no existe."
+msgstr "ActionsAPI [copy]: No hay archivos que coinciden con el patrón \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:144
 msgid "ActionsAPI [copy]: Permission denied: %s to %s"
@@ -303,9 +297,8 @@ msgid "ActionsAPI [copytree]: Directory %s doesn't exists."
 msgstr "ActionsAPI [copytree]: Carpeta %s no existe."
 
 #: pisi/actionsapi/shelltools.py:185
-#, fuzzy
 msgid "ActionsAPI [touch]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: Archivo %s no existe."
+msgstr "ActionsAPI [touch]: No hay archivos que coinciden con el patrón \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:194
 msgid "ActionsAPI [touch]: Permission denied: %s"
@@ -313,7 +306,7 @@ msgstr "ActionsAPI [touch]: Permiso denegado: %s"
 
 #: pisi/actionsapi/shelltools.py:249
 msgid "Command \"%s\" failed, return value was %d."
-msgstr ""
+msgstr "Comando \"%s\" fallado, valor de retorno: %d."
 
 #: pisi/api.py:61 pisi/cli/command.py:167
 msgid "You have to be root for this operation."
@@ -418,8 +411,7 @@ msgstr "Instalando %s, versión %s, release %s, build %s"
 
 #: pisi/atomicoperations.py:163
 msgid "%s package cannot be installed unless the dependencies are satisfied"
-msgstr ""
-"paquete %s no se puede instalar hasta que instale los paquetes requeridos"
+msgstr "paquete %s no se puede instalar hasta que instale los paquetes requeridos"
 
 # check this ?? - probably ok, but see the context
 #: pisi/atomicoperations.py:187
@@ -503,8 +495,7 @@ msgid "Not removing conflicted file : %s"
 msgstr "Archivo conflictivo: %s no eliminado "
 
 #: pisi/atomicoperations.py:532
-msgid ""
-"Installed file %s does not exist on system [Probably you manually deleted]"
+msgid "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
 "Archivo instalado %s no existe en el sistema [Probablemente eliminado "
 "manualmente]"
@@ -670,7 +661,7 @@ msgstr "Verificar paquetes instalados del componente"
 
 #: pisi/cli/check.py:51
 msgid "Checks only changed config files of the packages"
-msgstr ""
+msgstr "Verificaciones solamente modificaron archivos de configuración de los paquetes"
 
 #: pisi/cli/check.py:67
 msgid "Checking all installed packages"
@@ -680,13 +671,14 @@ msgstr "Verificando todos los paquetes instalados"
 msgid "* Checking %s... "
 msgstr "* Verificando %s... "
 
-# i put in spanish "contains" instead of "has", ok ?
 #: pisi/cli/check.py:78
-#, fuzzy
+# favor verificar, no estoy seguro, depende del contexto
 msgid ""
 "\n"
 "Package %s has changed config files."
-msgstr "Paquete %s contiene archivo /%s"
+msgstr ""
+"\n"
+"Paquete %s tiene archivos de configuración diferentes."
 
 #: pisi/cli/check.py:80
 msgid ""
@@ -1065,10 +1057,8 @@ msgstr "Mostrar detalles de instalación"
 
 # I suppose here the position is important too ! Should be the same ok as in english
 #: pisi/cli/listinstalled.py:71 pisi/cli/listupgrades.py:73
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr ""
-"Nombre Paquete   |St|   Versión|  Rel.| Build|  Distro|            Fecha"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr "Nombre Paquete   |St|   Versión|  Rel.| Build|  Distro|            Fecha"
 
 #: pisi/cli/listpending.py:43
 msgid "There are no packages waiting to be configured"
@@ -1519,8 +1509,7 @@ msgstr "Generando paquete fuente PiSi: %s"
 
 #: pisi/operations/build.py:235
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr ""
-"IceCream detectado. Asegúrese que el demónio está activo y funcionando..."
+msgstr "IceCream detectado. Asegúrese que el demónio está activo y funcionando..."
 
 #: pisi/operations/build.py:240
 msgid "CCache detected..."
@@ -1611,8 +1600,7 @@ msgstr "no posible llamar función desde acciones: %s"
 
 # did I get "safety switch" right (in this context)?
 #: pisi/operations/build.py:499
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Verificación de seguridad: Se instalarán los siguientes paquetes adicionales "
 "en system.devel:"
@@ -1623,8 +1611,7 @@ msgstr "Verificación de seguridad: system.devel ya está instalado"
 
 #: pisi/operations/build.py:506
 msgid "Safety switch: the component system.devel cannot be found"
-msgstr ""
-"Verificación de seguridad: No posible encontrar el componente system.devel"
+msgstr "Verificación de seguridad: No posible encontrar el componente system.devel"
 
 # satisfechas - entiendo que se refiere a librerias necesarias para hacer el proceso build
 # quizá hay mejor manera de decirlo en español
@@ -1678,8 +1665,7 @@ msgstr "(no se encontró build anterior, estableciendo número de build a 1.)"
 
 #: pisi/operations/build.py:793
 msgid "(old package lacks a build no, setting build no to 1.)"
-msgstr ""
-"(paquete antiguo no tiene número de build, seteando número de build a 1.)"
+msgstr "(paquete antiguo no tiene número de build, seteando número de build a 1.)"
 
 #: pisi/operations/build.py:796
 msgid "There are changes, incrementing build no to %d"
@@ -1728,8 +1714,7 @@ msgstr "Archivos abandonados en carpeta de instalación (%s):"
 
 # revisa este por favor
 #: pisi/operations/build.py:958
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Todos los archivos de la carpeta de instalación (%s) se juntaron en los "
 "paquetes"
@@ -1747,11 +1732,12 @@ msgid "Checking /%s "
 msgstr "Verificando /%s "
 
 #: pisi/operations/check.py:40
-#, fuzzy
 msgid ""
 "\n"
 "Changed config file: %s"
-msgstr "Archivo de paquete: %s"
+msgstr ""
+"\n"
+"Archivo de configuración modificado: %s"
 
 #: pisi/operations/check.py:42
 msgid ""
@@ -1862,8 +1848,7 @@ msgstr ""
 msgid ""
 "The following package(s) are already installed and are not going to be "
 "installed again:\n"
-msgstr ""
-"Los siguientes paquetes ya están instalados y no se instalarán de nuevo:\n"
+msgstr "Los siguientes paquetes ya están instalados y no se instalarán de nuevo:\n"
 
 #: pisi/operations/install.py:50 pisi/operations/install.py:171
 msgid "No packages to install."
@@ -1887,8 +1872,7 @@ msgstr "Instalado %d / %d"
 
 #: pisi/operations/install.py:110
 msgid "Mixing file names and package names not supported yet."
-msgstr ""
-"Mezclando nombres de archivos y nombres de paquetes actualmente no soportado."
+msgstr "Mezclando nombres de archivos y nombres de paquetes actualmente no soportado."
 
 #: pisi/operations/install.py:150
 msgid "External dependencies not satisfied: %s"
@@ -1919,8 +1903,7 @@ msgstr ""
 # should this say in english ? "Safety switch: the component cannot be found in system.base" ?? (i did in spanish like this)
 #: pisi/operations/remove.py:48 pisi/operations/upgrade.py:251
 msgid "Safety switch: the component system.base cannot be found"
-msgstr ""
-"Verificación de seguridad: No posible encontrar el componente system.base: "
+msgstr "Verificación de seguridad: No posible encontrar el componente system.base: "
 
 #: pisi/operations/remove.py:55
 msgid "Package %s does not exist. Cannot remove."
@@ -1951,9 +1934,8 @@ msgid "Obsoleted packages remaining"
 msgstr "Paquetes obsoletos permanecen"
 
 #: pisi/operations/remove.py:131
-#, fuzzy
 msgid "Replaced package remains"
-msgstr "Paquetes obsoletos permanecen"
+msgstr "Queda conservado el paquete reemplazado"
 
 #: pisi/operations/upgrade.py:45
 msgid "Warning: package *name* ends with '.pisi'"
@@ -2248,8 +2230,7 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 "Desarrollador '%s <%s>' tiene otra dirección email '%s' en archivo fuente '%"
 "s'"
@@ -2278,9 +2259,3 @@ msgstr "Buscando en repositorio de fuentes...\n"
 msgid "Scanning binary packages...\n"
 msgstr "Buscando paquetes binarios...\n"
 
-#~ msgid ""
-#~ "\n"
-#~ "Missing file: %s"
-#~ msgstr ""
-#~ "\n"
-#~ "Falta archivo: %s"
