@@ -70,7 +70,7 @@ def dohtml(*sourceFiles):
     for sourceFile in sourceFiles:
         sourceFileGlob = glob.glob(sourceFile)
         if len(sourceFileGlob) == 0:
-            raise FileError(_("No file matched pattern \"%s\"" % sourceFile))
+            raise FileError(_("No file matched pattern \"%s\"") % sourceFile)
 
         for source in sourceFileGlob:
             if os.path.isfile(source) and os.path.splitext(source)[1] in allowed_extensions:
@@ -127,7 +127,7 @@ def doman(*sourceFiles):
     for sourceFile in sourceFiles:
         sourceFileGlob = glob.glob(sourceFile)
         if len(sourceFileGlob) == 0:
-            raise FileError(_("No file matched pattern \"%s\"" % sourceFile))
+            raise FileError(_("No file matched pattern \"%s\"") % sourceFile)
 
         for source in sourceFileGlob:
             compressed = source.endswith("gz") and source
@@ -164,7 +164,7 @@ def domove(sourceFile, destination, destinationFile = ''):
 
     sourceFileGlob = glob.glob(join_path(get.installDIR(), sourceFile))
     if len(sourceFileGlob) == 0:
-        raise FileError(_("No file matched pattern \"%s\". 'domove' operation failed." % sourceFile))
+        raise FileError(_("No file matched pattern \"%s\". 'domove' operation failed.") % sourceFile)
 
     for filePath in sourceFileGlob:
         if not destinationFile:
@@ -239,7 +239,7 @@ def insinto(destinationDirectory, sourceFile,  destinationFile = '', sym = True)
     if not destinationFile:
         sourceFileGlob = glob.glob(sourceFile)
         if len(sourceFileGlob) == 0:
-            raise FileError(_("No file matched pattern \"%s\"." % sourceFile))
+            raise FileError(_("No file matched pattern \"%s\".") % sourceFile)
 
         for filePath in sourceFileGlob:
             if can_access_file(filePath):
@@ -266,7 +266,7 @@ def remove(sourceFile):
     '''removes sourceFile'''
     sourceFileGlob = glob.glob(join_path(get.installDIR(), sourceFile))
     if len(sourceFileGlob) == 0:
-        raise FileError(_("No file matched pattern \"%s\". Remove operation failed." % sourceFile))
+        raise FileError(_("No file matched pattern \"%s\". Remove operation failed.") % sourceFile)
 
     for filePath in sourceFileGlob:
         unlink(filePath)
@@ -275,7 +275,7 @@ def removeDir(destinationDirectory):
     '''removes destinationDirectory and its subtrees'''
     destdirGlob = glob.glob(join_path(get.installDIR(), destinationDirectory))
     if len(destdirGlob) == 0:
-        raise FileError(_("No directory matched pattern \"%s\". Remove directory operation failed." % destinationDirectory))
+        raise FileError(_("No directory matched pattern \"%s\". Remove directory operation failed.") % destinationDirectory)
 
     for directory in destdirGlob:
         unlinkDir(directory)

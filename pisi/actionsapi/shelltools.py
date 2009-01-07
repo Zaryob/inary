@@ -60,7 +60,7 @@ def chmod(filePath, mode = 0755):
     '''change the mode of filePath to the mode'''
     filePathGlob = glob.glob(filePath)
     if len(filePathGlob) == 0:
-        error(_("ActionsAPI [chmod]: No file matched pattern \"%s\"." % filePath))
+        error(_("ActionsAPI [chmod]: No file matched pattern \"%s\".") % filePath)
 
     for fileName in filePathGlob:
         if can_access_file(fileName):
@@ -118,7 +118,7 @@ def move(source, destination):
     '''recursively move a "source" file or directory to "destination"'''
     sourceGlob = glob.glob(source)
     if len(sourceGlob) == 0:
-        error(_("ActionsAPI [move]: No file matched pattern \"%s\"." % source))
+        error(_("ActionsAPI [move]: No file matched pattern \"%s\".") % source)
 
     for filePath in sourceGlob:
         if isFile(filePath) or isLink(filePath) or isDirectory(filePath):
@@ -134,7 +134,7 @@ def copy(source, destination, sym = True):
     '''recursively copy a "source" file or directory to "destination"'''
     sourceGlob = glob.glob(source)
     if len(sourceGlob) == 0:
-        error(_("ActionsAPI [copy]: No file matched pattern \"%s\"." % source))
+        error(_("ActionsAPI [copy]: No file matched pattern \"%s\".") % source)
 
     for filePath in sourceGlob:
         if isFile(filePath) and not isLink(filePath):
@@ -182,7 +182,7 @@ def touch(filePath):
 
     if filePathGlob:
         if len(filePathGlob) == 0:
-            error(_("ActionsAPI [touch]: No file matched pattern \"%s\"." % filePath))
+            error(_("ActionsAPI [touch]: No file matched pattern \"%s\".") % filePath)
 
         for f in filePathGlob:
             os.utime(f, None)
@@ -246,6 +246,6 @@ def system(command):
 
     #if return value is different than 0, it means error, raise exception
     if retValue != 0:
-        error(_("Command \"%s\" failed, return value was %d." % (command, retValue)))
+        error(_("Command \"%s\" failed, return value was %d.") % (command, retValue))
 
     return retValue

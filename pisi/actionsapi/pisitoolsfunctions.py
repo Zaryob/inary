@@ -50,7 +50,7 @@ def executable_insinto(destinationDirectory, *sourceFiles):
     for sourceFile in sourceFiles:
         sourceFileGlob = glob.glob(sourceFile)
         if len(sourceFileGlob) == 0:
-            raise FileError(_("No executable file matched pattern \"%s\"." % sourceFile))
+            raise FileError(_("No executable file matched pattern \"%s\".") % sourceFile)
 
         for source in sourceFileGlob:
             # FIXME: use an internal install routine for these
@@ -68,7 +68,7 @@ def readable_insinto(destinationDirectory, *sourceFiles):
     for sourceFile in sourceFiles:
         sourceFileGlob = glob.glob(sourceFile)
         if len(sourceFileGlob) == 0:
-            raise FileError(_("No file matched pattern \"%s\"." % sourceFile))
+            raise FileError(_("No file matched pattern \"%s\".") % sourceFile)
 
         for source in sourceFileGlob:
             system('install -m0644 "%s" %s' % (source, destinationDirectory))
