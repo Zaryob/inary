@@ -209,7 +209,7 @@ def dosed(sourceFiles, findPattern, replacePattern = ''):
                 sys.stdout.write(line)
             if can_access_file(backupFile):
                 if filecmp.cmp(sourceFile, backupFile):
-                    raise FileError(_('dosed method has not changed file \'%s\'.') % sourceFile)
+                    ctx.ui.warning(_('dosed method has not changed file \'%s\'.') % sourceFile)
                 else:
                     os.unlink(backupFile)
         else:
