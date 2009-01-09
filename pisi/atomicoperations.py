@@ -521,6 +521,10 @@ class Remove(AtomicOperation):
                 else:
                     # keep changed file in history
                     historydb.save_config(package_name, fpath)
+
+                    # after saving to history db, remove the config file any way
+                    if ctx.get_option("purge"):
+                        os.unlink(fpath)
             except pisi.util.FileError:
                 pass
         else:
