@@ -1,3 +1,8 @@
+2009-01-09 Gökçen Eraslan <gokcen@pardus.org.tr>
+        * pisi/actionsapi/cmaketools.py: If both -v and -d parameters are
+        given, pass VERBOSE=1 parameter to make command. This results printing
+        commands in make to the screen in addition to the colorful cmake progress lines.
+
 2009-01-07 Faik Uygur <faik@pardus.org.tr>
         * pisi-2.1.1
 
