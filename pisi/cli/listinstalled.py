@@ -67,6 +67,11 @@ Usage: list-installed
             installed = list(set(installed) & set(component_pkgs))
 
         installed.sort()
+
+        # Resize the first column according to the longest package name
+        if installed:
+            maxlen = max([len(_p) for _p in installed])
+
         if self.options.install_info:
             ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
             print         '========================================================================'
@@ -79,4 +84,5 @@ Usage: list-installed
             elif self.options.install_info:
                 ctx.ui.info('%-15s  |%s' % (package.name, inst_info.one_liner()))
             else:
-                ctx.ui.info('%15s - %s' % (package.name, unicode(package.summary)))
+                package.name = package.name + ' ' * (maxlen - len(package.name))
+                ctx.ui.info('%s - %s' % (package.name, unicode(package.summary)))

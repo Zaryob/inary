@@ -1,3 +1,10 @@
+2009-01-14 Ozan Çağlayan <ozan@pardus.org.tr>
+        * pisi/cli/listavailable.py (print_packages): Resize the first column
+        dynamically according to the longest package name (#9021) and fix some
+        other displaying issues concerning 'listavailable' command.
+        * pisi/cli/listinstalled.py (run): Resize the first column
+        dynamically according to the longest package name.
+
 2009-01-09 Gökçen Eraslan <gokcen@pardus.org.tr>
         * pisi/actionsapi/cmaketools.py: If both -v and -d parameters are
         given, pass VERBOSE=1 parameter to make command. This results printing
