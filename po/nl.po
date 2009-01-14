@@ -1,14 +1,14 @@
 # translation of nl.po to Nederlands
 # Andre van der Lubben <klikspin@gmail.com>, 2006.
-# Willem Gielen <w.gielen@gmail.com>, 2006, 2007, 2008.
+# Willem Gielen <w.gielen@gmail.com>, 2006, 2007, 2008, 2009.
 # Rinse de Vries <rinsedevries@kde.nl>, 2006.
 # W.P.M.H.I.A. Gielen <w.gielen@gmail.com>, 2006, 2007, 2008.
-# Copyright (C) 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
+# Copyright (C) 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "POT-Creation-Date: 2009-01-07 13:37+EET\n"
-"PO-Revision-Date: 2008-12-01 18:05+0100\n"
+"PO-Revision-Date: 2009-01-14 18:34+0100\n"
 "Last-Translator: Willem Gielen <w.gielen@gmail.com>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -163,18 +163,16 @@ msgid "perl install failed."
 msgstr "perl installatie mislukt."
 
 #: pisi/actionsapi/pisitools.py:73 pisi/actionsapi/pisitools.py:130
-#, fuzzy
 msgid "No file matched pattern \"%s\""
-msgstr "ActionsAPI [chmod]: bestand %s bestaat niet."
+msgstr "Geen bestand komt overeen met patroon \"%s\""
 
 #: pisi/actionsapi/pisitools.py:140
 msgid "ActionsAPI [doman]: Wrong man page file: %s"
 msgstr "ActionsAPI [doman]: onjuist man-pagina bestand: %s"
 
 #: pisi/actionsapi/pisitools.py:167
-#, fuzzy
 msgid "No file matched pattern \"%s\". 'domove' operation failed."
-msgstr "ActionsAPI [chmod]: bestand %s bestaat niet."
+msgstr "Geen bestand komt overeen met patroon \"%s\". 'domove' handeling mislukt."
 
 #: pisi/actionsapi/pisitools.py:186
 msgid "ActionsAPI [rename]: No such file or directory: %s"
@@ -182,11 +180,11 @@ msgstr "ActionsAPI [rename]: bestand of map niet gevonden: %s"
 
 #: pisi/actionsapi/pisitools.py:201
 msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
-msgstr ""
+msgstr "Geen bestand komt overeen met patroon: \"%s\". 'dosed' handeling misluky."
 
 #: pisi/actionsapi/pisitools.py:212
 msgid "dosed method has not changed file '%s'."
-msgstr ""
+msgstr "desed methode heeft bestand '%s' niet veranderd."
 
 #: pisi/actionsapi/pisitools.py:216
 msgid "File does not exist or permission denied: %s"
@@ -198,17 +196,15 @@ msgstr "ActionsAPI [dosym]: bestand aanwezig: %s"
 
 #: pisi/actionsapi/pisitools.py:242 pisi/actionsapi/pisitoolsfunctions.py:71
 msgid "No file matched pattern \"%s\"."
-msgstr ""
+msgstr "Geen bestand komt overeen met patroon \"%s\"."
 
 #: pisi/actionsapi/pisitools.py:269
-#, fuzzy
 msgid "No file matched pattern \"%s\". Remove operation failed."
-msgstr "ActionsAPI [chmod]: bestand %s bestaat niet."
+msgstr "Geen bestand komt overeen met patroon \"%s\". Verwijderen mislukt."
 
 #: pisi/actionsapi/pisitools.py:278
-#, fuzzy
 msgid "No directory matched pattern \"%s\". Remove directory operation failed."
-msgstr "ActionsAPI [chmod]: bestand %s bestaat niet."
+msgstr "Geen map komt overeen met patroon \"%s\". Verwijderen map misluky."
 
 # pisi/actionsapi/pisitoolsfunctions.py:46 :59
 #: pisi/actionsapi/pisitoolsfunctions.py:45
@@ -219,7 +215,7 @@ msgstr "Onvoldoende parameters."
 
 #: pisi/actionsapi/pisitoolsfunctions.py:53
 msgid "No executable file matched pattern \"%s\"."
-msgstr ""
+msgstr "Geen uitvoerbare bestanden komen overeen met patroon \"%s\"."
 
 #: pisi/actionsapi/pythonmodules.py:66
 msgid "Running %s failed."
@@ -234,9 +230,8 @@ msgid "ActionsAPI [echo]: Can't append to file %s."
 msgstr "ActionsAPI [echo]: kan niet toevoegen aan bestand %s."
 
 #: pisi/actionsapi/shelltools.py:63
-#, fuzzy
 msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: bestand %s bestaat niet."
+msgstr "ActionsAPI [chmod]: Geen bestand komt overeen met patroon \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:70
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: %s)"
@@ -275,9 +270,8 @@ msgid "ActionsAPI [unlinkDir]: Directory %s doesn't exists."
 msgstr "ActionsAPI [unlinkDir]: map %s bestaat niet."
 
 #: pisi/actionsapi/shelltools.py:121
-#, fuzzy
 msgid "ActionsAPI [move]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: bestand %s bestaat niet."
+msgstr "ActionsAPI [move]: Geen bestand komt overeen met patroon \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:128
 msgid "ActionsAPI [move]: Permission denied: %s to %s"
@@ -288,9 +282,8 @@ msgid "ActionsAPI [move]: File %s doesn't exists."
 msgstr "ActionsAPI [move]: bestand %s bestaat niet."
 
 #: pisi/actionsapi/shelltools.py:137
-#, fuzzy
 msgid "ActionsAPI [copy]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: bestand %s bestaat niet."
+msgstr "ActionsAPI [copy]: Geen bestand komt overeen met patroon \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:144
 msgid "ActionsAPI [copy]: Permission denied: %s to %s"
@@ -309,9 +302,8 @@ msgid "ActionsAPI [copytree]: Directory %s doesn't exists."
 msgstr "ActionsAPI [copytree]: map %s bestaat niet."
 
 #: pisi/actionsapi/shelltools.py:185
-#, fuzzy
 msgid "ActionsAPI [touch]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: bestand %s bestaat niet."
+msgstr "ActionsAPI [touch]: Geen bestand komt overeen met patroon \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:194
 msgid "ActionsAPI [touch]: Permission denied: %s"
@@ -319,7 +311,7 @@ msgstr "ActionsAPI [touch]: toegang geweigerd: %s"
 
 #: pisi/actionsapi/shelltools.py:249
 msgid "Command \"%s\" failed, return value was %d."
-msgstr ""
+msgstr "Commando \"%s\" mislukt, waarde terug veranderd in %d."
 
 #: pisi/api.py:61 pisi/cli/command.py:167
 msgid "You have to be root for this operation."
@@ -503,8 +495,7 @@ msgid "Not removing conflicted file : %s"
 msgstr "Niet verwijderen conflicterend bestand: %s"
 
 #: pisi/atomicoperations.py:532
-msgid ""
-"Installed file %s does not exist on system [Probably you manually deleted]"
+msgid "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
 "Geïnstalleerd bestand %s bestaat niet op systeem [waarschijnlijk handmatig "
 "verwijderd]"
@@ -676,11 +667,12 @@ msgid "* Checking %s... "
 msgstr "* Controle %s... "
 
 #: pisi/cli/check.py:78
-#, fuzzy
 msgid ""
 "\n"
 "Package %s has changed config files."
-msgstr "Pakket %s bevat bestand /%s"
+msgstr ""
+"\n"
+"Pakket %s is veranderd in config bestanden."
 
 #: pisi/cli/check.py:80
 msgid ""
@@ -1051,8 +1043,7 @@ msgstr "Toon gedetailleerde installatie-informatie"
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/listinstalled.py:71 pisi/cli/listupgrades.py:73
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
 msgstr "Pakketnaam     |St|   Versie|  Rel.| Bouw |  Distro|             Datum"
 
 #: pisi/cli/listpending.py:43
@@ -1583,8 +1574,7 @@ msgid "unable to call function from actions: %s"
 msgstr "kan functie niet aanroepen vanuit actions: %s"
 
 #: pisi/operations/build.py:499
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Veiligheidsprocedure: de volgende extra pakketten in system.devel zullen "
 "geïnstalleerd worden:"
@@ -1695,10 +1685,8 @@ msgid "Abandoned files under the install dir (%s):"
 msgstr "Verlaten bestanden in de installatiemap (%s):"
 
 #: pisi/operations/build.py:958
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
-msgstr ""
-"Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)."
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
+msgstr "Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)."
 
 #: pisi/operations/build.py:962
 msgid "Cleaning Build Directory..."
@@ -1713,11 +1701,12 @@ msgid "Checking /%s "
 msgstr "Controle /%s "
 
 #: pisi/operations/check.py:40
-#, fuzzy
 msgid ""
 "\n"
 "Changed config file: %s"
-msgstr "Pakketbestand: %s"
+msgstr ""
+"\n"
+"Veranderd config bestand: %s"
 
 #: pisi/operations/check.py:42
 msgid ""
@@ -1917,9 +1906,8 @@ msgid "Obsoleted packages remaining"
 msgstr "Overbodige pakketten blijven"
 
 #: pisi/operations/remove.py:131
-#, fuzzy
 msgid "Replaced package remains"
-msgstr "Overbodige pakketten blijven"
+msgstr "Vervangen pakket blijft"
 
 #: pisi/operations/upgrade.py:45
 msgid "Warning: package *name* ends with '.pisi'"
@@ -2211,10 +2199,8 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-msgstr ""
-"Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgstr "Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
 
 #: scripts/repostats.py:467
 msgid ""
@@ -2240,9 +2226,3 @@ msgstr "Scannen bron-repository...\n"
 msgid "Scanning binary packages...\n"
 msgstr "Scannen binaire pakketten...\n"
 
-#~ msgid ""
-#~ "\n"
-#~ "Missing file: %s"
-#~ msgstr ""
-#~ "\n"
-#~ "Missend bestand: %s"
