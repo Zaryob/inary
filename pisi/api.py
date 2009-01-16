@@ -189,6 +189,16 @@ def list_available(repo=None):
     """
     return pisi.db.packagedb.PackageDB().list_packages(repo)
 
+def list_newest(repo=None, since=None):
+    """
+    Return a list of newest packages in the given repository -> list_of_strings since
+    last update or before.
+    @param repo: Repository of the packages. If repo is None than returns a list of
+    all the newest packages from all the repositories.
+    @param since: yyyy-mm-dd formatted
+    """
+    return pisi.db.packagedb.PackageDB().list_newest(repo, since)
+
 def list_upgradable():
     """
     Return a list of packages that are upgraded in the repository -> list_of_strings

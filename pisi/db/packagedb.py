@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005 - 2009, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -18,8 +18,10 @@ yes, we are cheap
 """
 
 import re
+import time
 import gzip
 import gettext
+import datetime
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
@@ -56,17 +58,17 @@ class PackageDB(lazydb.LazyDB):
 
     def __generate_replaces(self, doc):
         return [x.getTagData("Name") for x in doc.tags("Package") if x.getTagData("Replaces")]
-        
+
     def __generate_obsoletes(self, doc):
         distribution = doc.getTag("Distribution")
         obsoletes = distribution and distribution.getTag("Obsoletes")
         src_repo = doc.getTag("SpecFile") is not None
-        
+
         if not obsoletes or src_repo:
             return []
 
         return map(lambda x: x.firstChild().data(), obsoletes.tags("Package"))
-        
+
     def __generate_packages(self, doc):
         return dict(map(lambda x: (x.getTagData("Name"), gzip.zlib.compress(x.toString())), doc.tags("Package")))
 
@@ -123,7 +125,7 @@ class PackageDB(lazydb.LazyDB):
 
     def get_obsoletes(self, repo=None):
         return self.odb.get_list_item(repo)
-    
+
     def get_rev_deps(self, name, repo=None):
         try:
             rvdb = self.rvdb.get_item(name, repo)
@@ -155,3 +157,17 @@ class PackageDB(lazydb.LazyDB):
 
     def list_packages(self, repo):
         return self.pdb.get_item_keys(repo)
+
+    def list_newest(self, repo, since=None):
+        packages = []
+        historydb = pisi.db.historydb.HistoryDB()
+        if since:
+            since_date = datetime.datetime(*time.strptime(since, "%Y-%m-%d")[0:6])
+        else:
+            since_date = datetime.datetime(*time.strptime(historydb.get_last_repo_update(), "%Y-%m-%d")[0:6])
+
+        for pkg in self.list_packages(repo):
+            enter_date = datetime.datetime(*time.strptime(self.get_package(pkg).history[-1].date, "%Y-%m-%d")[0:6])
+            if enter_date >= since_date:
+                packages.append(pkg)
+        return packages

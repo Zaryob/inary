@@ -33,6 +33,7 @@ import pisi.cli.index
 import pisi.cli.info
 import pisi.cli.install
 import pisi.cli.history
+import pisi.cli.listnewest
 import pisi.cli.listavailable
 import pisi.cli.listcomponents
 import pisi.cli.listinstalled
