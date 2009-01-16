@@ -88,6 +88,8 @@ expanded to package names.
             repos = pisi.api.list_repos()
             for repo in repos:
                 pisi.api.update_repo(repo)
+            # reinitialize after update repo operation
+            pisi.db.historydb.HistoryDB().init()
         else:
             ctx.ui.info(_('Will not update repositories'))
 

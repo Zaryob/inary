@@ -25,7 +25,7 @@ import pisi.context as ctx
 import pisi.cli.command as command
 
 # Operation names for translation
-opttrans = {"upgrade":_("upgrade"),"remove":_("remove"),"emerge":_("emerge"), "install":_("install"), "snapshot":_("snapshot"), "takeback":_("takeback")}
+opttrans = {"upgrade":_("upgrade"),"remove":_("remove"),"emerge":_("emerge"), "install":_("install"), "snapshot":_("snapshot"), "takeback":_("takeback"), "repoupdate":_("repository update")}
 
 class History(command.PackageOp):
     """History of pisi operations
@@ -70,6 +70,9 @@ Lists previous operations."""
 
             if operation.type == "snapshot":
                 print _("    * There are %d packages in this snapshot.") % len(operation.packages)
+            if operation.type == "repoupdate":
+                for repo in operation.repos:
+                    print "    *",  repo
             else:
                 for pkg in operation.packages:
                     print "    *",  pkg

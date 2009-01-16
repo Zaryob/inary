@@ -31,6 +31,22 @@ class PackageInfo:
     def __str__(self):
         return self.version + "-" + self.release + "-" + (self.build or '?')
 
+class Repo:
+    a_operation = [autoxml.String, autoxml.mandatory]
+
+    t_Name = [autoxml.String, autoxml.mandatory]
+    t_Uri = [autoxml.String, autoxml.mandatory]
+
+    def __str__(self):
+        # "update", "remove", "add"
+        operation = ""
+        if self.operation == "update":
+            return _("%s repository is updated.") % self.name
+        elif self.operation == "add":
+            pass # TBD
+        elif self.operation == "remove":
+            pass # TBD
+
 class Package:
 
     a_operation = [autoxml.String, autoxml.mandatory]
@@ -65,7 +81,8 @@ class Operation:
     a_date = [autoxml.String, autoxml.mandatory]
     a_time = [autoxml.String, autoxml.mandatory]
 
-    t_Packages = [ [Package], autoxml.mandatory, "Package"]
+    t_Packages = [ [Package], autoxml.optional, "Package"]
+    t_Repos = [ [Repo], autoxml.optional, "Repository"]
 
     def __str__(self):
         return self.type
@@ -80,7 +97,7 @@ class History(xmlfile.XmlFile):
 
     def create(self, operation):
 
-        if operation not in ["upgrade", "remove", "emerge", "install", "snapshot", "takeback"]:
+        if operation not in ["upgrade", "remove", "emerge", "install", "snapshot", "takeback", "repoupdate"]:
             raise Exception("Unknown package operation")
 
         opno = self._get_latest()
@@ -91,6 +108,13 @@ class History(xmlfile.XmlFile):
         self.operation.date = "%s-%02d-%02d" % (year, month, day)
         self.operation.time = "%02d:%02d" % (hour, minute)
         self.operation.no = opno
+
+    def update_repo(self, name, uri, operation=None):
+        repo = Repo()
+        repo.operation = operation
+        repo.name = name
+        repo.uri = uri
+        self.operation.repos.append(repo)
 
     # @param otype is currently only used to hold if an upgrade is from "delta"
     def add(self, pkgBefore=None, pkgAfter=None, operation=None, otype=None):

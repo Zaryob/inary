@@ -25,6 +25,7 @@ class HistoryDB(lazydb.LazyDB):
 
     def init(self):
         self.__logs = self.__generate_history()
+        self.history = None
 
     def __generate_history(self):
         logs = filter(lambda x:x.endswith(".xml"), os.listdir(ctx.config.history_dir()))
@@ -33,8 +34,9 @@ class HistoryDB(lazydb.LazyDB):
         return logs
 
     def create_history(self, operation):
-        self.history = pisi.history.History()
-        self.history.create(operation)
+        if not self.history:
+            self.history = pisi.history.History()
+            self.history.create(operation)
 
     def add_and_update(self, pkgBefore=None, pkgAfter=None, operation=None, otype=None):
         self.add_package(pkgBefore, pkgAfter, operation, otype)
@@ -57,6 +59,10 @@ class HistoryDB(lazydb.LazyDB):
 
         destdir = os.path.join(hist_dir, config_file[1:])
         pisi.util.copy_file_stat(config_file, destdir);
+
+    def update_repo(self, repo, uri, operation = None):
+        self.history.update_repo(repo, uri, operation)
+        self.update_history()
 
     def update_history(self):
         self.history.update()
