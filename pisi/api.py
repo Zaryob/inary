@@ -631,7 +631,17 @@ def remove_repo(name):
                  % name)
 
 @locked
+def update_repos(repos, force=False):
+    pisi.db.historydb.HistoryDB().create_history("repoupdate")
+    for repo in repos:
+        __update_repo(repo, force)
+
+@locked
 def update_repo(repo, force=False):
+    pisi.db.historydb.HistoryDB().create_history("repoupdate")
+    __update_repo(repo, force)
+
+def __update_repo(repo, force=False):
     ctx.ui.info(_('* Updating repository: %s') % repo)
     ctx.ui.notify(pisi.ui.updatingrepo, name = repo)
     repodb = pisi.db.repodb.RepoDB()
@@ -640,7 +650,6 @@ def update_repo(repo, force=False):
         repouri = repodb.get_repo(repo).indexuri.get_uri()
         try:
             index.read_uri_of_repo(repouri, repo)
-            pisi.db.historydb.HistoryDB().create_history("repoupdate")
             pisi.db.historydb.HistoryDB().update_repo(repo, repouri, "update")
         except pisi.file.AlreadyHaveException, e:
             ctx.ui.info(_('%s repository information is up-to-date.') % repo)

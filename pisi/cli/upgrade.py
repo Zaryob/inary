@@ -86,10 +86,7 @@ expanded to package names.
         if not ctx.get_option('bypass_update_repo'):
             ctx.ui.info(_('Updating repositories'))
             repos = pisi.api.list_repos()
-            for repo in repos:
-                pisi.api.update_repo(repo)
-            # reinitialize after update repo operation
-            pisi.db.historydb.HistoryDB().init()
+            pisi.api.update_repos(repos)
         else:
             ctx.ui.info(_('Will not update repositories'))
 

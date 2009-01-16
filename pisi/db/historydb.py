@@ -34,9 +34,8 @@ class HistoryDB(lazydb.LazyDB):
         return logs
 
     def create_history(self, operation):
-        if not self.history:
-            self.history = pisi.history.History()
-            self.history.create(operation)
+        self.history = pisi.history.History()
+        self.history.create(operation)
 
     def add_and_update(self, pkgBefore=None, pkgAfter=None, operation=None, otype=None):
         self.add_package(pkgBefore, pkgAfter, operation, otype)
