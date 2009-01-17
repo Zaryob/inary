@@ -376,7 +376,7 @@ class Builder:
         for root, dirs, files in os.walk(install_dir):
             for file_ in files:
                 already_in_package = False
-                fpath = pisi.util.join_path(root, file_)
+                fpath = pisi.util.join_path(root, file_) + '/'
                 for path in all_paths_in_packages:
                     if not fpath.find(path):
                         already_in_package = True

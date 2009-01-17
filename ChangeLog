@@ -1,3 +1,9 @@
+2009-01-17 Ozan Çağlayan <ozan@pardus.org.tr>
+        * pisi/operations/build.py (get_abandoned_files): Delimit the paths
+        written in pspec.xml's Files section with a trailing '/' for not
+        matching similar patterns like /usr/lib and /usr/libexec during
+        abandoned files checking.
+
 2009-01-14 Ozan Çağlayan <ozan@pardus.org.tr>
         * pisi/cli/listavailable.py (print_packages): Resize the first column
         dynamically according to the longest package name (#9021) and fix some
