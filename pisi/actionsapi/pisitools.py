@@ -208,7 +208,9 @@ def dosed(sourceFiles, findPattern, replacePattern = ''):
                 line = re.sub(findPattern, replacePattern, line)
                 sys.stdout.write(line)
             if can_access_file(backupFile):
-                if filecmp.cmp(sourceFile, backupFile):
+                # By default, filecmp.cmp() compares two files by looking file sizes.
+                # shallow=False tells cmp() to look file content.
+                if filecmp.cmp(sourceFile, backupFile, shallow=False):
                     ctx.ui.warning(_('dosed method has not changed file \'%s\'.') % sourceFile)
                 else:
                     os.unlink(backupFile)
