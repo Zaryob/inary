@@ -37,17 +37,20 @@ temp_pspec = '''<?xml version="1.0" ?>
             <Dependency versionFrom=""></Dependency>
             <Dependency></Dependency>
         </BuildDependencies>
-        <!--
         <Patches>
+            <!--
             <Patch level="1"></Patch>
+            -->
         </Patches>
-        -->
     </Source>
 
     <Package>
         <Name>%(package)s</Name>
         <RuntimeDependencies>
         </RuntimeDependencies>
+        <Conflicts>
+            <Package releaseTo="29">sleep</Package>
+        </Conflicts>
         <Files>
             <Path fileType="data">/</Path>
         </Files>
@@ -118,35 +121,56 @@ StartupNotify=false
 Categories=Application;Game;ArcadeGame;
 '''
 
-temp_service = '''serviceType = "local"
+temp_service = '''
 from comar.service import *
 
 serviceType = "local"
-serviceDefault = "off"
+serviceConf = "%(package)s"
+serviceDefault = "conditional"
 
 serviceDesc = _({"en": "%(package_cap)s",
                  "tr": "%(package_cap)s"})
 
+@synchronized
 def start():
-    if 0 == run('/sbin/start-stop-daemon --quiet --start --exec /usr/bin/%(package)s --pidfile /var/run/%(package)s.pid'):
-        notify("System.Service.changed", "started")
+    startService(command="/usr/sbin/%(package)s",
+                 args = config.get("args", "destroy"),
+                 donotify=True)
 
+@synchronized
 def stop():
-    if 0 == run("/sbin/start-stop-daemon --stop --pidfile /var/run/%(package)s.pid"):
-        notify("System.Service.changed", "stopped")
+    stopService(command="/usr/sbin/%(package)s",
+                donotify=True)
+
+def ready():
+    import os
+    status = is_on()
+    if status == "on" or (status == "conditional" and os.path.exists("/sys/coffee/ready")):
+        start()
 
 def status():
-    return checkDeamon("/var/run/%(package)s.pid")
+    return checkDaemon("/var/run/%(package)s.pid")
 
 '''
 
 temp_postscript = '''#/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import os
 
 def postInstall():
     print "FIXME"
 
+'''
+
+temp_translation = '''<?xml version="1.0" ?>
+<PISI>
+    <Source>
+        <Name>%(package)s</Name>
+        <Summary xml:lang=""></Summary>
+        <Description xml:lang=""></Description>
+    </Source>
+</PISI>
 '''
 
 def write(filename, data):
@@ -205,6 +229,7 @@ data["packager_name"], data["packager_email"] = readConfig()
 create_dirs()
 write("pspec.xml", temp_pspec % data)
 write("actions.py", temp_actions % data)
+write("translations.xml", temp_translation % data)
 write("files/%s.desktop" % data["package"], temp_desktop % data)
 write("comar/service.py", temp_service % data)
 write("comar/package.py", temp_postscript)
