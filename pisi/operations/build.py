@@ -381,7 +381,7 @@ class Builder:
                     if not fpath.find(path):
                         already_in_package = True
                 if not already_in_package:
-                    abandoned_files.append(fpath)
+                    abandoned_files.append(fpath.rsplit("/", 1)[0])
 
         return abandoned_files
 
