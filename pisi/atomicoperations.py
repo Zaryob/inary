@@ -27,6 +27,7 @@ import pisi.files
 import pisi.uri
 import pisi.ui
 import pisi.version
+import pisi.operations.helper
 import pisi.operations.delta
 import pisi.db
 
@@ -83,8 +84,10 @@ class Install(AtomicOperation):
             # If delta exists than use the delta uri.
             if delta:
                 pkg_uri = delta.packageURI
+                pkg_hash = delta.packageHash
             else:
                 pkg_uri = pkg.packageURI
+                pkg_hash = pkg.packageHash
 
             uri = pisi.uri.URI(pkg_uri)
             if uri.is_absolute_path():
@@ -95,7 +98,19 @@ class Install(AtomicOperation):
 
             ctx.ui.info(_("Package URI: %s") % pkg_path, verbose=True)
 
-            return Install(pkg_path, ignore_dep)
+            # Bug 4113
+            cached_file = pisi.package.Package.is_cached(pkg_path)
+            if cached_file and util.sha1_file(cached_file) != pkg_hash:
+                os.unlink(cached_file)
+
+            install_op = Install(pkg_path, ignore_dep)
+
+            # Bug 4113
+            downloaded_file = install_op.package.filepath
+            if pisi.util.sha1_file(downloaded_file) != pkg_hash:
+                raise pisi.Error(_("Download Error: Package does not match the repository package."))
+
+            return install_op
         else:
             raise Error(_("Package %s not found in any active repository.") % name)
 

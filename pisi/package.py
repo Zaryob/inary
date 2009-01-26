@@ -142,3 +142,13 @@ class Package:
 
     def comar_dir(self):
         return os.path.join(self.pkg_dir(), ctx.const.comar_dir)
+
+    @staticmethod
+    def is_cached(packagefn):
+        url = pisi.uri.URI(packagefn)
+        filepath = packagefn
+        if url.is_remote_file():
+            filepath = os.path.join(ctx.config.cached_packages_dir(), url.filename())
+            return os.path.exists(filepath) and filepath
+        else:
+            return filepath
