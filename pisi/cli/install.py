@@ -57,6 +57,11 @@ expanded to package names.
                                default=None, help=_("Install component's and recursive components' packages"))
         group.add_option("-f", "--fetch-only", action="store_true",
                      default=False, help=_("Fetch upgrades but do not install."))
+        group.add_option("-x", "--exclude", action="append",
+                     default=None, help=_("When installing packages, ignore packages and components whose basenames match pattern."))
+        group.add_option("--exclude-from", action="store",
+                     default=None, help=_("When installing packages, ignore packages and components whose basenames \
+                     match any pattern contained in file."))
         self.parser.add_option_group(group)
 
     def run(self):
@@ -77,5 +82,11 @@ expanded to package names.
                 if self.componentdb.has_component(name):
                     packages.extend(self.componentdb.get_union_packages(name, walk=True))
         packages.extend(self.args)
+
+        if ctx.get_option('exclude_from'):
+            packages = pisi.blacklist.exclude_from(packages, ctx.get_option('exclude_from'))
+
+        if ctx.get_option('exclude'):
+            packages = pisi.blacklist.exclude(packages, ctx.get_option('exclude'))
 
         pisi.api.install(packages, ctx.get_option('reinstall'))
