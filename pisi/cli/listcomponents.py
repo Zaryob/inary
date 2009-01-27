@@ -21,13 +21,13 @@ import pisi.context as ctx
 import pisi.db
 
 class ListComponents(command.Command):
-    """List available components
+    __doc__ = _("""List available components
 
 Usage: list-components
 
 Gives a brief list of PiSi components published in the
 repositories.
-"""
+""")
     __metaclass__ = command.autocommand
 
     def __init__(self, args):

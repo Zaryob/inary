@@ -20,13 +20,13 @@ import pisi.api
 import pisi.cli.command as command
 
 class ConfigurePending(command.PackageOp):
-    """Configure pending packages
+    __doc__ = _("""Configure pending packages
 
 If COMAR configuration of some packages were not
 done at installation time, they are added to a list
 of packages waiting to be configured. This command
 configures those packages.
-"""
+""")
 
     __metaclass__ = command.autocommand
 

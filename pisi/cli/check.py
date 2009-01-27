@@ -22,7 +22,7 @@ import pisi.context as ctx
 import pisi.db
 
 class Check(command.Command):
-    """Verify installation
+    __doc__ = _("""Verify installation
 
 Usage: check [<package1> <package2> ... <packagen>]
 
@@ -33,7 +33,7 @@ file. Check command uses the checksums to verify a package.
 Just give the names of packages.
 
 If no packages are given, checks all installed packages.
-"""
+""")
     __metaclass__ = command.autocommand
 
     def __init__(self, args):

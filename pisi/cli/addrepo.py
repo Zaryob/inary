@@ -21,7 +21,7 @@ import pisi.cli.command as command
 import pisi.context as ctx
 
 class AddRepo(command.Command):
-    """Add a repository
+    __doc__ = _("""Add a repository
 
 Usage: add-repo <repo> <indexuri>
 
@@ -31,7 +31,7 @@ Usage: add-repo <repo> <indexuri>
 If no repo is given, add-repo pardus-devel repo is added by default
 
 NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
-"""
+""")
     __metaclass__ = command.autocommand
 
     def __init__(self, args):

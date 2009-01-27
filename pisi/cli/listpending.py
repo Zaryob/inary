@@ -19,10 +19,10 @@ import pisi.context as ctx
 import pisi.api
 
 class ListPending(command.Command):
-    """List pending packages
+    __doc__ = _("""List pending packages
 
 Lists packages waiting to be configured.
-"""
+""")
     __metaclass__ = command.autocommand
 
     def __init__(self, args):

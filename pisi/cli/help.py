@@ -19,11 +19,11 @@ import pisi.cli.command as command
 import pisi.context as ctx
 
 class Help(command.Command):
-    """Prints help for given commands
+    __doc__ = _("""Prints help for given commands
 
 Usage: help [ <command1> <command2> ... <commandn> ]
 
-If run without parameters, it prints the general help."""
+If run without parameters, it prints the general help.""")
 
     __metaclass__ = command.autocommand
 

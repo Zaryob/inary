@@ -22,10 +22,10 @@ import pisi.api
 import pisi.db
 
 class ListInstalled(command.Command):
-    """Print the list of all installed packages
+    __doc__ = _("""Print the list of all installed packages
 
 Usage: list-installed
-"""
+""")
 
     __metaclass__ = command.autocommand
 

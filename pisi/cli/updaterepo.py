@@ -21,7 +21,7 @@ import pisi.context as ctx
 import pisi.api
 
 class UpdateRepo(command.Command):
-    """Update repository databases
+    __doc__ = _("""Update repository databases
 
 Usage: update-repo [<repo1> <repo2> ... <repon>]
 
@@ -29,7 +29,7 @@ Usage: update-repo [<repo1> <repo2> ... <repon>]
 
 Synchronizes the PiSi databases with the current repository.
 If no repository is given, all repositories are updated.
-"""
+""")
     __metaclass__ = command.autocommand
 
     def __init__(self,args):

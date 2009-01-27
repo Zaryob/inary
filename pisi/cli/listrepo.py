@@ -10,17 +10,21 @@
 # Please read the COPYING file.
 #
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 import pisi.cli.command as command
 import pisi.context as ctx
 import pisi.db
 
 class ListRepo(command.Command):
-    """List repositories
+    __doc__ = _("""List repositories
 
 Usage: list-repo
 
 Lists currently tracked repositories.
-"""
+""")
     __metaclass__ = command.autocommand
 
     def __init__(self, args):

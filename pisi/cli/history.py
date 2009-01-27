@@ -28,11 +28,11 @@ import pisi.cli.command as command
 opttrans = {"upgrade":_("upgrade"),"remove":_("remove"),"emerge":_("emerge"), "install":_("install"), "snapshot":_("snapshot"), "takeback":_("takeback"), "repoupdate":_("repository update")}
 
 class History(command.PackageOp):
-    """History of pisi operations
+    __doc__ = _("""History of pisi operations
 
 Usage: history
 
-Lists previous operations."""
+Lists previous operations.""")
 
     __metaclass__ = command.autocommand
 

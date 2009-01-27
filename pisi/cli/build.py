@@ -21,7 +21,7 @@ import pisi.cli.command as command
 import pisi.context as ctx
 
 class Build(command.Command):
-    """Build PiSi packages
+    __doc__ = _("""Build PiSi packages
 
 Usage: build [<pspec.xml> | <sourcename>] ...
 
@@ -30,7 +30,7 @@ fetch all necessary files and build the package for you.
 
 Alternatively, you can give the name of a source package
 to be downloaded from a repository containing sources.
-"""
+""")
     __metaclass__ = command.autocommand
 
     def __init__(self, args):

@@ -21,12 +21,12 @@ import pisi.context as ctx
 import pisi.db
 
 class ListSources(command.Command):
-    """List available sources
+    __doc__ = _("""List available sources
 
 Usage: list-sources
 
 Gives a brief list of sources published in the repositories.
-"""
+""")
     __metaclass__ = command.autocommand
 
     def __init__(self, args):

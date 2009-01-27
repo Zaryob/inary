@@ -23,7 +23,7 @@ import pisi.context as ctx
 import pisi.db
 
 class Graph(command.Command):
-    """Graph package relations
+    __doc__ = _("""Graph package relations
 
 Usage: graph [<package1> <package2> ...]
 
@@ -31,7 +31,7 @@ Write a graph of package relations, tracking dependency and
 conflicts relations starting from given packages. By default
 shows the package relations among repository packages, and writes
 the package in graphviz format to 'pgraph.dot'.
-"""
+""")
 
     __metaclass__ = command.autocommand
 

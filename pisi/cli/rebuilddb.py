@@ -21,7 +21,7 @@ import pisi.context as ctx
 import pisi.api
 
 class RebuildDb(command.Command):
-    """Rebuild Databases
+    __doc__ = _("""Rebuild Databases
 
 Usage: rebuilddb [ <package1> <package2> ... <packagen> ]
 
@@ -29,7 +29,7 @@ Rebuilds the PiSi databases
 
 If package specs are given, they should be the names of package
 dirs under /var/lib/pisi
-"""
+""")
     __metaclass__ = command.autocommand
 
     def __init__(self, args):

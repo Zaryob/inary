@@ -20,7 +20,7 @@ import pisi.cli.command as command
 import pisi.context as ctx
 
 class Index(command.Command):
-    """Index PiSi files in a given directory
+    __doc__ = _("""Index PiSi files in a given directory
 
 Usage: index <directory> ...
 
@@ -31,7 +31,7 @@ source and binary packages.
 
 If you give multiple directories, the command still works, but puts
 everything in a single index file.
-"""
+""")
     __metaclass__ = command.autocommand
 
     def __init__(self, args):

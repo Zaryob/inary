@@ -23,14 +23,14 @@ import pisi.api
 import pisi.db
 
 class ListNewest(command.Command):
-    """List newest packages in the repositories
+    __doc__ = _("""List newest packages in the repositories
 
 Usage: list-newest [ <repo1> <repo2> ... repon ]
 
 Gives a list of PiSi newly published packages in the specified
 repositories. If no repository is specified, we list the new
 packages from all repositories.
-"""
+""")
     __metaclass__ = command.autocommand
 
     def __init__(self, args):

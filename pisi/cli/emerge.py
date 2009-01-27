@@ -22,7 +22,7 @@ import pisi.context as ctx
 import pisi.api
 
 class Emerge(build.Build):
-    """Build and install PiSi source packages from repository
+    __doc__ = _("""Build and install PiSi source packages from repository
 
 Usage: emerge <sourcename> ...
 
@@ -30,7 +30,7 @@ You should give the name of a source package to be
 downloaded from a repository containing sources.
 
 You can also give the name of a component.
-"""
+""")
     __metaclass__ = command.autocommand
 
     def __init__(self, args):

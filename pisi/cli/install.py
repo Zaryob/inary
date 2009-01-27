@@ -22,7 +22,7 @@ import pisi.api
 import pisi.db
 
 class Install(command.PackageOp):
-    """Install PiSi packages
+    __doc__ = _("""Install PiSi packages
 
 Usage: install <package1> <package2> ... <packagen>
 
@@ -31,7 +31,7 @@ specified a package name, it should exist in a specified repository.
 
 You can also specify components instead of package names, which will be
 expanded to package names.
-"""
+""")
     __metaclass__ = command.autocommand
 
     def __init__(self, args):

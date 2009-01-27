@@ -24,12 +24,12 @@ import pisi.api
 import pisi.db
 
 class ListUpgrades(command.Command):
-    """List packages to be upgraded
+    __doc__ = _("""List packages to be upgraded
 
 Usage: list-upgrades
 
 Lists the packages that will be upgraded.
-"""
+""")
     __metaclass__ = command.autocommand
 
     def __init__(self, args):

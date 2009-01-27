@@ -23,12 +23,12 @@ import pisi.api
 import pisi.db
 
 class Info(command.Command):
-    """Display package information
+    __doc__ = _("""Display package information
 
 Usage: info <package1> <package2> ... <packagen>
 
 <packagei> is either a package name or a .pisi file,
-"""
+""")
     __metaclass__ = command.autocommand
 
     def __init__(self, args):
@@ -147,7 +147,7 @@ Usage: info <package1> <package2> ... <packagen>
         self.print_metadata(metadata)
         if self.options.files or self.options.files_path:
             self.print_files(files)
-        
+
     def installdb_info(self, package):
         if self.installdb.has_package(package):
             metadata, files, repo = pisi.api.info_name(package, True)
@@ -160,7 +160,7 @@ Usage: info <package1> <package2> ... <packagen>
                 ctx.ui.info(_('[inst] '), noln=True)
             else:
                 ctx.ui.info(_('Installed package:'))
-                
+
             self.print_metadata(metadata, self.installdb)
         else:
             ctx.ui.info(_("%s package is not installed") % package)

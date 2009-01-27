@@ -10,15 +10,19 @@
 # Please read the COPYING file.
 #
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 import pisi.cli.command as command
 
 class Clean(command.Command):
-    """Clean stale locks
+    __doc__ = _("""Clean stale locks
 
 Usage: clean
 
 PiSi uses filesystem locks for managing database access.
-This command deletes unused locks from the database directory."""
+This command deletes unused locks from the database directory.""")
 
     __metaclass__ = command.autocommand
 

@@ -21,7 +21,7 @@ import pisi.context as ctx
 import pisi.db
 
 class Search(command.Command):
-    """Search packages
+    __doc__ = _("""Search packages
 
 Usage: search <term1> <term2> ... <termn>
 
@@ -30,7 +30,7 @@ in summary, description, and package name fields.
 Default search is done in package database. Use
 options to search in install database or source
 database.
-"""
+""")
     __metaclass__ = command.autocommand
 
     def __init__(self, args):

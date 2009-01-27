@@ -10,18 +10,22 @@
 # Please read the COPYING file.
 #
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 import pisi
 import pisi.api
 import pisi.cli.command as command
 
 class DeleteCache(command.Command):
-    """Delete cache files
+    __doc__ = _("""Delete cache files
 
 Usage: delete-cache
 
 Sources, packages and temporary files are stored
 under /var directory. Since these accumulate they can
-consume a lot of disk space."""
+consume a lot of disk space.""")
 
     __metaclass__ = command.autocommand
 

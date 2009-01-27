@@ -20,14 +20,14 @@ import pisi.cli.command as command
 import pisi.context as ctx
 
 class Delta(command.Command):
-    """Creates delta PiSi packages
+    __doc__ = _("""Creates delta PiSi packages
 
 Usage: delta oldpackage newpackage
 
 Delta command finds the changed files between the given packages by comparing the sha1sum of the files
 and creates a delta pisi package with the changed files between two releases.
 
-"""
+""")
     __metaclass__ = command.autocommand
 
     def __init__(self, args):
