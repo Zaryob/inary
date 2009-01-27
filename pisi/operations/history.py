@@ -155,7 +155,7 @@ def takeback(operation):
         pisi.operations.remove.remove(beremoved, True, True)
 
     if paths:
-        pisi.operations.install.install_pkg_files(paths)
+        pisi.operations.install.install_pkg_files(paths, True)
 
     for pkg, operation in configs:
         historydb.load_config(operation, pkg)

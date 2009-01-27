@@ -100,7 +100,7 @@ def install_pkg_names(A, reinstall = False):
 
     return True
 
-def install_pkg_files(package_URIs):
+def install_pkg_files(package_URIs, reinstall = False):
     """install a number of pisi package files"""
 
     ctx.ui.debug('A = %s' % str(package_URIs))
@@ -112,7 +112,7 @@ def install_pkg_files(package_URIs):
     if ctx.config.get_option('ignore_dependency'):
         # simple code path then
         for x in package_URIs:
-            atomicoperations.install_single_file(x)
+            atomicoperations.install_single_file(x, reinstall)
         return True
 
     # read the package information into memory first
@@ -207,7 +207,7 @@ in the respective order to satisfy extra dependencies:
     ctx.ui.notify(ui.packagestogo, order = order)
 
     for x in order:
-        atomicoperations.install_single_file(dfn[x])
+        atomicoperations.install_single_file(dfn[x], reinstall)
 
     return True
 
