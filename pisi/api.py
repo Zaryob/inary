@@ -189,6 +189,14 @@ def list_available(repo=None):
     """
     return pisi.db.packagedb.PackageDB().list_packages(repo)
 
+def list_sources(repo=None):
+    """
+    Return a list of available packages in the given repository -> list_of_strings
+    @param repo: Repository of the sourcepackages. If repo is None than returns
+    a list of all the available packages in all the repositories
+    """
+    return pisi.db.sourcedb.SourceDB().list_sources(repo)
+
 def list_newest(repo=None, since=None):
     """
     Return a list of newest packages in the given repository -> list_of_strings since
