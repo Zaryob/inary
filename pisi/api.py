@@ -191,9 +191,9 @@ def list_available(repo=None):
 
 def list_sources(repo=None):
     """
-    Return a list of available packages in the given repository -> list_of_strings
-    @param repo: Repository of the sourcepackages. If repo is None than returns
-    a list of all the available packages in all the repositories
+    Return a list of available source packages in the given repository -> list_of_strings
+    @param repo: Repository of the source packages. If repo is None than returns
+    a list of all the available source packages in all the repositories
     """
     return pisi.db.sourcedb.SourceDB().list_sources(repo)
 
