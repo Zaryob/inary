@@ -27,7 +27,7 @@ class HistoryDB(lazydb.LazyDB):
 
     def init(self):
         self.__logs = self.__generate_history()
-        self.history = None
+        self.history = pisi.history.History()
 
     def __generate_history(self):
         logs = filter(lambda x:x.endswith(".xml"), os.listdir(ctx.config.history_dir()))
@@ -36,7 +36,6 @@ class HistoryDB(lazydb.LazyDB):
         return logs
 
     def create_history(self, operation):
-        self.history = pisi.history.History()
         self.history.create(operation)
 
     def add_and_update(self, pkgBefore=None, pkgAfter=None, operation=None, otype=None):
