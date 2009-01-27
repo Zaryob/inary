@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "POT-Creation-Date: 2009-01-27 11:26+EET\n"
-"PO-Revision-Date: 2009-01-07 20:27-0300\n"
+"PO-Revision-Date: 2009-01-27 20:10-0300\n"
 "Last-Translator: Klemens Häckel <click3d at linuxmail dot com>\n"
 "Language-Team: español <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -234,8 +234,7 @@ msgstr "ActionsAPI [echo]: No posible anexar a archivo %s."
 
 #: pisi/actionsapi/shelltools.py:63
 msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
-msgstr ""
-"ActionsAPI [chmod]: No hay archivos que coinciden con el patrón \"%s\"."
+msgstr "ActionsAPI [chmod]: No hay archivos que coinciden con el patrón \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:70
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: %s)"
@@ -307,8 +306,7 @@ msgstr "ActionsAPI [copytree]: Carpeta %s no existe."
 
 #: pisi/actionsapi/shelltools.py:185
 msgid "ActionsAPI [touch]: No file matched pattern \"%s\"."
-msgstr ""
-"ActionsAPI [touch]: No hay archivos que coinciden con el patrón \"%s\"."
+msgstr "ActionsAPI [touch]: No hay archivos que coinciden con el patrón \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:194
 msgid "ActionsAPI [touch]: Permission denied: %s"
@@ -413,7 +411,7 @@ msgstr "URL de paquete: %s"
 
 #: pisi/atomicoperations.py:111
 msgid "Download Error: Package does not match the repository package."
-msgstr ""
+msgstr "Error de descarga: Paquete local no coincide con paquete del repositorio."
 
 #: pisi/atomicoperations.py:115
 msgid "Package %s not found in any active repository."
@@ -425,8 +423,7 @@ msgstr "Instalando %s, versión %s, release %s, build %s"
 
 #: pisi/atomicoperations.py:178
 msgid "%s package cannot be installed unless the dependencies are satisfied"
-msgstr ""
-"paquete %s no se puede instalar hasta que instale los paquetes requeridos"
+msgstr "paquete %s no se puede instalar hasta que instale los paquetes requeridos"
 
 # check this ?? - probably ok, but see the context
 #: pisi/atomicoperations.py:202
@@ -510,8 +507,7 @@ msgid "Not removing conflicted file : %s"
 msgstr "Archivo conflictivo: %s no eliminado "
 
 #: pisi/atomicoperations.py:553
-msgid ""
-"Installed file %s does not exist on system [Probably you manually deleted]"
+msgid "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
 "Archivo instalado %s no existe en el sistema [Probablemente eliminado "
 "manualmente]"
@@ -567,6 +563,16 @@ msgid ""
 "NB: We support only local files (e.g., /a/b/c) and http:// URIs at the "
 "moment\n"
 msgstr ""
+"Agregar repositorio\n"
+"\n"
+"Uso: add-repo <repo> <indexuri>\n"
+"\n"
+"<repo>: nombre del repositorio a agregar\n"
+"<indexuri>: URI del archivo index\n"
+"\n"
+"Si no se indica un repositorio, add-repo pardus-devel repositorio se agrega automáticamente\n"
+"\n"
+"Obs: Actualmente solamente archivos locales (ej., /a/b/c) y URLs http:// son soportados\n"
 
 #: pisi/cli/addrepo.py:44
 msgid "add-repo options"
@@ -596,6 +602,15 @@ msgid ""
 "Alternatively, you can give the name of a source package\n"
 "to be downloaded from a repository containing sources.\n"
 msgstr ""
+"Build paquetes PiSi\n"
+"\n"
+"Uso: build [<pspec.xml> | <sourcename>] ...\n"
+"\n"
+"Puede indicar la URI del archivo pspec.xml file. PiSi \n"
+"adquirirá todos los archivos necesarios y construir el paquete.\n"
+"\n"
+"Alternativamente puede indicar el nombre de un paquete de fuentes\n"
+"a descargar de un repositorio de fuentes.\n"
 
 #: pisi/cli/build.py:47
 msgid "build options"
@@ -709,6 +724,17 @@ msgid ""
 "\n"
 "If no packages are given, checks all installed packages.\n"
 msgstr ""
+"Verificar Instalación\n"
+"\n"
+"Uso: check [<package1> <package2> ... <packagen>]\n"
+"\n"
+"<packagei>: nombre de paquete\n"
+"\n"
+"Se guarda un hash criptográfico de verificación para cada archivo instalado.\n"
+"El comando Check usa estas cadenas hash para la verificación de los paquetes.\n"
+"Sencillamente ingrese los nombres de los paquetes.\n"
+"\n"
+"Si no se indican nombres de paquetes, se verificarán todos los paquetes instalados.\n"
 
 #: pisi/cli/check.py:47
 msgid "check options"
@@ -766,6 +792,12 @@ msgid ""
 "PiSi uses filesystem locks for managing database access.\n"
 "This command deletes unused locks from the database directory."
 msgstr ""
+"Limpiar bloqueos\n"
+"\n"
+"Uso: clean\n"
+"\n"
+"PiSi usa archivos indicadores de bloqueo para administrar el acceso a la base de datos.\n"
+"Este comando elimina archivos indicadores sin uso del directorio de la base de datos."
 
 #: pisi/cli/command.py:30
 msgid "Command lacks name"
@@ -843,12 +875,20 @@ msgid ""
 "of packages waiting to be configured. This command\n"
 "configures those packages.\n"
 msgstr ""
+"Configurar paquetes pendientes\n"
+"\n"
+"Si COMAR no realiza la configuración de algunos paquetes durante el\n"
+"proceso de instalación, se los agrega a una lista de espera,\n"
+"de paquetes pendientes a configurar. Este comando\n"
+"configura los paquetes en espera.\n"
 
 #: pisi/cli/configurepending.py:39
 msgid "configure-pending options"
 msgstr "Opciones de configure-pending"
 
 #: pisi/cli/deletecache.py:22
+# maybe here add some additional final comment ??
+# like "By deleting the cache you can gain back the used disk space, without damaging the current installations".. or so..
 msgid ""
 "Delete cache files\n"
 "\n"
@@ -858,6 +898,13 @@ msgid ""
 "under /var directory. Since these accumulate they can\n"
 "consume a lot of disk space."
 msgstr ""
+"Eliminar archivos del cache\n"
+"\n"
+"Uso: delete-cache\n"
+"\n"
+"Archivos de fuentes, paquetes y archivos temporales se guardan en\n"
+"el directorio /var. Ya que se van acumulando los archivos, el \n"
+"espacio consumido en disco puede aumentar considerablemente."
 
 #: pisi/cli/delta.py:23
 msgid ""
@@ -871,6 +918,13 @@ msgid ""
 "releases.\n"
 "\n"
 msgstr ""
+"Crea paquetes PiSi delta\n"
+"\n"
+"Uso: delta oldpackage newpackage\n"
+"\n"
+"El comando Delta encuentra los archivos modificados entre los paquetes indicados, comparando los archivos sha1sum correspondientes\n"
+"y crea un paquete pisi delta que contendrá estos archivos modificados entre las dos versiones.\n"
+"\n"
 
 #: pisi/cli/delta.py:40
 msgid "delta options"
@@ -887,6 +941,14 @@ msgid ""
 "\n"
 "You can also give the name of a component.\n"
 msgstr ""
+"Build e instalar paquetes PiSi de fuentes de un repositorio\n"
+"\n"
+"Uso: emerge <sourcename> ...\n"
+"\n"
+"Debe indicar el nombre de un paquete de fuentes \n"
+"a descargar de un repositorio con fuentes.\n"
+"\n"
+"También puede indicar el nombre de un componente.\n"
 
 # no idea, i should know the context :(
 #: pisi/cli/emerge.py:44
@@ -920,6 +982,14 @@ msgid ""
 "shows the package relations among repository packages, and writes\n"
 "the package in graphviz format to 'pgraph.dot'.\n"
 msgstr ""
+"Graficar relaciones de paquetes\n"
+"\n"
+"Uso: graph [<package1> <package2> ...]\n"
+"\n"
+"Dibuja un gráfico de relaciones entre los paquetes, demostrando dependencias\n"
+"y relaciones conflictivos, partiendo de determinados paquetes base. Por defecto\n"
+"muestra las relaciones entre los paquetes del repositorio, y genera\n"
+"el resultado en formato graphviz  a un archivo 'pgraph.dot'.\n"
 
 #: pisi/cli/graph.py:43
 msgid "graph options"
@@ -961,6 +1031,11 @@ msgid ""
 "\n"
 "If run without parameters, it prints the general help."
 msgstr ""
+"Imprime la ayuda para un comando\n"
+"\n"
+"Uso: help [ <command1> <command2> ... <commandn> ]\n"
+"\n"
+"Si se ejecuta sin parámetro se imprime la ayuda general."
 
 #: pisi/cli/help.py:49
 msgid ""
@@ -995,9 +1070,8 @@ msgid "remove"
 msgstr "eliminar"
 
 #: pisi/cli/history.py:28
-#, fuzzy
 msgid "repository update"
-msgstr "Repositorio : %s\n"
+msgstr "Actualización de repositorio"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1020,6 +1094,11 @@ msgid ""
 "\n"
 "Lists previous operations."
 msgstr ""
+"Histórico de operaciones pisi\n"
+"\n"
+"Uso: history\n"
+"\n"
+"Lista operaciones previas."
 
 #: pisi/cli/history.py:47
 msgid "history options"
@@ -1051,6 +1130,8 @@ msgid "    * There are %d packages in this snapshot."
 msgstr "    * Hay %d paquetes en esta instantánea."
 
 #: pisi/cli/index.py:23
+# favor revisar, salté algunos pasajes
+# verificar: tags
 msgid ""
 "Index PiSi files in a given directory\n"
 "\n"
@@ -1064,6 +1145,17 @@ msgid ""
 "If you give multiple directories, the command still works, but puts\n"
 "everything in a single index file.\n"
 msgstr ""
+"Indexar archivos PiSi en un directorio determinado\n"
+"\n"
+"Uso: index <directory> ...\n"
+"\n"
+"Este comando busca todos los archivos PiSi en un directorio, extrae y junta \n"
+"los tags PiSi y los acumula en un archivo de salida XML,\n"
+"con el nombre 'pisi-index.xml' por defecto. Indexa tanto paquetes\n"
+"de fuentes como de binarios.\n"
+"\n"
+"Si se indica varios directorios a la vez, el comando funciona, pero \n"
+"el resultado se guardará en un solo archivo de index.\n"
 
 #: pisi/cli/index.py:44
 msgid "index options"
@@ -1097,6 +1189,11 @@ msgid ""
 "\n"
 "<packagei> is either a package name or a .pisi file,\n"
 msgstr ""
+"Mostrar información de paquete\n"
+"\n"
+"Uso: info <package1> <package2> ... <packagen>\n"
+"\n"
+"<packagei> puede ser nombre de paquete o de un archivo .pisi,\n"
 
 #: pisi/cli/info.py:45
 msgid "info options"
@@ -1179,6 +1276,15 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
+"Instalar paquetes PiSi\n"
+"\n"
+"Uso: install <package1> <package2> ... <packagen>\n"
+"\n"
+"Se puede indicar nombres de archivos, URI's o nombres de paquetes. Si indicó\n"
+"un nombre de un paquete, este mismo debería existir en uno de los repositorios especificados.\n"
+"\n"
+"También puede indicar componentes en lugar de nombre de paquetes, lo que\n"
+"se expanden automáticamente a nombres de paquetes.\n"
 
 #: pisi/cli/install.py:44
 msgid "install options"
@@ -1198,23 +1304,19 @@ msgid "Fetch upgrades but do not install."
 msgstr "Descargar actualizaciones pero no instalar."
 
 #: pisi/cli/install.py:61
-#, fuzzy
 msgid ""
 "When installing packages, ignore packages and components whose basenames "
 "match pattern."
 msgstr ""
-"Ignorar paquetes y componentes para la actualización, cuyo nombre base "
-"coincide con el patrón."
+"Ignorar paquetes y componentes para la instalación, cuyos nombres base "
+"coinciden con el patrón."
 
-# translated as if "..whose basenames contain the pattern string"
 #: pisi/cli/install.py:63
-#, fuzzy
+# no estoy seguro si capté la idea - i am not sure if i got the idea right
 msgid ""
 "When installing packages, ignore packages and components whose "
 "basenames                      match any pattern contained in file."
-msgstr ""
-"Ignorar paquetes y componentes para la actualización, cuyo nombre base "
-"contiene el patrón."
+msgstr "Ignorar paquetes y componentes para la instalación, cuyo nombre base                      coinciden con cualquiera de los patrones guardados en el archivo."
 
 #: pisi/cli/listavailable.py:26
 msgid ""
@@ -1226,6 +1328,13 @@ msgid ""
 "repositories. If no repository is specified, we list packages in\n"
 "all repositories.\n"
 msgstr ""
+"Listar paquetes disponibles en los repositorios\n"
+"\n"
+"Uso: list-available [ <repo1> <repo2> ... repon ]\n"
+"\n"
+"Da una lista breve de los paquetes PiSi publicados en los repositorios\n"
+"especificados. Si no se especifica el repositorio, se genera una lista\n"
+"de los paquetes de todos los repositorios.\n"
 
 #: pisi/cli/listavailable.py:45
 msgid "list-available options"
@@ -1263,6 +1372,12 @@ msgid ""
 "Gives a brief list of PiSi components published in the\n"
 "repositories.\n"
 msgstr ""
+"Listar componentes disponibles\n"
+"\n"
+"Uso: list-components\n"
+"\n"
+"Da una lista breve de componentes PiSi publicados en los\n"
+" repositorios.\n"
 
 #: pisi/cli/listcomponents.py:40
 msgid "list-components options"
@@ -1274,6 +1389,9 @@ msgid ""
 "\n"
 "Usage: list-installed\n"
 msgstr ""
+"Imprimir lista de todos los paquetes instalados\n"
+"\n"
+"Uso: list-installed\n"
 
 #: pisi/cli/listinstalled.py:41
 msgid "list-installed options"
@@ -1293,10 +1411,8 @@ msgstr "Mostrar detalles de instalación"
 
 # I suppose here the position is important too ! Should be the same ok as in english
 #: pisi/cli/listinstalled.py:76 pisi/cli/listupgrades.py:73
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr ""
-"Nombre Paquete   |St|   Versión|  Rel.| Build|  Distro|            Fecha"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr "Nombre Paquete   |St|   Versión|  Rel.| Build|  Distro|            Fecha"
 
 #: pisi/cli/listnewest.py:26
 msgid ""
@@ -1308,42 +1424,50 @@ msgid ""
 "repositories. If no repository is specified, we list the new\n"
 "packages from all repositories.\n"
 msgstr ""
+"Listar paquetes nuevos de los repositorios\n"
+"\n"
+"Uso: list-newest [ <repo1> <repo2> ... repon ]\n"
+"\n"
+"Muestra una lista de paquetes PiSi recientemente publicados en los repositorios \n"
+"especificados. Si no se indica un repositorio, se mostrará una lista de \n"
+"los paquetes nuevos de todos los repositorios.\n"
 
 #: pisi/cli/listnewest.py:45
-#, fuzzy
 msgid "list-newest options"
-msgstr "opciones de list-installed"
+msgstr "opciones de list-newest"
 
 #: pisi/cli/listnewest.py:47
 msgid ""
 "List new packages added to repository after this given date formatted as "
 "yyyy-mm-dd"
 msgstr ""
+"Listar paquetes nuevos en el repositorio, desde la fecha indicada, en formato "
+"yyyy-mm-dd"
 
 #: pisi/cli/listnewest.py:49
+# favor verificar, posiblemente se puede decir mejor
 msgid ""
 "List new packages added to repository after last nth previous repository "
 "update"
-msgstr ""
+msgstr "Listar paquetes nuevos en el repositorio luego de la ultima nta actualización del repositorio"
 
-# i put in spanish "contains" instead of "has", ok ?
 #: pisi/cli/listnewest.py:77
-#, fuzzy
 msgid "Packages added to %s since %s:\n"
-msgstr "Paquete %s contiene archivo /%s"
+msgstr "Paquetes agregados a %s desde %s:\n"
 
 #: pisi/cli/listnewest.py:79
-#, fuzzy
 msgid "Packages added to %s:"
-msgstr "Archivo de paquete: %s"
+msgstr "Paquetes agregados a %s"
 
 #: pisi/cli/listpending.py:22
-#, fuzzy
 msgid ""
 "List pending packages\n"
 "\n"
 "Lists packages waiting to be configured.\n"
-msgstr "No hay paquetes pendientes para configurar"
+msgstr ""
+"Listar paquetes pendientes\n"
+"\n"
+"Lista paquetes en espera de configuración.\n"
 
 #: pisi/cli/listpending.py:43
 msgid "There are no packages waiting to be configured"
@@ -1357,6 +1481,11 @@ msgid ""
 "\n"
 "Lists currently tracked repositories.\n"
 msgstr ""
+"Listar repositorios\n"
+"\n"
+"Uso: list-repo\n"
+"\n"
+"Lista los repositorios configurados actualmente.\n"
 
 #: pisi/cli/listsources.py:24
 msgid ""
@@ -1366,6 +1495,11 @@ msgid ""
 "\n"
 "Gives a brief list of sources published in the repositories.\n"
 msgstr ""
+"Listar fuentes disponibles\n"
+"\n"
+"Uso: list-sources\n"
+"\n"
+"Da una breve lista de fuentes publicados en los repositorios.\n"
 
 #: pisi/cli/listsources.py:39
 msgid "list-sources options"
@@ -1379,6 +1513,11 @@ msgid ""
 "\n"
 "Lists the packages that will be upgraded.\n"
 msgstr ""
+"Lista paquetes a actualizar\n"
+"\n"
+"Uso: list-upgrades\n"
+"\n"
+"Lista los paquetes que se actualizarán.\n"
 
 #: pisi/cli/listupgrades.py:43
 msgid "list-upgrades options"
@@ -1416,6 +1555,14 @@ msgid ""
 "If package specs are given, they should be the names of package\n"
 "dirs under /var/lib/pisi\n"
 msgstr ""
+"Reconstruir bases de datos\n"
+"\n"
+"Uso: rebuilddb [ <package1> <package2> ... <packagen> ]\n"
+"\n"
+"Reconstruye las bases de datos PiSi \n"
+"\n"
+"Si se especifica paquetes, debería ser usando los nombres de los directorios en\n"
+"/var/lib/pisi\n"
 
 #: pisi/cli/rebuilddb.py:42
 msgid "rebuild-db options"
@@ -1440,17 +1587,22 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
+"Remover paquetes PiSi\n"
+"\n"
+"Uso: remove <package1> <package2> ... <packagen>\n"
+"\n"
+"Remover paquete(s) del sistema. Sencillamente indique el nombre del paquete a remover.\n"
+"\n"
+"Puede especificar también componentes, en vez de nombres de paquetes, que se\n"
+"expandirán a nombres de los paquetes respectivos.\n"
 
 #: pisi/cli/remove.py:43
 msgid "remove options"
 msgstr "opciones de remover"
 
 #: pisi/cli/remove.py:46
-#, fuzzy
 msgid "Removes everything including changed config files of the package"
-msgstr ""
-"Verificaciones solamente modificaron archivos de configuración de los "
-"paquetes"
+msgstr "Remueve todo, incluyendo archivos de configuración modificados del paquete"
 
 #: pisi/cli/remove.py:48
 msgid "Remove component's and recursive components' packages"
@@ -1464,6 +1616,11 @@ msgid ""
 "\n"
 "Remove all repository information from the system.\n"
 msgstr ""
+"Remover repositorios\n"
+"\n"
+"Uso: remove-repo <repo1> <repo2> ... <repon>\n"
+"\n"
+"Remueve toda información del repositorio del sistema.\n"
 
 #: pisi/cli/search.py:24
 msgid ""
@@ -1477,6 +1634,14 @@ msgid ""
 "options to search in install database or source\n"
 "database.\n"
 msgstr ""
+"Buscar paquetes\n"
+"\n"
+"Uso: search <term1> <term2> ... <termn>\n"
+"\n"
+"Busca paquetes que contienen lo términos de búsqueda\n"
+"en los campos de resumen, descripción y nombre de paquete.\n"
+"Por defecto la búsqueda se realiza en la base de datos de los paquetes. Use\n"
+"las opciones para buscar en la base de datos de instalación, o de fuentes.\n"
 
 #: pisi/cli/search.py:42
 msgid "search options"
@@ -1507,6 +1672,11 @@ msgid ""
 "\n"
 "Finds the installed package which contains the specified file.\n"
 msgstr ""
+"Buscar por archivo\n"
+"\n"
+"Uso: search-file <path1> <path2> ... <pathn>\n"
+"\n"
+"Busca el paquete instalado, que contiene el archivo especificado.\n"
 
 #: pisi/cli/searchfile.py:38
 msgid "search-file options"
@@ -1540,6 +1710,14 @@ msgid ""
 "Synchronizes the PiSi databases with the current repository.\n"
 "If no repository is given, all repositories are updated.\n"
 msgstr ""
+"Actualizar bases de datos de repositorios\n"
+"\n"
+"Uso: update-repo [<repo1> <repo2> ... <repon>]\n"
+"\n"
+"<repoi>: nombre repositorio\n"
+"\n"
+"Sincroniza las bases de datos PiSi con los repositorios.\n"
+"Si no se especifica un repositorio, se actualizarán todos los repositorios.\n"
 
 #: pisi/cli/updaterepo.py:42
 msgid "update-repo options"
@@ -1568,6 +1746,22 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
+"Actualizar los paquetes PiSi\n"
+"\n"
+"Uso: Upgrade [<package1> <package2> ... <packagen>]\n"
+"\n"
+"<packagei>: nombre paquete\n"
+"\n"
+"Actualiza todo el sistema, si no se indica un nombre de paquete.\n"
+"\n"
+"Solo debe utilizar nombres de paquetes para indicar los paquetes\n"
+"porque la opción de actualización hace referencia a los paquetes en \n"
+"los repositorios. Los nombres de paquetes deben \n"
+"existir en los repositorios de paquetes. Si solamente quiere volver \n"
+"a instalar un paquete de un archivo PiSi, use simplemente el comando install.\n"
+"\n"
+"También puede especificar componentes en lugar de nombres de paquetes, que \n"
+"se expanderán a nombres de paquetes.\n"
 
 #: pisi/cli/upgrade.py:53
 msgid "upgrade options"
@@ -1843,9 +2037,8 @@ msgid "Encountered cycle %s"
 msgstr "Encontrado ciclo (cycle) %s"
 
 #: pisi/history.py:44
-#, fuzzy
 msgid "%s repository is updated."
-msgstr "Información de repositorio %s está actualizado."
+msgstr "Repositorio %s está actualizado."
 
 #: pisi/history.py:64
 msgid "%s is upgraded from %s to %s with delta."
@@ -1920,8 +2113,7 @@ msgstr "Generando paquete fuente PiSi: %s"
 
 #: pisi/operations/build.py:235
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr ""
-"IceCream detectado. Asegúrese que el demónio está activo y funcionando..."
+msgstr "IceCream detectado. Asegúrese que el demónio está activo y funcionando..."
 
 #: pisi/operations/build.py:240
 msgid "CCache detected..."
@@ -2012,8 +2204,7 @@ msgstr "no posible llamar función desde acciones: %s"
 
 # did I get "safety switch" right (in this context)?
 #: pisi/operations/build.py:499
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Verificación de seguridad: Se instalarán los siguientes paquetes adicionales "
 "en system.devel:"
@@ -2024,8 +2215,7 @@ msgstr "Verificación de seguridad: system.devel ya está instalado"
 
 #: pisi/operations/build.py:506
 msgid "Safety switch: the component system.devel cannot be found"
-msgstr ""
-"Verificación de seguridad: No posible encontrar el componente system.devel"
+msgstr "Verificación de seguridad: No posible encontrar el componente system.devel"
 
 # satisfechas - entiendo que se refiere a librerias necesarias para hacer el proceso build
 # quizá hay mejor manera de decirlo en español
@@ -2079,8 +2269,7 @@ msgstr "(no se encontró build anterior, estableciendo número de build a 1.)"
 
 #: pisi/operations/build.py:793
 msgid "(old package lacks a build no, setting build no to 1.)"
-msgstr ""
-"(paquete antiguo no tiene número de build, seteando número de build a 1.)"
+msgstr "(paquete antiguo no tiene número de build, seteando número de build a 1.)"
 
 #: pisi/operations/build.py:796
 msgid "There are changes, incrementing build no to %d"
@@ -2129,8 +2318,7 @@ msgstr "Archivos abandonados en carpeta de instalación (%s):"
 
 # revisa este por favor
 #: pisi/operations/build.py:958
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Todos los archivos de la carpeta de instalación (%s) se juntaron en los "
 "paquetes"
@@ -2264,8 +2452,7 @@ msgstr ""
 msgid ""
 "The following package(s) are already installed and are not going to be "
 "installed again:\n"
-msgstr ""
-"Los siguientes paquetes ya están instalados y no se instalarán de nuevo:\n"
+msgstr "Los siguientes paquetes ya están instalados y no se instalarán de nuevo:\n"
 
 #: pisi/operations/install.py:50 pisi/operations/install.py:171
 msgid "No packages to install."
@@ -2289,8 +2476,7 @@ msgstr "Instalado %d / %d"
 
 #: pisi/operations/install.py:110
 msgid "Mixing file names and package names not supported yet."
-msgstr ""
-"Mezclando nombres de archivos y nombres de paquetes actualmente no soportado."
+msgstr "Mezclando nombres de archivos y nombres de paquetes actualmente no soportado."
 
 #: pisi/operations/install.py:150
 msgid "External dependencies not satisfied: %s"
@@ -2321,8 +2507,7 @@ msgstr ""
 # should this say in english ? "Safety switch: the component cannot be found in system.base" ?? (i did in spanish like this)
 #: pisi/operations/remove.py:48 pisi/operations/upgrade.py:251
 msgid "Safety switch: the component system.base cannot be found"
-msgstr ""
-"Verificación de seguridad: No posible encontrar el componente system.base: "
+msgstr "Verificación de seguridad: No posible encontrar el componente system.base: "
 
 #: pisi/operations/remove.py:55
 msgid "Package %s does not exist. Cannot remove."
@@ -2649,8 +2834,7 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 "Desarrollador '%s <%s>' tiene otra dirección email '%s' en archivo fuente '%"
 "s'"
@@ -2678,3 +2862,4 @@ msgstr "Buscando en repositorio de fuentes...\n"
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr "Buscando paquetes binarios...\n"
+
