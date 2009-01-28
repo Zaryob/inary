@@ -11,6 +11,7 @@
 
 # standard python modules
 import os
+import glob
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -53,12 +54,14 @@ def install(parameters = ''):
     if system('python setup.py install --root=%s --no-compile -O0 %s' % (get.installDIR(), parameters)):
         raise InstallError, _('Install failed.')
 
-    DDOCS = 'CHANGELOG COPYRIGHT KNOWN_BUGS MAINTAINERS PKG-INFO AUTHORS \
-             CONTRIBUTORS LICENSE COPYING* Change* MANIFEST* README*'
+    docFiles = ('AUTHORS', 'CHANGELOG', 'CONTRIBUTORS', 'COPYING*', 'COPYRIGHT',
+                'Change*', 'KNOWN_BUGS', 'LICENSE', 'MAINTAINERS', 'NEWS',
+                'README*', 'PKG-INFO')
 
-    for doc in DDOCS.split():
-        if can_access_file(doc) and not isEmpty(doc):
-            dodoc(doc)
+    for docGlob in docFiles:
+        for doc in glob.glob(docGlob):
+            if can_access_file(doc) and not isEmpty(doc):
+                dodoc(doc)
 
 def run(parameters = ''):
     '''executes parameters with python'''
