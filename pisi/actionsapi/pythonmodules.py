@@ -60,7 +60,7 @@ def install(parameters = ''):
 
     for docGlob in docFiles:
         for doc in glob.glob(docGlob):
-            if can_access_file(doc) and not isEmpty(doc):
+            if not isEmpty(doc):
                 dodoc(doc)
 
 def run(parameters = ''):
