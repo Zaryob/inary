@@ -625,7 +625,7 @@ def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=F
 
 @locked
 def add_repo(name, indexuri, at = None):
-    if not re.match("^[a-zA-Z0-9\\-\\_\\.]*$", name):
+    if not re.match("^[%s\\-\\_\\.\s]*$" % str(pisi.util.letters()), name):
         raise pisi.Error(_('Not a valid repo name.'))
     repodb = pisi.db.repodb.RepoDB()
     if repodb.has_repo(name):

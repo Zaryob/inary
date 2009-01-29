@@ -13,6 +13,7 @@
 """misc. utility functions, including process and file utils"""
 
 # standard python modules
+
 import os
 import re
 import sys
@@ -22,6 +23,7 @@ import string
 import statvfs
 import operator
 import subprocess
+import unicodedata
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -673,3 +675,23 @@ def config_changed(config_file):
             if pisi.util.sha1_file(fpath) != config_file.hash:
                 return True
     return False
+
+# Python regex sucks
+# http://mail.python.org/pipermail/python-list/2009-January/523704.html
+def letters():
+    start = end = None
+    result = []
+    for index in xrange(sys.maxunicode + 1):
+        c = unichr(index)
+        if unicodedata.category(c)[0] == 'L':
+            if start is None:
+                start = end = c
+            else:
+                end = c
+        elif start:
+            if start == end:
+                result.append(start)
+            else:
+                result.append(start + "-" + end)
+            start = None
+    return ''.join(result)
