@@ -1,3 +1,6 @@
+2009-02-01 Ozan Çağlayan <ozan@pardus.org.tr>
+        * pisi/metadata.py (Package.__str__): Use human_readable_size() to output installed size.
+
 2009-01-28 Fatih Aşıcı <fatih@pardus.org.tr>
         * Fix auto-dodoc in pythonmodules to include ChangeLog, README, etc.
 
