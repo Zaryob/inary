@@ -29,7 +29,7 @@ import pisi.util as util
 
 class Delta:
     __metaclass__ = autoxml.autoxml
-    
+
     t_PackageURI = [ autoxml.String, autoxml.optional]
     t_PackageSize = [ autoxml.Long, autoxml.optional]
     t_PackageHash = [ autoxml.String, autoxml.optional, "SHA1Sum" ]
@@ -71,10 +71,13 @@ class Package(specfile.Package, xmlfile.XmlFile):
 
     def __str__(self):
         s = specfile.Package.__str__(self)
+        i_size = util.human_readable_size(self.installedSize)
+        size = "%.2f %s" % (i_size[0], i_size[1])
+
         s += _('Distribution: %s, Dist. Release: %s\n') % \
               (self.distribution, self.distributionRelease)
         s += _('Architecture: %s, Installed Size: %s') % \
-            (self.architecture, self.installedSize)
+              (self.architecture, size)
         return s
 
 class MetaData(xmlfile.XmlFile):
