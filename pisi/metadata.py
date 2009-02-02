@@ -78,6 +78,12 @@ class Package(specfile.Package, xmlfile.XmlFile):
               (self.distribution, self.distributionRelease)
         s += _('Architecture: %s, Installed Size: %s') % \
               (self.architecture, size)
+
+        if self.packageSize:
+            p_size = util.human_readable_size(self.packageSize)
+            size = "%.2f %s" % (p_size[0], p_size[1])
+            s += _(', Package Size: %s') % size
+
         return s
 
 class MetaData(xmlfile.XmlFile):
