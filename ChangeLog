@@ -1,13 +1,26 @@
+2009-02-02 Faik Uygur <faik@pardus.org.tr>
+        * Add human readable package size info to pisi info output. (#8845)
+        * Speed up finding old packages process. (#9101)
+
 2009-02-01 Ozan Çağlayan <ozan@pardus.org.tr>
         * pisi/metadata.py (Package.__str__): Use human_readable_size() to output installed size.
 
+2009-01-29 Faik Uygur <faik@pardus.org.tr>
+        * Fix not allowing local letters other than [a-zA-Z] and space for repo names (#8361)
+
 2009-01-28 Fatih Aşıcı <fatih@pardus.org.tr>
         * Fix auto-dodoc in pythonmodules to include ChangeLog, README, etc.
+
+2009-01-27 Faik Uygur <faik@pardus.org.tr>
+        * When a takeback operation is accepted there should be no other question (#8811)
+        * Make pisi help command outputs translatable (#9089)
+        * Add list_sources method to pisi api.
 
 2009-01-26 Faik Uygur <faik@pardus.org.tr>
         * When pisi fails to download the package raise an error and exit. This is needed when
         pisi is behind a proxy with some virus control mechanism that sends a html status page
         instead of the package file. (#4113)
+        * Add -x and --exclude-from packages parameters to install operation. (#9020)
 
 2009-01-23 Faik Uygur <faik@pardus.org.tr>
         * Fix a critical regression bug which prevents an upgrade operation (#9038)
