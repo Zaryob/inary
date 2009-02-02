@@ -709,7 +709,8 @@ class Builder:
         # find previous build in packages dir
         found = set()
         def locate_old_package(old_package_fn):
-            if not old_package_fn.endswith(ctx.const.package_suffix):
+            if not old_package_fn.endswith(ctx.const.package_suffix) or \
+                    old_package_fn.endswith(ctx.const.delta_package_suffix):
                 return
 
             if pisi.util.is_package_name(os.path.basename(old_package_fn), package_name):
