@@ -709,20 +709,15 @@ class Builder:
         # find previous build in packages dir
         found = set()
         def locate_old_package(old_package_fn):
-            if not old_package_fn.endswith(ctx.const.package_suffix) or \
-                    old_package_fn.endswith(ctx.const.delta_package_suffix):
+            if not old_package_fn.endswith(ctx.const.package_suffix):
                 return
 
             if pisi.util.is_package_name(os.path.basename(old_package_fn), package_name):
                 try:
-                    old_pkg = pisi.package.Package(old_package_fn, 'r')
-                    old_pkg.read()
+                    pkg = os.path.basename(old_package_fn)
+                    name, version = pisi.util.parse_package_name(pkg[:-5])
                     ctx.ui.info(_('(found old version %s)') % old_package_fn)
-                    if str(old_pkg.metadata.package.name) != package_name:
-                        ctx.ui.warning(_('Skipping %s with wrong pkg name ') %
-                                                old_package_fn)
-                        return
-                    old_build = old_pkg.metadata.package.build
+                    old_build = int(str(pisi.version.Version(version).build))
                     found.add( (old_package_fn, old_build) )
                 except Error:
                     ctx.ui.warning('Package file %s may be corrupt. Skipping.' % old_package_fn)
@@ -747,7 +742,7 @@ class Builder:
             return (1, None)
             ctx.ui.warning(_('(no previous build found, setting build no to 1.)'))
         else:
-            a = filter(lambda (x,y): y != None, found)
+            a = filter(lambda (x,y): y != 0, found)
             ctx.ui.debug(str(a))
             if a:
                 # sort in order of increasing build number
