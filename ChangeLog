@@ -1,3 +1,9 @@
+2009-02-04 Ozan Çağlayan <ozan@pardus.org.tr>
+        * po/*.po: Update PO messages, fix bugzilla url,
+        * po/tr.po: Complete missing translations.
+        * pisi/cli/listupgrades.py (run): Return if there are no updates, resize the first column of the output.
+        * pisi/cli/listnewest.py (run): No need to double check for 'l' before the assignment of maxlen.
+
 2009-02-02 Faik Uygur <faik@pardus.org.tr>
         * Add human readable package size info to pisi info output. (#8845)
         * Speed up finding old packages process. (#9101)

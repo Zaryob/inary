@@ -67,8 +67,13 @@ Lists the packages that will be upgraded.
 
         if not upgradable_pkgs:
             ctx.ui.info(_('No packages to upgrade.'))
+            return
 
         upgradable_pkgs.sort()
+
+        # Resize the first column according to the longest package name
+        maxlen = max([len(_p) for _p in upgradable_pkgs])
+
         if self.options.install_info:
             ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
             print         '========================================================================'
@@ -81,4 +86,5 @@ Lists the packages that will be upgraded.
             elif self.options.install_info:
                 ctx.ui.info('%-15s | %s ' % (package.name, inst_info.one_liner()))
             else:
-                ctx.ui.info('%15s - %s ' % (package.name, package.summary))
+                package.name = package.name + ' ' * (maxlen - len(package.name))
+                ctx.ui.info('%s - %s' % (package.name, unicode(package.summary)))

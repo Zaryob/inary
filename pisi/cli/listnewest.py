@@ -79,8 +79,7 @@ packages from all repositories.
             ctx.ui.info(_("Packages added to %s:") % (repo))
 
         # maxlen is defined dynamically from the longest package name (#9021)
-        if l:
-            maxlen = max([len(_p) for _p in l])
+        maxlen = max([len(_p) for _p in l])
 
         l.sort()
         for p in l:
