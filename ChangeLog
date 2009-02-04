@@ -1,3 +1,10 @@
+2009-02-04 Faik Uygur <faik@pardus.org.tr>
+        * Add --repository parameter to pisi upgrade operation to upgrade packages from only
+        given repository (#6157)
+        * Add activate/deactive repository functionality to pisi api
+        * Add --repository parameter to use with --component parameter which lets pisi install
+        operation to install components from only given repository (#8123)
+
 2009-02-04 Ozan Çağlayan <ozan@pardus.org.tr>
         * po/*.po: Update PO messages, fix bugzilla url,
         * po/tr.po: Complete missing translations.
