@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
-"POT-Creation-Date: 2009-01-27 11:26+EET\n"
+"POT-Creation-Date: 2009-02-04 12:38+EET\n"
 "PO-Revision-Date: 2009-01-14 18:34+0100\n"
 "Last-Translator: Willem Gielen <w.gielen@gmail.com>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
@@ -29,12 +29,13 @@ msgid "Program Terminated."
 msgstr "Programma beëindigd."
 
 #: pisi-cli:48
+#, fuzzy
 msgid ""
 "Unhandled internal exception.\n"
-"Please file a bug report. (http://bugs.uludag.org.tr)"
+"Please file a bug report. (http://bugs.pardus.org.tr)"
 msgstr ""
 "Onhandelbare interne uitzondering.\n"
-"Rapporteer deze fout alstublieft. (http://bugs.uludag.org.tr)"
+"Rapporteer deze fout alstublieft. (http://bugs.pardus.org.tr)"
 
 #: pisi-cli:54
 msgid "System Error. Program Terminated."
@@ -75,7 +76,7 @@ msgstr "Geen configuratiescript gevonden."
 
 #: pisi/actionsapi/autotools.py:99 pisi/actionsapi/cmaketools.py:79
 #: pisi/actionsapi/kde.py:72 pisi/actionsapi/perlmodules.py:63
-#: pisi/actionsapi/perlmodules.py:72 pisi/actionsapi/pythonmodules.py:49
+#: pisi/actionsapi/perlmodules.py:72 pisi/actionsapi/pythonmodules.py:50
 #: pisi/actionsapi/scons.py:39
 msgid "Make failed."
 msgstr "Make mislukt."
@@ -83,7 +84,7 @@ msgstr "Make mislukt."
 # pisi/actionsapi/autotools.py:119 :127
 #: pisi/actionsapi/autotools.py:127 pisi/actionsapi/autotools.py:138
 #: pisi/actionsapi/cmaketools.py:109 pisi/actionsapi/cmaketools.py:119
-#: pisi/actionsapi/kde.py:79 pisi/actionsapi/pythonmodules.py:54
+#: pisi/actionsapi/kde.py:79 pisi/actionsapi/pythonmodules.py:55
 #: pisi/actionsapi/scons.py:43
 msgid "Install failed."
 msgstr "Install mislukt."
@@ -219,7 +220,7 @@ msgstr "Onvoldoende parameters."
 msgid "No executable file matched pattern \"%s\"."
 msgstr "Geen uitvoerbare bestanden komen overeen met patroon \"%s\"."
 
-#: pisi/actionsapi/pythonmodules.py:66
+#: pisi/actionsapi/pythonmodules.py:69
 msgid "Running %s failed."
 msgstr "Uitvoeren %s mislukt"
 
@@ -1267,7 +1268,7 @@ msgid "Show detailed install info"
 msgstr "Toon gedetailleerde installatie-informatie"
 
 # pisi/cli/commands.py:542 :729
-#: pisi/cli/listinstalled.py:76 pisi/cli/listupgrades.py:73
+#: pisi/cli/listinstalled.py:76 pisi/cli/listupgrades.py:78
 msgid ""
 "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
 msgstr "Pakketnaam     |St|   Versie|  Rel.| Bouw |  Distro|             Datum"
@@ -1852,13 +1853,18 @@ msgstr "Pakket %s: metadata is corrupt, wordt overgeslagen..."
 msgid "Adding %s to source index"
 msgstr "Toevoegen %s aan bronindex"
 
-#: pisi/metadata.py:74
+#: pisi/metadata.py:77
 msgid "Distribution: %s, Dist. Release: %s\n"
 msgstr "Distributie: %s, distributie-uitgave: %s\n"
 
-#: pisi/metadata.py:76
+#: pisi/metadata.py:79
 msgid "Architecture: %s, Installed Size: %s"
 msgstr "Architectuur: %s, installatiegrootte: %s"
+
+#: pisi/metadata.py:85
+#, fuzzy
+msgid ", Package Size: %s"
+msgstr "Pakketbestand: %s"
 
 #: pisi/mirrors.py:46
 msgid "Mirrors file %s does not exist. Could not resolve mirrors://"
@@ -2023,44 +2029,40 @@ msgstr "Strippen bestanden..."
 msgid "(found old version %s)"
 msgstr "(gevonden oude versie %s)"
 
-#: pisi/operations/build.py:722
-msgid "Skipping %s with wrong pkg name "
-msgstr "Overslaan %s met onjuiste pakketnaam"
-
-#: pisi/operations/build.py:748
+#: pisi/operations/build.py:744
 msgid "(no previous build found, setting build no to 1.)"
 msgstr "(geen eerdere bouw gevonden, zet bouwnummer op 1.)"
 
-#: pisi/operations/build.py:793
+#: pisi/operations/build.py:789
 msgid "(old package lacks a build no, setting build no to 1.)"
 msgstr "(oud pakket heeft geen bouwnummer, zet compilatienummer op 1.)"
 
-#: pisi/operations/build.py:796
+#: pisi/operations/build.py:792
 msgid "There are changes, incrementing build no to %d"
 msgstr "Er zijn wijzigingen, zet bouwnummer op %d "
 
-#: pisi/operations/build.py:799
+#: pisi/operations/build.py:795
 msgid "There is no change from previous build %d"
 msgstr "Er zijn geen wijzigingen sinds vorige bouw %d"
 
-#: pisi/operations/build.py:864
+#: pisi/operations/build.py:860
 msgid "No user named '%s' found on the system"
 msgstr "Geen gebruiker met de naam '%s' gevonden op het systeem"
 
-#: pisi/operations/build.py:869
+#: pisi/operations/build.py:865
 msgid "No group named '%s' found on the system"
 msgstr "Geen groep met de naam '%s' gevonden op het systeem"
 
-#: pisi/operations/build.py:872
+#: pisi/operations/build.py:868
 msgid "** Building package %s"
 msgstr "** bouwen pakket %s"
 
 # pisi/build.py:503 :506
-#: pisi/operations/build.py:874 pisi/operations/build.py:877
+#: pisi/operations/build.py:870 pisi/operations/build.py:873
 msgid "Generating %s,"
 msgstr "Genereren %s."
 
-#: pisi/operations/build.py:883
+#: pisi/operations/build.py:879
 msgid ""
 "Build number is not available. For repo builds you must enable buildno in "
 "pisi.conf."
@@ -2068,29 +2070,29 @@ msgstr ""
 "Bouwnummer is niet aanwezig. Bij repo-compilaties moet u buildno inschakelen "
 "in pisi.conf."
 
-#: pisi/operations/build.py:903
+#: pisi/operations/build.py:899
 msgid "Creating PiSi package %s."
 msgstr "Aanmaken PiSi-pakket %s."
 
-#: pisi/operations/build.py:948 pisi/operations/delta.py:93
+#: pisi/operations/build.py:944 pisi/operations/delta.py:93
 msgid "Done."
 msgstr "Gereed."
 
-#: pisi/operations/build.py:954
+#: pisi/operations/build.py:950
 msgid "Abandoned files under the install dir (%s):"
 msgstr "Verlaten bestanden in de installatiemap (%s):"
 
-#: pisi/operations/build.py:958
+#: pisi/operations/build.py:954
 msgid ""
 "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)."
 
-#: pisi/operations/build.py:962
+#: pisi/operations/build.py:958
 msgid "Cleaning Build Directory..."
 msgstr "Opschonen bouwmap..."
 
-#: pisi/operations/build.py:965
+#: pisi/operations/build.py:961
 msgid "Keeping Build Directory"
 msgstr "Behouden bouwmap"
 
@@ -2532,47 +2534,47 @@ msgstr "Bouw afhankelijkheden: "
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr "setAuthInfo heeft een unieke relatie nodig  (gebruiker, wachtwoord)"
 
-#: pisi/util.py:122 pisi/util.py:143
+#: pisi/util.py:124 pisi/util.py:145
 msgid "Running "
 msgstr "Actief "
 
-#: pisi/util.py:126 pisi/util.py:161
+#: pisi/util.py:128 pisi/util.py:163
 msgid "return value for \"%s\" is %s"
 msgstr "return-waarde voor \"%s\" is %s"
 
-#: pisi/util.py:324
+#: pisi/util.py:326
 msgid "Including external link '%s'"
 msgstr "Bijsluiten externe koppeling '%s'"
 
-#: pisi/util.py:326
+#: pisi/util.py:328
 msgid "Including directory '%s'"
 msgstr "Bijsluiten map '%s'"
 
-#: pisi/util.py:412
+#: pisi/util.py:414
 msgid "Cannot calculate SHA1 hash of %s"
 msgstr "Kan SHA1 hash niet berekenen uit %s"
 
-#: pisi/util.py:467
+#: pisi/util.py:469
 msgid "ERROR: patch (%s) failed"
 msgstr "Fout: patch (%s) mislukt"
 
-#: pisi/util.py:469
+#: pisi/util.py:471
 msgid "ERROR: patch (%s) failed: %s"
 msgstr "Fout: patch (%s) mislukt: %s"
 
-#: pisi/util.py:516
+#: pisi/util.py:518
 msgid "strip command failed for file '%s'!"
 msgstr "Commando 'strip' mislukte voor bestand '%s'!"
 
-#: pisi/util.py:523
+#: pisi/util.py:525
 msgid "chrpath command failed for file '%s'!"
 msgstr "chrpath commando 'mislukte voor bestand '%s'!"
 
-#: pisi/util.py:530
+#: pisi/util.py:532
 msgid "objcopy (keep-debug) command failed for file '%s'!"
 msgstr "Commando 'objcopy' (keep-debug) mislukte voor bestand '%s'!"
 
-#: pisi/util.py:536
+#: pisi/util.py:538
 msgid "objcopy (add-debuglink) command failed for file '%s'!"
 msgstr "Commando 'objcopy' (add-debuglink)  mislukte voor bestand '%s'!"
 
@@ -2625,3 +2627,6 @@ msgstr "Scannen bron-repository...\n"
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr "Scannen binaire pakketten...\n"
+
+#~ msgid "Skipping %s with wrong pkg name "
+#~ msgstr "Overslaan %s met onjuiste pakketnaam"

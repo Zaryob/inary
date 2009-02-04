@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-27 11:26+EET\n"
+"POT-Creation-Date: 2009-02-04 12:38+EET\n"
 "PO-Revision-Date: 2006-04-08 12:19+0900\n"
 "Last-Translator: Piotr Maliński <riklaunim@gmail.com>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -19,12 +19,13 @@ msgid "Program Terminated."
 msgstr "Program Zakończony."
 
 #: pisi-cli:48
+#, fuzzy
 msgid ""
 "Unhandled internal exception.\n"
-"Please file a bug report. (http://bugs.uludag.org.tr)"
+"Please file a bug report. (http://bugs.pardus.org.tr)"
 msgstr ""
 "Nieobsłużony wewnętrzny błąd.\n"
-"Prosimy zgłosić błąd. (http://bugs.uludag.org.tr)"
+"Prosimy zgłosić błąd. (http://bugs.pardus.org.tr)"
 
 #: pisi-cli:54
 msgid "System Error. Program Terminated."
@@ -63,14 +64,14 @@ msgstr "Nie znaleziono skryptu konfiguracji."
 
 #: pisi/actionsapi/autotools.py:99 pisi/actionsapi/cmaketools.py:79
 #: pisi/actionsapi/kde.py:72 pisi/actionsapi/perlmodules.py:63
-#: pisi/actionsapi/perlmodules.py:72 pisi/actionsapi/pythonmodules.py:49
+#: pisi/actionsapi/perlmodules.py:72 pisi/actionsapi/pythonmodules.py:50
 #: pisi/actionsapi/scons.py:39
 msgid "Make failed."
 msgstr "Make nie powiódł się."
 
 #: pisi/actionsapi/autotools.py:127 pisi/actionsapi/autotools.py:138
 #: pisi/actionsapi/cmaketools.py:109 pisi/actionsapi/cmaketools.py:119
-#: pisi/actionsapi/kde.py:79 pisi/actionsapi/pythonmodules.py:54
+#: pisi/actionsapi/kde.py:79 pisi/actionsapi/pythonmodules.py:55
 #: pisi/actionsapi/scons.py:43
 msgid "Install failed."
 msgstr "Instalacja nie powiodła się."
@@ -201,7 +202,7 @@ msgstr "Niewystarczająca liczba argumentów."
 msgid "No executable file matched pattern \"%s\"."
 msgstr ""
 
-#: pisi/actionsapi/pythonmodules.py:66
+#: pisi/actionsapi/pythonmodules.py:69
 msgid "Running %s failed."
 msgstr "Uruchomienie %s nie powiodło się."
 
@@ -1239,7 +1240,7 @@ msgstr ""
 msgid "Show detailed install info"
 msgstr ""
 
-#: pisi/cli/listinstalled.py:76 pisi/cli/listupgrades.py:73
+#: pisi/cli/listinstalled.py:76 pisi/cli/listupgrades.py:78
 msgid ""
 "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
 msgstr ""
@@ -1819,13 +1820,18 @@ msgstr ""
 msgid "Adding %s to source index"
 msgstr ""
 
-#: pisi/metadata.py:74
+#: pisi/metadata.py:77
 msgid "Distribution: %s, Dist. Release: %s\n"
 msgstr ""
 
-#: pisi/metadata.py:76
+#: pisi/metadata.py:79
 msgid "Architecture: %s, Installed Size: %s"
 msgstr ""
+
+#: pisi/metadata.py:85
+#, fuzzy
+msgid ", Package Size: %s"
+msgstr "URI pakietu: %s"
 
 #: pisi/mirrors.py:46
 msgid "Mirrors file %s does not exist. Could not resolve mirrors://"
@@ -1992,72 +1998,68 @@ msgstr "Odchudzam pliki..."
 msgid "(found old version %s)"
 msgstr "(znaleziono starszą wersję %s)"
 
-#: pisi/operations/build.py:722
-msgid "Skipping %s with wrong pkg name "
-msgstr "Pomijam %s ze złą nazwą pakietu "
-
-#: pisi/operations/build.py:748
+#: pisi/operations/build.py:744
 msgid "(no previous build found, setting build no to 1.)"
 msgstr ""
 "(nie znaleziono wcześniejszych wersji build, ustalam numer wesji na 1.)"
 
-#: pisi/operations/build.py:793
+#: pisi/operations/build.py:789
 msgid "(old package lacks a build no, setting build no to 1.)"
 msgstr ""
 "(w starszych paczkach brakuje numeru wersji build, ustalan numer na 1.)"
 
-#: pisi/operations/build.py:796
+#: pisi/operations/build.py:792
 msgid "There are changes, incrementing build no to %d"
 msgstr "Są zmiany, inkrementuje numer wersji build do %d"
 
-#: pisi/operations/build.py:799
+#: pisi/operations/build.py:795
 msgid "There is no change from previous build %d"
 msgstr "Brak zmian względem wcześniejszej wersji build %d"
 
-#: pisi/operations/build.py:864
+#: pisi/operations/build.py:860
 msgid "No user named '%s' found on the system"
 msgstr "W systemie nie znaleziono użytkownika o nazwie '%s'"
 
-#: pisi/operations/build.py:869
+#: pisi/operations/build.py:865
 msgid "No group named '%s' found on the system"
 msgstr "W systemie nie znaleziono grupy o nazwie '%s'"
 
-#: pisi/operations/build.py:872
+#: pisi/operations/build.py:868
 msgid "** Building package %s"
 msgstr "** Budowanie pakietu %s"
 
-#: pisi/operations/build.py:874 pisi/operations/build.py:877
+#: pisi/operations/build.py:870 pisi/operations/build.py:873
 msgid "Generating %s,"
 msgstr "Generowanie %s,"
 
-#: pisi/operations/build.py:883
+#: pisi/operations/build.py:879
 msgid ""
 "Build number is not available. For repo builds you must enable buildno in "
 "pisi.conf."
 msgstr ""
 
-#: pisi/operations/build.py:903
+#: pisi/operations/build.py:899
 msgid "Creating PiSi package %s."
 msgstr ""
 
-#: pisi/operations/build.py:948 pisi/operations/delta.py:93
+#: pisi/operations/build.py:944 pisi/operations/delta.py:93
 msgid "Done."
 msgstr ""
 
-#: pisi/operations/build.py:954
+#: pisi/operations/build.py:950
 msgid "Abandoned files under the install dir (%s):"
 msgstr ""
 
-#: pisi/operations/build.py:958
+#: pisi/operations/build.py:954
 msgid ""
 "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 
-#: pisi/operations/build.py:962
+#: pisi/operations/build.py:958
 msgid "Cleaning Build Directory..."
 msgstr ""
 
-#: pisi/operations/build.py:965
+#: pisi/operations/build.py:961
 msgid "Keeping Build Directory"
 msgstr ""
 
@@ -2470,47 +2472,47 @@ msgstr "Niespełnione zależoności budowy"
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr ""
 
-#: pisi/util.py:122 pisi/util.py:143
+#: pisi/util.py:124 pisi/util.py:145
 msgid "Running "
 msgstr ""
 
-#: pisi/util.py:126 pisi/util.py:161
+#: pisi/util.py:128 pisi/util.py:163
 msgid "return value for \"%s\" is %s"
 msgstr ""
 
-#: pisi/util.py:324
+#: pisi/util.py:326
 msgid "Including external link '%s'"
 msgstr ""
 
-#: pisi/util.py:326
+#: pisi/util.py:328
 msgid "Including directory '%s'"
 msgstr ""
 
-#: pisi/util.py:412
+#: pisi/util.py:414
 msgid "Cannot calculate SHA1 hash of %s"
 msgstr ""
 
-#: pisi/util.py:467
+#: pisi/util.py:469
 msgid "ERROR: patch (%s) failed"
 msgstr ""
 
-#: pisi/util.py:469
+#: pisi/util.py:471
 msgid "ERROR: patch (%s) failed: %s"
 msgstr ""
 
-#: pisi/util.py:516
+#: pisi/util.py:518
 msgid "strip command failed for file '%s'!"
 msgstr ""
 
-#: pisi/util.py:523
+#: pisi/util.py:525
 msgid "chrpath command failed for file '%s'!"
 msgstr ""
 
-#: pisi/util.py:530
+#: pisi/util.py:532
 msgid "objcopy (keep-debug) command failed for file '%s'!"
 msgstr ""
 
-#: pisi/util.py:536
+#: pisi/util.py:538
 msgid "objcopy (add-debuglink) command failed for file '%s'!"
 msgstr ""
 
@@ -2554,6 +2556,9 @@ msgstr ""
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr ""
+
+#~ msgid "Skipping %s with wrong pkg name "
+#~ msgstr "Pomijam %s ze złą nazwą pakietu "
 
 #~ msgid "* Rebuilding '%s' named repo... "
 #~ msgstr "* Przebudowywanie repozytorium o nazwie '%s'... "

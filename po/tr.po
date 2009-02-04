@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2009-01-27 11:26+EET\n"
+"POT-Creation-Date: 2009-02-04 12:38+EET\n"
 "PO-Revision-Date: 2008-12-01 11:40+0200\n"
 "Last-Translator: Faik Uygur <faik@pardus.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
@@ -21,23 +21,24 @@ msgstr ""
 
 #: pisi-cli:41
 msgid "Keyboard Interrupt: Exiting..."
-msgstr "Klavye kesmesi: Çıkıyor..."
+msgstr "Klavye kesmesi: Program sonlandırılıyor.."
 
 #: pisi-cli:44
 msgid "Program Terminated."
 msgstr "Program sonlandırıldı."
 
 #: pisi-cli:48
+#, fuzzy
 msgid ""
 "Unhandled internal exception.\n"
-"Please file a bug report. (http://bugs.uludag.org.tr)"
+"Please file a bug report. (http://bugs.pardus.org.tr)"
 msgstr ""
 "Eksik hata denetlemesi.\n"
-"Lütfen bir hata raporu bildiriniz. (http://bugs.uludag.org.tr)"
+"Lütfen bir hata raporu bildiriniz. (http://hata.pardus.org.tr)"
 
 #: pisi-cli:54
 msgid "System Error. Program Terminated."
-msgstr "Sistem Hatası: Program Sonlandırıldı. "
+msgstr "Sistem Hatası: Program Sonlandırıldı."
 
 #: pisi-cli:61
 msgid "Please use 'pisi help' for general help."
@@ -75,7 +76,7 @@ msgstr "Yapılandırma betiği bulunamadı."
 
 #: pisi/actionsapi/autotools.py:99 pisi/actionsapi/cmaketools.py:79
 #: pisi/actionsapi/kde.py:72 pisi/actionsapi/perlmodules.py:63
-#: pisi/actionsapi/perlmodules.py:72 pisi/actionsapi/pythonmodules.py:49
+#: pisi/actionsapi/perlmodules.py:72 pisi/actionsapi/pythonmodules.py:50
 #: pisi/actionsapi/scons.py:39
 msgid "Make failed."
 msgstr "İnşa başarısızlığa uğradı."
@@ -83,7 +84,7 @@ msgstr "İnşa başarısızlığa uğradı."
 # pisi/actionsapi/autotools.py:119 :127
 #: pisi/actionsapi/autotools.py:127 pisi/actionsapi/autotools.py:138
 #: pisi/actionsapi/cmaketools.py:109 pisi/actionsapi/cmaketools.py:119
-#: pisi/actionsapi/kde.py:79 pisi/actionsapi/pythonmodules.py:54
+#: pisi/actionsapi/kde.py:79 pisi/actionsapi/pythonmodules.py:55
 #: pisi/actionsapi/scons.py:43
 msgid "Install failed."
 msgstr "Kurulum başarısızlığa uğradı."
@@ -163,18 +164,16 @@ msgid "perl install failed."
 msgstr "perl kurma işlemi başarısızlığa uğgradı."
 
 #: pisi/actionsapi/pisitools.py:73 pisi/actionsapi/pisitools.py:130
-#, fuzzy
 msgid "No file matched pattern \"%s\""
-msgstr "ActionsAPI [chmod]: %s dosyası bulunamadı."
+msgstr "\"%s\" ile eşleşen bir dosya bulunamadı."
 
 #: pisi/actionsapi/pisitools.py:140
 msgid "ActionsAPI [doman]: Wrong man page file: %s"
 msgstr "ActionsAPI [doman]: Yanlış kılavuz sayfası dosyası: %s"
 
 #: pisi/actionsapi/pisitools.py:167
-#, fuzzy
 msgid "No file matched pattern \"%s\". 'domove' operation failed."
-msgstr "ActionsAPI [chmod]: %s dosyası bulunamadı."
+msgstr "\"%s\" ile eşleşen bir dosya bulunamadı. 'domove' işlemi başarısız."
 
 #: pisi/actionsapi/pisitools.py:186
 msgid "ActionsAPI [rename]: No such file or directory: %s"
@@ -182,11 +181,11 @@ msgstr "ActionsAPI [rename]: Böyle bir dosya ya da dizin bulunamadı: %s"
 
 #: pisi/actionsapi/pisitools.py:201
 msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
-msgstr ""
+msgstr "\"%s\" ile eşleşen bir dosya bulunamadı. 'dosed' işlemi başarısız."
 
 #: pisi/actionsapi/pisitools.py:214
 msgid "dosed method has not changed file '%s'."
-msgstr ""
+msgstr "dosed '%s' dosyasında bir değişiklik yapmadı."
 
 #: pisi/actionsapi/pisitools.py:218
 msgid "File does not exist or permission denied: %s"
@@ -198,30 +197,28 @@ msgstr "ActionsAPI [dosym]: %s dosyası sistemde var"
 
 #: pisi/actionsapi/pisitools.py:244 pisi/actionsapi/pisitoolsfunctions.py:71
 msgid "No file matched pattern \"%s\"."
-msgstr ""
+msgstr "\"%s\" ile eşleşen bir dosya bulunamadı."
 
 #: pisi/actionsapi/pisitools.py:271
-#, fuzzy
 msgid "No file matched pattern \"%s\". Remove operation failed."
-msgstr "ActionsAPI [chmod]: %s dosyası bulunamadı."
+msgstr "\"%s\" ile eşleşen bir dosya bulunamadı. 'remove' işlemi başarısız."
 
 #: pisi/actionsapi/pisitools.py:280
-#, fuzzy
 msgid "No directory matched pattern \"%s\". Remove directory operation failed."
-msgstr "ActionsAPI [chmod]: %s dosyası bulunamadı."
+msgstr "\"%s\" ile eşleşen bir dizin bulunamadı. 'removeDir' işlemi başarısız."
 
 # pisi/actionsapi/pisitoolsfunctions.py:46 :59
 #: pisi/actionsapi/pisitoolsfunctions.py:45
 #: pisi/actionsapi/pisitoolsfunctions.py:63
 #: pisi/actionsapi/pisitoolsfunctions.py:80
 msgid "Insufficient arguments."
-msgstr "Yetersiz argümanlar"
+msgstr "Yetersiz argüman."
 
 #: pisi/actionsapi/pisitoolsfunctions.py:53
 msgid "No executable file matched pattern \"%s\"."
-msgstr ""
+msgstr "\"%s\" ile eşleşen çalıştırılabilir bir dosya bulunamadı."
 
-#: pisi/actionsapi/pythonmodules.py:66
+#: pisi/actionsapi/pythonmodules.py:69
 msgid "Running %s failed."
 msgstr "%s çalıştırılamadı"
 
@@ -234,9 +231,8 @@ msgid "ActionsAPI [echo]: Can't append to file %s."
 msgstr "ActionsAPI [echo]: %s dosyasına eklenemiyor."
 
 #: pisi/actionsapi/shelltools.py:63
-#, fuzzy
 msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: %s dosyası bulunamadı."
+msgstr "ActionsAPI [chmod]: \"%s\" ile eşleşen bir dosya bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:70
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: %s)"
@@ -275,9 +271,8 @@ msgid "ActionsAPI [unlinkDir]: Directory %s doesn't exists."
 msgstr "ActionsAPI [unlinkDir]: %s dizini bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:121
-#, fuzzy
 msgid "ActionsAPI [move]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: %s dosyası bulunamadı."
+msgstr "ActionsAPI [move]: \"%s\" ile eşleşen bir dosya bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:128
 msgid "ActionsAPI [move]: Permission denied: %s to %s"
@@ -288,9 +283,8 @@ msgid "ActionsAPI [move]: File %s doesn't exists."
 msgstr "ActionsAPI [move]: %s dosyası bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:137
-#, fuzzy
 msgid "ActionsAPI [copy]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: %s dosyası bulunamadı."
+msgstr "ActionsAPI [copy]: \"%s\" ile eşleşen bir dosya bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:144
 msgid "ActionsAPI [copy]: Permission denied: %s to %s"
@@ -309,9 +303,8 @@ msgid "ActionsAPI [copytree]: Directory %s doesn't exists."
 msgstr "ActionsAPI [copytree]: %s dizini bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:185
-#, fuzzy
 msgid "ActionsAPI [touch]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: %s dosyası bulunamadı."
+msgstr "ActionsAPI [touch]: \"%s\" ile eşleşen bir dosya bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:194
 msgid "ActionsAPI [touch]: Permission denied: %s"
@@ -319,7 +312,7 @@ msgstr "ActionsAPI [touch]: Erişim engellendi: %s"
 
 #: pisi/actionsapi/shelltools.py:249
 msgid "Command \"%s\" failed, return value was %d."
-msgstr ""
+msgstr "\"%s\" komutu başarısız oldu, dönüş değeri: %d ."
 
 #: pisi/api.py:61 pisi/cli/command.py:167
 msgid "You have to be root for this operation."
@@ -719,11 +712,12 @@ msgid "* Checking %s... "
 msgstr "* %s kontrol ediliyor... "
 
 #: pisi/cli/check.py:78
-#, fuzzy
 msgid ""
 "\n"
 "Package %s has changed config files."
-msgstr "%s paketi içinde %s dosyası var"
+msgstr ""
+"\n"
+"%s paketine ait değiştirilmiş yapılandırma dosyaları var."
 
 #: pisi/cli/check.py:80
 msgid ""
@@ -739,7 +733,7 @@ msgstr "Tamam"
 
 #: pisi/cli/check.py:84
 msgid "Package %s not installed"
-msgstr "Paket %s kurulmamış"
+msgstr "%s paketi kurulmamış"
 
 #: pisi/cli/clean.py:20
 msgid ""
@@ -750,6 +744,12 @@ msgid ""
 "PiSi uses filesystem locks for managing database access.\n"
 "This command deletes unused locks from the database directory."
 msgstr ""
+"Kullanılmayan kilitleri temizle\n"
+"\n"
+"Kullanım: clean\n"
+"\n"
+"PiSi veritabı erişimini yönetmek için dosya kilitleri kullanır.\n"
+"Bu komut, kullanılmayan kilit dosyalarını veritabanı dizininden kaldırır."
 
 #: pisi/cli/command.py:30
 msgid "Command lacks name"
@@ -976,9 +976,8 @@ msgid "remove"
 msgstr "kaldır"
 
 #: pisi/cli/history.py:28
-#, fuzzy
 msgid "repository update"
-msgstr "Depo: %s\n"
+msgstr "depo güncellemesi"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1000,6 +999,11 @@ msgid ""
 "\n"
 "Lists previous operations."
 msgstr ""
+"pisi işlemlerinin günlüğü\n"
+"\n"
+"Kullanım: history\n"
+"\n"
+"Önceki işlemleri listeler."
 
 #: pisi/cli/history.py:47
 msgid "history options"
@@ -1175,22 +1179,18 @@ msgid "Fetch upgrades but do not install."
 msgstr "Yükseltilecekleri indir ama kurma"
 
 #: pisi/cli/install.py:61
-#, fuzzy
 msgid ""
 "When installing packages, ignore packages and components whose basenames "
 "match pattern."
-msgstr ""
-"Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile "
-"eşleşenleri yok say"
+msgstr "Paket kurarken, ifade ile eşleşen paket ve bileşenleri gözardı et."
 
 #: pisi/cli/install.py:63
-#, fuzzy
 msgid ""
 "When installing packages, ignore packages and components whose "
 "basenames                      match any pattern contained in file."
 msgstr ""
-"Sistemi yükseltirken paket ya da bileşen isimlerinden dosya içerisinde "
-"verilen kalıplardan herhangi birisi ile eşleşenleri yok say"
+"Paket kurarken, paket ya da bileşen isimlerinden dosya içerisinde verilen "
+"kalıplardan herhangi birisi ile eşleşenleri gözardı et."
 
 #: pisi/cli/listavailable.py:26
 msgid ""
@@ -1267,7 +1267,7 @@ msgid "Show detailed install info"
 msgstr "Detaylı kurulum bilgisi göster"
 
 # pisi/cli/commands.py:542 :729
-#: pisi/cli/listinstalled.py:76 pisi/cli/listupgrades.py:73
+#: pisi/cli/listinstalled.py:76 pisi/cli/listupgrades.py:78
 msgid ""
 "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
 msgstr ""
@@ -1285,9 +1285,8 @@ msgid ""
 msgstr ""
 
 #: pisi/cli/listnewest.py:45
-#, fuzzy
 msgid "list-newest options"
-msgstr "list-installed seçenekleri"
+msgstr "list-newest seçenekleri"
 
 #: pisi/cli/listnewest.py:47
 msgid ""
@@ -1302,22 +1301,22 @@ msgid ""
 msgstr ""
 
 #: pisi/cli/listnewest.py:77
-#, fuzzy
 msgid "Packages added to %s since %s:\n"
-msgstr "%s paketi içinde %s dosyası var"
+msgstr "%s deposuna %s tarihinden beri yeni giren paketler:"
 
 #: pisi/cli/listnewest.py:79
-#, fuzzy
 msgid "Packages added to %s:"
-msgstr "Paket dosyası: %s"
+msgstr "%s deposuna yeni giren paketler:"
 
 #: pisi/cli/listpending.py:22
-#, fuzzy
 msgid ""
 "List pending packages\n"
 "\n"
 "Lists packages waiting to be configured.\n"
-msgstr "Yapılandırılmayı bekleyen paket yok"
+msgstr ""
+"Bekleyen paketleri listele\n"
+"\n"
+"Yapılandırılmak için bekleyen paketleri listeler.\n"
 
 #: pisi/cli/listpending.py:43
 msgid "There are no packages waiting to be configured"
@@ -1808,9 +1807,8 @@ msgid "Encountered cycle %s"
 msgstr "Çember ile karşılaşıldı: %s"
 
 #: pisi/history.py:44
-#, fuzzy
 msgid "%s repository is updated."
-msgstr "%s depo bilgisi güncel."
+msgstr "%s deposu güncellendi."
 
 #: pisi/history.py:64
 msgid "%s is upgraded from %s to %s with delta."
@@ -1852,13 +1850,18 @@ msgstr "Paket %s: metadata bozuk, atlanıyor..."
 msgid "Adding %s to source index"
 msgstr "%s kaynak indeksine ekleniyor"
 
-#: pisi/metadata.py:74
+#: pisi/metadata.py:77
 msgid "Distribution: %s, Dist. Release: %s\n"
 msgstr "Dağıtım: %s, Dağıtım Sürümü: %s\n"
 
-#: pisi/metadata.py:76
+#: pisi/metadata.py:79
 msgid "Architecture: %s, Installed Size: %s"
 msgstr "Mimari: %s, Yerleşik Boyut: %s"
+
+#: pisi/metadata.py:85
+#, fuzzy
+msgid ", Package Size: %s"
+msgstr "Paket dosyası: %s"
 
 #: pisi/mirrors.py:46
 msgid "Mirrors file %s does not exist. Could not resolve mirrors://"
@@ -2025,44 +2028,40 @@ msgstr "Semboller çıkarılıyor.."
 msgid "(found old version %s)"
 msgstr "(%s numaralı eski versiyon bulundu)"
 
-#: pisi/operations/build.py:722
-msgid "Skipping %s with wrong pkg name "
-msgstr "Yanlış paket adına sahip %s atlanıyor"
-
-#: pisi/operations/build.py:748
+#: pisi/operations/build.py:744
 msgid "(no previous build found, setting build no to 1.)"
 msgstr "(önceki bir inşa bulunamadı, inşa numarası 1 yapılıyor)"
 
-#: pisi/operations/build.py:793
+#: pisi/operations/build.py:789
 msgid "(old package lacks a build no, setting build no to 1.)"
 msgstr "(önceki paketin bir inşa numarası yok, inşa numarası 1 yapılıyor)"
 
-#: pisi/operations/build.py:796
+#: pisi/operations/build.py:792
 msgid "There are changes, incrementing build no to %d"
 msgstr "Değişiklikler var, inşa numarası bir arttırılarak %d yapıldı."
 
-#: pisi/operations/build.py:799
+#: pisi/operations/build.py:795
 msgid "There is no change from previous build %d"
 msgstr "Bir önceki %d numaralı inşadan beri bir değişiklik yok."
 
-#: pisi/operations/build.py:864
+#: pisi/operations/build.py:860
 msgid "No user named '%s' found on the system"
 msgstr "Sistemde '%s' isminde bir kullanıcı bulunamadı"
 
-#: pisi/operations/build.py:869
+#: pisi/operations/build.py:865
 msgid "No group named '%s' found on the system"
 msgstr "Sistemde '%s' isminde bir grup bulunamadı"
 
-#: pisi/operations/build.py:872
+#: pisi/operations/build.py:868
 msgid "** Building package %s"
 msgstr "** Paket %s inşa ediliyor"
 
 # pisi/build.py:503 :506
-#: pisi/operations/build.py:874 pisi/operations/build.py:877
+#: pisi/operations/build.py:870 pisi/operations/build.py:873
 msgid "Generating %s,"
 msgstr "%s yaratılıyor,"
 
-#: pisi/operations/build.py:883
+#: pisi/operations/build.py:879
 msgid ""
 "Build number is not available. For repo builds you must enable buildno in "
 "pisi.conf."
@@ -2070,30 +2069,30 @@ msgstr ""
 "İnşa (build) sayısı koyulmayacak. Depo inşaları için buildno seçeneğini pisi."
 "conf dosyasında etkinleştirmelisiniz."
 
-#: pisi/operations/build.py:903
+#: pisi/operations/build.py:899
 msgid "Creating PiSi package %s."
 msgstr "%s adlı PiSi paketi yaratılıyor."
 
-#: pisi/operations/build.py:948 pisi/operations/delta.py:93
+#: pisi/operations/build.py:944 pisi/operations/delta.py:93
 msgid "Done."
 msgstr "Bitti."
 
-#: pisi/operations/build.py:954
+#: pisi/operations/build.py:950
 msgid "Abandoned files under the install dir (%s):"
 msgstr "kurulum dizini (%s) altındaki terkedilmiş dosyalar:"
 
-#: pisi/operations/build.py:958
+#: pisi/operations/build.py:954
 msgid ""
 "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Kurulum dizini (%s) altındaki bütün dosyalar paket(ler) tarafından "
 "toplanmıştır"
 
-#: pisi/operations/build.py:962
+#: pisi/operations/build.py:958
 msgid "Cleaning Build Directory..."
 msgstr "İnşa dizini siliniyor..."
 
-#: pisi/operations/build.py:965
+#: pisi/operations/build.py:961
 msgid "Keeping Build Directory"
 msgstr "İnşa dizini bırakılıyor"
 
@@ -2102,11 +2101,12 @@ msgid "Checking /%s "
 msgstr "/%s kontrol ediliyor "
 
 #: pisi/operations/check.py:40
-#, fuzzy
 msgid ""
 "\n"
 "Changed config file: %s"
-msgstr "Paket dosyası: %s"
+msgstr ""
+"\n"
+"Değişen yapılandırma dosyası: %s"
 
 #: pisi/operations/check.py:42
 msgid ""
@@ -2207,7 +2207,7 @@ msgid ""
 "Following packages could not be found in repositories and are not cached:\n"
 msgstr ""
 "\n"
-"Bu paketler depolarda bulunamadı ve önbellekte de değiller:\n"
+"Bu paketler depolarda ve önbellekte bulunamadı:\n"
 
 #: pisi/operations/install.py:45
 msgid ""
@@ -2296,9 +2296,8 @@ msgid "Obsoleted packages remaining"
 msgstr "Eskimiş paketler duruyor"
 
 #: pisi/operations/remove.py:131
-#, fuzzy
 msgid "Replaced package remains"
-msgstr "Eskimiş paketler duruyor"
+msgstr "Yerine yenisi yerleştirilen paketler duruyor"
 
 #: pisi/operations/upgrade.py:45
 msgid "Warning: package *name* ends with '.pisi'"
@@ -2524,47 +2523,47 @@ msgstr "İnşa Bağımlılıkları:"
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr "setAuthInfo bir (kullanıcı, parola) ikilisi ister"
 
-#: pisi/util.py:122 pisi/util.py:143
+#: pisi/util.py:124 pisi/util.py:145
 msgid "Running "
 msgstr "Çalışıyor: "
 
-#: pisi/util.py:126 pisi/util.py:161
+#: pisi/util.py:128 pisi/util.py:163
 msgid "return value for \"%s\" is %s"
 msgstr "\"%s\" için dönüş değeri %s"
 
-#: pisi/util.py:324
+#: pisi/util.py:326
 msgid "Including external link '%s'"
 msgstr "'%s' harici bağı ekleniyor"
 
-#: pisi/util.py:326
+#: pisi/util.py:328
 msgid "Including directory '%s'"
 msgstr "'%s' dizini içeriliyor"
 
-#: pisi/util.py:412
+#: pisi/util.py:414
 msgid "Cannot calculate SHA1 hash of %s"
 msgstr "%s dosyasının SHA1 kontrol toplamı hesaplanamıyor"
 
-#: pisi/util.py:467
+#: pisi/util.py:469
 msgid "ERROR: patch (%s) failed"
 msgstr "HATA: Yama (%s) başarısız"
 
-#: pisi/util.py:469
+#: pisi/util.py:471
 msgid "ERROR: patch (%s) failed: %s"
 msgstr "HATA: Yama (%s) başarısız: %s"
 
-#: pisi/util.py:516
+#: pisi/util.py:518
 msgid "strip command failed for file '%s'!"
 msgstr "strip komutu '%s' dosyası için çalışmadı!"
 
-#: pisi/util.py:523
+#: pisi/util.py:525
 msgid "chrpath command failed for file '%s'!"
 msgstr "chrpath komutu '%s' dosyası için çalışmadı!"
 
-#: pisi/util.py:530
+#: pisi/util.py:532
 msgid "objcopy (keep-debug) command failed for file '%s'!"
 msgstr "objcopy (keep-debug) komutu '%s' dosyası için çalışmadı!"
 
-#: pisi/util.py:536
+#: pisi/util.py:538
 msgid "objcopy (add-debuglink) command failed for file '%s'!"
 msgstr "objcopy (add-debuglink) komutu '%s' dosyası için çalışmadı!"
 
@@ -2618,9 +2617,5 @@ msgstr "Kaynak deposu taranıyor...\n"
 msgid "Scanning binary packages...\n"
 msgstr "İkili dosyalar taranıyor...\n"
 
-#~ msgid ""
-#~ "\n"
-#~ "Missing file: %s"
-#~ msgstr ""
-#~ "\n"
-#~ "Eksik dosya: %s"
+#~ msgid "Skipping %s with wrong pkg name "
+#~ msgstr "Yanlış paket adına sahip %s atlanıyor"
