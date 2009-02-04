@@ -26,8 +26,8 @@ import pisi.util as util
 import pisi.dependency as dependency
 import pisi.db
 
-def upgrade(A):
-    upgrade_pkg_names(A)
+def upgrade(A, repo=None):
+    upgrade_pkg_names(A, repo)
 
 def find_upgrades(packages, replaces):
     packagedb = pisi.db.packagedb.PackageDB()
@@ -89,17 +89,20 @@ def find_upgrades(packages, replaces):
 
     return Ap
 
-def upgrade_pkg_names(A = []):
+def upgrade_pkg_names(A = [], repo=None):
     """Re-installs packages from the repository, trying to perform
     a minimum or maximum number of upgrades according to options."""
 
     packagedb = pisi.db.packagedb.PackageDB()
     installdb = pisi.db.installdb.InstallDB()
     replaces = packagedb.get_replaces()
-
     if not A:
         # if A is empty, then upgrade all packages
         A = installdb.list_installed()
+
+    if repo:
+        repo_packages = set(packagedb.list_packages(repo))
+        A = set(A).intersection(repo_packages)
 
     A_0 = A = set(A)
     Ap = find_upgrades(A, replaces)

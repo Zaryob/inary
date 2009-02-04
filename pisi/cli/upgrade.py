@@ -58,7 +58,7 @@ expanded to package names.
                                help=_("Do not take build no into account."))
         group.add_option("--security-only", action="store_true",
                      default=False, help=_("Security related package upgrades only"))
-        group.add_option("-r", "--bypass-update-repo", action="store_true",
+        group.add_option("-b", "--bypass-update-repo", action="store_true",
                      default=False, help=_("Do not update repositories"))
         group.add_option("--ignore-file-conflicts", action="store_true",
                      default=False, help=_("Ignore file conflicts"))
@@ -66,6 +66,8 @@ expanded to package names.
                      default=False, help=_("Ignore package conflicts"))
         group.add_option("-c", "--component", action="append",
                                default=None, help=_("Upgrade component's and recursive components' packages"))
+        group.add_option("-r", "--repository", action="store",
+                               type="string", default=None, help=_('Name of the to be upgraded packages\' repository'))
         group.add_option("-f", "--fetch-only", action="store_true",
                      default=False, help=_("Fetch upgrades but do not install."))
         group.add_option("-x", "--exclude", action="append",
@@ -90,16 +92,17 @@ expanded to package names.
         else:
             ctx.ui.info(_('Will not update repositories'))
 
+        repository = ctx.get_option('repository')
         components = ctx.get_option('component')
         packages = []
         if components:
             for name in components:
                 if self.componentdb.has_component(name):
-                    packages.extend(self.componentdb.get_union_packages(name, walk=True))
+                    if repository:
+                        packages.extend(self.componentdb.get_packages(name, walk=True, repo=repository))
+                    else:
+                        packages.extend(self.componentdb.get_union_packages(name, walk=True))
         packages.extend(self.args)
-
-        if packages == []:
-            packages = pisi.api.list_installed()
 
         packages = pisi.blacklist.exclude_from(packages, ctx.const.blacklist)
 
@@ -109,4 +112,4 @@ expanded to package names.
         if ctx.get_option('exclude'):
             packages = pisi.blacklist.exclude(packages, ctx.get_option('exclude'))
 
-        pisi.api.upgrade(packages)
+        pisi.api.upgrade(packages, repository)
