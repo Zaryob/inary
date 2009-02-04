@@ -33,7 +33,7 @@ medias = (cd, usb, remote, local) = range(4)
 class RepoOrder:
 
     def __init__(self):
-        self.repos = self._get_repos() 
+        self.repos = self._get_repos()
 
     def add(self, repo_name, repo_url, repo_type="remote"):
         repo_doc = self._get_doc()
@@ -50,8 +50,26 @@ class RepoOrder:
         url_node = repo_node.insertTag("Url")
         url_node.insertData(repo_url)
 
+        name_node = repo_node.insertTag("Status")
+        name_node.insertData("active")
+
         media_node = repo_node.insertTag("Media")
         media_node.insertData(repo_type)
+
+        self._update(repo_doc)
+
+    def set_status(self, repo_name, status):
+        repo_doc = self._get_doc()
+
+        for r in repo_doc.tags("Repo"):
+            if r.getTagData("Name") == repo_name:
+                status_node = r.getTag("Status")
+                if status_node:
+                    status_node.firstChild().hide()
+                    status_node.insertData(status)
+                else:
+                    status_node = r.insertTag("Status")
+                    status_node.insertData(status)
 
         self._update(repo_doc)
 
@@ -92,7 +110,9 @@ class RepoOrder:
         for r in repo_doc.tags("Repo"):
             media = r.getTagData("Media")
             name = r.getTagData("Name")
-            order.setdefault(media, []).append(name)
+            status = r.getTagData("Status")
+            if status != "deactive":
+                order.setdefault(media, []).append(name)
 
         return order
 
@@ -174,3 +194,9 @@ class RepoDB(lazydb.LazyDB):
         for r in self.list_repos():
             if self.get_repo_url(r) == url:
                 return r
+
+    def activate_repo(self, name):
+        self.repoorder.set_status(name, "active")
+
+    def deactivate_repo(self, name):
+        self.repoorder.set_status(name, "deactive")
