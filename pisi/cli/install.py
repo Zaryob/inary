@@ -55,6 +55,8 @@ expanded to package names.
                      default=False, help=_("Ignore package conflicts"))
         group.add_option("-c", "--component", action="append",
                                default=None, help=_("Install component's and recursive components' packages"))
+        group.add_option("-r", "--repository", action="store",
+                               type="string", default=None, help=_('Name of the component\'s repository'))
         group.add_option("-f", "--fetch-only", action="store_true",
                      default=False, help=_("Fetch upgrades but do not install."))
         group.add_option("-x", "--exclude", action="append",
@@ -80,7 +82,12 @@ expanded to package names.
         if components:
             for name in components:
                 if self.componentdb.has_component(name):
-                    packages.extend(self.componentdb.get_union_packages(name, walk=True))
+                    repository = ctx.get_option('repository')
+                    if repository:
+                        packages.extend(self.componentdb.get_packages(name, walk=True, repo=repository))
+                    else:
+                        packages.extend(self.componentdb.get_union_packages(name, walk=True))
+
         packages.extend(self.args)
 
         if ctx.get_option('exclude_from'):
