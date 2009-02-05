@@ -212,8 +212,7 @@ def dosed(sourceFiles, findPattern, replacePattern = ''):
                 # shallow=False tells cmp() to look file content.
                 if filecmp.cmp(sourceFile, backupFile, shallow=False):
                     ctx.ui.warning(_('dosed method has not changed file \'%s\'.') % sourceFile)
-                else:
-                    os.unlink(backupFile)
+                os.unlink(backupFile)
         else:
             raise FileError(_('File does not exist or permission denied: %s') % sourceFile)
 

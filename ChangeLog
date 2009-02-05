@@ -1,3 +1,7 @@
+2009-02-05 Ozan Çağlayan <ozan@pardus.org.tr>
+        * pisi/actionsapi/pisitools.py (dosed): Unlink backup file in all situations
+        as it now raises warning instead of error.
+
 2009-02-04 Faik Uygur <faik@pardus.org.tr>
         * Add --repository parameter to pisi upgrade operation to upgrade packages from only
         given repository (#6157)
