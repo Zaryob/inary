@@ -47,7 +47,6 @@ import pisi.operations.helper
 import pisi.operations.check
 import pisi.operations.emerge
 import pisi.operations.build
-import pisi.comariface
 import pisi.errors
 
 def locked(func):
@@ -526,6 +525,9 @@ def configure_pending(packages=None):
     # start with pending packages
     # configure them in reverse topological order of dependency
     installdb = pisi.db.installdb.InstallDB()
+
+    # Import COMAR
+    import pisi.comariface
 
     if not packages:
         packages = installdb.list_pending()
