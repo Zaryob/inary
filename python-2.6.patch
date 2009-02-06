@@ -31,9 +31,18 @@ Index: pisi/archive.py
 +            self.decompressToFileNew(name, outname)
 +
 +    def decompressToFileNew(self, name, outname):
-+        self.extract(name, os.path.dirname(outname))
++        self.extract(name, outname)
 +
 +    def decompressToFileOld(self, name, outname):
          import zlib
          import binascii
  
+@@ -414,7 +426,7 @@
+                     perm &= 0x08FF0000
+                     perm >>= 16
+                     perm |= 0x00000100
+-                    zip_obj.decompressToFile(info.filename, ofile)
++                    zip_obj.decompressToFile(info.filename, target_dir)
+                     os.chmod(ofile, perm)
+ 
+     def unpack_files(self, paths, target_dir):
