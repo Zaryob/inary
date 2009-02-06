@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "POT-Creation-Date: 2009-02-04 12:38+EET\n"
-"PO-Revision-Date: 2009-01-14 18:34+0100\n"
+"PO-Revision-Date: 2009-02-06 11:33+0100\n"
 "Last-Translator: Willem Gielen <w.gielen@gmail.com>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -172,8 +172,7 @@ msgstr "ActionsAPI [doman]: onjuist man-pagina bestand: %s"
 
 #: pisi/actionsapi/pisitools.py:167
 msgid "No file matched pattern \"%s\". 'domove' operation failed."
-msgstr ""
-"Geen bestand komt overeen met patroon \"%s\". 'domove' handeling mislukt."
+msgstr "Geen bestand komt overeen met patroon \"%s\". 'domove' handeling mislukt."
 
 #: pisi/actionsapi/pisitools.py:186
 msgid "ActionsAPI [rename]: No such file or directory: %s"
@@ -181,8 +180,7 @@ msgstr "ActionsAPI [rename]: bestand of map niet gevonden: %s"
 
 #: pisi/actionsapi/pisitools.py:201
 msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
-msgstr ""
-"Geen bestand komt overeen met patroon: \"%s\". 'dosed' handeling misluky."
+msgstr "Geen bestand komt overeen met patroon: \"%s\". 'dosed' handeling misluky."
 
 #: pisi/actionsapi/pisitools.py:214
 msgid "dosed method has not changed file '%s'."
@@ -405,7 +403,7 @@ msgstr "Pakket-URI: %s"
 
 #: pisi/atomicoperations.py:111
 msgid "Download Error: Package does not match the repository package."
-msgstr ""
+msgstr "Download fout: Pakket komt niet overeen met het pakket in de repository."
 
 #: pisi/atomicoperations.py:115
 msgid "Package %s not found in any active repository."
@@ -501,8 +499,7 @@ msgid "Not removing conflicted file : %s"
 msgstr "Niet verwijderen conflicterend bestand: %s"
 
 #: pisi/atomicoperations.py:553
-msgid ""
-"Installed file %s does not exist on system [Probably you manually deleted]"
+msgid "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
 "Geïnstalleerd bestand %s bestaat niet op systeem [waarschijnlijk handmatig "
 "verwijderd]"
@@ -558,6 +555,16 @@ msgid ""
 "NB: We support only local files (e.g., /a/b/c) and http:// URIs at the "
 "moment\n"
 msgstr ""
+"Repository toevoegen\n"
+"\n"
+"Gebruik: add-repo <repo> <indexuri>\n"
+"\n"
+"<repo>: naam van de toe te voegen repository\n"
+"<indexuri>: IRI van indexbestand\n"
+"\n"
+"Als geen repo wordt gegeven, wordt add-repo pardus-devel als standaard toegevoegd\n"
+"\n"
+"NB: We ondersteumen momenteel alleen lokale bestanden (bijv. /a/b/c) en http:// URIs\n"
 
 #: pisi/cli/addrepo.py:44
 msgid "add-repo options"
@@ -587,6 +594,15 @@ msgid ""
 "Alternatively, you can give the name of a source package\n"
 "to be downloaded from a repository containing sources.\n"
 msgstr ""
+"Bouw PiSi pakket\n"
+"\n"
+"Gebruik: build [<pspec.xml> | <sourcename>] ...\n"
+"\n"
+"U kunt een URI opgeven van een specifiek pspec.xml bestand. PiSi zal\n"
+"alle benodigde bestanden regelen en het pakket voor u bouwen.\n"
+"\n"
+"Als alternatief kunt u de naam geven van een bron pakket dat te downloaden is\n"
+"van een repository welk de bron bevat.\n"
 
 #: pisi/cli/build.py:47
 msgid "build options"
@@ -695,6 +711,15 @@ msgid ""
 "\n"
 "If no packages are given, checks all installed packages.\n"
 msgstr ""
+"Controleer installatie\n"
+"\n"
+"Gebruik: check [<package1> <package2> ... <packagen>]\n"
+"\n"
+"<packagei>: pakketnaam\n"
+"\n"
+"Een cryptografische controlesom wordt opgeslagen voor elke geïnstalleerd \n"
+"bestand. Check commando gebruikt de controlesommen om een pakket te controleren.\n"
+"Geef de namen van pakketten.\n"
 
 #: pisi/cli/check.py:47
 msgid "check options"
@@ -706,7 +731,7 @@ msgstr "Controleer geïnstalleerde pakketten onder een gegeven component"
 
 #: pisi/cli/check.py:51
 msgid "Checks only changed config files of the packages"
-msgstr ""
+msgstr "Controleer alleen veranderde configuratiebestanden van de pakketten"
 
 #: pisi/cli/check.py:67
 msgid "Checking all installed packages"
@@ -999,6 +1024,11 @@ msgid ""
 "\n"
 "Lists previous operations."
 msgstr ""
+"Geschiedenis van pisi handelingen\n"
+"\n"
+"Gebruik: history\n"
+"\n"
+"Toont eerdere handelingen."
 
 #: pisi/cli/history.py:47
 msgid "history options"
@@ -1042,6 +1072,15 @@ msgid ""
 "If you give multiple directories, the command still works, but puts\n"
 "everything in a single index file.\n"
 msgstr ""
+"Indexeer PiSi bestanden in een bepaalde map\n"
+"\n"
+"Gebruik: index <map>...\n"
+"\n"
+"Dit commando zoekt alle PiSi bestanden in een map, verzamelt PiSi\n"
+"tags van ze en hoopt de gegevens op in een XML-bestand,\n"
+"standaard 'pisi-index.xml' genaamd. In het bijzonder, het indexeerd zowel\n"
+"bron-en binaire pakketten.\n\n"
+"\n"
 
 #: pisi/cli/index.py:44
 msgid "index options"
@@ -1075,6 +1114,11 @@ msgid ""
 "\n"
 "<packagei> is either a package name or a .pisi file,\n"
 msgstr ""
+"Toon pakket informatie\n"
+"\n"
+"Gebruik: info <pakket1> <pakket2> ... <pakketn>\n"
+"\n"
+"<pakketx> is ofwel een pakketnaam of een .pisi pakket,\n"
 
 #: pisi/cli/info.py:45
 msgid "info options"
@@ -1156,6 +1200,15 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
+"Installeer PiSi pakketten\n"
+"\n"
+"Gebruik: installeer <pakket1> <pakket2> ... <pakketn>\n"
+"\n	"
+"U mag bestandsnamen, URI's of pakketnamen namen voor pakketten gebruiken. Als u\n"
+"een pakketnaam gespecificeerd heeft, dient het te bestaan in de repository.\n"
+"\n	"
+"U kunt ook onderdelen specificeren in plaats van pakketnamen, welk uitgebreid\n"
+"zullen worden naar pakketnamen.\n"
 
 #: pisi/cli/install.py:44
 msgid "install options"
@@ -1174,23 +1227,18 @@ msgid "Fetch upgrades but do not install."
 msgstr "Haal bijgewerkte bestanden op maar installeer ze niet."
 
 #: pisi/cli/install.py:61
-#, fuzzy
 msgid ""
 "When installing packages, ignore packages and components whose basenames "
 "match pattern."
-msgstr ""
-"Bij het opwaarderen van het systeem, pakketten en componenten negeren "
-"waarbij basenames overeenkomen met patroon."
+msgstr "Bij installeren van pakketten, negeer pakketten en componenten wiens basenames overeenkomen met patroon."
 
 #: pisi/cli/install.py:63
-#, fuzzy
 msgid ""
 "When installing packages, ignore packages and components whose "
 "basenames                      match any pattern contained in file."
 msgstr ""
-"Als het systeem opgewaardeerd wordt, pakketten en componenten negeren "
-"waarbij basenames                     overeenkomen met ieder patroon in "
-"bestand."
+"Als pakketten geïnstalleerd worden, negeer pakketten en componenten wiens "
+"basenames                     overeenkomen met elk patroon in bestand."
 
 #: pisi/cli/listavailable.py:26
 msgid ""
@@ -1202,6 +1250,13 @@ msgid ""
 "repositories. If no repository is specified, we list packages in\n"
 "all repositories.\n"
 msgstr ""
+"Toon aanwezige pakketten in de repository\n"
+"\n"
+"Gebruik: list-available [ <repo1> <repo2> ... repon ]\n"
+"\n"
+"Geeft een korte lijst van PiSi pakketten gepubliceerd in de opgegeven\n"
+"repositories. Als geen repository opgegeven is, tonen we pakketten in\n"
+"alle repositories.\n"
 
 #: pisi/cli/listavailable.py:45
 msgid "list-available options"
@@ -1268,8 +1323,7 @@ msgstr "Toon gedetailleerde installatie-informatie"
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/listinstalled.py:76 pisi/cli/listupgrades.py:78
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
 msgstr "Pakketnaam     |St|   Versie|  Rel.| Bouw |  Distro|             Datum"
 
 #: pisi/cli/listnewest.py:26
@@ -1974,8 +2028,7 @@ msgid "unable to call function from actions: %s"
 msgstr "kan functie niet aanroepen vanuit actions: %s"
 
 #: pisi/operations/build.py:499
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Veiligheidsprocedure: de volgende extra pakketten in system.devel zullen "
 "geïnstalleerd worden:"
@@ -2082,10 +2135,8 @@ msgid "Abandoned files under the install dir (%s):"
 msgstr "Verlaten bestanden in de installatiemap (%s):"
 
 #: pisi/operations/build.py:954
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
-msgstr ""
-"Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)."
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
+msgstr "Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)."
 
 #: pisi/operations/build.py:958
 msgid "Cleaning Build Directory..."
@@ -2598,10 +2649,8 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-msgstr ""
-"Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgstr "Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
 
 #: scripts/repostats.py:467
 msgid ""
@@ -2627,5 +2676,3 @@ msgstr "Scannen bron-repository...\n"
 msgid "Scanning binary packages...\n"
 msgstr "Scannen binaire pakketten...\n"
 
-#~ msgid "Skipping %s with wrong pkg name "
-#~ msgstr "Overslaan %s met onjuiste pakketnaam"
