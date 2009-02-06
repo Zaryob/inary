@@ -20,29 +20,17 @@ Index: pisi/archive.py
              batch = None
              if ctx.config.values.build.compressionlevel:
                  batch = "lzma -%s -z %s" % (ctx.config.values.build.compressionlevel, self.file_path)
-@@ -201,6 +203,16 @@
- 
- class MyZipFile(zipfile.ZipFile):
-     def decompressToFile(self, name, outname):
-+        version = sys.version.split()[0]
-+        if distutils.version.StrictVersion(version) < distutils.version.StrictVersion("2.6.0"):
-+            self.decompressToFileOld(name, outname)
-+        else:
-+            self.decompressToFileNew(name, outname)
-+
-+    def decompressToFileNew(self, name, outname):
-+        self.extract(name, outname)
-+
-+    def decompressToFileOld(self, name, outname):
-         import zlib
-         import binascii
- 
-@@ -414,7 +426,7 @@
+@@ -414,7 +416,12 @@
                      perm &= 0x08FF0000
                      perm >>= 16
                      perm |= 0x00000100
 -                    zip_obj.decompressToFile(info.filename, ofile)
-+                    zip_obj.decompressToFile(info.filename, target_dir)
++
++                    version = sys.version.split()[0]
++                    if distutils.version.StrictVersion(version) < distutils.version.StrictVersion("2.6.0"):
++                        zip_obj.decompressToFile(info.filename, ofile)
++                    else:
++                        zip_obj.extract(info.filename, target_dir)
                      os.chmod(ofile, perm)
  
      def unpack_files(self, paths, target_dir):
