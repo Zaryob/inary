@@ -11,6 +11,7 @@
 #
 
 import optparse
+import re
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -58,6 +59,7 @@ database.
             self.help()
             return
 
+        replace = re.compile("(%s)" % "|".join(self.args), re.I)
         lang = ctx.get_option('language')
         repo = ctx.get_option('repository')
 
@@ -80,8 +82,10 @@ database.
         for pkg in pkgs:
             pkg_info = get_info(pkg)
             name, summary = get_name_sum(pkg_info)
+            name = replace.sub(pisi.util.colorize(r"\1", "brightred"), name)
             if lang and summary.has_key(lang):
-                print "%s - %s" % (name, summary[lang])
+                summary = replace.sub(pisi.util.colorize(r"\1", "brightred"), str(summary[lang]))
             else:
-                print "%s - %s" % (name, summary)
+                summary = replace.sub(pisi.util.colorize(r"\1", "brightred"), str(summary))
 
+            print "%s - %s" % (name, summary)
