@@ -14,6 +14,7 @@ import gettext
 __trans = gettext.translation("pisi", fallback=True)
 _ = __trans.ugettext
 
+import pisi
 import pisi.context as ctx
 import pisi.util
 import pisi.db
@@ -21,6 +22,9 @@ import pisi.fetcher
 
 installdb = pisi.db.installdb.InstallDB()
 historydb = pisi.db.historydb.HistoryDB()
+
+class PackageNotFound(pisi.Error):
+    pass
 
 def __pkg_already_installed(name, pkginfo):
     if not installdb.has_package(name):
@@ -66,6 +70,9 @@ def __getpackageurl(package):
             if pkg in packagedb.get_obsoletes(repo):
                 reponame = repo
 
+    if not reponame:
+        raise PackageNotFound
+
     repourl = repodb.get_repo_url(reponame)
     ctx.ui.info(_("Package %s found in repository %s") % (pkg, reponame))
 
@@ -73,7 +80,13 @@ def __getpackageurl(package):
     return os.path.join(os.path.dirname(repourl), package)
 
 def fetch_remote_file(package, errors):
-    uri = pisi.file.File.make_uri(__getpackageurl(package))
+    try:
+        uri = pisi.file.File.make_uri(__getpackageurl(package))
+    except PackageNotFound:
+        errors.append(package)
+        ctx.ui.info(pisi.util.colorize(_("%s could not be found") % (package), "red"))
+        return False
+
     dest = ctx.config.cached_packages_dir()
     filepath = os.path.join(dest, uri.filename())
     if not os.path.exists(filepath):
