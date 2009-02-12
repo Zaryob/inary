@@ -182,8 +182,8 @@ def rename(sourceFile, destinationFile):
 
     try:
         os.rename(join_path(get.installDIR(), sourceFile), join_path(get.installDIR(), baseDir, destinationFile))
-    except OSError:
-        error(_('ActionsAPI [rename]: No such file or directory: %s') % (sourceFile))
+    except OSError, e:
+        error(_('ActionsAPI [rename]: %s: %s') % (e, sourceFile))
 
 def dosed(sourceFiles, findPattern, replacePattern = ''):
     '''replaces patterns in sourceFiles'''
