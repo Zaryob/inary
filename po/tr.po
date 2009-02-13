@@ -1,16 +1,16 @@
 # translation of tr.po to Türkçe
 # Eray Ozkural <eray@pardus.org.tr>, 2005,2006.
 # Furkan Duman <coderlord@gmail.com>, 2006.
-# Faik Uygur <faik@pardus.org.tr>, 2006, 2007, 2008.
+# Faik Uygur <faik@pardus.org.tr>, 2006, 2007, 2008, 2009.
 # Ahmet AYGÜN <ahmet@pardusman.org>, 2006.
 # translation of tr.po to
 # PiSi Translation
-# Copyright (C) 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
+# Copyright (C) 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2009-02-04 12:38+EET\n"
-"PO-Revision-Date: 2008-12-01 11:40+0200\n"
+"POT-Creation-Date: 2009-02-13 14:20+EET\n"
+"PO-Revision-Date: 2009-02-13 14:25+0200\n"
 "Last-Translator: Faik Uygur <faik@pardus.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -49,8 +49,7 @@ msgstr "Geri-iz:"
 
 #: pisi-cli:68
 msgid "Use --debug to see a traceback."
-msgstr ""
-"Bir geri-iz (traceback) görmek için lütfen --debug seçeneğini kullanın."
+msgstr "Bir geri-iz (traceback) görmek için lütfen --debug seçeneğini kullanın."
 
 #: pisi/actionsapi/autotools.py:37 pisi/actionsapi/cmaketools.py:36
 msgid ""
@@ -175,8 +174,8 @@ msgid "No file matched pattern \"%s\". 'domove' operation failed."
 msgstr "\"%s\" ile eşleşen bir dosya bulunamadı. 'domove' işlemi başarısız."
 
 #: pisi/actionsapi/pisitools.py:186
-msgid "ActionsAPI [rename]: No such file or directory: %s"
-msgstr "ActionsAPI [rename]: Böyle bir dosya ya da dizin bulunamadı: %s"
+msgid "ActionsAPI [rename]: %s: %s"
+msgstr "ActionsAPI [rename]: %s: %s"
 
 #: pisi/actionsapi/pisitools.py:201
 msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
@@ -186,23 +185,23 @@ msgstr "\"%s\" ile eşleşen bir dosya bulunamadı. 'dosed' işlemi başarısız
 msgid "dosed method has not changed file '%s'."
 msgstr "dosed '%s' dosyasında bir değişiklik yapmadı."
 
-#: pisi/actionsapi/pisitools.py:218
+#: pisi/actionsapi/pisitools.py:217
 msgid "File does not exist or permission denied: %s"
 msgstr "Dosya yok ya da erişim engellendi: %s"
 
-#: pisi/actionsapi/pisitools.py:235
+#: pisi/actionsapi/pisitools.py:234
 msgid "ActionsAPI [dosym]: File exists: %s"
 msgstr "ActionsAPI [dosym]: %s dosyası sistemde var"
 
-#: pisi/actionsapi/pisitools.py:244 pisi/actionsapi/pisitoolsfunctions.py:71
+#: pisi/actionsapi/pisitools.py:243 pisi/actionsapi/pisitoolsfunctions.py:71
 msgid "No file matched pattern \"%s\"."
 msgstr "\"%s\" ile eşleşen bir dosya bulunamadı."
 
-#: pisi/actionsapi/pisitools.py:271
+#: pisi/actionsapi/pisitools.py:270
 msgid "No file matched pattern \"%s\". Remove operation failed."
 msgstr "\"%s\" ile eşleşen bir dosya bulunamadı. 'remove' işlemi başarısız."
 
-#: pisi/actionsapi/pisitools.py:280
+#: pisi/actionsapi/pisitools.py:279
 msgid "No directory matched pattern \"%s\". Remove directory operation failed."
 msgstr "\"%s\" ile eşleşen bir dizin bulunamadı. 'removeDir' işlemi başarısız."
 
@@ -313,88 +312,87 @@ msgstr "ActionsAPI [touch]: Erişim engellendi: %s"
 msgid "Command \"%s\" failed, return value was %d."
 msgstr "\"%s\" komutu başarısız oldu, dönüş değeri: %d ."
 
-#: pisi/api.py:61 pisi/cli/command.py:167
+#: pisi/api.py:60 pisi/cli/command.py:167
 msgid "You have to be root for this operation."
 msgstr "Bu işlem için root olmalısınız."
 
-#: pisi/api.py:66
+#: pisi/api.py:65
 msgid "Another instance of PiSi is running. Only one instance is allowed."
-msgstr ""
-"Başka bir yerde daha PiSi çalışıyor. Sadece tek bir PiSi'ye izin verilir."
+msgstr "Başka bir yerde daha PiSi çalışıyor. Sadece tek bir PiSi'ye izin verilir."
 
-#: pisi/api.py:454
+#: pisi/api.py:453
 msgid "Taking snapshot of the system"
 msgstr "Sistemin görüntüsü alınıyor"
 
-#: pisi/api.py:565
+#: pisi/api.py:567
 msgid "comar package is not fully installed"
 msgstr "comar paketi tam olarak kurulmamış"
 
-#: pisi/api.py:577
+#: pisi/api.py:579
 msgid "File %s not found"
 msgstr "Dosya %s bulunamadı."
 
-#: pisi/api.py:617
+#: pisi/api.py:619
 msgid "* Building index of PiSi files under %s"
 msgstr "* %s altındaki PiSi dosyalarının bir indeksi yapılıyor"
 
-#: pisi/api.py:624
+#: pisi/api.py:626
 msgid "* Index file written"
 msgstr "* İndeks dosyası yazıldı"
 
-#: pisi/api.py:629
+#: pisi/api.py:631
 msgid "Not a valid repo name."
 msgstr "Geçerli bir depo ismi değil."
 
-#: pisi/api.py:632
+#: pisi/api.py:634
 msgid "Repo %s already present."
 msgstr "Depo %s halihazırda var."
 
-#: pisi/api.py:635
+#: pisi/api.py:637
 msgid "Repo already present with name %s."
 msgstr "Depo halihazırda %s ismi ile mevcut."
 
-#: pisi/api.py:639
+#: pisi/api.py:641
 msgid "Repo %s added to system."
 msgstr "%s isimli depo sisteme eklendi."
 
-#: pisi/api.py:646
+#: pisi/api.py:648
 msgid "Repo %s removed from system."
 msgstr "%s isimli depo sistemden çıkarıldı."
 
-#: pisi/api.py:648
+#: pisi/api.py:650
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "%s deposu yok. Kaldırılamıyor."
 
-#: pisi/api.py:663
+#: pisi/api.py:665
 msgid "* Updating repository: %s"
 msgstr "* %s deposu güncelleniyor"
 
-#: pisi/api.py:673
+#: pisi/api.py:675
 msgid "%s repository information is up-to-date."
 msgstr "%s depo bilgisi güncel."
 
-#: pisi/api.py:675
+#: pisi/api.py:677
 msgid "Updating database at any rate as requested"
 msgstr "Veritabanı istek üzerine güncelleniyor"
 
-#: pisi/api.py:685
+#: pisi/api.py:687
 msgid "* Package database updated."
 msgstr "* Paket veritabanı güncellendi."
 
-#: pisi/api.py:687
+#: pisi/api.py:689
 msgid "No repository named %s found."
 msgstr "%s adında bir depo bulunamadı."
 
-#: pisi/api.py:704
+#: pisi/api.py:706
 msgid "* Adding '%s' to db... "
 msgstr "* '%s' veritabanına ekleniyor... "
 
-#: pisi/api.py:707
+#: pisi/api.py:709
 msgid "OK."
 msgstr "Tamam."
 
-#: pisi/atomicoperations.py:72 pisi/operations/history.py:70
+#: pisi/atomicoperations.py:72 pisi/operations/history.py:77
 msgid "Package %s found in repository %s"
 msgstr "Paket %s, %s deposunda bulundu"
 
@@ -404,7 +402,7 @@ msgstr "Paket adresi: %s"
 
 #: pisi/atomicoperations.py:111
 msgid "Download Error: Package does not match the repository package."
-msgstr ""
+msgstr "İndirme hatası: Paket depodaki paket ile uyuşmuyor."
 
 #: pisi/atomicoperations.py:115
 msgid "Package %s not found in any active repository."
@@ -481,8 +479,7 @@ msgstr "%s saklanıyor"
 
 #: pisi/atomicoperations.py:477
 msgid "File list could not be read for package %s, continuing removal."
-msgstr ""
-"%s paketi için dosya listesi okunamadı, kaldırma işlemine devam ediliyor. "
+msgstr "%s paketi için dosya listesi okunamadı, kaldırma işlemine devam ediliyor. "
 
 #: pisi/atomicoperations.py:483
 msgid "Removing package %s"
@@ -497,8 +494,7 @@ msgid "Not removing conflicted file : %s"
 msgstr "Çakışan dosya silinmiyor : %s"
 
 #: pisi/atomicoperations.py:553
-msgid ""
-"Installed file %s does not exist on system [Probably you manually deleted]"
+msgid "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr "Kurulmuş dosya %s sistemde bulunmuyor [Muhtemelen el ile silindi]"
 
 #: pisi/cli/__init__.py:76
@@ -700,7 +696,7 @@ msgstr "Bileşen altındaki kurulu paketleri kontrol et"
 
 #: pisi/cli/check.py:51
 msgid "Checks only changed config files of the packages"
-msgstr ""
+msgstr "Sadece paketlerin değiştirilen ayar dosyalarını kontrol eder"
 
 #: pisi/cli/check.py:67
 msgid "Checking all installed packages"
@@ -1173,17 +1169,21 @@ msgstr "Halihazırda kurulu paketi yeniden kur"
 msgid "Install component's and recursive components' packages"
 msgstr "Bileşenin ve alt bileşenlerinin paketlerini kur"
 
-#: pisi/cli/install.py:59 pisi/cli/upgrade.py:70
+#: pisi/cli/install.py:59
+msgid "Name of the component's repository"
+msgstr "Bileşenin depo ismi"
+
+#: pisi/cli/install.py:61 pisi/cli/upgrade.py:72
 msgid "Fetch upgrades but do not install."
 msgstr "Yükseltilecekleri indir ama kurma"
 
-#: pisi/cli/install.py:61
+#: pisi/cli/install.py:63
 msgid ""
 "When installing packages, ignore packages and components whose basenames "
 "match pattern."
 msgstr "Paket kurarken, ifade ile eşleşen paket ve bileşenleri gözardı et."
 
-#: pisi/cli/install.py:63
+#: pisi/cli/install.py:65
 msgid ""
 "When installing packages, ignore packages and components whose "
 "basenames                      match any pattern contained in file."
@@ -1267,10 +1267,8 @@ msgstr "Detaylı kurulum bilgisi göster"
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/listinstalled.py:76 pisi/cli/listupgrades.py:78
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr ""
-"Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr "Paket Adı        |Dm|  Versiyon| Sürüm|  İnşa|  Dağıt.|            Tarih"
 
 #: pisi/cli/listnewest.py:26
 msgid ""
@@ -1291,13 +1289,13 @@ msgstr "list-newest seçenekleri"
 msgid ""
 "List new packages added to repository after this given date formatted as "
 "yyyy-mm-dd"
-msgstr ""
+msgstr "yyyy-aa-gg biçiminde girilen tarihten sonra depoya eklenen yeni paketleri listeler"
 
 #: pisi/cli/listnewest.py:49
 msgid ""
 "List new packages added to repository after last nth previous repository "
 "update"
-msgstr ""
+msgstr "Önceki n'inci depo güncellemesinden sonra depoya eklenen yeni paketleri listeler"
 
 #: pisi/cli/listnewest.py:77
 msgid "Packages added to %s since %s:\n"
@@ -1360,7 +1358,7 @@ msgstr "list-upgrades seçenekleri"
 msgid "List upgradable packages under given component"
 msgstr "Bileşen altındaki güncellenebilir paketleri listele"
 
-#: pisi/cli/listupgrades.py:69 pisi/operations/upgrade.py:109
+#: pisi/cli/listupgrades.py:69 pisi/operations/upgrade.py:112
 msgid "No packages to upgrade."
 msgstr "Yükseltilecek paket yok."
 
@@ -1418,7 +1416,7 @@ msgstr "remove seçenekler"
 
 #: pisi/cli/remove.py:46
 msgid "Removes everything including changed config files of the package"
-msgstr ""
+msgstr "Değiştirilen ayar dosyaları dahil herşeyi kaldırır"
 
 #: pisi/cli/remove.py:48
 msgid "Remove component's and recursive components' packages"
@@ -1433,7 +1431,7 @@ msgid ""
 "Remove all repository information from the system.\n"
 msgstr ""
 
-#: pisi/cli/search.py:24
+#: pisi/cli/search.py:25
 msgid ""
 "Search packages\n"
 "\n"
@@ -1446,23 +1444,23 @@ msgid ""
 "database.\n"
 msgstr ""
 
-#: pisi/cli/search.py:42
+#: pisi/cli/search.py:43
 msgid "search options"
 msgstr "search seçenekleri"
 
-#: pisi/cli/search.py:44
+#: pisi/cli/search.py:45
 msgid "Summary and description language"
 msgstr "Özet ve açıklama dili"
 
-#: pisi/cli/search.py:46
+#: pisi/cli/search.py:47
 msgid "Name of the source or package repository"
 msgstr "Kaynak ya da ikili paket deposu ismi"
 
-#: pisi/cli/search.py:48
+#: pisi/cli/search.py:49
 msgid "Search in installdb"
 msgstr "Installdb içinde ara"
 
-#: pisi/cli/search.py:50
+#: pisi/cli/search.py:51
 msgid "Search in sourcedb"
 msgstr "Sourcedb içinde ara"
 
@@ -1551,7 +1549,11 @@ msgstr "Depoları güncelleme"
 msgid "Upgrade component's and recursive components' packages"
 msgstr "Bileşenin ve alt bileşenlerinin paketlerini güncelle"
 
-#: pisi/cli/upgrade.py:72
+#: pisi/cli/upgrade.py:70
+msgid "Name of the to be upgraded packages' repository"
+msgstr "Güncellenecek paketlerin depo ismi"
+
+#: pisi/cli/upgrade.py:74
 msgid ""
 "When upgrading system, ignore packages and components whose basenames match "
 "pattern."
@@ -1559,7 +1561,7 @@ msgstr ""
 "Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile "
 "eşleşenleri yok say"
 
-#: pisi/cli/upgrade.py:74
+#: pisi/cli/upgrade.py:76
 msgid ""
 "When upgrading system, ignore packages and components whose "
 "basenames                      match any pattern contained in file."
@@ -1567,11 +1569,11 @@ msgstr ""
 "Sistemi yükseltirken paket ya da bileşen isimlerinden dosya içerisinde "
 "verilen kalıplardan herhangi birisi ile eşleşenleri yok say"
 
-#: pisi/cli/upgrade.py:87
+#: pisi/cli/upgrade.py:89
 msgid "Updating repositories"
 msgstr "Depolar güncelleniyor"
 
-#: pisi/cli/upgrade.py:91
+#: pisi/cli/upgrade.py:93
 msgid "Will not update repositories"
 msgstr "Depolar güncellenmeyecek"
 
@@ -1883,8 +1885,7 @@ msgstr "PiSi kaynak paketi %s inşa ediliyor"
 
 #: pisi/operations/build.py:235
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr ""
-"IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
+msgstr "IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
 
 #: pisi/operations/build.py:240
 msgid "CCache detected..."
@@ -1971,16 +1972,14 @@ msgid "unable to call function from actions: %s"
 msgstr "fonksiyon eylemlerden çağırılamıyor: %s"
 
 #: pisi/operations/build.py:499
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Emniyet mandalı: taban geliştirme sistemi system.devel içindeki bu paketler "
 "ek olarak kurulacak:"
 
 #: pisi/operations/build.py:504
 msgid "Safety switch: system.devel is already installed"
-msgstr ""
-"Emniyet mandalı: taban geliştirme sistemi system.devel halihazırda kurulu"
+msgstr "Emniyet mandalı: taban geliştirme sistemi system.devel halihazırda kurulu"
 
 #: pisi/operations/build.py:506
 msgid "Safety switch: the component system.devel cannot be found"
@@ -2080,8 +2079,7 @@ msgid "Abandoned files under the install dir (%s):"
 msgstr "kurulum dizini (%s) altındaki terkedilmiş dosyalar:"
 
 #: pisi/operations/build.py:954
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Kurulum dizini (%s) altındaki bütün dosyalar paket(ler) tarafından "
 "toplanmıştır"
@@ -2141,7 +2139,7 @@ msgstr ""
 "kurulacak:\n"
 
 #: pisi/operations/emerge.py:62 pisi/operations/install.py:79
-#: pisi/operations/upgrade.py:143
+#: pisi/operations/upgrade.py:146
 msgid "There are extra packages due to dependencies. Do you want to continue?"
 msgstr "Bağımlılıklar yüzünden ek paketler var. Devam etmek istiyor musunuz?"
 
@@ -2173,33 +2171,33 @@ msgstr "Bu çakışan paketler kaldırılsın mı?"
 msgid "Conflicts remain"
 msgstr "Çakışmalar var"
 
-#: pisi/operations/history.py:84
+#: pisi/operations/history.py:87 pisi/operations/history.py:97
 msgid "%s could not be found"
 msgstr "%s bulunamadı"
 
-#: pisi/operations/history.py:87 pisi/package.py:60 pisi/sourcearchive.py:92
+#: pisi/operations/history.py:100 pisi/package.py:60 pisi/sourcearchive.py:92
 msgid "%s [cached]"
 msgstr "%s [önbellekte]"
 
-#: pisi/operations/history.py:132
+#: pisi/operations/history.py:145
 msgid "Following packages will be installed:\n"
 msgstr "Bu paketler kurulacak:\n"
 
-#: pisi/operations/history.py:135
+#: pisi/operations/history.py:148
 msgid "Following packages will be removed:\n"
 msgstr "Bu paketler kaldırılacak:\n"
 
-#: pisi/operations/history.py:137 pisi/operations/history.py:151
+#: pisi/operations/history.py:150 pisi/operations/history.py:164
 #: pisi/operations/install.py:158 pisi/operations/remove.py:72
 msgid "Do you want to continue?"
 msgstr "Devam etmek istiyor musunuz?"
 
-#: pisi/operations/history.py:143 pisi/operations/install.py:88
-#: pisi/operations/upgrade.py:150
+#: pisi/operations/history.py:156 pisi/operations/install.py:88
+#: pisi/operations/upgrade.py:153
 msgid "Downloading %d / %d"
 msgstr "İndiriliyor %d / %d"
 
-#: pisi/operations/history.py:149
+#: pisi/operations/history.py:162
 msgid ""
 "\n"
 "Following packages could not be found in repositories and are not cached:\n"
@@ -2211,8 +2209,7 @@ msgstr ""
 msgid ""
 "The following package(s) are already installed and are not going to be "
 "installed again:\n"
-msgstr ""
-"Aşağıdaki paket(ler) zaten sistemde kurulu ve yeniden kurulmayacak(lar):\n"
+msgstr "Aşağıdaki paket(ler) zaten sistemde kurulu ve yeniden kurulmayacak(lar):\n"
 
 # pisi/api.py:168 :215
 #: pisi/operations/install.py:50 pisi/operations/install.py:171
@@ -2223,14 +2220,13 @@ msgstr "Kurulacak paket yok."
 msgid ""
 "Following packages will be installed in the respective order to satisfy "
 "dependencies:\n"
-msgstr ""
-"Bağımlılıkları sağlamak için bu paketler verilen sırada kurulacaktır:\n"
+msgstr "Bağımlılıkları sağlamak için bu paketler verilen sırada kurulacaktır:\n"
 
-#: pisi/operations/install.py:73 pisi/operations/upgrade.py:137
+#: pisi/operations/install.py:73 pisi/operations/upgrade.py:140
 msgid "Total size of package(s): %.2f %s"
 msgstr "Paket(ler)in toplam boyu: %.2f %s"
 
-#: pisi/operations/install.py:97 pisi/operations/upgrade.py:167
+#: pisi/operations/install.py:97 pisi/operations/upgrade.py:170
 msgid "Installing %d / %d"
 msgstr "Kuruluyor %d / %d"
 
@@ -2246,8 +2242,7 @@ msgstr "Dış bağımlılıklar sağlanamadı: %s"
 msgid ""
 "The following packages will be installed\n"
 "in the respective order to satisfy extra dependencies:\n"
-msgstr ""
-"Ek bağımlılıkları sağlamak için bu paketler verilen sırada kurulacaktır:\n"
+msgstr "Ek bağımlılıkları sağlamak için bu paketler verilen sırada kurulacaktır:\n"
 
 #: pisi/operations/install.py:159
 msgid "External dependencies not satisfied"
@@ -2259,10 +2254,9 @@ msgstr "Kurulum sırası: "
 
 #: pisi/operations/remove.py:44
 msgid "Safety switch: cannot remove the following packages in system.base: "
-msgstr ""
-"Emniyet mandalı: taban sistem system.base deki bu paketler kaldırılamıyor: "
+msgstr "Emniyet mandalı: taban sistem system.base deki bu paketler kaldırılamıyor: "
 
-#: pisi/operations/remove.py:48 pisi/operations/upgrade.py:251
+#: pisi/operations/remove.py:48 pisi/operations/upgrade.py:254
 msgid "Safety switch: the component system.base cannot be found"
 msgstr "Emniyet mandalı: taban sistem bileşeni system.base bulunamadı"
 
@@ -2278,8 +2272,7 @@ msgstr "Kaldıracak paket yok."
 msgid ""
 "The following minimal list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
-msgstr ""
-"Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:\n"
+msgstr "Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:\n"
 
 #: pisi/operations/remove.py:73
 msgid "Package removal declined"
@@ -2317,30 +2310,29 @@ msgstr "Paket %s zaten en son sürüm %s'de"
 msgid "Package %s is already at the latest build %s."
 msgstr "Paket %s zaten en son inşa %s'de."
 
-#: pisi/operations/upgrade.py:132
+#: pisi/operations/upgrade.py:135
 msgid "The following packages will be upgraded: "
 msgstr "Bu paketler yükseltilecektir: "
 
-#: pisi/operations/upgrade.py:201
+#: pisi/operations/upgrade.py:204
 msgid "Dependency %s of %s cannot be satisfied"
 msgstr "%s bağımlılığı, %s paketi için sağlanamadı"
 
-#: pisi/operations/upgrade.py:202
+#: pisi/operations/upgrade.py:205
 msgid "Upgrade is not possible."
 msgstr "Yükseltme mümkün değil."
 
-#: pisi/operations/upgrade.py:218
+#: pisi/operations/upgrade.py:221
 msgid "Reverse dependency %s of %s cannot be satisfied"
 msgstr "Ters bağımlılık %s, %s paketi için sağlanamadı"
 
-#: pisi/operations/upgrade.py:239
+#: pisi/operations/upgrade.py:242
 msgid "Safety switch: Following packages in system.base will be installed: "
 msgstr "Emniyet mandalı: taban sistem system.base'den bu paketler kurulacak:"
 
-#: pisi/operations/upgrade.py:245
+#: pisi/operations/upgrade.py:248
 msgid "Safety switch: Following packages in system.base will be upgraded: "
-msgstr ""
-"Emniyet mandalı: taban sistem system.base'den bu paketler yükseltilecek:"
+msgstr "Emniyet mandalı: taban sistem system.base'den bu paketler yükseltilecek:"
 
 #: pisi/package.py:56
 msgid ""
@@ -2586,8 +2578,7 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 
 #: scripts/repostats.py:467
@@ -2600,8 +2591,7 @@ msgstr ""
 
 #: scripts/repostats.py:553
 msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-msgstr ""
-"Kullanım: repostats.py [SEÇENEKLER] source-repo-path [ikili-depo-adresi]\n"
+msgstr "Kullanım: repostats.py [SEÇENEKLER] source-repo-path [ikili-depo-adresi]\n"
 
 #: scripts/repostats.py:554
 msgid "Dont generate the web site.\n"
@@ -2615,5 +2605,3 @@ msgstr "Kaynak deposu taranıyor...\n"
 msgid "Scanning binary packages...\n"
 msgstr "İkili dosyalar taranıyor...\n"
 
-#~ msgid "Skipping %s with wrong pkg name "
-#~ msgstr "Yanlış paket adına sahip %s atlanıyor"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
-"POT-Creation-Date: 2009-02-04 12:38+EET\n"
+"POT-Creation-Date: 2009-02-13 14:20+EET\n"
 "PO-Revision-Date: 2007-07-11 21:08+0200\n"
 "Last-Translator: Andrea Decorte <adecorte@gmail.com>\n"
 "Language-Team: Italian <pardus-translation-it@pardus.org.tr>\n"
@@ -164,8 +164,9 @@ msgid "No file matched pattern \"%s\". 'domove' operation failed."
 msgstr "ActionsAPI [chmod]: Il file %s non esiste."
 
 #: pisi/actionsapi/pisitools.py:186
-msgid "ActionsAPI [rename]: No such file or directory: %s"
-msgstr "ActionsAPI [rename]: File o cartella non esistente: %s"
+#, fuzzy
+msgid "ActionsAPI [rename]: %s: %s"
+msgstr "ActionsAPI [copytree] %s in %s: %s"
 
 #: pisi/actionsapi/pisitools.py:201
 msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
@@ -175,24 +176,24 @@ msgstr ""
 msgid "dosed method has not changed file '%s'."
 msgstr ""
 
-#: pisi/actionsapi/pisitools.py:218
+#: pisi/actionsapi/pisitools.py:217
 msgid "File does not exist or permission denied: %s"
 msgstr "Il file non esiste o non si hanno i permessi necessari: %s"
 
-#: pisi/actionsapi/pisitools.py:235
+#: pisi/actionsapi/pisitools.py:234
 msgid "ActionsAPI [dosym]: File exists: %s"
 msgstr "ActionsAPI [dosym]: Il file esiste"
 
-#: pisi/actionsapi/pisitools.py:244 pisi/actionsapi/pisitoolsfunctions.py:71
+#: pisi/actionsapi/pisitools.py:243 pisi/actionsapi/pisitoolsfunctions.py:71
 msgid "No file matched pattern \"%s\"."
 msgstr ""
 
-#: pisi/actionsapi/pisitools.py:271
+#: pisi/actionsapi/pisitools.py:270
 #, fuzzy
 msgid "No file matched pattern \"%s\". Remove operation failed."
 msgstr "ActionsAPI [chmod]: Il file %s non esiste."
 
-#: pisi/actionsapi/pisitools.py:280
+#: pisi/actionsapi/pisitools.py:279
 #, fuzzy
 msgid "No directory matched pattern \"%s\". Remove directory operation failed."
 msgstr "ActionsAPI [chmod]: Il file %s non esiste."
@@ -307,94 +308,94 @@ msgstr "ActionsAPI [touch]: Permesso negato: %s"
 msgid "Command \"%s\" failed, return value was %d."
 msgstr ""
 
-#: pisi/api.py:61 pisi/cli/command.py:167
+#: pisi/api.py:60 pisi/cli/command.py:167
 #, fuzzy
 msgid "You have to be root for this operation."
 msgstr ""
 "Impossibile ottenere accesso in lettura al database PiSi. Devi essere root "
 "per eseguire questa operazione."
 
-#: pisi/api.py:66
+#: pisi/api.py:65
 #, fuzzy
 msgid "Another instance of PiSi is running. Only one instance is allowed."
 msgstr ""
 "Un'altra istanza di PiSi è in esecuzione. La modifica del database di PiSi è "
 "consentita a un'unica istanza alla volta."
 
-#: pisi/api.py:454
+#: pisi/api.py:453
 msgid "Taking snapshot of the system"
 msgstr ""
 
-#: pisi/api.py:565
+#: pisi/api.py:567
 msgid "comar package is not fully installed"
 msgstr "il pacchetto COMAR non è completamente installato"
 
-#: pisi/api.py:577
+#: pisi/api.py:579
 msgid "File %s not found"
 msgstr "File %s non trovato"
 
-#: pisi/api.py:617
+#: pisi/api.py:619
 msgid "* Building index of PiSi files under %s"
 msgstr "* Costruzione dell'indice dei file PiSi in %s"
 
-#: pisi/api.py:624
+#: pisi/api.py:626
 msgid "* Index file written"
 msgstr "* File di indice scritto"
 
-#: pisi/api.py:629
+#: pisi/api.py:631
 msgid "Not a valid repo name."
 msgstr ""
 
-#: pisi/api.py:632
+#: pisi/api.py:634
 msgid "Repo %s already present."
 msgstr "Il repository %s è già presente."
 
-#: pisi/api.py:635
+#: pisi/api.py:637
 #, fuzzy
 msgid "Repo already present with name %s."
 msgstr "Il repository %s è già presente."
 
-#: pisi/api.py:639
+#: pisi/api.py:641
 msgid "Repo %s added to system."
 msgstr "Il repository %s è stato aggiunto al sistema."
 
-#: pisi/api.py:646
+#: pisi/api.py:648
 msgid "Repo %s removed from system."
 msgstr "Il repository %s è stato rimosso dal sistema."
 
-#: pisi/api.py:648
+#: pisi/api.py:650
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "Il repository %s non esiste. Impossibile rimuovere."
 
-#: pisi/api.py:663
+#: pisi/api.py:665
 msgid "* Updating repository: %s"
 msgstr "* Aggiornamento del repository: %s"
 
-#: pisi/api.py:673
+#: pisi/api.py:675
 msgid "%s repository information is up-to-date."
 msgstr ""
 
-#: pisi/api.py:675
+#: pisi/api.py:677
 msgid "Updating database at any rate as requested"
 msgstr "Aggiornamento del database alla frequenza richiesta"
 
-#: pisi/api.py:685
+#: pisi/api.py:687
 msgid "* Package database updated."
 msgstr "* Database dei pacchetti aggiornato."
 
-#: pisi/api.py:687
+#: pisi/api.py:689
 msgid "No repository named %s found."
 msgstr "Nessun repository di nome %s trovato."
 
-#: pisi/api.py:704
+#: pisi/api.py:706
 msgid "* Adding '%s' to db... "
 msgstr "* Aggiunta di %s al database... "
 
-#: pisi/api.py:707
+#: pisi/api.py:709
 msgid "OK."
 msgstr "OK."
 
-#: pisi/atomicoperations.py:72 pisi/operations/history.py:70
+#: pisi/atomicoperations.py:72 pisi/operations/history.py:77
 msgid "Package %s found in repository %s"
 msgstr "Pacchetto %s trovato nel repository %s"
 
@@ -1293,11 +1294,15 @@ msgstr "Reinstalla i pacchetti già installati"
 msgid "Install component's and recursive components' packages"
 msgstr "Installa i pacchetti del componente e dei componenti ricorsivi"
 
-#: pisi/cli/install.py:59 pisi/cli/upgrade.py:70
+#: pisi/cli/install.py:59
+msgid "Name of the component's repository"
+msgstr ""
+
+#: pisi/cli/install.py:61 pisi/cli/upgrade.py:72
 msgid "Fetch upgrades but do not install."
 msgstr "Recupera aggiornamenti ma non installarli."
 
-#: pisi/cli/install.py:61
+#: pisi/cli/install.py:63
 #, fuzzy
 msgid ""
 "When installing packages, ignore packages and components whose basenames "
@@ -1306,7 +1311,7 @@ msgstr ""
 "All'aggiornamento del sistema, ignora i pacchetti e i componenti i cui nomi "
 "base corrispondono al modello."
 
-#: pisi/cli/install.py:63
+#: pisi/cli/install.py:65
 #, fuzzy
 msgid ""
 "When installing packages, ignore packages and components whose "
@@ -1524,7 +1529,7 @@ msgstr "opzioni list-upgrades"
 msgid "List upgradable packages under given component"
 msgstr "Elenca i pacchetti aggiornabili sotto il componente fornito"
 
-#: pisi/cli/listupgrades.py:69 pisi/operations/upgrade.py:109
+#: pisi/cli/listupgrades.py:69 pisi/operations/upgrade.py:112
 msgid "No packages to upgrade."
 msgstr "Nessun pacchetto da aggiornare."
 
@@ -1621,7 +1626,7 @@ msgstr ""
 "\n"
 "Rimuove tutte le informazioni dei repository dal sistema.\n"
 
-#: pisi/cli/search.py:24
+#: pisi/cli/search.py:25
 #, fuzzy
 msgid ""
 "Search packages\n"
@@ -1641,24 +1646,24 @@ msgstr ""
 "Trova un pacchetto che contiene i termini di ricerca specificati\n"
 "nei campi sommario, descrizione e nome del pacchetto.\n"
 
-#: pisi/cli/search.py:42
+#: pisi/cli/search.py:43
 msgid "search options"
 msgstr "opzioni di ricerca"
 
-#: pisi/cli/search.py:44
+#: pisi/cli/search.py:45
 msgid "Summary and description language"
 msgstr ""
 
-#: pisi/cli/search.py:46
+#: pisi/cli/search.py:47
 msgid "Name of the source or package repository"
 msgstr ""
 
-#: pisi/cli/search.py:48
+#: pisi/cli/search.py:49
 #, fuzzy
 msgid "Search in installdb"
 msgstr "%s non è installato"
 
-#: pisi/cli/search.py:50
+#: pisi/cli/search.py:51
 #, fuzzy
 msgid "Search in sourcedb"
 msgstr "Ricerca di %s in corso"
@@ -1780,7 +1785,11 @@ msgstr "Non aggiornare i repository"
 msgid "Upgrade component's and recursive components' packages"
 msgstr "Aggiorna i pacchetti del componente e dei componenti ricorsivi"
 
-#: pisi/cli/upgrade.py:72
+#: pisi/cli/upgrade.py:70
+msgid "Name of the to be upgraded packages' repository"
+msgstr ""
+
+#: pisi/cli/upgrade.py:74
 msgid ""
 "When upgrading system, ignore packages and components whose basenames match "
 "pattern."
@@ -1788,7 +1797,7 @@ msgstr ""
 "All'aggiornamento del sistema, ignora i pacchetti e i componenti i cui nomi "
 "base corrispondono al modello."
 
-#: pisi/cli/upgrade.py:74
+#: pisi/cli/upgrade.py:76
 msgid ""
 "When upgrading system, ignore packages and components whose "
 "basenames                      match any pattern contained in file."
@@ -1796,11 +1805,11 @@ msgstr ""
 "All'aggiornamento del sistema, ignora i pacchetti e i componenti i cui nomi "
 "base                      corrispondono a uno dei modelli contenuti nel file."
 
-#: pisi/cli/upgrade.py:87
+#: pisi/cli/upgrade.py:89
 msgid "Updating repositories"
 msgstr "Aggiornamento repository in corso"
 
-#: pisi/cli/upgrade.py:91
+#: pisi/cli/upgrade.py:93
 msgid "Will not update repositories"
 msgstr "Non aggiornerà i repository"
 
@@ -2380,7 +2389,7 @@ msgstr ""
 "installata nel rispettivo ordine per soddisfare le dipendenze:\n"
 
 #: pisi/operations/emerge.py:62 pisi/operations/install.py:79
-#: pisi/operations/upgrade.py:143
+#: pisi/operations/upgrade.py:146
 msgid "There are extra packages due to dependencies. Do you want to continue?"
 msgstr ""
 "Sono inclusi dei pacchetti extra per via delle dipendenze. Desideri "
@@ -2414,36 +2423,36 @@ msgstr "Rimuovere i seguenti pacchetti conflittanti?"
 msgid "Conflicts remain"
 msgstr "Il conflitto rimane"
 
-#: pisi/operations/history.py:84
+#: pisi/operations/history.py:87 pisi/operations/history.py:97
 #, fuzzy
 msgid "%s could not be found"
 msgstr "Utilità %s non trovata"
 
-#: pisi/operations/history.py:87 pisi/package.py:60 pisi/sourcearchive.py:92
+#: pisi/operations/history.py:100 pisi/package.py:60 pisi/sourcearchive.py:92
 msgid "%s [cached]"
 msgstr "%s [nella cache]"
 
-#: pisi/operations/history.py:132
+#: pisi/operations/history.py:145
 #, fuzzy
 msgid "Following packages will be installed:\n"
 msgstr "I seguenti pacchetti verranno aggiornati: "
 
-#: pisi/operations/history.py:135
+#: pisi/operations/history.py:148
 #, fuzzy
 msgid "Following packages will be removed:\n"
 msgstr "I seguenti pacchetti verranno aggiornati: "
 
-#: pisi/operations/history.py:137 pisi/operations/history.py:151
+#: pisi/operations/history.py:150 pisi/operations/history.py:164
 #: pisi/operations/install.py:158 pisi/operations/remove.py:72
 msgid "Do you want to continue?"
 msgstr "Vuoi proseguire?"
 
-#: pisi/operations/history.py:143 pisi/operations/install.py:88
-#: pisi/operations/upgrade.py:150
+#: pisi/operations/history.py:156 pisi/operations/install.py:88
+#: pisi/operations/upgrade.py:153
 msgid "Downloading %d / %d"
 msgstr "Scaricamento di %d/%d"
 
-#: pisi/operations/history.py:149
+#: pisi/operations/history.py:162
 msgid ""
 "\n"
 "Following packages could not be found in repositories and are not cached:\n"
@@ -2469,11 +2478,11 @@ msgstr ""
 "I seguenti pacchetti verranno installati nel\n"
 "rispettivo ordine per soddisfare le dipendenze:\n"
 
-#: pisi/operations/install.py:73 pisi/operations/upgrade.py:137
+#: pisi/operations/install.py:73 pisi/operations/upgrade.py:140
 msgid "Total size of package(s): %.2f %s"
 msgstr "Dimensione totale dei pacchetti: %.2f %s"
 
-#: pisi/operations/install.py:97 pisi/operations/upgrade.py:167
+#: pisi/operations/install.py:97 pisi/operations/upgrade.py:170
 msgid "Installing %d / %d"
 msgstr "Installazione di %d/%d"
 
@@ -2508,7 +2517,7 @@ msgstr ""
 "Switch di sicurezza: impossibile rimuovere i seguenti pacchetti in system."
 "base: "
 
-#: pisi/operations/remove.py:48 pisi/operations/upgrade.py:251
+#: pisi/operations/remove.py:48 pisi/operations/upgrade.py:254
 msgid "Safety switch: the component system.base cannot be found"
 msgstr "Switch di sicurezza: il componente system.base non è stato trovato"
 
@@ -2564,29 +2573,29 @@ msgstr "Il pacchetto %s è già alla versione più recente %s."
 msgid "Package %s is already at the latest build %s."
 msgstr "Il pacchetto %s è già alla build più recente %s."
 
-#: pisi/operations/upgrade.py:132
+#: pisi/operations/upgrade.py:135
 msgid "The following packages will be upgraded: "
 msgstr "I seguenti pacchetti verranno aggiornati: "
 
-#: pisi/operations/upgrade.py:201
+#: pisi/operations/upgrade.py:204
 msgid "Dependency %s of %s cannot be satisfied"
 msgstr "Impossibile soddisfare la dipendenza %s di %s"
 
-#: pisi/operations/upgrade.py:202
+#: pisi/operations/upgrade.py:205
 msgid "Upgrade is not possible."
 msgstr "L'aggiornamento non è possibile."
 
-#: pisi/operations/upgrade.py:218
+#: pisi/operations/upgrade.py:221
 msgid "Reverse dependency %s of %s cannot be satisfied"
 msgstr "La dipendenza inversa %s di %s non può essere soddisfatta"
 
-#: pisi/operations/upgrade.py:239
+#: pisi/operations/upgrade.py:242
 msgid "Safety switch: Following packages in system.base will be installed: "
 msgstr ""
 "Switch di sicurezza: i seguenti pacchetti in system.base verranno "
 "installati: "
 
-#: pisi/operations/upgrade.py:245
+#: pisi/operations/upgrade.py:248
 msgid "Safety switch: Following packages in system.base will be upgraded: "
 msgstr ""
 "Switch di sicurezza: i seguenti pacchetti in system.base verranno "
@@ -2868,6 +2877,9 @@ msgstr "Scansione del repository sorgente in corso...\n"
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr "Scansione dei pacchetti binari in corso...\n"
+
+#~ msgid "ActionsAPI [rename]: No such file or directory: %s"
+#~ msgstr "ActionsAPI [rename]: File o cartella non esistente: %s"
 
 #~ msgid "Skipping %s with wrong pkg name "
 #~ msgstr "Salto %s con nome del pacchetto errato"
