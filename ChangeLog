@@ -1,3 +1,14 @@
+2009-02-13 Faik Uygur <faik@pardus.org.tr>
+        * Make enableSandbox enabled default
+        * Export CXX and CC before compiling
+
+2009-02-10 Faik Uygur <faik@pardus.org.tr>
+        * pisi history --takeback should not give an exception and quit when package
+        does not found (#9083)
+
+2009-02-10 Faik Uygur <faik@pardus.org.tr>
+        * Make pisi search output colored like grep (#9156)
+
 2009-02-05 Bahadır Kandemir <bahadir@pardus.org.tr>
         * pisi/api.py (configure_pending): Import comariface when necessary.
 
