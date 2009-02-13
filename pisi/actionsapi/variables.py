@@ -35,6 +35,10 @@ def exportFlags():
     os.environ['USER_LDFLAGS'] = values.build.ldflags
     os.environ['JOBS'] = values.build.jobs
 
+    # http://liste.pardus.org.tr/gelistirici/2009-January/016442.html
+    os.environ['CC'] = "%s-gcc" % values.build.host
+    os.environ['CXX'] = "%s-g++" % values.build.host
+
 class Env(object):
     '''General environment variables used in actions API'''
     def __init__(self):
