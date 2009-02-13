@@ -20,6 +20,8 @@ import tarfile
 import zipfile
 import gzip
 import struct
+import sys
+import distutils.version
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -187,7 +189,7 @@ class ArchiveTar(ArchiveBase):
     def close(self):
         self.tar.close()
 
-        if self.tar.mode == 'wb' and self.type == 'tarlzma':
+        if 'w' in str(self.tar.mode) and self.type == 'tarlzma':
             batch = None
             if ctx.config.values.build.compressionlevel:
                 batch = "lzma -%s -z %s" % (ctx.config.values.build.compressionlevel, self.file_path)
@@ -414,7 +416,12 @@ class ArchiveZip(ArchiveBase):
                     perm &= 0x08FF0000
                     perm >>= 16
                     perm |= 0x00000100
-                    zip_obj.decompressToFile(info.filename, ofile)
+
+                    version = sys.version.split()[0]
+                    if distutils.version.StrictVersion(version) < distutils.version.StrictVersion("2.6.0"):
+                        zip_obj.decompressToFile(info.filename, ofile)
+                    else:
+                        zip_obj.extract(info.filename, target_dir)
                     os.chmod(ofile, perm)
 
     def unpack_files(self, paths, target_dir):
