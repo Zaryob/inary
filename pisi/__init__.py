@@ -13,6 +13,7 @@
 # PiSi version
 
 import os
+import sys
 import atexit
 import logging
 
@@ -66,6 +67,11 @@ def _cleanup():
 
     ctx.ui.close()
     ctx.enable_keyboard_interrupts()
+
+# Hack for pisi to work with non-patched Python. pisi needs
+# lots of work for not doing this.
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 atexit.register(_cleanup)
 
