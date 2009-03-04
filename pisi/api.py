@@ -670,12 +670,14 @@ def __update_repo(repo, force=False):
         repouri = repodb.get_repo(repo).indexuri.get_uri()
         try:
             index.read_uri_of_repo(repouri, repo)
+            pisi.db.packagedb.PackageDB().cache_flush()
             pisi.db.historydb.HistoryDB().update_repo(repo, repouri, "update")
         except pisi.file.AlreadyHaveException, e:
             ctx.ui.info(_('%s repository information is up-to-date.') % repo)
             if force:
                 ctx.ui.info(_('Updating database at any rate as requested'))
                 index.read_uri_of_repo(repouri, repo, force = force)
+                pisi.db.packagedb.PackageDB().cache_flush()
             else:
                 return
 

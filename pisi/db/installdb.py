@@ -65,6 +65,8 @@ class InstallInfo:
 class InstallDB(lazydb.LazyDB):
 
     def init(self):
+        self.cacheable = True
+
         self.installed_db = self.__generate_installed_pkgs()
         self.confing_pending_db = self.__generate_config_pending()
         self.rev_deps_db = self.__generate_revdeps()
@@ -192,7 +194,7 @@ class InstallDB(lazydb.LazyDB):
     def add_package(self, pkginfo):
         self.installed_db[pkginfo.name] = "%s-%s" % (pkginfo.version, pkginfo.release)
         self.__add_to_revdeps(pkginfo.name, self.rev_deps_db)
-        
+
     def remove_package(self, package_name):
         if self.installed_db.has_key(package_name):
             del self.installed_db[package_name]
@@ -219,3 +221,6 @@ class InstallDB(lazydb.LazyDB):
             return os.path.join(ctx.config.packages_dir(), "%s-%s" % (package, self.installed_db[package]))
 
         raise Exception(_('Package %s is not installed') % package)
+
+    def close(self):
+        self.cache_save()

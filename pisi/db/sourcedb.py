@@ -25,6 +25,7 @@ import pisi.db.lazydb as lazydb
 class SourceDB(lazydb.LazyDB):
 
     def init(self):
+        self.cacheable = True
 
         self.__source_nodes = {}
         self.__pkgstosrc = {}

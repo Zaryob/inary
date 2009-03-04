@@ -62,6 +62,10 @@ def _cleanup():
     if filesdb.is_initialized():
         filesdb.close()
 
+    installdb = pisi.db.installdb.InstallDB()
+    if installdb.is_initialized():
+        installdb.close()
+
     if ctx.build_leftover and os.path.exists(ctx.build_leftover):
         os.unlink(ctx.build_leftover)
 

@@ -10,6 +10,8 @@
 # Please read the COPYING file.
 #
 
+import os
+import cPickle
 import time
 import pisi.context as ctx
 
@@ -26,11 +28,29 @@ class LazyDB(Singleton):
 
     def is_initialized(self):
         return self.initialized
-    
+
+    def cache_save(self):
+        if os.access("/var/cache/pisi", os.W_OK) and self.__class__._the_instance.__dict__.has_key("cacheable"):
+            cPickle.dump(self.__class__._the_instance.__dict__,
+                         file('/var/cache/pisi/%s.cache' % self.__class__.__name__.lower(), 'wb'), 1)
+
+    def cache_load(self):
+        if os.path.exists("/var/cache/pisi/%s.cache" % self.__class__.__name__.lower()):
+            self.__class__._the_instance.__dict__ = cPickle.load(file('/var/cache/pisi/%s.cache' % self.__class__.__name__.lower(), 'rb'))
+            return True
+        return False
+
+    def cache_flush(self):
+        cache_file = "/var/cache/pisi/%s.cache" % self.__class__.__name__.lower()
+        if os.path.exists(cache_file):
+            os.unlink(cache_file)
+
     def __getattr__(self, attr):
-        if not self.initialized:
+        if not attr == "__setstate__" and not self.initialized:
             start = time.time()
-            self.init()
+            if not self.cache_load():
+                self.init()
+                self.cache_save()
             end = time.time()
             ctx.ui.debug("%s initialized in %s." % (self.__class__.__name__, end - start))
             self.initialized = True
