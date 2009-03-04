@@ -22,15 +22,16 @@ class Singleton(object):
         return type._the_instance
 
 class LazyDB(Singleton):
-    def __init__(self):
+    def __init__(self, cacheable=False):
         if not self.__dict__.has_key("initialized"):
             self.initialized = False
+        self.cacheable = cacheable
 
     def is_initialized(self):
         return self.initialized
 
     def cache_save(self):
-        if os.access("/var/cache/pisi", os.W_OK) and self.__class__._the_instance.__dict__.has_key("cacheable"):
+        if os.access("/var/cache/pisi", os.W_OK) and self.cacheable:
             cPickle.dump(self.__class__._the_instance.__dict__,
                          file('/var/cache/pisi/%s.cache' % self.__class__.__name__.lower(), 'wb'), 1)
 

@@ -35,9 +35,10 @@ import pisi.db.lazydb as lazydb
 
 class PackageDB(lazydb.LazyDB):
 
-    def init(self):
-        self.cacheable = True
+    def __init__(self):
+        lazydb.LazyDB.__init__(self, cacheable=True)
 
+    def init(self):
         self.__package_nodes = {} # Packages
         self.__revdeps = {}       # Reverse dependencies
         self.__obsoletes = {}     # Obsoletes

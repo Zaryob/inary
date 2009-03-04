@@ -25,9 +25,10 @@ import pisi.db.lazydb as lazydb
 
 class ComponentDB(lazydb.LazyDB):
 
-    def init(self):
-        self.cacheable = True
+    def __init__(self):
+        lazydb.LazyDB.__init__(self, cacheable=True)
 
+    def init(self):
         component_nodes = {}
         component_packages = {}
         component_sources = {}
