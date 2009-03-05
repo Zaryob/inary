@@ -424,6 +424,15 @@ def get_takeback_plan(operation):
     return beinstalled, beremoved
 
 @locked
+def delete_cache():
+    """
+    Deletes cached packages, cached archives, build dirs
+    """
+    pisi.util.clean_dir(ctx.config.cached_packages_dir())
+    pisi.util.clean_dir(ctx.config.archives_dir())
+    pisi.util.clean_dir(ctx.config.tmp_dir())
+
+@locked
 def snapshot():
     """
     Takes snapshot of the system packages. The snapshot is only a record of which packages are currently
@@ -689,12 +698,6 @@ def __update_repo(repo, force=False):
         ctx.ui.info(_('* Package database updated.'))
     else:
         raise pisi.Error(_('No repository named %s found.') % repo)
-
-@locked
-def delete_cache():
-    pisi.util.clean_dir(ctx.config.cached_packages_dir())
-    pisi.util.clean_dir(ctx.config.archives_dir())
-    pisi.util.clean_dir(ctx.config.tmp_dir())
 
 # FIXME: rebuild_db is only here for filesdb and it really is ugly. we should not need any rebuild.
 @locked
