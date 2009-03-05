@@ -64,9 +64,10 @@ class InstallInfo:
 
 class InstallDB(lazydb.LazyDB):
 
-    def init(self):
-        self.cacheable = True
+    def __init__(self):
+        lazydb.LazyDB.__init__(self, cacheable=True)
 
+    def init(self):
         self.installed_db = self.__generate_installed_pkgs()
         self.confing_pending_db = self.__generate_config_pending()
         self.rev_deps_db = self.__generate_revdeps()
