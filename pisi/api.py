@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005 - 2009, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -664,11 +664,14 @@ def update_repos(repos, force=False):
     pisi.db.historydb.HistoryDB().create_history("repoupdate")
     for repo in repos:
         __update_repo(repo, force)
+    pisi.db.reload()
+
 
 @locked
 def update_repo(repo, force=False):
     pisi.db.historydb.HistoryDB().create_history("repoupdate")
     __update_repo(repo, force)
+    pisi.db.reload()
 
 def __update_repo(repo, force=False):
     ctx.ui.info(_('* Updating repository: %s') % repo)
@@ -679,14 +682,12 @@ def __update_repo(repo, force=False):
         repouri = repodb.get_repo(repo).indexuri.get_uri()
         try:
             index.read_uri_of_repo(repouri, repo)
-            pisi.db.packagedb.PackageDB().cache_flush()
             pisi.db.historydb.HistoryDB().update_repo(repo, repouri, "update")
         except pisi.file.AlreadyHaveException, e:
             ctx.ui.info(_('%s repository information is up-to-date.') % repo)
             if force:
                 ctx.ui.info(_('Updating database at any rate as requested'))
                 index.read_uri_of_repo(repouri, repo, force = force)
-                pisi.db.packagedb.PackageDB().cache_flush()
             else:
                 return
 

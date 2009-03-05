@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2007, TUBITAK/UEKAE
+# Copyright (C) 2007-2009, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -46,15 +46,22 @@ class LazyDB(Singleton):
         if os.path.exists(cache_file):
             os.unlink(cache_file)
 
+    def reload(self):
+        self.cache_flush()
+        self.__init()
+
     def close(self):
         self.cache_save()
+
+    def __init(self):
+        if not self.cache_load():
+            self.init()
+            self.cache_save()
 
     def __getattr__(self, attr):
         if not attr == "__setstate__" and not self.initialized:
             start = time.time()
-            if not self.cache_load():
-                self.init()
-                self.cache_save()
+            self.__init()
             end = time.time()
             ctx.ui.debug("%s initialized in %s." % (self.__class__.__name__, end - start))
             self.initialized = True
