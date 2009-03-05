@@ -46,6 +46,9 @@ class LazyDB(Singleton):
         if os.path.exists(cache_file):
             os.unlink(cache_file)
 
+    def close(self):
+        self.cache_save()
+
     def __getattr__(self, attr):
         if not attr == "__setstate__" and not self.initialized:
             start = time.time()

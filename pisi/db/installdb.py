@@ -221,6 +221,3 @@ class InstallDB(lazydb.LazyDB):
             return os.path.join(ctx.config.packages_dir(), "%s-%s" % (package, self.installed_db[package]))
 
         raise Exception(_('Package %s is not installed') % package)
-
-    def close(self):
-        self.cache_save()
