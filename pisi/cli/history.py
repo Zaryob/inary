@@ -75,7 +75,7 @@ Lists previous operations.""")
                     print "    *",  repo
             else:
                 for pkg in operation.packages:
-                    print "    *",  pkg
+                    print "    *",  pkg.name
             print
 
     def redirect_output(self):
