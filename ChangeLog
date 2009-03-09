@@ -1,8 +1,5 @@
-2009-03-08 Ozan Çağlayan <ozan@pardus.org.tr>
-        * pisi/cli/history.py(History.print_history): pkg.name should be
-        printed instead of pkg. Thanks İbrahim for noticing this bug causing
-        pisi hs output to contain only '*' character for every package in a
-        snapshot.
+2009-03-09 Faik Uygur <faik@pardus.org.tr>
+        * Fix pisi hs output for snapshot printing empty "*"
 
 2009-02-13 Bahadır Kandemir <bahadir@pardus.org.tr>
         * Merged Python 2.6 patch
