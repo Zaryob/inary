@@ -1,3 +1,7 @@
+2009-03-11 Ozan Çağlayan <ozan@pardus.org.tr>
+        * pisi/actionsapi/pisitools.py: Implement new method removeLaFiles()
+        to recursively delete libtool *la files from /usr/lib.
+
 2009-03-09 Faik Uygur <faik@pardus.org.tr>
         * Fix pisi hs output for snapshot printing empty "*"
 

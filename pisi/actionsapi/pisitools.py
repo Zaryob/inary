@@ -280,3 +280,10 @@ def removeDir(destinationDirectory):
 
     for directory in destdirGlob:
         unlinkDir(directory)
+
+def removeLaFiles(lookInto='/usr/lib/'):
+    ''' cleans *.la files from /usr/lib '''
+    for root, dirs, files in os.walk('%s/%s' % (get.installDIR(), lookInto)):
+        for laFile in files:
+            if laFile.endswith('.la') and can_access_file('%s/%s' % (root, laFile)):
+                unlink('%s/%s' % (root, laFile))
