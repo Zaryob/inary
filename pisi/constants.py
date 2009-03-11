@@ -51,7 +51,7 @@ class Constants:
         self.__c.lzma_suffix = ".lzma"
 
         # suffix for auto generated debug packages
-        self.__c.debug_name_suffix = "-debug"
+        self.__c.debug_name_suffix = "-dbginfo"
         self.__c.debug_file_suffix = ".debug"
 
         # suffix for auto generated ar packages
