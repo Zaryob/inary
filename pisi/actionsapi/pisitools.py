@@ -59,7 +59,7 @@ def dohtml(*sourceFiles):
     '''inserts the files in the list of files into /usr/share/doc/PACKAGE/html'''
 
     ''' example call: pisitools.dohtml("doc/doxygen/html/*")'''
-    destionationDirectory = join_path(get.installDIR(), 'usr/share/doc' ,get.srcTAG(), 'html')
+    destionationDirectory = join_path(get.installDIR(), 'usr/share/doc', get.srcNAME(), 'html')
 
     if not can_access_directory(destionationDirectory):
         makedirs(destionationDirectory)
@@ -255,7 +255,7 @@ def newdoc(sourceFile, destinationFile):
     destinationFile = os.path.basename(destinationFile)
     # Use copy instead of move or let build-install scream like file not found!
     copy(sourceFile, destinationFile)
-    readable_insinto(join_path(get.installDIR(), 'usr/share/doc', get.srcTAG(), destinationDirectory), destinationFile)
+    readable_insinto(join_path(get.installDIR(), 'usr/share/doc', get.srcNAME(), destinationDirectory), destinationFile)
 
 def newman(sourceFile, destinationFile):
     '''inserts a sourceFile into /usr/share/man/manPREFIX/ directory as a destinationFile'''
