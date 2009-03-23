@@ -1,6 +1,6 @@
 Index: pisi/comariface.py
 ===================================================================
---- pisi/comariface.py	(revision 21595)
+--- pisi/comariface.py	(revision 21915)
 +++ pisi/comariface.py	(working copy)
 @@ -26,16 +26,23 @@
      pass
@@ -219,7 +219,7 @@ Index: pisi/comariface.py
          raise Error, _("Script error: %s") % exception
 Index: pisi/api.py
 ===================================================================
---- pisi/api.py	(revision 21595)
+--- pisi/api.py	(revision 21915)
 +++ pisi/api.py	(working copy)
 @@ -97,12 +97,12 @@
      """
@@ -238,23 +238,9 @@ Index: pisi/api.py
  
  def set_dbus_sockname(sockname):
      """
-@@ -524,11 +524,12 @@
- def configure_pending(packages=None):
-     # start with pending packages
-     # configure them in reverse topological order of dependency
--    installdb = pisi.db.installdb.InstallDB()
- 
-     # Import COMAR
-     import pisi.comariface
- 
-+    installdb = pisi.db.installdb.InstallDB()
-+
-     if not packages:
-         packages = installdb.list_pending()
-     else:
 Index: pisi/atomicoperations.py
 ===================================================================
---- pisi/atomicoperations.py	(revision 21595)
+--- pisi/atomicoperations.py	(revision 21915)
 +++ pisi/atomicoperations.py	(working copy)
 @@ -165,7 +165,7 @@
          # check comar
@@ -292,7 +278,7 @@ Index: pisi/atomicoperations.py
          self.historydb.add_and_update(pkgBefore=self.package, operation="remove")        
 Index: pisi/context.py
 ===================================================================
---- pisi/context.py	(revision 21595)
+--- pisi/context.py	(revision 21915)
 +++ pisi/context.py	(working copy)
 @@ -38,7 +38,7 @@
  stderr = None
