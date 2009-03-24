@@ -165,7 +165,7 @@ class Install(AtomicOperation):
         # check comar
         if self.metadata.package.providesComar and ctx.comar:
             import pisi.comariface as comariface
-            comariface.get_iface()
+            comariface.get_link()
 
     def check_versioning(self, version):
         if not pisi.version.Version.valid(version):
@@ -492,6 +492,8 @@ class Remove(AtomicOperation):
         for fileinfo in self.files.list:
             self.remove_file(fileinfo, self.package_name, True)
 
+        self.run_postremove()
+
         self.update_databases()
 
         self.remove_pisi_files()
@@ -563,6 +565,15 @@ class Remove(AtomicOperation):
         if ctx.comar:
             import pisi.comariface
             pisi.comariface.pre_remove(
+                self.package_name,
+                os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
+                os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+            )
+
+    def run_postremove(self):
+        if ctx.comar:
+            import pisi.comariface
+            pisi.comariface.post_remove(
                 self.package_name,
                 os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
                 os.path.join(self.package.pkg_dir(), ctx.const.files_xml),

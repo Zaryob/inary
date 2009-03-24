@@ -38,7 +38,7 @@ stdout = None
 stderr = None
 
 comar = True
-comar_destination = "tr.org.pardus.comar"
+comar_updated = False
 dbus_sockname = None
 dbus_timeout = 300
 

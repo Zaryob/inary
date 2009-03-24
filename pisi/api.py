@@ -97,12 +97,12 @@ def set_comar(enable):
     """
     ctx.comar = enable
 
-def set_comar_destination(destination):
+def set_comar_updated(updated):
     """
-    Set comar bus destination
-    @param destination: Path to bus destination of COMAR
+    Set comar package update status
+    @param updated: True if COMAR package is updated, else False
     """
-    ctx.comar_destination = destination
+    ctx.comar_updated = updated
 
 def set_dbus_sockname(sockname):
     """
