@@ -81,8 +81,12 @@ class Install(AtomicOperation):
                 (version, release, build) = installdb.get_version(pkg.name)
                 delta = pkg.get_delta(buildFrom=build)
 
+            # Check if delta is enabled in pisi.conf
+            config = pisi.configfile.ConfigurationFile("/etc/pisi/pisi.conf")
+            ignore_delta = config.get("general", "ignore_delta")
+
             # If delta exists than use the delta uri.
-            if delta:
+            if delta and not ignore_delta:
                 pkg_uri = delta.packageURI
                 pkg_hash = delta.packageHash
             else:

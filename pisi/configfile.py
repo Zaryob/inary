@@ -75,6 +75,7 @@ class GeneralDefaults:
     package_cache = False
     package_cache_limit = 0
     bandwidth_limit = 0
+    ignore_delta = False
 
 class BuildDefaults:
     """Default values for [build] section"""
