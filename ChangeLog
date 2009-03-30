@@ -1,3 +1,7 @@
+2009-03-30 Faik Uygur <faik@pardus.org.tr>
+        * Fix a bug in new "reverseDependencyUpdate" tag, where it forces to install all reverseDeps that are
+        also not installed
+
 2009-03-24 Bahadır Kandemir <bahadir@pardus.org.tr>
         * Allow disabling delta package support from pisi.conf
 
