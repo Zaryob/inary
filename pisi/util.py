@@ -103,7 +103,7 @@ def remove_prefix(a,b):
     return b[len(a):]
 
 def human_readable_size(size = 0):
-    symbols, depth = [' B', 'KB', 'MB', 'GB'], 0
+    symbols, depth = [' B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'], 0
 
     while size > 1000 and depth < 3:
         size = float(size / 1024)
