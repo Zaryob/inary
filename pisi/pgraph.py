@@ -55,32 +55,6 @@ class PGraph(graph.Digraph):
         self.add_edge(str(pkg), str(depinfo.package), ('d', depinfo),
                       pkg1data, pkg2data )
 
-    def add_rev_dep(self, depinfo, pkg):
-        pkg1data = None
-        if not pkg in self.vertices():
-            pkg1 = self.packagedb.get_package(depinfo.package)
-            pkg1data = (pkg1.version, pkg1.release)
-        pkg2data = None
-        if not depinfo.package in self.vertices():
-            pkg2 = self.packagedb.get_package(pkg)
-            pkg2data = (pkg2.version, pkg2.release)
-        self.add_edge(str(depinfo.package), str(pkg), ('d', depinfo),
-                      pkg1data, pkg2data )
-
-    def add_conflict(self, pkg, conflinfo):
-        pkg1data = None
-        if not pkg in self.vertices():
-            pkg1 = self.packagedb.get_package(pkg)
-            pkg1data = (pkg1.version, pkg1.release)
-        pkg2data = None
-        if not pkg in self.vertices():
-            pkg2 = self.packagedb.get_package(conflinfo.package)
-            pkg2data = (pkg2.version, pkg2.release)
-
-        # FIXME: WTF? /usr/lib/pardus/pisi/pgraph.py:80: Invalid arguments to (add_biedge), got 5, expected between 2 and 3 / caglar
-        self.add_biedge(str(pkg), str(conflinfo.package), ('c', conflinfo)
-                        , pkg1data, pkg2data )
-
     def write_graphviz_vlabel(self, f, u):
         (v, r) = self.vertex_data(u)
         f.write('[ label = \"' + str(u) + '(' + str(v) + ',' + str(r) + ')\" ]')
