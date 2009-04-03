@@ -143,7 +143,7 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath,
 def pre_remove(package_name, metapath, filepath):
     """Do package's pre removal operations"""
     
-    ctx.ui.info(_("Configuring %s package for removal") % package_name)
+    ctx.ui.info(_("Running pre removal operations for %s") % package_name)
     link = get_link()
     
     package_name = safe_package_name(package_name)
@@ -169,7 +169,7 @@ def pre_remove(package_name, metapath, filepath):
 def post_remove(package_name, metapath, filepath):
     """Do package's post removal operations"""
     
-    ctx.ui.info(_("Configuring %s package for removal") % package_name)
+    ctx.ui.info(_("Running post removal operations for %s") % package_name)
     link = get_link()
     
     package_name = safe_package_name(package_name)
