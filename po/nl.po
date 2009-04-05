@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "POT-Creation-Date: 2009-02-13 14:20+EET\n"
-"PO-Revision-Date: 2009-02-06 11:33+0100\n"
+"PO-Revision-Date: 2009-04-05 09:56+0200\n"
 "Last-Translator: Willem Gielen <w.gielen@gmail.com>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -172,18 +172,15 @@ msgstr "ActionsAPI [doman]: onjuist man-pagina bestand: %s"
 
 #: pisi/actionsapi/pisitools.py:167
 msgid "No file matched pattern \"%s\". 'domove' operation failed."
-msgstr ""
-"Geen bestand komt overeen met patroon \"%s\". 'domove' handeling mislukt."
+msgstr "Geen bestand komt overeen met patroon \"%s\". 'domove' handeling mislukt."
 
 #: pisi/actionsapi/pisitools.py:186
-#, fuzzy
 msgid "ActionsAPI [rename]: %s: %s"
-msgstr "ActionsAPI [copytree] %s naar %s: %s"
+msgstr "ActionsAPI [rename] %s: %s"
 
 #: pisi/actionsapi/pisitools.py:201
 msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
-msgstr ""
-"Geen bestand komt overeen met patroon: \"%s\". 'dosed' handeling misluky."
+msgstr "Geen bestand komt overeen met patroon: \"%s\". 'dosed' handeling misluky."
 
 #: pisi/actionsapi/pisitools.py:214
 msgid "dosed method has not changed file '%s'."
@@ -406,8 +403,7 @@ msgstr "Pakket-URI: %s"
 
 #: pisi/atomicoperations.py:111
 msgid "Download Error: Package does not match the repository package."
-msgstr ""
-"Download fout: Pakket komt niet overeen met het pakket in de repository."
+msgstr "Download fout: Pakket komt niet overeen met het pakket in de repository."
 
 #: pisi/atomicoperations.py:115
 msgid "Package %s not found in any active repository."
@@ -503,8 +499,7 @@ msgid "Not removing conflicted file : %s"
 msgstr "Niet verwijderen conflicterend bestand: %s"
 
 #: pisi/atomicoperations.py:553
-msgid ""
-"Installed file %s does not exist on system [Probably you manually deleted]"
+msgid "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
 "Geïnstalleerd bestand %s bestaat niet op systeem [waarschijnlijk handmatig "
 "verwijderd]"
@@ -1342,8 +1337,7 @@ msgstr "Toon gedetailleerde installatie-informatie"
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/listinstalled.py:76 pisi/cli/listupgrades.py:78
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
 msgstr "Pakketnaam     |St|   Versie|  Rel.| Bouw |  Distro|             Datum"
 
 #: pisi/cli/listnewest.py:26
@@ -2053,8 +2047,7 @@ msgid "unable to call function from actions: %s"
 msgstr "kan functie niet aanroepen vanuit actions: %s"
 
 #: pisi/operations/build.py:499
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Veiligheidsprocedure: de volgende extra pakketten in system.devel zullen "
 "geïnstalleerd worden:"
@@ -2161,10 +2154,8 @@ msgid "Abandoned files under the install dir (%s):"
 msgstr "Verlaten bestanden in de installatiemap (%s):"
 
 #: pisi/operations/build.py:954
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
-msgstr ""
-"Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)."
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
+msgstr "Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)."
 
 #: pisi/operations/build.py:958
 msgid "Cleaning Build Directory..."
@@ -2677,10 +2668,8 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-msgstr ""
-"Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgstr "Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
 
 #: scripts/repostats.py:467
 msgid ""
@@ -2706,5 +2695,3 @@ msgstr "Scannen bron-repository...\n"
 msgid "Scanning binary packages...\n"
 msgstr "Scannen binaire pakketten...\n"
 
-#~ msgid "ActionsAPI [rename]: No such file or directory: %s"
-#~ msgstr "ActionsAPI [rename]: bestand of map niet gevonden: %s"
