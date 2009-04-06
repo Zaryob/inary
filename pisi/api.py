@@ -780,7 +780,6 @@ def build(*args, **kw):
 def clearCache(all=False):
 
     import glob
-    from sets import Set as set
 
     def getPackageLists(pkgList):
         latest = {}

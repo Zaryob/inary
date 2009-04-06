@@ -62,7 +62,6 @@ Usage: list-installed
         component = ctx.get_option('component')
         if component:
             #FIXME: pisi api is insufficient to do this
-            from sets import Set as set
             component_pkgs = self.componentdb.get_union_packages(component, walk=True)
             installed = list(set(installed) & set(component_pkgs))
 
