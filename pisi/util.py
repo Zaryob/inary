@@ -17,7 +17,7 @@
 import os
 import re
 import sys
-import sha
+import hashlib
 import shutil
 import string
 import fnmatch
@@ -397,7 +397,7 @@ def sha1_file(filename):
     """Calculate sha1 hash of file."""
     # Broken links can cause problem!
     try:
-        m = sha.new()
+        m = hashlib.sha1()
         f = file(filename, 'rb')
         while True:
             # 256 KB seems ideal for speed/memory tradeoff
@@ -418,7 +418,7 @@ def sha1_file(filename):
 
 def sha1_data(data):
     """Calculate sha1 hash of given data."""
-    m = sha.new()
+    m = hashlib.sha1()
     m.update(data)
     return m.hexdigest()
 
