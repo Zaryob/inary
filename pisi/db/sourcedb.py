@@ -34,7 +34,7 @@ class SourceDB(lazydb.LazyDB):
 
         repodb = pisi.db.repodb.RepoDB()
 
-        for repo in repodb.list_repos():
+        for repo in repodb.get_source_repos():
             doc = repodb.get_repo_doc(repo)
             self.__source_nodes[repo], self.__pkgstosrc[repo] = self.__generate_sources(doc)
             self.__revdeps[repo] = self.__generate_revdeps(doc)
