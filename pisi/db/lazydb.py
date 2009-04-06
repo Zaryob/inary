@@ -16,10 +16,17 @@ import time
 import pisi.context as ctx
 
 class Singleton(object):
+    _the_instances = {}
     def __new__(type):
-        if not '_the_instance' in type.__dict__:
-            type._the_instance = object.__new__(type)
-        return type._the_instance
+        if not type.__name__ in Singleton._the_instances:
+            Singleton._the_instances[type.__name__] = object.__new__(type)
+        return Singleton._the_instances[type.__name__]
+
+    def _instance(self):
+        return self._the_instances[type(self).__name__]
+
+    def _delete(self):
+        del self._the_instances[type(self).__name__]
 
 class LazyDB(Singleton):
     def __init__(self, cacheable=False):
@@ -32,12 +39,12 @@ class LazyDB(Singleton):
 
     def cache_save(self):
         if os.access("/var/cache/pisi", os.W_OK) and self.cacheable:
-            cPickle.dump(self.__class__._the_instance.__dict__,
+            cPickle.dump(self._instance().__dict__,
                          file('/var/cache/pisi/%s.cache' % self.__class__.__name__.lower(), 'wb'), 1)
 
     def cache_load(self):
         if os.path.exists("/var/cache/pisi/%s.cache" % self.__class__.__name__.lower()):
-            self.__class__._the_instance.__dict__ = cPickle.load(file('/var/cache/pisi/%s.cache' % self.__class__.__name__.lower(), 'rb'))
+            self._instance().__dict__ = cPickle.load(file('/var/cache/pisi/%s.cache' % self.__class__.__name__.lower(), 'rb'))
             return True
         return False
 
@@ -46,17 +53,12 @@ class LazyDB(Singleton):
         if os.path.exists(cache_file):
             os.unlink(cache_file)
 
-    def reload(self):
-        self.cache_flush()
-        self.__init()
-
-    def close(self):
-        self.cache_save()
+    def invalidate(self):
+        self._delete()
 
     def __init(self):
         if not self.cache_load():
             self.init()
-            self.cache_save()
 
     def __getattr__(self, attr):
         if not attr == "__setstate__" and not self.initialized:

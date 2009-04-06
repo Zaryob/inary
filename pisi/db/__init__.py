@@ -10,9 +10,19 @@
 # Please read the COPYING file.
 #
 
-import pisi
+def invalidate_caches():
+    # Invalidates pisi caches in use and forces to re-fill caches from disk when needed
+    for db in [packagedb.PackageDB(), sourcedb.SourceDB(), componentdb.ComponentDB(), installdb.InstallDB()]:
+        db.invalidate()
 
-def reload():
-    pisi.db.packagedb.PackageDB().reload()
-    pisi.db.sourcedb.SourceDB().reload()
-    pisi.db.componentdb.ComponentDB().reload()
+def flush_caches():
+    # Invalidate and flush caches to re-generate them when needed
+    for db in [packagedb.PackageDB(), sourcedb.SourceDB(), componentdb.ComponentDB()]:
+        db.invalidate()
+        db.cache_flush()
+
+def update_caches():
+    # Updates ondisk caches
+    for db in [packagedb.PackageDB(), sourcedb.SourceDB(), componentdb.ComponentDB(), installdb.InstallDB()]:
+        if db.is_initialized():
+            db.cache_save()

@@ -65,8 +65,10 @@ def locked(func):
             raise pisi.errors.AnotherInstanceError(_("Another instance of PiSi is running. Only one instance is allowed."))
 
         try:
+            pisi.db.invalidate_caches()
             return func(*__args,**__kw)
         finally:
+            pisi.db.update_caches()
             lock.close()
     return wrapper
 
@@ -646,6 +648,7 @@ def add_repo(name, indexuri, at = None):
     else:
         repo = pisi.db.repodb.Repo(pisi.uri.URI(indexuri))
         repodb.add_repo(name, repo, at = at)
+        pisi.db.flush_caches()
         ctx.ui.info(_('Repo %s added to system.') % name)
 
 @locked
@@ -653,6 +656,7 @@ def remove_repo(name):
     repodb = pisi.db.repodb.RepoDB()
     if repodb.has_repo(name):
         repodb.remove_repo(name)
+        pisi.db.flush_caches()
         ctx.ui.info(_('Repo %s removed from system.') % name)
     else:
         raise pisi.Error(_('Repository %s does not exist. Cannot remove.')
@@ -663,14 +667,13 @@ def update_repos(repos, force=False):
     pisi.db.historydb.HistoryDB().create_history("repoupdate")
     for repo in repos:
         __update_repo(repo, force)
-    pisi.db.reload()
-
+    pisi.db.flush_caches()
 
 @locked
 def update_repo(repo, force=False):
     pisi.db.historydb.HistoryDB().create_history("repoupdate")
     __update_repo(repo, force)
-    pisi.db.reload()
+    pisi.db.flush_caches()
 
 def __update_repo(repo, force=False):
     ctx.ui.info(_('* Updating repository: %s') % repo)
