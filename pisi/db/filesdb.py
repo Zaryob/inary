@@ -16,7 +16,7 @@ _ = __trans.ugettext
 import os
 import re
 import shelve
-import md5
+import hashlib
 
 import pisi
 import pisi.context as ctx
@@ -35,10 +35,10 @@ class FilesDB(lazydb.LazyDB):
         self.__check_filesdb()
 
     def has_file(self, path):
-        return self.filesdb.has_key(md5.new(path).digest())
+        return self.filesdb.has_key(hashlib.md5(path).digest())
 
     def get_file(self, path):
-        return self.filesdb[md5.new(path).digest()], path
+        return self.filesdb[hashlib.md5(path).digest()], path
 
     def search_file(self, term):
         if self.has_file(term):
@@ -59,12 +59,12 @@ class FilesDB(lazydb.LazyDB):
         self.__check_filesdb()
 
         for f in files.list:
-            self.filesdb[md5.new(f.path).digest()] = pkg
+            self.filesdb[hashlib.md5(f.path).digest()] = pkg
 
     def remove_files(self, files):
         for f in files:
-            if self.filesdb.has_key(md5.new(f.path).digest()):
-                del self.filesdb[md5.new(f.path).digest()]
+            if self.filesdb.has_key(hashlib.md5(f.path).digest()):
+                del self.filesdb[hashlib.md5(f.path).digest()]
 
     def destroy(self):
         files_db = os.path.join(ctx.config.info_dir(), ctx.const.files_db)
