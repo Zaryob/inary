@@ -37,28 +37,28 @@ class LazyDB(Singleton):
     def is_initialized(self):
         return self.initialized
 
+    def __cache_file(self):
+        return "/var/cache/pisi/%s.cache" % self.__class__.__name__.lower()
+
     def cache_save(self):
         if os.access("/var/cache/pisi", os.W_OK) and self.cacheable:
             cPickle.dump(self._instance().__dict__,
-                         file('/var/cache/pisi/%s.cache' % self.__class__.__name__.lower(), 'wb'), 1)
+                         file(self.__cache_file(), 'wb'), 1)
 
     def cache_load(self):
-        cache_file = "/var/cache/pisi/%s.cache" % self.__class__.__name__.lower()
-        if os.path.exists(cache_file):
+        if os.path.exists(self.__cache_file()):
             try:
-                self._instance().__dict__ = cPickle.load(file(cache_file, 'rb'))
+                self._instance().__dict__ = cPickle.load(file(self.__cache_file(), 'rb'))
                 return True
             except cPickle.UnpicklingError:
-                # Delete corrupted cache
                 if os.access("/var/cache/pisi", os.W_OK):
-                    os.unlink(cache_file)
+                    os.unlink(self.__cache_file())
                 return False
         return False
 
     def cache_flush(self):
-        cache_file = "/var/cache/pisi/%s.cache" % self.__class__.__name__.lower()
-        if os.path.exists(cache_file):
-            os.unlink(cache_file)
+        if os.path.exists(self.__cache_file()):
+            os.unlink(self.__cache_file())
 
     def invalidate(self):
         self._delete()
