@@ -43,9 +43,16 @@ class LazyDB(Singleton):
                          file('/var/cache/pisi/%s.cache' % self.__class__.__name__.lower(), 'wb'), 1)
 
     def cache_load(self):
-        if os.path.exists("/var/cache/pisi/%s.cache" % self.__class__.__name__.lower()):
-            self._instance().__dict__ = cPickle.load(file('/var/cache/pisi/%s.cache' % self.__class__.__name__.lower(), 'rb'))
-            return True
+        cache_file = "/var/cache/pisi/%s.cache" % self.__class__.__name__.lower()
+        if os.path.exists(cache_file):
+            try:
+                self._instance().__dict__ = cPickle.load(file(cache_file, 'rb'))
+                return True
+            except cPickle.UnpicklingError:
+                # Delete corrupted cache
+                if os.access("/var/cache/pisi", os.W_OK):
+                    os.unlink(cache_file)
+                return False
         return False
 
     def cache_flush(self):
