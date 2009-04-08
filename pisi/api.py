@@ -433,7 +433,7 @@ def delete_cache():
     pisi.util.clean_dir(ctx.config.cached_packages_dir())
     pisi.util.clean_dir(ctx.config.archives_dir())
     pisi.util.clean_dir(ctx.config.tmp_dir())
-    for cache in filter(lambda x: x.endswith(".cache"), os.listdir(ctx.config.cache_root_dir()))
+    for cache in filter(lambda x: x.endswith(".cache"), os.listdir(ctx.config.cache_root_dir())):
         os.unlink(pisi.util.join_path(ctx.config.cache_root_dir(), cache))
 
 @locked
