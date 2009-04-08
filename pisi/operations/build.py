@@ -13,6 +13,7 @@
 
 # python standard library
 import os
+import re
 import sys
 import glob
 import copy
