@@ -107,6 +107,9 @@ class Config(object):
     def archives_dir(self):
         return self.subdir(self.values.dirs.archives_dir)
 
+    def cache_root_dir(self):
+        return self.subdir(self.values.dirs.cache_root_dir)
+
     def cached_packages_dir(self):
         return self.subdir(self.values.dirs.cached_packages_dir)
 

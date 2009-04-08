@@ -98,6 +98,7 @@ class DirectoriesDefaults:
     info_dir = "/var/lib/pisi/info"
     history_dir = "/var/lib/pisi/history"
     archives_dir = "/var/cache/pisi/archives"
+    cache_root_dir = "/var/cache/pisi"
     cached_packages_dir = "/var/cache/pisi/packages"
     compiled_packages_dir = "/var/cache/pisi/packages"
     debug_packages_dir = "/var/cache/pisi/packages-debug"

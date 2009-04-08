@@ -428,11 +428,13 @@ def get_takeback_plan(operation):
 @locked
 def delete_cache():
     """
-    Deletes cached packages, cached archives, build dirs
+    Deletes cached packages, cached archives, build dirs, db caches
     """
     pisi.util.clean_dir(ctx.config.cached_packages_dir())
     pisi.util.clean_dir(ctx.config.archives_dir())
     pisi.util.clean_dir(ctx.config.tmp_dir())
+    for cache in filter(lambda x: x.endswith(".cache"), os.listdir(ctx.config.cache_root_dir()))
+        os.unlink(pisi.util.join_path(ctx.config.cache_root_dir(), cache))
 
 @locked
 def snapshot():
