@@ -28,15 +28,16 @@ import pisi.actionsapi.pisitools    as pisitools
 import pisi.actionsapi.shelltools   as shelltools
 
 def __getFlavour():
-    flavuor = ""
+    flavour = ""
     try:
-        flavuor = get.srcNAME().split("kernel-")[1]
+        flavour = get.srcNAME().split("kernel-")[1]
     except IndexError:
         pass
 
     return flavour
 
 def __getExtraVersion():
+    extraversion = ""
     try:
         # if successful, this is something like:
         # .1 for 2.6.30.1
@@ -44,7 +45,7 @@ def __getExtraVersion():
         extraversion = re.split("2.[0-9].[0-9]{2}([._].*)", get.srcVERSION())[1]
     except IndexError:
         # e.g. if version == 2.6.30
-        extraversion = ""
+        pass
 
     extraversion += "-%s" % get.srcRELEASE()
 
@@ -66,7 +67,7 @@ def configure():
     pisitools.dosed("Makefile", "EXTRAVERSION =.*", "EXTRAVERSION = %s" % extraversion)
 
     # Configure the kernel
-    autotools.make("silentoldconfig")
+    autotools.make("oldconfig")
 
 def build():
     autotools.make()
