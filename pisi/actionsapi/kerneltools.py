@@ -26,7 +26,7 @@ from pisi.actionsapi.shelltools import system
 from pisi.actionsapi.shelltools import makedirs
 from pisi.actionsapi.shelltools import copytree
 
-def installHeaders(*additionalDirs):
+def installHeaders(extra=[]):
     """ Install the files needed to build out-of-tree kernel modules. """
     pruned = ["include", "scripts"]
     wanted = ["Makefile*", "Kconfig*", "Kbuild*", "*.sh", "*.pl", "*.lds"]
@@ -44,7 +44,7 @@ def installHeaders(*additionalDirs):
     system(find_cmd)
 
     # Install additional headers passed by actions.py
-    for d in additionalDirs:
+    for d in extra:
         system("cp -a %s/*.h %s/%s" % (d, destination, d))
 
     # Install remaining headers
