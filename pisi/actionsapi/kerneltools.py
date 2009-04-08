@@ -27,6 +27,7 @@ from pisi.actionsapi.shelltools import makedirs
 from pisi.actionsapi.shelltools import copytree
 
 def installHeaders(*additionalDirs):
+    """ Install the files needed to build out-of-tree kernel modules. """
     pruned = ["include", "scripts"]
     wanted = ["Makefile*", "Kconfig*", "Kbuild*", "*.sh", "*.pl", "*.lds"]
 
