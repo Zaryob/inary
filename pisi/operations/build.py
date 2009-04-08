@@ -683,6 +683,8 @@ class Builder:
                 d[frpath] = pisi.files.FileInfo(path=frpath, type=ftype, permanent=permanent,
                                      size=fsize, hash=fhash, uid=str(st.st_uid), gid=str(st.st_gid),
                                      mode=oct(stat.S_IMODE(st.st_mode)))
+                if stat.S_IMODE(st.st_mode) & stat.S_ISUID:
+                    ctx.ui.warning(_("/%s has suid bit set") % frpath)
 
         for pinfo in package.files:
             wildcard_path = pisi.util.join_path(install_dir, pinfo.path)
