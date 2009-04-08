@@ -45,6 +45,9 @@ import pisi.db
 class Error(pisi.Error):
     pass
 
+class ActionScriptException(Error):
+    pass
+
 # Helper Functions
 def get_file_type(path, pinfo_list, install_dir):
     """Return the file type of a path according to the given PathInfo
@@ -304,7 +307,7 @@ class Builder:
 
     def fetch_component(self):
         if not self.spec.source.partOf:
-            ctx.ui.warning(_('PartOf tag not defined, looking for component'))
+            ctx.ui.info(_('PartOf tag not defined, looking for component'))
             diruri = pisi.util.parenturi(self.specuri.get_uri())
             parentdir = pisi.util.parenturi(diruri)
             url = pisi.util.join_path(parentdir, 'component.xml')
@@ -456,11 +459,11 @@ class Builder:
                             if line.startswith("~"):
                                 line = os.environ["HOME"] + line[1:]
                             valid_paths.append(line)
-                
+
                 # Extra path for ccache when needed
                 if ctx.config.values.build.buildhelper == "ccache":
                     valid_paths.append("%s/.ccache" % os.environ["HOME"])
-                
+
                 ret = catbox.run(self.actionLocals[func], valid_paths, logger=self.log_sandbox_violation)
                 # Retcode can be 0 while there is a sanbox violation, so only look for violations to correctly handle it
                 if ret.violations != []:
@@ -468,15 +471,13 @@ class Builder:
                     for result in ret.violations:
                         ctx.ui.error("* %s (%s -> %s)" % (result[0], result[1], result[2]))
                     raise Error(_("Sandbox violations!"))
-                else:
-                    # Retcode is 1 when there is a python exception.
-                    # This is for actionsapi's exceptions. Without this, when exception is raised, build process continues.
-                    if ret.code == 1:
-                        sys.exit(1)
+
+                if ret.code == 1:
+                    raise ActionScriptException
         else:
             if mandatory:
                 raise Error(_("unable to call function from actions: %s") % func)
-        
+
         os.chdir(curDir)
         return True
 
@@ -501,7 +502,7 @@ class Builder:
                     extra_deps = [dependency.Dependency(package = x) for x in extra_names]
                     build_deps.extend(extra_deps)
                 else:
-                    ctx.ui.warning(_('Safety switch: system.devel is already installed'))
+                    ctx.ui.info(_('Safety switch: system.devel is already installed'))
             else:
                 ctx.ui.warning(_('Safety switch: the component system.devel cannot be found'))
 
@@ -947,11 +948,11 @@ class Builder:
         if ctx.get_option('debug'):
             abandoned_files = self.get_abandoned_files()
             if abandoned_files:
-                ctx.ui.warning(_('Abandoned files under the install dir (%s):') % (install_dir))
+                ctx.ui.warning(_('There are abandoned files under the install dir (%s):') % (install_dir))
                 for f in abandoned_files:
                     ctx.ui.info('    - %s' % (f))
             else:
-                ctx.ui.warning(_('All of the files under the install dir (%s) has been collected by package(s)')
+                ctx.ui.info(_('All of the files under the install dir (%s) has been collected by package(s)')
                                                                 % (install_dir))
 
         if ctx.config.values.general.autoclean is True:
@@ -978,7 +979,14 @@ def build(pspec):
         pb = Builder(pspec)
     else:
         pb = Builder.from_name(pspec)
-    return pb.build()
+    try:
+        result = pb.build()
+    except ActionScriptException:
+        ctx.ui.error("Action script error caught.")
+        sys.exit(1)
+    finally:
+        ctx.ui.warning("*** %d error(s), %d warning(s)" % (ctx.ui.errors, ctx.ui.warnings))
+    return result
 
 order = {"none": 0,
          "fetch": 1,

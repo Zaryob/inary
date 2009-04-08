@@ -38,6 +38,8 @@ class UI(object):
     def __init__(self, debuggy = False, verbose = False):
         self.show_debug = debuggy
         self.show_verbose = verbose
+        self.errors = 0
+        self.warnings = 0
 
     def close(self):
         "cleanup stuff here"

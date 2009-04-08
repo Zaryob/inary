@@ -46,6 +46,8 @@ class CLI(pisi.ui.UI):
 
     def __init__(self, show_debug = False, show_verbose = False):
         super(CLI, self).__init__(show_debug, show_verbose)
+        self.warnings = 0
+        self.errors = 0
 
     def close(self):
         pisi.util.xterm_title_reset()
@@ -70,6 +72,7 @@ class CLI(pisi.ui.UI):
 
     def warning(self, msg, verbose = False):
         msg = unicode(msg)
+        self.warnings += 1
         if ctx.log:
             ctx.log.warning(msg)
         if ctx.get_option('no_color'):
@@ -79,6 +82,7 @@ class CLI(pisi.ui.UI):
 
     def error(self, msg):
         msg = unicode(msg)
+        self.errors += 1
         if ctx.log:
             ctx.log.error(msg)
         if ctx.get_option('no_color'):
