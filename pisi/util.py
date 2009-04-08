@@ -475,45 +475,8 @@ def do_patch(sourceDir, patchFile, level = 0):
 
     os.chdir(cwd)
 
-
-def strip_directory(top, excludelist=[]):
-    for root, dirs, files in os.walk(top):
-        for fn in files:
-            frpath = join_path(root, fn)
-            drpath = join_path(os.path.dirname(top),
-                               ctx.const.debug_dir_suffix,
-                               ctx.const.debug_files_suffix,
-                               remove_prefix(top, frpath))
-
-            # Some upstream sources have buggy libtool and ltmain.sh with them,
-            # which causes wrong path entries in *.la files. And these wrong path
-            # entries sometimes triggers compile-time errors or linkage problems.
-            # Instead of patching all these buggy sources and maintain these patches,
-            # PiSi removes wrong paths...
-            if frpath.endswith(".la") and not os.path.islink(frpath):
-                ladata = file(frpath).read()
-                new_ladata = re.sub("-L%s/\S*" % ctx.config.tmp_dir(), "", ladata)
-                new_ladata = re.sub("%s/\S*/install/" % ctx.config.tmp_dir(), "/", new_ladata)
-                if new_ladata != ladata:
-                    file(frpath, "w").write(new_ladata)
-            # real path in .pisi package
-            p = '/' + removepathprefix(top, frpath)
-            strip = True
-            for exclude in excludelist:
-                if p.startswith(exclude):
-                    strip = False
-                    ctx.ui.debug("%s [%s]" %(p, "NoStrip"))
-
-            if strip:
-                if strip_file(frpath, drpath):
-                    ctx.ui.debug("%s [%s]" %(p, "stripped"))
-
-
-def strip_file(filepath, outpath):
+def strip_file(filepath, fileinfo, outpath):
     """Strip an elf file from debug symbols."""
-    p = os.popen("file \"%s\"" % filepath)
-    o = p.read()
-
     def run_strip(f, flags=""):
         p = os.popen("strip %s %s" %(flags, f))
         ret = p.close()
@@ -540,11 +503,11 @@ def strip_file(filepath, outpath):
         if ret:
             ctx.ui.warning(_("objcopy (add-debuglink) command failed for file '%s'!") % f)
 
-    if "current ar archive" in o:
+    if "current ar archive" in fileinfo:
         run_strip(filepath, "-g")
         return True
 
-    elif "SB executable" in o:
+    elif "SB executable" in fileinfo:
         if ctx.config.values.build.generatedebug:
             check_dir(os.path.dirname(outpath))
             save_elf_debug(filepath, outpath)
@@ -553,7 +516,7 @@ def strip_file(filepath, outpath):
         # run_chrpath(filepath)
         return True
 
-    elif "SB shared object" in o:
+    elif "SB shared object" in fileinfo:
         if ctx.config.values.build.generatedebug:
             check_dir(os.path.dirname(outpath))
             save_elf_debug(filepath, outpath)

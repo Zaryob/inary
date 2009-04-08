@@ -89,6 +89,35 @@ def check_path_collision(package, pkgList):
                                  path.path)
     return collisions
 
+def strip_debug_action(filepath, fileinfo, install_dir, ag):
+    excludelist = [] if not ag.has_key('NoStrip') else ag.has_key('NoStrip')
+    outputpath = pisi.util.join_path(os.path.dirname(install_dir),
+                                 ctx.const.debug_dir_suffix,
+                                 ctx.const.debug_files_suffix,
+                                 pisi.util.remove_prefix(install_dir, filepath))
+
+    # Some upstream sources have buggy libtool and ltmain.sh with them,
+    # which causes wrong path entries in *.la files. And these wrong path
+    # entries sometimes triggers compile-time errors or linkage problems.
+    # Instead of patching all these buggy sources and maintain these patches,
+    # PiSi removes wrong paths...
+    if filepath.endswith(".la") and not os.path.islink(filepath):
+        ladata = file(filepath).read()
+        new_ladata = re.sub("-L%s/\S*" % ctx.config.tmp_dir(), "", ladata)
+        new_ladata = re.sub("%s/\S*/install/" % ctx.config.tmp_dir(), "/", new_ladata)
+        if new_ladata != ladata:
+            file(filepath, "w").write(new_ladata)
+    # real path in .pisi package
+    p = '/' + pisi.util.removepathprefix(install_dir, filepath)
+    strip = True
+    for exclude in excludelist:
+        if p.startswith(exclude):
+            strip = False
+            ctx.ui.debug("%s [%s]" %(p, "NoStrip"))
+
+    if strip:
+        if pisi.util.strip_file(filepath, fileinfo, outputpath):
+            ctx.ui.debug("%s [%s]" %(p, "stripped"))
 
 class Builder:
     """Provides the package build and creation routines"""
@@ -612,16 +641,6 @@ class Builder:
 
         return debug_package_obj
 
-    def strip_install_dir(self):
-        """strip install directory"""
-        ctx.ui.action(_("Stripping files.."))
-        install_dir = self.pkg_install_dir()
-        try:
-            nostrip = self.actionGlobals['NoStrip']
-            pisi.util.strip_directory(install_dir, nostrip)
-        except KeyError:
-            pisi.util.strip_directory(install_dir)
-
     def gen_metadata_xml(self, package):
         """Generate the metadata.xml file for build source.
 
@@ -798,14 +817,22 @@ class Builder:
                 ctx.ui.info(_('There is no change from previous build %d') % old_build)
                 return (old_build, old_build)
 
+    def file_actions(self, install_dir, actionGlobals):
+        for root, dirs, files in os.walk(install_dir):
+            for fn in files:
+                filepath = pisi.util.join_path(root, fn)
+                fileinfo = os.popen("file \"%s\"" % filepath).read()
+                strip_debug_action(filepath, fileinfo, install_dir, actionGlobals)
+                # TODO: Add pyc, la, pod, pyo removal code
+
     def build_packages(self):
         """Build each package defined in PSPEC file. After this process there
         will be .pisi files hanging around, AS INTENDED ;)"""
 
         self.fetch_component() # bug 856
 
-        # Strip install directory before building .pisi packages.
-        self.strip_install_dir()
+        # Operations and filters for package files
+        self.file_actions(self.pkg_install_dir(), self.actionGlobals)
 
         if ctx.get_option('create_static'):
             obj = self.generate_static_package_object()
