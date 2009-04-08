@@ -26,12 +26,12 @@ from pisi.actionsapi.shelltools import system
 from pisi.actionsapi.shelltools import makedirs
 from pisi.actionsapi.shelltools import copytree
 
-def installHeaders(extra=[]):
+def installHeaders(suffix, extra=[]):
     """ Install the files needed to build out-of-tree kernel modules. """
     pruned = ["include", "scripts"]
     wanted = ["Makefile*", "Kconfig*", "Kbuild*", "*.sh", "*.pl", "*.lds"]
 
-    destination = "%s/usr/src/linux-headers" % get.installDIR()
+    destination = "%s/usr/src/linux-headers-%s" % (get.installDIR(), suffix)
     makedirs(destination)
 
     # First create the skel
