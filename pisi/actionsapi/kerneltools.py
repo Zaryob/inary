@@ -44,10 +44,15 @@ def installHeaders(*additionalDirs):
 
     # Install additional headers passed by actions.py
     for d in additionalDirs:
-        system("cp -a %s/*.h %s/%s" % (destination, d))
+        system("cp -a %s/*.h %s/%s" % (d, destination, d))
 
     # Install remaining headers
     system("cp -a scripts include %s" % destination)
+
+    # Finally copy the include directories found in arch/
+    system("(find arch -name include -type d -print | \
+            xargs -n1 -i: find : -type f) | \
+            cpio -pd --preserve-modification-time %s" % destination)
 
 def installSource():
     pass
