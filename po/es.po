@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
-"POT-Creation-Date: 2009-04-08 10:43+EEST\n"
+"POT-Creation-Date: 2009-04-08 11:15+EEST\n"
 "PO-Revision-Date: 2009-02-13 21:55-0300\n"
 "Last-Translator: Klemens Häckel <click3d at linuxmail _ org>\n"
 "Language-Team: spanish <es@li.org>\n"
@@ -435,76 +435,76 @@ msgstr ""
 "una vez."
 
 # o mejor decir: capturar estado del sistema ?
-#: pisi/api.py:464
+#: pisi/api.py:466
 msgid "Taking snapshot of the system"
 msgstr "Generando instantánea del sistema"
 
-#: pisi/api.py:577
+#: pisi/api.py:579
 msgid "comar package is not fully installed"
 msgstr "paquete comar no está instalado completamente"
 
-#: pisi/api.py:589
+#: pisi/api.py:591
 msgid "File %s not found"
 msgstr "Archivo %s no encontrado"
 
-#: pisi/api.py:629
+#: pisi/api.py:631
 msgid "* Building index of PiSi files under %s"
 msgstr "* Generando índice de archivos de PiSi en %s"
 
-#: pisi/api.py:636
+#: pisi/api.py:638
 msgid "* Index file written"
 msgstr "* Archivo de índice grabado"
 
-#: pisi/api.py:641
+#: pisi/api.py:643
 msgid "Not a valid repo name."
 msgstr "No es un nombre válido para un Repositorio."
 
-#: pisi/api.py:644
+#: pisi/api.py:646
 msgid "Repo %s already present."
 msgstr "Repositorio %s ya existe."
 
-#: pisi/api.py:647
+#: pisi/api.py:649
 msgid "Repo already present with name %s."
 msgstr "Repositorio ya existe con el nombre %s."
 
-#: pisi/api.py:652
+#: pisi/api.py:654
 msgid "Repo %s added to system."
 msgstr "Repositorio %s agregado al sistema."
 
-#: pisi/api.py:660
+#: pisi/api.py:662
 msgid "Repo %s removed from system."
 msgstr "Repositorio %s removido del sistema."
 
-#: pisi/api.py:662
+#: pisi/api.py:664
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "Repositorio %s no existe. No posible remover."
 
-#: pisi/api.py:679
+#: pisi/api.py:681
 msgid "* Updating repository: %s"
 msgstr "* Actualizando repositorio: %s"
 
-#: pisi/api.py:689
+#: pisi/api.py:691
 msgid "%s repository information is up-to-date."
 msgstr "Información de repositorio %s está actualizado."
 
 # what do You mean here with "at any rate" ? ok, got it, but will think of better spanish translation. it is not yet in here.
-#: pisi/api.py:691
+#: pisi/api.py:693
 msgid "Updating database at any rate as requested"
 msgstr "Actualizando base de datos de todas formas según solicitado"
 
-#: pisi/api.py:701
+#: pisi/api.py:703
 msgid "* Package database updated."
 msgstr "* Base de datos de paquetes actualizada."
 
-#: pisi/api.py:703
+#: pisi/api.py:705
 msgid "No repository named %s found."
 msgstr "No se encontró repositorio con nombre %s."
 
-#: pisi/api.py:714
+#: pisi/api.py:716
 msgid "* Adding '%s' to db... "
 msgstr "* Agregando '%s' a db... "
 
-#: pisi/api.py:717
+#: pisi/api.py:719
 msgid "OK."
 msgstr "OK."
 
@@ -2024,7 +2024,7 @@ msgstr "Eliminando scripts comar del registro"
 msgid "Destination directory %s does not exist. Creating it."
 msgstr "Carpeta destino %s no existe. Creando ahora."
 
-#: pisi/configfile.py:124
+#: pisi/configfile.py:125
 msgid "No section by name '%s'"
 msgstr "No hay sección con nombre '%s'"
 
@@ -2428,44 +2428,48 @@ msgstr "* Aplicando parche: %s"
 msgid "Stripping files.."
 msgstr "Quitando archivos.."
 
-#: pisi/operations/build.py:721
+#: pisi/operations/build.py:687
+msgid "/%s has suid bit set"
+msgstr ""
+
+#: pisi/operations/build.py:723
 msgid "(found old version %s)"
 msgstr "(encontrado versión antigua %s)"
 
-#: pisi/operations/build.py:745
+#: pisi/operations/build.py:747
 msgid "(no previous build found, setting build no to 1.)"
 msgstr "(no se encontró build anterior, estableciendo número de build a 1.)"
 
-#: pisi/operations/build.py:790
+#: pisi/operations/build.py:792
 msgid "(old package lacks a build no, setting build no to 1.)"
 msgstr ""
 "(paquete antiguo no tiene número de build, seteando número de build a 1.)"
 
-#: pisi/operations/build.py:793
+#: pisi/operations/build.py:795
 msgid "There are changes, incrementing build no to %d"
 msgstr "Hay cambios, incrementando número de build a %d"
 
-#: pisi/operations/build.py:796
+#: pisi/operations/build.py:798
 msgid "There is no change from previous build %d"
 msgstr "No hay cambios en relación al build anterior %d"
 
-#: pisi/operations/build.py:861
+#: pisi/operations/build.py:863
 msgid "No user named '%s' found on the system"
 msgstr "Usuario '%s' no existe en el sistema"
 
-#: pisi/operations/build.py:866
+#: pisi/operations/build.py:868
 msgid "No group named '%s' found on the system"
 msgstr "Grupo '%s' no existe en el sistema"
 
-#: pisi/operations/build.py:869
+#: pisi/operations/build.py:871
 msgid "** Building package %s"
 msgstr "** Construyendo (build) paquete %s"
 
-#: pisi/operations/build.py:871 pisi/operations/build.py:874
+#: pisi/operations/build.py:873 pisi/operations/build.py:876
 msgid "Generating %s,"
 msgstr "Generando %s,"
 
-#: pisi/operations/build.py:880
+#: pisi/operations/build.py:882
 msgid ""
 "Build number is not available. For repo builds you must enable buildno in "
 "pisi.conf."
@@ -2473,37 +2477,37 @@ msgstr ""
 "Número de build no disponible. Para builds de repo buildno debe estar "
 "habilitado en pisi.conf."
 
-#: pisi/operations/build.py:900
+#: pisi/operations/build.py:902
 msgid "Creating PiSi package %s."
 msgstr "Creando Paquete PiSi %s."
 
 # podria ser tambien "Fin" o "Listo"
-#: pisi/operations/build.py:945 pisi/operations/delta.py:92
+#: pisi/operations/build.py:947 pisi/operations/delta.py:92
 msgid "Done."
 msgstr "Hecho."
 
-#: pisi/operations/build.py:951
+#: pisi/operations/build.py:953
 #, fuzzy
 msgid "There are abandoned files under the install dir (%s):"
 msgstr "Archivos abandonados en carpeta de instalación (%s):"
 
 # revisa este por favor
-#: pisi/operations/build.py:955
+#: pisi/operations/build.py:957
 msgid ""
 "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Todos los archivos de la carpeta de instalación (%s) se juntaron en los "
 "paquetes"
 
-#: pisi/operations/build.py:959
+#: pisi/operations/build.py:961
 msgid "Cleaning Build Directory..."
 msgstr "Limpiando Carpeta Build..."
 
-#: pisi/operations/build.py:962
+#: pisi/operations/build.py:964
 msgid "Keeping Build Directory"
 msgstr "Conservando Carpeta Build"
 
-#: pisi/operations/build.py:988
+#: pisi/operations/build.py:990
 msgid "*** %d error(s), %d warning(s)"
 msgstr ""
 
