@@ -817,12 +817,13 @@ class Builder:
                 ctx.ui.info(_('There is no change from previous build %d') % old_build)
                 return (old_build, old_build)
 
-    def file_actions(self, install_dir, actionGlobals):
+    def file_actions(self):
+        install_dir = self.pkg_install_dir()
         for root, dirs, files in os.walk(install_dir):
             for fn in files:
                 filepath = pisi.util.join_path(root, fn)
                 fileinfo = os.popen("file \"%s\"" % filepath).read()
-                strip_debug_action(filepath, fileinfo, install_dir, actionGlobals)
+                strip_debug_action(filepath, fileinfo, install_dir, self.actionGlobals)
                 # TODO: Add pyc, la, pod, pyo removal code
 
     def build_packages(self):
@@ -832,7 +833,7 @@ class Builder:
         self.fetch_component() # bug 856
 
         # Operations and filters for package files
-        self.file_actions(self.pkg_install_dir(), self.actionGlobals)
+        self.file_actions()
 
         if ctx.get_option('create_static'):
             obj = self.generate_static_package_object()
