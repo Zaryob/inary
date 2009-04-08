@@ -985,7 +985,7 @@ def build(pspec):
         ctx.ui.error("Action script error caught.")
         sys.exit(1)
     finally:
-        ctx.ui.warning("*** %d error(s), %d warning(s)" % (ctx.ui.errors, ctx.ui.warnings))
+        ctx.ui.warning(_("*** %d error(s), %d warning(s)") % (ctx.ui.errors, ctx.ui.warnings))
     return result
 
 order = {"none": 0,
