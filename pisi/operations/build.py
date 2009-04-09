@@ -91,7 +91,7 @@ def check_path_collision(package, pkgList):
     return collisions
 
 def exclude_special_files(filepath, fileinfo, install_dir, ag):
-    keeplist = [] if not ag.has_key('KeepSpecial') else ag.has_key('KeepSpecial')
+    keeplist = [] if not ag.has_key('KeepSpecial') else ag['KeepSpecial']
     patterns = {
              "libtool":".*: libtool library file",
              "python":".*: python.*byte-compiled",
@@ -117,7 +117,7 @@ def exclude_special_files(filepath, fileinfo, install_dir, ag):
             os.unlink(filepath)
 
 def strip_debug_action(filepath, fileinfo, install_dir, ag):
-    excludelist = [] if not ag.has_key('NoStrip') else ag.has_key('NoStrip')
+    excludelist = [] if not ag.has_key('NoStrip') else ag['NoStrip']
     outputpath = pisi.util.join_path(os.path.dirname(install_dir),
                                  ctx.const.debug_dir_suffix,
                                  ctx.const.debug_files_suffix,
