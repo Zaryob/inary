@@ -142,7 +142,7 @@ def installHeaders(extra=[]):
     # Finally copy the include directories found in arch/
     shelltools.system("(find arch -name include -type d -print | \
                         xargs -n1 -i: find : -type f) | \
-                        cpio -pVd --preserve-modification-time %s" % destination)
+                        cpio -pd --preserve-modification-time %s" % destination)
 
     # Settle the correct build symlink to this headers
     pisitools.dosym("/%s" % headersDirectoryName, "/lib/modules/%s/build" % suffix)
