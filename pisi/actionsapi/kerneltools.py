@@ -45,6 +45,8 @@ def __getSuffix():
     if __getFlavour():
         suffix += "-%s" % __getFlavour()
 
+    return suffix
+
 def __getExtraVersion():
     extraversion = ""
     try:
@@ -64,17 +66,12 @@ def __getExtraVersion():
 
     return extraversion
 
-def __getHeadersDirectoryName():
-    return "usr/src/linux-headers-%s" %  __getSuffix()
-
 
 # Public callables
 
 def configure():
     # Set EXTRAVERSION
     extraversion = __getExtraVersion()
-
-    print "******* EV: ", extraversion
 
     # I don't know what for but let's clean *.orig files
     shelltools.system("find . -name \"*.orig\" | xargs rm -f")
@@ -85,7 +82,7 @@ def configure():
     if os.getenv("MENUCONFIG"):
         autotools.make("menuconfig")
     else:
-        autotools.make("oldconfig")
+        autotools.make("silentoldconfig")
 
 def build():
     autotools.make()
@@ -125,8 +122,11 @@ def installHeaders(extra=[]):
     pruned = ["include", "scripts"]
     wanted = ["Makefile*", "Kconfig*", "Kbuild*", "*.sh", "*.pl", "*.lds"]
 
+    suffix = __getSuffix()
+    headersDirectoryName = "usr/src/linux-headers-%s" % suffix
+
     # Get the destination directory for header installation
-    destination = os.path.join(get.installDIR(), __getHeadersDirectoryName())
+    destination = os.path.join(get.installDIR(), headersDirectoryName)
     shelltools.makedirs(destination)
 
     # First create the skel
@@ -151,20 +151,19 @@ def installHeaders(extra=[]):
                         cpio -pd --preserve-modification-time %s" % destination)
 
     # Settle the correct build symlink to this headers
-    pisitools.dosym("/%s" % __getHeadersDirectoryName(),
-                    "/lib/modules/%s/build" % suffix)
+    pisitools.dosym("/%s" % headersDirectoryName, "/lib/modules/%s/build" % suffix)
 
 def installSource():
     destination = "usr/src/linux-source-%s" %  __getSuffix()
 
     pisitools.dodir("/usr/src")
-    shelltools.copytree("../%s/" % WorkDir, os.path.join(get.installDIR(), destination))
+    shelltools.copytree("../%s/" % os.path.basename(get.curDIR()), os.path.join(get.installDIR(), destination))
 
     # Cleanup the installed source
     shelltools.cd(os.path.join(get.installDIR(), destination))
     autotools.make("clean")
     autotools.make("modules_prepare")
 
-
-def installDocumentation():
-    pass
+def mkinitramfs():
+    """ Create and install the initramfs image into the package. This will hopefully be done on user's system. """
+    shelltools.system("/sbin/mkinitramfs kernel=%s --full --root-dir=%s --output=/%s/boot" % (__getSuffix(), get.installDIR(), get.installDIR()))
