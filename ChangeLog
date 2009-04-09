@@ -1,3 +1,7 @@
+2009-04-09 Ozan Çağlayan <ozan@pardus.org.tr>
+        * (scripts/revdep-rebuild): Ignore /opt/ptsp during library and binary
+        search.
+
 2009-03-30 Faik Uygur <faik@pardus.org.tr>
         * Fix a bug in new "reverseDependencyUpdate" tag, where it forces to install all reverseDeps that are
         also not installed
