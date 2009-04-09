@@ -90,6 +90,32 @@ def check_path_collision(package, pkgList):
                                  path.path)
     return collisions
 
+def exclude_special_files(filepath, fileinfo, install_dir, ag):
+    keeplist = [] if not ag.has_key('KeepSpecial') else ag.has_key('KeepSpecial')
+    patterns = {
+             "libtool":".*: libtool library file",
+             "python":".*: python.*byte-compiled",
+             "perl":".*: Perl POD document text"
+             }
+
+    if "libtool" in keeplist:
+        # Some upstream sources have buggy libtool and ltmain.sh with them,
+        # which causes wrong path entries in *.la files. And these wrong path
+        # entries sometimes triggers compile-time errors or linkage problems.
+        # Instead of patching all these buggy sources and maintain these patches,
+        # PiSi removes wrong paths...
+        if re.match(patterns["libtool"], fileinfo) and not os.path.islink(filepath):
+            ladata = file(filepath).read()
+            new_ladata = re.sub("-L%s/\S*" % ctx.config.tmp_dir(), "", ladata)
+            new_ladata = re.sub("%s/\S*/install/" % ctx.config.tmp_dir(), "/", new_ladata)
+            if new_ladata != ladata:
+                file(filepath, "w").write(new_ladata)
+
+    for pattern in patterns.keys():
+        if not pattern in keeplist and re.match(patterns[pattern], fileinfo):
+            ctx.ui.debug("Removing special %s file: %s" % (pattern, filepath))
+            os.unlink(filepath)
+
 def strip_debug_action(filepath, fileinfo, install_dir, ag):
     excludelist = [] if not ag.has_key('NoStrip') else ag.has_key('NoStrip')
     outputpath = pisi.util.join_path(os.path.dirname(install_dir),
@@ -97,17 +123,6 @@ def strip_debug_action(filepath, fileinfo, install_dir, ag):
                                  ctx.const.debug_files_suffix,
                                  pisi.util.remove_prefix(install_dir, filepath))
 
-    # Some upstream sources have buggy libtool and ltmain.sh with them,
-    # which causes wrong path entries in *.la files. And these wrong path
-    # entries sometimes triggers compile-time errors or linkage problems.
-    # Instead of patching all these buggy sources and maintain these patches,
-    # PiSi removes wrong paths...
-    if filepath.endswith(".la") and not os.path.islink(filepath):
-        ladata = file(filepath).read()
-        new_ladata = re.sub("-L%s/\S*" % ctx.config.tmp_dir(), "", ladata)
-        new_ladata = re.sub("%s/\S*/install/" % ctx.config.tmp_dir(), "/", new_ladata)
-        if new_ladata != ladata:
-            file(filepath, "w").write(new_ladata)
     # real path in .pisi package
     p = '/' + pisi.util.removepathprefix(install_dir, filepath)
     strip = True
@@ -825,7 +840,7 @@ class Builder:
                 filepath = pisi.util.join_path(root, fn)
                 fileinfo = os.popen("file \"%s\"" % filepath).read()
                 strip_debug_action(filepath, fileinfo, install_dir, self.actionGlobals)
-                # TODO: Add pyc, la, pod, pyo removal code
+                exclude_special_files(filepath, fileinfo, install_dir, self.actionGlobals)
 
     def build_packages(self):
         """Build each package defined in PSPEC file. After this process there
