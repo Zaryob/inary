@@ -79,10 +79,11 @@ def configure():
     pisitools.dosed("Makefile", "EXTRAVERSION =.*", "EXTRAVERSION = %s" % extraversion)
 
     # Configure the kernel
-    if os.getenv("MENUCONFIG"):
-        autotools.make("menuconfig")
+    configtype = os.getenv("KCONFIG")
+    if configtype:
+        autotools.make(configtype)
     else:
-        autotools.make("silentoldconfig")
+        autotools.make("oldconfig")
 
 def build():
     autotools.make()
