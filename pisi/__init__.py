@@ -42,7 +42,7 @@ import pisi.context as ctx
 
 def init_logging():
     log_dir = os.path.join(ctx.config.dest_dir(), ctx.config.log_dir())
-    if os.access(log_dir, os.W_OK):
+    if os.access(log_dir, os.W_OK) and not sys.modules.has_key("distutils.core"):
         handler = logging.handlers.RotatingFileHandler('%s/pisi.log' % log_dir)
         formatter = logging.Formatter('%(asctime)-12s: %(levelname)-8s %(message)s')
         handler.setFormatter(formatter)
