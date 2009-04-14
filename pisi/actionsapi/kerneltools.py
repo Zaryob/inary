@@ -170,6 +170,9 @@ def installLibcHeaders():
     shelltools.system("find . -name '.' -o -name '.*' -prune -o -print | \
                        cpio -pVd --preserve-modification-time %s" % headers_dir)
 
+    # Remove sound/ directory which is installed by alsa-headers
+    shelltools.system("rm -rf %s/sound" % headers_dir)
+
     shelltools.cd(oldwd)
 
     # FIXME: Do we really need to delete those directories below?
