@@ -176,6 +176,9 @@ class Source:
     t_Release = [ autoxml.String, autoxml.optional]
     t_SourceURI = [ autoxml.String, autoxml.optional ] # used in index
 
+    def buildtimeDependencies(self):
+        return self.buildDependencies
+
 class Package:
 
     t_Name = [ autoxml.String, autoxml.mandatory ]
