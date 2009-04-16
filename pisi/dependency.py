@@ -38,7 +38,7 @@ class Dependency(pisi.relation.Relation):
             s += _(" release ") + self.release
         return s
 
-    def satisfied_by_dict_repo(dict_repo):
+    def satisfied_by_dict_repo(self, dict_repo):
         if not dict_repo.has_key(self.package):
             return False
         else:
