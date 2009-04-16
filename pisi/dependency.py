@@ -38,15 +38,13 @@ class Dependency(pisi.relation.Relation):
             s += _(" release ") + self.release
         return s
 
-def dict_satisfies_dep(dict, depinfo):
-    """determine if a package in a dictionary satisfies given dependency spec"""
-    pkg_name = depinfo.package
-    if not dict.has_key(pkg_name):
-        return False
-    else:
-        pkg = dict[pkg_name]
-        (version, release) = (pkg.version, pkg.release)
-        return depinfo.satisfies_relation(version, release)
+    def satisfied_by_dict_repo(dict_repo):
+        if not dict_repo.has_key(self.package):
+            return False
+        else:
+            pkg = dict_repo[self.package]
+            (version, release) = (pkg.version, pkg.release)
+            return self.satisfies_relation(version, release)
 
 def installed_satisfies_dep(depinfo):
     """determine if a package in *repository* satisfies given

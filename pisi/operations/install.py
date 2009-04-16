@@ -130,7 +130,7 @@ def install_pkg_files(package_URIs, reinstall = False):
         # is dependency satisfied among available packages
         # or packages to be installed?
         return dependency.installed_satisfies_dep(dep) \
-               or dependency.dict_satisfies_dep(d_t, dep)
+               or dep.satisfied_by_dict_repo(d_t)
 
     # for this case, we have to determine the dependencies
     # that aren't already satisfied and try to install them
@@ -186,7 +186,7 @@ in the respective order to satisfy extra dependencies:
         for x in B:
             pkg = packagedb.get_package(x)
             for dep in pkg.runtimeDependencies():
-                if dependency.dict_satisfies_dep(d_t, dep):
+                if dep.satisfied_by_dict_repo(d_t):
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
