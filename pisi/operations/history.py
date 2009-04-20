@@ -20,13 +20,11 @@ import pisi.util
 import pisi.db
 import pisi.fetcher
 
-installdb = pisi.db.installdb.InstallDB()
-historydb = pisi.db.historydb.HistoryDB()
-
 class PackageNotFound(pisi.Error):
     pass
 
 def __pkg_already_installed(name, pkginfo):
+    installdb = pisi.db.installdb.InstallDB()
     if not installdb.has_package(name):
         return False
 
@@ -43,6 +41,7 @@ def __listactions(actions):
     beremoved = []
     configs = []
 
+    installdb = pisi.db.installdb.InstallDB()
     for pkg in actions:
         action, pkginfo, operation = actions[pkg]
         if action == "install":
@@ -103,6 +102,7 @@ def fetch_remote_file(package, errors):
 def get_snapshot_actions(operation):
     actions = {}
     snapshot_pkgs = set()
+    installdb = pisi.db.installdb.InstallDB()
 
     for pkg in operation.packages:
         snapshot_pkgs.add(pkg.name)
@@ -115,6 +115,7 @@ def get_snapshot_actions(operation):
 
 def get_takeback_actions(operation):
     actions = {}
+    historydb = pisi.db.historydb.HistoryDB()
 
     for operation in historydb.get_till_operation(operation):
         if operation.type == "snapshot":
@@ -129,6 +130,7 @@ def get_takeback_actions(operation):
     return actions
 
 def plan_takeback(operation):
+    historydb = pisi.db.historydb.HistoryDB()
     op = historydb.get_operation(operation)
     if op.type == "snapshot":
         actions = get_snapshot_actions(op)
@@ -138,7 +140,7 @@ def plan_takeback(operation):
     return __listactions(actions)
 
 def takeback(operation):
-
+    historydb = pisi.db.historydb.HistoryDB()
     beinstalled, beremoved, configs = plan_takeback(operation)
 
     if beinstalled:
