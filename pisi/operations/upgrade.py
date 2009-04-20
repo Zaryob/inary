@@ -194,10 +194,10 @@ def plan_upgrade(A):
             pkg = packagedb.get_package(x)
             for dep in pkg.runtimeDependencies():
                 # add packages that can be upgraded
-                if installdb.has_package(dep.package) and dependency.installed_satisfies_dep(dep):
+                if installdb.has_package(dep.package) and dep.satisfied_by_installed():
                     continue
                 
-                if dependency.repo_satisfies_dep(dep):
+                if dep.satisfied_by_repo():
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
@@ -217,8 +217,8 @@ def plan_upgrade(A):
             for (rev_dep, depinfo) in rev_deps:
                 # add only installed but unsatisfied reverse dependencies
                 if (installdb.has_package(rev_dep) and 
-                    not dependency.installed_satisfies_dep(depinfo) and is_upgradable(rev_dep)):
-                    if not dependency.repo_satisfies_dep(depinfo):
+                    not depinfo.satisfied_by_installed() and is_upgradable(rev_dep)):
+                    if not depinfo.satisfied_by_repo():
                         raise Exception(_('Reverse dependency %s of %s cannot be satisfied') % (rev_dep, x))
                     if not rev_dep in G_f.vertices():
                         Bp.add(rev_dep)

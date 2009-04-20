@@ -46,44 +46,13 @@ class Dependency(pisi.relation.Relation):
             (version, release) = (pkg.version, pkg.release)
             return self.satisfies_relation(version, release)
 
-def installed_satisfies_dep(depinfo):
-    """determine if a package in *repository* satisfies given
-dependency spec"""
-    return pisi.relation.installed_package_satisfies(depinfo)
+    def satisfied_by_installed(self):
+        return pisi.relation.installed_package_satisfies(self)
 
-def repo_satisfies_dep(depinfo):
-    """determine if a package in *repository* satisfies given
-dependency spec"""
-    packagedb = pisi.db.packagedb.PackageDB()
-    pkg_name = depinfo.package
-    if not packagedb.has_package(pkg_name):
-        return False
-    else:
-        pkg = packagedb.get_package(pkg_name)
-        (version, release) = (pkg.version, pkg.release)
-        return depinfo.satisfies_relation(version, release)
-
-def satisfies_dependencies(pkg, deps, sat = installed_satisfies_dep):
-    for dep in deps:
-        if not sat(dep):
-            ctx.ui.error(_('%s dependency of package %s is not satisfied') %
-                     (dep, pkg))
+    def satisfied_by_repo(self):
+        packagedb = pisi.db.packagedb.PackageDB()
+        if not packagedb.has_package(self.package):
             return False
-    return True
-
-def satisfies_runtime_deps(pkg):
-    packagedb = pisi.db.packagedb.PackageDB()
-    deps = packagedb.get_package(pkg).runtimeDependencies()
-    return satisfies_dependencies(pkg, deps)
-
-def installable(pkg):
-    """calculate if pkg name is installable currently
-    which means it has to satisfy both install and runtime dependencies"""
-    packagedb = pisi.db.packagedb.PackageDB()
-    if not packagedb.has_package(pkg):
-        ctx.ui.info(_("Package %s is not present in the package database") % pkg);
-        return False
-    elif satisfies_runtime_deps(pkg):
-        return True
-    else:
-        return False
+        else:
+            pkg = packagedb.get_package(self.package)
+            return self.satisfies_relation(pkg.version, pkg.release)

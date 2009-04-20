@@ -554,7 +554,7 @@ class Builder:
         # find out the build dependencies that are not satisfied...
         dep_unsatis = []
         for dep in build_deps:
-            if not dependency.installed_satisfies_dep(dep):
+            if not dep.satisfied_by_installed():
                 dep_unsatis.append(dep)
 
         if dep_unsatis:
@@ -566,7 +566,7 @@ class Builder:
 
             if not ctx.config.get_option('ignore_dependency'):
                 for dep in dep_unsatis:
-                    if not dependency.repo_satisfies_dep(dep):
+                    if not dep.satisfied_by_repo():
                         raise Error(_('Build dependency %s cannot be satisfied') % str(dep))
                 if ctx.ui.confirm(
                 _('Do you want to install the unsatisfied build dependencies')):

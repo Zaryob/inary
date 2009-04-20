@@ -157,7 +157,6 @@ class Archive:
         s = _('URI: %s, type: %s, sha1sum: %s') % (self.uri, self.type, self.sha1sum)
         return s
 
-
 class Source:
 
     t_Name = [autoxml.String, autoxml.mandatory]
@@ -214,10 +213,16 @@ class Package:
 
         return util.join_path(ctx.config.packages_dir(), packageDir)
 
+    def satisfies_runtime_dependencies(self):
+        for dep in self.runtimeDependencies():
+            if not dep.satisfied_by_installed():
+                ctx.ui.error(_('%s dependency of package %s is not satisfied') % (dep, self.name))
+                return False
+        return True
+
     def installable(self):
         """calculate if pkg is installable currently"""
-        deps = self.runtimeDependencies()
-        return pisi.dependency.satisfies_dependencies(self.name, deps)
+        return self.satisfies_runtime_dependencies()
 
     def __str__(self):
         if self.build:

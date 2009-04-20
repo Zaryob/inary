@@ -129,8 +129,7 @@ def install_pkg_files(package_URIs, reinstall = False):
     def satisfiesDep(dep):
         # is dependency satisfied among available packages
         # or packages to be installed?
-        return dependency.installed_satisfies_dep(dep) \
-               or dep.satisfied_by_dict_repo(d_t)
+        return dep.satisfied_by_installed() or dep.satisfied_by_dict_repo(d_t)
 
     # for this case, we have to determine the dependencies
     # that aren't already satisfied and try to install them
@@ -146,7 +145,7 @@ def install_pkg_files(package_URIs, reinstall = False):
     # now determine if these unsatisfied dependencies could
     # be satisfied by installing packages from the repo
     for dep in dep_unsatis:
-        if not dependency.repo_satisfies_dep(dep):
+        if not dep.satisfied_by_repo():
             raise Exception(_('External dependencies not satisfied: %s') % dep)
 
     # if so, then invoke install_pkg_names
@@ -232,8 +231,8 @@ def plan_install_pkg_names(A, ignore_package_conflicts = False):
             for dep in pkg.runtimeDependencies():
                 ctx.ui.debug('checking %s' % str(dep))
                 # we don't deal with already *satisfied* dependencies
-                if not dependency.installed_satisfies_dep(dep):
-                    if not dependency.repo_satisfies_dep(dep):
+                if not dep.satisfied_by_installed():
+                    if not dep.satisfied_by_repo():
                         raise Exception(_('%s dependency of package %s is not satisfied') % (dep, pkg.name))
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))

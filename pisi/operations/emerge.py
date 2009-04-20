@@ -117,8 +117,8 @@ def plan_emerge(A):
             # add dependencies
 
             def process_dep(dep):
-                if not dependency.installed_satisfies_dep(dep):
-                    if dependency.repo_satisfies_dep(dep):
+                if not dep.satisfied_by_installed():
+                    if dep.satisfied_by_repo():
                         install_list.add(dep.package)
                         return
                     srcdep = pkgtosrc(dep.package)
