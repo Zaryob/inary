@@ -114,6 +114,7 @@ class MetaData(xmlfile.XmlFile):
         self.package.partOf = pkg.partOf
         self.package.license = pkg.license
         self.package.packageDependencies = pkg.packageDependencies
+        self.package.packageAnyDependencies = pkg.packageAnyDependencies
         self.package.componentDependencies = pkg.componentDependencies
         self.package.files = pkg.files
         # FIXME: no need to copy full history with comments

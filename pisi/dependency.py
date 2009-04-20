@@ -16,11 +16,9 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import pisi.context as ctx
 import pisi.relation
 import pisi.db
 
-""" Dependency relation """
 class Dependency(pisi.relation.Relation):
     def __str__(self):
         s = self.package
@@ -37,6 +35,9 @@ class Dependency(pisi.relation.Relation):
         if self.release:
             s += _(" release ") + self.release
         return s
+
+    def name(self):
+        return self.package
 
     def satisfied_by_dict_repo(self, dict_repo):
         if not dict_repo.has_key(self.package):

@@ -178,6 +178,36 @@ class Source:
     def buildtimeDependencies(self):
         return self.buildDependencies
 
+class AnyDependency:
+    t_Dependencies = [[pisi.dependency.Dependency], autoxml.optional, "Dependency"]
+
+    def __str__(self):
+        return "{%s}" % _(" or ").join([str(dep) for dep in self.dependencies])
+
+    def name(self):
+        return "{%s}" % _(" or ").join([dep.package for dep in self.dependencies])
+
+    def decode_hook(self, node, errs, where):
+        self.package = self.dependencies[0].package
+
+    def satisfied_by_dict_repo(self, dict_repo):
+        for dependency in self.dependencies:
+            if dependency.satisfied_by_dict_repo(dict_repo):
+                return True
+        return False
+
+    def satisfied_by_installed(self):
+        for dependency in self.dependencies:
+            if dependency.satisfied_by_installed():
+                return True
+        return False
+
+    def satisfied_by_repo(self):
+        for dependency in self.dependencies:
+            if dependency.satisfied_by_repo():
+                return True
+        return False
+
 class Package:
 
     t_Name = [ autoxml.String, autoxml.mandatory ]
@@ -188,6 +218,7 @@ class Package:
     t_License = [ [autoxml.String], autoxml.optional]
     t_Icon = [ autoxml.String, autoxml.optional]
     t_PackageDependencies = [ [pisi.dependency.Dependency], autoxml.optional, "RuntimeDependencies/Dependency"]
+    t_PackageAnyDependencies = [[AnyDependency], autoxml.optional, "RuntimeDependencies/AnyDependency"]
     t_ComponentDependencies = [ [autoxml.String], autoxml.optional, "RuntimeDependencies/Component"]
     t_Files = [ [Path], autoxml.optional]
     t_Conflicts = [ [pisi.conflict.Conflict], autoxml.optional, "Conflicts/Package"]
@@ -202,7 +233,7 @@ class Package:
 
     def runtimeDependencies(self):
         componentdb = pisi.db.componentdb.ComponentDB()
-        deps = self.packageDependencies
+        deps = self.packageDependencies + self.packageAnyDependencies
         deps += [ componentdb.get_component[x].packages for x in self.componentDependencies ]
         return deps
 
@@ -242,7 +273,9 @@ class Package:
         for x in self.componentDependencies:
            s += x.package + ' '
         for x in self.packageDependencies:
-           s += x.package + ' '
+           s += x.name() + ' '
+        for x in self.packageAnyDependencies:
+           s += x.name() + ' '
         return s + '\n'
 
 
