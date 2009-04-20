@@ -43,8 +43,7 @@ class Dependency(pisi.relation.Relation):
             return False
         else:
             pkg = dict_repo[self.package]
-            (version, release) = (pkg.version, pkg.release)
-            return self.satisfies_relation(version, release)
+            return self.satisfies_relation(pkg.version, pkg.release)
 
     def satisfied_by_installed(self):
         return pisi.relation.installed_package_satisfies(self)
