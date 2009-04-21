@@ -45,8 +45,8 @@
 #index_dir = /var/cache/pisi/index
 #packages_dir = /var/cache/pisi/package
 #tmp_dir = /var/pisi
-#kde_dir = /usr/kde/3.5
-#qt_dir = /usr/qt/3
+#kde_dir = /usr/kde/4
+#qt_dir = /usr/qt/4
 
 import os
 import re
@@ -106,8 +106,8 @@ class DirectoriesDefaults:
     lock_dir = "/var/lock/subsys"
     index_dir = "/var/lib/pisi/index"
     tmp_dir =  "/var/pisi"
-    kde_dir = "/usr/kde/3.5"
-    qt_dir = "/usr/qt/3"
+    kde_dir = "/usr/kde/4"
+    qt_dir = "/usr/qt/4"
 
 class ConfigurationSection(object):
     """ConfigurationSection class defines a section in the configuration
