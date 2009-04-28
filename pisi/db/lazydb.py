@@ -54,7 +54,7 @@ class LazyDB(Singleton):
             try:
                 self._instance().__dict__ = cPickle.load(file(self.__cache_file(), 'rb'))
                 return True
-            except cPickle.UnpicklingError:
+            except (cPickle.UnpicklingError, EOFError):
                 if os.access("/var/cache/pisi", os.W_OK):
                     os.unlink(self.__cache_file())
                 return False
