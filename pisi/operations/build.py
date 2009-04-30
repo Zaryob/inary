@@ -85,7 +85,7 @@ def check_path_collision(package, pkgList):
                     # we'll handle this in gen_files_xml..
                     continue
                 if pisi.util.subpath(pinfo.path, path.path):
-                    collisions.append(path.path)
+                    collisions.append(path.path.rstrip("/"))
                     ctx.ui.debug(_('Path %s belongs in multiple packages') %
                                  path.path)
     return collisions
