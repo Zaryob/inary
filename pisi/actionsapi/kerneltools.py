@@ -27,6 +27,10 @@ import pisi.actionsapi.autotools    as autotools
 import pisi.actionsapi.pisitools    as pisitools
 import pisi.actionsapi.shelltools   as shelltools
 
++# Set WorkDir for kernel modules, black magic :)
+
+if not globals().has_key("WorkDir"):
+    globals()['WorkDir'] = "%s-%s" % (get.srcNAME().split("module-")[1], get.srcVERSION())
 
 # Internal helpers for versioning stuff
 
