@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2008, TUBITAK/UEKAE
+# Copyright (C) 2005 - 2009, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -33,7 +33,7 @@
 #buildno=True     # necessary for generating build nos
 #buildhelper = None / ccache / icecream
 #compressionlevel = 7
-#fallback = "ftp://ftp.pardus.org.tr/pub/source/2008"
+#fallback = "ftp://ftp.pardus.org.tr/pub/source/2009"
 #
 #[directories]
 #lib_dir = /var/lib/pisi
@@ -89,7 +89,7 @@ class BuildDefaults:
     buildno = False
     buildhelper = None
     compressionlevel = 7
-    fallback = "ftp://ftp.pardus.org.tr/pub/source/2008"
+    fallback = "ftp://ftp.pardus.org.tr/pub/source/2009"
 
 class DirectoriesDefaults:
     "Default values for [directories] section"
