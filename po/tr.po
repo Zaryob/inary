@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2009-04-20 16:26+EEST\n"
-"PO-Revision-Date: 2009-04-20 16:28+0300\n"
+"POT-Creation-Date: 2009-05-05 15:19+EEST\n"
+"PO-Revision-Date: 2009-05-05 15:21+0300\n"
 "Last-Translator: Faik Uygur <faik@pardus.org.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1298,6 +1298,10 @@ msgid ""
 msgstr ""
 "Paket kurarken, paket ya da bileşen isimlerinden dosya içerisinde verilen "
 "kalıplardan herhangi birisi ile eşleşenleri gözardı et."
+
+#: pisi/cli/install.py:91
+msgid "There is no component named %s"
+msgstr "%s isminde bir bileşen bulunamadı"
 
 #: pisi/cli/listavailable.py:26
 msgid ""
