@@ -87,6 +87,8 @@ expanded to package names.
                         packages.extend(self.componentdb.get_packages(name, walk=True, repo=repository))
                     else:
                         packages.extend(self.componentdb.get_union_packages(name, walk=True))
+                else:
+                    ctx.ui.info(_('There is no component named %s') % name)
 
         packages.extend(self.args)
 
