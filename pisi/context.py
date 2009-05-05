@@ -40,7 +40,7 @@ stderr = None
 comar = True
 comar_updated = False
 dbus_sockname = None
-dbus_timeout = 300
+dbus_timeout = 60 * 60 # in seconds
 
 # Bug #2879
 # FIXME: Maybe we can create a simple rollback mechanism. There are other

@@ -77,6 +77,7 @@ def get_link():
     while timeout > 0:
         try:
             link = comar.Link(socket=sockname, alternate=alternate)
+            link.setLocale()
             return link
         except dbus.DBusException, e:
             exceptions.append(str(e))
