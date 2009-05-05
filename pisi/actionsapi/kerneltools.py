@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2009, TUBITAK/UEKAE
+# Copyright (C) 2009 TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -27,12 +27,47 @@ import pisi.actionsapi.autotools    as autotools
 import pisi.actionsapi.pisitools    as pisitools
 import pisi.actionsapi.shelltools   as shelltools
 
-# Set WorkDir for kernel modules, black magic :)
+KERNELRC = "/etc/kernelrc"
+DEFAULT_FLAVOURS = "pae"
+
+# Internal helpers
+
+def __getAllSupportedFlavours():
+    def_flavours = DEFAULT_FLAVOURS.split(",")
+
+    import ConfigParser
+    cp = ConfigParser.ConfigParser()
+
+    if os.path.exists(KERNELRC) and cp.read(KERNELRC):
+        try:
+            return cp.get('general', 'flavours').strip('"')
+        except NoSectionError, NoOptionError:
+            return def_flavours
+    else:
+        return def_flavours
+
+def __get_workdir_for_module(mod):
+    mod = mod.split("module-")[1]
+
+    # Now we have something like alsa-driver or alsa-driver-pae. We also have
+    # to strip a possible flavour name at the end..
+    for f in __getAllSupportedFlavours():
+        if mod.endswith("-%s" % f):
+            mod = mod.split("-%s" % f)[0]
+            break
+
+    return "%s-%s" % (mod, get.srcVERSION())
+
+#####
+# Set WorkDir for kernel modules
+#####
 
 if not globals().has_key("WorkDir") and get.srcNAME().startswith("module-"):
-    globals()['WorkDir'] = "%s-%s" % (get.srcNAME().split("module-")[1], get.srcVERSION())
+    globals()['WorkDir'] = __get_workdir_for_module(get.srcNAME())
 
-# Internal helpers for versioning stuff
+#################
+# Other helpers #
+#################
 
 def __getFlavour():
     flavour = ""
