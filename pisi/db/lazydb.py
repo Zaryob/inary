@@ -14,6 +14,7 @@ import os
 import cPickle
 import time
 import pisi.context as ctx
+import pisi.util as util
 
 import string
 # lower borks for international locales. What we want is ascii lower.
@@ -42,10 +43,10 @@ class LazyDB(Singleton):
         return self.initialized
 
     def __cache_file(self):
-        return "/var/cache/pisi/%s.cache" % self.__class__.__name__.translate(lower_map)
+        return util.join_path(ctx.config.cache_root_dir(), "%s.cache" % self.__class__.__name__.translate(lower_map))
 
     def cache_save(self):
-        if os.access("/var/cache/pisi", os.W_OK) and self.cacheable:
+        if os.access(ctx.config.cache_root_dir(), os.W_OK) and self.cacheable:
             cPickle.dump(self._instance().__dict__,
                          file(self.__cache_file(), 'wb'), 1)
 
@@ -55,7 +56,7 @@ class LazyDB(Singleton):
                 self._instance().__dict__ = cPickle.load(file(self.__cache_file(), 'rb'))
                 return True
             except (cPickle.UnpicklingError, EOFError):
-                if os.access("/var/cache/pisi", os.W_OK):
+                if os.access(ctx.config.cache_root_dir(), os.W_OK):
                     os.unlink(self.__cache_file())
                 return False
         return False
