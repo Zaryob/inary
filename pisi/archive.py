@@ -21,7 +21,6 @@ import zipfile
 import gzip
 import struct
 import sys
-import distutils.version
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -417,8 +416,7 @@ class ArchiveZip(ArchiveBase):
                     perm >>= 16
                     perm |= 0x00000100
 
-                    version = sys.version.split()[0]
-                    if distutils.version.StrictVersion(version) < distutils.version.StrictVersion("2.6.0"):
+                    if sys.version_info[:2] < (2, 6):
                         zip_obj.decompressToFile(info.filename, ofile)
                     else:
                         zip_obj.extract(info.filename, target_dir)
