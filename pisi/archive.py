@@ -21,6 +21,7 @@ import zipfile
 import gzip
 import struct
 import sys
+import distutils.version
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -199,6 +200,100 @@ class ArchiveTar(ArchiveBase):
             if ret != 0:
                 raise LzmaRuntimeError(err)
 
+
+class MyZipFile(zipfile.ZipFile):
+    def decompressToFile(self, name, outname):
+        import zlib
+        import binascii
+
+        block_size = 1024 * 1024 * 2
+
+        if self.mode not in ("r", "a"):
+            raise RuntimeError, 'read() requires mode "r" or "a"'
+        if not self.fp:
+            raise RuntimeError, \
+                  "Attempt to read ZIP archive that was already closed"
+        zinfo = self.getinfo(name)
+        filepos = self.fp.tell()
+
+        self.fp.seek(zinfo.header_offset, 0)
+
+        # Skip the file header:
+        fheader = self.fp.read(30)
+        if fheader[0:4] != zipfile.stringFileHeader:
+            raise BadZipfile, "Bad magic number for file header"
+
+        fheader = struct.unpack(zipfile.structFileHeader, fheader)
+        fname = self.fp.read(fheader[zipfile._FH_FILENAME_LENGTH])
+        if fheader[zipfile._FH_EXTRA_FIELD_LENGTH]:
+            self.fp.read(fheader[zipfile._FH_EXTRA_FIELD_LENGTH])
+
+        if fname != zinfo.orig_filename:
+            raise zipfile.BadZipfile, \
+                  'File name in directory "%s" and header "%s" differ.' % (
+                zinfo.orig_filename, fname)
+
+        destfile = file(outname, 'wb')
+
+        if zinfo.compress_type == zipfile.ZIP_STORED:
+            total_read = 0
+            crc = None
+            while total_read < zinfo.compress_size:
+                if zinfo.compress_size - total_read < block_size:
+                    block_size = zinfo.compress_size - total_read
+                buff = self.fp.read(block_size)
+                destfile.write(buff)
+                total_read += (block_size)
+                if crc:
+                    crc = binascii.crc32(buff, crc)
+                else:
+                    crc = binascii.crc32(buff)
+            destfile.close()
+            self.fp.seek(filepos, 0)
+            if crc and crc != zinfo.CRC:
+                raise zipfile.BadZipfile, "Bad CRC-32 for file %s" % name
+            return
+        elif zinfo.compress_type != zipfile.ZIP_DEFLATED:
+            raise zipfile.BadZipfile, \
+                  "Unsupported compression method %d for file %s" % \
+            (zinfo.compress_type, name)
+
+        if not zlib:
+            raise RuntimeError, \
+                "De-compression requires the (missing) zlib module"
+        # zlib compress/decompress code by Jeremy Hylton of CNRI
+        dc = zlib.decompressobj(-15)
+
+        total_read = 0
+        crc = None
+        while total_read < zinfo.compress_size:
+            if zinfo.compress_size - total_read < block_size:
+                block_size = zinfo.compress_size - total_read
+            buff = self.fp.read(block_size)
+            dcbuff = dc.decompress(dc.unconsumed_tail + buff)
+            destfile.write(dcbuff)
+            total_read += block_size
+            if crc:
+                crc = binascii.crc32(dcbuff, crc)
+            else:
+                crc = binascii.crc32(dcbuff)
+
+        # need to feed in unused pad byte so that zlib won't choke
+        ex = dc.decompress(dc.unconsumed_tail + 'Z') + dc.flush()
+        if ex:
+            if crc:
+                crc = binascii.crc32(ex, crc)
+            else:
+                crc = binascii.crc32(ex)
+            destfile.write(ex)
+
+        if crc and crc != zinfo.CRC:
+            raise zipfile.BadZipfile, "Bad CRC-32 for file %s" % name
+
+        destfile.close()
+        self.fp.seek(filepos, 0)
+
+
 class ArchiveZip(ArchiveBase):
     """ArchiveZip handles zip archives.
 
@@ -211,7 +306,7 @@ class ArchiveZip(ArchiveBase):
     def __init__(self, file_path, arch_type = "zip", mode = 'r'):
         super(ArchiveZip, self).__init__(file_path, arch_type)
 
-        self.zip_obj = zipfile.ZipFile(self.file_path, mode)
+        self.zip_obj = MyZipFile(self.file_path, mode)
 
     def close(self):
         """Close the zip archive."""
@@ -322,7 +417,11 @@ class ArchiveZip(ArchiveBase):
                     perm >>= 16
                     perm |= 0x00000100
 
-                    zip_obj.extract(info.filename, target_dir)
+                    version = sys.version.split()[0]
+                    if distutils.version.StrictVersion(version) < distutils.version.StrictVersion("2.6.0"):
+                        zip_obj.decompressToFile(info.filename, ofile)
+                    else:
+                        zip_obj.extract(info.filename, target_dir)
                     os.chmod(ofile, perm)
 
     def unpack_files(self, paths, target_dir):
