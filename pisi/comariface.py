@@ -121,7 +121,7 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath,
     ctx.ui.debug(_("Calling post install handlers"))
     for handler in link.System.PackageHandler:
         try:
-            link.System.PackageHandler[handler].setupPackage(metapath, filepath)
+            link.System.PackageHandler[handler].setupPackage(metapath, filepath, timeout=ctx.dbus_timeout)
         except dbus.DBusException, exception:
             # Do nothing if setupPackage method is not defined in package script
             if not is_method_missing(exception):
