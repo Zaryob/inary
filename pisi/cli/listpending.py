@@ -34,10 +34,8 @@ Lists packages waiting to be configured.
         self.init(database = True, write = False)
 
         A = pisi.api.list_pending()
-        order = pisi.api.generate_pending_order(A)
-
-        if len(order):
-            for p in order:
+        if len(A):
+            for p in pisi.api.generate_pending_order(A):
                 print p
         else:
             ctx.ui.info(_('There are no packages waiting to be configured'))

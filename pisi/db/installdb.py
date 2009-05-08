@@ -69,13 +69,12 @@ class InstallDB(lazydb.LazyDB):
 
     def init(self):
         self.installed_db = self.__generate_installed_pkgs()
-        self.confing_pending_db = self.__generate_config_pending()
         self.rev_deps_db = self.__generate_revdeps()
 
     def __generate_installed_pkgs(self):
         return dict(map(lambda x:pisi.util.parse_package_name(x), os.listdir(ctx.config.packages_dir())))
 
-    def __generate_config_pending(self):
+    def __get_config_pending(self):
         pending_info_path = os.path.join(ctx.config.info_dir(), ctx.const.config_pending)
         if os.path.exists(pending_info_path):
             return open(pending_info_path, "r").read().split()
@@ -95,10 +94,10 @@ class InstallDB(lazydb.LazyDB):
         for package in self.list_installed():
             self.__add_to_revdeps(package, revdeps)
         return revdeps
-        
+
     def list_installed(self):
         return self.installed_db.keys()
- 
+
     def has_package(self, package):
         return self.installed_db.has_key(package)
 
@@ -153,7 +152,7 @@ class InstallDB(lazydb.LazyDB):
         state = "i"
         if pkg.name in self.list_pending():
             state = "ip"
-        
+
         info = InstallInfo(state,
                            pkg.version,
                            pkg.release,
@@ -163,7 +162,7 @@ class InstallDB(lazydb.LazyDB):
         return info
 
     def get_rev_deps(self, name):
-        
+
         rev_deps = []
 
         if self.rev_deps_db.has_key(name):
@@ -175,7 +174,7 @@ class InstallDB(lazydb.LazyDB):
                     attr = node.attributes()[0]
                     dependency.__dict__[attr] = node.getAttribute(attr)
                 rev_deps.append((pkg, dependency))
-            
+
         return rev_deps
 
     def pkg_dir(self, pkg, version, release):
@@ -188,9 +187,10 @@ class InstallDB(lazydb.LazyDB):
         return metadata.package
 
     def mark_pending(self, package):
-        if package not in self.confing_pending_db:
-            self.confing_pending_db.append(package)
-            self.__write_config_pending()
+        config_pending = self.__get_config_pending()
+        if package not in config_pending:
+            config_pending.append(package)
+            self.__write_config_pending(config_pending)
 
     def add_package(self, pkginfo):
         self.installed_db[pkginfo.name] = "%s-%s" % (pkginfo.version, pkginfo.release)
@@ -202,17 +202,18 @@ class InstallDB(lazydb.LazyDB):
         self.clear_pending(package_name)
 
     def list_pending(self):
-        return self.confing_pending_db
+        return self.__get_config_pending()
 
     def clear_pending(self, package):
-        if package in self.confing_pending_db:
-            self.confing_pending_db.remove(package)
-            self.__write_config_pending()
+        config_pending = self.__get_config_pending()
+        if package in config_pending:
+            config_pending.remove(package)
+            self.__write_config_pending(config_pending)
 
-    def __write_config_pending(self):
+    def __write_config_pending(self, config_pending):
         pending_info_file = os.path.join(ctx.config.info_dir(), ctx.const.config_pending)
         pending = open(pending_info_file, "w")
-        for pkg in set(self.confing_pending_db):
+        for pkg in set(config_pending):
             pending.write("%s\n" % pkg)
         pending.close()
 
