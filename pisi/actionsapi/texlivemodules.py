@@ -26,7 +26,11 @@ import pisi.actionsapi.get as get
 from pisi.actionsapi.shelltools import *
 from pisi.actionsapi.pisitools import dodoc, dodir, domove, dosym, insinto, removeDir
 
-WorkDir = "texlive-%s-%s" % (get.srcNAME().split('-')[-1], get.srcVERSION().split('_')[-1])
+if not "doc" in get.srcNAME():
+    WorkDir = "texlive-%s-%s" % (get.srcNAME().split('-')[-1], get.srcVERSION().split('_')[-1])
+else:
+    WorkDir = "texlive-documentation-%s-%s" % (get.srcNAME().split('-')[-1], get.srcVERSION().split('_')[-1])
+
 
 class CompileError(pisi.actionsapi.Error):
     def __init__(self, value=''):
