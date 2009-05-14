@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2009, TUBITAK/UEKAE
+# Copyright (C) 2009, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -26,6 +26,7 @@ import pisi.actionsapi.get as get
 from pisi.actionsapi.shelltools import *
 from pisi.actionsapi.pisitools import dodoc, dodir, domove, dosym, insinto, removeDir
 
+WorkDir = "%s-%s" % (get.srcNAME(), get.srcVERSION().split('_')[-1])
 
 class CompileError(pisi.actionsapi.Error):
     def __init__(self, value=''):
@@ -105,7 +106,7 @@ def createSymlinksFormat2Engines():
 
 def installTexmfFiles():
     '''Installing texmf, texmf-dist, tlpkg, texmf-var'''
-    for installdoc in ["texmf", "texmf-dist", "tlkpg", "texmf-var"]:
+    for installdoc in ["texmf", "texmf-dist", "tlpkg", "texmf-var"]:
         if os.path.isdir("%s/%s" % (get.curDIR(), installdoc)):
             if not installdoc == "texmf-var":
                 copytree(installdoc, "%s/usr/share/%s" % (get.installDIR(), installdoc))
@@ -143,8 +144,8 @@ def installConfigFiles():
 
 def handleConfigFiles(currdir,ext1, ext2):
     '''Handling config files'''
-    for files in ls(currdir):
-        configpath = os.path.join(currdir, files)
+    for conffile in ls(currdir):
+        configpath = os.path.join(currdir, conffile)
         if os.path.isfile(configpath):
              if configpath.endswith(ext1) or configpath.endswith(ext2):
                 if not "config" in configpath:
@@ -152,8 +153,8 @@ def handleConfigFiles(currdir,ext1, ext2):
                     if not os.path.isdir("%s/etc/texmf/%s.d" % (get.installDIR(),handledir[1])):
                         ctx.ui.info(_('Creating /etc/texmf/%s.d') % handledir[1])
                         dodir("/etc/texmf/%s.d" % handledir[1])
-                    domove("/usr/share/texmf/%s/%s" % (handledir[1], files), "/etc/texmf/%s.d" % handledir[1])
-                    dosym("/etc/texmf/%s.d/%s" % (handledir[1], files), "/usr/share/texmf/%s/%s" % (handledir[1], files))
+                    domove("/usr/share/texmf/%s/%s" % (handledir[1], conffile), "/etc/texmf/%s.d" % handledir[1])
+                    dosym("/etc/texmf/%s.d/%s" % (handledir[1], conffile), "/usr/share/texmf/%s/%s" % (handledir[1], conffile))
 
         else:
            handleConfigFiles(configpath,ext1, ext2)
@@ -210,7 +211,7 @@ def makeLanguagesDefDatLines(parameter):
         if not righthyphenmin[1]:
             righthyphenmin[1]= "3"
 
-        file = splitspace[3].split("=")
+        datdeffile = splitspace[3].split("=")
     else:
         name = splitspace[0].split("=")
         synonyms = splitspace[1].split("=")
@@ -223,18 +224,18 @@ def makeLanguagesDefDatLines(parameter):
         if not righthyphenmin[1]:
             righthyphenmin[1]= "3"
 
-        file = splitspace[4].split("=")
+        datdeffile = splitspace[4].split("=")
 
         synonym = synonyms[1].split(",")
         for i in range(len(synonym)):
-            echo("%s/language.%s.def" % (get.curDIR(), get.srcNAME()), "\\languages{%s}{%s}{}{%s}{%s}" % (synonym[i], file[1], lefthyphenmin[1], righthyphenmin[1]))
-            ctx.ui.info(_('\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def') % (synonym[1], file[1], lefthyphenmin[1], righthyphenmin[1], get.curDIR(), get.srcNAME()))
+            echo("%s/language.%s.def" % (get.curDIR(), get.srcNAME()), "\\languages{%s}{%s}{}{%s}{%s}" % (synonym[i], datdeffile[1], lefthyphenmin[1], righthyphenmin[1]))
+            ctx.ui.info(_('\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def') % (synonym[i], datdeffile[1], lefthyphenmin[1], righthyphenmin[1], get.curDIR(), get.srcNAME()))
 
             echo("%s/language.%s.dat" % (get.curDIR(), get.srcNAME()), "=%s"  % (synonym[i]))
-            ctx.ui.info(_('%s %s is added to %s/language.%s.dat') % (synonym[1], get.curDIR(), get.srcNAME()))
+            ctx.ui.info(_('%s is added to %s/language.%s.dat') % (synonym[i], get.curDIR(), get.srcNAME()))
 
-    echo("%s/language.%s.def" % (get.curDIR(), get.srcNAME()), "\\languages{%s}{%s}{}{%s}{%s}" % (name[1], file[1], lefthyphenmin[1], righthyphenmin[1]))
-    ctx.ui.info(_('\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def ') % (name[1], file[1], lefthyphenmin[1], righthyphenmin[1], get.curDIR(), get.srcNAME()))
+    echo("%s/language.%s.def" % (get.curDIR(), get.srcNAME()), "\\languages{%s}{%s}{}{%s}{%s}" % (name[1], datdeffile[1], lefthyphenmin[1], righthyphenmin[1]))
+    ctx.ui.info(_('\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def ') % (name[1], datdeffile[1], lefthyphenmin[1], righthyphenmin[1], get.curDIR(), get.srcNAME()))
 
-    echo("%s/language.%s.dat" % (get.curDIR(), get.srcNAME()), "%s %s"  % (name[1], file[1]))
-    ctx.ui.info(_('%s %s is added to %s/language.%s.dat ') % (name[1], file[1], get.curDIR(), get.srcNAME()))
+    echo("%s/language.%s.dat" % (get.curDIR(), get.srcNAME()), "%s %s"  % (name[1], datdeffile[1]))
+    ctx.ui.info(_('%s %s is added to %s/language.%s.dat ') % (name[1], datdeffile[1], get.curDIR(), get.srcNAME()))
