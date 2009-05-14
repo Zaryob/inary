@@ -105,8 +105,9 @@ def __getExtraVersion():
 
     return extraversion
 
-
-# Public callables
+#######################
+# Configuration stuff #
+#######################
 
 def configure():
     # Set EXTRAVERSION
@@ -124,8 +125,13 @@ def configure():
     else:
         autotools.make("oldconfig")
 
+
+######################
+# Installation stuff #
+######################
+
 def build():
-    autotools.make()
+    autotools.make("CONFIG_DEBUG_SECTION_MISMATCH=y")
 
 def install():
     suffix = __getSuffix()
