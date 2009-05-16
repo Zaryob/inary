@@ -29,12 +29,11 @@ import pisi.actionsapi.pisitools    as pisitools
 import pisi.actionsapi.shelltools   as shelltools
 
 KERNELRC = "/etc/kernelrc"
-DEFAULT_FLAVOURS = "pae"
+DEFAULT_FLAVOURS = ["pae"]
 
 # Internal helpers
 
 def __getAllSupportedFlavours():
-    def_flavours = DEFAULT_FLAVOURS.split(",")
 
     import ConfigParser
     cp = ConfigParser.ConfigParser()
@@ -43,9 +42,9 @@ def __getAllSupportedFlavours():
         try:
             return cp.get('general', 'flavours').strip('"')
         except NoSectionError, NoOptionError:
-            return def_flavours
+            return DEFAULT_FLAVOURS
     else:
-        return def_flavours
+            return DEFAULT_FLAVOURS
 
 def __get_workdir_for_module(mod):
     mod = mod.split("module-")[1]
