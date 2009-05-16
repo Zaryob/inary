@@ -189,6 +189,15 @@ def installHeaders(extra=[]):
                         xargs -n1 -i: find : -type f) | \
                         cpio -pd --preserve-modification-time %s" % destination)
 
+    # Copy Modules.symvers
+    shutil.copy("Module.symvers", "%s/" % destination)
+
+    # Copy .config file which will be needed by some external modules
+    shutil.copy(".config", "%s/" % destination)
+
+    # Unset CONFIG_DEBUG_INFO if it's set in the kernel configuration
+    pisitools.dosed(".config", ".*CONFIG_DEBUG_INFO=.*", "# CONFIG_DEBUG_INFO is not set")
+
     # Settle the correct build symlink to this headers
     pisitools.dosym("/%s" % headersDirectoryName, "/lib/modules/%s/build" % suffix)
 
