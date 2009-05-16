@@ -12,6 +12,7 @@
 # Standard Python Modules
 import os
 import re
+import shutil
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -62,8 +63,10 @@ def __get_workdir_for_module(mod):
 # Set WorkDir for kernel modules
 #####
 
-if not globals().has_key("WorkDir") and get.srcNAME().startswith("module-"):
-    globals()['WorkDir'] = __get_workdir_for_module(get.srcNAME())
+def setModuleWorkDIR():
+    if get.srcNAME().startswith("module-"):
+        globals()['WorkDir'] = __get_workdir_for_module(get.srcNAME())
+
 
 #################
 # Other helpers #
@@ -108,6 +111,7 @@ def __getExtraVersion():
 #######################
 # Configuration stuff #
 #######################
+
 
 def configure():
     # Set EXTRAVERSION
