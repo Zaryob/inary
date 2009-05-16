@@ -111,15 +111,13 @@ def __getExtraVersion():
 # Configuration stuff #
 #######################
 
-
 def configure():
-    # Set EXTRAVERSION
-    extraversion = __getExtraVersion()
 
     # I don't know what for but let's clean *.orig files
     shelltools.system("find . -name \"*.orig\" | xargs rm -f")
 
-    pisitools.dosed("Makefile", "EXTRAVERSION =.*", "EXTRAVERSION = %s" % extraversion)
+    # Set EXTRAVERSION
+    pisitools.dosed("Makefile", "EXTRAVERSION =.*", "EXTRAVERSION = %s" % __getExtraVersion())
 
     # Configure the kernel
     configtype = os.getenv("KCONFIG")
@@ -129,12 +127,16 @@ def configure():
         autotools.make("oldconfig")
 
 
-######################
-# Installation stuff #
-######################
+##################################
+# Building and nstallation stuff #
+##################################
 
-def build():
-    autotools.make("CONFIG_DEBUG_SECTION_MISMATCH=y")
+def build(debugSymbols=False):
+    extra_config = ["CONFIG_DEBUG_SECTION_MISMATCH=y"]
+    if debugSymbols:
+        extra_config.append("CONFIG_DEBUG_INFO=y")
+
+    autotools.make("%s" " ".join(extra_config))
 
 def install():
     suffix = __getSuffix()
