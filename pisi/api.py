@@ -237,7 +237,7 @@ def get_install_order(packages):
     @param packages: list of package names -> list_of_strings
     """
     install_order = pisi.operations.install.plan_install_pkg_names
-    i_graph, order = install_order(packages, ignore_package_conflicts=True)
+    i_graph, order = install_order(packages)
     return order
 
 def get_remove_order(packages):
@@ -267,7 +267,7 @@ def get_base_upgrade_order(packages):
     @param packages: list of package names -> list_of_strings
     """
     upgrade_order = pisi.operations.upgrade.upgrade_base
-    order = upgrade_order(packages, ignore_package_conflicts=True)
+    order = upgrade_order(packages)
     return list(order)
 
 def get_conflicts(packages):

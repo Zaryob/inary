@@ -149,6 +149,10 @@ def upgrade_pkg_names(A = [], repo=None):
 
     ctx.ui.notify(ui.packagestogo, order = order)
 
+    conflicts = []
+    if not ctx.get_option('ignore_package_conflicts'):
+        conflicts = operations.helper.check_conflicts(order, packagedb)
+
     paths = []
     for x in order:
         ctx.ui.info(util.colorize(_("Downloading %d / %d") % (order.index(x)+1, len(order)), "yellow"))
@@ -159,10 +163,8 @@ def upgrade_pkg_names(A = [], repo=None):
     if ctx.get_option('fetch_only'):
         return
 
-    if not ctx.get_option('ignore_package_conflicts'):
-        conflicts = operations.helper.check_conflicts(order, packagedb)
-        if conflicts:
-            operations.remove.remove_conflicting_packages(conflicts)
+    if conflicts:
+        operations.remove.remove_conflicting_packages(conflicts)
 
     operations.remove.remove_replaced_packages(replaces.keys())
     operations.remove.remove_obsoleted_packages()
@@ -231,7 +233,7 @@ def plan_upgrade(A):
     order.reverse()
     return G_f, order
 
-def upgrade_base(A = set(), ignore_package_conflicts = False):
+def upgrade_base(A = set()):
     installdb = pisi.db.installdb.InstallDB()
     componentdb = pisi.db.componentdb.ComponentDB()
     ignore_build = ctx.get_option('ignore_build_no')
@@ -242,7 +244,7 @@ def upgrade_base(A = set(), ignore_package_conflicts = False):
             if extra_installs:
                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be installed: ') +
                                util.strlist(extra_installs))
-            G_f, install_order = operations.install.plan_install_pkg_names(extra_installs, ignore_package_conflicts)
+            G_f, install_order = operations.install.plan_install_pkg_names(extra_installs)
             extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase - set(install_order))
             upgrade_order = []
             if extra_upgrades:

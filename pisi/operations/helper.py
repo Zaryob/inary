@@ -60,7 +60,7 @@ def check_conflicts(order, packagedb):
                     conflicts)
 
         if not ctx.ui.confirm(_('Remove the following conflicting packages?')):
-            raise Exception(_("Conflicts remain"))
+            raise Exception(_("Conflicting packages should be removed to continue"))
 
     return list(C)
 
