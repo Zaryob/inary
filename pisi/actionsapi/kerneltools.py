@@ -131,9 +131,18 @@ def configure():
 # Building and nstallation stuff #
 ##################################
 
+def dumpVersion():
+    # Writes the specific kernel version into /etc/kernel
+    destination = os.path.join(get.installDIR(), "etc/kernel/")
+    if not os.path.exists(destination):
+        os.makedirs(destination)
+
+    open(os.path.join(destination, get.srcNAME()), "w").write("%s-%s" % (get.srcVERSION(), get.srcRELEASE()))
+
 def build(debugSymbols=False):
     extra_config = ["CONFIG_DEBUG_SECTION_MISMATCH=y"]
     if debugSymbols:
+        # Enable debugging symbols (-g -gdwarf2)
         extra_config.append("CONFIG_DEBUG_INFO=y")
 
     autotools.make("%s" " ".join(extra_config))
