@@ -1027,9 +1027,9 @@ def build(pspec):
         pb = Builder.from_name(pspec)
     try:
         result = pb.build()
-    except ActionScriptException:
+    except ActionScriptException, e:
         ctx.ui.error("Action script error caught.")
-        sys.exit(1)
+        raise e
     finally:
         ctx.ui.warning(_("*** %d error(s), %d warning(s)") % (ctx.ui.errors, ctx.ui.warnings))
     return result
