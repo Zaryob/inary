@@ -12,7 +12,8 @@
 
 def invalidate_caches():
     # Invalidates pisi caches in use and forces to re-fill caches from disk when needed
-    for db in [packagedb.PackageDB(), sourcedb.SourceDB(), componentdb.ComponentDB(), installdb.InstallDB()]:
+    for db in [packagedb.PackageDB(), sourcedb.SourceDB(), componentdb.ComponentDB(),
+               installdb.InstallDB(), historydb.HistoryDB()]:
         db.invalidate()
 
 def flush_caches():
