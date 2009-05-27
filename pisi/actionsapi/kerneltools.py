@@ -28,23 +28,18 @@ import pisi.actionsapi.autotools    as autotools
 import pisi.actionsapi.pisitools    as pisitools
 import pisi.actionsapi.shelltools   as shelltools
 
-KERNELRC = "/etc/kernelrc"
 DEFAULT_FLAVOURS = ["pae"]
+
+class ConfigureError(pisi.actionsapi.Error):
+    def __init__(self, value=''):
+        pisi.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
 
 # Internal helpers
 
 def __getAllSupportedFlavours():
-
-    import ConfigParser
-    cp = ConfigParser.ConfigParser()
-
-    if os.path.exists(KERNELRC) and cp.read(KERNELRC):
-        try:
-            return cp.get('general', 'flavours').strip('"')
-        except NoSectionError, NoOptionError:
-            return DEFAULT_FLAVOURS
-    else:
-            return DEFAULT_FLAVOURS
+    pass
 
 def __get_workdir_for_module(mod):
     mod = mod.split("module-")[1]
@@ -81,7 +76,7 @@ def __getFlavour():
     return flavour
 
 def __getSuffix():
-    # Set suffix, e.g. "2.6.29_rc8-default"
+    # Set suffix, e.g. "2.6.30_rc7-119"
     suffix = "%s-%s" % (get.srcVERSION(), get.srcRELEASE())
     if __getFlavour():
         suffix += "-%s" % __getFlavour()
@@ -111,6 +106,24 @@ def __getExtraVersion():
 # Configuration stuff #
 #######################
 
+def getKernelVersion(flavour=None):
+    # Returns the KVER information to use with external module compilation
+    # This is something like 2.6.30_rc7-119 which will be appended to /lib/modules.
+    # if flavour==None, it will return the KVER in the /etc/kernel/kernel file else,
+    # /etc/kernel/<flavour>.
+    # If it fails, it will return the running kernel version.
+    kverfile = "/etc/kernel"
+    if flavour:
+        kverfile = os.path.join(kverfile, flavour)
+    else:
+        kverfile = os.path.join(kverfile, "kernel")
+
+    if os.path.exists(kverfile):
+        return open(kverfile, "r").read().strip()
+    else:
+        # Fail
+        raise ConfigureError(_("Can't find kernel version information file %s.") % kverfile)
+
 def configure():
 
     # I don't know what for but let's clean *.orig files
@@ -127,9 +140,9 @@ def configure():
         autotools.make("oldconfig")
 
 
-##################################
-# Building and nstallation stuff #
-##################################
+###################################
+# Building and installation stuff #
+###################################
 
 def dumpVersion():
     # Writes the specific kernel version into /etc/kernel
