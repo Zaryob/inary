@@ -164,6 +164,10 @@ class ArchiveTar(ArchiveBase):
                 else:
                     os.lchown(tarinfo.name, uid, gid)
 
+            # Added for package-manager
+            if tarinfo.name.endswith(".desktop"):
+                ctx.ui.notify(pisi.ui.desktopfile, desktopfile=tarinfo.name)
+
         os.chdir(oldwd)
         self.close()
 

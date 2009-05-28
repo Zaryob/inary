@@ -13,7 +13,7 @@
 #
 
 (installed, upgraded, removed, installing, removing, configuring, configured, extracting,
- downloading, packagestogo, updatingrepo, cached)  = range(12)
+ downloading, packagestogo, updatingrepo, cached, desktopfile)  = range(13)
 
 class UI(object):
     "Abstract class for UI operations, derive from this."
