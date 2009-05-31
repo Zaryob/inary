@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "POT-Creation-Date: 2009-05-05 15:19+EEST\n"
-"PO-Revision-Date: 2009-04-05 09:56+0200\n"
+"PO-Revision-Date: 2009-05-31 19:10+0200\n"
 "Last-Translator: Willem Gielen <w.gielen@gmail.com>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -172,8 +172,7 @@ msgstr "ActionsAPI [doman]: onjuist man-pagina bestand: %s"
 
 #: pisi/actionsapi/pisitools.py:167
 msgid "No file matched pattern \"%s\". 'domove' operation failed."
-msgstr ""
-"Geen bestand komt overeen met patroon \"%s\". 'domove' handeling mislukt."
+msgstr "Geen bestand komt overeen met patroon \"%s\". 'domove' handeling mislukt."
 
 #: pisi/actionsapi/pisitools.py:186
 msgid "ActionsAPI [rename]: %s: %s"
@@ -181,8 +180,7 @@ msgstr "ActionsAPI [rename] %s: %s"
 
 #: pisi/actionsapi/pisitools.py:201
 msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
-msgstr ""
-"Geen bestand komt overeen met patroon: \"%s\". 'dosed' handeling misluky."
+msgstr "Geen bestand komt overeen met patroon: \"%s\". 'dosed' handeling misluky."
 
 #: pisi/actionsapi/pisitools.py:214
 msgid "dosed method has not changed file '%s'."
@@ -316,45 +314,38 @@ msgid "Command \"%s\" failed, return value was %d."
 msgstr "Commando \"%s\" mislukt, waarde terug veranderd in %d."
 
 #: pisi/actionsapi/texlivemodules.py:53
-#, fuzzy
 msgid "Building format files failed"
-msgstr "Uitvoeren automake mislukt."
+msgstr "Bouwen format bestanden mislukt"
 
 #: pisi/actionsapi/texlivemodules.py:56
 msgid "Generate config files failed"
-msgstr ""
+msgstr "Genereren config bestanden mislukt"
 
 #: pisi/actionsapi/texlivemodules.py:63
 msgid "Creating symlinks from format to engines failed"
-msgstr ""
+msgstr "Creeëren symlinks van formats naar engines mislukt"
 
 # pisi/actionsapi/autotools.py:119 :127
 #: pisi/actionsapi/texlivemodules.py:67
-#, fuzzy
 msgid "Installing texmf files failed"
-msgstr "Install mislukt."
+msgstr "Installeren texmf bestanden mislukt"
 
 # pisi/actionsapi/autotools.py:119 :127
 #: pisi/actionsapi/texlivemodules.py:71
-#, fuzzy
 msgid "Installing docs failed"
-msgstr "Install mislukt."
+msgstr "Installeren docs mislukt"
 
 #: pisi/actionsapi/texlivemodules.py:75
-#, fuzzy
 msgid "Installing config files failed"
-msgstr "Uitvoeren ldconfig mislukt."
+msgstr "Installeren config bestanden mislukt"
 
 #: pisi/actionsapi/texlivemodules.py:81
-#, fuzzy
 msgid "Handle config files failed"
-msgstr ""
-"\n"
-"Veranderd config bestand: %s"
+msgstr "Behandelen config bestanden mislukt"
 
 #: pisi/actionsapi/texlivemodules.py:92
 msgid "Symlink %s skipped (special case)"
-msgstr ""
+msgstr "Symlink %s overgeslagen (speciaal geval)"
 
 #: pisi/actionsapi/texlivemodules.py:94
 msgid "Symlink %s -> %s skipped (texlive-core takes care of it."
@@ -513,8 +504,7 @@ msgstr "Pakket-URI: %s"
 
 #: pisi/atomicoperations.py:115
 msgid "Download Error: Package does not match the repository package."
-msgstr ""
-"Download fout: Pakket komt niet overeen met het pakket in de repository."
+msgstr "Download fout: Pakket komt niet overeen met het pakket in de repository."
 
 #: pisi/atomicoperations.py:119
 msgid "Package %s not found in any active repository."
@@ -610,8 +600,7 @@ msgid "Not removing conflicted file : %s"
 msgstr "Niet verwijderen conflicterend bestand: %s"
 
 #: pisi/atomicoperations.py:559
-msgid ""
-"Installed file %s does not exist on system [Probably you manually deleted]"
+msgid "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
 "Geïnstalleerd bestand %s bestaat niet op systeem [waarschijnlijk handmatig "
 "verwijderd]"
@@ -1457,8 +1446,7 @@ msgstr "Toon gedetailleerde installatie-informatie"
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/listinstalled.py:75 pisi/cli/listupgrades.py:77
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
 msgstr "Pakketnaam     |St|   Versie|  Rel.| Bouw |  Distro|             Datum"
 
 #: pisi/cli/listnewest.py:26
@@ -2176,8 +2164,7 @@ msgid "unable to call function from actions: %s"
 msgstr "kan functie niet aanroepen vanuit actions: %s"
 
 #: pisi/operations/build.py:545
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Veiligheidsprocedure: de volgende extra pakketten in system.devel zullen "
 "geïnstalleerd worden:"
@@ -2285,10 +2272,8 @@ msgid "There are abandoned files under the install dir (%s):"
 msgstr "Verlaten bestanden in de installatiemap (%s):"
 
 #: pisi/operations/build.py:1001
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
-msgstr ""
-"Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)."
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
+msgstr "Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)."
 
 #: pisi/operations/build.py:1005
 msgid "Cleaning Build Directory..."
@@ -2813,10 +2798,8 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-msgstr ""
-"Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgstr "Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
 
 #: scripts/repostats.py:467
 msgid ""
@@ -2842,14 +2825,3 @@ msgstr "Scannen bron-repository...\n"
 msgid "Scanning binary packages...\n"
 msgstr "Scannen binaire pakketten...\n"
 
-#~ msgid "Package %s is not present in the package database"
-#~ msgstr "Pakket %s niet aanwezig in de pakketdatabase"
-
-#~ msgid "Stripping files.."
-#~ msgstr "Strippen bestanden..."
-
-#~ msgid "dbus-python package is not fully installed"
-#~ msgstr "dbus-python pakket is niet volledig geïnstalleerd"
-
-#~ msgid "Configuring %s package for removal"
-#~ msgstr "Configureren %s pakket voor verwijdering"
