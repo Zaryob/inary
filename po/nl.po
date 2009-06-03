@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "POT-Creation-Date: 2009-05-05 15:19+EEST\n"
-"PO-Revision-Date: 2009-05-31 19:10+0200\n"
+"PO-Revision-Date: 2009-06-03 18:59+0200\n"
 "Last-Translator: Willem Gielen <w.gielen@gmail.com>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -349,70 +349,67 @@ msgstr "Symlink %s overgeslagen (speciaal geval)"
 
 #: pisi/actionsapi/texlivemodules.py:94
 msgid "Symlink %s -> %s skipped (texlive-core takes care of it."
-msgstr ""
+msgstr "Symlink %s -> %s overgeslagen ( texlive-core regelt dit."
 
 #: pisi/actionsapi/texlivemodules.py:97
 msgid "Symlink %s -> %s skipped."
-msgstr ""
+msgstr "Symlink %s -> %s overgeslagen."
 
 #: pisi/actionsapi/texlivemodules.py:99
 msgid "Symlink %s skipped (file exists.)"
-msgstr ""
+msgstr "Symlink %s overgeslagen (bestand bestaat.)"
 
 #: pisi/actionsapi/texlivemodules.py:101
 msgid "Making symlink from %s to %s"
-msgstr ""
+msgstr "Aanmaken symlink van %s naar %s"
 
 #: pisi/actionsapi/texlivemodules.py:153
 msgid "Creating /etc/texmf/%s.d"
-msgstr ""
+msgstr "Aanmaken /etc/texmf/%s.d"
 
 #: pisi/actionsapi/texlivemodules.py:166
-#, fuzzy
 msgid "Building format file %s"
-msgstr "** bouwen pakket %s"
+msgstr "Bouwen format bestand %s"
 
 #: pisi/actionsapi/texlivemodules.py:181
-#, fuzzy
 msgid "Map %s is added to %s/%s.cfg"
-msgstr "Repo %s toegevoegd aan het systeem."
+msgstr "Kaart %s is toegevoegd aan %s/%s.cfg"
 
 #: pisi/actionsapi/texlivemodules.py:184
-#, fuzzy
 msgid "MixedMap %s is added to %s/%s.cfg"
-msgstr "Repo %s toegevoegd aan het systeem."
+msgstr "Gemixte kaart %s is toegevoegd aan %s/%s.cfg"
 
 #: pisi/actionsapi/texlivemodules.py:187
 msgid "p +%s is added to %s/%s-config.ps"
-msgstr ""
+msgstr "p +%s is toegevoegd aan %s/%s-config.ps"
 
 #: pisi/actionsapi/texlivemodules.py:190
 msgid "f %s is added to %s/%s-config"
-msgstr ""
+msgstr "f %s is toegevoegd aan %s/%s-config"
 
 #: pisi/actionsapi/texlivemodules.py:194
 msgid "Language file  %s  already generated."
-msgstr ""
+msgstr "Taalbestand %s is al aangemaakt."
 
 #: pisi/actionsapi/texlivemodules.py:196
 msgid "No rule to proccess %s. Please file a bug."
-msgstr ""
+msgstr "Geen regel verwerkt %s. Meld de bug alstublieft."
 
 #: pisi/actionsapi/texlivemodules.py:231
 msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
-msgstr ""
+msgstr "\\languages{%s}{%s}{}{%s}{%s} is toegevoegd aan %s/language.%s.def"
 
 #: pisi/actionsapi/texlivemodules.py:234
 msgid "%s %s is added to %s/language.%s.dat"
-msgstr ""
+msgstr "%s %s is toegevoegd aan %s/language.%s.dat"
 
 #: pisi/actionsapi/texlivemodules.py:237
 msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
-msgstr ""
+msgstr "\\languages{%s}{%s}{}{%s}{%s} is toegevoegd aan %s/language.%s.def "
 
 #: pisi/actionsapi/texlivemodules.py:240
 msgid "%s %s is added to %s/language.%s.dat "
-msgstr ""
+msgstr "%s %s is toegevoegd aan %s/language.%s.dat "
 
 #: pisi/api.py:60 pisi/cli/command.py:167
 msgid "You have to be root for this operation."
