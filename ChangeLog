@@ -1,3 +1,8 @@
+2009-06-06 Ozan Çağlayan <ozan@pardus.org.tr>
+		* (operations/build.py): Sort the files according to their path names
+		before adding them to the tarfile. This helps lzma to compress the
+		install.tar better. Thanks Onur for noticing this and giving the idea.
+
 2009-05-07 Bahadır Kandemir <bahadir@pardus.org.tr>
         * Set DBus timeout for setupPackage calls.
 

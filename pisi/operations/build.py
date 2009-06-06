@@ -965,6 +965,11 @@ class Builder:
             files = pisi.files.Files()
             files.read(ctx.const.files_xml)
 
+            # Sort the files in-place according to their path for an ordered
+            # tarfile layout which dramatically improves the compression performance
+            # of lzma.
+            files.list.sort(key=lambda x: x.path)
+
             if ctx.get_option('package_format') == "1.0":
                 for finfo in files.list:
                     orgname = arcname = pisi.util.join_path("install", finfo.path)
