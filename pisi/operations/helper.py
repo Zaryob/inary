@@ -87,7 +87,9 @@ def calculate_download_sizes(order):
             (version, release, build) = installdb.get_version(pkg.name)
             delta = pkg.get_delta(buildFrom=build)
 
-        if delta:
+        ignore_delta = ctx.config.values.general.ignore_delta
+
+        if delta and not ignore_delta:
             fn = os.path.basename(delta.packageURI)
             pkg_hash = delta.packageHash
             pkg_size = delta.packageSize
