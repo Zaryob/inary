@@ -73,6 +73,17 @@ class RepoOrder:
 
         self._update(repo_doc)
 
+    def get_status(self, repo_name):
+        repo_doc = self._get_doc()
+        for r in repo_doc.tags("Repo"):
+            if r.getTagData("Name") == repo_name:
+                status_node = r.getTag("Status")
+                if status_node:
+                    status = status_node.firstChild().data()
+                    if status in ["active", "deactive"]:
+                        return status
+        return "deactive"
+
     def remove(self, repo_name):
         repo_doc = self._get_doc()
 
@@ -111,8 +122,7 @@ class RepoOrder:
             media = r.getTagData("Media")
             name = r.getTagData("Name")
             status = r.getTagData("Status")
-            if status != "deactive":
-                order.setdefault(media, []).append(name)
+            order.setdefault(media, []).append(name)
 
         return order
 
@@ -178,8 +188,8 @@ class RepoDB(lazydb.LazyDB):
                 repos.append(r)
         return repos
 
-    def list_repos(self):
-        return self.repoorder.get_order()
+    def list_repos(self, onlyActive=True):
+        return filter(lambda x:True if not onlyActive else self.repo_active(x), self.repoorder.get_order())
 
     def list_repo_urls(self):
         repos = []
@@ -200,3 +210,6 @@ class RepoDB(lazydb.LazyDB):
 
     def deactivate_repo(self, name):
         self.repoorder.set_status(name, "deactive")
+
+    def repo_active(self, name):
+        return self.repoorder.get_status(name) == "active"
