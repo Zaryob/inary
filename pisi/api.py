@@ -427,6 +427,20 @@ def get_takeback_plan(operation):
     return beinstalled, beremoved
 
 @locked
+def set_repo_activity(name, active):
+    """
+    Changes the activity status of a  repository. Inactive repositories will have no effect on
+    upgrades and installs.
+    @param name: name of the repository
+    @param active: the new repository status
+    """
+    repodb = pisi.db.repodb.RepoDB()
+    if active:
+        repodb.activate_repo(name)
+    else:
+        repodb.deactivate_repo(name)
+
+@locked
 def delete_cache():
     """
     Deletes cached packages, cached archives, build dirs, db caches
