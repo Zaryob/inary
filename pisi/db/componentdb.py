@@ -34,8 +34,8 @@ class ComponentDB(lazydb.LazyDB):
         component_sources = {}
 
         self.repodb = pisi.db.repodb.RepoDB()
-
-        for repo in self.repodb.list_repos():
+        repos = filter(lambda x:self.repodb.repo_active(x), self.repodb.list_repos())
+        for repo in repos:
             doc = self.repodb.get_repo_doc(repo)
             component_nodes[repo] = self.__generate_components(doc)
             component_packages[repo] = self.__generate_packages(doc)

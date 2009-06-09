@@ -224,12 +224,11 @@ def list_upgradable():
 
     return upgradable
 
-def list_repos(onlyActive=True):
+def list_repos():
     """
     Return a list of the repositories -> list_of_strings
-    @param onlyActive: return only the active repos list -> list_of_strings
     """
-    return pisi.db.repodb.RepoDB().list_repos(onlyActive)
+    return pisi.db.repodb.RepoDB().list_repos()
 
 def get_install_order(packages):
     """

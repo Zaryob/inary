@@ -33,8 +33,8 @@ class SourceDB(lazydb.LazyDB):
         self.__revdeps = {}
 
         repodb = pisi.db.repodb.RepoDB()
-
-        for repo in repodb.list_repos():
+        repos = filter(lambda x:repodb.repo_active(x), repodb.list_repos())
+        for repo in repos:
             doc = repodb.get_repo_doc(repo)
             self.__source_nodes[repo], self.__pkgstosrc[repo] = self.__generate_sources(doc)
             self.__revdeps[repo] = self.__generate_revdeps(doc)
@@ -52,7 +52,7 @@ class SourceDB(lazydb.LazyDB):
             sources[src_name] = gzip.zlib.compress(spec.toString())
             for package in spec.tags("Package"):
                 pkgstosrc[package.getTagData("Name")] = src_name
-        
+
         return sources, pkgstosrc
 
     def __generate_revdeps(self, doc):
