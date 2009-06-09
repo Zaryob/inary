@@ -45,8 +45,8 @@ class PackageDB(lazydb.LazyDB):
         self.__replaces = {}      # Replaces
 
         repodb = pisi.db.repodb.RepoDB()
-        repos = filter(lambda x:repodb.repo_active(x), repodb.list_repos())
-        for repo in repos:
+
+        for repo in repodb.list_repos():
             doc = repodb.get_repo_doc(repo)
             self.__package_nodes[repo] = self.__generate_packages(doc)
             self.__revdeps[repo] = self.__generate_revdeps(doc)
