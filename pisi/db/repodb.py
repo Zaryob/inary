@@ -132,7 +132,7 @@ class RepoDB(lazydb.LazyDB):
         self.repoorder = RepoOrder()
 
     def has_repo(self, name):
-        return name in self.list_repos()
+        return name in self.list_repos(only_active=False)
 
     def has_repo_url(self, url):
         return url in self.list_repo_urls()
@@ -174,16 +174,16 @@ class RepoDB(lazydb.LazyDB):
         pisi.util.clean_dir(os.path.join(ctx.config.index_dir(), name))
         self.repoorder.remove(name)
 
-    def get_source_repos(self):
+    def get_source_repos(self, only_active=True):
         repos = []
-        for r in self.list_repos():
+        for r in self.list_repos(only_active):
             if self.get_repo_doc(r).getTag("SpecFile"):
                 repos.append(r)
         return repos
 
-    def get_binary_repos(self):
+    def get_binary_repos(self, only_active=True):
         repos = []
-        for r in self.list_repos():
+        for r in self.list_repos(only_active):
             if not self.get_repo_doc(r).getTag("SpecFile"):
                 repos.append(r)
         return repos
@@ -191,9 +191,9 @@ class RepoDB(lazydb.LazyDB):
     def list_repos(self, only_active=True):
         return filter(lambda x:True if not only_active else self.repo_active(x), self.repoorder.get_order())
 
-    def list_repo_urls(self):
+    def list_repo_urls(self, only_active=True):
         repos = []
-        for r in self.list_repos():
+        for r in self.list_repos(only_active):
             repos.append(self.get_repo_url(r))
         return repos
 
@@ -201,7 +201,7 @@ class RepoDB(lazydb.LazyDB):
         if not self.has_repo_url(url):
             return None
 
-        for r in self.list_repos():
+        for r in self.list_repos(only_active=False):
             if self.get_repo_url(r) == url:
                 return r
 
