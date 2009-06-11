@@ -1,8 +1,9 @@
 # translation of tr.po to Türkçe
 # Eray Ozkural <eray@pardus.org.tr>, 2005,2006.
 # Furkan Duman <coderlord@gmail.com>, 2006.
-# Faik Uygur <faik@pardus.org.tr>, 2006, 2007, 2008, 2009.
 # Ahmet AYGÜN <ahmet@pardusman.org>, 2006.
+# Faik Uygur <faik@pardus.org.tr>, 2006, 2007, 2008, 2009.
+# Ozan Çağlayan <ozan@pardus.org.tr>, 2009.
 # translation of tr.po to
 # PiSi Translation
 # Copyright (C) 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
@@ -1173,7 +1174,7 @@ msgstr "Verilen operasyon sonrası duruma geri dön"
 
 #: pisi/cli/history.py:67
 msgid "Operation #%d: %s"
-msgstr "Operasyon #%d: %s"
+msgstr "İşlem #%d: %s"
 
 #: pisi/cli/history.py:68
 msgid "Date: %s %s"
@@ -1758,7 +1759,7 @@ msgstr "%s paketi yapılandırılıyor"
 
 #: pisi/comariface.py:99
 msgid "COMAR package updated. From now on, using new COMAR daemon."
-msgstr ""
+msgstr "COMAR paketi güncellendi, artık yeni COMAR kullanılıyor."
 
 #: pisi/comariface.py:105
 msgid "Registering %s comar script"
@@ -1944,7 +1945,7 @@ msgstr "zip sıkıştırma henüz desteklenmiyor"
 
 #: pisi/file.py:117
 msgid "Fetching %s"
-msgstr "%s'i indiriyor"
+msgstr "%s indiriliyor"
 
 #: pisi/file.py:122
 msgid "Copying %s to transfer dir"
@@ -1956,19 +1957,19 @@ msgstr "Dosya '%s' bulunamadı."
 
 #: pisi/file.py:135
 msgid "File integrity of %s compromised."
-msgstr "%s in dosya bütünlüğü bozuk."
+msgstr "%s dosyasının bütünlüğü bozuk."
 
 #: pisi/file.py:155
 msgid "File mode must be either File.read or File.write"
-msgstr "File modu ya File.read ya da File.write olmalı"
+msgstr "Dosya kipi File.read veya File.write olmalı"
 
 #: pisi/file.py:160
 msgid "Remote write not implemented"
-msgstr "Uzağa yazmalar henüz programlanmadı"
+msgstr "Uzağa yazma özelliği henüz desteklenmiyor"
 
 #: pisi/file.py:187
 msgid "gzip compression not supported yet"
-msgstr "gzip sıkıştırma henüz desteklenmiyor"
+msgstr "gzip sıkıştırma algoritması henüz desteklenmiyor"
 
 #: pisi/file.py:202 pisi/file.py:205
 msgid "ERROR: gpg --detach-sig %s failed"
@@ -1984,7 +1985,7 @@ msgstr "%s deposu güncellendi."
 
 #: pisi/history.py:64
 msgid "%s is upgraded from %s to %s with delta."
-msgstr "%s %s sürümünden %s sürümüne delta ile yükseltildi."
+msgstr "%s %s sürümünden %s sürümüne delta paketi ile yükseltildi."
 
 #: pisi/history.py:66
 msgid "%s is upgraded from %s to %s."
@@ -2004,7 +2005,7 @@ msgstr "%s %s yeniden kuruldu."
 
 #: pisi/history.py:74
 msgid "%s is downgraded from %s to %s."
-msgstr "%s %s dan %s sürümüne indirildi."
+msgstr "%s %s sürümünden %s sürümüne indirildi."
 
 #: pisi/index.py:97
 msgid "Adding %s to component index"
@@ -2040,7 +2041,7 @@ msgstr "Yansı dosyası %s bulunamadı. mirrors:// çözümlenemedi."
 
 #: pisi/operations/build.py:89
 msgid "Path %s belongs in multiple packages"
-msgstr "Yol %s birden çok pakete ait"
+msgstr "%s yolu birden çok pakete ait"
 
 #: pisi/operations/build.py:161
 msgid "Source URI: %s"
@@ -2048,7 +2049,7 @@ msgstr "Kaynak adresi: %s"
 
 #: pisi/operations/build.py:165
 msgid "Source %s not found in any active repository."
-msgstr "%s isimli kaynak paket hiç bir etkin depoda bulunamadı."
+msgstr "%s isimli kaynak paket hiçbir etkin depoda bulunamadı."
 
 #: pisi/operations/build.py:238
 msgid "Building PiSi source package: %s"
@@ -2092,7 +2093,7 @@ msgstr " açıldı (%s)"
 
 #: pisi/operations/build.py:388
 msgid "Setting up source..."
-msgstr "Kaynak yapılandırılıyor"
+msgstr "Kaynak yapılandırılıyor..."
 
 #: pisi/operations/build.py:393
 msgid "Building source..."
@@ -2108,19 +2109,19 @@ msgstr "Kuruluyor..."
 
 #: pisi/operations/build.py:444
 msgid "Unable to read Actions Script (%s): %s"
-msgstr "Action betiği okunamıyor (%s): %s"
+msgstr "Actions betiği okunamıyor (%s): %s"
 
 #: pisi/operations/build.py:446
 msgid "SyntaxError in Actions Script (%s): %s"
-msgstr "Action betiğinde sözdizimi hatası (%s): %s"
+msgstr "Actions betiğinde sözdizimi hatası (%s): %s"
 
 #: pisi/operations/build.py:463
 msgid "Unable to read COMAR script (%s): %s"
-msgstr "Action betiği okunamıyor (%s): %s"
+msgstr "Actions betiği okunamıyor (%s): %s"
 
 #: pisi/operations/build.py:465
 msgid "SyntaxError in COMAR file (%s): %s"
-msgstr "Action betiğinde sözdizimi hatası (%s): %s"
+msgstr "Actions betiğinde sözdizimi hatası (%s): %s"
 
 #: pisi/operations/build.py:477
 msgid "Sandbox violation: %s (%s -> %s)"
@@ -2145,20 +2146,20 @@ msgstr "fonksiyon eylemlerden çağırılamıyor: %s"
 #: pisi/operations/build.py:545
 msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
-"Emniyet mandalı: taban geliştirme sistemi system.devel içindeki bu paketler "
-"ek olarak kurulacak:"
+"Emniyet mandalı: taban geliştirme bileşeni system.devel içindeki bu paketler "
+"ek olarak kurulacak: "
 
 #: pisi/operations/build.py:550
 msgid "Safety switch: system.devel is already installed"
-msgstr "Emniyet mandalı: taban geliştirme sistemi system.devel halihazırda kurulu"
+msgstr "Emniyet mandalı: taban geliştirme bileşeni system.devel zaten kurulu"
 
 #: pisi/operations/build.py:552
 msgid "Safety switch: the component system.devel cannot be found"
-msgstr "Emniyet mandalı: geliştirme sistemi bileşeni system.devel bulunamadı"
+msgstr "Emniyet mandalı: taban geliştirme bileşeni system.devel bulunamadı"
 
 #: pisi/operations/build.py:561
 msgid "Unsatisfied Build Dependencies:"
-msgstr "Sağlanmamış inşa bağımlılıkları"
+msgstr "Sağlanmamış İnşa Bağımlılıkları:"
 
 #: pisi/operations/build.py:565
 msgid "Cannot build package due to unsatisfied build dependencies"
@@ -2170,11 +2171,11 @@ msgstr "İnşa bağımlılığı %s sağlanamadı"
 
 #: pisi/operations/build.py:572
 msgid "Do you want to install the unsatisfied build dependencies"
-msgstr "Sağlanmamış inşa bağımlılıklarını kurmak istiyor musunuz? "
+msgstr "Sağlanmamış inşa bağımlılıklarını kurmak istiyor musunuz?"
 
 #: pisi/operations/build.py:573
 msgid "Installing build dependencies."
-msgstr "İnşa bağımlılıkları kuruluyor. "
+msgstr "İnşa bağımlılıkları kuruluyor."
 
 #: pisi/operations/build.py:579
 msgid "Ignoring build dependencies."
@@ -2190,7 +2191,7 @@ msgstr "* Yama uygulanıyor: %s"
 
 #: pisi/operations/build.py:722
 msgid "/%s has suid bit set"
-msgstr ""
+msgstr "/%s dosyasının suid bit'i etkin"
 
 #: pisi/operations/build.py:758
 msgid "(found old version %s)"
@@ -2198,11 +2199,11 @@ msgstr "(%s numaralı eski versiyon bulundu)"
 
 #: pisi/operations/build.py:782
 msgid "(no previous build found, setting build no to 1.)"
-msgstr "(önceki bir inşa bulunamadı, inşa numarası 1 yapılıyor)"
+msgstr "(eski bir inşa bulunamadı, inşa numarası 1 yapılıyor)"
 
 #: pisi/operations/build.py:827
 msgid "(old package lacks a build no, setting build no to 1.)"
-msgstr "(önceki paketin bir inşa numarası yok, inşa numarası 1 yapılıyor)"
+msgstr "(önceki inşa numaraya sahip değil, inşa numarası 1 yapılıyor)"
 
 #: pisi/operations/build.py:830
 msgid "There are changes, incrementing build no to %d"
@@ -2257,7 +2258,7 @@ msgstr ""
 
 #: pisi/operations/build.py:1005
 msgid "Cleaning Build Directory..."
-msgstr "İnşa dizini siliniyor..."
+msgstr "İnşa dizini temizleniyor..."
 
 #: pisi/operations/build.py:1008
 msgid "Keeping Build Directory"
@@ -2269,7 +2270,7 @@ msgstr "*** %d hata, %d uyarı"
 
 #: pisi/operations/check.py:36
 msgid "Checking /%s "
-msgstr "/%s kontrol ediliyor "
+msgstr "/%s denetleniyor "
 
 #: pisi/operations/check.py:40
 msgid ""
@@ -2340,7 +2341,7 @@ msgstr ""
 
 #: pisi/operations/helper.py:62
 msgid "Remove the following conflicting packages?"
-msgstr "Bu çakışan paketler kaldırılsın mı?"
+msgstr "Çakışan paketler kaldırılsın mı?"
 
 #: pisi/operations/helper.py:63 pisi/operations/remove.py:119
 msgid "Conflicts remain"
@@ -2433,7 +2434,7 @@ msgstr "%s bağımlılığı %s paketi için sağlanamadı"
 
 #: pisi/operations/remove.py:44
 msgid "Safety switch: cannot remove the following packages in system.base: "
-msgstr "Emniyet mandalı: taban sistem system.base deki bu paketler kaldırılamıyor: "
+msgstr "Emniyet mandalı: taban sistem system.base bileşenine ait bu paketler kaldırılamıyor: "
 
 #: pisi/operations/remove.py:48 pisi/operations/upgrade.py:255
 msgid "Safety switch: the component system.base cannot be found"
@@ -2445,7 +2446,7 @@ msgstr "Olmayan paket %s kaldırılamıyor."
 
 #: pisi/operations/remove.py:59
 msgid "No packages to remove."
-msgstr "Kaldıracak paket yok."
+msgstr "Kaldırılacak paket yok."
 
 #: pisi/operations/remove.py:68
 msgid ""
@@ -2507,11 +2508,11 @@ msgstr "Ters bağımlılık %s, %s paketi için sağlanamadı"
 
 #: pisi/operations/upgrade.py:243
 msgid "Safety switch: Following packages in system.base will be installed: "
-msgstr "Emniyet mandalı: taban sistem system.base'den bu paketler kurulacak:"
+msgstr "Emniyet mandalı: taban sistem system.base bileşenine ait şu paketler kurulacak:"
 
 #: pisi/operations/upgrade.py:249
 msgid "Safety switch: Following packages in system.base will be upgraded: "
-msgstr "Emniyet mandalı: taban sistem system.base'den bu paketler yükseltilecek:"
+msgstr "Emniyet mandalı: taban sistem system.base bileşenine ait şu paketler yükseltilecek:"
 
 #: pisi/package.py:56
 msgid ""
@@ -2626,11 +2627,11 @@ msgstr "%s pisi paketi bulunamadı."
 
 #: pisi/scenarioapi/repoops.py:28
 msgid "Repo already has package named %s."
-msgstr "Depo'da %s isimli paket zaten mevcut."
+msgstr "Depoda %s isimli bir paket zaten mevcut."
 
 #: pisi/scenarioapi/repoops.py:52 pisi/scenarioapi/repoops.py:59
 msgid "Repo does not have package named %s."
-msgstr "Depo'da %s isminde bir paket yok."
+msgstr "Depoda %s isminde bir paket yok."
 
 #: pisi/sourcearchive.py:61
 msgid "Trying fallback address: %s"
@@ -2650,7 +2651,7 @@ msgstr "Kaynak, %s yansılarından indirilemedi."
 
 #: pisi/sourcearchive.py:101
 msgid "unpack: check_file_hash failed"
-msgstr "unpack: check_file_hash başarısızlığa uğradı"
+msgstr "unpack: kaynak arşivin bütünlüğünde sorun var"
 
 #: pisi/specfile.py:157
 msgid "URI: %s, type: %s, sha1sum: %s"
@@ -2682,7 +2683,7 @@ msgstr "Sağladıkları: "
 
 #: pisi/specfile.py:272
 msgid "Dependencies: "
-msgstr "Bağımlılıklar:"
+msgstr "Bağımlılıklar: "
 
 #: pisi/specfile.py:323
 msgid "Name: %s, version: %s, release: %s\n"
@@ -2690,7 +2691,7 @@ msgstr "Ad: %s, versiyon: %s, sürüm: %s\n"
 
 #: pisi/specfile.py:328
 msgid "Build Dependencies: "
-msgstr "İnşa Bağımlılıkları:"
+msgstr "İnşa Bağımlılıkları: "
 
 #: pisi/uri.py:80
 msgid "setAuthInfo needs a tuple (user, pass)"
@@ -2698,7 +2699,7 @@ msgstr "setAuthInfo bir (kullanıcı, parola) ikilisi ister"
 
 #: pisi/util.py:125 pisi/util.py:146
 msgid "Running "
-msgstr "Çalışıyor: "
+msgstr "Çalışıyor "
 
 #: pisi/util.py:129 pisi/util.py:164
 msgid "return value for \"%s\" is %s"
@@ -2762,7 +2763,7 @@ msgstr ""
 
 #: scripts/repostats.py:371
 msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-msgstr ""
+msgstr "'%s <%s>' geliştiricisinin farklı bir e-posta adresi (%s) kaynak paket '%s' içerisinde bulundu"
 
 #: scripts/repostats.py:467
 msgid ""
@@ -2782,7 +2783,7 @@ msgstr "Web sayfasını oluşturma.\n"
 
 #: scripts/repostats.py:575
 msgid "Scanning source repository...\n"
-msgstr "Kaynak deposu taranıyor...\n"
+msgstr "Kaynak depo taranıyor...\n"
 
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
