@@ -651,10 +651,10 @@ msgid ""
 "<repo>: name of repository to add\n"
 "<indexuri>: URI of index file\n"
 "\n"
-"If no repo is given, add-repo pardus-devel repo is added by default\n"
+"If no repo is given, add-repo pardus-devel repo is added by default.\n"
 "\n"
 "NB: We support only local files (e.g., /a/b/c) and http:// URIs at the "
-"moment\n"
+"moment.\n"
 msgstr ""
 "Bir depo ekle\n"
 "\n"
@@ -917,7 +917,7 @@ msgstr "Bantgenişliği kullanımını belirtilen KB sınırının altında tut"
 
 #: pisi/cli/command.py:108
 msgid "Detailed output"
-msgstr "Detaylı çıktı"
+msgstr "Detaylı çıktı ver"
 
 #: pisi/cli/command.py:110
 msgid "Show debugging information"
@@ -925,7 +925,7 @@ msgstr "Hata ayıklama bilgisini göster"
 
 #: pisi/cli/command.py:112
 msgid "Suppresses all coloring of PiSi's output"
-msgstr "PiSi'nin tüm çıktı renklendirmelerini önler"
+msgstr "PiSi çıktılarında renk kullanma"
 
 #: pisi/cli/command.py:131
 msgid "Destination directory %s does not exist. Creating directory.\n"
@@ -975,6 +975,12 @@ msgid ""
 "under /var directory. Since these accumulate they can\n"
 "consume a lot of disk space."
 msgstr ""
+"Önbellek dosyalarını temizle\n"
+"\n"
+"Paket arşivleri, ikili paketler ve geçici dosyalar /var\n"
+"dizini altında saklanmaktadır. Bu komutla bu dosyaları\n"
+"temizleyebilir ve diskinizde yer açabilirsiniz.\n"
+
 
 #: pisi/cli/delta.py:23
 msgid ""
@@ -988,6 +994,15 @@ msgid ""
 "releases.\n"
 "\n"
 msgstr ""
+"Delta PiSi paketleri yarat\n"
+"\n"
+"Kullanım: delta <oldpackage> <newpackage>\n"
+"\n"
+"<oldpackage>: Eski paket\n"
+"<newpackage>: Yeni paket\n"
+"\n"
+"Delta komutu, iki PiSi paketi arasında değişen dosyaları bulup sadece\n"
+"o dosyalardan oluşan bir fark paketi yaratır.\n"
 
 #: pisi/cli/delta.py:40
 msgid "delta options"
