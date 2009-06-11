@@ -41,7 +41,7 @@ msgstr "Sistem Hatası: Program Sonlandırıldı."
 
 #: pisi-cli:61
 msgid "Please use 'pisi help' for general help."
-msgstr "Genel yardım için lütfen 'pisi help' komutunu kullanınız. "
+msgstr "Genel yardım için lütfen 'pisi help' komutunu kullanınız."
 
 #: pisi-cli:64
 msgid "Traceback:"
@@ -141,15 +141,15 @@ msgstr ""
 
 #: pisi/actionsapi/libtools.py:38
 msgid "Running ldconfig failed."
-msgstr "ldconfig çalıştırılamadı"
+msgstr "ldconfig çalıştırılamadı."
 
 #: pisi/actionsapi/libtools.py:49
 msgid "GNU Config Update Finished."
-msgstr "GNU yapılandırma güncellemesi bitti"
+msgstr "GNU yapılandırma güncellemesi bitti."
 
 #: pisi/actionsapi/libtools.py:53
 msgid "Running libtoolize failed."
-msgstr "libtoolize çalıştırılamadı"
+msgstr "libtoolize çalıştırılamadı."
 
 # pisi/actionsapi/autotools.py:119 :127
 #: pisi/actionsapi/perlmodules.py:66
@@ -222,7 +222,7 @@ msgstr "%s çalıştırılamadı"
 
 #: pisi/actionsapi/shelltools.py:49
 msgid "Cannot create directory %s"
-msgstr "%s dizini yaratılamıyor."
+msgstr "%s dizini yaratılamıyor"
 
 #: pisi/actionsapi/shelltools.py:57
 msgid "ActionsAPI [echo]: Can't append to file %s."
@@ -426,7 +426,7 @@ msgstr "Bu işlem için root olmalısınız."
 
 #: pisi/api.py:65
 msgid "Another instance of PiSi is running. Only one instance is allowed."
-msgstr "Başka bir yerde daha PiSi çalışıyor. Sadece tek bir PiSi'ye izin verilir."
+msgstr "Sistemde çalışan bir PiSi mevcut. Aynı anda sadece tek PiSi çalışabilir."
 
 #: pisi/api.py:466
 msgid "Taking snapshot of the system"
@@ -438,7 +438,7 @@ msgstr "comar paketi tam olarak kurulmamış"
 
 #: pisi/api.py:591
 msgid "File %s not found"
-msgstr "Dosya %s bulunamadı."
+msgstr "Dosya %s bulunamadı"
 
 #: pisi/api.py:631
 msgid "* Building index of PiSi files under %s"
@@ -454,11 +454,11 @@ msgstr "Geçerli bir depo ismi değil."
 
 #: pisi/api.py:646
 msgid "Repo %s already present."
-msgstr "Depo %s halihazırda var."
+msgstr "Depo %s zaten mevcut."
 
 #: pisi/api.py:649
 msgid "Repo already present with name %s."
-msgstr "Depo halihazırda %s ismi ile mevcut."
+msgstr "Depo zaten %s ismi ile mevcut."
 
 #: pisi/api.py:654
 msgid "Repo %s added to system."
@@ -514,7 +514,7 @@ msgstr "İndirme hatası: Paket depodaki paket ile uyuşmuyor."
 
 #: pisi/atomicoperations.py:119
 msgid "Package %s not found in any active repository."
-msgstr "%s isimli paket hiç bir etkin depoda bulunamadı."
+msgstr "%s isimli paket hiçbir etkin depoda bulunamadı."
 
 #: pisi/atomicoperations.py:138
 msgid "Installing %s, version %s, release %s, build %s"
@@ -538,11 +538,11 @@ msgstr ""
 
 #: pisi/atomicoperations.py:236
 msgid "Re-install same version package?"
-msgstr "Aynı versiyona sahip paketi yeniden yerleştireyim mi?"
+msgstr "Aynı versiyona sahip paket yeniden yerleştirilsin mi?"
 
 #: pisi/atomicoperations.py:237
 msgid "Package re-install declined"
-msgstr "Paketi yeniden yerleştirmeye izin verilmedi"
+msgstr "Paketin yeniden yerleştirilmesine izin verilmedi"
 
 #: pisi/atomicoperations.py:243
 msgid "Upgrading to new upstream version"
@@ -587,7 +587,7 @@ msgstr "%s saklanıyor"
 
 #: pisi/atomicoperations.py:481
 msgid "File list could not be read for package %s, continuing removal."
-msgstr "%s paketi için dosya listesi okunamadı, kaldırma işlemine devam ediliyor. "
+msgstr "%s paketi için dosya listesi okunamadı, kaldırma işlemine devam ediliyor."
 
 #: pisi/atomicoperations.py:487
 msgid "Removing package %s"
@@ -595,7 +595,7 @@ msgstr "%s paketi kaldırılıyor"
 
 #: pisi/atomicoperations.py:490
 msgid "Trying to remove nonexistent package "
-msgstr "Varolmayan paket kaldırılmaya çalışıldı"
+msgstr "Varolmayan paket kaldırılmaya çalışıldı "
 
 #: pisi/atomicoperations.py:531
 msgid "Not removing conflicted file : %s"
@@ -603,7 +603,7 @@ msgstr "Çakışan dosya silinmiyor : %s"
 
 #: pisi/atomicoperations.py:559
 msgid "Installed file %s does not exist on system [Probably you manually deleted]"
-msgstr "Kurulmuş dosya %s sistemde bulunmuyor [Muhtemelen el ile silindi]"
+msgstr "Kurulmuş dosya %s sistemde bulunamadı [Muhtemelen el ile silindi]"
 
 #: pisi/cli/__init__.py:79
 msgid "Warning: "
@@ -656,6 +656,17 @@ msgid ""
 "NB: We support only local files (e.g., /a/b/c) and http:// URIs at the "
 "moment\n"
 msgstr ""
+"Bir depo ekle\n"
+"\n"
+"Kullanım: add-repo <repo> <indexuri>\n"
+"\n"
+"<repo>: Eklenecek deponun adı\n"
+"<indexuri> Depo indeksinin yolu\n"
+"\n"
+"Eğer depo verilmezse, öntanımlı olarak pardus-devel deposu eklenir\n"
+"\n"
+"Not: Şu anda sadece yerel dosyalar ve http:// protokolü desteklenmektedir\n"
+
 
 #: pisi/cli/addrepo.py:44
 msgid "add-repo options"
@@ -685,6 +696,17 @@ msgid ""
 "Alternatively, you can give the name of a source package\n"
 "to be downloaded from a repository containing sources.\n"
 msgstr ""
+"Verilen PiSi paket(ler)ini inşa et\n"
+"\n"
+"Kullanım: build [<pspec.xml> | <sourcename>] ...\n"
+"\n"
+"Yerel veya uzak bir adresteki pspec.xml dosyasının verilmesi\n"
+"yeterlidir, PiSi eğer gerekiyorsa diğer dosyaları indirip paketi\n"
+"inşa edecektir.\n"
+"\n"
+"Kaynak depo kullanıyorsanız, doğrudan kaynak depoda bulunan\n"
+"bir paketin adını vererek PiSi'nin o paketi inşa etmesini\n"
+"sağlayabilirsiniz.\n"
 
 #: pisi/cli/build.py:47
 msgid "build options"
@@ -693,7 +715,7 @@ msgstr "inşa seçenekleri"
 #: pisi/cli/build.py:54 pisi/cli/install.py:49 pisi/cli/listupgrades.py:46
 #: pisi/cli/upgrade.py:58
 msgid "Do not take build no into account."
-msgstr "İnşa numarasını dikkate alma"
+msgstr "İnşa numarasını dikkate alma."
 
 #: pisi/cli/build.py:57 pisi/cli/command.py:205
 msgid "Do not take dependency information into account"
@@ -705,15 +727,15 @@ msgstr "Üretilecek paketler için çıktı dizini"
 
 #: pisi/cli/build.py:62
 msgid "Bypass errors from ActionsAPI"
-msgstr "ActionsAPI kaynaklı hataları esgeç"
+msgstr "ActionsAPI kaynaklı hataları yoksay"
 
 #: pisi/cli/build.py:64 pisi/cli/command.py:209
 msgid "Bypass safety switch"
-msgstr "Emniyet mandalını esgeç"
+msgstr "Emniyet mandalını yoksay"
 
 #: pisi/cli/build.py:66
 msgid "Bypass testing step"
-msgstr "Test adımını esgeç"
+msgstr "Test adımını yoksay"
 
 #: pisi/cli/build.py:68
 msgid "Create a static package with ar files"
@@ -721,7 +743,7 @@ msgstr "Ar dosyaları içeren bir statik paket yarat"
 
 #: pisi/cli/build.py:70
 msgid "PiSi binary package formats: '1.0', '1.1' (default)"
-msgstr "PiSi ikili paket formatları: '1.0', '1.1' (öntanımlı)"
+msgstr "PiSi ikili paket biçimleri: '1.0', '1.1' (öntanımlı)"
 
 #: pisi/cli/build.py:72
 msgid "Use quilt patch management system instead of GNU patch"
@@ -737,31 +759,31 @@ msgstr "inşa adımları"
 
 #: pisi/cli/build.py:79
 msgid "Break build after fetching the source archive"
-msgstr "Kaynak arşivini indirdikten sonra inşa'yı sonlandır"
+msgstr "Kaynak arşivini indirdikten sonra inşayı sonlandır"
 
 #: pisi/cli/build.py:81
 msgid ""
 "Break build after unpacking the source archive, checking sha1sum and "
 "applying patches"
 msgstr ""
-"Kaynak arşivini açtıktan, sha1sum kontrolü yaptıktan ve yamaları "
-"uyguladıktan sonra inşa'yı sonlandır"
+"Kaynak arşivini açtıktan, sha1sum denetimi yaptıktan ve yamaları "
+"uyguladıktan sonra inşayı sonlandır"
 
 #: pisi/cli/build.py:83
 msgid "Break build after running configure step"
-msgstr "Yapılandırma adımından sonra inşa'yı sonlandır"
+msgstr "Yapılandırma adımından sonra inşayı sonlandır"
 
 #: pisi/cli/build.py:85
 msgid "Break build after running compile step"
-msgstr "Derleme adımından sonra inşa'yı sonlandır"
+msgstr "Derleme adımından sonra inşayı sonlandır"
 
 #: pisi/cli/build.py:87
 msgid "Break build after running check step"
-msgstr "Test adımından sonra inşa'yı sonlandır"
+msgstr "Test adımından sonra inşayı sonlandır"
 
 #: pisi/cli/build.py:89
 msgid "Break build after running install step"
-msgstr "Kurulum adımından sonra inşa'yı sonlandır"
+msgstr "Kurulum adımından sonra inşayı sonlandır"
 
 #: pisi/cli/build.py:91
 msgid "create PiSi package"
@@ -793,18 +815,28 @@ msgid ""
 "\n"
 "If no packages are given, checks all installed packages.\n"
 msgstr ""
+"Kurulumu denetle\n"
+"\n"
+"Kullanım: check [<package1> <package2> ... <packagen>]\n"
+"          check -c <component>\n"
+"\n"
+"Bir veya birden fazla paketin doğruluğunu denetler. Alternatif\n"
+"olarak -c parametresiyle belirli bir depo bileşeninin altındaki\n"
+"tüm paketlerin doğruluğu denetlenebilir.\n"
+"\n"
+"Eğer hiç paket verilmemişse, kurulu bütün paketleri doğrular.\n"
 
 #: pisi/cli/check.py:47
 msgid "check options"
-msgstr "test seçenekleri"
+msgstr "denetleme seçenekleri"
 
 #: pisi/cli/check.py:49
 msgid "Check installed packages under given component"
-msgstr "Bileşen altındaki kurulu paketleri kontrol et"
+msgstr "Bileşen altındaki kurulu paketleri denetle"
 
 #: pisi/cli/check.py:51
 msgid "Checks only changed config files of the packages"
-msgstr "Sadece paketlerin değiştirilen ayar dosyalarını kontrol eder"
+msgstr "Sadece paketlerin değiştirilen ayar dosyalarını denetler"
 
 #: pisi/cli/check.py:66
 msgid "Checking all installed packages"
@@ -812,7 +844,7 @@ msgstr "Tüm kurulu paketler denetleniyor"
 
 #: pisi/cli/check.py:71
 msgid "* Checking %s... "
-msgstr "* %s kontrol ediliyor... "
+msgstr "* %s denetleniyor... "
 
 #: pisi/cli/check.py:77
 msgid ""
@@ -851,7 +883,7 @@ msgstr ""
 "\n"
 "Kullanım: clean\n"
 "\n"
-"PiSi veritabı erişimini yönetmek için dosya kilitleri kullanır.\n"
+"PiSi veritabanı erişimini yönetmek için dosya kilitleri kullanır.\n"
 "Bu komut, kullanılmayan kilit dosyalarını veritabanı dizininden kaldırır."
 
 #: pisi/cli/command.py:30
@@ -881,7 +913,7 @@ msgstr "Bütün evet/hayır sorularında evet varsay"
 
 #: pisi/cli/command.py:105
 msgid "Keep bandwidth usage under specified KB's"
-msgstr "Bantgenişliği kullanımını belirtilen KB's içinde tut"
+msgstr "Bantgenişliği kullanımını belirtilen KB sınırının altında tut"
 
 #: pisi/cli/command.py:108
 msgid "Detailed output"
@@ -905,19 +937,19 @@ msgstr "Parola: "
 
 #: pisi/cli/command.py:192
 msgid "Command terminated abnormally."
-msgstr "Komut anormal biçimde sonlandı."
+msgstr "Komut beklenmeyen bir biçimde sonlandı."
 
 #: pisi/cli/command.py:207 pisi/cli/emerge.py:53
 msgid "Bypass comar configuration agent"
-msgstr "Çomar yapılandırma aygıtını kullanma"
+msgstr "Çomar yapılandırma ajanını kullanma"
 
 #: pisi/cli/command.py:211
 msgid "Do not perform any action, just show what would be done"
-msgstr "Hiç bir eylem gerçekleştirme, sadece ne yapılacağını göster"
+msgstr "Hiçbir eylem gerçekleştirmeden sadece yapılacakları göster"
 
 #: pisi/cli/command.py:229
 msgid "usage: %s\n"
-msgstr "kullanımı: %s\n"
+msgstr "kullanım: %s\n"
 
 #: pisi/cli/configurepending.py:23
 msgid ""
