@@ -50,7 +50,7 @@ class Distribution(xmlfile.XmlFile):
 
     t_Obsoletes = [ [Obsolete], autoxml.optional, "Obsoletes/Package"]
 
-class Component:
+class Component(xmlfile.XmlFile):
     "representation for component declarations"
 
     __metaclass__ = autoxml.autoxml
@@ -85,7 +85,7 @@ class Components(xmlfile.XmlFile):
     t_Components = [ [Component], autoxml.optional, "Components/Component" ]
 
 # FIXME: there will be no component.xml only components.xml
-class CompatComponent(Component, xmlfile.XmlFile):
+class CompatComponent(Component):
 
     tag = "PISI"
 
