@@ -50,12 +50,10 @@ class Distribution(xmlfile.XmlFile):
 
     t_Obsoletes = [ [Obsolete], autoxml.optional, "Obsoletes/Package"]
 
-class Component(xmlfile.XmlFile):
+class Component:
     "representation for component declarations"
 
     __metaclass__ = autoxml.autoxml
-
-    tag = "PISI"
 
     t_Name = [autoxml.String, autoxml.mandatory]     # fully qualified name
 
@@ -69,10 +67,26 @@ class Component(xmlfile.XmlFile):
     t_Summary = [autoxml.LocalText, autoxml.mandatory]
     t_Description = [autoxml.LocalText, autoxml.mandatory]
     t_Icon = [ autoxml.String, autoxml.optional]
-    t_VisibleTo = [autoxml.String, autoxml.optional]
+    t_Group = [ autoxml.LocalText, autoxml.optional ]
 
     # the parts of this component.
     # to be filled by the component database, thus it is optional.
     t_Packages = [ [autoxml.String], autoxml.optional, "Parts/Package"]
 
     t_Sources = [ [autoxml.String], autoxml.optional, "Parts/Source"]
+
+class Components(xmlfile.XmlFile):
+    "representation for component declarations"
+
+    __metaclass__ = autoxml.autoxml
+
+    tag = "PISI"
+
+    t_Components = [ [Component], autoxml.optional, "Components/Component" ]
+
+# FIXME: there will be no component.xml only components.xml
+class CompatComponent(Component, xmlfile.XmlFile):
+
+    tag = "PISI"
+
+    t_VisibleTo = [autoxml.String, autoxml.optional]

@@ -93,9 +93,8 @@ class Index(xmlfile.XmlFile):
                 elif fn.endswith(ctx.const.package_suffix):
                     packages.append(os.path.join(root, fn))
 
-                if fn == 'component.xml':
-                    ctx.ui.info(_('Adding %s to component index') % fn)
-                    self.add_component(os.path.join(root, fn))
+                if fn == 'components.xml':
+                    self.add_components(os.path.join(root, fn))
                 if fn == 'pspec.xml' and not skip_sources:
                     self.add_spec(os.path.join(root, fn), repo_uri)
                 if fn == 'distribution.xml':
@@ -148,16 +147,19 @@ class Index(xmlfile.XmlFile):
 
             self.packages.append(md.package)
 
-    def add_component(self, path):
-        comp = component.Component()
+    def add_components(self, path):
+        ctx.ui.info("Adding components.xml to index...")
+        components_xml = component.Components()
+        components_xml.read(path)
         #try:
-        comp.read(path)
-        self.components.append(comp)
+        for comp in components_xml.components:
+            self.components.append(comp)
         #except:
         #    raise Error(_('Component in %s is corrupt') % path)
             #ctx.ui.error(str(Error(*errs)))
 
     def add_distro(self, path):
+        ctx.ui.info("Adding distribution.xml to index...")
         distro = component.Distribution()
         #try:
         distro.read(path)

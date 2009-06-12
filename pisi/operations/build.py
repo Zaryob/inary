@@ -364,7 +364,7 @@ class Builder:
                 if not os.path.exists(url):
                     raise Exception(_('Cannot find component.xml in upper directory'))
                 path = url
-            comp = component.Component()
+            comp = component.CompatComponent()
             comp.read(path)
             ctx.ui.info(_('Source is part of %s component') % comp.name)
             self.spec.source.partOf = comp.name
