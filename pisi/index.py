@@ -99,6 +99,8 @@ class Index(xmlfile.XmlFile):
                     self.add_spec(os.path.join(root, fn), repo_uri)
                 if fn == 'distribution.xml':
                     self.add_distro(os.path.join(root, fn))
+                if fn == 'groups.xml':
+                    self.add_groups(os.path.join(root, fn))
 
         try:
             obsoletes_list = map(str, self.distribution.obsoletes)
@@ -146,6 +148,13 @@ class Index(xmlfile.XmlFile):
                         md.package.deltaPackages.append(delta)
 
             self.packages.append(md.package)
+
+    def add_groups(self, path):
+        ctx.ui.info("Adding groups.xml to index...")
+        groups_xml = group.Groups()
+        groups_xml.read(path)
+        for group in groups_xml.groups:
+            self.groups.append(group)
 
     def add_components(self, path):
         ctx.ui.info("Adding components.xml to index...")

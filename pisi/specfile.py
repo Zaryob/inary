@@ -32,6 +32,7 @@ import pisi.dependency
 import pisi.replace
 import pisi.conflict
 import pisi.component as component
+import pisi.group as group
 import pisi.util as util
 import pisi.db
 
@@ -288,6 +289,7 @@ class SpecFile(xmlfile.XmlFile):
     t_Packages = [ [Package], autoxml.mandatory, "Package"]
     t_History = [ [Update], autoxml.mandatory]
     t_Components = [ [component.Component], autoxml.optional, "Component"]
+    t_Groups = [ [group.Group], autoxml.optional, "Group"]
 
     def getSourceVersion(self):
         return self.history[0].version
