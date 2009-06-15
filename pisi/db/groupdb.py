@@ -42,7 +42,10 @@ class GroupDB(lazydb.LazyDB):
     def __generate_components(self, doc):
         groups = {}
         for c in doc.tags("Component"):
-            groups.setdefault(c.getTagData("Group"), []).append(c.getTagData("Name"))
+            group = c.getTagData("Group")
+            if not group:
+                group = "unknown"
+            groups.setdefault(group, []).append(c.getTagData("Name"))
         return groups
 
     def __generate_groups(self, doc):
