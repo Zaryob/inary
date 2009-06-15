@@ -65,4 +65,10 @@ class GroupDB(lazydb.LazyDB):
         return group
 
     def get_group_components(self, name, repo=None):
-        return self.gcdb.get_item(name, repo)
+        if not self.has_group(name, repo):
+            raise Exception(_('Group %s not found') % name)
+
+        if self.gcdb.has_item(name):
+            return self.gcdb.get_item(name, repo)
+
+        return []
