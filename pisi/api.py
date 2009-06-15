@@ -482,6 +482,14 @@ def snapshot():
 
     historydb.update_history()
 
+def calculate_download_size(packages):
+    """
+    Returns the total download size and the cached size of the packages.
+    @param packages: list of package names -> list_of_strings
+    """
+    total_size, cached_size = pisi.operations.helper.calculate_download_sizes(packages)
+    return total_size, cached_size
+
 # ****** Danger Zone Below! Tressspassers' eyes will explode! ********** #
 
 def package_graph(A, packagedb, ignore_installed = False):
