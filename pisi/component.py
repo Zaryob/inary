@@ -66,8 +66,7 @@ class Component(xmlfile.XmlFile):
     # Information about the component
     t_Summary = [autoxml.LocalText, autoxml.mandatory]
     t_Description = [autoxml.LocalText, autoxml.mandatory]
-    t_Icon = [ autoxml.String, autoxml.optional]
-    t_Group = [ autoxml.LocalText, autoxml.optional ]
+    t_Group = [ autoxml.String, autoxml.optional ]
 
     # the parts of this component.
     # to be filled by the component database, thus it is optional.
