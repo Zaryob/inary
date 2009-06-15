@@ -23,7 +23,7 @@ class Error(pisi.Error):
 
 __metaclass__ = autoxml.autoxml
 
-class Group:
+class Group(xmlfile.XmlFile):
     "representation for group declarations"
 
     __metaclass__ = autoxml.autoxml

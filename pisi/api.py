@@ -32,6 +32,7 @@ import pisi.db.installdb
 import pisi.db.historydb
 import pisi.db.sourcedb
 import pisi.db.componentdb
+import pisi.db.groupdb
 import pisi.index
 import pisi.config
 import pisi.metadata

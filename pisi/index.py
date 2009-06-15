@@ -29,6 +29,7 @@ import pisi.pxml.xmlfile as xmlfile
 import pisi.file
 import pisi.pxml.autoxml as autoxml
 import pisi.component as component
+import pisi.group as group
 
 class Error(pisi.Error):
     pass
@@ -43,6 +44,7 @@ class Index(xmlfile.XmlFile):
     t_Packages = [ [metadata.Package], autoxml.optional, "Package"]
     #t_Metadatas = [ [metadata.MetaData], autoxml.optional, "MetaData"]
     t_Components = [ [component.Component], autoxml.optional, "Component"]
+    t_Groups = [ [group.Group], autoxml.optional, "Group"]
 
     def name(self):
         return self.distribution.name + self.distribution.repositoryname
@@ -153,8 +155,8 @@ class Index(xmlfile.XmlFile):
         ctx.ui.info("Adding groups.xml to index...")
         groups_xml = group.Groups()
         groups_xml.read(path)
-        for group in groups_xml.groups:
-            self.groups.append(group)
+        for grp in groups_xml.groups:
+            self.groups.append(grp)
 
     def add_components(self, path):
         ctx.ui.info("Adding components.xml to index...")
