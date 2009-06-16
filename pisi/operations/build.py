@@ -16,7 +16,6 @@ import os
 import re
 import sys
 import glob
-import copy
 import stat
 import pwd
 import grp
