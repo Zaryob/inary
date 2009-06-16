@@ -1017,8 +1017,8 @@ class Builder:
         # buildfarm actually. buildfarm re-inits pisi for each build
         # and left environment variables go directly into initial dict
         # making actionsapi.variables.exportFlags() useless...
-        os.environ = {}
-        os.environ = copy.deepcopy(ctx.config.environ)
+        os.environ.clear()
+        os.environ.update(ctx.config.environ)
 
         return self.new_packages, self.old_packages
 

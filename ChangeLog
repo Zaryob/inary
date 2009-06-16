@@ -1,3 +1,6 @@
+2009-06-16 Fatih Aşıcı <fatih@pardus.org.tr>
+		* (operations/build.py): Fix resetting of the environment.
+
 2009-06-06 Ozan Çağlayan <ozan@pardus.org.tr>
 		* (operations/build.py): Sort the files according to their path names
 		before adding them to the tarfile. This helps lzma to compress the
