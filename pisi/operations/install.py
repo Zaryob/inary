@@ -146,7 +146,11 @@ def install_pkg_files(package_URIs, reinstall = False):
     dfn = {}
     for x in package_URIs:
         package = pisi.package.Package(x)
-        package.read()
+        try:
+            package.read()
+        except zipfile.BadZipfile:
+            # YALI needed to get which file is broken
+            raise zipfile.BadZipfile(x)
         name = str(package.metadata.package.name)
         d_t[name] = package.metadata.package
         dfn[name] = x
