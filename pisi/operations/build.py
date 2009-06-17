@@ -48,6 +48,9 @@ class Error(pisi.Error):
 class ActionScriptException(Error):
     pass
 
+class AbandonedFilesException(Error):
+    pass
+
 # Helper Functions
 def get_file_type(path, pinfo_list, install_dir):
     """Return the file type of a path according to the given PathInfo
@@ -998,9 +1001,10 @@ class Builder:
         if ctx.get_option('debug'):
             abandoned_files = self.get_abandoned_files()
             if abandoned_files:
-                ctx.ui.warning(_('There are abandoned files under the install dir (%s):') % (install_dir))
+                ctx.ui.error(_('There are abandoned files under the install dir (%s):') % (install_dir))
                 for f in abandoned_files:
                     ctx.ui.info('    - %s' % (f))
+                raise AbandonedFilesException
             else:
                 ctx.ui.info(_('All of the files under the install dir (%s) has been collected by package(s)')
                                                                 % (install_dir))
