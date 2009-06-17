@@ -128,6 +128,19 @@ class PackageDB(lazydb.LazyDB):
     def get_obsoletes(self, repo=None):
         return self.odb.get_list_item(repo)
 
+    def get_isa_packages(self, isa):
+        repodb = pisi.db.repodb.RepoDB()
+
+        packages = set()
+        for repo in repodb.list_repos():
+            doc = repodb.get_repo_doc(repo)
+            for package in doc.tags("Package"):
+                if package.getTagData("IsA"):
+                    for node in package.tags("IsA"):
+                        if node.firstChild().data() == isa:
+                            packages.add(package.getTagData("Name"))
+        return list(packages)
+
     def get_rev_deps(self, name, repo=None):
         try:
             rvdb = self.rvdb.get_item(name, repo)
