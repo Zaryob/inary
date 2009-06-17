@@ -997,14 +997,13 @@ class Builder:
             self.set_state("buildpackages")
             ctx.ui.info(_("Done."))
 
+        abandoned_files = self.get_abandoned_files()
         #show the files those are not collected from the install dir
         if ctx.get_option('debug'):
-            abandoned_files = self.get_abandoned_files()
             if abandoned_files:
                 ctx.ui.error(_('There are abandoned files under the install dir (%s):') % (install_dir))
                 for f in abandoned_files:
                     ctx.ui.info('    - %s' % (f))
-                raise AbandonedFilesException
             else:
                 ctx.ui.info(_('All of the files under the install dir (%s) has been collected by package(s)')
                                                                 % (install_dir))
@@ -1022,6 +1021,9 @@ class Builder:
         # making actionsapi.variables.exportFlags() useless...
         os.environ.clear()
         os.environ.update(ctx.config.environ)
+
+        if abandoned_files:
+            raise AbandonedFilesException
 
         return self.new_packages, self.old_packages
 
