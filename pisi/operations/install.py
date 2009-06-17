@@ -10,6 +10,7 @@
 # Please read the COPYING file.
 #
 
+import os
 import sys
 
 import gettext
@@ -111,11 +112,27 @@ def install_pkg_names(A, reinstall = False):
 def install_pkg_files(package_URIs, reinstall = False):
     """install a number of pisi package files"""
 
+    installdb = pisi.db.installdb.InstallDB()
     ctx.ui.debug('A = %s' % str(package_URIs))
 
     for x in package_URIs:
         if not x.endswith(ctx.const.package_suffix):
             raise Exception(_('Mixing file names and package names not supported yet.'))
+
+    # filter packages that are already installed
+    tobe_installed, already_installed = [], set()
+    if not reinstall:
+        for x in package_URIs:
+            if not x.endswith(ctx.const.delta_package_suffix) and x.endswith(ctx.const.package_suffix):
+                pkg_name, pkg_version = pisi.util.parse_package_name(os.path.basename(x))
+                if installdb.has_package(pkg_name):
+                    already_installed.add(pkg_name)
+                else:
+                    tobe_installed.append(x)
+        if already_installed:
+            ctx.ui.warning(_("The following package(s) are already installed and are not going to be installed again:\n") +
+                           util.strlist(already_installed))
+        package_URIs = tobe_installed
 
     if ctx.config.get_option('ignore_dependency'):
         # simple code path then
