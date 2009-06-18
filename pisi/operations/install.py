@@ -12,6 +12,7 @@
 
 import os
 import sys
+import zipfile
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -145,8 +146,8 @@ def install_pkg_files(package_URIs, reinstall = False):
     d_t = {}
     dfn = {}
     for x in package_URIs:
-        package = pisi.package.Package(x)
         try:
+            package = pisi.package.Package(x)
             package.read()
         except zipfile.BadZipfile:
             # YALI needed to get which file is broken

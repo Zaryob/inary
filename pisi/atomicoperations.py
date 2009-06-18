@@ -17,6 +17,7 @@ _ = __trans.ugettext
 
 import os
 import shutil
+import zipfile
 
 import pisi
 import pisi.context as ctx
@@ -123,8 +124,11 @@ class Install(AtomicOperation):
             ignore_file_conflicts = ctx.get_option('ignore_file_conflicts')
         self.ignore_file_conflicts = ignore_file_conflicts
         self.package_fname = package_fname
-        self.package = pisi.package.Package(package_fname)
-        self.package.read()
+        try:
+            self.package = pisi.package.Package(package_fname)
+            self.package.read()
+        except zipfile.BadZipfile:
+            raise zipfile.BadZipfile(self.package_fname)
         self.metadata = self.package.metadata
         self.files = self.package.files
         self.pkginfo = self.metadata.package
