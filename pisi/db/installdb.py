@@ -145,6 +145,15 @@ class InstallDB(lazydb.LazyDB):
                 found.append(name)
         return found
 
+    def get_isa_packages(self, isa):
+        risa = '<IsA>%s</IsA>' % isa
+        packages = []
+        for name in self.list_installed():
+            xml = open(os.path.join(self.package_path(name), ctx.const.metadata_xml)).read()
+            if re.compile(risa).search(xml):
+                packages.append(name)
+        return packages
+
     def get_info(self, package):
         files_xml = os.path.join(self.package_path(package), ctx.const.files_xml)
         ctime = pisi.util.creation_time(files_xml)
