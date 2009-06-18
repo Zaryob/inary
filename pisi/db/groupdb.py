@@ -20,6 +20,9 @@ import pisi.db.itembyrepo
 import pisi.group
 import pisi.db.lazydb as lazydb
 
+class GroupNotFound(Exception):
+    pass
+
 class GroupDB(lazydb.LazyDB):
 
     def __init__(self):
@@ -60,7 +63,7 @@ class GroupDB(lazydb.LazyDB):
     def get_group(self, name, repo = None):
 
         if not self.has_group(name, repo):
-            raise Exception(_('Group %s not found') % name)
+            raise GroupNotFound(_('Group %s not found') % name)
 
         group = pisi.group.Group()
         group.parse(self.gdb.get_item(name, repo))
@@ -69,7 +72,7 @@ class GroupDB(lazydb.LazyDB):
 
     def get_group_components(self, name, repo=None):
         if not self.has_group(name, repo):
-            raise Exception(_('Group %s not found') % name)
+            raise GroupNotFound(_('Group %s not found') % name)
 
         if self.gcdb.has_item(name):
             return self.gcdb.get_item(name, repo)
