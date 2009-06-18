@@ -400,7 +400,7 @@ def install(packages, reinstall=False, ignore_file_conflicts=False, ignore_packa
 
     # Install pisi package files or pisi packages from a repository
     if packages and packages[0].endswith(ctx.const.package_suffix):
-        return pisi.operations.install.install_pkg_files(packages)
+        return pisi.operations.install.install_pkg_files(packages, reinstall)
     else:
         return pisi.operations.install.install_pkg_names(packages, reinstall)
 
