@@ -68,6 +68,12 @@ class LazyDB(Singleton):
     def invalidate(self):
         self._delete()
 
+    def cache_regenerate(self):
+        try:
+            self.this_attr_does_not_exist()
+        except AttributeError:
+            pass
+
     def __init(self):
         if not self.cache_load():
             self.init()

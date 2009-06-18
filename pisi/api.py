@@ -693,13 +693,13 @@ def update_repos(repos, force=False):
     pisi.db.historydb.HistoryDB().create_history("repoupdate")
     for repo in repos:
         __update_repo(repo, force)
-    pisi.db.flush_caches()
+    pisi.db.regenerate_caches()
 
 @locked
 def update_repo(repo, force=False):
     pisi.db.historydb.HistoryDB().create_history("repoupdate")
     __update_repo(repo, force)
-    pisi.db.flush_caches()
+    pisi.db.regenerate_caches()
 
 def __update_repo(repo, force=False):
     ctx.ui.info(_('* Updating repository: %s') % repo)

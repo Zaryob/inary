@@ -29,3 +29,10 @@ def update_caches():
                installdb.InstallDB(), groupdb.GroupDB()]:
         if db.is_initialized():
             db.cache_save()
+
+def regenerate_caches():
+    flush_caches()
+    # Invalidate and flush caches to re-generate them when needed
+    for db in [packagedb.PackageDB(), sourcedb.SourceDB(),
+               componentdb.ComponentDB(), groupdb.GroupDB()]:
+        db.cache_regenerate()
