@@ -262,16 +262,18 @@ def is_upgradable(name, ignore_build = False):
     if not installdb.has_package(name):
         return False
 
-    (i_version, i_release, i_build) = installdb.get_version(name)
+    (i_version, i_release, i_build, i_distro, i_distro_release) = installdb.get_version_and_distro_release(name)
 
     try:
-        version, release, build = packagedb.get_version(name, packagedb.which_repo(name))
+        version, release, build, distro, distro_release = packagedb.get_version_and_distro_release(name, packagedb.which_repo(name))
     except KeyboardInterrupt:
         raise
     except Exception: #FIXME: what exception could we catch here, replace with that.
         return False
 
-    if ignore_build or (not i_build) or (not build):
+    if distro == i_distro and pisi.version.Version(distro_release) > pisi.version.Version(i_distro_release):
+        return True
+    elif ignore_build or (not i_build) or (not build):
         return pisi.version.Version(i_release) < pisi.version.Version(release)
     else:
         return i_build < build
