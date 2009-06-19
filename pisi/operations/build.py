@@ -652,11 +652,6 @@ class Builder:
         for f in debug_files:
             debug_package_obj.files.append(pisi.specfile.Path(path = f[len(self.pkg_debug_dir()):], fileType = "debug"))
 
-        # append all generated packages to dependencies
-        for p in self.spec.packages:
-            debug_package_obj.packageDependencies.append(
-                pisi.dependency.Dependency(package = p.name))
-
         return debug_package_obj
 
     def gen_metadata_xml(self, package):
