@@ -10,13 +10,6 @@
 # Please read the COPYING file.
 #
 
-"""package database
-interface for update/query to local package repository
-
-we basically store everything in PackageInfo class
-yes, we are cheap
-"""
-
 import re
 import time
 import gzip
