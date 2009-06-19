@@ -379,6 +379,27 @@ def search_file(term):
     return filesdb.search_file(term)
 
 @locked
+def upgrade(packages=[], repo=None):
+    """
+    Upgrades the given packages, if no package given upgrades all the packages
+    @param packages: list of package names -> list_of_strings
+    @param repo: name of the repository that only the packages from that repo going to be upgraded
+    """
+    pisi.db.historydb.HistoryDB().create_history("upgrade")
+    return pisi.operations.upgrade.upgrade(packages, repo)
+
+@locked
+def remove(packages, ignore_dependency=False, ignore_safety=False):
+    """
+    Removes the given packages from the system
+    @param packages: list of package names -> list_of_strings
+    @param ignore_dependency: removes packages without looking into theirs reverse deps if True
+    @param ignore_safety: system.base packages can also be removed if True
+    """
+    pisi.db.historydb.HistoryDB().create_history("remove")
+    return pisi.operations.remove.remove(packages, ignore_dependency, ignore_safety)
+
+@locked
 def install(packages, reinstall=False, ignore_file_conflicts=False, ignore_package_conflicts=False):
     """
     Returns True if no errors occured during the operation
@@ -770,16 +791,6 @@ def rebuild_db(files=False):
 # from pisi.operations import plan_remove, plan_upgrade, upgrade_base, calculate_conflicts, reorder_base_packages
 # from pisi.build import build_until
 # from pisi.atomicoperations import resurrect_package, build
-
-@locked
-def remove(*args, **kw):
-    pisi.db.historydb.HistoryDB().create_history("remove")
-    return pisi.operations.remove.remove(*args, **kw)
-
-@locked
-def upgrade(*args, **kw):
-    pisi.db.historydb.HistoryDB().create_history("upgrade")
-    return pisi.operations.upgrade.upgrade(*args, **kw)
 
 @locked
 def emerge(*args, **kw):
