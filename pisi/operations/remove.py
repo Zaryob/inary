@@ -36,7 +36,7 @@ def remove(A, ignore_dep = False, ignore_safety = False):
     # filter packages that are not installed
     A_0 = A = set(A)
 
-    if not ctx.get_option('ignore_safety') and not ignore_safety:
+    if not ctx.get_option('ignore_safety') and not ctx.config.values.general.ignore_safety and not ignore_safety:
         if componentdb.has_component('system.base'):
             systembase = set(componentdb.get_union_component('system.base').packages)
             refused = A.intersection(systembase)

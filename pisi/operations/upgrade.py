@@ -237,7 +237,7 @@ def upgrade_base(A = set()):
     installdb = pisi.db.installdb.InstallDB()
     componentdb = pisi.db.componentdb.ComponentDB()
     ignore_build = ctx.get_option('ignore_build_no')
-    if not ctx.get_option('ignore_safety'):
+    if not ctx.config.values.general.ignore_safety and not ctx.get_option('ignore_safety'):
         if componentdb.has_component('system.base'):
             systembase = set(componentdb.get_union_component('system.base').packages)
             extra_installs = filter(lambda x: not installdb.has_package(x), systembase - set(A))

@@ -537,7 +537,7 @@ class Builder:
 
         build_deps = self.spec.source.buildDependencies
 
-        if not ctx.get_option('ignore_safety'):
+        if not ctx.config.values.general.ignore_safety and not ctx.get_option('ignore_safety'):
             if self.componentdb.has_component('system.devel'):
                 build_deps_names = set([x.package for x in build_deps])
                 devel_deps_names = set(self.componentdb.get_component('system.devel').packages)
