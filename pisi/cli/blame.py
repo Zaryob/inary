@@ -22,7 +22,7 @@ import pisi.api
 import pisi.db
 
 class Blame(command.Command):
-    __doc__ = _("""Info about the package owner
+    __doc__ = _("""Information about the package owner and release
 
 Usage: blame <package> ... <package>
 
@@ -43,6 +43,11 @@ Usage: blame <package> ... <package>
 
     def run(self):
         self.init(database=False, write=False)
+
+        if not self.args:
+            self.help()
+            return
+
         for package in self.args:
             if self.packagedb.has_package(package):
                 pkg = self.packagedb.get_package(package)
