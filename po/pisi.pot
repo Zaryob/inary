@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2009-06-23 11:09+EEST\n"
+"POT-Creation-Date: 2009-06-23 16:55+EEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -399,75 +399,75 @@ msgstr ""
 msgid "Another instance of PiSi is running. Only one instance is allowed."
 msgstr ""
 
-#: pisi/api.py:493
+#: pisi/api.py:494
 msgid "Taking snapshot of the system"
 msgstr ""
 
-#: pisi/api.py:614
+#: pisi/api.py:615
 msgid "comar package is not fully installed"
 msgstr ""
 
-#: pisi/api.py:626
+#: pisi/api.py:627
 msgid "File %s not found"
 msgstr ""
 
-#: pisi/api.py:666
+#: pisi/api.py:667
 msgid "* Building index of PiSi files under %s"
 msgstr ""
 
-#: pisi/api.py:673
+#: pisi/api.py:674
 msgid "* Index file written"
 msgstr ""
 
-#: pisi/api.py:678
+#: pisi/api.py:679
 msgid "Not a valid repo name."
 msgstr ""
 
-#: pisi/api.py:681
+#: pisi/api.py:682
 msgid "Repo %s already present."
 msgstr ""
 
-#: pisi/api.py:684
+#: pisi/api.py:685
 msgid "Repo already present with name %s."
 msgstr ""
 
-#: pisi/api.py:689
+#: pisi/api.py:690
 msgid "Repo %s added to system."
 msgstr ""
 
-#: pisi/api.py:697
+#: pisi/api.py:698
 msgid "Repo %s removed from system."
 msgstr ""
 
-#: pisi/api.py:699
+#: pisi/api.py:700
 msgid "Repository %s does not exist. Cannot remove."
 msgstr ""
 
-#: pisi/api.py:716
+#: pisi/api.py:717
 msgid "* Updating repository: %s"
 msgstr ""
 
-#: pisi/api.py:726
+#: pisi/api.py:727
 msgid "%s repository information is up-to-date."
 msgstr ""
 
-#: pisi/api.py:728
+#: pisi/api.py:729
 msgid "Updating database at any rate as requested"
 msgstr ""
 
-#: pisi/api.py:738
+#: pisi/api.py:739
 msgid "* Package database updated."
 msgstr ""
 
-#: pisi/api.py:740
+#: pisi/api.py:741
 msgid "No repository named %s found."
 msgstr ""
 
-#: pisi/api.py:751
+#: pisi/api.py:752
 msgid "* Adding '%s' to db... "
 msgstr ""
 
-#: pisi/api.py:754
+#: pisi/api.py:755
 msgid "OK."
 msgstr ""
 
@@ -643,7 +643,7 @@ msgstr ""
 
 #: pisi/cli/blame.py:25
 msgid ""
-"Info about the package owner\n"
+"Information about the package owner and release\n"
 "\n"
 "Usage: blame <package> ... <package>\n"
 "\n"
@@ -657,22 +657,22 @@ msgstr ""
 msgid "Blame for the given release"
 msgstr ""
 
-#: pisi/cli/blame.py:58 pisi/specfile.py:325
+#: pisi/cli/blame.py:63 pisi/specfile.py:325
 msgid ""
 "Name: %s, version: %s, release: %s\n"
 msgstr ""
 
-#: pisi/cli/blame.py:60
+#: pisi/cli/blame.py:65
 msgid ""
 "Package Maintainer: %s <%s>\n"
 msgstr ""
 
-#: pisi/cli/blame.py:61
+#: pisi/cli/blame.py:66
 msgid ""
 "Release Updater: %s <%s>\n"
 msgstr ""
 
-#: pisi/cli/blame.py:62
+#: pisi/cli/blame.py:67
 msgid ""
 "Update Date: %s\n"
 msgstr ""
@@ -852,7 +852,7 @@ msgstr ""
 msgid "Duplicate command %s"
 msgstr ""
 
-#: pisi/cli/command.py:71 pisi/cli/pisicli.py:131
+#: pisi/cli/command.py:71 pisi/cli/pisicli.py:133
 msgid "Unrecognized command: %s"
 msgstr ""
 
@@ -950,6 +950,17 @@ msgstr ""
 msgid "delta options"
 msgstr ""
 
+#: pisi/cli/disablerepo.py:24
+msgid ""
+"Disable repository\n"
+"\n"
+"Usage: disable-repo [<repo1> <repo2> ... <repon>]\n"
+"\n"
+"<repoi>: repository name\n"
+"\n"
+"Disabled repositories are not taken into account in operations\n"
+msgstr ""
+
 #: pisi/cli/emerge.py:25
 msgid ""
 "Build and install PiSi source packages from repository\n"
@@ -980,6 +991,17 @@ msgstr ""
 
 #: pisi/cli/emerge.py:73
 msgid "Outputting binary packages in the package cache."
+msgstr ""
+
+#: pisi/cli/enablerepo.py:24
+msgid ""
+"Enable repository\n"
+"\n"
+"Usage: enable-repo [<repo1> <repo2> ... <repon>]\n"
+"\n"
+"<repoi>: repository name\n"
+"\n"
+"Disabled repositories are not taken into account in operations\n"
 msgstr ""
 
 #: pisi/cli/graph.py:26
@@ -1415,7 +1437,7 @@ msgid "active"
 msgstr ""
 
 #: pisi/cli/listrepo.py:40
-msgid "deactive"
+msgid "inactive"
 msgstr ""
 
 #: pisi/cli/listsources.py:24
@@ -1452,15 +1474,15 @@ msgstr ""
 msgid "No packages to upgrade."
 msgstr ""
 
-#: pisi/cli/pisicli.py:83
+#: pisi/cli/pisicli.py:85
 msgid "Options must precede non-option arguments"
 msgstr ""
 
-#: pisi/cli/pisicli.py:124
+#: pisi/cli/pisicli.py:126
 msgid "No command given"
 msgstr ""
 
-#: pisi/cli/pisicli.py:127
+#: pisi/cli/pisicli.py:129
 msgid "Command line parsing error"
 msgstr ""
 
