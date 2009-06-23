@@ -58,6 +58,7 @@ Usage: blame <package> ... <package>
         s = _('Name: %s, version: %s, release: %s\n') % (
               package.name, package.history[hno].version, package.history[hno].release)
         s += _('Package Maintainer: %s <%s>\n') % (unicode(package.source.packager.name), package.source.packager.email)
+        s += _('Release Updater: %s <%s>\n') % (package.history[hno].name, package.history[hno].email)
         s += _('Update Date: %s\n' % package.history[hno].date)
         s += _('\n%s\n' % package.history[hno].comment)
         print s
