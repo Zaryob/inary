@@ -451,6 +451,7 @@ def set_repo_activity(name, active):
         repodb.activate_repo(name)
     else:
         repodb.deactivate_repo(name)
+    pisi.db.regenerate_caches()
 
 @locked
 def delete_cache():
