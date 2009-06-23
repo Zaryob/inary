@@ -80,9 +80,9 @@ class RepoOrder:
                 status_node = r.getTag("Status")
                 if status_node:
                     status = status_node.firstChild().data()
-                    if status in ["active", "deactive"]:
+                    if status in ["active", "inactive"]:
                         return status
-        return "deactive"
+        return "inactive"
 
     def remove(self, repo_name):
         repo_doc = self._get_doc()
@@ -209,7 +209,7 @@ class RepoDB(lazydb.LazyDB):
         self.repoorder.set_status(name, "active")
 
     def deactivate_repo(self, name):
-        self.repoorder.set_status(name, "deactive")
+        self.repoorder.set_status(name, "inactive")
 
     def repo_active(self, name):
         return self.repoorder.get_status(name) == "active"

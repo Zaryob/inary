@@ -37,7 +37,7 @@ Lists currently tracked repositories.
 
         self.init(database = True, write = False)
         for repo in self.repodb.list_repos(only_active=False):
-            active = _("active") if self.repodb.repo_active(repo) else _("deactive")
+            active = _("active") if self.repodb.repo_active(repo) else _("inactive")
             ctx.ui.info("%s [%s]" % (repo, active))
             print '  ', self.repodb.get_repo_url(repo)
 
