@@ -31,9 +31,8 @@ def update_caches():
             db.cache_save()
 
 def regenerate_caches():
+    flush_caches()
     # Force cache regeneration
     for db in [packagedb.PackageDB(), sourcedb.SourceDB(),
                componentdb.ComponentDB(), groupdb.GroupDB()]:
-        db.invalidate()
-        db.cache_flush()
         db.cache_regenerate()
