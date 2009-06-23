@@ -45,6 +45,8 @@ import pisi.cli.listupgrades
 import pisi.cli.rebuilddb
 import pisi.cli.remove
 import pisi.cli.removerepo
+import pisi.cli.enablerepo
+import pisi.cli.disablerepo
 import pisi.cli.searchfile
 import pisi.cli.search
 import pisi.cli.updaterepo
