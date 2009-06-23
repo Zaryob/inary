@@ -21,6 +21,7 @@ import pisi
 import pisi.cli
 import pisi.cli.command as command
 import pisi.cli.addrepo
+import pisi.cli.blame
 import pisi.cli.build
 import pisi.cli.check
 import pisi.cli.clean
