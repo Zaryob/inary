@@ -1,9 +1,10 @@
-# translation of tr.po to Türkçe
+# translation of tr.po to Turkish
 # Eray Ozkural <eray@pardus.org.tr>, 2005,2006.
 # Furkan Duman <coderlord@gmail.com>, 2006.
 # Ahmet AYGÜN <ahmet@pardusman.org>, 2006.
 # Faik Uygur <faik@pardus.org.tr>, 2006, 2007, 2008, 2009.
 # Ozan Çağlayan <ozan@pardus.org.tr>, 2009.
+# Necmettin Begiter <necmettin.begiter@gmail.com>, 2009.
 # translation of tr.po to
 # PiSi Translation
 # Copyright (C) 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
@@ -11,22 +12,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "POT-Creation-Date: 2009-06-23 16:55+EEST\n"
-"PO-Revision-Date: 2009-06-23 16:57+0300\n"
-"Last-Translator: Faik Uygur <faik@pardus.org.tr>\n"
-"Language-Team: Türkçe <liste.pardus.org.tr/turkce>\n"
+"PO-Revision-Date: 2009-06-24 23:58+0300\n"
+"Last-Translator: Necmettin Begiter <necmettin.begiter@gmail.com>\n"
+"Language-Team: Turkish <yerellestirme@kde.org.tr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=1;plural=0;\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: pisi-cli:41
 msgid "Keyboard Interrupt: Exiting..."
-msgstr "Klavye kesmesi: Program sonlandırılıyor.."
+msgstr "Klavye Kesmesi: Program Sonlandırılıyor..."
 
 #: pisi-cli:44
 msgid "Program Terminated."
-msgstr "Program sonlandırıldı."
+msgstr "Program Sonlandırıldı."
 
 #: pisi-cli:48
 msgid ""
@@ -34,11 +35,11 @@ msgid ""
 "Please file a bug report. (http://bugs.pardus.org.tr)"
 msgstr ""
 "Eksik hata denetlemesi.\n"
-"Lütfen bir hata raporu bildiriniz. (http://hata.pardus.org.tr)"
+"Lütfen bu hatayı bildiriniz. (http://hata.pardus.org.tr)"
 
 #: pisi-cli:54
 msgid "System Error. Program Terminated."
-msgstr "Sistem Hatası: Program Sonlandırıldı."
+msgstr "Sistem Hatası. Program Sonlandırıldı."
 
 #: pisi-cli:61
 msgid "Please use 'pisi help' for general help."
@@ -46,11 +47,11 @@ msgstr "Genel yardım için lütfen 'pisi help' komutunu kullanınız."
 
 #: pisi-cli:64
 msgid "Traceback:"
-msgstr "Geri-iz:"
+msgstr "Geri izleme verisi:"
 
 #: pisi-cli:68
 msgid "Use --debug to see a traceback."
-msgstr "Bir geri-iz (traceback) görmek için lütfen --debug seçeneğini kullanın."
+msgstr "Geri izleme verisi almak için lütfen --debug seçeneğini kullanın."
 
 #: pisi/actionsapi/autotools.py:37 pisi/actionsapi/cmaketools.py:36
 msgid ""
@@ -65,7 +66,7 @@ msgstr ""
 #: pisi/actionsapi/cmaketools.py:66 pisi/actionsapi/kde.py:65
 #: pisi/actionsapi/perlmodules.py:54 pisi/actionsapi/perlmodules.py:57
 msgid "Configure failed."
-msgstr "Yapılandırma başarısızlığa uğradı."
+msgstr "Yapılandırma işlemi başarısız oldu."
 
 # pisi/actionsapi/autotools.py:77 :87
 #: pisi/actionsapi/autotools.py:80 pisi/actionsapi/autotools.py:90
@@ -78,7 +79,7 @@ msgstr "Yapılandırma betiği bulunamadı."
 #: pisi/actionsapi/perlmodules.py:72 pisi/actionsapi/pythonmodules.py:50
 #: pisi/actionsapi/scons.py:39
 msgid "Make failed."
-msgstr "İnşa başarısızlığa uğradı."
+msgstr "İnşa işlemi başarısız oldu."
 
 # pisi/actionsapi/autotools.py:119 :127
 #: pisi/actionsapi/autotools.py:127 pisi/actionsapi/autotools.py:138
@@ -86,36 +87,36 @@ msgstr "İnşa başarısızlığa uğradı."
 #: pisi/actionsapi/kde.py:79 pisi/actionsapi/pythonmodules.py:55
 #: pisi/actionsapi/scons.py:43
 msgid "Install failed."
-msgstr "Kurulum başarısızlığa uğradı."
+msgstr "Kurulum işlemi başarısız oldu."
 
 # pisi/actionsapi/autotools.py:121 :129
 #: pisi/actionsapi/autotools.py:131 pisi/actionsapi/autotools.py:142
 #: pisi/actionsapi/cmaketools.py:81 pisi/actionsapi/cmaketools.py:113
 #: pisi/actionsapi/cmaketools.py:123 pisi/actionsapi/kde.py:81
 msgid "No Makefile found."
-msgstr "Makefile bulunamadı."
+msgstr "Make dosyası bulunamadı."
 
 #: pisi/actionsapi/autotools.py:147
 msgid "Running aclocal failed."
-msgstr "aclocal çalıştırılamadı."
+msgstr "aclocal çalıştırma işlemi başarısız oldu."
 
 # pisi/actionsapi/autotools.py:139 :144
 #: pisi/actionsapi/autotools.py:152
 msgid "Running autoconf failed."
-msgstr "autoconf çalıştırılamadı."
+msgstr "autoconf çalıştırma işlemi başarısız oldu."
 
 # pisi/actionsapi/autotools.py:139 :144
 #: pisi/actionsapi/autotools.py:157
 msgid "Running autoreconf failed."
-msgstr "autoreconf çalıştırılamadı."
+msgstr "autoreconf çalıştırma işlemi başarısız oldu."
 
 #: pisi/actionsapi/autotools.py:162
 msgid "Running automake failed."
-msgstr "automake çalıştırılamadı."
+msgstr "automake çalıştırma işlemi başarısız oldu."
 
 #: pisi/actionsapi/autotools.py:167
 msgid "Running autoheader failed."
-msgstr "autoheader çalıştırılamadı."
+msgstr "autoheader çalıştırma işlemi başarısız oldu."
 
 # pisi/actionsapi/autotools.py:77 :87
 #: pisi/actionsapi/cmaketools.py:68
@@ -124,11 +125,11 @@ msgstr "cmake için yapılandırma betiği bulunamadı."
 
 #: pisi/actionsapi/get.py:163
 msgid "Util %s cannot be found"
-msgstr "Araç %s bulunamıyor"
+msgstr "%s aracı bulunamadı."
 
 #: pisi/actionsapi/get.py:165
 msgid "Warning: %s does not exist, using plain name %s"
-msgstr "Uyarı: %s yok, düz ad %s kullanılıyor"
+msgstr "Uyarı: %s yok, düz ad %s kullanılıyor."
 
 #: pisi/actionsapi/kde.py:34
 msgid ""
@@ -142,29 +143,29 @@ msgstr ""
 
 #: pisi/actionsapi/kerneltools.py:125
 msgid "Can't find kernel version information file %s."
-msgstr ""
+msgstr "Çekirdek sürüm bilgisi dosyası %s bulunamıyor."
 
 #: pisi/actionsapi/libtools.py:38
 msgid "Running ldconfig failed."
-msgstr "ldconfig çalıştırılamadı."
+msgstr "ldconfig çalıştırma işlemi başarısız oldu."
 
 #: pisi/actionsapi/libtools.py:49
 msgid "GNU Config Update Finished."
-msgstr "GNU yapılandırma güncellemesi bitti."
+msgstr "GNU Yapılandırma Güncellemesi Bitti."
 
 #: pisi/actionsapi/libtools.py:53
 msgid "Running libtoolize failed."
-msgstr "libtoolize çalıştırılamadı."
+msgstr "libtoolize çalıştırma işlemi başarısız oldu."
 
 # pisi/actionsapi/autotools.py:119 :127
 #: pisi/actionsapi/perlmodules.py:66
 msgid "perl build failed."
-msgstr "perl inşası başarısızlığa uğgradı."
+msgstr "perl inşa işlemi başarısız oldu."
 
 # pisi/actionsapi/autotools.py:119 :127
 #: pisi/actionsapi/perlmodules.py:75
 msgid "perl install failed."
-msgstr "perl kurma işlemi başarısızlığa uğgradı."
+msgstr "perl kurma işlemi başarısız oldu."
 
 #: pisi/actionsapi/pisitools.py:73 pisi/actionsapi/pisitools.py:130
 msgid "No file matched pattern \"%s\""
@@ -176,7 +177,7 @@ msgstr "ActionsAPI [doman]: Yanlış kılavuz sayfası dosyası: %s"
 
 #: pisi/actionsapi/pisitools.py:167
 msgid "No file matched pattern \"%s\". 'domove' operation failed."
-msgstr "\"%s\" ile eşleşen bir dosya bulunamadı. 'domove' işlemi başarısız."
+msgstr "\"%s\" ile eşleşen bir dosya bulunamadı. 'domove' işlemi başarısız oldu."
 
 #: pisi/actionsapi/pisitools.py:186
 msgid "ActionsAPI [rename]: %s: %s"
@@ -184,7 +185,7 @@ msgstr "ActionsAPI [rename]: %s: %s"
 
 #: pisi/actionsapi/pisitools.py:201
 msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
-msgstr "\"%s\" ile eşleşen bir dosya bulunamadı. 'dosed' işlemi başarısız."
+msgstr "\"%s\" ile eşleşen bir dosya bulunamadı. 'dosed' işlemi başarısız oldu."
 
 #: pisi/actionsapi/pisitools.py:214
 msgid "dosed method has not changed file '%s'."
@@ -192,11 +193,11 @@ msgstr "dosed '%s' dosyasında bir değişiklik yapmadı."
 
 #: pisi/actionsapi/pisitools.py:217
 msgid "File does not exist or permission denied: %s"
-msgstr "Dosya yok ya da erişim engellendi: %s"
+msgstr "Dosya yok ya da erişim reddedildi: %s"
 
 #: pisi/actionsapi/pisitools.py:234
 msgid "ActionsAPI [dosym]: File exists: %s"
-msgstr "ActionsAPI [dosym]: %s dosyası sistemde var"
+msgstr "ActionsAPI [dosym]: Dosya zaten var: %s"
 
 #: pisi/actionsapi/pisitools.py:243 pisi/actionsapi/pisitoolsfunctions.py:71
 msgid "No file matched pattern \"%s\"."
@@ -204,18 +205,18 @@ msgstr "\"%s\" ile eşleşen bir dosya bulunamadı."
 
 #: pisi/actionsapi/pisitools.py:270
 msgid "No file matched pattern \"%s\". Remove operation failed."
-msgstr "\"%s\" ile eşleşen bir dosya bulunamadı. 'remove' işlemi başarısız."
+msgstr "\"%s\" ile eşleşen bir dosya bulunamadı. Silme işlemi başarısız oldu."
 
 #: pisi/actionsapi/pisitools.py:279
 msgid "No directory matched pattern \"%s\". Remove directory operation failed."
-msgstr "\"%s\" ile eşleşen bir dizin bulunamadı. 'removeDir' işlemi başarısız."
+msgstr "\"%s\" ile eşleşen bir dizin bulunamadı. Dizin silme işlemi başarısız oldu."
 
 # pisi/actionsapi/pisitoolsfunctions.py:46 :59
 #: pisi/actionsapi/pisitoolsfunctions.py:45
 #: pisi/actionsapi/pisitoolsfunctions.py:63
 #: pisi/actionsapi/pisitoolsfunctions.py:80
 msgid "Insufficient arguments."
-msgstr "Yetersiz argüman."
+msgstr "Yetersiz sayıda parametre."
 
 #: pisi/actionsapi/pisitoolsfunctions.py:53
 msgid "No executable file matched pattern \"%s\"."
@@ -223,15 +224,15 @@ msgstr "\"%s\" ile eşleşen çalıştırılabilir bir dosya bulunamadı."
 
 #: pisi/actionsapi/pythonmodules.py:69
 msgid "Running %s failed."
-msgstr "%s çalıştırılamadı"
+msgstr "%s çalıştırma işlemi başarısız oldu."
 
 #: pisi/actionsapi/shelltools.py:49
 msgid "Cannot create directory %s"
-msgstr "%s dizini yaratılamıyor"
+msgstr "%s dizini oluşturulamıyor."
 
 #: pisi/actionsapi/shelltools.py:57
 msgid "ActionsAPI [echo]: Can't append to file %s."
-msgstr "ActionsAPI [echo]: %s dosyasına eklenemiyor."
+msgstr "ActionsAPI [echo]: %s dosyasına ekleme yapılamıyor."
 
 #: pisi/actionsapi/shelltools.py:63
 msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
@@ -239,7 +240,7 @@ msgstr "ActionsAPI [chmod]: \"%s\" ile eşleşen bir dosya bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:70
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: %s)"
-msgstr "ActionsAPI [chmod]: İşleme izin verilmedi: %s (mod: %s)"
+msgstr "ActionsAPI [chmod]: İşleme izin verilmedi: %s (kip: %s)"
 
 #: pisi/actionsapi/shelltools.py:73
 msgid "ActionsAPI [chmod]: File %s doesn't exists."
@@ -255,11 +256,11 @@ msgstr "ActionsAPI [chown]: %s dosyası bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:91
 msgid "ActionsAPI [sym]: Permission denied: %s to %s"
-msgstr "ActionsAPI [sym]: Erişim engellendi: %s -> %s"
+msgstr "ActionsAPI [sym]: Erişim reddedildi: %s -> %s"
 
 #: pisi/actionsapi/shelltools.py:99
 msgid "ActionsAPI [unlink]: Permission denied: %s."
-msgstr "ActionsAPI [unlink]: İzin verilmedi: %s."
+msgstr "ActionsAPI [unlink]: Erişim reddedildi: %s."
 
 #: pisi/actionsapi/shelltools.py:103
 msgid "ActionsAPI [unlink]: File %s doesn't exists."
@@ -291,7 +292,7 @@ msgstr "ActionsAPI [copy]: \"%s\" ile eşleşen bir dosya bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:144
 msgid "ActionsAPI [copy]: Permission denied: %s to %s"
-msgstr "ActionsAPI [copy]: Erişim engellendi: %s -> %s"
+msgstr "ActionsAPI [copy]: Erişim reddedildi: %s -> %s"
 
 #: pisi/actionsapi/shelltools.py:160
 msgid "ActionsAPI [copy]: File %s does not exist."
@@ -311,124 +312,113 @@ msgstr "ActionsAPI [touch]: \"%s\" ile eşleşen bir dosya bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:194
 msgid "ActionsAPI [touch]: Permission denied: %s"
-msgstr "ActionsAPI [touch]: Erişim engellendi: %s"
+msgstr "ActionsAPI [touch]: Erişim reddedildi: %s"
 
 #: pisi/actionsapi/shelltools.py:249
 msgid "Command \"%s\" failed, return value was %d."
 msgstr "\"%s\" komutu başarısız oldu, dönüş değeri: %d ."
 
 #: pisi/actionsapi/texlivemodules.py:54
-#, fuzzy
 msgid "Building format files failed"
-msgstr "automake çalıştırılamadı."
+msgstr "Biçem dosyalarının inşası işlemi başarısız oldu."
 
 #: pisi/actionsapi/texlivemodules.py:57
 msgid "Generate config files failed"
-msgstr ""
+msgstr "Yapılandırma dosyalarının oluşturulması işlemi başarısız oldu."
 
 #: pisi/actionsapi/texlivemodules.py:64
 msgid "Creating symlinks from format to engines failed"
-msgstr ""
+msgstr "Biçemden motorlara sembolik bağların oluşturulması işlemi başarısız oldu."
 
 # pisi/actionsapi/autotools.py:119 :127
 #: pisi/actionsapi/texlivemodules.py:68
-#, fuzzy
 msgid "Installing texmf files failed"
-msgstr "Kurulum başarısızlığa uğradı."
+msgstr "texmg dosyalarının yüklenmesi işlemi başarısız oldu."
 
 # pisi/actionsapi/autotools.py:119 :127
 #: pisi/actionsapi/texlivemodules.py:72
-#, fuzzy
 msgid "Installing docs failed"
-msgstr "Kurulum başarısızlığa uğradı."
+msgstr "Belgelendirme dosyalarının yüklenmesi işlemi başarısız oldu."
 
 #: pisi/actionsapi/texlivemodules.py:76
-#, fuzzy
 msgid "Installing config files failed"
-msgstr "ldconfig çalıştırılamadı"
+msgstr "Yapılandırma dosyalarının yüklenmesi işlemi başarısız oldu."
 
 #: pisi/actionsapi/texlivemodules.py:82
-#, fuzzy
 msgid "Handle config files failed"
-msgstr ""
-"\n"
-"Değişen yapılandırma dosyası: %s"
+msgstr "Yapılandırma dosyalarının işlenmesi işlemi başarısız oldu."
 
 #: pisi/actionsapi/texlivemodules.py:93
 msgid "Symlink %s skipped (special case)"
-msgstr ""
+msgstr "%s sembolik bağı atlandı (özel durum)."
 
 #: pisi/actionsapi/texlivemodules.py:95
 msgid "Symlink %s -> %s skipped (texlive-core takes care of it."
-msgstr ""
+msgstr "%s konumundan %s konumuna sembolik bağ oluşturma işlemi atlandı (texlive-core halledecek)."
 
 #: pisi/actionsapi/texlivemodules.py:98
 msgid "Symlink %s -> %s skipped."
-msgstr ""
+msgstr "%s konumundan %s konumuna sembolik bağ oluşturma işlemi atlandı."
 
 #: pisi/actionsapi/texlivemodules.py:100
 msgid "Symlink %s skipped (file exists.)"
-msgstr ""
+msgstr "%s sembolik bağının oluşturulması atlandı (dosya zaten var)."
 
 #: pisi/actionsapi/texlivemodules.py:102
 msgid "Making symlink from %s to %s"
-msgstr ""
+msgstr "%s konumundan %s konumuna sembolik bağ oluşturuluyor."
 
 #: pisi/actionsapi/texlivemodules.py:154
 msgid "Creating /etc/texmf/%s.d"
-msgstr ""
+msgstr "/etc/texmf/%s.d oluşturuluyor."
 
 #: pisi/actionsapi/texlivemodules.py:167
-#, fuzzy
 msgid "Building format file %s"
-msgstr "** Paket %s inşa ediliyor"
+msgstr "Biçem dosyası %s inşa ediliyor."
 
 #: pisi/actionsapi/texlivemodules.py:182
-#, fuzzy
 msgid "Map %s is added to %s/%s.cfg"
-msgstr "%s isimli depo sisteme eklendi."
+msgstr "%s haritası %2s/%3s.cfg dosyasına eklendi."
 
 #: pisi/actionsapi/texlivemodules.py:185
-#, fuzzy
 msgid "MixedMap %s is added to %s/%s.cfg"
-msgstr "%s isimli depo sisteme eklendi."
+msgstr "%s karıştırılmış haritası %s/%s.cfg dosyasına eklendi."
 
 #: pisi/actionsapi/texlivemodules.py:188
 msgid "p +%s is added to %s/%s-config.ps"
-msgstr ""
+msgstr "p +%s %s/%s-config.ps dosyasına eklendi."
 
 #: pisi/actionsapi/texlivemodules.py:191
 msgid "f %s is added to %s/%s-config"
-msgstr ""
+msgstr "f %s %s/%s-config dosyasına eklendi."
 
 #: pisi/actionsapi/texlivemodules.py:195
 msgid "Language file  %s  already generated."
-msgstr ""
+msgstr "Lisan dosyası %s zaten oluşturuldu."
 
 #: pisi/actionsapi/texlivemodules.py:197
 msgid "No rule to proccess %s. Please file a bug."
-msgstr ""
+msgstr "%s öğesini işlemek için kural belirtilmemiş, lütfen bir hata raporu girin."
 
 #: pisi/actionsapi/texlivemodules.py:232
 msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
-msgstr ""
+msgstr "\\languages{%s}{%s}{}{%s}{%s} %s/language.%s.def dosyasına eklendi."
 
 #: pisi/actionsapi/texlivemodules.py:235
-#, fuzzy
 msgid "%s is added to %s/language.%s.dat"
-msgstr "%s isimli depo sisteme eklendi."
+msgstr "%s %s/language.%s.dat dosyasına eklendi."
 
 #: pisi/actionsapi/texlivemodules.py:238
 msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
-msgstr ""
+msgstr "\\languages{%s}{%s}{}{%s}{%s} %s/language.%s.def dosyasına eklendi."
 
 #: pisi/actionsapi/texlivemodules.py:241
 msgid "%s %s is added to %s/language.%s.dat "
-msgstr ""
+msgstr "%s %s %s/language.%s.dat dosyasına eklendi."
 
 #: pisi/api.py:61 pisi/cli/command.py:167
 msgid "You have to be root for this operation."
-msgstr "Bu işlem için root olmalısınız."
+msgstr "Bu işlemi yapabilmek için root kullanıcısı olmalısınız."
 
 #: pisi/api.py:66
 msgid "Another instance of PiSi is running. Only one instance is allowed."
@@ -436,23 +426,23 @@ msgstr "Sistemde çalışan bir PiSi mevcut. Aynı anda sadece tek PiSi çalış
 
 #: pisi/api.py:494
 msgid "Taking snapshot of the system"
-msgstr "Sistemin görüntüsü alınıyor"
+msgstr "Sistemin görüntüsü alınıyor."
 
 #: pisi/api.py:615
 msgid "comar package is not fully installed"
-msgstr "comar paketi tam olarak kurulmamış"
+msgstr "comar paketi tam olarak kurulmamış."
 
 #: pisi/api.py:627
 msgid "File %s not found"
-msgstr "Dosya %s bulunamadı"
+msgstr "%s dosyası bulunamadı."
 
 #: pisi/api.py:667
 msgid "* Building index of PiSi files under %s"
-msgstr "* %s altındaki PiSi dosyalarının bir indeksi yapılıyor"
+msgstr "* %s altındaki PiSi dosyalarının kataloğu oluşturuluyor."
 
 #: pisi/api.py:674
 msgid "* Index file written"
-msgstr "* İndeks dosyası yazıldı"
+msgstr "* Katalog dosyası yazıldı."
 
 #: pisi/api.py:679
 msgid "Not a valid repo name."
@@ -460,19 +450,19 @@ msgstr "Geçerli bir depo ismi değil."
 
 #: pisi/api.py:682
 msgid "Repo %s already present."
-msgstr "Depo %s zaten mevcut."
+msgstr "%s deposu zaten mevcut."
 
 #: pisi/api.py:685
 msgid "Repo already present with name %s."
-msgstr "Depo zaten %s ismi ile mevcut."
+msgstr "%s isminde bir depo zaten mevcut."
 
 #: pisi/api.py:690
 msgid "Repo %s added to system."
-msgstr "%s isimli depo sisteme eklendi."
+msgstr "%s deposu sisteme eklendi."
 
 #: pisi/api.py:698
 msgid "Repo %s removed from system."
-msgstr "%s isimli depo sistemden çıkarıldı."
+msgstr "%s deposu sistemden çıkarıldı."
 
 #: pisi/api.py:700
 msgid "Repository %s does not exist. Cannot remove."
@@ -480,7 +470,7 @@ msgstr "%s deposu yok. Kaldırılamıyor."
 
 #: pisi/api.py:717
 msgid "* Updating repository: %s"
-msgstr "* %s deposu güncelleniyor"
+msgstr "* %s deposu güncelleniyor."
 
 #: pisi/api.py:727
 msgid "%s repository information is up-to-date."
@@ -488,7 +478,7 @@ msgstr "%s depo bilgisi güncel."
 
 #: pisi/api.py:729
 msgid "Updating database at any rate as requested"
-msgstr "Veritabanı istek üzerine güncelleniyor"
+msgstr "Veritabanı istek üzerine güncelleniyor."
 
 #: pisi/api.py:739
 msgid "* Package database updated."
@@ -508,11 +498,11 @@ msgstr "Tamam."
 
 #: pisi/atomicoperations.py:73 pisi/operations/history.py:76
 msgid "Package %s found in repository %s"
-msgstr "Paket %s, %s deposunda bulundu"
+msgstr "%s paketi %s deposunda bulundu."
 
 #: pisi/atomicoperations.py:102
 msgid "Package URI: %s"
-msgstr "Paket adresi: %s"
+msgstr "Paket adresi: %s."
 
 #: pisi/atomicoperations.py:114
 msgid "Download Error: Package does not match the repository package."
@@ -520,15 +510,15 @@ msgstr "İndirme hatası: Paket depodaki paket ile uyuşmuyor."
 
 #: pisi/atomicoperations.py:118
 msgid "Package %s not found in any active repository."
-msgstr "%s isimli paket hiçbir etkin depoda bulunamadı."
+msgstr "%s pakedi etkin hiçbir depoda bulunamadı."
 
 #: pisi/atomicoperations.py:140
 msgid "Installing %s, version %s, release %s, build %s"
-msgstr "%s paketi, versiyon %s, sürüm %s, inşa %s kuruluyor"
+msgstr "%s paketi %s sürümü %s yayımı %s inşası kuruluyor."
 
 #: pisi/atomicoperations.py:184
 msgid "%s package cannot be installed unless the dependencies are satisfied"
-msgstr "%s paketi bağımlılıkları sağlanmadan kurulamaz"
+msgstr "%s paketi bağımlılıkları sağlanmadan kurulamaz."
 
 #: pisi/atomicoperations.py:208
 msgid "/%s from %s package\n"
@@ -544,27 +534,27 @@ msgstr ""
 
 #: pisi/atomicoperations.py:238
 msgid "Re-install same version package?"
-msgstr "Aynı versiyona sahip paket yeniden yerleştirilsin mi?"
+msgstr "Aynı sürüm paket yeniden kurulsun mu?"
 
 #: pisi/atomicoperations.py:239
 msgid "Package re-install declined"
-msgstr "Paketin yeniden yerleştirilmesine izin verilmedi"
+msgstr "Paketin yeniden kurulması reddedildi."
 
 #: pisi/atomicoperations.py:245
 msgid "Upgrading to new upstream version"
-msgstr "Yeni orijinal versiyona yükseltiliyor"
+msgstr "Yeni ana kaynak sürüme yükseltiliyor."
 
 #: pisi/atomicoperations.py:248
 msgid "Upgrading to new distribution release"
-msgstr "Yeni dağıtım sürümüne yükseltiliyor"
+msgstr "Yeni dağıtım yayımına yükseltiliyor."
 
 #: pisi/atomicoperations.py:252
 msgid "Upgrading to new distribution build"
-msgstr "Yeni dağıtım inşasına yükseltiliyor"
+msgstr "Yeni dağıtım inşasına yükseltiliyor."
 
 #: pisi/atomicoperations.py:261
 msgid "Downgrade to old distribution release?"
-msgstr "Eski dağıtım sürümüne dönülsün mü?"
+msgstr "Eski dağıtım yayımına dönülsün mü?"
 
 #: pisi/atomicoperations.py:263
 msgid "Downgrade to old distribution build?"
@@ -572,32 +562,32 @@ msgstr "Eski dağıtım inşasına dönülsün mü?"
 
 #: pisi/atomicoperations.py:265
 msgid "Package downgrade declined"
-msgstr "Paket eskileştirilmesine izin verilmedi"
+msgstr "Paketin eski sürüme indirilmesi reddedildi."
 
 # pisi/actionsapi/autotools.py:75 :85
 #: pisi/atomicoperations.py:303
 msgid "%s configuration failed."
-msgstr "%s yapılandırması başarısızlığa uğradı."
+msgstr "%s yapılandırması başarısız oldu."
 
 #: pisi/atomicoperations.py:419
 msgid "Storing %s, "
-msgstr "%s saklanıyor, "
+msgstr "%s depolanıyor, "
 
 #: pisi/atomicoperations.py:422
 msgid "Storing %s."
-msgstr "%s saklanıyor."
+msgstr "%s depolanıyor."
 
 #: pisi/atomicoperations.py:429
 msgid "Storing %s"
-msgstr "%s saklanıyor"
+msgstr "%s depolanıyor."
 
 #: pisi/atomicoperations.py:483
 msgid "File list could not be read for package %s, continuing removal."
-msgstr "%s paketi için dosya listesi okunamadı, kaldırma işlemine devam ediliyor."
+msgstr "%s paketi dosya listesi okunamadı, kaldırma işlemine devam ediliyor."
 
 #: pisi/atomicoperations.py:489
 msgid "Removing package %s"
-msgstr "%s paketi kaldırılıyor"
+msgstr "%s paketi kaldırılıyor."
 
 #: pisi/atomicoperations.py:492
 msgid "Trying to remove nonexistent package "
@@ -605,11 +595,11 @@ msgstr "Varolmayan paket kaldırılmaya çalışıldı "
 
 #: pisi/atomicoperations.py:533
 msgid "Not removing conflicted file : %s"
-msgstr "Çakışan dosya silinmiyor : %s"
+msgstr "Çakışan dosya (%s) silinmiyor."
 
 #: pisi/atomicoperations.py:561
 msgid "Installed file %s does not exist on system [Probably you manually deleted]"
-msgstr "Kurulmuş dosya %s sistemde bulunamadı [Muhtemelen el ile silindi]"
+msgstr "Kurulmuş dosya %s sistemde bulunamadı (Muhtemelen elle sildiniz)."
 
 #: pisi/cli/__init__.py:79
 msgid "Warning: "
@@ -625,31 +615,30 @@ msgstr " (evet/hayır)"
 
 #: pisi/cli/__init__.py:140
 msgid " [complete]\n"
-msgstr " [bitti]\n"
+msgstr " [tamamlandı]\n"
 
 #: pisi/cli/__init__.py:150
 msgid "Installed %s"
-msgstr "%s paketi kuruldu"
+msgstr "%s kuruldu."
 
 #: pisi/cli/__init__.py:152
 msgid "Removed %s"
-msgstr "%s paketi kaldırıldı"
+msgstr "%s kaldırıldı."
 
 #: pisi/cli/__init__.py:154
 msgid "Upgraded %s"
-msgstr "%s paketi yükseltildi"
+msgstr "%s yükseltildi."
 
 # pisi/actionsapi/autotools.py:75 :85
 #: pisi/cli/__init__.py:156
 msgid "Configured %s"
-msgstr "%s paketi yapılandırıldı"
+msgstr "%s yapılandırıldı."
 
 #: pisi/cli/__init__.py:158
 msgid "Extracting the files of %s"
-msgstr "%s paketinin dosyaları arşivden çıkartılıyor"
+msgstr "%s dosyaları arşivden çıkartılıyor."
 
 #: pisi/cli/addrepo.py:24
-#, fuzzy
 msgid ""
 "Add a repository\n"
 "\n"
@@ -663,28 +652,28 @@ msgid ""
 "NB: We support only local files (e.g., /a/b/c) and http:// URIs at the "
 "moment\n"
 msgstr ""
-"Bir depo ekle\n"
+"Depo ekle\n"
 "\n"
-"Kullanım: add-repo <repo> <indexuri>\n"
+"Kullanım: add-repo <depo> <katalog adresi>\n"
 "\n"
-"<repo>: Eklenecek deponun adı\n"
-"<indexuri> Depo indeksinin yolu\n"
+"<depo>: eklenecek deponun adı\n"
+"<katalog adresi>: depo katalog dosyasının adresi\n"
 "\n"
-"Eğer depo verilmezse, öntanımlı olarak pardus-devel deposu eklenir\n"
+"Eğer depo verilmezse öntanımlı olarak pardus-devel deposu eklenir.\n"
 "\n"
-"Not: Şu anda sadece yerel dosyalar ve http:// protokolü desteklenmektedir\n"
+"Not: Şu anda sadece yerel dosyalar (örn. /a/b/c) ve http:// adresleri destekleniyor.\n"
 
 #: pisi/cli/addrepo.py:44
 msgid "add-repo options"
-msgstr "add-repo seçenekler"
+msgstr "add-repo seçenekleri"
 
 #: pisi/cli/addrepo.py:47
 msgid "Add repository at given position (0 is first)"
-msgstr "Belirtilen pozisyona depo ekler (0 birinci)"
+msgstr "Belirtilen konuma depo ekle (ilk konum 0'dır)."
 
 #: pisi/cli/addrepo.py:61
 msgid "Update PiSi database for repository %s?"
-msgstr "%s isimli depo için PiSi veritabanı güncellensin mi?"
+msgstr "%s deposu PiSi veritabanı güncellensin mi?"
 
 #: pisi/cli/addrepo.py:65
 msgid "%s repository could not be reached. Removing %s from system."
