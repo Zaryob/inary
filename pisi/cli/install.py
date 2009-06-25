@@ -98,4 +98,5 @@ expanded to package names.
         if ctx.get_option('exclude'):
             packages = pisi.blacklist.exclude(packages, ctx.get_option('exclude'))
 
-        pisi.api.install(packages, ctx.get_option('reinstall'))
+        reinstall = packages[0].endswith(ctx.const.package_suffix)
+        pisi.api.install(packages, ctx.get_option('reinstall') or reinstall)
