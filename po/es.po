@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "POT-Creation-Date: 2009-06-23 16:55+EEST\n"
-"PO-Revision-Date: 2009-05-05 19:45-0400\n"
+"PO-Revision-Date: 2009-06-24 21:27-0400\n"
 "Last-Translator: Klemens Häckel <click3d at linuxmail dot org>\n"
 "Language-Team: spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -139,7 +139,7 @@ msgstr ""
 
 #: pisi/actionsapi/kerneltools.py:125
 msgid "Can't find kernel version information file %s."
-msgstr ""
+msgstr "Información de versión de kernel no encontrado en archivo %s."
 
 #: pisi/actionsapi/libtools.py:38
 msgid "Running ldconfig failed."
@@ -238,8 +238,7 @@ msgstr "ActionsAPI [echo]: No posible anexar a archivo %s."
 
 #: pisi/actionsapi/shelltools.py:63
 msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
-msgstr ""
-"ActionsAPI [chmod]: No hay archivos que coinciden con el patrón \"%s\"."
+msgstr "ActionsAPI [chmod]: No hay archivos que coinciden con el patrón \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:70
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: %s)"
@@ -311,8 +310,7 @@ msgstr "ActionsAPI [copytree]: Carpeta %s no existe."
 
 #: pisi/actionsapi/shelltools.py:185
 msgid "ActionsAPI [touch]: No file matched pattern \"%s\"."
-msgstr ""
-"ActionsAPI [touch]: No hay archivos que coinciden con el patrón \"%s\"."
+msgstr "ActionsAPI [touch]: No hay archivos que coinciden con el patrón \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:194
 msgid "ActionsAPI [touch]: Permission denied: %s"
@@ -333,8 +331,7 @@ msgstr "Generación de archivos de configuración fallado"
 # favor revisar, lo debería dejas mas en ingles nomas ?
 #: pisi/actionsapi/texlivemodules.py:64
 msgid "Creating symlinks from format to engines failed"
-msgstr ""
-"Falla de creación de enlaces simbólicos desde formato a motores (engines)"
+msgstr "Falla de creación de enlaces simbólicos desde formato a motores (engines)"
 
 #: pisi/actionsapi/texlivemodules.py:68
 msgid "Installing texmf files failed"
@@ -412,9 +409,9 @@ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
 msgstr "\\idiomas{%s}{%s}{}{%s}{%s} agregados a %s/language.%s.def"
 
 #: pisi/actionsapi/texlivemodules.py:235
-#, fuzzy
+# favor revisar, eventualmente debe describir mas explicito
 msgid "%s is added to %s/language.%s.dat"
-msgstr "%s %s agregado a %s/language.%s.dat"
+msgstr "%s agregado a %s/language.%s.dat"
 
 #: pisi/actionsapi/texlivemodules.py:238
 msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
@@ -519,8 +516,7 @@ msgstr "URL de paquete: %s"
 
 #: pisi/atomicoperations.py:114
 msgid "Download Error: Package does not match the repository package."
-msgstr ""
-"Error de descarga: Paquete local no coincide con paquete del repositorio."
+msgstr "Error de descarga: Paquete local no coincide con paquete del repositorio."
 
 #: pisi/atomicoperations.py:118
 msgid "Package %s not found in any active repository."
@@ -532,8 +528,7 @@ msgstr "Instalando %s, versión %s, release %s, build %s"
 
 #: pisi/atomicoperations.py:184
 msgid "%s package cannot be installed unless the dependencies are satisfied"
-msgstr ""
-"paquete %s no se puede instalar hasta que instale los paquetes requeridos"
+msgstr "paquete %s no se puede instalar hasta que instale los paquetes requeridos"
 
 # check this ?? - probably ok, but see the context
 #: pisi/atomicoperations.py:208
@@ -617,8 +612,7 @@ msgid "Not removing conflicted file : %s"
 msgstr "Archivo conflictivo: %s no eliminado "
 
 #: pisi/atomicoperations.py:561
-msgid ""
-"Installed file %s does not exist on system [Probably you manually deleted]"
+msgid "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
 "Archivo instalado %s no existe en el sistema [Probablemente eliminado "
 "manualmente]"
@@ -710,32 +704,34 @@ msgid ""
 "Usage: blame <package> ... <package>\n"
 "\n"
 msgstr ""
+"Información acerca del propietario del paquete y versión\n"
+"\n"
+"Uso: blame <package> ... <package>\n"
+"\n"
 
 #: pisi/cli/blame.py:40
-#, fuzzy
 msgid "blame options"
-msgstr "opciones de build"
+msgstr "opciones de blame"
 
 #: pisi/cli/blame.py:41
 msgid "Blame for the given release"
-msgstr ""
+msgstr "Responsable para la versión indicada"
 
 #: pisi/cli/blame.py:63 pisi/specfile.py:325
 msgid "Name: %s, version: %s, release: %s\n"
 msgstr "Nombre: %s, versión: %s, release: %s\n"
 
 #: pisi/cli/blame.py:65
-#, fuzzy
 msgid "Package Maintainer: %s <%s>\n"
-msgstr "Archivo de paquete: %s"
+msgstr "Mantenedor de paquete: %s <%s>\n"
 
 #: pisi/cli/blame.py:66
 msgid "Release Updater: %s <%s>\n"
-msgstr ""
+msgstr "Actualizador de versión: %s <%s>\n"
 
 #: pisi/cli/blame.py:67
 msgid "Update Date: %s\n"
-msgstr ""
+msgstr "Fecha de actualización: %s\n"
 
 #: pisi/cli/build.py:24
 msgid ""
@@ -1085,7 +1081,6 @@ msgid "delta options"
 msgstr "opciones de delta"
 
 #: pisi/cli/disablerepo.py:24
-#, fuzzy
 msgid ""
 "Disable repository\n"
 "\n"
@@ -1095,14 +1090,13 @@ msgid ""
 "\n"
 "Disabled repositories are not taken into account in operations\n"
 msgstr ""
-"Actualizar bases de datos de repositorios\n"
+"Deshabilitar repositorio\n"
 "\n"
-"Uso: update-repo [<repo1> <repo2> ... <repon>]\n"
+"Uso: disable-repo [<repo1> <repo2> ... <repon>]\n"
 "\n"
-"<repoi>: nombre repositorio\n"
+"<repoi>: nombre de repositorio\n"
 "\n"
-"Sincroniza las bases de datos PiSi con los repositorios.\n"
-"Si no se especifica un repositorio, se actualizarán todos los repositorios.\n"
+"Repositorios deshabilitados son ignorados para las siguientes operaciones.\n"
 
 #: pisi/cli/emerge.py:25
 msgid ""
@@ -1146,7 +1140,7 @@ msgid "Outputting binary packages in the package cache."
 msgstr "Guardando paquetes binarios en el cache de paquetes."
 
 #: pisi/cli/enablerepo.py:24
-#, fuzzy
+# here seems something wrong with the final text in english 
 msgid ""
 "Enable repository\n"
 "\n"
@@ -1156,14 +1150,6 @@ msgid ""
 "\n"
 "Disabled repositories are not taken into account in operations\n"
 msgstr ""
-"Actualizar bases de datos de repositorios\n"
-"\n"
-"Uso: update-repo [<repo1> <repo2> ... <repon>]\n"
-"\n"
-"<repoi>: nombre repositorio\n"
-"\n"
-"Sincroniza las bases de datos PiSi con los repositorios.\n"
-"Si no se especifica un repositorio, se actualizarán todos los repositorios.\n"
 
 #: pisi/cli/graph.py:26
 msgid ""
@@ -1625,10 +1611,8 @@ msgstr "Mostrar detalles de instalación"
 
 # I suppose here the position is important too ! Should be the same ok as in english
 #: pisi/cli/listinstalled.py:75 pisi/cli/listupgrades.py:77
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr ""
-"Nombre Paquete   |St|   Versión|  Rel.| Build|  Distro|            Fecha"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr "Nombre Paquete   |St|   Versión|  Rel.| Build|  Distro|            Fecha"
 
 #: pisi/cli/listnewest.py:26
 msgid ""
@@ -1708,11 +1692,11 @@ msgstr ""
 
 #: pisi/cli/listrepo.py:40
 msgid "active"
-msgstr ""
+msgstr "activo"
 
 #: pisi/cli/listrepo.py:40
 msgid "inactive"
-msgstr ""
+msgstr "deshabilitado"
 
 #: pisi/cli/listsources.py:24
 msgid ""
@@ -1832,8 +1816,7 @@ msgstr "opciones de remover"
 
 #: pisi/cli/remove.py:46
 msgid "Removes everything including changed config files of the package"
-msgstr ""
-"Remueve todo, incluyendo archivos de configuración modificados del paquete"
+msgstr "Remueve todo, incluyendo archivos de configuración modificados del paquete"
 
 #: pisi/cli/remove.py:48
 msgid "Remove component's and recursive components' packages"
@@ -2150,9 +2133,8 @@ msgid "Component %s not found"
 msgstr "Componente %s no encontrado"
 
 #: pisi/db/groupdb.py:66 pisi/db/groupdb.py:75
-#, fuzzy
 msgid "Group %s not found"
-msgstr "Componente %s no encontrado"
+msgstr "Grupo %s no encontrado"
 
 #: pisi/db/installdb.py:37
 msgid "installed"
@@ -2359,8 +2341,7 @@ msgstr "Generando paquete fuente PiSi: %s"
 
 #: pisi/operations/build.py:285
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr ""
-"IceCream detectado. Asegúrese que el demónio está activo y funcionando..."
+msgstr "IceCream detectado. Asegúrese que el demónio está activo y funcionando..."
 
 #: pisi/operations/build.py:290
 msgid "CCache detected..."
@@ -2451,8 +2432,7 @@ msgstr "no posible llamar función desde acciones: %s"
 
 # did I get "safety switch" right (in this context)?
 #: pisi/operations/build.py:547
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Verificación de seguridad: Se instalarán los siguientes paquetes adicionales "
 "en system.devel:"
@@ -2463,8 +2443,7 @@ msgstr "Verificación de seguridad: system.devel ya está instalado"
 
 #: pisi/operations/build.py:554
 msgid "Safety switch: the component system.devel cannot be found"
-msgstr ""
-"Verificación de seguridad: No posible encontrar el componente system.devel"
+msgstr "Verificación de seguridad: No posible encontrar el componente system.devel"
 
 # satisfechas - entiendo que se refiere a librerias necesarias para hacer el proceso build
 # quizá hay mejor manera de decirlo en español
@@ -2514,8 +2493,7 @@ msgstr "(no se encontró build anterior, estableciendo número de build a 1.)"
 
 #: pisi/operations/build.py:824
 msgid "(old package lacks a build no, setting build no to 1.)"
-msgstr ""
-"(paquete antiguo no tiene número de build, seteando número de build a 1.)"
+msgstr "(paquete antiguo no tiene número de build, seteando número de build a 1.)"
 
 #: pisi/operations/build.py:827
 msgid "There are changes, incrementing build no to %d"
@@ -2564,8 +2542,7 @@ msgstr "Existen archivos abandonados en la carpeta de instalación (%s):"
 
 # revisa este por favor
 #: pisi/operations/build.py:1003
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Todos los archivos de la carpeta de instalación (%s) se juntaron en los "
 "paquetes"
@@ -2660,9 +2637,8 @@ msgid "Remove the following conflicting packages?"
 msgstr "Remover los siguientes paquetes conflictivos ?"
 
 #: pisi/operations/helper.py:63
-#, fuzzy
 msgid "Conflicting packages should be removed to continue"
-msgstr "Se eliminarán los siguientes paquetes:\n"
+msgstr "Se deben remover los paquetes conflictivos antes de continuar"
 
 #: pisi/operations/history.py:86 pisi/operations/history.py:96
 msgid "%s could not be found"
@@ -2703,8 +2679,7 @@ msgstr ""
 msgid ""
 "The following package(s) are already installed and are not going to be "
 "installed again:\n"
-msgstr ""
-"Los siguientes paquetes ya están instalados y no se instalarán de nuevo:\n"
+msgstr "Los siguientes paquetes ya están instalados y no se instalarán de nuevo:\n"
 
 #: pisi/operations/install.py:53 pisi/operations/install.py:200
 msgid "No packages to install."
@@ -2728,8 +2703,7 @@ msgstr "Instalado %d / %d"
 
 #: pisi/operations/install.py:121
 msgid "Mixing file names and package names not supported yet."
-msgstr ""
-"Mezclando nombres de archivos y nombres de paquetes actualmente no soportado."
+msgstr "Mezclando nombres de archivos y nombres de paquetes actualmente no soportado."
 
 #: pisi/operations/install.py:179
 msgid "External dependencies not satisfied: %s"
@@ -2765,8 +2739,7 @@ msgstr ""
 # should this say in english ? "Safety switch: the component cannot be found in system.base" ?? (i did in spanish like this)
 #: pisi/operations/remove.py:48 pisi/operations/upgrade.py:254
 msgid "Safety switch: the component system.base cannot be found"
-msgstr ""
-"Verificación de seguridad: No posible encontrar el componente system.base: "
+msgstr "Verificación de seguridad: No posible encontrar el componente system.base: "
 
 #: pisi/operations/remove.py:55
 msgid "Package %s does not exist. Cannot remove."
@@ -3098,8 +3071,7 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
 msgstr ""
 "Desarrollador '%s <%s>' tiene otra dirección email '%s' en archivo fuente '%"
 "s'"
@@ -3128,5 +3100,3 @@ msgstr "Buscando en repositorio de fuentes...\n"
 msgid "Scanning binary packages...\n"
 msgstr "Buscando paquetes binarios...\n"
 
-#~ msgid "Adding %s to component index"
-#~ msgstr "Agregando %s a index de componentes"
