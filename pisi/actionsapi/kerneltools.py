@@ -158,7 +158,7 @@ def build(debugSymbols=False):
         # Enable debugging symbols (-g -gdwarf2)
         extra_config.append("CONFIG_DEBUG_INFO=y")
 
-    autotools.make("%s" " ".join(extra_config))
+    autotools.make("%s" % " ".join(extra_config))
 
 def install():
     suffix = __getSuffix()
