@@ -596,14 +596,15 @@ class Builder:
 
         for patch in self.spec.source.patches:
             patchFile = pisi.util.join_path(files_dir, patch.filename)
+            relativePath = patch.filename
             if patch.compressionType:
                 patchFile = pisi.util.uncompress(patchFile,
                                             compressType=patch.compressionType,
                                             targetDir=ctx.config.tmp_dir())
+                relativePath = relativePath.rsplit(".%s" % patch.compressionType, 1)[0]
 
             ctx.ui.action(_("* Applying patch: %s") % patch.filename)
-            pisi.util.do_patch(self.srcDir, patchFile, level=patch.level)
-        return True
+            pisi.util.do_patch(self.srcDir, patchFile, level=patch.level, name=relativePath)
         return True
 
     def generate_static_package_object(self):

@@ -443,13 +443,16 @@ def uncompress(patchFile, compressType="gz", targetDir=None):
     return filePath
 
 
-def do_patch(sourceDir, patchFile, level = 0):
+def do_patch(sourceDir, patchFile, level=0, name=None):
     """Apply given patch to the sourceDir."""
     cwd = os.getcwd()
     os.chdir(sourceDir)
 
     if level == None:
         level = 0
+
+    if name is None:
+        name = os.path.basename(patchFile)
 
     check_file(patchFile)
 
@@ -459,7 +462,7 @@ def do_patch(sourceDir, patchFile, level = 0):
         if not os.path.exists(patchesDir):
             os.makedirs(patchesDir)
         # Import original patch into quilt tree
-        (ret, out, err) = run_batch('quilt import -p %d -P %s \"%s\"' % (level, os.path.basename(patchFile), patchFile))
+        (ret, out, err) = run_batch('quilt import -p %d -P %s \"%s\"' % (level, name, patchFile))
         # run quilt push to apply original patch into tree
         (ret, out, err) = run_batch('quilt push')
     else:
