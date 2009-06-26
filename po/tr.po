@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "POT-Creation-Date: 2009-06-23 16:55+EEST\n"
-"PO-Revision-Date: 2009-06-25 05:15+0300\n"
+"PO-Revision-Date: 2009-06-25 20:17+0300\n"
 "Last-Translator: Necmettin Begiter <necmettin.begiter@gmail.com>\n"
 "Language-Team: Turkish <yerellestirme@kde.org.tr>\n"
 "MIME-Version: 1.0\n"
@@ -1717,6 +1717,14 @@ msgid ""
 "If package specs are given, they should be the names of package\n"
 "dirs under /var/lib/pisi\n"
 msgstr ""
+"Veritabanlarını Yeniden İnşa Et\n"
+"\n"
+"Kullanım: rebuilddb [ <paket1> <paket2> ... <paketn> ]\n"
+"\n"
+"PiSi veritabanlarını yeniden inşa eder\n"
+"\n"
+"Eğer paket belirtimleri verilirse, /var/lib/pisi altındaki\n"
+"dizinlerin adları olmalıdir.\n"
 
 #: pisi/cli/rebuilddb.py:42
 msgid "rebuild-db options"
@@ -1741,14 +1749,23 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
+"PiSi paketlerini kaldır\n"
+"\n"
+"Kullanım: remove <paket1> <paket2> ... <paketn>\n"
+"\n"
+"Sistemden paket(ler) kaldırır. Kaldırılacak paketlerin adlarını\n"
+"vermeniz yeterlidir.\n"
+"\n"
+"Paket isimleri yerine bileşen de belirtebilirsiniz, bileşen altındaki\n"
+"paketler alınır.\n"
 
 #: pisi/cli/remove.py:43
 msgid "remove options"
-msgstr "remove seçenekler"
+msgstr "remove seçenekleri"
 
 #: pisi/cli/remove.py:46
 msgid "Removes everything including changed config files of the package"
-msgstr "Değiştirilen ayar dosyaları dahil herşeyi kaldırır"
+msgstr "Değiştirdiğiniz ayar dosyaları dahil paketin tüm dosyalarını kaldırır."
 
 #: pisi/cli/remove.py:48
 msgid "Remove component's and recursive components' packages"
@@ -1762,6 +1779,11 @@ msgid ""
 "\n"
 "Remove all repository information from the system.\n"
 msgstr ""
+"Depoları kaldır\n"
+"\n"
+"Kullanım: remove-repo <depo1> <depo2> ... <depon>\n"
+"\n"
+"Sistemden verilen deponun tüm verisini kaldır.\n"
 
 #: pisi/cli/search.py:25
 msgid ""
@@ -1775,6 +1797,15 @@ msgid ""
 "options to search in install database or source\n"
 "database.\n"
 msgstr ""
+"Paket ara\n"
+"\n"
+"Kullanım: search <kavram1> <kavram2> ... <kavramn>\n"
+"\n"
+"Özet, açıklama ve paket ismi alanlarında belirtilen kavramı\n"
+"içeren paketlerin listesini çıkarır. Öntanımlı arama paket\n"
+"veritabanında yapılır. Kurulum veritabanında veya kaynak\n"
+"veritabanında arama yapmak için seçenekleri\n"
+"kullanabilirsiniz.\n"
 
 #: pisi/cli/search.py:43
 msgid "search options"
@@ -1800,6 +1831,11 @@ msgid ""
 "\n"
 "Finds the installed package which contains the specified file.\n"
 msgstr ""
+"Dosya ara\n"
+"\n"
+"Kullanım: search-file <yol1> <yol2> ... <yoln>\n"
+"\n"
+"Belirtilen dosyayı içeren kurulu paketi bulur.\n"
 
 #: pisi/cli/searchfile.py:38
 msgid "search-file options"
@@ -1807,19 +1843,19 @@ msgstr "search-file seçenekleri"
 
 #: pisi/cli/searchfile.py:42
 msgid "Show only package name"
-msgstr "Sadece paket ismi göster"
+msgstr "Sadece paket ismini göster."
 
 #: pisi/cli/searchfile.py:49
 msgid "Package %s has file /%s"
-msgstr "%s paketi içinde %s dosyası var"
+msgstr "%s paketi içinde %s dosyası var."
 
 #: pisi/cli/searchfile.py:52
 msgid "Path '%s' does not belong to an installed package"
-msgstr "Yol '%s' yerleştirilmiş bir pakete ait değil"
+msgstr "'%s' kurulu herhangi bir pakette değil."
 
 #: pisi/cli/searchfile.py:65
 msgid "Searching for %s"
-msgstr "%s dosyası aranıyor"
+msgstr "%s aranıyor"
 
 #: pisi/cli/updaterepo.py:24
 msgid ""
@@ -1832,6 +1868,14 @@ msgid ""
 "Synchronizes the PiSi databases with the current repository.\n"
 "If no repository is given, all repositories are updated.\n"
 msgstr ""
+"Depo veritabanlarını güncelle\n"
+"\n"
+"Kullanım: update-repo [<depo1> <depo2> ... <depon>]\n"
+"\n"
+"<depoi>: depo ismi\n"
+"\n"
+"PiSi veritabanlarını güncel depoya eşler. Eğer depo ismi\n"
+"verilmezse tüm depolar güncellenir.\n"
 
 #: pisi/cli/updaterepo.py:42
 msgid "update-repo options"
@@ -1839,7 +1883,7 @@ msgstr "update-repo seçenekleri"
 
 #: pisi/cli/updaterepo.py:46
 msgid "Update database in any case"
-msgstr "Veritabanını her halde güncelle"
+msgstr "Veritabanını her halükârda güncelle"
 
 #: pisi/cli/upgrade.py:27
 msgid ""
@@ -1860,6 +1904,22 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
+"PiSi paketlerini güncelle\n"
+"\n"
+"Kullanım: upgrade [<paket1> <paket2> ... <paketn>]\n"
+"\n"
+"<paketi>: paket ismi\n"
+"\n"
+"Eğer paket ismi verilmezse tüm sistemi günceller.\n"
+"\n"
+"Paket güncelleme işlemleri sadece depolar dikkate alınarak\n"
+"yapıldığı için sadece paket isimleri kullanabilirsiniz. Eğer\n"
+"bir paket ismi belirtirseniz, pa ketin paket depolarında\n"
+"bulunması gerekir. Eğer istediğiniz bir PiSi dosyasından bir\n"
+"paket kurmaksa, install komutunu kullanın.\n"
+"\n"
+"Ayrıca paket isimleri yerine bileşen de belirtirseniz, bu durumda\n"
+"bileşendeki paketler kurulur.\n"
 
 #: pisi/cli/upgrade.py:53
 msgid "upgrade options"
@@ -1867,7 +1927,7 @@ msgstr "upgrade seçenekleri"
 
 #: pisi/cli/upgrade.py:60
 msgid "Security related package upgrades only"
-msgstr "Sadece güvenlik ile alakalı güncellemeler"
+msgstr "Sadece güvenlik ile alakalı paket güncellemeleri"
 
 #: pisi/cli/upgrade.py:62
 msgid "Do not update repositories"
@@ -1887,7 +1947,7 @@ msgid ""
 "pattern."
 msgstr ""
 "Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile "
-"eşleşenleri yok say"
+"eşleşenleri yoksay."
 
 #: pisi/cli/upgrade.py:76
 msgid ""
@@ -1895,7 +1955,7 @@ msgid ""
 "basenames                      match any pattern contained in file."
 msgstr ""
 "Sistemi yükseltirken paket ya da bileşen isimlerinden dosya içerisinde "
-"verilen kalıplardan herhangi birisi ile eşleşenleri yok say"
+"verilen kalıplardan herhangi birisi ile eşleşenleri yoksay."
 
 #: pisi/cli/upgrade.py:89
 msgid "Updating repositories"
@@ -1903,18 +1963,18 @@ msgstr "Depolar güncelleniyor"
 
 #: pisi/cli/upgrade.py:93
 msgid "Will not update repositories"
-msgstr "Depolar güncellenmeyecek"
+msgstr "Depolar güncellenmeyecek."
 
 #: pisi/comariface.py:32
 msgid "comar-api package is not fully installed"
-msgstr "comar-api paketi tam olarak kurulmamış"
+msgstr "comar-api paketi tam olarak kurulmamış."
 
 #: pisi/comariface.py:88
 msgid ""
 "Cannot connect to COMAR: \n"
 "  %s\n"
 msgstr ""
-"COMAR'A bağlanılamıyor: \n"
+"COMAR'a bağlanılamıyor: \n"
 "  %s\n"
 
 #: pisi/comariface.py:93
@@ -1937,11 +1997,11 @@ msgstr "Betik hatası: %s"
 
 #: pisi/comariface.py:121
 msgid "Calling post install handlers"
-msgstr "Yerleştirme sonrası betikleri çağrılıyor"
+msgstr "Kurulum sonrası betikleri çağrılıyor"
 
 #: pisi/comariface.py:136
 msgid "Running package's post install script"
-msgstr "Paketin yerleştirme sonrası betiği çağrılıyor"
+msgstr "Paketin kurulum sonrası betiği çağrılıyor"
 
 #: pisi/comariface.py:147
 msgid "Running pre removal operations for %s"
@@ -1953,7 +2013,7 @@ msgstr "Paketin kaldırma öncesi betiği çağrılıyor"
 
 #: pisi/comariface.py:161
 msgid "Calling pre remove handlers"
-msgstr "Kaldırma öncesi betikleri çağrılıyor"
+msgstr "Kaldırma öncesi işleyicileri çağrılıyor"
 
 #: pisi/comariface.py:173
 msgid "Running post removal operations for %s"
@@ -1965,11 +2025,11 @@ msgstr "Paketin kaldırma sonrası betiği çağrılıyor"
 
 #: pisi/comariface.py:187
 msgid "Calling post remove handlers"
-msgstr "Kaldırma sonrası betikleri çağrılıyor"
+msgstr "Kaldırma sonrası işleyicileri çağrılıyor"
 
 #: pisi/comariface.py:196
 msgid "Unregistering comar scripts"
-msgstr "comar betikleri siliniyor"
+msgstr "comar betikleri kayıtlardan siliniyor"
 
 #: pisi/config.py:60
 msgid "Destination directory %s does not exist. Creating it."
@@ -1977,19 +2037,19 @@ msgstr "Hedef dizini %s bulunamadı. Yaratılıyor."
 
 #: pisi/configfile.py:126
 msgid "No section by name '%s'"
-msgstr "'%s' diye bir bölüm yok."
+msgstr "'%s' isminde bir bölüm yok."
 
 #: pisi/conflict.py:26 pisi/dependency.py:26 pisi/replace.py:24
 msgid " version >= "
-msgstr " versiyon >= "
+msgstr " sürüm >= "
 
 #: pisi/conflict.py:28 pisi/dependency.py:28 pisi/replace.py:26
 msgid " version <= "
-msgstr " versiyon <= "
+msgstr " sürüm <= "
 
 #: pisi/conflict.py:30 pisi/dependency.py:30 pisi/replace.py:28
 msgid " version "
-msgstr " versiyon "
+msgstr " sürüm "
 
 #: pisi/conflict.py:32 pisi/dependency.py:32 pisi/replace.py:30
 msgid " release >= "
@@ -2005,19 +2065,19 @@ msgstr " sürüm "
 
 #: pisi/constants.py:28
 msgid "Can't rebind constant: %s"
-msgstr "Sabit %s değiştirilemez"
+msgstr "Sabit yeniden bağlanamaz: %s"
 
 #: pisi/constants.py:34
 msgid "Can't unbind constant: %s"
-msgstr "Sabit %s kaldırılamaz"
+msgstr "Sabit ayrılamaz: %s"
 
 #: pisi/db/componentdb.py:89
 msgid "Component %s not found"
-msgstr "%s bileşeni bulunamadı"
+msgstr "%s bileşeni bulunamadı."
 
 #: pisi/db/groupdb.py:66 pisi/db/groupdb.py:75
 msgid "Group %s not found"
-msgstr "Grup %s bulunamadı"
+msgstr "Grup %s bulunamadı."
 
 #: pisi/db/installdb.py:37
 msgid "installed"
@@ -2033,35 +2093,35 @@ msgid ""
 "Version: %s, Release: %s, Build: %s\n"
 msgstr ""
 "Durum: %s\n"
-"Versiyon: %s, Sürüm: %s, İnşa: %s\n"
+"Sürüm: %s, Yayım: %s, İnşa: %s\n"
 
 #: pisi/db/installdb.py:61
 msgid "Distribution: %s, Install Time: %s\n"
-msgstr "Dağıtım: %s, Yerleştime Zamanı: %s\n"
+msgstr "Dağıtım: %s, Kurulma Zamanı: %s\n"
 
 #: pisi/db/installdb.py:247
 msgid "Package %s is not installed"
-msgstr "Paket %s kurulmamış."
+msgstr "%s paketi kurulu değil."
 
 #: pisi/db/itembyrepo.py:41
 msgid "%s not found in any repository."
-msgstr "%s hiç bir depoda bulunamadı."
+msgstr "%s hiçbir depoda bulunamadı."
 
 #: pisi/db/itembyrepo.py:51
 msgid "Repo item %s not found"
-msgstr "Depo elemanı %s bulunamadı"
+msgstr "Depo elemanı %s bulunamadı."
 
 #: pisi/db/itembyrepo.py:61 pisi/db/itembyrepo.py:72 pisi/db/itembyrepo.py:82
 msgid "Repository %s does not exist."
-msgstr "%s deposu bulunmuyor."
+msgstr "%s deposu yok."
 
 #: pisi/db/packagedb.py:116 pisi/db/packagedb.py:123
 msgid "Package %s not found."
-msgstr "Paket %s bulunamadı"
+msgstr "Paket %s bulunamadı."
 
 #: pisi/fetcher.py:125
 msgid "Urlgrabber needs to be installed to run this command"
-msgstr "Bu komutu çalıştırmak için Urlgrabber kurulu olmalı"
+msgstr "Bu komutun çalıştırılabilmesi için Urlgrabber kurulu olmalı."
 
 #: pisi/fetcher.py:128
 msgid "Filename error"
@@ -2069,11 +2129,11 @@ msgstr "Dosya adı hatası"
 
 #: pisi/fetcher.py:131
 msgid "Access denied to write to destination directory: \"%s\""
-msgstr "\"%s\" hedef dizinine yazmaya izin verilmedi."
+msgstr "Hedef dizinine yazma erişimi reddedildi: \"%s\""
 
 #: pisi/fetcher.py:134
 msgid "Access denied to destination file: \"%s\""
-msgstr "\"%s\" hedef dosyasına erişim engellendi."
+msgstr "Hedef dosyasına erişim reddedildi: \"%s\""
 
 #: pisi/fetcher.py:147
 msgid "Could not fetch destination file \"%s\": %s"
@@ -2083,33 +2143,31 @@ msgstr "\"%s\" hedef dosyasına erişilemedi: %s"
 msgid ""
 "A problem occurred. Please check the archive address and/or permissions "
 "again."
-msgstr ""
-"Bir hata oluştu. Lütfen arşiv adresini ve/veya kullanıcı izinlerini yeniden "
-"kontrol edin."
+msgstr "Bir hata oluştu. Lütfen arşiv adresini ve/veya kullanıcı izinlerini kontrol edin."
 
 #: pisi/fetcher.py:184
 msgid "Proxy configuration has been found for '%s' protocol"
-msgstr "'%s' protokolü için vekil (proxy) yapılandırması bulundu"
+msgstr "'%s' protokolü için vekil yapılandırması bulundu."
 
 #: pisi/fetcher.py:191
 msgid "Bandwidth usage is limited to %s KB/s"
-msgstr "Bantgenişliği kullanımı %s KB/s ile sınırlı"
+msgstr "Bant genişliği kullanımı %s KB/s ile sınırlı."
 
 #: pisi/fetcher.py:207
 msgid ""
 "Server doesn't support partial downloads. Previously downloaded part of the "
 "file will be over-written."
 msgstr ""
-"Sunucu parçalı indirimleri desteklemiyor. Dosyanın daha önce indirilen "
-"parçası üzerine yazılacak."
+"Sunucu kısmî indirimleri desteklemiyor. Dosyanın daha önce indirilen "
+"parçasının üzerine yazılacak."
 
 #: pisi/file.py:66
 msgid "uri must have type either URI or string"
-msgstr "uri argümanı ya URI ya da string tipine sahip olmalı"
+msgstr "uri parametresi ya URI ya da string tipine sahip olmalı."
 
 #: pisi/file.py:89
 msgid "zip compression not supported yet"
-msgstr "zip sıkıştırma henüz desteklenmiyor"
+msgstr "zip sıkıştırma henüz desteklenmiyor."
 
 #: pisi/file.py:117
 msgid "Fetching %s"
@@ -2121,7 +2179,7 @@ msgstr "%s aktarım dizinine kopyalanıyor"
 
 #: pisi/file.py:127
 msgid "File '%s' not found."
-msgstr "Dosya '%s' bulunamadı."
+msgstr "'%s' dosyası bulunamadı."
 
 #: pisi/file.py:135
 msgid "File integrity of %s compromised."
@@ -2129,11 +2187,11 @@ msgstr "%s dosyasının bütünlüğü bozuk."
 
 #: pisi/file.py:155
 msgid "File mode must be either File.read or File.write"
-msgstr "Dosya kipi File.read veya File.write olmalı"
+msgstr "Dosya kipi File.read veya File.write olmalı."
 
 #: pisi/file.py:160
 msgid "Remote write not implemented"
-msgstr "Uzağa yazma özelliği henüz desteklenmiyor"
+msgstr "Uzağa yazma özelliği henüz desteklenmiyor."
 
 #: pisi/file.py:187
 msgid "gzip compression not supported yet"
