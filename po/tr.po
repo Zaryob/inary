@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "POT-Creation-Date: 2009-06-23 16:55+EEST\n"
-"PO-Revision-Date: 2009-06-27 18:47+0300\n"
+"PO-Revision-Date: 2009-06-27 19:24+0300\n"
 "Last-Translator: Necmettin Begiter <necmettin.begiter@gmail.com>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -2758,102 +2758,100 @@ msgstr "En azından bir tane '%s' etiketi yerel metne sahip olmalı."
 
 #: pisi/pxml/autoxml.py:86
 msgid "'%s' language of tag '%s' is empty"
-msgstr "'%s' dili metni, etiket %s içerisinde boş"
+msgstr "'%s' dili metni, takı %s için boş."
 
 #: pisi/pxml/autoxml.py:114
 msgid "LocalText: unable to get either current or default locale"
-msgstr ""
-"LocalText: şu andaki ya da ön tanımlı yerelleştirme seçenekleri (locale) "
-"bulunamıyor"
+msgstr "LocalText: şu andaki ya da öntanımlı yerel bulunamıyor."
 
 #: pisi/pxml/autoxml.py:120 pisi/pxml/autoxml.py:135
 msgid ""
 "Tag should have at least the current locale, or failing that an English or "
 "Turkish version"
 msgstr ""
-"Etiket en azından şu andaki yerelleştirme seçenekleri (locale) için bir "
-"girdiye, o olmazsa bir Türkçe ya da İngilizce versiyona sahip olmalı"
+"Takı içeriğinin en azından güncel yerelde (locale) bir karşılığı olmalı, ya da eğer o yoksa bir Türkçe ya da "
+"İngilizce sürüme sahip olmalı."
 
 #: pisi/pxml/autoxml.py:373
 msgid "autoxml.check: '%s' errors"
-msgstr "autoxml.check: '%s' hatalar"
+msgstr "autoxml.check: '%s' hata"
 
 #: pisi/pxml/autoxml.py:428 pisi/pxml/autoxml.py:438
 msgid "autoxml.parse: String '%s' has errors"
-msgstr "autoxml.read: Dosya '%s' hatalara sahip"
+msgstr "autoxml.read: Katar '%s' hatalar içeriyor."
 
 #: pisi/pxml/autoxml.py:452 pisi/pxml/autoxml.py:462
 msgid "autoxml.read: File '%s' has errors"
-msgstr "autoxml.read: Dosya '%s' hatalara sahip"
+msgstr "autoxml.read: Dosya '%s' hatalar içeriyor."
 
 #: pisi/pxml/autoxml.py:470
 msgid "autoxml.write: object validation has failed"
-msgstr "autoxml.write: nesne doğrulaması başarısızlığa uğradı"
+msgstr "autoxml.write: nesne doğrulaması başarısız oldu."
 
 #: pisi/pxml/autoxml.py:478
 msgid "autoxml.write: File encoding '%s' has errors"
-msgstr "autoxml.write: Dosya biçimlendirmesi '%s' hatalara sahip"
+msgstr "autoxml.write: Dosya karakter kodlaması '%s' hatalar içeriyor."
 
 #: pisi/pxml/autoxml.py:528
 msgid "gen_tag: unrecognized tag type %s in spec"
-msgstr "gen_tag: tanınmayan im tipi %s"
+msgstr "gen_tag: belirtimde tanınmayan takı tipi %s."
 
 #: pisi/pxml/autoxml.py:576 pisi/pxml/autoxml.py:587
 msgid "Mandatory variable %s not available"
-msgstr "Gerekli değişken %s bulunamadı"
+msgstr "Zorunlu değişken %s bulunamadı."
 
 #: pisi/pxml/autoxml.py:657
 msgid "Type mismatch: read text cannot be decoded"
-msgstr "Tip uyumsuzluğu: okunan metin çözülemedi"
+msgstr "Tip uyumsuzluğu: okunan metnin kodlaması çözümlenemedi."
 
 #: pisi/pxml/autoxml.py:661 pisi/pxml/autoxml.py:670
 msgid "Mandatory token %s not available"
-msgstr "Gerekli im %s bulunamadı"
+msgstr "Zorunlu takı %s bulunamadı."
 
 #: pisi/pxml/autoxml.py:675
 msgid "Type mismatch. Expected %s, got %s"
-msgstr "Tip uyumsuzluğu. %s beklerken, %s bulundu"
+msgstr "Tip uyumsuzluğu. %s beklerken, %s alındı."
 
 # pisi/xmlfile.py:420 :521
 #: pisi/pxml/autoxml.py:705 pisi/pxml/autoxml.py:821
 msgid "Type mismatch: DOM cannot be decoded"
-msgstr "Tip uyumsuzluğu: DOM okunamıyor"
+msgstr "Tip uyumsuzluğu: DOM çözümlenemedi."
 
 # pisi/xmlfile.py:392 :423 :439 :446 :524 :538 :545
 #: pisi/pxml/autoxml.py:708 pisi/pxml/autoxml.py:724 pisi/pxml/autoxml.py:734
 #: pisi/pxml/autoxml.py:824 pisi/pxml/autoxml.py:838 pisi/pxml/autoxml.py:848
 msgid "Mandatory argument not available"
-msgstr "Gerekli argüman bulunamadı"
+msgstr "Zorunlu argüman alınamadı."
 
 # pisi/xmlfile.py:436 :535
 #: pisi/pxml/autoxml.py:721 pisi/pxml/autoxml.py:835
 msgid "Object cannot be encoded"
-msgstr "Nesne kodlanamadı"
+msgstr "Nesne kodlanamadı."
 
 #: pisi/pxml/autoxml.py:746
 msgid "List type must contain only one element"
-msgstr "List tipi sadece bir eleman içermeli"
+msgstr "Liste tipi sadece bir eleman içermeli."
 
 # pisi/xmlfile.py:470 :485
 #: pisi/pxml/autoxml.py:759 pisi/pxml/autoxml.py:780
 msgid "Mandatory list \"%s\" under \"%s\" node is empty."
-msgstr "Zorunlu \"%s\" listesi \"%s\" içinde yok."
+msgstr "Zorunlu \"%s\" listesi (\"%s\" düğümü altındaki) boş."
 
 #: pisi/pxml/xmlext.py:79
 msgid "getNodeText: Expected text node, got something else!"
-msgstr "getNodeText: metin beklenirken başka birşey alındı!"
+msgstr "getNodeText: Metin düğüm beklenirken başka birşey alındı."
 
 #: pisi/pxml/xmlfile.py:63
 msgid "String '%s' has invalid XML"
-msgstr "'%s' dosyasının XML sözdizimi geçersiz"
+msgstr "'%s' katarının XML sözdizimi geçersiz."
 
 #: pisi/pxml/xmlfile.py:86
 msgid "File '%s' has invalid XML"
-msgstr "'%s' dosyasının XML sözdizimi geçersiz"
+msgstr "'%s' dosyasının XML sözdizimi geçersiz."
 
 #: pisi/scenarioapi/package.py:67
 msgid "No pisi package: %s* found."
-msgstr "%s pisi paketi bulunamadı."
+msgstr "PiSi paketi yok: %s* bulundu."
 
 #: pisi/scenarioapi/repoops.py:28
 msgid "Repo already has package named %s."
@@ -2873,7 +2871,7 @@ msgstr "%s yansıları tanımlı değil."
 
 #: pisi/sourcearchive.py:77
 msgid "Fetching source from mirror: %s"
-msgstr "Kaynak, %s yansısından indiriliyor"
+msgstr "Kaynak, %s yansısından indiriliyor."
 
 #: pisi/sourcearchive.py:83
 msgid "Could not fetch source from %s mirrors."
@@ -2881,11 +2879,11 @@ msgstr "Kaynak, %s yansılarından indirilemedi."
 
 #: pisi/sourcearchive.py:101
 msgid "unpack: check_file_hash failed"
-msgstr "unpack: kaynak arşivin bütünlüğünde sorun var"
+msgstr "unpack: kaynak arşivin bütünlüğünde sorun var."
 
 #: pisi/specfile.py:158
 msgid "URI: %s, type: %s, sha1sum: %s"
-msgstr "URI: %s, tip: %s, sha1sum: %s"
+msgstr "Adres: %s, tip: %s, sha1sum: %s"
 
 #: pisi/specfile.py:186 pisi/specfile.py:189
 msgid " or "
@@ -2893,7 +2891,7 @@ msgstr " veya "
 
 #: pisi/specfile.py:264
 msgid "Name: %s, version: %s, release: %s, build %s\n"
-msgstr "Ad: %s, versiyon %s, sürüm %s, inşa %s\n"
+msgstr "İsim: %s, sürüm %s, yayım %s, inşa %s\n"
 
 #: pisi/specfile.py:266 pisi/specfile.py:327
 msgid "Summary: %s\n"
@@ -2913,7 +2911,7 @@ msgstr "Sağladıkları: "
 
 #: pisi/specfile.py:273
 msgid "Dependencies: "
-msgstr "Bağımlılıklar: "
+msgstr "Bağımlılıkları: "
 
 #: pisi/specfile.py:330
 msgid "Build Dependencies: "
@@ -2921,7 +2919,7 @@ msgstr "İnşa Bağımlılıkları: "
 
 #: pisi/uri.py:80
 msgid "setAuthInfo needs a tuple (user, pass)"
-msgstr "setAuthInfo bir (kullanıcı, parola) ikilisi ister"
+msgstr "setAuthInfo bir (kullanıcı, parola) ikilisi ister."
 
 #: pisi/util.py:125 pisi/util.py:146
 msgid "Running "
@@ -2929,23 +2927,23 @@ msgstr "Çalışıyor "
 
 #: pisi/util.py:129 pisi/util.py:164
 msgid "return value for \"%s\" is %s"
-msgstr "\"%s\" için dönüş değeri %s"
+msgstr "\"%s\" dönüş değeri %s"
 
 #: pisi/util.py:327
 msgid "Including external link '%s'"
-msgstr "'%s' harici bağı ekleniyor"
+msgstr "'%s' haricî bağlantısı ekleniyor."
 
 #: pisi/util.py:329
 msgid "Including directory '%s'"
-msgstr "'%s' dizini içeriliyor"
+msgstr "'%s' dizini ekleniyor."
 
 #: pisi/util.py:417
 msgid "Cannot calculate SHA1 hash of %s"
-msgstr "%s dosyasının SHA1 kontrol toplamı hesaplanamıyor"
+msgstr "%s dosyasının SHA1 kontrol toplamı hesaplanamıyor."
 
 #: pisi/util.py:472
 msgid "ERROR: patch (%s) failed"
-msgstr "HATA: Yama (%s) başarısız"
+msgstr "HATA: Yama (%s) başarısız."
 
 #: pisi/util.py:474
 msgid "ERROR: patch (%s) failed: %s"
@@ -2953,19 +2951,19 @@ msgstr "HATA: Yama (%s) başarısız: %s"
 
 #: pisi/util.py:484
 msgid "strip command failed for file '%s'!"
-msgstr "strip komutu '%s' dosyası için çalışmadı!"
+msgstr "strip komutu '%s' dosyası için başarısız oldu!"
 
 #: pisi/util.py:491
 msgid "chrpath command failed for file '%s'!"
-msgstr "chrpath komutu '%s' dosyası için çalışmadı!"
+msgstr "chrpath komutu '%s' dosyası için başarısız oldu!"
 
 #: pisi/util.py:498
 msgid "objcopy (keep-debug) command failed for file '%s'!"
-msgstr "objcopy (keep-debug) komutu '%s' dosyası için çalışmadı!"
+msgstr "objcopy (keep-debug) komutu '%s' dosyası için başarısız oldu!"
 
 #: pisi/util.py:504
 msgid "objcopy (add-debuglink) command failed for file '%s'!"
-msgstr "objcopy (add-debuglink) komutu '%s' dosyası için çalışmadı!"
+msgstr "objcopy (add-debuglink) komutu '%s' dosyası için başarısız oldu!"
 
 #: scripts/repostats.py:226
 msgid ""
@@ -2989,9 +2987,7 @@ msgstr ""
 
 #: scripts/repostats.py:371
 msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-msgstr ""
-"'%s <%s>' geliştiricisinin farklı bir e-posta adresi (%s) kaynak paket '%s' "
-"içerisinde bulundu"
+msgstr "'%s <%s>' geliştiricisinin farklı bir e-posta adresi (%s) kaynak paket '%s' içerisinde bulundu."
 
 #: scripts/repostats.py:467
 msgid ""
@@ -3003,15 +2999,15 @@ msgstr ""
 
 #: scripts/repostats.py:553
 msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-msgstr "Kullanım: repostats.py [SEÇENEKLER] source-repo-path [ikili-depo-adresi]\n"
+msgstr "Kullanım: repostats.py [SEÇENEKLER] kaynak-depo-yolu [ikili-depo-adresi]\n"
 
 #: scripts/repostats.py:554
 msgid "Dont generate the web site.\n"
-msgstr "Web sayfasını oluşturma.\n"
+msgstr "Web sitesini oluşturma.\n"
 
 #: scripts/repostats.py:575
 msgid "Scanning source repository...\n"
-msgstr "Kaynak depo taranıyor...\n"
+msgstr "Kaynak deposu taranıyor...\n"
 
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
