@@ -61,7 +61,7 @@ def find_upgrades(packages, replaces):
             continue
 
         pkg = packagedb.get_package(u_pkg)
-        (version, release, build) = installdb.get_version(i_pkg)
+        (version, release, build, distro, distro_release) = installdb.get_version_and_distro_release(i_pkg)
 
         updates = [i for i in pkg.history if pisi.version.Version(i.release) > pisi.version.Version(release)]
         if security_only:
@@ -72,7 +72,9 @@ def find_upgrades(packages, replaces):
             rev_deps = map(lambda d:d[0], packagedb.get_rev_deps(u_pkg))
             Ap.extend(filter(lambda name:is_upgradable(name), rev_deps))
 
-        if ignore_build or (not build) or (not pkg.build):
+        if pkg.distribution == distro and pisi.version.Version(pkg.distributionRelease) > pisi.version.Version(distro_release):
+            Ap.append(u_pkg)
+        elif ignore_build or (not build) or (not pkg.build):
             if pisi.version.Version(release) < pisi.version.Version(pkg.release):
                 Ap.append(u_pkg)
             else:
