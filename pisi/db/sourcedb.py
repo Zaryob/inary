@@ -83,8 +83,8 @@ class SourceDB(lazydb.LazyDB):
         return spec
 
     def search_spec(self, terms, lang=None, repo=None):
-        resum = '<Summary xml:lang="(%s|en)">.*?%s.*?</Summary>'
-        redesc = '<Description xml:lang="(%s|en)">.*?%s.*?</Description>'
+        resum = '<Summary xml:lang=.(%s|en).>.*?%s.*?</Summary>'
+        redesc = '<Description xml:lang=.(%s|en).>.*?%s.*?</Description>'
         if not lang:
             lang = pisi.pxml.autoxml.LocalText.get_lang()
         found = []
