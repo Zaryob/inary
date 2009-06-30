@@ -26,7 +26,7 @@
 #host = i686-pc-linux-gnu
 #generateDebug = False
 #enableSandbox = False
-#jobs = "-j1"
+#jobs = "-j3"
 #CFLAGS= -mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2
 #CXXFLAGS= -mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2
 #LDFLAGS= -Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common
@@ -81,7 +81,7 @@ class GeneralDefaults:
 class BuildDefaults:
     """Default values for [build] section"""
     host = "i686-pc-linux-gnu"
-    jobs = "-j1"
+    jobs = "-j3"
     generateDebug = False
     enableSandbox = True
     cflags = "-mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"

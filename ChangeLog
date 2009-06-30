@@ -1,3 +1,7 @@
+2009-06-30 Onur Küçük <onur@pardus.org.tr>
+		* Change default make job number from 1 to 3 in pisi defaults,
+		sometimes it is forgotten and we need to see parallel build errors
+
 2009-06-26 Fatih Aşıcı <fatih@pardus.org.tr>
 		* Pass relative paths of patches to quilt. This makes the
 		patches directory have the same structure as the files
