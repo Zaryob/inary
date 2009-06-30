@@ -1,18 +1,17 @@
-# translation of de.po to Deutsch
+﻿# translation of de.po to Deutsch
 # translation of de.po to
 # Copyright (C) YEAR ORGANIZATION
 #
 # Mustafa Ölcerman <oelcerman@fussballkreis.org>, 2006.
 # Mustafa Ölcerman <mustafa.oelcerman@fk-koeln.de>, 2007.
 # Mustafa Ölcerman <m.oelcerman@pardus-linux.de>, 2008, 2009.
-# Klemens Häckel <click3d_at_linuxmail_org>, 2008.
-# Klemens Häckel <sw1976de_at_googlemail_com>, 2009.
-
+# Klemens Häckel <click3d_at_linuxmail_org>, 2008, 2009.
+# Stefan Wilhelm <sw1976de at googlemail dot com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "POT-Creation-Date: 2009-05-05 15:19+EEST\n"
-"PO-Revision-Date: 2009-06-26 13:13+0100\n"
+"PO-Revision-Date: 2009-06-30 09:06+0100\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch <pardus-translation-de@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
@@ -645,7 +644,6 @@ msgstr "%s konfiguriert"
 msgid "Extracting the files of %s"
 msgstr "Entpacke die Dateien aus %s"
 
-# bei indesxuri evtl Position entfernen!
 #: pisi/cli/addrepo.py:24
 msgid ""
 "Add a repository\n"
@@ -661,12 +659,12 @@ msgid ""
 msgstr ""
 "Depot hinzufügen\n"
 "\n"
-"Syntax: add-repo <repo> <indexuri>\n"
+"Syntax: add-repo <repo> <index_uri>\n"
 "\n"
 "<repo>: Name des Depots welches hinzugefügt werden soll\n"
 "<indexuri>: Adresse bzw. Position der index-Datei\n"
 "\n"
-"Falls kein Depot angegeben wird, wird das pardus-devel Depot hinzugefügt\n"
+"Falls kein Depot angegeben wird, wird das Depot Pardus-Devel hinzugefügt\n"
 "\n"
 "NB: Es werden im Moment nur lokale Dateien unterstützt (z.B.: /a/b/c) und http:// URI \n"
 
@@ -1868,7 +1866,7 @@ msgstr "Upgrade für die Komponente durchführen und Pakete der Komponente rekur
 #: pisi/cli/upgrade.py:70
 #, fuzzy
 msgid "Name of the to be upgraded packages' repository"
-msgstr "Name des Quell- oder Paket-Depots welches aktualisert werden soll"
+msgstr "Name des Quell- oder Paket-Depots welches aktualisiert werden soll"
 
 #: pisi/cli/upgrade.py:74
 msgid "When upgrading system, ignore packages and components whose basenames match pattern."
@@ -2018,7 +2016,6 @@ msgstr "Komponente %s nicht gefunden"
 msgid "installed"
 msgstr "installiert"
 
-# Ich denke die Übersetzung passt so!
 #: pisi/db/installdb.py:37
 #, fuzzy
 msgid "installed-pending"
@@ -2405,10 +2402,11 @@ msgstr "Fertig."
 msgid "There are abandoned files under the install dir (%s):"
 msgstr "Zurückgelassene Dateien im Installationsverzeichnis (%s):"
 
-# gesammelt hört sich komisch an
+# Stefan: ich denke bei dem Vorgang werden Dateien nach der Installation entfernt bzw. vielleicht ist das eine Bildschimausgabe bei der Erstellung von Installationspaketen.
+# Wenn das so ist, dann würde es schon so passen.
 #: pisi/operations/build.py:1001
 msgid "All of the files under the install dir (%s) has been collected by package(s)"
-msgstr "Alle Dateien unter Installationsierzeichnis (%s) wurden von den Paketen gesammelt"
+msgstr "Alle Dateien im Installationsverzeichnis (%s) wurden von Paketen aufgesammelt"
 
 #: pisi/operations/build.py:1005
 msgid "Cleaning Build Directory..."
