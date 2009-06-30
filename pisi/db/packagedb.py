@@ -84,6 +84,20 @@ class PackageDB(lazydb.LazyDB):
         pkg, repo = self.get_package_repo(name, repo)
         return pkg
 
+    def search_in_packages(self, packages, terms, lang=None):
+        resum = '<Summary xml:lang=.(%s|en).>.*?%s.*?</Summary>'
+        redesc = '<Description xml:lang=.(%s|en).>.*?%s.*?</Description>'
+        if not lang:
+            lang = pisi.pxml.autoxml.LocalText.get_lang()
+        found = []
+        for name in packages:
+            xml = self.pdb.get_item(name)
+            if terms == filter(lambda term: re.compile(term, re.I).search(name) or \
+                                            re.compile(resum % (lang, term), re.I).search(xml) or \
+                                            re.compile(redesc % (lang, term), re.I).search(xml), terms):
+                found.append(name)
+        return found
+
     def search_package(self, terms, lang=None, repo=None):
         resum = '<Summary xml:lang=.(%s|en).>.*?%s.*?</Summary>'
         redesc = '<Description xml:lang=.(%s|en).>.*?%s.*?</Description>'
