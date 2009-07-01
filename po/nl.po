@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
-"POT-Creation-Date: 2009-06-23 16:55+EEST\n"
+"POT-Creation-Date: 2009-07-01 12:06+EEST\n"
 "PO-Revision-Date: 07/06/09 12:57\n"
 "Last-Translator: Antoon Tolboom <atolboo@gmail.com>\n"
 "Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
@@ -1712,7 +1712,7 @@ msgstr "list-upgrades opties"
 msgid "List upgradable packages under given component"
 msgstr "Toon op te waarderen pakketten onder opgegeven component"
 
-#: pisi/cli/listupgrades.py:68 pisi/operations/upgrade.py:110
+#: pisi/cli/listupgrades.py:68 pisi/operations/upgrade.py:112
 msgid "No packages to upgrade."
 msgstr "Geen pakketten op te waarderen."
 
@@ -2141,7 +2141,7 @@ msgstr "Repo item %s niet gevonden"
 msgid "Repository %s does not exist."
 msgstr "Repository %s bestaat niet."
 
-#: pisi/db/packagedb.py:116 pisi/db/packagedb.py:123
+#: pisi/db/packagedb.py:130 pisi/db/packagedb.py:137
 msgid "Package %s not found."
 msgstr "Pakket %s niet gevonden."
 
@@ -2436,52 +2436,52 @@ msgstr "Negeren bouwafhankelijkheden."
 msgid "Patch file is missing: %s\n"
 msgstr "Patch-bestand ontbreekt: %s\n"
 
-#: pisi/operations/build.py:604
+#: pisi/operations/build.py:606
 msgid "* Applying patch: %s"
 msgstr "* Toepassen patch: %s"
 
-#: pisi/operations/build.py:719
+#: pisi/operations/build.py:720
 msgid "/%s has suid bit set"
 msgstr "%s heeft suid-bit gezet"
 
-#: pisi/operations/build.py:755
+#: pisi/operations/build.py:756
 msgid "(found old version %s)"
 msgstr "(gevonden oude versie %s)"
 
-#: pisi/operations/build.py:779
+#: pisi/operations/build.py:780
 msgid "(no previous build found, setting build no to 1.)"
 msgstr "(geen eerdere bouw gevonden, zet bouwnummer op 1.)"
 
-#: pisi/operations/build.py:824
+#: pisi/operations/build.py:825
 msgid "(old package lacks a build no, setting build no to 1.)"
 msgstr "(oud pakket heeft geen bouwnummer, zet compilatienummer op 1.)"
 
-#: pisi/operations/build.py:827
+#: pisi/operations/build.py:828
 msgid "There are changes, incrementing build no to %d"
 msgstr "Er zijn wijzigingen, zet bouwnummer op %d "
 
-#: pisi/operations/build.py:830
+#: pisi/operations/build.py:831
 msgid "There is no change from previous build %d"
 msgstr "Er zijn geen wijzigingen sinds vorige bouw %d"
 
-#: pisi/operations/build.py:904
+#: pisi/operations/build.py:905
 msgid "No user named '%s' found on the system"
 msgstr "Geen gebruiker met de naam '%s' gevonden op het systeem"
 
-#: pisi/operations/build.py:909
+#: pisi/operations/build.py:910
 msgid "No group named '%s' found on the system"
 msgstr "Geen groep met de naam '%s' gevonden op het systeem"
 
-#: pisi/operations/build.py:912
+#: pisi/operations/build.py:913
 msgid "** Building package %s"
 msgstr "** bouwen pakket %s"
 
 # pisi/build.py:503 :506
-#: pisi/operations/build.py:914 pisi/operations/build.py:917
+#: pisi/operations/build.py:915 pisi/operations/build.py:918
 msgid "Generating %s,"
 msgstr "Genereren %s,"
 
-#: pisi/operations/build.py:923
+#: pisi/operations/build.py:924
 msgid ""
 "Build number is not available. For repo builds you must enable buildno in "
 "pisi.conf."
@@ -2489,33 +2489,33 @@ msgstr ""
 "Bouwnummer is niet aanwezig. Bij repo-compilaties moet u buildno inschakelen "
 "in pisi.conf."
 
-#: pisi/operations/build.py:943
+#: pisi/operations/build.py:944
 msgid "Creating PiSi package %s."
 msgstr "Aanmaken PiSi-pakket %s."
 
-#: pisi/operations/build.py:993 pisi/operations/delta.py:92
+#: pisi/operations/build.py:994 pisi/operations/delta.py:92
 msgid "Done."
 msgstr "Gereed."
 
-#: pisi/operations/build.py:999
+#: pisi/operations/build.py:1000
 msgid "There are abandoned files under the install dir (%s):"
 msgstr "Er zijn verlaten bestanden in de installatiemap (%s):"
 
-#: pisi/operations/build.py:1003
+#: pisi/operations/build.py:1004
 msgid ""
 "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)"
 
-#: pisi/operations/build.py:1007
+#: pisi/operations/build.py:1008
 msgid "Cleaning Build Directory..."
 msgstr "Opschonen bouwmap..."
 
-#: pisi/operations/build.py:1010
+#: pisi/operations/build.py:1011
 msgid "Keeping Build Directory"
 msgstr "Behouden bouwmap"
 
-#: pisi/operations/build.py:1039
+#: pisi/operations/build.py:1040
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d fout(en), %d waarschuwing(en)"
 
@@ -2570,7 +2570,7 @@ msgstr ""
 "aan afhankelijkheden te voldoen:\n"
 
 #: pisi/operations/emerge.py:62 pisi/operations/install.py:82
-#: pisi/operations/upgrade.py:144
+#: pisi/operations/upgrade.py:146
 msgid "There are extra packages due to dependencies. Do you want to continue?"
 msgstr "Er zijn extra pakketten wegens afhankelijkheden. Wilt u doorgaan?"
 
@@ -2625,7 +2625,7 @@ msgid "Do you want to continue?"
 msgstr "Wilt u doorgaan?"
 
 #: pisi/operations/history.py:158 pisi/operations/install.py:95
-#: pisi/operations/upgrade.py:155
+#: pisi/operations/upgrade.py:157
 msgid "Downloading %d / %d"
 msgstr "Downloaden %d / %d"
 
@@ -2659,11 +2659,11 @@ msgstr ""
 "De volgende pakketten zullen geïnstalleerd worden in de respectievelijke "
 "volgorde voor de afhankelijkheden:\n"
 
-#: pisi/operations/install.py:76 pisi/operations/upgrade.py:138
+#: pisi/operations/install.py:76 pisi/operations/upgrade.py:140
 msgid "Total size of package(s): %.2f %s"
 msgstr "Totale grootte van pakket(ten): %.2f %s"
 
-#: pisi/operations/install.py:107 pisi/operations/upgrade.py:170
+#: pisi/operations/install.py:107 pisi/operations/upgrade.py:172
 msgid "Installing %d / %d"
 msgstr "Installeren %d / %d"
 
@@ -2701,7 +2701,7 @@ msgstr ""
 "Veiligheidsprocedure: kan de volgende pakketten niet verwijderen uit system."
 "base: "
 
-#: pisi/operations/remove.py:48 pisi/operations/upgrade.py:254
+#: pisi/operations/remove.py:48 pisi/operations/upgrade.py:256
 msgid "Safety switch: the component system.base cannot be found"
 msgstr "Veiligheidsprocedure: component system.base is niet gevonden"
 
@@ -2753,37 +2753,37 @@ msgstr "Pakket %s is niet geïnstalleerd."
 msgid "Package %s is not available in repositories."
 msgstr "Pakket %s is niet beschikbaar in de repositories."
 
-#: pisi/operations/upgrade.py:79
+#: pisi/operations/upgrade.py:81
 msgid "Package %s is already at the latest release %s."
 msgstr "Pakket %s is al de laatste uitgave %s."
 
-#: pisi/operations/upgrade.py:85
+#: pisi/operations/upgrade.py:87
 msgid "Package %s is already at the latest build %s."
 msgstr "Pakket %s is al de laatste bouw %s."
 
-#: pisi/operations/upgrade.py:133
+#: pisi/operations/upgrade.py:135
 msgid "The following packages will be upgraded: "
 msgstr "De volgende pakketen zullen worden opgewaardeerd: "
 
-#: pisi/operations/upgrade.py:204
+#: pisi/operations/upgrade.py:206
 msgid "Dependency %s of %s cannot be satisfied"
 msgstr "Afhankelijkheid %s van %s kan niet worden voldaan"
 
-#: pisi/operations/upgrade.py:205
+#: pisi/operations/upgrade.py:207
 msgid "Upgrade is not possible."
 msgstr "Opwaarderen niet mogelijk."
 
-#: pisi/operations/upgrade.py:221
+#: pisi/operations/upgrade.py:223
 msgid "Reverse dependency %s of %s cannot be satisfied"
 msgstr "Omgekeerde afhankelijkheid %s van %s kan niet worden voldaan"
 
-#: pisi/operations/upgrade.py:242
+#: pisi/operations/upgrade.py:244
 msgid "Safety switch: Following packages in system.base will be installed: "
 msgstr ""
 "Veiligheidsprocedure: de volgende pakketten in system.base worden "
 "geïnstalleerd: "
 
-#: pisi/operations/upgrade.py:248
+#: pisi/operations/upgrade.py:250
 msgid "Safety switch: Following packages in system.base will be upgraded: "
 msgstr ""
 "Veiligheidsprocedure: de volgende pakketten in system.base worden "
@@ -2986,27 +2986,27 @@ msgstr "Bijsluiten map '%s'"
 msgid "Cannot calculate SHA1 hash of %s"
 msgstr "Kan SHA1 hash niet berekenen uit %s"
 
-#: pisi/util.py:472
+#: pisi/util.py:475
 msgid "ERROR: patch (%s) failed"
 msgstr "Fout: patch (%s) mislukt"
 
-#: pisi/util.py:474
+#: pisi/util.py:477
 msgid "ERROR: patch (%s) failed: %s"
 msgstr "Fout: patch (%s) mislukt: %s"
 
-#: pisi/util.py:484
+#: pisi/util.py:487
 msgid "strip command failed for file '%s'!"
 msgstr "Commando 'strip' mislukte voor bestand '%s'!"
 
-#: pisi/util.py:491
+#: pisi/util.py:494
 msgid "chrpath command failed for file '%s'!"
 msgstr "chrpath commando 'mislukte voor bestand '%s'!"
 
-#: pisi/util.py:498
+#: pisi/util.py:501
 msgid "objcopy (keep-debug) command failed for file '%s'!"
 msgstr "Commando 'objcopy' (keep-debug) mislukte voor bestand '%s'!"
 
-#: pisi/util.py:504
+#: pisi/util.py:507
 msgid "objcopy (add-debuglink) command failed for file '%s'!"
 msgstr "Commando 'objcopy' (add-debuglink)  mislukte voor bestand '%s'!"
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-23 16:55+EEST\n"
+"POT-Creation-Date: 2009-07-01 12:06+EEST\n"
 "PO-Revision-Date: 2006-04-08 12:19+0900\n"
 "Last-Translator: Piotr Maliński <riklaunim@gmail.com>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -1519,7 +1519,7 @@ msgstr ""
 msgid "List upgradable packages under given component"
 msgstr ""
 
-#: pisi/cli/listupgrades.py:68 pisi/operations/upgrade.py:110
+#: pisi/cli/listupgrades.py:68 pisi/operations/upgrade.py:112
 msgid "No packages to upgrade."
 msgstr ""
 
@@ -1883,7 +1883,7 @@ msgstr "Plik %s nie został znaleziony"
 msgid "Repository %s does not exist."
 msgstr "Repozytorium %s nie istnieje. Nie można usunąć."
 
-#: pisi/db/packagedb.py:116 pisi/db/packagedb.py:123
+#: pisi/db/packagedb.py:130 pisi/db/packagedb.py:137
 #, fuzzy
 msgid "Package %s not found."
 msgstr "Plik %s nie został znaleziony"
@@ -2181,84 +2181,84 @@ msgstr "Ignorowanie zależności budowy."
 msgid "Patch file is missing: %s\n"
 msgstr "Brakuje pliku poprawki: %s\n"
 
-#: pisi/operations/build.py:604
+#: pisi/operations/build.py:606
 msgid "* Applying patch: %s"
 msgstr "* Instaluję poprawkę: %s"
 
-#: pisi/operations/build.py:719
+#: pisi/operations/build.py:720
 msgid "/%s has suid bit set"
 msgstr ""
 
-#: pisi/operations/build.py:755
+#: pisi/operations/build.py:756
 msgid "(found old version %s)"
 msgstr "(znaleziono starszą wersję %s)"
 
-#: pisi/operations/build.py:779
+#: pisi/operations/build.py:780
 msgid "(no previous build found, setting build no to 1.)"
 msgstr ""
 "(nie znaleziono wcześniejszych wersji build, ustalam numer wesji na 1.)"
 
-#: pisi/operations/build.py:824
+#: pisi/operations/build.py:825
 msgid "(old package lacks a build no, setting build no to 1.)"
 msgstr ""
 "(w starszych paczkach brakuje numeru wersji build, ustalan numer na 1.)"
 
-#: pisi/operations/build.py:827
+#: pisi/operations/build.py:828
 msgid "There are changes, incrementing build no to %d"
 msgstr "Są zmiany, inkrementuje numer wersji build do %d"
 
-#: pisi/operations/build.py:830
+#: pisi/operations/build.py:831
 msgid "There is no change from previous build %d"
 msgstr "Brak zmian względem wcześniejszej wersji build %d"
 
-#: pisi/operations/build.py:904
+#: pisi/operations/build.py:905
 msgid "No user named '%s' found on the system"
 msgstr "W systemie nie znaleziono użytkownika o nazwie '%s'"
 
-#: pisi/operations/build.py:909
+#: pisi/operations/build.py:910
 msgid "No group named '%s' found on the system"
 msgstr "W systemie nie znaleziono grupy o nazwie '%s'"
 
-#: pisi/operations/build.py:912
+#: pisi/operations/build.py:913
 msgid "** Building package %s"
 msgstr "** Budowanie pakietu %s"
 
-#: pisi/operations/build.py:914 pisi/operations/build.py:917
+#: pisi/operations/build.py:915 pisi/operations/build.py:918
 msgid "Generating %s,"
 msgstr "Generowanie %s,"
 
-#: pisi/operations/build.py:923
+#: pisi/operations/build.py:924
 msgid ""
 "Build number is not available. For repo builds you must enable buildno in "
 "pisi.conf."
 msgstr ""
 
-#: pisi/operations/build.py:943
+#: pisi/operations/build.py:944
 msgid "Creating PiSi package %s."
 msgstr ""
 
-#: pisi/operations/build.py:993 pisi/operations/delta.py:92
+#: pisi/operations/build.py:994 pisi/operations/delta.py:92
 msgid "Done."
 msgstr ""
 
-#: pisi/operations/build.py:999
+#: pisi/operations/build.py:1000
 msgid "There are abandoned files under the install dir (%s):"
 msgstr ""
 
-#: pisi/operations/build.py:1003
+#: pisi/operations/build.py:1004
 msgid ""
 "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 
-#: pisi/operations/build.py:1007
+#: pisi/operations/build.py:1008
 msgid "Cleaning Build Directory..."
 msgstr ""
 
-#: pisi/operations/build.py:1010
+#: pisi/operations/build.py:1011
 msgid "Keeping Build Directory"
 msgstr ""
 
-#: pisi/operations/build.py:1039
+#: pisi/operations/build.py:1040
 msgid "*** %d error(s), %d warning(s)"
 msgstr ""
 
@@ -2305,7 +2305,7 @@ msgid ""
 msgstr ""
 
 #: pisi/operations/emerge.py:62 pisi/operations/install.py:82
-#: pisi/operations/upgrade.py:144
+#: pisi/operations/upgrade.py:146
 msgid "There are extra packages due to dependencies. Do you want to continue?"
 msgstr ""
 
@@ -2361,7 +2361,7 @@ msgid "Do you want to continue?"
 msgstr ""
 
 #: pisi/operations/history.py:158 pisi/operations/install.py:95
-#: pisi/operations/upgrade.py:155
+#: pisi/operations/upgrade.py:157
 msgid "Downloading %d / %d"
 msgstr ""
 
@@ -2387,11 +2387,11 @@ msgid ""
 "dependencies:\n"
 msgstr ""
 
-#: pisi/operations/install.py:76 pisi/operations/upgrade.py:138
+#: pisi/operations/install.py:76 pisi/operations/upgrade.py:140
 msgid "Total size of package(s): %.2f %s"
 msgstr ""
 
-#: pisi/operations/install.py:107 pisi/operations/upgrade.py:170
+#: pisi/operations/install.py:107 pisi/operations/upgrade.py:172
 msgid "Installing %d / %d"
 msgstr ""
 
@@ -2426,7 +2426,7 @@ msgstr ""
 msgid "Safety switch: cannot remove the following packages in system.base: "
 msgstr ""
 
-#: pisi/operations/remove.py:48 pisi/operations/upgrade.py:254
+#: pisi/operations/remove.py:48 pisi/operations/upgrade.py:256
 msgid "Safety switch: the component system.base cannot be found"
 msgstr ""
 
@@ -2476,35 +2476,35 @@ msgstr ""
 msgid "Package %s is not available in repositories."
 msgstr ""
 
-#: pisi/operations/upgrade.py:79
+#: pisi/operations/upgrade.py:81
 msgid "Package %s is already at the latest release %s."
 msgstr ""
 
-#: pisi/operations/upgrade.py:85
+#: pisi/operations/upgrade.py:87
 msgid "Package %s is already at the latest build %s."
 msgstr ""
 
-#: pisi/operations/upgrade.py:133
+#: pisi/operations/upgrade.py:135
 msgid "The following packages will be upgraded: "
 msgstr ""
 
-#: pisi/operations/upgrade.py:204
+#: pisi/operations/upgrade.py:206
 msgid "Dependency %s of %s cannot be satisfied"
 msgstr ""
 
-#: pisi/operations/upgrade.py:205
+#: pisi/operations/upgrade.py:207
 msgid "Upgrade is not possible."
 msgstr ""
 
-#: pisi/operations/upgrade.py:221
+#: pisi/operations/upgrade.py:223
 msgid "Reverse dependency %s of %s cannot be satisfied"
 msgstr ""
 
-#: pisi/operations/upgrade.py:242
+#: pisi/operations/upgrade.py:244
 msgid "Safety switch: Following packages in system.base will be installed: "
 msgstr ""
 
-#: pisi/operations/upgrade.py:248
+#: pisi/operations/upgrade.py:250
 msgid "Safety switch: Following packages in system.base will be upgraded: "
 msgstr ""
 
@@ -2698,27 +2698,27 @@ msgstr ""
 msgid "Cannot calculate SHA1 hash of %s"
 msgstr ""
 
-#: pisi/util.py:472
+#: pisi/util.py:475
 msgid "ERROR: patch (%s) failed"
 msgstr ""
 
-#: pisi/util.py:474
+#: pisi/util.py:477
 msgid "ERROR: patch (%s) failed: %s"
 msgstr ""
 
-#: pisi/util.py:484
+#: pisi/util.py:487
 msgid "strip command failed for file '%s'!"
 msgstr ""
 
-#: pisi/util.py:491
+#: pisi/util.py:494
 msgid "chrpath command failed for file '%s'!"
 msgstr ""
 
-#: pisi/util.py:498
+#: pisi/util.py:501
 msgid "objcopy (keep-debug) command failed for file '%s'!"
 msgstr ""
 
-#: pisi/util.py:504
+#: pisi/util.py:507
 msgid "objcopy (add-debuglink) command failed for file '%s'!"
 msgstr ""
 
