@@ -146,14 +146,14 @@ def doman(*sourceFiles):
             else:
                 uncompress(compressed, targetDir=manPDIR)
 
-def domo(sourceFile, locale, destinationFile ):
+def domo(sourceFile, locale, destinationFile, localeDirPrefix = '/usr/share/locale'):
     '''inserts the mo files in the list of files into /usr/share/locale/LOCALE/LC_MESSAGES'''
 
     '''example call: pisitools.domo("po/tr.po", "tr", "pam_login.mo")'''
 
     system('msgfmt %s' % sourceFile)
-    makedirs('%s/usr/share/locale/%s/LC_MESSAGES/' % (get.installDIR(), locale))
-    move('messages.mo', '%s/usr/share/locale/%s/LC_MESSAGES/%s' % (get.installDIR(), locale, destinationFile))
+    makedirs('%s%s/%s/LC_MESSAGES/' % (get.installDIR(), localeDirPrefix, locale))
+    move('messages.mo', '%s%s/%s/LC_MESSAGES/%s' % (get.installDIR(), localeDirPrefix, locale, destinationFile))
 
 def domove(sourceFile, destination, destinationFile = ''):
     '''moves sourceFile/Directory into destinationFile/Directory'''
