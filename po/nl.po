@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "POT-Creation-Date: 2009-07-01 12:06+EEST\n"
-"PO-Revision-Date: 2009-07-05 00:22+0200\n"
+"PO-Revision-Date: 2009-07-05 00:28+0200\n"
 "Last-Translator: Willem Gielen <w.gielen@gmail.com>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1055,7 +1055,6 @@ msgid "delta options"
 msgstr "delta opties"
 
 #: pisi/cli/disablerepo.py:24
-#, fuzzy
 msgid ""
 "Disable repository\n"
 "\n"
@@ -1065,15 +1064,13 @@ msgid ""
 "\n"
 "Disabled repositories are not taken into account in operations\n"
 msgstr ""
-"Update repository databases\n"
+"Schakel repositorie uit\n"
 "\n"
-"Gebruik: update-repo [<repo1> <repo2> ... <repon>]\n"
+"Gebruik: disable-repo [<repo1> <repo2> ... <repon>]\n"
 "\n"
 "<repoi>: repositorynaam\n"
 "\n"
-"Synchroniseert de PiSi-databases met de huidige repository.\n"
-"Indien geen repository is opgegeven worden alle repositories\n"
-"opgewaardeerd.\n"
+"Uitgeschakelde repositories worden niet meengenomen in de handeling\n"
 
 #: pisi/cli/emerge.py:25
 msgid ""
@@ -1116,7 +1113,6 @@ msgid "Outputting binary packages in the package cache."
 msgstr "Uitvoeren binaire pakketten naar de pakketcache."
 
 #: pisi/cli/enablerepo.py:24
-#, fuzzy
 msgid ""
 "Enable repository\n"
 "\n"
@@ -1126,15 +1122,13 @@ msgid ""
 "\n"
 "Disabled repositories are not taken into account in operations\n"
 msgstr ""
-"Update repository databases\n"
+"Schakel repositorie in\n"
 "\n"
-"Gebruik: update-repo [<repo1> <repo2> ... <repon>]\n"
+"Gebruik: enable-repo [<repo1> <repo2> ... <repon>]\n"
 "\n"
 "<repoi>: repositorynaam\n"
 "\n"
-"Synchroniseert de PiSi-databases met de huidige repository.\n"
-"Indien geen repository is opgegeven worden alle repositories\n"
-"opgewaardeerd.\n"
+"\n"
 
 #: pisi/cli/graph.py:26
 msgid ""
@@ -1662,11 +1656,11 @@ msgstr ""
 
 #: pisi/cli/listrepo.py:40
 msgid "active"
-msgstr ""
+msgstr "actief"
 
 #: pisi/cli/listrepo.py:40
 msgid "inactive"
-msgstr ""
+msgstr "inactief"
 
 #: pisi/cli/listsources.py:24
 msgid ""
@@ -2095,9 +2089,8 @@ msgid "Component %s not found"
 msgstr "Component %s niet gevonden"
 
 #: pisi/db/groupdb.py:66 pisi/db/groupdb.py:75
-#, fuzzy
 msgid "Group %s not found"
-msgstr "Component %s niet gevonden"
+msgstr "Groep %s niet gevonden"
 
 #: pisi/db/installdb.py:37
 msgid "installed"
@@ -2590,9 +2583,8 @@ msgid "Remove the following conflicting packages?"
 msgstr "De volgende pakketten met conflicten verwijderen?"
 
 #: pisi/operations/helper.py:63
-#, fuzzy
 msgid "Conflicting packages should be removed to continue"
-msgstr "Volgende pakketen zullen worden verwijderd:\n"
+msgstr "Conflicterende pakketten dienen verwijderd te worden om door te kunnen gaan"
 
 #: pisi/operations/history.py:86 pisi/operations/history.py:96
 msgid "%s could not be found"
