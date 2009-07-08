@@ -150,7 +150,7 @@ def dumpVersion():
     if not os.path.exists(destination):
         os.makedirs(destination)
 
-    open(os.path.join(destination, get.srcNAME()), "w").write("%s-%s" % (get.srcVERSION(), get.srcRELEASE()))
+    open(os.path.join(destination, get.srcNAME()), "w").write(__getSuffix())
 
 def build(debugSymbols=False):
     extra_config = ["CONFIG_DEBUG_SECTION_MISMATCH=y"]
