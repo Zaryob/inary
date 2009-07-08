@@ -28,7 +28,6 @@ import pisi.actionsapi.autotools    as autotools
 import pisi.actionsapi.pisitools    as pisitools
 import pisi.actionsapi.shelltools   as shelltools
 
-DEFAULT_FLAVOURS = ["pae"]
 
 class ConfigureError(pisi.actionsapi.Error):
     def __init__(self, value=''):
@@ -39,28 +38,8 @@ class ConfigureError(pisi.actionsapi.Error):
 # Internal helpers
 
 def __getAllSupportedFlavours():
-    pass
-
-def __get_workdir_for_module(mod):
-    mod = mod.split("module-")[1]
-
-    # Now we have something like alsa-driver or alsa-driver-pae. We also have
-    # to strip a possible flavour name at the end..
-    for f in __getAllSupportedFlavours():
-        if mod.endswith("-%s" % f):
-            mod = mod.split("-%s" % f)[0]
-            break
-
-    return "%s-%s" % (mod, get.srcVERSION())
-
-#####
-# Set WorkDir for kernel modules
-#####
-
-def setModuleWorkDIR():
-    if get.srcNAME().startswith("module-"):
-        globals()['WorkDir'] = __get_workdir_for_module(get.srcNAME())
-
+    if os.path.exists("/etc/kernel"):
+        return os.listdir("/etc/kernel")
 
 #################
 # Other helpers #
@@ -74,6 +53,13 @@ def __getFlavour():
         pass
 
     return flavour
+
+def __getModuleFlavour():
+    for fl in [_f for _f in __getAllSupportedFlavours() if "-" in _f]:
+        if fl.split("-")[1] == get.srcNAME().split("-")[1]:
+            return fl
+
+    return "kernel"
 
 def __getSuffix():
     # Set suffix, e.g. "2.6.30_rc7-119"
@@ -112,11 +98,12 @@ def getKernelVersion(flavour=None):
     # if flavour==None, it will return the KVER in the /etc/kernel/kernel file else,
     # /etc/kernel/<flavour>.
     # If it fails, it will return the running kernel version.
-    kverfile = "/etc/kernel"
-    if flavour:
-        kverfile = os.path.join(kverfile, flavour)
-    else:
-        kverfile = os.path.join(kverfile, "kernel")
+
+    # Try to detect module flavour
+    if not flavour:
+        flavour = __getModuleFlavour()
+
+    kverfile = os.path.join("/etc/kernel", flavour)
 
     if os.path.exists(kverfile):
         return open(kverfile, "r").read().strip()
