@@ -273,6 +273,7 @@ class Install(AtomicOperation):
             self.old_path = self.installdb.pkg_dir(pkg.name, iversion, irelease)
             self.remove_old = Remove(pkg.name)
             self.remove_old.run_preremove()
+            self.remove_old.run_postremove()
 
     def reinstall(self):
         return not self.operation == INSTALL
