@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-01 12:06+EEST\n"
+"POT-Creation-Date: 2009-07-09 15:48+EEST\n"
 "PO-Revision-Date: 2006-04-08 12:19+0900\n"
 "Last-Translator: Piotr Maliński <riklaunim@gmail.com>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -123,7 +123,7 @@ msgstr ""
 "Prosimy o dołączenie do raportu o błędzie pliku config.log:\n"
 "%s/config.log"
 
-#: pisi/actionsapi/kerneltools.py:125
+#: pisi/actionsapi/kerneltools.py:112
 msgid "Can't find kernel version information file %s."
 msgstr ""
 
@@ -496,34 +496,34 @@ msgstr "OK."
 msgid "Package %s found in repository %s"
 msgstr "Pakiet %s znaleziono w repozytorium %s"
 
-#: pisi/atomicoperations.py:102
+#: pisi/atomicoperations.py:104
 msgid "Package URI: %s"
 msgstr "URI pakietu: %s"
 
-#: pisi/atomicoperations.py:114
+#: pisi/atomicoperations.py:116
 msgid "Download Error: Package does not match the repository package."
 msgstr ""
 
-#: pisi/atomicoperations.py:118
+#: pisi/atomicoperations.py:120
 msgid "Package %s not found in any active repository."
 msgstr "Pakiet %s nie została znaleziona w żadnym z aktywnym repozytoriów."
 
-#: pisi/atomicoperations.py:140
+#: pisi/atomicoperations.py:142
 msgid "Installing %s, version %s, release %s, build %s"
 msgstr "Instalowanie %s, wersja %s, wydanie %s, build %s"
 
-#: pisi/atomicoperations.py:184
+#: pisi/atomicoperations.py:186
 msgid "%s package cannot be installed unless the dependencies are satisfied"
 msgstr ""
 "%s pakiet nie może zostać zainstalowany, dopóki nie zostaną spełnione "
 "zależności"
 
-#: pisi/atomicoperations.py:208
+#: pisi/atomicoperations.py:210
 #, fuzzy
 msgid "/%s from %s package\n"
 msgstr "/%s z pakietu %s"
 
-#: pisi/atomicoperations.py:209
+#: pisi/atomicoperations.py:211
 msgid ""
 "File conflicts:\n"
 "%s"
@@ -531,71 +531,71 @@ msgstr ""
 "Konflikt plików:\n"
 "%s"
 
-#: pisi/atomicoperations.py:238
+#: pisi/atomicoperations.py:240
 msgid "Re-install same version package?"
 msgstr "Reinstalować pakiet o tej samej wersji? "
 
-#: pisi/atomicoperations.py:239
+#: pisi/atomicoperations.py:241
 msgid "Package re-install declined"
 msgstr "Reinstalowanie pakietu anulowane"
 
-#: pisi/atomicoperations.py:245
+#: pisi/atomicoperations.py:247
 msgid "Upgrading to new upstream version"
 msgstr "Aktualizacja do nowszej wersji"
 
-#: pisi/atomicoperations.py:248
+#: pisi/atomicoperations.py:250
 msgid "Upgrading to new distribution release"
 msgstr "Aktualizacja do nowego wydania dystrybucji"
 
-#: pisi/atomicoperations.py:252
+#: pisi/atomicoperations.py:254
 msgid "Upgrading to new distribution build"
 msgstr "Aktualizacja do nowej wersji build dystrybucji"
 
-#: pisi/atomicoperations.py:261
+#: pisi/atomicoperations.py:263
 msgid "Downgrade to old distribution release?"
 msgstr "Aktualizować do starszego wydania dystrybucji?"
 
-#: pisi/atomicoperations.py:263
+#: pisi/atomicoperations.py:265
 msgid "Downgrade to old distribution build?"
 msgstr "Aktualizować do starszej wersji build dystrybucji?"
 
-#: pisi/atomicoperations.py:265
+#: pisi/atomicoperations.py:267
 msgid "Package downgrade declined"
 msgstr "Aktualizacja pakietu do starszej wersji anulowana"
 
-#: pisi/atomicoperations.py:303
+#: pisi/atomicoperations.py:305
 msgid "%s configuration failed."
 msgstr "%s konfiguracja nie powiodła się"
 
-#: pisi/atomicoperations.py:419
+#: pisi/atomicoperations.py:421
 msgid "Storing %s, "
 msgstr "Gromadzenie %s, "
 
-#: pisi/atomicoperations.py:422
+#: pisi/atomicoperations.py:424
 msgid "Storing %s."
 msgstr "Gromadzenie %s."
 
-#: pisi/atomicoperations.py:429
+#: pisi/atomicoperations.py:431
 msgid "Storing %s"
 msgstr "Gromadzenie %s"
 
-#: pisi/atomicoperations.py:483
+#: pisi/atomicoperations.py:485
 msgid "File list could not be read for package %s, continuing removal."
 msgstr "Nie można przeczytać listy plików dla pakietu %s, kontynuuje usuwanie"
 
-#: pisi/atomicoperations.py:489
+#: pisi/atomicoperations.py:491
 msgid "Removing package %s"
 msgstr "Usuwanie pakietu %s"
 
-#: pisi/atomicoperations.py:492
+#: pisi/atomicoperations.py:494
 msgid "Trying to remove nonexistent package "
 msgstr "Próba usunięcia nieistniejącego pakietu "
 
-#: pisi/atomicoperations.py:533
+#: pisi/atomicoperations.py:535
 msgid "Not removing conflicted file : %s"
 msgstr "Nie usuwam kolidującego pliku : %s"
 
-#: pisi/atomicoperations.py:561
+#: pisi/atomicoperations.py:563
 #, fuzzy
 msgid ""
 "Installed file %s does not exist on system [Probably you manually deleted]"
@@ -723,7 +723,7 @@ msgid "build options"
 msgstr ""
 
 #: pisi/cli/build.py:54 pisi/cli/install.py:49 pisi/cli/listupgrades.py:46
-#: pisi/cli/upgrade.py:58
+#: pisi/cli/upgrade.py:57
 msgid "Do not take build no into account."
 msgstr ""
 
@@ -1012,11 +1012,11 @@ msgstr ""
 msgid "Emerge available packages under given component"
 msgstr ""
 
-#: pisi/cli/emerge.py:49 pisi/cli/install.py:53 pisi/cli/upgrade.py:64
+#: pisi/cli/emerge.py:49 pisi/cli/install.py:53 pisi/cli/upgrade.py:63
 msgid "Ignore file conflicts"
 msgstr ""
 
-#: pisi/cli/emerge.py:51 pisi/cli/install.py:55 pisi/cli/upgrade.py:66
+#: pisi/cli/emerge.py:51 pisi/cli/install.py:55 pisi/cli/upgrade.py:65
 msgid "Ignore package conflicts"
 msgstr ""
 
@@ -1320,7 +1320,7 @@ msgstr ""
 msgid "Name of the component's repository"
 msgstr ""
 
-#: pisi/cli/install.py:61 pisi/cli/upgrade.py:72
+#: pisi/cli/install.py:61 pisi/cli/upgrade.py:71
 msgid "Fetch upgrades but do not install."
 msgstr ""
 
@@ -1691,43 +1691,43 @@ msgid ""
 "expanded to package names.\n"
 msgstr ""
 
-#: pisi/cli/upgrade.py:53
+#: pisi/cli/upgrade.py:52
 msgid "upgrade options"
 msgstr ""
 
-#: pisi/cli/upgrade.py:60
+#: pisi/cli/upgrade.py:59
 msgid "Security related package upgrades only"
 msgstr ""
 
-#: pisi/cli/upgrade.py:62
+#: pisi/cli/upgrade.py:61
 msgid "Do not update repositories"
 msgstr ""
 
-#: pisi/cli/upgrade.py:68
+#: pisi/cli/upgrade.py:67
 msgid "Upgrade component's and recursive components' packages"
 msgstr ""
 
-#: pisi/cli/upgrade.py:70
+#: pisi/cli/upgrade.py:69
 msgid "Name of the to be upgraded packages' repository"
 msgstr ""
 
-#: pisi/cli/upgrade.py:74
+#: pisi/cli/upgrade.py:73
 msgid ""
 "When upgrading system, ignore packages and components whose basenames match "
 "pattern."
 msgstr ""
 
-#: pisi/cli/upgrade.py:76
+#: pisi/cli/upgrade.py:75
 msgid ""
 "When upgrading system, ignore packages and components whose "
 "basenames                      match any pattern contained in file."
 msgstr ""
 
-#: pisi/cli/upgrade.py:89
+#: pisi/cli/upgrade.py:88
 msgid "Updating repositories"
 msgstr ""
 
-#: pisi/cli/upgrade.py:93
+#: pisi/cli/upgrade.py:92
 msgid "Will not update repositories"
 msgstr ""
 
