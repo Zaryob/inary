@@ -7,13 +7,14 @@
 # Mustafa Ölcerman <m.oelcerman@pardus-linux.de>, 2008, 2009.
 # Klemens Häckel <click3d_at_linuxmail_org>, 2008, 2009.
 # Stefan Wilhelm <sw1976de at googlemail dot com>, 2009.
+# Heiko Pardus Translator <miltonjohn@web.de>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "POT-Creation-Date: 2009-07-01 14:17+EEST\n"
-"PO-Revision-Date: 2009-07-01 23:13+0100\n"
+"PO-Revision-Date: 2009-07-09 03:23+0100\n"
 "Last-Translator: Stefan <sw1976de@googlemail.com>\n"
-"Language-Team: Deutsch <pardus-translation-de@pardus.org.tr>\n"
+"Language-Team: Deutsch <pardus-translators@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -33,12 +34,12 @@ msgid ""
 "Unhandled internal exception.\n"
 "Please file a bug report. (http://bugs.pardus.org.tr)"
 msgstr ""
-"Unbehandelte interene Fehlermeldung.\n"
+"Unbehandelte interne Ausnahme.\n"
 "Bitte senden Sie einen Fehler-Bericht. (http://bugs.pardus.org.tr)"
 
 #: pisi-cli:54
 msgid "System Error. Program Terminated."
-msgstr "System-Fehler. Programm terminiert."
+msgstr "Systemfehler. Programm terminiert."
 
 #: pisi-cli:61
 msgid "Please use 'pisi help' for general help."
@@ -434,7 +435,7 @@ msgstr "Sie müssen für diesen Vorgang root sein."
 
 #: pisi/api.py:66
 msgid "Another instance of PiSi is running. Only one instance is allowed."
-msgstr "Eine nadere Instanz von PiSi wird ausgeführt. Es ist nur eine Instanz erlaubt."
+msgstr "Eine andere Instanz von PiSi wird ausgeführt. Es ist nur eine Instanz erlaubt."
 
 #: pisi/api.py:494
 msgid "Taking snapshot of the system"
@@ -450,7 +451,7 @@ msgstr "Datei %s nicht gefunden"
 
 #: pisi/api.py:667
 msgid "* Building index of PiSi files under %s"
-msgstr "* Index von PiSi-Dateien unteeer %s werden konstruiert"
+msgstr "* Index von PiSi-Dateien unter %s werden konstruiert"
 
 #: pisi/api.py:674
 msgid "* Index file written"
@@ -458,7 +459,7 @@ msgstr "* Index-Datei geschrieben"
 
 #: pisi/api.py:679
 msgid "Not a valid repo name."
-msgstr "Kein gültiger Depotsname."
+msgstr "Kein gültiger Depotname."
 
 #: pisi/api.py:682
 msgid "Repo %s already present."
@@ -490,7 +491,7 @@ msgstr "%s-Depot-Information ist aktuell."
 
 #: pisi/api.py:729
 msgid "Updating database at any rate as requested"
-msgstr "Datenbank wird wunschgemäss auf jeden Fall aktualisiert"
+msgstr "Datenbank wird wunschgemäss aktualisiert"
 
 #: pisi/api.py:739
 msgid "* Package database updated."
@@ -547,11 +548,11 @@ msgstr ""
 
 #: pisi/atomicoperations.py:238
 msgid "Re-install same version package?"
-msgstr "Selbe Paket-Version erneut installieren?"
+msgstr "Gleiche Paket-Version erneut installieren?"
 
 #: pisi/atomicoperations.py:239
 msgid "Package re-install declined"
-msgstr "Erneute Installation des Paketes ist abgelehnt worden"
+msgstr "Erneute Installation des Paketes wird abgelehnt"
 
 #: pisi/atomicoperations.py:245
 msgid "Upgrading to new upstream version"
@@ -798,7 +799,7 @@ msgstr "Verwende Quilt Patch-Management-System anstelle von GNU Patch"
 
 #: pisi/cli/build.py:74
 msgid "Do not constrain build process inside the build folder"
-msgstr "Den Build-Prozess nicht in den Build-Ordner beschränlen"
+msgstr "Den Build-Prozess nicht auf den Build-Ordner beschränken"
 
 #: pisi/cli/build.py:77
 msgid "build steps"
@@ -957,7 +958,7 @@ msgstr "Ändere für die PiSi-Befehle das System-Root(wurzel)-Verzeichnis"
 
 #: pisi/cli/command.py:101
 msgid "Assume yes in all yes/no queries"
-msgstr "Alle Abfragen mit ja/nein mit ja annehmen"
+msgstr "Alle JA/Nein-Abfragen mit ja annehmen"
 
 #: pisi/cli/command.py:105
 msgid "Keep bandwidth usage under specified KB's"
@@ -986,7 +987,7 @@ msgstr "Passwort:"
 
 #: pisi/cli/command.py:192
 msgid "Command terminated abnormally."
-msgstr "Befehl unzulässig beendet."
+msgstr "Befehl unzulässig - beende."
 
 #: pisi/cli/command.py:207
 #: pisi/cli/emerge.py:53
@@ -1205,7 +1206,7 @@ msgid ""
 "\n"
 "If run without parameters, it prints the general help."
 msgstr ""
-"Zeit die Hilfe für Kommandos an\n"
+"Zeigt die Hilfe für Kommandos an\n"
 "\n"
 "Syntax: help [ <command_1> <command_2> ... <command_n> ]\n"
 "\n"
@@ -1696,11 +1697,11 @@ msgid ""
 "\n"
 "Lists the packages that will be upgraded.\n"
 msgstr ""
-"List packages to be upgraded\n"
+"Liste upgradebare Pakete auf\n"
 "\n"
 "Usage: list-upgrades\n"
 "\n"
-"Lists the packages that will be upgraded.\n"
+"Listet die upgradebaren Pakte auf.\n"
 
 #: pisi/cli/listupgrades.py:43
 msgid "list-upgrades options"
@@ -1717,7 +1718,7 @@ msgstr "Es gibt keine Pakete zu aktualisieren."
 
 #: pisi/cli/pisicli.py:85
 msgid "Options must precede non-option arguments"
-msgstr "Die Optionen mussen vor dem Hauptargument aufgeführt sein"
+msgstr "Die Optionen müssen vor dem Hauptargument aufgeführt sein"
 
 #: pisi/cli/pisicli.py:126
 msgid "No command given"
@@ -1936,7 +1937,7 @@ msgstr ""
 "Falls man einen Paketnamen angegeben hat,  sollte er auch im Depot\n"
 "vorhanden sein. Falls man ein Paket erneut installieren will,nutzen Sie bitte das install-Kommando.\n"
 "\n"
-"Man kann auch Komonenten des Namens angeben, welche anschließend  zum\n"
+"Man kann auch Komponenten des Namens angeben, welche anschließend  zum\n"
 "Paketnamen erweitert werden.\n"
 
 #: pisi/cli/upgrade.py:53
@@ -2054,7 +2055,7 @@ msgstr "Zielverzeichnis %s existiert nicht. Wird neu erstellt."
 
 #: pisi/configfile.py:126
 msgid "No section by name '%s'"
-msgstr "Kein Abschnitt mi Namen '%s' "
+msgstr "Kein Abschnitt mit Namen '%s' "
 
 #: pisi/conflict.py:26
 #: pisi/dependency.py:26
@@ -2875,7 +2876,7 @@ msgstr "Listentyp darf nur ein Element enthalten"
 #: pisi/pxml/autoxml.py:759
 #: pisi/pxml/autoxml.py:780
 msgid "Mandatory list \"%s\" under \"%s\" node is empty."
-msgstr "Obligatirische Liste \"%s\" unter Knoten \"%s\" ist leer."
+msgstr "Obligatorische Liste \"%s\" unter Knoten \"%s\" ist leer."
 
 #: pisi/pxml/xmlext.py:79
 msgid "getNodeText: Expected text node, got something else!"
@@ -3059,19 +3060,4 @@ msgstr "Suche im Quellcode - Depot...\n"
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr "Suche im Binär - Depot...\n"
-
-#~ msgid "Adding %s to component index"
-#~ msgstr "%s wird zum Komponente-Index hinzugefügt"
-#~ msgid "Package %s is not present in the package database"
-#~ msgstr "Paket %s ist nicht in der Paketdatenbank enthalten"
-#~ msgid "Stripping files.."
-#~ msgstr "Dateien werden abgelöst.."
-#~ msgid "dbus-python package is not fully installed"
-#~ msgstr "Paket dbus-Python wurde nicht vollständig installiert"
-#~ msgid "Configuring %s package for removal"
-#~ msgstr "Konfiguriere Paket %s zum entfernen"
-#~ msgid "ActionsAPI [rename]: No such file or directory: %s"
-#~ msgstr "ActionsAPI [rename]: Kein derartige Datei oder Verzeichnis: %s"
-#~ msgid "Skipping %s with wrong pkg name "
-#~ msgstr "Überspringe %s mit falschen pkg-Namen"
 
