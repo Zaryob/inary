@@ -31,6 +31,7 @@ class Singleton(object):
         return self._the_instances[type(self).__name__]
 
     def _delete(self):
+        #FIXME: After invalidate, previously initialized db object becomes stale
         del self._the_instances[type(self).__name__]
 
 class LazyDB(Singleton):

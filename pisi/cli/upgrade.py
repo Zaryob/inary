@@ -45,7 +45,6 @@ expanded to package names.
 
     def __init__(self, args):
         super(Upgrade, self).__init__(args)
-        self.componentdb = pisi.db.componentdb.ComponentDB()
 
     name = ("upgrade", "up")
 
@@ -96,12 +95,13 @@ expanded to package names.
         components = ctx.get_option('component')
         packages = []
         if components:
+            componentdb = pisi.db.componentdb.ComponentDB()
             for name in components:
-                if self.componentdb.has_component(name):
+                if componentdb.has_component(name):
                     if repository:
-                        packages.extend(self.componentdb.get_packages(name, walk=True, repo=repository))
+                        packages.extend(componentdb.get_packages(name, walk=True, repo=repository))
                     else:
-                        packages.extend(self.componentdb.get_union_packages(name, walk=True))
+                        packages.extend(componentdb.get_union_packages(name, walk=True))
         packages.extend(self.args)
 
         packages = pisi.blacklist.exclude_from(packages, ctx.const.blacklist)
