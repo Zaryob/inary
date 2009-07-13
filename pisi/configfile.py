@@ -32,7 +32,7 @@
 #LDFLAGS= -Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common
 #buildno=True     # necessary for generating build nos
 #buildhelper = None / ccache / icecream
-#compressionlevel = 7
+#compressionlevel = 1
 #fallback = "ftp://ftp.pardus.org.tr/pub/source/2009"
 #
 #[directories]
@@ -89,7 +89,7 @@ class BuildDefaults:
     ldflags = "-Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common"
     buildno = False
     buildhelper = None
-    compressionlevel = 7
+    compressionlevel = 1
     fallback = "ftp://ftp.pardus.org.tr/pub/source/2009"
 
 class DirectoriesDefaults:
