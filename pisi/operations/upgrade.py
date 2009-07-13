@@ -181,6 +181,11 @@ def plan_upgrade(A):
 
     G_f = pgraph.PGraph(packagedb)               # construct G_f
 
+    replaces = packagedb.get_replaces()
+    # Force upgrading of installed but replaced packages or else they will be removed (they are obsoleted also).
+    # This is not wanted for a replaced driver package (eg. nvidia-X).
+    A = set(A) | set(replaces.values())
+
     # find the "install closure" graph of G_f by package
     # set A using packagedb
     for x in A:
