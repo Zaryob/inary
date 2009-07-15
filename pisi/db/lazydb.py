@@ -11,7 +11,6 @@
 #
 
 import os
-import time
 import stat
 import cPickle
 import time
