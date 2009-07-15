@@ -60,8 +60,7 @@ class LazyDB(Singleton):
             return False
         cache_modified = os.stat(self.__cache_file()).st_mtime
         cache_dir_modified = os.stat(self.cachedir).st_mtime
-        valid = cache_modified > cache_dir_modified
-        return valid
+        return cache_modified > cache_dir_modified
 
     def cache_load(self):
         if os.path.exists(self.__cache_file()) and self.cache_valid():
