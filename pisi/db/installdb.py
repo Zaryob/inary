@@ -65,7 +65,7 @@ class InstallInfo:
 class InstallDB(lazydb.LazyDB):
 
     def __init__(self):
-        lazydb.LazyDB.__init__(self, cacheable=True)
+        lazydb.LazyDB.__init__(self, cacheable=True, cachedir=ctx.config.packages_dir())
 
     def init(self):
         self.installed_db = self.__generate_installed_pkgs()

@@ -11,6 +11,8 @@
 #
 
 import os
+import time
+import stat
 import cPickle
 import time
 import pisi.context as ctx
@@ -35,10 +37,11 @@ class Singleton(object):
         del self._the_instances[type(self).__name__]
 
 class LazyDB(Singleton):
-    def __init__(self, cacheable=False):
+    def __init__(self, cacheable=False, cachedir=None):
         if not self.__dict__.has_key("initialized"):
             self.initialized = False
         self.cacheable = cacheable
+        self.cachedir = cachedir
 
     def is_initialized(self):
         return self.initialized
@@ -51,8 +54,18 @@ class LazyDB(Singleton):
             cPickle.dump(self._instance().__dict__,
                          file(self.__cache_file(), 'wb'), 1)
 
+    def cache_valid(self):
+        if not self.cachedir:
+            return True
+        if not os.path.exists(self.cachedir):
+            return False
+        cache_modified = os.stat(self.__cache_file()).st_mtime
+        cache_dir_modified = os.stat(self.cachedir).st_mtime
+        valid = cache_modified > cache_dir_modified
+        return valid
+
     def cache_load(self):
-        if os.path.exists(self.__cache_file()):
+        if os.path.exists(self.__cache_file()) and self.cache_valid():
             try:
                 self._instance().__dict__ = cPickle.load(file(self.__cache_file(), 'rb'))
                 return True
