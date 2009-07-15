@@ -1311,6 +1311,15 @@
         </element>
     </define>
 
+    <!-- AnyDependency -->
+    <define name="AnyDependency">
+        <element name="AnyDependency">
+            <oneOrMore>
+                <ref name="Dependency"/>
+            </oneOrMore>
+        </element>
+    </define>
+
     <!-- attlist.VersionReleaseToFrom -->
     <define name="attlist.VersionReleaseToFrom">
         <group>
@@ -1454,9 +1463,22 @@
     <!-- RuntimeDependencies -->
     <define name="RuntimeDependencies">
         <element name="RuntimeDependencies">
-            <oneOrMore>
-                <ref name="Dependency"/>
-            </oneOrMore>
+            <choice>
+                <oneOrMore>
+                    <ref name="AnyDependency"/>
+                </oneOrMore>
+                <oneOrMore>
+                    <ref name="Dependency"/>
+                </oneOrMore>
+                <group>
+                    <oneOrMore>
+                        <ref name="AnyDependency"/>
+                    </oneOrMore>
+                    <oneOrMore>
+                        <ref name="Dependency"/>
+                    </oneOrMore>
+                </group>
+            </choice>
         </element>
     </define>
 
