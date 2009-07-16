@@ -67,9 +67,10 @@ def locked(func):
 
         try:
             pisi.db.invalidate_caches()
-            return func(*__args,**__kw)
-        finally:
+            ret = func(*__args,**__kw)
             pisi.db.update_caches()
+            return ret
+        finally:
             lock.close()
     return wrapper
 
