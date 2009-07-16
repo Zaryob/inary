@@ -105,6 +105,8 @@ def calculate_download_sizes(order):
         # check the file and sha1sum to be sure it _is_ the cached package
         if os.path.exists(path) and util.sha1_file(path) == pkg_hash:
             cached_size += pkg_size
+        elif os.path.exists("%s.part" % path):
+            cached_size += os.stat("%s.part" % path).st_size
 
         total_size += pkg_size
 
