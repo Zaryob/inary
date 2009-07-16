@@ -53,7 +53,7 @@ def safe_package_name(package):
 
 def get_link():
     """Connect to the COMAR daemon and return the link."""
-    
+
     sockname = "/var/run/dbus/system_bus_socket"
     # YALI starts comar chrooted in the install target, but uses PiSi outside of
     # the chroot environment, so PiSi needs to use a different socket path to be
@@ -61,14 +61,14 @@ def get_link():
     # (usually /var/run/dbus/system_bus_socket)
     if ctx.dbus_sockname:
         sockname = ctx.dbus_sockname
-    
+
     alternate = False
     # If COMAR package is updated, all new configuration requests should be
     # made through new COMAR service. Passing alternate=True to Link() class
     # will ensure this.
     if ctx.comar_updated:
         alternate = True
-    
+
     # This function is sometimes called when comar has recently started
     # or restarting after an update. So we give comar a chance to become
     # active in a reasonable time.
@@ -89,19 +89,19 @@ def get_link():
 
 def post_install(package_name, provided_scripts, scriptpath, metapath, filepath, fromVersion, fromRelease, toVersion, toRelease):
     """Do package's post install operations"""
-    
+
     ctx.ui.info(_("Configuring %s package") % package_name)
     self_post = False
     sys_service = False
-    
+
     package_name = safe_package_name(package_name)
-    
+
     if package_name == 'comar':
         ctx.ui.debug(_("COMAR package updated. From now on, using new COMAR daemon."))
         pisi.api.set_comar_updated(True)
-    
+
     link = get_link()
-    
+
     for script in provided_scripts:
         ctx.ui.debug(_("Registering %s comar script") % script.om)
         if script.om == "System.Package":
@@ -117,7 +117,7 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath,
                 link.System.Service[package_name].registerState()
             except dbus.DBusException, exception:
                 raise Error, _("Script error: %s") % exception
-    
+
     ctx.ui.debug(_("Calling post install handlers"))
     for handler in link.System.PackageHandler:
         try:
@@ -126,13 +126,13 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath,
             # Do nothing if setupPackage method is not defined in package script
             if not is_method_missing(exception):
                 raise Error, _("Script error: %s") % exception
-    
+
     if self_post:
         if not fromVersion:
             fromVersion = ""
         if not fromRelease:
             fromRelease = ""
-        
+
         ctx.ui.debug(_("Running package's post install script"))
         try:
             link.System.Package[package_name].postInstall(fromVersion, fromRelease, toVersion, toRelease, timeout=ctx.dbus_timeout)
@@ -143,12 +143,12 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath,
 
 def pre_remove(package_name, metapath, filepath):
     """Do package's pre removal operations"""
-    
+
     ctx.ui.info(_("Running pre removal operations for %s") % package_name)
     link = get_link()
-    
+
     package_name = safe_package_name(package_name)
-    
+
     if package_name in list(link.System.Package):
         ctx.ui.debug(_("Running package's pre remove script"))
         try:
@@ -157,7 +157,7 @@ def pre_remove(package_name, metapath, filepath):
             # Do nothing if preRemove method is not defined in package script
             if not is_method_missing(exception):
                 raise Error, _("Script error: %s") % exception
-    
+
     ctx.ui.debug(_("Calling pre remove handlers"))
     for handler in list(link.System.PackageHandler):
         try:
@@ -169,12 +169,12 @@ def pre_remove(package_name, metapath, filepath):
 
 def post_remove(package_name, metapath, filepath):
     """Do package's post removal operations"""
-    
+
     ctx.ui.info(_("Running post removal operations for %s") % package_name)
     link = get_link()
-    
+
     package_name = safe_package_name(package_name)
-    
+
     if package_name in list(link.System.Package):
         ctx.ui.debug(_("Running package's postremove script"))
         try:
@@ -183,7 +183,7 @@ def post_remove(package_name, metapath, filepath):
             # Do nothing if postRemove method is not defined in package script
             if not is_method_missing(exception):
                 raise Error, _("Script error: %s") % exception
-    
+
     ctx.ui.debug(_("Calling post remove handlers"))
     for handler in list(link.System.PackageHandler):
         try:
@@ -192,7 +192,7 @@ def post_remove(package_name, metapath, filepath):
             # Do nothing if postCleanupPackage method is not defined in package script
             if not is_method_missing(exception):
                 raise Error, _("Script error: %s") % exception
-    
+
     ctx.ui.debug(_("Unregistering comar scripts"))
     try:
         link.remove(package_name, timeout=ctx.dbus_timeout)
