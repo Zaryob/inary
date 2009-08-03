@@ -45,9 +45,10 @@ def dodir(destinationDirectory):
     '''creates a directory tree'''
     makedirs(join_path(get.installDIR(), destinationDirectory))
 
-def dodoc(*sourceFiles):
+def dodoc(*sourceFiles, **kw):
     '''inserts the files in the list of files into /usr/share/doc/PACKAGE'''
-    readable_insinto(join_path(get.installDIR(), join_path('/usr/share/doc', get.srcNAME())), *sourceFiles)
+    destDir = kw.get("destDir", get.srcNAME())
+    readable_insinto(join_path(get.installDIR(), join_path(get.docDIR(), destDir)), *sourceFiles)
 
 def doexe(sourceFile, destinationDirectory):
     '''insert a executable file into destination directory'''
