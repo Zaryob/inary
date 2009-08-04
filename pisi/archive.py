@@ -168,6 +168,10 @@ class ArchiveTar(ArchiveBase):
             if tarinfo.name.endswith(".desktop"):
                 ctx.ui.notify(pisi.ui.desktopfile, desktopfile=tarinfo.name)
 
+        # Bug #10680
+        if self.type == 'tarlzma':
+            os.unlink(self.file_path)
+
         os.chdir(oldwd)
         self.close()
 
