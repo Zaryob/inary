@@ -426,12 +426,14 @@ class Builder:
         for root, dirs, files in os.walk(install_dir):
             for file_ in files:
                 already_in_package = False
-                fpath = pisi.util.join_path(root, file_) + '/'
-                for path in all_paths_in_packages:
-                    if not fpath.find(path):
+                fpath = pisi.util.join_path(root, file_)
+                for _path in all_paths_in_packages:
+                    if os.path.isdir(_path) and not _path.endswith("/"):
+                        _path = _path + "/"
+                    if not fpath.find(_path):
                         already_in_package = True
                 if not already_in_package:
-                    abandoned_files.append(fpath.rsplit("/", 1)[0])
+                    abandoned_files.append(fpath)
 
         return abandoned_files
 
