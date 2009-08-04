@@ -1,6 +1,8 @@
 2009-08-04 Ozan Çağlayan <ozan@pardus.org.tr>
 		* (operations/build.py): Really fix the abandoned file checking when
-		the path in pspec.xml and the actual path of a missed file intersects.
+		the path in pspec.xml and the actual path of a missed file intersects,
+		* (operations/build.py): Check and fail if necessary for abandoned files before creating the
+		*.pisi packages.
 
 2009-08-03 Fatih Aşıcı <fatih@pardus.org.tr>
 		* Make it possible to specify doc directory's name via destDir
