@@ -25,6 +25,8 @@ config = None
 
 log = None
 
+locked = False
+
 def set_option(opt, val):
     config.set_option(opt, val)
 

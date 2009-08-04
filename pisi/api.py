@@ -62,8 +62,10 @@ def locked(func):
 
         try:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            ctx.locked = True
         except IOError:
-            raise pisi.errors.AnotherInstanceError(_("Another instance of PiSi is running. Only one instance is allowed."))
+            if not ctx.locked:
+                raise pisi.errors.AnotherInstanceError(_("Another instance of PiSi is running. Only one instance is allowed."))
 
         try:
             pisi.db.invalidate_caches()
@@ -71,6 +73,7 @@ def locked(func):
             pisi.db.update_caches()
             return ret
         finally:
+            ctx.locked = False
             lock.close()
     return wrapper
 
