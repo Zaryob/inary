@@ -142,6 +142,7 @@ class Fetcher:
                            proxies      = self._get_proxies(),
                            throttle     = self._get_bandwith_limit(),
                            reget        = self._test_range_support(),
+                           copy_local   = 1,
                            user_agent   = 'PiSi Fetcher/' + pisi.__version__)
         except urlgrabber.grabber.URLGrabError, e:
             raise FetchError(_('Could not fetch destination file "%s": %s') % (self.archive_file, e))
