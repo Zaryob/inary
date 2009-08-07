@@ -1,0 +1,12 @@
+TODO
+-----
+
+(-) Add filter_flags, disable_as_needed, disable_no_undefined functions
+(-) pisitools.dobin() needs a destinationFile parameter to rename the binary
+(-) pisitools.dodoc() may need an optional mode parameter for chmodding installed
+    documents
+(-) pisitools.dobin() is already doing what pisitools.doexe() is doing
+(-) pisitools.dolib() and pisitools.dolib_so() are carbon copies!
+(-) Unify all dolib* stuff into one function
+(-) rename() could be dropped in favor of move()
+(-)
