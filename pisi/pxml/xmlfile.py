@@ -82,6 +82,8 @@ class XmlFile(object):
         try:
             self.doc = iks.parse(localpath)
             return self.doc
+        except OSError, e:
+            raise Error(_("Unable to read file (%s): %s") %(localpath,e))
         except Exception, e:
             raise Error(_("File '%s' has invalid XML") % (localpath) )
 
