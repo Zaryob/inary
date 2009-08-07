@@ -1,3 +1,7 @@
+2009-08-07 Ozan Çağlayan <ozan@pardus.org.tr>
+		* (utils.py): Strip kernel and modules as well as other binaries to build
+		dbginfo packages for them.
+
 2009-08-04 Ozan Çağlayan <ozan@pardus.org.tr>
 		* (operations/build.py): Really fix the abandoned file checking when
 		the path in pspec.xml and the actual path of a missed file intersects,
