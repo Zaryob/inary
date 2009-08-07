@@ -453,7 +453,7 @@ class Archive:
 
     def __init__(self, file_path, arch_type):
         """accepted archive types:
-        targz, tarbz2, zip, tar"""
+        targz, tarbz2, tarlzma, tar, zip, gzip, binary"""
 
         handlers = {
             'targz': ArchiveTar,
