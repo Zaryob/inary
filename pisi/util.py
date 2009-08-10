@@ -507,7 +507,7 @@ def strip_file(filepath, fileinfo, outpath):
             ctx.ui.warning(_("objcopy (add-debuglink) command failed for file '%s'!") % f)
 
     if "current ar archive" in fileinfo:
-        run_strip(filepath, "-g")
+        run_strip(filepath, "--strip-debug")
         return True
 
     if "SB relocatable" in fileinfo and filepath.endswith(".ko"):
@@ -515,7 +515,7 @@ def strip_file(filepath, fileinfo, outpath):
         if ctx.config.values.build.generatedebug:
             check_dir(os.path.dirname(outpath))
             save_elf_debug(filepath, outpath)
-        run_strip(filepath)
+        run_strip(filepath, "--strip-debug")
         return True
 
     elif "SB executable" in fileinfo:
