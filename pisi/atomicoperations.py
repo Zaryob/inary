@@ -220,7 +220,7 @@ class Install(AtomicOperation):
         pkg = self.pkginfo
 
         if self.installdb.has_package(pkg.name): # is this a reinstallation?
-            ipkg = self.installdb.get_info(pkg.name)
+            ipkg = self.installdb.get_package(pkg.name)
             repomismatch = ipkg.distribution != pkg.distribution
             (iversion, irelease, ibuild) = self.installdb.get_version(pkg.name)
 
