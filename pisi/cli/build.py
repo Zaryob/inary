@@ -52,6 +52,8 @@ to be downloaded from a repository containing sources.
         group.add_option("--ignore-build-no", action="store_true",
                                default=False,
                                help=_("Do not take build no into account."))
+        group.add_option("-q", "--quiet", action="store_true", default=False,
+                               help=_("Run pisi build process in silent mode"))
         group.add_option("--ignore-dependency", action="store_true",
                                default=False,
                                help=_("Do not take dependency information into account"))
@@ -95,6 +97,9 @@ to be downloaded from a repository containing sources.
         if not self.args:
             self.help()
             return
+
+        if not self.options.quiet:
+            self.options.debug = True
 
         self.init()
 
