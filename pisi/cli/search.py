@@ -49,6 +49,12 @@ database.
                                default=False, help=_("Search in installdb"))
         group.add_option("-s", "--sourcedb", action="store_true",
                                default=False, help=_("Search in sourcedb"))
+        group.add_option("--name", action="store_true",
+                               default=False, help=_('Search in the package name'))
+        group.add_option("--summary", action="store_true",
+                               default=False, help=_('Search in the package summary'))
+        group.add_option("--description", action="store_true",
+                               default=False, help=_('Search in the package description'))
         self.parser.add_option_group(group)
 
     def run(self):
@@ -62,20 +68,26 @@ database.
         replace = re.compile("(%s)" % "|".join(self.args), re.I)
         lang = ctx.get_option('language')
         repo = ctx.get_option('repository')
+        name = ctx.get_option('name')
+        summary = ctx.get_option('summary')
+        desc = ctx.get_option('description')
+        fields = None
+        if name or summary or desc:
+            fields = {'name': name, 'summary': summary, 'desc': desc}
 
         if ctx.get_option('installdb'):
             db = pisi.db.installdb.InstallDB()
-            pkgs = db.search_package(self.args, lang)
+            pkgs = db.search_package(self.args, lang, fields)
             get_info = db.get_package
             get_name_sum = lambda pkg:(pkg.name, pkg.summary)
         elif ctx.get_option('sourcedb'):
             db = pisi.db.sourcedb.SourceDB()
-            pkgs = db.search_spec(self.args, lang, repo)
+            pkgs = db.search_spec(self.args, lang, repo, fields)
             get_info = db.get_spec
             get_name_sum = lambda pkg:(pkg.source.name, pkg.source.summary)
         else:
             db = pisi.db.packagedb.PackageDB()
-            pkgs = db.search_package(self.args, lang, repo)
+            pkgs = db.search_package(self.args, lang, repo, fields)
             get_info = db.get_package
             get_name_sum = lambda pkg:(pkg.name, pkg.summary)
 

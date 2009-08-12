@@ -82,16 +82,30 @@ class SourceDB(lazydb.LazyDB):
         spec, repo = self.get_spec_repo(name, repo)
         return spec
 
-    def search_spec(self, terms, lang=None, repo=None):
+    def search_spec(self, terms, lang=None, repo=None, fields=None):
+        """
+        fields (dict) : looks for terms in the fields which are marked as True
+        If the fields is equal to None this method will search in all fields
+
+        example :
+        if fields is equal to : {'name': True, 'summary': True, 'desc': False}
+        This method will return only package that contents terms in the package
+        name or summary
+        """
         resum = '<Summary xml:lang=.(%s|en).>.*?%s.*?</Summary>'
         redesc = '<Description xml:lang=.(%s|en).>.*?%s.*?</Description>'
+        if not fields:
+            fields = {'name': True, 'summary': True, 'desc': True}
         if not lang:
             lang = pisi.pxml.autoxml.LocalText.get_lang()
         found = []
         for name, xml in self.sdb.get_items_iter(repo):
-            if terms == filter(lambda term: re.compile(term, re.I).search(name) or \
-                                            re.compile(resum % (lang, term), re.I).search(xml) or \
-                                            re.compile(redesc % (lang, term), re.I).search(xml), terms):
+            if terms == filter(lambda term: (fields['name'] and \
+                    re.compile(term, re.I).search(name)) or \
+                    (fields['summary'] and \
+                    re.compile(resum % (lang, term), re.I).search(xml)) or \
+                    (fields['desc'] and \
+                    re.compile(redesc % (lang, term), re.I).search(xml)), terms):
                 found.append(name)
         return found
 
