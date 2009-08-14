@@ -119,6 +119,12 @@ class ArchiveTar(ArchiveBase):
             ret, out, err = util.run_batch("lzma -k -f -d %s%s" % (self.file_path,ctx.const.lzma_suffix))
             if ret != 0:
                 raise LzmaRuntimeError(err)
+        elif self.type == 'tarZ':
+            rmode = 'r:'
+            self.file_path = self.file_path.rstrip('.Z')
+            ret, out, err = util.run_batch("uncompress -f %s%s" % (self.file_path,'.Z'))
+            if ret != 0:
+                raise RuntimeError, 'Problem occured while uncompressing %s.Z file' % self.file_path
         else:
             raise UnknownArchiveType
 
@@ -168,8 +174,8 @@ class ArchiveTar(ArchiveBase):
             if tarinfo.name.endswith(".desktop"):
                 ctx.ui.notify(pisi.ui.desktopfile, desktopfile=tarinfo.name)
 
-        # Bug #10680
-        if self.type == 'tarlzma':
+        # Bug #10680 and addition for tarZ files
+        if self.type == 'tarlzma' or self.type == 'tarZ':
             os.unlink(self.file_path)
 
         os.chdir(oldwd)
@@ -187,6 +193,9 @@ class ArchiveTar(ArchiveBase):
             elif self.type == 'tarlzma':
                 wmode = 'w:'
                 self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
+            elif self.type == 'tarZ':
+                wmode = 'w:'
+                self.file_path = self.file_path.rstrip(".Z")
             else:
                 raise UnknownArchiveType
             self.tar = tarfile.open(self.file_path, wmode)
@@ -453,12 +462,13 @@ class Archive:
 
     def __init__(self, file_path, arch_type):
         """accepted archive types:
-        targz, tarbz2, tarlzma, tar, zip, gzip, binary"""
+        targz, tarbz2, tarlzma, tarZ, tar, zip, gzip, binary"""
 
         handlers = {
             'targz': ArchiveTar,
             'tarbz2': ArchiveTar,
             'tarlzma': ArchiveTar,
+            'tarZ': ArchiveTar,
             'tar': ArchiveTar,
             'zip': ArchiveZip,
             'gzip': ArchiveGzip,
