@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "POT-Creation-Date: 2009-07-09 15:48+EEST\n"
-"PO-Revision-Date: 2009-07-31 14:11+0200\n"
+"PO-Revision-Date: 2009-07-31 21:57+0200\n"
 "Last-Translator: Patrik Karlsson <patrik@pardus.nu>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: pisi-cli:44
 msgid "Program Terminated."
-msgstr "Programmet avslutades."
+msgstr "Programmet avbröts."
 
 #: pisi-cli:48
 msgid ""
@@ -33,7 +33,7 @@ msgstr ""
 
 #: pisi-cli:54
 msgid "System Error. Program Terminated."
-msgstr "Systemfel. Programmet avslutades."
+msgstr "Systemfel. Programmet avbröts."
 
 #: pisi-cli:61
 msgid "Please use 'pisi help' for general help."
@@ -52,6 +52,8 @@ msgid ""
 "Please attach the config.log to your bug report:\n"
 "%s/config.log"
 msgstr ""
+"Vänligen bifoga config.log med din felrapport:\n"
+"%s/config.log"
 
 #: pisi/actionsapi/autotools.py:78 pisi/actionsapi/autotools.py:88
 #: pisi/actionsapi/cmaketools.py:66 pisi/actionsapi/kde.py:65
@@ -86,23 +88,23 @@ msgstr ""
 
 #: pisi/actionsapi/autotools.py:147
 msgid "Running aclocal failed."
-msgstr ""
+msgstr "Körning av aclocal misslyckades."
 
 #: pisi/actionsapi/autotools.py:152
 msgid "Running autoconf failed."
-msgstr ""
+msgstr "Körning av autoconf misslyckades."
 
 #: pisi/actionsapi/autotools.py:157
 msgid "Running autoreconf failed."
-msgstr ""
+msgstr "Körning av autoreconf misslyckades."
 
 #: pisi/actionsapi/autotools.py:162
 msgid "Running automake failed."
-msgstr ""
+msgstr "Körning av automake misslyckades."
 
 #: pisi/actionsapi/autotools.py:167
 msgid "Running autoheader failed."
-msgstr ""
+msgstr "Körning av autoheader misslyckades."
 
 #: pisi/actionsapi/cmaketools.py:68
 msgid "No configure script found for cmake."
@@ -122,6 +124,9 @@ msgid ""
 "!!! Please attach the config.log to your bug report:\n"
 "%s/config.log"
 msgstr ""
+"\n"
+"Vänligen bifoga config.log med din felrapport:\n"
+"%s/config.log"
 
 #: pisi/actionsapi/kerneltools.py:112
 msgid "Can't find kernel version information file %s."
@@ -129,7 +134,7 @@ msgstr ""
 
 #: pisi/actionsapi/libtools.py:38
 msgid "Running ldconfig failed."
-msgstr ""
+msgstr "Körning av ldconfig misslyckades."
 
 #: pisi/actionsapi/libtools.py:49
 msgid "GNU Config Update Finished."
@@ -395,7 +400,7 @@ msgstr ""
 
 #: pisi/api.py:61 pisi/cli/command.py:167
 msgid "You have to be root for this operation."
-msgstr ""
+msgstr "Du måste vara root för den här åtgärden."
 
 #: pisi/api.py:66
 msgid "Another instance of PiSi is running. Only one instance is allowed."
@@ -419,11 +424,11 @@ msgstr ""
 
 #: pisi/api.py:674
 msgid "* Index file written"
-msgstr ""
+msgstr "* Indexfil skriven"
 
 #: pisi/api.py:679
 msgid "Not a valid repo name."
-msgstr ""
+msgstr "Ogiltigt förrådsnamn."
 
 #: pisi/api.py:682
 msgid "Repo %s already present."
@@ -1472,7 +1477,7 @@ msgstr ""
 
 #: pisi/cli/pisicli.py:126
 msgid "No command given"
-msgstr ""
+msgstr "Inget kommando angivet"
 
 #: pisi/cli/pisicli.py:129
 msgid "Command line parsing error"
@@ -1809,7 +1814,7 @@ msgstr ""
 
 #: pisi/db/itembyrepo.py:51
 msgid "Repo item %s not found"
-msgstr ""
+msgstr "Paketet %s hittades ej"
 
 #: pisi/db/itembyrepo.py:61 pisi/db/itembyrepo.py:72 pisi/db/itembyrepo.py:82
 msgid "Repository %s does not exist."
