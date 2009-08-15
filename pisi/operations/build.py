@@ -488,7 +488,10 @@ class Builder:
         # we'll need our working directory after actionscript
         # finished its work in the archive source directory.
         curDir = os.getcwd()
-        os.chdir(self.srcDir)
+        if os.path.exists(self.srcDir):
+            os.chdir(self.srcDir)
+        else:
+            raise Error(_("ERROR: WorkDir (%s) does not exist\n") % (self.srcDir))
 
         if func in self.actionLocals:
             if ctx.get_option('ignore_sandbox') or not ctx.config.values.build.enablesandbox:

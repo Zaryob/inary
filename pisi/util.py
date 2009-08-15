@@ -446,7 +446,10 @@ def uncompress(patchFile, compressType="gz", targetDir=None):
 def do_patch(sourceDir, patchFile, level=0, name=None):
     """Apply given patch to the sourceDir."""
     cwd = os.getcwd()
-    os.chdir(sourceDir)
+    if os.path.exists(sourceDir):
+        os.chdir(sourceDir)
+    else:
+        raise Error(_("ERROR: WorkDir (%s) does not exist\n") % (sourceDir))
 
     if level == None:
         level = 0
