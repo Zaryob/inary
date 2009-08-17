@@ -1,3 +1,7 @@
+2009-08-04 Ozan Çağlayan <ozan@pardus.org.tr>
+		* (pisi/util.py): Revert kernel module stripping for now as it's not
+		tested well.
+
 2009-08-14 Serdar Dalgıç <dalgic.srdr@gmail.com>
         * tarZ support for archives
 
@@ -10,7 +14,7 @@
 		or --quiet parameter is passed.
 
 2009-08-07 Ozan Çağlayan <ozan@pardus.org.tr>
-		* (utils.py): Strip kernel and modules as well as other binaries to build
+		* (pisi/util.py): Strip kernel and modules as well as other binaries to build
 		dbginfo packages for them.
 
 2009-08-04 Ozan Çağlayan <ozan@pardus.org.tr>
