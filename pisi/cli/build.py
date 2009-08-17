@@ -53,7 +53,7 @@ to be downloaded from a repository containing sources.
                                default=False,
                                help=_("Do not take build no into account."))
         group.add_option("-q", "--quiet", action="store_true", default=False,
-                               help=_("Run pisi build process in silent mode"))
+                               help=_("Run pisi build operation without printing extra debug information"))
         group.add_option("--ignore-dependency", action="store_true",
                                default=False,
                                help=_("Do not take dependency information into account"))
