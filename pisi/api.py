@@ -14,6 +14,7 @@ import fcntl
 import re
 import logging
 import logging.handlers
+import fetcher
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -371,6 +372,25 @@ def search_file(term):
     if term.startswith("/"): # FIXME: why? why?
         term = term[1:]
     return filesdb.search_file(term)
+
+def fetch_package(packages=[], path=os.path.curdir):
+    """
+    Fetches the given packages from the repository without installing, just downloads the packages.
+    @param packages: list of package names -> list_of_strings
+    @param path: path to where the packages will be downloaded. If not given, packages will be downloaded
+    to the current working directory.
+    """
+    packagedb = pisi.db.packagedb.PackageDB()
+    repodb = pisi.db.repodb.RepoDB()
+    for name in packages:
+        package, repo = packagedb.get_package_repo(name)
+        uri = pisi.uri.URI(package.packageURI)
+        if uri.is_absolute_path():
+            url = str(pkg_uri)
+        else:
+            url = os.path.join(os.path.dirname(repodb.get_repo_url(repo)), str(uri.path()))
+
+        fetcher.fetch_url(url, path, ctx.ui.Progress)
 
 @locked
 def upgrade(packages=[], repo=None):
