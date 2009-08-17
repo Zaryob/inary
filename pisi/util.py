@@ -523,7 +523,7 @@ def strip_file(filepath, fileinfo, outpath):
         return True
     """
 
-    elif "SB executable" in fileinfo:
+    if "SB executable" in fileinfo:
         if ctx.config.values.build.generatedebug:
             check_dir(os.path.dirname(outpath))
             save_elf_debug(filepath, outpath)
