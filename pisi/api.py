@@ -373,7 +373,7 @@ def search_file(term):
         term = term[1:]
     return filesdb.search_file(term)
 
-def fetch_package(packages=[], path=os.path.curdir):
+def fetch(packages=[], path=os.path.curdir):
     """
     Fetches the given packages from the repository without installing, just downloads the packages.
     @param packages: list of package names -> list_of_strings
