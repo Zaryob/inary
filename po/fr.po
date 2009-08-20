@@ -2,22 +2,24 @@
 # Copyright (C) YEAR ORGANIZATION
 #
 # Amine Chadly <amine.chadly@gmail.com>, 2007, 2008.
+# Philippe Svetoslavsky <philsvet@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "POT-Creation-Date: 2009-08-17 09:53+EEST\n"
-"PO-Revision-Date: 2008-06-27 02:49+0200\n"
-"Last-Translator: Amine Chadly <amine.chadly@gmail.com>\n"
-"Language-Team: French <pardus-translators@liste.pardus.org.tr>\n"
+"PO-Revision-Date: 2009-08-21 00:27+0200\n"
+"Last-Translator: Philippe Svetoslavsky <philsvet@gmail.com>\n"
+"Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: pisi-cli:41
 msgid "Keyboard Interrupt: Exiting..."
-msgstr "Interruption Clavier : Sortons..."
+msgstr "Interruption Clavier : Sortie..."
 
 #: pisi-cli:44
 msgid "Program Terminated."
@@ -29,7 +31,7 @@ msgid ""
 "Please file a bug report. (http://bugs.pardus.org.tr)"
 msgstr ""
 "Exception interne non gérée.\n"
-"Veuillez signaler le disfonctionnement s'il vous plaît. (http://bugs.uludag."
+"Veuillez signaler le dysfonctionnement s'il vous plaît. (http://bugs.uludag."
 "org.tr)"
 
 #: pisi-cli:54
@@ -46,14 +48,14 @@ msgstr "Pile d'exécution : "
 
 #: pisi-cli:68
 msgid "Use --debug to see a traceback."
-msgstr "Utiliser --debug pour voir une pile d'exécution."
+msgstr "Utiliser --debug pour voir la pile d'exécution."
 
 #: pisi/actionsapi/autotools.py:37 pisi/actionsapi/cmaketools.py:36
 msgid ""
 "Please attach the config.log to your bug report:\n"
 "%s/config.log"
 msgstr ""
-"Veuillez attacher le config.log à votre rapport de disfonctionnement s'il "
+"Veuillez attacher le config.log à votre rapport de dysfonctionnement s'il "
 "vous plaît :\n"
 "%s/config.log"
 
@@ -110,7 +112,7 @@ msgstr "L'exécution de autoheader a échoué."
 
 #: pisi/actionsapi/cmaketools.py:68
 msgid "No configure script found for cmake."
-msgstr "Pas de script pour cmake trouvé."
+msgstr "Pas trouvé de script configure pour cmake."
 
 #: pisi/actionsapi/get.py:163
 msgid "Util %s cannot be found"
@@ -127,13 +129,13 @@ msgid ""
 "%s/config.log"
 msgstr ""
 "\n"
-"!!! Veuillez attacher le config.log à votre rapport de disfonctionnement "
+"!!! Veuillez attacher le config.log à votre rapport de dysfonctionnement "
 "s'il vous plaît :\n"
 "%s/config.log"
 
 #: pisi/actionsapi/kerneltools.py:117
 msgid "Can't find kernel version information file %s."
-msgstr ""
+msgstr "Impossible de trouver le fichier %s d'information de version du noyau."
 
 #: pisi/actionsapi/libtools.py:38
 msgid "Running ldconfig failed."
@@ -149,42 +151,41 @@ msgstr "L'exécution de libtoolize a échoué."
 
 #: pisi/actionsapi/perlmodules.py:66
 msgid "perl build failed."
-msgstr "la compilation de perl a échoué."
+msgstr "La compilation de perl a échoué."
 
 #: pisi/actionsapi/perlmodules.py:75
 msgid "perl install failed."
 msgstr "L'installation de perl a échoué."
 
 #: pisi/actionsapi/pisitools.py:74 pisi/actionsapi/pisitools.py:131
-#, fuzzy
 msgid "No file matched pattern \"%s\""
-msgstr "ActionsAPI [chmod]: Le fichier %s n'existe pas."
+msgstr "Aucun fichier ne correspond au critère \"%s\""
 
 #: pisi/actionsapi/pisitools.py:141
 msgid "ActionsAPI [doman]: Wrong man page file: %s"
-msgstr "ActionsAPI [doman]: Fichier de page de manuel incorrecte : %s"
+msgstr "ActionsAPI [doman]: Fichier de page de manuel incorrect : %s"
 
 #: pisi/actionsapi/pisitools.py:168
-#, fuzzy
 msgid "No file matched pattern \"%s\". 'domove' operation failed."
-msgstr "ActionsAPI [chmod]: Le fichier %s n'existe pas."
+msgstr ""
+"Aucun fichier ne correspond au critère \"%s\". Échec de l'opération 'domove'."
 
 #: pisi/actionsapi/pisitools.py:187
-#, fuzzy
 msgid "ActionsAPI [rename]: %s: %s"
-msgstr "ActionsAPI [copytree] %s à %s: %s"
+msgstr "ActionsAPI [rename] : %s : %s"
 
 #: pisi/actionsapi/pisitools.py:202
 msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
 msgstr ""
+"Aucun fichier ne correspond au critère \"%s\". Échec de l'opération 'dosed'."
 
 #: pisi/actionsapi/pisitools.py:215
 msgid "dosed method has not changed file '%s'."
-msgstr ""
+msgstr "La méthode dosed n'a pas changé le fichie '%s'."
 
 #: pisi/actionsapi/pisitools.py:218
 msgid "File does not exist or permission denied: %s"
-msgstr "Le fichier n'existe pas ou la permission refusée : %s"
+msgstr "Le fichier n'existe pas ou la permission est refusée : %s"
 
 #: pisi/actionsapi/pisitools.py:235
 msgid "ActionsAPI [dosym]: File exists: %s"
@@ -192,17 +193,19 @@ msgstr "ActionsAPI [dosym]: Le fichier existe : %s"
 
 #: pisi/actionsapi/pisitools.py:244 pisi/actionsapi/pisitoolsfunctions.py:71
 msgid "No file matched pattern \"%s\"."
-msgstr ""
+msgstr "Aucun fichier ne correspond au critère \"%s\"."
 
 #: pisi/actionsapi/pisitools.py:271
-#, fuzzy
 msgid "No file matched pattern \"%s\". Remove operation failed."
-msgstr "ActionsAPI [chmod]: Le fichier %s n'existe pas."
+msgstr ""
+"Aucun fichier ne correspond au critère \"%s\". Échec de l'opération de "
+"suppression."
 
 #: pisi/actionsapi/pisitools.py:280
-#, fuzzy
 msgid "No directory matched pattern \"%s\". Remove directory operation failed."
-msgstr "ActionsAPI [chmod]: Le fichier %s n'existe pas."
+msgstr ""
+"Aucun fichier ne correspond au critère \"%s\". Échec de l'opération de "
+"suppression de dossier."
 
 #: pisi/actionsapi/pisitoolsfunctions.py:45
 #: pisi/actionsapi/pisitoolsfunctions.py:63
@@ -212,7 +215,7 @@ msgstr "Pas assez d'arguments."
 
 #: pisi/actionsapi/pisitoolsfunctions.py:53
 msgid "No executable file matched pattern \"%s\"."
-msgstr ""
+msgstr "Aucun fichier exécutable ne correspond au critère \"%s\"."
 
 #: pisi/actionsapi/pythonmodules.py:69
 msgid "Running %s failed."
@@ -227,9 +230,8 @@ msgid "ActionsAPI [echo]: Can't append to file %s."
 msgstr "ActionsAPI [echo]: Impossible d'ajouter des données au fichier %s."
 
 #: pisi/actionsapi/shelltools.py:63
-#, fuzzy
 msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: Le fichier %s n'existe pas."
+msgstr "ActionsAPI [chmod]: aucun fichier ne correspond au critère \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:70
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: %s)"
