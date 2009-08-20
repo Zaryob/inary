@@ -104,7 +104,8 @@ def plan_remove(A):
             for (rev_dep, depinfo) in rev_deps:
                 # we don't deal with uninstalled rev deps
                 # and unsatisfied dependencies (this is important, too)
-                if installdb.has_package(rev_dep) and depinfo.satisfied_by_installed():
+                # satisfied_by_any_installed_other_than is for AnyDependency
+                if installdb.has_package(rev_dep) and depinfo.satisfied_by_installed() and not depinfo.satisfied_by_any_installed_other_than(x):
                     if not rev_dep in G_f.vertices():
                         Bp.add(rev_dep)
                         G_f.add_plain_dep(rev_dep, x)

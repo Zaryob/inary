@@ -88,6 +88,9 @@ class InstallDB(lazydb.LazyDB):
         if deps:
             for dep in deps.tags("Dependency"):
                 revdeps.setdefault(dep.firstChild().data(), set()).add((name, dep.toString()))
+            for anydep in deps.tags("AnyDependency"):
+                for dep in anydep.tags("Dependency"):
+                    revdeps.setdefault(dep.firstChild().data(), set()).add((name, anydep.toString()))
 
     def __generate_revdeps(self):
         revdeps = {}
@@ -197,18 +200,31 @@ class InstallDB(lazydb.LazyDB):
                            ctime)
         return info
 
+    def __make_dependency(self, depStr):
+        node = piksemel.parseString(depStr)
+        dependency = pisi.dependency.Dependency()
+        dependency.package = node.firstChild().data()
+        if node.attributes():
+            attr = node.attributes()[0]
+            dependency.__dict__[attr] = node.getAttribute(attr)
+        return dependency
+
+    def __create_dependency(self, depStr):
+        if "<AnyDependency>" in depStr:
+            anydependency = pisi.specfile.AnyDependency()
+            for dep in re.compile('(<Dependency>.*?</Dependency>)').findall(depStr):
+                anydependency.dependencies.append(self.__make_dependency(dep))
+            return anydependency
+        else:
+            return self.__make_dependency(depStr)
+
     def get_rev_deps(self, name):
 
         rev_deps = []
 
         if self.rev_deps_db.has_key(name):
             for pkg, dep in self.rev_deps_db[name]:
-                node = piksemel.parseString(dep)
-                dependency = pisi.dependency.Dependency()
-                dependency.package = node.firstChild().data()
-                if node.attributes():
-                    attr = node.attributes()[0]
-                    dependency.__dict__[attr] = node.getAttribute(attr)
+                dependency = self.__create_dependency(dep)
                 rev_deps.append((pkg, dependency))
 
         return rev_deps

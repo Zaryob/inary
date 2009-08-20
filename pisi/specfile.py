@@ -197,6 +197,12 @@ class AnyDependency:
                 return True
         return False
 
+    def satisfied_by_any_installed_other_than(self, package):
+        for dependency in self.dependencies:
+            if dependency.package != package and dependency.satisfied_by_installed():
+                return True
+        return False
+
     def satisfied_by_installed(self):
         for dependency in self.dependencies:
             if dependency.satisfied_by_installed():
