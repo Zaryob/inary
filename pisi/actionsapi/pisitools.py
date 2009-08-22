@@ -48,7 +48,7 @@ def dodir(destinationDirectory):
 def dodoc(*sourceFiles, **kw):
     '''inserts the files in the list of files into /usr/share/doc/PACKAGE'''
     destDir = kw.get("destDir", get.srcNAME())
-    readable_insinto(join_path(get.installDIR(), join_path(get.docDIR(), destDir)), *sourceFiles)
+    readable_insinto(join_path(get.installDIR(), get.docDIR(), destDir), *sourceFiles)
 
 def doexe(sourceFile, destinationDirectory):
     '''insert a executable file into destination directory'''
@@ -56,11 +56,12 @@ def doexe(sourceFile, destinationDirectory):
     ''' example call: pisitools.doexe("kde-3.4.sh", "/etc/X11/Sessions")'''
     executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
 
-def dohtml(*sourceFiles):
+def dohtml(*sourceFiles, **kw):
     '''inserts the files in the list of files into /usr/share/doc/PACKAGE/html'''
 
     ''' example call: pisitools.dohtml("doc/doxygen/html/*")'''
-    destionationDirectory = join_path(get.installDIR(), 'usr/share/doc', get.srcNAME(), 'html')
+    destDir = kw.get("destDir", get.srcNAME())
+    destionationDirectory = join_path(get.installDIR(), get.docDIR(), destDir, 'html')
 
     if not can_access_directory(destionationDirectory):
         makedirs(destionationDirectory)
