@@ -994,10 +994,10 @@ class Builder:
                 ctx.build_leftover = pisi.util.join_path(self.pkg_dir(), ctx.const.install_tar_lzma)
                 tar = archive.ArchiveTar(ctx.const.install_tar_lzma, "tarlzma")
                 for finfo in files.list:
-                    orgname = arcname = pisi.util.join_path("install", finfo.path)
+                    orgname = pisi.util.join_path("install", finfo.path)
                     if package.debug_package:
                         orgname = pisi.util.join_path("debug", finfo.path)
-                    tar.add_to_archive(orgname, arcname.lstrip("install"))
+                    tar.add_to_archive(orgname, finfo.path)
                 tar.close()
                 pkg.add_to_package(ctx.const.install_tar_lzma)
                 pkg.close()
