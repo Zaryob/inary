@@ -94,7 +94,7 @@ class Package:
             # cleanup install.tar.lzma and install.tar after installing
             if os.path.exists(lzmafile):
                 os.unlink(lzmafile)
-            lzmafile = lzmafile.rstrip(ctx.const.lzma_suffix)
+            lzmafile = util.remove_suffix(ctx.const.lzma_suffix, lzmafile)
             if os.path.exists(lzmafile):
                 os.unlink(lzmafile)
         else:
