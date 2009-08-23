@@ -283,7 +283,7 @@ def dir_size(dir):
         return os.path.getsize(dir)
 
     if os.path.islink(dir):
-        return long(len(os.readlink(dir)))
+        return long(len(read_link(dir)))
 
     def sizes():
         for root, dirs, files in os.walk(dir):
@@ -301,6 +301,13 @@ def copy_file_stat(src,dest):
     check_file(src)
     check_dir(os.path.dirname(dest))
     shutil.copy2(src, dest)
+
+def read_link(link):
+    """Return the normalized path which is pointed by the symbolic link."""
+    # tarfile module normalizes the paths pointed by symbolic links. This
+    # causes problems as the file hashes and sizes are calculated before
+    # this normalization.
+    return os.path.normpath(os.readlink(link))
 
 def is_ar_file(file_path):
     return open(file_path).read(8) == '!<arch>\n'
@@ -322,7 +329,7 @@ def calculate_hash(path):
     """Return a (path, hash) tuple for given path."""
     if os.path.islink(path):
         # For symlinks, path string is hashed instead of the content
-        value = sha1_data(os.readlink(path))
+        value = sha1_data(read_link(path))
         if not os.path.exists(path):
             ctx.ui.info(_("Including external link '%s'") % path)
     elif os.path.isdir(path):
