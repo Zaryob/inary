@@ -91,17 +91,31 @@ def same(l):
 
 def prefix(a, b):
     """Check if sequence a is a prefix of sequence b."""
-    if len(a)>len(b):
+    if len(a) > len(b):
         return False
-    for i in range(0,len(a)):
-        if a[i]!=b[i]:
+    for i in range(0, len(a)):
+        if a[i] != b[i]:
             return False
     return True
 
-def remove_prefix(a,b):
+def remove_prefix(a, b):
     """Remove prefix a from sequence b."""
-    assert prefix(a,b)
+    assert prefix(a, b)
     return b[len(a):]
+
+def suffix(a, b):
+    """Check if sequence a is a suffix of sequence b."""
+    if len(a) > len(b):
+        return False
+    for i in range(1, len(a) + 1):
+        if a[-i] != b[-i]:
+            return False
+    return True
+
+def remove_suffix(a, b):
+    """Remove suffix a from sequence b."""
+    assert suffix(a, b)
+    return b[:-len(a)]
 
 def human_readable_size(size = 0):
     symbols, depth = [' B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'], 0
