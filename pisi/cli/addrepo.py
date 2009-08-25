@@ -61,7 +61,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
             if ctx.ui.confirm(_('Update PiSi database for repository %s?') % name):
                 try:
                     pisi.api.update_repo(name)
-                except pisi.fetcher.FetchError:
+                except (pisi.fetcher.FetchError, IOError):
                     ctx.ui.warning(_("%s repository could not be reached. Removing %s from system.") % (name, name))
                     pisi.api.remove_repo(name)
         else:
