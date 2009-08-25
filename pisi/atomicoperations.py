@@ -564,11 +564,11 @@ class Remove(AtomicOperation):
                 ctx.ui.warning(_('Installed file %s does not exist on system [Probably you manually deleted]') % fpath)
                 return
 
-            # remove emptied directories
-            dpath = os.path.dirname(fpath)
-            while dpath != '/' and not os.listdir(dpath):
-                os.rmdir(dpath)
-                dpath = os.path.dirname(dpath)
+        # remove emptied directories
+        dpath = os.path.dirname(fpath)
+        while dpath != '/' and not os.listdir(dpath):
+            os.rmdir(dpath)
+            dpath = os.path.dirname(dpath)
 
     def run_preremove(self):
         if ctx.comar:
