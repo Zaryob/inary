@@ -3,13 +3,16 @@
 # revdep-rebuild: Reverse dependency rebuilder.
 # Author: Stanislav Brabec <utx@gentoo.org>
 
+# Adapt to Pardus
+# Author: Ozan Caglayan <ozan@pardus.org.tr>
+
 # Mask of specially evaluated libraries (exactly one space separated).
 LD_LIBRARY_MASK="libodbcinst.so libodbc.so libjava.so libjvm.so"
 
 # List of directories to be searched (feel free to edit it)
-# Note /usr/libexec and /usr/local/subprefix cotradicts FHS, but are present
+# Note /usr/libexec and /usr/local/subprefix contradicts FHS, but are present
 SEARCH_DIRS="/lib /bin /sbin /usr/lib /usr/bin /usr/sbin /usr/libexec /usr/local /usr/qt* /usr/kde/*/bin /usr/lib/MozillaFirefox /usr/kde/*/lib /usr/*-*-linux-gnu /opt"
-EXCLUDE_DIRS="/opt/ptsp /usr/lib/xorg/nvidia*"
+EXCLUDE_DIRS="/opt/ptsp /usr/lib/xorg/nvidia* /usr/lib/debug"
 
 # Base of temporary files names.
 LIST=~/.revdep-rebuild
@@ -37,10 +40,10 @@ while : ; do
 	-h | --help )
 		echo "Usage: $0 [OPTIONS] [--]"
 		echo
-		echo "Broken reverse dependency rebuilder."
+		echo "Broken reverse dependency checker."
 		echo
 		echo
-		echo "      --force"
+        echo "      --force          remove old revdep-rebuild files"
 		echo
 		echo "      --soname SONAME  recompile packages using library with SONAME instead"
 		echo "                       of broken library (SONAME providing library must be"
@@ -123,8 +126,6 @@ fi
 
 echo
 echo "Checking reverse dependencies..."
-echo "Packages containing binaries and libraries $HEAD_TEXT,"
-echo "will be recompiled."
 
 echo
 echo -n -e "${GR}Collecting system binaries and libraries...${NO}"
