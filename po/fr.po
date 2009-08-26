@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "POT-Creation-Date: 2009-08-17 09:53+EEST\n"
-"PO-Revision-Date: 2009-08-21 00:27+0200\n"
+"PO-Revision-Date: 2009-08-26 20:11+0200\n"
 "Last-Translator: Philippe Svetoslavsky <philsvet@gmail.com>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -314,7 +314,7 @@ msgstr "ActionsAPI [touch]: Permission refusée : %s"
 
 #: pisi/actionsapi/shelltools.py:249
 msgid "Command \"%s\" failed, return value was %d."
-msgstr ""
+msgstr "La commande \"%s\" a échoué, la valeur retournée était %d."
 
 #: pisi/actionsapi/texlivemodules.py:54
 #, fuzzy
@@ -330,14 +330,12 @@ msgid "Creating symlinks from format to engines failed"
 msgstr ""
 
 #: pisi/actionsapi/texlivemodules.py:68
-#, fuzzy
 msgid "Installing texmf files failed"
-msgstr "Échec de l'installation."
+msgstr "Échec de l'installation des fichiers texmf."
 
 #: pisi/actionsapi/texlivemodules.py:72
-#, fuzzy
 msgid "Installing docs failed"
-msgstr "Échec de l'installation."
+msgstr "Échec de l'installation des docs."
 
 #: pisi/actionsapi/texlivemodules.py:76
 #, fuzzy
@@ -345,9 +343,8 @@ msgid "Installing config files failed"
 msgstr "L'exécution de ldconfig a échoué."
 
 #: pisi/actionsapi/texlivemodules.py:82
-#, fuzzy
 msgid "Handle config files failed"
-msgstr "Fichier paquet : %s"
+msgstr ""
 
 #: pisi/actionsapi/texlivemodules.py:93
 msgid "Symlink %s skipped (special case)"
@@ -367,51 +364,47 @@ msgstr ""
 
 #: pisi/actionsapi/texlivemodules.py:102
 msgid "Making symlink from %s to %s"
-msgstr ""
+msgstr "Création du lien symbolique de %s vers %s"
 
 #: pisi/actionsapi/texlivemodules.py:154
 msgid "Creating /etc/texmf/%s.d"
-msgstr ""
+msgstr "Création de /etc/texmf/%s.d"
 
 #: pisi/actionsapi/texlivemodules.py:167
-#, fuzzy
 msgid "Building format file %s"
-msgstr "** Compilation du paquet %s"
+msgstr "Compilation du paquet %s"
 
 #: pisi/actionsapi/texlivemodules.py:182
-#, fuzzy
 msgid "Map %s is added to %s/%s.cfg"
-msgstr "Le dépôt %s a été ajouté au système."
+msgstr "Map %s est ajouté à %s/%s.cfg"
 
 #: pisi/actionsapi/texlivemodules.py:185
-#, fuzzy
 msgid "MixedMap %s is added to %s/%s.cfg"
-msgstr "Le dépôt %s a été ajouté au système."
+msgstr "MixedMap %s est ajouté à %s/%s.cfg"
 
 #: pisi/actionsapi/texlivemodules.py:188
 msgid "p +%s is added to %s/%s-config.ps"
-msgstr ""
+msgstr "p +%s est ajouté à %s/%s-config.ps"
 
 #: pisi/actionsapi/texlivemodules.py:191
 msgid "f %s is added to %s/%s-config"
-msgstr ""
+msgstr "f %s est ajouté à %s/%s-config"
 
 #: pisi/actionsapi/texlivemodules.py:195
 msgid "Language file  %s  already generated."
-msgstr ""
+msgstr "Le fichier de langue %s a déjà été généré."
 
 #: pisi/actionsapi/texlivemodules.py:197
 msgid "No rule to proccess %s. Please file a bug."
-msgstr ""
+msgstr "Pas de règle pour traiter %s. Merci de faire un rapport de bug."
 
 #: pisi/actionsapi/texlivemodules.py:232
 msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
-msgstr ""
+msgstr "\\Les langues {%s}{%s}{}{%s}{%s} ont été ajoutées à %s/language.%s.def"
 
 #: pisi/actionsapi/texlivemodules.py:235
-#, fuzzy
 msgid "%s is added to %s/language.%s.dat"
-msgstr "Le dépôt %s a été ajouté au système."
+msgstr "%s a été ajouté à %s/language.%s.dat"
 
 #: pisi/actionsapi/texlivemodules.py:238
 msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
