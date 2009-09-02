@@ -110,6 +110,8 @@ cmd = sys.argv[1]
 
 if cmd == "create":
     create_sandbox("base", "http://192.168.3.110/pardus-2009/pisi-index.xml.bz2")
+elif cmd == "reset":
+    umount_sandbox()
 elif cmd == "build":
     pspec = sys.argv[2]
     mount_sandbox()
