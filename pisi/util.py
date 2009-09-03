@@ -534,16 +534,6 @@ def strip_file(filepath, fileinfo, outpath):
         run_strip(filepath, "--strip-debug")
         return True
 
-        """
-    if "SB relocatable" in fileinfo and filepath.endswith(".ko"):
-        # kernel module
-        if ctx.config.values.build.generatedebug:
-            check_dir(os.path.dirname(outpath))
-            save_elf_debug(filepath, outpath)
-        run_strip(filepath, "--strip-debug")
-        return True
-        """
-
     elif "SB executable" in fileinfo:
         if ctx.config.values.build.generatedebug:
             check_dir(os.path.dirname(outpath))
