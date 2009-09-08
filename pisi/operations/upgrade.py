@@ -165,7 +165,6 @@ def upgrade(A=[], repo=None):
     if conflicts:
         operations.remove.remove_conflicting_packages(conflicts)
 
-    operations.remove.remove_replaced_packages(replaces.keys())
     operations.remove.remove_obsoleted_packages()
 
     for path in paths:

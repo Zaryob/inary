@@ -139,6 +139,10 @@ class Install(AtomicOperation):
         self.operation = INSTALL
 
     def install(self, ask_reinstall = True):
+
+        # Any package should remove the package it replaces before
+        self.check_replaces()
+
         ctx.ui.status(_('Installing %s, version %s, release %s, build %s') %
                 (self.pkginfo.name, self.pkginfo.version,
                  self.pkginfo.release, self.pkginfo.build))
@@ -174,6 +178,11 @@ class Install(AtomicOperation):
         if self.metadata.package.providesComar and ctx.comar:
             import pisi.comariface as comariface
             comariface.get_link()
+
+    def check_replaces(self):
+        for replaced in self.pkginfo.replaces:
+            if self.installdb.has_package(replaced.package):
+                pisi.operations.remove.remove_replaced_packages([replaced.package])
 
     def check_versioning(self, version):
         if not pisi.version.Version.valid(version):
