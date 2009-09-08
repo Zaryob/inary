@@ -324,8 +324,8 @@ class SpecFile(xmlfile.XmlFile):
         for pak in doc.tags("Package"):
             for inst in self.packages:
                 if inst.name == pak.getTagData("Name"):
+                    self._set_i18n(pak, inst)
                     break
-            self._set_i18n(pak, inst)
 
     def __str__(self):
         s = _('Name: %s, version: %s, release: %s\n') % (
