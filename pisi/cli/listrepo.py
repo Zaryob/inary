@@ -16,6 +16,7 @@ _ = __trans.ugettext
 
 import pisi.cli.command as command
 import pisi.context as ctx
+import pisi.util as util
 import pisi.db
 
 class ListRepo(command.Command):
@@ -38,6 +39,9 @@ Lists currently tracked repositories.
         self.init(database = True, write = False)
         for repo in self.repodb.list_repos(only_active=False):
             active = _("active") if self.repodb.repo_active(repo) else _("inactive")
-            ctx.ui.info("%s [%s]" % (repo, active))
+            if active == _("active"):
+                ctx.ui.info(util.colorize(_("%s [%s]") % (repo, active), 'green'))
+            else:
+                ctx.ui.info(util.colorize(_("%s [%s]") % (repo, active), 'red'))
             print '  ', self.repodb.get_repo_url(repo)
 
