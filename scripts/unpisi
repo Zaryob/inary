@@ -45,15 +45,13 @@ def main():
 
     arc.unpack_files(['files.xml', 'metadata.xml'], '.')
     arc.unpack_files("install.tar.lzma", ctx.config.tmp_dir())
-    arc.unpack_dir_flat('comar','comar')
+    arc.unpack_dir('comar', '.')
 
     tar_file = util.join_path(ctx.config.tmp_dir(), "install.tar.lzma")
     tar = ArchiveTar(tar_file, 'tarlzma')
     tar.unpack_dir('.')
 
     os.unlink(tar_file)
-    os.unlink(tar_file.rstrip('.lzma'))
-
     return 0
 
 if __name__ == "__main__":
