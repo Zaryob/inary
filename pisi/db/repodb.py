@@ -134,8 +134,8 @@ class RepoDB(lazydb.LazyDB):
     def has_repo(self, name):
         return name in self.list_repos(only_active=False)
 
-    def has_repo_url(self, url):
-        return url in self.list_repo_urls()
+    def has_repo_url(self, url, only_active = True):
+        return url in self.list_repo_urls(only_active)
 
     def get_repo_doc(self, repo_name):
         repo = self.get_repo(repo_name)
