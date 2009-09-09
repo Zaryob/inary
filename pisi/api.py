@@ -478,6 +478,15 @@ def set_repo_activity(name, active):
     pisi.db.regenerate_caches()
 
 @locked
+def emerge(packages):
+    """
+    Builds and installs the given packages from source
+    @param packages: list of package names -> list_of_strings
+    """
+    pisi.db.historydb.HistoryDB().create_history("emerge")
+    return pisi.operations.emerge.emerge(packages)
+
+@locked
 def delete_cache():
     """
     Deletes cached packages, cached archives, build dirs, db caches
@@ -806,11 +815,6 @@ def rebuild_db(files=False):
 # from pisi.operations import plan_remove, plan_upgrade, upgrade_base, calculate_conflicts, reorder_base_packages
 # from pisi.build import build_until
 # from pisi.atomicoperations import resurrect_package, build
-
-@locked
-def emerge(*args, **kw):
-    pisi.db.historydb.HistoryDB().create_history("emerge")
-    return pisi.operations.emerge.emerge(*args, **kw)
 
 def calculate_conflicts(*args, **kw):
     return pisi.conflict.calculate_conflicts(*args, **kw)

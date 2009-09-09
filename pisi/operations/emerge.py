@@ -71,7 +71,7 @@ installed in the respective order to satisfy dependencies:
 
     for x in order_build:
         package_names = atomicoperations.build(x)[0]
-        pisi.operations.install.install_pkg_files(package_names) # handle inter-package deps here
+        pisi.operations.install.install_pkg_files(package_names, reinstall=True) # handle inter-package deps here
         # reset counts between builds
         ctx.ui.errors = ctx.ui.warnings = 0
 
