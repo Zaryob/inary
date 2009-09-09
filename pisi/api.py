@@ -384,6 +384,7 @@ def fetch(packages=[], path=os.path.curdir):
     repodb = pisi.db.repodb.RepoDB()
     for name in packages:
         package, repo = packagedb.get_package_repo(name)
+        ctx.ui.info(_("%s package found in %s repository") % (package.name, repo))
         uri = pisi.uri.URI(package.packageURI)
         if uri.is_absolute_path():
             url = str(pkg_uri)
