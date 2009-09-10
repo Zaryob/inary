@@ -10,6 +10,7 @@
 # Please read the COPYING file.
 
 import os
+import exceptions
 import gettext
 __trans = gettext.translation("pisi", fallback=True)
 _ = __trans.ugettext
@@ -28,11 +29,10 @@ def __pkg_already_installed(name, pkginfo):
     if not installdb.has_package(name):
         return False
 
-    ver, rel, build = str(pkginfo).split("-")
-    if build == '?':
-        build = None
-    else:
-        build = int(build)
+    verno = str(pkginfo).split("-")
+    ver, rel = verno[0:2]
+    build = int(verno[2]) if len(verno) > 2 else None
+
     return (ver, rel, build) == installdb.get_version(name)
 
 def __listactions(actions):
