@@ -13,6 +13,7 @@
 """Archive module provides access to regular archive file types."""
 
 # standard library modules
+import exceptions
 import os
 import stat
 import shutil
@@ -178,7 +179,11 @@ class ArchiveTar(ArchiveBase):
         if self.type == 'tarlzma' or self.type == 'tarZ':
             os.unlink(self.file_path)
 
-        os.chdir(oldwd)
+        try:
+            os.chdir(oldwd)
+        # Bug #6748
+        except exceptions.OSError:
+            pass
         self.close()
 
     def add_to_archive(self, file_name, arc_name=None):
