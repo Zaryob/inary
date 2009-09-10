@@ -29,10 +29,7 @@ class PackageInfo:
     a_build = [autoxml.String, autoxml.optional]
 
     def __str__(self):
-        if self.build:
-            return self.version + "-" + self.release + "-" + self.build
-        else:
-            return self.version + "-" + self.release
+        return self.version + "-" + self.release + "-" + (self.build or '?')
 
 class Repo:
     a_operation = [autoxml.String, autoxml.mandatory]
