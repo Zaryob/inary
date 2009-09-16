@@ -19,6 +19,7 @@ import glob
 import stat
 import pwd
 import grp
+import locale
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -131,7 +132,6 @@ def strip_debug_action(filepath, fileinfo, install_dir, ag):
     for exclude in excludelist:
         if p.startswith(exclude):
             strip = False
-            ctx.ui.debug("%s [%s]" %(p, "NoStrip"))
 
     if strip:
         if pisi.util.strip_file(filepath, fileinfo, outputpath):
@@ -838,12 +838,21 @@ class Builder:
 
     def file_actions(self):
         install_dir = self.pkg_install_dir()
+
+        locale.setlocale(locale.LC_ALL, 'C')
+        import magic
+        ms = magic.open(magic.MAGIC_NONE)
+        ms.load()
+
         for root, dirs, files in os.walk(install_dir):
             for fn in files:
                 filepath = pisi.util.join_path(root, fn)
-                fileinfo = os.popen("file \"%s\"" % filepath).read()
+                fileinfo = ms.file(filepath)
                 strip_debug_action(filepath, fileinfo, install_dir, self.actionGlobals)
                 exclude_special_files(filepath, fileinfo, install_dir, self.actionGlobals)
+
+        ms.close()
+        locale.setlocale(locale.LC_ALL, '')
 
     def build_packages(self):
         """Build each package defined in PSPEC file. After this process there

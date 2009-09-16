@@ -1,6 +1,8 @@
 2009-09-16 Ozan Çağlayan <ozan@pardus.org.tr>
 		* pisi/archive.py (ArchiveBzip2): Implement ArchiveBzip2 to support
-		.bz2 archive files.
+		.bz2 archive files,
+		* pisi/operations/build.py (Builder.file_actions): Use python magic
+		module instead of spawning file process to improve performance.
 
 2009-09-08 Ozan Çağlayan <ozan@pardus.org.tr>
 		* pisi/specfile.py (read_translations): Fix matching of translations
