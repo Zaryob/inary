@@ -14,7 +14,6 @@
 # python standard library
 import os
 import re
-import sys
 import glob
 import stat
 import pwd
@@ -93,7 +92,7 @@ def check_path_collision(package, pkgList):
                                  path.path)
     return collisions
 
-def exclude_special_files(filepath, fileinfo, install_dir, ag):
+def exclude_special_files(filepath, fileinfo, ag):
     keeplist = [] if not ag.has_key('KeepSpecial') else ag['KeepSpecial']
     patterns = {
              "libtool":".*: libtool library file",
@@ -849,7 +848,7 @@ class Builder:
                 filepath = pisi.util.join_path(root, fn)
                 fileinfo = ms.file(filepath)
                 strip_debug_action(filepath, fileinfo, install_dir, self.actionGlobals)
-                exclude_special_files(filepath, fileinfo, install_dir, self.actionGlobals)
+                exclude_special_files(filepath, fileinfo, self.actionGlobals)
 
         ms.close()
         locale.setlocale(locale.LC_ALL, '')
@@ -898,9 +897,6 @@ class Builder:
             if not package.icon:
                 package.icon = self.spec.source.icon
 
-
-
-            old_package_name = None
             # store additional files
             c = os.getcwd()
             os.chdir(self.specdir)
