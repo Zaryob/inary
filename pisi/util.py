@@ -15,7 +15,6 @@
 # standard python modules
 
 import os
-import re
 import sys
 import hashlib
 import shutil
