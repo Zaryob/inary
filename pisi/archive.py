@@ -20,6 +20,7 @@ import shutil
 import tarfile
 import zipfile
 import gzip
+import bz2
 import struct
 import sys
 
@@ -67,6 +68,28 @@ class ArchiveBinary(ArchiveBase):
         import shutil
         target_file = os.path.join(target_dir, os.path.basename(self.file_path))
         shutil.copyfile(self.file_path, target_file)
+
+class ArchiveBzip2(ArchiveBase):
+    """ArchiveBzip2 handles Bzip2 archive files"""
+    def __init__(self, file_path, arch_type = "bz2"):
+        super(ArchiveBzip2, self).__init__(file_path, arch_type)
+
+    def unpack(self, target_dir, clean_dir = False):
+        super(ArchiveBzip2, self).unpack(target_dir, clean_dir)
+        self.unpack_dir(target_dir)
+
+    def unpack_dir(self, target_dir):
+        """Unpack Bzip2 archive to a given target directory(target_dir)."""
+        oldwd = os.getcwd()
+        os.chdir(target_dir)
+
+        self.bzip2 = bz2.BZ2File(self.file_path, "r")
+        self.output = open(os.path.basename(self.file_path.rstrip(".bz2")), "w")
+        self.output.write(self.bzip2.read())
+        self.output.close()
+        self.bzip2.close()
+
+        os.chdir(oldwd)
 
 class ArchiveGzip(ArchiveBase):
     """ArchiveGzip handles Gzip archive files"""
@@ -477,6 +500,7 @@ class Archive:
             'tar': ArchiveTar,
             'zip': ArchiveZip,
             'gzip': ArchiveGzip,
+            'bzip2': ArchiveBzip2,
             'binary': ArchiveBinary
         }
 
