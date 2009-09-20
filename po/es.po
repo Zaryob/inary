@@ -10,18 +10,20 @@
 # Klemens Häckel <click3d at linuxmail dot org>, 2008, 2009.
 # Klemens Häckel <click3d at linuxmail dot com>, 2008, 2009.
 # Klemens Häckel <click3d at linuxmail _ org>, 2009.
+# Klemens Häckel <click3d at linuxmail (dot) org>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "POT-Creation-Date: 2009-08-17 09:53+EEST\n"
-"PO-Revision-Date: 2009-06-26 18:41-0400\n"
-"Last-Translator: Klemens Häckel <click3d at linuxmail dot org>\n"
-"Language-Team: spanish <es@li.org>\n"
+"PO-Revision-Date: 2009-08-30 07:08-0400\n"
+"Last-Translator: Klemens Häckel <click3d at linuxmail (dot) org>\n"
+"Language-Team: Spanish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: pisi-cli:41
 msgid "Keyboard Interrupt: Exiting..."
@@ -773,6 +775,8 @@ msgstr "Ignorar número de build."
 #: pisi/cli/build.py:56
 msgid "Run pisi build operation without printing extra debug information"
 msgstr ""
+"Ejecutar operación de pisi build sin mostrar informaciones adicionales de "
+"depuración"
 
 #: pisi/cli/build.py:59 pisi/cli/command.py:205
 msgid "Do not take dependency information into account"
@@ -1894,17 +1898,16 @@ msgid "Search in sourcedb"
 msgstr "Buscar en sourcedb"
 
 #: pisi/cli/search.py:53
-#, fuzzy
 msgid "Search in the package name"
-msgstr "Mostrar solamente nombre de paquete"
+msgstr "Buscar en nombre de paquetes"
 
 #: pisi/cli/search.py:55
 msgid "Search in the package summary"
-msgstr ""
+msgstr "Buscar en el resumen de los paquetes"
 
 #: pisi/cli/search.py:57
 msgid "Search in the package description"
-msgstr ""
+msgstr "Buscar en descripción de los paquetes"
 
 #: pisi/cli/searchfile.py:24
 msgid ""
@@ -2445,9 +2448,8 @@ msgid "Sandbox violation: %s (%s -> %s)"
 msgstr "Violación de caja de arena (Sandbox): %s (%s -> %s)"
 
 #: pisi/operations/build.py:494 pisi/util.py:452
-#, fuzzy
 msgid "ERROR: WorkDir (%s) does not exist\n"
-msgstr "Repositorio %s no existe."
+msgstr "ERROR: Directorio de trabajo (%s) no existe\n"
 
 # favor revisar
 #: pisi/operations/build.py:502
@@ -2975,9 +2977,8 @@ msgid "String '%s' has invalid XML"
 msgstr "Cadena '%s' contiene XML inválido"
 
 #: pisi/pxml/xmlfile.py:86
-#, fuzzy
 msgid "Unable to read file (%s): %s"
-msgstr "No posible leer Script de COMAR (%s): %s"
+msgstr "No posible leer archivo (%s): %s"
 
 #: pisi/pxml/xmlfile.py:88
 msgid "File '%s' has invalid XML"
