@@ -95,9 +95,9 @@ def check_path_collision(package, pkgList):
 def exclude_special_files(filepath, fileinfo, ag):
     keeplist = [] if not ag.has_key('KeepSpecial') else ag['KeepSpecial']
     patterns = {
-             "libtool":".*: libtool library file",
-             "python":".*: python.*byte-compiled",
-             "perl":".*: Perl POD document text"
+             "libtool": "libtool library file",
+             "python":  "python.*byte-compiled",
+             "perl":    "Perl POD document text"
              }
 
     if "libtool" in keeplist:
