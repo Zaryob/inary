@@ -1,3 +1,8 @@
+2009-09-25 Gökçen Eraslan <gokcen@pardus.org.tr>
+		* pisi/actionsapi/pisitools.py: In dosym method, file that already exists is the
+		destination file, not the source file. Print the correct error message
+		when there is already a destination file.
+
 2009-09-22 Fatih Aşıcı <fatih@pardus.org.tr>
 		* pisi/operations/build.py: Fix the special file patterns
 		for the new code using python magic module.
