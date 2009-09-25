@@ -233,7 +233,7 @@ def dosym(sourceFile, destinationFile):
     try:
         os.symlink(sourceFile, join_path(get.installDIR() ,destinationFile))
     except OSError:
-        error(_('ActionsAPI [dosym]: File exists: %s') % (sourceFile))
+        error(_('ActionsAPI [dosym]: File already exists: %s') % (destinationFile))
 
 def insinto(destinationDirectory, sourceFile,  destinationFile = '', sym = True):
     '''insert a sourceFile into destinationDirectory as a destinationFile with same uid/guid/permissions'''
