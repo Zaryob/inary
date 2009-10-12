@@ -182,9 +182,7 @@ class Install(AtomicOperation):
     def check_replaces(self):
         for replaced in self.pkginfo.replaces:
             if self.installdb.has_package(replaced.package):
-                (iversion, irelease, ibuild) = self.installdb.get_version(replaced.package)
-                if replaced.satisfies_relation(iversion, irelease):
-                    pisi.operations.remove.remove_replaced_packages([replaced.package])
+                pisi.operations.remove.remove_replaced_packages([replaced.package])
 
     def check_versioning(self, version):
         if not pisi.version.Version.valid(version):
