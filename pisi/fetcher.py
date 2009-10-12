@@ -44,19 +44,20 @@ class UIHandler:
         self.basename        = None
         self.downloaded_size = 0
         self.percent         = None
+        self.completed       = False
         self.rate            = 0.0
         self.eta             = '--:--:--'
         self.symbol          = '--/-'
         self.last_updated    = 0
         self.exist_size      = 0
 
-    def start(self, archive, url, basename, total_size, text):
+    def start(self, archive, url, basename, size, text):
         if os.path.exists(archive):
             self.exist_size = os.path.getsize(archive)
         self.filename   = basename
         self.url        = url
         self.basename   = basename
-        self.total_size = total_size or 0
+        self.total_size = size or 0
         self.text       = text
 
         self.now    = lambda: time.time()
@@ -78,7 +79,11 @@ class UIHandler:
                 self.eta  = '%02d:%02d:%02d' %\
                     tuple([i for i in time.gmtime((self.t_diff() * (100 - self.percent)) / self.percent)[3:6]])
 
-        self._update_ui()
+        if not self.completed:
+            self._update_ui()
+
+        if self.percent == 100.0:
+            self.completed = True
 
     def end(self, read):
         pass
@@ -203,7 +208,7 @@ class Fetcher:
         headers = file_obj.info()
         file_obj.close()
         if headers.has_key('Content-Length'):
-            return 'check_timestamp'
+            return 'simple'
         else:
             ctx.ui.debug(_("Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."))
             os.remove(self.partial_file)
