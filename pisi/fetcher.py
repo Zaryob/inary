@@ -46,6 +46,7 @@ class UIHandler:
         self.percent         = None
         self.completed       = False
         self.rate            = 0.0
+        self.size            = 0
         self.eta             = '--:--:--'
         self.symbol          = '--/-'
         self.last_updated    = 0
@@ -66,8 +67,11 @@ class UIHandler:
         self.s_time = self.now()
 
     def update(self, size):
-        self.size = size
 
+        if self.size == size:
+            return
+
+        self.size = size
         if self.total_size:
             self.percent = (size * 100.0) / self.total_size
         else:
@@ -79,11 +83,7 @@ class UIHandler:
                 self.eta  = '%02d:%02d:%02d' %\
                     tuple([i for i in time.gmtime((self.t_diff() * (100 - self.percent)) / self.percent)[3:6]])
 
-        if not self.completed:
-            self._update_ui()
-
-        if self.percent == 100.0:
-            self.completed = True
+        self._update_ui()
 
     def end(self, read):
         pass
