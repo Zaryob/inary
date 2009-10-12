@@ -54,7 +54,7 @@ class UIHandler:
     def start(self, archive, url, basename, size, text):
         if os.path.exists(archive):
             self.exist_size = os.path.getsize(archive)
-        self.filename   = basename
+        self.filename   = util.remove_suffix(ctx.const.partial_suffix, basename)
         self.url        = url
         self.basename   = basename
         self.total_size = size or 0
@@ -114,7 +114,7 @@ class Fetcher:
         self.url      = url
         self.destdir  = destdir
         self.archive_file = os.path.join(self.destdir, self.url.filename())
-        self.partial_file = self.archive_file + '.part'
+        self.partial_file = self.archive_file + ctx.const.partial_suffix
         self.progress = None
 
         util.check_dir(self.destdir)

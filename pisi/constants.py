@@ -50,6 +50,8 @@ class Constants:
         # suffix for lzma
         self.__c.lzma_suffix = ".lzma"
 
+        self.__c.partial_suffix = ".part"
+
         # suffix for auto generated debug packages
         self.__c.debug_name_suffix = "-dbginfo"
         self.__c.debug_file_suffix = ".debug"
