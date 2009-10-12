@@ -44,7 +44,6 @@ class UIHandler:
         self.basename        = None
         self.downloaded_size = 0
         self.percent         = None
-        self.completed       = False
         self.rate            = 0.0
         self.size            = 0
         self.eta             = '--:--:--'
