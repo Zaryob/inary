@@ -220,7 +220,7 @@ def installHeaders(extra=[]):
     # Settle the correct build symlink to this headers
     pisitools.dosym("/%s" % headersDirectoryName, "/lib/modules/%s/build" % suffix)
 
-def installLibcHeaders():
+def installLibcHeaders(excludes=[]):
     headers_tmp = os.path.join(get.installDIR(), 'tmp-headers')
     headers_dir = os.path.join(get.installDIR(), 'usr/include')
 
@@ -245,6 +245,9 @@ def installLibcHeaders():
 
     # Remove sound/ directory which is installed by alsa-headers
     shelltools.system("rm -rf %s/sound" % headers_dir)
+
+    # Remove possible excludes given by actions.py
+    shelltools.system("rm -rf %s" % " ".join(["%s/%s" % (headers_dir, exc.strip("/")) for exc in excludes))
 
     shelltools.cd(oldwd)
 
