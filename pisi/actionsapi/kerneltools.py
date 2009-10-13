@@ -247,7 +247,8 @@ def installLibcHeaders(excludes=[]):
     shelltools.system("rm -rf %s/sound" % headers_dir)
 
     # Remove possible excludes given by actions.py
-    shelltools.system("rm -rf %s" % " ".join(["%s/%s" % (headers_dir, exc.strip("/")) for exc in excludes))
+    if excludes:
+        shelltools.system("rm -rf %s" % " ".join(["%s/%s" % (headers_dir, exc.strip("/")) for exc in excludes))
 
     shelltools.cd(oldwd)
 
