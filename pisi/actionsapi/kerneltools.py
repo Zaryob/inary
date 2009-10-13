@@ -248,7 +248,7 @@ def installLibcHeaders(excludes=[]):
 
     # Remove possible excludes given by actions.py
     if excludes:
-        shelltools.system("rm -rf %s" % " ".join(["%s/%s" % (headers_dir, exc.strip("/")) for exc in excludes))
+        shelltools.system("rm -rf %s" % " ".join(["%s/%s" % (headers_dir, exc.strip("/")) for exc in excludes]))
 
     shelltools.cd(oldwd)
 
