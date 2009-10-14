@@ -1,0 +1,18 @@
+TODO
+-----
+
+(-) Add filter_flags, disable_as_needed, disable_no_undefined functions
+(-) pisitools.dobin() needs a destinationFile parameter to rename the binary
+(-) pisitools.dodoc() may need an optional mode parameter for chmodding installed
+    documents
+(-) pisitools.dodoc() does not allow passing a directory as source
+(-) pisitools.dobin() is already doing what pisitools.doexe() is doing
+(-) pisitools.dolib() and pisitools.dolib_so() are carbon copies!
+(-) Unify all dolib* stuff into one function
+(-) rename() could be dropped in favor of move()
+(-) pisitools.dosed() does not provide all sed functionality. It only supports
+    substitution. Rename the function or add support for other sed commands.
+(-) It is not clear which function takes source file paths relative to workDir or
+    relative to installDir (dosed, insinto -> workDir, rename -> installDir).
+    We may consider using different module names to distinguish these like
+    sourceutils, installutils, etc.

@@ -1,0 +1,110 @@
+
+Here we take notes of the strange stuff, so we can refactor them after
+Pardus 2007 release.
+
+
+==> Locale support
+* bindtextdomain and textdomain calls are not necessary, because
+gettext.translation() dont use them.
+
+* setlocale call is probably necessary for some stuff, but not for
+message translation, it seems gettext.translation() api looks for
+environment LC_ALL, LC_MESSAGES anyway.
+
+* pygettext.py shouldn't be needed at all. Plain xgettext works with
+python source.
+
+
+==> Utility functions
+* sha1_file and sha1_data functions has some
+exception confusion. These two functions should be a lot simpler.
+
+* To estimate required disk size for the packages more accurately we can
+calculate package size + (nr of files * inode size of fs).
+
+* Why in a world like this there exists *parse_package* util functions? These must be all methods of package class
+
+* Remove all unneeded util functions, most of them belongs its classes
+
+==> code readability
+* Public functions should contain doc strings.
+
+* Python builtins like file, list, etc should be avoided in variable names.
+There is even a file.py module!
+
+* a,b,c,d,f,r,_i,A,B,C,G are equally bad.
+
+* some import'ed modules are not used inside the importer modules, cleanup needed.
+
+* Convert all String Concatenation into "%s" % string form which is much faster, readable and correct
+
+==> exceptions
+* Current model is bad. Exception names should tell what is the error type. Instead
+we have one Error exception in every module. If I call pisi.api.install("lala"),
+I should get pisi.api.PackageNotFound or pisi.install.PackageNotFound or something
+like that. For every kind of error, you get pisi.api.Error now, and only way to find
+out exact error is try to parse error string (which is localized).
+
+* class Exception(Exception) is evil.
+
+* There shouldn't be a bare Except: clause in pisi modules.
+
+
+==> database
+* We should have a DB performance test suite to find important points to make faster,
+if we cannot measure, we cannot improve. 
+
+==> class attributes
+* In some classes there are some attributes assigned but never
+used. (see remove_unused_attributes.patch)
+
+* PiSi uses heavy classes and creates thousands of instances of them
+  (Package, Metadata, Dependency, ...). These classes should define
+  __slots__ to reduce the heap used.
+
+
+==> actionsAPI
+* Get rid of ugly exception model
+* Refactor/clean the code
+* Add strict checks to models
+* Maybe? Get rid of functional logic, switch to OO one
+* ActionsAPI still needs an updated API document
+
+
+==> PiSi API
+* Write a real one
+
+
+==> Function parameters
+* Check function parameters and see if some parameters (especially the
+ones named tmpDir/tmp_dir/target_dir) are redundant now. See
+http://liste.uludag.org.tr/uludag-commits/2007-February/010070.html
+
+==> Fixes (that need API breakage)
+* http://liste.uludag.org.tr/uludag-commits/2007-February/010117.html
+
+==> Logging
+
+* Improve logging with all needed update/downgrade/install/remove information so one can easily find the history of packages, 
+currently PiSi wrotes everyting into logs which is not usefull. Also this information can be used for rollback and reporting.
+
+==> function code lengths
+
+* we have some functions that goes pages long... divide all of them to small digestable chunks.. 
+  avoid writing functions longer than your editor's screen.
+
+==> assertions
+
+* Lots of assertions used in the code with no following descriptive string information.
+
+==> repo order
+
+* When trying to install a package or looking for a dependency for a package the first found package
+  in "repo order" is used. This design decision is not very good. When a new repo that has the latest
+  version of any package is added and if it is the last repo in order, pisi can not upgrade to this 
+  package. 
+
+  We can remove this order thing and in this situation we can use the latest version of the package.
+  This should also lead to some other problems but between these two not very good solutions this 
+  seems to be the better one.
+

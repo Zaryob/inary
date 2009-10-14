@@ -1,0 +1,15 @@
+You can install PiSi on your system with a single command.
+
+# ./setup.py install
+
+If you are on a Pardus system, you should delete /usr/lib/pardus/pisi
+when you are installing the SVN version
+
+PiSi requires piksemel XML processing library, Pardus configuration 
+manager COMAR and COMAR API in order to run.
+
+If you are upgrading from an old PiSi release you may have to 
+run the following command as root:
+
+# pisi rebuild-db
+
