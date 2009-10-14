@@ -1,0 +1,115 @@
+API Plan
+========
+
+Pisi does not have a usable api. All the projects use its internal modules to do their
+jobs. This file holds a list of these usages by project as a guide for a new competent 
+pisi api.
+
+PiSi
+====
+
+Below are pisi's internal calls that they may help to figure out common api calls.
+
+* packagedb.remove_repo
+* sourcedb.remove_repo
+* packagedb.which_repo
+* repodb.get_repo
+* packagedb.get_package
+* installdb.is_installed
+* packagedb.get_rev_deps
+* installdb.get_version
+* packagedb.has_package
+* packagedb.add_package
+* componentdb.add_package
+* filesdb.has_file
+* filesdb.get_file
+* installdb.get_info
+* installdb.files
+* installdb.pkg_dir
+* installdb.install
+* filesdb.add_files
+* componentdb.add_spec
+* sourcedb.add_spec
+* componentdb.get_union_comp
+* componentdb.remove_spec
+* installdb.get_version
+* componentdb.remove_repo
+* componentdb.remove_package
+* componentdb.update_component
+* componentdb.add_package
+* installdb.remove
+* filesdb.remove_files
+* sourcedb.pkgtosrc
+* sourcedb.get_spec
+* sourcedb.get_source
+* sourcedb.get_spec_repo
+* repodb.get_repo
+* componentdb.has_component
+* componentdb.get_component
+* installdb.is_installed
+* packagedb.list_packages
+* installdb.list_installed
+* componentdb.get_union_packages
+* componentdb.list_components
+* repodb.list
+* sourcedb.list
+* installdb.list_pending
+* filesdb.match_files
+
+Package Manager
+===============
+
+Below are the pisi modules used internally by package-manager. Package-manager should use pisi
+api.
+
+* repodb.get_repo
+* packagedb.get_package
+  pm still uses the old packagedb with pisi.itemsbyrepo.installed or pisi.itemsbyrepo.repos params
+* componentdb.list_components
+* repodb.list
+* componentdb.get_union_comp
+* componentdb.get_union_packages
+
+Yali
+====
+
+Below are the pisi modules used internally by Yali. Yali should use pisi api.
+
+* api.add_repo
+* api.update_repo
+* api.remove_repo
+* api.install
+* packagedb.list_packages
+* installdb.list_pending
+* api.configure_pending
+* packagedb.get_package
+
+Buildfarm
+=========
+
+Below are the pisi modules used internally by Buildfarm.
+
+* api.create_delta_package
+
+PackageKit
+==========
+
+Below are the pisi modules used internally by PackageKit.
+
+* installdb.has_package
+* installdb.get_package
+* packagedb.has_package
+* packagedb.get_package
+* installdb.get_rev_deps
+* packagedb.get_rev_deps
+* installdb.get_package.runtimeDependencies
+* packagedb.get_package.runtimeDependencies
+* api.install
+* api.upgrade
+* api.remove
+* api.list_upgradable
+* api.update_repo 
+* api.list_repos
+* repodb.get_repo.indexuri.get_uri
+* version.Version
+* util.any

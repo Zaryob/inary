@@ -1,0 +1,219 @@
+2009-04-09 Ozan Çağlayan <ozan@pardus.org.tr>
+        * (scripts/revdep-rebuild): Ignore /opt/ptsp during library and binary
+        search.
+
+2009-02-13 Faik Uygur <faik@pardus.org.tr>
+        * pisi-2.1.2
+
+2009-02-13 Faik Uygur <faik@pardus.org.tr>
+        * Make enableSandbox enabled default
+        * Export CXX and CC before compiling
+
+2009-02-10 Faik Uygur <faik@pardus.org.tr>
+        * pisi history --takeback should not give an exception and quit when package
+        does not found (#9083)
+
+2009-02-10 Faik Uygur <faik@pardus.org.tr>
+        * Make pisi search output colored like grep (#9156)
+
+2009-02-05 Bahadır Kandemir <bahadir@pardus.org.tr>
+        * pisi/api.py (configure_pending): Import comariface when necessary.
+
+2009-02-05 Ozan Çağlayan <ozan@pardus.org.tr>
+        * pisi/actionsapi/pisitools.py (dosed): Unlink backup file in all situations
+        as it now raises warning instead of error.
+
+2009-02-04 Faik Uygur <faik@pardus.org.tr>
+        * Add --repository parameter to pisi upgrade operation to upgrade packages from only
+        given repository (#6157)
+        * Add activate/deactive repository functionality to pisi api
+        * Add --repository parameter to use with --component parameter which lets pisi install
+        operation to install components from only given repository (#8123)
+
+2009-02-04 Ozan Çağlayan <ozan@pardus.org.tr>
+        * po/*.po: Update PO messages, fix bugzilla url,
+        * po/tr.po: Complete missing translations.
+        * pisi/cli/listupgrades.py (run): Return if there are no updates, resize the first column of the output.
+        * pisi/cli/listnewest.py (run): No need to double check for 'l' before the assignment of maxlen.
+
+2009-02-02 Faik Uygur <faik@pardus.org.tr>
+        * Add human readable package size info to pisi info output. (#8845)
+        * Speed up finding old packages process. (#9101)
+
+2009-02-01 Ozan Çağlayan <ozan@pardus.org.tr>
+        * pisi/metadata.py (Package.__str__): Use human_readable_size() to output installed size.
+
+2009-01-29 Faik Uygur <faik@pardus.org.tr>
+        * Fix not allowing local letters other than [a-zA-Z] and space for repo names (#8361)
+
+2009-01-28 Fatih Aşıcı <fatih@pardus.org.tr>
+        * Fix auto-dodoc in pythonmodules to include ChangeLog, README, etc.
+
+2009-01-27 Faik Uygur <faik@pardus.org.tr>
+        * When a takeback operation is accepted there should be no other question (#8811)
+        * Make pisi help command outputs translatable (#9089)
+        * Add list_sources method to pisi api.
+
+2009-01-26 Faik Uygur <faik@pardus.org.tr>
+        * When pisi fails to download the package raise an error and exit. This is needed when
+        pisi is behind a proxy with some virus control mechanism that sends a html status page
+        instead of the package file. (#4113)
+        * Add -x and --exclude-from packages parameters to install operation. (#9020)
+
+2009-01-23 Faik Uygur <faik@pardus.org.tr>
+        * Fix a critical regression bug which prevents an upgrade operation (#9038)
+
+2009-01-20 Faik Uygur <faik@pardus.org.tr>
+        * Fix a bug in the delta code that is discovered in virtualbox' delta package where a symlink
+        is tried to be overwritten by the previous linked file with the same name.
+
+2009-01-17 Ozan Çağlayan <ozan@pardus.org.tr>
+        * pisi/operations/build.py (get_abandoned_files): Delimit the paths
+        written in pspec.xml's Files section with a trailing '/' for not
+        matching similar patterns like /usr/lib and /usr/libexec during
+        abandoned files checking.
+
+2009-01-16 Faik Uygur <faik@pardus.org.tr>
+        * Add pisi list-newest [--since yyyy-mm-dd] [--last nth_previous_repo_ update]
+        Lists the newly added packages in the repositories.
+
+2009-01-14 Ozan Çağlayan <ozan@pardus.org.tr>
+        * pisi/cli/listavailable.py (print_packages): Resize the first column
+        dynamically according to the longest package name (#9021) and fix some
+        other displaying issues concerning 'listavailable' command.
+        * pisi/cli/listinstalled.py (run): Resize the first column
+        dynamically according to the longest package name.
+
+2009-01-09 Gökçen Eraslan <gokcen@pardus.org.tr>
+        * pisi/actionsapi/cmaketools.py: If both -v and -d parameters are
+        given, pass VERBOSE=1 parameter to make command. This results printing
+        commands in make to the screen in addition to the colorful cmake progress lines.
+
+2009-01-07 Faik Uygur <faik@pardus.org.tr>
+        * pisi-2.1.1
+
+2009-01-04 Gökçen Eraslan <gokcen@pardus.org.tr>
+        * (pisi/actionsapi/{pisitools.py, pisitoolsfunctions.py,
+        shelltools.py}): Check glob methods. This means, if any action in actions.py, operates
+        on files that do not exist, pisi raises an exception about that.
+        * (pisi/actionsapi/shelltools.py): Check return value of the given command of shelltools.system, raise
+        exception if it is not equal to zero. This also effects methods using system, like domo, dobin, doman etc.
+        * (pisi/actionsapi/pisitools.py): Raise exception, if dosed does not change anything in given file.
+
+2008-12-27 Ozan Çağlayan <ozan@pardus.org.tr>
+        * (pisi/cli/command.py): Trivial cosmetic patch by Ömer Fadıl Usta
+        to fix the layout issue of 'pisi help' (#8907).
+
+2008-12-23 Gökmen Göksel <gokmen@pardus.org.tr>
+        * Fix dodoc for python
+
+2008-12-23 Faik Uygur <faik@pardus.org.tr>
+        * Fix replaced package upgrades regression. No upgrades was possible.
+        * Fix optional and mandatory problem of <Requires> <Action> tags when
+        pisi.spec.SpecFile is used.
+
+2008-12-22 Faik Uygur <faik@pardus.org.tr>
+        * Fail if build dependency install is unsuccesful.
+
+2008-12-08 Ozan Çağlayan <ozan@pardus.org.tr>
+        * Added 4Suite and Qhull licenses
+
+2008-12-05 Faik Uygur <faik@pardus.org.tr>
+        * Add get_config_files helper to installdb
+        * Clean up pisi.api.check and move check to pisi.operations.check
+        * Added --config parameter to pisi check that now checks and finds any
+        changed config file (#8436)
+
+2008-12-02 Faik Uygur <faik@pardus.org.tr>
+        * If full path is given to pisi sf then lookup package in filesdb for
+        a quick search result.
+
+2008-12-01 Faik Uygur <faik@pardus.org.tr>
+        * pisi-2.1.0
+
+2008-11-27 Ozan Çağlayan <ozan@pardus.org.tr>
+        * (cli/__init__.py): Flush stdin buffer just before asking a question.
+
+2008-11-26 Faik Uygur <faik@pardus.org.tr>
+        * Check versioning of the package while building and installing. (#5493)
+        * Make warning message color brightyellow instead of brightred. Red indicates
+        a fatal error. (#5619)
+
+2008-11-25 Faik Uygur <faik@pardus.org.tr>
+        * Fix fetching pspec.xml twice.
+        * pisi cli does not have to give all user friendly messages. But "I/O Error"
+        is not necessary here. (#6402)
+
+2008-11-21 Faik Uygur <faik@pardus.org.tr>
+        * Symlink files' existence should be checked not the linked file's. (#7336)
+        * Check build dependencies before downloading all the patches of a
+        remote build operation (#5370)
+
+2008-11-19 Faik Uygur <faik@pardus.org.tr>
+        * Install operation should fetch all the packages before starting to install.
+        * Install operation should show the status of the operation (#8623)
+
+2008-11-10 Faik Uygur <faik@pardus.org.tr>
+        * If an unsatisfied build dep is found and another version of that package is installed
+        build asks to install the package but than exits complaining that the package is already
+        installed. (#8379)
+
+2008-11-10 Türker Sezer <turkersezer@tsdesign.info>
+        * Do not ask to remove conflicting packages until it is time to remove them. The
+        message is misleading when --fetch-only is used. (#4539)
+
+2008-11-05 Faik Uygur <faik@pardus.org.tr>
+        * Force upgrade of replaced packages. Because they are also obsoleted packages,
+        they will be removed in any way. This is not wanted for replaced driver packages.
+        * Privilege warning messages added to pisi history command (#8515)
+
+2008-11-03 Faik Uygur <faik@pardus.org.tr>
+        * debug_packages_dir config option is added to calculate build nos
+        of debug packages if they are moved to somewhere than compiled_packages_dir.
+
+2008-10-15 Ozan Çağlayan <ozan@pardus.org.tr>
+        * (po/de.po): Correct word for "Package" is "Paket" (Fixes #8501)
+
+2008-10-15 Faik Uygur <faik@pardus.org.tr>
+        * doman should also work on compressed man files. (#8426)
+
+2008-10-06 Faik Uygur <faik@pardus.org.tr>
+        * Raise exception when tried to run another instance of pisi. (#8145)
+
+2008-09-25 Faik Uygur <faik@pardus.org.tr>
+        * Fix leaving symlinks while removing a package problem.
+
+2008-09-10 Fatih Aşıcı <fatih@pardus.org.tr>
+        * Add validation for sub packages having icons.
+
+2008-09-10 Ozan Çağlayan <ozan@pardus.org.tr>
+        * Fix only the first unsatisfied runtime dependency being
+        resolved while building a standalone package.
+
+2008-09-08 Faik Uygur <faik@pardus.org.tr>
+        * Add Requires tag to Update with actions.
+
+2008-09-04 Faik Uygur <faik@pardus.org.tr>
+        * Allow dot in repo name fix.
+
+2008-09-03 Eren Türkay <turkay.eren@gmail.com>
+        * Fix for false sandbox violation errors. (#7328)
+
+2008-09-03 Faik Uygur <faik@pardus.org.tr>
+        * pisi-2.0.1
+
+2008-09-02 Faik Uygur <faik@pardus.org.tr>
+        * Only add delta packages to latest build of the package.
+
+2008-08-07 Faik Uygur <faik@pardus.org.tr>
+        * Fix validity checks while adding a new repo. (#5940, #5906)
+        * Increase console information line length. (#5281)
+        * pisi it *.pisi was showing same package name multiple times
+        as a dependency. (#7929)
+
+2008-08-04 Faik Uygur <faik@pardus.org.tr>
+        * Fix for pisi history not showing +999 operations bug.
+
+2008-07-31 Türker Sezer <turkersezer@tsdesign.info>
+        * Fix failing pisi la -c when component not found in the
+        first repository. (#7929)

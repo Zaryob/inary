@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMI xmlns:UML="http://schema.omg.org/spec/UML/1.3" verified="false" timestamp="2006-09-29T21:06:38" xmi.version="1.2" >
+ <XMI.header>
+  <XMI.documentation>
+   <XMI.exporter>umbrello uml modeller http://uml.sf.net</XMI.exporter>
+   <XMI.exporterVersion>1.5.4</XMI.exporterVersion>
+   <XMI.exporterEncoding>UnicodeUTF8</XMI.exporterEncoding>
+  </XMI.documentation>
+  <XMI.metamodel xmi.name="UML" href="UML.xml" xmi.version="1.3" />
+ </XMI.header>
+ <XMI.content>
+  <UML:Model isSpecification="false" isLeaf="false" isRoot="false" xmi.id="m1" isAbstract="false" name="UML Model" >
+   <UML:Namespace.ownedElement>
+    <UML:Stereotype isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="3" isRoot="false" isAbstract="false" name="datatype" />
+    <UML:Stereotype isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="108" isRoot="false" isAbstract="false" name="enum" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="2" isRoot="false" isAbstract="false" name="int" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="4" isRoot="false" isAbstract="false" name="char" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="5" isRoot="false" isAbstract="false" name="bool" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="6" isRoot="false" isAbstract="false" name="float" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="7" isRoot="false" isAbstract="false" name="double" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="8" isRoot="false" isAbstract="false" name="short" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="9" isRoot="false" isAbstract="false" name="long" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="10" isRoot="false" isAbstract="false" name="unsigned int" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="11" isRoot="false" isAbstract="false" name="unsigned short" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="12" isRoot="false" isAbstract="false" name="unsigned long" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="13" isRoot="false" isAbstract="false" name="string" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="89" isRoot="false" isAbstract="false" name="data" />
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="24" isRoot="false" isAbstract="false" name="InstallDB" >
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="25" type="76" name="d" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="77" type="76" name="db" />
+     </UML:Classifier.feature>
+     <UML:Namespace.ownedElement>
+      <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="24" xmi.id="14" isRoot="false" isAbstract="false" name="InstallInfo" >
+       <UML:Classifier.feature>
+        <UML:Attribute isSpecification="false" visibility="private" xmi.id="79" type="13" name="state" />
+        <UML:Attribute isSpecification="false" visibility="private" xmi.id="80" type="13" name="version" />
+        <UML:Attribute isSpecification="false" visibility="private" xmi.id="81" type="13" name="release" />
+        <UML:Attribute isSpecification="false" visibility="private" xmi.id="82" type="13" name="build" />
+        <UML:Attribute isSpecification="false" visibility="private" xmi.id="83" type="13" name="distribution" />
+        <UML:Attribute isSpecification="false" visibility="private" xmi.id="84" type="13" name="time" />
+       </UML:Classifier.feature>
+      </UML:Class>
+     </UML:Namespace.ownedElement>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="76" isRoot="false" isAbstract="false" name="LockedDBShelf" />
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="86" isRoot="false" isAbstract="false" name="RepoDB" >
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="87" type="76" name="d" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="98" isRoot="false" isAbstract="false" name="Repo" >
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="99" type="13" name="indexuri" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="111" isRoot="false" isAbstract="false" name="FilesDB" >
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="112" type="76" name="d" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="114" isRoot="false" isAbstract="false" name="FileInfo" >
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="115" type="13" name="path" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="116" type="13" name="type" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="117" type="9" name="size" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="118" type="13" name="hash" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="119" type="5" name="permanent" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Enumeration stereotype="108" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="141" isRoot="false" isAbstract="false" name="repo" >
+     <UML:EnumerationLiteral isSpecification="false" isLeaf="false" visibility="public" namespace="141" xmi.id="142" isRoot="false" isAbstract="false" name="installed" />
+     <UML:EnumerationLiteral isSpecification="false" isLeaf="false" visibility="public" namespace="141" xmi.id="143" isRoot="false" isAbstract="false" name="thirdparty" />
+     <UML:EnumerationLiteral isSpecification="false" isLeaf="false" visibility="public" namespace="141" xmi.id="144" isRoot="false" isAbstract="false" name="repos" />
+     <UML:EnumerationLiteral isSpecification="false" isLeaf="false" visibility="public" namespace="141" xmi.id="145" isRoot="false" isAbstract="false" name="all" />
+    </UML:Enumeration>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="146" isRoot="false" isAbstract="false" name="ItemByRepo" >
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="147" type="76" name="d" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="155" isRoot="false" isAbstract="false" name="ComponentDB" >
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="156" type="146" name="d" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="163" isRoot="false" isAbstract="false" name="Component" >
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="164" type="13" name="name" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="165" type="13" name="localname" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="166" type="13" name="summary" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="167" type="13" name="description" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="168" type="177" name="dependencies" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="169" type="177" name="packages" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="170" type="177" name="sources" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="177" isRoot="false" isAbstract="false" name="list" />
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="186" isRoot="false" isAbstract="false" name="PackageDB" >
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="187" type="146" name="d" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="188" type="146" name="dr" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="190" isRoot="false" isAbstract="false" name="Package" >
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="191" type="13" name="name" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="192" type="13" name="summary" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="193" type="13" name="description" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="194" type="13" name="partof" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="195" type="13" name="license" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="196" type="177" name="packageDependencies" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="197" type="177" name="componentDependencies" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="198" type="177" name="files" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="199" type="177" name="conflicts" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="200" type="177" name="providesComar" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="201" type="177" name="additionalFiles" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="202" type="177" name="history" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="211" isRoot="false" isAbstract="false" name="SourceDB" >
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="212" type="146" name="d" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="213" type="146" name="dpkgtosrc" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="215" isRoot="false" isAbstract="false" name="SpecFile" >
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="216" type="217" name="source" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="218" type="177" name="packages" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="219" type="177" name="history" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="221" type="177" name="components" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="217" isRoot="false" isAbstract="false" name="Source" />
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="220" isRoot="false" isAbstract="false" name="History" />
+    <UML:Association isSpecification="false" visibility="public" namespace="m1" xmi.id="26" name="" >
+     <UML:Association.connection>
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="false" xmi.id="27" aggregation="none" type="24" name="" />
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="28" aggregation="none" type="14" name="" />
+     </UML:Association.connection>
+    </UML:Association>
+    <UML:Association isSpecification="false" visibility="public" namespace="m1" xmi.id="35" name="" >
+     <UML:Association.connection>
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="false" xmi.id="36" aggregation="none" type="24" name="" />
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="37" aggregation="none" type="14" name="" multiplicity="n" />
+     </UML:Association.connection>
+    </UML:Association>
+    <UML:Association isSpecification="false" visibility="public" namespace="m1" xmi.id="40" name="1..*" >
+     <UML:Association.connection>
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="false" xmi.id="41" aggregation="none" type="24" name="" />
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="42" aggregation="none" type="14" name="" />
+     </UML:Association.connection>
+    </UML:Association>
+    <UML:Association isSpecification="false" visibility="public" namespace="m1" xmi.id="64" name="" >
+     <UML:Association.connection>
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="65" aggregation="none" type="24" name="" />
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="66" aggregation="none" type="14" name="" />
+     </UML:Association.connection>
+    </UML:Association>
+    <UML:Association isSpecification="false" visibility="public" namespace="m1" xmi.id="73" name="" >
+     <UML:Association.connection>
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="false" xmi.id="74" aggregation="none" type="24" name="" />
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="75" aggregation="none" type="14" name="" />
+     </UML:Association.connection>
+    </UML:Association>
+    <UML:Association isSpecification="false" visibility="public" namespace="m1" xmi.id="90" name="1..*" >
+     <UML:Association.connection>
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="91" aggregation="composite" type="24" name="name" />
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="92" aggregation="none" type="14" name="" />
+     </UML:Association.connection>
+    </UML:Association>
+    <UML:Association isSpecification="false" visibility="public" namespace="m1" xmi.id="100" name="1..*" >
+     <UML:Association.connection>
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="101" aggregation="composite" type="86" name="" />
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="102" aggregation="none" type="98" name="" />
+     </UML:Association.connection>
+    </UML:Association>
+    <UML:Association isSpecification="false" visibility="public" namespace="m1" xmi.id="120" name="1..*" >
+     <UML:Association.connection>
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="121" aggregation="composite" type="111" name="" />
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="122" aggregation="none" type="114" name="" />
+     </UML:Association.connection>
+    </UML:Association>
+    <UML:Dependency isSpecification="false" visibility="public" namespace="m1" xmi.id="149" client="146" name="" supplier="141" />
+    <UML:Association isSpecification="false" visibility="public" namespace="m1" xmi.id="171" name="1..*" >
+     <UML:Association.connection>
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="172" aggregation="composite" type="155" name="" />
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="173" aggregation="none" type="163" name="" />
+     </UML:Association.connection>
+    </UML:Association>
+    <UML:Association isSpecification="false" visibility="public" namespace="m1" xmi.id="203" name="1..*" >
+     <UML:Association.connection>
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="204" aggregation="composite" type="186" name="" />
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="205" aggregation="none" type="190" name="" />
+     </UML:Association.connection>
+    </UML:Association>
+    <UML:Association isSpecification="false" visibility="public" namespace="m1" xmi.id="222" name="1..*" >
+     <UML:Association.connection>
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="223" aggregation="composite" type="211" name="" />
+      <UML:AssociationEnd isSpecification="false" visibility="public" changeability="changeable" isNavigable="true" xmi.id="224" aggregation="none" type="215" name="" />
+     </UML:Association.connection>
+    </UML:Association>
+   </UML:Namespace.ownedElement>
+  </UML:Model>
+ </XMI.content>
+ <XMI.extensions xmi.extender="umbrello" >
+  <docsettings viewid="209" documentation="" uniqueid="234" />
+  <diagrams>
+   <diagram snapgrid="0" showattsig="1" fillcolor="#ffffc0" linewidth="0" zoom="100" showgrid="0" showopsig="1" usefillcolor="1" snapx="10" canvaswidth="1012" snapy="10" showatts="1" xmi.id="1" documentation="" type="402" showops="1" showpackage="0" name="InstallDB" localid="900000" showstereotype="0" showscope="1" snapcsgrid="0" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="#ff0000" canvasheight="593" >
+    <widgets>
+     <classwidget usesdiagramfillcolour="0" width="142" showattsigs="601" usesdiagramusefillcolour="0" x="543" y="273" showopsigs="601" linewidth="none" fillcolour="#ffffc0" height="135" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="14" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="#ff0000" />
+     <classwidget usesdiagramfillcolour="0" width="204" showattsigs="601" usesdiagramusefillcolour="0" x="35" y="355" showopsigs="601" linewidth="none" fillcolour="#ffffc0" height="63" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="24" showoperations="1" showpackage="1" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="#ff0000" />
+     <notewidget usesdiagramfillcolour="1" width="413" usesdiagramusefillcolour="1" x="27" y="149" linewidth="none" fillcolour="none" height="185" usefillcolor="1" isinstance="0" xmi.id="46" showstereotype="1" text="@d: is a bsddb dict which holds package related data. 
+key:&quot;package name&quot; value:InstallInfo 
+
+&quot;/var/db/pisi/install.bdb&quot; 
+
+@dp: is a bsddb dict which holds pending packages data. 
+key:&quot;package name&quot; value:bool 
+
+&quot;/var/db/pisi/configpending.bdb&quot; 
+" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     <notewidget usesdiagramfillcolour="1" width="411" usesdiagramusefillcolour="1" x="15" y="14" linewidth="none" fillcolour="none" height="113" usefillcolor="1" isinstance="0" xmi.id="47" text="installdb.py 
+
+The main purpose of the installdb is to hold the packages' version and status infos. " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     <notewidget usesdiagramfillcolour="1" width="313" usesdiagramusefillcolour="1" x="678" y="50" linewidth="none" fillcolour="none" height="245" usefillcolor="1" isinstance="0" xmi.id="49" showstereotype="1" text="@state: holds the status of the package 
+	'i' : 'installed'
+	'ip' : 'installed-pending'
+	'r' : 'removed'
+	'p' : 'purged'
+@version: version of the package 
+@release: release number of the package 
+@build: build number of the package 
+@distribution: distribution of the package. (exp: &quot;Pardus&quot;) 
+@time: the time when the package is installed 
+" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+    </widgets>
+    <messages/>
+    <associations>
+     <assocwidget totalcounta="2" indexa="1" totalcountb="2" indexb="1" linewidth="none" widgetbid="14" widgetaid="24" xmi.id="90" linecolor="none" >
+      <linepath>
+       <startpoint startx="239" starty="386" />
+       <endpoint endx="543" endy="340" />
+      </linepath>
+      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="391" y="363" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="227" text="1..*" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+      <floatingtext usesdiagramfillcolour="1" width="56" usesdiagramusefillcolour="1" x="241" y="362" linewidth="none" posttext="" role="709" fillcolour="none" height="22" usefillcolor="1" pretext="+" isinstance="0" xmi.id="228" text="name" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     </assocwidget>
+    </associations>
+   </diagram>
+   <diagram snapgrid="0" showattsig="1" fillcolor="#ffffc0" linewidth="0" zoom="100" showgrid="0" showopsig="1" usefillcolor="1" snapx="10" canvaswidth="1012" snapy="10" showatts="1" xmi.id="52" documentation="" type="402" showops="1" showpackage="0" name="RepoDB" localid="900000" showstereotype="0" showscope="1" snapcsgrid="0" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="#ff0000" canvasheight="593" >
+    <widgets>
+     <notewidget usesdiagramfillcolour="1" width="453" usesdiagramusefillcolour="1" x="16" y="13" linewidth="none" fillcolour="none" height="108" usefillcolor="1" isinstance="0" xmi.id="54" text="repodb.py 
+
+The main purpose of the repodb is to hold the repositories' infos (currently we only have the repository's url). 
+" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     <classwidget usesdiagramfillcolour="1" width="139" showattsigs="601" usesdiagramusefillcolour="1" x="35" y="299" showopsigs="601" linewidth="none" fillcolour="none" height="45" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="86" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
+     <notewidget usesdiagramfillcolour="1" width="403" usesdiagramusefillcolour="1" x="22" y="165" linewidth="none" fillcolour="none" height="101" usefillcolor="1" isinstance="0" xmi.id="88" showstereotype="1" text="@d: is a bsddb dict which holds repositories' infos 
+key:&quot;repository name&quot; value:Repo 
+
+&quot;/var/db/pisi/repodb.bdb&quot; 
+" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     <classwidget usesdiagramfillcolour="1" width="121" showattsigs="601" usesdiagramusefillcolour="1" x="538" y="259" showopsigs="601" linewidth="none" fillcolour="none" height="45" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="98" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
+     <notewidget usesdiagramfillcolour="1" width="243" usesdiagramusefillcolour="1" x="615" y="211" linewidth="none" fillcolour="none" height="58" usefillcolor="1" isinstance="0" xmi.id="106" showstereotype="1" text="@indexuri: url of the repository. " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+    </widgets>
+    <messages/>
+    <associations>
+     <assocwidget totalcounta="2" indexa="1" totalcountb="2" indexb="1" linewidth="none" widgetbid="98" widgetaid="86" xmi.id="100" linecolor="none" >
+      <linepath>
+       <startpoint startx="174" starty="321" />
+       <endpoint endx="538" endy="281" />
+      </linepath>
+      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="356" y="301" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="229" text="1..*" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     </assocwidget>
+    </associations>
+   </diagram>
+   <diagram snapgrid="0" showattsig="1" fillcolor="#ffffc0" linewidth="0" zoom="100" showgrid="0" showopsig="1" usefillcolor="1" snapx="10" canvaswidth="1012" snapy="10" showatts="1" xmi.id="109" documentation="" type="402" showops="1" showpackage="0" name="FilesDB" localid="900000" showstereotype="0" showscope="1" snapcsgrid="0" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="#ff0000" canvasheight="593" >
+    <widgets>
+     <notewidget usesdiagramfillcolour="1" width="404" usesdiagramusefillcolour="1" x="14" y="14" linewidth="none" fillcolour="none" height="113" usefillcolor="1" isinstance="0" xmi.id="110" text="filesdb.py 
+
+The main purpose of the filesdb is to hold all the packages' files' information. 
+" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     <classwidget usesdiagramfillcolour="1" width="139" showattsigs="601" usesdiagramusefillcolour="1" x="43" y="338" showopsigs="601" linewidth="none" fillcolour="none" height="45" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="111" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
+     <notewidget usesdiagramfillcolour="1" width="420" usesdiagramusefillcolour="1" x="15" y="188" linewidth="none" fillcolour="none" height="115" usefillcolor="1" isinstance="0" xmi.id="113" showstereotype="1" text="@d: is a bsddb dict which holds file infos that all the installed packages have. 
+
+key:&quot;file path&quot; value: (packagename, FileInfo) tuple 
+&quot;/var/db/pisi/filesdb.bdb&quot; 
+" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     <classwidget usesdiagramfillcolour="1" width="140" showattsigs="601" usesdiagramusefillcolour="1" x="538" y="244" showopsigs="601" linewidth="none" fillcolour="none" height="122" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="114" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
+     <notewidget usesdiagramfillcolour="1" width="335" usesdiagramusefillcolour="1" x="640" y="81" linewidth="none" fillcolour="none" height="223" usefillcolor="1" isinstance="0" xmi.id="133" showstereotype="1" text="@path: path of the file 
+@type: type of the file. (&quot;doc&quot;, &quot;man&quot;, &quot;info&quot;, &quot;config&quot;, &quot;header&quot;, &quot;library&quot;, &quot;executable&quot;, &quot;data&quot;, &quot;localedata&quot;) 
+@size: size of the file 
+@hash: sha1sum of the file 
+@permanent: If true, file is not removed when the package is removed. " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+    </widgets>
+    <messages/>
+    <associations>
+     <assocwidget totalcounta="2" indexa="1" totalcountb="2" indexb="1" linewidth="none" widgetbid="114" widgetaid="111" xmi.id="120" linecolor="none" >
+      <linepath>
+       <startpoint startx="182" starty="360" />
+       <endpoint endx="538" endy="305" />
+      </linepath>
+      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="360" y="332" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="230" text="1..*" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     </assocwidget>
+    </associations>
+   </diagram>
+   <diagram snapgrid="0" showattsig="1" fillcolor="#ffffc0" linewidth="0" zoom="100" showgrid="0" showopsig="1" usefillcolor="1" snapx="10" canvaswidth="1012" snapy="10" showatts="1" xmi.id="136" documentation="" type="402" showops="1" showpackage="0" name="ItemByRepo" localid="900000" showstereotype="0" showscope="1" snapcsgrid="0" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="#ff0000" canvasheight="593" >
+    <widgets>
+     <enumwidget usesdiagramfillcolour="0" width="85" usesdiagramusefillcolour="0" x="507" y="249" linewidth="none" fillcolour="#ffffc0" height="126" usefillcolor="1" isinstance="0" xmi.id="141" showpackage="0" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="#ff0000" />
+     <classwidget usesdiagramfillcolour="1" width="139" showattsigs="601" usesdiagramusefillcolour="1" x="52" y="262" showopsigs="601" linewidth="none" fillcolour="none" height="45" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="146" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
+     <notewidget usesdiagramfillcolour="1" width="394" usesdiagramusefillcolour="1" x="38" y="178" linewidth="none" fillcolour="none" height="69" usefillcolor="1" isinstance="0" xmi.id="148" showstereotype="1" text="@d: is a bsddb dict which holds another key,value dict 
+key: objkey value:dict(&quot;repo name&quot;, objvalue) 
+" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     <notewidget usesdiagramfillcolour="1" width="453" usesdiagramusefillcolour="1" x="16" y="20" linewidth="none" fillcolour="none" height="108" usefillcolor="1" isinstance="0" xmi.id="152" text="itembydb.py 
+
+The main purpose of the itembyrepo class is make it easier for holding datas by repository." font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+    </widgets>
+    <messages/>
+    <associations>
+     <assocwidget totalcounta="2" indexa="1" totalcountb="2" indexb="1" linewidth="none" widgetbid="141" widgetaid="146" xmi.id="149" linecolor="none" >
+      <linepath>
+       <startpoint startx="191" starty="284" />
+       <endpoint endx="507" endy="312" />
+      </linepath>
+     </assocwidget>
+    </associations>
+   </diagram>
+   <diagram snapgrid="0" showattsig="1" fillcolor="#ffffc0" linewidth="0" zoom="100" showgrid="0" showopsig="1" usefillcolor="1" snapx="10" canvaswidth="1012" snapy="10" showatts="1" xmi.id="153" documentation="" type="402" showops="1" showpackage="0" name="ComponentDB" localid="900000" showstereotype="0" showscope="1" snapcsgrid="0" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="#ff0000" canvasheight="593" >
+    <widgets>
+     <notewidget usesdiagramfillcolour="1" width="453" usesdiagramusefillcolour="1" x="16" y="20" linewidth="none" fillcolour="none" height="108" usefillcolor="1" isinstance="0" xmi.id="154" text="component.py 
+
+The main purpose of the componentdb is to hold the repositories component infos. " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     <classwidget usesdiagramfillcolour="1" width="130" showattsigs="601" usesdiagramusefillcolour="1" x="31" y="332" showopsigs="601" linewidth="none" fillcolour="none" height="47" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="155" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
+     <notewidget usesdiagramfillcolour="1" width="401" usesdiagramusefillcolour="1" x="30" y="203" linewidth="none" fillcolour="none" height="112" usefillcolor="1" isinstance="0" xmi.id="157" showstereotype="1" text="@d: is a ItemByRepo object which contains component infos by repos. 
+
+key: &quot;component name&quot; value: Component
+&quot;/var/db/pisi/component.bdb&quot;
+" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     <classwidget usesdiagramfillcolour="1" width="160" showattsigs="601" usesdiagramusefillcolour="1" x="549" y="317" showopsigs="601" linewidth="none" fillcolour="none" height="153" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="163" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
+     <notewidget usesdiagramfillcolour="1" width="335" usesdiagramusefillcolour="1" x="673" y="106" linewidth="none" fillcolour="none" height="223" usefillcolor="1" isinstance="0" xmi.id="176" showstereotype="1" text="@name: component name
+@localname: components local name (system.base) -> (sistem.taban)
+@summary: component information
+@component: component description
+@dependencies: string list of other components this component depends on.
+@packages: string list of packages under this component
+@sources: string list of source packages under this component" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+    </widgets>
+    <messages/>
+    <associations>
+     <assocwidget totalcounta="2" indexa="1" totalcountb="2" indexb="1" linewidth="none" widgetbid="163" widgetaid="155" xmi.id="171" linecolor="none" >
+      <linepath>
+       <startpoint startx="161" starty="355" />
+       <endpoint endx="549" endy="393" />
+      </linepath>
+      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="355" y="374" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="231" showstereotype="1" text="1..*" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     </assocwidget>
+    </associations>
+   </diagram>
+   <diagram snapgrid="0" showattsig="1" fillcolor="#ffffc0" linewidth="0" zoom="100" showgrid="0" showopsig="1" usefillcolor="1" snapx="10" canvaswidth="1021" snapy="10" showatts="1" xmi.id="184" documentation="" type="402" showops="1" showpackage="0" name="PackageDB" localid="900000" showstereotype="0" showscope="1" snapcsgrid="0" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="#ff0000" canvasheight="579" >
+    <widgets>
+     <notewidget usesdiagramfillcolour="1" width="453" usesdiagramusefillcolour="1" x="16" y="20" linewidth="none" fillcolour="none" height="108" usefillcolor="1" isinstance="0" xmi.id="185" text="packagedb.py 
+
+The main purpose of the packagedb is to hold package infos of the repositories and reverse dependency informations." font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     <classwidget usesdiagramfillcolour="1" width="125" showattsigs="601" usesdiagramusefillcolour="1" x="36" y="428" showopsigs="601" linewidth="none" fillcolour="none" height="63" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="186" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
+     <notewidget usesdiagramfillcolour="1" width="418" usesdiagramusefillcolour="1" x="32" y="177" linewidth="none" fillcolour="none" height="235" usefillcolor="1" isinstance="0" xmi.id="189" showstereotype="1" text="@d: is a ItemByRepo object which holds the package informations of repos. 
+key:&quot;package name&quot; value:Package
+
+&quot;/var/db/pisi/package.bdb&quot; 
+
+@d: is a ItemByRepo object which holds reverse dependency information of packages. 
+key:&quot;dependency name&quot; value: [dependent package names list]
+
+&quot;/var/db/pisi/revdep.bdb&quot; " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     <classwidget usesdiagramfillcolour="1" width="217" showattsigs="601" usesdiagramusefillcolour="1" x="557" y="296" showopsigs="601" linewidth="none" fillcolour="none" height="243" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="190" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
+     <notewidget usesdiagramfillcolour="1" width="317" usesdiagramusefillcolour="1" x="700" y="187" linewidth="none" fillcolour="none" height="120" usefillcolor="1" isinstance="0" xmi.id="206" showstereotype="1" text="@name: package name
+@summary: package's summary
+@description: description of the package
+@partof: package's component
+@license: license of the package
+" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+    </widgets>
+    <messages/>
+    <associations>
+     <assocwidget totalcounta="2" indexa="1" totalcountb="2" indexb="1" linewidth="none" widgetbid="190" widgetaid="186" xmi.id="203" linecolor="none" >
+      <linepath>
+       <startpoint startx="161" starty="459" />
+       <endpoint endx="557" endy="417" />
+      </linepath>
+      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="359" y="438" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="232" showstereotype="1" text="1..*" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     </assocwidget>
+    </associations>
+   </diagram>
+   <diagram snapgrid="0" showattsig="1" fillcolor="#ffffc0" linewidth="0" zoom="100" showgrid="0" showopsig="1" usefillcolor="1" snapx="10" canvaswidth="1012" snapy="10" showatts="1" xmi.id="209" documentation="" type="402" showops="1" showpackage="0" name="SourceDB" localid="900000" showstereotype="0" showscope="1" snapcsgrid="0" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="#ff0000" canvasheight="593" >
+    <widgets>
+     <notewidget usesdiagramfillcolour="1" width="453" usesdiagramusefillcolour="1" x="27" y="22" linewidth="none" fillcolour="none" height="108" usefillcolor="1" isinstance="0" xmi.id="210" text="sourcedb.py 
+
+The main purpose of the sourcedb is for emerge operation. " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     <classwidget usesdiagramfillcolour="1" width="175" showattsigs="601" usesdiagramusefillcolour="1" x="33" y="433" showopsigs="601" linewidth="none" fillcolour="none" height="63" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="211" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
+     <notewidget usesdiagramfillcolour="1" width="414" usesdiagramusefillcolour="1" x="31" y="174" linewidth="none" fillcolour="none" height="242" usefillcolor="1" isinstance="0" xmi.id="214" showstereotype="1" text="@d: is a ItemByRepo object which contains source packages building information of the package for emerge. 
+key: &quot;source package name&quot; value: SpecFile 
+
+&quot;/var/db/pisi/source.bdb&quot; 
+
+@d: is a ItemByRepo object which contains package name information and that package's source package name information
+key: &quot;package name&quot; value:&quot;source package name&quot;
+
+&quot;/var/db/pisi/pkgtosrc.bdb&quot; 
+" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     <classwidget usesdiagramfillcolour="1" width="133" showattsigs="601" usesdiagramusefillcolour="1" x="666" y="365" showopsigs="601" linewidth="none" fillcolour="none" height="99" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="215" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
+    </widgets>
+    <messages/>
+    <associations>
+     <assocwidget totalcounta="2" indexa="1" totalcountb="2" indexb="1" linewidth="none" widgetbid="215" widgetaid="211" xmi.id="222" linecolor="none" >
+      <linepath>
+       <startpoint startx="208" starty="464" />
+       <endpoint endx="666" endy="414" />
+      </linepath>
+      <floatingtext usesdiagramfillcolour="1" width="32" usesdiagramusefillcolour="1" x="437" y="439" linewidth="none" posttext="" role="703" fillcolour="none" height="32" usefillcolor="1" pretext="" isinstance="0" xmi.id="233" showstereotype="1" text="1..*" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+     </assocwidget>
+    </associations>
+   </diagram>
+  </diagrams>
+  <listview>
+   <listitem open="1" type="800" label="Görünümler" >
+    <listitem open="1" type="801" label="Mantıksal Görünüm" >
+     <listitem open="1" type="813" id="163" >
+      <listitem open="0" type="814" id="164" />
+      <listitem open="0" type="814" id="165" />
+      <listitem open="0" type="814" id="166" />
+      <listitem open="0" type="814" id="167" />
+      <listitem open="0" type="814" id="168" />
+      <listitem open="0" type="814" id="169" />
+      <listitem open="0" type="814" id="170" />
+     </listitem>
+     <listitem open="1" type="813" id="155" >
+      <listitem open="0" type="814" id="156" />
+     </listitem>
+     <listitem open="1" type="813" id="114" >
+      <listitem open="0" type="814" id="115" />
+      <listitem open="0" type="814" id="116" />
+      <listitem open="0" type="814" id="117" />
+      <listitem open="0" type="814" id="118" />
+      <listitem open="0" type="814" id="119" />
+     </listitem>
+     <listitem open="1" type="813" id="111" >
+      <listitem open="0" type="814" id="112" />
+     </listitem>
+     <listitem open="1" type="813" id="220" />
+     <listitem open="1" type="813" id="24" >
+      <listitem open="1" type="813" id="14" >
+       <listitem open="0" type="814" id="79" />
+       <listitem open="0" type="814" id="80" />
+       <listitem open="0" type="814" id="81" />
+       <listitem open="0" type="814" id="82" />
+       <listitem open="0" type="814" id="83" />
+       <listitem open="0" type="814" id="84" />
+      </listitem>
+      <listitem open="0" type="814" id="25" />
+      <listitem open="0" type="814" id="77" />
+     </listitem>
+     <listitem open="1" type="813" id="146" >
+      <listitem open="0" type="814" id="147" />
+     </listitem>
+     <listitem open="1" type="813" id="76" />
+     <listitem open="1" type="813" id="190" >
+      <listitem open="0" type="814" id="191" />
+      <listitem open="0" type="814" id="192" />
+      <listitem open="0" type="814" id="193" />
+      <listitem open="0" type="814" id="194" />
+      <listitem open="0" type="814" id="195" />
+      <listitem open="0" type="814" id="196" />
+      <listitem open="0" type="814" id="197" />
+      <listitem open="0" type="814" id="198" />
+      <listitem open="0" type="814" id="199" />
+      <listitem open="0" type="814" id="200" />
+      <listitem open="0" type="814" id="201" />
+      <listitem open="0" type="814" id="202" />
+     </listitem>
+     <listitem open="1" type="813" id="186" >
+      <listitem open="0" type="814" id="187" />
+      <listitem open="0" type="814" id="188" />
+     </listitem>
+     <listitem open="1" type="813" id="98" >
+      <listitem open="0" type="814" id="99" />
+     </listitem>
+     <listitem open="1" type="813" id="86" >
+      <listitem open="0" type="814" id="87" />
+     </listitem>
+     <listitem open="1" type="813" id="217" />
+     <listitem open="1" type="813" id="211" >
+      <listitem open="0" type="814" id="212" />
+      <listitem open="0" type="814" id="213" />
+     </listitem>
+     <listitem open="1" type="813" id="215" >
+      <listitem open="0" type="814" id="216" />
+      <listitem open="0" type="814" id="218" />
+      <listitem open="0" type="814" id="219" />
+      <listitem open="0" type="814" id="221" />
+     </listitem>
+     <listitem open="1" type="813" id="177" />
+     <listitem open="1" type="830" label="Veri türleri" >
+      <listitem open="1" type="829" id="5" />
+      <listitem open="1" type="829" id="4" />
+      <listitem open="1" type="829" id="89" />
+      <listitem open="1" type="829" id="7" />
+      <listitem open="1" type="829" id="6" />
+      <listitem open="1" type="829" id="2" />
+      <listitem open="1" type="829" id="9" />
+      <listitem open="1" type="829" id="8" />
+      <listitem open="1" type="829" id="13" />
+      <listitem open="1" type="829" id="10" />
+      <listitem open="1" type="829" id="12" />
+      <listitem open="1" type="829" id="11" />
+     </listitem>
+     <listitem open="1" type="831" id="141" >
+      <listitem open="0" type="839" id="142" />
+      <listitem open="0" type="839" id="143" />
+      <listitem open="0" type="839" id="144" />
+      <listitem open="0" type="839" id="145" />
+     </listitem>
+    </listitem>
+    <listitem open="1" type="802" label="Use Case Görünümü" />
+    <listitem open="1" type="821" label="Bileşen Görünümü" />
+    <listitem open="1" type="827" label="Deployment View" />
+    <listitem open="1" type="836" label="Entity Relationship Model" />
+   </listitem>
+  </listview>
+  <codegeneration>
+   <codegenerator language="C++" />
+  </codegeneration>
+ </XMI.extensions>
+</XMI>

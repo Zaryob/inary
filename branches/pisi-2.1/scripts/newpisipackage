@@ -1,0 +1,236 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
+# just put a .pisipackager file in your home and fill it like
+#
+# name = Onur Küçük
+# email = onur@pardus.org.tr
+#
+
+import os
+import sys
+import time
+import string
+
+packagerfile = ".pisipackager"
+
+data = {"date": time.strftime("%Y-%m-%d"),
+        "year": time.strftime("%Y")}
+
+temp_pspec = '''<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>%(package)s</Name>
+        <Homepage></Homepage>
+        <Packager>
+            <Name>%(packager_name)s</Name>
+            <Email>%(packager_email)s</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>%(package)s</Icon>
+        <IsA>app:gui</IsA>
+        <Summary></Summary>
+        <Description></Description>
+        <Archive sha1sum="" type="targz"></Archive>
+        <BuildDependencies>
+            <Dependency versionFrom=""></Dependency>
+            <Dependency></Dependency>
+        </BuildDependencies>
+        <Patches>
+            <!--
+            <Patch level="1"></Patch>
+            -->
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>%(package)s</Name>
+        <RuntimeDependencies>
+        </RuntimeDependencies>
+        <Conflicts>
+            <Package releaseTo="29">sleep</Package>
+        </Conflicts>
+        <Files>
+            <Path fileType="data">/</Path>
+        </Files>
+        <!--
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/%(package)s.desktop">%(package)s.desktop</AdditionalFile>
+        </AdditionalFiles>
+        -->
+        <!--
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+            <COMAR script="service.py">System.Service</COMAR>
+        </Provides>
+        -->
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>%(date)s</Date>
+            <Version></Version>
+            <Comment>First release</Comment>
+            <Name>%(packager_name)s</Name>
+            <Email>%(packager_email)s</Email>
+        </Update>
+    </History>
+</PISI>
+'''
+
+temp_actions = '''#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
+# Copyright %(year)s TUBITAK/UEKAE
+# Licensed under the GNU General Public License, version 2.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+
+from pisi.actionsapi import autotools
+from pisi.actionsapi import pisitools
+from pisi.actionsapi import shelltools
+from pisi.actionsapi import get
+
+# WorkDir = ""
+# NoStrip = "/"
+
+def setup():
+    autotools.configure()
+
+def build():
+    autotools.make()
+
+def install():
+    autotools.rawInstall("DESTDIR=%%s" %% get.installDIR())
+
+    pisitools.dodoc("AUTHORS", "ChangeLog", "README*", "NEWS")
+'''
+
+temp_desktop = '''[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=%(package_cap)s
+Name[tr]=%(package_cap)s
+GenericName=%(package_cap)s
+GenericName[tr]=%(package_cap)s
+Icon=%(package)s
+Exec=%(package)s
+Terminal=false
+StartupNotify=false
+Categories=Application;Game;ArcadeGame;
+'''
+
+temp_service = '''
+from comar.service import *
+
+serviceType = "local"
+serviceConf = "%(package)s"
+serviceDefault = "conditional"
+
+serviceDesc = _({"en": "%(package_cap)s",
+                 "tr": "%(package_cap)s"})
+
+@synchronized
+def start():
+    startService(command="/usr/sbin/%(package)s",
+                 args = config.get("args", "destroy"),
+                 donotify=True)
+
+@synchronized
+def stop():
+    stopService(command="/usr/sbin/%(package)s",
+                donotify=True)
+
+def ready():
+    import os
+    status = is_on()
+    if status == "on" or (status == "conditional" and os.path.exists("/sys/coffee/ready")):
+        start()
+
+def status():
+    return checkDaemon("/var/run/%(package)s.pid")
+
+'''
+
+temp_postscript = '''#/usr/bin/python
+# -*- coding: utf-8 -*-
+
+import os
+
+def postInstall():
+    print "FIXME"
+
+'''
+
+temp_translation = '''<?xml version="1.0" ?>
+<PISI>
+    <Source>
+        <Name>%(package)s</Name>
+        <Summary xml:lang=""></Summary>
+        <Description xml:lang=""></Description>
+    </Source>
+</PISI>
+'''
+
+def write(filename, data):
+    try:
+       f = file("%s/%s" % (target, filename), "w")
+       f.write(data)
+       f.close()
+    except:
+        print "Could not write file %s/%s" % (target, filename)
+
+
+def create_dirs():
+    try:
+        os.makedirs("%s/files" % target)
+        os.makedirs("%s/comar" % target)
+    except:
+        print "Could not make directory %s" % target
+        sys.exit(1)
+
+def readConfig():
+    home = os.getenv("HOME", "")
+    cfg = "%s/%s" % (home, packagerfile)
+    d = {"name": "", "email": ""}
+
+    if home != "" and os.path.exists(cfg):
+        for line in file(cfg):
+            if line != "" and not line.startswith("#") and "=" in line:
+                l, m = line.split("=", 1)
+                k = l.strip()
+                v = m.strip()
+                if k in ["name", "email"]:
+                    if v.startswith('"') or v.startswith("'"):
+                        v = v[1:-1]
+                    d[k.strip()] = v.strip()
+
+    return d["name"], d["email"]
+
+# some checks
+if len(sys.argv) < 2:
+    print "Usage : %s NewPackageDir" % sys.argv[0]
+    sys.exit(0)
+else:
+    target = sys.argv[1]
+    data["packagedir"], data["package"] = os.path.split(target)
+    data["package_cap"] = string.capitalize(data["package"])
+
+if os.path.exists(target):
+    print "%s already exists, please remove it first" % target
+    sys.exit(1)
+elif " " in data["package"]:
+    print "You should not use empty space in package name"
+    sys.exit(1)
+
+# here we go
+data["packager_name"], data["packager_email"] = readConfig()
+create_dirs()
+write("pspec.xml", temp_pspec % data)
+write("actions.py", temp_actions % data)
+write("translations.xml", temp_translation % data)
+write("files/%s.desktop" % data["package"], temp_desktop % data)
+write("comar/service.py", temp_service % data)
+write("comar/package.py", temp_postscript)
+

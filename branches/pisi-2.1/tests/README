@@ -1,0 +1,13 @@
+
+PiSi UnitTests
+##############
+
+Before running unittests you need to first go to repos directory and 
+create test repositories.
+
+>>> pisi@pardus tests/repos# python createrepos.py
+
+Now you can return to tests folder and run tests.
+
+>>> pisi@pardus tests # python runtests.py
+
