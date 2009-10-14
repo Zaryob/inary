@@ -1,0 +1,187 @@
+
+
+PiSi TODO List
+==============
+
+A list of tasks to accomplish, organized into priority sections
+
+Legend:
+
+- Todo
+? Not determined if/how we have to do
+/ In progress
++ Accomplished
+
+1. Pre-Alpha
+
+ + reading spec file
+ + writing
+   + files
+   + metadata
+ + Actions API framework
+   + sample api modules (autotools)
+   + unit test
+ + source building
+ + package module
+   + extraction
+   + add file / compression
+ + package creation
+ + install database
+ + package database
+ + command line interface
+   + pisi-build
+   + pisi-install
+   + pisi-index
+   + pisi-updatedb
+ + single repository index
+ + simple dependency checking
+ + Package/Files
+
+2. Alpha
+ + multi-package dependency analysis (eray)
+   + design a package operation planner
+   + install/remove operations (eray)
+ + command line interface:
+   + pisi remove
+   + svn-like CLI
+ + configuration file
+   + define the format of the configuration file
+   + extend Config module (config.py) accordingly
+   + define configuration keys (baris - meren)
+ + query
+   + list of installed packages (eray)
+ + refactor actionsAPI (caglar)
+ + fix xml indentation (meren)
+ + define file types (doc, executable, conf, etc...) (baris - meren)
+ + write specfile (eray)
+ + file locking for database access [not tested!] (eray)
+ + implement file uri
+   + extend the modules dealing with files accordingly
+ + ui module improvements
+   + methods for interaction (yes, no questions, etc.)
+ + implement source database (eray)
+ + easy package preparation
+   + convert ebuild to pisi
+ + COMAR interface
+   + what do we need to specify in a package.
+   + package install: register config script
+   + package remove: unregister config script
+ + internet installation
+   + support URI's whereever a filename is supported
+   + http server
+   + pisi updatedb over internet
+
+3. Beta
+
+ * high priority
+
+ / documentation
+   / actionsAPI documentation, unittests (caglar - meren)
+   + versioning information document
+ 
+ * medium priority
+ 
+ / components (eray)
+   + requirements
+   / xml format
+   - query components: list of components/packages in a component
+   - install/remove components 
+ / API: we even have application users (eray)
+ / multiple package repository (eray)
+   + decide how to implement
+   + support repo order
+   - support medium types
+     - internet: http/ftp
+     - local repository: file://
+     - removable media: media://
+ - partial caching and automatic resume for file download (meren)
+  - use a separate "partial/" subdir like urpmi
+ - a helper script for finding dependencies
+ 
+ * low priority 
+ 
+ - search command: 
+    - implement an inverted index (if there's a good one, just use it)
+    - search in either summary, or description
+    - english stemming
+    - turkish stemming
+    - phonetic/syntactic fault tolerance (whichever works!)
+      - in particular evaluate soundex and metaphone
+      - research if there are language independent phonetic encodings
+      - implement as an option (or make it possible to turn it off if it works well :))
+    - fault tolerant search in package names (bir sekilde)
+/ exception handling (baris)
+   / better/more sensible exception hierarchy (eray)
+   ? recovery from exceptions where necessary
+ / overhaul installdb (try to merge its use with packagedb) (eray)
+ / verify metodlari
+   + SpecFile
+   + MetaData
+   + Files
+   - Index (o kadar onemli degil)
+ ? non-interactive use (baris)
+ 
+ * finished tasks
+ 
+ + UI
+   + PISIMAT
+   + pykde GUI (cartman)
+   + improve interface
+    + refactor UI, reintroduce base class
+    + add an ack interface, start cleaning up a bit
+   + cli
+    + ask alternatives to choose from (eray)
+   + eliminate \n's from infos, what's the point?
+   + metaclass coolness for CLI command framework (eray)
+ + i18n support
+   + translations and correct language for summary, description
+   + make pisi messages translatable
+   + .pot support for dist script
+   + translate messages mesajların çevirisinin yapılması (pisi tr.po)
+ + configure-pending (eray)
+ + ignore-deps
+ + more robust upgrade
+ + query
+   + comar OM information (Provides)
+   + find package by name, display summary/description
+   + info --files option (like rpm -ql, but better of course)
+ + autoxml: automated xml processing (eray)
+   + design
+   + basic types
+   + list type
+   + class type
+   + localtext type
+ + implement missing unit tests
+   + sourcedb
+   + package (baris)
+   + configuration file (baris)
+ + upgrade (eray)
+   + upgrade operation
+   + test upgrade op
+   + system-wide upgrade (upgrade-all) komutu
+ + incremental build (eray)
+   + generate binary release number by comparing MD5s (eray)
+   + keep track of successfully completed configure, make, install
+     steps (necessary for large-scale builds?) (meren)
+ + database locking bugs (eray)
+ + provide a library interface for users outside (YALI, TASMA). "import pisi" (baris)
+
+4. Release (bug fix, guzellestirme vs.)
+
+5. Post Release
+
+ - a database of components: faster access
+ - more support for categories:
+   - put categories into a database
+   - fast search for categories
+ / make a package and sourcedb for each repo
+   + packagedb
+   - sourceb
+ - transaction stuff for database (eray)
+ - multi-architecture support (baris, caglar)
+   / design decisions
+   / extend XML specs to support that
+   - cross-platform building support
+ - incremental build/fetch for repository index (pisi-index.xml)
+   - diffsets (caglar)
+   

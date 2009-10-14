@@ -1,0 +1,51 @@
+<PISI>
+    <Source>
+        <Name>popt</Name>
+        <Homepage>http://www.rpm.org/</Homepage>
+        <Packager>
+            <Name>Kırmızı kafalar</Name>
+            <Email>hotmail@redhat.com</Email>
+        </Packager>
+    </Source>
+    <Package>
+        <Name>popt</Name>
+        <Summary xml:lang="en">Command line option parsing library</Summary>
+        <Summary xml:lang="tr">Komut satırı seçenekleri işleme kütüphanesi</Summary>
+        <Description xml:lang="en">library files for popt</Description>
+        <IsA>app:console</IsA>
+        <PartOf>system.base</PartOf>
+        <License>as-is</License>
+        <RuntimeDependencies>
+            <Dependency>gettext</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="header">/usr/include/popt.h</Path>
+        </Files>
+        <History>
+            <Update release="1">
+                <Date>2005-06-14</Date>
+                <Version>1.7</Version>
+                <Comment>First release.</Comment>
+                <Name>Kırmızı kafalar</Name>
+                <Email>hotmail@redhat.com</Email>
+            </Update>
+        </History>
+        <Distribution>Pardus</Distribution>
+        <DistributionRelease>2007</DistributionRelease>
+        <Architecture>Any</Architecture>
+        <InstalledSize>15982</InstalledSize>
+        <PackageFormat>1.1</PackageFormat>
+        <Source>
+            <Name>popt</Name>
+            <Homepage>http://www.rpm.org/</Homepage>
+            <Packager>
+                <Name>Kırmızı kafalar</Name>
+                <Email>hotmail@redhat.com</Email>
+            </Packager>
+        </Source>
+    </Package>
+</PISI>

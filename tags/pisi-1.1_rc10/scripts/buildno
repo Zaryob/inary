@@ -1,0 +1,9 @@
+#!/bin/bash
+
+b=/var/lib/pisi/package
+
+for d in `ls $b`;do
+    if ! grep "<Build>" $b/$d/metadata.xml &>/dev/null ; then
+        echo "$d"
+    fi
+done

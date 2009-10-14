@@ -1,0 +1,13 @@
+You can install PISI on your system with a single command.
+
+# ./setup.py install
+
+If you are on a pardus system, you should delete /usr/lib/pardus/pisi
+when you are installing the SVN version
+
+PISI requires 4suite XML processing library, the newest version
+bsd bindings called "bsddb3" and Pardus configuration manager COMAR
+in order to run.
+
+If you are upgrading from an old pisi release you may have to 
+run rebuild-db command

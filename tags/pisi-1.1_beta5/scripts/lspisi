@@ -1,0 +1,77 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2005, TUBITAK/UEKAE
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 2 of the License, or (at your option)
+# any later version.
+#
+# Please read the COPYING file.
+
+import os
+import sys
+import zipfile
+
+def openZip(fileName):
+    if not zipfile.is_zipfile(fileName):
+        usage("ZIP file required...")
+
+    f = zipfile.ZipFile(fileName, "r")
+
+    if [True for file in f.namelist() if file == "files.xml"]:
+        return f
+    else:
+        usage("'%s' is not a PiSi package" % (fileName))
+
+def fillFileList(zipFile):
+    filelist = []
+
+    for file in zipFile.namelist():
+        filelist.append(file)
+    
+    filelist.sort()
+    return filelist
+
+def uniq(alist):
+    set = {}
+    return [set.setdefault(e, e) for e in alist if e not in set]
+
+def usage(errmsg):
+    print """
+    Error: %s
+    
+    Usage:
+      lspisi PiSi_package.PiSi         (lists the content of package)
+      lspisi dirs PiSi_package.PiSi    (lists directories in the package for the package developer)
+    """ % (errmsg)
+
+    sys.exit(1)
+
+def main():
+
+    if len(sys.argv) < 2 or ("dirs" in sys.argv and len(sys.argv) < 3):
+        usage("PiSi package required..")
+
+    if sys.argv[1] == "dirs":
+        f = openZip(sys.argv[2])
+        dirlist =[]
+        for file in fillFileList(f):
+            dirlist.append(os.path.dirname(file))
+    
+        for dir in uniq(dirlist):
+            print "<Path fileType=\"\">" + dir.replace("install/", "/") + "</Path>"
+
+    else:
+        f = openZip(sys.argv[1])
+        for file in fillFileList(f):
+            if f.getinfo(file).external_attr == 2716663808:
+                print file + " --> " + f.read(file)
+            else:
+                print file
+
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())

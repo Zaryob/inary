@@ -1,0 +1,51 @@
+Index: build.py
+===================================================================
+--- build.py	(revision 8935)
++++ build.py	(working copy)
+@@ -197,13 +197,30 @@
+         # apply the patches and prepare a source directory for build.
+         self.apply_patches()
+ 
++        if ctx.get_option('use_catbox'):
++            import catbox
++            ret = catbox.run(
++                self.sandboxed,
++                ["/var/tmp/pisi", "/tmp", "/dev/tty", "/dev/null"],
++                logger = self.sandbox_logger
++            )
++            if ret != 0:
++                raise Error, "actions.py borked"
++        else:
++            self.sandboxed()
++
++        # after all, we are ready to build/prepare the packages
++        return self.build_packages()
++
++    def sandbox_logger(self, event, data):
++        if event == "denied":
++            ctx.ui.error("Access denied to '%s'" % data)
++
++    def sandboxed(self):
+         self.run_setup_action()
+         self.run_build_action()
+         self.run_install_action()
+ 
+-        # after all, we are ready to build/prepare the packages
+-        return self.build_packages()
+-
+     def set_environment_vars(self):
+         """Sets the environment variables for actions API to use"""
+ 
+Index: cli/commands.py
+===================================================================
+--- cli/commands.py	(revision 8935)
++++ cli/commands.py	(working copy)
+@@ -396,6 +396,8 @@
+                                default=False, help=_("don't install build dependencies, fail if a build dependency is present"))
+         self.parser.add_option("-F", "--package-format", action="store", default='1.1',
+                                help=_("pisi package format"))
++        self.parser.add_option("", "--use-catbox", action="store_true",
++                               default=False, help=_("use catbox"))
+ 
+     def run(self):
+         if not self.args:

@@ -1,0 +1,75 @@
+Like every serious project, there are guidelines.
+Oooooo. "Coding Standards".
+
+Guidelines
+----------
+
+1. When using dirnames, don't expect the dir to end
+   with a trailing slash, and please use the dirnames
+   in pisiconfig
+2. Python indentation is usually 4 chars.
+3. Follow python philosophy of 'batteries included'
+4. Don't make the code have runtime dependencies on
+   a particular distribution (as much as possible)
+5. Don't assume narrow use cases.
+6. If you are changing something, check if that change
+   breaks anything and fix breakage. For instance a
+   name. Running the tests is not always enough!
+
+Unit testing
+------------
+
+Unit tests are located in unittests directory. Running the tests is
+trivial. But you must synchronize your code and data with the test
+code, which can be a tedious work if you lose discipline.
+
+Sample data files are located in the same directory with test modules.
+
+For running the entire test suite, use the following command:
+
+$ ./unittests/run.py
+
+If you know what you are doing, you can run the tests seperately. But
+keep in your mind that tests can depend on each other. (?) The unit test
+system doesn't know about that. The following command will run tests
+in specfiletests and archivetests in unittests dir:
+
+$ ./unittests/run.py specfile archive
+
+
+Misc. Suggestions
+-----------------
+
+1. Demeter's Law
+
+In OO programming, try to invoke Demeter's law.
+One of the "rules" there is not directly accessing any
+objects that are further than, 2/3 refs, away. So the
+following code is OK.
+   destroy_system(a.system().name())
+but the following isn't as robust
+   destroy_system(object_store.root().a.system.name())
+As you can tell, this introduces too many implementation
+dependencies. The rule of thumb is that, in these cases
+this statement must have been elsewhere.... It may be a
+good idea to not count the object scope in this case,
+so in Python self.a means only one level of reference,
+not two.
+
+One quibble with this: it may be preferable not to insist
+on this where it would be inefficient. So if everything
+is neatly packed into one object contained in another
+object, why replicate everything in the upper level? If
+the semantics prevents dependency changes, then chains
+of 3 or even 4 could be acceptable.
+
+OTOH, in Python and C++, it's not always good to implement 
+accessor/modifier pairs for every property of an object.
+It would be much simpler if you are not doing any special
+processing on the property (e.g. if what the type system
+does is sufficient).
+
+The main rule of thumb in Demeter's Law is avoiding
+putting more than, say, 10 methods in a class. That works
+really well in practice, forcing refactoring every now
+and then.
