@@ -204,7 +204,7 @@ class Install(AtomicOperation):
                 return True
 
             return not pkg in map(lambda x:x.package, self.pkginfo.conflicts)
-        
+
         # check file conflicts
         file_conflicts = []
         for f in self.files.list:
@@ -390,8 +390,8 @@ class Install(AtomicOperation):
                     Remove.remove_file(old_fileinfo[path], self.pkginfo.name)
 
         if self.reinstall():
-            # get 'config' typed file objects
-            new = filter(lambda x: x.type == 'config', self.files.list)
+            # get 'config' typed file objects if replace is not set
+            new = filter(lambda x: x.type == 'config' and not x.replace, self.files.list)
             old = filter(lambda x: x.type == 'config', self.old_files.list)
 
             # get config path lists
@@ -530,7 +530,7 @@ class Remove(AtomicOperation):
 
         if fileinfo.permanent and not remove_permanent:
             return
-        
+
         fpath = pisi.util.join_path(ctx.config.dest_dir(), fileinfo.path)
 
         historydb = pisi.db.historydb.HistoryDB()

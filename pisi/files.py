@@ -29,6 +29,7 @@ class FileInfo:
     t_Mode = [ autoxml.String, autoxml.optional ]
     t_Hash = [ autoxml.String, autoxml.optional, "SHA1Sum" ]
     t_Permanent = [ autoxml.String, autoxml.optional ]
+    t_Replace = [ autoxml.String, autoxml.optional ]
 
     def __str__(self):
         s = "/%s, type: %s, size: %s, sha1sum: %s" %  (self.path, self.type,

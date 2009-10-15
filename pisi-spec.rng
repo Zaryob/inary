@@ -1521,6 +1521,14 @@
                     </choice>
                 </attribute>
             </optional>
+            <optional>
+                <attribute name="replace">
+                    <choice>
+                        <value>false</value>
+                        <value>true</value>
+                    </choice>
+                </attribute>
+            </optional>
         </group>
     </define>
 
