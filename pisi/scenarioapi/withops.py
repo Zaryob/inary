@@ -14,12 +14,12 @@
 ADDED, REMOVED, INIT = range(3)
 PARTOF, VERSION, CONFLICT, DEPENDENCY = range(4)
 
-class with:
+class With:
     def __init__(self):
         pass
 
 def with_action(types, action, data):
-    w = with()
+    w = With()
     w.types = types
     w.action = action
     w.data = data
