@@ -32,18 +32,18 @@ def repo_added_package(package, *args):
     dependencies = []
     conflicts = []
 
-    for with in args:
-        if with.types == CONFLICT and with.action == INIT:
-            conflicts = with.data
+    for _with in args:
+        if _with.types == CONFLICT and _with.action == INIT:
+            conflicts = _with.data
 
-        if with.types == DEPENDENCY and with.action == INIT:
-            dependencies = with.data
+        if _with.types == DEPENDENCY and _with.action == INIT:
+            dependencies = _with.data
 
-        if with.types == VERSION and with.action == INIT:
-            version = with.data
+        if _with.types == VERSION and _with.action == INIT:
+            version = _with.data
 
-        if with.types == PARTOF and with.action == INIT:
-            partOf = with.data
+        if _with.types == PARTOF and _with.action == INIT:
+            partOf = _with.data
 
     repodb[package] = Package(package, dependencies, conflicts, ver=version, partOf=partOf)
 
