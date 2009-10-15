@@ -12,19 +12,20 @@
 
 import sys
 import os
+import shutil
+import tempfile
 from zipfile import BadZipfile
 
 import pisi
 from pisi.archive import ArchiveZip, ArchiveTar
-import pisi.context as ctx
 import pisi.util as util
 
 def usage(errmsg):
     print """
     Error: %s
-    
+
     Usage:
-      unpisi PiSi_package.PiSi
+      unpisi PiSi_package.pisi
     """ % (errmsg)
 
     sys.exit(1)
@@ -43,15 +44,20 @@ def main():
         print e
         sys.exit(1)
 
+    # Create a temporary directory in /tmp
+    tempdir = tempfile.mkdtemp(prefix='unpisi')
+
     arc.unpack_files(['files.xml', 'metadata.xml'], '.')
-    arc.unpack_files("install.tar.lzma", ctx.config.tmp_dir())
+    arc.unpack_files("install.tar.lzma", tempdir)
     arc.unpack_dir('comar', '.')
 
-    tar_file = util.join_path(ctx.config.tmp_dir(), "install.tar.lzma")
-    tar = ArchiveTar(tar_file, 'tarlzma')
-    tar.unpack_dir('.')
+    tar_file = util.join_path(tempdir, "install.tar.lzma")
+    if os.path.exists(tar_file):
+        tar = ArchiveTar(tar_file, 'tarlzma')
+        tar.unpack_dir('.')
+        os.unlink(tar_file)
 
-    os.unlink(tar_file)
+    shutil.rmtree(tempdir)
     return 0
 
 if __name__ == "__main__":
