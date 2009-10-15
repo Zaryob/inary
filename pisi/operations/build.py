@@ -497,7 +497,7 @@ class Builder:
                 self.actionLocals[func]()
             else:
                 import catbox
-                
+
                 ctx.ui.info(_("Sandbox enabled build..."))
 
                 # Configure allowed paths from sandbox.conf
@@ -653,7 +653,7 @@ class Builder:
         # FIXME: find a better way to deal with the summary and description constants.
         debug_package_obj.summary['en'] = u'Debug files for %s' % (self.spec.source.name)
         debug_package_obj.description['en'] = u'Debug files for %s' % (self.spec.source.name)
-        debug_package_obj.partOf = self.spec.source.partOf + ctx.const.debug_name_suffix
+        debug_package_obj.partOf = self.spec.source.partOf
         for f in debug_files:
             debug_package_obj.files.append(pisi.specfile.Path(path = f[len(self.pkg_debug_dir()):], fileType = "debug"))
 
