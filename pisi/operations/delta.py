@@ -106,10 +106,7 @@ def find_delta(oldfiles, newfiles):
 
     files_new = set(map(lambda x:x.hash, newfiles.list))
     files_old = set(map(lambda x:x.hash, oldfiles.list))
-    files_delta = list(files_new - files_old)
-
-    # Add to-be-replaced config files to delta package regardless of its state
-    files_delta.extend([f.hash for f in newfiles.list if f.type=='config' and f.replace])
+    files_delta = files_new - files_old
 
     deltas = []
     for h in files_delta:

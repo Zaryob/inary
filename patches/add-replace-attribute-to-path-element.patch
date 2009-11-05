@@ -1,0 +1,105 @@
+Index: pisi-spec.rng
+===================================================================
+--- pisi-spec.rng	(revision 25920)
++++ pisi-spec.rng	(revision 25922)
+@@ -1521,6 +1521,14 @@
+                     </choice>
+                 </attribute>
+             </optional>
++            <optional>
++                <attribute name="replace">
++                    <choice>
++                        <value>false</value>
++                        <value>true</value>
++                    </choice>
++                </attribute>
++            </optional>
+         </group>
+     </define>
+ 
+Index: pisi/specfile.py
+===================================================================
+--- pisi/specfile.py	(revision 25920)
++++ pisi/specfile.py	(revision 25922)
+@@ -127,6 +127,7 @@
+     s_Path = [autoxml.String, autoxml.mandatory]
+     a_fileType =  [autoxml.String, autoxml.optional]
+     a_permanent =  [autoxml.String, autoxml.optional]
++    a_replace =  [autoxml.String, autoxml.optional]
+ 
+     def __str__(self):
+         s = self.path
+Index: pisi/operations/delta.py
+===================================================================
+--- pisi/operations/delta.py	(revision 25920)
++++ pisi/operations/delta.py	(revision 25922)
+@@ -106,8 +106,11 @@
+ 
+     files_new = set(map(lambda x:x.hash, newfiles.list))
+     files_old = set(map(lambda x:x.hash, oldfiles.list))
+-    files_delta = files_new - files_old
++    files_delta = list(files_new - files_old)
+ 
++    # Add to-be-replaced config files to delta package regardless of its state
++    files_delta.extend([f.hash for f in newfiles.list if f.type=='config' and f.replace])
++
+     deltas = []
+     for h in files_delta:
+         deltas.extend(hashto_files[h])
+Index: pisi/files.py
+===================================================================
+--- pisi/files.py	(revision 25920)
++++ pisi/files.py	(revision 25922)
+@@ -29,6 +29,7 @@
+     t_Mode = [ autoxml.String, autoxml.optional ]
+     t_Hash = [ autoxml.String, autoxml.optional, "SHA1Sum" ]
+     t_Permanent = [ autoxml.String, autoxml.optional ]
++    t_Replace = [ autoxml.String, autoxml.optional ]
+ 
+     def __str__(self):
+         s = "/%s, type: %s, size: %s, sha1sum: %s" %  (self.path, self.type,
+Index: pisi/atomicoperations.py
+===================================================================
+--- pisi/atomicoperations.py	(revision 25920)
++++ pisi/atomicoperations.py	(revision 25922)
+@@ -204,7 +204,7 @@
+                 return True
+ 
+             return not pkg in map(lambda x:x.package, self.pkginfo.conflicts)
+-        
++
+         # check file conflicts
+         file_conflicts = []
+         for f in self.files.list:
+@@ -390,8 +390,8 @@
+                     Remove.remove_file(old_fileinfo[path], self.pkginfo.name)
+ 
+         if self.reinstall():
+-            # get 'config' typed file objects
+-            new = filter(lambda x: x.type == 'config', self.files.list)
++            # get 'config' typed file objects if replace is not set
++            new = filter(lambda x: x.type == 'config' and not x.replace, self.files.list)
+             old = filter(lambda x: x.type == 'config', self.old_files.list)
+ 
+             # get config path lists
+@@ -530,7 +530,7 @@
+ 
+         if fileinfo.permanent and not remove_permanent:
+             return
+-        
++
+         fpath = pisi.util.join_path(ctx.config.dest_dir(), fileinfo.path)
+ 
+         historydb = pisi.db.historydb.HistoryDB()
+Index: pisi-spec.dtd
+===================================================================
+--- pisi-spec.dtd	(revision 25920)
++++ pisi-spec.dtd	(revision 25922)
+@@ -117,6 +117,7 @@
+ 	(executable|library|data|config|doc|man|info|localedata|header)
+ 	#REQUIRED>
+ <!ATTLIST Path permanent (false|true) #IMPLIED>
++<!ATTLIST Path replace (false|true) #IMPLIED>
+ 
+ 
+ <!-- History Section -->

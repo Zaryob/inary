@@ -127,7 +127,6 @@ class Path:
     s_Path = [autoxml.String, autoxml.mandatory]
     a_fileType =  [autoxml.String, autoxml.optional]
     a_permanent =  [autoxml.String, autoxml.optional]
-    a_replace =  [autoxml.String, autoxml.optional]
 
     def __str__(self):
         s = self.path
