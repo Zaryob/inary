@@ -1,3 +1,7 @@
+2009-11-09 Faik Uygur <faik@pardus.org.tr>
+		* pisi/actionsapi/perlmodules.py: KeepSpecial should control pod file removal.
+                Remove .packlist files from perl packages.
+
 2009-10-15 Ozan Çağlayan <ozan@pardus.org.tr>
 		* pisi/operations/build.py (Builder.generate_debug_package_object):
 		Don't append dbginfo to the debug packages' component.
