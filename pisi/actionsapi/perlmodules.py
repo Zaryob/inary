@@ -74,11 +74,13 @@ def install(parameters = 'install'):
         if system('perl Build install'):
             raise MakeError, _('perl install failed.')
 
-    fixLocalPod()
+    removePacklist()
 
-def fixLocalPod():
-    podFiles = glob.glob('%s/usr/lib/*/*/*/perllocal.pod' % get.installDIR())
-
-    for podFile in podFiles:
-        if can_access_file(podFile):
-            unlink(podFile)
+def removePacklist():
+    ''' cleans .packlist file from perl packages '''
+    path = '%s/%s' % (get.installDIR(), "/usr/lib/perl5/vendor_perl/%s/%s-linux-thread-multi/auto/" % (get.curPERL(), get.HOST().split("-")[0]))
+    for root, dirs, files in os.walk(path):
+        for packFile in files:
+            if packFile == ".packlist":
+                if can_access_file('%s/%s' % (root, packFile)):
+                    unlink('%s/%s' % (root, packFile))
