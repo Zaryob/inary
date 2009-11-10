@@ -292,7 +292,7 @@ class Install(AtomicOperation):
         if ctx.comar:
             import pisi.comariface
             try:
-                if self.operation == UPGRADE:
+                if self.operation == UPGRADE or self.operation == DOWNGRADE:
                     fromVersion = self.old_pkginfo.version
                     fromRelease = self.old_pkginfo.release
                 else:
