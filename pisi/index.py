@@ -118,7 +118,7 @@ class Index(xmlfile.XmlFile):
     def add_package(self, path, deltas, repo_uri):
         package = pisi.package.Package(path, 'r')
         md = package.get_metadata()
-        md.package.packageSize = os.path.getsize(path)
+        md.package.packageSize = long(os.path.getsize(path))
         md.package.packageHash = util.sha1_file(path)
         if ctx.config.options and ctx.config.options.absolute_urls:
             md.package.packageURI = os.path.realpath(path)
@@ -140,7 +140,7 @@ class Index(xmlfile.XmlFile):
                 for delta_path in deltas[md.package.name]:
                     delta = metadata.Delta()
                     delta.packageURI = util.removepathprefix(repo_uri, delta_path)
-                    delta.packageSize = os.path.getsize(delta_path)
+                    delta.packageSize = long(os.path.getsize(delta_path))
                     delta.packageHash = util.sha1_file(delta_path)
                     name, buildFrom, buildTo = util.parse_delta_package_name(delta_path)
                     delta.buildFrom = buildFrom

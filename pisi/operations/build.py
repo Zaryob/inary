@@ -676,7 +676,7 @@ class Builder:
         for fileinfo in self.files.list:
             size += fileinfo.size
 
-        metadata.package.installedSize = size
+        metadata.package.installedSize = long(size)
 
         self.metadata = metadata
 
@@ -712,7 +712,7 @@ class Builder:
                     continue
                 frpath = pisi.util.removepathprefix(install_dir, fpath) # relative path
                 ftype, permanent = get_file_type(frpath, package.files, install_dir)
-                fsize = pisi.util.dir_size(fpath)
+                fsize = long(pisi.util.dir_size(fpath))
                 if not os.path.islink(fpath):
                     st = os.stat(fpath)
                 else:

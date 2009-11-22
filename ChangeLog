@@ -1,3 +1,7 @@
+2009-11-22 Bahadır Kandemir <bahadir@pardus.org.tr>
+		* pisi/operations/build.py, pisi/index.py: *Size variables should be
+		long, instead of int.
+
 2009-11-09 Faik Uygur <faik@pardus.org.tr>
 		* pisi/actionsapi/perlmodules.py: KeepSpecial should control pod file removal.
                 Remove .packlist files from perl packages.
