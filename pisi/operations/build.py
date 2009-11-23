@@ -117,6 +117,8 @@ def exclude_special_files(filepath, fileinfo, ag):
         if not pattern in keeplist and re.match(patterns[pattern], fileinfo):
             ctx.ui.debug("Removing special %s file: %s" % (pattern, filepath))
             os.unlink(filepath)
+            # Remove dir if it becomes empty (Bug #11588)
+            pisi.util.rmdirs(os.path.dirname(filepath))
 
 def strip_debug_action(filepath, fileinfo, install_dir, ag):
     excludelist = [] if not ag.has_key('NoStrip') else ag['NoStrip']

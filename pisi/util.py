@@ -668,6 +668,13 @@ def config_changed(config_file):
                 return True
     return False
 
+# recursively remove empty dirs starting from dirpath
+def rmdirs(dirpath):
+    if os.path.isdir(dirpath) and not os.listdir(dirpath):
+        ctx.ui.debug("Removing empty dir: %s" % dirpath)
+        os.rmdir(dirpath)
+        rmdirs(os.path.dirname(dirpath))
+
 # Python regex sucks
 # http://mail.python.org/pipermail/python-list/2009-January/523704.html
 def letters():
