@@ -182,7 +182,7 @@ def list_replaces(repo=None):
     @param repo: Repository of the replaced packages. If repo is None than returns
     a dictionary of all the replaced packages in all the repositories
 
-    {'gaim':'pidgin, 'actioncube':'assaultcube'}
+    {'gaim':['pidgin'], 'gimp-i18n':['gimp-i18n-tr', 'gimp-18n-de', ...]}
 
     gaim replaced by pidgin and actioncube replaced by assaultcube
     """

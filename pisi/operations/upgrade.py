@@ -114,7 +114,9 @@ def upgrade(A=[], repo=None):
 
     # Force upgrading of installed but replaced packages or else they will be removed (they are obsoleted also).
     # This is not wanted for a replaced driver package (eg. nvidia-X).
-    A |= set(replaces.values())
+    #
+    # sum(array, []) is a nice trick to flatten an array of arrays
+    A |= set(sum(replaces.values(), []))
 
     A |= upgrade_base(A)
 
