@@ -184,7 +184,8 @@ def list_replaces(repo=None):
 
     {'gaim':['pidgin'], 'gimp-i18n':['gimp-i18n-tr', 'gimp-18n-de', ...]}
 
-    gaim replaced by pidgin and actioncube replaced by assaultcube
+    gaim replaced by pidgin and gimp-i18n is divided into smaller packages which also
+    replaces gimp-i18n
     """
     return pisi.db.packagedb.PackageDB().get_replaces(repo)
 
