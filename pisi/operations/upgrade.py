@@ -207,7 +207,7 @@ def plan_upgrade(A):
         B = Bp
     # now, search reverse dependencies to see if anything
     # should be upgraded
-    B = A
+    B = filter(lambda x:installdb.has_package(x), G_f.vertices())
     while len(B) > 0:
         Bp = set()
         for x in B:
