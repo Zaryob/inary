@@ -60,10 +60,6 @@ def find_upgrades(packages, replaces):
             if not pisi.util.any(lambda i:i.type == 'security', updates):
                 continue
 
-        if pisi.util.any(lambda u:"reverseDependencyUpdate" in u.required_actions() , updates):
-            rev_deps = map(lambda d:d[0], packagedb.get_rev_deps(i_pkg))
-            Ap.extend(filter(lambda name:is_upgradable(name), rev_deps))
-
         if pkg.distribution == distro and pisi.version.Version(pkg.distributionRelease) > pisi.version.Version(distro_release):
             Ap.append(i_pkg)
         elif ignore_build or (not build) or (not pkg.build):
@@ -222,6 +218,22 @@ def plan_upgrade(A):
                     if not rev_dep in G_f.vertices():
                         Bp.add(rev_dep)
                         G_f.add_plain_dep(rev_dep, x)
+        B = Bp
+
+    # now, search for reverse dependency update needs of to be upgraded packages
+    # check only the installed ones.
+    B = filter(lambda x:installdb.has_package(x), G_f.vertices())
+    while len(B) > 0:
+        Bp = set()
+        for x in B:
+            pkg = packagedb.get_package(x)
+            updates = [i for i in pkg.history if pisi.version.Version(i.release) > pisi.version.Version(release)]
+
+            if pisi.util.any(lambda u:"reverseDependencyUpdate" in u.required_actions() , updates):
+                rev_deps = map(lambda d:d[0], packagedb.get_rev_deps(i_pkg))
+                for rev_dep in filter(lambda name:name not in G_f.vertices() and is_upgradable(name), rev_deps):
+                    Bp.add(rev_dep)
+                    G_f.add_plain_dep(rev_dep, x)
         B = Bp
 
     if ctx.config.get_option('debug'):
