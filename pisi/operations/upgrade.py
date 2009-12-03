@@ -36,31 +36,23 @@ def find_upgrades(packages, replaces):
     Ap = []
     for i_pkg in packages:
 
-        u_pkg = i_pkg # upgrade package and installed package are the same if there is no replacement in place
+        if i_pkg in replaces.keys():
+            # Replaced packages will be forced for upgrade, cause replaced packages are marked as obsoleted also. So we
+            # pass them.
+            continue
 
         if i_pkg.endswith(ctx.const.package_suffix):
             ctx.ui.debug(_("Warning: package *name* ends with '.pisi'"))
-
-        # pisi up has "installed to be replaced package" as argument
-        if i_pkg in replaces.keys():
-            u_pkg = replaces[i_pkg]
-
-        # pisi up has "not installed but replacement package" as argument
-        if i_pkg in replaces.values():
-            for i, u in replaces.items():
-                if i_pkg == u:
-                    i_pkg = i
-                    u_pkg = u
 
         if not installdb.has_package(i_pkg):
             ctx.ui.info(_('Package %s is not installed.') % i_pkg, True)
             continue
 
-        if not packagedb.has_package(u_pkg):
-            ctx.ui.info(_('Package %s is not available in repositories.') % u_pkg, True)
+        if not packagedb.has_package(i_pkg):
+            ctx.ui.info(_('Package %s is not available in repositories.') % i_pkg, True)
             continue
 
-        pkg = packagedb.get_package(u_pkg)
+        pkg = packagedb.get_package(i_pkg)
         (version, release, build, distro, distro_release) = installdb.get_version_and_distro_release(i_pkg)
 
         updates = [i for i in pkg.history if pisi.version.Version(i.release) > pisi.version.Version(release)]
@@ -69,20 +61,20 @@ def find_upgrades(packages, replaces):
                 continue
 
         if pisi.util.any(lambda u:"reverseDependencyUpdate" in u.required_actions() , updates):
-            rev_deps = map(lambda d:d[0], packagedb.get_rev_deps(u_pkg))
+            rev_deps = map(lambda d:d[0], packagedb.get_rev_deps(i_pkg))
             Ap.extend(filter(lambda name:is_upgradable(name), rev_deps))
 
         if pkg.distribution == distro and pisi.version.Version(pkg.distributionRelease) > pisi.version.Version(distro_release):
-            Ap.append(u_pkg)
+            Ap.append(i_pkg)
         elif ignore_build or (not build) or (not pkg.build):
             if pisi.version.Version(release) < pisi.version.Version(pkg.release):
-                Ap.append(u_pkg)
+                Ap.append(i_pkg)
             else:
                 ctx.ui.info(_('Package %s is already at the latest release %s.')
                             % (pkg.name, pkg.release), True)
         else:
-            if build < pkg.build or u_pkg != i_pkg:
-                Ap.append(u_pkg)
+            if build < pkg.build:
+                Ap.append(i_pkg)
             else:
                 ctx.ui.info(_('Package %s is already at the latest build %s.')
                             % (pkg.name, pkg.build), True)
@@ -108,13 +100,15 @@ def upgrade(A=[], repo=None):
     Ap = find_upgrades(A, replaces)
     A = set(Ap)
 
+    # Force upgrading of installed but replaced packages or else they will be removed (they are obsoleted also).
+    # This is not wanted for a replaced driver package (eg. nvidia-X).
+    #
+    # sum(array, []) is a nice trick to flatten an array of arrays
+    A |= set(sum(replaces.values(), []))
+
     if len(A)==0:
         ctx.ui.info(_('No packages to upgrade.'))
         return True
-
-    # Force upgrading of installed but replaced packages or else they will be removed (they are obsoleted also).
-    # This is not wanted for a replaced driver package (eg. nvidia-X).
-    A |= set(replaces.values())
 
     A |= upgrade_base(A)
 
@@ -142,7 +136,7 @@ def upgrade(A=[], repo=None):
     if ctx.get_option('dry_run'):
         return
 
-    if set(order) - A_0 - set(replaces.values()):
+    if set(order) - A_0 - set(sum(replaces.values(), [])):
         if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
             return False
 
@@ -183,7 +177,7 @@ def plan_upgrade(A):
     replaces = packagedb.get_replaces()
     # Force upgrading of installed but replaced packages or else they will be removed (they are obsoleted also).
     # This is not wanted for a replaced driver package (eg. nvidia-X).
-    A = set(A) | set(replaces.values())
+    A = set(A) | set(sum(replaces.values(), []))
 
     # find the "install closure" graph of G_f by package
     # set A using packagedb

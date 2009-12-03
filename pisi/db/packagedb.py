@@ -203,7 +203,7 @@ class PackageDB(lazydb.LazyDB):
             replaces = self.get_package(pkg_name).replaces
             for r in replaces:
                 if pisi.replace.installed_package_replaced(r):
-                    pairs[r.package] = pkg_name
+                    pairs.setdefault(r.package, []).append(pkg_name)
 
         return pairs
 
