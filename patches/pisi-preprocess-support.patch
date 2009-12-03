@@ -1,8 +1,8 @@
 Index: pisi/pxml/xmlfile.py
 ===================================================================
---- pisi/pxml/xmlfile.py	(revision 26638)
+--- pisi/pxml/xmlfile.py	(revision 26639)
 +++ pisi/pxml/xmlfile.py	(working copy)
-@@ -27,12 +27,16 @@
+@@ -27,6 +27,7 @@
  
  import codecs
  import exceptions
@@ -10,21 +10,8 @@ Index: pisi/pxml/xmlfile.py
  
  import piksemel as iks
  
- import pisi
- import pisi.file
-+import pisi.config
- 
-+from preprocess import preprocess,PreprocessError
-+
- class Error(pisi.Error):
-     pass
- 
-@@ -76,11 +80,20 @@
-             localpath = uri.path()
-         else:
-             # this is a remote file, first download it into tmpDir
--            localpath = pisi.file.File.download(uri, tmpDir, sha1sum=sha1sum, 
-+            localpath = pisi.file.File.download(uri, tmpDir, sha1sum=sha1sum,
+@@ -79,8 +80,17 @@
+             localpath = pisi.file.File.download(uri, tmpDir, sha1sum=sha1sum, 
                                                  compress=compress,sign=sign, copylocal=copylocal)
  
 +        st = cStringIO.StringIO()
@@ -44,7 +31,7 @@ Index: pisi/pxml/xmlfile.py
              raise Error(_("Unable to read file (%s): %s") %(localpath,e))
 Index: pisi/configfile.py
 ===================================================================
---- pisi/configfile.py	(revision 26638)
+--- pisi/configfile.py	(revision 26639)
 +++ pisi/configfile.py	(working copy)
 @@ -179,6 +179,18 @@
              dirsitems = []
@@ -65,18 +52,3 @@ Index: pisi/configfile.py
      # get, set and write_config methods added for manipulation of pisi.conf file from Comar to solve bug #5668.
      # Current ConfigParser does not keep the comments and white spaces, which we do not want for pisi.conf. There
      # are patches floating in the python sourceforge to add this feature. The write_config code is from python
-@@ -206,7 +218,7 @@
-             r'(?P<padding>\s*)'
-             r'(?P<value>.*)$'
-             )
--        
-+
-         fp = open(self.filePath, "r+")
-         # Default to " = " to match write(), but use the most recent
-         # separator found if the file has any options.
-@@ -313,4 +325,4 @@
-                 fp.write(sect.getvalue())
- 
-         fp.close()
--        
-+
