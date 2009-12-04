@@ -231,7 +231,7 @@ def plan_upgrade(A):
             updates = [i for i in pkg.history if pisi.version.Version(i.release) > pisi.version.Version(release)]
 
             if pisi.util.any(lambda u:"reverseDependencyUpdate" in u.required_actions() , updates):
-                rev_deps = map(lambda d:d[0], packagedb.get_rev_deps(i_pkg))
+                rev_deps = map(lambda d:d[0], packagedb.get_rev_deps(x))
                 for rev_dep in filter(lambda name:name not in G_f.vertices() and is_upgradable(name), rev_deps):
                     Bp.add(rev_dep)
                     G_f.add_plain_dep(rev_dep, x)
