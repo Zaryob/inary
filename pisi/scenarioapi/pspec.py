@@ -140,18 +140,10 @@ class Pspec:
         self.package.conflicts = conflicts
 
         if dependencies:
-            for depitem in dependencies:
-                if isinstance(depitem, list):
-                    anydep = AnyDependency()
-                    for depname in depitem:
-                        dep = Dependency()
-                        dep.package = depname
-                        anydep.dependencies.append(dep)
-                    self.package.packageAnyDependencies.append(anydep)
-                else:
-                    dep = Dependency()
-                    dep.package = depitem
-                    self.package.packageDependencies.append(dep)
+            for depname in dependencies:
+                dep = Dependency()
+                dep.package = depname
+                self.package.packageDependencies.append(dep)
 
         self.pspec.packages.append(self.package)
 
