@@ -10,7 +10,7 @@
 # Please read the COPYING file.
 #
 
-from pisi.specfile import SpecFile, Package, Update, Path
+from pisi.specfile import SpecFile, Package, Update, Path, Action
 from pisi.dependency import Dependency
 from pisi.conflict import Conflict
 from pisi.pxml.autoxml import LocalText
@@ -101,7 +101,12 @@ class Pspec:
         self.update = new
         self.pspec.history.append(self.update)
         self.pspec.history.reverse()
-        self.write()
+
+    def add_requires(self, actions):
+        for action in actions:
+            new = Action()
+            new.action = action
+            self.pspec.history[0].requires.append(new)
 
     def set_source(self, homepage, summary, description, license, partOf):
         self.pspec.source.name = self.name

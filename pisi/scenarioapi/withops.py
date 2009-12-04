@@ -12,7 +12,7 @@
 #
 
 ADDED, REMOVED, INIT = range(3)
-PARTOF, VERSION, CONFLICT, DEPENDENCY = range(4)
+PARTOF, VERSION, CONFLICT, DEPENDENCY, REQUIRES = range(5)
 
 class With:
     def __init__(self):
@@ -33,6 +33,9 @@ def with_version(version):
 
 def with_conflicts(*cons):
     return with_action(CONFLICT, INIT, cons)
+
+def with_requiring_actions(*action):
+    return with_action(REQUIRES, ADDED, action)
 
 def with_dependencies(*deps):
     return with_action(DEPENDENCY, INIT, deps)

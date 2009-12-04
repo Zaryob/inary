@@ -69,9 +69,14 @@ class Package:
         return os.path.basename(found[0])
 
     def version_bump(self, *args):
+        self.pspec.update_history(self.date, self.version)
+
         for _with in args:
             if _with.types == CONFLICT and _with.action == ADDED:
                 self.pspec.add_conflicts(_with.data)
+                
+            if _with.types == REQUIRES and _with.action == ADDED:
+                self.pspec.add_requires(_with.data)
 
             if _with.types == CONFLICT and _with.action == REMOVED:
                 self.pspec.remove_conflicts(_with.data)
@@ -84,8 +89,8 @@ class Package:
 
             if _with.types == VERSION and _with.action == INIT:
                 self.version = _with.data
-
-        self.pspec.update_history(self.date, self.version)
+                
+        self.pspec.write()
         self.actions.name = self.name
         self.actions.write()
         self.create_pisi()
