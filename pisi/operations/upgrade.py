@@ -227,6 +227,7 @@ def plan_upgrade(A):
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
+            (version, release, build) = installdb.get_version(x)
             updates = [i for i in pkg.history if pisi.version.Version(i.release) > pisi.version.Version(release)]
 
             if pisi.util.any(lambda u:"reverseDependencyUpdate" in u.required_actions() , updates):
