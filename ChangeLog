@@ -1,4 +1,8 @@
 2009-12-04 Bahadır Kandemir <bahadir@pardus.org.tr>
+		* pisi/scenarioapi/package.py: Fixed repo_version_bumped() ignoring
+		with_version() argument.
+
+2009-12-04 Bahadır Kandemir <bahadir@pardus.org.tr>
 		* pisi/scenarioapi/pspec.py: AnyDependency support added to
 		with_dependencies() method. Simply give AnyDependency list as an
 		argument.
