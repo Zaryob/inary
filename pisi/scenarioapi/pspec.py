@@ -10,7 +10,7 @@
 # Please read the COPYING file.
 #
 
-from pisi.specfile import SpecFile, Package, Update, Path, Action
+from pisi.specfile import SpecFile, Package, Update, Path, Action, AnyDependency
 from pisi.dependency import Dependency
 from pisi.conflict import Conflict
 from pisi.pxml.autoxml import LocalText
@@ -140,10 +140,18 @@ class Pspec:
         self.package.conflicts = conflicts
 
         if dependencies:
-            for depname in dependencies:
-                dep = Dependency()
-                dep.package = depname
-                self.package.packageDependencies.append(dep)
+            for depitem in dependencies:
+                if isinstance(depitem, list):
+                    anydep = AnyDependency()
+                    for depname in depitem:
+                        dep = Dependency()
+                        dep.package = depname
+                        anydep.dependencies.append(dep)
+                    self.package.packageAnyDependencies.append(anydep)
+                else:
+                    dep = Dependency()
+                    dep.package = depitem
+                    self.package.packageDependencies.append(dep)
 
         self.pspec.packages.append(self.package)
 
