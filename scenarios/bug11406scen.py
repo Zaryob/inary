@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-# -*- coding: utf-8 -*-
 #
-# Scenario : bug11405scen.py
+# Scenario : bug11406scen.py
 #
 # Source   : http://bugs.pardus.org.tr/show_bug.cgi?id=11406
 #
