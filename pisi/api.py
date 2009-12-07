@@ -156,6 +156,42 @@ def set_options(options):
     """
     ctx.config = pisi.config.Config(options)
 
+def list_needs_restart():
+    """
+    Return a list of packages that need a service restart.
+    """
+    return pisi.db.installdb.InstallDB().list_needs_restart()
+
+def list_needs_reboot():
+    """
+    Return a list of packages that need a system reboot.
+    """
+    return pisi.db.installdb.InstallDB().list_needs_reboot()
+
+def add_needs_restart(package):
+    """
+    Add a new package to service restart list.
+    """
+    pisi.db.installdb.InstallDB().mark_needs_restart(package)
+
+def add_needs_reboot(package):
+    """
+    Add a new package to system reboot list.
+    """
+    pisi.db.installdb.InstallDB().mark_needs_reboot(package)
+
+def remove_needs_restart(package):
+    """
+    Remove a package from service restart list. Passing "*" will clear whole list.
+    """
+    pisi.db.installdb.InstallDB().clear_needs_restart(package)
+
+def remove_needs_reboot(package):
+    """
+    Remove a package from system reboot list. Passing "*" will clear whole list.
+    """
+    pisi.db.installdb.InstallDB().clear_needs_reboot(package)
+
 def list_pending():
     """
     Return a list of configuration pending packages -> list_of_strings

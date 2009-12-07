@@ -87,6 +87,8 @@ class Constants:
         self.__c.sandbox_conf = "/etc/pisi/sandbox.conf"
         self.__c.blacklist = "/etc/pisi/blacklist"
         self.__c.config_pending = "configpending"
+        self.__c.needs_restart = "needs_restart"
+        self.__c.needs_reboot = "needs_reboot"
         self.__c.files_db = "files.db"
         self.__c.repos = "repos"
         

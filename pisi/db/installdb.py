@@ -80,6 +80,18 @@ class InstallDB(lazydb.LazyDB):
             return open(pending_info_path, "r").read().split()
         return []
 
+    def __get_needs_restart(self):
+        restart_info_path = os.path.join(ctx.config.info_dir(), ctx.const.needs_restart)
+        if os.path.exists(restart_info_path):
+            return open(restart_info_path, "r").read().split()
+        return []
+
+    def __get_needs_reboot(self):
+        reboot_info_path = os.path.join(ctx.config.info_dir(), ctx.const.needs_reboot)
+        if os.path.exists(reboot_info_path):
+            return open(reboot_info_path, "r").read().split()
+        return []
+
     def __add_to_revdeps(self, package, revdeps):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
         meta_doc = piksemel.parse(metadata_xml)
@@ -244,6 +256,18 @@ class InstallDB(lazydb.LazyDB):
             config_pending.append(package)
             self.__write_config_pending(config_pending)
 
+    def mark_needs_restart(self, package):
+        needs_restart = self.__get_needs_restart()
+        if package not in needs_restart:
+            needs_restart.append(package)
+            self.__write_needs_restart(needs_restart)
+
+    def mark_needs_reboot(self, package):
+        needs_reboot = self.__get_needs_reboot()
+        if package not in needs_reboot:
+            needs_reboot.append(package)
+            self.__write_needs_reboot(needs_reboot)
+
     def add_package(self, pkginfo):
         self.installed_db[pkginfo.name] = "%s-%s" % (pkginfo.version, pkginfo.release)
         self.__add_to_revdeps(pkginfo.name, self.rev_deps_db)
@@ -256,11 +280,33 @@ class InstallDB(lazydb.LazyDB):
     def list_pending(self):
         return self.__get_config_pending()
 
+    def list_needs_restart(self):
+        return self.__get_needs_restart()
+
+    def list_needs_reboot(self):
+        return self.__get_needs_reboot()
+
     def clear_pending(self, package):
         config_pending = self.__get_config_pending()
         if package in config_pending:
             config_pending.remove(package)
             self.__write_config_pending(config_pending)
+
+    def clear_needs_restart(self, package):
+        needs_restart = self.__get_needs_restart()
+        if package == "*":
+            self.__write_needs_restart([])
+        elif package in needs_restart:
+            needs_restart.remove(package)
+            self.__write_needs_restart(needs_restart)
+
+    def clear_needs_reboot(self, package):
+        needs_reboot = self.__get_needs_reboot()
+        if package == "*":
+            self.__write_needs_reboot([])
+        elif package in needs_reboot:
+            needs_reboot.remove(package)
+            self.__write_needs_reboot(needs_reboot)
 
     def __write_config_pending(self, config_pending):
         pending_info_file = os.path.join(ctx.config.info_dir(), ctx.const.config_pending)
@@ -268,6 +314,20 @@ class InstallDB(lazydb.LazyDB):
         for pkg in set(config_pending):
             pending.write("%s\n" % pkg)
         pending.close()
+
+    def __write_needs_restart(self, needs_restart):
+        restart_info_file = os.path.join(ctx.config.info_dir(), ctx.const.needs_restart)
+        restart = open(restart_info_file, "w")
+        for pkg in set(needs_restart):
+            restart.write("%s\n" % pkg)
+        restart.close()
+
+    def __write_needs_reboot(self, needs_reboot):
+        reboot_info_file = os.path.join(ctx.config.info_dir(), ctx.const.needs_reboot)
+        reboot = open(reboot_info_file, "w")
+        for pkg in set(needs_reboot):
+            reboot.write("%s\n" % pkg)
+        reboot.close()
 
     def package_path(self, package):
 
