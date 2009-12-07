@@ -293,18 +293,20 @@ class InstallDB(lazydb.LazyDB):
             self.__write_config_pending(config_pending)
 
     def clear_needs_restart(self, package):
-        needs_restart = self.__get_needs_restart()
         if package == "*":
             self.__write_needs_restart([])
-        elif package in needs_restart:
+            return
+        needs_restart = self.__get_needs_restart()
+        if package in needs_restart:
             needs_restart.remove(package)
             self.__write_needs_restart(needs_restart)
 
     def clear_needs_reboot(self, package):
-        needs_reboot = self.__get_needs_reboot()
         if package == "*":
             self.__write_needs_reboot([])
-        elif package in needs_reboot:
+            return
+        needs_reboot = self.__get_needs_reboot()
+        if package in needs_reboot:
             needs_reboot.remove(package)
             self.__write_needs_reboot(needs_reboot)
 
