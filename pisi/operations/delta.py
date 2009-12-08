@@ -104,9 +104,8 @@ def find_delta(oldfiles, newfiles):
     for f in newfiles.list:
         hashto_files.setdefault(f.hash, []).append(f)
 
-    # Find hash or permission changed files
-    files_new = set(map(lambda x:x.hash+x.mode, newfiles.list))
-    files_old = set(map(lambda x:x.hash+x.mode, oldfiles.list))
+    files_new = set(map(lambda x:x.hash, newfiles.list))
+    files_old = set(map(lambda x:x.hash, oldfiles.list))
     files_delta = files_new - files_old
 
     deltas = []
