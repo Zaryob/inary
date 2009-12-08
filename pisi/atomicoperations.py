@@ -449,6 +449,19 @@ class Install(AtomicOperation):
         if self.config_later:
             self.installdb.mark_pending(self.pkginfo.name)
 
+        # get update history
+        if self.installdb.has_package(self.pkginfo.name):
+            (version, release, build) = self.installdb.get_version(self.pkginfo.name)
+            updates = [i for i in self.pkginfo.history if pisi.version.Version(i.release) > pisi.version.Version(release)]
+        else:
+            updates = self.pkginfo.history
+
+        # need service or system restart?
+        if pisi.util.any(lambda u:"serviceRestart" in u.required_actions(), updates):
+            pisi.api.add_needs_restart(self.pkginfo.name)
+        if pisi.util.any(lambda u:"systemRestart" in u.required_actions(), updates):
+            pisi.api.add_needs_reboot(self.pkginfo.name)
+
         # filesdb
         self.filesdb.add_files(self.metadata.package.name, self.files)
 

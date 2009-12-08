@@ -1,3 +1,7 @@
+2009-12-08 Bahadır Kandemir <bahadir@pardus.org.tr>
+		* pisi/atomicoperations.py: Add package name to needs{Restart,Reboot}
+		list if an update requires one of these actions.
+
 2009-12-07 Bahadır Kandemir <bahadir@pardus.org.tr>
 		* pisi/api.py, pisi/db/install.db, pisi/constants.py: Install DB
 		changes and API methods for needs{Restart,Reboot} feature.
