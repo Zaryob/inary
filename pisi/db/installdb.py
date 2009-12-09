@@ -74,22 +74,10 @@ class InstallDB(lazydb.LazyDB):
     def __generate_installed_pkgs(self):
         return dict(map(lambda x:pisi.util.parse_package_name(x), os.listdir(ctx.config.packages_dir())))
 
-    def __get_config_pending(self):
-        pending_info_path = os.path.join(ctx.config.info_dir(), ctx.const.config_pending)
-        if os.path.exists(pending_info_path):
-            return open(pending_info_path, "r").read().split()
-        return []
-
-    def __get_needs_restart(self):
-        restart_info_path = os.path.join(ctx.config.info_dir(), ctx.const.needs_restart)
-        if os.path.exists(restart_info_path):
-            return open(restart_info_path, "r").read().split()
-        return []
-
-    def __get_needs_reboot(self):
-        reboot_info_path = os.path.join(ctx.config.info_dir(), ctx.const.needs_reboot)
-        if os.path.exists(reboot_info_path):
-            return open(reboot_info_path, "r").read().split()
+    def __get_marked_packages(self, _type):
+        info_path = os.path.join(ctx.config.info_dir(), _type)
+        if os.path.exists(info_path):
+            return open(info_path, "r").read().split()
         return []
 
     def __add_to_revdeps(self, package, revdeps):
@@ -250,23 +238,20 @@ class InstallDB(lazydb.LazyDB):
         metadata.read(metadata_xml)
         return metadata.package
 
+    def __mark_package(self, _type, package):
+        packages = self.__get_marked_packages(_type)
+        if package not in packages:
+            packages.append(package)
+            self.__write_marked_packages(_type, packages)
+
     def mark_pending(self, package):
-        config_pending = self.__get_config_pending()
-        if package not in config_pending:
-            config_pending.append(package)
-            self.__write_config_pending(config_pending)
+        self.__mark_package(ctx.const.config_pending, package)
 
     def mark_needs_restart(self, package):
-        needs_restart = self.__get_needs_restart()
-        if package not in needs_restart:
-            needs_restart.append(package)
-            self.__write_needs_restart(needs_restart)
+        self.__mark_package(ctx.const.needs_restart, package)
 
     def mark_needs_reboot(self, package):
-        needs_reboot = self.__get_needs_reboot()
-        if package not in needs_reboot:
-            needs_reboot.append(package)
-            self.__write_needs_reboot(needs_reboot)
+        self.__mark_package(ctx.const.needs_reboot, package)
 
     def add_package(self, pkginfo):
         self.installed_db[pkginfo.name] = "%s-%s" % (pkginfo.version, pkginfo.release)
@@ -278,58 +263,38 @@ class InstallDB(lazydb.LazyDB):
         self.clear_pending(package_name)
 
     def list_pending(self):
-        return self.__get_config_pending()
+        return self.__get_marked_packages(ctx.const.config_pending)
 
     def list_needs_restart(self):
-        return self.__get_needs_restart()
+        return self.__get_marked_packages(ctx.const.needs_restart)
 
     def list_needs_reboot(self):
-        return self.__get_needs_reboot()
+        return self.__get_marked_packages(ctx.const.needs_reboot)
+
+    def __write_marked_packages(self, _type, packages):
+        info_file = os.path.join(ctx.config.info_dir(), _type)
+        config = open(info_file, "w")
+        for pkg in set(packages):
+            config.write("%s\n" % pkg)
+        config.close()
+
+    def __clear_marked_packages(self, _type, package):
+        if package == "*":
+            self.__write_marked_packages(_type, [])
+            return
+        packages = self.__get_marked_packages(_type)
+        if package in packages:
+            packages.remove(package)
+            self.__write_marked_packages(_type, packages)
 
     def clear_pending(self, package):
-        config_pending = self.__get_config_pending()
-        if package in config_pending:
-            config_pending.remove(package)
-            self.__write_config_pending(config_pending)
+        self.__clear_marked_packages(ctx.const.config_pending, package)
 
     def clear_needs_restart(self, package):
-        if package == "*":
-            self.__write_needs_restart([])
-            return
-        needs_restart = self.__get_needs_restart()
-        if package in needs_restart:
-            needs_restart.remove(package)
-            self.__write_needs_restart(needs_restart)
+        self.__clear_marked_packages(ctx.const.needs_restart, package)
 
     def clear_needs_reboot(self, package):
-        if package == "*":
-            self.__write_needs_reboot([])
-            return
-        needs_reboot = self.__get_needs_reboot()
-        if package in needs_reboot:
-            needs_reboot.remove(package)
-            self.__write_needs_reboot(needs_reboot)
-
-    def __write_config_pending(self, config_pending):
-        pending_info_file = os.path.join(ctx.config.info_dir(), ctx.const.config_pending)
-        pending = open(pending_info_file, "w")
-        for pkg in set(config_pending):
-            pending.write("%s\n" % pkg)
-        pending.close()
-
-    def __write_needs_restart(self, needs_restart):
-        restart_info_file = os.path.join(ctx.config.info_dir(), ctx.const.needs_restart)
-        restart = open(restart_info_file, "w")
-        for pkg in set(needs_restart):
-            restart.write("%s\n" % pkg)
-        restart.close()
-
-    def __write_needs_reboot(self, needs_reboot):
-        reboot_info_file = os.path.join(ctx.config.info_dir(), ctx.const.needs_reboot)
-        reboot = open(reboot_info_file, "w")
-        for pkg in set(needs_reboot):
-            reboot.write("%s\n" % pkg)
-        reboot.close()
+        self.__clear_marked_packages(ctx.const.needs_reboot, package)
 
     def package_path(self, package):
 
