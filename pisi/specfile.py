@@ -318,7 +318,10 @@ class SpecFile(xmlfile.XmlFile):
     def read_translations(self, path):
         if not os.path.exists(path):
             return
-        doc = piksemel.parse(path)
+        try:
+            doc = piksemel.parse(path)
+        except Exception, e:
+            raise Error(_("File '%s' has invalid XML") % (path) )
 
         self._set_i18n(doc.getTag("Source"), self.source)
         for pak in doc.tags("Package"):

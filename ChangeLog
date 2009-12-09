@@ -1,3 +1,7 @@
+2009-12-09 Serdar Dalgıç <serdar@pardus.org.tr>
+		* pisi/specfile.py: Raise meaningful warning when translations.xml has
+		invalid XML, closes bug #8969
+
 2009-12-08 Bahadır Kandemir <bahadir@pardus.org.tr>
 		* pisi/atomicoperations.py: Add package name to needs{Restart,Reboot}
 		list if an update requires one of these actions.
