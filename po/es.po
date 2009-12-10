@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "POT-Creation-Date: 2009-12-01 14:53+EET\n"
-"PO-Revision-Date: 2009-08-30 07:08-0400\n"
+"PO-Revision-Date: 2009-12-10 19:58-0300\n"
 "Last-Translator: Klemens Häckel <click3d at linuxmail (dot) org>\n"
 "Language-Team: Spanish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -197,7 +197,6 @@ msgid "File does not exist or permission denied: %s"
 msgstr "Archivo no existe o permiso denegado: %s"
 
 #: pisi/actionsapi/pisitools.py:236
-#, fuzzy
 msgid "ActionsAPI [dosym]: File already exists: %s"
 msgstr "ActionsAPI [dosym]: Archivo ya existe: %s"
 
@@ -438,14 +437,12 @@ msgstr ""
 "una vez."
 
 #: pisi/api.py:387
-#, fuzzy
 msgid "%s package found in %s repository"
-msgstr "Paquete encontrado en %s repositorio:"
+msgstr "Paquete %s encontrado en repositorio %s"
 
 #: pisi/api.py:391
-#, fuzzy
 msgid "%s package already fetched"
-msgstr "Remover paquetes denegado"
+msgstr "Paquete %s ya está descargado"
 
 # o mejor decir: capturar estado del sistema ?
 #: pisi/api.py:532
@@ -1183,7 +1180,6 @@ msgstr ""
 "Repositorios deshabilitados son ignorados para las siguientes operaciones\n"
 
 #: pisi/cli/fetch.py:25
-#, fuzzy
 msgid ""
 "Fetch a package\n"
 "\n"
@@ -1193,21 +1189,21 @@ msgid ""
 "\n"
 "Downloads the given pisi packages to working directory\n"
 msgstr ""
-"Mostrar información de paquete\n"
+"Descargar un paquete\n"
 "\n"
-"Uso: info <package1> <package2> ... <packagen>\n"
+"Uso: fetch <package1> <package2> ... <packagen>\n"
 "\n"
-"<packagei> puede ser nombre de paquete o de un archivo .pisi,\n"
+"<packagei>: nombre de paquete\n"
+"\n"
+"Descarga el paquete pisi indicado al directorio de trabajo\n"
 
 #: pisi/cli/fetch.py:41
-#, fuzzy
 msgid "fetch options"
-msgstr "opciones de búsqueda"
+msgstr "opciones de descarga"
 
 #: pisi/cli/fetch.py:47
-#, fuzzy
 msgid "Output directory for the fetched packages"
-msgstr "Carpeta de salida para paquetes producidos"
+msgstr "Carpeta destino para paquetes descargados"
 
 #: pisi/cli/graph.py:26
 msgid ""
