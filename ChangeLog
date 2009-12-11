@@ -1,3 +1,7 @@
+2009-12-11 Serdar Dalgıç <serdar@pardus.org.tr>
+		* pisi/operations/install.py: Check individual packages' Distribution
+		Release and architecture properties before installing them.
+
 2009-12-09 Serdar Dalgıç <serdar@pardus.org.tr>
 		* pisi/specfile.py: Raise meaningful warning when translations.xml has
 		invalid XML, closes bug #8969

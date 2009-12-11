@@ -156,6 +156,17 @@ def install_pkg_files(package_URIs, reinstall = False):
         d_t[name] = package.metadata.package
         dfn[name] = x
 
+    # check packages' DistributionReleases and Architecture
+    config = pisi.configfile.ConfigurationFile("/etc/pisi/pisi.conf")
+    for x in d_t.keys():
+        pkg = d_t[x]
+        if pkg.distributionRelease != config.get("general", "distribution_release"):
+            raise Exception(_('Package %s is not compatible with your distribution release %s %s.') \
+                    % (x, config.get("general", "distribution"), config.get("general", "distribution_release")))
+        if pkg.architecture != config.get("general", "architecture"):
+            raise Exception(_('Package %s (%s) is not compatible with your %s architecture.') \
+                    % (x, pkg.architecture, config.get("general", "architecture")))
+
     def satisfiesDep(dep):
         # is dependency satisfied among available packages
         # or packages to be installed?
