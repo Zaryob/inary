@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "POT-Creation-Date: 2009-12-01 14:53+EET\n"
-"PO-Revision-Date: 2009-08-14 20:09+0200\n"
+"PO-Revision-Date: 2009-12-12 09:06+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@pardus.nu>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
@@ -408,7 +408,7 @@ msgstr ""
 
 #: pisi/api.py:387
 msgid "%s package found in %s repository"
-msgstr ""
+msgstr "%s-paketet finns i %s-förrådet."
 
 #: pisi/api.py:391
 msgid "%s package already fetched"
@@ -472,7 +472,7 @@ msgstr ""
 
 #: pisi/api.py:777
 msgid "* Package database updated."
-msgstr ""
+msgstr "* Paketdatabas uppdaterad."
 
 #: pisi/api.py:779
 msgid "No repository named %s found."
@@ -674,7 +674,7 @@ msgstr ""
 
 #: pisi/cli/blame.py:63 pisi/specfile.py:331
 msgid "Name: %s, version: %s, release: %s\n"
-msgstr ""
+msgstr "Namm: %s, version: %s, utgåva: %s\n"
 
 #: pisi/cli/blame.py:65
 msgid "Package Maintainer: %s <%s>\n"
@@ -1246,7 +1246,7 @@ msgstr ""
 
 #: pisi/cli/info.py:129
 msgid "Reverse Dependencies:"
-msgstr ""
+msgstr "Omvända beroenden:"
 
 #: pisi/cli/info.py:140
 msgid "Reverse Build Dependencies:"
@@ -1262,11 +1262,11 @@ msgstr ""
 
 #: pisi/cli/info.py:162
 msgid "Installed package:"
-msgstr ""
+msgstr "Paketet är installerat:"
 
 #: pisi/cli/info.py:166
 msgid "%s package is not installed"
-msgstr ""
+msgstr "%s är inte installerad."
 
 #: pisi/cli/info.py:172
 msgid "[binary] "
@@ -1274,7 +1274,7 @@ msgstr ""
 
 #: pisi/cli/info.py:174 pisi/cli/info.py:186
 msgid "Package found in %s repository:"
-msgstr ""
+msgstr "Paketet finns i förrådet %s."
 
 #: pisi/cli/info.py:177
 msgid "%s package is not found in binary repositories"
@@ -1286,7 +1286,7 @@ msgstr ""
 
 #: pisi/cli/info.py:189
 msgid "%s package is not found in source repositories"
-msgstr ""
+msgstr "%s finns inte i källkodsförråden."
 
 #: pisi/cli/install.py:25
 msgid ""
@@ -2016,15 +2016,15 @@ msgstr ""
 
 #: pisi/metadata.py:77
 msgid "Distribution: %s, Dist. Release: %s\n"
-msgstr ""
+msgstr "Distribution: %s, Utgåva: %s\n"
 
 #: pisi/metadata.py:79
 msgid "Architecture: %s, Installed Size: %s"
-msgstr ""
+msgstr "Arkitektur: %s, Installerad storlek: %s"
 
 #: pisi/metadata.py:85
 msgid ", Package Size: %s"
-msgstr ""
+msgstr ", Paketstorlek: %s"
 
 #: pisi/mirrors.py:46
 msgid "Mirrors file %s does not exist. Could not resolve mirrors://"
@@ -2640,27 +2640,27 @@ msgstr ""
 
 #: pisi/specfile.py:270
 msgid "Name: %s, version: %s, release: %s, build %s\n"
-msgstr ""
+msgstr "Namn: %s, version: %s, utgåva: %s, bygge %s\n"
 
 #: pisi/specfile.py:272 pisi/specfile.py:333
 msgid "Summary: %s\n"
-msgstr ""
+msgstr "Sammandrag: %s\n"
 
 #: pisi/specfile.py:273 pisi/specfile.py:334
 msgid "Description: %s\n"
-msgstr ""
+msgstr "Beskrivning: %s\n"
 
 #: pisi/specfile.py:274 pisi/specfile.py:335
 msgid "Component: %s\n"
-msgstr ""
+msgstr "Komponent: %s\n"
 
 #: pisi/specfile.py:275
 msgid "Provides: "
-msgstr ""
+msgstr "Tillhandahåller: "
 
 #: pisi/specfile.py:279
 msgid "Dependencies: "
-msgstr ""
+msgstr "Beroenden: "
 
 #: pisi/specfile.py:336
 msgid "Build Dependencies: "
@@ -2754,3 +2754,4 @@ msgstr ""
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr ""
+
