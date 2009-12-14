@@ -1,3 +1,7 @@
+2009-12-14 Serdar Dalgıç <serdar@pardus.org.tr>
+		*	Add architecture and distribution release check to pisi add-repo
+		New parameter --ignore-check is added to pisi ar too.
+
 2009-12-11 Serdar Dalgıç <serdar@pardus.org.tr>
 		* pisi/operations/install.py: Check individual packages' Distribution
 		Release and architecture properties before installing them.
