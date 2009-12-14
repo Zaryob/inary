@@ -34,15 +34,11 @@ import pisi.group as group
 class Error(pisi.Error):
     pass
 
-class NotCompatibleDistroException(pisi.Exception):
-    def __init__(self, repoVersion, curDistro, curDistVersion):
-        pisi.Exception.__init__(self, "Opps, sorry, this repository for %s is not compatible with your distribution release %s %s." \
-                % (repoVersion, curDistro, curDistVersion))
+class DistributionMismatchException(pisi.Exception):
+    pass
 
-class NotCompatibleArchException(pisi.Exception):
-    def __init__(self, repoArch, curArch):
-        pisi.Exception.__init__(self, "Opps, sorry, repo architecture %s is not compatible with your %s architecture." \
-                % (repoArch, curArch))
+class ArchitectureMismatchException(pisi.Exception):
+    pass
 
 class Index(xmlfile.XmlFile):
     __metaclass__ = autoxml.autoxml
@@ -82,7 +78,7 @@ class Index(xmlfile.XmlFile):
 
         # check packages' DistributionReleases and Architecture
         if not ctx.get_option('ignore_check'):
-            self.check_distro_and_arch(doc)
+            self.check_distribution_and_architecture(doc)
 
         if not repo:
             repo = self.distribution.name()
@@ -95,16 +91,16 @@ class Index(xmlfile.XmlFile):
         tmpdir = os.path.join(ctx.config.index_dir(), repo)
         pisi.file.File.check_signature(filename, tmpdir)
 
-    def check_distro_and_arch(self, doc):
+    def check_distribution_and_architecture(self, doc):
         config = pisi.configfile.ConfigurationFile("/etc/pisi/pisi.conf")
         if doc.getTag("Distribution").getTagData("Version") != config.get("general", "distribution_release"):
-            raise NotCompatibleDistroException(doc.getTag("Distribution").getTagData("Version"), \
-                    config.get("general", "distribution"), config.get("general", "distribution_release"))
+            ctx.ui.error(_("The repository couldn't be added because of distribution release mismatch"))
+            raise DistributionMismatchException
+        # First check if Architecture tag exists in index.xml; if not, directly skip it ;)
         if doc.getTag("Distribution").getTagData("Architecture"):
-            # First check if Architecture tag exists in index.xml; if not, directly skip it ;)
             if doc.getTag("Distribution").getTagData("Architecture") != config.get("general", "architecture"):
-                raise NotCompatibleArchException(doc.getTag("Distribution").getTagData("Architecture"), \
-                    config.get("general", "architecture"))
+                ctx.ui.error(_("The repository couldn't be added because of distribution architecture mismatch"))
+                raise ArchitectureMismatchException
 
     def index(self, repo_uri, skip_sources=False):
         self.repo_dir = repo_uri
