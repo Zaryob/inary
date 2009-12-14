@@ -92,13 +92,12 @@ class Index(xmlfile.XmlFile):
         pisi.file.File.check_signature(filename, tmpdir)
 
     def check_distribution_and_architecture(self, doc):
-        config = pisi.configfile.ConfigurationFile("/etc/pisi/pisi.conf")
-        if doc.getTag("Distribution").getTagData("Version") != config.get("general", "distribution_release"):
+        if doc.getTag("Distribution").getTagData("Version") != ctx.config.values.get("general", "distribution_release"):
             ctx.ui.error(_("The repository couldn't be added because of distribution release mismatch"))
             raise DistributionMismatchException
         # First check if Architecture tag exists in index.xml; if not, directly skip it ;)
         if doc.getTag("Distribution").getTagData("Architecture"):
-            if doc.getTag("Distribution").getTagData("Architecture") != config.get("general", "architecture"):
+            if doc.getTag("Distribution").getTagData("Architecture") != ctx.config.values.get("general", "architecture"):
                 ctx.ui.error(_("The repository couldn't be added because of distribution architecture mismatch"))
                 raise ArchitectureMismatchException
 
