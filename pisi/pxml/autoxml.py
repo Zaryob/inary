@@ -440,11 +440,11 @@ class autoxml(oo.autosuper, oo.autoprop):
             def read(self, uri, keepDoc = False, tmpDir = '/tmp',
                      sha1sum = False, compress = None, sign = None, copylocal = False, nodecode = False):
                 "read XML file and decode it into a python object"
-                self.readxml(uri, tmpDir, sha1sum=sha1sum, 
+                read_xml = self.readxml(uri, tmpDir, sha1sum=sha1sum, 
                              compress=compress, sign=sign, copylocal=copylocal)
 
                 if nodecode:
-                    return
+                    return read_xml
 
                 errs = []
                 self.decode(self.rootNode(), errs)

@@ -34,6 +34,16 @@ import pisi.group as group
 class Error(pisi.Error):
     pass
 
+class NotCompatibleDistroException(pisi.Exception):
+    def __init__(self, repoVersion, curDistro, curDistVersion):
+        pisi.Exception.__init__(self, "Opps, sorry, this repository for %s is not compatible with your distribution release %s %s." \
+                % (repoVersion, curDistro, curDistVersion))
+
+class NotCompatibleArchException(pisi.Exception):
+    def __init__(self, repoArch, curArch):
+        pisi.Exception.__init__(self, "Opps, sorry, repo architecture %s is not compatible with your %s architecture." \
+                % (repoArch, curArch))
+
 class Index(xmlfile.XmlFile):
     __metaclass__ = autoxml.autoxml
 
@@ -50,7 +60,7 @@ class Index(xmlfile.XmlFile):
         return self.distribution.name + self.distribution.repositoryname
 
     def read_uri(self, uri, tmpdir, force = False):
-        self.read(uri, tmpDir=tmpdir, sha1sum=not force,
+        return self.read(uri, tmpDir=tmpdir, sha1sum=not force,
                   compress=pisi.file.File.auto, sign=pisi.file.File.detached, copylocal = True, nodecode = True)
 
     # read index for a given repo, force means download even if remote not updated
@@ -68,7 +78,11 @@ class Index(xmlfile.XmlFile):
         urlfile.write(uri) # uri
         urlfile.close()
 
-        self.read_uri(uri, tmpdir, force)
+        doc = self.read_uri(uri, tmpdir, force)
+
+        # check packages' DistributionReleases and Architecture
+        if not ctx.get_option('ignore_check'):
+            self.check_distro_and_arch(doc)
 
         if not repo:
             repo = self.distribution.name()
@@ -80,6 +94,17 @@ class Index(xmlfile.XmlFile):
     def check_signature(self, filename, repo):
         tmpdir = os.path.join(ctx.config.index_dir(), repo)
         pisi.file.File.check_signature(filename, tmpdir)
+
+    def check_distro_and_arch(self, doc):
+        config = pisi.configfile.ConfigurationFile("/etc/pisi/pisi.conf")
+        if doc.getTag("Distribution").getTagData("Version") != config.get("general", "distribution_release"):
+            raise NotCompatibleDistroException(doc.getTag("Distribution").getTagData("Version"), \
+                    config.get("general", "distribution"), config.get("general", "distribution_release"))
+        if doc.getTag("Distribution").getTagData("Architecture"):
+            # First check if Architecture tag exists in index.xml; if not, directly skip it ;)
+            if doc.getTag("Distribution").getTagData("Architecture") != config.get("general", "architecture"):
+                raise NotCompatibleArchException(doc.getTag("Distribution").getTagData("Architecture"), \
+                    config.get("general", "architecture"))
 
     def index(self, repo_uri, skip_sources=False):
         self.repo_dir = repo_uri

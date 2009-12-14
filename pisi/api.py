@@ -805,6 +805,14 @@ def __update_repo(repo, force=False):
                 index.read_uri_of_repo(repouri, repo, force = force)
             else:
                 return
+        except pisi.index.NotCompatibleDistroException, e:
+            ctx.ui.warning(e)
+            remove_repo(repo)
+            return
+        except pisi.index.NotCompatibleArchException, e:
+            ctx.ui.warning(e)
+            remove_repo(repo)
+            return
 
         try:
             index.check_signature(repouri, repo)
