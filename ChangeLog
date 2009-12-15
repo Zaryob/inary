@@ -1,3 +1,8 @@
+2009-12-15 Faik Uygur <faik@pardus.org.tr>
+		* pisi/component.py (Component): Make LocalName, Summary and
+		Description optional for cleaning up component.xml files in the
+		repository.
+
 2009-12-14 Serdar Dalgıç <serdar@pardus.org.tr>
 		*	Add architecture and distribution release check to pisi add-repo
 		New parameter --ignore-check is added to pisi ar too.

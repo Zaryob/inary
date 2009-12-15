@@ -64,8 +64,8 @@ class Component(xmlfile.XmlFile):
     t_LocalName = [autoxml.LocalText, autoxml.optional]
 
     # Information about the component
-    t_Summary = [autoxml.LocalText, autoxml.mandatory]
-    t_Description = [autoxml.LocalText, autoxml.mandatory]
+    t_Summary = [autoxml.LocalText, autoxml.optional]
+    t_Description = [autoxml.LocalText, autoxml.optional]
     t_Group = [ autoxml.String, autoxml.optional ]
 
     # the parts of this component.
