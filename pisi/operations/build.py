@@ -365,7 +365,9 @@ class Builder:
                 path = pisi.util.join_path(self.pkg_work_dir(), 'component.xml')
             else:
                 if not os.path.exists(url):
-                    raise Exception(_('Cannot find component.xml in upper directory'))
+                    ctx.ui.warning(_('Cannot find component.xml in upper directory, Source is now part of unknown component'))
+                    self.spec.source.partOf = 'unknown'
+                    return
                 path = url
             comp = component.CompatComponent()
             comp.read(path)
