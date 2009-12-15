@@ -61,7 +61,7 @@ class Component(xmlfile.XmlFile):
     # LocalName for system.base could be sistem.taban or "Taban Sistem",
     # this could be useful for GUIs
 
-    t_LocalName = [autoxml.LocalText, autoxml.mandatory]
+    t_LocalName = [autoxml.LocalText, autoxml.optional]
 
     # Information about the component
     t_Summary = [autoxml.LocalText, autoxml.mandatory]
