@@ -1,3 +1,7 @@
+2009-12-16 Serdar Dalgıç <serdar@pardus.org.tr>
+		* pisi/operations/build.py: Warn if component.xml is not found in the
+		upper directory, tag the source as a part of unknown component.
+
 2009-12-15 Faik Uygur <faik@pardus.org.tr>
 		* pisi/component.py (Component): Make LocalName, Summary and
 		Description optional for cleaning up component.xml files in the
