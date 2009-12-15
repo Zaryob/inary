@@ -361,7 +361,12 @@ class Builder:
             url = pisi.util.join_path(parentdir, 'component.xml')
             progress = ctx.ui.Progress
             if pisi.uri.URI(url).is_remote_file():
-                pisi.fetcher.fetch_url(url, self.pkg_work_dir(), progress)
+                try:
+                    pisi.fetcher.fetch_url(url, self.pkg_work_dir(), progress)
+                except pisi.fetcher.FetchError:
+                    ctx.ui.warning(_('Cannot find component.xml in remote directory, Source is now part of unknown component'))
+                    self.spec.source.partOf = 'unknown'
+                    return
                 path = pisi.util.join_path(self.pkg_work_dir(), 'component.xml')
             else:
                 if not os.path.exists(url):
