@@ -10,6 +10,7 @@
 # Please read the COPYING file.
 
 import os
+import stat
 
 import gettext
 __trans = gettext.translation("pisi", fallback=True)
@@ -137,3 +138,22 @@ def find_relocations(oldfiles, newfiles):
                     relocations.append((files_old[h][0], files_new[h][i]))
 
     return relocations
+
+def find_permission_changes(oldfiles, newfiles):
+
+    files_new = {}
+    for f in newfiles.list:
+        files_new.setdefault(f.hash, []).append(f)
+
+    hashes_new = set(map(lambda f:f.hash, newfiles.list))
+    hashes_old = set(map(lambda f:f.hash, oldfiles.list))
+    unchanged = hashes_new.intersection(hashes_old)
+
+    permissions = []
+    for h in unchanged:
+        for _file in files_new[h]:
+            path = "/%s" % _file.path
+            if oct(stat.S_IMODE(os.stat(path)[stat.ST_MODE])) != _file.mode:
+                permissions.append((path, int(_file.mode, 8)))
+
+    return permissions

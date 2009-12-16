@@ -358,6 +358,13 @@ class Install(AtomicOperation):
 
                 os.rename(oldconfig, path)
 
+        # Package file's path may not be relocated or content may not be changed but
+        # permission may be changed
+        def update_permissions():
+            permissions = pisi.operations.delta.find_permission_changes(self.old_files, self.files)
+            for path, mode in permissions:
+                os.chmod(path, mode)
+
         # Delta package does not contain the files that have the same hash as in 
         # the old package's. Because it means the file has not changed. But some 
         # of these files may be relocated to some other directory in the new package. 
@@ -411,6 +418,7 @@ class Install(AtomicOperation):
 
         if self.package_fname.endswith(ctx.const.delta_package_suffix):
             relocate_files()
+            update_permissions()
 
         self.package.extract_install(ctx.config.dest_dir())
 
