@@ -1,4 +1,9 @@
 2009-12-16 Serdar Dalgıç <serdar@pardus.org.tr>
+		* pisi/cli/blame.py: Several enhancements in blame:
+			- pisi bl works for LC_ALL=C
+			- a new option "-a" / "--print-all": blame for all of the releases
+
+2009-12-16 Serdar Dalgıç <serdar@pardus.org.tr>
 		* pisi/operations/build.py: Warn if component.xml is not found in the
 		upper directory, tag the source as a part of unknown component.
 
