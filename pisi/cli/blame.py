@@ -67,4 +67,4 @@ Usage: blame <package> ... <package>
         s += _('Release Updater: %s <%s>\n') % (package.history[hno].name, package.history[hno].email)
         s += _('Update Date: %s\n') % package.history[hno].date
         s += '\n%s\n' % package.history[hno].comment
-        print s
+        ctx.ui.info(s)
