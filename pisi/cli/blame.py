@@ -39,6 +39,8 @@ Usage: blame <package> ... <package>
     def options(self):
         group = optparse.OptionGroup(self.parser, _("blame options"))
         group.add_option("-r", "--release", action="store", type="int", help=_("Blame for the given release"))
+        group.add_option("-a", "--print-all", action="store_true", default=False,
+                help=_("Blame for all of the releases"))
         self.parser.add_option_group(group)
 
     def run(self):
@@ -52,8 +54,11 @@ Usage: blame <package> ... <package>
             if self.packagedb.has_package(package):
                 pkg = self.packagedb.get_package(package)
                 release = ctx.get_option('release')
-                if not release:
+                if not release and not ctx.get_option('print_all'):
                     self.print_package_info(pkg)
+                elif ctx.get_option('print_all'):
+                    for hno, update in enumerate(pkg.history):
+                        self.print_package_info(pkg, hno)
                 else:
                     for hno, update in enumerate(pkg.history):
                         if int(update.release) == release:
