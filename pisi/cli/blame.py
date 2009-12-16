@@ -58,6 +58,7 @@ Usage: blame <package> ... <package>
                     for hno, update in enumerate(pkg.history):
                         if int(update.release) == release:
                             self.print_package_info(pkg, hno)
+                            return
 
     def print_package_info(self, package, hno=0):
         s = _('Name: %s, version: %s, release: %s\n') % (
