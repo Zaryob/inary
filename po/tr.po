@@ -1354,7 +1354,7 @@ msgstr ""
 "\n"
 "Kullanım: index <dizin> ...\n"
 "\n"
-"Bu komut bir dizinde PiSi dosyaları arar, onlardan PiSi takılarının çıkarır\n"
+"Bu komut bir dizinde PiSi dosyaları arar, onlardan PiSi etiketlerini çıkarır\n"
 "ve bilgiyi pisi-index.xml adında bir XML dosyasında toplar. Hem kaynak hem\n"
 "de ikili paketleri kataloglar.\n"
 "\n"
@@ -2384,7 +2384,7 @@ msgid ""
 "Cannot find component.xml in remote directory, Source is now part of unknown "
 "component"
 msgstr ""
-"component.xml  uzaktaki dizinde bulunamadı, kaynak bilinmeyen bir bileşenin "
+"component.xml uzaktaki dizinde bulunamadı, kaynak bilinmeyen bir bileşenin "
 "parçası"
 
 #: pisi/operations/build.py:373
@@ -2392,7 +2392,7 @@ msgid ""
 "Cannot find component.xml in upper directory, Source is now part of unknown "
 "component"
 msgstr ""
-"component.xml  uzaktaki dizinde bulunamadı, kaynak bilinmeyen bir bileşenin "
+"component.xml bir üst dizinde bulunamadı, kaynak bilinmeyen bir bileşenin "
 "parçası"
 
 #: pisi/operations/build.py:379
@@ -2742,11 +2742,11 @@ msgstr "Dosya ve paket adlarını birlikte kullanmak henüz desteklenmiyor."
 
 #: pisi/operations/install.py:163
 msgid "Package %s is not compatible with your distribution release %s %s."
-msgstr "%s paketi dağıtım sürmünüz %s %s ile uyumlu değil."
+msgstr "%s paketi dağıtım sürümünüz %s %s ile uyumlu değil."
 
 #: pisi/operations/install.py:167
 msgid "Package %s (%s) is not compatible with your %s architecture."
-msgstr "%s (%s) paketi sizin %s mimariniz ile uyumlu değil"
+msgstr "%s (%s) paketi sizin %s mimariniz ile uyumlu değil."
 
 #: pisi/operations/install.py:190
 msgid "External dependencies not satisfied: %s"
@@ -2878,7 +2878,7 @@ msgstr "En azından bir tane '%s' etiketi yerel metne sahip olmalı."
 
 #: pisi/pxml/autoxml.py:86
 msgid "'%s' language of tag '%s' is empty"
-msgstr "'%s' dili metni, takı %s için boş."
+msgstr "'%s' dili metni, etiket %s için boş."
 
 #: pisi/pxml/autoxml.py:114
 msgid "LocalText: unable to get either current or default locale"
@@ -2889,7 +2889,7 @@ msgid ""
 "Tag should have at least the current locale, or failing that an English or "
 "Turkish version"
 msgstr ""
-"Takı içeriğinin en azından güncel yerelde (locale) bir karşılığı olmalı, ya "
+"Etiket içeriğinin en azından güncel yerelde (locale) bir karşılığı olmalı, ya "
 "da eğer o yoksa bir Türkçe ya da İngilizce sürüme sahip olmalı."
 
 #: pisi/pxml/autoxml.py:373
@@ -2914,7 +2914,7 @@ msgstr "autoxml.write: Dosya karakter kodlaması '%s' hatalar içeriyor."
 
 #: pisi/pxml/autoxml.py:528
 msgid "gen_tag: unrecognized tag type %s in spec"
-msgstr "gen_tag: belirtimde tanınmayan takı tipi %s."
+msgstr "gen_tag: belirtimde tanınmayan etiket tipi %s."
 
 #: pisi/pxml/autoxml.py:576 pisi/pxml/autoxml.py:587
 msgid "Mandatory variable %s not available"
@@ -2926,7 +2926,7 @@ msgstr "Tip uyumsuzluğu: okunan metnin kodlaması çözümlenemedi."
 
 #: pisi/pxml/autoxml.py:661 pisi/pxml/autoxml.py:670
 msgid "Mandatory token %s not available"
-msgstr "Zorunlu takı %s bulunamadı."
+msgstr "Zorunlu etiket %s bulunamadı."
 
 #: pisi/pxml/autoxml.py:675
 msgid "Type mismatch. Expected %s, got %s"
