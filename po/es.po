@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "POT-Creation-Date: 2009-12-17 09:47+EET\n"
-"PO-Revision-Date: 2009-12-10 19:58-0300\n"
+"PO-Revision-Date: 2009-12-17 21:36-0300\n"
 "Last-Translator: Klemens Häckel <click3d at linuxmail (dot) org>\n"
 "Language-Team: Spanish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -707,7 +707,7 @@ msgstr "Agregar repositorio en posición indicada (inicia con 0)"
 
 #: pisi/cli/addrepo.py:50
 msgid "Skip distribution release and architecture check"
-msgstr ""
+msgstr "Saltar comprobación de architectura y versión"
 
 #: pisi/cli/addrepo.py:64
 msgid "Update PiSi database for repository %s?"
@@ -738,9 +738,8 @@ msgid "Blame for the given release"
 msgstr "Responsable para la versión indicada"
 
 #: pisi/cli/blame.py:43
-#, fuzzy
 msgid "Blame for all of the releases"
-msgstr "Responsable para la versión indicada"
+msgstr "Responsable para todas las versiones"
 
 #: pisi/cli/blame.py:69 pisi/specfile.py:334
 msgid "Name: %s, version: %s, release: %s\n"
@@ -2378,12 +2377,16 @@ msgstr "%s fue revertido de %s a %s."
 msgid ""
 "The repository couldn't be added because of distribution release mismatch"
 msgstr ""
+"No se puede agregar el repositorio, porque la versión del sistema es "
+"diferente"
 
 #: pisi/index.py:101
 msgid ""
 "The repository couldn't be added because of distribution architecture "
 "mismatch"
 msgstr ""
+"No se puede agregar el repositorio, porque la la architectura del sistema es "
+"diferente"
 
 #: pisi/index.py:135
 msgid "Adding %s to package index"
@@ -2446,18 +2449,20 @@ msgid "PartOf tag not defined, looking for component"
 msgstr "ParteOf tag no definido, buscando componente"
 
 #: pisi/operations/build.py:367
-#, fuzzy
 msgid ""
 "Cannot find component.xml in remote directory, Source is now part of unknown "
 "component"
-msgstr "No se pudo encontrar component.xml en directorio superior"
+msgstr ""
+"No se encuentra component.xml en directorio remoto. La fuente es ahora parte "
+"de componente desconocido"
 
 #: pisi/operations/build.py:373
-#, fuzzy
 msgid ""
 "Cannot find component.xml in upper directory, Source is now part of unknown "
 "component"
-msgstr "No se pudo encontrar component.xml en directorio superior"
+msgstr ""
+"No se encontró component.xml en directorio superior. La fuente es ahora "
+"parte de componente desconocido"
 
 #: pisi/operations/build.py:379
 msgid "Source is part of %s component"
@@ -2820,14 +2825,12 @@ msgstr ""
 "Mezclando nombres de archivos y nombres de paquetes actualmente no soportado."
 
 #: pisi/operations/install.py:163
-#, fuzzy
 msgid "Package %s is not compatible with your distribution release %s %s."
-msgstr "Paquete %s no está disponible en repositorios."
+msgstr "Pacquete %s no es compatible con su versión de distribución %s %s."
 
 #: pisi/operations/install.py:167
-#, fuzzy
 msgid "Package %s (%s) is not compatible with your %s architecture."
-msgstr "Paquete %s no está disponible en repositorios."
+msgstr "Paquete %s (%s) no es compatible con su arquitectura %s."
 
 #: pisi/operations/install.py:190
 msgid "External dependencies not satisfied: %s"
