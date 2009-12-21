@@ -78,10 +78,41 @@ Lists previous operations.""")
                     print "    *",  pkg
             print
 
-    def redirect_output(self):
+    def redirect_output(self, func):
         if os.isatty(sys.stdout.fileno()):
-            output = os.popen("less","w")
-            sys.stdout =  sys.stderr = output
+            class LessException(Exception):
+                pass
+
+            class LessPipe():
+                def __init__(self):
+                    import subprocess
+                    self.less = subprocess.Popen(["less", "-"],
+                                            stdin=subprocess.PIPE)
+
+                def __del__(self):
+                    self.less.stdin.close()
+                    self.less.wait()
+
+                def flush(self):
+                    self.less.stdin.flush()
+
+                def write(self, s):
+                    try:
+                        self.less.stdin.write(s)
+                    except IOError:
+                        raise LessException
+
+            stdout, stderr = sys.stdout, sys.stderr
+            sys.stdout = sys.stderr = LessPipe()
+            try:
+                func()
+            except LessException:
+                pass
+            finally:
+                sys.stdout, sys.stderr = stdout, stderr
+
+        else:
+            func()
 
     def run(self):
         self.init(database = False, write = False)
@@ -95,5 +126,4 @@ Lists previous operations.""")
                 self.takeback(opno)
                 return
 
-        self.redirect_output()
-        self.print_history()
+        self.redirect_output(self.print_history)
