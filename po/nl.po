@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "POT-Creation-Date: 2009-12-17 09:47+EET\n"
-"PO-Revision-Date: 06/12/09 21:27\n"
+"PO-Revision-Date: 22/12/09 14:33\n"
 "Last-Translator: Antoon Tolboom <atolboo@gmail.com>\n"
 "Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -151,7 +151,7 @@ msgstr "Uitvoeren ldconfig mislukt."
 
 #: pisi/actionsapi/libtools.py:49
 msgid "GNU Config Update Finished."
-msgstr "GNU Config Update voltooid."
+msgstr "GNU Config bijwerken voltooid."
 
 #: pisi/actionsapi/libtools.py:53
 msgid "Running libtoolize failed."
@@ -177,8 +177,7 @@ msgstr "ActionsAPI [doman]: onjuist man-pagina bestand: %s"
 
 #: pisi/actionsapi/pisitools.py:169
 msgid "No file matched pattern \"%s\". 'domove' operation failed."
-msgstr ""
-"Geen bestand komt overeen met patroon \"%s\". 'domove' handeling mislukt."
+msgstr "Geen bestand komt overeen met patroon \"%s\". 'domove' handeling mislukt."
 
 #: pisi/actionsapi/pisitools.py:188
 msgid "ActionsAPI [rename]: %s: %s"
@@ -186,8 +185,7 @@ msgstr "ActionsAPI [rename] %s: %s"
 
 #: pisi/actionsapi/pisitools.py:203
 msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
-msgstr ""
-"Geen bestand komt overeen met patroon: \"%s\". 'dosed' handeling misluky."
+msgstr "Geen bestand komt overeen met patroon: \"%s\". 'dosed' handeling misluky."
 
 #: pisi/actionsapi/pisitools.py:216
 msgid "dosed method has not changed file '%s'."
@@ -428,7 +426,7 @@ msgstr "Er is al een kopie van PiSi actief. Dit is slechts eenmaal toegestaan."
 
 #: pisi/api.py:424
 msgid "%s package found in %s repository"
-msgstr "%s pakket gevonden in %s repository"
+msgstr "%s pakket gevonden in %s installatiebron"
 
 #: pisi/api.py:428
 msgid "%s package already fetched"
@@ -476,27 +474,27 @@ msgstr "Repo %s verwijderd uit het systeem."
 
 #: pisi/api.py:775
 msgid "Repository %s does not exist. Cannot remove."
-msgstr "Repository %s bestaat niet. Kan niet verwijderen."
+msgstr "Installatiebron %s bestaat niet. Kan niet verwijderd worden."
 
 #: pisi/api.py:792
 msgid "* Updating repository: %s"
-msgstr "* Updaten repository: %s "
+msgstr "* Bijwerken installatiebron: %s "
 
 #: pisi/api.py:802
 msgid "%s repository information is up-to-date."
-msgstr "%s repository informatie is nog recent."
+msgstr "%s installatiebroninformatie is nog recent."
 
 #: pisi/api.py:804
 msgid "Updating database at any rate as requested"
-msgstr "Updaten database op elke snelheid zoals verzocht"
+msgstr "Database op elke snelheid zoals verzocht bijwerken"
 
 #: pisi/api.py:820
 msgid "* Package database updated."
-msgstr "* Pakketdatabase geupdate."
+msgstr "* Pakketdatabase bijgewerkt."
 
 #: pisi/api.py:822
 msgid "No repository named %s found."
-msgstr "Geen repository met de naam %s gevonden."
+msgstr "Geen installatiebron met de naam %s gevonden."
 
 #: pisi/api.py:833
 msgid "* Adding '%s' to db... "
@@ -508,7 +506,7 @@ msgstr "OK."
 
 #: pisi/atomicoperations.py:73 pisi/operations/history.py:76
 msgid "Package %s found in repository %s"
-msgstr "Pakket %s gevonden in repository %s "
+msgstr "Pakket %s gevonden in installatiebron %s "
 
 #: pisi/atomicoperations.py:104
 msgid "Package URI: %s"
@@ -516,12 +514,11 @@ msgstr "Pakket-URI: %s"
 
 #: pisi/atomicoperations.py:116
 msgid "Download Error: Package does not match the repository package."
-msgstr ""
-"Download fout: Pakket komt niet overeen met het pakket in de repository."
+msgstr "Download fout: Pakket komt niet overeen met het pakket in de installatiebron."
 
 #: pisi/atomicoperations.py:120
 msgid "Package %s not found in any active repository."
-msgstr "Pakket %s niet gevonden in de actieve repositories."
+msgstr "Pakket %s niet gevonden in de actieve installatiebronnen."
 
 #: pisi/atomicoperations.py:146
 msgid "Installing %s, version %s, release %s, build %s"
@@ -559,7 +556,7 @@ msgstr "Opwaarderen naar nieuwe upstream-versie"
 
 #: pisi/atomicoperations.py:259
 msgid "Upgrading to new distribution release"
-msgstr "Opwaarderen naar nieuwe distributie-uitgave"
+msgstr "Opwaarderen naar nieuwe distributieuitgave"
 
 #: pisi/atomicoperations.py:263
 msgid "Upgrading to new distribution build"
@@ -567,7 +564,7 @@ msgstr "Opwaarderen naar nieuwe distributie bouw"
 
 #: pisi/atomicoperations.py:272
 msgid "Downgrade to old distribution release?"
-msgstr "Terugwaarderen naar oude distributie uitgave?"
+msgstr "Terugzetten naar oude distributieuitgave?"
 
 #: pisi/atomicoperations.py:274
 msgid "Downgrade to old distribution build?"
@@ -613,8 +610,7 @@ msgid "Not removing conflicted file : %s"
 msgstr "Niet verwijderen conflicterend bestand: %s"
 
 #: pisi/atomicoperations.py:594
-msgid ""
-"Installed file %s does not exist on system [Probably you manually deleted]"
+msgid "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
 "Geïnstalleerd bestand %s bestaat niet op systeem [waarschijnlijk handmatig "
 "verwijderd]"
@@ -670,11 +666,11 @@ msgid ""
 "NB: We support only local files (e.g., /a/b/c) and http:// URIs at the "
 "moment\n"
 msgstr ""
-"Repository toevoegen\n"
+"Installatiebron toevoegen\n"
 "\n"
 "Gebruik: add-repo <repo> <indexuri>\n"
 "\n"
-"<repo>: naam van de toe te voegen repository\n"
+"<repo>: naam van de toe te voegen installatiebron\n"
 "<indexuri>: IRI van indexbestand\n"
 "\n"
 "Als geen repo wordt gegeven, wordt add-repo pardus-devel als standaard "
@@ -689,19 +685,19 @@ msgstr "add-repo opties"
 
 #: pisi/cli/addrepo.py:47
 msgid "Add repository at given position (0 is first)"
-msgstr "Toevoegen repository op gegeven positie (0 is eerst)"
+msgstr "Installatiebron op gegeven positie (0 is eerst) toevoegen"
 
 #: pisi/cli/addrepo.py:50
 msgid "Skip distribution release and architecture check"
-msgstr ""
+msgstr "Controle van distributieversie en architectuur overslaan"
 
 #: pisi/cli/addrepo.py:64
 msgid "Update PiSi database for repository %s?"
-msgstr "Update PiSi-database voor de repository %s?"
+msgstr "PiSi-database voor de installatiebron %s bijwerken?"
 
 #: pisi/cli/addrepo.py:68
 msgid "%s repository could not be reached. Removing %s from system."
-msgstr "%s repository kan niet bereikt worden. Verwijderd %s van systeem."
+msgstr "%s installatiebron is onbereikbaar. %s van systeem verwijderen."
 
 #: pisi/cli/blame.py:25
 msgid ""
@@ -724,9 +720,8 @@ msgid "Blame for the given release"
 msgstr "Blame voor de gegeven uitgave"
 
 #: pisi/cli/blame.py:43
-#, fuzzy
 msgid "Blame for all of the releases"
-msgstr "Blame voor de gegeven uitgave"
+msgstr "Blame voor alle uitgaven"
 
 #: pisi/cli/blame.py:69 pisi/specfile.py:334
 msgid "Name: %s, version: %s, release: %s\n"
@@ -738,11 +733,11 @@ msgstr "Pakket onderhouder: %s <%s>\n"
 
 #: pisi/cli/blame.py:72
 msgid "Release Updater: %s <%s>\n"
-msgstr "Uitgave updater: %s <%s>\n"
+msgstr "Uitgave bijwerker: %s <%s>\n"
 
 #: pisi/cli/blame.py:73
 msgid "Update Date: %s\n"
-msgstr "Update datum: %s\n"
+msgstr "Bijwerkdatum: %s\n"
 
 #: pisi/cli/build.py:24
 msgid ""
@@ -765,7 +760,7 @@ msgstr ""
 "\n"
 "Als alternatief kunt u de naam geven van een bron pakket dat te downloaden "
 "is\n"
-"van een repository welk de bron bevat.\n"
+"van een installatiebron welk de bron bevat.\n"
 
 #: pisi/cli/build.py:47
 msgid "build options"
@@ -1089,13 +1084,13 @@ msgid ""
 "\n"
 "Disabled repositories are not taken into account in operations\n"
 msgstr ""
-"Schakel repositorie uit\n"
+"Schakel installatiebron uit\n"
 "\n"
 "Gebruik: disable-repo [<repo1> <repo2> ... <repon>]\n"
 "\n"
-"<repoi>: repositorynaam\n"
+"<repoi>: installatiebronnaam\n"
 "\n"
-"Uitgeschakelde repositories worden niet meengenomen in de handeling\n"
+"Uitgeschakelde installatiebronnen worden in bewerkingen niet meegenomen\n"
 
 #: pisi/cli/emerge.py:25
 msgid ""
@@ -1108,12 +1103,12 @@ msgid ""
 "\n"
 "You can also give the name of a component.\n"
 msgstr ""
-"Bouw en installeer PiSi_bronpakket van repository\n"
+"Bouw en installeer PiSi_bronpakket van installatiebron\n"
 "\n"
 "Gebruik: emerge <sourcename> ...\n"
 "\n"
 "Geef de naam van het bronpakket op, om het van de\n"
-"repository met broncodes te downloaden.\n"
+"installatiebron met broncodes te downloaden.\n"
 "\n"
 "Een componentnaam is ook mogelijk.\n"
 
@@ -1147,11 +1142,11 @@ msgid ""
 "\n"
 "Disabled repositories are not taken into account in operations\n"
 msgstr ""
-"Schakel repositorie in\n"
+"Schakel installatiebron in\n"
 "\n"
 "Gebruik: enable-repo [<repo1> <repo2> ... <repon>]\n"
 "\n"
-"<repoi>: repositorynaam\n"
+"<repoi>: installatiebronnaam\n"
 "\n"
 "\n"
 
@@ -1198,7 +1193,7 @@ msgstr ""
 "\n"
 "Schrijft een grafiek met pakketrelaties, volgt afhankelijkheid- en\n"
 "conflictenrelaties beginnend bij de opgegeven pakketten. Laat\n"
-"standaard de pakketrelaties tussen repositorypakketten zien,\n"
+"standaard de pakketrelaties tussen installatiebronpakketten zien,\n"
 "en schrijft het pakket in graphviz-formaat naar 'pgraph.dot'.\n"
 
 #: pisi/cli/graph.py:43
@@ -1207,7 +1202,7 @@ msgstr "grafische opties"
 
 #: pisi/cli/graph.py:47
 msgid "Specify a particular repository"
-msgstr "Geef een bepaalde repository aan"
+msgstr "Geef een bepaalde installatiebron aan"
 
 #: pisi/cli/graph.py:50
 msgid "Graph of installed packages"
@@ -1223,7 +1218,7 @@ msgstr "Dot uitvoerbestand"
 
 #: pisi/cli/graph.py:70
 msgid "Plotting packages in repository %s"
-msgstr "Plot pakketten in repository %s"
+msgstr "Plot pakketten in installatiebron %s"
 
 #: pisi/cli/graph.py:73
 msgid "Plotting a graph of relations among all repository packages"
@@ -1281,7 +1276,7 @@ msgstr "verwijderen"
 
 #: pisi/cli/history.py:28
 msgid "repository update"
-msgstr "repository updaten"
+msgstr "installatiebron bijwerken"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1454,11 +1449,11 @@ msgstr "[binair] "
 
 #: pisi/cli/info.py:174 pisi/cli/info.py:186
 msgid "Package found in %s repository:"
-msgstr "Pakket gevonden in %s repository:"
+msgstr "Pakket gevonden in %s installatiebron:"
 
 #: pisi/cli/info.py:177
 msgid "%s package is not found in binary repositories"
-msgstr "%s pakket is niet gevonden in de binaire repositories"
+msgstr "%s pakket is niet gevonden in de binaire installatiebronnen"
 
 #: pisi/cli/info.py:184
 msgid "[source] "
@@ -1466,7 +1461,7 @@ msgstr "[bron] "
 
 #: pisi/cli/info.py:189
 msgid "%s package is not found in source repositories"
-msgstr "%s pakket is niet gevonden in de bron repositories"
+msgstr "%s pakket is niet gevonden in de installatiebronnen"
 
 #: pisi/cli/install.py:25
 msgid ""
@@ -1486,7 +1481,7 @@ msgstr ""
 "\n"
 "\tU mag bestandsnamen, URI's of pakketnamen namen voor pakketten gebruiken. "
 "Als u\n"
-"een pakketnaam gespecificeerd heeft, dient het te bestaan in de repository.\n"
+"een pakketnaam gespecificeerd heeft, dient het te bestaan in de installatiebron.\n"
 "\n"
 "\tU kunt ook onderdelen specificeren in plaats van pakketnamen, welk "
 "uitgebreid\n"
@@ -1506,7 +1501,7 @@ msgstr "Installeer componenten en de pakketten van recursieve componenten"
 
 #: pisi/cli/install.py:59
 msgid "Name of the component's repository"
-msgstr "Naam van de componentrepository"
+msgstr "Naam van de componentbron"
 
 #: pisi/cli/install.py:61 pisi/cli/upgrade.py:71
 msgid "Fetch upgrades but do not install."
@@ -1542,13 +1537,13 @@ msgid ""
 "repositories. If no repository is specified, we list packages in\n"
 "all repositories.\n"
 msgstr ""
-"Toon aanwezige pakketten in de repository\n"
+"Toon aanwezige pakketten in de installatiebron\n"
 "\n"
 "Gebruik: list-available [ <repo1> <repo2> ... repon ]\n"
 "\n"
 "Geeft een korte lijst van PiSi-pakketten gepubliceerd in de opgegeven\n"
-"repositories. Als geen repository opgegeven is, tonen we pakketten in\n"
-"alle repositories.\n"
+"installatiebronnen. Als geen installatiebron opgegeven is, tonen we pakketten in\n"
+"alle installatiebronnen.\n"
 
 #: pisi/cli/listavailable.py:45
 msgid "list-available options"
@@ -1574,7 +1569,7 @@ msgstr "Geïnstalleerde pakketten worden in deze kleur weergegeven"
 
 #: pisi/cli/listavailable.py:67
 msgid "Repository : %s\n"
-msgstr "Repository: %s\n"
+msgstr "Installatiebron: %s\n"
 
 #: pisi/cli/listcomponents.py:24
 msgid ""
@@ -1590,7 +1585,7 @@ msgstr ""
 "Gebruik: list-components\n"
 "\n"
 "Toont een korte lijst van PiSi-componenten\n"
-"gepubliceerd in de repositories.\n"
+"gepubliceerd in de installatiebronnen.\n"
 
 #: pisi/cli/listcomponents.py:40
 msgid "list-components options"
@@ -1598,7 +1593,7 @@ msgstr "list-components opties"
 
 #: pisi/cli/listcomponents.py:44 pisi/cli/search.py:47
 msgid "Name of the source or package repository"
-msgstr "Naam van de bron of pakketrepository"
+msgstr "Naam van de bron of pakketbron"
 
 #: pisi/cli/listinstalled.py:25
 msgid ""
@@ -1628,8 +1623,7 @@ msgstr "Toon gedetailleerde installatie-informatie"
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/listinstalled.py:75 pisi/cli/listupgrades.py:77
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
 msgstr "Pakketnaam     |St|   Versie|  Rel.| Bouw |  Distro|             Datum"
 
 #: pisi/cli/listnewest.py:26
@@ -1642,13 +1636,13 @@ msgid ""
 "repositories. If no repository is specified, we list the new\n"
 "packages from all repositories.\n"
 msgstr ""
-"Toon de nieuwste pakketten in de repositories\n"
+"Toon de nieuwste pakketten in de installatiebronnen\n"
 "\n"
 "Gebruik: list-newest [ <repo1> <repo2> ... repon ]\n"
 "\n"
 "Toont een lijst van de nieuwste gepubliceerde PiSi-pakketten in\n"
-"de opgegeven repository. Indien geen repository opgegeven is,\n"
-"worden de nieuwste pakketten uit alle repositories getoond.\n"
+"de opgegeven installatiebron. Indien geen installatiebron opgegeven is,\n"
+"worden de nieuwste pakketten uit alle installatiebronnen getoond.\n"
 
 #: pisi/cli/listnewest.py:45
 msgid "list-newest options"
@@ -1659,7 +1653,7 @@ msgid ""
 "List new packages added to repository after this given date formatted as "
 "yyyy-mm-dd"
 msgstr ""
-"Toon nieuwe pakketten die aan de repository toegevoegd zijn na de opgegeven "
+"Toon nieuwe pakketten die aan de installatiebron toegevoegd zijn na de opgegeven "
 "datum in het formaat jjjj-mm-dd"
 
 #: pisi/cli/listnewest.py:49
@@ -1667,8 +1661,8 @@ msgid ""
 "List new packages added to repository after last nth previous repository "
 "update"
 msgstr ""
-"Toon nieuwe pakketten die aan de repository toegevoegd zijn na de laatste n-"
-"de repository opwaardering"
+"Toon nieuwe pakketten die aan de installatiebron toegevoegd zijn na de laatste n-"
+"de installatiebronopwaardering"
 
 #: pisi/cli/listnewest.py:77
 msgid "Packages added to %s since %s:\n"
@@ -1700,11 +1694,11 @@ msgid ""
 "\n"
 "Lists currently tracked repositories.\n"
 msgstr ""
-"Toon repositories\n"
-"\n"
+"Toon Installatiebronnen\n"
+"i"
 "Gebruik: list-repo\n"
 "\n"
-"Toont huidige ingestelde repositories.\n"
+"Toont huidige ingestelde installatiebronnen.\n"
 
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
@@ -1730,7 +1724,7 @@ msgstr ""
 "\n"
 "Gebruik: list-sources\n"
 "\n"
-"Toont een beknopte lijst van bronnen gepubliceerd in de repositories.\n"
+"Toont een beknopte lijst van bronnen gepubliceerd in de installatiebronnen.\n"
 
 #: pisi/cli/listsources.py:39
 msgid "list-sources options"
@@ -1833,8 +1827,7 @@ msgstr "verwijder opties"
 
 #: pisi/cli/remove.py:46
 msgid "Removes everything including changed config files of the package"
-msgstr ""
-"Verwijdert alles inclusief gewijzigde configuratiebestanden van het pakket"
+msgstr "Verwijdert alles inclusief gewijzigde configuratiebestanden van het pakket"
 
 #: pisi/cli/remove.py:48
 msgid "Remove component's and recursive components' packages"
@@ -1848,11 +1841,11 @@ msgid ""
 "\n"
 "Remove all repository information from the system.\n"
 msgstr ""
-"Verwijder repositories\n"
+"Verwijder installatiebron(nen)\n"
 "\n"
 "Gebruik: remove-repo <repo1> <repo2> ... <repon>\n"
 "\n"
-"Verwijder alle repository informatie van het systeem.\n"
+"Verwijder alle installatiebroninformatie van het systeem.\n"
 
 #: pisi/cli/search.py:25
 msgid ""
@@ -1948,23 +1941,23 @@ msgid ""
 "Synchronizes the PiSi databases with the current repository.\n"
 "If no repository is given, all repositories are updated.\n"
 msgstr ""
-"Update repository databases\n"
+"installatiebron databases bijwerken\n"
 "\n"
 "Gebruik: update-repo [<repo1> <repo2> ... <repon>]\n"
 "\n"
-"<repoi>: repositorynaam\n"
+"<repoi>: installatiebronnaam\n"
 "\n"
-"Synchroniseert de PiSi-databases met de huidige repository.\n"
-"Indien geen repository is opgegeven worden alle repositories\n"
+"Synchroniseert de PiSi-databases met de huidige installatiebron.\n"
+"Indien geen installatiebron is opgegeven worden alle installatiebronnen\n"
 "opgewaardeerd.\n"
 
 #: pisi/cli/updaterepo.py:42
 msgid "update-repo options"
-msgstr "update-repo opties"
+msgstr "bijwerken-repo opties"
 
 #: pisi/cli/updaterepo.py:46
 msgid "Update database in any case"
-msgstr "Altijd database updaten"
+msgstr "Altijd database bijwerken"
 
 #: pisi/cli/upgrade.py:27
 msgid ""
@@ -1994,8 +1987,8 @@ msgstr ""
 "Opwaardeer het gehele systeem indien geen pakketnaam opgegeven is\n"
 "\n"
 "Uitsluitend pakketnamen zijn toegestaan om pakketten te specificeren daar\n"
-"de pakketopwaardeeroperatie gedefinieerd is met respect naar repositories.\n"
-"De opgegeven pakketnaam dient aanwezig te zijn in de pakketrepository.\n"
+"de pakketopwaardeeroperatie gebeurt volgens de namen in de installatiebronnen.\n"
+"De opgegeven pakketnaam dient aanwezig te zijn in de pakketbron.\n"
 "Indien u alleen maar een pakket uit een PiSi-bestand wilt herinstalleren,\n"
 "gebruik dan het install commando.\n"
 "\n"
@@ -2012,7 +2005,7 @@ msgstr "Alleen beveiligingspakketten opwaarderen"
 
 #: pisi/cli/upgrade.py:61
 msgid "Do not update repositories"
-msgstr "Repositories niet updaten"
+msgstr "Installatiebronnen niet bijwerken"
 
 #: pisi/cli/upgrade.py:67
 msgid "Upgrade component's and recursive components' packages"
@@ -2020,7 +2013,7 @@ msgstr "Opwaarderen componenten en recursieve componenten pakketten"
 
 #: pisi/cli/upgrade.py:69
 msgid "Name of the to be upgraded packages' repository"
-msgstr "Naam van de op te waarderen pakketrepository"
+msgstr "Naam van de op te waarderen pakketbron"
 
 #: pisi/cli/upgrade.py:73
 msgid ""
@@ -2041,11 +2034,11 @@ msgstr ""
 
 #: pisi/cli/upgrade.py:88
 msgid "Updating repositories"
-msgstr "Updaten repositories"
+msgstr "Installatiebronnen worden bijgewerkt"
 
 #: pisi/cli/upgrade.py:92
 msgid "Will not update repositories"
-msgstr "Zal repositories niet updaten"
+msgstr "Zal installatiebronnen niet bijwerken"
 
 #: pisi/comariface.py:32
 msgid "comar-api package is not fully installed"
@@ -2065,8 +2058,7 @@ msgstr "Configureren %s pakket"
 
 #: pisi/comariface.py:100
 msgid "COMAR package updated. From now on, using new COMAR daemon."
-msgstr ""
-"COMAR-pakket opgewaardeerd. Van nu af aan, niewe COMAR-daemon gebruiken."
+msgstr "COMAR-pakket opgewaardeerd. Van nu af aan, niewe COMAR-daemon gebruiken."
 
 #: pisi/comariface.py:106
 msgid "Registering %s comar script"
@@ -2188,7 +2180,7 @@ msgstr "Pakket %s is niet geïnstalleerd"
 
 #: pisi/db/itembyrepo.py:41
 msgid "%s not found in any repository."
-msgstr "%s in geen enkele repositories gevonden."
+msgstr "%s in geen enkele installatiebron gevonden."
 
 #: pisi/db/itembyrepo.py:51
 msgid "Repo item %s not found"
@@ -2196,7 +2188,7 @@ msgstr "Repo item %s niet gevonden"
 
 #: pisi/db/itembyrepo.py:61 pisi/db/itembyrepo.py:72 pisi/db/itembyrepo.py:82
 msgid "Repository %s does not exist."
-msgstr "Repository %s bestaat niet."
+msgstr "Installatiebron %s bestaat niet."
 
 #: pisi/db/packagedb.py:144 pisi/db/packagedb.py:151
 msgid "Package %s not found."
@@ -2292,7 +2284,7 @@ msgstr "Ondekt cyclus %s"
 
 #: pisi/history.py:44
 msgid "%s repository is updated."
-msgstr "%s repository is opgewaardeerd."
+msgstr "%s installatiebron is opgewaardeerd."
 
 #: pisi/history.py:64
 msgid "%s is upgraded from %s to %s with delta."
@@ -2319,15 +2311,14 @@ msgid "%s is downgraded from %s to %s."
 msgstr "% is teruggebracht van %s naar %s."
 
 #: pisi/index.py:96
-msgid ""
-"The repository couldn't be added because of distribution release mismatch"
-msgstr ""
+msgid "The repository couldn't be added because of distribution release mismatch"
+msgstr "De installatiebron kan niet toegevoegd worden omdat de distributieversie niet overeen komt"
 
 #: pisi/index.py:101
 msgid ""
 "The repository couldn't be added because of distribution architecture "
 "mismatch"
-msgstr ""
+msgstr "De installatiebron kan niet toegevoegd worden omdat de distributiearchitectuur niet overeen komt"
 
 #: pisi/index.py:135
 msgid "Adding %s to package index"
@@ -2367,7 +2358,7 @@ msgstr "Bron URI: %s"
 
 #: pisi/operations/build.py:168
 msgid "Source %s not found in any active repository."
-msgstr "Bron %s niet gevonden in actieve repositories."
+msgstr "Bron %s niet gevonden in actieve installatiebronnen."
 
 #: pisi/operations/build.py:241
 msgid "Building PiSi source package: %s"
@@ -2386,18 +2377,20 @@ msgid "PartOf tag not defined, looking for component"
 msgstr "PartOf tag is niet omschreven, zoeken naar component"
 
 #: pisi/operations/build.py:367
-#, fuzzy
 msgid ""
 "Cannot find component.xml in remote directory, Source is now part of unknown "
 "component"
-msgstr "Kan component.xml niet vinden in hoger gelegen map"
+msgstr ""
+"Kan component.xml in map op afstand niet vinden. Bron is nu onderdeel van onbekende "
+"component"
 
 #: pisi/operations/build.py:373
-#, fuzzy
 msgid ""
 "Cannot find component.xml in upper directory, Source is now part of unknown "
 "component"
-msgstr "Kan component.xml niet vinden in hoger gelegen map"
+msgstr ""
+"Kan component.xml in bovenliggende map niet vinden. Bron is nu onderdeel van onbekende "
+"component"
 
 #: pisi/operations/build.py:379
 msgid "Source is part of %s component"
@@ -2476,8 +2469,7 @@ msgid "unable to call function from actions: %s"
 msgstr "kan functie niet aanroepen vanuit actions: %s"
 
 #: pisi/operations/build.py:560
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 "Veiligheidsprocedure: de volgende extra pakketten in system.devel zullen "
 "geïnstalleerd worden: "
@@ -2584,10 +2576,8 @@ msgid "Done."
 msgstr "Gereed."
 
 #: pisi/operations/build.py:1028
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
-msgstr ""
-"Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)"
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
+msgstr "Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)"
 
 #: pisi/operations/build.py:1032
 msgid "Cleaning Build Directory..."
@@ -2639,7 +2629,7 @@ msgid ""
 "from repository in the respective order to satisfy dependencies:\n"
 msgstr ""
 "De volgende minimale lijst van pakketten zullen geïnstalleerd worden\n"
-"uit de repository in de respectievelijke volgorde om aan afhankelijkheden te "
+"uit de installatiebron in de respectievelijke volgorde om aan afhankelijkheden te "
 "voldoen:\n"
 
 #: pisi/operations/emerge.py:54
@@ -2682,8 +2672,7 @@ msgstr "De volgende pakketten met conflicten verwijderen?"
 
 #: pisi/operations/helper.py:63
 msgid "Conflicting packages should be removed to continue"
-msgstr ""
-"Conflicterende pakketten dienen verwijderd te worden om door te kunnen gaan"
+msgstr "Conflicterende pakketten dienen verwijderd te worden om door te kunnen gaan"
 
 #: pisi/operations/history.py:86 pisi/operations/history.py:96
 msgid "%s could not be found"
@@ -2717,7 +2706,7 @@ msgid ""
 "Following packages could not be found in repositories and are not cached:\n"
 msgstr ""
 "\n"
-"Volgende pakketten konden niet gevonden worden in de repositories en zijn "
+"Volgende pakketten konden niet gevonden worden in de installatiebronnen en zijn "
 "niet in het buffer:\n"
 
 #: pisi/operations/install.py:48 pisi/operations/install.py:134
@@ -2754,14 +2743,12 @@ msgid "Mixing file names and package names not supported yet."
 msgstr "Combineren van bestands- en pakketnamen nog niet ondersteund."
 
 #: pisi/operations/install.py:163
-#, fuzzy
 msgid "Package %s is not compatible with your distribution release %s %s."
-msgstr "Pakket %s is niet beschikbaar in de repositories."
+msgstr "Pakket %s is niet compatibel met de distributieversie %s %s."
 
 #: pisi/operations/install.py:167
-#, fuzzy
 msgid "Package %s (%s) is not compatible with your %s architecture."
-msgstr "Pakket %s is niet beschikbaar in de repositories."
+msgstr "Pakket %s (%s) is niet compatibel met de %s architectuur."
 
 #: pisi/operations/install.py:190
 msgid "External dependencies not satisfied: %s"
@@ -2843,7 +2830,7 @@ msgstr "Pakket %s is niet geïnstalleerd."
 
 #: pisi/operations/upgrade.py:52
 msgid "Package %s is not available in repositories."
-msgstr "Pakket %s is niet beschikbaar in de repositories."
+msgstr "Pakket %s is niet beschikbaar in de installatiebronnen."
 
 #: pisi/operations/upgrade.py:69
 msgid "Package %s is already at the latest release %s."
@@ -3127,10 +3114,8 @@ msgstr ""
 "%s\n"
 
 #: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-msgstr ""
-"Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
+msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+msgstr "Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
 
 #: scripts/repostats.py:467
 msgid ""
@@ -3142,8 +3127,7 @@ msgstr ""
 
 #: scripts/repostats.py:553
 msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-msgstr ""
-"Gebruik: repostats.py [Opties] pad-naar-repo-bron [binair-repo-adres]\n"
+msgstr "Gebruik: repostats.py [Opties] pad-naar-repo-bron [binair-repo-adres]\n"
 
 #: scripts/repostats.py:554
 msgid "Dont generate the web site.\n"
@@ -3151,8 +3135,9 @@ msgstr "Website niet genereren.\n"
 
 #: scripts/repostats.py:575
 msgid "Scanning source repository...\n"
-msgstr "Scannen bron-repository...\n"
+msgstr "Scannen bron-installatiebron...\n"
 
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr "Scannen binaire pakketten...\n"
+
