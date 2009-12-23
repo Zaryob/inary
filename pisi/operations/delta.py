@@ -71,6 +71,11 @@ def create_delta_package(old_package, new_package):
 
     # only metadata information may change in a package, so no install.tar.lzma added to delta package
     if files_delta:
+        # Sort the files in-place according to their path for an ordered
+        # tarfile layout which dramatically improves the compression performance
+        # of lzma. This improvement is stolen from build.py (commit r23485).
+        files_delta.sort(key=lambda x: x.path)
+
         ctx.build_leftover = util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar_lzma)
 
         tar = archive.ArchiveTar(util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar_lzma), "tarlzma")
