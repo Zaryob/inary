@@ -157,15 +157,16 @@ def install_pkg_files(package_URIs, reinstall = False):
         dfn[name] = x
 
     # check packages' DistributionReleases and Architecture
-    for x in d_t.keys():
-        pkg = d_t[x]
-        if pkg.distributionRelease != ctx.config.values.get("general", "distribution_release"):
-            raise Exception(_('Package %s is not compatible with your distribution release %s %s.') \
-                    % (x, ctx.config.values.get("general", "distribution"), \
-                    ctx.config.values.get("general", "distribution_release")))
-        if pkg.architecture != ctx.config.values.get("general", "architecture"):
-            raise Exception(_('Package %s (%s) is not compatible with your %s architecture.') \
-                    % (x, pkg.architecture, ctx.config.values.get("general", "architecture")))
+    if not ctx.get_option('ignore_check'):
+        for x in d_t.keys():
+            pkg = d_t[x]
+            if pkg.distributionRelease != ctx.config.values.get("general", "distribution_release"):
+                raise Exception(_('Package %s is not compatible with your distribution release %s %s.') \
+                        % (x, ctx.config.values.get("general", "distribution"), \
+                        ctx.config.values.get("general", "distribution_release")))
+            if pkg.architecture != ctx.config.values.get("general", "architecture"):
+                raise Exception(_('Package %s (%s) is not compatible with your %s architecture.') \
+                        % (x, pkg.architecture, ctx.config.values.get("general", "architecture")))
 
     def satisfiesDep(dep):
         # is dependency satisfied among available packages

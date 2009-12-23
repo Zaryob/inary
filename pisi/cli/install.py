@@ -49,6 +49,8 @@ expanded to package names.
                                help=_("Do not take build no into account."))
         group.add_option("--reinstall", action="store_true",
                      default=False, help=_("Reinstall already installed packages"))
+        group.add_option("--ignore-check", action="store_true",
+                     default=False, help=_("Skip distribution release and architecture check"))
         group.add_option("--ignore-file-conflicts", action="store_true",
                      default=False, help=_("Ignore file conflicts"))
         group.add_option("--ignore-package-conflicts", action="store_true",
