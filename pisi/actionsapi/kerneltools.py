@@ -136,7 +136,7 @@ def updateKConfig():
     # variables.
 
     # Grr ugly but no solution.
-    shelltools.system('yes "" | make silentoldconfig')
+    shelltools.system('yes "" | make oldconfig')
 
 
 ###################################
@@ -159,7 +159,7 @@ def build(debugSymbols=False):
 
     autotools.make("%s" % " ".join(extra_config))
 
-def install():
+def install(installFirmwares=True):
     suffix = __getSuffix()
 
     # Check if loadable module support is available or not before doing module specific tasks
@@ -179,6 +179,10 @@ def install():
 
     # Install kernel image
     pisitools.insinto("/boot/", "arch/x86/boot/bzImage", "kernel-%s" % suffix)
+
+    if not installFirmwares:
+        # For use with PAE e.g.
+        shelltools.system("rm -rf %s/lib/firmware" % get.installDIR())
 
 
 def installHeaders(extra=[]):
