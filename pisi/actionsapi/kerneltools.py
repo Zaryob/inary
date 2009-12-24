@@ -131,6 +131,13 @@ def configure():
     else:
         autotools.make("oldconfig")
 
+def updateKConfig():
+    # Call this to set newly added symbols to their defaults after sedding some KConfig
+    # variables.
+
+    # Grr ugly but no solution.
+    shelltools.system('yes "" | make silentoldconfig')
+
 
 ###################################
 # Building and installation stuff #
