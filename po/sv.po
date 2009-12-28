@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "POT-Creation-Date: 2009-12-17 09:47+EET\n"
-"PO-Revision-Date: 2009-12-12 09:06+0100\n"
+"PO-Revision-Date: 2009-12-28 16:12+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@pardus.nu>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
@@ -488,7 +488,7 @@ msgstr "OK."
 
 #: pisi/atomicoperations.py:73 pisi/operations/history.py:76
 msgid "Package %s found in repository %s"
-msgstr ""
+msgstr "Paket %s hittades i förrådet %s"
 
 #: pisi/atomicoperations.py:104
 msgid "Package URI: %s"
@@ -504,7 +504,7 @@ msgstr ""
 
 #: pisi/atomicoperations.py:146
 msgid "Installing %s, version %s, release %s, build %s"
-msgstr ""
+msgstr "Installerar %s, version %s, utgåva %s, bygge %s"
 
 #: pisi/atomicoperations.py:195
 msgid "%s package cannot be installed unless the dependencies are satisfied"
@@ -607,7 +607,7 @@ msgstr " [slutförd]\n"
 
 #: pisi/cli/__init__.py:150
 msgid "Installed %s"
-msgstr ""
+msgstr "Installerat %s"
 
 #: pisi/cli/__init__.py:152
 msgid "Removed %s"
@@ -619,11 +619,11 @@ msgstr ""
 
 #: pisi/cli/__init__.py:156
 msgid "Configured %s"
-msgstr ""
+msgstr "Anpassat paketet %s"
 
 #: pisi/cli/__init__.py:158
 msgid "Extracting the files of %s"
-msgstr ""
+msgstr "Packar upp filer för %s"
 
 #: pisi/cli/addrepo.py:24
 msgid ""
@@ -736,7 +736,7 @@ msgstr ""
 
 #: pisi/cli/build.py:66 pisi/cli/command.py:209
 msgid "Bypass safety switch"
-msgstr ""
+msgstr "Åsidosätt säkerhetslås"
 
 #: pisi/cli/build.py:68
 msgid "Bypass testing step"
@@ -1760,7 +1760,7 @@ msgstr ""
 
 #: pisi/comariface.py:93
 msgid "Configuring %s package"
-msgstr ""
+msgstr "Anpassar paketet %s..."
 
 #: pisi/comariface.py:100
 msgid "COMAR package updated. From now on, using new COMAR daemon."
@@ -2168,15 +2168,15 @@ msgstr ""
 #: pisi/operations/build.py:560
 msgid ""
 "Safety switch: following extra packages in system.devel will be installed: "
-msgstr ""
+msgstr "Säkerhetslås: följande paket i system.devel kommer att installeras: "
 
 #: pisi/operations/build.py:565
 msgid "Safety switch: system.devel is already installed"
-msgstr ""
+msgstr "Säkerhetslås: system.devel är redan installerad"
 
 #: pisi/operations/build.py:567
 msgid "Safety switch: the component system.devel cannot be found"
-msgstr ""
+msgstr "Säkerhetslås: kan inte hitta komponenten system.devel"
 
 #: pisi/operations/build.py:576
 msgid "Unsatisfied Build Dependencies:"
@@ -2328,7 +2328,7 @@ msgstr ""
 #: pisi/operations/emerge.py:62 pisi/operations/install.py:82
 #: pisi/operations/upgrade.py:136
 msgid "There are extra packages due to dependencies. Do you want to continue?"
-msgstr ""
+msgstr "Det finns extra paket på grund av beroenden. Vill du fortsätta?"
 
 #: pisi/operations/emerge.py:96
 msgid "Cannot find source package: %s"
@@ -2362,7 +2362,7 @@ msgstr ""
 
 #: pisi/operations/history.py:99 pisi/package.py:60 pisi/sourcearchive.py:92
 msgid "%s [cached]"
-msgstr ""
+msgstr "%s [cachad]"
 
 #: pisi/operations/history.py:147
 msgid "Following packages will be installed:\n"
@@ -2380,7 +2380,7 @@ msgstr ""
 #: pisi/operations/history.py:158 pisi/operations/install.py:95
 #: pisi/operations/upgrade.py:147
 msgid "Downloading %d / %d"
-msgstr ""
+msgstr "Hämtar %d / %d"
 
 #: pisi/operations/history.py:164
 msgid ""
@@ -2406,11 +2406,11 @@ msgstr ""
 
 #: pisi/operations/install.py:76 pisi/operations/upgrade.py:130
 msgid "Total size of package(s): %.2f %s"
-msgstr ""
+msgstr "Sammanlagd paketstorlek: %.2f %s"
 
 #: pisi/operations/install.py:107 pisi/operations/upgrade.py:161
 msgid "Installing %d / %d"
-msgstr ""
+msgstr "Installerar %d / %d"
 
 #: pisi/operations/install.py:121
 msgid "Mixing file names and package names not supported yet."
@@ -2448,11 +2448,11 @@ msgstr ""
 
 #: pisi/operations/remove.py:44
 msgid "Safety switch: cannot remove the following packages in system.base: "
-msgstr ""
+msgstr "Säkerhetslås: kan inte ta bort följande paket i system.base"
 
 #: pisi/operations/remove.py:48 pisi/operations/upgrade.py:267
 msgid "Safety switch: the component system.base cannot be found"
-msgstr ""
+msgstr "Säkerhetslås: kan inte hitta komponenten system.base"
 
 #: pisi/operations/remove.py:55
 msgid "Package %s does not exist. Cannot remove."
@@ -2510,7 +2510,7 @@ msgstr ""
 
 #: pisi/operations/upgrade.py:125
 msgid "The following packages will be upgraded: "
-msgstr ""
+msgstr "Följande paket kommer att uppdateras: "
 
 #: pisi/operations/upgrade.py:200
 msgid "Dependency %s of %s cannot be satisfied"
@@ -2526,11 +2526,11 @@ msgstr ""
 
 #: pisi/operations/upgrade.py:255
 msgid "Safety switch: Following packages in system.base will be installed: "
-msgstr ""
+msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
 
 #: pisi/operations/upgrade.py:261
 msgid "Safety switch: Following packages in system.base will be upgraded: "
-msgstr ""
+msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
 
 #: pisi/package.py:56
 msgid ""
@@ -2789,3 +2789,4 @@ msgstr ""
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr ""
+
