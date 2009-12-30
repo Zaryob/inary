@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "POT-Creation-Date: 2009-12-17 09:47+EET\n"
-"PO-Revision-Date: 23/12/09 17:23\n"
+"PO-Revision-Date: 30/12/09 16:03\n"
 "Last-Translator: Antoon Tolboom <atolboo@gmail.com>\n"
 "Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -454,23 +454,23 @@ msgstr "* Index-bestand geschreven"
 
 #: pisi/api.py:754
 msgid "Not a valid repo name."
-msgstr "Geen geldige repo naam."
+msgstr "Geen geldige bronnaam."
 
 #: pisi/api.py:757
 msgid "Repo %s already present."
-msgstr "Repo %s is al aanwezig."
+msgstr "Bron %s is al aanwezig."
 
 #: pisi/api.py:760
 msgid "Repo already present with name %s."
-msgstr "Repo %s is al aanwezig met naam %s."
+msgstr "Bron %s is al aanwezig met naam %s."
 
 #: pisi/api.py:765
 msgid "Repo %s added to system."
-msgstr "Repo %s toegevoegd aan het systeem."
+msgstr "Bron %s toegevoegd aan het systeem."
 
 #: pisi/api.py:773
 msgid "Repo %s removed from system."
-msgstr "Repo %s verwijderd uit het systeem."
+msgstr "Bron %s verwijderd uit het systeem."
 
 #: pisi/api.py:775
 msgid "Repository %s does not exist. Cannot remove."
@@ -673,15 +673,15 @@ msgstr ""
 "<repo>: naam van de toe te voegen softwarebron\n"
 "<indexuri>: IRI van indexbestand\n"
 "\n"
-"Als geen repo wordt gegeven, wordt add-repo pardus-devel als standaard "
+"Als geen bron wordt gegeven, wordt add-repo pardus-devel als standaard "
 "toegevoegd\n"
 "\n"
-"NB: We ondersteumen momenteel alleen lokale bestanden (bijv. /a/b/c) en "
+"NB: Momenteel worden alleen lokale bestanden ondersteund (bijv. /a/b/c) en "
 "http:// URI's\n"
 
 #: pisi/cli/addrepo.py:44
 msgid "add-repo options"
-msgstr "add-repo opties"
+msgstr "bronopties toevoegen"
 
 #: pisi/cli/addrepo.py:47
 msgid "Add repository at given position (0 is first)"
@@ -1221,7 +1221,7 @@ msgstr "Plot pakketten in softwarebron %s"
 
 #: pisi/cli/graph.py:73
 msgid "Plotting a graph of relations among all repository packages"
-msgstr "Plot een grafiek van de relaties tussen alle repositoy-pakketten"
+msgstr "Plot een grafiek van de relaties tussen alle bronpakketten"
 
 #: pisi/cli/graph.py:87
 msgid "Plotting a graph of relations among all installed packages"
@@ -1952,7 +1952,7 @@ msgstr ""
 
 #: pisi/cli/updaterepo.py:42
 msgid "update-repo options"
-msgstr "update-repo opties"
+msgstr "bronopties bijwerken"
 
 #: pisi/cli/updaterepo.py:46
 msgid "Update database in any case"
@@ -2183,7 +2183,7 @@ msgstr "%s in geen enkele softwarebron gevonden."
 
 #: pisi/db/itembyrepo.py:51
 msgid "Repo item %s not found"
-msgstr "Repo item %s niet gevonden"
+msgstr "Bronitem %s niet gevonden"
 
 #: pisi/db/itembyrepo.py:61 pisi/db/itembyrepo.py:72 pisi/db/itembyrepo.py:82
 msgid "Repository %s does not exist."
@@ -2563,8 +2563,8 @@ msgid ""
 "Build number is not available. For repo builds you must enable buildno in "
 "pisi.conf."
 msgstr ""
-"Bouwnummer is niet aanwezig. Bij repo-compilaties moet u buildno inschakelen "
-"in pisi.conf."
+"Bouwnummer is niet aanwezig. Bij repo-compilaties is buildno inschakelen "
+"in pisi.conf noodzakelijk."
 
 #: pisi/operations/build.py:973
 msgid "Creating PiSi package %s."
@@ -2982,11 +2982,11 @@ msgstr "Geen pisi pakket %s* gevonden."
 
 #: pisi/scenarioapi/repoops.py:28
 msgid "Repo already has package named %s."
-msgstr "Repo bevat al een pakket met de naam %s."
+msgstr "Bron bevat al een pakket met de naam %s."
 
 #: pisi/scenarioapi/repoops.py:52 pisi/scenarioapi/repoops.py:59
 msgid "Repo does not have package named %s."
-msgstr "Repo bevat geen pakket met de naam %s."
+msgstr "Bron bevat geen pakket met de naam %s."
 
 #: pisi/sourcearchive.py:61
 msgid "Trying fallback address: %s"
