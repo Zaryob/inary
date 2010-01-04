@@ -90,17 +90,21 @@ def sym(source, destination):
     except OSError:
         ctx.ui.error(_('ActionsAPI [sym]: Permission denied: %s to %s') % (source, destination))
 
-def unlink(filePath):
+def unlink(pattern):
     '''remove the file path'''
-    if isFile(filePath) or isLink(filePath):
-        try:
-            os.unlink(filePath)
-        except OSError:
-            ctx.ui.error(_('ActionsAPI [unlink]: Permission denied: %s.') % (filePath))
-    elif isDirectory(filePath):
-        pass
-    else:
-        ctx.ui.error(_('ActionsAPI [unlink]: File %s doesn\'t exists.') % (filePath))
+    filePathGlob = glob.glob(pattern)
+    if len(filePathGlob) == 0:
+        raise FileError(_("No file matched pattern \"%s\". Remove operation failed.") % pattern)
+    for filePath in filePathGlob:
+        if isFile(filePath) or isLink(filePath):
+            try:
+                os.unlink(filePath)
+            except OSError:
+                ctx.ui.error(_('ActionsAPI [unlink]: Permission denied: %s.') % (filePath))
+        elif isDirectory(filePath):
+            pass
+        else:
+            ctx.ui.error(_('ActionsAPI [unlink]: File %s doesn\'t exists.') % (filePath))
 
 def unlinkDir(sourceDirectory):
     '''delete an entire directory tree'''
