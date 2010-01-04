@@ -123,10 +123,7 @@ Lists previous operations.""")
         elif ctx.get_option('takeback'):
             opno = ctx.get_option('takeback')
             if opno != -1:
-                if opno == 1:
-                    ctx.ui.error(_("You can not takeback your system to the initial state."))
-                else:
-                    self.takeback(opno)
+                self.takeback(opno)
                 return
 
         self.redirect_output(self.print_history)
