@@ -805,12 +805,6 @@ def __update_repo(repo, force=False):
                 index.read_uri_of_repo(repouri, repo, force = force)
             else:
                 return
-        except pisi.index.DistributionMismatchException:
-            remove_repo(repo)
-            return
-        except pisi.index.ArchitectureMismatchException:
-            remove_repo(repo)
-            return
 
         try:
             index.check_signature(repouri, repo)
