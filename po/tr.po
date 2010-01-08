@@ -5,14 +5,14 @@
 # Eray Ozkural <eray@pardus.org.tr>, 2005,2006.
 # Furkan Duman <coderlord@gmail.com>, 2006.
 # Ahmet AYGÜN <ahmet@pardusman.org>, 2006.
-# Faik Uygur <faik@pardus.org.tr>, 2006, 2007, 2008, 2009.
+# Faik Uygur <faik@pardus.org.tr>, 2006, 2007, 2008, 2009, 2010.
 # Ozan Çağlayan <ozan@pardus.org.tr>, 2009.
 # Necmettin Begiter <necmettin.begiter@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2009-12-17 09:47+EET\n"
-"PO-Revision-Date: 2009-12-17 09:54+0200\n"
+"POT-Creation-Date: 2010-01-08 09:46+EET\n"
+"PO-Revision-Date: 2010-01-08 09:46+0200\n"
 "Last-Translator: Faik Uygur <faik@pardus.org.tr>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -205,7 +205,7 @@ msgstr "ActionsAPI [dosym]: Dosya zaten var: %s"
 msgid "No file matched pattern \"%s\"."
 msgstr "\"%s\" ile eşleşen bir dosya bulunamadı."
 
-#: pisi/actionsapi/pisitools.py:272
+#: pisi/actionsapi/pisitools.py:272 pisi/actionsapi/shelltools.py:97
 msgid "No file matched pattern \"%s\". Remove operation failed."
 msgstr "\"%s\" ile eşleşen bir dosya bulunamadı. Silme işlemi başarısız oldu."
 
@@ -261,63 +261,63 @@ msgstr "ActionsAPI [chown]: %s dosyası bulunamadı."
 msgid "ActionsAPI [sym]: Permission denied: %s to %s"
 msgstr "ActionsAPI [sym]: Erişim reddedildi: %s -> %s"
 
-#: pisi/actionsapi/shelltools.py:99
+#: pisi/actionsapi/shelltools.py:103
 msgid "ActionsAPI [unlink]: Permission denied: %s."
 msgstr "ActionsAPI [unlink]: Erişim reddedildi: %s."
 
-#: pisi/actionsapi/shelltools.py:103
+#: pisi/actionsapi/shelltools.py:107
 msgid "ActionsAPI [unlink]: File %s doesn't exists."
 msgstr "ActionsAPI [unlink]: %s dosyası bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:111
+#: pisi/actionsapi/shelltools.py:115
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: %s"
 msgstr "ActionsAPI [unlinkDir]: İşleme izin verilmedi: %s"
 
-#: pisi/actionsapi/shelltools.py:115
+#: pisi/actionsapi/shelltools.py:119
 msgid "ActionsAPI [unlinkDir]: Directory %s doesn't exists."
 msgstr "ActionsAPI [unlinkDir]: %s dizini bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:121
+#: pisi/actionsapi/shelltools.py:125
 msgid "ActionsAPI [move]: No file matched pattern \"%s\"."
 msgstr "ActionsAPI [move]: \"%s\" ile eşleşen bir dosya bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:128
+#: pisi/actionsapi/shelltools.py:132
 msgid "ActionsAPI [move]: Permission denied: %s to %s"
 msgstr "ActionsAPI [move]: Erişim engellendi: %s -> %s"
 
-#: pisi/actionsapi/shelltools.py:130
+#: pisi/actionsapi/shelltools.py:134
 msgid "ActionsAPI [move]: File %s doesn't exists."
 msgstr "ActionsAPI [move]: %s dosyası bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:137
+#: pisi/actionsapi/shelltools.py:141
 msgid "ActionsAPI [copy]: No file matched pattern \"%s\"."
 msgstr "ActionsAPI [copy]: \"%s\" ile eşleşen bir dosya bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:144
+#: pisi/actionsapi/shelltools.py:148
 msgid "ActionsAPI [copy]: Permission denied: %s to %s"
 msgstr "ActionsAPI [copy]: Erişim reddedildi: %s -> %s"
 
-#: pisi/actionsapi/shelltools.py:160
+#: pisi/actionsapi/shelltools.py:164
 msgid "ActionsAPI [copy]: File %s does not exist."
 msgstr "ActionsAPI [copy]: %s dosyası bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:175
+#: pisi/actionsapi/shelltools.py:179
 msgid "ActionsAPI [copytree] %s to %s: %s"
 msgstr "ActionsAPI [copytree]: %s konumundan %s konumuna: %s"
 
-#: pisi/actionsapi/shelltools.py:177
+#: pisi/actionsapi/shelltools.py:181
 msgid "ActionsAPI [copytree]: Directory %s doesn't exists."
 msgstr "ActionsAPI [copytree]: %s dizini bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:185
+#: pisi/actionsapi/shelltools.py:189
 msgid "ActionsAPI [touch]: No file matched pattern \"%s\"."
 msgstr "ActionsAPI [touch]: \"%s\" ile eşleşen bir dosya bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:194
+#: pisi/actionsapi/shelltools.py:198
 msgid "ActionsAPI [touch]: Permission denied: %s"
 msgstr "ActionsAPI [touch]: Erişim reddedildi: %s"
 
-#: pisi/actionsapi/shelltools.py:249
+#: pisi/actionsapi/shelltools.py:253
 msgid "Command \"%s\" failed, return value was %d."
 msgstr "\"%s\" komutu başarısız oldu, dönüş değeri: %d ."
 
@@ -689,15 +689,11 @@ msgstr "add-repo seçenekleri"
 msgid "Add repository at given position (0 is first)"
 msgstr "Belirtilen konuma depo ekle (ilk konum 0'dır)."
 
-#: pisi/cli/addrepo.py:50
-msgid "Skip distribution release and architecture check"
-msgstr "Dağıtım sürümü ve mimarisi kontrolünü atla"
-
-#: pisi/cli/addrepo.py:64
+#: pisi/cli/addrepo.py:61
 msgid "Update PiSi database for repository %s?"
 msgstr "%s deposu PiSi veritabanı güncellensin mi?"
 
-#: pisi/cli/addrepo.py:68
+#: pisi/cli/addrepo.py:65
 msgid "%s repository could not be reached. Removing %s from system."
 msgstr "%s deposuna erişilemedi. %s sistemden kaldırılıyor."
 
@@ -1123,11 +1119,11 @@ msgstr "emerge seçenekleri"
 msgid "Emerge available packages under given component"
 msgstr "Bileşen altındaki paketleri derleyip kur"
 
-#: pisi/cli/emerge.py:49 pisi/cli/install.py:53 pisi/cli/upgrade.py:63
+#: pisi/cli/emerge.py:49 pisi/cli/install.py:55 pisi/cli/upgrade.py:63
 msgid "Ignore file conflicts"
 msgstr "Dosya çakışmalarını gözardı et."
 
-#: pisi/cli/emerge.py:51 pisi/cli/install.py:55 pisi/cli/upgrade.py:65
+#: pisi/cli/emerge.py:51 pisi/cli/install.py:57 pisi/cli/upgrade.py:65
 msgid "Ignore package conflicts"
 msgstr "Paket çakışmalarını gözardı et."
 
@@ -1354,7 +1350,8 @@ msgstr ""
 "\n"
 "Kullanım: index <dizin> ...\n"
 "\n"
-"Bu komut bir dizinde PiSi dosyaları arar, onlardan PiSi etiketlerini çıkarır\n"
+"Bu komut bir dizinde PiSi dosyaları arar, onlardan PiSi etiketlerini "
+"çıkarır\n"
 "ve bilgiyi pisi-index.xml adında bir XML dosyasında toplar. Hem kaynak hem\n"
 "de ikili paketleri kataloglar.\n"
 "\n"
@@ -1497,25 +1494,29 @@ msgstr "install seçenekleri"
 msgid "Reinstall already installed packages"
 msgstr "Halihazırda kurulu paket(ler)i yeniden kur."
 
-#: pisi/cli/install.py:57
+#: pisi/cli/install.py:53
+msgid "Skip distribution release and architecture check"
+msgstr "Dağıtım sürümü ve mimarisi kontrolünü atla"
+
+#: pisi/cli/install.py:59
 msgid "Install component's and recursive components' packages"
 msgstr "Bileşenin ve alt bileşenlerinin paketlerini kur."
 
-#: pisi/cli/install.py:59
+#: pisi/cli/install.py:61
 msgid "Name of the component's repository"
 msgstr "Bileşenin depo ismi"
 
-#: pisi/cli/install.py:61 pisi/cli/upgrade.py:71
+#: pisi/cli/install.py:63 pisi/cli/upgrade.py:71
 msgid "Fetch upgrades but do not install."
 msgstr "Yükseltmeleri indir ama kurma."
 
-#: pisi/cli/install.py:63
+#: pisi/cli/install.py:65
 msgid ""
 "When installing packages, ignore packages and components whose basenames "
 "match pattern."
 msgstr "Paket kurarken, ifade ile eşleşen paket ve bileşenleri gözardı et."
 
-#: pisi/cli/install.py:65
+#: pisi/cli/install.py:67
 msgid ""
 "When installing packages, ignore packages and components whose "
 "basenames                      match any pattern contained in file."
@@ -1523,7 +1524,7 @@ msgstr ""
 "Paket kurarken, paket ya da bileşen isimlerinden dosya içerisinde verilen "
 "kalıplardan herhangi birisi ile eşleşenleri gözardı et."
 
-#: pisi/cli/install.py:91
+#: pisi/cli/install.py:93
 msgid "There is no component named %s"
 msgstr "%s isminde bir bileşen bulunamadı."
 
@@ -1711,6 +1712,7 @@ msgid "active"
 msgstr "etkin"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
+#, fuzzy
 msgid "%s [%s]"
 msgstr ""
 
@@ -2311,26 +2313,15 @@ msgstr "%s %s yeniden kuruldu."
 msgid "%s is downgraded from %s to %s."
 msgstr "%s %s sürümünden %s sürümüne indirildi."
 
-#: pisi/index.py:96
-msgid ""
-"The repository couldn't be added because of distribution release mismatch"
-msgstr "Dağıtım sürümü uyuşmadığı için depo eklenemedi"
-
-#: pisi/index.py:101
-msgid ""
-"The repository couldn't be added because of distribution architecture "
-"mismatch"
-msgstr "Dağıtım mimarisi uyuşmadığı için depo eklenemedi"
-
-#: pisi/index.py:135
+#: pisi/index.py:121
 msgid "Adding %s to package index"
 msgstr "%s paket indeksine ekleniyor"
 
-#: pisi/index.py:152
+#: pisi/index.py:138
 msgid "Package %s: metadata corrupt, skipping..."
 msgstr "Paket %s: metadata bozuk, atlanıyor..."
 
-#: pisi/index.py:204
+#: pisi/index.py:190
 msgid "Adding %s to source index"
 msgstr "%s kaynak indeksine ekleniyor"
 
@@ -2575,7 +2566,7 @@ msgstr ""
 msgid "Creating PiSi package %s."
 msgstr "%s PiSi paketi yaratılıyor."
 
-#: pisi/operations/build.py:1023 pisi/operations/delta.py:93
+#: pisi/operations/build.py:1023 pisi/operations/delta.py:98
 msgid "Done."
 msgstr "Tamamlandı."
 
@@ -2693,7 +2684,7 @@ msgid "Following packages will be removed:\n"
 msgstr "Bu paketler kaldırılacak:\n"
 
 #: pisi/operations/history.py:152 pisi/operations/history.py:166
-#: pisi/operations/install.py:198 pisi/operations/remove.py:72
+#: pisi/operations/install.py:199 pisi/operations/remove.py:72
 msgid "Do you want to continue?"
 msgstr "Devam etmek istiyor musunuz?"
 
@@ -2717,7 +2708,7 @@ msgid ""
 msgstr "Aşağıdaki paket(ler) zaten kurulu ve yeniden kurulmayacak:\n"
 
 # pisi/api.py:168 :215
-#: pisi/operations/install.py:53 pisi/operations/install.py:211
+#: pisi/operations/install.py:53 pisi/operations/install.py:212
 msgid "No packages to install."
 msgstr "Kurulacak paket yok."
 
@@ -2740,34 +2731,34 @@ msgstr "Kuruluyor %d / %d"
 msgid "Mixing file names and package names not supported yet."
 msgstr "Dosya ve paket adlarını birlikte kullanmak henüz desteklenmiyor."
 
-#: pisi/operations/install.py:163
+#: pisi/operations/install.py:164
 msgid "Package %s is not compatible with your distribution release %s %s."
 msgstr "%s paketi, %s %s sürümü ile uyumlu değil."
 
-#: pisi/operations/install.py:167
+#: pisi/operations/install.py:168
 msgid "Package %s (%s) is not compatible with your %s architecture."
 msgstr "%s (%s) paketi %s mimarisi ile uyumlu değil."
 
-#: pisi/operations/install.py:190
+#: pisi/operations/install.py:191
 msgid "External dependencies not satisfied: %s"
 msgstr "Dış bağımlılıklar sağlanamadı: %s"
 
-#: pisi/operations/install.py:195
+#: pisi/operations/install.py:196
 msgid ""
 "The following packages will be installed\n"
 "in the respective order to satisfy extra dependencies:\n"
 msgstr ""
 "Ek bağımlılıkları sağlamak için bu paketler verilen sırada kurulacaktır:\n"
 
-#: pisi/operations/install.py:199
+#: pisi/operations/install.py:200
 msgid "External dependencies not satisfied"
 msgstr "Dış bağımlılıklar sağlanamadı."
 
-#: pisi/operations/install.py:242
+#: pisi/operations/install.py:243
 msgid "Installation order: "
 msgstr "Kurulum sırası: "
 
-#: pisi/operations/install.py:277 pisi/specfile.py:257
+#: pisi/operations/install.py:278 pisi/specfile.py:257
 msgid "%s dependency of package %s is not satisfied"
 msgstr "%s bağımlılığı %s paketi için sağlanamadı."
 
@@ -2889,8 +2880,8 @@ msgid ""
 "Tag should have at least the current locale, or failing that an English or "
 "Turkish version"
 msgstr ""
-"Etiket içeriğinin en azından güncel yerelde (locale) bir karşılığı olmalı, ya "
-"da eğer o yoksa bir Türkçe ya da İngilizce sürüme sahip olmalı."
+"Etiket içeriğinin en azından güncel yerelde (locale) bir karşılığı olmalı, "
+"ya da eğer o yoksa bir Türkçe ya da İngilizce sürüme sahip olmalı."
 
 #: pisi/pxml/autoxml.py:373
 msgid "autoxml.check: '%s' errors"
@@ -3140,6 +3131,15 @@ msgstr "Kaynak deposu taranıyor...\n"
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr "İkili dosyalar taranıyor...\n"
+
+#~ msgid ""
+#~ "The repository couldn't be added because of distribution release mismatch"
+#~ msgstr "Dağıtım sürümü uyuşmadığı için depo eklenemedi"
+
+#~ msgid ""
+#~ "The repository couldn't be added because of distribution architecture "
+#~ "mismatch"
+#~ msgstr "Dağıtım mimarisi uyuşmadığı için depo eklenemedi"
 
 #, fuzzy
 #~ msgid "Run pisi build process in silent mode"

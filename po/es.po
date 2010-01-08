@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
-"POT-Creation-Date: 2009-12-17 09:47+EET\n"
+"POT-Creation-Date: 2010-01-08 09:46+EET\n"
 "PO-Revision-Date: 2009-12-17 21:36-0300\n"
 "Last-Translator: Klemens Häckel <click3d at linuxmail (dot) org>\n"
 "Language-Team: Spanish <kde-i18n-doc@kde.org>\n"
@@ -204,7 +204,7 @@ msgstr "ActionsAPI [dosym]: Archivo ya existe: %s"
 msgid "No file matched pattern \"%s\"."
 msgstr "No hay archivos que coinciden con el patrón \"%s\"."
 
-#: pisi/actionsapi/pisitools.py:272
+#: pisi/actionsapi/pisitools.py:272 pisi/actionsapi/shelltools.py:97
 msgid "No file matched pattern \"%s\". Remove operation failed."
 msgstr ""
 "No hay archivos que coinciden con el patrón \"%s\". Operación Remove "
@@ -263,64 +263,64 @@ msgstr "ActionsAPI [chown]: Archivo %s no existe."
 msgid "ActionsAPI [sym]: Permission denied: %s to %s"
 msgstr "ActionsAPI [sym]: Permiso denegado: %s a %s"
 
-#: pisi/actionsapi/shelltools.py:99
+#: pisi/actionsapi/shelltools.py:103
 msgid "ActionsAPI [unlink]: Permission denied: %s."
 msgstr "ActionsAPI [unlink]: Permiso denegado: %s."
 
-#: pisi/actionsapi/shelltools.py:103
+#: pisi/actionsapi/shelltools.py:107
 msgid "ActionsAPI [unlink]: File %s doesn't exists."
 msgstr "ActionsAPI [unlink]: Archivo %s no existe."
 
-#: pisi/actionsapi/shelltools.py:111
+#: pisi/actionsapi/shelltools.py:115
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: %s"
 msgstr "ActionsAPI [unlinkDir]: Operación no permitida: %s"
 
-#: pisi/actionsapi/shelltools.py:115
+#: pisi/actionsapi/shelltools.py:119
 msgid "ActionsAPI [unlinkDir]: Directory %s doesn't exists."
 msgstr "ActionsAPI [unlinkDir]: Carpeta %s no existe."
 
-#: pisi/actionsapi/shelltools.py:121
+#: pisi/actionsapi/shelltools.py:125
 msgid "ActionsAPI [move]: No file matched pattern \"%s\"."
 msgstr "ActionsAPI [move]: No hay archivos que coinciden con el patrón \"%s\"."
 
-#: pisi/actionsapi/shelltools.py:128
+#: pisi/actionsapi/shelltools.py:132
 msgid "ActionsAPI [move]: Permission denied: %s to %s"
 msgstr "ActionsAPI [move]: Permiso denegado: %s a %s"
 
-#: pisi/actionsapi/shelltools.py:130
+#: pisi/actionsapi/shelltools.py:134
 msgid "ActionsAPI [move]: File %s doesn't exists."
 msgstr "ActionsAPI [move]: Archivo %s no existe."
 
-#: pisi/actionsapi/shelltools.py:137
+#: pisi/actionsapi/shelltools.py:141
 msgid "ActionsAPI [copy]: No file matched pattern \"%s\"."
 msgstr "ActionsAPI [copy]: No hay archivos que coinciden con el patrón \"%s\"."
 
-#: pisi/actionsapi/shelltools.py:144
+#: pisi/actionsapi/shelltools.py:148
 msgid "ActionsAPI [copy]: Permission denied: %s to %s"
 msgstr "ActionsAPI [copy]: Permiso denegado: %s a %s"
 
-#: pisi/actionsapi/shelltools.py:160
+#: pisi/actionsapi/shelltools.py:164
 msgid "ActionsAPI [copy]: File %s does not exist."
 msgstr "ActionsAPI [copy]: Archivo %s no existe."
 
-#: pisi/actionsapi/shelltools.py:175
+#: pisi/actionsapi/shelltools.py:179
 msgid "ActionsAPI [copytree] %s to %s: %s"
 msgstr "ActionsAPI [copytree] %s a %s: %s"
 
-#: pisi/actionsapi/shelltools.py:177
+#: pisi/actionsapi/shelltools.py:181
 msgid "ActionsAPI [copytree]: Directory %s doesn't exists."
 msgstr "ActionsAPI [copytree]: Carpeta %s no existe."
 
-#: pisi/actionsapi/shelltools.py:185
+#: pisi/actionsapi/shelltools.py:189
 msgid "ActionsAPI [touch]: No file matched pattern \"%s\"."
 msgstr ""
 "ActionsAPI [touch]: No hay archivos que coinciden con el patrón \"%s\"."
 
-#: pisi/actionsapi/shelltools.py:194
+#: pisi/actionsapi/shelltools.py:198
 msgid "ActionsAPI [touch]: Permission denied: %s"
 msgstr "ActionsAPI [touch]: Permiso denegado: %s"
 
-#: pisi/actionsapi/shelltools.py:249
+#: pisi/actionsapi/shelltools.py:253
 msgid "Command \"%s\" failed, return value was %d."
 msgstr "Comando \"%s\" fallado, valor de retorno: %d."
 
@@ -705,15 +705,11 @@ msgstr "opciones add-repo"
 msgid "Add repository at given position (0 is first)"
 msgstr "Agregar repositorio en posición indicada (inicia con 0)"
 
-#: pisi/cli/addrepo.py:50
-msgid "Skip distribution release and architecture check"
-msgstr "Saltar comprobación de architectura y versión"
-
-#: pisi/cli/addrepo.py:64
+#: pisi/cli/addrepo.py:61
 msgid "Update PiSi database for repository %s?"
 msgstr "Actualizar base de datos PiSi para repositorio %s?"
 
-#: pisi/cli/addrepo.py:68
+#: pisi/cli/addrepo.py:65
 msgid "%s repository could not be reached. Removing %s from system."
 msgstr "Repositorio %s inaccesible. Removiendo %s del sistema."
 
@@ -1157,11 +1153,11 @@ msgstr "Opciones emerge"
 msgid "Emerge available packages under given component"
 msgstr "Emerge paquetes disponibles de un componente dado"
 
-#: pisi/cli/emerge.py:49 pisi/cli/install.py:53 pisi/cli/upgrade.py:63
+#: pisi/cli/emerge.py:49 pisi/cli/install.py:55 pisi/cli/upgrade.py:63
 msgid "Ignore file conflicts"
 msgstr "Ignorar conflictos de archivos"
 
-#: pisi/cli/emerge.py:51 pisi/cli/install.py:55 pisi/cli/upgrade.py:65
+#: pisi/cli/emerge.py:51 pisi/cli/install.py:57 pisi/cli/upgrade.py:65
 msgid "Ignore package conflicts"
 msgstr "Ignorar conflictos de paquetes"
 
@@ -1541,20 +1537,24 @@ msgstr "Opciones de instalación"
 msgid "Reinstall already installed packages"
 msgstr "Reinstalar paquetes ya instalados"
 
+#: pisi/cli/install.py:53
+msgid "Skip distribution release and architecture check"
+msgstr "Saltar comprobación de architectura y versión"
+
 # check here: should be the idea be here - "dependent" (instead of "recursive")?
-#: pisi/cli/install.py:57
+#: pisi/cli/install.py:59
 msgid "Install component's and recursive components' packages"
 msgstr "Instalar paquetes de componente y de componentes relacionados"
 
-#: pisi/cli/install.py:59
+#: pisi/cli/install.py:61
 msgid "Name of the component's repository"
 msgstr "Nombre del repositorio del componente"
 
-#: pisi/cli/install.py:61 pisi/cli/upgrade.py:71
+#: pisi/cli/install.py:63 pisi/cli/upgrade.py:71
 msgid "Fetch upgrades but do not install."
 msgstr "Descargar actualizaciones pero no instalar."
 
-#: pisi/cli/install.py:63
+#: pisi/cli/install.py:65
 msgid ""
 "When installing packages, ignore packages and components whose basenames "
 "match pattern."
@@ -1563,7 +1563,7 @@ msgstr ""
 "coinciden con el patrón."
 
 # no estoy seguro si capté la idea - i am not sure if i got the idea right
-#: pisi/cli/install.py:65
+#: pisi/cli/install.py:67
 msgid ""
 "When installing packages, ignore packages and components whose "
 "basenames                      match any pattern contained in file."
@@ -1572,7 +1572,7 @@ msgstr ""
 "base                      coinciden con cualquiera de los patrones guardados "
 "en el archivo."
 
-#: pisi/cli/install.py:91
+#: pisi/cli/install.py:93
 msgid "There is no component named %s"
 msgstr "No existe componente de nombre %s"
 
@@ -2373,31 +2373,16 @@ msgstr "%s %s fue reinstalado."
 msgid "%s is downgraded from %s to %s."
 msgstr "%s fue revertido de %s a %s."
 
-#: pisi/index.py:96
-msgid ""
-"The repository couldn't be added because of distribution release mismatch"
-msgstr ""
-"No se puede agregar el repositorio, porque la versión del sistema es "
-"diferente"
-
-#: pisi/index.py:101
-msgid ""
-"The repository couldn't be added because of distribution architecture "
-"mismatch"
-msgstr ""
-"No se puede agregar el repositorio, porque la la architectura del sistema es "
-"diferente"
-
-#: pisi/index.py:135
+#: pisi/index.py:121
 msgid "Adding %s to package index"
 msgstr "Agregando %s al index de paquetes"
 
-#: pisi/index.py:152
+#: pisi/index.py:138
 msgid "Package %s: metadata corrupt, skipping..."
 msgstr "Metadata de paquete %s: corrupto, omitiendo..."
 
 # here "source" means - like source code ? (not "base".. )
-#: pisi/index.py:204
+#: pisi/index.py:190
 msgid "Adding %s to source index"
 msgstr "Agregando %s a index de fuentes"
 
@@ -2652,7 +2637,7 @@ msgid "Creating PiSi package %s."
 msgstr "Creando Paquete PiSi %s."
 
 # podria ser tambien "Fin" o "Listo"
-#: pisi/operations/build.py:1023 pisi/operations/delta.py:93
+#: pisi/operations/build.py:1023 pisi/operations/delta.py:98
 msgid "Done."
 msgstr "Hecho."
 
@@ -2774,7 +2759,7 @@ msgid "Following packages will be removed:\n"
 msgstr "Se eliminarán los siguientes paquetes:\n"
 
 #: pisi/operations/history.py:152 pisi/operations/history.py:166
-#: pisi/operations/install.py:198 pisi/operations/remove.py:72
+#: pisi/operations/install.py:199 pisi/operations/remove.py:72
 msgid "Do you want to continue?"
 msgstr "Desea continuar ?"
 
@@ -2799,7 +2784,7 @@ msgid ""
 msgstr ""
 "Los siguientes paquetes ya están instalados y no se instalarán de nuevo:\n"
 
-#: pisi/operations/install.py:53 pisi/operations/install.py:211
+#: pisi/operations/install.py:53 pisi/operations/install.py:212
 msgid "No packages to install."
 msgstr "No hay paquetes para instalar."
 
@@ -2824,19 +2809,19 @@ msgid "Mixing file names and package names not supported yet."
 msgstr ""
 "Mezclando nombres de archivos y nombres de paquetes actualmente no soportado."
 
-#: pisi/operations/install.py:163
+#: pisi/operations/install.py:164
 msgid "Package %s is not compatible with your distribution release %s %s."
 msgstr "Pacquete %s no es compatible con su versión de distribución %s %s."
 
-#: pisi/operations/install.py:167
+#: pisi/operations/install.py:168
 msgid "Package %s (%s) is not compatible with your %s architecture."
 msgstr "Paquete %s (%s) no es compatible con su arquitectura %s."
 
-#: pisi/operations/install.py:190
+#: pisi/operations/install.py:191
 msgid "External dependencies not satisfied: %s"
 msgstr "Dependencias externas no satisfechas: %s"
 
-#: pisi/operations/install.py:195
+#: pisi/operations/install.py:196
 msgid ""
 "The following packages will be installed\n"
 "in the respective order to satisfy extra dependencies:\n"
@@ -2844,16 +2829,16 @@ msgstr ""
 "Se instalarán los siguientes paquetes\n"
 "en el orden respectivo para satisfacer las dependencias adicionales:\n"
 
-#: pisi/operations/install.py:199
+#: pisi/operations/install.py:200
 msgid "External dependencies not satisfied"
 msgstr "Dependencia externa no satisfecha"
 
-#: pisi/operations/install.py:242
+#: pisi/operations/install.py:243
 msgid "Installation order: "
 msgstr "Orden de instalación:"
 
 # satisfy - a traducir con "cumplir" ? como suena ?
-#: pisi/operations/install.py:277 pisi/specfile.py:257
+#: pisi/operations/install.py:278 pisi/specfile.py:257
 msgid "%s dependency of package %s is not satisfied"
 msgstr "Dependencia %s de paquete %s no está satisfecha"
 
@@ -3232,6 +3217,19 @@ msgstr "Buscando en repositorio de fuentes...\n"
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr "Buscando paquetes binarios...\n"
+
+#~ msgid ""
+#~ "The repository couldn't be added because of distribution release mismatch"
+#~ msgstr ""
+#~ "No se puede agregar el repositorio, porque la versión del sistema es "
+#~ "diferente"
+
+#~ msgid ""
+#~ "The repository couldn't be added because of distribution architecture "
+#~ "mismatch"
+#~ msgstr ""
+#~ "No se puede agregar el repositorio, porque la la architectura del sistema "
+#~ "es diferente"
 
 # favor verificar
 #, fuzzy
