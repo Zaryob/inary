@@ -34,12 +34,6 @@ import pisi.group as group
 class Error(pisi.Error):
     pass
 
-class DistributionMismatchException(pisi.Exception):
-    pass
-
-class ArchitectureMismatchException(pisi.Exception):
-    pass
-
 class Index(xmlfile.XmlFile):
     __metaclass__ = autoxml.autoxml
 
