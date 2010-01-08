@@ -76,10 +76,6 @@ class Index(xmlfile.XmlFile):
 
         doc = self.read_uri(uri, tmpdir, force)
 
-        # check packages' DistributionReleases and Architecture
-        if not ctx.get_option('ignore_check'):
-            self.check_distribution_and_architecture(doc)
-
         if not repo:
             repo = self.distribution.name()
             # and what do we do with it? move it to index dir properly
@@ -90,16 +86,6 @@ class Index(xmlfile.XmlFile):
     def check_signature(self, filename, repo):
         tmpdir = os.path.join(ctx.config.index_dir(), repo)
         pisi.file.File.check_signature(filename, tmpdir)
-
-    def check_distribution_and_architecture(self, doc):
-        if doc.getTag("Distribution").getTagData("Version") != ctx.config.values.get("general", "distribution_release"):
-            ctx.ui.error(_("The repository couldn't be added because of distribution release mismatch"))
-            raise DistributionMismatchException
-        # First check if Architecture tag exists in index.xml; if not, directly skip it ;)
-        if doc.getTag("Distribution").getTagData("Architecture"):
-            if doc.getTag("Distribution").getTagData("Architecture") != ctx.config.values.get("general", "architecture"):
-                ctx.ui.error(_("The repository couldn't be added because of distribution architecture mismatch"))
-                raise ArchitectureMismatchException
 
     def index(self, repo_uri, skip_sources=False):
         self.repo_dir = repo_uri

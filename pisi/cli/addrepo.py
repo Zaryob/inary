@@ -45,9 +45,6 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
         group.add_option("--at", action="store",
                                type="int", default=None,
                                help=_("Add repository at given position (0 is first)"))
-        group.add_option("--ignore-check", action="store_true", 
-                               default=False, 
-                               help=_("Skip distribution release and architecture check"))
         self.parser.add_option_group(group)
 
     def run(self):
