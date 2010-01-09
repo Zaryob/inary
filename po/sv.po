@@ -1,11 +1,11 @@
 # Copyright (C) YEAR ORGANIZATION
 #
-# Patrik Karlsson <patrik@pardus.nu>, 2009.
+# Patrik Karlsson <patrik@pardus.nu>, 2009, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "POT-Creation-Date: 2010-01-08 09:46+EET\n"
-"PO-Revision-Date: 2009-12-28 16:12+0100\n"
+"PO-Revision-Date: 2010-01-09 20:12+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@pardus.nu>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
@@ -440,15 +440,15 @@ msgstr "Ogiltigt förrådsnamn."
 
 #: pisi/api.py:757
 msgid "Repo %s already present."
-msgstr ""
+msgstr "Förrådet %s finns redan."
 
 #: pisi/api.py:760
 msgid "Repo already present with name %s."
-msgstr ""
+msgstr "Förrådet finns redan under namnet %s."
 
 #: pisi/api.py:765
 msgid "Repo %s added to system."
-msgstr ""
+msgstr "Förrådet %s lades till:"
 
 #: pisi/api.py:773
 msgid "Repo %s removed from system."
@@ -650,7 +650,7 @@ msgstr ""
 
 #: pisi/cli/addrepo.py:61
 msgid "Update PiSi database for repository %s?"
-msgstr ""
+msgstr "Uppdatera PiSi-databasen för %s-förrådet?"
 
 #: pisi/cli/addrepo.py:65
 msgid "%s repository could not be reached. Removing %s from system."
@@ -1485,11 +1485,11 @@ msgstr ""
 
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
-msgstr ""
+msgstr "avaktiverad"
 
 #: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
 msgid "active"
-msgstr ""
+msgstr "aktiverad"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
@@ -2422,6 +2422,8 @@ msgid ""
 "The following packages will be installed\n"
 "in the respective order to satisfy extra dependencies:\n"
 msgstr ""
+"Följande paket kommer att installeras i respektive ordning för att uppfylla "
+"beroenden"
 
 #: pisi/operations/install.py:200
 msgid "External dependencies not satisfied"
@@ -2445,7 +2447,7 @@ msgstr "Säkerhetslås: kan inte hitta komponenten system.base"
 
 #: pisi/operations/remove.py:55
 msgid "Package %s does not exist. Cannot remove."
-msgstr ""
+msgstr "Paketet %s finns inte och kan därmed inte tas bort."
 
 #: pisi/operations/remove.py:59
 msgid "No packages to remove."
@@ -2463,7 +2465,7 @@ msgstr ""
 
 #: pisi/operations/remove.py:85
 msgid "Package %s is not installed. Cannot remove."
-msgstr ""
+msgstr "Paketet %s är inte installerat och kan därmed inte tas bort."
 
 #: pisi/operations/remove.py:120
 msgid "Conflicts remain"
@@ -2778,3 +2780,5 @@ msgstr ""
 #: scripts/repostats.py:579
 msgid "Scanning binary packages...\n"
 msgstr ""
+
+
