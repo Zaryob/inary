@@ -578,6 +578,39 @@ def calculate_download_size(packages):
     total_size, cached_size = pisi.operations.helper.calculate_download_sizes(packages)
     return total_size, cached_size
 
+def get_package_requirements(packages):
+    """
+    Returns a dict with two keys - systemRestart, serviceRestart - with package lists as their values
+    @param packages: list of package names -> list_of_strings
+
+    >>> lu = pisi.api.list_upgrades()
+    
+    >>> requirements = pisi.api.get_package_requirements(lu)
+
+    >>> print requirements
+    >>> { "systemRestart":["kernel", "module-alsa-driver"], "serviceRestart":["mysql-server", "memcached", "postfix"] }
+
+    """
+    
+    requirements = { "systemRestart":[], "serviceRestart":[] }
+    installdb = pisi.db.installdb.InstallDB()
+    packagedb = pisi.db.packagedb.PackageDB()
+
+    for i_pkg in packages:
+        try:
+            pkg = packagedb.get_package(i_pkg)
+        except Exception: #FIXME: Should catch RepoItemNotFound exception
+            pass
+        
+        (version, release, build) = installdb.get_version(i_pkg)
+        
+        updates = [i for i in pkg.history if pisi.version.Version(i.release) > pisi.version.Version(release)]
+        for key in ["systemRestart", "serviceRestart"]:
+            if pisi.util.any(lambda i:key in i.required_actions(), updates):
+                requirements[key].append(pkg.name)
+
+    return requirements
+
 # ****** Danger Zone Below! Tressspassers' eyes will explode! ********** #
 
 def package_graph(A, packagedb, ignore_installed = False):
