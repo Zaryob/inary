@@ -1,3 +1,7 @@
+2010-01-12 Ozan Çağlayan <ozan@pardus.org.tr>
+		* pisi/actionsapi/get.py: Add ARCH() for getting host architecture.
+		Thanks to 64-bit team for pointing out this requirement.
+
 2010-01-04 Ozan Çağlayan <ozan@pardus.org.tr>
 		* pisi/actionsapi/shelltools.py (unlink): Support glob patterns in
 		unlink().

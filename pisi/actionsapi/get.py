@@ -33,6 +33,7 @@ class BinutilsError(pisi.actionsapi.Error):
 # Globals
 env = pisi.actionsapi.variables.glb.env
 dirs = pisi.actionsapi.variables.glb.dirs
+generals = pisi.actionsapi.variables.glb.generals
 
 def curDIR():
     '''returns current work directory's path'''
@@ -90,6 +91,9 @@ def srcDIR():
     return '%s-%s' % (env.src_name, env.src_version)
 
 # Build Related Functions
+
+def ARCH():
+    return generals.architecture
 
 def HOST():
     return env.host

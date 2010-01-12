@@ -89,6 +89,13 @@ class Dirs:
         self.kde = self.values.dirs.kde_dir
         self.qt = self.values.dirs.qt_dir
 
+class Generals:
+    '''General informations from /etc/pisi/pisi.conf'''
+
+    def __init__(self):
+        self.values = ctx.config.values
+        self.architecture = self.values.general.architecture
+
 
 # As we import this module from build.py, we can't init glb as a
 # singleton here.  Or else Python will bug us with NoneType errors
@@ -103,4 +110,5 @@ def initVariables():
     global glb
     ctx.env = Env()
     ctx.dirs = Dirs()
+    ctx.generals = Generals()
     glb = ctx
