@@ -162,7 +162,7 @@ def upgrade(A=[], repo=None):
         install_op = atomicoperations.Install(path, ignore_file_conflicts = True)
         install_op.install(True)
 
-def plan_upgrade(A):
+def plan_upgrade(A, force_replaced=True):
     # try to construct a pisi graph of packages to
     # install / reinstall
 
@@ -170,10 +170,16 @@ def plan_upgrade(A):
 
     G_f = pgraph.PGraph(packagedb)               # construct G_f
 
-    replaces = packagedb.get_replaces()
+    A = set(A)
+    
     # Force upgrading of installed but replaced packages or else they will be removed (they are obsoleted also).
     # This is not wanted for a replaced driver package (eg. nvidia-X).
-    A = set(A) | set(sum(replaces.values(), []))
+    #
+    # FIXME: this is also not nice. this would not be needed if replaced packages are not written as obsoleted also.
+    # But if they are not written obsoleted "pisi index" indexes them
+    if force_replaced:
+        replaces = packagedb.get_replaces()
+        A |= set(sum(replaces.values(), []))
 
     # find the "install closure" graph of G_f by package
     # set A using packagedb
@@ -260,7 +266,7 @@ def upgrade_base(A = set()):
             if extra_upgrades:
                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be upgraded: ') +
                                util.strlist(extra_upgrades))
-                G_f, upgrade_order = plan_upgrade(extra_upgrades)
+                G_f, upgrade_order = plan_upgrade(extra_upgrades, force_replaced=False)
             # return packages that must be added to any installation
             return set(install_order + upgrade_order)
         else:
