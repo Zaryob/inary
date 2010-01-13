@@ -9,18 +9,20 @@
 # Stefan Wilhelm <sw1976de at googlemail dot com>, 2009.
 # Heiko Pardus Translator <miltonjohn@web.de>, 2009.
 # Klemens Häckel <click3d at linuxmail dot org>, 2009.
+# Klemens Häckel <click3d at linuxmail (dot) org>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "POT-Creation-Date: 2010-01-08 09:46+EET\n"
-"PO-Revision-Date: 2009-07-14 22:39-0400\n"
-"Last-Translator: Klemens Häckel <click3d at linuxmail dot org>\n"
-"Language-Team: German <de@li.org>\n"
+"PO-Revision-Date: 2010-01-13 19:42-0300\n"
+"Last-Translator: Klemens Häckel <click3d at linuxmail (dot) org>\n"
+"Language-Team: German <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: pisi-cli:41
 msgid "Keyboard Interrupt: Exiting..."
@@ -2295,7 +2297,7 @@ msgstr "Datei '%s' nicht gefunden."
 # Zweifel - komprimisiert, komisches Wort
 #: pisi/file.py:135
 msgid "File integrity of %s compromised."
-msgstr "Datei-Integrität von %s komprimisiert."
+msgstr "Datei-Integrität von %s kompromittiert."
 
 #: pisi/file.py:155
 msgid "File mode must be either File.read or File.write"
@@ -2544,7 +2546,7 @@ msgstr "Patch-Datei fehlend: %s\n"
 msgid "* Applying patch: %s"
 msgstr "* Patch wird eingesetzt: %s"
 
-# Zweifel, 
+# Zweifel,
 #: pisi/operations/build.py:733
 msgid "/%s has suid bit set"
 msgstr "/%s hat das suid-bit gesetzt"
@@ -2905,7 +2907,7 @@ msgid "Safety switch: Following packages in system.base will be upgraded: "
 msgstr ""
 "Sicherheitsschalter: Die folgenden Pakete in system.base werden aktualisiert:"
 
-# Zweifel 
+# Zweifel
 # is the english text correct ? should maybe the last sentence refer to update of "package list" of the repo ??
 #: pisi/package.py:56
 msgid ""
