@@ -163,6 +163,7 @@ def upgrade(A=[], repo=None):
         install_op.install(True)
 
 def plan_upgrade(A, force_replaced=True):
+    # FIXME: remove force_replaced
     # try to construct a pisi graph of packages to
     # install / reinstall
 
