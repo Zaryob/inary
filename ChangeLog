@@ -3,6 +3,11 @@
 		translations.xml reading.
 		* pisi/specfile.py (read_translations): Ignore source package
 		translations if <Name> is empty in translations.xml.
+		* pisi/version.py (VersionItem): Handle unknown keywords in version
+		strings,
+		* pisi/operations/build.py (Builder.__init__): Don't wait until
+		creating .pisi file for borking about invalid version strings e.g.
+		something like "0.5.6.1_x1219" in <Update> element.
 
 2010-01-12 Ozan Çağlayan <ozan@pardus.org.tr>
 		* pisi/actionsapi/get.py: Add ARCH() for getting host architecture.

@@ -184,6 +184,9 @@ class Builder:
         else:
             self.specdir = os.path.dirname(self.specuri.get_uri())
 
+        # Don't wait until creating .pisi file for complaining about versioning scheme errors
+        self.check_versioning("%s-%s" % (self.spec.getSourceVersion(), self.spec.getSourceRelease()))
+
         self.read_translations(self.specdir)
 
         self.sourceArchive = pisi.sourcearchive.SourceArchive(self.spec, self.pkg_work_dir())
@@ -956,8 +959,6 @@ class Builder:
 
             self.metadata.package.build = build_no
             self.metadata.write(pisi.util.join_path(self.pkg_dir(), ctx.const.metadata_xml))
-
-            self.check_versioning("%s-%s" % (self.spec.getSourceVersion(), self.spec.getSourceRelease()))
 
             # Calculate new and oldpackage names for buildfarm
             name =  pisi.util.package_name(package.name,

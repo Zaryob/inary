@@ -25,13 +25,15 @@ maxdashes = 2
 # p > (no suffix) > m > rc > pre > beta > alpha
 # m: milestone. this was added for OO.o
 # p: patch-level
-keywords = {"alpha": 0,
-            "beta" : 1,
-            "pre"  : 2,
-            "rc"   : 3,
-            "m"    : 4,
+keywords = {
+            "alpha" : 0,
+            "beta"  : 1,
+            "pre"   : 2,
+            "rc"    : 3,
+            "m"     : 4,
             "NOKEY" : 5,
-            "p"    : 6}
+            "p"     : 6,
+            }
 
 # helper functions
 def has_keyword(versionitem):
@@ -71,6 +73,9 @@ class VersionItem:
             if len(itemstring) == 1 and itemstring in string.ascii_letters:
                 # single letter version item ('a' to 'Z')
                 self._value = itemstring
+            elif len(itemstring) > 1 and itemstring[0] in string.ascii_letters:
+                # Unknown keyword
+                raise VersionException("")
             else:
                 self._value = int(itemstring)
         else:
