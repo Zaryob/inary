@@ -310,10 +310,14 @@ class SpecFile(xmlfile.XmlFile):
         self.source.description["en"] = self.source.summary["en"]
 
     def _set_i18n(self, tag, inst):
-        for summary in tag.tags("Summary"):
-            inst.summary[summary.getAttribute("xml:lang")] = summary.firstChild().data()
-        for desc in tag.tags("Description"):
-            inst.description[desc.getAttribute("xml:lang")] = desc.firstChild().data()
+        try:
+            for summary in tag.tags("Summary"):
+                inst.summary[summary.getAttribute("xml:lang")] = summary.firstChild().data()
+            for desc in tag.tags("Description"):
+                inst.description[desc.getAttribute("xml:lang")] = desc.firstChild().data()
+        except AttributeError:
+            raise Error(_("translations.xml file is badly formed."))
+
 
     def read_translations(self, path):
         if not os.path.exists(path):
@@ -323,7 +327,10 @@ class SpecFile(xmlfile.XmlFile):
         except Exception, e:
             raise Error(_("File '%s' has invalid XML") % (path) )
 
-        self._set_i18n(doc.getTag("Source"), self.source)
+        if doc.getTag("Source").getTagData("Name") == self.source.name:
+            # Set source package translations
+            self._set_i18n(doc.getTag("Source"), self.source)
+
         for pak in doc.tags("Package"):
             for inst in self.packages:
                 if inst.name == pak.getTagData("Name"):

@@ -1,3 +1,9 @@
+2010-01-19 Ozan Çağlayan <ozan@pardus.org.tr>
+		* pisi/specfile.py (_set_i18n): Handle parsing errors during
+		translations.xml reading.
+		* pisi/specfile.py (read_translations): Ignore source package
+		translations if <Name> is empty in translations.xml.
+
 2010-01-12 Ozan Çağlayan <ozan@pardus.org.tr>
 		* pisi/actionsapi/get.py: Add ARCH() for getting host architecture.
 		Thanks to 64-bit team for pointing out this requirement.
