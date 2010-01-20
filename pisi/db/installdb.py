@@ -212,7 +212,7 @@ class InstallDB(lazydb.LazyDB):
     def __create_dependency(self, depStr):
         if "<AnyDependency>" in depStr:
             anydependency = pisi.specfile.AnyDependency()
-            for dep in re.compile('(<Dependency>.*?</Dependency>)').findall(depStr):
+            for dep in re.compile('(<Dependency .*?>.*?</Dependency>)').findall(depStr):
                 anydependency.dependencies.append(self.__make_dependency(dep))
             return anydependency
         else:
