@@ -1,3 +1,8 @@
+2010-01-22 Gökçen Eraslan <gokcen@pardus.org.tr>
+		* pisi/actionsapi/perlmodules.py: Do not ignore parameter in make
+		method (eg. perl Build test). Tests of some perl modules have never run
+		before this commit.
+
 2010-01-19 Ozan Çağlayan <ozan@pardus.org.tr>
 		* pisi/specfile.py (_set_i18n): Handle parsing errors during
 		translations.xml reading.

@@ -62,7 +62,7 @@ def make(parameters = ''):
         if system('make %s' % parameters):
             raise MakeError, _('Make failed.')
     else:
-        if system('perl Build build'):
+        if system('perl Build %s' % parameters):
             raise MakeError, _('perl build failed.')
 
 def install(parameters = 'install'):
