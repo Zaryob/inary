@@ -463,7 +463,7 @@ def uncompress(patchFile, compressType="gz", targetDir=None):
     return filePath
 
 
-def do_patch(sourceDir, patchFile, level=0, name=None):
+def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
     """Apply given patch to the sourceDir."""
     cwd = os.getcwd()
     if os.path.exists(sourceDir):
@@ -485,12 +485,12 @@ def do_patch(sourceDir, patchFile, level=0, name=None):
         if not os.path.exists(patchesDir):
             os.makedirs(patchesDir)
         # Import original patch into quilt tree
-        (ret, out, err) = run_batch('quilt import -p %d -P %s \"%s\"' % (level, name, patchFile))
+        (ret, out, err) = run_batch('quilt import %s -p %d -P %s \"%s\"' % (("-R" if reverse else ""), level, name, patchFile))
         # run quilt push to apply original patch into tree
         (ret, out, err) = run_batch('quilt push')
     else:
         # run GNU patch to apply original patch into tree
-        (ret, out, err) = run_batch("patch --remove-empty-files --no-backup-if-mismatch -p%d < \"%s\"" % (level, patchFile))
+        (ret, out, err) = run_batch("patch --remove-empty-files --no-backup-if-mismatch %s -p%d < \"%s\"" % (("-R" if reverse else ""), level, patchFile))
 
     if ret:
         if out is None and err is None:
