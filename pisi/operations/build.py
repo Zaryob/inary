@@ -613,7 +613,7 @@ class Builder:
         for patch in self.spec.source.patches:
             patchFile = pisi.util.join_path(files_dir, patch.filename)
             relativePath = patch.filename
-            reverseApply = patch.reverse.lower() == "true"
+            reverseApply = patch.reverse and patch.reverse.lower() == "true"
             if patch.compressionType:
                 patchFile = pisi.util.uncompress(patchFile,
                                             compressType=patch.compressionType,
