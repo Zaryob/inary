@@ -1,3 +1,7 @@
+2010-01-26 Serdar Dalgıç <serdar@pardus.org.tr>
+		* Handle urllib2 errors of dummy .part files created as a result of unreachable
+		translations.xml's. Fixes #12136.
+
 2010-01-23 Ozan Çağlayan <ozan@pardus.org.tr>
 		* Add support for optional reverse="[tT]rue" in <Patch> for reverse applying
 		a patch.

@@ -206,7 +206,13 @@ class Fetcher:
             return None
 
         import urllib2
-        file_obj = urllib2.urlopen(urllib2.Request(self.url.get_uri()))
+        try:
+            file_obj = urllib2.urlopen(urllib2.Request(self.url.get_uri()))
+        except urllib2.HTTPError:
+            ctx.ui.debug(_("Remote file can not be reached. Previously downloaded part of the file will be removed."))
+            os.remove(self.partial_file)
+            return None
+
         headers = file_obj.info()
         file_obj.close()
         if headers.has_key('Content-Length'):
