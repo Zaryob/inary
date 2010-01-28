@@ -95,7 +95,8 @@ class Generals:
     def __init__(self):
         self.values = ctx.config.values
         self.architecture = self.values.general.architecture
-
+        self.distribution = self.values.general.distribution
+        self.distribution_release = self.values.general.distribution_release
 
 # As we import this module from build.py, we can't init glb as a
 # singleton here.  Or else Python will bug us with NoneType errors
