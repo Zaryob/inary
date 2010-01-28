@@ -225,3 +225,12 @@ class RepoDB(lazydb.LazyDB):
     def get_distribution_release(self, name):
         doc = self.get_repo_doc(name)
         return doc.getTag("Distribution").getTagData("Version")
+
+    def check_architecture(self, name):
+        return self.get_architecture(name) == ctx.config.values.general.architecture
+
+    def check_distribution(self, name):
+        return self.get_distribution(name) == ctx.config.values.general.distribution and \
+                 self.get_distribution_release(name) == ctx.config.values.general.distribution_release
+
+    
