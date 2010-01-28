@@ -213,3 +213,15 @@ class RepoDB(lazydb.LazyDB):
 
     def repo_active(self, name):
         return self.repoorder.get_status(name) == "active"
+
+    def get_architecture(self, name):
+        doc = self.get_repo_doc(name)
+        return doc.getTag("Distribution").getTagData("Architecture")
+
+    def get_distribution(self, name):
+        doc = self.get_repo_doc(name)
+        return doc.getTag("Distribution").getTagData("SourceName")
+
+    def get_distribution_release(self, name):
+        doc = self.get_repo_doc(name)
+        return doc.getTag("Distribution").getTagData("Version")
