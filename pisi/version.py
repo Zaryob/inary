@@ -182,6 +182,10 @@ class Version:
         not we use the comparison operator. And we iterate to the left.
         The result is, 0 if two are equal, -1 if self < rhs, and +1
         if self>rhs"""
+
+        if isinstance(ver, basestring):
+            ver = pisi.version.Version(ver)
+
         lhs = self.comps
         rhs = ver.comps
         # pad the short version string with zeros

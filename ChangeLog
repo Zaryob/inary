@@ -1,3 +1,7 @@
+2010-02-05 Fatih Aşıcı <fatih@pardus.org.tr>
+		* pisi/version.py (compare): Allow comparing Version objects
+		with strings.
+
 2010-02-04 Ozan Çağlayan <ozan@pardus.org.tr>
 		* pisi/pxml/autoxml.py (format): Some optional elements may be None
 		during formatting, handle those situations. We still have a formatting
