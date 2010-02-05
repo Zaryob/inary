@@ -1,0 +1,65 @@
+--- a/pisi/operations/upgrade.py	2010-02-05 16:38:13.952987702 +0200
++++ b/pisi/operations/upgrade.py	2010-02-05 16:38:05.805982201 +0200
+@@ -25,6 +25,7 @@
+ import pisi.util as util
+ import pisi.dependency as dependency
+ import pisi.db
++import pisi.blacklist
+ 
+ def find_upgrades(packages, replaces):
+     packagedb = pisi.db.packagedb.PackageDB()
+@@ -102,11 +103,22 @@
+     # sum(array, []) is a nice trick to flatten an array of arrays
+     A |= set(sum(replaces.values(), []))
+ 
++    A |= upgrade_base(A)
++
++    A = pisi.blacklist.exclude_from(A, ctx.const.blacklist)
++
++    if ctx.get_option('exclude_from'):
++        A = pisi.blacklist.exclude_from(A, ctx.get_option('exclude_from'))
++
++    if ctx.get_option('exclude'):
++        A = pisi.blacklist.exclude(A, ctx.get_option('exclude'))
++
++    ctx.ui.debug('A = %s' % str(A))
++
+     if len(A)==0:
+         ctx.ui.info(_('No packages to upgrade.'))
+         return True
+ 
+-    A |= upgrade_base(A)
+ 
+     ctx.ui.debug('A = %s' % str(A))
+ 
+@@ -264,6 +276,15 @@
+             G_f, install_order = operations.install.plan_install_pkg_names(extra_installs)
+             extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase - set(install_order))
+             upgrade_order = []
++
++            extra_upgrades = pisi.blacklist.exclude_from(extra_upgrades, ctx.const.blacklist)
++
++            if ctx.get_option('exclude_from'):
++                extra_upgrades = pisi.blacklist.exclude_from(extra_upgrades, ctx.get_option('exclude_from'))
++
++            if ctx.get_option('exclude'):
++                extra_upgrades = pisi.blacklist.exclude(extra_upgrades, ctx.get_option('exclude'))
++
+             if extra_upgrades:
+                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be upgraded: ') +
+                                util.strlist(extra_upgrades))
+--- a/pisi/cli/upgrade.py	2009-11-04 17:46:17.033419297 +0200
++++ b/pisi/cli/upgrade.py	2010-02-05 16:35:36.161229971 +0200
+@@ -104,12 +104,4 @@
+                         packages.extend(componentdb.get_union_packages(name, walk=True))
+         packages.extend(self.args)
+ 
+-        packages = pisi.blacklist.exclude_from(packages, ctx.const.blacklist)
+-
+-        if ctx.get_option('exclude_from'):
+-            packages = pisi.blacklist.exclude_from(packages, ctx.get_option('exclude_from'))
+-
+-        if ctx.get_option('exclude'):
+-            packages = pisi.blacklist.exclude(packages, ctx.get_option('exclude'))
+-
+         pisi.api.upgrade(packages, repository)
