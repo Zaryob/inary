@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "POT-Creation-Date: 2010-01-08 09:46+EET\n"
-"PO-Revision-Date: 2010-02-05 16:33+0100\n"
+"PO-Revision-Date: 2010-02-07 15:36+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@pardus.nu>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
@@ -112,7 +112,7 @@ msgstr ""
 
 #: pisi/actionsapi/get.py:163
 msgid "Util %s cannot be found"
-msgstr ""
+msgstr "Verktyget %s kunde inte hittas"
 
 #: pisi/actionsapi/get.py:165
 msgid "Warning: %s does not exist, using plain name %s"
@@ -424,7 +424,7 @@ msgstr ""
 
 #: pisi/api.py:702
 msgid "File %s not found"
-msgstr ""
+msgstr "Filen %s hittades inte"
 
 #: pisi/api.py:742
 msgid "* Building index of PiSi files under %s"
@@ -456,7 +456,7 @@ msgstr ""
 
 #: pisi/api.py:775
 msgid "Repository %s does not exist. Cannot remove."
-msgstr ""
+msgstr "Förrådet % finns inte och kan därmed inte tas bort."
 
 #: pisi/api.py:792
 msgid "* Updating repository: %s"
@@ -476,7 +476,7 @@ msgstr "* Paketdatabas uppdaterad."
 
 #: pisi/api.py:822
 msgid "No repository named %s found."
-msgstr ""
+msgstr "Inget förråd med namnet %s funnet."
 
 #: pisi/api.py:833
 msgid "* Adding '%s' to db... "
@@ -492,11 +492,11 @@ msgstr "Paket %s hittades i förrådet %s"
 
 #: pisi/atomicoperations.py:104
 msgid "Package URI: %s"
-msgstr ""
+msgstr "Paket-URI: %s"
 
 #: pisi/atomicoperations.py:116
 msgid "Download Error: Package does not match the repository package."
-msgstr ""
+msgstr "Hämtningsfel: Paketet matchar inte förrådspaketet."
 
 #: pisi/atomicoperations.py:120
 msgid "Package %s not found in any active repository."
@@ -512,7 +512,7 @@ msgstr ""
 
 #: pisi/atomicoperations.py:219
 msgid "/%s from %s package\n"
-msgstr ""
+msgstr "/%s från %s-paketet\n"
 
 #: pisi/atomicoperations.py:220
 msgid ""
@@ -522,7 +522,7 @@ msgstr ""
 
 #: pisi/atomicoperations.py:249
 msgid "Re-install same version package?"
-msgstr ""
+msgstr "Återinstallera samma paketversion?"
 
 #: pisi/atomicoperations.py:250
 msgid "Package re-install declined"
@@ -530,7 +530,7 @@ msgstr ""
 
 #: pisi/atomicoperations.py:256
 msgid "Upgrading to new upstream version"
-msgstr ""
+msgstr "Uppdaterar till ny uppströmsversion"
 
 #: pisi/atomicoperations.py:259
 msgid "Upgrading to new distribution release"
@@ -574,7 +574,7 @@ msgstr ""
 
 #: pisi/atomicoperations.py:522
 msgid "Removing package %s"
-msgstr ""
+msgstr "Tar bort paketet %s"
 
 #: pisi/atomicoperations.py:525
 msgid "Trying to remove nonexistent package "
@@ -582,7 +582,7 @@ msgstr ""
 
 #: pisi/atomicoperations.py:566
 msgid "Not removing conflicted file : %s"
-msgstr ""
+msgstr "Tar inte bort fil i konflikt: %s"
 
 #: pisi/atomicoperations.py:594
 msgid ""
@@ -611,7 +611,7 @@ msgstr "Installerat %s"
 
 #: pisi/cli/__init__.py:152
 msgid "Removed %s"
-msgstr ""
+msgstr "Tog bort %s"
 
 #: pisi/cli/__init__.py:154
 msgid "Upgraded %s"
