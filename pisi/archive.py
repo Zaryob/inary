@@ -13,7 +13,6 @@
 """Archive module provides access to regular archive file types."""
 
 # standard library modules
-import exceptions
 import os
 import stat
 import shutil
@@ -153,7 +152,12 @@ class ArchiveTar(ArchiveBase):
             raise UnknownArchiveType
 
         self.tar = tarfile.open(self.file_path, rmode)
-        oldwd = os.getcwd()
+        oldwd = None
+        try:
+            # Don't fail if CWD doesn't exist (#6748)
+            oldwd = os.getcwd()
+        except OSError:
+            pass
         os.chdir(target_dir)
 
         uid = os.getuid()
@@ -203,9 +207,10 @@ class ArchiveTar(ArchiveBase):
             os.unlink(self.file_path)
 
         try:
-            os.chdir(oldwd)
+            if oldwd:
+                os.chdir(oldwd)
         # Bug #6748
-        except exceptions.OSError:
+        except OSError:
             pass
         self.close()
 
