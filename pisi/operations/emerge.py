@@ -48,10 +48,10 @@ def emerge(A):
         order_build = A
 
     if order_inst:
-        ctx.ui.info(_("""The following minimal list of packages will be installed
+        ctx.ui.info(_("""The following list of packages will be installed
 from repository in the respective order to satisfy dependencies:
 """) + util.strlist(order_inst))
-    ctx.ui.info(_("""The following minimal list of packages will be built and
+    ctx.ui.info(_("""The following list of packages will be built and
 installed in the respective order to satisfy dependencies:
 """) + util.strlist(order_build))
 

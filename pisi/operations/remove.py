@@ -65,7 +65,7 @@ def remove(A, ignore_dep = False, ignore_safety = False):
         G_f = None
         order = A
 
-    ctx.ui.info(_("""The following minimal list of packages will be removed
+    ctx.ui.info(_("""The following list of packages will be removed
 in the respective order to satisfy dependencies:
 """) + util.strlist(order))
     if len(order) > len(A_0):
