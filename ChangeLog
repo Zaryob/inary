@@ -1,3 +1,7 @@
+2010-02-12 Gökçen Eraslan <gokcen@pardus.org.tr>
+		* pisi/actionsapi/shelltools.py: Replace FileError with ctx.ui.error
+		since FileError is defined in pisitoolsfunctions.
+
 2010-02-05 Fatih Aşıcı <fatih@pardus.org.tr>
 		* pisi/version.py (compare): Allow comparing Version objects
 		with strings.
