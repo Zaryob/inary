@@ -1,0 +1,50 @@
+Index: pisi-spec.rng
+===================================================================
+--- pisi-spec.rng	(revision 27869)
++++ pisi-spec.rng	(working copy)
+@@ -45,7 +45,9 @@
+                 <!-- FIXME: should be oneOrMore -->
+                 <ref name="Description"/>
+             </zeroOrMore>
+-            <ref name="Archive"/>
++            <oneOrMore>
++                <ref name="Archive"/>
++            </oneOrMore>
+             <optional>
+                 <ref name="BuildDependencies"/>
+             </optional>
+Index: pisi/specfile.py
+===================================================================
+--- pisi/specfile.py	(revision 27869)
++++ pisi/specfile.py	(working copy)
+@@ -170,7 +170,7 @@
+     t_Summary = [autoxml.LocalText, autoxml.mandatory]
+     t_Description = [autoxml.LocalText, autoxml.optional]
+     t_Icon = [ autoxml.String, autoxml.optional]
+-    t_Archive = [Archive, autoxml.mandatory ]
++    t_Archives = [[Archive], autoxml.mandatory ]
+     t_BuildDependencies = [ [pisi.dependency.Dependency], autoxml.optional]
+     t_Patches = [ [Patch], autoxml.optional]
+     t_Version = [ autoxml.String, autoxml.optional]
+@@ -292,7 +292,7 @@
+ 
+     tag = "PISI"
+ 
+-    t_Source = [ Source, autoxml.mandatory]
++    t_Source = [ [Source], autoxml.mandatory]
+     t_Packages = [ [Package], autoxml.mandatory, "Package"]
+     t_History = [ [Update], autoxml.mandatory]
+     t_Components = [ [component.Component], autoxml.optional, "Component"]
+Index: pisi/operations/build.py
+===================================================================
+--- pisi/operations/build.py	(revision 27869)
++++ pisi/operations/build.py	(working copy)
+@@ -189,6 +189,8 @@
+ 
+         self.read_translations(self.specdir)
+ 
++        print self.spec
++
+         self.sourceArchive = pisi.sourcearchive.SourceArchive(self.spec, self.pkg_work_dir())
+ 
+         self.set_environment_vars()
