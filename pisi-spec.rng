@@ -26,6 +26,9 @@
             <ref name="Name"/>
             <ref name="Homepage"/>
             <ref name="Packager"/>
+            <zeroOrMore>
+                <ref name="ExcludeArch">
+            </zeroOrMore>
             <oneOrMore>
                 <ref name="License"/>
             </oneOrMore>

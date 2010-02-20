@@ -164,6 +164,7 @@ class Source:
     t_Name = [autoxml.String, autoxml.mandatory]
     t_Homepage = [autoxml.String, autoxml.optional]
     t_Packager = [Packager, autoxml.mandatory]
+    t_ExcludeArch = [ [autoxml.String], autoxml.optional]
     t_License = [ [autoxml.String], autoxml.mandatory]
     t_IsA = [ [autoxml.String], autoxml.optional]
     t_PartOf = [autoxml.String, autoxml.optional]

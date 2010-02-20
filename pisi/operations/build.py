@@ -51,6 +51,9 @@ class ActionScriptException(Error):
 class AbandonedFilesException(Error):
     pass
 
+class ExcludedArchitectureException(Error):
+    pass
+
 # Helper Functions
 def get_file_type(path, pinfo_list, install_dir):
     """Return the file type of a path according to the given PathInfo
@@ -240,6 +243,11 @@ class Builder:
 
     def build(self):
         """Build the package in one shot."""
+
+        architecture = ctx.config.values.general.architecture
+        if architecture in self.spec.source.excludeArch:
+            raise ExcludedArchitectureException(_("pspec.xml avoids this package from building for '%s'") % architecture)
+
 
         ctx.ui.status(_("Building PiSi source package: %s") % self.spec.source.name)
 
