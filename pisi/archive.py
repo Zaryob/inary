@@ -47,10 +47,12 @@ class ArchiveBase(object):
     def unpack(self, target_dir, clean_dir = False):
         self.target_dir = target_dir
         # first we check if we need to clean-up our working env.
-        if os.path.exists(self.target_dir) and clean_dir:
-            util.clean_dir(self.target_dir)
+        if os.path.exists(self.target_dir):
+            if clean_dir:
+                util.clean_dir(self.target_dir)
 
-        os.makedirs(self.target_dir)
+        if not os.path.exists(self.target_dir):
+            os.makedirs(self.target_dir)
 
 
 class ArchiveBinary(ArchiveBase):

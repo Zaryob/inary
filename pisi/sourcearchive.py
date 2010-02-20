@@ -28,14 +28,29 @@ import pisi.mirrors
 class Error(pisi.Error):
     pass
 
+class SourceArchives:
+    """This is a wrapper for supporting multiple SourceArchive objects."""
+    def __init__(self, spec, pkg_work_dir):
+        self.sourceArchives = [SourceArchive(a, pkg_work_dir) for a in spec.source.archive]
+
+    def fetch(self, interactive=True):
+        for archive in self.sourceArchives:
+            archive.fetch(interactive)
+
+    def unpack(self, clean_dir=True):
+        self.sourceArchives[0].unpack(clean_dir)
+        for archive in self.sourceArchives[1:]:
+            archive.unpack(clean_dir=False)
+
+
 class SourceArchive:
     """source archive. this is a class responsible for fetching
     and unpacking a source archive"""
-    def __init__(self, spec, pkg_work_dir):
-        self.url = pisi.uri.URI(spec.source.archive.uri)
+    def __init__(self, archive, pkg_work_dir):
+        self.url = pisi.uri.URI(archive.uri)
         self.pkg_work_dir = pkg_work_dir
         self.archiveFile = os.path.join(ctx.config.archives_dir(), self.url.filename())
-        self.archive = spec.source.archive
+        self.archive = archive
 
     def fetch(self, interactive=True):
         if not self.is_cached(interactive):
@@ -45,6 +60,7 @@ class SourceArchive:
                 self.progress = None
 
             try:
+                ctx.ui.info(_("Fetching source from: %s") % self.url.uri)
                 if self.url.get_uri().startswith("mirrors://"):
                     self.fetch_from_mirror()
                 else:
@@ -54,6 +70,9 @@ class SourceArchive:
                     self.fetch_from_fallback()
                 else:
                     raise
+
+            ctx.ui.info(_("Source archive is stored: %s/%s")
+                % (ctx.config.archives_dir(), self.uri.filename()))
 
     def fetch_from_fallback(self):
         archive = os.path.basename(self.url.get_uri())

@@ -171,7 +171,7 @@ class Source:
     t_Summary = [autoxml.LocalText, autoxml.mandatory]
     t_Description = [autoxml.LocalText, autoxml.optional]
     t_Icon = [ autoxml.String, autoxml.optional]
-    t_Archive = [Archive, autoxml.mandatory ]
+    t_Archive = [ [Archive], autoxml.mandatory, "Archive" ]
     t_AdditionalFiles = [ [AdditionalFile], autoxml.optional]
     t_BuildDependencies = [ [pisi.dependency.Dependency], autoxml.optional]
     t_Patches = [ [Patch], autoxml.optional]

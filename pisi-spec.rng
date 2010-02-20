@@ -48,7 +48,9 @@
                 <!-- FIXME: should be oneOrMore -->
                 <ref name="Description"/>
             </zeroOrMore>
-            <ref name="Archive"/>
+            <oneOrMore>
+                <ref name="Archive"/>
+            </oneOrMore>
             <optional>
                 <ref name="AdditionalFiles"/>
             </optional>

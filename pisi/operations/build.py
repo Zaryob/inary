@@ -192,7 +192,7 @@ class Builder:
 
         self.read_translations(self.specdir)
 
-        self.sourceArchive = pisi.sourcearchive.SourceArchive(self.spec, self.pkg_work_dir())
+        self.sourceArchives = pisi.sourcearchive.SourceArchives(self.spec, self.pkg_work_dir())
 
         self.set_environment_vars()
 
@@ -259,8 +259,8 @@ class Builder:
 
         self.check_build_dependencies()
         self.fetch_component()
-        self.fetch_source_archive()
-        self.unpack_source_archive()
+        self.fetch_source_archives()
+        self.unpack_source_archives()
 
         # Grab AdditionalFiles
         self.copy_additional_source_files()
@@ -392,15 +392,12 @@ class Builder:
             ctx.ui.info(_('Source is part of %s component') % comp.name)
             self.spec.source.partOf = comp.name
 
-    def fetch_source_archive(self):
-        ctx.ui.info(_("Fetching source from: %s") % self.spec.source.archive.uri)
-        self.sourceArchive.fetch()
-        ctx.ui.info(_("Source archive is stored: %s/%s")
-                %(ctx.config.archives_dir(), self.spec.source.archive.name))
+    def fetch_source_archives(self):
+        self.sourceArchives.fetch()
 
-    def unpack_source_archive(self):
-        ctx.ui.info(_("Unpacking archive..."))
-        self.sourceArchive.unpack()
+    def unpack_source_archives(self):
+        ctx.ui.info(_("Unpacking archive(s)..."))
+        self.sourceArchives.unpack()
         # apply the patches and prepare a source directory for build.
         if self.apply_patches():
             ctx.ui.info(_(" unpacked (%s)") % self.pkg_work_dir())
@@ -1094,12 +1091,12 @@ order = {"none": 0,
 def __buildState_fetch(pb):
     # fetch is the first state to run.
     pb.patch_exists()
-    pb.fetch_source_archive()
+    pb.fetch_source_archives()
 
 def __buildState_unpack(pb, last):
     if order[last] < order["fetch"]:
         __buildState_fetch(pb)
-    pb.unpack_source_archive()
+    pb.unpack_source_archives()
 
 def __buildState_setupaction(pb, last):
     if order[last] < order["unpack"]:
