@@ -1,0 +1,29 @@
+# Generate encrypted private key and self signed certificate:
+# (Skip this step if you already have a key and a certificate)
+
+mkdir certs
+openssl genrsa -des3 -out certs/enc_key.pem 1024
+openssl req -new -subj '/C=TR/ST=Kocaeli/L=Gebze/CN=Pardus' -key certs/enc_key.pem -out certs/req.pem
+openssl req -x509 -key certs/enc_key.pem -in certs/req.pem -out certs/cert.pem -days 365
+
+# Feel free to share 'certs/cert.pem' with anyone, keep others to yourself.
+
+# Create a test file:
+
+mkdir -p dummy/a/b/c
+echo "abc" > dummy/test.txt
+echo "123" > dummy/a/test.txt
+echo "ABC" > dummy/a/b/test.txt
+echo "^+%" > dummy/a/b/c/test.txt
+zip -r test.zip dummy
+rm -rf dummy
+
+# Sign ZIP file:
+
+./pisign.py sign test.zip certs/enc_key.pem ********
+
+# Verify ZIP file:
+
+./pisign.py verify test.zip certs/cert.pem
+
+# Change test.zip content and try to verify again.
