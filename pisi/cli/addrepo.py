@@ -55,11 +55,10 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
         pisi.api.remove_repo(repo)
 
     def check_arch_and_distro(self, repo):
-        warning = _("Repository %s does not match. Removing %s from system.")
         if not self.repodb.check_architecture(repo):
-            self.warn_and_remove(warning % ("architecture", repo), repo)
+            self.warn_and_remove(_("Repository architecture does not match. Removing %s from system.") % repo)
         if not self.repodb.check_distribution(repo):
-            self.warn_and_remove(warning % ("distribution", repo), repo)
+            self.warn_and_remove(_("Repository distribution does not match. Removing %s from system.") % repo)
 
     def run(self):
 
