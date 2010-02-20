@@ -10,7 +10,7 @@
 # Please read the COPYING file.
 #
 
-from pisi.specfile import SpecFile, Package, Update, Path, Action, AnyDependency
+from pisi.specfile import SpecFile, Package, Update, Path, Action, Archive, AnyDependency
 from pisi.dependency import Dependency
 from pisi.conflict import Conflict
 from pisi.pxml.autoxml import LocalText
@@ -124,10 +124,13 @@ class Pspec:
         self.update.name = unicode(name)
         self.update.email = email
 
-    def set_archive(self, sha1sum, type, uri):
-        self.pspec.source.archive.sha1sum = sha1sum
-        self.pspec.source.archive.type = type
-        self.pspec.source.archive.uri = uri
+    def add_archive(self, sha1sum, type, uri):
+        archive = Archive()
+        archive.sha1sum = sha1sum
+        archive.type = type
+        archive.uri = uri
+
+        self.pspec.source.archive.append(archive)
 
     def add_file_path(self, path, type):
         p = Path()

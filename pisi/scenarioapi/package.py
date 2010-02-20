@@ -43,7 +43,7 @@ class Package:
         pspec.set_source(consts.homepage, consts.summary % self.name,
                          consts.description % self.name, consts.license, self.partOf)
         pspec.set_packager(consts.packager_name, consts.packager_email)
-        pspec.set_archive(consts.skel_sha1sum, consts.skel_type, consts.skel_uri)
+        pspec.add_archive(consts.skel_sha1sum, consts.skel_type, consts.skel_uri)
         pspec.set_package(self.dependencies, self.conflicts)
         pspec.add_file_path(consts.skel_bindir, consts.skel_dirtype)
         pspec.set_history(self.date, self.version)
