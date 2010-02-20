@@ -149,7 +149,7 @@ class ComarProvide:
 class Archive:
 
     s_uri = [ autoxml.String, autoxml.mandatory ]
-    a_type =[ autoxml.String, autoxml.mandatory ]
+    a_type = [ autoxml.String, autoxml.mandatory ]
     a_sha1sum =[ autoxml.String, autoxml.mandatory ]
 
     def decode_hook(self, node, errs, where):
@@ -172,6 +172,7 @@ class Source:
     t_Description = [autoxml.LocalText, autoxml.optional]
     t_Icon = [ autoxml.String, autoxml.optional]
     t_Archive = [Archive, autoxml.mandatory ]
+    t_AdditionalFiles = [ [AdditionalFile], autoxml.optional]
     t_BuildDependencies = [ [pisi.dependency.Dependency], autoxml.optional]
     t_Patches = [ [Patch], autoxml.optional]
     t_Version = [ autoxml.String, autoxml.optional]

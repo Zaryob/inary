@@ -262,6 +262,9 @@ class Builder:
         self.fetch_source_archive()
         self.unpack_source_archive()
 
+        # Grab AdditionalFiles
+        self.copy_additional_source_files()
+
         self.run_setup_action()
         self.run_build_action()
         if ctx.get_option('debug') and not ctx.get_option('ignore_check'):
@@ -350,8 +353,7 @@ class Builder:
                 self.download(comaruri, pisi.util.join_path(self.destdir, ctx.const.comar_dir))
 
     def fetch_additionalFiles(self):
-        spec = self.spec
-        for pkg in spec.packages:
+        for pkg in self.spec.packages + self.spec.source:
             for afile in pkg.additionalFiles:
                 file_name = os.path.basename(afile.filename)
                 dir_name = os.path.dirname(afile.filename)
@@ -455,6 +457,16 @@ class Builder:
                     abandoned_files.append(fpath)
 
         return abandoned_files
+
+    def copy_additional_source_files(self):
+        # store additional files
+        for afile in self.spec.source.additionalFiles:
+            src = os.path.join(self.specdir, ctx.const.files_dir, afile.filename)
+            dest = os.path.join(self.srcDir, afile.target)
+            pisi.util.copy_file(src, dest)
+            if afile.permission:
+                # mode is octal!
+                os.chmod(dest, int(afile.permission, 8))
 
     def compile_action_script(self):
         """Compiles given actions.py to check syntax error in it and sets the actionLocals and actionGlobals"""

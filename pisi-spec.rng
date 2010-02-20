@@ -50,6 +50,9 @@
             </zeroOrMore>
             <ref name="Archive"/>
             <optional>
+                <ref name="AdditionalFiles"/>
+            </optional>
+            <optional>
                 <ref name="BuildDependencies"/>
             </optional>
             <optional>
