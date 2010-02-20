@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2010-02-20 12:46+EET\n"
+"POT-Creation-Date: 2010-02-20 12:58+EET\n"
 "PO-Revision-Date: 2010-01-08 09:46+0200\n"
 "Last-Translator: Faik Uygur <faik@pardus.org.tr>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -699,12 +699,15 @@ msgstr "Depo indeksini indirme ve dağıtım sürümü ve mimarisini denetleme"
 msgid "Add repository at given position (0 is first)"
 msgstr "Belirtilen konuma depo ekle (ilk konum 0'dır)."
 
-#: pisi/cli/addrepo.py:58
-#, fuzzy
-msgid "Repository %s does not match. Removing %s from system."
-msgstr "%s deposuna erişilemedi. %s sistemden kaldırılıyor."
+#: pisi/cli/addrepo.py:59
+msgid "Repository architecture does not match. Removing %s from system."
+msgstr "Depo mimarisi sisteminizle uyumsuz. %s deposu sistemden kaldırılıyor."
 
-#: pisi/cli/addrepo.py:76
+#: pisi/cli/addrepo.py:61
+msgid "Repository distribution does not match. Removing %s from system."
+msgstr "Depo dağıtımı sisteminizle uyumsuz. %s deposu sistemden kaldırılıyor."
+
+#: pisi/cli/addrepo.py:75
 msgid ""
 "Add %s repository without updating the database?\n"
 "By confirming this you are also adding the repository to your system without "
@@ -712,10 +715,11 @@ msgid ""
 "Do you want to continue?"
 msgstr ""
 "%s deposunu veritabanını güncellemeden eklemek istediniz.\n"
-"Bu işlemi onayladığınızda, depoyu sisteminize depo dağıtım sürümü ve mimarisi denetlenmeden "
-"eklemiş olacaksınız. Devam etmek istediğinize emin misiniz?"
+"Bu işlemi onayladığınızda, depoyu sisteminize depo dağıtım sürümü ve "
+"mimarisi denetlenmeden eklemiş olacaksınız. Devam etmek istediğinize emin "
+"misiniz?"
 
-#: pisi/cli/addrepo.py:90
+#: pisi/cli/addrepo.py:89
 msgid "%s repository could not be reached. Removing %s from system."
 msgstr "%s deposuna erişilemedi. %s sistemden kaldırılıyor."
 
@@ -2258,8 +2262,7 @@ msgstr "Bant genişliği kullanımı %s KB/s ile sınırlı."
 msgid ""
 "Remote file can not be reached. Previously downloaded part of the file will "
 "be removed."
-msgstr ""
-"Uzak dosyaya erişilemedi. Dosyanın yarım kalan parçası silinecek."
+msgstr "Uzak dosyaya erişilemedi. Dosyanın yarım kalan parçası silinecek."
 
 #: pisi/fetcher.py:221
 msgid ""

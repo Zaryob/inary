@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
-"POT-Creation-Date: 2010-02-20 12:46+EET\n"
+"POT-Creation-Date: 2010-02-20 12:58+EET\n"
 "PO-Revision-Date: 2010-01-13 19:42-0300\n"
 "Last-Translator: Klemens Häckel <click3d at linuxmail (dot) org>\n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
@@ -702,12 +702,17 @@ msgstr ""
 msgid "Add repository at given position (0 is first)"
 msgstr "Depot in angegebene Position hinzufügen (0 ist die Erste)"
 
-#: pisi/cli/addrepo.py:58
+#: pisi/cli/addrepo.py:59
 #, fuzzy
-msgid "Repository %s does not match. Removing %s from system."
+msgid "Repository architecture does not match. Removing %s from system."
 msgstr "Depot %s konnte nicht kontaktiert werden. Entferne %s vom System."
 
-#: pisi/cli/addrepo.py:76
+#: pisi/cli/addrepo.py:61
+#, fuzzy
+msgid "Repository distribution does not match. Removing %s from system."
+msgstr "Depot %s konnte nicht kontaktiert werden. Entferne %s vom System."
+
+#: pisi/cli/addrepo.py:75
 msgid ""
 "Add %s repository without updating the database?\n"
 "By confirming this you are also adding the repository to your system without "
@@ -715,7 +720,7 @@ msgid ""
 "Do you want to continue?"
 msgstr ""
 
-#: pisi/cli/addrepo.py:90
+#: pisi/cli/addrepo.py:89
 msgid "%s repository could not be reached. Removing %s from system."
 msgstr "Depot %s konnte nicht kontaktiert werden. Entferne %s vom System."
 

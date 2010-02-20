@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
-"POT-Creation-Date: 2010-02-20 12:46+EET\n"
+"POT-Creation-Date: 2010-02-20 12:58+EET\n"
 "PO-Revision-Date: 2010-01-01 22:22+0100\n"
 "Last-Translator: Philippe Svetoslavsky <philsvet@gmail.com>\n"
 "Language-Team: French <pardus-translators@pardus.org.tr>\n"
@@ -694,12 +694,17 @@ msgstr ""
 msgid "Add repository at given position (0 is first)"
 msgstr "Ajouter un dépôt à la position donnée (0 est la première)"
 
-#: pisi/cli/addrepo.py:58
+#: pisi/cli/addrepo.py:59
 #, fuzzy
-msgid "Repository %s does not match. Removing %s from system."
+msgid "Repository architecture does not match. Removing %s from system."
 msgstr "Impossible d'atteindre le dépôt %s. Suppression de %s du système."
 
-#: pisi/cli/addrepo.py:76
+#: pisi/cli/addrepo.py:61
+#, fuzzy
+msgid "Repository distribution does not match. Removing %s from system."
+msgstr "Impossible d'atteindre le dépôt %s. Suppression de %s du système."
+
+#: pisi/cli/addrepo.py:75
 msgid ""
 "Add %s repository without updating the database?\n"
 "By confirming this you are also adding the repository to your system without "
@@ -707,7 +712,7 @@ msgid ""
 "Do you want to continue?"
 msgstr ""
 
-#: pisi/cli/addrepo.py:90
+#: pisi/cli/addrepo.py:89
 msgid "%s repository could not be reached. Removing %s from system."
 msgstr "Impossible d'atteindre le dépôt %s. Suppression de %s du système."
 
