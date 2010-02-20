@@ -151,6 +151,7 @@ class Archive:
     s_uri = [ autoxml.String, autoxml.mandatory ]
     a_type = [ autoxml.String, autoxml.mandatory ]
     a_sha1sum =[ autoxml.String, autoxml.mandatory ]
+    a_target =[ autoxml.String, autoxml.optional ]
 
     def decode_hook(self, node, errs, where):
         self.name = os.path.basename(self.uri)

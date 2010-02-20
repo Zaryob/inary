@@ -120,4 +120,5 @@ class SourceArchive:
             raise Error, _("unpack: check_file_hash failed")
 
         archive = pisi.archive.Archive(self.archiveFile, self.archive.type)
-        archive.unpack(self.pkg_work_dir, clean_dir)
+        target_dir = os.path.join(self.pkg_work_dir, self.archive.target or "")
+        archive.unpack(target_dir, clean_dir)
