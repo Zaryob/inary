@@ -160,6 +160,16 @@
         </element>
     </define>
 
+    <!-- ExcludeArch -->
+    <define name="ExcludeArch">
+        <element name="ExcludeArch">
+            <choice>
+                <value>x86</value>
+                <value>x86_64</value>
+            </choice>
+        </element>
+    </define>
+
     <!-- License -->
     <define name="License">
         <element name="License">
