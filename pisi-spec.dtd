@@ -11,12 +11,14 @@
 	Homepage |
 	Icon |
 	Packager |
+	ExcludeArch |
 	License |
 	IsA |
 	PartOf |
 	Summary |
 	Description |
 	Archive |
+	AdditionalFiles |
 	Patches |
 	BuildDependencies
 )*>
@@ -29,6 +31,8 @@
 
 <!ELEMENT Packager (Name, Email)>
 <!ELEMENT Email (#PCDATA)>
+
+<!ELEMENT ExcludeArch (#PCDATA)>
 
 <!ELEMENT License (#PCDATA)>
 
