@@ -72,7 +72,7 @@ class SourceArchive:
                     raise
 
             ctx.ui.info(_("Source archive is stored: %s/%s")
-                % (ctx.config.archives_dir(), self.uri.filename()))
+                % (ctx.config.archives_dir(), self.url.filename()))
 
     def fetch_from_fallback(self):
         archive = os.path.basename(self.url.get_uri())
