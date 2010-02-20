@@ -686,16 +686,14 @@ msgid "add-repo options"
 msgstr "add-repo seçenekleri"
 
 #: pisi/cli/addrepo.py:46
-#, fuzzy
 msgid "Ignore repository distribution and architecture check"
-msgstr "Dağıtım sürümü ve mimarisi kontrolünü atla"
+msgstr "Depo dağıtım sürümü ve mimari denetimini atla"
 
 #: pisi/cli/addrepo.py:47
-#, fuzzy
 msgid ""
 "Does not fetch repository index and does not check distribution and "
 "architecture match"
-msgstr "Dağıtım mimarisi uyuşmadığı için depo eklenemedi"
+msgstr "Depo indeksini indirme ve dağıtım sürümü ve mimarisini denetleme"
 
 #: pisi/cli/addrepo.py:50
 msgid "Add repository at given position (0 is first)"
@@ -713,6 +711,9 @@ msgid ""
 "checking the distribution and the architecture of the repository.\n"
 "Do you want to continue?"
 msgstr ""
+"%s deposunu veritabanını güncellemeden eklemek istediniz.\n"
+"Bu işlemi onayladığınızda, depoyu sisteminize depo dağıtım sürümü ve mimarisi denetlenmeden "
+"eklemiş olacaksınız. Devam etmek istediğinize emin misiniz?"
 
 #: pisi/cli/addrepo.py:90
 msgid "%s repository could not be reached. Removing %s from system."
@@ -2254,13 +2255,11 @@ msgid "Bandwidth usage is limited to %s KB/s"
 msgstr "Bant genişliği kullanımı %s KB/s ile sınırlı."
 
 #: pisi/fetcher.py:212
-#, fuzzy
 msgid ""
 "Remote file can not be reached. Previously downloaded part of the file will "
 "be removed."
 msgstr ""
-"Sunucu kısmî indirimleri desteklemiyor. Dosyanın daha önce indirilen "
-"parçasının üzerine yazılacak."
+"Uzak dosyaya erişilemedi. Dosyanın yarım kalan parçası silinecek."
 
 #: pisi/fetcher.py:221
 msgid ""
@@ -2384,7 +2383,7 @@ msgstr "%s isimli kaynak paket etkin depolarda bulunamadı."
 
 #: pisi/operations/build.py:249
 msgid "pspec.xml avoids this package from building for '%s'"
-msgstr ""
+msgstr "pspec.xml bu kaynak paketin '%s' için inşa edilmesini engelliyor"
 
 #: pisi/operations/build.py:252
 msgid "Building PiSi source package: %s"
@@ -2424,9 +2423,8 @@ msgid "Source is part of %s component"
 msgstr "Kaynak %s bileşeninin parçası"
 
 #: pisi/operations/build.py:399
-#, fuzzy
 msgid "Unpacking archive(s)..."
-msgstr "Arşiv açılıyor..."
+msgstr "Arşiv(ler) açılıyor..."
 
 #: pisi/operations/build.py:403
 msgid " unpacked (%s)"
@@ -2647,14 +2645,12 @@ msgid "No packages to emerge."
 msgstr "Çekilip derlenecek ve kurulacak paket yok."
 
 #: pisi/operations/emerge.py:51
-#, fuzzy
 msgid ""
 "The following list of packages will be installed\n"
 "from repository in the respective order to satisfy dependencies:\n"
 msgstr "Bağımlılıkları sağlamak için bu paketler verilen sırada kurulacak:\n"
 
 #: pisi/operations/emerge.py:54
-#, fuzzy
 msgid ""
 "The following list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
@@ -2809,7 +2805,6 @@ msgid "No packages to remove."
 msgstr "Kaldırılacak paket yok."
 
 #: pisi/operations/remove.py:68
-#, fuzzy
 msgid ""
 "The following list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
@@ -2970,9 +2965,8 @@ msgstr "Nesne kodlanamadı."
 
 # pisi/xmlfile.py:436 :535
 #: pisi/pxml/autoxml.py:735 pisi/pxml/autoxml.py:854
-#, fuzzy
 msgid "Object cannot be formatted"
-msgstr "Nesne kodlanamadı."
+msgstr "Nesne biçimlendirilemedi"
 
 #: pisi/pxml/autoxml.py:751
 msgid "List type must contain only one element"
