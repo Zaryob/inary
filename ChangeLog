@@ -3,6 +3,7 @@
 		for repository architecture as the current infrastructure
 		doesn't allow a unified repository for multiple
 		architectures.
+		* pisi/operations/build.py: Refactor get_file_type function.
 
 2010-02-12 Serdar Dalgıç <serdar@pardus.org.tr>
 		* pisi/operations/build.py: Use glob.glob0 and lstrip instead of

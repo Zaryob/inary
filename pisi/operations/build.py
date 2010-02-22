@@ -19,6 +19,7 @@ import stat
 import pwd
 import grp
 import locale
+import fnmatch
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -55,18 +56,29 @@ class ExcludedArchitectureException(Error):
     pass
 
 # Helper Functions
-def get_file_type(path, pinfo_list, install_dir):
+def get_file_type(path, pinfo_list):
     """Return the file type of a path according to the given PathInfo
     list"""
 
-    Match = lambda x: [match for match in glob.glob0(install_dir, x.lstrip("/")) if pisi.util.join_path(install_dir, path).find(match) > -1]
+    path = "/%s" % path
+    info = None
+    glob_match = parent_match = None
 
-    def Sort(x):
-        x.sort(reverse=True)
-        return x
+    for pinfo in pinfo_list:
+        if path == pinfo.path:
+            info = pinfo
+            break
 
-    best_matched_path = Sort([pinfo.path for pinfo in pinfo_list if Match(pinfo.path)])[0]
-    info = [pinfo for pinfo in pinfo_list if best_matched_path == pinfo.path][0]
+        elif fnmatch.fnmatch(path, pinfo.path):
+            glob_match = pinfo
+
+        elif fnmatch.fnmatch(path, "%s/*" % pinfo.path):
+            if parent_match is None or parent_match.path < pinfo.path:
+                parent_match = pinfo
+
+    else:
+        info = glob_match or parent_match
+
     return info.fileType, info.permanent
 
 def check_path_collision(package, pkgList):
@@ -741,7 +753,7 @@ class Builder:
                     # don't include this file into the package.
                     continue
                 frpath = pisi.util.removepathprefix(install_dir, fpath) # relative path
-                ftype, permanent = get_file_type(frpath, package.files, install_dir)
+                ftype, permanent = get_file_type(frpath, package.files)
                 fsize = long(pisi.util.dir_size(fpath))
                 if not os.path.islink(fpath):
                     st = os.stat(fpath)
