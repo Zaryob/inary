@@ -1,3 +1,9 @@
+2010-02-22 Fatih Aşıcı <fatih@pardus.org.tr>
+		* pisi/cli/addrepo.py, pisi/db/repodb.py: Remove the check
+		for repository architecture as the current infrastructure
+		doesn't allow a unified repository for multiple
+		architectures.
+
 2010-02-12 Serdar Dalgıç <serdar@pardus.org.tr>
 		* pisi/operations/build.py: Use glob.glob0 and lstrip instead of
 		glob.glob. Typos in filePaths in pspec.xml were sometimes ignored and
@@ -74,7 +80,7 @@
 		repository.
 
 2009-12-14 Serdar Dalgıç <serdar@pardus.org.tr>
-		*	Add architecture and distribution release check to pisi add-repo
+		* Add architecture and distribution release check to pisi add-repo
 		New parameter --ignore-check is added to pisi ar too.
 
 2009-12-11 Serdar Dalgıç <serdar@pardus.org.tr>

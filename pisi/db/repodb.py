@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005 - 2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -214,10 +214,6 @@ class RepoDB(lazydb.LazyDB):
     def repo_active(self, name):
         return self.repoorder.get_status(name) == "active"
 
-    def get_architecture(self, name):
-        doc = self.get_repo_doc(name)
-        return doc.getTag("Distribution").getTagData("Architecture")
-
     def get_distribution(self, name):
         doc = self.get_repo_doc(name)
         return doc.getTag("Distribution").getTagData("SourceName")
@@ -226,11 +222,6 @@ class RepoDB(lazydb.LazyDB):
         doc = self.get_repo_doc(name)
         return doc.getTag("Distribution").getTagData("Version")
 
-    def check_architecture(self, name):
-        return self.get_architecture(name) == ctx.config.values.general.architecture
-
     def check_distribution(self, name):
         return self.get_distribution(name) == ctx.config.values.general.distribution and \
                  self.get_distribution_release(name) == ctx.config.values.general.distribution_release
-
-    
