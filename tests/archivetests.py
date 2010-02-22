@@ -13,37 +13,39 @@ class ArchiveTestCase(unittest.TestCase):
     def testTarUnpack(self):
         spec = SpecFile('repos/pardus-2007/system/base/curl/pspec.xml')
         targetDir = '/tmp/tests'
-        archiv = sourcearchive.SourceArchive(spec, targetDir)
-        archiv.unpack()
-        assert spec.source.archive.type == 'targz'
+        archives = sourcearchive.SourceArchives(spec, targetDir)
+        archives.unpack()
+        for archive in spec.source.archive:
+            assert archive.type == 'targz'
 
 
     def testUnpackTarCond(self):
         spec = SpecFile('repos/pardus-2007/system/base/curl/pspec.xml')
         targetDir = '/tmp'
-        archiv = sourcearchive.SourceArchive(spec, targetDir)
-        url = uri.URI(spec.source.archive.uri)
-        filePath = join(pisi.context.config.archives_dir(), url.filename())
-        if util.sha1_file(filePath) != spec.source.archive.sha1sum:
-            fetch = fetcher.Fetcher(spec.source.archive.uri, targetDir)
-            fetch.fetch()
-        assert spec.source.archive.type == 'targz'
+        archives = sourcearchive.SourceArchives(spec, targetDir)
+        for archive in spec.source.archive:
+            url = uri.URI(archive.uri)
+            filePath = join(pisi.context.config.archives_dir(), url.filename())
+            if util.sha1_file(filePath) != archive.sha1sum:
+                fetch = fetcher.Fetcher(archive.uri, targetDir)
+                fetch.fetch()
+            assert archive.type == 'targz'
 
     def testZipUnpack(self):
         spec = SpecFile('repos/pardus-2007/system/base/openssl/pspec.xml')
         targetDir = '/tmp/tests'
-        archiv = sourcearchive.SourceArchive(spec, targetDir)
-        archiv.fetch()
-        archiv.unpack()
+        archives = sourcearchive.SourceArchives(spec, targetDir)
+        archives.fetch()
+        archives.unpack()
         assert not exists(targetDir + '/openssl')
 
     def testMakeZip(self):
         spec = SpecFile('repos/pardus-2007/system/base/openssl/pspec.xml')
         targetDir = '/tmp/tests'
-        archiv = sourcearchive.SourceArchive(spec, targetDir)
-        archiv.fetch(interactive = False)
-        archiv.unpack(clean_dir = True)
-        del archiv
+        archives = sourcearchive.SourceArchives(spec, targetDir)
+        archives.fetch(interactive = False)
+        archives.unpack(clean_dir = True)
+        del archives
 
         newDir = targetDir + '/newZip'
         zip = archive.ArchiveZip(newDir, 'zip', 'w')
