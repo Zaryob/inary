@@ -1,3 +1,9 @@
+2010-02-12 Serdar Dalgıç <serdar@pardus.org.tr>
+		* pisi/operations/build.py: Use glob.glob0 and lstrip instead of
+		glob.glob. Typos in filePaths in pspec.xml were sometimes ignored and
+		abandoned files were not succesfully caught in some cases. Now it is
+		fixed. Thanks Fatih for the collaboration.
+
 2010-02-12 Gökçen Eraslan <gokcen@pardus.org.tr>
 		* pisi/actionsapi/shelltools.py: Replace FileError with ctx.ui.error
 		since FileError is defined in pisitoolsfunctions.

@@ -59,7 +59,7 @@ def get_file_type(path, pinfo_list, install_dir):
     """Return the file type of a path according to the given PathInfo
     list"""
 
-    Match = lambda x: [match for match in glob.glob(install_dir + x) if pisi.util.join_path(install_dir, path).find(match) > -1]
+    Match = lambda x: [match for match in glob.glob0(install_dir, x.lstrip("/")) if pisi.util.join_path(install_dir, path).find(match) > -1]
 
     def Sort(x):
         x.sort(reverse=True)
