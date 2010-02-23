@@ -54,7 +54,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
         ctx.ui.warning(message)
         pisi.api.remove_repo(repo)
 
-    def check_arch_and_distro(self, repo):
+    def check_distro(self, repo):
         if not self.repodb.check_distribution(repo):
             self.warn_and_remove(_("Repository distribution does not match. Removing %s from system.") % repo)
 
@@ -82,7 +82,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
                 try:
                     pisi.api.update_repo(name)
                     if not ctx.get_option('ignore_check'):
-                        self.check_arch_and_distro(name)
+                        self.check_distro(name)
                 except (pisi.fetcher.FetchError, IOError):
                     warning = _("%s repository could not be reached. Removing %s from system.") % (name, name)
                     self.warn_and_remove(warning, name)
