@@ -72,7 +72,7 @@ def get_file_type(path, pinfo_list):
         elif fnmatch.fnmatch(path, pinfo.path):
             glob_match = pinfo
 
-        elif fnmatch.fnmatch(path, "%s/*" % pinfo.path):
+        elif fnmatch.fnmatch(path, pisi.util.join_path(pinfo.path, "*")):
             if parent_match is None or parent_match.path < pinfo.path:
                 parent_match = pinfo
 
