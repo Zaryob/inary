@@ -10,19 +10,19 @@
 # Klemens Häckel <click3d at linuxmail dot org>, 2008, 2009.
 # Klemens Häckel <click3d at linuxmail dot com>, 2008, 2009.
 # Klemens Häckel <click3d at linuxmail _ org>, 2009.
-# Klemens Häckel <click3d at linuxmail (dot) org>, 2009.
+# Klemens Häckel <click3d at linuxmail (dot) org>, 2009, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "POT-Creation-Date: 2010-02-20 12:58+EET\n"
-"PO-Revision-Date: 2009-12-17 21:36-0300\n"
-"Last-Translator: Klemens Häckel <click3d at linuxmail (dot) org>\n"
+"PO-Revision-Date: 2010-02-22 21:30-0300\n"
+"Last-Translator: \n"
 "Language-Team: Spanish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: Lokalize 0.3\n"
+"X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: pisi-cli:41
@@ -702,32 +702,28 @@ msgid "add-repo options"
 msgstr "opciones add-repo"
 
 #: pisi/cli/addrepo.py:46
-#, fuzzy
 msgid "Ignore repository distribution and architecture check"
-msgstr "Saltar comprobación de architectura y versión"
+msgstr "Ignorar verificación de repositorio y de arquitectura"
 
 #: pisi/cli/addrepo.py:47
-#, fuzzy
 msgid ""
 "Does not fetch repository index and does not check distribution and "
 "architecture match"
 msgstr ""
-"No se puede agregar el repositorio, porque la la architectura del sistema es "
-"diferente"
+"No busca lista de archivos del repositorio y no verifica si coincide "
+"distribución y arquitectura"
 
 #: pisi/cli/addrepo.py:50
 msgid "Add repository at given position (0 is first)"
 msgstr "Agregar repositorio en posición indicada (inicia con 0)"
 
 #: pisi/cli/addrepo.py:59
-#, fuzzy
 msgid "Repository architecture does not match. Removing %s from system."
-msgstr "Repositorio %s inaccesible. Removiendo %s del sistema."
+msgstr "Arquitectura de repositorio no coincide. Removiendo %s del sistema."
 
 #: pisi/cli/addrepo.py:61
-#, fuzzy
 msgid "Repository distribution does not match. Removing %s from system."
-msgstr "Repositorio %s inaccesible. Removiendo %s del sistema."
+msgstr "Distribución del repositorio no coincide. Removiendo %s del sistema."
 
 #: pisi/cli/addrepo.py:75
 msgid ""
@@ -2321,13 +2317,12 @@ msgstr "Uso de ancho de banda está limitado a %s KB/s"
 
 # favor verificar
 #: pisi/fetcher.py:212
-#, fuzzy
 msgid ""
 "Remote file can not be reached. Previously downloaded part of the file will "
 "be removed."
 msgstr ""
-"Servidor no soporta descarga parciales. La parte del archivo descargado "
-"anteriormente será sobreescrito."
+"No posible adquirir archivo remoto. Se eliminará el archivo parcialmente "
+"descargado."
 
 # favor verificar
 #: pisi/fetcher.py:221
@@ -2496,9 +2491,8 @@ msgid "Source is part of %s component"
 msgstr "Fuente es parte de componente %s "
 
 #: pisi/operations/build.py:399
-#, fuzzy
 msgid "Unpacking archive(s)..."
-msgstr "Descompactando archivo..."
+msgstr "Descompactando archivo(s)..."
 
 #: pisi/operations/build.py:403
 msgid " unpacked (%s)"
@@ -2729,21 +2723,19 @@ msgid "No packages to emerge."
 msgstr "No hay paquetes para emerge."
 
 #: pisi/operations/emerge.py:51
-#, fuzzy
 msgid ""
 "The following list of packages will be installed\n"
 "from repository in the respective order to satisfy dependencies:\n"
 msgstr ""
-"Se instalará la siguiente lista mínima de paquetes\n"
+"Se instalará la siguiente lista de paquetes\n"
 "del repositorio en el orden indicado para satisfacer dependencias:\n"
 
 #: pisi/operations/emerge.py:54
-#, fuzzy
 msgid ""
 "The following list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
 msgstr ""
-"La siguiente lista mínima de paquetes se generará e instalará\n"
+"La siguiente lista de paquetes se generará e instalará\n"
 "en el orden indicado, para satisfacer las dependencias:\n"
 
 #: pisi/operations/emerge.py:62 pisi/operations/install.py:82
@@ -2900,12 +2892,11 @@ msgid "No packages to remove."
 msgstr "No hay paquetes para remover."
 
 #: pisi/operations/remove.py:68
-#, fuzzy
 msgid ""
 "The following list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
 msgstr ""
-"La siguiente lista mínima de paquetes será removida\n"
+"La siguiente lista de paquetes será removida\n"
 "en el orden indicado, para satisfacer las dependencias:\n"
 
 #: pisi/operations/remove.py:73
@@ -3065,9 +3056,8 @@ msgid "Object cannot be encoded"
 msgstr "No posible codificar objeto"
 
 #: pisi/pxml/autoxml.py:735 pisi/pxml/autoxml.py:854
-#, fuzzy
 msgid "Object cannot be formatted"
-msgstr "No posible codificar objeto"
+msgstr "No posible formatear al objeto"
 
 #: pisi/pxml/autoxml.py:751
 msgid "List type must contain only one element"
