@@ -43,8 +43,8 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
     def options(self):
 
         group = optparse.OptionGroup(self.parser, _("add-repo options"))
-        group.add_option("--ignore-check", action="store_true", default=False, help=_("Ignore repository distribution and architecture check"))
-        group.add_option("--no-fetch", action="store_true", default=False, help=_("Does not fetch repository index and does not check distribution and architecture match"))
+        group.add_option("--ignore-check", action="store_true", default=False, help=_("Ignore repository distribution check"))
+        group.add_option("--no-fetch", action="store_true", default=False, help=_("Does not fetch repository index and does not check distribution match"))
         group.add_option("--at", action="store",
                                type="int", default=None,
                                help=_("Add repository at given position (0 is first)"))
@@ -54,12 +54,9 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
         ctx.ui.warning(message)
         pisi.api.remove_repo(repo)
 
-    def check_arch_and_distro(self, repo):
-        warning = _("Repository %s does not match. Removing %s from system.")
-        if not self.repodb.check_architecture(repo):
-            self.warn_and_remove(warning % ("architecture", repo), repo)
+    def check_distro(self, repo):
         if not self.repodb.check_distribution(repo):
-            self.warn_and_remove(warning % ("distribution", repo), repo)
+            self.warn_and_remove(_("Repository distribution does not match. Removing %s from system.") % repo, repo)
 
     def run(self):
 
@@ -75,7 +72,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
             if ctx.get_option('no_fetch'):
                 if not ctx.ui.confirm(_('Add %s repository without updating the database?\nBy confirming '
                                         'this you are also adding the repository to your system without '
-                                        'checking the distribution and the architecture of the repository.\n'
+                                        'checking the distribution of the repository.\n'
                                         'Do you want to continue?') % name):
                     return
 
@@ -85,7 +82,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
                 try:
                     pisi.api.update_repo(name)
                     if not ctx.get_option('ignore_check'):
-                        self.check_arch_and_distro(name)
+                        self.check_distro(name)
                 except (pisi.fetcher.FetchError, IOError):
                     warning = _("%s repository could not be reached. Removing %s from system.") % (name, name)
                     self.warn_and_remove(warning, name)
