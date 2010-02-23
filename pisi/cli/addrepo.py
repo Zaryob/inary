@@ -56,7 +56,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 
     def check_distro(self, repo):
         if not self.repodb.check_distribution(repo):
-            self.warn_and_remove(_("Repository distribution does not match. Removing %s from system.") % repo)
+            self.warn_and_remove(_("Repository distribution does not match. Removing %s from system.") % repo, repo)
 
     def run(self):
 
