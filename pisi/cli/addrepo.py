@@ -57,9 +57,8 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
     def check_distro(self, repo):
         if not self.repodb.get_distribution(repo):
             ctx.ui.warning(
-                _("The repository might not be compatible with this "
-                  "distribution as it does not contain information "
-                  "about the distribution."))
+                _("Unable to check compatibility of this repository as "
+                  "it does not have information about the distribution."))
             return
 
         if not self.repodb.check_distribution(repo):
