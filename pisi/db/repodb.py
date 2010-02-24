@@ -223,9 +223,12 @@ class RepoDB(lazydb.LazyDB):
         return doc.getTag("Distribution").getTagData("Version")
 
     def check_distribution(self, name):
-        if not self.get_distribution(name):
-            ctx.ui.warning('Distribution check is ignored due to missing DistributionName tag in the index file.')
+        dist_name = self.get_distribution(name)
+        dist_release = self.get_distribution_release(name)
+
+        if not dist_name:
+            # If distribution info is not available, ignore for now.
             return True
-        else:
-            return self.get_distribution(name) == ctx.config.values.general.distribution and \
-                 self.get_distribution_release(name) == ctx.config.values.general.distribution_release
+
+        return dist_name == ctx.config.values.general.distribution and \
+                dist_release == ctx.config.values.general.distribution_release
