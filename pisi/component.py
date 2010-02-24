@@ -19,10 +19,9 @@ import pisi.context as ctx
 import pisi.pxml.xmlfile as xmlfile
 import pisi.pxml.autoxml as autoxml
 
-class Error(pisi.Error):
-    pass
+class Error(object):
 
-__metaclass__ = autoxml.autoxml
+    __metaclass__ = autoxml.autoxml
 
 class Obsolete:
 
@@ -50,6 +49,18 @@ class Distribution(xmlfile.XmlFile):
 
     t_Obsoletes = [ [Obsolete], autoxml.optional, "Obsoletes/Package"]
 
+class Maintainer(xmlfile.XmlFile):
+    "representation for component responsibles"
+
+    __metaclass__ = autoxml.autoxml
+
+    t_Name = [autoxml.Text, autoxml.mandatory]
+    t_Email = [autoxml.String, autoxml.mandatory]
+
+    def __str__(self):
+        s = "%s <%s>" % (self.name, self.email)
+        return s
+
 class Component(xmlfile.XmlFile):
     "representation for component declarations"
 
@@ -66,7 +77,10 @@ class Component(xmlfile.XmlFile):
     # Information about the component
     t_Summary = [autoxml.LocalText, autoxml.optional]
     t_Description = [autoxml.LocalText, autoxml.optional]
-    t_Group = [ autoxml.String, autoxml.optional ]
+    t_Group = [autoxml.String, autoxml.optional]
+
+    # Component responsible
+    t_Maintainer = [Maintainer, autoxml.optional]
 
     # the parts of this component.
     # to be filled by the component database, thus it is optional.

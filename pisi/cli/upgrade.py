@@ -104,12 +104,4 @@ expanded to package names.
                         packages.extend(componentdb.get_union_packages(name, walk=True))
         packages.extend(self.args)
 
-        packages = pisi.blacklist.exclude_from(packages, ctx.const.blacklist)
-
-        if ctx.get_option('exclude_from'):
-            packages = pisi.blacklist.exclude_from(packages, ctx.get_option('exclude_from'))
-
-        if ctx.get_option('exclude'):
-            packages = pisi.blacklist.exclude(packages, ctx.get_option('exclude'))
-
         pisi.api.upgrade(packages, repository)

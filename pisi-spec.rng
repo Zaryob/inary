@@ -45,7 +45,12 @@
                 <!-- FIXME: should be oneOrMore -->
                 <ref name="Description"/>
             </zeroOrMore>
-            <ref name="Archive"/>
+            <oneOrMore>
+                <ref name="Archive"/>
+            </oneOrMore>
+            <optional>
+                <ref name="AdditionalFiles"/>
+            </optional>
             <optional>
                 <ref name="BuildDependencies"/>
             </optional>
@@ -1291,6 +1296,9 @@
                     <value>binary</value>
                 </choice>
             </attribute>
+            <optional>
+                <attribute name="target"/>
+            </optional>
         </group>
     </define>
 

@@ -25,6 +25,7 @@ import pisi.operations as operations
 import pisi.util as util
 import pisi.dependency as dependency
 import pisi.db
+import pisi.blacklist
 
 def find_upgrades(packages, replaces):
     packagedb = pisi.db.packagedb.PackageDB()
@@ -102,11 +103,22 @@ def upgrade(A=[], repo=None):
     # sum(array, []) is a nice trick to flatten an array of arrays
     A |= set(sum(replaces.values(), []))
 
+    A |= upgrade_base(A)
+
+    A = pisi.blacklist.exclude_from(A, ctx.const.blacklist)
+
+    if ctx.get_option('exclude_from'):
+        A = pisi.blacklist.exclude_from(A, ctx.get_option('exclude_from'))
+
+    if ctx.get_option('exclude'):
+        A = pisi.blacklist.exclude(A, ctx.get_option('exclude'))
+
+    ctx.ui.debug('A = %s' % str(A))
+
     if len(A)==0:
         ctx.ui.info(_('No packages to upgrade.'))
         return True
 
-    A |= upgrade_base(A)
 
     ctx.ui.debug('A = %s' % str(A))
 
@@ -264,6 +276,15 @@ def upgrade_base(A = set()):
             G_f, install_order = operations.install.plan_install_pkg_names(extra_installs)
             extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase - set(install_order))
             upgrade_order = []
+
+            extra_upgrades = pisi.blacklist.exclude_from(extra_upgrades, ctx.const.blacklist)
+
+            if ctx.get_option('exclude_from'):
+                extra_upgrades = pisi.blacklist.exclude_from(extra_upgrades, ctx.get_option('exclude_from'))
+
+            if ctx.get_option('exclude'):
+                extra_upgrades = pisi.blacklist.exclude(extra_upgrades, ctx.get_option('exclude'))
+
             if extra_upgrades:
                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be upgraded: ') +
                                util.strlist(extra_upgrades))

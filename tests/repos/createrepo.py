@@ -53,16 +53,23 @@ pspecTemplate = """<?xml version="1.0" ?>
 </PISI>
 """
 
+componentsTemplate = """
+        <Component>
+            <Name>%(name)s</Name>
+            <LocalName xml:lang="tr">%(local_name)s</LocalName>
+            <Summary xml:lang="tr">%(summary)s</Summary>
+            <Description xml:lang="tr">%(description)s</Description>
+            <Group>system</Group>
+            <Packager>
+                <Name>Joe Packager</Name>
+                <Email>joe@pardus.org.tr</Email>
+            </Packager>
+        </Component>
+"""
+
 componentTemplate = """
 <PISI>
     <Name>%(name)s</Name>
-    <LocalName xml:lang="tr">%(local_name)s</LocalName>
-    <Summary xml:lang="tr">%(summary)s</Summary>
-    <Description xml:lang="tr">%(description)s</Description>
-    <Packager>
-        <Name>Joe Packager</Name>
-        <Email>joe@pardus.org.tr</Email>
-    </Packager>
 </PISI>
 """
 
@@ -93,10 +100,7 @@ class Component:
         self.name = name
 
     def get_comp_template(self, subcomp):
-        return componentTemplate % {"name":subcomp,
-                                    "local_name":subcomp,
-                                    "summary":subcomp,
-                                    "description":subcomp}
+        return componentTemplate % {"name": subcomp}
 
     def get_comp_path(self):
         return "/".join(self.name.split("."))
@@ -189,7 +193,26 @@ class Repository:
         for pkg in self.packages:
             pkg.create()
 
+        self.create_components_xml()
+
         os.chdir(cur_dir)
+
+    def create_components_xml(self):
+        xml_content = "<PISI>\n    <Components>"
+
+        for root, dirs, files in os.walk("."):
+            if "component.xml" in files:
+                component = root[2:].replace("/", ".")
+                xml_content += componentsTemplate \
+                                % {"name": component,
+                                   "local_name": component,
+                                   "summary": component,
+                                   "description": component}
+
+        xml_content += "    </Components>\n</PISI>\n"
+
+        open("components.xml", "w").write(xml_content)
+
 
 class Pardus2007Repo(Repository):
     def __init__(self):

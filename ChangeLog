@@ -1,3 +1,19 @@
+2010-02-12 Gökçen Eraslan <gokcen@pardus.org.tr>
+		* pisi/actionsapi/shelltools.py: Replace FileError with ctx.ui.error
+		since FileError is defined in pisitoolsfunctions.
+
+2010-02-05 Fatih Aşıcı <fatih@pardus.org.tr>
+		* pisi/version.py (compare): Allow comparing Version objects
+		with strings.
+
+2010-02-04 Ozan Çağlayan <ozan@pardus.org.tr>
+		* pisi/pxml/autoxml.py (format): Some optional elements may be None
+		during formatting, handle those situations. We still have a formatting
+		issue caused by the automagical output representation of autoxml.
+
+2010-02-02 Ozan Çağlayan <ozan@pardus.org.tr>
+		* pisi/component.py(Maintainer): Add Maintainer tag to components.xml.
+
 2010-01-26 Serdar Dalgıç <serdar@pardus.org.tr>
 		* Handle urllib2 errors of dummy .part files created as a result of unreachable
 		translations.xml's. Fixes #12136.

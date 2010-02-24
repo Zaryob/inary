@@ -727,11 +727,16 @@ class autoxml(oo.autosuper, oo.autoprop):
             return obj.errors(where)
 
         def format(obj, f, errs):
-            try:
-                obj.format(f, errs)
-            except Error:
+            if obj:
+                try:
+                    obj.format(f, errs)
+                except Error:
+                    if req == mandatory:
+                        errs.append(_('Object cannot be formatted'))
+            else:
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
+
         return (init, decode, encode, errors, format)
 
     def gen_list_tag(cls, tag, spec):
@@ -841,9 +846,13 @@ class autoxml(oo.autosuper, oo.autoprop):
             return obj.errors(where)
 
         def format(obj, f, errs):
-            try:
-                obj.format(f, errs)
-            except Error:
+            if obj:
+                try:
+                    obj.format(f, errs)
+                except Error:
+                    if req == mandatory:
+                        errs.append(_('Object cannot be formatted'))
+            else:
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
 

@@ -46,6 +46,7 @@
 <!ATTLIST Archive sha1sum CDATA #REQUIRED>
 <!-- NOTE: we can limit possible types here to the ones that pisi know -->
 <!ATTLIST Archive type CDATA #REQUIRED>
+<!ATTLIST Archive target CDATA #IMPLIED>
 
 <!ELEMENT BuildDependencies (Dependency*)>
 

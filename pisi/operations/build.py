@@ -189,7 +189,7 @@ class Builder:
 
         self.read_translations(self.specdir)
 
-        self.sourceArchive = pisi.sourcearchive.SourceArchive(self.spec, self.pkg_work_dir())
+        self.sourceArchives = pisi.sourcearchive.SourceArchives(self.spec, self.pkg_work_dir())
 
         self.set_environment_vars()
 
@@ -251,8 +251,11 @@ class Builder:
 
         self.check_build_dependencies()
         self.fetch_component()
-        self.fetch_source_archive()
-        self.unpack_source_archive()
+        self.fetch_source_archives()
+        self.unpack_source_archives()
+
+        # Grab AdditionalFiles
+        self.copy_additional_source_files()
 
         self.run_setup_action()
         self.run_build_action()
@@ -342,8 +345,7 @@ class Builder:
                 self.download(comaruri, pisi.util.join_path(self.destdir, ctx.const.comar_dir))
 
     def fetch_additionalFiles(self):
-        spec = self.spec
-        for pkg in spec.packages:
+        for pkg in self.spec.packages + self.spec.source:
             for afile in pkg.additionalFiles:
                 file_name = os.path.basename(afile.filename)
                 dir_name = os.path.dirname(afile.filename)
@@ -382,15 +384,12 @@ class Builder:
             ctx.ui.info(_('Source is part of %s component') % comp.name)
             self.spec.source.partOf = comp.name
 
-    def fetch_source_archive(self):
-        ctx.ui.info(_("Fetching source from: %s") % self.spec.source.archive.uri)
-        self.sourceArchive.fetch()
-        ctx.ui.info(_("Source archive is stored: %s/%s")
-                %(ctx.config.archives_dir(), self.spec.source.archive.name))
+    def fetch_source_archives(self):
+        self.sourceArchives.fetch()
 
-    def unpack_source_archive(self):
-        ctx.ui.info(_("Unpacking archive..."))
-        self.sourceArchive.unpack()
+    def unpack_source_archives(self):
+        ctx.ui.info(_("Unpacking archive(s)..."))
+        self.sourceArchives.unpack()
         # apply the patches and prepare a source directory for build.
         if self.apply_patches():
             ctx.ui.info(_(" unpacked (%s)") % self.pkg_work_dir())
@@ -447,6 +446,16 @@ class Builder:
                     abandoned_files.append(fpath)
 
         return abandoned_files
+
+    def copy_additional_source_files(self):
+        # store additional files
+        for afile in self.spec.source.additionalFiles:
+            src = os.path.join(self.specdir, ctx.const.files_dir, afile.filename)
+            dest = os.path.join(self.srcDir, afile.target)
+            pisi.util.copy_file(src, dest)
+            if afile.permission:
+                # mode is octal!
+                os.chmod(dest, int(afile.permission, 8))
 
     def compile_action_script(self):
         """Compiles given actions.py to check syntax error in it and sets the actionLocals and actionGlobals"""
@@ -1074,12 +1083,12 @@ order = {"none": 0,
 def __buildState_fetch(pb):
     # fetch is the first state to run.
     pb.patch_exists()
-    pb.fetch_source_archive()
+    pb.fetch_source_archives()
 
 def __buildState_unpack(pb, last):
     if order[last] < order["fetch"]:
         __buildState_fetch(pb)
-    pb.unpack_source_archive()
+    pb.unpack_source_archives()
 
 def __buildState_setupaction(pb, last):
     if order[last] < order["unpack"]:

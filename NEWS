@@ -1,0 +1,47 @@
+pisi 2.2.19 (??/02/2010)
+-------------------------
+
+Bug fixes
+----------
+
+6748   - pisi fails to install a package when CWD doesn't exist anymore (real fix)
+9991   - blacklisted system.base packages are not ignored during update
+11818  - Cosmetic: Remove 'minimal' from some UI messages,
+12136  - Handle urllib2 errors of dummy .part files created as a result of unreachable
+         translations.xml files.
+
+Other improvements
+-------------------
+
+- Sanitize some error handlings during translations.xml parsing,
+- Ignore source package translations if <Name> is empty in translations.xml,
+- Don't wait until packaging for complaining about invalid version strings,
+- Fix the behaviour of <AnyDependency> when the last dependency package is removed,
+- Do not ignore parameter in perlmodules.make(). Tests of some Perl modules were not
+  running at all before this fix,
+- Allow comparing Version objects with strings,
+
+
+New features
+-------------
+
+- Add support for reverse applying a patch with <Patch reverse="[tT]rue"> in pspec.xml,
+
+- pisi --add-repo will now add, update and check the repository by default without
+  asking if you want to update the index or not. If fetching the index from the given
+  URL fails, pisi will remove the repository as before,
+
+- 2 new options to pisi-cli --add-repo: --ignore-check and --no-fetch
+    - If --ignore-check is given, pisi ignores the arch/distro check after a successful
+    add/update phase,
+    - --no-fetch is for not fetching the index. If this is given, pisi will be unable
+    to check the arch and distro of the repository as it doesn't have access to the index
+
+- components.xml now recognizes <Maintainer> tags,
+
+- Add ability to use <AdditionalFiles> for <Source> packages,
+
+- You can now define more than 1 <Archive>'s in pspec.xml files.
+
+
+And translation updates..

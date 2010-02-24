@@ -94,7 +94,9 @@ def unlink(pattern):
     '''remove the file path'''
     filePathGlob = glob.glob(pattern)
     if len(filePathGlob) == 0:
-        raise FileError(_("No file matched pattern \"%s\". Remove operation failed.") % pattern)
+        ctx.ui.error(_("No file matched pattern \"%s\". Remove operation failed.") % pattern)
+        return
+
     for filePath in filePathGlob:
         if isFile(filePath) or isLink(filePath):
             try:
