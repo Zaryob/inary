@@ -439,14 +439,13 @@ class ArchiveZip(ArchiveBase):
                 ofile = os.path.join(target_dir, outpath)
 
                 if is_dir:               # this is a directory
-                    d = os.path.join(target_dir, outpath)
-                    if not os.path.isdir(d):
-                        os.makedirs(d)
+                    if not os.path.isdir(ofile):
+                        os.makedirs(ofile)
                         perm = info.external_attr
                         perm &= 0xFFFF0000
                         perm >>= 16
                         perm |= 0x00000100
-                        os.chmod(d, perm)
+                        os.chmod(ofile, perm)
                     continue
 
                 # check that output dir is present
