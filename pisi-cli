@@ -37,6 +37,7 @@ def handle_exception(exception, value, tb):
     signal.signal(signal.SIGINT, signal.SIG_IGN)   # disable further interrupts
     ui = pisi.cli.CLI() # make a temporary UI
     show_traceback = False
+
     if exception == exceptions.KeyboardInterrupt:
         ui.error(_("Keyboard Interrupt: Exiting..."))
         exit()
@@ -53,15 +54,15 @@ def handle_exception(exception, value, tb):
         show_traceback = ctx.get_option('debug')
         ui.error(_("System error. Program terminated."))
 
-    if ctx.get_option('debug'):
-        ui.error(u"%s: %s" % (exception, str(value)))
+    if show_traceback:
+        ui.error("%s: %s" % (exception, str(value)))
     else:
         ui.error(str(value))
 
-    ui.info(_("\nPlease use 'pisi help' for general help."))
+    ui.info(_("Please use 'pisi help' for general help."))
 
     if show_traceback:
-        ui.info(_("Traceback:"))
+        ui.info(_("\nTraceback:"))
         traceback.print_tb(tb)
     else:
         if not exception is pisi.Error:
@@ -70,7 +71,6 @@ def handle_exception(exception, value, tb):
     exit()
 
 if __name__ == "__main__":
-   
     sys.excepthook = handle_exception
 
     signal.signal(signal.SIGTERM, sig_handler)
