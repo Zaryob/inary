@@ -471,7 +471,8 @@ class ArchiveZip(ArchiveBase):
                     if sys.version_info[:2] < (2, 6):
                         zip_obj.decompressToFile(info.filename, ofile)
                     else:
-                        zip_obj.extract(info.filename, target_dir)
+                        info.filename = outpath
+                        zip_obj.extract(info, target_dir)
                     os.chmod(ofile, perm)
 
     def unpack_files(self, paths, target_dir):
