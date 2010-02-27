@@ -1,3 +1,8 @@
+2010-02-27 Fatih Aşıcı <fatih@pardus.org.tr>
+		* pisi/archive.py: Install files into correct paths when the old
+		package format is used. This was a regression introduced when
+		switching to python 2.6.
+
 2010-02-12 Gökçen Eraslan <gokcen@pardus.org.tr>
 		* pisi/actionsapi/shelltools.py: Replace FileError with ctx.ui.error
 		since FileError is defined in pisitoolsfunctions.
@@ -68,7 +73,7 @@
 		repository.
 
 2009-12-14 Serdar Dalgıç <serdar@pardus.org.tr>
-		*	Add architecture and distribution release check to pisi add-repo
+		* Add architecture and distribution release check to pisi add-repo
 		New parameter --ignore-check is added to pisi ar too.
 
 2009-12-11 Serdar Dalgıç <serdar@pardus.org.tr>
