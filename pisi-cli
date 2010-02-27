@@ -47,7 +47,7 @@ def handle_exception(exception, value, tb):
     elif isinstance(value, pisi.Exception):
         show_traceback = True
         ui.error(_("Unhandled internal exception.\n"
-                   "Please file a bug report to <http://bugs.pardus.org.tr>"))
+                   "Please file a bug report to <http://bugs.pardus.org.tr>."))
     else:
         # For any other exception (possibly Python exceptions) show
         # the traceback!
