@@ -18,11 +18,12 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 def file_corrupted(pfile):
-    if os.path.islink("/%s" % pfile.path):
-        if pisi.util.sha1_data(os.readlink("/%s" % pfile.path)) != pfile.hash:
+    path = os.path.join(ctx.config.dest_dir(), pfile.path)
+    if os.path.islink(path):
+        if pisi.util.sha1_data(os.readlink(path)) != pfile.hash:
             return True
     else:
-        if pisi.util.sha1_file("/%s" % pfile.path) != pfile.hash:
+        if pisi.util.sha1_file(path) != pfile.hash:
             return True
     return False
 
@@ -34,7 +35,8 @@ def check_files(files, check_config=False):
         if not f.hash:
             continue
         ctx.ui.info(_("Checking /%s ") % f.path, noln=True, verbose=True)
-        if os.path.lexists("/%s" % f.path):
+        path = os.path.join(ctx.config.dest_dir(), f.path)
+        if os.path.lexists(path):
             if file_corrupted(f):
                 if f.type == "config":
                     msg = _("\nChanged config file: %s")
