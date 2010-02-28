@@ -56,7 +56,9 @@ def handle_exception(exception, value, tb):
     if show_traceback:
         ui.error("%s: %s" % (exception, str(value)))
     else:
-        ui.error(str(value))
+        msg = str(value)
+        if msg:
+            ui.error(msg)
 
     ui.info(_("Please use 'pisi help' for general help."))
 
