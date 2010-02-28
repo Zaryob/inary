@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
-"POT-Creation-Date: 2010-02-28 00:17+EET\n"
+"POT-Creation-Date: 2010-02-28 21:26+EET\n"
 "PO-Revision-Date: 2010-02-07 15:36+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@pardus.nu>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
@@ -420,75 +420,75 @@ msgstr "%s-paketet finns i %s-förrådet."
 msgid "%s package already fetched"
 msgstr ""
 
-#: pisi/api.py:569
+#: pisi/api.py:570
 msgid "Taking snapshot of the system"
 msgstr ""
 
-#: pisi/api.py:723
+#: pisi/api.py:724
 msgid "comar package is not fully installed"
 msgstr ""
 
-#: pisi/api.py:735
+#: pisi/api.py:736
 msgid "File %s not found"
 msgstr "Filen %s hittades inte"
 
-#: pisi/api.py:775
+#: pisi/api.py:776
 msgid "* Building index of PiSi files under %s"
 msgstr "* Indexerar PiSi-filer under %s"
 
-#: pisi/api.py:782
+#: pisi/api.py:783
 msgid "* Index file written"
 msgstr "* Indexfil skriven"
 
-#: pisi/api.py:787
+#: pisi/api.py:788
 msgid "Not a valid repo name."
 msgstr "Ogiltigt förrådsnamn."
 
-#: pisi/api.py:790
+#: pisi/api.py:791
 msgid "Repo %s already present."
 msgstr "Förrådet %s finns redan."
 
-#: pisi/api.py:793
+#: pisi/api.py:794
 msgid "Repo already present with name %s."
 msgstr "Förrådet finns redan under namnet %s."
 
-#: pisi/api.py:798
+#: pisi/api.py:799
 msgid "Repo %s added to system."
 msgstr "Förrådet %s lades till:"
 
-#: pisi/api.py:806
+#: pisi/api.py:807
 msgid "Repo %s removed from system."
 msgstr ""
 
-#: pisi/api.py:808
+#: pisi/api.py:809
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "Förrådet % finns inte och kan därmed inte tas bort."
 
-#: pisi/api.py:825
+#: pisi/api.py:826
 msgid "* Updating repository: %s"
 msgstr "* Uppdaterar förråd: %s"
 
-#: pisi/api.py:835
+#: pisi/api.py:836
 msgid "%s repository information is up-to-date."
 msgstr "%s-förrådets information är aktuell."
 
-#: pisi/api.py:837
+#: pisi/api.py:838
 msgid "Updating database at any rate as requested"
 msgstr ""
 
-#: pisi/api.py:847
+#: pisi/api.py:848
 msgid "* Package database updated."
 msgstr "* Paketdatabas uppdaterad."
 
-#: pisi/api.py:849
+#: pisi/api.py:850
 msgid "No repository named %s found."
 msgstr "Inget förråd med namnet %s funnet."
 
-#: pisi/api.py:860
+#: pisi/api.py:861
 msgid "* Adding '%s' to db... "
 msgstr ""
 
-#: pisi/api.py:863
+#: pisi/api.py:864
 msgid "OK."
 msgstr "OK."
 
@@ -562,35 +562,41 @@ msgstr ""
 msgid "%s configuration failed."
 msgstr ""
 
-#: pisi/atomicoperations.py:439
+#: pisi/atomicoperations.py:406
+msgid ""
+"Unable to relocate following files. Reinstallation of this package is "
+"strongly recommended."
+msgstr ""
+
+#: pisi/atomicoperations.py:488
 msgid "Storing %s, "
 msgstr "Lagrar %s, "
 
-#: pisi/atomicoperations.py:442
+#: pisi/atomicoperations.py:491
 msgid "Storing %s."
 msgstr "Lagrar %s."
 
-#: pisi/atomicoperations.py:449
+#: pisi/atomicoperations.py:498
 msgid "Storing %s"
 msgstr "Lagrar %s"
 
-#: pisi/atomicoperations.py:516
+#: pisi/atomicoperations.py:565
 msgid "File list could not be read for package %s, continuing removal."
 msgstr ""
 
-#: pisi/atomicoperations.py:522
+#: pisi/atomicoperations.py:571
 msgid "Removing package %s"
 msgstr "Tar bort paketet %s"
 
-#: pisi/atomicoperations.py:525
+#: pisi/atomicoperations.py:574
 msgid "Trying to remove nonexistent package "
 msgstr ""
 
-#: pisi/atomicoperations.py:566
+#: pisi/atomicoperations.py:615
 msgid "Not removing conflicted file : %s"
 msgstr "Tar inte bort fil i konflikt: %s"
 
-#: pisi/atomicoperations.py:594
+#: pisi/atomicoperations.py:643
 msgid ""
 "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
@@ -870,7 +876,7 @@ msgid ""
 "Package %s is corrupt."
 msgstr ""
 
-#: pisi/cli/check.py:81 pisi/operations/check.py:46
+#: pisi/cli/check.py:81 pisi/operations/check.py:48
 msgid "OK"
 msgstr ""
 
@@ -2299,20 +2305,26 @@ msgstr ""
 msgid "*** %d error(s), %d warning(s)"
 msgstr ""
 
-#: pisi/operations/check.py:36
+#: pisi/operations/check.py:37
 msgid "Checking /%s "
-msgstr ""
-
-#: pisi/operations/check.py:40
-msgid ""
-"\n"
-"Changed config file: %s"
 msgstr ""
 
 #: pisi/operations/check.py:42
 msgid ""
 "\n"
+"Changed config file: %s"
+msgstr ""
+
+#: pisi/operations/check.py:44
+msgid ""
+"\n"
 "Corrupt file: %s"
+msgstr ""
+
+#: pisi/operations/check.py:50
+msgid ""
+"\n"
+"Missing file: /%s"
 msgstr ""
 
 #: pisi/operations/delta.py:27

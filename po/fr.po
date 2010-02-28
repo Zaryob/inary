@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
-"POT-Creation-Date: 2010-02-28 00:17+EET\n"
+"POT-Creation-Date: 2010-02-28 21:26+EET\n"
 "PO-Revision-Date: 2010-01-01 22:22+0100\n"
 "Last-Translator: Philippe Svetoslavsky <philsvet@gmail.com>\n"
 "Language-Team: French <pardus-translators@pardus.org.tr>\n"
@@ -430,75 +430,75 @@ msgstr "Paquet %s trouvé dans le dépôt %s"
 msgid "%s package already fetched"
 msgstr "Paquet %s déjà téléchargé"
 
-#: pisi/api.py:569
+#: pisi/api.py:570
 msgid "Taking snapshot of the system"
 msgstr "Prise d'un instantané du système"
 
-#: pisi/api.py:723
+#: pisi/api.py:724
 msgid "comar package is not fully installed"
 msgstr "Le paquet comar n'est pas entièrement installé"
 
-#: pisi/api.py:735
+#: pisi/api.py:736
 msgid "File %s not found"
 msgstr "Le fichier %s est introuvable"
 
-#: pisi/api.py:775
+#: pisi/api.py:776
 msgid "* Building index of PiSi files under %s"
 msgstr "* Construction de l'index des fichiers PiSi sous %s"
 
-#: pisi/api.py:782
+#: pisi/api.py:783
 msgid "* Index file written"
 msgstr "* Fichier d'index écrit"
 
-#: pisi/api.py:787
+#: pisi/api.py:788
 msgid "Not a valid repo name."
 msgstr "Nom de dépôt invalide"
 
-#: pisi/api.py:790
+#: pisi/api.py:791
 msgid "Repo %s already present."
 msgstr "Le dépôt %s existe déjà."
 
-#: pisi/api.py:793
+#: pisi/api.py:794
 msgid "Repo already present with name %s."
 msgstr "Le dépôt %s existe déjà."
 
-#: pisi/api.py:798
+#: pisi/api.py:799
 msgid "Repo %s added to system."
 msgstr "Le dépôt %s a été ajouté au système."
 
-#: pisi/api.py:806
+#: pisi/api.py:807
 msgid "Repo %s removed from system."
 msgstr "Le dépôt %s a été supprimé du système."
 
-#: pisi/api.py:808
+#: pisi/api.py:809
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "Le dépôt %s n'existe pas. Impossible de le supprimer."
 
-#: pisi/api.py:825
+#: pisi/api.py:826
 msgid "* Updating repository: %s"
 msgstr "* Mise à jour du dépôt : %s"
 
-#: pisi/api.py:835
+#: pisi/api.py:836
 msgid "%s repository information is up-to-date."
 msgstr "les informations concernant le dépôt %s sont à jour."
 
-#: pisi/api.py:837
+#: pisi/api.py:838
 msgid "Updating database at any rate as requested"
 msgstr "Mise à jour de la base de données quoi qu'il arrive comme demandé"
 
-#: pisi/api.py:847
+#: pisi/api.py:848
 msgid "* Package database updated."
 msgstr "* Base de données des paquets mise à jour."
 
-#: pisi/api.py:849
+#: pisi/api.py:850
 msgid "No repository named %s found."
 msgstr "Pas de dépôt au nom %s trouvé."
 
-#: pisi/api.py:860
+#: pisi/api.py:861
 msgid "* Adding '%s' to db... "
 msgstr "* Ajout de '%s' à la base de données... "
 
-#: pisi/api.py:863
+#: pisi/api.py:864
 msgid "OK."
 msgstr "OK."
 
@@ -577,37 +577,43 @@ msgstr "Régression de paquet déclinée"
 msgid "%s configuration failed."
 msgstr "La configuration de %s a échoué."
 
-#: pisi/atomicoperations.py:439
+#: pisi/atomicoperations.py:406
+msgid ""
+"Unable to relocate following files. Reinstallation of this package is "
+"strongly recommended."
+msgstr ""
+
+#: pisi/atomicoperations.py:488
 msgid "Storing %s, "
 msgstr "Stockage de %s,"
 
-#: pisi/atomicoperations.py:442
+#: pisi/atomicoperations.py:491
 msgid "Storing %s."
 msgstr "Stockage de %s."
 
-#: pisi/atomicoperations.py:449
+#: pisi/atomicoperations.py:498
 msgid "Storing %s"
 msgstr "Stockage de %s"
 
-#: pisi/atomicoperations.py:516
+#: pisi/atomicoperations.py:565
 msgid "File list could not be read for package %s, continuing removal."
 msgstr ""
 "La liste des fichier pour le paquet %s n'a pu être lue, poursuite de la "
 "suppression."
 
-#: pisi/atomicoperations.py:522
+#: pisi/atomicoperations.py:571
 msgid "Removing package %s"
 msgstr "Suppression du paquet %s"
 
-#: pisi/atomicoperations.py:525
+#: pisi/atomicoperations.py:574
 msgid "Trying to remove nonexistent package "
 msgstr " Tentative de suppression d'un paquet inexistant"
 
-#: pisi/atomicoperations.py:566
+#: pisi/atomicoperations.py:615
 msgid "Not removing conflicted file : %s"
 msgstr "Le fichier %s causant un conflit ne sera pas supprimé"
 
-#: pisi/atomicoperations.py:594
+#: pisi/atomicoperations.py:643
 msgid ""
 "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
@@ -945,7 +951,7 @@ msgstr ""
 "\n"
 "Le paquet %s est corrompu."
 
-#: pisi/cli/check.py:81 pisi/operations/check.py:46
+#: pisi/cli/check.py:81 pisi/operations/check.py:48
 msgid "OK"
 msgstr "OK"
 
@@ -2631,11 +2637,11 @@ msgstr "Répertoire de Compilation conservé"
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d erreur(s), %d alerte(s)"
 
-#: pisi/operations/check.py:36
+#: pisi/operations/check.py:37
 msgid "Checking /%s "
 msgstr "Vérification de /%s "
 
-#: pisi/operations/check.py:40
+#: pisi/operations/check.py:42
 msgid ""
 "\n"
 "Changed config file: %s"
@@ -2643,13 +2649,22 @@ msgstr ""
 "\n"
 "Fichier de configuration modifié : %s"
 
-#: pisi/operations/check.py:42
+#: pisi/operations/check.py:44
 msgid ""
 "\n"
 "Corrupt file: %s"
 msgstr ""
 "\n"
 "Fichier corrompu : %s"
+
+#: pisi/operations/check.py:50
+#, fuzzy
+msgid ""
+"\n"
+"Missing file: /%s"
+msgstr ""
+"\n"
+"Fichier manquant : %s"
 
 #: pisi/operations/delta.py:27
 msgid "Cannot create delta for same package!"
@@ -3318,13 +3333,6 @@ msgstr "Exploration de paquets binaires...\n"
 
 #~ msgid "Skipping %s with wrong pkg name "
 #~ msgstr "Mise de côté de %s avec un nom de paquet erroné"
-
-#~ msgid ""
-#~ "\n"
-#~ "Missing file: %s"
-#~ msgstr ""
-#~ "\n"
-#~ "Fichier manquant : %s"
 
 #~ msgid "* Rebuilding '%s' named repo... "
 #~ msgstr "* Reconstruction du dépôt '%s'... "

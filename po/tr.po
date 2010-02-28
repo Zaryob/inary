@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2010-02-28 00:17+EET\n"
+"POT-Creation-Date: 2010-02-28 21:26+EET\n"
 "PO-Revision-Date: 2010-01-08 09:46+0200\n"
 "Last-Translator: Faik Uygur <faik@pardus.org.tr>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -444,75 +444,75 @@ msgstr "%s paketi %s deposunda bulundu"
 msgid "%s package already fetched"
 msgstr "%s paketi zaten indirilmiş"
 
-#: pisi/api.py:569
+#: pisi/api.py:570
 msgid "Taking snapshot of the system"
 msgstr "Sistemin görüntüsü alınıyor."
 
-#: pisi/api.py:723
+#: pisi/api.py:724
 msgid "comar package is not fully installed"
 msgstr "comar paketi tam olarak kurulmamış."
 
-#: pisi/api.py:735
+#: pisi/api.py:736
 msgid "File %s not found"
 msgstr "%s dosyası bulunamadı."
 
-#: pisi/api.py:775
+#: pisi/api.py:776
 msgid "* Building index of PiSi files under %s"
 msgstr "* %s altındaki PiSi dosyalarının kataloğu oluşturuluyor."
 
-#: pisi/api.py:782
+#: pisi/api.py:783
 msgid "* Index file written"
 msgstr "* Katalog dosyası yazıldı."
 
-#: pisi/api.py:787
+#: pisi/api.py:788
 msgid "Not a valid repo name."
 msgstr "Geçerli bir depo ismi değil."
 
-#: pisi/api.py:790
+#: pisi/api.py:791
 msgid "Repo %s already present."
 msgstr "%s deposu zaten mevcut."
 
-#: pisi/api.py:793
+#: pisi/api.py:794
 msgid "Repo already present with name %s."
 msgstr "%s isminde bir depo zaten mevcut."
 
-#: pisi/api.py:798
+#: pisi/api.py:799
 msgid "Repo %s added to system."
 msgstr "%s deposu sisteme eklendi."
 
-#: pisi/api.py:806
+#: pisi/api.py:807
 msgid "Repo %s removed from system."
 msgstr "%s deposu sistemden çıkarıldı."
 
-#: pisi/api.py:808
+#: pisi/api.py:809
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "%s deposu yok. Kaldırılamıyor."
 
-#: pisi/api.py:825
+#: pisi/api.py:826
 msgid "* Updating repository: %s"
 msgstr "* %s deposu güncelleniyor."
 
-#: pisi/api.py:835
+#: pisi/api.py:836
 msgid "%s repository information is up-to-date."
 msgstr "%s depo bilgisi güncel."
 
-#: pisi/api.py:837
+#: pisi/api.py:838
 msgid "Updating database at any rate as requested"
 msgstr "Veritabanı istek üzerine güncelleniyor."
 
-#: pisi/api.py:847
+#: pisi/api.py:848
 msgid "* Package database updated."
 msgstr "* Paket veritabanı güncellendi."
 
-#: pisi/api.py:849
+#: pisi/api.py:850
 msgid "No repository named %s found."
 msgstr "%s adında bir depo bulunamadı."
 
-#: pisi/api.py:860
+#: pisi/api.py:861
 msgid "* Adding '%s' to db... "
 msgstr "* '%s' veritabanına ekleniyor... "
 
-#: pisi/api.py:863
+#: pisi/api.py:864
 msgid "OK."
 msgstr "Tamam."
 
@@ -589,35 +589,43 @@ msgstr "Paketin eski sürüme indirilmesi reddedildi."
 msgid "%s configuration failed."
 msgstr "%s yapılandırması başarısız oldu."
 
-#: pisi/atomicoperations.py:439
+#: pisi/atomicoperations.py:406
+msgid ""
+"Unable to relocate following files. Reinstallation of this package is "
+"strongly recommended."
+msgstr ""
+"Aşağıdaki dosyalar taşınamadı. Bu paketin yeniden kurulumu şiddetle "
+"önerilir."
+
+#: pisi/atomicoperations.py:488
 msgid "Storing %s, "
 msgstr "%s depolanıyor, "
 
-#: pisi/atomicoperations.py:442
+#: pisi/atomicoperations.py:491
 msgid "Storing %s."
 msgstr "%s depolanıyor."
 
-#: pisi/atomicoperations.py:449
+#: pisi/atomicoperations.py:498
 msgid "Storing %s"
 msgstr "%s depolanıyor."
 
-#: pisi/atomicoperations.py:516
+#: pisi/atomicoperations.py:565
 msgid "File list could not be read for package %s, continuing removal."
 msgstr "%s paketi dosya listesi okunamadı, kaldırma işlemine devam ediliyor."
 
-#: pisi/atomicoperations.py:522
+#: pisi/atomicoperations.py:571
 msgid "Removing package %s"
 msgstr "%s paketi kaldırılıyor."
 
-#: pisi/atomicoperations.py:525
+#: pisi/atomicoperations.py:574
 msgid "Trying to remove nonexistent package "
 msgstr "Varolmayan paket kaldırılmaya çalışıldı "
 
-#: pisi/atomicoperations.py:566
+#: pisi/atomicoperations.py:615
 msgid "Not removing conflicted file : %s"
 msgstr "Çakışan dosya (%s) silinmiyor."
 
-#: pisi/atomicoperations.py:594
+#: pisi/atomicoperations.py:643
 msgid ""
 "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr "Kurulmuş dosya %s sistemde bulunamadı (Muhtemelen elle sildiniz)."
@@ -713,9 +721,8 @@ msgid ""
 "Do you want to continue?"
 msgstr ""
 "%s deposunu veritabanını güncellemeden eklemek istediniz.\n"
-"Bu işlemi onayladığınızda, depoyu sisteminize depo dağıtımını "
-"denetlenmeden eklemiş olacaksınız. Devam etmek istediğinize emin "
-"misiniz?"
+"Bu işlemi onayladığınızda, depoyu sisteminize depo dağıtımını denetlenmeden "
+"eklemiş olacaksınız. Devam etmek istediğinize emin misiniz?"
 
 #: pisi/cli/addrepo.py:87
 msgid "%s repository could not be reached. Removing %s from system."
@@ -944,7 +951,7 @@ msgstr ""
 "\n"
 "%s paketi bozuk."
 
-#: pisi/cli/check.py:81 pisi/operations/check.py:46
+#: pisi/cli/check.py:81 pisi/operations/check.py:48
 msgid "OK"
 msgstr "Tamam"
 
@@ -2613,11 +2620,11 @@ msgstr "İnşa dizini bırakılıyor..."
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d hata, %d uyarı"
 
-#: pisi/operations/check.py:36
+#: pisi/operations/check.py:37
 msgid "Checking /%s "
 msgstr "/%s denetleniyor "
 
-#: pisi/operations/check.py:40
+#: pisi/operations/check.py:42
 msgid ""
 "\n"
 "Changed config file: %s"
@@ -2625,13 +2632,21 @@ msgstr ""
 "\n"
 "Değişen yapılandırma dosyası: %s"
 
-#: pisi/operations/check.py:42
+#: pisi/operations/check.py:44
 msgid ""
 "\n"
 "Corrupt file: %s"
 msgstr ""
 "\n"
 "Bozuk dosya: %s"
+
+#: pisi/operations/check.py:50
+msgid ""
+"\n"
+"Missing file: /%s"
+msgstr ""
+"\n"
+"Eksik dosya: /%s"
 
 #: pisi/operations/delta.py:27
 msgid "Cannot create delta for same package!"

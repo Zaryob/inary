@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2008, TUBITAK/UEKAE
+# Copyright (C) 2008 - 2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -28,7 +28,7 @@ def file_corrupted(pfile):
     return False
 
 def check_files(files, check_config=False):
-    results = {'missing':[],'corrupted':[]}
+    results = {'missing':[], 'corrupted':[]}
     for f in files:
         if not check_config and f.type == "config":
             continue
@@ -47,7 +47,7 @@ def check_files(files, check_config=False):
             else:
                 ctx.ui.info(_("OK"), verbose=True)
         else:
-            ctx.ui.error("\nMissing file: /%s" % f.path)
+            ctx.ui.error(_("\nMissing file: /%s") % f.path)
             results['missing'].append(f.path)
     return results
 

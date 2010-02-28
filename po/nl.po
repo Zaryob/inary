@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
-"POT-Creation-Date: 2010-02-28 00:17+EET\n"
+"POT-Creation-Date: 2010-02-28 21:26+EET\n"
 "PO-Revision-Date: 30/12/09 16:03\n"
 "Last-Translator: Antoon Tolboom <atolboo@gmail.com>\n"
 "Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
@@ -440,75 +440,75 @@ msgstr "%s pakket gevonden in %s softwarebron"
 msgid "%s package already fetched"
 msgstr "%s pakket reeds opgehaald"
 
-#: pisi/api.py:569
+#: pisi/api.py:570
 msgid "Taking snapshot of the system"
 msgstr "Snapshot van het systeem nemen"
 
-#: pisi/api.py:723
+#: pisi/api.py:724
 msgid "comar package is not fully installed"
 msgstr "comar-pakket is niet volledig geïnstalleerd"
 
-#: pisi/api.py:735
+#: pisi/api.py:736
 msgid "File %s not found"
 msgstr "Bestand %s niet gevonden"
 
-#: pisi/api.py:775
+#: pisi/api.py:776
 msgid "* Building index of PiSi files under %s"
 msgstr "* Index aanmaken van PiSi-bestanden onder %s"
 
-#: pisi/api.py:782
+#: pisi/api.py:783
 msgid "* Index file written"
 msgstr "* Index-bestand geschreven"
 
-#: pisi/api.py:787
+#: pisi/api.py:788
 msgid "Not a valid repo name."
 msgstr "Geen geldige bronnaam."
 
-#: pisi/api.py:790
+#: pisi/api.py:791
 msgid "Repo %s already present."
 msgstr "Bron %s is al aanwezig."
 
-#: pisi/api.py:793
+#: pisi/api.py:794
 msgid "Repo already present with name %s."
 msgstr "Bron %s is al aanwezig met naam %s."
 
-#: pisi/api.py:798
+#: pisi/api.py:799
 msgid "Repo %s added to system."
 msgstr "Bron %s toegevoegd aan het systeem."
 
-#: pisi/api.py:806
+#: pisi/api.py:807
 msgid "Repo %s removed from system."
 msgstr "Bron %s verwijderd uit het systeem."
 
-#: pisi/api.py:808
+#: pisi/api.py:809
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "Softwarebron %s bestaat niet. Kan niet verwijderd worden."
 
-#: pisi/api.py:825
+#: pisi/api.py:826
 msgid "* Updating repository: %s"
 msgstr "* Bijwerken van softwarebron: %s "
 
-#: pisi/api.py:835
+#: pisi/api.py:836
 msgid "%s repository information is up-to-date."
 msgstr "%s softwarebroninformatie is nog recent."
 
-#: pisi/api.py:837
+#: pisi/api.py:838
 msgid "Updating database at any rate as requested"
 msgstr "Database op elke snelheid zoals verzocht bijwerken"
 
-#: pisi/api.py:847
+#: pisi/api.py:848
 msgid "* Package database updated."
 msgstr "* Pakketdatabase bijgewerkt."
 
-#: pisi/api.py:849
+#: pisi/api.py:850
 msgid "No repository named %s found."
 msgstr "Geen softwarebron met de naam %s gevonden."
 
-#: pisi/api.py:860
+#: pisi/api.py:861
 msgid "* Adding '%s' to db... "
 msgstr "* Toevoegen '%s' aan db... "
 
-#: pisi/api.py:863
+#: pisi/api.py:864
 msgid "OK."
 msgstr "OK."
 
@@ -588,37 +588,43 @@ msgstr "Pakket terugwaarderen geweigerd"
 msgid "%s configuration failed."
 msgstr "%s configuratie mislukt."
 
-#: pisi/atomicoperations.py:439
+#: pisi/atomicoperations.py:406
+msgid ""
+"Unable to relocate following files. Reinstallation of this package is "
+"strongly recommended."
+msgstr ""
+
+#: pisi/atomicoperations.py:488
 msgid "Storing %s, "
 msgstr "Opslaan %s, "
 
-#: pisi/atomicoperations.py:442
+#: pisi/atomicoperations.py:491
 msgid "Storing %s."
 msgstr "Opslaan %s."
 
-#: pisi/atomicoperations.py:449
+#: pisi/atomicoperations.py:498
 msgid "Storing %s"
 msgstr "Opslaan %s"
 
-#: pisi/atomicoperations.py:516
+#: pisi/atomicoperations.py:565
 msgid "File list could not be read for package %s, continuing removal."
 msgstr ""
 "Bestandslijst kon niet gelezen worden voor pakket %s, voortzetten "
 "verwijderen."
 
-#: pisi/atomicoperations.py:522
+#: pisi/atomicoperations.py:571
 msgid "Removing package %s"
 msgstr "Verwijderen pakket %s"
 
-#: pisi/atomicoperations.py:525
+#: pisi/atomicoperations.py:574
 msgid "Trying to remove nonexistent package "
 msgstr "Proberen niet-bestaand pakket te verwijderen "
 
-#: pisi/atomicoperations.py:566
+#: pisi/atomicoperations.py:615
 msgid "Not removing conflicted file : %s"
 msgstr "Niet verwijderen conflicterend bestand: %s"
 
-#: pisi/atomicoperations.py:594
+#: pisi/atomicoperations.py:643
 msgid ""
 "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
@@ -946,7 +952,7 @@ msgstr ""
 "\n"
 "Pakket %s is beschadigd."
 
-#: pisi/cli/check.py:81 pisi/operations/check.py:46
+#: pisi/cli/check.py:81 pisi/operations/check.py:48
 msgid "OK"
 msgstr "OK"
 
@@ -2624,11 +2630,11 @@ msgstr "Behouden bouwmap"
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d fout(en), %d waarschuwing(en)"
 
-#: pisi/operations/check.py:36
+#: pisi/operations/check.py:37
 msgid "Checking /%s "
 msgstr "Controle /%s "
 
-#: pisi/operations/check.py:40
+#: pisi/operations/check.py:42
 msgid ""
 "\n"
 "Changed config file: %s"
@@ -2636,13 +2642,19 @@ msgstr ""
 "\n"
 "Veranderd config bestand: %s"
 
-#: pisi/operations/check.py:42
+#: pisi/operations/check.py:44
 msgid ""
 "\n"
 "Corrupt file: %s"
 msgstr ""
 "\n"
 "Bestand met fouten: %s"
+
+#: pisi/operations/check.py:50
+msgid ""
+"\n"
+"Missing file: /%s"
+msgstr ""
 
 #: pisi/operations/delta.py:27
 msgid "Cannot create delta for same package!"
