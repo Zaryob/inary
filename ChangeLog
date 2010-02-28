@@ -9,6 +9,8 @@
 		files.
 		* pisi/operations/delta.py: Take -D parameter into account
 		when looking for file permission changes.
+		* pisi/api.py (snapshot): Take -D parameter into account when
+		storing config files.
 
 2010-02-27 Fatih Aşıcı <fatih@pardus.org.tr>
 		* pisi/archive.py: Install files into correct paths when the old
