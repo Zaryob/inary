@@ -43,7 +43,6 @@ def handle_exception(exception, value, tb):
         exit()
     elif isinstance(value, pisi.Error):
         ui.error(_("Program terminated."))
-        show_traceback = ctx.get_option('debug')
     elif isinstance(value, pisi.Exception):
         show_traceback = True
         ui.error(_("Unhandled internal exception.\n"
@@ -64,9 +63,8 @@ def handle_exception(exception, value, tb):
     if show_traceback:
         ui.info(_("\nTraceback:"))
         traceback.print_tb(tb)
-    else:
-        if not exception is pisi.Error:
-            ui.info(_("Use --debug to see a traceback."))
+    elif not isinstance(value, pisi.Error):
+        ui.info(_("Use --debug to see a traceback."))
 
     exit()
 
