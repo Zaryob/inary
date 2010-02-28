@@ -370,31 +370,80 @@ class Install(AtomicOperation):
         # of these files may be relocated to some other directory in the new package. 
         # We handle these cases here.
         def relocate_files():
+            missing_old_files = set()
+
             for old_file, new_file in pisi.operations.delta.find_relocations(self.old_files, self.files):
-                old_path, new_path = ("/" + old_file.path, "/" + new_file.path)
+                old_path = os.path.join(ctx.config.dest_dir(), old_file.path)
+                new_path = os.path.join(ctx.config.dest_dir(), new_file.path)
+
+                if not os.path.lexists(old_path):
+                    missing_old_files.add(old_path)
+                    continue
+
+                if os.path.lexists(new_path):
+                    # If one of the parent directories is a symlink, it is possible
+                    # that the new and old file paths refer to the same file.
+                    # In this case, there is nothing to do here.
+                    #
+                    # e.g. /lib/libdl.so and /lib64/libdl.so when /lib64 is
+                    # a symlink to /lib.
+                    if os.path.basename(old_path) == os.path.basename(new_path) \
+                            and os.path.samestat(os.lstat(old_path), os.lstat(new_path)):
+                        continue
+
+                    os.unlink(new_path)
 
                 destdir = os.path.dirname(new_path)
                 if not os.path.exists(destdir):
                     os.makedirs(destdir)
-
-                if os.path.lexists(new_path):
-                    os.unlink(new_path)
 
                 if os.path.islink(old_path):
                     os.symlink(os.readlink(old_path), new_path)
                 else:
                     shutil.copy(old_path, new_path)
 
+            if missing_old_files:
+                ctx.ui.warning(_("Unable to relocate following files. Reinstallation of this package is strongly recommended."))
+                for f in sorted(missing_old_files):
+                    ctx.ui.warning("\t- %s" % f)
+
         # remove left over files from the old package.
         def clean_leftovers():
-            new = set(str(f.path) for f in self.files.list)
-            old = set(str(f.path) for f in self.old_files.list)
-            leftover = old - new
-            old_fileinfo = {}
-            for fileinfo in self.old_files.list:
-                old_fileinfo[str(fileinfo.path)] = fileinfo
-            for path in leftover:
-                    Remove.remove_file(old_fileinfo[path], self.pkginfo.name)
+            new_files = dict((f.path, f) for f in self.files.list)
+
+            for old_file in self.old_files.list:
+                if old_file.path in new_files:
+                    continue
+
+                old_file_path = os.path.join(ctx.config.dest_dir(), old_file.path)
+
+                if not os.path.lexists(old_file_path):
+                    continue
+
+                old_file_stat = None
+                old_filename = os.path.basename(old_file.path)
+
+                for new_file in self.files.list:
+                    # If one of the parent directories is a symlink, it is possible
+                    # that the new and old file paths refer to the same file.
+                    # In this case, we must not remove the old file.
+                    #
+                    # e.g. /lib/libdl.so and /lib64/libdl.so when /lib64 is
+                    # a symlink to /lib.
+
+                    if new_file.hash != old_file.hash \
+                            or os.path.basename(new_file.path) != old_filename:
+                        continue
+
+                    new_file_path = os.path.join(ctx.config.dest_dir(), new_file.path)
+                    if not os.path.lexists(new_file_path):
+                        continue
+
+                    old_file_stat = old_file_stat or os.lstat(old_file_path)
+                    if os.path.samestat(os.lstat(new_file_path), old_file_stat):
+                        break
+                else:
+                    Remove.remove_file(old_file, self.pkginfo.name)
 
         if self.reinstall():
             # get 'config' typed file objects
