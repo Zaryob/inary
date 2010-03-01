@@ -524,7 +524,7 @@ class Install(AtomicOperation):
         # installed packages
         self.installdb.add_package(self.pkginfo)
 
-        otype = "delta" if self.package_fname.endswith("delta.pisi") else None
+        otype = "delta" if self.package_fname.endswith(ctx.const.delta_package_suffix) else None
         self.historydb.add_and_update(pkgBefore=self.old_pkginfo, pkgAfter=self.pkginfo, operation=opttostr[self.operation], otype=otype)
 
 def install_single(pkg, upgrade = False):

@@ -70,7 +70,7 @@ class FilesDB(lazydb.LazyDB):
         files_db = os.path.join(ctx.config.info_dir(), ctx.const.files_db)
         if os.path.exists(files_db):
             os.unlink(files_db)
-    
+
     def close(self):
         if isinstance(self.filesdb, shelve.DbfilenameShelf):
             self.filesdb.close()
