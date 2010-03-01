@@ -937,7 +937,7 @@ def clearCache(all=False):
     def getRemoveOrder(cacheDir, pkgList):
         sizes = {}
         for pkg in pkgList:
-            sizes[pkg] = os.stat(os.path.join(cacheDir, pkg) + ".pisi").st_size
+            sizes[pkg] = os.stat(os.path.join(cacheDir, pkg) + ctx.const.package_suffix).st_size
 
         # sort dictionary by value from PEP-265
         from operator import itemgetter
@@ -949,7 +949,7 @@ def clearCache(all=False):
             totalSize += size
             if totalSize >= limit:
                 try:
-                    os.remove(os.path.join(cacheDir, pkg) + ".pisi")
+                    os.remove(os.path.join(cacheDir, pkg) + ctx.const.package_suffix)
                 except exceptions.OSError:
                     pass
 
@@ -963,7 +963,7 @@ def clearCache(all=False):
 
     cacheDir = ctx.config.cached_packages_dir()
 
-    pkgList = map(lambda x: os.path.basename(x).split(".pisi")[0], glob.glob("%s/*.pisi" % cacheDir))
+    pkgList = map(lambda x: os.path.basename(x).split(ctx.const.package_suffix)[0], glob.glob("%s/*.pisi" % cacheDir))
     if not all:
         # Cache limits from pisi.conf
         config = pisi.configfile.ConfigurationFile("/etc/pisi/pisi.conf")

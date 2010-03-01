@@ -383,7 +383,7 @@ class ArchiveZip(ArchiveBase):
                 self.zip_obj.writestr(attr, dest)
             else:
                 comp_type = zipfile.ZIP_DEFLATED
-                if file_name.endswith(".lzma"):
+                if file_name.endswith(ctx.const.lzma_suffix):
                     comp_type = zipfile.ZIP_STORED
                 self.zip_obj.write(file_name, arc_name, comp_type)
 
