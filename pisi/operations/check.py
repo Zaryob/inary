@@ -45,6 +45,7 @@ def check_files(files, check_config=False):
             else:
                 ctx.ui.info(_("OK"), verbose=True)
         else:
+            ctx.ui.error("\nMissing file: /%s" % f.path)
             results['missing'].append(f.path)
     return results
 
