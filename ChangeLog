@@ -14,6 +14,7 @@
 		* pisi/operations/build.py: Catch empty dirs when searching
 		for abandoned files. Always show abandoned files whether the
 		--debug option is given or not.
+		* pisi-cli: Do not show traceback for handled pisi errors.
 
 2010-02-27 Fatih Aşıcı <fatih@pardus.org.tr>
 		* pisi/archive.py: Install files into correct paths when the old
