@@ -431,8 +431,7 @@ class Install(AtomicOperation):
                     # e.g. /lib/libdl.so and /lib64/libdl.so when /lib64 is
                     # a symlink to /lib.
 
-                    if new_file.hash != old_file.hash \
-                            or os.path.basename(new_file.path) != old_filename:
+                    if os.path.basename(new_file.path) != old_filename:
                         continue
 
                     new_file_path = os.path.join(ctx.config.dest_dir(), new_file.path)
