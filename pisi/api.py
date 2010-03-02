@@ -561,7 +561,8 @@ def snapshot():
         # Save changed config files of the package in snapshot
         for f in installdb.get_files(name).list:
             if f.type == "config" and pisi.util.config_changed(f):
-                historydb.save_config(name, "/%s" % f.path)
+                fpath = pisi.util.join_path(ctx.config.dest_dir(), f.path)
+                historydb.save_config(name, fpath)
 
         processed += 1
         ctx.ui.display_progress(operation = "snapshot",
