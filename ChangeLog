@@ -3,6 +3,9 @@
 		package format is used. This was a regression introduced when
 		switching to python 2.6.
 
+2010-02-22 Fatih Aşıcı <fatih@pardus.org.tr>
+		* pisi/operations/build.py: Refactor get_file_type function.
+
 2010-02-12 Gökçen Eraslan <gokcen@pardus.org.tr>
 		* pisi/actionsapi/shelltools.py: Replace FileError with ctx.ui.error
 		since FileError is defined in pisitoolsfunctions.
