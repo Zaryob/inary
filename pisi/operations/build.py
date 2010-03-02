@@ -49,7 +49,7 @@ class Error(pisi.Error):
 class ActionScriptException(Error):
     pass
 
-class AbandonedFilesException(Error):
+class AbandonedFilesException(pisi.Error):
     pass
 
 # Helper Functions
@@ -443,21 +443,34 @@ class Builder:
 
         for package in self.spec.packages:
             for path in package.files:
-                map(lambda p: all_paths_in_packages.append(p), [p for p in glob.glob(install_dir + path.path)])
+                path = pisi.util.join_path(install_dir, path.path)
+                all_paths_in_packages.append(path)
+
+        def is_included(path1, path2):
+            "Return True if path2 includes path1"
+            return path1 == path2 \
+                    or fnmatch.fnmatch(path1, path2) \
+                    or fnmatch.fnmatch(path1, pisi.util.join_path(path2, "*"))
 
         for root, dirs, files in os.walk(install_dir):
+            if not dirs and not files:
+                for _path in all_paths_in_packages:
+                    if is_included(root, _path):
+                        break
+                else:
+                    abandoned_files.append(root)
+
             for file_ in files:
-                already_in_package = False
                 fpath = pisi.util.join_path(root, file_)
                 for _path in all_paths_in_packages:
-                    if os.path.isdir(_path) and not _path.endswith("/"):
-                        _path = _path + "/"
-                    if not fpath.find(_path):
-                        already_in_package = True
-                if not already_in_package:
+                    if is_included(fpath, _path):
+                        break
+
+                else:
                     abandoned_files.append(fpath)
 
-        return abandoned_files
+        len_install_dir = len(install_dir)
+        return map(lambda x: x[len_install_dir:], abandoned_files)
 
     def copy_additional_source_files(self):
         # store additional files
@@ -963,14 +976,12 @@ class Builder:
             self.gen_metadata_xml(package)
 
             abandoned_files = self.get_abandoned_files()
-            if ctx.get_option('debug'):
-                if abandoned_files:
-                    # Fail
-                    ctx.ui.error(_('There are abandoned files under the install dir (%s):') % (install_dir))
-                    for f in abandoned_files:
-                        ctx.ui.info('    - %s' % (f))
+            if abandoned_files:
+                ctx.ui.error(_('There are abandoned files under the install dir (%s):') % (install_dir))
+                for f in abandoned_files:
+                    ctx.ui.info('    - %s' % (f))
 
-                    raise AbandonedFilesException
+                raise AbandonedFilesException
 
             # build number
             if ctx.config.options.ignore_build_no or not ctx.config.values.build.buildno:

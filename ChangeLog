@@ -11,6 +11,9 @@
 		when looking for file permission changes.
 		* pisi/api.py (snapshot): Take -D parameter into account when
 		storing config files.
+		* pisi/operations/build.py: Catch empty dirs when searching
+		for abandoned files. Always show abandoned files whether the
+		--debug option is given or not.
 
 2010-02-27 Fatih Aşıcı <fatih@pardus.org.tr>
 		* pisi/archive.py: Install files into correct paths when the old
