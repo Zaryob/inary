@@ -5,7 +5,8 @@
 		directory is "/" and fix exceptions when an old file is not
 		found.
 		* pisi/operations/check.py: Show missing files in the "check"
-		command output.
+		command output. Take "-D" parameter into account when checking
+		files.
 
 2010-02-27 Fatih Aşıcı <fatih@pardus.org.tr>
 		* pisi/archive.py: Install files into correct paths when the old
