@@ -52,8 +52,8 @@ Please file a bug report. (http://bugs.pardus.org.tr)"""))
         show_traceback = ctx.get_option('debug')
         ui.error(_("System Error. Program Terminated."))
 
-    if ctx.get_option('debug'):
-        ui.error(u"%s: %s" % (exception, value))
+    if show_traceback:
+        ui.error("%s: %s" % (exception, str(value)))
     else:
         msg = str(value)
         if msg:
