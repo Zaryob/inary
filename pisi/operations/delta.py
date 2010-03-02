@@ -157,7 +157,7 @@ def find_permission_changes(oldfiles, newfiles):
     permissions = []
     for h in unchanged:
         for _file in files_new[h]:
-            path = "/%s" % _file.path
+            path = os.path.join(ctx.config.dest_dir(), _file.path)
             if os.path.exists(path) and oct(stat.S_IMODE(os.stat(path)[stat.ST_MODE])) != _file.mode:
                 permissions.append((path, int(_file.mode, 8)))
 
