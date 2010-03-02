@@ -1,3 +1,12 @@
+2010-02-28 Fatih Aşıcı <fatih@pardus.org.tr>
+		* pisi/atomicoperations.py: Check if the old and new paths
+		refer to the same file when relocating or cleaning up. Also
+		fix updates with delta packages when the destination
+		directory is "/" and fix exceptions when an old file is not
+		found.
+		* pisi/operations/check.py: Show missing files in the "check"
+		command output.
+
 2010-02-27 Fatih Aşıcı <fatih@pardus.org.tr>
 		* pisi/archive.py: Install files into correct paths when the old
 		package format is used. This was a regression introduced when
