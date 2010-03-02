@@ -405,7 +405,7 @@ class Install(AtomicOperation):
             if missing_old_files:
                 ctx.ui.warning(_("Unable to relocate following files. Reinstallation of this package is strongly recommended."))
                 for f in sorted(missing_old_files):
-                    ctx.ui.warning("\t- %s" % f)
+                    ctx.ui.warning("    - %s" % f)
 
         # remove left over files from the old package.
         def clean_leftovers():
