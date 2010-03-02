@@ -55,7 +55,9 @@ Please file a bug report. (http://bugs.pardus.org.tr)"""))
     if ctx.get_option('debug'):
         ui.error(u"%s: %s" % (exception, value))
     else:
-         ui.error(unicode(value))
+        msg = str(value)
+        if msg:
+            ui.error(msg)
 
     ui.info(_("Please use 'pisi help' for general help."))
 
