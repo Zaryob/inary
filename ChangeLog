@@ -1,3 +1,8 @@
+2010-03-03 Fatih Aşıcı <fatih@pardus.org.tr>
+		* pisi/operations/build.py: Fix concatenation error. This is a
+		regression introduced when the support for Source/AdditionalFile
+		support is added.
+
 2010-02-28 Fatih Aşıcı <fatih@pardus.org.tr>
 		* pisi/atomicoperations.py: Check if the old and new paths
 		refer to the same file when relocating or cleaning up. Also

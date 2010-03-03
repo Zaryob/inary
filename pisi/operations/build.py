@@ -365,7 +365,7 @@ class Builder:
                 self.download(comaruri, pisi.util.join_path(self.destdir, ctx.const.comar_dir))
 
     def fetch_additionalFiles(self):
-        for pkg in self.spec.packages + self.spec.source:
+        for pkg in self.spec.packages + [self.spec.source]:
             for afile in pkg.additionalFiles:
                 file_name = os.path.basename(afile.filename)
                 dir_name = os.path.dirname(afile.filename)
