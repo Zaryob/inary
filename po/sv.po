@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
-"POT-Creation-Date: 2010-02-25 00:39+EET\n"
+"POT-Creation-Date: 2010-03-03 09:35+EET\n"
 "PO-Revision-Date: 2010-02-07 15:36+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@pardus.nu>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
@@ -23,7 +23,7 @@ msgstr "Tangentbordsavbrott: Avslutar..."
 msgid "Program Terminated."
 msgstr "Programmet avbröts."
 
-#: pisi-cli:48
+#: pisi-cli:47
 msgid ""
 "Unhandled internal exception.\n"
 "Please file a bug report. (http://bugs.pardus.org.tr)"
@@ -31,15 +31,15 @@ msgstr ""
 "Ohanterat internt undantag.\n"
 "Vänligen fyll i en felrapport. (http://bugs.pardus.org.tr)"
 
-#: pisi-cli:54
+#: pisi-cli:53
 msgid "System Error. Program Terminated."
 msgstr "Systemfel. Programmet avbröts."
 
-#: pisi-cli:61
+#: pisi-cli:62
 msgid "Please use 'pisi help' for general help."
 msgstr "Vänligen använd 'pisi help' för allmän hjälp."
 
-#: pisi-cli:64
+#: pisi-cli:65
 msgid "Traceback:"
 msgstr "Bakåtspårning:"
 
@@ -414,75 +414,75 @@ msgstr "%s-paketet finns i %s-förrådet."
 msgid "%s package already fetched"
 msgstr ""
 
-#: pisi/api.py:569
+#: pisi/api.py:570
 msgid "Taking snapshot of the system"
 msgstr ""
 
-#: pisi/api.py:723
+#: pisi/api.py:724
 msgid "comar package is not fully installed"
 msgstr ""
 
-#: pisi/api.py:735
+#: pisi/api.py:736
 msgid "File %s not found"
 msgstr "Filen %s hittades inte"
 
-#: pisi/api.py:775
+#: pisi/api.py:776
 msgid "* Building index of PiSi files under %s"
 msgstr "* Indexerar PiSi-filer under %s"
 
-#: pisi/api.py:782
+#: pisi/api.py:783
 msgid "* Index file written"
 msgstr "* Indexfil skriven"
 
-#: pisi/api.py:787
+#: pisi/api.py:788
 msgid "Not a valid repo name."
 msgstr "Ogiltigt förrådsnamn."
 
-#: pisi/api.py:790
+#: pisi/api.py:791
 msgid "Repo %s already present."
 msgstr "Förrådet %s finns redan."
 
-#: pisi/api.py:793
+#: pisi/api.py:794
 msgid "Repo already present with name %s."
 msgstr "Förrådet finns redan under namnet %s."
 
-#: pisi/api.py:798
+#: pisi/api.py:799
 msgid "Repo %s added to system."
 msgstr "Förrådet %s lades till:"
 
-#: pisi/api.py:806
+#: pisi/api.py:807
 msgid "Repo %s removed from system."
 msgstr ""
 
-#: pisi/api.py:808
+#: pisi/api.py:809
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "Förrådet % finns inte och kan därmed inte tas bort."
 
-#: pisi/api.py:825
+#: pisi/api.py:826
 msgid "* Updating repository: %s"
 msgstr "* Uppdaterar förråd: %s"
 
-#: pisi/api.py:835
+#: pisi/api.py:836
 msgid "%s repository information is up-to-date."
 msgstr "%s-förrådets information är aktuell."
 
-#: pisi/api.py:837
+#: pisi/api.py:838
 msgid "Updating database at any rate as requested"
 msgstr ""
 
-#: pisi/api.py:847
+#: pisi/api.py:848
 msgid "* Package database updated."
 msgstr "* Paketdatabas uppdaterad."
 
-#: pisi/api.py:849
+#: pisi/api.py:850
 msgid "No repository named %s found."
 msgstr "Inget förråd med namnet %s funnet."
 
-#: pisi/api.py:860
+#: pisi/api.py:861
 msgid "* Adding '%s' to db... "
 msgstr ""
 
-#: pisi/api.py:863
+#: pisi/api.py:864
 msgid "OK."
 msgstr "OK."
 
@@ -556,35 +556,41 @@ msgstr ""
 msgid "%s configuration failed."
 msgstr ""
 
-#: pisi/atomicoperations.py:439
+#: pisi/atomicoperations.py:406
+msgid ""
+"Unable to relocate following files. Reinstallation of this package is "
+"strongly recommended."
+msgstr ""
+
+#: pisi/atomicoperations.py:487
 msgid "Storing %s, "
 msgstr "Lagrar %s, "
 
-#: pisi/atomicoperations.py:442
+#: pisi/atomicoperations.py:490
 msgid "Storing %s."
 msgstr "Lagrar %s."
 
-#: pisi/atomicoperations.py:449
+#: pisi/atomicoperations.py:497
 msgid "Storing %s"
 msgstr "Lagrar %s"
 
-#: pisi/atomicoperations.py:516
+#: pisi/atomicoperations.py:564
 msgid "File list could not be read for package %s, continuing removal."
 msgstr ""
 
-#: pisi/atomicoperations.py:522
+#: pisi/atomicoperations.py:570
 msgid "Removing package %s"
 msgstr "Tar bort paketet %s"
 
-#: pisi/atomicoperations.py:525
+#: pisi/atomicoperations.py:573
 msgid "Trying to remove nonexistent package "
 msgstr ""
 
-#: pisi/atomicoperations.py:566
+#: pisi/atomicoperations.py:614
 msgid "Not removing conflicted file : %s"
 msgstr "Tar inte bort fil i konflikt: %s"
 
-#: pisi/atomicoperations.py:594
+#: pisi/atomicoperations.py:642
 msgid ""
 "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
@@ -870,7 +876,7 @@ msgid ""
 "Package %s is corrupt."
 msgstr ""
 
-#: pisi/cli/check.py:81 pisi/operations/check.py:46
+#: pisi/cli/check.py:81 pisi/operations/check.py:48
 msgid "OK"
 msgstr ""
 
@@ -2067,248 +2073,254 @@ msgstr ", Paketstorlek: %s"
 msgid "Mirrors file %s does not exist. Could not resolve mirrors://"
 msgstr ""
 
-#: pisi/operations/build.py:91
+#: pisi/operations/build.py:103
 msgid "Path %s belongs in multiple packages"
 msgstr ""
 
-#: pisi/operations/build.py:164
+#: pisi/operations/build.py:176
 msgid "Source URI: %s"
 msgstr ""
 
-#: pisi/operations/build.py:168
+#: pisi/operations/build.py:180
 msgid "Source %s not found in any active repository."
 msgstr ""
 
-#: pisi/operations/build.py:244
+#: pisi/operations/build.py:256
 msgid "Building PiSi source package: %s"
 msgstr ""
 
-#: pisi/operations/build.py:292
+#: pisi/operations/build.py:304
 msgid "IceCream detected. Make sure your daemon is up and running..."
 msgstr ""
 
-#: pisi/operations/build.py:297
+#: pisi/operations/build.py:309
 msgid "CCache detected..."
 msgstr ""
 
-#: pisi/operations/build.py:363
+#: pisi/operations/build.py:375
 msgid "PartOf tag not defined, looking for component"
 msgstr ""
 
-#: pisi/operations/build.py:372
+#: pisi/operations/build.py:384
 msgid ""
 "Cannot find component.xml in remote directory, Source is now part of unknown "
 "component"
 msgstr ""
 
-#: pisi/operations/build.py:378
+#: pisi/operations/build.py:390
 msgid ""
 "Cannot find component.xml in upper directory, Source is now part of unknown "
 "component"
 msgstr ""
 
-#: pisi/operations/build.py:384
+#: pisi/operations/build.py:396
 msgid "Source is part of %s component"
 msgstr ""
 
-#: pisi/operations/build.py:391
+#: pisi/operations/build.py:403
 msgid "Unpacking archive(s)..."
 msgstr ""
 
-#: pisi/operations/build.py:395
+#: pisi/operations/build.py:407
 msgid " unpacked (%s)"
 msgstr ""
 
-#: pisi/operations/build.py:400
+#: pisi/operations/build.py:412
 msgid "Setting up source..."
 msgstr ""
 
-#: pisi/operations/build.py:405
+#: pisi/operations/build.py:417
 msgid "Building source..."
 msgstr ""
 
-#: pisi/operations/build.py:410
+#: pisi/operations/build.py:422
 msgid "Testing package..."
 msgstr "Testar paket..."
 
-#: pisi/operations/build.py:414
+#: pisi/operations/build.py:426
 msgid "Installing..."
 msgstr "Installerar..."
 
-#: pisi/operations/build.py:468
+#: pisi/operations/build.py:493
 msgid "Unable to read Actions Script (%s): %s"
 msgstr ""
 
-#: pisi/operations/build.py:470
+#: pisi/operations/build.py:495
 msgid "SyntaxError in Actions Script (%s): %s"
 msgstr ""
 
-#: pisi/operations/build.py:487
+#: pisi/operations/build.py:512
 msgid "Unable to read COMAR script (%s): %s"
 msgstr ""
 
-#: pisi/operations/build.py:489
+#: pisi/operations/build.py:514
 msgid "SyntaxError in COMAR file (%s): %s"
 msgstr ""
 
-#: pisi/operations/build.py:501
+#: pisi/operations/build.py:526
 msgid "Sandbox violation: %s (%s -> %s)"
 msgstr ""
 
-#: pisi/operations/build.py:514 pisi/util.py:472
+#: pisi/operations/build.py:539 pisi/util.py:472
 msgid "ERROR: WorkDir (%s) does not exist\n"
 msgstr ""
 
-#: pisi/operations/build.py:522
+#: pisi/operations/build.py:547
 msgid "Sandbox enabled build..."
 msgstr ""
 
-#: pisi/operations/build.py:542
+#: pisi/operations/build.py:567
 msgid "Sandbox violation result:"
 msgstr ""
 
-#: pisi/operations/build.py:545
+#: pisi/operations/build.py:570
 msgid "Sandbox violations!"
 msgstr ""
 
-#: pisi/operations/build.py:551
+#: pisi/operations/build.py:576
 msgid "unable to call function from actions: %s"
 msgstr ""
 
-#: pisi/operations/build.py:572
+#: pisi/operations/build.py:597
 msgid ""
 "Safety switch: following extra packages in system.devel will be installed: "
 msgstr "Säkerhetslås: följande paket i system.devel kommer att installeras: "
 
-#: pisi/operations/build.py:577
+#: pisi/operations/build.py:602
 msgid "Safety switch: system.devel is already installed"
 msgstr "Säkerhetslås: system.devel är redan installerad"
 
-#: pisi/operations/build.py:579
+#: pisi/operations/build.py:604
 msgid "Safety switch: the component system.devel cannot be found"
 msgstr "Säkerhetslås: kan inte hitta komponenten system.devel"
 
-#: pisi/operations/build.py:588
+#: pisi/operations/build.py:613
 msgid "Unsatisfied Build Dependencies:"
 msgstr ""
 
-#: pisi/operations/build.py:592
+#: pisi/operations/build.py:617
 msgid "Cannot build package due to unsatisfied build dependencies"
 msgstr ""
 
-#: pisi/operations/build.py:597
+#: pisi/operations/build.py:622
 msgid "Build dependency %s cannot be satisfied"
 msgstr ""
 
-#: pisi/operations/build.py:599
+#: pisi/operations/build.py:624
 msgid "Do you want to install the unsatisfied build dependencies"
 msgstr ""
 
-#: pisi/operations/build.py:600
+#: pisi/operations/build.py:625
 msgid "Installing build dependencies."
 msgstr ""
 
-#: pisi/operations/build.py:606
+#: pisi/operations/build.py:631
 msgid "Ignoring build dependencies."
 msgstr ""
 
-#: pisi/operations/build.py:616
+#: pisi/operations/build.py:641
 msgid "Patch file is missing: %s\n"
 msgstr ""
 
-#: pisi/operations/build.py:632
+#: pisi/operations/build.py:657
 msgid "* Applying patch: %s"
 msgstr ""
 
-#: pisi/operations/build.py:746
+#: pisi/operations/build.py:771
 msgid "/%s has suid bit set"
 msgstr ""
 
-#: pisi/operations/build.py:782
+#: pisi/operations/build.py:807
 msgid "(found old version %s)"
 msgstr ""
 
-#: pisi/operations/build.py:806
+#: pisi/operations/build.py:831
 msgid "(no previous build found, setting build no to 1.)"
 msgstr ""
 
-#: pisi/operations/build.py:851
+#: pisi/operations/build.py:876
 msgid "(old package lacks a build no, setting build no to 1.)"
 msgstr ""
 
-#: pisi/operations/build.py:854
+#: pisi/operations/build.py:879
 msgid "There are changes, incrementing build no to %d"
 msgstr ""
 
-#: pisi/operations/build.py:857
+#: pisi/operations/build.py:882
 msgid "There is no change from previous build %d"
 msgstr ""
 
-#: pisi/operations/build.py:937
+#: pisi/operations/build.py:962
 msgid "No user named '%s' found on the system"
 msgstr ""
 
-#: pisi/operations/build.py:942
+#: pisi/operations/build.py:967
 msgid "No group named '%s' found on the system"
 msgstr ""
 
-#: pisi/operations/build.py:945
+#: pisi/operations/build.py:970
 msgid "** Building package %s"
 msgstr ""
 
-#: pisi/operations/build.py:947 pisi/operations/build.py:950
+#: pisi/operations/build.py:972 pisi/operations/build.py:975
 msgid "Generating %s,"
 msgstr ""
 
-#: pisi/operations/build.py:957
+#: pisi/operations/build.py:980
 msgid "There are abandoned files under the install dir (%s):"
 msgstr ""
 
-#: pisi/operations/build.py:966
+#: pisi/operations/build.py:989
 msgid ""
 "Build number is not available. For repo builds you must enable buildno in "
 "pisi.conf."
 msgstr ""
 
-#: pisi/operations/build.py:984
+#: pisi/operations/build.py:1007
 msgid "Creating PiSi package %s."
 msgstr ""
 
-#: pisi/operations/build.py:1034 pisi/operations/delta.py:98
+#: pisi/operations/build.py:1057 pisi/operations/delta.py:98
 msgid "Done."
 msgstr ""
 
-#: pisi/operations/build.py:1039
+#: pisi/operations/build.py:1062
 msgid ""
 "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 
-#: pisi/operations/build.py:1043
+#: pisi/operations/build.py:1066
 msgid "Cleaning Build Directory..."
 msgstr ""
 
-#: pisi/operations/build.py:1046
+#: pisi/operations/build.py:1069
 msgid "Keeping Build Directory"
 msgstr ""
 
-#: pisi/operations/build.py:1072
+#: pisi/operations/build.py:1095
 msgid "*** %d error(s), %d warning(s)"
 msgstr ""
 
-#: pisi/operations/check.py:36
+#: pisi/operations/check.py:37
 msgid "Checking /%s "
-msgstr ""
-
-#: pisi/operations/check.py:40
-msgid ""
-"\n"
-"Changed config file: %s"
 msgstr ""
 
 #: pisi/operations/check.py:42
 msgid ""
 "\n"
+"Changed config file: %s"
+msgstr ""
+
+#: pisi/operations/check.py:44
+msgid ""
+"\n"
 "Corrupt file: %s"
+msgstr ""
+
+#: pisi/operations/check.py:50
+msgid ""
+"\n"
+"Missing file: /%s"
 msgstr ""
 
 #: pisi/operations/delta.py:27
