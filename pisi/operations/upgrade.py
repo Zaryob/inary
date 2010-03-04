@@ -242,18 +242,22 @@ def plan_upgrade(A, force_replaced=True):
     # now, search for reverse dependency update needs of to be upgraded packages
     # check only the installed ones.
     B = filter(lambda x:installdb.has_package(x), G_f.vertices())
-    while len(B) > 0:
+    while B:
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
             (version, release, build) = installdb.get_version(x)
-            updates = [i for i in pkg.history if pisi.version.Version(i.release) > pisi.version.Version(release)]
+            for update in pkg.history:
+                if update.release == release:
+                    break
 
-            if pisi.util.any(lambda u:"reverseDependencyUpdate" in u.required_actions() , updates):
-                rev_deps = map(lambda d:d[0], packagedb.get_rev_deps(x))
-                for rev_dep in filter(lambda name:name not in G_f.vertices() and is_upgradable(name), rev_deps):
-                    Bp.add(rev_dep)
-                    G_f.add_plain_dep(rev_dep, x)
+                if "reverseDependencyUpdate" in update.required_actions():
+                    for name, dep in packagedb.get_rev_deps(x):
+                        if name in G_f.vertices() or not is_upgradable(name):
+                            continue
+
+                        Bp.add(name)
+                        G_f.add_plain_dep(name, x)
         B = Bp
 
     if ctx.config.get_option('debug'):
