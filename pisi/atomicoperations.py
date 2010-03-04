@@ -484,10 +484,10 @@ class Install(AtomicOperation):
         if self.reinstall():
             util.clean_dir(self.old_path)
 
-        ctx.ui.info(_('Storing %s, ') % ctx.const.files_xml, verbose=True)
+        ctx.ui.info(_('Storing %s') % ctx.const.files_xml, verbose=True)
         self.package.extract_file(ctx.const.files_xml, self.package.pkg_dir())
 
-        ctx.ui.info(_('Storing %s.') % ctx.const.metadata_xml, verbose=True)
+        ctx.ui.info(_('Storing %s') % ctx.const.metadata_xml, verbose=True)
         self.package.extract_file(ctx.const.metadata_xml, self.package.pkg_dir())
 
         for pcomar in self.metadata.package.providesComar:
