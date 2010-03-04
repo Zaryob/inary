@@ -227,18 +227,22 @@ class Install(AtomicOperation):
 
         self.old_pkginfo = None
         pkg = self.pkginfo
+        pkg_version = pisi.version.Version(pkg.version)
+        pkg_release = int(pkg.release)
 
         if self.installdb.has_package(pkg.name): # is this a reinstallation?
             ipkg = self.installdb.get_package(pkg.name)
             repomismatch = ipkg.distribution != pkg.distribution
             (iversion, irelease, ibuild) = self.installdb.get_version(pkg.name)
+            iversion = pisi.version.Version(iversion)
+            irelease = int(irelease)
 
             # determine if same version
             self.same_ver = False
             ignore_build = ctx.config.options and ctx.config.options.ignore_build_no
             if repomismatch or (not ibuild) or (not pkg.build) or ignore_build:
                 # we don't look at builds to compare two package versions
-                if pisi.version.Version(pkg.release) == pisi.version.Version(irelease):
+                if pkg_release == irelease:
                     self.same_ver = True
             else:
                 if pkg.build == ibuild:
@@ -252,10 +256,10 @@ class Install(AtomicOperation):
             else:
                 # is this an upgrade?
                 # determine and report the kind of upgrade: version, release, build
-                if pisi.version.Version(pkg.version) > pisi.version.Version(iversion):
+                if pkg_version > iversion:
                     ctx.ui.info(_('Upgrading to new upstream version'))
                     self.operation = UPGRADE
-                elif pisi.version.Version(pkg.release) > pisi.version.Version(irelease):
+                elif pkg_release > irelease:
                     ctx.ui.info(_('Upgrading to new distribution release'))
                     self.operation = UPGRADE
                 elif ((not ignore_build) and ibuild and pkg.build
@@ -265,10 +269,10 @@ class Install(AtomicOperation):
 
                 # is this a downgrade? confirm this action.
                 if not self.operation == UPGRADE:
-                    if pisi.version.Version(pkg.version) < pisi.version.Version(iversion):
+                    if pkg_version < iversion:
                         #x = _('Downgrade to old upstream version?')
                         x = None
-                    elif pisi.version.Version(pkg.release) < pisi.version.Version(irelease):
+                    elif pkg_release < irelease:
                         x = _('Downgrade to old distribution release?')
                     else:
                         x = _('Downgrade to old distribution build?')
@@ -279,7 +283,7 @@ class Install(AtomicOperation):
             # schedule for reinstall
             self.old_files = self.installdb.get_files(pkg.name)
             self.old_pkginfo = self.installdb.get_info(pkg.name)
-            self.old_path = self.installdb.pkg_dir(pkg.name, iversion, irelease)
+            self.old_path = self.installdb.pkg_dir(pkg.name, str(iversion), str(irelease))
             self.remove_old = Remove(pkg.name)
             self.remove_old.run_preremove()
             self.remove_old.run_postremove()
@@ -508,7 +512,11 @@ class Install(AtomicOperation):
         # get update history
         if self.installdb.has_package(self.pkginfo.name):
             (version, release, build) = self.installdb.get_version(self.pkginfo.name)
-            updates = [i for i in self.pkginfo.history if pisi.version.Version(i.release) > pisi.version.Version(release)]
+            updates = []
+            for update in self.pkginfo.history:
+                if update.release == release:
+                    break
+                updates.append(update)
         else:
             updates = self.pkginfo.history
 
