@@ -56,9 +56,15 @@ def find_upgrades(packages, replaces):
         pkg = packagedb.get_package(i_pkg)
         (version, release, build, distro, distro_release) = installdb.get_version_and_distro_release(i_pkg)
 
-        updates = [i for i in pkg.history if pisi.version.Version(i.release) > pisi.version.Version(release)]
         if security_only:
-            if not pisi.util.any(lambda i:i.type == 'security', updates):
+            security_update = False
+            for update in pkg.history:
+                if update.release == release:
+                    break
+                if update.type == "security":
+                    security_update = True
+                    break
+            if not security_update:
                 continue
 
         if pkg.distribution == distro and pisi.version.Version(pkg.distributionRelease) > pisi.version.Version(distro_release):
