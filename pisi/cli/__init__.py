@@ -88,7 +88,7 @@ class CLI(pisi.ui.UI):
         if ctx.get_option('no_color'):
             self.output(_('Error: ') + msg + '\n', err=True)
         else:
-            self.output(pisi.util.colorize(msg + '\n', 'red'), err=True)
+            self.output(pisi.util.colorize(msg + '\n', 'brightred'), err=True)
 
     def action(self, msg, verbose = False):
         #TODO: this seems quite redundant?
