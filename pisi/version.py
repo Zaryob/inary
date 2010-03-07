@@ -14,7 +14,10 @@
 
 import re
 import string
-import exceptions
+
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
 
 import pisi
 import pisi.util as util
@@ -34,6 +37,47 @@ keywords = {
             "NOKEY" : 5,
             "p"     : 6,
             }
+
+__keywords = (
+        ("alpha",   -5),
+        ("beta",    -4),
+        ("pre",     -3),
+        ("rc",      -2),
+        ("m",       -1),
+        ("p",        1),
+        )
+
+class InvalidVersionError(pisi.Error):
+    pass
+
+def __make_version_item(v):
+    try:
+        return int(v), None
+    except ValueError:
+        return int(v[:-1]), v[-1]
+
+def make_version(version):
+    ver, sep, suffix = version.partition("_")
+    try:
+        if sep:
+            # "s" is a string greater than the greatest keyword "rc"
+            if "a" <= suffix <= "s":
+                for keyword, value in __keywords:
+                    if suffix.startswith(keyword):
+                        return map(__make_version_item, ver.split(".")), value, \
+                                map(__make_version_item, suffix[len(keyword):].split("."))
+                else:
+                    # Probably an invalid version string. Reset ver string
+                    # to raise an exception in __make_version_item function.
+                    ver = ""
+            else:
+                return map(__make_version_item, ver.split(".")), 0, \
+                        map(__make_version_item, suffix.split("."))
+
+        return map(__make_version_item, ver.split(".")), 0, [(0, None)]
+
+    except ValueError:
+        raise InvalidVersionError(_("Invalid version string: '%s'") % version)
 
 # helper functions
 def has_keyword(versionitem):
