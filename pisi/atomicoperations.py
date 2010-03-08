@@ -187,7 +187,7 @@ class Install(AtomicOperation):
     def check_versioning(self, version, release):
         try:
             int(release)
-            pisi.version.Version(version)
+            pisi.version.make_version(version)
         except (ValueError, InvalidVersionError):
             raise Error(_("%s-%s is not a valid PiSi version format") % (version, release))
 
@@ -230,22 +230,18 @@ class Install(AtomicOperation):
 
         self.old_pkginfo = None
         pkg = self.pkginfo
-        pkg_version = pisi.version.Version(pkg.version)
-        pkg_release = int(pkg.release)
 
         if self.installdb.has_package(pkg.name): # is this a reinstallation?
             ipkg = self.installdb.get_package(pkg.name)
             repomismatch = ipkg.distribution != pkg.distribution
-            (iversion, irelease, ibuild) = self.installdb.get_version(pkg.name)
-            iversion = pisi.version.Version(iversion)
-            irelease = int(irelease)
+            (iversion_s, irelease_s, ibuild) = self.installdb.get_version(pkg.name)
 
             # determine if same version
             self.same_ver = False
             ignore_build = ctx.config.options and ctx.config.options.ignore_build_no
             if repomismatch or (not ibuild) or (not pkg.build) or ignore_build:
                 # we don't look at builds to compare two package versions
-                if pkg_release == irelease:
+                if pkg.release == irelease_s:
                     self.same_ver = True
             else:
                 if pkg.build == ibuild:
@@ -257,6 +253,12 @@ class Install(AtomicOperation):
                         raise Error(_('Package re-install declined'))
                 self.operation = REINSTALL
             else:
+                pkg_version = pisi.version.make_version(pkg.version)
+                iversion = pisi.version.make_version(iversion_s)
+
+                pkg_release = int(pkg.release)
+                irelease = int(irelease_s)
+
                 # is this an upgrade?
                 # determine and report the kind of upgrade: version, release, build
                 if pkg_version > iversion:
@@ -286,7 +288,7 @@ class Install(AtomicOperation):
             # schedule for reinstall
             self.old_files = self.installdb.get_files(pkg.name)
             self.old_pkginfo = self.installdb.get_info(pkg.name)
-            self.old_path = self.installdb.pkg_dir(pkg.name, str(iversion), str(irelease))
+            self.old_path = self.installdb.pkg_dir(pkg.name, iversion_s, irelease_s)
             self.remove_old = Remove(pkg.name)
             self.remove_old.run_preremove()
             self.remove_old.run_postremove()
