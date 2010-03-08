@@ -24,8 +24,8 @@ class VersionTestCase(unittest.TestCase):
     def testOpsNumerical(self):
         v1 = Version("0.3.1")
         v2 = Version("0.3.5")
-        v3 = Version("1.5.2-4")
-        v4 = Version("0.3.1-1")
+        v3 = Version("1.5.2")
+        v4 = Version("0.3.1")
         v5 = Version("2.07")
         self.assert_(v1 < v2)
         self.assert_(v3 > v2)
