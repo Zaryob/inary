@@ -2,7 +2,9 @@
 		* pisi/operations/build.py: Fix concatenation error. This is a
 		regression introduced when the support for Source/AdditionalFile
 		support is added.
-
+2010-03-01 Ozan Çağlayan <ozan@pardus.org.tr>
+		* pisi/: Use the constants from constants.py instead of hardcoding
+		them.
 2010-02-28 Fatih Aşıcı <fatih@pardus.org.tr>
 		* pisi/atomicoperations.py: Check if the old and new paths
 		refer to the same file when relocating or cleaning up. Also
