@@ -67,10 +67,12 @@ def find_upgrades(packages, replaces):
             if not security_update:
                 continue
 
-        if pkg.distribution == distro and pisi.version.Version(pkg.distributionRelease) > pisi.version.Version(distro_release):
+        if pkg.distribution == distro and \
+                pisi.version.make_version(pkg.distributionRelease) > pisi.version.make_version(distro_release):
             Ap.append(i_pkg)
+
         elif ignore_build or (not build) or (not pkg.build):
-            if pisi.version.Version(release) < pisi.version.Version(pkg.release):
+            if int(release) < int(pkg.release):
                 Ap.append(i_pkg)
             else:
                 ctx.ui.info(_('Package %s is already at the latest release %s.')
@@ -308,12 +310,13 @@ def upgrade_base(A = set()):
 def is_upgradable(name, ignore_build = False):
 
     installdb = pisi.db.installdb.InstallDB()
-    packagedb = pisi.db.packagedb.PackageDB()
 
     if not installdb.has_package(name):
         return False
 
     (i_version, i_release, i_build, i_distro, i_distro_release) = installdb.get_version_and_distro_release(name)
+
+    packagedb = pisi.db.packagedb.PackageDB()
 
     try:
         version, release, build, distro, distro_release = packagedb.get_version_and_distro_release(name, packagedb.which_repo(name))
@@ -322,9 +325,10 @@ def is_upgradable(name, ignore_build = False):
     except Exception: #FIXME: what exception could we catch here, replace with that.
         return False
 
-    if distro == i_distro and pisi.version.Version(distro_release) > pisi.version.Version(i_distro_release):
+    if distro == i_distro and \
+            pisi.version.make_version(distro_release) > pisi.version.make_version(i_distro_release):
         return True
     elif ignore_build or (not i_build) or (not build):
-        return pisi.version.Version(i_release) < pisi.version.Version(release)
+        return int(i_release) < int(release)
     else:
         return i_build < build

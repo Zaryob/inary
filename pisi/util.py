@@ -661,8 +661,8 @@ def filter_latest_packages(package_paths):
                 continue
 
             elif l_release == r_release:
-                l_version = pisi.version.Version(l_version)
-                r_version = pisi.version.Version(r_version)
+                l_version = pisi.version.make_version(l_version)
+                r_version = pisi.version.make_version(r_version)
 
                 if l_version > r_version:
                     continue
