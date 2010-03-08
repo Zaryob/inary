@@ -10,6 +10,10 @@
 # Please read the COPYING file.
 #
 
+import gettext
+__trans = gettext.translation('pisi', fallback=True)
+_ = __trans.ugettext
+
 import os
 
 import piksemel
@@ -152,13 +156,13 @@ class RepoDB(lazydb.LazyDB):
             index_path = index_path.split(".bz2")[0]
 
         if not os.path.exists(index_path):
-            ctx.ui.warning("%s repository needs to be updated" % repo_name)
+            ctx.ui.warning(_("%s repository needs to be updated") % repo_name)
             return piksemel.newDocument("PISI")
 
         try:
             return piksemel.parse(index_path)
         except Exception, e:
-            raise RepoError("Error parsing repository index information. Index file does not exist or is malformed.")
+            raise RepoError(_("Error parsing repository index information. Index file does not exist or is malformed."))
 
     def get_repo(self, repo):
         return Repo(pisi.uri.URI(self.get_repo_url(repo)))
