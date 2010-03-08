@@ -926,7 +926,6 @@ def clearCache(all=False):
                 name, full_version = util.parse_package_name(f)
                 version, release, build = pisi.util.split_version(full_version)
 
-                version = Version(version)
                 release = int(release)
                 if build:
                     build = int(build)
