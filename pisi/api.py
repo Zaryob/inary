@@ -923,19 +923,30 @@ def clearCache(all=False):
         latest = {}
         for f in pkgList:
             try:
-                name, version = util.parse_package_name(f)
-                if latest.has_key(name):
-                    if Version(latest[name]) < Version(version):
-                        latest[name] = version
-                else:
-                    if version:
-                        latest[name] = version
+                name, full_version = util.parse_package_name(f)
+                version, release, build = pisi.util.split_version(full_version)
+
+                version = Version(version)
+                release = int(release)
+                if build:
+                    build = int(build)
+
+                if name in latest:
+                    lversion, lrelease, lbuild = latest[name]
+                    if lbuild and build:
+                        if lbuild > build:
+                            continue
+                    elif lrelease > release:
+                        continue
+
+                latest[name] = full_version, release, build
+
             except:
                 pass
 
         latestVersions = []
         for pkg in latest:
-            latestVersions.append("%s-%s" % (pkg, latest[pkg]))
+            latestVersions.append("%s-%s" % (pkg, latest[pkg][0]))
 
         oldVersions = list(set(pkgList) - set(latestVersions))
         return oldVersions, latestVersions
