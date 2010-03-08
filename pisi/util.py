@@ -640,21 +640,35 @@ def filter_latest_packages(package_paths):
         name, version = parse_package_name(os.path.basename(path[:-len(ctx.const.package_suffix)]))
 
         if latest.has_key(name):
-            l_version = pisi.version.Version(latest[name][2])
-            r_version = pisi.version.Version(version)
+            l_version, l_release, l_build = split_version(latest[name][2])
+            r_version, r_release, r_build = split_version(version)
 
-            # Bug 6352
-            # If version format changes in repo and a repo also keeps the old packages (bad.bad.bad.)
-            # than only use the build nos
-            if l_version.build and r_version.build:
-                if l_version.build < r_version.build:
-                    latest[name] = (root, name, version)
-            else:
-                if l_version < r_version:
-                    latest[name] = (root, name, version)
-        else:
-            if version:
-                latest[name] = (root, name, version)
+            try:
+                l_release = int(l_release)
+                r_release = int(r_release)
+
+                l_build = int(l_build) if l_build else None
+                r_build = int(r_build) if r_build else None
+
+            except ValueError:
+                continue
+
+            if l_build and r_build:
+                if l_build > r_build:
+                    continue
+
+            elif l_release > r_release:
+                continue
+
+            elif l_release == r_release:
+                l_version = pisi.version.Version(l_version)
+                r_version = pisi.version.Version(r_version)
+
+                if l_version > r_version:
+                    continue
+
+        if version:
+            latest[name] = (root, name, version)
 
     return map(lambda x:"%s/%s-%s.pisi" % x, latest.values())
 
