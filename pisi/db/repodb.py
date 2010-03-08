@@ -33,6 +33,7 @@ medias = (cd, usb, remote, local) = range(4)
 class RepoOrder:
 
     def __init__(self):
+        self._doc = None
         self.repos = self._get_repos()
 
     def add(self, repo_name, repo_url, repo_type="remote"):
@@ -106,13 +107,18 @@ class RepoOrder:
     def _update(self, doc):
         repos_file = os.path.join(ctx.config.info_dir(), ctx.const.repos)
         open(repos_file, "w").write("%s\n" % doc.toPrettyString())
+        self._doc = None
         self.repos = self._get_repos()
 
     def _get_doc(self):
-        repos_file = os.path.join(ctx.config.info_dir(), ctx.const.repos)
-        if not os.path.exists(repos_file):
-            return piksemel.newDocument("REPOS")
-        return piksemel.parse(repos_file)
+        if self._doc is None:
+            repos_file = os.path.join(ctx.config.info_dir(), ctx.const.repos)
+            if os.path.exists(repos_file):
+                self._doc = piksemel.parse(repos_file)
+            else:
+                self._doc = piksemel.newDocument("REPOS")
+
+        return self._doc
 
     def _get_repos(self):
         repo_doc = self._get_doc()
@@ -161,13 +167,13 @@ class RepoDB(lazydb.LazyDB):
     def get_repo_url(self, repo):
         urifile_path = pisi.util.join_path(ctx.config.index_dir(), repo, "uri")
         uri = open(urifile_path, "r").read()
-        return uri
+        return uri.rstrip()
 
     def add_repo(self, name, repo_info, at = None):
         repo_path = pisi.util.join_path(ctx.config.index_dir(), name)
         os.makedirs(repo_path)
         urifile_path = pisi.util.join_path(ctx.config.index_dir(), name, "uri")
-        uri = open(urifile_path, "w").write(repo_info.indexuri.get_uri())
+        open(urifile_path, "w").write(repo_info.indexuri.get_uri())
         self.repoorder.add(name, repo_info.indexuri.get_uri())
 
     def remove_repo(self, name):
