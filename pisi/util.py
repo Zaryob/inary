@@ -618,6 +618,15 @@ def parse_delta_package_name(package_name):
     
     return name, buildFrom, buildTo
 
+def split_version(package_version):
+    """Split version, release and build parts of a package version
+
+    example: 1.0.3-5-2 -> (1.0.3, 5, 2)
+    """
+    version, sep, release_and_build = package_version.partition("-")
+    release, sep, build = release_and_build.partition("-")
+    return version, release, build
+
 def filter_latest_packages(package_paths):
     """ For a given pisi package paths list where there may also be multiple versions
         of the same package, filters only the latest versioned ones """
