@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2007, TUBITAK/UEKAE
+# Copyright (C) 2007 - 2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -32,22 +32,31 @@ class Relation:
     a_releaseTo = [autoxml.String, autoxml.optional]
 
     def satisfies_relation(self, version, release):
-        ret = True
-        v = pisi.version.Version(version)
-        if self.version:
-            ret &= v == pisi.version.Version(self.version)
-        if self.versionFrom:
-            ret &= v >= pisi.version.Version(self.versionFrom)
-        if self.versionTo:
-            ret &= v <= pisi.version.Version(self.versionTo)
-        r = pisi.version.Version(release)
-        if self.release:
-            ret &= r == pisi.version.Version(self.release)
-        if self.releaseFrom:
-            ret &= r >= pisi.version.Version(self.releaseFrom)
-        if self.releaseTo:
-            ret &= r <= pisi.version.Version(self.releaseTo)
-        return ret
+        if self.version and version != self.version:
+            return False
+        else:
+            v = pisi.version.make_version(version)
+
+            if self.versionFrom and \
+                    v < pisi.version.make_version(self.versionFrom):
+                return False
+
+            if self.versionTo and \
+                    v > pisi.version.make_version(self.versionTo):
+                return False
+
+        if self.release and release != self.release:
+            return False
+        else:
+            r = int(release)
+
+            if self.releaseFrom and r < int(self.releaseFrom):
+                return False
+
+            if self.releaseTo and r > int(self.releaseTo):
+                return False
+
+        return True
 
 def installed_package_satisfies(relation):
     installdb = pisi.db.installdb.InstallDB()
@@ -56,5 +65,4 @@ def installed_package_satisfies(relation):
         return False
     else:
         pkg = installdb.get_package(pkg_name)
-        (version, release) = (pkg.version, pkg.release)
-        return relation.satisfies_relation(version, release)
+        return relation.satisfies_relation(pkg.version, pkg.release)
