@@ -200,7 +200,7 @@ class Builder:
             self.specdir = os.path.dirname(self.specuri.get_uri())
 
         # Don't wait until creating .pisi file for complaining about versioning scheme errors
-        self.check_versioning("%s-%s" % (self.spec.getSourceVersion(), self.spec.getSourceRelease()))
+        self.check_versioning(self.spec.getSourceVersion(), self.spec.getSourceRelease())
 
         self.read_translations(self.specdir)
 
@@ -586,9 +586,12 @@ class Builder:
         os.chdir(curDir)
         return True
 
-    def check_versioning(self, version):
-        if not pisi.version.Version.valid(version):
-            raise Error("%s is not a valid PiSi version format" % version)
+    def check_versioning(self, version, release):
+        try:
+            int(release)
+            pisi.version.Version(version)
+        except (ValueError, InvalidVersionError):
+            raise Error(_("%s-%s is not a valid PiSi version format") % (version, release))
 
     def check_build_dependencies(self):
         """check and try to install build dependencies, otherwise fail."""
@@ -813,7 +816,8 @@ class Builder:
                     pkg = os.path.basename(old_package_fn)
                     name, version = pisi.util.parse_package_name(pkg[:-5])
                     ctx.ui.info(_('(found old version %s)') % old_package_fn)
-                    old_build = int(str(pisi.version.Version(version).build))
+                    ver, rel, build = pisi.util.split_version(version)
+                    old_build = int(build) if build else 0
                     found.add( (old_package_fn, old_build) )
                 except Error:
                     ctx.ui.warning('Package file %s may be corrupt. Skipping.' % old_package_fn)

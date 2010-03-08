@@ -150,7 +150,7 @@ class Install(AtomicOperation):
 
         self.ask_reinstall = ask_reinstall
         self.check_requirements()
-        self.check_versioning("%s-%s" % (self.pkginfo.version, self.pkginfo.release))
+        self.check_versioning(self.pkginfo.version, self.pkginfo.release)
         self.check_relations()
         self.check_operation()
         self.extract_install()
@@ -184,9 +184,12 @@ class Install(AtomicOperation):
             if self.installdb.has_package(replaced.package):
                 pisi.operations.remove.remove_replaced_packages([replaced.package])
 
-    def check_versioning(self, version):
-        if not pisi.version.Version.valid(version):
-            raise Error("%s is not a valid PiSi version format" % version)
+    def check_versioning(self, version, release):
+        try:
+            int(release)
+            pisi.version.Version(version)
+        except (ValueError, InvalidVersionError):
+            raise Error(_("%s-%s is not a valid PiSi version format") % (version, release))
 
     def check_relations(self):
         # check dependencies
