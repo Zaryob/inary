@@ -131,7 +131,7 @@ def upgrade(A=[], repo=None):
     ctx.ui.debug('A = %s' % str(A))
 
     if not ctx.config.get_option('ignore_dependency'):
-        G_f, order = plan_upgrade(A)
+        G_f, order = plan_upgrade(A, replaces=replaces)
     else:
         G_f = None
         order = list(A)
@@ -182,7 +182,7 @@ def upgrade(A=[], repo=None):
         install_op = atomicoperations.Install(path, ignore_file_conflicts = True)
         install_op.install(True)
 
-def plan_upgrade(A, force_replaced=True):
+def plan_upgrade(A, force_replaced=True, replaces=None):
     # FIXME: remove force_replaced
     # try to construct a pisi graph of packages to
     # install / reinstall
@@ -199,7 +199,8 @@ def plan_upgrade(A, force_replaced=True):
     # FIXME: this is also not nice. this would not be needed if replaced packages are not written as obsoleted also.
     # But if they are not written obsoleted "pisi index" indexes them
     if force_replaced:
-        replaces = packagedb.get_replaces()
+        if replaces is None:
+            replaces = packagedb.get_replaces()
         A |= set(sum(replaces.values(), []))
 
     # find the "install closure" graph of G_f by package
