@@ -200,10 +200,16 @@ class PackageDB(lazydb.LazyDB):
         pairs = {}
 
         for pkg_name in self.rpdb.get_list_item():
-            replaces = self.get_package(pkg_name).replaces
-            for r in replaces:
-                if pisi.replace.installed_package_replaced(r):
-                    pairs.setdefault(r.package, []).append(pkg_name)
+            xml = self.pdb.get_item(pkg_name, repo)
+            package = piksemel.parseString(xml)
+            replaces_tag = package.getTag("Replaces")
+            if replaces_tag:
+                for node in replaces_tag.tags("Package"):
+                    r = pisi.relation.Relation()
+                    # XXX Is there a better way to do this?
+                    r.decode(node, [])
+                    if pisi.replace.installed_package_replaced(r):
+                        pairs.setdefault(r.package, []).append(pkg_name)
 
         return pairs
 
