@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005 - 2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -87,11 +87,11 @@ class Constants:
         self.__c.sandbox_conf = "/etc/pisi/sandbox.conf"
         self.__c.blacklist = "/etc/pisi/blacklist"
         self.__c.config_pending = "configpending"
-        self.__c.needs_restart = "needs_restart"
-        self.__c.needs_reboot = "needs_reboot"
+        self.__c.needs_restart = "needsrestart"
+        self.__c.needs_reboot = "needsreboot"
         self.__c.files_db = "files.db"
         self.__c.repos = "repos"
-        
+
         #file/directory permissions
         self.__c.umask = 0022
 

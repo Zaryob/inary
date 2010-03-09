@@ -1,3 +1,7 @@
+2010-03-09 Ozan Çağlayan <ozan@pardus.org.tr>
+		* pisi/constants.py: Don't use underscores to be compatible with other
+		file names in infodir.
+
 2010-03-08 Ozan Çağlayan <ozan@pardus.org.tr>
 		* pisi/actionsapi/cmaketools.py: Those given parameters are nonsense
 		and noop. Just give DESTDIR to install() for correct installation into
