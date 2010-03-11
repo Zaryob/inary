@@ -1,22 +1,22 @@
 # translation of nl.po to Nederlands
+# Copyright (C) 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
 # Andre van der Lubben <klikspin@gmail.com>, 2006.
 # Willem Gielen <w.gielen@gmail.com>, 2006, 2007, 2008, 2009.
 # Rinse de Vries <rinsedevries@kde.nl>, 2006.
 # W.P.M.H.I.A. Gielen <w.gielen@gmail.com>, 2006, 2007, 2008.
-# Antoon Tolboom <atolboo@gmail.com>, 2009.
-# Copyright (C) 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
+# Antoon Tolboom <atolboo@gmail.com>, 2009, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "POT-Creation-Date: 2010-02-28 21:26+EET\n"
-"PO-Revision-Date: 30/12/09 16:03\n"
+"PO-Revision-Date: 2010-03-11 14:47+0100\n"
 "Last-Translator: Antoon Tolboom <atolboo@gmail.com>\n"
-"Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
+"Language-Team: Dutch <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 1.0\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -26,34 +26,32 @@ msgid "Keyboard Interrupt: Exiting..."
 msgstr "Toetsenbord-interrupt: Wordt verlaten..."
 
 #: pisi-cli:45
-#, fuzzy
 msgid "Program terminated."
 msgstr "Programma beëindigd."
 
 #: pisi-cli:49
-#, fuzzy
 msgid ""
 "Unhandled internal exception.\n"
 "Please file a bug report to <http://bugs.pardus.org.tr>."
 msgstr ""
 "Onhandelbare interne uitzondering.\n"
-"Rapporteer deze fout alstublieft. (http://bugs.pardus.org.tr)"
+"Rapporteer deze fout op <http://bugs.pardus.org.tr>."
 
 #: pisi-cli:55
-#, fuzzy
 msgid "System error. Program terminated."
-msgstr "Systeemfout: programma beëindigd."
+msgstr "Systeemfout. Programma beëindigd."
 
 #: pisi-cli:62
 msgid "Please use 'pisi help' for general help."
 msgstr "Gebruik pisi help voor algemene hulp."
 
 #: pisi-cli:65
-#, fuzzy
 msgid ""
 "\n"
 "Traceback:"
-msgstr "Terugloop:"
+msgstr ""
+"\n"
+"Terugloop:"
 
 #: pisi-cli:69
 msgid "Use --debug to see a traceback."
@@ -523,7 +521,7 @@ msgstr "Pakket-URI: %s"
 #: pisi/atomicoperations.py:116
 msgid "Download Error: Package does not match the repository package."
 msgstr ""
-"Download fout: Pakket komt niet overeen met het pakket in de softwarebron."
+"Downloadfout: Pakket komt niet overeen met het pakket in de softwarebron."
 
 #: pisi/atomicoperations.py:120
 msgid "Package %s not found in any active repository."
@@ -593,6 +591,8 @@ msgid ""
 "Unable to relocate following files. Reinstallation of this package is "
 "strongly recommended."
 msgstr ""
+"Kan volgende bestanden niet terugvinden. Herinstallatie van dit pakket wordt "
+"sterk aangeraden."
 
 #: pisi/atomicoperations.py:488
 msgid "Storing %s, "
@@ -700,25 +700,23 @@ msgid "add-repo options"
 msgstr "bronopties toevoegen"
 
 #: pisi/cli/addrepo.py:46
-#, fuzzy
 msgid "Ignore repository distribution check"
-msgstr "Controle van distributieversie en architectuur overslaan"
+msgstr "Controle van distributiebron en architectuur overslaan"
 
 #: pisi/cli/addrepo.py:47
-#, fuzzy
 msgid "Does not fetch repository index and does not check distribution match"
 msgstr ""
-"De softwarebron kan niet toegevoegd worden omdat de distributiearchitectuur "
-"niet overeen komt"
+"Haalt index van de bron niet op en controleert de distributie en "
+"architectuur niet"
 
 #: pisi/cli/addrepo.py:50
 msgid "Add repository at given position (0 is first)"
 msgstr "Softwarebron op gegeven positie (0 is eerst) toevoegen"
 
 #: pisi/cli/addrepo.py:59
-#, fuzzy
 msgid "Repository distribution does not match. Removing %s from system."
-msgstr "%s softwarebron is onbereikbaar. %s van systeem verwijderen."
+msgstr ""
+"Softwarebron van distributie komt niet overeen. %s van systeem verwijderen."
 
 #: pisi/cli/addrepo.py:73
 msgid ""
@@ -727,6 +725,10 @@ msgid ""
 "checking the distribution of the repository.\n"
 "Do you want to continue?"
 msgstr ""
+"%s softwarebron toevoegen zonder bijwerken van de database?\n"
+"Door het toestemmen wordt deze bron aan het system toegevoegd zonder deze "
+"te controleren.\n"
+"Doorgaan met toevoegen? "
 
 #: pisi/cli/addrepo.py:87
 msgid "%s repository could not be reached. Removing %s from system."
@@ -1804,7 +1806,7 @@ msgstr "Geen commando gegeven"
 
 #: pisi/cli/pisicli.py:130
 msgid "Command line parsing error"
-msgstr "Fout bij ontleden van commando"
+msgstr "Fout bij ontleden van opdrachtregel"
 
 #: pisi/cli/rebuilddb.py:24
 msgid ""
@@ -2240,7 +2242,7 @@ msgstr "Urlgrabber dient geïnstalleerd te zijn om dit commando uit te voeren"
 
 #: pisi/fetcher.py:135
 msgid "Filename error"
-msgstr "Bestandsnaam fout"
+msgstr "Bestandsnaamfout"
 
 #: pisi/fetcher.py:138
 msgid "Access denied to write to destination directory: \"%s\""
@@ -2271,13 +2273,12 @@ msgid "Bandwidth usage is limited to %s KB/s"
 msgstr "Bandbreedte gebruik is beperks tot %s KB/s"
 
 #: pisi/fetcher.py:212
-#, fuzzy
 msgid ""
 "Remote file can not be reached. Previously downloaded part of the file will "
 "be removed."
 msgstr ""
-"De server ondersteunt geen gedeeltelijke downloads. Het eerder gedownloade "
-"deel van het bestand zal overschreven worden."
+"Bestand op afstand kan niet bereikt worden. Het eerder opgehaalde "
+"deel van het bestand zal verwijderd worden."
 
 #: pisi/fetcher.py:221
 msgid ""
@@ -2401,7 +2402,7 @@ msgstr "Bron %s niet gevonden in actieve softwarebronnen."
 
 #: pisi/operations/build.py:261
 msgid "pspec.xml avoids this package from building for '%s'"
-msgstr ""
+msgstr "pspec.xml voorkomt het bouwen van dit pakket voor '%s'"
 
 #: pisi/operations/build.py:264
 msgid "Building PiSi source package: %s"
@@ -2440,9 +2441,8 @@ msgid "Source is part of %s component"
 msgstr "Bron is onderdeel van %s component"
 
 #: pisi/operations/build.py:411
-#, fuzzy
 msgid "Unpacking archive(s)..."
-msgstr "Uitpakken archief..."
+msgstr "Bezig uitpakken archief..."
 
 #: pisi/operations/build.py:415
 msgid " unpacked (%s)"
@@ -2655,6 +2655,8 @@ msgid ""
 "\n"
 "Missing file: /%s"
 msgstr ""
+"\n"
+"Ontbrekend bestand: /%s"
 
 #: pisi/operations/delta.py:27
 msgid "Cannot create delta for same package!"
@@ -2669,24 +2671,20 @@ msgid "No packages to emerge."
 msgstr "Geen samen te voegen pakketten."
 
 #: pisi/operations/emerge.py:51
-#, fuzzy
 msgid ""
 "The following list of packages will be installed\n"
 "from repository in the respective order to satisfy dependencies:\n"
 msgstr ""
-"De volgende minimale lijst van pakketten zullen geïnstalleerd worden\n"
-"uit de softwarebron in de respectievelijke volgorde om aan afhankelijkheden "
-"te voldoen:\n"
+"De volgende lijst van pakketten worden uit de softwarebron\n"
+"geïnstalleerd om aan de afhankelijkheden te voldoen:\n"
 
 #: pisi/operations/emerge.py:54
-#, fuzzy
 msgid ""
 "The following list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
 msgstr ""
-"De volgende minimale lijst van pakketten zullen gecompileerd\n"
-"en geïnstalleerd worden in de respectievelijke volgorde om\n"
-"aan afhankelijkheden te voldoen:\n"
+"De volgende lijst van pakketten zullen gecompileerd\n"
+"en geïnstalleerd worden om aan de afhankelijkheden te voldoen:\n"
 
 #: pisi/operations/emerge.py:62 pisi/operations/install.py:82
 #: pisi/operations/upgrade.py:148
@@ -2841,13 +2839,12 @@ msgid "No packages to remove."
 msgstr "Geen te verwijderen pakketten."
 
 #: pisi/operations/remove.py:68
-#, fuzzy
 msgid ""
 "The following list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
 msgstr ""
-"De volgende minimale lijst van pakketten zullen verwijderd worden\n"
-"in de respectievelijke volgorde om aan afhankelijkheden te voldoen:\n"
+"De volgende lijst van pakketten zullen verwijderd worden\n"
+"om aan de afhankelijkheden te voldoen:\n"
 
 #: pisi/operations/remove.py:73
 msgid "Package removal declined"
@@ -3003,9 +3000,8 @@ msgstr "Object kan niet gecodeerd worden"
 
 # pisi/xmlfile.py:436 :535
 #: pisi/pxml/autoxml.py:735 pisi/pxml/autoxml.py:854
-#, fuzzy
 msgid "Object cannot be formatted"
-msgstr "Object kan niet gecodeerd worden"
+msgstr "Object kan niet geformatteerd worden"
 
 #: pisi/pxml/autoxml.py:751
 msgid "List type must contain only one element"
@@ -3106,7 +3102,7 @@ msgstr "Afhankelijkheden: "
 
 #: pisi/specfile.py:323
 msgid "translations.xml file is badly formed."
-msgstr ""
+msgstr "translations.xml bestand is niet goed. "
 
 #: pisi/specfile.py:350
 msgid "Build Dependencies: "
@@ -3173,6 +3169,16 @@ msgid ""
 "            Signed data\n"
 "    "
 msgstr ""
+"\n"
+"        Onderteken data met opgegeven sleutelbestand en wachtwoord.\n"
+"\n"
+"        Argumenten:\n"
+"            data: Te ondertekenen data\n"
+"            sleutelbestand: Persoonlijke sleutel\n"
+"            wachtwoord: Wachtwoord\n"
+"        Geeft terug:\n"
+"            Ondertekende data\n"
+"    "
 
 #: scripts/package-signing/pisign.py:32
 msgid ""
@@ -3188,6 +3194,17 @@ msgid ""
 "            True if valid, False if invalid\n"
 "    "
 msgstr ""
+"\n"
+"        Verifieert ondertekening. sleutelbestand of certificaat is vereist.\n"
+"\n"
+"        Argumenten:\n"
+"            data: Originele data\n"
+"            handtekening: Ondertekende data\n"
+"            sleutelbestand: Publiek sleutelbestand\n"
+"            certificaat: Certificaat\n"
+"        Geeft terug:\n"
+"            True indien geldig, False indien ongeldig\n"
+"    "
 
 #: scripts/package-signing/pisign.py:62
 msgid ""
@@ -3200,6 +3217,14 @@ msgid ""
 "            File names and sums\n"
 "    "
 msgstr ""
+"\n"
+"        Berekent controlesom van de bestanden in het ZIP-object.\n"
+"\n"
+"        Argumenten:\n"
+"            zip: Zipbestand-object\n"
+"        Geeft terug:\n"
+"            Bestandsnamen en controlesommen\n"
+"    "
 
 #: scripts/package-signing/pisign.py:79
 msgid ""
@@ -3215,6 +3240,17 @@ msgid ""
 "            True if valid, False if invalid\n"
 "    "
 msgstr ""
+"\n"
+"         Verifieert de integriteit van een ZIP-bestand. Sleutelbestand of "
+"certificaat is vereist.\n"
+"\n"
+"        Argumenten:\n"
+"            bestandnaam: ZIP-bestandnaam\n"
+"            sleutelbestand: Publiek sleutelbestand\n"
+"            certificaat: Certificaat\n"
+"        Geeft terug:\n"
+"            True indien geldig, False indien ongeldig\n"
+"    "
 
 #: scripts/package-signing/pisign.py:100
 msgid ""
@@ -3227,6 +3263,14 @@ msgid ""
 "            passphrase: Passphrase\n"
 "    "
 msgstr ""
+"\n"
+"        Ondertekent een ZIP-bestand.\n"
+"\n"
+"        Argumenten:\n"
+"            bestandnaam: ZIP-bestandnaam\n"
+"            sleutelbestand: Persoonlijke sleutel\n"
+"            wachtwoord: Wachtwoord\n"
+"    "
 
 #: scripts/package-signing/pisign.py:121
 msgid ""
@@ -3234,6 +3278,9 @@ msgid ""
 "        Prints usage information of application and exits.\n"
 "    "
 msgstr ""
+"\n"
+"        Informatie over het gebruik van de toepassing tonen en sluit af.\n"
+"    "
 
 #: scripts/repostats.py:226
 msgid ""
