@@ -16,11 +16,14 @@
 
 import os
 import sys
-import hashlib
+import fcntl
 import shutil
 import string
+import struct
 import fnmatch
+import hashlib
 import statvfs
+import termios
 import operator
 import subprocess
 import unicodedata
@@ -129,6 +132,62 @@ def human_readable_rate(size = 0):
     x = human_readable_size(size)
     return x[0], x[1] + '/s'
 
+def format_by_columns(strings, sep_width=2):
+    longest_str_len = len(max(strings, key=len))
+    term_rows, term_columns = get_terminal_size()
+
+    def get_columns(max_count):
+        if longest_str_len > term_columns:
+            return [longest_str_len]
+
+        columns = []
+        for name in strings:
+            table_width = sum(columns) + len(name) + len(columns) * sep_width
+            if table_width > term_columns:
+                break
+
+            columns.append(len(name))
+            if len(columns) == max_count:
+                break
+
+        return columns
+
+    def check_size(columns):
+        total_sep_width = (len(columns) - 1) * sep_width
+
+        for n, name in enumerate(strings):
+            col = n % len(columns)
+            if len(name) > columns[col]:
+                columns[col] = len(name)
+
+            if len(columns) > 1:
+                width = sum(columns) + total_sep_width
+                if width > term_columns:
+                    return False
+
+        return True
+
+    columns = get_columns(term_columns)
+
+    while not check_size(columns):
+        columns = get_columns(len(columns) - 1)
+
+    sep = " " * sep_width
+    lines = []
+    current_line = []
+    for n, name in enumerate(strings):
+        col = n % len(columns)
+        current_line.append(name.ljust(columns[col]))
+
+        if col == len(columns) - 1:
+            lines.append(sep.join(current_line))
+            current_line = []
+
+    if current_line:
+        lines.append(sep.join(current_line))
+
+    return "\n".join(lines)
+
 ##############################
 # Process Releated Functions #
 ##############################
@@ -181,6 +240,16 @@ def run_logged(cmd):
 ######################
 # Terminal functions #
 ######################
+
+def get_terminal_size():
+    try:
+        ret = fcntl.ioctl(sys.stdout.fileno(), termios.TIOCGWINSZ, "1234")
+    except IOError:
+        rows = int(os.environ.get("LINES", 25))
+        cols = int(os.environ.get("COLUMNS", 80))
+        return rows, cols
+
+    return struct.unpack("hh", ret)
 
 def xterm_title(message):
     """Set message as console window title."""
