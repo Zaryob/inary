@@ -83,9 +83,10 @@ class InstallDB(lazydb.LazyDB):
     def __add_to_revdeps(self, package, revdeps):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
         meta_doc = piksemel.parse(metadata_xml)
-        name = meta_doc.getTag("Package").getTagData('Name')
-        deps = meta_doc.getTag("Package").getTag('RuntimeDependencies')
+        pkg = meta_doc.getTag("Package")
+        deps = pkg.getTag('RuntimeDependencies')
         if deps:
+            name = pkg.getTagData('Name')
             for dep in deps.tags("Dependency"):
                 revdeps.setdefault(dep.firstChild().data(), set()).add((name, dep.toString()))
             for anydep in deps.tags("AnyDependency"):
