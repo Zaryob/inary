@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "POT-Creation-Date: 2010-02-28 21:26+EET\n"
-"PO-Revision-Date: 2010-02-07 15:36+0100\n"
+"PO-Revision-Date: 2010-03-13 09:32+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@pardus.nu>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
@@ -582,7 +582,7 @@ msgstr "Lagrar %s"
 
 #: pisi/atomicoperations.py:565
 msgid "File list could not be read for package %s, continuing removal."
-msgstr ""
+msgstr "Fillistan för paketet %s kunde inte läsas, fortsätter med borttagning."
 
 #: pisi/atomicoperations.py:571
 msgid "Removing package %s"
@@ -1815,7 +1815,7 @@ msgstr ""
 
 #: pisi/comariface.py:147
 msgid "Running pre removal operations for %s"
-msgstr ""
+msgstr "Kör förberedande åtgärder före borttagning av %s"
 
 #: pisi/comariface.py:153
 msgid "Running package's pre remove script"
@@ -1827,7 +1827,7 @@ msgstr ""
 
 #: pisi/comariface.py:173
 msgid "Running post removal operations for %s"
-msgstr ""
+msgstr "Kör avslutande åtgärder efter borttagning av %s"
 
 #: pisi/comariface.py:179
 msgid "Running package's postremove script"
@@ -2507,7 +2507,7 @@ msgstr ""
 
 #: pisi/operations/remove.py:73
 msgid "Package removal declined"
-msgstr ""
+msgstr "Paketborttagning nekades"
 
 #: pisi/operations/remove.py:85
 msgid "Package %s is not installed. Cannot remove."
