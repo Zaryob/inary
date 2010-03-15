@@ -142,7 +142,7 @@ def upgrade(A=[], repo=None):
     if componentdb.has_component('system.base'):
         order = operations.helper.reorder_base_packages(order)
 
-    ctx.ui.info(_('The following packages will be upgraded:'))
+    ctx.ui.status(_('The following packages will be upgraded:'))
     ctx.ui.info(util.format_by_columns(sorted(order)))
 
     total_size, cached_size = operations.helper.calculate_download_sizes(order)
