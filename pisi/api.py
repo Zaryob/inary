@@ -829,7 +829,7 @@ def update_repo(repo, force=False):
     pisi.db.regenerate_caches()
 
 def __update_repo(repo, force=False):
-    ctx.ui.info(_('* Updating repository: %s') % repo)
+    ctx.ui.action(_('Updating repository: %s') % repo)
     ctx.ui.notify(pisi.ui.updatingrepo, name = repo)
     repodb = pisi.db.repodb.RepoDB()
     index = pisi.index.Index()
