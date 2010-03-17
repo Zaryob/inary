@@ -65,6 +65,11 @@ class AdditionalFile:
             s += '(%s)' % self.permission
         return s
 
+class Type:
+
+    s_type = [autoxml.String, autoxml.mandatory]
+    a_package = [autoxml.String, autoxml.optional]
+
 class Action:
 
     # Valid actions:
@@ -74,6 +79,8 @@ class Action:
     # serviceRestart
 
     s_action = [autoxml.String, autoxml.mandatory]
+    a_package = [autoxml.String, autoxml.optional]
+    a_targetPackage = [autoxml.String, autoxml.optional]
 
     def __str__(self):
         return self.action
@@ -101,7 +108,9 @@ class Patch:
 class Update:
 
     a_release = [autoxml.String, autoxml.mandatory]
+    # 'type' attribute is here to keep backward compatibility
     a_type = [autoxml.String, autoxml.optional]
+    t_types = [[Type], autoxml.optional, "Type"]
     t_Date = [autoxml.String, autoxml.mandatory]
     t_Version = [autoxml.String, autoxml.mandatory]
     t_Comment = [autoxml.String, autoxml.optional]
@@ -265,6 +274,40 @@ class Package:
     def installable(self):
         """calculate if pkg is installable currently"""
         return self.satisfies_runtime_dependencies()
+
+    def get_update_types_and_actions(self, old_release):
+        """Return update types and actions effective for the binary package
+
+        get_update_types_and_actions(self, old_release) -> (types, actions)
+
+        old_release:    Release of the installed package
+        types:          Set of type strings
+        actions:        Set of (action name, package) pairs
+        """
+
+        types = set()
+        actions = set()
+
+        for update in self.history:
+            if update.release == old_release:
+                break
+
+            if update.type:
+                types.add(update.type)
+
+            for type_ in update.types:
+                if type_.package and type_.package != self.name:
+                    continue
+
+                types.add(type_.type)
+
+            for action in update.requires:
+                if action.package and action.package != self.name:
+                    continue
+
+                actions.add((action.action, action.targetPackage))
+
+        return types, actions
 
     def __str__(self):
         if self.build:
