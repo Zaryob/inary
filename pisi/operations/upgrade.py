@@ -56,10 +56,8 @@ def find_upgrades(packages, replaces):
         pkg = packagedb.get_package(i_pkg)
         (version, release, build, distro, distro_release) = installdb.get_version_and_distro_release(i_pkg)
 
-        if security_only:
-            types, actions = pkg.get_update_types_and_actions(release)
-            if "security" not in types:
-                continue
+        if security_only and not pkg.has_update_type("security", release):
+            continue
 
         if pkg.distribution == distro and \
                 pisi.version.make_version(pkg.distributionRelease) > pisi.version.make_version(distro_release):
@@ -250,7 +248,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
         for x in B:
             pkg = packagedb.get_package(x)
             (version, release, build) = installdb.get_version(x)
-            types, actions = pkg.get_update_types_and_actions(release)
+            actions = pkg.get_update_actions(release)
 
             for action_name, action_package in actions:
                 if action_name == "reverseDependencyUpdate":

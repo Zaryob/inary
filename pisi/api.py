@@ -606,7 +606,7 @@ def get_package_requirements(packages):
             pass
 
         version, release, build = installdb.get_version(i_pkg)
-        pkg_types, pkg_actions = pkg.get_update_types_and_actions(release)
+        pkg_actions = pkg.get_update_actions(release)
 
         for action_name, action_package in pkg_actions:
             if action_name in actions:

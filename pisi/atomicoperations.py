@@ -517,9 +517,9 @@ class Install(AtomicOperation):
         # need service or system restart?
         if self.installdb.has_package(self.pkginfo.name):
             (version, release, build) = self.installdb.get_version(self.pkginfo.name)
-            types, actions = self.pkginfo.get_update_types_and_actions(release)
+            actions = self.pkginfo.get_update_actions(release)
         else:
-            types, actions = self.pkginfo.get_update_types_and_actions("1")
+            actions = self.pkginfo.get_update_actions("1")
 
         for action_name, action_package in actions:
             package_name = action_package or self.pkginfo.name

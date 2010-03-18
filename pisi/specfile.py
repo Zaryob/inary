@@ -269,18 +269,17 @@ class Package:
         """calculate if pkg is installable currently"""
         return self.satisfies_runtime_dependencies()
 
-    def get_update_types_and_actions(self, old_release):
-        """Return update types and actions effective for the binary package
+    def get_update_types(self, old_release):
+        """Returns update types for the releases greater than old_release.
 
-        get_update_types_and_actions(self, old_release) -> (types, actions)
+        @type  old_release: string
+        @param old_release: The release of the installed package.
 
-        old_release:    Release of the installed package
-        types:          Set of type strings
-        actions:        Set of (action name, package) pairs
+        @rtype:  set of strings
+        @return: Update types.
         """
 
         types = set()
-        actions = set()
 
         for update in self.history:
             if update.release == old_release:
@@ -295,13 +294,59 @@ class Package:
 
                 types.add(type_.type)
 
+        return types
+
+    def has_update_type(self, type_name, old_release):
+        """Checks whether the package has the given update type.
+
+        @type  type_name:   string
+        @param type_name:   Name of the update type.
+        @type  old_release: string
+        @param old_release: The release of the installed package.
+
+        @rtype:  bool
+        @return: True if the type exists, else False.
+        """
+
+        for update in self.history:
+            if update.release == old_release:
+                break
+
+            if update.type == type_name:
+                return True
+
+            for type_ in update.types:
+                if type_.package and type_.package != self.name:
+                    continue
+
+                if type_.type == type_name:
+                    return True
+
+        return False
+
+    def get_update_actions(self, old_release):
+        """Returns update actions for the releases greater than old_release.
+
+        @type  old_release: string
+        @param old_release: The release of the installed package.
+
+        @rtype:  set of tuples
+        @return: A set of (action name, target package) tuples.
+        """
+
+        actions = set()
+
+        for update in self.history:
+            if update.release == old_release:
+                break
+
             for action in update.requires:
                 if action.package and action.package != self.name:
                     continue
 
                 actions.add((action.action, action.targetPackage))
 
-        return types, actions
+        return actions
 
     def __str__(self):
         if self.build:
