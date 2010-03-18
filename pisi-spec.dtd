@@ -93,6 +93,7 @@
 <!ELEMENT Provides (COMAR)+>
 <!ELEMENT COMAR (#PCDATA)>
 <!ATTLIST COMAR script CDATA #IMPLIED>
+<!ATTLIST COMAR name CDATA #IMPLIED>
 
 <!ELEMENT Conflicts (Package)+>
 <!-- we have a problem here, this Package tag only contains a package name
@@ -129,10 +130,19 @@ suck anyway -->
 
 <!ELEMENT History (Update+)>
 
-<!ELEMENT Update (#PCDATA | Date | Version | Comment | Name | Email)*>
+<!ELEMENT Update (#PCDATA | Date | Version | Comment | Type | Requires | Name | Email)*>
 <!ATTLIST Update release CDATA #REQUIRED>
 <!ATTLIST Update type (security|bug) #IMPLIED>
 
 <!ELEMENT Date (#PCDATA)>
 <!ELEMENT Version (#PCDATA)>
 <!ELEMENT Comment (#PCDATA)>
+
+<!ELEMENT Type (#PCDATA)>
+<!ATTLIST Type package CDATA #IMPLIED>
+
+<!ELEMENT Requires (Action+)>
+
+<!ELEMENT Action (#PCDATA)>
+<!ATTLIST Action package CDATA #IMPLIED>
+<!ATTLIST Action target CDATA #IMPLIED>

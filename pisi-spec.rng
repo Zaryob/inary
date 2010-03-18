@@ -1560,6 +1560,9 @@
             <ref name="Date"/>
             <ref name="Version"/>
             <ref name="Comment"/>
+            <zeroOrMore>
+                <ref name="Type"/>
+            </zeroOrMore>
             <optional>
                 <ref name="Requires"/>
             </optional>
@@ -1602,6 +1605,24 @@
         </element>
     </define>
 
+    <!-- Type -->
+    <define name="Type">
+        <element name="Type">
+            <ref name="attlist.Type"/>
+            <choice>
+                <value>security</value>
+                <value>bug</value>
+            </choice>
+        </element>
+    </define>
+
+    <!-- attlist.Type -->
+    <define name="attlist.Type" combine="interleave">
+        <optional>
+            <attribute name="package"/>
+        </optional>
+    </define>
+
     <!-- Requires -->
     <define name="Requires">
         <element name="Requires">
@@ -1614,11 +1635,22 @@
     <!-- Action -->
     <define name="Action">
         <element name="Action">
+            <ref name="attlist.Action"/>
             <choice>
                 <value>reverseDependencyUpdate</value>
                 <value>systemRestart</value>
                 <value>serviceRestart</value>
             </choice>
         </element>
+    </define>
+
+    <!-- attlist.Action -->
+    <define name="attlist.Action" combine="interleave">
+        <optional>
+            <attribute name="package"/>
+        </optional>
+        <optional>
+            <attribute name="target"/>
+        </optional>
     </define>
 </grammar>
