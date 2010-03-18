@@ -276,6 +276,7 @@ def upgrade_base(A = set()):
         if componentdb.has_component('system.base'):
             systembase = set(componentdb.get_union_component('system.base').packages)
             extra_installs = filter(lambda x: not installdb.has_package(x), systembase - set(A))
+            extra_installs = pisi.blacklist.exclude_from(extra_installs, ctx.const.blacklist)
             if extra_installs:
                 ctx.ui.warning(_('Safety switch: Following packages in system.base will be installed: ') +
                                util.strlist(extra_installs))
