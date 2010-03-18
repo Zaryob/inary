@@ -605,16 +605,12 @@ def get_package_requirements(packages):
         except Exception: #FIXME: Should catch RepoItemNotFound exception
             pass
 
-        (version, release, build) = installdb.get_version(i_pkg)
-        release = int(release)
+        version, release, build = installdb.get_version(i_pkg)
+        pkg_types, pkg_actions = pkg.get_update_types_and_actions(release)
 
-        for update in pkg.history:
-            if int(update.release) <= release:
-                break
-
-            for action in update.required_actions():
-                if action in actions:
-                    requirements[action].append(pkg.name)
+        for action_name, action_package in pkg_actions:
+            if action_name in actions:
+                requirements[action_name].append(pkg.name)
 
     return requirements
 

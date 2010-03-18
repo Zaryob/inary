@@ -514,22 +514,19 @@ class Install(AtomicOperation):
         if self.config_later:
             self.installdb.mark_pending(self.pkginfo.name)
 
-        # get update history
+        # need service or system restart?
         if self.installdb.has_package(self.pkginfo.name):
             (version, release, build) = self.installdb.get_version(self.pkginfo.name)
-            updates = []
-            for update in self.pkginfo.history:
-                if update.release == release:
-                    break
-                updates.append(update)
+            types, actions = self.pkginfo.get_update_types_and_actions(release)
         else:
-            updates = self.pkginfo.history
+            types, actions = self.pkginfo.get_update_types_and_actions("1")
 
-        # need service or system restart?
-        if pisi.util.any(lambda u:"serviceRestart" in u.required_actions(), updates):
-            pisi.api.add_needs_restart(self.pkginfo.name)
-        if pisi.util.any(lambda u:"systemRestart" in u.required_actions(), updates):
-            pisi.api.add_needs_reboot(self.pkginfo.name)
+        for action_name, action_package in actions:
+            package_name = action_package or self.pkginfo.name
+            if action_name == "serviceRestart":
+                pisi.api.add_needs_restart(package_name)
+            elif action_name == "systemRestart":
+                pisi.api.add_needs_reboot(package_name)
 
         # filesdb
         self.filesdb.add_files(self.metadata.package.name, self.files)

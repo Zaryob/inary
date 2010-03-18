@@ -57,14 +57,8 @@ def find_upgrades(packages, replaces):
         (version, release, build, distro, distro_release) = installdb.get_version_and_distro_release(i_pkg)
 
         if security_only:
-            security_update = False
-            for update in pkg.history:
-                if update.release == release:
-                    break
-                if update.type == "security":
-                    security_update = True
-                    break
-            if not security_update:
+            types, actions = pkg.get_update_types_and_actions(release)
+            if "security" not in types:
                 continue
 
         if pkg.distribution == distro and \
@@ -256,17 +250,18 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
         for x in B:
             pkg = packagedb.get_package(x)
             (version, release, build) = installdb.get_version(x)
-            for update in pkg.history:
-                if update.release == release:
-                    break
+            types, actions = pkg.get_update_types_and_actions(release)
 
-                if "reverseDependencyUpdate" in update.required_actions():
-                    for name, dep in packagedb.get_rev_deps(x):
+            for action_name, action_package in actions:
+                if action_name == "reverseDependencyUpdate":
+                    target_package = action_package or x
+                    for name, dep in packagedb.get_rev_deps(target_package):
                         if name in G_f.vertices() or not is_upgradable(name):
                             continue
 
                         Bp.add(name)
-                        G_f.add_plain_dep(name, x)
+                        G_f.add_plain_dep(name, target_package)
+
         B = Bp
 
     if ctx.config.get_option('debug'):

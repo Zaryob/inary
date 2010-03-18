@@ -118,12 +118,6 @@ class Update:
     t_Email = [autoxml.String, autoxml.optional]
     t_Requires = [[Action], autoxml.optional]
 
-    def required_actions(self):
-        if self.requires != None:
-            return map(lambda x:str(x), self.requires)
-        else:
-            return []
-
     def __str__(self):
         s = self.date
         s += ", ver=" + self.version
