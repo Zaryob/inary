@@ -142,11 +142,12 @@ class ComarProvide:
 
     s_om = [autoxml.String, autoxml.mandatory]
     a_script = [autoxml.String, autoxml.mandatory]
+    a_name = [autoxml.String, autoxml.optional]
 
     def __str__(self):
         # FIXME: descriptive enough?
         s = self.script
-        s += ' (' + self.om + ')'
+        s += ' (' + self.om + '%s' % (' for %s' % self.name if self.name else '') + ')'
         return s
 
 class Archive:

@@ -104,17 +104,18 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath,
 
     for script in provided_scripts:
         ctx.ui.debug(_("Registering %s comar script") % script.om)
+        script_name = script.name if script.name else package_name
         if script.om == "System.Package":
             self_post = True
         elif script.om == "System.Service":
             sys_service = True
         try:
-            link.register(package_name, script.om, os.path.join(scriptpath, script.script))
+            link.register(script_name, script.om, os.path.join(scriptpath, script.script))
         except dbus.DBusException, exception:
             raise Error, _("Script error: %s") % exception
         if sys_service:
             try:
-                link.System.Service[package_name].registerState()
+                link.System.Service[script_name].registerState()
             except dbus.DBusException, exception:
                 raise Error, _("Script error: %s") % exception
 
@@ -167,13 +168,15 @@ def pre_remove(package_name, metapath, filepath):
             if not is_method_missing(exception):
                 raise Error, _("Script error: %s") % exception
 
-def post_remove(package_name, metapath, filepath):
+def post_remove(package_name, metapath, filepath, provided_scripts=[]):
     """Do package's post removal operations"""
 
     ctx.ui.info(_("Running post removal operations for %s") % package_name)
     link = get_link()
 
     package_name = safe_package_name(package_name)
+    scripts = set([s.name for s in provided_scripts if s.name])
+    scripts.add(package_name)
 
     if package_name in list(link.System.Package):
         ctx.ui.debug(_("Running package's postremove script"))
@@ -194,7 +197,8 @@ def post_remove(package_name, metapath, filepath):
                 raise Error, _("Script error: %s") % exception
 
     ctx.ui.debug(_("Unregistering comar scripts"))
-    try:
-        link.remove(package_name, timeout=ctx.dbus_timeout)
-    except dbus.DBusException, exception:
-        raise Error, _("Script error: %s") % exception
+    for scr in scripts:
+        try:
+            link.remove(scr, timeout=ctx.dbus_timeout)
+        except dbus.DBusException, exception:
+            raise Error, _("Script error: %s") % exception

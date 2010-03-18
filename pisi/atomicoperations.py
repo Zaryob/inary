@@ -674,11 +674,12 @@ class Remove(AtomicOperation):
                 self.package_name,
                 os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
                 os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+                provided_scripts=self.package.providesComar,
             )
 
     def update_databases(self):
         self.remove_db()
-        self.historydb.add_and_update(pkgBefore=self.package, operation="remove")        
+        self.historydb.add_and_update(pkgBefore=self.package, operation="remove")
 
     def remove_pisi_files(self):
         util.clean_dir(self.package.pkg_dir())
