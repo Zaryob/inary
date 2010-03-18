@@ -78,9 +78,9 @@ class Action:
     # systemRestart
     # serviceRestart
 
-    s_action = [autoxml.String, autoxml.mandatory]
+    s_action  = [autoxml.String, autoxml.mandatory]
     a_package = [autoxml.String, autoxml.optional]
-    a_targetPackage = [autoxml.String, autoxml.optional]
+    a_target  = [autoxml.String, autoxml.optional]
 
     def __str__(self):
         return self.action
@@ -345,7 +345,7 @@ class Package:
                 if action.package and action.package != self.name:
                     continue
 
-                actions.add((action.action, action.targetPackage))
+                actions.add((action.action, action.target))
 
         return actions
 
