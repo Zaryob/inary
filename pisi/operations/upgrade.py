@@ -220,16 +220,19 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     def add_broken_revdeps(pkg, Bp):
         # Search reverse dependencies to see if anything
         # should be upgraded
-        rev_deps = packagedb.get_rev_deps(pkg.name)
+        rev_deps = installdb.get_rev_deps(pkg.name)
         for rev_dep, depinfo in rev_deps:
             # add only installed but unsatisfied reverse dependencies
-            if (installdb.has_package(rev_dep) and 
-                not depinfo.satisfied_by_installed() and is_upgradable(rev_dep)):
-                if not depinfo.satisfied_by_repo():
-                    raise Exception(_('Reverse dependency %s of %s cannot be satisfied') % (rev_dep, pkg.name))
-                if not rev_dep in G_f.vertices():
-                    Bp.add(rev_dep)
-                    G_f.add_plain_dep(rev_dep, pkg.name)
+            if rev_dep in G_f.vertices() or \
+                    depinfo.satisfied_by_installed() or \
+                    not is_upgradable(rev_dep):
+                continue
+
+            if not depinfo.satisfied_by_repo():
+                raise Exception(_('Reverse dependency %s of %s cannot be satisfied') % (rev_dep, pkg.name))
+
+            Bp.add(rev_dep)
+            G_f.add_plain_dep(rev_dep, pkg.name)
 
     def add_needed_revdeps(pkg, Bp):
         # Search for reverse dependency update needs of to be upgraded packages
@@ -240,7 +243,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
         for action_name, action_package in actions:
             if action_name == "reverseDependencyUpdate":
                 target_package = action_package or pkg.name
-                for name, dep in packagedb.get_rev_deps(target_package):
+                for name, dep in installdb.get_rev_deps(target_package):
                     if name in G_f.vertices() or not is_upgradable(name):
                         continue
 
