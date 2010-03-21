@@ -199,7 +199,6 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     # set A using packagedb
     for x in A:
         G_f.add_package(x)
-    B = A
 
     installdb = pisi.db.installdb.InstallDB()
 
@@ -250,10 +249,10 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
                     Bp.add(name)
                     G_f.add_plain_dep(name, target_package)
 
-    while B:
+    while A:
         Bp = set()
 
-        for x in B:
+        for x in A:
             pkg = packagedb.get_package(x)
 
             add_runtime_deps(pkg, Bp)
@@ -262,7 +261,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
                 add_broken_revdeps(pkg, Bp)
                 add_needed_revdeps(pkg, Bp)
 
-        B = Bp
+        A = Bp
 
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
