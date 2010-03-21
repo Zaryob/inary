@@ -45,8 +45,9 @@ def install_pkg_names(A, reinstall = False):
         Ap = set(filter(lambda x: not installdb.has_package(x), A))
         d = A - Ap
         if len(d) > 0:
-            ctx.ui.warning(_("The following package(s) are already installed and are not going to be installed again:\n") +
-                             util.strlist(d))
+            ctx.ui.warning(_("The following package(s) are already installed "
+                             "and are not going to be installed again:"))
+            ctx.ui.info(util.format_by_columns(sorted(d)))
             A = Ap
 
     if len(A)==0:
@@ -68,8 +69,8 @@ def install_pkg_names(A, reinstall = False):
         order = operations.helper.reorder_base_packages(order)
 
     if len(order) > 1:
-        ctx.ui.info(_("Following packages will be installed in the respective "
-                      "order to satisfy dependencies:\n") + util.strlist(order))
+        ctx.ui.info(util.colorize(_("Following packages will be installed:"), "brightblue"))
+        ctx.ui.info(util.format_by_columns(sorted(order)))
 
     total_size, cached_size = operations.helper.calculate_download_sizes(order)
     total_size, symbol = util.human_readable_size(total_size)
@@ -131,8 +132,9 @@ def install_pkg_files(package_URIs, reinstall = False):
                 else:
                     tobe_installed.append(x)
         if already_installed:
-            ctx.ui.warning(_("The following package(s) are already installed and are not going to be installed again:\n") +
-                           util.strlist(already_installed))
+            ctx.ui.warning(_("The following package(s) are already installed "
+                             "and are not going to be installed again:"))
+            ctx.ui.info(util.format_by_columns(sorted(already_installed)))
         package_URIs = tobe_installed
 
     if ctx.config.get_option('ignore_dependency'):
@@ -193,9 +195,9 @@ def install_pkg_files(package_URIs, reinstall = False):
     # if so, then invoke install_pkg_names
     extra_packages = [x.package for x in dep_unsatis]
     if extra_packages:
-        ctx.ui.info(_("""The following packages will be installed
-in the respective order to satisfy extra dependencies:
-""") + util.strlist(extra_packages))
+        ctx.ui.warning(_("The following packages will be installed "
+                         "in order to satisfy dependencies:"))
+        ctx.ui.info(util.format_by_columns(sorted(extra_packages)))
         if not ctx.ui.confirm(_('Do you want to continue?')):
             raise Exception(_('External dependencies not satisfied'))
         install_pkg_names(extra_packages, reinstall=True)
