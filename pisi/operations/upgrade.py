@@ -280,8 +280,9 @@ def upgrade_base(A = set()):
             extra_installs = filter(lambda x: not installdb.has_package(x), systembase - set(A))
             extra_installs = pisi.blacklist.exclude_from(extra_installs, ctx.const.blacklist)
             if extra_installs:
-                ctx.ui.warning(_('Safety switch: Following packages in system.base will be installed: ') +
-                               util.strlist(extra_installs))
+                ctx.ui.warning(_("Safety switch forces the installation of "
+                                 "following packages:"))
+                ctx.ui.info(util.format_by_columns(sorted(extra_installs)))
             G_f, install_order = operations.install.plan_install_pkg_names(extra_installs)
             extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase - set(install_order))
             upgrade_order = []
@@ -295,13 +296,14 @@ def upgrade_base(A = set()):
                 extra_upgrades = pisi.blacklist.exclude(extra_upgrades, ctx.get_option('exclude'))
 
             if extra_upgrades:
-                ctx.ui.warning(_('Safety switch: Following packages in system.base will be upgraded: ') +
-                               util.strlist(extra_upgrades))
+                ctx.ui.warning(_("Safety switch forces the upgrade of "
+                                 "following packages:"))
+                ctx.ui.info(util.format_by_columns(sorted(extra_upgrades)))
                 G_f, upgrade_order = plan_upgrade(extra_upgrades, force_replaced=False)
             # return packages that must be added to any installation
             return set(install_order + upgrade_order)
         else:
-            ctx.ui.warning(_('Safety switch: the component system.base cannot be found'))
+            ctx.ui.warning(_('Safety switch: The component system.base cannot be found.'))
     return set()
 
 def is_upgradable(name, ignore_build = False):

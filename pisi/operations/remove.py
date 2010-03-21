@@ -41,11 +41,12 @@ def remove(A, ignore_dep = False, ignore_safety = False):
             systembase = set(componentdb.get_union_component('system.base').packages)
             refused = A.intersection(systembase)
             if refused:
-                raise pisi.Error(_('Safety switch: cannot remove the following packages in system.base: ') +
-                               util.strlist(refused))
+                raise pisi.Error(_("Safety switch prevents the removal of "
+                                   "following packages:\n") +
+                                    util.format_by_columns(sorted(refused)))
                 A = A - systembase
         else:
-            ctx.ui.warning(_('Safety switch: the component system.base cannot be found'))
+            ctx.ui.warning(_("Safety switch: The component system.base cannot be found."))
 
     Ap = []
     for x in A:
