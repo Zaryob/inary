@@ -139,7 +139,7 @@ def upgrade(A=[], repo=None):
 
     total_size, cached_size = operations.helper.calculate_download_sizes(order)
     total_size, symbol = util.human_readable_size(total_size)
-    ctx.ui.info(_('Total size of package(s): %.2f %s') % (total_size, symbol))
+    ctx.ui.info(util.colorize(_('Total size of package(s): %.2f %s') % (total_size, symbol), "yellow"))
 
     if ctx.get_option('dry_run'):
         return
