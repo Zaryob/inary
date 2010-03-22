@@ -255,7 +255,12 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
             if dep.satisfied_by_repo():
                 if not dep.package in G_f.vertices():
                     Bp.add(str(dep.package))
-                    G_f.add_dep(pkg.name, dep)
+
+                # Always add the dependency info although the dependant
+                # package is already a member of this graph. Upgrade order
+                # might change if the dependency info differs from the
+                # previous ones.
+                G_f.add_dep(pkg.name, dep)
             else:
                 ctx.ui.error(_('Dependency %s of %s cannot be satisfied') % (dep, pkg.name))
                 raise Exception(_("Upgrade is not possible."))
