@@ -84,17 +84,32 @@ def update(GPG):
 def net_update():
     pass
 
-def list_keys():
+def list_keys(GPG):
+    cmd = GPG + ' --batch --list_keys'
+    print "cmd: " + cmd
     pass
+    pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return pipe.wait() == 0
 
-def list_fingerprints():
+def list_fingerprints(GPG):
+    cmd = GPG + ' --batch --fingerprint'
+    print "cmd: " + cmd
     pass
+    pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return pipe.wait() == 0
 
-def export():
+def export(GPG, keyid):
+    cmd = GPG + ' --armor --export %s' keyid
+    print "cmd: " + cmd
     pass
+    pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return pipe.wait() == 0
 
-def exportAll():
-    pass
+def exportAll(GPG):
+    cmd = GPG + ' --armor --export'
+    print "cmd: " + cmd
+    pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return pipe.wait() == 0
 
 def printUsage():
     """
@@ -181,25 +196,20 @@ if __name__ == '__main__':
 
     elif operation == 'list':
         # list keys
-        GPG += ' --batch --list-keys'
-        list_keys()
+        list_keys(GPG)
 
     elif operation == 'finger':
         # list fingerprints
-        GPG += ' --batch --fingerprint'
-        list_fingerprints()
+        ist_fingerprints(GPG)
 
     elif operation == 'export':
         # output the key with the <keyid>
         keyid = sys.argv[argc]
-        argc += 1 #increment argc
-        GPG += ' --armor --export %s' % keyid
-        export()
+        export(GPG, keyid)
 
     elif operation == 'exportall':
         # output all trusted keys
-        GPG += ' --armor --export'
-        exportAll()
+        exportAll(GPG)
 
     elif operation == 'adv':
         adv_command = GPG + ' ' + sys.args[3:]
