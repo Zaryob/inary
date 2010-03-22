@@ -274,9 +274,6 @@ class Builder:
         self.fetch_source_archives()
         self.unpack_source_archives()
 
-        # Grab AdditionalFiles
-        self.copy_additional_source_files()
-
         self.run_setup_action()
         self.run_build_action()
         if ctx.get_option('debug') and not ctx.get_option('ignore_check'):
@@ -412,6 +409,8 @@ class Builder:
         self.sourceArchives.unpack()
         # apply the patches and prepare a source directory for build.
         if self.apply_patches():
+            # Grab AdditionalFiles
+            self.copy_additional_source_files()
             ctx.ui.info(_(" unpacked (%s)") % self.pkg_work_dir())
             self.set_state("unpack")
 
