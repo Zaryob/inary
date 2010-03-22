@@ -13,31 +13,73 @@
 #
 
 import sys
+import os
 import subprocess
 
 # We don't use a secret keyring, of course, but gpg panics and
 # implodes if there isn't one available
-GPG = 'gpg --ignore-time-conflict --no-options --no-default-keyring \
-        --secret-keyring /etc/pisi/secring.gpg --trustdb-name /etc/pisi/trustdb.gpg'
+GPG_CMD = 'gpg --ignore-time-conflict --no-options --no-default-keyring \
+            --secret-keyring /etc/pisi/secring.gpg --trustdb-name /etc/pisi/trustdb.gpg'
+
+GPG = GPG_CMD
 
 MASTER_KEYRING = ''
 ARCHIVE_KEYRING_URI = ''
 # MASTER_KEYRING = '/usr/share/keyrings/pardus-master-keyring.gpg'
 # ARCHIVE_KEYRING_URI = 'http://ftp.pardus.org.tr/pardus/pardus-archive-keyring.gpg'
 
-ARCHIVE_KEYRING=/usr/share/keyrings/pardus-archive-keyring.gpg
-REMOVED_KEYS=/usr/share/keyrings/pardus-archive-removed-keys.gpg
+ARCHIVE_KEYRING='/usr/share/keyrings/pardus-archive-keyring.gpg'
+REMOVED_KEYS='/usr/share/keyrings/pardus-archive-removed-keys.gpg'
 
-def addKey(GPGcommand, keyfile):
-    cmd = GPGcommand + ' --quiet --batch --import %s' % keyfile
-    pipe = subprocess.call(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+def addKey(GPG, keyfile):
+    cmd = GPG + ' --quiet --batch --import %s' % keyfile
+    print "cmd: " + cmd
+    pass
+    pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return pipe.wait() == 0
 
-def removeKey():
+def removeKey(GPG, keyfile):
+    cmd = GPG + ' --quiet --batch --delete-key --yes %s' % keyfile
+    print "cmd: " + cmd
     pass
+    pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return pipe.wait() == 0
 
-def update():
+def update(GPG):
+    if not os.access(ARCHIVE_KEYRING, os.F_OK):
+        print "ERROR: Can't find the archive-keyring"
+        print "Is the pisi-archive-keyring package installed?"
+        sys.exit(1)
+
+    # add new keys from the package;
+
+    # we do not use add_keys_with_verify_against_master_keyring here,
+    # because "update" is run on regular package updates.  A
+    # attacker might as well replace the master-archive-keyring file
+    # in the package and add his own keys. so this check wouldn't
+    # add any security. we *need* this check on net-update though
+    cmd = GPG_CMD + ' --quiet --batch --keyring %s --export | %s --import' % (ARCHIVE_KEYRING, GPG)
+    print "cmd: " + cmd
     pass
+    pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    if not pipe.wait() == 0:
+        print "An error occured, inform the maintainer about this issue"
+        sys.exit(1)
+
+    if os.access(REMOVED_KEYS, os.R_OK):
+        # remove no-longer supported/used keys
+        cmd = '%s --keyring %s --with-colons --list-keys | grep ^pub | cut -d: -f5' % (GPG_CMD, REMOVED_KEYS)
+        pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        keys = pipe.stdout.read()
+        for key in keys:
+            cmd = '%s --list-keys --with-colons | grep ^pub | cut -d: -f5 | grep -q %s' % (GPG, key)
+            pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            if pipe.stdout.read():
+                cmd = '%s --quiet --batch --delete-key --yes %s' % (GPG, key)
+    else:
+        print "Warning: removed keys keyring %s missing or not readable" % REMOVED_KEYS
+        sys.exit(1)
+
 
 def net_update():
     pass
@@ -89,35 +131,49 @@ if __name__ == '__main__':
     # if sys.argv[1] == '--keyring':
     if sys.argv[argc] == '--keyring':
         # keyring is the TRUSTEDFILE
-        #FIXME:: check whether keyrings are accessible
         argc += 1 # becomes 2
         keyring = sys.argv[argc]
+        if not os.access(keyring, F_OK):
+            print "Error: The specified keyring %s is missing or not readable" % keyring
+            sys.exit(1)
+
         argc += 1 # becomes 3
         operation = sys.argv[argc]
+        GPG += ' --keyring %s --primary-keyring %s' % (keyring, keyring)
         argc += 1 # becomes 4
-    elif:
+
+    else:
         # otherwise use the default
         keyring = '/etc/pisi/trusted.gpg'
+        if os.access(keyring, os.F_OK):
+            GPG += ' --keyring %s' % keyring
+        GPG += ' --primary-keyring %s' % keyring
+            #NOTICE:: TRUSTEDPARTS is not implemented.
         operation = sys.argv[argc]
         argc += 1 # becomes 2
 
-    GPG += ' --keyring %s --primary-keyring %s' % (keyring, keyring)
+    # print 'COMMAND: %s' % GPG
 
-    #TRUSTEDPARTS is not implemented.
+    if operation == 'help':
+        printUsage()
+        sys.exit(0)
 
-    if operation == 'add':
+    elif operation == 'add':
         # add the key
         keyfile = sys.argv[argc]
         # check whether key_path is alive ('-' can be used for stdin)
         addKey(GPG, keyfile)
+        print "Key in %s is succesfully added." % keyfile
 
     elif operation == 'del':
+        keyfile = sys.argv[argc]
         # remove the key
-        removeKey()
+        removeKey(GPG, keyfile)
+        print "Key in %s is succesfully deleted." % keyfile
 
     elif operation == 'update':
         # update keys using the keyring package
-        update()
+        update(GPG)
 
     elif operation == 'net-update':
         # update keys using the network
