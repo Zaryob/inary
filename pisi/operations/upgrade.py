@@ -27,6 +27,44 @@ import pisi.dependency as dependency
 import pisi.db
 import pisi.blacklist
 
+def check_update_actions(packages):
+    installdb = pisi.db.installdb.InstallDB()
+    packagedb = pisi.db.packagedb.PackageDB()
+
+    actions = {}
+
+    for package in packages:
+        if not installdb.has_package(package):
+            continue
+
+        pkg = packagedb.get_package(package)
+        version, release, build = installdb.get_version(package)
+        pkg_actions = pkg.get_update_actions(release)
+
+        for action_name, action_target in pkg_actions:
+            item = actions.setdefault(action_name, [])
+            item.append((package, action_target))
+
+    has_actions = False
+
+    if "serviceRestart" in actions:
+        has_actions = True
+        ctx.ui.warning(_("You must restart the following service(s) manually "
+                         "in order the updated versions of software to take "
+                         "effect:"))
+        for package, target in actions["serviceRestart"]:
+            ctx.ui.info("    - %s" % target)
+
+    if "systemRestart" in actions:
+        has_actions = True
+        ctx.ui.warning(_("You must restart your system in order the updated "
+                         "versions of the following package(s) to take "
+                         "effect:"))
+        for package, target in actions["systemRestart"]:
+            ctx.ui.info("    - %s" % package)
+
+    return has_actions
+
 def find_upgrades(packages, replaces):
     packagedb = pisi.db.packagedb.PackageDB()
     installdb = pisi.db.installdb.InstallDB()
@@ -141,12 +179,18 @@ def upgrade(A=[], repo=None):
     total_size, symbol = util.human_readable_size(total_size)
     ctx.ui.info(util.colorize(_('Total size of package(s): %.2f %s') % (total_size, symbol), "yellow"))
 
+    needs_confirm = check_update_actions(order)
+
+    if set(order) - A_0 - set(sum(replaces.values(), [])):
+        ctx.ui.warning(_("There are extra packages due to dependencies."))
+        needs_confirm = True
+
     if ctx.get_option('dry_run'):
         return
 
-    if set(order) - A_0 - set(sum(replaces.values(), [])):
-        if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
-            return False
+    if needs_confirm and \
+            not ctx.ui.confirm(_("Do you want to continue?")):
+        return False
 
     ctx.ui.notify(ui.packagestogo, order = order)
 
