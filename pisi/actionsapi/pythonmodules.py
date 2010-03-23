@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2010 TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -26,6 +26,12 @@ import pisi.actionsapi.get as get
 from pisi.actionsapi.shelltools import system, can_access_file, unlink, isEmpty
 from pisi.actionsapi.pisitools import dodoc
 
+class ConfigureError(pisi.actionsapi.Error):
+    def __init__(self, value=''):
+        pisi.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
+
 class CompileError(pisi.actionsapi.Error):
     def __init__(self, value=''):
         pisi.actionsapi.Error.__init__(self, value)
@@ -43,6 +49,12 @@ class RunTimeError(pisi.actionsapi.Error):
         pisi.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)
+
+def configure(parameters = ''):
+    '''does python setup.py configure'''
+    if system('python setup.py configure %s' % (parameters)):
+        raise ConfigureError, _('Configuration failed.')
+
 
 def compile(parameters = ''):
     '''compile source with given parameters.'''
