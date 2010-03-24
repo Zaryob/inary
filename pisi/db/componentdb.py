@@ -33,10 +33,10 @@ class ComponentDB(lazydb.LazyDB):
         component_packages = {}
         component_sources = {}
 
-        self.repodb = pisi.db.repodb.RepoDB()
+        repodb = pisi.db.repodb.RepoDB()
 
-        for repo in self.repodb.list_repos():
-            doc = self.repodb.get_repo_doc(repo)
+        for repo in repodb.list_repos():
+            doc = repodb.get_repo_doc(repo)
             component_nodes[repo] = self.__generate_components(doc)
             component_packages[repo] = self.__generate_packages(doc)
             component_sources[repo] = self.__generate_sources(doc)
@@ -109,7 +109,7 @@ class ComponentDB(lazydb.LazyDB):
         component = pisi.component.Component()
         component.parse(self.cdb.get_item(component_name))
         
-        for repo in self.repodb.list_repos():
+        for repo in pisi.db.repodb.RepoDB().list_repos():
             try:
                 component.packages.extend(self.cpdb.get_item(component_name, repo))
             except Exception: #FIXME: what exception could we catch here, replace with that.
