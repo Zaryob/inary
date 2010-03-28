@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "POT-Creation-Date: 2010-03-24 16:10+EET\n"
-"PO-Revision-Date: 2010-02-22 21:30-0300\n"
+"PO-Revision-Date: 2010-03-28 20:37-0400\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -30,34 +30,32 @@ msgid "Keyboard Interrupt: Exiting..."
 msgstr "Interrupción de teclado: Terminando..."
 
 #: pisi-cli:45
-#, fuzzy
 msgid "Program terminated."
 msgstr "Programa terminado."
 
 #: pisi-cli:48
-#, fuzzy
 msgid ""
 "Unhandled internal exception.\n"
 "Please file a bug report to <http://bugs.pardus.org.tr>."
 msgstr ""
 "Excepción interna no prevista.\n"
-"Favor envíe un reporte de la falla. (http://bugs.pardus.org.tr)"
+"Favor envíe un reporte de la falla<http://bugs.pardus.org.tr>."
 
 #: pisi-cli:54
-#, fuzzy
 msgid "System error. Program terminated."
-msgstr "Error de sistema. Programa terminado."
+msgstr "Error del sistema. Programa terminado."
 
 #: pisi-cli:63
 msgid "Please use 'pisi help' for general help."
 msgstr "Favor use  'pisi help' para ayuda general."
 
 #: pisi-cli:66
-#, fuzzy
 msgid ""
 "\n"
 "Traceback:"
-msgstr "Registro:"
+msgstr ""
+"\n"
+"Trazo inverso:"
 
 #: pisi-cli:69
 msgid "Use --debug to see a traceback."
@@ -233,9 +231,8 @@ msgid "No executable file matched pattern \"%s\"."
 msgstr "No hay archivos ejecutables que coinciden con el patrón \"%s\"."
 
 #: pisi/actionsapi/pythonmodules.py:56
-#, fuzzy
 msgid "Configuration failed."
-msgstr "Falló la configuración %s ."
+msgstr "Falló la configuración."
 
 #: pisi/actionsapi/pythonmodules.py:81
 msgid "Running %s failed."
@@ -501,9 +498,8 @@ msgid "Repository %s does not exist. Cannot remove."
 msgstr "Repositorio %s no existe. No posible remover."
 
 #: pisi/api.py:828
-#, fuzzy
 msgid "Updating repository: %s"
-msgstr "* Actualizando repositorio: %s"
+msgstr "Actualizando repositorio: %s"
 
 #: pisi/api.py:838
 msgid "%s repository information is up-to-date."
@@ -717,16 +713,14 @@ msgid "add-repo options"
 msgstr "opciones add-repo"
 
 #: pisi/cli/addrepo.py:46
-#, fuzzy
 msgid "Ignore repository distribution check"
-msgstr "Ignorar verificación de repositorio y de arquitectura"
+msgstr "Ignorar verificación de distribución del repositorio"
 
 #: pisi/cli/addrepo.py:47
-#, fuzzy
 msgid "Does not fetch repository index and does not check distribution match"
 msgstr ""
 "No busca lista de archivos del repositorio y no verifica si coincide "
-"distribución y arquitectura"
+"distribución"
 
 #: pisi/cli/addrepo.py:50
 msgid "Add repository at given position (0 is first)"
@@ -2293,9 +2287,8 @@ msgid "Package %s not found."
 msgstr "Paquete %s no encontrado."
 
 #: pisi/db/repodb.py:159
-#, fuzzy
 msgid "%s repository needs to be updated"
-msgstr "Repositorio %s está actualizado."
+msgstr "Repositorio %s requiere actualización"
 
 #: pisi/db/repodb.py:165
 msgid ""
@@ -2835,21 +2828,19 @@ msgstr ""
 "fueron guardados:\n"
 
 #: pisi/operations/install.py:48 pisi/operations/install.py:135
-#, fuzzy
 msgid ""
 "The following package(s) are already installed and are not going to be "
 "installed again:"
 msgstr ""
-"Los siguientes paquetes ya están instalados y no se instalarán de nuevo:\n"
+"Los siguientes paquetes ya están instalados y no se instalarán de nuevo:"
 
 #: pisi/operations/install.py:54 pisi/operations/install.py:214
 msgid "No packages to install."
 msgstr "No hay paquetes para instalar."
 
 #: pisi/operations/install.py:72
-#, fuzzy
 msgid "Following packages will be installed:"
-msgstr "Se instalarán los siguientes paquetes:\n"
+msgstr "Se instalarán los siguientes paquetes:"
 
 #: pisi/operations/install.py:77 pisi/operations/upgrade.py:180
 msgid "Total size of package(s): %.2f %s"
@@ -2877,12 +2868,11 @@ msgid "External dependencies not satisfied: %s"
 msgstr "Dependencias externas no satisfechas: %s"
 
 #: pisi/operations/install.py:198
-#, fuzzy
 msgid ""
 "The following packages will be installed in order to satisfy dependencies:"
 msgstr ""
-"Se instalarán los siguientes paquetes en el orden indicado para satisfacer "
-"las dependencias:\n"
+"Se instalarán los siguientes paquetes para satisfacer "
+"las dependencias:"
 
 #: pisi/operations/install.py:202
 msgid "External dependencies not satisfied"
@@ -2898,18 +2888,14 @@ msgid "%s dependency of package %s is not satisfied"
 msgstr "Dependencia %s de paquete %s no está satisfecha"
 
 #: pisi/operations/remove.py:44
-#, fuzzy
 msgid "Safety switch prevents the removal of following packages:\n"
-msgstr ""
-"Verificación de seguridad: no posible remover los paquetes siguientes de "
-"system.base: "
+msgstr "Verificación de seguridad impide remover los siguientes paquetes: \n"
 
 # should this say in english ? "Safety switch: the component cannot be found in system.base" ?? (i did in spanish like this)
 #: pisi/operations/remove.py:49 pisi/operations/upgrade.py:355
-#, fuzzy
 msgid "Safety switch: The component system.base cannot be found."
 msgstr ""
-"Verificación de seguridad: No posible encontrar el componente system.base: "
+"Verificación de seguridad: No posible encontrar el componente system.base."
 
 #: pisi/operations/remove.py:56
 msgid "Package %s does not exist. Cannot remove."
@@ -2981,14 +2967,12 @@ msgid "Package %s is already at the latest build %s."
 msgstr "Paquete %s ya está con su último build %s."
 
 #: pisi/operations/upgrade.py:175
-#, fuzzy
 msgid "The following packages will be upgraded:"
-msgstr "Se actualizarán los siguientes paquetes: "
+msgstr "Se actualizarán los siguientes paquetes:"
 
 #: pisi/operations/upgrade.py:185
-#, fuzzy
 msgid "There are extra packages due to dependencies."
-msgstr "Hay paquetes adicionales por motivo de dependencias. Desea continuar ?"
+msgstr "Hay paquetes adicionales por motivo de dependencias."
 
 #: pisi/operations/upgrade.py:265
 msgid "Dependency %s of %s cannot be satisfied"
@@ -3003,18 +2987,15 @@ msgid "Reverse dependency %s of %s cannot be satisfied"
 msgstr "No se puede satisfacer la dependencia reversa %s de %s"
 
 #: pisi/operations/upgrade.py:332
-#, fuzzy
 msgid "Safety switch forces the installation of following packages:"
 msgstr ""
-"Verificación de seguridad: no posible remover los paquetes siguientes de "
-"system.base: "
+"Verificación de seguridad obliga la instalación de los siguientes paquetes: "
 
 #: pisi/operations/upgrade.py:348
-#, fuzzy
 msgid "Safety switch forces the upgrade of following packages:"
 msgstr ""
-"Verificación de seguridad: no posible remover los paquetes siguientes de "
-"system.base: "
+"Verificación de seguridad obliga la actualización de los siguientes "
+"paquetes: "
 
 # do you mean: maybe the file on the server is newer than the one in the pisi list ?
 # using upgrade automatically takes the newest one from the server,
