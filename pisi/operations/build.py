@@ -589,7 +589,7 @@ class Builder:
         try:
             int(release)
             pisi.version.make_version(version)
-        except (ValueError, InvalidVersionError):
+        except (ValueError, pisi.version.InvalidVersionError):
             raise Error(_("%s-%s is not a valid PiSi version format") % (version, release))
 
     def check_build_dependencies(self):
