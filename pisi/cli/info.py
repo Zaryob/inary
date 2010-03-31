@@ -121,18 +121,18 @@ Usage: info <package1> <package2> ... <packagen>
     def print_metadata(self, metadata, packagedb=None):
         if ctx.get_option('short'):
             pkg = metadata.package
-            ctx.ui.info('%15s - %s' % (pkg.name, unicode(pkg.summary)))
+            ctx.ui.formatted_output(" - ".join((pkg.name, unicode(pkg.summary))))
         else:
-            ctx.ui.info(unicode(metadata.package))
+            ctx.ui.formatted_output(unicode(metadata.package))
             if packagedb:
                 revdeps =  [name for name, dep in packagedb.get_rev_deps(metadata.package.name)]
-                print _('Reverse Dependencies:'), util.strlist(revdeps)
+                ctx.ui.formatted_output(" ".join((_("Reverse Dependencies:"), util.strlist(revdeps))))
                 print
 
     def print_specdata(self, spec, sourcedb=None):
         src = spec.source
         if ctx.get_option('short'):
-            ctx.ui.info('%15s - %s' % (src.name, unicode(src.summary)))
+            ctx.ui.formatted_output(" - ".join((src.name, unicode(src.summary))))
         else:
             ctx.ui.info(unicode(spec))
             if sourcedb:
@@ -142,7 +142,7 @@ Usage: info <package1> <package2> ... <packagen>
 
     def pisifile_info(self, package):
         metadata, files = pisi.api.info_file(package)
-        ctx.ui.info(_('Package file: %s') % package)
+        ctx.ui.formatted_output(_("Package file: %s") % package)
 
         self.print_metadata(metadata)
         if self.options.files or self.options.files_path:
@@ -157,7 +157,7 @@ Usage: info <package1> <package2> ... <packagen>
                 return
 
             if self.options.short:
-                ctx.ui.info(_('[inst] '), noln=True)
+                ctx.ui.formatted_output(_("[inst] "), noln=True, column=" ")
             else:
                 ctx.ui.info(_('Installed package:'))
 
@@ -169,7 +169,7 @@ Usage: info <package1> <package2> ... <packagen>
         if self.packagedb.has_package(package):
             metadata, files, repo = pisi.api.info_name(package, False)
             if self.options.short:
-                ctx.ui.info(_('[binary] '), noln=True)
+                ctx.ui.formatted_output(_("[binary] "), noln=True, column=" ")
             else:
                 ctx.ui.info(_('Package found in %s repository:') % repo)
             self.print_metadata(metadata, self.packagedb)
@@ -181,7 +181,7 @@ Usage: info <package1> <package2> ... <packagen>
             repo = self.sourcedb.which_repo(package)
             spec = self.sourcedb.get_spec(package)
             if self.options.short:
-                ctx.ui.info(_('[source] '), noln=True)
+                ctx.ui.formatted_output(_("[source] "), noln=True, column=" ")
             else:
                 ctx.ui.info(_('Package found in %s repository:') % repo)
             self.print_specdata(spec, self.sourcedb)

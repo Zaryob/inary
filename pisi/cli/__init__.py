@@ -63,6 +63,43 @@ class CLI(pisi.ui.UI):
             out.write(msg)
             out.flush()
 
+    def formatted_output(self, msg, verbose = False, noln = False, column=":"):
+        key_width = 20
+        line_format = "%(key)-20s%(column)s%(rest)s"
+        term_height, term_width = pisi.util.get_terminal_size()
+
+        def find_whitespace(s, i):
+            while s[i] not in (" ", "\t"):
+                i -= 1
+            return i
+
+        def align(s):
+            align_width = term_width - key_width - 2
+            s_width = len(s)
+            new_s = ""
+            index = 0
+            while True:
+                next_index = index + align_width
+                if next_index >= s_width:
+                    new_s += s[index:]
+                    break
+                next_index = find_whitespace(s, next_index)
+                new_s += s[index:next_index]
+                index = next_index
+                if index < s_width:
+                    new_s += "\n" + " " * (key_width + 1)
+            return new_s
+
+        new_msg = ""
+        for line in msg.split("\n"):
+            key, column, rest = line.partition(column)
+            rest = align(rest)
+            new_msg += line_format % {"key":key, "column":column, "rest":rest}
+            if not noln:
+                new_msg = "%s\n" % new_msg
+        msg = new_msg
+        self.output(unicode(msg), verbose=verbose)
+
     def info(self, msg, verbose = False, noln = False):
         # TODO: need to look at more kinds of info messages
         # let's cheat from KDE :)
