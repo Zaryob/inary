@@ -933,8 +933,47 @@ class Builder:
         self.new_packages = []
         self.old_packages = []
 
-        for package in self.spec.packages:
+        install_dir = self.pkg_dir() + ctx.const.install_dir_suffix
 
+        # Store additional files
+        c = os.getcwd()
+        os.chdir(self.specdir)
+        for package in self.spec.packages:
+            for afile in package.additionalFiles:
+                src = os.path.join(ctx.const.files_dir, afile.filename)
+                dest = os.path.join(
+                        install_dir + os.path.dirname(afile.target),
+                        os.path.basename(afile.target))
+                pisi.util.copy_file(src, dest)
+                if afile.permission:
+                    # mode is octal!
+                    os.chmod(dest, int(afile.permission, 8))
+                if afile.owner:
+                    try:
+                        os.chown(dest, pwd.getpwnam(afile.owner)[2], -1)
+                    except KeyError:
+                        ctx.ui.warning(_("No user named '%s' found "
+                                         "on the system") % afile.owner)
+                if afile.group:
+                    try:
+                        os.chown(dest, -1, grp.getgrnam(afile.group)[2])
+                    except KeyError:
+                        ctx.ui.warning(_("No group named '%s' found "
+                                         "on the system") % afile.group)
+        os.chdir(c)
+
+        # Show the files those are not collected from the install dir
+        abandoned_files = self.get_abandoned_files()
+        if abandoned_files:
+            ctx.ui.error(_("There are abandoned files "
+                           "under the install dir (%s):") % install_dir)
+
+            for f in abandoned_files:
+                ctx.ui.info("    - %s" % f)
+
+            raise AbandonedFilesException
+
+        for package in self.spec.packages:
             # removing "farce" in specfile.py:SpecFile.override_tags
             # this block of code came here... SpecFile should never
             # ever ruin the generated PSPEC file. If build process
@@ -955,29 +994,6 @@ class Builder:
             if not package.icon:
                 package.icon = self.spec.source.icon
 
-            # store additional files
-            c = os.getcwd()
-            os.chdir(self.specdir)
-            install_dir = self.pkg_dir() + ctx.const.install_dir_suffix
-            for afile in package.additionalFiles:
-                src = os.path.join(ctx.const.files_dir, afile.filename)
-                dest = os.path.join(install_dir + os.path.dirname(afile.target), os.path.basename(afile.target))
-                pisi.util.copy_file(src, dest)
-                if afile.permission:
-                    # mode is octal!
-                    os.chmod(dest, int(afile.permission, 8))
-                if afile.owner:
-                    try:
-                        os.chown(dest, pwd.getpwnam(afile.owner)[2], -1)
-                    except KeyError:
-                        ctx.ui.warning(_("No user named '%s' found on the system") % afile.owner)
-                if afile.group:
-                    try:
-                        os.chown(dest, -1, grp.getgrnam(afile.group)[2])
-                    except KeyError:
-                        ctx.ui.warning(_("No group named '%s' found on the system") % afile.group)
-            os.chdir(c)
-
             ctx.ui.action(_("** Building package %s") % package.name);
 
             ctx.ui.info(_("Generating %s,") % ctx.const.files_xml)
@@ -985,14 +1001,6 @@ class Builder:
 
             ctx.ui.info(_("Generating %s,") % ctx.const.metadata_xml)
             self.gen_metadata_xml(package)
-
-            abandoned_files = self.get_abandoned_files()
-            if abandoned_files:
-                ctx.ui.error(_('There are abandoned files under the install dir (%s):') % (install_dir))
-                for f in abandoned_files:
-                    ctx.ui.info('    - %s' % (f))
-
-                raise AbandonedFilesException
 
             # build number
             if ctx.config.options.ignore_build_no or not ctx.config.values.build.buildno:
@@ -1067,11 +1075,8 @@ class Builder:
             self.set_state("buildpackages")
             ctx.ui.info(_("Done."))
 
-        # Show the files those are not collected from the install dir
-        if ctx.get_option('debug'):
-            if not abandoned_files:
-                ctx.ui.info(_('All of the files under the install dir (%s) has been collected by package(s)')
-                                                                % (install_dir))
+        ctx.ui.info(_("All of the files under the install dir (%s) has been "
+                      "collected by package(s)") % install_dir)
 
         if ctx.config.values.general.autoclean is True:
             ctx.ui.info(_("Cleaning Build Directory..."))
