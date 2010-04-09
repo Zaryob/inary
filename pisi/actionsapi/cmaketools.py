@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2010 TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -88,22 +88,15 @@ def fixInfoDir():
 def install(parameters = '', argument = 'install'):
     '''install source into install directory with given parameters'''
     if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
-        args = 'make prefix=%(prefix)s/%(defaultprefix)s \
-                datadir=%(prefix)s/%(data)s \
-                infodir=%(prefix)s/%(info)s \
-                localstatedir=%(prefix)s/%(localstate)s \
-                mandir=%(prefix)s/%(man)s \
-                sysconfdir=%(prefix)s/%(conf)s \
-                %(parameters)s \
-                %(argument)s' % {'prefix': get.installDIR(),
-                            'defaultprefix': get.defaultprefixDIR(),
-                            'man': get.manDIR(),
-                            'info': get.infoDIR(),
-                            'localstate': get.localstateDIR(),
-                            'conf': get.confDIR(),
-                            'data': get.dataDIR(),
-                            'parameters': parameters,
-                            'argument':argument}
+        # You can't squeeze unix paths with things like 'bindir', 'datadir', etc with CMake
+        # http://public.kitware.com/pipermail/cmake/2006-August/010748.html
+        args = 'make DESTDIR="%(destdir)s" \
+                     %(parameters)s \
+                     %(argument)s' % {
+                                         'destdir'      : get.installDIR(),
+                                         'parameters'   : parameters,
+                                         'argument'     : argument,
+                                     }
 
         if system(args):
             raise InstallError(_('Install failed.'))
