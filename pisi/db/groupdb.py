@@ -32,10 +32,10 @@ class GroupDB(lazydb.LazyDB):
         group_nodes = {}
         group_components = {}
 
-        self.repodb = pisi.db.repodb.RepoDB()
+        repodb = pisi.db.repodb.RepoDB()
 
-        for repo in self.repodb.list_repos():
-            doc = self.repodb.get_repo_doc(repo)
+        for repo in repodb.list_repos():
+            doc = repodb.get_repo_doc(repo)
             group_nodes[repo] = self.__generate_groups(doc)
             group_components[repo] = self.__generate_components(doc)
 
