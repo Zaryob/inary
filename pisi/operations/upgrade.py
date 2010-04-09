@@ -198,63 +198,67 @@ def plan_upgrade(A, force_replaced=True):
     # set A using packagedb
     for x in A:
         G_f.add_package(x)
-    B = A
 
     installdb = pisi.db.installdb.InstallDB()
-    
-    while len(B) > 0:
-        Bp = set()
-        for x in B:
-            pkg = packagedb.get_package(x)
-            for dep in pkg.runtimeDependencies():
-                # add packages that can be upgraded
-                if installdb.has_package(dep.package) and dep.satisfied_by_installed():
-                    continue
-                
-                if dep.satisfied_by_repo():
-                    if not dep.package in G_f.vertices():
-                        Bp.add(str(dep.package))
-                    G_f.add_dep(x, dep)
-                else:
-                    ctx.ui.error(_('Dependency %s of %s cannot be satisfied') % (dep, x))
-                    raise Exception(_("Upgrade is not possible."))
-                
-        B = Bp
-    # now, search reverse dependencies to see if anything
-    # should be upgraded
-    B = filter(lambda x:installdb.has_package(x), G_f.vertices())
-    while len(B) > 0:
-        Bp = set()
-        for x in B:
-            pkg = packagedb.get_package(x)
-            rev_deps = packagedb.get_rev_deps(x)
-            for (rev_dep, depinfo) in rev_deps:
-                # add only installed but unsatisfied reverse dependencies
-                if (installdb.has_package(rev_dep) and 
-                    not depinfo.satisfied_by_installed() and is_upgradable(rev_dep)):
-                    if not depinfo.satisfied_by_repo():
-                        raise Exception(_('Reverse dependency %s of %s cannot be satisfied') % (rev_dep, x))
-                    if not rev_dep in G_f.vertices():
-                        Bp.add(rev_dep)
-                        G_f.add_plain_dep(rev_dep, x)
-        B = Bp
 
-    # now, search for reverse dependency update needs of to be upgraded packages
-    # check only the installed ones.
-    B = filter(lambda x:installdb.has_package(x), G_f.vertices())
-    while len(B) > 0:
-        Bp = set()
-        for x in B:
-            pkg = packagedb.get_package(x)
-            (version, release, build) = installdb.get_version(x)
-            updates = [i for i in pkg.history if pisi.version.Version(i.release) > pisi.version.Version(release)]
+    def add_runtime_deps(pkg, Bp):
+        for dep in pkg.runtimeDependencies():
+            # add packages that can be upgraded
+            if installdb.has_package(dep.package) and dep.satisfied_by_installed():
+                continue
 
-            if pisi.util.any(lambda u:"reverseDependencyUpdate" in u.required_actions() , updates):
-                rev_deps = map(lambda d:d[0], packagedb.get_rev_deps(x))
-                for rev_dep in filter(lambda name:name not in G_f.vertices() and is_upgradable(name), rev_deps):
+            if dep.satisfied_by_repo():
+                if not dep.package in G_f.vertices():
+                    Bp.add(str(dep.package))
+
+                # Always add the dependency info although the dependant
+                # package is already a member of this graph. Upgrade order
+                # might change if the dependency info differs from the
+                # previous ones.
+                G_f.add_dep(pkg.name, dep)
+            else:
+                ctx.ui.error(_('Dependency %s of %s cannot be satisfied') % (dep, pkg.name))
+                raise Exception(_("Upgrade is not possible."))
+
+    def add_broken_revdeps(pkg, Bp):
+        # Search reverse dependencies to see if anything
+        # should be upgraded
+        rev_deps = packagedb.get_rev_deps(pkg.name)
+        for (rev_dep, depinfo) in rev_deps:
+            # add only installed but unsatisfied reverse dependencies
+            if (installdb.has_package(rev_dep) and 
+                not depinfo.satisfied_by_installed() and is_upgradable(rev_dep)):
+                if not depinfo.satisfied_by_repo():
+                    raise Exception(_('Reverse dependency %s of %s cannot be satisfied') % (rev_dep, pkg.name))
+                if not rev_dep in G_f.vertices():
                     Bp.add(rev_dep)
-                    G_f.add_plain_dep(rev_dep, x)
-        B = Bp
+                    G_f.add_plain_dep(rev_dep, pkg.name)
+
+    def add_needed_revdeps(pkg, Bp):
+        # Search for reverse dependency update needs of to be upgraded packages
+        # check only the installed ones.
+        (version, release, build) = installdb.get_version(pkg.name)
+        updates = [i for i in pkg.history if pisi.version.Version(i.release) > pisi.version.Version(release)]
+
+        if pisi.util.any(lambda u:"reverseDependencyUpdate" in u.required_actions() , updates):
+            rev_deps = map(lambda d:d[0], packagedb.get_rev_deps(pkg.name))
+            for rev_dep in filter(lambda name:name not in G_f.vertices() and is_upgradable(name), rev_deps):
+                Bp.add(rev_dep)
+                G_f.add_plain_dep(rev_dep, pkg.name)
+
+    while A:
+        Bp = set()
+
+        for x in A:
+            pkg = packagedb.get_package(x)
+
+            add_runtime_deps(pkg, Bp)
+
+            if installdb.has_package(x):
+                add_broken_revdeps(pkg, Bp)
+                add_needed_revdeps(pkg, Bp)
+
+        A = Bp
 
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
