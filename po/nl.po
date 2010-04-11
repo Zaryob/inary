@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
-"POT-Creation-Date: 2010-03-24 16:10+EET\n"
+"POT-Creation-Date: 2010-04-11 17:08+EEST\n"
 "PO-Revision-Date: 2010-04-10 23:51+0300\n"
 "Last-Translator: H. İbrahim Güngör <ibrahim@pardus.org.tr>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -21,6 +21,80 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
+
+#: /usr/lib/python2.6/optparse.py:140
+#, fuzzy
+msgid "no such option: %s"
+msgstr "search opties"
+
+#: /usr/lib/python2.6/optparse.py:151
+#, fuzzy
+msgid "ambiguous option: %s (%s?)"
+msgstr "Sandbox overtreding: %s (%s?)"
+
+#: /usr/lib/python2.6/optparse.py:374
+#, fuzzy
+msgid "Usage: %s\n"
+msgstr "gebruik: %s\n"
+
+#: /usr/lib/python2.6/optparse.py:393
+msgid "Usage"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:418
+msgid "integer"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:419
+msgid "long integer"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:420
+msgid "floating-point"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:421
+#, fuzzy
+msgid "complex"
+msgstr " [compleet]\n"
+
+#: /usr/lib/python2.6/optparse.py:429
+msgid "option %s: invalid %s value: %r"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:437
+msgid "option %s: invalid choice: %r (choose from %s)"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1245
+msgid "show this help message and exit"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1250
+msgid "show program's version number and exit"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1273
+#, fuzzy
+msgid "%prog [options]"
+msgstr "duik opties op"
+
+#: /usr/lib/python2.6/optparse.py:1493 /usr/lib/python2.6/optparse.py:1532
+msgid "%s option requires an argument"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1495 /usr/lib/python2.6/optparse.py:1534
+msgid "%s option requires %d arguments"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1504
+msgid "%s option does not take a value"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1621
+#, fuzzy
+msgid "Options"
+msgstr "info opties"
 
 #: pisi-cli:42
 msgid "Keyboard Interrupt: Exiting..."
@@ -636,40 +710,40 @@ msgstr ""
 "Geïnstalleerd bestand %s bestaat niet op systeem [waarschijnlijk handmatig "
 "verwijderd]"
 
-#: pisi/cli/__init__.py:79
+#: pisi/cli/__init__.py:116
 msgid "Warning: "
 msgstr "Waarschuwing: "
 
-#: pisi/cli/__init__.py:89
+#: pisi/cli/__init__.py:126
 msgid "Error: "
 msgstr "Fout: "
 
-#: pisi/cli/__init__.py:119
+#: pisi/cli/__init__.py:156
 msgid " (yes/no)"
 msgstr " (ja/nee)"
 
-#: pisi/cli/__init__.py:140
+#: pisi/cli/__init__.py:177
 msgid " [complete]\n"
 msgstr " [compleet]\n"
 
-#: pisi/cli/__init__.py:150
+#: pisi/cli/__init__.py:187
 msgid "Installed %s"
 msgstr "Geïnstalleerd %s"
 
-#: pisi/cli/__init__.py:152
+#: pisi/cli/__init__.py:189
 msgid "Removed %s"
 msgstr "Verwijderd %s"
 
-#: pisi/cli/__init__.py:154
+#: pisi/cli/__init__.py:191
 msgid "Upgraded %s"
 msgstr "Opgewaardeerd %s"
 
 # pisi/actionsapi/autotools.py:75 :85
-#: pisi/cli/__init__.py:156
+#: pisi/cli/__init__.py:193
 msgid "Configured %s"
 msgstr "Geconfigureerd %s"
 
-#: pisi/cli/__init__.py:158
+#: pisi/cli/__init__.py:195
 msgid "Extracting the files of %s"
 msgstr "Bestanden uitpakken van %s"
 
@@ -2591,28 +2665,28 @@ msgstr "Er zijn wijzigingen, zet bouwnummer op %d "
 msgid "There is no change from previous build %d"
 msgstr "Er zijn geen wijzigingen sinds vorige bouw %d"
 
-#: pisi/operations/build.py:973
+#: pisi/operations/build.py:955
 msgid "No user named '%s' found on the system"
 msgstr "Geen gebruiker met de naam '%s' gevonden op het systeem"
 
-#: pisi/operations/build.py:978
+#: pisi/operations/build.py:961
 msgid "No group named '%s' found on the system"
 msgstr "Geen groep met de naam '%s' gevonden op het systeem"
 
-#: pisi/operations/build.py:981
+#: pisi/operations/build.py:968
+msgid "There are abandoned files under the install dir (%s):"
+msgstr "Er zijn achtergelaten bestanden in de installatiemap (%s):"
+
+#: pisi/operations/build.py:997
 msgid "** Building package %s"
 msgstr "** bouwen pakket %s"
 
 # pisi/build.py:503 :506
-#: pisi/operations/build.py:983 pisi/operations/build.py:986
+#: pisi/operations/build.py:999 pisi/operations/build.py:1002
 msgid "Generating %s,"
 msgstr "Genereren %s,"
 
-#: pisi/operations/build.py:991
-msgid "There are abandoned files under the install dir (%s):"
-msgstr "Er zijn achtergelaten bestanden in de installatiemap (%s):"
-
-#: pisi/operations/build.py:1000
+#: pisi/operations/build.py:1008
 msgid ""
 "Build number is not available. For repo builds you must enable buildno in "
 "pisi.conf."
@@ -2620,29 +2694,29 @@ msgstr ""
 "Bouwnummer is niet aanwezig. Bij repo-compilaties is buildno inschakelen in "
 "pisi.conf noodzakelijk."
 
-#: pisi/operations/build.py:1018
+#: pisi/operations/build.py:1026
 msgid "Creating PiSi package %s."
 msgstr "Aanmaken PiSi-pakket %s."
 
-#: pisi/operations/build.py:1068 pisi/operations/delta.py:98
+#: pisi/operations/build.py:1076 pisi/operations/delta.py:98
 msgid "Done."
 msgstr "Gereed."
 
-#: pisi/operations/build.py:1073
+#: pisi/operations/build.py:1078
 msgid ""
 "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)"
 
-#: pisi/operations/build.py:1077
+#: pisi/operations/build.py:1082
 msgid "Cleaning Build Directory..."
 msgstr "Opschonen bouwmap..."
 
-#: pisi/operations/build.py:1080
+#: pisi/operations/build.py:1085
 msgid "Keeping Build Directory"
 msgstr "Behouden bouwmap"
 
-#: pisi/operations/build.py:1106
+#: pisi/operations/build.py:1111
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d fout(en), %d waarschuwing(en)"
 
@@ -3196,183 +3270,169 @@ msgstr "Commando 'objcopy' (add-debuglink)  mislukte voor bestand '%s'!"
 msgid "Invalid version string: '%s'"
 msgstr ""
 
-#: scripts/package-signing/pisi-key.py:115
-#: scripts/package-signing/pisign.py:121
-msgid ""
-"\n"
-"        Prints usage information of application and exits.\n"
-"    "
-msgstr ""
-"\n"
-"        Informatie over het gebruik van de toepassing tonen en sluit af.\n"
-"    "
+#~ msgid ""
+#~ "\n"
+#~ "        Prints usage information of application and exits.\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "        Informatie over het gebruik van de toepassing tonen en sluit af.\n"
+#~ "    "
 
-#: scripts/package-signing/pisign.py:13
-msgid ""
-"\n"
-"        Signs data with given key file and passphrase.\n"
-"\n"
-"        Arguments:\n"
-"            data: Data to sign\n"
-"            keyfile: Private key\n"
-"            passphrase: Passphrase\n"
-"        Returns:\n"
-"            Signed data\n"
-"    "
-msgstr ""
-"\n"
-"        Onderteken data met opgegeven sleutelbestand en wachtwoord.\n"
-"\n"
-"        Argumenten:\n"
-"            data: Te ondertekenen data\n"
-"            sleutelbestand: Persoonlijke sleutel\n"
-"            wachtwoord: Wachtwoord\n"
-"        Geeft terug:\n"
-"            Ondertekende data\n"
-"    "
+#~ msgid ""
+#~ "\n"
+#~ "        Signs data with given key file and passphrase.\n"
+#~ "\n"
+#~ "        Arguments:\n"
+#~ "            data: Data to sign\n"
+#~ "            keyfile: Private key\n"
+#~ "            passphrase: Passphrase\n"
+#~ "        Returns:\n"
+#~ "            Signed data\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "        Onderteken data met opgegeven sleutelbestand en wachtwoord.\n"
+#~ "\n"
+#~ "        Argumenten:\n"
+#~ "            data: Te ondertekenen data\n"
+#~ "            sleutelbestand: Persoonlijke sleutel\n"
+#~ "            wachtwoord: Wachtwoord\n"
+#~ "        Geeft terug:\n"
+#~ "            Ondertekende data\n"
+#~ "    "
 
-#: scripts/package-signing/pisign.py:32
-msgid ""
-"\n"
-"        Verifies signature. Keyfile or certificate is required.\n"
-"\n"
-"        Arguments:\n"
-"            data: Original data\n"
-"            signature: Signed data\n"
-"            keyfile: Public keyfile\n"
-"            certificate: Certificate\n"
-"        Returns:\n"
-"            True if valid, False if invalid\n"
-"    "
-msgstr ""
-"\n"
-"        Verifieert ondertekening. sleutelbestand of certificaat is vereist.\n"
-"\n"
-"        Argumenten:\n"
-"            data: Originele data\n"
-"            handtekening: Ondertekende data\n"
-"            sleutelbestand: Publiek sleutelbestand\n"
-"            certificaat: Certificaat\n"
-"        Geeft terug:\n"
-"            True indien geldig, False indien ongeldig\n"
-"    "
+#~ msgid ""
+#~ "\n"
+#~ "        Verifies signature. Keyfile or certificate is required.\n"
+#~ "\n"
+#~ "        Arguments:\n"
+#~ "            data: Original data\n"
+#~ "            signature: Signed data\n"
+#~ "            keyfile: Public keyfile\n"
+#~ "            certificate: Certificate\n"
+#~ "        Returns:\n"
+#~ "            True if valid, False if invalid\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "        Verifieert ondertekening. sleutelbestand of certificaat is "
+#~ "vereist.\n"
+#~ "\n"
+#~ "        Argumenten:\n"
+#~ "            data: Originele data\n"
+#~ "            handtekening: Ondertekende data\n"
+#~ "            sleutelbestand: Publiek sleutelbestand\n"
+#~ "            certificaat: Certificaat\n"
+#~ "        Geeft terug:\n"
+#~ "            True indien geldig, False indien ongeldig\n"
+#~ "    "
 
-#: scripts/package-signing/pisign.py:62
-msgid ""
-"\n"
-"        Calculates checksums of files in ZIP object.\n"
-"\n"
-"        Arguments:\n"
-"            zip: ZipFile object\n"
-"        Returns:\n"
-"            File names and sums\n"
-"    "
-msgstr ""
-"\n"
-"        Berekent controlesom van de bestanden in het ZIP-object.\n"
-"\n"
-"        Argumenten:\n"
-"            zip: Zipbestand-object\n"
-"        Geeft terug:\n"
-"            Bestandsnamen en controlesommen\n"
-"    "
+#~ msgid ""
+#~ "\n"
+#~ "        Calculates checksums of files in ZIP object.\n"
+#~ "\n"
+#~ "        Arguments:\n"
+#~ "            zip: ZipFile object\n"
+#~ "        Returns:\n"
+#~ "            File names and sums\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "        Berekent controlesom van de bestanden in het ZIP-object.\n"
+#~ "\n"
+#~ "        Argumenten:\n"
+#~ "            zip: Zipbestand-object\n"
+#~ "        Geeft terug:\n"
+#~ "            Bestandsnamen en controlesommen\n"
+#~ "    "
 
-#: scripts/package-signing/pisign.py:79
-msgid ""
-"\n"
-"        Verifies integrity of a ZIP file. Keyfile or certificate is "
-"required.\n"
-"\n"
-"        Arguments:\n"
-"            filename: ZIP filename\n"
-"            keyfile: Public keyfile\n"
-"            certificate: Certificate\n"
-"        Returns:\n"
-"            True if valid, False if invalid\n"
-"    "
-msgstr ""
-"\n"
-"         Verifieert de integriteit van een ZIP-bestand. Sleutelbestand of "
-"certificaat is vereist.\n"
-"\n"
-"        Argumenten:\n"
-"            bestandnaam: ZIP-bestandnaam\n"
-"            sleutelbestand: Publiek sleutelbestand\n"
-"            certificaat: Certificaat\n"
-"        Geeft terug:\n"
-"            True indien geldig, False indien ongeldig\n"
-"    "
+#~ msgid ""
+#~ "\n"
+#~ "        Verifies integrity of a ZIP file. Keyfile or certificate is "
+#~ "required.\n"
+#~ "\n"
+#~ "        Arguments:\n"
+#~ "            filename: ZIP filename\n"
+#~ "            keyfile: Public keyfile\n"
+#~ "            certificate: Certificate\n"
+#~ "        Returns:\n"
+#~ "            True if valid, False if invalid\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "         Verifieert de integriteit van een ZIP-bestand. Sleutelbestand of "
+#~ "certificaat is vereist.\n"
+#~ "\n"
+#~ "        Argumenten:\n"
+#~ "            bestandnaam: ZIP-bestandnaam\n"
+#~ "            sleutelbestand: Publiek sleutelbestand\n"
+#~ "            certificaat: Certificaat\n"
+#~ "        Geeft terug:\n"
+#~ "            True indien geldig, False indien ongeldig\n"
+#~ "    "
 
-#: scripts/package-signing/pisign.py:100
-msgid ""
-"\n"
-"        Signs a ZIP file.\n"
-"\n"
-"        Arguments:\n"
-"            filename: ZIP filename\n"
-"            keyfile: Private key\n"
-"            passphrase: Passphrase\n"
-"    "
-msgstr ""
-"\n"
-"        Ondertekent een ZIP-bestand.\n"
-"\n"
-"        Argumenten:\n"
-"            bestandnaam: ZIP-bestandnaam\n"
-"            sleutelbestand: Persoonlijke sleutel\n"
-"            wachtwoord: Wachtwoord\n"
-"    "
+#~ msgid ""
+#~ "\n"
+#~ "        Signs a ZIP file.\n"
+#~ "\n"
+#~ "        Arguments:\n"
+#~ "            filename: ZIP filename\n"
+#~ "            keyfile: Private key\n"
+#~ "            passphrase: Passphrase\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "        Ondertekent een ZIP-bestand.\n"
+#~ "\n"
+#~ "        Argumenten:\n"
+#~ "            bestandnaam: ZIP-bestandnaam\n"
+#~ "            sleutelbestand: Persoonlijke sleutel\n"
+#~ "            wachtwoord: Wachtwoord\n"
+#~ "    "
 
-#: scripts/repostats.py:226
-msgid ""
-"Duplicate binary packages:\n"
-"%s\n"
-"%s\n"
-msgstr ""
-"Dubbele binaire pakketten:\n"
-"%s\n"
-"%s\n"
+#~ msgid ""
+#~ "Duplicate binary packages:\n"
+#~ "%s\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Dubbele binaire pakketten:\n"
+#~ "%s\n"
+#~ "%s\n"
 
-#: scripts/repostats.py:301
-msgid ""
-"Duplicate source packages:\n"
-"%s\n"
-"%s\n"
-msgstr ""
-"Dubbele bronpakketten:\n"
-"%s\n"
-"%s\n"
+#~ msgid ""
+#~ "Duplicate source packages:\n"
+#~ "%s\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Dubbele bronpakketten:\n"
+#~ "%s\n"
+#~ "%s\n"
 
-#: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-msgstr ""
-"Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
+#~ msgid ""
+#~ "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+#~ msgstr ""
+#~ "Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
 
-#: scripts/repostats.py:467
-msgid ""
-"Cannot parse '%s':\n"
-"%s\n"
-msgstr ""
-"Kan '%s' niet ontleden:\n"
-"'%s'\n"
+#~ msgid ""
+#~ "Cannot parse '%s':\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Kan '%s' niet ontleden:\n"
+#~ "'%s'\n"
 
-#: scripts/repostats.py:553
-msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-msgstr ""
-"Gebruik: repostats.py [Opties] pad-naar-repo-bron [binair-repo-adres]\n"
+#~ msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
+#~ msgstr ""
+#~ "Gebruik: repostats.py [Opties] pad-naar-repo-bron [binair-repo-adres]\n"
 
-#: scripts/repostats.py:554
-msgid "Dont generate the web site.\n"
-msgstr "Website niet genereren.\n"
+#~ msgid "Dont generate the web site.\n"
+#~ msgstr "Website niet genereren.\n"
 
-#: scripts/repostats.py:575
-msgid "Scanning source repository...\n"
-msgstr "Scannen van softwarebron...\n"
+#~ msgid "Scanning source repository...\n"
+#~ msgstr "Scannen van softwarebron...\n"
 
-#: scripts/repostats.py:579
-msgid "Scanning binary packages...\n"
-msgstr "Scannen binaire pakketten...\n"
+#~ msgid "Scanning binary packages...\n"
+#~ msgstr "Scannen binaire pakketten...\n"
 
 #~ msgid "Storing %s, "
 #~ msgstr "Opslaan %s, "

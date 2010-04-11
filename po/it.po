@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
-"POT-Creation-Date: 2010-03-24 16:10+EET\n"
+"POT-Creation-Date: 2010-04-11 17:08+EEST\n"
 "PO-Revision-Date: 2007-07-11 21:08+0200\n"
 "Last-Translator: Andrea Decorte <adecorte@gmail.com>\n"
 "Language-Team: Italian <pardus-translation-it@pardus.org.tr>\n"
@@ -15,6 +15,76 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+
+#: /usr/lib/python2.6/optparse.py:140
+msgid "no such option: %s"
+msgstr "opzione non valida: %s"
+
+#: /usr/lib/python2.6/optparse.py:151
+msgid "ambiguous option: %s (%s?)"
+msgstr "opzione ambigua: %s (%s?)"
+
+#: /usr/lib/python2.6/optparse.py:374
+#, fuzzy
+msgid "Usage: %s\n"
+msgstr "uso: %s\n"
+
+#: /usr/lib/python2.6/optparse.py:393
+msgid "Usage"
+msgstr "Uso"
+
+#: /usr/lib/python2.6/optparse.py:418
+msgid "integer"
+msgstr "intero"
+
+#: /usr/lib/python2.6/optparse.py:419
+msgid "long integer"
+msgstr "intero lungo"
+
+#: /usr/lib/python2.6/optparse.py:420
+msgid "floating-point"
+msgstr "float"
+
+#: /usr/lib/python2.6/optparse.py:421
+msgid "complex"
+msgstr "complesso"
+
+#: /usr/lib/python2.6/optparse.py:429
+msgid "option %s: invalid %s value: %r"
+msgstr "opzione %s: valore %s invalido: %r"
+
+#: /usr/lib/python2.6/optparse.py:437
+msgid "option %s: invalid choice: %r (choose from %s)"
+msgstr "opzione %s: scelta non valida: %r (scegli tra %s)"
+
+#: /usr/lib/python2.6/optparse.py:1245
+msgid "show this help message and exit"
+msgstr "mostra questo messaggio di aiuto e esce"
+
+#: /usr/lib/python2.6/optparse.py:1250
+msgid "show program's version number and exit"
+msgstr "mostra il numero di versione del programma e esce"
+
+#: /usr/lib/python2.6/optparse.py:1273
+msgid "%prog [options]"
+msgstr "%prog [opzioni]"
+
+#: /usr/lib/python2.6/optparse.py:1493 /usr/lib/python2.6/optparse.py:1532
+msgid "%s option requires an argument"
+msgstr "l'opzione %s richiede un argomento"
+
+#: /usr/lib/python2.6/optparse.py:1495 /usr/lib/python2.6/optparse.py:1534
+msgid "%s option requires %d arguments"
+msgstr "l'opzione %s richiede %d argomenti"
+
+#: /usr/lib/python2.6/optparse.py:1504
+msgid "%s option does not take a value"
+msgstr "l'opzione %s non richiede un parametro"
+
+#: /usr/lib/python2.6/optparse.py:1621
+#, fuzzy
+msgid "Options"
+msgstr "opzioni"
 
 #: pisi-cli:42
 msgid "Keyboard Interrupt: Exiting..."
@@ -642,39 +712,39 @@ msgstr ""
 "Il file installato %s non è presente nel sistema [Probabilmente è stato "
 "eliminato manualmente]"
 
-#: pisi/cli/__init__.py:79
+#: pisi/cli/__init__.py:116
 msgid "Warning: "
 msgstr "Avviso: "
 
-#: pisi/cli/__init__.py:89
+#: pisi/cli/__init__.py:126
 msgid "Error: "
 msgstr "Errore: "
 
-#: pisi/cli/__init__.py:119
+#: pisi/cli/__init__.py:156
 msgid " (yes/no)"
 msgstr " (si/no)"
 
-#: pisi/cli/__init__.py:140
+#: pisi/cli/__init__.py:177
 msgid " [complete]\n"
 msgstr " [completato]\n"
 
-#: pisi/cli/__init__.py:150
+#: pisi/cli/__init__.py:187
 msgid "Installed %s"
 msgstr "Installato %s"
 
-#: pisi/cli/__init__.py:152
+#: pisi/cli/__init__.py:189
 msgid "Removed %s"
 msgstr "Rimosso %s"
 
-#: pisi/cli/__init__.py:154
+#: pisi/cli/__init__.py:191
 msgid "Upgraded %s"
 msgstr "Aggiornato %s"
 
-#: pisi/cli/__init__.py:156
+#: pisi/cli/__init__.py:193
 msgid "Configured %s"
 msgstr "Configurato %s"
 
-#: pisi/cli/__init__.py:158
+#: pisi/cli/__init__.py:195
 msgid "Extracting the files of %s"
 msgstr "Estrazione dei file di %s"
 
@@ -2628,28 +2698,28 @@ msgstr "Cambiamenti rilevati, incremento del numero di build a %d"
 msgid "There is no change from previous build %d"
 msgstr "Nessun cambiamento dalla build precedente %d"
 
-#: pisi/operations/build.py:973
+#: pisi/operations/build.py:955
 msgid "No user named '%s' found on the system"
 msgstr "Utente '%s' non trovato nel sistema"
 
-#: pisi/operations/build.py:978
+#: pisi/operations/build.py:961
 msgid "No group named '%s' found on the system"
 msgstr "Gruppo '%s' non trovato nel sistema"
 
-#: pisi/operations/build.py:981
-msgid "** Building package %s"
-msgstr "** Compilazione del pacchetto %s"
-
-#: pisi/operations/build.py:983 pisi/operations/build.py:986
-msgid "Generating %s,"
-msgstr "Generazione di %s,"
-
-#: pisi/operations/build.py:991
+#: pisi/operations/build.py:968
 #, fuzzy
 msgid "There are abandoned files under the install dir (%s):"
 msgstr "File abbandonati nella cartella di installazione (%s):"
 
-#: pisi/operations/build.py:1000
+#: pisi/operations/build.py:997
+msgid "** Building package %s"
+msgstr "** Compilazione del pacchetto %s"
+
+#: pisi/operations/build.py:999 pisi/operations/build.py:1002
+msgid "Generating %s,"
+msgstr "Generazione di %s,"
+
+#: pisi/operations/build.py:1008
 msgid ""
 "Build number is not available. For repo builds you must enable buildno in "
 "pisi.conf."
@@ -2657,30 +2727,30 @@ msgstr ""
 "Il numero di build non è disponibile. Per le build dal repository devi "
 "attivare buildno in pisi.conf."
 
-#: pisi/operations/build.py:1018
+#: pisi/operations/build.py:1026
 msgid "Creating PiSi package %s."
 msgstr "Creazione del pacchetto PiSi %s."
 
-#: pisi/operations/build.py:1068 pisi/operations/delta.py:98
+#: pisi/operations/build.py:1076 pisi/operations/delta.py:98
 msgid "Done."
 msgstr "Fatto."
 
-#: pisi/operations/build.py:1073
+#: pisi/operations/build.py:1078
 msgid ""
 "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Tutti i file nella cartella di installazione (%s) sono stati raccolti dai "
 "pacchetti"
 
-#: pisi/operations/build.py:1077
+#: pisi/operations/build.py:1082
 msgid "Cleaning Build Directory..."
 msgstr "Pulizia della cartella di compilazione..."
 
-#: pisi/operations/build.py:1080
+#: pisi/operations/build.py:1085
 msgid "Keeping Build Directory"
 msgstr "La cartella di compilazione verrà conservata"
 
-#: pisi/operations/build.py:1106
+#: pisi/operations/build.py:1111
 msgid "*** %d error(s), %d warning(s)"
 msgstr ""
 
@@ -3244,134 +3314,50 @@ msgstr "comando objcopy (add-debuglink) fallito per il file '%s'!"
 msgid "Invalid version string: '%s'"
 msgstr ""
 
-#: scripts/package-signing/pisi-key.py:115
-#: scripts/package-signing/pisign.py:121
-msgid ""
-"\n"
-"        Prints usage information of application and exits.\n"
-"    "
-msgstr ""
+#~ msgid ""
+#~ "Duplicate binary packages:\n"
+#~ "%s\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Pacchetti binari duplicati:\n"
+#~ "%s\n"
+#~ "%s\n"
 
-#: scripts/package-signing/pisign.py:13
-msgid ""
-"\n"
-"        Signs data with given key file and passphrase.\n"
-"\n"
-"        Arguments:\n"
-"            data: Data to sign\n"
-"            keyfile: Private key\n"
-"            passphrase: Passphrase\n"
-"        Returns:\n"
-"            Signed data\n"
-"    "
-msgstr ""
+#~ msgid ""
+#~ "Duplicate source packages:\n"
+#~ "%s\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Pacchetti sorgenti duplicati:\n"
+#~ "%s\n"
+#~ "%s\n"
 
-#: scripts/package-signing/pisign.py:32
-msgid ""
-"\n"
-"        Verifies signature. Keyfile or certificate is required.\n"
-"\n"
-"        Arguments:\n"
-"            data: Original data\n"
-"            signature: Signed data\n"
-"            keyfile: Public keyfile\n"
-"            certificate: Certificate\n"
-"        Returns:\n"
-"            True if valid, False if invalid\n"
-"    "
-msgstr ""
+#~ msgid ""
+#~ "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+#~ msgstr ""
+#~ "Lo sviluppatore '%s <%s>' ha un altro indirizzo di posta elettronica '%s' "
+#~ "nel pacchetto sorgente '%s'"
 
-#: scripts/package-signing/pisign.py:62
-msgid ""
-"\n"
-"        Calculates checksums of files in ZIP object.\n"
-"\n"
-"        Arguments:\n"
-"            zip: ZipFile object\n"
-"        Returns:\n"
-"            File names and sums\n"
-"    "
-msgstr ""
+#~ msgid ""
+#~ "Cannot parse '%s':\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Impossibile analizzare '%s':\n"
+#~ "%s\n"
 
-#: scripts/package-signing/pisign.py:79
-msgid ""
-"\n"
-"        Verifies integrity of a ZIP file. Keyfile or certificate is "
-"required.\n"
-"\n"
-"        Arguments:\n"
-"            filename: ZIP filename\n"
-"            keyfile: Public keyfile\n"
-"            certificate: Certificate\n"
-"        Returns:\n"
-"            True if valid, False if invalid\n"
-"    "
-msgstr ""
+#~ msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
+#~ msgstr ""
+#~ "Utilizzo: repostats.py [OPZIONI] percorso-repo-sorgente [percorso-repo-"
+#~ "binario]\n"
 
-#: scripts/package-signing/pisign.py:100
-msgid ""
-"\n"
-"        Signs a ZIP file.\n"
-"\n"
-"        Arguments:\n"
-"            filename: ZIP filename\n"
-"            keyfile: Private key\n"
-"            passphrase: Passphrase\n"
-"    "
-msgstr ""
+#~ msgid "Dont generate the web site.\n"
+#~ msgstr "Non generare il sito web.\n"
 
-#: scripts/repostats.py:226
-msgid ""
-"Duplicate binary packages:\n"
-"%s\n"
-"%s\n"
-msgstr ""
-"Pacchetti binari duplicati:\n"
-"%s\n"
-"%s\n"
+#~ msgid "Scanning source repository...\n"
+#~ msgstr "Scansione del repository sorgente in corso...\n"
 
-#: scripts/repostats.py:301
-msgid ""
-"Duplicate source packages:\n"
-"%s\n"
-"%s\n"
-msgstr ""
-"Pacchetti sorgenti duplicati:\n"
-"%s\n"
-"%s\n"
-
-#: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-msgstr ""
-"Lo sviluppatore '%s <%s>' ha un altro indirizzo di posta elettronica '%s' "
-"nel pacchetto sorgente '%s'"
-
-#: scripts/repostats.py:467
-msgid ""
-"Cannot parse '%s':\n"
-"%s\n"
-msgstr ""
-"Impossibile analizzare '%s':\n"
-"%s\n"
-
-#: scripts/repostats.py:553
-msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-msgstr ""
-"Utilizzo: repostats.py [OPZIONI] percorso-repo-sorgente [percorso-repo-"
-"binario]\n"
-
-#: scripts/repostats.py:554
-msgid "Dont generate the web site.\n"
-msgstr "Non generare il sito web.\n"
-
-#: scripts/repostats.py:575
-msgid "Scanning source repository...\n"
-msgstr "Scansione del repository sorgente in corso...\n"
-
-#: scripts/repostats.py:579
-msgid "Scanning binary packages...\n"
-msgstr "Scansione dei pacchetti binari in corso...\n"
+#~ msgid "Scanning binary packages...\n"
+#~ msgstr "Scansione dei pacchetti binari in corso...\n"
 
 #~ msgid "Storing %s, "
 #~ msgstr "Salvataggio di %s, "
@@ -3529,27 +3515,6 @@ msgstr "Scansione dei pacchetti binari in corso...\n"
 #~ "Formatta l'aiuto sottolineando i titoli delle sezioni.\n"
 #~ "    "
 
-#~ msgid "Usage"
-#~ msgstr "Uso"
-
-#~ msgid "integer"
-#~ msgstr "intero"
-
-#~ msgid "long integer"
-#~ msgstr "intero lungo"
-
-#~ msgid "floating-point"
-#~ msgstr "float"
-
-#~ msgid "complex"
-#~ msgstr "complesso"
-
-#~ msgid "option %s: invalid %s value: %r"
-#~ msgstr "opzione %s: valore %s invalido: %r"
-
-#~ msgid "option %s: invalid choice: %r (choose from %s)"
-#~ msgstr "opzione %s: scelta non valida: %r (scegli tra %s)"
-
 #~ msgid ""
 #~ "\n"
 #~ "    Instance attributes:\n"
@@ -3628,27 +3593,6 @@ msgstr "Scansione dei pacchetti binari in corso...\n"
 #~ "           add_option(opt_str, ..., kwarg=val, ...)\n"
 #~ "       "
 
-#~ msgid "show this help message and exit"
-#~ msgstr "mostra questo messaggio di aiuto e esce"
-
-#~ msgid "show program's version number and exit"
-#~ msgstr "mostra il numero di versione del programma e esce"
-
-#~ msgid "%prog [options]"
-#~ msgstr "%prog [opzioni]"
-
-#~ msgid "%s option requires an argument"
-#~ msgstr "l'opzione %s richiede un argomento"
-
-#~ msgid "%s option requires %d arguments"
-#~ msgstr "l'opzione %s richiede %d argomenti"
-
-#~ msgid "%s option does not take a value"
-#~ msgstr "l'opzione %s non richiede un parametro"
-
-#~ msgid "no such option: %s"
-#~ msgstr "opzione non valida: %s"
-
 #~ msgid ""
 #~ "error(msg : string)\n"
 #~ "\n"
@@ -3709,9 +3653,6 @@ msgstr "Scansione dei pacchetti binari in corso...\n"
 #~ "        corrente.  Non fa nulla se self.version è vuoto o non definito.\n"
 #~ "        "
 
-#~ msgid "options"
-#~ msgstr "opzioni"
-
 #~ msgid ""
 #~ "print_help(file : file = stdout)\n"
 #~ "\n"
@@ -3725,9 +3666,6 @@ msgstr "Scansione dei pacchetti binari in corso...\n"
 #~ "e\n"
 #~ "        ogni testo associato ad esse, in 'file' (stdout predefinito).\n"
 #~ "        "
-
-#~ msgid "ambiguous option: %s (%s?)"
-#~ msgstr "opzione ambigua: %s (%s?)"
 
 #~ msgid ""
 #~ "A database operation has been aborted. You should run pisi\n"

@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
-"POT-Creation-Date: 2010-03-24 16:10+EET\n"
+"POT-Creation-Date: 2010-04-11 17:08+EEST\n"
 "PO-Revision-Date: 2010-01-13 19:42-0300\n"
 "Last-Translator: Klemens Häckel <click3d at linuxmail (dot) org>\n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
@@ -23,6 +23,80 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 0.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: /usr/lib/python2.6/optparse.py:140
+#, fuzzy
+msgid "no such option: %s"
+msgstr "Optionen von search"
+
+#: /usr/lib/python2.6/optparse.py:151
+#, fuzzy
+msgid "ambiguous option: %s (%s?)"
+msgstr "Sandbox-Verletzung: %s (%s -> %s)"
+
+#: /usr/lib/python2.6/optparse.py:374
+#, fuzzy
+msgid "Usage: %s\n"
+msgstr "Syntax: %s\n"
+
+#: /usr/lib/python2.6/optparse.py:393
+msgid "Usage"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:418
+msgid "integer"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:419
+msgid "long integer"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:420
+msgid "floating-point"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:421
+#, fuzzy
+msgid "complex"
+msgstr " [vollständig]\n"
+
+#: /usr/lib/python2.6/optparse.py:429
+msgid "option %s: invalid %s value: %r"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:437
+msgid "option %s: invalid choice: %r (choose from %s)"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1245
+msgid "show this help message and exit"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1250
+msgid "show program's version number and exit"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1273
+#, fuzzy
+msgid "%prog [options]"
+msgstr "Optionen von emerge"
+
+#: /usr/lib/python2.6/optparse.py:1493 /usr/lib/python2.6/optparse.py:1532
+msgid "%s option requires an argument"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1495 /usr/lib/python2.6/optparse.py:1534
+msgid "%s option requires %d arguments"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1504
+msgid "%s option does not take a value"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1621
+#, fuzzy
+msgid "Options"
+msgstr "Optionen von info"
 
 #: pisi-cli:42
 msgid "Keyboard Interrupt: Exiting..."
@@ -637,39 +711,39 @@ msgstr ""
 "Installierte Datei %s existiert nicht mehr im System [vermutlich haben Sie "
 "sie manuell gelöscht]"
 
-#: pisi/cli/__init__.py:79
+#: pisi/cli/__init__.py:116
 msgid "Warning: "
 msgstr "Warnung:"
 
-#: pisi/cli/__init__.py:89
+#: pisi/cli/__init__.py:126
 msgid "Error: "
 msgstr "Fehler:"
 
-#: pisi/cli/__init__.py:119
+#: pisi/cli/__init__.py:156
 msgid " (yes/no)"
 msgstr " (ja/nein)"
 
-#: pisi/cli/__init__.py:140
+#: pisi/cli/__init__.py:177
 msgid " [complete]\n"
 msgstr " [vollständig]\n"
 
-#: pisi/cli/__init__.py:150
+#: pisi/cli/__init__.py:187
 msgid "Installed %s"
 msgstr "%s installiert"
 
-#: pisi/cli/__init__.py:152
+#: pisi/cli/__init__.py:189
 msgid "Removed %s"
 msgstr "%s entfernt"
 
-#: pisi/cli/__init__.py:154
+#: pisi/cli/__init__.py:191
 msgid "Upgraded %s"
 msgstr "%s aktualisiert"
 
-#: pisi/cli/__init__.py:156
+#: pisi/cli/__init__.py:193
 msgid "Configured %s"
 msgstr "%s konfiguriert"
 
-#: pisi/cli/__init__.py:158
+#: pisi/cli/__init__.py:195
 msgid "Extracting the files of %s"
 msgstr "Entpacke die Dateien aus %s"
 
@@ -2620,27 +2694,27 @@ msgstr "Es gibt Änderungen, erhöhe die Build-Nr auf %d"
 msgid "There is no change from previous build %d"
 msgstr "Es gibt keine Änderungen seit dem vorherigen Build %d"
 
-#: pisi/operations/build.py:973
+#: pisi/operations/build.py:955
 msgid "No user named '%s' found on the system"
 msgstr "Benutzer '%s' kann auf diesem System nicht gefunden werden"
 
-#: pisi/operations/build.py:978
+#: pisi/operations/build.py:961
 msgid "No group named '%s' found on the system"
 msgstr "Gruppe  '%s' kann auf diesem System nicht gefunden werden"
 
-#: pisi/operations/build.py:981
-msgid "** Building package %s"
-msgstr "** Paket %s wird konstruiert"
-
-#: pisi/operations/build.py:983 pisi/operations/build.py:986
-msgid "Generating %s,"
-msgstr "%s wird generiert,"
-
-#: pisi/operations/build.py:991
+#: pisi/operations/build.py:968
 msgid "There are abandoned files under the install dir (%s):"
 msgstr "Es gibt zurückgelassene Dateien im Installationsverzeichnis (%s):"
 
-#: pisi/operations/build.py:1000
+#: pisi/operations/build.py:997
+msgid "** Building package %s"
+msgstr "** Paket %s wird konstruiert"
+
+#: pisi/operations/build.py:999 pisi/operations/build.py:1002
+msgid "Generating %s,"
+msgstr "%s wird generiert,"
+
+#: pisi/operations/build.py:1008
 msgid ""
 "Build number is not available. For repo builds you must enable buildno in "
 "pisi.conf."
@@ -2648,31 +2722,31 @@ msgstr ""
 "Build-Nr ist nicht vorhanden. Für Depot-Builds muss in pisi.conf buildno "
 "aktiviert sein."
 
-#: pisi/operations/build.py:1018
+#: pisi/operations/build.py:1026
 msgid "Creating PiSi package %s."
 msgstr "PiSi Paket %s wird erstellt."
 
-#: pisi/operations/build.py:1068 pisi/operations/delta.py:98
+#: pisi/operations/build.py:1076 pisi/operations/delta.py:98
 msgid "Done."
 msgstr "Fertig."
 
 # Stefan: ich denke bei dem Vorgang werden Dateien nach der Installation entfernt bzw. vielleicht ist das eine Bildschimausgabe bei der Erstellung von Installationspaketen.
 # Wenn das so ist, dann würde es schon so passen.
-#: pisi/operations/build.py:1073
+#: pisi/operations/build.py:1078
 msgid ""
 "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Alle Dateien im Installationsverzeichnis (%s) wurden von Paketen aufgesammelt"
 
-#: pisi/operations/build.py:1077
+#: pisi/operations/build.py:1082
 msgid "Cleaning Build Directory..."
 msgstr "Build-Verzeichnis wird geleert..."
 
-#: pisi/operations/build.py:1080
+#: pisi/operations/build.py:1085
 msgid "Keeping Build Directory"
 msgstr "Erhalte Build-Verzeichnis"
 
-#: pisi/operations/build.py:1106
+#: pisi/operations/build.py:1111
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d Fehlermeldungr(en), %d Warnung(en)"
 
@@ -3239,132 +3313,49 @@ msgstr "Befehl objcopy (add-debuglink) fehlgeschlagen für Datei '%s'!"
 msgid "Invalid version string: '%s'"
 msgstr ""
 
-#: scripts/package-signing/pisi-key.py:115
-#: scripts/package-signing/pisign.py:121
-msgid ""
-"\n"
-"        Prints usage information of application and exits.\n"
-"    "
-msgstr ""
+#~ msgid ""
+#~ "Duplicate binary packages:\n"
+#~ "%s\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Doppelte Binär-Pakete:\n"
+#~ "%s\n"
+#~ "%s\n"
 
-#: scripts/package-signing/pisign.py:13
-msgid ""
-"\n"
-"        Signs data with given key file and passphrase.\n"
-"\n"
-"        Arguments:\n"
-"            data: Data to sign\n"
-"            keyfile: Private key\n"
-"            passphrase: Passphrase\n"
-"        Returns:\n"
-"            Signed data\n"
-"    "
-msgstr ""
+#~ msgid ""
+#~ "Duplicate source packages:\n"
+#~ "%s\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Doppelte Quellcode -Pakete:\n"
+#~ "%s\n"
+#~ "%s\n"
 
-#: scripts/package-signing/pisign.py:32
-msgid ""
-"\n"
-"        Verifies signature. Keyfile or certificate is required.\n"
-"\n"
-"        Arguments:\n"
-"            data: Original data\n"
-"            signature: Signed data\n"
-"            keyfile: Public keyfile\n"
-"            certificate: Certificate\n"
-"        Returns:\n"
-"            True if valid, False if invalid\n"
-"    "
-msgstr ""
+#~ msgid ""
+#~ "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+#~ msgstr ""
+#~ "Entwickler '%s <%s>' hat eina andere email adresse '%s' im Quelltext-"
+#~ "Paket '%s'"
 
-#: scripts/package-signing/pisign.py:62
-msgid ""
-"\n"
-"        Calculates checksums of files in ZIP object.\n"
-"\n"
-"        Arguments:\n"
-"            zip: ZipFile object\n"
-"        Returns:\n"
-"            File names and sums\n"
-"    "
-msgstr ""
+#~ msgid ""
+#~ "Cannot parse '%s':\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Parsen von '%s' nicht möglich:\n"
+#~ "%s\n"
 
-#: scripts/package-signing/pisign.py:79
-msgid ""
-"\n"
-"        Verifies integrity of a ZIP file. Keyfile or certificate is "
-"required.\n"
-"\n"
-"        Arguments:\n"
-"            filename: ZIP filename\n"
-"            keyfile: Public keyfile\n"
-"            certificate: Certificate\n"
-"        Returns:\n"
-"            True if valid, False if invalid\n"
-"    "
-msgstr ""
+#~ msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
+#~ msgstr ""
+#~ "Syntax: repostats.py [OPTIONEN] Quelle-Depot-Pfad [Binär-Depot-Pfad]\n"
 
-#: scripts/package-signing/pisign.py:100
-msgid ""
-"\n"
-"        Signs a ZIP file.\n"
-"\n"
-"        Arguments:\n"
-"            filename: ZIP filename\n"
-"            keyfile: Private key\n"
-"            passphrase: Passphrase\n"
-"    "
-msgstr ""
+#~ msgid "Dont generate the web site.\n"
+#~ msgstr "Webseite nicht erzeugen.\n"
 
-#: scripts/repostats.py:226
-msgid ""
-"Duplicate binary packages:\n"
-"%s\n"
-"%s\n"
-msgstr ""
-"Doppelte Binär-Pakete:\n"
-"%s\n"
-"%s\n"
+#~ msgid "Scanning source repository...\n"
+#~ msgstr "Suche im Quellcode - Depot...\n"
 
-#: scripts/repostats.py:301
-msgid ""
-"Duplicate source packages:\n"
-"%s\n"
-"%s\n"
-msgstr ""
-"Doppelte Quellcode -Pakete:\n"
-"%s\n"
-"%s\n"
-
-#: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-msgstr ""
-"Entwickler '%s <%s>' hat eina andere email adresse '%s' im Quelltext-Paket '%"
-"s'"
-
-#: scripts/repostats.py:467
-msgid ""
-"Cannot parse '%s':\n"
-"%s\n"
-msgstr ""
-"Parsen von '%s' nicht möglich:\n"
-"%s\n"
-
-#: scripts/repostats.py:553
-msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-msgstr "Syntax: repostats.py [OPTIONEN] Quelle-Depot-Pfad [Binär-Depot-Pfad]\n"
-
-#: scripts/repostats.py:554
-msgid "Dont generate the web site.\n"
-msgstr "Webseite nicht erzeugen.\n"
-
-#: scripts/repostats.py:575
-msgid "Scanning source repository...\n"
-msgstr "Suche im Quellcode - Depot...\n"
-
-#: scripts/repostats.py:579
-msgid "Scanning binary packages...\n"
-msgstr "Suche im Binär - Depot...\n"
+#~ msgid "Scanning binary packages...\n"
+#~ msgstr "Suche im Binär - Depot...\n"
 
 #~ msgid "Storing %s, "
 #~ msgstr "%s wird abgelegt, "

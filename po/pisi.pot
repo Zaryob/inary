@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-03-24 16:10+EET\n"
+"POT-Creation-Date: 2010-04-11 17:08+EEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,6 +14,75 @@ msgstr ""
 "Content-Transfer-Encoding: ENCODING\n"
 "Generated-By: pygettext.py 1.5\n"
 
+
+#: /usr/lib/python2.6/optparse.py:140
+msgid "no such option: %s"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:151
+msgid "ambiguous option: %s (%s?)"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:374
+msgid ""
+"Usage: %s\n"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:393
+msgid "Usage"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:418
+msgid "integer"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:419
+msgid "long integer"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:420
+msgid "floating-point"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:421
+msgid "complex"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:429
+msgid "option %s: invalid %s value: %r"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:437
+msgid "option %s: invalid choice: %r (choose from %s)"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1245
+msgid "show this help message and exit"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1250
+msgid "show program's version number and exit"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1273
+msgid "%prog [options]"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1493 /usr/lib/python2.6/optparse.py:1532
+msgid "%s option requires an argument"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1495 /usr/lib/python2.6/optparse.py:1534
+msgid "%s option requires %d arguments"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1504
+msgid "%s option does not take a value"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1621
+msgid "Options"
+msgstr ""
 
 #: pisi-cli:42
 msgid "Keyboard Interrupt: Exiting..."
@@ -589,40 +658,40 @@ msgstr ""
 msgid "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
 
-#: pisi/cli/__init__.py:79
+#: pisi/cli/__init__.py:116
 msgid "Warning: "
 msgstr ""
 
-#: pisi/cli/__init__.py:89
+#: pisi/cli/__init__.py:126
 msgid "Error: "
 msgstr ""
 
-#: pisi/cli/__init__.py:119
+#: pisi/cli/__init__.py:156
 msgid " (yes/no)"
 msgstr ""
 
-#: pisi/cli/__init__.py:140
+#: pisi/cli/__init__.py:177
 msgid ""
 " [complete]\n"
 msgstr ""
 
-#: pisi/cli/__init__.py:150
+#: pisi/cli/__init__.py:187
 msgid "Installed %s"
 msgstr ""
 
-#: pisi/cli/__init__.py:152
+#: pisi/cli/__init__.py:189
 msgid "Removed %s"
 msgstr ""
 
-#: pisi/cli/__init__.py:154
+#: pisi/cli/__init__.py:191
 msgid "Upgraded %s"
 msgstr ""
 
-#: pisi/cli/__init__.py:156
+#: pisi/cli/__init__.py:193
 msgid "Configured %s"
 msgstr ""
 
-#: pisi/cli/__init__.py:158
+#: pisi/cli/__init__.py:195
 msgid "Extracting the files of %s"
 msgstr ""
 
@@ -2232,51 +2301,51 @@ msgstr ""
 msgid "There is no change from previous build %d"
 msgstr ""
 
-#: pisi/operations/build.py:973
+#: pisi/operations/build.py:955
 msgid "No user named '%s' found on the system"
 msgstr ""
 
-#: pisi/operations/build.py:978
+#: pisi/operations/build.py:961
 msgid "No group named '%s' found on the system"
 msgstr ""
 
-#: pisi/operations/build.py:981
-msgid "** Building package %s"
-msgstr ""
-
-#: pisi/operations/build.py:983 pisi/operations/build.py:986
-msgid "Generating %s,"
-msgstr ""
-
-#: pisi/operations/build.py:991
+#: pisi/operations/build.py:968
 msgid "There are abandoned files under the install dir (%s):"
 msgstr ""
 
-#: pisi/operations/build.py:1000
+#: pisi/operations/build.py:997
+msgid "** Building package %s"
+msgstr ""
+
+#: pisi/operations/build.py:999 pisi/operations/build.py:1002
+msgid "Generating %s,"
+msgstr ""
+
+#: pisi/operations/build.py:1008
 msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
 msgstr ""
 
-#: pisi/operations/build.py:1018
+#: pisi/operations/build.py:1026
 msgid "Creating PiSi package %s."
 msgstr ""
 
-#: pisi/operations/build.py:1068 pisi/operations/delta.py:98
+#: pisi/operations/build.py:1076 pisi/operations/delta.py:98
 msgid "Done."
 msgstr ""
 
-#: pisi/operations/build.py:1073
+#: pisi/operations/build.py:1078
 msgid "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 
-#: pisi/operations/build.py:1077
+#: pisi/operations/build.py:1082
 msgid "Cleaning Build Directory..."
 msgstr ""
 
-#: pisi/operations/build.py:1080
+#: pisi/operations/build.py:1085
 msgid "Keeping Build Directory"
 msgstr ""
 
-#: pisi/operations/build.py:1106
+#: pisi/operations/build.py:1111
 msgid "*** %d error(s), %d warning(s)"
 msgstr ""
 
@@ -2780,130 +2849,5 @@ msgstr ""
 
 #: pisi/version.py:64
 msgid "Invalid version string: '%s'"
-msgstr ""
-
-#: scripts/package-signing/pisi-key.py:115
-#: scripts/package-signing/pisign.py:121
-#, docstring
-msgid ""
-"\n"
-"        Prints usage information of application and exits.\n"
-"    "
-msgstr ""
-
-#: scripts/package-signing/pisign.py:13
-#, docstring
-msgid ""
-"\n"
-"        Signs data with given key file and passphrase.\n"
-"\n"
-"        Arguments:\n"
-"            data: Data to sign\n"
-"            keyfile: Private key\n"
-"            passphrase: Passphrase\n"
-"        Returns:\n"
-"            Signed data\n"
-"    "
-msgstr ""
-
-#: scripts/package-signing/pisign.py:32
-#, docstring
-msgid ""
-"\n"
-"        Verifies signature. Keyfile or certificate is required.\n"
-"\n"
-"        Arguments:\n"
-"            data: Original data\n"
-"            signature: Signed data\n"
-"            keyfile: Public keyfile\n"
-"            certificate: Certificate\n"
-"        Returns:\n"
-"            True if valid, False if invalid\n"
-"    "
-msgstr ""
-
-#: scripts/package-signing/pisign.py:62
-#, docstring
-msgid ""
-"\n"
-"        Calculates checksums of files in ZIP object.\n"
-"\n"
-"        Arguments:\n"
-"            zip: ZipFile object\n"
-"        Returns:\n"
-"            File names and sums\n"
-"    "
-msgstr ""
-
-#: scripts/package-signing/pisign.py:79
-#, docstring
-msgid ""
-"\n"
-"        Verifies integrity of a ZIP file. Keyfile or certificate is required.\n"
-"\n"
-"        Arguments:\n"
-"            filename: ZIP filename\n"
-"            keyfile: Public keyfile\n"
-"            certificate: Certificate\n"
-"        Returns:\n"
-"            True if valid, False if invalid\n"
-"    "
-msgstr ""
-
-#: scripts/package-signing/pisign.py:100
-#, docstring
-msgid ""
-"\n"
-"        Signs a ZIP file.\n"
-"\n"
-"        Arguments:\n"
-"            filename: ZIP filename\n"
-"            keyfile: Private key\n"
-"            passphrase: Passphrase\n"
-"    "
-msgstr ""
-
-#: scripts/repostats.py:226
-msgid ""
-"Duplicate binary packages:\n"
-"%s\n"
-"%s\n"
-msgstr ""
-
-#: scripts/repostats.py:301
-msgid ""
-"Duplicate source packages:\n"
-"%s\n"
-"%s\n"
-msgstr ""
-
-#: scripts/repostats.py:371
-msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-msgstr ""
-
-#: scripts/repostats.py:467
-msgid ""
-"Cannot parse '%s':\n"
-"%s\n"
-msgstr ""
-
-#: scripts/repostats.py:553
-msgid ""
-"Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-msgstr ""
-
-#: scripts/repostats.py:554
-msgid ""
-"Dont generate the web site.\n"
-msgstr ""
-
-#: scripts/repostats.py:575
-msgid ""
-"Scanning source repository...\n"
-msgstr ""
-
-#: scripts/repostats.py:579
-msgid ""
-"Scanning binary packages...\n"
 msgstr ""
 

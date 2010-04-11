@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
-"POT-Creation-Date: 2010-03-24 16:10+EET\n"
+"POT-Creation-Date: 2010-04-11 17:08+EEST\n"
 "PO-Revision-Date: 2010-03-28 20:37-0400\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <kde-i18n-doc@kde.org>\n"
@@ -24,6 +24,81 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: /usr/lib/python2.6/optparse.py:140
+#, fuzzy
+msgid "no such option: %s"
+msgstr "opciones de búsqueda"
+
+#: /usr/lib/python2.6/optparse.py:151
+#, fuzzy
+msgid "ambiguous option: %s (%s?)"
+msgstr "Violación de caja de arena (Sandbox): %s (%s -> %s)"
+
+#: /usr/lib/python2.6/optparse.py:374
+#, fuzzy
+msgid "Usage: %s\n"
+msgstr "uso: %s\n"
+
+#: /usr/lib/python2.6/optparse.py:393
+msgid "Usage"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:418
+msgid "integer"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:419
+msgid "long integer"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:420
+msgid "floating-point"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:421
+#, fuzzy
+msgid "complex"
+msgstr " [complete]\n"
+
+#: /usr/lib/python2.6/optparse.py:429
+msgid "option %s: invalid %s value: %r"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:437
+msgid "option %s: invalid choice: %r (choose from %s)"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1245
+msgid "show this help message and exit"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1250
+msgid "show program's version number and exit"
+msgstr ""
+
+# no idea, i should know the context :(
+#: /usr/lib/python2.6/optparse.py:1273
+#, fuzzy
+msgid "%prog [options]"
+msgstr "Opciones emerge"
+
+#: /usr/lib/python2.6/optparse.py:1493 /usr/lib/python2.6/optparse.py:1532
+msgid "%s option requires an argument"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1495 /usr/lib/python2.6/optparse.py:1534
+msgid "%s option requires %d arguments"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1504
+msgid "%s option does not take a value"
+msgstr ""
+
+#: /usr/lib/python2.6/optparse.py:1621
+#, fuzzy
+msgid "Options"
+msgstr "opciones de info"
 
 #: pisi-cli:42
 msgid "Keyboard Interrupt: Exiting..."
@@ -644,40 +719,40 @@ msgstr ""
 "Archivo instalado %s no existe en el sistema [Probablemente eliminado "
 "manualmente]"
 
-#: pisi/cli/__init__.py:79
+#: pisi/cli/__init__.py:116
 msgid "Warning: "
 msgstr "Alerta:"
 
-#: pisi/cli/__init__.py:89
+#: pisi/cli/__init__.py:126
 msgid "Error: "
 msgstr "Error: "
 
 # is this to translate ? would it work if i change this ?
-#: pisi/cli/__init__.py:119
+#: pisi/cli/__init__.py:156
 msgid " (yes/no)"
 msgstr " (yes/no)"
 
-#: pisi/cli/__init__.py:140
+#: pisi/cli/__init__.py:177
 msgid " [complete]\n"
 msgstr " [complete]\n"
 
-#: pisi/cli/__init__.py:150
+#: pisi/cli/__init__.py:187
 msgid "Installed %s"
 msgstr "Instalado %s"
 
-#: pisi/cli/__init__.py:152
+#: pisi/cli/__init__.py:189
 msgid "Removed %s"
 msgstr "Removido %s"
 
-#: pisi/cli/__init__.py:154
+#: pisi/cli/__init__.py:191
 msgid "Upgraded %s"
 msgstr "Actualizado %s"
 
-#: pisi/cli/__init__.py:156
+#: pisi/cli/__init__.py:193
 msgid "Configured %s"
 msgstr "Configurado %s"
 
-#: pisi/cli/__init__.py:158
+#: pisi/cli/__init__.py:195
 msgid "Extracting the files of %s"
 msgstr "Extrayendo los archivos de %s"
 
@@ -2648,27 +2723,27 @@ msgstr "Hay cambios, incrementando número de build a %d"
 msgid "There is no change from previous build %d"
 msgstr "No hay cambios en relación al build anterior %d"
 
-#: pisi/operations/build.py:973
+#: pisi/operations/build.py:955
 msgid "No user named '%s' found on the system"
 msgstr "Usuario '%s' no existe en el sistema"
 
-#: pisi/operations/build.py:978
+#: pisi/operations/build.py:961
 msgid "No group named '%s' found on the system"
 msgstr "Grupo '%s' no existe en el sistema"
 
-#: pisi/operations/build.py:981
-msgid "** Building package %s"
-msgstr "** Construyendo (build) paquete %s"
-
-#: pisi/operations/build.py:983 pisi/operations/build.py:986
-msgid "Generating %s,"
-msgstr "Generando %s,"
-
-#: pisi/operations/build.py:991
+#: pisi/operations/build.py:968
 msgid "There are abandoned files under the install dir (%s):"
 msgstr "Existen archivos abandonados en la carpeta de instalación (%s):"
 
-#: pisi/operations/build.py:1000
+#: pisi/operations/build.py:997
+msgid "** Building package %s"
+msgstr "** Construyendo (build) paquete %s"
+
+#: pisi/operations/build.py:999 pisi/operations/build.py:1002
+msgid "Generating %s,"
+msgstr "Generando %s,"
+
+#: pisi/operations/build.py:1008
 msgid ""
 "Build number is not available. For repo builds you must enable buildno in "
 "pisi.conf."
@@ -2676,32 +2751,32 @@ msgstr ""
 "Número de build no disponible. Para builds de repo buildno debe estar "
 "habilitado en pisi.conf."
 
-#: pisi/operations/build.py:1018
+#: pisi/operations/build.py:1026
 msgid "Creating PiSi package %s."
 msgstr "Creando Paquete PiSi %s."
 
 # podria ser tambien "Fin" o "Listo"
-#: pisi/operations/build.py:1068 pisi/operations/delta.py:98
+#: pisi/operations/build.py:1076 pisi/operations/delta.py:98
 msgid "Done."
 msgstr "Hecho."
 
 # revisa este por favor
-#: pisi/operations/build.py:1073
+#: pisi/operations/build.py:1078
 msgid ""
 "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 "Todos los archivos de la carpeta de instalación (%s) se juntaron en los "
 "paquetes"
 
-#: pisi/operations/build.py:1077
+#: pisi/operations/build.py:1082
 msgid "Cleaning Build Directory..."
 msgstr "Limpiando Carpeta Build..."
 
-#: pisi/operations/build.py:1080
+#: pisi/operations/build.py:1085
 msgid "Keeping Build Directory"
 msgstr "Conservando Carpeta Build"
 
-#: pisi/operations/build.py:1106
+#: pisi/operations/build.py:1111
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d error(es), %d alerta(s)"
 
@@ -2871,8 +2946,7 @@ msgstr "Dependencias externas no satisfechas: %s"
 msgid ""
 "The following packages will be installed in order to satisfy dependencies:"
 msgstr ""
-"Se instalarán los siguientes paquetes para satisfacer "
-"las dependencias:"
+"Se instalarán los siguientes paquetes para satisfacer las dependencias:"
 
 #: pisi/operations/install.py:202
 msgid "External dependencies not satisfied"
@@ -3244,132 +3318,48 @@ msgstr "comando objcopy (add-debuglink) falló para archivo '%s'!"
 msgid "Invalid version string: '%s'"
 msgstr ""
 
-#: scripts/package-signing/pisi-key.py:115
-#: scripts/package-signing/pisign.py:121
-msgid ""
-"\n"
-"        Prints usage information of application and exits.\n"
-"    "
-msgstr ""
+#~ msgid ""
+#~ "Duplicate binary packages:\n"
+#~ "%s\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Paquetes binarios duplicados:\n"
+#~ "%s\n"
+#~ "%s\n"
 
-#: scripts/package-signing/pisign.py:13
-msgid ""
-"\n"
-"        Signs data with given key file and passphrase.\n"
-"\n"
-"        Arguments:\n"
-"            data: Data to sign\n"
-"            keyfile: Private key\n"
-"            passphrase: Passphrase\n"
-"        Returns:\n"
-"            Signed data\n"
-"    "
-msgstr ""
+#~ msgid ""
+#~ "Duplicate source packages:\n"
+#~ "%s\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Paquetes de fuentes duplicados:\n"
+#~ "%s\n"
+#~ "%s\n"
 
-#: scripts/package-signing/pisign.py:32
-msgid ""
-"\n"
-"        Verifies signature. Keyfile or certificate is required.\n"
-"\n"
-"        Arguments:\n"
-"            data: Original data\n"
-"            signature: Signed data\n"
-"            keyfile: Public keyfile\n"
-"            certificate: Certificate\n"
-"        Returns:\n"
-"            True if valid, False if invalid\n"
-"    "
-msgstr ""
+#~ msgid ""
+#~ "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+#~ msgstr ""
+#~ "Desarrollador '%s <%s>' tiene otra dirección email '%s' en archivo fuente "
+#~ "'%s'"
 
-#: scripts/package-signing/pisign.py:62
-msgid ""
-"\n"
-"        Calculates checksums of files in ZIP object.\n"
-"\n"
-"        Arguments:\n"
-"            zip: ZipFile object\n"
-"        Returns:\n"
-"            File names and sums\n"
-"    "
-msgstr ""
+#~ msgid ""
+#~ "Cannot parse '%s':\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "No posible analizar '%s':\n"
+#~ "%s\n"
 
-#: scripts/package-signing/pisign.py:79
-msgid ""
-"\n"
-"        Verifies integrity of a ZIP file. Keyfile or certificate is "
-"required.\n"
-"\n"
-"        Arguments:\n"
-"            filename: ZIP filename\n"
-"            keyfile: Public keyfile\n"
-"            certificate: Certificate\n"
-"        Returns:\n"
-"            True if valid, False if invalid\n"
-"    "
-msgstr ""
+#~ msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
+#~ msgstr "Uso: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
 
-#: scripts/package-signing/pisign.py:100
-msgid ""
-"\n"
-"        Signs a ZIP file.\n"
-"\n"
-"        Arguments:\n"
-"            filename: ZIP filename\n"
-"            keyfile: Private key\n"
-"            passphrase: Passphrase\n"
-"    "
-msgstr ""
+#~ msgid "Dont generate the web site.\n"
+#~ msgstr "No generar sitio web.\n"
 
-#: scripts/repostats.py:226
-msgid ""
-"Duplicate binary packages:\n"
-"%s\n"
-"%s\n"
-msgstr ""
-"Paquetes binarios duplicados:\n"
-"%s\n"
-"%s\n"
+#~ msgid "Scanning source repository...\n"
+#~ msgstr "Buscando en repositorio de fuentes...\n"
 
-#: scripts/repostats.py:301
-msgid ""
-"Duplicate source packages:\n"
-"%s\n"
-"%s\n"
-msgstr ""
-"Paquetes de fuentes duplicados:\n"
-"%s\n"
-"%s\n"
-
-#: scripts/repostats.py:371
-msgid ""
-"Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-msgstr ""
-"Desarrollador '%s <%s>' tiene otra dirección email '%s' en archivo fuente '%"
-"s'"
-
-#: scripts/repostats.py:467
-msgid ""
-"Cannot parse '%s':\n"
-"%s\n"
-msgstr ""
-"No posible analizar '%s':\n"
-"%s\n"
-
-#: scripts/repostats.py:553
-msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-msgstr "Uso: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-
-#: scripts/repostats.py:554
-msgid "Dont generate the web site.\n"
-msgstr "No generar sitio web.\n"
-
-#: scripts/repostats.py:575
-msgid "Scanning source repository...\n"
-msgstr "Buscando en repositorio de fuentes...\n"
-
-#: scripts/repostats.py:579
-msgid "Scanning binary packages...\n"
-msgstr "Buscando paquetes binarios...\n"
+#~ msgid "Scanning binary packages...\n"
+#~ msgstr "Buscando paquetes binarios...\n"
 
 #~ msgid "Storing %s, "
 #~ msgstr "Guardando %s, "
