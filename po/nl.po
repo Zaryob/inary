@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "POT-Creation-Date: 2010-04-11 17:08+EEST\n"
-"PO-Revision-Date: 2010-04-10 23:51+0300\n"
-"Last-Translator: H. İbrahim Güngör <ibrahim@pardus.org.tr>\n"
-"Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2010-04-12 15:11+0200\n"
+"Last-Translator: Antoon Tolboom <atolboo@gmail.com>\n"
+"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,78 +23,72 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: /usr/lib/python2.6/optparse.py:140
-#, fuzzy
 msgid "no such option: %s"
-msgstr "search opties"
+msgstr "geen optie: %s"
 
 #: /usr/lib/python2.6/optparse.py:151
-#, fuzzy
 msgid "ambiguous option: %s (%s?)"
-msgstr "Sandbox overtreding: %s (%s?)"
+msgstr "dubbelzinnige optie: %s (%s?)"
 
 #: /usr/lib/python2.6/optparse.py:374
-#, fuzzy
 msgid "Usage: %s\n"
-msgstr "gebruik: %s\n"
+msgstr "Gebruik: %s\n"
 
 #: /usr/lib/python2.6/optparse.py:393
 msgid "Usage"
-msgstr ""
+msgstr "Gebruik"
 
 #: /usr/lib/python2.6/optparse.py:418
 msgid "integer"
-msgstr ""
+msgstr "geheel getal"
 
 #: /usr/lib/python2.6/optparse.py:419
 msgid "long integer"
-msgstr ""
+msgstr "lang geheel getal"
 
 #: /usr/lib/python2.6/optparse.py:420
 msgid "floating-point"
-msgstr ""
+msgstr "drijvende komma"
 
 #: /usr/lib/python2.6/optparse.py:421
-#, fuzzy
 msgid "complex"
-msgstr " [compleet]\n"
+msgstr "complex"
 
 #: /usr/lib/python2.6/optparse.py:429
 msgid "option %s: invalid %s value: %r"
-msgstr ""
+msgstr "optie %s: ongeldig %s waarde: %r"
 
 #: /usr/lib/python2.6/optparse.py:437
 msgid "option %s: invalid choice: %r (choose from %s)"
-msgstr ""
+msgstr "optie %s: ongeldige keuze: %r (kies uit %s)"
 
 #: /usr/lib/python2.6/optparse.py:1245
 msgid "show this help message and exit"
-msgstr ""
+msgstr "melding over help tonen en beëindigen"
 
 #: /usr/lib/python2.6/optparse.py:1250
 msgid "show program's version number and exit"
-msgstr ""
+msgstr "versienummer van programma tonen en beëindigen"
 
 #: /usr/lib/python2.6/optparse.py:1273
-#, fuzzy
 msgid "%prog [options]"
-msgstr "duik opties op"
+msgstr "%prog [opties]"
 
 #: /usr/lib/python2.6/optparse.py:1493 /usr/lib/python2.6/optparse.py:1532
 msgid "%s option requires an argument"
-msgstr ""
+msgstr "optie %s vereist een argument"
 
 #: /usr/lib/python2.6/optparse.py:1495 /usr/lib/python2.6/optparse.py:1534
 msgid "%s option requires %d arguments"
-msgstr ""
+msgstr "optie %s vereist %d argumenten"
 
 #: /usr/lib/python2.6/optparse.py:1504
 msgid "%s option does not take a value"
-msgstr ""
+msgstr "optie %s neemt geen waarde"
 
 #: /usr/lib/python2.6/optparse.py:1621
-#, fuzzy
 msgid "Options"
-msgstr "info opties"
+msgstr "Opties"
 
 #: pisi-cli:42
 msgid "Keyboard Interrupt: Exiting..."
@@ -305,9 +299,8 @@ msgstr "Geen uitvoerbare bestanden komen overeen met patroon \"%s\"."
 
 # pisi/actionsapi/autotools.py:75 :85
 #: pisi/actionsapi/pythonmodules.py:56
-#, fuzzy
 msgid "Configuration failed."
-msgstr "Configuratie mislukt."
+msgstr "Configuratie is mislukt."
 
 #: pisi/actionsapi/pythonmodules.py:81
 msgid "Running %s failed."
@@ -564,9 +557,8 @@ msgid "Repository %s does not exist. Cannot remove."
 msgstr "Softwarebron %s bestaat niet. Kan niet verwijderd worden."
 
 #: pisi/api.py:828
-#, fuzzy
 msgid "Updating repository: %s"
-msgstr "* Bijwerken van softwarebron: %s "
+msgstr "Bijwerken softwarebron: %s "
 
 #: pisi/api.py:838
 msgid "%s repository information is up-to-date."
@@ -615,7 +607,7 @@ msgstr "Installatie %s, versie %s, uitgave %s, bouw %s"
 
 #: pisi/atomicoperations.py:192 pisi/operations/build.py:593
 msgid "%s-%s is not a valid PiSi version format"
-msgstr ""
+msgstr "%s-%s is niet een geldig PiSi-versie formaat"
 
 #: pisi/atomicoperations.py:198
 msgid "%s package cannot be installed unless the dependencies are satisfied"
@@ -2316,15 +2308,16 @@ msgid "Package %s not found."
 msgstr "Pakket %s niet gevonden."
 
 #: pisi/db/repodb.py:159
-#, fuzzy
 msgid "%s repository needs to be updated"
-msgstr "%s softwarebron is opgewaardeerd."
+msgstr "%s softwarebron dient opgewaardeerd te worden."
 
 #: pisi/db/repodb.py:165
 msgid ""
 "Error parsing repository index information. Index file does not exist or is "
 "malformed."
 msgstr ""
+"Fout bij het ontleden van indexinformatie van softwarebron. Indexbestand "
+"bestaat niet of is van onjuiste formaat."
 
 #: pisi/fetcher.py:132
 msgid "Urlgrabber needs to be installed to run this command"
@@ -2846,13 +2839,12 @@ msgstr ""
 "niet in het buffer:\n"
 
 #: pisi/operations/install.py:48 pisi/operations/install.py:135
-#, fuzzy
 msgid ""
 "The following package(s) are already installed and are not going to be "
 "installed again:"
 msgstr ""
 "De volgende pakket(ten) zijn al geïnstalleerd en zullen niet opnieuw worden "
-"geïnstalleerd:\n"
+"geïnstalleerd:"
 
 # pisi/api.py:168 :215
 #: pisi/operations/install.py:54 pisi/operations/install.py:214
@@ -2860,9 +2852,8 @@ msgid "No packages to install."
 msgstr "Geen te installeren pakketten."
 
 #: pisi/operations/install.py:72
-#, fuzzy
 msgid "Following packages will be installed:"
-msgstr "Volgende pakketen zullen worden geïnstalleerd:\n"
+msgstr "Volgende pakketten zullen worden geïnstalleerd:"
 
 #: pisi/operations/install.py:77 pisi/operations/upgrade.py:180
 msgid "Total size of package(s): %.2f %s"
@@ -2889,12 +2880,11 @@ msgid "External dependencies not satisfied: %s"
 msgstr "Externe afhankelijkheden zijn niet voldaan: %s"
 
 #: pisi/operations/install.py:198
-#, fuzzy
 msgid ""
 "The following packages will be installed in order to satisfy dependencies:"
 msgstr ""
-"De volgende pakketten zullen geïnstalleerd worden in de respectievelijke "
-"volgorde voor de afhankelijkheden:\n"
+"De volgende pakketten zullen in de respectievelijke volgorde geïnstalleerd "
+"worden om aan de afhankelijkheden te voldoen:"
 
 #: pisi/operations/install.py:202
 msgid "External dependencies not satisfied"
@@ -2909,16 +2899,13 @@ msgid "%s dependency of package %s is not satisfied"
 msgstr "%s afhankelijkheid van pakket %s is niet bevredigend"
 
 #: pisi/operations/remove.py:44
-#, fuzzy
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr ""
-"Veiligheidsprocedure: kan de volgende pakketten niet verwijderen uit system."
-"base: "
+"Veiligheidsprocedure voorkomt het verwijderen van de volgende pakketten:\n"
 
 #: pisi/operations/remove.py:49 pisi/operations/upgrade.py:355
-#, fuzzy
 msgid "Safety switch: The component system.base cannot be found."
-msgstr "Veiligheidsprocedure: component system.base is niet gevonden"
+msgstr "Veiligheidsprocedure: De component system.base is niet gevonden."
 
 #: pisi/operations/remove.py:56
 msgid "Package %s does not exist. Cannot remove."
@@ -2961,12 +2948,16 @@ msgid ""
 "You must restart the following service(s) manually in order the updated "
 "versions of software to take effect:"
 msgstr ""
+"Herstart de volgende dienst(en) handmatig voor het bijwerken van "
+"opgewaardeerde softwareversies:"
 
 #: pisi/operations/upgrade.py:60
 msgid ""
 "You must restart your system in order the updated versions of the following "
 "package(s) to take effect:"
 msgstr ""
+"Herstart het systeem voor het actief maken van de volgende opgewaardeerde "
+"pakket(ten)versie(s):"
 
 #: pisi/operations/upgrade.py:84
 msgid "Warning: package *name* ends with '.pisi'"
@@ -2989,14 +2980,12 @@ msgid "Package %s is already at the latest build %s."
 msgstr "Pakket %s is al de laatste bouw %s."
 
 #: pisi/operations/upgrade.py:175
-#, fuzzy
 msgid "The following packages will be upgraded:"
-msgstr "De volgende pakketen zullen worden opgewaardeerd: "
+msgstr "De volgende pakketten worden opgewaardeerd:"
 
 #: pisi/operations/upgrade.py:185
-#, fuzzy
 msgid "There are extra packages due to dependencies."
-msgstr "Er zijn extra pakketten wegens afhankelijkheden. Wilt u doorgaan?"
+msgstr "Wegens afhankelijkheden zijn er extra pakketten."
 
 #: pisi/operations/upgrade.py:265
 msgid "Dependency %s of %s cannot be satisfied"
@@ -3011,18 +3000,14 @@ msgid "Reverse dependency %s of %s cannot be satisfied"
 msgstr "Omgekeerde afhankelijkheid %s van %s kan niet worden voldaan"
 
 #: pisi/operations/upgrade.py:332
-#, fuzzy
 msgid "Safety switch forces the installation of following packages:"
 msgstr ""
-"Veiligheidsprocedure: kan de volgende pakketten niet verwijderen uit system."
-"base: "
+"Veiligheidsprocedure vereist het installeren van de volgende pakketten:"
 
 #: pisi/operations/upgrade.py:348
-#, fuzzy
 msgid "Safety switch forces the upgrade of following packages:"
 msgstr ""
-"Veiligheidsprocedure: kan de volgende pakketten niet verwijderen uit system."
-"base: "
+"Veiligheidsprocedure vereist het opwaarderen van de volgende pakketten:"
 
 #: pisi/package.py:56
 msgid ""
@@ -3268,7 +3253,7 @@ msgstr "Commando 'objcopy' (add-debuglink)  mislukte voor bestand '%s'!"
 
 #: pisi/version.py:64
 msgid "Invalid version string: '%s'"
-msgstr ""
+msgstr "Ongeldige versie tekenreeks: '%s'"
 
 #~ msgid ""
 #~ "\n"
