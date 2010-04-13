@@ -8,6 +8,6 @@ echo "$OPTPARSE_PY" >> exclude
 python scripts/pygettext.py -D -X exclude -o po/pisi.pot pisi pisi-cli $OPTPARSE_PY
 for lang in po/*.po
 do
-    msgmerge -U $lang po/pisi.pot
+    msgmerge --update --no-wrap --sort-by-file $lang po/pisi.pot
 done
 rm exclude
