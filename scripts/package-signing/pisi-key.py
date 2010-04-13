@@ -32,6 +32,8 @@ ARCHIVE_KEYRING='/usr/share/keyrings/pardus-archive-keyring.gpg'
 REMOVED_KEYS='/usr/share/keyrings/pardus-archive-removed-keys.gpg'
 
 def addKey(GPG, keyfile):
+    """ add the key """
+
     cmd = GPG + ' --quiet --batch --import %s' % keyfile
     print "cmd: " + cmd
     pass
@@ -39,6 +41,8 @@ def addKey(GPG, keyfile):
     return pipe.wait() == 0
 
 def removeKey(GPG, keyfile):
+    """ remove the key """
+
     cmd = GPG + ' --quiet --batch --delete-key --yes %s' % keyfile
     print "cmd: " + cmd
     pass
@@ -46,18 +50,19 @@ def removeKey(GPG, keyfile):
     return pipe.wait() == 0
 
 def update(GPG):
+    """ update keys using the keyring package:
+
+     we do not use add_keys_with_verify_against_master_keyring here,
+     because "update" is run on regular package updates.  An
+     attacker might as well replace the master-archive-keyring file
+     in the package and add his own keys. so this check wouldn't
+     add any security. we *need* this check on net-update though """
+
     if not os.access(ARCHIVE_KEYRING, os.F_OK):
         print "ERROR: Can't find the archive-keyring"
         print "Is the pisi-archive-keyring package installed?"
         sys.exit(1)
 
-    # add new keys from the package;
-
-    # we do not use add_keys_with_verify_against_master_keyring here,
-    # because "update" is run on regular package updates.  A
-    # attacker might as well replace the master-archive-keyring file
-    # in the package and add his own keys. so this check wouldn't
-    # add any security. we *need* this check on net-update though
     cmd = GPG_CMD + ' --quiet --batch --keyring %s --export | %s --import' % (ARCHIVE_KEYRING, GPG)
     print "cmd: " + cmd
     pass
@@ -82,9 +87,27 @@ def update(GPG):
 
 
 def net_update():
+    """ update the current archive signing keyring from a network URI:
+    the archive-keyring keys needs to be signed with the master key
+    (otherwise it does not make sense from a security POV) """
+    if len(ARCHIVE_KEYRING_URI) == 0:
+        print "Error: no location for the archive-keyring given"
+        sys.exit(1)
+
+    #TODO: Network connection should be checked!!
+    if not os.path.isdir("/var/lib/pisi/keyrings"):
+        os.mkdir("/var/lib/pisi/keyrings")
+
+    keyring = "/var/lib/pisi/keyrings/%s" ARCHIVE_KEYRING.split("/")[-1]
+    if os.path.exists(keyring):
+        old_mtime = os.stat(keyring).st_mtime
+    else:
+        old_mtime = 0
+    
     pass
 
 def list_keys(GPG):
+    """ list keys """
     cmd = GPG + ' --batch --list_keys'
     print "cmd: " + cmd
     pass
@@ -92,6 +115,7 @@ def list_keys(GPG):
     return pipe.wait() == 0
 
 def list_fingerprints(GPG):
+    """ list fingerprints """
     cmd = GPG + ' --batch --fingerprint'
     print "cmd: " + cmd
     pass
@@ -99,6 +123,7 @@ def list_fingerprints(GPG):
     return pipe.wait() == 0
 
 def export(GPG, keyid):
+    """ output the key with the <keyid> """
     cmd = GPG + ' --armor --export %s' keyid
     print "cmd: " + cmd
     pass
@@ -106,6 +131,7 @@ def export(GPG, keyid):
     return pipe.wait() == 0
 
 def exportAll(GPG):
+    """ output all trusted keys """
     cmd = GPG + ' --armor --export'
     print "cmd: " + cmd
     pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -174,41 +200,33 @@ if __name__ == '__main__':
         sys.exit(0)
 
     elif operation == 'add':
-        # add the key
         keyfile = sys.argv[argc]
-        # check whether key_path is alive ('-' can be used for stdin)
+        # TODO: check whether key_path is alive ('-' can be used for stdin) e.g. gpg --keyring pisi-keyring.gpg --armour --export 102030AB | pisi-key add -
         addKey(GPG, keyfile)
         print "Key in %s is succesfully added." % keyfile
 
     elif operation == 'del':
         keyfile = sys.argv[argc]
-        # remove the key
         removeKey(GPG, keyfile)
         print "Key in %s is succesfully deleted." % keyfile
 
     elif operation == 'update':
-        # update keys using the keyring package
         update(GPG)
 
     elif operation == 'net-update':
-        # update keys using the network
         net_update()
 
     elif operation == 'list':
-        # list keys
         list_keys(GPG)
 
     elif operation == 'finger':
-        # list fingerprints
-        ist_fingerprints(GPG)
+        list_fingerprints(GPG)
 
     elif operation == 'export':
-        # output the key with the <keyid>
         keyid = sys.argv[argc]
         export(GPG, keyid)
 
     elif operation == 'exportall':
-        # output all trusted keys
         exportAll(GPG)
 
     elif operation == 'adv':
@@ -218,6 +236,4 @@ if __name__ == '__main__':
         pass
     else:
         printUsage()
-        sys.exit(1)
-
 
