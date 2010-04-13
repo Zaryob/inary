@@ -84,7 +84,7 @@ msgstr "L'option %s nécessite %d arguments"
 
 #: /usr/lib/python2.6/optparse.py:1504
 msgid "%s option does not take a value"
-msgstr ""
+msgstr "L'option %s ne prend pas de valeur"
 
 #: /usr/lib/python2.6/optparse.py:1621
 msgid "Options"
@@ -635,7 +635,7 @@ msgstr "La configuration de %s a échoué."
 
 #: pisi/atomicoperations.py:406
 msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
-msgstr ""
+msgstr "Impossible de déplacer les fichiers suivants. La réinstallation de ce paquet est fortement recommandée."
 
 #: pisi/atomicoperations.py:487
 msgid "Storing %s, "
@@ -734,14 +734,12 @@ msgid "add-repo options"
 msgstr "Options d'add-repo"
 
 #: pisi/cli/addrepo.py:46
-#, fuzzy
 msgid "Ignore repository distribution check"
-msgstr "Passer outre la vérification du numéro de version et de l'architecture de la distribution"
+msgstr "Passer outre la vérification de la version de la distribution"
 
 #: pisi/cli/addrepo.py:47
-#, fuzzy
 msgid "Does not fetch repository index and does not check distribution match"
-msgstr "Le dépôt n'a pas pu être ajouté car l'architecture de la distribution ne correspond pas."
+msgstr "Ne va pas chercher l'index du dépôt et ne vérifie pas sa correspondance avec la distribution."
 
 #: pisi/cli/addrepo.py:50
 msgid "Add repository at given position (0 is first)"
@@ -749,12 +747,11 @@ msgstr "Ajouter un dépôt à la position donnée (0 est la première)"
 
 #: pisi/cli/addrepo.py:60
 msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
-msgstr ""
+msgstr "Impossible de vérifier la compatibilité de ce dépôt car il ne dispose pas d'informations sur la distribution."
 
 #: pisi/cli/addrepo.py:66
-#, fuzzy
 msgid "Repository distribution does not match. Removing %s from system."
-msgstr "Impossible d'atteindre le dépôt %s. Suppression de %s du système."
+msgstr "Dépôt et distribution ne correspondent pas. Retrait de %s du système."
 
 #: pisi/cli/addrepo.py:81
 msgid ""
@@ -762,6 +759,9 @@ msgid ""
 "By confirming this you are also adding the repository to your system without checking the distribution of the repository.\n"
 "Do you want to continue?"
 msgstr ""
+"Ajouter le dépôt %s sans mettre à jour la base de données? \n"
+"Si oui, cela ajoutera le dépôt à votre système sans vérifier la version de la distribution. \n"
+"Voulez-vous continuer?"
 
 #: pisi/cli/addrepo.py:95
 msgid "%s repository could not be reached. Removing %s from system."
@@ -2250,9 +2250,8 @@ msgid "Bandwidth usage is limited to %s KB/s"
 msgstr "L'utilisation de la bande passante est restreinte à %s Ko/s"
 
 #: pisi/fetcher.py:212
-#, fuzzy
 msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
-msgstr "Le serveur ne permet pas d'effectuer des téléchargements partiels. Tout ce qui a été précédemment téléchargé du fichier va être écrasé."
+msgstr "Le fichier distant ne peut pas être atteint. La partie du fichier déjà téléchargée sera supprimée."
 
 #: pisi/fetcher.py:221
 msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
@@ -2399,7 +2398,6 @@ msgid "Source is part of %s component"
 msgstr "La source fait partie du composant %s"
 
 #: pisi/operations/build.py:400
-#, fuzzy
 msgid "Unpacking archive(s)..."
 msgstr "Décompression de l'archive..."
 
@@ -2620,22 +2618,20 @@ msgid "No packages to emerge."
 msgstr "Aucun paquet à émerger."
 
 #: pisi/operations/emerge.py:51
-#, fuzzy
 msgid ""
 "The following list of packages will be installed\n"
 "from repository in the respective order to satisfy dependencies:\n"
 msgstr ""
-"La liste suivante minimaliste de paquet va être installée\n"
-"depuis le dépôt dans cet ordre afin de satisfaire les dépendances :\n"
+"Les paquets listés suivants seront installés \n"
+"depuis le dépôt dans l'ordre pour satisfaire les dépendances : \n"
 
 #: pisi/operations/emerge.py:54
-#, fuzzy
 msgid ""
 "The following list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
 msgstr ""
-"Les paquets de la liste minimaliste suivante vont être\n"
-"construits et installé dans cet ordre afin de satisfaire les dépendances :\n"
+"Les paquets listés suivants seront construits et \n"
+"installés dans l'ordre pour satisfaire les dépendances : \n"
 
 #: pisi/operations/emerge.py:62 pisi/operations/install.py:82
 #: pisi/operations/upgrade.py:148
@@ -2777,13 +2773,12 @@ msgid "No packages to remove."
 msgstr "Aucun paquet à supprimer."
 
 #: pisi/operations/remove.py:68
-#, fuzzy
 msgid ""
 "The following list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
 msgstr ""
-"La liste minimale suivante de paquets va être supprimée\n"
-"en respectant cet ordre afin de satisfaire les dépendances :\n"
+"Les paquets listés suivants seront retirés \n"
+"dans l'ordre pour satisfaire les dépendances : \n"
 
 #: pisi/operations/remove.py:73
 msgid "Package removal declined"
@@ -2927,9 +2922,8 @@ msgid "Object cannot be encoded"
 msgstr "L'objet ne peut être encodé"
 
 #: pisi/pxml/autoxml.py:735 pisi/pxml/autoxml.py:854
-#, fuzzy
 msgid "Object cannot be formatted"
-msgstr "L'objet ne peut être encodé"
+msgstr "L'objet ne peut pas être formaté"
 
 #: pisi/pxml/autoxml.py:751
 msgid "List type must contain only one element"
