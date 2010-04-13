@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2010 TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -73,6 +73,13 @@ def installDIR():
     '''returns the path of binary packages'''
     return env.install_dir
 
+# Pardus Related Functions
+
+def lsbINFO():
+    """Returns a dictionary filled through /etc/lsb-release."""
+    return dict([(l.split("=")[0], l.split("=")[1].strip("'\"")) \
+                for l in open("/etc/lsb-release", "r").read().strip().split("\n") if "=" in l])
+
 # PSPEC Related Functions
 
 def srcNAME():
@@ -100,7 +107,7 @@ def HOST():
 
 def CHOST():
     # FIXME: Currently it behave same as HOST,
-    # but will be used for cross-compiling when PİSİ ready...
+    # but will be used for cross-compiling when pisi ready...
     return env.host
 
 def CFLAGS():
