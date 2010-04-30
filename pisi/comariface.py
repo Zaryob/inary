@@ -92,7 +92,6 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath,
 
     ctx.ui.info(_("Configuring %s package") % package_name)
     self_post = False
-    sys_service = False
 
     package_name = safe_package_name(package_name)
 
@@ -107,13 +106,11 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath,
         script_name = script.name if script.name else package_name
         if script.om == "System.Package":
             self_post = True
-        elif script.om == "System.Service":
-            sys_service = True
         try:
             link.register(script_name, script.om, os.path.join(scriptpath, script.script))
         except dbus.DBusException, exception:
             raise Error, _("Script error: %s") % exception
-        if sys_service:
+        if script.om == "System.Service":
             try:
                 link.System.Service[script_name].registerState()
             except dbus.DBusException, exception:
