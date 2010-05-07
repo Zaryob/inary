@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2007, TUBITAK/UEKAE
+# Copyright (C) 2007-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -10,7 +10,6 @@
 # Please read the COPYING file.
 
 import os
-import stat
 
 import gettext
 __trans = gettext.translation("pisi", fallback=True)
@@ -150,15 +149,13 @@ def find_permission_changes(oldfiles, newfiles):
     for f in newfiles.list:
         files_new.setdefault(f.hash, []).append(f)
 
-    hashes_new = set(map(lambda f:f.hash, newfiles.list))
-    hashes_old = set(map(lambda f:f.hash, oldfiles.list))
-    unchanged = hashes_new.intersection(hashes_old)
+    for old_file in oldfiles.list:
+        files = files_new.get(old_file.hash, [])
 
-    permissions = []
-    for h in unchanged:
-        for _file in files_new[h]:
+        for _file in files:
+            if old_file.mode == _file.mode:
+                continue
+
             path = os.path.join(ctx.config.dest_dir(), _file.path)
-            if os.path.exists(path) and oct(stat.S_IMODE(os.stat(path)[stat.ST_MODE])) != _file.mode:
-                permissions.append((path, int(_file.mode, 8)))
-
-    return permissions
+            if os.path.exists(path):
+                yield path, int(_file.mode, 8)
