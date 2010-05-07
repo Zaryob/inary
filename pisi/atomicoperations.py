@@ -418,37 +418,47 @@ class Install(AtomicOperation):
 
         # remove left over files from the old package.
         def clean_leftovers():
-            new_files = dict((f.path, f) for f in self.files.list)
+            stat_cache = {}
+
+            files_by_name = {}
+            new_paths = []
+            for f in self.files.list:
+                files_by_name.setdefault(os.path.basename(f.path), []).append(f)
+                new_paths.append(f.path)
 
             for old_file in self.old_files.list:
-                if old_file.path in new_files:
+                if old_file.path in new_paths:
                     continue
 
                 old_file_path = os.path.join(ctx.config.dest_dir(), old_file.path)
 
-                if not os.path.lexists(old_file_path):
+                try:
+                    old_file_stat = os.lstat(old_file_path)
+                except OSError:
                     continue
 
-                old_file_stat = None
                 old_filename = os.path.basename(old_file.path)
 
-                for new_file in self.files.list:
-                    # If one of the parent directories is a symlink, it is possible
-                    # that the new and old file paths refer to the same file.
-                    # In this case, we must not remove the old file.
-                    #
-                    # e.g. /lib/libdl.so and /lib64/libdl.so when /lib64 is
-                    # a symlink to /lib.
+                # If one of the parent directories is a symlink, it is possible
+                # that the new and old file paths refer to the same file.
+                # In this case, we must not remove the old file.
+                #
+                # e.g. /lib/libdl.so and /lib64/libdl.so when /lib64 is
+                # a symlink to /lib.
+                for new_file in files_by_name.get(old_filename, []):
 
-                    if os.path.basename(new_file.path) != old_filename:
-                        continue
+                    new_file_stat = stat_cache.get(new_file.path)
 
-                    new_file_path = os.path.join(ctx.config.dest_dir(), new_file.path)
-                    if not os.path.lexists(new_file_path):
-                        continue
+                    if new_file_stat is None:
+                        path = os.path.join(ctx.config.dest_dir(), new_file.path)
+                        try:
+                            new_file_stat = os.lstat(path)
+                        except OSError:
+                            continue
 
-                    old_file_stat = old_file_stat or os.lstat(old_file_path)
-                    if os.path.samestat(os.lstat(new_file_path), old_file_stat):
+                        stat_cache[new_file.path] = new_file_stat
+
+                    if os.path.samestat(new_file_stat, old_file_stat):
                         break
                 else:
                     Remove.remove_file(old_file, self.pkginfo.name)
