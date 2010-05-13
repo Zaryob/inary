@@ -257,12 +257,23 @@ class InstallDB(lazydb.LazyDB):
         self.__mark_package(ctx.const.needs_reboot, package)
 
     def add_package(self, pkginfo):
+        # Cleanup old revdep info
+        for revdep_info in self.rev_deps_db.values():
+            if pkginfo.name in revdep_info:
+                del revdep_info[pkginfo.name]
+
         self.installed_db[pkginfo.name] = "%s-%s" % (pkginfo.version, pkginfo.release)
         self.__add_to_revdeps(pkginfo.name, self.rev_deps_db)
 
     def remove_package(self, package_name):
         if self.installed_db.has_key(package_name):
             del self.installed_db[package_name]
+
+        # Cleanup revdep info
+        for revdep_info in self.rev_deps_db.values():
+            if package_name in revdep_info:
+                del revdep_info[package_name]
+
         self.clear_pending(package_name)
 
     def list_pending(self):
