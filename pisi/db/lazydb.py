@@ -36,6 +36,9 @@ class Singleton(object):
         del self._the_instances[type(self).__name__]
 
 class LazyDB(Singleton):
+
+    cache_version = "2.2"
+
     def __init__(self, cacheable=False, cachedir=None):
         if not self.__dict__.has_key("initialized"):
             self.initialized = False
@@ -48,8 +51,21 @@ class LazyDB(Singleton):
     def __cache_file(self):
         return util.join_path(ctx.config.cache_root_dir(), "%s.cache" % self.__class__.__name__.translate(lower_map))
 
+    def __cache_version_file(self):
+        return "%s.version" % self.__cache_file()
+
+    def __cache_file_version(self):
+        try:
+            return open(self.__cache_version_file()).read().strip()
+        except IOError:
+            return "2.2"
+
     def cache_save(self):
         if os.access(ctx.config.cache_root_dir(), os.W_OK) and self.cacheable:
+            with open(self.__cache_version_file(), "w") as f:
+                f.write(LazyDB.cache_version)
+                f.flush()
+                os.fsync(f.fileno())
             cPickle.dump(self._instance().__dict__,
                          file(self.__cache_file(), 'wb'), 1)
 
@@ -58,6 +74,9 @@ class LazyDB(Singleton):
             return True
         if not os.path.exists(self.cachedir):
             return False
+        if self.__cache_file_version() != LazyDB.cache_version:
+            return False
+
         cache_modified = os.stat(self.__cache_file()).st_mtime
         cache_dir_modified = os.stat(self.cachedir).st_mtime
         return cache_modified > cache_dir_modified
