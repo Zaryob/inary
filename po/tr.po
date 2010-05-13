@@ -18,8 +18,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=1;plural=0;\n"
+"X-Generator: Lokalize 1.0\n"
 
 #: /usr/lib/python2.6/optparse.py:140
 msgid "no such option: %s"
@@ -766,7 +766,7 @@ msgstr "Belirtilen konuma depo ekle (ilk konum 0'dır)."
 
 #: pisi/cli/addrepo.py:60
 msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
-msgstr ""
+msgstr "Dağıtım hakkında bilgi içermediği için bu deponun uyumluluğu denetlenemiyor."
 
 #: pisi/cli/addrepo.py:66
 msgid "Repository distribution does not match. Removing %s from system."
@@ -1766,13 +1766,13 @@ msgstr ""
 "\n"
 "İzlemede olan depoları listele.\n"
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr "etkin"
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
 msgstr "etkin değil"
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
+msgstr "etkin"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
