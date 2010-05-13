@@ -325,17 +325,21 @@ class Package:
 
         return False
 
-    def get_update_actions(self, old_release):
+    def get_update_actions(self, old_release=None):
         """Returns update actions for the releases greater than old_release.
 
         @type  old_release: string
         @param old_release: The release of the installed package.
 
-        @rtype:  set of tuples
-        @return: A set of (action name, target package) tuples.
+        @rtype:  dict
+        @return: A set of affected packages for each action.
         """
 
-        actions = set()
+        if old_release is None:
+            installdb = pisi.db.installdb.InstallDB()
+            version, old_release, build = installdb.get_version(self.name)
+
+        actions = {}
 
         for update in self.history:
             if update.release == old_release:
@@ -345,7 +349,8 @@ class Package:
                 if action.package and action.package != self.name:
                     continue
 
-                actions.add((action.action, action.target))
+                target = action.target or self.name
+                actions.setdefault(action.action, set()).add(target)
 
         return actions
 

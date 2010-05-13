@@ -41,9 +41,10 @@ def check_update_actions(packages):
         version, release, build = installdb.get_version(package)
         pkg_actions = pkg.get_update_actions(release)
 
-        for action_name, action_target in pkg_actions:
+        for action_name, action_targets in pkg_actions.items():
             item = actions.setdefault(action_name, [])
-            item.append((package, action_target))
+            for action_target in action_targets:
+                item.append((package, action_target))
 
     has_actions = False
 
@@ -284,9 +285,9 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
         version, release, build = installdb.get_version(pkg.name)
         actions = pkg.get_update_actions(release)
 
-        for action_name, action_package in actions:
-            if action_name == "reverseDependencyUpdate":
-                target_package = action_package or pkg.name
+        packages = actions.get("reverseDependencyUpdate")
+        if packages:
+            for target_package in packages:
                 for name, dep in installdb.get_rev_deps(target_package):
                     if name in G_f.vertices() or not is_upgradable(name):
                         continue

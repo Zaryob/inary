@@ -531,12 +531,11 @@ class Install(AtomicOperation):
         else:
             actions = self.pkginfo.get_update_actions("1")
 
-        for action_name, action_package in actions:
-            package_name = action_package or self.pkginfo.name
-            if action_name == "serviceRestart":
-                pisi.api.add_needs_restart(package_name)
-            elif action_name == "systemRestart":
-                pisi.api.add_needs_reboot(package_name)
+        for package_name in actions.get("serviceRestart", []):
+            pisi.api.add_needs_restart(package_name)
+
+        for package_name in actions.get("systemRestart", []):
+            pisi.api.add_needs_reboot(package_name)
 
         # filesdb
         self.filesdb.add_files(self.metadata.package.name, self.files)

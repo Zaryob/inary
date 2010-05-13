@@ -608,7 +608,7 @@ def get_package_requirements(packages):
         version, release, build = installdb.get_version(i_pkg)
         pkg_actions = pkg.get_update_actions(release)
 
-        for action_name, action_package in pkg_actions:
+        for action_name in pkg_actions:
             if action_name in actions:
                 requirements[action_name].append(pkg.name)
 
