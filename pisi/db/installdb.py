@@ -88,10 +88,12 @@ class InstallDB(lazydb.LazyDB):
         if deps:
             name = pkg.getTagData('Name')
             for dep in deps.tags("Dependency"):
-                revdeps.setdefault(dep.firstChild().data(), set()).add((name, dep.toString()))
+                revdep = revdeps.setdefault(dep.firstChild().data(), {})
+                revdep[name] = dep.toString()
             for anydep in deps.tags("AnyDependency"):
                 for dep in anydep.tags("Dependency"):
-                    revdeps.setdefault(dep.firstChild().data(), set()).add((name, anydep.toString()))
+                    revdep = revdeps.setdefault(dep.firstChild().data(), {})
+                    revdep[name] = anydep.toString()
 
     def __generate_revdeps(self):
         revdeps = {}
@@ -220,11 +222,11 @@ class InstallDB(lazydb.LazyDB):
             return self.__make_dependency(depStr)
 
     def get_rev_deps(self, name):
-
         rev_deps = []
 
-        if self.rev_deps_db.has_key(name):
-            for pkg, dep in self.rev_deps_db[name]:
+        package_revdeps = self.rev_deps_db.get(name)
+        if package_revdeps:
+            for pkg, dep in package_revdeps.items():
                 dependency = self.__create_dependency(dep)
                 rev_deps.append((pkg, dependency))
 
