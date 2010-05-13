@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
-"POT-Creation-Date: 2010-04-11 17:08+EEST\n"
+"POT-Creation-Date: 2010-05-13 19:56+EEST\n"
 "PO-Revision-Date: 2010-03-13 09:32+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@pardus.nu>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
@@ -186,11 +186,11 @@ msgstr "Körning av autoheader misslyckades."
 msgid "No configure script found for cmake."
 msgstr ""
 
-#: pisi/actionsapi/get.py:167
+#: pisi/actionsapi/get.py:174
 msgid "Util %s cannot be found"
 msgstr "Verktyget %s kunde inte hittas"
 
-#: pisi/actionsapi/get.py:169
+#: pisi/actionsapi/get.py:176
 msgid "Warning: %s does not exist, using plain name %s"
 msgstr ""
 
@@ -643,35 +643,32 @@ msgid "%s configuration failed."
 msgstr ""
 
 #: pisi/atomicoperations.py:415
-msgid ""
-"Unable to relocate following files. Reinstallation of this package is "
-"strongly recommended."
+msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
 msgstr ""
 
-#: pisi/atomicoperations.py:496 pisi/atomicoperations.py:499
-#: pisi/atomicoperations.py:506
+#: pisi/atomicoperations.py:506 pisi/atomicoperations.py:509
+#: pisi/atomicoperations.py:516
 msgid "Storing %s"
 msgstr "Lagrar %s"
 
-#: pisi/atomicoperations.py:574
+#: pisi/atomicoperations.py:583
 msgid "File list could not be read for package %s, continuing removal."
 msgstr "Fillistan för paketet %s kunde inte läsas, fortsätter med borttagning."
 
-#: pisi/atomicoperations.py:580
+#: pisi/atomicoperations.py:589
 msgid "Removing package %s"
 msgstr "Tar bort paketet %s"
 
-#: pisi/atomicoperations.py:583
+#: pisi/atomicoperations.py:592
 msgid "Trying to remove nonexistent package "
 msgstr ""
 
-#: pisi/atomicoperations.py:624
+#: pisi/atomicoperations.py:633
 msgid "Not removing conflicted file : %s"
 msgstr "Tar inte bort fil i konflikt: %s"
 
-#: pisi/atomicoperations.py:652
-msgid ""
-"Installed file %s does not exist on system [Probably you manually deleted]"
+#: pisi/atomicoperations.py:661
+msgid "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
 
 #: pisi/cli/__init__.py:116
@@ -721,8 +718,7 @@ msgid ""
 "\n"
 "If no repo is given, add-repo pardus-devel repo is added by default\n"
 "\n"
-"NB: We support only local files (e.g., /a/b/c) and http:// URIs at the "
-"moment\n"
+"NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment\n"
 msgstr ""
 
 #: pisi/cli/addrepo.py:45
@@ -741,20 +737,23 @@ msgstr ""
 msgid "Add repository at given position (0 is first)"
 msgstr ""
 
-#: pisi/cli/addrepo.py:59
+#: pisi/cli/addrepo.py:60
+msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
+msgstr ""
+
+#: pisi/cli/addrepo.py:66
 #, fuzzy
 msgid "Repository distribution does not match. Removing %s from system."
 msgstr "Förrådet % finns inte och kan därmed inte tas bort."
 
-#: pisi/cli/addrepo.py:73
+#: pisi/cli/addrepo.py:81
 msgid ""
 "Add %s repository without updating the database?\n"
-"By confirming this you are also adding the repository to your system without "
-"checking the distribution of the repository.\n"
+"By confirming this you are also adding the repository to your system without checking the distribution of the repository.\n"
 "Do you want to continue?"
 msgstr ""
 
-#: pisi/cli/addrepo.py:87
+#: pisi/cli/addrepo.py:95
 msgid "%s repository could not be reached. Removing %s from system."
 msgstr ""
 
@@ -778,7 +777,7 @@ msgstr ""
 msgid "Blame for all of the releases"
 msgstr ""
 
-#: pisi/cli/blame.py:69 pisi/specfile.py:428
+#: pisi/cli/blame.py:69 pisi/specfile.py:433
 msgid "Name: %s, version: %s, release: %s\n"
 msgstr "Namm: %s, version: %s, utgåva: %s\n"
 
@@ -865,9 +864,7 @@ msgid "Break build after fetching the source archive"
 msgstr ""
 
 #: pisi/cli/build.py:83
-msgid ""
-"Break build after unpacking the source archive, checking sha1sum and "
-"applying patches"
+msgid "Break build after unpacking the source archive, checking sha1sum and applying patches"
 msgstr ""
 
 #: pisi/cli/build.py:85
@@ -1062,10 +1059,8 @@ msgid ""
 "\n"
 "Usage: delta oldpackage newpackage\n"
 "\n"
-"Delta command finds the changed files between the given packages by "
-"comparing the sha1sum of the files\n"
-"and creates a delta pisi package with the changed files between two "
-"releases.\n"
+"Delta command finds the changed files between the given packages by comparing the sha1sum of the files\n"
+"and creates a delta pisi package with the changed files between two releases.\n"
 "\n"
 msgstr ""
 
@@ -1432,15 +1427,11 @@ msgid "Fetch upgrades but do not install."
 msgstr ""
 
 #: pisi/cli/install.py:65
-msgid ""
-"When installing packages, ignore packages and components whose basenames "
-"match pattern."
+msgid "When installing packages, ignore packages and components whose basenames match pattern."
 msgstr ""
 
 #: pisi/cli/install.py:67
-msgid ""
-"When installing packages, ignore packages and components whose "
-"basenames                      match any pattern contained in file."
+msgid "When installing packages, ignore packages and components whose basenames                      match any pattern contained in file."
 msgstr ""
 
 #: pisi/cli/install.py:93
@@ -1526,8 +1517,7 @@ msgid "Show detailed install info"
 msgstr ""
 
 #: pisi/cli/listinstalled.py:75 pisi/cli/listupgrades.py:77
-msgid ""
-"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
 msgstr ""
 
 #: pisi/cli/listnewest.py:26
@@ -1546,15 +1536,11 @@ msgid "list-newest options"
 msgstr ""
 
 #: pisi/cli/listnewest.py:47
-msgid ""
-"List new packages added to repository after this given date formatted as "
-"yyyy-mm-dd"
+msgid "List new packages added to repository after this given date formatted as yyyy-mm-dd"
 msgstr ""
 
 #: pisi/cli/listnewest.py:49
-msgid ""
-"List new packages added to repository after last nth previous repository "
-"update"
+msgid "List new packages added to repository after last nth previous repository update"
 msgstr ""
 
 #: pisi/cli/listnewest.py:77
@@ -1585,13 +1571,13 @@ msgid ""
 "Lists currently tracked repositories.\n"
 msgstr ""
 
-#: pisi/cli/listrepo.py:41
-msgid "inactive"
-msgstr "avaktiverad"
-
 #: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
 msgid "active"
 msgstr "aktiverad"
+
+#: pisi/cli/listrepo.py:41
+msgid "inactive"
+msgstr "avaktiverad"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
@@ -1627,7 +1613,7 @@ msgstr ""
 msgid "List upgradable packages under given component"
 msgstr ""
 
-#: pisi/cli/listupgrades.py:68 pisi/operations/upgrade.py:157
+#: pisi/cli/listupgrades.py:68 pisi/operations/upgrade.py:158
 msgid "No packages to upgrade."
 msgstr "Inga paket att uppdatera."
 
@@ -1831,15 +1817,11 @@ msgid "Name of the to be upgraded packages' repository"
 msgstr ""
 
 #: pisi/cli/upgrade.py:73
-msgid ""
-"When upgrading system, ignore packages and components whose basenames match "
-"pattern."
+msgid "When upgrading system, ignore packages and components whose basenames match pattern."
 msgstr ""
 
 #: pisi/cli/upgrade.py:75
-msgid ""
-"When upgrading system, ignore packages and components whose "
-"basenames                      match any pattern contained in file."
+msgid "When upgrading system, ignore packages and components whose basenames                      match any pattern contained in file."
 msgstr ""
 
 #: pisi/cli/upgrade.py:88
@@ -1864,53 +1846,53 @@ msgstr ""
 msgid "Configuring %s package"
 msgstr "Anpassar paketet %s..."
 
-#: pisi/comariface.py:100
+#: pisi/comariface.py:99
 msgid "COMAR package updated. From now on, using new COMAR daemon."
 msgstr ""
 
-#: pisi/comariface.py:106
+#: pisi/comariface.py:105
 msgid "Registering %s comar script"
 msgstr ""
 
-#: pisi/comariface.py:115 pisi/comariface.py:120 pisi/comariface.py:129
-#: pisi/comariface.py:143 pisi/comariface.py:160 pisi/comariface.py:169
-#: pisi/comariface.py:188 pisi/comariface.py:197 pisi/comariface.py:204
+#: pisi/comariface.py:112 pisi/comariface.py:117 pisi/comariface.py:126
+#: pisi/comariface.py:140 pisi/comariface.py:157 pisi/comariface.py:166
+#: pisi/comariface.py:185 pisi/comariface.py:194 pisi/comariface.py:201
 msgid "Script error: %s"
 msgstr ""
 
-#: pisi/comariface.py:122
+#: pisi/comariface.py:119
 msgid "Calling post install handlers"
 msgstr ""
 
-#: pisi/comariface.py:137
+#: pisi/comariface.py:134
 msgid "Running package's post install script"
 msgstr ""
 
-#: pisi/comariface.py:148
+#: pisi/comariface.py:145
 msgid "Running pre removal operations for %s"
 msgstr "Kör förberedande åtgärder före borttagning av %s"
 
-#: pisi/comariface.py:154
+#: pisi/comariface.py:151
 msgid "Running package's pre remove script"
 msgstr ""
 
-#: pisi/comariface.py:162
+#: pisi/comariface.py:159
 msgid "Calling pre remove handlers"
 msgstr ""
 
-#: pisi/comariface.py:174
+#: pisi/comariface.py:171
 msgid "Running post removal operations for %s"
 msgstr "Kör avslutande åtgärder efter borttagning av %s"
 
-#: pisi/comariface.py:182
+#: pisi/comariface.py:179
 msgid "Running package's postremove script"
 msgstr ""
 
-#: pisi/comariface.py:190
+#: pisi/comariface.py:187
 msgid "Calling post remove handlers"
 msgstr ""
 
-#: pisi/comariface.py:199
+#: pisi/comariface.py:196
 msgid "Unregistering comar scripts"
 msgstr ""
 
@@ -1980,7 +1962,7 @@ msgstr ""
 msgid "Distribution: %s, Install Time: %s\n"
 msgstr ""
 
-#: pisi/db/installdb.py:305
+#: pisi/db/installdb.py:318
 msgid "Package %s is not installed"
 msgstr ""
 
@@ -2006,9 +1988,7 @@ msgid "%s repository needs to be updated"
 msgstr "%s-förrådets information är aktuell."
 
 #: pisi/db/repodb.py:165
-msgid ""
-"Error parsing repository index information. Index file does not exist or is "
-"malformed."
+msgid "Error parsing repository index information. Index file does not exist or is malformed."
 msgstr ""
 
 #: pisi/fetcher.py:132
@@ -2032,9 +2012,7 @@ msgid "Could not fetch destination file \"%s\": %s"
 msgstr ""
 
 #: pisi/fetcher.py:159
-msgid ""
-"A problem occurred. Please check the archive address and/or permissions "
-"again."
+msgid "A problem occurred. Please check the archive address and/or permissions again."
 msgstr ""
 
 #: pisi/fetcher.py:192
@@ -2046,15 +2024,11 @@ msgid "Bandwidth usage is limited to %s KB/s"
 msgstr ""
 
 #: pisi/fetcher.py:212
-msgid ""
-"Remote file can not be reached. Previously downloaded part of the file will "
-"be removed."
+msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
 msgstr ""
 
 #: pisi/fetcher.py:221
-msgid ""
-"Server doesn't support partial downloads. Previously downloaded part of the "
-"file will be over-written."
+msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
 msgstr ""
 
 #: pisi/file.py:66
@@ -2190,15 +2164,11 @@ msgid "PartOf tag not defined, looking for component"
 msgstr ""
 
 #: pisi/operations/build.py:389
-msgid ""
-"Cannot find component.xml in remote directory, Source is now part of unknown "
-"component"
+msgid "Cannot find component.xml in remote directory, Source is now part of unknown component"
 msgstr ""
 
 #: pisi/operations/build.py:395
-msgid ""
-"Cannot find component.xml in upper directory, Source is now part of unknown "
-"component"
+msgid "Cannot find component.xml in upper directory, Source is now part of unknown component"
 msgstr ""
 
 #: pisi/operations/build.py:401
@@ -2270,8 +2240,7 @@ msgid "unable to call function from actions: %s"
 msgstr ""
 
 #: pisi/operations/build.py:607
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr "Säkerhetslås: följande paket i system.devel kommer att installeras: "
 
 #: pisi/operations/build.py:612
@@ -2359,22 +2328,19 @@ msgid "Generating %s,"
 msgstr ""
 
 #: pisi/operations/build.py:1008
-msgid ""
-"Build number is not available. For repo builds you must enable buildno in "
-"pisi.conf."
+msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
 msgstr ""
 
 #: pisi/operations/build.py:1026
 msgid "Creating PiSi package %s."
 msgstr ""
 
-#: pisi/operations/build.py:1076 pisi/operations/delta.py:98
+#: pisi/operations/build.py:1076 pisi/operations/delta.py:97
 msgid "Done."
 msgstr ""
 
 #: pisi/operations/build.py:1078
-msgid ""
-"All of the files under the install dir (%s) has been collected by package(s)"
+msgid "All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 
 #: pisi/operations/build.py:1082
@@ -2411,11 +2377,11 @@ msgid ""
 "Missing file: /%s"
 msgstr ""
 
-#: pisi/operations/delta.py:27
+#: pisi/operations/delta.py:26
 msgid "Cannot create delta for same package!"
 msgstr ""
 
-#: pisi/operations/delta.py:41
+#: pisi/operations/delta.py:40
 msgid "Creating delta PiSi package between %s %s"
 msgstr ""
 
@@ -2428,18 +2394,14 @@ msgstr ""
 msgid ""
 "The following list of packages will be installed\n"
 "from repository in the respective order to satisfy dependencies:\n"
-msgstr ""
-"Följande paket kommer att installeras i respektive ordning för att uppfylla "
-"beroenden"
+msgstr "Följande paket kommer att installeras i respektive ordning för att uppfylla beroenden"
 
 #: pisi/operations/emerge.py:54
 #, fuzzy
 msgid ""
 "The following list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
-msgstr ""
-"Följande paket kommer att installeras i respektive ordning för att uppfylla "
-"beroenden"
+msgstr "Följande paket kommer att installeras i respektive ordning för att uppfylla beroenden"
 
 #: pisi/operations/emerge.py:62 pisi/operations/install.py:83
 msgid "There are extra packages due to dependencies. Do you want to continue?"
@@ -2489,12 +2451,12 @@ msgstr ""
 
 #: pisi/operations/history.py:152 pisi/operations/history.py:166
 #: pisi/operations/install.py:201 pisi/operations/remove.py:73
-#: pisi/operations/upgrade.py:192
+#: pisi/operations/upgrade.py:193
 msgid "Do you want to continue?"
 msgstr ""
 
 #: pisi/operations/history.py:158 pisi/operations/install.py:96
-#: pisi/operations/upgrade.py:203
+#: pisi/operations/upgrade.py:204
 msgid "Downloading %d / %d"
 msgstr "Hämtar %d / %d"
 
@@ -2505,9 +2467,7 @@ msgid ""
 msgstr ""
 
 #: pisi/operations/install.py:48 pisi/operations/install.py:135
-msgid ""
-"The following package(s) are already installed and are not going to be "
-"installed again:"
+msgid "The following package(s) are already installed and are not going to be installed again:"
 msgstr ""
 
 #: pisi/operations/install.py:54 pisi/operations/install.py:214
@@ -2519,11 +2479,11 @@ msgstr ""
 msgid "Following packages will be installed:"
 msgstr "Följande paket kommer att uppdateras: "
 
-#: pisi/operations/install.py:77 pisi/operations/upgrade.py:180
+#: pisi/operations/install.py:77 pisi/operations/upgrade.py:181
 msgid "Total size of package(s): %.2f %s"
 msgstr "Sammanlagd paketstorlek: %.2f %s"
 
-#: pisi/operations/install.py:108 pisi/operations/upgrade.py:217
+#: pisi/operations/install.py:108 pisi/operations/upgrade.py:218
 msgid "Installing %d / %d"
 msgstr "Installerar %d / %d"
 
@@ -2545,11 +2505,8 @@ msgstr ""
 
 #: pisi/operations/install.py:198
 #, fuzzy
-msgid ""
-"The following packages will be installed in order to satisfy dependencies:"
-msgstr ""
-"Följande paket kommer att installeras i respektive ordning för att uppfylla "
-"beroenden\n"
+msgid "The following packages will be installed in order to satisfy dependencies:"
+msgstr "Följande paket kommer att installeras i respektive ordning för att uppfylla beroenden\n"
 
 #: pisi/operations/install.py:202
 msgid "External dependencies not satisfied"
@@ -2568,7 +2525,7 @@ msgstr ""
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "Säkerhetslås: kan inte ta bort följande paket i system.base"
 
-#: pisi/operations/remove.py:49 pisi/operations/upgrade.py:355
+#: pisi/operations/remove.py:49 pisi/operations/upgrade.py:352
 #, fuzzy
 msgid "Safety switch: The component system.base cannot be found."
 msgstr "Säkerhetslås: kan inte hitta komponenten system.base"
@@ -2586,9 +2543,7 @@ msgstr ""
 msgid ""
 "The following list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
-msgstr ""
-"Följande paket kommer att installeras i respektive ordning för att uppfylla "
-"beroenden"
+msgstr "Följande paket kommer att installeras i respektive ordning för att uppfylla beroenden"
 
 #: pisi/operations/remove.py:74
 msgid "Package removal declined"
@@ -2610,66 +2565,58 @@ msgstr ""
 msgid "Replaced package remains"
 msgstr ""
 
-#: pisi/operations/upgrade.py:52
-msgid ""
-"You must restart the following service(s) manually in order the updated "
-"versions of software to take effect:"
+#: pisi/operations/upgrade.py:53
+msgid "You must restart the following service(s) manually in order the updated versions of software to take effect:"
 msgstr ""
 
-#: pisi/operations/upgrade.py:60
-msgid ""
-"You must restart your system in order the updated versions of the following "
-"package(s) to take effect:"
+#: pisi/operations/upgrade.py:61
+msgid "You must restart your system in order the updated versions of the following package(s) to take effect:"
 msgstr ""
 
-#: pisi/operations/upgrade.py:84
+#: pisi/operations/upgrade.py:85
 msgid "Warning: package *name* ends with '.pisi'"
 msgstr ""
 
-#: pisi/operations/upgrade.py:87
+#: pisi/operations/upgrade.py:88
 msgid "Package %s is not installed."
 msgstr ""
 
-#: pisi/operations/upgrade.py:91
+#: pisi/operations/upgrade.py:92
 msgid "Package %s is not available in repositories."
 msgstr ""
 
-#: pisi/operations/upgrade.py:108
+#: pisi/operations/upgrade.py:109
 msgid "Package %s is already at the latest release %s."
 msgstr ""
 
-#: pisi/operations/upgrade.py:114
+#: pisi/operations/upgrade.py:115
 msgid "Package %s is already at the latest build %s."
 msgstr ""
 
-#: pisi/operations/upgrade.py:175
+#: pisi/operations/upgrade.py:176
 #, fuzzy
 msgid "The following packages will be upgraded:"
 msgstr "Följande paket kommer att uppdateras: "
 
-#: pisi/operations/upgrade.py:185
+#: pisi/operations/upgrade.py:186
 #, fuzzy
 msgid "There are extra packages due to dependencies."
 msgstr "Det finns extra paket på grund av beroenden. Vill du fortsätta?"
 
-#: pisi/operations/upgrade.py:265
+#: pisi/operations/upgrade.py:266
 msgid "Dependency %s of %s cannot be satisfied"
 msgstr ""
 
-#: pisi/operations/upgrade.py:266
+#: pisi/operations/upgrade.py:267
 msgid "Upgrade is not possible."
 msgstr ""
 
-#: pisi/operations/upgrade.py:280
-msgid "Reverse dependency %s of %s cannot be satisfied"
-msgstr ""
-
-#: pisi/operations/upgrade.py:332
+#: pisi/operations/upgrade.py:329
 #, fuzzy
 msgid "Safety switch forces the installation of following packages:"
 msgstr "Säkerhetslås: kan inte ta bort följande paket i system.base"
 
-#: pisi/operations/upgrade.py:348
+#: pisi/operations/upgrade.py:345
 #, fuzzy
 msgid "Safety switch forces the upgrade of following packages:"
 msgstr "Säkerhetslås: kan inte ta bort följande paket i system.base"
@@ -2693,9 +2640,7 @@ msgid "LocalText: unable to get either current or default locale"
 msgstr ""
 
 #: pisi/pxml/autoxml.py:120 pisi/pxml/autoxml.py:135
-msgid ""
-"Tag should have at least the current locale, or failing that an English or "
-"Turkish version"
+msgid "Tag should have at least the current locale, or failing that an English or Turkish version"
 msgstr ""
 
 #: pisi/pxml/autoxml.py:373
@@ -2776,7 +2721,7 @@ msgstr ""
 msgid "Unable to read file (%s): %s"
 msgstr ""
 
-#: pisi/pxml/xmlfile.py:88 pisi/specfile.py:415
+#: pisi/pxml/xmlfile.py:88 pisi/specfile.py:420
 msgid "File '%s' has invalid XML"
 msgstr ""
 
@@ -2828,35 +2773,35 @@ msgstr ""
 msgid " or "
 msgstr ""
 
-#: pisi/specfile.py:357
+#: pisi/specfile.py:362
 msgid "Name: %s, version: %s, release: %s, build %s\n"
 msgstr "Namn: %s, version: %s, utgåva: %s, bygge %s\n"
 
-#: pisi/specfile.py:359 pisi/specfile.py:430
+#: pisi/specfile.py:364 pisi/specfile.py:435
 msgid "Summary: %s\n"
 msgstr "Sammandrag: %s\n"
 
-#: pisi/specfile.py:360 pisi/specfile.py:431
+#: pisi/specfile.py:365 pisi/specfile.py:436
 msgid "Description: %s\n"
 msgstr "Beskrivning: %s\n"
 
-#: pisi/specfile.py:361 pisi/specfile.py:432
+#: pisi/specfile.py:366 pisi/specfile.py:437
 msgid "Component: %s\n"
 msgstr "Komponent: %s\n"
 
-#: pisi/specfile.py:362
+#: pisi/specfile.py:367
 msgid "Provides: "
 msgstr "Tillhandahåller: "
 
-#: pisi/specfile.py:366
+#: pisi/specfile.py:371
 msgid "Dependencies: "
 msgstr "Beroenden: "
 
-#: pisi/specfile.py:406
+#: pisi/specfile.py:411
 msgid "translations.xml file is badly formed."
 msgstr ""
 
-#: pisi/specfile.py:433
+#: pisi/specfile.py:438
 msgid "Build Dependencies: "
 msgstr ""
 
@@ -2912,21 +2857,21 @@ msgstr ""
 msgid "Invalid version string: '%s'"
 msgstr ""
 
-#~ msgid "Storing %s, "
-#~ msgstr "Lagrar %s, "
-
-#~ msgid "Storing %s."
-#~ msgstr "Lagrar %s."
-
-#~ msgid "Safety switch: Following packages in system.base will be installed: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
-
-#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
+#~ msgid "Update PiSi database for repository %s?"
+#~ msgstr "Uppdatera PiSi-databasen för %s-förrådet?"
 
 #, fuzzy
 #~ msgid "Repository architecture does not match. Removing %s from system."
 #~ msgstr "Förrådet % finns inte och kan därmed inte tas bort."
 
-#~ msgid "Update PiSi database for repository %s?"
-#~ msgstr "Uppdatera PiSi-databasen för %s-förrådet?"
+#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
+
+#~ msgid "Safety switch: Following packages in system.base will be installed: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
+
+#~ msgid "Storing %s."
+#~ msgstr "Lagrar %s."
+
+#~ msgid "Storing %s, "
+#~ msgstr "Lagrar %s, "
