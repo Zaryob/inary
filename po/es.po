@@ -1,7 +1,7 @@
 # translation of es.po to spanish
 # translation of es.po to
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Klemens Häckel <click3d_at_linuxmail_org>, 2007, 2008.
 # Christian Faure <christian.faurebouvard@laposte.net>, 2007.
 # klemens <click3d at linuxmail org>, 2007.
@@ -21,28 +21,25 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 1.0\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: /usr/lib/python2.6/optparse.py:140
-#, fuzzy
 msgid "no such option: %s"
-msgstr "opciones de búsqueda"
+msgstr "opción inválida: %s"
 
 #: /usr/lib/python2.6/optparse.py:151
-#, fuzzy
 msgid "ambiguous option: %s (%s?)"
-msgstr "Violación de caja de arena (Sandbox): %s (%s -> %s)"
+msgstr "opción ambigua: %s (%s?)"
 
 #: /usr/lib/python2.6/optparse.py:374
-#, fuzzy
 msgid "Usage: %s\n"
-msgstr "uso: %s\n"
+msgstr "Uso: %s\n"
 
 #: /usr/lib/python2.6/optparse.py:393
 msgid "Usage"
-msgstr ""
+msgstr "Uso"
 
 #: /usr/lib/python2.6/optparse.py:418
 msgid "integer"
@@ -59,46 +56,44 @@ msgstr ""
 #: /usr/lib/python2.6/optparse.py:421
 #, fuzzy
 msgid "complex"
-msgstr " [complete]\n"
+msgstr "complex"
 
 #: /usr/lib/python2.6/optparse.py:429
 msgid "option %s: invalid %s value: %r"
-msgstr ""
+msgstr "opción %s: valor de %s inválido: %r"
 
 #: /usr/lib/python2.6/optparse.py:437
 msgid "option %s: invalid choice: %r (choose from %s)"
-msgstr ""
+msgstr "opción %s: selección inválida: %r (elegir de %s)"
 
 #: /usr/lib/python2.6/optparse.py:1245
 msgid "show this help message and exit"
-msgstr ""
+msgstr "mostrar este mensaje de ayuda y salir"
 
 #: /usr/lib/python2.6/optparse.py:1250
 msgid "show program's version number and exit"
-msgstr ""
+msgstr "mostrar número de versión del programa y salir"
 
 # no idea, i should know the context :(
 #: /usr/lib/python2.6/optparse.py:1273
-#, fuzzy
 msgid "%prog [options]"
-msgstr "Opciones emerge"
+msgstr ""
 
 #: /usr/lib/python2.6/optparse.py:1493 /usr/lib/python2.6/optparse.py:1532
 msgid "%s option requires an argument"
-msgstr ""
+msgstr "%s opción requiere un argumento"
 
 #: /usr/lib/python2.6/optparse.py:1495 /usr/lib/python2.6/optparse.py:1534
 msgid "%s option requires %d arguments"
-msgstr ""
+msgstr "%s opción requiere %d argumentos"
 
 #: /usr/lib/python2.6/optparse.py:1504
 msgid "%s option does not take a value"
-msgstr ""
+msgstr "opción %s no require argumento"
 
 #: /usr/lib/python2.6/optparse.py:1621
-#, fuzzy
 msgid "Options"
-msgstr "opciones de info"
+msgstr "opciones"
 
 #: pisi-cli:42
 msgid "Keyboard Interrupt: Exiting..."
@@ -567,7 +562,8 @@ msgstr "Actualizando repositorio: %s"
 msgid "%s repository information is up-to-date."
 msgstr "Información de repositorio %s está actualizado."
 
-# what do You mean here with "at any rate" ? ok, got it, but will think of better spanish translation. it is not yet in here.
+# what do You mean here with "at any rate" ? ok, got it, but will think of
+# better spanish translation. it is not yet in here.
 #: pisi/api.py:840
 msgid "Updating database at any rate as requested"
 msgstr "Actualizando base de datos de todas formas según solicitado"
@@ -611,7 +607,7 @@ msgstr "Instalando %s, versión %s, release %s, build %s"
 
 #: pisi/atomicoperations.py:192 pisi/operations/build.py:593
 msgid "%s-%s is not a valid PiSi version format"
-msgstr ""
+msgstr "%s-%s no es un formato válido de versión PiSi"
 
 #: pisi/atomicoperations.py:198
 msgid "%s package cannot be installed unless the dependencies are satisfied"
@@ -669,7 +665,7 @@ msgstr "Falló la configuración %s ."
 
 #: pisi/atomicoperations.py:415
 msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
-msgstr ""
+msgstr "No posible reubicar los archivos siguientes. Se recomienda la reinstalación de éste paquete."
 
 #: pisi/atomicoperations.py:506 pisi/atomicoperations.py:509
 #: pisi/atomicoperations.py:516
@@ -776,7 +772,7 @@ msgstr "Agregar repositorio en posición indicada (inicia con 0)"
 
 #: pisi/cli/addrepo.py:60
 msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
-msgstr ""
+msgstr "No posible verificar la compatibilidad del repositorio, ya que no posee información sobre la distribución."
 
 #: pisi/cli/addrepo.py:66
 msgid "Repository distribution does not match. Removing %s from system."
@@ -1056,7 +1052,8 @@ msgstr "Comando desconocido: %s"
 msgid "general options"
 msgstr "opciones generales"
 
-# "Change" is meant to be imperative ? like "please do.." ? (or is it like "The change")
+# "Change" is meant to be imperative ? like "please do.." ? (or is it like
+# "The change")
 # como entender "root" ??
 # or do you mean only user root can execute PiSi ?
 #: pisi/cli/command.py:99
@@ -1128,7 +1125,8 @@ msgid "configure-pending options"
 msgstr "Opciones de configure-pending"
 
 # maybe here add some additional final comment ??
-# like "By deleting the cache you can gain back the used disk space, without damaging the current installations".. or so..
+# like "By deleting the cache you can gain back the used disk space, without
+# damaging the current installations".. or so..
 #: pisi/cli/deletecache.py:22
 msgid ""
 "Delete cache files\n"
@@ -1599,7 +1597,8 @@ msgstr "Reinstalar paquetes ya instalados"
 msgid "Skip distribution release and architecture check"
 msgstr "Saltar comprobación de architectura y versión"
 
-# check here: should be the idea be here - "dependent" (instead of "recursive")?
+# check here: should be the idea be here - "dependent" (instead of
+# "recursive")?
 #: pisi/cli/install.py:59
 msgid "Install component's and recursive components' packages"
 msgstr "Instalar paquetes de componente y de componentes relacionados"
@@ -1720,7 +1719,8 @@ msgstr "Listar paquetes instalados de componente "
 msgid "Show detailed install info"
 msgstr "Mostrar detalles de instalación"
 
-# I suppose here the position is important too ! Should be the same ok as in english
+# I suppose here the position is important too ! Should be the same ok as in
+# english
 #: pisi/cli/listinstalled.py:75 pisi/cli/listupgrades.py:77
 msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
 msgstr "Nombre Paquete   |St|   Versión|  Rel.| Build|  Distro|            Fecha"
@@ -1792,13 +1792,13 @@ msgstr ""
 "\n"
 "Lista los repositorios configurados actualmente.\n"
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr "activo"
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
 msgstr "deshabilitado"
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
+msgstr "activo"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
@@ -2539,8 +2539,10 @@ msgstr "Resultado de violación de Sandbox:"
 msgid "Sandbox violations!"
 msgstr "Violaciones de Sandbox!"
 
-# no suea bien, pero está correcto segun ingles. pero quizá querían decir otra cosa ?
-# quizá quieren decir: no posible llamar/ejecutar rutina del achivo (script batch) de acciones ??
+# no suea bien, pero está correcto segun ingles. pero quizá querían decir otra
+# cosa ?
+# quizá quieren decir: no posible llamar/ejecutar rutina del achivo (script
+# batch) de acciones ??
 #: pisi/operations/build.py:583
 msgid "unable to call function from actions: %s"
 msgstr "no posible llamar función desde acciones: %s"
@@ -2558,7 +2560,8 @@ msgstr "Verificación de seguridad: system.devel ya está instalado"
 msgid "Safety switch: the component system.devel cannot be found"
 msgstr "Verificación de seguridad: No posible encontrar el componente system.devel"
 
-# satisfechas - entiendo que se refiere a librerias necesarias para hacer el proceso build
+# satisfechas - entiendo que se refiere a librerias necesarias para hacer el
+# proceso build
 # quizá hay mejor manera de decirlo en español
 #: pisi/operations/build.py:623
 msgid "Unsatisfied Build Dependencies:"
@@ -2844,7 +2847,8 @@ msgstr "Dependencia %s de paquete %s no está satisfecha"
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "Verificación de seguridad impide remover los siguientes paquetes: \n"
 
-# should this say in english ? "Safety switch: the component cannot be found in system.base" ?? (i did in spanish like this)
+# should this say in english ? "Safety switch: the component cannot be found
+# in system.base" ?? (i did in spanish like this)
 #: pisi/operations/remove.py:49 pisi/operations/upgrade.py:352
 msgid "Safety switch: The component system.base cannot be found."
 msgstr "Verificación de seguridad: No posible encontrar el componente system.base."
@@ -2938,7 +2942,8 @@ msgstr "Verificación de seguridad obliga la instalación de los siguientes paqu
 msgid "Safety switch forces the upgrade of following packages:"
 msgstr "Verificación de seguridad obliga la actualización de los siguientes paquetes: "
 
-# do you mean: maybe the file on the server is newer than the one in the pisi list ?
+# do you mean: maybe the file on the server is newer than the one in the pisi
+# list ?
 # using upgrade automatically takes the newest one from the server,
 # while install tries to fetch the exact one ?
 #: pisi/package.py:56
@@ -3180,8 +3185,6 @@ msgstr "comando objcopy (add-debuglink) falló para archivo '%s'!"
 msgid "Invalid version string: '%s'"
 msgstr ""
 
-# favor verificar
-#, fuzzy
 #~ msgid "Run pisi build process in silent mode"
 #~ msgstr "No restringir proceso de build a carpeta de build"
 
@@ -3197,7 +3200,6 @@ msgstr ""
 #~ msgid "Safety switch: Following packages in system.base will be upgraded: "
 #~ msgstr "Verificación de seguridad: Se actualizarán los siguientes paquetes en system.base: "
 
-# I don't know what to say for "Safety switch".. yet
 #~ msgid "Safety switch: Following packages in system.base will be installed: "
 #~ msgstr "Verificación de seguridad: Se instalarán los siguientes paquetes en system.base: "
 
