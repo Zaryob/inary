@@ -54,9 +54,8 @@ msgid "floating-point"
 msgstr ""
 
 #: /usr/lib/python2.6/optparse.py:421
-#, fuzzy
 msgid "complex"
-msgstr "complex"
+msgstr "complejo"
 
 #: /usr/lib/python2.6/optparse.py:429
 msgid "option %s: invalid %s value: %r"
@@ -784,6 +783,9 @@ msgid ""
 "By confirming this you are also adding the repository to your system without checking the distribution of the repository.\n"
 "Do you want to continue?"
 msgstr ""
+"Agregar repositorio %s sin actualizar base de datos ?\n"
+"En caso de confirmar, también admite el repositorio saltando la verificación de la compatibilidad con su distribución.\n"
+"Desea continuar?"
 
 #: pisi/cli/addrepo.py:95
 msgid "%s repository could not be reached. Removing %s from system."
@@ -2286,7 +2288,7 @@ msgstr "Repositorio %s requiere actualización"
 
 #: pisi/db/repodb.py:165
 msgid "Error parsing repository index information. Index file does not exist or is malformed."
-msgstr ""
+msgstr "Error al analizar la información del repositorio. Archivo index no existe o está con mal formato."
 
 #: pisi/fetcher.py:132
 msgid "Urlgrabber needs to be installed to run this command"
@@ -2448,7 +2450,7 @@ msgstr "Fuente %s no encontrada en repositorios activos."
 
 #: pisi/operations/build.py:261
 msgid "pspec.xml avoids this package from building for '%s'"
-msgstr ""
+msgstr "pspec.xml impide build del paquete actual para '%s'"
 
 #: pisi/operations/build.py:264
 msgid "Building PiSi source package: %s"
@@ -2694,6 +2696,8 @@ msgid ""
 "\n"
 "Missing file: /%s"
 msgstr ""
+"\n"
+"Archivo faltante: /%s"
 
 #: pisi/operations/delta.py:26
 msgid "Cannot create delta for same package!"
@@ -2892,11 +2896,11 @@ msgstr "Queda conservado el paquete reemplazado"
 
 #: pisi/operations/upgrade.py:53
 msgid "You must restart the following service(s) manually in order the updated versions of software to take effect:"
-msgstr ""
+msgstr "Debe reiniciar manualmente los siguientes servicios para que las actualizaciones de software tengan efecto:"
 
 #: pisi/operations/upgrade.py:61
 msgid "You must restart your system in order the updated versions of the following package(s) to take effect:"
-msgstr ""
+msgstr "Debe reiniciar el sistema para que las actualizaciones de software tengan efecto:"
 
 #: pisi/operations/upgrade.py:85
 msgid "Warning: package *name* ends with '.pisi'"
@@ -3127,7 +3131,7 @@ msgstr "Dependencias: "
 
 #: pisi/specfile.py:411
 msgid "translations.xml file is badly formed."
-msgstr ""
+msgstr "Archivo translations.xml incorrecto."
 
 #: pisi/specfile.py:438
 msgid "Build Dependencies: "
@@ -3183,7 +3187,7 @@ msgstr "comando objcopy (add-debuglink) falló para archivo '%s'!"
 
 #: pisi/version.py:64
 msgid "Invalid version string: '%s'"
-msgstr ""
+msgstr "Cadena de versión inválida: '%s'"
 
 #~ msgid "Run pisi build process in silent mode"
 #~ msgstr "No restringir proceso de build a carpeta de build"
