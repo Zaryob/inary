@@ -2,19 +2,20 @@
 # Copyright (C) YEAR ORGANIZATION
 #
 # Andrea Decorte <adecorte@gmail.com>, 2007.
+# Davide Siciliano <edivad95@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "POT-Creation-Date: 2010-05-13 19:56+EEST\n"
-"PO-Revision-Date: 2007-07-11 21:08+0200\n"
-"Last-Translator: Andrea Decorte <adecorte@gmail.com>\n"
-"Language-Team: Italian <pardus-translation-it@pardus.org.tr>\n"
+"PO-Revision-Date: 2010-05-15 13:34+0200\n"
+"Last-Translator: Davide Siciliano <edivad95@gmail.com>\n"
+"Language-Team: Italian <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 1.0\n"
 
 #: /usr/lib/python2.6/optparse.py:140
 msgid "no such option: %s"
@@ -89,21 +90,18 @@ msgid "Keyboard Interrupt: Exiting..."
 msgstr "Interruzione da tastiera: uscita..."
 
 #: pisi-cli:45
-#, fuzzy
 msgid "Program terminated."
 msgstr "Programma terminato."
 
 #: pisi-cli:48
-#, fuzzy
 msgid ""
 "Unhandled internal exception.\n"
 "Please file a bug report to <http://bugs.pardus.org.tr>."
 msgstr ""
 "Eccezione interna non gestita.\n"
-"Invia per piacere una segnalazione di un bug (http://bugs.pardus.org.tr)"
+"Invia per piacere una segnalazione di un bug  su <http://bugs.pardus.org.tr>"
 
 #: pisi-cli:54
-#, fuzzy
 msgid "System error. Program terminated."
 msgstr "Errore di sistema. Programma terminato."
 
@@ -112,11 +110,12 @@ msgid "Please use 'pisi help' for general help."
 msgstr "Utilizza per favore 'pisi help' per un aiuto generico."
 
 #: pisi-cli:66
-#, fuzzy
 msgid ""
 "\n"
 "Traceback:"
-msgstr "Traceback:"
+msgstr ""
+"\n"
+"Traceback:"
 
 #: pisi-cli:69
 msgid "Use --debug to see a traceback."
@@ -206,6 +205,7 @@ msgstr ""
 #: pisi/actionsapi/kerneltools.py:117
 msgid "Can't find kernel version information file %s."
 msgstr ""
+"Impossibile trovare il file %s di informazioni della versione del kernel."
 
 #: pisi/actionsapi/libtools.py:38
 msgid "Running ldconfig failed."
@@ -287,9 +287,8 @@ msgid "No executable file matched pattern \"%s\"."
 msgstr ""
 
 #: pisi/actionsapi/pythonmodules.py:56
-#, fuzzy
 msgid "Configuration failed."
-msgstr "configurazione di %s fallita."
+msgstr "Configurazione fallita."
 
 #: pisi/actionsapi/pythonmodules.py:81
 msgid "Running %s failed."
@@ -389,7 +388,7 @@ msgstr "ActionsAPI [touch]: Permesso negato: %s"
 
 #: pisi/actionsapi/shelltools.py:255
 msgid "Command \"%s\" failed, return value was %d."
-msgstr ""
+msgstr "Comando \"%s\" fallito, il valore ritornato è stato %d."
 
 #: pisi/actionsapi/texlivemodules.py:54
 #, fuzzy
@@ -398,7 +397,7 @@ msgstr "Esecuzione di automake fallita."
 
 #: pisi/actionsapi/texlivemodules.py:57
 msgid "Generate config files failed"
-msgstr ""
+msgstr "Generazione file di configurazione fallita."
 
 #: pisi/actionsapi/texlivemodules.py:64
 msgid "Creating symlinks from format to engines failed"
@@ -493,11 +492,15 @@ msgstr ""
 
 #: pisi/api.py:62 pisi/cli/command.py:167
 msgid "You have to be root for this operation."
-msgstr "Impossibile ottenere accesso in lettura al database PiSi. Devi essere root per eseguire questa operazione."
+msgstr ""
+"Impossibile ottenere accesso in lettura al database PiSi. Devi essere root "
+"per eseguire questa operazione."
 
 #: pisi/api.py:69
 msgid "Another instance of PiSi is running. Only one instance is allowed."
-msgstr "Un'altra istanza di PiSi è in esecuzione. La modifica del database di PiSi è consentita a un'unica istanza alla volta."
+msgstr ""
+"Un'altra istanza di PiSi è in esecuzione. La modifica del database di PiSi è "
+"consentita a un'unica istanza alla volta."
 
 #: pisi/api.py:424
 msgid "%s package found in %s repository"
@@ -606,7 +609,9 @@ msgstr ""
 
 #: pisi/atomicoperations.py:198
 msgid "%s package cannot be installed unless the dependencies are satisfied"
-msgstr "il pacchetto %s non può essere installato, a meno che le sue dipendenze vengano soddisfatte"
+msgstr ""
+"il pacchetto %s non può essere installato, a meno che le sue dipendenze "
+"vengano soddisfatte"
 
 #: pisi/atomicoperations.py:222
 msgid "/%s from %s package\n"
@@ -657,7 +662,9 @@ msgid "%s configuration failed."
 msgstr "configurazione di %s fallita."
 
 #: pisi/atomicoperations.py:415
-msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
+msgid ""
+"Unable to relocate following files. Reinstallation of this package is "
+"strongly recommended."
 msgstr ""
 
 #: pisi/atomicoperations.py:506 pisi/atomicoperations.py:509
@@ -667,7 +674,9 @@ msgstr "Salvataggio di %s"
 
 #: pisi/atomicoperations.py:583
 msgid "File list could not be read for package %s, continuing removal."
-msgstr "Impossibile leggere la lista dei file per il pacchetto %s, proseguo con la rimozione."
+msgstr ""
+"Impossibile leggere la lista dei file per il pacchetto %s, proseguo con la "
+"rimozione."
 
 #: pisi/atomicoperations.py:589
 msgid "Removing package %s"
@@ -682,8 +691,11 @@ msgid "Not removing conflicted file : %s"
 msgstr "File in conflitto non rimossi: %s"
 
 #: pisi/atomicoperations.py:661
-msgid "Installed file %s does not exist on system [Probably you manually deleted]"
-msgstr "Il file installato %s non è presente nel sistema [Probabilmente è stato eliminato manualmente]"
+msgid ""
+"Installed file %s does not exist on system [Probably you manually deleted]"
+msgstr ""
+"Il file installato %s non è presente nel sistema [Probabilmente è stato "
+"eliminato manualmente]"
 
 #: pisi/cli/__init__.py:116
 msgid "Warning: "
@@ -732,7 +744,8 @@ msgid ""
 "\n"
 "If no repo is given, add-repo pardus-devel repo is added by default\n"
 "\n"
-"NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment\n"
+"NB: We support only local files (e.g., /a/b/c) and http:// URIs at the "
+"moment\n"
 msgstr ""
 "Aggiunge un repository\n"
 "\n"
@@ -741,9 +754,11 @@ msgstr ""
 "<repo>: nome del repository da aggiungere\n"
 "<indexuri>: URI del file di indice\n"
 "\n"
-"Se non viene fornito alcun repository, viene aggiunto automaticamente il repository pardus-devel\n"
+"Se non viene fornito alcun repository, viene aggiunto automaticamente il "
+"repository pardus-devel\n"
 "\n"
-"NB: Sono supportati solo file locali (es., /a/b/c) e URI http:// per il momento.\n"
+"NB: Sono supportati solo file locali (es., /a/b/c) e URI http:// per il "
+"momento.\n"
 
 #: pisi/cli/addrepo.py:45
 msgid "add-repo options"
@@ -763,24 +778,31 @@ msgid "Add repository at given position (0 is first)"
 msgstr "Aggiunge il repository a una posizione specificata (0 è la prima)"
 
 #: pisi/cli/addrepo.py:60
-msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
+msgid ""
+"Unable to check compatibility of this repository as it does not have "
+"information about the distribution."
 msgstr ""
 
 #: pisi/cli/addrepo.py:66
 #, fuzzy
 msgid "Repository distribution does not match. Removing %s from system."
-msgstr "Il repository %s non può essere raggiunto. Rimozione di %s dal sistema in corso."
+msgstr ""
+"Il repository %s non può essere raggiunto. Rimozione di %s dal sistema in "
+"corso."
 
 #: pisi/cli/addrepo.py:81
 msgid ""
 "Add %s repository without updating the database?\n"
-"By confirming this you are also adding the repository to your system without checking the distribution of the repository.\n"
+"By confirming this you are also adding the repository to your system without "
+"checking the distribution of the repository.\n"
 "Do you want to continue?"
 msgstr ""
 
 #: pisi/cli/addrepo.py:95
 msgid "%s repository could not be reached. Removing %s from system."
-msgstr "Il repository %s non può essere raggiunto. Rimozione di %s dal sistema in corso."
+msgstr ""
+"Il repository %s non può essere raggiunto. Rimozione di %s dal sistema in "
+"corso."
 
 #: pisi/cli/blame.py:25
 msgid ""
@@ -899,8 +921,12 @@ msgid "Break build after fetching the source archive"
 msgstr "Interrompi la costruzione dopo aver recuperato l'archivio dei sorgenti"
 
 #: pisi/cli/build.py:83
-msgid "Break build after unpacking the source archive, checking sha1sum and applying patches"
-msgstr "Interrompi la costruzione dopo aver scompattato l'archivio dei sorgenti, aver controllato sha1sum e applicato le patch"
+msgid ""
+"Break build after unpacking the source archive, checking sha1sum and "
+"applying patches"
+msgstr ""
+"Interrompi la costruzione dopo aver scompattato l'archivio dei sorgenti, "
+"aver controllato sha1sum e applicato le patch"
 
 #: pisi/cli/build.py:85
 msgid "Break build after running configure step"
@@ -955,10 +981,12 @@ msgstr ""
 "<pacchettoi>: nome del pacchetto\n"
 "\n"
 "Una somma di verifica crittografica viene memorizzata per ogni file\n"
-"installato. Il comando check utilizza tali somme per verificare un pacchetto.\n"
+"installato. Il comando check utilizza tali somme per verificare un "
+"pacchetto.\n"
 "Devi solamente fornire i nomi dei pacchetti.\n"
 "\n"
-"Se non vengono specificati dei pacchetti, vengono verificati tutti i pacchetti installati.\n"
+"Se non vengono specificati dei pacchetti, vengono verificati tutti i "
+"pacchetti installati.\n"
 
 #: pisi/cli/check.py:47
 msgid "check options"
@@ -1128,15 +1156,18 @@ msgid ""
 "\n"
 "Usage: delta oldpackage newpackage\n"
 "\n"
-"Delta command finds the changed files between the given packages by comparing the sha1sum of the files\n"
-"and creates a delta pisi package with the changed files between two releases.\n"
+"Delta command finds the changed files between the given packages by "
+"comparing the sha1sum of the files\n"
+"and creates a delta pisi package with the changed files between two "
+"releases.\n"
 "\n"
 msgstr ""
 "Crea pacchetti PiSi delta PiSi\n"
 "\n"
 "Utilizzo: delta vecchiopacchetto nuovopacchetto\n"
 "\n"
-"Il comando delta trova i file cambiati tra due pacchetti attraverso il confronto del sha1sum dei file\n"
+"Il comando delta trova i file cambiati tra due pacchetti attraverso il "
+"confronto del sha1sum dei file\n"
 "e crea un pacchetto pisi delta con i file cambiati tra le due versioni.\n"
 "\n"
 
@@ -1261,7 +1292,8 @@ msgstr ""
 "\n"
 "Utilizzo: graph [<pacchetto1> <pacchetto2> ...]\n"
 "\n"
-"Stampa un grafico delle relazioni tra i pacchetti, tenendo traccia delle dipendenze\n"
+"Stampa un grafico delle relazioni tra i pacchetti, tenendo traccia delle "
+"dipendenze\n"
 "e dei conflitti a partire dai pacchetti forniti. Senza parametri\n"
 "mostra le relazioni tra i pacchetti del repository e scrive il\n"
 "pacchetti nel formato graphviz nel file 'pgraph.dot'.\n"
@@ -1292,7 +1324,8 @@ msgstr "Disegno grafico dei pacchetti nel repository %s in corso"
 
 #: pisi/cli/graph.py:73
 msgid "Plotting a graph of relations among all repository packages"
-msgstr "Disegno di un grafico delle relazioni tra tutti i pacchetti del repository"
+msgstr ""
+"Disegno di un grafico delle relazioni tra tutti i pacchetti del repository"
 
 #: pisi/cli/graph.py:87
 msgid "Plotting a graph of relations among all installed packages"
@@ -1426,7 +1459,8 @@ msgstr ""
 "\n"
 "Questo comando cerca tutti i file PiSi nella cartella, raccoglie i loro tag\n"
 "PiSi e accumula le informazione in un file di output in formato XML,\n"
-"il cui nome predefinito è 'pisi-index.xml'. In particolare, indicizza sia i pacchetti\n"
+"il cui nome predefinito è 'pisi-index.xml'. In particolare, indicizza sia i "
+"pacchetti\n"
 "sorgente che quelli binari.\n"
 "\n"
 "Se fornisci più cartelle, il comando funziona comunque, ma\n"
@@ -1561,7 +1595,8 @@ msgstr ""
 "Puoi utilizzare nomi dei file, URI o nomi dei pacchetti. Se hai specificato\n"
 "il nome di un pacchetto, esso deve esistere in un repository specificato.\n"
 "\n"
-"Puoi anche specificare i componenti invece dei nomi dei pacchetti; essi verranno\n"
+"Puoi anche specificare i componenti invece dei nomi dei pacchetti; essi "
+"verranno\n"
 "poi espansi per ottenere i nomi dei pacchetti.\n"
 
 #: pisi/cli/install.py:44
@@ -1589,12 +1624,20 @@ msgid "Fetch upgrades but do not install."
 msgstr "Recupera aggiornamenti ma non installarli."
 
 #: pisi/cli/install.py:65
-msgid "When installing packages, ignore packages and components whose basenames match pattern."
-msgstr "All'aggiornamento del sistema, ignora i pacchetti e i componenti i cui nomi base corrispondono al modello."
+msgid ""
+"When installing packages, ignore packages and components whose basenames "
+"match pattern."
+msgstr ""
+"All'aggiornamento del sistema, ignora i pacchetti e i componenti i cui nomi "
+"base corrispondono al modello."
 
 #: pisi/cli/install.py:67
-msgid "When installing packages, ignore packages and components whose basenames                      match any pattern contained in file."
-msgstr "All'aggiornamento del sistema, ignora i pacchetti e i componenti i cui nomi base corrispondono a uno dei modelli contenuti nel file."
+msgid ""
+"When installing packages, ignore packages and components whose "
+"basenames                      match any pattern contained in file."
+msgstr ""
+"All'aggiornamento del sistema, ignora i pacchetti e i componenti i cui nomi "
+"base corrispondono a uno dei modelli contenuti nel file."
 
 #: pisi/cli/install.py:93
 msgid "There is no component named %s"
@@ -1694,8 +1737,10 @@ msgid "Show detailed install info"
 msgstr "Mostra informazione dettagliate sull'installazione"
 
 #: pisi/cli/listinstalled.py:75 pisi/cli/listupgrades.py:77
-msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
-msgstr "Nome pacchetto     |St|   Versione|  Rel.| Build|  Distro|             Data"
+msgid ""
+"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr ""
+"Nome pacchetto     |St|   Versione|  Rel.| Build|  Distro|             Data"
 
 #: pisi/cli/listnewest.py:26
 msgid ""
@@ -1720,11 +1765,15 @@ msgid "list-newest options"
 msgstr "opzioni list-newest"
 
 #: pisi/cli/listnewest.py:47
-msgid "List new packages added to repository after this given date formatted as yyyy-mm-dd"
+msgid ""
+"List new packages added to repository after this given date formatted as "
+"yyyy-mm-dd"
 msgstr ""
 
 #: pisi/cli/listnewest.py:49
-msgid "List new packages added to repository after last nth previous repository update"
+msgid ""
+"List new packages added to repository after last nth previous repository "
+"update"
 msgstr ""
 
 #: pisi/cli/listnewest.py:77
@@ -1763,12 +1812,12 @@ msgstr ""
 "\n"
 "Elenca i repository tenuti al momento sotto controllo.\n"
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr ""
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
+msgstr ""
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
 msgstr ""
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
@@ -1848,7 +1897,8 @@ msgstr ""
 "\n"
 "Ricostruisce i database PiSi\n"
 "\n"
-"Se vengono forniti dei pacchetti, dovrebbero essere i nome delle cartelle dei\n"
+"Se vengono forniti dei pacchetti, dovrebbero essere i nome delle cartelle "
+"dei\n"
 "pacchetti in /var/lib/pisi\n"
 
 #: pisi/cli/rebuilddb.py:42
@@ -1878,9 +1928,11 @@ msgstr ""
 "\n"
 "Utilizzo: remove <pacchetto1> <pacchetto2> ... <pacchetton>\n"
 "\n"
-"Rimuove uno o più pacchetti dal tuo sistema. Devi solo fornire i nomi dei pacchetti da rimuovere.\n"
+"Rimuove uno o più pacchetti dal tuo sistema. Devi solo fornire i nomi dei "
+"pacchetti da rimuovere.\n"
 "\n"
-"Puoi anche specificare i componenti invece dei nomi dei pacchetti; essi verranno\n"
+"Puoi anche specificare i componenti invece dei nomi dei pacchetti; essi "
+"verranno\n"
 "poi espansi per ottenere i nomi dei pacchetti.\n"
 
 #: pisi/cli/remove.py:43
@@ -2048,12 +2100,14 @@ msgstr ""
 "Aggiorna l'intero sistema se non viene specificato alcun pacchetto\n"
 "\n"
 "Puoi utilizzare solo i nomi dei pacchetti per specificarli poiché\n"
-"l'operazione di aggiornamento dei pacchetti è definita solo in releazione ai\n"
+"l'operazione di aggiornamento dei pacchetti è definita solo in releazione "
+"ai\n"
 "ai repository. Se hai specificato un nome di pacchetto, esso\n"
 "deve esistere nei repository. Se desideri solo reinstallare\n"
 "un pacchetto da un file PiSi, utilizza il comando install.\n"
 "\n"
-"Puoi anche specificare i componenti invece dei nomi dei pacchetti; essi verranno\n"
+"Puoi anche specificare i componenti invece dei nomi dei pacchetti; essi "
+"verranno\n"
 "poi espansi per ottenere i nomi dei pacchetti.\n"
 
 #: pisi/cli/upgrade.py:52
@@ -2077,12 +2131,20 @@ msgid "Name of the to be upgraded packages' repository"
 msgstr ""
 
 #: pisi/cli/upgrade.py:73
-msgid "When upgrading system, ignore packages and components whose basenames match pattern."
-msgstr "All'aggiornamento del sistema, ignora i pacchetti e i componenti i cui nomi base corrispondono al modello."
+msgid ""
+"When upgrading system, ignore packages and components whose basenames match "
+"pattern."
+msgstr ""
+"All'aggiornamento del sistema, ignora i pacchetti e i componenti i cui nomi "
+"base corrispondono al modello."
 
 #: pisi/cli/upgrade.py:75
-msgid "When upgrading system, ignore packages and components whose basenames                      match any pattern contained in file."
-msgstr "All'aggiornamento del sistema, ignora i pacchetti e i componenti i cui nomi base                      corrispondono a uno dei modelli contenuti nel file."
+msgid ""
+"When upgrading system, ignore packages and components whose "
+"basenames                      match any pattern contained in file."
+msgstr ""
+"All'aggiornamento del sistema, ignora i pacchetti e i componenti i cui nomi "
+"base                      corrispondono a uno dei modelli contenuti nel file."
 
 #: pisi/cli/upgrade.py:88
 msgid "Updating repositories"
@@ -2260,7 +2322,9 @@ msgid "%s repository needs to be updated"
 msgstr "Nessun repository di nome %s trovato."
 
 #: pisi/db/repodb.py:165
-msgid "Error parsing repository index information. Index file does not exist or is malformed."
+msgid ""
+"Error parsing repository index information. Index file does not exist or is "
+"malformed."
 msgstr ""
 
 #: pisi/fetcher.py:132
@@ -2286,8 +2350,12 @@ msgstr "Accesso negato al file di destinazione: \"%s\""
 
 #: pisi/fetcher.py:159
 #, fuzzy
-msgid "A problem occurred. Please check the archive address and/or permissions again."
-msgstr "C'è stato un problema. Controlla per favore di nuovo l'indirizzo dell'archivio e/o i permessi."
+msgid ""
+"A problem occurred. Please check the archive address and/or permissions "
+"again."
+msgstr ""
+"C'è stato un problema. Controlla per favore di nuovo l'indirizzo "
+"dell'archivio e/o i permessi."
 
 #: pisi/fetcher.py:192
 msgid "Proxy configuration has been found for '%s' protocol"
@@ -2298,11 +2366,15 @@ msgid "Bandwidth usage is limited to %s KB/s"
 msgstr ""
 
 #: pisi/fetcher.py:212
-msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
+msgid ""
+"Remote file can not be reached. Previously downloaded part of the file will "
+"be removed."
 msgstr ""
 
 #: pisi/fetcher.py:221
-msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
+msgid ""
+"Server doesn't support partial downloads. Previously downloaded part of the "
+"file will be over-written."
 msgstr ""
 
 #: pisi/file.py:66
@@ -2431,7 +2503,8 @@ msgstr "Costruzione del pacchetto sorgente PiSi %s"
 
 #: pisi/operations/build.py:309
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr "Rilevato IceCream. Assicurati che il tuo demone sia in esecuzione e attivo..."
+msgstr ""
+"Rilevato IceCream. Assicurati che il tuo demone sia in esecuzione e attivo..."
 
 #: pisi/operations/build.py:314
 msgid "CCache detected..."
@@ -2442,11 +2515,15 @@ msgid "PartOf tag not defined, looking for component"
 msgstr "Tag PartOf non definito, ricerca del componente"
 
 #: pisi/operations/build.py:389
-msgid "Cannot find component.xml in remote directory, Source is now part of unknown component"
+msgid ""
+"Cannot find component.xml in remote directory, Source is now part of unknown "
+"component"
 msgstr "Impossibile trovare il file component.xml nella cartella remota"
 
 #: pisi/operations/build.py:395
-msgid "Cannot find component.xml in upper directory, Source is now part of unknown component"
+msgid ""
+"Cannot find component.xml in upper directory, Source is now part of unknown "
+"component"
 msgstr "Impossibile trovare il file component.xml nella cartella superiore"
 
 #: pisi/operations/build.py:401
@@ -2518,8 +2595,11 @@ msgid "unable to call function from actions: %s"
 msgstr "impossibile chiamare la funzione dalle azioni: %s"
 
 #: pisi/operations/build.py:607
-msgid "Safety switch: following extra packages in system.devel will be installed: "
-msgstr "Switch di sicurezza: i seguenti pacchetti aggiuntivi in system.devel verranno installati: "
+msgid ""
+"Safety switch: following extra packages in system.devel will be installed: "
+msgstr ""
+"Switch di sicurezza: i seguenti pacchetti aggiuntivi in system.devel "
+"verranno installati: "
 
 #: pisi/operations/build.py:612
 msgid "Safety switch: system.devel is already installed"
@@ -2535,7 +2615,8 @@ msgstr "Dipendenze di compilazione non soddisfatte:"
 
 #: pisi/operations/build.py:627
 msgid "Cannot build package due to unsatisfied build dependencies"
-msgstr "Impossibile compilare il pacchetto a casa di dipendenze non soddisfatte"
+msgstr ""
+"Impossibile compilare il pacchetto a casa di dipendenze non soddisfatte"
 
 #: pisi/operations/build.py:632
 msgid "Build dependency %s cannot be satisfied"
@@ -2606,8 +2687,12 @@ msgid "Generating %s,"
 msgstr "Generazione di %s,"
 
 #: pisi/operations/build.py:1008
-msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
-msgstr "Il numero di build non è disponibile. Per le build dal repository devi attivare buildno in pisi.conf."
+msgid ""
+"Build number is not available. For repo builds you must enable buildno in "
+"pisi.conf."
+msgstr ""
+"Il numero di build non è disponibile. Per le build dal repository devi "
+"attivare buildno in pisi.conf."
 
 #: pisi/operations/build.py:1026
 msgid "Creating PiSi package %s."
@@ -2618,8 +2703,11 @@ msgid "Done."
 msgstr "Fatto."
 
 #: pisi/operations/build.py:1078
-msgid "All of the files under the install dir (%s) has been collected by package(s)"
-msgstr "Tutti i file nella cartella di installazione (%s) sono stati raccolti dai pacchetti"
+msgid ""
+"All of the files under the install dir (%s) has been collected by package(s)"
+msgstr ""
+"Tutti i file nella cartella di installazione (%s) sono stati raccolti dai "
+"pacchetti"
 
 #: pisi/operations/build.py:1082
 msgid "Cleaning Build Directory..."
@@ -2693,7 +2781,9 @@ msgstr ""
 
 #: pisi/operations/emerge.py:62 pisi/operations/install.py:83
 msgid "There are extra packages due to dependencies. Do you want to continue?"
-msgstr "Sono inclusi dei pacchetti extra per via delle dipendenze. Desideri proseguire?"
+msgstr ""
+"Sono inclusi dei pacchetti extra per via delle dipendenze. Desideri "
+"proseguire?"
 
 #: pisi/operations/emerge.py:96
 msgid "Cannot find source package: %s"
@@ -2762,8 +2852,12 @@ msgstr ""
 
 #: pisi/operations/install.py:48 pisi/operations/install.py:135
 #, fuzzy
-msgid "The following package(s) are already installed and are not going to be installed again:"
-msgstr "I seguenti pacchetti sono già installati e non verranno installati nuovamente:\n"
+msgid ""
+"The following package(s) are already installed and are not going to be "
+"installed again:"
+msgstr ""
+"I seguenti pacchetti sono già installati e non verranno installati "
+"nuovamente:\n"
 
 #: pisi/operations/install.py:54 pisi/operations/install.py:214
 msgid "No packages to install."
@@ -2803,7 +2897,8 @@ msgstr "Dipendenze esterne non soddisfatte"
 
 #: pisi/operations/install.py:198
 #, fuzzy
-msgid "The following packages will be installed in order to satisfy dependencies:"
+msgid ""
+"The following packages will be installed in order to satisfy dependencies:"
 msgstr ""
 "I seguenti pacchetti verranno installati nel\n"
 "rispettivo ordine per soddisfare le dipendenze:\n"
@@ -2821,9 +2916,8 @@ msgid "%s dependency of package %s is not satisfied"
 msgstr "La dipendenza %s del pacchetto %s non è soddisfatta"
 
 #: pisi/operations/remove.py:44
-#, fuzzy
 msgid "Safety switch prevents the removal of following packages:\n"
-msgstr "Switch di sicurezza: impossibile rimuovere i seguenti pacchetti in system.base: "
+msgstr "Switch di sicurezza: impossibile rimuovere i seguenti pacchetti:\n"
 
 #: pisi/operations/remove.py:49 pisi/operations/upgrade.py:352
 #, fuzzy
@@ -2868,11 +2962,15 @@ msgid "Replaced package remains"
 msgstr "Il pacchetto sostituito rimane"
 
 #: pisi/operations/upgrade.py:53
-msgid "You must restart the following service(s) manually in order the updated versions of software to take effect:"
+msgid ""
+"You must restart the following service(s) manually in order the updated "
+"versions of software to take effect:"
 msgstr ""
 
 #: pisi/operations/upgrade.py:61
-msgid "You must restart your system in order the updated versions of the following package(s) to take effect:"
+msgid ""
+"You must restart your system in order the updated versions of the following "
+"package(s) to take effect:"
 msgstr ""
 
 #: pisi/operations/upgrade.py:85
@@ -2903,7 +3001,9 @@ msgstr "I seguenti pacchetti verranno aggiornati: "
 #: pisi/operations/upgrade.py:186
 #, fuzzy
 msgid "There are extra packages due to dependencies."
-msgstr "Sono inclusi dei pacchetti extra per via delle dipendenze. Desideri proseguire?"
+msgstr ""
+"Sono inclusi dei pacchetti extra per via delle dipendenze. Desideri "
+"proseguire?"
 
 #: pisi/operations/upgrade.py:266
 msgid "Dependency %s of %s cannot be satisfied"
@@ -2916,12 +3016,16 @@ msgstr "L'aggiornamento non è possibile."
 #: pisi/operations/upgrade.py:329
 #, fuzzy
 msgid "Safety switch forces the installation of following packages:"
-msgstr "Switch di sicurezza: impossibile rimuovere i seguenti pacchetti in system.base: "
+msgstr ""
+"Switch di sicurezza: impossibile rimuovere i seguenti pacchetti in system."
+"base: "
 
 #: pisi/operations/upgrade.py:345
 #, fuzzy
 msgid "Safety switch forces the upgrade of following packages:"
-msgstr "Switch di sicurezza: impossibile rimuovere i seguenti pacchetti in system.base: "
+msgstr ""
+"Switch di sicurezza: impossibile rimuovere i seguenti pacchetti in system."
+"base: "
 
 #: pisi/package.py:56
 msgid ""
@@ -2929,7 +3033,8 @@ msgid ""
 "The package may have been upgraded. Please try to upgrade the package."
 msgstr ""
 "C'è stato un problema durante il recupero di '%s'.\n"
-"Il pacchetto potrebbe essere stato aggiornato. Prova per favore ad aggiornare il pacchetto."
+"Il pacchetto potrebbe essere stato aggiornato. Prova per favore ad "
+"aggiornare il pacchetto."
 
 #: pisi/pxml/autoxml.py:79
 msgid "At least one '%s' tag should have local text"
@@ -2941,11 +3046,16 @@ msgstr "lingua '%s' del tag '%s' è vuoto"
 
 #: pisi/pxml/autoxml.py:114
 msgid "LocalText: unable to get either current or default locale"
-msgstr "LocalText: impossibile ottenere sia il locale corrente che quello predefinito"
+msgstr ""
+"LocalText: impossibile ottenere sia il locale corrente che quello predefinito"
 
 #: pisi/pxml/autoxml.py:120 pisi/pxml/autoxml.py:135
-msgid "Tag should have at least the current locale, or failing that an English or Turkish version"
-msgstr "Il tag dovrebbe avere almeno il locale corrente, o in mancanza di esso una versione inglese o turca"
+msgid ""
+"Tag should have at least the current locale, or failing that an English or "
+"Turkish version"
+msgstr ""
+"Il tag dovrebbe avere almeno il locale corrente, o in mancanza di esso una "
+"versione inglese o turca"
 
 #: pisi/pxml/autoxml.py:373
 msgid "autoxml.check: '%s' errors"
@@ -2977,7 +3087,8 @@ msgstr "La variabile obbligatoria %s non è disponibile"
 
 #: pisi/pxml/autoxml.py:657
 msgid "Type mismatch: read text cannot be decoded"
-msgstr "Errore non corrispondenza di tipo: impossibile decodificare il testo letto"
+msgstr ""
+"Errore non corrispondenza di tipo: impossibile decodificare il testo letto"
 
 #: pisi/pxml/autoxml.py:661 pisi/pxml/autoxml.py:670
 msgid "Mandatory token %s not available"
@@ -3180,8 +3291,11 @@ msgstr ""
 #~ msgid "No repository named %s exists"
 #~ msgstr "Non esiste alcun repository di nome %s"
 
-#~ msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
-#~ msgstr "I flag devono essere uno di 'r', 'w, 'c', o 'n' oppure utilizza i flag bsddb.db.DB_*"
+#~ msgid ""
+#~ "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
+#~ msgstr ""
+#~ "I flag devono essere uno di 'r', 'w, 'c', o 'n' oppure utilizza i flag "
+#~ "bsddb.db.DB_*"
 
 #~ msgid "Cannot attain read or write access to database %s"
 #~ msgstr "Impossibile ottenere accesso in lettura o scrittura al database %s"
@@ -3195,11 +3309,16 @@ msgstr ""
 #~ msgid "Cannot attain write access to database environment"
 #~ msgstr "Impossibile ottenere accesso in scrittura all'ambiente del database"
 
-#~ msgid "Database version for %s greater than PiSi version. You need a newer PiSi."
-#~ msgstr "La versione del database per %s è maggiore della versione di PiSi. Ti serve una versione più recente di PiSi."
+#~ msgid ""
+#~ "Database version for %s greater than PiSi version. You need a newer PiSi."
+#~ msgstr ""
+#~ "La versione del database per %s è maggiore della versione di PiSi. Ti "
+#~ "serve una versione più recente di PiSi."
 
 #~ msgid "Database version for %s insufficient. Please run rebuild-db command."
-#~ msgstr "Versione del database per %s insufficiente. Lancia per favore il comando rebuild-db."
+#~ msgstr ""
+#~ "Versione del database per %s insufficiente. Lancia per favore il comando "
+#~ "rebuild-db."
 
 #~ msgid "Key %s in repo %s not found"
 #~ msgstr "Chiave %s nel repository %s non trovata"
@@ -3326,12 +3445,15 @@ msgstr ""
 
 #~ msgid ""
 #~ "A database operation has been aborted. You should run pisi\n"
-#~ "again for normal DB recovery procedure. Make sure you have free disk space. \n"
-#~ "You have to run rebuild-db only when there is file corruption and database upgrades."
+#~ "again for normal DB recovery procedure. Make sure you have free disk "
+#~ "space. \n"
+#~ "You have to run rebuild-db only when there is file corruption and "
+#~ "database upgrades."
 #~ msgstr ""
 #~ "Una operazione sul database è stata annullata. Dovresti lanciare\n"
 #~ "nuovamente PiSi per la procedura di correzione del database. Assicurati\n"
-#~ "di avere spazio libero a sufficienza. Devi eseguire rebuild-db solo quando si\n"
+#~ "di avere spazio libero a sufficienza. Devi eseguire rebuild-db solo "
+#~ "quando si\n"
 #~ "riscontra la corruzione di file o ci sono aggiornamenti del database."
 
 #~ msgid ""
@@ -3343,7 +3465,8 @@ msgstr ""
 #~ msgstr ""
 #~ "print_help(file : file = stdout)\n"
 #~ "\n"
-#~ "        Stampa un messaggio di aiuto esteso, elencando tutte le opzioni e\n"
+#~ "        Stampa un messaggio di aiuto esteso, elencando tutte le opzioni "
+#~ "e\n"
 #~ "        ogni testo associato ad esse, in 'file' (stdout predefinito).\n"
 #~ "        "
 
@@ -3352,15 +3475,19 @@ msgstr ""
 #~ "\n"
 #~ "        Print the version message for this program (self.version) to\n"
 #~ "        'file' (default stdout).  As with print_usage(), any occurence\n"
-#~ "        of \"%prog\" in self.version is replaced by the current program's\n"
+#~ "        of \"%prog\" in self.version is replaced by the current "
+#~ "program's\n"
 #~ "        name.  Does nothing if self.version is empty or undefined.\n"
 #~ "        "
 #~ msgstr ""
 #~ "print_version(file : file = stdout)\n"
 #~ "\n"
-#~ "        Stampa il messaggio di versione per questo programma (self.version) su\n"
-#~ "        'file' (predefinito stdout).  Come per print_usage(), ogni occorrenza\n"
-#~ "        di \"%prog\" in self.version viene sostituita dal nome del programma\n"
+#~ "        Stampa il messaggio di versione per questo programma (self."
+#~ "version) su\n"
+#~ "        'file' (predefinito stdout).  Come per print_usage(), ogni "
+#~ "occorrenza\n"
+#~ "        di \"%prog\" in self.version viene sostituita dal nome del "
+#~ "programma\n"
 #~ "        corrente.  Non fa nulla se self.version è vuoto o non definito.\n"
 #~ "        "
 
@@ -3368,7 +3495,8 @@ msgstr ""
 #~ "print_usage(file : file = stdout)\n"
 #~ "\n"
 #~ "        Print the usage message for the current program (self.usage) to\n"
-#~ "        'file' (default stdout).  Any occurence of the string \"%prog\" in\n"
+#~ "        'file' (default stdout).  Any occurence of the string \"%prog\" "
+#~ "in\n"
 #~ "        self.usage is replaced with the name of the current program\n"
 #~ "        (basename of sys.argv[0]).  Does nothing if self.usage is empty\n"
 #~ "        or not defined.\n"
@@ -3376,8 +3504,10 @@ msgstr ""
 #~ msgstr ""
 #~ "print_usage(file : file = stdout)\n"
 #~ "\n"
-#~ "        Stampa il messaggio d'uso per il programma corrente (self.usage) su\n"
-#~ "        'file' (predefinito stdout).  Ogni occorrenza della stringa \"%prog\" in\n"
+#~ "        Stampa il messaggio d'uso per il programma corrente (self.usage) "
+#~ "su\n"
+#~ "        'file' (predefinito stdout).  Ogni occorrenza della stringa \"%"
+#~ "prog\" in\n"
 #~ "        self.usage viene sostituita con il nome del programma corrente\n"
 #~ "        (nome base di sys.argv[0]).  Non fa nulla se self.usage è vuoto\n"
 #~ "        o non definito.\n"
@@ -3393,8 +3523,10 @@ msgstr ""
 #~ msgstr ""
 #~ "error(msg : string)\n"
 #~ "\n"
-#~ "        Stampa un messaggio di utilizzo incorporando 'msg' nel stderr e esce.\n"
-#~ "        Se sovrascrivi questa funzione in una sottoclasse, non deve restituire nulla -- \n"
+#~ "        Stampa un messaggio di utilizzo incorporando 'msg' nel stderr e "
+#~ "esce.\n"
+#~ "        Se sovrascrivi questa funzione in una sottoclasse, non deve "
+#~ "restituire nulla -- \n"
 #~ "        deve o uscire o lanciare un'eccezione.\n"
 #~ "        "
 
@@ -3429,9 +3561,12 @@ msgstr ""
 #~ "        "
 #~ msgstr ""
 #~ "\n"
-#~ "        Aggiorna i valori delle opzioni da un dizionario arbitrario, ma utilizza\n"
-#~ "        solo le chiavi del dizionario che hanno già un attributo corrispondente\n"
-#~ "        in sé.  Qualsiasi chiave del dizionario senza un attributo corrispondente\n"
+#~ "        Aggiorna i valori delle opzioni da un dizionario arbitrario, ma "
+#~ "utilizza\n"
+#~ "        solo le chiavi del dizionario che hanno già un attributo "
+#~ "corrispondente\n"
+#~ "        in sé.  Qualsiasi chiave del dizionario senza un attributo "
+#~ "corrispondente\n"
 #~ "        verrà ignorata silenziosamente.\\         "
 
 #~ msgid ""
@@ -3488,15 +3623,19 @@ msgstr ""
 #~ "    "
 
 #~ msgid "Return a comma-separated list of option strings & metavariables."
-#~ msgstr "Restituisce una lista separata da virgole di stringhe di opzione e metavariabili."
+#~ msgstr ""
+#~ "Restituisce una lista separata da virgole di stringhe di opzione e "
+#~ "metavariabili."
 
 #~ msgid ""
 #~ "\n"
-#~ "    Raised if an invalid or ambiguous option is seen on the command-line.\n"
+#~ "    Raised if an invalid or ambiguous option is seen on the command-"
+#~ "line.\n"
 #~ "    "
 #~ msgstr ""
 #~ "\n"
-#~ "    Lanciata se una opzione non valida o ambigua viene riscontrata nella linea di comando.\n"
+#~ "    Lanciata se una opzione non valida o ambigua viene riscontrata nella "
+#~ "linea di comando.\n"
 #~ "    "
 
 #~ msgid ""
@@ -3545,22 +3684,28 @@ msgstr ""
 #~ "For support, use the optik-users@lists.sourceforge.net mailing list\n"
 #~ "(http://lists.sourceforge.net/lists/listinfo/optik-users).\n"
 #~ msgstr ""
-#~ "optparse - un analizzatore (parser) di opzioni potente, estensibile e facile da utilizzare.\n"
+#~ "optparse - un analizzatore (parser) di opzioni potente, estensibile e "
+#~ "facile da utilizzare.\n"
 #~ "\n"
 #~ "Di Greg Ward <gward@python.net>\n"
 #~ "\n"
-#~ "Distribuito originariamente come Optik; guarda http://optik.sourceforge.net/ .\n"
+#~ "Distribuito originariamente come Optik; guarda http://optik.sourceforge."
+#~ "net/ .\n"
 #~ "\n"
 #~ "Se hai dei problemi con questo modulo, per favore non inviare bug,\n"
-#~ "patch, o richieste di nuove funzioni nella pagina di Python; usa invece la\n"
+#~ "patch, o richieste di nuove funzioni nella pagina di Python; usa invece "
+#~ "la\n"
 #~ "pagina di progetto di Optik su SourceForge:\n"
 #~ "  http://sourceforge.net/projects/optik\n"
 #~ "\n"
 #~ "Per supporto, usa la mailing list optik-users@lists.sourceforge.net\n"
 #~ "(http://lists.sourceforge.net/lists/listinfo/optik-users).\n"
 
-#~ msgid "Do not install build dependencies, fail if a build dependency is present"
-#~ msgstr "Non installare dipendenze di compilazione, fallisce se sono presenti delle dipendenze"
+#~ msgid ""
+#~ "Do not install build dependencies, fail if a build dependency is present"
+#~ msgstr ""
+#~ "Non installare dipendenze di compilazione, fallisce se sono presenti "
+#~ "delle dipendenze"
 
 #~ msgid "Input/Output error while reading %s: %s"
 #~ msgstr "Errore in Input/Output durante la lettura di %s: %s"
@@ -3590,7 +3735,9 @@ msgstr ""
 #~ msgstr "Aggiorna il database PiSi per il repository %s?"
 
 #~ msgid "Repository architecture does not match. Removing %s from system."
-#~ msgstr "Il repository %s non può essere raggiunto. Rimozione di %s dal sistema in corso."
+#~ msgstr ""
+#~ "Il repository %s non può essere raggiunto. Rimozione di %s dal sistema in "
+#~ "corso."
 
 #~ msgid "Scanning binary packages...\n"
 #~ msgstr "Scansione dei pacchetti binari in corso...\n"
@@ -3602,7 +3749,9 @@ msgstr ""
 #~ msgstr "Non generare il sito web.\n"
 
 #~ msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-#~ msgstr "Utilizzo: repostats.py [OPZIONI] percorso-repo-sorgente [percorso-repo-binario]\n"
+#~ msgstr ""
+#~ "Utilizzo: repostats.py [OPZIONI] percorso-repo-sorgente [percorso-repo-"
+#~ "binario]\n"
 
 #~ msgid ""
 #~ "Cannot parse '%s':\n"
@@ -3611,8 +3760,11 @@ msgstr ""
 #~ "Impossibile analizzare '%s':\n"
 #~ "%s\n"
 
-#~ msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-#~ msgstr "Lo sviluppatore '%s <%s>' ha un altro indirizzo di posta elettronica '%s' nel pacchetto sorgente '%s'"
+#~ msgid ""
+#~ "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+#~ msgstr ""
+#~ "Lo sviluppatore '%s <%s>' ha un altro indirizzo di posta elettronica '%s' "
+#~ "nel pacchetto sorgente '%s'"
 
 #~ msgid ""
 #~ "Duplicate source packages:\n"
@@ -3633,10 +3785,14 @@ msgstr ""
 #~ "%s\n"
 
 #~ msgid "Safety switch: Following packages in system.base will be upgraded: "
-#~ msgstr "Switch di sicurezza: i seguenti pacchetti in system.base verranno aggiornati: "
+#~ msgstr ""
+#~ "Switch di sicurezza: i seguenti pacchetti in system.base verranno "
+#~ "aggiornati: "
 
 #~ msgid "Safety switch: Following packages in system.base will be installed: "
-#~ msgstr "Switch di sicurezza: i seguenti pacchetti in system.base verranno installati: "
+#~ msgstr ""
+#~ "Switch di sicurezza: i seguenti pacchetti in system.base verranno "
+#~ "installati: "
 
 #~ msgid "Reverse dependency %s of %s cannot be satisfied"
 #~ msgstr "La dipendenza inversa %s di %s non può essere soddisfatta"
