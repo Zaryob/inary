@@ -70,8 +70,10 @@ expanded to package names.
         group.add_option("-x", "--exclude", action="append",
                      default=None, help=_("When upgrading system, ignore packages and components whose basenames match pattern."))
         group.add_option("--exclude-from", action="store",
-                     default=None, help=_("When upgrading system, ignore packages and components whose basenames \
-                     match any pattern contained in file."))
+                     default=None,
+                     help=_("When upgrading system, ignore packages "
+                            "and components whose basenames match "
+                            "any pattern contained in file."))
 
         self.parser.add_option_group(group)
 
