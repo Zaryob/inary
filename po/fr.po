@@ -2835,14 +2835,12 @@ msgid "Package %s is already at the latest build %s."
 msgstr "Le paquet %s est déjà à son build le plus récent %s."
 
 #: pisi/operations/upgrade.py:176
-#, fuzzy
 msgid "The following packages will be upgraded:"
-msgstr "Le paquet suivant va être mis à jour :"
+msgstr "Les paquets suivants vont être mis à jour :"
 
 #: pisi/operations/upgrade.py:186
-#, fuzzy
 msgid "There are extra packages due to dependencies."
-msgstr "Il y a des paquets en plus à cause de dépendances. Voulez vous continuer ?"
+msgstr "Il y a des paquets supplémentaires pour cause de dépendances."
 
 #: pisi/operations/upgrade.py:266
 msgid "Dependency %s of %s cannot be satisfied"
@@ -2853,14 +2851,12 @@ msgid "Upgrade is not possible."
 msgstr "La mise à jour est impossible."
 
 #: pisi/operations/upgrade.py:329
-#, fuzzy
 msgid "Safety switch forces the installation of following packages:"
-msgstr "Précautions de sécurité : impossible de supprimer les paquets suivants de system.base : "
+msgstr "Le loquet de sécurité oblige à l'installation des paquets suivants : "
 
 #: pisi/operations/upgrade.py:345
-#, fuzzy
 msgid "Safety switch forces the upgrade of following packages:"
-msgstr "Précautions de sécurité : impossible de supprimer les paquets suivants de system.base : "
+msgstr "Le loquet de sécurité oblige à la mise à jour des paquets suivants :"
 
 #: pisi/package.py:56
 msgid ""
@@ -2940,9 +2936,8 @@ msgid "Object cannot be encoded"
 msgstr "L'objet ne peut être encodé"
 
 #: pisi/pxml/autoxml.py:735 pisi/pxml/autoxml.py:854
-#, fuzzy
 msgid "Object cannot be formatted"
-msgstr "L'objet ne peut être encodé"
+msgstr "L'objet ne peut être formaté"
 
 #: pisi/pxml/autoxml.py:751
 msgid "List type must contain only one element"
