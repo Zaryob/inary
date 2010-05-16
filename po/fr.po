@@ -2638,13 +2638,12 @@ msgstr ""
 " à partir du dépôt et dans l'ordre afin de satisfaire les dépendances:\n"
 
 #: pisi/operations/emerge.py:54
-#, fuzzy
 msgid ""
 "The following list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
 msgstr ""
-"Les paquets de la liste minimaliste suivante vont être\n"
-"construits et installé dans cet ordre afin de satisfaire les dépendances :\n"
+"Liste des paquets qui seront construits et\n"
+" installés dans l'ordre afin de satisfaire les dépendances :\n"
 
 #: pisi/operations/emerge.py:62 pisi/operations/install.py:83
 msgid "There are extra packages due to dependencies. Do you want to continue?"
@@ -2714,18 +2713,16 @@ msgstr ""
 "Les paquets suivants n'ont pas été trouvés dans les dépots et ne sont pas dans le cache :\n"
 
 #: pisi/operations/install.py:48 pisi/operations/install.py:135
-#, fuzzy
 msgid "The following package(s) are already installed and are not going to be installed again:"
-msgstr "Les paquets suivants sont déjà installés et ne seront pas installés à nouveau :\n"
+msgstr "Les paquets suivants sont déjà installés et ne seront pas installés à nouveau :"
 
 #: pisi/operations/install.py:54 pisi/operations/install.py:214
 msgid "No packages to install."
 msgstr "Aucun paquet à installer."
 
 #: pisi/operations/install.py:72
-#, fuzzy
 msgid "Following packages will be installed:"
-msgstr "Les paquets suivants vont être installés :\n"
+msgstr "Les paquets suivants vont être installés :"
 
 #: pisi/operations/install.py:77 pisi/operations/upgrade.py:181
 msgid "Total size of package(s): %.2f %s"
@@ -2752,9 +2749,8 @@ msgid "External dependencies not satisfied: %s"
 msgstr "Dépendances externes non satisfaites : %s"
 
 #: pisi/operations/install.py:198
-#, fuzzy
 msgid "The following packages will be installed in order to satisfy dependencies:"
-msgstr "Les paquets suivants vont être installés dans cet ordre afin de satisfaire des dépendances supplémentaires :\n"
+msgstr "Les paquets suivants vont être installés dans cet ordre afin de satisfaire les dépendances."
 
 #: pisi/operations/install.py:202
 msgid "External dependencies not satisfied"
