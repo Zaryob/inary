@@ -21,14 +21,12 @@ import zipfile
 
 import pisi
 import pisi.context as ctx
-import pisi.conflict
 import pisi.util as util
 import pisi.metadata
 import pisi.files
 import pisi.uri
 import pisi.ui
 import pisi.version
-import pisi.operations.helper
 import pisi.operations.delta
 import pisi.db
 

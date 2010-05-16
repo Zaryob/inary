@@ -20,8 +20,6 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import pisi.util as util
-
 class URI(object):
     """URI class provides a URL parser and simplifies working with
     URLs."""

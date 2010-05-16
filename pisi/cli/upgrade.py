@@ -12,14 +12,12 @@
 
 import optparse
 
-import os
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi.cli.command as command
 import pisi.context as ctx
-import pisi.blacklist
 import pisi.api
 import pisi.db
 

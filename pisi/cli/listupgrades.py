@@ -10,7 +10,6 @@
 # Please read the COPYING file.
 #
 
-import os
 import optparse
 
 import gettext

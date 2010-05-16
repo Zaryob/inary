@@ -17,7 +17,6 @@ knows what."""
 
 # python standard library modules
 import os
-import sys
 import time
 import base64
 import shutil

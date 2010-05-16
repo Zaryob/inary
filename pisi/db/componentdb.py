@@ -15,8 +15,6 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import piksemel
-
 import pisi
 import pisi.db.repodb
 import pisi.db.itembyrepo

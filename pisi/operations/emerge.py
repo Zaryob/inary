@@ -21,7 +21,6 @@ import pisi.operations
 import pisi.context as ctx
 import pisi.util as util
 import pisi.atomicoperations as atomicoperations
-import pisi.dependency as dependency
 import pisi.ui as ui
 import pisi.db
 

@@ -12,7 +12,6 @@
 
 import os
 import time
-import select
 import string
 
 import gettext

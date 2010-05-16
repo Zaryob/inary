@@ -11,13 +11,6 @@
 #
 
 import os
-import time
-import datetime
-import gettext
-__trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
-
-import piksemel
 
 import pisi.context as ctx
 import pisi.db.lazydb as lazydb

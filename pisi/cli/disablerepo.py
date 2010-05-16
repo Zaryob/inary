@@ -10,14 +10,11 @@
 # Please read the COPYING file.
 #
 
-import optparse
-
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
 import pisi.cli.command as command
-import pisi.context as ctx
 import pisi.api
 
 class DisableRepo(command.Command):

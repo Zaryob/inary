@@ -23,7 +23,6 @@ import pisi.pgraph as pgraph
 import pisi.atomicoperations as atomicoperations
 import pisi.operations as operations
 import pisi.util as util
-import pisi.dependency as dependency
 import pisi.db
 import pisi.blacklist
 

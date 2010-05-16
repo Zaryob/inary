@@ -21,7 +21,6 @@ import piksemel
 import pisi
 import pisi.uri
 import pisi.util
-import pisi.index
 import pisi.context as ctx
 import pisi.db.lazydb as lazydb
 

@@ -66,7 +66,6 @@ class ArchiveBinary(ArchiveBase):
 
         # we can't unpack .bin files. we'll just move them to target
         # directory and leave the dirty job to actions.py ;)
-        import shutil
         target_file = os.path.join(target_dir, os.path.basename(self.file_path))
         shutil.copyfile(self.file_path, target_file)
 

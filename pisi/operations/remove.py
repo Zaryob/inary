@@ -19,7 +19,6 @@ _ = __trans.ugettext
 import pisi
 import pisi.context as ctx
 import pisi.atomicoperations as atomicoperations
-import pisi.dependency as dependency
 import pisi.pgraph as pgraph
 import pisi.util as util
 import pisi.ui as ui

@@ -11,7 +11,6 @@
 #
 
 import sys
-import logging
 import locale
 
 import gettext

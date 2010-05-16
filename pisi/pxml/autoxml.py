@@ -21,7 +21,6 @@
 
 # System
 import locale
-import codecs
 import types
 import formatter
 import sys

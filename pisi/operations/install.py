@@ -24,7 +24,6 @@ import pisi.util as util
 import pisi.atomicoperations as atomicoperations
 import pisi.operations as operations
 import pisi.pgraph as pgraph
-import pisi.dependency as dependency
 import pisi.ui as ui
 import pisi.db
 

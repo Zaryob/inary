@@ -21,7 +21,6 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import pisi.context as ctx
 import pisi.specfile as specfile
 import pisi.pxml.xmlfile as xmlfile
 import pisi.pxml.autoxml as autoxml

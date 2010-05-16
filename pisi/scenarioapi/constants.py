@@ -9,9 +9,6 @@
 #
 # Please read the COPYING file.
 
-import locale
-from os.path import join
-
 class _constant:
     "Constant members implementation"
     class ConstError(TypeError):

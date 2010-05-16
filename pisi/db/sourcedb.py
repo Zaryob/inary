@@ -12,9 +12,6 @@
 
 import re
 import gzip
-import gettext
-__trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
 
 import piksemel
 

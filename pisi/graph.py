@@ -12,7 +12,6 @@
 # the most simple minded digraph class ever
 
 
-import sys
 import string
 
 import pisi

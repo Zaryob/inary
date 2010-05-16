@@ -25,9 +25,6 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import codecs
-import exceptions
-
 import piksemel as iks
 
 import pisi

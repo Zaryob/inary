@@ -10,13 +10,6 @@
 # Please read the COPYING file.
 #
 
-import sys
-import locale
-
-import gettext
-__trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
-
 import pisi
 
 class Error(pisi.Error):

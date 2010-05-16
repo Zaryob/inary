@@ -12,8 +12,6 @@
 import os
 import fcntl
 import re
-import logging
-import logging.handlers
 import fetcher
 
 import gettext
@@ -24,7 +22,6 @@ import pisi
 import pisi.context as ctx
 import pisi.uri
 import pisi.util
-import pisi.dependency as dependency
 import pisi.pgraph as pgraph
 import pisi.db.packagedb
 import pisi.db.repodb
@@ -40,7 +37,6 @@ import pisi.metadata
 import pisi.file
 import pisi.blacklist
 import pisi.atomicoperations
-import pisi.operations.delta
 import pisi.operations.remove
 import pisi.operations.upgrade
 import pisi.operations.install

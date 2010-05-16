@@ -12,11 +12,6 @@
 
 """PiSi package relation graph that represents the state of packagedb"""
 
-import string
-
-import pisi
-import pisi.db
-import pisi.context as ctx
 import graph
 
 # Cache the results from packagedb queries in a graph

@@ -126,7 +126,6 @@ class Command(object):
         # make destdir absolute
         if self.options.destdir:
             d = str(self.options.destdir)
-            import os.path
             if not os.path.exists(d):
                 pisi.cli.printu(_('Destination directory %s does not exist. Creating directory.\n') % d)
                 os.makedirs(d)

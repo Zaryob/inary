@@ -11,7 +11,6 @@
 #
 
 import os
-import stat
 import cPickle
 import time
 import pisi.context as ctx

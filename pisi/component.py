@@ -10,12 +10,6 @@
 # Please read the COPYING file.
 #
 
-import gettext
-__trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
-
-import pisi
-import pisi.context as ctx
 import pisi.pxml.xmlfile as xmlfile
 import pisi.pxml.autoxml as autoxml
 
