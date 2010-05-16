@@ -2769,9 +2769,8 @@ msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "Le loquet de sécurité empêche la suppression des paquets suivants :\n"
 
 #: pisi/operations/remove.py:49 pisi/operations/upgrade.py:352
-#, fuzzy
 msgid "Safety switch: The component system.base cannot be found."
-msgstr "Précautions de sécurité : Le composant system.base est introuvable"
+msgstr "Loquet de sécurité : Le composant system.base est introuvable."
 
 #: pisi/operations/remove.py:56
 msgid "Package %s does not exist. Cannot remove."
@@ -2782,13 +2781,10 @@ msgid "No packages to remove."
 msgstr "Aucun paquet à supprimer."
 
 #: pisi/operations/remove.py:69
-#, fuzzy
 msgid ""
 "The following list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
-msgstr ""
-"La liste minimale suivante de paquets va être supprimée\n"
-"en respectant cet ordre afin de satisfaire les dépendances :\n"
+msgstr "Les paquets suivants vont être désinstallés dans cet ordre afin de satisfaire les dépendances :\n"
 
 #: pisi/operations/remove.py:74
 msgid "Package removal declined"
@@ -2812,7 +2808,7 @@ msgstr "Le paquet remplacé demeure"
 
 #: pisi/operations/upgrade.py:53
 msgid "You must restart the following service(s) manually in order the updated versions of software to take effect:"
-msgstr ""
+msgstr "Vous devez redémarrer le(s) service(s) suivant(s) manuellement pour profiter des versions à jour des logiciels :"
 
 #: pisi/operations/upgrade.py:61
 msgid "You must restart your system in order the updated versions of the following package(s) to take effect:"
