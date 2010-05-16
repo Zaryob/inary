@@ -133,7 +133,7 @@ msgstr ""
 #: pisi/actionsapi/cmaketools.py:66 pisi/actionsapi/kde.py:65
 #: pisi/actionsapi/perlmodules.py:54 pisi/actionsapi/perlmodules.py:57
 msgid "Configure failed."
-msgstr "Échec du configure."
+msgstr "Échec de la configuration."
 
 #: pisi/actionsapi/autotools.py:80 pisi/actionsapi/autotools.py:90
 #: pisi/actionsapi/kde.py:67
@@ -145,7 +145,7 @@ msgstr "Pas de script configure trouvé."
 #: pisi/actionsapi/perlmodules.py:72 pisi/actionsapi/pythonmodules.py:62
 #: pisi/actionsapi/scons.py:39
 msgid "Make failed."
-msgstr "Échec du make."
+msgstr "Échec de la construction."
 
 #: pisi/actionsapi/autotools.py:127 pisi/actionsapi/autotools.py:138
 #: pisi/actionsapi/cmaketools.py:102 pisi/actionsapi/cmaketools.py:112
@@ -158,7 +158,7 @@ msgstr "Échec de l'installation."
 #: pisi/actionsapi/cmaketools.py:81 pisi/actionsapi/cmaketools.py:106
 #: pisi/actionsapi/cmaketools.py:116 pisi/actionsapi/kde.py:81
 msgid "No Makefile found."
-msgstr "Pas de Makefile trouvé."
+msgstr "Fichier Makefile introuvable."
 
 #: pisi/actionsapi/autotools.py:147
 msgid "Running aclocal failed."
@@ -182,7 +182,7 @@ msgstr "L'exécution de autoheader a échoué."
 
 #: pisi/actionsapi/cmaketools.py:68
 msgid "No configure script found for cmake."
-msgstr "Pas trouvé de script configure pour cmake."
+msgstr "Pas trouvé de fichier configure pour cmake."
 
 #: pisi/actionsapi/get.py:174
 msgid "Util %s cannot be found"
@@ -199,7 +199,7 @@ msgid ""
 "%s/config.log"
 msgstr ""
 "\n"
-"!!! Veuillez attacher le config.log à votre rapport de dysfonctionnement s'il vous plaît :\n"
+"! Veuillez attacher le config.log à votre rapport de bogue s'il vous plaît :\n"
 "%s/config.log"
 
 #: pisi/actionsapi/kerneltools.py:117
