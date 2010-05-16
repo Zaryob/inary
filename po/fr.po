@@ -1,6 +1,6 @@
 # translation of fr.po to French
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Amine Chadly <amine.chadly@gmail.com>, 2007, 2008.
 # Philippe Svetoslavsky <philsvet@gmail.com>, 2009, 2010.
 msgid ""
@@ -55,7 +55,7 @@ msgstr "Option %s : valeur %s invalide : %r"
 
 #: /usr/lib/python2.6/optparse.py:437
 msgid "option %s: invalid choice: %r (choose from %s)"
-msgstr ""
+msgstr "Option %s : choix invalides : %r (à choisir dans %s)"
 
 #: /usr/lib/python2.6/optparse.py:1245
 msgid "show this help message and exit"
@@ -281,9 +281,8 @@ msgid "No executable file matched pattern \"%s\"."
 msgstr "Aucun fichier exécutable ne correspond au critère \"%s\"."
 
 #: pisi/actionsapi/pythonmodules.py:56
-#, fuzzy
 msgid "Configuration failed."
-msgstr "La configuration de %s a échoué."
+msgstr "La configuration a échoué."
 
 #: pisi/actionsapi/pythonmodules.py:81
 msgid "Running %s failed."
@@ -538,9 +537,8 @@ msgid "Repository %s does not exist. Cannot remove."
 msgstr "Le dépôt %s n'existe pas. Impossible de le supprimer."
 
 #: pisi/api.py:828
-#, fuzzy
 msgid "Updating repository: %s"
-msgstr "* Mise à jour du dépôt : %s"
+msgstr "Mise à jour du dépôt : %s"
 
 #: pisi/api.py:838
 msgid "%s repository information is up-to-date."
@@ -588,7 +586,7 @@ msgstr "Installation de %s, version majeure %s, version mineure %s, build %s"
 
 #: pisi/atomicoperations.py:192 pisi/operations/build.py:593
 msgid "%s-%s is not a valid PiSi version format"
-msgstr ""
+msgstr "%s-%s n'est pas un format de version valide de PiSi."
 
 #: pisi/atomicoperations.py:198
 msgid "%s package cannot be installed unless the dependencies are satisfied"
@@ -644,7 +642,7 @@ msgstr "La configuration de %s a échoué."
 
 #: pisi/atomicoperations.py:415
 msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
-msgstr ""
+msgstr "Impossible de déplacer les fichiers suivants. La réinstallation de ce paquet est fortement recommandée."
 
 #: pisi/atomicoperations.py:506 pisi/atomicoperations.py:509
 #: pisi/atomicoperations.py:516
@@ -736,14 +734,12 @@ msgid "add-repo options"
 msgstr "Options d'add-repo"
 
 #: pisi/cli/addrepo.py:46
-#, fuzzy
 msgid "Ignore repository distribution check"
-msgstr "Passer outre la vérification du numéro de version et de l'architecture de la distribution"
+msgstr "Passer outre la vérification du dépôt de la distribution"
 
 #: pisi/cli/addrepo.py:47
-#, fuzzy
 msgid "Does not fetch repository index and does not check distribution match"
-msgstr "Le dépôt n'a pas pu être ajouté car l'architecture de la distribution ne correspond pas."
+msgstr "Ne télécharge pas l'index du dépôt et ne vérifie pas la correspondance avec la distribution."
 
 #: pisi/cli/addrepo.py:50
 msgid "Add repository at given position (0 is first)"
@@ -751,12 +747,11 @@ msgstr "Ajouter un dépôt à la position donnée (0 est la première)"
 
 #: pisi/cli/addrepo.py:60
 msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
-msgstr ""
+msgstr "Impossible de vérifier la compatibilité de ce dépôt car il n'a pas d'informations à propos de la distribution."
 
 #: pisi/cli/addrepo.py:66
-#, fuzzy
 msgid "Repository distribution does not match. Removing %s from system."
-msgstr "Impossible d'atteindre le dépôt %s. Suppression de %s du système."
+msgstr "Le dépôt et la distribution ne correspondent pas. Retrait de %s du système."
 
 #: pisi/cli/addrepo.py:81
 msgid ""
@@ -764,6 +759,9 @@ msgid ""
 "By confirming this you are also adding the repository to your system without checking the distribution of the repository.\n"
 "Do you want to continue?"
 msgstr ""
+"Ajouter le dépôt %s sans mettre à jour la base de données ?\n"
+"En confirmant cela vous ajoutez aussi le dépôt à votre système sans vérifier sa conformité.\n"
+"Voulez-vous continuer?"
 
 #: pisi/cli/addrepo.py:95
 msgid "%s repository could not be reached. Removing %s from system."
@@ -1741,13 +1739,13 @@ msgstr ""
 "\n"
 "Lists currently tracked repositories.\n"
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr "actif"
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
 msgstr "inactif"
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
+msgstr "actif"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
@@ -2220,13 +2218,12 @@ msgid "Package %s not found."
 msgstr "Le paquet %s est introuvable."
 
 #: pisi/db/repodb.py:159
-#, fuzzy
 msgid "%s repository needs to be updated"
-msgstr "Le dépôt %s est à jour."
+msgstr "Le dépôt %s a besoin d'être mis à jour."
 
 #: pisi/db/repodb.py:165
 msgid "Error parsing repository index information. Index file does not exist or is malformed."
-msgstr ""
+msgstr "Erreur d'analyse de l'index du dépôt. Le fichier d'index n'existe pas ou est malformé."
 
 #: pisi/fetcher.py:132
 msgid "Urlgrabber needs to be installed to run this command"
@@ -2261,9 +2258,8 @@ msgid "Bandwidth usage is limited to %s KB/s"
 msgstr "L'utilisation de la bande passante est restreinte à %s Ko/s"
 
 #: pisi/fetcher.py:212
-#, fuzzy
 msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
-msgstr "Le serveur ne permet pas d'effectuer des téléchargements partiels. Tout ce qui a été précédemment téléchargé du fichier va être écrasé."
+msgstr "Le fichier distant ne peut pas être atteint. La portion du fichier qui a été téléchargée sera supprimée."
 
 #: pisi/fetcher.py:221
 msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
@@ -2383,7 +2379,7 @@ msgstr "La source %s n'est dans aucun des dépôts actifs."
 
 #: pisi/operations/build.py:261
 msgid "pspec.xml avoids this package from building for '%s'"
-msgstr ""
+msgstr "pspec.xml évite la construction de ce paquet pour '%s'"
 
 #: pisi/operations/build.py:264
 msgid "Building PiSi source package: %s"
