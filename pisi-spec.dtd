@@ -132,7 +132,7 @@ suck anyway -->
 
 <!ELEMENT Update (#PCDATA | Date | Version | Comment | Type | Requires | Name | Email)*>
 <!ATTLIST Update release CDATA #REQUIRED>
-<!ATTLIST Update type (security|bug) #IMPLIED>
+<!ATTLIST Update type (critical|security) #IMPLIED>
 
 <!ELEMENT Date (#PCDATA)>
 <!ELEMENT Version (#PCDATA)>
