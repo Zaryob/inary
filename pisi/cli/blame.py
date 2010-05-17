@@ -31,7 +31,7 @@ Usage: blame <package> ... <package>
 
     def __init__(self, args=None):
         super(Blame, self).__init__(args)
-        self.packagedb = pisi.db.packagedb.PackageDB()
+        self.installdb = pisi.db.installdb.InstallDB()
 
     name = ("blame", "bl")
 
@@ -50,8 +50,8 @@ Usage: blame <package> ... <package>
             return
 
         for package in self.args:
-            if self.packagedb.has_package(package):
-                pkg = self.packagedb.get_package(package)
+            if self.installdb.has_package(package):
+                pkg = self.installdb.get_package(package)
                 release = ctx.get_option('release')
                 if not release and not ctx.get_option('all'):
                     self.print_package_info(pkg)
