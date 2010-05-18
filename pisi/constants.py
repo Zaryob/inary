@@ -18,6 +18,8 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
+from pisi.util import Singleton
+
 class _constant:
     "Constant members implementation"
     class ConstError(TypeError):
@@ -37,6 +39,8 @@ class _constant:
 
 class Constants:
     "Pisi Constants Singleton"
+
+    __metaclass__ = Singleton
 
     __c = _constant()
 

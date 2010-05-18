@@ -43,6 +43,8 @@ class Options(object):
 class Config(object):
     """Config Singleton"""
 
+    __metaclass__ = pisi.util.Singleton
+
     def __init__(self, options = Options()):
         self.options = options
         self.values = pisi.configfile.ConfigurationFile("/etc/pisi/pisi.conf")
