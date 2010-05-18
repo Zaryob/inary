@@ -86,7 +86,7 @@ Lists previous operations.""")
             class LessPipe():
                 def __init__(self):
                     import subprocess
-                    self.less = subprocess.Popen(["less", "-"],
+                    self.less = subprocess.Popen(["less", "-K", "-"],
                                             stdin=subprocess.PIPE)
 
                 def __del__(self):
