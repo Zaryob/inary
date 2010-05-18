@@ -151,7 +151,7 @@ class Fetcher:
                            copy_local   = 1,
                            user_agent   = 'PiSi Fetcher/' + pisi.__version__)
         except urlgrabber.grabber.URLGrabError, e:
-            raise FetchError(_('Could not fetch destination file "%s": %s') % (self.archive_file, e))
+            raise FetchError(_('Could not fetch destination file "%s": %s') % (self.url.get_uri(), e))
 
         if os.stat(self.partial_file).st_size == 0:
             os.remove(self.partial_file)
@@ -207,7 +207,7 @@ class Fetcher:
         import urllib2
         try:
             file_obj = urllib2.urlopen(urllib2.Request(self.url.get_uri()))
-        except urllib2.HTTPError:
+        except urllib2.URLError:
             ctx.ui.debug(_("Remote file can not be reached. Previously downloaded part of the file will be removed."))
             os.remove(self.partial_file)
             return None
