@@ -1,12 +1,13 @@
 # Copyright (C) YEAR ORGANIZATION
 #
 # Patrik Karlsson <patrik@pardus.nu>, 2009, 2010.
+# Patrik Karlsson <patrik@trixon.se>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "POT-Creation-Date: 2010-05-13 19:56+EEST\n"
-"PO-Revision-Date: 2010-03-13 09:32+0100\n"
-"Last-Translator: Patrik Karlsson <patrik@pardus.nu>\n"
+"PO-Revision-Date: 2010-05-19 10:33+0200\n"
+"Last-Translator: Patrik Karlsson <patrik@trixon.se>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,38 +17,36 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: /usr/lib/python2.6/optparse.py:140
-#, fuzzy
 msgid "no such option: %s"
-msgstr "Beskrivning: %s\n"
+msgstr "alternativ saknas: %s"
 
 #: /usr/lib/python2.6/optparse.py:151
 msgid "ambiguous option: %s (%s?)"
-msgstr ""
+msgstr "Tvetydigt argument: %s (%s?)"
 
 #: /usr/lib/python2.6/optparse.py:374
 msgid "Usage: %s\n"
-msgstr ""
+msgstr "Användning: %s\n"
 
 #: /usr/lib/python2.6/optparse.py:393
 msgid "Usage"
-msgstr ""
+msgstr "Använd"
 
 #: /usr/lib/python2.6/optparse.py:418
 msgid "integer"
-msgstr ""
+msgstr "heltal"
 
 #: /usr/lib/python2.6/optparse.py:419
 msgid "long integer"
-msgstr ""
+msgstr "långt heltal"
 
 #: /usr/lib/python2.6/optparse.py:420
 msgid "floating-point"
-msgstr ""
+msgstr "flyttal"
 
 #: /usr/lib/python2.6/optparse.py:421
-#, fuzzy
 msgid "complex"
-msgstr " [slutförd]\n"
+msgstr "komplex"
 
 #: /usr/lib/python2.6/optparse.py:429
 msgid "option %s: invalid %s value: %r"
@@ -59,11 +58,11 @@ msgstr ""
 
 #: /usr/lib/python2.6/optparse.py:1245
 msgid "show this help message and exit"
-msgstr ""
+msgstr "visa detta hjälpmeddelande och avsluta"
 
 #: /usr/lib/python2.6/optparse.py:1250
 msgid "show program's version number and exit"
-msgstr ""
+msgstr "visa programmets version och avsluta"
 
 #: /usr/lib/python2.6/optparse.py:1273
 msgid "%prog [options]"
@@ -83,28 +82,25 @@ msgstr ""
 
 #: /usr/lib/python2.6/optparse.py:1621
 msgid "Options"
-msgstr ""
+msgstr "Alternativ"
 
 #: pisi-cli:42
 msgid "Keyboard Interrupt: Exiting..."
 msgstr "Tangentbordsavbrott: Avslutar..."
 
 #: pisi-cli:45
-#, fuzzy
 msgid "Program terminated."
 msgstr "Programmet avbröts."
 
 #: pisi-cli:48
-#, fuzzy
 msgid ""
 "Unhandled internal exception.\n"
 "Please file a bug report to <http://bugs.pardus.org.tr>."
 msgstr ""
 "Ohanterat internt undantag.\n"
-"Vänligen fyll i en felrapport. (http://bugs.pardus.org.tr)"
+"Vänligen fyll i en felrapport på <http://bugs.pardus.org.tr>."
 
 #: pisi-cli:54
-#, fuzzy
 msgid "System error. Program terminated."
 msgstr "Systemfel. Programmet avbröts."
 
@@ -113,11 +109,12 @@ msgid "Please use 'pisi help' for general help."
 msgstr "Vänligen använd 'pisi help' för allmän hjälp."
 
 #: pisi-cli:66
-#, fuzzy
 msgid ""
 "\n"
 "Traceback:"
-msgstr "Bakåtspårning:"
+msgstr ""
+"\n"
+"Bakåtspårning:"
 
 #: pisi-cli:69
 msgid "Use --debug to see a traceback."
@@ -147,20 +144,20 @@ msgstr "Konfigurationsskript hittades ej."
 #: pisi/actionsapi/perlmodules.py:72 pisi/actionsapi/pythonmodules.py:62
 #: pisi/actionsapi/scons.py:39
 msgid "Make failed."
-msgstr ""
+msgstr "Make misslyckades."
 
 #: pisi/actionsapi/autotools.py:127 pisi/actionsapi/autotools.py:138
 #: pisi/actionsapi/cmaketools.py:102 pisi/actionsapi/cmaketools.py:112
 #: pisi/actionsapi/kde.py:79 pisi/actionsapi/pythonmodules.py:67
 #: pisi/actionsapi/scons.py:43
 msgid "Install failed."
-msgstr ""
+msgstr "Installation misslyckades."
 
 #: pisi/actionsapi/autotools.py:131 pisi/actionsapi/autotools.py:142
 #: pisi/actionsapi/cmaketools.py:81 pisi/actionsapi/cmaketools.py:106
 #: pisi/actionsapi/cmaketools.py:116 pisi/actionsapi/kde.py:81
 msgid "No Makefile found."
-msgstr ""
+msgstr "Ingen Make-fil funnen."
 
 #: pisi/actionsapi/autotools.py:147
 msgid "Running aclocal failed."
@@ -283,7 +280,6 @@ msgid "No executable file matched pattern \"%s\"."
 msgstr ""
 
 #: pisi/actionsapi/pythonmodules.py:56
-#, fuzzy
 msgid "Configuration failed."
 msgstr "Konfigureringen misslyckades."
 
@@ -540,9 +536,8 @@ msgid "Repository %s does not exist. Cannot remove."
 msgstr "Förrådet % finns inte och kan därmed inte tas bort."
 
 #: pisi/api.py:828
-#, fuzzy
 msgid "Updating repository: %s"
-msgstr "* Uppdaterar förråd: %s"
+msgstr "Uppdaterar förråd: %s"
 
 #: pisi/api.py:838
 msgid "%s repository information is up-to-date."
@@ -643,7 +638,9 @@ msgid "%s configuration failed."
 msgstr ""
 
 #: pisi/atomicoperations.py:415
-msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
+msgid ""
+"Unable to relocate following files. Reinstallation of this package is "
+"strongly recommended."
 msgstr ""
 
 #: pisi/atomicoperations.py:506 pisi/atomicoperations.py:509
@@ -668,7 +665,8 @@ msgid "Not removing conflicted file : %s"
 msgstr "Tar inte bort fil i konflikt: %s"
 
 #: pisi/atomicoperations.py:661
-msgid "Installed file %s does not exist on system [Probably you manually deleted]"
+msgid ""
+"Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
 
 #: pisi/cli/__init__.py:116
@@ -718,7 +716,8 @@ msgid ""
 "\n"
 "If no repo is given, add-repo pardus-devel repo is added by default\n"
 "\n"
-"NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment\n"
+"NB: We support only local files (e.g., /a/b/c) and http:// URIs at the "
+"moment\n"
 msgstr ""
 
 #: pisi/cli/addrepo.py:45
@@ -738,18 +737,20 @@ msgid "Add repository at given position (0 is first)"
 msgstr ""
 
 #: pisi/cli/addrepo.py:60
-msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
+msgid ""
+"Unable to check compatibility of this repository as it does not have "
+"information about the distribution."
 msgstr ""
 
 #: pisi/cli/addrepo.py:66
-#, fuzzy
 msgid "Repository distribution does not match. Removing %s from system."
-msgstr "Förrådet % finns inte och kan därmed inte tas bort."
+msgstr "Förrådsdistributionen stämmer inte. Tar bort %s från systemet."
 
 #: pisi/cli/addrepo.py:81
 msgid ""
 "Add %s repository without updating the database?\n"
-"By confirming this you are also adding the repository to your system without checking the distribution of the repository.\n"
+"By confirming this you are also adding the repository to your system without "
+"checking the distribution of the repository.\n"
 "Do you want to continue?"
 msgstr ""
 
@@ -864,7 +865,9 @@ msgid "Break build after fetching the source archive"
 msgstr ""
 
 #: pisi/cli/build.py:83
-msgid "Break build after unpacking the source archive, checking sha1sum and applying patches"
+msgid ""
+"Break build after unpacking the source archive, checking sha1sum and "
+"applying patches"
 msgstr ""
 
 #: pisi/cli/build.py:85
@@ -1059,8 +1062,10 @@ msgid ""
 "\n"
 "Usage: delta oldpackage newpackage\n"
 "\n"
-"Delta command finds the changed files between the given packages by comparing the sha1sum of the files\n"
-"and creates a delta pisi package with the changed files between two releases.\n"
+"Delta command finds the changed files between the given packages by "
+"comparing the sha1sum of the files\n"
+"and creates a delta pisi package with the changed files between two "
+"releases.\n"
 "\n"
 msgstr ""
 
@@ -1427,11 +1432,15 @@ msgid "Fetch upgrades but do not install."
 msgstr ""
 
 #: pisi/cli/install.py:65
-msgid "When installing packages, ignore packages and components whose basenames match pattern."
+msgid ""
+"When installing packages, ignore packages and components whose basenames "
+"match pattern."
 msgstr ""
 
 #: pisi/cli/install.py:67
-msgid "When installing packages, ignore packages and components whose basenames match any pattern contained in file."
+msgid ""
+"When installing packages, ignore packages and components whose basenames "
+"match any pattern contained in file."
 msgstr ""
 
 #: pisi/cli/install.py:93
@@ -1517,7 +1526,8 @@ msgid "Show detailed install info"
 msgstr ""
 
 #: pisi/cli/listinstalled.py:75 pisi/cli/listupgrades.py:77
-msgid "Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgid ""
+"Package Name     |St|   Version|  Rel.| Build|  Distro|             Date"
 msgstr ""
 
 #: pisi/cli/listnewest.py:26
@@ -1536,11 +1546,15 @@ msgid "list-newest options"
 msgstr ""
 
 #: pisi/cli/listnewest.py:47
-msgid "List new packages added to repository after this given date formatted as yyyy-mm-dd"
+msgid ""
+"List new packages added to repository after this given date formatted as "
+"yyyy-mm-dd"
 msgstr ""
 
 #: pisi/cli/listnewest.py:49
-msgid "List new packages added to repository after last nth previous repository update"
+msgid ""
+"List new packages added to repository after last nth previous repository "
+"update"
 msgstr ""
 
 #: pisi/cli/listnewest.py:77
@@ -1571,13 +1585,13 @@ msgid ""
 "Lists currently tracked repositories.\n"
 msgstr ""
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr "aktiverad"
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
 msgstr "avaktiverad"
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
+msgstr "aktiverad"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
@@ -1817,11 +1831,15 @@ msgid "Name of the to be upgraded packages' repository"
 msgstr ""
 
 #: pisi/cli/upgrade.py:73
-msgid "When upgrading system, ignore packages and components whose basenames match pattern."
+msgid ""
+"When upgrading system, ignore packages and components whose basenames match "
+"pattern."
 msgstr ""
 
 #: pisi/cli/upgrade.py:75
-msgid "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
+msgid ""
+"When upgrading system, ignore packages and components whose basenames match "
+"any pattern contained in file."
 msgstr ""
 
 #: pisi/cli/upgrade.py:88
@@ -1983,12 +2001,13 @@ msgid "Package %s not found."
 msgstr ""
 
 #: pisi/db/repodb.py:159
-#, fuzzy
 msgid "%s repository needs to be updated"
-msgstr "%s-förrådets information är aktuell."
+msgstr "%s-förrådet behöver uppdateras"
 
 #: pisi/db/repodb.py:165
-msgid "Error parsing repository index information. Index file does not exist or is malformed."
+msgid ""
+"Error parsing repository index information. Index file does not exist or is "
+"malformed."
 msgstr ""
 
 #: pisi/fetcher.py:132
@@ -2012,7 +2031,9 @@ msgid "Could not fetch destination file \"%s\": %s"
 msgstr ""
 
 #: pisi/fetcher.py:159
-msgid "A problem occurred. Please check the archive address and/or permissions again."
+msgid ""
+"A problem occurred. Please check the archive address and/or permissions "
+"again."
 msgstr ""
 
 #: pisi/fetcher.py:192
@@ -2024,11 +2045,15 @@ msgid "Bandwidth usage is limited to %s KB/s"
 msgstr ""
 
 #: pisi/fetcher.py:212
-msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
+msgid ""
+"Remote file can not be reached. Previously downloaded part of the file will "
+"be removed."
 msgstr ""
 
 #: pisi/fetcher.py:221
-msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
+msgid ""
+"Server doesn't support partial downloads. Previously downloaded part of the "
+"file will be over-written."
 msgstr ""
 
 #: pisi/file.py:66
@@ -2164,11 +2189,15 @@ msgid "PartOf tag not defined, looking for component"
 msgstr ""
 
 #: pisi/operations/build.py:389
-msgid "Cannot find component.xml in remote directory, Source is now part of unknown component"
+msgid ""
+"Cannot find component.xml in remote directory, Source is now part of unknown "
+"component"
 msgstr ""
 
 #: pisi/operations/build.py:395
-msgid "Cannot find component.xml in upper directory, Source is now part of unknown component"
+msgid ""
+"Cannot find component.xml in upper directory, Source is now part of unknown "
+"component"
 msgstr ""
 
 #: pisi/operations/build.py:401
@@ -2240,7 +2269,8 @@ msgid "unable to call function from actions: %s"
 msgstr ""
 
 #: pisi/operations/build.py:607
-msgid "Safety switch: following extra packages in system.devel will be installed: "
+msgid ""
+"Safety switch: following extra packages in system.devel will be installed: "
 msgstr "Säkerhetslås: följande paket i system.devel kommer att installeras: "
 
 #: pisi/operations/build.py:612
@@ -2328,7 +2358,9 @@ msgid "Generating %s,"
 msgstr ""
 
 #: pisi/operations/build.py:1008
-msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
+msgid ""
+"Build number is not available. For repo builds you must enable buildno in "
+"pisi.conf."
 msgstr ""
 
 #: pisi/operations/build.py:1026
@@ -2340,7 +2372,8 @@ msgid "Done."
 msgstr ""
 
 #: pisi/operations/build.py:1078
-msgid "All of the files under the install dir (%s) has been collected by package(s)"
+msgid ""
+"All of the files under the install dir (%s) has been collected by package(s)"
 msgstr ""
 
 #: pisi/operations/build.py:1082
@@ -2390,18 +2423,21 @@ msgid "No packages to emerge."
 msgstr ""
 
 #: pisi/operations/emerge.py:51
-#, fuzzy
 msgid ""
 "The following list of packages will be installed\n"
 "from repository in the respective order to satisfy dependencies:\n"
-msgstr "Följande paket kommer att installeras i respektive ordning för att uppfylla beroenden"
+msgstr ""
+"Följande paket kommer att installeras i respektive ordning för att uppfylla "
+"beroenden:\n"
 
 #: pisi/operations/emerge.py:54
-#, fuzzy
 msgid ""
 "The following list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
-msgstr "Följande paket kommer att installeras i respektive ordning för att uppfylla beroenden"
+msgstr ""
+"Följande paket kommer att byggas och installeras i respektive ordning för "
+"att uppfylla "
+"beroenden:\n"
 
 #: pisi/operations/emerge.py:62 pisi/operations/install.py:83
 msgid "There are extra packages due to dependencies. Do you want to continue?"
@@ -2467,7 +2503,9 @@ msgid ""
 msgstr ""
 
 #: pisi/operations/install.py:48 pisi/operations/install.py:135
-msgid "The following package(s) are already installed and are not going to be installed again:"
+msgid ""
+"The following package(s) are already installed and are not going to be "
+"installed again:"
 msgstr ""
 
 #: pisi/operations/install.py:54 pisi/operations/install.py:214
@@ -2475,9 +2513,8 @@ msgid "No packages to install."
 msgstr ""
 
 #: pisi/operations/install.py:72
-#, fuzzy
 msgid "Following packages will be installed:"
-msgstr "Följande paket kommer att uppdateras: "
+msgstr "Följande paket kommer att installeras: "
 
 #: pisi/operations/install.py:77 pisi/operations/upgrade.py:181
 msgid "Total size of package(s): %.2f %s"
@@ -2504,9 +2541,9 @@ msgid "External dependencies not satisfied: %s"
 msgstr ""
 
 #: pisi/operations/install.py:198
-#, fuzzy
-msgid "The following packages will be installed in order to satisfy dependencies:"
-msgstr "Följande paket kommer att installeras i respektive ordning för att uppfylla beroenden\n"
+msgid ""
+"The following packages will be installed in order to satisfy dependencies:"
+msgstr "Följande paket kommer att installeras för att uppfylla beroenden:"
 
 #: pisi/operations/install.py:202
 msgid "External dependencies not satisfied"
@@ -2521,14 +2558,12 @@ msgid "%s dependency of package %s is not satisfied"
 msgstr ""
 
 #: pisi/operations/remove.py:44
-#, fuzzy
 msgid "Safety switch prevents the removal of following packages:\n"
-msgstr "Säkerhetslås: kan inte ta bort följande paket i system.base"
+msgstr "Säkerhetsspärren förhindrar borttagning av följande paket:\n"
 
 #: pisi/operations/remove.py:49 pisi/operations/upgrade.py:352
-#, fuzzy
 msgid "Safety switch: The component system.base cannot be found."
-msgstr "Säkerhetslås: kan inte hitta komponenten system.base"
+msgstr "Säkerhetsspärr: Kan inte hitta komponenten system.base"
 
 #: pisi/operations/remove.py:56
 msgid "Package %s does not exist. Cannot remove."
@@ -2539,11 +2574,12 @@ msgid "No packages to remove."
 msgstr ""
 
 #: pisi/operations/remove.py:69
-#, fuzzy
 msgid ""
 "The following list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
-msgstr "Följande paket kommer att installeras i respektive ordning för att uppfylla beroenden"
+msgstr ""
+"Följande paket kommer att installeras i respektive ordning för att uppfylla "
+"beroenden:\n"
 
 #: pisi/operations/remove.py:74
 msgid "Package removal declined"
@@ -2566,11 +2602,15 @@ msgid "Replaced package remains"
 msgstr ""
 
 #: pisi/operations/upgrade.py:53
-msgid "You must restart the following service(s) manually in order the updated versions of software to take effect:"
+msgid ""
+"You must restart the following service(s) manually in order the updated "
+"versions of software to take effect:"
 msgstr ""
 
 #: pisi/operations/upgrade.py:61
-msgid "You must restart your system in order the updated versions of the following package(s) to take effect:"
+msgid ""
+"You must restart your system in order the updated versions of the following "
+"package(s) to take effect:"
 msgstr ""
 
 #: pisi/operations/upgrade.py:85
@@ -2594,14 +2634,12 @@ msgid "Package %s is already at the latest build %s."
 msgstr ""
 
 #: pisi/operations/upgrade.py:176
-#, fuzzy
 msgid "The following packages will be upgraded:"
-msgstr "Följande paket kommer att uppdateras: "
+msgstr "Följande paket kommer att uppdateras:"
 
 #: pisi/operations/upgrade.py:186
-#, fuzzy
 msgid "There are extra packages due to dependencies."
-msgstr "Det finns extra paket på grund av beroenden. Vill du fortsätta?"
+msgstr "Det finns extra paket på grund av beroenden."
 
 #: pisi/operations/upgrade.py:266
 msgid "Dependency %s of %s cannot be satisfied"
@@ -2612,14 +2650,12 @@ msgid "Upgrade is not possible."
 msgstr ""
 
 #: pisi/operations/upgrade.py:329
-#, fuzzy
 msgid "Safety switch forces the installation of following packages:"
-msgstr "Säkerhetslås: kan inte ta bort följande paket i system.base"
+msgstr "Säkerhetsspärren påtvingar installation av följande paket:"
 
 #: pisi/operations/upgrade.py:345
-#, fuzzy
 msgid "Safety switch forces the upgrade of following packages:"
-msgstr "Säkerhetslås: kan inte ta bort följande paket i system.base"
+msgstr "Säkerhetsspärren påtvingar uppdatering av följande paket:"
 
 #: pisi/package.py:56
 msgid ""
@@ -2640,7 +2676,9 @@ msgid "LocalText: unable to get either current or default locale"
 msgstr ""
 
 #: pisi/pxml/autoxml.py:120 pisi/pxml/autoxml.py:135
-msgid "Tag should have at least the current locale, or failing that an English or Turkish version"
+msgid ""
+"Tag should have at least the current locale, or failing that an English or "
+"Turkish version"
 msgstr ""
 
 #: pisi/pxml/autoxml.py:373
@@ -2697,9 +2735,8 @@ msgid "Object cannot be encoded"
 msgstr ""
 
 #: pisi/pxml/autoxml.py:735 pisi/pxml/autoxml.py:854
-#, fuzzy
 msgid "Object cannot be formatted"
-msgstr "Verktyget %s kunde inte hittas"
+msgstr "Objektet kan inte formateras"
 
 #: pisi/pxml/autoxml.py:751
 msgid "List type must contain only one element"
