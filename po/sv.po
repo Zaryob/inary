@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "POT-Creation-Date: 2010-05-13 19:56+EEST\n"
-"PO-Revision-Date: 2010-05-19 10:33+0200\n"
+"PO-Revision-Date: 2010-05-19 10:55+0200\n"
 "Last-Translator: Patrik Karlsson <patrik@trixon.se>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
@@ -231,7 +231,7 @@ msgstr ""
 
 #: pisi/actionsapi/pisitools.py:142
 msgid "ActionsAPI [doman]: Wrong man page file: %s"
-msgstr ""
+msgstr "ActionsAPI [doman]: Fel man-sidefil: %s"
 
 #: pisi/actionsapi/pisitools.py:169
 msgid "No file matched pattern \"%s\". 'domove' operation failed."
@@ -239,7 +239,7 @@ msgstr ""
 
 #: pisi/actionsapi/pisitools.py:188
 msgid "ActionsAPI [rename]: %s: %s"
-msgstr ""
+msgstr "ActionsAPI [rename]: %s: %s"
 
 #: pisi/actionsapi/pisitools.py:203
 msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
@@ -255,7 +255,7 @@ msgstr ""
 
 #: pisi/actionsapi/pisitools.py:236
 msgid "ActionsAPI [dosym]: File already exists: %s"
-msgstr ""
+msgstr "ActionsAPI [dosym]: Filen finns redan: %s"
 
 #: pisi/actionsapi/pisitools.py:245 pisi/actionsapi/pisitoolsfunctions.py:71
 msgid "No file matched pattern \"%s\"."
@@ -293,87 +293,87 @@ msgstr "Kan inte skapa katalog %s"
 
 #: pisi/actionsapi/shelltools.py:57
 msgid "ActionsAPI [echo]: Can't append to file %s."
-msgstr ""
+msgstr "ActionsAPI [echo]: Kan inte lägga till till filen %s."
 
 #: pisi/actionsapi/shelltools.py:63
 msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
-msgstr ""
+msgstr "ActionsAPI [chmod]: Ingen fil matchade mönstret \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:70
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: %s)"
-msgstr ""
+msgstr "ActionsAPI [chmod]: Åtgärden ej tillåten: %s (mode: %s)"
 
 #: pisi/actionsapi/shelltools.py:73
 msgid "ActionsAPI [chmod]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [chmod]: Filen %s finns inte."
 
 #: pisi/actionsapi/shelltools.py:81
 msgid "ActionsAPI [chown]: Operation not permitted: %s (uid: %s, gid: %s)"
-msgstr ""
+msgstr "ActionsAPI [chown]: Åtgärden ej tillåten: %s (uid: %s, gid: %s)"
 
 #: pisi/actionsapi/shelltools.py:84
 msgid "ActionsAPI [chown]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [chown]: Filen %s finns inte."
 
 #: pisi/actionsapi/shelltools.py:91
 msgid "ActionsAPI [sym]: Permission denied: %s to %s"
-msgstr ""
+msgstr "ActionsAPI [sym]: Tillstånd nekas: %s till %s"
 
 #: pisi/actionsapi/shelltools.py:105
 msgid "ActionsAPI [unlink]: Permission denied: %s."
-msgstr ""
+msgstr "ActionsAPI [unlink]: Tillstånd nekas: %s."
 
 #: pisi/actionsapi/shelltools.py:109
 msgid "ActionsAPI [unlink]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [unlink]: Filen %s finns inte."
 
 #: pisi/actionsapi/shelltools.py:117
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: %s"
-msgstr ""
+msgstr "ActionsAPI [unlinkDir]: Åtgärd ej tillåten: %s"
 
 #: pisi/actionsapi/shelltools.py:121
 msgid "ActionsAPI [unlinkDir]: Directory %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [unlinkDir]: Katalogen %s finns inte."
 
 #: pisi/actionsapi/shelltools.py:127
 msgid "ActionsAPI [move]: No file matched pattern \"%s\"."
-msgstr ""
+msgstr "ActionsAPI [move]: Ingen fil matchade mönstret \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:134
 msgid "ActionsAPI [move]: Permission denied: %s to %s"
-msgstr ""
+msgstr "ActionsAPI [move]: Tillstånd nekas: %s till %s"
 
 #: pisi/actionsapi/shelltools.py:136
 msgid "ActionsAPI [move]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [move]: Filen %s finns inte."
 
 #: pisi/actionsapi/shelltools.py:143
 msgid "ActionsAPI [copy]: No file matched pattern \"%s\"."
-msgstr ""
+msgstr "ActionsAPI [copy]: Ingen fil matchade mönstret \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:150
 msgid "ActionsAPI [copy]: Permission denied: %s to %s"
-msgstr ""
+msgstr "ActionsAPI [copy]: Tillstånd nekas: %s till %s"
 
 #: pisi/actionsapi/shelltools.py:166
 msgid "ActionsAPI [copy]: File %s does not exist."
-msgstr ""
+msgstr "ActionsAPI [copy]: Filen %s finns inte."
 
 #: pisi/actionsapi/shelltools.py:181
 msgid "ActionsAPI [copytree] %s to %s: %s"
-msgstr ""
+msgstr "ActionsAPI [copytree] %s till %s: %s"
 
 #: pisi/actionsapi/shelltools.py:183
 msgid "ActionsAPI [copytree]: Directory %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [copytree]: Katalogen %s finns inte."
 
 #: pisi/actionsapi/shelltools.py:191
 msgid "ActionsAPI [touch]: No file matched pattern \"%s\"."
-msgstr ""
+msgstr "ActionsAPI [touch]: Ingen fil matchade mönstret \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:200
 msgid "ActionsAPI [touch]: Permission denied: %s"
-msgstr ""
+msgstr "ActionsAPI [touch]: Tillstånd nekas: %s"
 
 #: pisi/actionsapi/shelltools.py:255
 msgid "Command \"%s\" failed, return value was %d."
