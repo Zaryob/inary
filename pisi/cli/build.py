@@ -16,6 +16,7 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
+import pisi
 import pisi.api
 import pisi.cli.command as command
 import pisi.context as ctx
@@ -104,7 +105,7 @@ to be downloaded from a repository containing sources.
         self.init()
 
         if ctx.get_option('package_format') not in Build.package_formats:
-            raise Error(_('package_format must be one of %s ') % pisi.util.strlist(Build.package_formats))
+            raise pisi.Error(_('package_format must be one of %s ') % pisi.util.strlist(Build.package_formats))
 
         if ctx.get_option('output_dir'):
             ctx.ui.info(_('Output directory: %s') % ctx.config.options.output_dir)
