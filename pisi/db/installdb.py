@@ -82,7 +82,15 @@ class InstallDB(lazydb.LazyDB):
 
     def __add_to_revdeps(self, package, revdeps):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
-        meta_doc = piksemel.parse(metadata_xml)
+        try:
+            meta_doc = piksemel.parse(metadata_xml)
+        except:
+            # If package info is broken or not available, skip it.
+            ctx.ui.warning(_("Installation info for package '%s' is broken. "
+                             "Reinstall it to fix this problem.") % package)
+            del self.installed_db[package]
+            return
+
         pkg = meta_doc.getTag("Package")
         deps = pkg.getTag('RuntimeDependencies')
         if deps:
