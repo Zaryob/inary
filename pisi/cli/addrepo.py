@@ -89,8 +89,6 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
             if not ctx.get_option('no_fetch'):
                 try:
                     pisi.api.update_repo(name)
-                    if not ctx.get_option('ignore_check'):
-                        self.check_distro(name)
                 except (pisi.fetcher.FetchError, IOError):
                     warning = _("%s repository could not be reached. Removing %s from system.") % (name, name)
                     self.warn_and_remove(warning, name)

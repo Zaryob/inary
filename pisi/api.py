@@ -838,6 +838,8 @@ def __update_repo(repo, force=False):
             else:
                 return
 
+        repodb.check_distribution(repo)
+
         try:
             index.check_signature(repouri, repo)
         except pisi.file.NoSignatureFound, e:

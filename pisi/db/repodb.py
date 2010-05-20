@@ -27,6 +27,9 @@ import pisi.db.lazydb as lazydb
 class RepoError(pisi.Error):
     pass
 
+class IncompatibleRepoError(RepoError):
+    pass
+
 class Repo:
     def __init__(self, indexuri):
         self.indexuri = indexuri
@@ -225,19 +228,22 @@ class RepoDB(lazydb.LazyDB):
 
     def get_distribution(self, name):
         doc = self.get_repo_doc(name)
-        return doc.getTag("Distribution").getTagData("DistributionName")
+        return doc.getTag("Distribution").getTagData("SourceName")
 
     def get_distribution_release(self, name):
         doc = self.get_repo_doc(name)
         return doc.getTag("Distribution").getTagData("Version")
 
     def check_distribution(self, name):
+        if ctx.get_option('ignore_check'):
+            return
+
         dist_name = self.get_distribution(name)
         dist_release = self.get_distribution_release(name)
 
-        if not dist_name:
-            # If distribution info is not available, ignore for now.
-            return True
-
-        return dist_name == ctx.config.values.general.distribution and \
-                dist_release == ctx.config.values.general.distribution_release
+        if dist_name != ctx.config.values.general.distribution or \
+                dist_release != ctx.config.values.general.distribution_release:
+            self.deactivate_repo(name)
+            raise IncompatibleRepoError(
+                    _("Repository '%s' is not compatible with your "
+                      "distribution. Repository is disabled.") % name)
