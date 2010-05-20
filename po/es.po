@@ -1,7 +1,7 @@
 # translation of es.po to spanish
 # translation of es.po to
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Klemens Häckel <click3d_at_linuxmail_org>, 2007, 2008.
 # Christian Faure <christian.faurebouvard@laposte.net>, 2007.
 # klemens <click3d at linuxmail org>, 2007.
@@ -1786,13 +1786,13 @@ msgstr ""
 "\n"
 "Lista los repositorios configurados actualmente.\n"
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr "activo"
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
 msgstr "deshabilitado"
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
+msgstr "activo"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
@@ -2256,7 +2256,7 @@ msgstr "Distribución: %s, Tiempo de Instalación: %s\n"
 
 #: pisi/db/installdb.py:89
 msgid "Installation info for package '%s' is broken. Reinstall it to fix this problem."
-msgstr ""
+msgstr "Instalación del paquete '%s' está corrupta. Reinstale para solucionar el problema."
 
 #: pisi/db/installdb.py:326
 msgid "Package %s is not installed"
@@ -2287,9 +2287,8 @@ msgid "Error parsing repository index information. Index file does not exist or 
 msgstr "Error al analizar la información del repositorio. Archivo index no existe o está con mal formato."
 
 #: pisi/db/repodb.py:248
-#, fuzzy
 msgid "Repository '%s' is not compatible with your distribution. Repository is disabled."
-msgstr "Pacquete %s no es compatible con su versión de distribución %s %s."
+msgstr "Repositorio '%s' no es compatible con su distribución. Repositor deshabilitado."
 
 #: pisi/fetcher.py:131
 msgid "Urlgrabber needs to be installed to run this command"
