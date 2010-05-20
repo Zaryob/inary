@@ -150,7 +150,7 @@ def set_options(options):
            options.verbose     # flag controlling verbosity of the output messages
            options.output_dir  # build and delta operations package output directory
     """
-    ctx.config = pisi.config.Config(options)
+    ctx.config.set_options(options)
 
 def list_needs_restart():
     """

@@ -46,7 +46,7 @@ class Config(object):
     __metaclass__ = pisi.util.Singleton
 
     def __init__(self, options = Options()):
-        self.options = options
+        self.set_options(options)
         self.values = pisi.configfile.ConfigurationFile("/etc/pisi/pisi.conf")
 
         destdir = self.get_option('destdir')
@@ -65,6 +65,9 @@ class Config(object):
         # get the initial environment variables. this is needed for
         # build process.
         self.environ = copy.deepcopy(os.environ)
+
+    def set_options(self, options):
+        self.options = options
 
     def set_option(self, opt, val):
         setattr(self.options, opt, val)

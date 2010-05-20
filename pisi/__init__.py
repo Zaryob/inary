@@ -76,5 +76,5 @@ sys.setdefaultencoding('utf-8')
 
 atexit.register(_cleanup)
 
-ctx.config = pisi.config.Config(pisi.config.Options())
+ctx.config = pisi.config.Config()
 init_logging()
