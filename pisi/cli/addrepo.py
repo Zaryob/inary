@@ -54,18 +54,6 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
         ctx.ui.warning(message)
         pisi.api.remove_repo(repo)
 
-    def check_distro(self, repo):
-        if not self.repodb.get_distribution(repo):
-            ctx.ui.warning(
-                _("Unable to check compatibility of this repository as "
-                  "it does not have information about the distribution."))
-            return
-
-        if not self.repodb.check_distribution(repo):
-            self.warn_and_remove(
-                _("Repository distribution does not match. "
-                  "Removing %s from system.") % repo, repo)
-
     def run(self):
 
         if len(self.args)==2 or len(self.args)==0:
