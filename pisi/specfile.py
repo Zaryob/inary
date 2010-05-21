@@ -337,6 +337,9 @@ class Package:
 
         if old_release is None:
             installdb = pisi.db.installdb.InstallDB()
+            if not installdb.has_package(self.name):
+                return {}
+
             version, old_release, build = installdb.get_version(self.name)
 
         actions = {}
