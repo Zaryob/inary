@@ -49,25 +49,15 @@ class Config(object):
         self.set_options(options)
         self.values = pisi.configfile.ConfigurationFile("/etc/pisi/pisi.conf")
 
-        destdir = self.get_option('destdir')
-        if destdir:
-            if destdir.strip().startswith('/'):
-                self.destdir = destdir
-            else:
-                self.destdir = pisi.util.join_path(os.getcwd(), destdir)
-        else:
-            self.destdir = self.values.general.destinationdirectory
-
-        if not os.path.exists(self.destdir):
-            ctx.ui.warning( _('Destination directory %s does not exist. Creating it.') % self.destdir)
-            os.makedirs(self.destdir)
-
         # get the initial environment variables. this is needed for
         # build process.
         self.environ = copy.deepcopy(os.environ)
 
     def set_options(self, options):
         self.options = options
+
+        # Reset __dest_dir to re-read from options
+        self.__dest_dir = None
 
     def set_option(self, opt, val):
         setattr(self.options, opt, val)
@@ -84,7 +74,19 @@ class Config(object):
     # pkg_x_dir: per package directory for storing info type x
 
     def dest_dir(self):
-        return self.destdir
+        if self.__dest_dir is None:
+            destdir = self.get_option('destdir')
+            if destdir:
+                self.__dest_dir = os.path.abspath(destdir)
+            else:
+                self.__dest_dir = self.values.general.destinationdirectory
+
+            if not os.path.exists(self.__dest_dir):
+                ctx.ui.warning(_("Destination directory %s does not exist. "
+                                 "Creating it.") % self.__dest_dir)
+                os.makedirs(self.__dest_dir)
+
+        return self.__dest_dir
 
     def subdir(self, path):
         subdir = pisi.util.join_path(self.dest_dir(), path)
