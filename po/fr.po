@@ -1,6 +1,6 @@
 # translation of fr.po to French
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Amine Chadly <amine.chadly@gmail.com>, 2007, 2008.
 # Philippe Svetoslavsky <philsvet@gmail.com>, 2009, 2010.
 msgid ""
@@ -1731,13 +1731,13 @@ msgstr ""
 "\n"
 "Lists currently tracked repositories.\n"
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr "actif"
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
 msgstr "inactif"
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
+msgstr "actif"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
@@ -2191,7 +2191,7 @@ msgstr "Distribution : %s, Date d'installation : %s\n"
 
 #: pisi/db/installdb.py:89
 msgid "Installation info for package '%s' is broken. Reinstall it to fix this problem."
-msgstr ""
+msgstr "L'information d'installation du paquet '%s' est cassée. Réinstallez-la pour corriger le problème."
 
 #: pisi/db/installdb.py:326
 msgid "Package %s is not installed"
@@ -2222,9 +2222,8 @@ msgid "Error parsing repository index information. Index file does not exist or 
 msgstr "Erreur d'analyse de l'index du dépôt. Le fichier d'index n'existe pas ou est malformé."
 
 #: pisi/db/repodb.py:248
-#, fuzzy
 msgid "Repository '%s' is not compatible with your distribution. Repository is disabled."
-msgstr "Le paquet %s n'est pas compatible avec votre version de distribution %s %s."
+msgstr "Le dépôt '%s' n'est pas compatible avec votre version de distribution. Le dépôt est désactivé."
 
 #: pisi/fetcher.py:131
 msgid "Urlgrabber needs to be installed to run this command"
