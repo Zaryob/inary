@@ -829,7 +829,6 @@ def __update_repo(repo, force=False):
         repouri = repodb.get_repo(repo).indexuri.get_uri()
         try:
             index.read_uri_of_repo(repouri, repo)
-            pisi.db.historydb.HistoryDB().update_repo(repo, repouri, "update")
         except pisi.file.AlreadyHaveException, e:
             ctx.ui.info(_('%s repository information is up-to-date.') % repo)
             if force:
@@ -838,6 +837,7 @@ def __update_repo(repo, force=False):
             else:
                 return
 
+        pisi.db.historydb.HistoryDB().update_repo(repo, repouri, "update")
         repodb.check_distribution(repo)
 
         try:
