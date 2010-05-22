@@ -810,15 +810,18 @@ def remove_repo(name):
 @locked
 def update_repos(repos, force=False):
     pisi.db.historydb.HistoryDB().create_history("repoupdate")
+    updated = False
     for repo in repos:
-        __update_repo(repo, force)
-    pisi.db.regenerate_caches()
+        updated |= __update_repo(repo, force)
+    if updated:
+        pisi.db.regenerate_caches()
 
 @locked
 def update_repo(repo, force=False):
     pisi.db.historydb.HistoryDB().create_history("repoupdate")
-    __update_repo(repo, force)
-    pisi.db.regenerate_caches()
+    updated = __update_repo(repo, force)
+    if updated:
+        pisi.db.regenerate_caches()
 
 def __update_repo(repo, force=False):
     ctx.ui.action(_('Updating repository: %s') % repo)
@@ -835,7 +838,7 @@ def __update_repo(repo, force=False):
                 ctx.ui.info(_('Updating database at any rate as requested'))
                 index.read_uri_of_repo(repouri, repo, force = force)
             else:
-                return
+                return False
 
         pisi.db.historydb.HistoryDB().update_repo(repo, repouri, "update")
         repodb.check_distribution(repo)
@@ -848,6 +851,8 @@ def __update_repo(repo, force=False):
         ctx.ui.info(_('* Package database updated.'))
     else:
         raise pisi.Error(_('No repository named %s found.') % repo)
+
+    return True
 
 # FIXME: rebuild_db is only here for filesdb and it really is ugly. we should not need any rebuild.
 @locked
