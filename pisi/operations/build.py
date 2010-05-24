@@ -311,6 +311,9 @@ class Builder:
             if os.path.exists("/usr/lib/ccache/bin/gcc"):
                 # Add ccache directory for support Compiler Cache :)
                 os.environ["PATH"] = "/usr/lib/ccache/bin/:%s" % os.environ["PATH"]
+                # Force ccache to use /root/.ccache instead of $HOME/.ccache which can be modified
+                # through actions.py
+                os.environ["CCACHE_DIR"] = "/root/.ccache"
                 ctx.ui.info(_("CCache detected..."))
 
     def fetch_files(self):
@@ -566,7 +569,7 @@ class Builder:
 
                 # Extra path for ccache when needed
                 if ctx.config.values.build.buildhelper == "ccache":
-                    valid_paths.append("%s/.ccache" % os.environ["HOME"])
+                    valid_paths.append(os.environ.get("CCACHE_DIR", "/root/.ccache"))
 
                 ret = catbox.run(self.actionLocals[func], valid_paths, logger=self.log_sandbox_violation)
                 # Retcode can be 0 while there is a sanbox violation, so only look for violations to correctly handle it
