@@ -79,6 +79,17 @@ class Package:
         """Extract file with path to outdir"""
         self.extract_files([path], outdir)
 
+    def extract_file_synced(self, path, outdir):
+        """Extract file with path to outdir"""
+        data = self.impl.read_file(path)
+        fpath = util.join_path(outdir, path)
+        util.check_dir(os.path.dirname(fpath))
+
+        with open(fpath, "wb") as f:
+            f.write(data)
+            f.flush()
+            os.fsync(f.fileno())
+
     def extract_dir(self, dir, outdir):
         """Extract directory recursively, this function
         copies the directory archiveroot/dir to outdir"""

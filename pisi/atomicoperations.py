@@ -502,17 +502,17 @@ class Install(AtomicOperation):
             util.clean_dir(self.old_path)
 
         ctx.ui.info(_('Storing %s') % ctx.const.files_xml, verbose=True)
-        self.package.extract_file(ctx.const.files_xml, self.package.pkg_dir())
+        self.package.extract_file_synced(ctx.const.files_xml, self.package.pkg_dir())
 
         ctx.ui.info(_('Storing %s') % ctx.const.metadata_xml, verbose=True)
-        self.package.extract_file(ctx.const.metadata_xml, self.package.pkg_dir())
+        self.package.extract_file_synced(ctx.const.metadata_xml, self.package.pkg_dir())
 
         for pcomar in self.metadata.package.providesComar:
             fpath = os.path.join(ctx.const.comar_dir, pcomar.script)
             # comar prefix is added to the pkg_dir while extracting comar
             # script file. so we'll use pkg_dir as destination.
             ctx.ui.info(_('Storing %s') % fpath, verbose=True)
-            self.package.extract_file(fpath, self.package.pkg_dir())
+            self.package.extract_file_synced(fpath, self.package.pkg_dir())
 
     def update_databases(self):
         "update databases"
