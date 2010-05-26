@@ -151,11 +151,14 @@ class RepoDB(lazydb.LazyDB):
 
     def get_repo_doc(self, repo_name):
         repo = self.get_repo(repo_name)
-        index = os.path.basename(repo.indexuri.get_uri())
-        index_path = pisi.util.join_path(ctx.config.index_dir(), repo_name, index)
+        if repo.indexuri.is_remote_file():
+            index = os.path.basename(repo.indexuri.get_uri())
+            index_path = pisi.util.join_path(ctx.config.index_dir(), repo_name, index)
+        else:
+            index_path = repo.indexuri.get_uri()
 
         if index_path.endswith("bz2"):
-            index_path = index_path.split(".bz2")[0]
+            index_path = pisi.util.remove_suffix(".bz2", index_path)
 
         if not os.path.exists(index_path):
             ctx.ui.warning(_("%s repository needs to be updated") % repo_name)
