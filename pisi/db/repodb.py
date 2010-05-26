@@ -228,11 +228,13 @@ class RepoDB(lazydb.LazyDB):
 
     def get_distribution(self, name):
         doc = self.get_repo_doc(name)
-        return doc.getTag("Distribution").getTagData("SourceName")
+        distro = doc.getTag("Distribution")
+        return distro and distro.getTagData("SourceName")
 
     def get_distribution_release(self, name):
         doc = self.get_repo_doc(name)
-        return doc.getTag("Distribution").getTagData("Version")
+        distro = doc.getTag("Distribution")
+        return distro and distro.getTagData("Version")
 
     def check_distribution(self, name):
         if ctx.get_option('ignore_check'):
