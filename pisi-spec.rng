@@ -1610,8 +1610,8 @@
         <element name="Type">
             <ref name="attlist.Type"/>
             <choice>
+                <value>critical</value>
                 <value>security</value>
-                <value>bug</value>
             </choice>
         </element>
     </define>
