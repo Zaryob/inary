@@ -29,10 +29,11 @@ def cleanup_msg_lines(lines):
     for line in lines:
         if line.startswith("BUG:FIXED:"):
             bug_number = line.split(":")[2]
-            line = "Fixed bug #%s." % bug_number
+            line = "Fixes the bug reported at http://bugs.pardus.org.tr/%s." % bug_number
 
         elif line.startswith("BUG:COMMENT:"):
-            continue
+            bug_number = line.split(":")[2]
+            line = "See http://bugs.pardus.org.tr/%s." % bug_number
 
         elif line.startswith("Changes since "):
             return result[:-1]
