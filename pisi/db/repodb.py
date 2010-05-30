@@ -247,10 +247,17 @@ class RepoDB(lazydb.LazyDB):
             return
 
         dist_name = self.get_distribution(name)
-        dist_release = self.get_distribution_release(name)
+        if dist_name is None:
+            return
 
-        if dist_name != ctx.config.values.general.distribution or \
-                dist_release != ctx.config.values.general.distribution_release:
+        compatible = dist_name == ctx.config.values.general.distribution
+
+        dist_release = self.get_distribution_release(name)
+        if dist_release is not None:
+            compatible &= \
+                dist_release == ctx.config.values.general.distribution_release
+
+        if not compatible:
             self.deactivate_repo(name)
             raise IncompatibleRepoError(
                     _("Repository '%s' is not compatible with your "
