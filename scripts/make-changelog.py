@@ -20,6 +20,7 @@ def get_author_name_mail(author):
                 continue
 
             account, name, mail, jabber = line.split(":")
+            mail = mail.replace(" [at] ", "@")
             authors[account] = "%s <%s>" % (name, mail)
 
     return authors[author]
@@ -59,11 +60,10 @@ def create_log_entry(author, date, msg):
     author = get_author_name_mail(author)
     date = date.split("T", 1)[0]
 
-    indentation = " " * 8
     lines = msg.splitlines()
     lines = cleanup_msg_lines(lines)
-    lines[0] = "%s* %s" % (indentation, lines[0])
-    msg = ("\n%s" % indentation).join(lines)
+    lines[0] = "\t* %s" % lines[0]
+    msg = "\n\t".join(lines)
 
     msg = strip_empty_lines(msg)
     entry = "%s %s\n%s" % (date, author, msg)
