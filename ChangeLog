@@ -1,644 +1,671 @@
-2010-05-27 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Remove NEWS file and update MANIFEST.in
+2010-05-30 Fatih Aşıcı <fatih@pardus.org.tr>
+	* scripts/make-changelog: Replace [at]'s with @ char and use tab char for indentation
 
-2010-05-27 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * changelog: Rename old ChangeLog file
+2010-05-30 Fatih Aşıcı <fatih@pardus.org.tr>
+	* repodb: Do not check compatibility if distro info is not included
 
-2010-05-27 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * scripts/make-changelog: Write bug report links
+	Check distro name if specified in index file. If distro release is also
+	specified, check it for compatibility in addition to distro name.
 
-2010-05-27 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * scripts: Add a script to generate ChangeLog files from svn log
+2010-05-30 Fatih Aşıcı <fatih@pardus.org.tr>
+	* repodb: Fix use of compressed local repositories
 
-2010-05-26 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * repodb: Do not search index files of local repos in /var/lib/pisi
+	This fixes a serious regression in 2.3. Repo index files are also cached
+	when it is compressed. Parse the cached xml file if the uri of compressed
+	index file is given as the repo address.
 
-        Fixes the bug reported at http://bugs.pardus.org.tr/13156.
+2010-05-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* rng: Allow 'critical' as a value for Type tag
 
-2010-05-26 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * repodb: Do not fail when Distribution tag is missing
+2010-05-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* pisi 2.3
 
-2010-05-24 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * install: Call flush/fsync for critical pisi files
+	This is the first stable release of 2.3.x series. This release
+	includes assorted bug fixes that might be considered critical.
 
-        Fixes the bug reported at http://bugs.pardus.org.tr/13005.
+	Full changelog since version 2.2.19 is included in ChangeLog file.
 
-2010-05-24 Ozan Çağlayan <ozan [at] pardus.org.tr>
-        * Always use /root/.ccache for CCACHE_DIR for not bypassing ccache when we modify /root in actions.py. A more elegant way is to read CCACHE_DIR from pisi.conf
+2010-05-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Remove NEWS file and update MANIFEST.in
 
-2010-05-24 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * pisi 2.3_rc1
+2010-05-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* changelog: Rename old ChangeLog file
 
-        This is the first release candidate for the upcoming 2.3.x releases.
-        This release mostly includes bug fixes and translation updates.
+2010-05-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* scripts/make-changelog: Write bug report links
 
-2010-05-22 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * api/update_repo(s): Update caches when index is really updated
+2010-05-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* scripts: Add a script to generate ChangeLog files from svn log
 
-2010-05-22 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * api: Record forced update-repo operations in history
+2010-05-26 Fatih Aşıcı <fatih@pardus.org.tr>
+	* repodb: Do not search index files of local repos in /var/lib/pisi
 
-2010-05-21 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * config: Let --destdir= parameter work again
+	Fixes the bug reported at http://bugs.pardus.org.tr/13156.
 
-        This is another regression introduced after the Config class became
-        a Singleton.
+2010-05-26 Fatih Aşıcı <fatih@pardus.org.tr>
+	* repodb: Do not fail when Distribution tag is missing
 
-2010-05-21 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * specfile: Uninstalled packages cannot have update actions
+2010-05-24 Fatih Aşıcı <fatih@pardus.org.tr>
+	* install: Call flush/fsync for critical pisi files
 
-2010-05-20 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * pisi 2.3_beta2
+	Fixes the bug reported at http://bugs.pardus.org.tr/13005.
 
-        This is the second beta for the upcoming 2.3.x releases. This release
-        mostly includes bug fixes and translation updates.
+2010-05-24 Ozan Çağlayan <ozan@pardus.org.tr>
+	* Always use /root/.ccache for CCACHE_DIR for not bypassing ccache when we modify /root in actions.py. A more elegant way is to read CCACHE_DIR from pisi.conf
 
-2010-05-20 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * l10n: Update messages
+2010-05-24 Fatih Aşıcı <fatih@pardus.org.tr>
+	* pisi 2.3_rc1
 
-2010-05-20 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * cli/addrepo: Remove dead code
+	This is the first release candidate for the upcoming 2.3.x releases.
+	This release mostly includes bug fixes and translation updates.
 
-2010-05-20 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * repodb: Let check_distribution raise an error
+2010-05-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* api/update_repo(s): Update caches when index is really updated
 
-        This commit moves the check from cli code to api.py. Check is done
-        at every repo update. Also uses SourceName tag for getting distribution
-        name.
+2010-05-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* api: Record forced update-repo operations in history
 
-2010-05-20 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * installdb: Fix errors when installed package info is broken
+2010-05-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* config: Let --destdir= parameter work again
 
-        If read of metadata.xml fails, warn user and consider that package as
-        uninstalled.
+	This is another regression introduced after the Config class became
+	a Singleton.
 
-        See http://bugs.pardus.org.tr/13005.
+2010-05-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* specfile: Uninstalled packages cannot have update actions
 
-2010-05-20 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * cli/build: Use Error class in pisi namespace
+2010-05-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* pisi 2.3_beta2
 
-2010-05-20 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * config: Add a method for setting options
+	This is the second beta for the upcoming 2.3.x releases. This release
+	mostly includes bug fixes and translation updates.
 
-        This fixes a regression appeared after Config class became a singleton.
-        Different parts of pisi tries to create an instance of Config class with
-        different options. Since it is a singleton, later contructions won't
-        get the new options. Fix this by implementing a new method for setting
-        options instance.
+2010-05-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* l10n: Update messages
 
-2010-05-18 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Make Config and Constants classes singletons
+2010-05-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/addrepo: Remove dead code
 
-2010-05-18 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * util: Add a singleton metaclass
+2010-05-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* repodb: Let check_distribution raise an error
 
-2010-05-18 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * cli/install: Fix the exception raised when an unknown component name is provided
+	This commit moves the check from cli code to api.py. Check is done
+	at every repo update. Also uses SourceName tag for getting distribution
+	name.
 
-2010-05-18 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * fetcher: Handle all fetch errors
+2010-05-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* installdb: Fix errors when installed package info is broken
 
-        Also show the URI in the error message (not the local path).
+	If read of metadata.xml fails, warn user and consider that package as
+	uninstalled.
 
-        Fixes the bug reported at http://bugs.pardus.org.tr/10948.
+	See http://bugs.pardus.org.tr/13005.
 
-2010-05-18 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * cli/history: Pass -K option to less
+2010-05-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/build: Use Error class in pisi namespace
 
-        This causes less to exit cleanly when an interrupt character is typed.
+2010-05-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* config: Add a method for setting options
 
-        Fixes the bug reported at http://bugs.pardus.org.tr/12947.
+	This fixes a regression appeared after Config class became a singleton.
+	Different parts of pisi tries to create an instance of Config class with
+	different options. Since it is a singleton, later contructions won't
+	get the new options. Fix this by implementing a new method for setting
+	options instance.
 
-2010-05-17 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * dtd/rng: Replace update type 'bug' with 'critical'
+2010-05-18 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Make Config and Constants classes singletons
 
-2010-05-17 Serdar Dalgıç <serdar [at] pardus.org.tr>
-        * cli/blame: Blame installed package instead of the one in the repositories.
+2010-05-18 Fatih Aşıcı <fatih@pardus.org.tr>
+	* util: Add a singleton metaclass
 
-        Fixes the bug reported at http://bugs.pardus.org.tr/12979.
+2010-05-18 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/install: Fix the exception raised when an unknown component name is provided
 
-2010-05-16 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * cli/install: Fix help string
+2010-05-18 Fatih Aşıcı <fatih@pardus.org.tr>
+	* fetcher: Handle all fetch errors
 
-2010-05-16 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * cli/upgrade: Fix help string
+	Also show the URI in the error message (not the local path).
 
-2010-05-16 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * tree-wide: Remove redundant imports
+	Fixes the bug reported at http://bugs.pardus.org.tr/10948.
 
-2010-05-14 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * pisi 2.3_beta1
+2010-05-18 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/history: Pass -K option to less
 
-        This is the first beta for the upcoming 2.3.x releases. This release
-        includes important bug fixes beside some optimizations targeting more
-        speed.
+	This causes less to exit cleanly when an interrupt character is typed.
 
-        No new features added and this time we are really closer to a stable
-        release.
+	Fixes the bug reported at http://bugs.pardus.org.tr/12947.
 
-2010-05-14 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Update MANIFEST.in
+2010-05-17 Fatih Aşıcı <fatih@pardus.org.tr>
+	* dtd/rng: Replace update type 'bug' with 'critical'
 
-2010-05-13 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * l10n: Update messages
+2010-05-17 Serdar Dalgıç <serdar@pardus.org.tr>
+	* cli/blame: Blame installed package instead of the one in the repositories.
 
-2010-05-13 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * cli/addrepo: Change the distro check behaviour as in 2.2 branch
+	Fixes the bug reported at http://bugs.pardus.org.tr/12979.
 
-        It looks for a DistributionName tag to check distro name. If it does not
-        exist, the check is ignored.
+2010-05-16 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/install: Fix help string
 
-2010-05-13 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * specfile: Refactor get_update_actions to simplify its usage
+2010-05-16 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/upgrade: Fix help string
 
-2010-05-13 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * installdb: Cleanup reverse dependency info when adding/removing a package
+2010-05-16 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tree-wide: Remove redundant imports
 
-2010-05-13 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * installdb: Use a dictionary for reverse dep info
+2010-05-14 Fatih Aşıcı <fatih@pardus.org.tr>
+	* pisi 2.3_beta1
 
-        Bumped cache version in order to avoid crashes with old caches.
+	This is the first beta for the upcoming 2.3.x releases. This release
+	includes important bug fixes beside some optimizations targeting more
+	speed.
 
-2010-05-13 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * db/lazydb: Store a version string to track changes in cache file structure
+	No new features added and this time we are really closer to a stable
+	release.
 
-        This is needed when new class members added or the type of a variable is
-        changed.
+2010-05-14 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Update MANIFEST.in
 
-2010-05-07 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * install: Optimize clean_leftover to gain speed
+2010-05-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* l10n: Update messages
 
-        This improves the installation time of packages that have
-        lots of files with the same name.
+2010-05-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/addrepo: Change the distro check behaviour as in 2.2 branch
 
-        e.g. kernel-module-headers having lots of files named
-             "Makefile" and "Kconfig".
+	It looks for a DistributionName tag to check distro name. If it does not
+	exist, the check is ignored.
 
-2010-05-07 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * delta: Use installdb data to find permission changes
+2010-05-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* specfile: Refactor get_update_actions to simplify its usage
 
-        stat calls are expensive. We already have the old permission info in
-        InstallDB. This fixes the performance regression caused by 26893.
+2010-05-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* installdb: Cleanup reverse dependency info when adding/removing a package
 
-2010-04-30 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * comariface: Fix failure when registering COMAR scripts
+2010-05-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* installdb: Use a dictionary for reverse dep info
 
-        If a package provides multiple scripts and a service script precedes
-        another script, System.Service.registerState is called for that script
-        although it is not a script.
+	Bumped cache version in order to avoid crashes with old caches.
 
-2010-04-27 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * upgrade: Fix the logic when finding broken packages
+2010-05-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* db/lazydb: Store a version string to track changes in cache file structure
 
-        Usually the reverse dependency gets broken *after* the upgrade is done. So,
-        we must check the dependency info with satisfied_by_repo instead of
-        satisfied_by_installed.
+	This is needed when new class members added or the type of a variable is
+	changed.
 
-        This commit will hopefully fix the upgrade operations failing with:
-        "Reverse dependency X of Y cannot be satisfied"
+2010-05-07 Fatih Aşıcı <fatih@pardus.org.tr>
+	* install: Optimize clean_leftover to gain speed
 
-2010-04-13 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * scripts/update-po: Do not wrap lines and sort by file
+	This improves the installation time of packages that have
+	lots of files with the same name.
 
-        I hope this helps reducing the sizes of transifex commits.
+	e.g. kernel-module-headers having lots of files named
+	     "Makefile" and "Kconfig".
 
-2010-04-13 Serdar Dalgıç <serdar [at] pardus.org.tr>
-        * scripts: update python docstrings and start implementing net_update function.
+2010-05-07 Fatih Aşıcı <fatih@pardus.org.tr>
+	* delta: Use installdb data to find permission changes
 
-2010-04-13 Ozan Çağlayan <ozan [at] pardus.org.tr>
-        * Implement lsbINFO() to get LSB information of the distribution
+	stat calls are expensive. We already have the old permission info in
+	InstallDB. This fixes the performance regression caused by 26893.
 
-2010-04-11 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * l10n: Cleanup tr.po
+2010-04-30 Fatih Aşıcı <fatih@pardus.org.tr>
+	* comariface: Fix failure when registering COMAR scripts
 
-2010-04-11 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * l10n: Update messages
+	If a package provides multiple scripts and a service script precedes
+	another script, System.Service.registerState is called for that script
+	although it is not a script.
 
-2010-04-11 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * scripts: Do not extract docstrings in optparse module
+2010-04-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* upgrade: Fix the logic when finding broken packages
 
-2010-04-11 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * scripts: Fix update-po.sh script
+	Usually the reverse dependency gets broken *after* the upgrade is done. So,
+	we must check the dependency info with satisfied_by_repo instead of
+	satisfied_by_installed.
 
-        This fixes the untranslated strings in --help output.
+	This commit will hopefully fix the upgrade operations failing with:
+	"Reverse dependency X of Y cannot be satisfied"
 
-2010-04-11 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Remove empty directory
+2010-04-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* scripts/update-po: Do not wrap lines and sort by file
 
-2010-04-11 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * scripts: Move all scripts into scripts directory
+	I hope this helps reducing the sizes of transifex commits.
 
-2010-04-11 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * scripts: Move repo-related scripts out of pisi tree
+2010-04-13 Serdar Dalgıç <serdar@pardus.org.tr>
+	* scripts: update python docstrings and start implementing net_update function.
 
-2010-04-06 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * build: Check abandoned files after copying all the additional files
+2010-04-13 Ozan Çağlayan <ozan@pardus.org.tr>
+	* Implement lsbINFO() to get LSB information of the distribution
 
-        Previously the check was performed for all sub-packages. Now it checks
-        only once.
+2010-04-11 Fatih Aşıcı <fatih@pardus.org.tr>
+	* l10n: Cleanup tr.po
 
-2010-03-31 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * cli/info: Use aligned texts to make output more readable
+2010-04-11 Fatih Aşıcı <fatih@pardus.org.tr>
+	* l10n: Update messages
 
-        Patch by Barış Metin. Modified to use util.get_terminal_size and
-        str.join besides some cosmetic changes.
+2010-04-11 Fatih Aşıcı <fatih@pardus.org.tr>
+	* scripts: Do not extract docstrings in optparse module
 
-        Fixes the bug reported at http://bugs.pardus.org.tr/12536.
+2010-04-11 Fatih Aşıcı <fatih@pardus.org.tr>
+	* scripts: Fix update-po.sh script
 
-2010-03-30 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * build/install: Fix exception handling in case of invalid version strings
+	This fixes the untranslated strings in --help output.
 
-2010-03-28 Klemens Häckel <click3d [at] linuxmail.org>
-        * update of some new spanish language strings (kh)
+2010-04-11 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Remove empty directory
 
-2010-03-26 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * po: Add missing end of line character in Turkish translation
+2010-04-11 Fatih Aşıcı <fatih@pardus.org.tr>
+	* scripts: Move all scripts into scripts directory
 
-2010-03-24 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * pisi 2.3_alpha3
+2010-04-11 Fatih Aşıcı <fatih@pardus.org.tr>
+	* scripts: Move repo-related scripts out of pisi tree
 
-        This is the third alpha for the upcoming 2.3.x releases. This release
-        includes important bug fixes and enhancements beside the optimizations
-        for speed.
+2010-04-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Check abandoned files after copying all the additional files
 
-        Following new features are also implemented in this release:
-         - Support for specifiying different update types and actions for each
-           sub-package,
-         - Warnings for packages that need the restart of some services and
-           system reboot,
-         - Ability to rename service scripts.
+	Previously the check was performed for all sub-packages. Now it checks
+	only once.
 
-2010-03-24 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * po: Update for new messages
+2010-03-31 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/info: Use aligned texts to make output more readable
 
-2010-03-24 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * db: Remove repodb members to avoid caching of RepoDB instance
+	Patch by Barış Metin. Modified to use util.get_terminal_size and
+	str.join besides some cosmetic changes.
 
-2010-03-23 Ozan Çağlayan <ozan [at] pardus.org.tr>
-        * Implement configure()
+	Fixes the bug reported at http://bugs.pardus.org.tr/12536.
 
-2010-03-22 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * upgrade: Take all deps into account for the correct upgrade order
+2010-03-30 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build/install: Fix exception handling in case of invalid version strings
 
-        This commit gets back the old logic changed by the recent commits.
+2010-03-28 Klemens Häckel <click3d@linuxmail.org>
+	* update of some new spanish language strings (kh)
 
-2010-03-22 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * build: Copy additional source files when a build step is given too
+2010-03-26 Fatih Aşıcı <fatih@pardus.org.tr>
+	* po: Add missing end of line character in Turkish translation
 
-2010-03-22 Serdar Dalgıç <serdar [at] pardus.org.tr>
-        * implement list_keys, list_fingerprints, export and exportall parts.
+2010-03-24 Fatih Aşıcı <fatih@pardus.org.tr>
+	* pisi 2.3_alpha3
 
-2010-03-22 Serdar Dalgıç <serdar [at] pardus.org.tr>
-        * add some file_existence checks, implement add, del, update func. , some improvements in the code.. Still Prototypesvn diff
+	This is the third alpha for the upcoming 2.3.x releases. This release
+	includes important bug fixes and enhancements beside the optimizations
+	for speed.
 
-2010-03-22 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * cli/upgrade: Show packages that need serviceRestart and systemRestart before upgrade
+	Following new features are also implemented in this release:
+	 - Support for specifiying different update types and actions for each
+	   sub-package,
+	 - Warnings for packages that need the restart of some services and
+	   system reboot,
+	 - Ability to rename service scripts.
 
-2010-03-21 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * cli/remove,upgrade: Revise safety switch messages
+2010-03-24 Fatih Aşıcı <fatih@pardus.org.tr>
+	* po: Update for new messages
 
-2010-03-21 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * cli/install: Make package lists more readable and colorize messages
+2010-03-24 Fatih Aşıcı <fatih@pardus.org.tr>
+	* db: Remove repodb members to avoid caching of RepoDB instance
 
-2010-03-21 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * upgrade: Remove redundant variable
+2010-03-23 Ozan Çağlayan <ozan@pardus.org.tr>
+	* Implement configure()
 
-2010-03-21 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * cli/install,upgrade: Colorize package size info
+2010-03-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* upgrade: Take all deps into account for the correct upgrade order
 
-2010-03-21 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * upgrade: Check the reverse dependencies of installed packages
+	This commit gets back the old logic changed by the recent commits.
 
-2010-03-21 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * upgrade: Use a single loop for finding packages to be upgraded
+2010-03-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Copy additional source files when a build step is given too
 
-        If a package is added to the upgrade list because of a
-        reverseDependencyUpdate action (e.g. google-gadgets because of
-        libproxy), runtime dependencies of that package are not examined (e.g.
-        webkit-gtk not installed although it is a dep of google-earth). This
-        commit also fixes this issue.
+2010-03-22 Serdar Dalgıç <serdar@pardus.org.tr>
+	* implement list_keys, list_fingerprints, export and exportall parts.
 
-2010-03-18 Serdar Dalgıç <serdar [at] pardus.org.tr>
-        * add a prototype python script for GPG Key management in Pisi. Being adopted from apt-key script in apt. A step in Package Signing ;)
+2010-03-22 Serdar Dalgıç <serdar@pardus.org.tr>
+	* add some file_existence checks, implement add, del, update func. , some improvements in the code.. Still Prototypesvn diff
 
-2010-03-18 Ozan Çağlayan <ozan [at] pardus.org.tr>
-        * Don't install blacklisted system.base packages on update and new package install
+2010-03-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/upgrade: Show packages that need serviceRestart and systemRestart before upgrade
 
-2010-03-18 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * dtd,rng: Update DTD and RelaxNG shemas for the recently added features
+2010-03-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/remove,upgrade: Revise safety switch messages
 
-2010-03-18 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * specfile: Rename targetPackage attribute in Action tags as target
+2010-03-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/install: Make package lists more readable and colorize messages
 
-        Service names can be different from the package names as of the previous
-        commit.
+2010-03-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* upgrade: Remove redundant variable
 
-2010-03-18 Ozan Çağlayan <ozan [at] pardus.org.tr>
-        * Add ability to rename System.Service scripts
+2010-03-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/install,upgrade: Colorize package size info
 
-        <Provides>
-          <COMAR script="iscsi-service.py" name="iscsi">System.Service</COMAR>
-          <COMAR script="iscsid-service.py" name="iscsid">System.Service</COMAR>
-        </Provides>
+2010-03-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* upgrade: Check the reverse dependencies of installed packages
 
-        Will register two separate system services called respectively "iscsi" and "iscsid". This way
-        we don't have to split packages to give them separate names or to provide more than 1 services
-        in a sub-package.
+2010-03-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* upgrade: Use a single loop for finding packages to be upgraded
 
-2010-03-18 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * specfile: Replace get_update_types_and_actions function with faster ones
+	If a package is added to the upgrade list because of a
+	reverseDependencyUpdate action (e.g. google-gadgets because of
+	libproxy), runtime dependencies of that package are not examined (e.g.
+	webkit-gtk not installed although it is a dep of google-earth). This
+	commit also fixes this issue.
 
-2010-03-18 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Add support to specify update types and actions for each sub-package
+2010-03-18 Serdar Dalgıç <serdar@pardus.org.tr>
+	* add a prototype python script for GPG Key management in Pisi. Being adopted from apt-key script in apt. A step in Package Signing ;)
 
-        Following is an example to specify "security" type and
-        "reverseDependencyUpdate" action for different sub-packages.
+2010-03-18 Ozan Çağlayan <ozan@pardus.org.tr>
+	* Don't install blacklisted system.base packages on update and new package install
 
-            <Update release="30">
-                <Date>2010-02-17</Date>
-                <Version>2.4.18</Version>
-                <Comment> ... </Comment>
-                <Type package="libdrm-intel">security</Type>
-                <Requires>
-                    <Action package="libdrm-nouveau">reverseDependencyUpdate</Action>
-                </Requires>
-                <Name>Fatih Aşıcı</Name>
-                <Email>fatih@pardus.org.tr</Email>
-            </Update>
+2010-03-18 Fatih Aşıcı <fatih@pardus.org.tr>
+	* dtd,rng: Update DTD and RelaxNG shemas for the recently added features
 
-        It is also possible to specify different targets for the actions. In the
-        following example, new release of mod_php package requires a restart of apache
-        service.
+2010-03-18 Fatih Aşıcı <fatih@pardus.org.tr>
+	* specfile: Rename targetPackage attribute in Action tags as target
 
-            <Update release="30">
-                <Date>2010-02-17</Date>
-                <Version>5.2.13</Version>
-                <Comment> ... </Comment>
-                <Requires>
-                    <Action package="mod_php" targetPackage="apache">serviceRestart</Action>
-                </Requires>
-                <Name>Fatih Aşıcı</Name>
-                <Email>fatih@pardus.org.tr</Email>
-            </Update>
+	Service names can be different from the package names as of the previous
+	commit.
 
-2010-03-17 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * specfile: Initial bits for Type tags and Action attributes
+2010-03-18 Ozan Çağlayan <ozan@pardus.org.tr>
+	* Add ability to rename System.Service scripts
 
-2010-03-15 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * cli/upgrade: Replace a ui.info with ui.status
+	<Provides>
+	  <COMAR script="iscsi-service.py" name="iscsi">System.Service</COMAR>
+	  <COMAR script="iscsid-service.py" name="iscsid">System.Service</COMAR>
+	</Provides>
 
-2010-03-15 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * cli/update-repo: Use ui.action to print 'Updating repository:' message
+	Will register two separate system services called respectively "iscsi" and "iscsid". This way
+	we don't have to split packages to give them separate names or to provide more than 1 services
+	in a sub-package.
 
-2010-03-13 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * cli/upgrade: Print package lists in a more readable format
+2010-03-18 Fatih Aşıcı <fatih@pardus.org.tr>
+	* specfile: Replace get_update_types_and_actions function with faster ones
 
-2010-03-13 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * util: Add utility functions to print a list of strings by columns
+2010-03-18 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Add support to specify update types and actions for each sub-package
 
-2010-03-13 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * installdb: Store package node and use it later to reach sub-nodes
+	Following is an example to specify "security" type and
+	"reverseDependencyUpdate" action for different sub-packages.
 
-2010-03-13 Patrik Karlsson <patrik [at] pardus.nu>
-        * Swedish translation
+	    <Update release="30">
+	        <Date>2010-02-17</Date>
+	        <Version>2.4.18</Version>
+	        <Comment> ... </Comment>
+	        <Type package="libdrm-intel">security</Type>
+	        <Requires>
+	            <Action package="libdrm-nouveau">reverseDependencyUpdate</Action>
+	        </Requires>
+	        <Name>Fatih Aşıcı</Name>
+	        <Email>fatih@pardus.org.tr</Email>
+	    </Update>
 
-2010-03-11 Anton Tolboom <atolboo [at] gmail.com>
-        * Dutch language update of /trunk/pisi/po.nl.po
+	It is also possible to specify different targets for the actions. In the
+	following example, new release of mod_php package requires a restart of apache
+	service.
 
-2010-03-09 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * packagedb: Accelerate get_replaces
+	    <Update release="30">
+	        <Date>2010-02-17</Date>
+	        <Version>5.2.13</Version>
+	        <Comment> ... </Comment>
+	        <Requires>
+	            <Action package="mod_php" targetPackage="apache">serviceRestart</Action>
+	        </Requires>
+	        <Name>Fatih Aşıcı</Name>
+	        <Email>fatih@pardus.org.tr</Email>
+	    </Update>
 
-2010-03-09 Ozan Çağlayan <ozan [at] pardus.org.tr>
-        * Don't use underscores for filenames in infodir
+2010-03-17 Fatih Aşıcı <fatih@pardus.org.tr>
+	* specfile: Initial bits for Type tags and Action attributes
 
-2010-03-08 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * upgrade: Do not call get_replaces twice
+2010-03-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/upgrade: Replace a ui.info with ui.status
 
-2010-03-08 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * repodb: Make error messages translatable
+2010-03-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/update-repo: Use ui.action to print 'Updating repository:' message
 
-2010-03-08 Ozan Çağlayan <ozan [at] pardus.org.tr>
-        * Those given parameters are nonsense and noop. Just give DESTDIR to install() for correct installation into sandbox.
+2010-03-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/upgrade: Print package lists in a more readable format
 
-2010-03-08 Ozan Çağlayan <ozan [at] pardus.org.tr>
-        * Add forgotten log
+2010-03-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* util: Add utility functions to print a list of strings by columns
 
-2010-03-08 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * repodb: Reduce the number of calls to piksemel.parse
+2010-03-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* installdb: Store package node and use it later to reach sub-nodes
 
-2010-03-08 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Use make_version instead of Version class
+2010-03-13 Patrik Karlsson <patrik@pardus.nu>
+	* Swedish translation
 
-        Also use int for release numbers.
+2010-03-11 Anton Tolboom <atolboo@gmail.com>
+	* Dutch language update of /trunk/pisi/po.nl.po
 
-2010-03-08 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Return immediately if a condition is not satisfied
+2010-03-09 Fatih Aşıcı <fatih@pardus.org.tr>
+	* packagedb: Accelerate get_replaces
 
-        Also use make_version instead of Version class.
+2010-03-09 Ozan Çağlayan <ozan@pardus.org.tr>
+	* Don't use underscores for filenames in infodir
 
-2010-03-08 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * atomicoperations: Use make_version instead of Version class
+2010-03-08 Fatih Aşıcı <fatih@pardus.org.tr>
+	* upgrade: Do not call get_replaces twice
 
-        This also moves some variable initializations into inner scopes
-        for optimization.
+2010-03-08 Fatih Aşıcı <fatih@pardus.org.tr>
+	* repodb: Make error messages translatable
 
-2010-03-08 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * api: Remove unused variable
+2010-03-08 Ozan Çağlayan <ozan@pardus.org.tr>
+	* Those given parameters are nonsense and noop. Just give DESTDIR to install() for correct installation into sandbox.
 
-2010-03-08 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * tests: Remove release numbers from version strings as they are no longer supported
+2010-03-08 Ozan Çağlayan <ozan@pardus.org.tr>
+	* Add forgotten log
 
-2010-03-08 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * version: Modify Version class to use make_version
+2010-03-08 Fatih Aşıcı <fatih@pardus.org.tr>
+	* repodb: Reduce the number of calls to piksemel.parse
 
-2010-03-08 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * api: Do not use Version class for full package versions
+2010-03-08 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Use make_version instead of Version class
 
-2010-03-08 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * index: If the build numbers are same, use the release number.
+	Also use int for release numbers.
 
-        Pisi was selecting "icon-naming-utils-0.8.90-7-1.pisi" when both
+2010-03-08 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Return immediately if a condition is not satisfied
 
-          icon-naming-utils-0.8.90-7-1.pisi
-          icon-naming-utils-0.8.90-8-1.pisi
+	Also use make_version instead of Version class.
 
-        files exist in the same directory. With this commit, it chooses the one
-        with greater release number.
+2010-03-08 Fatih Aşıcı <fatih@pardus.org.tr>
+	* atomicoperations: Use make_version instead of Version class
 
-2010-03-08 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Add split_version function to split version, release and build parts of a package version
+	This also moves some variable initializations into inner scopes
+	for optimization.
 
-2010-03-07 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Add make_version function
+2010-03-08 Fatih Aşıcı <fatih@pardus.org.tr>
+	* api: Remove unused variable
 
-        pisi.version.Version is one of most frequently used class in pisi
-        (esp. when calculating dependencies). This new function is a fast
-        alternative which returns a tuple representation of version strings.
-        Since python is able to compare tuple and list objects, we do not
-        have to write a special compare function.
+2010-03-08 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Remove release numbers from version strings as they are no longer supported
 
-        Here are some results:
+2010-03-08 Fatih Aşıcı <fatih@pardus.org.tr>
+	* version: Modify Version class to use make_version
 
-        In [7]: %timeit -n100000 pisi.version.make_version("1.2.3.4.5")
-        100000 loops, best of 3: 8.12 us per loop
+2010-03-08 Fatih Aşıcı <fatih@pardus.org.tr>
+	* api: Do not use Version class for full package versions
 
-        In [8]: %timeit -n100000 pisi.version.Version("1.2.3.4.5")
-        100000 loops, best of 3: 60.6 us per loop
+2010-03-08 Fatih Aşıcı <fatih@pardus.org.tr>
+	* index: If the build numbers are same, use the release number.
 
-        In [9]: %timeit -n100000 pisi.version.make_version("1.2") < pisi.version.make_version("1.3")
-        100000 loops, best of 3: 10.1 us per loop
+	Pisi was selecting "icon-naming-utils-0.8.90-7-1.pisi" when both
 
-        In [10]: %timeit -n100000 pisi.version.Version("1.2") < pisi.version.Version("1.3")
-        100000 loops, best of 3: 85.4 us per loop
+	  icon-naming-utils-0.8.90-7-1.pisi
+	  icon-naming-utils-0.8.90-8-1.pisi
 
-2010-03-06 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Use brightred for error messages
+	files exist in the same directory. With this commit, it chooses the one
+	with greater release number.
 
-2010-03-06 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Accelerate iteration to find security updates
+2010-03-08 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Add split_version function to split version, release and build parts of a package version
 
-2010-03-04 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Refactor reverseDependencyUpdate search
+2010-03-07 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Add make_version function
 
-2010-03-04 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Little optimization for Install class
+	pisi.version.Version is one of most frequently used class in pisi
+	(esp. when calculating dependencies). This new function is a fast
+	alternative which returns a tuple representation of version strings.
+	Since python is able to compare tuple and list objects, we do not
+	have to write a special compare function.
 
-        * Make release variables integer instead of Version
-        * Create Version objects outside loops if possible
-        * Do not iterate over all update tags
+	Here are some results:
 
-2010-03-04 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Optimize get_package_requirements a little
+	In [7]: %timeit -n100000 pisi.version.make_version("1.2.3.4.5")
+	100000 loops, best of 3: 8.12 us per loop
 
-        Since release number are integers, we don't have to use Version objects.
-        Also piksemel returns tags in the order they are written. So we don't
-        have to iterate all update tags.
+	In [8]: %timeit -n100000 pisi.version.Version("1.2.3.4.5")
+	100000 loops, best of 3: 60.6 us per loop
 
-2010-03-04 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * More consistent messages
+	In [9]: %timeit -n100000 pisi.version.make_version("1.2") < pisi.version.make_version("1.3")
+	100000 loops, best of 3: 10.1 us per loop
 
-2010-03-03 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Fix concatenation error
+	In [10]: %timeit -n100000 pisi.version.Version("1.2") < pisi.version.Version("1.3")
+	100000 loops, best of 3: 85.4 us per loop
 
-        This is a regression introduced when the support for
-        Source/AdditionalFile support is added.
+2010-03-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Use brightred for error messages
 
-2010-03-01 Ozan Çağlayan <ozan [at] pardus.org.tr>
-        * Use constants from constants.py
+2010-03-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Accelerate iteration to find security updates
 
-2010-03-01 Ozan Çağlayan <ozan [at] pardus.org.tr>
-        * Use delta suffix value from constants.py
+2010-03-04 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Refactor reverseDependencyUpdate search
 
-2010-03-01 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Thinko fix: Old and new file hashes might be different.
+2010-03-04 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Little optimization for Install class
 
-2010-03-01 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * pisi 2.3_alpha2
+	* Make release variables integer instead of Version
+	* Create Version objects outside loops if possible
+	* Do not iterate over all update tags
 
-        This is the second alpha for the upcoming 2.3.x releases. Beside the
-        minor refactoring and cosmetic changes, this release includes important
-        bug fixes related to delta packages. Also the installation of pisi
-        packages with the old format is fixed.
+2010-03-04 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Optimize get_package_requirements a little
 
-2010-03-01 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Update ChangeLog
+	Since release number are integers, we don't have to use Version objects.
+	Also piksemel returns tags in the order they are written. So we don't
+	have to iterate all update tags.
 
-2010-02-28 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Do not print an empty exception message
+2010-03-04 Fatih Aşıcı <fatih@pardus.org.tr>
+	* More consistent messages
 
-2010-02-28 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Do not show traceback for handled pisi errors
+2010-03-03 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Fix concatenation error
 
-2010-02-28 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Catch empty dirs when searching for abandoned files.
-        Always show abandoned files whether the --debug option is given or not.
+	This is a regression introduced when the support for
+	Source/AdditionalFile support is added.
 
-        Fixes the bug reported at http://bugs.pardus.org.tr/12342.
+2010-03-01 Ozan Çağlayan <ozan@pardus.org.tr>
+	* Use constants from constants.py
 
-2010-02-28 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Update messages
+2010-03-01 Ozan Çağlayan <ozan@pardus.org.tr>
+	* Use delta suffix value from constants.py
 
-2010-02-28 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Yet another place that doesn't take -D parameter into account
+2010-03-01 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Thinko fix: Old and new file hashes might be different.
 
-2010-02-28 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Take -D parameter into account when looking for file permission changes
+2010-03-01 Fatih Aşıcı <fatih@pardus.org.tr>
+	* pisi 2.3_alpha2
 
-2010-02-28 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Take -D parameter into account when checking files
+	This is the second alpha for the upcoming 2.3.x releases. Beside the
+	minor refactoring and cosmetic changes, this release includes important
+	bug fixes related to delta packages. Also the installation of pisi
+	packages with the old format is fixed.
 
-2010-02-28 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Update ChangeLog
+2010-03-01 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Update ChangeLog
 
-2010-02-28 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Show missing files in the output of pisi check
+2010-02-28 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Do not print an empty exception message
 
-2010-02-28 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Check if the old and new paths refer to the same file when relocating or cleaning up.
+2010-02-28 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Do not show traceback for handled pisi errors
 
-        This commit also fixes updates with delta packages when the destination
-        directory is "/" and fixes exceptions when an old file is not found.
+2010-02-28 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Catch empty dirs when searching for abandoned files.
+	Always show abandoned files whether the --debug option is given or not.
 
-2010-02-27 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Update messages
+	Fixes the bug reported at http://bugs.pardus.org.tr/12342.
 
-2010-02-27 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Better
+2010-02-28 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Update messages
 
-2010-02-27 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Print human readable error messages. We must use str instead of unicode in order to use __str__ method of exception classes.
+2010-02-28 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Yet another place that doesn't take -D parameter into account
 
-2010-02-27 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Remove redundant variable
+2010-02-28 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Take -D parameter into account when looking for file permission changes
 
-2010-02-27 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Install files into correct paths when the old package format is used.
+2010-02-28 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Take -D parameter into account when checking files
 
-        This was a regression introduced when switching to python 2.6.
+2010-02-28 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Update ChangeLog
 
-2010-02-23 Serdar Dalgıç <serdar [at] pardus.org.tr>
-        * warn_and_remove needs one more argument=repo
+2010-02-28 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Show missing files in the output of pisi check
 
-2010-02-23 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Fix exceptions when path includes a trailing slash
+2010-02-28 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Check if the old and new paths refer to the same file when relocating or cleaning up.
 
-2010-02-23 Serdar Dalgıç <serdar [at] pardus.org.tr>
-        * correct the function name.
+	This commit also fixes updates with delta packages when the destination
+	directory is "/" and fixes exceptions when an old file is not found.
 
-2010-02-23 Klemens Häckel <click3d [at] linuxmail.org>
-        * update of some spanish language files (kh)
+2010-02-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Update messages
 
-2010-02-23 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Create valid repos for test cases
+2010-02-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Better
 
-2010-02-22 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Fix archive tests
+2010-02-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Print human readable error messages. We must use str instead of unicode in order to use __str__ method of exception classes.
 
-2010-02-22 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Add missing shebang
+2010-02-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Remove redundant variable
 
-2010-02-22 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Refactor get_file_type function
+2010-02-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Install files into correct paths when the old package format is used.
 
-2010-02-22 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * pisi 2.3_alpha1
+	This was a regression introduced when switching to python 2.6.
 
-        This is the first alpha for the upcoming 2.3.x releases. This
-        release adds new features for building source packages on different
-        architectures.
+2010-02-23 Serdar Dalgıç <serdar@pardus.org.tr>
+	* warn_and_remove needs one more argument=repo
 
-2010-02-22 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Remove the check for repository architecture
+2010-02-23 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Fix exceptions when path includes a trailing slash
 
-        The current infrastructure doesn't allow a unified repository for multiple
-        architectures.
+2010-02-23 Serdar Dalgıç <serdar@pardus.org.tr>
+	* correct the function name.
 
-2010-02-22 Serdar Dalgıç <serdar [at] pardus.org.tr>
-        * Use glob.glob0 and lstrip instead of glob.glob. 
+2010-02-23 Klemens Häckel <click3d@linuxmail.org>
+	* update of some spanish language files (kh)
 
-        Typos in filePaths in pspec.xml were sometimes ignored and abandoned files were not succesfully caught in some cases. Now it is fixed.
+2010-02-23 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Create valid repos for test cases
 
-        Thanks Fatih for the collaboration.
+2010-02-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Fix archive tests
 
-2010-02-20 Fatih Aşıcı <fatih [at] pardus.org.tr>
-        * Add target attribute to Archive tag. It can be used to extract the archive into a sub-directory.
+2010-02-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Add missing shebang
+
+2010-02-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Refactor get_file_type function
+
+2010-02-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* pisi 2.3_alpha1
+
+	This is the first alpha for the upcoming 2.3.x releases. This
+	release adds new features for building source packages on different
+	architectures.
+
+2010-02-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Remove the check for repository architecture
+
+	The current infrastructure doesn't allow a unified repository for multiple
+	architectures.
+
+2010-02-22 Serdar Dalgıç <serdar@pardus.org.tr>
+	* Use glob.glob0 and lstrip instead of glob.glob. 
+
+	Typos in filePaths in pspec.xml were sometimes ignored and abandoned files were not succesfully caught in some cases. Now it is fixed.
+
+	Thanks Fatih for the collaboration.
+
+2010-02-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Add target attribute to Archive tag. It can be used to extract the archive into a sub-directory.
