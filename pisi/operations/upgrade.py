@@ -50,16 +50,14 @@ def check_update_actions(packages):
     if "serviceRestart" in actions:
         has_actions = True
         ctx.ui.warning(_("You must restart the following service(s) manually "
-                         "in order the updated versions of software to take "
-                         "effect:"))
+                         "for the updated software to take effect:"))
         for package, target in actions["serviceRestart"]:
             ctx.ui.info("    - %s" % target)
 
     if "systemRestart" in actions:
         has_actions = True
-        ctx.ui.warning(_("You must restart your system in order the updated "
-                         "versions of the following package(s) to take "
-                         "effect:"))
+        ctx.ui.warning(_("You must restart your system for the updates "
+                         "in the following package(s) to take effect:"))
         for package, target in actions["systemRestart"]:
             ctx.ui.info("    - %s" % package)
 
