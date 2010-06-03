@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2010 TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -35,7 +35,7 @@ class InstallError(pisi.actionsapi.Error):
         ctx.ui.error(value)
 
 def make(parameters = ''):
-    if system('scons %s' % parameters):
+    if system('scons %s %s' % (get.makeJOBS(), parameters)):
         raise MakeError(_('Make failed.'))
 
 def install(parameters = 'install', prefix = get.installDIR(), argument='prefix'):
