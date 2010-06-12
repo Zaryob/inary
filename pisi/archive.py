@@ -18,8 +18,6 @@ import stat
 import shutil
 import tarfile
 import zipfile
-import gzip
-import bz2
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -176,6 +174,7 @@ class ArchiveBzip2(ArchiveBase):
         oldwd = os.getcwd()
         os.chdir(target_dir)
 
+        import bz2
         self.bzip2 = bz2.BZ2File(self.file_path, "r")
         self.output = open(os.path.basename(self.file_path.rstrip(".bz2")), "w")
         self.output.write(self.bzip2.read())
@@ -199,6 +198,7 @@ class ArchiveGzip(ArchiveBase):
         oldwd = os.getcwd()
         os.chdir(target_dir)
 
+        import gzip
         self.gzip = gzip.GzipFile(self.file_path, "r")
         self.output = open(os.path.basename(self.file_path.rstrip(".gz")), "w")
         self.output.write(self.gzip.read())
