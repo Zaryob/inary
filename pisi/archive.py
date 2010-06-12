@@ -30,11 +30,105 @@ import pisi
 import pisi.util as util
 import pisi.context as ctx
 
+
 class UnknownArchiveType(Exception):
     pass
 
-class LzmaRuntimeError(Exception):
-    pass
+
+# Proxy class inspired from tarfile._BZ2Proxy
+class _LZMAProxy(object):
+
+    blocksize = 16 * 1024
+
+    def __init__(self, fileobj, mode):
+        self.fileobj = fileobj
+        self.mode = mode
+        self.name = getattr(self.fileobj, "name", None)
+        self.init()
+
+    def init(self):
+        import lzma
+        self.pos = 0
+        if self.mode == "r":
+            self.lzmaobj = lzma.LZMADecompressor()
+            if hasattr(self.fileobj, "seek"):
+                self.fileobj.seek(0)
+            self.buf = ""
+        else:
+            self.lzmaobj = lzma.LZMACompressor()
+
+    def read(self, size):
+        b = [self.buf]
+        x = len(self.buf)
+        while x < size:
+            raw = self.fileobj.read(self.blocksize)
+            if not raw:
+                break
+            try:
+                data = self.lzmaobj.decompress(raw)
+            except EOFError:
+                break
+            b.append(data)
+            x += len(data)
+        self.buf = "".join(b)
+
+        buf = self.buf[:size]
+        self.buf = self.buf[size:]
+        self.pos += len(buf)
+        return buf
+
+    def seek(self, pos):
+        if pos < self.pos:
+            self.init()
+        self.read(pos - self.pos)
+
+    def tell(self):
+        return self.pos
+
+    def write(self, data):
+        self.pos += len(data)
+        raw = self.lzmaobj.compress(data)
+        self.fileobj.write(raw)
+
+    def close(self):
+        if self.mode == "w":
+            raw = self.lzmaobj.flush()
+            self.fileobj.write(raw)
+
+
+class TarFile(tarfile.TarFile):
+
+    @classmethod
+    def lzmaopen(cls, name=None, mode="r", fileobj=None,
+                    compresslevel=9, **kwargs):
+        """Open lzma compressed tar archive name for reading or writing.
+           Appending is not allowed.
+        """
+        if len(mode) > 1 or mode not in "rw":
+            raise ValueError("mode must be 'r' or 'w'.")
+
+        try:
+            import lzma
+        except ImportError:
+            raise tarfile.CompressionError("lzma module is not available")
+
+        if fileobj is not None:
+            fileobj = _LZMAProxy(fileobj, mode)
+        else:
+            options = {
+                "format":   "alone",
+                "level":    compresslevel,
+                #"extreme":  compresslevel == 9
+            }
+            fileobj = lzma.LZMAFile(name, mode, options=options)
+
+        try:
+            t = cls.taropen(name, mode, fileobj, **kwargs)
+        except IOError:
+            raise ReadError("not a lzma file")
+        t._extfileobj = False
+        return t
+
 
 class ArchiveBase(object):
     """Base class for Archive classes."""
@@ -67,6 +161,7 @@ class ArchiveBinary(ArchiveBase):
         target_file = os.path.join(target_dir, os.path.basename(self.file_path))
         shutil.copyfile(self.file_path, target_file)
 
+
 class ArchiveBzip2(ArchiveBase):
     """ArchiveBzip2 handles Bzip2 archive files"""
     def __init__(self, file_path, arch_type = "bz2"):
@@ -88,6 +183,7 @@ class ArchiveBzip2(ArchiveBase):
         self.bzip2.close()
 
         os.chdir(oldwd)
+
 
 class ArchiveGzip(ArchiveBase):
     """ArchiveGzip handles Gzip archive files"""
@@ -111,6 +207,7 @@ class ArchiveGzip(ArchiveBase):
 
         os.chdir(oldwd)
 
+
 class ArchiveTar(ArchiveBase):
     """ArchiveTar handles tar archives depending on the compression
     type. Provides access to tar, tar.gz and tar.bz2 files.
@@ -129,6 +226,7 @@ class ArchiveTar(ArchiveBase):
 
     def unpack_dir(self, target_dir):
         rmode = ""
+        self.tar = None
         if self.type == 'tar':
             rmode = 'r:'
         elif self.type == 'targz':
@@ -136,11 +234,7 @@ class ArchiveTar(ArchiveBase):
         elif self.type == 'tarbz2':
             rmode = 'r:bz2'
         elif self.type == 'tarlzma':
-            rmode = 'r:'
-            self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
-            ret, out, err = util.run_batch("lzma -k -f -d %s%s" % (self.file_path,ctx.const.lzma_suffix))
-            if ret != 0:
-                raise LzmaRuntimeError(err)
+            self.tar = TarFile.lzmaopen(self.file_path)
         elif self.type == 'tarZ':
             rmode = 'r:'
             self.file_path = self.file_path.rstrip('.Z')
@@ -150,7 +244,9 @@ class ArchiveTar(ArchiveBase):
         else:
             raise UnknownArchiveType
 
-        self.tar = tarfile.open(self.file_path, rmode)
+        if self.tar is None:
+            self.tar = tarfile.open(self.file_path, rmode)
+
         oldwd = None
         try:
             # Don't fail if CWD doesn't exist (#6748)
@@ -173,7 +269,7 @@ class ArchiveTar(ArchiveBase):
             # 
             # Also, tar.extract() doesn't write on symlinks... Not any
             # more :).
-            if self.file_path == install_tar_path:
+            if self.file_path.startswith(install_tar_path):
                 if os.path.isfile(tarinfo.name) or os.path.islink(tarinfo.name):
                     try:
                         os.unlink(tarinfo.name)
@@ -202,7 +298,7 @@ class ArchiveTar(ArchiveBase):
                 ctx.ui.notify(pisi.ui.desktopfile, desktopfile=tarinfo.name)
 
         # Bug #10680 and addition for tarZ files
-        if self.type == 'tarlzma' or self.type == 'tarZ':
+        if self.type == 'tarZ':
             os.unlink(self.file_path)
 
         try:
@@ -223,30 +319,22 @@ class ArchiveTar(ArchiveBase):
             elif self.type == 'tarbz2':
                 wmode = 'w:bz2'
             elif self.type == 'tarlzma':
-                wmode = 'w:'
-                self.file_path = self.file_path.rstrip(ctx.const.lzma_suffix)
+                level = int(ctx.config.values.build.compressionlevel)
+                self.tar = TarFile.lzmaopen(self.file_path, "w",
+                                            compresslevel=level)
             elif self.type == 'tarZ':
                 wmode = 'w:'
                 self.file_path = self.file_path.rstrip(".Z")
             else:
                 raise UnknownArchiveType
-            self.tar = tarfile.open(self.file_path, wmode)
+
+            if self.tar is None:
+                self.tar = tarfile.open(self.file_path, wmode)
 
         self.tar.add(file_name, arc_name)
 
     def close(self):
         self.tar.close()
-
-        if 'w' in str(self.tar.mode) and self.type == 'tarlzma':
-            batch = None
-            if ctx.config.values.build.compressionlevel:
-                batch = "lzma -%s -z %s" % (ctx.config.values.build.compressionlevel, self.file_path)
-            else:
-                batch = "lzma -z %s" % self.file_path
-
-            ret, out, err = util.run_batch(batch)
-            if ret != 0:
-                raise LzmaRuntimeError(err)
 
 
 class ArchiveZip(ArchiveBase):
