@@ -120,17 +120,12 @@ class Package:
 
 
         if self.impl.has_file(ctx.const.install_tar_lzma):
-            lzmafile = os.path.join(ctx.config.tmp_dir(), ctx.const.install_tar_lzma)
-            self.extract_file(ctx.const.install_tar_lzma, ctx.config.tmp_dir())
-            tar = archive.ArchiveTar(lzmafile, 'tarlzma', False, False)
+            lzmafile = self.impl.open(ctx.const.install_tar_lzma)
+            tar = archive.ArchiveTar(fileobj=lzmafile,
+                                     arch_type="tarlzma",
+                                     no_same_permissions=False,
+                                     no_same_owner=False)
             tar.unpack_dir(outdir, callback=callback)
-
-            # cleanup install.tar.lzma and install.tar after installing
-            if os.path.exists(lzmafile):
-                os.unlink(lzmafile)
-            lzmafile = util.remove_suffix(ctx.const.lzma_suffix, lzmafile)
-            if os.path.exists(lzmafile):
-                os.unlink(lzmafile)
         else:
             self.extract_dir_flat('install', outdir)
 
