@@ -134,7 +134,7 @@ class ArchiveBase(object):
         self.file_path = file_path
         self.type = atype
 
-    def unpack(self, target_dir, clean_dir = False):
+    def unpack(self, target_dir, clean_dir=False):
         self.target_dir = target_dir
         # first we check if we need to clean-up our working env.
         if os.path.exists(self.target_dir):
@@ -148,24 +148,25 @@ class ArchiveBase(object):
 class ArchiveBinary(ArchiveBase):
     """ArchiveBinary handles binary archive files (usually distrubuted as
     .bin files)"""
-    def __init__(self, file_path, arch_type = "binary"):
+    def __init__(self, file_path, arch_type="binary"):
         super(ArchiveBinary, self).__init__(file_path, arch_type)
 
-    def unpack(self, target_dir, clean_dir = False):
+    def unpack(self, target_dir, clean_dir=False):
         super(ArchiveBinary, self).unpack(target_dir, clean_dir)
 
         # we can't unpack .bin files. we'll just move them to target
         # directory and leave the dirty job to actions.py ;)
-        target_file = os.path.join(target_dir, os.path.basename(self.file_path))
+        target_file = os.path.join(target_dir,
+                                   os.path.basename(self.file_path))
         shutil.copyfile(self.file_path, target_file)
 
 
 class ArchiveBzip2(ArchiveBase):
     """ArchiveBzip2 handles Bzip2 archive files"""
-    def __init__(self, file_path, arch_type = "bz2"):
+    def __init__(self, file_path, arch_type="bz2"):
         super(ArchiveBzip2, self).__init__(file_path, arch_type)
 
-    def unpack(self, target_dir, clean_dir = False):
+    def unpack(self, target_dir, clean_dir=False):
         super(ArchiveBzip2, self).unpack(target_dir, clean_dir)
         self.unpack_dir(target_dir)
 
@@ -176,7 +177,8 @@ class ArchiveBzip2(ArchiveBase):
 
         import bz2
         self.bzip2 = bz2.BZ2File(self.file_path, "r")
-        self.output = open(os.path.basename(self.file_path.rstrip(".bz2")), "w")
+        self.output = \
+                open(os.path.basename(self.file_path.rstrip(".bz2")), "w")
         self.output.write(self.bzip2.read())
         self.output.close()
         self.bzip2.close()
@@ -186,10 +188,10 @@ class ArchiveBzip2(ArchiveBase):
 
 class ArchiveGzip(ArchiveBase):
     """ArchiveGzip handles Gzip archive files"""
-    def __init__(self, file_path, arch_type = "gz"):
+    def __init__(self, file_path, arch_type="gz"):
         super(ArchiveGzip, self).__init__(file_path, arch_type)
 
-    def unpack(self, target_dir, clean_dir = False):
+    def unpack(self, target_dir, clean_dir=False):
         super(ArchiveGzip, self).unpack(target_dir, clean_dir)
         self.unpack_dir(target_dir)
 
@@ -223,7 +225,7 @@ class ArchiveTar(ArchiveBase):
         self.no_same_owner = no_same_owner
         self.fileobj = fileobj
 
-    def unpack(self, target_dir, clean_dir = False):
+    def unpack(self, target_dir, clean_dir=False):
         """Unpack tar archive to a given target directory(target_dir)."""
         super(ArchiveTar, self).unpack(target_dir, clean_dir)
         self.unpack_dir(target_dir)
@@ -263,12 +265,12 @@ class ArchiveTar(ArchiveBase):
 
             self.tar.extract(tarinfo)
 
-            # tarfile.extract does not honor umask. It must be honored explicitly.
-            # see --no-same-permissions option of tar(1), which is the deafult
-            # behaviour.
+            # tarfile.extract does not honor umask. It must be honored
+            # explicitly. See --no-same-permissions option of tar(1),
+            # which is the deafult behaviour.
             #
-            # Note: This is no good while installing a pisi package. Thats why
-            # this is optional.
+            # Note: This is no good while installing a pisi package.
+            # Thats why this is optional.
             if self.no_same_permissions and not os.path.islink(tarinfo.name):
                 os.chmod(tarinfo.name, tarinfo.mode & ~ctx.const.umask)
 
@@ -358,12 +360,12 @@ class ArchiveTarZ(ArchiveBase):
         for tarinfo in self.tar:
             self.tar.extract(tarinfo)
 
-            # tarfile.extract does not honor umask. It must be honored explicitly.
-            # see --no-same-permissions option of tar(1), which is the deafult
-            # behaviour.
+            # tarfile.extract does not honor umask. It must be honored
+            # explicitly. See --no-same-permissions option of tar(1),
+            # which is the deafult behaviour.
             #
-            # Note: This is no good while installing a pisi package. Thats why
-            # this is optional.
+            # Note: This is no good while installing a pisi package.
+            # Thats why this is optional.
             if self.no_same_permissions and not os.path.islink(tarinfo.name):
                 os.chmod(tarinfo.name, tarinfo.mode & ~ctx.const.umask)
 
@@ -392,9 +394,9 @@ class ArchiveZip(ArchiveBase):
     extensively. This class provides unpacking and packing magic for
     zip archives."""
 
-    symmagic = 2716663808 #long of hex val '0xA1ED0000L'
+    symmagic = 2716663808  # long of hex val '0xA1ED0000L'
 
-    def __init__(self, file_path, arch_type = "zip", mode = 'r'):
+    def __init__(self, file_path, arch_type="zip", mode='r'):
         super(ArchiveZip, self).__init__(file_path, arch_type)
 
         self.zip_obj = zipfile.ZipFile(self.file_path, mode)
@@ -456,7 +458,7 @@ class ArchiveZip(ArchiveBase):
     def read_file(self, file_path):
         return self.zip_obj.read(file_path)
 
-    def unpack_file_cond(self, pred, target_dir, archive_root = ''):
+    def unpack_file_cond(self, pred, target_dir, archive_root=''):
         """Unpack/Extract files according to predicate function
         pred: filename -> bool
         unpacks stuff into target_dir and only extracts files
@@ -501,7 +503,9 @@ class ArchiveZip(ArchiveBase):
 
                 if info.external_attr == self.symmagic:
                     if os.path.isdir(ofile):
-                        shutil.rmtree(ofile) # a rare case, the file used to be a dir, now it is a symlink!
+                        # A rare case, the file used to be a dir,
+                        # now it is a symlink!
+                        shutil.rmtree(ofile)
                     target = zip_obj.read(info.filename)
                     os.symlink(target, ofile)
                 else:
@@ -515,13 +519,14 @@ class ArchiveZip(ArchiveBase):
                     os.chmod(ofile, perm)
 
     def unpack_files(self, paths, target_dir):
-        self.unpack_file_cond(lambda f:f in paths, target_dir)
+        self.unpack_file_cond(lambda f: f in paths, target_dir)
 
     def unpack_dir(self, path, target_dir):
-        self.unpack_file_cond(lambda f:util.subpath(path, f), target_dir)
+        self.unpack_file_cond(lambda f: util.subpath(path, f), target_dir)
 
     def unpack_dir_flat(self, path, target_dir):
-        self.unpack_file_cond(lambda f:util.subpath(path, f), target_dir, path)
+        self.unpack_file_cond(lambda f: util.subpath(path, f),
+                              target_dir, path)
 
     def unpack(self, target_dir, clean_dir=False):
         super(ArchiveZip, self).unpack(target_dir, clean_dir)
@@ -539,21 +544,19 @@ class Archive:
         """accepted archive types:
         targz, tarbz2, tarlzma, tarZ, tar, zip, gzip, binary"""
 
-        handlers = {
-            'targz': ArchiveTar,
-            'tarbz2': ArchiveTar,
-            'tarlzma': ArchiveTar,
-            'tarZ': ArchiveTarZ,
-            'tar': ArchiveTar,
-            'zip': ArchiveZip,
-            'gzip': ArchiveGzip,
-            'bzip2': ArchiveBzip2,
-            'binary': ArchiveBinary
-        }
+        handlers = {'targz':    ArchiveTar,
+                    'tarbz2':   ArchiveTar,
+                    'tarlzma':  ArchiveTar,
+                    'tarZ':     ArchiveTarZ,
+                    'tar':      ArchiveTar,
+                    'zip':      ArchiveZip,
+                    'gzip':     ArchiveGzip,
+                    'bzip2':    ArchiveBzip2,
+                    'binary':   ArchiveBinary}
 
         self.archive = handlers.get(arch_type)(file_path, arch_type)
 
-    def unpack(self, target_dir, clean_dir = False):
+    def unpack(self, target_dir, clean_dir=False):
         self.archive.unpack(target_dir, clean_dir)
 
     def unpack_files(self, files, target_dir):
