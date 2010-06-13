@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2006, TUBITAK/UEKAE
+# Copyright (C) 2006-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -10,14 +10,13 @@
 #
 # Please read the COPYING file.
 
-import sys
 import os
-import shutil
-import tempfile
+import sys
 from zipfile import BadZipfile
 
 import pisi
 from pisi.archive import ArchiveZip, ArchiveTar
+import pisi.context as ctx
 import pisi.util as util
 
 def usage(errmsg):
@@ -44,20 +43,14 @@ def main():
         print e
         sys.exit(1)
 
-    # Create a temporary directory in /tmp
-    tempdir = tempfile.mkdtemp(prefix='unpisi')
-
     arc.unpack_files(['files.xml', 'metadata.xml'], '.')
-    arc.unpack_files("install.tar.lzma", tempdir)
     arc.unpack_dir('comar', '.')
 
-    tar_file = util.join_path(tempdir, "install.tar.lzma")
-    if os.path.exists(tar_file):
-        tar = ArchiveTar(tar_file, 'tarlzma')
+    if arc.has_file(ctx.const.install_tar_lzma):
+        tar_file = arc.open(ctx.const.install_tar_lzma)
+        tar = ArchiveTar(fileobj=tar_file, arch_type='tarlzma')
         tar.unpack_dir('.')
-        os.unlink(tar_file)
 
-    shutil.rmtree(tempdir)
     return 0
 
 if __name__ == "__main__":
