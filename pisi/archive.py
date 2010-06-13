@@ -235,12 +235,6 @@ class ArchiveTar(ArchiveBase):
             rmode = 'r:bz2'
         elif self.type == 'tarlzma':
             self.tar = TarFile.lzmaopen(self.file_path)
-        elif self.type == 'tarZ':
-            rmode = 'r:'
-            self.file_path = self.file_path.rstrip('.Z')
-            ret, out, err = util.run_batch("uncompress -f %s%s" % (self.file_path,'.Z'))
-            if ret != 0:
-                raise RuntimeError, 'Problem occured while uncompressing %s.Z file' % self.file_path
         else:
             raise UnknownArchiveType
 
@@ -297,10 +291,6 @@ class ArchiveTar(ArchiveBase):
             if tarinfo.name.endswith(".desktop"):
                 ctx.ui.notify(pisi.ui.desktopfile, desktopfile=tarinfo.name)
 
-        # Bug #10680 and addition for tarZ files
-        if self.type == 'tarZ':
-            os.unlink(self.file_path)
-
         try:
             if oldwd:
                 os.chdir(oldwd)
@@ -322,9 +312,6 @@ class ArchiveTar(ArchiveBase):
                 level = int(ctx.config.values.build.compressionlevel)
                 self.tar = TarFile.lzmaopen(self.file_path, "w",
                                             compresslevel=level)
-            elif self.type == 'tarZ':
-                wmode = 'w:'
-                self.file_path = self.file_path.rstrip(".Z")
             else:
                 raise UnknownArchiveType
 
@@ -334,6 +321,75 @@ class ArchiveTar(ArchiveBase):
         self.tar.add(file_name, arc_name)
 
     def close(self):
+        self.tar.close()
+
+
+class ArchiveTarZ(ArchiveBase):
+    """ArchiveTar handles tar.Z archives.
+
+    This class provides the unpack magic for tar.Z archives."""
+    def __init__(self, file_path, arch_type="tarZ",
+                        no_same_permissions=True, no_same_owner=True):
+        super(ArchiveTarZ, self).__init__(file_path, arch_type)
+        self.tar = None
+        self.no_same_permissions = no_same_permissions
+        self.no_same_owner = no_same_owner
+
+    def unpack(self, target_dir, clean_dir=False):
+        """Unpack tar archive to a given target directory(target_dir)."""
+        super(ArchiveTarZ, self).unpack(target_dir, clean_dir)
+        self.unpack_dir(target_dir)
+
+    def unpack_dir(self, target_dir):
+        self.file_path = util.remove_suffix(".Z", self.file_path)
+
+        ret, out, err = util.run_batch(
+                "uncompress -cf %s.Z > %s" % (self.file_path, self.file_path))
+        if ret != 0:
+            raise RuntimeError(
+                        _("Problem occured while uncompressing %s.Z file")
+                        % self.file_path)
+
+        self.tar = tarfile.open(self.file_path)
+
+        oldwd = None
+        try:
+            # Don't fail if CWD doesn't exist (#6748)
+            oldwd = os.getcwd()
+        except OSError:
+            pass
+        os.chdir(target_dir)
+
+        uid = os.getuid()
+        gid = os.getgid()
+
+        for tarinfo in self.tar:
+            self.tar.extract(tarinfo)
+
+            # tarfile.extract does not honor umask. It must be honored explicitly.
+            # see --no-same-permissions option of tar(1), which is the deafult
+            # behaviour.
+            #
+            # Note: This is no good while installing a pisi package. Thats why
+            # this is optional.
+            if self.no_same_permissions and not os.path.islink(tarinfo.name):
+                os.chmod(tarinfo.name, tarinfo.mode & ~ctx.const.umask)
+
+            if self.no_same_owner:
+                if not os.path.islink(tarinfo.name):
+                    os.chown(tarinfo.name, uid, gid)
+                else:
+                    os.lchown(tarinfo.name, uid, gid)
+
+        # Bug #10680 and addition for tarZ files
+        os.unlink(self.file_path)
+
+        try:
+            if oldwd:
+                os.chdir(oldwd)
+        # Bug #6748
+        except OSError:
+            pass
         self.tar.close()
 
 
@@ -492,7 +548,7 @@ class Archive:
             'targz': ArchiveTar,
             'tarbz2': ArchiveTar,
             'tarlzma': ArchiveTar,
-            'tarZ': ArchiveTar,
+            'tarZ': ArchiveTarZ,
             'tar': ArchiveTar,
             'zip': ArchiveZip,
             'gzip': ArchiveGzip,
