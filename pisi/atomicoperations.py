@@ -151,12 +151,12 @@ class Install(AtomicOperation):
         self.check_versioning(self.pkginfo.version, self.pkginfo.release)
         self.check_relations()
         self.check_operation()
-        self.extract_install()
 
         ctx.disable_keyboard_interrupts()
+
+        self.extract_install()
         self.store_pisi_files()
         self.postinstall()
-
         self.update_databases()
 
         ctx.enable_keyboard_interrupts()
