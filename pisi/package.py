@@ -96,11 +96,34 @@ class Package:
         self.impl.unpack_dir(dir, outdir)
 
     def extract_install(self, outdir):
+        def callback(tarinfo, extracted):
+            if not extracted:
+                # Installing packages (especially shared libraries) is a
+                # bit tricky. You should also change the inode if you
+                # change the file, cause the file is opened allready and
+                # accessed. Removing and creating the file will also
+                # change the inode and will do the trick (in fact, old
+                # file will be deleted only when its closed).
+                # 
+                # Also, tar.extract() doesn't write on symlinks... Not any
+                # more :).
+                if os.path.isfile(tarinfo.name) or os.path.islink(tarinfo.name):
+                    try:
+                        os.unlink(tarinfo.name)
+                    except OSError, e:
+                        ctx.ui.warning(e)
+
+            else:
+                # Added for package-manager
+                if tarinfo.name.endswith(".desktop"):
+                    ctx.ui.notify(pisi.ui.desktopfile, desktopfile=tarinfo.name)
+
+
         if self.impl.has_file(ctx.const.install_tar_lzma):
             lzmafile = os.path.join(ctx.config.tmp_dir(), ctx.const.install_tar_lzma)
             self.extract_file(ctx.const.install_tar_lzma, ctx.config.tmp_dir())
             tar = archive.ArchiveTar(lzmafile, 'tarlzma', False, False)
-            tar.unpack_dir(outdir)
+            tar.unpack_dir(outdir, callback=callback)
 
             # cleanup install.tar.lzma and install.tar after installing
             if os.path.exists(lzmafile):

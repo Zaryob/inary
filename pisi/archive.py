@@ -224,7 +224,7 @@ class ArchiveTar(ArchiveBase):
         super(ArchiveTar, self).unpack(target_dir, clean_dir)
         self.unpack_dir(target_dir)
 
-    def unpack_dir(self, target_dir):
+    def unpack_dir(self, target_dir, callback=None):
         rmode = ""
         self.tar = None
         if self.type == 'tar':
@@ -252,23 +252,9 @@ class ArchiveTar(ArchiveBase):
         uid = os.getuid()
         gid = os.getgid()
 
-        install_tar_path = util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar)
         for tarinfo in self.tar:
-            # Installing packages (especially shared libraries) is a
-            # bit tricky. You should also change the inode if you
-            # change the file, cause the file is opened allready and
-            # accessed. Removing and creating the file will also
-            # change the inode and will do the trick (in fact, old
-            # file will be deleted only when its closed).
-            # 
-            # Also, tar.extract() doesn't write on symlinks... Not any
-            # more :).
-            if self.file_path.startswith(install_tar_path):
-                if os.path.isfile(tarinfo.name) or os.path.islink(tarinfo.name):
-                    try:
-                        os.unlink(tarinfo.name)
-                    except OSError, e:
-                        ctx.ui.warning(e)
+            if callback:
+                callback(tarinfo, extracted=False)
 
             self.tar.extract(tarinfo)
 
@@ -287,9 +273,8 @@ class ArchiveTar(ArchiveBase):
                 else:
                     os.lchown(tarinfo.name, uid, gid)
 
-            # Added for package-manager
-            if tarinfo.name.endswith(".desktop"):
-                ctx.ui.notify(pisi.ui.desktopfile, desktopfile=tarinfo.name)
+            if callback:
+                callback(tarinfo, extracted=True)
 
         try:
             if oldwd:
