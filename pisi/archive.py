@@ -213,11 +213,15 @@ class ArchiveTar(ArchiveBase):
     type. Provides access to tar, tar.gz and tar.bz2 files.
 
     This class provides the unpack magic for tar archives."""
-    def __init__(self, file_path, arch_type = "tar", no_same_permissions = True, no_same_owner = True):
+    def __init__(self, file_path=None, arch_type="tar",
+                        no_same_permissions=True,
+                        no_same_owner=True,
+                        fileobj=None):
         super(ArchiveTar, self).__init__(file_path, arch_type)
         self.tar = None
         self.no_same_permissions = no_same_permissions
         self.no_same_owner = no_same_owner
+        self.fileobj = fileobj
 
     def unpack(self, target_dir, clean_dir = False):
         """Unpack tar archive to a given target directory(target_dir)."""
@@ -234,12 +238,13 @@ class ArchiveTar(ArchiveBase):
         elif self.type == 'tarbz2':
             rmode = 'r:bz2'
         elif self.type == 'tarlzma':
-            self.tar = TarFile.lzmaopen(self.file_path)
+            self.tar = TarFile.lzmaopen(self.file_path, fileobj=self.fileobj)
         else:
             raise UnknownArchiveType
 
         if self.tar is None:
-            self.tar = tarfile.open(self.file_path, rmode)
+            self.tar = tarfile.open(self.file_path, rmode,
+                                    fileobj=self.fileobj)
 
         oldwd = None
         try:
@@ -296,12 +301,14 @@ class ArchiveTar(ArchiveBase):
             elif self.type == 'tarlzma':
                 level = int(ctx.config.values.build.compressionlevel)
                 self.tar = TarFile.lzmaopen(self.file_path, "w",
+                                            fileobj=self.fileobj,
                                             compresslevel=level)
             else:
                 raise UnknownArchiveType
 
             if self.tar is None:
-                self.tar = tarfile.open(self.file_path, wmode)
+                self.tar = tarfile.open(self.file_path, wmode,
+                                        fileobj=self.fileobj)
 
         self.tar.add(file_name, arc_name)
 
@@ -391,6 +398,9 @@ class ArchiveZip(ArchiveBase):
         super(ArchiveZip, self).__init__(file_path, arch_type)
 
         self.zip_obj = zipfile.ZipFile(self.file_path, mode)
+
+    def open(self, file_path, mode="r"):
+        return self.zip_obj.open(file_path, mode)
 
     def close(self):
         """Close the zip archive."""
