@@ -557,7 +557,11 @@ class Archive:
                     'bzip2':    ArchiveBzip2,
                     'binary':   ArchiveBinary}
 
-        self.archive = handlers.get(arch_type)(file_path, arch_type)
+        handler = handlers.get(arch_type)
+        if handler is None:
+            raise UnknownArchiveType
+
+        self.archive = handler(file_path, arch_type)
 
     def unpack(self, target_dir, clean_dir=False):
         self.archive.unpack(target_dir, clean_dir)

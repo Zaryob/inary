@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -119,6 +119,11 @@ class SourceArchive:
         if not util.check_file_hash(self.archiveFile, self.archive.sha1sum):
             raise Error, _("unpack: check_file_hash failed")
 
-        archive = pisi.archive.Archive(self.archiveFile, self.archive.type)
+        try:
+            archive = pisi.archive.Archive(self.archiveFile, self.archive.type)
+        except pisi.archive.UnknownArchiveType:
+            raise Error(_("Unknown archive type '%s' is given for '%s'.")
+                        % (self.archive.type, self.url.filename()))
+
         target_dir = os.path.join(self.pkg_work_dir, self.archive.target or "")
         archive.unpack(target_dir, clean_dir)
