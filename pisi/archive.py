@@ -97,11 +97,17 @@ class _LZMAProxy(object):
 class TarFile(tarfile.TarFile):
 
     @classmethod
-    def lzmaopen(cls, name=None, mode="r", fileobj=None,
-                    compresslevel=9, **kwargs):
-        """Open lzma compressed tar archive name for reading or writing.
+    def lzmaopen(cls,
+                 name=None,
+                 mode="r",
+                 fileobj=None,
+                 compressformat="xz",
+                 compresslevel=9,
+                 **kwargs):
+        """Open lzma/xz compressed tar archive name for reading or writing.
            Appending is not allowed.
         """
+
         if len(mode) > 1 or mode not in "rw":
             raise ValueError("mode must be 'r' or 'w'.")
 
@@ -113,11 +119,8 @@ class TarFile(tarfile.TarFile):
         if fileobj is not None:
             fileobj = _LZMAProxy(fileobj, mode)
         else:
-            options = {
-                "format":   "alone",
-                "level":    compresslevel,
-                #"extreme":  compresslevel == 9
-            }
+            options = {"format":    compressformat,
+                       "level":     compresslevel}
             fileobj = lzma.LZMAFile(name, mode, options=options)
 
         try:
@@ -242,7 +245,7 @@ class ArchiveTar(ArchiveBase):
             rmode = 'r:gz'
         elif self.type == 'tarbz2':
             rmode = 'r:bz2'
-        elif self.type == 'tarlzma':
+        elif self.type in ('tarlzma', 'tarxz'):
             self.tar = TarFile.lzmaopen(self.file_path, fileobj=self.fileobj)
         else:
             raise UnknownArchiveType
@@ -303,10 +306,12 @@ class ArchiveTar(ArchiveBase):
                 wmode = 'w:gz'
             elif self.type == 'tarbz2':
                 wmode = 'w:bz2'
-            elif self.type == 'tarlzma':
+            elif self.type in ('tarlzma', 'tarxz'):
+                format = "xz" if self.type == "tarxz" else "alone"
                 level = int(ctx.config.values.build.compressionlevel)
                 self.tar = TarFile.lzmaopen(self.file_path, "w",
                                             fileobj=self.fileobj,
+                                            compressformat=format,
                                             compresslevel=level)
             else:
                 raise UnknownArchiveType
@@ -550,6 +555,7 @@ class Archive:
         handlers = {'targz':    ArchiveTar,
                     'tarbz2':   ArchiveTar,
                     'tarlzma':  ArchiveTar,
+                    'tarxz':    ArchiveTar,
                     'tarZ':     ArchiveTarZ,
                     'tar':      ArchiveTar,
                     'zip':      ArchiveZip,
