@@ -216,6 +216,33 @@ class ArchiveGzip(ArchiveBase):
         gzip_file.close()
 
 
+class ArchiveLzma(ArchiveBase):
+    """ArchiveLzma handles LZMA archive files"""
+
+    def __init__(self, file_path, arch_type="lzma"):
+        super(ArchiveLzma, self).__init__(file_path, arch_type)
+
+    def unpack(self, target_dir, clean_dir=False):
+        super(ArchiveLzma, self).unpack(target_dir, clean_dir)
+        self.unpack_dir(target_dir)
+
+    def unpack_dir(self, target_dir):
+        """Unpack LZMA archive to a given target directory(target_dir)."""
+
+        output_path = util.join_path(target_dir,
+                                     os.path.basename(self.file_path))
+        ext = ".lzma" if self.type == "lzma" else ".xz"
+        if output_path.endswith(ext):
+            output_path = output_path[:-len(ext)]
+
+        import lzma
+        lzma_file = lzma.LZMAFile(self.file_path, "r")
+        output = open(output_path, "w")
+        output.write(lzma_file.read())
+        output.close()
+        lzma_file.close()
+
+
 class ArchiveTar(ArchiveBase):
     """ArchiveTar handles tar archives depending on the compression
     type. Provides access to tar, tar.gz and tar.bz2 files.
@@ -549,8 +576,9 @@ class Archive:
     Abstract Factory Pattern :)."""
 
     def __init__(self, file_path, arch_type):
-        """accepted archive types:
-        targz, tarbz2, tarlzma, tarZ, tar, zip, gzip, binary"""
+        """Accepted archive types:
+        targz, tarbz2, tarlzma, tarxz, tarZ, tar, zip, gzip, bzip2,
+        lzma, xz, binary"""
 
         handlers = {'targz':    ArchiveTar,
                     'tarbz2':   ArchiveTar,
@@ -561,6 +589,8 @@ class Archive:
                     'zip':      ArchiveZip,
                     'gzip':     ArchiveGzip,
                     'bzip2':    ArchiveBzip2,
+                    'lzma':     ArchiveLzma,
+                    'xz':       ArchiveLzma,
                     'binary':   ArchiveBinary}
 
         handler = handlers.get(arch_type)
