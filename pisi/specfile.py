@@ -153,7 +153,7 @@ class ComarProvide:
 class Archive:
 
     s_uri = [ autoxml.String, autoxml.mandatory ]
-    a_type = [ autoxml.String, autoxml.mandatory ]
+    a_type = [ autoxml.String, autoxml.optional ]
     a_sha1sum =[ autoxml.String, autoxml.mandatory ]
     a_target =[ autoxml.String, autoxml.optional ]
 

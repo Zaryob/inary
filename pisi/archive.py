@@ -580,6 +580,9 @@ class Archive:
         targz, tarbz2, tarlzma, tarxz, tarZ, tar, zip, gzip, bzip2,
         lzma, xz, binary"""
 
+        if not arch_type:
+            arch_type = self._guess_archive_type(file_path)
+
         handlers = {'targz':    ArchiveTar,
                     'tarbz2':   ArchiveTar,
                     'tarlzma':  ArchiveTar,
@@ -600,6 +603,26 @@ class Archive:
             raise UnknownArchiveType
 
         self.archive = handler(file_path, arch_type)
+
+    def _guess_archive_type(self, file_path):
+        types = (("targz",      (".tar.gz", ".tgz")),
+                 ("tarbz2",     (".tar.bz2", ".tar.bz", ".tbz2", ".tbz")),
+                 ("tarlzma",    (".tar.lzma", ".tlz")),
+                 ("tarxz",      (".tar.xz", ".txz")),
+                 ("tarZ",       (".tar.Z",)),
+                 ("tar",        (".tar",)),
+                 ("zip",        (".zip", ".ZIP")),
+                 ("gz",         (".gz",)),
+                 ("bz2",        (".bz2", ".bz")),
+                 ("lzma",       (".lzma",)),
+                 ("xz",         (".xz",)),
+                 ("binary",     (".bin", ".run", ".sh")))
+
+        for _type, extensions in types:
+            if file_path.endswith(extensions):
+                return _type
+
+        return "binary"
 
     def unpack(self, target_dir, clean_dir=False):
         self.archive.unpack(target_dir, clean_dir)
