@@ -163,6 +163,7 @@ class ArchiveBinary(ArchiveBase):
 
 class ArchiveBzip2(ArchiveBase):
     """ArchiveBzip2 handles Bzip2 archive files"""
+
     def __init__(self, file_path, arch_type="bz2"):
         super(ArchiveBzip2, self).__init__(file_path, arch_type)
 
@@ -172,22 +173,23 @@ class ArchiveBzip2(ArchiveBase):
 
     def unpack_dir(self, target_dir):
         """Unpack Bzip2 archive to a given target directory(target_dir)."""
-        oldwd = os.getcwd()
-        os.chdir(target_dir)
+
+        output_path = util.join_path(target_dir,
+                                     os.path.basename(self.file_path))
+        if output_path.endswith(".bz2"):
+            output_path = output_path[:-4]
 
         import bz2
-        self.bzip2 = bz2.BZ2File(self.file_path, "r")
-        self.output = \
-                open(os.path.basename(self.file_path.rstrip(".bz2")), "w")
-        self.output.write(self.bzip2.read())
-        self.output.close()
-        self.bzip2.close()
-
-        os.chdir(oldwd)
+        bz2_file = bz2.BZ2File(self.file_path, "r")
+        output = open(output_path, "w")
+        output.write(bz2_file.read())
+        output.close()
+        bz2_file.close()
 
 
 class ArchiveGzip(ArchiveBase):
     """ArchiveGzip handles Gzip archive files"""
+
     def __init__(self, file_path, arch_type="gz"):
         super(ArchiveGzip, self).__init__(file_path, arch_type)
 
@@ -197,17 +199,18 @@ class ArchiveGzip(ArchiveBase):
 
     def unpack_dir(self, target_dir):
         """Unpack Gzip archive to a given target directory(target_dir)."""
-        oldwd = os.getcwd()
-        os.chdir(target_dir)
+
+        output_path = util.join_path(target_dir,
+                                     os.path.basename(self.file_path))
+        if output_path.endswith(".gz"):
+            output_path = output_path[:-3]
 
         import gzip
-        self.gzip = gzip.GzipFile(self.file_path, "r")
-        self.output = open(os.path.basename(self.file_path.rstrip(".gz")), "w")
-        self.output.write(self.gzip.read())
-        self.output.close()
-        self.gzip.close()
-
-        os.chdir(oldwd)
+        gzip_file = gzip.GzipFile(self.file_path, "r")
+        output = open(output_path, "w")
+        output.write(gzip_file.read())
+        output.close()
+        gzip_file.close()
 
 
 class ArchiveTar(ArchiveBase):
