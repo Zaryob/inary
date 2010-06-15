@@ -524,16 +524,23 @@ def sha1_data(data):
 
 def uncompress(patchFile, compressType="gz", targetDir=""):
     """Uncompress the file and return the new path."""
-    archive = pisi.archive.Archive(patchFile, compressType)
-    archive.unpack(targetDir)
+    formats = ("gz", "gzip", "bz2", "bzip2", "lzma", "xz")
+    if compressType not in formats:
+        raise Error(_("Compression type is not valid: '%s'") % compressType)
 
-    # for bzip2, file extension is bz2
-    if compressType == "bzip2":
-        compressType = "bz2"
+    archive = pisi.archive.Archive(patchFile, compressType)
+    try:
+        archive.unpack(targetDir)
+    except Exception, msg:
+        raise Error(_("Error while decompressing %s: %s") % (patchFile, msg))
+
+    # FIXME: Get file path from Archive instance
+    filePath = join_path(targetDir, os.path.basename(patchFile))
 
     # remove suffix from file cause its uncompressed now
-    filePath = join_path(targetDir, os.path.basename(patchFile))
-    return filePath.split(".%s" % compressType)[0]
+    extensions = {"gzip": "gz", "bzip2": "bz2"}
+    extension = extensions.get(compressType, compressType)
+    return filePath.split(".%s" % extension)[0]
 
 
 def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):

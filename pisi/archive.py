@@ -587,6 +587,7 @@ class Archive:
                     'tarZ':     ArchiveTarZ,
                     'tar':      ArchiveTar,
                     'zip':      ArchiveZip,
+                    'gz':       ArchiveGzip,
                     'gzip':     ArchiveGzip,
                     'bz2':      ArchiveBzip2,
                     'bzip2':    ArchiveBzip2,
