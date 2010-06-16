@@ -155,39 +155,39 @@ msgstr "Telepítés nem sikerült."
 #: pisi/actionsapi/cmaketools.py:81 pisi/actionsapi/cmaketools.py:106
 #: pisi/actionsapi/cmaketools.py:116 pisi/actionsapi/kde.py:81
 msgid "No Makefile found."
-msgstr ""
+msgstr "Nem találok make fájlt."
 
 #: pisi/actionsapi/autotools.py:147
 msgid "Running aclocal failed."
-msgstr ""
+msgstr "Aclocal futása nem sikerült."
 
 #: pisi/actionsapi/autotools.py:152
 msgid "Running autoconf failed."
-msgstr ""
+msgstr "Autoconf futása nem sikerült."
 
 #: pisi/actionsapi/autotools.py:157
 msgid "Running autoreconf failed."
-msgstr ""
+msgstr "Autoreconf futása nem sikerült."
 
 #: pisi/actionsapi/autotools.py:162
 msgid "Running automake failed."
-msgstr ""
+msgstr "Automake futása nem sikerült."
 
 #: pisi/actionsapi/autotools.py:167
 msgid "Running autoheader failed."
-msgstr ""
+msgstr "Autoheader futása nem sikerült."
 
 #: pisi/actionsapi/cmaketools.py:68
 msgid "No configure script found for cmake."
-msgstr ""
+msgstr "Nem található konfiguráló szkript cmake-hez."
 
 #: pisi/actionsapi/get.py:174
 msgid "Util %s cannot be found"
-msgstr ""
+msgstr "Util %s nem található"
 
 #: pisi/actionsapi/get.py:176
 msgid "Warning: %s does not exist, using plain name %s"
-msgstr ""
+msgstr "Figyelmeztetés: %s nem létezik, add meg érthetően a nevét: %s"
 
 #: pisi/actionsapi/kde.py:34
 msgid ""
@@ -195,10 +195,13 @@ msgid ""
 "!!! Please attach the config.log to your bug report:\n"
 "%s/config.log"
 msgstr ""
+"\n"
+"!!! Kérjük, csatolja a config.log-ot a hibajelentéshez:\n"
+"%s/ config.log"
 
 #: pisi/actionsapi/kerneltools.py:117
 msgid "Can't find kernel version information file %s."
-msgstr ""
+msgstr "Nem találom a kernel verzió-információs fájlt %s."
 
 #: pisi/actionsapi/libtools.py:38
 msgid "Running ldconfig failed."
