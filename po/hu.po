@@ -52,98 +52,104 @@ msgstr "beállítás %s: %s érvénytelen érték: %r"
 
 #: /usr/lib/python2.6/optparse.py:437
 msgid "option %s: invalid choice: %r (choose from %s)"
-msgstr ""
+msgstr "beállítás %s: érvénytelen választás: %r (választani %s)"
 
 #: /usr/lib/python2.6/optparse.py:1245
 msgid "show this help message and exit"
-msgstr ""
+msgstr "mutassa ezt a súgó üzenetet aztán kilép"
 
 #: /usr/lib/python2.6/optparse.py:1250
 msgid "show program's version number and exit"
-msgstr ""
+msgstr "mutassa a program verziószámát és kilép"
 
 #: /usr/lib/python2.6/optparse.py:1273
 msgid "%prog [options]"
-msgstr ""
+msgstr "% Prog [opciók]"
 
 #: /usr/lib/python2.6/optparse.py:1493 /usr/lib/python2.6/optparse.py:1532
 msgid "%s option requires an argument"
-msgstr ""
+msgstr "%s argumentumot igényel"
 
 #: /usr/lib/python2.6/optparse.py:1495 /usr/lib/python2.6/optparse.py:1534
 msgid "%s option requires %d arguments"
-msgstr ""
+msgstr "%s opció megköveteli %d argumentumot"
 
 #: /usr/lib/python2.6/optparse.py:1504
 msgid "%s option does not take a value"
-msgstr ""
+msgstr "%s opció nem tartalmaz értéket"
 
 #: /usr/lib/python2.6/optparse.py:1621
 msgid "Options"
-msgstr ""
+msgstr "Opciók"
 
 #: pisi-cli:42
 msgid "Keyboard Interrupt: Exiting..."
-msgstr ""
+msgstr "Billentyűzet hiba: Kilépés ..."
 
 #: pisi-cli:45
 msgid "Program terminated."
-msgstr ""
+msgstr "Program megszűnik."
 
 #: pisi-cli:48
 msgid ""
 "Unhandled internal exception.\n"
 "Please file a bug report to <http://bugs.pardus.org.tr>."
 msgstr ""
+"Kezelt belső kivételével. \n"
+"Küldjön egy hibabejelentést a <http://bugs.pardus.org.tr> ."
 
 #: pisi-cli:54
 msgid "System error. Program terminated."
-msgstr ""
+msgstr "Rendszerhiba. Program megszűnik."
 
 #: pisi-cli:63
 msgid "Please use 'pisi help' for general help."
-msgstr ""
+msgstr "Kérjük, használja a \"pisi help\" alkalmazást az általános súgóhoz."
 
 #: pisi-cli:66
 msgid ""
 "\n"
 "Traceback:"
 msgstr ""
+"\n"
+"Visszakövetés"
 
 #: pisi-cli:69
 msgid "Use --debug to see a traceback."
-msgstr ""
+msgstr "Használata - debug látni a visszakövetést."
 
 #: pisi/actionsapi/autotools.py:37 pisi/actionsapi/cmaketools.py:36
 msgid ""
 "Please attach the config.log to your bug report:\n"
 "%s/config.log"
 msgstr ""
+"Kérjük, csatolja a config.log-ot a hibajelentéshez:\n"
+"%s/config.log"
 
 #: pisi/actionsapi/autotools.py:78 pisi/actionsapi/autotools.py:88
 #: pisi/actionsapi/cmaketools.py:66 pisi/actionsapi/kde.py:65
 #: pisi/actionsapi/perlmodules.py:54 pisi/actionsapi/perlmodules.py:57
 msgid "Configure failed."
-msgstr ""
+msgstr "Konfigurálás nem sikerült."
 
 #: pisi/actionsapi/autotools.py:80 pisi/actionsapi/autotools.py:90
 #: pisi/actionsapi/kde.py:67
 msgid "No configure script found."
-msgstr ""
+msgstr "Nem található konfiguráló szkript."
 
 #: pisi/actionsapi/autotools.py:99 pisi/actionsapi/cmaketools.py:79
 #: pisi/actionsapi/kde.py:72 pisi/actionsapi/perlmodules.py:63
 #: pisi/actionsapi/perlmodules.py:72 pisi/actionsapi/pythonmodules.py:62
 #: pisi/actionsapi/scons.py:39
 msgid "Make failed."
-msgstr ""
+msgstr "Make nem sikerült."
 
 #: pisi/actionsapi/autotools.py:127 pisi/actionsapi/autotools.py:138
 #: pisi/actionsapi/cmaketools.py:102 pisi/actionsapi/cmaketools.py:112
 #: pisi/actionsapi/kde.py:79 pisi/actionsapi/pythonmodules.py:67
 #: pisi/actionsapi/scons.py:43
 msgid "Install failed."
-msgstr ""
+msgstr "Telepítés nem sikerült."
 
 #: pisi/actionsapi/autotools.py:131 pisi/actionsapi/autotools.py:142
 #: pisi/actionsapi/cmaketools.py:81 pisi/actionsapi/cmaketools.py:106
