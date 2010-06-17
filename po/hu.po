@@ -664,47 +664,47 @@ msgstr "Nem létező csomag eltávolításának kísérlete"
 
 #: pisi/atomicoperations.py:631
 msgid "Not removing conflicted file : %s"
-msgstr ""
+msgstr "Ütköző fájl nincs eltávolítva: %s "
 
 #: pisi/atomicoperations.py:659
 msgid "Installed file %s does not exist on system [Probably you manually deleted]"
-msgstr ""
+msgstr "Telepített %s fájl nem létezik a rendszerben [Talán kézzel törölve]"
 
 #: pisi/cli/__init__.py:115
 msgid "Warning: "
-msgstr ""
+msgstr "Figyelmeztetés:"
 
 #: pisi/cli/__init__.py:125
 msgid "Error: "
-msgstr ""
+msgstr "Hiba:"
 
 #: pisi/cli/__init__.py:155
 msgid " (yes/no)"
-msgstr ""
+msgstr "(Igen / nem)"
 
 #: pisi/cli/__init__.py:176
 msgid " [complete]\n"
-msgstr ""
+msgstr "[Teljes]\n"
 
 #: pisi/cli/__init__.py:186
 msgid "Installed %s"
-msgstr ""
+msgstr "Telepített %s"
 
 #: pisi/cli/__init__.py:188
 msgid "Removed %s"
-msgstr ""
+msgstr "Eltávolított %s"
 
 #: pisi/cli/__init__.py:190
 msgid "Upgraded %s"
-msgstr ""
+msgstr "Frissített %s"
 
 #: pisi/cli/__init__.py:192
 msgid "Configured %s"
-msgstr ""
+msgstr "Beállítva %s"
 
 #: pisi/cli/__init__.py:194
 msgid "Extracting the files of %s"
-msgstr ""
+msgstr "Fájlok kibontása a %s -ból"
 
 #: pisi/cli/addrepo.py:24
 msgid ""
@@ -722,11 +722,11 @@ msgstr ""
 
 #: pisi/cli/addrepo.py:45
 msgid "add-repo options"
-msgstr ""
+msgstr "add-repo opciók"
 
 #: pisi/cli/addrepo.py:46
 msgid "Ignore repository distribution check"
-msgstr ""
+msgstr "A disztribúció tárolói ellenőrzésének figyelmen kívül hagyása"
 
 #: pisi/cli/addrepo.py:47
 msgid "Does not fetch repository index and does not check distribution match"
