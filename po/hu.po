@@ -730,11 +730,11 @@ msgstr "A disztribúció tárolói ellenőrzésének figyelmen kívül hagyása"
 
 #: pisi/cli/addrepo.py:47
 msgid "Does not fetch repository index and does not check distribution match"
-msgstr ""
+msgstr "Nem lehet letölteni a tároló index-fájlt és nincs disztribúció egyezés"
 
 #: pisi/cli/addrepo.py:50
 msgid "Add repository at given position (0 is first)"
-msgstr ""
+msgstr "Tároló hozzáadása megadott helyen (0 az első)"
 
 #: pisi/cli/addrepo.py:69
 msgid ""
@@ -745,7 +745,7 @@ msgstr ""
 
 #: pisi/cli/addrepo.py:81
 msgid "%s repository could not be reached. Removing %s from system."
-msgstr ""
+msgstr "%s tároló nem érhető el. %s eltávolítása a rendszerből."
 
 #: pisi/cli/blame.py:24
 msgid ""
@@ -757,15 +757,15 @@ msgstr ""
 
 #: pisi/cli/blame.py:39
 msgid "blame options"
-msgstr ""
+msgstr "hibalehetőségek"
 
 #: pisi/cli/blame.py:40
 msgid "Blame for the given release"
-msgstr ""
+msgstr "Hiba az adott kiadásban"
 
 #: pisi/cli/blame.py:42
 msgid "Blame for all of the releases"
-msgstr ""
+msgstr "Hiba az összes kiadásban"
 
 #: pisi/cli/blame.py:68 pisi/specfile.py:436
 msgid "Name: %s, version: %s, release: %s\n"
@@ -773,15 +773,15 @@ msgstr ""
 
 #: pisi/cli/blame.py:70
 msgid "Package Maintainer: %s <%s>\n"
-msgstr ""
+msgstr "Csomag karbantartó: %s <%s>\n"
 
 #: pisi/cli/blame.py:71
 msgid "Release Updater: %s <%s>\n"
-msgstr ""
+msgstr "Kiadás fejlesztő: %s <%s>\n"
 
 #: pisi/cli/blame.py:72
 msgid "Update Date: %s\n"
-msgstr ""
+msgstr "Frissítés dátuma: %s\n"
 
 #: pisi/cli/build.py:25
 msgid ""
