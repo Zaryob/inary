@@ -27,7 +27,7 @@ _ = __trans.ugettext
 
 import pisi
 import pisi.specfile
-import pisi.util
+import pisi.util as util
 import pisi.file
 import pisi.context as ctx
 import pisi.dependency as dependency
@@ -43,6 +43,7 @@ import pisi.archive as archive
 import pisi.actionsapi.variables
 import pisi.db
 
+
 class Error(pisi.Error):
     pass
 
@@ -54,6 +55,7 @@ class AbandonedFilesException(pisi.Error):
 
 class ExcludedArchitectureException(Error):
     pass
+
 
 # Helper Functions
 def get_file_type(path, pinfo_list):
@@ -72,7 +74,7 @@ def get_file_type(path, pinfo_list):
         elif fnmatch.fnmatch(path, pinfo.path):
             glob_match = pinfo
 
-        elif fnmatch.fnmatch(path, pisi.util.join_path(pinfo.path, "*")):
+        elif fnmatch.fnmatch(path, util.join_path(pinfo.path, "*")):
             if parent_match is None or parent_match.path < pinfo.path:
                 parent_match = pinfo
 
@@ -85,6 +87,11 @@ def check_path_collision(package, pkgList):
     """This function will check for collision of paths in a package with
     the paths of packages in pkgList. The return value will be the
     list containing the paths that collide."""
+    create_static = ctx.get_option("create_static")
+    create_debug = ctx.config.values.build.generatedebug
+    ar_suffix = ctx.const.ar_file_suffix
+    debug_suffix = ctx.const.debug_file_suffix
+
     collisions = []
     for pinfo in package.files:
         for pkg in pkgList:
@@ -96,12 +103,14 @@ def check_path_collision(package, pkgList):
                 # collide. Exp:
                 # pinfo.path: /usr/share
                 # path.path: /usr/share/doc
-                if (path.path.endswith(ctx.const.ar_file_suffix) and ctx.get_option('create_static')) or \
-                   (path.path.endswith(ctx.const.debug_file_suffix) and ctx.config.values.build.generatedebug):
+
+                if (create_static and path.path.endswith(ar_suffix)) or \
+                        (create_static and path.path.endswith(debug_suffix)):
                     # don't throw collision error for these files.
                     # we'll handle this in gen_files_xml..
                     continue
-                if pisi.util.subpath(pinfo.path, path.path):
+
+                if util.subpath(pinfo.path, path.path):
                     collisions.append(path.path.rstrip("/"))
                     ctx.ui.debug(_('Path %s belongs in multiple packages') %
                                  path.path)
@@ -109,22 +118,22 @@ def check_path_collision(package, pkgList):
 
 def exclude_special_files(filepath, fileinfo, ag):
     keeplist = [] if not ag.has_key('KeepSpecial') else ag['KeepSpecial']
-    patterns = {
-             "libtool": "libtool library file",
-             "python":  "python.*byte-compiled",
-             "perl":    "Perl POD document text"
-             }
+    patterns = {"libtool": "libtool library file",
+                "python":  "python.*byte-compiled",
+                "perl":    "Perl POD document text"}
 
     if "libtool" in keeplist:
         # Some upstream sources have buggy libtool and ltmain.sh with them,
         # which causes wrong path entries in *.la files. And these wrong path
         # entries sometimes triggers compile-time errors or linkage problems.
-        # Instead of patching all these buggy sources and maintain these patches,
-        # PiSi removes wrong paths...
-        if re.match(patterns["libtool"], fileinfo) and not os.path.islink(filepath):
+        # Instead of patching all these buggy sources and maintain these
+        # patches, PiSi removes wrong paths...
+        if re.match(patterns["libtool"], fileinfo) and \
+                not os.path.islink(filepath):
             ladata = file(filepath).read()
             new_ladata = re.sub("-L%s/\S*" % ctx.config.tmp_dir(), "", ladata)
-            new_ladata = re.sub("%s/\S*/install/" % ctx.config.tmp_dir(), "/", new_ladata)
+            new_ladata = re.sub("%s/\S*/install/" % ctx.config.tmp_dir(), "/",
+                                new_ladata)
             if new_ladata != ladata:
                 file(filepath, "w").write(new_ladata)
 
@@ -133,25 +142,25 @@ def exclude_special_files(filepath, fileinfo, ag):
             ctx.ui.debug("Removing special %s file: %s" % (pattern, filepath))
             os.unlink(filepath)
             # Remove dir if it becomes empty (Bug #11588)
-            pisi.util.rmdirs(os.path.dirname(filepath))
+            util.rmdirs(os.path.dirname(filepath))
 
 def strip_debug_action(filepath, fileinfo, install_dir, ag):
     excludelist = [] if not ag.has_key('NoStrip') else ag['NoStrip']
-    outputpath = pisi.util.join_path(os.path.dirname(install_dir),
-                                 ctx.const.debug_dir_suffix,
-                                 ctx.const.debug_files_suffix,
-                                 pisi.util.remove_prefix(install_dir, filepath))
+    outputpath = util.join_path(os.path.dirname(install_dir),
+                                ctx.const.debug_dir_suffix,
+                                ctx.const.debug_files_suffix,
+                                util.remove_prefix(install_dir, filepath))
 
     # real path in .pisi package
-    p = '/' + pisi.util.removepathprefix(install_dir, filepath)
+    p = '/' + util.removepathprefix(install_dir, filepath)
     strip = True
     for exclude in excludelist:
         if p.startswith(exclude):
             strip = False
 
     if strip:
-        if pisi.util.strip_file(filepath, fileinfo, outputpath):
-            ctx.ui.debug("%s [%s]" %(p, "stripped"))
+        if util.strip_file(filepath, fileinfo, outputpath):
+            ctx.ui.debug("%s [%s]" % (p, "stripped"))
 
 class Builder:
     """Provides the package build and creation routines"""
@@ -173,14 +182,16 @@ class Builder:
             else:
                 repo = repodb.get_repo(reponame)
                 #FIXME: don't use dirname to work on URLs
-                src_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
-                                        str(src_uri.path()))
+                src_path = os.path.join(
+                                    os.path.dirname(repo.indexuri.get_uri()),
+                                    str(src_uri.path()))
 
             ctx.ui.debug(_("Source URI: %s") % src_path)
 
             return Builder(src_path)
         else:
-            raise Error(_("Source %s not found in any active repository.") % name)
+            raise Error(_("Source %s not found in any active repository.")
+                        % name)
 
     def __init__(self, specuri):
 
@@ -199,12 +210,16 @@ class Builder:
         else:
             self.specdir = os.path.dirname(self.specuri.get_uri())
 
-        # Don't wait until creating .pisi file for complaining about versioning scheme errors
-        self.check_versioning(self.spec.getSourceVersion(), self.spec.getSourceRelease())
+        # Don't wait until creating .pisi file for complaining about versioning
+        # scheme errors
+        self.check_versioning(self.spec.getSourceVersion(),
+                              self.spec.getSourceRelease())
 
         self.read_translations(self.specdir)
 
-        self.sourceArchives = pisi.sourcearchive.SourceArchives(self.spec, self.pkg_work_dir())
+        self.sourceArchives = pisi.sourcearchive.SourceArchives(
+                                                        self.spec,
+                                                        self.pkg_work_dir())
 
         self.set_environment_vars()
 
@@ -214,14 +229,16 @@ class Builder:
 
     def set_spec_file(self, specuri):
         if not specuri.is_remote_file():
-            specuri = pisi.uri.URI(os.path.realpath(specuri.get_uri()))  # FIXME: doesn't work for file://
+            # FIXME: doesn't work for file://
+            specuri = pisi.uri.URI(os.path.realpath(specuri.get_uri()))
         self.specuri = specuri
         spec = pisi.specfile.SpecFile()
         spec.read(self.specuri, ctx.config.tmp_dir())
         self.spec = spec
 
     def read_translations(self, specdir):
-        self.spec.read_translations(pisi.util.join_path(specdir, ctx.const.translations_file))
+        self.spec.read_translations(util.join_path(specdir,
+                                    ctx.const.translations_file))
 
     # directory accessor functions
 
@@ -230,9 +247,11 @@ class Builder:
     def pkg_dir(self):
         "package build directory"
         packageDir = self.spec.source.name + '-' + \
-                     self.spec.getSourceVersion() + '-' + self.spec.getSourceRelease()
-        return pisi.util.join_path(ctx.config.dest_dir(), ctx.config.values.dirs.tmp_dir,
-                     packageDir)
+                     self.spec.getSourceVersion() + '-' + \
+                     self.spec.getSourceRelease()
+        return util.join_path(ctx.config.dest_dir(),
+                              ctx.config.values.dirs.tmp_dir,
+                              packageDir)
 
     def pkg_work_dir(self):
         return self.pkg_dir() + ctx.const.work_dir_suffix
@@ -244,12 +263,12 @@ class Builder:
         return self.pkg_dir() + ctx.const.install_dir_suffix
 
     def set_state(self, state):
-        stateFile = pisi.util.join_path(self.pkg_work_dir(), "pisiBuildState")
+        stateFile = util.join_path(self.pkg_work_dir(), "pisiBuildState")
         open(stateFile, "w").write(state)
 
     def get_state(self):
-        stateFile = pisi.util.join_path(self.pkg_work_dir(), "pisiBuildState")
-        if not os.path.exists(stateFile): # no state
+        stateFile = util.join_path(self.pkg_work_dir(), "pisiBuildState")
+        if not os.path.exists(stateFile):  # no state
             return None
         return open(stateFile, "r").read()
 
@@ -258,15 +277,18 @@ class Builder:
 
         architecture = ctx.config.values.general.architecture
         if architecture in self.spec.source.excludeArch:
-            raise ExcludedArchitectureException(_("pspec.xml avoids this package from building for '%s'") % architecture)
+            raise ExcludedArchitectureException(
+                    _("pspec.xml avoids this package from building for '%s'")
+                    % architecture)
 
-
-        ctx.ui.status(_("Building PiSi source package: %s") % self.spec.source.name)
+        ctx.ui.status(_("Building PiSi source package: %s")
+                      % self.spec.source.name)
 
         self.compile_action_script()
         self.compile_comar_script()
 
-        # check if all patch files exists, if there are missing no need to unpack!
+        # check if all patch files exists, if there are missing no need
+        # to unpack!
         self.patch_exists()
 
         self.check_build_dependencies()
@@ -290,14 +312,12 @@ class Builder:
         # environment. See bug #2575
         pisi.actionsapi.variables.initVariables()
 
-        env = {
-            "PKG_DIR": self.pkg_dir(),
-            "WORK_DIR": self.pkg_work_dir(),
-            "INSTALL_DIR": self.pkg_install_dir(),
-            "SRC_NAME": self.spec.source.name,
-            "SRC_VERSION": self.spec.getSourceVersion(),
-            "SRC_RELEASE": self.spec.getSourceRelease()
-            }
+        env = {"PKG_DIR": self.pkg_dir(),
+               "WORK_DIR": self.pkg_work_dir(),
+               "INSTALL_DIR": self.pkg_install_dir(),
+               "SRC_NAME": self.spec.source.name,
+               "SRC_VERSION": self.spec.getSourceVersion(),
+               "SRC_RELEASE": self.spec.getSourceRelease()}
         os.environ.update(env)
 
         # First check icecream, if not found use ccache, no need to use both
@@ -305,21 +325,23 @@ class Builder:
         if ctx.config.values.build.buildhelper == "icecream":
             if os.path.exists("/opt/icecream/bin/gcc"):
                 # Add icecream directory for support distributed compiling :)
-                os.environ["PATH"] = "/opt/icecream/bin/:%s" % os.environ["PATH"]
-                ctx.ui.info(_("IceCream detected. Make sure your daemon is up and running..."))
+                os.environ["PATH"] = "/opt/icecream/bin:%(PATH)s" % os.environ
+                ctx.ui.info(_("IceCream detected. Make sure your daemon "
+                              "is up and running..."))
         elif ctx.config.values.build.buildhelper == "ccache":
             if os.path.exists("/usr/lib/ccache/bin/gcc"):
                 # Add ccache directory for support Compiler Cache :)
-                os.environ["PATH"] = "/usr/lib/ccache/bin/:%s" % os.environ["PATH"]
-                # Force ccache to use /root/.ccache instead of $HOME/.ccache which can be modified
-                # through actions.py
+                os.environ["PATH"] = "/usr/lib/ccache/bin:%(PATH)s" \
+                                                                % os.environ
+                # Force ccache to use /root/.ccache instead of $HOME/.ccache
+                # which can be modified through actions.py
                 os.environ["CCACHE_DIR"] = "/root/.ccache"
                 ctx.ui.info(_("CCache detected..."))
 
     def fetch_files(self):
         self.specdiruri = os.path.dirname(self.specuri.get_uri())
         pkgname = os.path.basename(self.specdiruri)
-        self.destdir = pisi.util.join_path(ctx.config.tmp_dir(), pkgname)
+        self.destdir = util.join_path(ctx.config.tmp_dir(), pkgname)
         #self.location = os.path.dirname(self.url.uri)
 
         self.fetch_actionsfile()
@@ -332,15 +354,16 @@ class Builder:
         return self.destdir
 
     def fetch_pspecfile(self):
-        pspecuri = pisi.util.join_path(self.specdiruri, ctx.const.pspec_file)
+        pspecuri = util.join_path(self.specdiruri, ctx.const.pspec_file)
         self.download(pspecuri, self.destdir)
 
     def fetch_actionsfile(self):
-        actionsuri = pisi.util.join_path(self.specdiruri, ctx.const.actions_file)
+        actionsuri = util.join_path(self.specdiruri, ctx.const.actions_file)
         self.download(actionsuri, self.destdir)
 
     def fetch_translationsfile(self):
-        translationsuri = pisi.util.join_path(self.specdiruri, ctx.const.translations_file)
+        translationsuri = util.join_path(self.specdiruri,
+                                         ctx.const.translations_file)
         try:
             self.download(translationsuri, self.destdir)
         except pisi.fetcher.FetchError:
@@ -352,26 +375,31 @@ class Builder:
         for patch in spec.source.patches:
             file_name = os.path.basename(patch.filename)
             dir_name = os.path.dirname(patch.filename)
-            patchuri = pisi.util.join_path(self.specdiruri,
+            patchuri = util.join_path(self.specdiruri,
                             ctx.const.files_dir, dir_name, file_name)
-            self.download(patchuri, pisi.util.join_path(self.destdir, ctx.const.files_dir, dir_name))
+            self.download(patchuri, util.join_path(self.destdir,
+                                                   ctx.const.files_dir,
+                                                   dir_name))
 
     def fetch_comarfiles(self):
         spec = self.spec
         for package in spec.packages:
             for pcomar in package.providesComar:
-                comaruri = pisi.util.join_path(self.specdiruri,
+                comaruri = util.join_path(self.specdiruri,
                                 ctx.const.comar_dir, pcomar.script)
-                self.download(comaruri, pisi.util.join_path(self.destdir, ctx.const.comar_dir))
+                self.download(comaruri, util.join_path(self.destdir,
+                                                       ctx.const.comar_dir))
 
     def fetch_additionalFiles(self):
         for pkg in self.spec.packages + [self.spec.source]:
             for afile in pkg.additionalFiles:
                 file_name = os.path.basename(afile.filename)
                 dir_name = os.path.dirname(afile.filename)
-                afileuri = pisi.util.join_path(self.specdiruri,
+                afileuri = util.join_path(self.specdiruri,
                                 ctx.const.files_dir, dir_name, file_name)
-                self.download(afileuri, pisi.util.join_path(self.destdir, ctx.const.files_dir, dir_name))
+                self.download(afileuri, util.join_path(self.destdir,
+                                                       ctx.const.files_dir,
+                                                       dir_name))
 
     def download(self, uri, transferdir):
         # fix auth info and download
@@ -381,21 +409,25 @@ class Builder:
     def fetch_component(self):
         if not self.spec.source.partOf:
             ctx.ui.info(_('PartOf tag not defined, looking for component'))
-            diruri = pisi.util.parenturi(self.specuri.get_uri())
-            parentdir = pisi.util.parenturi(diruri)
-            url = pisi.util.join_path(parentdir, 'component.xml')
+            diruri = util.parenturi(self.specuri.get_uri())
+            parentdir = util.parenturi(diruri)
+            url = util.join_path(parentdir, 'component.xml')
             progress = ctx.ui.Progress
             if pisi.uri.URI(url).is_remote_file():
                 try:
                     pisi.fetcher.fetch_url(url, self.pkg_work_dir(), progress)
                 except pisi.fetcher.FetchError:
-                    ctx.ui.warning(_('Cannot find component.xml in remote directory, Source is now part of unknown component'))
+                    ctx.ui.warning(_("Cannot find component.xml in remote "
+                                     "directory, Source is now part of "
+                                     "unknown component"))
                     self.spec.source.partOf = 'unknown'
                     return
-                path = pisi.util.join_path(self.pkg_work_dir(), 'component.xml')
+                path = util.join_path(self.pkg_work_dir(), 'component.xml')
             else:
                 if not os.path.exists(url):
-                    ctx.ui.warning(_('Cannot find component.xml in upper directory, Source is now part of unknown component'))
+                    ctx.ui.warning(_("Cannot find component.xml in upper "
+                                     "directory, Source is now part of "
+                                     "unknown component"))
                     self.spec.source.partOf = 'unknown'
                     return
                 path = url
@@ -437,7 +469,7 @@ class Builder:
 
         # Before install make sure install_dir is clean
         if os.path.exists(self.pkg_install_dir()):
-            pisi.util.clean_dir(self.pkg_install_dir())
+            util.clean_dir(self.pkg_install_dir())
 
         # install function is mandatory!
         if self.run_action_function(ctx.const.install_func, True):
@@ -450,17 +482,16 @@ class Builder:
         abandoned_files = []
         all_paths_in_packages = []
 
-
         for package in self.spec.packages:
             for path in package.files:
-                path = pisi.util.join_path(install_dir, path.path)
+                path = util.join_path(install_dir, path.path)
                 all_paths_in_packages.append(path)
 
         def is_included(path1, path2):
             "Return True if path2 includes path1"
             return path1 == path2 \
                     or fnmatch.fnmatch(path1, path2) \
-                    or fnmatch.fnmatch(path1, pisi.util.join_path(path2, "*"))
+                    or fnmatch.fnmatch(path1, util.join_path(path2, "*"))
 
         for root, dirs, files in os.walk(install_dir):
             if not dirs and not files:
@@ -471,7 +502,7 @@ class Builder:
                     abandoned_files.append(root)
 
             for file_ in files:
-                fpath = pisi.util.join_path(root, file_)
+                fpath = util.join_path(root, file_)
                 for _path in all_paths_in_packages:
                     if is_included(fpath, _path):
                         break
@@ -487,22 +518,25 @@ class Builder:
         for afile in self.spec.source.additionalFiles:
             src = os.path.join(self.specdir, ctx.const.files_dir, afile.filename)
             dest = os.path.join(self.srcDir, afile.target)
-            pisi.util.copy_file(src, dest)
+            util.copy_file(src, dest)
             if afile.permission:
                 # mode is octal!
                 os.chmod(dest, int(afile.permission, 8))
 
     def compile_action_script(self):
-        """Compiles given actions.py to check syntax error in it and sets the actionLocals and actionGlobals"""
-        fname = pisi.util.join_path(self.specdir, ctx.const.actions_file)
+        """Compiles given actions.py to check syntax error in it and
+        sets the actionLocals and actionGlobals"""
+        fname = util.join_path(self.specdir, ctx.const.actions_file)
         try:
             localSymbols = globalSymbols = {}
             buf = open(fname).read()
             exec compile(buf, "error", "exec") in localSymbols, globalSymbols
         except IOError, e:
-            raise Error(_("Unable to read Actions Script (%s): %s") %(fname,e))
+            raise Error(_("Unable to read Actions Script (%s): %s")
+                        % (fname, e))
         except SyntaxError, e:
-            raise Error(_("SyntaxError in Actions Script (%s): %s") %(fname,e))
+            raise Error(_("SyntaxError in Actions Script (%s): %s")
+                        % (fname, e))
 
         self.actionLocals = localSymbols
         self.actionGlobals = globalSymbols
@@ -512,28 +546,33 @@ class Builder:
         """Compiles comar scripts to check syntax errors"""
         for package in self.spec.packages:
             for pcomar in package.providesComar:
-                fname = pisi.util.join_path(self.specdir, ctx.const.comar_dir,
+                fname = util.join_path(self.specdir, ctx.const.comar_dir,
                                      pcomar.script)
 
                 try:
                     buf = open(fname).read()
                     compile(buf, "error", "exec")
                 except IOError, e:
-                    raise Error(_("Unable to read COMAR script (%s): %s") %(fname,e))
+                    raise Error(_("Unable to read COMAR script (%s): %s")
+                                % (fname, e))
                 except SyntaxError, e:
-                    raise Error(_("SyntaxError in COMAR file (%s): %s") %(fname,e))
+                    raise Error(_("SyntaxError in COMAR file (%s): %s")
+                                % (fname, e))
 
     def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
         try:
             workdir = self.actionGlobals['WorkDir']
         except KeyError:
-            workdir = self.spec.source.name + "-" + self.spec.getSourceVersion()
+            workdir = self.spec.source.name + "-" + \
+                        self.spec.getSourceVersion()
 
-        return pisi.util.join_path(self.pkg_work_dir(), workdir)
+        return util.join_path(self.pkg_work_dir(), workdir)
 
     def log_sandbox_violation(self, operation, path, canonical_path):
-        ctx.ui.error(_("Sandbox violation: %s (%s -> %s)") % (operation, path, canonical_path))
+        ctx.ui.error(_("Sandbox violation: %s (%s -> %s)") % (operation,
+                                                              path,
+                                                              canonical_path))
 
     def run_action_function(self, func, mandatory=False):
         """Calls the corresponding function in actions.py.
@@ -546,10 +585,12 @@ class Builder:
         if os.path.exists(self.srcDir):
             os.chdir(self.srcDir)
         else:
-            raise Error(_("ERROR: WorkDir (%s) does not exist\n") % (self.srcDir))
+            raise Error(_("ERROR: WorkDir (%s) does not exist\n")
+                        % (self.srcDir))
 
         if func in self.actionLocals:
-            if ctx.get_option('ignore_sandbox') or not ctx.config.values.build.enablesandbox:
+            if ctx.get_option('ignore_sandbox') or \
+                    not ctx.config.values.build.enablesandbox:
                 self.actionLocals[func]()
             else:
                 import catbox
@@ -557,7 +598,7 @@ class Builder:
                 ctx.ui.info(_("Sandbox enabled build..."))
 
                 # Configure allowed paths from sandbox.conf
-                valid_paths = [ self.pkg_dir() ]
+                valid_paths = [self.pkg_dir()]
                 conf_file = ctx.const.sandbox_conf
                 if os.path.exists(conf_file):
                     for line in file(conf_file):
@@ -569,21 +610,28 @@ class Builder:
 
                 # Extra path for ccache when needed
                 if ctx.config.values.build.buildhelper == "ccache":
-                    valid_paths.append(os.environ.get("CCACHE_DIR", "/root/.ccache"))
+                    valid_paths.append(os.environ.get("CCACHE_DIR",
+                                                      "/root/.ccache"))
 
-                ret = catbox.run(self.actionLocals[func], valid_paths, logger=self.log_sandbox_violation)
-                # Retcode can be 0 while there is a sanbox violation, so only look for violations to correctly handle it
+                ret = catbox.run(self.actionLocals[func],
+                                 valid_paths,
+                                 logger=self.log_sandbox_violation)
+                # Retcode can be 0 while there is a sanbox violation, so only
+                # look for violations to correctly handle it
                 if ret.violations != []:
                     ctx.ui.error(_("Sandbox violation result:"))
                     for result in ret.violations:
-                        ctx.ui.error("* %s (%s -> %s)" % (result[0], result[1], result[2]))
+                        ctx.ui.error("* %s (%s -> %s)" % (result[0],
+                                                          result[1],
+                                                          result[2]))
                     raise Error(_("Sandbox violations!"))
 
                 if ret.code == 1:
                     raise ActionScriptException
         else:
             if mandatory:
-                raise Error(_("unable to call function from actions: %s") % func)
+                raise Error(_("unable to call function from actions: %s")
+                            % func)
 
         os.chdir(curDir)
         return True
@@ -593,14 +641,16 @@ class Builder:
             int(release)
             pisi.version.make_version(version)
         except (ValueError, pisi.version.InvalidVersionError):
-            raise Error(_("%s-%s is not a valid PiSi version format") % (version, release))
+            raise Error(_("%s-%s is not a valid PiSi version format")
+                        % (version, release))
 
     def check_build_dependencies(self):
         """check and try to install build dependencies, otherwise fail."""
 
         build_deps = self.spec.source.buildDependencies
 
-        if not ctx.config.values.general.ignore_safety and not ctx.get_option('ignore_safety'):
+        if not ctx.config.values.general.ignore_safety and \
+                not ctx.get_option('ignore_safety'):
             if self.componentdb.has_component('system.devel'):
                 build_deps_names = set([x.package for x in build_deps])
                 devel_deps_names = set(self.componentdb.get_component('system.devel').packages)
@@ -608,8 +658,8 @@ class Builder:
                 extra_names = filter(lambda x: not self.installdb.has_package(x), extra_names)
                 if extra_names:
                     ctx.ui.warning(_('Safety switch: following extra packages in system.devel will be installed: ') +
-                               pisi.util.strlist(extra_names))
-                    extra_deps = [dependency.Dependency(package = x) for x in extra_names]
+                               util.strlist(extra_names))
+                    extra_deps = [dependency.Dependency(package=x) for x in extra_names]
                     build_deps.extend(extra_deps)
                 else:
                     ctx.ui.info(_('Safety switch: system.devel is already installed'))
@@ -624,7 +674,7 @@ class Builder:
 
         if dep_unsatis:
             ctx.ui.info(_("Unsatisfied Build Dependencies:") + ' '
-                        + pisi.util.strlist([str(x) for x in dep_unsatis]) )
+                        + util.strlist([str(x) for x in dep_unsatis]))
 
             def fail():
                 raise Error(_('Cannot build package due to unsatisfied build dependencies'))
@@ -646,37 +696,37 @@ class Builder:
     def patch_exists(self):
         """check existence of patch files declared in PSPEC"""
 
-        files_dir = os.path.abspath(pisi.util.join_path(self.specdir,
+        files_dir = os.path.abspath(util.join_path(self.specdir,
                                                  ctx.const.files_dir))
         for patch in self.spec.source.patches:
-            patchFile = pisi.util.join_path(files_dir, patch.filename)
+            patchFile = util.join_path(files_dir, patch.filename)
             if not os.access(patchFile, os.F_OK):
                 raise Error(_("Patch file is missing: %s\n") % patch.filename)
 
     def apply_patches(self):
-        files_dir = os.path.abspath(pisi.util.join_path(self.specdir,
+        files_dir = os.path.abspath(util.join_path(self.specdir,
                                                  ctx.const.files_dir))
 
         for patch in self.spec.source.patches:
-            patchFile = pisi.util.join_path(files_dir, patch.filename)
+            patchFile = util.join_path(files_dir, patch.filename)
             relativePath = patch.filename
             reverseApply = patch.reverse and patch.reverse.lower() == "true"
             if patch.compressionType:
-                patchFile = pisi.util.uncompress(patchFile,
+                patchFile = util.uncompress(patchFile,
                                             compressType=patch.compressionType,
                                             targetDir=ctx.config.tmp_dir())
                 relativePath = relativePath.rsplit(".%s" % patch.compressionType, 1)[0]
 
             ctx.ui.action(_("* Applying patch: %s") % patch.filename)
-            pisi.util.do_patch(self.srcDir, patchFile, level=patch.level, name=relativePath, reverse=reverseApply)
+            util.do_patch(self.srcDir, patchFile, level=patch.level, name=relativePath, reverse=reverseApply)
         return True
 
     def generate_static_package_object(self):
         ar_files = []
         for root, dirs, files in os.walk(self.pkg_install_dir()):
             for f in files:
-                if f.endswith(ctx.const.ar_file_suffix) and pisi.util.is_ar_file(pisi.util.join_path(root, f)):
-                    ar_files.append(pisi.util.join_path(root, f))
+                if f.endswith(ctx.const.ar_file_suffix) and util.is_ar_file(util.join_path(root, f)):
+                    ar_files.append(util.join_path(root, f))
 
         if not len(ar_files):
             return None
@@ -688,12 +738,12 @@ class Builder:
         static_package_obj.description['en'] = u'Ar files for %s' % (self.spec.source.name)
         static_package_obj.partOf = self.spec.source.partOf
         for f in ar_files:
-            static_package_obj.files.append(pisi.specfile.Path(path = f[len(self.pkg_install_dir()):], fileType = "library"))
+            static_package_obj.files.append(pisi.specfile.Path(path=f[len(self.pkg_install_dir()):], fileType="library"))
 
         # append all generated packages to dependencies
         for p in self.spec.packages:
             static_package_obj.packageDependencies.append(
-                pisi.dependency.Dependency(package = p.name))
+                pisi.dependency.Dependency(package=p.name))
 
         return static_package_obj
 
@@ -702,7 +752,7 @@ class Builder:
         for root, dirs, files in os.walk(self.pkg_debug_dir()):
             for f in files:
                 if f.endswith(ctx.const.debug_file_suffix):
-                    debug_files.append(pisi.util.join_path(root, f))
+                    debug_files.append(util.join_path(root, f))
 
         if not len(debug_files):
             return None
@@ -715,7 +765,7 @@ class Builder:
         debug_package_obj.description['en'] = u'Debug files for %s' % (self.spec.source.name)
         debug_package_obj.partOf = self.spec.source.partOf
         for f in debug_files:
-            debug_package_obj.files.append(pisi.specfile.Path(path = f[len(self.pkg_debug_dir()):], fileType = "debug"))
+            debug_package_obj.files.append(pisi.specfile.Path(path=f[len(self.pkg_debug_dir()):], fileType="debug"))
 
         return debug_package_obj
 
@@ -760,19 +810,20 @@ class Builder:
         # reported as errors
 
         d = {}
+
         def add_path(path):
             # add the files under material path
-            for fpath, fhash in pisi.util.get_file_hashes(path, collisions, install_dir):
+            for fpath, fhash in util.get_file_hashes(path, collisions, install_dir):
                 if ctx.get_option('create_static') \
                     and fpath.endswith(ctx.const.ar_file_suffix) \
                     and not package.name.endswith(ctx.const.static_name_suffix) \
-                    and pisi.util.is_ar_file(fpath):
+                    and util.is_ar_file(fpath):
                     # if this is an ar file, and this package is not a static package,
                     # don't include this file into the package.
                     continue
-                frpath = pisi.util.removepathprefix(install_dir, fpath) # relative path
+                frpath = util.removepathprefix(install_dir, fpath)  # relative path
                 ftype, permanent = get_file_type(frpath, package.files)
-                fsize = long(pisi.util.dir_size(fpath))
+                fsize = long(util.dir_size(fpath))
                 if not os.path.islink(fpath):
                     st = os.stat(fpath)
                 else:
@@ -784,14 +835,14 @@ class Builder:
                     ctx.ui.warning(_("/%s has suid bit set") % frpath)
 
         for pinfo in package.files:
-            wildcard_path = pisi.util.join_path(install_dir, pinfo.path)
+            wildcard_path = util.join_path(install_dir, pinfo.path)
             for path in glob.glob(wildcard_path):
                 add_path(path)
 
         for (p, fileinfo) in d.iteritems():
             files.append(fileinfo)
 
-        files_xml_path = pisi.util.join_path(self.pkg_dir(), ctx.const.files_xml)
+        files_xml_path = util.join_path(self.pkg_dir(), ctx.const.files_xml)
         files.write(files_xml_path)
         self.files = files
 
@@ -808,19 +859,20 @@ class Builder:
 
         # find previous build in packages dir
         found = set()
+
         def locate_old_package(old_package_fn):
             if not old_package_fn.endswith(ctx.const.package_suffix) or \
                     old_package_fn.endswith(ctx.const.delta_package_suffix):
                 return
 
-            if pisi.util.is_package_name(os.path.basename(old_package_fn), package_name):
+            if util.is_package_name(os.path.basename(old_package_fn), package_name):
                 try:
                     pkg = os.path.basename(old_package_fn)
-                    name, version = pisi.util.parse_package_name(pkg[:-5])
+                    name, version = util.parse_package_name(pkg[:-5])
                     ctx.ui.info(_('(found old version %s)') % old_package_fn)
-                    ver, rel, build = pisi.util.split_version(version)
+                    ver, rel, build = util.split_version(version)
                     old_build = int(build) if build else 0
-                    found.add( (old_package_fn, old_build) )
+                    found.add((old_package_fn, old_build))
                 except Error:
                     ctx.ui.warning('Package file %s may be corrupt. Skipping.' % old_package_fn)
 
@@ -828,15 +880,15 @@ class Builder:
             for path in paths:
                 for root, dirs, files in os.walk(path):
                     for f in files:
-                        locate_old_package(pisi.util.join_path(root,f))
+                        locate_old_package(util.join_path(root, f))
 
         search_old_packages_in([ctx.config.compiled_packages_dir(),
                                 ctx.config.debug_packages_dir()])
 
-        outdir=ctx.get_option('output_dir')
+        outdir = ctx.get_option('output_dir')
         if not outdir:
             outdir = '.'
-        for f in [pisi.util.join_path(outdir,entry) for entry in os.listdir(outdir)]:
+        for f in [util.join_path(outdir, entry) for entry in os.listdir(outdir)]:
             if os.path.isfile(f):
                 locate_old_package(f)
 
@@ -844,11 +896,11 @@ class Builder:
             return (1, None)
             ctx.ui.warning(_('(no previous build found, setting build no to 1.)'))
         else:
-            a = filter(lambda (x,y): y != 0, found)
+            a = filter(lambda (x, y): y != 0, found)
             ctx.ui.debug(str(a))
             if a:
                 # sort in order of increasing build number
-                a.sort(lambda x,y : cmp(x[1],y[1]))
+                a.sort(lambda x, y: cmp(x[1], y[1]))
                 old_package_fn = a[-1][0]   # get the last one
                 old_build = a[-1][1]
 
@@ -859,8 +911,8 @@ class Builder:
                 changed = False
                 fnew = self.files.list
                 fold = old_pkg.files.list
-                fold.sort(lambda x,y : cmp(x.path,y.path))
-                fnew.sort(lambda x,y : cmp(x.path,y.path))
+                fold.sort(lambda x, y: cmp(x.path, y.path))
+                fnew.sort(lambda x, y: cmp(x.path, y.path))
 
                 if len(fnew) != len(fold):
                     changed = True
@@ -880,7 +932,7 @@ class Builder:
                     changed = True
 
                 self.old_packages.append(os.path.basename(old_package_fn))
-            else: # no old build had a build number
+            else:  # no old build had a build number
                 old_build = None
 
             ctx.ui.debug('old build number: %s' % old_build)
@@ -906,7 +958,7 @@ class Builder:
 
         for root, dirs, files in os.walk(install_dir):
             for fn in files:
-                filepath = pisi.util.join_path(root, fn)
+                filepath = util.join_path(root, fn)
                 fileinfo = ms.file(filepath)
                 strip_debug_action(filepath, fileinfo, install_dir, self.actionGlobals)
                 exclude_special_files(filepath, fileinfo, self.actionGlobals)
@@ -918,7 +970,7 @@ class Builder:
         """Build each package defined in PSPEC file. After this process there
         will be .pisi files hanging around, AS INTENDED ;)"""
 
-        self.fetch_component() # bug 856
+        self.fetch_component()  # bug 856
 
         # Operations and filters for package files
         self.file_actions()
@@ -947,7 +999,7 @@ class Builder:
                 dest = os.path.join(
                         install_dir + os.path.dirname(afile.target),
                         os.path.basename(afile.target))
-                pisi.util.copy_file(src, dest)
+                util.copy_file(src, dest)
                 if afile.permission:
                     # mode is octal!
                     os.chmod(dest, int(afile.permission, 8))
@@ -1013,17 +1065,17 @@ class Builder:
                 build_no, old_build_no = self.calc_build_no(package.name)
 
             self.metadata.package.build = build_no
-            self.metadata.write(pisi.util.join_path(self.pkg_dir(), ctx.const.metadata_xml))
+            self.metadata.write(util.join_path(self.pkg_dir(), ctx.const.metadata_xml))
 
             # Calculate new and oldpackage names for buildfarm
-            name =  pisi.util.package_name(package.name,
+            name =  util.package_name(package.name,
                                      self.spec.getSourceVersion(),
                                      self.spec.getSourceRelease(),
                                      self.metadata.package.build)
 
             outdir = ctx.get_option('output_dir')
             if outdir:
-                name = pisi.util.join_path(outdir, name)
+                name = util.join_path(outdir, name)
             self.new_packages.append(name)
 
             ctx.ui.info(_("Creating PiSi package %s.") % name)
@@ -1033,7 +1085,7 @@ class Builder:
             # add comar files to package
             os.chdir(self.specdir)
             for pcomar in package.providesComar:
-                fname = pisi.util.join_path(ctx.const.comar_dir,
+                fname = util.join_path(ctx.const.comar_dir,
                                      pcomar.script)
                 pkg.add_to_package(fname)
 
@@ -1049,24 +1101,25 @@ class Builder:
             files.read(ctx.const.files_xml)
 
             # Sort the files in-place according to their path for an ordered
-            # tarfile layout which dramatically improves the compression performance
-            # of lzma.
+            # tarfile layout which dramatically improves the compression
+            # performance of lzma.
             files.list.sort(key=lambda x: x.path)
 
             if ctx.get_option('package_format') == "1.0":
                 for finfo in files.list:
-                    orgname = arcname = pisi.util.join_path("install", finfo.path)
+                    orgname = arcname = util.join_path("install", finfo.path)
                     if package.debug_package:
-                        orgname = pisi.util.join_path("debug", finfo.path)
+                        orgname = util.join_path("debug", finfo.path)
                     pkg.add_to_package(orgname, arcname)
                 pkg.close()
             else: # default package format is 1.1, so make it fallback.
-                ctx.build_leftover = pisi.util.join_path(self.pkg_dir(), ctx.const.install_tar_lzma)
+                ctx.build_leftover = util.join_path(self.pkg_dir(),
+                                                    ctx.const.install_tar_lzma)
                 tar = archive.ArchiveTar(ctx.const.install_tar_lzma, "tarlzma")
                 for finfo in files.list:
-                    orgname = pisi.util.join_path("install", finfo.path)
+                    orgname = util.join_path("install", finfo.path)
                     if package.debug_package:
-                        orgname = pisi.util.join_path("debug", finfo.path)
+                        orgname = util.join_path("debug", finfo.path)
                     tar.add_to_archive(orgname, finfo.path)
                 tar.close()
                 pkg.add_to_package(ctx.const.install_tar_lzma)
@@ -1083,7 +1136,7 @@ class Builder:
 
         if ctx.config.values.general.autoclean is True:
             ctx.ui.info(_("Cleaning Build Directory..."))
-            pisi.util.clean_dir(self.pkg_dir())
+            util.clean_dir(self.pkg_dir())
         else:
             ctx.ui.info(_("Keeping Build Directory"))
 
