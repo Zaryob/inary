@@ -371,83 +371,83 @@ msgstr "ActionsAPI [touch]: Nincs illeszkedő fájl-minta \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:200
 msgid "ActionsAPI [touch]: Permission denied: %s"
-msgstr ""
+msgstr "ActionsAPI [touch]: Engedély megtagadva: %s"
 
 #: pisi/actionsapi/shelltools.py:255
 msgid "Command \"%s\" failed, return value was %d."
-msgstr ""
+msgstr "Parancs \"%s\" nem sikerült, visszatérés %d értékre."
 
 #: pisi/actionsapi/texlivemodules.py:54
 msgid "Building format files failed"
-msgstr ""
+msgstr "Fájlépítés nem sikerült"
 
 #: pisi/actionsapi/texlivemodules.py:57
 msgid "Generate config files failed"
-msgstr ""
+msgstr "Konfigurációs fájlok létrehozása nem sikerült"
 
 #: pisi/actionsapi/texlivemodules.py:64
 msgid "Creating symlinks from format to engines failed"
-msgstr ""
+msgstr "Szimbolikus linkek létrehozása nem sikerült."
 
 #: pisi/actionsapi/texlivemodules.py:68
 msgid "Installing texmf files failed"
-msgstr ""
+msgstr "Texmf fájlt telepítése nem sikerült"
 
 #: pisi/actionsapi/texlivemodules.py:72
 msgid "Installing docs failed"
-msgstr ""
+msgstr "Docs telepítése nem sikerült"
 
 #: pisi/actionsapi/texlivemodules.py:76
 msgid "Installing config files failed"
-msgstr ""
+msgstr "Konfigurációs fájl telepítése nem sikerült"
 
 #: pisi/actionsapi/texlivemodules.py:82
 msgid "Handle config files failed"
-msgstr ""
+msgstr "Handle konfigurációs fájl létrehozása nem sikerült"
 
 #: pisi/actionsapi/texlivemodules.py:93
 msgid "Symlink %s skipped (special case)"
-msgstr ""
+msgstr "Szimbolikus link %s kihagyva (speciális eset)"
 
 #: pisi/actionsapi/texlivemodules.py:95
 msgid "Symlink %s -> %s skipped (texlive-core takes care of it."
-msgstr ""
+msgstr "Szimbolikus link %s -> %s kihagyva (texlive-mag gondoskodik róla."
 
 #: pisi/actionsapi/texlivemodules.py:98
 msgid "Symlink %s -> %s skipped."
-msgstr ""
+msgstr "Szimbolikus link %s -> %s kihagyva."
 
 #: pisi/actionsapi/texlivemodules.py:100
 msgid "Symlink %s skipped (file exists.)"
-msgstr ""
+msgstr "Szimbolikus link %s kihagyva (fájl létezik.)"
 
 #: pisi/actionsapi/texlivemodules.py:102
 msgid "Making symlink from %s to %s"
-msgstr ""
+msgstr "Szimbolikus link készítése a %s ból %s"
 
 #: pisi/actionsapi/texlivemodules.py:154
 msgid "Creating /etc/texmf/%s.d"
-msgstr ""
+msgstr "Létrehozás /etc/texmf/%s.d"
 
 #: pisi/actionsapi/texlivemodules.py:167
 msgid "Building format file %s"
-msgstr ""
+msgstr "Fájlépítés formátuma %s"
 
 #: pisi/actionsapi/texlivemodules.py:182
 msgid "Map %s is added to %s/%s.cfg"
-msgstr ""
+msgstr "Map %s egészül ki %s/%s.cfg"
 
 #: pisi/actionsapi/texlivemodules.py:185
 msgid "MixedMap %s is added to %s/%s.cfg"
-msgstr ""
+msgstr "MixedMap %s egészül ki %s/%s.cfg"
 
 #: pisi/actionsapi/texlivemodules.py:188
 msgid "p +%s is added to %s/%s-config.ps"
-msgstr ""
+msgstr "p +%s egészül ki %s/%s-config.ps"
 
 #: pisi/actionsapi/texlivemodules.py:191
 msgid "f %s is added to %s/%s-config"
-msgstr ""
+msgstr "f %s egészül ki %s/%s-config"
 
 #: pisi/actionsapi/texlivemodules.py:195
 msgid "Language file  %s  already generated."
