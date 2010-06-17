@@ -918,7 +918,7 @@ msgstr "Csak a megváltozott konfigurációs fájlok ellenőrzése a csomagban"
 
 #: pisi/cli/check.py:66
 msgid "Checking all installed packages"
-msgstr ""
+msgstr "Telepített csomagok ellenőrzése"
 
 #: pisi/cli/check.py:71
 msgid "* Checking %s... "
@@ -929,20 +929,24 @@ msgid ""
 "\n"
 "Package %s has changed config files."
 msgstr ""
+"\n"
+"%s csomag megváltoztatta a konfigurációs fájlokat."
 
 #: pisi/cli/check.py:79
 msgid ""
 "\n"
 "Package %s is corrupt."
 msgstr ""
+"\n"
+"%s csomag sérült."
 
 #: pisi/cli/check.py:81 pisi/operations/check.py:48
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: pisi/cli/check.py:83
 msgid "Package %s not installed"
-msgstr ""
+msgstr "%s csomag nincs telepítve"
 
 #: pisi/cli/clean.py:20
 msgid ""
@@ -956,7 +960,7 @@ msgstr ""
 
 #: pisi/cli/command.py:30
 msgid "Command lacks name"
-msgstr ""
+msgstr "Hiányzik a parancs neve"
 
 #: pisi/cli/command.py:34
 msgid "Duplicate command %s"
