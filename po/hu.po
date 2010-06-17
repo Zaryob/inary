@@ -586,7 +586,7 @@ msgstr "Telepítés %s, %s verzió, kiadás %s, %s csomagolt"
 
 #: pisi/atomicoperations.py:190 pisi/operations/build.py:596
 msgid "%s-%s is not a valid PiSi version format"
-msgstr ""
+msgstr "%s-%s nem érvényes PiSi formátum"
 
 #: pisi/atomicoperations.py:196
 msgid "%s package cannot be installed unless the dependencies are satisfied"
@@ -611,56 +611,56 @@ msgstr "Telepítse újra ugyanazt a változatát a csomagnak?"
 
 #: pisi/atomicoperations.py:251
 msgid "Package re-install declined"
-msgstr ""
+msgstr "Csomag újratelepítés elutasítva"
 
 #: pisi/atomicoperations.py:263
 msgid "Upgrading to new upstream version"
-msgstr ""
+msgstr "Frissítve az új verzióra"
 
 #: pisi/atomicoperations.py:266
 msgid "Upgrading to new distribution release"
-msgstr ""
+msgstr "Frissítve disztribúció új kiadására"
 
 #: pisi/atomicoperations.py:270
 msgid "Upgrading to new distribution build"
-msgstr ""
+msgstr "Frissítve disztribúció új építésű változatára"
 
 #: pisi/atomicoperations.py:279
 msgid "Downgrade to old distribution release?"
-msgstr ""
+msgstr "Visszafejleszt a disztribúció korábbi kiadására?"
 
 #: pisi/atomicoperations.py:281
 msgid "Downgrade to old distribution build?"
-msgstr ""
+msgstr "Visszafejleszt a disztribúció korábban épített változatára?"
 
 #: pisi/atomicoperations.py:283
 msgid "Package downgrade declined"
-msgstr ""
+msgstr "Csomag visszafejlesztés elutasítva"
 
 #: pisi/atomicoperations.py:322
 msgid "%s configuration failed."
-msgstr ""
+msgstr "%s konfiguráció nem sikerült."
 
 #: pisi/atomicoperations.py:413
 msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
-msgstr ""
+msgstr "Nem sikerült áthelyezni a következő fájlokat. A csomagok újratelepítése erősen ajánlott."
 
 #: pisi/atomicoperations.py:504 pisi/atomicoperations.py:507
 #: pisi/atomicoperations.py:514
 msgid "Storing %s"
-msgstr ""
+msgstr "%s tárolás"
 
 #: pisi/atomicoperations.py:581
 msgid "File list could not be read for package %s, continuing removal."
-msgstr ""
+msgstr "A %s csomag fájllistáját nem lehet olvasni,eltávolítás folytatása."
 
 #: pisi/atomicoperations.py:587
 msgid "Removing package %s"
-msgstr ""
+msgstr "% csomag eltávolítása"
 
 #: pisi/atomicoperations.py:590
 msgid "Trying to remove nonexistent package "
-msgstr ""
+msgstr "Nem létező csomag eltávolításának kísérlete"
 
 #: pisi/atomicoperations.py:631
 msgid "Not removing conflicted file : %s"
