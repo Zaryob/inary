@@ -166,6 +166,9 @@ class Builder:
     """Provides the package build and creation routines"""
     #FIXME: this class and every other class must use URLs as paths!
 
+    package_formats = ("1.0", "1.1")
+    default_package_format = "1.1"
+
     @staticmethod
     def from_name(name):
         repodb = pisi.db.repodb.RepoDB()
@@ -214,6 +217,13 @@ class Builder:
         # scheme errors
         self.check_versioning(self.spec.getSourceVersion(),
                               self.spec.getSourceRelease())
+
+        # Check package format
+        self.target_package_format = ctx.get_option("package_format") \
+                                        or Builder.default_package_format
+        if self.target_package_format not in Builder.package_formats:
+            raise Error(_("Invalid package format: %s")
+                        % self.target_package_format)
 
         self.read_translations(self.specdir)
 
@@ -780,7 +790,7 @@ class Builder:
         metadata.package.distribution = ctx.config.values.general.distribution
         metadata.package.distributionRelease = ctx.config.values.general.distribution_release
         metadata.package.architecture = ctx.config.values.general.architecture
-        metadata.package.packageFormat = ctx.get_option('package_format')
+        metadata.package.packageFormat = self.target_package_format
 
         size = 0
         for fileinfo in self.files.list:
@@ -1105,7 +1115,7 @@ class Builder:
             # performance of lzma.
             files.list.sort(key=lambda x: x.path)
 
-            if ctx.get_option('package_format') == "1.0":
+            if self.target_package_format == "1.0":
                 for finfo in files.list:
                     orgname = arcname = util.join_path("install", finfo.path)
                     if package.debug_package:

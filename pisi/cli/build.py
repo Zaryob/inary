@@ -45,8 +45,6 @@ class Build(command.Command):
 
     name = ("build", "bi")
 
-    package_formats = ("1.0", "1.1")
-
     def options(self):
         self.add_steps_options()
         group = optparse.OptionGroup(self.parser, _("build options"))
@@ -97,9 +95,9 @@ class Build(command.Command):
 
         group.add_option("-F", "--package-format",
                          action="store",
-                         default="1.1",
-                         help=_("PiSi binary package formats: "
-                                "'1.0', '1.1' (default)"))
+                         help=_("Create the binary package using the given "
+                                "format. Use '-F help' to see a list of "
+                                "supported formats."))
 
         group.add_option("--use-quilt",
                          action="store_true",
@@ -164,18 +162,25 @@ class Build(command.Command):
         self.parser.add_option_group(group)
 
     def run(self):
+        if not self.options.quiet:
+            self.options.debug = True
+
+        if self.options.package_format == "help":
+            self.init(False, False)
+            ctx.ui.info(_("Supported package formats:"))
+            build = pisi.operations.build
+            for format in build.Builder.package_formats:
+                if format == build.Builder.default_package_format:
+                    ctx.ui.info(_("  %s (default)") % format)
+                else:
+                    ctx.ui.info("  %s" % format)
+            return
+
         if not self.args:
             self.help()
             return
 
-        if not self.options.quiet:
-            self.options.debug = True
-
         self.init()
-
-        if ctx.get_option('package_format') not in Build.package_formats:
-            raise pisi.Error(_("Package format must be one of %s ")
-                             % pisi.util.strlist(Build.package_formats))
 
         if ctx.get_option('output_dir'):
             ctx.ui.info(_('Output directory: %s')
