@@ -40,7 +40,8 @@ def main():
         print e
         sys.exit(1)
 
-    os.makedirs("install")
+    if not os.path.exists("install"):
+        os.makedirs("install")
 
     package.extract_pisi_files(".")
     package.extract_dir("comar", ".")
