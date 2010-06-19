@@ -166,8 +166,8 @@ class Builder:
     """Provides the package build and creation routines"""
     #FIXME: this class and every other class must use URLs as paths!
 
-    package_formats = ("1.0", "1.1")
-    default_package_format = "1.1"
+    package_formats = ("1.0", "1.1", "1.2")
+    default_package_format = "1.2"
 
     @staticmethod
     def from_name(name):
@@ -1122,19 +1122,28 @@ class Builder:
                         orgname = util.join_path("debug", finfo.path)
                     pkg.add_to_package(orgname, arcname)
                 pkg.close()
-            else: # default package format is 1.1, so make it fallback.
+            else:
+                if self.target_package_format == "1.1":
+                    archive_format = "tarlzma"
+                    archive_suffix = ctx.const.lzma_suffix
+                else:
+                    archive_format = "tarxz"
+                    archive_suffix = ctx.const.xz_suffix
+
+                archive_name = ctx.const.install_tar + archive_suffix
+
                 ctx.build_leftover = util.join_path(self.pkg_dir(),
-                                                    ctx.const.install_tar_lzma)
-                tar = archive.ArchiveTar(ctx.const.install_tar_lzma, "tarlzma")
+                                                    archive_name)
+                tar = archive.ArchiveTar(archive_name, archive_format)
                 for finfo in files.list:
                     orgname = util.join_path("install", finfo.path)
                     if package.debug_package:
                         orgname = util.join_path("debug", finfo.path)
                     tar.add_to_archive(orgname, finfo.path)
                 tar.close()
-                pkg.add_to_package(ctx.const.install_tar_lzma)
+                pkg.add_to_package(archive_name)
                 pkg.close()
-                os.unlink(ctx.const.install_tar_lzma)
+                os.unlink(archive_name)
                 ctx.build_leftover = None
 
             os.chdir(c)

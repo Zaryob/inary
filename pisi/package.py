@@ -119,10 +119,20 @@ class Package:
                     ctx.ui.notify(pisi.ui.desktopfile, desktopfile=tarinfo.name)
 
 
-        if self.impl.has_file(ctx.const.install_tar_lzma):
-            lzmafile = self.impl.open(ctx.const.install_tar_lzma)
-            tar = archive.ArchiveTar(fileobj=lzmafile,
-                                     arch_type="tarlzma",
+        # TODO: Read metadata to get package format
+
+        archive_name = None
+        if self.impl.has_file(ctx.const.install_tar_xz):
+            archive_name = ctx.const.install_tar_xz
+            archive_format = "tarxz"
+        elif self.impl.has_file(ctx.const.install_tar_lzma):
+            archive_name = ctx.const.install_tar_lzma
+            archive_format = "tarlzma"
+
+        if archive_name:
+            archive_file = self.impl.open(archive_name)
+            tar = archive.ArchiveTar(fileobj=archive_file,
+                                     arch_type=archive_format,
                                      no_same_permissions=False,
                                      no_same_owner=False)
             tar.unpack_dir(outdir, callback=callback)

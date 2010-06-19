@@ -53,6 +53,8 @@ class Constants:
 
         # suffix for lzma
         self.__c.lzma_suffix = ".lzma"
+        # suffix for xz
+        self.__c.xz_suffix = ".xz"
 
         self.__c.partial_suffix = ".part"
 
@@ -87,6 +89,7 @@ class Constants:
         self.__c.metadata_xml = "metadata.xml"
         self.__c.install_tar = "install.tar"
         self.__c.install_tar_lzma = "install.tar.lzma"
+        self.__c.install_tar_xz = "install.tar.xz"
         self.__c.mirrors_conf = "/etc/pisi/mirrors.conf"
         self.__c.sandbox_conf = "/etc/pisi/sandbox.conf"
         self.__c.blacklist = "/etc/pisi/blacklist"
