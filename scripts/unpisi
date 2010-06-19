@@ -46,9 +46,17 @@ def main():
     arc.unpack_files(['files.xml', 'metadata.xml'], '.')
     arc.unpack_dir('comar', '.')
 
-    if arc.has_file(ctx.const.install_tar_lzma):
-        tar_file = arc.open(ctx.const.install_tar_lzma)
-        tar = ArchiveTar(fileobj=tar_file, arch_type='tarlzma')
+    archive_name = None
+    if arc.has_file(ctx.const.install_tar_xz):
+        archive_name = ctx.const.install_tar_xz
+        archive_format = "tarxz"
+    elif arc.has_file(ctx.const.install_tar_lzma):
+        archive_name = ctx.const.install_tar_lzma
+        archive_format = "tarlzma"
+
+    if archive_name:
+        tar_file = arc.open(archive_name)
+        tar = ArchiveTar(fileobj=tar_file, arch_type=archive_format)
         tar.unpack_dir('.')
 
     return 0
