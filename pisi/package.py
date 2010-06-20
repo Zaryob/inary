@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -27,6 +27,7 @@ import pisi.files
 import pisi.util as util
 import fetcher
 
+
 class Error(pisi.Error):
     pass
 
@@ -34,7 +35,26 @@ class Error(pisi.Error):
 class Package:
     """PiSi Package Class provides access to a pisi package (.pisi
     file)."""
-    def __init__(self, packagefn, mode='r'):
+
+    formats = ("1.0", "1.1", "1.2")
+    default_format = "1.2"
+
+    @staticmethod
+    def archive_name_and_format(package_format):
+        if package_format == "1.2":
+            archive_format = "tarxz"
+            archive_suffix = ctx.const.xz_suffix
+        elif package_format == "1.1":
+            archive_format = "tarlzma"
+            archive_suffix = ctx.const.lzma_suffix
+        else:
+            # "1.0" format does not have an archive
+            return (None, None)
+
+        archive_name = ctx.const.install_tar + archive_suffix
+        return archive_name, archive_format
+
+    def __init__(self, packagefn, mode='r', format=None):
         self.filepath = packagefn
         url = pisi.uri.URI(packagefn)
 
@@ -42,6 +62,26 @@ class Package:
             self.fetch_remote_file(url)
 
         self.impl = archive.ArchiveZip(self.filepath, 'zip', mode)
+        self.install_archive = None
+
+        if mode == "r":
+            self.metadata = self.get_metadata()
+            format = self.metadata.package.packageFormat
+
+            # Many of the old packages do not contain format information
+            # because of a bug in old Pisi versions. This is a workaround
+            # to guess their package format.
+            if format is None:
+                archive_name = ctx.const.install_tar + ctx.const.lzma_suffix
+                if self.impl.has_file(archive_name):
+                    format = "1.1"
+                else:
+                    format = "1.0"
+
+        self.format = format or Package.default_format
+
+        if self.format not in Package.formats:
+            raise Error(_("Unsupported package format: %s") % format)
 
     def fetch_remote_file(self, url):
         dest = ctx.config.cached_packages_dir()
@@ -63,9 +103,82 @@ class Package:
         """Add a file or directory to package"""
         self.impl.add_to_archive(fn, an)
 
+    def add_to_install(self, name, arcname=None):
+        """Add the file 'name' to the install archive"""
+
+        if arcname is None:
+            arcname = name
+
+        if self.format == "1.0":
+            arcname = util.join_path("install", arcname)
+            self.add_to_package(name, arcname)
+            return
+
+        if self.install_archive is None:
+            archive_name, archive_format = \
+                    self.archive_name_and_format(self.format)
+            pkg_dir = "-".join((self.metadata.package.name,
+                                self.metadata.package.version,
+                                self.metadata.package.release))
+            self.install_archive_path = util.join_path(ctx.config.tmp_dir(),
+                                                       pkg_dir,
+                                                       archive_name)
+            ctx.build_leftover = self.install_archive_path
+            self.install_archive = archive.ArchiveTar(
+                                            self.install_archive_path,
+                                            archive_format)
+
+        self.install_archive.add_to_archive(name, arcname)
+
+    def add_metadata_xml(self, path):
+        self.metadata = pisi.metadata.MetaData()
+        self.metadata.read(path)
+
+        self.add_to_package(path, ctx.const.metadata_xml)
+
+    def add_files_xml(self, path):
+        self.files = pisi.files.Files()
+        self.files.read(path)
+
+        self.add_to_package(path, ctx.const.files_xml)
+
     def close(self):
         """Close the package archive"""
+        if self.install_archive:
+            self.install_archive.close()
+            arcpath = self.install_archive_path
+            arcname = os.path.basename(arcpath)
+            self.add_to_package(arcpath, arcname)
+
         self.impl.close()
+
+        if self.install_archive:
+            os.unlink(self.install_archive_path)
+            ctx.build_leftover = None
+
+    def get_install_archive(self):
+        if self.format == "1.2":
+            archive_format = "tarxz"
+            archive_suffix = ctx.const.xz_suffix
+        elif self.format == "1.1":
+            archive_format = "tarlzma"
+            archive_suffix = ctx.const.lzma_suffix
+        else:
+            # "1.0" format does not have an archive
+            return
+
+        archive_name = ctx.const.install_tar + archive_suffix
+
+        if not self.impl.has_file(archive_name):
+            return
+
+        archive_file = self.impl.open(archive_name)
+        tar = archive.ArchiveTar(fileobj=archive_file,
+                                 arch_type=archive_format,
+                                 no_same_permissions=False,
+                                 no_same_owner=False)
+
+        return tar
 
     def extract(self, outdir):
         """Extract entire package contents to directory"""
@@ -119,22 +232,9 @@ class Package:
                     ctx.ui.notify(pisi.ui.desktopfile, desktopfile=tarinfo.name)
 
 
-        # TODO: Read metadata to get package format
+        tar = self.get_install_archive()
 
-        archive_name = None
-        if self.impl.has_file(ctx.const.install_tar_xz):
-            archive_name = ctx.const.install_tar_xz
-            archive_format = "tarxz"
-        elif self.impl.has_file(ctx.const.install_tar_lzma):
-            archive_name = ctx.const.install_tar_lzma
-            archive_format = "tarlzma"
-
-        if archive_name:
-            archive_file = self.impl.open(archive_name)
-            tar = archive.ArchiveTar(fileobj=archive_file,
-                                     arch_type=archive_format,
-                                     no_same_permissions=False,
-                                     no_same_owner=False)
+        if tar:
             tar.unpack_dir(outdir, callback=callback)
         else:
             self.extract_dir_flat('install', outdir)
