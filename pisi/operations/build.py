@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2008, TUBITAK/UEKAE
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -166,9 +166,6 @@ class Builder:
     """Provides the package build and creation routines"""
     #FIXME: this class and every other class must use URLs as paths!
 
-    package_formats = ("1.0", "1.1", "1.2")
-    default_package_format = "1.2"
-
     @staticmethod
     def from_name(name):
         repodb = pisi.db.repodb.RepoDB()
@@ -220,10 +217,7 @@ class Builder:
 
         # Check package format
         self.target_package_format = ctx.get_option("package_format") \
-                                        or Builder.default_package_format
-        if self.target_package_format not in Builder.package_formats:
-            raise Error(_("Invalid package format: %s")
-                        % self.target_package_format)
+                                        or pisi.package.Package.default_format
 
         self.read_translations(self.specdir)
 
@@ -1090,7 +1084,7 @@ class Builder:
 
             ctx.ui.info(_("Creating PiSi package %s.") % name)
 
-            pkg = pisi.package.Package(name, 'w')
+            pkg = pisi.package.Package(name, "w", self.target_package_format)
 
             # add comar files to package
             os.chdir(self.specdir)
@@ -1102,49 +1096,20 @@ class Builder:
             # add xmls and files
             os.chdir(self.pkg_dir())
 
-            pkg.add_to_package(ctx.const.metadata_xml)
-            pkg.add_to_package(ctx.const.files_xml)
-
-            # Now it is time to add files to the packages using newly
-            # created files.xml
-            files = pisi.files.Files()
-            files.read(ctx.const.files_xml)
+            pkg.add_metadata_xml(ctx.const.metadata_xml)
+            pkg.add_files_xml(ctx.const.files_xml)
 
             # Sort the files in-place according to their path for an ordered
             # tarfile layout which dramatically improves the compression
             # performance of lzma.
-            files.list.sort(key=lambda x: x.path)
+            pkg.files.list.sort(key=lambda x: x.path)
 
-            if self.target_package_format == "1.0":
-                for finfo in files.list:
-                    orgname = arcname = util.join_path("install", finfo.path)
-                    if package.debug_package:
-                        orgname = util.join_path("debug", finfo.path)
-                    pkg.add_to_package(orgname, arcname)
-                pkg.close()
-            else:
-                if self.target_package_format == "1.1":
-                    archive_format = "tarlzma"
-                    archive_suffix = ctx.const.lzma_suffix
-                else:
-                    archive_format = "tarxz"
-                    archive_suffix = ctx.const.xz_suffix
-
-                archive_name = ctx.const.install_tar + archive_suffix
-
-                ctx.build_leftover = util.join_path(self.pkg_dir(),
-                                                    archive_name)
-                tar = archive.ArchiveTar(archive_name, archive_format)
-                for finfo in files.list:
-                    orgname = util.join_path("install", finfo.path)
-                    if package.debug_package:
-                        orgname = util.join_path("debug", finfo.path)
-                    tar.add_to_archive(orgname, finfo.path)
-                tar.close()
-                pkg.add_to_package(archive_name)
-                pkg.close()
-                os.unlink(archive_name)
-                ctx.build_leftover = None
+            for finfo in pkg.files.list:
+                orgname = util.join_path("install", finfo.path)
+                if package.debug_package:
+                    orgname = util.join_path("debug", finfo.path)
+                pkg.add_to_install(orgname, finfo.path)
+            pkg.close()
 
             os.chdir(c)
             self.set_state("buildpackages")
