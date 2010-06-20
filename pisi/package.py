@@ -157,19 +157,10 @@ class Package:
             ctx.build_leftover = None
 
     def get_install_archive(self):
-        if self.format == "1.2":
-            archive_format = "tarxz"
-            archive_suffix = ctx.const.xz_suffix
-        elif self.format == "1.1":
-            archive_format = "tarlzma"
-            archive_suffix = ctx.const.lzma_suffix
-        else:
-            # "1.0" format does not have an archive
-            return
+        archive_name, archive_format = \
+                self.archive_name_and_format(self.format)
 
-        archive_name = ctx.const.install_tar + archive_suffix
-
-        if not self.impl.has_file(archive_name):
+        if archive_name is None or not self.impl.has_file(archive_name):
             return
 
         archive_file = self.impl.open(archive_name)
