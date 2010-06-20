@@ -552,9 +552,8 @@ msgid "* Package database updated."
 msgstr "* A csomag adatbázis-frissítés."
 
 #: pisi/api.py:853
-#, fuzzy
 msgid "No repository named %s found."
-msgstr "Nem adattár nevû% s található."
+msgstr "%s nevű tároló nem található."
 
 #: pisi/api.py:866
 msgid "* Adding '%s' to db... "
@@ -995,8 +994,9 @@ msgid "Show debugging information"
 msgstr ""
 
 #: pisi/cli/command.py:112
+#, fuzzy
 msgid "Suppresses all coloring of PiSi's output"
-msgstr ""
+msgstr "Elnyomja az összes színezése PiSi kimenetének"
 
 #: pisi/cli/command.py:130
 msgid "Destination directory %s does not exist. Creating directory.\n"
@@ -1016,7 +1016,7 @@ msgstr ""
 
 #: pisi/cli/command.py:210
 msgid "Do not perform any action, just show what would be done"
-msgstr ""
+msgstr "Nem mutatja a folyamatot, csak ha már végzett"
 
 #: pisi/cli/command.py:228
 msgid "usage: %s\n"
@@ -1060,7 +1060,7 @@ msgstr ""
 
 #: pisi/cli/delta.py:40
 msgid "delta options"
-msgstr ""
+msgstr "delta opciók"
 
 #: pisi/cli/disablerepo.py:21
 msgid ""
@@ -1087,23 +1087,25 @@ msgstr ""
 
 #: pisi/cli/emerge.py:44
 msgid "emerge options"
-msgstr ""
+msgstr "emerge opciók"
 
 #: pisi/cli/emerge.py:47
+#, fuzzy
 msgid "Emerge available packages under given component"
-msgstr ""
+msgstr "Ereszd ki a rendelkezésre álló csomagok mellett az adott komponens"
 
 #: pisi/cli/emerge.py:49 pisi/cli/install.py:55 pisi/cli/upgrade.py:61
 msgid "Ignore file conflicts"
-msgstr ""
+msgstr "Fájl-ütközések figyelmen kívül hagyása"
 
 #: pisi/cli/emerge.py:51 pisi/cli/install.py:57 pisi/cli/upgrade.py:63
 msgid "Ignore package conflicts"
-msgstr ""
+msgstr "Csomag-ütközések figyelmen kívül hagyása"
 
 #: pisi/cli/emerge.py:73
+#, fuzzy
 msgid "Outputting binary packages in the package cache."
-msgstr ""
+msgstr "A bináris csomagok kimenete a csomag-gyorsítótárban van."
 
 #: pisi/cli/enablerepo.py:21
 msgid ""
@@ -1129,7 +1131,7 @@ msgstr ""
 
 #: pisi/cli/fetch.py:41
 msgid "fetch options"
-msgstr ""
+msgstr "fetch opciók"
 
 #: pisi/cli/fetch.py:47
 msgid "Output directory for the fetched packages"
@@ -1149,7 +1151,7 @@ msgstr ""
 
 #: pisi/cli/graph.py:43
 msgid "graph options"
-msgstr ""
+msgstr "graph opciók"
 
 #: pisi/cli/graph.py:47
 msgid "Specify a particular repository"
@@ -1161,11 +1163,12 @@ msgstr ""
 
 #: pisi/cli/graph.py:53
 msgid "Do not show installed packages"
-msgstr ""
+msgstr "Ne mutassa a  telepített csomagokat"
 
 #: pisi/cli/graph.py:56
+#, fuzzy
 msgid "Dot output file"
-msgstr ""
+msgstr "Dot kimeneti fájl"
 
 #: pisi/cli/graph.py:70
 msgid "Plotting packages in repository %s"
@@ -1204,31 +1207,32 @@ msgstr ""
 
 #: pisi/cli/history.py:28
 msgid "emerge"
-msgstr ""
+msgstr "emerge"
 
 #: pisi/cli/history.py:28
 msgid "install"
-msgstr ""
+msgstr "telepít"
 
 #: pisi/cli/history.py:28
 msgid "remove"
-msgstr ""
+msgstr "eltávolít"
 
 #: pisi/cli/history.py:28
 msgid "repository update"
-msgstr ""
+msgstr "tároló frissítés"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
-msgstr ""
+msgstr "pillanatkép"
 
 #: pisi/cli/history.py:28
 msgid "takeback"
-msgstr ""
+msgstr "visszavonás"
 
 #: pisi/cli/history.py:28
+#, fuzzy
 msgid "upgrade"
-msgstr ""
+msgstr "frissítés"
 
 #: pisi/cli/history.py:31
 msgid ""
