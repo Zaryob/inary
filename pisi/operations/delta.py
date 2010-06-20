@@ -20,6 +20,7 @@ import pisi.package
 import pisi.util as util
 import pisi.archive as archive
 
+
 def create_delta_package(old_package, new_package):
 
     if old_package == new_package:
@@ -37,18 +38,27 @@ def create_delta_package(old_package, new_package):
 
     files_delta = find_delta(oldfiles, newfiles)
 
-    ctx.ui.info(_("Creating delta PiSi package between %s %s") % (old_package, new_package))
+    ctx.ui.info(_("Creating delta PiSi package between %s %s")
+                % (old_package, new_package))
 
     # Unpack new package to temp
-    newpkg_name = util.package_name(newmd.package.name, newmd.package.version, newmd.package.release, newmd.package.build, False)
+    newpkg_name = util.package_name(newmd.package.name,
+                                    newmd.package.version,
+                                    newmd.package.release,
+                                    newmd.package.build,
+                                    False)
     newpkg_path = util.join_path(ctx.config.tmp_dir(), newpkg_name)
     newpkg.extract_to(newpkg_path, True)
 
-    tar = archive.ArchiveTar(util.join_path(newpkg_path, ctx.const.install_tar_lzma), "tarlzma", False, False)
+    newpkg_archive = util.join_path(newpkg_path, ctx.const.install_tar_lzma)
+    tar = archive.ArchiveTar(newpkg_archive, "tarlzma", False, False)
     tar.unpack_dir(newpkg_path)
 
     # Create delta package
-    deltaname = "%s-%s-%s%s" % (oldmd.package.name, oldmd.package.build, newmd.package.build, ctx.const.delta_package_suffix)
+    deltaname = "%s-%s-%s%s" % (oldmd.package.name,
+                                oldmd.package.build,
+                                newmd.package.build,
+                                ctx.const.delta_package_suffix)
 
     outdir = ctx.get_option("output_dir")
     if outdir:
@@ -68,16 +78,21 @@ def create_delta_package(old_package, new_package):
     deltapkg.add_to_package(ctx.const.metadata_xml)
     deltapkg.add_to_package(ctx.const.files_xml)
 
-    # only metadata information may change in a package, so no install.tar.lzma added to delta package
+    # only metadata information may change in a package,
+    # so no install.tar.lzma added to delta package
     if files_delta:
         # Sort the files in-place according to their path for an ordered
-        # tarfile layout which dramatically improves the compression performance
-        # of lzma. This improvement is stolen from build.py (commit r23485).
+        # tarfile layout which dramatically improves the compression
+        # performance of lzma. This improvement is stolen from build.py
+        # (commit r23485).
         files_delta.sort(key=lambda x: x.path)
 
-        ctx.build_leftover = util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar_lzma)
+        ctx.build_leftover = util.join_path(ctx.config.tmp_dir(),
+                                            ctx.const.install_tar_lzma)
 
-        tar = archive.ArchiveTar(util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar_lzma), "tarlzma")
+        deltapkg_archive = util.join_path(ctx.config.tmp_dir(),
+                                          ctx.const.install_tar_lzma)
+        tar = archive.ArchiveTar(deltapkg_archive, "tarlzma")
         for f in files_delta:
             tar.add_to_archive(f.path)
         tar.close()
@@ -99,6 +114,7 @@ def create_delta_package(old_package, new_package):
     # return delta package name
     return deltaname
 
+
 #  Hash not equals                      (these are the deltas)
 #  Hash equal but path different ones   (these are the relocations)
 #  Hash and also path equal ones        (do nothing)
@@ -109,16 +125,17 @@ def find_delta(oldfiles, newfiles):
     for f in newfiles.list:
         hashto_files.setdefault(f.hash, []).append(f)
 
-    files_new = set(map(lambda x:x.hash, newfiles.list))
-    files_old = set(map(lambda x:x.hash, oldfiles.list))
+    files_new = set(map(lambda x: x.hash, newfiles.list))
+    files_old = set(map(lambda x: x.hash, oldfiles.list))
     files_delta = files_new - files_old
 
     deltas = []
     for h in files_delta:
         deltas.extend(hashto_files[h])
 
-    # Directory hashes are None. There was a bug with PolicyKit that should have an empty directory.
-    if hashto_files.has_key(None):
+    # Directory hashes are None. There was a bug with PolicyKit that
+    # should have an empty directory.
+    if None in hashto_files:
         deltas.extend(hashto_files[None])
 
     return deltas
