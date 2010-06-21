@@ -54,7 +54,7 @@ class Package:
         archive_name = ctx.const.install_tar + archive_suffix
         return archive_name, archive_format
 
-    def __init__(self, packagefn, mode='r', format=None):
+    def __init__(self, packagefn, mode='r', format=None, tmp_dir=None):
         self.filepath = packagefn
         url = pisi.uri.URI(packagefn)
 
@@ -82,6 +82,8 @@ class Package:
 
         if self.format not in Package.formats:
             raise Error(_("Unsupported package format: %s") % format)
+
+        self.tmp_dir = tmp_dir or ctx.config.tmp_dir()
 
     def fetch_remote_file(self, url):
         dest = ctx.config.cached_packages_dir()
@@ -117,11 +119,7 @@ class Package:
         if self.install_archive is None:
             archive_name, archive_format = \
                     self.archive_name_and_format(self.format)
-            pkg_dir = "-".join((self.metadata.package.name,
-                                self.metadata.package.version,
-                                self.metadata.package.release))
-            self.install_archive_path = util.join_path(ctx.config.tmp_dir(),
-                                                       pkg_dir,
+            self.install_archive_path = util.join_path(self.tmp_dir,
                                                        archive_name)
             ctx.build_leftover = self.install_archive_path
             self.install_archive = archive.ArchiveTar(

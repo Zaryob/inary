@@ -1084,7 +1084,9 @@ class Builder:
 
             ctx.ui.info(_("Creating PiSi package %s.") % name)
 
-            pkg = pisi.package.Package(name, "w", self.target_package_format)
+            pkg = pisi.package.Package(name, "w",
+                                       format=self.target_package_format,
+                                       tmp_dir=self.pkg_dir())
 
             # add comar files to package
             os.chdir(self.specdir)
