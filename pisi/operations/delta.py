@@ -92,6 +92,9 @@ def create_delta_package(old_package, new_package):
 
     os.chdir(c)
 
+    # Remove temp dir
+    util.clean_dir(newpkg_path)
+
     ctx.ui.info(_("Done."))
 
     # return delta package name
