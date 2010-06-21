@@ -1034,7 +1034,7 @@ msgstr ""
 
 #: pisi/cli/configurepending.py:39
 msgid "configure-pending options"
-msgstr ""
+msgstr "konfigurálás alatt álló opciók"
 
 #: pisi/cli/deletecache.py:22
 msgid ""
@@ -1245,19 +1245,19 @@ msgstr ""
 
 #: pisi/cli/history.py:47
 msgid "history options"
-msgstr ""
+msgstr "history opciók"
 
 #: pisi/cli/history.py:53
 msgid "Output only the last n operations"
-msgstr ""
+msgstr "Kimenet csak az utolsó n műveleteknek"
 
 #: pisi/cli/history.py:55
 msgid "Take snapshot of the current system"
-msgstr ""
+msgstr "Pillanatkép készítése az aktuális rendszer-állapotról"
 
 #: pisi/cli/history.py:57
 msgid "Takeback to the state after the given operation finished"
-msgstr ""
+msgstr "Állapot visszaállítása, miután a művelet befejeződött"
 
 #: pisi/cli/history.py:67
 msgid "Operation #%d: %s"
@@ -1265,11 +1265,11 @@ msgstr ""
 
 #: pisi/cli/history.py:68
 msgid "Date: %s %s"
-msgstr ""
+msgstr "Dátum: %s %s"
 
 #: pisi/cli/history.py:72
 msgid "    * There are %d packages in this snapshot."
-msgstr ""
+msgstr "*&d csomagok vannak a pillanatfelvételben."
 
 #: pisi/cli/index.py:23
 msgid ""
@@ -1288,27 +1288,27 @@ msgstr ""
 
 #: pisi/cli/index.py:44
 msgid "index options"
-msgstr ""
+msgstr "index lehetőségek"
 
 #: pisi/cli/index.py:48
 msgid "Store absolute links for indexed files."
-msgstr ""
+msgstr "Az indexelt fájlok abszolút hivatkozásait tárolni."
 
 #: pisi/cli/index.py:51
 msgid "Index output file"
-msgstr ""
+msgstr "Kimeneti fájl indexelése"
 
 #: pisi/cli/index.py:54
 msgid "Do not index PiSi spec files."
-msgstr ""
+msgstr "Ne indexelje a speciális PiSi fájlokat."
 
 #: pisi/cli/index.py:57
 msgid "Do not sign index."
-msgstr ""
+msgstr "Ne jelölje az indexet."
 
 #: pisi/cli/index.py:70
 msgid "Indexing current directory."
-msgstr ""
+msgstr "Az aktuális könyvtár indexelése."
 
 #: pisi/cli/info.py:26
 msgid ""
@@ -1321,55 +1321,55 @@ msgstr ""
 
 #: pisi/cli/info.py:45
 msgid "info options"
-msgstr ""
+msgstr "információ lehetőségek"
 
 #: pisi/cli/info.py:52
 msgid "Show a list of package files."
-msgstr ""
+msgstr "Csomagfájlok listájának mutatása."
 
 #: pisi/cli/info.py:54
 msgid "Info about the given component"
-msgstr ""
+msgstr "Információ az adott összetevőről"
 
 #: pisi/cli/info.py:57
 msgid "Show only paths."
-msgstr ""
+msgstr "Csak az elérési út mutatása."
 
 #: pisi/cli/info.py:59
 msgid "Do not show details"
-msgstr ""
+msgstr "Ne mutassa a részleteket"
 
 #: pisi/cli/info.py:61
 msgid "Output in xml format"
-msgstr ""
+msgstr "Kimenet xml formátumban"
 
 #: pisi/cli/info.py:129
 msgid "Reverse Dependencies:"
-msgstr ""
+msgstr "Fordított függőségek:"
 
 #: pisi/cli/info.py:140
 msgid "Reverse Build Dependencies:"
-msgstr ""
+msgstr "Fordított csomagoló függőségek:"
 
 #: pisi/cli/info.py:145
 msgid "Package file: %s"
-msgstr ""
+msgstr "Csomag fájl: %s"
 
 #: pisi/cli/info.py:160
 msgid "[inst] "
-msgstr ""
+msgstr "[inst]"
 
 #: pisi/cli/info.py:162
 msgid "Installed package:"
-msgstr ""
+msgstr "Telepített csomag:"
 
 #: pisi/cli/info.py:166
 msgid "%s package is not installed"
-msgstr ""
+msgstr "%s csomag nincs telepítve"
 
 #: pisi/cli/info.py:172
 msgid "[binary] "
-msgstr ""
+msgstr "[bináris]"
 
 #: pisi/cli/info.py:174 pisi/cli/info.py:186
 msgid "Package found in %s repository:"
@@ -1406,23 +1406,24 @@ msgstr ""
 
 #: pisi/cli/install.py:51
 msgid "Reinstall already installed packages"
-msgstr ""
+msgstr "Telepített csomagok újratelepítése"
 
 #: pisi/cli/install.py:53
 msgid "Skip distribution release and architecture check"
-msgstr ""
+msgstr "Disztribúció kiadás és az architektúra ellenőrzés kihagyása"
 
 #: pisi/cli/install.py:59
 msgid "Install component's and recursive components' packages"
-msgstr ""
+msgstr "Telepítse a csomagok összetevőit és rekurzív komponenseit"
 
 #: pisi/cli/install.py:61
 msgid "Name of the component's repository"
-msgstr ""
+msgstr "A komponens tároló neve"
 
 #: pisi/cli/install.py:63 pisi/cli/upgrade.py:69
+#, fuzzy
 msgid "Fetch upgrades but do not install."
-msgstr ""
+msgstr "Fetch frissítés de nem telepíti."
 
 #: pisi/cli/install.py:65
 msgid "When installing packages, ignore packages and components whose basenames match pattern."
