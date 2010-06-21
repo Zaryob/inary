@@ -16,6 +16,7 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
+import pisi
 import pisi.cli.command as command
 import pisi.context as ctx
 
@@ -52,10 +53,25 @@ class Delta(command.Command):
                          default=None,
                          help=_("Output directory for produced packages"))
 
+        group.add_option("-F", "--package-format",
+                         action="store",
+                         help=_("Create the binary package using the given "
+                                "format. Use '-F help' to see a list of "
+                                "supported formats."))
+
     def run(self):
         from pisi.operations.delta import create_delta_package
 
         self.init(database=False, write=False)
+
+        if self.options.package_format == "help":
+            ctx.ui.info(_("Supported package formats:"))
+            for format in pisi.package.Package.formats:
+                if format == pisi.package.Package.default_format:
+                    ctx.ui.info(_("  %s (default)") % format)
+                else:
+                    ctx.ui.info("  %s" % format)
+            return
 
         if len(self.args) != 2:
             self.help()

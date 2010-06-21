@@ -62,7 +62,8 @@ def create_delta_package(old_package, new_package):
     if outdir:
         deltaname = util.join_path(outdir, deltaname)
 
-    deltapkg = pisi.package.Package(deltaname, "w")
+    deltapkg = pisi.package.Package(deltaname, "w",
+                                    format=ctx.get_option("package_format"))
 
     c = os.getcwd()
     os.chdir(newpkg_path)
