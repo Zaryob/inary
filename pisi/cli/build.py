@@ -168,9 +168,8 @@ class Build(command.Command):
         if self.options.package_format == "help":
             self.init(False, False)
             ctx.ui.info(_("Supported package formats:"))
-            build = pisi.operations.build
-            for format in build.Builder.package_formats:
-                if format == build.Builder.default_package_format:
+            for format in pisi.package.Package.formats:
+                if format == pisi.package.Package.default_format:
                     ctx.ui.info(_("  %s (default)") % format)
                 else:
                     ctx.ui.info("  %s" % format)
