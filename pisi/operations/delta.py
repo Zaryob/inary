@@ -30,8 +30,8 @@ def create_delta_package(old_package, new_package):
     oldpkg = pisi.package.Package(old_package, "r")
     newpkg = pisi.package.Package(new_package, "r")
 
-    newmd = newpkg.get_metadata()
-    oldmd = oldpkg.get_metadata()
+    newmd = newpkg.metadata
+    oldmd = oldpkg.metadata
 
     oldfiles = oldpkg.get_files()
     newfiles = newpkg.get_files()
@@ -48,11 +48,9 @@ def create_delta_package(old_package, new_package):
                                     newmd.package.build,
                                     False)
     newpkg_path = util.join_path(ctx.config.tmp_dir(), newpkg_name)
-    newpkg.extract_to(newpkg_path, True)
-
-    newpkg_archive = util.join_path(newpkg_path, ctx.const.install_tar_lzma)
-    tar = archive.ArchiveTar(newpkg_archive, "tarlzma", False, False)
-    tar.unpack_dir(newpkg_path)
+    newpkg.extract_pisi_files(newpkg_path)
+    newpkg.extract_dir("comar", newpkg_path)
+    newpkg.extract_install(newpkg_path)
 
     # Create delta package
     deltaname = "%s-%s-%s%s" % (oldmd.package.name,
@@ -75,8 +73,8 @@ def create_delta_package(old_package, new_package):
         deltapkg.add_to_package(fname)
 
     # add xmls and files
-    deltapkg.add_to_package(ctx.const.metadata_xml)
-    deltapkg.add_to_package(ctx.const.files_xml)
+    deltapkg.add_metadata_xml(ctx.const.metadata_xml)
+    deltapkg.add_files_xml(ctx.const.files_xml)
 
     # only metadata information may change in a package,
     # so no install.tar.lzma added to delta package
@@ -87,26 +85,11 @@ def create_delta_package(old_package, new_package):
         # (commit r23485).
         files_delta.sort(key=lambda x: x.path)
 
-        ctx.build_leftover = util.join_path(ctx.config.tmp_dir(),
-                                            ctx.const.install_tar_lzma)
-
-        deltapkg_archive = util.join_path(ctx.config.tmp_dir(),
-                                          ctx.const.install_tar_lzma)
-        tar = archive.ArchiveTar(deltapkg_archive, "tarlzma")
         for f in files_delta:
-            tar.add_to_archive(f.path)
-        tar.close()
-
-        os.chdir(ctx.config.tmp_dir())
-        deltapkg.add_to_package(ctx.const.install_tar_lzma)
+            deltapkg.add_to_install(f.path)
 
     deltapkg.close()
 
-    tmp_file = util.join_path(ctx.config.tmp_dir(), ctx.const.install_tar_lzma)
-    if os.path.exists(tmp_file):
-        os.unlink(tmp_file)
-
-    ctx.build_leftover = None
     os.chdir(c)
 
     ctx.ui.info(_("Done."))
