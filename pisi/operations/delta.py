@@ -77,7 +77,7 @@ def create_delta_package(old_package, new_package):
     deltapkg.add_files_xml(ctx.const.files_xml)
 
     # only metadata information may change in a package,
-    # so no install.tar.lzma added to delta package
+    # so no install archive added to delta package
     if files_delta:
         # Sort the files in-place according to their path for an ordered
         # tarfile layout which dramatically improves the compression
