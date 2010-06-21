@@ -50,7 +50,11 @@ def create_delta_package(old_package, new_package):
     newpkg_path = util.join_path(ctx.config.tmp_dir(), newpkg_name)
     newpkg.extract_pisi_files(newpkg_path)
     newpkg.extract_dir("comar", newpkg_path)
-    newpkg.extract_install(newpkg_path)
+
+    install_dir = util.join_path(newpkg_path, "install")
+    util.clean_dir(install_dir)
+    os.mkdir(install_dir)
+    newpkg.extract_install(install_dir)
 
     # Create delta package
     deltaname = "%s-%s-%s%s" % (oldmd.package.name,
@@ -86,6 +90,7 @@ def create_delta_package(old_package, new_package):
         # (commit r23485).
         files_delta.sort(key=lambda x: x.path)
 
+        os.chdir(install_dir)
         for f in files_delta:
             deltapkg.add_to_install(f.path)
 
