@@ -448,11 +448,12 @@ class ArchiveZip(ArchiveBase):
         # It's a pity that zipfile can't handle unicode strings. Grrr!
         file_name = str(file_name)
         if os.path.isdir(file_name) and not os.path.islink(file_name):
-            self.zip_obj.writestr(file_name + '/', '')
-            attr_obj = self.zip_obj.getinfo(file_name + '/')
+            self.zip_obj.writestr(arc_name + '/', '')
+            attr_obj = self.zip_obj.getinfo(arc_name + '/')
             attr_obj.external_attr = stat.S_IMODE(os.stat(file_name)[0]) << 16L
             for f in os.listdir(file_name):
-                self.add_to_archive(os.path.join(file_name, f))
+                self.add_to_archive(os.path.join(file_name, f),
+                                    os.path.join(arc_name, f))
         else:
             if os.path.islink(file_name):
                 dest = os.readlink(file_name)
