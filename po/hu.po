@@ -1626,7 +1626,7 @@ msgstr ""
 
 #: pisi/cli/pisicli.py:130
 msgid "Command line parsing error"
-msgstr ""
+msgstr "Parancssori feldolgozási hiba"
 
 #: pisi/cli/rebuilddb.py:24
 msgid ""
@@ -1646,11 +1646,11 @@ msgstr ""
 
 #: pisi/cli/rebuilddb.py:45
 msgid "Rebuild files database"
-msgstr ""
+msgstr "Fájl adatbázis újjáépítése"
 
 #: pisi/cli/rebuilddb.py:51
 msgid "Rebuild PiSi databases?"
-msgstr ""
+msgstr "PiSi adatbázis újjáépítése?"
 
 #: pisi/cli/remove.py:25
 msgid ""
@@ -1666,7 +1666,7 @@ msgstr ""
 
 #: pisi/cli/remove.py:43
 msgid "remove options"
-msgstr ""
+msgstr "eltávolítási lehetőségek"
 
 #: pisi/cli/remove.py:46
 msgid "Removes everything including changed config files of the package"
@@ -1700,11 +1700,11 @@ msgstr ""
 
 #: pisi/cli/search.py:43
 msgid "search options"
-msgstr ""
+msgstr "keresési opciók"
 
 #: pisi/cli/search.py:45
 msgid "Summary and description language"
-msgstr ""
+msgstr "Összefoglaló és leíró nyelv"
 
 #: pisi/cli/search.py:49
 msgid "Search in installdb"
@@ -1716,15 +1716,15 @@ msgstr ""
 
 #: pisi/cli/search.py:53
 msgid "Search in the package name"
-msgstr ""
+msgstr "Keresés a csomag nevében"
 
 #: pisi/cli/search.py:55
 msgid "Search in the package summary"
-msgstr ""
+msgstr "Keresés a csomag összefoglalójában"
 
 #: pisi/cli/search.py:57
 msgid "Search in the package description"
-msgstr ""
+msgstr "Keresés a csomag leírásában"
 
 #: pisi/cli/searchfile.py:24
 msgid ""
@@ -1737,11 +1737,11 @@ msgstr ""
 
 #: pisi/cli/searchfile.py:38
 msgid "search-file options"
-msgstr ""
+msgstr "fájl-kereső opciók"
 
 #: pisi/cli/searchfile.py:42
 msgid "Show only package name"
-msgstr ""
+msgstr "Csak a csomag nevének mutatása"
 
 #: pisi/cli/searchfile.py:49
 msgid "Package %s has file /%s"
@@ -1769,11 +1769,11 @@ msgstr ""
 
 #: pisi/cli/updaterepo.py:42
 msgid "update-repo options"
-msgstr ""
+msgstr "tároló-frissítés lehetőségek"
 
 #: pisi/cli/updaterepo.py:46
 msgid "Update database in any case"
-msgstr ""
+msgstr "Adatbázis frissítése minden esetben"
 
 #: pisi/cli/upgrade.py:25
 msgid ""
@@ -1797,15 +1797,15 @@ msgstr ""
 
 #: pisi/cli/upgrade.py:50
 msgid "upgrade options"
-msgstr ""
+msgstr "frissítési lehetőségek"
 
 #: pisi/cli/upgrade.py:57
 msgid "Security related package upgrades only"
-msgstr ""
+msgstr "Csak a biztonsággal kapcsolatos csomagok frissítése"
 
 #: pisi/cli/upgrade.py:59
 msgid "Do not update repositories"
-msgstr ""
+msgstr "Ne frissüljenek a tárolók"
 
 #: pisi/cli/upgrade.py:65
 msgid "Upgrade component's and recursive components' packages"
@@ -1825,11 +1825,11 @@ msgstr ""
 
 #: pisi/cli/upgrade.py:88
 msgid "Updating repositories"
-msgstr ""
+msgstr "Tárolók frissítése"
 
 #: pisi/cli/upgrade.py:92
 msgid "Will not update repositories"
-msgstr ""
+msgstr "Ne frissítse a tárolókat"
 
 #: pisi/comariface.py:31
 msgid "comar-api package is not fully installed"
@@ -1905,27 +1905,27 @@ msgstr ""
 
 #: pisi/conflict.py:26 pisi/dependency.py:26 pisi/replace.py:24
 msgid " version >= "
-msgstr ""
+msgstr "verzió >="
 
 #: pisi/conflict.py:28 pisi/dependency.py:28 pisi/replace.py:26
 msgid " version <= "
-msgstr ""
+msgstr "verzió <="
 
 #: pisi/conflict.py:30 pisi/dependency.py:30 pisi/replace.py:28
 msgid " version "
-msgstr ""
+msgstr "verzió"
 
 #: pisi/conflict.py:32 pisi/dependency.py:32 pisi/replace.py:30
 msgid " release >= "
-msgstr ""
+msgstr "kiadás >="
 
 #: pisi/conflict.py:34 pisi/dependency.py:34 pisi/replace.py:32
 msgid " release <= "
-msgstr ""
+msgstr "kiadás <="
 
 #: pisi/conflict.py:36 pisi/dependency.py:36 pisi/replace.py:34
 msgid " release "
-msgstr ""
+msgstr "kiadás"
 
 #: pisi/constants.py:30
 msgid "Can't rebind constant: %s"
@@ -1945,7 +1945,7 @@ msgstr ""
 
 #: pisi/db/installdb.py:37
 msgid "installed"
-msgstr ""
+msgstr "telepítve"
 
 #: pisi/db/installdb.py:37
 msgid "installed-pending"
@@ -1967,7 +1967,7 @@ msgstr ""
 
 #: pisi/db/installdb.py:326
 msgid "Package %s is not installed"
-msgstr ""
+msgstr "%s csomag nincs telepítve"
 
 #: pisi/db/itembyrepo.py:40
 msgid "%s not found in any repository."
@@ -2003,7 +2003,7 @@ msgstr ""
 
 #: pisi/fetcher.py:134
 msgid "Filename error"
-msgstr ""
+msgstr "Fájlnév hiba"
 
 #: pisi/fetcher.py:137
 msgid "Access denied to write to destination directory: \"%s\""
