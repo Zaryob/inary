@@ -61,7 +61,11 @@ class Package:
         if url.is_remote_file():
             self.fetch_remote_file(url)
 
-        self.impl = archive.ArchiveZip(self.filepath, 'zip', mode)
+        try:
+            self.impl = archive.ArchiveZip(self.filepath, 'zip', mode)
+        except IOError, e:
+            raise Error(_("Cannot open package file: %s") % e)
+
         self.install_archive = None
 
         if mode == "r":
