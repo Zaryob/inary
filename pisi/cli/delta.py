@@ -21,14 +21,14 @@ import pisi.cli.command as command
 import pisi.context as ctx
 
 
-usage = _("""Creates delta PiSi packages
+usage = _("""Creates delta packages
 
-Usage: delta oldpackage newpackage
+Usages: delta oldpackage1 oldpackage2 ...  newpackage
+        delta -t newpackage oldpackage1 oldpackage2 ...
 
 Delta command finds the changed files between the given
-packages by comparing the sha1sum of the files and creates
-a delta pisi package with the changed files between two
-releases.
+packages by comparing the sha1sum of files and creates
+a delta package with the changed files.
 """)
 
 
@@ -48,10 +48,16 @@ class Delta(command.Command):
         self.parser.add_option_group(group)
 
     def add_options(self, group):
+        group.add_option("-t", "--newest-package",
+                         action="store",
+                         default=None,
+                         help=_("Use arg as the new package and treat "
+                                "other arguments as old packages."))
+
         group.add_option("-O", "--output-dir",
                          action="store",
                          default=None,
-                         help=_("Output directory for produced packages"))
+                         help=_("Output directory for produced packages."))
 
         group.add_option("-F", "--package-format",
                          action="store",
@@ -60,8 +66,6 @@ class Delta(command.Command):
                                 "supported formats."))
 
     def run(self):
-        from pisi.operations.delta import create_delta_package
-
         self.init(database=False, write=False)
 
         if self.options.package_format == "help":
@@ -73,9 +77,16 @@ class Delta(command.Command):
                     ctx.ui.info("  %s" % format)
             return
 
-        if len(self.args) != 2:
-            self.help()
-            return
+        new_package = ctx.get_option("newest_package")
+        if new_package:
+            old_packages = self.args
+        else:
+            if len(self.args) < 2:
+                self.help()
+                return
+
+            new_package = self.args[-1]
+            old_packages = self.args[:-1]
 
         if ctx.get_option('output_dir'):
             ctx.ui.info(_('Output directory: %s')
@@ -84,7 +95,5 @@ class Delta(command.Command):
             ctx.ui.info(_('Outputting packages in the working directory.'))
             ctx.config.options.output_dir = '.'
 
-        oldpackage = self.args[0]
-        newpackage = self.args[1]
-
-        create_delta_package(oldpackage, newpackage)
+        from pisi.operations.delta import create_delta_packages
+        create_delta_packages(old_packages, new_package)
