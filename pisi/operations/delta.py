@@ -56,6 +56,12 @@ def create_delta_packages(old_packages, new_package):
         old_pkg = pisi.package.Package(old_package)
         old_pkg_info = old_pkg.metadata.package
 
+        if old_pkg_info.name != new_pkg_info.name:
+            ctx.ui.warning(_("The file '%s' belongs to a different package "
+                             "other than '%s'. Skipping it...")
+                             % (old_package, new_pkg_info.name))
+            continue
+
         if old_pkg_info.build == new_pkg_info.build:
             ctx.ui.warning(_("Package '%s' has the same build number with "
                              "the new package. Skipping it...") % old_package)
