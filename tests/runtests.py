@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2007, TUBITAK/UEKAE
+# Copyright (C) 2007-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -11,6 +11,7 @@
 # Please read the COPYING file.
 #
 
+import os
 import unittest
 import database
 
@@ -46,20 +47,11 @@ from utiltest import UtilTestCase
 from versiontest import VersionTestCase
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-suite = unittest.TestSuite()
-
 if __name__ == '__main__':
+    if os.path.exists("repos/tmp"):
+        import shutil
+        shutil.rmtree("repos/tmp")
+
+    suite = unittest.TestSuite()
     unittest.main()
+
