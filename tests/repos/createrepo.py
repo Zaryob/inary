@@ -86,7 +86,7 @@ def install():
 distributionTemplate = """
 <PISI>
     <SourceName>%(sourcename)s</SourceName>
-    <Version>1.1</Version>
+    <Version>%(version)s</Version>
     <Description xml:lang="tr">%(description)s</Description>
     <Type>Core</Type>
     <Obsoletes>
@@ -170,8 +170,9 @@ class PackageFactory:
         return pkgs
 
 class Repository:
-    def __init__(self, name, packages, obsoletes):
+    def __init__(self, name, version, packages, obsoletes):
         self.name = name
+        self.version = version
         self.packages = packages
         self.obsoletes = obsoletes
 
@@ -180,7 +181,8 @@ class Repository:
         for obs in self.obsoletes:
             obsoletes += "     <Package>%s</Package>\n" % obs
             
-        return distributionTemplate % {"sourcename":self.name,
+        return distributionTemplate % {"sourcename": "Pardus",
+                                       "version": self.version,
                                        "description":self.name,
                                        "obsoletes":obsoletes}
 
@@ -216,7 +218,7 @@ class Repository:
 
 class Pardus2007Repo(Repository):
     def __init__(self):
-        Repository.__init__(self, "pardus-2007", [], ["wengophone", "rar"])
+        Repository.__init__(self, "pardus-2007", "2007", [], ["wengophone", "rar"])
         
     def create(self):
 
@@ -245,7 +247,7 @@ class Pardus2007Repo(Repository):
 
 class Contrib2007Repo(Repository):
     def __init__(self):
-        Repository.__init__(self, "contrib-2007", [], ["xara"])
+        Repository.__init__(self, "contrib-2007", "2007", [], ["xara"])
         
     def create(self):
 
