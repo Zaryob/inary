@@ -149,7 +149,7 @@ class ArchiveBase(object):
 
 
 class ArchiveBinary(ArchiveBase):
-    """ArchiveBinary handles binary archive files (usually distrubuted as
+    """ArchiveBinary handles binary archive files (usually distributed as
     .bin files)"""
     def __init__(self, file_path, arch_type="binary"):
         super(ArchiveBinary, self).__init__(file_path, arch_type)
