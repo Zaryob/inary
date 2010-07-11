@@ -14,7 +14,7 @@ class FetchTestCase(unittest.TestCase):
         unittest.TestCase.setUp(self)
         self.spec = SpecFile()
         self.spec.read('repos/pardus-2007/system/base/curl/pspec.xml')
-        self.url = uri.URI(self.spec.source.archive.uri)
+        self.url = uri.URI(self.spec.source.archive[0].uri)
         self.url.set_auth_info(("user", "pass"))
         self.destpath = ctx.config.archives_dir()
         self.fetch = Fetcher(self.url, self.destpath)
@@ -23,7 +23,7 @@ class FetchTestCase(unittest.TestCase):
         self.fetch.fetch()
         fetchedFile = os.path.join(self.destpath, self.url.filename())
         if os.access(fetchedFile, os.R_OK):
-            self.assertEqual(util.sha1_file(fetchedFile),self.spec.source.archive.sha1sum)
+            self.assertEqual(util.sha1_file(fetchedFile),self.spec.source.archive[0].sha1sum)
         os.remove(fetchedFile)
 
     def testFetcherFunctions(self):

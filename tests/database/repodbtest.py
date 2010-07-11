@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2007, TUBITAK/UEKAE
+# Copyright (C) 2007-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -15,7 +15,9 @@ import pisi
 
 class RepoDBTestCase(testcase.TestCase):
 
-    repodb = pisi.db.repodb.RepoDB()
+    def setUp(self):
+        testcase.TestCase.setUp(self)
+        self.repodb = pisi.db.repodb.RepoDB()
 
     def testAddRemoveRepo(self):
         assert "contrib-2007-src" not in self.repodb.list_repos()
@@ -54,7 +56,7 @@ class RepoDBTestCase(testcase.TestCase):
     def testRepoOrder(self):
         repoorder = pisi.db.repodb.RepoOrder()
         assert repoorder.get_order() == ['pardus-2007', 'contrib-2007', 'pardus-2007-src']
-        
+
         repoorder.add("test-repo", "http://test-repo/pisi-index.xml.bz2")
         assert repoorder.get_order() == ['pardus-2007', 'contrib-2007', 'pardus-2007-src', 'test-repo']
 

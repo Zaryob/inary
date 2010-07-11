@@ -22,4 +22,3 @@ class TestCase(unittest.TestCase):
             pisi.api.update_repo("pardus-2007")
             pisi.api.update_repo("contrib-2007")
             pisi.api.update_repo("pardus-2007-src")
-            

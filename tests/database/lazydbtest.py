@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2007, TUBITAK/UEKAE
+# Copyright (C) 2007-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -14,7 +14,7 @@ import unittest
 import pisi.db.lazydb as lazydb
 
 class TestDB(lazydb.LazyDB):
-    
+
     def init(self):
         self.testfield = True
 
@@ -25,17 +25,16 @@ class LazyDBTestCase(unittest.TestCase):
 
     def testDatabaseMethodForcingInit(self):
         db = TestDB()
-        db.getTestField()
+        assert db.getTestField()
         assert db.__dict__.has_key("testfield")
-        del TestDB._the_instance
+        db._delete()
 
     def testDatabaseWithoutInit(self):
         db = TestDB()
         assert not db.__dict__.has_key("testfield")
-        del TestDB._the_instance
+        db._delete()
 
     def testSingletonBehaviour(self):
         db = TestDB()
         db2 = TestDB()
         assert id(db) == id(db2)
-        

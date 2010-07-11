@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2007, TUBITAK/UEKAE
+# Copyright (C) 2007-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -14,32 +14,38 @@ import testcase
 import pisi
 
 class InstallDBTestCase(testcase.TestCase):
-    
-    installdb = pisi.db.installdb.InstallDB()
+
+    def setUp(self):
+        testcase.TestCase.setUp(self)
+        self.installdb = pisi.db.installdb.InstallDB()
 
     def testGetPackage(self):
         pisi.api.install(["ethtool"])
-        pkg = self.installdb.get_package("ethtool")
+        idb = pisi.db.installdb.InstallDB()
+        pkg = idb.get_package("ethtool")
         assert type(pkg) == pisi.metadata.Package
         assert pkg.name == "ethtool"
         pisi.api.remove(["ethtool"])
 
     def testHasPackage(self):
         pisi.api.install(["ethtool"])
+        self.installdb = pisi.db.installdb.InstallDB()
         assert not self.installdb.has_package("hedehodo")
         assert self.installdb.has_package("ethtool")
         pisi.api.remove(["ethtool"])
 
     def testListInstalled(self):
         pisi.api.install(["ethtool"])
+        self.installdb = pisi.db.installdb.InstallDB()
         assert set(self.installdb.list_installed()) == set(['zlib', 'pam', 'shadow', 
                                                             'jpeg', 'libidn', 'db4', 
                                                             'cracklib', 'openssl', 
                                                             'curl', 'bash', 'ethtool'])
         pisi.api.remove(["ethtool"])
-        
+
     def testGetVersion(self):
         pisi.api.install(["ethtool"])
+        self.installdb = pisi.db.installdb.InstallDB()
         version, release, build = self.installdb.get_version("zlib")
         assert version == "0.3"
         assert release == "1"
@@ -48,32 +54,35 @@ class InstallDBTestCase(testcase.TestCase):
 
     def testGetFiles(self):
         pisi.api.install(["ethtool"])
+        self.installdb = pisi.db.installdb.InstallDB()
         files = self.installdb.get_files("ethtool")
         assert files.list[0].path == "usr/bin/ethtool"
         pisi.api.remove(["ethtool"])
 
     def testGetInfo(self):
         pisi.api.install(["ethtool"])
-        info = self.installdb.get_info("ethtool")
+        idb = pisi.db.installdb.InstallDB()
+        info = idb.get_info("ethtool")
         assert info.__class__ == pisi.db.installdb.InstallInfo
         assert info.distribution == "Pardus"
         pisi.api.remove(["ethtool"])
-        
+
     def testGetReverseDependencies(self):
         pisi.api.install(["ethtool"])
         pisi.api.install(["ctorrent"])
-
+        self.installdb = pisi.db.installdb.InstallDB()
         revdeps = self.installdb.get_rev_deps("openssl")
         assert set(["ctorrent", "curl"]) == set(map(lambda x:x[0], revdeps))
-
         pisi.api.remove(["ctorrent"])
         pisi.api.remove(["ethtool"])
 
     def testAddRemovePackage(self):
         pisi.api.install(["ctorrent"])
+        self.installdb = pisi.db.installdb.InstallDB()
         assert self.installdb.has_package("ctorrent")
         assert not self.installdb.has_package("ethtool")
         pisi.api.install(["ethtool"])
+        self.installdb = pisi.db.installdb.InstallDB()
         assert self.installdb.has_package("ctorrent")
         assert self.installdb.has_package("ethtool")
         pisi.api.remove(["ctorrent"])
@@ -101,11 +110,11 @@ class InstallDBTestCase(testcase.TestCase):
 
     def testSearchPackage(self):
         pisi.api.set_comar(False)
-
+        self.installdb = pisi.db.installdb.InstallDB()
         assert not self.installdb.has_package("ethtool")
         assert not self.installdb.search_package(["ethtool"])
         pisi.api.install(["ethtool"])
+        self.installdb = pisi.db.installdb.InstallDB()
         assert self.installdb.search_package(["et", "tool", "h"]) == ["ethtool"]
         pisi.api.remove(["ethtool"])
-
         pisi.api.set_comar(True)

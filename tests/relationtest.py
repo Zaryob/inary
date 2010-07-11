@@ -9,12 +9,12 @@ class RelationTestCase(unittest.TestCase):
 
         relation.package = "ethtool"
         # Test version = X
-        relation.version = "6"
+        relation.version = "0.3"
         assert pisi.relation.installed_package_satisfies(relation)
         relation.version = None
 
         # Test versionFrom = X
-        relation.versionFrom = "3"
+        relation.versionFrom = "0.3"
         assert pisi.relation.installed_package_satisfies(relation)
         relation.versionFrom = "8"
         assert not pisi.relation.installed_package_satisfies(relation)
@@ -23,15 +23,15 @@ class RelationTestCase(unittest.TestCase):
         #Test versionTo = X
         relation.versionTo = "8"
         assert pisi.relation.installed_package_satisfies(relation)
-        relation.versionTo = "3"
+        relation.versionTo = "0.1"
         assert not pisi.relation.installed_package_satisfies(relation)
         relation.versionTo = None
         
         #Test release = X
         relation.release = "3"
-        assert pisi.relation.installed_package_satisfies(relation)
-        relation.release = "1"
         assert not pisi.relation.installed_package_satisfies(relation)
+        relation.release = "1"
+        assert pisi.relation.installed_package_satisfies(relation)
         relation.release = None
 
         #test releaseFrom = X
@@ -44,7 +44,7 @@ class RelationTestCase(unittest.TestCase):
         #test releaseTo = X
         relation.releaseTo = "7"
         assert pisi.relation.installed_package_satisfies(relation)
-        relation.releaseTo = "1"
+        relation.releaseTo = "0"
         assert not pisi.relation.installed_package_satisfies(relation)
         relation.releaseTo = None
 

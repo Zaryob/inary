@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2007, TUBITAK/UEKAE
+# Copyright (C) 2007-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -14,8 +14,12 @@ import testcase
 import pisi
 
 class SourceDBTestCase(testcase.TestCase):
-    
-    sourcedb = pisi.db.sourcedb.SourceDB()
+
+    def setUp(self):
+        testcase.TestCase.setUp(self)
+
+        self.sourcedb = pisi.db.sourcedb.SourceDB()
+
 
     def testListSources(self):
         assert set(self.sourcedb.list_sources()) == set(['ethtool', 'nfdump', 'shadow', 'libidn', 

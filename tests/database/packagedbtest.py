@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2007, TUBITAK/UEKAE
+# Copyright (C) 2007-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -15,7 +15,9 @@ import pisi
 
 class PackageDBTestCase(testcase.TestCase):
     
-    packagedb = pisi.db.packagedb.PackageDB()
+    def setUp(self):
+        testcase.TestCase.setUp(self)
+        self.packagedb = pisi.db.packagedb.PackageDB()
 
     def testGetPackage(self):
         pkg = self.packagedb.get_package("ncftp", "pardus-2007")

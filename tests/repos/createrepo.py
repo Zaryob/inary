@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2007, TUBITAK/UEKAE
+# Copyright (C) 2007-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -56,9 +56,9 @@ pspecTemplate = """<?xml version="1.0" ?>
 componentsTemplate = """
         <Component>
             <Name>%(name)s</Name>
-            <LocalName xml:lang="tr">%(local_name)s</LocalName>
-            <Summary xml:lang="tr">%(summary)s</Summary>
-            <Description xml:lang="tr">%(description)s</Description>
+            <LocalName>%(local_name)s</LocalName>
+            <Summary>%(summary)s</Summary>
+            <Description>%(description)s</Description>
             <Group>system</Group>
             <Packager>
                 <Name>Joe Packager</Name>
@@ -87,7 +87,7 @@ distributionTemplate = """
 <PISI>
     <SourceName>%(sourcename)s</SourceName>
     <Version>%(version)s</Version>
-    <Description xml:lang="tr">%(description)s</Description>
+    <Description>%(description)s</Description>
     <Type>Core</Type>
     <Obsoletes>
         %(obsoletes)s
