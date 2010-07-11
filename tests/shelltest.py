@@ -42,7 +42,7 @@ class ShellTestCase(unittest.TestCase):
     def testSym(self):
         from pisi.actionsapi.shelltools import sym
 
-        sym('scenarios/repo','tests/repos')
+        sym('../../scenarios/repo','tests/repos')
         self.assertEqual(os.path.islink('tools'),False)
         self.assertEqual(os.path.islink('tests/repos'),True)
 
@@ -52,36 +52,38 @@ class ShellTestCase(unittest.TestCase):
         from pisi.actionsapi.shelltools import unlinkDir
 
         makedirs('tests/testdirectory/sample')
-        sym('tests/testdirectory/sample','tests/history')
-        self.assertEqual(os.path.islink('tests/history'),True)
+        sym('testdirectory/sample', 'tests/history')
+        self.assertEqual(os.path.islink('tests/history'), True)
         unlinkDir('tests/testdirectory/sample')
-        self.assertEqual(os.path.islink('tests/testdirectory/sample'),False)
+        self.assertEqual(os.path.islink('tests/testdirectory/sample'), False)
 
     def testCopy(self):
         from pisi.actionsapi.shelltools import echo
         from pisi.actionsapi.shelltools import copy
+        from pisi.actionsapi.shelltools import makedirs
 
-        copy('./tests', './tests-copy')
-        self.assertEqual(os.path.islink('./tests-copy'),False)
+        makedirs('tests/testdirectory/sample')
+        copy('tests', 'tests-copy')
+        self.assertEqual(os.path.islink('tests-copy'), False)
         shutil.rmtree("tests-copy")
 
         echo('tests/echo-file', 'subject eco')
-        copy('./tests/echo-file', './tests/echo-file-copy')
-        self.assertEqual(os.path.islink('./tests/echo-file-copy'), False)
+        copy('tests/echo-file', 'tests/echo-file-copy')
+        self.assertEqual(os.path.islink('tests/echo-file-copy'), False)
         os.remove("tests/echo-file")
 
     def testIsLink(self):
         from pisi.actionsapi.shelltools import sym
         from pisi.actionsapi.shelltools import isLink
 
-        sym('tests/database','tests/history')
+        sym('../database', 'tests/history')
         assert isLink('tests/history')
         assert not isLink('tests/runtests.py')
 
     def testIsFile(self):
         from pisi.actionsapi.shelltools import isFile
 
-        assert isFile('/usr/lib/engines/libaep.so')
+        assert isFile('/bin/bash')
         assert not isFile('/tests/database')
 
     def testIsDirectory(self):
