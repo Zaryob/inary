@@ -18,7 +18,6 @@ like all pisi classes, it has been programmed in a non-restrictive way
 """
 
 import os
-import types
 import shutil
 
 import gettext
@@ -59,7 +58,7 @@ class File:
     @staticmethod
     def make_uri(uri):
         "handle URI arg"
-        if type(uri) == types.StringType or type(uri) == types.UnicodeType:
+        if isinstance(uri, basestring):
             uri = pisi.uri.URI(uri)
         elif not isinstance(uri, pisi.uri.URI):
             raise Error(_("uri must have type either URI or string"))
