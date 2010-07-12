@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -19,7 +19,6 @@ like all pisi classes, it has been programmed in a non-restrictive way
 
 import os
 import types
-import bz2
 import shutil
 
 import gettext
@@ -53,8 +52,8 @@ class InvalidSignature(pisi.Error):
 
 class File:
 
-    (read, write) = range(2) # modes
-    (bz2, gzip, auto) = range(3) # compress enums
+    (read, write) = range(2)            # modes
+    (xz, bz2, gzip, auto) = range(4)    # compress enums
     (detached, whatelse) = range(2)
 
     @staticmethod
@@ -68,9 +67,10 @@ class File:
 
     @staticmethod
     def choose_method(filename, compress):
-        # this is really simple (^_^) -- exa
         if compress == File.auto:
-            if filename.endswith('.bz2'):
+            if filename.endswith('.xz'):
+                return File.xz
+            elif filename.endswith('.bz2'):
                 return File.bz2
             elif filename.endswith('.gz'):
                 return File.gzip
@@ -82,7 +82,12 @@ class File:
     @staticmethod
     def decompress(localfile, compress):
         compress = File.choose_method(localfile, compress)
-        if compress == File.bz2:
+        if compress == File.xz:
+            import lzma
+            open(localfile[:-3], "w").write(lzma.LZMAFile(localfile).read())
+            localfile = localfile[:-3]
+        elif compress == File.bz2:
+            import bz2
             open(localfile[:-4], "w").write(bz2.BZ2File(localfile).read())
             localfile = localfile[:-4]
         elif compress == File.gzip:
@@ -179,7 +184,13 @@ class File:
         self.__file__.close()
         if self.mode == File.write:
             compressed_file = None
-            if self.compress == File.bz2:
+            if self.compress == File.xz:
+                import lzma
+                compressed_file = self.localfile + ".xz"
+                lzma.LZMAFile(compressed_file, "w").write(open(self.localfile, "r").read())
+
+            elif self.compress == File.bz2:
+                import bz2
                 compressed_file = self.localfile + ".bz2"
                 bz2.BZ2File(compressed_file, "w").write(open(self.localfile, "r").read())
 
