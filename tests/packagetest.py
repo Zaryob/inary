@@ -21,9 +21,7 @@ class PackageTestCase(unittest.TestCase):
         pkg.add_to_package('002_remove.xml')
         pkg.add_to_package('003_install.xml')
         os.chdir(cur)
-        pkg.close()
 
-        pkg = package.Package(pkg_path)
         pkg.extract_file('002_remove.xml', cur)
         if os.path.exists('files.xml'):
             self.fail("Package add error")
