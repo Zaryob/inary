@@ -191,7 +191,11 @@ class File:
             if self.compress == File.xz:
                 import lzma
                 compressed_file = self.localfile + ".xz"
-                lzma.LZMAFile(compressed_file, "w").write(open(self.localfile, "r").read())
+                options = {"level": 9}
+                lzma_file = lzma.LZMAFile(compressed_file, "w",
+                                          options=options)
+                lzma_file.write(open(self.localfile, "r").read())
+                lzma_file.close()
 
             elif self.compress == File.bz2:
                 import bz2
