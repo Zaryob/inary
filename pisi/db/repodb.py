@@ -23,6 +23,7 @@ import pisi.uri
 import pisi.util
 import pisi.context as ctx
 import pisi.db.lazydb as lazydb
+from pisi.file import File
 
 class RepoError(pisi.Error):
     pass
@@ -155,13 +156,13 @@ class RepoDB(lazydb.LazyDB):
         index_path = repo.indexuri.get_uri()
 
         #FIXME Local index files should also be cached.
-        if index_path.endswith("bz2") or repo.indexuri.is_remote_file():
+        if File.is_compressed(index_path) or repo.indexuri.is_remote_file():
             index = os.path.basename(index_path)
             index_path = pisi.util.join_path(ctx.config.index_dir(),
-                                                repo_name, index)
+                                             repo_name, index)
 
-            if index_path.endswith("bz2"):
-                index_path = pisi.util.remove_suffix(".bz2", index_path)
+            if File.is_compressed(index_path):
+                index_path = os.path.splitext(index_path)[0]
 
         if not os.path.exists(index_path):
             ctx.ui.warning(_("%s repository needs to be updated") % repo_name)
