@@ -55,6 +55,10 @@ class File:
     (xz, bz2, gzip, auto) = range(4)    # compress enums
     (detached, whatelse) = range(2)
 
+    __compressed_file_extensions = {".xz": xz,
+                                    ".bz2": bz2,
+                                    ".gz": gzip}
+
     @staticmethod
     def make_uri(uri):
         "handle URI arg"
@@ -67,16 +71,17 @@ class File:
     @staticmethod
     def choose_method(filename, compress):
         if compress == File.auto:
-            if filename.endswith('.xz'):
-                return File.xz
-            elif filename.endswith('.bz2'):
-                return File.bz2
-            elif filename.endswith('.gz'):
-                return File.gzip
-            else:
-                return None
+            for ext, method in File.__compressed_file_extensions.items():
+                if filename.endswith(ext):
+                    return method
+
+            return None
         else:
             return compress
+
+    @staticmethod
+    def is_compressed(filename):
+        return filename.endswith(tuple(File.__compressed_file_extensions))
 
     @staticmethod
     def decompress(localfile, compress):
