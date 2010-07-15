@@ -288,7 +288,7 @@ class Builder:
         ctx.ui.status(_("Building PiSi source package: %s")
                       % self.spec.source.name)
 
-        self.compile_action_script()
+        self.load_action_script()
         self.compile_comar_script()
 
         # check if all patch files exists, if there are missing no need
@@ -528,19 +528,31 @@ class Builder:
                 os.chmod(dest, int(afile.permission, 8))
 
     def compile_action_script(self):
-        """Compiles given actions.py to check syntax error in it and
-        sets the actionLocals and actionGlobals"""
+        """Compiles the action script and returns a code object"""
+
         fname = util.join_path(self.specdir, ctx.const.actions_file)
         try:
-            localSymbols = globalSymbols = {}
             buf = open(fname).read()
-            exec compile(buf, "error", "exec") in localSymbols, globalSymbols
+            return compile(buf, fname, "exec")
         except IOError, e:
             raise Error(_("Unable to read Actions Script (%s): %s")
                         % (fname, e))
         except SyntaxError, e:
             raise Error(_("SyntaxError in Actions Script (%s): %s")
                         % (fname, e))
+
+    def load_action_script(self):
+        """Compiles and executes the action script"""
+
+        compiled_script = self.compile_action_script()
+
+        try:
+            localSymbols = globalSymbols = {}
+            exec compiled_script in localSymbols, globalSymbols
+        except Exception, e:
+            import traceback
+            traceback.print_exc(e)
+            raise ActionScriptException
 
         self.actionLocals = localSymbols
         self.actionGlobals = globalSymbols
@@ -1206,7 +1218,7 @@ def build_until(pspec, state):
     else:
         pb = Builder.from_name(pspec)
 
-    pb.compile_action_script()
+    pb.load_action_script()
     pb.compile_comar_script()
 
     last = pb.get_state()
