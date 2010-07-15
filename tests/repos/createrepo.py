@@ -285,4 +285,4 @@ class BuildFarm:
 if __name__ == "__main__":
     Pardus2007Repo().create()
     Contrib2007Repo().create()
-    BuildFarm().build(["pardus-2007", "contrib-2007", "repo1"])
+    BuildFarm().build(["pardus-2007", "contrib-2007", "repo1", "repo2"])
