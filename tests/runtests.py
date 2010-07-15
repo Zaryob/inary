@@ -15,6 +15,9 @@ import os
 import unittest
 import database
 
+import pisi
+import pisi.context as ctx
+
 from database.repodbtest import RepoDBTestCase
 from database.packagedbtest import PackageDBTestCase
 from database.sourcedbtest import SourceDBTestCase
@@ -45,6 +48,16 @@ from srcarchivetest import SourceArchiveTestCase
 from uritest import UriTestCase
 from utiltest import UtilTestCase
 from versiontest import VersionTestCase
+
+def setup():
+    options = pisi.config.Options()
+    options.ignore_build_no = False
+    options.destdir = 'repos/tmp'
+    pisi.api.set_options(options)
+    pisi.api.set_comar(False)
+
+    ctx.config.values.general.distribution = "Pardus"
+    ctx.config.values.general.distribution_release = "2007"
 
 
 if __name__ == '__main__':
