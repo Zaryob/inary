@@ -263,6 +263,34 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
                 ctx.ui.error(_('Dependency %s of %s cannot be satisfied') % (dep, pkg.name))
                 raise Exception(_("Upgrade is not possible."))
 
+    def add_resolvable_conflicts(pkg, Bp):
+        """Try to resolve conflicts by upgrading
+
+        If a package B conflicts with an old version of package A and
+        does not conflict with the new version of A, add A to the upgrade list.
+        """
+        for conflict in pkg.conflicts:
+            if not pisi.conflict.installed_package_conflicts(conflict):
+                # Conflicting package is not installed.
+                # No need to deal with it.
+                continue
+
+            if not packagedb.has_package(conflict.package):
+                # Conflicting package is not available in repo.
+                # Installed package will be removed.
+                continue
+
+            new_pkg = packagedb.get_package(conflict.package)
+            if conflict.satisfies_relation(new_pkg.version, new_pkg.release):
+                # Package still conflicts with the repo package.
+                # Installed package will be removed.
+                continue
+
+            # Upgrading the package will resolve conflict.
+            # Add it to the upgrade list.
+            Bp.add(conflict.package)
+            G_f.add_package(conflict.package)
+
     def add_broken_revdeps(pkg, Bp):
         # Search reverse dependencies to see if anything
         # should be upgraded
@@ -299,6 +327,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
             pkg = packagedb.get_package(x)
 
             add_runtime_deps(pkg, Bp)
+            add_resolvable_conflicts(pkg, Bp)
 
             if installdb.has_package(x):
                 add_broken_revdeps(pkg, Bp)
