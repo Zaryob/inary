@@ -63,8 +63,8 @@ class InstallDBTestCase(testcase.TestCase):
         pisi.api.install(["ethtool"])
         idb = pisi.db.installdb.InstallDB()
         info = idb.get_info("ethtool")
-        assert info.__class__ == pisi.db.installdb.InstallInfo
-        assert info.distribution == "Pardus"
+        self.assertTrue(isinstance(info, pisi.db.installdb.InstallInfo))
+        self.assertEqual(info.version, "0.3")
         pisi.api.remove(["ethtool"])
 
     def testGetReverseDependencies(self):
