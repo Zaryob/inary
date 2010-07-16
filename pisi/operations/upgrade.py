@@ -270,6 +270,10 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
         does not conflict with the new version of A, add A to the upgrade list.
         """
         for conflict in pkg.conflicts:
+            if conflict.package in G_f.vertices():
+                # Conflicting package is already in the upgrade list.
+                continue
+
             if not pisi.conflict.installed_package_conflicts(conflict):
                 # Conflicting package is not installed.
                 # No need to deal with it.
