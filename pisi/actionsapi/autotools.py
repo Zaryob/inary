@@ -26,7 +26,6 @@ from pisi.actionsapi.shelltools import system
 from pisi.actionsapi.shelltools import can_access_file
 from pisi.actionsapi.shelltools import unlink
 from pisi.actionsapi.libtools import gnuconfig_update
-from pisi.actionsapi.libtools import libtoolize
 
 class ConfigureError(pisi.actionsapi.Error):
     def __init__(self, value=''):
@@ -90,13 +89,12 @@ def rawConfigure(parameters = ''):
         raise ConfigureError(_('No configure script found.'))
 
 def compile(parameters = ''):
-    #FIXME: Only one package uses this until now, hmmm
     system('%s %s %s' % (get.CC(), get.CFLAGS(), parameters))
 
 def make(parameters = ''):
     '''make source with given parameters = "all" || "doc" etc.'''
     if system('make %s %s' % (get.makeJOBS(), parameters)):
-            raise MakeError(_('Make failed.'))
+        raise MakeError(_('Make failed.'))
 
 def fixInfoDir():
     infoDir = '%s/usr/share/info/dir' % get.installDIR()
@@ -105,41 +103,37 @@ def fixInfoDir():
 
 def install(parameters = '', argument = 'install'):
     '''install source into install directory with given parameters'''
-    if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
-        args = 'make prefix=%(prefix)s/%(defaultprefix)s \
-                datadir=%(prefix)s/%(data)s \
-                infodir=%(prefix)s/%(info)s \
-                localstatedir=%(prefix)s/%(localstate)s \
-                mandir=%(prefix)s/%(man)s \
-                sysconfdir=%(prefix)s/%(conf)s \
-                %(parameters)s \
-                %(argument)s' % {'prefix': get.installDIR(),
-                            'defaultprefix': get.defaultprefixDIR(),
-                            'man': get.manDIR(),
-                            'info': get.infoDIR(),
-                            'localstate': get.localstateDIR(),
-                            'conf': get.confDIR(),
-                            'data': get.dataDIR(),
-                            'parameters': parameters,
-                            'argument':argument}
+    args = 'make prefix=%(prefix)s/%(defaultprefix)s \
+            datadir=%(prefix)s/%(data)s \
+            infodir=%(prefix)s/%(info)s \
+            localstatedir=%(prefix)s/%(localstate)s \
+            mandir=%(prefix)s/%(man)s \
+            sysconfdir=%(prefix)s/%(conf)s \
+            %(parameters)s \
+            %(argument)s' % {
+                                'prefix': get.installDIR(),
+                                'defaultprefix': get.defaultprefixDIR(),
+                                'man': get.manDIR(),
+                                'info': get.infoDIR(),
+                                'localstate': get.localstateDIR(),
+                                'conf': get.confDIR(),
+                                'data': get.dataDIR(),
+                                'parameters': parameters,
+                                'argument':argument,
+                            }
 
-        if system(args):
-            raise InstallError(_('Install failed.'))
-        else:
-            fixInfoDir()
+    if system(args):
+        raise InstallError(_('Install failed.'))
     else:
-        raise InstallError(_('No Makefile found.'))
+        fixInfoDir()
 
 
 def rawInstall(parameters = '', argument = 'install'):
     '''install source into install directory with given parameters = PREFIX=%s % get.installDIR()'''
-    if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
-        if system('make %s %s' % (parameters, argument)):
-            raise InstallError(_('Install failed.'))
-        else:
-            fixInfoDir()
+    if system('make %s %s' % (parameters, argument)):
+        raise InstallError(_('Install failed.'))
     else:
-        raise InstallError(_('No Makefile found.'))
+        fixInfoDir()
 
 def aclocal(parameters = ''):
     '''generates an aclocal.m4 based on the contents of configure.in.'''
