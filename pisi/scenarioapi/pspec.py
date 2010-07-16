@@ -140,13 +140,18 @@ class Pspec:
 
     def set_package(self, dependencies, conflicts):
         self.package.name = self.name
-        self.package.conflicts = conflicts
 
         if dependencies:
             for depname in dependencies:
                 dep = Dependency()
                 dep.package = depname
                 self.package.packageDependencies.append(dep)
+
+        if conflicts:
+            for package in conflicts:
+                conflict = Conflict()
+                conflict.package = package
+                self.package.conflicts.append(conflict)
 
         self.pspec.packages.append(self.package)
 
