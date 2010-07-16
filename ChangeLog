@@ -1,3 +1,71 @@
+2010-07-16 Fatih Aşıcı <fatih@pardus.org.tr>
+	* upgrade: Check if the conflicting package is already in the upgrade list
+
+2010-07-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* upgrade: Try to resolve conflicts by upgrading
+
+	If a package B conflicts with an old version of package A and
+	does not conflict with the new version of A, add A to the upgrade list.
+	Fixes conflict tests.
+
+2010-07-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Handle actions.py errors
+
+	Print a traceback for the actual exception.
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/13786.
+
+2010-07-14 Gökmen Görgen <gkmngrgn@gmail.com>
+	* pisi/actionsapi: Add rubymodules.py
+
+	Written new module that is including API for simplifying to package Ruby
+	applications.
+
+2010-07-12 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Fix TypeError when adding an empty dir to ZIP archives
+
+	Fixes archivetest.
+
+2010-07-04 Ozan Çağlayan <ozan@pardus.org.tr>
+	* pisi/actionsapi: No need to check the existence of Makefile*
+
+	install() and rawInstall() should not check the existence of a
+	Makefile. This check prevents passing -C to those installation
+	wrappers.
+
+2010-07-03 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Fix the test that overwrites /usr/bin/aclocal
+
+2010-06-24 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Move license files to uludag/trunk/doc/en
+
+2010-06-24 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli: Ignore broken pipe errors
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/13609.
+
+2010-06-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Fix ArchiveZip adding empty dirs with incorrect paths
+
+2010-06-10 H. İbrahim Güngör <h.ibrahim.gungor@gmail.com>
+	* l10n: Fix warning in sv.po
+
+2010-06-03 Ozan Çağlayan <ozan@pardus.org.tr>
+	* actionsapi: Update copyright dates
+
+2010-06-03 Ozan Çağlayan <ozan@pardus.org.tr>
+	* actionsapi/scons: Pass -j option to enable parallel builds
+
+2010-06-03 Ozan Çağlayan <ozan@pardus.org.tr>
+	* l10n: Improve 2 messages and their translations
+
+2010-05-30 Fatih Aşıcı <fatih@pardus.org.tr>
+	* pisi 2.3.1
+
+	This release fixes a serious regression which prevents using local
+	repositories with compressed index files. Also the compatibility
+	of repositories without distribution info is ignored now.
+
 2010-05-30 Fatih Aşıcı <fatih@pardus.org.tr>
 	* scripts/make-changelog: Replace [at]'s with @ char and use tab char for indentation
 
