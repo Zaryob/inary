@@ -67,7 +67,7 @@ def chmod(filePath, mode = 0755):
             try:
                 os.chmod(fileName, mode)
             except OSError:
-                ctx.ui.error(_('ActionsAPI [chmod]: Operation not permitted: %s (mode: %s)') \
+                ctx.ui.error(_('ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)') \
                                                                 % (fileName, mode))
         else:
             ctx.ui.error(_('ActionsAPI [chmod]: File %s doesn\'t exists.') % (fileName))

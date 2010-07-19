@@ -85,4 +85,4 @@ def lib_insinto(sourceFile, destinationDirectory, permission = 0644):
     if os.path.islink(sourceFile):
         os.symlink(os.path.realpath(sourceFile), os.path.join(destinationDirectory, sourceFile))
     else:
-        system('install -m%s %s %s' % (permission, sourceFile, destinationDirectory))
+        system('install -m0%o %s %s' % (permission, sourceFile, destinationDirectory))
