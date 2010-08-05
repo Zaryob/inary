@@ -8,7 +8,6 @@
 # any later version.
 #
 # Please read the COPYING file.
-# Author: Gökmen Görgen, gkmngrgn [at] gmail.com
 
 # standard python modules
 import os
