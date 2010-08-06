@@ -77,7 +77,7 @@ class Dirs:
     info = 'usr/share/info'
     data = 'usr/share'
     conf = 'etc'
-    localstate = 'var/lib'
+    localstate = 'var'
     libexec = 'usr/libexec'
     defaultprefix = 'usr'
 
