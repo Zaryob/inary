@@ -34,9 +34,9 @@ datadir = "%s/share/%s" % (prefix, basename)
 docdir = "/%s/%s" % (get.docDIR(), basename)
 examplesdir = "%s/%s/examples" % (libdir, basename)
 demosdir = "%s/%s/demos" % (libdir, basename)
-importdir = "%s/%s/imports" % (libdir, basename)
-plugindir = "%s/%s/plugins" % (libdir, basename)
-translationdir = "%s/%s/translations" % (datadir, basename)
+importsdir = "%s/%s/imports" % (libdir, basename)
+pluginsdir = "%s/%s/plugins" % (libdir, basename)
+translationsdir = "%s/%s/translations" % (datadir, basename)
 sysconfdir= "/etc"
 qmake = "%s/qmake" % bindir
 
