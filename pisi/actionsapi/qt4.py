@@ -36,7 +36,7 @@ examplesdir = "%s/%s/examples" % (libdir, basename)
 demosdir = "%s/%s/demos" % (libdir, basename)
 importdir = "%s/%s/imports" % (libdir, basename)
 plugindir = "%s/%s/plugins" % (libdir, basename)
-translationdir = "%s/%s/translations" % (datadir, basename)
+translationdir = "%s/translations" % datadir
 sysconfdir= "/etc"
 qmake = "%s/qmake" % bindir
 
