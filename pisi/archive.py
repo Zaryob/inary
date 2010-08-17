@@ -49,8 +49,9 @@ class _LZMAProxy(object):
         self.pos = 0
         if self.mode == "r":
             self.lzmaobj = lzma.LZMADecompressor()
-            if hasattr(self.fileobj, "seek"):
-                self.fileobj.seek(0)
+            # Seeking here can cause problems with Python 2.7
+            # if hasattr(self.fileobj, "seek"):
+            #     self.fileobj.seek(0)
             self.buf = ""
         else:
             self.lzmaobj = lzma.LZMACompressor()
