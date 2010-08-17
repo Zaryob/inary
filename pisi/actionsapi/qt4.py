@@ -31,6 +31,7 @@ prefix = "/%s" % get.defaultprefixDIR()
 libdir = "%s/lib" % prefix
 bindir = "%s/bin" % prefix
 datadir = "%s/share/%s" % (prefix, basename)
+includedir = "%s/include" % prefix
 docdir = "/%s/%s" % (get.docDIR(), basename)
 examplesdir = "%s/%s/examples" % (libdir, basename)
 demosdir = "%s/%s/demos" % (libdir, basename)
