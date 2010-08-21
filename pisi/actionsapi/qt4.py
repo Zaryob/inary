@@ -55,11 +55,10 @@ def configure(projectfile='', parameters='', installPrefix=prefix):
     if len(profiles) > 1 and projectfile == '':
         raise ConfigureError(_("It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)" % ", ".join(profiles)))
 
-    shelltools.system("%s -makefile %s PREFIX='%s' %s" % (qmake, projectfile, installPrefix, parameters))
+    shelltools.system("%s -makefile %s PREFIX='%s' QMAKE_CFLAGS+='%s' QMAKE_CXXFLAGS+='%s' %s" % (qmake, projectfile, installPrefix, get.CFLAGS(), get.CXXFLAGS(), parameters))
 
 def make(parameters=''):
-    #qmake ignores CXXFLAGS and CFLAGS environment variables #11638
-    cmaketools.make('CFLAGS="%s" CXXFLAGS="%s" %s' % (get.CFLAGS(), get.CXXFLAGS(), parameters))
+    cmaketools.make(parameters)
 
 def install(parameters='', argument='install'):
     cmaketools.install('INSTALL_ROOT="%s" %s' % (get.installDIR(), parameters), argument)
