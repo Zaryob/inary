@@ -12,6 +12,7 @@
 # standard python modules
 import os
 import glob
+import shutil
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
@@ -25,6 +26,7 @@ import pisi.actionsapi
 import pisi.actionsapi.get as get
 from pisi.actionsapi.shelltools import *
 from pisi.actionsapi.pisitools import dodoc, dodir, domove, dosym, insinto, removeDir
+
 
 WorkDir = "%s-%s" % (get.srcNAME(), get.srcVERSION().split('_')[-1])
 
@@ -49,12 +51,15 @@ class RunTimeError(pisi.actionsapi.Error):
 def compile(parameters = ''):
     '''compiling texlive packages'''
 
-    # Build format files
-    if buildFormatFiles():
-        raise CompileError, _('Building format files failed')
+    # Move sources according to tplobj files
+    if moveSources():
+        raise CompileError, _('Moving source files failed')
     # Generate config files
     if generateConfigFiles():
         raise CompileError, _('Generate config files failed')
+    # Build format files
+    if buildFormatFiles():
+        raise CompileError, _('Building format files failed')
 
 def install(parameters = ''):
     '''Installing texlive packages'''
@@ -63,23 +68,21 @@ def install(parameters = ''):
     if createSymlinksFormat2Engines():
         raise InstallError, _('Creating symlinks from format to engines failed')
 
-    # Installing texmf, texmf-dist, tlpkg, texmf-var
-    if installTexmfFiles():
-        raise InstallError, _('Installing texmf files failed')
-
     # Installing docs
     if installDocFiles():
         raise InstallError, _('Installing docs failed')
+
+    # Installing texmf, texmf-dist, tlpkg, texmf-var
+    if installTexmfFiles():
+        raise InstallError, _('Installing texmf files failed')
 
     # Installing config files
     if installConfigFiles():
         raise InstallError, _('Installing config files failed')
 
     # Handle config files
-    if os.path.isdir("%s/texmf" % get.curDIR()):
-        cd("%s/usr/share/texmf" % get.installDIR())
-        if handleConfigFiles(".", "cfg", "cnf"):
-            raise Installing, _('Handle config files failed')
+    if handleConfigFiles():
+        raise Installing, _('Handle config files failed')
 
 
 def createSymlinksFormat2Engines():
@@ -104,16 +107,6 @@ def createSymlinksFormat2Engines():
                         sym(symbin[1], "%s/usr/bin/%s" % (get.installDIR(), symbin[0]))
         symfile.close()
 
-def installTexmfFiles():
-    '''Installing texmf, texmf-dist, tlpkg, texmf-var'''
-    for installdoc in ["texmf", "texmf-dist", "tlpkg", "texmf-var"]:
-        if os.path.isdir("%s/%s" % (get.curDIR(), installdoc)):
-            if not installdoc == "texmf-var":
-                copytree(installdoc, "%s/usr/share/%s" % (get.installDIR(), installdoc))
-            else:
-                copytree(installdoc, "%s/var/lib/texmf" % get.installDIR())
-
-
 def installDocFiles():
     '''Installing docs'''
     if not "documentation" in get.srcNAME():
@@ -122,8 +115,16 @@ def installDocFiles():
     else:
         for removedir in ["texmf", "texmf-dist"]:
             if os.path.isdir("%s/%s/doc/" % (get.curDIR(), removedir)):
-                removeDir("/usr/share/%s/doc" % removedir )
+                shutil.rmtree("%s/%s/doc" % (get.curDIR(),removedir))
 
+def installTexmfFiles():
+    '''Installing texmf, texmf-dist, tlpkg, texmf-var'''
+    for installdoc in ["texmf", "texmf-dist", "tlpkg", "texmf-var"]:
+        if os.path.isdir("%s/%s" % (get.curDIR(), installdoc)):
+            if not installdoc == "texmf-var":
+                shutil.copytree(installdoc, "%s/usr/share/%s" % (get.installDIR(),installdoc))
+            else:
+                copytree(installdoc, "%s/var/lib/texmf" % get.installDIR())
 
 def installConfigFiles():
     '''Installing config files'''
@@ -142,31 +143,73 @@ def installConfigFiles():
     if can_access_file("%s/language.%s.dat" % (get.curDIR(), get.srcNAME())):
         insinto( "/etc/texmf/language.dat.d", "%s/language.%s.dat" % (get.curDIR(), get.srcNAME()))
 
-def handleConfigFiles(currdir,ext1, ext2):
+def handleConfigFiles():
     '''Handling config files'''
-    for conffile in ls(currdir):
-        configpath = os.path.join(currdir, conffile)
-        if os.path.isfile(configpath):
-             if configpath.endswith(ext1) or configpath.endswith(ext2):
-                if not "config" in configpath:
-                    handledir=currdir.split('/')
-                    if not os.path.isdir("%s/etc/texmf/%s.d" % (get.installDIR(),handledir[1])):
-                        ctx.ui.info(_('Creating /etc/texmf/%s.d') % handledir[1])
-                        dodir("/etc/texmf/%s.d" % handledir[1])
-                    domove("/usr/share/texmf/%s/%s" % (handledir[1], conffile), "/etc/texmf/%s.d" % handledir[1])
-                    dosym("/etc/texmf/%s.d/%s" % (handledir[1], conffile), "/usr/share/texmf/%s/%s" % (handledir[1], conffile))
+    for root, dirs,files in os.walk("%s/usr/share/texmf" % get.installDIR()):
+        for file in files:
+            if file.endswith("cnf") or file.endswith("cfg"):
+                if not ("config" or "doc") in root:
+                    dirname = root.split("/")[-1]
+                    if not os.path.isdir("%s/etc/texmf/%s.d" % (get.installDIR(),dirname)):
+                        ctx.ui.info(_('Creating /etc/texmf/%s.d') % dirname)
+                        dodir("/etc/texmf/%s.d" % dirname)
+                    ctx.ui.info(_('Moving (and symlinking) /usr/share/texmf/%s to /etc/texmf/%s.d') % (file,dirname))
+                    domove("/usr/share/texmf/%s/%s" % (dirname,file), "/etc/texmf/%s.d" % dirname)
+                    dosym("/etc/texmf/%s.d/%s" % (dirname, file), "/usr/share/texmf/%s/%s" %(dirname, file))
 
-        else:
-           handleConfigFiles(configpath,ext1, ext2)
+
+def addFormat(parameters):
+    '''Add format files'''
+    if not os.path.isdir("%s/texmf/fmtutil/" % get.curDIR()):
+        makedirs("%s/texmf/fmtutil/" % get.curDIR())
+    if not os.path.isfile("%s/texmf/fmtutil/format.%s.cnf" % (get.curDIR(),get.srcNAME())):
+        cnf_file = open("%s/texmf/fmtutil/format.%s.cnf" % (get.curDIR(),get.srcNAME()), "w")
+        cnf_file.write("# Generated for %s by actionsapi/texlivemodules.py\n" % get.srcNAME())
+        cnf_file.close()
+
+    # TODO: Use regex for code simplification
+    
+    parameters = " ".join(parameters.split())   # Removing white-space characters
+    parameters = parameters.split(" ",3)        # Split parameters until the value "option"
+    para_dict = {}
+    for option in parameters:
+        pair = option.strip()                   # Remove whitespaces before "options" value
+        pair = pair.split("=",1)                # The value "options" may have multiple "=", thus split just one time
+        if len(pair) == 2:                      # The list may contain values that are not pair
+            para_dict[pair[0]] = pair[1]
+            if not pair[0] == "patterns":
+                para_dict["patterns"] = '-'     # Specified in the texlive-module.eclass
+
+    cnf_file = open('%s/texmf/fmtutil/format.%s.cnf' % (get.curDIR(),get.srcNAME()), 'a')
+    cnf_file.write("%s\t%s\t%s\t%s\n" % (para_dict["name"], para_dict["engine"], para_dict["patterns"], para_dict["options"]))
+    cnf_file.close()
+
+
+def moveSources():
+    reloc = "texmf-dist"
+
+    for tlpobjfile in os.listdir("tlpkg/tlpobj/"):
+        jobsfile=open("tlpkg/tlpobj/%s" % tlpobjfile, "r")
+        for line in jobsfile.readlines():
+            if "RELOC" in line:
+                path = line.split("/", 1)[-1]
+                path = path.strip()
+                filename = path.split("/", -1)
+                dirname = os.path.dirname(path)
+                if not os.path.isdir("%s/%s" % (reloc,dirname)):
+                    os.system("mkdir -p %s/%s" % (reloc,dirname))
+                shutil.move("%s" % path , "%s/%s" % (reloc,dirname))
+
 
 def buildFormatFiles():
     '''Build format files'''
     if os.path.isdir("%s/texmf/fmtutil/" % get.curDIR()):
-        makedirs("texmf-var/web2c")
         for formatfile in ls("%s/texmf/fmtutil/format*.cnf" % get.curDIR()):
+            makedirs("%s/texmf-var/web2c/" % get.curDIR())
             ctx.ui.info(_('Building format file %s') % formatfile)
-            export("TEXMFHOME", "texmf:texmf-dist")
-            system("fmtutil --cnffile %s --fmtdir texmf-var/web2c --all" % formatfile)
+            export("TEXMFHOME", "%s/texmf:/%stexmf-dist:%s/texmf-var" %(get.curDIR(), get.curDIR(), get.curDIR() ))
+            export("VARTEXFONTS", "fonts")
+            system("env -u TEXINPUTS fmtutil --cnffile %s --fmtdir texmf-var/web2c --all" % formatfile)
 
 def generateConfigFiles():
     '''Generate config files'''
@@ -191,6 +234,8 @@ def generateConfigFiles():
                     ctx.ui.info(_('f %s is added to %s/%s-config') % (parameter, get.curDIR(), get.srcNAME()))
                 elif command == "AddHyphen":
                     makeLanguagesDefDatLines(parameter)
+                elif command == "AddFormat":
+                    addFormat(parameter)
                 elif command == "BuildFormat":
                     ctx.ui.info(_('Language file  %s  already generated.') % parameter)
                 elif command == "BuildLanguageDat":
