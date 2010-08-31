@@ -109,7 +109,7 @@ def createSymlinksFormat2Engines():
 
 def installDocFiles():
     '''Installing docs'''
-    if not "documentation" in get.srcNAME():
+    if "documentation" in get.srcNAME():
         if os.path.isdir("%s/texmf-doc" % get.curDIR()):
             copytree("texmf-doc", "%s/usr/share/texmf-doc" % get.installDIR())
     else:
@@ -148,7 +148,7 @@ def handleConfigFiles():
     for root, dirs,files in os.walk("%s/usr/share/texmf" % get.installDIR()):
         for file in files:
             if file.endswith("cnf") or file.endswith("cfg"):
-                if not ("config" or "doc") in root:
+                if not ("config" and "doc") in root:
                     dirname = root.split("/")[-1]
                     if not os.path.isdir("%s/etc/texmf/%s.d" % (get.installDIR(),dirname)):
                         ctx.ui.info(_('Creating /etc/texmf/%s.d') % dirname)
