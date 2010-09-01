@@ -13,7 +13,7 @@
 import os
 import glob
 import shutil
-
+import shlex
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
@@ -146,16 +146,16 @@ def installConfigFiles():
 def handleConfigFiles():
     '''Handling config files'''
     for root, dirs,files in os.walk("%s/usr/share/texmf" % get.installDIR()):
-        for file in files:
-            if file.endswith("cnf") or file.endswith("cfg"):
-                if not ("config" and "doc") in root:
+        if not ("config" in root or "doc" in root):
+            for configFile in files:
+                if configFile.endswith(("cfg", "cnf")):
                     dirname = root.split("/")[-1]
                     if not os.path.isdir("%s/etc/texmf/%s.d" % (get.installDIR(),dirname)):
                         ctx.ui.info(_('Creating /etc/texmf/%s.d') % dirname)
                         dodir("/etc/texmf/%s.d" % dirname)
-                    ctx.ui.info(_('Moving (and symlinking) /usr/share/texmf/%s to /etc/texmf/%s.d') % (file,dirname))
-                    domove("/usr/share/texmf/%s/%s" % (dirname,file), "/etc/texmf/%s.d" % dirname)
-                    dosym("/etc/texmf/%s.d/%s" % (dirname, file), "/usr/share/texmf/%s/%s" %(dirname, file))
+                    ctx.ui.info(_('Moving (and symlinking) /usr/share/texmf/%s to /etc/texmf/%s.d') % (configFile,dirname))
+                    domove("/usr/share/texmf/%s/%s" % (dirname,configFile), "/etc/texmf/%s.d" % dirname)
+                    dosym("/etc/texmf/%s.d/%s" % (dirname, configFile), "/usr/share/texmf/%s/%s" %(dirname, configFile))
 
 
 def addFormat(parameters):
@@ -170,7 +170,7 @@ def addFormat(parameters):
     # TODO: Use regex for code simplification
     
     parameters = " ".join(parameters.split())   # Removing white-space characters
-    parameters = parameters.split(" ",3)        # Split parameters until the value "option"
+    parameters = shlex.split(parameters)      # Split parameters until the value "option"
     para_dict = {}
     for option in parameters:
         pair = option.strip()                   # Remove whitespaces before "options" value
