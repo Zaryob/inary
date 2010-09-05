@@ -21,7 +21,7 @@ def usage(errmsg):
     Error: %s
 
     Usage:
-      unpisi PiSi_package.pisi
+      unpisi PiSi_package.pisi [target_dir]
     """ % (errmsg)
 
     sys.exit(1)
@@ -43,9 +43,18 @@ def main():
     if not os.path.exists("install"):
         os.makedirs("install")
 
-    package.extract_pisi_files(".")
-    package.extract_dir("comar", ".")
-    package.extract_install("install")
+    target = '.' if len(sys.argv) == 2 else sys.argv[2]
+
+    package.extract_pisi_files(target)
+    package.extract_dir('comar', target)
+    if not os.path.exists(os.path.join(target, 'install')):
+        os.makedirs(os.path.join(target, 'install'))
+
+    package.extract_install(os.path.join(target, 'install'))
+
+    # FIXME: There is a Pisi bug, it already creates an install directory even its empty.
+    if os.listdir('install') == []:
+        os.rmdir('install')
 
     return 0
 
