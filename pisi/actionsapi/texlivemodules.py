@@ -168,7 +168,6 @@ def addFormat(parameters):
         cnf_file.close()
 
     # TODO: Use regex for code simplification
-    
     parameters = " ".join(parameters.split())   # Removing white-space characters
     parameters = shlex.split(parameters)      # Split parameters until the value "option"
     para_dict = {}
@@ -211,6 +210,50 @@ def buildFormatFiles():
             export("VARTEXFONTS", "fonts")
             system("env -u TEXINPUTS fmtutil --cnffile %s --fmtdir texmf-var/web2c --all" % formatfile)
 
+def addLanguageDat(parameter):
+    '''Create language.*.dat files'''
+    parameter = parameter.split()
+    para_dict={}
+    for option in parameter:
+        pair = option.split("=")
+        if len(pair) == 2: #That's just a caution, the pair should have two items, not more not less
+            para_dict[pair[0]] = pair[1]
+
+    language_dat = open('%s/language.%s.dat' % (get.curDIR(),get.srcNAME())  , 'a')
+    language_dat.write("%s\t%s\n" % (para_dict["name"], para_dict["file"]))
+    language_dat.close()
+
+    if "synonyms" in para_dict:
+        language_dat = open('%s/language.%s.dat' % (get.curDIR(),get.srcNAME())  , 'a')
+        language_dat.write("=%s\n" % para_dict["synonyms"])
+        language_dat.close()
+
+
+def addLanguageDef(parameter):
+    '''Create language.*.def files'''
+    parameter = parameter.split()
+    para_dict={}
+    for option in parameter:
+        pair = option.split("=")
+        if len(pair) == 2: #That's just a caution, the pair should have two items, not more not less
+            para_dict[pair[0]] = pair[1]
+
+    if "lefthyphenmin" in para_dict and not para_dict["lefthyphenmin"]:
+        para_dict["lefthyphenmin"] = "2"
+    if "righthyphenmin" in para_dict and not para_dict["righthyphenmin"]:
+        para_dict["righthyphenmin"] = "3"
+
+    language_def = open('%s/language.%s.def' % (get.curDIR(),get.srcNAME())  , 'a')
+    language_def.write("\\addlanguage{%s}{%s}{}{%s}{%s}\n" % (para_dict["name"], para_dict["file"],  para_dict["lefthyphenmin"],  para_dict["righthyphenmin"]))
+    language_def.close()
+
+    if "synonyms" in para_dict:
+        language_def = open('%s/language.%s.def' % (get.curDIR(),get.srcNAME())  , 'a')
+        language_def.write("\\addlanguage{%s}{%s}{}{%s}{%s}\n" % (para_dict["synonyms"], para_dict["file"],  para_dict["lefthyphenmin"],  para_dict["righthyphenmin"]))
+        language_def.close()
+
+
+
 def generateConfigFiles():
     '''Generate config files'''
     for tlpobjfile in ls("%s/tlpkg/tlpobj/*" % get.curDIR()):
@@ -233,7 +276,8 @@ def generateConfigFiles():
                     echo("%s/%s-config" % (get.curDIR(), get.srcNAME()), "f %s" % parameter)
                     ctx.ui.info(_('f %s is added to %s/%s-config') % (parameter, get.curDIR(), get.srcNAME()))
                 elif command == "AddHyphen":
-                    makeLanguagesDefDatLines(parameter)
+                    addLanguageDat(parameter)
+                    addLanguageDef(parameter)
                 elif command == "AddFormat":
                     addFormat(parameter)
                 elif command == "BuildFormat":
@@ -242,45 +286,3 @@ def generateConfigFiles():
                     ctx.ui.info(_('No rule to proccess %s. Please file a bug.') % command)
         jobsfile.close()
 
-def makeLanguagesDefDatLines(parameter):
-    '''Make Languages Def Dat Lines'''
-    splitspace=parameter.split(None)
-    if len(splitspace) == 4:
-        name = splitspace[0].split("=")
-
-        lefthyphenmin = splitspace[1].split("=")
-        if not lefthyphenmin[1]:
-            lefthyphenmin[1]= "2"
-
-        righthyphenmin = splitspace[2].split("=")
-        if not righthyphenmin[1]:
-            righthyphenmin[1]= "3"
-
-        datdeffile = splitspace[3].split("=")
-    else:
-        name = splitspace[0].split("=")
-        synonyms = splitspace[1].split("=")
-
-        lefthyphenmin = splitspace[2].split("=")
-        if not lefthyphenmin[1]:
-             lefthyphenmin[1]= "2"
-
-        righthyphenmin = splitspace[3].split("=")
-        if not righthyphenmin[1]:
-            righthyphenmin[1]= "3"
-
-        datdeffile = splitspace[4].split("=")
-
-        synonym = synonyms[1].split(",")
-        for i in range(len(synonym)):
-            echo("%s/language.%s.def" % (get.curDIR(), get.srcNAME()), "\\languages{%s}{%s}{}{%s}{%s}" % (synonym[i], datdeffile[1], lefthyphenmin[1], righthyphenmin[1]))
-            ctx.ui.info(_('\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def') % (synonym[i], datdeffile[1], lefthyphenmin[1], righthyphenmin[1], get.curDIR(), get.srcNAME()))
-
-            echo("%s/language.%s.dat" % (get.curDIR(), get.srcNAME()), "=%s"  % (synonym[i]))
-            ctx.ui.info(_('%s is added to %s/language.%s.dat') % (synonym[i], get.curDIR(), get.srcNAME()))
-
-    echo("%s/language.%s.def" % (get.curDIR(), get.srcNAME()), "\\languages{%s}{%s}{}{%s}{%s}" % (name[1], datdeffile[1], lefthyphenmin[1], righthyphenmin[1]))
-    ctx.ui.info(_('\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def ') % (name[1], datdeffile[1], lefthyphenmin[1], righthyphenmin[1], get.curDIR(), get.srcNAME()))
-
-    echo("%s/language.%s.dat" % (get.curDIR(), get.srcNAME()), "%s %s"  % (name[1], datdeffile[1]))
-    ctx.ui.info(_('%s %s is added to %s/language.%s.dat ') % (name[1], datdeffile[1], get.curDIR(), get.srcNAME()))
