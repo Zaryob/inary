@@ -176,7 +176,7 @@ def addFormat(parameters):
         pair = pair.split("=",1)                # The value "options" may have multiple "=", thus split just one time
         if len(pair) == 2:                      # The list may contain values that are not pair
             para_dict[pair[0]] = pair[1]
-            if not pair[0] == "patterns":
+            if pair[0] == "patterns" and pair[1] == '':
                 para_dict["patterns"] = '-'     # Specified in the texlive-module.eclass
 
     cnf_file = open('%s/texmf/fmtutil/format.%s.cnf' % (get.curDIR(),get.srcNAME()), 'a')
