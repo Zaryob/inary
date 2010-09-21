@@ -1052,11 +1052,6 @@ class Builder:
             if not package.summary:
                 package.summary = self.spec.source.summary
             if not package.description:
-                # TODO: remove this if statement with the part in
-                # specfile.py:SpecFile
-                if not self.spec.source.description:
-                    self.spec.dirtyWorkAround()
-
                 package.description = self.spec.source.description
             if not package.partOf:
                 package.partOf = self.spec.source.partOf

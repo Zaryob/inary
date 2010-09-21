@@ -174,7 +174,7 @@ class Source:
     t_IsA = [ [autoxml.String], autoxml.optional]
     t_PartOf = [autoxml.String, autoxml.optional]
     t_Summary = [autoxml.LocalText, autoxml.mandatory]
-    t_Description = [autoxml.LocalText, autoxml.optional]
+    t_Description = [autoxml.LocalText, autoxml.mandatory]
     t_Icon = [ autoxml.String, autoxml.optional]
     t_Archive = [ [Archive], autoxml.mandatory, "Archive" ]
     t_AdditionalFiles = [ [AdditionalFile], autoxml.optional]
@@ -397,12 +397,6 @@ class SpecFile(xmlfile.XmlFile):
 
     def getSourceRelease(self):
         return self.history[0].release
-
-    def dirtyWorkAround(self):
-        #TODO: Description should be mandatory. Remove this code when repo is ready.
-        #http://liste.pardus.org.tr/gelistirici/2006-September/002332.html
-        self.source.description = autoxml.LocalText("Description")
-        self.source.description["en"] = self.source.summary["en"]
 
     def _set_i18n(self, tag, inst):
         try:
