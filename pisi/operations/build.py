@@ -105,7 +105,7 @@ def check_path_collision(package, pkgList):
                 # path.path: /usr/share/doc
 
                 if (create_static and path.path.endswith(ar_suffix)) or \
-                        (create_static and path.path.endswith(debug_suffix)):
+                        (create_debug and path.path.endswith(debug_suffix)):
                     # don't throw collision error for these files.
                     # we'll handle this in gen_files_xml..
                     continue
