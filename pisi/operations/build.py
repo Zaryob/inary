@@ -772,6 +772,11 @@ class Builder:
         debug_package_obj.description['en'] = u'Debug files for %s' % (package.name)
         debug_package_obj.partOf = package.partOf
 
+        dependency = pisi.dependency.Dependency()
+        dependency.package = package.name
+        dependency.release = self.spec.history[0].release
+        debug_package_obj.packageDependencies.append(dependency)
+
         for path_info in package.files:
             path = util.join_path(ctx.const.debug_files_suffix, path_info.path)
             debug_path_info = pisi.specfile.Path(path=path, fileType="debug")
