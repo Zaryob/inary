@@ -1079,7 +1079,6 @@ class Builder:
             # build number
             if ctx.config.options.ignore_build_no or not ctx.config.values.build.buildno:
                 build_no = old_build_no = None
-                ctx.ui.warning(_('Build number is not available. For repo builds you must enable buildno in pisi.conf.'))
             else:
                 build_no, old_build_no = self.calc_build_no(package.name)
 
@@ -1148,6 +1147,12 @@ class Builder:
         # making actionsapi.variables.exportFlags() useless...
         os.environ.clear()
         os.environ.update(ctx.config.environ)
+
+        if ctx.config.options.ignore_build_no or \
+                not ctx.config.values.build.buildno:
+            ctx.ui.warning(_("Build numbers were not used as requested. For "
+                             "repository builds, you must enable 'buildno' "
+                             "option in pisi.conf."))
 
         return self.new_packages, self.old_packages
 
