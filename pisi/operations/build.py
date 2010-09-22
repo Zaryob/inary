@@ -763,25 +763,19 @@ class Builder:
 
         return static_package_obj
 
-    def generate_debug_package_object(self):
-        debug_files = []
-        for root, dirs, files in os.walk(self.pkg_debug_dir()):
-            for f in files:
-                if f.endswith(ctx.const.debug_file_suffix):
-                    debug_files.append(util.join_path(root, f))
-
-        if not len(debug_files):
-            return None
-
+    def generate_debug_package_object(self, package):
         debug_package_obj = pisi.specfile.Package()
         debug_package_obj.debug_package = True
-        debug_package_obj.name = self.spec.source.name + ctx.const.debug_name_suffix
+        debug_package_obj.name = package.name + ctx.const.debug_name_suffix
         # FIXME: find a better way to deal with the summary and description constants.
-        debug_package_obj.summary['en'] = u'Debug files for %s' % (self.spec.source.name)
-        debug_package_obj.description['en'] = u'Debug files for %s' % (self.spec.source.name)
-        debug_package_obj.partOf = self.spec.source.partOf
-        for f in debug_files:
-            debug_package_obj.files.append(pisi.specfile.Path(path=f[len(self.pkg_debug_dir()):], fileType="debug"))
+        debug_package_obj.summary['en'] = u'Debug files for %s' % (package.name)
+        debug_package_obj.description['en'] = u'Debug files for %s' % (package.name)
+        debug_package_obj.partOf = package.partOf
+
+        for path_info in package.files:
+            path = util.join_path(ctx.const.debug_files_suffix, path_info.path)
+            debug_path_info = pisi.specfile.Path(path=path, fileType="debug")
+            debug_package_obj.files.append(debug_path_info)
 
         return debug_package_obj
 
@@ -997,9 +991,14 @@ class Builder:
                 self.spec.packages.append(obj)
 
         if ctx.config.values.build.generatedebug:
-            obj = self.generate_debug_package_object()
-            if obj:
-                self.spec.packages.append(obj)
+            debug_packages = []
+            for package in self.spec.packages:
+                obj = self.generate_debug_package_object(package)
+                if obj:
+                    debug_packages.append(obj)
+
+            if debug_packages:
+                self.spec.packages.extend(debug_packages)
 
         self.new_packages = []
         self.old_packages = []
@@ -1064,6 +1063,10 @@ class Builder:
 
             ctx.ui.info(_("Generating %s,") % ctx.const.files_xml)
             self.gen_files_xml(package)
+
+            if not self.files.list:
+                ctx.ui.warning(_("Ignoring empty package %s" % package.name))
+                continue
 
             ctx.ui.info(_("Generating %s,") % ctx.const.metadata_xml)
             self.gen_metadata_xml(package)
