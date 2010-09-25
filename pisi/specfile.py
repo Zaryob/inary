@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -391,6 +391,24 @@ class SpecFile(xmlfile.XmlFile):
     t_History = [ [Update], autoxml.mandatory]
     t_Components = [ [component.Component], autoxml.optional, "Component"]
     t_Groups = [ [group.Group], autoxml.optional, "Group"]
+
+    def decode_hook(self, node, errs, where):
+        current_version = self.history[0].version
+        current_release = self.history[0].release
+
+        for package in self.packages:
+            deps = package.packageDependencies + package.packageAnyDependencies
+            for dep in deps:
+                for attr_name, attr_value in dep.__dict__.items():
+                    if attr_value != "current":
+                        continue
+
+                    if attr_name.startswith("version"):
+                        dep.__dict__[attr_name] = current_version
+
+                    elif attr_name.startswith("release"):
+                        dep.__dict__[attr_name] = current_release
+
 
     def getSourceVersion(self):
         return self.history[0].version
