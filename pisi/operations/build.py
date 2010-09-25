@@ -577,13 +577,23 @@ class Builder:
 
     def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
-        try:
-            workdir = self.actionGlobals['WorkDir']
-        except KeyError:
-            workdir = self.spec.source.name + "-" + \
-                        self.spec.getSourceVersion()
 
-        return util.join_path(self.pkg_work_dir(), workdir)
+        dirname = self.spec.source.name + "-" + self.spec.getSourceVersion()
+        dirname = self.actionGlobals.get("WorkDir", dirname)
+
+        src_dir = util.join_path(self.pkg_work_dir(), dirname)
+
+        if not os.path.exists(src_dir):
+            basename = os.path.basename(self.spec.source.archive[0].uri)
+            dirname = os.path.splitext(basename)[0]
+            src_dir = util.join_path(self.pkg_work_dir(), dirname)
+
+            while not os.path.exists(src_dir):
+                src_dir, ext = os.path.splitext(src_dir)
+                if not ext:
+                    break
+
+        return src_dir
 
     def log_sandbox_violation(self, operation, path, canonical_path):
         ctx.ui.error(_("Sandbox violation: %s (%s -> %s)") % (operation,
