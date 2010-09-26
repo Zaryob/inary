@@ -343,13 +343,10 @@ def check_file(file, mode = os.F_OK):
         raise FileError("File " + file + " not found")
     return True
 
-# FIXME: check_dir is not a good name considering it can also create the dir
-def check_dir(d):
-    """Make sure given directory path exists."""
-    # FIXME: What is first strip doing there?
-    d = d.strip().rstrip("/")
-    if not os.access(d, os.F_OK):
-        os.makedirs(d)
+def ensure_dirs(path):
+    """Make sure the given directory path exists."""
+    if not os.path.exists(path):
+        os.makedirs(path)
 
 def clean_dir(path):
     """Remove all content of a directory."""
@@ -386,13 +383,13 @@ def dir_size(dir):
 def copy_file(src,dest):
     """Copy source file to the destination file."""
     check_file(src)
-    check_dir(os.path.dirname(dest))
+    ensure_dirs(os.path.dirname(dest))
     shutil.copyfile(src, dest)
 
 def copy_file_stat(src,dest):
     """Copy source file to the destination file with all stat info."""
     check_file(src)
-    check_dir(os.path.dirname(dest))
+    ensure_dirs(os.path.dirname(dest))
     shutil.copy2(src, dest)
 
 def read_link(link):
@@ -615,7 +612,7 @@ def strip_file(filepath, fileinfo, outpath):
 
     elif "SB executable" in fileinfo:
         if ctx.config.values.build.generatedebug:
-            check_dir(os.path.dirname(outpath))
+            ensure_dirs(os.path.dirname(outpath))
             save_elf_debug(filepath, outpath)
         run_strip(filepath)
         # FIXME: removing RPATH also causes problems, for details see gelistirici mailing list - caglar10ur
@@ -624,7 +621,7 @@ def strip_file(filepath, fileinfo, outpath):
 
     elif "SB shared object" in fileinfo:
         if ctx.config.values.build.generatedebug:
-            check_dir(os.path.dirname(outpath))
+            ensure_dirs(os.path.dirname(outpath))
             save_elf_debug(filepath, outpath)
         run_strip(filepath, "--strip-unneeded")
         # run_chrpath(filepath)

@@ -90,7 +90,8 @@ class Config(object):
 
     def subdir(self, path):
         subdir = pisi.util.join_path(self.dest_dir(), path)
-        pisi.util.check_dir(subdir)
+        if os.access(os.path.dirname(subdir), os.W_OK):
+            pisi.util.ensure_dirs(subdir)
         return subdir
 
     def log_dir(self):

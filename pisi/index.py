@@ -63,7 +63,8 @@ class Index(xmlfile.XmlFile):
         else:
             tmpdir = os.path.join(ctx.config.tmp_dir(), 'index')
             pisi.util.clean_dir(tmpdir)
-        pisi.util.check_dir(tmpdir)
+
+        pisi.util.ensure_dirs(tmpdir)
 
         # write uri
         urlfile = file(pisi.util.join_path(tmpdir, 'uri'), 'w')

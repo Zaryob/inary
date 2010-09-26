@@ -118,8 +118,7 @@ class Fetcher:
         self.partial_file = self.archive_file + ctx.const.partial_suffix
         self.progress = None
 
-        util.check_dir(self.destdir)
-
+        util.ensure_dirs(self.destdir)
 
     def fetch (self):
         """Return value: Fetched file's full path.."""

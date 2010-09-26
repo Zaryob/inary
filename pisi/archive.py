@@ -533,7 +533,7 @@ class ArchiveZip(ArchiveBase):
                     continue
 
                 # check that output dir is present
-                util.check_dir(os.path.dirname(ofile))
+                util.ensure_dirs(os.path.dirname(ofile))
 
                 # remove output file we might be overwriting.
                 # (also check for islink? for broken symlinks...)

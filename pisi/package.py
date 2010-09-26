@@ -189,7 +189,7 @@ class Package:
         """Extract file with path to outdir"""
         data = self.impl.read_file(path)
         fpath = util.join_path(outdir, path)
-        util.check_dir(os.path.dirname(fpath))
+        util.ensure_dirs(os.path.dirname(fpath))
 
         with open(fpath, "wb") as f:
             f.write(data)

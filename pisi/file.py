@@ -105,6 +105,8 @@ class File:
 
         assert isinstance(uri, pisi.uri.URI)
 
+        pisi.util.ensure_dirs(transfer_dir)
+
         if sha1sum:
             sha1filename = File.download(pisi.uri.URI(uri.get_uri() + '.sha1sum'), transfer_dir)
             sha1f = file(sha1filename)
