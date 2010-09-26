@@ -52,12 +52,11 @@ class InvalidSignature(pisi.Error):
 class File:
 
     (read, write) = range(2)            # modes
-    (xz, bz2, gzip, auto) = range(4)    # compress enums
+    (xz, bz2, auto) = range(3)          # compress enums
     (detached, whatelse) = range(2)
 
     __compressed_file_extensions = {".xz": xz,
-                                    ".bz2": bz2,
-                                    ".gz": gzip}
+                                    ".bz2": bz2}
 
     @staticmethod
     def make_uri(uri):
@@ -94,8 +93,6 @@ class File:
             import bz2
             open(localfile[:-4], "w").write(bz2.BZ2File(localfile).read())
             localfile = localfile[:-4]
-        elif compress == File.gzip:
-            raise Error(_("zip compression not supported yet"))
         return localfile
 
     @staticmethod
@@ -201,9 +198,6 @@ class File:
                 import bz2
                 compressed_file = self.localfile + ".bz2"
                 bz2.BZ2File(compressed_file, "w").write(open(self.localfile, "r").read())
-
-            elif self.compress == File.gzip:
-                raise Error(_("gzip compression not supported yet"))
 
             if self.sha1sum:
                 sha1 = pisi.util.sha1_file(self.localfile)
