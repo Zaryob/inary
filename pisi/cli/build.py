@@ -175,10 +175,6 @@ class Build(command.Command):
                     ctx.ui.info("  %s" % format)
             return
 
-        if not self.args:
-            self.help()
-            return
-
         self.init()
 
         if ctx.get_option('output_dir'):
@@ -188,7 +184,7 @@ class Build(command.Command):
             ctx.ui.info(_('Outputting packages in the working directory.'))
             ctx.config.options.output_dir = '.'
 
-        for x in self.args:
+        for x in self.args or ["pspec.xml"]:
             if ctx.get_option('until'):
                 pisi.api.build_until(x, ctx.get_option('until'))
             else:
