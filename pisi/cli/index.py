@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -19,8 +19,8 @@ _ = __trans.ugettext
 import pisi.cli.command as command
 import pisi.context as ctx
 
-class Index(command.Command):
-    __doc__ = _("""Index PiSi files in a given directory
+
+usage = _("""Index PiSi files in a given directory
 
 Usage: index <directory> ...
 
@@ -32,6 +32,11 @@ source and binary packages.
 If you give multiple directories, the command still works, but puts
 everything in a single index file.
 """)
+
+
+class Index(command.Command):
+
+    __doc__ = usage
     __metaclass__ = command.autocommand
 
     def __init__(self, args):
@@ -40,34 +45,35 @@ everything in a single index file.
     name = ("index", "ix")
 
     def options(self):
-
         group = optparse.OptionGroup(self.parser, _("index options"))
 
-        group.add_option("-a", "--absolute-urls", action="store_true",
-                               default=False,
-                               help=_("Store absolute links for indexed files."))
-        group.add_option("-o", "--output", action="store",
-                               default='pisi-index.xml',
-                               help=_("Index output file"))
-        group.add_option("--skip-sources", action="store_true",
-                               default=False,
-                               help=_("Do not index PiSi spec files."))
-        group.add_option("--skip-signing", action="store_true",
-                               default=False,
-                               help=_("Do not sign index."))
+        group.add_option("-a", "--absolute-urls",
+                         action="store_true",
+                         default=False,
+                         help=_("Store absolute links for indexed files."))
+
+        group.add_option("-o", "--output",
+                         action="store",
+                         default='pisi-index.xml',
+                         help=_("Index output file"))
+
+        group.add_option("--skip-sources",
+                         action="store_true",
+                         default=False,
+                         help=_("Do not index PiSi spec files."))
+
+        group.add_option("--skip-signing",
+                         action="store_true",
+                         default=False,
+                         help=_("Do not sign index."))
 
         self.parser.add_option_group(group)
 
     def run(self):
+        self.init(database=True, write=False)
 
-        self.init(database = True, write = False)
         from pisi.api import index
-        if len(self.args)>0:
-            index(self.args, ctx.get_option('output'),
-                  skip_sources = ctx.get_option('skip_sources'),
-                  skip_signing = ctx.get_option('skip_signing'))
-        elif len(self.args)==0:
-            ctx.ui.info(_('Indexing current directory.'))
-            index(['.'], ctx.get_option('output'),
-                  skip_sources = ctx.get_option('skip_sources'),
-                  skip_signing = ctx.get_option('skip_signing'))
+
+        index(self.args or ["."], ctx.get_option('output'),
+              skip_sources=ctx.get_option('skip_sources'),
+              skip_signing=ctx.get_option('skip_signing'))
