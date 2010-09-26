@@ -586,7 +586,13 @@ class Builder:
         src_dir = util.join_path(self.pkg_work_dir(), dirname)
 
         if not os.path.exists(src_dir):
-            basename = os.path.basename(self.spec.source.archive[0].uri)
+            archive = self.spec.source.archive[0]
+
+            # For binary types, WorkDir is usually "."
+            if archive.type == "binary":
+                return self.pkg_work_dir()
+
+            basename = os.path.basename(archive.uri)
             dirname = os.path.splitext(basename)[0]
             src_dir = util.join_path(self.pkg_work_dir(), dirname)
 
