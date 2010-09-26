@@ -188,19 +188,22 @@ class File:
         "this method must be called at the end of operation"
         self.__file__.close()
         if self.mode == File.write:
-            compressed_file = None
-            if self.compress & File.COMPRESSION_TYPE_XZ:
+            compressed_files = []
+            ctypes = self.compress or 0
+            if ctypes & File.COMPRESSION_TYPE_XZ:
                 import lzma
                 compressed_file = self.localfile + ".xz"
+                compressed_files.append(compressed_file)
                 options = {"level": 9}
                 lzma_file = lzma.LZMAFile(compressed_file, "w",
                                           options=options)
                 lzma_file.write(open(self.localfile, "r").read())
                 lzma_file.close()
 
-            if self.compress & File.COMPRESSION_TYPE_BZ2:
+            if ctypes & File.COMPRESSION_TYPE_BZ2:
                 import bz2
                 compressed_file = self.localfile + ".bz2"
+                compressed_files.append(compressed_file)
                 bz2.BZ2File(compressed_file, "w").write(open(self.localfile, "r").read())
 
             if self.sha1sum:
@@ -208,7 +211,7 @@ class File:
                 cs = file(self.localfile + '.sha1sum', 'w')
                 cs.write(sha1)
                 cs.close()
-                if compressed_file:
+                for compressed_file in compressed_files:
                     sha1 = pisi.util.sha1_file(compressed_file)
                     cs = file(compressed_file + '.sha1sum', 'w')
                     cs.write(sha1)
@@ -217,7 +220,7 @@ class File:
             if self.sign==File.detached:
                 if pisi.util.run_batch('gpg --detach-sig ' + self.localfile)[0]:
                     raise Error(_("ERROR: gpg --detach-sig %s failed") % self.localfile)
-                if compressed_file:
+                for compressed_file in compressed_files:
                     if pisi.util.run_batch('gpg --detach-sig ' + compressed_file)[0]:
                         raise Error(_("ERROR: gpg --detach-sig %s failed") % compressed_file)
 
