@@ -774,10 +774,9 @@ def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=F
         ctx.ui.info(_('* Building index of PiSi files under %s') % repo_dir)
         index.index(repo_dir, skip_sources)
 
-    if skip_signing:
-        index.write(output, sha1sum=True, compress=pisi.file.File.xz, sign=None)
-    else:
-        index.write(output, sha1sum=True, compress=pisi.file.File.xz, sign=pisi.file.File.detached)
+    compression = pisi.file.File.COMPRESSION_TYPE_XZ
+    sign = None if skip_signing else pisi.file.File.detached
+    index.write(output, sha1sum=True, compress=compression, sign=sign)
     ctx.ui.info(_('* Index file written'))
 
 @locked

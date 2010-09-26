@@ -51,12 +51,16 @@ class InvalidSignature(pisi.Error):
 
 class File:
 
+    # Compression types
+    COMPRESSION_TYPE_AUTO = 0
+    COMPRESSION_TYPE_BZ2 = 1
+    COMPRESSION_TYPE_XZ = 2
+
     (read, write) = range(2)            # modes
-    (xz, bz2, auto) = range(3)          # compress enums
     (detached, whatelse) = range(2)
 
-    __compressed_file_extensions = {".xz": xz,
-                                    ".bz2": bz2}
+    __compressed_file_extensions = {".xz": COMPRESSION_TYPE_XZ,
+                                    ".bz2": COMPRESSION_TYPE_BZ2}
 
     @staticmethod
     def make_uri(uri):
@@ -69,7 +73,7 @@ class File:
 
     @staticmethod
     def choose_method(filename, compress):
-        if compress == File.auto:
+        if compress == File.COMPRESSION_TYPE_AUTO:
             for ext, method in File.__compressed_file_extensions.items():
                 if filename.endswith(ext):
                     return method
@@ -85,11 +89,11 @@ class File:
     @staticmethod
     def decompress(localfile, compress):
         compress = File.choose_method(localfile, compress)
-        if compress == File.xz:
+        if compress == File.COMPRESSION_TYPE_XZ:
             import lzma
             open(localfile[:-3], "w").write(lzma.LZMAFile(localfile).read())
             localfile = localfile[:-3]
-        elif compress == File.bz2:
+        elif compress == File.COMPRESSION_TYPE_BZ2:
             import bz2
             open(localfile[:-4], "w").write(bz2.BZ2File(localfile).read())
             localfile = localfile[:-4]
@@ -185,7 +189,7 @@ class File:
         self.__file__.close()
         if self.mode == File.write:
             compressed_file = None
-            if self.compress == File.xz:
+            if self.compress & File.COMPRESSION_TYPE_XZ:
                 import lzma
                 compressed_file = self.localfile + ".xz"
                 options = {"level": 9}
@@ -194,7 +198,7 @@ class File:
                 lzma_file.write(open(self.localfile, "r").read())
                 lzma_file.close()
 
-            elif self.compress == File.bz2:
+            if self.compress & File.COMPRESSION_TYPE_BZ2:
                 import bz2
                 compressed_file = self.localfile + ".bz2"
                 bz2.BZ2File(compressed_file, "w").write(open(self.localfile, "r").read())

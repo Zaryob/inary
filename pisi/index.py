@@ -51,7 +51,9 @@ class Index(xmlfile.XmlFile):
 
     def read_uri(self, uri, tmpdir, force = False):
         return self.read(uri, tmpDir=tmpdir, sha1sum=not force,
-                  compress=pisi.file.File.auto, sign=pisi.file.File.detached, copylocal = True, nodecode = True)
+                         compress=pisi.file.File.COMPRESSION_TYPE_AUTO,
+                         sign=pisi.file.File.detached,
+                         copylocal=True, nodecode=True)
 
     # read index for a given repo, force means download even if remote not updated
     def read_uri_of_repo(self, uri, repo = None, force = False):
