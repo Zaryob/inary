@@ -763,7 +763,9 @@ def info_name(package_name, useinstalldb=False):
         files = None
     return metadata, files, repo
 
-def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=False):
+def index(dirs=None, output='pisi-index.xml',
+          skip_sources=False, skip_signing=False,
+          compression=0):
     """Accumulate PiSi XML files in a directory, and write an index."""
     index = pisi.index.Index()
     index.distribution = None
@@ -774,7 +776,6 @@ def index(dirs=None, output='pisi-index.xml', skip_sources=False, skip_signing=F
         ctx.ui.info(_('* Building index of PiSi files under %s') % repo_dir)
         index.index(repo_dir, skip_sources)
 
-    compression = pisi.file.File.COMPRESSION_TYPE_XZ
     sign = None if skip_signing else pisi.file.File.detached
     index.write(output, sha1sum=True, compress=compression, sign=sign)
     ctx.ui.info(_('* Index file written'))

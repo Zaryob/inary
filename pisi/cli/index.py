@@ -57,6 +57,12 @@ class Index(command.Command):
                          default='pisi-index.xml',
                          help=_("Index output file"))
 
+        group.add_option("--compression-types",
+                         action="store",
+                         default="xz",
+                         help=_("Comma-separated compression types "
+                                "for index file"))
+
         group.add_option("--skip-sources",
                          action="store_true",
                          default=False,
@@ -73,7 +79,15 @@ class Index(command.Command):
         self.init(database=True, write=False)
 
         from pisi.api import index
+        from pisi.file import File
+
+        ctypes = {"bz2": File.COMPRESSION_TYPE_BZ2,
+                  "xz": File.COMPRESSION_TYPE_XZ}
+        compression = 0
+        for type_str in ctx.get_option("compression_types").split(","):
+            compression |= ctypes.get(type_str, 0)
 
         index(self.args or ["."], ctx.get_option('output'),
               skip_sources=ctx.get_option('skip_sources'),
-              skip_signing=ctx.get_option('skip_signing'))
+              skip_signing=ctx.get_option('skip_signing'),
+              compression=compression)
