@@ -578,9 +578,11 @@ class Builder:
     def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
 
-        dirname = self.spec.source.name + "-" + self.spec.getSourceVersion()
-        dirname = self.actionGlobals.get("WorkDir", dirname)
+        dirname = self.actionGlobals.get("WorkDir")
+        if dirname:
+            return util.join_path(self.pkg_work_dir(), dirname)
 
+        dirname = self.spec.source.name + "-" + self.spec.getSourceVersion()
         src_dir = util.join_path(self.pkg_work_dir(), dirname)
 
         if not os.path.exists(src_dir):
