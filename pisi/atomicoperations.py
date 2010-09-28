@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -105,13 +105,15 @@ class Install(AtomicOperation):
             cached_file = pisi.package.Package.is_cached(pkg_path)
             if cached_file and util.sha1_file(cached_file) != pkg_hash:
                 os.unlink(cached_file)
+                cached_file = None
 
             install_op = Install(pkg_path, ignore_dep)
 
             # Bug 4113
-            downloaded_file = install_op.package.filepath
-            if pisi.util.sha1_file(downloaded_file) != pkg_hash:
-                raise pisi.Error(_("Download Error: Package does not match the repository package."))
+            if not cached_file:
+                downloaded_file = install_op.package.filepath
+                if pisi.util.sha1_file(downloaded_file) != pkg_hash:
+                    raise pisi.Error(_("Download Error: Package does not match the repository package."))
 
             return install_op
         else:
