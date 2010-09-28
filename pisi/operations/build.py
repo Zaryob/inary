@@ -229,7 +229,6 @@ class Builder:
 
         self.actionLocals = None
         self.actionGlobals = None
-        self.srcDir = None
 
     def set_spec_file(self, specuri):
         if not specuri.is_remote_file():
@@ -446,7 +445,6 @@ class Builder:
     def unpack_source_archives(self):
         ctx.ui.info(_("Unpacking archive(s)..."))
         self.sourceArchives.unpack()
-        self.srcDir = self.pkg_src_dir()
         # apply the patches and prepare a source directory for build.
         if self.apply_patches():
             # Grab AdditionalFiles
@@ -522,7 +520,7 @@ class Builder:
         # store additional files
         for afile in self.spec.source.additionalFiles:
             src = os.path.join(self.specdir, ctx.const.files_dir, afile.filename)
-            dest = os.path.join(self.srcDir, afile.target)
+            dest = os.path.join(self.pkg_src_dir(), afile.target)
             util.copy_file(src, dest)
             if afile.permission:
                 # mode is octal!
@@ -616,11 +614,11 @@ class Builder:
         # we'll need our working directory after actionscript
         # finished its work in the archive source directory.
         curDir = os.getcwd()
-        if os.path.exists(self.srcDir):
-            os.chdir(self.srcDir)
+        src_dir = self.pkg_src_dir()
+        if os.path.exists(src_dir):
+            os.chdir(src_dir)
         else:
-            raise Error(_("ERROR: WorkDir (%s) does not exist\n")
-                        % (self.srcDir))
+            raise Error(_("ERROR: WorkDir (%s) does not exist\n") % src_dir)
 
         if func in self.actionLocals:
             if ctx.get_option('ignore_sandbox') or \
@@ -752,7 +750,10 @@ class Builder:
                 relativePath = relativePath.rsplit(".%s" % patch.compressionType, 1)[0]
 
             ctx.ui.action(_("* Applying patch: %s") % patch.filename)
-            util.do_patch(self.srcDir, patchFile, level=patch.level, name=relativePath, reverse=reverseApply)
+            util.do_patch(self.pkg_src_dir(), patchFile,
+                          level=patch.level,
+                          name=relativePath,
+                          reverse=reverseApply)
         return True
 
     def generate_static_package_object(self):
