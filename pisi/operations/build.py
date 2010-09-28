@@ -446,6 +446,7 @@ class Builder:
     def unpack_source_archives(self):
         ctx.ui.info(_("Unpacking archive(s)..."))
         self.sourceArchives.unpack()
+        self.srcDir = self.pkg_src_dir()
         # apply the patches and prepare a source directory for build.
         if self.apply_patches():
             # Grab AdditionalFiles
@@ -556,7 +557,6 @@ class Builder:
 
         self.actionLocals = localSymbols
         self.actionGlobals = globalSymbols
-        self.srcDir = self.pkg_src_dir()
 
     def compile_comar_script(self):
         """Compiles comar scripts to check syntax errors"""
