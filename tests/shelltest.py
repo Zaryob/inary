@@ -13,7 +13,7 @@ class ShellTestCase(unittest.TestCase):
 
     def testCanAccessFile(self):
         from pisi.actionsapi.shelltools import can_access_file
-        assert can_access_file('/usr/lib/engines/libaep.so')
+        assert can_access_file(__file__)
         assert not can_access_file('actionsapi/set.py')
 
     def testCanAccessDirectory(self):
