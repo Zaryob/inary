@@ -90,8 +90,13 @@ class Config(object):
 
     def subdir(self, path):
         subdir = pisi.util.join_path(self.dest_dir(), path)
-        if os.access(os.path.dirname(subdir), os.W_OK):
+
+        # If the directory does not exist, try to create it.
+        try:
             pisi.util.ensure_dirs(subdir)
+        except OSError:
+            pass
+
         return subdir
 
     def log_dir(self):
