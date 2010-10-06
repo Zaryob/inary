@@ -143,9 +143,9 @@ class Install(AtomicOperation):
         # Any package should remove the package it replaces before
         self.check_replaces()
 
-        ctx.ui.status(_('Installing %s, version %s, release %s, build %s') %
+        ctx.ui.status(_('Installing %s, version %s, release %s') %
                 (self.pkginfo.name, self.pkginfo.version,
-                 self.pkginfo.release, self.pkginfo.build))
+                 self.pkginfo.release))
         ctx.ui.notify(pisi.ui.installing, package=self.pkginfo, files=self.files)
 
         self.ask_reinstall = ask_reinstall
@@ -233,21 +233,10 @@ class Install(AtomicOperation):
 
         if self.installdb.has_package(pkg.name): # is this a reinstallation?
             ipkg = self.installdb.get_package(pkg.name)
-            repomismatch = ipkg.distribution != pkg.distribution
             (iversion_s, irelease_s, ibuild) = self.installdb.get_version(pkg.name)
 
             # determine if same version
-            self.same_ver = False
-            ignore_build = ctx.config.options and ctx.config.options.ignore_build_no
-            if repomismatch or (not ibuild) or (not pkg.build) or ignore_build:
-                # we don't look at builds to compare two package versions
-                if pkg.release == irelease_s:
-                    self.same_ver = True
-            else:
-                if pkg.build == ibuild:
-                    self.same_ver = True
-
-            if self.same_ver:
+            if pkg.release == irelease_s:
                 if self.ask_reinstall:
                     if not ctx.ui.confirm(_('Re-install same version package?')):
                         raise Error(_('Package re-install declined'))
@@ -260,16 +249,12 @@ class Install(AtomicOperation):
                 irelease = int(irelease_s)
 
                 # is this an upgrade?
-                # determine and report the kind of upgrade: version, release, build
+                # determine and report the kind of upgrade: version, release
                 if pkg_version > iversion:
                     ctx.ui.info(_('Upgrading to new upstream version'))
                     self.operation = UPGRADE
                 elif pkg_release > irelease:
                     ctx.ui.info(_('Upgrading to new distribution release'))
-                    self.operation = UPGRADE
-                elif ((not ignore_build) and ibuild and pkg.build
-                       and pkg.build > ibuild):
-                    ctx.ui.info(_('Upgrading to new distribution build'))
                     self.operation = UPGRADE
 
                 # is this a downgrade? confirm this action.
@@ -280,7 +265,7 @@ class Install(AtomicOperation):
                     elif pkg_release < irelease:
                         x = _('Downgrade to old distribution release?')
                     else:
-                        x = _('Downgrade to old distribution build?')
+                        x = None
                     if self.ask_reinstall and x and not ctx.ui.confirm(x):
                         raise Error(_('Package downgrade declined'))
                     self.operation = DOWNGRADE
