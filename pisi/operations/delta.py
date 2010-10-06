@@ -44,6 +44,9 @@ def create_delta_packages(old_packages, new_package):
     os.mkdir(install_dir)
     new_pkg.extract_install(install_dir)
 
+    name, new_version, new_release, new_distro_id, new_arch = \
+            util.split_package_filename(new_pkg_name)
+
     cwd = os.getcwd()
     out_dir = ctx.get_option("output_dir")
     target_format = ctx.get_option("package_format")
@@ -59,15 +62,16 @@ def create_delta_packages(old_packages, new_package):
                              % (old_package, new_pkg_info.name))
             continue
 
-        if old_pkg_info.build == new_pkg_info.build:
-            ctx.ui.warning(_("Package '%s' has the same build number with "
+        if old_pkg_info.release == new_pkg_info.release:
+            ctx.ui.warning(_("Package '%s' has the same release number with "
                              "the new package. Skipping it...") % old_package)
             continue
 
-        delta_name = "%s-%s-%s%s" % (old_pkg_info.name,
-                                     old_pkg_info.build,
-                                     new_pkg_info.build,
-                                     ctx.const.delta_package_suffix)
+        delta_name = "-".join((old_pkg_info.name,
+                               old_pkg_info.release,
+                               new_pkg_info.release,
+                               new_distro_id,
+                               new_arch)) + ctx.const.delta_package_suffix
 
         ctx.ui.info(_("Creating %s...") % delta_name)
 
