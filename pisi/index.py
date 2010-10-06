@@ -140,17 +140,25 @@ class Index(xmlfile.XmlFile):
             md.package.additionalFiles = None
 
             if md.package.name in deltas:
+                name, version, release, distro_id, arch = \
+                        util.split_package_filename(path)
+
                 for delta_path in deltas[md.package.name]:
+                    src_release, dst_release, delta_distro_id, delta_arch = \
+                            util.split_delta_package_filename(delta_path)[1:]
+
+                    # Add only delta to latest build of the package
+                    if dst_release != md.package.release or \
+                            (delta_distro_id, delta_arch) != (distro_id, arch):
+                        continue
+
                     delta = metadata.Delta()
                     delta.packageURI = util.removepathprefix(repo_uri, delta_path)
                     delta.packageSize = long(os.path.getsize(delta_path))
                     delta.packageHash = util.sha1_file(delta_path)
-                    name, buildFrom, buildTo = util.parse_delta_package_name(delta_path)
-                    delta.buildFrom = buildFrom
+                    delta.releaseFrom = src_release
 
-                    # Add only delta to latest build of the package
-                    if int(buildTo) == int(md.package.build):
-                        md.package.deltaPackages.append(delta)
+                    md.package.deltaPackages.append(delta)
 
             self.packages.append(md.package)
 

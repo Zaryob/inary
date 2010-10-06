@@ -33,6 +33,7 @@ class Delta:
     t_PackageSize = [ autoxml.Long, autoxml.optional]
     t_PackageHash = [ autoxml.String, autoxml.optional, "SHA1Sum" ]
     a_buildFrom = [autoxml.String, autoxml.optional]
+    a_releaseFrom = [autoxml.String, autoxml.optional]
 
 class Source:
     __metaclass__ = autoxml.autoxml
@@ -57,9 +58,9 @@ class Package(specfile.Package, xmlfile.XmlFile):
 
     t_Source = [ Source, autoxml.optional]
 
-    def get_delta(self, buildFrom):
+    def get_delta(self, release):
         for delta in self.deltaPackages:
-            if delta.buildFrom == str(buildFrom):
+            if delta.releaseFrom == str(release):
                 return delta
         else:
             return None
