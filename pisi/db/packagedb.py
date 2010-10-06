@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2009, TUBITAK/UEKAE
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -127,11 +127,11 @@ class PackageDB(lazydb.LazyDB):
 
     def __get_version(self, meta_doc):
         history = meta_doc.getTag("History")
-        build = meta_doc.getTagData("Build")
         version = history.getTag("Update").getTagData("Version")
         release = history.getTag("Update").getAttribute("release")
 
-        return version, release, build and int(build)
+        # TODO Remove None
+        return version, release, None
 
     def __get_distro_release(self, meta_doc):
         distro = meta_doc.getTagData("Distribution")
