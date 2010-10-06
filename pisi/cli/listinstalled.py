@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -39,8 +39,11 @@ Usage: list-installed
 
         group = optparse.OptionGroup(self.parser, _("list-installed options"))
 
-        group.add_option("-b", "--without-buildno", action="store_true",
-                               default=False, help=_("Only list the installed packages without build nos"))
+        group.add_option("-b", "--with-build-host",
+                         action="store",
+                         default="localhost",
+                         help=_("Only list the installed packages built "
+                                "by the given host"))
         group.add_option("-l", "--long", action="store_true",
                                default=False, help=_("Show in long format"))
         group.add_option("-c", "--component", action="store",
@@ -53,10 +56,11 @@ Usage: list-installed
     def run(self):
         self.init(database = True, write = False)
 
-        if not ctx.get_option('without_buildno'):
+        build_host = ctx.get_option("with_build_host")
+        if not build_host:
             installed = self.installdb.list_installed()
         else:
-            installed = self.installdb.list_installed_without_buildno()
+            installed = self.installdb.list_installed_with_build_host(build_host)
 
         component = ctx.get_option('component')
         if component:

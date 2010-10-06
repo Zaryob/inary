@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2010, TUBITAK/UEKAE
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -117,12 +117,13 @@ class InstallDB(lazydb.LazyDB):
     def has_package(self, package):
         return self.installed_db.has_key(package)
 
-    def list_installed_without_buildno(self):
-        rebuildno = '<Build>.*?</Build>'
+    def list_installed_with_build_host(self, build_host):
+        xml_line = "<BuildHost>%s</BuildHost>" % re.escape(build_host)
+        build_host_re = re.compile(xml_line)
         found = []
         for name in self.list_installed():
             xml = open(os.path.join(self.package_path(name), ctx.const.metadata_xml)).read()
-            if not re.compile(rebuildno).search(xml):
+            if build_host_re.search(xml):
                 found.append(name)
         return found
 
