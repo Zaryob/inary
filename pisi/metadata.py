@@ -46,6 +46,7 @@ class Package(specfile.Package, xmlfile.XmlFile):
     __metaclass__ = autoxml.autoxml
 
     t_Build = [ autoxml.Integer, autoxml.optional]
+    t_BuildHost = [autoxml.String, autoxml.optional]
     t_Distribution = [ autoxml.String, autoxml.mandatory]
     t_DistributionRelease = [ autoxml.String, autoxml.mandatory]
     t_Architecture = [ autoxml.String, autoxml.mandatory]

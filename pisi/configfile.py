@@ -80,6 +80,7 @@ class GeneralDefaults:
 
 class BuildDefaults:
     """Default values for [build] section"""
+    build_host = "localhost"
     host = "i686-pc-linux-gnu"
     jobs = "-j3"
     generateDebug = False

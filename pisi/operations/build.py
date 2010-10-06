@@ -831,6 +831,8 @@ class Builder:
         metadata = pisi.metadata.MetaData()
         metadata.from_spec(self.spec.source, package, self.spec.history)
 
+        metadata.package.buildHost = ctx.config.values.build.build_host
+
         metadata.package.distribution = ctx.config.values.general.distribution
         metadata.package.distributionRelease = ctx.config.values.general.distribution_release
         metadata.package.architecture = ctx.config.values.general.architecture
