@@ -52,11 +52,6 @@ class Build(command.Command):
         self.parser.add_option_group(group)
 
     def add_options(self, group):
-        group.add_option("--ignore-build-no",
-                         action="store_true",
-                         default=False,
-                         help=_("Do not take build no into account."))
-
         group.add_option("-q", "--quiet",
                          action="store_true",
                          default=False,

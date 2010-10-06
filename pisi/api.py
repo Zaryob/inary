@@ -252,7 +252,7 @@ def list_upgradable():
     Return a list of packages that are upgraded in the repository -> list_of_strings
     """
     installdb = pisi.db.installdb.InstallDB()
-    is_upgradable = lambda pkg: pisi.operations.upgrade.is_upgradable(pkg, ctx.get_option('ignore_build_no'))
+    is_upgradable = pisi.operations.upgrade.is_upgradable
 
     upgradable = filter(is_upgradable, installdb.list_installed())
     # replaced packages can not pass is_upgradable test, so we add them manually

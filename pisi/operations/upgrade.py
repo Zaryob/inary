@@ -68,7 +68,6 @@ def find_upgrades(packages, replaces):
     installdb = pisi.db.installdb.InstallDB()
 
     security_only = ctx.get_option('security_only')
-    ignore_build = ctx.get_option('ignore_build_no')
 
     Ap = []
     for i_pkg in packages:
@@ -99,18 +98,12 @@ def find_upgrades(packages, replaces):
                 pisi.version.make_version(pkg.distributionRelease) > pisi.version.make_version(distro_release):
             Ap.append(i_pkg)
 
-        elif ignore_build or (not build) or (not pkg.build):
+        else:
             if int(release) < int(pkg.release):
                 Ap.append(i_pkg)
             else:
                 ctx.ui.info(_('Package %s is already at the latest release %s.')
                             % (pkg.name, pkg.release), True)
-        else:
-            if build < pkg.build:
-                Ap.append(i_pkg)
-            else:
-                ctx.ui.info(_('Package %s is already at the latest build %s.')
-                            % (pkg.name, pkg.build), True)
 
     return Ap
 
@@ -349,7 +342,6 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
 def upgrade_base(A = set()):
     installdb = pisi.db.installdb.InstallDB()
     componentdb = pisi.db.componentdb.ComponentDB()
-    ignore_build = ctx.get_option('ignore_build_no')
     if not ctx.config.values.general.ignore_safety and not ctx.get_option('ignore_safety'):
         if componentdb.has_component('system.base'):
             systembase = set(componentdb.get_union_component('system.base').packages)
@@ -360,7 +352,7 @@ def upgrade_base(A = set()):
                                  "following packages:"))
                 ctx.ui.info(util.format_by_columns(sorted(extra_installs)))
             G_f, install_order = operations.install.plan_install_pkg_names(extra_installs)
-            extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase - set(install_order))
+            extra_upgrades = filter(lambda x: is_upgradable(x), systembase - set(install_order))
             upgrade_order = []
 
             extra_upgrades = pisi.blacklist.exclude_from(extra_upgrades, ctx.const.blacklist)
@@ -382,7 +374,7 @@ def upgrade_base(A = set()):
             ctx.ui.warning(_('Safety switch: The component system.base cannot be found.'))
     return set()
 
-def is_upgradable(name, ignore_build = False):
+def is_upgradable(name):
 
     installdb = pisi.db.installdb.InstallDB()
 
@@ -403,7 +395,5 @@ def is_upgradable(name, ignore_build = False):
     if distro == i_distro and \
             pisi.version.make_version(distro_release) > pisi.version.make_version(i_distro_release):
         return True
-    elif ignore_build or (not i_build) or (not build):
-        return int(i_release) < int(release)
-    else:
-        return i_build < build
+
+    return int(i_release) < int(release)

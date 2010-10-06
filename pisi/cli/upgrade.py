@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -50,9 +50,6 @@ expanded to package names.
         group = optparse.OptionGroup(self.parser, _("upgrade options"))
 
         super(Upgrade, self).options(group)
-        group.add_option("--ignore-build-no", action="store_true",
-                               default=False,
-                               help=_("Do not take build no into account."))
         group.add_option("--security-only", action="store_true",
                      default=False, help=_("Security related package upgrades only"))
         group.add_option("-b", "--bypass-update-repo", action="store_true",

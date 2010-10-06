@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -40,9 +40,6 @@ Lists the packages that will be upgraded.
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("list-upgrades options"))
-        group.add_option("--ignore-build-no", action="store_true",
-                               default=False,
-                               help=_("Do not take build no into account."))
         group.add_option("-l", "--long", action="store_true",
                                default=False, help=_("Show in long format"))
         group.add_option("-c", "--component", action="store",

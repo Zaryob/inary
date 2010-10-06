@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -44,9 +44,7 @@ expanded to package names.
         group = optparse.OptionGroup(self.parser, _("install options"))
 
         super(Install, self).options(group)
-        group.add_option("--ignore-build-no", action="store_true",
-                               default=False,
-                               help=_("Do not take build no into account."))
+
         group.add_option("--reinstall", action="store_true",
                      default=False, help=_("Reinstall already installed packages"))
         group.add_option("--ignore-check", action="store_true",

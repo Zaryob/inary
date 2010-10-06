@@ -7,7 +7,6 @@ class TestCase(unittest.TestCase):
 
     def setUp(self):
         options = pisi.config.Options()
-        options.ignore_build_no = False
         options.destdir = 'repos/tmp'
         pisi.api.set_options(options)
         pisi.api.set_comar(False)
