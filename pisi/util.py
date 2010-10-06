@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -665,8 +665,8 @@ def is_package_name(fn, package_name = None):
             return True
     return False
 
-def parse_package_name(package_name):
-    """Separate package name and version string.
+def parse_package_name_legacy(package_name):
+    """Separate package name and version string for package formats <= 1.1.
     
     example: tasma-1.0.3-5-2 -> (tasma, 1.0.3-5-2)
     
@@ -682,6 +682,34 @@ def parse_package_name(package_name):
     version = package_name[len(name) + 1:]
 
     return (name, version)
+
+def parse_package_name(package_name):
+    """Separate package name and version string.
+
+    example: tasma-1.0.3-5-p11-x86_64 -> (tasma, 1.0.3-5)
+    """
+
+    # Strip extension if exists
+    if package_name.endswith(ctx.const.package_suffix):
+        package_name = remove_suffix(ctx.const.package_suffix, package_name)
+
+
+    try:
+        name, version, release, distro_id, arch = package_name.rsplit("-", 4)
+
+        # Arch field cannot start with a digit. If a digit is found,
+        # the package might have an old format. Raise here to call
+        # the legacy function.
+        if not arch or arch[0] in string.digits:
+            raise ValueError
+
+    except ValueError:
+        try:
+            return parse_package_name_legacy(package_name)
+        except:
+            raise Error(_("Invalid package name: %s") % package_name)
+
+    return name, "%s-%s" % (version, release)
 
 def parse_delta_package_name(package_name):
     """Separate delta package name and release infos
