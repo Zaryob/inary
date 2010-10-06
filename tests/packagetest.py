@@ -8,7 +8,7 @@ import pisi.context as ctx
 class PackageTestCase(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
-        self.pkgName = util.package_name('test','7.1','2',3)
+        self.pkgName = "test-7.1-2-p11-x86_64.pisi"
 
     def testAddPackage(self):
         cur = os.getcwd()

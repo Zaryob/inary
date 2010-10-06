@@ -639,32 +639,6 @@ def partition_freespace(directory):
 # Package/Repository Related Functions #
 ########################################
 
-def package_name(name, version, release, build, prependSuffix=True):
-    fn = name + '-' + version + '-' + release
-    if build:
-        fn += '-' + str(build)
-    if prependSuffix:
-        fn += ctx.const.package_suffix
-    return fn
-
-def is_package_name(fn, package_name = None):
-    """Check if fn is a valid filename for given package_name.
-    
-    If not given a package name, see if fn fits the package name rules
-    
-    """
-    if (package_name==None) or fn.startswith(package_name + '-'):
-        if fn.endswith(ctx.const.package_suffix):
-            # get version string, skip separator '-'
-            verstr = fn[len(package_name) + 1:
-                        len(fn)-len(ctx.const.package_suffix)]
-            for x in verstr.split('-'):
-                # weak rule: version components after '-' start with a digit
-                if x == '' or (not x[0] in string.digits):
-                    return False
-            return True
-    return False
-
 def parse_package_name_legacy(package_name):
     """Separate package name and version string for package formats <= 1.1.
     
@@ -741,11 +715,10 @@ def filter_latest_packages(package_paths):
     latest = {}
     for path in package_paths:
 
-        root = os.path.dirname(path)
         name, version = parse_package_name(os.path.basename(path[:-len(ctx.const.package_suffix)]))
 
         if latest.has_key(name):
-            l_version, l_release, l_build = split_version(latest[name][2])
+            l_version, l_release, l_build = split_version(latest[name][1])
             r_version, r_release, r_build = split_version(version)
 
             try:
@@ -773,9 +746,9 @@ def filter_latest_packages(package_paths):
                     continue
 
         if version:
-            latest[name] = (root, name, version)
+            latest[name] = (path, version)
 
-    return map(lambda x:"%s/%s-%s.pisi" % x, latest.values())
+    return map(lambda x: x[0], latest.values())
 
 def colorize(msg, color):
     """Colorize the given message for console output"""

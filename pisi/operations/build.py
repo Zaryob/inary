@@ -243,6 +243,26 @@ class Builder:
         self.spec.read_translations(util.join_path(specdir,
                                     ctx.const.translations_file))
 
+    def package_filename(self, package_info, release_info=None,
+                         distro_id=None, with_extension=True):
+
+        if release_info is None:
+            release_info = self.spec.history[0]
+
+        if distro_id is None:
+            distro_id = ctx.config.values.general.distribution_id
+
+        fn = "-".join((package_info.name,
+                       release_info.version,
+                       release_info.release,
+                       distro_id,
+                       package_info.architecture))
+
+        if with_extension:
+            fn += ctx.const.package_suffix
+
+        return fn
+
     # directory accessor functions
 
     # pkg_x_dir: per package directory for storing info type x
@@ -880,108 +900,6 @@ class Builder:
         files.write(files_xml_path)
         self.files = files
 
-    def calc_build_no(self, package_name):
-        """Calculate build number"""
-
-        def metadata_changed(old_metadata, new_metadata):
-            for key in old_metadata.package.__dict__.keys():
-                if old_metadata.package.__dict__[key] != new_metadata.package.__dict__[key]:
-                    if key != "build":
-                        return True
-
-            return False
-
-        # find previous build in packages dir
-        found = set()
-
-        def locate_old_package(old_package_fn):
-            if not old_package_fn.endswith(ctx.const.package_suffix) or \
-                    old_package_fn.endswith(ctx.const.delta_package_suffix):
-                return
-
-            if util.is_package_name(os.path.basename(old_package_fn), package_name):
-                try:
-                    pkg = os.path.basename(old_package_fn)
-                    name, version = util.parse_package_name(pkg[:-5])
-                    ctx.ui.info(_('(found old version %s)') % old_package_fn)
-                    ver, rel, build = util.split_version(version)
-                    old_build = int(build) if build else 0
-                    found.add((old_package_fn, old_build))
-                except Error:
-                    ctx.ui.warning('Package file %s may be corrupt. Skipping.' % old_package_fn)
-
-        def search_old_packages_in(paths):
-            for path in paths:
-                for root, dirs, files in os.walk(path):
-                    for f in files:
-                        locate_old_package(util.join_path(root, f))
-
-        search_old_packages_in([ctx.config.compiled_packages_dir(),
-                                ctx.config.debug_packages_dir()])
-
-        outdir = ctx.get_option('output_dir')
-        if not outdir:
-            outdir = '.'
-        for f in [util.join_path(outdir, entry) for entry in os.listdir(outdir)]:
-            if os.path.isfile(f):
-                locate_old_package(f)
-
-        if not found:
-            return (1, None)
-            ctx.ui.warning(_('(no previous build found, setting build no to 1.)'))
-        else:
-            a = filter(lambda (x, y): y != 0, found)
-            ctx.ui.debug(str(a))
-            if a:
-                # sort in order of increasing build number
-                a.sort(lambda x, y: cmp(x[1], y[1]))
-                old_package_fn = a[-1][0]   # get the last one
-                old_build = a[-1][1]
-
-                # compare old files.xml with the new one..
-                old_pkg = pisi.package.Package(old_package_fn, 'r')
-                old_pkg.read()
-
-                changed = False
-                fnew = self.files.list
-                fold = old_pkg.files.list
-                fold.sort(lambda x, y: cmp(x.path, y.path))
-                fnew.sort(lambda x, y: cmp(x.path, y.path))
-
-                if len(fnew) != len(fold):
-                    changed = True
-                else:
-                    for i in range(len(fold)):
-                        fo = fold.pop(0)
-                        fn = fnew.pop(0)
-                        if fo.path != fn.path:
-                            changed = True
-                            break
-                        else:
-                            if fo.hash != fn.hash:
-                                changed = True
-                                break
-
-                if metadata_changed(old_pkg.metadata, self.metadata):
-                    changed = True
-
-                self.old_packages.append(os.path.basename(old_package_fn))
-            else:  # no old build had a build number
-                old_build = None
-
-            ctx.ui.debug('old build number: %s' % old_build)
-
-            # set build number
-            if old_build is None:
-                ctx.ui.warning(_('(old package lacks a build no, setting build no to 1.)'))
-                return (1, None)
-            elif changed:
-                ctx.ui.info(_('There are changes, incrementing build no to %d') % (old_build + 1))
-                return (old_build + 1, old_build)
-            else:
-                ctx.ui.info(_('There is no change from previous build %d') % old_build)
-                return (old_build, old_build)
-
     def file_actions(self):
         install_dir = self.pkg_install_dir()
 
@@ -1095,20 +1013,9 @@ class Builder:
             ctx.ui.info(_("Generating %s,") % ctx.const.metadata_xml)
             self.gen_metadata_xml(package)
 
-            # build number
-            if ctx.config.options.ignore_build_no or not ctx.config.values.build.buildno:
-                build_no = old_build_no = None
-            else:
-                build_no, old_build_no = self.calc_build_no(package.name)
-
-            self.metadata.package.build = build_no
             self.metadata.write(util.join_path(self.pkg_dir(), ctx.const.metadata_xml))
 
-            # Calculate new and oldpackage names for buildfarm
-            name =  util.package_name(package.name,
-                                     self.spec.getSourceVersion(),
-                                     self.spec.getSourceRelease(),
-                                     self.metadata.package.build)
+            name = self.package_filename(self.metadata.package)
 
             outdir = ctx.get_option('output_dir')
             if outdir:
@@ -1146,7 +1053,17 @@ class Builder:
                 pkg.add_to_install(orgname, finfo.path)
             pkg.close()
 
+            # TODO Generate delta packages here
+
             os.chdir(c)
+
+            for update in self.spec.history[1:]:
+                filename = self.package_filename(self.metadata.package, update)
+                path = util.join_path(outdir, filename) if outdir else filename
+
+                if os.path.exists(path):
+                    self.old_packages.append(filename)
+
             self.set_state("buildpackages")
             ctx.ui.info(_("Done."))
 
@@ -1166,12 +1083,6 @@ class Builder:
         # making actionsapi.variables.exportFlags() useless...
         os.environ.clear()
         os.environ.update(ctx.config.environ)
-
-        if ctx.config.options.ignore_build_no or \
-                not ctx.config.values.build.buildno:
-            ctx.ui.warning(_("Build numbers were not used as requested. For "
-                             "repository builds, you must enable 'buildno' "
-                             "option in pisi.conf."))
 
         return self.new_packages, self.old_packages
 

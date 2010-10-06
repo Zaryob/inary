@@ -694,11 +694,7 @@ def configure_pending(packages=None):
         for x in order:
             if installdb.has_package(x):
                 pkginfo = installdb.get_package(x)
-                pkgname = pisi.util.package_name(x, pkginfo.version,
-                                        pkginfo.release,
-                                        False,
-                                        False)
-                pkg_path = pisi.util.join_path(ctx.config.packages_dir(), pkgname)
+                pkg_path = installdb.package_path(x)
                 m = pisi.metadata.MetaData()
                 metadata_path = pisi.util.join_path(pkg_path, ctx.const.metadata_xml)
                 m.read(metadata_path)

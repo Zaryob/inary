@@ -33,10 +33,7 @@ def create_delta_packages(old_packages, new_package):
     new_pkg_files = new_pkg.get_files()
 
     # Unpack new package to temp
-    new_pkg_name = util.package_name(new_pkg_info.name,
-                                     new_pkg_info.version,
-                                     new_pkg_info.release,
-                                     new_pkg_info.build, False)
+    new_pkg_name = os.path.splitext(os.path.basename(new_package))[0]
 
     new_pkg_path = util.join_path(ctx.config.tmp_dir(), new_pkg_name)
     new_pkg.extract_pisi_files(new_pkg_path)
