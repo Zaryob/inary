@@ -93,7 +93,7 @@ def calculate_download_sizes(order):
             (version, release, build, distro, distro_release) = installdb.get_version_and_distro_release(pkg.name)
             # pisi distro upgrade should not use delta support
             if distro == pkg.distribution and distro_release == pkg.distributionRelease:
-                delta = pkg.get_delta(buildFrom=build)
+                delta = pkg.get_delta(release)
 
         ignore_delta = ctx.config.values.general.ignore_delta
 
