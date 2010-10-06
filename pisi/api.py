@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2009, TUBITAK/UEKAE
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -922,18 +922,12 @@ def clearCache(all=False):
                 version, release, build = pisi.util.split_version(full_version)
 
                 release = int(release)
-                if build:
-                    build = int(build)
-
                 if name in latest:
-                    lversion, lrelease, lbuild = latest[name]
-                    if lbuild and build:
-                        if lbuild > build:
-                            continue
-                    elif lrelease > release:
+                    lversion, lrelease = latest[name]
+                    if lrelease > release:
                         continue
 
-                latest[name] = full_version, release, build
+                latest[name] = full_version, release
 
             except:
                 pass
