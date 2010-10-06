@@ -685,17 +685,96 @@ def parse_package_name(package_name):
 
     return name, "%s-%s" % (version, release)
 
-def parse_delta_package_name(package_name):
-    """Separate delta package name and release infos
-    
-    example: tasma-5-7.pisi.delta -> (tasma, 5, 7)
-    
+def parse_delta_package_name_legacy(package_name):
+    """Separate delta package name and release infos for package formats <= 1.1.
+
+    example: tasma-5-7.delta.pisi -> (tasma, 5, 7)
     """
     name, build = parse_package_name(package_name)
     build = build[:-len(ctx.const.delta_package_suffix)]
     buildFrom, buildTo = build.split("-")
-    
+
     return name, buildFrom, buildTo
+
+def parse_delta_package_name(package_name):
+    """Separate delta package name and release infos
+
+    example: tasma-5-7-p11-x86_64.delta.pisi -> (tasma, 5, 7)
+    """
+
+    # Strip extension if exists
+    if package_name.endswith(ctx.const.delta_package_suffix):
+        package_name = remove_suffix(ctx.const.delta_package_suffix,
+                                     package_name)
+
+    try:
+        name, source_release, target_release, distro_id, arch = \
+                package_name.rsplit("-", 4)
+
+        # Arch field cannot start with a digit. If a digit is found,
+        # the package might have an old format. Raise here to call
+        # the legacy function.
+        if not arch or arch[0] in string.digits:
+            raise ValueError
+
+    except ValueError:
+        try:
+            return parse_delta_package_name_legacy(package_name)
+        except:
+            raise Error(_("Invalid delta package name: %s") % package_name)
+
+    return name, source_release, target_release
+
+def split_package_filename(filename):
+    """Split fields in package filename.
+
+    example: tasma-1.0.3-5-p11-x86_64.pisi -> (tasma, 1.0.3, 5, p11, x86_64)
+    """
+
+    # Strip extension if exists
+    if filename.endswith(ctx.const.package_suffix):
+        filename = remove_suffix(ctx.const.package_suffix, filename)
+
+    try:
+        name, version, release, distro_id, arch = filename.rsplit("-", 4)
+
+        # Arch field cannot start with a digit. If a digit is found,
+        # the package might have an old format.
+        if not arch or arch[0] in string.digits:
+            raise ValueError
+
+    except ValueError:
+        name, version = parse_package_name_legacy(filename)
+        version, release, build = split_version(version)
+        distro_id = arch = None
+
+    return name, version, release, distro_id, arch
+
+def split_delta_package_filename(filename):
+    """Split fields in delta package filename.
+
+    example: tasma-5-7-p11-x86_64.delta.pisi -> (tasma, 5, 7, p11, x86-64)
+    """
+
+    # Strip extension if exists
+    if filename.endswith(ctx.const.delta_package_suffix):
+        filename = remove_suffix(ctx.const.delta_package_suffix, filename)
+
+    try:
+        name, source_release, target_release, distro_id, arch = \
+                filename.rsplit("-", 4)
+
+        # Arch field cannot start with a digit. If a digit is found,
+        # the package might have an old format.
+        if not arch or arch[0] in string.digits:
+            raise ValueError
+
+    except ValueError:
+        # Old formats not supported
+        name = parse_delta_package_name_legacy(filename)[0]
+        source_release = target_release = None
+
+    return name, source_release, target_release
 
 def split_version(package_version):
     """Split version, release and build parts of a package version
