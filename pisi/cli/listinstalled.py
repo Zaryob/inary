@@ -75,8 +75,8 @@ Usage: list-installed
             maxlen = max([len(_p) for _p in installed])
 
         if self.options.install_info:
-            ctx.ui.info(_('Package Name     |St|   Version|  Rel.| Build|  Distro|             Date'))
-            print         '========================================================================'
+            ctx.ui.info(_('Package Name          |St|        Version|  Rel.|  Distro|             Date'))
+            print         '==========================================================================='
         for pkg in installed:
             package = self.installdb.get_package(pkg)
             inst_info = self.installdb.get_info(pkg)
@@ -84,7 +84,7 @@ Usage: list-installed
                 ctx.ui.info(unicode(package))
                 ctx.ui.info(unicode(inst_info))
             elif self.options.install_info:
-                ctx.ui.info('%-15s  |%s' % (package.name, inst_info.one_liner()))
+                ctx.ui.info('%-20s  |%s' % (package.name, inst_info.one_liner()))
             else:
                 package.name = package.name + ' ' * (maxlen - len(package.name))
                 ctx.ui.info('%s - %s' % (package.name, unicode(package.summary)))

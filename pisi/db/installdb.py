@@ -36,26 +36,23 @@ class InstallInfo:
 
     state_map = { 'i': _('installed'), 'ip':_('installed-pending') }
 
-    def __init__(self, state, version, release, build, distribution, time):
+    def __init__(self, state, version, release, distribution, time):
         self.state = state
         self.version = version
         self.release = release
-        self.build = build
         self.distribution = distribution
         self.time = time
 
     def one_liner(self):
         import time
         time_str = time.strftime("%d %b %Y %H:%M", self.time)
-        s = '%2s|%10s|%6s|%6s|%8s|%12s' % (self.state, self.version, self.release,
-                                   self.build, self.distribution,
-                                   time_str)
+        s = '%2s|%15s|%6s|%8s|%12s' % (self.state, self.version, self.release,
+                                       self.distribution, time_str)
         return s
 
     def __str__(self):
-        s = _("State: %s\nVersion: %s, Release: %s, Build: %s\n") % \
-            (InstallInfo.state_map[self.state], self.version,
-             self.release, self.build)
+        s = _("State: %s\nVersion: %s, Release: %s\n") % \
+            (InstallInfo.state_map[self.state], self.version, self.release)
         import time
         time_str = time.strftime("%d %b %Y %H:%M", self.time)
         s += _('Distribution: %s, Install Time: %s\n') % (self.distribution,
@@ -135,11 +132,11 @@ class InstallDB(lazydb.LazyDB):
 
     def __get_version(self, meta_doc):
         history = meta_doc.getTag("Package").getTag("History")
-        build = meta_doc.getTag("Package").getTagData("Build")
         version = history.getTag("Update").getTagData("Version")
         release = history.getTag("Update").getAttribute("release")
 
-        return version, release, build and int(build)
+        # TODO Remove None
+        return version, release, None
 
     def __get_distro_release(self, meta_doc):
         distro = meta_doc.getTag("Package").getTagData("Distribution")
@@ -215,7 +212,6 @@ class InstallDB(lazydb.LazyDB):
         info = InstallInfo(state,
                            pkg.version,
                            pkg.release,
-                           pkg.build,
                            pkg.distribution,
                            ctime)
         return info
