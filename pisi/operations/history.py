@@ -28,12 +28,8 @@ def __pkg_already_installed(name, pkginfo):
     if not installdb.has_package(name):
         return False
 
-    ver, rel, build = str(pkginfo).split("-")
-    if build == '?':
-        build = None
-    else:
-        build = int(build)
-    return (ver, rel, build) == installdb.get_version(name)
+    ver, rel = str(pkginfo).split("-")
+    return (ver, rel) == installdb.get_version(name)[:-1]
 
 def __listactions(actions):
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2008, TUBITAK/UEKAE
+# Copyright (C) 2008-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -26,10 +26,9 @@ class PackageInfo:
 
     a_version = [autoxml.String, autoxml.mandatory]
     a_release = [autoxml.String, autoxml.mandatory]
-    a_build = [autoxml.String, autoxml.optional]
 
     def __str__(self):
-        return self.version + "-" + self.release + "-" + (self.build or '?')
+        return self.version + "-" + self.release
 
 class Repo:
     a_operation = [autoxml.String, autoxml.mandatory]
@@ -137,7 +136,6 @@ class History(xmlfile.XmlFile):
             if pkgInfo:
                 histInfo.version = str(pkgInfo.version)
                 histInfo.release = str(pkgInfo.release)
-                histInfo.build = pkgInfo.build and str(pkgInfo.build)
 
         self.operation.packages.append(package)
 
