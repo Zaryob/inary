@@ -774,7 +774,7 @@ def split_delta_package_filename(filename):
         name = parse_delta_package_name_legacy(filename)[0]
         source_release = target_release = None
 
-    return name, source_release, target_release
+    return name, source_release, target_release, distro_id, arch
 
 def split_version(package_version):
     """Split version, release and build parts of a package version
