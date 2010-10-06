@@ -41,7 +41,7 @@ Usage: list-installed
 
         group.add_option("-b", "--with-build-host",
                          action="store",
-                         default="localhost",
+                         default=None,
                          help=_("Only list the installed packages built "
                                 "by the given host"))
         group.add_option("-l", "--long", action="store_true",
@@ -57,7 +57,7 @@ Usage: list-installed
         self.init(database = True, write = False)
 
         build_host = ctx.get_option("with_build_host")
-        if not build_host:
+        if build_host is None:
             installed = self.installdb.list_installed()
         else:
             installed = self.installdb.list_installed_with_build_host(build_host)

@@ -118,13 +118,19 @@ class InstallDB(lazydb.LazyDB):
         return self.installed_db.has_key(package)
 
     def list_installed_with_build_host(self, build_host):
-        xml_line = "<BuildHost>%s</BuildHost>" % re.escape(build_host)
-        build_host_re = re.compile(xml_line)
+        build_host_re = re.compile("<BuildHost>(.*?)</BuildHost>")
         found = []
         for name in self.list_installed():
             xml = open(os.path.join(self.package_path(name), ctx.const.metadata_xml)).read()
-            if build_host_re.search(xml):
-                found.append(name)
+            matched = build_host_re.search(xml)
+            if matched:
+                if build_host != matched.groups()[0]:
+                    continue
+            elif build_host:
+                continue
+
+            found.append(name)
+
         return found
 
     def __get_version(self, meta_doc):
