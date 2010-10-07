@@ -1059,12 +1059,17 @@ class Builder:
 
             os.chdir(c)
 
+            old_package_dirs = (ctx.config.compiled_packages_dir(),
+                                ctx.config.debug_packages_dir(),
+                                outdir or ".")
+
             for update in self.spec.history[1:]:
                 filename = self.package_filename(self.metadata.package, update)
-                path = util.join_path(outdir, filename) if outdir else filename
 
-                if os.path.exists(path):
-                    self.old_packages.append(filename)
+                for package_dir in old_package_dirs:
+                    path = util.join_path(package_dir, filename)
+                    if os.path.exists(path):
+                        self.old_packages.append(filename)
 
             self.set_state("buildpackages")
             ctx.ui.info(_("Done."))
