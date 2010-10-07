@@ -639,6 +639,20 @@ def partition_freespace(directory):
 # Package/Repository Related Functions #
 ########################################
 
+def package_filename(name, version, release, distro_id=None, arch=None):
+    """Return a filename for a package with the given information. """
+
+    if distro_id is None:
+        distro_id = ctx.config.values.general.distribution_id
+
+    if arch is None:
+        arch = ctx.config.values.general.architecture
+
+    fn = "-".join((name, version, release, distro_id, arch))
+    fn += ctx.const.package_suffix
+
+    return fn
+
 def parse_package_name_legacy(package_name):
     """Separate package name and version string for package formats <= 1.1.
     
