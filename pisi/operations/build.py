@@ -1089,13 +1089,11 @@ class Builder:
         os.environ.clear()
         os.environ.update(ctx.config.environ)
 
-        print self.delta_map
-
     def build_delta_packages(self, package, outdir):
         max_delta_count = int(ctx.config.values.build.max_delta_count)
 
         if not max_delta_count:
-            return
+            return []
 
         old_package_dirs = (ctx.config.compiled_packages_dir(),
                             ctx.config.debug_packages_dir(),
