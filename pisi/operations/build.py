@@ -230,6 +230,9 @@ class Builder:
         self.actionLocals = None
         self.actionGlobals = None
 
+        self.new_packages = []
+        self.new_delta_packages = []
+
     def set_spec_file(self, specuri):
         if not specuri.is_remote_file():
             # FIXME: doesn't work for file://
@@ -326,7 +329,7 @@ class Builder:
         self.run_install_action()
 
         # after all, we are ready to build/prepare the packages
-        return self.build_packages()
+        self.build_packages()
 
     def set_environment_vars(self):
         """Sets the environment variables for actions API to use"""
@@ -944,9 +947,6 @@ class Builder:
             if debug_packages:
                 self.spec.packages.extend(debug_packages)
 
-        self.new_packages = []
-        self.old_packages = []
-
         install_dir = self.pkg_dir() + ctx.const.install_dir_suffix
 
         # Store additional files
@@ -1053,24 +1053,15 @@ class Builder:
                 if package.debug_package:
                     orgname = util.join_path("debug", finfo.path)
                 pkg.add_to_install(orgname, finfo.path)
-            pkg.close()
-
-            # TODO Generate delta packages here
 
             os.chdir(c)
 
-            old_package_dirs = (ctx.config.compiled_packages_dir(),
-                                ctx.config.debug_packages_dir(),
-                                outdir or ".")
+            # FIXME Remove this hack
+            pkg.metadata.package.debug_package = package.debug_package
 
-            for update in self.spec.history[1:]:
-                filename = self.package_filename(self.metadata.package, update)
+            self.new_delta_packages += self.build_delta_packages(pkg, outdir)
 
-                for package_dir in old_package_dirs:
-                    path = util.join_path(package_dir, filename)
-                    if os.path.exists(path):
-                        self.old_packages.append(filename)
-
+            pkg.close()
             self.set_state("buildpackages")
             ctx.ui.info(_("Done."))
 
@@ -1091,7 +1082,33 @@ class Builder:
         os.environ.clear()
         os.environ.update(ctx.config.environ)
 
-        return self.new_packages, self.old_packages
+    def build_delta_packages(self, package, outdir):
+        max_delta_count = int(ctx.config.values.build.max_delta_count)
+
+        if not max_delta_count:
+            return
+
+        old_package_dirs = (ctx.config.compiled_packages_dir(),
+                            ctx.config.debug_packages_dir(),
+                            outdir or ".")
+
+        old_packages = []
+        for update in self.spec.history[1:]:
+            filename = self.package_filename(package.metadata.package, update)
+
+            for package_dir in old_package_dirs:
+                path = util.join_path(package_dir, filename)
+                if os.path.exists(path):
+                    old_packages.append(path)
+                    break
+
+            if len(old_packages) == max_delta_count:
+                break
+
+        from pisi.operations.delta import create_delta_packages_from_obj
+        return create_delta_packages_from_obj(old_packages,
+                                              package,
+                                              self.specdir)
 
 
 # build functions...
@@ -1102,7 +1119,7 @@ def build(pspec):
     else:
         pb = Builder.from_name(pspec)
     try:
-        result = pb.build()
+        pb.build()
     except ActionScriptException, e:
         ctx.ui.error("Action script error caught.")
         raise e
@@ -1110,7 +1127,6 @@ def build(pspec):
         if ctx.ui.errors or ctx.ui.warnings:
             ctx.ui.warning(_("*** %d error(s), %d warning(s)") \
                             % (ctx.ui.errors, ctx.ui.warnings))
-    return result
 
 order = {"none": 0,
          "fetch": 1,

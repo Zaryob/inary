@@ -91,6 +91,7 @@ class BuildDefaults:
     buildhelper = None
     compressionlevel = 1
     fallback = "ftp://ftp.pardus.org.tr/pub/source/2009"
+    max_delta_count = 0
 
 class DirectoriesDefaults:
     "Default values for [directories] section"

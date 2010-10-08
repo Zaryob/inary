@@ -21,6 +21,78 @@ import pisi.util as util
 import pisi.archive as archive
 
 
+# FIXME Reduce code duplication
+def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
+    new_pkg_info = new_package_obj.metadata.package
+    new_pkg_files = new_package_obj.files
+
+    new_pkg_path = new_package_obj.tmp_dir
+
+    new_pkg_name = os.path.basename(new_package_obj.filepath)
+    name, new_version, new_release, new_distro_id, new_arch = \
+            util.split_package_filename(new_pkg_name)
+
+    cwd = os.getcwd()
+    out_dir = ctx.get_option("output_dir")
+    target_format = ctx.get_option("package_format")
+    delta_packages = []
+
+    for old_package in old_packages:
+        old_pkg = pisi.package.Package(old_package)
+        old_pkg_info = old_pkg.metadata.package
+
+        delta_name = "-".join((old_pkg_info.name,
+                               old_pkg_info.release,
+                               new_pkg_info.release,
+                               new_distro_id,
+                               new_arch)) + ctx.const.delta_package_suffix
+
+        ctx.ui.info(_("Creating %s...") % delta_name)
+
+        if out_dir:
+            delta_name = util.join_path(out_dir, delta_name)
+
+        old_pkg_files = old_pkg.get_files()
+
+        delta_pkg = pisi.package.Package(delta_name, "w", format=target_format)
+
+        # add comar files to package
+        os.chdir(specdir)
+        for pcomar in new_pkg_info.providesComar:
+            fname = util.join_path(ctx.const.comar_dir, pcomar.script)
+            delta_pkg.add_to_package(fname)
+
+        # add xmls and files
+        os.chdir(new_pkg_path)
+
+        delta_pkg.add_metadata_xml(ctx.const.metadata_xml)
+        delta_pkg.add_files_xml(ctx.const.files_xml)
+
+        files_delta = find_delta(old_pkg_files, new_pkg_files)
+
+        # only metadata information may change in a package,
+        # so no install archive added to delta package
+        if files_delta:
+            # Sort the files in-place according to their path for an ordered
+            # tarfile layout which dramatically improves the compression
+            # performance of lzma. This improvement is stolen from build.py
+            # (commit r23485).
+            files_delta.sort(key=lambda x: x.path)
+
+            for finfo in files_delta:
+                orgname = util.join_path("install", finfo.path)
+                if new_pkg_info.debug_package:
+                    orgname = util.join_path("debug", finfo.path)
+                delta_pkg.add_to_install(orgname, finfo.path)
+
+        os.chdir(cwd)
+
+        delta_pkg.close()
+        delta_packages.append(delta_name)
+
+    # Return delta package names
+    return delta_packages
+
 def create_delta_packages(old_packages, new_package):
     if new_package in old_packages:
         ctx.ui.warning(_("New package '%s' exists in the list of old "
