@@ -232,7 +232,8 @@ class Builder:
 
         self.new_packages = []
         self.new_debug_packages = []
-        self.new_delta_packages = []
+
+        self.delta_map = {}
 
     def set_spec_file(self, specuri):
         if not specuri.is_remote_file():
@@ -1064,7 +1065,8 @@ class Builder:
             # FIXME Remove this hack
             pkg.metadata.package.debug_package = package.debug_package
 
-            self.new_delta_packages += self.build_delta_packages(pkg, outdir)
+            delta_packages = self.build_delta_packages(pkg, outdir)
+            self.delta_map[name] = delta_packages
 
             pkg.close()
             self.set_state("buildpackages")
@@ -1086,6 +1088,8 @@ class Builder:
         # making actionsapi.variables.exportFlags() useless...
         os.environ.clear()
         os.environ.update(ctx.config.environ)
+
+        print self.delta_map
 
     def build_delta_packages(self, package, outdir):
         max_delta_count = int(ctx.config.values.build.max_delta_count)
