@@ -231,6 +231,7 @@ class Builder:
         self.actionGlobals = None
 
         self.new_packages = []
+        self.new_debug_packages = []
         self.new_delta_packages = []
 
     def set_spec_file(self, specuri):
@@ -1022,7 +1023,11 @@ class Builder:
             outdir = ctx.get_option('output_dir')
             if outdir:
                 name = util.join_path(outdir, name)
-            self.new_packages.append(name)
+
+            if package.debug_package:
+                self.new_debug_packages.append(name)
+            else:
+                self.new_packages.append(name)
 
             ctx.ui.info(_("Creating PiSi package %s.") % name)
 
