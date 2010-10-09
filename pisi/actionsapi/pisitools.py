@@ -93,8 +93,8 @@ def doinfo(*sourceFiles):
 def dolib(sourceFile, destinationDirectory = '/usr/lib'):
     '''insert the library into /usr/lib'''
 
-    '''example call: pisitools.dolib_a("libz.a")'''
-    '''example call: pisitools.dolib_a("libz.so")'''
+    '''example call: pisitools.dolib("libz.a")'''
+    '''example call: pisitools.dolib("libz.so")'''
     sourceFile = join_path(os.getcwd(), sourceFile)
     destinationDirectory = join_path(get.installDIR(), destinationDirectory)
 
