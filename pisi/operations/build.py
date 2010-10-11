@@ -1073,9 +1073,6 @@ class Builder:
             pkg.close()
             self.set_state("buildpackages")
 
-        ctx.ui.info(_("All of the files under the install dir (%s) has been "
-                      "collected by package(s)") % install_dir)
-
         if ctx.config.values.general.autoclean is True:
             ctx.ui.info(_("Cleaning Build Directory..."))
             util.clean_dir(self.pkg_dir())
