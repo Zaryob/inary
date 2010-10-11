@@ -1005,16 +1005,16 @@ class Builder:
             if not package.icon:
                 package.icon = self.spec.source.icon
 
-            ctx.ui.action(_("** Building package %s") % package.name);
-
-            ctx.ui.info(_("Generating %s,") % ctx.const.files_xml)
             self.gen_files_xml(package)
 
             if not self.files.list:
-                ctx.ui.warning(_("Ignoring empty package %s" % package.name))
+                if not package.debug_package:
+                    ctx.ui.warning(_("Ignoring empty package %s" \
+                                     % package.name))
                 continue
 
-            ctx.ui.info(_("Generating %s,") % ctx.const.metadata_xml)
+            ctx.ui.action(_("Building package %s") % package.name)
+
             self.gen_metadata_xml(package)
 
             self.metadata.write(util.join_path(self.pkg_dir(), ctx.const.metadata_xml))
@@ -1025,12 +1025,14 @@ class Builder:
             if outdir:
                 name = util.join_path(outdir, name)
 
+            name = os.path.normpath(name)
+
             if package.debug_package:
                 self.new_debug_packages.append(name)
             else:
                 self.new_packages.append(name)
 
-            ctx.ui.info(_("Creating PiSi package %s.") % name)
+            ctx.ui.info(_("Creating %s") % name)
 
             pkg = pisi.package.Package(name, "w",
                                        format=self.target_package_format,
@@ -1070,7 +1072,6 @@ class Builder:
 
             pkg.close()
             self.set_state("buildpackages")
-            ctx.ui.info(_("Done."))
 
         ctx.ui.info(_("All of the files under the install dir (%s) has been "
                       "collected by package(s)") % install_dir)

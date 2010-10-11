@@ -47,7 +47,7 @@ def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
                                new_distro_id,
                                new_arch)) + ctx.const.delta_package_suffix
 
-        ctx.ui.info(_("Creating %s...") % delta_name)
+        ctx.ui.info(_("Creating %s") % delta_name)
 
         if out_dir:
             delta_name = util.join_path(out_dir, delta_name)
@@ -145,7 +145,7 @@ def create_delta_packages(old_packages, new_package):
                                new_distro_id,
                                new_arch)) + ctx.const.delta_package_suffix
 
-        ctx.ui.info(_("Creating %s...") % delta_name)
+        ctx.ui.info(_("Creating %s") % delta_name)
 
         if out_dir:
             delta_name = util.join_path(out_dir, delta_name)
