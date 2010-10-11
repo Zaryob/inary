@@ -1,3 +1,716 @@
+2010-10-11 Fatih Aşıcı <fatih@pardus.org.tr>
+	* db: Bump cache version
+
+2010-10-11 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Case fix
+
+2010-10-11 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Update state file after building all packages
+
+2010-10-11 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Remove useless info message
+
+	Pisi fails when orphaned files found. No need to print this
+	message for successful builds.
+
+2010-10-11 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Tweak info messages
+
+2010-10-09 Onur Küçük <onur@pardus.org.tr>
+	* actionsapi/pisitools: Fix documentation of dolib
+
+2010-10-08 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Return an empty list instead of None
+
+	Also remove a debug line.
+
+2010-10-08 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Hold a dictionary for delta package lists
+
+2010-10-08 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Hold a seperate list for new debug packages
+
+2010-10-08 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Create delta packages after build if max_delta_count > 0
+
+	build_packages does not return a value any more. Code is really hacky
+	but works.
+
+2010-10-07 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Search old packages in {compiled,debug}_packages_dir too
+
+	This is similar to the behaviour before the build number removal except
+	that it does not search recursively.
+
+2010-10-07 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Do not print error/warning counts if they equal to zero
+
+2010-10-07 Fatih Aşıcı <fatih@pardus.org.tr>
+	* util: Add function to generate a filename from the package info given
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* specfile: Ignore build numbers
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* history: Remove buildno-related stuff
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* packagedb: Ignore build numbers in old formats
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* installdb: Remove buildno-related stuff
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* installdb,cli/listinstalled: Thinko fix
+
+	The build host should be an empty string for old packages.
+	"pisi li -b ''" now returns old packages, too.
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/listinstalled: Replace --without-buildno with --with-build-host
+
+	This renamed parameter is used to filter packages by their build host.
+
+	  e.g. pisi li -b localhost
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Hold an identifier for the host the package is built on
+
+	This can be changed using build_host option in pisi.conf. The
+	default value is "localhost". This can be used to distinguish
+	buildfarm packages and the packages built by the user.
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tree-wide: Remove --ignore-build-no options
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* atomicops: Remove build number checks
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* api: Remove the code related to build numbers
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* config: Remove buildno option
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tree-wide: Fix get_delta() usage
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* index: Add support for new filename format of delta packages
+
+	Also store release numbers instead of build numbers.
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* util: Fix returned value
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Change filename format of delta packages
+
+	The new format is:
+
+	    <name>-<source release>-<target release>-<distribution id>-<architecture>.delta.pisi
+
+	    e.g. pisi-179-180-p11-x86_64.pisi
+
+	Release numbers are used instead of build numbers.
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* util: Add support for parsing the upcoming delta package name format
+
+	This also adds utility functions to split fields of new filename format.
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Change filename format of packages
+
+	The new format is:
+
+	    <name>-<version>-<release>-<distribution id>-<architecture>.pisi
+
+	    e.g. pisi-2.3.2-180-p11-x86_64.pisi
+
+	We will not use build numbers any more. This commit removes some of the code
+	related to build numbers. New pisi will not deal with build numbers.
+	Before the stable release, all buildno-related code will be removed.
+
+	It is now possible to use digits after a dash character (e.g. polkit-qt-1).
+
+	Distribution id is a short string to represent the distribution release
+	(e.g. p11 for Pardus 2011).
+
+	Architecture strings cannot start with a digit. This is needed to
+	distinguish old and new packages.
+
+2010-10-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* util: Add support for parsing the upcoming package name format
+
+2010-10-01 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Replace the path with __file__ in testCanAccessFile
+
+	Otherwise, the result of the test is dependent on the installed
+	packages.
+
+2010-10-01 Fatih Aşıcı <fatih@pardus.org.tr>
+	* config: Just ignore if we can't create the directory
+
+2010-09-28 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Call pkg_src_dir() to get WorkDir path
+
+	No need to keep a member for source directory.
+
+2010-09-28 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Search WorkDir after unpacking sources
+
+2010-09-28 Fatih Aşıcı <fatih@pardus.org.tr>
+	* install: Do not calculate the sum of cached file twice
+
+2010-09-27 Ozan Çağlayan <ozan@pardus.org.tr>
+	* actionsapi/kerneltools: Refactor
+
+2010-09-26 Fatih Aşıcı <fatih@pardus.org.tr>
+	* config: Create directories if we have write access
+
+	Also rename util.check_dir to util.ensure_dirs.
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/14000.
+
+2010-09-26 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/build: If spec file is not given, fallback to ./pspec.xml
+
+2010-09-26 Fatih Aşıcı <fatih@pardus.org.tr>
+	* installdb: Real fix when Package tag is missing
+
+2010-09-26 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Try WorkDir="." for archives with type "binary"
+
+2010-09-26 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Fail if user-defined WorkDir does not exist
+
+2010-09-26 Fatih Aşıcı <fatih@pardus.org.tr>
+	* index: Add --compression-types option
+
+	With this option, the compression type of index file can be selected.
+	It is possible to pass multiple types separated by comma.
+
+	e.g. pisi index --skip-signing --compression-types=bz2,xz
+
+2010-09-26 Fatih Aşıcı <fatih@pardus.org.tr>
+	* file: Handle all compressed files
+
+	Now it signs all compressed index files and calculates sums
+	of them.
+
+2010-09-26 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/index: Code style fixes and simplifications
+
+	Also remove a redundant info message.
+
+2010-09-26 Fatih Aşıcı <fatih@pardus.org.tr>
+	* file: Modify File class to accept multiple compression types
+
+2010-09-26 Fatih Aşıcı <fatih@pardus.org.tr>
+	* file: Remove unused gzip enum
+
+2010-09-25 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Guess WorkDir from archive name
+
+	If defined, use WorkDir in actions.py. If it is not defined or the
+	directory does not exist, first try "srcname-version" then the
+	basename of archive URL after splitting extensions.
+
+2010-09-25 Fatih Aşıcı <fatih@pardus.org.tr>
+	* specfile: Replace "current" string in release/version values
+
+	With this feature, it is not necessary to hardcode versions/releases
+	used in inter-dependencies.
+
+	    <RuntimeDependencies>
+	        <Dependency release="current">xorg-server-common</Dependency>
+	    </RuntimeDependencies>
+
+	The "current" value will be replaced by the release of the source
+	package that this spec file defines. This is done when building
+	the package so that binary packages and index files do not include
+	"current" string.
+
+2010-09-23 Fatih Aşıcı <fatih@pardus.org.tr>
+	* installdb: Check if some mandatory tags in metadata.xml exist
+
+2010-09-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Move build number warning to the end
+
+	Otherwise it prints this warning for each sub-package.
+
+2010-09-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Add dependencies of debug packages
+
+	Currently, it only adds "foo" dependency to "foo-dbginfo" package.
+
+2010-09-22 Gökçen Eraslan <gokcen@pardus.org.tr>
+	* actionsapi/pisitools: Fix copy/paste typo
+
+2010-09-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Generate a debug package for each sub-package
+
+	This commit also changes the behavior when a sub-package does not
+	contain any files. Such packages will not be built and a warning
+	will be printed for each empty package.
+
+2010-09-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* specfile: Make package descriptions mandatory again
+
+2010-09-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Fix typo in path collision check
+
+2010-09-15 Ozan Çağlayan <ozan@pardus.org.tr>
+	* actionsapi/kerneltools: Don't show section mismatches
+
+2010-09-15 Onur Küçük <onur@pardus.org.tr>
+	* rng: Add new locales
+
+2010-09-08 Fatih Arslan < farslan@pardus.org.tr>
+	* actionsapi/texlivemodules: patterns have to be null string for change
+
+	If the key "patterns" do not have any value (null string), than it should be
+	replaced by "-". But the former condition was not able to catch up those null
+	strings. The condition has changed to work properly.
+
+2010-09-06 Fatih Arslan < farslan@pardus.org.tr>
+	* actionsapi/texlivemodules: Refactor language function, fixes the broken parsing ability
+
+	The old language function was not easy to read and understand. Splitting it into two
+	functions makes it more readable. The code itself is rewritten from scratch. The 
+	function's parsing ability was by default faulty which has caused to create error .dat 
+	files.
+
+2010-09-05 Gökmen Göksel <gokmen@pardus.org.tr>
+	* unpisi: Add support to extract packages to a target directory
+
+2010-09-01 Fatih Arslan < farslan@pardus.org.tr>
+	* actionsapi/texlivemodules.py: Fixes logical false result, using shlex for better parsing"
+
+2010-08-31 Fatih Arslan < farslan@pardus.org.tr>
+	* actionsapi/texlivemodules: Fixes the behaviour of copying and moving of documentation files
+
+2010-08-31 Fatih Arslan < farslan@pardus.org.tr>
+	* actionsapi/texlivemodules: Modified to work properly with TexLive 2009 version
+
+	Texlive 2009 has some significant changes in the source tree. 
+
+	-The format.cnf file is created from the information of tlpobj files. This is parsed via
+	the function addFormat().
+	-buildFormatFiles() has some enviroment changes.
+	-The files of the source itself is distributed in the source dir. This must be relocated 
+	and re-distributed properly. This relocation information is available in the the tlpobj files. 
+	The function which reads the information and relocate the files is named as  moveSource().
+	-handleConfigFiles() is rewritten to provide simplicity and readability. Also there is no need of 
+	parameters, because the prefixes are the same everywhere. 
+	-The order of the functions has been changed. First config files has to be created, after that it's 
+	possible to build formats
+
+2010-08-21 Gökçen Eraslan <gokcen@pardus.org.tr>
+	* actionsapi: Add Pardus CFLAGS/CXXFLAGS as qmake parameter instead of make parameter.
+
+	If we add flag parameters to make, we totally override flags instead of add them.
+
+2010-08-17 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Comment a seek call as it causes a problem with Python 2.7
+
+	It seems this call is redundant here. No known problems so far.
+
+2010-08-17 Gökçen Eraslan <gokcen@pardus.org.tr>
+	* actionsapi: Add includedir to qt4 module.
+
+2010-08-17 Gökçen Eraslan <gokcen@pardus.org.tr>
+	* actionsapi: Fix translation dir.
+
+2010-08-17 Gökçen Eraslan <gokcen@pardus.org.tr>
+	* actionsapi: Revert last commit, use upstream names for importdir, translationdir and plugindir.
+
+2010-08-16 Gökçen Eraslan <gokcen@pardus.org.tr>
+	* actionsapi: Change importdir, plugindir and translationdir to importsdir, pluginsdir and translationsdir for better integrity
+
+2010-08-16 Gökçen Eraslan <gokcen@pardus.org.tr>
+	* actionsapi: Add qt4 module to easily compile qmake based Qt packages.
+
+2010-08-16 Gökçen Eraslan <gokcen@pardus.org.tr>
+	* actionsapi: Add KDE4 module to easily compile and install cmake based KDE packages.
+
+2010-08-16 Gökçen Eraslan <gokcen@pardus.org.tr>
+	* actionsapi/cmaketools: Remove Makefile check from cmaketools.install
+
+	Developer may add '-C dir' parameter, so we should take this into account.
+
+2010-08-16 Gökçen Eraslan <gokcen@pardus.org.tr>
+	* actionsapi/cmaketools: Remove Makefile check
+
+	Developer may add '-C dir' parameter, so we should take this into account.
+
+2010-08-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* actionsapi: Set localstatedir prefix to "/var"
+
+2010-08-06 Fatih Aşıcı <fatih@pardus.org.tr>
+	* AUTHORS: Add missing developers and contributors
+
+	Organized with three titles: maintainers, developers and contributors.
+
+2010-08-05 Fatih Aşıcı <fatih@pardus.org.tr>
+	* AUTHORS: Update contributor list
+
+2010-08-05 Fatih Aşıcı <fatih@pardus.org.tr>
+	* AUTHORS: Remove translators
+
+2010-07-19 Fatih Aşıcı <fatih@pardus.org.tr>
+	* actionsapi: Use octal values for all permissions
+
+2010-07-18 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli: Use the parsed separator in line_format
+
+2010-07-18 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli: Do not overwrite the value given by column parameter in formatted_output
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/13795.
+
+2010-07-16 Fatih Aşıcı <fatih@pardus.org.tr>
+	* upgrade: Check if the conflicting package is already in the upgrade list
+
+2010-07-16 Fatih Aşıcı <fatih@pardus.org.tr>
+	* scenarioapi/pspec: Properly add conflicts
+
+2010-07-16 Fatih Aşıcı <fatih@pardus.org.tr>
+	* scenarioapi/constants: Use uncompressed index file
+
+2010-07-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Add tearDown method for cleanup
+
+2010-07-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Fix InstallDB test
+
+2010-07-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* upgrade: Try to resolve conflicts by upgrading
+
+	If a package B conflicts with an old version of package A and
+	does not conflict with the new version of A, add A to the upgrade list.
+	Fixes conflict tests.
+
+2010-07-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Add new conflict tests
+
+	One of these tests fails because of a bug in Pisi :/
+
+2010-07-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Build repo2
+
+2010-07-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Set pisi config before running tests
+
+2010-07-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Add repo2 to simulate an updated state of repo1
+
+2010-07-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Add more packages
+
+2010-07-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Handle actions.py errors
+
+	Print a traceback for the actual exception.
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/13786.
+
+2010-07-14 Gökmen Görgen <gkmngrgn@gmail.com>
+	* pisi/actionsapi: Add rubymodules.py
+
+	Written new module that is including API for simplifying to package Ruby
+	applications.
+
+2010-07-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* file: Set compression level to 9 for XZ
+
+2010-07-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Use uncompressed index files
+
+2010-07-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* index: Use XZ for compression
+
+2010-07-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tree-wide: Use is_compressed instead of hard-coding extensions
+
+2010-07-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* file: Implement is_compressed method and simplify choosemethod
+
+2010-07-13 Ozan Çağlayan <ozan@pardus.org.tr>
+	* rng: Add Burmese locale
+
+2010-07-12 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Use the same Package instance when testing add_to_package
+
+2010-07-12 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Fix TypeError when adding an empty dir to ZIP archives
+
+	Fixes archivetest.
+
+2010-07-12 Fatih Aşıcı <fatih@pardus.org.tr>
+	* file: Use isinstance() instead of type()
+
+2010-07-12 Fatih Aşıcı <fatih@pardus.org.tr>
+	* file: Add support for XZ-compressed files
+
+2010-07-12 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Build repo1
+
+2010-07-12 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Add a sample repository tree
+
+2010-07-11 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Fix shelltest
+
+	It seems the execution order can change. We should
+	break the dependencies between tests.
+
+2010-07-11 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Lots of fixes
+
+	Thanks to the great work done by Gökhan Göktürk.
+
+2010-07-06 Serdar Dalgıç <serdar@pardus.org.tr>
+	* typo: fix typo in pisi/pisi/cli/blame.py
+
+2010-07-05 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Remove tmp dir before running tests
+
+2010-07-05 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Correct distro names and versions of example repositories
+
+	Also set distro name and release in testcases.
+
+2010-07-04 Fatih Aşıcı <fatih@pardus.org.tr>
+	* rng: Add NCSA to the list of licenses
+
+2010-07-04 Ozan Çağlayan <ozan@pardus.org.tr>
+	* pisi/actionsapi: No need to check the existence of Makefile*
+
+	install() and rawInstall() should not check the existence of a
+	Makefile. This check prevents passing -C to those installation
+	wrappers.
+
+2010-07-03 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tests: Fix the test that overwrites /usr/bin/aclocal
+
+2010-06-28 Fatih Aşıcı <fatih@pardus.org.tr>
+	* delta: Check the names of old and new packages
+
+	Warns and skips if the package names are different.
+
+2010-06-24 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Move license files to uludag/trunk/doc/en
+
+2010-06-24 Fatih Aşıcı <fatih@pardus.org.tr>
+	* rng: Add CeCILL-B license
+
+2010-06-24 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli: Ignore broken pipe errors
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/13609.
+
+2010-06-24 Doruk Fişek <dfisek@fisek.com.tr>
+	* licenses: Add CeCILL-B license
+
+	Thanks to Necdet Yücel.
+
+2010-06-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* package: Handle IO errors
+
+2010-06-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/delta: Allow passing multiple old packages
+
+	Usages: delta oldpackage1 oldpackage2 ...  newpackage
+	        delta -t newpackage oldpackage1 oldpackage2 ...
+
+2010-06-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* delta: Implement function to create multiple delta packages
+
+	create_delta_package is now a wrapper around create_delta_packages.
+
+2010-06-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Fix ArchiveZip adding empty dirs with incorrect paths
+
+2010-06-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* delta: Extract install archive into a sub-directory
+
+2010-06-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* delta: Add an option to specify the format of delta package
+
+2010-06-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/build: Fix '-F help'
+
+2010-06-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* constants: Remove unused strings
+
+2010-06-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* delta: Improve comment
+
+2010-06-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* delta: Remove temporary dir after creating delta packages
+
+2010-06-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* delta: Use new package api to create delta packages
+
+	It is now possible to create deltas by comparing packages with
+	different formats.
+
+2010-06-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* package: Add tmp_dir parameter to constructor
+
+	Different operations might use different temp dirs.
+
+2010-06-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* package: Use common code to get archive name and format
+
+2010-06-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Use the methods in package module to reduce code duplication
+
+2010-06-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* package: Implement common methods to read/create pisi files
+
+2010-06-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* delta: Code style fixes
+
+	Also replace deprecated .has_key() with "in" keyword.
+
+2010-06-19 Fatih Aşıcı <fatih@pardus.org.tr>
+	* unpisi: Do not fail if 'install' directory already exists
+
+2010-06-19 Fatih Aşıcı <fatih@pardus.org.tr>
+	* unpisi: Extract install.tar* archive into 'install' subdir
+
+2010-06-19 Fatih Aşıcı <fatih@pardus.org.tr>
+	* unpisi: Use pisi.package module instead of duplicating extraction code
+
+2010-06-19 Fatih Aşıcı <fatih@pardus.org.tr>
+	* unpisi: Add support for package format 1.2
+
+2010-06-19 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Change package format to use XZ compression
+
+	Version of the new package format is 1.2. Delta support is not ready yet.
+
+2010-06-18 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Do not hardcode package formats in cli code
+
+	Now, it is possible to see a list of supported formats
+	with "-F help".
+
+2010-06-17 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Lots of code style fixes
+
+2010-06-17 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/build: Code style fixes
+
+	Minor string changes are also included in this commit.
+
+2010-06-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Guess archive type from file extension
+
+	This makes "type" attribute of "Archive" tag optional.
+
+2010-06-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* util: Check compression type passed to uncompress
+
+	Also add "gz" as an alias for "gzip".
+
+2010-06-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* util: Use Archive class in uncompress function
+
+	This reduces code duplication and allows using patches compressed
+	with lzma/xz.
+
+2010-06-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Make "bz2" an alias for "bzip2"
+
+	"bzip2" is used for archives and "bz2" is used for patches. Add this
+	alias for consistency.
+
+2010-06-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Add support for archive files compressed with lzma/xz
+
+2010-06-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Add support for xz compressed tar archives
+
+2010-06-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Handle the exception raises when archive type is unknown
+
+2010-06-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Refactor Archive{Bzip2,Gzip}.unpack_dir methods
+
+	Prepend output path with target dir instead of chdir'ing. Also remove
+	rstrip's used for dropping extensions.
+
+2010-06-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Code style fixes
+
+2010-06-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* scripts: Update unpisi to extract using file objects
+
+2010-06-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* install: Read install.tar.lzma without extracting it
+
+	Do not waste time/space for extracting it from ZIP archive.
+
+2010-06-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Allow passing a file-like object to ArchiveTar
+
+	Also add an "open" function to ArchiveZip. This function
+	returns a file-like object for files in Zip archives.
+
+2010-06-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Add callback parameter to ArchiveTar.unpack_dir
+
+	Install related stuff is moved from archive.py to atomicoperations.py
+	by using a callback function.
+
+2010-06-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Implement a separate class for tar.Z archives
+
+	Also modify uncompress command to keep original archive after
+	unpacking.
+
+2010-06-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* install: Disable keyboard interrupts while extracting
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/10462.
+
+2010-06-12 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Import bz2 and gzip modules only when needed
+
+2010-06-12 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Use pyliblzma for (de)compression with lzma
+
+	Pisi does not need "lzma" executable any more.
+
+2010-06-12 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Drop decompress function implemented for Python < 2.6
+
+	Pisi does not support Python versions before 2.6. It is useless to keep
+	this function here.
+
+2010-06-10 H. İbrahim Güngör <ibrahim@pardus.org.tr>
+	* l10n: Fix warning in sv.po
+
+2010-06-03 Ozan Çağlayan <ozan@pardus.org.tr>
+	* actionsapi: Update copyright dates
+
+2010-06-03 Ozan Çağlayan <ozan@pardus.org.tr>
+	* actionsapi/scons: Pass -j option to enable parallel builds
+
+2010-06-03 Ozan Çağlayan <ozan@pardus.org.tr>
+	* l10n: Improve 2 messages and their translations
+
+2010-05-30 Fatih Aşıcı <fatih@pardus.org.tr>
+	* pisi 2.3.1
+
+	This release fixes a serious regression which prevents using local
+	repositories with compressed index files. Also the compatibility
+	of repositories without distribution info is ignored now.
+
 2010-05-30 Fatih Aşıcı <fatih@pardus.org.tr>
 	* scripts/make-changelog: Replace [at]'s with @ char and use tab char for indentation
 
