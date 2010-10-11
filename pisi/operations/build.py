@@ -1075,10 +1075,10 @@ class Builder:
         self.set_state("buildpackages")
 
         if ctx.config.values.general.autoclean is True:
-            ctx.ui.info(_("Cleaning Build Directory..."))
+            ctx.ui.info(_("Cleaning build directory..."))
             util.clean_dir(self.pkg_dir())
         else:
-            ctx.ui.info(_("Keeping Build Directory"))
+            ctx.ui.info(_("Keeping build directory"))
 
 
         # reset environment variables after build.  this one is for
