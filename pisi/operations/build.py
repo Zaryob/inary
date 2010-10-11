@@ -1071,7 +1071,8 @@ class Builder:
             self.delta_map[name] = delta_packages
 
             pkg.close()
-            self.set_state("buildpackages")
+
+        self.set_state("buildpackages")
 
         if ctx.config.values.general.autoclean is True:
             ctx.ui.info(_("Cleaning Build Directory..."))
