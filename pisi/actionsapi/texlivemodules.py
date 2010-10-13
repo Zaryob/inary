@@ -84,7 +84,6 @@ def install(parameters = ''):
     if handleConfigFiles():
         raise Installing, _('Handle config files failed')
 
-
 def createSymlinksFormat2Engines():
     '''Create symlinks from format to engines'''
     for formatfile in ls("%s/texmf/fmtutil/format*.cnf" % get.curDIR()):
@@ -157,7 +156,6 @@ def handleConfigFiles():
                     domove("/usr/share/texmf/%s/%s" % (dirname,configFile), "/etc/texmf/%s.d" % dirname)
                     dosym("/etc/texmf/%s.d/%s" % (dirname, configFile), "/usr/share/texmf/%s/%s" %(dirname, configFile))
 
-
 def addFormat(parameters):
     '''Add format files'''
     if not os.path.isdir("%s/texmf/fmtutil/" % get.curDIR()):
@@ -178,11 +176,12 @@ def addFormat(parameters):
             para_dict[pair[0]] = pair[1]
             if pair[0] == "patterns" and pair[1] == '':
                 para_dict["patterns"] = '-'     # Specified in the texlive-module.eclass
+            elif not pair[0] == 'patterns':
+                para_dict["patterns"] = '-'
 
     cnf_file = open('%s/texmf/fmtutil/format.%s.cnf' % (get.curDIR(),get.srcNAME()), 'a')
     cnf_file.write("%s\t%s\t%s\t%s\n" % (para_dict["name"], para_dict["engine"], para_dict["patterns"], para_dict["options"]))
     cnf_file.close()
-
 
 def moveSources():
     reloc = "texmf-dist"
@@ -198,7 +197,6 @@ def moveSources():
                 if not os.path.isdir("%s/%s" % (reloc,dirname)):
                     os.system("mkdir -p %s/%s" % (reloc,dirname))
                 shutil.move("%s" % path , "%s/%s" % (reloc,dirname))
-
 
 def buildFormatFiles():
     '''Build format files'''
@@ -228,7 +226,6 @@ def addLanguageDat(parameter):
         language_dat.write("=%s\n" % para_dict["synonyms"])
         language_dat.close()
 
-
 def addLanguageDef(parameter):
     '''Create language.*.def files'''
     parameter = parameter.split()
@@ -251,8 +248,6 @@ def addLanguageDef(parameter):
         language_def = open('%s/language.%s.def' % (get.curDIR(),get.srcNAME())  , 'a')
         language_def.write("\\addlanguage{%s}{%s}{}{%s}{%s}\n" % (para_dict["synonyms"], para_dict["file"],  para_dict["lefthyphenmin"],  para_dict["righthyphenmin"]))
         language_def.close()
-
-
 
 def generateConfigFiles():
     '''Generate config files'''
