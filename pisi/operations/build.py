@@ -1009,8 +1009,8 @@ class Builder:
 
             if not self.files.list:
                 if not package.debug_package:
-                    ctx.ui.warning(_("Ignoring empty package %s" \
-                                     % package.name))
+                    ctx.ui.warning(_("Ignoring empty package %s") \
+                                     % package.name)
                 continue
 
             ctx.ui.action(_("Building package: %s") % package.name)

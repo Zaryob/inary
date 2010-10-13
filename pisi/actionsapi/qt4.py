@@ -49,11 +49,11 @@ class ConfigureError(pisi.actionsapi.Error):
 
 def configure(projectfile='', parameters='', installPrefix=prefix):
     if projectfile != '' and not shelltools.can_access_file(projectfile):
-        raise ConfigureError(_("Project file '%s' not found." % projectfile))
+        raise ConfigureError(_("Project file '%s' not found.") % projectfile)
 
     profiles = glob.glob("*.pro")
     if len(profiles) > 1 and projectfile == '':
-        raise ConfigureError(_("It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)" % ", ".join(profiles)))
+        raise ConfigureError(_("It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)") % ", ".join(profiles))
 
     shelltools.system("%s -makefile %s PREFIX='%s' QMAKE_CFLAGS+='%s' QMAKE_CXXFLAGS+='%s' %s" % (qmake, projectfile, installPrefix, get.CFLAGS(), get.CXXFLAGS(), parameters))
 
