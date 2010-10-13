@@ -309,7 +309,7 @@ msgstr "'%s' dosyası bulunamadı."
 
 #: pisi/actionsapi/qt4.py:56
 msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)"
-msgstr ""
+msgstr "Birden fazla .pro dosyası mevcut görünüyor. Bir tane belirtmelisiniz (Olası .pro dosyaları: %s)."
 
 #: pisi/actionsapi/rubymodules.py:108
 msgid "Running 'ruby %s' failed."
@@ -467,7 +467,7 @@ msgstr "/etc/texmf/%s.d oluşturuluyor."
 
 #: pisi/actionsapi/texlivemodules.py:155
 msgid "Moving (and symlinking) /usr/share/texmf/%s to /etc/texmf/%s.d"
-msgstr ""
+msgstr "/usr/share/texmf/%s dosyası /etc/texmf/%s.d dizinine taşınıyor ve bağ oluşturuluyor"
 
 #: pisi/actionsapi/texlivemodules.py:206
 msgid "Building format file %s"
