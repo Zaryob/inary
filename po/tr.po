@@ -304,7 +304,6 @@ msgid "Running %s failed."
 msgstr "%s çalıştırma işlemi başarısız oldu."
 
 #: pisi/actionsapi/qt4.py:52
-#, fuzzy
 msgid "Project file '%s' not found."
 msgstr "'%s' dosyası bulunamadı."
 
@@ -313,9 +312,8 @@ msgid "It seems there are more than one .pro file, you must specify one. (Possib
 msgstr ""
 
 #: pisi/actionsapi/rubymodules.py:108
-#, fuzzy
 msgid "Running 'ruby %s' failed."
-msgstr "%s çalıştırma işlemi başarısız oldu."
+msgstr "'%s' komutu başarısız oldu."
 
 #: pisi/actionsapi/shelltools.py:49
 msgid "Cannot create directory %s"
@@ -330,9 +328,8 @@ msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
 msgstr "ActionsAPI [chmod]: \"%s\" ile eşleşen bir dosya bulunamadı."
 
 #: pisi/actionsapi/shelltools.py:70
-#, fuzzy
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
-msgstr "ActionsAPI [chmod]: İşleme izin verilmedi: %s (kip: %s)"
+msgstr "ActionsAPI [chmod]: İşleme izin verilmedi: %s (kip: 0%o)"
 
 #: pisi/actionsapi/shelltools.py:73
 msgid "ActionsAPI [chmod]: File %s doesn't exists."
@@ -411,9 +408,8 @@ msgid "Command \"%s\" failed, return value was %d."
 msgstr "\"%s\" komutu başarısız oldu, dönüş değeri: %d ."
 
 #: pisi/actionsapi/texlivemodules.py:56
-#, fuzzy
 msgid "Moving source files failed"
-msgstr "Biçem dosyalarının inşası işlemi başarısız oldu."
+msgstr "Kaynak dosyalar taşınırken bir hata oluştu"
 
 #: pisi/actionsapi/texlivemodules.py:59
 msgid "Generate config files failed"
@@ -610,9 +606,8 @@ msgid "Package %s not found in any active repository."
 msgstr "%s pakedi etkin hiçbir depoda bulunamadı."
 
 #: pisi/atomicoperations.py:146
-#, fuzzy
 msgid "Installing %s, version %s, release %s"
-msgstr "%s paketi %s sürümü %s yayımı %s inşası kuruluyor."
+msgstr "%s paketi %s sürümü %s yayımı kuruluyor"
 
 #: pisi/atomicoperations.py:192 pisi/operations/build.py:701
 msgid "%s-%s is not a valid PiSi version format"
@@ -917,14 +912,12 @@ msgid "Break build after running install step"
 msgstr "Kurulum adımından sonra inşayı sonlandır."
 
 #: pisi/cli/build.py:155
-#, fuzzy
 msgid "Create PiSi package"
-msgstr "PiSi paketi oluştur."
+msgstr "PiSi paketi oluştur"
 
 #: pisi/cli/build.py:165 pisi/cli/delta.py:72
-#, fuzzy
 msgid "Supported package formats:"
-msgstr "Yerine yenisi yerleştirilen bir paket duruyor."
+msgstr "Desteklenen paket biçimleri:"
 
 #: pisi/cli/build.py:168 pisi/cli/delta.py:75
 msgid "  %s (default)"
@@ -1128,7 +1121,6 @@ msgstr ""
 "Bu dosyalar uzun vadede çok yer kaplayabilir."
 
 #: pisi/cli/delta.py:24
-#, fuzzy
 msgid ""
 "Creates delta packages\n"
 "\n"
@@ -1139,16 +1131,14 @@ msgid ""
 "packages by comparing the sha1sum of files and creates\n"
 "a delta package with the changed files.\n"
 msgstr ""
-"Delta PiSi paketleri yarat\n"
+"Delta paketleri yarat\n"
 "\n"
-"Kullanım: delta <eskipaket> <yenipaket>\n"
+"Kullanım: delta eskipaket1 eskipaket2 ...  yenipaket\n"
+"          delta -t yenipaket eskipaket1 eskipaket2 ...\n"
 "\n"
-"<eskipaket>: Kök olarak alınacak eski paket\n"
-"<yenipaket>: Delta için kullanılacak yeni paket\n"
-"\n"
-"Delta komutu, iki PiSi paketindeki dosyaların sha1 toplamlarını karşılaştırarak arasında değişen dosyaları bulup\n"
-"sadece değişenleri bulur ve iki paket arasında bir delta paketi oluşturur.\n"
-"\n"
+"Delta komutu, verilen paketlerde dosyaların sha1 toplamlarını\n"
+"karşılaştırarak değişen dosyaları bulur ve bu dosyaları\n"
+"içeren bir delta paketi oluşturur.\n"
 
 #: pisi/cli/delta.py:46
 msgid "delta options"
@@ -1159,9 +1149,8 @@ msgid "Use arg as the new package and treat other arguments as old packages."
 msgstr ""
 
 #: pisi/cli/delta.py:60
-#, fuzzy
 msgid "Output directory for produced packages."
-msgstr "Üretilecek paketler için çıktı dizini"
+msgstr "Üretilen paketler için çıktı dizini"
 
 #: pisi/cli/disablerepo.py:21
 msgid ""
@@ -1693,9 +1682,8 @@ msgid "list-installed options"
 msgstr "list-installed seçenekleri"
 
 #: pisi/cli/listinstalled.py:45
-#, fuzzy
 msgid "Only list the installed packages built by the given host"
-msgstr "İnşa numarası olmaksızın sadece kurulu paketleri listele"
+msgstr "Sadece verilen makine tarafından inşa edilmiş paketleri listele"
 
 #: pisi/cli/listinstalled.py:50
 msgid "List installed packages under given component"
@@ -1707,9 +1695,8 @@ msgstr "Detaylı kurulum bilgisi göster."
 
 # pisi/cli/commands.py:542 :729
 #: pisi/cli/listinstalled.py:78 pisi/cli/listupgrades.py:73
-#, fuzzy
 msgid "Package Name          |St|        Version|  Rel.|  Distro|             Date"
-msgstr "Paket Adı        |Dm|     Sürüm| Yayım|  İnşa| Dağıtım|            Tarih"
+msgstr "Paket Adı             |Dm|          Sürüm| Yayım| Dağıtım|            Tarih"
 
 #: pisi/cli/listnewest.py:25
 msgid ""
@@ -2428,9 +2415,8 @@ msgid "pspec.xml avoids this package from building for '%s'"
 msgstr "pspec.xml bu kaynak paketin '%s' için inşa edilmesini engelliyor"
 
 #: pisi/operations/build.py:312
-#, fuzzy
 msgid "Building source package: %s"
-msgstr "PiSi kaynak paketi %s inşa ediliyor"
+msgstr "Kaynak paket inşa ediliyor: %s"
 
 #: pisi/operations/build.py:357
 msgid "IceCream detected. Make sure your daemon is up and running..."
@@ -2581,30 +2567,25 @@ msgid "There are abandoned files under the install dir (%s):"
 msgstr "Kurulum dizini (%s) altında terkedilmiş dosyalar var:"
 
 #: pisi/operations/build.py:1012
-#, fuzzy
 msgid "Ignoring empty package %s"
-msgstr "%s paketi kaldırılıyor."
+msgstr "Boş %s paketi yoksayılıyor"
 
 #: pisi/operations/build.py:1016
-#, fuzzy
 msgid "Building package: %s"
-msgstr "** Paket %s inşa ediliyor"
+msgstr "Paket inşa ediliyor: %s"
 
 #: pisi/operations/build.py:1035 pisi/operations/delta.py:50
 #: pisi/operations/delta.py:148
-#, fuzzy
 msgid "Creating %s..."
-msgstr "* %s denetleniyor... "
+msgstr "%s oluşturuluyor... "
 
 #: pisi/operations/build.py:1078
-#, fuzzy
 msgid "Cleaning build directory..."
 msgstr "İnşa dizini temizleniyor..."
 
 #: pisi/operations/build.py:1081
-#, fuzzy
 msgid "Keeping build directory"
-msgstr "İnşa dizini bırakılıyor..."
+msgstr "İnşa dizini bırakılıyor"
 
 #: pisi/operations/build.py:1134
 msgid "*** %d error(s), %d warning(s)"
@@ -2879,9 +2860,8 @@ msgid "Safety switch forces the upgrade of following packages:"
 msgstr "Emniyet mandalı aşağıdaki paketlerin yükseltilmesini zorunlu kılıyor:"
 
 #: pisi/package.py:67
-#, fuzzy
 msgid "Cannot open package file: %s"
-msgstr "Kaynak paket bulunamadı: %s"
+msgstr "Paket dosyası açılamadı: %s"
 
 #: pisi/package.py:88
 msgid "Unsupported package format: %s"
@@ -3134,14 +3114,12 @@ msgid "objcopy (add-debuglink) command failed for file '%s'!"
 msgstr "objcopy (add-debuglink) komutu '%s' dosyası için başarısız oldu!"
 
 #: pisi/util.py:698
-#, fuzzy
 msgid "Invalid package name: %s"
-msgstr "Yüklü paket:"
+msgstr "Geçersiz paket adı: %s"
 
 #: pisi/util.py:738
-#, fuzzy
 msgid "Invalid delta package name: %s"
-msgstr "Depoda %s isimli bir paket zaten mevcut."
+msgstr "Geçersiz delta paket adı: %s"
 
 #: pisi/version.py:64
 msgid "Invalid version string: '%s'"
