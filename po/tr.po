@@ -15,10 +15,10 @@ msgstr ""
 "PO-Revision-Date: 2010-03-24 16:28+0200\n"
 "Last-Translator: Fatih Aşıcı <fatih@pardus.org.tr>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=1;plural=0;\n"
 "X-Generator: Lokalize 1.0\n"
 
@@ -587,7 +587,7 @@ msgstr "Tamam."
 
 #: pisi/archive.py:380
 msgid "Problem occured while uncompressing %s.Z file"
-msgstr ""
+msgstr "%s.Z dosyası genişletilirken hata oluştu"
 
 #: pisi/atomicoperations.py:71 pisi/operations/history.py:72
 msgid "Package %s found in repository %s"
@@ -873,7 +873,7 @@ msgstr "Ar dosyalarıyla statik bir paket yarat."
 
 #: pisi/cli/build.py:93 pisi/cli/delta.py:64
 msgid "Create the binary package using the given format. Use '-F help' to see a list of supported formats."
-msgstr ""
+msgstr "İkili paketi verilen biçimde oluştur. Desteklenen biçimlerin listesini görmek için '-F help' kullanın."
 
 #: pisi/cli/build.py:100
 msgid "Use quilt patch management system instead of GNU patch"
@@ -921,7 +921,7 @@ msgstr "Desteklenen paket biçimleri:"
 
 #: pisi/cli/build.py:168 pisi/cli/delta.py:75
 msgid "  %s (default)"
-msgstr ""
+msgstr "%s (öntanımlı)"
 
 #: pisi/cli/build.py:176 pisi/cli/delta.py:92 pisi/cli/emerge.py:71
 msgid "Output directory: %s"
@@ -1146,7 +1146,7 @@ msgstr "delta seçenekleri"
 
 #: pisi/cli/delta.py:54
 msgid "Use arg as the new package and treat other arguments as old packages."
-msgstr ""
+msgstr "Yeni paket adı olarak arg'ı kullan ve diğer argümanları eski paket listesi olarak al."
 
 #: pisi/cli/delta.py:60
 msgid "Output directory for produced packages."
@@ -1449,7 +1449,7 @@ msgstr "Katalog çıktı dosyası"
 
 #: pisi/cli/index.py:63
 msgid "Comma-separated compression types for index file"
-msgstr ""
+msgstr "Katalog dosyası için virgülle ayrılmış sıkıştırma türleri"
 
 #: pisi/cli/index.py:69
 msgid "Do not index PiSi spec files."
@@ -1764,13 +1764,13 @@ msgstr ""
 "\n"
 "İzlemede olan depoları listele.\n"
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr "etkin"
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
 msgstr "etkin değil"
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
+msgstr "etkin"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
@@ -2218,13 +2218,12 @@ msgid "installed-pending"
 msgstr "kurulu-beklemede"
 
 #: pisi/db/installdb.py:54
-#, fuzzy
 msgid ""
 "State: %s\n"
 "Version: %s, Release: %s\n"
 msgstr ""
 "Durum: %s\n"
-"Sürüm: %s, Yayım: %s, İnşa: %s\n"
+"Sürüm: %s, Yayım: %s\n"
 
 #: pisi/db/installdb.py:58
 msgid "Distribution: %s, Install Time: %s\n"
@@ -2621,15 +2620,15 @@ msgstr ""
 
 #: pisi/operations/delta.py:98
 msgid "New package '%s' exists in the list of old packages. Skipping it..."
-msgstr ""
+msgstr "Yeni paket '%s', eski paket listesinde de mevcut. Atlanıyor..."
 
 #: pisi/operations/delta.py:132
 msgid "The file '%s' belongs to a different package other than '%s'. Skipping it..."
-msgstr ""
+msgstr "'%s' dosyası '%s' paketinden farklı bir pakete ait. Atlanıyor..."
 
 #: pisi/operations/delta.py:138
 msgid "Package '%s' has the same release number with the new package. Skipping it..."
-msgstr ""
+msgstr "'%s' paketi yeni paket ile aynı yayım numarasına sahip. Atlanıyor..."
 
 #: pisi/operations/emerge.py:35
 msgid "No packages to emerge."
@@ -2865,7 +2864,7 @@ msgstr "Paket dosyası açılamadı: %s"
 
 #: pisi/package.py:88
 msgid "Unsupported package format: %s"
-msgstr ""
+msgstr "Desteklenmeyen paket biçimi: %s"
 
 #: pisi/package.py:102
 msgid ""
@@ -3019,7 +3018,7 @@ msgstr "unpack: kaynak arşivin bütünlüğünde sorun var."
 
 #: pisi/sourcearchive.py:125
 msgid "Unknown archive type '%s' is given for '%s'."
-msgstr ""
+msgstr "'%s' için bilinmeyen bir arşiv türü verildi."
 
 #: pisi/specfile.py:164
 msgid "URI: %s, type: %s, sha1sum: %s"
@@ -3083,11 +3082,11 @@ msgstr "%s dosyasının SHA1 kontrol toplamı hesaplanamıyor."
 
 #: pisi/util.py:526
 msgid "Compression type is not valid: '%s'"
-msgstr ""
+msgstr "Sıkıştırma türü geçerli değil: '%s'"
 
 #: pisi/util.py:532
 msgid "Error while decompressing %s: %s"
-msgstr ""
+msgstr "%s genişletilirken hata: %s"
 
 #: pisi/util.py:575
 msgid "ERROR: patch (%s) failed"
@@ -3158,7 +3157,6 @@ msgstr "Hatalı sürüm dizgisi: '%s'"
 #~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
 #~ msgstr "İnşa numarası alınamıyor. Depo inşaları için pisi.conf dosyasında buildno seçeneğini etkinleştirmelisiniz."
 
-# pisi/build.py:503 :506
 #~ msgid "Generating %s,"
 #~ msgstr "%s yaratılıyor,"
 
