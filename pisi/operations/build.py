@@ -309,7 +309,7 @@ class Builder:
                     _("pspec.xml avoids this package from building for '%s'")
                     % architecture)
 
-        ctx.ui.status(_("Building PiSi source package: %s")
+        ctx.ui.status(_("Building source package: %s")
                       % self.spec.source.name)
 
         self.load_action_script()
@@ -1013,7 +1013,7 @@ class Builder:
                                      % package.name))
                 continue
 
-            ctx.ui.action(_("Building package %s") % package.name)
+            ctx.ui.action(_("Building package: %s") % package.name)
 
             self.gen_metadata_xml(package)
 
@@ -1032,7 +1032,7 @@ class Builder:
             else:
                 self.new_packages.append(name)
 
-            ctx.ui.info(_("Creating %s") % name)
+            ctx.ui.info(_("Creating %s...") % name)
 
             pkg = pisi.package.Package(name, "w",
                                        format=self.target_package_format,
