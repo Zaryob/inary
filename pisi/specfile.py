@@ -393,7 +393,9 @@ class SpecFile(xmlfile.XmlFile):
         current_release = self.history[0].release
 
         for package in self.packages:
-            deps = package.packageDependencies + package.packageAnyDependencies
+            deps = package.packageDependencies[:]
+            deps += sum([x.dependencies for x
+                         in package.packageAnyDependencies], [])
             for dep in deps:
                 for attr_name, attr_value in dep.__dict__.items():
                     if attr_value != "current":
