@@ -1307,17 +1307,26 @@
     <define name="attlist.Archive" combine="interleave">
         <group>
             <attribute name="sha1sum"/>
-            <attribute name="type">
-                <choice>
-                    <value>targz</value>
-                    <value>tarbz2</value>
-                    <value>tarlzma</value>
-                    <value>tar</value>
-                    <value>zip</value>
-                    <value>gzip</value>
-                    <value>binary</value>
-                </choice>
-            </attribute>
+            <optional>
+                <attribute name="type">
+                    <choice>
+                        <value>targz</value>
+                        <value>tarbz2</value>
+                        <value>tarlzma</value>
+                        <value>tarxz</value>
+                        <value>tarZ</value>
+                        <value>tar</value>
+                        <value>zip</value>
+                        <value>gz</value>
+                        <value>gzip</value>
+                        <value>bz2</value>
+                        <value>bzip2</value>
+                        <value>lzma</value>
+                        <value>xz</value>
+                        <value>binary</value>
+                    </choice>
+                </attribute>
+            </optional>
             <optional>
                 <attribute name="target"/>
             </optional>
