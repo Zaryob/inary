@@ -18,7 +18,6 @@ import glob
 import stat
 import pwd
 import grp
-import locale
 import fnmatch
 
 import gettext
@@ -910,7 +909,6 @@ class Builder:
     def file_actions(self):
         install_dir = self.pkg_install_dir()
 
-        locale.setlocale(locale.LC_ALL, 'C')
         import magic
         ms = magic.open(magic.MAGIC_NONE)
         ms.load()
@@ -923,7 +921,6 @@ class Builder:
                 exclude_special_files(filepath, fileinfo, self.actionGlobals)
 
         ms.close()
-        locale.setlocale(locale.LC_ALL, '')
 
     def build_packages(self):
         """Build each package defined in PSPEC file. After this process there

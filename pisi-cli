@@ -12,7 +12,6 @@
 
 import sys
 import errno
-import locale
 import traceback
 import exceptions
 import signal
@@ -79,6 +78,5 @@ if __name__ == "__main__":
 
     signal.signal(signal.SIGTERM, sig_handler)
 
-    locale.setlocale(locale.LC_ALL, '')
     cli = pisicli.PisiCLI()
     cli.run_command()

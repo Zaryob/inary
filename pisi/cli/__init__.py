@@ -137,7 +137,6 @@ class CLI(pisi.ui.UI):
 
     def choose(self, msg, opts):
         msg = unicode(msg)
-        import re
         prompt = msg + pisi.util.colorize(' (%s)' % "/".join(opts), 'red')
         while True:
             s = raw_input(prompt.encode('utf-8'))
@@ -149,17 +148,25 @@ class CLI(pisi.ui.UI):
         msg = unicode(msg)
         if ctx.config.options and ctx.config.options.yes_all:
             return True
-        while True:
-            import re, tty
-            yesexpr = re.compile(locale.nl_langinfo(locale.YESEXPR))
 
+        import re, tty
+
+        locale.setlocale(locale.LC_ALL, "")
+        yes_expr = re.compile(locale.nl_langinfo(locale.YESEXPR))
+        no_expr = re.compile(locale.nl_langinfo(locale.NOEXPR))
+        locale.setlocale(locale.LC_ALL, "C")
+
+        while True:
             tty.tcflush(sys.stdin.fileno(), 0)
             prompt = msg + pisi.util.colorize(_(' (yes/no)'), 'red')
             s = raw_input(prompt.encode('utf-8'))
-            if yesexpr.search(s):
+
+            if yes_expr.search(s):
                 return True
 
-            return False
+            if no_expr.search(s):
+                return False
+
 
     def display_progress(self, **ka):
         """ display progress of any operation """
