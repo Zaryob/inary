@@ -612,7 +612,7 @@ def get_package_requirements(packages):
 
 # ****** Danger Zone Below! Tressspassers' eyes will explode! ********** #
 
-def package_graph(A, packagedb, ignore_installed = False):
+def package_graph(A, packagedb, ignore_installed = False, reverse=False):
     """Construct a package relations graph.
 
     Graph will contain all dependencies of packages A, if ignore_installed
@@ -638,13 +638,22 @@ def package_graph(A, packagedb, ignore_installed = False):
         for x in B:
             pkg = packagedb.get_package(x)
             #print pkg
-            for dep in pkg.runtimeDependencies():
-                if ignore_installed:
-                    if dep.satisfied_by_installed():
-                        continue
-                if not dep.package in G_f.vertices():
-                    Bp.add(str(dep.package))
-                G_f.add_dep(x, dep)
+            if reverse:
+                for name,dep in packagedb.get_rev_deps(x):
+                    if ignore_installed:
+                        if dep.satisfied_by_installed():
+                            continue
+                    if not name in G_f.vertices():
+                        Bp.add(name)
+                    G_f.add_dep(name, dep)
+            else:
+                for dep in pkg.runtimeDependencies():
+                    if ignore_installed:
+                        if dep.satisfied_by_installed():
+                            continue
+                    if not dep.package in G_f.vertices():
+                        Bp.add(str(dep.package))
+                    G_f.add_dep(x, dep)
         B = Bp
     return G_f
 

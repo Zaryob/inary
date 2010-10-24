@@ -51,6 +51,9 @@ the package in graphviz format to 'pgraph.dot'.
         group.add_option("--ignore-installed", action="store_true",
                                default=False,
                                help=_("Do not show installed packages"))
+        group.add_option("-R", "--reverse", action="store_true",
+                               default=False,
+                               help=_("Draw reverse dependency graph"))
         group.add_option("-o", "--output", action="store",
                                default='pgraph.dot',
                                help=_("Dot output file"))
@@ -88,5 +91,5 @@ the package in graphviz format to 'pgraph.dot'.
                 a = pisi.api.list_installed()
 
         g = pisi.api.package_graph(a, packagedb,
-                                   ignore_installed = ctx.get_option('ignore_installed'))
+                                   ignore_installed = ctx.get_option('ignore_installed'), reverse = ctx.get_option('reverse'))
         g.write_graphviz(file(ctx.get_option('output'), 'w'))
