@@ -32,13 +32,14 @@ import pisi.context as ctx
 
 class AlreadyHaveException(pisi.Exception):
     def __init__(self, url, localfile):
-        pisi.Exception.__init__(self, "URL %s already downloaded as %s" % (url, localfile))
+        pisi.Exception.__init__(self, _("URL %s already downloaded as %s")
+                                      % (url, localfile))
         self.url = url
         self.localfile = localfile
 
 class NoSignatureFound(pisi.Exception):
     def __init__(self, url):
-        pisi.Exception.__init__(self, "No signature found for %s" % url)
+        pisi.Exception.__init__(self, _("No signature found for %s") % url)
         self.url = url
 
 class Error(pisi.Error):
@@ -46,7 +47,7 @@ class Error(pisi.Error):
 
 class InvalidSignature(pisi.Error):
     def __init__(self, url):
-        pisi.Exception.__init__(self, " invalid for %s" % url)
+        pisi.Exception.__init__(self, _(" invalid for %s") % url)
         self.url = url
 
 class File:
