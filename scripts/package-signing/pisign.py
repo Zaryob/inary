@@ -15,13 +15,18 @@ import sys
 import tempfile
 import zipfile
 
-def sign_data(data, certificate, password_fd):
+# Certificate validity
+VALID = 1
+SELF_SIGNED = 0
+INVALID = -1
+
+def sign_data(data, key_file, password_fd):
     """
         Signs data with given certificate.
 
         Arguments:
             data: Data to be signed
-            certificate: Private certificate
+            key_file: Private key
             password_fd: File that contains passphrase
         Returns:
             Signed data
@@ -31,7 +36,7 @@ def sign_data(data, certificate, password_fd):
 
     # Use OpenSSL to sign data
     command = '/usr/bin/openssl dgst -sha1 -sign %s -passin fd:%d'
-    command = command % (certificate, password_fd.fileno())
+    command = command % (key_file, password_fd.fileno())
     command = shlex.split(command)
 
     pipe = subprocess.Popen(command, stdin=subprocess.PIPE,
@@ -48,14 +53,62 @@ def sign_data(data, certificate, password_fd):
 
     return signed_ascii
 
-def verify_data(data, signature, key_file):
+def get_public_key(cert_file):
     """
-        Verifies signature of data signed with given key file.
+        Extracts public key from certificate.
+
+        Arguments:
+            cert_file: Certificate
+        Returns:
+            Public key
+    """
+    # Use OpenSSL to extract public key
+    command = "openssl x509 -inform pem -in %s -pubkey -noout"
+    command = command % cert_file
+    command = shlex.split(command)
+
+    pipe = subprocess.Popen(command, stdout=subprocess.PIPE,
+                                     stderr=subprocess.PIPE)
+    key_ascii = pipe.stdout.read()
+
+    return key_ascii
+
+def verify_certificate(cert_file):
+    """
+        Verifies a certificate.
+
+        Arguments:
+            cert_file: Certificate
+        Returns:
+            VALID, SELF_SIGNED or INVALID
+    """
+    # Use OpenSSL to verify certificate
+    command = '/usr/bin/openssl verify %s'
+    command = command % cert_file
+    command = shlex.split(command)
+
+    pipe = subprocess.Popen(command, stdout=subprocess.PIPE,
+                                     stderr=subprocess.PIPE)
+    lines = pipe.stdout.read().split('\n')
+    if len(lines) < 2:
+        return INVALID
+    elif lines[1].startswith("error"):
+        code = lines[1].split()[1]
+        if code == '18':
+            return SELF_SIGNED
+        else:
+            return INVALID
+    else:
+        return VALID
+
+def verify_data(data, signature, cert_file):
+    """
+        Verifies signature of data signed with given certificate.
 
         Arguments:
             data: Original data
             signature_file: Signed data
-            key_file: Public keyfile
+            cert_file: Certificate
         Returns:
             True if valid, False if invalid
     """
@@ -69,9 +122,14 @@ def verify_data(data, signature, key_file):
     data_file.write(data)
     data_file.flush()
 
+    # Keep public key in a temporary file
+    pub_file = tempfile.NamedTemporaryFile()
+    pub_file.write(get_public_key(cert_file))
+    pub_file.flush()
+
     # Use OpenSSL to verify signature
     command = '/usr/bin/openssl dgst -sha1 -verify %s -signature %s %s'
-    command = command % (key_file, signature_file.name, data_file.name)
+    command = command % (pub_file.name, signature_file.name, data_file.name)
     command = shlex.split(command)
 
     pipe = subprocess.Popen(command, stdout=subprocess.PIPE,
@@ -81,6 +139,7 @@ def verify_data(data, signature, key_file):
     # Destroy temporary files
     signature_file.close()
     data_file.close()
+    pub_file.close()
 
     return result == 0
 
@@ -107,13 +166,13 @@ def get_zip_hashes(zip_obj):
 
     return "\n".join(hashes)
 
-def verify_zipfile(filename, key_file):
+def verify_zipfile(filename, cert_file):
     """
         Verifies integrity of a ZIP file.
 
         Arguments:
             filename: ZIP filename
-            key_file: Public keyfile
+            cert_file: Certificate
         Returns:
             True if valid, False if invalid
     """
@@ -133,7 +192,7 @@ def verify_zipfile(filename, key_file):
     zip_obj.close()
 
     # Verify signed data
-    return verify_data(hashes, signature, key_file)
+    return verify_data(hashes, signature, cert_file)
 
 def sign_zipfile(filename, certificate, password_fd):
     """
@@ -164,7 +223,7 @@ def print_usage():
 
     print "Usage:"
     print "  %s sign <path/to/private_key> <file.zip  ...>" % sys.argv[0]
-    print "  %s verify <path/to/public_key> <file.zip ...>" % sys.argv[0]
+    print "  %s verify <path/to/certificate> <file.zip ...>" % sys.argv[0]
     sys.exit(1)
 
 def main():
@@ -201,13 +260,20 @@ def main():
 
     elif operation == 'verify':
         try:
-            key_file = sys.argv[2]
+            cert_file = sys.argv[2]
         except IndexError:
             print_usage()
 
+        cert_validity = verify_certificate(cert_file)
+        if cert_validity == SELF_SIGNED:
+            print "WARNING: Certificate is self-signed."
+        elif cert_validity == INVALID:
+            print "ERROR: Certificate is invalid"
+            sys.exit(1)
+
         if len(sys.argv[3:]):
             for filename in sys.argv[3:]:
-                if verify_zipfile(filename, key_file):
+                if verify_zipfile(filename, cert_file):
                     print "%s is valid." % filename
                 else:
                     print "%s is corrupted." % filename

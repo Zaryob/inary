@@ -5,7 +5,6 @@ mkdir certs
 openssl genrsa -des3 -out certs/enc_key.pem 1024
 openssl req -new -subj '/C=TR/ST=Kocaeli/L=Gebze/CN=Pardus' -key certs/enc_key.pem -out certs/req.pem
 openssl req -x509 -key certs/enc_key.pem -in certs/req.pem -out certs/cert.pem -days 365
-openssl x509 -inform pem -in certs/cert.pem -pubkey -noout > certs/pub_key.pem
 
 # Feel free to share 'certs/cert.pem' and 'certs/pub_key.pem' with anyone, keep others to yourself.
 
