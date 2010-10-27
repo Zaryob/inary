@@ -21,11 +21,17 @@ cp test.zip test2.zip
 
 # Sign ZIP files:
 
-./pisign.py sign certs/enc_key.pem test.zip test2.zip
+./pisign.py sign certs/enc_key.pem test.zip test2.zip abc.txt
 Password: <Enter password>
+
+# Make a directory for trusted certificates:
+
+mkdir certs_trusted/
+cp certs/cert.pem certs_trusted/
 
 # Verify ZIP files:
 
-./pisign.py verify certs/cert.pem test.zip test2.zip
+./pisign.py verify certs_trusted/ test.zip test2.zip abc.txt
 
 # Change *.zip contents and try to verify again.
+# Clear cert_trusted/ directory and try again.
