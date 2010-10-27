@@ -20,7 +20,7 @@ _ = __trans.ugettext
 def file_corrupted(pfile):
     path = os.path.join(ctx.config.dest_dir(), pfile.path)
     if os.path.islink(path):
-        if pisi.util.sha1_data(os.readlink(path)) != pfile.hash:
+        if pisi.util.sha1_data(pisi.util.read_link(path)) != pfile.hash:
             return True
     else:
         if pisi.util.sha1_file(path) != pfile.hash:
