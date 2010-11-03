@@ -816,10 +816,12 @@ def remove_repo(name):
 def update_repos(repos, force=False):
     pisi.db.historydb.HistoryDB().create_history("repoupdate")
     updated = False
-    for repo in repos:
-        updated |= __update_repo(repo, force)
-    if updated:
-        pisi.db.regenerate_caches()
+    try:
+        for repo in repos:
+            updated |= __update_repo(repo, force)
+    finally:
+        if updated:
+            pisi.db.regenerate_caches()
 
 @locked
 def update_repo(repo, force=False):
