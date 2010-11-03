@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005-2006, TUBITAK/UEKAE
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -36,7 +36,8 @@ def is_char_valid(char):
 
 def is_method_missing(exception):
     """Tells if exception is about missing method in COMAR script"""
-    if exception._dbus_error_name in ("tr.org.pardus.comar.python.missing", "tr.org.pardus.comar.Missing"):
+    if exception._dbus_error_name in ("tr.org.pardus.comar.python.missing",
+                                      "tr.org.pardus.comar.Missing"):
         return True
     return False
 
@@ -54,9 +55,9 @@ def get_link():
     """Connect to the COMAR daemon and return the link."""
 
     sockname = "/var/run/dbus/system_bus_socket"
-    # YALI starts comar chrooted in the install target, but uses PiSi outside of
-    # the chroot environment, so PiSi needs to use a different socket path to be
-    # able to connect true dbus (and comar).
+    # YALI starts comar chrooted in the install target, but uses PiSi
+    # outside of the chroot environment, so Pisi needs to use a different
+    # socket path to be able to connect true dbus (and comar).
     # (usually /var/run/dbus/system_bus_socket)
     if ctx.dbus_sockname:
         sockname = ctx.dbus_sockname
@@ -84,9 +85,13 @@ def get_link():
             exceptions.append(str(e))
         time.sleep(0.2)
         timeout -= 0.2
-    raise Error(_("Cannot connect to COMAR: \n  %s\n") % "\n  ".join(exceptions))
+    raise Error(_("Cannot connect to COMAR: \n  %s\n")
+                % "\n  ".join(exceptions))
 
-def post_install(package_name, provided_scripts, scriptpath, metapath, filepath, fromVersion, fromRelease, toVersion, toRelease):
+
+def post_install(package_name, provided_scripts,
+                 scriptpath, metapath, filepath,
+                 fromVersion, fromRelease, toVersion, toRelease):
     """Do package's post install operations"""
 
     ctx.ui.info(_("Configuring %s package") % package_name)
@@ -95,7 +100,8 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath,
     package_name = safe_package_name(package_name)
 
     if package_name == 'comar':
-        ctx.ui.debug(_("COMAR package updated. From now on, using new COMAR daemon."))
+        ctx.ui.debug(_("COMAR package updated. From now on,"
+                       " using new COMAR daemon."))
         pisi.api.set_comar_updated(True)
 
     link = get_link()
@@ -106,23 +112,28 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath,
         if script.om == "System.Package":
             self_post = True
         try:
-            link.register(script_name, script.om, os.path.join(scriptpath, script.script))
+            link.register(script_name, script.om,
+                          os.path.join(scriptpath, script.script))
         except dbus.DBusException, exception:
-            raise Error, _("Script error: %s") % exception
+            raise Error(_("Script error: %s") % exception)
         if script.om == "System.Service":
             try:
                 link.System.Service[script_name].registerState()
             except dbus.DBusException, exception:
-                raise Error, _("Script error: %s") % exception
+                raise Error(_("Script error: %s") % exception)
 
     ctx.ui.debug(_("Calling post install handlers"))
     for handler in link.System.PackageHandler:
         try:
-            link.System.PackageHandler[handler].setupPackage(metapath, filepath, timeout=ctx.dbus_timeout)
+            link.System.PackageHandler[handler].setupPackage(
+                    metapath,
+                    filepath,
+                    timeout=ctx.dbus_timeout)
         except dbus.DBusException, exception:
-            # Do nothing if setupPackage method is not defined in package script
+            # Do nothing if setupPackage method is not defined
+            # in package script
             if not is_method_missing(exception):
-                raise Error, _("Script error: %s") % exception
+                raise Error(_("Script error: %s") % exception)
 
     if self_post:
         if not fromVersion:
@@ -132,11 +143,14 @@ def post_install(package_name, provided_scripts, scriptpath, metapath, filepath,
 
         ctx.ui.debug(_("Running package's post install script"))
         try:
-            link.System.Package[package_name].postInstall(fromVersion, fromRelease, toVersion, toRelease, timeout=ctx.dbus_timeout)
+            link.System.Package[package_name].postInstall(
+                    fromVersion, fromRelease, toVersion, toRelease,
+                    timeout=ctx.dbus_timeout)
         except dbus.DBusException, exception:
             # Do nothing if postInstall method is not defined in package script
             if not is_method_missing(exception):
-                raise Error, _("Script error: %s") % exception
+                raise Error(_("Script error: %s") % exception)
+
 
 def pre_remove(package_name, metapath, filepath):
     """Do package's pre removal operations"""
@@ -149,20 +163,24 @@ def pre_remove(package_name, metapath, filepath):
     if package_name in list(link.System.Package):
         ctx.ui.debug(_("Running package's pre remove script"))
         try:
-            link.System.Package[package_name].preRemove(timeout=ctx.dbus_timeout)
+            link.System.Package[package_name].preRemove(
+                    timeout=ctx.dbus_timeout)
         except dbus.DBusException, exception:
             # Do nothing if preRemove method is not defined in package script
             if not is_method_missing(exception):
-                raise Error, _("Script error: %s") % exception
+                raise Error(_("Script error: %s") % exception)
 
     ctx.ui.debug(_("Calling pre remove handlers"))
     for handler in list(link.System.PackageHandler):
         try:
-            link.System.PackageHandler[handler].cleanupPackage(metapath, filepath, timeout=ctx.dbus_timeout)
+            link.System.PackageHandler[handler].cleanupPackage(
+                    metapath, filepath, timeout=ctx.dbus_timeout)
         except dbus.DBusException, exception:
-            # Do nothing if cleanupPackage method is not defined in package script
+            # Do nothing if cleanupPackage method is not defined
+            # in package script
             if not is_method_missing(exception):
-                raise Error, _("Script error: %s") % exception
+                raise Error(_("Script error: %s") % exception)
+
 
 def post_remove(package_name, metapath, filepath, provided_scripts=[]):
     """Do package's post removal operations"""
@@ -177,24 +195,27 @@ def post_remove(package_name, metapath, filepath, provided_scripts=[]):
     if package_name in list(link.System.Package):
         ctx.ui.debug(_("Running package's postremove script"))
         try:
-            link.System.Package[package_name].postRemove(timeout=ctx.dbus_timeout)
+            link.System.Package[package_name].postRemove(
+                    timeout=ctx.dbus_timeout)
         except dbus.DBusException, exception:
             # Do nothing if postRemove method is not defined in package script
             if not is_method_missing(exception):
-                raise Error, _("Script error: %s") % exception
+                raise Error(_("Script error: %s") % exception)
 
     ctx.ui.debug(_("Calling post remove handlers"))
     for handler in list(link.System.PackageHandler):
         try:
-            link.System.PackageHandler[handler].postCleanupPackage(metapath, filepath, timeout=ctx.dbus_timeout)
+            link.System.PackageHandler[handler].postCleanupPackage(
+                    metapath, filepath, timeout=ctx.dbus_timeout)
         except dbus.DBusException, exception:
-            # Do nothing if postCleanupPackage method is not defined in package script
+            # Do nothing if postCleanupPackage method is not defined
+            # in package script
             if not is_method_missing(exception):
-                raise Error, _("Script error: %s") % exception
+                raise Error(_("Script error: %s") % exception)
 
     ctx.ui.debug(_("Unregistering comar scripts"))
     for scr in scripts:
         try:
             link.remove(scr, timeout=ctx.dbus_timeout)
         except dbus.DBusException, exception:
-            raise Error, _("Script error: %s") % exception
+            raise Error(_("Script error: %s") % exception)
