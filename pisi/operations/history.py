@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2008, TUBITAK/UEKAE
+# Copyright (C) 2008-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -28,7 +28,7 @@ def __pkg_already_installed(name, pkginfo):
     if not installdb.has_package(name):
         return False
 
-    ver, rel = str(pkginfo).split("-")
+    ver, rel = str(pkginfo).split("-")[:2]
     return (ver, rel) == installdb.get_version(name)[:-1]
 
 def __listactions(actions):
