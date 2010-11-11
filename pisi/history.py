@@ -28,7 +28,11 @@ class PackageInfo:
     a_release = [autoxml.String, autoxml.mandatory]
 
     def __str__(self):
-        return self.version + "-" + self.release
+        # FIXME: Do not get these from the config file
+        distro_id = ctx.config.values.general.distribution_id
+        arch = ctx.config.values.general.architecture
+
+        return "-".join((self.version, self.release, distro_id, arch))
 
 class Repo:
     a_operation = [autoxml.String, autoxml.mandatory]
