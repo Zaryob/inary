@@ -1,6 +1,6 @@
 # translation of fr.po to French
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Amine Chadly <amine.chadly@gmail.com>, 2007, 2008.
 # Philippe Svetoslavsky <philsvet@gmail.com>, 2009, 2010.
 msgid ""
@@ -10,10 +10,10 @@ msgstr ""
 "PO-Revision-Date: 2010-01-01 22:22+0100\n"
 "Last-Translator: Philippe Svetoslavsky <philsvet@gmail.com>\n"
 "Language-Team: French <pardus-translators@pardus.org.tr>\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 0.3\n"
@@ -289,18 +289,16 @@ msgid "Running %s failed."
 msgstr "L'exécution de %s a échoué."
 
 #: pisi/actionsapi/qt4.py:52
-#, fuzzy
 msgid "Project file '%s' not found."
-msgstr "Fichier '%s' introuvable."
+msgstr "Fichier projet '%s' introuvable."
 
 #: pisi/actionsapi/qt4.py:56
 msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)"
-msgstr ""
+msgstr "Il semblerait qu'il y ait plus d'un fichier .pro, vous devez en spécifier une. (Possible .pro files: %s)"
 
 #: pisi/actionsapi/rubymodules.py:108
-#, fuzzy
 msgid "Running 'ruby %s' failed."
-msgstr "L'exécution de %s a échoué."
+msgstr "Échec de l'exécution de 'ruby %s'."
 
 #: pisi/actionsapi/shelltools.py:49
 msgid "Cannot create directory %s"
@@ -315,9 +313,8 @@ msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
 msgstr "ActionsAPI [chmod]: aucun fichier ne correspond au critère \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:70
-#, fuzzy
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
-msgstr "ActionsAPI [chmod]: Operation non permise : %s (mode: %s)"
+msgstr "ActionsAPI [chmod] : Opération non permise : %s (mode: 0%o)"
 
 #: pisi/actionsapi/shelltools.py:73
 msgid "ActionsAPI [chmod]: File %s doesn't exists."
@@ -396,9 +393,8 @@ msgid "Command \"%s\" failed, return value was %d."
 msgstr "La commande \"%s\" a échoué, la valeur retournée était %d."
 
 #: pisi/actionsapi/texlivemodules.py:56
-#, fuzzy
 msgid "Moving source files failed"
-msgstr "Échec de la construction des fichiers 'format'"
+msgstr "Échec du déplacement des fichiers source"
 
 #: pisi/actionsapi/texlivemodules.py:59
 msgid "Generate config files failed"
@@ -454,7 +450,7 @@ msgstr "Création de /etc/texmf/%s.d"
 
 #: pisi/actionsapi/texlivemodules.py:155
 msgid "Moving (and symlinking) /usr/share/texmf/%s to /etc/texmf/%s.d"
-msgstr ""
+msgstr "Déplacement (et liaison symbolique) /usr/share/texmf/%s/ vers /etc/texmf/%s.d"
 
 #: pisi/actionsapi/texlivemodules.py:206
 msgid "Building format file %s"
@@ -574,7 +570,7 @@ msgstr "OK."
 
 #: pisi/archive.py:380
 msgid "Problem occured while uncompressing %s.Z file"
-msgstr ""
+msgstr "Un problème est survenu durant la décompression du fichiers %s.Z"
 
 #: pisi/atomicoperations.py:71 pisi/operations/history.py:72
 msgid "Package %s found in repository %s"
@@ -593,9 +589,8 @@ msgid "Package %s not found in any active repository."
 msgstr "Le paquet %s introuvable dans les dépôts actifs."
 
 #: pisi/atomicoperations.py:146
-#, fuzzy
 msgid "Installing %s, version %s, release %s"
-msgstr "Installation de %s, version majeure %s, version mineure %s, build %s"
+msgstr "Installation de %s, version %s, millésime %s"
 
 #: pisi/atomicoperations.py:192 pisi/operations/build.py:701
 msgid "%s-%s is not a valid PiSi version format"
@@ -860,7 +855,7 @@ msgstr "Création d'un paquet statique avec des fichier ar"
 
 #: pisi/cli/build.py:93 pisi/cli/delta.py:64
 msgid "Create the binary package using the given format. Use '-F help' to see a list of supported formats."
-msgstr ""
+msgstr "Créez le paquet binaire en utilisant le format donné. Utilisez '-F Help' pour voir la liste des formats pris en charge."
 
 #: pisi/cli/build.py:100
 msgid "Use quilt patch management system instead of GNU patch"
@@ -899,18 +894,16 @@ msgid "Break build after running install step"
 msgstr "Arrête le process de construction du paquet après l'exécution de l'install"
 
 #: pisi/cli/build.py:155
-#, fuzzy
 msgid "Create PiSi package"
 msgstr "Crée le paquet PiSi"
 
 #: pisi/cli/build.py:165 pisi/cli/delta.py:72
-#, fuzzy
 msgid "Supported package formats:"
-msgstr "Le paquet remplacé demeure"
+msgstr "Formats de paquets pris en charge :"
 
 #: pisi/cli/build.py:168 pisi/cli/delta.py:75
 msgid "  %s (default)"
-msgstr ""
+msgstr "%s (par défaut)"
 
 #: pisi/cli/build.py:176 pisi/cli/delta.py:92 pisi/cli/emerge.py:71
 msgid "Output directory: %s"
@@ -1750,13 +1743,13 @@ msgstr ""
 "\n"
 "Lists currently tracked repositories.\n"
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr "actif"
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
 msgstr "inactif"
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
+msgstr "actif"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
