@@ -1130,7 +1130,6 @@ msgid "Use arg as the new package and treat other arguments as old packages."
 msgstr ""
 
 #: pisi/cli/delta.py:60
-#, fuzzy
 msgid "Output directory for produced packages."
 msgstr "Répertoire accueillant les paquets produits"
 
@@ -2387,7 +2386,6 @@ msgid "pspec.xml avoids this package from building for '%s'"
 msgstr "pspec.xml évite la construction de ce paquet pour '%s'"
 
 #: pisi/operations/build.py:312
-#, fuzzy
 msgid "Building source package: %s"
 msgstr "Construction du paquet source PiSi : %s"
 
@@ -2542,28 +2540,24 @@ msgstr "Fichiers abandonnés sous le répertoire d'installation (%s) :"
 #: pisi/operations/build.py:1012
 #, fuzzy
 msgid "Ignoring empty package %s"
-msgstr "Suppression du paquet %s"
+msgstr "Ignorant% emballage vide s"
 
 #: pisi/operations/build.py:1016
-#, fuzzy
 msgid "Building package: %s"
-msgstr "** Compilation du paquet %s"
+msgstr "Construction du paquet : %s"
 
 #: pisi/operations/build.py:1035 pisi/operations/delta.py:50
 #: pisi/operations/delta.py:148
-#, fuzzy
 msgid "Creating %s..."
-msgstr "* Vérification de %s... "
+msgstr "Création de %s..."
 
 #: pisi/operations/build.py:1078
-#, fuzzy
 msgid "Cleaning build directory..."
-msgstr "Nettoyage du Répertoire de Compilation..."
+msgstr "Nettoyage du dossier de construction..."
 
 #: pisi/operations/build.py:1081
-#, fuzzy
 msgid "Keeping build directory"
-msgstr "Répertoire de Compilation conservé"
+msgstr "Dossier de construction conservé"
 
 #: pisi/operations/build.py:1134
 msgid "*** %d error(s), %d warning(s)"
@@ -2839,13 +2833,12 @@ msgid "Safety switch forces the upgrade of following packages:"
 msgstr "Le loquet de sécurité oblige à la mise à jour des paquets suivants :"
 
 #: pisi/package.py:67
-#, fuzzy
 msgid "Cannot open package file: %s"
-msgstr "Impossible de trouver le paquet source : %s"
+msgstr "Impossible d'ouvrir le fichier de paquet : %s"
 
 #: pisi/package.py:88
 msgid "Unsupported package format: %s"
-msgstr ""
+msgstr "Format de paquets non géré : %s"
 
 #: pisi/package.py:102
 msgid ""
@@ -2994,7 +2987,7 @@ msgstr "unpack : check_file_hash a échoué"
 
 #: pisi/sourcearchive.py:125
 msgid "Unknown archive type '%s' is given for '%s'."
-msgstr ""
+msgstr "Type d'archive inconnu '%s' est donné pour '%s'."
 
 #: pisi/specfile.py:164
 msgid "URI: %s, type: %s, sha1sum: %s"
@@ -3058,7 +3051,7 @@ msgstr "Impossible de calculer le hash SHA1 de %s"
 
 #: pisi/util.py:526
 msgid "Compression type is not valid: '%s'"
-msgstr ""
+msgstr "Type de compression invalide : '%s'"
 
 #: pisi/util.py:532
 #, fuzzy
