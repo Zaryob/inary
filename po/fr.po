@@ -1102,7 +1102,6 @@ msgstr ""
 "beaucoup de place sur le disque dur."
 
 #: pisi/cli/delta.py:24
-#, fuzzy
 msgid ""
 "Creates delta packages\n"
 "\n"
@@ -1113,13 +1112,14 @@ msgid ""
 "packages by comparing the sha1sum of files and creates\n"
 "a delta package with the changed files.\n"
 msgstr ""
-"Créer des paquets delta\n"
+"Crée des paquets delta\n"
 "\n"
-"Mode d'emploi : delta <vieux paquet> <nouveau paquet>\n"
+"Mode d'emploi : delta vieuxpaquet1 vieuxpaquet2 ... nouveaupaquet\n"
+"delta-t vieuxpaquet1 vieuxpaquet2 ... \n"
 "\n"
-"La commande delta trouve les fichiers qui ont ont été modifiés entre les deux versions des paquets donnés en comparant les sommes sha1sum des fichiers\n"
-"et créé un paquet pisi delta avec les fichiers modifiés entre les deux versions.\n"
-"\n"
+"La commande delta trouve les fichiers modifiés entre les paquets donnés\n"
+" en comparant les sha1sum des fichiers et crée\n"
+"le paquet delta avec les fichiers modifiés.\n"
 
 #: pisi/cli/delta.py:46
 msgid "delta options"
@@ -1127,7 +1127,7 @@ msgstr "Options de delta"
 
 #: pisi/cli/delta.py:54
 msgid "Use arg as the new package and treat other arguments as old packages."
-msgstr ""
+msgstr "Utiliser arg comme nouveau paquet et traiter les autres arguments comme les anciens paquets."
 
 #: pisi/cli/delta.py:60
 msgid "Output directory for produced packages."
@@ -1428,7 +1428,7 @@ msgstr "Fichier de sortie d'index."
 
 #: pisi/cli/index.py:63
 msgid "Comma-separated compression types for index file"
-msgstr ""
+msgstr "Types de compression séparés par des virgules pour le fichier d'index"
 
 #: pisi/cli/index.py:69
 msgid "Do not index PiSi spec files."
@@ -1660,9 +1660,8 @@ msgid "list-installed options"
 msgstr "Options de list-installed"
 
 #: pisi/cli/listinstalled.py:45
-#, fuzzy
 msgid "Only list the installed packages built by the given host"
-msgstr "Liste seulement les paquets installés n'ayant pas de numéro de build "
+msgstr "Lister seulement les paquets installés construit par l'hôte donné"
 
 #: pisi/cli/listinstalled.py:50
 msgid "List installed packages under given component"
@@ -1673,9 +1672,8 @@ msgid "Show detailed install info"
 msgstr "Afficher les informations détaillées de l'installation"
 
 #: pisi/cli/listinstalled.py:78 pisi/cli/listupgrades.py:73
-#, fuzzy
 msgid "Package Name          |St|        Version|  Rel.|  Distro|             Date"
-msgstr "Paquet Nom     |St|   Version|  Rel.| Build|  Distro|             Date"
+msgstr "Nom du paquet | St | Version | Rel |. Distro | Date"
 
 #: pisi/cli/listnewest.py:25
 msgid ""
@@ -2189,13 +2187,12 @@ msgid "installed-pending"
 msgstr "en attente d'installation"
 
 #: pisi/db/installdb.py:54
-#, fuzzy
 msgid ""
 "State: %s\n"
 "Version: %s, Release: %s\n"
 msgstr ""
 "État : %s\n"
-"Version : %s, Release : %s, Build : %s\n"
+"Version : %s, sortie : %s\n"
 
 #: pisi/db/installdb.py:58
 msgid "Distribution: %s, Install Time: %s\n"
@@ -2538,9 +2535,8 @@ msgid "There are abandoned files under the install dir (%s):"
 msgstr "Fichiers abandonnés sous le répertoire d'installation (%s) :"
 
 #: pisi/operations/build.py:1012
-#, fuzzy
 msgid "Ignoring empty package %s"
-msgstr "Ignorant% emballage vide s"
+msgstr "Ignorons le paquet vide %s"
 
 #: pisi/operations/build.py:1016
 msgid "Building package: %s"
@@ -2593,15 +2589,15 @@ msgstr ""
 
 #: pisi/operations/delta.py:98
 msgid "New package '%s' exists in the list of old packages. Skipping it..."
-msgstr ""
+msgstr "Le nouveau paquet '%s' existe dans la liste des anciens paquets. On le saute..."
 
 #: pisi/operations/delta.py:132
 msgid "The file '%s' belongs to a different package other than '%s'. Skipping it..."
-msgstr ""
+msgstr "Le fichier '%s' appartient à un autre paquet que '%s'. On le saute..."
 
 #: pisi/operations/delta.py:138
 msgid "Package '%s' has the same release number with the new package. Skipping it..."
-msgstr ""
+msgstr "Le paquet '%s' a le même numéro de sortie que le nouveau paquet. On le saute..."
 
 #: pisi/operations/emerge.py:35
 msgid "No packages to emerge."
@@ -3054,9 +3050,8 @@ msgid "Compression type is not valid: '%s'"
 msgstr "Type de compression invalide : '%s'"
 
 #: pisi/util.py:532
-#, fuzzy
 msgid "Error while decompressing %s: %s"
-msgstr "Erreur d'entrée/sortie ors de la lecture de %s : %s"
+msgstr "Erreur lors de la décompression de %s : %s"
 
 #: pisi/util.py:575
 msgid "ERROR: patch (%s) failed"
@@ -3083,14 +3078,12 @@ msgid "objcopy (add-debuglink) command failed for file '%s'!"
 msgstr "objcopy (add-debuglink) La commande a échoué pour le fichier '%s' !"
 
 #: pisi/util.py:698
-#, fuzzy
 msgid "Invalid package name: %s"
-msgstr "Paquets installés :"
+msgstr "Nom de paquet incorrect : %s"
 
 #: pisi/util.py:738
-#, fuzzy
 msgid "Invalid delta package name: %s"
-msgstr "Un dépôt a déjà le paquet %s."
+msgstr "Nom de paquet delta invalide : %s"
 
 #: pisi/version.py:64
 msgid "Invalid version string: '%s'"
