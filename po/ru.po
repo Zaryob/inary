@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR ORGANIZATION
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -14,7 +14,6 @@ msgstr ""
 "Content-Transfer-Encoding: ENCODING\n"
 "Generated-By: pygettext.py 1.5\n"
 
-
 #: /usr/lib/python2.7/optparse.py:140
 msgid "no such option: %s"
 msgstr ""
@@ -24,17 +23,16 @@ msgid "ambiguous option: %s (%s?)"
 msgstr ""
 
 #: /usr/lib/python2.7/optparse.py:374
-msgid ""
-"Usage: %s\n"
+msgid "Usage: %s\n"
 msgstr ""
 
 #: /usr/lib/python2.7/optparse.py:393
 msgid "Usage"
-msgstr ""
+msgstr "Использование"
 
 #: /usr/lib/python2.7/optparse.py:418
 msgid "integer"
-msgstr ""
+msgstr "integer"
 
 #: /usr/lib/python2.7/optparse.py:419
 msgid "long integer"
@@ -66,7 +64,7 @@ msgstr ""
 
 #: /usr/lib/python2.7/optparse.py:1273
 msgid "%prog [options]"
-msgstr ""
+msgstr "%prog [options]"
 
 #: /usr/lib/python2.7/optparse.py:1493 /usr/lib/python2.7/optparse.py:1532
 msgid "%s option requires an argument"
@@ -82,7 +80,7 @@ msgstr ""
 
 #: /usr/lib/python2.7/optparse.py:1621
 msgid "Options"
-msgstr ""
+msgstr "Опции"
 
 #: pisi-cli:43
 msgid "Keyboard Interrupt: Exiting..."
@@ -126,7 +124,7 @@ msgstr ""
 #: pisi/actionsapi/cmaketools.py:66 pisi/actionsapi/kde.py:65
 #: pisi/actionsapi/perlmodules.py:54 pisi/actionsapi/perlmodules.py:57
 msgid "Configure failed."
-msgstr ""
+msgstr "Настройка не удалось."
 
 #: pisi/actionsapi/autotools.py:79 pisi/actionsapi/autotools.py:89
 #: pisi/actionsapi/kde.py:67
@@ -146,7 +144,7 @@ msgstr ""
 #: pisi/actionsapi/rubymodules.py:92 pisi/actionsapi/rubymodules.py:99
 #: pisi/actionsapi/scons.py:43
 msgid "Install failed."
-msgstr ""
+msgstr "Не удалось установить."
 
 #: pisi/actionsapi/autotools.py:141
 msgid "Running aclocal failed."
@@ -590,8 +588,7 @@ msgid "%s package cannot be installed unless the dependencies are satisfied"
 msgstr ""
 
 #: pisi/atomicoperations.py:222
-msgid ""
-"/%s from %s package\n"
+msgid "/%s from %s package\n"
 msgstr ""
 
 #: pisi/atomicoperations.py:223
@@ -670,8 +667,7 @@ msgid " (yes/no)"
 msgstr ""
 
 #: pisi/cli/__init__.py:178
-msgid ""
-" [complete]\n"
+msgid " [complete]\n"
 msgstr ""
 
 #: pisi/cli/__init__.py:188
@@ -756,23 +752,19 @@ msgid "Blame for all of the releases"
 msgstr ""
 
 #: pisi/cli/blame.py:68 pisi/specfile.py:361 pisi/specfile.py:444
-msgid ""
-"Name: %s, version: %s, release: %s\n"
+msgid "Name: %s, version: %s, release: %s\n"
 msgstr ""
 
 #: pisi/cli/blame.py:70
-msgid ""
-"Package Maintainer: %s <%s>\n"
+msgid "Package Maintainer: %s <%s>\n"
 msgstr ""
 
 #: pisi/cli/blame.py:71
-msgid ""
-"Release Updater: %s <%s>\n"
+msgid "Release Updater: %s <%s>\n"
 msgstr ""
 
 #: pisi/cli/blame.py:72
-msgid ""
-"Update Date: %s\n"
+msgid "Update Date: %s\n"
 msgstr ""
 
 #: pisi/cli/build.py:25
@@ -986,8 +978,7 @@ msgid "Suppresses all coloring of PiSi's output"
 msgstr ""
 
 #: pisi/cli/command.py:130
-msgid ""
-"Destination directory %s does not exist. Creating directory.\n"
+msgid "Destination directory %s does not exist. Creating directory.\n"
 msgstr ""
 
 #: pisi/cli/command.py:152
@@ -1007,8 +998,7 @@ msgid "Do not perform any action, just show what would be done"
 msgstr ""
 
 #: pisi/cli/command.py:228
-msgid ""
-"usage: %s\n"
+msgid "usage: %s\n"
 msgstr ""
 
 #: pisi/cli/configurepending.py:23
@@ -1464,8 +1454,7 @@ msgid "Installed packages are shown in this color"
 msgstr ""
 
 #: pisi/cli/listavailable.py:67
-msgid ""
-"Repository : %s\n"
+msgid "Repository : %s\n"
 msgstr ""
 
 #: pisi/cli/listcomponents.py:24
@@ -1537,8 +1526,7 @@ msgid "List new packages added to repository after last nth previous repository 
 msgstr ""
 
 #: pisi/cli/listnewest.py:76
-msgid ""
-"Packages added to %s since %s:\n"
+msgid "Packages added to %s since %s:\n"
 msgstr ""
 
 #: pisi/cli/listnewest.py:78
@@ -1953,8 +1941,7 @@ msgid ""
 msgstr ""
 
 #: pisi/db/installdb.py:58
-msgid ""
-"Distribution: %s, Install Time: %s\n"
+msgid "Distribution: %s, Install Time: %s\n"
 msgstr ""
 
 #: pisi/db/installdb.py:90
@@ -2110,8 +2097,7 @@ msgid "Adding %s to source index"
 msgstr ""
 
 #: pisi/metadata.py:78
-msgid ""
-"Distribution: %s, Dist. Release: %s\n"
+msgid "Distribution: %s, Dist. Release: %s\n"
 msgstr ""
 
 #: pisi/metadata.py:80
@@ -2215,8 +2201,7 @@ msgid "Sandbox violation: %s (%s -> %s)"
 msgstr ""
 
 #: pisi/operations/build.py:646 pisi/util.py:549
-msgid ""
-"ERROR: WorkDir (%s) does not exist\n"
+msgid "ERROR: WorkDir (%s) does not exist\n"
 msgstr ""
 
 #: pisi/operations/build.py:655
@@ -2272,8 +2257,7 @@ msgid "Ignoring build dependencies."
 msgstr ""
 
 #: pisi/operations/build.py:761
-msgid ""
-"Patch file is missing: %s\n"
+msgid "Patch file is missing: %s\n"
 msgstr ""
 
 #: pisi/operations/build.py:777
@@ -2384,8 +2368,7 @@ msgid "Selected packages [%s] are in conflict with each other."
 msgstr ""
 
 #: pisi/operations/helper.py:57
-msgid ""
-"[%s conflicts with: %s]\n"
+msgid "[%s conflicts with: %s]\n"
 msgstr ""
 
 #: pisi/operations/helper.py:59
@@ -2411,13 +2394,11 @@ msgid "%s [cached]"
 msgstr ""
 
 #: pisi/operations/history.py:143
-msgid ""
-"Following packages will be installed:\n"
+msgid "Following packages will be installed:\n"
 msgstr ""
 
 #: pisi/operations/history.py:146
-msgid ""
-"Following packages will be removed:\n"
+msgid "Following packages will be removed:\n"
 msgstr ""
 
 #: pisi/operations/history.py:148 pisi/operations/history.py:162
@@ -2490,8 +2471,7 @@ msgid "%s dependency of package %s is not satisfied"
 msgstr ""
 
 #: pisi/operations/remove.py:43
-msgid ""
-"Safety switch prevents the removal of following packages:\n"
+msgid "Safety switch prevents the removal of following packages:\n"
 msgstr ""
 
 #: pisi/operations/remove.py:48 pisi/operations/upgrade.py:374
@@ -2744,18 +2724,15 @@ msgid " or "
 msgstr ""
 
 #: pisi/specfile.py:363 pisi/specfile.py:446
-msgid ""
-"Summary: %s\n"
+msgid "Summary: %s\n"
 msgstr ""
 
 #: pisi/specfile.py:364 pisi/specfile.py:447
-msgid ""
-"Description: %s\n"
+msgid "Description: %s\n"
 msgstr ""
 
 #: pisi/specfile.py:365 pisi/specfile.py:448
-msgid ""
-"Component: %s\n"
+msgid "Component: %s\n"
 msgstr ""
 
 #: pisi/specfile.py:366
@@ -2841,4 +2818,3 @@ msgstr ""
 #: pisi/version.py:64
 msgid "Invalid version string: '%s'"
 msgstr ""
-
