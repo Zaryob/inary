@@ -100,45 +100,49 @@ msgstr ""
 
 #: pisi-cli:58
 msgid "System error. Program terminated."
-msgstr ""
+msgstr "Системная ошибка. Программа закрыта."
 
 #: pisi-cli:67
 msgid "Please use 'pisi help' for general help."
-msgstr ""
+msgstr "Используйте 'pisi help' для получения справки."
 
 #: pisi-cli:70
 msgid ""
 "\n"
 "Traceback:"
 msgstr ""
+"\n"
+"Трассировка:"
 
 #: pisi-cli:73
 msgid "Use --debug to see a traceback."
-msgstr ""
+msgstr "Используйте --debug для просмотра трассировки"
 
 #: pisi/actionsapi/autotools.py:36 pisi/actionsapi/cmaketools.py:36
 msgid ""
 "Please attach the config.log to your bug report:\n"
 "%s/config.log"
 msgstr ""
+"Пожалуйста прикрепите config.log в  ваш отчет об ошибке:\n"
+"%s/config.log"
 
 #: pisi/actionsapi/autotools.py:77 pisi/actionsapi/autotools.py:87
 #: pisi/actionsapi/cmaketools.py:66 pisi/actionsapi/kde.py:65
 #: pisi/actionsapi/perlmodules.py:54 pisi/actionsapi/perlmodules.py:57
 msgid "Configure failed."
-msgstr "Настройка не удалось."
+msgstr "Ошибка конфигурирования."
 
 #: pisi/actionsapi/autotools.py:79 pisi/actionsapi/autotools.py:89
 #: pisi/actionsapi/kde.py:67
 msgid "No configure script found."
-msgstr ""
+msgstr "Файл конфигурации не найден."
 
 #: pisi/actionsapi/autotools.py:97 pisi/actionsapi/cmaketools.py:78
 #: pisi/actionsapi/kde.py:72 pisi/actionsapi/perlmodules.py:63
 #: pisi/actionsapi/perlmodules.py:72 pisi/actionsapi/pythonmodules.py:62
 #: pisi/actionsapi/scons.py:39
 msgid "Make failed."
-msgstr ""
+msgstr "Ошибка сборки."
 
 #: pisi/actionsapi/autotools.py:126 pisi/actionsapi/autotools.py:134
 #: pisi/actionsapi/cmaketools.py:98 pisi/actionsapi/cmaketools.py:106
@@ -146,43 +150,43 @@ msgstr ""
 #: pisi/actionsapi/rubymodules.py:92 pisi/actionsapi/rubymodules.py:99
 #: pisi/actionsapi/scons.py:43
 msgid "Install failed."
-msgstr "Не удалось установить."
+msgstr "Ошибка установки."
 
 #: pisi/actionsapi/autotools.py:141
 msgid "Running aclocal failed."
-msgstr ""
+msgstr "Запуск aclocal не удался."
 
 #: pisi/actionsapi/autotools.py:146
 msgid "Running autoconf failed."
-msgstr ""
+msgstr "Запуск Autoconf не удался."
 
 #: pisi/actionsapi/autotools.py:151
 msgid "Running autoreconf failed."
-msgstr ""
+msgstr "Запуск autoreconf не удался."
 
 #: pisi/actionsapi/autotools.py:156
 msgid "Running automake failed."
-msgstr ""
+msgstr "Запуск Automake не удался."
 
 #: pisi/actionsapi/autotools.py:161
 msgid "Running autoheader failed."
-msgstr ""
+msgstr "Запуск autoheader не удался."
 
 #: pisi/actionsapi/cmaketools.py:68
 msgid "No configure script found for cmake."
-msgstr ""
+msgstr "Не найден скрипт конфигурации для cmake. "
 
 #: pisi/actionsapi/cmaketools.py:110 pisi/actionsapi/kde.py:81
 msgid "No Makefile found."
-msgstr ""
+msgstr "Makefile не найден."
 
 #: pisi/actionsapi/get.py:174
 msgid "Util %s cannot be found"
-msgstr ""
+msgstr "Утилита %s не найдена"
 
 #: pisi/actionsapi/get.py:176
 msgid "Warning: %s does not exist, using plain name %s"
-msgstr ""
+msgstr "Предупреждение: %s не существует, используя %s"
 
 #: pisi/actionsapi/kde.py:34
 msgid ""
@@ -190,10 +194,13 @@ msgid ""
 "!!! Please attach the config.log to your bug report:\n"
 "%s/config.log"
 msgstr ""
+"\n"
+"!!! Пожалуйста прикрепите config.log в ваш ответ об ошибке:\n"
+"%s/config.log"
 
 #: pisi/actionsapi/kerneltools.py:120
 msgid "Can't find kernel version information file %s."
-msgstr ""
+msgstr "Не найден файл информации о ядре %s."
 
 #: pisi/actionsapi/libtools.py:38
 msgid "Running ldconfig failed."
