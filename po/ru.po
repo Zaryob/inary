@@ -20,11 +20,11 @@ msgstr "опция не найдена:% S"
 
 #: /usr/lib/python2.7/optparse.py:151
 msgid "ambiguous option: %s (%s?)"
-msgstr ""
+msgstr "неоднозначная опция: %s (%s?)"
 
 #: /usr/lib/python2.7/optparse.py:374
 msgid "Usage: %s\n"
-msgstr ""
+msgstr "Использование: %s\n"
 
 #: /usr/lib/python2.7/optparse.py:393
 msgid "Usage"
@@ -44,23 +44,23 @@ msgstr "floating-point"
 
 #: /usr/lib/python2.7/optparse.py:421
 msgid "complex"
-msgstr ""
+msgstr "complex"
 
 #: /usr/lib/python2.7/optparse.py:429
 msgid "option %s: invalid %s value: %r"
-msgstr ""
+msgstr "опция %s: некорректное %s значение: %r"
 
 #: /usr/lib/python2.7/optparse.py:437
 msgid "option %s: invalid choice: %r (choose from %s)"
-msgstr ""
+msgstr "опция %s: неверный выбор: %r (выбирайте из %s)"
 
 #: /usr/lib/python2.7/optparse.py:1245
 msgid "show this help message and exit"
-msgstr ""
+msgstr "показать справку и выйти"
 
 #: /usr/lib/python2.7/optparse.py:1250
 msgid "show program's version number and exit"
-msgstr ""
+msgstr "Показать версию программы и выйти"
 
 #: /usr/lib/python2.7/optparse.py:1273
 msgid "%prog [options]"
@@ -68,15 +68,15 @@ msgstr "%prog [options]"
 
 #: /usr/lib/python2.7/optparse.py:1493 /usr/lib/python2.7/optparse.py:1532
 msgid "%s option requires an argument"
-msgstr ""
+msgstr "%s опция требует аргумент"
 
 #: /usr/lib/python2.7/optparse.py:1495 /usr/lib/python2.7/optparse.py:1534
 msgid "%s option requires %d arguments"
-msgstr ""
+msgstr "%s опция требует %d аргумент"
 
 #: /usr/lib/python2.7/optparse.py:1504
 msgid "%s option does not take a value"
-msgstr ""
+msgstr "%s опция не требует аргумент"
 
 #: /usr/lib/python2.7/optparse.py:1621
 msgid "Options"
@@ -84,17 +84,19 @@ msgstr "Опции"
 
 #: pisi-cli:43
 msgid "Keyboard Interrupt: Exiting..."
-msgstr ""
+msgstr "Прерывание от клавиатуры: Выход ..."
 
 #: pisi-cli:46
 msgid "Program terminated."
-msgstr ""
+msgstr "Программа закрыта."
 
 #: pisi-cli:49
 msgid ""
 "Unhandled internal exception.\n"
 "Please file a bug report to <http://bugs.pardus.org.tr>."
 msgstr ""
+"Необработанное внутреннее исключение. \n"
+"Пожалуйста отправьте отчет об ошибке в <http://bugs.pardus.org.tr> ."
 
 #: pisi-cli:58
 msgid "System error. Program terminated."
