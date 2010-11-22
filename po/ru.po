@@ -16,7 +16,7 @@ msgstr ""
 
 #: /usr/lib/python2.7/optparse.py:140
 msgid "no such option: %s"
-msgstr ""
+msgstr "опция не найдена:% S"
 
 #: /usr/lib/python2.7/optparse.py:151
 msgid "ambiguous option: %s (%s?)"
@@ -36,11 +36,11 @@ msgstr "integer"
 
 #: /usr/lib/python2.7/optparse.py:419
 msgid "long integer"
-msgstr ""
+msgstr "long integer"
 
 #: /usr/lib/python2.7/optparse.py:420
 msgid "floating-point"
-msgstr ""
+msgstr "floating-point"
 
 #: /usr/lib/python2.7/optparse.py:421
 msgid "complex"
@@ -2592,7 +2592,7 @@ msgstr ""
 
 #: pisi/pxml/autoxml.py:372
 msgid "autoxml.check: '%s' errors"
-msgstr ""
+msgstr "autoxml.check: '%s' errors"
 
 #: pisi/pxml/autoxml.py:427 pisi/pxml/autoxml.py:437
 msgid "autoxml.parse: String '%s' has errors"
@@ -2721,7 +2721,7 @@ msgstr ""
 
 #: pisi/specfile.py:194 pisi/specfile.py:197
 msgid " or "
-msgstr ""
+msgstr "или"
 
 #: pisi/specfile.py:363 pisi/specfile.py:446
 msgid "Summary: %s\n"
@@ -2741,7 +2741,7 @@ msgstr ""
 
 #: pisi/specfile.py:370
 msgid "Dependencies: "
-msgstr ""
+msgstr "Зависимости:"
 
 #: pisi/specfile.py:422
 msgid "translations.xml file is badly formed."
@@ -2749,7 +2749,7 @@ msgstr ""
 
 #: pisi/specfile.py:449
 msgid "Build Dependencies: "
-msgstr ""
+msgstr "Зависимостей на стадии сборки:"
 
 #: pisi/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
@@ -2757,7 +2757,7 @@ msgstr ""
 
 #: pisi/util.py:208 pisi/util.py:229
 msgid "Running "
-msgstr ""
+msgstr "Запуск"
 
 #: pisi/util.py:212 pisi/util.py:247
 msgid "return value for \"%s\" is %s"
