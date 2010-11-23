@@ -1709,9 +1709,8 @@ msgid "list-installed options"
 msgstr "opciones de list-installed"
 
 #: pisi/cli/listinstalled.py:45
-#, fuzzy
 msgid "Only list the installed packages built by the given host"
-msgstr "Solamente listar paquetes instalados, sin numero de build"
+msgstr "Solamente listar paquetes creados en el host indicado"
 
 #: pisi/cli/listinstalled.py:50
 msgid "List installed packages under given component"
@@ -1724,9 +1723,8 @@ msgstr "Mostrar detalles de instalación"
 # I suppose here the position is important too ! Should be the same ok as in
 # english
 #: pisi/cli/listinstalled.py:78 pisi/cli/listupgrades.py:73
-#, fuzzy
 msgid "Package Name          |St|        Version|  Rel.|  Distro|             Date"
-msgstr "Nombre Paquete   |St|   Versión|  Rel.| Build|  Distro|            Fecha"
+msgstr "Nombre de Paquete     |St|        Versión|  Rel.|  Distro|            Fecha"
 
 #: pisi/cli/listnewest.py:25
 msgid ""
@@ -2252,13 +2250,12 @@ msgid "installed-pending"
 msgstr "installed-pending"
 
 #: pisi/db/installdb.py:54
-#, fuzzy
 msgid ""
 "State: %s\n"
 "Version: %s, Release: %s\n"
 msgstr ""
 "Estado: %s\n"
-"Versión: %s, Release: %s, Build: %s\n"
+"Versión: %s, Release: %s\n"
 
 #: pisi/db/installdb.py:58
 msgid "Distribution: %s, Install Time: %s\n"
@@ -2455,9 +2452,8 @@ msgid "pspec.xml avoids this package from building for '%s'"
 msgstr "pspec.xml impide build del paquete actual para '%s'"
 
 #: pisi/operations/build.py:312
-#, fuzzy
 msgid "Building source package: %s"
-msgstr "Generando paquete fuente PiSi: %s"
+msgstr "Generando paquete fuente: %s"
 
 #: pisi/operations/build.py:357
 msgid "IceCream detected. Make sure your daemon is up and running..."
@@ -2617,30 +2613,25 @@ msgid "There are abandoned files under the install dir (%s):"
 msgstr "Existen archivos abandonados en la carpeta de instalación (%s):"
 
 #: pisi/operations/build.py:1012
-#, fuzzy
 msgid "Ignoring empty package %s"
-msgstr "Eliminando paquete %s"
+msgstr "Omitiendo paquete vacío %s"
 
 #: pisi/operations/build.py:1016
-#, fuzzy
 msgid "Building package: %s"
-msgstr "** Construyendo (build) paquete %s"
+msgstr "Construyendo paquete: %s"
 
 #: pisi/operations/build.py:1035 pisi/operations/delta.py:50
 #: pisi/operations/delta.py:148
-#, fuzzy
 msgid "Creating %s..."
-msgstr "* Verificando %s... "
+msgstr "Creando %s..."
 
 #: pisi/operations/build.py:1078
-#, fuzzy
 msgid "Cleaning build directory..."
-msgstr "Limpiando Carpeta Build..."
+msgstr "Limpiando carpeta build..."
 
 #: pisi/operations/build.py:1081
-#, fuzzy
 msgid "Keeping build directory"
-msgstr "Conservando Carpeta Build"
+msgstr "Conservando carpeta build"
 
 #: pisi/operations/build.py:1134
 msgid "*** %d error(s), %d warning(s)"
@@ -2676,15 +2667,15 @@ msgstr ""
 
 #: pisi/operations/delta.py:98
 msgid "New package '%s' exists in the list of old packages. Skipping it..."
-msgstr ""
+msgstr "Paquete nuevo '%s' existe en la lista de paquetes antiguos. Omitiendo..."
 
 #: pisi/operations/delta.py:132
 msgid "The file '%s' belongs to a different package other than '%s'. Skipping it..."
-msgstr ""
+msgstr "Archivo '%s' pertenece a un paquete diferente a '%s'. Omitiendo..."
 
 #: pisi/operations/delta.py:138
 msgid "Package '%s' has the same release number with the new package. Skipping it..."
-msgstr ""
+msgstr "Paquete '%s' tiene numero de release identico como el nuevo paquete. Omitiendo..."
 
 #: pisi/operations/emerge.py:35
 msgid "No packages to emerge."
@@ -2922,13 +2913,12 @@ msgid "Safety switch forces the upgrade of following packages:"
 msgstr "Verificación de seguridad obliga la actualización de los siguientes paquetes: "
 
 #: pisi/package.py:67
-#, fuzzy
 msgid "Cannot open package file: %s"
-msgstr "No se ha encontrado paquete fuente: %s"
+msgstr "No posible abrir archivo de paquete: %s"
 
 #: pisi/package.py:88
 msgid "Unsupported package format: %s"
-msgstr ""
+msgstr "Formato de paquete no soportado: %s"
 
 # do you mean: maybe the file on the server is newer than the one in the pisi
 # list ?
@@ -3082,7 +3072,7 @@ msgstr "unpack: check_file_hash falló"
 
 #: pisi/sourcearchive.py:125
 msgid "Unknown archive type '%s' is given for '%s'."
-msgstr ""
+msgstr "Tipo de archivo '%s' desconocido para el archivo '%s'."
 
 #: pisi/specfile.py:164
 msgid "URI: %s, type: %s, sha1sum: %s"
