@@ -1,7 +1,7 @@
 # translation of es.po to spanish
 # translation of es.po to
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Klemens Häckel <click3d_at_linuxmail_org>, 2007, 2008.
 # Christian Faure <christian.faurebouvard@laposte.net>, 2007.
 # klemens <click3d at linuxmail org>, 2007.
@@ -18,10 +18,10 @@ msgstr ""
 "PO-Revision-Date: 2010-03-28 20:37-0400\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <kde-i18n-doc@kde.org>\n"
-"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 1.0\n"
@@ -300,18 +300,16 @@ msgid "Running %s failed."
 msgstr "Ejecución de %s falló."
 
 #: pisi/actionsapi/qt4.py:52
-#, fuzzy
 msgid "Project file '%s' not found."
-msgstr "Archivo '%s' no encontrado"
+msgstr "Archivo de proyecto '%s' no encontrado"
 
 #: pisi/actionsapi/qt4.py:56
 msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)"
-msgstr ""
+msgstr "Se encontraron más de un archivo con extensión .pro, por favor indique uno. (Archivos .pro posibles: %s)"
 
 #: pisi/actionsapi/rubymodules.py:108
-#, fuzzy
 msgid "Running 'ruby %s' failed."
-msgstr "Ejecución de %s falló."
+msgstr "Ejecución de 'ruby %s' falló."
 
 #: pisi/actionsapi/shelltools.py:49
 msgid "Cannot create directory %s"
@@ -326,9 +324,8 @@ msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
 msgstr "ActionsAPI [chmod]: No hay archivos que coinciden con el patrón \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:70
-#, fuzzy
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
-msgstr "ActionsAPI [chmod]: Operación no permitida: %s (mode: %s)"
+msgstr "ActionsAPI [chmod]: Operación no permitida %s (mode: 0%o)"
 
 #: pisi/actionsapi/shelltools.py:73
 msgid "ActionsAPI [chmod]: File %s doesn't exists."
@@ -407,9 +404,8 @@ msgid "Command \"%s\" failed, return value was %d."
 msgstr "Comando \"%s\" fallado, valor de retorno: %d."
 
 #: pisi/actionsapi/texlivemodules.py:56
-#, fuzzy
 msgid "Moving source files failed"
-msgstr "Falló construcción de archivos de formato"
+msgstr "Falló mover archivos fuentes"
 
 #: pisi/actionsapi/texlivemodules.py:59
 msgid "Generate config files failed"
@@ -468,7 +464,7 @@ msgstr "Creando /etc/texmf/%s.d"
 
 #: pisi/actionsapi/texlivemodules.py:155
 msgid "Moving (and symlinking) /usr/share/texmf/%s to /etc/texmf/%s.d"
-msgstr ""
+msgstr "Moviendo (y enlazando) /usr/share/texmf/%s a /etc/texmf/%s.d"
 
 #: pisi/actionsapi/texlivemodules.py:206
 msgid "Building format file %s"
@@ -591,7 +587,7 @@ msgstr "OK."
 
 #: pisi/archive.py:380
 msgid "Problem occured while uncompressing %s.Z file"
-msgstr ""
+msgstr "Ocurrió un problama al descomprimir archivo %s.Z"
 
 #: pisi/atomicoperations.py:71 pisi/operations/history.py:72
 msgid "Package %s found in repository %s"
@@ -611,9 +607,8 @@ msgid "Package %s not found in any active repository."
 msgstr "Paquete %s no encontrado en ningún repositorio activo."
 
 #: pisi/atomicoperations.py:146
-#, fuzzy
 msgid "Installing %s, version %s, release %s"
-msgstr "Instalando %s, versión %s, release %s, build %s"
+msgstr "Instalando %s, versión %s, release %s"
 
 #: pisi/atomicoperations.py:192 pisi/operations/build.py:701
 msgid "%s-%s is not a valid PiSi version format"
@@ -885,7 +880,7 @@ msgstr "Crear un paquete estático con archivos ar"
 
 #: pisi/cli/build.py:93 pisi/cli/delta.py:64
 msgid "Create the binary package using the given format. Use '-F help' to see a list of supported formats."
-msgstr ""
+msgstr "Crear paquete binario usando el formato determinado. Use '-F help' para ver una lista de formatos soportados."
 
 #: pisi/cli/build.py:100
 msgid "Use quilt patch management system instead of GNU patch"
@@ -925,18 +920,16 @@ msgid "Break build after running install step"
 msgstr "Interrumpir build luego de ejecutar install"
 
 #: pisi/cli/build.py:155
-#, fuzzy
 msgid "Create PiSi package"
-msgstr "crear paquete PiSi"
+msgstr "Crear paquete PiSi"
 
 #: pisi/cli/build.py:165 pisi/cli/delta.py:72
-#, fuzzy
 msgid "Supported package formats:"
-msgstr "Queda conservado el paquete reemplazado"
+msgstr "Formatos de paquetes soportados:"
 
 #: pisi/cli/build.py:168 pisi/cli/delta.py:75
 msgid "  %s (default)"
-msgstr ""
+msgstr "  %s (predeterminado)"
 
 #: pisi/cli/build.py:176 pisi/cli/delta.py:92 pisi/cli/emerge.py:71
 msgid "Output directory: %s"
@@ -1144,7 +1137,6 @@ msgstr ""
 "espacio consumido en disco puede aumentar considerablemente."
 
 #: pisi/cli/delta.py:24
-#, fuzzy
 msgid ""
 "Creates delta packages\n"
 "\n"
@@ -1155,13 +1147,14 @@ msgid ""
 "packages by comparing the sha1sum of files and creates\n"
 "a delta package with the changed files.\n"
 msgstr ""
-"Crea paquetes PiSi delta\n"
+"Crea paquetes delta\n"
 "\n"
-"Uso: delta oldpackage newpackage\n"
+"Uso: delta oldpackage1 oldpackage2 ...  newpackage\n"
+"        delta -t newpackage oldpackage1 oldpackage2 ...\n"
 "\n"
-"El comando Delta encuentra los archivos modificados entre los paquetes indicados, comparando los archivos sha1sum correspondientes\n"
-"y crea un paquete pisi delta que contendrá estos archivos modificados entre las dos versiones.\n"
-"\n"
+"El comando delta encuentra los archivos modificados  entre \n"
+"los paquetes indicados a través una comparación de la sha1sum de los archivos\n"
+"y crea un paquete delta con los archivos modificados.\n"
 
 #: pisi/cli/delta.py:46
 msgid "delta options"
@@ -1169,12 +1162,11 @@ msgstr "opciones de delta"
 
 #: pisi/cli/delta.py:54
 msgid "Use arg as the new package and treat other arguments as old packages."
-msgstr ""
+msgstr "Use arg como paquete nuevo y trate otros argumentos como paquetes antiguos."
 
 #: pisi/cli/delta.py:60
-#, fuzzy
 msgid "Output directory for produced packages."
-msgstr "Carpeta de salida para paquetes producidos"
+msgstr "Carpeta de salida para paquetes creados."
 
 #: pisi/cli/disablerepo.py:21
 msgid ""
@@ -1479,7 +1471,7 @@ msgstr "Archivo index de salida"
 
 #: pisi/cli/index.py:63
 msgid "Comma-separated compression types for index file"
-msgstr ""
+msgstr "Tipos de compresión separado por coma para archivo index"
 
 #: pisi/cli/index.py:69
 msgid "Do not index PiSi spec files."
@@ -1803,13 +1795,13 @@ msgstr ""
 "\n"
 "Lista los repositorios configurados actualmente.\n"
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr "activo"
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
 msgstr "deshabilitado"
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
+msgstr "activo"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
@@ -3291,11 +3283,9 @@ msgstr "Cadena de versión inválida: '%s'"
 #~ msgid "Cannot create delta for same package!"
 #~ msgstr "No posible crear delta para el mismo paquete!"
 
-# revisa este por favor
 #~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
 #~ msgstr "Todos los archivos de la carpeta de instalación (%s) se juntaron en los paquetes"
 
-# podria ser tambien "Fin" o "Listo"
 #~ msgid "Done."
 #~ msgstr "Hecho."
 
@@ -3353,10 +3343,8 @@ msgstr "Cadena de versión inválida: '%s'"
 #~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
 #~ msgstr "\\idiomas{%s}{%s}{}{%s}{%s} agregados a %s/language.%s.def "
 
-# favor revisar, eventualmente debe describir mas explicito
 #~ msgid "%s is added to %s/language.%s.dat"
 #~ msgstr "%s agregado a %s/language.%s.dat"
 
-# which part of "language" must remain the same, which part can i translate ??
 #~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
 #~ msgstr "\\idiomas{%s}{%s}{}{%s}{%s} agregados a %s/language.%s.def"
