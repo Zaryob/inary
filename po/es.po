@@ -3137,11 +3137,11 @@ msgstr "No posible calcular hash SHA1 de %s"
 
 #: pisi/util.py:526
 msgid "Compression type is not valid: '%s'"
-msgstr ""
+msgstr "Tipo de compresión no válido: '%s'"
 
 #: pisi/util.py:532
 msgid "Error while decompressing %s: %s"
-msgstr ""
+msgstr "Error al decomprimir %s: %s"
 
 #: pisi/util.py:575
 msgid "ERROR: patch (%s) failed"
@@ -3168,14 +3168,12 @@ msgid "objcopy (add-debuglink) command failed for file '%s'!"
 msgstr "comando objcopy (add-debuglink) falló para archivo '%s'!"
 
 #: pisi/util.py:698
-#, fuzzy
 msgid "Invalid package name: %s"
-msgstr "Paquete instalado:"
+msgstr "Nombre de paquete no válido: %s"
 
 #: pisi/util.py:738
-#, fuzzy
 msgid "Invalid delta package name: %s"
-msgstr "Repo ya contiene paquete con nombre %s."
+msgstr "Nombre de paquete delta no válido: %s"
 
 #: pisi/version.py:64
 msgid "Invalid version string: '%s'"
