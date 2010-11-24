@@ -46,9 +46,6 @@ class Index(xmlfile.XmlFile):
     t_Components = [ [component.Component], autoxml.optional, "Component"]
     t_Groups = [ [group.Group], autoxml.optional, "Group"]
 
-    def name(self):
-        return self.distribution.name + self.distribution.repositoryname
-
     def read_uri(self, uri, tmpdir, force = False):
         return self.read(uri, tmpDir=tmpdir, sha1sum=not force,
                          compress=pisi.file.File.COMPRESSION_TYPE_AUTO,
