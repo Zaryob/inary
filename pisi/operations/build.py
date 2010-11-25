@@ -316,7 +316,7 @@ class Builder:
 
         # check if all patch files exists, if there are missing no need
         # to unpack!
-        self.patch_exists()
+        self.check_patches()
 
         self.check_build_dependencies()
         self.fetch_component()
@@ -749,8 +749,8 @@ class Builder:
             else:
                 ctx.ui.warning(_('Ignoring build dependencies.'))
 
-    def patch_exists(self):
-        """check existence of patch files declared in PSPEC"""
+    def check_patches(self):
+        """check existence of patch files and their sizes."""
 
         files_dir = os.path.abspath(util.join_path(self.specdir,
                                                  ctx.const.files_dir))
@@ -758,6 +758,8 @@ class Builder:
             patchFile = util.join_path(files_dir, patch.filename)
             if not os.access(patchFile, os.F_OK):
                 raise Error(_("Patch file is missing: %s\n") % patch.filename)
+            if os.stat(patchFile).st_size == 0:
+                ctx.ui.warning(_('Patch file is empty: %s') % patch.filename)
 
     def apply_patches(self):
         files_dir = os.path.abspath(util.join_path(self.specdir,
@@ -1141,7 +1143,7 @@ order = {"none": 0,
 
 def __buildState_fetch(pb):
     # fetch is the first state to run.
-    pb.patch_exists()
+    pb.check_patches()
     pb.fetch_source_archives()
 
 def __buildState_unpack(pb, last):
