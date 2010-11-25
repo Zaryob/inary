@@ -1,6 +1,6 @@
 # translation of it.po to Italian
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Andrea Decorte <adecorte@gmail.com>, 2007.
 # Davide Siciliano <edivad95@gmail.com>, 2010.
 msgid ""
@@ -10,10 +10,10 @@ msgstr ""
 "PO-Revision-Date: 2010-07-01 16:01+0200\n"
 "Last-Translator: Davide Siciliano <edivad95@gmail.com>\n"
 "Language-Team: Italian <pardus-translators@pardus.org.tr>\n"
-"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 1.0\n"
@@ -289,18 +289,16 @@ msgid "Running %s failed."
 msgstr "Esecuzione di %s fallita."
 
 #: pisi/actionsapi/qt4.py:52
-#, fuzzy
 msgid "Project file '%s' not found."
-msgstr "File '%s' non trovato."
+msgstr "File di progetto '%s' non trovato."
 
 #: pisi/actionsapi/qt4.py:56
 msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)"
 msgstr ""
 
 #: pisi/actionsapi/rubymodules.py:108
-#, fuzzy
 msgid "Running 'ruby %s' failed."
-msgstr "Esecuzione di %s fallita."
+msgstr "Esecuzione 'ruby %s' fallita."
 
 #: pisi/actionsapi/shelltools.py:49
 msgid "Cannot create directory %s"
@@ -315,7 +313,6 @@ msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
 msgstr "ActionsAPI [chmod]: nessun file con il pattern \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:70
-#, fuzzy
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
 msgstr "ActionsAPI [chmod]: Operazione non permessa: %s (modalità: %s)"
 
@@ -457,14 +454,12 @@ msgid "Moving (and symlinking) /usr/share/texmf/%s to /etc/texmf/%s.d"
 msgstr ""
 
 #: pisi/actionsapi/texlivemodules.py:206
-#, fuzzy
 msgid "Building format file %s"
-msgstr "** Compilazione del pacchetto %s"
+msgstr "costruzione del formato file %s"
 
 #: pisi/actionsapi/texlivemodules.py:263
-#, fuzzy
 msgid "Map %s is added to %s/%s.cfg"
-msgstr "Il repository %s è stato aggiunto al sistema."
+msgstr "La mappa %s è stato aggiunto a %s/%s.cfg"
 
 #: pisi/actionsapi/texlivemodules.py:266
 msgid "MixedMap %s is added to %s/%s.cfg"
@@ -524,7 +519,7 @@ msgstr "* File di indice scritto"
 
 #: pisi/api.py:782
 msgid "Not a valid repo name."
-msgstr ""
+msgstr "Nome non valide del repositorio"
 
 #: pisi/api.py:785
 msgid "Repo %s already present."
@@ -547,13 +542,12 @@ msgid "Repository %s does not exist. Cannot remove."
 msgstr "Il repository %s non esiste. Impossibile rimuovere."
 
 #: pisi/api.py:823
-#, fuzzy
 msgid "Updating repository: %s"
-msgstr "* Aggiornamento del repository: %s"
+msgstr "Aggiornamento in corso del repositorio: %s"
 
 #: pisi/api.py:832
 msgid "%s repository information is up-to-date."
-msgstr ""
+msgstr "informazione del repositorio %s è aggiornato"
 
 #: pisi/api.py:834
 msgid "Updating database at any rate as requested"
@@ -1760,12 +1754,12 @@ msgstr ""
 "\n"
 "Elenca i repository tenuti al momento sotto controllo.\n"
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr ""
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
+msgstr ""
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
 msgstr ""
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
@@ -3650,7 +3644,6 @@ msgstr ""
 #~ msgid "Cannot calculate SHA1 hash of given data"
 #~ msgstr "Impossibile calcolare l'hash SHA1 dei dati forniti"
 
-#, fuzzy
 #~ msgid "Repository distribution does not match. Removing %s from system."
 #~ msgstr "Il repository %s non può essere raggiunto. Rimozione di %s dal sistema in corso."
 
