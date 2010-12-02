@@ -567,7 +567,7 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
         (ret, out, err) = run_batch('quilt push')
     else:
         # run GNU patch to apply original patch into tree
-        (ret, out, err) = run_batch("patch --remove-empty-files --no-backup-if-mismatch %s -p%d < \"%s\"" % (("-R" if reverse else ""), level, patchFile))
+        (ret, out, err) = run_batch("patch --remove-empty-files --no-backup-if-mismatch %s -p%d -i \"%s\"" % (("-R" if reverse else ""), level, patchFile))
 
     if ret:
         if out is None and err is None:
