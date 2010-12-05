@@ -286,7 +286,7 @@ msgstr "Запуск %s не удался."
 
 #: pisi/actionsapi/qt4.py:52
 msgid "Project file '%s' not found."
-msgstr ""
+msgstr "Файл проекта '%s' не найден."
 
 #: pisi/actionsapi/qt4.py:56
 msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)"
@@ -294,11 +294,11 @@ msgstr ""
 
 #: pisi/actionsapi/rubymodules.py:108
 msgid "Running 'ruby %s' failed."
-msgstr ""
+msgstr "Ошибка запуска 'ruby %s'."
 
 #: pisi/actionsapi/shelltools.py:49
 msgid "Cannot create directory %s"
-msgstr ""
+msgstr "Невозможно создать директорию %s"
 
 #: pisi/actionsapi/shelltools.py:57
 msgid "ActionsAPI [echo]: Can't append to file %s."
@@ -390,7 +390,7 @@ msgstr ""
 
 #: pisi/actionsapi/texlivemodules.py:56
 msgid "Moving source files failed"
-msgstr ""
+msgstr "Перемещение файлов исходного кода закончилось ошибкой."
 
 #: pisi/actionsapi/texlivemodules.py:59
 msgid "Generate config files failed"
@@ -406,7 +406,7 @@ msgstr ""
 
 #: pisi/actionsapi/texlivemodules.py:73
 msgid "Installing docs failed"
-msgstr ""
+msgstr "Установка документации не удалась."
 
 #: pisi/actionsapi/texlivemodules.py:77
 msgid "Installing texmf files failed"
@@ -502,7 +502,7 @@ msgstr ""
 
 #: pisi/api.py:730
 msgid "File %s not found"
-msgstr ""
+msgstr "Файл %s не найден"
 
 #: pisi/api.py:772
 msgid "* Building index of PiSi files under %s"
@@ -510,11 +510,11 @@ msgstr ""
 
 #: pisi/api.py:777
 msgid "* Index file written"
-msgstr ""
+msgstr "* Файл индекса записан"
 
 #: pisi/api.py:782
 msgid "Not a valid repo name."
-msgstr ""
+msgstr "Неверное имя репозитория"
 
 #: pisi/api.py:785
 msgid "Repo %s already present."
@@ -550,19 +550,19 @@ msgstr ""
 
 #: pisi/api.py:847
 msgid "* Package database updated."
-msgstr ""
+msgstr "* База данных пакетов обновлена."
 
 #: pisi/api.py:849
 msgid "No repository named %s found."
-msgstr ""
+msgstr "Не найден репозиторий с именем %s ."
 
 #: pisi/api.py:862
 msgid "* Adding '%s' to db... "
-msgstr ""
+msgstr "* Добавление '%s' в базу данных... "
 
 #: pisi/api.py:865
 msgid "OK."
-msgstr ""
+msgstr "ОК."
 
 #: pisi/archive.py:380
 msgid "Problem occured while uncompressing %s.Z file"
@@ -573,8 +573,9 @@ msgid "Package %s found in repository %s"
 msgstr ""
 
 #: pisi/atomicoperations.py:102
+#, fuzzy
 msgid "Package URI: %s"
-msgstr ""
+msgstr "URI пакета: %s"
 
 #: pisi/atomicoperations.py:116
 msgid "Download Error: Package does not match the repository package."
@@ -586,7 +587,7 @@ msgstr ""
 
 #: pisi/atomicoperations.py:146
 msgid "Installing %s, version %s, release %s"
-msgstr ""
+msgstr "Установка %s, версия %s, релиз %s"
 
 #: pisi/atomicoperations.py:192 pisi/operations/build.py:701
 msgid "%s-%s is not a valid PiSi version format"
@@ -649,7 +650,7 @@ msgstr ""
 
 #: pisi/atomicoperations.py:574
 msgid "Removing package %s"
-msgstr ""
+msgstr "Удаление пакета %s"
 
 #: pisi/atomicoperations.py:577
 msgid "Trying to remove nonexistent package "
@@ -665,39 +666,39 @@ msgstr ""
 
 #: pisi/cli/__init__.py:117
 msgid "Warning: "
-msgstr ""
+msgstr "Предупреждение:"
 
 #: pisi/cli/__init__.py:127
 msgid "Error: "
-msgstr ""
+msgstr "Ошибка:"
 
 #: pisi/cli/__init__.py:157
 msgid " (yes/no)"
-msgstr ""
+msgstr "(да/нет)"
 
 #: pisi/cli/__init__.py:178
 msgid " [complete]\n"
-msgstr ""
+msgstr "[завершено]\n"
 
 #: pisi/cli/__init__.py:188
 msgid "Installed %s"
-msgstr ""
+msgstr "%s установлен"
 
 #: pisi/cli/__init__.py:190
 msgid "Removed %s"
-msgstr ""
+msgstr "%s удален"
 
 #: pisi/cli/__init__.py:192
 msgid "Upgraded %s"
-msgstr ""
+msgstr "%s обновлен"
 
 #: pisi/cli/__init__.py:194
 msgid "Configured %s"
-msgstr ""
+msgstr "%s настроен"
 
 #: pisi/cli/__init__.py:196
 msgid "Extracting the files of %s"
-msgstr ""
+msgstr "Распаковка файлов пакета %s"
 
 #: pisi/cli/addrepo.py:24
 msgid ""
@@ -715,7 +716,7 @@ msgstr ""
 
 #: pisi/cli/addrepo.py:45
 msgid "add-repo options"
-msgstr ""
+msgstr "опции add-repo"
 
 #: pisi/cli/addrepo.py:46
 msgid "Ignore repository distribution check"
@@ -819,19 +820,19 @@ msgstr ""
 
 #: pisi/cli/build.py:89
 msgid "Create a static package with ar files"
-msgstr ""
+msgstr "Создание пакета PiSi"
 
 #: pisi/cli/build.py:93 pisi/cli/delta.py:64
 msgid "Create the binary package using the given format. Use '-F help' to see a list of supported formats."
-msgstr ""
+msgstr "Поддерживаемые форматы пакетов:"
 
 #: pisi/cli/build.py:100
 msgid "Use quilt patch management system instead of GNU patch"
-msgstr ""
+msgstr "%s (по-умолчанию)"
 
 #: pisi/cli/build.py:106
 msgid "Do not constrain build process inside the build folder"
-msgstr ""
+msgstr "Целевая директория: %s"
 
 #: pisi/cli/build.py:110
 msgid "build steps"
@@ -843,7 +844,7 @@ msgstr ""
 
 #: pisi/cli/build.py:123
 msgid "Break build after unpacking the source archive, checking sha1sum and applying patches"
-msgstr ""
+msgstr "опции check"
 
 #: pisi/cli/build.py:131
 msgid "Break build after running configure step"
@@ -910,11 +911,11 @@ msgstr ""
 
 #: pisi/cli/check.py:66
 msgid "Checking all installed packages"
-msgstr ""
+msgstr "Проверка всех установленных пакетов"
 
 #: pisi/cli/check.py:71
 msgid "* Checking %s... "
-msgstr ""
+msgstr "* Проверка %s... "
 
 #: pisi/cli/check.py:77
 msgid ""
@@ -930,11 +931,11 @@ msgstr ""
 
 #: pisi/cli/check.py:81 pisi/operations/check.py:48
 msgid "OK"
-msgstr ""
+msgstr "ОК"
 
 #: pisi/cli/check.py:83
 msgid "Package %s not installed"
-msgstr ""
+msgstr "Пакет %s не установлен"
 
 #: pisi/cli/clean.py:20
 msgid ""
