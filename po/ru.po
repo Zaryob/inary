@@ -302,79 +302,81 @@ msgstr "Невозможно создать директорию %s"
 
 #: pisi/actionsapi/shelltools.py:57
 msgid "ActionsAPI [echo]: Can't append to file %s."
-msgstr ""
+msgstr "ActionsAPI [echo]: Невозможно добавить в файл %s."
 
 #: pisi/actionsapi/shelltools.py:63
 msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
-msgstr ""
+msgstr "ActionsAPI [chmod]: Нет файла соответствующего шаблону \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:70
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
-msgstr ""
+msgstr "ActionsAPI [chmod]: Операция не разрешается: %s (режим: 0%o)"
 
 #: pisi/actionsapi/shelltools.py:73
 msgid "ActionsAPI [chmod]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [chmod]: Файл %s не существует."
 
 #: pisi/actionsapi/shelltools.py:81
+#, fuzzy
 msgid "ActionsAPI [chown]: Operation not permitted: %s (uid: %s, gid: %s)"
-msgstr ""
+msgstr "ActionsAPI [chown]: Операция не разрешается: %s (uid: %s, gid: %s)"
 
 #: pisi/actionsapi/shelltools.py:84
 msgid "ActionsAPI [chown]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [chown]: Файл %s не существует."
 
 #: pisi/actionsapi/shelltools.py:91
 msgid "ActionsAPI [sym]: Permission denied: %s to %s"
-msgstr ""
+msgstr "ActionsAPI [sym]: Доступ запрещен: %s to %s"
 
 #: pisi/actionsapi/shelltools.py:105
 msgid "ActionsAPI [unlink]: Permission denied: %s."
-msgstr ""
+msgstr "ActionsAPI [unlink]: Доступ запрещен: %s."
 
 #: pisi/actionsapi/shelltools.py:109
 msgid "ActionsAPI [unlink]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [unlink]: Файл %s не существует."
 
 #: pisi/actionsapi/shelltools.py:117
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: %s"
-msgstr ""
+msgstr "ActionsAPI [unlinkDir]: Операция не разрешается: %s"
 
 #: pisi/actionsapi/shelltools.py:121
 msgid "ActionsAPI [unlinkDir]: Directory %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [unlinkDir]: Директория %s не существует."
 
 #: pisi/actionsapi/shelltools.py:127
 msgid "ActionsAPI [move]: No file matched pattern \"%s\"."
-msgstr ""
+msgstr "ActionsAPI [move]: Нет файла соответствующего шаблону \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:134
 msgid "ActionsAPI [move]: Permission denied: %s to %s"
-msgstr ""
+msgstr "ActionsAPI [move]: Доступ запрещен: %s to %s"
 
 #: pisi/actionsapi/shelltools.py:136
 msgid "ActionsAPI [move]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [move]: Файл %s не существует."
 
 #: pisi/actionsapi/shelltools.py:143
 msgid "ActionsAPI [copy]: No file matched pattern \"%s\"."
-msgstr ""
+msgstr "ActionsAPI [copy]: Нет файла соответствующего шаблону \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:150
 msgid "ActionsAPI [copy]: Permission denied: %s to %s"
-msgstr ""
+msgstr "ActionsAPI [copy]:Доступ запрещен: %s to %s"
 
 #: pisi/actionsapi/shelltools.py:166
 msgid "ActionsAPI [copy]: File %s does not exist."
-msgstr ""
+msgstr "ActionsAPI [copy]: Файл %s не существует."
 
 #: pisi/actionsapi/shelltools.py:181
+#, fuzzy
 msgid "ActionsAPI [copytree] %s to %s: %s"
-msgstr ""
+msgstr "ActionsAPI [copytree] %s to %s: %s"
 
 #: pisi/actionsapi/shelltools.py:183
 msgid "ActionsAPI [copytree]: Directory %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [copytree]: Директория %s не существует."
 
 #: pisi/actionsapi/shelltools.py:191
 msgid "ActionsAPI [touch]: No file matched pattern \"%s\"."
