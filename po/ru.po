@@ -317,9 +317,8 @@ msgid "ActionsAPI [chmod]: File %s doesn't exists."
 msgstr "ActionsAPI [chmod]: Файл %s не существует."
 
 #: pisi/actionsapi/shelltools.py:81
-#, fuzzy
 msgid "ActionsAPI [chown]: Operation not permitted: %s (uid: %s, gid: %s)"
-msgstr "ActionsAPI [chown]: Операция не разрешается: %s (uid: %s, gid: %s)"
+msgstr "ActionsAPI [chown]: Операция не разрешает: %s (uid: %s, gid: %s)"
 
 #: pisi/actionsapi/shelltools.py:84
 msgid "ActionsAPI [chown]: File %s doesn't exists."
@@ -483,9 +482,8 @@ msgid "You have to be root for this operation."
 msgstr "Вы должны иметь привилегии суперпользователя для этой операции."
 
 #: pisi/api.py:65
-#, fuzzy
 msgid "Another instance of PiSi is running. Only one instance is allowed."
-msgstr "Другой экземпляр PiSi работает. Разрешается работать только одному экземпляру одновременно."
+msgstr "Другой экземпляр PiSi работает. Допускается работа только одного экземпляра программы."
 
 #: pisi/api.py:420
 msgid "%s package found in %s repository"
