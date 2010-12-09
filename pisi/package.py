@@ -23,6 +23,7 @@ import pisi.context as ctx
 import pisi.archive as archive
 import pisi.uri
 import pisi.metadata
+import pisi.file
 import pisi.files
 import pisi.util as util
 import fetcher
@@ -95,7 +96,7 @@ class Package:
 
         if not os.path.exists(self.filepath):
             try:
-                fetcher.fetch_url(url, dest, ctx.ui.Progress)
+                pisi.file.File.download(url, dest)
             except pisi.fetcher.FetchError:
                 # Bug 3465
                 if ctx.get_option('reinstall'):

@@ -105,18 +105,20 @@ class UIHandler:
 class Fetcher:
     """Fetcher can fetch a file from various sources using various
     protocols."""
-    def __init__(self, url, destdir):
+    def __init__(self, url, destdir, destfile=None):
         if not isinstance(url, pisi.uri.URI):
             url = pisi.uri.URI(url)
 
         if ctx.config.get_option("authinfo"):
             url.set_auth_info(ctx.config.get_option("authinfo"))
 
-        self.url      = url
-        self.destdir  = destdir
-        self.archive_file = os.path.join(self.destdir, self.url.filename())
-        self.partial_file = self.archive_file + ctx.const.partial_suffix
+        self.url = url
+        self.destdir = destdir
+        self.destfile = destfile
         self.progress = None
+
+        self.archive_file = os.path.join(destdir, destfile or url.filename())
+        self.partial_file = os.path.join(self.destdir, self.url.filename()) + ctx.const.partial_suffix
 
         util.ensure_dirs(self.destdir)
 
@@ -222,7 +224,7 @@ class Fetcher:
 
 
 # helper function
-def fetch_url(url, destdir, progress=None):
-    fetch = Fetcher(url, destdir)
+def fetch_url(url, destdir, progress=None, destfile=None):
+    fetch = Fetcher(url, destdir, destfile)
     fetch.progress = progress
     fetch.fetch()

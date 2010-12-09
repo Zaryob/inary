@@ -57,6 +57,7 @@ class Constants:
         self.__c.xz_suffix = ".xz"
 
         self.__c.partial_suffix = ".part"
+        self.__c.temporary_suffix = ".tmp"
 
         # suffix for auto generated debug packages
         self.__c.debug_name_suffix = "-dbginfo"
