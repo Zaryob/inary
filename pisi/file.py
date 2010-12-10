@@ -126,11 +126,11 @@ class File:
             #oldsha1fn = localfile + '.sha1sum'
             #if os.exists(oldsha1fn):
                 #oldsha1 = file(oldsha1fn).readlines()[0]
-            if sha1sum and os.path.exists(localfile):
-                oldsha1 = pisi.util.sha1_file(localfile)
+            if sha1sum and os.path.exists(origfile):
+                oldsha1 = pisi.util.sha1_file(origfile)
                 if (newsha1 == oldsha1):
                     # early terminate, we already got it ;)
-                    raise AlreadyHaveException(uri, localfile)
+                    raise AlreadyHaveException(uri, origfile)
 
             if uri.is_remote_file():
                 ctx.ui.info(_("Fetching %s") % uri.get_uri(), verbose=True)
@@ -149,7 +149,9 @@ class File:
                 shutil.copy(oldfn, localfile)
 
         def clean_temporary():
-            temp_files = [sha1filename]
+            temp_files = []
+            if sha1sum:
+                temp_files.append(sha1filename)
             if check_integrity:
                 temp_files.append(localfile)
             for filename in temp_files:
