@@ -111,6 +111,8 @@ class File:
         # Check file integrity before saving?
         check_integrity = sha1sum or sign
 
+        origfile = pisi.util.join_path(transfer_dir, uri.filename())
+
         if sha1sum:
             sha1filename = File.download(pisi.uri.URI(uri.get_uri() + '.sha1sum'), transfer_dir)
             sha1f = file(sha1filename)
