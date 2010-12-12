@@ -454,7 +454,7 @@ msgstr ""
 
 #: pisi/actionsapi/texlivemodules.py:263
 msgid "Map %s is added to %s/%s.cfg"
-msgstr ""
+msgstr "Map %s is added to %s/%s.cfg"
 
 #: pisi/actionsapi/texlivemodules.py:266
 msgid "MixedMap %s is added to %s/%s.cfg"
@@ -505,9 +505,8 @@ msgid "File %s not found"
 msgstr "Файл %s не найден"
 
 #: pisi/api.py:772
-#, fuzzy
 msgid "* Building index of PiSi files under %s"
-msgstr "* Построение индекса PiSi файлов под %s"
+msgstr "* Building index of PiSi files under %s"
 
 #: pisi/api.py:777
 msgid "* Index file written"
@@ -527,19 +526,19 @@ msgstr "Репозиторий уже существует с именем %s."
 
 #: pisi/api.py:793
 msgid "Repo %s added to system."
-msgstr ""
+msgstr "Репозиторий %s добавлен в систему."
 
 #: pisi/api.py:801
 msgid "Repo %s removed from system."
-msgstr ""
+msgstr "Репозиторий %s удален из системы."
 
 #: pisi/api.py:803
 msgid "Repository %s does not exist. Cannot remove."
-msgstr ""
+msgstr "Репозиторий %s не существует и не может быть удален."
 
 #: pisi/api.py:823
 msgid "Updating repository: %s"
-msgstr ""
+msgstr "Обновление репозитория: %s"
 
 #: pisi/api.py:832
 msgid "%s repository information is up-to-date."
@@ -571,10 +570,9 @@ msgstr ""
 
 #: pisi/atomicoperations.py:71 pisi/operations/history.py:72
 msgid "Package %s found in repository %s"
-msgstr ""
+msgstr "Пакет %s найден в репозитории %s"
 
 #: pisi/atomicoperations.py:102
-#, fuzzy
 msgid "Package URI: %s"
 msgstr "URI пакета: %s"
 
@@ -618,11 +616,11 @@ msgstr ""
 
 #: pisi/atomicoperations.py:254
 msgid "Upgrading to new upstream version"
-msgstr ""
+msgstr "Обновление до новой версии"
 
 #: pisi/atomicoperations.py:257
 msgid "Upgrading to new distribution release"
-msgstr ""
+msgstr "Обновление до нового релиза дистрибутива"
 
 #: pisi/atomicoperations.py:266
 msgid "Downgrade to old distribution release?"
@@ -634,7 +632,7 @@ msgstr ""
 
 #: pisi/atomicoperations.py:309
 msgid "%s configuration failed."
-msgstr ""
+msgstr "%s ошибка конфигурации."
 
 #: pisi/atomicoperations.py:400
 msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
@@ -643,7 +641,7 @@ msgstr ""
 #: pisi/atomicoperations.py:491 pisi/atomicoperations.py:494
 #: pisi/atomicoperations.py:501
 msgid "Storing %s"
-msgstr ""
+msgstr "Хранение %s"
 
 #: pisi/atomicoperations.py:568
 msgid "File list could not be read for package %s, continuing removal."
@@ -729,7 +727,7 @@ msgstr ""
 
 #: pisi/cli/addrepo.py:50
 msgid "Add repository at given position (0 is first)"
-msgstr ""
+msgstr "Добавить репозиторий в данной позиции (0 - первый)"
 
 #: pisi/cli/addrepo.py:69
 msgid ""
@@ -772,11 +770,11 @@ msgstr ""
 
 #: pisi/cli/blame.py:71
 msgid "Release Updater: %s <%s>\n"
-msgstr ""
+msgstr "Релиз обновления: %s <%s>\n"
 
 #: pisi/cli/blame.py:72
 msgid "Update Date: %s\n"
-msgstr ""
+msgstr "Дата обновления: %s\n"
 
 #: pisi/cli/build.py:25
 msgid ""
@@ -793,7 +791,7 @@ msgstr ""
 
 #: pisi/cli/build.py:50
 msgid "build options"
-msgstr ""
+msgstr "build опции"
 
 #: pisi/cli/build.py:58
 msgid "Run pisi build operation without printing extra debug information"
@@ -837,7 +835,7 @@ msgstr "Целевая директория: %s"
 
 #: pisi/cli/build.py:110
 msgid "build steps"
-msgstr ""
+msgstr "build шаги"
 
 #: pisi/cli/build.py:116
 msgid "Break build after fetching the source archive"
@@ -865,7 +863,7 @@ msgstr ""
 
 #: pisi/cli/build.py:155
 msgid "Create PiSi package"
-msgstr ""
+msgstr "Создать PiSi пакет"
 
 #: pisi/cli/build.py:165 pisi/cli/delta.py:72
 msgid "Supported package formats:"
@@ -900,11 +898,11 @@ msgstr ""
 
 #: pisi/cli/check.py:47
 msgid "check options"
-msgstr ""
+msgstr "Проверка опций"
 
 #: pisi/cli/check.py:49
 msgid "Check installed packages under given component"
-msgstr ""
+msgstr "Проверка установленных пакетов по данному компоненту"
 
 #: pisi/cli/check.py:51
 msgid "Checks only changed config files of the packages"
@@ -962,7 +960,7 @@ msgstr ""
 
 #: pisi/cli/command.py:96
 msgid "general options"
-msgstr ""
+msgstr "общие параметры"
 
 #: pisi/cli/command.py:99
 msgid "Change the system root for PiSi commands"
@@ -982,7 +980,7 @@ msgstr ""
 
 #: pisi/cli/command.py:110
 msgid "Show debugging information"
-msgstr ""
+msgstr "Показать информацию об отладке"
 
 #: pisi/cli/command.py:112
 msgid "Suppresses all coloring of PiSi's output"
@@ -994,7 +992,7 @@ msgstr ""
 
 #: pisi/cli/command.py:152
 msgid "Password: "
-msgstr ""
+msgstr "Пароль:"
 
 #: pisi/cli/command.py:191
 msgid "Command terminated abnormally."
@@ -1051,7 +1049,7 @@ msgstr ""
 
 #: pisi/cli/delta.py:46
 msgid "delta options"
-msgstr ""
+msgstr "delta опции"
 
 #: pisi/cli/delta.py:54
 msgid "Use arg as the new package and treat other arguments as old packages."
@@ -1086,7 +1084,7 @@ msgstr ""
 
 #: pisi/cli/emerge.py:44
 msgid "emerge options"
-msgstr ""
+msgstr "emerge опции"
 
 #: pisi/cli/emerge.py:47
 msgid "Emerge available packages under given component"
@@ -1094,11 +1092,11 @@ msgstr ""
 
 #: pisi/cli/emerge.py:49 pisi/cli/install.py:53 pisi/cli/upgrade.py:58
 msgid "Ignore file conflicts"
-msgstr ""
+msgstr "игнорировать конфликтные файлы"
 
 #: pisi/cli/emerge.py:51 pisi/cli/install.py:55 pisi/cli/upgrade.py:60
 msgid "Ignore package conflicts"
-msgstr ""
+msgstr "игнорировать конфликтные пакеты"
 
 #: pisi/cli/emerge.py:73
 msgid "Outputting binary packages in the package cache."
@@ -1128,7 +1126,7 @@ msgstr ""
 
 #: pisi/cli/fetch.py:41
 msgid "fetch options"
-msgstr ""
+msgstr "fetch опции"
 
 #: pisi/cli/fetch.py:47
 msgid "Output directory for the fetched packages"
@@ -1148,7 +1146,7 @@ msgstr ""
 
 #: pisi/cli/graph.py:43
 msgid "graph options"
-msgstr ""
+msgstr "graph опции"
 
 #: pisi/cli/graph.py:47
 msgid "Specify a particular repository"
@@ -1207,11 +1205,11 @@ msgstr ""
 
 #: pisi/cli/history.py:28
 msgid "install"
-msgstr ""
+msgstr "установить"
 
 #: pisi/cli/history.py:28
 msgid "remove"
-msgstr ""
+msgstr "удалить"
 
 #: pisi/cli/history.py:28
 msgid "repository update"
@@ -1227,7 +1225,7 @@ msgstr ""
 
 #: pisi/cli/history.py:28
 msgid "upgrade"
-msgstr ""
+msgstr "обновить"
 
 #: pisi/cli/history.py:31
 msgid ""
@@ -1240,7 +1238,7 @@ msgstr ""
 
 #: pisi/cli/history.py:47
 msgid "history options"
-msgstr ""
+msgstr "history опции"
 
 #: pisi/cli/history.py:53
 msgid "Output only the last n operations"
@@ -1256,11 +1254,11 @@ msgstr ""
 
 #: pisi/cli/history.py:67
 msgid "Operation #%d: %s"
-msgstr ""
+msgstr "Операция #%d: %s"
 
 #: pisi/cli/history.py:68
 msgid "Date: %s %s"
-msgstr ""
+msgstr "Дата: %s %s"
 
 #: pisi/cli/history.py:72
 msgid "    * There are %d packages in this snapshot."
@@ -1283,7 +1281,7 @@ msgstr ""
 
 #: pisi/cli/index.py:48
 msgid "index options"
-msgstr ""
+msgstr "index опции"
 
 #: pisi/cli/index.py:53
 msgid "Store absolute links for indexed files."
@@ -1348,39 +1346,39 @@ msgstr ""
 
 #: pisi/cli/info.py:145
 msgid "Package file: %s"
-msgstr ""
+msgstr "Файл пакета: %s"
 
 #: pisi/cli/info.py:160
 msgid "[inst] "
-msgstr ""
+msgstr "[inst] "
 
 #: pisi/cli/info.py:162
 msgid "Installed package:"
-msgstr ""
+msgstr "Установка пакета:"
 
 #: pisi/cli/info.py:166
 msgid "%s package is not installed"
-msgstr ""
+msgstr "%s пакет не установлен"
 
 #: pisi/cli/info.py:172
 msgid "[binary] "
-msgstr ""
+msgstr "[binary] "
 
 #: pisi/cli/info.py:174 pisi/cli/info.py:186
 msgid "Package found in %s repository:"
-msgstr ""
+msgstr "пакет найден в репозитории %s:"
 
 #: pisi/cli/info.py:177
 msgid "%s package is not found in binary repositories"
-msgstr ""
+msgstr "%s пакет не найден в репозитории с бинарными пакетами"
 
 #: pisi/cli/info.py:184
 msgid "[source] "
-msgstr ""
+msgstr "[source] "
 
 #: pisi/cli/info.py:189
 msgid "%s package is not found in source repositories"
-msgstr ""
+msgstr "%s пакет не найден в репозитории с исходными кодами"
 
 #: pisi/cli/install.py:25
 msgid ""
@@ -1397,7 +1395,7 @@ msgstr ""
 
 #: pisi/cli/install.py:44
 msgid "install options"
-msgstr ""
+msgstr "install оции"
 
 #: pisi/cli/install.py:49
 msgid "Reinstall already installed packages"
@@ -1660,7 +1658,7 @@ msgstr ""
 
 #: pisi/cli/remove.py:43
 msgid "remove options"
-msgstr ""
+msgstr "remove опции"
 
 #: pisi/cli/remove.py:46
 msgid "Removes everything including changed config files of the package"
@@ -1694,7 +1692,7 @@ msgstr ""
 
 #: pisi/cli/search.py:43
 msgid "search options"
-msgstr ""
+msgstr "search опции"
 
 #: pisi/cli/search.py:45
 msgid "Summary and description language"
@@ -1710,7 +1708,7 @@ msgstr ""
 
 #: pisi/cli/search.py:53
 msgid "Search in the package name"
-msgstr ""
+msgstr "Поиска в именах пакетов"
 
 #: pisi/cli/search.py:55
 msgid "Search in the package summary"
@@ -1718,7 +1716,7 @@ msgstr ""
 
 #: pisi/cli/search.py:57
 msgid "Search in the package description"
-msgstr ""
+msgstr "Поиск в описании пакетов"
 
 #: pisi/cli/searchfile.py:24
 msgid ""
@@ -1731,7 +1729,7 @@ msgstr ""
 
 #: pisi/cli/searchfile.py:38
 msgid "search-file options"
-msgstr ""
+msgstr "search-file опции"
 
 #: pisi/cli/searchfile.py:42
 msgid "Show only package name"
@@ -1763,7 +1761,7 @@ msgstr ""
 
 #: pisi/cli/updaterepo.py:42
 msgid "update-repo options"
-msgstr ""
+msgstr "update-repo опции"
 
 #: pisi/cli/updaterepo.py:46
 msgid "Update database in any case"
@@ -1791,7 +1789,7 @@ msgstr ""
 
 #: pisi/cli/upgrade.py:50
 msgid "upgrade options"
-msgstr ""
+msgstr "upgrade опции"
 
 #: pisi/cli/upgrade.py:54
 msgid "Security related package upgrades only"
