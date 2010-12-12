@@ -2429,23 +2429,23 @@ msgstr ""
 
 #: pisi/operations/install.py:47 pisi/operations/install.py:134
 msgid "The following package(s) are already installed and are not going to be installed again:"
-msgstr ""
+msgstr "Следующий пакет (ы) уже установлены и не будет установлен еще раз:"
 
 #: pisi/operations/install.py:53 pisi/operations/install.py:213
 msgid "No packages to install."
-msgstr ""
+msgstr "Нет пакетов для установки."
 
 #: pisi/operations/install.py:71
 msgid "Following packages will be installed:"
-msgstr ""
+msgstr "Следующие пакеты будут установлены:"
 
 #: pisi/operations/install.py:76 pisi/operations/upgrade.py:171
 msgid "Total size of package(s): %.2f %s"
-msgstr ""
+msgstr "Общий размер пакета (ов): %.2f %s"
 
 #: pisi/operations/install.py:107 pisi/operations/upgrade.py:208
 msgid "Installing %d / %d"
-msgstr ""
+msgstr "Установка %d / %d"
 
 #: pisi/operations/install.py:121
 msgid "Mixing file names and package names not supported yet."
@@ -2453,11 +2453,11 @@ msgstr ""
 
 #: pisi/operations/install.py:165
 msgid "Package %s is not compatible with your distribution release %s %s."
-msgstr ""
+msgstr "Пакет %s не совместим с вашей версией дистрибутива %s %s."
 
 #: pisi/operations/install.py:169
 msgid "Package %s (%s) is not compatible with your %s architecture."
-msgstr ""
+msgstr "Пакет %s (%s) не совместим с вашей %s архитектурой."
 
 #: pisi/operations/install.py:192
 msgid "External dependencies not satisfied: %s"
@@ -2489,11 +2489,11 @@ msgstr ""
 
 #: pisi/operations/remove.py:55
 msgid "Package %s does not exist. Cannot remove."
-msgstr ""
+msgstr "Пакет %s не существует. Не удален."
 
 #: pisi/operations/remove.py:59
 msgid "No packages to remove."
-msgstr ""
+msgstr "Нет пакетов для удаления."
 
 #: pisi/operations/remove.py:68
 msgid ""
@@ -2535,7 +2535,7 @@ msgstr ""
 
 #: pisi/operations/upgrade.py:84
 msgid "Package %s is not installed."
-msgstr ""
+msgstr "Пакет %s не установлен."
 
 #: pisi/operations/upgrade.py:88
 msgid "Package %s is not available in repositories."
@@ -2571,7 +2571,7 @@ msgstr ""
 
 #: pisi/package.py:67
 msgid "Cannot open package file: %s"
-msgstr ""
+msgstr "Файл пакета не может быть открыт: %s"
 
 #: pisi/package.py:88
 msgid "Unsupported package format: %s"
@@ -2684,7 +2684,7 @@ msgstr ""
 
 #: pisi/scenarioapi/package.py:67
 msgid "No pisi package: %s* found."
-msgstr ""
+msgstr "Нет Pisi пакета: %s* поиск."
 
 #: pisi/scenarioapi/repoops.py:28
 msgid "Repo already has package named %s."
@@ -2820,7 +2820,7 @@ msgstr ""
 
 #: pisi/util.py:698
 msgid "Invalid package name: %s"
-msgstr ""
+msgstr "Неверное имя пакета: %s"
 
 #: pisi/util.py:738
 msgid "Invalid delta package name: %s"
