@@ -138,7 +138,7 @@ class File:
             else:
                 # copy to transfer dir
                 ctx.ui.info(_("Copying %s to transfer dir") % uri.get_uri(), verbose=True)
-                shutil.copy(uri.get_uri(), transfer_dir)
+                shutil.copy(uri.get_uri(), localfile)
         else:
             localfile = uri.get_uri() #TODO: use a special function here?
             if not os.path.exists(localfile):
