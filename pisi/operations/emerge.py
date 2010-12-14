@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -69,7 +69,7 @@ installed in the respective order to satisfy dependencies:
     #ctx.ui.notify(ui.packagestogo, order = order_build)
 
     for x in order_build:
-        package_names = atomicoperations.build(x)[0]
+        package_names = atomicoperations.build(x).new_packages
         pisi.operations.install.install_pkg_files(package_names, reinstall=True) # handle inter-package deps here
         # reset counts between builds
         ctx.ui.errors = ctx.ui.warnings = 0
