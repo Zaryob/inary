@@ -1132,6 +1132,7 @@ def build(pspec):
         if ctx.ui.errors or ctx.ui.warnings:
             ctx.ui.warning(_("*** %d error(s), %d warning(s)") \
                             % (ctx.ui.errors, ctx.ui.warnings))
+    return pb
 
 order = {"none": 0,
          "fetch": 1,
