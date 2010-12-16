@@ -290,7 +290,7 @@ msgstr "Файл проекта '%s' не найден."
 
 #: pisi/actionsapi/qt4.py:56
 msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)"
-msgstr ""
+msgstr "Похоже, что .pro файлов несколько, Вы должны выбрать один. (Возможные .pro файлы: %s)"
 
 #: pisi/actionsapi/rubymodules.py:108
 msgid "Running 'ruby %s' failed."
@@ -498,7 +498,7 @@ msgstr "Снятие снимка с системы"
 
 #: pisi/api.py:718
 msgid "comar package is not fully installed"
-msgstr ""
+msgstr "Пакет Comar  не полностью установлен"
 
 #: pisi/api.py:730
 msgid "File %s not found"
@@ -546,7 +546,7 @@ msgstr "%s ифрормация о репозитории обновлена"
 
 #: pisi/api.py:834
 msgid "Updating database at any rate as requested"
-msgstr ""
+msgstr "Обновление базы данных в любом случае как запрос"
 
 #: pisi/api.py:847
 msgid "* Package database updated."
@@ -566,7 +566,7 @@ msgstr "ОК."
 
 #: pisi/archive.py:380
 msgid "Problem occured while uncompressing %s.Z file"
-msgstr ""
+msgstr "Обнаружена ошибка во время распаковки %s.Z файла"
 
 #: pisi/atomicoperations.py:71 pisi/operations/history.py:72
 msgid "Package %s found in repository %s"
@@ -578,7 +578,7 @@ msgstr "URI пакета: %s"
 
 #: pisi/atomicoperations.py:116
 msgid "Download Error: Package does not match the repository package."
-msgstr ""
+msgstr "Ошибка загрузки: Пакет не соответствует пакету из репозитория."
 
 #: pisi/atomicoperations.py:120
 msgid "Package %s not found in any active repository."
@@ -594,7 +594,7 @@ msgstr "%s-%s не правильная версия PiSi"
 
 #: pisi/atomicoperations.py:198
 msgid "%s package cannot be installed unless the dependencies are satisfied"
-msgstr ""
+msgstr "Пакет %s не может быть установлен, пока все зависимости не будут удовлетворены"
 
 #: pisi/atomicoperations.py:222
 msgid "/%s from %s package\n"
@@ -614,7 +614,7 @@ msgstr "Переустановить версию пакета?"
 
 #: pisi/atomicoperations.py:242
 msgid "Package re-install declined"
-msgstr ""
+msgstr "Переустановка пакета отменена"
 
 #: pisi/atomicoperations.py:254
 msgid "Upgrading to new upstream version"
@@ -626,11 +626,11 @@ msgstr "Обновление до нового релиза дистрибути
 
 #: pisi/atomicoperations.py:266
 msgid "Downgrade to old distribution release?"
-msgstr ""
+msgstr "Обновить до более старой версии дистрибутива?"
 
 #: pisi/atomicoperations.py:270
 msgid "Package downgrade declined"
-msgstr ""
+msgstr "Обновление до более старой версии отменено."
 
 #: pisi/atomicoperations.py:309
 msgid "%s configuration failed."
@@ -655,7 +655,7 @@ msgstr "Удаление пакета %s"
 
 #: pisi/atomicoperations.py:577
 msgid "Trying to remove nonexistent package "
-msgstr ""
+msgstr "Попытка удаления несуществующего пакета"
 
 #: pisi/atomicoperations.py:618
 msgid "Not removing conflicted file : %s"
@@ -714,6 +714,16 @@ msgid ""
 "\n"
 "NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment\n"
 msgstr ""
+"Добавление репозитория\n"
+"\n"
+"Использование: add-repo <repo> <indexuri>\n"
+"\n"
+"<repo>: имя добавляемого репозитория\n"
+"<indexuri>: URL-ссылка на индексный файл\n"
+"\n"
+"Если репозиторий для добавления не задан, будет добавлен репозиторий pardus-devel\n"
+"\n"
+"NB: На данный момент, реализована поддержка только локальных файлов (e.g., /a/b/c) и http:// URI-ссылок\n"
 
 #: pisi/cli/addrepo.py:45
 msgid "add-repo options"
