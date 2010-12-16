@@ -398,7 +398,7 @@ msgstr "Создание конфигурационных файлов заве�
 
 #: pisi/actionsapi/texlivemodules.py:62
 msgid "Building format files failed"
-msgstr ""
+msgstr "Ошибка выполнения файла"
 
 #: pisi/actionsapi/texlivemodules.py:69
 msgid "Creating symlinks from format to engines failed"
@@ -450,7 +450,7 @@ msgstr "Перемещение (и создание символических �
 
 #: pisi/actionsapi/texlivemodules.py:206
 msgid "Building format file %s"
-msgstr ""
+msgstr "Формат исполняемого файла %s"
 
 #: pisi/actionsapi/texlivemodules.py:263
 msgid "Map %s is added to %s/%s.cfg"
@@ -458,15 +458,15 @@ msgstr "Map %s is added to %s/%s.cfg"
 
 #: pisi/actionsapi/texlivemodules.py:266
 msgid "MixedMap %s is added to %s/%s.cfg"
-msgstr ""
+msgstr "MixedMap %s добавлен в %s/%s.cfg"
 
 #: pisi/actionsapi/texlivemodules.py:269
 msgid "p +%s is added to %s/%s-config.ps"
-msgstr ""
+msgstr "p +%s добавлено в %s/%s-config.ps"
 
 #: pisi/actionsapi/texlivemodules.py:272
 msgid "f %s is added to %s/%s-config"
-msgstr ""
+msgstr "f %s добавленно в %s/%s-config"
 
 #: pisi/actionsapi/texlivemodules.py:279
 msgid "Language file  %s  already generated."
@@ -542,7 +542,7 @@ msgstr "Обновление репозитория: %s"
 
 #: pisi/api.py:832
 msgid "%s repository information is up-to-date."
-msgstr ""
+msgstr "%s ифрормация о репозитории обновлена"
 
 #: pisi/api.py:834
 msgid "Updating database at any rate as requested"
@@ -582,7 +582,7 @@ msgstr ""
 
 #: pisi/atomicoperations.py:120
 msgid "Package %s not found in any active repository."
-msgstr ""
+msgstr "Пакет %s не найден в активном репозитории."
 
 #: pisi/atomicoperations.py:146
 msgid "Installing %s, version %s, release %s"
@@ -590,7 +590,7 @@ msgstr "Установка %s, версия %s, релиз %s"
 
 #: pisi/atomicoperations.py:192 pisi/operations/build.py:701
 msgid "%s-%s is not a valid PiSi version format"
-msgstr ""
+msgstr "%s-%s не правильная версия PiSi"
 
 #: pisi/atomicoperations.py:198
 msgid "%s package cannot be installed unless the dependencies are satisfied"
@@ -598,17 +598,19 @@ msgstr ""
 
 #: pisi/atomicoperations.py:222
 msgid "/%s from %s package\n"
-msgstr ""
+msgstr "/%s для %s пакет\n"
 
 #: pisi/atomicoperations.py:223
 msgid ""
 "File conflicts:\n"
 "%s"
 msgstr ""
+"Конфликтные файлы:\n"
+"%s"
 
 #: pisi/atomicoperations.py:241
 msgid "Re-install same version package?"
-msgstr ""
+msgstr "Переустановить версию пакета?"
 
 #: pisi/atomicoperations.py:242
 msgid "Package re-install declined"
@@ -738,7 +740,7 @@ msgstr ""
 
 #: pisi/cli/addrepo.py:81
 msgid "%s repository could not be reached. Removing %s from system."
-msgstr ""
+msgstr "%s репозиторий не найден. Удаление %s из системы."
 
 #: pisi/cli/blame.py:24
 msgid ""
@@ -747,26 +749,30 @@ msgid ""
 "Usage: blame <package> ... <package>\n"
 "\n"
 msgstr ""
+"Информация об авторе пакта, его версии и релизе\n"
+"\n"
+"Использование: blame <package> ... <package>\n"
+"\n"
 
 #: pisi/cli/blame.py:39
 msgid "blame options"
-msgstr ""
+msgstr "blame опции"
 
 #: pisi/cli/blame.py:40
 msgid "Blame for the given release"
-msgstr ""
+msgstr "Blame для текущего релиза"
 
 #: pisi/cli/blame.py:42
 msgid "Blame for all of the releases"
-msgstr ""
+msgstr "Blame для всех релизов"
 
 #: pisi/cli/blame.py:68 pisi/specfile.py:361 pisi/specfile.py:444
 msgid "Name: %s, version: %s, release: %s\n"
-msgstr ""
+msgstr "Имя: %s, версия: %s, релиз: %s\n"
 
 #: pisi/cli/blame.py:70
 msgid "Package Maintainer: %s <%s>\n"
-msgstr ""
+msgstr "Package Maintainer: %s <%s>\n"
 
 #: pisi/cli/blame.py:71
 msgid "Release Updater: %s <%s>\n"
@@ -807,7 +813,7 @@ msgstr ""
 
 #: pisi/cli/build.py:74
 msgid "Bypass errors from ActionsAPI"
-msgstr ""
+msgstr "Bypass ошибка ActionsAPI"
 
 #: pisi/cli/build.py:79 pisi/cli/command.py:208
 msgid "Bypass safety switch"
@@ -871,11 +877,11 @@ msgstr ""
 
 #: pisi/cli/build.py:168 pisi/cli/delta.py:75
 msgid "  %s (default)"
-msgstr ""
+msgstr "  %s (default)"
 
 #: pisi/cli/build.py:176 pisi/cli/delta.py:92 pisi/cli/emerge.py:71
 msgid "Output directory: %s"
-msgstr ""
+msgstr "Конечная дериктория: %s"
 
 #: pisi/cli/build.py:179 pisi/cli/delta.py:95
 msgid "Outputting packages in the working directory."
@@ -895,6 +901,17 @@ msgid ""
 "\n"
 "If no packages are given, checks all installed packages.\n"
 msgstr ""
+"Проверка установки\n"
+"\n"
+"Использование: check [<package1> <package2> ... <packagen>]\n"
+"\n"
+"<packagei>: package name\n"
+"\n"
+"A cryptographic checksum is stored for each installed\n"
+"file. Check command uses the checksums to verify a package.\n"
+"Just give the names of packages.\n"
+"\n"
+"If no packages are given, checks all installed packages.\n"
 
 #: pisi/cli/check.py:47
 msgid "check options"
@@ -906,7 +923,7 @@ msgstr "Проверка установленных пакетов по данн
 
 #: pisi/cli/check.py:51
 msgid "Checks only changed config files of the packages"
-msgstr ""
+msgstr "Проверка измения конфигурационных файлов пакетов"
 
 #: pisi/cli/check.py:66
 msgid "Checking all installed packages"
@@ -921,12 +938,16 @@ msgid ""
 "\n"
 "Package %s has changed config files."
 msgstr ""
+"\n"
+"Package %s изменение конфигурационного файла."
 
 #: pisi/cli/check.py:79
 msgid ""
 "\n"
 "Package %s is corrupt."
 msgstr ""
+"\n"
+"Package %s поврежден."
 
 #: pisi/cli/check.py:81 pisi/operations/check.py:48
 msgid "OK"
@@ -1201,7 +1222,7 @@ msgstr ""
 
 #: pisi/cli/history.py:28
 msgid "emerge"
-msgstr ""
+msgstr "emerge"
 
 #: pisi/cli/history.py:28
 msgid "install"
@@ -1213,11 +1234,11 @@ msgstr "удалить"
 
 #: pisi/cli/history.py:28
 msgid "repository update"
-msgstr ""
+msgstr "обновление репозитория"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
-msgstr ""
+msgstr "snapshot"
 
 #: pisi/cli/history.py:28
 msgid "takeback"
@@ -1311,14 +1332,19 @@ msgid ""
 "\n"
 "<packagei> is either a package name or a .pisi file,\n"
 msgstr ""
+"Просмотр информации о пакете\n"
+"\n"
+"Использование: info <package1> <package2> ... <packagen>\n"
+"\n"
+"<packagei> is either a package name or a .pisi file,\n"
 
 #: pisi/cli/info.py:45
 msgid "info options"
-msgstr ""
+msgstr "info опции"
 
 #: pisi/cli/info.py:52
 msgid "Show a list of package files."
-msgstr ""
+msgstr "Показать список пакетов."
 
 #: pisi/cli/info.py:54
 msgid "Info about the given component"
@@ -1326,11 +1352,11 @@ msgstr ""
 
 #: pisi/cli/info.py:57
 msgid "Show only paths."
-msgstr ""
+msgstr "Показать только пути."
 
 #: pisi/cli/info.py:59
 msgid "Do not show details"
-msgstr ""
+msgstr "Не показывать подробности"
 
 #: pisi/cli/info.py:61
 msgid "Output in xml format"
@@ -1399,7 +1425,7 @@ msgstr "install оции"
 
 #: pisi/cli/install.py:49
 msgid "Reinstall already installed packages"
-msgstr ""
+msgstr "Переустановить  уже установленные пакеты"
 
 #: pisi/cli/install.py:51
 msgid "Skip distribution release and architecture check"
