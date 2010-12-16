@@ -999,7 +999,7 @@ msgstr ""
 
 #: pisi/cli/command.py:101
 msgid "Assume yes in all yes/no queries"
-msgstr ""
+msgstr "Отвечать ДА на все запросы ДА/НЕТ"
 
 #: pisi/cli/command.py:105
 msgid "Keep bandwidth usage under specified KB's"
@@ -1007,7 +1007,7 @@ msgstr ""
 
 #: pisi/cli/command.py:108
 msgid "Detailed output"
-msgstr ""
+msgstr "Подробный вывод"
 
 #: pisi/cli/command.py:110
 msgid "Show debugging information"
@@ -1027,7 +1027,7 @@ msgstr "Пароль:"
 
 #: pisi/cli/command.py:191
 msgid "Command terminated abnormally."
-msgstr ""
+msgstr "Аварийное завершение команды."
 
 #: pisi/cli/command.py:206 pisi/cli/emerge.py:53
 msgid "Bypass comar configuration agent"
@@ -1039,7 +1039,7 @@ msgstr ""
 
 #: pisi/cli/command.py:228
 msgid "usage: %s\n"
-msgstr ""
+msgstr "использование: %s\n"
 
 #: pisi/cli/configurepending.py:23
 msgid ""
@@ -1088,7 +1088,7 @@ msgstr ""
 
 #: pisi/cli/delta.py:60
 msgid "Output directory for produced packages."
-msgstr ""
+msgstr "Выводная директория для создаваемых пакетов."
 
 #: pisi/cli/disablerepo.py:21
 msgid ""
@@ -1100,6 +1100,13 @@ msgid ""
 "\n"
 "Disabled repositories are not taken into account in operations\n"
 msgstr ""
+"Отключить репозиторий\n"
+"\n"
+"Использование: disable-repo [<repo1> <repo2> ... <repon>]\n"
+"\n"
+"<repoi>: имя репозитория\n"
+"\n"
+"Отключенные репозитории не используются при операциях над пакетами\n"
 
 #: pisi/cli/emerge.py:25
 msgid ""
@@ -1143,6 +1150,13 @@ msgid ""
 "\n"
 "Disabled repositories are not taken into account in operations\n"
 msgstr ""
+"Включить репозиторий\n"
+"\n"
+"Использование: enable-repo [<repo1> <repo2> ... <repon>]\n"
+"\n"
+"<repoi>: имя репозитория\n"
+"\n"
+"Отключенные репозитории не используются при операциях над пакетами\n"
 
 #: pisi/cli/fetch.py:25
 msgid ""
