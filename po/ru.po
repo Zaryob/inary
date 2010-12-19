@@ -402,7 +402,7 @@ msgstr "Ошибка выполнения файла"
 
 #: pisi/actionsapi/texlivemodules.py:69
 msgid "Creating symlinks from format to engines failed"
-msgstr ""
+msgstr "Создание ссылок данного формана на устройса не удалось."
 
 #: pisi/actionsapi/texlivemodules.py:73
 msgid "Installing docs failed"
@@ -418,7 +418,7 @@ msgstr "Установка конфигурационных файлов не у
 
 #: pisi/actionsapi/texlivemodules.py:85
 msgid "Handle config files failed"
-msgstr ""
+msgstr "Установка конфигурационных файлов устройств не удалось"
 
 #: pisi/actionsapi/texlivemodules.py:95
 msgid "Symlink %s skipped (special case)"
@@ -638,7 +638,7 @@ msgstr "%s ошибка конфигурации."
 
 #: pisi/atomicoperations.py:400
 msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
-msgstr ""
+msgstr "Невозможно разрешить попытку перемещения данных файлов. Настоятельно рекомендуется повторная установка ."
 
 #: pisi/atomicoperations.py:491 pisi/atomicoperations.py:494
 #: pisi/atomicoperations.py:501
@@ -647,7 +647,7 @@ msgstr "Хранение %s"
 
 #: pisi/atomicoperations.py:568
 msgid "File list could not be read for package %s, continuing removal."
-msgstr ""
+msgstr "Список файлов не может быть прочитан для пакета %s, продолжение удаления."
 
 #: pisi/atomicoperations.py:574
 msgid "Removing package %s"
@@ -659,11 +659,11 @@ msgstr "Попытка удаления несуществующего паке�
 
 #: pisi/atomicoperations.py:618
 msgid "Not removing conflicted file : %s"
-msgstr ""
+msgstr "Не удаляется конфликтующий файл: %s"
 
 #: pisi/atomicoperations.py:646
 msgid "Installed file %s does not exist on system [Probably you manually deleted]"
-msgstr ""
+msgstr "Установленный файл %s не существует в системе. [Возможно, он был удален вручную]"
 
 #: pisi/cli/__init__.py:117
 msgid "Warning: "
@@ -731,11 +731,11 @@ msgstr "опции add-repo"
 
 #: pisi/cli/addrepo.py:46
 msgid "Ignore repository distribution check"
-msgstr ""
+msgstr "Игнорировать проверку репозитория"
 
 #: pisi/cli/addrepo.py:47
 msgid "Does not fetch repository index and does not check distribution match"
-msgstr ""
+msgstr "Не получает индекса в репозитории и не проверять соответствие цели"
 
 #: pisi/cli/addrepo.py:50
 msgid "Add repository at given position (0 is first)"
@@ -747,6 +747,9 @@ msgid ""
 "By confirming this you are also adding the repository to your system without checking the distribution of the repository.\n"
 "Do you want to continue?"
 msgstr ""
+"Добавить репозиторий %s без обновления базы данных?\n"
+"Соглашаясь с этим, вы добавите репозиторий без проверки целостности дистрибутива.\n"
+"Вы хотите продолжить?"
 
 #: pisi/cli/addrepo.py:81
 msgid "%s repository could not be reached. Removing %s from system."
@@ -804,6 +807,15 @@ msgid ""
 "Alternatively, you can give the name of a source package\n"
 "to be downloaded from a repository containing sources.\n"
 msgstr ""
+"Создание пакетов PiSi\n"
+"\n"
+"Использование: build [<pspec.xml> | <sourcename>] ...\n"
+"\n"
+"Вы можете предложить URI pspec.xml файла. PiSi\n"
+"проверит все необходимые файлы и создаст пакет для вас.\n"
+"\n"
+"Как другой вариант, вы можете предложить имя пакета с исходными файлами,\n"
+"который будет скачат с репозитория, содержащего исходные файлы\n"
 
 #: pisi/cli/build.py:50
 msgid "build options"
@@ -811,15 +823,15 @@ msgstr "build опции"
 
 #: pisi/cli/build.py:58
 msgid "Run pisi build operation without printing extra debug information"
-msgstr ""
+msgstr "Запустить pisi build без вывода дополнительной отладочной информации"
 
 #: pisi/cli/build.py:64 pisi/cli/command.py:204
 msgid "Do not take dependency information into account"
-msgstr ""
+msgstr "Не вкладывать информацию о зависимостях в аккаунт"
 
 #: pisi/cli/build.py:70
 msgid "Output directory for produced packages"
-msgstr ""
+msgstr "Директория для вновь созданных пакетов"
 
 #: pisi/cli/build.py:74
 msgid "Bypass errors from ActionsAPI"
@@ -827,11 +839,11 @@ msgstr "Bypass ошибка ActionsAPI"
 
 #: pisi/cli/build.py:79 pisi/cli/command.py:208
 msgid "Bypass safety switch"
-msgstr ""
+msgstr "Пропустить проверку безопасности"
 
 #: pisi/cli/build.py:84
 msgid "Bypass testing step"
-msgstr ""
+msgstr "Пропустить тестирование"
 
 #: pisi/cli/build.py:89
 msgid "Create a static package with ar files"
@@ -895,7 +907,7 @@ msgstr "Конечная дериктория: %s"
 
 #: pisi/cli/build.py:179 pisi/cli/delta.py:95
 msgid "Outputting packages in the working directory."
-msgstr ""
+msgstr "Пакеты в рабочей директории."
 
 #: pisi/cli/check.py:25
 msgid ""
