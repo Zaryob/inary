@@ -70,14 +70,9 @@ def __getKernelARCH():
     return get.ARCH().replace("i686", "i386")
 
 def __getSuffix():
-    # Set suffix, e.g. "2.6.30_rc7-119"
-    suffix = "%s-%s" % (get.srcVERSION(), get.srcRELEASE())
-    if __getFlavour():
-        suffix += "-%s" % __getFlavour()
+    return open(suffix, "r").read()
 
-    return suffix
-
-def __getExtraVersion():
+def __getExtraVersion(abiVersion):
     extraversion = ""
     try:
         # if successful, this is something like:
@@ -88,7 +83,8 @@ def __getExtraVersion():
         # e.g. if version == 2.6.30
         pass
 
-    extraversion += "-%s" % get.srcRELEASE()
+    # abiVersion will be passed from actions.py e.g. like the old release numbers
+    extraversion += "-%s" % abiVersion
 
     # Append pae, default, rt, etc. to the extraversion if available
     if __getFlavour():
@@ -120,7 +116,7 @@ def getKernelVersion(flavour=None):
         raise ConfigureError(_("Can't find kernel version information file %s.") % kverfile)
 
 
-def configure():
+def configure(abiVersion):
     # I don't know what for but let's clean *.orig files
     shelltools.system("find . -name \"*.orig\" | xargs rm -f")
 
@@ -128,7 +124,13 @@ def configure():
     shutil.copy("configs/kernel-%s-config" % get.ARCH(), ".config")
 
     # Set EXTRAVERSION
-    pisitools.dosed("Makefile", "EXTRAVERSION =.*", "EXTRAVERSION = %s" % __getExtraVersion())
+    pisitools.dosed("Makefile", "EXTRAVERSION =.*", "EXTRAVERSION = %s" % __getExtraVersion(abiVersion))
+
+    # Create .suffix file which will contain __getSuffix()'s return value
+    suffix = "%s-%s" % (get.srcVERSION(), abiVersion)
+    if __getFlavour():
+        suffix += "-%s" % __getFlavour()
+    open(".suffix", "w").write(suffix)
 
     # Configure the kernel
     autotools.make("ARCH=%s oldconfig" % __getKernelARCH())
