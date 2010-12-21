@@ -70,7 +70,7 @@ def __getKernelARCH():
     return get.ARCH().replace("i686", "i386")
 
 def __getSuffix():
-    return open(suffix, "r").read()
+    return open(".suffix", "r").read().strip()
 
 def __getExtraVersion(abiVersion):
     extraversion = ""
@@ -117,9 +117,6 @@ def getKernelVersion(flavour=None):
 
 
 def configure(abiVersion):
-    # I don't know what for but let's clean *.orig files
-    shelltools.system("find . -name \"*.orig\" | xargs rm -f")
-
     # Copy the relevant configuration file
     shutil.copy("configs/kernel-%s-config" % get.ARCH(), ".config")
 
@@ -166,7 +163,7 @@ def build(debugSymbols=False):
     autotools.make("ARCH=%s %s" % (__getKernelARCH(), " ".join(extra_config)))
 
 
-def install(installFirmwares=True):
+def install():
     suffix = __getSuffix()
 
     # Install kernel image
@@ -175,9 +172,10 @@ def install(installFirmwares=True):
     # Check if loadable module support is available or not before doing module specific tasks
     if re.search("CONFIG_MODULES=y", open(".config", "r").read().strip()):
 
-        # Install the modules and the firmwares into /lib/{modules,firmware}
+        # Install the modules
+        # mod-fw= avoids firmwares from installing
         autotools.rawInstall("INSTALL_MOD_PATH=%s/" % get.installDIR(),
-                             "modules_install")
+                             "modules_install mod-fw=")
 
         # Install Module.symvers and System.map
         pisitools.insinto("/lib/modules/%s/" % suffix, "System.map")
@@ -186,10 +184,6 @@ def install(installFirmwares=True):
         # Remove wrong symlinks
         pisitools.remove("/lib/modules/%s/source" % suffix)
         pisitools.remove("/lib/modules/%s/build" % suffix)
-
-        if not installFirmwares:
-            # For use with PAE e.g.
-            shelltools.system("rm -rf %s/lib/firmware" % get.installDIR())
 
 
 def installHeaders(extra=[]):
