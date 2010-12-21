@@ -169,21 +169,23 @@ def install():
     # Install kernel image
     pisitools.insinto("/boot/", "arch/x86/boot/bzImage", "kernel-%s" % suffix)
 
-    # Check if loadable module support is available or not before doing module specific tasks
-    if re.search("CONFIG_MODULES=y", open(".config", "r").read().strip()):
+    # Install the modules
+    # mod-fw= avoids firmwares from installing
+    autotools.rawInstall("INSTALL_MOD_PATH=%s/" % get.installDIR(),
+                         "modules_install mod-fw=")
 
-        # Install the modules
-        # mod-fw= avoids firmwares from installing
-        autotools.rawInstall("INSTALL_MOD_PATH=%s/" % get.installDIR(),
-                             "modules_install mod-fw=")
+    # Remove symlinks first
+    pisitools.remove("/lib/modules/%s/source" % suffix)
+    pisitools.remove("/lib/modules/%s/build" % suffix)
 
-        # Install Module.symvers and System.map
-        pisitools.insinto("/lib/modules/%s/" % suffix, "System.map")
-        pisitools.insinto("/lib/modules/%s/" % suffix, "Module.symvers")
+    # Create correct ones
+    pisitools.dodir("/lib/modules/%s/build" % suffix)
+    pisitools.dosym("/lib/modules/%s/build" % suffix,
+                    "/lib/modules/%s/source" % suffix)
 
-        # Remove wrong symlinks
-        pisitools.remove("/lib/modules/%s/source" % suffix)
-        pisitools.remove("/lib/modules/%s/build" % suffix)
+    # Create extra/ and updates/ subdirectories
+    for _dir in ("extra", "updates"):
+        pisitools.dodir("/lib/modules/%s/%s" % (suffix, _dir))
 
 
 def installHeaders(extra=[]):
@@ -220,14 +222,15 @@ def installHeaders(extra=[]):
                         xargs -n1 -i: find : -type f) | \
                         cpio -pd --preserve-modification-time %s" % destination)
 
-    # Copy Modules.symvers
+    # Copy Modules.symvers and System.map
     shutil.copy("Module.symvers", "%s/" % destination)
+    shutil.copy("System.map", "%s/" % destination)
 
     # Copy .config file which will be needed by some external modules
     shutil.copy(".config", "%s/" % destination)
 
     # Unset CONFIG_DEBUG_INFO if it's set in the kernel configuration
-    pisitools.dosed(".config", ".*CONFIG_DEBUG_INFO=.*", "# CONFIG_DEBUG_INFO is not set")
+    # pisitools.dosed(".config", ".*CONFIG_DEBUG_INFO=.*", "# CONFIG_DEBUG_INFO is not set")
 
     # Settle the correct build symlink to this headers
     pisitools.dosym("/%s" % headersDirectoryName, "/lib/modules/%s/build" % suffix)
@@ -267,24 +270,6 @@ def installLibcHeaders(excludes=[]):
 
     # Remove tmp directory
     shelltools.system("rm -rf %s" % headers_tmp)
-
-
-def installSource(onlySymlink=False):
-    destination = "usr/src/linux-source-%s" %  __getSuffix()
-
-    # Create the symlink
-    pisitools.dosym("/%s" % destination, "/lib/modules/%s/source" % __getSuffix())
-
-    if not onlySymlink:
-        # Copy the whole source directory
-        pisitools.dodir("/usr/src")
-        shelltools.copytree("../%s/" % os.path.basename(get.curDIR()), os.path.join(get.installDIR(), destination))
-
-        # Cleanup the installed source
-        shelltools.cd(os.path.join(get.installDIR(), destination))
-        autotools.make("clean")
-        autotools.make("modules_prepare")
-        shelltools.system("find . -path './.*' | xargs rm -rf")
 
 
 def cleanModuleFiles():
