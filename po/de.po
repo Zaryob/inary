@@ -43,15 +43,15 @@ msgstr "Verwendung"
 
 #: /usr/lib/python2.7/optparse.py:418
 msgid "integer"
-msgstr ""
+msgstr "integer"
 
 #: /usr/lib/python2.7/optparse.py:419
 msgid "long integer"
-msgstr ""
+msgstr "long integer"
 
 #: /usr/lib/python2.7/optparse.py:420
 msgid "floating-point"
-msgstr ""
+msgstr "floating-point"
 
 #: /usr/lib/python2.7/optparse.py:421
 msgid "complex"
@@ -67,7 +67,7 @@ msgstr "Option %s: Ungültige Auswahl: %r (wähle von %s)"
 
 #: /usr/lib/python2.7/optparse.py:1245
 msgid "show this help message and exit"
-msgstr "Diese Hilfe anzeigen und beenden"
+msgstr "Diesen Hilfetext anzeigen und beenden"
 
 #: /usr/lib/python2.7/optparse.py:1250
 msgid "show program's version number and exit"
@@ -107,7 +107,7 @@ msgid ""
 "Please file a bug report to <http://bugs.pardus.org.tr>."
 msgstr ""
 "Unbehandelte interne Ausnahme.\n"
-"Bitte senden Sie einen Fehler-Bericht an <http://bugs.pardus.org.tr>."
+"Bitte erstellen Sie einen Fehler-Bericht auf <http://bugs.pardus.org.tr>."
 
 #: pisi-cli:58
 msgid "System error. Program terminated."
@@ -123,10 +123,13 @@ msgstr "Bitte geben Sie 'pisi help' für die Allgemeine-Hilfe ein"
 # kann und eigentlich auch so verständlich sein sollten. Traceback ist so
 # speziell, dass man es ruhig so stehen lassen kann
 #: pisi-cli:70
+#, fuzzy
 msgid ""
 "\n"
 "Traceback:"
 msgstr ""
+"\n"
+"Traceback:"
 
 # Zurückfolge für traceback gefällt mir nicht - eher noch Zurückverfolgung
 # oder Ablaufkette.
@@ -922,8 +925,9 @@ msgid "Supported package formats:"
 msgstr "Unterstütze Paket-Formate:"
 
 #: pisi/cli/build.py:168 pisi/cli/delta.py:75
+#, fuzzy
 msgid "  %s (default)"
-msgstr ""
+msgstr "  %s (default)"
 
 #: pisi/cli/build.py:176 pisi/cli/delta.py:92 pisi/cli/emerge.py:71
 msgid "Output directory: %s"
@@ -1792,8 +1796,9 @@ msgid "active"
 msgstr "Aktiv"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
+#, fuzzy
 msgid "%s [%s]"
-msgstr ""
+msgstr "%s [%s]"
 
 #: pisi/cli/listsources.py:24
 msgid ""
