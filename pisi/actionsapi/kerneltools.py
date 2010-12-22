@@ -46,13 +46,12 @@ def __getAllSupportedFlavours():
 #################
 
 def __getFlavour():
-    flavour = ""
     try:
         flavour = get.srcNAME().split("kernel-")[1]
     except IndexError:
-        pass
-
-    return flavour
+        return ""
+    else:
+        return flavour
 
 def __getModuleFlavour():
     for fl in [_f for _f in __getAllSupportedFlavours() if "-" in _f]:
@@ -67,9 +66,11 @@ def __getModuleFlavour():
     return "kernel"
 
 def __getKernelARCH():
+    """i386 is relevant for our i686 architecture."""
     return get.ARCH().replace("i686", "i386")
 
 def __getSuffix():
+    """Read and return the value read from .suffix file."""
     return open(".suffix", "r").read().strip()
 
 def __getExtraVersion(abiVersion):
@@ -115,7 +116,6 @@ def getKernelVersion(flavour=None):
         # Fail
         raise ConfigureError(_("Can't find kernel version information file %s.") % kverfile)
 
-
 def configure(abiVersion):
     # Copy the relevant configuration file
     shutil.copy("configs/kernel-%s-config" % get.ARCH(), ".config")
@@ -129,9 +129,12 @@ def configure(abiVersion):
         suffix += "-%s" % __getFlavour()
     open(".suffix", "w").write(suffix)
 
-    # Configure the kernel
-    autotools.make("ARCH=%s oldconfig" % __getKernelARCH())
+    # Check configuration with nonint_oldconfig
+    autotools.make("ARCH=%s nonint_oldconfig" % __getKernelARCH())
 
+    # Configure the kernel interactively if
+    # configuration contains new options
+    autotools.make("ARCH=%s oldconfig" % __getKernelARCH())
 
 def updateKConfig():
     # Call this to set newly added symbols to their defaults after sedding some KConfig
@@ -188,8 +191,15 @@ def install():
         pisitools.dodir("/lib/modules/%s/%s" % (suffix, _dir))
 
 
-def installHeaders(extra=[]):
+def installHeaders(extraHeaders=None):
     """ Install the files needed to build out-of-tree kernel modules. """
+
+    extras = ["drivers/media/dvb/dvb-core",
+              "drivers/media/dvb/frontends",
+              "drivers/media/video"]
+
+    if extraHeaders:
+        extras.extend(extraHeaders)
 
     pruned = ["include", "scripts"]
     wanted = ["Makefile*", "Kconfig*", "Kbuild*", "*.sh", "*.pl", "*.lds"]
@@ -210,9 +220,9 @@ def installHeaders(extra=[]):
 
     shelltools.system(find_cmd)
 
-    # Install additional headers passed by actions.py
-    for d in extra:
-        shelltools.system("cp -a %s/*.h %s/%s" % (d, destination, d))
+    # Install additional headers
+    for headers in extras:
+        shelltools.system("cp -a %s/*.h %s/%s" % (headers, destination, headers))
 
     # Install remaining headers
     shelltools.system("cp -a scripts include %s" % destination)
@@ -236,7 +246,7 @@ def installHeaders(extra=[]):
     pisitools.dosym("/%s" % headersDirectoryName, "/lib/modules/%s/build" % suffix)
 
 
-def installLibcHeaders(excludes=[]):
+def installLibcHeaders(excludes=None):
     headers_tmp = os.path.join(get.installDIR(), 'tmp-headers')
     headers_dir = os.path.join(get.installDIR(), 'usr/include')
 
