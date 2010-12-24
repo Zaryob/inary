@@ -129,12 +129,12 @@ def configure(abiVersion):
         suffix += "-%s" % __getFlavour()
     open(".suffix", "w").write(suffix)
 
-    # Check configuration with nonint_oldconfig
-    autotools.make("ARCH=%s nonint_oldconfig" % __getKernelARCH())
-
     # Configure the kernel interactively if
     # configuration contains new options
     autotools.make("ARCH=%s oldconfig" % __getKernelARCH())
+
+    # Check configuration with nonint_oldconfig
+    autotools.make("ARCH=%s nonint_oldconfig" % __getKernelARCH())
 
 def updateKConfig():
     # Call this to set newly added symbols to their defaults after sedding some KConfig
@@ -186,6 +186,10 @@ def install():
     pisitools.remove("/lib/modules/%s/source" % suffix)
     pisitools.remove("/lib/modules/%s/build" % suffix)
 
+    # Install Module.symvers and System.map here too
+    shutil.copy("Module.symvers", "%s/lib/modules/%s/" % (get.installDIR(), suffix))
+    shutil.copy("System.map", "%s/lib/modules/%s/" % (get.installDIR(), suffix))
+
     # Create extra/ and updates/ subdirectories
     for _dir in ("extra", "updates"):
         pisitools.dodir("/lib/modules/%s/%s" % (suffix, _dir))
@@ -226,6 +230,10 @@ def installHeaders(extraHeaders=None):
 
     # Install remaining headers
     shelltools.system("cp -a scripts include %s" % destination)
+
+    # Cleanup scripts directory
+    shelltools.system("rm -rf %s/scripts/*.o" % destination)
+    shelltools.system("rm -rf %s/scripts/*/*.o" % destination)
 
     # Finally copy the include directories found in arch/
     shelltools.system("(find arch -name include -type d -print | \
