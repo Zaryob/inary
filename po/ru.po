@@ -1241,6 +1241,14 @@ msgid ""
 "shows the package relations among repository packages, and writes\n"
 "the package in graphviz format to 'pgraph.dot'.\n"
 msgstr ""
+"График связей между пакетами\n"
+"\n"
+"Использование: graph [<пакет1> <пакет2> ...]\n"
+"\n"
+"Создать график связей между пакетами, отслеживающий зависимости и\n"
+"конфликты, начиная с заданных пакетов. По умолчанию\n"
+"показывает связи между пакетами в репозитории и записывает\n"
+"результат в формате graphviz в файл 'pgraph.dot'.\n"
 
 #: pisi/cli/graph.py:43
 msgid "graph options"
@@ -1248,11 +1256,11 @@ msgstr "graph опции"
 
 #: pisi/cli/graph.py:47
 msgid "Specify a particular repository"
-msgstr ""
+msgstr "Установить особый репозиторий"
 
 #: pisi/cli/graph.py:50
 msgid "Graph of installed packages"
-msgstr ""
+msgstr "График установленных пакетов"
 
 #: pisi/cli/graph.py:53
 msgid "Do not show installed packages"
@@ -1260,19 +1268,19 @@ msgstr "Не показывать установленные пакеты"
 
 #: pisi/cli/graph.py:56
 msgid "Dot output file"
-msgstr ""
+msgstr "Окончательное размещение файла"
 
 #: pisi/cli/graph.py:70
 msgid "Plotting packages in repository %s"
-msgstr ""
+msgstr "Размещение пакетов в репозитории %s"
 
 #: pisi/cli/graph.py:73
 msgid "Plotting a graph of relations among all repository packages"
-msgstr ""
+msgstr "Создание графика связей между всеми пакетами в репозитории"
 
 #: pisi/cli/graph.py:87
 msgid "Plotting a graph of relations among all installed packages"
-msgstr ""
+msgstr "Создание графика связей между всеми установленными пакетами"
 
 #: pisi/cli/help.py:22
 msgid ""
