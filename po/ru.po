@@ -1384,7 +1384,7 @@ msgstr "Дата: %s %s"
 
 #: pisi/cli/history.py:72
 msgid "    * There are %d packages in this snapshot."
-msgstr ""
+msgstr "    * %d пакетов в этом образе."
 
 #: pisi/cli/index.py:23
 msgid ""
@@ -1400,6 +1400,17 @@ msgid ""
 "If you give multiple directories, the command still works, but puts\n"
 "everything in a single index file.\n"
 msgstr ""
+"Индексировать файлы PiSi в заданной дитектории\n"
+"\n"
+"Использование: index <directory> ...\n"
+"\n"
+"Эта команда ищет все файлы PiSi в директории, собирает\n"
+"тэги из них и суммирует всю информацию в одном выходном файле XML, \n"
+"который по умолчанию называется 'pisi-index.xml'. В частности он индексирует и файлы\n"
+" исходников и бинарные пакеты.\n"
+"\n"
+"Если вы зададите несколько директорий, команда сработает, но все будет\n"
+"собрано в одном индексном файле.\n"
 
 #: pisi/cli/index.py:48
 msgid "index options"
@@ -1407,11 +1418,11 @@ msgstr "index опции"
 
 #: pisi/cli/index.py:53
 msgid "Store absolute links for indexed files."
-msgstr ""
+msgstr "Хранить жесткие ссылки на индексированные файлы."
 
 #: pisi/cli/index.py:58
 msgid "Index output file"
-msgstr ""
+msgstr "Файл для индексирования"
 
 #: pisi/cli/index.py:63
 msgid "Comma-separated compression types for index file"
