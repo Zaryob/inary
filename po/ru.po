@@ -2661,15 +2661,15 @@ msgstr ""
 
 #: pisi/operations/upgrade.py:52
 msgid "You must restart the following service(s) manually for the updated software to take effect:"
-msgstr ""
+msgstr "Вы должны перезапустить следующие службы вручную для того чтобы обновления программного обеспечения вступили в силу:"
 
 #: pisi/operations/upgrade.py:59
 msgid "You must restart your system for the updates in the following package(s) to take effect:"
-msgstr ""
+msgstr "Вы должны перезагрузить компьютер для того чтобы обновления следующих пакетов вступили в силу:"
 
 #: pisi/operations/upgrade.py:81
 msgid "Warning: package *name* ends with '.pisi'"
-msgstr ""
+msgstr "Внимание: *имя пакета* заканчивается расширением '.pisi'"
 
 #: pisi/operations/upgrade.py:84
 msgid "Package %s is not installed."
@@ -2677,7 +2677,7 @@ msgstr "Пакет %s не установлен."
 
 #: pisi/operations/upgrade.py:88
 msgid "Package %s is not available in repositories."
-msgstr ""
+msgstr "Пакет %s не доступен в репозиториях."
 
 #: pisi/operations/upgrade.py:105
 msgid "Package %s is already at the latest release %s."
@@ -2685,11 +2685,11 @@ msgstr ""
 
 #: pisi/operations/upgrade.py:166
 msgid "The following packages will be upgraded:"
-msgstr ""
+msgstr "Следующие пакеты будут обновлены:"
 
 #: pisi/operations/upgrade.py:176
 msgid "There are extra packages due to dependencies."
-msgstr ""
+msgstr "Есть дополнительные пакеты из-за зависимостей."
 
 #: pisi/operations/upgrade.py:256
 msgid "Dependency %s of %s cannot be satisfied"
@@ -2697,7 +2697,7 @@ msgstr ""
 
 #: pisi/operations/upgrade.py:257
 msgid "Upgrade is not possible."
-msgstr ""
+msgstr "Обновление не возможно."
 
 #: pisi/operations/upgrade.py:351
 msgid "Safety switch forces the installation of following packages:"
@@ -2790,11 +2790,11 @@ msgstr ""
 
 #: pisi/pxml/autoxml.py:720 pisi/pxml/autoxml.py:839
 msgid "Object cannot be encoded"
-msgstr ""
+msgstr "Объект не может быть закодирован"
 
 #: pisi/pxml/autoxml.py:734 pisi/pxml/autoxml.py:853
 msgid "Object cannot be formatted"
-msgstr ""
+msgstr "Объект не может быть отформатирован"
 
 #: pisi/pxml/autoxml.py:750
 msgid "List type must contain only one element"
@@ -2818,7 +2818,7 @@ msgstr ""
 
 #: pisi/pxml/xmlfile.py:85 pisi/specfile.py:431
 msgid "File '%s' has invalid XML"
-msgstr ""
+msgstr "Файл '%s' содержит неправильный XML"
 
 #: pisi/scenarioapi/package.py:67
 msgid "No pisi package: %s* found."
@@ -2826,11 +2826,11 @@ msgstr "Нет Pisi пакета: %s* поиск."
 
 #: pisi/scenarioapi/repoops.py:28
 msgid "Repo already has package named %s."
-msgstr ""
+msgstr "В репозитории уже есть пакет с именем %s."
 
 #: pisi/scenarioapi/repoops.py:52 pisi/scenarioapi/repoops.py:59
 msgid "Repo does not have package named %s."
-msgstr ""
+msgstr "В репозитории нет пакета с именем %s."
 
 #: pisi/sourcearchive.py:63
 msgid "Fetching source from: %s"
@@ -2962,7 +2962,7 @@ msgstr "Неверное имя пакета: %s"
 
 #: pisi/util.py:738
 msgid "Invalid delta package name: %s"
-msgstr ""
+msgstr "Неверное имя дельта пакета: %s"
 
 #: pisi/version.py:64
 msgid "Invalid version string: '%s'"
