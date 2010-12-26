@@ -988,10 +988,16 @@ msgid ""
 "PiSi uses filesystem locks for managing database access.\n"
 "This command deletes unused locks from the database directory."
 msgstr ""
+"Очистить файлы блокировки\n"
+"\n"
+"Использование: clean\n"
+"\n"
+"PiSi использует файлы блокировки состояния для управления доступом в базу данных.\n"
+"Эта команда удалит неиспользуемые файлы блокировки из директории базы данных."
 
 #: pisi/cli/command.py:30
 msgid "Command lacks name"
-msgstr ""
+msgstr "У команды отсутствует имя"
 
 #: pisi/cli/command.py:34
 msgid "Duplicate command %s"
@@ -1015,7 +1021,7 @@ msgstr "Отвечать ДА на все запросы ДА/НЕТ"
 
 #: pisi/cli/command.py:105
 msgid "Keep bandwidth usage under specified KB's"
-msgstr ""
+msgstr "Поддерживать пропускную способность на заданном уровне в Кб"
 
 #: pisi/cli/command.py:108
 msgid "Detailed output"
@@ -1027,11 +1033,11 @@ msgstr "Показать информацию об отладке"
 
 #: pisi/cli/command.py:112
 msgid "Suppresses all coloring of PiSi's output"
-msgstr ""
+msgstr "Убирает цветной вывод PiSi"
 
 #: pisi/cli/command.py:130
 msgid "Destination directory %s does not exist. Creating directory.\n"
-msgstr ""
+msgstr "Целевая директория %s не найдена. Создание директории.\n"
 
 #: pisi/cli/command.py:152
 msgid "Password: "
