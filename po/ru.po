@@ -1049,11 +1049,11 @@ msgstr "Аварийное завершение команды."
 
 #: pisi/cli/command.py:206 pisi/cli/emerge.py:53
 msgid "Bypass comar configuration agent"
-msgstr ""
+msgstr "Пропустить утилиту конфигурирования comar"
 
 #: pisi/cli/command.py:210
 msgid "Do not perform any action, just show what would be done"
-msgstr ""
+msgstr "Не выполнять никаких действи, просто смотреть, что могло бы произойти"
 
 #: pisi/cli/command.py:228
 msgid "usage: %s\n"
@@ -1068,6 +1068,11 @@ msgid ""
 "of packages waiting to be configured. This command\n"
 "configures those packages.\n"
 msgstr ""
+"Конфигурировать задерженные пакеты\n"
+"\n"
+"lf COMAR конфигурация не будет сделана\n"
+"во время установки, они будут добавлены в список пакетов, ожидающих конфигурирования. Эта команда\n"
+"сконфигурирует такие пакеты.\n"
 
 #: pisi/cli/configurepending.py:39
 msgid "configure-pending options"
@@ -1083,6 +1088,13 @@ msgid ""
 "under /var directory. Since these accumulate they can\n"
 "consume a lot of disk space."
 msgstr ""
+"Удалить файлы кэша\n"
+"\n"
+"Использование: delete-cache\n"
+"\n"
+"Пакеты с исходниками, бинарные пакеты и временные файоы хранятся в\n"
+" директории /var. После удаления этих файлов может\n"
+"освободиться много дискового пространства."
 
 #: pisi/cli/delta.py:24
 msgid ""
@@ -1229,7 +1241,7 @@ msgstr ""
 
 #: pisi/cli/graph.py:53
 msgid "Do not show installed packages"
-msgstr ""
+msgstr "Не показывать установленные пакеты"
 
 #: pisi/cli/graph.py:56
 msgid "Dot output file"
