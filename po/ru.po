@@ -1122,7 +1122,7 @@ msgstr "delta опции"
 
 #: pisi/cli/delta.py:54
 msgid "Use arg as the new package and treat other arguments as old packages."
-msgstr ""
+msgstr "Использовать аргумент как новый пакет и трактовать другие аргументы как старые пакеты."
 
 #: pisi/cli/delta.py:60
 msgid "Output directory for produced packages."
@@ -1157,6 +1157,14 @@ msgid ""
 "\n"
 "You can also give the name of a component.\n"
 msgstr ""
+"Создать и установить пакет исходных файлов PiSi из репозитория\n"
+"\n"
+"Использование: emerge <имя исходноников>... \n"
+"\n"
+"Вам следует указать имя пакета с исходными файлами, который\n"
+"будет скачан с репозитория, содержащего такие файоы.\n"
+"\n"
+"Вы также можете задать имя компонента.\n"
 
 #: pisi/cli/emerge.py:44
 msgid "emerge options"
@@ -1164,7 +1172,7 @@ msgstr "emerge опции"
 
 #: pisi/cli/emerge.py:47
 msgid "Emerge available packages under given component"
-msgstr ""
+msgstr "Собрать выбранные пакеты в занный компонент"
 
 #: pisi/cli/emerge.py:49 pisi/cli/install.py:53 pisi/cli/upgrade.py:58
 msgid "Ignore file conflicts"
@@ -1176,7 +1184,7 @@ msgstr "игнорировать конфликтные пакеты"
 
 #: pisi/cli/emerge.py:73
 msgid "Outputting binary packages in the package cache."
-msgstr ""
+msgstr "Бинарные пакеты, как результат, в кэше пакетов."
 
 #: pisi/cli/enablerepo.py:21
 msgid ""
@@ -1206,6 +1214,13 @@ msgid ""
 "\n"
 "Downloads the given pisi packages to working directory\n"
 msgstr ""
+"Скачать пакет\n"
+"\n"
+"Использование: fetch [<пакет1> <пакет2> ... <пакетn>]\n"
+"\n"
+"<пакетi>: имя пакета\n"
+"\n"
+"Скачивает заданные пакеты pisi в рабочую директорию\n"
 
 #: pisi/cli/fetch.py:41
 msgid "fetch options"
@@ -1213,7 +1228,7 @@ msgstr "fetch опции"
 
 #: pisi/cli/fetch.py:47
 msgid "Output directory for the fetched packages"
-msgstr ""
+msgstr "Директория для скачанных пакетов"
 
 #: pisi/cli/graph.py:26
 msgid ""
