@@ -1303,6 +1303,10 @@ msgid ""
 "where <command> is one of:\n"
 "\n"
 msgstr ""
+"%prog [options] <command> [arguments]\n"
+"\n"
+"где <command> это одна из:\n"
+"\n"
 
 #: pisi/cli/help.py:55
 msgid ""
@@ -1334,7 +1338,7 @@ msgstr "snapshot"
 
 #: pisi/cli/history.py:28
 msgid "takeback"
-msgstr ""
+msgstr "возврат"
 
 #: pisi/cli/history.py:28
 msgid "upgrade"
@@ -1348,6 +1352,11 @@ msgid ""
 "\n"
 "Lists previous operations."
 msgstr ""
+"История операций pisi\n"
+"\n"
+"Использование: history\n"
+"\n"
+"Список предыдущих операций."
 
 #: pisi/cli/history.py:47
 msgid "history options"
@@ -1355,15 +1364,15 @@ msgstr "history опции"
 
 #: pisi/cli/history.py:53
 msgid "Output only the last n operations"
-msgstr ""
+msgstr "Вывод только последней операции"
 
 #: pisi/cli/history.py:55
 msgid "Take snapshot of the current system"
-msgstr ""
+msgstr "Создать образ текущей системы"
 
 #: pisi/cli/history.py:57
 msgid "Takeback to the state after the given operation finished"
-msgstr ""
+msgstr "Вернуться к состоянию, после того, как операция будет выполнена"
 
 #: pisi/cli/history.py:67
 msgid "Operation #%d: %s"
