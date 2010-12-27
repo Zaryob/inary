@@ -133,8 +133,8 @@ def configure(abiVersion):
     # configuration contains new options
     autotools.make("ARCH=%s oldconfig" % __getKernelARCH())
 
-    # Check configuration with nonint_oldconfig
-    autotools.make("ARCH=%s nonint_oldconfig" % __getKernelARCH())
+    # Check configuration listnewconfig
+    autotools.make("ARCH=%s listnewconfig" % __getKernelARCH())
 
 def updateKConfig():
     # Call this to set newly added symbols to their defaults after sedding some KConfig
