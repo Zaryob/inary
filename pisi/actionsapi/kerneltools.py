@@ -71,9 +71,12 @@ def __getKernelARCH():
 
 def __getSuffix():
     """Read and return the value read from .suffix file."""
-    return open(".suffix", "r").read().strip()
+    suffix = get.srcVERSION()
+    if __getFlavour():
+        suffix += "-%s" % __getFlavour()
+    return suffix
 
-def __getExtraVersion(abiVersion):
+def __getExtraVersion():
     extraversion = ""
     try:
         # if successful, this is something like:
@@ -83,9 +86,6 @@ def __getExtraVersion(abiVersion):
     except IndexError:
         # e.g. if version == 2.6.30
         pass
-
-    # abiVersion will be passed from actions.py e.g. like the old release numbers
-    extraversion += "-%s" % abiVersion
 
     # Append pae, default, rt, etc. to the extraversion if available
     if __getFlavour():
@@ -116,33 +116,19 @@ def getKernelVersion(flavour=None):
         # Fail
         raise ConfigureError(_("Can't find kernel version information file %s.") % kverfile)
 
-def configure(abiVersion):
+def configure():
     # Copy the relevant configuration file
     shutil.copy("configs/kernel-%s-config" % get.ARCH(), ".config")
 
     # Set EXTRAVERSION
-    pisitools.dosed("Makefile", "EXTRAVERSION =.*", "EXTRAVERSION = %s" % __getExtraVersion(abiVersion))
-
-    # Create .suffix file which will contain __getSuffix()'s return value
-    suffix = "%s-%s" % (get.srcVERSION(), abiVersion)
-    if __getFlavour():
-        suffix += "-%s" % __getFlavour()
-    open(".suffix", "w").write(suffix)
+    pisitools.dosed("Makefile", "EXTRAVERSION =.*", "EXTRAVERSION = %s" % __getExtraVersion())
 
     # Configure the kernel interactively if
     # configuration contains new options
     autotools.make("ARCH=%s oldconfig" % __getKernelARCH())
 
-    # Check configuration listnewconfig
+    # Check configuration with listnewconfig
     autotools.make("ARCH=%s listnewconfig" % __getKernelARCH())
-
-def updateKConfig():
-    # Call this to set newly added symbols to their defaults after sedding some KConfig
-    # variables.
-
-    # Grr ugly but no solution.
-    shelltools.system('yes "" | make oldconfig')
-
 
 ###################################
 # Building and installation stuff #
@@ -205,7 +191,7 @@ def installHeaders(extraHeaders=None):
     if extraHeaders:
         extras.extend(extraHeaders)
 
-    pruned = ["include", "scripts"]
+    pruned = ["include", "scripts", "Documentation"]
     wanted = ["Makefile*", "Kconfig*", "Kbuild*", "*.sh", "*.pl", "*.lds"]
 
     suffix = __getSuffix()
@@ -229,11 +215,12 @@ def installHeaders(extraHeaders=None):
         shelltools.system("cp -a %s/*.h %s/%s" % (headers, destination, headers))
 
     # Install remaining headers
-    shelltools.system("cp -a scripts include %s" % destination)
+    shelltools.system("cp -a %s %s" % (" ".join(pruned), destination))
 
-    # Cleanup scripts directory
+    # Cleanup directories
     shelltools.system("rm -rf %s/scripts/*.o" % destination)
     shelltools.system("rm -rf %s/scripts/*/*.o" % destination)
+    shelltools.system("rm -rf %s/Documentation/DocBook" % destination)
 
     # Finally copy the include directories found in arch/
     shelltools.system("(find arch -name include -type d -print | \
@@ -246,9 +233,6 @@ def installHeaders(extraHeaders=None):
 
     # Copy .config file which will be needed by some external modules
     shutil.copy(".config", "%s/" % destination)
-
-    # Unset CONFIG_DEBUG_INFO if it's set in the kernel configuration
-    # pisitools.dosed(".config", ".*CONFIG_DEBUG_INFO=.*", "# CONFIG_DEBUG_INFO is not set")
 
     # Settle the correct build symlink to this headers
     pisitools.dosym("/%s" % headersDirectoryName, "/lib/modules/%s/build" % suffix)
