@@ -1,16 +1,201 @@
-Add non-root building support to pisi
-* if config.tmp_dir is not writeable defaults to /tmp/pisi-$USER
-* if /var/cache/pisi/archives is not writeable defaults to /tmp/pisi-$USER
-* Move chowning additional files into postinstall
-* Assume that group == owner if no group is given for AdditionalFiles
-
-BUGS:
-
-All files extracted under work_dir and installed under install_dir
-has owner:group == uid:gid of the user which builds the package.
-
----
-
+Index: patches/add-non-root-build-support.patch
+===================================================================
+--- patches/add-non-root-build-support.patch	(revision 34448)
++++ patches/add-non-root-build-support.patch	(working copy)
+@@ -1,180 +0,0 @@
+-Add non-root building support to pisi
+-* if config.tmp_dir is not writeable defaults to /tmp/pisi-$USER
+-* if /var/cache/pisi/archives is not writeable defaults to /tmp/pisi-$USER
+-* Move chowning additional files into postinstall
+-* Assume that group == owner if no group is given for AdditionalFiles
+-
+-BUGS:
+-
+-All files extracted under work_dir and installed under install_dir
+-has owner:group == uid:gid of the user which builds the package.
+-
+----
+-
+-Index: pisi/operations/build.py
+-===================================================================
+---- pisi/operations/build.py	(revision 34443)
+-+++ pisi/operations/build.py	(working copy)
+-@@ -277,7 +277,7 @@
+-                      self.spec.getSourceVersion() + '-' + \
+-                      self.spec.getSourceRelease()
+-         return util.join_path(ctx.config.dest_dir(),
+--                              ctx.config.values.dirs.tmp_dir,
+-+                              ctx.config.tmp_dir(),
+-                               packageDir)
+- 
+-     def pkg_work_dir(self):
+-@@ -886,12 +886,43 @@
+-                 frpath = util.removepathprefix(install_dir, fpath)  # relative path
+-                 ftype, permanent = get_file_type(frpath, package.files)
+-                 fsize = long(util.dir_size(fpath))
+-+
+-                 if not os.path.islink(fpath):
+-                     st = os.stat(fpath)
+-                 else:
+-                     st = os.lstat(fpath)
+-+
+-+                _uid = str(st.st_uid)
+-+                _gid = str(st.st_gid)
+-+
+-+                for afile in package.additionalFiles:
+-+                    # FIXME: Better way?
+-+                    if frpath == util.removepathprefix("/",afile.target):
+-+                        # This is an additional file, uid and gid will change
+-+                        if afile.owner:
+-+                            try:
+-+                                _uid = str(pwd.getpwnam(afile.owner)[2])
+-+                            except KeyError:
+-+                                ctx.ui.warning(_("No user named '%s' found "
+-+                                                 "on the system") % afile.owner)
+-+                        if afile.group:
+-+                            try:
+-+                                _gid = str(grp.getgrnam(afile.group)[2])
+-+                            except KeyError:
+-+                                ctx.ui.warning(_("No group named '%s' found "
+-+                                                 "on the system") % afile.group)
+-+                        else:
+-+                            try:
+-+                                # Assume owner == root if no group is given
+-+                                _gid = str(grp.getgrnam(afile.owner)[2])
+-+                            except KeyError:
+-+                                ctx.ui.warning(_("No group named '%s' (value "
+-+                                                 "guessed from owner) found "
+-+                                                 "on the system") % afile.owner)
+-+                        break
+-+
+-                 d[frpath] = pisi.files.FileInfo(path=frpath, type=ftype, permanent=permanent,
+--                                     size=fsize, hash=fhash, uid=str(st.st_uid), gid=str(st.st_gid),
+-+                                     size=fsize, hash=fhash, uid=_uid, gid=_gid,
+-                                      mode=oct(stat.S_IMODE(st.st_mode)))
+-                 if stat.S_IMODE(st.st_mode) & stat.S_ISUID:
+-                     ctx.ui.warning(_("/%s has suid bit set") % frpath)
+-@@ -960,21 +991,12 @@
+-                         install_dir + os.path.dirname(afile.target),
+-                         os.path.basename(afile.target))
+-                 util.copy_file(src, dest)
+-+
+-+                # FIXME: Check that chmodding is safe for non-root builds
+-                 if afile.permission:
+-                     # mode is octal!
+-                     os.chmod(dest, int(afile.permission, 8))
+--                if afile.owner:
+--                    try:
+--                        os.chown(dest, pwd.getpwnam(afile.owner)[2], -1)
+--                    except KeyError:
+--                        ctx.ui.warning(_("No user named '%s' found "
+--                                         "on the system") % afile.owner)
+--                if afile.group:
+--                    try:
+--                        os.chown(dest, -1, grp.getgrnam(afile.group)[2])
+--                    except KeyError:
+--                        ctx.ui.warning(_("No group named '%s' found "
+--                                         "on the system") % afile.group)
+-+
+-         os.chdir(c)
+- 
+-         # Show the files those are not collected from the install dir
+-Index: pisi/config.py
+-===================================================================
+---- pisi/config.py	(revision 34443)
+-+++ pisi/config.py	(working copy)
+-@@ -118,8 +118,13 @@
+-         return self.subdir(self.values.dirs.packages_dir)
+- 
+-     def archives_dir(self):
+--        return self.subdir(self.values.dirs.archives_dir)
+-+        retval = self.subdir(self.values.dirs.archives_dir)
+-+        # check write access
+-+        if not os.access(retval, os.W_OK):
+-+            retval = self.tmp_dir()
+- 
+-+        return retval
+-+
+-     def cache_root_dir(self):
+-         return self.subdir(self.values.dirs.cache_root_dir)
+- 
+-@@ -136,16 +141,15 @@
+-         return self.subdir(self.values.dirs.index_dir)
+- 
+-     def tmp_dir(self):
+--        sysdir = self.subdir(self.values.dirs.tmp_dir)
+--        if os.environ.has_key('USER'):
+--            userdir = self.subdir('/tmp/pisi-' + os.environ['USER'])
+--        else:
+--            userdir = self.subdir('/tmp/pisi-root')
+-+        retval = self.subdir(self.values.dirs.tmp_dir)
+-+        userdir = self.subdir("/tmp/pisi-%s" % \
+-+                os.environ.get("USER", "root"))
+-+
+-         # check write access
+--        if os.access(sysdir, os.W_OK):
+--            return sysdir
+--        else:
+--            return userdir
+-+        if not os.access(retval, os.W_OK):
+-+            retval = userdir
+- 
+-+        return retval
+-+
+- #TODO: remove this
+- config = Config()
+-Index: pisi/atomicoperations.py
+-===================================================================
+---- pisi/atomicoperations.py	(revision 34443)
+-+++ pisi/atomicoperations.py	(working copy)
+-@@ -283,6 +283,12 @@
+- 
+-     def postinstall(self):
+-         self.config_later = False
+-+
+-+        # Chowning for additional files
+-+        for _file in self.package.get_files().list:
+-+            fpath = pisi.util.join_path(ctx.config.dest_dir(), _file.path)
+-+            os.chown(fpath, int(_file.uid), int(_file.gid))
+-+
+-         if ctx.comar:
+-             import pisi.comariface
+-             try:
+-Index: pisi/cli/build.py
+-===================================================================
+---- pisi/cli/build.py	(revision 34443)
+-+++ pisi/cli/build.py	(working copy)
+-@@ -160,8 +160,8 @@
+-         if not self.options.quiet:
+-             self.options.debug = True
+- 
+-+        self.init(False, False)
+-         if self.options.package_format == "help":
+--            self.init(False, False)
+-             ctx.ui.info(_("Supported package formats:"))
+-             for format in pisi.package.Package.formats:
+-                 if format == pisi.package.Package.default_format:
+-@@ -170,8 +170,6 @@
+-                     ctx.ui.info("  %s" % format)
+-             return
+- 
+--        self.init()
+--
+-         if ctx.get_option('output_dir'):
+-             ctx.ui.info(_('Output directory: %s')
+-                         % ctx.config.options.output_dir)
+Index: pisi/package.py
+===================================================================
+--- pisi/package.py	(revision 34443)
++++ pisi/package.py	(working copy)
+@@ -170,7 +170,7 @@
+         tar = archive.ArchiveTar(fileobj=archive_file,
+                                  arch_type=archive_format,
+                                  no_same_permissions=False,
+-                                 no_same_owner=False)
++                                 no_same_owner=True)
+ 
+         return tar
+ 
 Index: pisi/operations/build.py
 ===================================================================
 --- pisi/operations/build.py	(revision 34443)
@@ -142,19 +327,79 @@ Index: pisi/atomicoperations.py
 ===================================================================
 --- pisi/atomicoperations.py	(revision 34443)
 +++ pisi/atomicoperations.py	(working copy)
-@@ -283,6 +283,12 @@
+@@ -112,7 +112,7 @@
+             # Bug 4113
+             if not cached_file:
+                 downloaded_file = install_op.package.filepath
+-                if pisi.util.sha1_file(downloaded_file) != pkg_hash:
++                if util.sha1_file(downloaded_file) != pkg_hash:
+                     raise pisi.Error(_("Download Error: Package does not match the repository package."))
+ 
+             return install_op
+@@ -213,7 +213,7 @@
+         for f in self.files.list:
+             if self.filesdb.has_file(f.path):
+                 pkg, existing_file = self.filesdb.get_file(f.path)
+-                dst = pisi.util.join_path(ctx.config.dest_dir(), f.path)
++                dst = util.join_path(ctx.config.dest_dir(), f.path)
+                 if pkg != self.pkginfo.name and not os.path.isdir(dst) and really_conflicts(pkg):
+                     file_conflicts.append( (pkg, existing_file) )
+         if file_conflicts:
+@@ -283,6 +283,13 @@
  
      def postinstall(self):
          self.config_later = False
 +
 +        # Chowning for additional files
 +        for _file in self.package.get_files().list:
-+            fpath = pisi.util.join_path(ctx.config.dest_dir(), _file.path)
++            fpath = util.join_path(ctx.config.dest_dir(), _file.path)
++            print "** chowning in postinstall (%s:%s)" % (_file.uid, _file.gid)
 +            os.chown(fpath, int(_file.uid), int(_file.gid))
 +
          if ctx.comar:
              import pisi.comariface
              try:
+@@ -318,8 +325,8 @@
+ 
+         config_changed = []
+         def check_config_changed(config):
+-            fpath = pisi.util.join_path(ctx.config.dest_dir(), config.path)
+-            if pisi.util.config_changed(config):
++            fpath = util.join_path(ctx.config.dest_dir(), config.path)
++            if util.config_changed(config):
+                 config_changed.append(fpath)
+                 self.historydb.save_config(self.pkginfo.name, fpath)
+                 if os.path.exists(fpath + '.old'):
+@@ -603,9 +610,9 @@
+ 
+         if fileinfo.permanent and not remove_permanent:
+             return
+-        
+-        fpath = pisi.util.join_path(ctx.config.dest_dir(), fileinfo.path)
+ 
++        fpath = util.join_path(ctx.config.dest_dir(), fileinfo.path)
++
+         historydb = pisi.db.historydb.HistoryDB()
+         filesdb = pisi.db.filesdb.FilesDB()
+         # we should check if the file belongs to another
+@@ -626,7 +633,7 @@
+             # and when the package is reinstalled the symlink will
+             # link to that changed file again.
+             try:
+-                if os.path.islink(fpath) or pisi.util.sha1_file(fpath) == fileinfo.hash:
++                if os.path.islink(fpath) or util.sha1_file(fpath) == fileinfo.hash:
+                     os.unlink(fpath)
+                 else:
+                     # keep changed file in history
+@@ -635,7 +642,7 @@
+                     # after saving to history db, remove the config file any way
+                     if ctx.get_option("purge"):
+                         os.unlink(fpath)
+-            except pisi.util.FileError:
++            except util.FileError:
+                 pass
+         else:
+             if os.path.isfile(fpath) or os.path.islink(fpath):
 Index: pisi/cli/build.py
 ===================================================================
 --- pisi/cli/build.py	(revision 34443)
@@ -178,3 +423,46 @@ Index: pisi/cli/build.py
          if ctx.get_option('output_dir'):
              ctx.ui.info(_('Output directory: %s')
                          % ctx.config.options.output_dir)
+Index: pisi/archive.py
+===================================================================
+--- pisi/archive.py	(revision 34443)
++++ pisi/archive.py	(working copy)
+@@ -251,7 +251,7 @@
+     This class provides the unpack magic for tar archives."""
+     def __init__(self, file_path=None, arch_type="tar",
+                         no_same_permissions=True,
+-                        no_same_owner=True,
++                        no_same_owner=False,
+                         fileobj=None):
+         super(ArchiveTar, self).__init__(file_path, arch_type)
+         self.tar = None
+@@ -288,11 +288,10 @@
+             oldwd = os.getcwd()
+         except OSError:
+             pass
++
++        print "** %s" % target_dir
+         os.chdir(target_dir)
+ 
+-        uid = os.getuid()
+-        gid = os.getgid()
+-
+         for tarinfo in self.tar:
+             if callback:
+                 callback(tarinfo, extracted=False)
+@@ -309,9 +308,15 @@
+                 os.chmod(tarinfo.name, tarinfo.mode & ~ctx.const.umask)
+ 
+             if self.no_same_owner:
++                uid = os.getuid()
++                gid = os.getgid()
++
++
+                 if not os.path.islink(tarinfo.name):
++                    print "******** Chowning %s (%s:%s)" % (tarinfo.name, uid, gid)
+                     os.chown(tarinfo.name, uid, gid)
+                 else:
++                    print "******** LChowning %s (%s:%s)" % (tarinfo.name, uid, gid)
+                     os.lchown(tarinfo.name, uid, gid)
+ 
+             if callback:
