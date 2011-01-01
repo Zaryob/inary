@@ -1373,14 +1373,12 @@ msgid "Takeback to the state after the given operation finished"
 msgstr ""
 
 #: pisi/cli/history.py:67
-#, fuzzy
 msgid "Operation #%d: %s"
-msgstr "Descrizione: %s\n"
+msgstr "Operazione #%d: %s"
 
 #: pisi/cli/history.py:68
-#, fuzzy
 msgid "Date: %s %s"
-msgstr "Impossibile recuperare %s; %s"
+msgstr "Data: %s %s"
 
 #: pisi/cli/history.py:72
 msgid "    * There are %d packages in this snapshot."
@@ -1500,9 +1498,8 @@ msgid "%s package is not installed"
 msgstr "Il pacchetto %s non è installato"
 
 #: pisi/cli/info.py:172
-#, fuzzy
 msgid "[binary] "
-msgstr "[inst] "
+msgstr "[binario] "
 
 #: pisi/cli/info.py:174 pisi/cli/info.py:186
 msgid "Package found in %s repository:"
@@ -1514,9 +1511,8 @@ msgid "%s package is not found in binary repositories"
 msgstr "%s non è stato trovato nei repository"
 
 #: pisi/cli/info.py:184
-#, fuzzy
 msgid "[source] "
-msgstr "[repo] "
+msgstr "[sorgente] "
 
 #: pisi/cli/info.py:189
 msgid "%s package is not found in source repositories"
@@ -1747,11 +1743,11 @@ msgstr ""
 
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
-msgstr ""
+msgstr "inattivo"
 
 #: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
 msgid "active"
-msgstr ""
+msgstr "attivo"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
