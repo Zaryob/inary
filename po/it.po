@@ -590,9 +590,8 @@ msgid "Package %s not found in any active repository."
 msgstr "Il pacchetto %s non è stato trovato in alcun repository attivo."
 
 #: pisi/atomicoperations.py:146
-#, fuzzy
 msgid "Installing %s, version %s, release %s"
-msgstr "Installazione di %s, versione %s, release %s, build %s"
+msgstr "Installazione di %s, versione %s, release %s"
 
 #: pisi/atomicoperations.py:192 pisi/operations/build.py:701
 msgid "%s-%s is not a valid PiSi version format"
@@ -736,9 +735,8 @@ msgid "add-repo options"
 msgstr "opzioni add-repo"
 
 #: pisi/cli/addrepo.py:46
-#, fuzzy
 msgid "Ignore repository distribution check"
-msgstr "Stringa del repository non valida"
+msgstr "Ignora il controllo del repositorio della distribuzione"
 
 #: pisi/cli/addrepo.py:47
 msgid "Does not fetch repository index and does not check distribution match"
@@ -768,9 +766,8 @@ msgid ""
 msgstr ""
 
 #: pisi/cli/blame.py:39
-#, fuzzy
 msgid "blame options"
-msgstr "opzioni di costruzione"
+msgstr ""
 
 #: pisi/cli/blame.py:40
 msgid "Blame for the given release"
