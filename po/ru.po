@@ -1586,28 +1586,35 @@ msgid ""
 "repositories. If no repository is specified, we list packages in\n"
 "all repositories.\n"
 msgstr ""
+"Показать доступные пакеты в репозиториях\n"
+"\n"
+"Использование: list-available [<repo1> <repo2> ... <repon>]\n"
+"\n"
+"Показывает список пакетов PiSi, содержащихся в заданных\n"
+"репозиториях. Если не задан ни один репозиторий, будут показаны пакеты из\n"
+"всех репозиториев.\n"
 
 #: pisi/cli/listavailable.py:45
 msgid "list-available options"
-msgstr ""
+msgstr "list-available опции"
 
 #: pisi/cli/listavailable.py:47 pisi/cli/listcomponents.py:42
 #: pisi/cli/listinstalled.py:48 pisi/cli/listsources.py:41
 #: pisi/cli/listupgrades.py:44 pisi/cli/searchfile.py:40
 msgid "Show in long format"
-msgstr ""
+msgstr "Показать в расширенном формате"
 
 #: pisi/cli/listavailable.py:49
 msgid "List available packages under given component"
-msgstr ""
+msgstr "Показать доступные пакеты в данном компоненте"
 
 #: pisi/cli/listavailable.py:51
 msgid "Show uninstalled packages only"
-msgstr ""
+msgstr "Показать только не установленные пакеты"
 
 #: pisi/cli/listavailable.py:59
 msgid "Installed packages are shown in this color"
-msgstr ""
+msgstr "установленные пакеты показываются данным цветом"
 
 #: pisi/cli/listavailable.py:67
 msgid "Repository : %s\n"
