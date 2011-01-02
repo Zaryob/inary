@@ -1477,9 +1477,8 @@ msgid "Reverse Dependencies:"
 msgstr "Richiesto da:"
 
 #: pisi/cli/info.py:140
-#, fuzzy
 msgid "Reverse Build Dependencies:"
-msgstr "Richiesto da:"
+msgstr ""
 
 #: pisi/cli/info.py:145
 msgid "Package file: %s"
@@ -1506,9 +1505,8 @@ msgid "Package found in %s repository:"
 msgstr "Pacchetto trovato nel repository %s:"
 
 #: pisi/cli/info.py:177
-#, fuzzy
 msgid "%s package is not found in binary repositories"
-msgstr "%s non è stato trovato nei repository"
+msgstr "Pacchetto %s non è stato trovato nel repositorio binario"
 
 #: pisi/cli/info.py:184
 msgid "[source] "
@@ -1558,7 +1556,7 @@ msgstr "Installa i pacchetti del componente e dei componenti ricorsivi"
 
 #: pisi/cli/install.py:59
 msgid "Name of the component's repository"
-msgstr ""
+msgstr "Nome del repositorio del componente"
 
 #: pisi/cli/install.py:61 pisi/cli/upgrade.py:66
 msgid "Fetch upgrades but do not install."
@@ -1660,7 +1658,7 @@ msgstr "opzioni list-installed"
 #: pisi/cli/listinstalled.py:45
 #, fuzzy
 msgid "Only list the installed packages built by the given host"
-msgstr "Elenca i pacchetti installati sotto il componente fornito"
+msgstr "Elenca solo i pacchetti compilati dal dato host"
 
 #: pisi/cli/listinstalled.py:50
 msgid "List installed packages under given component"
@@ -1671,9 +1669,8 @@ msgid "Show detailed install info"
 msgstr "Mostra informazione dettagliate sull'installazione"
 
 #: pisi/cli/listinstalled.py:78 pisi/cli/listupgrades.py:73
-#, fuzzy
 msgid "Package Name          |St|        Version|  Rel.|  Distro|             Date"
-msgstr "Nome pacchetto     |St|   Versione|  Rel.| Build|  Distro|             Data"
+msgstr "Nome pacchetto |St| Versione| Rel.| Distro| Data"
 
 #: pisi/cli/listnewest.py:25
 msgid ""
@@ -1751,7 +1748,7 @@ msgstr "attivo"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
-msgstr ""
+msgstr "%s [%s]"
 
 #: pisi/cli/listsources.py:24
 msgid ""
@@ -1914,7 +1911,7 @@ msgstr "opzioni di ricerca"
 
 #: pisi/cli/search.py:45
 msgid "Summary and description language"
-msgstr ""
+msgstr "Linguaggio del sommario e descrizione"
 
 #: pisi/cli/search.py:49
 msgid "Search in installdb"
@@ -1930,11 +1927,11 @@ msgstr "Cerca nel nome del pacchetto"
 
 #: pisi/cli/search.py:55
 msgid "Search in the package summary"
-msgstr ""
+msgstr "Cerca nel sommario dei pachetti"
 
 #: pisi/cli/search.py:57
 msgid "Search in the package description"
-msgstr ""
+msgstr "Cerca nel descrizione dei pachetti"
 
 #: pisi/cli/searchfile.py:24
 msgid ""
