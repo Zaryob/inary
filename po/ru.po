@@ -1426,15 +1426,15 @@ msgstr "Файл для индексирования"
 
 #: pisi/cli/index.py:63
 msgid "Comma-separated compression types for index file"
-msgstr ""
+msgstr "Разделенные запятыми типы сжатия для индексного файла"
 
 #: pisi/cli/index.py:69
 msgid "Do not index PiSi spec files."
-msgstr ""
+msgstr "Не индексировать файлы PiSi"
 
 #: pisi/cli/index.py:74
 msgid "Do not sign index."
-msgstr ""
+msgstr "Не отмечать индекс."
 
 #: pisi/cli/info.py:26
 msgid ""
@@ -1460,7 +1460,7 @@ msgstr "Показать список пакетов."
 
 #: pisi/cli/info.py:54
 msgid "Info about the given component"
-msgstr ""
+msgstr "Информировать о заданном компоненте"
 
 #: pisi/cli/info.py:57
 msgid "Show only paths."
@@ -1472,15 +1472,15 @@ msgstr "Не показывать подробности"
 
 #: pisi/cli/info.py:61
 msgid "Output in xml format"
-msgstr ""
+msgstr "Вывод в формате xml"
 
 #: pisi/cli/info.py:129
 msgid "Reverse Dependencies:"
-msgstr ""
+msgstr "Реверсивные зависимости:"
 
 #: pisi/cli/info.py:140
 msgid "Reverse Build Dependencies:"
-msgstr ""
+msgstr "Зависимости реверсивного создания:"
 
 #: pisi/cli/info.py:145
 msgid "Package file: %s"
@@ -1530,6 +1530,15 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
+"Установить пакеты PiSi\n"
+"\n"
+"Использование: install <пакет1> <пакет2> ... <пакетn>\n"
+"\n"
+"Вы можете использовать имена файлов, ссылки или имена пакетов для установки. Если у вас\n"
+"определено имя пакета, он должен существовать в заданном репозитории.\n"
+"\n"
+"Вы можете также задать компоненты вместо названий пакетов, тогда\n"
+"они будут выбраны как наборы пакетов.\n"
 
 #: pisi/cli/install.py:44
 msgid "install options"
