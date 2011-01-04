@@ -2045,6 +2045,8 @@ msgid ""
 "Cannot connect to COMAR: \n"
 "  %s\n"
 msgstr ""
+"Невозможно соединиться с COMAR: \n"
+" %s\n"
 
 #: pisi/comariface.py:92
 msgid "Configuring %s package"
@@ -2056,13 +2058,13 @@ msgstr ""
 
 #: pisi/comariface.py:104
 msgid "Registering %s comar script"
-msgstr ""
+msgstr "Регистрация comar-скрипта %s "
 
 #: pisi/comariface.py:111 pisi/comariface.py:116 pisi/comariface.py:125
 #: pisi/comariface.py:139 pisi/comariface.py:156 pisi/comariface.py:165
 #: pisi/comariface.py:184 pisi/comariface.py:193 pisi/comariface.py:200
 msgid "Script error: %s"
-msgstr ""
+msgstr "Ошибка скрипта: %s"
 
 #: pisi/comariface.py:118
 msgid "Calling post install handlers"
@@ -2070,11 +2072,11 @@ msgstr ""
 
 #: pisi/comariface.py:133
 msgid "Running package's post install script"
-msgstr ""
+msgstr "Запуск послеустановочного скрипта"
 
 #: pisi/comariface.py:144
 msgid "Running pre removal operations for %s"
-msgstr ""
+msgstr "Запуск операций перед удалением %s"
 
 #: pisi/comariface.py:150
 msgid "Running package's pre remove script"
