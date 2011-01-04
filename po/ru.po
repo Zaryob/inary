@@ -2764,7 +2764,7 @@ msgstr "Пакет %s не доступен в репозиториях."
 
 #: pisi/operations/upgrade.py:105
 msgid "Package %s is already at the latest release %s."
-msgstr ""
+msgstr "Пакет %s уже последнего релиза %s."
 
 #: pisi/operations/upgrade.py:166
 msgid "The following packages will be upgraded:"
@@ -2796,7 +2796,7 @@ msgstr "Файл пакета не может быть открыт: %s"
 
 #: pisi/package.py:88
 msgid "Unsupported package format: %s"
-msgstr ""
+msgstr "Неподдерживаемый формат пакета: %s"
 
 #: pisi/package.py:102
 msgid ""
@@ -2828,19 +2828,19 @@ msgstr "autoxml.check: '%s' errors"
 
 #: pisi/pxml/autoxml.py:427 pisi/pxml/autoxml.py:437
 msgid "autoxml.parse: String '%s' has errors"
-msgstr ""
+msgstr "autoxml.parse: Строка '%s' содержит ошибки"
 
 #: pisi/pxml/autoxml.py:451 pisi/pxml/autoxml.py:461
 msgid "autoxml.read: File '%s' has errors"
-msgstr ""
+msgstr "autoxml.read: Файл '%s' содержит ошибки"
 
 #: pisi/pxml/autoxml.py:469
 msgid "autoxml.write: object validation has failed"
-msgstr ""
+msgstr "autoxml.write: Проверка объекта не удалась"
 
 #: pisi/pxml/autoxml.py:477
 msgid "autoxml.write: File encoding '%s' has errors"
-msgstr ""
+msgstr "autoxml.write: Кодировка файла '%s' содержит ошибки"
 
 #: pisi/pxml/autoxml.py:527
 msgid "gen_tag: unrecognized tag type %s in spec"
