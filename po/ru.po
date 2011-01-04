@@ -1672,7 +1672,7 @@ msgstr "Показать детальную информацию об устан
 
 #: pisi/cli/listinstalled.py:78 pisi/cli/listupgrades.py:73
 msgid "Package Name          |St|        Version|  Rel.|  Distro|             Date"
-msgstr ""
+msgstr "Имя пакета |Ст| Версия| Рел.| Дистр.| Дата"
 
 #: pisi/cli/listnewest.py:25
 msgid ""
@@ -1684,6 +1684,13 @@ msgid ""
 "repositories. If no repository is specified, we list the new\n"
 "packages from all repositories.\n"
 msgstr ""
+"Список новых пакетов в репозиториях\n"
+"\n"
+"Использование: list-newest [ <repo1> <repo2> ... repon ]\n"
+"\n"
+"Выдает список новых PiSi-пакетов, опубликованных в заданных\n"
+"репозиториях. Если репозиторий не задан, мы получим список новых\n"
+"пакетов из всех репозиториев.\n"
 
 #: pisi/cli/listnewest.py:44
 msgid "list-newest options"
@@ -1727,14 +1734,19 @@ msgid ""
 "\n"
 "Lists currently tracked repositories.\n"
 msgstr ""
+"Список репозиториев\n"
+"\n"
+"Использование: list-repo\n"
+"\n"
+"Показать текущие используемые репозитории.\n"
 
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
-msgstr ""
+msgstr "не активен"
 
 #: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
 msgid "active"
-msgstr ""
+msgstr "активен"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
@@ -1946,7 +1958,7 @@ msgstr "Путь '%s' не принадлежит установленному �
 
 #: pisi/cli/searchfile.py:65
 msgid "Searching for %s"
-msgstr ""
+msgstr "Поиск для %s"
 
 #: pisi/cli/updaterepo.py:24
 msgid ""
@@ -2018,7 +2030,7 @@ msgstr ""
 
 #: pisi/cli/upgrade.py:85
 msgid "Updating repositories"
-msgstr ""
+msgstr "Обновление репозиториев"
 
 #: pisi/cli/upgrade.py:89
 msgid "Will not update repositories"
@@ -2026,7 +2038,7 @@ msgstr ""
 
 #: pisi/comariface.py:31
 msgid "comar-api package is not fully installed"
-msgstr ""
+msgstr "Пакет comar-api установлен не полностью."
 
 #: pisi/comariface.py:87
 msgid ""
