@@ -1849,6 +1849,11 @@ msgid ""
 "\n"
 "Remove all repository information from the system.\n"
 msgstr ""
+"Удалить репозитории\n"
+"\n"
+"Использование: remove-repo <репозиторий1> <репозиторий2> ... <репозиторийn>\n"
+"\n"
+"Удалит всю информацию о репозитории из системы.\n"
 
 #: pisi/cli/search.py:25
 msgid ""
@@ -1899,6 +1904,11 @@ msgid ""
 "\n"
 "Finds the installed package which contains the specified file.\n"
 msgstr ""
+"Искать файл\n"
+"\n"
+"Использование: search-file <путь1> <путь2> ... <путьn>\n"
+"\n"
+"Ищет установленный пакет, который содержит указанный файл.\n"
 
 #: pisi/cli/searchfile.py:38
 msgid "search-file options"
@@ -1914,7 +1924,7 @@ msgstr "Пакет %s содержит файл /%s"
 
 #: pisi/cli/searchfile.py:52
 msgid "Path '%s' does not belong to an installed package"
-msgstr ""
+msgstr "Путь '%s' не принадлежит установленному пакету"
 
 #: pisi/cli/searchfile.py:65
 msgid "Searching for %s"
