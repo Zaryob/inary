@@ -2288,11 +2288,11 @@ msgstr "%s репозиторий обновлен."
 
 #: pisi/history.py:63
 msgid "%s is upgraded from %s to %s with delta."
-msgstr ""
+msgstr "%s обновлен с %s до %s при помощи применения разности пакетов (т.н. delta)"
 
 #: pisi/history.py:65
 msgid "%s is upgraded from %s to %s."
-msgstr ""
+msgstr "%s обновлен с %s до %s."
 
 #: pisi/history.py:67
 msgid "%s %s is removed."
@@ -2308,7 +2308,7 @@ msgstr "%s %s переустановлен."
 
 #: pisi/history.py:73
 msgid "%s is downgraded from %s to %s."
-msgstr ""
+msgstr "%s обновлен с %s до более ранней версии %s."
 
 #: pisi/index.py:118
 msgid "Adding %s to package index"
@@ -2316,7 +2316,7 @@ msgstr ""
 
 #: pisi/index.py:135
 msgid "Package %s: metadata corrupt, skipping..."
-msgstr ""
+msgstr "Пакет %s: метадата повреждена, пропуск..."
 
 #: pisi/index.py:195
 msgid "Adding %s to source index"
@@ -2324,19 +2324,19 @@ msgstr ""
 
 #: pisi/metadata.py:78
 msgid "Distribution: %s, Dist. Release: %s\n"
-msgstr ""
+msgstr "Дистрибутив: %s, Релиз дистр.: %s\n"
 
 #: pisi/metadata.py:80
 msgid "Architecture: %s, Installed Size: %s"
-msgstr ""
+msgstr "Архитектура: %s, Размер установки: %s"
 
 #: pisi/metadata.py:86
 msgid ", Package Size: %s"
-msgstr ""
+msgstr ", Размер пакета: %s"
 
 #: pisi/mirrors.py:46
 msgid "Mirrors file %s does not exist. Could not resolve mirrors://"
-msgstr ""
+msgstr "Файл зеркал %s не существует. Невозможно определить mirrors://"
 
 #: pisi/operations/build.py:115
 msgid "Path %s belongs in multiple packages"
@@ -2344,11 +2344,11 @@ msgstr ""
 
 #: pisi/operations/build.py:189
 msgid "Source URI: %s"
-msgstr ""
+msgstr "Адрес исходного кода: %s"
 
 #: pisi/operations/build.py:193
 msgid "Source %s not found in any active repository."
-msgstr ""
+msgstr "Исходный код %s не обнаружен ни в одном активном репозитории."
 
 #: pisi/operations/build.py:309
 msgid "pspec.xml avoids this package from building for '%s'"
@@ -2356,15 +2356,15 @@ msgstr ""
 
 #: pisi/operations/build.py:312
 msgid "Building source package: %s"
-msgstr ""
+msgstr "Сборка пакета с исходным кодом: %s"
 
 #: pisi/operations/build.py:357
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr ""
+msgstr "Обнаружен IceCream. Убедитесь, что ваш демон запущен."
 
 #: pisi/operations/build.py:367
 msgid "CCache detected..."
-msgstr ""
+msgstr "CCache обнаружен..."
 
 #: pisi/operations/build.py:439
 msgid "PartOf tag not defined, looking for component"
