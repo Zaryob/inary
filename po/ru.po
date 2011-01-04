@@ -2112,27 +2112,27 @@ msgstr ""
 
 #: pisi/conflict.py:26 pisi/dependency.py:26 pisi/replace.py:24
 msgid " version >= "
-msgstr ""
+msgstr "версия >="
 
 #: pisi/conflict.py:28 pisi/dependency.py:28 pisi/replace.py:26
 msgid " version <= "
-msgstr ""
+msgstr "версия <="
 
 #: pisi/conflict.py:30 pisi/dependency.py:30 pisi/replace.py:28
 msgid " version "
-msgstr ""
+msgstr "версия "
 
 #: pisi/conflict.py:32 pisi/dependency.py:32 pisi/replace.py:30
 msgid " release >= "
-msgstr ""
+msgstr "релиз >="
 
 #: pisi/conflict.py:34 pisi/dependency.py:34 pisi/replace.py:32
 msgid " release <= "
-msgstr ""
+msgstr "релиз <="
 
 #: pisi/conflict.py:36 pisi/dependency.py:36 pisi/replace.py:34
 msgid " release "
-msgstr ""
+msgstr "релиз"
 
 #: pisi/constants.py:30
 msgid "Can't rebind constant: %s"
@@ -2144,41 +2144,43 @@ msgstr ""
 
 #: pisi/db/componentdb.py:87
 msgid "Component %s not found"
-msgstr ""
+msgstr "Компонент %s не найден."
 
 #: pisi/db/groupdb.py:66 pisi/db/groupdb.py:75
 msgid "Group %s not found"
-msgstr ""
+msgstr "Группа %s не найдена."
 
 #: pisi/db/installdb.py:37
 msgid "installed"
-msgstr ""
+msgstr "установлен"
 
 #: pisi/db/installdb.py:37
 msgid "installed-pending"
-msgstr ""
+msgstr "установлен-ожидаемый"
 
 #: pisi/db/installdb.py:54
 msgid ""
 "State: %s\n"
 "Version: %s, Release: %s\n"
 msgstr ""
+"Состояние: %s\n"
+"Версия: %s, Релиз: %s\n"
 
 #: pisi/db/installdb.py:58
 msgid "Distribution: %s, Install Time: %s\n"
-msgstr ""
+msgstr "Дистрибутив: %s, Время установки: %s\n"
 
 #: pisi/db/installdb.py:90
 msgid "Installation info for package '%s' is broken. Reinstall it to fix this problem."
-msgstr ""
+msgstr "Информация для установки пакета '%s' повреждена. Переустановите для исправления этой ошибки."
 
 #: pisi/db/installdb.py:331
 msgid "Package %s is not installed"
-msgstr ""
+msgstr "Пакет %s не установлен"
 
 #: pisi/db/itembyrepo.py:40
 msgid "%s not found in any repository."
-msgstr ""
+msgstr "%s не обнаружен ни в одном репозитории."
 
 #: pisi/db/itembyrepo.py:50
 msgid "Repo item %s not found"
@@ -2186,11 +2188,11 @@ msgstr ""
 
 #: pisi/db/itembyrepo.py:60 pisi/db/itembyrepo.py:71 pisi/db/itembyrepo.py:81
 msgid "Repository %s does not exist."
-msgstr ""
+msgstr "Репозиторий %s не существует."
 
 #: pisi/db/packagedb.py:144 pisi/db/packagedb.py:151
 msgid "Package %s not found."
-msgstr ""
+msgstr "Пакет %s не найден."
 
 #: pisi/db/repodb.py:168
 msgid "%s repository needs to be updated"
