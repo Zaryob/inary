@@ -1702,6 +1702,9 @@ msgid ""
 "\n"
 "Lists packages waiting to be configured.\n"
 msgstr ""
+"Показать ожидающие пакеты\n"
+"\n"
+"Показать пакеты, ожидающие настройки.\n"
 
 #: pisi/cli/listpending.py:41
 msgid "There are no packages waiting to be configured"
@@ -1759,20 +1762,21 @@ msgid "List upgradable packages under given component"
 msgstr "Показать обновляемые пакеты по указанному компоненту"
 
 #: pisi/cli/listupgrades.py:64 pisi/operations/upgrade.py:148
+#, fuzzy
 msgid "No packages to upgrade."
-msgstr ""
+msgstr "Нет пакетов для обновления."
 
 #: pisi/cli/pisicli.py:86
 msgid "Options must precede non-option arguments"
-msgstr ""
+msgstr "Функции должны предшествовать аргументам без опций"
 
 #: pisi/cli/pisicli.py:127
 msgid "No command given"
-msgstr ""
+msgstr "Не задана команда"
 
 #: pisi/cli/pisicli.py:130
 msgid "Command line parsing error"
-msgstr ""
+msgstr "Ошибка разбора командной строки"
 
 #: pisi/cli/rebuilddb.py:24
 msgid ""
