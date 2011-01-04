@@ -1629,10 +1629,16 @@ msgid ""
 "Gives a brief list of PiSi components published in the\n"
 "repositories.\n"
 msgstr ""
+"Показать доступные компоненты\n"
+"\n"
+"Использование: list-components\n"
+"\n"
+"Дает краткий перечень PiSi компонентов, опубликованных в\n"
+"репозиториях.\n"
 
 #: pisi/cli/listcomponents.py:40
 msgid "list-components options"
-msgstr ""
+msgstr "опции list-component"
 
 #: pisi/cli/listcomponents.py:44 pisi/cli/search.py:47
 msgid "Name of the source or package repository"
@@ -1644,10 +1650,13 @@ msgid ""
 "\n"
 "Usage: list-installed\n"
 msgstr ""
+"Печать списка всех установленных пакетов\n"
+"\n"
+"Использование: list-installed\n"
 
 #: pisi/cli/listinstalled.py:40
 msgid "list-installed options"
-msgstr ""
+msgstr "опции list-installed"
 
 #: pisi/cli/listinstalled.py:45
 msgid "Only list the installed packages built by the given host"
@@ -1678,7 +1687,7 @@ msgstr ""
 
 #: pisi/cli/listnewest.py:44
 msgid "list-newest options"
-msgstr ""
+msgstr "опции list-newes"
 
 #: pisi/cli/listnewest.py:46
 msgid "List new packages added to repository after this given date formatted as yyyy-mm-dd"
@@ -1742,7 +1751,7 @@ msgstr ""
 
 #: pisi/cli/listsources.py:39
 msgid "list-sources options"
-msgstr ""
+msgstr "опции list-sources"
 
 #: pisi/cli/listupgrades.py:26
 msgid ""
@@ -1755,7 +1764,7 @@ msgstr ""
 
 #: pisi/cli/listupgrades.py:42
 msgid "list-upgrades options"
-msgstr ""
+msgstr "опции list-upgrades"
 
 #: pisi/cli/listupgrades.py:46
 msgid "List upgradable packages under given component"
@@ -1799,7 +1808,7 @@ msgstr ""
 
 #: pisi/cli/rebuilddb.py:42
 msgid "rebuild-db options"
-msgstr ""
+msgstr "опции rebuild-db"
 
 #: pisi/cli/rebuilddb.py:45
 msgid "Rebuild files database"
@@ -1867,6 +1876,15 @@ msgid ""
 "options to search in install database or source\n"
 "database.\n"
 msgstr ""
+"Искать пакеты\n"
+"\n"
+"Использование: search <термин1> <термин2> ... <терминn>\n"
+"\n"
+"Ищет пакет, содержащий указанные поисковые термины\n"
+"таким образом, поля описание и имя пакета.\n"
+"По умолчанию поиск осуществляется в базе данных пакетов. Используемые\n"
+"опции для поиска в базе данных установленных или исходных\n"
+"базы данных.\n"
 
 #: pisi/cli/search.py:43
 msgid "search options"
