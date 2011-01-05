@@ -108,7 +108,8 @@ def post_install(package_name, provided_scripts,
 
     for script in provided_scripts:
         ctx.ui.debug(_("Registering %s comar script") % script.om)
-        script_name = script.name if script.name else package_name
+        script_name = safe_script_name(script.name) \
+                if script.name else package_name
         if script.om == "System.Package":
             self_post = True
         try:
@@ -189,7 +190,8 @@ def post_remove(package_name, metapath, filepath, provided_scripts=[]):
     link = get_link()
 
     package_name = safe_script_name(package_name)
-    scripts = set([s.name for s in provided_scripts if s.name])
+    scripts = set([safe_script_name(s.name) for s \
+            in provided_scripts if s.name])
     scripts.add(package_name)
 
     if package_name in list(link.System.Package):
