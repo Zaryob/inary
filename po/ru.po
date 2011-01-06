@@ -1702,7 +1702,7 @@ msgstr "Показать новые пакеты, добавленные в ре
 
 #: pisi/cli/listnewest.py:48
 msgid "List new packages added to repository after last nth previous repository update"
-msgstr ""
+msgstr "Показать список новых пакетов, добавленных к репозиторию после последнего обновления репозитория."
 
 #: pisi/cli/listnewest.py:76
 msgid "Packages added to %s since %s:\n"
@@ -1760,6 +1760,11 @@ msgid ""
 "\n"
 "Gives a brief list of sources published in the repositories.\n"
 msgstr ""
+"Показать список доступных источников\n"
+"\n"
+"Использование: list-sources\n"
+"\n"
+"Предоставляет краткий список источников, опубликованных в репозиториях.\n"
 
 #: pisi/cli/listsources.py:39
 msgid "list-sources options"
@@ -1773,6 +1778,11 @@ msgid ""
 "\n"
 "Lists the packages that will be upgraded.\n"
 msgstr ""
+"Показать список пакетов для обновления\n"
+"\n"
+"Использование: list-upgrades\n"
+"\n"
+"Показывает пакеты, которые будут обновлены.\n"
 
 #: pisi/cli/listupgrades.py:42
 msgid "list-upgrades options"
