@@ -2032,11 +2032,11 @@ msgstr "Не обновлять репозитории"
 
 #: pisi/cli/upgrade.py:62
 msgid "Upgrade component's and recursive components' packages"
-msgstr ""
+msgstr "Обновление компонентов и рекурсивных компонентов пакетов"
 
 #: pisi/cli/upgrade.py:64
 msgid "Name of the to be upgraded packages' repository"
-msgstr ""
+msgstr "Название для обновления пакетов репозитория"
 
 #: pisi/cli/upgrade.py:68
 msgid "When upgrading system, ignore packages and components whose basenames match pattern."
@@ -2052,7 +2052,7 @@ msgstr "Обновление репозиториев"
 
 #: pisi/cli/upgrade.py:89
 msgid "Will not update repositories"
-msgstr ""
+msgstr "Не обновлять репозитории"
 
 #: pisi/comariface.py:31
 msgid "comar-api package is not fully installed"
@@ -2098,7 +2098,7 @@ msgstr "Запуск операций перед удалением %s"
 
 #: pisi/comariface.py:150
 msgid "Running package's pre remove script"
-msgstr ""
+msgstr "Запустить сценарий, используемый перед удалением, пакета"
 
 #: pisi/comariface.py:158
 msgid "Calling pre remove handlers"
@@ -2110,7 +2110,7 @@ msgstr "Запуск операций после удаления для %s"
 
 #: pisi/comariface.py:178
 msgid "Running package's postremove script"
-msgstr ""
+msgstr "Запустить сценарий, используемый после удаления, пакета"
 
 #: pisi/comariface.py:186
 msgid "Calling post remove handlers"
@@ -2214,7 +2214,7 @@ msgstr "Пакет %s не найден."
 
 #: pisi/db/repodb.py:168
 msgid "%s repository needs to be updated"
-msgstr ""
+msgstr "репозиторий %s нуждается в обновлении"
 
 #: pisi/db/repodb.py:174
 msgid "Error parsing repository index information. Index file does not exist or is malformed."
@@ -2222,7 +2222,7 @@ msgstr ""
 
 #: pisi/db/repodb.py:264
 msgid "Repository '%s' is not compatible with your distribution. Repository is disabled."
-msgstr ""
+msgstr "Репозиторий '%s' не совместим с Вашим дистрибутивом. Репозиторий отключен."
 
 #: pisi/fetcher.py:130
 msgid "Urlgrabber needs to be installed to run this command"
