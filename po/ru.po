@@ -2028,7 +2028,7 @@ msgstr ""
 
 #: pisi/cli/upgrade.py:56
 msgid "Do not update repositories"
-msgstr ""
+msgstr "Не обновлять репозитории"
 
 #: pisi/cli/upgrade.py:62
 msgid "Upgrade component's and recursive components' packages"
@@ -2085,8 +2085,9 @@ msgid "Script error: %s"
 msgstr "Ошибка скрипта: %s"
 
 #: pisi/comariface.py:118
+#, fuzzy
 msgid "Calling post install handlers"
-msgstr ""
+msgstr "Вызов после установочных обработчиков"
 
 #: pisi/comariface.py:133
 msgid "Running package's post install script"
@@ -2911,11 +2912,11 @@ msgstr ""
 
 #: pisi/pxml/xmlfile.py:60
 msgid "String '%s' has invalid XML"
-msgstr ""
+msgstr "Строка '%s' содержит неверный XML"
 
 #: pisi/pxml/xmlfile.py:83
 msgid "Unable to read file (%s): %s"
-msgstr ""
+msgstr "Невозможно прочитать файл (%s): %s"
 
 #: pisi/pxml/xmlfile.py:85 pisi/specfile.py:431
 msgid "File '%s' has invalid XML"
