@@ -2060,7 +2060,7 @@ msgstr "При обновлении системы, игнорировать п�
 
 #: pisi/cli/upgrade.py:71
 msgid "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
-msgstr ""
+msgstr "При обновлении системы игнорировать пакеты и компоненты, чьи базовые названия соответствуют любому шаблону, содержащемуся в файле"
 
 #: pisi/cli/upgrade.py:85
 msgid "Updating repositories"
@@ -2102,7 +2102,7 @@ msgstr "Ошибка скрипта: %s"
 
 #: pisi/comariface.py:118
 msgid "Calling post install handlers"
-msgstr ""
+msgstr "Вызов послеустановочных обработчиков"
 
 #: pisi/comariface.py:133
 msgid "Running package's post install script"
@@ -2118,7 +2118,7 @@ msgstr "Запустить сценарий, используемый перед
 
 #: pisi/comariface.py:158
 msgid "Calling pre remove handlers"
-msgstr ""
+msgstr "Вызов предустановочных обработчиков"
 
 #: pisi/comariface.py:170
 msgid "Running post removal operations for %s"
@@ -2130,19 +2130,19 @@ msgstr "Запустить сценарий, используемый после
 
 #: pisi/comariface.py:186
 msgid "Calling post remove handlers"
-msgstr ""
+msgstr "Вызов послеудаляционных обработчиков"
 
 #: pisi/comariface.py:195
 msgid "Unregistering comar scripts"
-msgstr ""
+msgstr "Отмена регистрации сценариев comar"
 
 #: pisi/config.py:85
 msgid "Destination directory %s does not exist. Creating it."
-msgstr ""
+msgstr "Конечный каталог %s не существует. Каталог создаётся."
 
 #: pisi/configfile.py:127
 msgid "No section by name '%s'"
-msgstr ""
+msgstr "Нет секции с именем '%s'"
 
 #: pisi/conflict.py:26 pisi/dependency.py:26 pisi/replace.py:24
 msgid " version >= "
@@ -2170,11 +2170,11 @@ msgstr "релиз"
 
 #: pisi/constants.py:30
 msgid "Can't rebind constant: %s"
-msgstr ""
+msgstr "Не удаётся привязать константе: %s"
 
 #: pisi/constants.py:36
 msgid "Can't unbind constant: %s"
-msgstr ""
+msgstr "Не удаётся отвязать от константы: %s"
 
 #: pisi/db/componentdb.py:87
 msgid "Component %s not found"
@@ -2218,7 +2218,7 @@ msgstr "%s не обнаружен ни в одном репозитории."
 
 #: pisi/db/itembyrepo.py:50
 msgid "Repo item %s not found"
-msgstr ""
+msgstr "Элемент %s репозитория не обнаружен"
 
 #: pisi/db/itembyrepo.py:60 pisi/db/itembyrepo.py:71 pisi/db/itembyrepo.py:81
 msgid "Repository %s does not exist."
