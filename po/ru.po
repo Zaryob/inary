@@ -2282,7 +2282,7 @@ msgstr ""
 
 #: pisi/file.py:71
 msgid "uri must have type either URI or string"
-msgstr ""
+msgstr "uri должен иметь тип URI или строковый"
 
 #: pisi/file.py:129
 msgid "Fetching %s"
@@ -2466,15 +2466,15 @@ msgstr "ОШИБКА: Рабочая директория (%s) не сущест
 
 #: pisi/operations/build.py:655
 msgid "Sandbox enabled build..."
-msgstr ""
+msgstr "Построение песочницы включено..."
 
 #: pisi/operations/build.py:679
 msgid "Sandbox violation result:"
-msgstr ""
+msgstr "Результат нарушения песочницы:"
 
 #: pisi/operations/build.py:684
 msgid "Sandbox violations!"
-msgstr ""
+msgstr "Нарушения песочницы!"
 
 #: pisi/operations/build.py:690
 msgid "unable to call function from actions: %s"
@@ -2502,11 +2502,11 @@ msgstr "Не могу собрать пакет из-за неудовлетво
 
 #: pisi/operations/build.py:742
 msgid "Build dependency %s cannot be satisfied"
-msgstr ""
+msgstr "Зависимость сборки %s не может быть удовлетворена"
 
 #: pisi/operations/build.py:744
 msgid "Do you want to install the unsatisfied build dependencies"
-msgstr ""
+msgstr "Вы хотите установить неудовлетворенные зависимости для сборки"
 
 #: pisi/operations/build.py:745
 msgid "Installing build dependencies."
