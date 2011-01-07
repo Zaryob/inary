@@ -2234,7 +2234,7 @@ msgstr "репозиторий %s нуждается в обновлении"
 
 #: pisi/db/repodb.py:174
 msgid "Error parsing repository index information. Index file does not exist or is malformed."
-msgstr ""
+msgstr "Ошибка разбора информации индекса репозитория. Файл индекса не существует или неправильный."
 
 #: pisi/db/repodb.py:264
 msgid "Repository '%s' is not compatible with your distribution. Repository is disabled."
@@ -2258,11 +2258,11 @@ msgstr "Доступ запрещен к целевуму файлу: \"%s\""
 
 #: pisi/fetcher.py:153
 msgid "Could not fetch destination file \"%s\": %s"
-msgstr ""
+msgstr "Не удалось получить конечный файл \"%s\": %s"
 
 #: pisi/fetcher.py:157
 msgid "A problem occurred. Please check the archive address and/or permissions again."
-msgstr ""
+msgstr "Возникла проблема. Пожалуйста, проверьте архивный адрес и/или разрешения вновь."
 
 #: pisi/fetcher.py:190
 msgid "Proxy configuration has been found for '%s' protocol"
@@ -2270,7 +2270,7 @@ msgstr "Обнаружена конфигурация прокси-сервер�
 
 #: pisi/fetcher.py:197
 msgid "Bandwidth usage is limited to %s KB/s"
-msgstr ""
+msgstr "Использование полосы пропускания ограничено %s Кб/с"
 
 #: pisi/fetcher.py:210
 msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
@@ -2286,11 +2286,11 @@ msgstr ""
 
 #: pisi/file.py:129
 msgid "Fetching %s"
-msgstr ""
+msgstr "Извлечение %s"
 
 #: pisi/file.py:134
 msgid "Copying %s to transfer dir"
-msgstr ""
+msgstr "Копирование %s в каталог для передачи"
 
 #: pisi/file.py:139
 msgid "File '%s' not found."
@@ -2298,7 +2298,7 @@ msgstr "Файл '%s' не найден."
 
 #: pisi/file.py:147
 msgid "File integrity of %s compromised."
-msgstr ""
+msgstr "Целостность файла %s скомпрометирована."
 
 #: pisi/file.py:167
 msgid "File mode must be either File.read or File.write"
@@ -2306,11 +2306,11 @@ msgstr ""
 
 #: pisi/file.py:172
 msgid "Remote write not implemented"
-msgstr ""
+msgstr "Удаленная запись не реализована"
 
 #: pisi/file.py:224 pisi/file.py:227
 msgid "ERROR: gpg --detach-sig %s failed"
-msgstr ""
+msgstr "ОШИБКА: gpg --detach-sig %s не удалось"
 
 #: pisi/graph.py:30
 msgid "Encountered cycle %s"
@@ -2346,7 +2346,7 @@ msgstr "%s обновлен с %s до более ранней версии %s."
 
 #: pisi/index.py:118
 msgid "Adding %s to package index"
-msgstr ""
+msgstr "Добавление %s в индекс пакета"
 
 #: pisi/index.py:135
 msgid "Package %s: metadata corrupt, skipping..."
@@ -2354,7 +2354,7 @@ msgstr "Пакет %s: метадата повреждена, пропуск..."
 
 #: pisi/index.py:195
 msgid "Adding %s to source index"
-msgstr ""
+msgstr "Добавление %s в индекс исходника"
 
 #: pisi/metadata.py:78
 msgid "Distribution: %s, Dist. Release: %s\n"
