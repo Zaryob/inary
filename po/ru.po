@@ -2242,7 +2242,7 @@ msgstr "Репозиторий '%s' не совместим с Вашим дис
 
 #: pisi/fetcher.py:130
 msgid "Urlgrabber needs to be installed to run this command"
-msgstr ""
+msgstr "Urlgrabber должен быть установлен для запуска этой команды"
 
 #: pisi/fetcher.py:133
 msgid "Filename error"
@@ -2274,11 +2274,11 @@ msgstr "Использование полосы пропускания огра�
 
 #: pisi/fetcher.py:210
 msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
-msgstr ""
+msgstr "Нет доступа к удаленному файлу. Скачанная предварительно часть файла будет удалена."
 
 #: pisi/fetcher.py:219
 msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
-msgstr ""
+msgstr "Сервер не поддерживает скачивание по частям. Ранее скачанная часть файла будет перезаписана."
 
 #: pisi/file.py:71
 msgid "uri must have type either URI or string"
@@ -2302,7 +2302,7 @@ msgstr "Целостность файла %s скомпрометирована.
 
 #: pisi/file.py:167
 msgid "File mode must be either File.read or File.write"
-msgstr ""
+msgstr "Доступ к файлу должен быть для чтения или для записи"
 
 #: pisi/file.py:172
 msgid "Remote write not implemented"
@@ -2314,7 +2314,7 @@ msgstr "ОШИБКА: gpg --detach-sig %s не удалось"
 
 #: pisi/graph.py:30
 msgid "Encountered cycle %s"
-msgstr ""
+msgstr "Обнаружен цикл %s"
 
 #: pisi/history.py:43
 msgid "%s repository is updated."
@@ -2374,7 +2374,7 @@ msgstr "Файл зеркал %s не существует. Невозможно
 
 #: pisi/operations/build.py:115
 msgid "Path %s belongs in multiple packages"
-msgstr ""
+msgstr "Путь %s содержится в нескольких пакетах"
 
 #: pisi/operations/build.py:189
 msgid "Source URI: %s"
