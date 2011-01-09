@@ -2406,11 +2406,11 @@ msgstr ""
 
 #: pisi/operations/build.py:448
 msgid "Cannot find component.xml in remote directory, Source is now part of unknown component"
-msgstr ""
+msgstr "Не найден файл component.xml в удаленном каталоге. Пакет сейчас является частью неизвестного компонента"
 
 #: pisi/operations/build.py:456
 msgid "Cannot find component.xml in upper directory, Source is now part of unknown component"
-msgstr ""
+msgstr "Не найден файл component.xml в верхнеи каталоге. Пакет сейчас является частью неизвестного компонента"
 
 #: pisi/operations/build.py:464
 msgid "Source is part of %s component"
@@ -2458,7 +2458,7 @@ msgstr "Ошибка синтаксиса в COMAR script (%s): %s"
 
 #: pisi/operations/build.py:630
 msgid "Sandbox violation: %s (%s -> %s)"
-msgstr ""
+msgstr "Нарушение среды сборки: %s (%s -> %s)"
 
 #: pisi/operations/build.py:646 pisi/util.py:549
 msgid "ERROR: WorkDir (%s) does not exist\n"
@@ -2525,8 +2525,9 @@ msgid "* Applying patch: %s"
 msgstr "* Применение патча: %s"
 
 #: pisi/operations/build.py:896
+#, fuzzy
 msgid "/%s has suid bit set"
-msgstr ""
+msgstr "/%s имеет SUID бит"
 
 #: pisi/operations/build.py:971
 msgid "No user named '%s' found on the system"
@@ -2559,7 +2560,7 @@ msgstr "Очистка директории для сборки..."
 
 #: pisi/operations/build.py:1081
 msgid "Keeping build directory"
-msgstr ""
+msgstr "Сохранение каталога сборки"
 
 #: pisi/operations/build.py:1134
 msgid "*** %d error(s), %d warning(s)"
@@ -2574,18 +2575,24 @@ msgid ""
 "\n"
 "Changed config file: %s"
 msgstr ""
+"\n"
+"Изменен конфигурационный файл: %s"
 
 #: pisi/operations/check.py:44
 msgid ""
 "\n"
 "Corrupt file: %s"
 msgstr ""
+"\n"
+"Поврежденный файл: %s"
 
 #: pisi/operations/check.py:50
 msgid ""
 "\n"
 "Missing file: /%s"
 msgstr ""
+"\n"
+"Отсутствующий файл: %s"
 
 #: pisi/operations/delta.py:98
 msgid "New package '%s' exists in the list of old packages. Skipping it..."
@@ -2604,10 +2611,13 @@ msgid "No packages to emerge."
 msgstr "Нет пакетов для сборки."
 
 #: pisi/operations/emerge.py:50
+#, fuzzy
 msgid ""
 "The following list of packages will be installed\n"
 "from repository in the respective order to satisfy dependencies:\n"
 msgstr ""
+"Следующий список пакетов будет установлен\n"
+"из репозитория в соответствии с зависимостями:\n"
 
 #: pisi/operations/emerge.py:53
 msgid ""
