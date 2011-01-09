@@ -2911,7 +2911,7 @@ msgstr ""
 
 #: pisi/pxml/autoxml.py:704 pisi/pxml/autoxml.py:825
 msgid "Type mismatch: DOM cannot be decoded"
-msgstr ""
+msgstr "Несоответствие типов: DOM не может быть раскодирован"
 
 #: pisi/pxml/autoxml.py:707 pisi/pxml/autoxml.py:723 pisi/pxml/autoxml.py:737
 #: pisi/pxml/autoxml.py:828 pisi/pxml/autoxml.py:842 pisi/pxml/autoxml.py:856
@@ -2964,11 +2964,11 @@ msgstr "В репозитории нет пакета с именем %s."
 
 #: pisi/sourcearchive.py:63
 msgid "Fetching source from: %s"
-msgstr ""
+msgstr "Извлечения исходного кода из: %s"
 
 #: pisi/sourcearchive.py:74
 msgid "Source archive is stored: %s/%s"
-msgstr ""
+msgstr "Архив исходных кодов хранится: %s/%s"
 
 #: pisi/sourcearchive.py:80
 msgid "Trying fallback address: %s"
@@ -2976,23 +2976,23 @@ msgstr ""
 
 #: pisi/sourcearchive.py:91
 msgid "%s mirrors are not defined."
-msgstr ""
+msgstr "%s зеркала не определены."
 
 #: pisi/sourcearchive.py:96
 msgid "Fetching source from mirror: %s"
-msgstr ""
+msgstr "Извлечения исходного кода из зеркала: %s"
 
 #: pisi/sourcearchive.py:102
 msgid "Could not fetch source from %s mirrors."
-msgstr ""
+msgstr "Не удалось извлечь исходный код из зеркала %s"
 
 #: pisi/sourcearchive.py:120
 msgid "unpack: check_file_hash failed"
-msgstr ""
+msgstr "распаковка: не удалось проверить хэш файла"
 
 #: pisi/sourcearchive.py:125
 msgid "Unknown archive type '%s' is given for '%s'."
-msgstr ""
+msgstr "Неизвестный тип архива '%s' задан для '%s'."
 
 #: pisi/specfile.py:164
 msgid "URI: %s, type: %s, sha1sum: %s"
@@ -3060,7 +3060,7 @@ msgstr ""
 
 #: pisi/util.py:532
 msgid "Error while decompressing %s: %s"
-msgstr ""
+msgstr "Ошибка в процессе декомпрессии %s: %s"
 
 #: pisi/util.py:575
 msgid "ERROR: patch (%s) failed"
@@ -3076,15 +3076,15 @@ msgstr ""
 
 #: pisi/util.py:594
 msgid "chrpath command failed for file '%s'!"
-msgstr ""
+msgstr "Команда chrpath не удалась для файла '%s'!"
 
 #: pisi/util.py:601
 msgid "objcopy (keep-debug) command failed for file '%s'!"
-msgstr ""
+msgstr "Команда objcopy (keep-debug) не удалась для файла '%s'!"
 
 #: pisi/util.py:607
 msgid "objcopy (add-debuglink) command failed for file '%s'!"
-msgstr ""
+msgstr "Команда objcopy (add-debuglink) не удалась для файла '%s'!"
 
 #: pisi/util.py:698
 msgid "Invalid package name: %s"
