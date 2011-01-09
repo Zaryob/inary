@@ -2611,7 +2611,6 @@ msgid "No packages to emerge."
 msgstr "Нет пакетов для сборки."
 
 #: pisi/operations/emerge.py:50
-#, fuzzy
 msgid ""
 "The following list of packages will be installed\n"
 "from repository in the respective order to satisfy dependencies:\n"
@@ -2624,10 +2623,12 @@ msgid ""
 "The following list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
 msgstr ""
+"Следующий список пакетов будет собран и \n"
+"установлен в соответствии с зависимостями:\n"
 
 #: pisi/operations/emerge.py:61 pisi/operations/install.py:82
 msgid "There are extra packages due to dependencies. Do you want to continue?"
-msgstr ""
+msgstr "Зависимости содержат экстра-пакеты. Вы хотите продолжить?"
 
 #: pisi/operations/emerge.py:95
 msgid "Cannot find source package: %s"
