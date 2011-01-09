@@ -2636,7 +2636,7 @@ msgstr "Не могу найти пакет исходного кода: %s"
 
 #: pisi/operations/helper.py:51
 msgid "Selected packages [%s] are in conflict with each other."
-msgstr ""
+msgstr "Выбранные пакеты [%s] конфликтуют с другими."
 
 #: pisi/operations/helper.py:57
 msgid "[%s conflicts with: %s]\n"
@@ -2727,15 +2727,15 @@ msgstr "Пакет %s (%s) не совместим с вашей %s архите
 
 #: pisi/operations/install.py:192
 msgid "External dependencies not satisfied: %s"
-msgstr ""
+msgstr "Внешние зависимости не могут быть соблюдены: %s"
 
 #: pisi/operations/install.py:197
 msgid "The following packages will be installed in order to satisfy dependencies:"
-msgstr ""
+msgstr "Следующие пакеты будут установлены в соответствии с зависимостями:"
 
 #: pisi/operations/install.py:201
 msgid "External dependencies not satisfied"
-msgstr ""
+msgstr "Внешние зависимости не соблюдены"
 
 #: pisi/operations/install.py:244
 msgid "Installation order: "
@@ -2743,7 +2743,7 @@ msgstr "Порядок установки:"
 
 #: pisi/operations/install.py:279 pisi/specfile.py:265
 msgid "%s dependency of package %s is not satisfied"
-msgstr ""
+msgstr "Зависимость %s пакета %s не соблюдена"
 
 #: pisi/operations/remove.py:43
 msgid "Safety switch prevents the removal of following packages:\n"
