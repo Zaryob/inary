@@ -393,9 +393,8 @@ msgid "Command \"%s\" failed, return value was %d."
 msgstr "Comando \"%s\" fallito, il valore ritornato è stato %d."
 
 #: pisi/actionsapi/texlivemodules.py:56
-#, fuzzy
 msgid "Moving source files failed"
-msgstr "Build file formato fallito."
+msgstr "Rimozione dei sorgenti fallito"
 
 #: pisi/actionsapi/texlivemodules.py:59
 msgid "Generate config files failed"
@@ -499,7 +498,7 @@ msgstr "%s pacchetto già scaricato"
 
 #: pisi/api.py:566
 msgid "Taking snapshot of the system"
-msgstr ""
+msgstr "Prendendo snapshot del sistema"
 
 #: pisi/api.py:718
 msgid "comar package is not fully installed"
