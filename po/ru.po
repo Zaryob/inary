@@ -2386,7 +2386,7 @@ msgstr "Исходный код %s не обнаружен ни в одном а
 
 #: pisi/operations/build.py:309
 msgid "pspec.xml avoids this package from building for '%s'"
-msgstr ""
+msgstr "pspec.xml избегает этот пакет для сборки для '%s'"
 
 #: pisi/operations/build.py:312
 msgid "Building source package: %s"
@@ -2402,7 +2402,7 @@ msgstr "CCache обнаружен..."
 
 #: pisi/operations/build.py:439
 msgid "PartOf tag not defined, looking for component"
-msgstr ""
+msgstr "Тег PartOf не указан, поиск компонента"
 
 #: pisi/operations/build.py:448
 msgid "Cannot find component.xml in remote directory, Source is now part of unknown component"
@@ -2527,7 +2527,7 @@ msgstr "* Применение патча: %s"
 #: pisi/operations/build.py:896
 #, fuzzy
 msgid "/%s has suid bit set"
-msgstr "/%s имеет SUID бит"
+msgstr "/%s имеет SUID биты"
 
 #: pisi/operations/build.py:971
 msgid "No user named '%s' found on the system"
@@ -2539,7 +2539,7 @@ msgstr "Группа '%s' не найдена в системе"
 
 #: pisi/operations/build.py:984
 msgid "There are abandoned files under the install dir (%s):"
-msgstr ""
+msgstr "Есть заброшенные файлы в каталоге установки (%s):"
 
 #: pisi/operations/build.py:1012
 msgid "Ignoring empty package %s"
@@ -2600,7 +2600,7 @@ msgstr "Новый пакет '%s' существует в списке стар
 
 #: pisi/operations/delta.py:132
 msgid "The file '%s' belongs to a different package other than '%s'. Skipping it..."
-msgstr ""
+msgstr "Файл '%s принадлежит другому пакету, чем '%s'. Пропуск..."
 
 #: pisi/operations/delta.py:138
 msgid "Package '%s' has the same release number with the new package. Skipping it..."
@@ -2715,7 +2715,7 @@ msgstr "Установка %d / %d"
 
 #: pisi/operations/install.py:121
 msgid "Mixing file names and package names not supported yet."
-msgstr ""
+msgstr "Сочетание имен файлов и имен пакетов пока не поддерживается."
 
 #: pisi/operations/install.py:165
 msgid "Package %s is not compatible with your distribution release %s %s."
@@ -2771,7 +2771,7 @@ msgstr ""
 
 #: pisi/operations/remove.py:73
 msgid "Package removal declined"
-msgstr ""
+msgstr "Удаление пакета отклонено"
 
 #: pisi/operations/remove.py:85
 msgid "Package %s is not installed. Cannot remove."
@@ -2783,11 +2783,11 @@ msgstr "Существуют конфликты"
 
 #: pisi/operations/remove.py:128
 msgid "Obsoleted packages remaining"
-msgstr ""
+msgstr "Остался устаревший пакет"
 
 #: pisi/operations/remove.py:132
 msgid "Replaced package remains"
-msgstr ""
+msgstr "Остался замененный пакет"
 
 #: pisi/operations/upgrade.py:52
 msgid "You must restart the following service(s) manually for the updated software to take effect:"
@@ -2855,7 +2855,7 @@ msgstr ""
 
 #: pisi/pxml/autoxml.py:78
 msgid "At least one '%s' tag should have local text"
-msgstr ""
+msgstr "Хотя бы один '%s' тег должен иметь локальный текст"
 
 #: pisi/pxml/autoxml.py:85
 msgid "'%s' language of tag '%s' is empty"
