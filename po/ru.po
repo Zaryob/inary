@@ -2747,7 +2747,7 @@ msgstr "Зависимость %s пакета %s не соблюдена"
 
 #: pisi/operations/remove.py:43
 msgid "Safety switch prevents the removal of following packages:\n"
-msgstr ""
+msgstr "Переключатель безопасности предотвратил удаление следующих пакетов:\n"
 
 #: pisi/operations/remove.py:48 pisi/operations/upgrade.py:374
 msgid "Safety switch: The component system.base cannot be found."
@@ -2859,11 +2859,11 @@ msgstr "Хотя бы один '%s' тег должен иметь локаль�
 
 #: pisi/pxml/autoxml.py:85
 msgid "'%s' language of tag '%s' is empty"
-msgstr ""
+msgstr "Язык '%s' из тега '%s' пуст"
 
 #: pisi/pxml/autoxml.py:113
 msgid "LocalText: unable to get either current or default locale"
-msgstr ""
+msgstr "LocalText: не удалось получить текущую локаль, либо локаль по умолчанию"
 
 #: pisi/pxml/autoxml.py:119 pisi/pxml/autoxml.py:134
 msgid "Tag should have at least the current locale, or failing that an English or Turkish version"
@@ -2891,11 +2891,11 @@ msgstr "autoxml.write: Кодировка файла '%s' содержит ош�
 
 #: pisi/pxml/autoxml.py:527
 msgid "gen_tag: unrecognized tag type %s in spec"
-msgstr ""
+msgstr "gen_tag: неизвестный тип тега %s в спектре"
 
 #: pisi/pxml/autoxml.py:575 pisi/pxml/autoxml.py:586
 msgid "Mandatory variable %s not available"
-msgstr ""
+msgstr "Обязательная переменная %s не доступна"
 
 #: pisi/pxml/autoxml.py:656
 msgid "Type mismatch: read text cannot be decoded"
@@ -2903,7 +2903,7 @@ msgstr "Несоответствие типов: читаемый текст н�
 
 #: pisi/pxml/autoxml.py:660 pisi/pxml/autoxml.py:669
 msgid "Mandatory token %s not available"
-msgstr ""
+msgstr "Обязательный маркер %s не доступен"
 
 #: pisi/pxml/autoxml.py:674
 msgid "Type mismatch. Expected %s, got %s"
@@ -2916,7 +2916,7 @@ msgstr "Несоответствие типов: DOM не может быть р
 #: pisi/pxml/autoxml.py:707 pisi/pxml/autoxml.py:723 pisi/pxml/autoxml.py:737
 #: pisi/pxml/autoxml.py:828 pisi/pxml/autoxml.py:842 pisi/pxml/autoxml.py:856
 msgid "Mandatory argument not available"
-msgstr ""
+msgstr "Обязательный аргумент не доступен"
 
 #: pisi/pxml/autoxml.py:720 pisi/pxml/autoxml.py:839
 msgid "Object cannot be encoded"
@@ -2928,7 +2928,7 @@ msgstr "Объект не может быть отформатирован"
 
 #: pisi/pxml/autoxml.py:750
 msgid "List type must contain only one element"
-msgstr ""
+msgstr "Списоковый тип должен содержать только один элемент"
 
 #: pisi/pxml/autoxml.py:763 pisi/pxml/autoxml.py:784
 msgid "Mandatory list \"%s\" under \"%s\" node is empty."
