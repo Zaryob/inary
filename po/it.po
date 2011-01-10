@@ -1112,7 +1112,6 @@ msgstr ""
 "\n"
 "Il comando delta trova i file cambiati tra due pacchetti attraverso il confronto del sha1sum dei file\n"
 "e crea un pacchetto pisi delta con i file cambiati tra le due versioni.\n"
-"\n"
 
 #: pisi/cli/delta.py:46
 msgid "delta options"
@@ -1123,9 +1122,8 @@ msgid "Use arg as the new package and treat other arguments as old packages."
 msgstr ""
 
 #: pisi/cli/delta.py:60
-#, fuzzy
 msgid "Output directory for produced packages."
-msgstr "Cartella di output per i pacchetti prodotti"
+msgstr "Cartella di output per i pacchetti prodotti."
 
 #: pisi/cli/disablerepo.py:21
 msgid ""
@@ -1333,17 +1331,15 @@ msgstr ""
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
+msgstr "snapshot"
+
+#: pisi/cli/history.py:28
+msgid "takeback"
 msgstr ""
 
 #: pisi/cli/history.py:28
-#, fuzzy
-msgid "takeback"
-msgstr "Traceback:"
-
-#: pisi/cli/history.py:28
-#, fuzzy
 msgid "upgrade"
-msgstr "Aggiornato %s"
+msgstr "aggiorna"
 
 #: pisi/cli/history.py:31
 msgid ""
@@ -1355,9 +1351,8 @@ msgid ""
 msgstr ""
 
 #: pisi/cli/history.py:47
-#, fuzzy
 msgid "history options"
-msgstr "opzioni list-sources"
+msgstr "opzioni storico"
 
 #: pisi/cli/history.py:53
 msgid "Output only the last n operations"
@@ -1365,7 +1360,7 @@ msgstr ""
 
 #: pisi/cli/history.py:55
 msgid "Take snapshot of the current system"
-msgstr ""
+msgstr "Prendi un'immagine del sistema attuale"
 
 #: pisi/cli/history.py:57
 msgid "Takeback to the state after the given operation finished"
