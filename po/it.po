@@ -896,7 +896,7 @@ msgstr ""
 
 #: pisi/cli/build.py:168 pisi/cli/delta.py:75
 msgid "  %s (default)"
-msgstr ""
+msgstr "%s (predefinito)"
 
 #: pisi/cli/build.py:176 pisi/cli/delta.py:92 pisi/cli/emerge.py:71
 msgid "Output directory: %s"
@@ -1018,7 +1018,7 @@ msgstr "Assumi una risposta positiva in tutte le domande sì/no"
 
 #: pisi/cli/command.py:105
 msgid "Keep bandwidth usage under specified KB's"
-msgstr ""
+msgstr "Mantenere l'utilizzo di banda in determinate KB"
 
 #: pisi/cli/command.py:108
 msgid "Detailed output"
@@ -1095,7 +1095,6 @@ msgstr ""
 "possono a lungo andare consumare molto spazio su disco."
 
 #: pisi/cli/delta.py:24
-#, fuzzy
 msgid ""
 "Creates delta packages\n"
 "\n"
@@ -1108,9 +1107,8 @@ msgid ""
 msgstr ""
 "Crea pacchetti PiSi delta PiSi\n"
 "\n"
-"Utilizzo: delta vecchiopacchetto nuovopacchetto\n"
-"\n"
-"Il comando delta trova i file cambiati tra due pacchetti attraverso il confronto del sha1sum dei file\n"
+"Utilizzo: delta vecchiopacchetto1 vecchiopacchetto2 ... nuovopacchetto\n"
+" delta -t nuovopacchetto vecchiopacchetto1 vecchiopacchetto2 trova i file cambiati tra due pacchetti attraverso il confronto del sha1sum dei file\n"
 "e crea un pacchetto pisi delta con i file cambiati tra le due versioni.\n"
 
 #: pisi/cli/delta.py:46
@@ -1219,9 +1217,8 @@ msgstr ""
 "<pacchettoi> è o il nome di un pacchetto o un file .pisi,\n"
 
 #: pisi/cli/fetch.py:41
-#, fuzzy
 msgid "fetch options"
-msgstr "opzioni di ricerca"
+msgstr ""
 
 #: pisi/cli/fetch.py:47
 msgid "Output directory for the fetched packages"
@@ -1327,7 +1324,7 @@ msgstr "rimuovi"
 
 #: pisi/cli/history.py:28
 msgid "repository update"
-msgstr ""
+msgstr "aggiornamento del repositorio"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
