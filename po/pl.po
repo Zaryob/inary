@@ -404,47 +404,43 @@ msgstr ""
 #: pisi/actionsapi/texlivemodules.py:62
 #, fuzzy
 msgid "Building format files failed"
-msgstr "Uruchomienie automake nie powiodło się."
+msgstr "Budynek format plików nie powiodło się"
 
 #: pisi/actionsapi/texlivemodules.py:69
 msgid "Creating symlinks from format to engines failed"
 msgstr ""
 
 #: pisi/actionsapi/texlivemodules.py:73
-#, fuzzy
 msgid "Installing docs failed"
-msgstr "Instalacja nie powiodła się."
+msgstr "Instalacja pomocy nie powiodła się."
 
 #: pisi/actionsapi/texlivemodules.py:77
-#, fuzzy
 msgid "Installing texmf files failed"
-msgstr "Instalacja nie powiodła się."
+msgstr "Instalowanie plików texmf nie powiodło się."
 
 #: pisi/actionsapi/texlivemodules.py:81
-#, fuzzy
 msgid "Installing config files failed"
-msgstr "Uruchomienie ldconfig nie powiodło się."
+msgstr "Instalacja plików konfiguracyjnych nie powiodła się."
 
 #: pisi/actionsapi/texlivemodules.py:85
-#, fuzzy
 msgid "Handle config files failed"
-msgstr "Konfiguracja nie powiodła się."
+msgstr "Obsługa plików konfiguracyjnych nie powiodła się."
 
 #: pisi/actionsapi/texlivemodules.py:95
 msgid "Symlink %s skipped (special case)"
-msgstr ""
+msgstr "Link symboliczny %s pominięty (specyficzny wyjątek)"
 
 #: pisi/actionsapi/texlivemodules.py:97
 msgid "Symlink %s -> %s skipped (texlive-core takes care of it."
-msgstr ""
+msgstr "Link symboliczny %s -> %s pominięty (texlive-core takes care of it)"
 
 #: pisi/actionsapi/texlivemodules.py:100
 msgid "Symlink %s -> %s skipped."
-msgstr ""
+msgstr "Link symboliczny %s -> %s pominięty."
 
 #: pisi/actionsapi/texlivemodules.py:102
 msgid "Symlink %s skipped (file exists.)"
-msgstr ""
+msgstr "Link symboliczny %s pominięty (plik istnieje)."
 
 #: pisi/actionsapi/texlivemodules.py:104
 msgid "Making symlink from %s to %s"
