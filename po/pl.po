@@ -222,7 +222,7 @@ msgstr "perl install nie powiódł się."
 
 #: pisi/actionsapi/pisitools.py:75 pisi/actionsapi/pisitools.py:132
 msgid "No file matched pattern \"%s\""
-msgstr "Brak dopasowanego pliku do szablonu  \"%s\""
+msgstr "Brak dopasowanego pliku wedłg wzorca  \"%s\""
 
 #: pisi/actionsapi/pisitools.py:142
 msgid "ActionsAPI [doman]: Wrong man page file: %s"
@@ -230,7 +230,7 @@ msgstr "ActionsAPI [doman]: Błędny plik stron man: %s"
 
 #: pisi/actionsapi/pisitools.py:169
 msgid "No file matched pattern \"%s\". 'domove' operation failed."
-msgstr "Brak dopasowanego pliku do szablonu  \"%s\". 'domove'  Operacja nie powiodła się."
+msgstr "Brak dopasowanego pliku wedłg wzorca  \"%s\". 'domove'  Operacja nie powiodła się."
 
 #: pisi/actionsapi/pisitools.py:188
 msgid "ActionsAPI [rename]: %s: %s"
@@ -238,7 +238,7 @@ msgstr "ActionsAPI [zmiana nazwy]: %s: %s"
 
 #: pisi/actionsapi/pisitools.py:203
 msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
-msgstr "Brak dopasowanego pliku do szablonu  \"%s\". 'dosed'  Operacja nie powiodła się."
+msgstr "Nie znaleziono pliku dopasowanego wedłg wzorca  \"%s\". 'dosed'  Operacja nie powiodła się."
 
 #: pisi/actionsapi/pisitools.py:216
 msgid "dosed method has not changed file '%s'."
@@ -254,15 +254,15 @@ msgstr "ActionsAPI [dosym]: Plik już istnieje: %s"
 
 #: pisi/actionsapi/pisitools.py:245 pisi/actionsapi/pisitoolsfunctions.py:71
 msgid "No file matched pattern \"%s\"."
-msgstr "Brak dopasowanego pliku do szablonu  \"%s\"."
+msgstr "Brak dopasowanego pliku wedłg wzorca  \"%s\"."
 
 #: pisi/actionsapi/pisitools.py:272 pisi/actionsapi/shelltools.py:97
 msgid "No file matched pattern \"%s\". Remove operation failed."
-msgstr "Brak dopasowanego pliku do szablonu  \"%s\". Operacja usunięcia nie powiodła się."
+msgstr "Brak dopasowanego pliku wedłg wzorca  \"%s\". Operacja usunięcia nie powiodła się."
 
 #: pisi/actionsapi/pisitools.py:281
 msgid "No directory matched pattern \"%s\". Remove directory operation failed."
-msgstr "Brak dopasowanego folderu do szablonu  \"%s\". Operacja usunięcia folderu nie powiodła się."
+msgstr "Brak dopasowanego folderu wedłg wzorca  \"%s\". Operacja usunięcia folderu nie powiodła się."
 
 #: pisi/actionsapi/pisitoolsfunctions.py:45
 #: pisi/actionsapi/pisitoolsfunctions.py:63
@@ -304,12 +304,10 @@ msgid "ActionsAPI [echo]: Can't append to file %s."
 msgstr "ActionsAPI [echo]: Nie można dołączyć pliku %s."
 
 #: pisi/actionsapi/shelltools.py:63
-#, fuzzy
 msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: No file matched pattern \"%s\"."
+msgstr "ActionsAPI [chmod]: Brak dopasowanego pliku wedłg wzorca \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:70
-#, fuzzy
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
 msgstr "ActionsAPI [chmod]: Nie dozwolona operacja: %s (mode: %s)"
 
@@ -346,9 +344,8 @@ msgid "ActionsAPI [unlinkDir]: Directory %s doesn't exists."
 msgstr "ActionsAPI [unlinkDir]: Katalog %s nie istnieje."
 
 #: pisi/actionsapi/shelltools.py:127
-#, fuzzy
 msgid "ActionsAPI [move]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: Plik %s nie istnieje."
+msgstr "ActionsAPI [chmod]: Brak dopasowanego pliku wedłg wzorca \"%s\""
 
 #: pisi/actionsapi/shelltools.py:134
 msgid "ActionsAPI [move]: Permission denied: %s to %s"
@@ -359,13 +356,12 @@ msgid "ActionsAPI [move]: File %s doesn't exists."
 msgstr "ActionsAPI [move]: Plik %s nie istnieje."
 
 #: pisi/actionsapi/shelltools.py:143
-#, fuzzy
 msgid "ActionsAPI [copy]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: Plik %s nie istnieje."
+msgstr "ActionsAPI [chmod]: Brak dopasowanego pliku wedłg wzorca \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:150
 msgid "ActionsAPI [copy]: Permission denied: %s to %s"
-msgstr "ActionsAPI [copy]: Brak uprawnień: %s dla %s"
+msgstr "ActionsAPI [copy]: Brak uprawnień: %s do %s"
 
 #: pisi/actionsapi/shelltools.py:166
 msgid "ActionsAPI [copy]: File %s does not exist."
@@ -380,9 +376,8 @@ msgid "ActionsAPI [copytree]: Directory %s doesn't exists."
 msgstr "ActionsAPI [copytree]: Katalog %s nie istnieje."
 
 #: pisi/actionsapi/shelltools.py:191
-#, fuzzy
 msgid "ActionsAPI [touch]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: Plik %s nie istnieje."
+msgstr "ActionsAPI [chmod]: Brak dopasowanego pliku wedłg wzorca \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:200
 msgid "ActionsAPI [touch]: Permission denied: %s"
