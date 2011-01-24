@@ -577,8 +577,9 @@ msgid "Package URI: %s"
 msgstr "URI pakietu: %s"
 
 #: pisi/atomicoperations.py:116
+#, fuzzy
 msgid "Download Error: Package does not match the repository package."
-msgstr ""
+msgstr "Błąd pobierania: Package does not match the repository package."
 
 #: pisi/atomicoperations.py:120
 msgid "Package %s not found in any active repository."
@@ -2547,39 +2548,39 @@ msgstr ""
 
 #: pisi/operations/remove.py:85
 msgid "Package %s is not installed. Cannot remove."
-msgstr ""
+msgstr "Pakiet %s nie jest zainstalowany. Nie można go usunąć."
 
 #: pisi/operations/remove.py:120
 msgid "Conflicts remain"
-msgstr ""
+msgstr "Pozostaw konflikty"
 
 #: pisi/operations/remove.py:128
 msgid "Obsoleted packages remaining"
-msgstr ""
+msgstr "Pozostawianie przestarzałych pakietów"
 
 #: pisi/operations/remove.py:132
 msgid "Replaced package remains"
-msgstr ""
+msgstr "Pozostawianie zastąpionych pakietów"
 
 #: pisi/operations/upgrade.py:52
 msgid "You must restart the following service(s) manually for the updated software to take effect:"
-msgstr ""
+msgstr "Następujące usługi musisz ręcznie zrestartować by uaktywnić aktualizacje:"
 
 #: pisi/operations/upgrade.py:59
 msgid "You must restart your system for the updates in the following package(s) to take effect:"
-msgstr ""
+msgstr "Musisz ponownie uruchomić komputer by następujące aktualizacje miały efekt:"
 
 #: pisi/operations/upgrade.py:81
 msgid "Warning: package *name* ends with '.pisi'"
-msgstr ""
+msgstr "Ostrzeżenie: nazwy pakietów kończą się na \".pisi\"."
 
 #: pisi/operations/upgrade.py:84
 msgid "Package %s is not installed."
-msgstr ""
+msgstr "Pakiet %s nie jest zainstalowany."
 
 #: pisi/operations/upgrade.py:88
 msgid "Package %s is not available in repositories."
-msgstr ""
+msgstr "Pakiet %s nie jest dostępny w repozytoriach."
 
 #: pisi/operations/upgrade.py:105
 msgid "Package %s is already at the latest release %s."
@@ -2774,36 +2775,36 @@ msgstr ""
 
 #: pisi/specfile.py:194 pisi/specfile.py:197
 msgid " or "
-msgstr ""
+msgstr "lub"
 
 #: pisi/specfile.py:363 pisi/specfile.py:446
 msgid "Summary: %s\n"
-msgstr ""
+msgstr "Podsumowanie: %s \n"
 
 #: pisi/specfile.py:364 pisi/specfile.py:447
 msgid "Description: %s\n"
-msgstr ""
+msgstr "Opis: %s \n"
 
 #: pisi/specfile.py:365 pisi/specfile.py:448
 msgid "Component: %s\n"
-msgstr ""
+msgstr "Składniki: %s \n"
 
 #: pisi/specfile.py:366
 msgid "Provides: "
-msgstr ""
+msgstr "Dostawcy:"
 
 #: pisi/specfile.py:370
+#, fuzzy
 msgid "Dependencies: "
-msgstr ""
+msgstr "Zależności:"
 
 #: pisi/specfile.py:422
 msgid "translations.xml file is badly formed."
 msgstr ""
 
 #: pisi/specfile.py:449
-#, fuzzy
 msgid "Build Dependencies: "
-msgstr "Niespełnione zależoności budowy"
+msgstr "Zależności budowania:"
 
 #: pisi/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
@@ -2819,31 +2820,31 @@ msgstr "Zwrócona wartość dla  \"%s\"  to %s"
 
 #: pisi/util.py:424
 msgid "Including external link '%s'"
-msgstr ""
+msgstr "Dołączanie zewnętrznego powiązania '%s'"
 
 #: pisi/util.py:426
 msgid "Including directory '%s'"
-msgstr ""
+msgstr "Dołączanie katalogu '%s'"
 
 #: pisi/util.py:514
 msgid "Cannot calculate SHA1 hash of %s"
-msgstr ""
+msgstr "Nie można obliczyć hash SHA1 %s"
 
 #: pisi/util.py:526
 msgid "Compression type is not valid: '%s'"
-msgstr ""
+msgstr "Typ kompresji nie jest poprawny: \"% s\""
 
 #: pisi/util.py:532
 msgid "Error while decompressing %s: %s"
-msgstr ""
+msgstr "Błąd podczas dekompresji %s: %s"
 
 #: pisi/util.py:575
 msgid "ERROR: patch (%s) failed"
-msgstr ""
+msgstr "Błąd: lokalizacja (%s) nie poprawna"
 
 #: pisi/util.py:577
 msgid "ERROR: patch (%s) failed: %s"
-msgstr ""
+msgstr "Błąd: lokalizacja (%s) nie poprawna: %s"
 
 #: pisi/util.py:587
 msgid "strip command failed for file '%s'!"
