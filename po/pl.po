@@ -1,3 +1,4 @@
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
@@ -6,10 +7,10 @@ msgstr ""
 "PO-Revision-Date: 2006-04-08 12:19+0900\n"
 "Last-Translator: Piotr Maliński <riklaunim@gmail.com>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
-"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
 
 #: /usr/lib/python2.7/optparse.py:140
 msgid "no such option: %s"
@@ -20,9 +21,8 @@ msgid "ambiguous option: %s (%s?)"
 msgstr "wieloznaczna opcja: %s (%s?)"
 
 #: /usr/lib/python2.7/optparse.py:374
-#, fuzzy
 msgid "Usage: %s\n"
-msgstr "użycie: %s\n"
+msgstr "Użycie: %s\n"
 
 #: /usr/lib/python2.7/optparse.py:393
 msgid "Usage"
@@ -77,16 +77,14 @@ msgid "%s option does not take a value"
 msgstr "%s opcja nie przyjmuje wartości"
 
 #: /usr/lib/python2.7/optparse.py:1621
-#, fuzzy
 msgid "Options"
-msgstr "opcje"
+msgstr "Opcje"
 
 #: pisi-cli:43
 msgid "Keyboard Interrupt: Exiting..."
 msgstr "Przerwanie z klawiatury: Wychodzę..."
 
 #: pisi-cli:46
-#, fuzzy
 msgid "Program terminated."
 msgstr "Program Zakończony."
 
@@ -1610,12 +1608,12 @@ msgid ""
 "Lists currently tracked repositories.\n"
 msgstr ""
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr ""
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
+msgstr ""
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
 msgstr ""
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
@@ -2920,14 +2918,12 @@ msgstr ""
 #~ msgid "Storing %s."
 #~ msgstr "Gromadzenie %s."
 
-#, fuzzy
 #~ msgid "Repository architecture does not match. Removing %s from system."
 #~ msgstr "Repozytorium %s nie istnieje. Nie można usunąć."
 
 #~ msgid "Stripping files.."
 #~ msgstr "Odchudzam pliki..."
 
-#, fuzzy
 #~ msgid "dbus-python package is not fully installed"
 #~ msgstr "pakiet comar nie jest w pełni zainstalowana"
 
@@ -3072,7 +3068,6 @@ msgstr ""
 #~ "w celu odtworzenia bazy. Upewnij się, że masz odpowiednią ilość wolnej przestrzeni na dysku. \n"
 #~ "W przypadku uszkodzenia plików lub aktualizaji bazy, należy użyć opcji rebuild-db"
 
-#, fuzzy
 #~ msgid "Item not found"
 #~ msgstr "Plik %s nie został znaleziony"
 
@@ -3104,7 +3099,6 @@ msgstr ""
 #~ msgid "Files XML '%s' cannot be found"
 #~ msgstr "Pliki XML '%s' nie mogą zostać znalezione"
 
-#, fuzzy
 #~ msgid "Repository distribution does not match. Removing %s from system."
 #~ msgstr "Repozytorium %s nie istnieje. Nie można usunąć."
 
@@ -3129,6 +3123,5 @@ msgstr ""
 #~ msgid "Upgrading to new distribution build"
 #~ msgstr "Aktualizacja do nowej wersji build dystrybucji"
 
-#, fuzzy
 #~ msgid "%s is added to %s/language.%s.dat"
 #~ msgstr "Repo %s zostało dodane do systemu."
