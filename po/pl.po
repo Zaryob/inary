@@ -89,16 +89,14 @@ msgid "Program terminated."
 msgstr "Program Zakończony."
 
 #: pisi-cli:49
-#, fuzzy
 msgid ""
 "Unhandled internal exception.\n"
 "Please file a bug report to <http://bugs.pardus.org.tr>."
 msgstr ""
-"Nieobsłużony wewnętrzny błąd.\n"
-"Prosimy zgłosić błąd. (http://bugs.pardus.org.tr)"
+"Nie obsługiwany wewnętrzny błąd.\n"
+" Prosimy zgłosić ten błąd. (http://bugs.pardus.org.tr)"
 
 #: pisi-cli:58
-#, fuzzy
 msgid "System error. Program terminated."
 msgstr "Błąd Systemu. Program Zakończony."
 
@@ -107,11 +105,12 @@ msgid "Please use 'pisi help' for general help."
 msgstr "Proszę użyć 'pisi help' w celu uzyskania pomocy."
 
 #: pisi-cli:70
-#, fuzzy
 msgid ""
 "\n"
 "Traceback:"
-msgstr "Traceback:"
+msgstr ""
+"\n"
+" Prześledź ponownie:"
 
 #: pisi-cli:73
 msgid "Use --debug to see a traceback."
@@ -199,7 +198,7 @@ msgstr ""
 
 #: pisi/actionsapi/kerneltools.py:120
 msgid "Can't find kernel version information file %s."
-msgstr ""
+msgstr "Nie można odnaleźć pliku %s zawierającego informacjami o  wersji jądra."
 
 #: pisi/actionsapi/libtools.py:38
 msgid "Running ldconfig failed."
@@ -222,53 +221,48 @@ msgid "perl install failed."
 msgstr "perl install nie powiódł się."
 
 #: pisi/actionsapi/pisitools.py:75 pisi/actionsapi/pisitools.py:132
-#, fuzzy
 msgid "No file matched pattern \"%s\""
-msgstr "ActionsAPI [chmod]: Plik %s nie istnieje."
+msgstr "Brak dopasowanego pliku do szablonu  \"%s\""
 
 #: pisi/actionsapi/pisitools.py:142
 msgid "ActionsAPI [doman]: Wrong man page file: %s"
 msgstr "ActionsAPI [doman]: Błędny plik stron man: %s"
 
 #: pisi/actionsapi/pisitools.py:169
-#, fuzzy
 msgid "No file matched pattern \"%s\". 'domove' operation failed."
-msgstr "ActionsAPI [chmod]: Plik %s nie istnieje."
+msgstr "Brak dopasowanego pliku do szablonu  \"%s\". 'domove'  Operacja nie powiodła się."
 
 #: pisi/actionsapi/pisitools.py:188
-#, fuzzy
 msgid "ActionsAPI [rename]: %s: %s"
-msgstr "ActionsAPI [copytree] %s dla %s: %s"
+msgstr "ActionsAPI [zmiana nazwy]: %s: %s"
 
 #: pisi/actionsapi/pisitools.py:203
 msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
-msgstr ""
+msgstr "Brak dopasowanego pliku do szablonu  \"%s\". 'dosed'  Operacja nie powiodła się."
 
 #: pisi/actionsapi/pisitools.py:216
 msgid "dosed method has not changed file '%s'."
-msgstr ""
+msgstr "metoda dodawania nie zmieniła pliku '%s'."
 
 #: pisi/actionsapi/pisitools.py:219
 msgid "File does not exist or permission denied: %s"
 msgstr "Plik nie istnieje lub brak uprawnień: %s"
 
 #: pisi/actionsapi/pisitools.py:236
-#, fuzzy
 msgid "ActionsAPI [dosym]: File already exists: %s"
-msgstr "ActionsAPI [dosym]: Plik istnieje: %s"
+msgstr "ActionsAPI [dosym]: Plik już istnieje: %s"
 
 #: pisi/actionsapi/pisitools.py:245 pisi/actionsapi/pisitoolsfunctions.py:71
 msgid "No file matched pattern \"%s\"."
-msgstr ""
+msgstr "Brak dopasowanego pliku do szablonu  \"%s\"."
 
 #: pisi/actionsapi/pisitools.py:272 pisi/actionsapi/shelltools.py:97
-#, fuzzy
 msgid "No file matched pattern \"%s\". Remove operation failed."
-msgstr "ActionsAPI [chmod]: Plik %s nie istnieje."
+msgstr "Brak dopasowanego pliku do szablonu  \"%s\". Operacja usunięcia nie powiodła się."
 
 #: pisi/actionsapi/pisitools.py:281
 msgid "No directory matched pattern \"%s\". Remove directory operation failed."
-msgstr ""
+msgstr "Brak dopasowanego folderu do szablonu  \"%s\". Operacja usunięcia folderu nie powiodła się."
 
 #: pisi/actionsapi/pisitoolsfunctions.py:45
 #: pisi/actionsapi/pisitoolsfunctions.py:63
@@ -278,21 +272,19 @@ msgstr "Niewystarczająca liczba argumentów."
 
 #: pisi/actionsapi/pisitoolsfunctions.py:53
 msgid "No executable file matched pattern \"%s\"."
-msgstr ""
+msgstr "Brak dopasowanego pliku wykonywalnego do szablonu  \"%s\"."
 
 #: pisi/actionsapi/pythonmodules.py:56
-#, fuzzy
 msgid "Configuration failed."
-msgstr "%s konfiguracja nie powiodła się"
+msgstr "Konfiguracja nie powiodła się."
 
 #: pisi/actionsapi/pythonmodules.py:81
 msgid "Running %s failed."
 msgstr "Uruchomienie %s nie powiodło się."
 
 #: pisi/actionsapi/qt4.py:52
-#, fuzzy
 msgid "Project file '%s' not found."
-msgstr "Plik %s nie został znaleziony"
+msgstr "Plik projektu \"%s\" nie znaleziony."
 
 #: pisi/actionsapi/qt4.py:56
 msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)"
@@ -314,7 +306,7 @@ msgstr "ActionsAPI [echo]: Nie można dołączyć pliku %s."
 #: pisi/actionsapi/shelltools.py:63
 #, fuzzy
 msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
-msgstr "ActionsAPI [chmod]: Plik %s nie istnieje."
+msgstr "ActionsAPI [chmod]: No file matched pattern \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:70
 #, fuzzy
