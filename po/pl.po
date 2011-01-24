@@ -291,7 +291,6 @@ msgid "It seems there are more than one .pro file, you must specify one. (Possib
 msgstr ""
 
 #: pisi/actionsapi/rubymodules.py:108
-#, fuzzy
 msgid "Running 'ruby %s' failed."
 msgstr "Uruchomienie %s nie powiodło się."
 
@@ -393,7 +392,7 @@ msgstr "Przenoszenie plików źródłowych nie powiodło się."
 
 #: pisi/actionsapi/texlivemodules.py:59
 msgid "Generate config files failed"
-msgstr ""
+msgstr "Generowanie plików konfiguracyjnych  nie powiodło się."
 
 #: pisi/actionsapi/texlivemodules.py:62
 msgid "Building format files failed"
@@ -445,7 +444,7 @@ msgstr "Tworzenie /etc/texmf/%s.d"
 
 #: pisi/actionsapi/texlivemodules.py:155
 msgid "Moving (and symlinking) /usr/share/texmf/%s to /etc/texmf/%s.d"
-msgstr ""
+msgstr "Przenoszenie (i tworzenie linków symbolicznych) z /usr/share/texmf/%s do /etc/texmf/%s.d"
 
 #: pisi/actionsapi/texlivemodules.py:206
 msgid "Building format file %s"
@@ -463,15 +462,15 @@ msgstr "Repo %s zostało dodane do systemu."
 
 #: pisi/actionsapi/texlivemodules.py:269
 msgid "p +%s is added to %s/%s-config.ps"
-msgstr ""
+msgstr "p +%s został dodany do %s/%s-config.ps"
 
 #: pisi/actionsapi/texlivemodules.py:272
 msgid "f %s is added to %s/%s-config"
-msgstr ""
+msgstr "f %s został dodany do %s/%s-config"
 
 #: pisi/actionsapi/texlivemodules.py:279
 msgid "Language file  %s  already generated."
-msgstr ""
+msgstr "Plik z lokalizacją  %s  już został wygenerowany."
 
 #: pisi/actionsapi/texlivemodules.py:281
 msgid "No rule to proccess %s. Please file a bug."
@@ -479,20 +478,19 @@ msgstr ""
 
 #: pisi/api.py:58 pisi/cli/command.py:166
 msgid "You have to be root for this operation."
-msgstr ""
+msgstr "Musisz być zalogowany jako \"root\" by wykonać tą operacje."
 
 #: pisi/api.py:65
 msgid "Another instance of PiSi is running. Only one instance is allowed."
 msgstr ""
 
 #: pisi/api.py:420
-#, fuzzy
 msgid "%s package found in %s repository"
 msgstr "Pakiet %s znaleziono w repozytorium %s"
 
 #: pisi/api.py:424
 msgid "%s package already fetched"
-msgstr ""
+msgstr "Pakiet %s jest już pobrany"
 
 #: pisi/api.py:566
 msgid "Taking snapshot of the system"
@@ -516,16 +514,15 @@ msgstr "* Indeks plików zapisany"
 
 #: pisi/api.py:782
 msgid "Not a valid repo name."
-msgstr ""
+msgstr "Niepoprawna nazwa repozytorium"
 
 #: pisi/api.py:785
 msgid "Repo %s already present."
 msgstr "Repo %s już wcześniej zostało dodane."
 
 #: pisi/api.py:788
-#, fuzzy
 msgid "Repo already present with name %s."
-msgstr "Repo %s już wcześniej zostało dodane."
+msgstr "Repozytorium %s już wcześniej zostało dodane."
 
 #: pisi/api.py:793
 msgid "Repo %s added to system."
@@ -540,9 +537,8 @@ msgid "Repository %s does not exist. Cannot remove."
 msgstr "Repozytorium %s nie istnieje. Nie można usunąć."
 
 #: pisi/api.py:823
-#, fuzzy
 msgid "Updating repository: %s"
-msgstr "* Aktualizacja repozytorium: %s"
+msgstr "Aktualizacja repozytorium: %s"
 
 #: pisi/api.py:832
 msgid "%s repository information is up-to-date."
@@ -694,19 +690,19 @@ msgstr ""
 
 #: pisi/cli/__init__.py:190
 msgid "Removed %s"
-msgstr ""
+msgstr "Usunięto %s"
 
 #: pisi/cli/__init__.py:192
 msgid "Upgraded %s"
-msgstr ""
+msgstr "Zaktualizowano %s"
 
 #: pisi/cli/__init__.py:194
 msgid "Configured %s"
-msgstr ""
+msgstr "Skonfigurowano %s"
 
 #: pisi/cli/__init__.py:196
 msgid "Extracting the files of %s"
-msgstr ""
+msgstr "Rozpakowywanie plików %s"
 
 #: pisi/cli/addrepo.py:24
 msgid ""
