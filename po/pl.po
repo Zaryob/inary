@@ -585,9 +585,8 @@ msgid "Package %s not found in any active repository."
 msgstr "Pakiet %s nie została znaleziona w żadnym z aktywnym repozytoriów."
 
 #: pisi/atomicoperations.py:146
-#, fuzzy
 msgid "Installing %s, version %s, release %s"
-msgstr "Instalowanie %s, wersja %s, wydanie %s, build %s"
+msgstr "Instalowanie %s, wersja %s, wydanie %s"
 
 #: pisi/atomicoperations.py:192 pisi/operations/build.py:701
 msgid "%s-%s is not a valid PiSi version format"
@@ -598,9 +597,8 @@ msgid "%s package cannot be installed unless the dependencies are satisfied"
 msgstr "%s pakiet nie może zostać zainstalowany, dopóki nie zostaną spełnione zależności"
 
 #: pisi/atomicoperations.py:222
-#, fuzzy
 msgid "/%s from %s package\n"
-msgstr "/%s z pakietu %s"
+msgstr "/%s z pakietu %s \n"
 
 #: pisi/atomicoperations.py:223
 msgid ""
@@ -664,21 +662,20 @@ msgid "Not removing conflicted file : %s"
 msgstr "Nie usuwam kolidującego pliku : %s"
 
 #: pisi/atomicoperations.py:646
-#, fuzzy
 msgid "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr "Zainstalowany plik %s nie istnieje w systemie [Prawdopodobnie został usunięty ręcznie]"
 
 #: pisi/cli/__init__.py:117
 msgid "Warning: "
-msgstr ""
+msgstr "Ostrzeżenie:"
 
 #: pisi/cli/__init__.py:127
 msgid "Error: "
-msgstr ""
+msgstr "Błąd:"
 
 #: pisi/cli/__init__.py:157
 msgid " (yes/no)"
-msgstr ""
+msgstr "(Tak / nie)"
 
 #: pisi/cli/__init__.py:178
 msgid " [complete]\n"
@@ -686,7 +683,7 @@ msgstr "[zakończony] \n"
 
 #: pisi/cli/__init__.py:188
 msgid "Installed %s"
-msgstr ""
+msgstr "Zainstalowany %s"
 
 #: pisi/cli/__init__.py:190
 msgid "Removed %s"
@@ -853,19 +850,19 @@ msgstr ""
 
 #: pisi/cli/build.py:131
 msgid "Break build after running configure step"
-msgstr ""
+msgstr "Przerwij budowanie po uruchomieniu konfiguracji"
 
 #: pisi/cli/build.py:137
 msgid "Break build after running compile step"
-msgstr ""
+msgstr "Przerwij budowanie po uruchomieniu kompilowania"
 
 #: pisi/cli/build.py:143
 msgid "Break build after running check step"
-msgstr ""
+msgstr "Przerwij budowanie po uruchomieniu sprawdzania"
 
 #: pisi/cli/build.py:149
 msgid "Break build after running install step"
-msgstr ""
+msgstr "Przerwij budowanie po uruchomieniu  instalacji"
 
 #: pisi/cli/build.py:155
 msgid "Create PiSi package"
@@ -916,18 +913,19 @@ msgstr ""
 
 #: pisi/cli/check.py:66
 msgid "Checking all installed packages"
-msgstr ""
+msgstr "Sprawdzanie wszystkich zainstalowanych pakietów"
 
 #: pisi/cli/check.py:71
 msgid "* Checking %s... "
 msgstr "* Sprawdzanie %s... "
 
 #: pisi/cli/check.py:77
-#, fuzzy
 msgid ""
 "\n"
 "Package %s has changed config files."
-msgstr "Pakiet %s znaleziono w repozytorium %s"
+msgstr ""
+"\n"
+" Pakiet %s ma zmienione pliki konfiguracje. "
 
 #: pisi/cli/check.py:79
 msgid ""
@@ -961,7 +959,7 @@ msgstr ""
 
 #: pisi/cli/command.py:34
 msgid "Duplicate command %s"
-msgstr ""
+msgstr "Polecenie %s już istnieje"
 
 #: pisi/cli/command.py:71 pisi/cli/pisicli.py:134
 msgid "Unrecognized command: %s"
@@ -969,7 +967,7 @@ msgstr ""
 
 #: pisi/cli/command.py:96
 msgid "general options"
-msgstr ""
+msgstr "opcje ogólne"
 
 #: pisi/cli/command.py:99
 msgid "Change the system root for PiSi commands"
@@ -977,7 +975,7 @@ msgstr ""
 
 #: pisi/cli/command.py:101
 msgid "Assume yes in all yes/no queries"
-msgstr ""
+msgstr "Wybierz TAK we wszystkich zapytaniach (tak/nie)"
 
 #: pisi/cli/command.py:105
 msgid "Keep bandwidth usage under specified KB's"
@@ -989,7 +987,7 @@ msgstr ""
 
 #: pisi/cli/command.py:110
 msgid "Show debugging information"
-msgstr ""
+msgstr "Pokaż informacje o debugowaniu"
 
 #: pisi/cli/command.py:112
 msgid "Suppresses all coloring of PiSi's output"
@@ -997,7 +995,7 @@ msgstr ""
 
 #: pisi/cli/command.py:130
 msgid "Destination directory %s does not exist. Creating directory.\n"
-msgstr ""
+msgstr "Katalog docelowy %s nie istnieje. Tworzenie katalogu. \n"
 
 #: pisi/cli/command.py:152
 msgid "Password: "
@@ -1134,9 +1132,8 @@ msgid ""
 msgstr ""
 
 #: pisi/cli/fetch.py:41
-#, fuzzy
 msgid "fetch options"
-msgstr "opcje"
+msgstr "Opcje pobierania"
 
 #: pisi/cli/fetch.py:47
 msgid "Output directory for the fetched packages"
@@ -1248,9 +1245,8 @@ msgid ""
 msgstr ""
 
 #: pisi/cli/history.py:47
-#, fuzzy
 msgid "history options"
-msgstr "opcje"
+msgstr "Opcje historii"
 
 #: pisi/cli/history.py:53
 msgid "Output only the last n operations"
@@ -1330,7 +1326,7 @@ msgstr "Opcje szczegółów"
 
 #: pisi/cli/info.py:52
 msgid "Show a list of package files."
-msgstr ""
+msgstr "Pokaż listę plików pakietu."
 
 #: pisi/cli/info.py:54
 msgid "Info about the given component"
@@ -1338,7 +1334,7 @@ msgstr ""
 
 #: pisi/cli/info.py:57
 msgid "Show only paths."
-msgstr ""
+msgstr "Pokaż tylko ścieżki."
 
 #: pisi/cli/info.py:59
 msgid "Do not show details"
