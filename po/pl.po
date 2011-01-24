@@ -388,18 +388,16 @@ msgid "Command \"%s\" failed, return value was %d."
 msgstr ""
 
 #: pisi/actionsapi/texlivemodules.py:56
-#, fuzzy
 msgid "Moving source files failed"
-msgstr "Uruchomienie automake nie powiodło się."
+msgstr "Przenoszenie plików źródłowych nie powiodło się."
 
 #: pisi/actionsapi/texlivemodules.py:59
 msgid "Generate config files failed"
 msgstr ""
 
 #: pisi/actionsapi/texlivemodules.py:62
-#, fuzzy
 msgid "Building format files failed"
-msgstr "Budynek format plików nie powiodło się"
+msgstr "Format plików budowania nie poprawny."
 
 #: pisi/actionsapi/texlivemodules.py:69
 msgid "Creating symlinks from format to engines failed"
@@ -439,20 +437,19 @@ msgstr "Link symboliczny %s pominięty (plik istnieje)."
 
 #: pisi/actionsapi/texlivemodules.py:104
 msgid "Making symlink from %s to %s"
-msgstr ""
+msgstr "Tworzenie linku symbolicznego z %s do %s"
 
 #: pisi/actionsapi/texlivemodules.py:153
 msgid "Creating /etc/texmf/%s.d"
-msgstr ""
+msgstr "Tworzenie /etc/texmf/%s.d"
 
 #: pisi/actionsapi/texlivemodules.py:155
 msgid "Moving (and symlinking) /usr/share/texmf/%s to /etc/texmf/%s.d"
 msgstr ""
 
 #: pisi/actionsapi/texlivemodules.py:206
-#, fuzzy
 msgid "Building format file %s"
-msgstr "** Budowanie pakietu %s"
+msgstr "Format pliku budowania%s"
 
 #: pisi/actionsapi/texlivemodules.py:263
 #, fuzzy
