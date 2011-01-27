@@ -122,6 +122,20 @@ class Fetcher:
 
         util.ensure_dirs(self.destdir)
 
+    def test(self):
+        import urlgrabber
+
+        try:
+            urlgrabber.urlopen(self.url.get_uri(),
+                           http_headers = self._get_http_headers(),
+                           ftp_headers  = self._get_ftp_headers(),
+                           proxies      = self._get_proxies(),
+                           user_agent   = 'PiSi Fetcher/' + pisi.__version__)
+        except urlgrabber.grabber.URLGrabError:
+            return False
+
+        return True
+
     def fetch (self):
         """Return value: Fetched file's full path.."""
 
