@@ -105,7 +105,7 @@ class UIHandler:
 class Fetcher:
     """Fetcher can fetch a file from various sources using various
     protocols."""
-    def __init__(self, url, destdir, destfile=None):
+    def __init__(self, url, destdir="/tmp", destfile=None):
         if not isinstance(url, pisi.uri.URI):
             url = pisi.uri.URI(url)
 
