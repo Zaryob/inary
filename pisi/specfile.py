@@ -369,7 +369,7 @@ class Package:
         s += '\n'
         s += _('Dependencies: ')
         for x in self.componentDependencies:
-           s += x.package + ' '
+           s += x + ' '
         for x in self.packageDependencies:
            s += x.name() + ' '
         for x in self.packageAnyDependencies:
