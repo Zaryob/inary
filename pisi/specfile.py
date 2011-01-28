@@ -249,7 +249,13 @@ class Package:
     def runtimeDependencies(self):
         componentdb = pisi.db.componentdb.ComponentDB()
         deps = self.packageDependencies + self.packageAnyDependencies
-        deps += [ componentdb.get_component(x).packages for x in self.componentDependencies ]
+
+        # Create Dependency objects for each package coming from
+        # a component dependency.
+        for component in self.componentDependencies:
+            for pkgName in componentdb.get_component(component).packages:
+                deps.append(pisi.dependency.Dependency(package=pkgName))
+
         return deps
 
     def pkg_dir(self):
