@@ -288,7 +288,7 @@ msgstr "Plik projektu \"%s\" nie znaleziony."
 
 #: pisi/actionsapi/qt4.py:56
 msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)"
-msgstr ""
+msgstr "Wygląda na to, że jest więcej niż jeden plik projektu \".pro\",  należy wybrać jeden. (Możliwe pliki \".pro\" : %s)"
 
 #: pisi/actionsapi/rubymodules.py:108
 msgid "Running 'ruby %s' failed."
@@ -384,7 +384,7 @@ msgstr "ActionsAPI [touch]: Brak uprawnień: %s"
 
 #: pisi/actionsapi/shelltools.py:255
 msgid "Command \"%s\" failed, return value was %d."
-msgstr ""
+msgstr "Polecenie  \"%s\"  nie powiodło się, zwrócona wartość %d."
 
 #: pisi/actionsapi/texlivemodules.py:56
 msgid "Moving source files failed"
@@ -400,7 +400,7 @@ msgstr "Format plików budowania nie poprawny."
 
 #: pisi/actionsapi/texlivemodules.py:69
 msgid "Creating symlinks from format to engines failed"
-msgstr ""
+msgstr "Nie powiodło się tworzenie powiązań formatów plików"
 
 #: pisi/actionsapi/texlivemodules.py:73
 msgid "Installing docs failed"
@@ -451,14 +451,12 @@ msgid "Building format file %s"
 msgstr "Format pliku budowania%s"
 
 #: pisi/actionsapi/texlivemodules.py:263
-#, fuzzy
 msgid "Map %s is added to %s/%s.cfg"
-msgstr "Repo %s zostało dodane do systemu."
+msgstr "Mapowanie %s zostało dodane do %s/%s.cfg"
 
 #: pisi/actionsapi/texlivemodules.py:266
-#, fuzzy
 msgid "MixedMap %s is added to %s/%s.cfg"
-msgstr "Repo %s zostało dodane do systemu."
+msgstr ""
 
 #: pisi/actionsapi/texlivemodules.py:269
 msgid "p +%s is added to %s/%s-config.ps"
@@ -474,7 +472,7 @@ msgstr "Plik z lokalizacją  %s  już został wygenerowany."
 
 #: pisi/actionsapi/texlivemodules.py:281
 msgid "No rule to proccess %s. Please file a bug."
-msgstr ""
+msgstr "Brak reguł dla procesu %s. Proszę zgłosić błąd."
 
 #: pisi/api.py:58 pisi/cli/command.py:166
 msgid "You have to be root for this operation."
@@ -482,7 +480,7 @@ msgstr "Musisz być zalogowany jako \"root\" by wykonać tą operacje."
 
 #: pisi/api.py:65
 msgid "Another instance of PiSi is running. Only one instance is allowed."
-msgstr ""
+msgstr "Inny proces PiSi jest już uruchomiony. Dozwolony jest tylko jeden uruchomiony proces PiSi."
 
 #: pisi/api.py:420
 msgid "%s package found in %s repository"
@@ -542,7 +540,7 @@ msgstr "Aktualizacja repozytorium: %s"
 
 #: pisi/api.py:832
 msgid "%s repository information is up-to-date."
-msgstr ""
+msgstr "Informacje o repozytorium %s są zaktualizowane."
 
 #: pisi/api.py:834
 msgid "Updating database at any rate as requested"
@@ -566,7 +564,7 @@ msgstr "OK."
 
 #: pisi/archive.py:380
 msgid "Problem occured while uncompressing %s.Z file"
-msgstr ""
+msgstr "Wystąpił problem podczas dekompresji pliku %s."
 
 #: pisi/atomicoperations.py:71 pisi/operations/history.py:72
 msgid "Package %s found in repository %s"
@@ -577,9 +575,8 @@ msgid "Package URI: %s"
 msgstr "URI pakietu: %s"
 
 #: pisi/atomicoperations.py:116
-#, fuzzy
 msgid "Download Error: Package does not match the repository package."
-msgstr "Błąd pobierania: Package does not match the repository package."
+msgstr "Błąd pobierania: Pakiet nie pasuje do repozytorium pakietów."
 
 #: pisi/atomicoperations.py:120
 msgid "Package %s not found in any active repository."
@@ -591,7 +588,7 @@ msgstr "Instalowanie %s, wersja %s, wydanie %s"
 
 #: pisi/atomicoperations.py:192 pisi/operations/build.py:701
 msgid "%s-%s is not a valid PiSi version format"
-msgstr ""
+msgstr "%s-%s nie jest to poprawna wersja formatu PiSi."
 
 #: pisi/atomicoperations.py:198
 msgid "%s package cannot be installed unless the dependencies are satisfied"
@@ -639,7 +636,7 @@ msgstr "%s konfiguracja nie powiodła się"
 
 #: pisi/atomicoperations.py:400
 msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
-msgstr ""
+msgstr "Nie można przenieść stępujących plików. Zalecana jest ponowna instalacja tego pakietu."
 
 #: pisi/atomicoperations.py:491 pisi/atomicoperations.py:494
 #: pisi/atomicoperations.py:501
@@ -715,22 +712,36 @@ msgid ""
 "\n"
 "NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment\n"
 msgstr ""
+"Aby dodać repozytorium \n"
+"\n"
+"\r\n"
+"Użyj: add-repo <repo> <indexuri>\n"
+"\n"
+"<repo>: nazwa repozytorium do dodania\n"
+"\r\n"
+"<indexuri>: URL indeksu pliku\n"
+"\n"
+"\r\n"
+"Jeżeli nie jest podane repozytorium, domyślnie dodane jest repozytorium pardus-devel\n"
+"\n"
+"\r\n"
+"NB: Obecnie obsługiwane są tylko lokalne piki (e.g., /a/b/c) i http:// URL\n"
 
 #: pisi/cli/addrepo.py:45
 msgid "add-repo options"
-msgstr ""
+msgstr "Opcje add-repo"
 
 #: pisi/cli/addrepo.py:46
 msgid "Ignore repository distribution check"
-msgstr ""
+msgstr "Ignoruj sprawdzanie repozytorium dystrybucji."
 
 #: pisi/cli/addrepo.py:47
 msgid "Does not fetch repository index and does not check distribution match"
-msgstr ""
+msgstr "Nie pobiera indeksu repozytorium i nie sprawdza dopasowania do dystrybucji."
 
 #: pisi/cli/addrepo.py:50
 msgid "Add repository at given position (0 is first)"
-msgstr ""
+msgstr "Dodaj repozytorium na wybranym miejscu (pierwszy 0)"
 
 #: pisi/cli/addrepo.py:69
 msgid ""
@@ -738,10 +749,14 @@ msgid ""
 "By confirming this you are also adding the repository to your system without checking the distribution of the repository.\n"
 "Do you want to continue?"
 msgstr ""
+"Dodać %s repozytorium bez aktualizowania bazy danych?\n"
+"\r\n"
+"Potwierdzając  dodajesz również repozytorium do systemu bez sprawdzania dystrybucji repozytorium.\n"
+" Czy chcesz kontynuować?"
 
 #: pisi/cli/addrepo.py:81
 msgid "%s repository could not be reached. Removing %s from system."
-msgstr ""
+msgstr "Repozytorium %s jest nie osiągalne. Usuwanie %s z systemu."
 
 #: pisi/cli/blame.py:24
 msgid ""
