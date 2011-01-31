@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2010, TUBITAK/UEKAE
+# Copyright (C) 2005-2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -18,7 +18,7 @@ import atexit
 import logging
 import logging.handlers
 
-__version__ = "2.4_alpha1"
+__version__ = "2.4_alpha2"
 
 __all__ = [ 'api', 'configfile', 'db']
 

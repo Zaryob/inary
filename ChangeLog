@@ -1,3 +1,234 @@
+2011-01-31 Fatih Aşıcı <fatih@pardus.org.tr>
+	* fetcher: Add a timeout parameter to Fetcher.test()
+
+2011-01-28 Ozan Çağlayan <ozan@pardus.org.tr>
+	* specfile: Create Dependency objects for each package in a
+	component dependency
+
+	This should fix the usage of Component dependencies. I'm
+	now testing.
+
+2011-01-28 Ozan Çağlayan <ozan@pardus.org.tr>
+	* specfile: Component dependencies are base strings
+
+2011-01-28 Ozan Çağlayan <ozan@pardus.org.tr>
+	* specfile: Fix typo: get_component() is a function.
+
+2011-01-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* fetcher: Add a method to test connection using urlopen
+
+2011-01-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* fetcher: Add a default value for destionation directory
+
+2011-01-21 Gökçen Eraslan <gokcen@pardus.org.tr>
+	* l10n: Fix Hu translation
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/16353.
+
+2011-01-05 Ozan Çağlayan <ozan@pardus.org.tr>
+	* comariface: Fix a case where names are not validated
+
+	When name="xx-yy" is given explicitly in a <COMAR> tag, current
+	code was not replacing the dash with an underscore causing D-Bus
+	errors.
+
+	This commit fixes this.
+
+2011-01-05 Ozan Çağlayan <ozan@pardus.org.tr>
+	* comariface: safe_script_name is a better name
+
+2010-12-28 Ozan Çağlayan <ozan@pardus.org.tr>
+	* actionsapi/kerneltools: Rework versioning stuff. I think it's okay now
+
+2010-12-28 Ozan Çağlayan <ozan@pardus.org.tr>
+	* patches: update non-root build patch
+
+2010-12-27 Ozan Çağlayan <ozan@pardus.org.tr>
+	* patches: Add patch to support non-root building
+
+	* if config.tmp_dir is not writeable defaults to /tmp/pisi-$USER
+	* if /var/cache/pisi/archives is not writeable defaults to /tmp/pisi-$USER
+	* Move chowning additional files into postinstall
+	* Assume that group == owner if no group is given for AdditionalFiles
+
+	BUGS:
+
+	All files extracted under work_dir and installed under install_dir
+	has owner:group == uid:gid of the user which builds the package.
+
+	TEST:
+	Build a package with your regular user and install it
+
+	EXPECTED RESULTS:
+	You shouldn't have any exceptions but the files installed on your
+	system will have the same ownership as your user ;)
+
+2010-12-27 Ozan Çağlayan <ozan@pardus.org.tr>
+	* actionsapi/kerneltools: This is changed to listnewconfig by upstream
+
+2010-12-24 Ozan Çağlayan <ozan@pardus.org.tr>
+	* actionsapi/kerneltools: Install Module.symvers and System.map under lib/modules too
+
+2010-12-23 Ozan Çağlayan <ozan@pardus.org.tr>
+	* actionsapi/kerneltools: More fixes and cleanup
+
+	Avoid calling depmod
+	Call nonint_oldconfig to check the configuration
+	Call dumpVersion from here instead of actions.py
+
+2010-12-22 Ozan Çağlayan <ozan@pardus.org.tr>
+	* actionsapi/kerneltools: More fixes
+
+2010-12-21 Ozan Çağlayan <ozan@pardus.org.tr>
+	* actionsapi/kerneltools: Don't install kernel sources, it's useless
+
+2010-12-21 Ozan Çağlayan <ozan@pardus.org.tr>
+	* actionsapi/kerneltools: Use upstream ways to not install the firmwares
+
+2010-12-21 Ozan Çağlayan <ozan@pardus.org.tr>
+	* actionsapi/kerneltools: Rework EXTRAVERSION stuff
+
+2010-12-18 H. İbrahim Güngör <ibrahim@pardus.org.tr>
+	* l10n: Revert back to r34041 since non-latin characters in ru.po seems broken.
+
+2010-12-18 H. İbrahim Güngör <ibrahim@pardus.org.tr>
+	* l10n: Revert last commit
+
+2010-12-14 Fatih Aşıcı <fatih@pardus.org.tr>
+	* emerge: Fix package installation
+
+	This is broken since the API change in Builder class.
+
+2010-12-14 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Let build function return Builder object
+
+2010-12-13 Bahadır Kandemir <bahadir@pardus.org.tr>
+	* file: Don't overwrite file when using with local filesystem
+
+2010-12-10 Bahadır Kandemir <bahadir@pardus.org.tr>
+	* file: Fix not checking sha1sum
+
+2010-12-10 Bahadır Kandemir <bahadir@pardus.org.tr>
+	* file: Fixed not keeping original filename
+
+2010-12-09 Bahadır Kandemir <bahadir@pardus.org.tr>
+	* fetcher: Check integrity of files before saving to disk.
+
+	Fetcher will check integrity of files using sha1sum file 
+	(and later with digital signatures) before saving them to 
+	their original locations.
+
+2010-12-02 Ozan Çağlayan <ozan@pardus.org.tr>
+	* util: Use -i instead of redirection
+
+	GNU patch accepts -i to pass the patch file. Use that instead of
+	redirection.
+
+2010-11-25 Ozan Çağlayan <ozan@pardus.org.tr>
+	* build: Warn if a patch file is empty
+
+	GNU patch does not detect empty patch files so print
+	a warning for empty patches before unpacking the source.
+
+2010-11-24 Ozan Çağlayan <ozan@pardus.org.tr>
+	* index: Remove faulty and unused name() method
+
+	distribution class doesn't have any members called name and
+	repositoryname.
+
+2010-11-11 Fatih Aşıcı <fatih@pardus.org.tr>
+	* history: Fix split error
+
+2010-11-11 Fatih Aşıcı <fatih@pardus.org.tr>
+	* history: Ugly fix for the regression caused by filename changes
+
+	Since we didn't store distribution and architecture info in history
+	database, takeback was not able to guess old package names.
+
+2010-11-03 Fatih Aşıcı <fatih@pardus.org.tr>
+	* api: Regenerate caches even if a repo-update fails
+
+2010-11-03 Fatih Aşıcı <fatih@pardus.org.tr>
+	* comariface: Code style fixes
+
+2010-10-27 Bahadır Kandemir <bahadir@pardus.org.tr>
+	* scripts: Check certificate validity and trustworthiness.
+
+	pisign utility embeds certificate into Zip files and validates them
+	before checking signature. It also looks into a trust_dir database
+	to see if certificates are trusted or not. Check README for examples.
+
+2010-10-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* check: Normalize symlink targets before calculating their sums
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/14906.
+
+2010-10-25 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tree-wide: Make some error messages translatable
+
+2010-10-25 Bahadır Kandemir <bahadir@pardus.org.tr>
+	* scripts: Package signing tool verifies using certificate.
+
+	Package signing tool verifies signed data using certificate instead 
+	of public key. It also verifies certificate, warns if it's self 
+	signed, fails if it's invalid.
+
+2010-10-25 Bahadır Kandemir <bahadir@pardus.org.tr>
+	* scripts: Various improvements in pisign.py
+
+	- Get passphrase with getpass
+	- Don't extract public key from certificate
+	- Support signing/verifying multiple files at once
+
+2010-10-24 Erdem Bayer <ebayer@bayer.gen.tr>
+	* cli/graph: Add option to generate reverse dependency graph
+
+2010-10-19 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tree-wide: Remove redundant setlocale's
+
+	This commit also fixes the confirm method to repeat asking until
+	a valid input is given.
+
+2010-10-18 Fatih Aşıcı <fatih@pardus.org.tr>
+	* rng: Update for type attribute in Archive tag
+
+	It is now optional and accepts more types.
+
+2010-10-14 Fatih Aşıcı <fatih@pardus.org.tr>
+	* specfile: Thinko fix
+
+	packageAnyDependencies is an array of AnyDependency objects, not
+	Dependency!
+
+2010-10-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* l10n: Fix fuzzy messages in Turkish translations
+
+2010-10-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* l10n: Update messages
+
+2010-10-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* tree-wide: Do not pass variables to the gettext function
+
+2010-10-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Little improvements on info messages
+
+2010-10-13 Fatih Arslan < farslan@pardus.org.tr>
+	* actionsapi/texlivemodules: Add exception for None values of "patterns"
+
+	Every format file has some keywords that are passed to the appropriate 
+	application during the build stage. However some of thes keywords, such
+	as "patterns" may have Null values (do not exist) or have empty string.
+	Thus, we add here an exception for Null values of "patterns". If no 
+	"patterns" keyword exist, than we create a new one with the parameter '-'
+	This parameter is default and is adviced from the TexLive developers itself.
+
+2010-10-11 Fatih Aşıcı <fatih@pardus.org.tr>
+	* pisi 2.4_alpha1
+
+	This is the first alpha for the upcoming 2.3.x releases. This
+	release adds lots of new features. The most significant ones are
+	the changes in the package format.
+
 2010-10-11 Fatih Aşıcı <fatih@pardus.org.tr>
 	* db: Bump cache version
 
