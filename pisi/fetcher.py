@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005 - 2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -122,7 +122,7 @@ class Fetcher:
 
         util.ensure_dirs(self.destdir)
 
-    def test(self):
+    def test(self, timeout=3):
         import urlgrabber
 
         try:
@@ -130,6 +130,7 @@ class Fetcher:
                            http_headers = self._get_http_headers(),
                            ftp_headers  = self._get_ftp_headers(),
                            proxies      = self._get_proxies(),
+                           timeout      = timeout,
                            user_agent   = 'PiSi Fetcher/' + pisi.__version__)
         except urlgrabber.grabber.URLGrabError:
             return False
