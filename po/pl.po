@@ -765,19 +765,23 @@ msgid ""
 "Usage: blame <package> ... <package>\n"
 "\n"
 msgstr ""
+"Informacje na temat właściciela pakietu i wydania\n"
+" \n"
+"\r\n"
+"Użyj: blame <pakiet> ... <pakiet> \n"
+" \n"
 
 #: pisi/cli/blame.py:39
-#, fuzzy
 msgid "blame options"
-msgstr "opcje"
+msgstr "Opcje blame"
 
 #: pisi/cli/blame.py:40
 msgid "Blame for the given release"
-msgstr ""
+msgstr "\"Blame\" dla danego wydania"
 
 #: pisi/cli/blame.py:42
 msgid "Blame for all of the releases"
-msgstr ""
+msgstr "\"Blame\" dla wszystkich wydań"
 
 #: pisi/cli/blame.py:68 pisi/specfile.py:361 pisi/specfile.py:444
 msgid "Name: %s, version: %s, release: %s\n"
@@ -789,7 +793,7 @@ msgstr "Opiekun pakietu: : %s <%s>\n"
 
 #: pisi/cli/blame.py:71
 msgid "Release Updater: %s <%s>\n"
-msgstr ""
+msgstr "Wydanie zaktualizowane: %s <%s>\n"
 
 #: pisi/cli/blame.py:72
 msgid "Update Date: %s\n"
@@ -807,6 +811,14 @@ msgid ""
 "Alternatively, you can give the name of a source package\n"
 "to be downloaded from a repository containing sources.\n"
 msgstr ""
+"Zbuduj pakiety PiSi\n"
+"\n"
+"Użyj: build [<pspec.xml> | <nazwa źródła >] ...\n"
+"\n"
+" Możesz dać URI dla pliku pspec.xml.\n"
+" PiSi pobierze wszystkie wymagane pliki i zbuduje pakiet dla Ciebie.\n"
+"\n"
+" Można podać nazwę pakietu źródłowego do pobrania z repozytorium zwierającego źródła.\n"
 
 #: pisi/cli/build.py:50
 msgid "build options"
@@ -814,15 +826,15 @@ msgstr "opcje budowania"
 
 #: pisi/cli/build.py:58
 msgid "Run pisi build operation without printing extra debug information"
-msgstr ""
+msgstr "Uruchom operacje budowania pakietów bez wyświetlania dodatkowych informacji debugowania."
 
 #: pisi/cli/build.py:64 pisi/cli/command.py:204
 msgid "Do not take dependency information into account"
-msgstr ""
+msgstr "Nie bierz pod uwagę informacji o zależnościach."
 
 #: pisi/cli/build.py:70
 msgid "Output directory for produced packages"
-msgstr ""
+msgstr "Katalog wyjściowy dla zbudowanego pakietu."
 
 #: pisi/cli/build.py:74
 msgid "Bypass errors from ActionsAPI"
