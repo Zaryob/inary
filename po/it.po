@@ -2316,9 +2316,8 @@ msgid "Encountered cycle %s"
 msgstr "Riscontrato ciclo %s"
 
 #: pisi/history.py:43
-#, fuzzy
 msgid "%s repository is updated."
-msgstr "Nessun repository di nome %s trovato."
+msgstr "repositorio di nome %s è aggiornato."
 
 #: pisi/history.py:63
 msgid "%s is upgraded from %s to %s with delta."
@@ -2330,17 +2329,15 @@ msgstr ""
 
 #: pisi/history.py:67
 msgid "%s %s is removed."
-msgstr ""
+msgstr "%s %s è stato rimosso."
 
 #: pisi/history.py:69
-#, fuzzy
 msgid "%s %s is installed."
-msgstr "%s non è installato"
+msgstr "%s %s è installato."
 
 #: pisi/history.py:71
-#, fuzzy
 msgid "%s %s is reinstalled."
-msgstr "%s non è installato"
+msgstr "%s %s è reinstallato."
 
 #: pisi/history.py:73
 msgid "%s is downgraded from %s to %s."
@@ -2367,9 +2364,8 @@ msgid "Architecture: %s, Installed Size: %s"
 msgstr "Architettura: %s, Dimensione file installati: %s"
 
 #: pisi/metadata.py:86
-#, fuzzy
 msgid ", Package Size: %s"
-msgstr "File pacchetto: %s"
+msgstr ""
 
 #: pisi/mirrors.py:46
 msgid "Mirrors file %s does not exist. Could not resolve mirrors://"
@@ -2392,9 +2388,8 @@ msgid "pspec.xml avoids this package from building for '%s'"
 msgstr ""
 
 #: pisi/operations/build.py:312
-#, fuzzy
 msgid "Building source package: %s"
-msgstr "Costruzione del pacchetto sorgente PiSi %s"
+msgstr "Costruzione del pacchetto sorgente: %s"
 
 #: pisi/operations/build.py:357
 msgid "IceCream detected. Make sure your daemon is up and running..."
@@ -2550,15 +2545,13 @@ msgid "Ignoring empty package %s"
 msgstr "Rimozione del pacchetto %s in corso"
 
 #: pisi/operations/build.py:1016
-#, fuzzy
 msgid "Building package: %s"
-msgstr "** Compilazione del pacchetto %s"
+msgstr "Costruzione del pacchetto: %s"
 
 #: pisi/operations/build.py:1035 pisi/operations/delta.py:50
 #: pisi/operations/delta.py:148
-#, fuzzy
 msgid "Creating %s..."
-msgstr "* Controllo di %s in corso... "
+msgstr ""
 
 #: pisi/operations/build.py:1078
 #, fuzzy
