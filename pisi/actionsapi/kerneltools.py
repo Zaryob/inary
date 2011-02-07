@@ -128,7 +128,10 @@ def configure():
     autotools.make("ARCH=%s oldconfig" % __getKernelARCH())
 
     # Check configuration with listnewconfig
-    autotools.make("ARCH=%s listnewconfig" % __getKernelARCH())
+    try:
+        autotools.make("ARCH=%s listnewconfig" % __getKernelARCH())
+    except:
+        pass
 
 ###################################
 # Building and installation stuff #
