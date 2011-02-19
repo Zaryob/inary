@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005-2010, TUBITAK/UEKAE
+# Copyright (C) 2005-2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -398,19 +398,17 @@ class Builder:
             pass
 
     def fetch_patches(self):
-        spec = self.spec
-        for patch in spec.source.patches:
-            file_name = os.path.basename(patch.filename)
+        for patch in self.spec.source.patches:
             dir_name = os.path.dirname(patch.filename)
             patchuri = util.join_path(self.specdiruri,
-                            ctx.const.files_dir, dir_name, file_name)
+                                      ctx.const.files_dir,
+                                      patch.filename)
             self.download(patchuri, util.join_path(self.destdir,
                                                    ctx.const.files_dir,
                                                    dir_name))
 
     def fetch_comarfiles(self):
-        spec = self.spec
-        for package in spec.packages:
+        for package in self.spec.packages:
             for pcomar in package.providesComar:
                 comaruri = util.join_path(self.specdiruri,
                                 ctx.const.comar_dir, pcomar.script)
@@ -505,7 +503,7 @@ class Builder:
     def get_abandoned_files(self):
         # return the files those are not collected from the install dir
 
-        install_dir = self.pkg_dir() + ctx.const.install_dir_suffix
+        install_dir = self.pkg_install_dir()
         abandoned_files = []
         all_paths_in_packages = []
 
@@ -948,7 +946,7 @@ class Builder:
             if debug_packages:
                 self.spec.packages.extend(debug_packages)
 
-        install_dir = self.pkg_dir() + ctx.const.install_dir_suffix
+        install_dir = self.pkg_install_dir()
 
         # Store additional files
         c = os.getcwd()
