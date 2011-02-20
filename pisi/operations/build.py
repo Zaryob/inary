@@ -340,10 +340,22 @@ class Builder:
         self.build_packages()
 
     def get_build_types(self):
+        ignored_build_types = \
+                ctx.config.values.build.ignored_build_types.split(",")
         build_types = [""]
+        packages = []
+
         for package in self.spec.packages:
-            if package.buildType and package.buildType not in build_types:
-                build_types.append(package.buildType)
+            if package.buildType:
+                if package.buildType in ignored_build_types:
+                    continue
+
+                if package.buildType not in build_types:
+                    build_types.append(package.buildType)
+
+            packages.append(package)
+
+        self.spec.packages = packages
 
         return build_types
 
