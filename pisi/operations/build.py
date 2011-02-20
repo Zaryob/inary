@@ -490,7 +490,7 @@ class Builder:
         self.sourceArchives.fetch()
 
     def unpack_source_archives(self):
-        ctx.ui.info(_("Unpacking archive(s)..."))
+        ctx.ui.action(_("Unpacking archive(s)..."))
         self.sourceArchives.unpack(self.pkg_work_dir())
         # apply the patches and prepare a source directory for build.
         if self.apply_patches():
