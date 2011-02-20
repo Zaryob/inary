@@ -728,6 +728,10 @@ class Builder:
 
         build_deps = self.spec.source.buildDependencies
 
+        for package in self.spec.packages:
+            if package.buildType in self.build_types:
+                build_deps.extend(package.buildDependencies)
+
         if not ctx.config.values.general.ignore_safety and \
                 not ctx.get_option('ignore_safety'):
             if self.componentdb.has_component('system.devel'):
