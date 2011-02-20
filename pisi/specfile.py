@@ -233,6 +233,7 @@ class Package:
     t_License = [ [autoxml.String], autoxml.optional]
     t_Icon = [ autoxml.String, autoxml.optional]
     t_BuildType = [ autoxml.String, autoxml.optional ]
+    t_BuildDependencies = [[pisi.dependency.Dependency], autoxml.optional]
     t_PackageDependencies = [ [pisi.dependency.Dependency], autoxml.optional, "RuntimeDependencies/Dependency"]
     t_PackageAnyDependencies = [[AnyDependency], autoxml.optional, "RuntimeDependencies/AnyDependency"]
     t_ComponentDependencies = [ [autoxml.String], autoxml.optional, "RuntimeDependencies/Component"]
