@@ -116,7 +116,7 @@ def check_path_collision(package, pkgList):
     return collisions
 
 def exclude_special_files(filepath, fileinfo, ag):
-    keeplist = [] if not ag.has_key('KeepSpecial') else ag['KeepSpecial']
+    keeplist = ag.get("KeepSpecial", [])
     patterns = {"libtool": "libtool library file",
                 "python":  "python.*byte-compiled",
                 "perl":    "Perl POD document text"}
@@ -136,30 +136,32 @@ def exclude_special_files(filepath, fileinfo, ag):
             if new_ladata != ladata:
                 file(filepath, "w").write(new_ladata)
 
-    for pattern in patterns.keys():
-        if not pattern in keeplist and re.match(patterns[pattern], fileinfo):
-            ctx.ui.debug("Removing special %s file: %s" % (pattern, filepath))
+    for name, pattern in patterns.items():
+        if name in keeplist:
+            continue
+
+        if re.match(pattern, fileinfo):
+            ctx.ui.debug("Removing special %s file: %s" % (name, filepath))
             os.unlink(filepath)
             # Remove dir if it becomes empty (Bug #11588)
             util.rmdirs(os.path.dirname(filepath))
 
 def strip_debug_action(filepath, fileinfo, install_dir, ag):
-    excludelist = [] if not ag.has_key('NoStrip') else ag['NoStrip']
+    excludelist = tuple(ag.get("NoStrip", []))
+
+    # real path in .pisi package
+    path = '/' + util.removepathprefix(install_dir, filepath)
+
+    if path.startswith(excludelist):
+        return
+
     outputpath = util.join_path(os.path.dirname(install_dir),
                                 ctx.const.debug_dir_suffix,
                                 ctx.const.debug_files_suffix,
-                                util.remove_prefix(install_dir, filepath))
+                                path)
 
-    # real path in .pisi package
-    p = '/' + util.removepathprefix(install_dir, filepath)
-    strip = True
-    for exclude in excludelist:
-        if p.startswith(exclude):
-            strip = False
-
-    if strip:
-        if util.strip_file(filepath, fileinfo, outputpath):
-            ctx.ui.debug("%s [%s]" % (p, "stripped"))
+    if util.strip_file(filepath, fileinfo, outputpath):
+        ctx.ui.debug("%s [%s]" % (path, "stripped"))
 
 class Builder:
     """Provides the package build and creation routines"""
