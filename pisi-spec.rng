@@ -86,6 +86,9 @@
                 <ref name="Description"/>
             </zeroOrMore>
             <optional>
+                <ref name="BuildType"/>
+            </optional>
+            <optional>
                 <ref name="RuntimeDependencies"/>
             </optional>
             <optional>
@@ -1331,6 +1334,13 @@
                 <attribute name="target"/>
             </optional>
         </group>
+    </define>
+
+    <!-- BuildType -->
+    <define name="BuildType">
+        <element name="BuildType">
+            <text/>
+        </element>
     </define>
 
     <!-- BuildDependencies -->

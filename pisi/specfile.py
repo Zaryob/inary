@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005-2010, TUBITAK/UEKAE
+# Copyright (C) 2005-2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -232,6 +232,7 @@ class Package:
     t_PartOf = [autoxml.String, autoxml.optional]
     t_License = [ [autoxml.String], autoxml.optional]
     t_Icon = [ autoxml.String, autoxml.optional]
+    t_BuildType = [ autoxml.String, autoxml.optional ]
     t_PackageDependencies = [ [pisi.dependency.Dependency], autoxml.optional, "RuntimeDependencies/Dependency"]
     t_PackageAnyDependencies = [[AnyDependency], autoxml.optional, "RuntimeDependencies/AnyDependency"]
     t_ComponentDependencies = [ [autoxml.String], autoxml.optional, "RuntimeDependencies/Component"]

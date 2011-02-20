@@ -52,6 +52,8 @@
 <!ATTLIST Archive type CDATA #REQUIRED>
 <!ATTLIST Archive target CDATA #IMPLIED>
 
+<!ELEMENT BuildType (#PCDATA)>
+
 <!ELEMENT BuildDependencies (Dependency*)>
 
 <!ELEMENT Dependency (#PCDATA)>
@@ -82,6 +84,7 @@
 	PartOf |
 	Summary |
 	Description |
+	BuildType |
 	RuntimeDependencies |
 	Files |
 	Conflicts |
