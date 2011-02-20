@@ -224,7 +224,10 @@ class Builder:
 
         self.sourceArchives = pisi.sourcearchive.SourceArchives(self.spec)
 
-        self.set_environment_vars()
+        self.build_types = self.get_build_types()
+
+        # Use an empty string for the default build
+        self.set_build_type("")
 
         self.actionLocals = None
         self.actionGlobals = None
@@ -281,7 +284,8 @@ class Builder:
                               packageDir)
 
     def pkg_work_dir(self):
-        return self.pkg_dir() + ctx.const.work_dir_suffix
+        suffix = "-%s" % self.build_type if self.build_type else ""
+        return self.pkg_dir() + ctx.const.work_dir_suffix + suffix
 
     def pkg_debug_dir(self):
         return self.pkg_dir() + ctx.const.debug_dir_suffix
@@ -321,16 +325,34 @@ class Builder:
         self.check_build_dependencies()
         self.fetch_component()
         self.fetch_source_archives()
-        self.unpack_source_archives()
 
-        self.run_setup_action()
-        self.run_build_action()
-        if ctx.get_option('debug') and not ctx.get_option('ignore_check'):
-            self.run_check_action()
-        self.run_install_action()
+        for build_type in self.build_types:
+            self.set_build_type(build_type)
+            self.unpack_source_archives()
+
+            self.run_setup_action()
+            self.run_build_action()
+            if ctx.get_option('debug') and not ctx.get_option('ignore_check'):
+                self.run_check_action()
+            self.run_install_action()
 
         # after all, we are ready to build/prepare the packages
         self.build_packages()
+
+    def get_build_types(self):
+        build_types = [""]
+        for package in self.spec.packages:
+            if package.buildType and package.buildType not in build_types:
+                build_types.append(package.buildType)
+
+        return build_types
+
+    def set_build_type(self, build_type):
+        if build_type:
+            ctx.ui.action(_("Rebuilding for %s") % build_type)
+
+        self.build_type = build_type
+        self.set_environment_vars()
 
     def set_environment_vars(self):
         """Sets the environment variables for actions API to use"""
@@ -342,6 +364,7 @@ class Builder:
         env = {"PKG_DIR": self.pkg_dir(),
                "WORK_DIR": self.pkg_work_dir(),
                "INSTALL_DIR": self.pkg_install_dir(),
+               "PISI_BUILD_TYPE": self.build_type,
                "SRC_NAME": self.spec.source.name,
                "SRC_VERSION": self.spec.getSourceVersion(),
                "SRC_RELEASE": self.spec.getSourceRelease()}
@@ -494,8 +517,8 @@ class Builder:
     def run_install_action(self):
         ctx.ui.action(_("Installing..."))
 
-        # Before install make sure install_dir is clean
-        if os.path.exists(self.pkg_install_dir()):
+        # Before the default install make sure install_dir is clean
+        if not self.build_type and os.path.exists(self.pkg_install_dir()):
             util.clean_dir(self.pkg_install_dir())
 
         # install function is mandatory!
@@ -1175,10 +1198,15 @@ def __buildState_installaction(pb, last):
         __buildState_buildaction(pb, last)
     pb.run_install_action()
 
-def __buildState_buildpackages(pb, last):
+def __buildState_buildpackages(pb):
 
-    if order[last] < order["installaction"]:
-        __buildState_installaction(pb, last)
+    for build_type in pb.build_types:
+        pb.set_build_type(build_type)
+        last = pb.get_state() or "none"
+
+        if order[last] < order["installaction"]:
+            __buildState_installaction(pb, last)
+
     pb.build_packages()
 
 def build_until(pspec, state):
@@ -1190,17 +1218,26 @@ def build_until(pspec, state):
     pb.load_action_script()
     pb.compile_comar_script()
 
-    last = pb.get_state()
-    ctx.ui.info("Last state was %s"%last)
-
-    if not last: last = "none"
-
     if state == "fetch":
         __buildState_fetch(pb)
         return
 
     # from now on build dependencies are needed
     pb.check_build_dependencies()
+
+    if state == "package":
+        __buildState_buildpackages(pb)
+        return
+
+    for build_type in pb.build_types:
+        pb.set_build_type(build_type)
+        last = pb.get_state() or "none"
+
+        __build_until(pb, state, last)
+
+
+def __build_until(pb, state, last):
+    ctx.ui.info("Last state was %s" % last)
 
     if state == "unpack":
         __buildState_unpack(pb, last)
@@ -1220,6 +1257,3 @@ def build_until(pspec, state):
 
     if state == "install":
         __buildState_installaction(pb, last)
-        return
-
-    __buildState_buildpackages(pb, last)

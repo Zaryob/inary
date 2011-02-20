@@ -122,6 +122,10 @@ def LDFLAGS():
 def makeJOBS():
     return env.jobs
 
+def buildTYPE():
+    '''returns the current build type'''
+    return env.build_type
+
 # Directory Related Functions
 
 def docDIR():
