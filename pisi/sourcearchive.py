@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005-2010, TUBITAK/UEKAE
+# Copyright (C) 2005-2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -30,25 +30,24 @@ class Error(pisi.Error):
 
 class SourceArchives:
     """This is a wrapper for supporting multiple SourceArchive objects."""
-    def __init__(self, spec, pkg_work_dir):
-        self.sourceArchives = [SourceArchive(a, pkg_work_dir) for a in spec.source.archive]
+    def __init__(self, spec):
+        self.sourceArchives = [SourceArchive(a) for a in spec.source.archive]
 
     def fetch(self, interactive=True):
         for archive in self.sourceArchives:
             archive.fetch(interactive)
 
-    def unpack(self, clean_dir=True):
-        self.sourceArchives[0].unpack(clean_dir)
+    def unpack(self, target_dir, clean_dir=True):
+        self.sourceArchives[0].unpack(target_dir, clean_dir)
         for archive in self.sourceArchives[1:]:
-            archive.unpack(clean_dir=False)
+            archive.unpack(target_dir, clean_dir=False)
 
 
 class SourceArchive:
     """source archive. this is a class responsible for fetching
     and unpacking a source archive"""
-    def __init__(self, archive, pkg_work_dir):
+    def __init__(self, archive):
         self.url = pisi.uri.URI(archive.uri)
-        self.pkg_work_dir = pkg_work_dir
         self.archiveFile = os.path.join(ctx.config.archives_dir(), self.url.filename())
         self.archive = archive
 
@@ -113,7 +112,7 @@ class SourceArchive:
 
         return False
 
-    def unpack(self, clean_dir=True):
+    def unpack(self, target_dir, clean_dir=True):
 
         # check archive file's integrity
         if not util.check_file_hash(self.archiveFile, self.archive.sha1sum):
@@ -125,5 +124,5 @@ class SourceArchive:
             raise Error(_("Unknown archive type '%s' is given for '%s'.")
                         % (self.archive.type, self.url.filename()))
 
-        target_dir = os.path.join(self.pkg_work_dir, self.archive.target or "")
+        target_dir = os.path.join(target_dir, self.archive.target or "")
         archive.unpack(target_dir, clean_dir)

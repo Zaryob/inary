@@ -13,8 +13,8 @@ class ArchiveTestCase(unittest.TestCase):
     def testTarUnpack(self):
         spec = SpecFile('repos/pardus-2007/system/base/curl/pspec.xml')
         targetDir = '/tmp/tests'
-        archives = sourcearchive.SourceArchives(spec, targetDir)
-        archives.unpack()
+        archives = sourcearchive.SourceArchives(spec)
+        archives.unpack(targetDir)
         for archive in spec.source.archive:
             assert archive.type == 'targz'
 
@@ -22,7 +22,7 @@ class ArchiveTestCase(unittest.TestCase):
     def testUnpackTarCond(self):
         spec = SpecFile('repos/pardus-2007/system/base/curl/pspec.xml')
         targetDir = '/tmp'
-        archives = sourcearchive.SourceArchives(spec, targetDir)
+        archives = sourcearchive.SourceArchives(spec)
         for archive in spec.source.archive:
             url = uri.URI(archive.uri)
             filePath = join(pisi.context.config.archives_dir(), url.filename())
@@ -34,17 +34,17 @@ class ArchiveTestCase(unittest.TestCase):
     def testZipUnpack(self):
         spec = SpecFile('repos/pardus-2007/system/base/openssl/pspec.xml')
         targetDir = '/tmp/tests'
-        archives = sourcearchive.SourceArchives(spec, targetDir)
+        archives = sourcearchive.SourceArchives(spec)
         archives.fetch()
-        archives.unpack()
+        archives.unpack(targetDir)
         assert not exists(targetDir + '/openssl')
 
     def testMakeZip(self):
         spec = SpecFile('repos/pardus-2007/system/base/openssl/pspec.xml')
         targetDir = '/tmp/tests'
-        archives = sourcearchive.SourceArchives(spec, targetDir)
+        archives = sourcearchive.SourceArchives(spec)
         archives.fetch(interactive = False)
-        archives.unpack(clean_dir = True)
+        archives.unpack(targetDir, clean_dir=True)
         del archives
 
         newDir = targetDir + '/newZip'
