@@ -434,34 +434,36 @@ class Builder:
         pisi.file.File.download(uri, transferdir)
 
     def fetch_component(self):
-        if not self.spec.source.partOf:
-            ctx.ui.info(_('PartOf tag not defined, looking for component'))
-            diruri = util.parenturi(self.specuri.get_uri())
-            parentdir = util.parenturi(diruri)
-            url = util.join_path(parentdir, 'component.xml')
-            progress = ctx.ui.Progress
-            if pisi.uri.URI(url).is_remote_file():
-                try:
-                    pisi.fetcher.fetch_url(url, self.pkg_work_dir(), progress)
-                except pisi.fetcher.FetchError:
-                    ctx.ui.warning(_("Cannot find component.xml in remote "
-                                     "directory, Source is now part of "
-                                     "unknown component"))
-                    self.spec.source.partOf = 'unknown'
-                    return
-                path = util.join_path(self.pkg_work_dir(), 'component.xml')
-            else:
-                if not os.path.exists(url):
-                    ctx.ui.warning(_("Cannot find component.xml in upper "
-                                     "directory, Source is now part of "
-                                     "unknown component"))
-                    self.spec.source.partOf = 'unknown'
-                    return
-                path = url
-            comp = component.CompatComponent()
-            comp.read(path)
-            ctx.ui.info(_('Source is part of %s component') % comp.name)
-            self.spec.source.partOf = comp.name
+        if self.spec.source.partOf:
+            return
+
+        ctx.ui.info(_('PartOf tag not defined, looking for component'))
+        diruri = util.parenturi(self.specuri.get_uri())
+        parentdir = util.parenturi(diruri)
+        url = util.join_path(parentdir, 'component.xml')
+        progress = ctx.ui.Progress
+        if pisi.uri.URI(url).is_remote_file():
+            try:
+                pisi.fetcher.fetch_url(url, self.pkg_work_dir(), progress)
+            except pisi.fetcher.FetchError:
+                ctx.ui.warning(_("Cannot find component.xml in remote "
+                                 "directory, Source is now part of "
+                                 "unknown component"))
+                self.spec.source.partOf = 'unknown'
+                return
+            path = util.join_path(self.pkg_work_dir(), 'component.xml')
+        else:
+            if not os.path.exists(url):
+                ctx.ui.warning(_("Cannot find component.xml in upper "
+                                 "directory, Source is now part of "
+                                 "unknown component"))
+                self.spec.source.partOf = 'unknown'
+                return
+            path = url
+        comp = component.CompatComponent()
+        comp.read(path)
+        ctx.ui.info(_('Source is part of %s component') % comp.name)
+        self.spec.source.partOf = comp.name
 
     def fetch_source_archives(self):
         self.sourceArchives.fetch()
