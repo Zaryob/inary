@@ -1,3 +1,77 @@
+2011-02-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build,config: Add a new config option to ignore build types
+
+	Contains a comma-separated list of build type strings. Example:
+
+	  ignored_build_types = 32bit,pae
+
+2011-02-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Remove redundant check in previous commit
+
+2011-02-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Iterate over Package tags to gather all build deps
+
+2011-02-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* specfile: Accept BuildDependencies inside Package tags
+
+	It will be used for build dependencies specific to a build type.
+
+2011-02-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Colorize unpack message
+
+2011-02-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Add support for build types
+
+	With build types, it is possible to use the same actions.py
+	for re-building the package with different options. In actions.py
+	scripts, get.buildTYPE() function can be used to get the current
+	build type.
+
+	A BuildType tag must be specified inside the Package tag of the related
+	binary package.
+
+2011-02-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* specfile: Accept BuildType tag inside Package tags
+
+	It is not functional at this time.
+
+2011-02-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* sourcearchive: Pass target dirs to unpack methods
+
+	This changes the internal API to make working with
+	multiple work dirs possible.
+
+2011-02-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Check build dependencies for unpack too
+
+	"patch" utility is needed to unpack since we apply patches
+	here.
+
+2011-02-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Cosmetic change
+
+	Yes, I don't like big "if" blocks.
+
+2011-02-20 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: More simplifications
+
+2011-02-19 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Minor simplifications
+
+2011-02-07 Ozan Çağlayan <ozan@pardus.org.tr>
+	* actionsapi/kerneltools: Don't fail if listnewconfig is not available
+
+	listnewconfig is not available on 2.6.35. Call it in a try/except
+	to avoid failing.
+
+2011-01-31 Fatih Aşıcı <fatih@pardus.org.tr>
+	* pisi 2.4_alpha2
+
+	This is the second alpha for the upcoming 2.4.x releases. This
+	release contains various fixes, actionsapi improvements, translation
+	updates, and a new feature to generate reverse dependency graph with
+	graph command.
+
 2011-01-31 Fatih Aşıcı <fatih@pardus.org.tr>
 	* fetcher: Add a timeout parameter to Fetcher.test()
 
