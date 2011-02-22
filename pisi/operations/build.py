@@ -315,7 +315,6 @@ class Builder:
         ctx.ui.status(_("Building source package: %s")
                       % self.spec.source.name)
 
-        self.load_action_script()
         self.compile_comar_script()
 
         # check if all patch files exists, if there are missing no need
@@ -365,6 +364,7 @@ class Builder:
 
         self.build_type = build_type
         self.set_environment_vars()
+        self.load_action_script()
 
     def set_environment_vars(self):
         """Sets the environment variables for actions API to use"""
@@ -1230,7 +1230,6 @@ def build_until(pspec, state):
     else:
         pb = Builder.from_name(pspec)
 
-    pb.load_action_script()
     pb.compile_comar_script()
 
     if state == "fetch":
