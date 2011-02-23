@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2007-2010, TUBITAK/UEKAE
+# Copyright (C) 2007-2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -36,7 +36,7 @@ class Singleton(object):
 
 class LazyDB(Singleton):
 
-    cache_version = "2.3"
+    cache_version = "2.4"
 
     def __init__(self, cacheable=False, cachedir=None):
         if not self.__dict__.has_key("initialized"):

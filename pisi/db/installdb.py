@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005-2010, TUBITAK/UEKAE
+# Copyright (C) 2005-2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -69,7 +69,11 @@ class InstallDB(lazydb.LazyDB):
         self.rev_deps_db = self.__generate_revdeps()
 
     def __generate_installed_pkgs(self):
-        return dict(map(lambda x:pisi.util.parse_package_name(x), os.listdir(ctx.config.packages_dir())))
+        def split_name(dirname):
+            name, version, release = dirname.rsplit("-", 2)
+            return name, version + "-" + release
+
+        return dict(map(split_name, os.listdir(ctx.config.packages_dir())))
 
     def __get_marked_packages(self, _type):
         info_path = os.path.join(ctx.config.info_dir(), _type)
