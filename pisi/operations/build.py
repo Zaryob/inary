@@ -735,9 +735,15 @@ class Builder:
         for package in self.spec.packages:
             for path_info in package.files:
                 path = os.path.normpath(path_info.path)
+
+                if not path.startswith("/"):
+                    raise Error(_("Path must start with a slash: "
+                                  "%s") % path_info.path)
+
                 if path in paths:
                     raise Error(_("Multiple 'Path' tags specified "
                                   "for this path: %s") % path_info.path)
+
                 paths.append(path)
 
     def check_versioning(self, version, release):
