@@ -229,6 +229,8 @@ class Builder:
         # Use an empty string for the default build
         self.set_build_type("")
 
+        self.check_paths()
+
         self.actionLocals = None
         self.actionGlobals = None
 
@@ -726,6 +728,17 @@ class Builder:
 
         os.chdir(curDir)
         return True
+
+    def check_paths(self):
+        paths = []
+
+        for package in self.spec.packages:
+            for path_info in package.files:
+                path = os.path.normpath(path_info.path)
+                if path in paths:
+                    raise Error(_("Multiple 'Path' tags specified "
+                                  "for this path: %s") % path_info.path)
+                paths.append(path)
 
     def check_versioning(self, version, release):
         try:
