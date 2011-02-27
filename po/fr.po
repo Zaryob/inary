@@ -1,6 +1,6 @@
 # translation of fr.po to French
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Amine Chadly <amine.chadly@gmail.com>, 2007, 2008.
 # Philippe Svetoslavsky <philsvet@gmail.com>, 2009, 2010.
 msgid ""
@@ -10,10 +10,10 @@ msgstr ""
 "PO-Revision-Date: 2010-01-01 22:22+0100\n"
 "Last-Translator: Philippe Svetoslavsky <philsvet@gmail.com>\n"
 "Language-Team: French <pardus-translators@pardus.org.tr>\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 0.3\n"
@@ -1270,9 +1270,8 @@ msgid "Do not show installed packages"
 msgstr "Ne pas montrer les paquets installés"
 
 #: pisi/cli/graph.py:56
-#, fuzzy
 msgid "Draw reverse dependency graph"
-msgstr "Dépendances inverses : "
+msgstr "Dessiner le graphe des dépendances inverses"
 
 #: pisi/cli/graph.py:59
 msgid "Dot output file"
@@ -1745,13 +1744,13 @@ msgstr ""
 "\n"
 "Lists currently tracked repositories.\n"
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr "actif"
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
 msgstr "inactif"
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
+msgstr "actif"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
@@ -2281,16 +2280,15 @@ msgstr "Le serveur ne permet pas d'effectuer des téléchargements partiels. Tou
 
 #: pisi/file.py:35
 msgid "URL %s already downloaded as %s"
-msgstr ""
+msgstr "URL %s déjà téléchargée en tant que %s"
 
 #: pisi/file.py:42
-#, fuzzy
 msgid "No signature found for %s"
-msgstr "Pas trouvé de fichier configure pour cmake."
+msgstr "Pas de signature pour %s"
 
 #: pisi/file.py:50
 msgid " invalid for %s"
-msgstr ""
+msgstr "invalide pour %s"
 
 #: pisi/file.py:72
 msgid "uri must have type either URI or string"
@@ -2358,7 +2356,7 @@ msgstr "%s est rétrogradé de %s à %s."
 
 #: pisi/history.py:104 pisi/history.py:126
 msgid "Unknown package operation"
-msgstr ""
+msgstr "Opération de paquet inconnue"
 
 #: pisi/index.py:115
 msgid "Adding %s to package index"
@@ -2409,9 +2407,8 @@ msgid "Building source package: %s"
 msgstr "Construction du paquet source PiSi : %s"
 
 #: pisi/operations/build.py:363
-#, fuzzy
 msgid "Rebuilding for %s"
-msgstr "Construction du fichier 'format' %s"
+msgstr "Reconstruction pour %s"
 
 #: pisi/operations/build.py:391
 msgid "IceCream detected. Make sure your daemon is up and running..."
@@ -2542,9 +2539,8 @@ msgid "Patch file is missing: %s\n"
 msgstr "Le fichier de patch %s est manquant\n"
 
 #: pisi/operations/build.py:800
-#, fuzzy
 msgid "Patch file is empty: %s"
-msgstr "Le fichier de patch %s est manquant\n"
+msgstr "Fichier de patch vide : %s"
 
 #: pisi/operations/build.py:816
 msgid "* Applying patch: %s"
