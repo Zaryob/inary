@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"T-Creation-Date: 2010-10-13 11:31+EEST\n"
+"POT-Creation-Date: 2011-02-27 18:39+EET\n"
 "PO-Revision-Date: 2011-02-04 12:21+0300\n"
 "Last-Translator: Korostil Daniel <ted.korostiled@gmail.com>\n"
 "Language-Team: translation@linux.org.ua\n"
@@ -12,8 +12,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"T-Creation-Date: 2010-10-13 11:31+EEST\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Virtaal 0.6.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
@@ -26,8 +26,7 @@ msgid "ambiguous option: %s (%s?)"
 msgstr "неоднозначний параметр: %s (%s?)"
 
 #: /usr/lib/python2.7/optparse.py:374
-msgid ""
-"Usage: %s\n"
+msgid "Usage: %s\n"
 msgstr "Використання: %s\n"
 
 #: /usr/lib/python2.7/optparse.py:393
@@ -86,15 +85,15 @@ msgstr "параметр %s не має значення"
 msgid "Options"
 msgstr "Параметри"
 
-#: pisi-cli:43
+#: pisi-cli:42
 msgid "Keyboard Interrupt: Exiting..."
 msgstr "Перереривання клавіатури: вихід…"
 
-#: pisi-cli:46
+#: pisi-cli:45
 msgid "Program terminated."
 msgstr "Програму перервано."
 
-#: pisi-cli:49
+#: pisi-cli:48
 msgid ""
 "Unhandled internal exception.\n"
 "Please file a bug report to <http://bugs.pardus.org.tr>."
@@ -102,15 +101,15 @@ msgstr ""
 "Ноброблено внутрішні винятки.\n"
 "Будь ласка, повідомте про ваду в <http://bugs.pardus.org.tr>."
 
-#: pisi-cli:58
+#: pisi-cli:57
 msgid "System error. Program terminated."
 msgstr "Системна помилка. Програму перервано."
 
-#: pisi-cli:67
+#: pisi-cli:66
 msgid "Please use 'pisi help' for general help."
 msgstr "Будь ласка, введіть «pisi help» для загальної довідки."
 
-#: pisi-cli:70
+#: pisi-cli:69
 msgid ""
 "\n"
 "Traceback:"
@@ -118,7 +117,7 @@ msgstr ""
 "\n"
 "Зворотне трасування:"
 
-#: pisi-cli:73
+#: pisi-cli:72
 msgid "Use --debug to see a traceback."
 msgstr "Ввдіть «--debug», щоб побачити зворотне трасування."
 
@@ -184,11 +183,11 @@ msgstr "Не знайдено скрипта налаштування для cma
 msgid "No Makefile found."
 msgstr "Не знайдено Makefile."
 
-#: pisi/actionsapi/get.py:174
+#: pisi/actionsapi/get.py:178
 msgid "Util %s cannot be found"
 msgstr "%s не знайдено."
 
-#: pisi/actionsapi/get.py:176
+#: pisi/actionsapi/get.py:180
 msgid "Warning: %s does not exist, using plain name %s"
 msgstr "Попередження: %s не існує, використовуйте просту назву %s"
 
@@ -202,7 +201,7 @@ msgstr ""
 "!!! Будь ласка, долчіть config.log до звіту про ваду:\n"
 "%s/config.log"
 
-#: pisi/actionsapi/kerneltools.py:120
+#: pisi/actionsapi/kerneltools.py:117
 msgid "Can't find kernel version information file %s."
 msgstr "Неможливо знайти файл про інформацію версії ядра %s."
 
@@ -500,71 +499,71 @@ msgstr ""
 msgid "Taking snapshot of the system"
 msgstr ""
 
-#: pisi/api.py:718
+#: pisi/api.py:727
 msgid "comar package is not fully installed"
 msgstr ""
 
-#: pisi/api.py:730
+#: pisi/api.py:739
 msgid "File %s not found"
 msgstr ""
 
-#: pisi/api.py:772
+#: pisi/api.py:781
 msgid "* Building index of PiSi files under %s"
 msgstr ""
 
-#: pisi/api.py:777
+#: pisi/api.py:786
 msgid "* Index file written"
 msgstr ""
 
-#: pisi/api.py:782
+#: pisi/api.py:791
 msgid "Not a valid repo name."
 msgstr ""
 
-#: pisi/api.py:785
+#: pisi/api.py:794
 msgid "Repo %s already present."
 msgstr ""
 
-#: pisi/api.py:788
+#: pisi/api.py:797
 msgid "Repo already present with name %s."
 msgstr ""
 
-#: pisi/api.py:793
+#: pisi/api.py:802
 msgid "Repo %s added to system."
 msgstr ""
 
-#: pisi/api.py:801
+#: pisi/api.py:810
 msgid "Repo %s removed from system."
 msgstr ""
 
-#: pisi/api.py:803
+#: pisi/api.py:812
 msgid "Repository %s does not exist. Cannot remove."
 msgstr ""
 
-#: pisi/api.py:823
+#: pisi/api.py:834
 msgid "Updating repository: %s"
 msgstr ""
 
-#: pisi/api.py:832
+#: pisi/api.py:843
 msgid "%s repository information is up-to-date."
 msgstr ""
 
-#: pisi/api.py:834
+#: pisi/api.py:845
 msgid "Updating database at any rate as requested"
 msgstr ""
 
-#: pisi/api.py:847
+#: pisi/api.py:858
 msgid "* Package database updated."
 msgstr ""
 
-#: pisi/api.py:849
+#: pisi/api.py:860
 msgid "No repository named %s found."
 msgstr ""
 
-#: pisi/api.py:862
+#: pisi/api.py:873
 msgid "* Adding '%s' to db... "
 msgstr ""
 
-#: pisi/api.py:865
+#: pisi/api.py:876
 msgid "OK."
 msgstr ""
 
@@ -592,7 +591,7 @@ msgstr ""
 msgid "Installing %s, version %s, release %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:192 pisi/operations/build.py:701
+#: pisi/atomicoperations.py:192 pisi/operations/build.py:735
 msgid "%s-%s is not a valid PiSi version format"
 msgstr ""
 
@@ -601,8 +600,7 @@ msgid "%s package cannot be installed unless the dependencies are satisfied"
 msgstr ""
 
 #: pisi/atomicoperations.py:222
-msgid ""
-"/%s from %s package\n"
+msgid "/%s from %s package\n"
 msgstr ""
 
 #: pisi/atomicoperations.py:223
@@ -676,32 +674,31 @@ msgstr ""
 msgid "Error: "
 msgstr ""
 
-#: pisi/cli/__init__.py:157
+#: pisi/cli/__init__.py:161
 msgid " (yes/no)"
 msgstr ""
 
-#: pisi/cli/__init__.py:178
-msgid ""
-" [complete]\n"
+#: pisi/cli/__init__.py:185
+msgid " [complete]\n"
 msgstr ""
 
-#: pisi/cli/__init__.py:188
+#: pisi/cli/__init__.py:195
 msgid "Installed %s"
 msgstr ""
 
-#: pisi/cli/__init__.py:190
+#: pisi/cli/__init__.py:197
 msgid "Removed %s"
 msgstr ""
 
-#: pisi/cli/__init__.py:192
+#: pisi/cli/__init__.py:199
 msgid "Upgraded %s"
 msgstr ""
 
-#: pisi/cli/__init__.py:194
+#: pisi/cli/__init__.py:201
 msgid "Configured %s"
 msgstr ""
 
-#: pisi/cli/__init__.py:196
+#: pisi/cli/__init__.py:203
 msgid "Extracting the files of %s"
 msgstr ""
 
@@ -766,24 +763,20 @@ msgstr ""
 msgid "Blame for all of the releases"
 msgstr ""
 
-#: pisi/cli/blame.py:68 pisi/specfile.py:361 pisi/specfile.py:444
-msgid ""
-"Name: %s, version: %s, release: %s\n"
+#: pisi/cli/blame.py:68 pisi/specfile.py:369 pisi/specfile.py:454
+msgid "Name: %s, version: %s, release: %s\n"
 msgstr ""
 
 #: pisi/cli/blame.py:70
-msgid ""
-"Package Maintainer: %s <%s>\n"
+msgid "Package Maintainer: %s <%s>\n"
 msgstr ""
 
 #: pisi/cli/blame.py:71
-msgid ""
-"Release Updater: %s <%s>\n"
+msgid "Release Updater: %s <%s>\n"
 msgstr ""
 
 #: pisi/cli/blame.py:72
-msgid ""
-"Update Date: %s\n"
+msgid "Update Date: %s\n"
 msgstr ""
 
 #: pisi/cli/build.py:25
@@ -997,8 +990,7 @@ msgid "Suppresses all coloring of PiSi's output"
 msgstr ""
 
 #: pisi/cli/command.py:130
-msgid ""
-"Destination directory %s does not exist. Creating directory.\n"
+msgid "Destination directory %s does not exist. Creating directory.\n"
 msgstr ""
 
 #: pisi/cli/command.py:152
@@ -1018,8 +1010,7 @@ msgid "Do not perform any action, just show what would be done"
 msgstr ""
 
 #: pisi/cli/command.py:228
-msgid ""
-"usage: %s\n"
+msgid "usage: %s\n"
 msgstr ""
 
 #: pisi/cli/configurepending.py:23
@@ -1173,18 +1164,22 @@ msgid "Do not show installed packages"
 msgstr ""
 
 #: pisi/cli/graph.py:56
+msgid "Draw reverse dependency graph"
+msgstr ""
+
+#: pisi/cli/graph.py:59
 msgid "Dot output file"
 msgstr ""
 
-#: pisi/cli/graph.py:70
+#: pisi/cli/graph.py:73
 msgid "Plotting packages in repository %s"
 msgstr ""
 
-#: pisi/cli/graph.py:73
+#: pisi/cli/graph.py:76
 msgid "Plotting a graph of relations among all repository packages"
 msgstr ""
 
-#: pisi/cli/graph.py:87
+#: pisi/cli/graph.py:90
 msgid "Plotting a graph of relations among all installed packages"
 msgstr ""
 
@@ -1475,8 +1470,7 @@ msgid "Installed packages are shown in this color"
 msgstr ""
 
 #: pisi/cli/listavailable.py:67
-msgid ""
-"Repository : %s\n"
+msgid "Repository : %s\n"
 msgstr ""
 
 #: pisi/cli/listcomponents.py:24
@@ -1548,8 +1542,7 @@ msgid "List new packages added to repository after last nth previous repository 
 msgstr ""
 
 #: pisi/cli/listnewest.py:76
-msgid ""
-"Packages added to %s since %s:\n"
+msgid "Packages added to %s since %s:\n"
 msgstr ""
 
 #: pisi/cli/listnewest.py:78
@@ -1576,12 +1569,12 @@ msgid ""
 "Lists currently tracked repositories.\n"
 msgstr ""
 
-#: pisi/cli/listrepo.py:41
-msgid "inactive"
-msgstr ""
-
 #: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
 msgid "active"
+msgstr ""
+
+#: pisi/cli/listrepo.py:41
+msgid "inactive"
 msgstr ""
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
@@ -1841,63 +1834,63 @@ msgstr ""
 msgid "comar-api package is not fully installed"
 msgstr ""
 
-#: pisi/comariface.py:87
+#: pisi/comariface.py:88
 msgid ""
 "Cannot connect to COMAR: \n"
 "  %s\n"
 msgstr ""
 
-#: pisi/comariface.py:92
+#: pisi/comariface.py:97
 msgid "Configuring %s package"
 msgstr ""
 
-#: pisi/comariface.py:98
+#: pisi/comariface.py:103
 msgid "COMAR package updated. From now on, using new COMAR daemon."
 msgstr ""
 
-#: pisi/comariface.py:104
+#: pisi/comariface.py:110
 msgid "Registering %s comar script"
 msgstr ""
 
-#: pisi/comariface.py:111 pisi/comariface.py:116 pisi/comariface.py:125
-#: pisi/comariface.py:139 pisi/comariface.py:156 pisi/comariface.py:165
-#: pisi/comariface.py:184 pisi/comariface.py:193 pisi/comariface.py:200
+#: pisi/comariface.py:119 pisi/comariface.py:124 pisi/comariface.py:137
+#: pisi/comariface.py:153 pisi/comariface.py:172 pisi/comariface.py:183
+#: pisi/comariface.py:205 pisi/comariface.py:216 pisi/comariface.py:223
 msgid "Script error: %s"
 msgstr ""
 
-#: pisi/comariface.py:118
+#: pisi/comariface.py:126
 msgid "Calling post install handlers"
 msgstr ""
 
-#: pisi/comariface.py:133
+#: pisi/comariface.py:145
 msgid "Running package's post install script"
 msgstr ""
 
-#: pisi/comariface.py:144
+#: pisi/comariface.py:159
 msgid "Running pre removal operations for %s"
 msgstr ""
 
-#: pisi/comariface.py:150
+#: pisi/comariface.py:165
 msgid "Running package's pre remove script"
 msgstr ""
 
-#: pisi/comariface.py:158
+#: pisi/comariface.py:174
 msgid "Calling pre remove handlers"
 msgstr ""
 
-#: pisi/comariface.py:170
+#: pisi/comariface.py:189
 msgid "Running post removal operations for %s"
 msgstr ""
 
-#: pisi/comariface.py:178
+#: pisi/comariface.py:198
 msgid "Running package's postremove script"
 msgstr ""
 
-#: pisi/comariface.py:186
+#: pisi/comariface.py:207
 msgid "Calling post remove handlers"
 msgstr ""
 
-#: pisi/comariface.py:195
+#: pisi/comariface.py:218
 msgid "Unregistering comar scripts"
 msgstr ""
 
@@ -1905,7 +1898,7 @@ msgstr ""
 msgid "Destination directory %s does not exist. Creating it."
 msgstr ""
 
-#: pisi/configfile.py:127
+#: pisi/configfile.py:128
 msgid "No section by name '%s'"
 msgstr ""
 
@@ -1964,15 +1957,14 @@ msgid ""
 msgstr ""
 
 #: pisi/db/installdb.py:58
-msgid ""
-"Distribution: %s, Install Time: %s\n"
+msgid "Distribution: %s, Install Time: %s\n"
 msgstr ""
 
-#: pisi/db/installdb.py:90
+#: pisi/db/installdb.py:94
 msgid "Installation info for package '%s' is broken. Reinstall it to fix this problem."
 msgstr ""
 
-#: pisi/db/installdb.py:331
+#: pisi/db/installdb.py:335
 msgid "Package %s is not installed"
 msgstr ""
 
@@ -2004,75 +1996,88 @@ msgstr ""
 msgid "Repository '%s' is not compatible with your distribution. Repository is disabled."
 msgstr ""
 
-#: pisi/fetcher.py:130
+#: pisi/fetcher.py:147
 msgid "Urlgrabber needs to be installed to run this command"
 msgstr ""
 
-#: pisi/fetcher.py:133
+#: pisi/fetcher.py:150
 msgid "Filename error"
 msgstr ""
 
-#: pisi/fetcher.py:136
+#: pisi/fetcher.py:153
 msgid "Access denied to write to destination directory: \"%s\""
 msgstr ""
 
-#: pisi/fetcher.py:139
+#: pisi/fetcher.py:156
 msgid "Access denied to destination file: \"%s\""
 msgstr ""
 
-#: pisi/fetcher.py:153
+#: pisi/fetcher.py:170
 msgid "Could not fetch destination file \"%s\": %s"
 msgstr ""
 
-#: pisi/fetcher.py:157
+#: pisi/fetcher.py:174
 msgid "A problem occurred. Please check the archive address and/or permissions again."
 msgstr ""
 
-#: pisi/fetcher.py:190
+#: pisi/fetcher.py:207
 msgid "Proxy configuration has been found for '%s' protocol"
 msgstr ""
 
-#: pisi/fetcher.py:197
+#: pisi/fetcher.py:214
 msgid "Bandwidth usage is limited to %s KB/s"
 msgstr ""
 
-#: pisi/fetcher.py:210
+#: pisi/fetcher.py:227
 msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
 msgstr ""
 
-#: pisi/fetcher.py:219
+#: pisi/fetcher.py:236
 msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
 msgstr ""
 
-#: pisi/file.py:71
+#: pisi/file.py:35
+msgid "URL %s already downloaded as %s"
+msgstr ""
+
+#: pisi/file.py:42
+#, fuzzy
+msgid "No signature found for %s"
+msgstr "Не знайдено скрипта налаштування для cmake."
+
+#: pisi/file.py:50
+msgid " invalid for %s"
+msgstr ""
+
+#: pisi/file.py:72
 msgid "uri must have type either URI or string"
 msgstr ""
 
-#: pisi/file.py:129
+#: pisi/file.py:136
 msgid "Fetching %s"
 msgstr ""
 
-#: pisi/file.py:134
+#: pisi/file.py:140
 msgid "Copying %s to transfer dir"
 msgstr ""
 
-#: pisi/file.py:139
+#: pisi/file.py:145
 msgid "File '%s' not found."
 msgstr ""
 
-#: pisi/file.py:147
+#: pisi/file.py:166
 msgid "File integrity of %s compromised."
 msgstr ""
 
-#: pisi/file.py:167
+#: pisi/file.py:190
 msgid "File mode must be either File.read or File.write"
 msgstr ""
 
-#: pisi/file.py:172
+#: pisi/file.py:195
 msgid "Remote write not implemented"
 msgstr ""
 
-#: pisi/file.py:224 pisi/file.py:227
+#: pisi/file.py:247 pisi/file.py:250
 msgid "ERROR: gpg --detach-sig %s failed"
 msgstr ""
 
@@ -2080,49 +2085,52 @@ msgstr ""
 msgid "Encountered cycle %s"
 msgstr ""
 
-#: pisi/history.py:43
+#: pisi/history.py:47
 msgid "%s repository is updated."
 msgstr ""
 
-#: pisi/history.py:63
+#: pisi/history.py:67
 msgid "%s is upgraded from %s to %s with delta."
 msgstr ""
 
-#: pisi/history.py:65
+#: pisi/history.py:69
 msgid "%s is upgraded from %s to %s."
 msgstr ""
 
-#: pisi/history.py:67
+#: pisi/history.py:71
 msgid "%s %s is removed."
 msgstr ""
 
-#: pisi/history.py:69
+#: pisi/history.py:73
 msgid "%s %s is installed."
 msgstr ""
 
-#: pisi/history.py:71
+#: pisi/history.py:75
 msgid "%s %s is reinstalled."
 msgstr ""
 
-#: pisi/history.py:73
+#: pisi/history.py:77
 msgid "%s is downgraded from %s to %s."
 msgstr ""
 
-#: pisi/index.py:118
+#: pisi/history.py:104 pisi/history.py:126
+msgid "Unknown package operation"
+msgstr ""
+
+#: pisi/index.py:115
 msgid "Adding %s to package index"
 msgstr ""
 
-#: pisi/index.py:135
+#: pisi/index.py:132
 msgid "Package %s: metadata corrupt, skipping..."
 msgstr ""
 
-#: pisi/index.py:195
+#: pisi/index.py:192
 msgid "Adding %s to source index"
 msgstr ""
 
 #: pisi/metadata.py:78
-msgid ""
-"Distribution: %s, Dist. Release: %s\n"
+msgid "Distribution: %s, Dist. Release: %s\n"
 msgstr ""
 
 #: pisi/metadata.py:80
@@ -2137,198 +2145,204 @@ msgstr ""
 msgid "Mirrors file %s does not exist. Could not resolve mirrors://"
 msgstr ""
 
-#: pisi/operations/build.py:115
+#: pisi/operations/build.py:114
 msgid "Path %s belongs in multiple packages"
 msgstr ""
 
-#: pisi/operations/build.py:189
+#: pisi/operations/build.py:190
 msgid "Source URI: %s"
 msgstr ""
 
-#: pisi/operations/build.py:193
+#: pisi/operations/build.py:194
 msgid "Source %s not found in any active repository."
 msgstr ""
 
-#: pisi/operations/build.py:309
+#: pisi/operations/build.py:312
 msgid "pspec.xml avoids this package from building for '%s'"
 msgstr ""
 
-#: pisi/operations/build.py:312
+#: pisi/operations/build.py:315
 msgid "Building source package: %s"
 msgstr ""
 
-#: pisi/operations/build.py:357
+#: pisi/operations/build.py:363
+msgid "Rebuilding for %s"
+msgstr ""
+
+#: pisi/operations/build.py:391
 msgid "IceCream detected. Make sure your daemon is up and running..."
 msgstr ""
 
-#: pisi/operations/build.py:367
+#: pisi/operations/build.py:401
 msgid "CCache detected..."
 msgstr ""
 
-#: pisi/operations/build.py:439
+#: pisi/operations/build.py:473
 msgid "PartOf tag not defined, looking for component"
 msgstr ""
 
-#: pisi/operations/build.py:448
+#: pisi/operations/build.py:482
 msgid "Cannot find component.xml in remote directory, Source is now part of unknown component"
 msgstr ""
 
-#: pisi/operations/build.py:456
+#: pisi/operations/build.py:490
 msgid "Cannot find component.xml in upper directory, Source is now part of unknown component"
 msgstr ""
 
-#: pisi/operations/build.py:464
+#: pisi/operations/build.py:498
 msgid "Source is part of %s component"
 msgstr ""
 
-#: pisi/operations/build.py:471
+#: pisi/operations/build.py:505
 msgid "Unpacking archive(s)..."
 msgstr ""
 
-#: pisi/operations/build.py:477
+#: pisi/operations/build.py:511
 msgid " unpacked (%s)"
 msgstr ""
 
-#: pisi/operations/build.py:482
+#: pisi/operations/build.py:516
 msgid "Setting up source..."
 msgstr ""
 
-#: pisi/operations/build.py:487
+#: pisi/operations/build.py:521
 msgid "Building source..."
 msgstr ""
 
-#: pisi/operations/build.py:492
+#: pisi/operations/build.py:526
 msgid "Testing package..."
 msgstr ""
 
-#: pisi/operations/build.py:496
+#: pisi/operations/build.py:530
 msgid "Installing..."
 msgstr ""
 
-#: pisi/operations/build.py:562
+#: pisi/operations/build.py:596
 msgid "Unable to read Actions Script (%s): %s"
 msgstr ""
 
-#: pisi/operations/build.py:565
+#: pisi/operations/build.py:599
 msgid "SyntaxError in Actions Script (%s): %s"
 msgstr ""
 
-#: pisi/operations/build.py:595
+#: pisi/operations/build.py:629
 msgid "Unable to read COMAR script (%s): %s"
 msgstr ""
 
-#: pisi/operations/build.py:598
+#: pisi/operations/build.py:632
 msgid "SyntaxError in COMAR file (%s): %s"
 msgstr ""
 
-#: pisi/operations/build.py:630
+#: pisi/operations/build.py:664
 msgid "Sandbox violation: %s (%s -> %s)"
 msgstr ""
 
-#: pisi/operations/build.py:646 pisi/util.py:549
-msgid ""
-"ERROR: WorkDir (%s) does not exist\n"
+#: pisi/operations/build.py:680 pisi/util.py:549
+msgid "ERROR: WorkDir (%s) does not exist\n"
 msgstr ""
 
-#: pisi/operations/build.py:655
+#: pisi/operations/build.py:689
 msgid "Sandbox enabled build..."
 msgstr ""
 
-#: pisi/operations/build.py:679
+#: pisi/operations/build.py:713
 msgid "Sandbox violation result:"
 msgstr ""
 
-#: pisi/operations/build.py:684
+#: pisi/operations/build.py:718
 msgid "Sandbox violations!"
 msgstr ""
 
-#: pisi/operations/build.py:690
+#: pisi/operations/build.py:724
 msgid "unable to call function from actions: %s"
 msgstr ""
 
-#: pisi/operations/build.py:717
+#: pisi/operations/build.py:754
 msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 
-#: pisi/operations/build.py:722
+#: pisi/operations/build.py:759
 msgid "Safety switch: system.devel is already installed"
 msgstr ""
 
-#: pisi/operations/build.py:724
+#: pisi/operations/build.py:761
 msgid "Safety switch: the component system.devel cannot be found"
 msgstr ""
 
-#: pisi/operations/build.py:733
+#: pisi/operations/build.py:770
 msgid "Unsatisfied Build Dependencies:"
 msgstr ""
 
-#: pisi/operations/build.py:737
+#: pisi/operations/build.py:774
 msgid "Cannot build package due to unsatisfied build dependencies"
 msgstr ""
 
-#: pisi/operations/build.py:742
+#: pisi/operations/build.py:779
 msgid "Build dependency %s cannot be satisfied"
 msgstr ""
 
-#: pisi/operations/build.py:744
+#: pisi/operations/build.py:781
 msgid "Do you want to install the unsatisfied build dependencies"
 msgstr ""
 
-#: pisi/operations/build.py:745
+#: pisi/operations/build.py:782
 msgid "Installing build dependencies."
 msgstr ""
 
-#: pisi/operations/build.py:751
+#: pisi/operations/build.py:788
 msgid "Ignoring build dependencies."
 msgstr ""
 
-#: pisi/operations/build.py:761
-msgid ""
-"Patch file is missing: %s\n"
+#: pisi/operations/build.py:798
+msgid "Patch file is missing: %s\n"
 msgstr ""
 
-#: pisi/operations/build.py:777
+#: pisi/operations/build.py:800
+msgid "Patch file is empty: %s"
+msgstr ""
+
+#: pisi/operations/build.py:816
 msgid "* Applying patch: %s"
 msgstr ""
 
-#: pisi/operations/build.py:896
+#: pisi/operations/build.py:935
 msgid "/%s has suid bit set"
 msgstr ""
 
-#: pisi/operations/build.py:971
+#: pisi/operations/build.py:1008
 msgid "No user named '%s' found on the system"
 msgstr ""
 
-#: pisi/operations/build.py:977
+#: pisi/operations/build.py:1014
 msgid "No group named '%s' found on the system"
 msgstr ""
 
-#: pisi/operations/build.py:984
+#: pisi/operations/build.py:1021
 msgid "There are abandoned files under the install dir (%s):"
 msgstr ""
 
-#: pisi/operations/build.py:1012
+#: pisi/operations/build.py:1049
 msgid "Ignoring empty package %s"
 msgstr ""
 
-#: pisi/operations/build.py:1016
+#: pisi/operations/build.py:1053
 msgid "Building package: %s"
 msgstr ""
 
-#: pisi/operations/build.py:1035 pisi/operations/delta.py:50
+#: pisi/operations/build.py:1072 pisi/operations/delta.py:50
 #: pisi/operations/delta.py:148
 msgid "Creating %s..."
 msgstr ""
 
-#: pisi/operations/build.py:1078
+#: pisi/operations/build.py:1115
 msgid "Cleaning build directory..."
 msgstr ""
 
-#: pisi/operations/build.py:1081
+#: pisi/operations/build.py:1118
 msgid "Keeping build directory"
 msgstr ""
 
-#: pisi/operations/build.py:1134
+#: pisi/operations/build.py:1171
 msgid "*** %d error(s), %d warning(s)"
 msgstr ""
 
@@ -2395,8 +2409,7 @@ msgid "Selected packages [%s] are in conflict with each other."
 msgstr ""
 
 #: pisi/operations/helper.py:57
-msgid ""
-"[%s conflicts with: %s]\n"
+msgid "[%s conflicts with: %s]\n"
 msgstr ""
 
 #: pisi/operations/helper.py:59
@@ -2417,18 +2430,16 @@ msgstr ""
 msgid "%s could not be found"
 msgstr ""
 
-#: pisi/operations/history.py:95 pisi/package.py:106 pisi/sourcearchive.py:111
+#: pisi/operations/history.py:95 pisi/package.py:107 pisi/sourcearchive.py:110
 msgid "%s [cached]"
 msgstr ""
 
 #: pisi/operations/history.py:143
-msgid ""
-"Following packages will be installed:\n"
+msgid "Following packages will be installed:\n"
 msgstr ""
 
 #: pisi/operations/history.py:146
-msgid ""
-"Following packages will be removed:\n"
+msgid "Following packages will be removed:\n"
 msgstr ""
 
 #: pisi/operations/history.py:148 pisi/operations/history.py:162
@@ -2496,13 +2507,12 @@ msgstr ""
 msgid "Installation order: "
 msgstr ""
 
-#: pisi/operations/install.py:279 pisi/specfile.py:265
+#: pisi/operations/install.py:279 pisi/specfile.py:273
 msgid "%s dependency of package %s is not satisfied"
 msgstr ""
 
 #: pisi/operations/remove.py:43
-msgid ""
-"Safety switch prevents the removal of following packages:\n"
+msgid "Safety switch prevents the removal of following packages:\n"
 msgstr ""
 
 #: pisi/operations/remove.py:48 pisi/operations/upgrade.py:374
@@ -2591,15 +2601,15 @@ msgstr ""
 msgid "Safety switch forces the upgrade of following packages:"
 msgstr ""
 
-#: pisi/package.py:67
+#: pisi/package.py:68
 msgid "Cannot open package file: %s"
 msgstr ""
 
-#: pisi/package.py:88
+#: pisi/package.py:89
 msgid "Unsupported package format: %s"
 msgstr ""
 
-#: pisi/package.py:102
+#: pisi/package.py:103
 msgid ""
 "There was a problem while fetching '%s'.\n"
 "The package may have been upgraded. Please try to upgrade the package."
@@ -2698,7 +2708,7 @@ msgstr ""
 msgid "Unable to read file (%s): %s"
 msgstr ""
 
-#: pisi/pxml/xmlfile.py:85 pisi/specfile.py:431
+#: pisi/pxml/xmlfile.py:85 pisi/specfile.py:441
 msgid "File '%s' has invalid XML"
 msgstr ""
 
@@ -2714,35 +2724,35 @@ msgstr ""
 msgid "Repo does not have package named %s."
 msgstr ""
 
-#: pisi/sourcearchive.py:63
+#: pisi/sourcearchive.py:62
 msgid "Fetching source from: %s"
 msgstr ""
 
-#: pisi/sourcearchive.py:74
+#: pisi/sourcearchive.py:73
 msgid "Source archive is stored: %s/%s"
 msgstr ""
 
-#: pisi/sourcearchive.py:80
+#: pisi/sourcearchive.py:79
 msgid "Trying fallback address: %s"
 msgstr ""
 
-#: pisi/sourcearchive.py:91
+#: pisi/sourcearchive.py:90
 msgid "%s mirrors are not defined."
 msgstr ""
 
-#: pisi/sourcearchive.py:96
+#: pisi/sourcearchive.py:95
 msgid "Fetching source from mirror: %s"
 msgstr ""
 
-#: pisi/sourcearchive.py:102
+#: pisi/sourcearchive.py:101
 msgid "Could not fetch source from %s mirrors."
 msgstr ""
 
-#: pisi/sourcearchive.py:120
+#: pisi/sourcearchive.py:119
 msgid "unpack: check_file_hash failed"
 msgstr ""
 
-#: pisi/sourcearchive.py:125
+#: pisi/sourcearchive.py:124
 msgid "Unknown archive type '%s' is given for '%s'."
 msgstr ""
 
@@ -2754,34 +2764,31 @@ msgstr ""
 msgid " or "
 msgstr ""
 
-#: pisi/specfile.py:363 pisi/specfile.py:446
-msgid ""
-"Summary: %s\n"
+#: pisi/specfile.py:371 pisi/specfile.py:456
+msgid "Summary: %s\n"
 msgstr ""
 
-#: pisi/specfile.py:364 pisi/specfile.py:447
-msgid ""
-"Description: %s\n"
+#: pisi/specfile.py:372 pisi/specfile.py:457
+msgid "Description: %s\n"
 msgstr ""
 
-#: pisi/specfile.py:365 pisi/specfile.py:448
-msgid ""
-"Component: %s\n"
+#: pisi/specfile.py:373 pisi/specfile.py:458
+msgid "Component: %s\n"
 msgstr ""
 
-#: pisi/specfile.py:366
+#: pisi/specfile.py:374
 msgid "Provides: "
 msgstr ""
 
-#: pisi/specfile.py:370
+#: pisi/specfile.py:378
 msgid "Dependencies: "
 msgstr ""
 
-#: pisi/specfile.py:422
+#: pisi/specfile.py:432
 msgid "translations.xml file is badly formed."
 msgstr ""
 
-#: pisi/specfile.py:449
+#: pisi/specfile.py:459
 msgid "Build Dependencies: "
 msgstr ""
 
