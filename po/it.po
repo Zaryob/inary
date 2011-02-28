@@ -2277,14 +2277,12 @@ msgid "Bandwidth usage is limited to %s KB/s"
 msgstr ""
 
 #: pisi/fetcher.py:227
-#, fuzzy
 msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
-msgstr "Il file remoto non può essere raggiunto. Precedentemente scaricato parte del file verrà rimosso."
+msgstr ""
 
 #: pisi/fetcher.py:236
-#, fuzzy
 msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
-msgstr "Il server non supporta download parziali. Precedentemente scaricato parte del file verrà sovrascritto."
+msgstr ""
 
 #: pisi/file.py:35
 msgid "URL %s already downloaded as %s"
@@ -2341,14 +2339,12 @@ msgid "%s repository is updated."
 msgstr "repositorio di nome %s è aggiornato."
 
 #: pisi/history.py:67
-#, fuzzy
 msgid "%s is upgraded from %s to %s with delta."
-msgstr "% s è stato aggiornato da % sa %s con delta."
+msgstr ""
 
 #: pisi/history.py:69
-#, fuzzy
 msgid "%s is upgraded from %s to %s."
-msgstr "% s è stato aggiornato da %s in %s."
+msgstr ""
 
 #: pisi/history.py:71
 msgid "%s %s is removed."
@@ -2363,9 +2359,8 @@ msgid "%s %s is reinstalled."
 msgstr "%s %s è reinstallato."
 
 #: pisi/history.py:77
-#, fuzzy
 msgid "%s is downgraded from %s to %s."
-msgstr "%s è declassato da %s a %s."
+msgstr ""
 
 #: pisi/history.py:104 pisi/history.py:126
 msgid "Unknown package operation"
@@ -2392,9 +2387,8 @@ msgid "Architecture: %s, Installed Size: %s"
 msgstr "Architettura: %s, Dimensione file installati: %s"
 
 #: pisi/metadata.py:86
-#, fuzzy
 msgid ", Package Size: %s"
-msgstr ", Dimensione Package: %s"
+msgstr ""
 
 #: pisi/mirrors.py:46
 msgid "Mirrors file %s does not exist. Could not resolve mirrors://"
@@ -2732,13 +2726,10 @@ msgid "Downloading %d / %d"
 msgstr "Scaricamento di %d/%d"
 
 #: pisi/operations/history.py:160
-#, fuzzy
 msgid ""
 "\n"
 "Following packages could not be found in repositories and are not cached:\n"
 msgstr ""
-"\n"
-"I pacchetti seguenti non è stato trovato nel repository e non sono memorizzati nella cache:\n"
 
 #: pisi/operations/install.py:47 pisi/operations/install.py:134
 #, fuzzy
@@ -2847,14 +2838,12 @@ msgid "Replaced package remains"
 msgstr "Il pacchetto sostituito rimane"
 
 #: pisi/operations/upgrade.py:52
-#, fuzzy
 msgid "You must restart the following service(s) manually for the updated software to take effect:"
-msgstr "È necessario riavviare il servizio seguente(i) manualmente per il software aggiornato per rendere effettive:"
+msgstr ""
 
 #: pisi/operations/upgrade.py:59
-#, fuzzy
 msgid "You must restart your system for the updates in the following package(s) to take effect:"
-msgstr "È necessario riavviare il sistema per gli aggiornamenti del pacchetto(i) seguente che abbiano effetto"
+msgstr ""
 
 #: pisi/operations/upgrade.py:81
 msgid "Warning: package *name* ends with '.pisi'"
@@ -2906,9 +2895,8 @@ msgid "Cannot open package file: %s"
 msgstr "Impossibile trovare il pacchetto di sorgenti: %s"
 
 #: pisi/package.py:89
-#, fuzzy
 msgid "Unsupported package format: %s"
-msgstr "Formato di pacchetto non supportato"
+msgstr ""
 
 #: pisi/package.py:103
 msgid ""
@@ -3058,18 +3046,16 @@ msgid "unpack: check_file_hash failed"
 msgstr "unpack: check_file_hash fallito"
 
 #: pisi/sourcearchive.py:124
-#, fuzzy
 msgid "Unknown archive type '%s' is given for '%s'."
-msgstr "'% S' tipo di archivio sconosciuto viene dato per '% s'."
+msgstr ""
 
 #: pisi/specfile.py:164
 msgid "URI: %s, type: %s, sha1sum: %s"
 msgstr "URI: %s, tipo: %s, sha1sum: %s"
 
 #: pisi/specfile.py:194 pisi/specfile.py:197
-#, fuzzy
 msgid " or "
-msgstr "o"
+msgstr ""
 
 #: pisi/specfile.py:371 pisi/specfile.py:456
 msgid "Summary: %s\n"
@@ -3092,14 +3078,13 @@ msgid "Dependencies: "
 msgstr "Dipendenze: "
 
 #: pisi/specfile.py:432
-#, fuzzy
 msgid "translations.xml file is badly formed."
-msgstr "translations.xml file è mal formata."
+msgstr ""
 
 #: pisi/specfile.py:459
 #, fuzzy
 msgid "Build Dependencies: "
-msgstr "creare dipendenza"
+msgstr "Dipendenze: "
 
 #: pisi/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
@@ -3127,9 +3112,8 @@ msgid "Cannot calculate SHA1 hash of %s"
 msgstr "Errore I/O: Impossibile calcolare l'hash SHA1 di %s"
 
 #: pisi/util.py:526
-#, fuzzy
 msgid "Compression type is not valid: '%s'"
-msgstr "tipo di compressione non è valido: '% s'"
+msgstr ""
 
 #: pisi/util.py:532
 #, fuzzy
@@ -3145,9 +3129,8 @@ msgid "ERROR: patch (%s) failed: %s"
 msgstr "ERRORE: patch (%s) fallita: %s"
 
 #: pisi/util.py:587
-#, fuzzy
 msgid "strip command failed for file '%s'!"
-msgstr "comando strip non riuscito per '% s' file!"
+msgstr ""
 
 #: pisi/util.py:594
 #, fuzzy
@@ -3173,9 +3156,8 @@ msgid "Invalid delta package name: %s"
 msgstr "Il repository ha già un pacchetto di nome %s."
 
 #: pisi/version.py:64
-#, fuzzy
 msgid "Invalid version string: '%s'"
-msgstr "Stringa non valida versione: '% s'"
+msgstr ""
 
 #~ msgid "Storing %s, "
 #~ msgstr "Salvataggio di %s, "
