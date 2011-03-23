@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
-"POT-Creation-Date: 2011-02-27 18:45+EET\n"
+"POT-Creation-Date: 2011-03-23 14:02+EET\n"
 "PO-Revision-Date: 2010-07-01 16:01+0200\n"
 "Last-Translator: Davide Siciliano <edivad95@gmail.com>\n"
 "Language-Team: Italian <pardus-translators@pardus.org.tr>\n"
@@ -592,7 +592,7 @@ msgstr "Il pacchetto %s non è stato trovato in alcun repository attivo."
 msgid "Installing %s, version %s, release %s"
 msgstr "Installazione di %s, versione %s, release %s"
 
-#: pisi/atomicoperations.py:192 pisi/operations/build.py:735
+#: pisi/atomicoperations.py:192 pisi/operations/build.py:757
 msgid "%s-%s is not a valid PiSi version format"
 msgstr ""
 
@@ -2135,7 +2135,7 @@ msgstr "Deregistrazionescript COMAR"
 msgid "Destination directory %s does not exist. Creating it."
 msgstr "La cartella di destinazione %s non esiste. La sto creando."
 
-#: pisi/configfile.py:128
+#: pisi/configfile.py:127
 msgid "No section by name '%s'"
 msgstr "Nessuna sezione di nome '%s'"
 
@@ -2406,197 +2406,205 @@ msgstr "URI di origine: %s"
 msgid "Source %s not found in any active repository."
 msgstr "Il sorgente %s non è stato trovato in alcun repository attivo."
 
-#: pisi/operations/build.py:312
+#: pisi/operations/build.py:317
 msgid "pspec.xml avoids this package from building for '%s'"
 msgstr ""
 
-#: pisi/operations/build.py:315
+#: pisi/operations/build.py:320
 msgid "Building source package: %s"
 msgstr "Costruzione del pacchetto sorgente: %s"
 
-#: pisi/operations/build.py:363
+#: pisi/operations/build.py:368
 #, fuzzy
 msgid "Rebuilding for %s"
 msgstr "costruzione del formato file %s"
 
-#: pisi/operations/build.py:391
+#: pisi/operations/build.py:396
 msgid "IceCream detected. Make sure your daemon is up and running..."
 msgstr "Rilevato IceCream. Assicurati che il tuo demone sia in esecuzione e attivo..."
 
-#: pisi/operations/build.py:401
+#: pisi/operations/build.py:406
 msgid "CCache detected..."
 msgstr "Rilevato CCache..."
 
-#: pisi/operations/build.py:473
+#: pisi/operations/build.py:478
 msgid "PartOf tag not defined, looking for component"
 msgstr "Tag PartOf non definito, ricerca del componente"
 
-#: pisi/operations/build.py:482
+#: pisi/operations/build.py:487
 msgid "Cannot find component.xml in remote directory, Source is now part of unknown component"
 msgstr "Impossibile trovare il file component.xml nella cartella remota"
 
-#: pisi/operations/build.py:490
+#: pisi/operations/build.py:495
 msgid "Cannot find component.xml in upper directory, Source is now part of unknown component"
 msgstr "Impossibile trovare il file component.xml nella cartella superiore"
 
-#: pisi/operations/build.py:498
+#: pisi/operations/build.py:503
 msgid "Source is part of %s component"
 msgstr "Il sorgente fa parte del componente %s"
 
-#: pisi/operations/build.py:505
+#: pisi/operations/build.py:510
 msgid "Unpacking archive(s)..."
 msgstr "Scompattazione archivio..."
 
-#: pisi/operations/build.py:511
+#: pisi/operations/build.py:516
 msgid " unpacked (%s)"
 msgstr "scompattato (%s)"
 
-#: pisi/operations/build.py:516
+#: pisi/operations/build.py:521
 msgid "Setting up source..."
 msgstr "Configurazione sorgente..."
 
-#: pisi/operations/build.py:521
+#: pisi/operations/build.py:526
 msgid "Building source..."
 msgstr "Compilazione sorgente..."
 
-#: pisi/operations/build.py:526
+#: pisi/operations/build.py:531
 msgid "Testing package..."
 msgstr "Verifica del pacchetto..."
 
-#: pisi/operations/build.py:530
+#: pisi/operations/build.py:535
 msgid "Installing..."
 msgstr "Installazione in corso..."
 
-#: pisi/operations/build.py:596
+#: pisi/operations/build.py:601
 msgid "Unable to read Actions Script (%s): %s"
 msgstr "Impossibile leggere Actions Script (%s): %s"
 
-#: pisi/operations/build.py:599
+#: pisi/operations/build.py:604
 msgid "SyntaxError in Actions Script (%s): %s"
 msgstr "Errore di sintassi in Actions Script (%s): %s"
 
-#: pisi/operations/build.py:629
+#: pisi/operations/build.py:634
 msgid "Unable to read COMAR script (%s): %s"
 msgstr "Impossibile leggere script COMAR (%s): %s"
 
-#: pisi/operations/build.py:632
+#: pisi/operations/build.py:637
 msgid "SyntaxError in COMAR file (%s): %s"
 msgstr "Errore di sintassi nel file COMAR (%s): %s"
 
-#: pisi/operations/build.py:664
+#: pisi/operations/build.py:669
 msgid "Sandbox violation: %s (%s -> %s)"
 msgstr "Violazione ambiente protetto: %s (%s -> %s)"
 
-#: pisi/operations/build.py:680 pisi/util.py:549
+#: pisi/operations/build.py:685 pisi/util.py:549
 msgid "ERROR: WorkDir (%s) does not exist\n"
 msgstr "Errore: La directory di lavoro (%s) non esiste\n"
 
-#: pisi/operations/build.py:689
+#: pisi/operations/build.py:694
 msgid "Sandbox enabled build..."
 msgstr ""
 
-#: pisi/operations/build.py:713
+#: pisi/operations/build.py:718
 msgid "Sandbox violation result:"
 msgstr "Violazione dell'ambiente protetto (sandbox)!"
 
-#: pisi/operations/build.py:718
+#: pisi/operations/build.py:723
 msgid "Sandbox violations!"
 msgstr "Violazioni dell'ambiente protetto (sandbox)!"
 
-#: pisi/operations/build.py:724
+#: pisi/operations/build.py:729
 msgid "unable to call function from actions: %s"
 msgstr "impossibile chiamare la funzione dalle azioni: %s"
 
-#: pisi/operations/build.py:754
+#: pisi/operations/build.py:743
+msgid "Path must start with a slash: %s"
+msgstr ""
+
+#: pisi/operations/build.py:747
+msgid "Multiple 'Path' tags specified for this path: %s"
+msgstr ""
+
+#: pisi/operations/build.py:776
 msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr "Switch di sicurezza: i seguenti pacchetti aggiuntivi in system.devel verranno installati: "
 
-#: pisi/operations/build.py:759
+#: pisi/operations/build.py:781
 msgid "Safety switch: system.devel is already installed"
 msgstr "Switch di sicurezza: system.devel è già installato"
 
-#: pisi/operations/build.py:761
+#: pisi/operations/build.py:783
 msgid "Safety switch: the component system.devel cannot be found"
 msgstr "Switch di sicurezza: il componente system.devel non è stato trovato"
 
-#: pisi/operations/build.py:770
+#: pisi/operations/build.py:792
 msgid "Unsatisfied Build Dependencies:"
 msgstr "Dipendenze di compilazione non soddisfatte:"
 
-#: pisi/operations/build.py:774
+#: pisi/operations/build.py:796
 msgid "Cannot build package due to unsatisfied build dependencies"
 msgstr "Impossibile compilare il pacchetto a casa di dipendenze non soddisfatte"
 
-#: pisi/operations/build.py:779
+#: pisi/operations/build.py:801
 msgid "Build dependency %s cannot be satisfied"
 msgstr "La dipendenza di compilazione %s non può essere soddisfatta"
 
-#: pisi/operations/build.py:781
+#: pisi/operations/build.py:803
 msgid "Do you want to install the unsatisfied build dependencies"
 msgstr "Desideri installare le dipendenze di compilazione non soddisfatte"
 
-#: pisi/operations/build.py:782
+#: pisi/operations/build.py:804
 msgid "Installing build dependencies."
 msgstr "Installazione dipendenze di compilazione."
 
-#: pisi/operations/build.py:788
+#: pisi/operations/build.py:810
 msgid "Ignoring build dependencies."
 msgstr "Ignoro le dipendenze di compilazione."
 
-#: pisi/operations/build.py:798
+#: pisi/operations/build.py:820
 msgid "Patch file is missing: %s\n"
 msgstr "Il file di patch è mancante: %s\n"
 
-#: pisi/operations/build.py:800
+#: pisi/operations/build.py:822
 #, fuzzy
 msgid "Patch file is empty: %s"
 msgstr "Il file di patch è mancante: %s\n"
 
-#: pisi/operations/build.py:816
+#: pisi/operations/build.py:838
 msgid "* Applying patch: %s"
 msgstr "* Applicazione della patch: %s"
 
-#: pisi/operations/build.py:935
+#: pisi/operations/build.py:957
 msgid "/%s has suid bit set"
 msgstr ""
 
-#: pisi/operations/build.py:1008
+#: pisi/operations/build.py:1030
 msgid "No user named '%s' found on the system"
 msgstr "Utente '%s' non trovato nel sistema"
 
-#: pisi/operations/build.py:1014
+#: pisi/operations/build.py:1036
 msgid "No group named '%s' found on the system"
 msgstr "Gruppo '%s' non trovato nel sistema"
 
-#: pisi/operations/build.py:1021
+#: pisi/operations/build.py:1043
 msgid "There are abandoned files under the install dir (%s):"
 msgstr "File abbandonati nella cartella di installazione (%s):"
 
-#: pisi/operations/build.py:1049
+#: pisi/operations/build.py:1071
 #, fuzzy
 msgid "Ignoring empty package %s"
 msgstr "Rimozione del pacchetto %s in corso"
 
-#: pisi/operations/build.py:1053
+#: pisi/operations/build.py:1075
 msgid "Building package: %s"
 msgstr "Costruzione del pacchetto: %s"
 
-#: pisi/operations/build.py:1072 pisi/operations/delta.py:50
+#: pisi/operations/build.py:1094 pisi/operations/delta.py:50
 #: pisi/operations/delta.py:148
 msgid "Creating %s..."
 msgstr ""
 
-#: pisi/operations/build.py:1115
+#: pisi/operations/build.py:1137
 #, fuzzy
 msgid "Cleaning build directory..."
 msgstr "Pulizia della cartella di compilazione..."
 
-#: pisi/operations/build.py:1118
+#: pisi/operations/build.py:1140
 #, fuzzy
 msgid "Keeping build directory"
 msgstr "La cartella di compilazione verrà conservata"
 
-#: pisi/operations/build.py:1171
+#: pisi/operations/build.py:1225
 msgid "*** %d error(s), %d warning(s)"
 msgstr ""
 
@@ -3159,97 +3167,439 @@ msgstr "Il repository ha già un pacchetto di nome %s."
 msgid "Invalid version string: '%s'"
 msgstr ""
 
-#~ msgid "Storing %s, "
-#~ msgstr "Salvataggio di %s, "
+#~ msgid "%s is added to %s/language.%s.dat"
+#~ msgstr "%s aggiunto a %s/language.%s.dat"
 
-#~ msgid "Storing %s."
-#~ msgstr "Salvataggio di %s."
+#~ msgid "Upgrading to new distribution build"
+#~ msgstr "Aggiornamento alla nuova build della distribuzione"
 
-#~ msgid ""
-#~ "The following packages will be installed\n"
-#~ "in the respective order to satisfy extra dependencies:\n"
-#~ msgstr ""
-#~ "I seguenti pacchetti verranno installati nel\n"
-#~ "rispettivo ordine per soddisfare le dipendenze aggiuntive:\n"
+#~ msgid "Downgrade to old distribution build?"
+#~ msgstr "Ritornare alla vecchia build della distribuzione?"
 
-#~ msgid "Reverse dependency %s of %s cannot be satisfied"
-#~ msgstr "La dipendenza inversa %s di %s non può essere soddisfatta"
+#~ msgid "Do not take build no into account."
+#~ msgstr "Non prendere in considerazione il numero di build."
 
-#~ msgid "Safety switch: Following packages in system.base will be installed: "
-#~ msgstr "Switch di sicurezza: i seguenti pacchetti in system.base verranno installati: "
+#~ msgid "PiSi binary package formats: '1.0', '1.1' (default)"
+#~ msgstr "Formati dei pacchetti binari PiSi: '1.0', '1.1' (predefinito)"
 
-#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
-#~ msgstr "Switch di sicurezza: i seguenti pacchetti in system.base verranno aggiornati: "
+#~ msgid "package_format must be one of %s "
+#~ msgstr "il formato del pacchetto deve essere uno tra %s"
 
-#~ msgid ""
-#~ "Duplicate binary packages:\n"
-#~ "%s\n"
-#~ "%s\n"
-#~ msgstr ""
-#~ "Pacchetti binari duplicati:\n"
-#~ "%s\n"
-#~ "%s\n"
+#~ msgid "Indexing current directory."
+#~ msgstr "Indicizzazione della cartella corrente."
 
-#~ msgid ""
-#~ "Duplicate source packages:\n"
-#~ "%s\n"
-#~ "%s\n"
-#~ msgstr ""
-#~ "Pacchetti sorgenti duplicati:\n"
-#~ "%s\n"
-#~ "%s\n"
+#~ msgid "zip compression not supported yet"
+#~ msgstr "la compressione zip non è ancora supportata "
 
-#~ msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-#~ msgstr "Lo sviluppatore '%s <%s>' ha un altro indirizzo di posta elettronica '%s' nel pacchetto sorgente '%s'"
+#~ msgid "gzip compression not supported yet"
+#~ msgstr "la compressione gzip non è ancora supportata "
 
-#~ msgid ""
-#~ "Cannot parse '%s':\n"
-#~ "%s\n"
-#~ msgstr ""
-#~ "Impossibile analizzare '%s':\n"
-#~ "%s\n"
+#~ msgid "(found old version %s)"
+#~ msgstr "(trovata vecchia versione %s)"
 
-#~ msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-#~ msgstr "Utilizzo: repostats.py [OPZIONI] percorso-repo-sorgente [percorso-repo-binario]\n"
+#~ msgid "(no previous build found, setting build no to 1.)"
+#~ msgstr "(nessuna build precedente trovata, imposto il numero di build a 1)"
 
-#~ msgid "Dont generate the web site.\n"
-#~ msgstr "Non generare il sito web.\n"
+#~ msgid "(old package lacks a build no, setting build no to 1.)"
+#~ msgstr "(il vecchio pacchetto non ha un numero di build, lo imposto a 1)"
 
-#~ msgid "Scanning source repository...\n"
-#~ msgstr "Scansione del repository sorgente in corso...\n"
+#~ msgid "There are changes, incrementing build no to %d"
+#~ msgstr "Cambiamenti rilevati, incremento del numero di build a %d"
 
-#~ msgid "Scanning binary packages...\n"
-#~ msgstr "Scansione dei pacchetti binari in corso...\n"
+#~ msgid "There is no change from previous build %d"
+#~ msgstr "Nessun cambiamento dalla build precedente %d"
 
-#~ msgid "Repository architecture does not match. Removing %s from system."
+#~ msgid "Generating %s,"
+#~ msgstr "Generazione di %s,"
+
+#~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
+#~ msgstr "Il numero di build non è disponibile. Per le build dal repository devi attivare buildno in pisi.conf."
+
+#~ msgid "Creating PiSi package %s."
+#~ msgstr "Creazione del pacchetto PiSi %s."
+
+#~ msgid "Done."
+#~ msgstr "Fatto."
+
+#~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
+#~ msgstr "Tutti i file nella cartella di installazione (%s) sono stati raccolti dai pacchetti"
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Impossibile creare delta per lo stesso pacchetto!"
+
+#~ msgid "Creating delta PiSi package between %s %s"
+#~ msgstr "Creazione del pacchetto delta PiSi tra %s e %s"
+
+#~ msgid "Package %s is already at the latest build %s."
+#~ msgstr "Il pacchetto %s è già alla build più recente %s."
+
+#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
+#~ msgstr "Nome: %s, versione: %s, release: %s, build %s\n"
+
+#~ msgid "Repository distribution does not match. Removing %s from system."
 #~ msgstr "Il repository %s non può essere raggiunto. Rimozione di %s dal sistema in corso."
 
-#~ msgid "Update PiSi database for repository %s?"
-#~ msgstr "Aggiorna il database PiSi per il repository %s?"
+#~ msgid "Cannot calculate SHA1 hash of given data"
+#~ msgstr "Impossibile calcolare l'hash SHA1 dei dati forniti"
 
-#~ msgid "Adding %s to component index"
-#~ msgstr "Aggiunta di %s all'indice dei componenti"
+#~ msgid "Source package %s not found"
+#~ msgstr "Pacchetto sorgente %s non trovato"
 
-#~ msgid "Package %s is not present in the package database"
-#~ msgstr "Il pacchetto %s non è presente nel database dei pacchetti"
+#~ msgid "Cannot add repository at position %s"
+#~ msgstr "Impossibile aggiungere un repository in posizione %s"
 
-#~ msgid "dbus-python package is not fully installed"
-#~ msgstr "il pacchetto COMAR non è completamente installato"
+#~ msgid "Repository %s already exists"
+#~ msgstr "Il repository %s esiste già"
 
-#~ msgid "Configuring %s package for removal"
-#~ msgstr "Configurazione del pacchetto %s per la rimozione"
+#~ msgid "No repository named %s exists"
+#~ msgstr "Non esiste alcun repository di nome %s"
 
-#~ msgid "ActionsAPI [rename]: No such file or directory: %s"
-#~ msgstr "ActionsAPI [rename]: File o cartella non esistente: %s"
+#~ msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
+#~ msgstr "I flag devono essere uno di 'r', 'w, 'c', o 'n' oppure utilizza i flag bsddb.db.DB_*"
 
-#~ msgid "Skipping %s with wrong pkg name "
-#~ msgstr "Salto %s con nome del pacchetto errato"
+#~ msgid "Cannot attain read or write access to database %s"
+#~ msgstr "Impossibile ottenere accesso in lettura o scrittura al database %s"
 
-#~ msgid "* Rebuilding '%s' named repo... "
-#~ msgstr "* Ricostruzione del repository di nome '%s'... "
+#~ msgid "Cannot attain read access to database environment"
+#~ msgstr "Impossibile ottenere accesso in lettura all'ambiente del database"
 
-#~ msgid "Do not install build dependencies, fail if a build dependency is present"
-#~ msgstr "Non installare dipendenze di compilazione, fallisce se sono presenti delle dipendenze"
+#~ msgid "Database version %s not present."
+#~ msgstr "Versione del database %s non presente."
+
+#~ msgid "Cannot attain write access to database environment"
+#~ msgstr "Impossibile ottenere accesso in scrittura all'ambiente del database"
+
+#~ msgid "Database version for %s greater than PiSi version. You need a newer PiSi."
+#~ msgstr "La versione del database per %s è maggiore della versione di PiSi. Ti serve una versione più recente di PiSi."
+
+#~ msgid "Database version for %s insufficient. Please run rebuild-db command."
+#~ msgstr "Versione del database per %s insufficiente. Lancia per favore il comando rebuild-db."
+
+#~ msgid "Key %s in repo %s not found"
+#~ msgstr "Chiave %s nel repository %s non trovata"
+
+#~ msgid "Already installed"
+#~ msgstr "Già installato"
+
+#~ msgid "purged"
+#~ msgstr "rimosso completamente"
+
+#~ msgid "Updating package database of %s"
+#~ msgstr "Aggiornamento del database dei pacchetti di %s"
+
+#~ msgid "ftp error"
+#~ msgstr "errore ftp"
+
+#~ msgid "Cannot fetch %s; (%s): %s"
+#~ msgstr "Impossibile recuperare %s; (%s): %s"
+
+#~ msgid "Please check your network connections and try again. (%s)"
+#~ msgstr "Controlla per favore la tua connessione di rete e riprova. (%s)"
+
+#~ msgid "Cannot fetch %s; value error: %s"
+#~ msgstr "Impossibile recuperare %s; valore errore: %s"
+
+#~ msgid "Requested range not satisfiable, starting again."
+#~ msgstr "Impossibile soddisfare l'intervallo richiesto, inizio di nuovo."
+
+#~ msgid "No such file or no permission to read"
+#~ msgstr "File non esistente o permesso di lettura negato"
+
+#~ msgid "Information for component %s not available"
+#~ msgstr "Nessuna informazione disponibile per il pacchetto %s"
+
+#~ msgid "Type: %s, Hash: %s"
+#~ msgstr "Tipo: %s, Hash: %s"
+
+#~ msgid "Fuzzy search"
+#~ msgstr "Ricerca fuzzy"
+
+#~ msgid "Show details"
+#~ msgstr "Mostra dettagli"
+
+#~ msgid "File information not available"
+#~ msgstr "Informazioni sul file non disponibili"
+
+#~ msgid ""
+#~ "\n"
+#~ "Files:"
+#~ msgstr ""
+#~ "\n"
+#~ "File:"
+
+#~ msgid "exit program"
+#~ msgstr "esce dal programma"
+
+#~ msgid "print help for the command"
+#~ msgstr "stampa l'aiuto per il comando"
+
+#~ msgid "do cleanup work for PiSi components"
+#~ msgstr "effettua lavoro di pulizia per i componenti PiSi"
+
+#~ msgid "initialize PiSi components"
+#~ msgstr "inizializza i componenti di PiSi"
+
+#~ msgid ""
+#~ "This is a fall back function. If the implementer module provides an\n"
+#~ "        options function it will be called"
+#~ msgstr ""
+#~ "Questa è una funzione di fallback. Se il modulo implementante fornisce\n"
+#~ "         una funzione di opzione essa verrà chiamata"
+
+#~ msgid "common options"
+#~ msgstr "opzioni comuni"
+
+#~ msgid "generic help string for any command"
+#~ msgstr "testo di aiuto generico per qualsiasi comando"
+
+#~ msgid "Files XML '%s' cannot be found"
+#~ msgstr "Impossibile trovare i file XML '%s'"
+
+#~ msgid "MetaData format wrong (%s)"
+#~ msgstr "Formato Metadata errato (%s)"
+
+#~ msgid "Metadata XML '%s' cannot be found"
+#~ msgstr "Impossibile trovare i Metadata XML'%s'"
+
+#~ msgid "Archive type not recognized"
+#~ msgstr "Tipo di archivio non riconosciuto"
+
+#~ msgid ""
+#~ "An error has occured while running LZMA:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Errore durante l'esecuzione di LZMA:\n"
+#~ "%s"
+
+#~ msgid "Rebuilding package database"
+#~ msgstr "Ricostruzione del database dei pacchetti"
+
+#~ msgid "No updates available for repository %s."
+#~ msgstr "Nessun aggiornamento disponibile per il repository %s."
+
+#~ msgid "MetaData format wrong"
+#~ msgstr "Formato MetaData errato"
+
+#~ msgid "Item not found"
+#~ msgstr "Chiave %s non trovata"
+
+#~ msgid "comar denied our access"
+#~ msgstr "comar ha negato l'accesso"
+
+#~ msgid "Configuration error: %s"
+#~ msgstr "Errore di configurazione: %s"
+
+#~ msgid "connection with comar unexpectedly closed"
+#~ msgstr "connessione con comar chiusa inaspettatamente"
+
+#~ msgid "Could not restart comar"
+#~ msgstr "impossibile riavviare comar"
+
+#~ msgid ""
+#~ "A database operation has been aborted. You should run pisi\n"
+#~ "again for normal DB recovery procedure. Make sure you have free disk space. \n"
+#~ "You have to run rebuild-db only when there is file corruption and database upgrades."
+#~ msgstr ""
+#~ "Una operazione sul database è stata annullata. Dovresti lanciare\n"
+#~ "nuovamente PiSi per la procedura di correzione del database. Assicurati\n"
+#~ "di avere spazio libero a sufficienza. Devi eseguire rebuild-db solo quando si\n"
+#~ "riscontra la corruzione di file o ci sono aggiornamenti del database."
+
+#~ msgid ""
+#~ "print_help(file : file = stdout)\n"
+#~ "\n"
+#~ "        Print an extended help message, listing all options and any\n"
+#~ "        help text provided with them, to 'file' (default stdout).\n"
+#~ "        "
+#~ msgstr ""
+#~ "print_help(file : file = stdout)\n"
+#~ "\n"
+#~ "        Stampa un messaggio di aiuto esteso, elencando tutte le opzioni e\n"
+#~ "        ogni testo associato ad esse, in 'file' (stdout predefinito).\n"
+#~ "        "
+
+#~ msgid ""
+#~ "print_version(file : file = stdout)\n"
+#~ "\n"
+#~ "        Print the version message for this program (self.version) to\n"
+#~ "        'file' (default stdout).  As with print_usage(), any occurence\n"
+#~ "        of \"%prog\" in self.version is replaced by the current program's\n"
+#~ "        name.  Does nothing if self.version is empty or undefined.\n"
+#~ "        "
+#~ msgstr ""
+#~ "print_version(file : file = stdout)\n"
+#~ "\n"
+#~ "        Stampa il messaggio di versione per questo programma (self.version) su\n"
+#~ "        'file' (predefinito stdout).  Come per print_usage(), ogni occorrenza\n"
+#~ "        di \"%prog\" in self.version viene sostituita dal nome del programma\n"
+#~ "        corrente.  Non fa nulla se self.version è vuoto o non definito.\n"
+#~ "        "
+
+#~ msgid ""
+#~ "print_usage(file : file = stdout)\n"
+#~ "\n"
+#~ "        Print the usage message for the current program (self.usage) to\n"
+#~ "        'file' (default stdout).  Any occurence of the string \"%prog\" in\n"
+#~ "        self.usage is replaced with the name of the current program\n"
+#~ "        (basename of sys.argv[0]).  Does nothing if self.usage is empty\n"
+#~ "        or not defined.\n"
+#~ "        "
+#~ msgstr ""
+#~ "print_usage(file : file = stdout)\n"
+#~ "\n"
+#~ "        Stampa il messaggio d'uso per il programma corrente (self.usage) su\n"
+#~ "        'file' (predefinito stdout).  Ogni occorrenza della stringa \"%prog\" in\n"
+#~ "        self.usage viene sostituita con il nome del programma corrente\n"
+#~ "        (nome base di sys.argv[0]).  Non fa nulla se self.usage è vuoto\n"
+#~ "        o non definito.\n"
+#~ "        "
+
+#~ msgid ""
+#~ "error(msg : string)\n"
+#~ "\n"
+#~ "        Print a usage message incorporating 'msg' to stderr and exit.\n"
+#~ "        If you override this in a subclass, it should not return -- it\n"
+#~ "        should either exit or raise an exception.\n"
+#~ "        "
+#~ msgstr ""
+#~ "error(msg : string)\n"
+#~ "\n"
+#~ "        Stampa un messaggio di utilizzo incorporando 'msg' nel stderr e esce.\n"
+#~ "        Se sovrascrivi questa funzione in una sottoclasse, non deve restituire nulla -- \n"
+#~ "        deve o uscire o lanciare un'eccezione.\n"
+#~ "        "
+
+#~ msgid ""
+#~ "add_option(Option)\n"
+#~ "           add_option(opt_str, ..., kwarg=val, ...)\n"
+#~ "        "
+#~ msgstr ""
+#~ "add_option(Opzione)\n"
+#~ "           add_option(opt_str, ..., kwarg=val, ...)\n"
+#~ "       "
+
+#~ msgid ""
+#~ "\n"
+#~ "        Update the option values from an arbitrary dictionary,\n"
+#~ "        using all keys from the dictionary regardless of whether\n"
+#~ "        they have a corresponding attribute in self or not.\n"
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "        Aggiorna il valore delle opzioni da un dizionario arbitrario,\n"
+#~ "        utilizzando tutte le chiavi del dizionario senza valutare se\n"
+#~ "        essi abbiano o meno un attributo corrispondente in sé.\n"
+#~ "        "
+
+#~ msgid ""
+#~ "\n"
+#~ "        Update the option values from an arbitrary dictionary, but only\n"
+#~ "        use keys from dict that already have a corresponding attribute\n"
+#~ "        in self.  Any keys in dict without a corresponding attribute\n"
+#~ "        are silently ignored.\n"
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "        Aggiorna i valori delle opzioni da un dizionario arbitrario, ma utilizza\n"
+#~ "        solo le chiavi del dizionario che hanno già un attributo corrispondente\n"
+#~ "        in sé.  Qualsiasi chiave del dizionario senza un attributo corrispondente\n"
+#~ "        verrà ignorata silenziosamente.\\         "
+
+#~ msgid ""
+#~ "\n"
+#~ "    Instance attributes:\n"
+#~ "      _short_opts : [string]\n"
+#~ "      _long_opts : [string]\n"
+#~ "\n"
+#~ "      action : string\n"
+#~ "      type : string\n"
+#~ "      dest : string\n"
+#~ "      default : any\n"
+#~ "      nargs : int\n"
+#~ "      const : any\n"
+#~ "      choices : [string]\n"
+#~ "      callback : function\n"
+#~ "      callback_args : (any*)\n"
+#~ "      callback_kwargs : { string : any }\n"
+#~ "      help : string\n"
+#~ "      metavar : string\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "    Instance attributes:\n"
+#~ "      _short_opts : [string]\n"
+#~ "      _long_opts : [string]\n"
+#~ "\n"
+#~ "      action : string\n"
+#~ "      type : string\n"
+#~ "      dest : string\n"
+#~ "      default : any\n"
+#~ "      nargs : int\n"
+#~ "      const : any\n"
+#~ "      choices : [string]\n"
+#~ "      callback : function\n"
+#~ "      callback_args : (any*)\n"
+#~ "      callback_kwargs : { string : any }\n"
+#~ "      help : string\n"
+#~ "      metavar : string\n"
+#~ "    "
+
+#~ msgid ""
+#~ "Format help with underlined section headers.\n"
+#~ "    "
+#~ msgstr ""
+#~ "Formatta l'aiuto sottolineando i titoli delle sezioni.\n"
+#~ "    "
+
+#~ msgid ""
+#~ "Format help with indented section bodies.\n"
+#~ "    "
+#~ msgstr ""
+#~ "Formatta l'aiuto indentando il corpo delle sezioni.\n"
+#~ "    "
+
+#~ msgid "Return a comma-separated list of option strings & metavariables."
+#~ msgstr "Restituisce una lista separata da virgole di stringhe di opzione e metavariabili."
+
+#~ msgid ""
+#~ "\n"
+#~ "    Raised if an invalid or ambiguous option is seen on the command-line.\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "    Lanciata se una opzione non valida o ambigua viene riscontrata nella linea di comando.\n"
+#~ "    "
+
+#~ msgid ""
+#~ "\n"
+#~ "    Raised if an invalid option value is encountered on the command\n"
+#~ "    line.\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "    Lanciata se un valore di opzione non valido viene riscontrato sulla\n"
+#~ "    linea di comando.\n"
+#~ "    "
+
+#~ msgid ""
+#~ "\n"
+#~ "    Raised if conflicting options are added to an OptionParser.\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "    Lanciata se opzioni conflittanti vengono aggiunte a un OptionParser.\n"
+#~ "    "
+
+#~ msgid ""
+#~ "\n"
+#~ "    Raised if an Option instance is created with invalid or\n"
+#~ "    inconsistent arguments.\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "    Lanciato se una istanza di Option viene creata con argomenti\n"
+#~ "    invalidi o inconsistenti.\n"
+#~ "    "
 
 #~ msgid ""
 #~ "optparse - a powerful, extensible, and easy-to-use option parser.\n"
@@ -3280,436 +3630,94 @@ msgstr ""
 #~ "Per supporto, usa la mailing list optik-users@lists.sourceforge.net\n"
 #~ "(http://lists.sourceforge.net/lists/listinfo/optik-users).\n"
 
-#~ msgid ""
-#~ "\n"
-#~ "    Raised if an Option instance is created with invalid or\n"
-#~ "    inconsistent arguments.\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "    Lanciato se una istanza di Option viene creata con argomenti\n"
-#~ "    invalidi o inconsistenti.\n"
-#~ "    "
+#~ msgid "Do not install build dependencies, fail if a build dependency is present"
+#~ msgstr "Non installare dipendenze di compilazione, fallisce se sono presenti delle dipendenze"
 
-#~ msgid ""
-#~ "\n"
-#~ "    Raised if conflicting options are added to an OptionParser.\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "    Lanciata se opzioni conflittanti vengono aggiunte a un OptionParser.\n"
-#~ "    "
+#~ msgid "* Rebuilding '%s' named repo... "
+#~ msgstr "* Ricostruzione del repository di nome '%s'... "
 
-#~ msgid ""
-#~ "\n"
-#~ "    Raised if an invalid option value is encountered on the command\n"
-#~ "    line.\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "    Lanciata se un valore di opzione non valido viene riscontrato sulla\n"
-#~ "    linea di comando.\n"
-#~ "    "
+#~ msgid "Skipping %s with wrong pkg name "
+#~ msgstr "Salto %s con nome del pacchetto errato"
 
-#~ msgid ""
-#~ "\n"
-#~ "    Raised if an invalid or ambiguous option is seen on the command-line.\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "    Lanciata se una opzione non valida o ambigua viene riscontrata nella linea di comando.\n"
-#~ "    "
+#~ msgid "ActionsAPI [rename]: No such file or directory: %s"
+#~ msgstr "ActionsAPI [rename]: File o cartella non esistente: %s"
 
-#~ msgid "Return a comma-separated list of option strings & metavariables."
-#~ msgstr "Restituisce una lista separata da virgole di stringhe di opzione e metavariabili."
+#~ msgid "Configuring %s package for removal"
+#~ msgstr "Configurazione del pacchetto %s per la rimozione"
 
-#~ msgid ""
-#~ "Format help with indented section bodies.\n"
-#~ "    "
-#~ msgstr ""
-#~ "Formatta l'aiuto indentando il corpo delle sezioni.\n"
-#~ "    "
+#~ msgid "dbus-python package is not fully installed"
+#~ msgstr "il pacchetto COMAR non è completamente installato"
 
-#~ msgid ""
-#~ "Format help with underlined section headers.\n"
-#~ "    "
-#~ msgstr ""
-#~ "Formatta l'aiuto sottolineando i titoli delle sezioni.\n"
-#~ "    "
+#~ msgid "Package %s is not present in the package database"
+#~ msgstr "Il pacchetto %s non è presente nel database dei pacchetti"
 
-#~ msgid ""
-#~ "\n"
-#~ "    Instance attributes:\n"
-#~ "      _short_opts : [string]\n"
-#~ "      _long_opts : [string]\n"
-#~ "\n"
-#~ "      action : string\n"
-#~ "      type : string\n"
-#~ "      dest : string\n"
-#~ "      default : any\n"
-#~ "      nargs : int\n"
-#~ "      const : any\n"
-#~ "      choices : [string]\n"
-#~ "      callback : function\n"
-#~ "      callback_args : (any*)\n"
-#~ "      callback_kwargs : { string : any }\n"
-#~ "      help : string\n"
-#~ "      metavar : string\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "    Instance attributes:\n"
-#~ "      _short_opts : [string]\n"
-#~ "      _long_opts : [string]\n"
-#~ "\n"
-#~ "      action : string\n"
-#~ "      type : string\n"
-#~ "      dest : string\n"
-#~ "      default : any\n"
-#~ "      nargs : int\n"
-#~ "      const : any\n"
-#~ "      choices : [string]\n"
-#~ "      callback : function\n"
-#~ "      callback_args : (any*)\n"
-#~ "      callback_kwargs : { string : any }\n"
-#~ "      help : string\n"
-#~ "      metavar : string\n"
-#~ "    "
+#~ msgid "Adding %s to component index"
+#~ msgstr "Aggiunta di %s all'indice dei componenti"
 
-#~ msgid ""
-#~ "\n"
-#~ "        Update the option values from an arbitrary dictionary, but only\n"
-#~ "        use keys from dict that already have a corresponding attribute\n"
-#~ "        in self.  Any keys in dict without a corresponding attribute\n"
-#~ "        are silently ignored.\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "        Aggiorna i valori delle opzioni da un dizionario arbitrario, ma utilizza\n"
-#~ "        solo le chiavi del dizionario che hanno già un attributo corrispondente\n"
-#~ "        in sé.  Qualsiasi chiave del dizionario senza un attributo corrispondente\n"
-#~ "        verrà ignorata silenziosamente.\\         "
+#~ msgid "Update PiSi database for repository %s?"
+#~ msgstr "Aggiorna il database PiSi per il repository %s?"
 
-#~ msgid ""
-#~ "\n"
-#~ "        Update the option values from an arbitrary dictionary,\n"
-#~ "        using all keys from the dictionary regardless of whether\n"
-#~ "        they have a corresponding attribute in self or not.\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "        Aggiorna il valore delle opzioni da un dizionario arbitrario,\n"
-#~ "        utilizzando tutte le chiavi del dizionario senza valutare se\n"
-#~ "        essi abbiano o meno un attributo corrispondente in sé.\n"
-#~ "        "
-
-#~ msgid ""
-#~ "add_option(Option)\n"
-#~ "           add_option(opt_str, ..., kwarg=val, ...)\n"
-#~ "        "
-#~ msgstr ""
-#~ "add_option(Opzione)\n"
-#~ "           add_option(opt_str, ..., kwarg=val, ...)\n"
-#~ "       "
-
-#~ msgid ""
-#~ "error(msg : string)\n"
-#~ "\n"
-#~ "        Print a usage message incorporating 'msg' to stderr and exit.\n"
-#~ "        If you override this in a subclass, it should not return -- it\n"
-#~ "        should either exit or raise an exception.\n"
-#~ "        "
-#~ msgstr ""
-#~ "error(msg : string)\n"
-#~ "\n"
-#~ "        Stampa un messaggio di utilizzo incorporando 'msg' nel stderr e esce.\n"
-#~ "        Se sovrascrivi questa funzione in una sottoclasse, non deve restituire nulla -- \n"
-#~ "        deve o uscire o lanciare un'eccezione.\n"
-#~ "        "
-
-#~ msgid ""
-#~ "print_usage(file : file = stdout)\n"
-#~ "\n"
-#~ "        Print the usage message for the current program (self.usage) to\n"
-#~ "        'file' (default stdout).  Any occurence of the string \"%prog\" in\n"
-#~ "        self.usage is replaced with the name of the current program\n"
-#~ "        (basename of sys.argv[0]).  Does nothing if self.usage is empty\n"
-#~ "        or not defined.\n"
-#~ "        "
-#~ msgstr ""
-#~ "print_usage(file : file = stdout)\n"
-#~ "\n"
-#~ "        Stampa il messaggio d'uso per il programma corrente (self.usage) su\n"
-#~ "        'file' (predefinito stdout).  Ogni occorrenza della stringa \"%prog\" in\n"
-#~ "        self.usage viene sostituita con il nome del programma corrente\n"
-#~ "        (nome base di sys.argv[0]).  Non fa nulla se self.usage è vuoto\n"
-#~ "        o non definito.\n"
-#~ "        "
-
-#~ msgid ""
-#~ "print_version(file : file = stdout)\n"
-#~ "\n"
-#~ "        Print the version message for this program (self.version) to\n"
-#~ "        'file' (default stdout).  As with print_usage(), any occurence\n"
-#~ "        of \"%prog\" in self.version is replaced by the current program's\n"
-#~ "        name.  Does nothing if self.version is empty or undefined.\n"
-#~ "        "
-#~ msgstr ""
-#~ "print_version(file : file = stdout)\n"
-#~ "\n"
-#~ "        Stampa il messaggio di versione per questo programma (self.version) su\n"
-#~ "        'file' (predefinito stdout).  Come per print_usage(), ogni occorrenza\n"
-#~ "        di \"%prog\" in self.version viene sostituita dal nome del programma\n"
-#~ "        corrente.  Non fa nulla se self.version è vuoto o non definito.\n"
-#~ "        "
-
-#~ msgid ""
-#~ "print_help(file : file = stdout)\n"
-#~ "\n"
-#~ "        Print an extended help message, listing all options and any\n"
-#~ "        help text provided with them, to 'file' (default stdout).\n"
-#~ "        "
-#~ msgstr ""
-#~ "print_help(file : file = stdout)\n"
-#~ "\n"
-#~ "        Stampa un messaggio di aiuto esteso, elencando tutte le opzioni e\n"
-#~ "        ogni testo associato ad esse, in 'file' (stdout predefinito).\n"
-#~ "        "
-
-#~ msgid ""
-#~ "A database operation has been aborted. You should run pisi\n"
-#~ "again for normal DB recovery procedure. Make sure you have free disk space. \n"
-#~ "You have to run rebuild-db only when there is file corruption and database upgrades."
-#~ msgstr ""
-#~ "Una operazione sul database è stata annullata. Dovresti lanciare\n"
-#~ "nuovamente PiSi per la procedura di correzione del database. Assicurati\n"
-#~ "di avere spazio libero a sufficienza. Devi eseguire rebuild-db solo quando si\n"
-#~ "riscontra la corruzione di file o ci sono aggiornamenti del database."
-
-#~ msgid "Could not restart comar"
-#~ msgstr "impossibile riavviare comar"
-
-#~ msgid "connection with comar unexpectedly closed"
-#~ msgstr "connessione con comar chiusa inaspettatamente"
-
-#~ msgid "Configuration error: %s"
-#~ msgstr "Errore di configurazione: %s"
-
-#~ msgid "comar denied our access"
-#~ msgstr "comar ha negato l'accesso"
-
-#~ msgid "Item not found"
-#~ msgstr "Chiave %s non trovata"
-
-#~ msgid "MetaData format wrong"
-#~ msgstr "Formato MetaData errato"
-
-#~ msgid "No updates available for repository %s."
-#~ msgstr "Nessun aggiornamento disponibile per il repository %s."
-
-#~ msgid "Rebuilding package database"
-#~ msgstr "Ricostruzione del database dei pacchetti"
-
-#~ msgid ""
-#~ "An error has occured while running LZMA:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Errore durante l'esecuzione di LZMA:\n"
-#~ "%s"
-
-#~ msgid "Archive type not recognized"
-#~ msgstr "Tipo di archivio non riconosciuto"
-
-#~ msgid "Metadata XML '%s' cannot be found"
-#~ msgstr "Impossibile trovare i Metadata XML'%s'"
-
-#~ msgid "MetaData format wrong (%s)"
-#~ msgstr "Formato Metadata errato (%s)"
-
-#~ msgid "Files XML '%s' cannot be found"
-#~ msgstr "Impossibile trovare i file XML '%s'"
-
-#~ msgid "generic help string for any command"
-#~ msgstr "testo di aiuto generico per qualsiasi comando"
-
-#~ msgid "common options"
-#~ msgstr "opzioni comuni"
-
-#~ msgid ""
-#~ "This is a fall back function. If the implementer module provides an\n"
-#~ "        options function it will be called"
-#~ msgstr ""
-#~ "Questa è una funzione di fallback. Se il modulo implementante fornisce\n"
-#~ "         una funzione di opzione essa verrà chiamata"
-
-#~ msgid "initialize PiSi components"
-#~ msgstr "inizializza i componenti di PiSi"
-
-#~ msgid "do cleanup work for PiSi components"
-#~ msgstr "effettua lavoro di pulizia per i componenti PiSi"
-
-#~ msgid "print help for the command"
-#~ msgstr "stampa l'aiuto per il comando"
-
-#~ msgid "exit program"
-#~ msgstr "esce dal programma"
-
-#~ msgid ""
-#~ "\n"
-#~ "Files:"
-#~ msgstr ""
-#~ "\n"
-#~ "File:"
-
-#~ msgid "File information not available"
-#~ msgstr "Informazioni sul file non disponibili"
-
-#~ msgid "Show details"
-#~ msgstr "Mostra dettagli"
-
-#~ msgid "Fuzzy search"
-#~ msgstr "Ricerca fuzzy"
-
-#~ msgid "Type: %s, Hash: %s"
-#~ msgstr "Tipo: %s, Hash: %s"
-
-#~ msgid "Information for component %s not available"
-#~ msgstr "Nessuna informazione disponibile per il pacchetto %s"
-
-#~ msgid "No such file or no permission to read"
-#~ msgstr "File non esistente o permesso di lettura negato"
-
-#~ msgid "Requested range not satisfiable, starting again."
-#~ msgstr "Impossibile soddisfare l'intervallo richiesto, inizio di nuovo."
-
-#~ msgid "Cannot fetch %s; value error: %s"
-#~ msgstr "Impossibile recuperare %s; valore errore: %s"
-
-#~ msgid "Please check your network connections and try again. (%s)"
-#~ msgstr "Controlla per favore la tua connessione di rete e riprova. (%s)"
-
-#~ msgid "Cannot fetch %s; (%s): %s"
-#~ msgstr "Impossibile recuperare %s; (%s): %s"
-
-#~ msgid "ftp error"
-#~ msgstr "errore ftp"
-
-#~ msgid "Updating package database of %s"
-#~ msgstr "Aggiornamento del database dei pacchetti di %s"
-
-#~ msgid "purged"
-#~ msgstr "rimosso completamente"
-
-#~ msgid "Already installed"
-#~ msgstr "Già installato"
-
-#~ msgid "Key %s in repo %s not found"
-#~ msgstr "Chiave %s nel repository %s non trovata"
-
-#~ msgid "Database version for %s insufficient. Please run rebuild-db command."
-#~ msgstr "Versione del database per %s insufficiente. Lancia per favore il comando rebuild-db."
-
-#~ msgid "Database version for %s greater than PiSi version. You need a newer PiSi."
-#~ msgstr "La versione del database per %s è maggiore della versione di PiSi. Ti serve una versione più recente di PiSi."
-
-#~ msgid "Cannot attain write access to database environment"
-#~ msgstr "Impossibile ottenere accesso in scrittura all'ambiente del database"
-
-#~ msgid "Database version %s not present."
-#~ msgstr "Versione del database %s non presente."
-
-#~ msgid "Cannot attain read access to database environment"
-#~ msgstr "Impossibile ottenere accesso in lettura all'ambiente del database"
-
-#~ msgid "Cannot attain read or write access to database %s"
-#~ msgstr "Impossibile ottenere accesso in lettura o scrittura al database %s"
-
-#~ msgid "Flags should be one of 'r', 'w', 'c' or 'n' or use the bsddb.db.DB_* flags"
-#~ msgstr "I flag devono essere uno di 'r', 'w, 'c', o 'n' oppure utilizza i flag bsddb.db.DB_*"
-
-#~ msgid "No repository named %s exists"
-#~ msgstr "Non esiste alcun repository di nome %s"
-
-#~ msgid "Repository %s already exists"
-#~ msgstr "Il repository %s esiste già"
-
-#~ msgid "Cannot add repository at position %s"
-#~ msgstr "Impossibile aggiungere un repository in posizione %s"
-
-#~ msgid "Source package %s not found"
-#~ msgstr "Pacchetto sorgente %s non trovato"
-
-#~ msgid "Cannot calculate SHA1 hash of given data"
-#~ msgstr "Impossibile calcolare l'hash SHA1 dei dati forniti"
-
-#~ msgid "Repository distribution does not match. Removing %s from system."
+#~ msgid "Repository architecture does not match. Removing %s from system."
 #~ msgstr "Il repository %s non può essere raggiunto. Rimozione di %s dal sistema in corso."
 
-#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
-#~ msgstr "Nome: %s, versione: %s, release: %s, build %s\n"
+#~ msgid "Scanning binary packages...\n"
+#~ msgstr "Scansione dei pacchetti binari in corso...\n"
 
-#~ msgid "Package %s is already at the latest build %s."
-#~ msgstr "Il pacchetto %s è già alla build più recente %s."
+#~ msgid "Scanning source repository...\n"
+#~ msgstr "Scansione del repository sorgente in corso...\n"
 
-#~ msgid "Creating delta PiSi package between %s %s"
-#~ msgstr "Creazione del pacchetto delta PiSi tra %s e %s"
+#~ msgid "Dont generate the web site.\n"
+#~ msgstr "Non generare il sito web.\n"
 
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Impossibile creare delta per lo stesso pacchetto!"
+#~ msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
+#~ msgstr "Utilizzo: repostats.py [OPZIONI] percorso-repo-sorgente [percorso-repo-binario]\n"
 
-#~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
-#~ msgstr "Tutti i file nella cartella di installazione (%s) sono stati raccolti dai pacchetti"
+#~ msgid ""
+#~ "Cannot parse '%s':\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Impossibile analizzare '%s':\n"
+#~ "%s\n"
 
-#~ msgid "Done."
-#~ msgstr "Fatto."
+#~ msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+#~ msgstr "Lo sviluppatore '%s <%s>' ha un altro indirizzo di posta elettronica '%s' nel pacchetto sorgente '%s'"
 
-#~ msgid "Creating PiSi package %s."
-#~ msgstr "Creazione del pacchetto PiSi %s."
+#~ msgid ""
+#~ "Duplicate source packages:\n"
+#~ "%s\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Pacchetti sorgenti duplicati:\n"
+#~ "%s\n"
+#~ "%s\n"
 
-#~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
-#~ msgstr "Il numero di build non è disponibile. Per le build dal repository devi attivare buildno in pisi.conf."
+#~ msgid ""
+#~ "Duplicate binary packages:\n"
+#~ "%s\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Pacchetti binari duplicati:\n"
+#~ "%s\n"
+#~ "%s\n"
 
-#~ msgid "Generating %s,"
-#~ msgstr "Generazione di %s,"
+#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
+#~ msgstr "Switch di sicurezza: i seguenti pacchetti in system.base verranno aggiornati: "
 
-#~ msgid "There is no change from previous build %d"
-#~ msgstr "Nessun cambiamento dalla build precedente %d"
+#~ msgid "Safety switch: Following packages in system.base will be installed: "
+#~ msgstr "Switch di sicurezza: i seguenti pacchetti in system.base verranno installati: "
 
-#~ msgid "There are changes, incrementing build no to %d"
-#~ msgstr "Cambiamenti rilevati, incremento del numero di build a %d"
+#~ msgid "Reverse dependency %s of %s cannot be satisfied"
+#~ msgstr "La dipendenza inversa %s di %s non può essere soddisfatta"
 
-#~ msgid "(old package lacks a build no, setting build no to 1.)"
-#~ msgstr "(il vecchio pacchetto non ha un numero di build, lo imposto a 1)"
+#~ msgid ""
+#~ "The following packages will be installed\n"
+#~ "in the respective order to satisfy extra dependencies:\n"
+#~ msgstr ""
+#~ "I seguenti pacchetti verranno installati nel\n"
+#~ "rispettivo ordine per soddisfare le dipendenze aggiuntive:\n"
 
-#~ msgid "(no previous build found, setting build no to 1.)"
-#~ msgstr "(nessuna build precedente trovata, imposto il numero di build a 1)"
+#~ msgid "Storing %s."
+#~ msgstr "Salvataggio di %s."
 
-#~ msgid "(found old version %s)"
-#~ msgstr "(trovata vecchia versione %s)"
-
-#~ msgid "gzip compression not supported yet"
-#~ msgstr "la compressione gzip non è ancora supportata "
-
-#~ msgid "zip compression not supported yet"
-#~ msgstr "la compressione zip non è ancora supportata "
-
-#~ msgid "Indexing current directory."
-#~ msgstr "Indicizzazione della cartella corrente."
-
-#~ msgid "package_format must be one of %s "
-#~ msgstr "il formato del pacchetto deve essere uno tra %s"
-
-#~ msgid "PiSi binary package formats: '1.0', '1.1' (default)"
-#~ msgstr "Formati dei pacchetti binari PiSi: '1.0', '1.1' (predefinito)"
-
-#~ msgid "Do not take build no into account."
-#~ msgstr "Non prendere in considerazione il numero di build."
-
-#~ msgid "Downgrade to old distribution build?"
-#~ msgstr "Ritornare alla vecchia build della distribuzione?"
-
-#~ msgid "Upgrading to new distribution build"
-#~ msgstr "Aggiornamento alla nuova build della distribuzione"
-
-#~ msgid "%s is added to %s/language.%s.dat"
-#~ msgstr "%s aggiunto a %s/language.%s.dat"
+#~ msgid "Storing %s, "
+#~ msgstr "Salvataggio di %s, "

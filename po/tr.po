@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2011-02-27 18:45+EET\n"
+"POT-Creation-Date: 2011-03-23 14:02+EET\n"
 "PO-Revision-Date: 2010-03-24 16:28+0200\n"
 "Last-Translator: Fatih Aşıcı <fatih@pardus.org.tr>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -609,7 +609,7 @@ msgstr "%s pakedi etkin hiçbir depoda bulunamadı."
 msgid "Installing %s, version %s, release %s"
 msgstr "%s paketi %s sürümü %s yayımı kuruluyor"
 
-#: pisi/atomicoperations.py:192 pisi/operations/build.py:735
+#: pisi/atomicoperations.py:192 pisi/operations/build.py:757
 msgid "%s-%s is not a valid PiSi version format"
 msgstr "%s-%s PiSi sürüm biçimine uymuyor"
 
@@ -2170,7 +2170,7 @@ msgstr "comar betikleri kayıtlardan siliniyor"
 msgid "Destination directory %s does not exist. Creating it."
 msgstr "Hedef dizini %s bulunamadı. Yaratılıyor."
 
-#: pisi/configfile.py:128
+#: pisi/configfile.py:127
 msgid "No section by name '%s'"
 msgstr "'%s' isminde bir bölüm yok."
 
@@ -2432,194 +2432,202 @@ msgstr "Kaynak adresi: %s"
 msgid "Source %s not found in any active repository."
 msgstr "%s isimli kaynak paket etkin depolarda bulunamadı."
 
-#: pisi/operations/build.py:312
+#: pisi/operations/build.py:317
 msgid "pspec.xml avoids this package from building for '%s'"
 msgstr "pspec.xml bu kaynak paketin '%s' için inşa edilmesini engelliyor"
 
-#: pisi/operations/build.py:315
+#: pisi/operations/build.py:320
 msgid "Building source package: %s"
 msgstr "Kaynak paket inşa ediliyor: %s"
 
-#: pisi/operations/build.py:363
+#: pisi/operations/build.py:368
 #, fuzzy
 msgid "Rebuilding for %s"
 msgstr "Biçem dosyası %s inşa ediliyor."
 
-#: pisi/operations/build.py:391
+#: pisi/operations/build.py:396
 msgid "IceCream detected. Make sure your daemon is up and running..."
 msgstr "IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
 
-#: pisi/operations/build.py:401
+#: pisi/operations/build.py:406
 msgid "CCache detected..."
 msgstr "CCache bulundu..."
 
-#: pisi/operations/build.py:473
+#: pisi/operations/build.py:478
 msgid "PartOf tag not defined, looking for component"
 msgstr "PartOf imi tanımlanmamış, bileşen araştırılıyor"
 
-#: pisi/operations/build.py:482
+#: pisi/operations/build.py:487
 msgid "Cannot find component.xml in remote directory, Source is now part of unknown component"
 msgstr "component.xml uzaktaki dizinde bulunamadı, kaynak bilinmeyen bir bileşenin parçası"
 
-#: pisi/operations/build.py:490
+#: pisi/operations/build.py:495
 msgid "Cannot find component.xml in upper directory, Source is now part of unknown component"
 msgstr "component.xml bir üst dizinde bulunamadı, kaynak bilinmeyen bir bileşenin parçası"
 
-#: pisi/operations/build.py:498
+#: pisi/operations/build.py:503
 msgid "Source is part of %s component"
 msgstr "Kaynak %s bileşeninin parçası"
 
-#: pisi/operations/build.py:505
+#: pisi/operations/build.py:510
 msgid "Unpacking archive(s)..."
 msgstr "Arşiv(ler) açılıyor..."
 
-#: pisi/operations/build.py:511
+#: pisi/operations/build.py:516
 msgid " unpacked (%s)"
 msgstr " açıldı (%s)"
 
-#: pisi/operations/build.py:516
+#: pisi/operations/build.py:521
 msgid "Setting up source..."
 msgstr "Kaynak yapılandırılıyor..."
 
-#: pisi/operations/build.py:521
+#: pisi/operations/build.py:526
 msgid "Building source..."
 msgstr "Kaynak inşa ediliyor..."
 
-#: pisi/operations/build.py:526
+#: pisi/operations/build.py:531
 msgid "Testing package..."
 msgstr "Paket test ediliyor..."
 
-#: pisi/operations/build.py:530
+#: pisi/operations/build.py:535
 msgid "Installing..."
 msgstr "Kuruluyor..."
 
-#: pisi/operations/build.py:596
+#: pisi/operations/build.py:601
 msgid "Unable to read Actions Script (%s): %s"
 msgstr "Actions betiği okunamıyor (%s): %s"
 
-#: pisi/operations/build.py:599
+#: pisi/operations/build.py:604
 msgid "SyntaxError in Actions Script (%s): %s"
 msgstr "Actions betiğinde sözdizimi hatası (%s): %s"
 
-#: pisi/operations/build.py:629
+#: pisi/operations/build.py:634
 msgid "Unable to read COMAR script (%s): %s"
 msgstr "COMAR betiği okunamıyor (%s): %s"
 
-#: pisi/operations/build.py:632
+#: pisi/operations/build.py:637
 msgid "SyntaxError in COMAR file (%s): %s"
 msgstr "COMAR dosyasında sözdizimi hatası (%s): %s"
 
-#: pisi/operations/build.py:664
+#: pisi/operations/build.py:669
 msgid "Sandbox violation: %s (%s -> %s)"
 msgstr "Sandbox ihlali: %s (%s -> %s)"
 
-#: pisi/operations/build.py:680 pisi/util.py:549
+#: pisi/operations/build.py:685 pisi/util.py:549
 msgid "ERROR: WorkDir (%s) does not exist\n"
 msgstr "HATA: Çalışma dizini (%s) bulunamadı\n"
 
-#: pisi/operations/build.py:689
+#: pisi/operations/build.py:694
 msgid "Sandbox enabled build..."
 msgstr "Sandbox açık inşa..."
 
-#: pisi/operations/build.py:713
+#: pisi/operations/build.py:718
 msgid "Sandbox violation result:"
 msgstr "Sandbox ihlal sonucu:"
 
-#: pisi/operations/build.py:718
+#: pisi/operations/build.py:723
 msgid "Sandbox violations!"
 msgstr "Sandbox ihlali!"
 
-#: pisi/operations/build.py:724
+#: pisi/operations/build.py:729
 msgid "unable to call function from actions: %s"
 msgstr "fonksiyon eylemlerden çağırılamıyor: %s"
 
-#: pisi/operations/build.py:754
+#: pisi/operations/build.py:743
+msgid "Path must start with a slash: %s"
+msgstr ""
+
+#: pisi/operations/build.py:747
+msgid "Multiple 'Path' tags specified for this path: %s"
+msgstr ""
+
+#: pisi/operations/build.py:776
 msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr "Emniyet mandalı: taban geliştirme bileşeni system.devel içindeki bu paketler ek olarak kurulacak: "
 
-#: pisi/operations/build.py:759
+#: pisi/operations/build.py:781
 msgid "Safety switch: system.devel is already installed"
 msgstr "Emniyet mandalı: taban geliştirme bileşeni system.devel zaten kurulu."
 
-#: pisi/operations/build.py:761
+#: pisi/operations/build.py:783
 msgid "Safety switch: the component system.devel cannot be found"
 msgstr "Emniyet mandalı: taban geliştirme bileşeni system.devel bulunamadı."
 
-#: pisi/operations/build.py:770
+#: pisi/operations/build.py:792
 msgid "Unsatisfied Build Dependencies:"
 msgstr "Sağlanmamış İnşa Bağımlılıkları:"
 
-#: pisi/operations/build.py:774
+#: pisi/operations/build.py:796
 msgid "Cannot build package due to unsatisfied build dependencies"
 msgstr "Sağlanmamış inşa bağımlılıkları yüzünden paket inşa edilemiyor."
 
-#: pisi/operations/build.py:779
+#: pisi/operations/build.py:801
 msgid "Build dependency %s cannot be satisfied"
 msgstr "İnşa bağımlılığı %s sağlanamadı."
 
-#: pisi/operations/build.py:781
+#: pisi/operations/build.py:803
 msgid "Do you want to install the unsatisfied build dependencies"
 msgstr "Sağlanmamış inşa bağımlılıklarını kurmak istiyor musunuz?"
 
-#: pisi/operations/build.py:782
+#: pisi/operations/build.py:804
 msgid "Installing build dependencies."
 msgstr "İnşa bağımlılıkları kuruluyor."
 
-#: pisi/operations/build.py:788
+#: pisi/operations/build.py:810
 msgid "Ignoring build dependencies."
 msgstr "İnşa bağımlılıkları yoksayılıyor."
 
-#: pisi/operations/build.py:798
+#: pisi/operations/build.py:820
 msgid "Patch file is missing: %s\n"
 msgstr "Yama dosyası eksik: %s\n"
 
-#: pisi/operations/build.py:800
+#: pisi/operations/build.py:822
 #, fuzzy
 msgid "Patch file is empty: %s"
 msgstr "Yama dosyası eksik: %s\n"
 
-#: pisi/operations/build.py:816
+#: pisi/operations/build.py:838
 msgid "* Applying patch: %s"
 msgstr "* Yama uygulanıyor: %s"
 
-#: pisi/operations/build.py:935
+#: pisi/operations/build.py:957
 msgid "/%s has suid bit set"
 msgstr "/%s dosyasının suid biti etkin"
 
-#: pisi/operations/build.py:1008
+#: pisi/operations/build.py:1030
 msgid "No user named '%s' found on the system"
 msgstr "Sistemde '%s' isminde bir kullanıcı bulunamadı."
 
-#: pisi/operations/build.py:1014
+#: pisi/operations/build.py:1036
 msgid "No group named '%s' found on the system"
 msgstr "Sistemde '%s' isminde bir grup bulunamadı."
 
-#: pisi/operations/build.py:1021
+#: pisi/operations/build.py:1043
 msgid "There are abandoned files under the install dir (%s):"
 msgstr "Kurulum dizini (%s) altında terkedilmiş dosyalar var:"
 
-#: pisi/operations/build.py:1049
+#: pisi/operations/build.py:1071
 msgid "Ignoring empty package %s"
 msgstr "Boş %s paketi yoksayılıyor"
 
-#: pisi/operations/build.py:1053
+#: pisi/operations/build.py:1075
 msgid "Building package: %s"
 msgstr "Paket inşa ediliyor: %s"
 
-#: pisi/operations/build.py:1072 pisi/operations/delta.py:50
+#: pisi/operations/build.py:1094 pisi/operations/delta.py:50
 #: pisi/operations/delta.py:148
 msgid "Creating %s..."
 msgstr "%s oluşturuluyor... "
 
-#: pisi/operations/build.py:1115
+#: pisi/operations/build.py:1137
 msgid "Cleaning build directory..."
 msgstr "İnşa dizini temizleniyor..."
 
-#: pisi/operations/build.py:1118
+#: pisi/operations/build.py:1140
 msgid "Keeping build directory"
 msgstr "İnşa dizini bırakılıyor"
 
-#: pisi/operations/build.py:1171
+#: pisi/operations/build.py:1225
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d hata, %d uyarı"
 
@@ -3157,89 +3165,89 @@ msgstr "Geçersiz delta paket adı: %s"
 msgid "Invalid version string: '%s'"
 msgstr "Hatalı sürüm dizgisi: '%s'"
 
-#~ msgid "Reverse dependency %s of %s cannot be satisfied"
-#~ msgstr "Ters bağımlılık %s, %s paketi için sağlanamadı."
-
-#~ msgid "Repository distribution does not match. Removing %s from system."
-#~ msgstr "Depo dağıtımı sisteminizle uyumsuz. %s deposu sistemden kaldırılıyor."
-
-#~ msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
-#~ msgstr "Dağıtım hakkında bilgi içermediği için bu deponun uyumluluğu denetlenemiyor."
-
-#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
-#~ msgstr "İsim: %s, sürüm %s, yayım %s, inşa %s\n"
-
-#~ msgid "Package %s is already at the latest build %s."
-#~ msgstr "%s paketi zaten (en son) inşa %s."
-
-#~ msgid "Creating delta PiSi package between %s %s"
-#~ msgstr "%s ile %s paketi arasında PiSi delta paketi oluşturuluyor."
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Aynı paket için delta oluşturulamaz!"
-
-#~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
-#~ msgstr "Kurulum dizini (%s) altındaki bütün dosyalar paket(ler) tarafından toplandı."
-
-#~ msgid "Done."
-#~ msgstr "Tamamlandı."
-
-#~ msgid "Creating PiSi package %s."
-#~ msgstr "%s PiSi paketi yaratılıyor."
-
-#~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
-#~ msgstr "İnşa numarası alınamıyor. Depo inşaları için pisi.conf dosyasında buildno seçeneğini etkinleştirmelisiniz."
-
-#~ msgid "Generating %s,"
-#~ msgstr "%s yaratılıyor,"
-
-#~ msgid "There is no change from previous build %d"
-#~ msgstr "Bir önceki %d numaralı inşadan bu yana herhangi bir değişiklik yok."
-
-#~ msgid "There are changes, incrementing build no to %d"
-#~ msgstr "Değişiklikler var, inşa numarası bir arttırılarak %d yapıldı."
-
-#~ msgid "(old package lacks a build no, setting build no to 1.)"
-#~ msgstr "(önceki inşa numaraya sahip değil, inşa numarası 1 yapılıyor.)"
-
-#~ msgid "(no previous build found, setting build no to 1.)"
-#~ msgstr "(eski bir inşa bulunamadı, inşa numarası olarak 1 atanıyor.)"
-
-#~ msgid "(found old version %s)"
-#~ msgstr "(%s numaralı eski sürüm bulundu)"
-
-#~ msgid "gzip compression not supported yet"
-#~ msgstr "gzip sıkıştırma algoritması henüz desteklenmiyor."
-
-#~ msgid "zip compression not supported yet"
-#~ msgstr "zip sıkıştırma henüz desteklenmiyor."
-
-#~ msgid "Indexing current directory."
-#~ msgstr "Güncel dizin kataloglanıyor."
-
-#~ msgid "package_format must be one of %s "
-#~ msgstr "package_format, bunlardan birisi olmalı: %s"
-
-#~ msgid "PiSi binary package formats: '1.0', '1.1' (default)"
-#~ msgstr "PiSi ikili paket biçimleri: '1.0', '1.1' (öntanımlı)"
-
-#~ msgid "Do not take build no into account."
-#~ msgstr "İnşa numarasını dikkate alma."
-
-#~ msgid "Downgrade to old distribution build?"
-#~ msgstr "Eski dağıtım inşasına dönülsün mü?"
-
-#~ msgid "Upgrading to new distribution build"
-#~ msgstr "Yeni dağıtım inşasına yükseltiliyor."
-
-#~ msgid "%s %s is added to %s/language.%s.dat "
-#~ msgstr "%s %s %s/language.%s.dat dosyasına eklendi."
-
-#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
+#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
 #~ msgstr "\\languages{%s}{%s}{}{%s}{%s} %s/language.%s.def dosyasına eklendi."
 
 #~ msgid "%s is added to %s/language.%s.dat"
 #~ msgstr "%s %s/language.%s.dat dosyasına eklendi."
 
-#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
+#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
 #~ msgstr "\\languages{%s}{%s}{}{%s}{%s} %s/language.%s.def dosyasına eklendi."
+
+#~ msgid "%s %s is added to %s/language.%s.dat "
+#~ msgstr "%s %s %s/language.%s.dat dosyasına eklendi."
+
+#~ msgid "Upgrading to new distribution build"
+#~ msgstr "Yeni dağıtım inşasına yükseltiliyor."
+
+#~ msgid "Downgrade to old distribution build?"
+#~ msgstr "Eski dağıtım inşasına dönülsün mü?"
+
+#~ msgid "Do not take build no into account."
+#~ msgstr "İnşa numarasını dikkate alma."
+
+#~ msgid "PiSi binary package formats: '1.0', '1.1' (default)"
+#~ msgstr "PiSi ikili paket biçimleri: '1.0', '1.1' (öntanımlı)"
+
+#~ msgid "package_format must be one of %s "
+#~ msgstr "package_format, bunlardan birisi olmalı: %s"
+
+#~ msgid "Indexing current directory."
+#~ msgstr "Güncel dizin kataloglanıyor."
+
+#~ msgid "zip compression not supported yet"
+#~ msgstr "zip sıkıştırma henüz desteklenmiyor."
+
+#~ msgid "gzip compression not supported yet"
+#~ msgstr "gzip sıkıştırma algoritması henüz desteklenmiyor."
+
+#~ msgid "(found old version %s)"
+#~ msgstr "(%s numaralı eski sürüm bulundu)"
+
+#~ msgid "(no previous build found, setting build no to 1.)"
+#~ msgstr "(eski bir inşa bulunamadı, inşa numarası olarak 1 atanıyor.)"
+
+#~ msgid "(old package lacks a build no, setting build no to 1.)"
+#~ msgstr "(önceki inşa numaraya sahip değil, inşa numarası 1 yapılıyor.)"
+
+#~ msgid "There are changes, incrementing build no to %d"
+#~ msgstr "Değişiklikler var, inşa numarası bir arttırılarak %d yapıldı."
+
+#~ msgid "There is no change from previous build %d"
+#~ msgstr "Bir önceki %d numaralı inşadan bu yana herhangi bir değişiklik yok."
+
+#~ msgid "Generating %s,"
+#~ msgstr "%s yaratılıyor,"
+
+#~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
+#~ msgstr "İnşa numarası alınamıyor. Depo inşaları için pisi.conf dosyasında buildno seçeneğini etkinleştirmelisiniz."
+
+#~ msgid "Creating PiSi package %s."
+#~ msgstr "%s PiSi paketi yaratılıyor."
+
+#~ msgid "Done."
+#~ msgstr "Tamamlandı."
+
+#~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
+#~ msgstr "Kurulum dizini (%s) altındaki bütün dosyalar paket(ler) tarafından toplandı."
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Aynı paket için delta oluşturulamaz!"
+
+#~ msgid "Creating delta PiSi package between %s %s"
+#~ msgstr "%s ile %s paketi arasında PiSi delta paketi oluşturuluyor."
+
+#~ msgid "Package %s is already at the latest build %s."
+#~ msgstr "%s paketi zaten (en son) inşa %s."
+
+#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
+#~ msgstr "İsim: %s, sürüm %s, yayım %s, inşa %s\n"
+
+#~ msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
+#~ msgstr "Dağıtım hakkında bilgi içermediği için bu deponun uyumluluğu denetlenemiyor."
+
+#~ msgid "Repository distribution does not match. Removing %s from system."
+#~ msgstr "Depo dağıtımı sisteminizle uyumsuz. %s deposu sistemden kaldırılıyor."
+
+#~ msgid "Reverse dependency %s of %s cannot be satisfied"
+#~ msgstr "Ters bağımlılık %s, %s paketi için sağlanamadı."

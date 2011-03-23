@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PiSi\n"
-"POT-Creation-Date: 2011-02-27 18:45+EET\n"
+"POT-Creation-Date: 2011-03-23 14:02+EET\n"
 "PO-Revision-Date: 2010-12-27 13:15+0100\n"
 "Last-Translator: Attila Siposs <sipiatti@gmail.com>\n"
 "Language-Team: Hungarian <pardus-translators@pardus.org.tr>\n"
@@ -595,7 +595,7 @@ msgstr "A(z) %s csomag nem található meg az aktív tárolókban."
 msgid "Installing %s, version %s, release %s"
 msgstr "%s telepítése, verzió %s, kiadás %s"
 
-#: pisi/atomicoperations.py:192 pisi/operations/build.py:735
+#: pisi/atomicoperations.py:192 pisi/operations/build.py:757
 msgid "%s-%s is not a valid PiSi version format"
 msgstr "%s-%s nem érvényes PiSi verzió formátum"
 
@@ -2148,7 +2148,7 @@ msgstr "Comar parancsfájl bejegyzésének eltávolítása"
 msgid "Destination directory %s does not exist. Creating it."
 msgstr "A(z) %s célkönyvtár nem létezik. Létrehozom."
 
-#: pisi/configfile.py:128
+#: pisi/configfile.py:127
 msgid "No section by name '%s'"
 msgstr "Nem létezik '%s' nevű szakasz"
 
@@ -2409,194 +2409,202 @@ msgstr "Forrás URI: %s"
 msgid "Source %s not found in any active repository."
 msgstr "A(z) %s forrás egyik aktív tárolóban sem található."
 
-#: pisi/operations/build.py:312
+#: pisi/operations/build.py:317
 msgid "pspec.xml avoids this package from building for '%s'"
 msgstr "A pspec.xml óva int a csomag '%s' számára való építésétől."
 
-#: pisi/operations/build.py:315
+#: pisi/operations/build.py:320
 msgid "Building source package: %s"
 msgstr "PiSi forráscsomag készítése: %s"
 
-#: pisi/operations/build.py:363
+#: pisi/operations/build.py:368
 #, fuzzy
 msgid "Rebuilding for %s"
 msgstr "A(z) %s formátumfájl építése"
 
-#: pisi/operations/build.py:391
+#: pisi/operations/build.py:396
 msgid "IceCream detected. Make sure your daemon is up and running..."
 msgstr "IceCream észlelve. Győződjön meg róla, hogy a démon működik."
 
-#: pisi/operations/build.py:401
+#: pisi/operations/build.py:406
 msgid "CCache detected..."
 msgstr "CCache észlelve..."
 
-#: pisi/operations/build.py:473
+#: pisi/operations/build.py:478
 msgid "PartOf tag not defined, looking for component"
 msgstr "PartOf címke nincs definiálva, komponens keresése"
 
-#: pisi/operations/build.py:482
+#: pisi/operations/build.py:487
 msgid "Cannot find component.xml in remote directory, Source is now part of unknown component"
 msgstr "Nem található component.xml a távoli könyvtárban. A forrás mostantól ismeretlen komponens része."
 
-#: pisi/operations/build.py:490
+#: pisi/operations/build.py:495
 msgid "Cannot find component.xml in upper directory, Source is now part of unknown component"
 msgstr "Nem található component.xml a szülő könyvtárban. A forrás mostantól imseretlne komponens része."
 
-#: pisi/operations/build.py:498
+#: pisi/operations/build.py:503
 msgid "Source is part of %s component"
 msgstr "A forrás a(z) %s komponens része."
 
-#: pisi/operations/build.py:505
+#: pisi/operations/build.py:510
 msgid "Unpacking archive(s)..."
 msgstr "Archívumok kicsomagolása..."
 
-#: pisi/operations/build.py:511
+#: pisi/operations/build.py:516
 msgid " unpacked (%s)"
 msgstr " kicsomagolva (%s)"
 
-#: pisi/operations/build.py:516
+#: pisi/operations/build.py:521
 msgid "Setting up source..."
 msgstr "Forrás beállítása..."
 
-#: pisi/operations/build.py:521
+#: pisi/operations/build.py:526
 msgid "Building source..."
 msgstr "Forrás építése..."
 
-#: pisi/operations/build.py:526
+#: pisi/operations/build.py:531
 msgid "Testing package..."
 msgstr "Csomag tesztelése..."
 
-#: pisi/operations/build.py:530
+#: pisi/operations/build.py:535
 msgid "Installing..."
 msgstr "Telepítés..."
 
-#: pisi/operations/build.py:596
+#: pisi/operations/build.py:601
 msgid "Unable to read Actions Script (%s): %s"
 msgstr "Az Action Script (%s) nem olvasható: %s"
 
-#: pisi/operations/build.py:599
+#: pisi/operations/build.py:604
 msgid "SyntaxError in Actions Script (%s): %s"
 msgstr "Szintaktikai hiba az Action Script-ben (%s): %s"
 
-#: pisi/operations/build.py:629
+#: pisi/operations/build.py:634
 msgid "Unable to read COMAR script (%s): %s"
 msgstr "A COMAR script nem olvasható (%s): %s"
 
-#: pisi/operations/build.py:632
+#: pisi/operations/build.py:637
 msgid "SyntaxError in COMAR file (%s): %s"
 msgstr "Szintaktikai hiba a COMAR fájlban (%s): %s"
 
-#: pisi/operations/build.py:664
+#: pisi/operations/build.py:669
 msgid "Sandbox violation: %s (%s -> %s)"
 msgstr "Sandbox violation: %s (%s -> %s)"
 
-#: pisi/operations/build.py:680 pisi/util.py:549
+#: pisi/operations/build.py:685 pisi/util.py:549
 msgid "ERROR: WorkDir (%s) does not exist\n"
 msgstr "HIBA: A(z) %s munkakönyvtár nem létezik.\n"
 
-#: pisi/operations/build.py:689
+#: pisi/operations/build.py:694
 msgid "Sandbox enabled build..."
 msgstr "Sandbox enabled build..."
 
-#: pisi/operations/build.py:713
+#: pisi/operations/build.py:718
 msgid "Sandbox violation result:"
 msgstr "Sandbox violation result:"
 
-#: pisi/operations/build.py:718
+#: pisi/operations/build.py:723
 msgid "Sandbox violations!"
 msgstr "Sandbox violations!"
 
-#: pisi/operations/build.py:724
+#: pisi/operations/build.py:729
 msgid "unable to call function from actions: %s"
 msgstr "unable to call function from actions: %s"
 
-#: pisi/operations/build.py:754
+#: pisi/operations/build.py:743
+msgid "Path must start with a slash: %s"
+msgstr ""
+
+#: pisi/operations/build.py:747
+msgid "Multiple 'Path' tags specified for this path: %s"
+msgstr ""
+
+#: pisi/operations/build.py:776
 msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr "Biztonsági kapcsoló: a következő extra csomagok telepítésre kerülnek a system.devel-ből: "
 
-#: pisi/operations/build.py:759
+#: pisi/operations/build.py:781
 msgid "Safety switch: system.devel is already installed"
 msgstr "Biztonsági kapcsoló: a system.devel már telepítve van"
 
-#: pisi/operations/build.py:761
+#: pisi/operations/build.py:783
 msgid "Safety switch: the component system.devel cannot be found"
 msgstr "Biztonsági kapcsoló: a system.devel komponens nem található"
 
-#: pisi/operations/build.py:770
+#: pisi/operations/build.py:792
 msgid "Unsatisfied Build Dependencies:"
 msgstr "Teljesíthetetlen függőségek:"
 
-#: pisi/operations/build.py:774
+#: pisi/operations/build.py:796
 msgid "Cannot build package due to unsatisfied build dependencies"
 msgstr "A csomag nem készíthető el teljesítetlen függőségek miatt"
 
-#: pisi/operations/build.py:779
+#: pisi/operations/build.py:801
 msgid "Build dependency %s cannot be satisfied"
 msgstr "A(z) %s build függőséget nem lehet teljesíteni"
 
-#: pisi/operations/build.py:781
+#: pisi/operations/build.py:803
 msgid "Do you want to install the unsatisfied build dependencies"
 msgstr "Akarja telepíteni a hiányzó függőségeket?"
 
-#: pisi/operations/build.py:782
+#: pisi/operations/build.py:804
 msgid "Installing build dependencies."
 msgstr "Build függőségek telepítése."
 
-#: pisi/operations/build.py:788
+#: pisi/operations/build.py:810
 msgid "Ignoring build dependencies."
 msgstr "Build függőségek kihagyása."
 
-#: pisi/operations/build.py:798
+#: pisi/operations/build.py:820
 msgid "Patch file is missing: %s\n"
 msgstr "Patch fájl nincs meg: %s\n"
 
-#: pisi/operations/build.py:800
+#: pisi/operations/build.py:822
 #, fuzzy
 msgid "Patch file is empty: %s"
 msgstr "Patch fájl nincs meg: %s\n"
 
-#: pisi/operations/build.py:816
+#: pisi/operations/build.py:838
 msgid "* Applying patch: %s"
 msgstr "* Patch alkalmazása: %s"
 
-#: pisi/operations/build.py:935
+#: pisi/operations/build.py:957
 msgid "/%s has suid bit set"
 msgstr "/%s suid bit beállítva"
 
-#: pisi/operations/build.py:1008
+#: pisi/operations/build.py:1030
 msgid "No user named '%s' found on the system"
 msgstr "Nincs '%s' nevű felhasználó a rendszerben"
 
-#: pisi/operations/build.py:1014
+#: pisi/operations/build.py:1036
 msgid "No group named '%s' found on the system"
 msgstr "Nincs '%s' nevű csoport a rendszerben"
 
-#: pisi/operations/build.py:1021
+#: pisi/operations/build.py:1043
 msgid "There are abandoned files under the install dir (%s):"
 msgstr "Gazdátlan fájlok vannak a telepítési könyvtár (%s):"
 
-#: pisi/operations/build.py:1049
+#: pisi/operations/build.py:1071
 msgid "Ignoring empty package %s"
 msgstr "% üres csomag figyelmen kívül hagyása"
 
-#: pisi/operations/build.py:1053
+#: pisi/operations/build.py:1075
 msgid "Building package: %s"
 msgstr "%s csomag elkészítése"
 
-#: pisi/operations/build.py:1072 pisi/operations/delta.py:50
+#: pisi/operations/build.py:1094 pisi/operations/delta.py:50
 #: pisi/operations/delta.py:148
 msgid "Creating %s..."
 msgstr "%s létrehozása..."
 
-#: pisi/operations/build.py:1115
+#: pisi/operations/build.py:1137
 msgid "Cleaning build directory..."
 msgstr "Átmeneti könyvtár tisztítása..."
 
-#: pisi/operations/build.py:1118
+#: pisi/operations/build.py:1140
 msgid "Keeping build directory"
 msgstr "Átmeneti könyvtár megőrzése"
 
-#: pisi/operations/build.py:1171
+#: pisi/operations/build.py:1225
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** hibák száma %d, figyelmeztetések száma %d"
 
@@ -3132,80 +3140,80 @@ msgstr "Érvénytelen deltacsomagnév: %s"
 msgid "Invalid version string: '%s'"
 msgstr "Érvénytelen verzió-sztring: '%s'"
 
-#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
-#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} hozzáadva %s/language.%s.def-hez"
-
-#~ msgid "%s is added to %s/language.%s.dat"
-#~ msgstr "%s hozzáadva %s/language.%s.dat-hoz"
-
-#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
-#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} hozzáadva %s/language.%s.def-hez "
-
-#~ msgid "%s %s is added to %s/language.%s.dat "
-#~ msgstr "%s %s hozzáadva %s/language.%s.dat-hoz "
-
-#~ msgid "Upgrading to new distribution build"
-#~ msgstr "Frissítés a disztribúció új build-változatára"
-
-#~ msgid "Downgrade to old distribution build?"
-#~ msgstr "Visszatér a disztribúció korábbi build-változatára?"
-
-#~ msgid "Do not take build no into account."
-#~ msgstr "Nem veszi figyelembe a \"build-no\" kapcsolót."
-
-#~ msgid "PiSi binary package formats: '1.0', '1.1' (default)"
-#~ msgstr "PiSi bináris csomag formátumok: 1.0', '1.1' (alapértelmezett)"
-
-#~ msgid "package_format must be one of %s "
-#~ msgstr "a csomag formátuma csak a következők egyike lehet:  %s"
-
-#~ msgid "Indexing current directory."
-#~ msgstr "Az aktuális könyvtár indexelése."
-
-#~ msgid "zip compression not supported yet"
-#~ msgstr "A zip tömörítés még nem támogatott."
-
-#~ msgid "gzip compression not supported yet"
-#~ msgstr "A gzip tömörítés még nem támogatott."
-
-#~ msgid "(found old version %s)"
-#~ msgstr "(régebbi verziójú %s-t találtam)"
-
-#~ msgid "(no previous build found, setting build no to 1.)"
-#~ msgstr "(nem találtam régebbi build-et, a sorszám 1-re lesz állítva)"
-
-#~ msgid "(old package lacks a build no, setting build no to 1.)"
-#~ msgstr "(a régi csomgnak nincs build száma, az új build szám ezért 1. lesz)"
-
-#~ msgid "There are changes, incrementing build no to %d"
-#~ msgstr "Változásokat észleltem, a build szám így növelve lesz. Az új érték: %d."
-
-#~ msgid "There is no change from previous build %d"
-#~ msgstr "Nincs változás az előző build-hez (%d) képest."
-
-#~ msgid "Generating %s,"
-#~ msgstr "%s generálása,"
-
-#~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
-#~ msgstr "A build számok használata nem lehetséges. Ha tároló számára épít, engedélyezze a buildno opciót a pisi.conf-ban."
-
-#~ msgid "Creating PiSi package %s."
-#~ msgstr "A(z) %s PiSi csomag létrehozása."
-
-#~ msgid "Done."
-#~ msgstr "Kész."
-
-#~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
-#~ msgstr "A telepési könyvtárban (%s) található valamennyi fájl a csomag(ok)ba gyűjtve"
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Nem hozható létre különbözet ugyanazon csomagból!"
-
-#~ msgid "Creating delta PiSi package between %s %s"
-#~ msgstr "PiSi különbözeti csomag létrehozása %s és %s között."
+#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
+#~ msgstr "Név: %s, verzió: %s, kiadás: %s, build: %s\n"
 
 #~ msgid "Package %s is already at the latest build %s."
 #~ msgstr "A(z) %s csomag már a legutolsó build számot viseli: %s."
 
-#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
-#~ msgstr "Név: %s, verzió: %s, kiadás: %s, build: %s\n"
+#~ msgid "Creating delta PiSi package between %s %s"
+#~ msgstr "PiSi különbözeti csomag létrehozása %s és %s között."
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Nem hozható létre különbözet ugyanazon csomagból!"
+
+#~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
+#~ msgstr "A telepési könyvtárban (%s) található valamennyi fájl a csomag(ok)ba gyűjtve"
+
+#~ msgid "Done."
+#~ msgstr "Kész."
+
+#~ msgid "Creating PiSi package %s."
+#~ msgstr "A(z) %s PiSi csomag létrehozása."
+
+#~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
+#~ msgstr "A build számok használata nem lehetséges. Ha tároló számára épít, engedélyezze a buildno opciót a pisi.conf-ban."
+
+#~ msgid "Generating %s,"
+#~ msgstr "%s generálása,"
+
+#~ msgid "There is no change from previous build %d"
+#~ msgstr "Nincs változás az előző build-hez (%d) képest."
+
+#~ msgid "There are changes, incrementing build no to %d"
+#~ msgstr "Változásokat észleltem, a build szám így növelve lesz. Az új érték: %d."
+
+#~ msgid "(old package lacks a build no, setting build no to 1.)"
+#~ msgstr "(a régi csomgnak nincs build száma, az új build szám ezért 1. lesz)"
+
+#~ msgid "(no previous build found, setting build no to 1.)"
+#~ msgstr "(nem találtam régebbi build-et, a sorszám 1-re lesz állítva)"
+
+#~ msgid "(found old version %s)"
+#~ msgstr "(régebbi verziójú %s-t találtam)"
+
+#~ msgid "gzip compression not supported yet"
+#~ msgstr "A gzip tömörítés még nem támogatott."
+
+#~ msgid "zip compression not supported yet"
+#~ msgstr "A zip tömörítés még nem támogatott."
+
+#~ msgid "Indexing current directory."
+#~ msgstr "Az aktuális könyvtár indexelése."
+
+#~ msgid "package_format must be one of %s "
+#~ msgstr "a csomag formátuma csak a következők egyike lehet:  %s"
+
+#~ msgid "PiSi binary package formats: '1.0', '1.1' (default)"
+#~ msgstr "PiSi bináris csomag formátumok: 1.0', '1.1' (alapértelmezett)"
+
+#~ msgid "Do not take build no into account."
+#~ msgstr "Nem veszi figyelembe a \"build-no\" kapcsolót."
+
+#~ msgid "Downgrade to old distribution build?"
+#~ msgstr "Visszatér a disztribúció korábbi build-változatára?"
+
+#~ msgid "Upgrading to new distribution build"
+#~ msgstr "Frissítés a disztribúció új build-változatára"
+
+#~ msgid "%s %s is added to %s/language.%s.dat "
+#~ msgstr "%s %s hozzáadva %s/language.%s.dat-hoz "
+
+#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
+#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} hozzáadva %s/language.%s.def-hez "
+
+#~ msgid "%s is added to %s/language.%s.dat"
+#~ msgstr "%s hozzáadva %s/language.%s.dat-hoz"
+
+#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
+#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} hozzáadva %s/language.%s.def-hez"
