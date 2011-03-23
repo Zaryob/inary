@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -111,6 +111,9 @@ class Index(xmlfile.XmlFile):
 
         for pkg in util.filter_latest_packages(packages):
             pkg_name = util.parse_package_name(os.path.basename(pkg))[0]
+            if pkg_name.endswith(ctx.const.debug_name_suffix):
+                pkg_name = util.remove_suffix(pkg_name,
+                                              ctx.const.debug_name_suffix)
             if pkg_name not in obsoletes_list:
                 ctx.ui.info(_('Adding %s to package index') % pkg)
                 self.add_package(pkg, deltas, repo_uri)
