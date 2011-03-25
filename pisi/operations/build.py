@@ -1001,6 +1001,9 @@ class Builder:
         if ctx.config.values.build.generatedebug:
             debug_packages = []
             for package in self.spec.packages:
+                if "noDebug" in package.buildFlags:
+                    continue
+
                 obj = self.generate_debug_package_object(package)
                 if obj:
                     debug_packages.append(obj)
@@ -1126,7 +1129,11 @@ class Builder:
             # FIXME Remove this hack
             pkg.metadata.package.debug_package = package.debug_package
 
-            delta_packages = self.build_delta_packages(pkg)
+            if "noDelta" not in package.buildFlags:
+                delta_packages = self.build_delta_packages(pkg)
+            else:
+                delta_packages = []
+
             self.delta_map[name] = delta_packages
 
             pkg.close()
