@@ -1,3 +1,90 @@
+2011-03-25 Fatih Aşıcı <fatih@pardus.org.tr>
+	* l10n: Update Turkish translations
+
+2011-03-25 Fatih Aşıcı <fatih@pardus.org.tr>
+	* dtd,rng: Accept BuildFlags tag inside Package tags
+
+2011-03-25 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build,specfile: Implement support for build flags
+
+	Currently, it supports two flags: noDebug, noDelta.
+
+	The usage is simple:
+
+	    <Package>
+	        ...
+	        <BuildFlags>
+	            <Flag>noDebug</Flag>
+	            <Flag>noDelta</Flag>
+	        </BuildFlags>
+	        ...
+	    </Package>
+
+	noDebug flag is used to disable building of a debug package for this
+	package tag.
+
+	noDelta flag is used to disable building of delta packages
+	automatically. It doesn't change the behaviour of "pisi delta" command.
+
+2011-03-23 Fatih Aşıcı <fatih@pardus.org.tr>
+	* index: Ignore debug packages of obsoleted packages
+
+2011-03-23 Fatih Aşıcı <fatih@pardus.org.tr>
+	* l10n: Update messages
+
+2011-03-23 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Add a method to determine delta packages to be created
+
+	This will be used by buildfarm. It accepts release numbers to create
+	delta packages for stable distribution releases. If the release number
+	is not given, it searches the binary package dirs for old packages and
+	creates delta packages. max_count can be specified to limit numbers of
+	delta packages.
+
+	It is possible to override search paths via search_paths parameter.
+
+	release and max_count parameters cannot be used at the same time.
+
+	This commit also removes the max_delta_count option from config file
+	since it is useless and confusing.
+
+2011-02-28 H. İbrahim Güngör <ibrahim@pardus.org.tr>
+	* l10n: Revert the latest Italian translation which breaks pisi.
+
+2011-02-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Fail if a path does not start with a slash
+
+2011-02-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Do not allow duplicate path values in spec file
+
+2011-02-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* l10n: Update messages
+
+2011-02-23 Fatih Aşıcı <fatih@pardus.org.tr>
+	* installdb: Parse directory names correctly
+
+	parse_package_name cannot parse directory names like "zlib-32bit".
+	Implement a function to split names.
+
+	Bumped cache version to force update.
+
+2011-02-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Reload actions script for each build type
+
+	So we can use get.buildTYPE() outside the functions in actions.py.
+
+2011-02-21 Fatih Aşıcı <fatih@pardus.org.tr>
+	* pisi 2.4_alpha3
+
+	This is the third alpha for the upcoming 2.4.x releases. This release
+	introduces a new feature for building source packages with different
+	configurations using the same actions.py. This is achieved with
+	BuildType tags specified between Package tags.
+
+	It is also possible to write build dependencies inside Package tags with
+	this release. This is needed since additional build dependencies could
+	be needed for different build types.
+
 2011-02-20 Fatih Aşıcı <fatih@pardus.org.tr>
 	* build,config: Add a new config option to ignore build types
 
