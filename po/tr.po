@@ -7,7 +7,7 @@
 # Faik Uygur <faik@pardus.org.tr>, 2006, 2007, 2008, 2009, 2010.
 # Ozan Çağlayan <ozan@pardus.org.tr>, 2009.
 # Necmettin Begiter <necmettin.begiter@gmail.com>, 2009.
-# Fatih Aşıcı <fatih@pardus.org.tr>, 2010.
+# Fatih Aşıcı <fatih@pardus.org.tr>, 2010, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
@@ -1291,9 +1291,8 @@ msgid "Do not show installed packages"
 msgstr "Kurulu paketleri gösterme."
 
 #: pisi/cli/graph.py:56
-#, fuzzy
 msgid "Draw reverse dependency graph"
-msgstr "Ters Bağımlılıklar:"
+msgstr "Ters bağımlılık grafiği çiz"
 
 #: pisi/cli/graph.py:59
 msgid "Dot output file"
@@ -2312,17 +2311,16 @@ msgstr "Sunucu kısmî indirimleri desteklemiyor. Dosyanın daha önce indirilen
 
 #: pisi/file.py:35
 msgid "URL %s already downloaded as %s"
-msgstr ""
+msgstr "%s adresi zaten %s olarak indirilmişti."
 
 # pisi/actionsapi/autotools.py:77 :87
 #: pisi/file.py:42
-#, fuzzy
 msgid "No signature found for %s"
-msgstr "cmake için yapılandırma betiği bulunamadı."
+msgstr "%s dosyası için imza bulunamadı."
 
 #: pisi/file.py:50
 msgid " invalid for %s"
-msgstr ""
+msgstr " %s için geçersiz"
 
 #: pisi/file.py:72
 msgid "uri must have type either URI or string"
@@ -2390,7 +2388,7 @@ msgstr "%s %s sürümünden %s sürümüne indirildi."
 
 #: pisi/history.py:104 pisi/history.py:126
 msgid "Unknown package operation"
-msgstr ""
+msgstr "Bilinmeyen paket işlemi"
 
 #: pisi/index.py:115
 msgid "Adding %s to package index"
@@ -2441,9 +2439,8 @@ msgid "Building source package: %s"
 msgstr "Kaynak paket inşa ediliyor: %s"
 
 #: pisi/operations/build.py:368
-#, fuzzy
 msgid "Rebuilding for %s"
-msgstr "Biçem dosyası %s inşa ediliyor."
+msgstr "%s için tekrar inşa ediliyor"
 
 #: pisi/operations/build.py:396
 msgid "IceCream detected. Make sure your daemon is up and running..."
@@ -2535,11 +2532,11 @@ msgstr "fonksiyon eylemlerden çağırılamıyor: %s"
 
 #: pisi/operations/build.py:743
 msgid "Path must start with a slash: %s"
-msgstr ""
+msgstr "Yol, bölme işareti ile başlamalı: %s"
 
 #: pisi/operations/build.py:747
 msgid "Multiple 'Path' tags specified for this path: %s"
-msgstr ""
+msgstr "Bu yol için birden fazla 'Path' etiketi yazılmış: %s"
 
 #: pisi/operations/build.py:776
 msgid "Safety switch: following extra packages in system.devel will be installed: "
@@ -2582,9 +2579,8 @@ msgid "Patch file is missing: %s\n"
 msgstr "Yama dosyası eksik: %s\n"
 
 #: pisi/operations/build.py:822
-#, fuzzy
 msgid "Patch file is empty: %s"
-msgstr "Yama dosyası eksik: %s\n"
+msgstr "Yama dosyası boş: %s"
 
 #: pisi/operations/build.py:838
 msgid "* Applying patch: %s"
