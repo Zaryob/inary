@@ -52,6 +52,10 @@
 <!ATTLIST Archive type CDATA #REQUIRED>
 <!ATTLIST Archive target CDATA #IMPLIED>
 
+<!ELEMENT BuildFlags (Flag*)>
+
+<!ELEMENT Flag (#PCDATA)>
+
 <!ELEMENT BuildType (#PCDATA)>
 
 <!ELEMENT BuildDependencies (Dependency*)>
@@ -84,6 +88,7 @@
 	PartOf |
 	Summary |
 	Description |
+	BuildFlags |
 	BuildType |
 	BuildDependencies |
 	RuntimeDependencies |

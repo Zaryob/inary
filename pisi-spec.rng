@@ -86,6 +86,9 @@
                 <ref name="Description"/>
             </zeroOrMore>
             <optional>
+                <ref name="BuildFlags"/>
+            </optional>
+            <optional>
                 <ref name="BuildType"/>
             </optional>
             <optional>
@@ -1337,6 +1340,25 @@
                 <attribute name="target"/>
             </optional>
         </group>
+    </define>
+
+    <!-- BuildFlags -->
+    <define name="BuildFlags">
+        <element name="BuildFlags">
+            <oneOrMore>
+                <ref name="Flag"/>
+            </oneOrMore>
+        </element>
+    </define>
+
+    <!-- Flag -->
+    <define name="Flag">
+        <element name="Flag">
+            <choice>
+                <value>noDebug</value>
+                <value>noDelta</value>
+            </choice>
+        </element>
     </define>
 
     <!-- BuildType -->
