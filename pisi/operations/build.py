@@ -1202,7 +1202,7 @@ class Builder:
                                                  update)
                 old_package = find_old_package(filename, search_paths)
                 if old_package:
-                    found_old_packages[old_release] = old_package
+                    found_old_packages[update.release] = old_package
 
                     if len(found_old_packages) == max_count:
                         break
