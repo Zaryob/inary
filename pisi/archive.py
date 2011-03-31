@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005-2010, TUBITAK/UEKAE
+# Copyright (C) 2005-2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -296,6 +296,45 @@ class ArchiveTar(ArchiveBase):
         for tarinfo in self.tar:
             if callback:
                 callback(tarinfo, extracted=False)
+
+            if tarinfo.issym() and \
+                    os.path.isdir(tarinfo.name) and \
+                    not os.path.islink(tarinfo.name):
+                # Changing a directory with a symlink. tarfile module
+                # cannot handle this case.
+
+                if os.path.isdir(tarinfo.linkname):
+                    # Symlink target is a directory. Move old directory's
+                    # content to this directory.
+                    for filename in os.listdir(tarinfo.name):
+                        old_path = util.join_path(tarinfo.name, filename)
+                        new_path = util.join_path(tarinfo.linkname, filename)
+
+                        if os.path.lexists(new_path):
+                            if not os.path.isdir(new_path):
+                                # A file with the same name exists in the
+                                # target. Remove the one in the old directory.
+                                os.remove(old_path)
+                            continue
+
+                        os.renames(old_path, new_path)
+
+                    os.rmdir(tarinfo.name)
+
+                elif not os.path.lexists(tarinfo.linkname):
+                    # Symlink target does not exist. Assume the old
+                    # directory is moved to another place in package.
+                    os.renames(tarinfo.name, tarinfo.linkname)
+
+                else:
+                    # This should not happen. Probably a packaging error.
+                    # Try to rename directory
+                    try:
+                        os.rename(tarinfo.name,
+                                  "%s.renamed-by-pisi" % tarinfo.name)
+                    except:
+                        # If fails, try to remove it
+                        shutil.rmtree(tarinfo.name)
 
             self.tar.extract(tarinfo)
 
