@@ -1160,10 +1160,10 @@ class Builder:
             search_paths = (ctx.config.compiled_packages_dir(),
                             ctx.config.debug_packages_dir())
 
-        if release is None:
-            self.delta_history_search_paths.append((search_paths, max_count))
-        else:
+        if release:
             self.delta_search_paths[release] = search_paths
+        elif max_count > 0:
+            self.delta_history_search_paths.append((search_paths, max_count))
 
     def build_delta_packages(self, package):
 
@@ -1193,6 +1193,9 @@ class Builder:
                 old_packages[old_release] = old_package
 
         for search_paths, max_count in self.delta_history_search_paths:
+            if max_count < 1:
+                continue
+
             found_old_packages = {}
             for update in self.spec.history[1:]:
                 if update.release in old_packages:
