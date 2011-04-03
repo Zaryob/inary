@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
-"POT-Creation-Date: 2011-03-23 14:02+EET\n"
+"POT-Creation-Date: 2011-04-03 17:19+EEST\n"
 "PO-Revision-Date: 2010-12-27 10:06+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@trixon.se>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
@@ -567,7 +567,7 @@ msgstr "* Lägger till '%s' till db... "
 msgid "OK."
 msgstr "OK."
 
-#: pisi/archive.py:380
+#: pisi/archive.py:419
 msgid "Problem occured while uncompressing %s.Z file"
 msgstr ""
 
@@ -765,7 +765,7 @@ msgstr ""
 msgid "Blame for all of the releases"
 msgstr ""
 
-#: pisi/cli/blame.py:68 pisi/specfile.py:369 pisi/specfile.py:454
+#: pisi/cli/blame.py:68 pisi/specfile.py:370 pisi/specfile.py:455
 msgid "Name: %s, version: %s, release: %s\n"
 msgstr "Namm: %s, version: %s, utgåva: %s\n"
 
@@ -2129,15 +2129,15 @@ msgstr ""
 msgid "Unknown package operation"
 msgstr ""
 
-#: pisi/index.py:115
+#: pisi/index.py:118
 msgid "Adding %s to package index"
 msgstr ""
 
-#: pisi/index.py:132
+#: pisi/index.py:135
 msgid "Package %s: metadata corrupt, skipping..."
 msgstr ""
 
-#: pisi/index.py:192
+#: pisi/index.py:195
 msgid "Adding %s to source index"
 msgstr ""
 
@@ -2331,40 +2331,40 @@ msgstr "* tillämpar patch: %s"
 msgid "/%s has suid bit set"
 msgstr ""
 
-#: pisi/operations/build.py:1030
+#: pisi/operations/build.py:1033
 msgid "No user named '%s' found on the system"
 msgstr ""
 
-#: pisi/operations/build.py:1036
+#: pisi/operations/build.py:1039
 msgid "No group named '%s' found on the system"
 msgstr ""
 
-#: pisi/operations/build.py:1043
+#: pisi/operations/build.py:1046
 msgid "There are abandoned files under the install dir (%s):"
 msgstr ""
 
-#: pisi/operations/build.py:1071
+#: pisi/operations/build.py:1074
 msgid "Ignoring empty package %s"
 msgstr "Hoppar över tomt paket %s"
 
-#: pisi/operations/build.py:1075
+#: pisi/operations/build.py:1078
 msgid "Building package: %s"
 msgstr "Bygger paketet: %s"
 
-#: pisi/operations/build.py:1094 pisi/operations/delta.py:50
-#: pisi/operations/delta.py:148
+#: pisi/operations/build.py:1097 pisi/operations/delta.py:50
+#: pisi/operations/delta.py:154
 msgid "Creating %s..."
 msgstr "Skapar %s... "
 
-#: pisi/operations/build.py:1137
+#: pisi/operations/build.py:1144
 msgid "Cleaning build directory..."
 msgstr "Rensar byggkatalog..."
 
-#: pisi/operations/build.py:1140
+#: pisi/operations/build.py:1147
 msgid "Keeping build directory"
 msgstr "Behåller byggkatalog"
 
-#: pisi/operations/build.py:1225
+#: pisi/operations/build.py:1235
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d fel, %d varning(ar)"
 
@@ -2390,15 +2390,19 @@ msgid ""
 "Missing file: /%s"
 msgstr ""
 
-#: pisi/operations/delta.py:98
+#: pisi/operations/delta.py:60 pisi/operations/delta.py:164
+msgid "All files in the package '%s' are different from the files in the new package. Skipping it..."
+msgstr ""
+
+#: pisi/operations/delta.py:104
 msgid "New package '%s' exists in the list of old packages. Skipping it..."
 msgstr ""
 
-#: pisi/operations/delta.py:132
+#: pisi/operations/delta.py:138
 msgid "The file '%s' belongs to a different package other than '%s'. Skipping it..."
 msgstr ""
 
-#: pisi/operations/delta.py:138
+#: pisi/operations/delta.py:144
 msgid "Package '%s' has the same release number with the new package. Skipping it..."
 msgstr ""
 
@@ -2531,7 +2535,7 @@ msgstr ""
 msgid "Installation order: "
 msgstr "Installationsordning: "
 
-#: pisi/operations/install.py:279 pisi/specfile.py:273
+#: pisi/operations/install.py:279 pisi/specfile.py:274
 msgid "%s dependency of package %s is not satisfied"
 msgstr ""
 
@@ -2732,7 +2736,7 @@ msgstr ""
 msgid "Unable to read file (%s): %s"
 msgstr ""
 
-#: pisi/pxml/xmlfile.py:85 pisi/specfile.py:441
+#: pisi/pxml/xmlfile.py:85 pisi/specfile.py:442
 msgid "File '%s' has invalid XML"
 msgstr ""
 
@@ -2788,31 +2792,31 @@ msgstr ""
 msgid " or "
 msgstr " eller "
 
-#: pisi/specfile.py:371 pisi/specfile.py:456
+#: pisi/specfile.py:372 pisi/specfile.py:457
 msgid "Summary: %s\n"
 msgstr "Sammandrag: %s\n"
 
-#: pisi/specfile.py:372 pisi/specfile.py:457
+#: pisi/specfile.py:373 pisi/specfile.py:458
 msgid "Description: %s\n"
 msgstr "Beskrivning: %s\n"
 
-#: pisi/specfile.py:373 pisi/specfile.py:458
+#: pisi/specfile.py:374 pisi/specfile.py:459
 msgid "Component: %s\n"
 msgstr "Komponent: %s\n"
 
-#: pisi/specfile.py:374
+#: pisi/specfile.py:375
 msgid "Provides: "
 msgstr "Tillhandahåller: "
 
-#: pisi/specfile.py:378
+#: pisi/specfile.py:379
 msgid "Dependencies: "
 msgstr "Beroenden: "
 
-#: pisi/specfile.py:432
+#: pisi/specfile.py:433
 msgid "translations.xml file is badly formed."
 msgstr ""
 
-#: pisi/specfile.py:459
+#: pisi/specfile.py:460
 msgid "Build Dependencies: "
 msgstr ""
 
@@ -2884,38 +2888,38 @@ msgstr ""
 msgid "Invalid version string: '%s'"
 msgstr "Ogiltig versionssträng: '%s'"
 
-#~ msgid "Generating %s,"
-#~ msgstr "Skapar %s,"
-
-#~ msgid "Done."
-#~ msgstr "Klar."
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Kan inte skapa delta av samma paket!"
-
-#~ msgid "Creating delta PiSi package between %s %s"
-#~ msgstr "Skapar delta-PiSi-paket mellan %s och %s"
-
-#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
-#~ msgstr "Namn: %s, version: %s, utgåva: %s, bygge %s\n"
-
-#~ msgid "Repository distribution does not match. Removing %s from system."
-#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort %s från systemet."
-
-#~ msgid "Update PiSi database for repository %s?"
-#~ msgstr "Uppdatera PiSi-databasen för %s-förrådet?"
-
-#~ msgid "Repository architecture does not match. Removing %s from system."
-#~ msgstr "Förrådet % finns inte och kan därmed inte tas bort."
-
-#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
-
-#~ msgid "Safety switch: Following packages in system.base will be installed: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
+#~ msgid "Storing %s, "
+#~ msgstr "Lagrar %s, "
 
 #~ msgid "Storing %s."
 #~ msgstr "Lagrar %s."
 
-#~ msgid "Storing %s, "
-#~ msgstr "Lagrar %s, "
+#~ msgid "Safety switch: Following packages in system.base will be installed: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
+
+#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
+
+#~ msgid "Repository architecture does not match. Removing %s from system."
+#~ msgstr "Förrådet % finns inte och kan därmed inte tas bort."
+
+#~ msgid "Update PiSi database for repository %s?"
+#~ msgstr "Uppdatera PiSi-databasen för %s-förrådet?"
+
+#~ msgid "Repository distribution does not match. Removing %s from system."
+#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort %s från systemet."
+
+#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
+#~ msgstr "Namn: %s, version: %s, utgåva: %s, bygge %s\n"
+
+#~ msgid "Creating delta PiSi package between %s %s"
+#~ msgstr "Skapar delta-PiSi-paket mellan %s och %s"
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Kan inte skapa delta av samma paket!"
+
+#~ msgid "Done."
+#~ msgstr "Klar."
+
+#~ msgid "Generating %s,"
+#~ msgstr "Skapar %s,"

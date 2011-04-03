@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2011-03-23 14:02+EET\n"
+"POT-Creation-Date: 2011-04-03 17:19+EEST\n"
 "PO-Revision-Date: 2010-03-24 16:28+0200\n"
 "Last-Translator: Fatih Aşıcı <fatih@pardus.org.tr>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -585,7 +585,7 @@ msgstr "* '%s' veritabanına ekleniyor... "
 msgid "OK."
 msgstr "Tamam."
 
-#: pisi/archive.py:380
+#: pisi/archive.py:419
 msgid "Problem occured while uncompressing %s.Z file"
 msgstr "%s.Z dosyası genişletilirken hata oluştu"
 
@@ -801,7 +801,7 @@ msgstr "Verilen sürüm için suçla"
 msgid "Blame for all of the releases"
 msgstr "Tüm sürümler için suçla"
 
-#: pisi/cli/blame.py:68 pisi/specfile.py:369 pisi/specfile.py:454
+#: pisi/cli/blame.py:68 pisi/specfile.py:370 pisi/specfile.py:455
 msgid "Name: %s, version: %s, release: %s\n"
 msgstr "İsim: %s, sürüm: %s, yayım: %s\n"
 
@@ -2390,15 +2390,15 @@ msgstr "%s %s sürümünden %s sürümüne indirildi."
 msgid "Unknown package operation"
 msgstr "Bilinmeyen paket işlemi"
 
-#: pisi/index.py:115
+#: pisi/index.py:118
 msgid "Adding %s to package index"
 msgstr "%s paket indeksine ekleniyor"
 
-#: pisi/index.py:132
+#: pisi/index.py:135
 msgid "Package %s: metadata corrupt, skipping..."
 msgstr "Paket %s: metadata bozuk, atlanıyor..."
 
-#: pisi/index.py:192
+#: pisi/index.py:195
 msgid "Adding %s to source index"
 msgstr "%s kaynak indeksine ekleniyor"
 
@@ -2590,40 +2590,40 @@ msgstr "* Yama uygulanıyor: %s"
 msgid "/%s has suid bit set"
 msgstr "/%s dosyasının suid biti etkin"
 
-#: pisi/operations/build.py:1030
+#: pisi/operations/build.py:1033
 msgid "No user named '%s' found on the system"
 msgstr "Sistemde '%s' isminde bir kullanıcı bulunamadı."
 
-#: pisi/operations/build.py:1036
+#: pisi/operations/build.py:1039
 msgid "No group named '%s' found on the system"
 msgstr "Sistemde '%s' isminde bir grup bulunamadı."
 
-#: pisi/operations/build.py:1043
+#: pisi/operations/build.py:1046
 msgid "There are abandoned files under the install dir (%s):"
 msgstr "Kurulum dizini (%s) altında terkedilmiş dosyalar var:"
 
-#: pisi/operations/build.py:1071
+#: pisi/operations/build.py:1074
 msgid "Ignoring empty package %s"
 msgstr "Boş %s paketi yoksayılıyor"
 
-#: pisi/operations/build.py:1075
+#: pisi/operations/build.py:1078
 msgid "Building package: %s"
 msgstr "Paket inşa ediliyor: %s"
 
-#: pisi/operations/build.py:1094 pisi/operations/delta.py:50
-#: pisi/operations/delta.py:148
+#: pisi/operations/build.py:1097 pisi/operations/delta.py:50
+#: pisi/operations/delta.py:154
 msgid "Creating %s..."
 msgstr "%s oluşturuluyor... "
 
-#: pisi/operations/build.py:1137
+#: pisi/operations/build.py:1144
 msgid "Cleaning build directory..."
 msgstr "İnşa dizini temizleniyor..."
 
-#: pisi/operations/build.py:1140
+#: pisi/operations/build.py:1147
 msgid "Keeping build directory"
 msgstr "İnşa dizini bırakılıyor"
 
-#: pisi/operations/build.py:1225
+#: pisi/operations/build.py:1235
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d hata, %d uyarı"
 
@@ -2655,15 +2655,20 @@ msgstr ""
 "\n"
 "Eksik dosya: /%s"
 
-#: pisi/operations/delta.py:98
+#: pisi/operations/delta.py:60 pisi/operations/delta.py:164
+#, fuzzy
+msgid "All files in the package '%s' are different from the files in the new package. Skipping it..."
+msgstr "'%s' paketi yeni paket ile aynı yayım numarasına sahip. Atlanıyor..."
+
+#: pisi/operations/delta.py:104
 msgid "New package '%s' exists in the list of old packages. Skipping it..."
 msgstr "Yeni paket '%s', eski paket listesinde de mevcut. Atlanıyor..."
 
-#: pisi/operations/delta.py:132
+#: pisi/operations/delta.py:138
 msgid "The file '%s' belongs to a different package other than '%s'. Skipping it..."
 msgstr "'%s' dosyası '%s' paketinden farklı bir pakete ait. Atlanıyor..."
 
-#: pisi/operations/delta.py:138
+#: pisi/operations/delta.py:144
 msgid "Package '%s' has the same release number with the new package. Skipping it..."
 msgstr "'%s' paketi yeni paket ile aynı yayım numarasına sahip. Atlanıyor..."
 
@@ -2801,7 +2806,7 @@ msgstr "Dış bağımlılıklar sağlanamadı."
 msgid "Installation order: "
 msgstr "Kurulum sırası: "
 
-#: pisi/operations/install.py:279 pisi/specfile.py:273
+#: pisi/operations/install.py:279 pisi/specfile.py:274
 msgid "%s dependency of package %s is not satisfied"
 msgstr "%s bağımlılığı %s paketi için sağlanamadı."
 
@@ -3009,7 +3014,7 @@ msgstr "'%s' katarının XML sözdizimi geçersiz."
 msgid "Unable to read file (%s): %s"
 msgstr "Dosya okunamadı (%s): %s"
 
-#: pisi/pxml/xmlfile.py:85 pisi/specfile.py:441
+#: pisi/pxml/xmlfile.py:85 pisi/specfile.py:442
 msgid "File '%s' has invalid XML"
 msgstr "'%s' dosyasının XML sözdizimi geçersiz."
 
@@ -3065,31 +3070,31 @@ msgstr "Adres: %s, tip: %s, sha1sum: %s"
 msgid " or "
 msgstr " veya "
 
-#: pisi/specfile.py:371 pisi/specfile.py:456
+#: pisi/specfile.py:372 pisi/specfile.py:457
 msgid "Summary: %s\n"
 msgstr "Özet: %s\n"
 
-#: pisi/specfile.py:372 pisi/specfile.py:457
+#: pisi/specfile.py:373 pisi/specfile.py:458
 msgid "Description: %s\n"
 msgstr "Açıklama: %s\n"
 
-#: pisi/specfile.py:373 pisi/specfile.py:458
+#: pisi/specfile.py:374 pisi/specfile.py:459
 msgid "Component: %s\n"
 msgstr "Bileşen: %s\n"
 
-#: pisi/specfile.py:374
+#: pisi/specfile.py:375
 msgid "Provides: "
 msgstr "Sağladıkları: "
 
-#: pisi/specfile.py:378
+#: pisi/specfile.py:379
 msgid "Dependencies: "
 msgstr "Bağımlılıkları: "
 
-#: pisi/specfile.py:432
+#: pisi/specfile.py:433
 msgid "translations.xml file is badly formed."
 msgstr "translations.xml dosyası hatalı."
 
-#: pisi/specfile.py:459
+#: pisi/specfile.py:460
 msgid "Build Dependencies: "
 msgstr "İnşa Bağımlılıkları: "
 
@@ -3161,89 +3166,89 @@ msgstr "Geçersiz delta paket adı: %s"
 msgid "Invalid version string: '%s'"
 msgstr "Hatalı sürüm dizgisi: '%s'"
 
-#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
+#~ msgid "Reverse dependency %s of %s cannot be satisfied"
+#~ msgstr "Ters bağımlılık %s, %s paketi için sağlanamadı."
+
+#~ msgid "Repository distribution does not match. Removing %s from system."
+#~ msgstr "Depo dağıtımı sisteminizle uyumsuz. %s deposu sistemden kaldırılıyor."
+
+#~ msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
+#~ msgstr "Dağıtım hakkında bilgi içermediği için bu deponun uyumluluğu denetlenemiyor."
+
+#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
+#~ msgstr "İsim: %s, sürüm %s, yayım %s, inşa %s\n"
+
+#~ msgid "Package %s is already at the latest build %s."
+#~ msgstr "%s paketi zaten (en son) inşa %s."
+
+#~ msgid "Creating delta PiSi package between %s %s"
+#~ msgstr "%s ile %s paketi arasında PiSi delta paketi oluşturuluyor."
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Aynı paket için delta oluşturulamaz!"
+
+#~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
+#~ msgstr "Kurulum dizini (%s) altındaki bütün dosyalar paket(ler) tarafından toplandı."
+
+#~ msgid "Done."
+#~ msgstr "Tamamlandı."
+
+#~ msgid "Creating PiSi package %s."
+#~ msgstr "%s PiSi paketi yaratılıyor."
+
+#~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
+#~ msgstr "İnşa numarası alınamıyor. Depo inşaları için pisi.conf dosyasında buildno seçeneğini etkinleştirmelisiniz."
+
+#~ msgid "Generating %s,"
+#~ msgstr "%s yaratılıyor,"
+
+#~ msgid "There is no change from previous build %d"
+#~ msgstr "Bir önceki %d numaralı inşadan bu yana herhangi bir değişiklik yok."
+
+#~ msgid "There are changes, incrementing build no to %d"
+#~ msgstr "Değişiklikler var, inşa numarası bir arttırılarak %d yapıldı."
+
+#~ msgid "(old package lacks a build no, setting build no to 1.)"
+#~ msgstr "(önceki inşa numaraya sahip değil, inşa numarası 1 yapılıyor.)"
+
+#~ msgid "(no previous build found, setting build no to 1.)"
+#~ msgstr "(eski bir inşa bulunamadı, inşa numarası olarak 1 atanıyor.)"
+
+#~ msgid "(found old version %s)"
+#~ msgstr "(%s numaralı eski sürüm bulundu)"
+
+#~ msgid "gzip compression not supported yet"
+#~ msgstr "gzip sıkıştırma algoritması henüz desteklenmiyor."
+
+#~ msgid "zip compression not supported yet"
+#~ msgstr "zip sıkıştırma henüz desteklenmiyor."
+
+#~ msgid "Indexing current directory."
+#~ msgstr "Güncel dizin kataloglanıyor."
+
+#~ msgid "package_format must be one of %s "
+#~ msgstr "package_format, bunlardan birisi olmalı: %s"
+
+#~ msgid "PiSi binary package formats: '1.0', '1.1' (default)"
+#~ msgstr "PiSi ikili paket biçimleri: '1.0', '1.1' (öntanımlı)"
+
+#~ msgid "Do not take build no into account."
+#~ msgstr "İnşa numarasını dikkate alma."
+
+#~ msgid "Downgrade to old distribution build?"
+#~ msgstr "Eski dağıtım inşasına dönülsün mü?"
+
+#~ msgid "Upgrading to new distribution build"
+#~ msgstr "Yeni dağıtım inşasına yükseltiliyor."
+
+#~ msgid "%s %s is added to %s/language.%s.dat "
+#~ msgstr "%s %s %s/language.%s.dat dosyasına eklendi."
+
+#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
 #~ msgstr "\\languages{%s}{%s}{}{%s}{%s} %s/language.%s.def dosyasına eklendi."
 
 #~ msgid "%s is added to %s/language.%s.dat"
 #~ msgstr "%s %s/language.%s.dat dosyasına eklendi."
 
-#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
+#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
 #~ msgstr "\\languages{%s}{%s}{}{%s}{%s} %s/language.%s.def dosyasına eklendi."
-
-#~ msgid "%s %s is added to %s/language.%s.dat "
-#~ msgstr "%s %s %s/language.%s.dat dosyasına eklendi."
-
-#~ msgid "Upgrading to new distribution build"
-#~ msgstr "Yeni dağıtım inşasına yükseltiliyor."
-
-#~ msgid "Downgrade to old distribution build?"
-#~ msgstr "Eski dağıtım inşasına dönülsün mü?"
-
-#~ msgid "Do not take build no into account."
-#~ msgstr "İnşa numarasını dikkate alma."
-
-#~ msgid "PiSi binary package formats: '1.0', '1.1' (default)"
-#~ msgstr "PiSi ikili paket biçimleri: '1.0', '1.1' (öntanımlı)"
-
-#~ msgid "package_format must be one of %s "
-#~ msgstr "package_format, bunlardan birisi olmalı: %s"
-
-#~ msgid "Indexing current directory."
-#~ msgstr "Güncel dizin kataloglanıyor."
-
-#~ msgid "zip compression not supported yet"
-#~ msgstr "zip sıkıştırma henüz desteklenmiyor."
-
-#~ msgid "gzip compression not supported yet"
-#~ msgstr "gzip sıkıştırma algoritması henüz desteklenmiyor."
-
-#~ msgid "(found old version %s)"
-#~ msgstr "(%s numaralı eski sürüm bulundu)"
-
-#~ msgid "(no previous build found, setting build no to 1.)"
-#~ msgstr "(eski bir inşa bulunamadı, inşa numarası olarak 1 atanıyor.)"
-
-#~ msgid "(old package lacks a build no, setting build no to 1.)"
-#~ msgstr "(önceki inşa numaraya sahip değil, inşa numarası 1 yapılıyor.)"
-
-#~ msgid "There are changes, incrementing build no to %d"
-#~ msgstr "Değişiklikler var, inşa numarası bir arttırılarak %d yapıldı."
-
-#~ msgid "There is no change from previous build %d"
-#~ msgstr "Bir önceki %d numaralı inşadan bu yana herhangi bir değişiklik yok."
-
-#~ msgid "Generating %s,"
-#~ msgstr "%s yaratılıyor,"
-
-#~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
-#~ msgstr "İnşa numarası alınamıyor. Depo inşaları için pisi.conf dosyasında buildno seçeneğini etkinleştirmelisiniz."
-
-#~ msgid "Creating PiSi package %s."
-#~ msgstr "%s PiSi paketi yaratılıyor."
-
-#~ msgid "Done."
-#~ msgstr "Tamamlandı."
-
-#~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
-#~ msgstr "Kurulum dizini (%s) altındaki bütün dosyalar paket(ler) tarafından toplandı."
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Aynı paket için delta oluşturulamaz!"
-
-#~ msgid "Creating delta PiSi package between %s %s"
-#~ msgstr "%s ile %s paketi arasında PiSi delta paketi oluşturuluyor."
-
-#~ msgid "Package %s is already at the latest build %s."
-#~ msgstr "%s paketi zaten (en son) inşa %s."
-
-#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
-#~ msgstr "İsim: %s, sürüm %s, yayım %s, inşa %s\n"
-
-#~ msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
-#~ msgstr "Dağıtım hakkında bilgi içermediği için bu deponun uyumluluğu denetlenemiyor."
-
-#~ msgid "Repository distribution does not match. Removing %s from system."
-#~ msgstr "Depo dağıtımı sisteminizle uyumsuz. %s deposu sistemden kaldırılıyor."
-
-#~ msgid "Reverse dependency %s of %s cannot be satisfied"
-#~ msgstr "Ters bağımlılık %s, %s paketi için sağlanamadı."

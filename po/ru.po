@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: 2011-03-23 14:02+EET\n"
+"POT-Creation-Date: 2011-04-03 17:19+EEST\n"
 "PO-Revision-Date: 2010-12-18 22:24+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -565,7 +565,7 @@ msgstr "* Добавление '%s' в базу данных... "
 msgid "OK."
 msgstr "ОК."
 
-#: pisi/archive.py:380
+#: pisi/archive.py:419
 msgid "Problem occured while uncompressing %s.Z file"
 msgstr "Обнаружена ошибка во время распаковки %s.Z файла"
 
@@ -780,7 +780,7 @@ msgstr "Blame для текущего релиза"
 msgid "Blame for all of the releases"
 msgstr "Blame для всех релизов"
 
-#: pisi/cli/blame.py:68 pisi/specfile.py:369 pisi/specfile.py:454
+#: pisi/cli/blame.py:68 pisi/specfile.py:370 pisi/specfile.py:455
 msgid "Name: %s, version: %s, release: %s\n"
 msgstr "Имя: %s, версия: %s, релиз: %s\n"
 
@@ -2367,15 +2367,15 @@ msgstr "%s обновлен с %s до более ранней версии %s."
 msgid "Unknown package operation"
 msgstr ""
 
-#: pisi/index.py:115
+#: pisi/index.py:118
 msgid "Adding %s to package index"
 msgstr "Добавление %s в индекс пакета"
 
-#: pisi/index.py:132
+#: pisi/index.py:135
 msgid "Package %s: metadata corrupt, skipping..."
 msgstr "Пакет %s: метадата повреждена, пропуск..."
 
-#: pisi/index.py:192
+#: pisi/index.py:195
 msgid "Adding %s to source index"
 msgstr "Добавление %s в индекс исходника"
 
@@ -2569,40 +2569,40 @@ msgstr "* Применение патча: %s"
 msgid "/%s has suid bit set"
 msgstr "/%s поставлен бит suid"
 
-#: pisi/operations/build.py:1030
+#: pisi/operations/build.py:1033
 msgid "No user named '%s' found on the system"
 msgstr "Пользователь по имени '%s' не найден в системе"
 
-#: pisi/operations/build.py:1036
+#: pisi/operations/build.py:1039
 msgid "No group named '%s' found on the system"
 msgstr "Группа '%s' не найдена в системе"
 
-#: pisi/operations/build.py:1043
+#: pisi/operations/build.py:1046
 msgid "There are abandoned files under the install dir (%s):"
 msgstr "Есть заброшенные файлы в каталоге установки (%s):"
 
-#: pisi/operations/build.py:1071
+#: pisi/operations/build.py:1074
 msgid "Ignoring empty package %s"
 msgstr "Игнорирование пустого пакета %s"
 
-#: pisi/operations/build.py:1075
+#: pisi/operations/build.py:1078
 msgid "Building package: %s"
 msgstr "Сборка пакета: %s"
 
-#: pisi/operations/build.py:1094 pisi/operations/delta.py:50
-#: pisi/operations/delta.py:148
+#: pisi/operations/build.py:1097 pisi/operations/delta.py:50
+#: pisi/operations/delta.py:154
 msgid "Creating %s..."
 msgstr "Создание %s..."
 
-#: pisi/operations/build.py:1137
+#: pisi/operations/build.py:1144
 msgid "Cleaning build directory..."
 msgstr "Очистка директории для сборки..."
 
-#: pisi/operations/build.py:1140
+#: pisi/operations/build.py:1147
 msgid "Keeping build directory"
 msgstr "Сохранение каталога сборки"
 
-#: pisi/operations/build.py:1225
+#: pisi/operations/build.py:1235
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d ошибка(ок), %d предупреждение(ий)."
 
@@ -2634,15 +2634,20 @@ msgstr ""
 "\n"
 "Отсутствующий файл: %s"
 
-#: pisi/operations/delta.py:98
+#: pisi/operations/delta.py:60 pisi/operations/delta.py:164
+#, fuzzy
+msgid "All files in the package '%s' are different from the files in the new package. Skipping it..."
+msgstr "Пакет '%s' имеет один и тот же номер релиза, что и новый пакет. Пропускаем..."
+
+#: pisi/operations/delta.py:104
 msgid "New package '%s' exists in the list of old packages. Skipping it..."
 msgstr "Новый пакет '%s' существует в списке старых пакетов. Пропускаем..."
 
-#: pisi/operations/delta.py:132
+#: pisi/operations/delta.py:138
 msgid "The file '%s' belongs to a different package other than '%s'. Skipping it..."
 msgstr "Файл '%s принадлежит другому пакету, чем '%s'. Пропуск..."
 
-#: pisi/operations/delta.py:138
+#: pisi/operations/delta.py:144
 msgid "Package '%s' has the same release number with the new package. Skipping it..."
 msgstr "Пакет '%s' имеет один и тот же номер релиза, что и новый пакет. Пропускаем..."
 
@@ -2781,7 +2786,7 @@ msgstr "Внешние зависимости не соблюдены"
 msgid "Installation order: "
 msgstr "Порядок установки:"
 
-#: pisi/operations/install.py:279 pisi/specfile.py:273
+#: pisi/operations/install.py:279 pisi/specfile.py:274
 msgid "%s dependency of package %s is not satisfied"
 msgstr "Зависимость %s пакета %s не соблюдена"
 
@@ -2986,7 +2991,7 @@ msgstr "Строка '%s' содержит неверный XML"
 msgid "Unable to read file (%s): %s"
 msgstr "Невозможно прочитать файл (%s): %s"
 
-#: pisi/pxml/xmlfile.py:85 pisi/specfile.py:441
+#: pisi/pxml/xmlfile.py:85 pisi/specfile.py:442
 msgid "File '%s' has invalid XML"
 msgstr "Файл '%s' содержит неправильный XML"
 
@@ -3042,31 +3047,31 @@ msgstr "URI: %s, тип%s, sha1 сумма: %s"
 msgid " or "
 msgstr "или"
 
-#: pisi/specfile.py:371 pisi/specfile.py:456
+#: pisi/specfile.py:372 pisi/specfile.py:457
 msgid "Summary: %s\n"
 msgstr "Суммарно: %s\n"
 
-#: pisi/specfile.py:372 pisi/specfile.py:457
+#: pisi/specfile.py:373 pisi/specfile.py:458
 msgid "Description: %s\n"
 msgstr "Описание: %s\n"
 
-#: pisi/specfile.py:373 pisi/specfile.py:458
+#: pisi/specfile.py:374 pisi/specfile.py:459
 msgid "Component: %s\n"
 msgstr "Компонент: %s\n"
 
-#: pisi/specfile.py:374
+#: pisi/specfile.py:375
 msgid "Provides: "
 msgstr "Provides: "
 
-#: pisi/specfile.py:378
+#: pisi/specfile.py:379
 msgid "Dependencies: "
 msgstr "Зависимости:"
 
-#: pisi/specfile.py:432
+#: pisi/specfile.py:433
 msgid "translations.xml file is badly formed."
 msgstr "Файл translations.xml неправильно сформирован."
 
-#: pisi/specfile.py:459
+#: pisi/specfile.py:460
 msgid "Build Dependencies: "
 msgstr "Сборка зависимостей:"
 
