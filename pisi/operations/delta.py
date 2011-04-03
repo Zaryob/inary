@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2007-2010, TUBITAK/UEKAE
+# Copyright (C) 2007-2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -200,18 +200,18 @@ def create_delta_package(old_package, new_package):
 #  Hash equal but path different ones   (these are the relocations)
 #  Hash and also path equal ones        (do nothing)
 
-def find_delta(oldfiles, newfiles):
+def find_delta(old_files, new_files):
 
     hashto_files = {}
-    for f in newfiles.list:
+    for f in new_files.list:
         hashto_files.setdefault(f.hash, []).append(f)
 
-    files_new = set(map(lambda x: x.hash, newfiles.list))
-    files_old = set(map(lambda x: x.hash, oldfiles.list))
-    files_delta = files_new - files_old
+    new_hashes = set([f.hash for f in new_files.list])
+    old_hashes = set([f.hash for f in old_files.list])
+    hashes_delta = new_hashes - old_hashes
 
     deltas = []
-    for h in files_delta:
+    for h in hashes_delta:
         deltas.extend(hashto_files[h])
 
     # Directory hashes are None. There was a bug with PolicyKit that
