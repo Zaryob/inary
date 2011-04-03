@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR ORGANIZATION
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
@@ -9,10 +9,10 @@ msgstr ""
 "PO-Revision-Date: 2010-12-18 22:24+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: /usr/lib/python2.7/optparse.py:140
@@ -1268,9 +1268,8 @@ msgid "Do not show installed packages"
 msgstr "Не показывать установленные пакеты"
 
 #: pisi/cli/graph.py:56
-#, fuzzy
 msgid "Draw reverse dependency graph"
-msgstr "Реверсивные зависимости:"
+msgstr "Нарисовать график обратных зависимостей"
 
 #: pisi/cli/graph.py:59
 msgid "Dot output file"
@@ -1746,13 +1745,13 @@ msgstr ""
 "\n"
 "Показать текущие используемые репозитории.\n"
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr "активен"
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
 msgstr "не активен"
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
+msgstr "активен"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
@@ -2288,12 +2287,11 @@ msgstr "Сервер не поддерживает скачивание по ч�
 
 #: pisi/file.py:35
 msgid "URL %s already downloaded as %s"
-msgstr ""
+msgstr "URL%S уже загружен как %S"
 
 #: pisi/file.py:42
-#, fuzzy
 msgid "No signature found for %s"
-msgstr "Не найден скрипт конфигурации для cmake. "
+msgstr "Подпись не найдена для %S"
 
 #: pisi/file.py:50
 msgid " invalid for %s"
@@ -2416,9 +2414,8 @@ msgid "Building source package: %s"
 msgstr "Сборка пакета с исходным кодом: %s"
 
 #: pisi/operations/build.py:368
-#, fuzzy
 msgid "Rebuilding for %s"
-msgstr "Формат исполняемого файла %s"
+msgstr "Пересборка %S"
 
 #: pisi/operations/build.py:396
 msgid "IceCream detected. Make sure your daemon is up and running..."
@@ -2557,9 +2554,8 @@ msgid "Patch file is missing: %s\n"
 msgstr "Файл патча отсутствует: %s\n"
 
 #: pisi/operations/build.py:822
-#, fuzzy
 msgid "Patch file is empty: %s"
-msgstr "Файл патча отсутствует: %s\n"
+msgstr "Файл патча отсутствует: %s"
 
 #: pisi/operations/build.py:838
 msgid "* Applying patch: %s"
@@ -2635,9 +2631,8 @@ msgstr ""
 "Отсутствующий файл: %s"
 
 #: pisi/operations/delta.py:60 pisi/operations/delta.py:164
-#, fuzzy
 msgid "All files in the package '%s' are different from the files in the new package. Skipping it..."
-msgstr "Пакет '%s' имеет один и тот же номер релиза, что и новый пакет. Пропускаем..."
+msgstr "Все файлы в пакете '%s' отличаются от файлов в новом пакете. Пропускаем ..."
 
 #: pisi/operations/delta.py:104
 msgid "New package '%s' exists in the list of old packages. Skipping it..."
