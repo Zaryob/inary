@@ -21,10 +21,6 @@ import pisi.util as util
 import pisi.archive as archive
 
 
-class AllFilesChangedException(Exception):
-    pass
-
-
 # FIXME Reduce code duplication
 def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
     new_pkg_info = new_package_obj.metadata.package
@@ -58,9 +54,9 @@ def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
 
         old_pkg_files = old_pkg.get_files()
 
-        try:
-            files_delta = find_delta(old_pkg_files, new_pkg_files)
-        except AllFilesChangedException:
+        files_delta = find_delta(old_pkg_files, new_pkg_files)
+
+        if len(files_delta) == len(new_pkg_files.list):
             ctx.ui.warning(_("All files in the package '%s' are different "
                              "from the files in the new package. Skipping "
                              "it...") % old_package)
@@ -162,9 +158,9 @@ def create_delta_packages(old_packages, new_package):
 
         old_pkg_files = old_pkg.get_files()
 
-        try:
-            files_delta = find_delta(old_pkg_files, new_pkg_files)
-        except AllFilesChangedException:
+        files_delta = find_delta(old_pkg_files, new_pkg_files)
+
+        if len(files_delta) == len(new_pkg_files.list):
             ctx.ui.warning(_("All files in the package '%s' are different "
                              "from the files in the new package. Skipping "
                              "it...") % old_package)
@@ -225,9 +221,6 @@ def find_delta(old_files, new_files):
     new_hashes = set([f.hash for f in new_files.list])
     old_hashes = set([f.hash for f in old_files.list])
     hashes_delta = new_hashes - old_hashes
-
-    if hashes_delta == new_hashes:
-        raise AllFilesChangedException
 
     deltas = []
     for h in hashes_delta:
