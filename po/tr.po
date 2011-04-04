@@ -15,10 +15,10 @@ msgstr ""
 "PO-Revision-Date: 2010-03-24 16:28+0200\n"
 "Last-Translator: Fatih Aşıcı <fatih@pardus.org.tr>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=1;plural=0;\n"
 "X-Generator: Lokalize 1.0\n"
 
@@ -1768,13 +1768,13 @@ msgstr ""
 "\n"
 "İzlemede olan depoları listele.\n"
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr "etkin"
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
 msgstr "etkin değil"
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
+msgstr "etkin"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
@@ -2656,9 +2656,8 @@ msgstr ""
 "Eksik dosya: /%s"
 
 #: pisi/operations/delta.py:60 pisi/operations/delta.py:164
-#, fuzzy
 msgid "All files in the package '%s' are different from the files in the new package. Skipping it..."
-msgstr "'%s' paketi yeni paket ile aynı yayım numarasına sahip. Atlanıyor..."
+msgstr "'%s' paketindeki tüm dosyalar yeni pakettekilerden farklı. Atlanıyor..."
 
 #: pisi/operations/delta.py:104
 msgid "New package '%s' exists in the list of old packages. Skipping it..."
