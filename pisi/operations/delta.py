@@ -18,10 +18,8 @@ _ = __trans.ugettext
 import pisi.context as ctx
 import pisi.package
 import pisi.util as util
-import pisi.archive as archive
 
 
-# FIXME Reduce code duplication
 def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
     new_pkg_info = new_package_obj.metadata.package
     new_pkg_files = new_package_obj.files
@@ -40,6 +38,17 @@ def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
     for old_package in old_packages:
         old_pkg = pisi.package.Package(old_package)
         old_pkg_info = old_pkg.metadata.package
+
+        if old_pkg_info.name != new_pkg_info.name:
+            ctx.ui.warning(_("The file '%s' belongs to a different package "
+                             "other than '%s'. Skipping it...")
+                             % (old_package, new_pkg_info.name))
+            continue
+
+        if old_pkg_info.release == new_pkg_info.release:
+            ctx.ui.warning(_("Package '%s' has the same release number with "
+                             "the new package. Skipping it...") % old_package)
+            continue
 
         delta_name = "-".join((old_pkg_info.name,
                                old_pkg_info.release,
@@ -106,14 +115,13 @@ def create_delta_packages(old_packages, new_package):
         while new_package in old_packages:
             old_packages.remove(new_package)
 
-    new_pkg = pisi.package.Package(new_package)
-    new_pkg_info = new_pkg.metadata.package
-    new_pkg_files = new_pkg.get_files()
+    new_pkg_name = os.path.splitext(os.path.basename(new_package))[0]
+    new_pkg_path = util.join_path(ctx.config.tmp_dir(), new_pkg_name)
+
+    new_pkg = pisi.package.Package(new_package, tmp_dir=new_pkg_path)
+    new_pkg.read()
 
     # Unpack new package to temp
-    new_pkg_name = os.path.splitext(os.path.basename(new_package))[0]
-
-    new_pkg_path = util.join_path(ctx.config.tmp_dir(), new_pkg_name)
     new_pkg.extract_pisi_files(new_pkg_path)
     new_pkg.extract_dir("comar", new_pkg_path)
 
@@ -122,80 +130,9 @@ def create_delta_packages(old_packages, new_package):
     os.mkdir(install_dir)
     new_pkg.extract_install(install_dir)
 
-    name, new_version, new_release, new_distro_id, new_arch = \
-            util.split_package_filename(new_pkg_name)
-
-    cwd = os.getcwd()
-    out_dir = ctx.get_option("output_dir")
-    target_format = ctx.get_option("package_format")
-    delta_packages = []
-
-    for old_package in old_packages:
-        old_pkg = pisi.package.Package(old_package)
-        old_pkg_info = old_pkg.metadata.package
-
-        if old_pkg_info.name != new_pkg_info.name:
-            ctx.ui.warning(_("The file '%s' belongs to a different package "
-                             "other than '%s'. Skipping it...")
-                             % (old_package, new_pkg_info.name))
-            continue
-
-        if old_pkg_info.release == new_pkg_info.release:
-            ctx.ui.warning(_("Package '%s' has the same release number with "
-                             "the new package. Skipping it...") % old_package)
-            continue
-
-        delta_name = "-".join((old_pkg_info.name,
-                               old_pkg_info.release,
-                               new_pkg_info.release,
-                               new_distro_id,
-                               new_arch)) + ctx.const.delta_package_suffix
-
-        ctx.ui.info(_("Creating %s...") % delta_name)
-
-        if out_dir:
-            delta_name = util.join_path(out_dir, delta_name)
-
-        old_pkg_files = old_pkg.get_files()
-
-        files_delta = find_delta(old_pkg_files, new_pkg_files)
-
-        if len(files_delta) == len(new_pkg_files.list):
-            ctx.ui.warning(_("All files in the package '%s' are different "
-                             "from the files in the new package. Skipping "
-                             "it...") % old_package)
-            continue
-
-        delta_pkg = pisi.package.Package(delta_name, "w", format=target_format)
-
-        os.chdir(new_pkg_path)
-
-        # add comar files to package
-        for pcomar in new_pkg_info.providesComar:
-            fname = util.join_path(ctx.const.comar_dir, pcomar.script)
-            delta_pkg.add_to_package(fname)
-
-        # add xmls and files
-        delta_pkg.add_metadata_xml(ctx.const.metadata_xml)
-        delta_pkg.add_files_xml(ctx.const.files_xml)
-
-        # only metadata information may change in a package,
-        # so no install archive added to delta package
-        if files_delta:
-            # Sort the files in-place according to their path for an ordered
-            # tarfile layout which dramatically improves the compression
-            # performance of lzma. This improvement is stolen from build.py
-            # (commit r23485).
-            files_delta.sort(key=lambda x: x.path)
-
-            os.chdir(install_dir)
-            for f in files_delta:
-                delta_pkg.add_to_install(f.path)
-
-        os.chdir(cwd)
-
-        delta_pkg.close()
-        delta_packages.append(delta_name)
+    delta_packages = create_delta_packages_from_obj(old_packages,
+                                                    new_pkg,
+                                                    new_pkg_path)
 
     # Remove temp dir
     util.clean_dir(new_pkg_path)
