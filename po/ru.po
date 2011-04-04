@@ -1,18 +1,18 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR ORGANIZATION
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: 2011-04-03 17:19+EEST\n"
+"POT-Creation-Date: 2011-04-05 01:35+EEST\n"
 "PO-Revision-Date: 2010-12-18 22:24+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: /usr/lib/python2.7/optparse.py:140
@@ -780,7 +780,7 @@ msgstr "Blame для текущего релиза"
 msgid "Blame for all of the releases"
 msgstr "Blame для всех релизов"
 
-#: pisi/cli/blame.py:68 pisi/specfile.py:370 pisi/specfile.py:455
+#: pisi/cli/blame.py:68 pisi/specfile.py:370 pisi/specfile.py:456
 msgid "Name: %s, version: %s, release: %s\n"
 msgstr "Имя: %s, версия: %s, релиз: %s\n"
 
@@ -1745,13 +1745,13 @@ msgstr ""
 "\n"
 "Показать текущие используемые репозитории.\n"
 
-#: pisi/cli/listrepo.py:41
-msgid "inactive"
-msgstr "не активен"
-
 #: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
 msgid "active"
 msgstr "активен"
+
+#: pisi/cli/listrepo.py:41
+msgid "inactive"
+msgstr "не активен"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
@@ -2585,8 +2585,7 @@ msgstr "Игнорирование пустого пакета %s"
 msgid "Building package: %s"
 msgstr "Сборка пакета: %s"
 
-#: pisi/operations/build.py:1097 pisi/operations/delta.py:50
-#: pisi/operations/delta.py:154
+#: pisi/operations/build.py:1097 pisi/operations/delta.py:59
 msgid "Creating %s..."
 msgstr "Создание %s..."
 
@@ -2630,21 +2629,21 @@ msgstr ""
 "\n"
 "Отсутствующий файл: %s"
 
-#: pisi/operations/delta.py:60 pisi/operations/delta.py:164
-msgid "All files in the package '%s' are different from the files in the new package. Skipping it..."
-msgstr "Все файлы в пакете '%s' отличаются от файлов в новом пакете. Пропускаем ..."
-
-#: pisi/operations/delta.py:104
-msgid "New package '%s' exists in the list of old packages. Skipping it..."
-msgstr "Новый пакет '%s' существует в списке старых пакетов. Пропускаем..."
-
-#: pisi/operations/delta.py:138
+#: pisi/operations/delta.py:43
 msgid "The file '%s' belongs to a different package other than '%s'. Skipping it..."
 msgstr "Файл '%s принадлежит другому пакету, чем '%s'. Пропуск..."
 
-#: pisi/operations/delta.py:144
+#: pisi/operations/delta.py:49
 msgid "Package '%s' has the same release number with the new package. Skipping it..."
 msgstr "Пакет '%s' имеет один и тот же номер релиза, что и новый пакет. Пропускаем..."
+
+#: pisi/operations/delta.py:69
+msgid "All files in the package '%s' are different from the files in the new package. Skipping it..."
+msgstr "Все файлы в пакете '%s' отличаются от файлов в новом пакете. Пропускаем ..."
+
+#: pisi/operations/delta.py:113
+msgid "New package '%s' exists in the list of old packages. Skipping it..."
+msgstr "Новый пакет '%s' существует в списке старых пакетов. Пропускаем..."
 
 #: pisi/operations/emerge.py:35
 msgid "No packages to emerge."
@@ -2986,7 +2985,7 @@ msgstr "Строка '%s' содержит неверный XML"
 msgid "Unable to read file (%s): %s"
 msgstr "Невозможно прочитать файл (%s): %s"
 
-#: pisi/pxml/xmlfile.py:85 pisi/specfile.py:442
+#: pisi/pxml/xmlfile.py:85 pisi/specfile.py:443
 msgid "File '%s' has invalid XML"
 msgstr "Файл '%s' содержит неправильный XML"
 
@@ -3042,31 +3041,36 @@ msgstr "URI: %s, тип%s, sha1 сумма: %s"
 msgid " or "
 msgstr "или"
 
-#: pisi/specfile.py:372 pisi/specfile.py:457
+#: pisi/specfile.py:372 pisi/specfile.py:458
 msgid "Summary: %s\n"
 msgstr "Суммарно: %s\n"
 
-#: pisi/specfile.py:373 pisi/specfile.py:458
+#: pisi/specfile.py:373 pisi/specfile.py:459
 msgid "Description: %s\n"
 msgstr "Описание: %s\n"
 
-#: pisi/specfile.py:374 pisi/specfile.py:459
+#: pisi/specfile.py:374 pisi/specfile.py:460
+#, fuzzy
+msgid "Licenses: %s\n"
+msgstr "Использование: %s\n"
+
+#: pisi/specfile.py:375 pisi/specfile.py:461
 msgid "Component: %s\n"
 msgstr "Компонент: %s\n"
 
-#: pisi/specfile.py:375
+#: pisi/specfile.py:376
 msgid "Provides: "
 msgstr "Provides: "
 
-#: pisi/specfile.py:379
+#: pisi/specfile.py:380
 msgid "Dependencies: "
 msgstr "Зависимости:"
 
-#: pisi/specfile.py:433
+#: pisi/specfile.py:434
 msgid "translations.xml file is badly formed."
 msgstr "Файл translations.xml неправильно сформирован."
 
-#: pisi/specfile.py:460
+#: pisi/specfile.py:462
 msgid "Build Dependencies: "
 msgstr "Сборка зависимостей:"
 

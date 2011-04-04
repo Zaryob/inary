@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-04-03 17:19+EEST\n"
+"POT-Creation-Date: 2011-04-05 01:35+EEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -755,7 +755,7 @@ msgstr ""
 msgid "Blame for all of the releases"
 msgstr ""
 
-#: pisi/cli/blame.py:68 pisi/specfile.py:370 pisi/specfile.py:455
+#: pisi/cli/blame.py:68 pisi/specfile.py:370 pisi/specfile.py:456
 msgid ""
 "Name: %s, version: %s, release: %s\n"
 msgstr ""
@@ -2340,8 +2340,7 @@ msgstr ""
 msgid "Building package: %s"
 msgstr ""
 
-#: pisi/operations/build.py:1097 pisi/operations/delta.py:50
-#: pisi/operations/delta.py:154
+#: pisi/operations/build.py:1097 pisi/operations/delta.py:59
 msgid "Creating %s..."
 msgstr ""
 
@@ -2379,20 +2378,20 @@ msgid ""
 "Missing file: /%s"
 msgstr ""
 
-#: pisi/operations/delta.py:60 pisi/operations/delta.py:164
-msgid "All files in the package '%s' are different from the files in the new package. Skipping it..."
-msgstr ""
-
-#: pisi/operations/delta.py:104
-msgid "New package '%s' exists in the list of old packages. Skipping it..."
-msgstr ""
-
-#: pisi/operations/delta.py:138
+#: pisi/operations/delta.py:43
 msgid "The file '%s' belongs to a different package other than '%s'. Skipping it..."
 msgstr ""
 
-#: pisi/operations/delta.py:144
+#: pisi/operations/delta.py:49
 msgid "Package '%s' has the same release number with the new package. Skipping it..."
+msgstr ""
+
+#: pisi/operations/delta.py:69
+msgid "All files in the package '%s' are different from the files in the new package. Skipping it..."
+msgstr ""
+
+#: pisi/operations/delta.py:113
+msgid "New package '%s' exists in the list of old packages. Skipping it..."
 msgstr ""
 
 #: pisi/operations/emerge.py:35
@@ -2727,7 +2726,7 @@ msgstr ""
 msgid "Unable to read file (%s): %s"
 msgstr ""
 
-#: pisi/pxml/xmlfile.py:85 pisi/specfile.py:442
+#: pisi/pxml/xmlfile.py:85 pisi/specfile.py:443
 msgid "File '%s' has invalid XML"
 msgstr ""
 
@@ -2783,34 +2782,39 @@ msgstr ""
 msgid " or "
 msgstr ""
 
-#: pisi/specfile.py:372 pisi/specfile.py:457
+#: pisi/specfile.py:372 pisi/specfile.py:458
 msgid ""
 "Summary: %s\n"
 msgstr ""
 
-#: pisi/specfile.py:373 pisi/specfile.py:458
+#: pisi/specfile.py:373 pisi/specfile.py:459
 msgid ""
 "Description: %s\n"
 msgstr ""
 
-#: pisi/specfile.py:374 pisi/specfile.py:459
+#: pisi/specfile.py:374 pisi/specfile.py:460
+msgid ""
+"Licenses: %s\n"
+msgstr ""
+
+#: pisi/specfile.py:375 pisi/specfile.py:461
 msgid ""
 "Component: %s\n"
 msgstr ""
 
-#: pisi/specfile.py:375
+#: pisi/specfile.py:376
 msgid "Provides: "
 msgstr ""
 
-#: pisi/specfile.py:379
+#: pisi/specfile.py:380
 msgid "Dependencies: "
 msgstr ""
 
-#: pisi/specfile.py:433
+#: pisi/specfile.py:434
 msgid "translations.xml file is badly formed."
 msgstr ""
 
-#: pisi/specfile.py:460
+#: pisi/specfile.py:462
 msgid "Build Dependencies: "
 msgstr ""
 
