@@ -134,7 +134,7 @@ Usage: info <package1> <package2> ... <packagen>
         if ctx.get_option('short'):
             ctx.ui.formatted_output(" - ".join((src.name, unicode(src.summary))))
         else:
-            ctx.ui.info(unicode(spec))
+            ctx.ui.formatted_output(unicode(spec))
             if sourcedb:
                 revdeps =  [name for name, dep in sourcedb.get_rev_deps(spec.source.name)]
                 print _('Reverse Build Dependencies:'), util.strlist(revdeps)
