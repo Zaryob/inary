@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 #
-# Copyright (C) 2005 - 2008, TUBITAK/UEKAE
+# Copyright (C) 2005-2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -28,8 +28,6 @@ Usage: add-repo <repo> <indexuri>
 <repo>: name of repository to add
 <indexuri>: URI of index file
 
-If no repo is given, add-repo pardus-devel repo is added by default
-
 NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 """)
     __metaclass__ = command.autocommand
@@ -56,14 +54,9 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 
     def run(self):
 
-        if len(self.args)==2 or len(self.args)==0:
+        if len(self.args) == 2:
             self.init()
-            if len(self.args)==2:
-                name = self.args[0]
-                indexuri = self.args[1]
-            else:
-                name = 'pardus-2009'
-                indexuri = 'http://paketler.pardus.org.tr/pardus-2009/pisi-index.xml.bz2'
+            name, indexuri = self.args
 
             if ctx.get_option('no_fetch'):
                 if not ctx.ui.confirm(_('Add %s repository without updating the database?\nBy confirming '
