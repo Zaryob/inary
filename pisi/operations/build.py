@@ -403,7 +403,7 @@ class Builder:
                 # Force ccache to use /root/.ccache instead of $HOME/.ccache
                 # which can be modified through actions.py
                 os.environ["CCACHE_DIR"] = "/root/.ccache"
-                ctx.ui.info(_("CCache detected..."))
+                ctx.ui.info(_("ccache detected..."))
 
     def fetch_files(self):
         self.specdiruri = os.path.dirname(self.specuri.get_uri())
