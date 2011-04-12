@@ -77,6 +77,7 @@ all repositories.
                 return
         else:
             l = pisi.api.list_available(repo)
+
         installed_list = pisi.api.list_installed()
 
         # maxlen is defined dynamically from the longest package name (#9021)
@@ -85,19 +86,18 @@ all repositories.
 
         l.sort()
         for p in l:
+            if ctx.config.get_option('uninstalled') and p in installed_list:
+                continue
+
             package = self.packagedb.get_package(p, repo)
+
+            if p in installed_list:
+                package.name = util.colorize(package.name, 'green')
+            else:
+                package.name = util.colorize(package.name, 'brightwhite')
+
             if self.options.long:
-                if p in installed_list:
-                    package.name = util.colorize(package.name, 'green')
-                else:
-                    package.name = util.colorize(package.name, 'brightwhite')
                 ctx.ui.info(unicode(package)+'\n')
             else:
-                lenp = len(p)
-                if p in installed_list:
-                    if ctx.config.get_option('uninstalled'):
-                        continue
-                    p = util.colorize(p, 'green')
-                p = util.colorize(p, 'brightwhite')
-                p = p + ' ' * max(0, maxlen - lenp)
-                ctx.ui.info('%s - %s ' % (p, unicode(package.summary)))
+                package.name += ' ' * max(0, maxlen - len(p))
+                ctx.ui.info('%s - %s ' % (package.name, unicode(package.summary)))
