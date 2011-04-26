@@ -1,6 +1,6 @@
 # translation of it.po to Italian
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Andrea Decorte <adecorte@gmail.com>, 2007.
 # Davide Siciliano <edivad95@gmail.com>, 2010.
 msgid ""
@@ -10,10 +10,10 @@ msgstr ""
 "PO-Revision-Date: 2010-07-01 16:01+0200\n"
 "Last-Translator: Davide Siciliano <edivad95@gmail.com>\n"
 "Language-Team: Italian <pardus-translators@pardus.org.tr>\n"
-"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 1.0\n"
@@ -1733,13 +1733,13 @@ msgstr ""
 "\n"
 "Elenca i repository tenuti al momento sotto controllo.\n"
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr "attivo"
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
 msgstr "inattivo"
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
+msgstr "attivo"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
@@ -2783,11 +2783,8 @@ msgid "External dependencies not satisfied: %s"
 msgstr "Dipendenze esterne non soddisfatte"
 
 #: pisi/operations/install.py:197
-#, fuzzy
 msgid "The following packages will be installed in order to satisfy dependencies:"
-msgstr ""
-"I seguenti pacchetti verranno installati nel\n"
-"rispettivo ordine per soddisfare le dipendenze:\n"
+msgstr "I seguenti pacchetti verranno installati in modo di soddisfare le dipendenze:"
 
 #: pisi/operations/install.py:201
 msgid "External dependencies not satisfied"
@@ -2806,9 +2803,8 @@ msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "Switch di sicurezza: impossibile rimuovere i seguenti pacchetti:\n"
 
 #: pisi/operations/remove.py:48 pisi/operations/upgrade.py:374
-#, fuzzy
 msgid "Safety switch: The component system.base cannot be found."
-msgstr "Switch di sicurezza: il componente system.base non è stato trovato"
+msgstr "Interruttore di sicurezza: il componente system.base non può essere trovato."
 
 #: pisi/operations/remove.py:55
 msgid "Package %s does not exist. Cannot remove."
@@ -2819,13 +2815,10 @@ msgid "No packages to remove."
 msgstr "Nessun pacchetto da rimuovere."
 
 #: pisi/operations/remove.py:68
-#, fuzzy
 msgid ""
 "The following list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
 msgstr ""
-"La seguente lista minimale di pacchetti verrà rimossa\n"
-"nel rispettivo ordine per soddisfare le dipendenze:\n"
 
 #: pisi/operations/remove.py:73
 msgid "Package removal declined"
@@ -2872,12 +2865,10 @@ msgid "Package %s is already at the latest release %s."
 msgstr "Il pacchetto %s è già alla versione più recente %s."
 
 #: pisi/operations/upgrade.py:166
-#, fuzzy
 msgid "The following packages will be upgraded:"
 msgstr "I seguenti pacchetti verranno aggiornati: "
 
 #: pisi/operations/upgrade.py:176
-#, fuzzy
 msgid "There are extra packages due to dependencies."
 msgstr "Sono inclusi dei pacchetti extra per via delle dipendenze. Desideri proseguire?"
 
@@ -2890,19 +2881,16 @@ msgid "Upgrade is not possible."
 msgstr "L'aggiornamento non è possibile."
 
 #: pisi/operations/upgrade.py:351
-#, fuzzy
 msgid "Safety switch forces the installation of following packages:"
-msgstr "Switch di sicurezza: impossibile rimuovere i seguenti pacchetti in system.base: "
+msgstr ""
 
 #: pisi/operations/upgrade.py:367
-#, fuzzy
 msgid "Safety switch forces the upgrade of following packages:"
-msgstr "Switch di sicurezza: impossibile rimuovere i seguenti pacchetti in system.base: "
+msgstr ""
 
 #: pisi/package.py:68
-#, fuzzy
 msgid "Cannot open package file: %s"
-msgstr "Impossibile trovare il pacchetto di sorgenti: %s"
+msgstr ""
 
 #: pisi/package.py:89
 msgid "Unsupported package format: %s"
@@ -2986,9 +2974,8 @@ msgid "Object cannot be encoded"
 msgstr "Impossibile codificare l'oggetto"
 
 #: pisi/pxml/autoxml.py:734 pisi/pxml/autoxml.py:853
-#, fuzzy
 msgid "Object cannot be formatted"
-msgstr "Impossibile codificare l'oggetto"
+msgstr "L'oggetto non può essere formattato"
 
 #: pisi/pxml/autoxml.py:750
 msgid "List type must contain only one element"
@@ -3076,9 +3063,8 @@ msgid "Description: %s\n"
 msgstr "Descrizione: %s\n"
 
 #: pisi/specfile.py:374 pisi/specfile.py:460
-#, fuzzy
 msgid "Licenses: %s\n"
-msgstr "uso: %s\n"
+msgstr "Licenze: %s\n"
 
 #: pisi/specfile.py:375 pisi/specfile.py:461
 msgid "Component: %s\n"
@@ -3097,9 +3083,8 @@ msgid "translations.xml file is badly formed."
 msgstr ""
 
 #: pisi/specfile.py:462
-#, fuzzy
 msgid "Build Dependencies: "
-msgstr "Dipendenze: "
+msgstr "Dipendenze per la Costruzione: "
 
 #: pisi/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
@@ -3122,9 +3107,8 @@ msgid "Including directory '%s'"
 msgstr "Includendo la cartella '%s'"
 
 #: pisi/util.py:514
-#, fuzzy
 msgid "Cannot calculate SHA1 hash of %s"
-msgstr "Errore I/O: Impossibile calcolare l'hash SHA1 di %s"
+msgstr "Impossibile calcolare l'hash SHA1 di %s"
 
 #: pisi/util.py:526
 msgid "Compression type is not valid: '%s'"
