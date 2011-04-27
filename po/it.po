@@ -295,6 +295,8 @@ msgstr "File di progetto '%s' non trovato."
 #: pisi/actionsapi/qt4.py:56
 msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)"
 msgstr ""
+"Sembra che ci siano più di un file  pro, è necessario specificare uno.\r\n"
+"(Eventuali file .pro : %s)"
 
 #: pisi/actionsapi/rubymodules.py:108
 msgid "Running 'ruby %s' failed."
@@ -406,7 +408,7 @@ msgstr "Build file formato fallito."
 
 #: pisi/actionsapi/texlivemodules.py:69
 msgid "Creating symlinks from format to engines failed"
-msgstr ""
+msgstr "La creazione di link simbolici dal formato ai motori fallito"
 
 #: pisi/actionsapi/texlivemodules.py:73
 msgid "Installing docs failed"
@@ -478,7 +480,7 @@ msgstr ""
 
 #: pisi/actionsapi/texlivemodules.py:281
 msgid "No rule to proccess %s. Please file a bug."
-msgstr ""
+msgstr "Nessuna regola di processo %s. Si prega di segnalare il bug."
 
 #: pisi/api.py:58 pisi/cli/command.py:166
 msgid "You have to be root for this operation."
@@ -570,7 +572,7 @@ msgstr "Ok."
 
 #: pisi/archive.py:419
 msgid "Problem occured while uncompressing %s.Z file"
-msgstr ""
+msgstr "Si è verificato una Problema durante la decompressione del file %s.Z"
 
 #: pisi/atomicoperations.py:71 pisi/operations/history.py:72
 msgid "Package %s found in repository %s"
