@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2009, TUBITAK/UEKAE
+# Copyright (C) 2009-2011 TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the
@@ -84,8 +84,8 @@ def create_sandbox(output_dir, repository):
         chrun("/usr/bin/pisi cp")
         chrun("/usr/bin/hav call baselayout User.Manager setUser 0 'Root' '/root' '/bin/bash' 'pardus' '' ")
 
-        # Now it is 2009 release
-        file(os.path.join(output_dir, "etc/pardus-release"), "w").write("Pardus 2009\n")
+        # Now it is 2011 release
+        file(os.path.join(output_dir, "etc/pardus-release"), "w").write("Pardus 2011\n")
 
     except KeyboardInterrupt:
         run('umount %s/proc' % output_dir, ignore_error=True)
