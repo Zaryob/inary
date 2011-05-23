@@ -113,17 +113,20 @@ class Index(xmlfile.XmlFile):
         # have
         pool = multiprocessing.Pool()
 
-        try:
-            # Add source packages to index using a process pool
-            self.specs = pool.map(add_spec, specs)
-        except:
-            # If an exception occurs (like a keyboard interrupt), immediately
-            # terminate worker processes and propagate exception. (CLI honors
-            # KeyboardInterrupt exception, if you're not using CLI, you must
-            # handle KeyboardException yourself)
+        # Before calling pool.map check if list is empty or not: python#12157
+        if specs:
+            try:
+                # Add source packages to index using a process pool
+                self.specs = pool.map(add_spec, specs)
+            except:
+                # If an exception occurs (like a keyboard interrupt),
+                # immediately terminate worker processes and propagate
+                # exception. (CLI honors KeyboardInterrupt exception, if you're
+                # not using CLI, you must handle KeyboardException yourself)
 
-            pool.terminate()
-            raise
+                pool.terminate()
+                pool.join()
+                raise
 
         try:
             obsoletes_list = map(str, self.distribution.obsoletes)
@@ -144,15 +147,21 @@ class Index(xmlfile.XmlFile):
 
                 latest_packages.append((pkg, deltas, repo_uri))
 
-        try:
-            # Add binary packages to index using a process pool
-            self.packages = pool.map(add_package, latest_packages)
-        except:
-            pool.terminate()
-            raise
-        else:
-            # Clean up output
-            ctx.ui.info("\r%-80.80s" % (_('Done.')))
+        # Before calling pool.map check if list is empty or not: python#12157
+        if latest_packages:
+            try:
+                # Add binary packages to index using a process pool
+                self.packages = pool.map(add_package, latest_packages)
+            except:
+                pool.terminate()
+                pool.join()
+                raise
+
+        pool.close()
+        pool.join()
+
+        # Clean up output
+        ctx.ui.info("\r%-80.80s" % (_('Done.')))
 
 def add_package(params):
     try:
