@@ -509,10 +509,12 @@ class Builder:
     def unpack_source_archives(self):
         ctx.ui.action(_("Unpacking archive(s)..."))
         self.sourceArchives.unpack(self.pkg_work_dir())
+
+        # Grab AdditionalFiles
+        self.copy_additional_source_files()
+
         # apply the patches and prepare a source directory for build.
         if self.apply_patches():
-            # Grab AdditionalFiles
-            self.copy_additional_source_files()
             ctx.ui.info(_(" unpacked (%s)") % self.pkg_work_dir())
             self.set_state("unpack")
 
