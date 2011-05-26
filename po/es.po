@@ -1,7 +1,7 @@
 # translation of es.po to spanish
 # translation of es.po to
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Klemens Häckel <click3d_at_linuxmail_org>, 2007, 2008.
 # Christian Faure <christian.faurebouvard@laposte.net>, 2007.
 # klemens <click3d at linuxmail org>, 2007.
@@ -18,10 +18,10 @@ msgstr ""
 "PO-Revision-Date: 2010-03-28 20:37-0400\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <kde-i18n-doc@kde.org>\n"
-"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 1.0\n"
@@ -728,7 +728,6 @@ msgid "Extracting the files of %s"
 msgstr "Extrayendo los archivos de %s"
 
 #: pisi/cli/addrepo.py:24
-#, fuzzy
 msgid ""
 "Add a repository\n"
 "\n"
@@ -739,14 +738,12 @@ msgid ""
 "\n"
 "NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment\n"
 msgstr ""
-"Agregar repositorio\n"
+"Agregar un repositorio\n"
 "\n"
 "Uso: add-repo <repo> <indexuri>\n"
 "\n"
 "<repo>: nombre del repositorio a agregar\n"
 "<indexuri>: URI del archivo index\n"
-"\n"
-"Si no se indica un repositorio, add-repo pardus-devel repositorio se agrega automáticamente\n"
 "\n"
 "Obs: Actualmente solamente archivos locales (ej., /a/b/c) y URLs http:// son soportados\n"
 
@@ -1308,9 +1305,8 @@ msgstr "No mostrar paquetes instalados"
 
 # "Reverse" ne demek ? is this = undo ?
 #: pisi/cli/graph.py:56
-#, fuzzy
 msgid "Draw reverse dependency graph"
-msgstr "Dependencias reversas:"
+msgstr "Dibujar gráfico de dependencias reversas"
 
 #: pisi/cli/graph.py:59
 msgid "Dot output file"
@@ -1798,13 +1794,13 @@ msgstr ""
 "\n"
 "Lista los repositorios configurados actualmente.\n"
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr "activo"
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
 msgstr "deshabilitado"
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
+msgstr "activo"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
@@ -2346,16 +2342,15 @@ msgstr "Servidor no soporta descarga parciales. La parte del archivo descargado 
 
 #: pisi/file.py:35
 msgid "URL %s already downloaded as %s"
-msgstr ""
+msgstr "URL %s ya descargada como %s"
 
 #: pisi/file.py:42
-#, fuzzy
 msgid "No signature found for %s"
-msgstr "Script de configuración para cmake no encontrado."
+msgstr "No firma encontrada para %s"
 
 #: pisi/file.py:50
 msgid " invalid for %s"
-msgstr ""
+msgstr " inválido para %s"
 
 #: pisi/file.py:72
 msgid "uri must have type either URI or string"
@@ -2424,7 +2419,7 @@ msgstr "%s fue revertido de %s a %s."
 
 #: pisi/history.py:104 pisi/history.py:126
 msgid "Unknown package operation"
-msgstr ""
+msgstr "Operación desconocida de paquete"
 
 #: pisi/index.py:118
 msgid "Adding %s to package index"
@@ -2478,9 +2473,8 @@ msgid "Building source package: %s"
 msgstr "Generando paquete fuente: %s"
 
 #: pisi/operations/build.py:368
-#, fuzzy
 msgid "Rebuilding for %s"
-msgstr "Construyendo archivo de formato %s"
+msgstr "Reconstruyendo para %s"
 
 #: pisi/operations/build.py:396
 msgid "IceCream detected. Make sure your daemon is up and running..."
@@ -2577,7 +2571,7 @@ msgstr "no posible llamar función desde acciones: %s"
 
 #: pisi/operations/build.py:743
 msgid "Path must start with a slash: %s"
-msgstr ""
+msgstr "Ruta debe empezar con una raya: %s"
 
 #: pisi/operations/build.py:747
 msgid "Multiple 'Path' tags specified for this path: %s"
@@ -2628,9 +2622,8 @@ msgid "Patch file is missing: %s\n"
 msgstr "Falta el archivo de parche: %s\n"
 
 #: pisi/operations/build.py:822
-#, fuzzy
 msgid "Patch file is empty: %s"
-msgstr "Falta el archivo de parche: %s\n"
+msgstr "Archivo de parche está vacío: %s"
 
 #: pisi/operations/build.py:838
 msgid "* Applying patch: %s"
@@ -2713,9 +2706,8 @@ msgid "Package '%s' has the same release number with the new package. Skipping i
 msgstr "Paquete '%s' tiene numero de release identico como el nuevo paquete. Omitiendo..."
 
 #: pisi/operations/delta.py:69
-#, fuzzy
 msgid "All files in the package '%s' are different from the files in the new package. Skipping it..."
-msgstr "Paquete '%s' tiene numero de release identico como el nuevo paquete. Omitiendo..."
+msgstr "Todos los archivos del paquete '%s' son diferente de los archivos del paquete nuevo. Omitiendo..."
 
 #: pisi/operations/delta.py:113
 msgid "New package '%s' exists in the list of old packages. Skipping it..."
@@ -3135,9 +3127,8 @@ msgid "Description: %s\n"
 msgstr "Descripción: %s\n"
 
 #: pisi/specfile.py:374 pisi/specfile.py:460
-#, fuzzy
 msgid "Licenses: %s\n"
-msgstr "Uso: %s\n"
+msgstr "Licencias: %s\n"
 
 #: pisi/specfile.py:375 pisi/specfile.py:461
 msgid "Component: %s\n"
