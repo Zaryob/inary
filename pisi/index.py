@@ -92,6 +92,11 @@ class Index(xmlfile.XmlFile):
         deltas = {}
 
         for root, dirs, files in os.walk(repo_uri):
+            # Filter hidden directories
+            # TODO: Add --exclude-dirs parameter to CLI and filter according
+            # directories here
+            dirs[:] = [d for d in dirs if not d.startswith(".")]
+
             for fn in files:
 
                 if fn.endswith(ctx.const.delta_package_suffix):
