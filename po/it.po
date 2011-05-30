@@ -2116,14 +2116,12 @@ msgid "Running post removal operations for %s"
 msgstr ""
 
 #: pisi/comariface.py:198
-#, fuzzy
 msgid "Running package's postremove script"
-msgstr "Esecuzione dello script pre rimozione del pacchetto"
+msgstr "Esecuzione dello script post rimozione del pacchetto"
 
 #: pisi/comariface.py:207
-#, fuzzy
 msgid "Calling post remove handlers"
-msgstr "Chiamata dei gestori di pre rimozione"
+msgstr "Chiamata dei gestori di post rimozione"
 
 #: pisi/comariface.py:218
 msgid "Unregistering comar scripts"
@@ -2174,9 +2172,8 @@ msgid "Component %s not found"
 msgstr "Componente %s non trovato"
 
 #: pisi/db/groupdb.py:66 pisi/db/groupdb.py:75
-#, fuzzy
 msgid "Group %s not found"
-msgstr "Componente %s non trovato"
+msgstr "Gruppo %s non trovato"
 
 #: pisi/db/installdb.py:37
 msgid "installed"
@@ -2217,28 +2214,24 @@ msgid "Repo item %s not found"
 msgstr "Chiave %s non trovata"
 
 #: pisi/db/itembyrepo.py:60 pisi/db/itembyrepo.py:71 pisi/db/itembyrepo.py:81
-#, fuzzy
 msgid "Repository %s does not exist."
-msgstr "Il repository %s non esiste. Impossibile rimuovere."
+msgstr "Il repository %s non esiste."
 
 #: pisi/db/packagedb.py:144 pisi/db/packagedb.py:151
-#, fuzzy
 msgid "Package %s not found."
-msgstr "Pacchetto %s non trovato"
+msgstr "Pacchetto %s non trovato."
 
 #: pisi/db/repodb.py:168
-#, fuzzy
 msgid "%s repository needs to be updated"
-msgstr "Nessun repository di nome %s trovato."
+msgstr "Repositorio di nome %s dev'essere aggiornato."
 
 #: pisi/db/repodb.py:174
 msgid "Error parsing repository index information. Index file does not exist or is malformed."
 msgstr ""
 
 #: pisi/db/repodb.py:264
-#, fuzzy
 msgid "Repository '%s' is not compatible with your distribution. Repository is disabled."
-msgstr "Il pacchetto %s non è disponibile nei repository."
+msgstr "Il pacchetto %s non è disponibile nei repositorio. Repositorio è disattivato."
 
 #: pisi/fetcher.py:147
 msgid "Urlgrabber needs to be installed to run this command"
@@ -2262,7 +2255,6 @@ msgid "Could not fetch destination file \"%s\": %s"
 msgstr "Accesso negato al file di destinazione: \"%s\""
 
 #: pisi/fetcher.py:174
-#, fuzzy
 msgid "A problem occurred. Please check the archive address and/or permissions again."
 msgstr "C'è stato un problema. Controlla per favore di nuovo l'indirizzo dell'archivio e/o i permessi."
 
@@ -2287,9 +2279,8 @@ msgid "URL %s already downloaded as %s"
 msgstr ""
 
 #: pisi/file.py:42
-#, fuzzy
 msgid "No signature found for %s"
-msgstr "Nessun script configure trovato per cmake."
+msgstr ""
 
 #: pisi/file.py:50
 #, fuzzy
