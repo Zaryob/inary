@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: 2011-04-06 00:27+EEST\n"
+"POT-Creation-Date: 2011-05-30 10:03+EEST\n"
 "PO-Revision-Date: 2011-02-04 12:21+0300\n"
 "Last-Translator: Korostil Daniel <ted.korostiled@gmail.com>\n"
 "Language-Team: translation@linux.org.ua\n"
@@ -591,7 +591,7 @@ msgstr ""
 msgid "Installing %s, version %s, release %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:192 pisi/operations/build.py:757
+#: pisi/atomicoperations.py:192 pisi/operations/build.py:759
 msgid "%s-%s is not a valid PiSi version format"
 msgstr ""
 
@@ -2115,15 +2115,19 @@ msgstr ""
 msgid "Unknown package operation"
 msgstr ""
 
-#: pisi/index.py:118
-msgid "Adding %s to package index"
+#: pisi/index.py:169
+msgid "Done."
 msgstr ""
 
-#: pisi/index.py:135
+#: pisi/index.py:175
+msgid "Adding package to index: %s"
+msgstr ""
+
+#: pisi/index.py:191
 msgid "Package %s: metadata corrupt, skipping..."
 msgstr ""
 
-#: pisi/index.py:195
+#: pisi/index.py:264
 msgid "Adding %s to source index"
 msgstr ""
 
@@ -2195,159 +2199,159 @@ msgstr ""
 msgid "Unpacking archive(s)..."
 msgstr ""
 
-#: pisi/operations/build.py:516
+#: pisi/operations/build.py:518
 msgid " unpacked (%s)"
 msgstr ""
 
-#: pisi/operations/build.py:521
+#: pisi/operations/build.py:523
 msgid "Setting up source..."
 msgstr ""
 
-#: pisi/operations/build.py:526
+#: pisi/operations/build.py:528
 msgid "Building source..."
 msgstr ""
 
-#: pisi/operations/build.py:531
+#: pisi/operations/build.py:533
 msgid "Testing package..."
 msgstr ""
 
-#: pisi/operations/build.py:535
+#: pisi/operations/build.py:537
 msgid "Installing..."
 msgstr ""
 
-#: pisi/operations/build.py:601
+#: pisi/operations/build.py:603
 msgid "Unable to read Actions Script (%s): %s"
 msgstr ""
 
-#: pisi/operations/build.py:604
+#: pisi/operations/build.py:606
 msgid "SyntaxError in Actions Script (%s): %s"
 msgstr ""
 
-#: pisi/operations/build.py:634
+#: pisi/operations/build.py:636
 msgid "Unable to read COMAR script (%s): %s"
 msgstr ""
 
-#: pisi/operations/build.py:637
+#: pisi/operations/build.py:639
 msgid "SyntaxError in COMAR file (%s): %s"
 msgstr ""
 
-#: pisi/operations/build.py:669
+#: pisi/operations/build.py:671
 msgid "Sandbox violation: %s (%s -> %s)"
 msgstr ""
 
-#: pisi/operations/build.py:685 pisi/util.py:549
+#: pisi/operations/build.py:687 pisi/util.py:549
 msgid "ERROR: WorkDir (%s) does not exist\n"
 msgstr ""
 
-#: pisi/operations/build.py:694
+#: pisi/operations/build.py:696
 msgid "Sandbox enabled build..."
 msgstr ""
 
-#: pisi/operations/build.py:718
+#: pisi/operations/build.py:720
 msgid "Sandbox violation result:"
 msgstr ""
 
-#: pisi/operations/build.py:723
+#: pisi/operations/build.py:725
 msgid "Sandbox violations!"
 msgstr ""
 
-#: pisi/operations/build.py:729
+#: pisi/operations/build.py:731
 msgid "unable to call function from actions: %s"
 msgstr ""
 
-#: pisi/operations/build.py:743
+#: pisi/operations/build.py:745
 msgid "Path must start with a slash: %s"
 msgstr ""
 
-#: pisi/operations/build.py:747
+#: pisi/operations/build.py:749
 msgid "Multiple 'Path' tags specified for this path: %s"
 msgstr ""
 
-#: pisi/operations/build.py:776
+#: pisi/operations/build.py:778
 msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 
-#: pisi/operations/build.py:781
+#: pisi/operations/build.py:783
 msgid "Safety switch: system.devel is already installed"
 msgstr ""
 
-#: pisi/operations/build.py:783
+#: pisi/operations/build.py:785
 msgid "Safety switch: the component system.devel cannot be found"
 msgstr ""
 
-#: pisi/operations/build.py:792
+#: pisi/operations/build.py:794
 msgid "Unsatisfied Build Dependencies:"
 msgstr ""
 
-#: pisi/operations/build.py:796
+#: pisi/operations/build.py:798
 msgid "Cannot build package due to unsatisfied build dependencies"
 msgstr ""
 
-#: pisi/operations/build.py:801
+#: pisi/operations/build.py:803
 msgid "Build dependency %s cannot be satisfied"
 msgstr ""
 
-#: pisi/operations/build.py:803
+#: pisi/operations/build.py:805
 msgid "Do you want to install the unsatisfied build dependencies"
 msgstr ""
 
-#: pisi/operations/build.py:804
+#: pisi/operations/build.py:806
 msgid "Installing build dependencies."
 msgstr ""
 
-#: pisi/operations/build.py:810
+#: pisi/operations/build.py:812
 msgid "Ignoring build dependencies."
 msgstr ""
 
-#: pisi/operations/build.py:820
+#: pisi/operations/build.py:822
 msgid "Patch file is missing: %s\n"
 msgstr ""
 
-#: pisi/operations/build.py:822
+#: pisi/operations/build.py:824
 msgid "Patch file is empty: %s"
 msgstr ""
 
-#: pisi/operations/build.py:838
+#: pisi/operations/build.py:840
 msgid "* Applying patch: %s"
 msgstr ""
 
-#: pisi/operations/build.py:957
+#: pisi/operations/build.py:959
 msgid "/%s has suid bit set"
 msgstr ""
 
-#: pisi/operations/build.py:1033
+#: pisi/operations/build.py:1035
 msgid "No user named '%s' found on the system"
 msgstr ""
 
-#: pisi/operations/build.py:1039
+#: pisi/operations/build.py:1041
 msgid "No group named '%s' found on the system"
 msgstr ""
 
-#: pisi/operations/build.py:1046
+#: pisi/operations/build.py:1048
 msgid "There are abandoned files under the install dir (%s):"
 msgstr ""
 
-#: pisi/operations/build.py:1074
+#: pisi/operations/build.py:1076
 msgid "Ignoring empty package %s"
 msgstr ""
 
-#: pisi/operations/build.py:1078
+#: pisi/operations/build.py:1080
 msgid "Building package: %s"
 msgstr ""
 
-#: pisi/operations/build.py:1097 pisi/operations/delta.py:59
+#: pisi/operations/build.py:1099 pisi/operations/delta.py:59
 msgid "Creating %s..."
 msgstr ""
 
-#: pisi/operations/build.py:1144
+#: pisi/operations/build.py:1146
 msgid "Cleaning build directory..."
 msgstr ""
 
-#: pisi/operations/build.py:1147
+#: pisi/operations/build.py:1149
 msgid "Keeping build directory"
 msgstr ""
 
-#: pisi/operations/build.py:1235
+#: pisi/operations/build.py:1237
 msgid "*** %d error(s), %d warning(s)"
 msgstr ""
 
