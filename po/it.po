@@ -1,6 +1,6 @@
 # translation of it.po to Italian
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Andrea Decorte <adecorte@gmail.com>, 2007.
 # Davide Siciliano <edivad95@gmail.com>, 2010.
 msgid ""
@@ -10,10 +10,10 @@ msgstr ""
 "PO-Revision-Date: 2010-07-01 16:01+0200\n"
 "Last-Translator: Davide Siciliano <edivad95@gmail.com>\n"
 "Language-Team: Italian <pardus-translators@pardus.org.tr>\n"
-"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 1.0\n"
@@ -474,7 +474,7 @@ msgstr ""
 
 #: pisi/actionsapi/texlivemodules.py:279
 msgid "Language file  %s  already generated."
-msgstr ""
+msgstr "File della lingua %s già generato."
 
 #: pisi/actionsapi/texlivemodules.py:281
 msgid "No rule to proccess %s. Please file a bug."
@@ -891,7 +891,7 @@ msgstr "Crea pacchetto PiSi"
 
 #: pisi/cli/build.py:165 pisi/cli/delta.py:72
 msgid "Supported package formats:"
-msgstr ""
+msgstr "Supportati formati di pacchetto:"
 
 #: pisi/cli/build.py:168 pisi/cli/delta.py:75
 msgid "  %s (default)"
@@ -1733,13 +1733,13 @@ msgstr ""
 "\n"
 "Elenca i repository tenuti al momento sotto controllo.\n"
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr "attivo"
-
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
 msgstr "inattivo"
+
+#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+msgid "active"
+msgstr "attivo"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 msgid "%s [%s]"
