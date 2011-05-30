@@ -1,3 +1,151 @@
+2011-05-30 Fatih Aşıcı <fatih@pardus.org.tr>
+	* l10n: Update messages
+
+2011-05-30 Fatih Aşıcı <fatih@pardus.org.tr>
+	* l10n/it: Do not break the line in translation
+
+2011-05-27 Gökçen Eraslan <gokcen@pardus.org.tr>
+	* index: Do not traverse hidden directories during index.
+
+2011-05-24 Ozan Çağlayan <ozan@pardus.org.tr>
+	* patches: Drop useless hunk
+
+2011-05-24 Ozan Çağlayan <ozan@pardus.org.tr>
+	* build: Put source additional files before applying patches.
+
+	This way, we can apply a patch on top of an additional
+	source file.
+
+2011-05-23 Ozan Çağlayan <ozan@pardus.org.tr>
+	* rng: Add AVASYSPL license for Epson scanner stuff
+
+2011-05-23 Gökçen Eraslan <gokcen@pardus.org.tr>
+	* index: Make sure that pool is safely closed and joined.
+
+	Make sure we call close and join methods of Pool object 
+	properly in any case. This fixes hundreds of processes
+	appeard in buildfarm.
+
+2011-05-13 Gökçen Eraslan <gokcen@pardus.org.tr>
+	* index: Parallelize indexing procedure using Python's multiprocessing module.
+
+	Create a pool of worker processes to make indexing in a parallel fashion.
+	Normally, all metadata parsing and SHA1 calculation process are done
+	sequentially per package.
+	This commits distributes all package-based parsing, SHA1 calculation process
+	to worker processes to make it faster in multiprocessor/multicore systems.
+
+2011-05-11 Ozan Çağlayan <ozan@pardus.org.tr>
+	* scripts/pisi-sandbox: Update dates, versions
+
+2011-05-07 Gökçen Eraslan <gokcen@pardus.org.tr>
+	* rng: Add ZPLv2.0 license to RNG.
+
+2011-04-27 Mehmet Emre Atasever <memre@pardus.org.tr>
+	* revert <ExcludeArch> regex support, add armv7l to the <ExcludeArch> values
+
+2011-04-27 Mehmet Emre Atasever <memre@pardus.org.tr>
+	* pisi should manage <ExcludeArch> tags with regex
+
+2011-04-12 Ozan Çağlayan <ozan@pardus.org.tr>
+	* l10n: Update messages
+
+2011-04-12 Ozan Çağlayan <ozan@pardus.org.tr>
+	* operations/build: Fix CCache name to reflect upstream name ccache (pb#17713)
+
+	Use ccache instead of CCache which doesn't reflect upstream name
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/17713.
+
+2011-04-12 Ozan Çağlayan <ozan@pardus.org.tr>
+	* cli/listavailable: Fix inconsistent coloring (pb#17716)
+
+	Simplify code to fix the wrong coloring behaviour of pisi list-available
+	command.
+
+	Reported by: Anıl Özbek
+
+	See http://bugs.pardus.org.tr/17716.
+
+2011-04-05 Fatih Aşıcı <fatih@pardus.org.tr>
+	* l10n: Update messages
+
+2011-04-05 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/addrepo: Make name and URI parameters mandatory
+
+	Previously it was adding a default repo if those parameters were not
+	given.
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/15196.
+
+2011-04-04 Fatih Aşıcı <fatih@pardus.org.tr>
+	* l10n: Update messages
+
+2011-04-04 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/info: Format the info output of source packages
+
+	Thanks to Anıl Özbek for his patch.
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/17595.
+
+2011-04-04 Fatih Aşıcı <fatih@pardus.org.tr>
+	* specfile: Show licenses in package info
+
+	A modified version of the patch provided by Anıl Özbek.
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/17596.
+
+2011-04-04 Fatih Aşıcı <fatih@pardus.org.tr>
+	* delta: Reduce code duplication
+
+2011-04-03 Fatih Aşıcı <fatih@pardus.org.tr>
+	* l10n: Update messages
+
+2011-04-03 Fatih Aşıcı <fatih@pardus.org.tr>
+	* delta: Change the way in previous commit
+
+	No need to use an exception. Comparing the size of changed files and the
+	new files is enough.
+
+2011-04-03 Fatih Aşıcı <fatih@pardus.org.tr>
+	* delta: Do not create delta if all files are different
+
+2011-04-03 Fatih Aşıcı <fatih@pardus.org.tr>
+	* delta: Minor refactoring in find_delta
+
+	Use better variable names and reduce lambda usage.
+
+2011-03-31 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Check max_count value
+
+2011-03-31 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Fix failure when a directory is changed with a symlink
+
+2011-03-30 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Fix copy/paste error
+
+2011-03-29 Fatih Aşıcı <fatih@pardus.org.tr>
+	* rng: Add FDL-1.3 to the list of licenses
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/17528.
+
+2011-03-26 Gökçen Eraslan <gokcen@pardus.org.tr>
+	* index: Fix usage of remove_suffix.
+
+2011-03-25 Fatih Aşıcı <fatih@pardus.org.tr>
+	* pisi 2.4_alpha4
+
+	This is the forth alpha for the upcoming 2.4.x releases. This release
+	introduces two features as well as bug fixes and translation updates.
+
+	The first feature which is added in this release is an API addition for
+	use in buildfarm. With a new method, it is now possible to determine
+	the old packages that will be used to create delta packages from.
+
+	"Build flags" is another feature introduced in this release. Build flags
+	can be used to enable/disable some operations/packages at build time.
+	Currently, two flags are accepted: noDebug and noDelta.
+
 2011-03-25 Fatih Aşıcı <fatih@pardus.org.tr>
 	* l10n: Update Turkish translations
 

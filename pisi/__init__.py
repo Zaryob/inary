@@ -18,7 +18,7 @@ import atexit
 import logging
 import logging.handlers
 
-__version__ = "2.4_alpha4"
+__version__ = "2.4_beta1"
 
 __all__ = [ 'api', 'configfile', 'db']
 
