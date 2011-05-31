@@ -16,11 +16,80 @@ import shutil
 import glob
 import sys
 import inspect
+import tempfile
 from distutils.core import setup
+from distutils.command.build import build
 from distutils.command.install import install
 
 sys.path.insert(0, '.')
 import pisi
+
+IN_FILES = ("pisi.xml.in",)
+PROJECT = "pisi"
+MIMEFILE_DIR = "usr/share/mime/packages"
+
+
+class Build(build):
+    def run(self):
+        build.run(self)
+
+        self.mkpath(self.build_base)
+
+        for in_file in IN_FILES:
+            name, ext = os.path.splitext(in_file)
+            self.spawn(["intltool-merge", "-x", "po", in_file, os.path.join(self.build_base, name)])
+
+
+class BuildPo(build):
+    def run(self):
+        build.run(self)
+        self.build_po()
+
+    def build_po(self):
+        import optparse
+        files = tempfile.mkstemp()[1]
+        filelist = []
+
+        # Include optparse module path to translate
+        optparse_path = os.path.abspath(optparse.__file__).rstrip("co")
+
+        # Collect headers for mimetype files
+        for filename in IN_FILES:
+            os.system("intltool-extract --type=gettext/xml %s" % filename)
+
+        for root,dirs,filenames in os.walk("pisi"):
+            for filename in filenames:
+                if filename.endswith(".py"):
+                    filelist.append(os.path.join(root, filename))
+
+        filelist.extend(["pisi-cli", "pisi.xml.in.h", optparse_path])
+        filelist.sort()
+        with open(files, "w") as _files:
+            _files.write("\n".join(filelist))
+
+        # Generate POT file
+        os.system("xgettext -L Python \
+                            --default-domain=%s \
+                            --keyword=_ \
+                            --keyword=N_ \
+                            --files-from=%s \
+                            -o po/%s.pot" % (PROJECT, files, PROJECT))
+
+        # Update PO files
+        for item in glob.glob1("po", "*.po"):
+            print "Updating .. ", item
+            os.system("msgmerge --update --no-wrap --sort-by-file po/%s po/%s.pot" % (item, PROJECT))
+
+        # Cleanup
+        os.unlink(files)
+        for f in filelist:
+            if not f.endswith(".h"):
+                continue
+            try:
+                os.unlink(f)
+            except OSError:
+                pass
+
 
 class Install(install):
     def run(self):
@@ -84,6 +153,7 @@ class Install(install):
             pisiconf.write('\n')
 
 
+
 setup(name="pisi",
     version= pisi.__version__,
     description="PiSi (Packages Installed Successfully as Intended)",
@@ -95,7 +165,9 @@ setup(name="pisi",
     package_dir = {'': ''},
     packages = ['pisi', 'pisi.cli', 'pisi.operations', 'pisi.actionsapi', 'pisi.pxml', 'pisi.scenarioapi', 'pisi.db'],
     scripts = ['pisi-cli', 'scripts/lspisi', 'scripts/unpisi', 'scripts/check-newconfigs.py', 'scripts/revdep-rebuild'],
-    cmdclass = {'install' : Install}
+    cmdclass = {'build' : Build,
+                'build_po' : BuildPo,
+                'install' : Install}
     )
 
 # the below stuff is really nice but we already have a version
