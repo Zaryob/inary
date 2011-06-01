@@ -183,7 +183,7 @@ def copytree(source, destination, sym = True):
         error(_('ActionsAPI [copytree]: Directory %s doesn\'t exists.') % (source))
 
 def touch(filePath):
-    '''changes the access time of the 'filePath', or creates it if it is not exist'''
+    '''changes the access time of the 'filePath', or creates it if it does not exist'''
     filePathGlob = glob.glob(filePath)
 
     if filePathGlob:
