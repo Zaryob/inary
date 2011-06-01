@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR ORGANIZATION
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
@@ -10,16 +10,16 @@ msgstr ""
 "PO-Revision-Date: 2010-12-18 22:24+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: /usr/lib/python2.7/optparse.py:140
-#, fuzzy, python-format
+#, python-format
 msgid "no such option: %s"
-msgstr "опция не найдена:% S"
+msgstr "опция не найдена: %s"
 
 #: /usr/lib/python2.7/optparse.py:151
 #, python-format
@@ -129,7 +129,6 @@ msgid "Use --debug to see a traceback."
 msgstr "Используйте --debug для просмотра трассировки"
 
 #: pisi.xml.in.h:1
-#, fuzzy
 msgid "PiSi package"
 msgstr "Создать PiSi пакет"
 
@@ -438,9 +437,9 @@ msgid "ActionsAPI [touch]: No file matched pattern \"%s\"."
 msgstr "ActionsAPI [touch]: Нет файла, соответствующего шаблону \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:200
-#, fuzzy, python-format
+#, python-format
 msgid "ActionsAPI [touch]: Permission denied: %s"
-msgstr "ActionsAPI [touch]: Доступ запрещен: %s to %s"
+msgstr "ActionsAPI [touch]: Доступ запрещен: %s"
 
 #: pisi/actionsapi/shelltools.py:255
 #, python-format
@@ -1442,20 +1441,20 @@ msgstr ""
 "Используйте \"%prog help <команда>\" для проверки особой команды.\n"
 
 #: pisi/cli/history.py:28
-msgid "emerge"
-msgstr "emerge"
-
-#: pisi/cli/history.py:28
-msgid "install"
-msgstr "установить"
+msgid "upgrade"
+msgstr "обновить"
 
 #: pisi/cli/history.py:28
 msgid "remove"
 msgstr "удалить"
 
 #: pisi/cli/history.py:28
-msgid "repository update"
-msgstr "обновление репозитория"
+msgid "emerge"
+msgstr "emerge"
+
+#: pisi/cli/history.py:28
+msgid "install"
+msgstr "установить"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1466,8 +1465,8 @@ msgid "takeback"
 msgstr "возврат"
 
 #: pisi/cli/history.py:28
-msgid "upgrade"
-msgstr "обновить"
+msgid "repository update"
+msgstr "обновление репозитория"
 
 #: pisi/cli/history.py:31
 msgid ""
@@ -2449,14 +2448,14 @@ msgid "Server doesn't support partial downloads. Previously downloaded part of t
 msgstr "Сервер не поддерживает скачивание по частям. Ранее скачанная часть файла будет перезаписана."
 
 #: pisi/file.py:35
-#, fuzzy, python-format
+#, python-format
 msgid "URL %s already downloaded as %s"
-msgstr "URL%S уже загружен как %S"
+msgstr "URL %s уже загружен как %s"
 
 #: pisi/file.py:42
-#, fuzzy, python-format
+#, python-format
 msgid "No signature found for %s"
-msgstr "Подпись не найдена для %S"
+msgstr "Подпись не найдена для %s"
 
 #: pisi/file.py:50
 #, python-format
@@ -2609,9 +2608,9 @@ msgid "Building source package: %s"
 msgstr "Сборка пакета с исходным кодом: %s"
 
 #: pisi/operations/build.py:368
-#, fuzzy, python-format
+#, python-format
 msgid "Rebuilding for %s"
-msgstr "Пересборка %S"
+msgstr "Пересборка %s"
 
 #: pisi/operations/build.py:396
 msgid "IceCream detected. Make sure your daemon is up and running..."
