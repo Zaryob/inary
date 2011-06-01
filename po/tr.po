@@ -16,10 +16,10 @@ msgstr ""
 "PO-Revision-Date: 2010-03-24 16:28+0200\n"
 "Last-Translator: Fatih Aşıcı <fatih@pardus.org.tr>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=1;plural=0;\n"
 "X-Generator: Lokalize 1.0\n"
 
@@ -136,9 +136,8 @@ msgid "Use --debug to see a traceback."
 msgstr "Geri izleme verisi almak için lütfen --debug seçeneğini kullanın."
 
 #: pisi.xml.in.h:1
-#, fuzzy
 msgid "PiSi package"
-msgstr "PiSi paketi oluştur"
+msgstr "PiSi paketi"
 
 #: pisi/actionsapi/autotools.py:36 pisi/actionsapi/cmaketools.py:36
 #, python-format
@@ -1463,20 +1462,20 @@ msgstr ""
 "Belirli bir komut hakkında yardım almak için \"%prog help <komut>\" kullanınız.\n"
 
 #: pisi/cli/history.py:28
-msgid "emerge"
-msgstr "kaynaktan kur"
-
-#: pisi/cli/history.py:28
-msgid "install"
-msgstr "kur"
+msgid "upgrade"
+msgstr "yükselt"
 
 #: pisi/cli/history.py:28
 msgid "remove"
 msgstr "kaldır"
 
 #: pisi/cli/history.py:28
-msgid "repository update"
-msgstr "depo güncellemesi"
+msgid "emerge"
+msgstr "kaynaktan kur"
+
+#: pisi/cli/history.py:28
+msgid "install"
+msgstr "kur"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1487,8 +1486,8 @@ msgid "takeback"
 msgstr "geri al"
 
 #: pisi/cli/history.py:28
-msgid "upgrade"
-msgstr "yükselt"
+msgid "repository update"
+msgstr "depo güncellemesi"
 
 #: pisi/cli/history.py:31
 msgid ""
@@ -3327,9 +3326,9 @@ msgid "unpack: check_file_hash failed"
 msgstr "unpack: kaynak arşivin bütünlüğünde sorun var."
 
 #: pisi/sourcearchive.py:124
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown archive type '%s' is given for '%s'."
-msgstr "'%s' için bilinmeyen bir arşiv türü verildi."
+msgstr "Arşiv için bilinmeyen bir tip (%s) verilmiş: %s"
 
 #: pisi/specfile.py:164
 #, python-format
