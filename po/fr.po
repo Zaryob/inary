@@ -1,6 +1,6 @@
 # translation of fr.po to French
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Amine Chadly <amine.chadly@gmail.com>, 2007, 2008.
 # Philippe Svetoslavsky <philsvet@gmail.com>, 2009, 2010.
 msgid ""
@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2010-01-01 22:22+0100\n"
 "Last-Translator: Philippe Svetoslavsky <philsvet@gmail.com>\n"
 "Language-Team: French <pardus-translators@pardus.org.tr>\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 0.3\n"
@@ -132,9 +132,8 @@ msgid "Use --debug to see a traceback."
 msgstr "Utiliser --debug pour voir la pile d'exécution."
 
 #: pisi.xml.in.h:1
-#, fuzzy
 msgid "PiSi package"
-msgstr "Crée le paquet PiSi"
+msgstr "Paquet PiSi"
 
 #: pisi/actionsapi/autotools.py:36 pisi/actionsapi/cmaketools.py:36
 #, python-format
@@ -1442,20 +1441,20 @@ msgstr ""
 "Utilisez \"%prog help <commande>\" pour une aide concernant une commande spécifique.\n"
 
 #: pisi/cli/history.py:28
-msgid "emerge"
-msgstr "emerge"
-
-#: pisi/cli/history.py:28
-msgid "install"
-msgstr "install"
+msgid "upgrade"
+msgstr "mettre à jour"
 
 #: pisi/cli/history.py:28
 msgid "remove"
 msgstr "supprime"
 
 #: pisi/cli/history.py:28
-msgid "repository update"
-msgstr "Mise-à-jour du dépôt"
+msgid "emerge"
+msgstr "emerge"
+
+#: pisi/cli/history.py:28
+msgid "install"
+msgstr "install"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1466,8 +1465,8 @@ msgid "takeback"
 msgstr "retour"
 
 #: pisi/cli/history.py:28
-msgid "upgrade"
-msgstr "mettre à jour"
+msgid "repository update"
+msgstr "Mise-à-jour du dépôt"
 
 #: pisi/cli/history.py:31
 msgid ""
@@ -3136,9 +3135,9 @@ msgid "At least one '%s' tag should have local text"
 msgstr "Au moins une balise '%s' devrait avoir du texte local"
 
 #: pisi/pxml/autoxml.py:85
-#, fuzzy, python-format
+#, python-format
 msgid "'%s' language of tag '%s' is empty"
-msgstr "La balise '%2$s' est vide pour la langue '%1$s'"
+msgstr "La balise '%s' est vide pour la langue '%s'"
 
 #: pisi/pxml/autoxml.py:113
 msgid "LocalText: unable to get either current or default locale"
