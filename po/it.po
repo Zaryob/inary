@@ -2931,14 +2931,12 @@ msgid "%s [cached]"
 msgstr "%s [nella cache]"
 
 #: pisi/operations/history.py:143
-#, fuzzy
 msgid "Following packages will be installed:\n"
-msgstr "I seguenti pacchetti verranno aggiornati: "
+msgstr "I seguenti pacchetti verranno installati:\n"
 
 #: pisi/operations/history.py:146
-#, fuzzy
 msgid "Following packages will be removed:\n"
-msgstr "I seguenti pacchetti verranno aggiornati: "
+msgstr "I seguenti pacchetti verranno rimossi:\n"
 
 #: pisi/operations/history.py:148 pisi/operations/history.py:162
 #: pisi/operations/install.py:200 pisi/operations/remove.py:72
@@ -2997,9 +2995,9 @@ msgid "Package %s (%s) is not compatible with your %s architecture."
 msgstr "Il pacchetto %s non è disponibile nei repository."
 
 #: pisi/operations/install.py:192
-#, fuzzy, python-format
+#, python-format
 msgid "External dependencies not satisfied: %s"
-msgstr "Dipendenze esterne non soddisfatte"
+msgstr "Dipendenze esterne non soddisfatte: %s"
 
 #: pisi/operations/install.py:197
 msgid "The following packages will be installed in order to satisfy dependencies:"
