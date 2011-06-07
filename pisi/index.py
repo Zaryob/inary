@@ -233,13 +233,13 @@ def add_package(params):
         raise Exception
 
 def add_groups(path):
-    ctx.ui.info("Adding groups.xml to index...")
+    ctx.ui.info(_('Adding groups.xml to index'))
     groups_xml = group.Groups()
     groups_xml.read(path)
     return groups_xml.groups
 
 def add_components(path):
-    ctx.ui.info("Adding components.xml to index...")
+    ctx.ui.info(_('Adding components.xml to index'))
     components_xml = component.Components()
     components_xml.read(path)
     #try:
@@ -249,7 +249,7 @@ def add_components(path):
     #ctx.ui.error(str(Error(*errs)))
 
 def add_distro(path):
-    ctx.ui.info("Adding distribution.xml to index...")
+    ctx.ui.info(_('Adding distribution.xml to index'))
     distro = component.Distribution()
     #try:
     distro.read(path)
