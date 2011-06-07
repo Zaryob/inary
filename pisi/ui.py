@@ -68,7 +68,7 @@ class UI(object):
         "warn the user"
         pass
 
-    def error(self,msg):
+    def error(self, msg, noln = False):
         "inform a (possibly fatal) error"
         pass
 
@@ -90,7 +90,7 @@ class UI(object):
         "display progress"
         pass
 
-    def status(self, msg = None):
+    def status(self, msg = None, verbose = False):
         "set status, if not given clear it"
         pass
 
