@@ -118,17 +118,15 @@ class CLI(pisi.ui.UI):
         else:
             self.output(pisi.util.colorize(msg + '\n', 'brightyellow'), err=True, verbose=verbose)
 
-    def error(self, msg, noln = False):
+    def error(self, msg):
         msg = unicode(msg)
         self.errors += 1
-        if not noln:
-            msg = '%s\n' % msg
         if ctx.log:
             ctx.log.error(msg)
         if ctx.get_option('no_color'):
-            self.output(_('Error: ') + msg, err=True)
+            self.output(_('Error: ') + msg + '\n', err=True)
         else:
-            self.output(pisi.util.colorize(msg, 'brightred'), err=True)
+            self.output(pisi.util.colorize(msg + '\n', 'brightred'), err=True)
 
     def action(self, msg, verbose = False):
         #TODO: this seems quite redundant?
@@ -186,10 +184,10 @@ class CLI(pisi.ui.UI):
         if ka['percent'] == 100:
             self.output(pisi.util.colorize(_(' [complete]\n'), 'gray'))
 
-    def status(self, msg = None, verbose = False):
+    def status(self, msg = None):
         if msg:
             msg = unicode(msg)
-            self.output(pisi.util.colorize(msg + '\n', 'brightgreen'), verbose=verbose)
+            self.output(pisi.util.colorize(msg + '\n', 'brightgreen'))
             pisi.util.xterm_title(msg)
 
     def notify(self, event, **keywords):
