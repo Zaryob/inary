@@ -242,6 +242,9 @@ class Builder:
 
         self.delta_map = {}
 
+        self.has_ccache = False
+        self.has_icecream = False
+
     def set_spec_file(self, specuri):
         if not specuri.is_remote_file():
             # FIXME: doesn't work for file://
@@ -334,6 +337,12 @@ class Builder:
             self.set_build_type(build_type)
             self.unpack_source_archives()
 
+            if self.has_ccache:
+                ctx.ui.info(_("ccache detected..."))
+            if self.has_icecream:
+                ctx.ui.info(_("IceCream detected. Make sure your daemon "
+                              "is up and running..."))
+
             self.run_setup_action()
             self.run_build_action()
             if ctx.get_option('debug') and not ctx.get_option('ignore_check'):
@@ -387,23 +396,22 @@ class Builder:
                "SRC_RELEASE": self.spec.getSourceRelease()}
         os.environ.update(env)
 
-        # First check icecream, if not found use ccache, no need to use both
-        # together (according to kde-wiki it cause performance loss)
+        # First check icecream, if not found use ccache
+        # TODO: Add support for using both of them
         if ctx.config.values.build.buildhelper == "icecream":
             if os.path.exists("/opt/icecream/bin/gcc"):
-                # Add icecream directory for support distributed compiling :)
+                self.has_icecream = True
                 os.environ["PATH"] = "/opt/icecream/bin:%(PATH)s" % os.environ
-                ctx.ui.info(_("IceCream detected. Make sure your daemon "
-                              "is up and running..."))
+
         elif ctx.config.values.build.buildhelper == "ccache":
             if os.path.exists("/usr/lib/ccache/bin/gcc"):
-                # Add ccache directory for support Compiler Cache :)
+                self.has_ccache = True
+
                 os.environ["PATH"] = "/usr/lib/ccache/bin:%(PATH)s" \
                                                                 % os.environ
                 # Force ccache to use /root/.ccache instead of $HOME/.ccache
-                # which can be modified through actions.py
+                # as $HOME can be modified through actions.py
                 os.environ["CCACHE_DIR"] = "/root/.ccache"
-                ctx.ui.info(_("ccache detected..."))
 
     def fetch_files(self):
         self.specdiruri = os.path.dirname(self.specuri.get_uri())
@@ -475,7 +483,6 @@ class Builder:
         if self.spec.source.partOf:
             return
 
-        ctx.ui.info(_('PartOf tag not defined, looking for component'))
         diruri = util.parenturi(self.specuri.get_uri())
         parentdir = util.parenturi(diruri)
         url = util.join_path(parentdir, 'component.xml')
@@ -500,7 +507,6 @@ class Builder:
             path = url
         comp = component.CompatComponent()
         comp.read(path)
-        ctx.ui.info(_('Source is part of %s component') % comp.name)
         self.spec.source.partOf = comp.name
 
     def fetch_source_archives(self):
