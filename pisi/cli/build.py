@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 #
-# Copyright (C) 2005-2010, TUBITAK/UEKAE
+# Copyright (C) 2005-2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -172,11 +172,7 @@ class Build(command.Command):
 
         self.init()
 
-        if ctx.get_option('output_dir'):
-            ctx.ui.info(_('Output directory: %s')
-                        % ctx.config.options.output_dir)
-        else:
-            ctx.ui.info(_('Outputting packages in the working directory.'))
+        if not ctx.get_option('output_dir'):
             ctx.config.options.output_dir = '.'
 
         for x in self.args or ["pspec.xml"]:
