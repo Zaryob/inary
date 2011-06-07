@@ -748,12 +748,12 @@ class Builder:
                 path = os.path.normpath(path_info.path)
 
                 if not path.startswith("/"):
-                    raise Error(_("Path must start with a slash: "
-                                  "%s") % path_info.path)
+                    raise Error(_("Source package '%s' defines a relative 'Path' element: "
+                                  "%s") % (self.spec.source.name, path_info.path))
 
                 if path in paths:
-                    raise Error(_("Multiple 'Path' tags specified "
-                                  "for this path: %s") % path_info.path)
+                    raise Error(_("Source package '%s' defines multiple 'Path' tags "
+                                  "for %s") % (self.spec.source.name, path_info.path))
 
                 paths.append(path)
 
