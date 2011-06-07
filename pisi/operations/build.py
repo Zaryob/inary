@@ -785,8 +785,6 @@ class Builder:
                                util.strlist(extra_names))
                     extra_deps = [dependency.Dependency(package=x) for x in extra_names]
                     build_deps.extend(extra_deps)
-                else:
-                    ctx.ui.info(_('Safety switch: system.devel is already installed'))
             else:
                 ctx.ui.warning(_('Safety switch: the component system.devel cannot be found'))
 
