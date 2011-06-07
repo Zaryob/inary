@@ -114,6 +114,8 @@ class Index(xmlfile.XmlFile):
                 if fn == 'groups.xml':
                     self.groups.extend(add_groups(os.path.join(root, fn)))
 
+        print
+
         # Create a process pool, as many processes as the number of CPUs we
         # have
         pool = multiprocessing.Pool()
@@ -128,9 +130,9 @@ class Index(xmlfile.XmlFile):
                 # immediately terminate worker processes and propagate
                 # exception. (CLI honors KeyboardInterrupt exception, if you're
                 # not using CLI, you must handle KeyboardException yourself)
-
                 pool.terminate()
                 pool.join()
+                print
                 raise
 
         try:
@@ -160,6 +162,7 @@ class Index(xmlfile.XmlFile):
             except:
                 pool.terminate()
                 pool.join()
+                print
                 raise
 
         pool.close()
@@ -187,6 +190,7 @@ def add_package(params):
         # check package semantics
         errs = md.errors()
         if md.errors():
+            print
             ctx.ui.error(_('Package %s: metadata corrupt, skipping...') % md.package.name)
             ctx.ui.error(unicode(Error(*errs)))
         else:
@@ -260,8 +264,6 @@ def add_distro(path):
 def add_spec(params):
     try:
         path, repo_uri = params
-        ctx.ui.info("\r%-80.80s" % (_('Adding %s to source index') %
-            path), noln = True)
         #TODO: may use try/except to handle this
         builder = pisi.operations.build.Builder(path)
         builder.fetch_component()
@@ -270,6 +272,9 @@ def add_spec(params):
             sf.source.sourceURI = os.path.realpath(path)
         else:
             sf.source.sourceURI = util.removepathprefix(repo_uri, path)
+
+        ctx.ui.info("\r%-80.80s" % (_('Adding %s to source index') %
+            path), noln = True)
         return sf
 
     except KeyboardInterrupt:
