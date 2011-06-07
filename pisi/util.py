@@ -513,7 +513,7 @@ def sha1_file(filename):
     except IOError, e:
         if e.errno == 13:
             # Permission denied, the file doesn't have read permissions, skip
-            raise FilePermissionDeniedError(_("You don't have necessary permissions to read %s") % filename)
+            raise FilePermissionDeniedError(_("You don't have necessary read permissions"))
         else:
             raise FileError(_("Cannot calculate SHA1 hash of %s") % filename)
 
