@@ -1230,7 +1230,7 @@ def build(pspec):
     try:
         pb.build()
     except ActionScriptException, e:
-        ctx.ui.error("Action script error caught.")
+        ctx.ui.error(_("Action script error caught."))
         raise e
     finally:
         if ctx.ui.errors or ctx.ui.warnings:
@@ -1317,7 +1317,7 @@ def build_until(pspec, state):
 
 
 def __build_until(pb, state, last):
-    ctx.ui.info("Last state was %s" % last)
+    ctx.ui.info(_("Last state was '%s'") % last)
 
     if state == "unpack":
         __buildState_unpack(pb, last)
