@@ -725,9 +725,9 @@ class Builder:
                 if ret.violations != []:
                     ctx.ui.error(_("Sandbox violation result:"))
                     for result in ret.violations:
-                        ctx.ui.error("* %s (%s -> %s)" % (result[0],
-                                                          result[1],
-                                                          result[2]))
+                        ctx.ui.error("%s (%s -> %s)" % (result[0],
+                                                        result[1],
+                                                        result[2]))
                     raise Error(_("Sandbox violations!"))
 
                 if ret.code == 1:
@@ -841,7 +841,7 @@ class Builder:
                                             targetDir=ctx.config.tmp_dir())
                 relativePath = relativePath.rsplit(".%s" % patch.compressionType, 1)[0]
 
-            ctx.ui.action(_("* Applying patch: %s") % patch.filename)
+            ctx.ui.action(_("Applying patch: %s") % patch.filename)
             util.do_patch(self.pkg_src_dir(), patchFile,
                           level=patch.level,
                           name=relativePath,

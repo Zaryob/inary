@@ -778,12 +778,12 @@ def index(dirs=None, output='pisi-index.xml',
         dirs = ['.']
     for repo_dir in dirs:
         repo_dir = str(repo_dir)
-        ctx.ui.info(_('* Building index of PiSi files under %s') % repo_dir)
+        ctx.ui.info(_('Building index of PiSi files under %s') % repo_dir)
         index.index(repo_dir, skip_sources)
 
     sign = None if skip_signing else pisi.file.File.detached
     index.write(output, sha1sum=True, compress=compression, sign=sign)
-    ctx.ui.info(_('* Index file written'))
+    ctx.ui.info(_('Index file written'))
 
 @locked
 def add_repo(name, indexuri, at = None):
@@ -855,7 +855,7 @@ def __update_repo(repo, force=False):
         except pisi.file.NoSignatureFound, e:
             ctx.ui.warning(e)
 
-        ctx.ui.info(_('* Package database updated.'))
+        ctx.ui.info(_('Package database updated.'))
     else:
         raise pisi.Error(_('No repository named %s found.') % repo)
 
@@ -870,7 +870,7 @@ def rebuild_db(files=False):
 
     def rebuild_filesdb():
         for pkg in list_installed():
-            ctx.ui.info(_('* Adding \'%s\' to db... ') % pkg, noln=True)
+            ctx.ui.info(_('Adding \'%s\' to db... ') % pkg, noln=True)
             files = installdb.get_files(pkg)
             filesdb.add_files(pkg, files)
             ctx.ui.info(_('OK.'))

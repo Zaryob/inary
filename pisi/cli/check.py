@@ -68,7 +68,7 @@ If no packages are given, checks all installed packages.
 
         check_config = ctx.get_option('config')
         for pkg in pkgs:
-            ctx.ui.info(_('* Checking %s... ') % pkg, noln=True)
+            ctx.ui.info(_('Checking %s... ') % pkg, noln=True)
             if self.installdb.has_package(pkg):
                 check_results = pisi.api.check(pkg, check_config)
                 corrupted = check_results['missing'] or check_results['corrupted']
