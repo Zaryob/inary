@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005-2010, TUBITAK/UEKAE
+# Copyright (C) 2005-2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -53,6 +53,9 @@ class Error(pisi.Error):
 class FileError(Error):
     pass
 
+class FilePermissionDeniedError(Error):
+    pass
+
 
 #########################
 # spec validation utility #
@@ -78,22 +81,22 @@ def unzip(seq):
 
 def concat(l):
     """Concatenate a list of lists."""
-    return reduce( operator.concat, l )
+    return reduce(operator.concat, l )
 
 def strlist(l):
     """Concatenate string reps of l's elements."""
     return "".join(map(lambda x: str(x) + ' ', l))
 
-def multisplit(str, chars):
+def multisplit(_str, chars):
     """Split str with any of the chars."""
-    l = [str]
+    l = [_str]
     for c in chars:
         l = concat(map(lambda x:x.split(c), l))
     return l
 
 def same(l):
     """Check if all elements of a sequence are equal."""
-    if len(l)==0:
+    if len(l) == 0:
         return True
     else:
         last = l.pop()
@@ -305,7 +308,6 @@ def parentpath(a, sep = os.path.sep):
 def parenturi(a):
     return parentpath(a, '/')
 
-# but this one is necessary
 def subpath(a, b):
     """Find if path a is before b in the directory tree."""
     return prefix(splitpath(a), splitpath(b))
@@ -320,9 +322,7 @@ def removepathprefix(prefix, path):
 
 def join_path(a, *p):
     """Join two or more pathname components.
-    
     Python os.path.join cannot handle '/' at the start of latter components.
-    
     """
     path = a
     for b in p:
@@ -337,10 +337,10 @@ def join_path(a, *p):
 # File/Directory Related Functions #
 ####################################
 
-def check_file(file, mode = os.F_OK):
+def check_file(_file, mode = os.F_OK):
     """Shorthand to check if a file exists."""
-    if not os.access(file, mode):
-        raise FileError("File " + file + " not found")
+    if not os.access(_file, mode):
+        raise FileError("File " + _file + " not found")
     return True
 
 def ensure_dirs(path):
@@ -353,14 +353,14 @@ def clean_dir(path):
     if os.path.exists(path):
         shutil.rmtree(path)
 
-def creation_time(file):
+def creation_time(_file):
     """Return the creation time of the given file."""
-    if check_file(file):
+    if check_file(_file):
         import time
-        st = os.stat(file)
+        st = os.stat(_file)
         return time.localtime(st.st_ctime)
 
-def dir_size(dir):
+def dir_size(_dir):
     """Calculate the size of files under a directory."""
     # It's really hard to give an approximate value for package's
     # installed size. Gettin a sum of all files' sizes if far from
@@ -368,15 +368,15 @@ def dir_size(dir):
     # better solution :(.
     # Not really, du calculates size on disk, this is much better -- exa
 
-    if os.path.exists(dir) and (not os.path.isdir(dir) and not os.path.islink(dir)):
+    if os.path.exists(_dir) and (not os.path.isdir(_dir) and not os.path.islink(_dir)):
         #so, this is not a directory but file..
-        return os.path.getsize(dir)
+        return os.path.getsize(_dir)
 
-    if os.path.islink(dir):
-        return long(len(read_link(dir)))
+    if os.path.islink(_dir):
+        return long(len(read_link(_dir)))
 
     def sizes():
-        for root, dirs, files in os.walk(dir):
+        for root, dirs, files in os.walk(_dir):
             yield sum([os.path.getsize(join_path(root, name)) for name in files if not os.path.islink(join_path(root, name))])
     return sum(sizes())
 
@@ -431,12 +431,12 @@ def calculate_hash(path):
             # We pad them with zeroes, thus hash will be stable
             clean_ar_timestamps(path)
         value = sha1_file(path)
-    
+
     return (path, value)
 
 def get_file_hashes(top, excludePrefix=None, removePrefix=None):
     """Yield (path, hash) tuples for given directory tree.
-    
+
     Generator function iterates over a toplevel path and returns the
     (filePath, sha1Hash) tuples for all files. If excludePrefixes list
     is given as a parameter, function will exclude the filePaths
@@ -452,20 +452,20 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
                     return False
                 temp = os.path.dirname(temp)
         return True
-    
+
     # single file/symlink case
     if not os.path.isdir(top) or os.path.islink(top):
         if is_included(top):
             yield calculate_hash(top)
         return
-    
+
     for root, dirs, files in os.walk(top):
         # Hash files and file symlinks
         for name in files:
             path = os.path.join(root, name)
             if is_included(path):
                 yield calculate_hash(path)
-        
+
         # Hash symlink dirs
         # os.walk doesn't enter them, we don't want to follow them either
         # but their name and hashes must be reported
@@ -475,7 +475,7 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
             if os.path.islink(path):
                 if is_included(path):
                     yield calculate_hash(path)
-        
+
         # Hash empty dir
         # Discussed in bug #340
         if len(files) == 0 and len(dirs) == 0:
@@ -495,7 +495,7 @@ def sha1_file(filename):
     # Broken links can cause problem!
     try:
         m = hashlib.sha1()
-        f = file(filename, 'rb')
+        f = open(filename, 'rb')
         while True:
             # 256 KB seems ideal for speed/memory tradeoff
             # It wont get much faster with bigger blocks, but
@@ -510,8 +510,12 @@ def sha1_file(filename):
             # we wont have two allocated blocks with same size
             del block
         return m.hexdigest()
-    except IOError:
-        raise FileError(_("Cannot calculate SHA1 hash of %s") % filename)
+    except IOError, e:
+        if e.errno == 13:
+            # Permission denied, the file doesn't have read permissions, skip
+            raise FilePermissionDeniedError(_("You don't have necessary permissions to read %s") % filename)
+        else:
+            raise FileError(_("Cannot calculate SHA1 hash of %s") % filename)
 
 def sha1_data(data):
     """Calculate sha1 hash of given data."""
@@ -655,9 +659,8 @@ def package_filename(name, version, release, distro_id=None, arch=None):
 
 def parse_package_name_legacy(package_name):
     """Separate package name and version string for package formats <= 1.1.
-    
+
     example: tasma-1.0.3-5-2 -> (tasma, 1.0.3-5-2)
-    
     """
     # We should handle package names like 855resolution
     name = []
