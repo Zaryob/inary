@@ -172,7 +172,7 @@ def add_package(params):
     try:
         path, deltas, repo_uri = params
 
-        ctx.ui.info("\r%-80.80s" % (_('Adding package to index: %s') % 
+        ctx.ui.info("\r%-80.80s" % (_('Adding package to index: %s') %
             os.path.basename(path)), noln = True)
 
         package = pisi.package.Package(path, 'r')
@@ -260,19 +260,17 @@ def add_distro(path):
 
 def add_spec(params):
     try:
-        path , repo_uri = params
-        ctx.ui.info(_('Adding %s to source index') % path)
+        path, repo_uri = params
+        ctx.ui.info("\r%-80.80s" % (_('Adding %s to source index') %
+            path), noln = True)
         #TODO: may use try/except to handle this
         builder = pisi.operations.build.Builder(path)
-        #ctx.ui.error(_('SpecFile in %s is corrupt, skipping...') % path)
-        #ctx.ui.error(str(Error(*errs)))
         builder.fetch_component()
         sf = builder.spec
         if ctx.config.options and ctx.config.options.absolute_urls:
             sf.source.sourceURI = os.path.realpath(path)
-        else:                           # create relative path by default
+        else:
             sf.source.sourceURI = util.removepathprefix(repo_uri, path)
-            # check component
         return sf
 
     except KeyboardInterrupt:
