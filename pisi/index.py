@@ -114,7 +114,7 @@ class Index(xmlfile.XmlFile):
                 if fn == 'groups.xml':
                     self.groups.extend(add_groups(os.path.join(root, fn)))
 
-        print
+        ctx.ui.info("")
 
         # Create a process pool, as many processes as the number of CPUs we
         # have
@@ -132,7 +132,7 @@ class Index(xmlfile.XmlFile):
                 # not using CLI, you must handle KeyboardException yourself)
                 pool.terminate()
                 pool.join()
-                print
+                ctx.ui.info("")
                 raise
 
         try:
@@ -162,14 +162,12 @@ class Index(xmlfile.XmlFile):
             except:
                 pool.terminate()
                 pool.join()
-                print
+                ctx.ui.info("")
                 raise
 
+        ctx.ui.info("")
         pool.close()
         pool.join()
-
-        # Clean up output
-        ctx.ui.info("\r%-80.80s" % (_('Done.')))
 
 def add_package(params):
     try:
@@ -190,7 +188,7 @@ def add_package(params):
         # check package semantics
         errs = md.errors()
         if md.errors():
-            print
+            ctx.ui.info("")
             ctx.ui.error(_('Package %s: metadata corrupt, skipping...') % md.package.name)
             ctx.ui.error(unicode(Error(*errs)))
         else:
