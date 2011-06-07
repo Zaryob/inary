@@ -181,10 +181,9 @@ def add_package(params):
         md.package.packageHash = util.sha1_file(path)
         if ctx.config.options and ctx.config.options.absolute_urls:
             md.package.packageURI = os.path.realpath(path)
-        else:                           # create relative path by default
-            # TODO: in the future well do all of this with purl/pfile/&helpers
-            # really? heheh -- future exa
+        else:
             md.package.packageURI = util.removepathprefix(repo_uri, path)
+
         # check package semantics
         errs = md.errors()
         if md.errors():
