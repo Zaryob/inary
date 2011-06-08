@@ -123,6 +123,9 @@ class SourceArchive:
         except pisi.archive.UnknownArchiveType:
             raise Error(_("Unknown archive type '%s' is given for '%s'.")
                         % (self.archive.type, self.url.filename()))
+        except pisi.archive.ArchiveHandlerNotInstalled:
+            raise Error(_("Pisi needs %s to unpack this archive but it is not installed.")
+                        % self.archive.type)
 
         target_dir = os.path.join(target_dir, self.archive.target or "")
         archive.unpack(target_dir, clean_dir)

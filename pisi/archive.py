@@ -32,6 +32,9 @@ import pisi.context as ctx
 class UnknownArchiveType(Exception):
     pass
 
+class ArchiveHandlerNotInstalled(Exception):
+    pass
+
 
 # Proxy class inspired from tarfile._BZ2Proxy
 class _LZMAProxy(object):
@@ -461,6 +464,25 @@ class ArchiveTarZ(ArchiveBase):
             pass
         self.tar.close()
 
+class Archive7Zip(ArchiveBase):
+    """ArchiveZip handles 7-Zip archives."""
+
+    def __init__(self, file_path, arch_type="7z"):
+        super(Archive7Zip, self).__init__(file_path, arch_type)
+        self.cmd = pisi.util.search_executable(arch_type)
+        if not self.cmd:
+            raise ArchiveHandlerNotInstalled
+
+    def unpack(self, target_dir, clean_dir=False):
+        super(Archive7Zip, self).unpack(target_dir, clean_dir)
+        self.unpack_dir(target_dir)
+
+    def unpack_dir(self, target_dir):
+        """Unpack 7z archive to a given target directory(target_dir)."""
+
+        # e.g. 7z x -bd -o<target_directory> <archive.7z>
+        pisi.util.run_batch("%s x -bd -o%s %s" % (self.cmd, target_dir, self.file_path))
+
 
 class ArchiveZip(ArchiveBase):
     """ArchiveZip handles zip archives.
@@ -639,6 +661,7 @@ class Archive:
                     'bzip2':    ArchiveBzip2,
                     'lzma':     ArchiveLzma,
                     'xz':       ArchiveLzma,
+                    '7z':       Archive7Zip,
                     'binary':   ArchiveBinary}
 
         handler = handlers.get(arch_type)
@@ -659,6 +682,7 @@ class Archive:
                  ("bz2",        (".bz2", ".bz")),
                  ("lzma",       (".lzma",)),
                  ("xz",         (".xz",)),
+                 ("7z",         (".7z",)),
                  ("binary",     (".bin", ".run", ".sh")))
 
         for _type, extensions in types:
