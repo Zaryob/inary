@@ -465,7 +465,7 @@ class ArchiveTarZ(ArchiveBase):
         self.tar.close()
 
 class Archive7Zip(ArchiveBase):
-    """ArchiveZip handles 7-Zip archives."""
+    """Archive7Zip handles 7-Zip archives."""
 
     def __init__(self, file_path, arch_type="7z"):
         super(Archive7Zip, self).__init__(file_path, arch_type)
