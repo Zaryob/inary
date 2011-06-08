@@ -65,6 +65,8 @@ If no packages are given, checks all installed packages.
             ctx.ui.info(_('Checking all installed packages') + '\n')
             pkgs = pisi.api.list_installed()
 
+        necessary_permissions = True
+
         # True if we should also check the configuration files
         check_config = ctx.get_option('config')
 
@@ -82,20 +84,30 @@ If no packages are given, checks all installed packages.
                 if check_results['missing'] or check_results['corrupted'] \
                         or check_results['config']:
                     ctx.ui.info(pisi.util.colorize(_("Broken"), 'brightred'))
-
-                    # Dump per file stuff
-                    for fpath in check_results['missing']:
-                        ctx.ui.info("   %s" % pisi.util.colorize(_("Missing file: /%s") % fpath, 'brightred'))
-                    for fpath in check_results['denied']:
-                        ctx.ui.info("   %s" % pisi.util.colorize(_("Access denied: /%s") % fpath, 'yellow'))
-                    for fpath in check_results['corrupted']:
-                        ctx.ui.info("   %s" % pisi.util.colorize(_("Corrupted file: /%s") % fpath, 'brightyellow'))
-                    for fpath in check_results['config']:
-                        ctx.ui.info("   %s" % pisi.util.colorize(_("Modified configuration file: /%s") % fpath, 'brightyellow'))
-
+                elif check_results['denied']:
+                    # We can't deduce a result when some files can't be accessed
+                    necessary_permissions = False
+                    ctx.ui.info(pisi.util.colorize(_("Unknown"), 'yellow'))
                 else:
-                    # Show OK packages only in verbose
                     ctx.ui.info(pisi.util.colorize(_("OK"), 'green'))
+                    continue
+
+                # Dump per file stuff
+                for fpath in check_results['missing']:
+                    ctx.ui.info(pisi.util.colorize(_("Missing file: /%s") % fpath, 'brightred'))
+                for fpath in check_results['denied']:
+                    ctx.ui.info(pisi.util.colorize(_("Access denied: /%s") % fpath, 'yellow'))
+                for fpath in check_results['corrupted']:
+                    ctx.ui.info(pisi.util.colorize(_("Corrupted file: /%s") % fpath, 'brightyellow'))
+                for fpath in check_results['config']:
+                    ctx.ui.info(pisi.util.colorize(_("Modified configuration file: /%s") % fpath, 'brightyellow'))
+
             else:
                 # Package is not installed
                 ctx.ui.info(_('Package %s not installed') % pkg)
+
+        if not necessary_permissions:
+            ctx.ui.info("")
+            ctx.ui.warning(_("Pisi was unable to check the integrity of packages which contain files that you don't have read access.\n"
+                             "Running the check under a privileged user may help fixing this problem."))
+
