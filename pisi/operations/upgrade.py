@@ -128,9 +128,7 @@ def upgrade(A=[], repo=None):
 
     # Force upgrading of installed but replaced packages or else they will be removed (they are obsoleted also).
     # This is not wanted for a replaced driver package (eg. nvidia-X).
-    #
-    # sum(array, []) is a nice trick to flatten an array of arrays
-    A |= set(sum(replaces.values(), []))
+    A |= set(pisi.util.flatten_list(replaces.values()))
 
     A |= upgrade_base(A)
 
@@ -147,7 +145,6 @@ def upgrade(A=[], repo=None):
     if len(A)==0:
         ctx.ui.info(_('No packages to upgrade.'))
         return True
-
 
     ctx.ui.debug('A = %s' % str(A))
 
@@ -172,7 +169,8 @@ def upgrade(A=[], repo=None):
 
     needs_confirm = check_update_actions(order)
 
-    if set(order) - A_0 - set(sum(replaces.values(), [])):
+    # NOTE: replaces.values() was already flattened above, it can be reused
+    if set(order) - A_0 - set(pisi.util.flatten_list(replaces.values())):
         ctx.ui.warning(_("There are extra packages due to dependencies."))
         needs_confirm = True
 
@@ -219,7 +217,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     G_f = pgraph.PGraph(packagedb)               # construct G_f
 
     A = set(A)
-    
+
     # Force upgrading of installed but replaced packages or else they will be removed (they are obsoleted also).
     # This is not wanted for a replaced driver package (eg. nvidia-X).
     #
@@ -228,7 +226,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     if force_replaced:
         if replaces is None:
             replaces = packagedb.get_replaces()
-        A |= set(sum(replaces.values(), []))
+        A |= set(pisi.util.flatten_list(replaces.values()))
 
     # find the "install closure" graph of G_f by package
     # set A using packagedb
