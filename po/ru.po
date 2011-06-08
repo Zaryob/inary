@@ -19,7 +19,7 @@ msgstr ""
 #: /usr/lib/python2.7/optparse.py:140
 #, python-format
 msgid "no such option: %s"
-msgstr "опция не найдена: %s"
+msgstr "нет такой опции: %s"
 
 #: /usr/lib/python2.7/optparse.py:151
 #, python-format
@@ -98,7 +98,7 @@ msgstr "Прерывание от клавиатуры: Выход ..."
 
 #: pisi-cli:45
 msgid "Program terminated."
-msgstr "Программа закрыта."
+msgstr "Программа завершена."
 
 #: pisi-cli:48
 msgid ""
@@ -126,11 +126,11 @@ msgstr ""
 
 #: pisi-cli:72
 msgid "Use --debug to see a traceback."
-msgstr "Используйте --debug для просмотра трассировки"
+msgstr "Используйте --debug для просмотра отладочной информации"
 
 #: pisi.xml.in.h:1
 msgid "PiSi package"
-msgstr "Создать PiSi пакет"
+msgstr "PiSi пакет"
 
 #: pisi/actionsapi/autotools.py:36 pisi/actionsapi/cmaketools.py:36
 #, python-format
@@ -138,14 +138,14 @@ msgid ""
 "Please attach the config.log to your bug report:\n"
 "%s/config.log"
 msgstr ""
-"Пожалуйста прикрепите config.log в  ваш отчет об ошибке:\n"
+"Пожалуйста прикрепите config.log в ваш отчет об ошибке:\n"
 "%s/config.log"
 
 #: pisi/actionsapi/autotools.py:77 pisi/actionsapi/autotools.py:87
 #: pisi/actionsapi/cmaketools.py:66 pisi/actionsapi/kde.py:65
 #: pisi/actionsapi/perlmodules.py:54 pisi/actionsapi/perlmodules.py:57
 msgid "Configure failed."
-msgstr "Ошибка конфигурирования."
+msgstr "Настройка не удалась."
 
 #: pisi/actionsapi/autotools.py:79 pisi/actionsapi/autotools.py:89
 #: pisi/actionsapi/kde.py:67
@@ -173,7 +173,7 @@ msgstr "Запуск aclocal не удался."
 
 #: pisi/actionsapi/autotools.py:146
 msgid "Running autoconf failed."
-msgstr "Запуск Autoconf не удался."
+msgstr "Запуск autoconf не удался."
 
 #: pisi/actionsapi/autotools.py:151
 msgid "Running autoreconf failed."
@@ -181,7 +181,7 @@ msgstr "Запуск autoreconf не удался."
 
 #: pisi/actionsapi/autotools.py:156
 msgid "Running automake failed."
-msgstr "Запуск Automake не удался."
+msgstr "Запуск automake не удался."
 
 #: pisi/actionsapi/autotools.py:161
 msgid "Running autoheader failed."
