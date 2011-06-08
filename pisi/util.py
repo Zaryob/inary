@@ -64,9 +64,11 @@ class FilePermissionDeniedError(Error):
 def any(pred, seq):
     return reduce(operator.or_, map(pred, seq), False)
 
-def concat(l):
-    """Concatenate a list of lists."""
-    return reduce(operator.concat, l)
+def flatten_list(l):
+    """Flatten a list of lists."""
+    # Fastest solution is list comprehension
+    # See: http://stackoverflow.com/questions/952914/making-a-flat-list-out-of-list-of-lists-in-python
+    return [item for sublist in l for item in sublist]
 
 def strlist(l):
     """Concatenate string reps of l's elements."""
