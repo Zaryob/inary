@@ -1,7 +1,7 @@
 # translation of es.po to spanish
 # translation of es.po to
 # Copyright (C) YEAR ORGANIZATION
-# 
+#
 # Klemens Häckel <click3d_at_linuxmail_org>, 2007, 2008.
 # Christian Faure <christian.faurebouvard@laposte.net>, 2007.
 # klemens <click3d at linuxmail org>, 2007.
@@ -15,14 +15,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-31 09:00+0300\n"
+"POT-Creation-Date: 2011-06-08 10:28+0300\n"
 "PO-Revision-Date: 2010-03-28 20:37-0400\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <kde-i18n-doc@kde.org>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 1.0\n"
@@ -598,12 +598,13 @@ msgid "File %s not found"
 msgstr "Archivo %s no encontrado"
 
 #: pisi/api.py:781
-#, python-format
-msgid "* Building index of PiSi files under %s"
+#, fuzzy, python-format
+msgid "Building index of PiSi files under %s"
 msgstr "* Generando índice de archivos de PiSi en %s"
 
 #: pisi/api.py:786
-msgid "* Index file written"
+#, fuzzy
+msgid "Index file written"
 msgstr "* Archivo de índice grabado"
 
 #: pisi/api.py:791
@@ -652,7 +653,8 @@ msgid "Updating database at any rate as requested"
 msgstr "Actualizando base de datos de todas formas según solicitado"
 
 #: pisi/api.py:858
-msgid "* Package database updated."
+#, fuzzy
+msgid "Package database updated."
 msgstr "* Base de datos de paquetes actualizada."
 
 #: pisi/api.py:860
@@ -661,8 +663,8 @@ msgid "No repository named %s found."
 msgstr "No se encontró repositorio con nombre %s."
 
 #: pisi/api.py:873
-#, python-format
-msgid "* Adding '%s' to db... "
+#, fuzzy, python-format
+msgid "Adding '%s' to db... "
 msgstr "* Agregando '%s' a db... "
 
 #: pisi/api.py:876
@@ -699,7 +701,7 @@ msgstr "Paquete %s no encontrado en ningún repositorio activo."
 msgid "Installing %s, version %s, release %s"
 msgstr "Instalando %s, versión %s, release %s"
 
-#: pisi/atomicoperations.py:192 pisi/operations/build.py:759
+#: pisi/atomicoperations.py:192 pisi/operations/build.py:765
 #, python-format
 msgid "%s-%s is not a valid PiSi version format"
 msgstr "%s-%s no es un formato válido de versión PiSi"
@@ -1038,16 +1040,6 @@ msgstr "Formatos de paquetes soportados:"
 msgid "  %s (default)"
 msgstr "  %s (predeterminado)"
 
-#: pisi/cli/build.py:176 pisi/cli/delta.py:92 pisi/cli/emerge.py:71
-#, python-format
-msgid "Output directory: %s"
-msgstr "Carpeta de salida: %s"
-
-# sense is "current directory" i think ?
-#: pisi/cli/build.py:179 pisi/cli/delta.py:95
-msgid "Outputting packages in the working directory."
-msgstr "Guardando paquetes en la carpeta actual."
-
 #: pisi/cli/check.py:25
 msgid ""
 "Verify installation\n"
@@ -1086,39 +1078,48 @@ msgstr "Verificar paquetes instalados del componente"
 msgid "Checks only changed config files of the packages"
 msgstr "Verificaciones solamente modificaron archivos de configuración de los paquetes"
 
-#: pisi/cli/check.py:66
+#: pisi/cli/check.py:65
 msgid "Checking all installed packages"
 msgstr "Verificando todos los paquetes instalados"
 
-#: pisi/cli/check.py:71
+#: pisi/cli/check.py:72
 #, python-format
-msgid "* Checking %s... "
-msgstr "* Verificando %s... "
+msgid "Checking integrity of %s"
+msgstr ""
 
-# favor verificar, no estoy seguro, depende del contexto
-#: pisi/cli/check.py:77
-#, python-format
-msgid ""
-"\n"
-"Package %s has changed config files."
+#: pisi/cli/check.py:84
+msgid "Broken"
+msgstr ""
+
+#: pisi/cli/check.py:88
+#, fuzzy, python-format
+msgid "Missing file: /%s"
 msgstr ""
 "\n"
-"Paquete %s tiene archivos de configuración diferentes."
+"Archivo faltante: /%s"
 
-#: pisi/cli/check.py:79
+#: pisi/cli/check.py:90
 #, python-format
-msgid ""
-"\n"
-"Package %s is corrupt."
+msgid "Access denied: /%s"
+msgstr ""
+
+#: pisi/cli/check.py:92
+#, fuzzy, python-format
+msgid "Corrupted file: /%s"
 msgstr ""
 "\n"
-"Paquete %s está dañado."
+"Archivo corrupto: %s"
 
-#: pisi/cli/check.py:81 pisi/operations/check.py:48
+#: pisi/cli/check.py:94
+#, fuzzy, python-format
+msgid "Modified configuration file: /%s"
+msgstr "Falló la configuración %s ."
+
+#: pisi/cli/check.py:98
 msgid "OK"
 msgstr "OK"
 
-#: pisi/cli/check.py:83
+#: pisi/cli/check.py:101
 #, python-format
 msgid "Package %s not installed"
 msgstr "Paquete %s no está instalado"
@@ -1339,6 +1340,11 @@ msgstr "Ignorar conflictos de archivos"
 msgid "Ignore package conflicts"
 msgstr "Ignorar conflictos de paquetes"
 
+#: pisi/cli/emerge.py:71
+#, python-format
+msgid "Output directory: %s"
+msgstr "Carpeta de salida: %s"
+
 #: pisi/cli/emerge.py:73
 msgid "Outputting binary packages in the package cache."
 msgstr "Guardando paquetes binarios en el cache de paquetes."
@@ -1480,20 +1486,20 @@ msgstr ""
 "Use \"%prog help <command>\" para ayuda de un comando específico.\n"
 
 #: pisi/cli/history.py:28
-msgid "upgrade"
-msgstr "actualizar"
-
-#: pisi/cli/history.py:28
-msgid "remove"
-msgstr "eliminar"
-
-#: pisi/cli/history.py:28
 msgid "emerge"
 msgstr "emerge"
 
 #: pisi/cli/history.py:28
 msgid "install"
 msgstr "instalar"
+
+#: pisi/cli/history.py:28
+msgid "remove"
+msgstr "eliminar"
+
+#: pisi/cli/history.py:28
+msgid "repository update"
+msgstr "Actualización de repositorio"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1505,8 +1511,8 @@ msgid "takeback"
 msgstr "retroceder"
 
 #: pisi/cli/history.py:28
-msgid "repository update"
-msgstr "Actualización de repositorio"
+msgid "upgrade"
+msgstr "actualizar"
 
 #: pisi/cli/history.py:31
 msgid ""
@@ -2601,22 +2607,35 @@ msgstr "%s fue revertido de %s a %s."
 msgid "Unknown package operation"
 msgstr "Operación desconocida de paquete"
 
-#: pisi/index.py:169
-msgid "Done."
-msgstr "Hecho."
-
-#: pisi/index.py:175
+#: pisi/index.py:176
 #, python-format
 msgid "Adding package to index: %s"
 msgstr "Agregando paquete a index: %s"
 
-#: pisi/index.py:191
+#: pisi/index.py:192
 #, python-format
 msgid "Package %s: metadata corrupt, skipping..."
 msgstr "Metadata de paquete %s: corrupto, omitiendo..."
 
 # here "source" means - like source code ? (not "base".. )
-#: pisi/index.py:264
+#: pisi/index.py:237
+#, fuzzy
+msgid "Adding groups.xml to index"
+msgstr "Agregando %s a index de fuentes"
+
+#: pisi/index.py:243
+#, fuzzy
+msgid "Adding components.xml to index"
+msgstr "Agregando paquete a index: %s"
+
+# here "source" means - like source code ? (not "base".. )
+#: pisi/index.py:253
+#, fuzzy
+msgid "Adding distribution.xml to index"
+msgstr "Agregando %s a index de fuentes"
+
+# here "source" means - like source code ? (not "base".. )
+#: pisi/index.py:274
 #, python-format
 msgid "Adding %s to source index"
 msgstr "Agregando %s a index de fuentes"
@@ -2658,111 +2677,102 @@ msgstr "URL Fuente: %s"
 msgid "Source %s not found in any active repository."
 msgstr "Fuente %s no encontrada en repositorios activos."
 
-#: pisi/operations/build.py:317
+#: pisi/operations/build.py:320
 #, python-format
 msgid "pspec.xml avoids this package from building for '%s'"
 msgstr "pspec.xml impide build del paquete actual para '%s'"
 
-#: pisi/operations/build.py:320
+#: pisi/operations/build.py:323
 #, python-format
 msgid "Building source package: %s"
 msgstr "Generando paquete fuente: %s"
 
-#: pisi/operations/build.py:368
+#: pisi/operations/build.py:341
+msgid "ccache detected..."
+msgstr "ccache detectado..."
+
+#: pisi/operations/build.py:343
+msgid "IceCream detected. Make sure your daemon is up and running..."
+msgstr "IceCream detectado. Asegúrese que el demónio está activo y funcionando..."
+
+#: pisi/operations/build.py:377
 #, python-format
 msgid "Rebuilding for %s"
 msgstr "Reconstruyendo para %s"
 
-#: pisi/operations/build.py:396
-msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr "IceCream detectado. Asegúrese que el demónio está activo y funcionando..."
-
-#: pisi/operations/build.py:406
-msgid "ccache detected..."
-msgstr "ccache detectado..."
-
-#: pisi/operations/build.py:478
-msgid "PartOf tag not defined, looking for component"
-msgstr "ParteOf tag no definido, buscando componente"
-
-#: pisi/operations/build.py:487
+#: pisi/operations/build.py:494
 msgid "Cannot find component.xml in remote directory, Source is now part of unknown component"
 msgstr "No se encuentra component.xml en directorio remoto. La fuente es ahora parte de componente desconocido"
 
-#: pisi/operations/build.py:495
+#: pisi/operations/build.py:502
 msgid "Cannot find component.xml in upper directory, Source is now part of unknown component"
 msgstr "No se encontró component.xml en directorio superior. La fuente es ahora parte de componente desconocido"
 
-#: pisi/operations/build.py:503
-#, python-format
-msgid "Source is part of %s component"
-msgstr "Fuente es parte de componente %s "
-
-#: pisi/operations/build.py:510
+#: pisi/operations/build.py:516
 msgid "Unpacking archive(s)..."
 msgstr "Descompactando archivo(s)..."
 
-#: pisi/operations/build.py:518
+#: pisi/operations/build.py:524
 #, python-format
 msgid " unpacked (%s)"
 msgstr " descompactado (%s)"
 
-#: pisi/operations/build.py:523
+#: pisi/operations/build.py:529
 msgid "Setting up source..."
 msgstr "Configurando fuente..."
 
-#: pisi/operations/build.py:528
+#: pisi/operations/build.py:534
 msgid "Building source..."
 msgstr "Generando fuente (build)..."
 
-#: pisi/operations/build.py:533
+#: pisi/operations/build.py:539
 msgid "Testing package..."
 msgstr "Verificando Paquete %s."
 
-#: pisi/operations/build.py:537
+#: pisi/operations/build.py:543
 msgid "Installing..."
 msgstr "Instalando..."
 
-#: pisi/operations/build.py:603
+#: pisi/operations/build.py:609
 #, python-format
 msgid "Unable to read Actions Script (%s): %s"
 msgstr "No posible leer Script de Acciones (%s): %s"
 
-#: pisi/operations/build.py:606
+#: pisi/operations/build.py:612
 #, python-format
 msgid "SyntaxError in Actions Script (%s): %s"
 msgstr "Error de Sintaxis en Script de Acciones (%s): %s"
 
-#: pisi/operations/build.py:636
+#: pisi/operations/build.py:642
 #, python-format
 msgid "Unable to read COMAR script (%s): %s"
 msgstr "No posible leer Script de COMAR (%s): %s"
 
-#: pisi/operations/build.py:639
+#: pisi/operations/build.py:645
 #, python-format
 msgid "SyntaxError in COMAR file (%s): %s"
 msgstr "Error de Sintaxis en archivo COMAR (%s): %s"
 
-#: pisi/operations/build.py:671
+#: pisi/operations/build.py:677
 #, python-format
 msgid "Sandbox violation: %s (%s -> %s)"
 msgstr "Violación de caja de arena (Sandbox): %s (%s -> %s)"
 
-#: pisi/operations/build.py:687 pisi/util.py:549
+#: pisi/operations/build.py:693 pisi/util.py:553
 #, python-format
 msgid "ERROR: WorkDir (%s) does not exist\n"
 msgstr "ERROR: Directorio de trabajo (%s) no existe\n"
 
 # favor revisar
-#: pisi/operations/build.py:696
+#: pisi/operations/build.py:702
 msgid "Sandbox enabled build..."
 msgstr "Build con Sandbox habilitado..."
 
-#: pisi/operations/build.py:720
+#: pisi/operations/build.py:726
 msgid "Sandbox violation result:"
 msgstr "Resultado de violación de Sandbox:"
 
-#: pisi/operations/build.py:725
+#: pisi/operations/build.py:731
 msgid "Sandbox violations!"
 msgstr "Violaciones de Sandbox!"
 
@@ -2770,156 +2780,129 @@ msgstr "Violaciones de Sandbox!"
 # cosa ?
 # quizá quieren decir: no posible llamar/ejecutar rutina del achivo (script
 # batch) de acciones ??
-#: pisi/operations/build.py:731
+#: pisi/operations/build.py:737
 #, python-format
 msgid "unable to call function from actions: %s"
 msgstr "no posible llamar función desde acciones: %s"
 
-#: pisi/operations/build.py:745
+#: pisi/operations/build.py:751
 #, python-format
-msgid "Path must start with a slash: %s"
-msgstr "Ruta debe empezar con una raya: %s"
+msgid "Source package '%s' defines a relative 'Path' element: %s"
+msgstr ""
 
-#: pisi/operations/build.py:749
+#: pisi/operations/build.py:755
 #, python-format
-msgid "Multiple 'Path' tags specified for this path: %s"
-msgstr "Etiquetas multiples especificados para esta ruta: %s"
+msgid "Source package '%s' defines multiple 'Path' tags for %s"
+msgstr ""
 
 # did I get "safety switch" right (in this context)?
-#: pisi/operations/build.py:778
+#: pisi/operations/build.py:784
 msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr "Verificación de seguridad: Se instalarán los siguientes paquetes adicionales en system.devel:"
 
-#: pisi/operations/build.py:783
-msgid "Safety switch: system.devel is already installed"
-msgstr "Verificación de seguridad: system.devel ya está instalado"
-
-#: pisi/operations/build.py:785
+#: pisi/operations/build.py:789
 msgid "Safety switch: the component system.devel cannot be found"
 msgstr "Verificación de seguridad: No posible encontrar el componente system.devel"
 
 # satisfechas - entiendo que se refiere a librerias necesarias para hacer el
 # proceso build
 # quizá hay mejor manera de decirlo en español
-#: pisi/operations/build.py:794
+#: pisi/operations/build.py:798
 msgid "Unsatisfied Build Dependencies:"
 msgstr "Dependencias Build no satisfechas:"
 
-#: pisi/operations/build.py:798
+#: pisi/operations/build.py:802
 msgid "Cannot build package due to unsatisfied build dependencies"
 msgstr "No es posible generar el paquete por dependencias build no satisfechas"
 
-#: pisi/operations/build.py:803
+#: pisi/operations/build.py:807
 #, python-format
 msgid "Build dependency %s cannot be satisfied"
 msgstr "Dependencia build %s no se puede satisfacer"
 
-#: pisi/operations/build.py:805
+#: pisi/operations/build.py:809
 msgid "Do you want to install the unsatisfied build dependencies"
 msgstr "Quiere instalar las dependencias build faltantes "
 
-#: pisi/operations/build.py:806
+#: pisi/operations/build.py:810
 msgid "Installing build dependencies."
 msgstr "Instalando dependencias build"
 
-#: pisi/operations/build.py:812
+#: pisi/operations/build.py:816
 msgid "Ignoring build dependencies."
 msgstr "Ignorando dependencias build"
 
-#: pisi/operations/build.py:822
+#: pisi/operations/build.py:826
 #, python-format
 msgid "Patch file is missing: %s\n"
 msgstr "Falta el archivo de parche: %s\n"
 
-#: pisi/operations/build.py:824
+#: pisi/operations/build.py:828
 #, python-format
 msgid "Patch file is empty: %s"
 msgstr "Archivo de parche está vacío: %s"
 
-#: pisi/operations/build.py:840
-#, python-format
-msgid "* Applying patch: %s"
+#: pisi/operations/build.py:844
+#, fuzzy, python-format
+msgid "Applying patch: %s"
 msgstr "* Aplicando parche: %s"
 
-#: pisi/operations/build.py:959
+#: pisi/operations/build.py:963
 #, python-format
 msgid "/%s has suid bit set"
 msgstr "/%s tiene seteado el bit suid"
 
-#: pisi/operations/build.py:1035
+#: pisi/operations/build.py:1039
 #, python-format
 msgid "No user named '%s' found on the system"
 msgstr "Usuario '%s' no existe en el sistema"
 
-#: pisi/operations/build.py:1041
+#: pisi/operations/build.py:1045
 #, python-format
 msgid "No group named '%s' found on the system"
 msgstr "Grupo '%s' no existe en el sistema"
 
-#: pisi/operations/build.py:1048
+#: pisi/operations/build.py:1052
 #, python-format
 msgid "There are abandoned files under the install dir (%s):"
 msgstr "Existen archivos abandonados en la carpeta de instalación (%s):"
 
-#: pisi/operations/build.py:1076
+#: pisi/operations/build.py:1080
 #, python-format
 msgid "Ignoring empty package %s"
 msgstr "Omitiendo paquete vacío %s"
 
-#: pisi/operations/build.py:1080
+#: pisi/operations/build.py:1084
 #, python-format
 msgid "Building package: %s"
 msgstr "Construyendo paquete: %s"
 
-#: pisi/operations/build.py:1099 pisi/operations/delta.py:59
+#: pisi/operations/build.py:1103 pisi/operations/delta.py:59
 #, python-format
 msgid "Creating %s..."
 msgstr "Creando %s..."
 
-#: pisi/operations/build.py:1146
+#: pisi/operations/build.py:1150
 msgid "Cleaning build directory..."
 msgstr "Limpiando carpeta build..."
 
-#: pisi/operations/build.py:1149
+#: pisi/operations/build.py:1153
 msgid "Keeping build directory"
 msgstr "Conservando carpeta build"
 
 #: pisi/operations/build.py:1237
+msgid "Action script error caught."
+msgstr ""
+
+#: pisi/operations/build.py:1241
 #, python-format
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d error(es), %d alerta(s)"
 
-#: pisi/operations/check.py:37
+#: pisi/operations/build.py:1324
 #, python-format
-msgid "Checking /%s "
-msgstr "Verificando /%s "
-
-#: pisi/operations/check.py:42
-#, python-format
-msgid ""
-"\n"
-"Changed config file: %s"
+msgid "Last state was '%s'"
 msgstr ""
-"\n"
-"Archivo de configuración modificado: %s"
-
-#: pisi/operations/check.py:44
-#, python-format
-msgid ""
-"\n"
-"Corrupt file: %s"
-msgstr ""
-"\n"
-"Archivo corrupto: %s"
-
-#: pisi/operations/check.py:50
-#, python-format
-msgid ""
-"\n"
-"Missing file: /%s"
-msgstr ""
-"\n"
-"Archivo faltante: /%s"
 
 #: pisi/operations/delta.py:43
 #, python-format
@@ -3434,11 +3417,11 @@ msgstr "Dependencias de Build: "
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr "setAuthInfo requiere un tuple (usuario, clave)"
 
-#: pisi/util.py:208 pisi/util.py:229
+#: pisi/util.py:211 pisi/util.py:232
 msgid "Running "
 msgstr "Ejecutando"
 
-#: pisi/util.py:212 pisi/util.py:247
+#: pisi/util.py:215 pisi/util.py:250
 #, python-format
 msgid "return value for \"%s\" is %s"
 msgstr "valor devuelto de \"%s\" es %s"
@@ -3453,57 +3436,61 @@ msgstr "Incluyendo link externo '%s'"
 msgid "Including directory '%s'"
 msgstr "Incluyendo carpeta '%s'"
 
-#: pisi/util.py:514
+#: pisi/util.py:516
+msgid "You don't have necessary read permissions"
+msgstr ""
+
+#: pisi/util.py:518
 #, python-format
 msgid "Cannot calculate SHA1 hash of %s"
 msgstr "No posible calcular hash SHA1 de %s"
 
-#: pisi/util.py:526
+#: pisi/util.py:530
 #, python-format
 msgid "Compression type is not valid: '%s'"
 msgstr "Tipo de compresión no válido: '%s'"
 
-#: pisi/util.py:532
+#: pisi/util.py:536
 #, python-format
 msgid "Error while decompressing %s: %s"
 msgstr "Error al decomprimir %s: %s"
 
-#: pisi/util.py:575
+#: pisi/util.py:579
 #, python-format
 msgid "ERROR: patch (%s) failed"
 msgstr "ERROR: parche (%s) falló"
 
-#: pisi/util.py:577
+#: pisi/util.py:581
 #, python-format
 msgid "ERROR: patch (%s) failed: %s"
 msgstr "ERROR: parche (%s) falló: %s"
 
-#: pisi/util.py:587
+#: pisi/util.py:591
 #, python-format
 msgid "strip command failed for file '%s'!"
 msgstr "comando strip falló para archivo '%s'!"
 
-#: pisi/util.py:594
+#: pisi/util.py:598
 #, python-format
 msgid "chrpath command failed for file '%s'!"
 msgstr "comando chrpath falló para archivo '%s'!"
 
-#: pisi/util.py:601
+#: pisi/util.py:605
 #, python-format
 msgid "objcopy (keep-debug) command failed for file '%s'!"
 msgstr "comando objcopy (keep-debug) falló para archivo '%s'!"
 
-#: pisi/util.py:607
+#: pisi/util.py:611
 #, python-format
 msgid "objcopy (add-debuglink) command failed for file '%s'!"
 msgstr "comando objcopy (add-debuglink) falló para archivo '%s'!"
 
-#: pisi/util.py:698
+#: pisi/util.py:701
 #, python-format
 msgid "Invalid package name: %s"
 msgstr "Nombre de paquete no válido: %s"
 
-#: pisi/util.py:738
+#: pisi/util.py:741
 #, python-format
 msgid "Invalid delta package name: %s"
 msgstr "Nombre de paquete delta no válido: %s"
@@ -3512,6 +3499,56 @@ msgstr "Nombre de paquete delta no válido: %s"
 #, python-format
 msgid "Invalid version string: '%s'"
 msgstr "Cadena de versión inválida: '%s'"
+
+# sense is "current directory" i think ?
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Guardando paquetes en la carpeta actual."
+
+#~ msgid "* Checking %s... "
+#~ msgstr "* Verificando %s... "
+
+# favor verificar, no estoy seguro, depende del contexto
+#~ msgid ""
+#~ "\n"
+#~ "Package %s has changed config files."
+#~ msgstr ""
+#~ "\n"
+#~ "Paquete %s tiene archivos de configuración diferentes."
+
+#~ msgid ""
+#~ "\n"
+#~ "Package %s is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "Paquete %s está dañado."
+
+#~ msgid "Done."
+#~ msgstr "Hecho."
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "ParteOf tag no definido, buscando componente"
+
+#~ msgid "Source is part of %s component"
+#~ msgstr "Fuente es parte de componente %s "
+
+#~ msgid "Path must start with a slash: %s"
+#~ msgstr "Ruta debe empezar con una raya: %s"
+
+#~ msgid "Multiple 'Path' tags specified for this path: %s"
+#~ msgstr "Etiquetas multiples especificados para esta ruta: %s"
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Verificación de seguridad: system.devel ya está instalado"
+
+#~ msgid "Checking /%s "
+#~ msgstr "Verificando /%s "
+
+#~ msgid ""
+#~ "\n"
+#~ "Changed config file: %s"
+#~ msgstr ""
+#~ "\n"
+#~ "Archivo de configuración modificado: %s"
 
 #~ msgid "Reverse dependency %s of %s cannot be satisfied"
 #~ msgstr "No se puede satisfacer la dependencia reversa %s de %s"
