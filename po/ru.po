@@ -1,19 +1,19 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR ORGANIZATION
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-08 10:28+0300\n"
+"POT-Creation-Date: 2011-06-08 14:53+0300\n"
 "PO-Revision-Date: 2010-12-18 22:24+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: /usr/lib/python2.7/optparse.py:140
@@ -580,7 +580,7 @@ msgid "File %s not found"
 msgstr "Файл %s не найден"
 
 #: pisi/api.py:781
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "Building index of PiSi files under %s"
 msgstr "Building index of PiSi files under %s"
 
@@ -649,7 +649,7 @@ msgstr "Добавление '%s' в базу данных... "
 msgid "OK."
 msgstr "ОК."
 
-#: pisi/archive.py:419
+#: pisi/archive.py:422
 #, python-format
 msgid "Problem occured while uncompressing %s.Z file"
 msgstr "Обнаружена ошибка во время распаковки %s.Z файла"
@@ -1053,43 +1053,53 @@ msgstr "Проверка измения конфигурационных фай�
 msgid "Checking all installed packages"
 msgstr "Проверка всех установленных пакетов"
 
-#: pisi/cli/check.py:72
+#: pisi/cli/check.py:74
 #, python-format
 msgid "Checking integrity of %s"
 msgstr "Проверка целостности %s"
 
-#: pisi/cli/check.py:84
+#: pisi/cli/check.py:86
 msgid "Broken"
 msgstr "Сломано"
 
-#: pisi/cli/check.py:88
+#: pisi/cli/check.py:90
+msgid "Unknown"
+msgstr ""
+
+#: pisi/cli/check.py:92
+msgid "OK"
+msgstr "ОК"
+
+#: pisi/cli/check.py:97
 #, python-format
 msgid "Missing file: /%s"
 msgstr "Отсутствующий файл: /%s"
 
-#: pisi/cli/check.py:90
+#: pisi/cli/check.py:99
 #, python-format
 msgid "Access denied: /%s"
 msgstr "Доступ запрещен: /%s"
 
-#: pisi/cli/check.py:92
+#: pisi/cli/check.py:101
 #, python-format
 msgid "Corrupted file: /%s"
 msgstr "Поврежденный файл: /%s"
 
-#: pisi/cli/check.py:94
+#: pisi/cli/check.py:103
 #, python-format
 msgid "Modified configuration file: /%s"
 msgstr "Измененный файл конфигурации: /%s"
 
-#: pisi/cli/check.py:98
-msgid "OK"
-msgstr "ОК"
-
-#: pisi/cli/check.py:101
+#: pisi/cli/check.py:107
 #, python-format
 msgid "Package %s not installed"
 msgstr "Пакет %s не установлен"
+
+#: pisi/cli/check.py:111
+msgid ""
+"Pisi was unable to check the integrity of packages which contain files that you don't have read access.\n"
+"Running the check under a privileged user may help fixing this problem."
+msgstr ""
 
 #: pisi/cli/clean.py:20
 msgid ""
@@ -1443,20 +1453,20 @@ msgstr ""
 "Используйте \"%prog help <команда>\" для проверки особой команды.\n"
 
 #: pisi/cli/history.py:28
-msgid "upgrade"
-msgstr "обновить"
-
-#: pisi/cli/history.py:28
-msgid "remove"
-msgstr "удалить"
-
-#: pisi/cli/history.py:28
 msgid "emerge"
 msgstr "emerge"
 
 #: pisi/cli/history.py:28
 msgid "install"
 msgstr "установить"
+
+#: pisi/cli/history.py:28
+msgid "remove"
+msgstr "удалить"
+
+#: pisi/cli/history.py:28
+msgid "repository update"
+msgstr "обновление репозитория"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1467,8 +1477,8 @@ msgid "takeback"
 msgstr "возврат"
 
 #: pisi/cli/history.py:28
-msgid "repository update"
-msgstr "обновление репозитория"
+msgid "upgrade"
+msgstr "обновить"
 
 #: pisi/cli/history.py:31
 msgid ""
@@ -2688,7 +2698,7 @@ msgstr "Ошибка синтаксиса в COMAR script (%s): %s"
 msgid "Sandbox violation: %s (%s -> %s)"
 msgstr "Нарушение среды сборки: %s (%s -> %s)"
 
-#: pisi/operations/build.py:693 pisi/util.py:553
+#: pisi/operations/build.py:693 pisi/util.py:517
 #, python-format
 msgid "ERROR: WorkDir (%s) does not exist\n"
 msgstr "ОШИБКА: Рабочая директория (%s) не существует\n"
@@ -2711,12 +2721,12 @@ msgid "unable to call function from actions: %s"
 msgstr "Не удалось вызвать функцию из действий: %s"
 
 #: pisi/operations/build.py:751
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "Source package '%s' defines a relative 'Path' element: %s"
 msgstr "Source package '%s' defines a relative 'Path' element: %s"
 
 #: pisi/operations/build.py:755
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "Source package '%s' defines multiple 'Path' tags for %s"
 msgstr "Source package '%s' defines multiple 'Path' tags for %s"
 
@@ -2821,7 +2831,7 @@ msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d ошибка(ок), %d предупреждение(ий)."
 
 #: pisi/operations/build.py:1324
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "Last state was '%s'"
 msgstr "Последнее состояние было '%s'"
 
@@ -3279,6 +3289,11 @@ msgstr "распаковка: не удалось проверить хэш фа
 msgid "Unknown archive type '%s' is given for '%s'."
 msgstr "Неизвестный тип архива '%s' задан для '%s'."
 
+#: pisi/sourcearchive.py:127
+#, python-format
+msgid "Pisi needs %s to unpack this archive but it is not installed."
+msgstr ""
+
 #: pisi/specfile.py:164
 #, python-format
 msgid "URI: %s, type: %s, sha1sum: %s"
@@ -3328,80 +3343,80 @@ msgstr "Сборка зависимостей:"
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr "setAuthInfo needs a tuple (user, pass)"
 
-#: pisi/util.py:211 pisi/util.py:232
+#: pisi/util.py:188 pisi/util.py:200
 msgid "Running "
 msgstr "Запуск"
 
-#: pisi/util.py:215 pisi/util.py:250
+#: pisi/util.py:192 pisi/util.py:218
 #, python-format
 msgid "return value for \"%s\" is %s"
 msgstr "возвращение значения для \"%s\" есть %s"
 
-#: pisi/util.py:424
+#: pisi/util.py:392
 #, python-format
 msgid "Including external link '%s'"
 msgstr "Включая внешнюю ссылку '%s'"
 
-#: pisi/util.py:426
+#: pisi/util.py:394
 #, python-format
 msgid "Including directory '%s'"
 msgstr "Подключение деректории '%s'"
 
-#: pisi/util.py:516
+#: pisi/util.py:480
 msgid "You don't have necessary read permissions"
 msgstr "У вас нет необходимого разрешения на чтение"
 
-#: pisi/util.py:518
+#: pisi/util.py:482
 #, python-format
 msgid "Cannot calculate SHA1 hash of %s"
 msgstr "Не могу вычислить SHA1 хэш для %s"
 
-#: pisi/util.py:530
+#: pisi/util.py:494
 #, python-format
 msgid "Compression type is not valid: '%s'"
 msgstr "Тип сжатия не верный: '%s'"
 
-#: pisi/util.py:536
+#: pisi/util.py:500
 #, python-format
 msgid "Error while decompressing %s: %s"
 msgstr "Ошибка в процессе декомпрессии %s: %s"
 
-#: pisi/util.py:579
+#: pisi/util.py:543
 #, python-format
 msgid "ERROR: patch (%s) failed"
 msgstr "Ошибка: неверный путь (%s)"
 
-#: pisi/util.py:581
+#: pisi/util.py:545
 #, python-format
 msgid "ERROR: patch (%s) failed: %s"
 msgstr "Ошибка: не верный путь (%s): %s"
 
-#: pisi/util.py:591
+#: pisi/util.py:555
 #, python-format
 msgid "strip command failed for file '%s'!"
 msgstr "Команда strip не удалась для файла '%s'!"
 
-#: pisi/util.py:598
+#: pisi/util.py:562
 #, python-format
 msgid "chrpath command failed for file '%s'!"
 msgstr "Команда chrpath не удалась для файла '%s'!"
 
-#: pisi/util.py:605
+#: pisi/util.py:569
 #, python-format
 msgid "objcopy (keep-debug) command failed for file '%s'!"
 msgstr "Команда objcopy (keep-debug) не удалась для файла '%s'!"
 
-#: pisi/util.py:611
+#: pisi/util.py:575
 #, python-format
 msgid "objcopy (add-debuglink) command failed for file '%s'!"
 msgstr "Команда objcopy (add-debuglink) не удалась для файла '%s'!"
 
-#: pisi/util.py:701
+#: pisi/util.py:665
 #, python-format
 msgid "Invalid package name: %s"
 msgstr "Неверное имя пакета: %s"
 
-#: pisi/util.py:741
+#: pisi/util.py:705
 #, python-format
 msgid "Invalid delta package name: %s"
 msgstr "Неверное имя дельта пакета: %s"
@@ -3411,18 +3426,33 @@ msgstr "Неверное имя дельта пакета: %s"
 msgid "Invalid version string: '%s'"
 msgstr "Недопустимая строка версии: '%s'"
 
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Пакеты в рабочей директории."
-
-#~ msgid "* Checking %s... "
-#~ msgstr "* Проверка %s... "
-
 #~ msgid ""
 #~ "\n"
-#~ "Package %s has changed config files."
+#~ "Changed config file: %s"
 #~ msgstr ""
 #~ "\n"
-#~ "Package %s изменение конфигурационного файла."
+#~ "Изменен конфигурационный файл: %s"
+
+#~ msgid "Checking /%s "
+#~ msgstr "Проверка /%s"
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Изменение безопасности: system.devel уже установлен"
+
+#~ msgid "Multiple 'Path' tags specified for this path: %s"
+#~ msgstr "Множественные тэги 'Path' определены для этого пути: %s"
+
+#~ msgid "Path must start with a slash: %s"
+#~ msgstr "Путь должен начинаться с \"/\": %s"
+
+#~ msgid "Source is part of %s component"
+#~ msgstr "Источник является частью %s компонента"
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "Тег PartOf не указан, поиск компонента"
+
+#~ msgid "Done."
+#~ msgstr "Выполнено."
 
 #~ msgid ""
 #~ "\n"
@@ -3431,30 +3461,15 @@ msgstr "Недопустимая строка версии: '%s'"
 #~ "\n"
 #~ "Package %s поврежден."
 
-#~ msgid "Done."
-#~ msgstr "Выполнено."
-
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "Тег PartOf не указан, поиск компонента"
-
-#~ msgid "Source is part of %s component"
-#~ msgstr "Источник является частью %s компонента"
-
-#~ msgid "Path must start with a slash: %s"
-#~ msgstr "Путь должен начинаться с \"/\": %s"
-
-#~ msgid "Multiple 'Path' tags specified for this path: %s"
-#~ msgstr "Множественные тэги 'Path' определены для этого пути: %s"
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Изменение безопасности: system.devel уже установлен"
-
-#~ msgid "Checking /%s "
-#~ msgstr "Проверка /%s"
-
 #~ msgid ""
 #~ "\n"
-#~ "Changed config file: %s"
+#~ "Package %s has changed config files."
 #~ msgstr ""
 #~ "\n"
-#~ "Изменен конфигурационный файл: %s"
+#~ "Package %s изменение конфигурационного файла."
+
+#~ msgid "* Checking %s... "
+#~ msgstr "* Проверка %s... "
+
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Пакеты в рабочей директории."

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-08 11:37+0300\n"
+"POT-Creation-Date: 2011-06-08 14:53+0300\n"
 "PO-Revision-Date: 2010-12-27 10:06+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@trixon.se>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
@@ -654,7 +654,7 @@ msgstr "* Lägger till '%s' till db... "
 msgid "OK."
 msgstr "OK."
 
-#: pisi/archive.py:419
+#: pisi/archive.py:422
 #, python-format
 msgid "Problem occured while uncompressing %s.Z file"
 msgstr ""
@@ -2467,7 +2467,7 @@ msgstr ""
 msgid "Sandbox violation: %s (%s -> %s)"
 msgstr ""
 
-#: pisi/operations/build.py:693 pisi/util.py:553
+#: pisi/operations/build.py:693 pisi/util.py:517
 #, python-format
 msgid "ERROR: WorkDir (%s) does not exist\n"
 msgstr ""
@@ -3048,6 +3048,11 @@ msgstr ""
 msgid "Unknown archive type '%s' is given for '%s'."
 msgstr ""
 
+#: pisi/sourcearchive.py:127
+#, python-format
+msgid "Pisi needs %s to unpack this archive but it is not installed."
+msgstr ""
+
 #: pisi/specfile.py:164
 #, python-format
 msgid "URI: %s, type: %s, sha1sum: %s"
@@ -3097,80 +3102,80 @@ msgstr ""
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr ""
 
-#: pisi/util.py:211 pisi/util.py:232
+#: pisi/util.py:188 pisi/util.py:200
 msgid "Running "
 msgstr "Kör "
 
-#: pisi/util.py:215 pisi/util.py:250
+#: pisi/util.py:192 pisi/util.py:218
 #, python-format
 msgid "return value for \"%s\" is %s"
 msgstr "returvärde för \"%s\" är %s"
 
-#: pisi/util.py:424
+#: pisi/util.py:392
 #, python-format
 msgid "Including external link '%s'"
 msgstr ""
 
-#: pisi/util.py:426
+#: pisi/util.py:394
 #, python-format
 msgid "Including directory '%s'"
 msgstr ""
 
-#: pisi/util.py:516
+#: pisi/util.py:480
 msgid "You don't have necessary read permissions"
 msgstr ""
 
-#: pisi/util.py:518
+#: pisi/util.py:482
 #, python-format
 msgid "Cannot calculate SHA1 hash of %s"
 msgstr ""
 
-#: pisi/util.py:530
+#: pisi/util.py:494
 #, python-format
 msgid "Compression type is not valid: '%s'"
 msgstr ""
 
-#: pisi/util.py:536
+#: pisi/util.py:500
 #, python-format
 msgid "Error while decompressing %s: %s"
 msgstr ""
 
-#: pisi/util.py:579
+#: pisi/util.py:543
 #, python-format
 msgid "ERROR: patch (%s) failed"
 msgstr "FEL: patch (%s) misslyckades"
 
-#: pisi/util.py:581
+#: pisi/util.py:545
 #, python-format
 msgid "ERROR: patch (%s) failed: %s"
 msgstr "FEL: patch (%s) misslyckades: %s"
 
-#: pisi/util.py:591
+#: pisi/util.py:555
 #, python-format
 msgid "strip command failed for file '%s'!"
 msgstr ""
 
-#: pisi/util.py:598
+#: pisi/util.py:562
 #, python-format
 msgid "chrpath command failed for file '%s'!"
 msgstr ""
 
-#: pisi/util.py:605
+#: pisi/util.py:569
 #, python-format
 msgid "objcopy (keep-debug) command failed for file '%s'!"
 msgstr ""
 
-#: pisi/util.py:611
+#: pisi/util.py:575
 #, python-format
 msgid "objcopy (add-debuglink) command failed for file '%s'!"
 msgstr ""
 
-#: pisi/util.py:701
+#: pisi/util.py:665
 #, python-format
 msgid "Invalid package name: %s"
 msgstr "Ogiltigt paketnamn: %s"
 
-#: pisi/util.py:741
+#: pisi/util.py:705
 #, python-format
 msgid "Invalid delta package name: %s"
 msgstr ""
@@ -3180,54 +3185,8 @@ msgstr ""
 msgid "Invalid version string: '%s'"
 msgstr "Ogiltig versionssträng: '%s'"
 
-#~ msgid "Generating %s,"
-#~ msgstr "Skapar %s,"
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Kan inte skapa delta av samma paket!"
-
-#~ msgid "Creating delta PiSi package between %s %s"
-#~ msgstr "Skapar delta-PiSi-paket mellan %s och %s"
-
-#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
-#~ msgstr "Namn: %s, version: %s, utgåva: %s, bygge %s\n"
-
-#~ msgid "Repository distribution does not match. Removing %s from system."
-#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort %s från systemet."
-
-#~ msgid "Update PiSi database for repository %s?"
-#~ msgstr "Uppdatera PiSi-databasen för %s-förrådet?"
-
-#~ msgid "Repository architecture does not match. Removing %s from system."
-#~ msgstr "Förrådet % finns inte och kan därmed inte tas bort."
-
-#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
-
-#~ msgid "Safety switch: Following packages in system.base will be installed: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
-
-#~ msgid "Storing %s."
-#~ msgstr "Lagrar %s."
-
-#~ msgid "Storing %s, "
-#~ msgstr "Lagrar %s, "
-
-#~ msgid "Checking /%s "
-#~ msgstr "Kontrollerar /%s "
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Säkerhetslås: system.devel är redan installerad"
-
-#~ msgid "Done."
-#~ msgstr "Klar."
-
-#~ msgid ""
-#~ "\n"
-#~ "Package %s is corrupt."
-#~ msgstr ""
-#~ "\n"
-#~ "Paketet %s är trasigt."
+#~ msgid "* Checking %s... "
+#~ msgstr "* Kontrollerar %s... "
 
 #~ msgid ""
 #~ "\n"
@@ -3236,5 +3195,51 @@ msgstr "Ogiltig versionssträng: '%s'"
 #~ "\n"
 #~ "Paketet %s har förändrade konfigurationsfiler."
 
-#~ msgid "* Checking %s... "
-#~ msgstr "* Kontrollerar %s... "
+#~ msgid ""
+#~ "\n"
+#~ "Package %s is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "Paketet %s är trasigt."
+
+#~ msgid "Done."
+#~ msgstr "Klar."
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Säkerhetslås: system.devel är redan installerad"
+
+#~ msgid "Checking /%s "
+#~ msgstr "Kontrollerar /%s "
+
+#~ msgid "Storing %s, "
+#~ msgstr "Lagrar %s, "
+
+#~ msgid "Storing %s."
+#~ msgstr "Lagrar %s."
+
+#~ msgid "Safety switch: Following packages in system.base will be installed: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
+
+#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
+
+#~ msgid "Repository architecture does not match. Removing %s from system."
+#~ msgstr "Förrådet % finns inte och kan därmed inte tas bort."
+
+#~ msgid "Update PiSi database for repository %s?"
+#~ msgstr "Uppdatera PiSi-databasen för %s-förrådet?"
+
+#~ msgid "Repository distribution does not match. Removing %s from system."
+#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort %s från systemet."
+
+#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
+#~ msgstr "Namn: %s, version: %s, utgåva: %s, bygge %s\n"
+
+#~ msgid "Creating delta PiSi package between %s %s"
+#~ msgstr "Skapar delta-PiSi-paket mellan %s och %s"
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Kan inte skapa delta av samma paket!"
+
+#~ msgid "Generating %s,"
+#~ msgstr "Skapar %s,"

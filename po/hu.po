@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PiSi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-08 11:37+0300\n"
+"POT-Creation-Date: 2011-06-08 14:53+0300\n"
 "PO-Revision-Date: 2010-12-27 13:15+0100\n"
 "Last-Translator: Attila Siposs <sipiatti@gmail.com>\n"
 "Language-Team: Hungarian <pardus-translators@pardus.org.tr>\n"
@@ -658,7 +658,7 @@ msgstr "* '%s' hozzáadása az adatbázishoz..."
 msgid "OK."
 msgstr "OK."
 
-#: pisi/archive.py:419
+#: pisi/archive.py:422
 #, python-format
 msgid "Problem occured while uncompressing %s.Z file"
 msgstr "Hiba lépett fel a %s.Z kicsomagolása közben."
@@ -2712,7 +2712,7 @@ msgstr "Szintaktikai hiba a COMAR fájlban (%s): %s"
 msgid "Sandbox violation: %s (%s -> %s)"
 msgstr "Sandbox violation: %s (%s -> %s)"
 
-#: pisi/operations/build.py:693 pisi/util.py:553
+#: pisi/operations/build.py:693 pisi/util.py:517
 #, python-format
 msgid "ERROR: WorkDir (%s) does not exist\n"
 msgstr "HIBA: A(z) %s munkakönyvtár nem létezik.\n"
@@ -3303,6 +3303,11 @@ msgstr "kicsomagolás: check_file_hash művelet sikertelen"
 msgid "Unknown archive type '%s' is given for '%s'."
 msgstr "'%s' ismeretlen arhívumtípus lett megadva ehhez: '%s'."
 
+#: pisi/sourcearchive.py:127
+#, python-format
+msgid "Pisi needs %s to unpack this archive but it is not installed."
+msgstr ""
+
 #: pisi/specfile.py:164
 #, python-format
 msgid "URI: %s, type: %s, sha1sum: %s"
@@ -3352,80 +3357,80 @@ msgstr "Build függőségek:"
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr "a setAuthInfo bemenete egy tuple (user, pass)"
 
-#: pisi/util.py:211 pisi/util.py:232
+#: pisi/util.py:188 pisi/util.py:200
 msgid "Running "
 msgstr "Folyamatban"
 
-#: pisi/util.py:215 pisi/util.py:250
+#: pisi/util.py:192 pisi/util.py:218
 #, python-format
 msgid "return value for \"%s\" is %s"
 msgstr "\"%s\" visszatéréis értéke %s"
 
-#: pisi/util.py:424
+#: pisi/util.py:392
 #, python-format
 msgid "Including external link '%s'"
 msgstr "A(z) '%s' külső hivatkozás hozzáadva"
 
-#: pisi/util.py:426
+#: pisi/util.py:394
 #, python-format
 msgid "Including directory '%s'"
 msgstr "A(z) '%s' könyvtár hozzáadva"
 
-#: pisi/util.py:516
+#: pisi/util.py:480
 msgid "You don't have necessary read permissions"
 msgstr ""
 
-#: pisi/util.py:518
+#: pisi/util.py:482
 #, python-format
 msgid "Cannot calculate SHA1 hash of %s"
 msgstr "Nem tudom kiszámítani %s SHA1 értékét"
 
-#: pisi/util.py:530
+#: pisi/util.py:494
 #, python-format
 msgid "Compression type is not valid: '%s'"
 msgstr "Tömörítési típus érvénytelen: '%s'"
 
-#: pisi/util.py:536
+#: pisi/util.py:500
 #, python-format
 msgid "Error while decompressing %s: %s"
 msgstr "Hiba a %s kicsomagolása közben: %s"
 
-#: pisi/util.py:579
+#: pisi/util.py:543
 #, python-format
 msgid "ERROR: patch (%s) failed"
 msgstr "HIBA: a patch (%s) alkalmazása nem sikerült"
 
-#: pisi/util.py:581
+#: pisi/util.py:545
 #, python-format
 msgid "ERROR: patch (%s) failed: %s"
 msgstr "HIBA: a patch (%s) alkalmazása nem sikerült: %s"
 
-#: pisi/util.py:591
+#: pisi/util.py:555
 #, python-format
 msgid "strip command failed for file '%s'!"
 msgstr "A strip parancsot nem tudtam végrehajtani a(z) %s fájlon!"
 
-#: pisi/util.py:598
+#: pisi/util.py:562
 #, python-format
 msgid "chrpath command failed for file '%s'!"
 msgstr "A chrpath parancsot nem tudtam végrehajtani a(z) %s fájlon!"
 
-#: pisi/util.py:605
+#: pisi/util.py:569
 #, python-format
 msgid "objcopy (keep-debug) command failed for file '%s'!"
 msgstr "Az objcopy (keep-debug) parancsot nem tudtam végrehajtani a(z) %s fájlon!"
 
-#: pisi/util.py:611
+#: pisi/util.py:575
 #, python-format
 msgid "objcopy (add-debuglink) command failed for file '%s'!"
 msgstr "Az objcopy (add-debuglink) parancsot nem tudtam végrehajtani a(z) %s fájlon!"
 
-#: pisi/util.py:701
+#: pisi/util.py:665
 #, python-format
 msgid "Invalid package name: %s"
 msgstr "Érvénytelen csomagnév: %s"
 
-#: pisi/util.py:741
+#: pisi/util.py:705
 #, python-format
 msgid "Invalid delta package name: %s"
 msgstr "Érvénytelen deltacsomagnév: %s"
@@ -3435,109 +3440,11 @@ msgstr "Érvénytelen deltacsomagnév: %s"
 msgid "Invalid version string: '%s'"
 msgstr "Érvénytelen verzió-sztring: '%s'"
 
-#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
-#~ msgstr "Név: %s, verzió: %s, kiadás: %s, build: %s\n"
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Csomagok elhelyezése a munkakönyvtárban."
 
-#~ msgid "Package %s is already at the latest build %s."
-#~ msgstr "A(z) %s csomag már a legutolsó build számot viseli: %s."
-
-#~ msgid "Creating delta PiSi package between %s %s"
-#~ msgstr "PiSi különbözeti csomag létrehozása %s és %s között."
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Nem hozható létre különbözet ugyanazon csomagból!"
-
-#~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
-#~ msgstr "A telepési könyvtárban (%s) található valamennyi fájl a csomag(ok)ba gyűjtve"
-
-#~ msgid "Creating PiSi package %s."
-#~ msgstr "A(z) %s PiSi csomag létrehozása."
-
-#~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
-#~ msgstr "A build számok használata nem lehetséges. Ha tároló számára épít, engedélyezze a buildno opciót a pisi.conf-ban."
-
-#~ msgid "Generating %s,"
-#~ msgstr "%s generálása,"
-
-#~ msgid "There is no change from previous build %d"
-#~ msgstr "Nincs változás az előző build-hez (%d) képest."
-
-#~ msgid "There are changes, incrementing build no to %d"
-#~ msgstr "Változásokat észleltem, a build szám így növelve lesz. Az új érték: %d."
-
-#~ msgid "(old package lacks a build no, setting build no to 1.)"
-#~ msgstr "(a régi csomgnak nincs build száma, az új build szám ezért 1. lesz)"
-
-#~ msgid "(no previous build found, setting build no to 1.)"
-#~ msgstr "(nem találtam régebbi build-et, a sorszám 1-re lesz állítva)"
-
-#~ msgid "(found old version %s)"
-#~ msgstr "(régebbi verziójú %s-t találtam)"
-
-#~ msgid "gzip compression not supported yet"
-#~ msgstr "A gzip tömörítés még nem támogatott."
-
-#~ msgid "zip compression not supported yet"
-#~ msgstr "A zip tömörítés még nem támogatott."
-
-#~ msgid "Indexing current directory."
-#~ msgstr "Az aktuális könyvtár indexelése."
-
-#~ msgid "package_format must be one of %s "
-#~ msgstr "a csomag formátuma csak a következők egyike lehet:  %s"
-
-#~ msgid "PiSi binary package formats: '1.0', '1.1' (default)"
-#~ msgstr "PiSi bináris csomag formátumok: 1.0', '1.1' (alapértelmezett)"
-
-#~ msgid "Do not take build no into account."
-#~ msgstr "Nem veszi figyelembe a \"build-no\" kapcsolót."
-
-#~ msgid "Downgrade to old distribution build?"
-#~ msgstr "Visszatér a disztribúció korábbi build-változatára?"
-
-#~ msgid "Upgrading to new distribution build"
-#~ msgstr "Frissítés a disztribúció új build-változatára"
-
-#~ msgid "%s %s is added to %s/language.%s.dat "
-#~ msgstr "%s %s hozzáadva %s/language.%s.dat-hoz "
-
-#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
-#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} hozzáadva %s/language.%s.def-hez "
-
-#~ msgid "%s is added to %s/language.%s.dat"
-#~ msgstr "%s hozzáadva %s/language.%s.dat-hoz"
-
-#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
-#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} hozzáadva %s/language.%s.def-hez"
-
-#~ msgid ""
-#~ "\n"
-#~ "Changed config file: %s"
-#~ msgstr ""
-#~ "\n"
-#~ "Megváltozott beállító fájl: %s"
-
-#~ msgid "Checking /%s "
-#~ msgstr "/%s ellenőrzése "
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Biztonsági kapcsoló: a system.devel már telepítve van"
-
-#~ msgid "Source is part of %s component"
-#~ msgstr "A forrás a(z) %s komponens része."
-
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "PartOf címke nincs definiálva, komponens keresése"
-
-#~ msgid "Done."
-#~ msgstr "Kész."
-
-#~ msgid ""
-#~ "\n"
-#~ "Package %s is corrupt."
-#~ msgstr ""
-#~ "\n"
-#~ "A(z) %s csomag sérült."
+#~ msgid "* Checking %s... "
+#~ msgstr "* %s ellenőrzése... "
 
 #~ msgid ""
 #~ "\n"
@@ -3546,8 +3453,106 @@ msgstr "Érvénytelen verzió-sztring: '%s'"
 #~ "\n"
 #~ "A(z) %s csomag konfigurációs állományai megváltoztak."
 
-#~ msgid "* Checking %s... "
-#~ msgstr "* %s ellenőrzése... "
+#~ msgid ""
+#~ "\n"
+#~ "Package %s is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "A(z) %s csomag sérült."
 
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Csomagok elhelyezése a munkakönyvtárban."
+#~ msgid "Done."
+#~ msgstr "Kész."
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "PartOf címke nincs definiálva, komponens keresése"
+
+#~ msgid "Source is part of %s component"
+#~ msgstr "A forrás a(z) %s komponens része."
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Biztonsági kapcsoló: a system.devel már telepítve van"
+
+#~ msgid "Checking /%s "
+#~ msgstr "/%s ellenőrzése "
+
+#~ msgid ""
+#~ "\n"
+#~ "Changed config file: %s"
+#~ msgstr ""
+#~ "\n"
+#~ "Megváltozott beállító fájl: %s"
+
+#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
+#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} hozzáadva %s/language.%s.def-hez"
+
+#~ msgid "%s is added to %s/language.%s.dat"
+#~ msgstr "%s hozzáadva %s/language.%s.dat-hoz"
+
+#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
+#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} hozzáadva %s/language.%s.def-hez "
+
+#~ msgid "%s %s is added to %s/language.%s.dat "
+#~ msgstr "%s %s hozzáadva %s/language.%s.dat-hoz "
+
+#~ msgid "Upgrading to new distribution build"
+#~ msgstr "Frissítés a disztribúció új build-változatára"
+
+#~ msgid "Downgrade to old distribution build?"
+#~ msgstr "Visszatér a disztribúció korábbi build-változatára?"
+
+#~ msgid "Do not take build no into account."
+#~ msgstr "Nem veszi figyelembe a \"build-no\" kapcsolót."
+
+#~ msgid "PiSi binary package formats: '1.0', '1.1' (default)"
+#~ msgstr "PiSi bináris csomag formátumok: 1.0', '1.1' (alapértelmezett)"
+
+#~ msgid "package_format must be one of %s "
+#~ msgstr "a csomag formátuma csak a következők egyike lehet:  %s"
+
+#~ msgid "Indexing current directory."
+#~ msgstr "Az aktuális könyvtár indexelése."
+
+#~ msgid "zip compression not supported yet"
+#~ msgstr "A zip tömörítés még nem támogatott."
+
+#~ msgid "gzip compression not supported yet"
+#~ msgstr "A gzip tömörítés még nem támogatott."
+
+#~ msgid "(found old version %s)"
+#~ msgstr "(régebbi verziójú %s-t találtam)"
+
+#~ msgid "(no previous build found, setting build no to 1.)"
+#~ msgstr "(nem találtam régebbi build-et, a sorszám 1-re lesz állítva)"
+
+#~ msgid "(old package lacks a build no, setting build no to 1.)"
+#~ msgstr "(a régi csomgnak nincs build száma, az új build szám ezért 1. lesz)"
+
+#~ msgid "There are changes, incrementing build no to %d"
+#~ msgstr "Változásokat észleltem, a build szám így növelve lesz. Az új érték: %d."
+
+#~ msgid "There is no change from previous build %d"
+#~ msgstr "Nincs változás az előző build-hez (%d) képest."
+
+#~ msgid "Generating %s,"
+#~ msgstr "%s generálása,"
+
+#~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
+#~ msgstr "A build számok használata nem lehetséges. Ha tároló számára épít, engedélyezze a buildno opciót a pisi.conf-ban."
+
+#~ msgid "Creating PiSi package %s."
+#~ msgstr "A(z) %s PiSi csomag létrehozása."
+
+#~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
+#~ msgstr "A telepési könyvtárban (%s) található valamennyi fájl a csomag(ok)ba gyűjtve"
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Nem hozható létre különbözet ugyanazon csomagból!"
+
+#~ msgid "Creating delta PiSi package between %s %s"
+#~ msgstr "PiSi különbözeti csomag létrehozása %s és %s között."
+
+#~ msgid "Package %s is already at the latest build %s."
+#~ msgstr "A(z) %s csomag már a legutolsó build számot viseli: %s."
+
+#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
+#~ msgstr "Név: %s, verzió: %s, kiadás: %s, build: %s\n"
