@@ -58,52 +58,19 @@ class FilePermissionDeniedError(Error):
 
 
 #########################
-# spec validation utility #
-#########################
-
-def print_errors(errlist):
-    for err in errlist:
-        ctx.ui.error(err)
-
-
-#########################
 # string/list/functional#
 #########################
-
-def every(pred, seq):
-    return reduce(operator.and_, map(pred, seq), True)
 
 def any(pred, seq):
     return reduce(operator.or_, map(pred, seq), False)
 
-def unzip(seq):
-    return zip(*seq)
-
 def concat(l):
     """Concatenate a list of lists."""
-    return reduce(operator.concat, l )
+    return reduce(operator.concat, l)
 
 def strlist(l):
     """Concatenate string reps of l's elements."""
     return "".join(map(lambda x: str(x) + ' ', l))
-
-def multisplit(_str, chars):
-    """Split str with any of the chars."""
-    l = [_str]
-    for c in chars:
-        l = concat(map(lambda x:x.split(c), l))
-    return l
-
-def same(l):
-    """Check if all elements of a sequence are equal."""
-    if len(l) == 0:
-        return True
-    else:
-        last = l.pop()
-        for x in l:
-            if x!=last:
-                return False
-        return True
 
 def prefix(a, b):
     """Check if sequence a is a prefix of sequence b."""
@@ -214,15 +181,6 @@ def run_batch(cmd):
     out, err = p.communicate()
     ctx.ui.debug(_('return value for "%s" is %s') % (cmd, p.returncode))
     return (p.returncode, out, err)
-
-# you can't use the following for Popen, oops
-class TeeOutFile:
-    def __init__(self, file):
-        self.file = file
-
-    def write(self, str):
-        self.write(str)
-        ctx.ui.debug(str)
 
 # TODO: it might be worthwhile to try to remove the
 # use of ctx.stdout, and use run_batch()'s return
