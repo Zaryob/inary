@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2008 - 2010, TUBITAK/UEKAE
+# Copyright (C) 2008 - 2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -23,32 +23,50 @@ def file_corrupted(pfile):
         if pisi.util.sha1_data(pisi.util.read_link(path)) != pfile.hash:
             return True
     else:
-        if pisi.util.sha1_file(path) != pfile.hash:
-            return True
+        try:
+            if pisi.util.sha1_file(path) != pfile.hash:
+                return True
+        except pisi.util.FilePermissionDeniedError, e:
+            raise e
     return False
 
 def check_files(files, check_config=False):
-    results = {'missing':[], 'corrupted':[]}
+    results = {
+                'missing'   :   [],
+                'corrupted' :   [],
+                'denied'    :   [],
+                'config'    :   [],
+              }
+
     for f in files:
         if not check_config and f.type == "config":
             continue
         if not f.hash:
             continue
-        ctx.ui.info(_("Checking /%s ") % f.path, noln=True, verbose=True)
+
+        is_file_corrupted = False
+
         path = os.path.join(ctx.config.dest_dir(), f.path)
         if os.path.lexists(path):
-            if file_corrupted(f):
-                if f.type == "config":
-                    msg = _("\nChanged config file: %s")
-                else:
-                    msg = _("\nCorrupt file: %s")
-                ctx.ui.error(msg % ("/%s" %f.path))
-                results['corrupted'].append(f.path)
+            try:
+                is_file_corrupted = file_corrupted(f)
+
+            except pisi.util.FilePermissionDeniedError, e:
+                # Can't read file, probably because of permissions, skip
+                results['denied'].append(f.path)
+
             else:
-                ctx.ui.info(_("OK"), verbose=True)
+                if is_file_corrupted:
+                    # Detect file type
+                    if f.type == "config":
+                        results['config'].append(f.path)
+                    else:
+                        results['corrupted'].append(f.path)
+
         else:
-            ctx.ui.error(_("\nMissing file: /%s") % f.path)
+            # Shipped file doesn't exist on the system
             results['missing'].append(f.path)
+
     return results
 
 def check_config_files(package):
