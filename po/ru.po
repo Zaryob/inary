@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR ORGANIZATION
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
@@ -10,10 +10,10 @@ msgstr ""
 "PO-Revision-Date: 2010-12-18 22:24+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: /usr/lib/python2.7/optparse.py:140
@@ -580,14 +580,13 @@ msgid "File %s not found"
 msgstr "Файл %s не найден"
 
 #: pisi/api.py:781
-#, fuzzy, python-format
+#, python-format
 msgid "Building index of PiSi files under %s"
-msgstr "* Building index of PiSi files under %s"
+msgstr "Building index of PiSi files under %s"
 
 #: pisi/api.py:786
-#, fuzzy
 msgid "Index file written"
-msgstr "* Файл индекса записан"
+msgstr "Файл индекса записан"
 
 #: pisi/api.py:791
 msgid "Not a valid repo name."
@@ -633,9 +632,8 @@ msgid "Updating database at any rate as requested"
 msgstr "Обновление базы данных в любом случае как запрос"
 
 #: pisi/api.py:858
-#, fuzzy
 msgid "Package database updated."
-msgstr "* База данных пакетов обновлена."
+msgstr "База данных пакетов обновлена."
 
 #: pisi/api.py:860
 #, python-format
@@ -643,9 +641,9 @@ msgid "No repository named %s found."
 msgstr "Не найден репозиторий с именем %s ."
 
 #: pisi/api.py:873
-#, fuzzy, python-format
+#, python-format
 msgid "Adding '%s' to db... "
-msgstr "* Добавление '%s' в базу данных... "
+msgstr "Добавление '%s' в базу данных... "
 
 #: pisi/api.py:876
 msgid "OK."
@@ -1058,35 +1056,31 @@ msgstr "Проверка всех установленных пакетов"
 #: pisi/cli/check.py:72
 #, python-format
 msgid "Checking integrity of %s"
-msgstr ""
+msgstr "Проверка целостности %s"
 
 #: pisi/cli/check.py:84
 msgid "Broken"
-msgstr ""
+msgstr "Сломано"
 
 #: pisi/cli/check.py:88
-#, fuzzy, python-format
+#, python-format
 msgid "Missing file: /%s"
-msgstr ""
-"\n"
-"Отсутствующий файл: %s"
+msgstr "Отсутствующий файл: /%s"
 
 #: pisi/cli/check.py:90
 #, python-format
 msgid "Access denied: /%s"
-msgstr ""
+msgstr "Доступ запрещен: /%s"
 
 #: pisi/cli/check.py:92
-#, fuzzy, python-format
+#, python-format
 msgid "Corrupted file: /%s"
-msgstr ""
-"\n"
-"Поврежденный файл: %s"
+msgstr "Поврежденный файл: /%s"
 
 #: pisi/cli/check.py:94
-#, fuzzy, python-format
+#, python-format
 msgid "Modified configuration file: /%s"
-msgstr "%s ошибка конфигурации."
+msgstr "Измененный файл конфигурации: /%s"
 
 #: pisi/cli/check.py:98
 msgid "OK"
@@ -1449,20 +1443,20 @@ msgstr ""
 "Используйте \"%prog help <команда>\" для проверки особой команды.\n"
 
 #: pisi/cli/history.py:28
-msgid "emerge"
-msgstr "emerge"
-
-#: pisi/cli/history.py:28
-msgid "install"
-msgstr "установить"
+msgid "upgrade"
+msgstr "обновить"
 
 #: pisi/cli/history.py:28
 msgid "remove"
 msgstr "удалить"
 
 #: pisi/cli/history.py:28
-msgid "repository update"
-msgstr "обновление репозитория"
+msgid "emerge"
+msgstr "emerge"
+
+#: pisi/cli/history.py:28
+msgid "install"
+msgstr "установить"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1473,8 +1467,8 @@ msgid "takeback"
 msgstr "возврат"
 
 #: pisi/cli/history.py:28
-msgid "upgrade"
-msgstr "обновить"
+msgid "repository update"
+msgstr "обновление репозитория"
 
 #: pisi/cli/history.py:31
 msgid ""
@@ -2562,19 +2556,16 @@ msgid "Package %s: metadata corrupt, skipping..."
 msgstr "Пакет %s: метадата повреждена, пропуск..."
 
 #: pisi/index.py:237
-#, fuzzy
 msgid "Adding groups.xml to index"
-msgstr "Добавление %s в индекс исходника"
+msgstr "Добавление groups.xml к индексу"
 
 #: pisi/index.py:243
-#, fuzzy
 msgid "Adding components.xml to index"
-msgstr "Добавление пакета в индекс: %s"
+msgstr "Добавление components.xml к индексу"
 
 #: pisi/index.py:253
-#, fuzzy
 msgid "Adding distribution.xml to index"
-msgstr "Добавление %s в индекс исходника"
+msgstr "Добавление distribution.xml к индексу"
 
 #: pisi/index.py:274
 #, python-format
@@ -2720,14 +2711,14 @@ msgid "unable to call function from actions: %s"
 msgstr "Не удалось вызвать функцию из действий: %s"
 
 #: pisi/operations/build.py:751
-#, python-format
+#, python-format, fuzzy
 msgid "Source package '%s' defines a relative 'Path' element: %s"
-msgstr ""
+msgstr "Source package '%s' defines a relative 'Path' element: %s"
 
 #: pisi/operations/build.py:755
-#, python-format
+#, python-format, fuzzy
 msgid "Source package '%s' defines multiple 'Path' tags for %s"
-msgstr ""
+msgstr "Source package '%s' defines multiple 'Path' tags for %s"
 
 #: pisi/operations/build.py:784
 msgid "Safety switch: following extra packages in system.devel will be installed: "
@@ -2773,9 +2764,9 @@ msgid "Patch file is empty: %s"
 msgstr "Файл патча отсутствует: %s"
 
 #: pisi/operations/build.py:844
-#, fuzzy, python-format
+#, python-format
 msgid "Applying patch: %s"
-msgstr "* Применение патча: %s"
+msgstr "Применение патча: %s"
 
 #: pisi/operations/build.py:963
 #, python-format
@@ -2822,7 +2813,7 @@ msgstr "Сохранение каталога сборки"
 
 #: pisi/operations/build.py:1237
 msgid "Action script error caught."
-msgstr ""
+msgstr "Обнаружена ошибка в Action Script"
 
 #: pisi/operations/build.py:1241
 #, python-format
@@ -2830,9 +2821,9 @@ msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d ошибка(ок), %d предупреждение(ий)."
 
 #: pisi/operations/build.py:1324
-#, python-format
+#, python-format, fuzzy
 msgid "Last state was '%s'"
-msgstr ""
+msgstr "Последнее состояние было '%s'"
 
 #: pisi/operations/delta.py:43
 #, python-format
@@ -3358,7 +3349,7 @@ msgstr "Подключение деректории '%s'"
 
 #: pisi/util.py:516
 msgid "You don't have necessary read permissions"
-msgstr ""
+msgstr "У вас нет необходимого разрешения на чтение"
 
 #: pisi/util.py:518
 #, python-format
