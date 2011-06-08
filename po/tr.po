@@ -600,14 +600,13 @@ msgid "File %s not found"
 msgstr "%s dosyası bulunamadı."
 
 #: pisi/api.py:781
-#, fuzzy, python-format
+#, python-format
 msgid "Building index of PiSi files under %s"
-msgstr "* %s altındaki PiSi dosyalarının kataloğu oluşturuluyor."
+msgstr "%s altındaki PiSi dosyalarının kataloğu oluşturuluyor"
 
 #: pisi/api.py:786
-#, fuzzy
 msgid "Index file written"
-msgstr "* Katalog dosyası yazıldı."
+msgstr "Katalog dosyası oluşturuldu"
 
 #: pisi/api.py:791
 msgid "Not a valid repo name."
@@ -653,9 +652,8 @@ msgid "Updating database at any rate as requested"
 msgstr "Veritabanı istek üzerine güncelleniyor."
 
 #: pisi/api.py:858
-#, fuzzy
 msgid "Package database updated."
-msgstr "* Paket veritabanı güncellendi."
+msgstr "Paket veritabanı güncellendi."
 
 #: pisi/api.py:860
 #, python-format
@@ -663,9 +661,9 @@ msgid "No repository named %s found."
 msgstr "%s adında bir depo bulunamadı."
 
 #: pisi/api.py:873
-#, fuzzy, python-format
+#, python-format
 msgid "Adding '%s' to db... "
-msgstr "* '%s' veritabanına ekleniyor... "
+msgstr "'%s' veritabanına ekleniyor... "
 
 #: pisi/api.py:876
 msgid "OK."
@@ -860,7 +858,7 @@ msgstr "Depo dağıtım denetimini atla"
 
 #: pisi/cli/addrepo.py:45
 msgid "Does not fetch repository index and does not check distribution match"
-msgstr "Depo indeksini indirme ve dağıtımı denetleme"
+msgstr "Depo kataloğunu indirme ve dağıtımı denetleme"
 
 #: pisi/cli/addrepo.py:48
 msgid "Add repository at given position (0 is first)"
@@ -1030,7 +1028,7 @@ msgstr "Desteklenen paket biçimleri:"
 #: pisi/cli/build.py:168 pisi/cli/delta.py:75
 #, python-format
 msgid "  %s (default)"
-msgstr "%s (öntanımlı)"
+msgstr "  %s (öntanımlı)"
 
 #: pisi/cli/check.py:25
 msgid ""
@@ -1079,36 +1077,32 @@ msgstr "Tüm kurulu paketler denetleniyor."
 #: pisi/cli/check.py:72
 #, python-format
 msgid "Checking integrity of %s"
-msgstr ""
+msgstr "%s paketinin bütünlüğü denetleniyor"
 
 #: pisi/cli/check.py:84
 msgid "Broken"
-msgstr ""
+msgstr "Kırık"
 
 #: pisi/cli/check.py:88
-#, fuzzy, python-format
+#, python-format
 msgid "Missing file: /%s"
-msgstr ""
-"\n"
-"Eksik dosya: /%s"
+msgstr "Eksik dosya: /%s"
 
 #: pisi/cli/check.py:90
 #, python-format
 msgid "Access denied: /%s"
-msgstr ""
+msgstr "Erişim Engellendi: /%s"
 
 #: pisi/cli/check.py:92
-#, fuzzy, python-format
+#, python-format
 msgid "Corrupted file: /%s"
-msgstr ""
-"\n"
-"Bozuk dosya: %s"
+msgstr "Bozuk dosya: /%s"
 
 # pisi/actionsapi/autotools.py:75 :85
 #: pisi/cli/check.py:94
-#, fuzzy, python-format
+#,  python-format
 msgid "Modified configuration file: /%s"
-msgstr "%s yapılandırması başarısız oldu."
+msgstr "Değiştirilmiş yapılandırma dosyası: /%s"
 
 #: pisi/cli/check.py:98
 msgid "OK"
@@ -1563,7 +1557,7 @@ msgstr ""
 "\n"
 "Bu komut bir dizinde PiSi dosyaları arar, onlardan PiSi etiketlerini çıkarır\n"
 "ve bilgiyi pisi-index.xml adında bir XML dosyasında toplar. Hem kaynak hem\n"
-"de ikili paketleri kataloglar.\n"
+"de ikili paketleri bu XML kataloğuna ekler.\n"
 "\n"
 "Birden fazla dizin verirseniz, komut yine çalışır, fakat herşeyi tek bir\n"
 "katalog dosyasına koyar.\n"
@@ -1586,7 +1580,7 @@ msgstr "Katalog dosyası için virgülle ayrılmış sıkıştırma türleri"
 
 #: pisi/cli/index.py:69
 msgid "Do not index PiSi spec files."
-msgstr "PiSi spec dosyalarını kataloglama."
+msgstr "PiSi spec dosyalarını kataloğa ekleme."
 
 #: pisi/cli/index.py:74
 msgid "Do not sign index."
@@ -2578,7 +2572,7 @@ msgstr "Bilinmeyen paket işlemi"
 #: pisi/index.py:176
 #, python-format
 msgid "Adding package to index: %s"
-msgstr "Paket indekse ekleniyor: %s"
+msgstr "Paket kataloğa ekleniyor: %s"
 
 #: pisi/index.py:192
 #, python-format
@@ -2586,24 +2580,21 @@ msgid "Package %s: metadata corrupt, skipping..."
 msgstr "Paket %s: metadata bozuk, atlanıyor..."
 
 #: pisi/index.py:237
-#, fuzzy
 msgid "Adding groups.xml to index"
-msgstr "%s kaynak indeksine ekleniyor"
+msgstr "groups.xml kataloğa ekleniyor"
 
 #: pisi/index.py:243
-#, fuzzy
 msgid "Adding components.xml to index"
-msgstr "Paket indekse ekleniyor: %s"
+msgstr "components.xml kataloğa ekleniyor"
 
 #: pisi/index.py:253
-#, fuzzy
 msgid "Adding distribution.xml to index"
-msgstr "%s kaynak indeksine ekleniyor"
+msgstr "distribution.xml kataloğa ekleniyor"
 
 #: pisi/index.py:274
 #, python-format
 msgid "Adding %s to source index"
-msgstr "%s kaynak indeksine ekleniyor"
+msgstr "%s kaynak kataloğuna ekleniyor"
 
 #: pisi/metadata.py:78
 #, python-format
@@ -2746,12 +2737,12 @@ msgstr "fonksiyon eylemlerden çağırılamıyor: %s"
 #: pisi/operations/build.py:751
 #, python-format
 msgid "Source package '%s' defines a relative 'Path' element: %s"
-msgstr ""
+msgstr "'%s' kaynak paketi göreli bir 'Path' elemanı içeriyor: %s"
 
 #: pisi/operations/build.py:755
 #, python-format
 msgid "Source package '%s' defines multiple 'Path' tags for %s"
-msgstr ""
+msgstr "'%s' kaynak paketi %s yolu için birden fazla 'Path'etiketi içeriyor"
 
 #: pisi/operations/build.py:784
 msgid "Safety switch: following extra packages in system.devel will be installed: "
@@ -2797,9 +2788,9 @@ msgid "Patch file is empty: %s"
 msgstr "Yama dosyası boş: %s"
 
 #: pisi/operations/build.py:844
-#, fuzzy, python-format
+#, python-format
 msgid "Applying patch: %s"
-msgstr "* Yama uygulanıyor: %s"
+msgstr "Yama uygulanıyor: %s"
 
 #: pisi/operations/build.py:963
 #, python-format
@@ -2846,7 +2837,7 @@ msgstr "İnşa dizini bırakılıyor"
 
 #: pisi/operations/build.py:1237
 msgid "Action script error caught."
-msgstr ""
+msgstr "Eylem betiği hatası oluştu."
 
 #: pisi/operations/build.py:1241
 #, python-format
@@ -2856,7 +2847,7 @@ msgstr "*** %d hata, %d uyarı"
 #: pisi/operations/build.py:1324
 #, python-format
 msgid "Last state was '%s'"
-msgstr ""
+msgstr "Son inşa adımı: '%s'"
 
 #: pisi/operations/delta.py:43
 #, python-format
@@ -3384,7 +3375,7 @@ msgstr "'%s' dizini ekleniyor."
 
 #: pisi/util.py:516
 msgid "You don't have necessary read permissions"
-msgstr ""
+msgstr "Gerekli okuma izinlerine sahip değilsiniz"
 
 #: pisi/util.py:518
 #, python-format
