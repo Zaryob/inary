@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-08 10:28+0300\n"
+"POT-Creation-Date: 2011-06-08 11:37+0300\n"
 "PO-Revision-Date: 2010-12-18 22:24+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1053,43 +1053,53 @@ msgstr "Проверка измения конфигурационных фай�
 msgid "Checking all installed packages"
 msgstr "Проверка всех установленных пакетов"
 
-#: pisi/cli/check.py:72
+#: pisi/cli/check.py:74
 #, python-format
 msgid "Checking integrity of %s"
 msgstr "Проверка целостности %s"
 
-#: pisi/cli/check.py:84
+#: pisi/cli/check.py:86
 msgid "Broken"
 msgstr "Сломано"
 
-#: pisi/cli/check.py:88
+#: pisi/cli/check.py:90
+msgid "Unknown"
+msgstr ""
+
+#: pisi/cli/check.py:92
+msgid "OK"
+msgstr "ОК"
+
+#: pisi/cli/check.py:97
 #, python-format
 msgid "Missing file: /%s"
 msgstr "Отсутствующий файл: /%s"
 
-#: pisi/cli/check.py:90
+#: pisi/cli/check.py:99
 #, python-format
 msgid "Access denied: /%s"
 msgstr "Доступ запрещен: /%s"
 
-#: pisi/cli/check.py:92
+#: pisi/cli/check.py:101
 #, python-format
 msgid "Corrupted file: /%s"
 msgstr "Поврежденный файл: /%s"
 
-#: pisi/cli/check.py:94
+#: pisi/cli/check.py:103
 #, python-format
 msgid "Modified configuration file: /%s"
 msgstr "Измененный файл конфигурации: /%s"
 
-#: pisi/cli/check.py:98
-msgid "OK"
-msgstr "ОК"
-
-#: pisi/cli/check.py:101
+#: pisi/cli/check.py:107
 #, python-format
 msgid "Package %s not installed"
 msgstr "Пакет %s не установлен"
+
+#: pisi/cli/check.py:111
+msgid ""
+"Pisi was unable to check the integrity of packages which contain files that you don't have read access.\n"
+"Running the check under a privileged user may help fixing this problem."
+msgstr ""
 
 #: pisi/cli/clean.py:20
 msgid ""
@@ -3411,18 +3421,33 @@ msgstr "Неверное имя дельта пакета: %s"
 msgid "Invalid version string: '%s'"
 msgstr "Недопустимая строка версии: '%s'"
 
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Пакеты в рабочей директории."
-
-#~ msgid "* Checking %s... "
-#~ msgstr "* Проверка %s... "
-
 #~ msgid ""
 #~ "\n"
-#~ "Package %s has changed config files."
+#~ "Changed config file: %s"
 #~ msgstr ""
 #~ "\n"
-#~ "Package %s изменение конфигурационного файла."
+#~ "Изменен конфигурационный файл: %s"
+
+#~ msgid "Checking /%s "
+#~ msgstr "Проверка /%s"
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Изменение безопасности: system.devel уже установлен"
+
+#~ msgid "Multiple 'Path' tags specified for this path: %s"
+#~ msgstr "Множественные тэги 'Path' определены для этого пути: %s"
+
+#~ msgid "Path must start with a slash: %s"
+#~ msgstr "Путь должен начинаться с \"/\": %s"
+
+#~ msgid "Source is part of %s component"
+#~ msgstr "Источник является частью %s компонента"
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "Тег PartOf не указан, поиск компонента"
+
+#~ msgid "Done."
+#~ msgstr "Выполнено."
 
 #~ msgid ""
 #~ "\n"
@@ -3431,30 +3456,15 @@ msgstr "Недопустимая строка версии: '%s'"
 #~ "\n"
 #~ "Package %s поврежден."
 
-#~ msgid "Done."
-#~ msgstr "Выполнено."
-
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "Тег PartOf не указан, поиск компонента"
-
-#~ msgid "Source is part of %s component"
-#~ msgstr "Источник является частью %s компонента"
-
-#~ msgid "Path must start with a slash: %s"
-#~ msgstr "Путь должен начинаться с \"/\": %s"
-
-#~ msgid "Multiple 'Path' tags specified for this path: %s"
-#~ msgstr "Множественные тэги 'Path' определены для этого пути: %s"
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Изменение безопасности: system.devel уже установлен"
-
-#~ msgid "Checking /%s "
-#~ msgstr "Проверка /%s"
-
 #~ msgid ""
 #~ "\n"
-#~ "Changed config file: %s"
+#~ "Package %s has changed config files."
 #~ msgstr ""
 #~ "\n"
-#~ "Изменен конфигурационный файл: %s"
+#~ "Package %s изменение конфигурационного файла."
+
+#~ msgid "* Checking %s... "
+#~ msgstr "* Проверка %s... "
+
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Пакеты в рабочей директории."

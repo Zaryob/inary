@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-08 10:28+0300\n"
+"POT-Creation-Date: 2011-06-08 11:37+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1017,42 +1017,53 @@ msgstr ""
 msgid "Checking all installed packages"
 msgstr ""
 
-#: pisi/cli/check.py:72
+#: pisi/cli/check.py:74
 #, python-format
 msgid "Checking integrity of %s"
 msgstr ""
 
-#: pisi/cli/check.py:84
+#: pisi/cli/check.py:86
 msgid "Broken"
 msgstr ""
 
-#: pisi/cli/check.py:88
+#: pisi/cli/check.py:90
+msgid "Unknown"
+msgstr ""
+
+#: pisi/cli/check.py:92
+msgid "OK"
+msgstr ""
+
+#: pisi/cli/check.py:97
 #, python-format
 msgid "Missing file: /%s"
 msgstr ""
 
-#: pisi/cli/check.py:90
+#: pisi/cli/check.py:99
 #, python-format
 msgid "Access denied: /%s"
 msgstr ""
 
-#: pisi/cli/check.py:92
+#: pisi/cli/check.py:101
 #, python-format
 msgid "Corrupted file: /%s"
 msgstr ""
 
-#: pisi/cli/check.py:94
+#: pisi/cli/check.py:103
 #, python-format
 msgid "Modified configuration file: /%s"
 msgstr ""
 
-#: pisi/cli/check.py:98
-msgid "OK"
-msgstr ""
-
-#: pisi/cli/check.py:101
+#: pisi/cli/check.py:107
 #, python-format
 msgid "Package %s not installed"
+msgstr ""
+
+#: pisi/cli/check.py:111
+msgid ""
+"Pisi was unable to check the integrity of packages which contain files that "
+"you don't have read access.\n"
+"Running the check under a privileged user may help fixing this problem."
 msgstr ""
 
 #: pisi/cli/clean.py:20

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-08 10:28+0300\n"
+"POT-Creation-Date: 2011-06-08 11:37+0300\n"
 "PO-Revision-Date: 2011-05-30 10:19+0200\n"
 "Last-Translator: Antoon Tolboom <atolboo@gmail.com>\n"
 "Language-Team: Dutch <kde-i18n-doc@kde.org>\n"
@@ -1075,28 +1075,36 @@ msgstr "Controleer alleen veranderde configuratiebestanden van de pakketten"
 msgid "Checking all installed packages"
 msgstr "Controleren alle geïnstalleerde pakketten"
 
-#: pisi/cli/check.py:72
+#: pisi/cli/check.py:74
 #, python-format
 msgid "Checking integrity of %s"
 msgstr ""
 
-#: pisi/cli/check.py:84
+#: pisi/cli/check.py:86
 msgid "Broken"
 msgstr ""
 
-#: pisi/cli/check.py:88
+#: pisi/cli/check.py:90
+msgid "Unknown"
+msgstr ""
+
+#: pisi/cli/check.py:92
+msgid "OK"
+msgstr "OK"
+
+#: pisi/cli/check.py:97
 #, fuzzy, python-format
 msgid "Missing file: /%s"
 msgstr ""
 "\n"
 "Ontbrekend bestand: /%s"
 
-#: pisi/cli/check.py:90
+#: pisi/cli/check.py:99
 #, python-format
 msgid "Access denied: /%s"
 msgstr ""
 
-#: pisi/cli/check.py:92
+#: pisi/cli/check.py:101
 #, fuzzy, python-format
 msgid "Corrupted file: /%s"
 msgstr ""
@@ -1104,19 +1112,21 @@ msgstr ""
 "Bestand met fouten: %s"
 
 # pisi/actionsapi/autotools.py:75 :85
-#: pisi/cli/check.py:94
+#: pisi/cli/check.py:103
 #, fuzzy, python-format
 msgid "Modified configuration file: /%s"
 msgstr "%s configuratie mislukt."
 
-#: pisi/cli/check.py:98
-msgid "OK"
-msgstr "OK"
-
-#: pisi/cli/check.py:101
+#: pisi/cli/check.py:107
 #, python-format
 msgid "Package %s not installed"
 msgstr "Pakket %s niet geïnstalleerd"
+
+#: pisi/cli/check.py:111
+msgid ""
+"Pisi was unable to check the integrity of packages which contain files that you don't have read access.\n"
+"Running the check under a privileged user may help fixing this problem."
+msgstr ""
 
 #: pisi/cli/clean.py:20
 msgid ""
@@ -3449,87 +3459,216 @@ msgstr "Ongeldige delta-pakketnaam: %s."
 msgid "Invalid version string: '%s'"
 msgstr "Ongeldige versie tekenreeks: '%s'"
 
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Uitvoeren pakketten naar de werkmap."
+#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
+#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} is toegevoegd aan %s/language.%s.def"
 
-#~ msgid "* Checking %s... "
-#~ msgstr "* Controle %s... "
+#~ msgid "%s is added to %s/language.%s.dat"
+#~ msgstr "%s is toegevoegd aan %s/language.%s.dat"
+
+#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
+#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} is toegevoegd aan %s/language.%s.def "
+
+#~ msgid "%s %s is added to %s/language.%s.dat "
+#~ msgstr "%s %s is toegevoegd aan %s/language.%s.dat "
+
+#~ msgid "Upgrading to new distribution build"
+#~ msgstr "Opwaarderen naar nieuwe distributie bouw"
+
+#~ msgid "Downgrade to old distribution build?"
+#~ msgstr "Terugwaarderen naar oude distributie bouw?"
+
+#~ msgid "Do not take build no into account."
+#~ msgstr "Bouwnummer niet meerekenen."
+
+#~ msgid "PiSi binary package formats: '1.0', '1.1' (default)"
+#~ msgstr "PiSi binaire pakket formaten: '1.0', '1.1' (standaard)"
+
+#~ msgid "package_format must be one of %s "
+#~ msgstr "package_format moet zijn %s "
+
+#~ msgid "Indexing current directory."
+#~ msgstr "Indexeren huidige map."
+
+#~ msgid "zip compression not supported yet"
+#~ msgstr "zip compressie nog niet ondersteund"
+
+#~ msgid "gzip compression not supported yet"
+#~ msgstr "gzip-compressie nog niet ondersteund"
+
+#~ msgid "(found old version %s)"
+#~ msgstr "(gevonden oude versie %s)"
+
+#~ msgid "(no previous build found, setting build no to 1.)"
+#~ msgstr "(geen eerdere bouw gevonden, zet bouwnummer op 1.)"
+
+#~ msgid "(old package lacks a build no, setting build no to 1.)"
+#~ msgstr "(oud pakket heeft geen bouwnummer, zet compilatienummer op 1.)"
+
+#~ msgid "There are changes, incrementing build no to %d"
+#~ msgstr "Er zijn wijzigingen, zet bouwnummer op %d "
+
+#~ msgid "There is no change from previous build %d"
+#~ msgstr "Er zijn geen wijzigingen sinds vorige bouw %d"
+
+# pisi/build.py:503 :506
+#~ msgid "Generating %s,"
+#~ msgstr "Genereren %s,"
+
+#~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
+#~ msgstr "Bouwnummer is niet aanwezig. Bij repo-compilaties is buildno inschakelen in pisi.conf noodzakelijk."
+
+#~ msgid "Creating PiSi package %s."
+#~ msgstr "Aanmaken PiSi-pakket %s."
+
+#~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
+#~ msgstr "Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)"
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Kan geen delta maken voor hetzelfde pakket!"
+
+#~ msgid "Creating delta PiSi package between %s %s"
+#~ msgstr "Aanmaken delta PiSi pakket tussen %s %s"
+
+#~ msgid "Package %s is already at the latest build %s."
+#~ msgstr "Pakket %s is al de laatste bouw %s."
+
+#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
+#~ msgstr "Naam: %s, versie %s, uitgave %s, bouw %s\n"
+
+#~ msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
+#~ msgstr "Kan compatibiliteit van deze bron niet controleren vanwege ontbrekende informatie over de distributie. "
+
+#~ msgid "Repository distribution does not match. Removing %s from system."
+#~ msgstr "Softwarebron van distributie komt niet overeen. %s van systeem verwijderen."
+
+#~ msgid "The repository couldn't be added because of distribution release mismatch"
+#~ msgstr "De softwarebron kan niet toegevoegd worden omdat de distributieversie niet overeen komt"
+
+#~ msgid "Update PiSi database for repository %s?"
+#~ msgstr "PiSi-database voor de softwarebron %s bijwerken?"
+
+#, fuzzy
+#~ msgid "Repository architecture does not match. Removing %s from system."
+#~ msgstr "%s softwarebron is onbereikbaar. %s van systeem verwijderen."
+
+#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
+#~ msgstr "Veiligheidsprocedure: de volgende pakketten in system.base worden opgewaardeerd: "
+
+#~ msgid "Safety switch: Following packages in system.base will be installed: "
+#~ msgstr "Veiligheidsprocedure: de volgende pakketten in system.base worden geïnstalleerd: "
 
 #~ msgid ""
-#~ "\n"
-#~ "Package %s has changed config files."
+#~ "The following packages will be installed\n"
+#~ "in the respective order to satisfy extra dependencies:\n"
 #~ msgstr ""
-#~ "\n"
-#~ "Pakket %s is veranderd in config bestanden."
+#~ "De volgende pakketten zullen geïnstalleerd worden\n"
+#~ "in de meest gunstige volgorde voor extra afhankelijkheden:\n"
+
+#~ msgid "Storing %s."
+#~ msgstr "Opslaan %s."
+
+#~ msgid "Storing %s, "
+#~ msgstr "Opslaan %s, "
+
+#~ msgid "Scanning binary packages...\n"
+#~ msgstr "Scannen binaire pakketten...\n"
+
+#~ msgid "Scanning source repository...\n"
+#~ msgstr "Scannen van softwarebron...\n"
+
+#~ msgid "Dont generate the web site.\n"
+#~ msgstr "Website niet genereren.\n"
+
+#~ msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
+#~ msgstr "Gebruik: repostats.py [Opties] pad-naar-repo-bron [binair-repo-adres]\n"
 
 #~ msgid ""
-#~ "\n"
-#~ "Package %s is corrupt."
+#~ "Cannot parse '%s':\n"
+#~ "%s\n"
 #~ msgstr ""
-#~ "\n"
-#~ "Pakket %s is beschadigd."
+#~ "Kan '%s' niet ontleden:\n"
+#~ "'%s'\n"
 
-#~ msgid "Done."
-#~ msgstr "Gereed."
-
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "PartOf tag is niet omschreven, zoeken naar component"
-
-#~ msgid "Source is part of %s component"
-#~ msgstr "Bron is onderdeel van %s component"
-
-#~ msgid "Path must start with a slash: %s"
-#~ msgstr "Pad dient te beginnen met een slash: %s"
-
-#~ msgid "Multiple 'Path' tags specified for this path: %s"
-#~ msgstr "Meerdere 'Pad'-tags opgegeven voor dit pad: %s"
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Veiligheidsprocedure: system.devel is al geïnstalleerd"
-
-#~ msgid "Checking /%s "
-#~ msgstr "Controle /%s "
+#~ msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+#~ msgstr "Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
 
 #~ msgid ""
-#~ "\n"
-#~ "Changed config file: %s"
+#~ "Duplicate source packages:\n"
+#~ "%s\n"
+#~ "%s\n"
 #~ msgstr ""
-#~ "\n"
-#~ "Veranderd config bestand: %s"
-
-#~ msgid "Reverse dependency %s of %s cannot be satisfied"
-#~ msgstr "Omgekeerde afhankelijkheid %s van %s kan niet worden voldaan"
+#~ "Dubbele bronpakketten:\n"
+#~ "%s\n"
+#~ "%s\n"
 
 #~ msgid ""
-#~ "\n"
-#~ "        Prints usage information of application and exits.\n"
-#~ "    "
+#~ "Duplicate binary packages:\n"
+#~ "%s\n"
+#~ "%s\n"
 #~ msgstr ""
-#~ "\n"
-#~ "        Informatie over het gebruik van de toepassing tonen en sluit af.\n"
-#~ "    "
+#~ "Dubbele binaire pakketten:\n"
+#~ "%s\n"
+#~ "%s\n"
 
 #~ msgid ""
 #~ "\n"
-#~ "        Signs data with given key file and passphrase.\n"
+#~ "        Signs a ZIP file.\n"
 #~ "\n"
 #~ "        Arguments:\n"
-#~ "            data: Data to sign\n"
+#~ "            filename: ZIP filename\n"
 #~ "            keyfile: Private key\n"
 #~ "            passphrase: Passphrase\n"
-#~ "        Returns:\n"
-#~ "            Signed data\n"
 #~ "    "
 #~ msgstr ""
 #~ "\n"
-#~ "        Onderteken data met opgegeven sleutelbestand en wachtwoord.\n"
+#~ "        Ondertekent een ZIP-bestand.\n"
 #~ "\n"
 #~ "        Argumenten:\n"
-#~ "            data: Te ondertekenen data\n"
+#~ "            bestandnaam: ZIP-bestandnaam\n"
 #~ "            sleutelbestand: Persoonlijke sleutel\n"
 #~ "            wachtwoord: Wachtwoord\n"
+#~ "    "
+
+#~ msgid ""
+#~ "\n"
+#~ "        Verifies integrity of a ZIP file. Keyfile or certificate is required.\n"
+#~ "\n"
+#~ "        Arguments:\n"
+#~ "            filename: ZIP filename\n"
+#~ "            keyfile: Public keyfile\n"
+#~ "            certificate: Certificate\n"
+#~ "        Returns:\n"
+#~ "            True if valid, False if invalid\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "         Verifieert de integriteit van een ZIP-bestand. Sleutelbestand of certificaat is vereist.\n"
+#~ "\n"
+#~ "        Argumenten:\n"
+#~ "            bestandnaam: ZIP-bestandnaam\n"
+#~ "            sleutelbestand: Publiek sleutelbestand\n"
+#~ "            certificaat: Certificaat\n"
 #~ "        Geeft terug:\n"
-#~ "            Ondertekende data\n"
+#~ "            True indien geldig, False indien ongeldig\n"
+#~ "    "
+
+#~ msgid ""
+#~ "\n"
+#~ "        Calculates checksums of files in ZIP object.\n"
+#~ "\n"
+#~ "        Arguments:\n"
+#~ "            zip: ZipFile object\n"
+#~ "        Returns:\n"
+#~ "            File names and sums\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "        Berekent controlesom van de bestanden in het ZIP-object.\n"
+#~ "\n"
+#~ "        Argumenten:\n"
+#~ "            zip: Zipbestand-object\n"
+#~ "        Geeft terug:\n"
+#~ "            Bestandsnamen en controlesommen\n"
 #~ "    "
 
 #~ msgid ""
@@ -3559,212 +3698,83 @@ msgstr "Ongeldige versie tekenreeks: '%s'"
 
 #~ msgid ""
 #~ "\n"
-#~ "        Calculates checksums of files in ZIP object.\n"
+#~ "        Signs data with given key file and passphrase.\n"
 #~ "\n"
 #~ "        Arguments:\n"
-#~ "            zip: ZipFile object\n"
-#~ "        Returns:\n"
-#~ "            File names and sums\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "        Berekent controlesom van de bestanden in het ZIP-object.\n"
-#~ "\n"
-#~ "        Argumenten:\n"
-#~ "            zip: Zipbestand-object\n"
-#~ "        Geeft terug:\n"
-#~ "            Bestandsnamen en controlesommen\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "        Verifies integrity of a ZIP file. Keyfile or certificate is required.\n"
-#~ "\n"
-#~ "        Arguments:\n"
-#~ "            filename: ZIP filename\n"
-#~ "            keyfile: Public keyfile\n"
-#~ "            certificate: Certificate\n"
-#~ "        Returns:\n"
-#~ "            True if valid, False if invalid\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "         Verifieert de integriteit van een ZIP-bestand. Sleutelbestand of certificaat is vereist.\n"
-#~ "\n"
-#~ "        Argumenten:\n"
-#~ "            bestandnaam: ZIP-bestandnaam\n"
-#~ "            sleutelbestand: Publiek sleutelbestand\n"
-#~ "            certificaat: Certificaat\n"
-#~ "        Geeft terug:\n"
-#~ "            True indien geldig, False indien ongeldig\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "        Signs a ZIP file.\n"
-#~ "\n"
-#~ "        Arguments:\n"
-#~ "            filename: ZIP filename\n"
+#~ "            data: Data to sign\n"
 #~ "            keyfile: Private key\n"
 #~ "            passphrase: Passphrase\n"
+#~ "        Returns:\n"
+#~ "            Signed data\n"
 #~ "    "
 #~ msgstr ""
 #~ "\n"
-#~ "        Ondertekent een ZIP-bestand.\n"
+#~ "        Onderteken data met opgegeven sleutelbestand en wachtwoord.\n"
 #~ "\n"
 #~ "        Argumenten:\n"
-#~ "            bestandnaam: ZIP-bestandnaam\n"
+#~ "            data: Te ondertekenen data\n"
 #~ "            sleutelbestand: Persoonlijke sleutel\n"
 #~ "            wachtwoord: Wachtwoord\n"
+#~ "        Geeft terug:\n"
+#~ "            Ondertekende data\n"
 #~ "    "
 
 #~ msgid ""
-#~ "Duplicate binary packages:\n"
-#~ "%s\n"
-#~ "%s\n"
+#~ "\n"
+#~ "        Prints usage information of application and exits.\n"
+#~ "    "
 #~ msgstr ""
-#~ "Dubbele binaire pakketten:\n"
-#~ "%s\n"
-#~ "%s\n"
+#~ "\n"
+#~ "        Informatie over het gebruik van de toepassing tonen en sluit af.\n"
+#~ "    "
+
+#~ msgid "Reverse dependency %s of %s cannot be satisfied"
+#~ msgstr "Omgekeerde afhankelijkheid %s van %s kan niet worden voldaan"
 
 #~ msgid ""
-#~ "Duplicate source packages:\n"
-#~ "%s\n"
-#~ "%s\n"
+#~ "\n"
+#~ "Changed config file: %s"
 #~ msgstr ""
-#~ "Dubbele bronpakketten:\n"
-#~ "%s\n"
-#~ "%s\n"
+#~ "\n"
+#~ "Veranderd config bestand: %s"
 
-#~ msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-#~ msgstr "Ontwikkelaar '%s <%s>' heeft een ander e-mailadres '%s' in bronpakket '%s'"
+#~ msgid "Checking /%s "
+#~ msgstr "Controle /%s "
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Veiligheidsprocedure: system.devel is al geïnstalleerd"
+
+#~ msgid "Multiple 'Path' tags specified for this path: %s"
+#~ msgstr "Meerdere 'Pad'-tags opgegeven voor dit pad: %s"
+
+#~ msgid "Path must start with a slash: %s"
+#~ msgstr "Pad dient te beginnen met een slash: %s"
+
+#~ msgid "Source is part of %s component"
+#~ msgstr "Bron is onderdeel van %s component"
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "PartOf tag is niet omschreven, zoeken naar component"
+
+#~ msgid "Done."
+#~ msgstr "Gereed."
 
 #~ msgid ""
-#~ "Cannot parse '%s':\n"
-#~ "%s\n"
+#~ "\n"
+#~ "Package %s is corrupt."
 #~ msgstr ""
-#~ "Kan '%s' niet ontleden:\n"
-#~ "'%s'\n"
-
-#~ msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-#~ msgstr "Gebruik: repostats.py [Opties] pad-naar-repo-bron [binair-repo-adres]\n"
-
-#~ msgid "Dont generate the web site.\n"
-#~ msgstr "Website niet genereren.\n"
-
-#~ msgid "Scanning source repository...\n"
-#~ msgstr "Scannen van softwarebron...\n"
-
-#~ msgid "Scanning binary packages...\n"
-#~ msgstr "Scannen binaire pakketten...\n"
-
-#~ msgid "Storing %s, "
-#~ msgstr "Opslaan %s, "
-
-#~ msgid "Storing %s."
-#~ msgstr "Opslaan %s."
+#~ "\n"
+#~ "Pakket %s is beschadigd."
 
 #~ msgid ""
-#~ "The following packages will be installed\n"
-#~ "in the respective order to satisfy extra dependencies:\n"
+#~ "\n"
+#~ "Package %s has changed config files."
 #~ msgstr ""
-#~ "De volgende pakketten zullen geïnstalleerd worden\n"
-#~ "in de meest gunstige volgorde voor extra afhankelijkheden:\n"
+#~ "\n"
+#~ "Pakket %s is veranderd in config bestanden."
 
-#~ msgid "Safety switch: Following packages in system.base will be installed: "
-#~ msgstr "Veiligheidsprocedure: de volgende pakketten in system.base worden geïnstalleerd: "
+#~ msgid "* Checking %s... "
+#~ msgstr "* Controle %s... "
 
-#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
-#~ msgstr "Veiligheidsprocedure: de volgende pakketten in system.base worden opgewaardeerd: "
-
-#, fuzzy
-#~ msgid "Repository architecture does not match. Removing %s from system."
-#~ msgstr "%s softwarebron is onbereikbaar. %s van systeem verwijderen."
-
-#~ msgid "Update PiSi database for repository %s?"
-#~ msgstr "PiSi-database voor de softwarebron %s bijwerken?"
-
-#~ msgid "The repository couldn't be added because of distribution release mismatch"
-#~ msgstr "De softwarebron kan niet toegevoegd worden omdat de distributieversie niet overeen komt"
-
-#~ msgid "Repository distribution does not match. Removing %s from system."
-#~ msgstr "Softwarebron van distributie komt niet overeen. %s van systeem verwijderen."
-
-#~ msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
-#~ msgstr "Kan compatibiliteit van deze bron niet controleren vanwege ontbrekende informatie over de distributie. "
-
-#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
-#~ msgstr "Naam: %s, versie %s, uitgave %s, bouw %s\n"
-
-#~ msgid "Package %s is already at the latest build %s."
-#~ msgstr "Pakket %s is al de laatste bouw %s."
-
-#~ msgid "Creating delta PiSi package between %s %s"
-#~ msgstr "Aanmaken delta PiSi pakket tussen %s %s"
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Kan geen delta maken voor hetzelfde pakket!"
-
-#~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
-#~ msgstr "Alle bestanden in de installatiemap (%s) zijn verzameld door pakket(ten)"
-
-#~ msgid "Creating PiSi package %s."
-#~ msgstr "Aanmaken PiSi-pakket %s."
-
-#~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
-#~ msgstr "Bouwnummer is niet aanwezig. Bij repo-compilaties is buildno inschakelen in pisi.conf noodzakelijk."
-
-# pisi/build.py:503 :506
-#~ msgid "Generating %s,"
-#~ msgstr "Genereren %s,"
-
-#~ msgid "There is no change from previous build %d"
-#~ msgstr "Er zijn geen wijzigingen sinds vorige bouw %d"
-
-#~ msgid "There are changes, incrementing build no to %d"
-#~ msgstr "Er zijn wijzigingen, zet bouwnummer op %d "
-
-#~ msgid "(old package lacks a build no, setting build no to 1.)"
-#~ msgstr "(oud pakket heeft geen bouwnummer, zet compilatienummer op 1.)"
-
-#~ msgid "(no previous build found, setting build no to 1.)"
-#~ msgstr "(geen eerdere bouw gevonden, zet bouwnummer op 1.)"
-
-#~ msgid "(found old version %s)"
-#~ msgstr "(gevonden oude versie %s)"
-
-#~ msgid "gzip compression not supported yet"
-#~ msgstr "gzip-compressie nog niet ondersteund"
-
-#~ msgid "zip compression not supported yet"
-#~ msgstr "zip compressie nog niet ondersteund"
-
-#~ msgid "Indexing current directory."
-#~ msgstr "Indexeren huidige map."
-
-#~ msgid "package_format must be one of %s "
-#~ msgstr "package_format moet zijn %s "
-
-#~ msgid "PiSi binary package formats: '1.0', '1.1' (default)"
-#~ msgstr "PiSi binaire pakket formaten: '1.0', '1.1' (standaard)"
-
-#~ msgid "Do not take build no into account."
-#~ msgstr "Bouwnummer niet meerekenen."
-
-#~ msgid "Downgrade to old distribution build?"
-#~ msgstr "Terugwaarderen naar oude distributie bouw?"
-
-#~ msgid "Upgrading to new distribution build"
-#~ msgstr "Opwaarderen naar nieuwe distributie bouw"
-
-#~ msgid "%s %s is added to %s/language.%s.dat "
-#~ msgstr "%s %s is toegevoegd aan %s/language.%s.dat "
-
-#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
-#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} is toegevoegd aan %s/language.%s.def "
-
-#~ msgid "%s is added to %s/language.%s.dat"
-#~ msgstr "%s is toegevoegd aan %s/language.%s.dat"
-
-#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
-#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} is toegevoegd aan %s/language.%s.def"
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Uitvoeren pakketten naar de werkmap."

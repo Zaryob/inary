@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-08 10:28+0300\n"
+"POT-Creation-Date: 2011-06-08 11:37+0300\n"
 "PO-Revision-Date: 2010-12-27 10:06+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@trixon.se>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
@@ -1021,43 +1021,53 @@ msgstr ""
 msgid "Checking all installed packages"
 msgstr ""
 
-#: pisi/cli/check.py:72
+#: pisi/cli/check.py:74
 #, python-format
 msgid "Checking integrity of %s"
 msgstr ""
 
-#: pisi/cli/check.py:84
+#: pisi/cli/check.py:86
 msgid "Broken"
 msgstr ""
 
-#: pisi/cli/check.py:88
+#: pisi/cli/check.py:90
+msgid "Unknown"
+msgstr ""
+
+#: pisi/cli/check.py:92
+msgid "OK"
+msgstr "OK"
+
+#: pisi/cli/check.py:97
 #, fuzzy, python-format
 msgid "Missing file: /%s"
 msgstr "Paketfil: %s"
 
-#: pisi/cli/check.py:90
+#: pisi/cli/check.py:99
 #, python-format
 msgid "Access denied: /%s"
 msgstr ""
 
-#: pisi/cli/check.py:92
+#: pisi/cli/check.py:101
 #, python-format
 msgid "Corrupted file: /%s"
 msgstr ""
 
-#: pisi/cli/check.py:94
+#: pisi/cli/check.py:103
 #, fuzzy, python-format
 msgid "Modified configuration file: /%s"
 msgstr "Konfigureringen misslyckades."
 
-#: pisi/cli/check.py:98
-msgid "OK"
-msgstr "OK"
-
-#: pisi/cli/check.py:101
+#: pisi/cli/check.py:107
 #, python-format
 msgid "Package %s not installed"
 msgstr "Paketet %s är inte installerat."
+
+#: pisi/cli/check.py:111
+msgid ""
+"Pisi was unable to check the integrity of packages which contain files that you don't have read access.\n"
+"Running the check under a privileged user may help fixing this problem."
+msgstr ""
 
 #: pisi/cli/clean.py:20
 msgid ""
@@ -3170,15 +3180,47 @@ msgstr ""
 msgid "Invalid version string: '%s'"
 msgstr "Ogiltig versionssträng: '%s'"
 
-#~ msgid "* Checking %s... "
-#~ msgstr "* Kontrollerar %s... "
+#~ msgid "Generating %s,"
+#~ msgstr "Skapar %s,"
 
-#~ msgid ""
-#~ "\n"
-#~ "Package %s has changed config files."
-#~ msgstr ""
-#~ "\n"
-#~ "Paketet %s har förändrade konfigurationsfiler."
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Kan inte skapa delta av samma paket!"
+
+#~ msgid "Creating delta PiSi package between %s %s"
+#~ msgstr "Skapar delta-PiSi-paket mellan %s och %s"
+
+#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
+#~ msgstr "Namn: %s, version: %s, utgåva: %s, bygge %s\n"
+
+#~ msgid "Repository distribution does not match. Removing %s from system."
+#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort %s från systemet."
+
+#~ msgid "Update PiSi database for repository %s?"
+#~ msgstr "Uppdatera PiSi-databasen för %s-förrådet?"
+
+#~ msgid "Repository architecture does not match. Removing %s from system."
+#~ msgstr "Förrådet % finns inte och kan därmed inte tas bort."
+
+#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
+
+#~ msgid "Safety switch: Following packages in system.base will be installed: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
+
+#~ msgid "Storing %s."
+#~ msgstr "Lagrar %s."
+
+#~ msgid "Storing %s, "
+#~ msgstr "Lagrar %s, "
+
+#~ msgid "Checking /%s "
+#~ msgstr "Kontrollerar /%s "
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Säkerhetslås: system.devel är redan installerad"
+
+#~ msgid "Done."
+#~ msgstr "Klar."
 
 #~ msgid ""
 #~ "\n"
@@ -3187,44 +3229,12 @@ msgstr "Ogiltig versionssträng: '%s'"
 #~ "\n"
 #~ "Paketet %s är trasigt."
 
-#~ msgid "Done."
-#~ msgstr "Klar."
+#~ msgid ""
+#~ "\n"
+#~ "Package %s has changed config files."
+#~ msgstr ""
+#~ "\n"
+#~ "Paketet %s har förändrade konfigurationsfiler."
 
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Säkerhetslås: system.devel är redan installerad"
-
-#~ msgid "Checking /%s "
-#~ msgstr "Kontrollerar /%s "
-
-#~ msgid "Storing %s, "
-#~ msgstr "Lagrar %s, "
-
-#~ msgid "Storing %s."
-#~ msgstr "Lagrar %s."
-
-#~ msgid "Safety switch: Following packages in system.base will be installed: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
-
-#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
-
-#~ msgid "Repository architecture does not match. Removing %s from system."
-#~ msgstr "Förrådet % finns inte och kan därmed inte tas bort."
-
-#~ msgid "Update PiSi database for repository %s?"
-#~ msgstr "Uppdatera PiSi-databasen för %s-förrådet?"
-
-#~ msgid "Repository distribution does not match. Removing %s from system."
-#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort %s från systemet."
-
-#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
-#~ msgstr "Namn: %s, version: %s, utgåva: %s, bygge %s\n"
-
-#~ msgid "Creating delta PiSi package between %s %s"
-#~ msgstr "Skapar delta-PiSi-paket mellan %s och %s"
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Kan inte skapa delta av samma paket!"
-
-#~ msgid "Generating %s,"
-#~ msgstr "Skapar %s,"
+#~ msgid "* Checking %s... "
+#~ msgstr "* Kontrollerar %s... "
