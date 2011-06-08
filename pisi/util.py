@@ -442,10 +442,6 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
             if is_included(root):
                 yield calculate_hash(root)
 
-def copy_dir(src, dest):
-    """Copy source dir to destination dir recursively."""
-    shutil.copytree(src, dest)
-
 def check_file_hash(filename, hash):
     """Check the file's integrity with a given hash."""
     return sha1_file(filename) == hash
