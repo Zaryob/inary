@@ -1,7 +1,7 @@
 # translation of de.po to German
 # translation of de.po to
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Mustafa Ölcerman <oelcerman@fussballkreis.org>, 2006.
 # Mustafa Ölcerman <mustafa.oelcerman@fk-koeln.de>, 2007.
 # Mustafa Ölcerman <m.oelcerman@pardus-linux.de>, 2008, 2009.
@@ -14,14 +14,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-08 11:37+0300\n"
+"POT-Creation-Date: 2011-06-08 10:28+0300\n"
 "PO-Revision-Date: 2010-05-20 19:49-0400\n"
 "Last-Translator: \n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 1.0\n"
@@ -604,14 +604,13 @@ msgid "File %s not found"
 msgstr "Datei %s nicht gefunden"
 
 #: pisi/api.py:781
-#, fuzzy, python-format
+#, python-format
 msgid "Building index of PiSi files under %s"
-msgstr "* Index von PiSi-Dateien unter %s werden konstruiert"
+msgstr "Indexiere PiSi-Dateien unter %s"
 
 #: pisi/api.py:786
-#, fuzzy
 msgid "Index file written"
-msgstr "* Index-Datei geschrieben"
+msgstr "Index-Datei geschrieben"
 
 #: pisi/api.py:791
 msgid "Not a valid repo name."
@@ -658,9 +657,8 @@ msgid "Updating database at any rate as requested"
 msgstr "Datenbank wird wunschgemäss aktualisiert"
 
 #: pisi/api.py:858
-#, fuzzy
 msgid "Package database updated."
-msgstr "* Paket-Datenbank aktualisiert."
+msgstr "Paket-Datenbank aktualisiert."
 
 #: pisi/api.py:860
 #, python-format
@@ -668,9 +666,9 @@ msgid "No repository named %s found."
 msgstr "Kein Depot mit Namen %s gefunden."
 
 #: pisi/api.py:873
-#, fuzzy, python-format
+#, python-format
 msgid "Adding '%s' to db... "
-msgstr "* '%s' wird in db hinzugefügt... "
+msgstr "'%s' wird zur db hinzugefügt... "
 
 #: pisi/api.py:876
 msgid "OK."
@@ -1078,57 +1076,43 @@ msgstr "Prüft nur die geänderten Konfigurationsdateien der Pakete"
 msgid "Checking all installed packages"
 msgstr "Prüfe alle installierten Pakete"
 
-#: pisi/cli/check.py:74
+#: pisi/cli/check.py:72
 #, python-format
 msgid "Checking integrity of %s"
-msgstr ""
+msgstr "Prüfe Integrität von %s"
 
-#: pisi/cli/check.py:86
+#: pisi/cli/check.py:84
 msgid "Broken"
-msgstr ""
+msgstr "Beschädigt"
+
+#: pisi/cli/check.py:88
+#, python-format
+msgid "Missing file: /%s"
+msgstr "Fehlende Datei: /%s"
 
 #: pisi/cli/check.py:90
-msgid "Unknown"
-msgstr ""
+#, python-format
+msgid "Access denied: /%s"
+msgstr "Zugriff verweigert: /%s"
 
 #: pisi/cli/check.py:92
+#, python-format
+msgid "Corrupted file: /%s"
+msgstr "Datei korrupt: %s"
+
+#: pisi/cli/check.py:94
+#, python-format
+msgid "Modified configuration file: /%s"
+msgstr "Konfigurationsdatei geändert: /%s"
+
+#: pisi/cli/check.py:98
 msgid "OK"
 msgstr "OK"
 
-#: pisi/cli/check.py:97
-#, fuzzy, python-format
-msgid "Missing file: /%s"
-msgstr ""
-"\n"
-"Fehlende Datei: /%s"
-
-#: pisi/cli/check.py:99
-#, python-format
-msgid "Access denied: /%s"
-msgstr ""
-
 #: pisi/cli/check.py:101
-#, fuzzy, python-format
-msgid "Corrupted file: /%s"
-msgstr ""
-"\n"
-"Datei korrupt: %s"
-
-#: pisi/cli/check.py:103
-#, fuzzy, python-format
-msgid "Modified configuration file: /%s"
-msgstr "Konfiguration von %s fehlgeschlagen."
-
-#: pisi/cli/check.py:107
 #, python-format
 msgid "Package %s not installed"
 msgstr "Paket %s nicht installiert"
-
-#: pisi/cli/check.py:111
-msgid ""
-"Pisi was unable to check the integrity of packages which contain files that you don't have read access.\n"
-"Running the check under a privileged user may help fixing this problem."
-msgstr ""
 
 #: pisi/cli/clean.py:20
 msgid ""
@@ -1487,20 +1471,20 @@ msgstr ""
 "Geben Sie \"%prog help <command>\" für Hilfe für einen bestimmten Befehl ein.\n"
 
 #: pisi/cli/history.py:28
-msgid "emerge"
-msgstr "emerge"
-
-#: pisi/cli/history.py:28
-msgid "install"
-msgstr "installieren"
+msgid "upgrade"
+msgstr "Upgrade vornehmen"
 
 #: pisi/cli/history.py:28
 msgid "remove"
 msgstr "entfernen"
 
 #: pisi/cli/history.py:28
-msgid "repository update"
-msgstr "Depot update"
+msgid "emerge"
+msgstr "emerge"
+
+#: pisi/cli/history.py:28
+msgid "install"
+msgstr "installieren"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1513,8 +1497,8 @@ msgid "takeback"
 msgstr "zurückversetzen"
 
 #: pisi/cli/history.py:28
-msgid "upgrade"
-msgstr "Upgrade vornehmen"
+msgid "repository update"
+msgstr "Depot update"
 
 #: pisi/cli/history.py:31
 msgid ""
@@ -2838,7 +2822,7 @@ msgstr "Patch-Datei ist leer: %s"
 #: pisi/operations/build.py:844
 #, fuzzy, python-format
 msgid "Applying patch: %s"
-msgstr "* Patch wird eingesetzt: %s"
+msgstr "Wende Patch an: %s"
 
 # Zweifel,
 #: pisi/operations/build.py:963
@@ -3489,142 +3473,56 @@ msgstr "Ungültiger Delta Paketname: %s"
 msgid "Invalid version string: '%s'"
 msgstr "Ungültige Versionskennzeichnung: '%s'"
 
-#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
-#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} wurde zu %s/language.%s.def hinzugefügt"
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Pakete werden in das Arbeitsverzeichnis ausgegeben."
 
-#~ msgid "%s is added to %s/language.%s.dat"
-#~ msgstr "%s wurde zu %s/language.%s.dat hinzugefügt"
-
-#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
-#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} wurde zu %s/language.%s.def hinzugefügt"
-
-#~ msgid "%s %s is added to %s/language.%s.dat "
-#~ msgstr "%s %s wurde zu %s/language.%s.dat hinzugefügt"
-
-#~ msgid "Upgrading to new distribution build"
-#~ msgstr "Ein Upgrade auf die neue Distributions-Build wird ausgeführt"
-
-#~ msgid "Downgrade to old distribution build?"
-#~ msgstr "Zum alten Distribution-Build downgraden?"
-
-#~ msgid "Do not take build no into account."
-#~ msgstr "Build-Nr nicht auswerten."
-
-#~ msgid "PiSi binary package formats: '1.0', '1.1' (default)"
-#~ msgstr "PiSi binäre Paket-Formate: '1.0', '1.1' (Standard)"
-
-#~ msgid "package_format must be one of %s "
-#~ msgstr "Paket_format muss von %s sein"
-
-#~ msgid "Indexing current directory."
-#~ msgstr "Aktuelles Verzeichnis wird indiziert"
-
-#~ msgid "zip compression not supported yet"
-#~ msgstr "Kompression zip noch nicht unterstützt"
-
-#~ msgid "gzip compression not supported yet"
-#~ msgstr "Kompression gzip noch nicht unterstützt"
-
-#~ msgid "(found old version %s)"
-#~ msgstr "(alte Version %s gefunden)"
-
-#~ msgid "(no previous build found, setting build no to 1.)"
-#~ msgstr "(kein vorheriges Build gefunden, setze Build-Nr auf 1.)"
-
-#~ msgid "(old package lacks a build no, setting build no to 1.)"
-#~ msgstr "(Altes Paket hat keine Build-Version, setze Build-Nr auf 1.)"
-
-#~ msgid "There are changes, incrementing build no to %d"
-#~ msgstr "Es gibt Änderungen, erhöhe die Build-Nr auf %d"
-
-#~ msgid "There is no change from previous build %d"
-#~ msgstr "Es gibt keine Änderungen seit dem vorherigen Build %d"
-
-#~ msgid "Generating %s,"
-#~ msgstr "%s wird generiert,"
-
-#~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
-#~ msgstr "Build-Nr ist nicht vorhanden. Für Depot-Builds muss in pisi.conf buildno aktiviert sein."
-
-#~ msgid "Creating PiSi package %s."
-#~ msgstr "PiSi Paket %s wird erstellt."
-
-#~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
-#~ msgstr "Alle Dateien im Installationsverzeichnis (%s) wurden von Paketen aufgesammelt"
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Für das selbe Paket kann kein Delta erstellt werden!"
-
-#~ msgid "Creating delta PiSi package between %s %s"
-#~ msgstr "Erstelle Delta PiSi-Paket zwischen %s %s"
-
-#~ msgid "Package %s is already at the latest build %s."
-#~ msgstr "Paket %s ist schon in der letzten Build-Version %s."
-
-#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
-#~ msgstr "Name: %s, Version: %s, Release: %s, Build %s\n"
-
-#~ msgid "Repository distribution does not match. Removing %s from system."
-#~ msgstr "Depot %s konnte nicht kontaktiert werden. Entferne %s vom System."
-
-#~ msgid "Run pisi build process in silent mode"
-#~ msgstr "Den Build-Prozess nicht auf den Build-Ordner beschränken"
-
-#~ msgid "Update PiSi database for repository %s?"
-#~ msgstr "PiSi Datenbank für Depot %s aktualisieren ?"
-
-#~ msgid "Repository architecture does not match. Removing %s from system."
-#~ msgstr "Depot %s konnte nicht kontaktiert werden. Entferne %s vom System."
-
-#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
-#~ msgstr "Sicherheitsschalter: Die folgenden Pakete in system.base werden aktualisiert:"
-
-#~ msgid "Safety switch: Following packages in system.base will be installed: "
-#~ msgstr "Sicherheitsschalter: Die folgenden Pakete in system.base werden installiert:"
+#~ msgid "* Checking %s... "
+#~ msgstr "* %s wird überprüft... "
 
 #~ msgid ""
-#~ "The following packages will be installed\n"
-#~ "in the respective order to satisfy extra dependencies:\n"
+#~ "\n"
+#~ "Package %s has changed config files."
 #~ msgstr ""
-#~ "Die folgenden Pakete werden in der angegebenen \n"
-#~ "Reihenfolge installiert um die zusätzlichen Abhängigkeiten zu erfüllen:\n"
-
-#~ msgid "Storing %s."
-#~ msgstr "%s wird abgelegt"
-
-#~ msgid "Storing %s, "
-#~ msgstr "%s wird abgelegt, "
-
-#~ msgid "Scanning binary packages...\n"
-#~ msgstr "Suche im Binär - Depot...\n"
-
-#~ msgid "Scanning source repository...\n"
-#~ msgstr "Suche im Quellcode - Depot...\n"
-
-#~ msgid "Dont generate the web site.\n"
-#~ msgstr "Webseite nicht erzeugen.\n"
-
-#~ msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-#~ msgstr "Syntax: repostats.py [OPTIONEN] Quelle-Depot-Pfad [Binär-Depot-Pfad]\n"
+#~ "\n"
+#~ "Paket %s hat die Konfigurations-Dateien geändert."
 
 #~ msgid ""
-#~ "Cannot parse '%s':\n"
-#~ "%s\n"
+#~ "\n"
+#~ "Package %s is corrupt."
 #~ msgstr ""
-#~ "Parsen von '%s' nicht möglich:\n"
-#~ "%s\n"
+#~ "\n"
+#~ "Paket %s ist korrupt."
 
-#~ msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
-#~ msgstr "Entwickler '%s <%s>' hat eina andere email adresse '%s' im Quelltext-Paket '%s'"
+#~ msgid "Done."
+#~ msgstr "Fertig."
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "PartOf tag nicht definiert, suche Komponente"
+
+#~ msgid "Source is part of %s component"
+#~ msgstr "Quelle ist ein Teil von Komponente %s"
+
+#~ msgid "Path must start with a slash: %s"
+#~ msgstr "Pfad muss mit einem Slash anfangen: %s"
+
+#~ msgid "Multiple 'Path' tags specified for this path: %s"
+#~ msgstr "Mehrere 'Tags' für diesen Pfad angegeben: %s"
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Sicherheitsschalter: system.devel ist bereits installiert"
+
+#~ msgid "Checking /%s "
+#~ msgstr "/%s wird überprüft"
 
 #~ msgid ""
-#~ "Duplicate source packages:\n"
-#~ "%s\n"
-#~ "%s\n"
+#~ "\n"
+#~ "Changed config file: %s"
 #~ msgstr ""
-#~ "Doppelte Quellcode -Pakete:\n"
-#~ "%s\n"
-#~ "%s\n"
+#~ "\n"
+#~ "Folgende Konfigurations-Datei geändert: %s"
+
+#~ msgid "Reverse dependency %s of %s cannot be satisfied"
+#~ msgstr "Rückabhängigkeit %s von %s kann nicht zufriedenstellend sein"
 
 #~ msgid ""
 #~ "Duplicate binary packages:\n"
@@ -3635,53 +3533,139 @@ msgstr "Ungültige Versionskennzeichnung: '%s'"
 #~ "%s\n"
 #~ "%s\n"
 
-#~ msgid "Reverse dependency %s of %s cannot be satisfied"
-#~ msgstr "Rückabhängigkeit %s von %s kann nicht zufriedenstellend sein"
+#~ msgid ""
+#~ "Duplicate source packages:\n"
+#~ "%s\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Doppelte Quellcode -Pakete:\n"
+#~ "%s\n"
+#~ "%s\n"
+
+#~ msgid "Developer '%s <%s>' has another mail address '%s' in source package '%s'"
+#~ msgstr "Entwickler '%s <%s>' hat eina andere email adresse '%s' im Quelltext-Paket '%s'"
 
 #~ msgid ""
-#~ "\n"
-#~ "Changed config file: %s"
+#~ "Cannot parse '%s':\n"
+#~ "%s\n"
 #~ msgstr ""
-#~ "\n"
-#~ "Folgende Konfigurations-Datei geändert: %s"
+#~ "Parsen von '%s' nicht möglich:\n"
+#~ "%s\n"
 
-#~ msgid "Checking /%s "
-#~ msgstr "/%s wird überprüft"
+#~ msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
+#~ msgstr "Syntax: repostats.py [OPTIONEN] Quelle-Depot-Pfad [Binär-Depot-Pfad]\n"
 
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Sicherheitsschalter: system.devel ist bereits installiert"
+#~ msgid "Dont generate the web site.\n"
+#~ msgstr "Webseite nicht erzeugen.\n"
 
-#~ msgid "Multiple 'Path' tags specified for this path: %s"
-#~ msgstr "Mehrere 'Tags' für diesen Pfad angegeben: %s"
+#~ msgid "Scanning source repository...\n"
+#~ msgstr "Suche im Quellcode - Depot...\n"
 
-#~ msgid "Path must start with a slash: %s"
-#~ msgstr "Pfad muss mit einem Slash anfangen: %s"
+#~ msgid "Scanning binary packages...\n"
+#~ msgstr "Suche im Binär - Depot...\n"
 
-#~ msgid "Source is part of %s component"
-#~ msgstr "Quelle ist ein Teil von Komponente %s"
+#~ msgid "Storing %s, "
+#~ msgstr "%s wird abgelegt, "
 
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "PartOf tag nicht definiert, suche Komponente"
-
-#~ msgid "Done."
-#~ msgstr "Fertig."
+#~ msgid "Storing %s."
+#~ msgstr "%s wird abgelegt"
 
 #~ msgid ""
-#~ "\n"
-#~ "Package %s is corrupt."
+#~ "The following packages will be installed\n"
+#~ "in the respective order to satisfy extra dependencies:\n"
 #~ msgstr ""
-#~ "\n"
-#~ "Paket %s ist korrupt."
+#~ "Die folgenden Pakete werden in der angegebenen \n"
+#~ "Reihenfolge installiert um die zusätzlichen Abhängigkeiten zu erfüllen:\n"
 
-#~ msgid ""
-#~ "\n"
-#~ "Package %s has changed config files."
-#~ msgstr ""
-#~ "\n"
-#~ "Paket %s hat die Konfigurations-Dateien geändert."
+#~ msgid "Safety switch: Following packages in system.base will be installed: "
+#~ msgstr "Sicherheitsschalter: Die folgenden Pakete in system.base werden installiert:"
 
-#~ msgid "* Checking %s... "
-#~ msgstr "* %s wird überprüft... "
+#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
+#~ msgstr "Sicherheitsschalter: Die folgenden Pakete in system.base werden aktualisiert:"
 
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Pakete werden in das Arbeitsverzeichnis ausgegeben."
+#~ msgid "Repository architecture does not match. Removing %s from system."
+#~ msgstr "Depot %s konnte nicht kontaktiert werden. Entferne %s vom System."
+
+#~ msgid "Update PiSi database for repository %s?"
+#~ msgstr "PiSi Datenbank für Depot %s aktualisieren ?"
+
+#~ msgid "Run pisi build process in silent mode"
+#~ msgstr "Den Build-Prozess nicht auf den Build-Ordner beschränken"
+
+#~ msgid "Repository distribution does not match. Removing %s from system."
+#~ msgstr "Depot %s konnte nicht kontaktiert werden. Entferne %s vom System."
+
+#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
+#~ msgstr "Name: %s, Version: %s, Release: %s, Build %s\n"
+
+#~ msgid "Package %s is already at the latest build %s."
+#~ msgstr "Paket %s ist schon in der letzten Build-Version %s."
+
+#~ msgid "Creating delta PiSi package between %s %s"
+#~ msgstr "Erstelle Delta PiSi-Paket zwischen %s %s"
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Für das selbe Paket kann kein Delta erstellt werden!"
+
+#~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
+#~ msgstr "Alle Dateien im Installationsverzeichnis (%s) wurden von Paketen aufgesammelt"
+
+#~ msgid "Creating PiSi package %s."
+#~ msgstr "PiSi Paket %s wird erstellt."
+
+#~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
+#~ msgstr "Build-Nr ist nicht vorhanden. Für Depot-Builds muss in pisi.conf buildno aktiviert sein."
+
+#~ msgid "Generating %s,"
+#~ msgstr "%s wird generiert,"
+
+#~ msgid "There is no change from previous build %d"
+#~ msgstr "Es gibt keine Änderungen seit dem vorherigen Build %d"
+
+#~ msgid "There are changes, incrementing build no to %d"
+#~ msgstr "Es gibt Änderungen, erhöhe die Build-Nr auf %d"
+
+#~ msgid "(old package lacks a build no, setting build no to 1.)"
+#~ msgstr "(Altes Paket hat keine Build-Version, setze Build-Nr auf 1.)"
+
+#~ msgid "(no previous build found, setting build no to 1.)"
+#~ msgstr "(kein vorheriges Build gefunden, setze Build-Nr auf 1.)"
+
+#~ msgid "(found old version %s)"
+#~ msgstr "(alte Version %s gefunden)"
+
+#~ msgid "gzip compression not supported yet"
+#~ msgstr "Kompression gzip noch nicht unterstützt"
+
+#~ msgid "zip compression not supported yet"
+#~ msgstr "Kompression zip noch nicht unterstützt"
+
+#~ msgid "Indexing current directory."
+#~ msgstr "Aktuelles Verzeichnis wird indiziert"
+
+#~ msgid "package_format must be one of %s "
+#~ msgstr "Paket_format muss von %s sein"
+
+#~ msgid "PiSi binary package formats: '1.0', '1.1' (default)"
+#~ msgstr "PiSi binäre Paket-Formate: '1.0', '1.1' (Standard)"
+
+#~ msgid "Do not take build no into account."
+#~ msgstr "Build-Nr nicht auswerten."
+
+#~ msgid "Downgrade to old distribution build?"
+#~ msgstr "Zum alten Distribution-Build downgraden?"
+
+#~ msgid "Upgrading to new distribution build"
+#~ msgstr "Ein Upgrade auf die neue Distributions-Build wird ausgeführt"
+
+#~ msgid "%s %s is added to %s/language.%s.dat "
+#~ msgstr "%s %s wurde zu %s/language.%s.dat hinzugefügt"
+
+#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
+#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} wurde zu %s/language.%s.def hinzugefügt"
+
+#~ msgid "%s is added to %s/language.%s.dat"
+#~ msgstr "%s wurde zu %s/language.%s.dat hinzugefügt"
+
+#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
+#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} wurde zu %s/language.%s.def hinzugefügt"
