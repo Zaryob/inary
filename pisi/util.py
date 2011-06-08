@@ -175,6 +175,14 @@ def format_by_columns(strings, sep_width=2):
 # Process Releated Functions #
 ##############################
 
+def search_executable(executable):
+    """Search for the executable in user's paths and return it."""
+    for _path in os.environ["PATH"].split(":"):
+        full_path = os.path.join(_path, executable)
+        if os.path.exists(full_path) and os.access(full_path, os.X_OK):
+            return full_path
+    return None
+
 def run_batch(cmd):
     """Run command and report return value and output."""
     ctx.ui.info(_('Running ') + cmd, verbose=True)
