@@ -560,9 +560,9 @@ msgid "Another instance of PiSi is running. Only one instance is allowed."
 msgstr "Un'altra istanza di PiSi è in esecuzione. La modifica del database di PiSi è consentita a un'unica istanza alla volta."
 
 #: pisi/api.py:420
-#, fuzzy, python-format
+#, python-format
 msgid "%s package found in %s repository"
-msgstr "Pacchetto trovato nel repository %s"
+msgstr "%s Pacchetto trovato nella %s repository "
 
 #: pisi/api.py:424
 #, python-format
@@ -583,14 +583,13 @@ msgid "File %s not found"
 msgstr "File %s non trovato"
 
 #: pisi/api.py:781
-#, fuzzy, python-format
+#, python-format
 msgid "Building index of PiSi files under %s"
-msgstr "* Costruzione dell'indice dei file PiSi in %s"
+msgstr "Costruzione dell'indice dei file PiSi in %s"
 
 #: pisi/api.py:786
-#, fuzzy
 msgid "Index file written"
-msgstr "* File di indice scritto"
+msgstr "File di indice scritto"
 
 #: pisi/api.py:791
 msgid "Not a valid repo name."
@@ -636,9 +635,8 @@ msgid "Updating database at any rate as requested"
 msgstr "Aggiornamento del database alla frequenza richiesta"
 
 #: pisi/api.py:858
-#, fuzzy
 msgid "Package database updated."
-msgstr "* Database dei pacchetti aggiornato."
+msgstr "Database dei pacchetti aggiornato."
 
 #: pisi/api.py:860
 #, python-format
@@ -646,9 +644,9 @@ msgid "No repository named %s found."
 msgstr "Nessun repository di nome %s trovato."
 
 #: pisi/api.py:873
-#, fuzzy, python-format
+#, python-format
 msgid "Adding '%s' to db... "
-msgstr "* Aggiunta di %s al database... "
+msgstr "Aggiunta di %s al database... "
 
 #: pisi/api.py:876
 msgid "OK."
@@ -812,7 +810,6 @@ msgid "Extracting the files of %s"
 msgstr "Estrazione dei file di %s"
 
 #: pisi/cli/addrepo.py:24
-#, fuzzy
 msgid ""
 "Add a repository\n"
 "\n"
