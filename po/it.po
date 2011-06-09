@@ -350,9 +350,9 @@ msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
 msgstr "ActionsAPI [chmod]: nessun file con il pattern \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:70
-#, fuzzy, python-format
+#, python-format
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
-msgstr "ActionsAPI [chmod]: Operazione non permessa: %s (modalità: %s)"
+msgstr "ActionsAPI [chmod]: Operazione non permessa: %s (modalità: 0%o)"
 
 #: pisi/actionsapi/shelltools.py:73
 #, python-format
@@ -928,7 +928,7 @@ msgstr "opzioni di costruzione"
 
 #: pisi/cli/build.py:58
 msgid "Run pisi build operation without printing extra debug information"
-msgstr ""
+msgstr "Esegui l'operazione PiSi build senza la stampa di informazioni aggiuntivi di debug"
 
 #: pisi/cli/build.py:64 pisi/cli/command.py:204
 msgid "Do not take dependency information into account"
@@ -964,7 +964,7 @@ msgstr "Utilizza il sistema di gestione delle patch quilt anziché GNU patch"
 
 #: pisi/cli/build.py:106
 msgid "Do not constrain build process inside the build folder"
-msgstr ""
+msgstr "Non vincolare il processo di compilazione all'interno della cartella della build"
 
 #: pisi/cli/build.py:110
 msgid "build steps"
@@ -1043,7 +1043,7 @@ msgstr "Verifica i pacchetti installati sotto il componente fornito"
 
 #: pisi/cli/check.py:51
 msgid "Checks only changed config files of the packages"
-msgstr ""
+msgstr "Verifica solo i file di configurazione dei pacchetti modificati"
 
 #: pisi/cli/check.py:65
 msgid "Checking all installed packages"
@@ -1052,7 +1052,7 @@ msgstr "Controllo di tutti i pacchetti installati"
 #: pisi/cli/check.py:74
 #, python-format
 msgid "Checking integrity of %s"
-msgstr ""
+msgstr "Controllo dell'integrità di %s"
 
 #: pisi/cli/check.py:86
 msgid "Broken"
