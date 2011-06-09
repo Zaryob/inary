@@ -1,6 +1,6 @@
 # translation of it.po to Italian
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Andrea Decorte <adecorte@gmail.com>, 2007.
 # Davide Siciliano <edivad95@gmail.com>, 2010.
 msgid ""
@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2010-07-01 16:01+0200\n"
 "Last-Translator: Davide Siciliano <edivad95@gmail.com>\n"
 "Language-Team: Italian <pardus-translators@pardus.org.tr>\n"
-"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 1.0\n"
@@ -1453,20 +1453,20 @@ msgstr ""
 "Utilizzo \"%prog help <comando>\" per aiuto su un comando specifico.\n"
 
 #: pisi/cli/history.py:28
-msgid "emerge"
-msgstr "emergere"
-
-#: pisi/cli/history.py:28
-msgid "install"
-msgstr "installa"
+msgid "upgrade"
+msgstr "aggiorna"
 
 #: pisi/cli/history.py:28
 msgid "remove"
 msgstr "rimuovi"
 
 #: pisi/cli/history.py:28
-msgid "repository update"
-msgstr "aggiornamento del repositorio"
+msgid "emerge"
+msgstr "emergere"
+
+#: pisi/cli/history.py:28
+msgid "install"
+msgstr "installa"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1477,8 +1477,8 @@ msgid "takeback"
 msgstr ""
 
 #: pisi/cli/history.py:28
-msgid "upgrade"
-msgstr "aggiorna"
+msgid "repository update"
+msgstr "aggiornamento del repositorio"
 
 #: pisi/cli/history.py:31
 msgid ""
@@ -2766,14 +2766,14 @@ msgid "Patch file is missing: %s\n"
 msgstr "Il file di patch è mancante: %s\n"
 
 #: pisi/operations/build.py:828
-#, fuzzy, python-format
+#, python-format
 msgid "Patch file is empty: %s"
-msgstr "Il file di patch è mancante: %s\n"
+msgstr "Il file di patch è vuoto: %s"
 
 #: pisi/operations/build.py:844
-#, fuzzy, python-format
+#, python-format
 msgid "Applying patch: %s"
-msgstr "* Applicazione della patch: %s"
+msgstr "Applicazione della patch: %s"
 
 #: pisi/operations/build.py:963
 #, python-format
@@ -2796,9 +2796,9 @@ msgid "There are abandoned files under the install dir (%s):"
 msgstr "File abbandonati nella cartella di installazione (%s):"
 
 #: pisi/operations/build.py:1080
-#, fuzzy, python-format
+#, python-format
 msgid "Ignoring empty package %s"
-msgstr "Rimozione del pacchetto %s in corso"
+msgstr "Ignorando pacchetto vuoto %s"
 
 #: pisi/operations/build.py:1084
 #, python-format
@@ -2808,21 +2808,19 @@ msgstr "Costruzione del pacchetto: %s"
 #: pisi/operations/build.py:1103 pisi/operations/delta.py:59
 #, python-format
 msgid "Creating %s..."
-msgstr ""
+msgstr "Creazione %s..."
 
 #: pisi/operations/build.py:1150
-#, fuzzy
 msgid "Cleaning build directory..."
 msgstr "Pulizia della cartella di compilazione..."
 
 #: pisi/operations/build.py:1153
-#, fuzzy
 msgid "Keeping build directory"
 msgstr "La cartella di compilazione verrà conservata"
 
 #: pisi/operations/build.py:1237
 msgid "Action script error caught."
-msgstr ""
+msgstr "Errore di Actionscript catturati."
 
 #: pisi/operations/build.py:1241
 #, python-format
@@ -2832,7 +2830,7 @@ msgstr ""
 #: pisi/operations/build.py:1324
 #, python-format
 msgid "Last state was '%s'"
-msgstr ""
+msgstr "L'ultimo era stato '%s'"
 
 #: pisi/operations/delta.py:43
 #, python-format
@@ -2859,7 +2857,6 @@ msgid "No packages to emerge."
 msgstr "Nessun pacchetto su cui effettuare emerge."
 
 #: pisi/operations/emerge.py:50
-#, fuzzy
 msgid ""
 "The following list of packages will be installed\n"
 "from repository in the respective order to satisfy dependencies:\n"
@@ -2868,7 +2865,6 @@ msgstr ""
 "dal repository nel rispettivo ordine per soddisfare le dipendenze:\n"
 
 #: pisi/operations/emerge.py:53
-#, fuzzy
 msgid ""
 "The following list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
@@ -2909,12 +2905,11 @@ msgid "Remove the following conflicting packages?"
 msgstr "Rimuovere i seguenti pacchetti conflittanti?"
 
 #: pisi/operations/helper.py:63
-#, fuzzy
 msgid "Conflicting packages should be removed to continue"
-msgstr "I seguenti pacchetti verranno aggiornati: "
+msgstr "Pacchetti in conflitto dovrebbero essere rimosse per continuare"
 
 #: pisi/operations/history.py:82 pisi/operations/history.py:92
-#, fuzzy, python-format
+#, python-format
 msgid "%s could not be found"
 msgstr "Utilità %s non trovata"
 
