@@ -139,8 +139,7 @@ class Digraph(object):
     def id_str(self, u):
         # Graph format only accepts underscores as key values
         # Sanitize the values. This is 2x faster than the old method.
-        return ''.join([ch if ch not in '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~' \
-                            else '_' for ch in u])
+        return u.replace("-", "_").replace("+", "_")
 
     def write_graphviz(self, f):
         f.write('digraph G {\n')
