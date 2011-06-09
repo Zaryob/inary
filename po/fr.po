@@ -1,6 +1,6 @@
 # translation of fr.po to French
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Amine Chadly <amine.chadly@gmail.com>, 2007, 2008.
 # Philippe Svetoslavsky <philsvet@gmail.com>, 2009, 2010.
 msgid ""
@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2010-01-01 22:22+0100\n"
 "Last-Translator: Philippe Svetoslavsky <philsvet@gmail.com>\n"
 "Language-Team: French <pardus-translators@pardus.org.tr>\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 0.3\n"
@@ -583,14 +583,13 @@ msgid "File %s not found"
 msgstr "Le fichier %s est introuvable"
 
 #: pisi/api.py:781
-#, fuzzy, python-format
+#, python-format
 msgid "Building index of PiSi files under %s"
-msgstr "* Construction de l'index des fichiers PiSi sous %s"
+msgstr "Construction de l'index des fichiers PiSi sous %s"
 
 #: pisi/api.py:786
-#, fuzzy
 msgid "Index file written"
-msgstr "* Fichier d'index écrit"
+msgstr "Fichier d'index écrit"
 
 #: pisi/api.py:791
 msgid "Not a valid repo name."
@@ -636,9 +635,8 @@ msgid "Updating database at any rate as requested"
 msgstr "Mise à jour de la base de données quoi qu'il arrive comme demandé"
 
 #: pisi/api.py:858
-#, fuzzy
 msgid "Package database updated."
-msgstr "* Base de données des paquets mise à jour."
+msgstr "Base de données des paquets mise à jour."
 
 #: pisi/api.py:860
 #, python-format
@@ -646,9 +644,9 @@ msgid "No repository named %s found."
 msgstr "Pas de dépôt au nom %s trouvé."
 
 #: pisi/api.py:873
-#, fuzzy, python-format
+#, python-format
 msgid "Adding '%s' to db... "
-msgstr "* Ajout de '%s' à la base de données... "
+msgstr "Ajout de '%s' à la base de données... "
 
 #: pisi/api.py:876
 msgid "OK."
@@ -1059,43 +1057,39 @@ msgstr "Vérification de tous les paquets installés"
 #: pisi/cli/check.py:74
 #, python-format
 msgid "Checking integrity of %s"
-msgstr ""
+msgstr "Vérification de l'intégrité de %s"
 
 #: pisi/cli/check.py:86
 msgid "Broken"
-msgstr ""
+msgstr "Cassé"
 
 #: pisi/cli/check.py:90
 msgid "Unknown"
-msgstr ""
+msgstr "Inconnu"
 
 #: pisi/cli/check.py:92
 msgid "OK"
 msgstr "OK"
 
 #: pisi/cli/check.py:97
-#, fuzzy, python-format
+#, python-format
 msgid "Missing file: /%s"
-msgstr ""
-"\n"
-"Fichier manquant : %s"
+msgstr "Fichier manquant : %s"
 
 #: pisi/cli/check.py:99
 #, python-format
 msgid "Access denied: /%s"
-msgstr ""
+msgstr "Accès refusé : \\%s"
 
 #: pisi/cli/check.py:101
-#, fuzzy, python-format
+#, python-format
 msgid "Corrupted file: /%s"
-msgstr ""
-"\n"
-"Fichier corrompu : %s"
+msgstr "Fichier corrompu : %s"
 
 #: pisi/cli/check.py:103
-#, fuzzy, python-format
+#, python-format
 msgid "Modified configuration file: /%s"
-msgstr "La configuration de %s a échoué."
+msgstr "Fichier de configuration modifié : %s"
 
 #: pisi/cli/check.py:107
 #, python-format
@@ -1107,6 +1101,8 @@ msgid ""
 "Pisi was unable to check the integrity of packages which contain files that you don't have read access.\n"
 "Running the check under a privileged user may help fixing this problem."
 msgstr ""
+"Pisi a été incapable de vérifier l'intégrité des paquets qui contiennent des fichiers pour lesquels vous n'avez pas d'accès en lecture.\n"
+"Effectuer la vérification en tant qu'administrateur peut résoudre ce problème."
 
 #: pisi/cli/clean.py:20
 msgid ""
@@ -1459,20 +1455,20 @@ msgstr ""
 "Utilisez \"%prog help <commande>\" pour une aide concernant une commande spécifique.\n"
 
 #: pisi/cli/history.py:28
-msgid "emerge"
-msgstr "emerge"
-
-#: pisi/cli/history.py:28
-msgid "install"
-msgstr "install"
+msgid "upgrade"
+msgstr "mettre à jour"
 
 #: pisi/cli/history.py:28
 msgid "remove"
 msgstr "supprime"
 
 #: pisi/cli/history.py:28
-msgid "repository update"
-msgstr "Mise-à-jour du dépôt"
+msgid "emerge"
+msgstr "emerge"
+
+#: pisi/cli/history.py:28
+msgid "install"
+msgstr "install"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1483,8 +1479,8 @@ msgid "takeback"
 msgstr "retour"
 
 #: pisi/cli/history.py:28
-msgid "upgrade"
-msgstr "mettre à jour"
+msgid "repository update"
+msgstr "Mise-à-jour du dépôt"
 
 #: pisi/cli/history.py:31
 msgid ""
@@ -2563,19 +2559,16 @@ msgid "Package %s: metadata corrupt, skipping..."
 msgstr "Paquet %s : métadonnées corrompues, mis de côté..."
 
 #: pisi/index.py:237
-#, fuzzy
 msgid "Adding groups.xml to index"
-msgstr "Ajout de %s à l'index des sources"
+msgstr "Ajout de groups.xml à l'index"
 
 #: pisi/index.py:243
-#, fuzzy
 msgid "Adding components.xml to index"
-msgstr "Ajout du composant %s à l'index"
+msgstr "Ajout de components.xml à l'index"
 
 #: pisi/index.py:253
-#, fuzzy
 msgid "Adding distribution.xml to index"
-msgstr "Ajout de %s à l'index des sources"
+msgstr "Ajout de distribution.xml à l'index"
 
 #: pisi/index.py:274
 #, python-format
@@ -2723,12 +2716,12 @@ msgstr "impossible d'appeler une fonction depuis une action : %s"
 #: pisi/operations/build.py:751
 #, python-format
 msgid "Source package '%s' defines a relative 'Path' element: %s"
-msgstr ""
+msgstr "Le paquet source '%s' définit un chemin relatif de l'élément : %s"
 
 #: pisi/operations/build.py:755
 #, python-format
 msgid "Source package '%s' defines multiple 'Path' tags for %s"
-msgstr ""
+msgstr "Le paquet source '%s' définit plusieurs balises de chemin pour %s"
 
 #: pisi/operations/build.py:784
 msgid "Safety switch: following extra packages in system.devel will be installed: "
@@ -2774,9 +2767,9 @@ msgid "Patch file is empty: %s"
 msgstr "Fichier de patch vide : %s"
 
 #: pisi/operations/build.py:844
-#, fuzzy, python-format
+#, python-format
 msgid "Applying patch: %s"
-msgstr "* Application du patch : %s"
+msgstr "Application du patch : %s"
 
 #: pisi/operations/build.py:963
 #, python-format
@@ -2823,7 +2816,7 @@ msgstr "Dossier de construction conservé"
 
 #: pisi/operations/build.py:1237
 msgid "Action script error caught."
-msgstr ""
+msgstr "Erreur de script d'action rencontrée"
 
 #: pisi/operations/build.py:1241
 #, python-format
@@ -2833,7 +2826,7 @@ msgstr "*** %d erreur(s), %d alerte(s)"
 #: pisi/operations/build.py:1324
 #, python-format
 msgid "Last state was '%s'"
-msgstr ""
+msgstr "Le dernier état était %s"
 
 #: pisi/operations/delta.py:43
 #, python-format
