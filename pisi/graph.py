@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005 - 2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -12,15 +12,11 @@
 # the most simple minded digraph class ever
 
 
-import string
-
 import pisi
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
-
-# not an error!
 
 class CycleException(pisi.Exception):
     def __init__(self, cycle):
@@ -141,12 +137,10 @@ class Digraph(object):
         return list
 
     def id_str(self, u):
-        def repl(char):
-            if char in string.punctuation:
-                return '_'
-            else:
-                return char
-        return pisi.util.flatten_list(map(repl, str(u)))
+        # Graph format only accepts underscores as key values
+        # Sanitize the values. This is 2x faster than the old method.
+        return ''.join([ch if ch not in '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~' \
+                            else '_' for ch in u])
 
     def write_graphviz(self, f):
         f.write('digraph G {\n')
