@@ -14,11 +14,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Country: CROATIA\n"
 "Language: \n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-Language: Croatian\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Country: CROATIA\n"
 
 #: /usr/lib/python2.7/optparse.py:140
 #, python-format
@@ -28,7 +28,7 @@ msgstr "nema takve opcije:  %s"
 #: /usr/lib/python2.7/optparse.py:151
 #, python-format
 msgid "ambiguous option: %s (%s?)"
-msgstr ""
+msgstr "dvosmislena opcija: %s (%s?)"
 
 #: /usr/lib/python2.7/optparse.py:374
 #, python-format
@@ -274,22 +274,22 @@ msgstr ""
 #: pisi/actionsapi/pisitools.py:236
 #, python-format
 msgid "ActionsAPI [dosym]: File already exists: %s"
-msgstr ""
+msgstr "ActionsAPI [dosym]: Datoteka već postoji: %s"
 
 #: pisi/actionsapi/pisitools.py:245 pisi/actionsapi/pisitoolsfunctions.py:71
 #, python-format
 msgid "No file matched pattern \"%s\"."
-msgstr ""
+msgstr "Nijedna datoteka se ne podudara sa uzorkom \"%s\". "
 
 #: pisi/actionsapi/pisitools.py:272 pisi/actionsapi/shelltools.py:97
 #, python-format
 msgid "No file matched pattern \"%s\". Remove operation failed."
-msgstr ""
+msgstr "Nijedna datoteka se ne podudara sa uzorkom \"%s\". Operacija uklonjanja nije uspjela."
 
 #: pisi/actionsapi/pisitools.py:281
 #, python-format
 msgid "No directory matched pattern \"%s\". Remove directory operation failed."
-msgstr ""
+msgstr "Nijedan se direktorij ne podudara sa uzorkom \"%s\".Operacija uklanjanja direktorija nije uspjela."
 
 #: pisi/actionsapi/pisitoolsfunctions.py:45
 #: pisi/actionsapi/pisitoolsfunctions.py:63
@@ -304,7 +304,7 @@ msgstr "Nijedna izvršna datoteka se ne podudara sa uzorkom \"%s\"."
 
 #: pisi/actionsapi/pythonmodules.py:56
 msgid "Configuration failed."
-msgstr ""
+msgstr "Konfiguracija nije uspjela."
 
 #: pisi/actionsapi/pythonmodules.py:81
 #, python-format
@@ -364,27 +364,27 @@ msgstr "ActionsAPI [chown]: Datoteka %s ne postoji."
 #: pisi/actionsapi/shelltools.py:91
 #, python-format
 msgid "ActionsAPI [sym]: Permission denied: %s to %s"
-msgstr ""
+msgstr "ActionsAPI [sym]: Dozvola odbijena: %s u %s"
 
 #: pisi/actionsapi/shelltools.py:105
 #, python-format
 msgid "ActionsAPI [unlink]: Permission denied: %s."
-msgstr ""
+msgstr "ActionsAPI [unlink]: Dozvola odbijena: %s."
 
 #: pisi/actionsapi/shelltools.py:109
 #, python-format
 msgid "ActionsAPI [unlink]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [unlink]: Datoteka %s ne postoji."
 
 #: pisi/actionsapi/shelltools.py:117
 #, python-format
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: %s"
-msgstr ""
+msgstr "ActionsAPI [unlinkDir]: Operacija nije dozvoljena: %s"
 
 #: pisi/actionsapi/shelltools.py:121
 #, python-format
 msgid "ActionsAPI [unlinkDir]: Directory %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [unlinkDir]: Direktorij %s ne postoji."
 
 #: pisi/actionsapi/shelltools.py:127
 #, python-format
@@ -447,7 +447,7 @@ msgstr "Neuspjelo premještanje izvornih datoteka"
 
 #: pisi/actionsapi/texlivemodules.py:59
 msgid "Generate config files failed"
-msgstr ""
+msgstr "Generiranje konfiguracijskih datoteka nije uspjelo"
 
 #: pisi/actionsapi/texlivemodules.py:62
 msgid "Building format files failed"
@@ -459,7 +459,7 @@ msgstr ""
 
 #: pisi/actionsapi/texlivemodules.py:73
 msgid "Installing docs failed"
-msgstr ""
+msgstr "Instalacija dokumenata nije uspjela "
 
 #: pisi/actionsapi/texlivemodules.py:77
 msgid "Installing texmf files failed"
@@ -467,7 +467,7 @@ msgstr ""
 
 #: pisi/actionsapi/texlivemodules.py:81
 msgid "Installing config files failed"
-msgstr ""
+msgstr "Instaliranje konfiguracijskih datoteka nije uspjelo"
 
 #: pisi/actionsapi/texlivemodules.py:85
 msgid "Handle config files failed"
@@ -476,7 +476,7 @@ msgstr ""
 #: pisi/actionsapi/texlivemodules.py:95
 #, python-format
 msgid "Symlink %s skipped (special case)"
-msgstr ""
+msgstr "Simbolička poveznica%s preskočena (poseban slučaj)"
 
 #: pisi/actionsapi/texlivemodules.py:97
 #, python-format
@@ -486,12 +486,12 @@ msgstr ""
 #: pisi/actionsapi/texlivemodules.py:100
 #, python-format
 msgid "Symlink %s -> %s skipped."
-msgstr ""
+msgstr "Simbolička poveznica  %s -> %s preskočena."
 
 #: pisi/actionsapi/texlivemodules.py:102
 #, python-format
 msgid "Symlink %s skipped (file exists.)"
-msgstr ""
+msgstr "Simbolička poveznica  %s preskočena (datoteka postoji) "
 
 #: pisi/actionsapi/texlivemodules.py:104
 #, python-format
@@ -545,7 +545,7 @@ msgstr ""
 
 #: pisi/api.py:58 pisi/cli/command.py:166
 msgid "You have to be root for this operation."
-msgstr ""
+msgstr "Morate biti root za ovu operaciju."
 
 #: pisi/api.py:65
 msgid "Another instance of PiSi is running. Only one instance is allowed."
@@ -559,11 +559,11 @@ msgstr "%s paket nađen u %s repozitoriju"
 #: pisi/api.py:424
 #, python-format
 msgid "%s package already fetched"
-msgstr ""
+msgstr "%s paket je već dohvaćen"
 
 #: pisi/api.py:566
 msgid "Taking snapshot of the system"
-msgstr ""
+msgstr "Pravim snimak sustava"
 
 #: pisi/api.py:727
 msgid "comar package is not fully installed"
@@ -577,7 +577,7 @@ msgstr "Datoteka %s nije nađena"
 #: pisi/api.py:781
 #, python-format
 msgid "Building index of PiSi files under %s"
-msgstr ""
+msgstr "Izgradnja indeksa PiSi datoteka pod %s"
 
 #: pisi/api.py:786
 msgid "Index file written"
@@ -701,7 +701,7 @@ msgstr "Ponovno instalirati istu verziju paketa?"
 
 #: pisi/atomicoperations.py:242
 msgid "Package re-install declined"
-msgstr ""
+msgstr "Ponovna instalacija paketa odbijena"
 
 #: pisi/atomicoperations.py:254
 msgid "Upgrading to new upstream version"
@@ -713,7 +713,7 @@ msgstr "Nadograđujem na novo izdanje distribucije"
 
 #: pisi/atomicoperations.py:266
 msgid "Downgrade to old distribution release?"
-msgstr ""
+msgstr "Vratiti na staro izadanje distribucije?"
 
 #: pisi/atomicoperations.py:270
 msgid "Package downgrade declined"
@@ -726,7 +726,7 @@ msgstr "%s neuspjela konfiguracija."
 
 #: pisi/atomicoperations.py:400
 msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
-msgstr ""
+msgstr "Nije moguće premjestiti sljedeće datoteke. Preporučuje se ponovna instalacija ovog paketa."
 
 #: pisi/atomicoperations.py:491 pisi/atomicoperations.py:494
 #: pisi/atomicoperations.py:501
@@ -829,7 +829,7 @@ msgstr "Ignoriraj provjeru repozitorija distribucije"
 
 #: pisi/cli/addrepo.py:45
 msgid "Does not fetch repository index and does not check distribution match"
-msgstr ""
+msgstr "Ne dohvaća indeks repozitorija i ne provjerava podudaranje distribucije"
 
 #: pisi/cli/addrepo.py:48
 msgid "Add repository at given position (0 is first)"
@@ -858,14 +858,18 @@ msgid ""
 "Usage: blame <package> ... <package>\n"
 "\n"
 msgstr ""
+"Informacije o vlasniku paketa i izadanju\n"
+"\n"
+"Uporaba: krivi <package> ... <package> \n"
+"\n"
 
 #: pisi/cli/blame.py:39
 msgid "blame options"
-msgstr ""
+msgstr "opcije krivljenja"
 
 #: pisi/cli/blame.py:40
 msgid "Blame for the given release"
-msgstr ""
+msgstr "Krivnja za dano izdanje"
 
 #: pisi/cli/blame.py:42
 msgid "Blame for all of the releases"
@@ -914,11 +918,11 @@ msgstr ""
 
 #: pisi/cli/build.py:64 pisi/cli/command.py:204
 msgid "Do not take dependency information into account"
-msgstr ""
+msgstr "Nemojte uzeti u obzir informacije o zavisnosti"
 
 #: pisi/cli/build.py:70
 msgid "Output directory for produced packages"
-msgstr ""
+msgstr "Izlazni direktorij za napravljene pakete"
 
 #: pisi/cli/build.py:74
 msgid "Bypass errors from ActionsAPI"
@@ -934,11 +938,11 @@ msgstr ""
 
 #: pisi/cli/build.py:89
 msgid "Create a static package with ar files"
-msgstr ""
+msgstr "Stvorite statički paket sa ar datotekama"
 
 #: pisi/cli/build.py:93 pisi/cli/delta.py:64
 msgid "Create the binary package using the given format. Use '-F help' to see a list of supported formats."
-msgstr ""
+msgstr "Napravite binarni paket koristeći dati format. Koristite 'F-help' da biste vidjeli popis podržanih formata."
 
 #: pisi/cli/build.py:100
 msgid "Use quilt patch management system instead of GNU patch"
@@ -1006,11 +1010,11 @@ msgstr ""
 
 #: pisi/cli/check.py:47
 msgid "check options"
-msgstr ""
+msgstr "opcije provjere"
 
 #: pisi/cli/check.py:49
 msgid "Check installed packages under given component"
-msgstr ""
+msgstr "Provjerite instalirane pakete pod određenom komponentom"
 
 #: pisi/cli/check.py:51
 msgid "Checks only changed config files of the packages"
@@ -1110,7 +1114,7 @@ msgstr ""
 
 #: pisi/cli/command.py:108
 msgid "Detailed output"
-msgstr ""
+msgstr "Detaljni izlazni ispis"
 
 #: pisi/cli/command.py:110
 msgid "Show debugging information"
@@ -1135,11 +1139,11 @@ msgstr ""
 
 #: pisi/cli/command.py:206 pisi/cli/emerge.py:53
 msgid "Bypass comar configuration agent"
-msgstr ""
+msgstr "Zaobiđi Comar konfiguracijski agent"
 
 #: pisi/cli/command.py:210
 msgid "Do not perform any action, just show what would be done"
-msgstr ""
+msgstr "Nemoj izvoditi nikakvee akcije, samo pokaži što će biti učinjeno"
 
 #: pisi/cli/command.py:228
 #, python-format
@@ -1228,11 +1232,11 @@ msgstr ""
 
 #: pisi/cli/emerge.py:49 pisi/cli/install.py:53 pisi/cli/upgrade.py:58
 msgid "Ignore file conflicts"
-msgstr ""
+msgstr "Zanemari sukobe datoteka"
 
 #: pisi/cli/emerge.py:51 pisi/cli/install.py:55 pisi/cli/upgrade.py:60
 msgid "Ignore package conflicts"
-msgstr ""
+msgstr "Zanemari sukobe pakete"
 
 #: pisi/cli/emerge.py:71
 #, python-format
@@ -1363,7 +1367,7 @@ msgstr "instaliraj"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
-msgstr ""
+msgstr "snimak"
 
 #: pisi/cli/history.py:28
 msgid "takeback"
@@ -1381,6 +1385,11 @@ msgid ""
 "\n"
 "Lists previous operations."
 msgstr ""
+"Povijest pisi operacija\n"
+"\n"
+"Uporaba: povijest\n"
+"\n"
+"Izlistava prethodne operacije."
 
 #: pisi/cli/history.py:47
 msgid "history options"
@@ -1401,7 +1410,7 @@ msgstr ""
 #: pisi/cli/history.py:67
 #, python-format
 msgid "Operation #%d: %s"
-msgstr ""
+msgstr "Operacija #%d: %s"
 
 #: pisi/cli/history.py:68
 #, python-format
@@ -1430,7 +1439,7 @@ msgstr ""
 
 #: pisi/cli/index.py:48
 msgid "index options"
-msgstr ""
+msgstr "opcije indeksa"
 
 #: pisi/cli/index.py:53
 msgid "Store absolute links for indexed files."
