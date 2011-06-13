@@ -91,13 +91,21 @@ database.
             get_info = db.get_package
             get_name_sum = lambda pkg:(pkg.name, pkg.summary)
 
+        if pkgs:
+            maxlen = max([len(_pkg) for _pkg in pkgs])
+
         for pkg in pkgs:
             pkg_info = get_info(pkg)
+
             name, summary = get_name_sum(pkg_info)
+            lenp = len(name)
+
             name = replace.sub(pisi.util.colorize(r"\1", "brightred"), name)
             if lang and summary.has_key(lang):
                 summary = replace.sub(pisi.util.colorize(r"\1", "brightred"), str(summary[lang]))
             else:
                 summary = replace.sub(pisi.util.colorize(r"\1", "brightred"), str(summary))
 
-            print "%s - %s" % (name, summary)
+            name += ' ' * max(0, maxlen - lenp)
+
+            ctx.ui.info('%s - %s' % (name, summary))
