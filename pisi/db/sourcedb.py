@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005 - 2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -49,7 +49,7 @@ class SourceDB(lazydb.LazyDB):
             sources[src_name] = gzip.zlib.compress(spec.toString())
             for package in spec.tags("Package"):
                 pkgstosrc[package.getTagData("Name")] = src_name
-        
+
         return sources, pkgstosrc
 
     def __generate_revdeps(self, doc):
