@@ -14,11 +14,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Country: CROATIA\n"
 "Language: \n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-Language: Croatian\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Country: CROATIA\n"
 
 #: /usr/lib/python2.7/optparse.py:140
 #, python-format
@@ -873,12 +873,12 @@ msgstr "Krivnja za dano izdanje"
 
 #: pisi/cli/blame.py:42
 msgid "Blame for all of the releases"
-msgstr ""
+msgstr "Krivnja za sva izdanja"
 
 #: pisi/cli/blame.py:68 pisi/specfile.py:370 pisi/specfile.py:456
 #, python-format
 msgid "Name: %s, version: %s, release: %s\n"
-msgstr ""
+msgstr "Ime:%s, verzija%s, izdanje:%s\n"
 
 #: pisi/cli/blame.py:70
 #, python-format
@@ -893,7 +893,7 @@ msgstr ""
 #: pisi/cli/blame.py:72
 #, python-format
 msgid "Update Date: %s\n"
-msgstr ""
+msgstr "DAtum dopune: %s\n"
 
 #: pisi/cli/build.py:25
 msgid ""
@@ -1018,7 +1018,7 @@ msgstr "Provjerite instalirane pakete pod određenom komponentom"
 
 #: pisi/cli/check.py:51
 msgid "Checks only changed config files of the packages"
-msgstr ""
+msgstr "Provjerava samo promijenjene konfiguracijske datoteke paketa"
 
 #: pisi/cli/check.py:65
 msgid "Checking all installed packages"
@@ -1027,7 +1027,7 @@ msgstr "Provjeravam sve instalirane pakete"
 #: pisi/cli/check.py:74
 #, python-format
 msgid "Checking integrity of %s"
-msgstr ""
+msgstr "Provjera integriteta%s"
 
 #: pisi/cli/check.py:86
 msgid "Broken"
@@ -1084,7 +1084,7 @@ msgstr ""
 
 #: pisi/cli/command.py:30
 msgid "Command lacks name"
-msgstr ""
+msgstr "Naredba nema ime"
 
 #: pisi/cli/command.py:34
 #, python-format
@@ -1102,7 +1102,7 @@ msgstr "osnovne opcije"
 
 #: pisi/cli/command.py:99
 msgid "Change the system root for PiSi commands"
-msgstr ""
+msgstr "Promjena root sustava za PiSi naredbe"
 
 #: pisi/cli/command.py:101
 msgid "Assume yes in all yes/no queries"
@@ -1295,7 +1295,7 @@ msgstr ""
 
 #: pisi/cli/graph.py:47
 msgid "Specify a particular repository"
-msgstr ""
+msgstr "Odredite konkretan repozitorij"
 
 #: pisi/cli/graph.py:50
 msgid "Graph of installed packages"
@@ -1522,7 +1522,7 @@ msgstr "%s paket nije instaliran"
 
 #: pisi/cli/info.py:172
 msgid "[binary] "
-msgstr ""
+msgstr "[binarni]"
 
 #: pisi/cli/info.py:174 pisi/cli/info.py:186
 #, python-format
@@ -1532,11 +1532,11 @@ msgstr "Paket je nađen u %s repozitoriju:"
 #: pisi/cli/info.py:177
 #, python-format
 msgid "%s package is not found in binary repositories"
-msgstr ""
+msgstr "%s paket nije pronađen u binarnom repozitoriju"
 
 #: pisi/cli/info.py:184
 msgid "[source] "
-msgstr ""
+msgstr "[Izvor]"
 
 #: pisi/cli/info.py:189
 #, python-format
@@ -1566,7 +1566,7 @@ msgstr "Ponovno instaliraj već instalirane pakete"
 
 #: pisi/cli/install.py:51
 msgid "Skip distribution release and architecture check"
-msgstr ""
+msgstr "Preskoči provjeru izdanja distribucije i arhitekture"
 
 #: pisi/cli/install.py:57
 msgid "Install component's and recursive components' packages"
@@ -1591,7 +1591,7 @@ msgstr ""
 #: pisi/cli/install.py:93
 #, python-format
 msgid "There is no component named %s"
-msgstr ""
+msgstr "Nema komponente po imenu%s"
 
 #: pisi/cli/listavailable.py:26
 msgid ""
@@ -1740,7 +1740,7 @@ msgstr ""
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 #, python-format
 msgid "%s [%s]"
-msgstr ""
+msgstr "%s [%s]"
 
 #: pisi/cli/listsources.py:24
 msgid ""
@@ -1864,7 +1864,7 @@ msgstr "opcije traženja"
 
 #: pisi/cli/search.py:45
 msgid "Summary and description language"
-msgstr ""
+msgstr "Sažetak i jezik opisa"
 
 #: pisi/cli/search.py:49
 msgid "Search in installdb"
@@ -1964,7 +1964,7 @@ msgstr "opcije nadogradnje"
 
 #: pisi/cli/upgrade.py:54
 msgid "Security related package upgrades only"
-msgstr ""
+msgstr "Nadogradi samo pakete vezane za sigurnost "
 
 #: pisi/cli/upgrade.py:56
 msgid "Do not update repositories"
@@ -1976,7 +1976,7 @@ msgstr ""
 
 #: pisi/cli/upgrade.py:64
 msgid "Name of the to be upgraded packages' repository"
-msgstr ""
+msgstr "Ime nadograđenog repozitorija paketa"
 
 #: pisi/cli/upgrade.py:68
 msgid "When upgrading system, ignore packages and components whose basenames match pattern."
@@ -2004,11 +2004,13 @@ msgid ""
 "Cannot connect to COMAR: \n"
 "  %s\n"
 msgstr ""
+"Ne mogu se spojiti na COMAR: \n"
+" %s\n"
 
 #: pisi/comariface.py:97
 #, python-format
 msgid "Configuring %s package"
-msgstr ""
+msgstr "Konfiguriram%s paket"
 
 #: pisi/comariface.py:103
 msgid "COMAR package updated. From now on, using new COMAR daemon."
@@ -2017,7 +2019,7 @@ msgstr ""
 #: pisi/comariface.py:110
 #, python-format
 msgid "Registering %s comar script"
-msgstr ""
+msgstr "Registriranje %s Comar skripte"
 
 #: pisi/comariface.py:119 pisi/comariface.py:124 pisi/comariface.py:137
 #: pisi/comariface.py:153 pisi/comariface.py:172 pisi/comariface.py:183
@@ -2067,7 +2069,7 @@ msgstr ""
 #: pisi/config.py:85
 #, python-format
 msgid "Destination directory %s does not exist. Creating it."
-msgstr ""
+msgstr "Odredišni direktorij %s ne postoji:Napravite ga."
 
 #: pisi/configfile.py:127
 #, python-format
@@ -2136,7 +2138,7 @@ msgstr ""
 #: pisi/db/installdb.py:58
 #, python-format
 msgid "Distribution: %s, Install Time: %s\n"
-msgstr ""
+msgstr "Distribucija:%s, Vrijeme instalacije: %s\n"
 
 #: pisi/db/installdb.py:94
 #, python-format
@@ -2156,7 +2158,7 @@ msgstr "%s nije nađen u nijednom repozitoriju."
 #: pisi/db/itembyrepo.py:50
 #, python-format
 msgid "Repo item %s not found"
-msgstr ""
+msgstr "Stavka repozitorija %s nije nađena"
 
 #: pisi/db/itembyrepo.py:60 pisi/db/itembyrepo.py:71 pisi/db/itembyrepo.py:81
 #, python-format
@@ -2180,7 +2182,7 @@ msgstr ""
 #: pisi/db/repodb.py:264
 #, python-format
 msgid "Repository '%s' is not compatible with your distribution. Repository is disabled."
-msgstr ""
+msgstr "Repozitorij %s nije kompatibilan sa vašom distribucijom.Repozitorij je onemogućen. "
 
 #: pisi/fetcher.py:147
 msgid "Urlgrabber needs to be installed to run this command"
@@ -2198,7 +2200,7 @@ msgstr "Odbijen pristup za pisanje u odredišnom direktoriju: \"%s\""
 #: pisi/fetcher.py:156
 #, python-format
 msgid "Access denied to destination file: \"%s\""
-msgstr ""
+msgstr "Odbijen pristup odedišnoj datoteci: \"%s\" "
 
 #: pisi/fetcher.py:170
 #, python-format
@@ -2207,7 +2209,7 @@ msgstr ""
 
 #: pisi/fetcher.py:174
 msgid "A problem occurred. Please check the archive address and/or permissions again."
-msgstr ""
+msgstr "Došlo je do greške.Provjerite adresu arhiva i/ili dozvole ponovno."
 
 #: pisi/fetcher.py:207
 #, python-format
@@ -2335,15 +2337,15 @@ msgstr ""
 
 #: pisi/index.py:237
 msgid "Adding groups.xml to index"
-msgstr ""
+msgstr "Dodajem grupe .xml u indeks"
 
 #: pisi/index.py:243
 msgid "Adding components.xml to index"
-msgstr ""
+msgstr "Dodajem komponente .xml u indeks"
 
 #: pisi/index.py:253
 msgid "Adding distribution.xml to index"
-msgstr ""
+msgstr "Dodajem .xml distribucije u indeks"
 
 #: pisi/index.py:274
 #, python-format
@@ -2358,7 +2360,7 @@ msgstr ""
 #: pisi/metadata.py:80
 #, python-format
 msgid "Architecture: %s, Installed Size: %s"
-msgstr ""
+msgstr "Arhitektura: %s, Instalirana veličina: %s"
 
 #: pisi/metadata.py:86
 #, python-format
