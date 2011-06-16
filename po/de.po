@@ -1,7 +1,7 @@
 # translation of de.po to German
 # translation of de.po to
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Mustafa Ölcerman <oelcerman@fussballkreis.org>, 2006.
 # Mustafa Ölcerman <mustafa.oelcerman@fk-koeln.de>, 2007.
 # Mustafa Ölcerman <m.oelcerman@pardus-linux.de>, 2008, 2009.
@@ -18,10 +18,10 @@ msgstr ""
 "PO-Revision-Date: 2010-05-20 19:49-0400\n"
 "Last-Translator: \n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 1.0\n"
@@ -1087,7 +1087,7 @@ msgstr "Beschädigt"
 
 #: pisi/cli/check.py:90
 msgid "Unknown"
-msgstr ""
+msgstr "Unbekannt"
 
 #: pisi/cli/check.py:92
 msgid "OK"
@@ -1123,6 +1123,8 @@ msgid ""
 "Pisi was unable to check the integrity of packages which contain files that you don't have read access.\n"
 "Running the check under a privileged user may help fixing this problem."
 msgstr ""
+"PiSi konnte die Integrität der Pakete nicht prüfen, da diese Dateien beinhalten, auf die Sie keinen Lesezugriff haben.\n"
+"Führen Sie die Prüfung erneut als Benutzer aus, der die Rechte besitzt. Das sollte helfen."
 
 #: pisi/cli/clean.py:20
 msgid ""
@@ -1481,20 +1483,20 @@ msgstr ""
 "Geben Sie \"%prog help <command>\" für Hilfe für einen bestimmten Befehl ein.\n"
 
 #: pisi/cli/history.py:28
-msgid "emerge"
-msgstr "emerge"
-
-#: pisi/cli/history.py:28
-msgid "install"
-msgstr "installieren"
+msgid "upgrade"
+msgstr "Upgrade vornehmen"
 
 #: pisi/cli/history.py:28
 msgid "remove"
 msgstr "entfernen"
 
 #: pisi/cli/history.py:28
-msgid "repository update"
-msgstr "Depot update"
+msgid "emerge"
+msgstr "emerge"
+
+#: pisi/cli/history.py:28
+msgid "install"
+msgstr "installieren"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1507,8 +1509,8 @@ msgid "takeback"
 msgstr "zurückversetzen"
 
 #: pisi/cli/history.py:28
-msgid "upgrade"
-msgstr "Upgrade vornehmen"
+msgid "repository update"
+msgstr "Depot update"
 
 #: pisi/cli/history.py:31
 msgid ""
@@ -2616,19 +2618,16 @@ msgid "Package %s: metadata corrupt, skipping..."
 msgstr "Paket %s: Metadata korrupt, wird übersprungen..."
 
 #: pisi/index.py:237
-#, fuzzy
 msgid "Adding groups.xml to index"
-msgstr "%s wird zu Quell-Index hinzugefügt"
+msgstr "groups.xml wird zum Index hinzugefügt"
 
 #: pisi/index.py:243
-#, fuzzy
 msgid "Adding components.xml to index"
-msgstr "Füge Paket zum Index hinzu: %s"
+msgstr "components.xml wird zum Index hinzugefügt"
 
 #: pisi/index.py:253
-#, fuzzy
 msgid "Adding distribution.xml to index"
-msgstr "%s wird zu Quell-Index hinzugefügt"
+msgstr "distribution.xml wird zum Index hinzugefügt"
 
 #: pisi/index.py:274
 #, python-format
@@ -2779,12 +2778,12 @@ msgstr "nicht in der Lage, die Funktion vom Vorgang aufzurufen: %s"
 #: pisi/operations/build.py:751
 #, python-format
 msgid "Source package '%s' defines a relative 'Path' element: %s"
-msgstr ""
+msgstr "Quellpaket '%s' definiert ein Element des relativen 'Pfads': %s"
 
 #: pisi/operations/build.py:755
 #, python-format
 msgid "Source package '%s' defines multiple 'Path' tags for %s"
-msgstr ""
+msgstr "Quellpaket '%s' definiert mehrfache  'Pfad' tags für %s"
 
 #: pisi/operations/build.py:784
 msgid "Safety switch: following extra packages in system.devel will be installed: "
@@ -2830,7 +2829,7 @@ msgid "Patch file is empty: %s"
 msgstr "Patch-Datei ist leer: %s"
 
 #: pisi/operations/build.py:844
-#, fuzzy, python-format
+#, python-format
 msgid "Applying patch: %s"
 msgstr "Wende Patch an: %s"
 
@@ -2880,7 +2879,7 @@ msgstr "Erhalte Build-Verzeichnis"
 
 #: pisi/operations/build.py:1237
 msgid "Action script error caught."
-msgstr ""
+msgstr "Fehler im Action Script entdeckt."
 
 #: pisi/operations/build.py:1241
 #, python-format
@@ -2890,7 +2889,7 @@ msgstr "*** %d Fehlermeldungr(en), %d Warnung(en)"
 #: pisi/operations/build.py:1324
 #, python-format
 msgid "Last state was '%s'"
-msgstr ""
+msgstr "Letzter Status war '%s'"
 
 #: pisi/operations/delta.py:43
 #, python-format
@@ -3353,7 +3352,7 @@ msgstr "Unbekannter Archivtyp '%s' übergeben für '%s'."
 #: pisi/sourcearchive.py:127
 #, python-format
 msgid "Pisi needs %s to unpack this archive but it is not installed."
-msgstr ""
+msgstr "PiSi benötigt %s um das Archiv zu entpacken. Es ist aber nicht installiert."
 
 #: pisi/specfile.py:164
 #, python-format
@@ -3426,7 +3425,7 @@ msgstr "Verzeichnis '%s' wird eingebunden"
 
 #: pisi/util.py:480
 msgid "You don't have necessary read permissions"
-msgstr ""
+msgstr "Sie haben nicht die benötigten Leserechte"
 
 #: pisi/util.py:482
 #, python-format
