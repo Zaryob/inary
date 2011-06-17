@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-08 14:53+0300\n"
+"POT-Creation-Date: 2011-06-17 14:12+0300\n"
 "PO-Revision-Date: 2010-12-27 10:06+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@trixon.se>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
@@ -569,88 +569,108 @@ msgstr "%s-paketet finns i %s-förrådet."
 msgid "%s package already fetched"
 msgstr ""
 
-#: pisi/api.py:566
+#: pisi/api.py:532
+#, fuzzy, python-format
+msgid "Cleaning package cache %s..."
+msgstr "Testar paket..."
+
+#: pisi/api.py:534
+#, fuzzy, python-format
+msgid "Cleaning source archive cache %s..."
+msgstr "Bygger källpaketet: %s"
+
+#: pisi/api.py:536
+#, fuzzy, python-format
+msgid "Cleaning temporary directory %s..."
+msgstr "Rensar byggkatalog..."
+
+#: pisi/api.py:540
+#, fuzzy, python-format
+msgid "Removing cache file %s"
+msgstr "Tar bort paketet %s"
+
+#: pisi/api.py:571
 msgid "Taking snapshot of the system"
 msgstr ""
 
-#: pisi/api.py:727
+#: pisi/api.py:732
 msgid "comar package is not fully installed"
 msgstr ""
 
-#: pisi/api.py:739
+#: pisi/api.py:744
 #, python-format
 msgid "File %s not found"
 msgstr "Filen %s hittades inte"
 
-#: pisi/api.py:781
+#: pisi/api.py:786
 #, fuzzy, python-format
 msgid "Building index of PiSi files under %s"
 msgstr "* Indexerar PiSi-filer under %s"
 
-#: pisi/api.py:786
+#: pisi/api.py:791
 #, fuzzy
 msgid "Index file written"
 msgstr "* Indexfil skriven"
 
-#: pisi/api.py:791
+#: pisi/api.py:796
 msgid "Not a valid repo name."
 msgstr "Ogiltigt förrådsnamn."
 
-#: pisi/api.py:794
+#: pisi/api.py:799
 #, python-format
 msgid "Repo %s already present."
 msgstr "Förrådet %s finns redan."
 
-#: pisi/api.py:797
+#: pisi/api.py:802
 #, python-format
 msgid "Repo already present with name %s."
 msgstr "Förrådet finns redan under namnet %s."
 
-#: pisi/api.py:802
+#: pisi/api.py:807
 #, python-format
 msgid "Repo %s added to system."
 msgstr "Förrådet %s lades till:"
 
-#: pisi/api.py:810
+#: pisi/api.py:815
 #, python-format
 msgid "Repo %s removed from system."
 msgstr ""
 
-#: pisi/api.py:812
+#: pisi/api.py:817
 #, fuzzy, python-format
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "Förrådet % finns inte och kan därmed inte tas bort."
 
-#: pisi/api.py:834
+#: pisi/api.py:839
 #, python-format
 msgid "Updating repository: %s"
 msgstr "Uppdaterar förråd: %s"
 
-#: pisi/api.py:843
+#: pisi/api.py:848
 #, python-format
 msgid "%s repository information is up-to-date."
 msgstr "%s-förrådets information är aktuell."
 
-#: pisi/api.py:845
+#: pisi/api.py:850
 msgid "Updating database at any rate as requested"
 msgstr ""
 
-#: pisi/api.py:858
+#: pisi/api.py:863
 #, fuzzy
 msgid "Package database updated."
 msgstr "* Paketdatabas uppdaterad."
 
-#: pisi/api.py:860
+#: pisi/api.py:865
 #, python-format
 msgid "No repository named %s found."
 msgstr "Inget förråd med namnet %s funnet."
 
-#: pisi/api.py:873
+#: pisi/api.py:878
 #, fuzzy, python-format
 msgid "Adding '%s' to db... "
 msgstr "* Lägger till '%s' till db... "
 
-#: pisi/api.py:876
+#: pisi/api.py:881
 msgid "OK."
 msgstr "OK."
 
@@ -990,11 +1010,12 @@ msgstr "Hanterade paketformat:"
 msgid "  %s (default)"
 msgstr ""
 
-#: pisi/cli/check.py:25
+#: pisi/cli/check.py:26
 msgid ""
 "Verify installation\n"
 "\n"
 "Usage: check [<package1> <package2> ... <packagen>]\n"
+"       check -c <component>\n"
 "\n"
 "<packagei>: package name\n"
 "\n"
@@ -1005,65 +1026,65 @@ msgid ""
 "If no packages are given, checks all installed packages.\n"
 msgstr ""
 
-#: pisi/cli/check.py:47
+#: pisi/cli/check.py:54
 msgid "check options"
 msgstr ""
 
-#: pisi/cli/check.py:49
+#: pisi/cli/check.py:59
 msgid "Check installed packages under given component"
 msgstr ""
 
-#: pisi/cli/check.py:51
+#: pisi/cli/check.py:65
 msgid "Checks only changed config files of the packages"
 msgstr ""
 
-#: pisi/cli/check.py:65
+#: pisi/cli/check.py:82
 msgid "Checking all installed packages"
 msgstr ""
 
-#: pisi/cli/check.py:74
+#: pisi/cli/check.py:91
 #, python-format
 msgid "Checking integrity of %s"
 msgstr ""
 
-#: pisi/cli/check.py:86
+#: pisi/cli/check.py:105
 msgid "Broken"
 msgstr ""
 
-#: pisi/cli/check.py:90
+#: pisi/cli/check.py:110
 msgid "Unknown"
 msgstr ""
 
-#: pisi/cli/check.py:92
+#: pisi/cli/check.py:112
 msgid "OK"
 msgstr "OK"
 
-#: pisi/cli/check.py:97
+#: pisi/cli/check.py:118
 #, fuzzy, python-format
 msgid "Missing file: /%s"
 msgstr "Paketfil: %s"
 
-#: pisi/cli/check.py:99
+#: pisi/cli/check.py:122
 #, python-format
 msgid "Access denied: /%s"
 msgstr ""
 
-#: pisi/cli/check.py:101
+#: pisi/cli/check.py:126
 #, python-format
 msgid "Corrupted file: /%s"
 msgstr ""
 
-#: pisi/cli/check.py:103
+#: pisi/cli/check.py:130
 #, fuzzy, python-format
 msgid "Modified configuration file: /%s"
 msgstr "Konfigureringen misslyckades."
 
-#: pisi/cli/check.py:107
+#: pisi/cli/check.py:135
 #, python-format
 msgid "Package %s not installed"
 msgstr "Paketet %s är inte installerat."
 
-#: pisi/cli/check.py:111
+#: pisi/cli/check.py:139
 msgid ""
 "Pisi was unable to check the integrity of packages which contain files that you don't have read access.\n"
 "Running the check under a privileged user may help fixing this problem."
@@ -1767,7 +1788,7 @@ msgstr "list-upgrades-alternativ"
 msgid "List upgradable packages under given component"
 msgstr ""
 
-#: pisi/cli/listupgrades.py:64 pisi/operations/upgrade.py:148
+#: pisi/cli/listupgrades.py:64 pisi/operations/upgrade.py:146
 msgid "No packages to upgrade."
 msgstr "Inga paket att uppdatera."
 
@@ -2278,7 +2299,7 @@ msgstr ""
 msgid "ERROR: gpg --detach-sig %s failed"
 msgstr ""
 
-#: pisi/graph.py:30
+#: pisi/graph.py:26
 #, python-format
 msgid "Encountered cycle %s"
 msgstr ""
@@ -2696,12 +2717,12 @@ msgstr "Följande paket kommer att tas bort:\n"
 
 #: pisi/operations/history.py:148 pisi/operations/history.py:162
 #: pisi/operations/install.py:200 pisi/operations/remove.py:72
-#: pisi/operations/upgrade.py:183
+#: pisi/operations/upgrade.py:181
 msgid "Do you want to continue?"
 msgstr "Vill du fortsätta?"
 
 #: pisi/operations/history.py:154 pisi/operations/install.py:95
-#: pisi/operations/upgrade.py:194
+#: pisi/operations/upgrade.py:192
 #, python-format
 msgid "Downloading %d / %d"
 msgstr "Hämtar %d / %d"
@@ -2724,12 +2745,12 @@ msgstr "Inga paket att installera."
 msgid "Following packages will be installed:"
 msgstr "Följande paket kommer att installeras: "
 
-#: pisi/operations/install.py:76 pisi/operations/upgrade.py:171
+#: pisi/operations/install.py:76 pisi/operations/upgrade.py:168
 #, python-format
 msgid "Total size of package(s): %.2f %s"
 msgstr "Sammanlagd paketstorlek: %.2f %s"
 
-#: pisi/operations/install.py:107 pisi/operations/upgrade.py:208
+#: pisi/operations/install.py:107 pisi/operations/upgrade.py:206
 #, python-format
 msgid "Installing %d / %d"
 msgstr "Installerar %d / %d"
@@ -2774,7 +2795,7 @@ msgstr ""
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "Säkerhetsspärren förhindrar borttagning av följande paket:\n"
 
-#: pisi/operations/remove.py:48 pisi/operations/upgrade.py:374
+#: pisi/operations/remove.py:48 pisi/operations/upgrade.py:372
 msgid "Safety switch: The component system.base cannot be found."
 msgstr "Säkerhetsspärr: Kan inte hitta komponenten system.base"
 
@@ -2841,28 +2862,28 @@ msgstr ""
 msgid "Package %s is already at the latest release %s."
 msgstr ""
 
-#: pisi/operations/upgrade.py:166
+#: pisi/operations/upgrade.py:163
 msgid "The following packages will be upgraded:"
 msgstr "Följande paket kommer att uppdateras:"
 
-#: pisi/operations/upgrade.py:176
+#: pisi/operations/upgrade.py:174
 msgid "There are extra packages due to dependencies."
 msgstr "Det finns extra paket på grund av beroenden."
 
-#: pisi/operations/upgrade.py:256
+#: pisi/operations/upgrade.py:254
 #, python-format
 msgid "Dependency %s of %s cannot be satisfied"
 msgstr ""
 
-#: pisi/operations/upgrade.py:257
+#: pisi/operations/upgrade.py:255
 msgid "Upgrade is not possible."
 msgstr "Uppdatering ej möjlig."
 
-#: pisi/operations/upgrade.py:351
+#: pisi/operations/upgrade.py:349
 msgid "Safety switch forces the installation of following packages:"
 msgstr "Säkerhetsspärren påtvingar installation av följande paket:"
 
-#: pisi/operations/upgrade.py:367
+#: pisi/operations/upgrade.py:365
 msgid "Safety switch forces the upgrade of following packages:"
 msgstr "Säkerhetsspärren påtvingar uppdatering av följande paket:"
 
@@ -3185,15 +3206,47 @@ msgstr ""
 msgid "Invalid version string: '%s'"
 msgstr "Ogiltig versionssträng: '%s'"
 
-#~ msgid "* Checking %s... "
-#~ msgstr "* Kontrollerar %s... "
+#~ msgid "Generating %s,"
+#~ msgstr "Skapar %s,"
 
-#~ msgid ""
-#~ "\n"
-#~ "Package %s has changed config files."
-#~ msgstr ""
-#~ "\n"
-#~ "Paketet %s har förändrade konfigurationsfiler."
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Kan inte skapa delta av samma paket!"
+
+#~ msgid "Creating delta PiSi package between %s %s"
+#~ msgstr "Skapar delta-PiSi-paket mellan %s och %s"
+
+#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
+#~ msgstr "Namn: %s, version: %s, utgåva: %s, bygge %s\n"
+
+#~ msgid "Repository distribution does not match. Removing %s from system."
+#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort %s från systemet."
+
+#~ msgid "Update PiSi database for repository %s?"
+#~ msgstr "Uppdatera PiSi-databasen för %s-förrådet?"
+
+#~ msgid "Repository architecture does not match. Removing %s from system."
+#~ msgstr "Förrådet % finns inte och kan därmed inte tas bort."
+
+#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
+
+#~ msgid "Safety switch: Following packages in system.base will be installed: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
+
+#~ msgid "Storing %s."
+#~ msgstr "Lagrar %s."
+
+#~ msgid "Storing %s, "
+#~ msgstr "Lagrar %s, "
+
+#~ msgid "Checking /%s "
+#~ msgstr "Kontrollerar /%s "
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Säkerhetslås: system.devel är redan installerad"
+
+#~ msgid "Done."
+#~ msgstr "Klar."
 
 #~ msgid ""
 #~ "\n"
@@ -3202,44 +3255,12 @@ msgstr "Ogiltig versionssträng: '%s'"
 #~ "\n"
 #~ "Paketet %s är trasigt."
 
-#~ msgid "Done."
-#~ msgstr "Klar."
+#~ msgid ""
+#~ "\n"
+#~ "Package %s has changed config files."
+#~ msgstr ""
+#~ "\n"
+#~ "Paketet %s har förändrade konfigurationsfiler."
 
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Säkerhetslås: system.devel är redan installerad"
-
-#~ msgid "Checking /%s "
-#~ msgstr "Kontrollerar /%s "
-
-#~ msgid "Storing %s, "
-#~ msgstr "Lagrar %s, "
-
-#~ msgid "Storing %s."
-#~ msgstr "Lagrar %s."
-
-#~ msgid "Safety switch: Following packages in system.base will be installed: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
-
-#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
-
-#~ msgid "Repository architecture does not match. Removing %s from system."
-#~ msgstr "Förrådet % finns inte och kan därmed inte tas bort."
-
-#~ msgid "Update PiSi database for repository %s?"
-#~ msgstr "Uppdatera PiSi-databasen för %s-förrådet?"
-
-#~ msgid "Repository distribution does not match. Removing %s from system."
-#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort %s från systemet."
-
-#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
-#~ msgstr "Namn: %s, version: %s, utgåva: %s, bygge %s\n"
-
-#~ msgid "Creating delta PiSi package between %s %s"
-#~ msgstr "Skapar delta-PiSi-paket mellan %s och %s"
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Kan inte skapa delta av samma paket!"
-
-#~ msgid "Generating %s,"
-#~ msgstr "Skapar %s,"
+#~ msgid "* Checking %s... "
+#~ msgstr "* Kontrollerar %s... "

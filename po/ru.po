@@ -1,19 +1,19 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR ORGANIZATION
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-08 14:53+0300\n"
+"POT-Creation-Date: 2011-06-17 14:12+0300\n"
 "PO-Revision-Date: 2010-12-18 22:24+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: /usr/lib/python2.7/optparse.py:140
@@ -566,86 +566,106 @@ msgstr "%s пакет найден в %s репозитории."
 msgid "%s package already fetched"
 msgstr "%s пакет уже получен"
 
-#: pisi/api.py:566
+#: pisi/api.py:532
+#, fuzzy, python-format
+msgid "Cleaning package cache %s..."
+msgstr "Тестирование пакета..."
+
+#: pisi/api.py:534
+#, fuzzy, python-format
+msgid "Cleaning source archive cache %s..."
+msgstr "Не могу найти пакет исходного кода: %s"
+
+#: pisi/api.py:536
+#, fuzzy, python-format
+msgid "Cleaning temporary directory %s..."
+msgstr "Очистка директории для сборки..."
+
+#: pisi/api.py:540
+#, fuzzy, python-format
+msgid "Removing cache file %s"
+msgstr "Удаление пакета %s"
+
+#: pisi/api.py:571
 msgid "Taking snapshot of the system"
 msgstr "Снятие снимка с системы"
 
-#: pisi/api.py:727
+#: pisi/api.py:732
 msgid "comar package is not fully installed"
 msgstr "Пакет сomar  не полностью установлен"
 
-#: pisi/api.py:739
+#: pisi/api.py:744
 #, python-format
 msgid "File %s not found"
 msgstr "Файл %s не найден"
 
-#: pisi/api.py:781
+#: pisi/api.py:786
 #, fuzzy, python-format
 msgid "Building index of PiSi files under %s"
 msgstr "Building index of PiSi files under %s"
 
-#: pisi/api.py:786
+#: pisi/api.py:791
 msgid "Index file written"
 msgstr "Файл индекса записан"
 
-#: pisi/api.py:791
+#: pisi/api.py:796
 msgid "Not a valid repo name."
 msgstr "Неверное имя репозитория"
 
-#: pisi/api.py:794
+#: pisi/api.py:799
 #, python-format
 msgid "Repo %s already present."
 msgstr "Репозиторий %s уже существует."
 
-#: pisi/api.py:797
+#: pisi/api.py:802
 #, python-format
 msgid "Repo already present with name %s."
 msgstr "Репозиторий уже существует с именем %s."
 
-#: pisi/api.py:802
+#: pisi/api.py:807
 #, python-format
 msgid "Repo %s added to system."
 msgstr "Репозиторий %s добавлен в систему."
 
-#: pisi/api.py:810
+#: pisi/api.py:815
 #, python-format
 msgid "Repo %s removed from system."
 msgstr "Репозиторий %s удален из системы."
 
-#: pisi/api.py:812
+#: pisi/api.py:817
 #, python-format
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "Репозиторий %s не существует и не может быть удален."
 
-#: pisi/api.py:834
+#: pisi/api.py:839
 #, python-format
 msgid "Updating repository: %s"
 msgstr "Обновление репозитория: %s"
 
-#: pisi/api.py:843
+#: pisi/api.py:848
 #, python-format
 msgid "%s repository information is up-to-date."
 msgstr "%s информация о репозитории обновлена"
 
-#: pisi/api.py:845
+#: pisi/api.py:850
 msgid "Updating database at any rate as requested"
 msgstr "Обновление базы данных в любом случае как запрос"
 
-#: pisi/api.py:858
+#: pisi/api.py:863
 msgid "Package database updated."
 msgstr "База данных пакетов обновлена."
 
-#: pisi/api.py:860
+#: pisi/api.py:865
 #, python-format
 msgid "No repository named %s found."
 msgstr "Не найден репозиторий с именем %s ."
 
-#: pisi/api.py:873
+#: pisi/api.py:878
 #, python-format
 msgid "Adding '%s' to db... "
 msgstr "Добавление '%s' в базу данных... "
 
-#: pisi/api.py:876
+#: pisi/api.py:881
 msgid "OK."
 msgstr "ОК."
 
@@ -1011,11 +1031,13 @@ msgstr "Поддерживаемые форматы пакетов:"
 msgid "  %s (default)"
 msgstr "  %s (default)"
 
-#: pisi/cli/check.py:25
+#: pisi/cli/check.py:26
+#, fuzzy
 msgid ""
 "Verify installation\n"
 "\n"
 "Usage: check [<package1> <package2> ... <packagen>]\n"
+"       check -c <component>\n"
 "\n"
 "<packagei>: package name\n"
 "\n"
@@ -1037,65 +1059,65 @@ msgstr ""
 "\n"
 "Если не будет задано имен пакетов, будут проверены все установленные пакеты.\n"
 
-#: pisi/cli/check.py:47
+#: pisi/cli/check.py:54
 msgid "check options"
 msgstr "Проверка опций"
 
-#: pisi/cli/check.py:49
+#: pisi/cli/check.py:59
 msgid "Check installed packages under given component"
 msgstr "Проверка установленных пакетов по данному компоненту"
 
-#: pisi/cli/check.py:51
+#: pisi/cli/check.py:65
 msgid "Checks only changed config files of the packages"
 msgstr "Проверка измения конфигурационных файлов пакетов"
 
-#: pisi/cli/check.py:65
+#: pisi/cli/check.py:82
 msgid "Checking all installed packages"
 msgstr "Проверка всех установленных пакетов"
 
-#: pisi/cli/check.py:74
+#: pisi/cli/check.py:91
 #, python-format
 msgid "Checking integrity of %s"
 msgstr "Проверка целостности %s"
 
-#: pisi/cli/check.py:86
+#: pisi/cli/check.py:105
 msgid "Broken"
 msgstr "Сломано"
 
-#: pisi/cli/check.py:90
+#: pisi/cli/check.py:110
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: pisi/cli/check.py:92
+#: pisi/cli/check.py:112
 msgid "OK"
 msgstr "ОК"
 
-#: pisi/cli/check.py:97
+#: pisi/cli/check.py:118
 #, python-format
 msgid "Missing file: /%s"
 msgstr "Отсутствующий файл: /%s"
 
-#: pisi/cli/check.py:99
+#: pisi/cli/check.py:122
 #, python-format
 msgid "Access denied: /%s"
 msgstr "Доступ запрещен: /%s"
 
-#: pisi/cli/check.py:101
+#: pisi/cli/check.py:126
 #, python-format
 msgid "Corrupted file: /%s"
 msgstr "Поврежденный файл: /%s"
 
-#: pisi/cli/check.py:103
+#: pisi/cli/check.py:130
 #, python-format
 msgid "Modified configuration file: /%s"
 msgstr "Измененный файл конфигурации: /%s"
 
-#: pisi/cli/check.py:107
+#: pisi/cli/check.py:135
 #, python-format
 msgid "Package %s not installed"
 msgstr "Пакет %s не установлен"
 
-#: pisi/cli/check.py:111
+#: pisi/cli/check.py:139
 msgid ""
 "Pisi was unable to check the integrity of packages which contain files that you don't have read access.\n"
 "Running the check under a privileged user may help fixing this problem."
@@ -1453,20 +1475,20 @@ msgstr ""
 "Используйте \"%prog help <команда>\" для проверки особой команды.\n"
 
 #: pisi/cli/history.py:28
-msgid "upgrade"
-msgstr "обновить"
-
-#: pisi/cli/history.py:28
-msgid "remove"
-msgstr "удалить"
-
-#: pisi/cli/history.py:28
 msgid "emerge"
 msgstr "emerge"
 
 #: pisi/cli/history.py:28
 msgid "install"
 msgstr "установить"
+
+#: pisi/cli/history.py:28
+msgid "remove"
+msgstr "удалить"
+
+#: pisi/cli/history.py:28
+msgid "repository update"
+msgstr "обновление репозитория"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1477,8 +1499,8 @@ msgid "takeback"
 msgstr "возврат"
 
 #: pisi/cli/history.py:28
-msgid "repository update"
-msgstr "обновление репозитория"
+msgid "upgrade"
+msgstr "обновить"
 
 #: pisi/cli/history.py:31
 msgid ""
@@ -1941,7 +1963,7 @@ msgstr "опции list-upgrades"
 msgid "List upgradable packages under given component"
 msgstr "Показать обновляемые пакеты по указанному компоненту"
 
-#: pisi/cli/listupgrades.py:64 pisi/operations/upgrade.py:148
+#: pisi/cli/listupgrades.py:64 pisi/operations/upgrade.py:146
 msgid "No packages to upgrade."
 msgstr "Нет пакетов для обновления."
 
@@ -2511,7 +2533,7 @@ msgstr "Удаленная запись не реализована"
 msgid "ERROR: gpg --detach-sig %s failed"
 msgstr "ОШИБКА: gpg --detach-sig %s не удалось"
 
-#: pisi/graph.py:30
+#: pisi/graph.py:26
 #, python-format
 msgid "Encountered cycle %s"
 msgstr "Обнаружен цикл %s"
@@ -2931,12 +2953,12 @@ msgstr "Следующие пакеты будут удалены:\n"
 
 #: pisi/operations/history.py:148 pisi/operations/history.py:162
 #: pisi/operations/install.py:200 pisi/operations/remove.py:72
-#: pisi/operations/upgrade.py:183
+#: pisi/operations/upgrade.py:181
 msgid "Do you want to continue?"
 msgstr "Вы хотите продолжить?"
 
 #: pisi/operations/history.py:154 pisi/operations/install.py:95
-#: pisi/operations/upgrade.py:194
+#: pisi/operations/upgrade.py:192
 #, python-format
 msgid "Downloading %d / %d"
 msgstr "Загрузка %d / %d"
@@ -2961,12 +2983,12 @@ msgstr "Нет пакетов для установки."
 msgid "Following packages will be installed:"
 msgstr "Следующие пакеты будут установлены:"
 
-#: pisi/operations/install.py:76 pisi/operations/upgrade.py:171
+#: pisi/operations/install.py:76 pisi/operations/upgrade.py:168
 #, python-format
 msgid "Total size of package(s): %.2f %s"
 msgstr "Общий размер пакета (ов): %.2f %s"
 
-#: pisi/operations/install.py:107 pisi/operations/upgrade.py:208
+#: pisi/operations/install.py:107 pisi/operations/upgrade.py:206
 #, python-format
 msgid "Installing %d / %d"
 msgstr "Установка %d / %d"
@@ -3011,7 +3033,7 @@ msgstr "Зависимость %s пакета %s не соблюдена"
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "Переключатель безопасности предотвратил удаление следующих пакетов:\n"
 
-#: pisi/operations/remove.py:48 pisi/operations/upgrade.py:374
+#: pisi/operations/remove.py:48 pisi/operations/upgrade.py:372
 msgid "Safety switch: The component system.base cannot be found."
 msgstr "Изменение безопасности: компонент system.base не найден."
 
@@ -3080,28 +3102,28 @@ msgstr "Пакет %s не доступен в репозиториях."
 msgid "Package %s is already at the latest release %s."
 msgstr "Пакет %s уже последнего релиза %s."
 
-#: pisi/operations/upgrade.py:166
+#: pisi/operations/upgrade.py:163
 msgid "The following packages will be upgraded:"
 msgstr "Следующие пакеты будут обновлены:"
 
-#: pisi/operations/upgrade.py:176
+#: pisi/operations/upgrade.py:174
 msgid "There are extra packages due to dependencies."
 msgstr "Есть дополнительные пакеты из-за зависимостей."
 
-#: pisi/operations/upgrade.py:256
+#: pisi/operations/upgrade.py:254
 #, python-format
 msgid "Dependency %s of %s cannot be satisfied"
 msgstr "Зависимость %s из %s не соблюдена"
 
-#: pisi/operations/upgrade.py:257
+#: pisi/operations/upgrade.py:255
 msgid "Upgrade is not possible."
 msgstr "Обновление не возможно."
 
-#: pisi/operations/upgrade.py:351
+#: pisi/operations/upgrade.py:349
 msgid "Safety switch forces the installation of following packages:"
 msgstr "Изменение безопасности требует установки следующих пакетов:"
 
-#: pisi/operations/upgrade.py:367
+#: pisi/operations/upgrade.py:365
 msgid "Safety switch forces the upgrade of following packages:"
 msgstr "Изменение безопасности требует обновления следующих пакетов:"
 
@@ -3426,40 +3448,11 @@ msgstr "Неверное имя дельта пакета: %s"
 msgid "Invalid version string: '%s'"
 msgstr "Недопустимая строка версии: '%s'"
 
-#~ msgid ""
-#~ "\n"
-#~ "Changed config file: %s"
-#~ msgstr ""
-#~ "\n"
-#~ "Изменен конфигурационный файл: %s"
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Пакеты в рабочей директории."
 
-#~ msgid "Checking /%s "
-#~ msgstr "Проверка /%s"
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Изменение безопасности: system.devel уже установлен"
-
-#~ msgid "Multiple 'Path' tags specified for this path: %s"
-#~ msgstr "Множественные тэги 'Path' определены для этого пути: %s"
-
-#~ msgid "Path must start with a slash: %s"
-#~ msgstr "Путь должен начинаться с \"/\": %s"
-
-#~ msgid "Source is part of %s component"
-#~ msgstr "Источник является частью %s компонента"
-
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "Тег PartOf не указан, поиск компонента"
-
-#~ msgid "Done."
-#~ msgstr "Выполнено."
-
-#~ msgid ""
-#~ "\n"
-#~ "Package %s is corrupt."
-#~ msgstr ""
-#~ "\n"
-#~ "Package %s поврежден."
+#~ msgid "* Checking %s... "
+#~ msgstr "* Проверка %s... "
 
 #~ msgid ""
 #~ "\n"
@@ -3468,8 +3461,37 @@ msgstr "Недопустимая строка версии: '%s'"
 #~ "\n"
 #~ "Package %s изменение конфигурационного файла."
 
-#~ msgid "* Checking %s... "
-#~ msgstr "* Проверка %s... "
+#~ msgid ""
+#~ "\n"
+#~ "Package %s is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "Package %s поврежден."
 
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Пакеты в рабочей директории."
+#~ msgid "Done."
+#~ msgstr "Выполнено."
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "Тег PartOf не указан, поиск компонента"
+
+#~ msgid "Source is part of %s component"
+#~ msgstr "Источник является частью %s компонента"
+
+#~ msgid "Path must start with a slash: %s"
+#~ msgstr "Путь должен начинаться с \"/\": %s"
+
+#~ msgid "Multiple 'Path' tags specified for this path: %s"
+#~ msgstr "Множественные тэги 'Path' определены для этого пути: %s"
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Изменение безопасности: system.devel уже установлен"
+
+#~ msgid "Checking /%s "
+#~ msgstr "Проверка /%s"
+
+#~ msgid ""
+#~ "\n"
+#~ "Changed config file: %s"
+#~ msgstr ""
+#~ "\n"
+#~ "Изменен конфигурационный файл: %s"
