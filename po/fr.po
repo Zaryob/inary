@@ -1,6 +1,6 @@
 # translation of fr.po to French
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Amine Chadly <amine.chadly@gmail.com>, 2007, 2008.
 # Philippe Svetoslavsky <philsvet@gmail.com>, 2009, 2010.
 msgid ""
@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2010-01-01 22:22+0100\n"
 "Last-Translator: Philippe Svetoslavsky <philsvet@gmail.com>\n"
 "Language-Team: French <pardus-translators@pardus.org.tr>\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 0.3\n"
@@ -570,24 +570,24 @@ msgid "%s package already fetched"
 msgstr "Paquet %s déjà téléchargé"
 
 #: pisi/api.py:532
-#, fuzzy, python-format
+#, python-format
 msgid "Cleaning package cache %s..."
-msgstr "Création du paquet PiSi %s."
+msgstr "Nettoyage du cache des paquets %s..."
 
 #: pisi/api.py:534
-#, fuzzy, python-format
+#, python-format
 msgid "Cleaning source archive cache %s..."
-msgstr "Impossible de trouver le paquet source : %s"
+msgstr "Nettoyage du cache de l'archive des sources %s..."
 
 #: pisi/api.py:536
-#, fuzzy, python-format
+#, python-format
 msgid "Cleaning temporary directory %s..."
-msgstr "Nettoyage du dossier de construction..."
+msgstr "Nettoyage du dossier temporaire %s..."
 
 #: pisi/api.py:540
-#, fuzzy, python-format
+#, python-format
 msgid "Removing cache file %s..."
-msgstr "Suppression du paquet %s"
+msgstr "Suppression du fichier cache %s..."
 
 #: pisi/api.py:571
 msgid "Taking snapshot of the system"
@@ -1033,7 +1033,6 @@ msgid "  %s (default)"
 msgstr "%s (par défaut)"
 
 #: pisi/cli/check.py:26
-#, fuzzy
 msgid ""
 "Verify installation\n"
 "\n"
@@ -1051,8 +1050,9 @@ msgstr ""
 "Vérifie l'installation\n"
 "\n"
 "Mode d'emploi : check [<paquet1> <paquet2> ... <paquetn>]\n"
+" check -c <composant>\n"
 "\n"
-"<paqueti>: nom de paquet\n"
+"<paqueti> : nom de paquet\n"
 "\n"
 "Une somme de contrôle cryptographique est conservée pour chaque fichier \n"
 "installé. La commande check utilise les sommes de contrôle (checksums) pour \n"
@@ -1477,20 +1477,20 @@ msgstr ""
 "Utilisez \"%prog help <commande>\" pour une aide concernant une commande spécifique.\n"
 
 #: pisi/cli/history.py:28
-msgid "emerge"
-msgstr "emerge"
-
-#: pisi/cli/history.py:28
-msgid "install"
-msgstr "install"
+msgid "upgrade"
+msgstr "mettre à jour"
 
 #: pisi/cli/history.py:28
 msgid "remove"
 msgstr "supprime"
 
 #: pisi/cli/history.py:28
-msgid "repository update"
-msgstr "Mise-à-jour du dépôt"
+msgid "emerge"
+msgstr "emerge"
+
+#: pisi/cli/history.py:28
+msgid "install"
+msgstr "install"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1501,8 +1501,8 @@ msgid "takeback"
 msgstr "retour"
 
 #: pisi/cli/history.py:28
-msgid "upgrade"
-msgstr "mettre à jour"
+msgid "repository update"
+msgstr "Mise-à-jour du dépôt"
 
 #: pisi/cli/history.py:31
 msgid ""
