@@ -16,10 +16,10 @@ msgstr ""
 "PO-Revision-Date: 2010-03-24 16:28+0200\n"
 "Last-Translator: Fatih Aşıcı <fatih@pardus.org.tr>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=1;plural=0;\n"
 "X-Generator: Lokalize 1.0\n"
 
@@ -587,24 +587,24 @@ msgid "%s package already fetched"
 msgstr "%s paketi zaten indirilmiş"
 
 #: pisi/api.py:532
-#, fuzzy, python-format
+#, python-format
 msgid "Cleaning package cache %s..."
-msgstr "%s PiSi paketi yaratılıyor."
+msgstr "Paket önbelleği %s temizleniyor..."
 
 #: pisi/api.py:534
-#, fuzzy, python-format
+#, python-format
 msgid "Cleaning source archive cache %s..."
-msgstr "Kaynak paket bulunamadı: %s"
+msgstr "Kaynak arşivi önbelleği %s temizleniyor..."
 
 #: pisi/api.py:536
-#, fuzzy, python-format
+#, python-format
 msgid "Cleaning temporary directory %s..."
-msgstr "İnşa dizini temizleniyor..."
+msgstr "Geçici dizin %s temizleniyor..."
 
 #: pisi/api.py:540
-#, fuzzy, python-format
+#, python-format
 msgid "Removing cache file %s"
-msgstr "%s paketi kaldırılıyor."
+msgstr "Önbellek dosyası %s siliniyor..."
 
 #: pisi/api.py:571
 msgid "Taking snapshot of the system"
@@ -1498,20 +1498,20 @@ msgstr ""
 "Belirli bir komut hakkında yardım almak için \"%prog help <komut>\" kullanınız.\n"
 
 #: pisi/cli/history.py:28
-msgid "emerge"
-msgstr "kaynaktan kur"
-
-#: pisi/cli/history.py:28
-msgid "install"
-msgstr "kur"
+msgid "upgrade"
+msgstr "yükselt"
 
 #: pisi/cli/history.py:28
 msgid "remove"
 msgstr "kaldır"
 
 #: pisi/cli/history.py:28
-msgid "repository update"
-msgstr "depo güncellemesi"
+msgid "emerge"
+msgstr "kaynaktan kur"
+
+#: pisi/cli/history.py:28
+msgid "install"
+msgstr "kur"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1522,8 +1522,8 @@ msgid "takeback"
 msgstr "geri al"
 
 #: pisi/cli/history.py:28
-msgid "upgrade"
-msgstr "yükselt"
+msgid "repository update"
+msgstr "depo güncellemesi"
 
 #: pisi/cli/history.py:31
 msgid ""
