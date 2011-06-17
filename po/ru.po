@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-17 14:12+0300\n"
+"POT-Creation-Date: 2011-06-17 14:30+0300\n"
 "PO-Revision-Date: 2010-12-18 22:24+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -583,7 +583,7 @@ msgstr "Очистка директории для сборки..."
 
 #: pisi/api.py:540
 #, fuzzy, python-format
-msgid "Removing cache file %s"
+msgid "Removing cache file %s..."
 msgstr "Удаление пакета %s"
 
 #: pisi/api.py:571
@@ -3448,18 +3448,33 @@ msgstr "Неверное имя дельта пакета: %s"
 msgid "Invalid version string: '%s'"
 msgstr "Недопустимая строка версии: '%s'"
 
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Пакеты в рабочей директории."
-
-#~ msgid "* Checking %s... "
-#~ msgstr "* Проверка %s... "
-
 #~ msgid ""
 #~ "\n"
-#~ "Package %s has changed config files."
+#~ "Changed config file: %s"
 #~ msgstr ""
 #~ "\n"
-#~ "Package %s изменение конфигурационного файла."
+#~ "Изменен конфигурационный файл: %s"
+
+#~ msgid "Checking /%s "
+#~ msgstr "Проверка /%s"
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Изменение безопасности: system.devel уже установлен"
+
+#~ msgid "Multiple 'Path' tags specified for this path: %s"
+#~ msgstr "Множественные тэги 'Path' определены для этого пути: %s"
+
+#~ msgid "Path must start with a slash: %s"
+#~ msgstr "Путь должен начинаться с \"/\": %s"
+
+#~ msgid "Source is part of %s component"
+#~ msgstr "Источник является частью %s компонента"
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "Тег PartOf не указан, поиск компонента"
+
+#~ msgid "Done."
+#~ msgstr "Выполнено."
 
 #~ msgid ""
 #~ "\n"
@@ -3468,30 +3483,15 @@ msgstr "Недопустимая строка версии: '%s'"
 #~ "\n"
 #~ "Package %s поврежден."
 
-#~ msgid "Done."
-#~ msgstr "Выполнено."
-
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "Тег PartOf не указан, поиск компонента"
-
-#~ msgid "Source is part of %s component"
-#~ msgstr "Источник является частью %s компонента"
-
-#~ msgid "Path must start with a slash: %s"
-#~ msgstr "Путь должен начинаться с \"/\": %s"
-
-#~ msgid "Multiple 'Path' tags specified for this path: %s"
-#~ msgstr "Множественные тэги 'Path' определены для этого пути: %s"
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Изменение безопасности: system.devel уже установлен"
-
-#~ msgid "Checking /%s "
-#~ msgstr "Проверка /%s"
-
 #~ msgid ""
 #~ "\n"
-#~ "Changed config file: %s"
+#~ "Package %s has changed config files."
 #~ msgstr ""
 #~ "\n"
-#~ "Изменен конфигурационный файл: %s"
+#~ "Package %s изменение конфигурационного файла."
+
+#~ msgid "* Checking %s... "
+#~ msgstr "* Проверка %s... "
+
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Пакеты в рабочей директории."

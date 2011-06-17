@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PiSi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-17 14:12+0300\n"
+"POT-Creation-Date: 2011-06-17 14:30+0300\n"
 "PO-Revision-Date: 2010-12-27 13:15+0100\n"
 "Last-Translator: Attila Siposs <sipiatti@gmail.com>\n"
 "Language-Team: Hungarian <pardus-translators@pardus.org.tr>\n"
@@ -590,7 +590,7 @@ msgstr "Átmeneti könyvtár tisztítása..."
 
 #: pisi/api.py:540
 #, fuzzy, python-format
-msgid "Removing cache file %s"
+msgid "Removing cache file %s..."
 msgstr "%s csomag eltávolítása"
 
 #: pisi/api.py:571
@@ -3462,106 +3462,11 @@ msgstr "Érvénytelen deltacsomagnév: %s"
 msgid "Invalid version string: '%s'"
 msgstr "Érvénytelen verzió-sztring: '%s'"
 
-#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
-#~ msgstr "Név: %s, verzió: %s, kiadás: %s, build: %s\n"
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Csomagok elhelyezése a munkakönyvtárban."
 
-#~ msgid "Package %s is already at the latest build %s."
-#~ msgstr "A(z) %s csomag már a legutolsó build számot viseli: %s."
-
-#~ msgid "Creating delta PiSi package between %s %s"
-#~ msgstr "PiSi különbözeti csomag létrehozása %s és %s között."
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Nem hozható létre különbözet ugyanazon csomagból!"
-
-#~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
-#~ msgstr "A telepési könyvtárban (%s) található valamennyi fájl a csomag(ok)ba gyűjtve"
-
-#~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
-#~ msgstr "A build számok használata nem lehetséges. Ha tároló számára épít, engedélyezze a buildno opciót a pisi.conf-ban."
-
-#~ msgid "Generating %s,"
-#~ msgstr "%s generálása,"
-
-#~ msgid "There is no change from previous build %d"
-#~ msgstr "Nincs változás az előző build-hez (%d) képest."
-
-#~ msgid "There are changes, incrementing build no to %d"
-#~ msgstr "Változásokat észleltem, a build szám így növelve lesz. Az új érték: %d."
-
-#~ msgid "(old package lacks a build no, setting build no to 1.)"
-#~ msgstr "(a régi csomgnak nincs build száma, az új build szám ezért 1. lesz)"
-
-#~ msgid "(no previous build found, setting build no to 1.)"
-#~ msgstr "(nem találtam régebbi build-et, a sorszám 1-re lesz állítva)"
-
-#~ msgid "(found old version %s)"
-#~ msgstr "(régebbi verziójú %s-t találtam)"
-
-#~ msgid "gzip compression not supported yet"
-#~ msgstr "A gzip tömörítés még nem támogatott."
-
-#~ msgid "zip compression not supported yet"
-#~ msgstr "A zip tömörítés még nem támogatott."
-
-#~ msgid "Indexing current directory."
-#~ msgstr "Az aktuális könyvtár indexelése."
-
-#~ msgid "package_format must be one of %s "
-#~ msgstr "a csomag formátuma csak a következők egyike lehet:  %s"
-
-#~ msgid "PiSi binary package formats: '1.0', '1.1' (default)"
-#~ msgstr "PiSi bináris csomag formátumok: 1.0', '1.1' (alapértelmezett)"
-
-#~ msgid "Do not take build no into account."
-#~ msgstr "Nem veszi figyelembe a \"build-no\" kapcsolót."
-
-#~ msgid "Downgrade to old distribution build?"
-#~ msgstr "Visszatér a disztribúció korábbi build-változatára?"
-
-#~ msgid "Upgrading to new distribution build"
-#~ msgstr "Frissítés a disztribúció új build-változatára"
-
-#~ msgid "%s %s is added to %s/language.%s.dat "
-#~ msgstr "%s %s hozzáadva %s/language.%s.dat-hoz "
-
-#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
-#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} hozzáadva %s/language.%s.def-hez "
-
-#~ msgid "%s is added to %s/language.%s.dat"
-#~ msgstr "%s hozzáadva %s/language.%s.dat-hoz"
-
-#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
-#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} hozzáadva %s/language.%s.def-hez"
-
-#~ msgid ""
-#~ "\n"
-#~ "Changed config file: %s"
-#~ msgstr ""
-#~ "\n"
-#~ "Megváltozott beállító fájl: %s"
-
-#~ msgid "Checking /%s "
-#~ msgstr "/%s ellenőrzése "
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Biztonsági kapcsoló: a system.devel már telepítve van"
-
-#~ msgid "Source is part of %s component"
-#~ msgstr "A forrás a(z) %s komponens része."
-
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "PartOf címke nincs definiálva, komponens keresése"
-
-#~ msgid "Done."
-#~ msgstr "Kész."
-
-#~ msgid ""
-#~ "\n"
-#~ "Package %s is corrupt."
-#~ msgstr ""
-#~ "\n"
-#~ "A(z) %s csomag sérült."
+#~ msgid "* Checking %s... "
+#~ msgstr "* %s ellenőrzése... "
 
 #~ msgid ""
 #~ "\n"
@@ -3570,8 +3475,103 @@ msgstr "Érvénytelen verzió-sztring: '%s'"
 #~ "\n"
 #~ "A(z) %s csomag konfigurációs állományai megváltoztak."
 
-#~ msgid "* Checking %s... "
-#~ msgstr "* %s ellenőrzése... "
+#~ msgid ""
+#~ "\n"
+#~ "Package %s is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "A(z) %s csomag sérült."
 
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Csomagok elhelyezése a munkakönyvtárban."
+#~ msgid "Done."
+#~ msgstr "Kész."
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "PartOf címke nincs definiálva, komponens keresése"
+
+#~ msgid "Source is part of %s component"
+#~ msgstr "A forrás a(z) %s komponens része."
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Biztonsági kapcsoló: a system.devel már telepítve van"
+
+#~ msgid "Checking /%s "
+#~ msgstr "/%s ellenőrzése "
+
+#~ msgid ""
+#~ "\n"
+#~ "Changed config file: %s"
+#~ msgstr ""
+#~ "\n"
+#~ "Megváltozott beállító fájl: %s"
+
+#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def"
+#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} hozzáadva %s/language.%s.def-hez"
+
+#~ msgid "%s is added to %s/language.%s.dat"
+#~ msgstr "%s hozzáadva %s/language.%s.dat-hoz"
+
+#~ msgid "\\languages{%s}{%s}{}{%s}{%s} is added to %s/language.%s.def "
+#~ msgstr "\\languages{%s}{%s}{}{%s}{%s} hozzáadva %s/language.%s.def-hez "
+
+#~ msgid "%s %s is added to %s/language.%s.dat "
+#~ msgstr "%s %s hozzáadva %s/language.%s.dat-hoz "
+
+#~ msgid "Upgrading to new distribution build"
+#~ msgstr "Frissítés a disztribúció új build-változatára"
+
+#~ msgid "Downgrade to old distribution build?"
+#~ msgstr "Visszatér a disztribúció korábbi build-változatára?"
+
+#~ msgid "Do not take build no into account."
+#~ msgstr "Nem veszi figyelembe a \"build-no\" kapcsolót."
+
+#~ msgid "PiSi binary package formats: '1.0', '1.1' (default)"
+#~ msgstr "PiSi bináris csomag formátumok: 1.0', '1.1' (alapértelmezett)"
+
+#~ msgid "package_format must be one of %s "
+#~ msgstr "a csomag formátuma csak a következők egyike lehet:  %s"
+
+#~ msgid "Indexing current directory."
+#~ msgstr "Az aktuális könyvtár indexelése."
+
+#~ msgid "zip compression not supported yet"
+#~ msgstr "A zip tömörítés még nem támogatott."
+
+#~ msgid "gzip compression not supported yet"
+#~ msgstr "A gzip tömörítés még nem támogatott."
+
+#~ msgid "(found old version %s)"
+#~ msgstr "(régebbi verziójú %s-t találtam)"
+
+#~ msgid "(no previous build found, setting build no to 1.)"
+#~ msgstr "(nem találtam régebbi build-et, a sorszám 1-re lesz állítva)"
+
+#~ msgid "(old package lacks a build no, setting build no to 1.)"
+#~ msgstr "(a régi csomgnak nincs build száma, az új build szám ezért 1. lesz)"
+
+#~ msgid "There are changes, incrementing build no to %d"
+#~ msgstr "Változásokat észleltem, a build szám így növelve lesz. Az új érték: %d."
+
+#~ msgid "There is no change from previous build %d"
+#~ msgstr "Nincs változás az előző build-hez (%d) képest."
+
+#~ msgid "Generating %s,"
+#~ msgstr "%s generálása,"
+
+#~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
+#~ msgstr "A build számok használata nem lehetséges. Ha tároló számára épít, engedélyezze a buildno opciót a pisi.conf-ban."
+
+#~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
+#~ msgstr "A telepési könyvtárban (%s) található valamennyi fájl a csomag(ok)ba gyűjtve"
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Nem hozható létre különbözet ugyanazon csomagból!"
+
+#~ msgid "Creating delta PiSi package between %s %s"
+#~ msgstr "PiSi különbözeti csomag létrehozása %s és %s között."
+
+#~ msgid "Package %s is already at the latest build %s."
+#~ msgstr "A(z) %s csomag már a legutolsó build számot viseli: %s."
+
+#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
+#~ msgstr "Név: %s, verzió: %s, kiadás: %s, build: %s\n"

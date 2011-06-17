@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pisi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-17 14:12+0300\n"
+"POT-Creation-Date: 2011-06-17 14:30+0300\n"
 "PO-Revision-Date: 2010-12-27 10:06+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@trixon.se>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
@@ -586,7 +586,7 @@ msgstr "Rensar byggkatalog..."
 
 #: pisi/api.py:540
 #, fuzzy, python-format
-msgid "Removing cache file %s"
+msgid "Removing cache file %s..."
 msgstr "Tar bort paketet %s"
 
 #: pisi/api.py:571
@@ -3206,54 +3206,8 @@ msgstr ""
 msgid "Invalid version string: '%s'"
 msgstr "Ogiltig versionssträng: '%s'"
 
-#~ msgid "Generating %s,"
-#~ msgstr "Skapar %s,"
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Kan inte skapa delta av samma paket!"
-
-#~ msgid "Creating delta PiSi package between %s %s"
-#~ msgstr "Skapar delta-PiSi-paket mellan %s och %s"
-
-#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
-#~ msgstr "Namn: %s, version: %s, utgåva: %s, bygge %s\n"
-
-#~ msgid "Repository distribution does not match. Removing %s from system."
-#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort %s från systemet."
-
-#~ msgid "Update PiSi database for repository %s?"
-#~ msgstr "Uppdatera PiSi-databasen för %s-förrådet?"
-
-#~ msgid "Repository architecture does not match. Removing %s from system."
-#~ msgstr "Förrådet % finns inte och kan därmed inte tas bort."
-
-#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
-
-#~ msgid "Safety switch: Following packages in system.base will be installed: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
-
-#~ msgid "Storing %s."
-#~ msgstr "Lagrar %s."
-
-#~ msgid "Storing %s, "
-#~ msgstr "Lagrar %s, "
-
-#~ msgid "Checking /%s "
-#~ msgstr "Kontrollerar /%s "
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Säkerhetslås: system.devel är redan installerad"
-
-#~ msgid "Done."
-#~ msgstr "Klar."
-
-#~ msgid ""
-#~ "\n"
-#~ "Package %s is corrupt."
-#~ msgstr ""
-#~ "\n"
-#~ "Paketet %s är trasigt."
+#~ msgid "* Checking %s... "
+#~ msgstr "* Kontrollerar %s... "
 
 #~ msgid ""
 #~ "\n"
@@ -3262,5 +3216,51 @@ msgstr "Ogiltig versionssträng: '%s'"
 #~ "\n"
 #~ "Paketet %s har förändrade konfigurationsfiler."
 
-#~ msgid "* Checking %s... "
-#~ msgstr "* Kontrollerar %s... "
+#~ msgid ""
+#~ "\n"
+#~ "Package %s is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "Paketet %s är trasigt."
+
+#~ msgid "Done."
+#~ msgstr "Klar."
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Säkerhetslås: system.devel är redan installerad"
+
+#~ msgid "Checking /%s "
+#~ msgstr "Kontrollerar /%s "
+
+#~ msgid "Storing %s, "
+#~ msgstr "Lagrar %s, "
+
+#~ msgid "Storing %s."
+#~ msgstr "Lagrar %s."
+
+#~ msgid "Safety switch: Following packages in system.base will be installed: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
+
+#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
+
+#~ msgid "Repository architecture does not match. Removing %s from system."
+#~ msgstr "Förrådet % finns inte och kan därmed inte tas bort."
+
+#~ msgid "Update PiSi database for repository %s?"
+#~ msgstr "Uppdatera PiSi-databasen för %s-förrådet?"
+
+#~ msgid "Repository distribution does not match. Removing %s from system."
+#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort %s från systemet."
+
+#~ msgid "Name: %s, version: %s, release: %s, build %s\n"
+#~ msgstr "Namn: %s, version: %s, utgåva: %s, bygge %s\n"
+
+#~ msgid "Creating delta PiSi package between %s %s"
+#~ msgstr "Skapar delta-PiSi-paket mellan %s och %s"
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Kan inte skapa delta av samma paket!"
+
+#~ msgid "Generating %s,"
+#~ msgstr "Skapar %s,"
