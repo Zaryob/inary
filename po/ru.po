@@ -1,19 +1,19 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR ORGANIZATION
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-17 14:30+0300\n"
+"POT-Creation-Date: 2011-06-17 14:12+0300\n"
 "PO-Revision-Date: 2010-12-18 22:24+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: /usr/lib/python2.7/optparse.py:140
@@ -567,24 +567,24 @@ msgid "%s package already fetched"
 msgstr "%s пакет уже получен"
 
 #: pisi/api.py:532
-#, fuzzy, python-format
+#, python-format
 msgid "Cleaning package cache %s..."
-msgstr "Тестирование пакета..."
+msgstr "Очистка кэша пакетов %s..."
 
 #: pisi/api.py:534
-#, fuzzy, python-format
+#, python-format
 msgid "Cleaning source archive cache %s..."
-msgstr "Не могу найти пакет исходного кода: %s"
+msgstr "Очистка кеша архивов исходных файлов %s..."
 
 #: pisi/api.py:536
-#, fuzzy, python-format
+#, python-format
 msgid "Cleaning temporary directory %s..."
-msgstr "Очистка директории для сборки..."
+msgstr "Очистка временного каталога %s..."
 
 #: pisi/api.py:540
-#, fuzzy, python-format
-msgid "Removing cache file %s..."
-msgstr "Удаление пакета %s"
+#, python-format
+msgid "Removing cache file %s"
+msgstr "Удаление файла кэша %s."
 
 #: pisi/api.py:571
 msgid "Taking snapshot of the system"
@@ -1475,20 +1475,20 @@ msgstr ""
 "Используйте \"%prog help <команда>\" для проверки особой команды.\n"
 
 #: pisi/cli/history.py:28
-msgid "emerge"
-msgstr "emerge"
-
-#: pisi/cli/history.py:28
-msgid "install"
-msgstr "установить"
+msgid "upgrade"
+msgstr "обновить"
 
 #: pisi/cli/history.py:28
 msgid "remove"
 msgstr "удалить"
 
 #: pisi/cli/history.py:28
-msgid "repository update"
-msgstr "обновление репозитория"
+msgid "emerge"
+msgstr "emerge"
+
+#: pisi/cli/history.py:28
+msgid "install"
+msgstr "установить"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1499,8 +1499,8 @@ msgid "takeback"
 msgstr "возврат"
 
 #: pisi/cli/history.py:28
-msgid "upgrade"
-msgstr "обновить"
+msgid "repository update"
+msgstr "обновление репозитория"
 
 #: pisi/cli/history.py:31
 msgid ""
@@ -3314,7 +3314,7 @@ msgstr "Неизвестный тип архива '%s' задан для '%s'."
 #: pisi/sourcearchive.py:127
 #, python-format
 msgid "Pisi needs %s to unpack this archive but it is not installed."
-msgstr ""
+msgstr "Pisi необходим %s для распаковки архива, но он не установлен."
 
 #: pisi/specfile.py:164
 #, python-format
@@ -3448,40 +3448,11 @@ msgstr "Неверное имя дельта пакета: %s"
 msgid "Invalid version string: '%s'"
 msgstr "Недопустимая строка версии: '%s'"
 
-#~ msgid ""
-#~ "\n"
-#~ "Changed config file: %s"
-#~ msgstr ""
-#~ "\n"
-#~ "Изменен конфигурационный файл: %s"
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Пакеты в рабочей директории."
 
-#~ msgid "Checking /%s "
-#~ msgstr "Проверка /%s"
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Изменение безопасности: system.devel уже установлен"
-
-#~ msgid "Multiple 'Path' tags specified for this path: %s"
-#~ msgstr "Множественные тэги 'Path' определены для этого пути: %s"
-
-#~ msgid "Path must start with a slash: %s"
-#~ msgstr "Путь должен начинаться с \"/\": %s"
-
-#~ msgid "Source is part of %s component"
-#~ msgstr "Источник является частью %s компонента"
-
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "Тег PartOf не указан, поиск компонента"
-
-#~ msgid "Done."
-#~ msgstr "Выполнено."
-
-#~ msgid ""
-#~ "\n"
-#~ "Package %s is corrupt."
-#~ msgstr ""
-#~ "\n"
-#~ "Package %s поврежден."
+#~ msgid "* Checking %s... "
+#~ msgstr "* Проверка %s... "
 
 #~ msgid ""
 #~ "\n"
@@ -3490,8 +3461,37 @@ msgstr "Недопустимая строка версии: '%s'"
 #~ "\n"
 #~ "Package %s изменение конфигурационного файла."
 
-#~ msgid "* Checking %s... "
-#~ msgstr "* Проверка %s... "
+#~ msgid ""
+#~ "\n"
+#~ "Package %s is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "Package %s поврежден."
 
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Пакеты в рабочей директории."
+#~ msgid "Done."
+#~ msgstr "Выполнено."
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "Тег PartOf не указан, поиск компонента"
+
+#~ msgid "Source is part of %s component"
+#~ msgstr "Источник является частью %s компонента"
+
+#~ msgid "Path must start with a slash: %s"
+#~ msgstr "Путь должен начинаться с \"/\": %s"
+
+#~ msgid "Multiple 'Path' tags specified for this path: %s"
+#~ msgstr "Множественные тэги 'Path' определены для этого пути: %s"
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Изменение безопасности: system.devel уже установлен"
+
+#~ msgid "Checking /%s "
+#~ msgstr "Проверка /%s"
+
+#~ msgid ""
+#~ "\n"
+#~ "Changed config file: %s"
+#~ msgstr ""
+#~ "\n"
+#~ "Изменен конфигурационный файл: %s"
