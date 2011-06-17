@@ -26,6 +26,7 @@ import pisi.db
 usage = _("""Verify installation
 
 Usage: check [<package1> <package2> ... <packagen>]
+       check -c <component>
 
 <packagei>: package name
 
