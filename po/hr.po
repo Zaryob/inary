@@ -14,11 +14,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Country: CROATIA\n"
 "Language: \n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-Language: Croatian\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Country: CROATIA\n"
 
 #: /usr/lib/python2.7/optparse.py:140
 #, python-format
@@ -249,7 +249,7 @@ msgstr ""
 #: pisi/actionsapi/pisitools.py:169
 #, python-format
 msgid "No file matched pattern \"%s\". 'domove' operation failed."
-msgstr ""
+msgstr "Nijedna datoteka se ne podudara sa uzorakom \"%s\". 'domove' operacija nije uspjela."
 
 #: pisi/actionsapi/pisitools.py:188
 #, python-format
@@ -269,7 +269,7 @@ msgstr ""
 #: pisi/actionsapi/pisitools.py:219
 #, python-format
 msgid "File does not exist or permission denied: %s"
-msgstr ""
+msgstr "Datoteka ne postoji ili je odbijena dozvola: %s"
 
 #: pisi/actionsapi/pisitools.py:236
 #, python-format
@@ -394,47 +394,47 @@ msgstr ""
 #: pisi/actionsapi/shelltools.py:134
 #, python-format
 msgid "ActionsAPI [move]: Permission denied: %s to %s"
-msgstr ""
+msgstr "ActionsAPI [Move]: Dozvola odbijena: %s u %s"
 
 #: pisi/actionsapi/shelltools.py:136
 #, python-format
 msgid "ActionsAPI [move]: File %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [Move]: Datoteka %s ne postoji."
 
 #: pisi/actionsapi/shelltools.py:143
 #, python-format
 msgid "ActionsAPI [copy]: No file matched pattern \"%s\"."
-msgstr ""
+msgstr "ActionsAPI [primjerak]: Nijedna datoteka se ne podudara sa uzorakom \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:150
 #, python-format
 msgid "ActionsAPI [copy]: Permission denied: %s to %s"
-msgstr ""
+msgstr "ActionsAPI [primjerak]: Dozvola odbijena: %s u %s"
 
 #: pisi/actionsapi/shelltools.py:166
 #, python-format
 msgid "ActionsAPI [copy]: File %s does not exist."
-msgstr ""
+msgstr "ActionsAPI [primjerak]: Datoteka %s ne postoji."
 
 #: pisi/actionsapi/shelltools.py:181
 #, python-format
 msgid "ActionsAPI [copytree] %s to %s: %s"
-msgstr ""
+msgstr "ActionsAPI [copytree] %s u %s: %s"
 
 #: pisi/actionsapi/shelltools.py:183
 #, python-format
 msgid "ActionsAPI [copytree]: Directory %s doesn't exists."
-msgstr ""
+msgstr "ActionsAPI [copytree]: Direktorij %s ne postoji."
 
 #: pisi/actionsapi/shelltools.py:191
 #, python-format
 msgid "ActionsAPI [touch]: No file matched pattern \"%s\"."
-msgstr ""
+msgstr "ActionsAPI [touch]:  Nijedna datoteka se ne podudara sa uzorakom \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:200
 #, python-format
 msgid "ActionsAPI [touch]: Permission denied: %s"
-msgstr ""
+msgstr "ActionsAPI [touch]: Dozvola odbijena: %s"
 
 #: pisi/actionsapi/shelltools.py:255
 #, python-format
@@ -463,7 +463,7 @@ msgstr "Instalacija dokumenata nije uspjela "
 
 #: pisi/actionsapi/texlivemodules.py:77
 msgid "Installing texmf files failed"
-msgstr ""
+msgstr "Instaliranje texmf datoteke nije uspjelo"
 
 #: pisi/actionsapi/texlivemodules.py:81
 msgid "Installing config files failed"
@@ -496,12 +496,12 @@ msgstr "Simbolička poveznica  %s preskočena (datoteka postoji) "
 #: pisi/actionsapi/texlivemodules.py:104
 #, python-format
 msgid "Making symlink from %s to %s"
-msgstr ""
+msgstr "Izrada simboličke veze sa %s u %s"
 
 #: pisi/actionsapi/texlivemodules.py:153
 #, python-format
 msgid "Creating /etc/texmf/%s.d"
-msgstr ""
+msgstr "Stvaranje /etc/texmf/%s.d "
 
 #: pisi/actionsapi/texlivemodules.py:155
 #, python-format
@@ -536,7 +536,7 @@ msgstr ""
 #: pisi/actionsapi/texlivemodules.py:279
 #, python-format
 msgid "Language file  %s  already generated."
-msgstr ""
+msgstr " Datoteka jezika %s je već generirana."
 
 #: pisi/actionsapi/texlivemodules.py:281
 #, python-format
@@ -1052,7 +1052,7 @@ msgstr "Provjera integriteta%s"
 
 #: pisi/cli/check.py:105
 msgid "Broken"
-msgstr ""
+msgstr "Slomljen"
 
 #: pisi/cli/check.py:110
 msgid "Unknown"
@@ -1080,7 +1080,7 @@ msgstr "Oštećena datoteka: /%s"
 #: pisi/cli/check.py:130
 #, python-format
 msgid "Modified configuration file: /%s"
-msgstr ""
+msgstr "Izmjenjena konfiguracijska datoteka: /%s"
 
 #: pisi/cli/check.py:135
 #, python-format
@@ -1110,7 +1110,7 @@ msgstr "Naredba nema ime"
 #: pisi/cli/command.py:34
 #, python-format
 msgid "Duplicate command %s"
-msgstr ""
+msgstr "Udvostruči naredbu %s"
 
 #: pisi/cli/command.py:71 pisi/cli/pisicli.py:134
 #, python-format
@@ -1127,7 +1127,7 @@ msgstr "Promjena root sustava za PiSi naredbe"
 
 #: pisi/cli/command.py:101
 msgid "Assume yes in all yes/no queries"
-msgstr ""
+msgstr "Pretpostavimo da u svim da/ne pitanjima"
 
 #: pisi/cli/command.py:105
 msgid "Keep bandwidth usage under specified KB's"
