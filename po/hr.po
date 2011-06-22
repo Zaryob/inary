@@ -14,11 +14,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Country: CROATIA\n"
 "Language: \n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-Language: Croatian\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Country: CROATIA\n"
 
 #: /usr/lib/python2.7/optparse.py:140
 #, python-format
@@ -506,7 +506,7 @@ msgstr "Stvaranje /etc/texmf/%s.d "
 #: pisi/actionsapi/texlivemodules.py:155
 #, python-format
 msgid "Moving (and symlinking) /usr/share/texmf/%s to /etc/texmf/%s.d"
-msgstr ""
+msgstr "Premještanje (i simboličko povezivanje) /usr/share/texmf /%s/ u etc/ exmf/ %s.d"
 
 #: pisi/actionsapi/texlivemodules.py:206
 #, python-format
@@ -531,7 +531,7 @@ msgstr ""
 #: pisi/actionsapi/texlivemodules.py:272
 #, python-format
 msgid "f %s is added to %s/%s-config"
-msgstr ""
+msgstr "f %s je dodan u %s/%s-config"
 
 #: pisi/actionsapi/texlivemodules.py:279
 #, python-format
@@ -644,7 +644,7 @@ msgstr "%s informacije repozitorija su dopunjene."
 
 #: pisi/api.py:850
 msgid "Updating database at any rate as requested"
-msgstr ""
+msgstr "Dopuna baze podataka u svakom slučaju kako je zahtjevano"
 
 #: pisi/api.py:863
 msgid "Package database updated."
@@ -714,6 +714,8 @@ msgid ""
 "File conflicts:\n"
 "%s"
 msgstr ""
+"Sukobi datoteke:\n"
+"%s"
 
 #: pisi/atomicoperations.py:241
 msgid "Re-install same version package?"
@@ -771,7 +773,7 @@ msgstr "Pokušava ukloniti nepostojeći paket"
 #: pisi/atomicoperations.py:618
 #, python-format
 msgid "Not removing conflicted file : %s"
-msgstr ""
+msgstr "Ne uklanjanje sporne datoteke: %s"
 
 #: pisi/atomicoperations.py:646
 #, python-format
@@ -869,7 +871,7 @@ msgstr ""
 #: pisi/cli/addrepo.py:74
 #, python-format
 msgid "%s repository could not be reached. Removing %s from system."
-msgstr ""
+msgstr "%s repozitorij nije mogao biti dohvaćen. Uklanjanje %s iz sustava."
 
 #: pisi/cli/blame.py:24
 msgid ""
@@ -908,7 +910,7 @@ msgstr "Održavatelj paketa: %s <%s>\n"
 #: pisi/cli/blame.py:71
 #, python-format
 msgid "Release Updater: %s <%s>\n"
-msgstr ""
+msgstr "Dopunitelj izdanja: %s <%s>\n"
 
 #: pisi/cli/blame.py:72
 #, python-format
@@ -946,7 +948,7 @@ msgstr "Izlazni direktorij za napravljene pakete"
 
 #: pisi/cli/build.py:74
 msgid "Bypass errors from ActionsAPI"
-msgstr ""
+msgstr "Zaobiđi greške iz ActionsAPI"
 
 #: pisi/cli/build.py:79 pisi/cli/command.py:208
 msgid "Bypass safety switch"
@@ -1207,6 +1209,14 @@ msgid ""
 "packages by comparing the sha1sum of files and creates\n"
 "a delta package with the changed files.\n"
 msgstr ""
+"Stvara delta pakete\n"
+"\n"
+"Uporaba: delta staripaket1 staripaket2 ... novipaket\n"
+" delta -t novipaket staripaket1 staripaket2 ...\n"
+"\n"
+"Delta naredba nalazi promjenjene datoteke između danih\n"
+"paketa uspoređujući  sha1sum datoteka i stvara \n"
+"a delta paket sa izmjenjenim datotekama.\n"
 
 #: pisi/cli/delta.py:46
 msgid "delta options"
@@ -1242,6 +1252,13 @@ msgid ""
 "\n"
 "You can also give the name of a component.\n"
 msgstr ""
+"Gradnja i instalacija PiSi izvornih paketa iz repozitorija\n"
+"\\ nUporaba: emerge <sourcename> ... \n"
+"\n"
+"Trebate dati ime izvornog paketa za\n"
+"preuzimanje iz repozitorija koji sadrži izvorne pakete.\n"
+"\n"
+"Također možete dati ime komponente.\n"
 
 #: pisi/cli/emerge.py:44
 msgid "emerge options"
@@ -1312,7 +1329,7 @@ msgstr ""
 
 #: pisi/cli/graph.py:43
 msgid "graph options"
-msgstr ""
+msgstr "Opcije grafikona"
 
 #: pisi/cli/graph.py:47
 msgid "Specify a particular repository"
@@ -1320,7 +1337,7 @@ msgstr "Odredite konkretan repozitorij"
 
 #: pisi/cli/graph.py:50
 msgid "Graph of installed packages"
-msgstr ""
+msgstr "Grafikon instaliranih paketa"
 
 #: pisi/cli/graph.py:53
 msgid "Do not show installed packages"
@@ -1418,11 +1435,11 @@ msgstr "opcije povijesti"
 
 #: pisi/cli/history.py:53
 msgid "Output only the last n operations"
-msgstr ""
+msgstr "Izlazni ispis samo zadnjih n operacija"
 
 #: pisi/cli/history.py:55
 msgid "Take snapshot of the current system"
-msgstr ""
+msgstr "Napravite snimak trenutnog sustava"
 
 #: pisi/cli/history.py:57
 msgid "Takeback to the state after the given operation finished"
@@ -1464,7 +1481,7 @@ msgstr "opcije indeksa"
 
 #: pisi/cli/index.py:53
 msgid "Store absolute links for indexed files."
-msgstr ""
+msgstr "Pohrani apsolutne veze za indeksirane datoteke."
 
 #: pisi/cli/index.py:58
 msgid "Index output file"
@@ -1476,7 +1493,7 @@ msgstr ""
 
 #: pisi/cli/index.py:69
 msgid "Do not index PiSi spec files."
-msgstr ""
+msgstr "Ne indeksiraj PiSi spec datoteke."
 
 #: pisi/cli/index.py:74
 msgid "Do not sign index."
@@ -1493,7 +1510,7 @@ msgstr ""
 
 #: pisi/cli/info.py:45
 msgid "info options"
-msgstr ""
+msgstr "opcije informacija"
 
 #: pisi/cli/info.py:52
 msgid "Show a list of package files."
@@ -1513,11 +1530,11 @@ msgstr "Ne pokazuj detalje"
 
 #: pisi/cli/info.py:61
 msgid "Output in xml format"
-msgstr ""
+msgstr "Izlaz u XML formatu"
 
 #: pisi/cli/info.py:129
 msgid "Reverse Dependencies:"
-msgstr ""
+msgstr "Obrnute zavisnosti:"
 
 #: pisi/cli/info.py:140
 msgid "Reverse Build Dependencies:"
@@ -1562,7 +1579,7 @@ msgstr "[Izvor]"
 #: pisi/cli/info.py:189
 #, python-format
 msgid "%s package is not found in source repositories"
-msgstr ""
+msgstr "%s paket nije nađen u repozitoriju izvora"
 
 #: pisi/cli/install.py:25
 msgid ""
@@ -1576,6 +1593,15 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
+"Instaliraj PiSi pakete\n"
+"\n"
+"Uporaba: instaliraj <paket1> <paket2> ... <paketn>\n"
+"\n"
+"Možete koristiti imena datoteka, URI-je ili imena paketa za pakete. Ako ste\n"
+"odredili ime paketa,tada trewba postojati u određenom repozitoriju.\n"
+"\n"
+"Također možete odrediti komponente umjesto imena paketa, koje će biti\n"
+"proširene na imena paketa.\n"
 
 #: pisi/cli/install.py:44
 msgid "install options"
@@ -1591,7 +1617,7 @@ msgstr "Preskoči provjeru izdanja distribucije i arhitekture"
 
 #: pisi/cli/install.py:57
 msgid "Install component's and recursive components' packages"
-msgstr ""
+msgstr "Instalirajte komponentu i rekurzivne pakete komponente"
 
 #: pisi/cli/install.py:59
 msgid "Name of the component's repository"
@@ -1624,10 +1650,16 @@ msgid ""
 "repositories. If no repository is specified, we list packages in\n"
 "all repositories.\n"
 msgstr ""
+"Izlistaj dostupne pakete u repozitorijima\n"
+"\n"
+"Uporaba: izlistaj-dostupne[ <repo1><repo2> ... repon]\n"
+"  nDaje kratak popis PiSi paketa objavljenih u navedenom\n"
+"repozitorijima. Ako nijedan repozitorij nije naveden, mi listamo pakete u\n"
+"svim repozitorijima.\n"
 
 #: pisi/cli/listavailable.py:45
 msgid "list-available options"
-msgstr ""
+msgstr "opcije izlistaj-dostupno"
 
 #: pisi/cli/listavailable.py:47 pisi/cli/listcomponents.py:42
 #: pisi/cli/listinstalled.py:48 pisi/cli/listsources.py:41
@@ -1668,7 +1700,7 @@ msgstr ""
 
 #: pisi/cli/listcomponents.py:44 pisi/cli/search.py:47
 msgid "Name of the source or package repository"
-msgstr ""
+msgstr "Ime repozitorija izvora ili paketa"
 
 #: pisi/cli/listinstalled.py:24
 msgid ""
@@ -1676,6 +1708,9 @@ msgid ""
 "\n"
 "Usage: list-installed\n"
 msgstr ""
+"Ispiši listu svih instaliranih paketa\n"
+"\n"
+"Uporaba: list-installed\n"
 
 #: pisi/cli/listinstalled.py:40
 msgid "list-installed options"
@@ -1691,7 +1726,7 @@ msgstr "Lista instaliranih paketa pod danom komponentom"
 
 #: pisi/cli/listinstalled.py:52 pisi/cli/listupgrades.py:48
 msgid "Show detailed install info"
-msgstr ""
+msgstr "Pokaži detaljnu informaciju o instalaciji"
 
 #: pisi/cli/listinstalled.py:78 pisi/cli/listupgrades.py:73
 msgid "Package Name          |St|        Version|  Rel.|  Distro|             Date"
@@ -1710,7 +1745,7 @@ msgstr ""
 
 #: pisi/cli/listnewest.py:44
 msgid "list-newest options"
-msgstr ""
+msgstr "opcije listaj-najnovije"
 
 #: pisi/cli/listnewest.py:46
 msgid "List new packages added to repository after this given date formatted as yyyy-mm-dd"
@@ -1752,11 +1787,11 @@ msgstr ""
 
 #: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
 msgid "active"
-msgstr ""
+msgstr "aktivan"
 
 #: pisi/cli/listrepo.py:41
 msgid "inactive"
-msgstr ""
+msgstr "neaktivan"
 
 #: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
 #, python-format
