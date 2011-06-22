@@ -771,7 +771,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             return l
 
         def encode(node, l, errs):
-            if l and len(l) > 0:
+            if l:
                 for item in l:
                     if list_tagpath:
                         listnode = xmlext.addNode(node, list_tagpath, branch = False)
