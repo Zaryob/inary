@@ -179,7 +179,7 @@ msgstr "Pokretanje autoreconf nije uspjelo."
 
 #: pisi/actionsapi/autotools.py:156
 msgid "Running automake failed."
-msgstr ""
+msgstr "Pokretanje automake nije uspjelo."
 
 #: pisi/actionsapi/autotools.py:161
 msgid "Running autoheader failed."
@@ -196,7 +196,7 @@ msgstr ""
 #: pisi/actionsapi/get.py:178
 #, python-format
 msgid "Util %s cannot be found"
-msgstr "Util% s ne može biti pronađen"
+msgstr "Util %s ne može biti pronađen"
 
 #: pisi/actionsapi/get.py:180
 #, python-format
@@ -218,15 +218,15 @@ msgstr "Ne mogu naći datoteku sa informacijama o verziji kernela %s."
 
 #: pisi/actionsapi/libtools.py:38
 msgid "Running ldconfig failed."
-msgstr ""
+msgstr "Pokretanje ldconfig nije uspjelo."
 
 #: pisi/actionsapi/libtools.py:49
 msgid "GNU Config Update Finished."
-msgstr ""
+msgstr "GNU Config završena dopuna."
 
 #: pisi/actionsapi/libtools.py:53
 msgid "Running libtoolize failed."
-msgstr ""
+msgstr "Pokretanje libtoolize nije uspjelo."
 
 #: pisi/actionsapi/perlmodules.py:66
 msgid "perl build failed."
@@ -309,7 +309,7 @@ msgstr "Konfiguracija nije uspjela."
 #: pisi/actionsapi/pythonmodules.py:81
 #, python-format
 msgid "Running %s failed."
-msgstr ""
+msgstr "Pokretannje %s nije uspjelo."
 
 #: pisi/actionsapi/qt4.py:52
 #, python-format
@@ -324,7 +324,7 @@ msgstr "Čini se da postoji više od jedne.pro datoteke,morate odrediti jednu. (
 #: pisi/actionsapi/rubymodules.py:108
 #, python-format
 msgid "Running 'ruby %s' failed."
-msgstr ""
+msgstr "Pokretanje 'ruby %s' nije uspjelo."
 
 #: pisi/actionsapi/shelltools.py:49
 #, python-format
@@ -389,7 +389,7 @@ msgstr "ActionsAPI [unlinkDir]: Direktorij %s ne postoji."
 #: pisi/actionsapi/shelltools.py:127
 #, python-format
 msgid "ActionsAPI [move]: No file matched pattern \"%s\"."
-msgstr ""
+msgstr "ActionsAPI [Move]:  Nijedna datoteka ne odgovara uzorku \"%s\"."
 
 #: pisi/actionsapi/shelltools.py:134
 #, python-format
@@ -439,7 +439,7 @@ msgstr "ActionsAPI [touch]: Dozvola odbijena: %s"
 #: pisi/actionsapi/shelltools.py:255
 #, python-format
 msgid "Command \"%s\" failed, return value was %d."
-msgstr ""
+msgstr "Naredba \"%s\" nije uspjela, povratna vrijednost je %d."
 
 #: pisi/actionsapi/texlivemodules.py:56
 msgid "Moving source files failed"
@@ -640,7 +640,7 @@ msgstr "Dopunjujem repozitorij: %s"
 #: pisi/api.py:848
 #, python-format
 msgid "%s repository information is up-to-date."
-msgstr ""
+msgstr "%s informacije repozitorija su dopunjene."
 
 #: pisi/api.py:850
 msgid "Updating database at any rate as requested"
@@ -913,7 +913,7 @@ msgstr ""
 #: pisi/cli/blame.py:72
 #, python-format
 msgid "Update Date: %s\n"
-msgstr "DAtum dopune: %s\n"
+msgstr "Datum dopune: %s\n"
 
 #: pisi/cli/build.py:25
 msgid ""
@@ -949,12 +949,13 @@ msgid "Bypass errors from ActionsAPI"
 msgstr ""
 
 #: pisi/cli/build.py:79 pisi/cli/command.py:208
+#, fuzzy
 msgid "Bypass safety switch"
-msgstr ""
+msgstr "Zaobići sigurnosni prekidač"
 
 #: pisi/cli/build.py:84
 msgid "Bypass testing step"
-msgstr ""
+msgstr "Zaobiđi korak testiranja"
 
 #: pisi/cli/build.py:89
 msgid "Create a static package with ar files"
@@ -1131,7 +1132,7 @@ msgstr "Pretpostavimo da u svim da/ne pitanjima"
 
 #: pisi/cli/command.py:105
 msgid "Keep bandwidth usage under specified KB's"
-msgstr ""
+msgstr "Držite korištenje propusne moći pod određenim KB-a"
 
 #: pisi/cli/command.py:108
 msgid "Detailed output"
