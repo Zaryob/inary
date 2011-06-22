@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2005-2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -662,7 +662,7 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         def encode(node, value, errs):
             """encode given value inside DOM node"""
-            if value:
+            if value is not None:
                 writetext(node, token, unicode(value))
             else:
                 if req == mandatory:
