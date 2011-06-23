@@ -14,11 +14,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Country: CROATIA\n"
 "Language: \n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-Language: Croatian\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Country: CROATIA\n"
 
 #: /usr/lib/python2.7/optparse.py:140
 #, python-format
@@ -1774,7 +1774,7 @@ msgstr ""
 
 #: pisi/cli/listpending.py:41
 msgid "There are no packages waiting to be configured"
-msgstr ""
+msgstr "Nema paketa koji čekaju da ih se konfigurira"
 
 #: pisi/cli/listrepo.py:23
 msgid ""
@@ -1826,7 +1826,7 @@ msgstr ""
 
 #: pisi/cli/listupgrades.py:46
 msgid "List upgradable packages under given component"
-msgstr ""
+msgstr "Popis nadogradivih paketa u datim komponentama"
 
 #: pisi/cli/listupgrades.py:64 pisi/operations/upgrade.py:146
 msgid "No packages to upgrade."
@@ -1862,11 +1862,11 @@ msgstr ""
 
 #: pisi/cli/rebuilddb.py:45
 msgid "Rebuild files database"
-msgstr ""
+msgstr "Obnovi bazu podataka datoteka"
 
 #: pisi/cli/rebuilddb.py:51
 msgid "Rebuild PiSi databases?"
-msgstr ""
+msgstr "Obnovi PiSi baze podataka?"
 
 #: pisi/cli/remove.py:25
 msgid ""
@@ -1890,7 +1890,7 @@ msgstr ""
 
 #: pisi/cli/remove.py:48
 msgid "Remove component's and recursive components' packages"
-msgstr ""
+msgstr "Uklonite komponente i rekurzivne pakete komponenata"
 
 #: pisi/cli/removerepo.py:21
 msgid ""
@@ -1967,12 +1967,12 @@ msgstr "Paket %s ima datoteku  /%s"
 #: pisi/cli/searchfile.py:52
 #, python-format
 msgid "Path '%s' does not belong to an installed package"
-msgstr ""
+msgstr "Putanja '%s' ne pripada instaliranom paketu"
 
 #: pisi/cli/searchfile.py:65
 #, python-format
 msgid "Searching for %s"
-msgstr ""
+msgstr "U potrazi za %s"
 
 #: pisi/cli/updaterepo.py:24
 msgid ""
@@ -1992,7 +1992,7 @@ msgstr ""
 
 #: pisi/cli/updaterepo.py:46
 msgid "Update database in any case"
-msgstr ""
+msgstr "Dopuni  bazu podataka u svakom slučaju"
 
 #: pisi/cli/upgrade.py:25
 msgid ""
@@ -2028,7 +2028,7 @@ msgstr "Ne dopunjuj repozitorije"
 
 #: pisi/cli/upgrade.py:62
 msgid "Upgrade component's and recursive components' packages"
-msgstr ""
+msgstr "Nadogradnja komponente i rekurzivne pakete komponente "
 
 #: pisi/cli/upgrade.py:64
 msgid "Name of the to be upgraded packages' repository"
@@ -2130,7 +2130,7 @@ msgstr "Odredišni direktorij %s ne postoji:Napravite ga."
 #: pisi/configfile.py:127
 #, python-format
 msgid "No section by name '%s'"
-msgstr ""
+msgstr "Nema sekcije po imenu '%s'"
 
 #: pisi/conflict.py:26 pisi/dependency.py:26 pisi/replace.py:24
 msgid " version >= "
@@ -2199,7 +2199,7 @@ msgstr "Distribucija:%s, Vrijeme instalacije: %s\n"
 #: pisi/db/installdb.py:94
 #, python-format
 msgid "Installation info for package '%s' is broken. Reinstall it to fix this problem."
-msgstr ""
+msgstr "Instalacijska informacija za paket '%s' je slomljena.Ponovno ga instalirajte da biste riješili problem."
 
 #: pisi/db/installdb.py:335
 #, python-format
@@ -2288,17 +2288,17 @@ msgstr "Poslužitelj ne podržava djelomična preuzimanja.Prethodno preuzeti dio
 #: pisi/file.py:35
 #, python-format
 msgid "URL %s already downloaded as %s"
-msgstr ""
+msgstr "URL %s već preuzet kao %s"
 
 #: pisi/file.py:42
 #, python-format
 msgid "No signature found for %s"
-msgstr ""
+msgstr "Nije pronađen potpis za %s"
 
 #: pisi/file.py:50
 #, python-format
 msgid " invalid for %s"
-msgstr ""
+msgstr "neispravno za %s"
 
 #: pisi/file.py:72
 msgid "uri must have type either URI or string"
@@ -2312,7 +2312,7 @@ msgstr ""
 #: pisi/file.py:140
 #, python-format
 msgid "Copying %s to transfer dir"
-msgstr ""
+msgstr "Kopiranje %s u direktorij prijenosa "
 
 #: pisi/file.py:145
 #, python-format
@@ -2335,7 +2335,7 @@ msgstr ""
 #: pisi/file.py:247 pisi/file.py:250
 #, python-format
 msgid "ERROR: gpg --detach-sig %s failed"
-msgstr ""
+msgstr "GREŠKA: gpg --detach-sig %s nije uspjelo"
 
 #: pisi/graph.py:26
 #, python-format
@@ -2379,7 +2379,7 @@ msgstr ""
 
 #: pisi/history.py:104 pisi/history.py:126
 msgid "Unknown package operation"
-msgstr ""
+msgstr "Nepoznata operacija paketa"
 
 #: pisi/index.py:176
 #, python-format
@@ -2436,12 +2436,12 @@ msgstr ""
 #: pisi/operations/build.py:190
 #, python-format
 msgid "Source URI: %s"
-msgstr ""
+msgstr "Izvor URI: %s"
 
 #: pisi/operations/build.py:194
 #, python-format
 msgid "Source %s not found in any active repository."
-msgstr ""
+msgstr "Izvor %s nije pronađen u nijednom aktivnom repozitoriju."
 
 #: pisi/operations/build.py:320
 #, python-format
@@ -2476,12 +2476,12 @@ msgstr ""
 
 #: pisi/operations/build.py:516
 msgid "Unpacking archive(s)..."
-msgstr ""
+msgstr "Raspakiravanje arhive(a)..."
 
 #: pisi/operations/build.py:524
 #, python-format
 msgid " unpacked (%s)"
-msgstr ""
+msgstr "raspakiran (%s)"
 
 #: pisi/operations/build.py:529
 msgid "Setting up source..."
@@ -2512,7 +2512,7 @@ msgstr ""
 #: pisi/operations/build.py:642
 #, python-format
 msgid "Unable to read COMAR script (%s): %s"
-msgstr ""
+msgstr "Nije moguće pročitati COMAR skriptu (%s): %s"
 
 #: pisi/operations/build.py:645
 #, python-format
@@ -2690,6 +2690,8 @@ msgid ""
 "The following list of packages will be installed\n"
 "from repository in the respective order to satisfy dependencies:\n"
 msgstr ""
+"Sljedeći popis paketa biti će instaliran\n"
+"iz repozitorija redoslijedom koji će zadovoljiti zavisnosti:\n"
 
 #: pisi/operations/emerge.py:53
 msgid ""
@@ -2699,7 +2701,7 @@ msgstr ""
 
 #: pisi/operations/emerge.py:61 pisi/operations/install.py:82
 msgid "There are extra packages due to dependencies. Do you want to continue?"
-msgstr ""
+msgstr "Postoje dodatni paketi zbog ovisnosti. Želite li nastaviti?"
 
 #: pisi/operations/emerge.py:95
 #, python-format
@@ -2709,12 +2711,12 @@ msgstr "Ne mogu naći izvorni paket: %s"
 #: pisi/operations/helper.py:51
 #, python-format
 msgid "Selected packages [%s] are in conflict with each other."
-msgstr ""
+msgstr "Odabrani paketi [%s] su u sukobu jedni s drugima."
 
 #: pisi/operations/helper.py:57
 #, python-format
 msgid "[%s conflicts with: %s]\n"
-msgstr ""
+msgstr "[%s u sukobu s: %s]\n"
 
 #: pisi/operations/helper.py:59
 #, python-format
@@ -2725,16 +2727,16 @@ msgstr ""
 
 #: pisi/operations/helper.py:62
 msgid "Remove the following conflicting packages?"
-msgstr ""
+msgstr "Uklonite sljedeće sukobljene pakete?"
 
 #: pisi/operations/helper.py:63
 msgid "Conflicting packages should be removed to continue"
-msgstr ""
+msgstr "Sukobljene pakete treba ukloniti da bi se nastavilo"
 
 #: pisi/operations/history.py:82 pisi/operations/history.py:92
 #, python-format
 msgid "%s could not be found"
-msgstr ""
+msgstr "%s nije moguće pronaći"
 
 #: pisi/operations/history.py:95 pisi/package.py:107 pisi/sourcearchive.py:110
 #, python-format
