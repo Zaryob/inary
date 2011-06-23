@@ -600,9 +600,9 @@ msgid "File %s not found"
 msgstr "Файл %s не найден"
 
 #: pisi/api.py:786
-#, fuzzy, python-format
+#, python-format
 msgid "Building index of PiSi files under %s"
-msgstr "Building index of PiSi files under %s"
+msgstr "Создание индексов файлов PiSi для %s"
 
 #: pisi/api.py:791
 msgid "Index file written"
@@ -1032,7 +1032,6 @@ msgid "  %s (default)"
 msgstr "  %s (default)"
 
 #: pisi/cli/check.py:26
-#, fuzzy
 msgid ""
 "Verify installation\n"
 "\n"
@@ -2743,14 +2742,14 @@ msgid "unable to call function from actions: %s"
 msgstr "Не удалось вызвать функцию из действий: %s"
 
 #: pisi/operations/build.py:751
-#, fuzzy, python-format
+#, python-format
 msgid "Source package '%s' defines a relative 'Path' element: %s"
-msgstr "Source package '%s' defines a relative 'Path' element: %s"
+msgstr "Пакет исходников '%s' устанавливает относительный элемент 'Path' : %s"
 
 #: pisi/operations/build.py:755
-#, fuzzy, python-format
+#, python-format
 msgid "Source package '%s' defines multiple 'Path' tags for %s"
-msgstr "Source package '%s' defines multiple 'Path' tags for %s"
+msgstr "Пакет исходников '%s' устанавливает множественные теги  'Path' для %s"
 
 #: pisi/operations/build.py:784
 msgid "Safety switch: following extra packages in system.devel will be installed: "
