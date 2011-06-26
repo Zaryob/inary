@@ -1642,7 +1642,7 @@ msgstr "Необходим для:"
 
 #: pisi/cli/info.py:140
 msgid "Reverse Build Dependencies:"
-msgstr "Зависимости реверсивного создания:"
+msgstr "Обратные зависимости для сборки:"
 
 #: pisi/cli/info.py:145
 #, python-format
@@ -2900,7 +2900,7 @@ msgstr ""
 
 #: pisi/operations/emerge.py:61 pisi/operations/install.py:82
 msgid "There are extra packages due to dependencies. Do you want to continue?"
-msgstr "Зависимости содержат экстра-пакеты. Вы хотите продолжить?"
+msgstr "Необходимо установить дополнительные пакеты. Вы хотите продолжить?"
 
 #: pisi/operations/emerge.py:95
 #, python-format
@@ -3352,7 +3352,7 @@ msgstr "Обеспечивает:"
 
 #: pisi/specfile.py:380
 msgid "Dependencies: "
-msgstr "Зависимости:"
+msgstr "Зависимости: "
 
 #: pisi/specfile.py:434
 msgid "translations.xml file is badly formed."
