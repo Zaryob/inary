@@ -2771,7 +2771,7 @@ msgstr ""
 
 #: pisi/operations/install.py:47 pisi/operations/install.py:134
 msgid "The following package(s) are already installed and are not going to be installed again:"
-msgstr ""
+msgstr "Sljedeći paket(i) su već instalirani, i neće biti instalirani opet:"
 
 #: pisi/operations/install.py:53 pisi/operations/install.py:213
 msgid "No packages to install."
@@ -2798,25 +2798,25 @@ msgstr ""
 #: pisi/operations/install.py:165
 #, python-format
 msgid "Package %s is not compatible with your distribution release %s %s."
-msgstr ""
+msgstr "Paket %s nije kompatibilan s vašim izdanjem distribucije %s %s."
 
 #: pisi/operations/install.py:169
 #, python-format
 msgid "Package %s (%s) is not compatible with your %s architecture."
-msgstr ""
+msgstr "Paket %s (%s) nije kompatibilan s vašom %s arhitekturom."
 
 #: pisi/operations/install.py:192
 #, python-format
 msgid "External dependencies not satisfied: %s"
-msgstr ""
+msgstr "Vanjske zavisnosti nisu zadovoljene: %s"
 
 #: pisi/operations/install.py:197
 msgid "The following packages will be installed in order to satisfy dependencies:"
-msgstr ""
+msgstr "Sljedeći paketi će biti instalirani kako bi se zadovoljile zavisnosti:"
 
 #: pisi/operations/install.py:201
 msgid "External dependencies not satisfied"
-msgstr ""
+msgstr "Vanjske zavisnosti nisu zadovoljene"
 
 #: pisi/operations/install.py:244
 msgid "Installation order: "
@@ -2825,7 +2825,7 @@ msgstr "Redoslijed instaliranja:"
 #: pisi/operations/install.py:279 pisi/specfile.py:274
 #, python-format
 msgid "%s dependency of package %s is not satisfied"
-msgstr ""
+msgstr "%s zavisnost paketa %s nije zadovoljena"
 
 #: pisi/operations/remove.py:43
 msgid "Safety switch prevents the removal of following packages:\n"
@@ -2857,11 +2857,11 @@ msgstr ""
 #: pisi/operations/remove.py:85
 #, python-format
 msgid "Package %s is not installed. Cannot remove."
-msgstr ""
+msgstr "Paket %s nije instaliran. Ne mogu ukloniti."
 
 #: pisi/operations/remove.py:120
 msgid "Conflicts remain"
-msgstr ""
+msgstr "Sukobi ostaju"
 
 #: pisi/operations/remove.py:128
 msgid "Obsoleted packages remaining"
@@ -2869,11 +2869,11 @@ msgstr ""
 
 #: pisi/operations/remove.py:132
 msgid "Replaced package remains"
-msgstr ""
+msgstr "Zamijenjeni paket ostaje"
 
 #: pisi/operations/upgrade.py:52
 msgid "You must restart the following service(s) manually for the updated software to take effect:"
-msgstr ""
+msgstr "Morate ponovno pokrenuti sljedeće uslugu(e) ručno za dopunjeni  software stupi na snagu:"
 
 #: pisi/operations/upgrade.py:59
 msgid "You must restart your system for the updates in the following package(s) to take effect:"
@@ -2896,7 +2896,7 @@ msgstr "Paket %s nije dostupan u repozitorijima."
 #: pisi/operations/upgrade.py:105
 #, python-format
 msgid "Package %s is already at the latest release %s."
-msgstr ""
+msgstr "Paket %s je već najnovije izdanje %s."
 
 #: pisi/operations/upgrade.py:163
 msgid "The following packages will be upgraded:"
@@ -2909,7 +2909,7 @@ msgstr "Ima dodatnih paketa zbog zavisnosti"
 #: pisi/operations/upgrade.py:254
 #, python-format
 msgid "Dependency %s of %s cannot be satisfied"
-msgstr ""
+msgstr "Zavisnost %s od %s ne može biti zadovoljena"
 
 #: pisi/operations/upgrade.py:255
 msgid "Upgrade is not possible."
@@ -3004,11 +3004,11 @@ msgstr ""
 #: pisi/pxml/autoxml.py:674
 #, python-format
 msgid "Type mismatch. Expected %s, got %s"
-msgstr ""
+msgstr "Neslaganje tipa. Očekivani %s, dobiveni %s "
 
 #: pisi/pxml/autoxml.py:704 pisi/pxml/autoxml.py:825
 msgid "Type mismatch: DOM cannot be decoded"
-msgstr ""
+msgstr "Neslaganje tipa: DOM se ne može dekodirati"
 
 #: pisi/pxml/autoxml.py:707 pisi/pxml/autoxml.py:723 pisi/pxml/autoxml.py:737
 #: pisi/pxml/autoxml.py:828 pisi/pxml/autoxml.py:842 pisi/pxml/autoxml.py:856
@@ -3017,11 +3017,11 @@ msgstr ""
 
 #: pisi/pxml/autoxml.py:720 pisi/pxml/autoxml.py:839
 msgid "Object cannot be encoded"
-msgstr ""
+msgstr "Objekt ne može biti kodiran"
 
 #: pisi/pxml/autoxml.py:734 pisi/pxml/autoxml.py:853
 msgid "Object cannot be formatted"
-msgstr ""
+msgstr "Objekt ne može biti formiran"
 
 #: pisi/pxml/autoxml.py:750
 msgid "List type must contain only one element"
@@ -3059,12 +3059,12 @@ msgstr "Nema pisi paketa: %s* nađen."
 #: pisi/scenarioapi/repoops.py:28
 #, python-format
 msgid "Repo already has package named %s."
-msgstr ""
+msgstr "Repozitorij  već sadrži paket po imenu %s."
 
 #: pisi/scenarioapi/repoops.py:52 pisi/scenarioapi/repoops.py:59
 #, python-format
 msgid "Repo does not have package named %s."
-msgstr ""
+msgstr "Repo ne sadrži paket po imenu %s."
 
 #: pisi/sourcearchive.py:62
 #, python-format
@@ -3074,7 +3074,7 @@ msgstr ""
 #: pisi/sourcearchive.py:73
 #, python-format
 msgid "Source archive is stored: %s/%s"
-msgstr ""
+msgstr "Izvorna arhiva je pohranjena: %s/%s"
 
 #: pisi/sourcearchive.py:79
 #, python-format
@@ -3084,7 +3084,7 @@ msgstr ""
 #: pisi/sourcearchive.py:90
 #, python-format
 msgid "%s mirrors are not defined."
-msgstr ""
+msgstr "%s zrcala nisu definirana."
 
 #: pisi/sourcearchive.py:95
 #, python-format
@@ -3149,7 +3149,7 @@ msgstr "Zavisnosti:"
 
 #: pisi/specfile.py:434
 msgid "translations.xml file is badly formed."
-msgstr ""
+msgstr "translations.xml datoteka je loše formirana."
 
 #: pisi/specfile.py:462
 msgid "Build Dependencies: "
@@ -3171,7 +3171,7 @@ msgstr ""
 #: pisi/util.py:392
 #, python-format
 msgid "Including external link '%s'"
-msgstr ""
+msgstr "Uključujući vanjsku poveznicu '%s'"
 
 #: pisi/util.py:394
 #, python-format
@@ -3230,12 +3230,12 @@ msgstr ""
 #: pisi/util.py:665
 #, python-format
 msgid "Invalid package name: %s"
-msgstr ""
+msgstr "Neispravno ime paketa: %s"
 
 #: pisi/util.py:705
 #, python-format
 msgid "Invalid delta package name: %s"
-msgstr ""
+msgstr "Neispravano ime delta paketa: %s"
 
 #: pisi/version.py:64
 #, python-format
