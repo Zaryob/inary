@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-06-17 14:12+0300\n"
-"PO-Revision-Date: 2011-06-27 00:35+0400\n"
+"PO-Revision-Date: 2011-07-04 23:03+0400\n"
 "Last-Translator: Alexey Ivanov <alexey.ivanes@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "MIME-Version: 1.0\n"
@@ -2769,7 +2769,7 @@ msgid ""
 "Cannot find component.xml in upper directory, Source is now part of unknown "
 "component"
 msgstr ""
-"Не найден файл component.xml в верхнеи каталоге. Пакет сейчас является частью "
+"Не найден файл component.xml в верхнем каталоге. Пакет сейчас является частью "
 "неизвестного компонента"
 
 #: pisi/operations/build.py:516
@@ -3136,7 +3136,7 @@ msgstr "Внешние зависимости не соблюдены"
 
 #: pisi/operations/install.py:244
 msgid "Installation order: "
-msgstr "Порядок установки:"
+msgstr "Порядок установки: "
 
 #: pisi/operations/install.py:279 pisi/specfile.py:274
 #, python-format
@@ -3533,12 +3533,12 @@ msgstr "Ошибка в процессе декомпрессии %s: %s"
 #: pisi/util.py:543
 #, python-format
 msgid "ERROR: patch (%s) failed"
-msgstr "Ошибка: неверный путь (%s)"
+msgstr "СБОЙ: не удалось применить патч (%s)"
 
 #: pisi/util.py:545
 #, python-format
 msgid "ERROR: patch (%s) failed: %s"
-msgstr "Ошибка: не верный путь (%s): %s"
+msgstr "СБОЙ: не удалось применить патч (%s): %s"
 
 #: pisi/util.py:555
 #, python-format
