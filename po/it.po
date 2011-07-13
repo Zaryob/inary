@@ -1,6 +1,6 @@
 # translation of it.po to Italian
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Andrea Decorte <adecorte@gmail.com>, 2007.
 # Davide Siciliano <edivad95@gmail.com>, 2010.
 msgid ""
@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2010-07-01 16:01+0200\n"
 "Last-Translator: Davide Siciliano <edivad95@gmail.com>\n"
 "Language-Team: Italian <pardus-translators@pardus.org.tr>\n"
-"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 1.0\n"
@@ -570,24 +570,24 @@ msgid "%s package already fetched"
 msgstr "%s pacchetto già scaricato"
 
 #: pisi/api.py:532
-#, fuzzy, python-format
+#, python-format
 msgid "Cleaning package cache %s..."
-msgstr "Creazione del pacchetto PiSi %s."
+msgstr "Pulizia della cache del pacchetto %s..."
 
 #: pisi/api.py:534
-#, fuzzy, python-format
+#, python-format
 msgid "Cleaning source archive cache %s..."
-msgstr "Impossibile trovare il pacchetto di sorgenti: %s"
+msgstr "Pulizia della cache di archivio sorgente %s..."
 
 #: pisi/api.py:536
-#, fuzzy, python-format
+#, python-format
 msgid "Cleaning temporary directory %s..."
-msgstr "Pulizia della cartella di compilazione..."
+msgstr "Pulizia della cartella temporanea %s..."
 
 #: pisi/api.py:540
-#, fuzzy, python-format
+#, python-format
 msgid "Removing cache file %s..."
-msgstr "Rimozione del pacchetto %s in corso"
+msgstr "Rimozione di file cache %s..."
 
 #: pisi/api.py:571
 msgid "Taking snapshot of the system"
@@ -689,7 +689,7 @@ msgstr "URI pacchetto: %s"
 
 #: pisi/atomicoperations.py:116
 msgid "Download Error: Package does not match the repository package."
-msgstr ""
+msgstr "Errore di download: Pacchetto non corrisponde al pacchetto di repository."
 
 #: pisi/atomicoperations.py:120
 #, python-format
@@ -1472,20 +1472,20 @@ msgstr ""
 "Utilizzo \"%prog help <comando>\" per aiuto su un comando specifico.\n"
 
 #: pisi/cli/history.py:28
-msgid "emerge"
-msgstr "emergere"
-
-#: pisi/cli/history.py:28
-msgid "install"
-msgstr "installa"
+msgid "upgrade"
+msgstr "aggiorna"
 
 #: pisi/cli/history.py:28
 msgid "remove"
 msgstr "rimuovi"
 
 #: pisi/cli/history.py:28
-msgid "repository update"
-msgstr "aggiornamento del repositorio"
+msgid "emerge"
+msgstr "emergere"
+
+#: pisi/cli/history.py:28
+msgid "install"
+msgstr "installa"
 
 #: pisi/cli/history.py:28
 msgid "snapshot"
@@ -1496,8 +1496,8 @@ msgid "takeback"
 msgstr ""
 
 #: pisi/cli/history.py:28
-msgid "upgrade"
-msgstr "aggiorna"
+msgid "repository update"
+msgstr "aggiornamento del repositorio"
 
 #: pisi/cli/history.py:31
 msgid ""
