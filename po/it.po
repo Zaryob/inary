@@ -1078,34 +1078,30 @@ msgstr "Controllo dell'integrità di %s"
 
 #: pisi/cli/check.py:105
 msgid "Broken"
-msgstr ""
+msgstr "Incompleto"
 
 #: pisi/cli/check.py:110
 msgid "Unknown"
-msgstr ""
+msgstr "Sconosciuto"
 
 #: pisi/cli/check.py:112
 msgid "OK"
 msgstr "Ok"
 
 #: pisi/cli/check.py:118
-#, fuzzy, python-format
+#, python-format
 msgid "Missing file: /%s"
-msgstr ""
-"\n"
-" File non trovato: /%s"
+msgstr "File mancante: /%s"
 
 #: pisi/cli/check.py:122
 #, python-format
 msgid "Access denied: /%s"
-msgstr ""
+msgstr "Accesso negato: /%s"
 
 #: pisi/cli/check.py:126
-#, fuzzy, python-format
+#, python-format
 msgid "Corrupted file: /%s"
-msgstr ""
-"\n"
-"File corrotto: %s"
+msgstr "File corrotto: /%s"
 
 #: pisi/cli/check.py:130
 #, fuzzy, python-format
