@@ -535,11 +535,14 @@ msgstr "MixedMap %s aggiunto a %s/%s.cfg"
 #, python-format
 msgid "p +%s is added to %s/%s-config.ps"
 msgstr ""
+"\t\r\n"
+"\r\n"
+"p +%s si aggiunge alla %s/%s-config.ps"
 
 #: pisi/actionsapi/texlivemodules.py:272
 #, python-format
 msgid "f %s is added to %s/%s-config"
-msgstr ""
+msgstr "f %s è aggiunto %s/%s-config"
 
 #: pisi/actionsapi/texlivemodules.py:279
 #, python-format
@@ -704,7 +707,7 @@ msgstr "Installazione di %s, versione %s, release %s"
 #: pisi/atomicoperations.py:192 pisi/operations/build.py:765
 #, python-format
 msgid "%s-%s is not a valid PiSi version format"
-msgstr ""
+msgstr "%s-%s Non è un valido formato di versione Pisi"
 
 #: pisi/atomicoperations.py:198
 #, python-format
@@ -756,7 +759,7 @@ msgstr "configurazione di %s fallita."
 
 #: pisi/atomicoperations.py:400
 msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
-msgstr ""
+msgstr "Impossibile spostare i seguenti file. Reinstallazione di questo pacchetto è fortemente raccomandato."
 
 #: pisi/atomicoperations.py:491 pisi/atomicoperations.py:494
 #: pisi/atomicoperations.py:501
@@ -861,7 +864,7 @@ msgstr "Ignora il controllo del repositorio della distribuzione"
 
 #: pisi/cli/addrepo.py:45
 msgid "Does not fetch repository index and does not check distribution match"
-msgstr ""
+msgstr "Non recuperare indice della repository e non verificare che la distribuzione corrisponde"
 
 #: pisi/cli/addrepo.py:48
 msgid "Add repository at given position (0 is first)"
@@ -890,15 +893,15 @@ msgstr ""
 
 #: pisi/cli/blame.py:39
 msgid "blame options"
-msgstr ""
+msgstr "Blame delle opzioni"
 
 #: pisi/cli/blame.py:40
 msgid "Blame for the given release"
-msgstr ""
+msgstr "Blame per il rilascio dato"
 
 #: pisi/cli/blame.py:42
 msgid "Blame for all of the releases"
-msgstr ""
+msgstr "Blame per tutte le versioni"
 
 #: pisi/cli/blame.py:68 pisi/specfile.py:370 pisi/specfile.py:456
 #, python-format
@@ -913,7 +916,7 @@ msgstr "Mantainer pacchetto: %s <%s>\n"
 #: pisi/cli/blame.py:71
 #, python-format
 msgid "Release Updater: %s <%s>\n"
-msgstr ""
+msgstr "Aggiornamento del Rilascio: %s <%s>\n"
 
 #: pisi/cli/blame.py:72
 #, python-format
@@ -976,7 +979,7 @@ msgstr "Crea un pacchetto statico con file ar"
 
 #: pisi/cli/build.py:93 pisi/cli/delta.py:64
 msgid "Create the binary package using the given format. Use '-F help' to see a list of supported formats."
-msgstr ""
+msgstr "Creare il pacchetto binario utilizzando il formato specificato. Usa 'F-help' per vedere un elenco dei formati supportati."
 
 #: pisi/cli/build.py:100
 msgid "Use quilt patch management system instead of GNU patch"
@@ -1104,9 +1107,9 @@ msgid "Corrupted file: /%s"
 msgstr "File corrotto: /%s"
 
 #: pisi/cli/check.py:130
-#, fuzzy, python-format
+#, python-format
 msgid "Modified configuration file: /%s"
-msgstr "configurazione di %s fallita."
+msgstr "File di configurazione modificato: /%s"
 
 #: pisi/cli/check.py:135
 #, python-format
@@ -1118,6 +1121,8 @@ msgid ""
 "Pisi was unable to check the integrity of packages which contain files that you don't have read access.\n"
 "Running the check under a privileged user may help fixing this problem."
 msgstr ""
+"Pisi è stato in grado di verificare l'integrità dei pacchetti che contengono i file che non hanno accesso in lettura.\n"
+" Eseguire il  controllo sotto un utente privilegiato può aiutare a risolvere il problema."
 
 #: pisi/cli/clean.py:20
 msgid ""
@@ -1264,7 +1269,7 @@ msgstr "opzioni delta"
 
 #: pisi/cli/delta.py:54
 msgid "Use arg as the new package and treat other arguments as old packages."
-msgstr ""
+msgstr "Utilizzare arg come il nuovo pacchetto e curare gli altri argomenti come i vecchi pacchetti."
 
 #: pisi/cli/delta.py:60
 msgid "Output directory for produced packages."
@@ -1370,7 +1375,7 @@ msgstr ""
 
 #: pisi/cli/fetch.py:41
 msgid "fetch options"
-msgstr ""
+msgstr "recuperare le opzioni"
 
 #: pisi/cli/fetch.py:47
 msgid "Output directory for the fetched packages"
