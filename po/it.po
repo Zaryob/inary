@@ -1634,7 +1634,7 @@ msgstr "Richiesto da:"
 
 #: pisi/cli/info.py:140
 msgid "Reverse Build Dependencies:"
-msgstr ""
+msgstr "Inverti costruzione delle dipendenze:"
 
 #: pisi/cli/info.py:145
 #, python-format
@@ -1709,7 +1709,7 @@ msgstr "Reinstalla i pacchetti già installati"
 
 #: pisi/cli/install.py:51
 msgid "Skip distribution release and architecture check"
-msgstr ""
+msgstr "Salta il controllo del rilascio della distribuzione e dell'architettura"
 
 #: pisi/cli/install.py:57
 msgid "Install component's and recursive components' packages"
@@ -1734,7 +1734,7 @@ msgstr "All'aggiornamento del sistema, ignora i pacchetti e i componenti i cui n
 #: pisi/cli/install.py:93
 #, python-format
 msgid "There is no component named %s"
-msgstr ""
+msgstr "Non vi è alcun componente denominato %s"
 
 #: pisi/cli/listavailable.py:26
 msgid ""
@@ -1802,7 +1802,7 @@ msgstr "opzioni list-components"
 
 #: pisi/cli/listcomponents.py:44 pisi/cli/search.py:47
 msgid "Name of the source or package repository"
-msgstr ""
+msgstr "Nome della repository dei sorgenti o del pacchetto"
 
 #: pisi/cli/listinstalled.py:24
 msgid ""
@@ -1819,7 +1819,6 @@ msgid "list-installed options"
 msgstr "opzioni list-installed"
 
 #: pisi/cli/listinstalled.py:45
-#, fuzzy
 msgid "Only list the installed packages built by the given host"
 msgstr "Elenca solo i pacchetti compilati dal dato host"
 
@@ -1859,11 +1858,11 @@ msgstr "opzioni list-newest"
 
 #: pisi/cli/listnewest.py:46
 msgid "List new packages added to repository after this given date formatted as yyyy-mm-dd"
-msgstr ""
+msgstr "Elenca i pacchetti aggiunte alla repository dopo questa data formattato come aaaa-mm-gg"
 
 #: pisi/cli/listnewest.py:48
 msgid "List new packages added to repository after last nth previous repository update"
-msgstr ""
+msgstr "Elenca i pacchetti aggiunte alla repository dopo l'ultimo aggiornamento ennesima repository precedente"
 
 #: pisi/cli/listnewest.py:76
 #, python-format
