@@ -15,6 +15,7 @@
 # standard library modules
 import os
 import stat
+import errno
 import shutil
 import tarfile
 import zipfile
@@ -339,7 +340,41 @@ class ArchiveTar(ArchiveBase):
                         # If fails, try to remove it
                         shutil.rmtree(tarinfo.name)
 
-            self.tar.extract(tarinfo)
+            try:
+                self.tar.extract(tarinfo)
+            except OSError, e:
+                # Handle the case where an upper directory cannot
+                # be created because of a conflict with an existing
+                # regular file or symlink. In this case, remove
+                # the old file and retry extracting.
+
+                if e.errno != errno.EEXIST:
+                    raise
+
+                # For the path "a/b/c", upper_dirs will be ["a", "a/b"].
+                upper_dirs = []
+                head, tail = os.path.split(tarinfo.name)
+
+                while head and tail:
+                    upper_dirs.insert(0, head)
+                    head, tail = os.path.split(head)
+
+                for path in upper_dirs:
+                    if not os.path.lexists(path):
+                        break
+
+                    if not os.path.isdir(path):
+                        # A file with the same name exists.
+                        # Remove the existing file.
+                        os.remove(path)
+                        break
+                else:
+                    # No conflicts detected! This is probably not the case
+                    # mentioned here. Raise the same exception.
+                    raise
+
+                # Try to extract again.
+                self.tar.extract(tarinfo)
 
             # tarfile.extract does not honor umask. It must be honored
             # explicitly. See --no-same-permissions option of tar(1),
