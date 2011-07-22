@@ -1,5 +1,230 @@
-2011-05-31 Onur Küçük <onur@pardus.org.tr>
+2011-07-14 Fatih Aşıcı <fatih@pardus.org.tr>
+	* archive: Handle possible conflicts if upper directories cannot be created
+
+	Installation fails when overriding a file with a directory. With this
+	change, Pisi will remove the old files before creating the upper
+	directories.
+
+2011-06-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Remove redundant dict variable
+
+2011-06-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* autoxml: Remove redundant check
+
+2011-06-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* autoxml: Check values against NoneType
+
+	The expression "value" is also False when the value equals zero. This
+	prevents the presence of the tags with a value of zero.
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/18467.
+
+2011-06-17 Fatih Aşıcı <fatih@pardus.org.tr>
+	* l10n: Update messages
+
+2011-06-17 Fatih Aşıcı <fatih@pardus.org.tr>
+	* deletecache: Append dots to the info text for consistency
+
+2011-06-17 Fatih Aşıcı <fatih@pardus.org.tr>
+	* l10n: Update messages
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/18427.
+
+2011-06-17 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/check: Fix usage string to show an example of -c option
+
+2011-06-17 Fatih Aşıcı <fatih@pardus.org.tr>
+	* cli/check: Style fixes
+
+2011-06-15 Fatih Aşıcı <fatih@pardus.org.tr>
+	* addrepo: Handle all pisi errors occurred when updating the new repo
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/18309.
+
+2011-06-13 Fatih Aşıcı <fatih@pardus.org.tr>
+	* l10n/tr: Add missing space
+
+2011-06-13 Ozan Çağlayan <ozan@pardus.org.tr>
+	* cli: Pretty print pisi search output
+
+	Slightly modified version of patch provided by Anıl Özbek
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/17719.
+
+2011-06-13 Ozan Çağlayan <ozan@pardus.org.tr>
+	* sourcedb: whitespace cleanup, update copyright date
+
+2011-06-13 Ozan Çağlayan <ozan@pardus.org.tr>
+	* db: whitespace cleanup, update copyright date
+
+2011-06-13 Ozan Çağlayan <ozan@pardus.org.tr>
+	* api: Generate some information about delete_cache
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/18310.
+
+2011-06-09 Ozan Çağlayan <ozan@pardus.org.tr>
+	* graph: only replace allowed characters which are -,+,_
+
+2011-06-09 Ozan Çağlayan <ozan@pardus.org.tr>
+	* graph: Use list comprehension for value sanitizing which is ~2x faster
+
+2011-06-08 Metin Akdere <metin@pardus.org.tr>
+	* archive: Fix typo in recently added Archive7Zip class
+
+2011-06-08 Ozan Çağlayan <ozan@pardus.org.tr>
+	* Drop old readme
+
+2011-06-08 Ozan Çağlayan <ozan@pardus.org.tr>
+	* upgrade: Use flatten_list() which is ~9x faster than sum() construct
+
+2011-06-08 Ozan Çağlayan <ozan@pardus.org.tr>
+	* rng: Add CCPL-Attribution-ShareAlike-NonCommercial-3.0
+
+	See http://bugs.pardus.org.tr/17792.
+
+2011-06-08 Ozan Çağlayan <ozan@pardus.org.tr>
+	* l10n: Update messages
+
+2011-06-08 Ozan Çağlayan <ozan@pardus.org.tr>
+	* archive: Add support for 7-Zip source archives
+
+	Dynamically check the unpacker and gracefully inform the user
+	about the missing utility.
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/3870.
+
+2011-06-08 Ozan Çağlayan <ozan@pardus.org.tr>
+	* util: add search_executable() to find search for an executable in PATH
+
+2011-06-08 Ozan Çağlayan <ozan@pardus.org.tr>
+	* util: remove unused copy_dir() too
+
+2011-06-08 Ozan Çağlayan <ozan@pardus.org.tr>
+	* graph: Rename concat() to flatten_list()
+
+2011-06-08 Ozan Çağlayan <ozan@pardus.org.tr>
+	* util: Rename concat() to flatten_list() and optimize it
+
+2011-06-08 Ozan Çağlayan <ozan@pardus.org.tr>
+	* util: Drop old, unused, weird shortcut functions
+
+2011-06-08 Ozan Çağlayan <ozan@pardus.org.tr>
+	* l10n: Update messages
+
+2011-06-08 Ozan Çağlayan <ozan@pardus.org.tr>
+	* check: Print a warning if some files can't be read
+
+2011-06-08 Ozan Çağlayan <ozan@pardus.org.tr>
+	* Update TR translations
+
+2011-06-08 Ozan Çağlayan <ozan@pardus.org.tr>
+	* l10n: Update messages
+
+2011-06-08 Ozan Çağlayan <ozan@pardus.org.tr>
+	* check: Refactor and improve whole check command
+
+	Warn about denied accesses (pb#18308)
+	Fix bad formatting issues
+
+	Fixes the bug reported at http://bugs.pardus.org.tr/18308.
+
+2011-06-07 Ozan Çağlayan <ozan@pardus.org.tr>
+	* index: Use ctx.ui.info() instead of plain print
+
+2011-06-07 Ozan Çağlayan <ozan@pardus.org.tr>
+	* build: Mark the errors with the source package name to give more info
+
+2011-06-07 Ozan Çağlayan <ozan@pardus.org.tr>
+	* index: Heal multithreading related output problems
+
+	index rewinds the line without writing \n which garbles the
+	output when an exception is caught.
+
+2011-06-07 Ozan Çağlayan <ozan@pardus.org.tr>
+	* index: Remove obfuscated and outdated comments
+
+2011-06-07 Ozan Çağlayan <ozan@pardus.org.tr>
+	* Revert r37178 "cli: Add verbose and noln parameters to error() and status()"
+
+2011-06-07 Ozan Çağlayan <ozan@pardus.org.tr>
+	* util: Don't pass the file name in the exception
+
+2011-06-07 Ozan Çağlayan <ozan@pardus.org.tr>
+	* cli: Add verbose and noln parameters to error() and status()
+
+2011-06-07 Ozan Çağlayan <ozan@pardus.org.tr>
+	* tree-wide: Don't use weird asterisks at line beginnings
+
+2011-06-07 Ozan Çağlayan <ozan@pardus.org.tr>
+	* util: Raise FilePermissionDeniedError if the file cannot be
+	read by the current user.
+
+	Whitespace, variable name cleanups
+
+2011-06-07 Ozan Çağlayan <ozan@pardus.org.tr>
+	* cli: Suppress info about output directory
+
+	The output directory will already be printed during the final
+	step of package building.
+
+2011-06-07 Ozan Çağlayan <ozan@pardus.org.tr>
+	* build: Prune another useless warning
+
+	This line is always printed, it doesn't actually warn the user about
+	an anomaly.
+
+2011-06-07 Ozan Çağlayan <ozan@pardus.org.tr>
+	* operations/build: Clean-up outputs
+
+	Prune always printed lines about component stuff,
+	Dump build helper information only during build() to not pollute index output
+
+2011-06-07 Ozan Çağlayan <ozan@pardus.org.tr>
+	* index: Print package names on the same line during source indexing
+
+2011-06-07 Ozan Çağlayan <ozan@pardus.org.tr>
+	* index: Add missing i18n() calls around strings
+
+2011-06-07 Ozan Çağlayan <ozan@pardus.org.tr>
+	* operations/build: Add missing i18n() calls around strings
+
+2011-06-01 Onur Küçük <onur@pardus.org.tr>
 	* actionsapi: Fix typo in shelltools documentation
+
+2011-05-31 Metin Akdere <metin@pardus.org.tr>
+	* l10n: Update messages
+
+2011-05-31 Metin Akdere <metin@pardus.org.tr>
+	* l10n: Remove deprecated pygettext module
+
+	As we switched to xgettext, scripts/pygettext file is redundant.
+
+2011-05-31 Metin Akdere <metin@pardus.org.tr>
+	* l10n: Switch from pygettext to xgettext
+
+	Also add pisi.xml mimetype file. Remove scripts/update-po.sh file.
+
+2011-05-30 H. İbrahim Güngör <ibrahim@pardus.org.tr>
+	* l10n: Revert  nl.po since it is the yali translation actually.
+
+2011-05-30 Fatih Aşıcı <fatih@pardus.org.tr>
+	* pisi 2.4_beta1
+
+	This is the first beta for the upcoming 2.4.x releases. This release
+	includes enhancements, important bug fixes, and translation updates.
+
+	The most notable change is the parallelization of index module. This
+	reduces the time spent when indexing large repositories. Another
+	important change is the fix for failure when a directory in a package
+	becomes a symlink.
+
+	There are also behavioural changes introduced in this release:
+
+	 * delta: If all files in a package have changed, delta is not created
+	   unless requested explicitly.
+	 * build: Additional source files are now copied before applying
+	   patches.
+	 * cli: add-repo command now fails when a repo name/uri is not given.
 
 2011-05-30 Fatih Aşıcı <fatih@pardus.org.tr>
 	* l10n: Update messages
