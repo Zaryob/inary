@@ -1,3 +1,35 @@
+2011-07-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* index: Print CR character at the end
+
+	Otherwise, error messages are not displayed correctly. Still needs some
+	tweaks for error/warning strings.
+
+2011-07-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* build: Add a comment for the dict variable
+
+	Also move the creation of Files object down and use itervalues() instead
+	of iteritems().
+
+2011-07-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* Revert "build: Remove redundant dict variable"
+
+	This variable prevents writing duplicate entries to files.xml.
+
+2011-07-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* MANIFEST: Add pisi.xml.in to the tarball
+
+2011-07-22 Fatih Aşıcı <fatih@pardus.org.tr>
+	* pisi 2.4_beta2
+
+	This is the second beta for the upcoming 2.4.x releases. This release
+	includes enhancements, important bug fixes, and translation updates.
+
+	Notable changes (see ChangeLog file for details):
+	  - Support for 7-zip source archives
+	  - Refactored check command
+	  - Revised cli messages
+	  - Switch from pygettext to xgettext
+
 2011-07-14 Fatih Aşıcı <fatih@pardus.org.tr>
 	* archive: Handle possible conflicts if upper directories cannot be created
 
