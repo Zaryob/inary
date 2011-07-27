@@ -937,6 +937,8 @@ class Builder:
         # FIXME: material collisions after expanding globs could be
         # reported as errors
 
+        d = {}
+
         def add_path(path):
             # add the files under material path
             for fpath, fhash in util.get_file_hashes(path, collisions, install_dir):
@@ -954,12 +956,9 @@ class Builder:
                     st = os.stat(fpath)
                 else:
                     st = os.lstat(fpath)
-
-                fileinfo = pisi.files.FileInfo(path=frpath, type=ftype, permanent=permanent,
+                d[frpath] = pisi.files.FileInfo(path=frpath, type=ftype, permanent=permanent,
                                      size=fsize, hash=fhash, uid=str(st.st_uid), gid=str(st.st_gid),
                                      mode=oct(stat.S_IMODE(st.st_mode)))
-                files.append(fileinfo)
-
                 if stat.S_IMODE(st.st_mode) & stat.S_ISUID:
                     ctx.ui.warning(_("/%s has suid bit set") % frpath)
 
@@ -967,6 +966,9 @@ class Builder:
             wildcard_path = util.join_path(install_dir, pinfo.path)
             for path in glob.glob(wildcard_path):
                 add_path(path)
+
+        for (p, fileinfo) in d.iteritems():
+            files.append(fileinfo)
 
         files_xml_path = util.join_path(self.pkg_dir(), ctx.const.files_xml)
         files.write(files_xml_path)
