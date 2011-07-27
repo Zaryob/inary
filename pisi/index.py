@@ -173,7 +173,7 @@ def add_package(params):
     try:
         path, deltas, repo_uri = params
 
-        ctx.ui.info("\r%-80.80s" % (_('Adding package to index: %s') %
+        ctx.ui.info("%-80.80s\r" % (_('Adding package to index: %s') %
             os.path.basename(path)), noln = True)
 
         package = pisi.package.Package(path, 'r')
@@ -271,7 +271,7 @@ def add_spec(params):
         else:
             sf.source.sourceURI = util.removepathprefix(repo_uri, path)
 
-        ctx.ui.info("\r%-80.80s" % (_('Adding %s to source index') %
+        ctx.ui.info("%-80.80s\r" % (_('Adding %s to source index') %
             path), noln = True)
         return sf
 
