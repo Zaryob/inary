@@ -921,7 +921,6 @@ class Builder:
     def gen_files_xml(self, package):
         """Generates files.xml using the path definitions in specfile and
         the files produced by the build system."""
-        files = pisi.files.Files()
 
         if package.debug_package:
             install_dir = self.pkg_debug_dir()
@@ -937,6 +936,7 @@ class Builder:
         # FIXME: material collisions after expanding globs could be
         # reported as errors
 
+        # Use a dict to avoid duplicate entries in files.xml.
         d = {}
 
         def add_path(path):
@@ -956,9 +956,11 @@ class Builder:
                     st = os.stat(fpath)
                 else:
                     st = os.lstat(fpath)
+
                 d[frpath] = pisi.files.FileInfo(path=frpath, type=ftype, permanent=permanent,
                                      size=fsize, hash=fhash, uid=str(st.st_uid), gid=str(st.st_gid),
                                      mode=oct(stat.S_IMODE(st.st_mode)))
+
                 if stat.S_IMODE(st.st_mode) & stat.S_ISUID:
                     ctx.ui.warning(_("/%s has suid bit set") % frpath)
 
@@ -967,7 +969,8 @@ class Builder:
             for path in glob.glob(wildcard_path):
                 add_path(path)
 
-        for (p, fileinfo) in d.iteritems():
+        files = pisi.files.Files()
+        for fileinfo in d.itervalues():
             files.append(fileinfo)
 
         files_xml_path = util.join_path(self.pkg_dir(), ctx.const.files_xml)
