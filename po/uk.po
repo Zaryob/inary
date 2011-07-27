@@ -9,14 +9,14 @@ msgstr ""
 "PO-Revision-Date: 2011-02-04 12:21+0300\n"
 "Last-Translator: Korostil Daniel <ted.korostiled@gmail.com>\n"
 "Language-Team: translation@linux.org.ua\n"
-"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"T-Creation-Date: 2010-10-13 11:31+EEST\n"
+"Language: uk\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Virtaal 0.6.1\n"
 "Generated-By: pygettext.py 1.5\n"
+"T-Creation-Date: 2010-10-13 11:31+EEST\n"
+"X-Generator: Virtaal 0.6.1\n"
 
 #: /usr/lib/python2.7/optparse.py:140
 #, python-format
@@ -132,7 +132,7 @@ msgstr "Ввдіть «--debug», щоб побачити зворотне тр�
 
 #: pisi.xml.in.h:1
 msgid "PiSi package"
-msgstr ""
+msgstr "Пакунок PiSi"
 
 #: pisi/actionsapi/autotools.py:36 pisi/actionsapi/cmaketools.py:36
 #, python-format
@@ -271,57 +271,57 @@ msgstr "Немає файла з відповідних шаблоном «%s».
 #: pisi/actionsapi/pisitools.py:216
 #, python-format
 msgid "dosed method has not changed file '%s'."
-msgstr ""
+msgstr "Частковий спосіб не має вибраного файла «%s»."
 
 #: pisi/actionsapi/pisitools.py:219
 #, python-format
 msgid "File does not exist or permission denied: %s"
-msgstr ""
+msgstr "Файл не існує або немає доступу: %s"
 
 #: pisi/actionsapi/pisitools.py:236
 #, python-format
 msgid "ActionsAPI [dosym]: File already exists: %s"
-msgstr ""
+msgstr "ActionsAPI [dosym]:  файл уже існує: %s"
 
 #: pisi/actionsapi/pisitools.py:245 pisi/actionsapi/pisitoolsfunctions.py:71
 #, python-format
 msgid "No file matched pattern \"%s\"."
-msgstr ""
+msgstr "Жодного файла відповідного до шаблону «%s»."
 
 #: pisi/actionsapi/pisitools.py:272 pisi/actionsapi/shelltools.py:97
 #, python-format
 msgid "No file matched pattern \"%s\". Remove operation failed."
-msgstr ""
+msgstr "Жодного файла відповідного до шаблону «%s». Не вдалось вилучити."
 
 #: pisi/actionsapi/pisitools.py:281
 #, python-format
 msgid "No directory matched pattern \"%s\". Remove directory operation failed."
-msgstr ""
+msgstr "Жодного каталогу відповідного до шаблону «%s». Не вдалось вилучити."
 
 #: pisi/actionsapi/pisitoolsfunctions.py:45
 #: pisi/actionsapi/pisitoolsfunctions.py:63
 #: pisi/actionsapi/pisitoolsfunctions.py:80
 msgid "Insufficient arguments."
-msgstr ""
+msgstr "Неповні аргументи."
 
 #: pisi/actionsapi/pisitoolsfunctions.py:53
 #, python-format
 msgid "No executable file matched pattern \"%s\"."
-msgstr ""
+msgstr "Жодного виконавчого файла відповідного до шаблону «%s»."
 
 #: pisi/actionsapi/pythonmodules.py:56
 msgid "Configuration failed."
-msgstr ""
+msgstr "Не вдалось налаштувати."
 
 #: pisi/actionsapi/pythonmodules.py:81
 #, python-format
 msgid "Running %s failed."
-msgstr ""
+msgstr "Не вдалось запустити %s."
 
 #: pisi/actionsapi/qt4.py:52
 #, python-format
 msgid "Project file '%s' not found."
-msgstr ""
+msgstr "Не знайдено файла проекту «%s»."
 
 #: pisi/actionsapi/qt4.py:56
 #, python-format
@@ -331,27 +331,29 @@ msgstr ""
 #: pisi/actionsapi/rubymodules.py:108
 #, python-format
 msgid "Running 'ruby %s' failed."
-msgstr ""
+msgstr "Не вдалось запустити «ruby %s»."
 
 #: pisi/actionsapi/shelltools.py:49
 #, python-format
 msgid "Cannot create directory %s"
-msgstr ""
+msgstr "Неможливо створити каталог %s"
 
 #: pisi/actionsapi/shelltools.py:57
 #, python-format
 msgid "ActionsAPI [echo]: Can't append to file %s."
-msgstr ""
+msgstr "ActionsAPI [echo]: Неможливо додати до файла %s."
 
 #: pisi/actionsapi/shelltools.py:63
 #, python-format
 msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
-msgstr ""
+msgstr "ActionsAPI [chmod]: жодного файла відповідного до шаблону «%s»."
 
 #: pisi/actionsapi/shelltools.py:70
 #, python-format
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
 msgstr ""
+"ActionsAPI [chmod]: немає прав на виконання: %s (режим: 0%o)\r\n"
+"\t"
 
 #: pisi/actionsapi/shelltools.py:73
 #, python-format
@@ -361,7 +363,7 @@ msgstr ""
 #: pisi/actionsapi/shelltools.py:81
 #, python-format
 msgid "ActionsAPI [chown]: Operation not permitted: %s (uid: %s, gid: %s)"
-msgstr ""
+msgstr "ActionsAPI [chown]: немає прав на виконання: %s (uid: %s, gid: %s)"
 
 #: pisi/actionsapi/shelltools.py:84
 #, python-format
@@ -1363,11 +1365,7 @@ msgid ""
 msgstr ""
 
 #: pisi/cli/history.py:28
-msgid "emerge"
-msgstr ""
-
-#: pisi/cli/history.py:28
-msgid "install"
+msgid "upgrade"
 msgstr ""
 
 #: pisi/cli/history.py:28
@@ -1375,7 +1373,11 @@ msgid "remove"
 msgstr ""
 
 #: pisi/cli/history.py:28
-msgid "repository update"
+msgid "emerge"
+msgstr ""
+
+#: pisi/cli/history.py:28
+msgid "install"
 msgstr ""
 
 #: pisi/cli/history.py:28
@@ -1387,7 +1389,7 @@ msgid "takeback"
 msgstr ""
 
 #: pisi/cli/history.py:28
-msgid "upgrade"
+msgid "repository update"
 msgstr ""
 
 #: pisi/cli/history.py:31
