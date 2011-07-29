@@ -13,9 +13,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: Lokalize 1.2\n"
 
 #: /usr/lib/python2.7/optparse.py:140
 #, python-format
@@ -3297,7 +3297,7 @@ msgstr "%s зеркала не определены."
 #: pisi/sourcearchive.py:95
 #, python-format
 msgid "Fetching source from mirror: %s"
-msgstr "Извлечения исходного кода из зеркала: %s"
+msgstr "Загрузка архива исходного кода из зеркала: %s"
 
 #: pisi/sourcearchive.py:101
 #, python-format
@@ -3306,7 +3306,7 @@ msgstr "Не удалось извлечь исходный код из зерк
 
 #: pisi/sourcearchive.py:119
 msgid "unpack: check_file_hash failed"
-msgstr "распаковка: не удалось проверить хэш файла"
+msgstr "распаковка: не верный хэш файла"
 
 #: pisi/sourcearchive.py:124
 #, python-format
