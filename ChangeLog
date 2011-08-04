@@ -1,4 +1,14 @@
 2011-07-27 Fatih Aşıcı <fatih@pardus.org.tr>
+	* pisi 2.4_rc1
+
+	This is the first release candidate for the upcoming 2.4.x releases.
+	This release fixes a regression introduced in beta2 and fixes a cosmetic
+	issue in the output of index command.
+
+	I think Pisi is quite ready for a stable release. Therefore, this may be
+	the last release before 2.4.
+
+2011-07-27 Fatih Aşıcı <fatih@pardus.org.tr>
 	* index: Print CR character at the end
 
 	Otherwise, error messages are not displayed correctly. Still needs some
