@@ -209,8 +209,7 @@ class Builder:
         if specuri.is_remote_file():
             self.specdiruri = os.path.dirname(self.specuri.get_uri())
             pkgname = os.path.basename(self.specdiruri)
-            self.destdir = util.join_path(ctx.config.tmp_dir(), pkgname)
-            self.specdir = self.destdir
+            self.specdir = util.join_path(ctx.config.tmp_dir(), pkgname)
 
             self.fetch_translationsfile()
         else:
@@ -430,17 +429,17 @@ class Builder:
 
     def fetch_pspecfile(self):
         pspecuri = util.join_path(self.specdiruri, ctx.const.pspec_file)
-        self.download(pspecuri, self.destdir)
+        self.download(pspecuri, self.specdir)
 
     def fetch_actionsfile(self):
         actionsuri = util.join_path(self.specdiruri, ctx.const.actions_file)
-        self.download(actionsuri, self.destdir)
+        self.download(actionsuri, self.specdir)
 
     def fetch_translationsfile(self):
         translationsuri = util.join_path(self.specdiruri,
                                          ctx.const.translations_file)
         try:
-            self.download(translationsuri, self.destdir)
+            self.download(translationsuri, self.specdir)
         except pisi.fetcher.FetchError:
             # translations.xml is not mandatory for PiSi
             pass
@@ -451,7 +450,7 @@ class Builder:
             patchuri = util.join_path(self.specdiruri,
                                       ctx.const.files_dir,
                                       patch.filename)
-            self.download(patchuri, util.join_path(self.destdir,
+            self.download(patchuri, util.join_path(self.specdir,
                                                    ctx.const.files_dir,
                                                    dir_name))
 
@@ -460,7 +459,7 @@ class Builder:
             for pcomar in package.providesComar:
                 comaruri = util.join_path(self.specdiruri,
                                 ctx.const.comar_dir, pcomar.script)
-                self.download(comaruri, util.join_path(self.destdir,
+                self.download(comaruri, util.join_path(self.specdir,
                                                        ctx.const.comar_dir))
 
     def fetch_additionalFiles(self):
@@ -470,7 +469,7 @@ class Builder:
                 dir_name = os.path.dirname(afile.filename)
                 afileuri = util.join_path(self.specdiruri,
                                 ctx.const.files_dir, dir_name, file_name)
-                self.download(afileuri, util.join_path(self.destdir,
+                self.download(afileuri, util.join_path(self.specdir,
                                                        ctx.const.files_dir,
                                                        dir_name))
 
