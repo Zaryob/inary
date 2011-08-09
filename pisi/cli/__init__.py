@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005-2010, TUBITAK/UEKAE
+# Copyright (C) 2005-2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -151,7 +151,12 @@ class CLI(pisi.ui.UI):
 
         import re, tty
 
-        locale.setlocale(locale.LC_ALL, "")
+        try:
+            locale.setlocale(locale.LC_ALL, "")
+        except:
+            # Ignore "unsupported locale setting" errors
+            pass
+
         yes_expr = re.compile(locale.nl_langinfo(locale.YESEXPR))
         no_expr = re.compile(locale.nl_langinfo(locale.NOEXPR))
         locale.setlocale(locale.LC_ALL, "C")
