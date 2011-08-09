@@ -207,7 +207,12 @@ class Builder:
         self.set_spec_file(specuri)
 
         if specuri.is_remote_file():
-            self.specdir = self.fetch_files()
+            self.specdiruri = os.path.dirname(self.specuri.get_uri())
+            pkgname = os.path.basename(self.specdiruri)
+            self.destdir = util.join_path(ctx.config.tmp_dir(), pkgname)
+            self.specdir = self.destdir
+
+            self.fetch_translationsfile()
         else:
             self.specdir = os.path.dirname(self.specuri.get_uri())
 
@@ -323,13 +328,17 @@ class Builder:
         ctx.ui.status(_("Building source package: %s")
                       % self.spec.source.name)
 
+        self.check_build_dependencies()
+
+        if self.specuri.is_remote_file():
+            self.fetch_files()
+
         self.compile_comar_script()
 
         # check if all patch files exists, if there are missing no need
         # to unpack!
         self.check_patches()
 
-        self.check_build_dependencies()
         self.fetch_component()
         self.fetch_source_archives()
 
@@ -414,19 +423,10 @@ class Builder:
                 os.environ["CCACHE_DIR"] = "/root/.ccache"
 
     def fetch_files(self):
-        self.specdiruri = os.path.dirname(self.specuri.get_uri())
-        pkgname = os.path.basename(self.specdiruri)
-        self.destdir = util.join_path(ctx.config.tmp_dir(), pkgname)
-        #self.location = os.path.dirname(self.url.uri)
-
         self.fetch_actionsfile()
-        self.check_build_dependencies()
-        self.fetch_translationsfile()
         self.fetch_patches()
         self.fetch_comarfiles()
         self.fetch_additionalFiles()
-
-        return self.destdir
 
     def fetch_pspecfile(self):
         pspecuri = util.join_path(self.specdiruri, ctx.const.pspec_file)
@@ -1255,6 +1255,10 @@ order = {"none": 0,
 
 def __buildState_fetch(pb):
     # fetch is the first state to run.
+
+    if pb.specuri.is_remote_file():
+        pb.fetch_files()
+
     pb.check_patches()
     pb.fetch_source_archives()
 
@@ -1303,14 +1307,14 @@ def build_until(pspec, state):
     else:
         pb = Builder.from_name(pspec)
 
-    pb.compile_comar_script()
-
     if state == "fetch":
         __buildState_fetch(pb)
         return
 
     # from now on build dependencies are needed
     pb.check_build_dependencies()
+
+    pb.compile_comar_script()
 
     if state == "package":
         __buildState_buildpackages(pb)
