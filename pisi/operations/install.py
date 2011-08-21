@@ -118,7 +118,7 @@ def install_pkg_files(package_URIs, reinstall = False):
 
     for x in package_URIs:
         if not x.endswith(ctx.const.package_suffix):
-            raise Exception(_('Mixing file names and package names not supported yet.'))
+            raise pisi.Error(_('Mixing file names and package names not supported yet.'))
 
     # filter packages that are already installed
     tobe_installed, already_installed = [], set()
@@ -162,11 +162,11 @@ def install_pkg_files(package_URIs, reinstall = False):
         for x in d_t.keys():
             pkg = d_t[x]
             if pkg.distributionRelease != ctx.config.values.general.distribution_release:
-                raise Exception(_('Package %s is not compatible with your distribution release %s %s.') \
+                raise pisi.Error(_('Package %s is not compatible with your distribution release %s %s.') \
                         % (x, ctx.config.values.general.distribution, \
                         ctx.config.values.general.distribution_release))
             if pkg.architecture != ctx.config.values.general.architecture:
-                raise Exception(_('Package %s (%s) is not compatible with your %s architecture.') \
+                raise pisi.Error(_('Package %s (%s) is not compatible with your %s architecture.') \
                         % (x, pkg.architecture, ctx.config.values.general.architecture))
 
     def satisfiesDep(dep):
@@ -189,7 +189,7 @@ def install_pkg_files(package_URIs, reinstall = False):
     # be satisfied by installing packages from the repo
     for dep in dep_unsatis:
         if not dep.satisfied_by_repo():
-            raise Exception(_('External dependencies not satisfied: %s') % dep)
+            raise pisi.Error(_('External dependencies not satisfied: %s') % dep)
 
     # if so, then invoke install_pkg_names
     extra_packages = [x.package for x in dep_unsatis]
@@ -198,7 +198,7 @@ def install_pkg_files(package_URIs, reinstall = False):
                          "in order to satisfy dependencies:"))
         ctx.ui.info(util.format_by_columns(sorted(extra_packages)))
         if not ctx.ui.confirm(_('Do you want to continue?')):
-            raise Exception(_('External dependencies not satisfied'))
+            raise pisi.Error(_('External dependencies not satisfied'))
         install_pkg_names(extra_packages, reinstall=True)
 
     class PackageDB:
@@ -276,7 +276,7 @@ def plan_install_pkg_names(A):
                 # we don't deal with already *satisfied* dependencies
                 if not dep.satisfied_by_installed():
                     if not dep.satisfied_by_repo():
-                        raise Exception(_('%s dependency of package %s is not satisfied') % (dep, pkg.name))
+                        raise pisi.Error(_('%s dependency of package %s is not satisfied') % (dep, pkg.name))
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
