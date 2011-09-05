@@ -142,12 +142,8 @@ class ArchiveBase(object):
         self.file_path = file_path
         self.type = atype
 
-    def unpack(self, target_dir, clean_dir=False):
+    def unpack(self, target_dir):
         self.target_dir = target_dir
-        # first we check if we need to clean-up our working env.
-        if os.path.exists(self.target_dir):
-            if clean_dir:
-                util.clean_dir(self.target_dir)
 
         if not os.path.exists(self.target_dir):
             os.makedirs(self.target_dir)
@@ -159,8 +155,8 @@ class ArchiveBinary(ArchiveBase):
     def __init__(self, file_path, arch_type="binary"):
         super(ArchiveBinary, self).__init__(file_path, arch_type)
 
-    def unpack(self, target_dir, clean_dir=False):
-        super(ArchiveBinary, self).unpack(target_dir, clean_dir)
+    def unpack(self, target_dir):
+        super(ArchiveBinary, self).unpack(target_dir)
 
         # we can't unpack .bin files. we'll just move them to target
         # directory and leave the dirty job to actions.py ;)
@@ -175,8 +171,8 @@ class ArchiveBzip2(ArchiveBase):
     def __init__(self, file_path, arch_type="bz2"):
         super(ArchiveBzip2, self).__init__(file_path, arch_type)
 
-    def unpack(self, target_dir, clean_dir=False):
-        super(ArchiveBzip2, self).unpack(target_dir, clean_dir)
+    def unpack(self, target_dir):
+        super(ArchiveBzip2, self).unpack(target_dir)
         self.unpack_dir(target_dir)
 
     def unpack_dir(self, target_dir):
@@ -201,8 +197,8 @@ class ArchiveGzip(ArchiveBase):
     def __init__(self, file_path, arch_type="gz"):
         super(ArchiveGzip, self).__init__(file_path, arch_type)
 
-    def unpack(self, target_dir, clean_dir=False):
-        super(ArchiveGzip, self).unpack(target_dir, clean_dir)
+    def unpack(self, target_dir):
+        super(ArchiveGzip, self).unpack(target_dir)
         self.unpack_dir(target_dir)
 
     def unpack_dir(self, target_dir):
@@ -227,8 +223,8 @@ class ArchiveLzma(ArchiveBase):
     def __init__(self, file_path, arch_type="lzma"):
         super(ArchiveLzma, self).__init__(file_path, arch_type)
 
-    def unpack(self, target_dir, clean_dir=False):
-        super(ArchiveLzma, self).unpack(target_dir, clean_dir)
+    def unpack(self, target_dir):
+        super(ArchiveLzma, self).unpack(target_dir)
         self.unpack_dir(target_dir)
 
     def unpack_dir(self, target_dir):
@@ -263,9 +259,9 @@ class ArchiveTar(ArchiveBase):
         self.no_same_owner = no_same_owner
         self.fileobj = fileobj
 
-    def unpack(self, target_dir, clean_dir=False):
+    def unpack(self, target_dir):
         """Unpack tar archive to a given target directory(target_dir)."""
-        super(ArchiveTar, self).unpack(target_dir, clean_dir)
+        super(ArchiveTar, self).unpack(target_dir)
         self.unpack_dir(target_dir)
 
     def unpack_dir(self, target_dir, callback=None):
@@ -442,9 +438,9 @@ class ArchiveTarZ(ArchiveBase):
         self.no_same_permissions = no_same_permissions
         self.no_same_owner = no_same_owner
 
-    def unpack(self, target_dir, clean_dir=False):
+    def unpack(self, target_dir):
         """Unpack tar archive to a given target directory(target_dir)."""
-        super(ArchiveTarZ, self).unpack(target_dir, clean_dir)
+        super(ArchiveTarZ, self).unpack(target_dir)
         self.unpack_dir(target_dir)
 
     def unpack_dir(self, target_dir):
@@ -508,8 +504,8 @@ class Archive7Zip(ArchiveBase):
         if not self.cmd:
             raise ArchiveHandlerNotInstalled
 
-    def unpack(self, target_dir, clean_dir=False):
-        super(Archive7Zip, self).unpack(target_dir, clean_dir)
+    def unpack(self, target_dir):
+        super(Archive7Zip, self).unpack(target_dir)
         self.unpack_dir(target_dir)
 
     def unpack_dir(self, target_dir):
@@ -663,8 +659,8 @@ class ArchiveZip(ArchiveBase):
         self.unpack_file_cond(lambda f: util.subpath(path, f),
                               target_dir, path)
 
-    def unpack(self, target_dir, clean_dir=False):
-        super(ArchiveZip, self).unpack(target_dir, clean_dir)
+    def unpack(self, target_dir):
+        super(ArchiveZip, self).unpack(target_dir)
 
         self.unpack_file_cond(lambda f: True, target_dir)
         self.close()
@@ -726,8 +722,8 @@ class Archive:
 
         return "binary"
 
-    def unpack(self, target_dir, clean_dir=False):
-        self.archive.unpack(target_dir, clean_dir)
+    def unpack(self, target_dir):
+        self.archive.unpack(target_dir)
 
     def unpack_files(self, files, target_dir):
         self.archive.unpack_files(files, target_dir)

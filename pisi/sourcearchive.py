@@ -37,10 +37,9 @@ class SourceArchives:
         for archive in self.sourceArchives:
             archive.fetch(interactive)
 
-    def unpack(self, target_dir, clean_dir=True):
-        self.sourceArchives[0].unpack(target_dir, clean_dir)
-        for archive in self.sourceArchives[1:]:
-            archive.unpack(target_dir, clean_dir=False)
+    def unpack(self, target_dir):
+        for archive in self.sourceArchives:
+            archive.unpack(target_dir)
 
 
 class SourceArchive:
@@ -112,7 +111,7 @@ class SourceArchive:
 
         return False
 
-    def unpack(self, target_dir, clean_dir=True):
+    def unpack(self, target_dir):
 
         # check archive file's integrity
         if not util.check_file_hash(self.archiveFile, self.archive.sha1sum):
@@ -128,4 +127,4 @@ class SourceArchive:
                         % self.archive.type)
 
         target_dir = os.path.join(target_dir, self.archive.target or "")
-        archive.unpack(target_dir, clean_dir)
+        archive.unpack(target_dir)
