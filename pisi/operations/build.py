@@ -512,6 +512,9 @@ class Builder:
         self.sourceArchives.fetch()
 
     def unpack_source_archives(self):
+        # Remove the old work directory if exists
+        util.clean_dir(self.pkg_work_dir())
+
         ctx.ui.action(_("Unpacking archive(s)..."))
         self.sourceArchives.unpack(self.pkg_work_dir())
 
