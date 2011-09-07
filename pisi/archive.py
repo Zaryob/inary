@@ -319,7 +319,8 @@ class ArchiveTar(ArchiveBase):
 
                         os.renames(old_path, new_path)
 
-                    os.rmdir(tarinfo.name)
+                    if os.path.exists(tarinfo.name):
+                        os.rmdir(tarinfo.name)
 
                 elif not os.path.lexists(tarinfo.linkname):
                     # Symlink target does not exist. Assume the old
