@@ -541,6 +541,9 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
         if out is None and err is None:
             # Which means stderr and stdout directed so they are None
             raise Error(_("ERROR: patch (%s) failed") % (patchFile))
+        elif ret == 127:
+            # 127 means that shell can't find the given program.
+            raise Error(_("ERROR: %s is not installed on your system.") % "patch")
         else:
             raise Error(_("ERROR: patch (%s) failed: %s") % (patchFile, out))
 
