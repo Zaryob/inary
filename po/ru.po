@@ -13,9 +13,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: Lokalize 1.2\n"
 
 #: /usr/lib/python2.7/optparse.py:140
 #, python-format
@@ -560,7 +560,7 @@ msgstr "Работает другой экземпляр PiSi. Допускае�
 #: pisi/api.py:420
 #, python-format
 msgid "%s package found in %s repository"
-msgstr "%s пакет найден в %s репозитории."
+msgstr "%s пакет найден в репозитории %s"
 
 #: pisi/api.py:424
 #, python-format
@@ -1656,7 +1656,7 @@ msgstr "[inst] "
 
 #: pisi/cli/info.py:162
 msgid "Installed package:"
-msgstr "Установка пакета:"
+msgstr "Установленный пакет:"
 
 #: pisi/cli/info.py:166
 #, python-format
@@ -1670,7 +1670,7 @@ msgstr "[binary] "
 #: pisi/cli/info.py:174 pisi/cli/info.py:186
 #, python-format
 msgid "Package found in %s repository:"
-msgstr "пакет найден в репозитории %s:"
+msgstr "Пакет репозитории %s:"
 
 #: pisi/cli/info.py:177
 #, python-format
