@@ -104,7 +104,7 @@ def unlink(pattern):
             except OSError:
                 ctx.ui.error(_('ActionsAPI [unlink]: Permission denied: %s.') % (filePath))
         elif isDirectory(filePath):
-            pass
+            ctx.ui.warning(_('ActionsAPI [unlink]: %s is not a file, use \'unlinkDir\' or \'removeDir\' to remove directories.') % filePath)
         else:
             ctx.ui.error(_('ActionsAPI [unlink]: File %s doesn\'t exists.') % (filePath))
 
@@ -116,7 +116,7 @@ def unlinkDir(sourceDirectory):
         except OSError:
             error(_('ActionsAPI [unlinkDir]: Operation not permitted: %s') % (sourceDirectory))
     elif isFile(sourceDirectory):
-        pass
+        ctx.ui.warning(_('ActionsAPI [unlinkDir]: %s is not a directory, use \'unlink\' or \'remove\' to remove files.') % sourceDirectory)
     else:
         error(_('ActionsAPI [unlinkDir]: Directory %s doesn\'t exists.') % (sourceDirectory))
 
