@@ -19,6 +19,7 @@ _ = __trans.ugettext
 
 # PiSi Modules
 import pisi.actionsapi
+import pisi.util
 import pisi.context as ctx
 
 # ActionsAPI Modules
@@ -163,18 +164,10 @@ def qtDIR():
 
 # Binutils Variables
 
-def existBinary(bin):
-    # determine if path has binary
-    path = os.environ['PATH'].split(':')
-    for directory in path:
-        if os.path.exists(os.path.join(directory, bin)):
-            return True
-    return False
-
 def getBinutilsInfo(util):
     cross_build_name = '%s-%s' % (HOST(), util)
-    if not existBinary(cross_build_name):
-        if not existBinary(util):
+    if not pisi.util.search_executable(cross_build_name):
+        if not pisi.util.search_executable(util):
             raise BinutilsError(_('Util %s cannot be found') % util)
         else:
             ctx.ui.debug(_('Warning: %s does not exist, using plain name %s') \
