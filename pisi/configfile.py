@@ -66,8 +66,8 @@ class GeneralDefaults:
     destinationdirectory = "/"
     autoclean = False
     distribution = "Pardus"
-    distribution_release = "2009"
-    distribution_id = "p9"
+    distribution_release = "2011"
+    distribution_id = "p11"
     architecture = "i686"
     http_proxy = os.getenv("HTTP_PROXY") or None
     https_proxy = os.getenv("HTTPS_PROXY") or None
@@ -90,7 +90,7 @@ class BuildDefaults:
     ldflags = "-Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common"
     buildhelper = None
     compressionlevel = 1
-    fallback = "ftp://ftp.pardus.org.tr/pub/source/2009"
+    fallback = "ftp://ftp.pardus.org.tr/pub/source/2011"
     ignored_build_types = ""
 
 class DirectoriesDefaults:
