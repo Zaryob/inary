@@ -211,6 +211,7 @@ class Builder:
             pkgname = os.path.basename(self.specdiruri)
             self.specdir = util.join_path(ctx.config.tmp_dir(), pkgname)
 
+            self.fetch_actionsfile()
             self.fetch_translationsfile()
         else:
             self.specdir = os.path.dirname(self.specuri.get_uri())
@@ -422,7 +423,6 @@ class Builder:
                 os.environ["CCACHE_DIR"] = "/root/.ccache"
 
     def fetch_files(self):
-        self.fetch_actionsfile()
         self.fetch_patches()
         self.fetch_comarfiles()
         self.fetch_additionalFiles()
