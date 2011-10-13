@@ -14,6 +14,7 @@ import os
 
 # Pisi-Core Modules
 import pisi.context as ctx
+import pisi.util
 
 # Set individual information, that are generally needed for ActionsAPI
 
@@ -35,8 +36,9 @@ def exportFlags():
     os.environ['JOBS'] = values.build.jobs
 
     # http://liste.pardus.org.tr/gelistirici/2009-January/016442.html
-    os.environ['CC'] = "%s-gcc" % values.build.host
-    os.environ['CXX'] = "%s-g++" % values.build.host
+    os.environ['CC'] = values.build.cc
+    os.environ['CXX'] = values.build.cxx
+    os.environ['LD'] = values.build.ld
 
 class Env(object):
     '''General environment variables used in actions API'''

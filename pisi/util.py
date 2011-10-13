@@ -552,7 +552,7 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
 def strip_file(filepath, fileinfo, outpath):
     """Strip an elf file from debug symbols."""
     def run_strip(f, flags=""):
-        p = os.popen("strip %s %s" %(flags, f))
+        p = os.popen("%s %s %s" %(ctx.config.values.build.strip, flags, f))
         ret = p.close()
         if ret:
             ctx.ui.warning(_("strip command failed for file '%s'!") % f)
@@ -566,13 +566,13 @@ def strip_file(filepath, fileinfo, outpath):
 
     def save_elf_debug(f, o):
         """copy debug info into file.debug file"""
-        p = os.popen("objcopy --only-keep-debug %s %s%s" % (f, o, ctx.const.debug_file_suffix))
+        p = os.popen("%s --only-keep-debug %s %s%s" % (ctx.config.values.build.objcopy, f, o, ctx.const.debug_file_suffix))
         ret = p.close()
         if ret:
             ctx.ui.warning(_("objcopy (keep-debug) command failed for file '%s'!") % f)
 
         """mark binary/shared objects to use file.debug"""
-        p = os.popen("objcopy --add-gnu-debuglink=%s%s %s" % (o, ctx.const.debug_file_suffix, f))
+        p = os.popen("%s --add-gnu-debuglink=%s%s %s" % (ctx.config.values.build.objcopy, o, ctx.const.debug_file_suffix, f))
         ret = p.close()
         if ret:
             ctx.ui.warning(_("objcopy (add-debuglink) command failed for file '%s'!") % f)

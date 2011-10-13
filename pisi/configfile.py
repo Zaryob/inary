@@ -30,6 +30,17 @@
 #cflags= -mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2
 #cxxflags= -mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2
 #ldflags= -Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common
+#ar = "ar"
+#assembler = "as"
+#cc = "gcc"
+#cxx = "g++"
+#ld = "ld"
+#nm = "nm"
+#ranlib = "ranlib"
+#f77 = "g77"
+#gcj = "gcj"
+#strip = "strip"
+#objcopy= "objcopy"
 #buildhelper = None / ccache / icecream
 #compressionlevel = 1
 #fallback = "ftp://ftp.pardus.org.tr/pub/source/2011"
@@ -87,6 +98,20 @@ class BuildDefaults:
     enableSandbox = True
     cflags = "-mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
     cxxflags = "-mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
+
+    # Toolchain defaults
+    ar = "ar"
+    assembler = "as"
+    cc = "gcc"
+    cxx = "g++"
+    ld = "ld"
+    nm = "nm"
+    ranlib = "ranlib"
+    f77 = "g77"
+    gcj = "gcj"
+    strip = "strip"
+    objcopy= "objcopy"
+
     ldflags = "-Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common"
     buildhelper = None
     compressionlevel = 1

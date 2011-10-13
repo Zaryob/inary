@@ -408,12 +408,14 @@ class Builder:
         # First check icecream, if not found use ccache
         # TODO: Add support for using both of them
         if ctx.config.values.build.buildhelper == "icecream":
-            if os.path.exists("/opt/icecream/bin/gcc"):
+            if os.path.exists("/opt/icecream/bin/%s" % ctx.config.values.build.cc):
                 self.has_icecream = True
                 os.environ["PATH"] = "/opt/icecream/bin:%(PATH)s" % os.environ
+            else:
+                ctx.ui.warning(_("Specified compiler is not supported by icecream, it will be disabled."))
 
         elif ctx.config.values.build.buildhelper == "ccache":
-            if os.path.exists("/usr/lib/ccache/bin/gcc"):
+            if os.path.exists("/usr/lib/ccache/bin/%s" % ctx.config.values.build.cc):
                 self.has_ccache = True
 
                 os.environ["PATH"] = "/usr/lib/ccache/bin:%(PATH)s" \
@@ -421,6 +423,8 @@ class Builder:
                 # Force ccache to use /root/.ccache instead of $HOME/.ccache
                 # as $HOME can be modified through actions.py
                 os.environ["CCACHE_DIR"] = "/root/.ccache"
+            else:
+                ctx.ui.warning(_("Specified compiler is not supported by ccache, it will be disabled."))
 
     def fetch_files(self):
         self.fetch_patches()

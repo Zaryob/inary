@@ -34,6 +34,7 @@ class BinutilsError(pisi.actionsapi.Error):
 # Globals
 env = pisi.actionsapi.variables.glb.env
 dirs = pisi.actionsapi.variables.glb.dirs
+config = pisi.actionsapi.variables.glb.config
 generals = pisi.actionsapi.variables.glb.generals
 
 def curDIR():
@@ -164,41 +165,29 @@ def qtDIR():
 
 # Binutils Variables
 
-def getBinutilsInfo(util):
-    cross_build_name = '%s-%s' % (HOST(), util)
-    if not pisi.util.search_executable(cross_build_name):
-        if not pisi.util.search_executable(util):
-            raise BinutilsError(_('Util %s cannot be found') % util)
-        else:
-            ctx.ui.debug(_('Warning: %s does not exist, using plain name %s') \
-                     % (cross_build_name, util))
-            return util
-    else:
-        return cross_build_name
-
 def AR():
-    return getBinutilsInfo('ar')
+    return config.values.build.ar
 
 def AS():
-    return getBinutilsInfo('as')
+    return config.values.build.assembler
 
 def CC():
-    return getBinutilsInfo('gcc')
+    return config.values.build.cc
 
 def CXX():
-    return getBinutilsInfo('g++')
+    return config.values.build.cxx
 
 def LD():
-    return getBinutilsInfo('ld')
+    return config.values.build.ld
 
 def NM():
-    return getBinutilsInfo('nm')
+    return config.values.build.nm
 
 def RANLIB():
-    return getBinutilsInfo('ranlib')
+    return config.values.build.ranlib
 
 def F77():
-    return getBinutilsInfo('g77')
+    return config.values.build.f77
 
 def GCJ():
-    return getBinutilsInfo('gcj')
+    return config.values.build.gcj
