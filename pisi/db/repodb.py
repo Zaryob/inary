@@ -151,6 +151,9 @@ class RepoDB(lazydb.LazyDB):
         return url in self.list_repo_urls(only_active)
 
     def get_repo_doc(self, repo_name):
+        if not self.has_repo(repo_name):
+            raise RepoError(_("Repository %s does not exist.") % repo)
+
         repo = self.get_repo(repo_name)
 
         index_path = repo.indexuri.get_uri()
@@ -178,6 +181,9 @@ class RepoDB(lazydb.LazyDB):
 
     #FIXME: this method is a quick hack around repo_info.indexuri.get_uri()
     def get_repo_url(self, repo):
+        if not self.has_repo(repo):
+            raise RepoError(_("Repository %s does not exist.") % repo)
+
         urifile_path = pisi.util.join_path(ctx.config.index_dir(), repo, "uri")
         uri = open(urifile_path, "r").read()
         return uri.rstrip()
