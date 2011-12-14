@@ -119,7 +119,7 @@ def exclude_special_files(filepath, fileinfo, ag):
     keeplist = ag.get("KeepSpecial", [])
     patterns = {"libtool": "libtool library file",
                 "python":  "python.*byte-compiled",
-                "perl":    "Perl POD document text"}
+                "perl":    "Perl POD document.* text"}
 
     if "libtool" in keeplist:
         # Some upstream sources have buggy libtool and ltmain.sh with them,
