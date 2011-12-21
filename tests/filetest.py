@@ -28,8 +28,6 @@ class FileTestCase(unittest.TestCase):
         assert (len(r) > 0)
 
     def testRemoteRead(self):
-        f = File('http://www.pardus.org.tr/urunler/pardus-2009.2-Geronticus_eremita-surum-notlari-tr.html', File.read)
+        f = File('http://www.gnu.org/licenses/gpl2.txt', File.read)
         r = f.readlines()
         assert (len(r) > 0)
-
-
