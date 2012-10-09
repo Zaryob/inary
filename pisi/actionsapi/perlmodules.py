@@ -27,6 +27,7 @@ from pisi.actionsapi.shelltools import system
 from pisi.actionsapi.shelltools import can_access_file
 from pisi.actionsapi.shelltools import export
 from pisi.actionsapi.shelltools import unlink
+from pisi.actionsapi.shelltools import unlinkDir
 
 class ConfigureError(pisi.actionsapi.Error):
     def __init__(self, value=''):
@@ -75,12 +76,31 @@ def install(parameters = 'install'):
             raise MakeError, _('perl install failed.')
 
     removePacklist()
+    removePodfiles()
 
 def removePacklist():
     ''' cleans .packlist file from perl packages '''
-    path = '%s/%s' % (get.installDIR(), "/usr/lib/perl5/vendor_perl/%s/%s-linux-thread-multi/auto/" % (get.curPERL(), get.HOST().split("-")[0]))
+    path = '%s/%s' % (get.installDIR(), "usr/lib/perl5/vendor_perl/%s/%s-linux-thread-multi/auto/" % (get.curPERL(), get.HOST().split("-")[0]))
     for root, dirs, files in os.walk(path):
         for packFile in files:
             if packFile == ".packlist":
                 if can_access_file('%s/%s' % (root, packFile)):
                     unlink('%s/%s' % (root, packFile))
+                    removeEmptydirs(root)
+
+def removePodfiles():
+    ''' cleans *.pod files from perl packages '''
+    path = '%s/%s' % (get.installDIR(), "usr/lib/perl5/")
+    for root, dirs, files in os.walk(path):
+        for packFile in files:
+            if packFile.endswith(".pod"):
+                if can_access_file('%s/%s' % (root, packFile)):
+                    unlink('%s/%s' % (root, packFile))
+                    removeEmptydirs(root)
+
+def removeEmptydirs(d):
+    ''' remove empty dirs from perl package if exists after deletion .pod and .packlist files '''
+    if not os.listdir(d) and not d == get.installDIR():
+        unlinkDir(d)
+        d = d[:d.rfind("/")]
+        removeEmptydirs(d)
