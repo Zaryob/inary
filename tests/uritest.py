@@ -1,8 +1,8 @@
 import unittest
 import os
-from pisi import uri
-from pisi.file import File
-from pisi.specfile import SpecFile
+from inary import uri
+from inary.file import File
+from inary.specfile import SpecFile
 
 class UriTestCase(unittest.TestCase):
 

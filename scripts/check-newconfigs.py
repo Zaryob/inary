@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Copyright (C) 2006, TUBITAK/UEKAE
@@ -14,13 +14,13 @@ import os
 import sys
 import exceptions
 
-import pisi
+import inary
 
-installdb = pisi.db.installdb.InstallDB()
+installdb = inary.db.installdb.InstallDB()
 
 def ask_action(msg, actions, default):
     while True:
-        s = raw_input(msg)
+        s = eval(input(msg))
         if len(s) == 0:
             return default
         else:
@@ -35,8 +35,8 @@ def get_installed_packages():
 def check_changed_config_files(package):
     
     all_files = installdb.get_files(package)
-    config_files = filter(lambda x: x.type == 'config', all_files.list)
-    config_paths = map(lambda x: "/" + str(x.path), config_files)
+    config_files = [x for x in all_files.list if x.type == 'config']
+    config_paths = ["/" + str(x.path) for x in config_files]
 
     newconfig = [] 
     for path in config_paths:
@@ -75,7 +75,7 @@ def check_changes():
 
 if __name__ == "__main__":
      if len(sys.argv) == 1:
-         print "Checking all packages"
+         print("Checking all packages")
          check_changes()
      if len(sys.argv) == 2:
          check_package(sys.argv[1])

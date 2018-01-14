@@ -1,34 +1,34 @@
 import unittest
-import pisi.relation
-import pisi.dependency
+import inary.relation
+import inary.dependency
 
 class DependencyTestCase(unittest.TestCase):
 
     def testDictSatisfiesDep(self):
-        pisi.api.install(["ethtool"])
-        relation = pisi.relation.Relation()
+        inary.api.install(["ethtool"])
+        relation = inary.relation.Relation()
         relation.package = "ethtool"
 
-        pisi.api.install(["zlib"])
-        rel = pisi.relation.Relation()
+        inary.api.install(["zlib"])
+        rel = inary.relation.Relation()
         rel.package = "zlib"
 
-        depinfo = pisi.dependency.Dependency(relation)
+        depinfo = inary.dependency.Dependency(relation)
         dictionary = {"ethtool": [" "],"zlib":["a","b"],"ctorrent":["c"]}
         assert not depinfo.satisfied_by_dict_repo(dictionary)
-        depinf = pisi.dependency.Dependency(rel)
+        depinf = inary.dependency.Dependency(rel)
         assert not depinf.satisfied_by_dict_repo(dictionary)
 
     def testInstalledSatisfiesDep(self):
-        pisi.api.install(["ctorrent"])
-        relation = pisi.relation.Relation()
+        inary.api.install(["ctorrent"])
+        relation = inary.relation.Relation()
         relation.package = "ctorrent"
-        depinfo = pisi.dependency.Dependency(relation)
+        depinfo = inary.dependency.Dependency(relation)
         assert not depinfo.satisfied_by_installed()
 
     def testRepoSatisfiesDependency(self):
-        pisi.api.install(["ethtool"])
-        relation = pisi.relation.Relation()
+        inary.api.install(["ethtool"])
+        relation = inary.relation.Relation()
         relation.package = "ctorrent"
-        depinfo = pisi.dependency.Dependency(relation)
+        depinfo = inary.dependency.Dependency(relation)
         assert not depinfo.satisfied_by_repo()

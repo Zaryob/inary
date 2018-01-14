@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+#
+# Copyright (C) 2016 - 2018, Suleyman POYRAZ (AquilaNipalensis)
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 2 of the License, or (at your option)
+# any later version.
+#
+# Please read the COPYING file.
+#
+import sys
+import errno
+import traceback
+import signal
+
+import inary
+import inary.context as ctx
+import inary.cli.inarycli as inarycli
+import gettext
+gettext.bindtextdomain('inary', "/usr/share/locale")
+gettext.textdomain('inary')
+__trans = gettext.translation('inary', fallback=True)
+_ = __trans.gettext
+
+def sig_handler(sig, frame):
+    if sig == signal.SIGTERM:
+        exit()
+
+def exit():
+    sys.exit(1)
+
+def handle_exception(exception, value, tb):
+    try:
+        signal.signal(signal.SIGINT, signal.SIG_IGN)   # disable further interrupts
+        ui = inary.cli.CLI() # make a temporary UI
+        show_traceback = False
+
+    except KeyboardInterrupt:
+        ui.error(_("Keyboard Interrupt: Exiting..."))
+        exit()
+    if isinstance(value, inary.Error):
+        ui.error(_("Program terminated."))
+    elif isinstance(value, inary.Exception):
+        show_traceback = True
+        ui.error(_("Unhandled internal exception.\n"
+                   "Please file a bug report to <http://bugs.pardus.org.tr>."))
+    elif isinstance(value, IOError) and value.errno == errno.EPIPE:
+        # Ignore broken pipe errors
+        sys.exit(0)
+    else:
+        # For any other exception (possibly Python exceptions) show
+        # the traceback!
+        show_traceback = ctx.get_option('debug')
+        ui.error(_("System error. Program terminated."))
+
+    if show_traceback:
+        ui.error("%s: %s" % (exception, str(value)))
+    else:
+        msg = str(value)
+        if msg:
+            ui.error(msg)
+
+    ui.info(_("Please use 'inary help' for general help."))
+
+    if show_traceback:
+        ui.info(_("\nTraceback:"))
+        traceback.print_tb(tb)
+    elif not isinstance(value, inary.Error):
+        ui.info(_("Use --debug to see a traceback."))
+
+    exit()
+
+if __name__ == "__main__":
+    sys.excepthook = handle_exception
+
+    signal.signal(signal.SIGTERM, sig_handler)
+
+    cli = inarycli.InaryCLI()
+    if cli.command.name[1] in "rdb sf".split():
+        ctx.filesdb = inary.db.filesldb.FilesLDB()
+    cli.run_command()

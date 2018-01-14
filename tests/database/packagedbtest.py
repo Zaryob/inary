@@ -10,14 +10,14 @@
 # Please read the COPYING file.
 #
 
-import testcase
-import pisi
+from . import testcase
+import inary
 
 class PackageDBTestCase(testcase.TestCase):
     
     def setUp(self):
         testcase.TestCase.setUp(self)
-        self.packagedb = pisi.db.packagedb.PackageDB()
+        self.packagedb = inary.db.packagedb.PackageDB()
 
     def testGetPackage(self):
         pkg = self.packagedb.get_package("ncftp", "pardus-2007")

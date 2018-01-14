@@ -66,15 +66,15 @@ def fixTags(doc, hist):
 
 def fixPspec(path):
     doc = mdom.parse(path)
-    pisi = doc.documentElement
-    source = getTags(pisi, "Source")[0]
+    inary = doc.documentElement
+    source = getTags(inary, "Source")[0]
     history = getTags(source, "History")[0]
     item = source.removeChild(history)
-    addText(doc, pisi, "\n    ")
+    addText(doc, inary, "\n    ")
     fixIndent(doc, item)
     fixTags(doc, item)
-    pisi.appendChild(item)
-    addText(doc, pisi, "\n")
+    inary.appendChild(item)
+    addText(doc, inary, "\n")
     f = codecs.open(path,'w', "utf-8")
     f.write(doc.toxml())
     f.close()

@@ -10,14 +10,14 @@
 # Please read the COPYING file.
 #
 
-import testcase
-import pisi
+from . import testcase
+import inary
 
 class ComponentDBTestCase(testcase.TestCase):
 
     def setUp(self):
         testcase.TestCase.setUp(self)
-        self.componentdb = pisi.db.componentdb.ComponentDB()
+        self.componentdb = inary.db.componentdb.ComponentDB()
 
     def testHasComponent(self):
         assert self.componentdb.has_component("system.base", "pardus-2007")

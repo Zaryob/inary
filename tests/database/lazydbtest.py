@@ -11,7 +11,7 @@
 #
 
 import unittest
-import pisi.db.lazydb as lazydb
+import inary.db.lazydb as lazydb
 
 class TestDB(lazydb.LazyDB):
 
@@ -26,12 +26,12 @@ class LazyDBTestCase(unittest.TestCase):
     def testDatabaseMethodForcingInit(self):
         db = TestDB()
         assert db.getTestField()
-        assert db.__dict__.has_key("testfield")
+        assert "testfield" in db.__dict__
         db._delete()
 
     def testDatabaseWithoutInit(self):
         db = TestDB()
-        assert not db.__dict__.has_key("testfield")
+        assert "testfield" not in db.__dict__
         db._delete()
 
     def testSingletonBehaviour(self):

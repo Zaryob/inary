@@ -1,17 +1,17 @@
 import unittest
-import pisi.relation
+import inary.relation
 
 class HistoryTestCase(unittest.TestCase):
 
     def testCreate(self):
-        history = pisi.history.History()
+        history = inary.history.History()
         operation = 'upgrade'
         history.create(operation)
         history.create('install')
         history.create('snapshot')
 
     def testGetLatest(self):
-        history = pisi.history.History()
+        history = inary.history.History()
         history.read('history/001_upgrade.xml')
         assert not '099' == history._get_latest()
 

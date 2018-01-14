@@ -4,7 +4,7 @@
 #
 # Source   : http://bugs.pardus.org.tr/show_bug.cgi?id=4211
 #
-# Problem  : PISI does not upgrade or install system.base packages before any other package
+# Problem  : SPAM does not upgrade or install system.base packages before any other package
 #
 # Bağımlılıkları sağlamak için bu paketler verilen sırada kurulacaktır:
 # util-macros xorg-proto xtrans libXdmcp libXau libX11 libXext libXp libICE libSM
@@ -22,34 +22,34 @@
 # xorg-input font-util xorg-font zorg jimmac-xcursor xorg-video xorg-server psmisc
 # ddcxinfos texinfo groff groff-utf8 man man-pages coolplug mkinitramfs parted
 # grub udev libgcc klibc lzma nss-mdns mudur gzip ncompress tar piksemel file
-# python-bsddb3 pisi nano glibc lib-compat miscfiles libpng jpeg libcap
+# python-bsddb3 spam nano glibc lib-compat miscfiles libpng jpeg libcap
 # openldap-client bc dmidecode fbgrab splashutils-misc splashutils pyparted
 # openssh sysfsutils pcmciautils zip libusb linux-headers memtest86 procps curl
 # vixie-cron slang usbutils pciutils
 # Paket(ler)in toplam boyu: 65.91 MB
 # Bağımlılıklar yüzünden ek paketler var. Devam etmek istiyor musunuz? (evet/hayır)e
 # Paket util-macros, buildfarm deposunda bulundu
-# util-macros-1.1.2-2-3.pisi     (5.0 KB)100%      0.00 B/s [??:??:??] [bitti]
+# util-macros-1.1.2-2-3.spam     (5.0 KB)100%      0.00 B/s [??:??:??] [bitti]
 # util-macros paketi, versiyon 1.1.2, sürüm 2, inşa 3 kuruluyor
 # util-macros paketinin dosyaları arşivden çıkartılıyor
 # util-macros paketi yapılandırılıyor
 # util-macros paketi yapılandırıldı
 # util-macros paketi kuruldu
 # Paket xorg-proto, buildfarm deposunda bulundu
-# xorg-proto-7.2_rc1-2-3.pisi    (190.0 KB)100%     77.64 KB/s [00:00:00] [bitti]
+# xorg-proto-7.2_rc1-2-3.spam    (190.0 KB)100%     77.64 KB/s [00:00:00] [bitti]
 # Klavye kesmesi: Çıkıyor...
 #
 # Problem Description: 
 # 
-# In an upgrade or installation PiSi does not upgrade or install system.base packages before any
+# In an upgrade or installation SPaM does not upgrade or install system.base packages before any
 # other package.
 #
 # Expected:
 #
-# PiSi should update or install system.base packages before any other package on the system.
+# SPaM should update or install system.base packages before any other package on the system.
 #
 
-from pisi.scenarioapi.scenario import *
+from spam.scenarioapi.scenario import *
 
 OPENOFFICE="openoffice"
 SUN_JRE="sun-jre"
@@ -65,7 +65,7 @@ let_repo_had(XORG_PROTO)
 let_repo_had(OPENOFFICE, with_dependencies(SUN_JRE))
 let_repo_had(SUN_JRE)
 
-let_pisi_had(UTIL_MACROS, XORG_PROTO, COMAR, MUDUR, OPENOFFICE, SUN_JRE)
+let_spam_had(UTIL_MACROS, XORG_PROTO, COMAR, MUDUR, OPENOFFICE, SUN_JRE)
 
 def run():
     repo_version_bumped(SUN_JRE)
@@ -76,5 +76,5 @@ def run():
     repo_version_bumped(UTIL_MACROS)
 
     repo_updated_index()
-    pisi_upgraded(OPENOFFICE, SUN_JRE)
+    spam_upgraded(OPENOFFICE, SUN_JRE)
 

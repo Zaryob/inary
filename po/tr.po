@@ -1,5 +1,5 @@
 # translation of tr.po to Turkish
-# PiSi Translation
+# INARY Translation
 # Copyright (C) 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
 # Eray Ozkural <eray@pardus.org.tr>, 2005,2006.
 # Furkan Duman <coderlord@gmail.com>, 2006.
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-17 14:30+0300\n"
+"POT-Creation-Date: 2017-07-02 23:23+UTC\n"
 "PO-Revision-Date: 2010-03-24 16:28+0200\n"
 "Last-Translator: Fatih Aşıcı <fatih@pardus.org.tr>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -23,107 +23,32 @@ msgstr ""
 "Plural-Forms: nplurals=1;plural=0;\n"
 "X-Generator: Lokalize 1.0\n"
 
-#: /usr/lib/python2.7/optparse.py:140
-#, python-format
-msgid "no such option: %s"
-msgstr "bilinmeyen seçenek: %s"
-
-#: /usr/lib/python2.7/optparse.py:151
-#, python-format
-msgid "ambiguous option: %s (%s?)"
-msgstr "belirsiz seçenek: %s (%s?)"
-
-#: /usr/lib/python2.7/optparse.py:374
-#, python-format
-msgid "Usage: %s\n"
-msgstr "Kullanım: %s\n"
-
-#: /usr/lib/python2.7/optparse.py:393
-msgid "Usage"
-msgstr "Kullanım"
-
-#: /usr/lib/python2.7/optparse.py:418
-msgid "integer"
-msgstr "tamsayı"
-
-#: /usr/lib/python2.7/optparse.py:419
-msgid "long integer"
-msgstr "uzun tamsayı"
-
-#: /usr/lib/python2.7/optparse.py:420
-msgid "floating-point"
-msgstr "kayan noktalı"
-
-#: /usr/lib/python2.7/optparse.py:421
-msgid "complex"
-msgstr "karmaşık"
-
-#: /usr/lib/python2.7/optparse.py:429
-#, python-format
-msgid "option %s: invalid %s value: %r"
-msgstr "seçenek %s: geçersiz %s değeri: %r"
-
-#: /usr/lib/python2.7/optparse.py:437
-#, python-format
-msgid "option %s: invalid choice: %r (choose from %s)"
-msgstr "seçenek %s: geçersiz seçim: %r (olası değerler: %s)"
-
-#: /usr/lib/python2.7/optparse.py:1245
-msgid "show this help message and exit"
-msgstr "bu yardım iletisini göster ve çık"
-
-#: /usr/lib/python2.7/optparse.py:1250
-msgid "show program's version number and exit"
-msgstr "programın sürüm numarasını göster ve çık"
-
-#: /usr/lib/python2.7/optparse.py:1273
-msgid "%prog [options]"
-msgstr "%prog [seçenekler]"
-
-#: /usr/lib/python2.7/optparse.py:1493 /usr/lib/python2.7/optparse.py:1532
-#, python-format
-msgid "%s option requires an argument"
-msgstr "%s seçeneği bir argüman almalıdır"
-
-#: /usr/lib/python2.7/optparse.py:1495 /usr/lib/python2.7/optparse.py:1534
-#, python-format
-msgid "%s option requires %d arguments"
-msgstr "%s seçeneği %d adet argüman almalıdır"
-
-#: /usr/lib/python2.7/optparse.py:1504
-#, python-format
-msgid "%s option does not take a value"
-msgstr "%s seçeneği herhangi bir değer almaz"
-
-#: /usr/lib/python2.7/optparse.py:1621
-msgid "Options"
-msgstr "Seçenekler"
-
-#: pisi-cli:42
+#: inary-cli:40
 msgid "Keyboard Interrupt: Exiting..."
 msgstr "Klavye Kesmesi: Program Sonlandırılıyor..."
 
-#: pisi-cli:45
+#: inary-cli:43
 msgid "Program terminated."
 msgstr "Program sonlandırıldı."
 
-#: pisi-cli:48
+#: inary-cli:46
+#, fuzzy
 msgid ""
 "Unhandled internal exception.\n"
 "Please file a bug report to <http://bugs.pardus.org.tr>."
 msgstr ""
 "Denetlenmeyen iç hata.\n"
-"Lütfen bu hatayı <http://hata.pardus.org.tr> adresine bildiriniz."
+"Lütfen bu hatayı <http://bugs.inarylinux.org> adresine bildiriniz."
 
-#: pisi-cli:57
+#: inary-cli:55
 msgid "System error. Program terminated."
 msgstr "Sistem hatası. Program sonlandırıldı."
 
-#: pisi-cli:66
-msgid "Please use 'pisi help' for general help."
-msgstr "Genel yardım için lütfen 'pisi help' komutunu kullanınız."
+#: inary-cli:64
+msgid "Please use 'inary help' for general help."
+msgstr "Genel yardım için lütfen 'inary help' komutunu kullanınız."
 
-#: pisi-cli:69
+#: inary-cli:67
 msgid ""
 "\n"
 "Traceback:"
@@ -131,16 +56,11 @@ msgstr ""
 "\n"
 "Geri iz:"
 
-#: pisi-cli:72
+#: inary-cli:70
 msgid "Use --debug to see a traceback."
 msgstr "Geri izleme verisi almak için lütfen --debug seçeneğini kullanın."
 
-#: pisi.xml.in.h:1
-msgid "PiSi package"
-msgstr "PiSi paketi"
-
-#: pisi/actionsapi/autotools.py:36 pisi/actionsapi/cmaketools.py:36
-#, python-format
+#: inary/actionsapi/autotools.py:40 inary/actionsapi/cmaketools.py:36
 msgid ""
 "Please attach the config.log to your bug report:\n"
 "%s/config.log"
@@ -148,79 +68,98 @@ msgstr ""
 "Lütfen hata raporunuza config.log dosyasını ekleyin:\n"
 "%s/config.log"
 
-# pisi/actionsapi/autotools.py:75 :85
-#: pisi/actionsapi/autotools.py:77 pisi/actionsapi/autotools.py:87
-#: pisi/actionsapi/cmaketools.py:66 pisi/actionsapi/kde.py:65
-#: pisi/actionsapi/perlmodules.py:54 pisi/actionsapi/perlmodules.py:57
+# inary/actionsapi/autotools.py:75 :85
+#: inary/actionsapi/autotools.py:84 inary/actionsapi/autotools.py:94
+#: inary/actionsapi/cmaketools.py:66 inary/actionsapi/kde.py:65
+#: inary/actionsapi/perlmodules.py:55 inary/actionsapi/perlmodules.py:58
 msgid "Configure failed."
 msgstr "Yapılandırma işlemi başarısız oldu."
 
-# pisi/actionsapi/autotools.py:77 :87
-#: pisi/actionsapi/autotools.py:79 pisi/actionsapi/autotools.py:89
-#: pisi/actionsapi/kde.py:67
+# inary/actionsapi/autotools.py:77 :87
+#: inary/actionsapi/autotools.py:86 inary/actionsapi/autotools.py:96
+#: inary/actionsapi/kde.py:67
 msgid "No configure script found."
 msgstr "Yapılandırma betiği bulunamadı."
 
-#: pisi/actionsapi/autotools.py:97 pisi/actionsapi/cmaketools.py:78
-#: pisi/actionsapi/kde.py:72 pisi/actionsapi/perlmodules.py:63
-#: pisi/actionsapi/perlmodules.py:72 pisi/actionsapi/pythonmodules.py:62
-#: pisi/actionsapi/scons.py:39
+#: inary/actionsapi/autotools.py:104 inary/actionsapi/cmaketools.py:78
+#: inary/actionsapi/kde.py:72 inary/actionsapi/perlmodules.py:64
+#: inary/actionsapi/perlmodules.py:73 inary/actionsapi/pythonmodules.py:62
+#: inary/actionsapi/scons.py:39
 msgid "Make failed."
 msgstr "İnşa işlemi başarısız oldu."
 
-# pisi/actionsapi/autotools.py:119 :127
-#: pisi/actionsapi/autotools.py:126 pisi/actionsapi/autotools.py:134
-#: pisi/actionsapi/cmaketools.py:98 pisi/actionsapi/cmaketools.py:106
-#: pisi/actionsapi/kde.py:79 pisi/actionsapi/pythonmodules.py:67
-#: pisi/actionsapi/rubymodules.py:92 pisi/actionsapi/rubymodules.py:99
-#: pisi/actionsapi/scons.py:43
+# inary/actionsapi/autotools.py:119 :127
+#: inary/actionsapi/autotools.py:140 inary/actionsapi/autotools.py:151
+#: inary/actionsapi/cmaketools.py:98 inary/actionsapi/cmaketools.py:106
+#: inary/actionsapi/kde.py:79 inary/actionsapi/pythonmodules.py:67
+#: inary/actionsapi/rubymodules.py:92 inary/actionsapi/rubymodules.py:99
+#: inary/actionsapi/scons.py:43
 msgid "Install failed."
 msgstr "Kurulum işlemi başarısız oldu."
 
-#: pisi/actionsapi/autotools.py:141
+#: inary/actionsapi/autotools.py:162
 msgid "Running aclocal failed."
 msgstr "aclocal çalıştırma işlemi başarısız oldu."
 
-# pisi/actionsapi/autotools.py:139 :144
-#: pisi/actionsapi/autotools.py:146
+# inary/actionsapi/autotools.py:139 :144
+#: inary/actionsapi/autotools.py:167
 msgid "Running autoconf failed."
 msgstr "autoconf çalıştırma işlemi başarısız oldu."
 
-# pisi/actionsapi/autotools.py:139 :144
-#: pisi/actionsapi/autotools.py:151
+# inary/actionsapi/autotools.py:139 :144
+#: inary/actionsapi/autotools.py:172
 msgid "Running autoreconf failed."
 msgstr "autoreconf çalıştırma işlemi başarısız oldu."
 
-#: pisi/actionsapi/autotools.py:156
+#: inary/actionsapi/autotools.py:177
 msgid "Running automake failed."
 msgstr "automake çalıştırma işlemi başarısız oldu."
 
-#: pisi/actionsapi/autotools.py:161
+#: inary/actionsapi/autotools.py:182
 msgid "Running autoheader failed."
 msgstr "autoheader çalıştırma işlemi başarısız oldu."
 
-# pisi/actionsapi/autotools.py:77 :87
-#: pisi/actionsapi/cmaketools.py:68
+# inary/actionsapi/autotools.py:77 :87
+#: inary/actionsapi/cmaketools.py:68
 msgid "No configure script found for cmake."
 msgstr "cmake için yapılandırma betiği bulunamadı."
 
-# pisi/actionsapi/autotools.py:121 :129
-#: pisi/actionsapi/cmaketools.py:110 pisi/actionsapi/kde.py:81
+# inary/actionsapi/autotools.py:121 :129
+#: inary/actionsapi/cmaketools.py:110 inary/actionsapi/kde.py:81
 msgid "No Makefile found."
 msgstr "Make dosyası bulunamadı."
 
-#: pisi/actionsapi/get.py:178
-#, python-format
+#: inary/actionsapi/get.py:181
 msgid "Util %s cannot be found"
 msgstr "%s aracı bulunamadı."
 
-#: pisi/actionsapi/get.py:180
-#, python-format
+#: inary/actionsapi/get.py:183
 msgid "Warning: %s does not exist, using plain name %s"
 msgstr "Uyarı: %s yok, düz ad %s kullanılıyor."
 
-#: pisi/actionsapi/kde.py:34
-#, python-format
+#: inary/actionsapi/javamodules.py:92 inary/actionsapi/javamodules.py:98
+#, fuzzy
+msgid "DoJavadoc failed."
+msgstr "İnşa işlemi başarısız oldu."
+
+# inary/actionsapi/autotools.py:75 :85
+#: inary/actionsapi/javamodules.py:148
+#, fuzzy
+msgid "Compile failed."
+msgstr "Yapılandırma işlemi başarısız oldu."
+
+# inary/actionsapi/autotools.py:75 :85
+#: inary/actionsapi/javamodules.py:246
+#, fuzzy
+msgid "Javadoc generation failed."
+msgstr "Yapılandırma sırasında hata oluştu."
+
+#: inary/actionsapi/javamodules.py:262
+#, fuzzy
+msgid "Run failed."
+msgstr "%s çalıştırma işlemi başarısız oldu."
+
+#: inary/actionsapi/kde.py:34
 msgid ""
 "\n"
 "!!! Please attach the config.log to your bug report:\n"
@@ -230,511 +169,449 @@ msgstr ""
 "Lütfen hata raporunuza config.log dosyasını ekleyin:\n"
 "%s/config.log"
 
-#: pisi/actionsapi/kerneltools.py:117
-#, python-format
+#: inary/actionsapi/kerneltools.py:117
 msgid "Can't find kernel version information file %s."
 msgstr "Çekirdek sürüm bilgisi dosyası %s bulunamıyor."
 
-#: pisi/actionsapi/libtools.py:38
+#: inary/actionsapi/libtools.py:38
 msgid "Running ldconfig failed."
 msgstr "ldconfig çalıştırma işlemi başarısız oldu."
 
-#: pisi/actionsapi/libtools.py:49
+#: inary/actionsapi/libtools.py:52
+msgid "Can not make GNU Config Update... Passing..."
+msgstr ""
+
+#: inary/actionsapi/libtools.py:54
 msgid "GNU Config Update Finished."
 msgstr "GNU Yapılandırma Güncellemesi Bitti."
 
-#: pisi/actionsapi/libtools.py:53
+#: inary/actionsapi/libtools.py:58
 msgid "Running libtoolize failed."
 msgstr "libtoolize çalıştırma işlemi başarısız oldu."
 
-# pisi/actionsapi/autotools.py:119 :127
-#: pisi/actionsapi/perlmodules.py:66
+# inary/actionsapi/autotools.py:119 :127
+#: inary/actionsapi/perlmodules.py:67
 msgid "perl build failed."
 msgstr "perl inşa işlemi başarısız oldu."
 
-# pisi/actionsapi/autotools.py:119 :127
-#: pisi/actionsapi/perlmodules.py:75
+# inary/actionsapi/autotools.py:119 :127
+#: inary/actionsapi/perlmodules.py:76
 msgid "perl install failed."
 msgstr "perl kurma işlemi başarısız oldu."
 
-#: pisi/actionsapi/pisitools.py:75 pisi/actionsapi/pisitools.py:132
-#, python-format
-msgid "No file matched pattern \"%s\""
-msgstr "\"%s\" ile eşleşen bir dosya bulunamadı."
+#: inary/actionsapi/pkgconfig.py:40 inary/actionsapi/pkgconfig.py:59
+#: inary/actionsapi/pkgconfig.py:79 inary/actionsapi/pkgconfig.py:99
+#: inary/actionsapi/pkgconfig.py:118 inary/actionsapi/pkgconfig.py:136
+#, fuzzy
+msgid "pkg-config is not installed on your system."
+msgstr "Paket %s kurulu değil. Kaldırılamıyor."
 
-#: pisi/actionsapi/pisitools.py:142
-#, python-format
-msgid "ActionsAPI [doman]: Wrong man page file: %s"
-msgstr "ActionsAPI [doman]: Yanlış kılavuz sayfası dosyası: %s"
-
-#: pisi/actionsapi/pisitools.py:169
-#, python-format
-msgid "No file matched pattern \"%s\". 'domove' operation failed."
-msgstr "\"%s\" ile eşleşen bir dosya bulunamadı. 'domove' işlemi başarısız oldu."
-
-#: pisi/actionsapi/pisitools.py:188
-#, python-format
-msgid "ActionsAPI [rename]: %s: %s"
-msgstr "ActionsAPI [rename]: %s: %s"
-
-#: pisi/actionsapi/pisitools.py:203
-#, python-format
-msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
-msgstr "\"%s\" ile eşleşen bir dosya bulunamadı. 'dosed' işlemi başarısız oldu."
-
-#: pisi/actionsapi/pisitools.py:216
-#, python-format
-msgid "dosed method has not changed file '%s'."
-msgstr "dosed '%s' dosyasında bir değişiklik yapmadı."
-
-#: pisi/actionsapi/pisitools.py:219
-#, python-format
-msgid "File does not exist or permission denied: %s"
-msgstr "Dosya yok ya da erişim reddedildi: %s"
-
-#: pisi/actionsapi/pisitools.py:236
-#, python-format
-msgid "ActionsAPI [dosym]: File already exists: %s"
-msgstr "ActionsAPI [dosym]: Dosya zaten var: %s"
-
-#: pisi/actionsapi/pisitools.py:245 pisi/actionsapi/pisitoolsfunctions.py:71
-#, python-format
-msgid "No file matched pattern \"%s\"."
-msgstr "\"%s\" ile eşleşen bir dosya bulunamadı."
-
-#: pisi/actionsapi/pisitools.py:272 pisi/actionsapi/shelltools.py:97
-#, python-format
-msgid "No file matched pattern \"%s\". Remove operation failed."
-msgstr "\"%s\" ile eşleşen bir dosya bulunamadı. Silme işlemi başarısız oldu."
-
-#: pisi/actionsapi/pisitools.py:281
-#, python-format
-msgid "No directory matched pattern \"%s\". Remove directory operation failed."
-msgstr "\"%s\" ile eşleşen bir dizin bulunamadı. Dizin silme işlemi başarısız oldu."
-
-# pisi/actionsapi/pisitoolsfunctions.py:46 :59
-#: pisi/actionsapi/pisitoolsfunctions.py:45
-#: pisi/actionsapi/pisitoolsfunctions.py:63
-#: pisi/actionsapi/pisitoolsfunctions.py:80
-msgid "Insufficient arguments."
-msgstr "Yetersiz sayıda parametre."
-
-#: pisi/actionsapi/pisitoolsfunctions.py:53
-#, python-format
-msgid "No executable file matched pattern \"%s\"."
-msgstr "\"%s\" ile eşleşen çalıştırılabilir bir dosya bulunamadı."
-
-# pisi/actionsapi/autotools.py:75 :85
-#: pisi/actionsapi/pythonmodules.py:56
+# inary/actionsapi/autotools.py:75 :85
+#: inary/actionsapi/pythonmodules.py:56
 msgid "Configuration failed."
 msgstr "Yapılandırma sırasında hata oluştu."
 
-#: pisi/actionsapi/pythonmodules.py:81
-#, python-format
+#: inary/actionsapi/pythonmodules.py:81
 msgid "Running %s failed."
 msgstr "%s çalıştırma işlemi başarısız oldu."
 
-#: pisi/actionsapi/qt4.py:52
-#, python-format
+#: inary/actionsapi/qt4.py:52 inary/actionsapi/qt5.py:60
 msgid "Project file '%s' not found."
 msgstr "'%s' dosyası bulunamadı."
 
-#: pisi/actionsapi/qt4.py:56
-#, python-format
-msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)"
-msgstr "Birden fazla .pro dosyası mevcut görünüyor. Bir tane belirtmelisiniz (Olası .pro dosyaları: %s)."
+#: inary/actionsapi/qt4.py:56 inary/actionsapi/qt5.py:64
+msgid ""
+"It seems there are more than one .pro file, you must specify one. (Possible ."
+"pro files: %s)"
+msgstr ""
+"Birden fazla .pro dosyası mevcut görünüyor. Bir tane belirtmelisiniz (Olası ."
+"pro dosyaları: %s)."
 
-#: pisi/actionsapi/rubymodules.py:108
-#, python-format
+#: inary/actionsapi/rubymodules.py:108
 msgid "Running 'ruby %s' failed."
 msgstr "'%s' komutu başarısız oldu."
 
-#: pisi/actionsapi/shelltools.py:49
-#, python-format
+#: inary/actionsapi/shelltools.py:49
 msgid "Cannot create directory %s"
 msgstr "%s dizini oluşturulamıyor."
 
-#: pisi/actionsapi/shelltools.py:57
-#, python-format
+#: inary/actionsapi/shelltools.py:57
 msgid "ActionsAPI [echo]: Can't append to file %s."
 msgstr "ActionsAPI [echo]: %s dosyasına ekleme yapılamıyor."
 
-#: pisi/actionsapi/shelltools.py:63
-#, python-format
+#: inary/actionsapi/shelltools.py:63
 msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
 msgstr "ActionsAPI [chmod]: \"%s\" ile eşleşen bir dosya bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:70
-#, python-format
+#: inary/actionsapi/shelltools.py:70
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
 msgstr "ActionsAPI [chmod]: İşleme izin verilmedi: %s (kip: 0%o)"
 
-#: pisi/actionsapi/shelltools.py:73
-#, python-format
+#: inary/actionsapi/shelltools.py:73
 msgid "ActionsAPI [chmod]: File %s doesn't exists."
 msgstr "ActionsAPI [chmod]: %s dosyası bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:81
-#, python-format
+#: inary/actionsapi/shelltools.py:81
 msgid "ActionsAPI [chown]: Operation not permitted: %s (uid: %s, gid: %s)"
 msgstr "ActionsAPI [chown]: İşleme izin verilmedi: %s (uid: %s, gid: %s)"
 
-#: pisi/actionsapi/shelltools.py:84
-#, python-format
+#: inary/actionsapi/shelltools.py:84
 msgid "ActionsAPI [chown]: File %s doesn't exists."
 msgstr "ActionsAPI [chown]: %s dosyası bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:91
-#, python-format
+#: inary/actionsapi/shelltools.py:91
 msgid "ActionsAPI [sym]: Permission denied: %s to %s"
 msgstr "ActionsAPI [sym]: Erişim reddedildi: %s -> %s"
 
-#: pisi/actionsapi/shelltools.py:105
-#, python-format
+#: inary/actionsapi/shelltools.py:97 inary/actionsapi/inarytools.py:301
+msgid "No file matched pattern \"%s\". Remove operation failed."
+msgstr "\"%s\" ile eşleşen bir dosya bulunamadı. Silme işlemi başarısız oldu."
+
+#: inary/actionsapi/shelltools.py:105
 msgid "ActionsAPI [unlink]: Permission denied: %s."
 msgstr "ActionsAPI [unlink]: Erişim reddedildi: %s."
 
-#: pisi/actionsapi/shelltools.py:109
-#, python-format
+#: inary/actionsapi/shelltools.py:109
 msgid "ActionsAPI [unlink]: File %s doesn't exists."
 msgstr "ActionsAPI [unlink]: %s dosyası bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:117
-#, python-format
+#: inary/actionsapi/shelltools.py:117
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: %s"
 msgstr "ActionsAPI [unlinkDir]: İşleme izin verilmedi: %s"
 
-#: pisi/actionsapi/shelltools.py:121
-#, python-format
+#: inary/actionsapi/shelltools.py:121
 msgid "ActionsAPI [unlinkDir]: Directory %s doesn't exists."
 msgstr "ActionsAPI [unlinkDir]: %s dizini bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:127
-#, python-format
+#: inary/actionsapi/shelltools.py:127
 msgid "ActionsAPI [move]: No file matched pattern \"%s\"."
 msgstr "ActionsAPI [move]: \"%s\" ile eşleşen bir dosya bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:134
-#, python-format
+#: inary/actionsapi/shelltools.py:134
 msgid "ActionsAPI [move]: Permission denied: %s to %s"
 msgstr "ActionsAPI [move]: Erişim engellendi: %s -> %s"
 
-#: pisi/actionsapi/shelltools.py:136
-#, python-format
+#: inary/actionsapi/shelltools.py:136
 msgid "ActionsAPI [move]: File %s doesn't exists."
 msgstr "ActionsAPI [move]: %s dosyası bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:143
-#, python-format
+#: inary/actionsapi/shelltools.py:143
 msgid "ActionsAPI [copy]: No file matched pattern \"%s\"."
 msgstr "ActionsAPI [copy]: \"%s\" ile eşleşen bir dosya bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:150
-#, python-format
+#: inary/actionsapi/shelltools.py:150
 msgid "ActionsAPI [copy]: Permission denied: %s to %s"
 msgstr "ActionsAPI [copy]: Erişim reddedildi: %s -> %s"
 
-#: pisi/actionsapi/shelltools.py:166
-#, python-format
+#: inary/actionsapi/shelltools.py:166
 msgid "ActionsAPI [copy]: File %s does not exist."
 msgstr "ActionsAPI [copy]: %s dosyası bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:181
-#, python-format
+#: inary/actionsapi/shelltools.py:181
 msgid "ActionsAPI [copytree] %s to %s: %s"
 msgstr "ActionsAPI [copytree]: %s konumundan %s konumuna: %s"
 
-#: pisi/actionsapi/shelltools.py:183
-#, python-format
+#: inary/actionsapi/shelltools.py:183
 msgid "ActionsAPI [copytree]: Directory %s doesn't exists."
 msgstr "ActionsAPI [copytree]: %s dizini bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:191
-#, python-format
+#: inary/actionsapi/shelltools.py:191
 msgid "ActionsAPI [touch]: No file matched pattern \"%s\"."
 msgstr "ActionsAPI [touch]: \"%s\" ile eşleşen bir dosya bulunamadı."
 
-#: pisi/actionsapi/shelltools.py:200
-#, python-format
+#: inary/actionsapi/shelltools.py:200
 msgid "ActionsAPI [touch]: Permission denied: %s"
 msgstr "ActionsAPI [touch]: Erişim reddedildi: %s"
 
-#: pisi/actionsapi/shelltools.py:255
-#, python-format
+#: inary/actionsapi/shelltools.py:259
 msgid "Command \"%s\" failed, return value was %d."
 msgstr "\"%s\" komutu başarısız oldu, dönüş değeri: %d ."
 
-#: pisi/actionsapi/texlivemodules.py:56
+#: inary/actionsapi/inarytools.py:80 inary/actionsapi/inarytools.py:137
+msgid "No file matched pattern \"%s\""
+msgstr "\"%s\" ile eşleşen bir dosya bulunamadı."
+
+#: inary/actionsapi/inarytools.py:147
+msgid "ActionsAPI [doman]: Wrong man page file: %s"
+msgstr "ActionsAPI [doman]: Yanlış kılavuz sayfası dosyası: %s"
+
+#: inary/actionsapi/inarytools.py:174
+msgid "No file matched pattern \"%s\". 'domove' operation failed."
+msgstr ""
+"\"%s\" ile eşleşen bir dosya bulunamadı. 'domove' işlemi başarısız oldu."
+
+#: inary/actionsapi/inarytools.py:193
+msgid "ActionsAPI [rename]: %s: %s"
+msgstr "ActionsAPI [rename]: %s: %s"
+
+#: inary/actionsapi/inarytools.py:230
+msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
+msgstr ""
+"\"%s\" ile eşleşen bir dosya bulunamadı. 'dosed' işlemi başarısız oldu."
+
+#: inary/actionsapi/inarytools.py:244
+msgid "dosed method has not changed file '%s'."
+msgstr "dosed '%s' dosyasında bir değişiklik yapmadı."
+
+#: inary/actionsapi/inarytools.py:248
+msgid "File does not exist or permission denied: %s"
+msgstr "Dosya yok ya da erişim reddedildi: %s"
+
+#: inary/actionsapi/inarytools.py:265
+msgid "ActionsAPI [dosym]: File already exists: %s"
+msgstr "ActionsAPI [dosym]: Dosya zaten var: %s"
+
+#: inary/actionsapi/inarytools.py:274 inary/actionsapi/inarytoolsfunctions.py:71
+msgid "No file matched pattern \"%s\"."
+msgstr "\"%s\" ile eşleşen bir dosya bulunamadı."
+
+#: inary/actionsapi/inarytools.py:310
+msgid "No directory matched pattern \"%s\". Remove directory operation failed."
+msgstr ""
+"\"%s\" ile eşleşen bir dizin bulunamadı. Dizin silme işlemi başarısız oldu."
+
+# inary/actionsapi/inarytoolsfunctions.py:46 :59
+#: inary/actionsapi/inarytoolsfunctions.py:45
+#: inary/actionsapi/inarytoolsfunctions.py:63
+#: inary/actionsapi/inarytoolsfunctions.py:80
+msgid "Insufficient arguments."
+msgstr "Yetersiz sayıda parametre."
+
+#: inary/actionsapi/inarytoolsfunctions.py:53
+msgid "No executable file matched pattern \"%s\"."
+msgstr "\"%s\" ile eşleşen çalıştırılabilir bir dosya bulunamadı."
+
+#: inary/actionsapi/texlivemodules.py:56
 msgid "Moving source files failed"
 msgstr "Kaynak dosyalar taşınırken bir hata oluştu"
 
-#: pisi/actionsapi/texlivemodules.py:59
+#: inary/actionsapi/texlivemodules.py:59
 msgid "Generate config files failed"
 msgstr "Yapılandırma dosyalarının oluşturulması işlemi başarısız oldu."
 
-#: pisi/actionsapi/texlivemodules.py:62
+#: inary/actionsapi/texlivemodules.py:62
 msgid "Building format files failed"
 msgstr "Biçem dosyalarının inşası işlemi başarısız oldu."
 
-#: pisi/actionsapi/texlivemodules.py:69
+#: inary/actionsapi/texlivemodules.py:69
 msgid "Creating symlinks from format to engines failed"
-msgstr "Biçemden motorlara sembolik bağların oluşturulması işlemi başarısız oldu."
+msgstr ""
+"Biçemden motorlara sembolik bağların oluşturulması işlemi başarısız oldu."
 
-# pisi/actionsapi/autotools.py:119 :127
-#: pisi/actionsapi/texlivemodules.py:73
+# inary/actionsapi/autotools.py:119 :127
+#: inary/actionsapi/texlivemodules.py:73
 msgid "Installing docs failed"
 msgstr "Belgelendirme dosyalarının yüklenmesi işlemi başarısız oldu."
 
-# pisi/actionsapi/autotools.py:119 :127
-#: pisi/actionsapi/texlivemodules.py:77
+# inary/actionsapi/autotools.py:119 :127
+#: inary/actionsapi/texlivemodules.py:77
 msgid "Installing texmf files failed"
 msgstr "texmg dosyalarının yüklenmesi işlemi başarısız oldu."
 
-#: pisi/actionsapi/texlivemodules.py:81
+#: inary/actionsapi/texlivemodules.py:81
 msgid "Installing config files failed"
 msgstr "Yapılandırma dosyalarının yüklenmesi işlemi başarısız oldu."
 
-#: pisi/actionsapi/texlivemodules.py:85
+#: inary/actionsapi/texlivemodules.py:85
 msgid "Handle config files failed"
 msgstr "Yapılandırma dosyalarının işlenmesi işlemi başarısız oldu."
 
-#: pisi/actionsapi/texlivemodules.py:95
-#, python-format
+#: inary/actionsapi/texlivemodules.py:95
 msgid "Symlink %s skipped (special case)"
 msgstr "%s sembolik bağı atlandı (özel durum)."
 
-#: pisi/actionsapi/texlivemodules.py:97
-#, python-format
+#: inary/actionsapi/texlivemodules.py:97
 msgid "Symlink %s -> %s skipped (texlive-core takes care of it."
-msgstr "%s konumundan %s konumuna sembolik bağ oluşturma işlemi atlandı (texlive-core halledecek)."
+msgstr ""
+"%s konumundan %s konumuna sembolik bağ oluşturma işlemi atlandı (texlive-"
+"core halledecek)."
 
-#: pisi/actionsapi/texlivemodules.py:100
-#, python-format
+#: inary/actionsapi/texlivemodules.py:100
 msgid "Symlink %s -> %s skipped."
 msgstr "%s konumundan %s konumuna sembolik bağ oluşturma işlemi atlandı."
 
-#: pisi/actionsapi/texlivemodules.py:102
-#, python-format
+#: inary/actionsapi/texlivemodules.py:102
 msgid "Symlink %s skipped (file exists.)"
 msgstr "%s sembolik bağının oluşturulması atlandı (dosya zaten var)."
 
-#: pisi/actionsapi/texlivemodules.py:104
-#, python-format
+#: inary/actionsapi/texlivemodules.py:104
 msgid "Making symlink from %s to %s"
 msgstr "%s konumundan %s konumuna sembolik bağ oluşturuluyor."
 
-#: pisi/actionsapi/texlivemodules.py:153
-#, python-format
+#: inary/actionsapi/texlivemodules.py:153
 msgid "Creating /etc/texmf/%s.d"
 msgstr "/etc/texmf/%s.d oluşturuluyor."
 
-#: pisi/actionsapi/texlivemodules.py:155
-#, python-format
+#: inary/actionsapi/texlivemodules.py:155
 msgid "Moving (and symlinking) /usr/share/texmf/%s to /etc/texmf/%s.d"
-msgstr "/usr/share/texmf/%s dosyası /etc/texmf/%s.d dizinine taşınıyor ve bağ oluşturuluyor"
+msgstr ""
+"/usr/share/texmf/%s dosyası /etc/texmf/%s.d dizinine taşınıyor ve bağ "
+"oluşturuluyor"
 
-#: pisi/actionsapi/texlivemodules.py:206
-#, python-format
+#: inary/actionsapi/texlivemodules.py:206
 msgid "Building format file %s"
 msgstr "Biçem dosyası %s inşa ediliyor."
 
-#: pisi/actionsapi/texlivemodules.py:263
-#, python-format
+#: inary/actionsapi/texlivemodules.py:263
 msgid "Map %s is added to %s/%s.cfg"
 msgstr "%s haritası %2s/%3s.cfg dosyasına eklendi."
 
-#: pisi/actionsapi/texlivemodules.py:266
-#, python-format
+#: inary/actionsapi/texlivemodules.py:266
 msgid "MixedMap %s is added to %s/%s.cfg"
 msgstr "%s karıştırılmış haritası %s/%s.cfg dosyasına eklendi."
 
-#: pisi/actionsapi/texlivemodules.py:269
-#, python-format
+#: inary/actionsapi/texlivemodules.py:269
 msgid "p +%s is added to %s/%s-config.ps"
 msgstr "p +%s %s/%s-config.ps dosyasına eklendi."
 
-#: pisi/actionsapi/texlivemodules.py:272
-#, python-format
+#: inary/actionsapi/texlivemodules.py:272
 msgid "f %s is added to %s/%s-config"
 msgstr "f %s %s/%s-config dosyasına eklendi."
 
-#: pisi/actionsapi/texlivemodules.py:279
-#, python-format
+#: inary/actionsapi/texlivemodules.py:279
 msgid "Language file  %s  already generated."
 msgstr "Lisan dosyası %s zaten oluşturuldu."
 
-#: pisi/actionsapi/texlivemodules.py:281
-#, python-format
+#: inary/actionsapi/texlivemodules.py:281
 msgid "No rule to proccess %s. Please file a bug."
-msgstr "%s öğesini işlemek için kural belirtilmemiş, lütfen bir hata raporu girin."
+msgstr ""
+"%s öğesini işlemek için kural belirtilmemiş, lütfen bir hata raporu girin."
 
-#: pisi/api.py:58 pisi/cli/command.py:166
+#: inary/api.py:58 inary/cli/command.py:167
 msgid "You have to be root for this operation."
 msgstr "Bu işlemi yapabilmek için root kullanıcısı olmalısınız."
 
-#: pisi/api.py:65
-msgid "Another instance of PiSi is running. Only one instance is allowed."
-msgstr "Sistemde çalışan bir PiSi mevcut. Aynı anda sadece tek PiSi çalışabilir."
+#: inary/api.py:65
+msgid "Another instance of INARY is running. Only one instance is allowed."
+msgstr ""
+"Sistemde çalışan bir INARY mevcut. Aynı anda sadece tek INARY çalışabilir."
 
-#: pisi/api.py:420
-#, python-format
+#: inary/api.py:419
 msgid "%s package found in %s repository"
 msgstr "%s paketi %s deposunda bulundu"
 
-#: pisi/api.py:424
-#, python-format
+#: inary/api.py:423
 msgid "%s package already fetched"
 msgstr "%s paketi zaten indirilmiş"
 
-#: pisi/api.py:532
-#, python-format
+#: inary/api.py:531
 msgid "Cleaning package cache %s..."
 msgstr "Paket önbelleği %s temizleniyor..."
 
-#: pisi/api.py:534
-#, python-format
+#: inary/api.py:533
 msgid "Cleaning source archive cache %s..."
 msgstr "Kaynak arşivi önbelleği %s temizleniyor..."
 
-#: pisi/api.py:536
-#, python-format
+#: inary/api.py:535
 msgid "Cleaning temporary directory %s..."
 msgstr "Geçici dizin %s temizleniyor..."
 
-#: pisi/api.py:540
-#, python-format
+#: inary/api.py:539
 msgid "Removing cache file %s..."
 msgstr "Önbellek dosyası %s siliniyor..."
 
-#: pisi/api.py:571
+#: inary/api.py:570
 msgid "Taking snapshot of the system"
 msgstr "Sistemin görüntüsü alınıyor."
 
-#: pisi/api.py:732
-msgid "comar package is not fully installed"
+#: inary/api.py:731
+#, fuzzy
+msgid "scom package is not fully installed"
 msgstr "comar paketi tam olarak kurulmamış."
 
-#: pisi/api.py:744
-#, python-format
+#: inary/api.py:743
 msgid "File %s not found"
 msgstr "%s dosyası bulunamadı."
 
-#: pisi/api.py:786
-#, python-format
-msgid "Building index of PiSi files under %s"
-msgstr "%s altındaki PiSi dosyalarının kataloğu oluşturuluyor"
+#: inary/api.py:785
+msgid "Building index of INARY files under %s"
+msgstr "%s altındaki INARY dosyalarının kataloğu oluşturuluyor"
 
-#: pisi/api.py:791
+#: inary/api.py:790
 msgid "Index file written"
 msgstr "Katalog dosyası oluşturuldu"
 
-#: pisi/api.py:796
+#: inary/api.py:795
 msgid "Not a valid repo name."
 msgstr "Geçerli bir depo ismi değil."
 
-#: pisi/api.py:799
-#, python-format
+#: inary/api.py:798
 msgid "Repo %s already present."
 msgstr "%s deposu zaten mevcut."
 
-#: pisi/api.py:802
-#, python-format
+#: inary/api.py:801
 msgid "Repo already present with name %s."
 msgstr "%s isminde bir depo zaten mevcut."
 
-#: pisi/api.py:807
-#, python-format
+#: inary/api.py:806
 msgid "Repo %s added to system."
 msgstr "%s deposu sisteme eklendi."
 
-#: pisi/api.py:815
-#, python-format
+#: inary/api.py:814
 msgid "Repo %s removed from system."
 msgstr "%s deposu sistemden çıkarıldı."
 
-#: pisi/api.py:817
-#, python-format
+#: inary/api.py:816
 msgid "Repository %s does not exist. Cannot remove."
 msgstr "%s deposu yok. Kaldırılamıyor."
 
-#: pisi/api.py:839
-#, python-format
+#: inary/api.py:838
 msgid "Updating repository: %s"
 msgstr "Depo güncelleniyor: %s"
 
-#: pisi/api.py:848
-#, python-format
+#: inary/api.py:847
 msgid "%s repository information is up-to-date."
 msgstr "%s depo bilgisi güncel."
 
-#: pisi/api.py:850
+#: inary/api.py:849
 msgid "Updating database at any rate as requested"
 msgstr "Veritabanı istek üzerine güncelleniyor."
 
-#: pisi/api.py:863
+#: inary/api.py:862
 msgid "Package database updated."
 msgstr "Paket veritabanı güncellendi."
 
-#: pisi/api.py:865
-#, python-format
+#: inary/api.py:864
 msgid "No repository named %s found."
 msgstr "%s adında bir depo bulunamadı."
 
-#: pisi/api.py:878
-#, python-format
-msgid "Adding '%s' to db... "
-msgstr "'%s' veritabanına ekleniyor... "
-
-#: pisi/api.py:881
-msgid "OK."
-msgstr "Tamam."
-
-#: pisi/archive.py:422
-#, python-format
+#: inary/archive.py:522
 msgid "Problem occured while uncompressing %s.Z file"
 msgstr "%s.Z dosyası genişletilirken hata oluştu"
 
-#: pisi/atomicoperations.py:71 pisi/operations/history.py:72
-#, python-format
+#: inary/atomicoperations.py:71 inary/operations/history.py:72
 msgid "Package %s found in repository %s"
 msgstr "%s paketi %s deposunda bulundu."
 
-#: pisi/atomicoperations.py:102
-#, python-format
+#: inary/atomicoperations.py:102
 msgid "Package URI: %s"
 msgstr "Paket adresi: %s."
 
-#: pisi/atomicoperations.py:116
+#: inary/atomicoperations.py:116
 msgid "Download Error: Package does not match the repository package."
 msgstr "İndirme hatası: Paket depodaki paket ile uyuşmuyor."
 
-#: pisi/atomicoperations.py:120
-#, python-format
+#: inary/atomicoperations.py:120
 msgid "Package %s not found in any active repository."
 msgstr "%s pakedi etkin hiçbir depoda bulunamadı."
 
-#: pisi/atomicoperations.py:146
-#, python-format
+#: inary/atomicoperations.py:147
 msgid "Installing %s, version %s, release %s"
 msgstr "%s paketi %s sürümü %s yayımı kuruluyor"
 
-#: pisi/atomicoperations.py:192 pisi/operations/build.py:765
-#, python-format
-msgid "%s-%s is not a valid PiSi version format"
-msgstr "%s-%s PiSi sürüm biçimine uymuyor"
+#: inary/atomicoperations.py:193 inary/operations/build.py:792
+msgid "%s-%s is not a valid INARY version format"
+msgstr "%s-%s INARY sürüm biçimine uymuyor"
 
-#: pisi/atomicoperations.py:198
-#, python-format
+#: inary/atomicoperations.py:199
 msgid "%s package cannot be installed unless the dependencies are satisfied"
 msgstr "%s paketi bağımlılıkları sağlanmadan kurulamaz."
 
-#: pisi/atomicoperations.py:222
-#, python-format
+#: inary/atomicoperations.py:223
 msgid "/%s from %s package\n"
 msgstr "/%s %s paketinden\n"
 
-#: pisi/atomicoperations.py:223
-#, python-format
+#: inary/atomicoperations.py:224
 msgid ""
 "File conflicts:\n"
 "%s"
@@ -742,113 +619,110 @@ msgstr ""
 "Dosya çakışmaları:\n"
 "%s"
 
-#: pisi/atomicoperations.py:241
+#: inary/atomicoperations.py:242
 msgid "Re-install same version package?"
 msgstr "Aynı sürüm paket yeniden kurulsun mu?"
 
-#: pisi/atomicoperations.py:242
+#: inary/atomicoperations.py:243
 msgid "Package re-install declined"
 msgstr "Paketin yeniden kurulması reddedildi."
 
-#: pisi/atomicoperations.py:254
+#: inary/atomicoperations.py:250
+msgid "Storing old paths info"
+msgstr ""
+
+#: inary/atomicoperations.py:259
 msgid "Upgrading to new upstream version"
 msgstr "Yeni ana kaynak sürüme yükseltiliyor."
 
-#: pisi/atomicoperations.py:257
+#: inary/atomicoperations.py:262
 msgid "Upgrading to new distribution release"
 msgstr "Yeni dağıtım yayımına yükseltiliyor."
 
-#: pisi/atomicoperations.py:266
+#: inary/atomicoperations.py:271
 msgid "Downgrade to old distribution release?"
 msgstr "Eski dağıtım yayımına dönülsün mü?"
 
-#: pisi/atomicoperations.py:270
+#: inary/atomicoperations.py:275
 msgid "Package downgrade declined"
 msgstr "Paketin eski sürüme indirilmesi reddedildi."
 
-# pisi/actionsapi/autotools.py:75 :85
-#: pisi/atomicoperations.py:309
-#, python-format
+# inary/actionsapi/autotools.py:75 :85
+#: inary/atomicoperations.py:321
 msgid "%s configuration failed."
 msgstr "%s yapılandırması başarısız oldu."
 
-#: pisi/atomicoperations.py:400
-msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
-msgstr "Aşağıdaki dosyalar taşınamadı. Bu paketin yeniden kurulumu şiddetle önerilir."
+#: inary/atomicoperations.py:412
+msgid ""
+"Unable to relocate following files. Reinstallation of this package is "
+"strongly recommended."
+msgstr ""
+"Aşağıdaki dosyalar taşınamadı. Bu paketin yeniden kurulumu şiddetle önerilir."
 
-#: pisi/atomicoperations.py:491 pisi/atomicoperations.py:494
-#: pisi/atomicoperations.py:501
-#, python-format
+#: inary/atomicoperations.py:504 inary/atomicoperations.py:507
+#: inary/atomicoperations.py:514
 msgid "Storing %s"
 msgstr "%s depolanıyor."
 
-#: pisi/atomicoperations.py:568
-#, python-format
+#: inary/atomicoperations.py:582
 msgid "File list could not be read for package %s, continuing removal."
 msgstr "%s paketi dosya listesi okunamadı, kaldırma işlemine devam ediliyor."
 
-#: pisi/atomicoperations.py:574
-#, python-format
+#: inary/atomicoperations.py:588
 msgid "Removing package %s"
 msgstr "%s paketi kaldırılıyor."
 
-#: pisi/atomicoperations.py:577
+#: inary/atomicoperations.py:591
 msgid "Trying to remove nonexistent package "
 msgstr "Varolmayan paket kaldırılmaya çalışıldı "
 
-#: pisi/atomicoperations.py:618
-#, python-format
+#: inary/atomicoperations.py:630
 msgid "Not removing conflicted file : %s"
 msgstr "Çakışan dosya (%s) silinmiyor."
 
-#: pisi/atomicoperations.py:646
-#, python-format
-msgid "Installed file %s does not exist on system [Probably you manually deleted]"
+#: inary/atomicoperations.py:660
+msgid ""
+"Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr "Kurulmuş dosya %s sistemde bulunamadı (Muhtemelen elle sildiniz)."
 
-#: pisi/cli/__init__.py:117
+#: inary/cli/__init__.py:129
 msgid "Warning: "
 msgstr "Uyarı: "
 
-#: pisi/cli/__init__.py:127
+#: inary/cli/__init__.py:139
 msgid "Error: "
 msgstr "Hata: "
 
-#: pisi/cli/__init__.py:161
+#: inary/cli/__init__.py:173
 msgid " (yes/no)"
 msgstr " (evet/hayır)"
 
-#: pisi/cli/__init__.py:185
+#: inary/cli/__init__.py:197
 msgid " [complete]\n"
 msgstr " [tamamlandı]\n"
 
-#: pisi/cli/__init__.py:195
-#, python-format
+#: inary/cli/__init__.py:207
 msgid "Installed %s"
 msgstr "%s kuruldu."
 
-#: pisi/cli/__init__.py:197
-#, python-format
+#: inary/cli/__init__.py:209
 msgid "Removed %s"
 msgstr "%s kaldırıldı."
 
-#: pisi/cli/__init__.py:199
-#, python-format
+#: inary/cli/__init__.py:211
 msgid "Upgraded %s"
 msgstr "%s yükseltildi."
 
-# pisi/actionsapi/autotools.py:75 :85
-#: pisi/cli/__init__.py:201
-#, python-format
+# inary/actionsapi/autotools.py:75 :85
+#: inary/cli/__init__.py:213
 msgid "Configured %s"
 msgstr "%s yapılandırıldı."
 
-#: pisi/cli/__init__.py:203
-#, python-format
+#: inary/cli/__init__.py:215
 msgid "Extracting the files of %s"
 msgstr "%s dosyaları arşivden çıkartılıyor."
 
-#: pisi/cli/addrepo.py:24
+#: inary/cli/addrepo.py:24
 msgid ""
 "Add a repository\n"
 "\n"
@@ -857,7 +731,8 @@ msgid ""
 "<repo>: name of repository to add\n"
 "<indexuri>: URI of index file\n"
 "\n"
-"NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment\n"
+"NB: We support only local files (e.g., /a/b/c) and http:// URIs at the "
+"moment\n"
 msgstr ""
 "Depo ekle\n"
 "\n"
@@ -866,40 +741,41 @@ msgstr ""
 "<depo>: eklenecek deponun adı\n"
 "<katalog adresi>: depo katalog dosyasının adresi\n"
 "\n"
-"Not: Şu anda sadece yerel dosyalar (örn. /a/b/c) ve http:// adresleri destekleniyor.\n"
+"Not: Şu anda sadece yerel dosyalar (örn. /a/b/c) ve http:// adresleri "
+"destekleniyor.\n"
 
-#: pisi/cli/addrepo.py:43
+#: inary/cli/addrepo.py:42
 msgid "add-repo options"
 msgstr "add-repo seçenekleri"
 
-#: pisi/cli/addrepo.py:44
+#: inary/cli/addrepo.py:43
 msgid "Ignore repository distribution check"
 msgstr "Depo dağıtım denetimini atla"
 
-#: pisi/cli/addrepo.py:45
+#: inary/cli/addrepo.py:44
 msgid "Does not fetch repository index and does not check distribution match"
 msgstr "Depo kataloğunu indirme ve dağıtımı denetleme"
 
-#: pisi/cli/addrepo.py:48
+#: inary/cli/addrepo.py:47
 msgid "Add repository at given position (0 is first)"
 msgstr "Belirtilen konuma depo ekle (ilk konum 0'dır)."
 
-#: pisi/cli/addrepo.py:62
-#, python-format
+#: inary/cli/addrepo.py:61
 msgid ""
 "Add %s repository without updating the database?\n"
-"By confirming this you are also adding the repository to your system without checking the distribution of the repository.\n"
+"By confirming this you are also adding the repository to your system without "
+"checking the distribution of the repository.\n"
 "Do you want to continue?"
 msgstr ""
 "%s deposunu veritabanını güncellemeden eklemek istediniz.\n"
-"Bu işlemi onayladığınızda, depoyu sisteminize depo dağıtımını denetlenmeden eklemiş olacaksınız. Devam etmek istediğinize emin misiniz?"
+"Bu işlemi onayladığınızda, depoyu sisteminize depo dağıtımını denetlenmeden "
+"eklemiş olacaksınız. Devam etmek istediğinize emin misiniz?"
 
-#: pisi/cli/addrepo.py:74
-#, python-format
+#: inary/cli/addrepo.py:73
 msgid "%s repository could not be reached. Removing %s from system."
 msgstr "%s deposuna erişilemedi. %s sistemden kaldırılıyor."
 
-#: pisi/cli/blame.py:24
+#: inary/cli/blame.py:24
 msgid ""
 "Information about the package owner and release\n"
 "\n"
@@ -911,146 +787,149 @@ msgstr ""
 "Kullanım: blame <paket> ... <paket>\n"
 "\n"
 
-#: pisi/cli/blame.py:39
+#: inary/cli/blame.py:37
 msgid "blame options"
 msgstr "blame seçenekleri"
 
-#: pisi/cli/blame.py:40
+#: inary/cli/blame.py:38
 msgid "Blame for the given release"
 msgstr "Verilen sürüm için suçla"
 
-#: pisi/cli/blame.py:42
+#: inary/cli/blame.py:40
 msgid "Blame for all of the releases"
 msgstr "Tüm sürümler için suçla"
 
-#: pisi/cli/blame.py:68 pisi/specfile.py:370 pisi/specfile.py:456
-#, python-format
+#: inary/cli/blame.py:66 inary/specfile.py:371 inary/specfile.py:455
 msgid "Name: %s, version: %s, release: %s\n"
 msgstr "İsim: %s, sürüm: %s, yayım: %s\n"
 
-#: pisi/cli/blame.py:70
-#, python-format
+#: inary/cli/blame.py:68
 msgid "Package Maintainer: %s <%s>\n"
 msgstr "Paket Bakıcısı: %s <%s>\n"
 
-#: pisi/cli/blame.py:71
-#, python-format
+#: inary/cli/blame.py:69
 msgid "Release Updater: %s <%s>\n"
 msgstr "Yayım Güncelleyen: %s <%s>\n"
 
-#: pisi/cli/blame.py:72
-#, python-format
+#: inary/cli/blame.py:70
 msgid "Update Date: %s\n"
 msgstr "Güncelleme Tarihi: %s\n"
 
-#: pisi/cli/build.py:25
+#: inary/cli/build.py:25
 msgid ""
-"Build PiSi packages\n"
+"Build INARY packages\n"
 "\n"
 "Usage: build [<pspec.xml> | <sourcename>] ...\n"
 "\n"
-"You can give a URI of the pspec.xml file. PiSi will\n"
+"You can give a URI of the pspec.xml file. INARY will\n"
 "fetch all necessary files and build the package for you.\n"
 "\n"
 "Alternatively, you can give the name of a source package\n"
 "to be downloaded from a repository containing sources.\n"
 msgstr ""
-"Verilen PiSi paket(ler)ini inşa et\n"
+"Verilen INARY paket(ler)ini inşa et\n"
 "\n"
 "Kullanım: build [<pspec.xml> | <kaynakadı>] ...\n"
 "\n"
 "Yerel veya uzak bir adresteki pspec.xml dosyasının adresinin verilmesi\n"
-"yeterlidir, PiSi gerekli dosyaları indirip paketi inşa edecektir.\n"
+"yeterlidir, INARY gerekli dosyaları indirip paketi inşa edecektir.\n"
 "\n"
 "Kaynak depo kullanıyorsanız, doğrudan kaynak depoda bulunan bir\n"
-"paketin adını vererek PiSi'nin o paketi inşa etmesini sağlayabilirsiniz.\n"
+"paketin adını vererek INARY'nin o paketi inşa etmesini sağlayabilirsiniz.\n"
 
-#: pisi/cli/build.py:50
+#: inary/cli/build.py:49
 msgid "build options"
 msgstr "inşa seçenekleri"
 
-#: pisi/cli/build.py:58
-msgid "Run pisi build operation without printing extra debug information"
+#: inary/cli/build.py:57
+msgid "Run inary build operation without printing extra debug information"
 msgstr "Ekstra hata ayıklama bilgilerini basmadan inşa operasyonunu çalıştır"
 
-#: pisi/cli/build.py:64 pisi/cli/command.py:204
+#: inary/cli/build.py:63 inary/cli/command.py:205
 msgid "Do not take dependency information into account"
 msgstr "Bağımlılık bilgilerini dikkate alma."
 
-#: pisi/cli/build.py:70
+#: inary/cli/build.py:69
 msgid "Output directory for produced packages"
 msgstr "Üretilecek paketler için çıktı dizini"
 
-#: pisi/cli/build.py:74
+#: inary/cli/build.py:73
 msgid "Bypass errors from ActionsAPI"
 msgstr "ActionsAPI kaynaklı hataları yoksay."
 
-#: pisi/cli/build.py:79 pisi/cli/command.py:208
+#: inary/cli/build.py:78 inary/cli/command.py:209
 msgid "Bypass safety switch"
 msgstr "Emniyet mandalını yoksay."
 
-#: pisi/cli/build.py:84
+#: inary/cli/build.py:83
 msgid "Bypass testing step"
 msgstr "Test adımını yoksay."
 
-#: pisi/cli/build.py:89
+#: inary/cli/build.py:88
 msgid "Create a static package with ar files"
 msgstr "Ar dosyalarıyla statik bir paket yarat."
 
-#: pisi/cli/build.py:93 pisi/cli/delta.py:64
-msgid "Create the binary package using the given format. Use '-F help' to see a list of supported formats."
-msgstr "İkili paketi verilen biçimde oluştur. Desteklenen biçimlerin listesini görmek için '-F help' kullanın."
+#: inary/cli/build.py:92 inary/cli/delta.py:63
+msgid ""
+"Create the binary package using the given format. Use '-F help' to see a "
+"list of supported formats."
+msgstr ""
+"İkili paketi verilen biçimde oluştur. Desteklenen biçimlerin listesini "
+"görmek için '-F help' kullanın."
 
-#: pisi/cli/build.py:100
+#: inary/cli/build.py:99
 msgid "Use quilt patch management system instead of GNU patch"
 msgstr "GNU patch yerine quilt yama yönetim sistemini kullan."
 
-#: pisi/cli/build.py:106
+#: inary/cli/build.py:105
 msgid "Do not constrain build process inside the build folder"
 msgstr "İnşa işlemini inşa klasörüyle sınırlama."
 
-#: pisi/cli/build.py:110
+#: inary/cli/build.py:109
 msgid "build steps"
 msgstr "inşa adımları"
 
-#: pisi/cli/build.py:116
+#: inary/cli/build.py:115
 msgid "Break build after fetching the source archive"
 msgstr "Kaynak arşivi indirdikten sonra inşayı sonlandır."
 
-#: pisi/cli/build.py:123
-msgid "Break build after unpacking the source archive, checking sha1sum and applying patches"
-msgstr "Kaynak arşivini açtıktan, sha1sum denetimi yaptıktan ve yamaları uyguladıktan sonra inşayı sonlandır."
+#: inary/cli/build.py:122
+msgid ""
+"Break build after unpacking the source archive, checking sha1sum and "
+"applying patches"
+msgstr ""
+"Kaynak arşivini açtıktan, sha1sum denetimi yaptıktan ve yamaları "
+"uyguladıktan sonra inşayı sonlandır."
 
-#: pisi/cli/build.py:131
+#: inary/cli/build.py:130
 msgid "Break build after running configure step"
 msgstr "Yapılandırma adımından sonra inşayı sonlandır."
 
-#: pisi/cli/build.py:137
+#: inary/cli/build.py:136
 msgid "Break build after running compile step"
 msgstr "Derleme adımından sonra inşayı sonlandır."
 
-#: pisi/cli/build.py:143
+#: inary/cli/build.py:142
 msgid "Break build after running check step"
 msgstr "Test adımından sonra inşayı sonlandır."
 
-#: pisi/cli/build.py:149
+#: inary/cli/build.py:148
 msgid "Break build after running install step"
 msgstr "Kurulum adımından sonra inşayı sonlandır."
 
-#: pisi/cli/build.py:155
-msgid "Create PiSi package"
-msgstr "PiSi paketi oluştur"
+#: inary/cli/build.py:154
+msgid "Create INARY package"
+msgstr "INARY paketi oluştur"
 
-#: pisi/cli/build.py:165 pisi/cli/delta.py:72
+#: inary/cli/build.py:164 inary/cli/delta.py:71
 msgid "Supported package formats:"
 msgstr "Desteklenen paket biçimleri:"
 
-#: pisi/cli/build.py:168 pisi/cli/delta.py:75
-#, python-format
+#: inary/cli/build.py:167 inary/cli/delta.py:74
 msgid "  %s (default)"
 msgstr "  %s (öntanımlı)"
 
-#: pisi/cli/check.py:26
+#: inary/cli/check.py:26
 msgid ""
 "Verify installation\n"
 "\n"
@@ -1079,159 +958,152 @@ msgstr ""
 "Eğer hiç paket adı verilmemişse, kurulu durumdaki bütün paketler\n"
 "doğrulanır.\n"
 
-#: pisi/cli/check.py:54
+#: inary/cli/check.py:53
 msgid "check options"
 msgstr "denetleme seçenekleri"
 
-#: pisi/cli/check.py:59
+#: inary/cli/check.py:58
 msgid "Check installed packages under given component"
 msgstr "Verilen bileşen altındaki kurulu paketleri denetle."
 
-#: pisi/cli/check.py:65
+#: inary/cli/check.py:64
 msgid "Checks only changed config files of the packages"
 msgstr "Paketlerin sadece değişen yapılandırma dosyalarını denetler."
 
-#: pisi/cli/check.py:82
+#: inary/cli/check.py:81
 msgid "Checking all installed packages"
 msgstr "Tüm kurulu paketler denetleniyor."
 
-#: pisi/cli/check.py:91
-#, python-format
+#: inary/cli/check.py:90
 msgid "Checking integrity of %s"
-msgstr "Bütünlüğü denetlenen paket: %s"
+msgstr "%s paketinin bütünlüğü denetleniyor"
 
-#: pisi/cli/check.py:105
+#: inary/cli/check.py:104
 msgid "Broken"
 msgstr "Kırık"
 
-#: pisi/cli/check.py:110
+#: inary/cli/check.py:109
 msgid "Unknown"
 msgstr "Bilinmiyor"
 
-#: pisi/cli/check.py:112
+#: inary/cli/check.py:111
 msgid "OK"
 msgstr "Tamam"
 
-#: pisi/cli/check.py:118
-#, python-format
+#: inary/cli/check.py:117
 msgid "Missing file: /%s"
 msgstr "Eksik dosya: /%s"
 
-#: pisi/cli/check.py:122
-#, python-format
+#: inary/cli/check.py:121
 msgid "Access denied: /%s"
 msgstr "Erişim Engellendi: /%s"
 
-#: pisi/cli/check.py:126
-#, python-format
+#: inary/cli/check.py:125
 msgid "Corrupted file: /%s"
 msgstr "Bozuk dosya: /%s"
 
-# pisi/actionsapi/autotools.py:75 :85
-#: pisi/cli/check.py:130
-#, python-format
+# inary/actionsapi/autotools.py:75 :85
+#: inary/cli/check.py:129
 msgid "Modified configuration file: /%s"
 msgstr "Değiştirilmiş yapılandırma dosyası: /%s"
 
-#: pisi/cli/check.py:135
-#, python-format
+#: inary/cli/check.py:134
 msgid "Package %s not installed"
 msgstr "%s paketi kurulu değil."
 
-#: pisi/cli/check.py:139
+#: inary/cli/check.py:138
 msgid ""
-"Pisi was unable to check the integrity of packages which contain files that you don't have read access.\n"
+"Inary was unable to check the integrity of packages which contain files that "
+"you don't have read access.\n"
 "Running the check under a privileged user may help fixing this problem."
 msgstr ""
-"Pisi okuma izninizin olmadığı dosyalar içeren paketlerin bütünlüğünden emin olamadı.\n"
+"Inary okuma izninizin olmadığı dosyalar içeren paketlerin bütünlüğünden emin "
+"olamadı.\n"
 "Denetlemeyi yetkili kullanıcı ile gerçekleştirmeniz daha sağlıklı olabilir."
 
-#: pisi/cli/clean.py:20
+#: inary/cli/clean.py:20
 msgid ""
 "Clean stale locks\n"
 "\n"
 "Usage: clean\n"
 "\n"
-"PiSi uses filesystem locks for managing database access.\n"
+"INARY uses filesystem locks for managing database access.\n"
 "This command deletes unused locks from the database directory."
 msgstr ""
 "Kullanılmayan kilitleri temizle\n"
 "\n"
 "Kullanım: clean\n"
 "\n"
-"PiSi veritabanı erişimini yönetmek için dosya kilitleri kullanır.\n"
+"INARY veritabanı erişimini yönetmek için dosya kilitleri kullanır.\n"
 "Bu komut, kullanılmayan kilit dosyalarını veritabanı dizininden kaldırır."
 
-#: pisi/cli/command.py:30
+#: inary/cli/command.py:30
 msgid "Command lacks name"
 msgstr "Komutun adı yok."
 
-#: pisi/cli/command.py:34
-#, python-format
+#: inary/cli/command.py:34
 msgid "Duplicate command %s"
 msgstr "Aynı komut: %s"
 
-#: pisi/cli/command.py:71 pisi/cli/pisicli.py:134
-#, python-format
+#: inary/cli/command.py:71 inary/cli/inarycli.py:137
 msgid "Unrecognized command: %s"
 msgstr "Tanınmayan komut: %s"
 
-# pisi/build.py:503 :506
-#: pisi/cli/command.py:96
+# inary/build.py:503 :506
+#: inary/cli/command.py:96
 msgid "general options"
 msgstr "genel seçenekler"
 
-#: pisi/cli/command.py:99
-msgid "Change the system root for PiSi commands"
-msgstr "PiSi komutları için sistem kökünü değiştir."
+#: inary/cli/command.py:99
+msgid "Change the system root for INARY commands"
+msgstr "INARY komutları için sistem kökünü değiştir."
 
-#: pisi/cli/command.py:101
+#: inary/cli/command.py:101
 msgid "Assume yes in all yes/no queries"
 msgstr "Bütün evet/hayır sorularında cevabı evet kabul et."
 
-#: pisi/cli/command.py:105
+#: inary/cli/command.py:105
 msgid "Keep bandwidth usage under specified KB's"
 msgstr "Bant genişliği kullanımını belirtilen kilobaytın altında tut."
 
-#: pisi/cli/command.py:108
+#: inary/cli/command.py:108
 msgid "Detailed output"
 msgstr "Detaylı çıktı"
 
-#: pisi/cli/command.py:110
+#: inary/cli/command.py:110
 msgid "Show debugging information"
 msgstr "Hata ayıklama bilgisini göster."
 
-#: pisi/cli/command.py:112
-msgid "Suppresses all coloring of PiSi's output"
-msgstr "PiSi çıktılarında renk kullanılmasını engeller."
+#: inary/cli/command.py:112
+msgid "Suppresses all coloring of INARY's output"
+msgstr "INARY çıktılarında renk kullanılmasını engeller."
 
-#: pisi/cli/command.py:130
-#, python-format
+#: inary/cli/command.py:130
 msgid "Destination directory %s does not exist. Creating directory.\n"
 msgstr "%s hedef dizini bulunamadı. Dizin yaratılıyor.\n"
 
-#: pisi/cli/command.py:152
+#: inary/cli/command.py:152
 msgid "Password: "
 msgstr "Parola: "
 
-#: pisi/cli/command.py:191
+#: inary/cli/command.py:192
 msgid "Command terminated abnormally."
 msgstr "Komut beklenmeyen bir biçimde sonlandı."
 
-#: pisi/cli/command.py:206 pisi/cli/emerge.py:53
-msgid "Bypass comar configuration agent"
+#: inary/cli/command.py:207 inary/cli/emerge.py:52 inary/cli/emergeup.py:52
+#, fuzzy
+msgid "Bypass scom configuration agent"
 msgstr "Çomar yapılandırma ajanını es geç."
 
-#: pisi/cli/command.py:210
+#: inary/cli/command.py:211
 msgid "Do not perform any action, just show what would be done"
 msgstr "Hiçbir eylem gerçekleştirme, sadece neler yapılacağını göster."
 
-#: pisi/cli/command.py:228
-#, python-format
+#: inary/cli/command.py:229
 msgid "usage: %s\n"
 msgstr "kullanım: %s\n"
 
-#: pisi/cli/configurepending.py:23
+#: inary/cli/configurepending.py:23
 msgid ""
 "Configure pending packages\n"
 "\n"
@@ -1246,11 +1118,11 @@ msgstr ""
 "atlandıysa, o paketler yapılandırılmayı bekleyen paketler\n"
 "listesine eklenir. Bu komut o paketleri yapılandırır.\n"
 
-#: pisi/cli/configurepending.py:39
+#: inary/cli/configurepending.py:37
 msgid "configure-pending options"
 msgstr "configure-pending seçenekleri"
 
-#: pisi/cli/deletecache.py:22
+#: inary/cli/deletecache.py:22
 msgid ""
 "Delete cache files\n"
 "\n"
@@ -1267,7 +1139,7 @@ msgstr ""
 "Kaynaklar, paketler ve geçici dosyalar /var dizinine kaydedilir.\n"
 "Bu dosyalar uzun vadede çok yer kaplayabilir."
 
-#: pisi/cli/delta.py:24
+#: inary/cli/delta.py:24
 msgid ""
 "Creates delta packages\n"
 "\n"
@@ -1287,19 +1159,21 @@ msgstr ""
 "karşılaştırarak değişen dosyaları bulur ve bu dosyaları\n"
 "içeren bir delta paketi oluşturur.\n"
 
-#: pisi/cli/delta.py:46
+#: inary/cli/delta.py:45
 msgid "delta options"
 msgstr "delta seçenekleri"
 
-#: pisi/cli/delta.py:54
+#: inary/cli/delta.py:53
 msgid "Use arg as the new package and treat other arguments as old packages."
-msgstr "Yeni paket adı olarak arg'ı kullan ve diğer argümanları eski paket listesi olarak al."
+msgstr ""
+"Yeni paket adı olarak arg'ı kullan ve diğer argümanları eski paket listesi "
+"olarak al."
 
-#: pisi/cli/delta.py:60
+#: inary/cli/delta.py:59
 msgid "Output directory for produced packages."
 msgstr "Üretilen paketler için çıktı dizini"
 
-#: pisi/cli/disablerepo.py:21
+#: inary/cli/disablerepo.py:21
 msgid ""
 "Disable repository\n"
 "\n"
@@ -1317,9 +1191,9 @@ msgstr ""
 "\n"
 "Etkin olmayan depolar işlemlerde dikkate alınmaz.\n"
 
-#: pisi/cli/emerge.py:25
+#: inary/cli/emerge.py:25
 msgid ""
-"Build and install PiSi source packages from repository\n"
+"Build and install INARY source packages from repository\n"
 "\n"
 "Usage: emerge <sourcename> ...\n"
 "\n"
@@ -1328,7 +1202,7 @@ msgid ""
 "\n"
 "You can also give the name of a component.\n"
 msgstr ""
-"PiSi kaynak paketlerini depodan inşa et ve kur\n"
+"INARY kaynak paketlerini depodan inşa et ve kur\n"
 "\n"
 "Kullanım: emerge <kaynakismi> ...\n"
 "\n"
@@ -1337,32 +1211,59 @@ msgstr ""
 "\n"
 "Bir bileşen adı da verebilirsiniz.\n"
 
-#: pisi/cli/emerge.py:44
+#: inary/cli/emerge.py:43
 msgid "emerge options"
 msgstr "emerge seçenekleri"
 
-#: pisi/cli/emerge.py:47
+#: inary/cli/emerge.py:46 inary/cli/emergeup.py:46
 msgid "Emerge available packages under given component"
 msgstr "Bileşen altındaki paketleri derleyip kur"
 
-#: pisi/cli/emerge.py:49 pisi/cli/install.py:53 pisi/cli/upgrade.py:58
+#: inary/cli/emerge.py:48 inary/cli/emergeup.py:48 inary/cli/install.py:52
+#: inary/cli/upgrade.py:57
 msgid "Ignore file conflicts"
 msgstr "Dosya çakışmalarını gözardı et."
 
-#: pisi/cli/emerge.py:51 pisi/cli/install.py:55 pisi/cli/upgrade.py:60
+#: inary/cli/emerge.py:50 inary/cli/emergeup.py:50 inary/cli/install.py:54
+#: inary/cli/upgrade.py:59
 msgid "Ignore package conflicts"
 msgstr "Paket çakışmalarını gözardı et."
 
-#: pisi/cli/emerge.py:71
-#, python-format
+#: inary/cli/emerge.py:70 inary/cli/emergeup.py:73
 msgid "Output directory: %s"
 msgstr "Çıktı dizini: %s"
 
-#: pisi/cli/emerge.py:73
+#: inary/cli/emerge.py:72 inary/cli/emergeup.py:75
 msgid "Outputting binary packages in the package cache."
 msgstr "İkili paketler paket önbelleğine yazılıyor."
 
-#: pisi/cli/enablerepo.py:21
+#: inary/cli/emergeup.py:25
+#, fuzzy
+msgid ""
+"Build and install INARY source packages from repository\n"
+"\n"
+"Usage: emergeup ...\n"
+"\n"
+"You should give the name of a source package to be\n"
+"downloaded from a repository containing sources.\n"
+"\n"
+"You can also give the name of a component.\n"
+msgstr ""
+"INARY kaynak paketlerini depodan inşa et ve kur\n"
+"\n"
+"Kullanım: emerge <kaynakismi> ...\n"
+"\n"
+"Bir kaynak depodan indirilecek kaynak paketin ismini\n"
+"vermelisiniz.\n"
+"\n"
+"Bir bileşen adı da verebilirsiniz.\n"
+
+#: inary/cli/emergeup.py:43
+#, fuzzy
+msgid "emergeup options"
+msgstr "emerge seçenekleri"
+
+#: inary/cli/enablerepo.py:21
 msgid ""
 "Enable repository\n"
 "\n"
@@ -1380,7 +1281,7 @@ msgstr ""
 "\n"
 "Etkin olmayan depolar işlemlerde dikkate alınmaz.\n"
 
-#: pisi/cli/fetch.py:25
+#: inary/cli/fetch.py:26
 msgid ""
 "Fetch a package\n"
 "\n"
@@ -1388,7 +1289,7 @@ msgid ""
 "\n"
 "<packagei>: package name\n"
 "\n"
-"Downloads the given pisi packages to working directory\n"
+"Downloads the given inary packages to working directory\n"
 msgstr ""
 "Paket indir\n"
 "\n"
@@ -1398,15 +1299,19 @@ msgstr ""
 "\n"
 "Çalışma klasörüne verilen paketleri indirir\n"
 
-#: pisi/cli/fetch.py:41
+#: inary/cli/fetch.py:41
 msgid "fetch options"
 msgstr "fetch seçenekleri"
 
-#: pisi/cli/fetch.py:47
+#: inary/cli/fetch.py:47
 msgid "Output directory for the fetched packages"
 msgstr "İndirilecek paketler için çıktı dizini"
 
-#: pisi/cli/graph.py:26
+#: inary/cli/fetch.py:49
+msgid "Bağımlılıkları ile indirme açıklaması."
+msgstr ""
+
+#: inary/cli/graph.py:26
 msgid ""
 "Graph package relations\n"
 "\n"
@@ -1426,44 +1331,43 @@ msgstr ""
 "depo paketleri arasındaki ilişkileri çıkarır ve dosyayı graphviz\n"
 "biçiminde 'pgraph.dot' dosyasına yazar.\n"
 
-#: pisi/cli/graph.py:43
+#: inary/cli/graph.py:41
 msgid "graph options"
 msgstr "graph seçenekleri"
 
-#: pisi/cli/graph.py:47
+#: inary/cli/graph.py:45
 msgid "Specify a particular repository"
 msgstr "Belli bir depoyu belirt"
 
-#: pisi/cli/graph.py:50
+#: inary/cli/graph.py:48
 msgid "Graph of installed packages"
 msgstr "Kurulu paketlerin grafiği"
 
-#: pisi/cli/graph.py:53
+#: inary/cli/graph.py:51
 msgid "Do not show installed packages"
 msgstr "Kurulu paketleri gösterme."
 
-#: pisi/cli/graph.py:56
+#: inary/cli/graph.py:54
 msgid "Draw reverse dependency graph"
 msgstr "Ters bağımlılık grafiği çiz"
 
-#: pisi/cli/graph.py:59
+#: inary/cli/graph.py:57
 msgid "Dot output file"
 msgstr "Dot çıktı dosyası"
 
-#: pisi/cli/graph.py:73
-#, python-format
+#: inary/cli/graph.py:71
 msgid "Plotting packages in repository %s"
 msgstr "%s deposundaki paketler çiziliyor."
 
-#: pisi/cli/graph.py:76
+#: inary/cli/graph.py:74
 msgid "Plotting a graph of relations among all repository packages"
 msgstr "Depolardaki bütün paketlerin arasındaki ilişkiler çiziliyor."
 
-#: pisi/cli/graph.py:90
+#: inary/cli/graph.py:88
 msgid "Plotting a graph of relations among all installed packages"
 msgstr "Tüm kurulu paketler arasındaki ilişkiler çiziliyor."
 
-#: pisi/cli/help.py:22
+#: inary/cli/help.py:22
 msgid ""
 "Prints help for given commands\n"
 "\n"
@@ -1477,7 +1381,7 @@ msgstr ""
 "\n"
 "Parametresiz çalıştırılırsa genel yardımı görüntüler."
 
-#: pisi/cli/help.py:49
+#: inary/cli/help.py:47
 msgid ""
 "%prog [options] <command> [arguments]\n"
 "\n"
@@ -1489,226 +1393,221 @@ msgstr ""
 "<komut> aşağıdakilerden birisi olabilir:\n"
 "\n"
 
-#: pisi/cli/help.py:55
+#: inary/cli/help.py:53
 msgid ""
 "\n"
 "Use \"%prog help <command>\" for help on a specific command.\n"
 msgstr ""
 "\n"
-"Belirli bir komut hakkında yardım almak için \"%prog help <komut>\" kullanınız.\n"
+"Belirli bir komut hakkında yardım almak için \"%prog help <komut>\" "
+"kullanınız.\n"
 
-#: pisi/cli/history.py:28
+#: inary/cli/history.py:28
 msgid "emerge"
 msgstr "kaynaktan kur"
 
-#: pisi/cli/history.py:28
+#: inary/cli/history.py:28
 msgid "install"
 msgstr "kur"
 
-#: pisi/cli/history.py:28
+#: inary/cli/history.py:28
 msgid "remove"
 msgstr "kaldır"
 
-#: pisi/cli/history.py:28
+#: inary/cli/history.py:28
 msgid "repository update"
 msgstr "depo güncellemesi"
 
-#: pisi/cli/history.py:28
+#: inary/cli/history.py:28
 msgid "snapshot"
 msgstr "görüntü"
 
-#: pisi/cli/history.py:28
+#: inary/cli/history.py:28
 msgid "takeback"
 msgstr "geri al"
 
-#: pisi/cli/history.py:28
+#: inary/cli/history.py:28
 msgid "upgrade"
 msgstr "yükselt"
 
-#: pisi/cli/history.py:31
+#: inary/cli/history.py:31
 msgid ""
-"History of pisi operations\n"
+"History of inary operations\n"
 "\n"
 "Usage: history\n"
 "\n"
 "Lists previous operations."
 msgstr ""
-"PiSi işlemlerinin günlüğü\n"
+"INARY işlemlerinin günlüğü\n"
 "\n"
 "Kullanım: history\n"
 "\n"
 "Önceki işlemleri listeler."
 
-#: pisi/cli/history.py:47
+#: inary/cli/history.py:45
 msgid "history options"
 msgstr "history seçenekleri"
 
-#: pisi/cli/history.py:53
+#: inary/cli/history.py:51
 msgid "Output only the last n operations"
 msgstr "Sadece son n adet operasyonu göster."
 
-#: pisi/cli/history.py:55
+#: inary/cli/history.py:53
 msgid "Take snapshot of the current system"
 msgstr "Güncel sistemin görüntüsünü al."
 
-#: pisi/cli/history.py:57
+#: inary/cli/history.py:55
 msgid "Takeback to the state after the given operation finished"
 msgstr "Verilen operasyon tamamlandıktan sonraki duruma geri dön."
 
-#: pisi/cli/history.py:67
-#, python-format
+#: inary/cli/history.py:65
 msgid "Operation #%d: %s"
 msgstr "İşlem %d: %s"
 
-#: pisi/cli/history.py:68
-#, python-format
+#: inary/cli/history.py:66
 msgid "Date: %s %s"
 msgstr "Tarih: %s %s"
 
-#: pisi/cli/history.py:72
-#, python-format
+#: inary/cli/history.py:70
 msgid "    * There are %d packages in this snapshot."
 msgstr "    * Bu durum görüntüsünde %d paket var."
 
-#: pisi/cli/index.py:23
+#: inary/cli/index.py:23
+#, fuzzy
 msgid ""
-"Index PiSi files in a given directory\n"
+"Index INARY files in a given directory\n"
 "\n"
 "Usage: index <directory> ...\n"
 "\n"
-"This command searches for all PiSi files in a directory, collects PiSi\n"
+"This command searches for all INARY files in a directory, collects INARY\n"
 "tags from them and accumulates the information in an output XML file,\n"
-"named by default 'pisi-index.xml'. In particular, it indexes both\n"
+"named by default 'inary-index.xml'. In particular, it indexes both\n"
 "source and binary packages.\n"
 "\n"
 "If you give multiple directories, the command still works, but puts\n"
 "everything in a single index file.\n"
 msgstr ""
-"Verilen dizindeki PiSi dosyalarının kataloğunu çıkar\n"
+"Verilen dizindeki INARY dosyalarının kataloğunu çıkar\n"
 "\n"
 "Kullanım: index <dizin> ...\n"
 "\n"
-"Bu komut bir dizinde PiSi dosyaları arar, onlardan PiSi etiketlerini çıkarır\n"
-"ve bilgiyi pisi-index.xml adında bir XML dosyasında toplar. Hem kaynak hem\n"
+"Bu komut bir dizinde INARY dosyaları arar, onlardan INARY etiketlerini "
+"çıkarır\n"
+"ve bilgiyi inary-index.xml adında bir XML dosyasında toplar. Hem kaynak hem\n"
 "de ikili paketleri bu XML kataloğuna ekler.\n"
 "\n"
 "Birden fazla dizin verirseniz, komut yine çalışır, fakat herşeyi tek bir\n"
 "katalog dosyasına koyar.\n"
 
-#: pisi/cli/index.py:48
+#: inary/cli/index.py:47
 msgid "index options"
 msgstr "index seçenekleri"
 
-#: pisi/cli/index.py:53
+#: inary/cli/index.py:52
 msgid "Store absolute links for indexed files."
 msgstr "Kataloglanan dosyalar için mutlak bağlar sakla."
 
-#: pisi/cli/index.py:58
+#: inary/cli/index.py:57
 msgid "Index output file"
 msgstr "Katalog çıktı dosyası"
 
-#: pisi/cli/index.py:63
+#: inary/cli/index.py:62
 msgid "Comma-separated compression types for index file"
 msgstr "Katalog dosyası için virgülle ayrılmış sıkıştırma türleri"
 
-#: pisi/cli/index.py:69
-msgid "Do not index PiSi spec files."
-msgstr "PiSi spec dosyalarını kataloğa ekleme."
+#: inary/cli/index.py:68
+msgid "Do not index INARY spec files."
+msgstr "INARY spec dosyalarını kataloğa ekleme."
 
-#: pisi/cli/index.py:74
+#: inary/cli/index.py:73
 msgid "Do not sign index."
 msgstr "Kataloğu imzalama."
 
-#: pisi/cli/info.py:26
+#: inary/cli/info.py:26
 msgid ""
 "Display package information\n"
 "\n"
 "Usage: info <package1> <package2> ... <packagen>\n"
 "\n"
-"<packagei> is either a package name or a .pisi file,\n"
+"<packagei> is either a package name or a .inary file,\n"
 msgstr ""
 "Paket bilgisini göster\n"
 "\n"
 "Kullanım: info <paket1> <paket2> ... <paketn>\n"
 "\n"
-"<paketi> paket adı ya da .pisi dosyası olabilir.\n"
+"<paketi> paket adı ya da .inary dosyası olabilir.\n"
 
-#: pisi/cli/info.py:45
+#: inary/cli/info.py:44
 msgid "info options"
 msgstr "info seçenekleri"
 
-#: pisi/cli/info.py:52
+#: inary/cli/info.py:51
 msgid "Show a list of package files."
 msgstr "Paketteki dosyaların bir listesini göster."
 
-#: pisi/cli/info.py:54
+#: inary/cli/info.py:53
 msgid "Info about the given component"
 msgstr "Verilen bileşen hakkında bilgi"
 
-#: pisi/cli/info.py:57
+#: inary/cli/info.py:56
 msgid "Show only paths."
 msgstr "Sadece yolları göster."
 
-#: pisi/cli/info.py:59
+#: inary/cli/info.py:58
 msgid "Do not show details"
 msgstr "Detayları gösterme"
 
-#: pisi/cli/info.py:61
+#: inary/cli/info.py:60
 msgid "Output in xml format"
 msgstr "Xml biçiminde çıktı üret."
 
-#: pisi/cli/info.py:129
+#: inary/cli/info.py:128
 msgid "Reverse Dependencies:"
 msgstr "Ters Bağımlılıklar:"
 
-#: pisi/cli/info.py:140
+#: inary/cli/info.py:139
 msgid "Reverse Build Dependencies:"
 msgstr "Ters İnşa Bağımlılıkları:"
 
-#: pisi/cli/info.py:145
-#, python-format
+#: inary/cli/info.py:144
 msgid "Package file: %s"
 msgstr "Paket dosyası: %s"
 
-#: pisi/cli/info.py:160
+#: inary/cli/info.py:159
 msgid "[inst] "
 msgstr "[yüklü] "
 
-#: pisi/cli/info.py:162
+#: inary/cli/info.py:161
 msgid "Installed package:"
 msgstr "Yüklü paket:"
 
-#: pisi/cli/info.py:166
-#, python-format
+#: inary/cli/info.py:165
 msgid "%s package is not installed"
 msgstr "Paket %s kurulu değil."
 
-#: pisi/cli/info.py:172
+#: inary/cli/info.py:171
 msgid "[binary] "
 msgstr "[ikili] "
 
-#: pisi/cli/info.py:174 pisi/cli/info.py:186
-#, python-format
+#: inary/cli/info.py:173 inary/cli/info.py:185
 msgid "Package found in %s repository:"
 msgstr "Paket %s deposunda bulundu:"
 
-#: pisi/cli/info.py:177
-#, python-format
+#: inary/cli/info.py:176
 msgid "%s package is not found in binary repositories"
 msgstr "%s paketi ikili depolarda bulunamadı."
 
-#: pisi/cli/info.py:184
+#: inary/cli/info.py:183
 msgid "[source] "
 msgstr "[kaynak] "
 
-#: pisi/cli/info.py:189
-#, python-format
+#: inary/cli/info.py:188
 msgid "%s package is not found in source repositories"
 msgstr "%s paketi kaynak depolarda bulunamadı."
 
-#: pisi/cli/install.py:25
+#: inary/cli/install.py:25
 msgid ""
-"Install PiSi packages\n"
+"Install INARY packages\n"
 "\n"
 "Usage: install <package1> <package2> ... <packagen>\n"
 "\n"
@@ -1718,7 +1617,7 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
-"PiSi paket(ler)i kur\n"
+"INARY paket(ler)i kur\n"
 "\n"
 "Kullanım: install <paket1> <paket2> ... <paketn>\n"
 "\n"
@@ -1728,50 +1627,60 @@ msgstr ""
 "Paket adları yerine bileşen de belirtebilirsiniz, bileşendeki\n"
 "paketler otomatik olarak seçilir.\n"
 
-#: pisi/cli/install.py:44
+#: inary/cli/install.py:43
 msgid "install options"
 msgstr "install seçenekleri"
 
-#: pisi/cli/install.py:49
+#: inary/cli/install.py:48
 msgid "Reinstall already installed packages"
 msgstr "Halihazırda kurulu paket(ler)i yeniden kur."
 
-#: pisi/cli/install.py:51
+#: inary/cli/install.py:50
 msgid "Skip distribution release and architecture check"
 msgstr "Dağıtım sürümü ve mimarisi kontrolünü atla"
 
-#: pisi/cli/install.py:57
+#: inary/cli/install.py:56
 msgid "Install component's and recursive components' packages"
 msgstr "Bileşenin ve alt bileşenlerinin paketlerini kur."
 
-#: pisi/cli/install.py:59
+#: inary/cli/install.py:58
 msgid "Name of the component's repository"
 msgstr "Bileşenin depo ismi"
 
-#: pisi/cli/install.py:61 pisi/cli/upgrade.py:66
+#: inary/cli/install.py:60 inary/cli/upgrade.py:65
 msgid "Fetch upgrades but do not install."
 msgstr "Yükseltmeleri indir ama kurma."
 
-#: pisi/cli/install.py:63
-msgid "When installing packages, ignore packages and components whose basenames match pattern."
+#: inary/cli/install.py:62
+msgid ""
+"When installing packages, ignore packages and components whose basenames "
+"match pattern."
 msgstr "Paket kurarken, ifade ile eşleşen paket ve bileşenleri gözardı et."
 
-#: pisi/cli/install.py:66
-msgid "When installing packages, ignore packages and components whose basenames match any pattern contained in file."
-msgstr "Paket kurarken, paket ya da bileşen isimlerinden dosya içerisinde verilen kalıplardan herhangi birisi ile eşleşenleri gözardı et."
+#: inary/cli/install.py:65
+msgid ""
+"When installing packages, ignore packages and components whose basenames "
+"match any pattern contained in file."
+msgstr ""
+"Paket kurarken, paket ya da bileşen isimlerinden dosya içerisinde verilen "
+"kalıplardan herhangi birisi ile eşleşenleri gözardı et."
 
-#: pisi/cli/install.py:93
-#, python-format
+#: inary/cli/install.py:69
+msgid ""
+"Store previous libraries info when package is updating to newer version."
+msgstr ""
+
+#: inary/cli/install.py:94
 msgid "There is no component named %s"
 msgstr "%s isminde bir bileşen bulunamadı."
 
-#: pisi/cli/listavailable.py:26
+#: inary/cli/listavailable.py:26
 msgid ""
 "List available packages in the repositories\n"
 "\n"
 "Usage: list-available [ <repo1> <repo2> ... repon ]\n"
 "\n"
-"Gives a brief list of PiSi packages published in the specified\n"
+"Gives a brief list of INARY packages published in the specified\n"
 "repositories. If no repository is specified, we list packages in\n"
 "all repositories.\n"
 msgstr ""
@@ -1779,62 +1688,61 @@ msgstr ""
 "\n"
 "Kullanım: list-available [ <depo1> <depo2> ... <depon> ]\n"
 "\n"
-"Belirtilen depolarda yayınlanan PiSi paketlerinin kısa bir\n"
+"Belirtilen depolarda yayınlanan INARY paketlerinin kısa bir\n"
 "listesini verir. Eğer depo belirtilmezse, tüm açık depolardaki\n"
 "paketler listelenir.\n"
 
-#: pisi/cli/listavailable.py:45
+#: inary/cli/listavailable.py:44
 msgid "list-available options"
 msgstr "list-available seçenekleri"
 
-#: pisi/cli/listavailable.py:47 pisi/cli/listcomponents.py:42
-#: pisi/cli/listinstalled.py:48 pisi/cli/listsources.py:41
-#: pisi/cli/listupgrades.py:44 pisi/cli/searchfile.py:40
+#: inary/cli/listavailable.py:46 inary/cli/listcomponents.py:41
+#: inary/cli/listinstalled.py:46 inary/cli/listsources.py:40
+#: inary/cli/listupgrades.py:43 inary/cli/searchfile.py:39
 msgid "Show in long format"
 msgstr "Uzun biçimde göster"
 
-#: pisi/cli/listavailable.py:49
+#: inary/cli/listavailable.py:48
 msgid "List available packages under given component"
 msgstr "Verilen bileşendeki paketleri listele"
 
-#: pisi/cli/listavailable.py:51
+#: inary/cli/listavailable.py:50
 msgid "Show uninstalled packages only"
 msgstr "Sadece kurulu olmayan paketleri göster"
 
-#: pisi/cli/listavailable.py:59
+#: inary/cli/listavailable.py:58
 msgid "Installed packages are shown in this color"
 msgstr "Kurulu paketler bu renkle gösterilir."
 
-#: pisi/cli/listavailable.py:67
-#, python-format
+#: inary/cli/listavailable.py:66
 msgid "Repository : %s\n"
 msgstr "Depo: %s\n"
 
-#: pisi/cli/listcomponents.py:24
+#: inary/cli/listcomponents.py:24
 msgid ""
 "List available components\n"
 "\n"
 "Usage: list-components\n"
 "\n"
-"Gives a brief list of PiSi components published in the\n"
+"Gives a brief list of INARY components published in the\n"
 "repositories.\n"
 msgstr ""
 "Bileşenleri listele\n"
 "\n"
 "Kullanım: list-components\n"
 "\n"
-"Depolarda yayınlanan PiSi bileşenlerinin kısa bir\n"
+"Depolarda yayınlanan INARY bileşenlerinin kısa bir\n"
 "listesini verir.\n"
 
-#: pisi/cli/listcomponents.py:40
+#: inary/cli/listcomponents.py:39
 msgid "list-components options"
 msgstr "list-components seçenekleri"
 
-#: pisi/cli/listcomponents.py:44 pisi/cli/search.py:47
+#: inary/cli/listcomponents.py:43 inary/cli/search.py:46
 msgid "Name of the source or package repository"
 msgstr "Kaynak ya da ikili paket deposu ismi"
 
-#: pisi/cli/listinstalled.py:24
+#: inary/cli/listinstalled.py:24
 msgid ""
 "Print the list of all installed packages\n"
 "\n"
@@ -1844,34 +1752,36 @@ msgstr ""
 "\n"
 "Kullanım: list-installed\n"
 
-#: pisi/cli/listinstalled.py:40
+#: inary/cli/listinstalled.py:38
 msgid "list-installed options"
 msgstr "list-installed seçenekleri"
 
-#: pisi/cli/listinstalled.py:45
+#: inary/cli/listinstalled.py:43
 msgid "Only list the installed packages built by the given host"
 msgstr "Sadece verilen makine tarafından inşa edilmiş paketleri listele"
 
-#: pisi/cli/listinstalled.py:50
+#: inary/cli/listinstalled.py:48
 msgid "List installed packages under given component"
 msgstr "Verilen bileşen altındaki kurulu paketleri listele."
 
-#: pisi/cli/listinstalled.py:52 pisi/cli/listupgrades.py:48
+#: inary/cli/listinstalled.py:50 inary/cli/listupgrades.py:47
 msgid "Show detailed install info"
 msgstr "Detaylı kurulum bilgisi göster."
 
-# pisi/cli/commands.py:542 :729
-#: pisi/cli/listinstalled.py:78 pisi/cli/listupgrades.py:73
-msgid "Package Name          |St|        Version|  Rel.|  Distro|             Date"
-msgstr "Paket Adı             |Dm|          Sürüm| Yayım| Dağıtım|            Tarih"
+# inary/cli/commands.py:542 :729
+#: inary/cli/listinstalled.py:76 inary/cli/listupgrades.py:72
+msgid ""
+"Package Name          |St|        Version|  Rel.|  Distro|             Date"
+msgstr ""
+"Paket Adı             |Dm|          Sürüm| Yayım| Dağıtım|            Tarih"
 
-#: pisi/cli/listnewest.py:25
+#: inary/cli/listnewest.py:25
 msgid ""
 "List newest packages in the repositories\n"
 "\n"
 "Usage: list-newest [ <repo1> <repo2> ... repon ]\n"
 "\n"
-"Gives a list of PiSi newly published packages in the specified\n"
+"Gives a list of INARY newly published packages in the specified\n"
 "repositories. If no repository is specified, we list the new\n"
 "packages from all repositories.\n"
 msgstr ""
@@ -1883,29 +1793,72 @@ msgstr ""
 "Eğer herhangi bir depo belirtilmezse, tüm depolardaki yeni\n"
 "paketler listelenir.\n"
 
-#: pisi/cli/listnewest.py:44
+#: inary/cli/listnewest.py:43
 msgid "list-newest options"
 msgstr "list-newest seçenekleri"
 
-#: pisi/cli/listnewest.py:46
-msgid "List new packages added to repository after this given date formatted as yyyy-mm-dd"
-msgstr "yyyy-aa-gg biçiminde verdiğiniz tarihten sonra depoya eklenen paketleri listeler"
+#: inary/cli/listnewest.py:45
+msgid ""
+"List new packages added to repository after this given date formatted as "
+"yyyy-mm-dd"
+msgstr ""
+"yyyy-aa-gg biçiminde verdiğiniz tarihten sonra depoya eklenen paketleri "
+"listeler"
 
-#: pisi/cli/listnewest.py:48
-msgid "List new packages added to repository after last nth previous repository update"
-msgstr "n önceki depo güncellemesinden itibaren depoya eklenen yeni paketleri listeler"
+#: inary/cli/listnewest.py:47
+msgid ""
+"List new packages added to repository after last nth previous repository "
+"update"
+msgstr ""
+"n önceki depo güncellemesinden itibaren depoya eklenen yeni paketleri "
+"listeler"
 
-#: pisi/cli/listnewest.py:76
-#, python-format
+#: inary/cli/listnewest.py:75
 msgid "Packages added to %s since %s:\n"
 msgstr "%s deposuna %s tarihinden bu yana giren paketler:\n"
 
-#: pisi/cli/listnewest.py:78
-#, python-format
+#: inary/cli/listnewest.py:77
 msgid "Packages added to %s:"
 msgstr "%s deposuna giren paketler:"
 
-#: pisi/cli/listpending.py:22
+#: inary/cli/listorphaned.py:25
+msgid ""
+"List orphaned packages\n"
+"\n"
+"Usage: list-orphaned\n"
+"\n"
+"Lists packages installed as dependency, but no longer needed by any other "
+"installed package.\n"
+msgstr ""
+
+#: inary/cli/listorphaned.py:40
+#, fuzzy
+msgid "list-orphaned options"
+msgstr "list-sources seçenekleri"
+
+#: inary/cli/listorphaned.py:42
+#, fuzzy
+msgid "Show all packages without reverse dependencies"
+msgstr "Bağımlılıklar yüzünden ek paketler var."
+
+#: inary/cli/listorphaned.py:44
+#, fuzzy
+msgid "Ignore packages and components whose basenames match pattern."
+msgstr ""
+"Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile "
+"eşleşenleri yoksay."
+
+#: inary/cli/listorphaned.py:56
+#, fuzzy
+msgid "Orphaned packages:"
+msgstr "Kurulu paketlerin grafiği"
+
+#: inary/cli/listorphaned.py:58
+#, fuzzy
+msgid "No orphaned packages"
+msgstr "Kurulu paketleri gösterme."
+
+#: inary/cli/listpending.py:22
 msgid ""
 "List pending packages\n"
 "\n"
@@ -1915,11 +1868,11 @@ msgstr ""
 "\n"
 "Yapılandırılmayı bekleyen paketleri listeler.\n"
 
-#: pisi/cli/listpending.py:41
+#: inary/cli/listpending.py:40
 msgid "There are no packages waiting to be configured"
 msgstr "Yapılandırılmayı bekleyen paket yok."
 
-#: pisi/cli/listrepo.py:23
+#: inary/cli/listrepo.py:23
 msgid ""
 "List repositories\n"
 "\n"
@@ -1933,20 +1886,19 @@ msgstr ""
 "\n"
 "İzlemede olan depoları listele.\n"
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
-msgid "active"
-msgstr "etkin"
-
-#: pisi/cli/listrepo.py:41
+#: inary/cli/listrepo.py:40
 msgid "inactive"
 msgstr "etkin değil"
 
-#: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
-#, python-format
+#: inary/cli/listrepo.py:40 inary/cli/listrepo.py:41
+msgid "active"
+msgstr "etkin"
+
+#: inary/cli/listrepo.py:42 inary/cli/listrepo.py:44
 msgid "%s [%s]"
 msgstr "%s [%s]"
 
-#: pisi/cli/listsources.py:24
+#: inary/cli/listsources.py:24
 msgid ""
 "List available sources\n"
 "\n"
@@ -1960,11 +1912,11 @@ msgstr ""
 "\n"
 "Depolarda yayınlanan kaynakların kısa bir listesini göster.\n"
 
-#: pisi/cli/listsources.py:39
+#: inary/cli/listsources.py:38
 msgid "list-sources options"
 msgstr "list-sources seçenekleri"
 
-#: pisi/cli/listupgrades.py:26
+#: inary/cli/listupgrades.py:26
 msgid ""
 "List packages to be upgraded\n"
 "\n"
@@ -1978,65 +1930,53 @@ msgstr ""
 "\n"
 "Yükseltilecek paketlerin listesini verir.\n"
 
-#: pisi/cli/listupgrades.py:42
+#: inary/cli/listupgrades.py:41
 msgid "list-upgrades options"
 msgstr "list-upgrades seçenekleri"
 
-#: pisi/cli/listupgrades.py:46
+#: inary/cli/listupgrades.py:45
 msgid "List upgradable packages under given component"
 msgstr "Verilen bileşen altındaki güncellenebilir paketleri listele"
 
-#: pisi/cli/listupgrades.py:64 pisi/operations/upgrade.py:146
+#: inary/cli/listupgrades.py:63 inary/operations/upgrade.py:159
 msgid "No packages to upgrade."
 msgstr "Yükseltilecek paket yok."
 
-#: pisi/cli/pisicli.py:86
-msgid "Options must precede non-option arguments"
-msgstr "Seçenekler seçenek olmayan parametrelerden önce gelmeli."
-
-#: pisi/cli/pisicli.py:127
-msgid "No command given"
-msgstr "Komut verilmedi."
-
-#: pisi/cli/pisicli.py:130
-msgid "Command line parsing error"
-msgstr "Komut satırı ayrıştırma hatası"
-
-#: pisi/cli/rebuilddb.py:24
+#: inary/cli/rebuilddb.py:24
 msgid ""
 "Rebuild Databases\n"
 "\n"
 "Usage: rebuilddb [ <package1> <package2> ... <packagen> ]\n"
 "\n"
-"Rebuilds the PiSi databases\n"
+"Rebuilds the INARY databases\n"
 "\n"
 "If package specs are given, they should be the names of package\n"
-"dirs under /var/lib/pisi\n"
+"dirs under /var/lib/inary\n"
 msgstr ""
 "Veritabanlarını Yeniden İnşa Et\n"
 "\n"
 "Kullanım: rebuilddb [ <paket1> <paket2> ... <paketn> ]\n"
 "\n"
-"PiSi veritabanlarını yeniden inşa eder\n"
+"INARY veritabanlarını yeniden inşa eder\n"
 "\n"
-"Eğer paket belirtimleri verilirse, /var/lib/pisi altındaki\n"
+"Eğer paket belirtimleri verilirse, /var/lib/inary altındaki\n"
 "dizinlerin adları olmalıdir.\n"
 
-#: pisi/cli/rebuilddb.py:42
+#: inary/cli/rebuilddb.py:41
 msgid "rebuild-db options"
 msgstr "rebuild-db seçenekleri"
 
-#: pisi/cli/rebuilddb.py:45
+#: inary/cli/rebuilddb.py:44
 msgid "Rebuild files database"
 msgstr "Dosya veritabanını yeniden inşa et"
 
-#: pisi/cli/rebuilddb.py:51
-msgid "Rebuild PiSi databases?"
-msgstr "PiSi veritabanı yeniden inşa edilsin mi?"
+#: inary/cli/rebuilddb.py:50
+msgid "Rebuild INARY databases?"
+msgstr "INARY veritabanı yeniden inşa edilsin mi?"
 
-#: pisi/cli/remove.py:25
+#: inary/cli/remove.py:25
 msgid ""
-"Remove PiSi packages\n"
+"Remove INARY packages\n"
 "\n"
 "Usage: remove <package1> <package2> ... <packagen>\n"
 "\n"
@@ -2045,7 +1985,7 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
-"PiSi paketlerini kaldır\n"
+"INARY paketlerini kaldır\n"
 "\n"
 "Kullanım: remove <paket1> <paket2> ... <paketn>\n"
 "\n"
@@ -2055,19 +1995,48 @@ msgstr ""
 "Paket isimleri yerine bileşen de belirtebilirsiniz, bileşen altındaki\n"
 "paketler alınır.\n"
 
-#: pisi/cli/remove.py:43
+#: inary/cli/remove.py:42
 msgid "remove options"
 msgstr "remove seçenekleri"
 
-#: pisi/cli/remove.py:46
+#: inary/cli/remove.py:45
 msgid "Removes everything including changed config files of the package"
 msgstr "Değiştirdiğiniz ayar dosyaları dahil paketin tüm dosyalarını kaldırır."
 
-#: pisi/cli/remove.py:48
+#: inary/cli/remove.py:47
 msgid "Remove component's and recursive components' packages"
 msgstr "Bileşenin ve alt bileşenlerinin paketlerini kaldır"
 
-#: pisi/cli/removerepo.py:21
+#: inary/cli/removeorphaned.py:25
+#, fuzzy
+msgid ""
+"Remove orphaned packages\n"
+"\n"
+"Usage: remove-orphaned\n"
+"\n"
+"Remove all orphaned packages from the system.\n"
+msgstr ""
+"Depoları kaldır\n"
+"\n"
+"Kullanım: remove-repo <depo1> <depo2> ... <depon>\n"
+"\n"
+"Sistemden verilen deponun tüm verisini kaldır.\n"
+
+#: inary/cli/removeorphaned.py:39
+#, fuzzy
+msgid "remove-orphaned options"
+msgstr "remove seçenekleri"
+
+#: inary/cli/removeorphaned.py:43
+#, fuzzy
+msgid ""
+"When removing orphaned, ignore packages and components whose basenames match "
+"pattern."
+msgstr ""
+"Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile "
+"eşleşenleri yoksay."
+
+#: inary/cli/removerepo.py:21
 msgid ""
 "Remove repositories\n"
 "\n"
@@ -2081,7 +2050,7 @@ msgstr ""
 "\n"
 "Sistemden verilen deponun tüm verisini kaldır.\n"
 
-#: pisi/cli/search.py:25
+#: inary/cli/search.py:25
 msgid ""
 "Search packages\n"
 "\n"
@@ -2103,35 +2072,39 @@ msgstr ""
 "veritabanında arama yapmak için seçenekleri\n"
 "kullanabilirsiniz.\n"
 
-#: pisi/cli/search.py:43
+#: inary/cli/search.py:42
 msgid "search options"
 msgstr "search seçenekleri"
 
-#: pisi/cli/search.py:45
+#: inary/cli/search.py:44
 msgid "Summary and description language"
 msgstr "Özet ve açıklama dili"
 
-#: pisi/cli/search.py:49
+#: inary/cli/search.py:48
 msgid "Search in installdb"
 msgstr "Installdb içinde ara"
 
-#: pisi/cli/search.py:51
+#: inary/cli/search.py:50
 msgid "Search in sourcedb"
 msgstr "Sourcedb içinde ara"
 
-#: pisi/cli/search.py:53
+#: inary/cli/search.py:52
+msgid "Case sensitive search"
+msgstr ""
+
+#: inary/cli/search.py:54
 msgid "Search in the package name"
 msgstr "Paket isminde ara"
 
-#: pisi/cli/search.py:55
+#: inary/cli/search.py:56
 msgid "Search in the package summary"
 msgstr "Paket özetinde ara"
 
-#: pisi/cli/search.py:57
+#: inary/cli/search.py:58
 msgid "Search in the package description"
 msgstr "Paket açıklamasında ara"
 
-#: pisi/cli/searchfile.py:24
+#: inary/cli/searchfile.py:24
 msgid ""
 "Search for a file\n"
 "\n"
@@ -2145,30 +2118,39 @@ msgstr ""
 "\n"
 "Belirtilen dosyayı içeren kurulu paketi bulur.\n"
 
-#: pisi/cli/searchfile.py:38
+#: inary/cli/searchfile.py:37
 msgid "search-file options"
 msgstr "search-file seçenekleri"
 
-#: pisi/cli/searchfile.py:42
+#: inary/cli/searchfile.py:41
 msgid "Show only package name"
 msgstr "Sadece paket ismini göster."
 
-#: pisi/cli/searchfile.py:49
-#, python-format
+#: inary/cli/searchfile.py:48
 msgid "Package %s has file /%s"
 msgstr "%s paketi içinde %s dosyası var."
 
-#: pisi/cli/searchfile.py:52
-#, python-format
+#: inary/cli/searchfile.py:51
 msgid "Path '%s' does not belong to an installed package"
 msgstr "'%s' kurulu herhangi bir pakette değil."
 
-#: pisi/cli/searchfile.py:65
-#, python-format
+#: inary/cli/searchfile.py:64
 msgid "Searching for %s"
 msgstr "%s aranıyor"
 
-#: pisi/cli/updaterepo.py:24
+#: inary/cli/inarycli.py:89
+msgid "Options must precede non-option arguments"
+msgstr "Seçenekler seçenek olmayan parametrelerden önce gelmeli."
+
+#: inary/cli/inarycli.py:130
+msgid "No command given"
+msgstr "Komut verilmedi."
+
+#: inary/cli/inarycli.py:133
+msgid "Command line parsing error"
+msgstr "Komut satırı ayrıştırma hatası"
+
+#: inary/cli/updaterepo.py:24
 msgid ""
 "Update repository databases\n"
 "\n"
@@ -2176,7 +2158,7 @@ msgid ""
 "\n"
 "<repoi>: repository name\n"
 "\n"
-"Synchronizes the PiSi databases with the current repository.\n"
+"Synchronizes the INARY databases with the current repository.\n"
 "If no repository is given, all repositories are updated.\n"
 msgstr ""
 "Depo veritabanlarını güncelle\n"
@@ -2185,20 +2167,20 @@ msgstr ""
 "\n"
 "<depoi>: depo ismi\n"
 "\n"
-"PiSi veritabanlarını güncel depoya eşler. Eğer depo ismi\n"
+"INARY veritabanlarını güncel depoya eşler. Eğer depo ismi\n"
 "verilmezse tüm depolar güncellenir.\n"
 
-#: pisi/cli/updaterepo.py:42
+#: inary/cli/updaterepo.py:41
 msgid "update-repo options"
 msgstr "update-repo seçenekleri"
 
-#: pisi/cli/updaterepo.py:46
+#: inary/cli/updaterepo.py:45
 msgid "Update database in any case"
 msgstr "Veritabanını her halükârda güncelle"
 
-#: pisi/cli/upgrade.py:25
+#: inary/cli/upgrade.py:25
 msgid ""
-"Upgrade PiSi packages\n"
+"Upgrade INARY packages\n"
 "\n"
 "Usage: Upgrade [<package1> <package2> ... <packagen>]\n"
 "\n"
@@ -2210,12 +2192,12 @@ msgid ""
 "the package upgrade operation is defined only with respect\n"
 "to repositories. If you have specified a package name, it\n"
 "should exist in the package repositories. If you just want to\n"
-"reinstall a package from a PiSi file, use the install command.\n"
+"reinstall a package from a INARY file, use the install command.\n"
 "\n"
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
-"PiSi paketlerini güncelle\n"
+"INARY paketlerini güncelle\n"
 "\n"
 "Kullanım: upgrade [<paket1> <paket2> ... <paketn>]\n"
 "\n"
@@ -2226,184 +2208,145 @@ msgstr ""
 "Paket güncelleme işlemleri sadece depolar dikkate alınarak\n"
 "yapıldığı için sadece paket isimleri kullanabilirsiniz. Eğer\n"
 "bir paket ismi belirtirseniz, pa ketin paket depolarında\n"
-"bulunması gerekir. Eğer istediğiniz bir PiSi dosyasından bir\n"
+"bulunması gerekir. Eğer istediğiniz bir INARY dosyasından bir\n"
 "paket kurmaksa, install komutunu kullanın.\n"
 "\n"
 "Ayrıca paket isimleri yerine bileşen de belirtirseniz, bu durumda\n"
 "bileşendeki paketler kurulur.\n"
 
-#: pisi/cli/upgrade.py:50
+#: inary/cli/upgrade.py:49
 msgid "upgrade options"
 msgstr "upgrade seçenekleri"
 
-#: pisi/cli/upgrade.py:54
+#: inary/cli/upgrade.py:53
 msgid "Security related package upgrades only"
 msgstr "Sadece güvenlik ile alakalı paket güncellemeleri"
 
-#: pisi/cli/upgrade.py:56
+#: inary/cli/upgrade.py:55
 msgid "Do not update repositories"
 msgstr "Depoları güncelleme"
 
-#: pisi/cli/upgrade.py:62
+#: inary/cli/upgrade.py:61
 msgid "Upgrade component's and recursive components' packages"
 msgstr "Bileşenin ve alt bileşenlerinin paketlerini güncelle"
 
-#: pisi/cli/upgrade.py:64
+#: inary/cli/upgrade.py:63
 msgid "Name of the to be upgraded packages' repository"
 msgstr "Güncellenecek paketlerin depo ismi"
 
-#: pisi/cli/upgrade.py:68
-msgid "When upgrading system, ignore packages and components whose basenames match pattern."
-msgstr "Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile eşleşenleri yoksay."
+#: inary/cli/upgrade.py:67
+msgid ""
+"When upgrading system, ignore packages and components whose basenames match "
+"pattern."
+msgstr ""
+"Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile "
+"eşleşenleri yoksay."
 
-#: pisi/cli/upgrade.py:71
-msgid "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
-msgstr "Sistemi yükseltirken paket ya da bileşen isimlerinden dosya içerisinde verilen kalıplardan herhangi birisi ile eşleşenleri yoksay."
+#: inary/cli/upgrade.py:70
+msgid ""
+"When upgrading system, ignore packages and components whose basenames match "
+"any pattern contained in file."
+msgstr ""
+"Sistemi yükseltirken paket ya da bileşen isimlerinden dosya içerisinde "
+"verilen kalıplardan herhangi birisi ile eşleşenleri yoksay."
 
-#: pisi/cli/upgrade.py:85
+#: inary/cli/upgrade.py:74
+#, fuzzy
+msgid "compare sha1sum repo and installed packages"
+msgstr "Halihazırda kurulu paket(ler)i yeniden kur."
+
+#: inary/cli/upgrade.py:86
 msgid "Updating repositories"
 msgstr "Depolar güncelleniyor"
 
-#: pisi/cli/upgrade.py:89
+#: inary/cli/upgrade.py:90
 msgid "Will not update repositories"
 msgstr "Depolar güncellenmeyecek."
 
-#: pisi/comariface.py:31
-msgid "comar-api package is not fully installed"
-msgstr "comar-api paketi tam olarak kurulmamış."
-
-#: pisi/comariface.py:88
-#, python-format
-msgid ""
-"Cannot connect to COMAR: \n"
-"  %s\n"
-msgstr ""
-"COMAR'a bağlanılamıyor: \n"
-"  %s\n"
-
-#: pisi/comariface.py:97
-#, python-format
-msgid "Configuring %s package"
-msgstr "%s paketi yapılandırılıyor"
-
-#: pisi/comariface.py:103
-msgid "COMAR package updated. From now on, using new COMAR daemon."
-msgstr "COMAR paketi güncellendi, artık yeni COMAR kullanılıyor."
-
-#: pisi/comariface.py:110
-#, python-format
-msgid "Registering %s comar script"
-msgstr "comar betiği %s kayıt ediliyor"
-
-#: pisi/comariface.py:119 pisi/comariface.py:124 pisi/comariface.py:137
-#: pisi/comariface.py:153 pisi/comariface.py:172 pisi/comariface.py:183
-#: pisi/comariface.py:205 pisi/comariface.py:216 pisi/comariface.py:223
-#, python-format
-msgid "Script error: %s"
-msgstr "Betik hatası: %s"
-
-#: pisi/comariface.py:126
-msgid "Calling post install handlers"
-msgstr "Kurulum sonrası betikleri çağrılıyor"
-
-#: pisi/comariface.py:145
-msgid "Running package's post install script"
-msgstr "Paketin kurulum sonrası betiği çağrılıyor"
-
-#: pisi/comariface.py:159
-#, python-format
-msgid "Running pre removal operations for %s"
-msgstr "%s için kaldırma öncesi işlemler çalıştırılıyor"
-
-#: pisi/comariface.py:165
-msgid "Running package's pre remove script"
-msgstr "Paketin kaldırma öncesi betiği çağrılıyor"
-
-#: pisi/comariface.py:174
-msgid "Calling pre remove handlers"
-msgstr "Kaldırma öncesi işleyicileri çağrılıyor"
-
-#: pisi/comariface.py:189
-#, python-format
-msgid "Running post removal operations for %s"
-msgstr "%s için kaldırma sonrası işlemler çalıştırılıyor"
-
-#: pisi/comariface.py:198
-msgid "Running package's postremove script"
-msgstr "Paketin kaldırma sonrası betiği çağrılıyor"
-
-#: pisi/comariface.py:207
-msgid "Calling post remove handlers"
-msgstr "Kaldırma sonrası işleyicileri çağrılıyor"
-
-#: pisi/comariface.py:218
-msgid "Unregistering comar scripts"
-msgstr "comar betikleri kayıtlardan siliniyor"
-
-#: pisi/config.py:85
-#, python-format
+#: inary/config.py:83
 msgid "Destination directory %s does not exist. Creating it."
 msgstr "Hedef dizini %s bulunamadı. Yaratılıyor."
 
-#: pisi/configfile.py:127
-#, python-format
+#: inary/configfile.py:130
 msgid "No section by name '%s'"
 msgstr "'%s' isminde bir bölüm yok."
 
-#: pisi/conflict.py:26 pisi/dependency.py:26 pisi/replace.py:24
+#: inary/conflict.py:26 inary/dependency.py:26 inary/replace.py:24
 msgid " version >= "
 msgstr " sürüm >= "
 
-#: pisi/conflict.py:28 pisi/dependency.py:28 pisi/replace.py:26
+#: inary/conflict.py:28 inary/dependency.py:28 inary/replace.py:26
 msgid " version <= "
 msgstr " sürüm <= "
 
-#: pisi/conflict.py:30 pisi/dependency.py:30 pisi/replace.py:28
+#: inary/conflict.py:30 inary/dependency.py:30 inary/replace.py:28
 msgid " version "
 msgstr " sürüm "
 
-#: pisi/conflict.py:32 pisi/dependency.py:32 pisi/replace.py:30
+#: inary/conflict.py:32 inary/dependency.py:32 inary/replace.py:30
 msgid " release >= "
 msgstr " sürüm >= "
 
-#: pisi/conflict.py:34 pisi/dependency.py:34 pisi/replace.py:32
+#: inary/conflict.py:34 inary/dependency.py:34 inary/replace.py:32
 msgid " release <= "
 msgstr " sürüm <= "
 
-#: pisi/conflict.py:36 pisi/dependency.py:36 pisi/replace.py:34
+#: inary/conflict.py:36 inary/dependency.py:36 inary/replace.py:34
 msgid " release "
 msgstr " sürüm "
 
-#: pisi/constants.py:30
-#, python-format
+#: inary/constants.py:30
 msgid "Can't rebind constant: %s"
 msgstr "Sabit yeniden bağlanamaz: %s"
 
-#: pisi/constants.py:36
-#, python-format
+#: inary/constants.py:36
 msgid "Can't unbind constant: %s"
 msgstr "Sabit ayrılamaz: %s"
 
-#: pisi/db/componentdb.py:87
-#, python-format
+#: inary/db/componentdb.py:87
 msgid "Component %s not found"
 msgstr "%s bileşeni bulunamadı."
 
-#: pisi/db/groupdb.py:66 pisi/db/groupdb.py:75
-#, python-format
+#: inary/db/filesldb.py:29
+msgid "LevelDB not found! Please install LevelDB and plyvel!"
+msgstr ""
+
+#: inary/db/filesldb.py:40
+#, fuzzy
+msgid "Creating files database..."
+msgstr "Dosya veritabanını yeniden inşa et"
+
+#: inary/db/filesldb.py:43
+msgid "Adding '%s' to db... "
+msgstr "'%s' veritabanına ekleniyor... "
+
+#: inary/db/filesldb.py:46
+msgid "OK."
+msgstr "Tamam."
+
+#: inary/db/filesldb.py:47 inary/db/filesldb.py:79
+#, fuzzy
+msgid "done."
+msgstr "Tamamlandı."
+
+#: inary/db/filesldb.py:77
+#, fuzzy
+msgid "Cleaning files database folder... "
+msgstr "İnşa dizini temizleniyor..."
+
+#: inary/db/groupdb.py:66 inary/db/groupdb.py:75
 msgid "Group %s not found"
 msgstr "Grup %s bulunamadı."
 
-#: pisi/db/installdb.py:37
+#: inary/db/installdb.py:37
 msgid "installed"
 msgstr "kurulu"
 
-#: pisi/db/installdb.py:37
+#: inary/db/installdb.py:37
 msgid "installed-pending"
 msgstr "kurulu-beklemede"
 
-#: pisi/db/installdb.py:54
-#, python-format
+#: inary/db/installdb.py:54
 msgid ""
 "State: %s\n"
 "Version: %s, Release: %s\n"
@@ -2411,508 +2354,506 @@ msgstr ""
 "Durum: %s\n"
 "Sürüm: %s, Yayım: %s\n"
 
-#: pisi/db/installdb.py:58
-#, python-format
+#: inary/db/installdb.py:58
 msgid "Distribution: %s, Install Time: %s\n"
 msgstr "Dağıtım: %s, Kurulma Zamanı: %s\n"
 
-#: pisi/db/installdb.py:94
-#, python-format
-msgid "Installation info for package '%s' is broken. Reinstall it to fix this problem."
-msgstr "'%s' paketine ait kurulum bilgisi bozulmuş. Sorunu düzeltmek için paketi yeniden kurun."
+#: inary/db/installdb.py:103
+msgid ""
+"Installation info for package '%s' is broken. Reinstall it to fix this "
+"problem."
+msgstr ""
+"'%s' paketine ait kurulum bilgisi bozulmuş. Sorunu düzeltmek için paketi "
+"yeniden kurun."
 
-#: pisi/db/installdb.py:335
-#, python-format
+#: inary/db/installdb.py:367
 msgid "Package %s is not installed"
 msgstr "%s paketi kurulu değil."
 
-#: pisi/db/itembyrepo.py:40
-#, python-format
+#: inary/db/itembyrepo.py:40
 msgid "%s not found in any repository."
 msgstr "%s hiçbir depoda bulunamadı."
 
-#: pisi/db/itembyrepo.py:50
-#, python-format
+#: inary/db/itembyrepo.py:50
 msgid "Repo item %s not found"
 msgstr "Depo elemanı %s bulunamadı."
 
-#: pisi/db/itembyrepo.py:60 pisi/db/itembyrepo.py:71 pisi/db/itembyrepo.py:81
-#, python-format
+#: inary/db/itembyrepo.py:60 inary/db/itembyrepo.py:71 inary/db/itembyrepo.py:81
 msgid "Repository %s does not exist."
 msgstr "%s deposu yok."
 
-#: pisi/db/packagedb.py:144 pisi/db/packagedb.py:151
-#, python-format
+#: inary/db/packagedb.py:149 inary/db/packagedb.py:156
 msgid "Package %s not found."
 msgstr "Paket %s bulunamadı."
 
-#: pisi/db/repodb.py:168
-#, python-format
+#: inary/db/repodb.py:168
 msgid "%s repository needs to be updated"
 msgstr "%s deposunun güncellenmesi gerekiyor"
 
-#: pisi/db/repodb.py:174
-msgid "Error parsing repository index information. Index file does not exist or is malformed."
-msgstr "Depo bilgisi ayrıştırılırken hata oluştu. Katalog dosyası mevcut değil ya da bozuk."
+#: inary/db/repodb.py:174
+msgid ""
+"Error parsing repository index information. Index file does not exist or is "
+"malformed."
+msgstr ""
+"Depo bilgisi ayrıştırılırken hata oluştu. Katalog dosyası mevcut değil ya da "
+"bozuk."
 
-#: pisi/db/repodb.py:264
-#, python-format
-msgid "Repository '%s' is not compatible with your distribution. Repository is disabled."
-msgstr "'%s' adlı depo dağıtımınız ile uyumlu değil. Depo etkisiz hale getirildi."
+#: inary/db/repodb.py:270
+msgid ""
+"Repository '%s' is not compatible with your distribution. Repository is "
+"disabled."
+msgstr ""
+"'%s' adlı depo dağıtımınız ile uyumlu değil. Depo etkisiz hale getirildi."
 
-#: pisi/fetcher.py:147
-msgid "Urlgrabber needs to be installed to run this command"
-msgstr "Bu komutun çalıştırılabilmesi için Urlgrabber kurulu olmalı."
+#: inary/fetcher.py:134 inary/fetcher.py:202
+msgid "Package manager not support downloding from ftp mirror"
+msgstr ""
 
-#: pisi/fetcher.py:150
+#: inary/fetcher.py:137
+msgid ""
+"SSL error while downloading the escrow certificate:\n"
+"\n"
+"%s"
+msgstr ""
+
+#: inary/fetcher.py:142
+msgid ""
+"The following error was encountered while downloading the escrow "
+"certificate:\n"
+"\n"
+"%s"
+msgstr ""
+
+#: inary/fetcher.py:152
 msgid "Filename error"
 msgstr "Dosya adı hatası"
 
-#: pisi/fetcher.py:153
-#, python-format
+#: inary/fetcher.py:155
 msgid "Access denied to write to destination directory: \"%s\""
 msgstr "Hedef dizinine yazma erişimi reddedildi: \"%s\""
 
-#: pisi/fetcher.py:156
-#, python-format
+#: inary/fetcher.py:158
 msgid "Access denied to destination file: \"%s\""
 msgstr "Hedef dosyasına erişim reddedildi: \"%s\""
 
-#: pisi/fetcher.py:170
-#, python-format
-msgid "Could not fetch destination file \"%s\": %s"
+#: inary/fetcher.py:161
+msgid "Source file fetching on disk"
+msgstr ""
+
+#: inary/fetcher.py:175
+msgid "Can not make connection. Network is unreachable"
+msgstr ""
+
+#: inary/fetcher.py:199
+#, fuzzy
+msgid "Could not fetch destination file \"%s\":%s"
 msgstr "\"%s\" hedef dosyasına erişilemedi: %s"
 
-#: pisi/fetcher.py:174
-msgid "A problem occurred. Please check the archive address and/or permissions again."
-msgstr "Bir hata oluştu. Lütfen arşiv adresini ve/veya kullanıcı izinlerini kontrol edin."
+#: inary/fetcher.py:207
+msgid ""
+"A problem occurred. Please check the archive address and/or permissions "
+"again."
+msgstr ""
+"Bir hata oluştu. Lütfen arşiv adresini ve/veya kullanıcı izinlerini kontrol "
+"edin."
 
-#: pisi/fetcher.py:207
-#, python-format
+#: inary/fetcher.py:240
 msgid "Proxy configuration has been found for '%s' protocol"
 msgstr "'%s' protokolü için vekil yapılandırması bulundu."
 
-#: pisi/fetcher.py:214
-#, python-format
+#: inary/fetcher.py:247
 msgid "Bandwidth usage is limited to %s KB/s"
 msgstr "Bant genişliği kullanımı %s KB/s ile sınırlı."
 
-#: pisi/fetcher.py:227
-msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
+#: inary/fetcher.py:260
+msgid ""
+"Remote file can not be reached. Previously downloaded part of the file will "
+"be removed."
 msgstr "Uzak dosyaya erişilemedi. Dosyanın yarım kalan parçası silinecek."
 
-#: pisi/fetcher.py:236
-msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
-msgstr "Sunucu kısmî indirimleri desteklemiyor. Dosyanın daha önce indirilen parçasının üzerine yazılacak."
+#: inary/fetcher.py:269
+msgid ""
+"Server doesn't support partial downloads. Previously downloaded part of the "
+"file will be over-written."
+msgstr ""
+"Sunucu kısmî indirimleri desteklemiyor. Dosyanın daha önce indirilen "
+"parçasının üzerine yazılacak."
 
-#: pisi/file.py:35
-#, python-format
+#: inary/file.py:35
 msgid "URL %s already downloaded as %s"
 msgstr "%s adresi zaten %s olarak indirilmişti."
 
-# pisi/actionsapi/autotools.py:77 :87
-#: pisi/file.py:42
-#, python-format
+# inary/actionsapi/autotools.py:77 :87
+#: inary/file.py:42
 msgid "No signature found for %s"
 msgstr "%s dosyası için imza bulunamadı."
 
-#: pisi/file.py:50
-#, python-format
+#: inary/file.py:50
 msgid " invalid for %s"
 msgstr " %s için geçersiz"
 
-#: pisi/file.py:72
+#: inary/file.py:72
 msgid "uri must have type either URI or string"
 msgstr "uri parametresi ya URI ya da string tipine sahip olmalı."
 
-#: pisi/file.py:136
-#, python-format
+#: inary/file.py:136
 msgid "Fetching %s"
 msgstr "%s indiriliyor"
 
-#: pisi/file.py:140
-#, python-format
+#: inary/file.py:140
 msgid "Copying %s to transfer dir"
 msgstr "%s aktarım dizinine kopyalanıyor"
 
-#: pisi/file.py:145
-#, python-format
+#: inary/file.py:145
 msgid "File '%s' not found."
 msgstr "'%s' dosyası bulunamadı."
 
-#: pisi/file.py:166
-#, python-format
+#: inary/file.py:166
 msgid "File integrity of %s compromised."
 msgstr "%s dosyasının bütünlüğü bozuk."
 
-#: pisi/file.py:190
+#: inary/file.py:190
 msgid "File mode must be either File.read or File.write"
 msgstr "Dosya kipi File.read veya File.write olmalı."
 
-#: pisi/file.py:195
+#: inary/file.py:195
 msgid "Remote write not implemented"
 msgstr "Uzağa yazma özelliği henüz desteklenmiyor."
 
-#: pisi/file.py:247 pisi/file.py:250
-#, python-format
+#: inary/file.py:247 inary/file.py:250
 msgid "ERROR: gpg --detach-sig %s failed"
 msgstr "HATA: gpg --detach-sig %s çalışmadı."
 
-#: pisi/graph.py:26
-#, python-format
+#: inary/graph.py:26
 msgid "Encountered cycle %s"
 msgstr "Çember ile karşılaşıldı: %s."
 
-#: pisi/history.py:47
-#, python-format
+#: inary/history.py:45
 msgid "%s repository is updated."
 msgstr "%s deposu güncellendi."
 
-#: pisi/history.py:67
-#, python-format
+#: inary/history.py:65
 msgid "%s is upgraded from %s to %s with delta."
 msgstr "%s %s sürümünden %s sürümüne delta paketi ile yükseltildi."
 
-#: pisi/history.py:69
-#, python-format
+#: inary/history.py:67
 msgid "%s is upgraded from %s to %s."
 msgstr "%s %s sürümünden %s sürümüne yükseltildi."
 
-#: pisi/history.py:71
-#, python-format
+#: inary/history.py:69
 msgid "%s %s is removed."
 msgstr "%s %s kaldırıldı."
 
-#: pisi/history.py:73
-#, python-format
+#: inary/history.py:71
 msgid "%s %s is installed."
 msgstr "%s %s kuruldu."
 
-#: pisi/history.py:75
-#, python-format
+#: inary/history.py:73
 msgid "%s %s is reinstalled."
 msgstr "%s %s yeniden kuruldu."
 
-#: pisi/history.py:77
-#, python-format
+#: inary/history.py:75
 msgid "%s is downgraded from %s to %s."
 msgstr "%s %s sürümünden %s sürümüne indirildi."
 
-#: pisi/history.py:104 pisi/history.py:126
+#: inary/history.py:100 inary/history.py:122
 msgid "Unknown package operation"
 msgstr "Bilinmeyen paket işlemi"
 
-#: pisi/index.py:176
-#, python-format
+#: inary/index.py:99
+#, fuzzy
+msgid "Sorting: %s "
+msgstr "%s oluşturuluyor... "
+
+#: inary/index.py:201
 msgid "Adding package to index: %s"
 msgstr "Paket kataloğa ekleniyor: %s"
 
-#: pisi/index.py:192
-#, python-format
+#: inary/index.py:217
 msgid "Package %s: metadata corrupt, skipping..."
 msgstr "Paket %s: metadata bozuk, atlanıyor..."
 
-#: pisi/index.py:237
+#: inary/index.py:262
 msgid "Adding groups.xml to index"
 msgstr "groups.xml kataloğa ekleniyor"
 
-#: pisi/index.py:243
+#: inary/index.py:268
 msgid "Adding components.xml to index"
 msgstr "components.xml kataloğa ekleniyor"
 
-#: pisi/index.py:253
+#: inary/index.py:278
 msgid "Adding distribution.xml to index"
 msgstr "distribution.xml kataloğa ekleniyor"
 
-#: pisi/index.py:274
-#, python-format
+#: inary/index.py:299
 msgid "Adding %s to source index"
 msgstr "%s kaynak kataloğuna ekleniyor"
 
-#: pisi/metadata.py:78
-#, python-format
+#: inary/metadata.py:73
 msgid "Distribution: %s, Dist. Release: %s\n"
 msgstr "Dağıtım: %s, Dağıtım Sürümü: %s\n"
 
-#: pisi/metadata.py:80
-#, python-format
+#: inary/metadata.py:75
 msgid "Architecture: %s, Installed Size: %s"
 msgstr "Mimari: %s, Yerleşik Boyut: %s"
 
-#: pisi/metadata.py:86
-#, python-format
+#: inary/metadata.py:81
 msgid ", Package Size: %s"
 msgstr ", Paket Boyutu: %s"
 
-#: pisi/mirrors.py:46
-#, python-format
+#: inary/metadata.py:83
+msgid ", install.tar.xz sha1sum: %s"
+msgstr ""
+
+#: inary/mirrors.py:46
 msgid "Mirrors file %s does not exist. Could not resolve mirrors://"
 msgstr "Yansı dosyası %s bulunamadı. mirrors:// çözümlenemedi."
 
-#: pisi/operations/build.py:114
-#, python-format
+#: inary/operations/build.py:114
 msgid "Path %s belongs in multiple packages"
 msgstr "%s yolu birden çok pakete ait."
 
-#: pisi/operations/build.py:190
-#, python-format
+#: inary/operations/build.py:144
+#, fuzzy
+msgid "Removing special file skipped for: %s"
+msgstr "Önbellek dosyası %s siliniyor..."
+
+#: inary/operations/build.py:193
 msgid "Source URI: %s"
 msgstr "Kaynak adresi: %s"
 
-#: pisi/operations/build.py:194
-#, python-format
+#: inary/operations/build.py:197
 msgid "Source %s not found in any active repository."
 msgstr "%s isimli kaynak paket etkin depolarda bulunamadı."
 
-#: pisi/operations/build.py:320
-#, python-format
+#: inary/operations/build.py:323
 msgid "pspec.xml avoids this package from building for '%s'"
 msgstr "pspec.xml bu kaynak paketin '%s' için inşa edilmesini engelliyor"
 
-#: pisi/operations/build.py:323
-#, python-format
+#: inary/operations/build.py:326
 msgid "Building source package: %s"
 msgstr "Kaynak paket inşa ediliyor: %s"
 
-#: pisi/operations/build.py:341
+#: inary/operations/build.py:344
 msgid "ccache detected..."
 msgstr "ccache bulundu..."
 
-#: pisi/operations/build.py:343
+#: inary/operations/build.py:346
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr "IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
+msgstr ""
+"IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
 
-#: pisi/operations/build.py:377
-#, python-format
+#: inary/operations/build.py:380
 msgid "Rebuilding for %s"
 msgstr "%s için tekrar inşa ediliyor"
 
-#: pisi/operations/build.py:494
-msgid "Cannot find component.xml in remote directory, Source is now part of unknown component"
-msgstr "component.xml uzaktaki dizinde bulunamadı, kaynak bilinmeyen bir bileşenin parçası"
+#: inary/operations/build.py:505
+msgid ""
+"Cannot find component.xml in remote directory, Source is now part of unknown "
+"component"
+msgstr ""
+"component.xml uzaktaki dizinde bulunamadı, kaynak bilinmeyen bir bileşenin "
+"parçası"
 
-#: pisi/operations/build.py:502
-msgid "Cannot find component.xml in upper directory, Source is now part of unknown component"
-msgstr "component.xml bir üst dizinde bulunamadı, kaynak bilinmeyen bir bileşenin parçası"
+#: inary/operations/build.py:513
+msgid ""
+"Cannot find component.xml in upper directory, Source is now part of unknown "
+"component"
+msgstr ""
+"component.xml bir üst dizinde bulunamadı, kaynak bilinmeyen bir bileşenin "
+"parçası"
 
-#: pisi/operations/build.py:516
+#: inary/operations/build.py:527
 msgid "Unpacking archive(s)..."
 msgstr "Arşiv(ler) açılıyor..."
 
-#: pisi/operations/build.py:524
-#, python-format
+#: inary/operations/build.py:535
 msgid " unpacked (%s)"
 msgstr " açıldı (%s)"
 
-#: pisi/operations/build.py:529
+#: inary/operations/build.py:540
 msgid "Setting up source..."
 msgstr "Kaynak yapılandırılıyor..."
 
-#: pisi/operations/build.py:534
+#: inary/operations/build.py:545
 msgid "Building source..."
 msgstr "Kaynak inşa ediliyor..."
 
-#: pisi/operations/build.py:539
+#: inary/operations/build.py:550
 msgid "Testing package..."
 msgstr "Paket test ediliyor..."
 
-#: pisi/operations/build.py:543
+#: inary/operations/build.py:554
 msgid "Installing..."
 msgstr "Kuruluyor..."
 
-#: pisi/operations/build.py:609
-#, python-format
+#: inary/operations/build.py:633
 msgid "Unable to read Actions Script (%s): %s"
 msgstr "Actions betiği okunamıyor (%s): %s"
 
-#: pisi/operations/build.py:612
-#, python-format
+#: inary/operations/build.py:636
 msgid "SyntaxError in Actions Script (%s): %s"
 msgstr "Actions betiğinde sözdizimi hatası (%s): %s"
 
-#: pisi/operations/build.py:642
-#, python-format
+#: inary/operations/build.py:665
 msgid "Unable to read COMAR script (%s): %s"
 msgstr "COMAR betiği okunamıyor (%s): %s"
 
-#: pisi/operations/build.py:645
-#, python-format
+#: inary/operations/build.py:668
 msgid "SyntaxError in COMAR file (%s): %s"
 msgstr "COMAR dosyasında sözdizimi hatası (%s): %s"
 
-#: pisi/operations/build.py:677
-#, python-format
+#: inary/operations/build.py:703
 msgid "Sandbox violation: %s (%s -> %s)"
 msgstr "Sandbox ihlali: %s (%s -> %s)"
 
-#: pisi/operations/build.py:693 pisi/util.py:517
-#, python-format
+#: inary/operations/build.py:719 inary/util.py:525
 msgid "ERROR: WorkDir (%s) does not exist\n"
 msgstr "HATA: Çalışma dizini (%s) bulunamadı\n"
 
-#: pisi/operations/build.py:702
+#: inary/operations/build.py:729
 msgid "Sandbox enabled build..."
 msgstr "Sandbox açık inşa..."
 
-#: pisi/operations/build.py:726
+#: inary/operations/build.py:753
 msgid "Sandbox violation result:"
 msgstr "Sandbox ihlal sonucu:"
 
-#: pisi/operations/build.py:731
+#: inary/operations/build.py:758
 msgid "Sandbox violations!"
 msgstr "Sandbox ihlali!"
 
-#: pisi/operations/build.py:737
-#, python-format
+#: inary/operations/build.py:764
 msgid "unable to call function from actions: %s"
 msgstr "fonksiyon eylemlerden çağırılamıyor: %s"
 
-#: pisi/operations/build.py:751
-#, python-format
+#: inary/operations/build.py:778
 msgid "Source package '%s' defines a relative 'Path' element: %s"
 msgstr "'%s' kaynak paketi göreli bir 'Path' elemanı içeriyor: %s"
 
-#: pisi/operations/build.py:755
-#, python-format
+#: inary/operations/build.py:782
 msgid "Source package '%s' defines multiple 'Path' tags for %s"
 msgstr "'%s' kaynak paketi %s yolu için birden fazla 'Path' etiketi içeriyor"
 
-#: pisi/operations/build.py:784
-msgid "Safety switch: following extra packages in system.devel will be installed: "
-msgstr "Emniyet mandalı: taban geliştirme bileşeni system.devel içindeki bu paketler ek olarak kurulacak: "
+#: inary/operations/build.py:811
+msgid ""
+"Safety switch: following extra packages in system.devel will be installed: "
+msgstr ""
+"Emniyet mandalı: taban geliştirme bileşeni system.devel içindeki bu paketler "
+"ek olarak kurulacak: "
 
-#: pisi/operations/build.py:789
+#: inary/operations/build.py:816
 msgid "Safety switch: the component system.devel cannot be found"
 msgstr "Emniyet mandalı: taban geliştirme bileşeni system.devel bulunamadı."
 
-#: pisi/operations/build.py:798
+#: inary/operations/build.py:825
 msgid "Unsatisfied Build Dependencies:"
 msgstr "Sağlanmamış İnşa Bağımlılıkları:"
 
-#: pisi/operations/build.py:802
+#: inary/operations/build.py:829
 msgid "Cannot build package due to unsatisfied build dependencies"
 msgstr "Sağlanmamış inşa bağımlılıkları yüzünden paket inşa edilemiyor."
 
-#: pisi/operations/build.py:807
-#, python-format
+#: inary/operations/build.py:834
 msgid "Build dependency %s cannot be satisfied"
 msgstr "İnşa bağımlılığı %s sağlanamadı."
 
-#: pisi/operations/build.py:809
+#: inary/operations/build.py:836
 msgid "Do you want to install the unsatisfied build dependencies"
 msgstr "Sağlanmamış inşa bağımlılıklarını kurmak istiyor musunuz?"
 
-#: pisi/operations/build.py:810
+#: inary/operations/build.py:837
 msgid "Installing build dependencies."
 msgstr "İnşa bağımlılıkları kuruluyor."
 
-#: pisi/operations/build.py:816
+#: inary/operations/build.py:843
 msgid "Ignoring build dependencies."
 msgstr "İnşa bağımlılıkları yoksayılıyor."
 
-#: pisi/operations/build.py:826
-#, python-format
+#: inary/operations/build.py:853
 msgid "Patch file is missing: %s\n"
 msgstr "Yama dosyası eksik: %s\n"
 
-#: pisi/operations/build.py:828
-#, python-format
+#: inary/operations/build.py:855
 msgid "Patch file is empty: %s"
 msgstr "Yama dosyası boş: %s"
 
-#: pisi/operations/build.py:844
-#, python-format
+#: inary/operations/build.py:871
 msgid "Applying patch: %s"
 msgstr "Yama uygulanıyor: %s"
 
-#: pisi/operations/build.py:963
-#, python-format
+#: inary/operations/build.py:992
 msgid "/%s has suid bit set"
 msgstr "/%s dosyasının suid biti etkin"
 
-#: pisi/operations/build.py:1039
-#, python-format
-msgid "No user named '%s' found on the system"
-msgstr "Sistemde '%s' isminde bir kullanıcı bulunamadı."
-
-#: pisi/operations/build.py:1045
-#, python-format
-msgid "No group named '%s' found on the system"
-msgstr "Sistemde '%s' isminde bir grup bulunamadı."
-
-#: pisi/operations/build.py:1052
-#, python-format
+#: inary/operations/build.py:1088
 msgid "There are abandoned files under the install dir (%s):"
 msgstr "Kurulum dizini (%s) altında terkedilmiş dosyalar var:"
 
-#: pisi/operations/build.py:1080
-#, python-format
+#: inary/operations/build.py:1124
 msgid "Ignoring empty package %s"
 msgstr "Boş %s paketi yoksayılıyor"
 
-#: pisi/operations/build.py:1084
-#, python-format
+#: inary/operations/build.py:1128
 msgid "Building package: %s"
 msgstr "Paket inşa ediliyor: %s"
 
-#: pisi/operations/build.py:1103 pisi/operations/delta.py:59
-#, python-format
+#: inary/operations/build.py:1145 inary/operations/delta.py:59
 msgid "Creating %s..."
 msgstr "%s oluşturuluyor... "
 
-#: pisi/operations/build.py:1150
+#: inary/operations/build.py:1194
 msgid "Cleaning build directory..."
 msgstr "İnşa dizini temizleniyor..."
 
-#: pisi/operations/build.py:1153
+#: inary/operations/build.py:1197
 msgid "Keeping build directory"
 msgstr "İnşa dizini bırakılıyor"
 
-#: pisi/operations/build.py:1237
+#: inary/operations/build.py:1287
 msgid "Action script error caught."
 msgstr "Eylem betiği hatası oluştu."
 
-#: pisi/operations/build.py:1241
-#, python-format
+#: inary/operations/build.py:1291
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d hata, %d uyarı"
 
-#: pisi/operations/build.py:1324
-#, python-format
+#: inary/operations/build.py:1374
 msgid "Last state was '%s'"
 msgstr "Son inşa adımı: '%s'"
 
-#: pisi/operations/delta.py:43
-#, python-format
-msgid "The file '%s' belongs to a different package other than '%s'. Skipping it..."
+#: inary/operations/delta.py:43
+msgid ""
+"The file '%s' belongs to a different package other than '%s'. Skipping it..."
 msgstr "'%s' dosyası '%s' paketinden farklı bir pakete ait. Atlanıyor..."
 
-#: pisi/operations/delta.py:49
-#, python-format
-msgid "Package '%s' has the same release number with the new package. Skipping it..."
+#: inary/operations/delta.py:49
+msgid ""
+"Package '%s' has the same release number with the new package. Skipping it..."
 msgstr "'%s' paketi yeni paket ile aynı yayım numarasına sahip. Atlanıyor..."
 
-#: pisi/operations/delta.py:69
-#, python-format
-msgid "All files in the package '%s' are different from the files in the new package. Skipping it..."
-msgstr "'%s' paketindeki tüm dosyalar yeni pakettekilerden farklı. Atlanıyor..."
+#: inary/operations/delta.py:69
+msgid ""
+"All files in the package '%s' are different from the files in the new "
+"package. Skipping it..."
+msgstr ""
+"'%s' paketindeki tüm dosyalar yeni pakettekilerden farklı. Atlanıyor..."
 
-#: pisi/operations/delta.py:113
-#, python-format
+#: inary/operations/delta.py:113
 msgid "New package '%s' exists in the list of old packages. Skipping it..."
 msgstr "Yeni paket '%s', eski paket listesinde de mevcut. Atlanıyor..."
 
-#: pisi/operations/emerge.py:35
+#: inary/operations/emerge.py:35
 msgid "No packages to emerge."
 msgstr "Çekilip derlenecek ve kurulacak paket yok."
 
-#: pisi/operations/emerge.py:50
+#: inary/operations/emerge.py:50
 msgid ""
 "The following list of packages will be installed\n"
 "from repository in the respective order to satisfy dependencies:\n"
 msgstr "Bağımlılıkları sağlamak için bu paketler verilen sırada kurulacak:\n"
 
-#: pisi/operations/emerge.py:53
+#: inary/operations/emerge.py:53
 msgid ""
 "The following list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
@@ -2920,27 +2861,23 @@ msgstr ""
 "Bağımlılıkları sağlamak için aşağıdaki paketler verilen sırada\n"
 "inşa edilip kurulacak:\n"
 
-#: pisi/operations/emerge.py:61 pisi/operations/install.py:82
+#: inary/operations/emerge.py:61 inary/operations/install.py:83
 msgid "There are extra packages due to dependencies. Do you want to continue?"
 msgstr "Bağımlılıklar yüzünden ek paketler var. Devam etmek istiyor musunuz?"
 
-#: pisi/operations/emerge.py:95
-#, python-format
+#: inary/operations/emerge.py:95
 msgid "Cannot find source package: %s"
 msgstr "Kaynak paket bulunamadı: %s"
 
-#: pisi/operations/helper.py:51
-#, python-format
+#: inary/operations/helper.py:51
 msgid "Selected packages [%s] are in conflict with each other."
 msgstr "Seçili paketler [%s] birbirleriyle çakışıyorlar."
 
-#: pisi/operations/helper.py:57
-#, python-format
+#: inary/operations/helper.py:57
 msgid "[%s conflicts with: %s]\n"
 msgstr "[%s, %s ile çakışıyor]\n"
 
-#: pisi/operations/helper.py:59
-#, python-format
+#: inary/operations/helper.py:59
 msgid ""
 "The following packages have conflicts:\n"
 "%s"
@@ -2948,45 +2885,42 @@ msgstr ""
 "Aşağıdaki paketlerde çakışmalar bulunuyor:\n"
 "%s"
 
-#: pisi/operations/helper.py:62
+#: inary/operations/helper.py:62
 msgid "Remove the following conflicting packages?"
 msgstr "Çakışan paketler kaldırılsın mı?"
 
-#: pisi/operations/helper.py:63
+#: inary/operations/helper.py:63
 msgid "Conflicting packages should be removed to continue"
 msgstr "Devam etmek için çakışan paketler kaldırılmalı."
 
-#: pisi/operations/history.py:82 pisi/operations/history.py:92
-#, python-format
+#: inary/operations/history.py:84 inary/operations/history.py:94
 msgid "%s could not be found"
 msgstr "%s bulunamadı"
 
-#: pisi/operations/history.py:95 pisi/package.py:107 pisi/sourcearchive.py:110
-#, python-format
+#: inary/operations/history.py:97 inary/package.py:107 inary/sourcearchive.py:110
 msgid "%s [cached]"
 msgstr "%s [önbellekte]"
 
-#: pisi/operations/history.py:143
+#: inary/operations/history.py:145
 msgid "Following packages will be installed:\n"
 msgstr "Bu paketler kurulacak:\n"
 
-#: pisi/operations/history.py:146
+#: inary/operations/history.py:148
 msgid "Following packages will be removed:\n"
 msgstr "Bu paketler kaldırılacak:\n"
 
-#: pisi/operations/history.py:148 pisi/operations/history.py:162
-#: pisi/operations/install.py:200 pisi/operations/remove.py:72
-#: pisi/operations/upgrade.py:181
+#: inary/operations/history.py:150 inary/operations/history.py:164
+#: inary/operations/install.py:215 inary/operations/remove.py:73
+#: inary/operations/upgrade.py:194
 msgid "Do you want to continue?"
 msgstr "Devam etmek istiyor musunuz?"
 
-#: pisi/operations/history.py:154 pisi/operations/install.py:95
-#: pisi/operations/upgrade.py:192
-#, python-format
+#: inary/operations/history.py:156 inary/operations/install.py:97
+#: inary/operations/upgrade.py:205
 msgid "Downloading %d / %d"
 msgstr "İndiriliyor %d / %d"
 
-#: pisi/operations/history.py:160
+#: inary/operations/history.py:162
 msgid ""
 "\n"
 "Following packages could not be found in repositories and are not cached:\n"
@@ -2994,173 +2928,177 @@ msgstr ""
 "\n"
 "Bu paketler depolarda ve önbellekte bulunamadı:\n"
 
-#: pisi/operations/install.py:47 pisi/operations/install.py:134
-msgid "The following package(s) are already installed and are not going to be installed again:"
+#: inary/operations/install.py:47 inary/operations/install.py:149
+msgid ""
+"The following package(s) are already installed and are not going to be "
+"installed again:"
 msgstr "Aşağıdaki paket(ler) zaten kurulu ve yeniden kurulmayacak:"
 
-# pisi/api.py:168 :215
-#: pisi/operations/install.py:53 pisi/operations/install.py:213
+# inary/api.py:168 :215
+#: inary/operations/install.py:53 inary/operations/install.py:228
 msgid "No packages to install."
 msgstr "Kurulacak paket yok."
 
-#: pisi/operations/install.py:71
+#: inary/operations/install.py:71
 msgid "Following packages will be installed:"
 msgstr "Aşağıdaki paketler kurulacak:"
 
-#: pisi/operations/install.py:76 pisi/operations/upgrade.py:168
-#, python-format
+#: inary/operations/install.py:76 inary/operations/upgrade.py:181
 msgid "Total size of package(s): %.2f %s"
 msgstr "Paket(ler)in toplam boyu: %.2f %s"
 
-#: pisi/operations/install.py:107 pisi/operations/upgrade.py:206
-#, python-format
+#: inary/operations/install.py:116 inary/operations/upgrade.py:219
 msgid "Installing %d / %d"
 msgstr "Kuruluyor %d / %d"
 
-#: pisi/operations/install.py:121
+#: inary/operations/install.py:136
 msgid "Mixing file names and package names not supported yet."
 msgstr "Dosya ve paket adlarını birlikte kullanmak henüz desteklenmiyor."
 
-#: pisi/operations/install.py:165
-#, python-format
+#: inary/operations/install.py:180
 msgid "Package %s is not compatible with your distribution release %s %s."
 msgstr "%s paketi, %s %s sürümü ile uyumlu değil."
 
-#: pisi/operations/install.py:169
-#, python-format
+#: inary/operations/install.py:184
 msgid "Package %s (%s) is not compatible with your %s architecture."
 msgstr "%s (%s) paketi %s mimarisi ile uyumlu değil."
 
-#: pisi/operations/install.py:192
-#, python-format
+#: inary/operations/install.py:207
 msgid "External dependencies not satisfied: %s"
 msgstr "Dış bağımlılıklar sağlanamadı: %s"
 
-#: pisi/operations/install.py:197
-msgid "The following packages will be installed in order to satisfy dependencies:"
+#: inary/operations/install.py:212
+msgid ""
+"The following packages will be installed in order to satisfy dependencies:"
 msgstr "Bağımlılıkları sağlamak için aşağıdaki paketler kurulacaktır:"
 
-#: pisi/operations/install.py:201
+#: inary/operations/install.py:216
 msgid "External dependencies not satisfied"
 msgstr "Dış bağımlılıklar sağlanamadı."
 
-#: pisi/operations/install.py:244
+#: inary/operations/install.py:259
 msgid "Installation order: "
 msgstr "Kurulum sırası: "
 
-#: pisi/operations/install.py:279 pisi/specfile.py:274
-#, python-format
+#: inary/operations/install.py:294 inary/specfile.py:275
 msgid "%s dependency of package %s is not satisfied"
 msgstr "%s bağımlılığı %s paketi için sağlanamadı."
 
-#: pisi/operations/remove.py:43
+#: inary/operations/remove.py:44
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "Emniyet mandalı, aşağıdaki paketlerin kaldırılmasını engelliyor:\n"
 
-#: pisi/operations/remove.py:48 pisi/operations/upgrade.py:372
+#: inary/operations/remove.py:49 inary/operations/upgrade.py:392
 msgid "Safety switch: The component system.base cannot be found."
 msgstr "Emniyet mandalı: Taban sistem bileşeni system.base bulunamadı."
 
-#: pisi/operations/remove.py:55
-#, python-format
+#: inary/operations/remove.py:56
 msgid "Package %s does not exist. Cannot remove."
 msgstr "Olmayan paket %s kaldırılamıyor."
 
-#: pisi/operations/remove.py:59
+#: inary/operations/remove.py:60
 msgid "No packages to remove."
 msgstr "Kaldırılacak paket yok."
 
-#: pisi/operations/remove.py:68
+#: inary/operations/remove.py:69
 msgid ""
 "The following list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
-msgstr "Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:\n"
+msgstr ""
+"Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:\n"
 
-#: pisi/operations/remove.py:73
+#: inary/operations/remove.py:74
 msgid "Package removal declined"
 msgstr "Paket kaldırmaya izin verilmedi."
 
-#: pisi/operations/remove.py:85
-#, python-format
+#: inary/operations/remove.py:91
 msgid "Package %s is not installed. Cannot remove."
 msgstr "Paket %s kurulu değil. Kaldırılamıyor."
 
-#: pisi/operations/remove.py:120
+#: inary/operations/remove.py:126
 msgid "Conflicts remain"
 msgstr "Halâ bazı çakışmalar var."
 
-#: pisi/operations/remove.py:128
+#: inary/operations/remove.py:134
 msgid "Obsoleted packages remaining"
 msgstr "Bazı eskimiş paket(ler) halâ duruyor."
 
-#: pisi/operations/remove.py:132
+#: inary/operations/remove.py:138
 msgid "Replaced package remains"
 msgstr "Yerine yenisi yerleştirilen bir paket duruyor."
 
-#: pisi/operations/upgrade.py:52
-msgid "You must restart the following service(s) manually for the updated software to take effect:"
-msgstr "Güncel yazılımların etkin hale gelmesi için aşağıdaki servis(ler)i yeniden başlatmalısınız:"
+#: inary/operations/upgrade.py:52
+msgid ""
+"You must restart the following service(s) manually for the updated software "
+"to take effect:"
+msgstr ""
+"Güncel yazılımların etkin hale gelmesi için aşağıdaki servis(ler)i yeniden "
+"başlatmalısınız:"
 
-#: pisi/operations/upgrade.py:59
-msgid "You must restart your system for the updates in the following package(s) to take effect:"
-msgstr "Aşağıdaki paket(ler)in güncel sürümlerinin etkin hale gelmesi için sisteminizi yeniden başlatmalısınız:"
+#: inary/operations/upgrade.py:59
+msgid ""
+"You must restart your system for the updates in the following package(s) to "
+"take effect:"
+msgstr ""
+"Aşağıdaki paket(ler)in güncel sürümlerinin etkin hale gelmesi için "
+"sisteminizi yeniden başlatmalısınız:"
 
-#: pisi/operations/upgrade.py:81
-msgid "Warning: package *name* ends with '.pisi'"
-msgstr "Uyarı: paket *ismi* '.pisi' ile bitiyor."
+#: inary/operations/upgrade.py:84
+msgid "Warning: package *name* ends with '.inary'"
+msgstr "Uyarı: paket *ismi* '.inary' ile bitiyor."
 
-#: pisi/operations/upgrade.py:84
-#, python-format
+#: inary/operations/upgrade.py:87
 msgid "Package %s is not installed."
 msgstr "%s paketi kurulu değil."
 
-#: pisi/operations/upgrade.py:88
-#, python-format
+#: inary/operations/upgrade.py:91
 msgid "Package %s is not available in repositories."
 msgstr "%s paketi depolarda mevcut değil."
 
-#: pisi/operations/upgrade.py:105
-#, python-format
+#: inary/operations/upgrade.py:114
 msgid "Package %s is already at the latest release %s."
 msgstr "%s paketi zaten (en son) sürüm %s."
 
-#: pisi/operations/upgrade.py:163
+#: inary/operations/upgrade.py:118
+#, fuzzy
+msgid "The following packages have different sha1sum:"
+msgstr ""
+"Aşağıdaki paketlerde çakışmalar bulunuyor:\n"
+"%s"
+
+#: inary/operations/upgrade.py:176
 msgid "The following packages will be upgraded:"
 msgstr "Aşağıdaki paketler yükseltilecektir:"
 
-#: pisi/operations/upgrade.py:174
+#: inary/operations/upgrade.py:187
 msgid "There are extra packages due to dependencies."
 msgstr "Bağımlılıklar yüzünden ek paketler var."
 
-#: pisi/operations/upgrade.py:254
-#, python-format
+#: inary/operations/upgrade.py:267
 msgid "Dependency %s of %s cannot be satisfied"
 msgstr "%s bağımlılığı, %s paketi için sağlanamadı."
 
-#: pisi/operations/upgrade.py:255
+#: inary/operations/upgrade.py:268
 msgid "Upgrade is not possible."
 msgstr "Yükseltme mümkün değil."
 
-#: pisi/operations/upgrade.py:349
+#: inary/operations/upgrade.py:362
 msgid "Safety switch forces the installation of following packages:"
 msgstr "Emniyet mandalı aşağıdaki paketlerin kurulmasını zorunlu kılıyor:"
 
-#: pisi/operations/upgrade.py:365
+#: inary/operations/upgrade.py:380
 msgid "Safety switch forces the upgrade of following packages:"
 msgstr "Emniyet mandalı aşağıdaki paketlerin yükseltilmesini zorunlu kılıyor:"
 
-#: pisi/package.py:68
-#, python-format
+#: inary/package.py:68
 msgid "Cannot open package file: %s"
 msgstr "Paket dosyası açılamadı: %s"
 
-#: pisi/package.py:89
-#, python-format
+#: inary/package.py:89
 msgid "Unsupported package format: %s"
 msgstr "Desteklenmeyen paket biçimi: %s"
 
-#: pisi/package.py:103
-#, python-format
+#: inary/package.py:103
 msgid ""
 "There was a problem while fetching '%s'.\n"
 "The package may have been upgraded. Please try to upgrade the package."
@@ -3168,312 +3106,419 @@ msgstr ""
 "'%s' indirilirken bir hata oluştu.\n"
 "Paket yükseltilmiş olabilir. Lütfen paketi yükseltmeyi deneyin."
 
-#: pisi/pxml/autoxml.py:78
-#, python-format
-msgid "At least one '%s' tag should have local text"
-msgstr "En azından bir tane '%s' etiketi yerel metne sahip olmalı."
+#: inary/scenarioapi/package.py:67
+msgid "No inary package: %s* found."
+msgstr "INARY paketi yok: %s* bulundu."
 
-#: pisi/pxml/autoxml.py:85
-#, python-format
-msgid "'%s' language of tag '%s' is empty"
-msgstr "'%s' dili metni, etiket %s için boş."
-
-#: pisi/pxml/autoxml.py:113
-msgid "LocalText: unable to get either current or default locale"
-msgstr "LocalText: şu andaki ya da öntanımlı yerel bulunamıyor."
-
-#: pisi/pxml/autoxml.py:119 pisi/pxml/autoxml.py:134
-msgid "Tag should have at least the current locale, or failing that an English or Turkish version"
-msgstr "Etiket içeriğinin en azından güncel yerelde (locale) bir karşılığı olmalı, ya da eğer o yoksa bir Türkçe ya da İngilizce sürüme sahip olmalı."
-
-#: pisi/pxml/autoxml.py:372
-#, python-format
-msgid "autoxml.check: '%s' errors"
-msgstr "autoxml.check: '%s' hata"
-
-#: pisi/pxml/autoxml.py:427 pisi/pxml/autoxml.py:437
-#, python-format
-msgid "autoxml.parse: String '%s' has errors"
-msgstr "autoxml.read: Katar '%s' hatalar içeriyor."
-
-#: pisi/pxml/autoxml.py:451 pisi/pxml/autoxml.py:461
-#, python-format
-msgid "autoxml.read: File '%s' has errors"
-msgstr "autoxml.read: Dosya '%s' hatalar içeriyor."
-
-#: pisi/pxml/autoxml.py:469
-msgid "autoxml.write: object validation has failed"
-msgstr "autoxml.write: nesne doğrulaması başarısız oldu."
-
-#: pisi/pxml/autoxml.py:477
-#, python-format
-msgid "autoxml.write: File encoding '%s' has errors"
-msgstr "autoxml.write: Dosya karakter kodlaması '%s' hatalar içeriyor."
-
-#: pisi/pxml/autoxml.py:527
-#, python-format
-msgid "gen_tag: unrecognized tag type %s in spec"
-msgstr "gen_tag: belirtimde tanınmayan etiket tipi %s."
-
-#: pisi/pxml/autoxml.py:575 pisi/pxml/autoxml.py:586
-#, python-format
-msgid "Mandatory variable %s not available"
-msgstr "Zorunlu değişken %s bulunamadı."
-
-#: pisi/pxml/autoxml.py:656
-msgid "Type mismatch: read text cannot be decoded"
-msgstr "Tip uyumsuzluğu: okunan metnin kodlaması çözümlenemedi."
-
-#: pisi/pxml/autoxml.py:660 pisi/pxml/autoxml.py:669
-#, python-format
-msgid "Mandatory token %s not available"
-msgstr "Zorunlu etiket %s bulunamadı."
-
-#: pisi/pxml/autoxml.py:674
-#, python-format
-msgid "Type mismatch. Expected %s, got %s"
-msgstr "Tip uyumsuzluğu. %s beklerken, %s alındı."
-
-# pisi/xmlfile.py:420 :521
-#: pisi/pxml/autoxml.py:704 pisi/pxml/autoxml.py:825
-msgid "Type mismatch: DOM cannot be decoded"
-msgstr "Tip uyumsuzluğu: DOM çözümlenemedi."
-
-# pisi/xmlfile.py:392 :423 :439 :446 :524 :538 :545
-#: pisi/pxml/autoxml.py:707 pisi/pxml/autoxml.py:723 pisi/pxml/autoxml.py:737
-#: pisi/pxml/autoxml.py:828 pisi/pxml/autoxml.py:842 pisi/pxml/autoxml.py:856
-msgid "Mandatory argument not available"
-msgstr "Zorunlu argüman alınamadı."
-
-# pisi/xmlfile.py:436 :535
-#: pisi/pxml/autoxml.py:720 pisi/pxml/autoxml.py:839
-msgid "Object cannot be encoded"
-msgstr "Nesne kodlanamadı."
-
-# pisi/xmlfile.py:436 :535
-#: pisi/pxml/autoxml.py:734 pisi/pxml/autoxml.py:853
-msgid "Object cannot be formatted"
-msgstr "Nesne biçimlendirilemedi"
-
-#: pisi/pxml/autoxml.py:750
-msgid "List type must contain only one element"
-msgstr "Liste tipi sadece bir eleman içermeli."
-
-# pisi/xmlfile.py:470 :485
-#: pisi/pxml/autoxml.py:763 pisi/pxml/autoxml.py:784
-#, python-format
-msgid "Mandatory list \"%s\" under \"%s\" node is empty."
-msgstr "Zorunlu \"%s\" listesi (\"%s\" düğümü altındaki) boş."
-
-#: pisi/pxml/xmlext.py:79
-msgid "getNodeText: Expected text node, got something else!"
-msgstr "getNodeText: Metin düğüm beklenirken başka birşey alındı."
-
-#: pisi/pxml/xmlfile.py:60
-#, python-format
-msgid "String '%s' has invalid XML"
-msgstr "'%s' katarının XML sözdizimi geçersiz."
-
-#: pisi/pxml/xmlfile.py:83
-#, python-format
-msgid "Unable to read file (%s): %s"
-msgstr "Dosya okunamadı (%s): %s"
-
-#: pisi/pxml/xmlfile.py:85 pisi/specfile.py:443
-#, python-format
-msgid "File '%s' has invalid XML"
-msgstr "'%s' dosyasının XML sözdizimi geçersiz."
-
-#: pisi/scenarioapi/package.py:67
-#, python-format
-msgid "No pisi package: %s* found."
-msgstr "PiSi paketi yok: %s* bulundu."
-
-#: pisi/scenarioapi/repoops.py:28
-#, python-format
+#: inary/scenarioapi/repoops.py:28
 msgid "Repo already has package named %s."
 msgstr "Depoda %s isimli bir paket zaten mevcut."
 
-#: pisi/scenarioapi/repoops.py:52 pisi/scenarioapi/repoops.py:59
-#, python-format
+#: inary/scenarioapi/repoops.py:52 inary/scenarioapi/repoops.py:59
 msgid "Repo does not have package named %s."
 msgstr "Depoda %s isminde bir paket yok."
 
-#: pisi/sourcearchive.py:62
-#, python-format
+#: inary/scomiface.py:31
+#, fuzzy
+msgid "scom-api package is not fully installed"
+msgstr "comar-api paketi tam olarak kurulmamış."
+
+#: inary/scomiface.py:88
+msgid ""
+"Cannot connect to COMAR: \n"
+"  %s\n"
+msgstr ""
+"COMAR'a bağlanılamıyor: \n"
+"  %s\n"
+
+#: inary/scomiface.py:97
+msgid "Configuring %s package"
+msgstr "%s paketi yapılandırılıyor"
+
+#: inary/scomiface.py:103
+msgid "COMAR package updated. From now on, using new COMAR daemon."
+msgstr "COMAR paketi güncellendi, artık yeni COMAR kullanılıyor."
+
+#: inary/scomiface.py:110
+#, fuzzy
+msgid "Registering %s scom script"
+msgstr "comar betiği %s kayıt ediliyor"
+
+#: inary/scomiface.py:119 inary/scomiface.py:124 inary/scomiface.py:137
+#: inary/scomiface.py:153 inary/scomiface.py:172 inary/scomiface.py:183
+#: inary/scomiface.py:205 inary/scomiface.py:216 inary/scomiface.py:223
+msgid "Script error: %s"
+msgstr "Betik hatası: %s"
+
+#: inary/scomiface.py:126
+msgid "Calling post install handlers"
+msgstr "Kurulum sonrası betikleri çağrılıyor"
+
+#: inary/scomiface.py:145
+msgid "Running package's post install script"
+msgstr "Paketin kurulum sonrası betiği çağrılıyor"
+
+#: inary/scomiface.py:159
+msgid "Running pre removal operations for %s"
+msgstr "%s için kaldırma öncesi işlemler çalıştırılıyor"
+
+#: inary/scomiface.py:165
+msgid "Running package's pre remove script"
+msgstr "Paketin kaldırma öncesi betiği çağrılıyor"
+
+#: inary/scomiface.py:174
+msgid "Calling pre remove handlers"
+msgstr "Kaldırma öncesi işleyicileri çağrılıyor"
+
+#: inary/scomiface.py:189
+msgid "Running post removal operations for %s"
+msgstr "%s için kaldırma sonrası işlemler çalıştırılıyor"
+
+#: inary/scomiface.py:198
+msgid "Running package's postremove script"
+msgstr "Paketin kaldırma sonrası betiği çağrılıyor"
+
+#: inary/scomiface.py:207
+msgid "Calling post remove handlers"
+msgstr "Kaldırma sonrası işleyicileri çağrılıyor"
+
+#: inary/scomiface.py:218
+#, fuzzy
+msgid "Unregistering scom scripts"
+msgstr "comar betikleri kayıtlardan siliniyor"
+
+#: inary/sourcearchive.py:62
 msgid "Fetching source from: %s"
 msgstr "Kaynak %s adresinden indiriliyor"
 
-#: pisi/sourcearchive.py:73
-#, python-format
+#: inary/sourcearchive.py:73
 msgid "Source archive is stored: %s/%s"
 msgstr "Kaynak arşivi depolandı:  %s/%s"
 
-#: pisi/sourcearchive.py:79
-#, python-format
+#: inary/sourcearchive.py:79
 msgid "Trying fallback address: %s"
 msgstr "Geri düşüm adresi %s deneniyor."
 
-#: pisi/sourcearchive.py:90
-#, python-format
+#: inary/sourcearchive.py:90
 msgid "%s mirrors are not defined."
 msgstr "%s yansıları tanımlı değil."
 
-#: pisi/sourcearchive.py:95
-#, python-format
+#: inary/sourcearchive.py:95
 msgid "Fetching source from mirror: %s"
 msgstr "Kaynak, %s yansısından indiriliyor."
 
-#: pisi/sourcearchive.py:101
-#, python-format
+#: inary/sourcearchive.py:101
 msgid "Could not fetch source from %s mirrors."
 msgstr "Kaynak, %s yansılarından indirilemedi."
 
-#: pisi/sourcearchive.py:119
+#: inary/sourcearchive.py:119
 msgid "unpack: check_file_hash failed"
 msgstr "unpack: kaynak arşivin bütünlüğünde sorun var."
 
-#: pisi/sourcearchive.py:124
-#, python-format
+#: inary/sourcearchive.py:124
 msgid "Unknown archive type '%s' is given for '%s'."
 msgstr "Arşiv için bilinmeyen bir tip (%s) verilmiş: %s"
 
-#: pisi/sourcearchive.py:127
-#, python-format
-msgid "Pisi needs %s to unpack this archive but it is not installed."
-msgstr "Pisi bu arşivi açabilmek için %s aracına ihtiyaç duyuyor ancak yüklü değil."
+#: inary/sourcearchive.py:127
+msgid "Inary needs %s to unpack this archive but it is not installed."
+msgstr ""
+"Inary bu arşivi açabilmek için %s aracına ihtiyaç duyuyor ancak yüklü değil."
 
-#: pisi/specfile.py:164
-#, python-format
+#: inary/specfile.py:165
 msgid "URI: %s, type: %s, sha1sum: %s"
 msgstr "Adres: %s, tip: %s, sha1sum: %s"
 
-#: pisi/specfile.py:194 pisi/specfile.py:197
+#: inary/specfile.py:195 inary/specfile.py:198
 msgid " or "
 msgstr " veya "
 
-#: pisi/specfile.py:372 pisi/specfile.py:458
-#, python-format
+#: inary/specfile.py:373 inary/specfile.py:457
 msgid "Summary: %s\n"
 msgstr "Özet: %s\n"
 
-#: pisi/specfile.py:373 pisi/specfile.py:459
-#, python-format
+#: inary/specfile.py:374 inary/specfile.py:458
 msgid "Description: %s\n"
 msgstr "Açıklama: %s\n"
 
-#: pisi/specfile.py:374 pisi/specfile.py:460
-#, python-format
+#: inary/specfile.py:375 inary/specfile.py:459
 msgid "Licenses: %s\n"
 msgstr "Lisanslar: %s\n"
 
-#: pisi/specfile.py:375 pisi/specfile.py:461
-#, python-format
+#: inary/specfile.py:376 inary/specfile.py:460
 msgid "Component: %s\n"
 msgstr "Bileşen: %s\n"
 
-#: pisi/specfile.py:376
+#: inary/specfile.py:377
 msgid "Provides: "
 msgstr "Sağladıkları: "
 
-#: pisi/specfile.py:380
+#: inary/specfile.py:381
 msgid "Dependencies: "
 msgstr "Bağımlılıkları: "
 
-#: pisi/specfile.py:434
+#: inary/specfile.py:433
 msgid "translations.xml file is badly formed."
 msgstr "translations.xml dosyası hatalı."
 
-#: pisi/specfile.py:462
+#: inary/specfile.py:442 inary/sxml/xmlfile.py:88
+msgid "File '%s' has invalid XML"
+msgstr "'%s' dosyasının XML sözdizimi geçersiz."
+
+#: inary/specfile.py:461
 msgid "Build Dependencies: "
 msgstr "İnşa Bağımlılıkları: "
 
-#: pisi/uri.py:78
+#: inary/sxml/autoxml.py:79
+msgid "At least one '%s' tag should have local text"
+msgstr "En azından bir tane '%s' etiketi yerel metne sahip olmalı."
+
+#: inary/sxml/autoxml.py:86
+msgid "'%s' language of tag '%s' is empty"
+msgstr "'%s' dili metni, etiket %s için boş."
+
+#: inary/sxml/autoxml.py:114
+msgid "LocalText: unable to get either current or default locale"
+msgstr "LocalText: şu andaki ya da öntanımlı yerel bulunamıyor."
+
+#: inary/sxml/autoxml.py:120 inary/sxml/autoxml.py:135
+msgid ""
+"Tag should have at least the current locale, or failing that an English or "
+"Turkish version"
+msgstr ""
+"Etiket içeriğinin en azından güncel yerelde (locale) bir karşılığı olmalı, "
+"ya da eğer o yoksa bir Türkçe ya da İngilizce sürüme sahip olmalı."
+
+#: inary/sxml/autoxml.py:370
+msgid "autoxml.check: '%s' errors"
+msgstr "autoxml.check: '%s' hata"
+
+#: inary/sxml/autoxml.py:426 inary/sxml/autoxml.py:436
+msgid "autoxml.parse: String '%s' has errors"
+msgstr "autoxml.read: Katar '%s' hatalar içeriyor."
+
+#: inary/sxml/autoxml.py:450 inary/sxml/autoxml.py:460
+msgid "autoxml.read: File '%s' has errors"
+msgstr "autoxml.read: Dosya '%s' hatalar içeriyor."
+
+#: inary/sxml/autoxml.py:468
+msgid "autoxml.write: object validation has failed"
+msgstr "autoxml.write: nesne doğrulaması başarısız oldu."
+
+#: inary/sxml/autoxml.py:476
+msgid "autoxml.write: File encoding '%s' has errors"
+msgstr "autoxml.write: Dosya karakter kodlaması '%s' hatalar içeriyor."
+
+#: inary/sxml/autoxml.py:526
+msgid "gen_tag: unrecognized tag type %s in spec"
+msgstr "gen_tag: belirtimde tanınmayan etiket tipi %s."
+
+#: inary/sxml/autoxml.py:574 inary/sxml/autoxml.py:585
+msgid "Mandatory variable %s not available"
+msgstr "Zorunlu değişken %s bulunamadı."
+
+#: inary/sxml/autoxml.py:655
+msgid "Type mismatch: read text cannot be decoded"
+msgstr "Tip uyumsuzluğu: okunan metnin kodlaması çözümlenemedi."
+
+#: inary/sxml/autoxml.py:659 inary/sxml/autoxml.py:668
+msgid "Mandatory token %s not available"
+msgstr "Zorunlu etiket %s bulunamadı."
+
+#: inary/sxml/autoxml.py:673
+msgid "Type mismatch. Expected %s, got %s"
+msgstr "Tip uyumsuzluğu. %s beklerken, %s alındı."
+
+# inary/xmlfile.py:420 :521
+#: inary/sxml/autoxml.py:703 inary/sxml/autoxml.py:824
+msgid "Type mismatch: DOM cannot be decoded"
+msgstr "Tip uyumsuzluğu: DOM çözümlenemedi."
+
+# inary/xmlfile.py:392 :423 :439 :446 :524 :538 :545
+#: inary/sxml/autoxml.py:706 inary/sxml/autoxml.py:722 inary/sxml/autoxml.py:736
+#: inary/sxml/autoxml.py:827 inary/sxml/autoxml.py:841 inary/sxml/autoxml.py:855
+msgid "Mandatory argument not available"
+msgstr "Zorunlu argüman alınamadı."
+
+# inary/xmlfile.py:436 :535
+#: inary/sxml/autoxml.py:719 inary/sxml/autoxml.py:838
+msgid "Object cannot be encoded"
+msgstr "Nesne kodlanamadı."
+
+# inary/xmlfile.py:436 :535
+#: inary/sxml/autoxml.py:733 inary/sxml/autoxml.py:852
+msgid "Object cannot be formatted"
+msgstr "Nesne biçimlendirilemedi"
+
+#: inary/sxml/autoxml.py:749
+msgid "List type must contain only one element"
+msgstr "Liste tipi sadece bir eleman içermeli."
+
+# inary/xmlfile.py:470 :485
+#: inary/sxml/autoxml.py:762 inary/sxml/autoxml.py:783
+msgid "Mandatory list \"%s\" under \"%s\" node is empty."
+msgstr "Zorunlu \"%s\" listesi (\"%s\" düğümü altındaki) boş."
+
+#: inary/sxml/xmlext.py:81
+msgid "getNodeText: Expected text node, got something else!"
+msgstr "getNodeText: Metin düğüm beklenirken başka birşey alındı."
+
+#: inary/sxml/xmlfile.py:73
+#, fuzzy
+msgid "Cannot read URI %s: %s"
+msgstr "Kaynak adresi: %s"
+
+#: inary/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr "setAuthInfo bir (kullanıcı, parola) ikilisi ister."
 
-#: pisi/util.py:188 pisi/util.py:200
+#: inary/util.py:189 inary/util.py:201
 msgid "Running "
 msgstr "Çalışıyor "
 
-#: pisi/util.py:192 pisi/util.py:218
-#, python-format
+#: inary/util.py:193 inary/util.py:219
 msgid "return value for \"%s\" is %s"
 msgstr "\"%s\" dönüş değeri %s"
 
-#: pisi/util.py:392
-#, python-format
+#: inary/util.py:393
 msgid "Including external link '%s'"
 msgstr "'%s' haricî bağlantısı ekleniyor."
 
-#: pisi/util.py:394
-#, python-format
+#: inary/util.py:395
 msgid "Including directory '%s'"
 msgstr "'%s' dizini ekleniyor."
 
-#: pisi/util.py:480
+#: inary/util.py:481
 msgid "You don't have necessary read permissions"
 msgstr "Gerekli okuma izinlerine sahip değilsiniz"
 
-#: pisi/util.py:482
-#, python-format
+#: inary/util.py:483
 msgid "Cannot calculate SHA1 hash of %s"
 msgstr "%s dosyasının SHA1 kontrol toplamı hesaplanamıyor."
 
-#: pisi/util.py:494
-#, python-format
+#: inary/util.py:495
 msgid "Compression type is not valid: '%s'"
 msgstr "Sıkıştırma türü geçerli değil: '%s'"
 
-#: pisi/util.py:500
-#, python-format
+#: inary/util.py:501
 msgid "Error while decompressing %s: %s"
 msgstr "%s genişletilirken hata: %s"
 
-#: pisi/util.py:543
-#, python-format
+#: inary/util.py:579
 msgid "ERROR: patch (%s) failed"
 msgstr "HATA: Yama (%s) başarısız."
 
-#: pisi/util.py:545
-#, python-format
+#: inary/util.py:581
 msgid "ERROR: patch (%s) failed: %s"
 msgstr "HATA: Yama (%s) başarısız: %s"
 
-#: pisi/util.py:555
-#, python-format
+#: inary/util.py:591
 msgid "strip command failed for file '%s'!"
 msgstr "strip komutu '%s' dosyası için başarısız oldu!"
 
-#: pisi/util.py:562
-#, python-format
+#: inary/util.py:598
 msgid "chrpath command failed for file '%s'!"
 msgstr "chrpath komutu '%s' dosyası için başarısız oldu!"
 
-#: pisi/util.py:569
-#, python-format
+#: inary/util.py:605
 msgid "objcopy (keep-debug) command failed for file '%s'!"
 msgstr "objcopy (keep-debug) komutu '%s' dosyası için başarısız oldu!"
 
-#: pisi/util.py:575
-#, python-format
+#: inary/util.py:611
 msgid "objcopy (add-debuglink) command failed for file '%s'!"
 msgstr "objcopy (add-debuglink) komutu '%s' dosyası için başarısız oldu!"
 
-#: pisi/util.py:665
-#, python-format
+#: inary/util.py:616
+#, fuzzy
+msgid "file command failed with return code %s for file: %s"
+msgstr "strip komutu '%s' dosyası için başarısız oldu!"
+
+#: inary/util.py:617
+#, fuzzy
+msgid ""
+"Output:\n"
+"%s"
+msgstr "Çıktı dizini: %s"
+
+#: inary/util.py:707
 msgid "Invalid package name: %s"
 msgstr "Geçersiz paket adı: %s"
 
-#: pisi/util.py:705
-#, python-format
+#: inary/util.py:752
 msgid "Invalid delta package name: %s"
 msgstr "Geçersiz delta paket adı: %s"
 
-#: pisi/version.py:64
-#, python-format
+#: inary/version.py:64
 msgid "Invalid version string: '%s'"
 msgstr "Hatalı sürüm dizgisi: '%s'"
+
+#~ msgid "no such option: %s"
+#~ msgstr "bilinmeyen seçenek: %s"
+
+#~ msgid "ambiguous option: %s (%s?)"
+#~ msgstr "belirsiz seçenek: %s (%s?)"
+
+#~ msgid "Usage: %s\n"
+#~ msgstr "Kullanım: %s\n"
+
+#~ msgid "Usage"
+#~ msgstr "Kullanım"
+
+#~ msgid "integer"
+#~ msgstr "tamsayı"
+
+#~ msgid "long integer"
+#~ msgstr "uzun tamsayı"
+
+#~ msgid "floating-point"
+#~ msgstr "kayan noktalı"
+
+#~ msgid "complex"
+#~ msgstr "karmaşık"
+
+#~ msgid "option %s: invalid %s value: %r"
+#~ msgstr "seçenek %s: geçersiz %s değeri: %r"
+
+#~ msgid "option %s: invalid choice: %r (choose from %s)"
+#~ msgstr "seçenek %s: geçersiz seçim: %r (olası değerler: %s)"
+
+#~ msgid "show this help message and exit"
+#~ msgstr "bu yardım iletisini göster ve çık"
+
+#~ msgid "show program's version number and exit"
+#~ msgstr "programın sürüm numarasını göster ve çık"
+
+#~ msgid "%prog [options]"
+#~ msgstr "%prog [seçenekler]"
+
+#~ msgid "%s option requires an argument"
+#~ msgstr "%s seçeneği bir argüman almalıdır"
+
+#~ msgid "%s option requires %d arguments"
+#~ msgstr "%s seçeneği %d adet argüman almalıdır"
+
+#~ msgid "%s option does not take a value"
+#~ msgstr "%s seçeneği herhangi bir değer almaz"
+
+#~ msgid "Options"
+#~ msgstr "Seçenekler"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY paketi"
+
+#~ msgid "Urlgrabber needs to be installed to run this command"
+#~ msgstr "Bu komutun çalıştırılabilmesi için Urlgrabber kurulu olmalı."
+
+#~ msgid "No user named '%s' found on the system"
+#~ msgstr "Sistemde '%s' isminde bir kullanıcı bulunamadı."
+
+#~ msgid "No group named '%s' found on the system"
+#~ msgstr "Sistemde '%s' isminde bir grup bulunamadı."
+
+#~ msgid "String '%s' has invalid XML"
+#~ msgstr "'%s' katarının XML sözdizimi geçersiz."
+
+#~ msgid "Unable to read file (%s): %s"
+#~ msgstr "Dosya okunamadı (%s): %s"
 
 #~ msgid "Outputting packages in the working directory."
 #~ msgstr "Paketler çalışma dizinine yazılıyor."
@@ -3495,9 +3540,6 @@ msgstr "Hatalı sürüm dizgisi: '%s'"
 #~ "\n"
 #~ "%s paketi bozuk."
 
-#~ msgid "Done."
-#~ msgstr "Tamamlandı."
-
 #~ msgid "PartOf tag not defined, looking for component"
 #~ msgstr "PartOf imi tanımlanmamış, bileşen araştırılıyor"
 
@@ -3511,7 +3553,8 @@ msgstr "Hatalı sürüm dizgisi: '%s'"
 #~ msgstr "Bu yol için birden fazla 'Path' etiketi yazılmış: %s"
 
 #~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Emniyet mandalı: taban geliştirme bileşeni system.devel zaten kurulu."
+#~ msgstr ""
+#~ "Emniyet mandalı: taban geliştirme bileşeni system.devel zaten kurulu."
 
 #~ msgid "Checking /%s "
 #~ msgstr "/%s denetleniyor "
@@ -3527,10 +3570,15 @@ msgstr "Hatalı sürüm dizgisi: '%s'"
 #~ msgstr "Ters bağımlılık %s, %s paketi için sağlanamadı."
 
 #~ msgid "Repository distribution does not match. Removing %s from system."
-#~ msgstr "Depo dağıtımı sisteminizle uyumsuz. %s deposu sistemden kaldırılıyor."
+#~ msgstr ""
+#~ "Depo dağıtımı sisteminizle uyumsuz. %s deposu sistemden kaldırılıyor."
 
-#~ msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
-#~ msgstr "Dağıtım hakkında bilgi içermediği için bu deponun uyumluluğu denetlenemiyor."
+#~ msgid ""
+#~ "Unable to check compatibility of this repository as it does not have "
+#~ "information about the distribution."
+#~ msgstr ""
+#~ "Dağıtım hakkında bilgi içermediği için bu deponun uyumluluğu "
+#~ "denetlenemiyor."
 
 #~ msgid "Name: %s, version: %s, release: %s, build %s\n"
 #~ msgstr "İsim: %s, sürüm %s, yayım %s, inşa %s\n"
@@ -3538,17 +3586,25 @@ msgstr "Hatalı sürüm dizgisi: '%s'"
 #~ msgid "Package %s is already at the latest build %s."
 #~ msgstr "%s paketi zaten (en son) inşa %s."
 
-#~ msgid "Creating delta PiSi package between %s %s"
-#~ msgstr "%s ile %s paketi arasında PiSi delta paketi oluşturuluyor."
+#~ msgid "Creating delta INARY package between %s %s"
+#~ msgstr "%s ile %s paketi arasında INARY delta paketi oluşturuluyor."
 
 #~ msgid "Cannot create delta for same package!"
 #~ msgstr "Aynı paket için delta oluşturulamaz!"
 
-#~ msgid "All of the files under the install dir (%s) has been collected by package(s)"
-#~ msgstr "Kurulum dizini (%s) altındaki bütün dosyalar paket(ler) tarafından toplandı."
+#~ msgid ""
+#~ "All of the files under the install dir (%s) has been collected by "
+#~ "package(s)"
+#~ msgstr ""
+#~ "Kurulum dizini (%s) altındaki bütün dosyalar paket(ler) tarafından "
+#~ "toplandı."
 
-#~ msgid "Build number is not available. For repo builds you must enable buildno in pisi.conf."
-#~ msgstr "İnşa numarası alınamıyor. Depo inşaları için pisi.conf dosyasında buildno seçeneğini etkinleştirmelisiniz."
+#~ msgid ""
+#~ "Build number is not available. For repo builds you must enable buildno in "
+#~ "inary.conf."
+#~ msgstr ""
+#~ "İnşa numarası alınamıyor. Depo inşaları için inary.conf dosyasında buildno "
+#~ "seçeneğini etkinleştirmelisiniz."
 
 #~ msgid "Generating %s,"
 #~ msgstr "%s yaratılıyor,"
@@ -3580,8 +3636,8 @@ msgstr "Hatalı sürüm dizgisi: '%s'"
 #~ msgid "package_format must be one of %s "
 #~ msgstr "package_format, bunlardan birisi olmalı: %s"
 
-#~ msgid "PiSi binary package formats: '1.0', '1.1' (default)"
-#~ msgstr "PiSi ikili paket biçimleri: '1.0', '1.1' (öntanımlı)"
+#~ msgid "INARY binary package formats: '1.0', '1.1' (default)"
+#~ msgstr "INARY ikili paket biçimleri: '1.0', '1.1' (öntanımlı)"
 
 #~ msgid "Do not take build no into account."
 #~ msgstr "İnşa numarasını dikkate alma."

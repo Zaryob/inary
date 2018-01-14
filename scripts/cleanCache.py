@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Copyright (C) 2005, 2006 TUBITAK/UEKAE
@@ -15,15 +15,15 @@ import sys
 import glob
 import string
 import shutil
-import pisi.util as util
-from pisi.version import Version
+import inary.util as util
+from inary.version import Version
 
 def findUnneededFiles(listdir):
     dict = {}
     for f in listdir:
         try:
             name, version = util.parse_package_name(f)
-            if dict.has_key(name):
+            if name in dict:
                 if Version(dict[name]) < Version(version):
                     dict[name] = version
             else:
@@ -42,25 +42,25 @@ def doit(root, listdir, clean, suffix = ""):
     for f in listdir:
         target = os.path.join(root, "%s%s" % (f, suffix))
         if os.path.exists(target):
-            print "%s%s" % (f, suffix)
+            print(("%s%s" % (f, suffix)))
             if clean == True:
                 try:
                     if os.path.isdir(target):
                         shutil.rmtree(target)
                     else:
                         os.remove(target)
-                except OSError,e :
+                except OSError as e :
                     usage("Permission denied: %s" % e)
 
 
-def cleanPisis(clean, root = '/var/cache/pisi/packages'):
-    # pisi packages
-    list = map(lambda x: os.path.basename(x).split(".pisi")[0], glob.glob("%s/*.pisi" % root))
+def cleanPisis(clean, root = '/var/cache/inary/packages'):
+    # inary packages
+    list = [os.path.basename(x).split(".inary")[0] for x in glob.glob("%s/*.inary" % root)]
     list.sort()
     l = findUnneededFiles(list)
-    doit(root, l, clean, ".pisi")
+    doit(root, l, clean, ".inary")
 
-def cleanBuilds(clean, root = '/var/pisi'):
+def cleanBuilds(clean, root = '/var/inary'):
     # Build remnant
     list = []
     for f in os.listdir(root):
@@ -71,13 +71,13 @@ def cleanBuilds(clean, root = '/var/pisi'):
     doit(root, l, clean)
 
 def usage(msg):
-    print """
+    print(("""
 Error: %s
 
 Usage:
     cleanCache --dry-run    (Shows unneeded files)
     cleanCache --clean      (Removes unneeded files)
-    """ % msg
+    """ % msg))
 
     sys.exit(1)
 

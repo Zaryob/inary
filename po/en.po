@@ -1,0 +1,3457 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: INARYLinux\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-26 18:33+0200\n"
+"PO-Revision-Date: 2013-01-04 21:08+0000\n"
+"Last-Translator: circass <erdincgultekin@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: /usr/lib/python2.7/optparse.py:140
+#, python-format
+msgid "no such option: %s"
+msgstr "no such option: %s"
+
+#: /usr/lib/python2.7/optparse.py:151
+#, python-format
+msgid "ambiguous option: %s (%s?)"
+msgstr "ambiguous option: %s (%s?)"
+
+#: /usr/lib/python2.7/optparse.py:374
+#, python-format
+msgid "Usage: %s\n"
+msgstr "Usage: %s\n"
+
+#: /usr/lib/python2.7/optparse.py:393
+msgid "Usage"
+msgstr "Usage"
+
+#: /usr/lib/python2.7/optparse.py:418
+msgid "integer"
+msgstr "integer"
+
+#: /usr/lib/python2.7/optparse.py:419
+msgid "long integer"
+msgstr "long integer"
+
+#: /usr/lib/python2.7/optparse.py:420
+msgid "floating-point"
+msgstr "floating-point"
+
+#: /usr/lib/python2.7/optparse.py:421
+msgid "complex"
+msgstr "complex"
+
+#: /usr/lib/python2.7/optparse.py:429
+#, python-format
+msgid "option %s: invalid %s value: %r"
+msgstr "option %s: invalid %s value: %r"
+
+#: /usr/lib/python2.7/optparse.py:437
+#, python-format
+msgid "option %s: invalid choice: %r (choose from %s)"
+msgstr "option %s: invalid choice: %r (choose from %s)"
+
+#: /usr/lib/python2.7/optparse.py:1250
+msgid "show this help message and exit"
+msgstr "show this help message and exit"
+
+#: /usr/lib/python2.7/optparse.py:1255
+msgid "show program's version number and exit"
+msgstr "show program's version number and exit"
+
+#: /usr/lib/python2.7/optparse.py:1278
+msgid "%prog [options]"
+msgstr "%prog [options]"
+
+#: /usr/lib/python2.7/optparse.py:1498 /usr/lib/python2.7/optparse.py:1537
+#, python-format
+msgid "%s option requires an argument"
+msgstr "%s option requires an argument"
+
+#: /usr/lib/python2.7/optparse.py:1500 /usr/lib/python2.7/optparse.py:1539
+#, python-format
+msgid "%s option requires %d arguments"
+msgstr "%s option requires %d arguments"
+
+#: /usr/lib/python2.7/optparse.py:1509
+#, python-format
+msgid "%s option does not take a value"
+msgstr "%s option does not take a value"
+
+#: /usr/lib/python2.7/optparse.py:1626
+msgid "Options"
+msgstr "Options"
+
+#: inary-cli:42
+msgid "Keyboard Interrupt: Exiting..."
+msgstr "Keyboard Interrupt: Exiting..."
+
+#: inary-cli:45
+msgid "Program terminated."
+msgstr "Program terminated."
+
+#: inary-cli:48
+#, fuzzy
+msgid ""
+"Unhandled internal exception.\n"
+"Please file a bug report to <http://bugs.inarylinux.org>."
+msgstr ""
+"Unhandled internal exception.\n"
+"Please file a bug report to <http://bugs.pardus.org.tr>."
+
+#: inary-cli:57
+msgid "System error. Program terminated."
+msgstr "System error. Program terminated."
+
+#: inary-cli:66
+msgid "Please use 'inary help' for general help."
+msgstr "Please use 'inary help' for general help."
+
+#: inary-cli:69
+msgid ""
+"\n"
+"Traceback:"
+msgstr ""
+"\n"
+"Traceback:"
+
+#: inary-cli:72
+msgid "Use --debug to see a traceback."
+msgstr "Use --debug to see a traceback."
+
+#: inary.xml.in.h:1
+msgid "INARY package"
+msgstr "INARY package"
+
+#: inary/actionsapi/autotools.py:40 inary/actionsapi/cmaketools.py:36
+#, python-format
+msgid ""
+"Please attach the config.log to your bug report:\n"
+"%s/config.log"
+msgstr ""
+"Please attach the config.log to your bug report:\n"
+"%s/config.log"
+
+#: inary/actionsapi/autotools.py:84 inary/actionsapi/autotools.py:94
+#: inary/actionsapi/cmaketools.py:66 inary/actionsapi/kde.py:65
+#: inary/actionsapi/perlmodules.py:55 inary/actionsapi/perlmodules.py:58
+msgid "Configure failed."
+msgstr "Configure failed."
+
+#: inary/actionsapi/autotools.py:86 inary/actionsapi/autotools.py:96
+#: inary/actionsapi/kde.py:67
+msgid "No configure script found."
+msgstr "No configure script found."
+
+#: inary/actionsapi/autotools.py:104 inary/actionsapi/cmaketools.py:78
+#: inary/actionsapi/kde.py:72 inary/actionsapi/perlmodules.py:64
+#: inary/actionsapi/perlmodules.py:73 inary/actionsapi/pythonmodules.py:62
+#: inary/actionsapi/scons.py:39
+msgid "Make failed."
+msgstr "Make failed."
+
+#: inary/actionsapi/autotools.py:140 inary/actionsapi/autotools.py:151
+#: inary/actionsapi/cmaketools.py:98 inary/actionsapi/cmaketools.py:106
+#: inary/actionsapi/kde.py:79 inary/actionsapi/pythonmodules.py:67
+#: inary/actionsapi/rubymodules.py:92 inary/actionsapi/rubymodules.py:99
+#: inary/actionsapi/scons.py:43
+msgid "Install failed."
+msgstr "Install failed."
+
+#: inary/actionsapi/autotools.py:162
+msgid "Running aclocal failed."
+msgstr "Running aclocal failed."
+
+#: inary/actionsapi/autotools.py:167
+msgid "Running autoconf failed."
+msgstr "Running autoconf failed."
+
+#: inary/actionsapi/autotools.py:172
+msgid "Running autoreconf failed."
+msgstr "Running autoreconf failed."
+
+#: inary/actionsapi/autotools.py:177
+msgid "Running automake failed."
+msgstr "Running automake failed."
+
+#: inary/actionsapi/autotools.py:182
+msgid "Running autoheader failed."
+msgstr "Running autoheader failed."
+
+#: inary/actionsapi/cmaketools.py:68
+msgid "No configure script found for cmake."
+msgstr "No configure script found for cmake."
+
+#: inary/actionsapi/cmaketools.py:110 inary/actionsapi/kde.py:81
+msgid "No Makefile found."
+msgstr "No Makefile found."
+
+#: inary/actionsapi/get.py:181
+#, python-format
+msgid "Util %s cannot be found"
+msgstr "Util %s cannot be found"
+
+#: inary/actionsapi/get.py:183
+#, python-format
+msgid "Warning: %s does not exist, using plain name %s"
+msgstr "Warning: %s does not exist, using plain name %s"
+
+#: inary/actionsapi/kde.py:34
+#, python-format
+msgid ""
+"\n"
+"!!! Please attach the config.log to your bug report:\n"
+"%s/config.log"
+msgstr ""
+"\n"
+"!!! Please attach the config.log to your bug report:\n"
+"%s/config.log"
+
+#: inary/actionsapi/kerneltools.py:117
+#, python-format
+msgid "Can't find kernel version information file %s."
+msgstr "Can't find kernel version information file %s."
+
+#: inary/actionsapi/libtools.py:38
+msgid "Running ldconfig failed."
+msgstr "Running ldconfig failed."
+
+#: inary/actionsapi/libtools.py:49
+msgid "GNU Config Update Finished."
+msgstr "GNU Config Update Finished."
+
+#: inary/actionsapi/libtools.py:53
+msgid "Running libtoolize failed."
+msgstr "Running libtoolize failed."
+
+#: inary/actionsapi/perlmodules.py:67
+msgid "perl build failed."
+msgstr "perl build failed."
+
+#: inary/actionsapi/perlmodules.py:76
+msgid "perl install failed."
+msgstr "perl install failed."
+
+#: inary/actionsapi/inarytools.py:75 inary/actionsapi/inarytools.py:132
+#, python-format
+msgid "No file matched pattern \"%s\""
+msgstr "No file matched pattern \"%s\""
+
+#: inary/actionsapi/inarytools.py:142
+#, python-format
+msgid "ActionsAPI [doman]: Wrong man page file: %s"
+msgstr "ActionsAPI [doman]: Wrong man page file: %s"
+
+#: inary/actionsapi/inarytools.py:169
+#, python-format
+msgid "No file matched pattern \"%s\". 'domove' operation failed."
+msgstr "No file matched pattern \"%s\". 'domove' operation failed."
+
+#: inary/actionsapi/inarytools.py:188
+#, python-format
+msgid "ActionsAPI [rename]: %s: %s"
+msgstr "ActionsAPI [rename]: %s: %s"
+
+#: inary/actionsapi/inarytools.py:225
+#, python-format
+msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
+msgstr "No such file matching pattern: \"%s\". 'dosed' operation failed."
+
+#: inary/actionsapi/inarytools.py:240
+#, python-format
+msgid "dosed method has not changed file '%s'."
+msgstr "dosed method has not changed file '%s'."
+
+#: inary/actionsapi/inarytools.py:243
+#, python-format
+msgid "File does not exist or permission denied: %s"
+msgstr "File does not exist or permission denied: %s"
+
+#: inary/actionsapi/inarytools.py:260
+#, python-format
+msgid "ActionsAPI [dosym]: File already exists: %s"
+msgstr "ActionsAPI [dosym]: File already exists: %s"
+
+#: inary/actionsapi/inarytools.py:269 inary/actionsapi/inarytoolsfunctions.py:71
+#, python-format
+msgid "No file matched pattern \"%s\"."
+msgstr "No file matched pattern \"%s\"."
+
+#: inary/actionsapi/inarytools.py:296 inary/actionsapi/shelltools.py:97
+#, python-format
+msgid "No file matched pattern \"%s\". Remove operation failed."
+msgstr "No file matched pattern \"%s\". Remove operation failed."
+
+#: inary/actionsapi/inarytools.py:305
+#, python-format
+msgid "No directory matched pattern \"%s\". Remove directory operation failed."
+msgstr "No directory matched pattern \"%s\". Remove directory operation failed."
+
+#: inary/actionsapi/inarytoolsfunctions.py:45
+#: inary/actionsapi/inarytoolsfunctions.py:63
+#: inary/actionsapi/inarytoolsfunctions.py:80
+msgid "Insufficient arguments."
+msgstr "Insufficient arguments."
+
+#: inary/actionsapi/inarytoolsfunctions.py:53
+#, python-format
+msgid "No executable file matched pattern \"%s\"."
+msgstr "No executable file matched pattern \"%s\"."
+
+#: inary/actionsapi/pythonmodules.py:56
+msgid "Configuration failed."
+msgstr "Configuration failed."
+
+#: inary/actionsapi/pythonmodules.py:81
+#, python-format
+msgid "Running %s failed."
+msgstr "Running %s failed."
+
+#: inary/actionsapi/qt4.py:52
+#, python-format
+msgid "Project file '%s' not found."
+msgstr "Project file '%s' not found."
+
+#: inary/actionsapi/qt4.py:56
+#, python-format
+msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)"
+msgstr "It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)"
+
+#: inary/actionsapi/rubymodules.py:108
+#, python-format
+msgid "Running 'ruby %s' failed."
+msgstr "Running 'ruby %s' failed."
+
+#: inary/actionsapi/shelltools.py:49
+#, python-format
+msgid "Cannot create directory %s"
+msgstr "Cannot create directory %s"
+
+#: inary/actionsapi/shelltools.py:57
+#, python-format
+msgid "ActionsAPI [echo]: Can't append to file %s."
+msgstr "ActionsAPI [echo]: Can't append to file %s."
+
+#: inary/actionsapi/shelltools.py:63
+#, python-format
+msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
+msgstr "ActionsAPI [chmod]: No file matched pattern \"%s\"."
+
+#: inary/actionsapi/shelltools.py:70
+#, python-format
+msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
+msgstr "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
+
+#: inary/actionsapi/shelltools.py:73
+#, python-format
+msgid "ActionsAPI [chmod]: File %s doesn't exists."
+msgstr "ActionsAPI [chmod]: File %s doesn't exists."
+
+#: inary/actionsapi/shelltools.py:81
+#, python-format
+msgid "ActionsAPI [chown]: Operation not permitted: %s (uid: %s, gid: %s)"
+msgstr "ActionsAPI [chown]: Operation not permitted: %s (uid: %s, gid: %s)"
+
+#: inary/actionsapi/shelltools.py:84
+#, python-format
+msgid "ActionsAPI [chown]: File %s doesn't exists."
+msgstr "ActionsAPI [chown]: File %s doesn't exists."
+
+#: inary/actionsapi/shelltools.py:91
+#, python-format
+msgid "ActionsAPI [sym]: Permission denied: %s to %s"
+msgstr "ActionsAPI [sym]: Permission denied: %s to %s"
+
+#: inary/actionsapi/shelltools.py:105
+#, python-format
+msgid "ActionsAPI [unlink]: Permission denied: %s."
+msgstr "ActionsAPI [unlink]: Permission denied: %s."
+
+#: inary/actionsapi/shelltools.py:109
+#, python-format
+msgid "ActionsAPI [unlink]: File %s doesn't exists."
+msgstr "ActionsAPI [unlink]: File %s doesn't exists."
+
+#: inary/actionsapi/shelltools.py:117
+#, python-format
+msgid "ActionsAPI [unlinkDir]: Operation not permitted: %s"
+msgstr "ActionsAPI [unlinkDir]: Operation not permitted: %s"
+
+#: inary/actionsapi/shelltools.py:121
+#, python-format
+msgid "ActionsAPI [unlinkDir]: Directory %s doesn't exists."
+msgstr "ActionsAPI [unlinkDir]: Directory %s doesn't exists."
+
+#: inary/actionsapi/shelltools.py:127
+#, python-format
+msgid "ActionsAPI [move]: No file matched pattern \"%s\"."
+msgstr "ActionsAPI [move]: No file matched pattern \"%s\"."
+
+#: inary/actionsapi/shelltools.py:134
+#, python-format
+msgid "ActionsAPI [move]: Permission denied: %s to %s"
+msgstr "ActionsAPI [move]: Permission denied: %s to %s"
+
+#: inary/actionsapi/shelltools.py:136
+#, python-format
+msgid "ActionsAPI [move]: File %s doesn't exists."
+msgstr "ActionsAPI [move]: File %s doesn't exists."
+
+#: inary/actionsapi/shelltools.py:143
+#, python-format
+msgid "ActionsAPI [copy]: No file matched pattern \"%s\"."
+msgstr "ActionsAPI [copy]: No file matched pattern \"%s\"."
+
+#: inary/actionsapi/shelltools.py:150
+#, python-format
+msgid "ActionsAPI [copy]: Permission denied: %s to %s"
+msgstr "ActionsAPI [copy]: Permission denied: %s to %s"
+
+#: inary/actionsapi/shelltools.py:166
+#, python-format
+msgid "ActionsAPI [copy]: File %s does not exist."
+msgstr "ActionsAPI [copy]: File %s does not exist."
+
+#: inary/actionsapi/shelltools.py:181
+#, python-format
+msgid "ActionsAPI [copytree] %s to %s: %s"
+msgstr "ActionsAPI [copytree] %s to %s: %s"
+
+#: inary/actionsapi/shelltools.py:183
+#, python-format
+msgid "ActionsAPI [copytree]: Directory %s doesn't exists."
+msgstr "ActionsAPI [copytree]: Directory %s doesn't exists."
+
+#: inary/actionsapi/shelltools.py:191
+#, python-format
+msgid "ActionsAPI [touch]: No file matched pattern \"%s\"."
+msgstr "ActionsAPI [touch]: No file matched pattern \"%s\"."
+
+#: inary/actionsapi/shelltools.py:200
+#, python-format
+msgid "ActionsAPI [touch]: Permission denied: %s"
+msgstr "ActionsAPI [touch]: Permission denied: %s"
+
+#: inary/actionsapi/shelltools.py:255
+#, python-format
+msgid "Command \"%s\" failed, return value was %d."
+msgstr "Command \"%s\" failed, return value was %d."
+
+#: inary/actionsapi/texlivemodules.py:56
+msgid "Moving source files failed"
+msgstr "Moving source files failed"
+
+#: inary/actionsapi/texlivemodules.py:59
+msgid "Generate config files failed"
+msgstr "Generate config files failed"
+
+#: inary/actionsapi/texlivemodules.py:62
+msgid "Building format files failed"
+msgstr "Building format files failed"
+
+#: inary/actionsapi/texlivemodules.py:69
+msgid "Creating symlinks from format to engines failed"
+msgstr "Creating symlinks from format to engines failed"
+
+#: inary/actionsapi/texlivemodules.py:73
+msgid "Installing docs failed"
+msgstr "Installing docs failed"
+
+#: inary/actionsapi/texlivemodules.py:77
+msgid "Installing texmf files failed"
+msgstr "Installing texmf files failed"
+
+#: inary/actionsapi/texlivemodules.py:81
+msgid "Installing config files failed"
+msgstr "Installing config files failed"
+
+#: inary/actionsapi/texlivemodules.py:85
+msgid "Handle config files failed"
+msgstr "Handle config files failed"
+
+#: inary/actionsapi/texlivemodules.py:95
+#, python-format
+msgid "Symlink %s skipped (special case)"
+msgstr "Symlink %s skipped (special case)"
+
+#: inary/actionsapi/texlivemodules.py:97
+#, python-format
+msgid "Symlink %s -> %s skipped (texlive-core takes care of it."
+msgstr "Symlink %s -> %s skipped (texlive-core takes care of it."
+
+#: inary/actionsapi/texlivemodules.py:100
+#, python-format
+msgid "Symlink %s -> %s skipped."
+msgstr "Symlink %s -> %s skipped."
+
+#: inary/actionsapi/texlivemodules.py:102
+#, python-format
+msgid "Symlink %s skipped (file exists.)"
+msgstr "Symlink %s skipped (file exists.)"
+
+#: inary/actionsapi/texlivemodules.py:104
+#, python-format
+msgid "Making symlink from %s to %s"
+msgstr "Making symlink from %s to %s"
+
+#: inary/actionsapi/texlivemodules.py:153
+#, python-format
+msgid "Creating /etc/texmf/%s.d"
+msgstr "Creating /etc/texmf/%s.d"
+
+#: inary/actionsapi/texlivemodules.py:155
+#, python-format
+msgid "Moving (and symlinking) /usr/share/texmf/%s to /etc/texmf/%s.d"
+msgstr "Moving (and symlinking) /usr/share/texmf/%s to /etc/texmf/%s.d"
+
+#: inary/actionsapi/texlivemodules.py:206
+#, python-format
+msgid "Building format file %s"
+msgstr "Building format file %s"
+
+#: inary/actionsapi/texlivemodules.py:263
+#, python-format
+msgid "Map %s is added to %s/%s.cfg"
+msgstr "Map %s is added to %s/%s.cfg"
+
+#: inary/actionsapi/texlivemodules.py:266
+#, python-format
+msgid "MixedMap %s is added to %s/%s.cfg"
+msgstr "MixedMap %s is added to %s/%s.cfg"
+
+#: inary/actionsapi/texlivemodules.py:269
+#, python-format
+msgid "p +%s is added to %s/%s-config.ps"
+msgstr "p +%s is added to %s/%s-config.ps"
+
+#: inary/actionsapi/texlivemodules.py:272
+#, python-format
+msgid "f %s is added to %s/%s-config"
+msgstr "f %s is added to %s/%s-config"
+
+#: inary/actionsapi/texlivemodules.py:279
+#, python-format
+msgid "Language file  %s  already generated."
+msgstr "Language file  %s  already generated."
+
+#: inary/actionsapi/texlivemodules.py:281
+#, python-format
+msgid "No rule to proccess %s. Please file a bug."
+msgstr "No rule to proccess %s. Please file a bug."
+
+#: inary/api.py:58 inary/cli/command.py:166
+msgid "You have to be root for this operation."
+msgstr "You have to be root for this operation."
+
+#: inary/api.py:65
+msgid "Another instance of INARY is running. Only one instance is allowed."
+msgstr "Another instance of INARY is running. Only one instance is allowed."
+
+#: inary/api.py:420
+#, python-format
+msgid "%s package found in %s repository"
+msgstr "%s package found in %s repository"
+
+#: inary/api.py:424
+#, python-format
+msgid "%s package already fetched"
+msgstr "%s package already fetched"
+
+#: inary/api.py:532
+#, python-format
+msgid "Cleaning package cache %s..."
+msgstr "Cleaning package cache %s..."
+
+#: inary/api.py:534
+#, python-format
+msgid "Cleaning source archive cache %s..."
+msgstr "Cleaning source archive cache %s..."
+
+#: inary/api.py:536
+#, python-format
+msgid "Cleaning temporary directory %s..."
+msgstr "Cleaning temporary directory %s..."
+
+#: inary/api.py:540
+#, python-format
+msgid "Removing cache file %s..."
+msgstr "Removing cache file %s..."
+
+#: inary/api.py:571
+msgid "Taking snapshot of the system"
+msgstr "Taking snapshot of the system"
+
+#: inary/api.py:732
+msgid "comar package is not fully installed"
+msgstr "comar package is not fully installed"
+
+#: inary/api.py:744
+#, python-format
+msgid "File %s not found"
+msgstr "File %s not found"
+
+#: inary/api.py:786
+#, python-format
+msgid "Building index of INARY files under %s"
+msgstr "Building index of INARY files under %s"
+
+#: inary/api.py:791
+msgid "Index file written"
+msgstr "Index file written"
+
+#: inary/api.py:796
+msgid "Not a valid repo name."
+msgstr "Not a valid repo name."
+
+#: inary/api.py:799
+#, python-format
+msgid "Repo %s already present."
+msgstr "Repo %s already present."
+
+#: inary/api.py:802
+#, python-format
+msgid "Repo already present with name %s."
+msgstr "Repo already present with name %s."
+
+#: inary/api.py:807
+#, python-format
+msgid "Repo %s added to system."
+msgstr "Repo %s added to system."
+
+#: inary/api.py:815
+#, python-format
+msgid "Repo %s removed from system."
+msgstr "Repo %s removed from system."
+
+#: inary/api.py:817
+#, python-format
+msgid "Repository %s does not exist. Cannot remove."
+msgstr "Repository %s does not exist. Cannot remove."
+
+#: inary/api.py:839
+#, python-format
+msgid "Updating repository: %s"
+msgstr "Updating repository: %s"
+
+#: inary/api.py:848
+#, python-format
+msgid "%s repository information is up-to-date."
+msgstr "%s repository information is up-to-date."
+
+#: inary/api.py:850
+msgid "Updating database at any rate as requested"
+msgstr "Updating database at any rate as requested"
+
+#: inary/api.py:863
+msgid "Package database updated."
+msgstr "Package database updated."
+
+#: inary/api.py:865
+#, python-format
+msgid "No repository named %s found."
+msgstr "No repository named %s found."
+
+#: inary/api.py:878
+#, python-format
+msgid "Adding '%s' to db... "
+msgstr "Adding '%s' to db... "
+
+#: inary/api.py:881
+msgid "OK."
+msgstr "OK."
+
+#: inary/archive.py:512
+#, python-format
+msgid "Problem occured while uncompressing %s.Z file"
+msgstr "Problem occured while uncompressing %s.Z file"
+
+#: inary/atomicoperations.py:71 inary/operations/history.py:72
+#, python-format
+msgid "Package %s found in repository %s"
+msgstr "Package %s found in repository %s"
+
+#: inary/atomicoperations.py:102
+#, python-format
+msgid "Package URI: %s"
+msgstr "Package URI: %s"
+
+#: inary/atomicoperations.py:116
+msgid "Download Error: Package does not match the repository package."
+msgstr "Download Error: Package does not match the repository package."
+
+#: inary/atomicoperations.py:120
+#, python-format
+msgid "Package %s not found in any active repository."
+msgstr "Package %s not found in any active repository."
+
+#: inary/atomicoperations.py:146
+#, python-format
+msgid "Installing %s, version %s, release %s"
+msgstr "Installing %s, version %s, release %s"
+
+#: inary/atomicoperations.py:192 inary/operations/build.py:788
+#, python-format
+msgid "%s-%s is not a valid INARY version format"
+msgstr "%s-%s is not a valid INARY version format"
+
+#: inary/atomicoperations.py:198
+#, python-format
+msgid "%s package cannot be installed unless the dependencies are satisfied"
+msgstr "%s package cannot be installed unless the dependencies are satisfied"
+
+#: inary/atomicoperations.py:222
+#, python-format
+msgid "/%s from %s package\n"
+msgstr "/%s from %s package\n"
+
+#: inary/atomicoperations.py:223
+#, python-format
+msgid ""
+"File conflicts:\n"
+"%s"
+msgstr ""
+"File conflicts:\n"
+"%s"
+
+#: inary/atomicoperations.py:241
+msgid "Re-install same version package?"
+msgstr "Re-install same version package?"
+
+#: inary/atomicoperations.py:242
+msgid "Package re-install declined"
+msgstr "Package re-install declined"
+
+#: inary/atomicoperations.py:254
+msgid "Upgrading to new upstream version"
+msgstr "Upgrading to new upstream version"
+
+#: inary/atomicoperations.py:257
+msgid "Upgrading to new distribution release"
+msgstr "Upgrading to new distribution release"
+
+#: inary/atomicoperations.py:266
+msgid "Downgrade to old distribution release?"
+msgstr "Downgrade to old distribution release?"
+
+#: inary/atomicoperations.py:270
+msgid "Package downgrade declined"
+msgstr "Package downgrade declined"
+
+#: inary/atomicoperations.py:309
+#, python-format
+msgid "%s configuration failed."
+msgstr "%s configuration failed."
+
+#: inary/atomicoperations.py:400
+msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
+msgstr "Unable to relocate following files. Reinstallation of this package is strongly recommended."
+
+#: inary/atomicoperations.py:491 inary/atomicoperations.py:494
+#: inary/atomicoperations.py:501
+#, python-format
+msgid "Storing %s"
+msgstr "Storing %s"
+
+#: inary/atomicoperations.py:568
+#, python-format
+msgid "File list could not be read for package %s, continuing removal."
+msgstr "File list could not be read for package %s, continuing removal."
+
+#: inary/atomicoperations.py:574
+#, python-format
+msgid "Removing package %s"
+msgstr "Removing package %s"
+
+#: inary/atomicoperations.py:577
+msgid "Trying to remove nonexistent package "
+msgstr "Trying to remove nonexistent package "
+
+#: inary/atomicoperations.py:618
+#, python-format
+msgid "Not removing conflicted file : %s"
+msgstr "Not removing conflicted file : %s"
+
+#: inary/atomicoperations.py:646
+#, python-format
+msgid "Installed file %s does not exist on system [Probably you manually deleted]"
+msgstr "Installed file %s does not exist on system [Probably you manually deleted]"
+
+#: inary/cli/__init__.py:117
+msgid "Warning: "
+msgstr "Warning: "
+
+#: inary/cli/__init__.py:127
+msgid "Error: "
+msgstr "Error: "
+
+#: inary/cli/__init__.py:161
+msgid " (yes/no)"
+msgstr " (yes/no)"
+
+#: inary/cli/__init__.py:185
+msgid " [complete]\n"
+msgstr " [complete]\n"
+
+#: inary/cli/__init__.py:195
+#, python-format
+msgid "Installed %s"
+msgstr "Installed %s"
+
+#: inary/cli/__init__.py:197
+#, python-format
+msgid "Removed %s"
+msgstr "Removed %s"
+
+#: inary/cli/__init__.py:199
+#, python-format
+msgid "Upgraded %s"
+msgstr "Upgraded %s"
+
+#: inary/cli/__init__.py:201
+#, python-format
+msgid "Configured %s"
+msgstr "Configured %s"
+
+#: inary/cli/__init__.py:203
+#, python-format
+msgid "Extracting the files of %s"
+msgstr "Extracting the files of %s"
+
+#: inary/cli/addrepo.py:24
+msgid ""
+"Add a repository\n"
+"\n"
+"Usage: add-repo <repo> <indexuri>\n"
+"\n"
+"<repo>: name of repository to add\n"
+"<indexuri>: URI of index file\n"
+"\n"
+"NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment\n"
+msgstr ""
+"Add a repository\n"
+"\n"
+"Usage: add-repo <repo> <indexuri>\n"
+"\n"
+"<repo>: name of repository to add\n"
+"<indexuri>: URI of index file\n"
+"\n"
+"NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment\n"
+
+#: inary/cli/addrepo.py:43
+msgid "add-repo options"
+msgstr "add-repo options"
+
+#: inary/cli/addrepo.py:44
+msgid "Ignore repository distribution check"
+msgstr "Ignore repository distribution check"
+
+#: inary/cli/addrepo.py:45
+msgid "Does not fetch repository index and does not check distribution match"
+msgstr "Does not fetch repository index and does not check distribution match"
+
+#: inary/cli/addrepo.py:48
+msgid "Add repository at given position (0 is first)"
+msgstr "Add repository at given position (0 is first)"
+
+#: inary/cli/addrepo.py:62
+#, python-format
+msgid ""
+"Add %s repository without updating the database?\n"
+"By confirming this you are also adding the repository to your system without checking the distribution of the repository.\n"
+"Do you want to continue?"
+msgstr ""
+"Add %s repository without updating the database?\n"
+"By confirming this you are also adding the repository to your system without checking the distribution of the repository.\n"
+"Do you want to continue?"
+
+#: inary/cli/addrepo.py:74
+#, python-format
+msgid "%s repository could not be reached. Removing %s from system."
+msgstr "%s repository could not be reached. Removing %s from system."
+
+#: inary/cli/blame.py:24
+msgid ""
+"Information about the package owner and release\n"
+"\n"
+"Usage: blame <package> ... <package>\n"
+"\n"
+msgstr ""
+"Information about the package owner and release\n"
+"\n"
+"Usage: blame <package> ... <package>\n"
+"\n"
+
+#: inary/cli/blame.py:39
+msgid "blame options"
+msgstr "blame options"
+
+#: inary/cli/blame.py:40
+msgid "Blame for the given release"
+msgstr "Blame for the given release"
+
+#: inary/cli/blame.py:42
+msgid "Blame for all of the releases"
+msgstr "Blame for all of the releases"
+
+#: inary/cli/blame.py:68 inary/specfile.py:370 inary/specfile.py:456
+#, python-format
+msgid "Name: %s, version: %s, release: %s\n"
+msgstr "Name: %s, version: %s, release: %s\n"
+
+#: inary/cli/blame.py:70
+#, python-format
+msgid "Package Maintainer: %s <%s>\n"
+msgstr "Package Maintainer: %s <%s>\n"
+
+#: inary/cli/blame.py:71
+#, python-format
+msgid "Release Updater: %s <%s>\n"
+msgstr "Release Updater: %s <%s>\n"
+
+#: inary/cli/blame.py:72
+#, python-format
+msgid "Update Date: %s\n"
+msgstr "Update Date: %s\n"
+
+#: inary/cli/build.py:25
+msgid ""
+"Build INARY packages\n"
+"\n"
+"Usage: build [<pspec.xml> | <sourcename>] ...\n"
+"\n"
+"You can give a URI of the pspec.xml file. INARY will\n"
+"fetch all necessary files and build the package for you.\n"
+"\n"
+"Alternatively, you can give the name of a source package\n"
+"to be downloaded from a repository containing sources.\n"
+msgstr ""
+"Build INARY packages\n"
+"\n"
+"Usage: build [<pspec.xml> | <sourcename>] ...\n"
+"\n"
+"You can give a URI of the pspec.xml file. INARY will\n"
+"fetch all necessary files and build the package for you.\n"
+"\n"
+"Alternatively, you can give the name of a source package\n"
+"to be downloaded from a repository containing sources.\n"
+
+#: inary/cli/build.py:50
+msgid "build options"
+msgstr "build options"
+
+#: inary/cli/build.py:58
+msgid "Run inary build operation without printing extra debug information"
+msgstr "Run inary build operation without printing extra debug information"
+
+#: inary/cli/build.py:64 inary/cli/command.py:204
+msgid "Do not take dependency information into account"
+msgstr "Do not take dependency information into account"
+
+#: inary/cli/build.py:70
+msgid "Output directory for produced packages"
+msgstr "Output directory for produced packages"
+
+#: inary/cli/build.py:74
+msgid "Bypass errors from ActionsAPI"
+msgstr "Bypass errors from ActionsAPI"
+
+#: inary/cli/build.py:79 inary/cli/command.py:208
+msgid "Bypass safety switch"
+msgstr "Bypass safety switch"
+
+#: inary/cli/build.py:84
+msgid "Bypass testing step"
+msgstr "Bypass testing step"
+
+#: inary/cli/build.py:89
+msgid "Create a static package with ar files"
+msgstr "Create a static package with ar files"
+
+#: inary/cli/build.py:93 inary/cli/delta.py:64
+msgid "Create the binary package using the given format. Use '-F help' to see a list of supported formats."
+msgstr "Create the binary package using the given format. Use '-F help' to see a list of supported formats."
+
+#: inary/cli/build.py:100
+msgid "Use quilt patch management system instead of GNU patch"
+msgstr "Use quilt patch management system instead of GNU patch"
+
+#: inary/cli/build.py:106
+msgid "Do not constrain build process inside the build folder"
+msgstr "Do not constrain build process inside the build folder"
+
+#: inary/cli/build.py:110
+msgid "build steps"
+msgstr "build steps"
+
+#: inary/cli/build.py:116
+msgid "Break build after fetching the source archive"
+msgstr "Break build after fetching the source archive"
+
+#: inary/cli/build.py:123
+msgid "Break build after unpacking the source archive, checking sha1sum and applying patches"
+msgstr "Break build after unpacking the source archive, checking sha1sum and applying patches"
+
+#: inary/cli/build.py:131
+msgid "Break build after running configure step"
+msgstr "Break build after running configure step"
+
+#: inary/cli/build.py:137
+msgid "Break build after running compile step"
+msgstr "Break build after running compile step"
+
+#: inary/cli/build.py:143
+msgid "Break build after running check step"
+msgstr "Break build after running check step"
+
+#: inary/cli/build.py:149
+msgid "Break build after running install step"
+msgstr "Break build after running install step"
+
+#: inary/cli/build.py:155
+msgid "Create INARY package"
+msgstr "Create INARY package"
+
+#: inary/cli/build.py:165 inary/cli/delta.py:72
+msgid "Supported package formats:"
+msgstr "Supported package formats:"
+
+#: inary/cli/build.py:168 inary/cli/delta.py:75
+#, python-format
+msgid "  %s (default)"
+msgstr "  %s (default)"
+
+#: inary/cli/check.py:26
+msgid ""
+"Verify installation\n"
+"\n"
+"Usage: check [<package1> <package2> ... <packagen>]\n"
+"       check -c <component>\n"
+"\n"
+"<packagei>: package name\n"
+"\n"
+"A cryptographic checksum is stored for each installed\n"
+"file. Check command uses the checksums to verify a package.\n"
+"Just give the names of packages.\n"
+"\n"
+"If no packages are given, checks all installed packages.\n"
+msgstr ""
+"Verify installation\n"
+"\n"
+"Usage: check [<package1> <package2> ... <packagen>]\n"
+"       check -c <component>\n"
+"\n"
+"<packagei>: package name\n"
+"\n"
+"A cryptographic checksum is stored for each installed\n"
+"file. Check command uses the checksums to verify a package.\n"
+"Just give the names of packages.\n"
+"\n"
+"If no packages are given, checks all installed packages.\n"
+
+#: inary/cli/check.py:54
+msgid "check options"
+msgstr "check options"
+
+#: inary/cli/check.py:59
+msgid "Check installed packages under given component"
+msgstr "Check installed packages under given component"
+
+#: inary/cli/check.py:65
+msgid "Checks only changed config files of the packages"
+msgstr "Checks only changed config files of the packages"
+
+#: inary/cli/check.py:82
+msgid "Checking all installed packages"
+msgstr "Checking all installed packages"
+
+#: inary/cli/check.py:91
+#, python-format
+msgid "Checking integrity of %s"
+msgstr "Checking integrity of %s"
+
+#: inary/cli/check.py:105
+msgid "Broken"
+msgstr "Broken"
+
+#: inary/cli/check.py:110
+msgid "Unknown"
+msgstr "Unknown"
+
+#: inary/cli/check.py:112
+msgid "OK"
+msgstr "OK"
+
+#: inary/cli/check.py:118
+#, python-format
+msgid "Missing file: /%s"
+msgstr "Missing file: /%s"
+
+#: inary/cli/check.py:122
+#, python-format
+msgid "Access denied: /%s"
+msgstr "Access denied: /%s"
+
+#: inary/cli/check.py:126
+#, python-format
+msgid "Corrupted file: /%s"
+msgstr "Corrupted file: /%s"
+
+#: inary/cli/check.py:130
+#, python-format
+msgid "Modified configuration file: /%s"
+msgstr "Modified configuration file: /%s"
+
+#: inary/cli/check.py:135
+#, python-format
+msgid "Package %s not installed"
+msgstr "Package %s not installed"
+
+#: inary/cli/check.py:139
+msgid ""
+"Inary was unable to check the integrity of packages which contain files that you don't have read access.\n"
+"Running the check under a privileged user may help fixing this problem."
+msgstr ""
+"Inary was unable to check the integrity of packages which contain files that you don't have read access.\n"
+"Running the check under a privileged user may help fixing this problem."
+
+#: inary/cli/clean.py:20
+msgid ""
+"Clean stale locks\n"
+"\n"
+"Usage: clean\n"
+"\n"
+"INARY uses filesystem locks for managing database access.\n"
+"This command deletes unused locks from the database directory."
+msgstr ""
+"Clean stale locks\n"
+"\n"
+"Usage: clean\n"
+"\n"
+"INARY uses filesystem locks for managing database access.\n"
+"This command deletes unused locks from the database directory."
+
+#: inary/cli/command.py:30
+msgid "Command lacks name"
+msgstr "Command lacks name"
+
+#: inary/cli/command.py:34
+#, python-format
+msgid "Duplicate command %s"
+msgstr "Duplicate command %s"
+
+#: inary/cli/command.py:71 inary/cli/inarycli.py:134
+#, python-format
+msgid "Unrecognized command: %s"
+msgstr "Unrecognized command: %s"
+
+#: inary/cli/command.py:96
+msgid "general options"
+msgstr "general options"
+
+#: inary/cli/command.py:99
+msgid "Change the system root for INARY commands"
+msgstr "Change the system root for INARY commands"
+
+#: inary/cli/command.py:101
+msgid "Assume yes in all yes/no queries"
+msgstr "Assume yes in all yes/no queries"
+
+#: inary/cli/command.py:105
+msgid "Keep bandwidth usage under specified KB's"
+msgstr "Keep bandwidth usage under specified KB's"
+
+#: inary/cli/command.py:108
+msgid "Detailed output"
+msgstr "Detailed output"
+
+#: inary/cli/command.py:110
+msgid "Show debugging information"
+msgstr "Show debugging information"
+
+#: inary/cli/command.py:112
+msgid "Suppresses all coloring of INARY's output"
+msgstr "Suppresses all coloring of INARY's output"
+
+#: inary/cli/command.py:130
+#, python-format
+msgid "Destination directory %s does not exist. Creating directory.\n"
+msgstr "Destination directory %s does not exist. Creating directory.\n"
+
+#: inary/cli/command.py:152
+msgid "Password: "
+msgstr "Password: "
+
+#: inary/cli/command.py:191
+msgid "Command terminated abnormally."
+msgstr "Command terminated abnormally."
+
+#: inary/cli/command.py:206 inary/cli/emerge.py:53
+msgid "Bypass comar configuration agent"
+msgstr "Bypass comar configuration agent"
+
+#: inary/cli/command.py:210
+msgid "Do not perform any action, just show what would be done"
+msgstr "Do not perform any action, just show what would be done"
+
+#: inary/cli/command.py:228
+#, python-format
+msgid "usage: %s\n"
+msgstr "usage: %s\n"
+
+#: inary/cli/configurepending.py:23
+msgid ""
+"Configure pending packages\n"
+"\n"
+"If COMAR configuration of some packages were not\n"
+"done at installation time, they are added to a list\n"
+"of packages waiting to be configured. This command\n"
+"configures those packages.\n"
+msgstr ""
+"Configure pending packages\n"
+"\n"
+"If COMAR configuration of some packages were not\n"
+"done at installation time, they are added to a list\n"
+"of packages waiting to be configured. This command\n"
+"configures those packages.\n"
+
+#: inary/cli/configurepending.py:39
+msgid "configure-pending options"
+msgstr "configure-pending options"
+
+#: inary/cli/deletecache.py:22
+msgid ""
+"Delete cache files\n"
+"\n"
+"Usage: delete-cache\n"
+"\n"
+"Sources, packages and temporary files are stored\n"
+"under /var directory. Since these accumulate they can\n"
+"consume a lot of disk space."
+msgstr ""
+"Delete cache files\n"
+"\n"
+"Usage: delete-cache\n"
+"\n"
+"Sources, packages and temporary files are stored\n"
+"under /var directory. Since these accumulate they can\n"
+"consume a lot of disk space."
+
+#: inary/cli/delta.py:24
+msgid ""
+"Creates delta packages\n"
+"\n"
+"Usages: delta oldpackage1 oldpackage2 ...  newpackage\n"
+"        delta -t newpackage oldpackage1 oldpackage2 ...\n"
+"\n"
+"Delta command finds the changed files between the given\n"
+"packages by comparing the sha1sum of files and creates\n"
+"a delta package with the changed files.\n"
+msgstr ""
+"Creates delta packages\n"
+"\n"
+"Usages: delta oldpackage1 oldpackage2 ...  newpackage\n"
+"        delta -t newpackage oldpackage1 oldpackage2 ...\n"
+"\n"
+"Delta command finds the changed files between the given\n"
+"packages by comparing the sha1sum of files and creates\n"
+"a delta package with the changed files.\n"
+
+#: inary/cli/delta.py:46
+msgid "delta options"
+msgstr "delta options"
+
+#: inary/cli/delta.py:54
+msgid "Use arg as the new package and treat other arguments as old packages."
+msgstr "Use arg as the new package and treat other arguments as old packages."
+
+#: inary/cli/delta.py:60
+msgid "Output directory for produced packages."
+msgstr "Output directory for produced packages."
+
+#: inary/cli/disablerepo.py:21
+msgid ""
+"Disable repository\n"
+"\n"
+"Usage: disable-repo [<repo1> <repo2> ... <repon>]\n"
+"\n"
+"<repoi>: repository name\n"
+"\n"
+"Disabled repositories are not taken into account in operations\n"
+msgstr ""
+"Disable repository\n"
+"\n"
+"Usage: disable-repo [<repo1> <repo2> ... <repon>]\n"
+"\n"
+"<repoi>: repository name\n"
+"\n"
+"Disabled repositories are not taken into account in operations\n"
+
+#: inary/cli/emerge.py:25
+msgid ""
+"Build and install INARY source packages from repository\n"
+"\n"
+"Usage: emerge <sourcename> ...\n"
+"\n"
+"You should give the name of a source package to be\n"
+"downloaded from a repository containing sources.\n"
+"\n"
+"You can also give the name of a component.\n"
+msgstr ""
+"Build and install INARY source packages from repository\n"
+"\n"
+"Usage: emerge <sourcename> ...\n"
+"\n"
+"You should give the name of a source package to be\n"
+"downloaded from a repository containing sources.\n"
+"\n"
+"You can also give the name of a component.\n"
+
+#: inary/cli/emerge.py:44
+msgid "emerge options"
+msgstr "emerge options"
+
+#: inary/cli/emerge.py:47
+msgid "Emerge available packages under given component"
+msgstr "Emerge available packages under given component"
+
+#: inary/cli/emerge.py:49 inary/cli/install.py:53 inary/cli/upgrade.py:58
+msgid "Ignore file conflicts"
+msgstr "Ignore file conflicts"
+
+#: inary/cli/emerge.py:51 inary/cli/install.py:55 inary/cli/upgrade.py:60
+msgid "Ignore package conflicts"
+msgstr "Ignore package conflicts"
+
+#: inary/cli/emerge.py:71
+#, python-format
+msgid "Output directory: %s"
+msgstr "Output directory: %s"
+
+#: inary/cli/emerge.py:73
+msgid "Outputting binary packages in the package cache."
+msgstr "Outputting binary packages in the package cache."
+
+#: inary/cli/enablerepo.py:21
+msgid ""
+"Enable repository\n"
+"\n"
+"Usage: enable-repo [<repo1> <repo2> ... <repon>]\n"
+"\n"
+"<repoi>: repository name\n"
+"\n"
+"Disabled repositories are not taken into account in operations\n"
+msgstr ""
+"Enable repository\n"
+"\n"
+"Usage: enable-repo [<repo1> <repo2> ... <repon>]\n"
+"\n"
+"<repoi>: repository name\n"
+"\n"
+"Disabled repositories are not taken into account in operations\n"
+
+#: inary/cli/fetch.py:25
+msgid ""
+"Fetch a package\n"
+"\n"
+"Usage: fetch [<package1> <package2> ... <packagen>]\n"
+"\n"
+"<packagei>: package name\n"
+"\n"
+"Downloads the given inary packages to working directory\n"
+msgstr ""
+"Fetch a package\n"
+"\n"
+"Usage: fetch [<package1> <package2> ... <packagen>]\n"
+"\n"
+"<packagei>: package name\n"
+"\n"
+"Downloads the given inary packages to working directory\n"
+
+#: inary/cli/fetch.py:41
+msgid "fetch options"
+msgstr "fetch options"
+
+#: inary/cli/fetch.py:47
+msgid "Output directory for the fetched packages"
+msgstr "Output directory for the fetched packages"
+
+#: inary/cli/graph.py:26
+msgid ""
+"Graph package relations\n"
+"\n"
+"Usage: graph [<package1> <package2> ...]\n"
+"\n"
+"Write a graph of package relations, tracking dependency and\n"
+"conflicts relations starting from given packages. By default\n"
+"shows the package relations among repository packages, and writes\n"
+"the package in graphviz format to 'pgraph.dot'.\n"
+msgstr ""
+"Graph package relations\n"
+"\n"
+"Usage: graph [<package1> <package2> ...]\n"
+"\n"
+"Write a graph of package relations, tracking dependency and\n"
+"conflicts relations starting from given packages. By default\n"
+"shows the package relations among repository packages, and writes\n"
+"the package in graphviz format to 'pgraph.dot'.\n"
+
+#: inary/cli/graph.py:43
+msgid "graph options"
+msgstr "graph options"
+
+#: inary/cli/graph.py:47
+msgid "Specify a particular repository"
+msgstr "Specify a particular repository"
+
+#: inary/cli/graph.py:50
+msgid "Graph of installed packages"
+msgstr "Graph of installed packages"
+
+#: inary/cli/graph.py:53
+msgid "Do not show installed packages"
+msgstr "Do not show installed packages"
+
+#: inary/cli/graph.py:56
+msgid "Draw reverse dependency graph"
+msgstr "Draw reverse dependency graph"
+
+#: inary/cli/graph.py:59
+msgid "Dot output file"
+msgstr "Dot output file"
+
+#: inary/cli/graph.py:73
+#, python-format
+msgid "Plotting packages in repository %s"
+msgstr "Plotting packages in repository %s"
+
+#: inary/cli/graph.py:76
+msgid "Plotting a graph of relations among all repository packages"
+msgstr "Plotting a graph of relations among all repository packages"
+
+#: inary/cli/graph.py:90
+msgid "Plotting a graph of relations among all installed packages"
+msgstr "Plotting a graph of relations among all installed packages"
+
+#: inary/cli/help.py:22
+msgid ""
+"Prints help for given commands\n"
+"\n"
+"Usage: help [ <command1> <command2> ... <commandn> ]\n"
+"\n"
+"If run without parameters, it prints the general help."
+msgstr ""
+"Prints help for given commands\n"
+"\n"
+"Usage: help [ <command1> <command2> ... <commandn> ]\n"
+"\n"
+"If run without parameters, it prints the general help."
+
+#: inary/cli/help.py:49
+msgid ""
+"%prog [options] <command> [arguments]\n"
+"\n"
+"where <command> is one of:\n"
+"\n"
+msgstr ""
+"%prog [options] <command> [arguments]\n"
+"\n"
+"where <command> is one of:\n"
+"\n"
+
+#: inary/cli/help.py:55
+msgid ""
+"\n"
+"Use \"%prog help <command>\" for help on a specific command.\n"
+msgstr ""
+"\n"
+"Use \"%prog help <command>\" for help on a specific command.\n"
+
+#: inary/cli/history.py:28
+msgid "emerge"
+msgstr "emerge"
+
+#: inary/cli/history.py:28
+msgid "install"
+msgstr "install"
+
+#: inary/cli/history.py:28
+msgid "remove"
+msgstr "remove"
+
+#: inary/cli/history.py:28
+msgid "repository update"
+msgstr "repository update"
+
+#: inary/cli/history.py:28
+msgid "snapshot"
+msgstr "snapshot"
+
+#: inary/cli/history.py:28
+msgid "takeback"
+msgstr "takeback"
+
+#: inary/cli/history.py:28
+msgid "upgrade"
+msgstr "upgrade"
+
+#: inary/cli/history.py:31
+msgid ""
+"History of inary operations\n"
+"\n"
+"Usage: history\n"
+"\n"
+"Lists previous operations."
+msgstr ""
+"History of inary operations\n"
+"\n"
+"Usage: history\n"
+"\n"
+"Lists previous operations."
+
+#: inary/cli/history.py:47
+msgid "history options"
+msgstr "history options"
+
+#: inary/cli/history.py:53
+msgid "Output only the last n operations"
+msgstr "Output only the last n operations"
+
+#: inary/cli/history.py:55
+msgid "Take snapshot of the current system"
+msgstr "Take snapshot of the current system"
+
+#: inary/cli/history.py:57
+msgid "Takeback to the state after the given operation finished"
+msgstr "Takeback to the state after the given operation finished"
+
+#: inary/cli/history.py:67
+#, python-format
+msgid "Operation #%d: %s"
+msgstr "Operation #%d: %s"
+
+#: inary/cli/history.py:68
+#, python-format
+msgid "Date: %s %s"
+msgstr "Date: %s %s"
+
+#: inary/cli/history.py:72
+#, python-format
+msgid "    * There are %d packages in this snapshot."
+msgstr "    * There are %d packages in this snapshot."
+
+#: inary/cli/index.py:23
+msgid ""
+"Index INARY files in a given directory\n"
+"\n"
+"Usage: index <directory> ...\n"
+"\n"
+"This command searches for all INARY files in a directory, collects INARY\n"
+"tags from them and accumulates the information in an output XML file,\n"
+"named by default 'inary-index.xml'. In particular, it indexes both\n"
+"source and binary packages.\n"
+"\n"
+"If you give multiple directories, the command still works, but puts\n"
+"everything in a single index file.\n"
+msgstr ""
+"Index INARY files in a given directory\n"
+"\n"
+"Usage: index <directory> ...\n"
+"\n"
+"This command searches for all INARY files in a directory, collects INARY\n"
+"tags from them and accumulates the information in an output XML file,\n"
+"named by default 'inary-index.xml'. In particular, it indexes both\n"
+"source and binary packages.\n"
+"\n"
+"If you give multiple directories, the command still works, but puts\n"
+"everything in a single index file.\n"
+
+#: inary/cli/index.py:48
+msgid "index options"
+msgstr "index options"
+
+#: inary/cli/index.py:53
+msgid "Store absolute links for indexed files."
+msgstr "Store absolute links for indexed files."
+
+#: inary/cli/index.py:58
+msgid "Index output file"
+msgstr "Index output file"
+
+#: inary/cli/index.py:63
+msgid "Comma-separated compression types for index file"
+msgstr "Comma-separated compression types for index file"
+
+#: inary/cli/index.py:69
+msgid "Do not index INARY spec files."
+msgstr "Do not index INARY spec files."
+
+#: inary/cli/index.py:74
+msgid "Do not sign index."
+msgstr "Do not sign index."
+
+#: inary/cli/info.py:26
+msgid ""
+"Display package information\n"
+"\n"
+"Usage: info <package1> <package2> ... <packagen>\n"
+"\n"
+"<packagei> is either a package name or a .inary file,\n"
+msgstr ""
+"Display package information\n"
+"\n"
+"Usage: info <package1> <package2> ... <packagen>\n"
+"\n"
+"<packagei> is either a package name or a .inary file,\n"
+
+#: inary/cli/info.py:45
+msgid "info options"
+msgstr "info options"
+
+#: inary/cli/info.py:52
+msgid "Show a list of package files."
+msgstr "Show a list of package files."
+
+#: inary/cli/info.py:54
+msgid "Info about the given component"
+msgstr "Info about the given component"
+
+#: inary/cli/info.py:57
+msgid "Show only paths."
+msgstr "Show only paths."
+
+#: inary/cli/info.py:59
+msgid "Do not show details"
+msgstr "Do not show details"
+
+#: inary/cli/info.py:61
+msgid "Output in xml format"
+msgstr "Output in xml format"
+
+#: inary/cli/info.py:129
+msgid "Reverse Dependencies:"
+msgstr "Reverse Dependencies:"
+
+#: inary/cli/info.py:140
+msgid "Reverse Build Dependencies:"
+msgstr "Reverse Build Dependencies:"
+
+#: inary/cli/info.py:145
+#, python-format
+msgid "Package file: %s"
+msgstr "Package file: %s"
+
+#: inary/cli/info.py:160
+msgid "[inst] "
+msgstr "[inst] "
+
+#: inary/cli/info.py:162
+msgid "Installed package:"
+msgstr "Installed package:"
+
+#: inary/cli/info.py:166
+#, python-format
+msgid "%s package is not installed"
+msgstr "%s package is not installed"
+
+#: inary/cli/info.py:172
+msgid "[binary] "
+msgstr "[binary] "
+
+#: inary/cli/info.py:174 inary/cli/info.py:186
+#, python-format
+msgid "Package found in %s repository:"
+msgstr "Package found in %s repository:"
+
+#: inary/cli/info.py:177
+#, python-format
+msgid "%s package is not found in binary repositories"
+msgstr "%s package is not found in binary repositories"
+
+#: inary/cli/info.py:184
+msgid "[source] "
+msgstr "[source] "
+
+#: inary/cli/info.py:189
+#, python-format
+msgid "%s package is not found in source repositories"
+msgstr "%s package is not found in source repositories"
+
+#: inary/cli/install.py:25
+msgid ""
+"Install INARY packages\n"
+"\n"
+"Usage: install <package1> <package2> ... <packagen>\n"
+"\n"
+"You may use filenames, URI's or package names for packages. If you have\n"
+"specified a package name, it should exist in a specified repository.\n"
+"\n"
+"You can also specify components instead of package names, which will be\n"
+"expanded to package names.\n"
+msgstr ""
+"Install INARY packages\n"
+"\n"
+"Usage: install <package1> <package2> ... <packagen>\n"
+"\n"
+"You may use filenames, URI's or package names for packages. If you have\n"
+"specified a package name, it should exist in a specified repository.\n"
+"\n"
+"You can also specify components instead of package names, which will be\n"
+"expanded to package names.\n"
+
+#: inary/cli/install.py:44
+msgid "install options"
+msgstr "install options"
+
+#: inary/cli/install.py:49
+msgid "Reinstall already installed packages"
+msgstr "Reinstall already installed packages"
+
+#: inary/cli/install.py:51
+msgid "Skip distribution release and architecture check"
+msgstr "Skip distribution release and architecture check"
+
+#: inary/cli/install.py:57
+msgid "Install component's and recursive components' packages"
+msgstr "Install component's and recursive components' packages"
+
+#: inary/cli/install.py:59
+msgid "Name of the component's repository"
+msgstr "Name of the component's repository"
+
+#: inary/cli/install.py:61 inary/cli/upgrade.py:66
+msgid "Fetch upgrades but do not install."
+msgstr "Fetch upgrades but do not install."
+
+#: inary/cli/install.py:63
+msgid "When installing packages, ignore packages and components whose basenames match pattern."
+msgstr "When installing packages, ignore packages and components whose basenames match pattern."
+
+#: inary/cli/install.py:66
+msgid "When installing packages, ignore packages and components whose basenames match any pattern contained in file."
+msgstr "When installing packages, ignore packages and components whose basenames match any pattern contained in file."
+
+#: inary/cli/install.py:93
+#, python-format
+msgid "There is no component named %s"
+msgstr "There is no component named %s"
+
+#: inary/cli/listavailable.py:26
+msgid ""
+"List available packages in the repositories\n"
+"\n"
+"Usage: list-available [ <repo1> <repo2> ... repon ]\n"
+"\n"
+"Gives a brief list of INARY packages published in the specified\n"
+"repositories. If no repository is specified, we list packages in\n"
+"all repositories.\n"
+msgstr ""
+"List available packages in the repositories\n"
+"\n"
+"Usage: list-available [ <repo1> <repo2> ... repon ]\n"
+"\n"
+"Gives a brief list of INARY packages published in the specified\n"
+"repositories. If no repository is specified, we list packages in\n"
+"all repositories.\n"
+
+#: inary/cli/listavailable.py:45
+msgid "list-available options"
+msgstr "list-available options"
+
+#: inary/cli/listavailable.py:47 inary/cli/listcomponents.py:42
+#: inary/cli/listinstalled.py:48 inary/cli/listsources.py:41
+#: inary/cli/listupgrades.py:44 inary/cli/searchfile.py:40
+msgid "Show in long format"
+msgstr "Show in long format"
+
+#: inary/cli/listavailable.py:49
+msgid "List available packages under given component"
+msgstr "List available packages under given component"
+
+#: inary/cli/listavailable.py:51
+msgid "Show uninstalled packages only"
+msgstr "Show uninstalled packages only"
+
+#: inary/cli/listavailable.py:59
+msgid "Installed packages are shown in this color"
+msgstr "Installed packages are shown in this color"
+
+#: inary/cli/listavailable.py:67
+#, python-format
+msgid "Repository : %s\n"
+msgstr "Repository : %s\n"
+
+#: inary/cli/listcomponents.py:24
+msgid ""
+"List available components\n"
+"\n"
+"Usage: list-components\n"
+"\n"
+"Gives a brief list of INARY components published in the\n"
+"repositories.\n"
+msgstr ""
+"List available components\n"
+"\n"
+"Usage: list-components\n"
+"\n"
+"Gives a brief list of INARY components published in the\n"
+"repositories.\n"
+
+#: inary/cli/listcomponents.py:40
+msgid "list-components options"
+msgstr "list-components options"
+
+#: inary/cli/listcomponents.py:44 inary/cli/search.py:47
+msgid "Name of the source or package repository"
+msgstr "Name of the source or package repository"
+
+#: inary/cli/listinstalled.py:24
+msgid ""
+"Print the list of all installed packages\n"
+"\n"
+"Usage: list-installed\n"
+msgstr ""
+"Print the list of all installed packages\n"
+"\n"
+"Usage: list-installed\n"
+
+#: inary/cli/listinstalled.py:40
+msgid "list-installed options"
+msgstr "list-installed options"
+
+#: inary/cli/listinstalled.py:45
+msgid "Only list the installed packages built by the given host"
+msgstr "Only list the installed packages built by the given host"
+
+#: inary/cli/listinstalled.py:50
+msgid "List installed packages under given component"
+msgstr "List installed packages under given component"
+
+#: inary/cli/listinstalled.py:52 inary/cli/listupgrades.py:48
+msgid "Show detailed install info"
+msgstr "Show detailed install info"
+
+#: inary/cli/listinstalled.py:78 inary/cli/listupgrades.py:73
+msgid "Package Name          |St|        Version|  Rel.|  Distro|             Date"
+msgstr "Package Name          |St|        Version|  Rel.|  Distro|             Date"
+
+#: inary/cli/listnewest.py:25
+msgid ""
+"List newest packages in the repositories\n"
+"\n"
+"Usage: list-newest [ <repo1> <repo2> ... repon ]\n"
+"\n"
+"Gives a list of INARY newly published packages in the specified\n"
+"repositories. If no repository is specified, we list the new\n"
+"packages from all repositories.\n"
+msgstr ""
+"List newest packages in the repositories\n"
+"\n"
+"Usage: list-newest [ <repo1> <repo2> ... repon ]\n"
+"\n"
+"Gives a list of INARY newly published packages in the specified\n"
+"repositories. If no repository is specified, we list the new\n"
+"packages from all repositories.\n"
+
+#: inary/cli/listnewest.py:44
+msgid "list-newest options"
+msgstr "list-newest options"
+
+#: inary/cli/listnewest.py:46
+msgid "List new packages added to repository after this given date formatted as yyyy-mm-dd"
+msgstr "List new packages added to repository after this given date formatted as yyyy-mm-dd"
+
+#: inary/cli/listnewest.py:48
+msgid "List new packages added to repository after last nth previous repository update"
+msgstr "List new packages added to repository after last nth previous repository update"
+
+#: inary/cli/listnewest.py:76
+#, python-format
+msgid "Packages added to %s since %s:\n"
+msgstr "Packages added to %s since %s:\n"
+
+#: inary/cli/listnewest.py:78
+#, python-format
+msgid "Packages added to %s:"
+msgstr "Packages added to %s:"
+
+#: inary/cli/listpending.py:22
+msgid ""
+"List pending packages\n"
+"\n"
+"Lists packages waiting to be configured.\n"
+msgstr ""
+"List pending packages\n"
+"\n"
+"Lists packages waiting to be configured.\n"
+
+#: inary/cli/listpending.py:41
+msgid "There are no packages waiting to be configured"
+msgstr "There are no packages waiting to be configured"
+
+#: inary/cli/listrepo.py:23
+msgid ""
+"List repositories\n"
+"\n"
+"Usage: list-repo\n"
+"\n"
+"Lists currently tracked repositories.\n"
+msgstr ""
+"List repositories\n"
+"\n"
+"Usage: list-repo\n"
+"\n"
+"Lists currently tracked repositories.\n"
+
+#: inary/cli/listrepo.py:41 inary/cli/listrepo.py:42
+msgid "active"
+msgstr "active"
+
+#: inary/cli/listrepo.py:41
+msgid "inactive"
+msgstr "inactive"
+
+#: inary/cli/listrepo.py:43 inary/cli/listrepo.py:45
+#, python-format
+msgid "%s [%s]"
+msgstr "%s [%s]"
+
+#: inary/cli/listsources.py:24
+msgid ""
+"List available sources\n"
+"\n"
+"Usage: list-sources\n"
+"\n"
+"Gives a brief list of sources published in the repositories.\n"
+msgstr ""
+"List available sources\n"
+"\n"
+"Usage: list-sources\n"
+"\n"
+"Gives a brief list of sources published in the repositories.\n"
+
+#: inary/cli/listsources.py:39
+msgid "list-sources options"
+msgstr "list-sources options"
+
+#: inary/cli/listupgrades.py:26
+msgid ""
+"List packages to be upgraded\n"
+"\n"
+"Usage: list-upgrades\n"
+"\n"
+"Lists the packages that will be upgraded.\n"
+msgstr ""
+"List packages to be upgraded\n"
+"\n"
+"Usage: list-upgrades\n"
+"\n"
+"Lists the packages that will be upgraded.\n"
+
+#: inary/cli/listupgrades.py:42
+msgid "list-upgrades options"
+msgstr "list-upgrades options"
+
+#: inary/cli/listupgrades.py:46
+msgid "List upgradable packages under given component"
+msgstr "List upgradable packages under given component"
+
+#: inary/cli/listupgrades.py:64 inary/operations/upgrade.py:146
+msgid "No packages to upgrade."
+msgstr "No packages to upgrade."
+
+#: inary/cli/inarycli.py:86
+msgid "Options must precede non-option arguments"
+msgstr "Options must precede non-option arguments"
+
+#: inary/cli/inarycli.py:127
+msgid "No command given"
+msgstr "No command given"
+
+#: inary/cli/inarycli.py:130
+msgid "Command line parsing error"
+msgstr "Command line parsing error"
+
+#: inary/cli/rebuilddb.py:24
+msgid ""
+"Rebuild Databases\n"
+"\n"
+"Usage: rebuilddb [ <package1> <package2> ... <packagen> ]\n"
+"\n"
+"Rebuilds the INARY databases\n"
+"\n"
+"If package specs are given, they should be the names of package\n"
+"dirs under /var/lib/inary\n"
+msgstr ""
+"Rebuild Databases\n"
+"\n"
+"Usage: rebuilddb [ <package1> <package2> ... <packagen> ]\n"
+"\n"
+"Rebuilds the INARY databases\n"
+"\n"
+"If package specs are given, they should be the names of package\n"
+"dirs under /var/lib/inary\n"
+
+#: inary/cli/rebuilddb.py:42
+msgid "rebuild-db options"
+msgstr "rebuild-db options"
+
+#: inary/cli/rebuilddb.py:45
+msgid "Rebuild files database"
+msgstr "Rebuild files database"
+
+#: inary/cli/rebuilddb.py:51
+msgid "Rebuild INARY databases?"
+msgstr "Rebuild INARY databases?"
+
+#: inary/cli/remove.py:25
+msgid ""
+"Remove INARY packages\n"
+"\n"
+"Usage: remove <package1> <package2> ... <packagen>\n"
+"\n"
+"Remove package(s) from your system. Just give the package names to remove.\n"
+"\n"
+"You can also specify components instead of package names, which will be\n"
+"expanded to package names.\n"
+msgstr ""
+"Remove INARY packages\n"
+"\n"
+"Usage: remove <package1> <package2> ... <packagen>\n"
+"\n"
+"Remove package(s) from your system. Just give the package names to remove.\n"
+"\n"
+"You can also specify components instead of package names, which will be\n"
+"expanded to package names.\n"
+
+#: inary/cli/remove.py:43
+msgid "remove options"
+msgstr "remove options"
+
+#: inary/cli/remove.py:46
+msgid "Removes everything including changed config files of the package"
+msgstr "Removes everything including changed config files of the package"
+
+#: inary/cli/remove.py:48
+msgid "Remove component's and recursive components' packages"
+msgstr "Remove component's and recursive components' packages"
+
+#: inary/cli/removerepo.py:21
+msgid ""
+"Remove repositories\n"
+"\n"
+"Usage: remove-repo <repo1> <repo2> ... <repon>\n"
+"\n"
+"Remove all repository information from the system.\n"
+msgstr ""
+"Remove repositories\n"
+"\n"
+"Usage: remove-repo <repo1> <repo2> ... <repon>\n"
+"\n"
+"Remove all repository information from the system.\n"
+
+#: inary/cli/search.py:25
+msgid ""
+"Search packages\n"
+"\n"
+"Usage: search <term1> <term2> ... <termn>\n"
+"\n"
+"Finds a package containing specified search terms\n"
+"in summary, description, and package name fields.\n"
+"Default search is done in package database. Use\n"
+"options to search in install database or source\n"
+"database.\n"
+msgstr ""
+"Search packages\n"
+"\n"
+"Usage: search <term1> <term2> ... <termn>\n"
+"\n"
+"Finds a package containing specified search terms\n"
+"in summary, description, and package name fields.\n"
+"Default search is done in package database. Use\n"
+"options to search in install database or source\n"
+"database.\n"
+
+#: inary/cli/search.py:43
+msgid "search options"
+msgstr "search options"
+
+#: inary/cli/search.py:45
+msgid "Summary and description language"
+msgstr "Summary and description language"
+
+#: inary/cli/search.py:49
+msgid "Search in installdb"
+msgstr "Search in installdb"
+
+#: inary/cli/search.py:51
+msgid "Search in sourcedb"
+msgstr "Search in sourcedb"
+
+#: inary/cli/search.py:53
+msgid "Search in the package name"
+msgstr "Search in the package name"
+
+#: inary/cli/search.py:55
+msgid "Search in the package summary"
+msgstr "Search in the package summary"
+
+#: inary/cli/search.py:57
+msgid "Search in the package description"
+msgstr "Search in the package description"
+
+#: inary/cli/searchfile.py:24
+msgid ""
+"Search for a file\n"
+"\n"
+"Usage: search-file <path1> <path2> ... <pathn>\n"
+"\n"
+"Finds the installed package which contains the specified file.\n"
+msgstr ""
+"Search for a file\n"
+"\n"
+"Usage: search-file <path1> <path2> ... <pathn>\n"
+"\n"
+"Finds the installed package which contains the specified file.\n"
+
+#: inary/cli/searchfile.py:38
+msgid "search-file options"
+msgstr "search-file options"
+
+#: inary/cli/searchfile.py:42
+msgid "Show only package name"
+msgstr "Show only package name"
+
+#: inary/cli/searchfile.py:49
+#, python-format
+msgid "Package %s has file /%s"
+msgstr "Package %s has file /%s"
+
+#: inary/cli/searchfile.py:52
+#, python-format
+msgid "Path '%s' does not belong to an installed package"
+msgstr "Path '%s' does not belong to an installed package"
+
+#: inary/cli/searchfile.py:65
+#, python-format
+msgid "Searching for %s"
+msgstr "Searching for %s"
+
+#: inary/cli/updaterepo.py:24
+msgid ""
+"Update repository databases\n"
+"\n"
+"Usage: update-repo [<repo1> <repo2> ... <repon>]\n"
+"\n"
+"<repoi>: repository name\n"
+"\n"
+"Synchronizes the INARY databases with the current repository.\n"
+"If no repository is given, all repositories are updated.\n"
+msgstr ""
+"Update repository databases\n"
+"\n"
+"Usage: update-repo [<repo1> <repo2> ... <repon>]\n"
+"\n"
+"<repoi>: repository name\n"
+"\n"
+"Synchronizes the INARY databases with the current repository.\n"
+"If no repository is given, all repositories are updated.\n"
+
+#: inary/cli/updaterepo.py:42
+msgid "update-repo options"
+msgstr "update-repo options"
+
+#: inary/cli/updaterepo.py:46
+msgid "Update database in any case"
+msgstr "Update database in any case"
+
+#: inary/cli/upgrade.py:25
+msgid ""
+"Upgrade INARY packages\n"
+"\n"
+"Usage: Upgrade [<package1> <package2> ... <packagen>]\n"
+"\n"
+"<packagei>: package name\n"
+"\n"
+"Upgrades the entire system if no package names are given\n"
+"\n"
+"You may use only package names to specify packages because\n"
+"the package upgrade operation is defined only with respect\n"
+"to repositories. If you have specified a package name, it\n"
+"should exist in the package repositories. If you just want to\n"
+"reinstall a package from a INARY file, use the install command.\n"
+"\n"
+"You can also specify components instead of package names, which will be\n"
+"expanded to package names.\n"
+msgstr ""
+"Upgrade INARY packages\n"
+"\n"
+"Usage: Upgrade [<package1> <package2> ... <packagen>]\n"
+"\n"
+"<packagei>: package name\n"
+"\n"
+"Upgrades the entire system if no package names are given\n"
+"\n"
+"You may use only package names to specify packages because\n"
+"the package upgrade operation is defined only with respect\n"
+"to repositories. If you have specified a package name, it\n"
+"should exist in the package repositories. If you just want to\n"
+"reinstall a package from a INARY file, use the install command.\n"
+"\n"
+"You can also specify components instead of package names, which will be\n"
+"expanded to package names.\n"
+
+#: inary/cli/upgrade.py:50
+msgid "upgrade options"
+msgstr "upgrade options"
+
+#: inary/cli/upgrade.py:54
+msgid "Security related package upgrades only"
+msgstr "Security related package upgrades only"
+
+#: inary/cli/upgrade.py:56
+msgid "Do not update repositories"
+msgstr "Do not update repositories"
+
+#: inary/cli/upgrade.py:62
+msgid "Upgrade component's and recursive components' packages"
+msgstr "Upgrade component's and recursive components' packages"
+
+#: inary/cli/upgrade.py:64
+msgid "Name of the to be upgraded packages' repository"
+msgstr "Name of the to be upgraded packages' repository"
+
+#: inary/cli/upgrade.py:68
+msgid "When upgrading system, ignore packages and components whose basenames match pattern."
+msgstr "When upgrading system, ignore packages and components whose basenames match pattern."
+
+#: inary/cli/upgrade.py:71
+msgid "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
+msgstr "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
+
+#: inary/cli/upgrade.py:85
+msgid "Updating repositories"
+msgstr "Updating repositories"
+
+#: inary/cli/upgrade.py:89
+msgid "Will not update repositories"
+msgstr "Will not update repositories"
+
+#: inary/comariface.py:31
+msgid "comar-api package is not fully installed"
+msgstr "comar-api package is not fully installed"
+
+#: inary/comariface.py:88
+#, python-format
+msgid ""
+"Cannot connect to COMAR: \n"
+"  %s\n"
+msgstr ""
+"Cannot connect to COMAR: \n"
+"  %s\n"
+
+#: inary/comariface.py:97
+#, python-format
+msgid "Configuring %s package"
+msgstr "Configuring %s package"
+
+#: inary/comariface.py:103
+msgid "COMAR package updated. From now on, using new COMAR daemon."
+msgstr "COMAR package updated. From now on, using new COMAR daemon."
+
+#: inary/comariface.py:110
+#, python-format
+msgid "Registering %s comar script"
+msgstr "Registering %s comar script"
+
+#: inary/comariface.py:119 inary/comariface.py:124 inary/comariface.py:137
+#: inary/comariface.py:153 inary/comariface.py:172 inary/comariface.py:183
+#: inary/comariface.py:205 inary/comariface.py:216 inary/comariface.py:223
+#, python-format
+msgid "Script error: %s"
+msgstr "Script error: %s"
+
+#: inary/comariface.py:126
+msgid "Calling post install handlers"
+msgstr "Calling post install handlers"
+
+#: inary/comariface.py:145
+msgid "Running package's post install script"
+msgstr "Running package's post install script"
+
+#: inary/comariface.py:159
+#, python-format
+msgid "Running pre removal operations for %s"
+msgstr "Running pre removal operations for %s"
+
+#: inary/comariface.py:165
+msgid "Running package's pre remove script"
+msgstr "Running package's pre remove script"
+
+#: inary/comariface.py:174
+msgid "Calling pre remove handlers"
+msgstr "Calling pre remove handlers"
+
+#: inary/comariface.py:189
+#, python-format
+msgid "Running post removal operations for %s"
+msgstr "Running post removal operations for %s"
+
+#: inary/comariface.py:198
+msgid "Running package's postremove script"
+msgstr "Running package's postremove script"
+
+#: inary/comariface.py:207
+msgid "Calling post remove handlers"
+msgstr "Calling post remove handlers"
+
+#: inary/comariface.py:218
+msgid "Unregistering comar scripts"
+msgstr "Unregistering comar scripts"
+
+#: inary/config.py:85
+#, python-format
+msgid "Destination directory %s does not exist. Creating it."
+msgstr "Destination directory %s does not exist. Creating it."
+
+#: inary/configfile.py:127
+#, python-format
+msgid "No section by name '%s'"
+msgstr "No section by name '%s'"
+
+#: inary/conflict.py:26 inary/dependency.py:26 inary/replace.py:24
+msgid " version >= "
+msgstr " version >= "
+
+#: inary/conflict.py:28 inary/dependency.py:28 inary/replace.py:26
+msgid " version <= "
+msgstr " version <= "
+
+#: inary/conflict.py:30 inary/dependency.py:30 inary/replace.py:28
+msgid " version "
+msgstr " version "
+
+#: inary/conflict.py:32 inary/dependency.py:32 inary/replace.py:30
+msgid " release >= "
+msgstr " release >= "
+
+#: inary/conflict.py:34 inary/dependency.py:34 inary/replace.py:32
+msgid " release <= "
+msgstr " release <= "
+
+#: inary/conflict.py:36 inary/dependency.py:36 inary/replace.py:34
+msgid " release "
+msgstr " release "
+
+#: inary/constants.py:30
+#, python-format
+msgid "Can't rebind constant: %s"
+msgstr "Can't rebind constant: %s"
+
+#: inary/constants.py:36
+#, python-format
+msgid "Can't unbind constant: %s"
+msgstr "Can't unbind constant: %s"
+
+#: inary/db/componentdb.py:87
+#, python-format
+msgid "Component %s not found"
+msgstr "Component %s not found"
+
+#: inary/db/groupdb.py:66 inary/db/groupdb.py:75
+#, python-format
+msgid "Group %s not found"
+msgstr "Group %s not found"
+
+#: inary/db/installdb.py:37
+msgid "installed"
+msgstr "installed"
+
+#: inary/db/installdb.py:37
+msgid "installed-pending"
+msgstr "installed-pending"
+
+#: inary/db/installdb.py:54
+#, python-format
+msgid ""
+"State: %s\n"
+"Version: %s, Release: %s\n"
+msgstr ""
+"State: %s\n"
+"Version: %s, Release: %s\n"
+
+#: inary/db/installdb.py:58
+#, python-format
+msgid "Distribution: %s, Install Time: %s\n"
+msgstr "Distribution: %s, Install Time: %s\n"
+
+#: inary/db/installdb.py:94
+#, python-format
+msgid "Installation info for package '%s' is broken. Reinstall it to fix this problem."
+msgstr "Installation info for package '%s' is broken. Reinstall it to fix this problem."
+
+#: inary/db/installdb.py:335
+#, python-format
+msgid "Package %s is not installed"
+msgstr "Package %s is not installed"
+
+#: inary/db/itembyrepo.py:40
+#, python-format
+msgid "%s not found in any repository."
+msgstr "%s not found in any repository."
+
+#: inary/db/itembyrepo.py:50
+#, python-format
+msgid "Repo item %s not found"
+msgstr "Repo item %s not found"
+
+#: inary/db/itembyrepo.py:60 inary/db/itembyrepo.py:71 inary/db/itembyrepo.py:81
+#, python-format
+msgid "Repository %s does not exist."
+msgstr "Repository %s does not exist."
+
+#: inary/db/packagedb.py:144 inary/db/packagedb.py:151
+#, python-format
+msgid "Package %s not found."
+msgstr "Package %s not found."
+
+#: inary/db/repodb.py:168
+#, python-format
+msgid "%s repository needs to be updated"
+msgstr "%s repository needs to be updated"
+
+#: inary/db/repodb.py:174
+msgid "Error parsing repository index information. Index file does not exist or is malformed."
+msgstr "Error parsing repository index information. Index file does not exist or is malformed."
+
+#: inary/db/repodb.py:264
+#, python-format
+msgid "Repository '%s' is not compatible with your distribution. Repository is disabled."
+msgstr "Repository '%s' is not compatible with your distribution. Repository is disabled."
+
+#: inary/fetcher.py:147
+msgid "Urlgrabber needs to be installed to run this command"
+msgstr "Urlgrabber needs to be installed to run this command"
+
+#: inary/fetcher.py:150
+msgid "Filename error"
+msgstr "Filename error"
+
+#: inary/fetcher.py:153
+#, python-format
+msgid "Access denied to write to destination directory: \"%s\""
+msgstr "Access denied to write to destination directory: \"%s\""
+
+#: inary/fetcher.py:156
+#, python-format
+msgid "Access denied to destination file: \"%s\""
+msgstr "Access denied to destination file: \"%s\""
+
+#: inary/fetcher.py:170
+#, python-format
+msgid "Could not fetch destination file \"%s\": %s"
+msgstr "Could not fetch destination file \"%s\": %s"
+
+#: inary/fetcher.py:174
+msgid "A problem occurred. Please check the archive address and/or permissions again."
+msgstr "A problem occurred. Please check the archive address and/or permissions again."
+
+#: inary/fetcher.py:207
+#, python-format
+msgid "Proxy configuration has been found for '%s' protocol"
+msgstr "Proxy configuration has been found for '%s' protocol"
+
+#: inary/fetcher.py:214
+#, python-format
+msgid "Bandwidth usage is limited to %s KB/s"
+msgstr "Bandwidth usage is limited to %s KB/s"
+
+#: inary/fetcher.py:227
+msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
+msgstr "Remote file can not be reached. Previously downloaded part of the file will be removed."
+
+#: inary/fetcher.py:236
+msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
+msgstr "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
+
+#: inary/file.py:35
+#, python-format
+msgid "URL %s already downloaded as %s"
+msgstr "URL %s already downloaded as %s"
+
+#: inary/file.py:42
+#, python-format
+msgid "No signature found for %s"
+msgstr "No signature found for %s"
+
+#: inary/file.py:50
+#, python-format
+msgid " invalid for %s"
+msgstr " invalid for %s"
+
+#: inary/file.py:72
+msgid "uri must have type either URI or string"
+msgstr "uri must have type either URI or string"
+
+#: inary/file.py:136
+#, python-format
+msgid "Fetching %s"
+msgstr "Fetching %s"
+
+#: inary/file.py:140
+#, python-format
+msgid "Copying %s to transfer dir"
+msgstr "Copying %s to transfer dir"
+
+#: inary/file.py:145
+#, python-format
+msgid "File '%s' not found."
+msgstr "File '%s' not found."
+
+#: inary/file.py:166
+#, python-format
+msgid "File integrity of %s compromised."
+msgstr "File integrity of %s compromised."
+
+#: inary/file.py:190
+msgid "File mode must be either File.read or File.write"
+msgstr "File mode must be either File.read or File.write"
+
+#: inary/file.py:195
+msgid "Remote write not implemented"
+msgstr "Remote write not implemented"
+
+#: inary/file.py:247 inary/file.py:250
+#, python-format
+msgid "ERROR: gpg --detach-sig %s failed"
+msgstr "ERROR: gpg --detach-sig %s failed"
+
+#: inary/graph.py:26
+#, python-format
+msgid "Encountered cycle %s"
+msgstr "Encountered cycle %s"
+
+#: inary/history.py:47
+#, python-format
+msgid "%s repository is updated."
+msgstr "%s repository is updated."
+
+#: inary/history.py:67
+#, python-format
+msgid "%s is upgraded from %s to %s with delta."
+msgstr "%s is upgraded from %s to %s with delta."
+
+#: inary/history.py:69
+#, python-format
+msgid "%s is upgraded from %s to %s."
+msgstr "%s is upgraded from %s to %s."
+
+#: inary/history.py:71
+#, python-format
+msgid "%s %s is removed."
+msgstr "%s %s is removed."
+
+#: inary/history.py:73
+#, python-format
+msgid "%s %s is installed."
+msgstr "%s %s is installed."
+
+#: inary/history.py:75
+#, python-format
+msgid "%s %s is reinstalled."
+msgstr "%s %s is reinstalled."
+
+#: inary/history.py:77
+#, python-format
+msgid "%s is downgraded from %s to %s."
+msgstr "%s is downgraded from %s to %s."
+
+#: inary/history.py:104 inary/history.py:126
+msgid "Unknown package operation"
+msgstr "Unknown package operation"
+
+#: inary/index.py:99
+#, fuzzy, python-format
+msgid "Sorting: %s "
+msgstr "Creating %s..."
+
+#: inary/index.py:186
+#, python-format
+msgid "Adding package to index: %s"
+msgstr "Adding package to index: %s"
+
+#: inary/index.py:202
+#, python-format
+msgid "Package %s: metadata corrupt, skipping..."
+msgstr "Package %s: metadata corrupt, skipping..."
+
+#: inary/index.py:247
+msgid "Adding groups.xml to index"
+msgstr "Adding groups.xml to index"
+
+#: inary/index.py:253
+msgid "Adding components.xml to index"
+msgstr "Adding components.xml to index"
+
+#: inary/index.py:263
+msgid "Adding distribution.xml to index"
+msgstr "Adding distribution.xml to index"
+
+#: inary/index.py:284
+#, python-format
+msgid "Adding %s to source index"
+msgstr "Adding %s to source index"
+
+#: inary/metadata.py:78
+#, python-format
+msgid "Distribution: %s, Dist. Release: %s\n"
+msgstr "Distribution: %s, Dist. Release: %s\n"
+
+#: inary/metadata.py:80
+#, python-format
+msgid "Architecture: %s, Installed Size: %s"
+msgstr "Architecture: %s, Installed Size: %s"
+
+#: inary/metadata.py:86
+#, python-format
+msgid ", Package Size: %s"
+msgstr ", Package Size: %s"
+
+#: inary/mirrors.py:46
+#, python-format
+msgid "Mirrors file %s does not exist. Could not resolve mirrors://"
+msgstr "Mirrors file %s does not exist. Could not resolve mirrors://"
+
+#: inary/operations/build.py:114
+#, python-format
+msgid "Path %s belongs in multiple packages"
+msgstr "Path %s belongs in multiple packages"
+
+#: inary/operations/build.py:190
+#, python-format
+msgid "Source URI: %s"
+msgstr "Source URI: %s"
+
+#: inary/operations/build.py:194
+#, python-format
+msgid "Source %s not found in any active repository."
+msgstr "Source %s not found in any active repository."
+
+#: inary/operations/build.py:320
+#, python-format
+msgid "pspec.xml avoids this package from building for '%s'"
+msgstr "pspec.xml avoids this package from building for '%s'"
+
+#: inary/operations/build.py:323
+#, python-format
+msgid "Building source package: %s"
+msgstr "Building source package: %s"
+
+#: inary/operations/build.py:341
+msgid "ccache detected..."
+msgstr "ccache detected..."
+
+#: inary/operations/build.py:343
+msgid "IceCream detected. Make sure your daemon is up and running..."
+msgstr "IceCream detected. Make sure your daemon is up and running..."
+
+#: inary/operations/build.py:377
+#, python-format
+msgid "Rebuilding for %s"
+msgstr "Rebuilding for %s"
+
+#: inary/operations/build.py:500
+msgid "Cannot find component.xml in remote directory, Source is now part of unknown component"
+msgstr "Cannot find component.xml in remote directory, Source is now part of unknown component"
+
+#: inary/operations/build.py:508
+msgid "Cannot find component.xml in upper directory, Source is now part of unknown component"
+msgstr "Cannot find component.xml in upper directory, Source is now part of unknown component"
+
+#: inary/operations/build.py:522
+msgid "Unpacking archive(s)..."
+msgstr "Unpacking archive(s)..."
+
+#: inary/operations/build.py:530
+#, python-format
+msgid " unpacked (%s)"
+msgstr " unpacked (%s)"
+
+#: inary/operations/build.py:535
+msgid "Setting up source..."
+msgstr "Setting up source..."
+
+#: inary/operations/build.py:540
+msgid "Building source..."
+msgstr "Building source..."
+
+#: inary/operations/build.py:545
+msgid "Testing package..."
+msgstr "Testing package..."
+
+#: inary/operations/build.py:549
+msgid "Installing..."
+msgstr "Installing..."
+
+#: inary/operations/build.py:628
+#, python-format
+msgid "Unable to read Actions Script (%s): %s"
+msgstr "Unable to read Actions Script (%s): %s"
+
+#: inary/operations/build.py:631
+#, python-format
+msgid "SyntaxError in Actions Script (%s): %s"
+msgstr "SyntaxError in Actions Script (%s): %s"
+
+#: inary/operations/build.py:661
+#, python-format
+msgid "Unable to read COMAR script (%s): %s"
+msgstr "Unable to read COMAR script (%s): %s"
+
+#: inary/operations/build.py:664
+#, python-format
+msgid "SyntaxError in COMAR file (%s): %s"
+msgstr "SyntaxError in COMAR file (%s): %s"
+
+#: inary/operations/build.py:699
+#, python-format
+msgid "Sandbox violation: %s (%s -> %s)"
+msgstr "Sandbox violation: %s (%s -> %s)"
+
+#: inary/operations/build.py:715 inary/util.py:518
+#, python-format
+msgid "ERROR: WorkDir (%s) does not exist\n"
+msgstr "ERROR: WorkDir (%s) does not exist\n"
+
+#: inary/operations/build.py:725
+msgid "Sandbox enabled build..."
+msgstr "Sandbox enabled build..."
+
+#: inary/operations/build.py:749
+msgid "Sandbox violation result:"
+msgstr "Sandbox violation result:"
+
+#: inary/operations/build.py:754
+msgid "Sandbox violations!"
+msgstr "Sandbox violations!"
+
+#: inary/operations/build.py:760
+#, python-format
+msgid "unable to call function from actions: %s"
+msgstr "unable to call function from actions: %s"
+
+#: inary/operations/build.py:774
+#, python-format
+msgid "Source package '%s' defines a relative 'Path' element: %s"
+msgstr "Source package '%s' defines a relative 'Path' element: %s"
+
+#: inary/operations/build.py:778
+#, python-format
+msgid "Source package '%s' defines multiple 'Path' tags for %s"
+msgstr "Source package '%s' defines multiple 'Path' tags for %s"
+
+#: inary/operations/build.py:807
+msgid "Safety switch: following extra packages in system.devel will be installed: "
+msgstr "Safety switch: following extra packages in system.devel will be installed: "
+
+#: inary/operations/build.py:812
+msgid "Safety switch: the component system.devel cannot be found"
+msgstr "Safety switch: the component system.devel cannot be found"
+
+#: inary/operations/build.py:821
+msgid "Unsatisfied Build Dependencies:"
+msgstr "Unsatisfied Build Dependencies:"
+
+#: inary/operations/build.py:825
+msgid "Cannot build package due to unsatisfied build dependencies"
+msgstr "Cannot build package due to unsatisfied build dependencies"
+
+#: inary/operations/build.py:830
+#, python-format
+msgid "Build dependency %s cannot be satisfied"
+msgstr "Build dependency %s cannot be satisfied"
+
+#: inary/operations/build.py:832
+msgid "Do you want to install the unsatisfied build dependencies"
+msgstr "Do you want to install the unsatisfied build dependencies"
+
+#: inary/operations/build.py:833
+msgid "Installing build dependencies."
+msgstr "Installing build dependencies."
+
+#: inary/operations/build.py:839
+msgid "Ignoring build dependencies."
+msgstr "Ignoring build dependencies."
+
+#: inary/operations/build.py:849
+#, python-format
+msgid "Patch file is missing: %s\n"
+msgstr "Patch file is missing: %s\n"
+
+#: inary/operations/build.py:851
+#, python-format
+msgid "Patch file is empty: %s"
+msgstr "Patch file is empty: %s"
+
+#: inary/operations/build.py:867
+#, python-format
+msgid "Applying patch: %s"
+msgstr "Applying patch: %s"
+
+#: inary/operations/build.py:988
+#, python-format
+msgid "/%s has suid bit set"
+msgstr "/%s has suid bit set"
+
+#: inary/operations/build.py:1067
+#, python-format
+msgid "No user named '%s' found on the system"
+msgstr "No user named '%s' found on the system"
+
+#: inary/operations/build.py:1073
+#, python-format
+msgid "No group named '%s' found on the system"
+msgstr "No group named '%s' found on the system"
+
+#: inary/operations/build.py:1080
+#, python-format
+msgid "There are abandoned files under the install dir (%s):"
+msgstr "There are abandoned files under the install dir (%s):"
+
+#: inary/operations/build.py:1116
+#, python-format
+msgid "Ignoring empty package %s"
+msgstr "Ignoring empty package %s"
+
+#: inary/operations/build.py:1120
+#, python-format
+msgid "Building package: %s"
+msgstr "Building package: %s"
+
+#: inary/operations/build.py:1139 inary/operations/delta.py:59
+#, python-format
+msgid "Creating %s..."
+msgstr "Creating %s..."
+
+#: inary/operations/build.py:1186
+msgid "Cleaning build directory..."
+msgstr "Cleaning build directory..."
+
+#: inary/operations/build.py:1189
+msgid "Keeping build directory"
+msgstr "Keeping build directory"
+
+#: inary/operations/build.py:1279
+msgid "Action script error caught."
+msgstr "Action script error caught."
+
+#: inary/operations/build.py:1283
+#, python-format
+msgid "*** %d error(s), %d warning(s)"
+msgstr "*** %d error(s), %d warning(s)"
+
+#: inary/operations/build.py:1366
+#, python-format
+msgid "Last state was '%s'"
+msgstr "Last state was '%s'"
+
+#: inary/operations/delta.py:43
+#, python-format
+msgid "The file '%s' belongs to a different package other than '%s'. Skipping it..."
+msgstr "The file '%s' belongs to a different package other than '%s'. Skipping it..."
+
+#: inary/operations/delta.py:49
+#, python-format
+msgid "Package '%s' has the same release number with the new package. Skipping it..."
+msgstr "Package '%s' has the same release number with the new package. Skipping it..."
+
+#: inary/operations/delta.py:69
+#, python-format
+msgid "All files in the package '%s' are different from the files in the new package. Skipping it..."
+msgstr "All files in the package '%s' are different from the files in the new package. Skipping it..."
+
+#: inary/operations/delta.py:113
+#, python-format
+msgid "New package '%s' exists in the list of old packages. Skipping it..."
+msgstr "New package '%s' exists in the list of old packages. Skipping it..."
+
+#: inary/operations/emerge.py:35
+msgid "No packages to emerge."
+msgstr "No packages to emerge."
+
+#: inary/operations/emerge.py:50
+msgid ""
+"The following list of packages will be installed\n"
+"from repository in the respective order to satisfy dependencies:\n"
+msgstr ""
+"The following list of packages will be installed\n"
+"from repository in the respective order to satisfy dependencies:\n"
+
+#: inary/operations/emerge.py:53
+msgid ""
+"The following list of packages will be built and\n"
+"installed in the respective order to satisfy dependencies:\n"
+msgstr ""
+"The following list of packages will be built and\n"
+"installed in the respective order to satisfy dependencies:\n"
+
+#: inary/operations/emerge.py:61 inary/operations/install.py:82
+msgid "There are extra packages due to dependencies. Do you want to continue?"
+msgstr "There are extra packages due to dependencies. Do you want to continue?"
+
+#: inary/operations/emerge.py:95
+#, python-format
+msgid "Cannot find source package: %s"
+msgstr "Cannot find source package: %s"
+
+#: inary/operations/helper.py:51
+#, python-format
+msgid "Selected packages [%s] are in conflict with each other."
+msgstr "Selected packages [%s] are in conflict with each other."
+
+#: inary/operations/helper.py:57
+#, python-format
+msgid "[%s conflicts with: %s]\n"
+msgstr "[%s conflicts with: %s]\n"
+
+#: inary/operations/helper.py:59
+#, python-format
+msgid ""
+"The following packages have conflicts:\n"
+"%s"
+msgstr ""
+"The following packages have conflicts:\n"
+"%s"
+
+#: inary/operations/helper.py:62
+msgid "Remove the following conflicting packages?"
+msgstr "Remove the following conflicting packages?"
+
+#: inary/operations/helper.py:63
+msgid "Conflicting packages should be removed to continue"
+msgstr "Conflicting packages should be removed to continue"
+
+#: inary/operations/history.py:84 inary/operations/history.py:94
+#, python-format
+msgid "%s could not be found"
+msgstr "%s could not be found"
+
+#: inary/operations/history.py:97 inary/package.py:107 inary/sourcearchive.py:110
+#, python-format
+msgid "%s [cached]"
+msgstr "%s [cached]"
+
+#: inary/operations/history.py:145
+msgid "Following packages will be installed:\n"
+msgstr "Following packages will be installed:\n"
+
+#: inary/operations/history.py:148
+msgid "Following packages will be removed:\n"
+msgstr "Following packages will be removed:\n"
+
+#: inary/operations/history.py:150 inary/operations/history.py:164
+#: inary/operations/install.py:200 inary/operations/remove.py:72
+#: inary/operations/upgrade.py:181
+msgid "Do you want to continue?"
+msgstr "Do you want to continue?"
+
+#: inary/operations/history.py:156 inary/operations/install.py:95
+#: inary/operations/upgrade.py:192
+#, python-format
+msgid "Downloading %d / %d"
+msgstr "Downloading %d / %d"
+
+#: inary/operations/history.py:162
+msgid ""
+"\n"
+"Following packages could not be found in repositories and are not cached:\n"
+msgstr ""
+"\n"
+"Following packages could not be found in repositories and are not cached:\n"
+
+#: inary/operations/install.py:47 inary/operations/install.py:134
+msgid "The following package(s) are already installed and are not going to be installed again:"
+msgstr "The following package(s) are already installed and are not going to be installed again:"
+
+#: inary/operations/install.py:53 inary/operations/install.py:213
+msgid "No packages to install."
+msgstr "No packages to install."
+
+#: inary/operations/install.py:71
+msgid "Following packages will be installed:"
+msgstr "Following packages will be installed:"
+
+#: inary/operations/install.py:76 inary/operations/upgrade.py:168
+#, python-format
+msgid "Total size of package(s): %.2f %s"
+msgstr "Total size of package(s): %.2f %s"
+
+#: inary/operations/install.py:107 inary/operations/upgrade.py:206
+#, python-format
+msgid "Installing %d / %d"
+msgstr "Installing %d / %d"
+
+#: inary/operations/install.py:121
+msgid "Mixing file names and package names not supported yet."
+msgstr "Mixing file names and package names not supported yet."
+
+#: inary/operations/install.py:165
+#, python-format
+msgid "Package %s is not compatible with your distribution release %s %s."
+msgstr "Package %s is not compatible with your distribution release %s %s."
+
+#: inary/operations/install.py:169
+#, python-format
+msgid "Package %s (%s) is not compatible with your %s architecture."
+msgstr "Package %s (%s) is not compatible with your %s architecture."
+
+#: inary/operations/install.py:192
+#, python-format
+msgid "External dependencies not satisfied: %s"
+msgstr "External dependencies not satisfied: %s"
+
+#: inary/operations/install.py:197
+msgid "The following packages will be installed in order to satisfy dependencies:"
+msgstr "The following packages will be installed in order to satisfy dependencies:"
+
+#: inary/operations/install.py:201
+msgid "External dependencies not satisfied"
+msgstr "External dependencies not satisfied"
+
+#: inary/operations/install.py:244
+msgid "Installation order: "
+msgstr "Installation order: "
+
+#: inary/operations/install.py:279 inary/specfile.py:274
+#, python-format
+msgid "%s dependency of package %s is not satisfied"
+msgstr "%s dependency of package %s is not satisfied"
+
+#: inary/operations/remove.py:43
+msgid "Safety switch prevents the removal of following packages:\n"
+msgstr "Safety switch prevents the removal of following packages:\n"
+
+#: inary/operations/remove.py:48 inary/operations/upgrade.py:372
+msgid "Safety switch: The component system.base cannot be found."
+msgstr "Safety switch: The component system.base cannot be found."
+
+#: inary/operations/remove.py:55
+#, python-format
+msgid "Package %s does not exist. Cannot remove."
+msgstr "Package %s does not exist. Cannot remove."
+
+#: inary/operations/remove.py:59
+msgid "No packages to remove."
+msgstr "No packages to remove."
+
+#: inary/operations/remove.py:68
+msgid ""
+"The following list of packages will be removed\n"
+"in the respective order to satisfy dependencies:\n"
+msgstr ""
+"The following list of packages will be removed\n"
+"in the respective order to satisfy dependencies:\n"
+
+#: inary/operations/remove.py:73
+msgid "Package removal declined"
+msgstr "Package removal declined"
+
+#: inary/operations/remove.py:85
+#, python-format
+msgid "Package %s is not installed. Cannot remove."
+msgstr "Package %s is not installed. Cannot remove."
+
+#: inary/operations/remove.py:120
+msgid "Conflicts remain"
+msgstr "Conflicts remain"
+
+#: inary/operations/remove.py:128
+msgid "Obsoleted packages remaining"
+msgstr "Obsoleted packages remaining"
+
+#: inary/operations/remove.py:132
+msgid "Replaced package remains"
+msgstr "Replaced package remains"
+
+#: inary/operations/upgrade.py:52
+msgid "You must restart the following service(s) manually for the updated software to take effect:"
+msgstr "You must restart the following service(s) manually for the updated software to take effect:"
+
+#: inary/operations/upgrade.py:59
+msgid "You must restart your system for the updates in the following package(s) to take effect:"
+msgstr "You must restart your system for the updates in the following package(s) to take effect:"
+
+#: inary/operations/upgrade.py:81
+msgid "Warning: package *name* ends with '.inary'"
+msgstr "Warning: package *name* ends with '.inary'"
+
+#: inary/operations/upgrade.py:84
+#, python-format
+msgid "Package %s is not installed."
+msgstr "Package %s is not installed."
+
+#: inary/operations/upgrade.py:88
+#, python-format
+msgid "Package %s is not available in repositories."
+msgstr "Package %s is not available in repositories."
+
+#: inary/operations/upgrade.py:105
+#, python-format
+msgid "Package %s is already at the latest release %s."
+msgstr "Package %s is already at the latest release %s."
+
+#: inary/operations/upgrade.py:163
+msgid "The following packages will be upgraded:"
+msgstr "The following packages will be upgraded:"
+
+#: inary/operations/upgrade.py:174
+msgid "There are extra packages due to dependencies."
+msgstr "There are extra packages due to dependencies."
+
+#: inary/operations/upgrade.py:254
+#, python-format
+msgid "Dependency %s of %s cannot be satisfied"
+msgstr "Dependency %s of %s cannot be satisfied"
+
+#: inary/operations/upgrade.py:255
+msgid "Upgrade is not possible."
+msgstr "Upgrade is not possible."
+
+#: inary/operations/upgrade.py:349
+msgid "Safety switch forces the installation of following packages:"
+msgstr "Safety switch forces the installation of following packages:"
+
+#: inary/operations/upgrade.py:365
+msgid "Safety switch forces the upgrade of following packages:"
+msgstr "Safety switch forces the upgrade of following packages:"
+
+#: inary/package.py:68
+#, python-format
+msgid "Cannot open package file: %s"
+msgstr "Cannot open package file: %s"
+
+#: inary/package.py:89
+#, python-format
+msgid "Unsupported package format: %s"
+msgstr "Unsupported package format: %s"
+
+#: inary/package.py:103
+#, python-format
+msgid ""
+"There was a problem while fetching '%s'.\n"
+"The package may have been upgraded. Please try to upgrade the package."
+msgstr ""
+"There was a problem while fetching '%s'.\n"
+"The package may have been upgraded. Please try to upgrade the package."
+
+#: inary/pxml/autoxml.py:78
+#, python-format
+msgid "At least one '%s' tag should have local text"
+msgstr "At least one '%s' tag should have local text"
+
+#: inary/pxml/autoxml.py:85
+#, python-format
+msgid "'%s' language of tag '%s' is empty"
+msgstr "'%s' language of tag '%s' is empty"
+
+#: inary/pxml/autoxml.py:113
+msgid "LocalText: unable to get either current or default locale"
+msgstr "LocalText: unable to get either current or default locale"
+
+#: inary/pxml/autoxml.py:119 inary/pxml/autoxml.py:134
+msgid "Tag should have at least the current locale, or failing that an English or Turkish version"
+msgstr "Tag should have at least the current locale, or failing that an English or Turkish version"
+
+#: inary/pxml/autoxml.py:372
+#, python-format
+msgid "autoxml.check: '%s' errors"
+msgstr "autoxml.check: '%s' errors"
+
+#: inary/pxml/autoxml.py:427 inary/pxml/autoxml.py:437
+#, python-format
+msgid "autoxml.parse: String '%s' has errors"
+msgstr "autoxml.parse: String '%s' has errors"
+
+#: inary/pxml/autoxml.py:451 inary/pxml/autoxml.py:461
+#, python-format
+msgid "autoxml.read: File '%s' has errors"
+msgstr "autoxml.read: File '%s' has errors"
+
+#: inary/pxml/autoxml.py:469
+msgid "autoxml.write: object validation has failed"
+msgstr "autoxml.write: object validation has failed"
+
+#: inary/pxml/autoxml.py:477
+#, python-format
+msgid "autoxml.write: File encoding '%s' has errors"
+msgstr "autoxml.write: File encoding '%s' has errors"
+
+#: inary/pxml/autoxml.py:527
+#, python-format
+msgid "gen_tag: unrecognized tag type %s in spec"
+msgstr "gen_tag: unrecognized tag type %s in spec"
+
+#: inary/pxml/autoxml.py:575 inary/pxml/autoxml.py:586
+#, python-format
+msgid "Mandatory variable %s not available"
+msgstr "Mandatory variable %s not available"
+
+#: inary/pxml/autoxml.py:656
+msgid "Type mismatch: read text cannot be decoded"
+msgstr "Type mismatch: read text cannot be decoded"
+
+#: inary/pxml/autoxml.py:660 inary/pxml/autoxml.py:669
+#, python-format
+msgid "Mandatory token %s not available"
+msgstr "Mandatory token %s not available"
+
+#: inary/pxml/autoxml.py:674
+#, python-format
+msgid "Type mismatch. Expected %s, got %s"
+msgstr "Type mismatch. Expected %s, got %s"
+
+#: inary/pxml/autoxml.py:704 inary/pxml/autoxml.py:825
+msgid "Type mismatch: DOM cannot be decoded"
+msgstr "Type mismatch: DOM cannot be decoded"
+
+#: inary/pxml/autoxml.py:707 inary/pxml/autoxml.py:723 inary/pxml/autoxml.py:737
+#: inary/pxml/autoxml.py:828 inary/pxml/autoxml.py:842 inary/pxml/autoxml.py:856
+msgid "Mandatory argument not available"
+msgstr "Mandatory argument not available"
+
+#: inary/pxml/autoxml.py:720 inary/pxml/autoxml.py:839
+msgid "Object cannot be encoded"
+msgstr "Object cannot be encoded"
+
+#: inary/pxml/autoxml.py:734 inary/pxml/autoxml.py:853
+msgid "Object cannot be formatted"
+msgstr "Object cannot be formatted"
+
+#: inary/pxml/autoxml.py:750
+msgid "List type must contain only one element"
+msgstr "List type must contain only one element"
+
+#: inary/pxml/autoxml.py:763 inary/pxml/autoxml.py:784
+#, python-format
+msgid "Mandatory list \"%s\" under \"%s\" node is empty."
+msgstr "Mandatory list \"%s\" under \"%s\" node is empty."
+
+#: inary/pxml/xmlext.py:79
+msgid "getNodeText: Expected text node, got something else!"
+msgstr "getNodeText: Expected text node, got something else!"
+
+#: inary/pxml/xmlfile.py:60
+#, python-format
+msgid "String '%s' has invalid XML"
+msgstr "String '%s' has invalid XML"
+
+#: inary/pxml/xmlfile.py:87
+#, python-format
+msgid "Unable to read file (%s): %s"
+msgstr "Unable to read file (%s): %s"
+
+#: inary/pxml/xmlfile.py:89 inary/specfile.py:443
+#, python-format
+msgid "File '%s' has invalid XML"
+msgstr "File '%s' has invalid XML"
+
+#: inary/scenarioapi/package.py:67
+#, python-format
+msgid "No inary package: %s* found."
+msgstr "No inary package: %s* found."
+
+#: inary/scenarioapi/repoops.py:28
+#, python-format
+msgid "Repo already has package named %s."
+msgstr "Repo already has package named %s."
+
+#: inary/scenarioapi/repoops.py:52 inary/scenarioapi/repoops.py:59
+#, python-format
+msgid "Repo does not have package named %s."
+msgstr "Repo does not have package named %s."
+
+#: inary/sourcearchive.py:62
+#, python-format
+msgid "Fetching source from: %s"
+msgstr "Fetching source from: %s"
+
+#: inary/sourcearchive.py:73
+#, python-format
+msgid "Source archive is stored: %s/%s"
+msgstr "Source archive is stored: %s/%s"
+
+#: inary/sourcearchive.py:79
+#, python-format
+msgid "Trying fallback address: %s"
+msgstr "Trying fallback address: %s"
+
+#: inary/sourcearchive.py:90
+#, python-format
+msgid "%s mirrors are not defined."
+msgstr "%s mirrors are not defined."
+
+#: inary/sourcearchive.py:95
+#, python-format
+msgid "Fetching source from mirror: %s"
+msgstr "Fetching source from mirror: %s"
+
+#: inary/sourcearchive.py:101
+#, python-format
+msgid "Could not fetch source from %s mirrors."
+msgstr "Could not fetch source from %s mirrors."
+
+#: inary/sourcearchive.py:119
+msgid "unpack: check_file_hash failed"
+msgstr "unpack: check_file_hash failed"
+
+#: inary/sourcearchive.py:124
+#, python-format
+msgid "Unknown archive type '%s' is given for '%s'."
+msgstr "Unknown archive type '%s' is given for '%s'."
+
+#: inary/sourcearchive.py:127
+#, python-format
+msgid "Inary needs %s to unpack this archive but it is not installed."
+msgstr "Inary needs %s to unpack this archive but it is not installed."
+
+#: inary/specfile.py:164
+#, python-format
+msgid "URI: %s, type: %s, sha1sum: %s"
+msgstr "URI: %s, type: %s, sha1sum: %s"
+
+#: inary/specfile.py:194 inary/specfile.py:197
+msgid " or "
+msgstr " or "
+
+#: inary/specfile.py:372 inary/specfile.py:458
+#, python-format
+msgid "Summary: %s\n"
+msgstr "Summary: %s\n"
+
+#: inary/specfile.py:373 inary/specfile.py:459
+#, python-format
+msgid "Description: %s\n"
+msgstr "Description: %s\n"
+
+#: inary/specfile.py:374 inary/specfile.py:460
+#, python-format
+msgid "Licenses: %s\n"
+msgstr "Licenses: %s\n"
+
+#: inary/specfile.py:375 inary/specfile.py:461
+#, python-format
+msgid "Component: %s\n"
+msgstr "Component: %s\n"
+
+#: inary/specfile.py:376
+msgid "Provides: "
+msgstr "Provides: "
+
+#: inary/specfile.py:380
+msgid "Dependencies: "
+msgstr "Dependencies: "
+
+#: inary/specfile.py:434
+msgid "translations.xml file is badly formed."
+msgstr "translations.xml file is badly formed."
+
+#: inary/specfile.py:462
+msgid "Build Dependencies: "
+msgstr "Build Dependencies: "
+
+#: inary/uri.py:78
+msgid "setAuthInfo needs a tuple (user, pass)"
+msgstr "setAuthInfo needs a tuple (user, pass)"
+
+#: inary/util.py:189 inary/util.py:201
+msgid "Running "
+msgstr "Running "
+
+#: inary/util.py:193 inary/util.py:219
+#, python-format
+msgid "return value for \"%s\" is %s"
+msgstr "return value for \"%s\" is %s"
+
+#: inary/util.py:393
+#, python-format
+msgid "Including external link '%s'"
+msgstr "Including external link '%s'"
+
+#: inary/util.py:395
+#, python-format
+msgid "Including directory '%s'"
+msgstr "Including directory '%s'"
+
+#: inary/util.py:481
+msgid "You don't have necessary read permissions"
+msgstr "You don't have necessary read permissions"
+
+#: inary/util.py:483
+#, python-format
+msgid "Cannot calculate SHA1 hash of %s"
+msgstr "Cannot calculate SHA1 hash of %s"
+
+#: inary/util.py:495
+#, python-format
+msgid "Compression type is not valid: '%s'"
+msgstr "Compression type is not valid: '%s'"
+
+#: inary/util.py:501
+#, python-format
+msgid "Error while decompressing %s: %s"
+msgstr "Error while decompressing %s: %s"
+
+#: inary/util.py:544
+#, python-format
+msgid "ERROR: patch (%s) failed"
+msgstr "ERROR: patch (%s) failed"
+
+#: inary/util.py:546
+#, python-format
+msgid "ERROR: patch (%s) failed: %s"
+msgstr "ERROR: patch (%s) failed: %s"
+
+#: inary/util.py:556
+#, python-format
+msgid "strip command failed for file '%s'!"
+msgstr "strip command failed for file '%s'!"
+
+#: inary/util.py:563
+#, python-format
+msgid "chrpath command failed for file '%s'!"
+msgstr "chrpath command failed for file '%s'!"
+
+#: inary/util.py:570
+#, python-format
+msgid "objcopy (keep-debug) command failed for file '%s'!"
+msgstr "objcopy (keep-debug) command failed for file '%s'!"
+
+#: inary/util.py:576
+#, python-format
+msgid "objcopy (add-debuglink) command failed for file '%s'!"
+msgstr "objcopy (add-debuglink) command failed for file '%s'!"
+
+#: inary/util.py:666
+#, python-format
+msgid "Invalid package name: %s"
+msgstr "Invalid package name: %s"
+
+#: inary/util.py:711
+#, python-format
+msgid "Invalid delta package name: %s"
+msgstr "Invalid delta package name: %s"
+
+#: inary/version.py:64
+#, python-format
+msgid "Invalid version string: '%s'"
+msgstr "Invalid version string: '%s'"

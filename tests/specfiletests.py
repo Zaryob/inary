@@ -1,7 +1,7 @@
 import unittest
 import os
-import pisi.specfile as specfile
-import pisi.util as util
+import inary.specfile as specfile
+import inary.util as util
 
 class SpecFileTestCase(unittest.TestCase):
     def setUp(self):

@@ -1,8 +1,8 @@
-
-from pisi.actionsapi import pisitools
-
-WorkDir = "skeleton"
+from spam.actionsapi import pythonmodules
+WorkDir = "gonullu"
 
 def install():
-    pisitools.dobin("skeleton.py")
-    pisitools.rename("/usr/bin/skeleton.py", "bar")
+    pythonmodules.install(pyVer='3')
+
+def afterinstall():
+    print('hello')

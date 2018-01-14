@@ -10,59 +10,59 @@
 # Please read the COPYING file.
 #
 
-import testcase
-import pisi
+from . import testcase
+import inary
 
 class FilesDBTestCase(testcase.TestCase):
 
-    filesdb = pisi.db.filesdb.FilesDB()
+    filesdb = inary.db.filesdb.FilesDB()
 
     def testHasFile(self):
         assert not self.filesdb.has_file("usr/bin/ethtool")
-        pisi.api.install(["ethtool"])
+        inary.api.install(["ethtool"])
         assert self.filesdb.has_file("usr/bin/ethtool")
-        pisi.api.remove(["ethtool"])
+        inary.api.remove(["ethtool"])
         assert not self.filesdb.has_file("usr/bin/ethtool")
 
     def testGetFile(self):
-        pisi.api.install(["ethtool"])
+        inary.api.install(["ethtool"])
         pkg, path = self.filesdb.get_file("usr/bin/ethtool")
         assert pkg == "ethtool"
         assert path == "usr/bin/ethtool"
-        pisi.api.remove(["ethtool"])
+        inary.api.remove(["ethtool"])
         assert not self.filesdb.has_file("usr/bin/ethtool")
 
     def testAddRemoveFiles(self):
-        fileinfo1 = pisi.files.FileInfo()
-        fileinfo1.path = "etc/pisi/pisi.conf"
-        fileinfo2 = pisi.files.FileInfo()
-        fileinfo2.path = "etc/pisi/mirrors.conf"
+        fileinfo1 = inary.files.FileInfo()
+        fileinfo1.path = "etc/inary/pisi.conf"
+        fileinfo2 = inary.files.FileInfo()
+        fileinfo2.path = "etc/inary/mirrors.conf"
         
-        files = pisi.files.Files()
+        files = inary.files.Files()
         files.list.append(fileinfo1)
         files.list.append(fileinfo2)
 
-        assert not self.filesdb.has_file("etc/pisi/pisi.conf")
-        assert not self.filesdb.has_file("etc/pisi/mirrors.conf")
+        assert not self.filesdb.has_file("etc/inary/pisi.conf")
+        assert not self.filesdb.has_file("etc/inary/mirrors.conf")
 
-        self.filesdb.add_files("pisi", files)
+        self.filesdb.add_files("inary", files)
 
-        assert self.filesdb.has_file("etc/pisi/pisi.conf")
-        assert self.filesdb.has_file("etc/pisi/mirrors.conf")
+        assert self.filesdb.has_file("etc/inary/pisi.conf")
+        assert self.filesdb.has_file("etc/inary/mirrors.conf")
 
-        pkg, path = self.filesdb.get_file("etc/pisi/pisi.conf")
-        assert pkg == "pisi"
+        pkg, path = self.filesdb.get_file("etc/inary/pisi.conf")
+        assert pkg == "inary"
 
         # FIXME: inconsistency in filesdb.py add_remove and remove_remove parameters
         self.filesdb.remove_files(files.list)
 
-        assert not self.filesdb.has_file("etc/pisi/pisi.conf")
-        assert not self.filesdb.has_file("etc/pisi/mirrors.conf")
+        assert not self.filesdb.has_file("etc/inary/pisi.conf")
+        assert not self.filesdb.has_file("etc/inary/mirrors.conf")
         
     def testSearchFile(self):
         assert not self.filesdb.search_file("ethtool")
-        pisi.api.install(["ethtool"])
+        inary.api.install(["ethtool"])
         found = self.filesdb.search_file("ethtool")
         pkg, files = found[0]
         assert set(files) == set(['usr/bin/ethtool'])
-        pisi.api.remove(["ethtool"])
+        inary.api.remove(["ethtool"])

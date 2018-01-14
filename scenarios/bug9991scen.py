@@ -16,26 +16,26 @@
 # All blacklisted packages should be excluded from upgrade plans.
 
 
-from pisi.scenarioapi.scenario import *
+from spam.scenarioapi.scenario import *
 
 DBUS = "dbus"
 GRUB = "grub"
-PISI = "pisi"
+SPAM = "spam"
 KERNEL = "kernel"
 BLUEZ = "bluez"
 
 let_repo_had(KERNEL)
 let_repo_had(BLUEZ)
 let_repo_had(DBUS, with_partof("system.base"))
-let_repo_had(PISI, with_partof("system.base"))
-let_pisi_had(DBUS, PISI, KERNEL, BLUEZ)
+let_repo_had(SPAM, with_partof("system.base"))
+let_spam_had(DBUS, SPAM, KERNEL, BLUEZ)
 
 def run():
     repo_version_bumped(KERNEL)
     repo_version_bumped(BLUEZ)
     repo_version_bumped(DBUS)
-    repo_version_bumped(PISI)
+    repo_version_bumped(SPAM)
     repo_updated_index()
 
-    # The packages in /etc/pisi/blacklist should not be upgraded
-    pisi_upgraded()
+    # The packages in /etc/spam/blacklist should not be upgraded
+    spam_upgraded()

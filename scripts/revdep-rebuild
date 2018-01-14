@@ -1,206 +1,243 @@
-#!/bin/bash
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# Author: Marcin Bojara <marcin@inarylinux.org>
 
-# revdep-rebuild: Reverse dependency rebuilder.
-# Author: Stanislav Brabec <utx@gentoo.org>
+import os
+import re
+import sys
+import glob
+import hashlib
+import subprocess
+import inary.context as ctx
 
-# Adapt to Pardus
-# Author: Ozan Caglayan <ozan@pardus.org.tr>
+from optparse import OptionParser
+from inary.db.installdb import InstallDB
 
-# Mask of specially evaluated libraries (exactly one space separated).
-LD_LIBRARY_MASK="libodbcinst.so libodbc.so libjava.so libjvm.so"
+CACHEDIR = "/var/cache/inary/"
+VRPATTERN = re.compile("(.*)-(\d+)$")
+SOLIBPATTERN = re.compile("(.*?\.so[\.\d]*)$")
+DOCPKGPATTERN = re.compile("(.*)-docs?$")
+SEARCH_DIRS="/lib /bin /sbin /usr/lib /usr/bin /usr/sbin /usr/libexec /usr/local /usr/qt* /usr/kde/*/bin /usr/lib/MozillaFirefox /usr/kde/*/lib /usr/*-*-linux-gnu /opt".split()
+EXCLUDE_DIRS="/opt/ptsp /usr/lib/xorg/nvidia* /usr/lib/debug".split()
+LIST="%s/.revdep-rebuild" % os.environ["HOME"]
 
-# List of directories to be searched (feel free to edit it)
-# Note /usr/libexec and /usr/local/subprefix contradicts FHS, but are present
-SEARCH_DIRS="/lib /bin /sbin /usr/lib /usr/bin /usr/sbin /usr/libexec /usr/local /usr/qt* /usr/kde/*/bin /usr/lib/MozillaFirefox /usr/kde/*/lib /usr/*-*-linux-gnu /opt"
-EXCLUDE_DIRS="/opt/ptsp /usr/lib/xorg/nvidia* /usr/lib/debug"
+NO = "\x1b[0;0m"
+BR = "\x1b[0;01m"
+CY = "\x1b[36;01m"
+GR = "\x1b[32;01m"
+RD = "\x1b[31;01m"
+YL = "\x1b[33;01m"
+BL = "\x1b[34;01m"
 
-# Base of temporary files names.
-LIST=~/.revdep-rebuild
+if __name__ == "__main__":
+    parser = OptionParser("Usage: %prog [options]")
+    parser.add_option("-f", "--force", action="store_true", help="remove old revdep-rebuild files")
+    parser.add_option("-n", "--soname", action="store_true", default=None, help="recompile packages using library with SONAME instead of broken library \
+                                                                            (SONAME providing library must be present in the system)")
+    parser.add_option("-e", "--soname-regexp", action="store_true", default=None, help="the same as --soname, but accepts regular expresions")
+    parser.add_option("-p", "--package", action="store_true", default=None, help="shows all reverse deps for PACKAGE (PACKAGE must be installed in the system)")
+    (options, args) = parser.parse_args()
 
-shopt -s nullglob
-shopt -s expand_aliases
-unalias -a
+    glob_paths = []
+    for path in SEARCH_DIRS:
+        if "*" in path:
+            glob_paths.extend(glob.glob(path))
+    if glob_paths: SEARCH_DIRS.extend(glob_paths)
+    SEARCH_DIRS = [p for p in SEARCH_DIRS if not "*" in p and os.path.isdir(p)]
+    glob_paths = []
+    for path in EXCLUDE_DIRS:
+        if "*" in path:
+            glob_paths.extend(glob.glob(path))
+    if glob_paths: EXCLUDE_DIRS.extend(glob_paths)
+    EXCLUDE_DIRS = [p for p in EXCLUDE_DIRS if not "*" in p]
 
-NO="\x1b[0;0m"
-BR="\x1b[0;01m"
-CY="\x1b[36;01m"
-GR="\x1b[32;01m"
-RD="\x1b[31;01m"
-YL="\x1b[33;01m"
-BL="\x1b[34;01m"
+    if options.force:
+        for f in  glob.glob("%s/.revdep-rebuild*" % os.environ["HOME"]): os.remove(f)
 
-alias echo_v=echo
+    if not options.soname and not options.soname_regexp and not options.package:
+        search_broken = True
+    elif options.soname and options.soname_regexp:
+        print("%suse --soname and --soname-regexp separately%s" % (RD, NO))
+        sys.exit(1)
+    elif options.package and (options.soname or options.soname_regexp):
+        print("%suse --package and (--soname or --soname-regexp) separately%s" % (RD, NO))
+        sys.exit(1)
+    else:
+        search_broken = False
 
-SONAME="not found"
-SONAME_GREP=fgrep
-SEARCH_BROKEN=true
+    print("\n%sCollecting installed packages and files...%s" % (GR, NO))
 
-while : ; do
-	case "$1" in
-	-h | --help )
-		echo "Usage: $0 [OPTIONS] [--]"
-		echo
-		echo "Broken reverse dependency checker."
-		echo
-		echo
-        echo "      --force          remove old revdep-rebuild files"
-		echo
-		echo "      --soname SONAME  recompile packages using library with SONAME instead"
-		echo "                       of broken library (SONAME providing library must be"
-		echo "                       present in the system)"
-		echo "      --soname-regexp SONAME"
-		echo "                       the same as --soname, but accepts grep-style regexp"
-		echo "  -q, --quiet          be less verbose"
-		echo
-		exit 0
-		;;
-	-q | --quiet )
-		alias echo_v=:
-		shift
-		;;
-	--soname=* )
-		SONAME="${1#*=}"
-		SEARCH_BROKEN=false
-		shift
-		;;
-	--soname )
-		SONAME="$2"
-		SEARCH_BROKEN=false
-		shift 2
-		;;
-	--soname-regexp=* )
-		SONAME="${1#*=}"
-		SONAME_GREP=grep
-		SEARCH_BROKEN=false
-		shift
-		;;
-	--soname-regexp )
-		SONAME="$2"
-		SONAME_GREP=grep
-		SEARCH_BROKEN=false
-		shift 2
-		;;
-	--force )
-		FORCE=true
-		shift
-		;;
-	-- )
-		shift
-		break
-		;;
-	* )
-		break
-		;;
-	esac
-done
+    installdb = InstallDB()
+    idb = installdb.installed_db
+    pkgfs = {}
+    pkgls = {}
+    for pkg, vr in idb.iteritems():
+        if re.search(DOCPKGPATTERN, pkg): continue
+        ver = re.sub(VRPATTERN, "\\1", vr)
+        files_xml = open(os.path.join(installdb.package_path(pkg), ctx.const.files_xml)).read()
+        pkgfs[pkg] = re.compile('<Path>(.*?)</Path>', re.I).findall(files_xml)
+        pkgls[pkg] = re.compile('<Path>(.*?\.so[\.\d]*)</Path>', re.I).findall(files_xml)
 
-function set_trap () {
-	trap "rm_temp $1" SIGHUP SIGINT SIGQUIT SIGABRT SIGTERM
-}
+    print("  done.")
 
-function rm_temp () {
-	echo " terminated."
-	echo "Removing incomplete $1."
-	rm $1
-	echo
-	exit 1
-}
+    print("\n%sCollecting old paths info...%s" % (GR, NO))
 
-if $FORCE ; then
-	rm -f /root/.revdep-rebuild*
-fi
+    oldpkgfs = {}
+    try:
+        if os.path.isdir(ctx.config.old_paths_cache_dir()):
+            for ls in os.listdir(ctx.config.old_paths_cache_dir()):
+                with open("%s/%s" % (ctx.config.old_paths_cache_dir(), ls)) as f:
+                    ver = f.readline().split(":").pop().strip()
+                    paths = [l.strip() for l in f.readlines()]
+                oldpkgfs["%s-%s (previous)" % (ls, ver)] = paths
+    except AttributeError:
+        print("%sYour inary version is too old.%s" % (GR, NO))
 
-if $SEARCH_BROKEN ; then
-	SONAME_SEARCH="$SONAME"
-	LLIST=$LIST
-	HEAD_TEXT="broken by any package update"
-	OK_TEXT="Dynamic linking on your system is consistent"
-	WORKING_TEXT=" consistency"
-else
-	SONAME_SEARCH="	$SONAME "
-	LLIST=${LIST}_$(echo "$SONAME_SEARCH$SONAME" | md5sum | head -c 8)
-	HEAD_TEXT="using given shared object name"
-	OK_TEXT="There are no dynamic links to $SONAME"
-	WORKING_TEXT=""
-fi
+    print("  done.")
 
-echo
-echo "Checking reverse dependencies..."
+    if search_broken:
+        soname_search = ["not"]
+        llist = LIST
+        head_text = "broken by any package update"
+        ok_text = "Dynamic linking on your system is consistent"
+        working_text = " consistency"
+    else:
+        if options.package:
+            try:
+                soname_search = [os.path.basename(p) for p in pkgls[args[0]]]
+            except KeyError:
+                print("%s Package %s not found!%s" % (RD, args[0], NO))
+                sys.exit(1)
+        else:
+            soname_search = args
+        sonames = " ".join(soname_search)
+        m = hashlib.md5()
+        m.update(sonames)
+        llist = LIST + "_" + m.hexdigest()[:8]
+        head_text = "using given shared object(s) name"
+        ok_text = "There are no dynamic links to %s" % sonames
+        working_text = ""
 
-echo
-echo -n -e "${GR}Collecting system binaries and libraries...${NO}"
-if [ -f $LIST.1_files ] ; then
-	echo " using existing $LIST.1_files."
-else
-	set_trap "$LIST.1_files"
-    EXCLUDED_DIRS=
-    for d in $EXCLUDE_DIRS; do
-        EXCLUDED_DIRS+="-path $d -prune -o "
-    done
-	find $SEARCH_DIRS $EXCLUDED_DIRS -type f \( -perm /+u+x -o -name '*.so' -o -name '*.so.*' \) 2>/dev/null >$LIST.1_files
-	echo -e " done.\n  ($LIST.1_files)"
-fi
+    print("\nChecking reverse dependencies..."
+    if options.package: print "  libs:", ", ".join(sorted(soname_search)))
 
-if $SEARCH_BROKEN ; then
-	echo
-	echo -n -e "${GR}Collecting complete LD_LIBRARY_PATH...${NO}"
-	if [ -f $LIST.2_ldpath ] ; then
-	echo " using existing $LIST.2_ldpath."
-	else
-	set_trap "$LIST.2_ldpath"
-	(
-		grep '.*\.so\(\|\..*\)$' <$LIST.1_files | sed 's:/[^/]*$::'
-		sed '/^#/d;s/#.*$//' </etc/ld.so.conf
-	) | sort -u |
-	tr '\n' : | tr -d '\r' | sed 's/:$//' >$LIST.2_ldpath
-	echo -e " done.\n  ($LIST.2_ldpath)"
-	fi
-	export COMPLETE_LD_LIBRARY_PATH="$(cat $LIST.2_ldpath)"
-fi
+    print("\n%sCollecting system binaries and libraries...%s" % (GR, NO))
 
-echo
-echo -n -e "${GR}Checking dynamic linking$WORKING_TEXT...${NO}"
-if [ -f $LLIST.3_rebuild ] ; then
-	echo " using existing $LLIST.3_rebuild."
-else
-	echo_v
-	set_trap "$LLIST.3_rebuild"
-	LD_MASK="\\(	$(echo "$LD_LIBRARY_MASK" | sed 's/\./\\./g;s/ / \\|	/g') \\)"
-	echo -n >$LLIST.3_rebuild
-	cat $LIST.1_files | while read FILE ; do
-	# Note: double checking seems to be faster than single
-	# with complete path (special add ons are rare).
-	if ldd "$FILE" 2>/dev/null | grep -v "$LD_MASK" |
-		$SONAME_GREP -q "$SONAME_SEARCH" ; then
-		if $SEARCH_BROKEN ; then
-		if LD_LIBRARY_PATH="$COMPLETE_LD_LIBRARY_PATH" \
-		ldd "$FILE" 2>/dev/null | grep -v "$LD_MASK" |
-			$SONAME_GREP -q "$SONAME_SEARCH" ; then
-			echo "$FILE" >>$LLIST.3_rebuild
-			echo_v "  broken $FILE (requires $(ldd "$FILE" | sed -n 's/	\(.*\) => not found$/\1/p' | tr '\n' ' ' | sed 's/ $//' ))"
-		fi
-		else
-		echo "$FILE" >>$LLIST.3_rebuild
-		echo_v "  found $FILE"
-		fi
-	fi
-	done
-	echo -e " done.\n  ($LLIST.3_rebuild)"
-fi
+    if os.path.isfile("%s.1_files" % llist):
+        print("  using existing %s.1_files." % llist)
+        with open("%s.1_files" % llist) as f:
+            ffiles = [l.strip() for l in f.readlines()]
+    else:
+        ffiles = []
+        for dir in SEARCH_DIRS:
+            for root, dirs, files in os.walk(dir):
+                if root in EXCLUDE_DIRS: continue
+                for f in files:
+                    path = os.path.join(root, f)
+                    if os.access(path, os.X_OK) or re.search(SOLIBPATTERN, f):
+                        ffiles.append(path)
+        ffiles = sorted(ffiles)
+        open("%s.1_files" % llist, "w").write("\n".join(ffiles))
+    print("  done. (%s.1_files)" % llist)
 
-echo
-echo -n -e "${GR}Determining package names$WORKING_TEXT...${NO}"
-if [ -f $LLIST.4_names ] ; then
-	echo " using existing $LLIST.4_names."
-else
-    echo_v
-    set_trap "$LLIST.4_names"
-    for i in `cat $LLIST.3_rebuild`
-    do
-        /usr/bin/pisi -q search-file $i >> $LLIST.tmp
-    done
-    cat $LLIST.tmp | uniq | sort > $LLIST.4_names
-    rm -f $LLIST.tmp
-    echo -e " done.\n  ($LIST.4_names)"
-fi
-cat $LLIST.4_names
+    if search_broken:
+        print("\n%sCollecting complete LD_LIBRARY_PATH...%s" % (GR, NO))
+        if os.path.isfile("%s.2_ldpath" % llist):
+            print("  using existing %s.2_ldpath." % llist)
+            with open("%s.2_ldpath" % llist) as f:
+                ldpaths = f.readline().split(":")
+        else:
+            ldpaths = []
+            for f in ffiles:
+                if re.search(SOLIBPATTERN, f) and not os.path.dirname(f) in ldpaths:
+                    ldpaths.append(os.path.dirname(f))
+            for f in os.listdir("/etc/ld.so.conf.d"):
+                with open("/etc/ld.so.conf.d/%s" % f) as cf:
+                    for line in [l.strip() for l in cf.readlines()]:
+                        if line.startswith("/") and not line in ldpaths and os.path.isdir(line):
+                            ldpaths.append(line)
+            ldpaths = sorted(ldpaths)
+            open("%s.2_ldpath" % llist, "w").write(":".join(ldpaths))
+        os.environ["COMPLETE_LD_LIBRARY_PATH"] = ":".join(ldpaths)
+        print("  done. (%s.2_ldpath)" % llist)
+
+    print("\n%sChecking dynamic linking%s...%s" % (GR, working_text, NO))
+
+    if os.path.isfile("%s.3_rebuild" % llist):
+        print("  using existing %s.3_rebuild." % llist)
+        with open("%s.3_rebuild" % llist) as f:
+            rebuild = dict((l, p.strip().split(";")) for l, p in [line.split(":") for line in f.readlines()])
+    else:
+        rebuild = {}
+        for f in ffiles:
+            if os.path.islink(f): continue
+            p = subprocess.Popen('LD_LIBRARY_PATH="$COMPLETE_LD_LIBRARY_PATH" ldd %s' % f, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            out, err = p.communicate()
+            for line in out.split("\n"):
+                if "=>" in line:
+                    src, dst = line.split("=>")
+                    src = src.strip()
+                    dst = dst.split()[0].strip()
+                    add = False
+                    if search_broken and dst in soname_search:
+                        add = True
+                        print "  broken %s requires %s" % (f, src)
+                    elif options.soname_regexp:
+                        for pattern in soname_search:
+                            if re.search(pattern, src):
+                                add = True
+                                print "  found %s requires %s" % (f, src)
+                    elif src in soname_search:
+                        add = True
+                        print "  found %s requires %s" % (f, src)
+                    if add:
+                        try:
+                            rebuild[src].append(f)
+                        except KeyError:
+                            rebuild[src] = [f]
+
+        open("%s.3_rebuild" % llist, "w").write("\n".join(["%s:%s" % (l, ";".join(p)) for l, p in sorted(rebuild.items())]))
+    print("  done. (%s.3_rebuild)" % llist)
+
+    print("\n%sDetermining package names%s...%s" % (GR, working_text, NO))
+
+    if os.path.isfile("%s.4_lnames" % llist) and os.path.isfile("%s.4_rdnames" % llist):
+        print("  using existing %s.4_names." % llist)
+        with open("%s.4_lnames" % llist) as f:
+            lnames = dict((l, p.strip().split(";")) for l, p in [line.split(":") for line in f.readlines()])
+        with open("%s.4_rdnames" % llist) as f:
+            rdnames = dict((l, p.strip().split(";")) for l, p in [line.split(":") for line in f.readlines()])
+    else:
+        lnames = {}
+        rdnames = {}
+        for lib, paths in sorted(rebuild.items()):
+            oldfound = False
+            for oldpkgname, oldpaths in sorted(oldpkgfs.items()):
+                if lib in [os.path.basename(f) for f in oldpaths]:
+                    lnames[lib] = [oldpkgname]
+                    oldfound = True
+                    break
+            if not oldfound:
+                libpat = re.compile(re.sub("\d+", r"\d+", lib))
+                for pkg, fs in pkgfs.iteritems():
+                    if lib in [os.path.basename(f) for f in fs] or (not options.package and re.search(libpat, " ".join(fs))):
+                        try:
+                            if not pkg in lnames[lib]: lnames[lib].append(pkg)
+                        except KeyError:
+                            lnames[lib] = [pkg]
+            for pkg, fs in pkgfs.iteritems():
+                for path in paths:
+                    if path[1:] in fs:
+                        try:
+                            print("  %s has %s and it needs %s from %s" % (pkg, path, lib, " | ".join(lnames[lib])))
+                        except KeyError:
+                            print("%s  %s has %s and it needs %s, but %s not belongs to any installed package.%s" % (YL, pkg, path, lib, lib, NO))
+                        try:
+                            if not pkg in rdnames[lib]: rdnames[lib].append(pkg)
+                        except KeyError:
+                            rdnames[lib] = [pkg]
+
+        open("%s.4_lnames" % llist, "w").write("\n".join(["%s:%s" % (l, ";".join(p)) for l, p in sorted(lnames.items())]))
+        open("%s.4_rdnames" % llist, "w").write("\n".join(["%s:%s" % (l, ";".join(p)) for l, p in sorted(rdnames.items())]))
+    print("  done. (%s.4_lnames, %s.4_rdnames)" % (llist, llist))

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 #
 # Copyright (C) 2005, 2006 TUBITAK/UEKAE
 #
@@ -12,8 +12,8 @@
 import os
 import sys
 
-import pisi.uri
-import pisi.specfile
+import inary.uri
+import inary.specfile
 
 def scanPSPEC(folder):
     packages = []
@@ -35,7 +35,7 @@ if __name__ == "__main__":
     try:
         packages = scanPSPEC(sys.argv[1])
     except:
-        print "Usage: cleanArchives.py path2repo"
+        print("Usage: cleanArchives.py path2repo")
         sys.exit(1)
 
     if "--dry-run" in sys.argv:
@@ -47,17 +47,17 @@ if __name__ == "__main__":
 
     files = []
     for package in packages:
-        spec = pisi.specfile.SpecFile()
+        spec = inary.specfile.SpecFile()
         spec.read(os.path.join(package, "pspec.xml"))
 
-        URI = pisi.uri.URI(spec.source.archive.uri)
+        URI = inary.uri.URI(spec.source.archive.uri)
         files.append(URI.filename())
 
-    archiveFiles = os.listdir("/var/cache/pisi/archives/")
-    unneededFiles = filter(lambda x:x not in files, archiveFiles)
+    archiveFiles = os.listdir("/var/cache/inary/archives/")
+    unneededFiles = [x for x in archiveFiles if x not in files]
 
     for i in unneededFiles:
         if not clean:
-            print("/var/cache/pisi/archives/%s" % i)
+            print(("/var/cache/inary/archives/%s" % i))
         else:
-            cleanArchives("/var/cache/pisi/archives/%s" % i)
+            cleanArchives("/var/cache/inary/archives/%s" % i)

@@ -10,8 +10,8 @@
 # Please read the COPYING file.
 #
 
-import testcase
-import pisi.db.itembyrepo
+from . import testcase
+import inary.db.itembyrepo
 
 class TestDB:
     def __init__(self):
@@ -26,8 +26,8 @@ class TestDB:
         self.obsoletes["pardus-2007"] = ["wengophone", "rar"]
         self.obsoletes["contrib-2007"] = ["xara"]
 
-        self.tdb = pisi.db.itembyrepo.ItemByRepo(self.packages)
-        self.odb = pisi.db.itembyrepo.ItemByRepo(self.obsoletes)
+        self.tdb = inary.db.itembyrepo.ItemByRepo(self.packages)
+        self.odb = inary.db.itembyrepo.ItemByRepo(self.obsoletes)
 
         # original item_repos in ItemByRepo uses repodb.list_repos
         def item_repos(repo=None):
@@ -67,7 +67,7 @@ class ItemByRepoTestCase(testcase.TestCase):
         assert repo == "contrib-2007"
 
     def testItemRepos(self):
-        db = pisi.db.itembyrepo.ItemByRepo({})
+        db = inary.db.itembyrepo.ItemByRepo({})
         assert db.item_repos("caracal") == ["caracal"]
         # repos were created by testcase.py
         assert db.item_repos() == ['pardus-2007', 'contrib-2007', 'pardus-2007-src']

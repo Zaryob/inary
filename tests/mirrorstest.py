@@ -10,7 +10,7 @@
 
 import unittest
 
-from pisi.mirrors import Mirrors
+from inary.mirrors import Mirrors
 
 class MirrorsTestCase(unittest.TestCase):
     def testGetMirrors(self):

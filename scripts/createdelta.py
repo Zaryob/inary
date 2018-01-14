@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Copyright (C) 2005, 2006 TUBITAK/UEKAE
@@ -12,14 +12,14 @@
 
 import os
 import glob
-import pisi
-import pisi.util as util
-from pisi.version import Version
-from pisi.delta import create_delta_package
+import inary
+import inary.util as util
+from inary.version import Version
+from inary.delta import create_delta_package
 
 def minsandmaxes():
 
-    packages = map(lambda x: os.path.basename(x).split(".pisi")[0], set(glob.glob("*.pisi")) - set(glob.glob("*.delta.pisi")))
+    packages = [os.path.basename(x).split(".inary")[0] for x in set(glob.glob("*.inary")) - set(glob.glob("*.delta.inary"))]
 
     versions = {}
     for file in packages:
@@ -28,7 +28,7 @@ def minsandmaxes():
 
     mins = {}
     maxs = {}
-    for pkg in versions.keys():
+    for pkg in list(versions.keys()):
         mins[pkg] = min(versions[pkg])
         maxs[pkg] = max(versions[pkg])
 
@@ -37,14 +37,14 @@ def minsandmaxes():
 if __name__ == "__main__":
 
     mi, ma = minsandmaxes()
-    for pkg in mi.keys():
-        old_pkg = "%s-%s.pisi" % (pkg, str(mi[pkg]))
-        new_pkg = "%s-%s.pisi" % (pkg, str(ma[pkg]))
+    for pkg in list(mi.keys()):
+        old_pkg = "%s-%s.inary" % (pkg, str(mi[pkg]))
+        new_pkg = "%s-%s.inary" % (pkg, str(ma[pkg]))
         name, version = util.parse_package_name(pkg)
 
         if not old_pkg == new_pkg:
         # skip if same 
-            if not os.path.exists("%s-%s-%s.delta.pisi" % (name, str(mi[pkg].build), str(ma[pkg].build))):
+            if not os.path.exists("%s-%s-%s.delta.inary" % (name, str(mi[pkg].build), str(ma[pkg].build))):
             # skip if delta exists
-                print "%s --> Min: %s Max: %s \n %s-%s-%s.delta.pisi" % (pkg, old_pkg, new_pkg, name, str(mi[pkg].build), str(ma[pkg].build))
+                print(("%s --> Min: %s Max: %s \n %s-%s-%s.delta.inary" % (pkg, old_pkg, new_pkg, name, str(mi[pkg].build), str(ma[pkg].build))))
                 create_delta_package(old_pkg, new_pkg)

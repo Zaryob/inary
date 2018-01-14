@@ -15,8 +15,8 @@ import shutil
 import time
 
 pspecTemplate = """<?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
-<PISI>
+<!DOCTYPE SPAM SYSTEM "http://www.pardus.org.tr/projeler/spam/spam-spec.dtd">
+<SPAM>
     <Source>
         <Name>%(package)s</Name>
         <Homepage>%(homepage)s</Homepage>
@@ -50,7 +50,7 @@ pspecTemplate = """<?xml version="1.0" ?>
             <Email>%(packager_email)s</Email>
         </Update>
     </History>
-</PISI>
+</SPAM>
 """
 
 componentsTemplate = """
@@ -68,23 +68,23 @@ componentsTemplate = """
 """
 
 componentTemplate = """
-<PISI>
+<SPAM>
     <Name>%(name)s</Name>
-</PISI>
+</SPAM>
 """
 
 actionsTemplate = """
-from pisi.actionsapi import pisitools
+from spam.actionsapi import spamtools
 
 WorkDir = "skeleton"
 
 def install():
-    pisitools.dobin("skeleton.py")
-    pisitools.rename("/usr/bin/skeleton.py", "%s")
+    spamtools.dobin("skeleton.py")
+    spamtools.rename("/usr/bin/skeleton.py", "%s")
 """
 
 distributionTemplate = """
-<PISI>
+<SPAM>
     <SourceName>%(sourcename)s</SourceName>
     <Version>%(version)s</Version>
     <Description>%(description)s</Description>
@@ -92,7 +92,7 @@ distributionTemplate = """
     <Obsoletes>
         %(obsoletes)s
     </Obsoletes>
-</PISI>
+</SPAM>
 """
 
 class Component:
@@ -139,7 +139,7 @@ class Package:
         summary = "%s is a very useful package" % self.name
         description = "%s is a very useful package that is known for its usefulness." % self.name
         sha1sum = "cc64dfa6e068fe1f6fb68a635878b1ea21acfac7"
-        archive = "http://cekirdek.uludag.org.tr/~faik/pisi/skeleton.tar.gz"
+        archive = "http://cekirdek.uludag.org.tr/~faik/spam/skeleton.tar.gz"
         date = time.strftime("%Y-%m-%d")
         partof = self.partof
 
@@ -200,7 +200,7 @@ class Repository:
         os.chdir(cur_dir)
 
     def create_components_xml(self):
-        xml_content = "<PISI>\n    <Components>"
+        xml_content = "<SPAM>\n    <Components>"
 
         for root, dirs, files in os.walk("."):
             if "component.xml" in files:
@@ -211,7 +211,7 @@ class Repository:
                                    "summary": component,
                                    "description": component}
 
-        xml_content += "    </Components>\n</PISI>\n"
+        xml_content += "    </Components>\n</SPAM>\n"
 
         open("components.xml", "w").write(xml_content)
 
@@ -270,8 +270,8 @@ class BuildFarm:
     def create_index(self, repo):
         binrepo = "%s-bin" % repo
         shutil.copy("%s/distribution.xml" % repo, binrepo)
-        os.system("pisi index %s --skip-signing -o %s/pisi-index.xml" % (repo, repo))
-        os.system("pisi index --skip-sources --skip-signing -o %s/pisi-index.xml %s %s" % (binrepo, binrepo, repo))
+        os.system("spam index %s --skip-signing -o %s/spam-index.xml" % (repo, repo))
+        os.system("spam index --skip-sources --skip-signing -o %s/spam-index.xml %s %s" % (binrepo, binrepo, repo))
 
     def build(self, repos):
         for repo in repos:
@@ -279,7 +279,7 @@ class BuildFarm:
             os.mkdir(binrepo)
             for root, dirs, files in os.walk(repo):
                 if "pspec.xml" in files:
-                    os.system("pisi build %s/%s -O %s" % (root, "pspec.xml", binrepo))
+                    os.system("spam build %s/%s -O %s" % (root, "pspec.xml", binrepo))
             self.create_index(repo)
 
 if __name__ == "__main__":

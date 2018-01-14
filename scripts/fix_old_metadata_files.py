@@ -1,11 +1,11 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import xml.dom.minidom as mdom
 import codecs
 import os
 
-folder = "/var/lib/pisi"
+folder = "/var/lib/inary"
 
 def saveMetadata(data, file):
     if data:
@@ -28,9 +28,9 @@ def addText(dom, parent, text):
 
 def fixMetadata(metadata):
     dom = mdom.parse(metadata)
-    pisi = dom.documentElement
+    inary = dom.documentElement
     
-    package = getTags(pisi, "Package")[0]
+    package = getTags(inary, "Package")[0]
     history = getTags(package, "History")[0]
     item = package.removeChild(history)
     
@@ -56,6 +56,6 @@ def findMetadata():
 
 for file in findMetadata():
     if saveMetadata(fixMetadata(file), file):
-        print "Güncellendi          : ", file
+        print(("Güncellendi          : ", file))
     else:
-        print "Hiç bir şey yapılmadı: ", file
+        print(("Hiç bir şey yapılmadı: ", file))

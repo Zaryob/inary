@@ -1,8 +1,8 @@
 import unittest
 import os
 
-from pisi import metadata
-from pisi import util
+from inary import metadata
+from inary import util
 
 class MetadataTestCase(unittest.TestCase):
 

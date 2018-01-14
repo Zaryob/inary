@@ -1,0 +1,16 @@
+2018-01-14 Suleyman POYRAZ <nipalensisaquila@gmail.com>
+    * inary/atomicoperations.py --- STATUS: NOT FIXED ---
+    In removing not asking "Do you want remove conflicted files "
+    Now remove all package files and conflicted files
+
+2018-01-13 Suleyman POYRAZ <nipalensisaquila@gmail.com>
+    * inary/util.py --- STATUS: FIXED ---
+    When packaging an error occured in inary/util.py line 371
+    'utf-8' codec can not decode byte '0xae' in position 78
+
+    Ummm. this is the same es an unicode-byte typing error
+
+2017-09-30 AquilaNipalensis <nipalensisaquila@gmail.com>
+    * inary/operations/delta.py ----STATUS: NOT FIXED----
+    In making delta packages can not adding actions.py files in delta package
+    in line 79. I try fix it but not work well.

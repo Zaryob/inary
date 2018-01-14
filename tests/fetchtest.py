@@ -1,12 +1,12 @@
 import unittest
 import os
 import base64
-import pisi.context as ctx
-import pisi.api
-from pisi.specfile import SpecFile
-from pisi.fetcher import Fetcher
-from pisi import util
-from pisi import uri
+import inary.context as ctx
+import inary.api
+from inary.specfile import SpecFile
+from inary.fetcher import Fetcher
+from inary import util
+from inary import uri
 
 class FetchTestCase(unittest.TestCase):
 

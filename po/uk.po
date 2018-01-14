@@ -94,31 +94,31 @@ msgstr "параметр %s не має значення"
 msgid "Options"
 msgstr "Параметри"
 
-#: pisi-cli:42
+#: inary-cli:42
 msgid "Keyboard Interrupt: Exiting..."
 msgstr "Перереривання клавіатури: вихід…"
 
-#: pisi-cli:45
+#: inary-cli:45
 msgid "Program terminated."
 msgstr "Програму перервано."
 
-#: pisi-cli:48
+#: inary-cli:48
 msgid ""
 "Unhandled internal exception.\n"
-"Please file a bug report to <http://bugs.pardus.org.tr>."
+"Please file a bug report to <http://bugs.inarylinux.org>."
 msgstr ""
 "Ноброблено внутрішні винятки.\n"
-"Будь ласка, повідомте про ваду в <http://bugs.pardus.org.tr>."
+"Будь ласка, повідомте про ваду в <http://bugs.inarylinux.org>."
 
-#: pisi-cli:57
+#: inary-cli:57
 msgid "System error. Program terminated."
 msgstr "Системна помилка. Програму перервано."
 
-#: pisi-cli:66
-msgid "Please use 'pisi help' for general help."
-msgstr "Будь ласка, введіть «pisi help» для загальної довідки."
+#: inary-cli:66
+msgid "Please use 'inary help' for general help."
+msgstr "Будь ласка, введіть «inary help» для загальної довідки."
 
-#: pisi-cli:69
+#: inary-cli:69
 msgid ""
 "\n"
 "Traceback:"
@@ -126,15 +126,15 @@ msgstr ""
 "\n"
 "Зворотне трасування:"
 
-#: pisi-cli:72
+#: inary-cli:72
 msgid "Use --debug to see a traceback."
 msgstr "Ввдіть «--debug», щоб побачити зворотне трасування."
 
-#: pisi.xml.in.h:1
-msgid "PiSi package"
-msgstr "Пакунок PiSi"
+#: inary.xml.in.h:1
+msgid "INARY package"
+msgstr "Пакунок INARY"
 
-#: pisi/actionsapi/autotools.py:36 pisi/actionsapi/cmaketools.py:36
+#: inary/actionsapi/autotools.py:36 inary/actionsapi/cmaketools.py:36
 #, python-format
 msgid ""
 "Please attach the config.log to your bug report:\n"
@@ -143,71 +143,71 @@ msgstr ""
 "Будь ласка, долучіть config.log до звіту про ваду:\n"
 "%s/config.log"
 
-#: pisi/actionsapi/autotools.py:77 pisi/actionsapi/autotools.py:87
-#: pisi/actionsapi/cmaketools.py:66 pisi/actionsapi/kde.py:65
-#: pisi/actionsapi/perlmodules.py:54 pisi/actionsapi/perlmodules.py:57
+#: inary/actionsapi/autotools.py:77 inary/actionsapi/autotools.py:87
+#: inary/actionsapi/cmaketools.py:66 inary/actionsapi/kde.py:65
+#: inary/actionsapi/perlmodules.py:54 inary/actionsapi/perlmodules.py:57
 msgid "Configure failed."
 msgstr "Не вдалось налаштувати."
 
-#: pisi/actionsapi/autotools.py:79 pisi/actionsapi/autotools.py:89
-#: pisi/actionsapi/kde.py:67
+#: inary/actionsapi/autotools.py:79 inary/actionsapi/autotools.py:89
+#: inary/actionsapi/kde.py:67
 msgid "No configure script found."
 msgstr "Скрипта налаштування не знайдено."
 
-#: pisi/actionsapi/autotools.py:97 pisi/actionsapi/cmaketools.py:78
-#: pisi/actionsapi/kde.py:72 pisi/actionsapi/perlmodules.py:63
-#: pisi/actionsapi/perlmodules.py:72 pisi/actionsapi/pythonmodules.py:62
-#: pisi/actionsapi/scons.py:39
+#: inary/actionsapi/autotools.py:97 inary/actionsapi/cmaketools.py:78
+#: inary/actionsapi/kde.py:72 inary/actionsapi/perlmodules.py:63
+#: inary/actionsapi/perlmodules.py:72 inary/actionsapi/pythonmodules.py:62
+#: inary/actionsapi/scons.py:39
 msgid "Make failed."
 msgstr "Не вдалось зібрати."
 
-#: pisi/actionsapi/autotools.py:126 pisi/actionsapi/autotools.py:134
-#: pisi/actionsapi/cmaketools.py:98 pisi/actionsapi/cmaketools.py:106
-#: pisi/actionsapi/kde.py:79 pisi/actionsapi/pythonmodules.py:67
-#: pisi/actionsapi/rubymodules.py:92 pisi/actionsapi/rubymodules.py:99
-#: pisi/actionsapi/scons.py:43
+#: inary/actionsapi/autotools.py:126 inary/actionsapi/autotools.py:134
+#: inary/actionsapi/cmaketools.py:98 inary/actionsapi/cmaketools.py:106
+#: inary/actionsapi/kde.py:79 inary/actionsapi/pythonmodules.py:67
+#: inary/actionsapi/rubymodules.py:92 inary/actionsapi/rubymodules.py:99
+#: inary/actionsapi/scons.py:43
 msgid "Install failed."
 msgstr "Не вдалось установити."
 
-#: pisi/actionsapi/autotools.py:141
+#: inary/actionsapi/autotools.py:141
 msgid "Running aclocal failed."
 msgstr "Не вдалось запустити aclocal."
 
-#: pisi/actionsapi/autotools.py:146
+#: inary/actionsapi/autotools.py:146
 msgid "Running autoconf failed."
 msgstr "Не вдалось запустити autoconf."
 
-#: pisi/actionsapi/autotools.py:151
+#: inary/actionsapi/autotools.py:151
 msgid "Running autoreconf failed."
 msgstr "Не вдалось запустити autoreconf."
 
-#: pisi/actionsapi/autotools.py:156
+#: inary/actionsapi/autotools.py:156
 msgid "Running automake failed."
 msgstr "Не вдалось запустити automake."
 
-#: pisi/actionsapi/autotools.py:161
+#: inary/actionsapi/autotools.py:161
 msgid "Running autoheader failed."
 msgstr "Не вдалось запустити autoheader."
 
-#: pisi/actionsapi/cmaketools.py:68
+#: inary/actionsapi/cmaketools.py:68
 msgid "No configure script found for cmake."
 msgstr "Не знайдено скрипта налаштування для cmake."
 
-#: pisi/actionsapi/cmaketools.py:110 pisi/actionsapi/kde.py:81
+#: inary/actionsapi/cmaketools.py:110 inary/actionsapi/kde.py:81
 msgid "No Makefile found."
 msgstr "Не знайдено Makefile."
 
-#: pisi/actionsapi/get.py:178
+#: inary/actionsapi/get.py:178
 #, python-format
 msgid "Util %s cannot be found"
 msgstr "%s не знайдено."
 
-#: pisi/actionsapi/get.py:180
+#: inary/actionsapi/get.py:180
 #, python-format
 msgid "Warning: %s does not exist, using plain name %s"
 msgstr "Попередження: %s не існує, використовуйте просту назву %s"
 
-#: pisi/actionsapi/kde.py:34
+#: inary/actionsapi/kde.py:34
 #, python-format
 msgid ""
 "\n"
@@ -218,617 +218,617 @@ msgstr ""
 "!!! Будь ласка, долчіть config.log до звіту про ваду:\n"
 "%s/config.log"
 
-#: pisi/actionsapi/kerneltools.py:117
+#: inary/actionsapi/kerneltools.py:117
 #, python-format
 msgid "Can't find kernel version information file %s."
 msgstr "Неможливо знайти файл про інформацію версії ядра %s."
 
-#: pisi/actionsapi/libtools.py:38
+#: inary/actionsapi/libtools.py:38
 msgid "Running ldconfig failed."
 msgstr "Не вдалось запустити ldconfig."
 
-#: pisi/actionsapi/libtools.py:49
+#: inary/actionsapi/libtools.py:49
 msgid "GNU Config Update Finished."
 msgstr "Налаштування GNU оновлено."
 
-#: pisi/actionsapi/libtools.py:53
+#: inary/actionsapi/libtools.py:53
 msgid "Running libtoolize failed."
 msgstr "Не вдалось запустити libtoolize."
 
-#: pisi/actionsapi/perlmodules.py:66
+#: inary/actionsapi/perlmodules.py:66
 msgid "perl build failed."
 msgstr "не вдалось зібрати через perl."
 
-#: pisi/actionsapi/perlmodules.py:75
+#: inary/actionsapi/perlmodules.py:75
 msgid "perl install failed."
 msgstr "Не вдалось установити через perl."
 
-#: pisi/actionsapi/pisitools.py:75 pisi/actionsapi/pisitools.py:132
+#: inary/actionsapi/inarytools.py:75 inary/actionsapi/inarytools.py:132
 #, python-format
 msgid "No file matched pattern \"%s\""
 msgstr "Немає файла з відповідних шаблоном «%s»"
 
-#: pisi/actionsapi/pisitools.py:142
+#: inary/actionsapi/inarytools.py:142
 #, python-format
 msgid "ActionsAPI [doman]: Wrong man page file: %s"
 msgstr "ActionsAPI [doman]: неправильний файл посібника: %s"
 
-#: pisi/actionsapi/pisitools.py:169
+#: inary/actionsapi/inarytools.py:169
 #, python-format
 msgid "No file matched pattern \"%s\". 'domove' operation failed."
 msgstr "Немає файла з відповідних шаблоном «%s». Не вдалось виконати «domove»."
 
-#: pisi/actionsapi/pisitools.py:188
+#: inary/actionsapi/inarytools.py:188
 #, python-format
 msgid "ActionsAPI [rename]: %s: %s"
 msgstr "ActionsAPI [rename]: %s: %s"
 
-#: pisi/actionsapi/pisitools.py:203
+#: inary/actionsapi/inarytools.py:203
 #, python-format
 msgid "No such file matching pattern: \"%s\". 'dosed' operation failed."
 msgstr "Немає файла з відповідних шаблоном «%s». Не вдалось виконати «dosed»."
 
-#: pisi/actionsapi/pisitools.py:216
+#: inary/actionsapi/inarytools.py:216
 #, python-format
 msgid "dosed method has not changed file '%s'."
 msgstr "Частковий спосіб не має вибраного файла «%s»."
 
-#: pisi/actionsapi/pisitools.py:219
+#: inary/actionsapi/inarytools.py:219
 #, python-format
 msgid "File does not exist or permission denied: %s"
 msgstr "Файл не існує або немає доступу: %s"
 
-#: pisi/actionsapi/pisitools.py:236
+#: inary/actionsapi/inarytools.py:236
 #, python-format
 msgid "ActionsAPI [dosym]: File already exists: %s"
 msgstr "ActionsAPI [dosym]:  файл уже існує: %s"
 
-#: pisi/actionsapi/pisitools.py:245 pisi/actionsapi/pisitoolsfunctions.py:71
+#: inary/actionsapi/inarytools.py:245 inary/actionsapi/inarytoolsfunctions.py:71
 #, python-format
 msgid "No file matched pattern \"%s\"."
 msgstr "Жодного файла відповідного до шаблону «%s»."
 
-#: pisi/actionsapi/pisitools.py:272 pisi/actionsapi/shelltools.py:97
+#: inary/actionsapi/inarytools.py:272 inary/actionsapi/shelltools.py:97
 #, python-format
 msgid "No file matched pattern \"%s\". Remove operation failed."
 msgstr "Жодного файла відповідного до шаблону «%s». Не вдалось вилучити."
 
-#: pisi/actionsapi/pisitools.py:281
+#: inary/actionsapi/inarytools.py:281
 #, python-format
 msgid "No directory matched pattern \"%s\". Remove directory operation failed."
 msgstr "Жодного каталогу відповідного до шаблону «%s». Не вдалось вилучити."
 
-#: pisi/actionsapi/pisitoolsfunctions.py:45
-#: pisi/actionsapi/pisitoolsfunctions.py:63
-#: pisi/actionsapi/pisitoolsfunctions.py:80
+#: inary/actionsapi/inarytoolsfunctions.py:45
+#: inary/actionsapi/inarytoolsfunctions.py:63
+#: inary/actionsapi/inarytoolsfunctions.py:80
 msgid "Insufficient arguments."
 msgstr "Неповні аргументи."
 
-#: pisi/actionsapi/pisitoolsfunctions.py:53
+#: inary/actionsapi/inarytoolsfunctions.py:53
 #, python-format
 msgid "No executable file matched pattern \"%s\"."
 msgstr "Жодного виконавчого файла відповідного до шаблону «%s»."
 
-#: pisi/actionsapi/pythonmodules.py:56
+#: inary/actionsapi/pythonmodules.py:56
 msgid "Configuration failed."
 msgstr "Не вдалось налаштувати."
 
-#: pisi/actionsapi/pythonmodules.py:81
+#: inary/actionsapi/pythonmodules.py:81
 #, python-format
 msgid "Running %s failed."
 msgstr "Не вдалось запустити %s."
 
-#: pisi/actionsapi/qt4.py:52
+#: inary/actionsapi/qt4.py:52
 #, python-format
 msgid "Project file '%s' not found."
 msgstr "Не знайдено файла проекту «%s»."
 
-#: pisi/actionsapi/qt4.py:56
+#: inary/actionsapi/qt4.py:56
 #, python-format
 msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)"
 msgstr ""
 
-#: pisi/actionsapi/rubymodules.py:108
+#: inary/actionsapi/rubymodules.py:108
 #, python-format
 msgid "Running 'ruby %s' failed."
 msgstr "Не вдалось запустити «ruby %s»."
 
-#: pisi/actionsapi/shelltools.py:49
+#: inary/actionsapi/shelltools.py:49
 #, python-format
 msgid "Cannot create directory %s"
 msgstr "Неможливо створити каталог %s"
 
-#: pisi/actionsapi/shelltools.py:57
+#: inary/actionsapi/shelltools.py:57
 #, python-format
 msgid "ActionsAPI [echo]: Can't append to file %s."
 msgstr "ActionsAPI [echo]: Неможливо додати до файла %s."
 
-#: pisi/actionsapi/shelltools.py:63
+#: inary/actionsapi/shelltools.py:63
 #, python-format
 msgid "ActionsAPI [chmod]: No file matched pattern \"%s\"."
 msgstr "ActionsAPI [chmod]: жодного файла відповідного до шаблону «%s»."
 
-#: pisi/actionsapi/shelltools.py:70
+#: inary/actionsapi/shelltools.py:70
 #, python-format
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
 msgstr ""
 "ActionsAPI [chmod]: немає прав на виконання: %s (режим: 0%o)\r\n"
 "\t"
 
-#: pisi/actionsapi/shelltools.py:73
+#: inary/actionsapi/shelltools.py:73
 #, python-format
 msgid "ActionsAPI [chmod]: File %s doesn't exists."
 msgstr ""
 
-#: pisi/actionsapi/shelltools.py:81
+#: inary/actionsapi/shelltools.py:81
 #, python-format
 msgid "ActionsAPI [chown]: Operation not permitted: %s (uid: %s, gid: %s)"
 msgstr "ActionsAPI [chown]: немає прав на виконання: %s (uid: %s, gid: %s)"
 
-#: pisi/actionsapi/shelltools.py:84
+#: inary/actionsapi/shelltools.py:84
 #, python-format
 msgid "ActionsAPI [chown]: File %s doesn't exists."
 msgstr ""
 
-#: pisi/actionsapi/shelltools.py:91
+#: inary/actionsapi/shelltools.py:91
 #, python-format
 msgid "ActionsAPI [sym]: Permission denied: %s to %s"
 msgstr ""
 
-#: pisi/actionsapi/shelltools.py:105
+#: inary/actionsapi/shelltools.py:105
 #, python-format
 msgid "ActionsAPI [unlink]: Permission denied: %s."
 msgstr ""
 
-#: pisi/actionsapi/shelltools.py:109
+#: inary/actionsapi/shelltools.py:109
 #, python-format
 msgid "ActionsAPI [unlink]: File %s doesn't exists."
 msgstr ""
 
-#: pisi/actionsapi/shelltools.py:117
+#: inary/actionsapi/shelltools.py:117
 #, python-format
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: %s"
 msgstr ""
 
-#: pisi/actionsapi/shelltools.py:121
+#: inary/actionsapi/shelltools.py:121
 #, python-format
 msgid "ActionsAPI [unlinkDir]: Directory %s doesn't exists."
 msgstr ""
 
-#: pisi/actionsapi/shelltools.py:127
+#: inary/actionsapi/shelltools.py:127
 #, python-format
 msgid "ActionsAPI [move]: No file matched pattern \"%s\"."
 msgstr ""
 
-#: pisi/actionsapi/shelltools.py:134
+#: inary/actionsapi/shelltools.py:134
 #, python-format
 msgid "ActionsAPI [move]: Permission denied: %s to %s"
 msgstr ""
 
-#: pisi/actionsapi/shelltools.py:136
+#: inary/actionsapi/shelltools.py:136
 #, python-format
 msgid "ActionsAPI [move]: File %s doesn't exists."
 msgstr ""
 
-#: pisi/actionsapi/shelltools.py:143
+#: inary/actionsapi/shelltools.py:143
 #, python-format
 msgid "ActionsAPI [copy]: No file matched pattern \"%s\"."
 msgstr ""
 
-#: pisi/actionsapi/shelltools.py:150
+#: inary/actionsapi/shelltools.py:150
 #, python-format
 msgid "ActionsAPI [copy]: Permission denied: %s to %s"
 msgstr ""
 
-#: pisi/actionsapi/shelltools.py:166
+#: inary/actionsapi/shelltools.py:166
 #, python-format
 msgid "ActionsAPI [copy]: File %s does not exist."
 msgstr ""
 
-#: pisi/actionsapi/shelltools.py:181
+#: inary/actionsapi/shelltools.py:181
 #, python-format
 msgid "ActionsAPI [copytree] %s to %s: %s"
 msgstr ""
 
-#: pisi/actionsapi/shelltools.py:183
+#: inary/actionsapi/shelltools.py:183
 #, python-format
 msgid "ActionsAPI [copytree]: Directory %s doesn't exists."
 msgstr ""
 
-#: pisi/actionsapi/shelltools.py:191
+#: inary/actionsapi/shelltools.py:191
 #, python-format
 msgid "ActionsAPI [touch]: No file matched pattern \"%s\"."
 msgstr ""
 
-#: pisi/actionsapi/shelltools.py:200
+#: inary/actionsapi/shelltools.py:200
 #, python-format
 msgid "ActionsAPI [touch]: Permission denied: %s"
 msgstr ""
 
-#: pisi/actionsapi/shelltools.py:255
+#: inary/actionsapi/shelltools.py:255
 #, python-format
 msgid "Command \"%s\" failed, return value was %d."
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:56
+#: inary/actionsapi/texlivemodules.py:56
 msgid "Moving source files failed"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:59
+#: inary/actionsapi/texlivemodules.py:59
 msgid "Generate config files failed"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:62
+#: inary/actionsapi/texlivemodules.py:62
 msgid "Building format files failed"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:69
+#: inary/actionsapi/texlivemodules.py:69
 msgid "Creating symlinks from format to engines failed"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:73
+#: inary/actionsapi/texlivemodules.py:73
 msgid "Installing docs failed"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:77
+#: inary/actionsapi/texlivemodules.py:77
 msgid "Installing texmf files failed"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:81
+#: inary/actionsapi/texlivemodules.py:81
 msgid "Installing config files failed"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:85
+#: inary/actionsapi/texlivemodules.py:85
 msgid "Handle config files failed"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:95
+#: inary/actionsapi/texlivemodules.py:95
 #, python-format
 msgid "Symlink %s skipped (special case)"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:97
+#: inary/actionsapi/texlivemodules.py:97
 #, python-format
 msgid "Symlink %s -> %s skipped (texlive-core takes care of it."
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:100
+#: inary/actionsapi/texlivemodules.py:100
 #, python-format
 msgid "Symlink %s -> %s skipped."
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:102
+#: inary/actionsapi/texlivemodules.py:102
 #, python-format
 msgid "Symlink %s skipped (file exists.)"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:104
+#: inary/actionsapi/texlivemodules.py:104
 #, python-format
 msgid "Making symlink from %s to %s"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:153
+#: inary/actionsapi/texlivemodules.py:153
 #, python-format
 msgid "Creating /etc/texmf/%s.d"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:155
+#: inary/actionsapi/texlivemodules.py:155
 #, python-format
 msgid "Moving (and symlinking) /usr/share/texmf/%s to /etc/texmf/%s.d"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:206
+#: inary/actionsapi/texlivemodules.py:206
 #, python-format
 msgid "Building format file %s"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:263
+#: inary/actionsapi/texlivemodules.py:263
 #, python-format
 msgid "Map %s is added to %s/%s.cfg"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:266
+#: inary/actionsapi/texlivemodules.py:266
 #, python-format
 msgid "MixedMap %s is added to %s/%s.cfg"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:269
+#: inary/actionsapi/texlivemodules.py:269
 #, python-format
 msgid "p +%s is added to %s/%s-config.ps"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:272
+#: inary/actionsapi/texlivemodules.py:272
 #, python-format
 msgid "f %s is added to %s/%s-config"
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:279
+#: inary/actionsapi/texlivemodules.py:279
 #, python-format
 msgid "Language file  %s  already generated."
 msgstr ""
 
-#: pisi/actionsapi/texlivemodules.py:281
+#: inary/actionsapi/texlivemodules.py:281
 #, python-format
 msgid "No rule to proccess %s. Please file a bug."
 msgstr ""
 
-#: pisi/api.py:58 pisi/cli/command.py:166
+#: inary/api.py:58 inary/cli/command.py:166
 msgid "You have to be root for this operation."
 msgstr ""
 
-#: pisi/api.py:65
-msgid "Another instance of PiSi is running. Only one instance is allowed."
+#: inary/api.py:65
+msgid "Another instance of INARY is running. Only one instance is allowed."
 msgstr ""
 
-#: pisi/api.py:420
+#: inary/api.py:420
 #, python-format
 msgid "%s package found in %s repository"
 msgstr ""
 
-#: pisi/api.py:424
+#: inary/api.py:424
 #, python-format
 msgid "%s package already fetched"
 msgstr ""
 
-#: pisi/api.py:532
+#: inary/api.py:532
 #, python-format
 msgid "Cleaning package cache %s..."
 msgstr ""
 
-#: pisi/api.py:534
+#: inary/api.py:534
 #, python-format
 msgid "Cleaning source archive cache %s..."
 msgstr ""
 
-#: pisi/api.py:536
+#: inary/api.py:536
 #, python-format
 msgid "Cleaning temporary directory %s..."
 msgstr ""
 
-#: pisi/api.py:540
+#: inary/api.py:540
 #, python-format
 msgid "Removing cache file %s..."
 msgstr ""
 
-#: pisi/api.py:571
+#: inary/api.py:571
 msgid "Taking snapshot of the system"
 msgstr ""
 
-#: pisi/api.py:732
+#: inary/api.py:732
 msgid "comar package is not fully installed"
 msgstr ""
 
-#: pisi/api.py:744
+#: inary/api.py:744
 #, python-format
 msgid "File %s not found"
 msgstr ""
 
-#: pisi/api.py:786
+#: inary/api.py:786
 #, python-format
-msgid "Building index of PiSi files under %s"
+msgid "Building index of INARY files under %s"
 msgstr ""
 
-#: pisi/api.py:791
+#: inary/api.py:791
 msgid "Index file written"
 msgstr ""
 
-#: pisi/api.py:796
+#: inary/api.py:796
 msgid "Not a valid repo name."
 msgstr ""
 
-#: pisi/api.py:799
+#: inary/api.py:799
 #, python-format
 msgid "Repo %s already present."
 msgstr ""
 
-#: pisi/api.py:802
+#: inary/api.py:802
 #, python-format
 msgid "Repo already present with name %s."
 msgstr ""
 
-#: pisi/api.py:807
+#: inary/api.py:807
 #, python-format
 msgid "Repo %s added to system."
 msgstr ""
 
-#: pisi/api.py:815
+#: inary/api.py:815
 #, python-format
 msgid "Repo %s removed from system."
 msgstr ""
 
-#: pisi/api.py:817
+#: inary/api.py:817
 #, python-format
 msgid "Repository %s does not exist. Cannot remove."
 msgstr ""
 
-#: pisi/api.py:839
+#: inary/api.py:839
 #, python-format
 msgid "Updating repository: %s"
 msgstr ""
 
-#: pisi/api.py:848
+#: inary/api.py:848
 #, python-format
 msgid "%s repository information is up-to-date."
 msgstr ""
 
-#: pisi/api.py:850
+#: inary/api.py:850
 msgid "Updating database at any rate as requested"
 msgstr ""
 
-#: pisi/api.py:863
+#: inary/api.py:863
 msgid "Package database updated."
 msgstr ""
 
-#: pisi/api.py:865
+#: inary/api.py:865
 #, python-format
 msgid "No repository named %s found."
 msgstr ""
 
-#: pisi/api.py:878
+#: inary/api.py:878
 #, python-format
 msgid "Adding '%s' to db... "
 msgstr ""
 
-#: pisi/api.py:881
+#: inary/api.py:881
 msgid "OK."
 msgstr ""
 
-#: pisi/archive.py:422
+#: inary/archive.py:422
 #, python-format
 msgid "Problem occured while uncompressing %s.Z file"
 msgstr ""
 
-#: pisi/atomicoperations.py:71 pisi/operations/history.py:72
+#: inary/atomicoperations.py:71 inary/operations/history.py:72
 #, python-format
 msgid "Package %s found in repository %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:102
+#: inary/atomicoperations.py:102
 #, python-format
 msgid "Package URI: %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:116
+#: inary/atomicoperations.py:116
 msgid "Download Error: Package does not match the repository package."
 msgstr ""
 
-#: pisi/atomicoperations.py:120
+#: inary/atomicoperations.py:120
 #, python-format
 msgid "Package %s not found in any active repository."
 msgstr ""
 
-#: pisi/atomicoperations.py:146
+#: inary/atomicoperations.py:146
 #, python-format
 msgid "Installing %s, version %s, release %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:192 pisi/operations/build.py:765
+#: inary/atomicoperations.py:192 inary/operations/build.py:765
 #, python-format
-msgid "%s-%s is not a valid PiSi version format"
+msgid "%s-%s is not a valid INARY version format"
 msgstr ""
 
-#: pisi/atomicoperations.py:198
+#: inary/atomicoperations.py:198
 #, python-format
 msgid "%s package cannot be installed unless the dependencies are satisfied"
 msgstr ""
 
-#: pisi/atomicoperations.py:222
+#: inary/atomicoperations.py:222
 #, python-format
 msgid "/%s from %s package\n"
 msgstr ""
 
-#: pisi/atomicoperations.py:223
+#: inary/atomicoperations.py:223
 #, python-format
 msgid ""
 "File conflicts:\n"
 "%s"
 msgstr ""
 
-#: pisi/atomicoperations.py:241
+#: inary/atomicoperations.py:241
 msgid "Re-install same version package?"
 msgstr ""
 
-#: pisi/atomicoperations.py:242
+#: inary/atomicoperations.py:242
 msgid "Package re-install declined"
 msgstr ""
 
-#: pisi/atomicoperations.py:254
+#: inary/atomicoperations.py:254
 msgid "Upgrading to new upstream version"
 msgstr ""
 
-#: pisi/atomicoperations.py:257
+#: inary/atomicoperations.py:257
 msgid "Upgrading to new distribution release"
 msgstr ""
 
-#: pisi/atomicoperations.py:266
+#: inary/atomicoperations.py:266
 msgid "Downgrade to old distribution release?"
 msgstr ""
 
-#: pisi/atomicoperations.py:270
+#: inary/atomicoperations.py:270
 msgid "Package downgrade declined"
 msgstr ""
 
-#: pisi/atomicoperations.py:309
+#: inary/atomicoperations.py:309
 #, python-format
 msgid "%s configuration failed."
 msgstr ""
 
-#: pisi/atomicoperations.py:400
+#: inary/atomicoperations.py:400
 msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
 msgstr ""
 
-#: pisi/atomicoperations.py:491 pisi/atomicoperations.py:494
-#: pisi/atomicoperations.py:501
+#: inary/atomicoperations.py:491 inary/atomicoperations.py:494
+#: inary/atomicoperations.py:501
 #, python-format
 msgid "Storing %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:568
+#: inary/atomicoperations.py:568
 #, python-format
 msgid "File list could not be read for package %s, continuing removal."
 msgstr ""
 
-#: pisi/atomicoperations.py:574
+#: inary/atomicoperations.py:574
 #, python-format
 msgid "Removing package %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:577
+#: inary/atomicoperations.py:577
 msgid "Trying to remove nonexistent package "
 msgstr ""
 
-#: pisi/atomicoperations.py:618
+#: inary/atomicoperations.py:618
 #, python-format
 msgid "Not removing conflicted file : %s"
 msgstr ""
 
-#: pisi/atomicoperations.py:646
+#: inary/atomicoperations.py:646
 #, python-format
 msgid "Installed file %s does not exist on system [Probably you manually deleted]"
 msgstr ""
 
-#: pisi/cli/__init__.py:117
+#: inary/cli/__init__.py:117
 msgid "Warning: "
 msgstr ""
 
-#: pisi/cli/__init__.py:127
+#: inary/cli/__init__.py:127
 msgid "Error: "
 msgstr ""
 
-#: pisi/cli/__init__.py:161
+#: inary/cli/__init__.py:161
 msgid " (yes/no)"
 msgstr ""
 
-#: pisi/cli/__init__.py:185
+#: inary/cli/__init__.py:185
 msgid " [complete]\n"
 msgstr ""
 
-#: pisi/cli/__init__.py:195
+#: inary/cli/__init__.py:195
 #, python-format
 msgid "Installed %s"
 msgstr ""
 
-#: pisi/cli/__init__.py:197
+#: inary/cli/__init__.py:197
 #, python-format
 msgid "Removed %s"
 msgstr ""
 
-#: pisi/cli/__init__.py:199
+#: inary/cli/__init__.py:199
 #, python-format
 msgid "Upgraded %s"
 msgstr ""
 
-#: pisi/cli/__init__.py:201
+#: inary/cli/__init__.py:201
 #, python-format
 msgid "Configured %s"
 msgstr ""
 
-#: pisi/cli/__init__.py:203
+#: inary/cli/__init__.py:203
 #, python-format
 msgid "Extracting the files of %s"
 msgstr ""
 
-#: pisi/cli/addrepo.py:24
+#: inary/cli/addrepo.py:24
 msgid ""
 "Add a repository\n"
 "\n"
@@ -840,23 +840,23 @@ msgid ""
 "NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment\n"
 msgstr ""
 
-#: pisi/cli/addrepo.py:43
+#: inary/cli/addrepo.py:43
 msgid "add-repo options"
 msgstr ""
 
-#: pisi/cli/addrepo.py:44
+#: inary/cli/addrepo.py:44
 msgid "Ignore repository distribution check"
 msgstr ""
 
-#: pisi/cli/addrepo.py:45
+#: inary/cli/addrepo.py:45
 msgid "Does not fetch repository index and does not check distribution match"
 msgstr ""
 
-#: pisi/cli/addrepo.py:48
+#: inary/cli/addrepo.py:48
 msgid "Add repository at given position (0 is first)"
 msgstr ""
 
-#: pisi/cli/addrepo.py:62
+#: inary/cli/addrepo.py:62
 #, python-format
 msgid ""
 "Add %s repository without updating the database?\n"
@@ -864,12 +864,12 @@ msgid ""
 "Do you want to continue?"
 msgstr ""
 
-#: pisi/cli/addrepo.py:74
+#: inary/cli/addrepo.py:74
 #, python-format
 msgid "%s repository could not be reached. Removing %s from system."
 msgstr ""
 
-#: pisi/cli/blame.py:24
+#: inary/cli/blame.py:24
 msgid ""
 "Information about the package owner and release\n"
 "\n"
@@ -877,137 +877,137 @@ msgid ""
 "\n"
 msgstr ""
 
-#: pisi/cli/blame.py:39
+#: inary/cli/blame.py:39
 msgid "blame options"
 msgstr ""
 
-#: pisi/cli/blame.py:40
+#: inary/cli/blame.py:40
 msgid "Blame for the given release"
 msgstr ""
 
-#: pisi/cli/blame.py:42
+#: inary/cli/blame.py:42
 msgid "Blame for all of the releases"
 msgstr ""
 
-#: pisi/cli/blame.py:68 pisi/specfile.py:370 pisi/specfile.py:456
+#: inary/cli/blame.py:68 inary/specfile.py:370 inary/specfile.py:456
 #, python-format
 msgid "Name: %s, version: %s, release: %s\n"
 msgstr ""
 
-#: pisi/cli/blame.py:70
+#: inary/cli/blame.py:70
 #, python-format
 msgid "Package Maintainer: %s <%s>\n"
 msgstr ""
 
-#: pisi/cli/blame.py:71
+#: inary/cli/blame.py:71
 #, python-format
 msgid "Release Updater: %s <%s>\n"
 msgstr ""
 
-#: pisi/cli/blame.py:72
+#: inary/cli/blame.py:72
 #, python-format
 msgid "Update Date: %s\n"
 msgstr ""
 
-#: pisi/cli/build.py:25
+#: inary/cli/build.py:25
 msgid ""
-"Build PiSi packages\n"
+"Build INARY packages\n"
 "\n"
 "Usage: build [<pspec.xml> | <sourcename>] ...\n"
 "\n"
-"You can give a URI of the pspec.xml file. PiSi will\n"
+"You can give a URI of the pspec.xml file. INARY will\n"
 "fetch all necessary files and build the package for you.\n"
 "\n"
 "Alternatively, you can give the name of a source package\n"
 "to be downloaded from a repository containing sources.\n"
 msgstr ""
 
-#: pisi/cli/build.py:50
+#: inary/cli/build.py:50
 msgid "build options"
 msgstr ""
 
-#: pisi/cli/build.py:58
-msgid "Run pisi build operation without printing extra debug information"
+#: inary/cli/build.py:58
+msgid "Run inary build operation without printing extra debug information"
 msgstr ""
 
-#: pisi/cli/build.py:64 pisi/cli/command.py:204
+#: inary/cli/build.py:64 inary/cli/command.py:204
 msgid "Do not take dependency information into account"
 msgstr ""
 
-#: pisi/cli/build.py:70
+#: inary/cli/build.py:70
 msgid "Output directory for produced packages"
 msgstr ""
 
-#: pisi/cli/build.py:74
+#: inary/cli/build.py:74
 msgid "Bypass errors from ActionsAPI"
 msgstr ""
 
-#: pisi/cli/build.py:79 pisi/cli/command.py:208
+#: inary/cli/build.py:79 inary/cli/command.py:208
 msgid "Bypass safety switch"
 msgstr ""
 
-#: pisi/cli/build.py:84
+#: inary/cli/build.py:84
 msgid "Bypass testing step"
 msgstr ""
 
-#: pisi/cli/build.py:89
+#: inary/cli/build.py:89
 msgid "Create a static package with ar files"
 msgstr ""
 
-#: pisi/cli/build.py:93 pisi/cli/delta.py:64
+#: inary/cli/build.py:93 inary/cli/delta.py:64
 msgid "Create the binary package using the given format. Use '-F help' to see a list of supported formats."
 msgstr ""
 
-#: pisi/cli/build.py:100
+#: inary/cli/build.py:100
 msgid "Use quilt patch management system instead of GNU patch"
 msgstr ""
 
-#: pisi/cli/build.py:106
+#: inary/cli/build.py:106
 msgid "Do not constrain build process inside the build folder"
 msgstr ""
 
-#: pisi/cli/build.py:110
+#: inary/cli/build.py:110
 msgid "build steps"
 msgstr ""
 
-#: pisi/cli/build.py:116
+#: inary/cli/build.py:116
 msgid "Break build after fetching the source archive"
 msgstr ""
 
-#: pisi/cli/build.py:123
+#: inary/cli/build.py:123
 msgid "Break build after unpacking the source archive, checking sha1sum and applying patches"
 msgstr ""
 
-#: pisi/cli/build.py:131
+#: inary/cli/build.py:131
 msgid "Break build after running configure step"
 msgstr ""
 
-#: pisi/cli/build.py:137
+#: inary/cli/build.py:137
 msgid "Break build after running compile step"
 msgstr ""
 
-#: pisi/cli/build.py:143
+#: inary/cli/build.py:143
 msgid "Break build after running check step"
 msgstr ""
 
-#: pisi/cli/build.py:149
+#: inary/cli/build.py:149
 msgid "Break build after running install step"
 msgstr ""
 
-#: pisi/cli/build.py:155
-msgid "Create PiSi package"
+#: inary/cli/build.py:155
+msgid "Create INARY package"
 msgstr ""
 
-#: pisi/cli/build.py:165 pisi/cli/delta.py:72
+#: inary/cli/build.py:165 inary/cli/delta.py:72
 msgid "Supported package formats:"
 msgstr ""
 
-#: pisi/cli/build.py:168 pisi/cli/delta.py:75
+#: inary/cli/build.py:168 inary/cli/delta.py:75
 #, python-format
 msgid "  %s (default)"
 msgstr ""
 
-#: pisi/cli/check.py:26
+#: inary/cli/check.py:26
 msgid ""
 "Verify installation\n"
 "\n"
@@ -1023,149 +1023,149 @@ msgid ""
 "If no packages are given, checks all installed packages.\n"
 msgstr ""
 
-#: pisi/cli/check.py:54
+#: inary/cli/check.py:54
 msgid "check options"
 msgstr ""
 
-#: pisi/cli/check.py:59
+#: inary/cli/check.py:59
 msgid "Check installed packages under given component"
 msgstr ""
 
-#: pisi/cli/check.py:65
+#: inary/cli/check.py:65
 msgid "Checks only changed config files of the packages"
 msgstr ""
 
-#: pisi/cli/check.py:82
+#: inary/cli/check.py:82
 msgid "Checking all installed packages"
 msgstr ""
 
-#: pisi/cli/check.py:91
+#: inary/cli/check.py:91
 #, python-format
 msgid "Checking integrity of %s"
 msgstr ""
 
-#: pisi/cli/check.py:105
+#: inary/cli/check.py:105
 msgid "Broken"
 msgstr ""
 
-#: pisi/cli/check.py:110
+#: inary/cli/check.py:110
 msgid "Unknown"
 msgstr ""
 
-#: pisi/cli/check.py:112
+#: inary/cli/check.py:112
 msgid "OK"
 msgstr ""
 
-#: pisi/cli/check.py:118
+#: inary/cli/check.py:118
 #, python-format
 msgid "Missing file: /%s"
 msgstr ""
 
-#: pisi/cli/check.py:122
+#: inary/cli/check.py:122
 #, python-format
 msgid "Access denied: /%s"
 msgstr ""
 
-#: pisi/cli/check.py:126
+#: inary/cli/check.py:126
 #, python-format
 msgid "Corrupted file: /%s"
 msgstr ""
 
-#: pisi/cli/check.py:130
+#: inary/cli/check.py:130
 #, python-format
 msgid "Modified configuration file: /%s"
 msgstr ""
 
-#: pisi/cli/check.py:135
+#: inary/cli/check.py:135
 #, python-format
 msgid "Package %s not installed"
 msgstr ""
 
-#: pisi/cli/check.py:139
+#: inary/cli/check.py:139
 msgid ""
-"Pisi was unable to check the integrity of packages which contain files that you don't have read access.\n"
+"Inary was unable to check the integrity of packages which contain files that you don't have read access.\n"
 "Running the check under a privileged user may help fixing this problem."
 msgstr ""
 
-#: pisi/cli/clean.py:20
+#: inary/cli/clean.py:20
 msgid ""
 "Clean stale locks\n"
 "\n"
 "Usage: clean\n"
 "\n"
-"PiSi uses filesystem locks for managing database access.\n"
+"INARY uses filesystem locks for managing database access.\n"
 "This command deletes unused locks from the database directory."
 msgstr ""
 
-#: pisi/cli/command.py:30
+#: inary/cli/command.py:30
 msgid "Command lacks name"
 msgstr ""
 
-#: pisi/cli/command.py:34
+#: inary/cli/command.py:34
 #, python-format
 msgid "Duplicate command %s"
 msgstr ""
 
-#: pisi/cli/command.py:71 pisi/cli/pisicli.py:134
+#: inary/cli/command.py:71 inary/cli/inarycli.py:134
 #, python-format
 msgid "Unrecognized command: %s"
 msgstr ""
 
-#: pisi/cli/command.py:96
+#: inary/cli/command.py:96
 msgid "general options"
 msgstr ""
 
-#: pisi/cli/command.py:99
-msgid "Change the system root for PiSi commands"
+#: inary/cli/command.py:99
+msgid "Change the system root for INARY commands"
 msgstr ""
 
-#: pisi/cli/command.py:101
+#: inary/cli/command.py:101
 msgid "Assume yes in all yes/no queries"
 msgstr ""
 
-#: pisi/cli/command.py:105
+#: inary/cli/command.py:105
 msgid "Keep bandwidth usage under specified KB's"
 msgstr ""
 
-#: pisi/cli/command.py:108
+#: inary/cli/command.py:108
 msgid "Detailed output"
 msgstr ""
 
-#: pisi/cli/command.py:110
+#: inary/cli/command.py:110
 msgid "Show debugging information"
 msgstr ""
 
-#: pisi/cli/command.py:112
-msgid "Suppresses all coloring of PiSi's output"
+#: inary/cli/command.py:112
+msgid "Suppresses all coloring of INARY's output"
 msgstr ""
 
-#: pisi/cli/command.py:130
+#: inary/cli/command.py:130
 #, python-format
 msgid "Destination directory %s does not exist. Creating directory.\n"
 msgstr ""
 
-#: pisi/cli/command.py:152
+#: inary/cli/command.py:152
 msgid "Password: "
 msgstr ""
 
-#: pisi/cli/command.py:191
+#: inary/cli/command.py:191
 msgid "Command terminated abnormally."
 msgstr ""
 
-#: pisi/cli/command.py:206 pisi/cli/emerge.py:53
+#: inary/cli/command.py:206 inary/cli/emerge.py:53
 msgid "Bypass comar configuration agent"
 msgstr ""
 
-#: pisi/cli/command.py:210
+#: inary/cli/command.py:210
 msgid "Do not perform any action, just show what would be done"
 msgstr ""
 
-#: pisi/cli/command.py:228
+#: inary/cli/command.py:228
 #, python-format
 msgid "usage: %s\n"
 msgstr ""
 
-#: pisi/cli/configurepending.py:23
+#: inary/cli/configurepending.py:23
 msgid ""
 "Configure pending packages\n"
 "\n"
@@ -1175,11 +1175,11 @@ msgid ""
 "configures those packages.\n"
 msgstr ""
 
-#: pisi/cli/configurepending.py:39
+#: inary/cli/configurepending.py:39
 msgid "configure-pending options"
 msgstr ""
 
-#: pisi/cli/deletecache.py:22
+#: inary/cli/deletecache.py:22
 msgid ""
 "Delete cache files\n"
 "\n"
@@ -1190,7 +1190,7 @@ msgid ""
 "consume a lot of disk space."
 msgstr ""
 
-#: pisi/cli/delta.py:24
+#: inary/cli/delta.py:24
 msgid ""
 "Creates delta packages\n"
 "\n"
@@ -1202,19 +1202,19 @@ msgid ""
 "a delta package with the changed files.\n"
 msgstr ""
 
-#: pisi/cli/delta.py:46
+#: inary/cli/delta.py:46
 msgid "delta options"
 msgstr ""
 
-#: pisi/cli/delta.py:54
+#: inary/cli/delta.py:54
 msgid "Use arg as the new package and treat other arguments as old packages."
 msgstr ""
 
-#: pisi/cli/delta.py:60
+#: inary/cli/delta.py:60
 msgid "Output directory for produced packages."
 msgstr ""
 
-#: pisi/cli/disablerepo.py:21
+#: inary/cli/disablerepo.py:21
 msgid ""
 "Disable repository\n"
 "\n"
@@ -1225,9 +1225,9 @@ msgid ""
 "Disabled repositories are not taken into account in operations\n"
 msgstr ""
 
-#: pisi/cli/emerge.py:25
+#: inary/cli/emerge.py:25
 msgid ""
-"Build and install PiSi source packages from repository\n"
+"Build and install INARY source packages from repository\n"
 "\n"
 "Usage: emerge <sourcename> ...\n"
 "\n"
@@ -1237,32 +1237,32 @@ msgid ""
 "You can also give the name of a component.\n"
 msgstr ""
 
-#: pisi/cli/emerge.py:44
+#: inary/cli/emerge.py:44
 msgid "emerge options"
 msgstr ""
 
-#: pisi/cli/emerge.py:47
+#: inary/cli/emerge.py:47
 msgid "Emerge available packages under given component"
 msgstr ""
 
-#: pisi/cli/emerge.py:49 pisi/cli/install.py:53 pisi/cli/upgrade.py:58
+#: inary/cli/emerge.py:49 inary/cli/install.py:53 inary/cli/upgrade.py:58
 msgid "Ignore file conflicts"
 msgstr ""
 
-#: pisi/cli/emerge.py:51 pisi/cli/install.py:55 pisi/cli/upgrade.py:60
+#: inary/cli/emerge.py:51 inary/cli/install.py:55 inary/cli/upgrade.py:60
 msgid "Ignore package conflicts"
 msgstr ""
 
-#: pisi/cli/emerge.py:71
+#: inary/cli/emerge.py:71
 #, python-format
 msgid "Output directory: %s"
 msgstr ""
 
-#: pisi/cli/emerge.py:73
+#: inary/cli/emerge.py:73
 msgid "Outputting binary packages in the package cache."
 msgstr ""
 
-#: pisi/cli/enablerepo.py:21
+#: inary/cli/enablerepo.py:21
 msgid ""
 "Enable repository\n"
 "\n"
@@ -1273,7 +1273,7 @@ msgid ""
 "Disabled repositories are not taken into account in operations\n"
 msgstr ""
 
-#: pisi/cli/fetch.py:25
+#: inary/cli/fetch.py:25
 msgid ""
 "Fetch a package\n"
 "\n"
@@ -1281,18 +1281,18 @@ msgid ""
 "\n"
 "<packagei>: package name\n"
 "\n"
-"Downloads the given pisi packages to working directory\n"
+"Downloads the given inary packages to working directory\n"
 msgstr ""
 
-#: pisi/cli/fetch.py:41
+#: inary/cli/fetch.py:41
 msgid "fetch options"
 msgstr ""
 
-#: pisi/cli/fetch.py:47
+#: inary/cli/fetch.py:47
 msgid "Output directory for the fetched packages"
 msgstr ""
 
-#: pisi/cli/graph.py:26
+#: inary/cli/graph.py:26
 msgid ""
 "Graph package relations\n"
 "\n"
@@ -1304,44 +1304,44 @@ msgid ""
 "the package in graphviz format to 'pgraph.dot'.\n"
 msgstr ""
 
-#: pisi/cli/graph.py:43
+#: inary/cli/graph.py:43
 msgid "graph options"
 msgstr ""
 
-#: pisi/cli/graph.py:47
+#: inary/cli/graph.py:47
 msgid "Specify a particular repository"
 msgstr ""
 
-#: pisi/cli/graph.py:50
+#: inary/cli/graph.py:50
 msgid "Graph of installed packages"
 msgstr ""
 
-#: pisi/cli/graph.py:53
+#: inary/cli/graph.py:53
 msgid "Do not show installed packages"
 msgstr ""
 
-#: pisi/cli/graph.py:56
+#: inary/cli/graph.py:56
 msgid "Draw reverse dependency graph"
 msgstr ""
 
-#: pisi/cli/graph.py:59
+#: inary/cli/graph.py:59
 msgid "Dot output file"
 msgstr ""
 
-#: pisi/cli/graph.py:73
+#: inary/cli/graph.py:73
 #, python-format
 msgid "Plotting packages in repository %s"
 msgstr ""
 
-#: pisi/cli/graph.py:76
+#: inary/cli/graph.py:76
 msgid "Plotting a graph of relations among all repository packages"
 msgstr ""
 
-#: pisi/cli/graph.py:90
+#: inary/cli/graph.py:90
 msgid "Plotting a graph of relations among all installed packages"
 msgstr ""
 
-#: pisi/cli/help.py:22
+#: inary/cli/help.py:22
 msgid ""
 "Prints help for given commands\n"
 "\n"
@@ -1350,7 +1350,7 @@ msgid ""
 "If run without parameters, it prints the general help."
 msgstr ""
 
-#: pisi/cli/help.py:49
+#: inary/cli/help.py:49
 msgid ""
 "%prog [options] <command> [arguments]\n"
 "\n"
@@ -1358,204 +1358,204 @@ msgid ""
 "\n"
 msgstr ""
 
-#: pisi/cli/help.py:55
+#: inary/cli/help.py:55
 msgid ""
 "\n"
 "Use \"%prog help <command>\" for help on a specific command.\n"
 msgstr ""
 
-#: pisi/cli/history.py:28
+#: inary/cli/history.py:28
 msgid "upgrade"
 msgstr ""
 
-#: pisi/cli/history.py:28
+#: inary/cli/history.py:28
 msgid "remove"
 msgstr ""
 
-#: pisi/cli/history.py:28
+#: inary/cli/history.py:28
 msgid "emerge"
 msgstr ""
 
-#: pisi/cli/history.py:28
+#: inary/cli/history.py:28
 msgid "install"
 msgstr ""
 
-#: pisi/cli/history.py:28
+#: inary/cli/history.py:28
 msgid "snapshot"
 msgstr ""
 
-#: pisi/cli/history.py:28
+#: inary/cli/history.py:28
 msgid "takeback"
 msgstr ""
 
-#: pisi/cli/history.py:28
+#: inary/cli/history.py:28
 msgid "repository update"
 msgstr ""
 
-#: pisi/cli/history.py:31
+#: inary/cli/history.py:31
 msgid ""
-"History of pisi operations\n"
+"History of inary operations\n"
 "\n"
 "Usage: history\n"
 "\n"
 "Lists previous operations."
 msgstr ""
 
-#: pisi/cli/history.py:47
+#: inary/cli/history.py:47
 msgid "history options"
 msgstr ""
 
-#: pisi/cli/history.py:53
+#: inary/cli/history.py:53
 msgid "Output only the last n operations"
 msgstr ""
 
-#: pisi/cli/history.py:55
+#: inary/cli/history.py:55
 msgid "Take snapshot of the current system"
 msgstr ""
 
-#: pisi/cli/history.py:57
+#: inary/cli/history.py:57
 msgid "Takeback to the state after the given operation finished"
 msgstr ""
 
-#: pisi/cli/history.py:67
+#: inary/cli/history.py:67
 #, python-format
 msgid "Operation #%d: %s"
 msgstr ""
 
-#: pisi/cli/history.py:68
+#: inary/cli/history.py:68
 #, python-format
 msgid "Date: %s %s"
 msgstr ""
 
-#: pisi/cli/history.py:72
+#: inary/cli/history.py:72
 #, python-format
 msgid "    * There are %d packages in this snapshot."
 msgstr ""
 
-#: pisi/cli/index.py:23
+#: inary/cli/index.py:23
 msgid ""
-"Index PiSi files in a given directory\n"
+"Index INARY files in a given directory\n"
 "\n"
 "Usage: index <directory> ...\n"
 "\n"
-"This command searches for all PiSi files in a directory, collects PiSi\n"
+"This command searches for all INARY files in a directory, collects INARY\n"
 "tags from them and accumulates the information in an output XML file,\n"
-"named by default 'pisi-index.xml'. In particular, it indexes both\n"
+"named by default 'inary-index.xml'. In particular, it indexes both\n"
 "source and binary packages.\n"
 "\n"
 "If you give multiple directories, the command still works, but puts\n"
 "everything in a single index file.\n"
 msgstr ""
 
-#: pisi/cli/index.py:48
+#: inary/cli/index.py:48
 msgid "index options"
 msgstr ""
 
-#: pisi/cli/index.py:53
+#: inary/cli/index.py:53
 msgid "Store absolute links for indexed files."
 msgstr ""
 
-#: pisi/cli/index.py:58
+#: inary/cli/index.py:58
 msgid "Index output file"
 msgstr ""
 
-#: pisi/cli/index.py:63
+#: inary/cli/index.py:63
 msgid "Comma-separated compression types for index file"
 msgstr ""
 
-#: pisi/cli/index.py:69
-msgid "Do not index PiSi spec files."
+#: inary/cli/index.py:69
+msgid "Do not index INARY spec files."
 msgstr ""
 
-#: pisi/cli/index.py:74
+#: inary/cli/index.py:74
 msgid "Do not sign index."
 msgstr ""
 
-#: pisi/cli/info.py:26
+#: inary/cli/info.py:26
 msgid ""
 "Display package information\n"
 "\n"
 "Usage: info <package1> <package2> ... <packagen>\n"
 "\n"
-"<packagei> is either a package name or a .pisi file,\n"
+"<packagei> is either a package name or a .inary file,\n"
 msgstr ""
 
-#: pisi/cli/info.py:45
+#: inary/cli/info.py:45
 msgid "info options"
 msgstr ""
 
-#: pisi/cli/info.py:52
+#: inary/cli/info.py:52
 msgid "Show a list of package files."
 msgstr ""
 
-#: pisi/cli/info.py:54
+#: inary/cli/info.py:54
 msgid "Info about the given component"
 msgstr ""
 
-#: pisi/cli/info.py:57
+#: inary/cli/info.py:57
 msgid "Show only paths."
 msgstr ""
 
-#: pisi/cli/info.py:59
+#: inary/cli/info.py:59
 msgid "Do not show details"
 msgstr ""
 
-#: pisi/cli/info.py:61
+#: inary/cli/info.py:61
 msgid "Output in xml format"
 msgstr ""
 
-#: pisi/cli/info.py:129
+#: inary/cli/info.py:129
 msgid "Reverse Dependencies:"
 msgstr ""
 
-#: pisi/cli/info.py:140
+#: inary/cli/info.py:140
 msgid "Reverse Build Dependencies:"
 msgstr ""
 
-#: pisi/cli/info.py:145
+#: inary/cli/info.py:145
 #, python-format
 msgid "Package file: %s"
 msgstr ""
 
-#: pisi/cli/info.py:160
+#: inary/cli/info.py:160
 msgid "[inst] "
 msgstr ""
 
-#: pisi/cli/info.py:162
+#: inary/cli/info.py:162
 msgid "Installed package:"
 msgstr ""
 
-#: pisi/cli/info.py:166
+#: inary/cli/info.py:166
 #, python-format
 msgid "%s package is not installed"
 msgstr ""
 
-#: pisi/cli/info.py:172
+#: inary/cli/info.py:172
 msgid "[binary] "
 msgstr ""
 
-#: pisi/cli/info.py:174 pisi/cli/info.py:186
+#: inary/cli/info.py:174 inary/cli/info.py:186
 #, python-format
 msgid "Package found in %s repository:"
 msgstr ""
 
-#: pisi/cli/info.py:177
+#: inary/cli/info.py:177
 #, python-format
 msgid "%s package is not found in binary repositories"
 msgstr ""
 
-#: pisi/cli/info.py:184
+#: inary/cli/info.py:184
 msgid "[source] "
 msgstr ""
 
-#: pisi/cli/info.py:189
+#: inary/cli/info.py:189
 #, python-format
 msgid "%s package is not found in source repositories"
 msgstr ""
 
-#: pisi/cli/install.py:25
+#: inary/cli/install.py:25
 msgid ""
-"Install PiSi packages\n"
+"Install INARY packages\n"
 "\n"
 "Usage: install <package1> <package2> ... <packagen>\n"
 "\n"
@@ -1566,171 +1566,171 @@ msgid ""
 "expanded to package names.\n"
 msgstr ""
 
-#: pisi/cli/install.py:44
+#: inary/cli/install.py:44
 msgid "install options"
 msgstr ""
 
-#: pisi/cli/install.py:49
+#: inary/cli/install.py:49
 msgid "Reinstall already installed packages"
 msgstr ""
 
-#: pisi/cli/install.py:51
+#: inary/cli/install.py:51
 msgid "Skip distribution release and architecture check"
 msgstr ""
 
-#: pisi/cli/install.py:57
+#: inary/cli/install.py:57
 msgid "Install component's and recursive components' packages"
 msgstr ""
 
-#: pisi/cli/install.py:59
+#: inary/cli/install.py:59
 msgid "Name of the component's repository"
 msgstr ""
 
-#: pisi/cli/install.py:61 pisi/cli/upgrade.py:66
+#: inary/cli/install.py:61 inary/cli/upgrade.py:66
 msgid "Fetch upgrades but do not install."
 msgstr ""
 
-#: pisi/cli/install.py:63
+#: inary/cli/install.py:63
 msgid "When installing packages, ignore packages and components whose basenames match pattern."
 msgstr ""
 
-#: pisi/cli/install.py:66
+#: inary/cli/install.py:66
 msgid "When installing packages, ignore packages and components whose basenames match any pattern contained in file."
 msgstr ""
 
-#: pisi/cli/install.py:93
+#: inary/cli/install.py:93
 #, python-format
 msgid "There is no component named %s"
 msgstr ""
 
-#: pisi/cli/listavailable.py:26
+#: inary/cli/listavailable.py:26
 msgid ""
 "List available packages in the repositories\n"
 "\n"
 "Usage: list-available [ <repo1> <repo2> ... repon ]\n"
 "\n"
-"Gives a brief list of PiSi packages published in the specified\n"
+"Gives a brief list of INARY packages published in the specified\n"
 "repositories. If no repository is specified, we list packages in\n"
 "all repositories.\n"
 msgstr ""
 
-#: pisi/cli/listavailable.py:45
+#: inary/cli/listavailable.py:45
 msgid "list-available options"
 msgstr ""
 
-#: pisi/cli/listavailable.py:47 pisi/cli/listcomponents.py:42
-#: pisi/cli/listinstalled.py:48 pisi/cli/listsources.py:41
-#: pisi/cli/listupgrades.py:44 pisi/cli/searchfile.py:40
+#: inary/cli/listavailable.py:47 inary/cli/listcomponents.py:42
+#: inary/cli/listinstalled.py:48 inary/cli/listsources.py:41
+#: inary/cli/listupgrades.py:44 inary/cli/searchfile.py:40
 msgid "Show in long format"
 msgstr ""
 
-#: pisi/cli/listavailable.py:49
+#: inary/cli/listavailable.py:49
 msgid "List available packages under given component"
 msgstr ""
 
-#: pisi/cli/listavailable.py:51
+#: inary/cli/listavailable.py:51
 msgid "Show uninstalled packages only"
 msgstr ""
 
-#: pisi/cli/listavailable.py:59
+#: inary/cli/listavailable.py:59
 msgid "Installed packages are shown in this color"
 msgstr ""
 
-#: pisi/cli/listavailable.py:67
+#: inary/cli/listavailable.py:67
 #, python-format
 msgid "Repository : %s\n"
 msgstr ""
 
-#: pisi/cli/listcomponents.py:24
+#: inary/cli/listcomponents.py:24
 msgid ""
 "List available components\n"
 "\n"
 "Usage: list-components\n"
 "\n"
-"Gives a brief list of PiSi components published in the\n"
+"Gives a brief list of INARY components published in the\n"
 "repositories.\n"
 msgstr ""
 
-#: pisi/cli/listcomponents.py:40
+#: inary/cli/listcomponents.py:40
 msgid "list-components options"
 msgstr ""
 
-#: pisi/cli/listcomponents.py:44 pisi/cli/search.py:47
+#: inary/cli/listcomponents.py:44 inary/cli/search.py:47
 msgid "Name of the source or package repository"
 msgstr ""
 
-#: pisi/cli/listinstalled.py:24
+#: inary/cli/listinstalled.py:24
 msgid ""
 "Print the list of all installed packages\n"
 "\n"
 "Usage: list-installed\n"
 msgstr ""
 
-#: pisi/cli/listinstalled.py:40
+#: inary/cli/listinstalled.py:40
 msgid "list-installed options"
 msgstr ""
 
-#: pisi/cli/listinstalled.py:45
+#: inary/cli/listinstalled.py:45
 msgid "Only list the installed packages built by the given host"
 msgstr ""
 
-#: pisi/cli/listinstalled.py:50
+#: inary/cli/listinstalled.py:50
 msgid "List installed packages under given component"
 msgstr ""
 
-#: pisi/cli/listinstalled.py:52 pisi/cli/listupgrades.py:48
+#: inary/cli/listinstalled.py:52 inary/cli/listupgrades.py:48
 msgid "Show detailed install info"
 msgstr ""
 
-#: pisi/cli/listinstalled.py:78 pisi/cli/listupgrades.py:73
+#: inary/cli/listinstalled.py:78 inary/cli/listupgrades.py:73
 msgid "Package Name          |St|        Version|  Rel.|  Distro|             Date"
 msgstr ""
 
-#: pisi/cli/listnewest.py:25
+#: inary/cli/listnewest.py:25
 msgid ""
 "List newest packages in the repositories\n"
 "\n"
 "Usage: list-newest [ <repo1> <repo2> ... repon ]\n"
 "\n"
-"Gives a list of PiSi newly published packages in the specified\n"
+"Gives a list of INARY newly published packages in the specified\n"
 "repositories. If no repository is specified, we list the new\n"
 "packages from all repositories.\n"
 msgstr ""
 
-#: pisi/cli/listnewest.py:44
+#: inary/cli/listnewest.py:44
 msgid "list-newest options"
 msgstr ""
 
-#: pisi/cli/listnewest.py:46
+#: inary/cli/listnewest.py:46
 msgid "List new packages added to repository after this given date formatted as yyyy-mm-dd"
 msgstr ""
 
-#: pisi/cli/listnewest.py:48
+#: inary/cli/listnewest.py:48
 msgid "List new packages added to repository after last nth previous repository update"
 msgstr ""
 
-#: pisi/cli/listnewest.py:76
+#: inary/cli/listnewest.py:76
 #, python-format
 msgid "Packages added to %s since %s:\n"
 msgstr ""
 
-#: pisi/cli/listnewest.py:78
+#: inary/cli/listnewest.py:78
 #, python-format
 msgid "Packages added to %s:"
 msgstr ""
 
-#: pisi/cli/listpending.py:22
+#: inary/cli/listpending.py:22
 msgid ""
 "List pending packages\n"
 "\n"
 "Lists packages waiting to be configured.\n"
 msgstr ""
 
-#: pisi/cli/listpending.py:41
+#: inary/cli/listpending.py:41
 msgid "There are no packages waiting to be configured"
 msgstr ""
 
-#: pisi/cli/listrepo.py:23
+#: inary/cli/listrepo.py:23
 msgid ""
 "List repositories\n"
 "\n"
@@ -1739,20 +1739,20 @@ msgid ""
 "Lists currently tracked repositories.\n"
 msgstr ""
 
-#: pisi/cli/listrepo.py:41 pisi/cli/listrepo.py:42
+#: inary/cli/listrepo.py:41 inary/cli/listrepo.py:42
 msgid "active"
 msgstr ""
 
-#: pisi/cli/listrepo.py:41
+#: inary/cli/listrepo.py:41
 msgid "inactive"
 msgstr ""
 
-#: pisi/cli/listrepo.py:43 pisi/cli/listrepo.py:45
+#: inary/cli/listrepo.py:43 inary/cli/listrepo.py:45
 #, python-format
 msgid "%s [%s]"
 msgstr ""
 
-#: pisi/cli/listsources.py:24
+#: inary/cli/listsources.py:24
 msgid ""
 "List available sources\n"
 "\n"
@@ -1761,11 +1761,11 @@ msgid ""
 "Gives a brief list of sources published in the repositories.\n"
 msgstr ""
 
-#: pisi/cli/listsources.py:39
+#: inary/cli/listsources.py:39
 msgid "list-sources options"
 msgstr ""
 
-#: pisi/cli/listupgrades.py:26
+#: inary/cli/listupgrades.py:26
 msgid ""
 "List packages to be upgraded\n"
 "\n"
@@ -1774,57 +1774,57 @@ msgid ""
 "Lists the packages that will be upgraded.\n"
 msgstr ""
 
-#: pisi/cli/listupgrades.py:42
+#: inary/cli/listupgrades.py:42
 msgid "list-upgrades options"
 msgstr ""
 
-#: pisi/cli/listupgrades.py:46
+#: inary/cli/listupgrades.py:46
 msgid "List upgradable packages under given component"
 msgstr ""
 
-#: pisi/cli/listupgrades.py:64 pisi/operations/upgrade.py:146
+#: inary/cli/listupgrades.py:64 inary/operations/upgrade.py:146
 msgid "No packages to upgrade."
 msgstr ""
 
-#: pisi/cli/pisicli.py:86
+#: inary/cli/inarycli.py:86
 msgid "Options must precede non-option arguments"
 msgstr ""
 
-#: pisi/cli/pisicli.py:127
+#: inary/cli/inarycli.py:127
 msgid "No command given"
 msgstr ""
 
-#: pisi/cli/pisicli.py:130
+#: inary/cli/inarycli.py:130
 msgid "Command line parsing error"
 msgstr ""
 
-#: pisi/cli/rebuilddb.py:24
+#: inary/cli/rebuilddb.py:24
 msgid ""
 "Rebuild Databases\n"
 "\n"
 "Usage: rebuilddb [ <package1> <package2> ... <packagen> ]\n"
 "\n"
-"Rebuilds the PiSi databases\n"
+"Rebuilds the INARY databases\n"
 "\n"
 "If package specs are given, they should be the names of package\n"
-"dirs under /var/lib/pisi\n"
+"dirs under /var/lib/inary\n"
 msgstr ""
 
-#: pisi/cli/rebuilddb.py:42
+#: inary/cli/rebuilddb.py:42
 msgid "rebuild-db options"
 msgstr ""
 
-#: pisi/cli/rebuilddb.py:45
+#: inary/cli/rebuilddb.py:45
 msgid "Rebuild files database"
 msgstr ""
 
-#: pisi/cli/rebuilddb.py:51
-msgid "Rebuild PiSi databases?"
+#: inary/cli/rebuilddb.py:51
+msgid "Rebuild INARY databases?"
 msgstr ""
 
-#: pisi/cli/remove.py:25
+#: inary/cli/remove.py:25
 msgid ""
-"Remove PiSi packages\n"
+"Remove INARY packages\n"
 "\n"
 "Usage: remove <package1> <package2> ... <packagen>\n"
 "\n"
@@ -1834,19 +1834,19 @@ msgid ""
 "expanded to package names.\n"
 msgstr ""
 
-#: pisi/cli/remove.py:43
+#: inary/cli/remove.py:43
 msgid "remove options"
 msgstr ""
 
-#: pisi/cli/remove.py:46
+#: inary/cli/remove.py:46
 msgid "Removes everything including changed config files of the package"
 msgstr ""
 
-#: pisi/cli/remove.py:48
+#: inary/cli/remove.py:48
 msgid "Remove component's and recursive components' packages"
 msgstr ""
 
-#: pisi/cli/removerepo.py:21
+#: inary/cli/removerepo.py:21
 msgid ""
 "Remove repositories\n"
 "\n"
@@ -1855,7 +1855,7 @@ msgid ""
 "Remove all repository information from the system.\n"
 msgstr ""
 
-#: pisi/cli/search.py:25
+#: inary/cli/search.py:25
 msgid ""
 "Search packages\n"
 "\n"
@@ -1868,35 +1868,35 @@ msgid ""
 "database.\n"
 msgstr ""
 
-#: pisi/cli/search.py:43
+#: inary/cli/search.py:43
 msgid "search options"
 msgstr ""
 
-#: pisi/cli/search.py:45
+#: inary/cli/search.py:45
 msgid "Summary and description language"
 msgstr ""
 
-#: pisi/cli/search.py:49
+#: inary/cli/search.py:49
 msgid "Search in installdb"
 msgstr ""
 
-#: pisi/cli/search.py:51
+#: inary/cli/search.py:51
 msgid "Search in sourcedb"
 msgstr ""
 
-#: pisi/cli/search.py:53
+#: inary/cli/search.py:53
 msgid "Search in the package name"
 msgstr ""
 
-#: pisi/cli/search.py:55
+#: inary/cli/search.py:55
 msgid "Search in the package summary"
 msgstr ""
 
-#: pisi/cli/search.py:57
+#: inary/cli/search.py:57
 msgid "Search in the package description"
 msgstr ""
 
-#: pisi/cli/searchfile.py:24
+#: inary/cli/searchfile.py:24
 msgid ""
 "Search for a file\n"
 "\n"
@@ -1905,30 +1905,30 @@ msgid ""
 "Finds the installed package which contains the specified file.\n"
 msgstr ""
 
-#: pisi/cli/searchfile.py:38
+#: inary/cli/searchfile.py:38
 msgid "search-file options"
 msgstr ""
 
-#: pisi/cli/searchfile.py:42
+#: inary/cli/searchfile.py:42
 msgid "Show only package name"
 msgstr ""
 
-#: pisi/cli/searchfile.py:49
+#: inary/cli/searchfile.py:49
 #, python-format
 msgid "Package %s has file /%s"
 msgstr ""
 
-#: pisi/cli/searchfile.py:52
+#: inary/cli/searchfile.py:52
 #, python-format
 msgid "Path '%s' does not belong to an installed package"
 msgstr ""
 
-#: pisi/cli/searchfile.py:65
+#: inary/cli/searchfile.py:65
 #, python-format
 msgid "Searching for %s"
 msgstr ""
 
-#: pisi/cli/updaterepo.py:24
+#: inary/cli/updaterepo.py:24
 msgid ""
 "Update repository databases\n"
 "\n"
@@ -1936,21 +1936,21 @@ msgid ""
 "\n"
 "<repoi>: repository name\n"
 "\n"
-"Synchronizes the PiSi databases with the current repository.\n"
+"Synchronizes the INARY databases with the current repository.\n"
 "If no repository is given, all repositories are updated.\n"
 msgstr ""
 
-#: pisi/cli/updaterepo.py:42
+#: inary/cli/updaterepo.py:42
 msgid "update-repo options"
 msgstr ""
 
-#: pisi/cli/updaterepo.py:46
+#: inary/cli/updaterepo.py:46
 msgid "Update database in any case"
 msgstr ""
 
-#: pisi/cli/upgrade.py:25
+#: inary/cli/upgrade.py:25
 msgid ""
-"Upgrade PiSi packages\n"
+"Upgrade INARY packages\n"
 "\n"
 "Usage: Upgrade [<package1> <package2> ... <packagen>]\n"
 "\n"
@@ -1962,1232 +1962,1232 @@ msgid ""
 "the package upgrade operation is defined only with respect\n"
 "to repositories. If you have specified a package name, it\n"
 "should exist in the package repositories. If you just want to\n"
-"reinstall a package from a PiSi file, use the install command.\n"
+"reinstall a package from a INARY file, use the install command.\n"
 "\n"
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
 
-#: pisi/cli/upgrade.py:50
+#: inary/cli/upgrade.py:50
 msgid "upgrade options"
 msgstr ""
 
-#: pisi/cli/upgrade.py:54
+#: inary/cli/upgrade.py:54
 msgid "Security related package upgrades only"
 msgstr ""
 
-#: pisi/cli/upgrade.py:56
+#: inary/cli/upgrade.py:56
 msgid "Do not update repositories"
 msgstr ""
 
-#: pisi/cli/upgrade.py:62
+#: inary/cli/upgrade.py:62
 msgid "Upgrade component's and recursive components' packages"
 msgstr ""
 
-#: pisi/cli/upgrade.py:64
+#: inary/cli/upgrade.py:64
 msgid "Name of the to be upgraded packages' repository"
 msgstr ""
 
-#: pisi/cli/upgrade.py:68
+#: inary/cli/upgrade.py:68
 msgid "When upgrading system, ignore packages and components whose basenames match pattern."
 msgstr ""
 
-#: pisi/cli/upgrade.py:71
+#: inary/cli/upgrade.py:71
 msgid "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
 msgstr ""
 
-#: pisi/cli/upgrade.py:85
+#: inary/cli/upgrade.py:85
 msgid "Updating repositories"
 msgstr ""
 
-#: pisi/cli/upgrade.py:89
+#: inary/cli/upgrade.py:89
 msgid "Will not update repositories"
 msgstr ""
 
-#: pisi/comariface.py:31
+#: inary/comariface.py:31
 msgid "comar-api package is not fully installed"
 msgstr ""
 
-#: pisi/comariface.py:88
+#: inary/comariface.py:88
 #, python-format
 msgid ""
 "Cannot connect to COMAR: \n"
 "  %s\n"
 msgstr ""
 
-#: pisi/comariface.py:97
+#: inary/comariface.py:97
 #, python-format
 msgid "Configuring %s package"
 msgstr ""
 
-#: pisi/comariface.py:103
+#: inary/comariface.py:103
 msgid "COMAR package updated. From now on, using new COMAR daemon."
 msgstr ""
 
-#: pisi/comariface.py:110
+#: inary/comariface.py:110
 #, python-format
 msgid "Registering %s comar script"
 msgstr ""
 
-#: pisi/comariface.py:119 pisi/comariface.py:124 pisi/comariface.py:137
-#: pisi/comariface.py:153 pisi/comariface.py:172 pisi/comariface.py:183
-#: pisi/comariface.py:205 pisi/comariface.py:216 pisi/comariface.py:223
+#: inary/comariface.py:119 inary/comariface.py:124 inary/comariface.py:137
+#: inary/comariface.py:153 inary/comariface.py:172 inary/comariface.py:183
+#: inary/comariface.py:205 inary/comariface.py:216 inary/comariface.py:223
 #, python-format
 msgid "Script error: %s"
 msgstr ""
 
-#: pisi/comariface.py:126
+#: inary/comariface.py:126
 msgid "Calling post install handlers"
 msgstr ""
 
-#: pisi/comariface.py:145
+#: inary/comariface.py:145
 msgid "Running package's post install script"
 msgstr ""
 
-#: pisi/comariface.py:159
+#: inary/comariface.py:159
 #, python-format
 msgid "Running pre removal operations for %s"
 msgstr ""
 
-#: pisi/comariface.py:165
+#: inary/comariface.py:165
 msgid "Running package's pre remove script"
 msgstr ""
 
-#: pisi/comariface.py:174
+#: inary/comariface.py:174
 msgid "Calling pre remove handlers"
 msgstr ""
 
-#: pisi/comariface.py:189
+#: inary/comariface.py:189
 #, python-format
 msgid "Running post removal operations for %s"
 msgstr ""
 
-#: pisi/comariface.py:198
+#: inary/comariface.py:198
 msgid "Running package's postremove script"
 msgstr ""
 
-#: pisi/comariface.py:207
+#: inary/comariface.py:207
 msgid "Calling post remove handlers"
 msgstr ""
 
-#: pisi/comariface.py:218
+#: inary/comariface.py:218
 msgid "Unregistering comar scripts"
 msgstr ""
 
-#: pisi/config.py:85
+#: inary/config.py:85
 #, python-format
 msgid "Destination directory %s does not exist. Creating it."
 msgstr ""
 
-#: pisi/configfile.py:127
+#: inary/configfile.py:127
 #, python-format
 msgid "No section by name '%s'"
 msgstr ""
 
-#: pisi/conflict.py:26 pisi/dependency.py:26 pisi/replace.py:24
+#: inary/conflict.py:26 inary/dependency.py:26 inary/replace.py:24
 msgid " version >= "
 msgstr ""
 
-#: pisi/conflict.py:28 pisi/dependency.py:28 pisi/replace.py:26
+#: inary/conflict.py:28 inary/dependency.py:28 inary/replace.py:26
 msgid " version <= "
 msgstr ""
 
-#: pisi/conflict.py:30 pisi/dependency.py:30 pisi/replace.py:28
+#: inary/conflict.py:30 inary/dependency.py:30 inary/replace.py:28
 msgid " version "
 msgstr ""
 
-#: pisi/conflict.py:32 pisi/dependency.py:32 pisi/replace.py:30
+#: inary/conflict.py:32 inary/dependency.py:32 inary/replace.py:30
 msgid " release >= "
 msgstr ""
 
-#: pisi/conflict.py:34 pisi/dependency.py:34 pisi/replace.py:32
+#: inary/conflict.py:34 inary/dependency.py:34 inary/replace.py:32
 msgid " release <= "
 msgstr ""
 
-#: pisi/conflict.py:36 pisi/dependency.py:36 pisi/replace.py:34
+#: inary/conflict.py:36 inary/dependency.py:36 inary/replace.py:34
 msgid " release "
 msgstr ""
 
-#: pisi/constants.py:30
+#: inary/constants.py:30
 #, python-format
 msgid "Can't rebind constant: %s"
 msgstr ""
 
-#: pisi/constants.py:36
+#: inary/constants.py:36
 #, python-format
 msgid "Can't unbind constant: %s"
 msgstr ""
 
-#: pisi/db/componentdb.py:87
+#: inary/db/componentdb.py:87
 #, python-format
 msgid "Component %s not found"
 msgstr ""
 
-#: pisi/db/groupdb.py:66 pisi/db/groupdb.py:75
+#: inary/db/groupdb.py:66 inary/db/groupdb.py:75
 #, python-format
 msgid "Group %s not found"
 msgstr ""
 
-#: pisi/db/installdb.py:37
+#: inary/db/installdb.py:37
 msgid "installed"
 msgstr ""
 
-#: pisi/db/installdb.py:37
+#: inary/db/installdb.py:37
 msgid "installed-pending"
 msgstr ""
 
-#: pisi/db/installdb.py:54
+#: inary/db/installdb.py:54
 #, python-format
 msgid ""
 "State: %s\n"
 "Version: %s, Release: %s\n"
 msgstr ""
 
-#: pisi/db/installdb.py:58
+#: inary/db/installdb.py:58
 #, python-format
 msgid "Distribution: %s, Install Time: %s\n"
 msgstr ""
 
-#: pisi/db/installdb.py:94
+#: inary/db/installdb.py:94
 #, python-format
 msgid "Installation info for package '%s' is broken. Reinstall it to fix this problem."
 msgstr ""
 
-#: pisi/db/installdb.py:335
+#: inary/db/installdb.py:335
 #, python-format
 msgid "Package %s is not installed"
 msgstr ""
 
-#: pisi/db/itembyrepo.py:40
+#: inary/db/itembyrepo.py:40
 #, python-format
 msgid "%s not found in any repository."
 msgstr ""
 
-#: pisi/db/itembyrepo.py:50
+#: inary/db/itembyrepo.py:50
 #, python-format
 msgid "Repo item %s not found"
 msgstr ""
 
-#: pisi/db/itembyrepo.py:60 pisi/db/itembyrepo.py:71 pisi/db/itembyrepo.py:81
+#: inary/db/itembyrepo.py:60 inary/db/itembyrepo.py:71 inary/db/itembyrepo.py:81
 #, python-format
 msgid "Repository %s does not exist."
 msgstr ""
 
-#: pisi/db/packagedb.py:144 pisi/db/packagedb.py:151
+#: inary/db/packagedb.py:144 inary/db/packagedb.py:151
 #, python-format
 msgid "Package %s not found."
 msgstr ""
 
-#: pisi/db/repodb.py:168
+#: inary/db/repodb.py:168
 #, python-format
 msgid "%s repository needs to be updated"
 msgstr ""
 
-#: pisi/db/repodb.py:174
+#: inary/db/repodb.py:174
 msgid "Error parsing repository index information. Index file does not exist or is malformed."
 msgstr ""
 
-#: pisi/db/repodb.py:264
+#: inary/db/repodb.py:264
 #, python-format
 msgid "Repository '%s' is not compatible with your distribution. Repository is disabled."
 msgstr ""
 
-#: pisi/fetcher.py:147
+#: inary/fetcher.py:147
 msgid "Urlgrabber needs to be installed to run this command"
 msgstr ""
 
-#: pisi/fetcher.py:150
+#: inary/fetcher.py:150
 msgid "Filename error"
 msgstr ""
 
-#: pisi/fetcher.py:153
+#: inary/fetcher.py:153
 #, python-format
 msgid "Access denied to write to destination directory: \"%s\""
 msgstr ""
 
-#: pisi/fetcher.py:156
+#: inary/fetcher.py:156
 #, python-format
 msgid "Access denied to destination file: \"%s\""
 msgstr ""
 
-#: pisi/fetcher.py:170
+#: inary/fetcher.py:170
 #, python-format
 msgid "Could not fetch destination file \"%s\": %s"
 msgstr ""
 
-#: pisi/fetcher.py:174
+#: inary/fetcher.py:174
 msgid "A problem occurred. Please check the archive address and/or permissions again."
 msgstr ""
 
-#: pisi/fetcher.py:207
+#: inary/fetcher.py:207
 #, python-format
 msgid "Proxy configuration has been found for '%s' protocol"
 msgstr ""
 
-#: pisi/fetcher.py:214
+#: inary/fetcher.py:214
 #, python-format
 msgid "Bandwidth usage is limited to %s KB/s"
 msgstr ""
 
-#: pisi/fetcher.py:227
+#: inary/fetcher.py:227
 msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
 msgstr ""
 
-#: pisi/fetcher.py:236
+#: inary/fetcher.py:236
 msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
 msgstr ""
 
-#: pisi/file.py:35
+#: inary/file.py:35
 #, python-format
 msgid "URL %s already downloaded as %s"
 msgstr ""
 
-#: pisi/file.py:42
+#: inary/file.py:42
 #, fuzzy, python-format
 msgid "No signature found for %s"
 msgstr "Не знайдено скрипта налаштування для cmake."
 
-#: pisi/file.py:50
+#: inary/file.py:50
 #, python-format
 msgid " invalid for %s"
 msgstr ""
 
-#: pisi/file.py:72
+#: inary/file.py:72
 msgid "uri must have type either URI or string"
 msgstr ""
 
-#: pisi/file.py:136
+#: inary/file.py:136
 #, python-format
 msgid "Fetching %s"
 msgstr ""
 
-#: pisi/file.py:140
+#: inary/file.py:140
 #, python-format
 msgid "Copying %s to transfer dir"
 msgstr ""
 
-#: pisi/file.py:145
+#: inary/file.py:145
 #, python-format
 msgid "File '%s' not found."
 msgstr ""
 
-#: pisi/file.py:166
+#: inary/file.py:166
 #, python-format
 msgid "File integrity of %s compromised."
 msgstr ""
 
-#: pisi/file.py:190
+#: inary/file.py:190
 msgid "File mode must be either File.read or File.write"
 msgstr ""
 
-#: pisi/file.py:195
+#: inary/file.py:195
 msgid "Remote write not implemented"
 msgstr ""
 
-#: pisi/file.py:247 pisi/file.py:250
+#: inary/file.py:247 inary/file.py:250
 #, python-format
 msgid "ERROR: gpg --detach-sig %s failed"
 msgstr ""
 
-#: pisi/graph.py:26
+#: inary/graph.py:26
 #, python-format
 msgid "Encountered cycle %s"
 msgstr ""
 
-#: pisi/history.py:47
+#: inary/history.py:47
 #, python-format
 msgid "%s repository is updated."
 msgstr ""
 
-#: pisi/history.py:67
+#: inary/history.py:67
 #, python-format
 msgid "%s is upgraded from %s to %s with delta."
 msgstr ""
 
-#: pisi/history.py:69
+#: inary/history.py:69
 #, python-format
 msgid "%s is upgraded from %s to %s."
 msgstr ""
 
-#: pisi/history.py:71
+#: inary/history.py:71
 #, python-format
 msgid "%s %s is removed."
 msgstr ""
 
-#: pisi/history.py:73
+#: inary/history.py:73
 #, python-format
 msgid "%s %s is installed."
 msgstr ""
 
-#: pisi/history.py:75
+#: inary/history.py:75
 #, python-format
 msgid "%s %s is reinstalled."
 msgstr ""
 
-#: pisi/history.py:77
+#: inary/history.py:77
 #, python-format
 msgid "%s is downgraded from %s to %s."
 msgstr ""
 
-#: pisi/history.py:104 pisi/history.py:126
+#: inary/history.py:104 inary/history.py:126
 msgid "Unknown package operation"
 msgstr ""
 
-#: pisi/index.py:176
+#: inary/index.py:176
 #, python-format
 msgid "Adding package to index: %s"
 msgstr ""
 
-#: pisi/index.py:192
+#: inary/index.py:192
 #, python-format
 msgid "Package %s: metadata corrupt, skipping..."
 msgstr ""
 
-#: pisi/index.py:237
+#: inary/index.py:237
 msgid "Adding groups.xml to index"
 msgstr ""
 
-#: pisi/index.py:243
+#: inary/index.py:243
 msgid "Adding components.xml to index"
 msgstr ""
 
-#: pisi/index.py:253
+#: inary/index.py:253
 msgid "Adding distribution.xml to index"
 msgstr ""
 
-#: pisi/index.py:274
+#: inary/index.py:274
 #, python-format
 msgid "Adding %s to source index"
 msgstr ""
 
-#: pisi/metadata.py:78
+#: inary/metadata.py:78
 #, python-format
 msgid "Distribution: %s, Dist. Release: %s\n"
 msgstr ""
 
-#: pisi/metadata.py:80
+#: inary/metadata.py:80
 #, python-format
 msgid "Architecture: %s, Installed Size: %s"
 msgstr ""
 
-#: pisi/metadata.py:86
+#: inary/metadata.py:86
 #, python-format
 msgid ", Package Size: %s"
 msgstr ""
 
-#: pisi/mirrors.py:46
+#: inary/mirrors.py:46
 #, python-format
 msgid "Mirrors file %s does not exist. Could not resolve mirrors://"
 msgstr ""
 
-#: pisi/operations/build.py:114
+#: inary/operations/build.py:114
 #, python-format
 msgid "Path %s belongs in multiple packages"
 msgstr ""
 
-#: pisi/operations/build.py:190
+#: inary/operations/build.py:190
 #, python-format
 msgid "Source URI: %s"
 msgstr ""
 
-#: pisi/operations/build.py:194
+#: inary/operations/build.py:194
 #, python-format
 msgid "Source %s not found in any active repository."
 msgstr ""
 
-#: pisi/operations/build.py:320
+#: inary/operations/build.py:320
 #, python-format
 msgid "pspec.xml avoids this package from building for '%s'"
 msgstr ""
 
-#: pisi/operations/build.py:323
+#: inary/operations/build.py:323
 #, python-format
 msgid "Building source package: %s"
 msgstr ""
 
-#: pisi/operations/build.py:341
+#: inary/operations/build.py:341
 msgid "ccache detected..."
 msgstr ""
 
-#: pisi/operations/build.py:343
+#: inary/operations/build.py:343
 msgid "IceCream detected. Make sure your daemon is up and running..."
 msgstr ""
 
-#: pisi/operations/build.py:377
+#: inary/operations/build.py:377
 #, python-format
 msgid "Rebuilding for %s"
 msgstr ""
 
-#: pisi/operations/build.py:494
+#: inary/operations/build.py:494
 msgid "Cannot find component.xml in remote directory, Source is now part of unknown component"
 msgstr ""
 
-#: pisi/operations/build.py:502
+#: inary/operations/build.py:502
 msgid "Cannot find component.xml in upper directory, Source is now part of unknown component"
 msgstr ""
 
-#: pisi/operations/build.py:516
+#: inary/operations/build.py:516
 msgid "Unpacking archive(s)..."
 msgstr ""
 
-#: pisi/operations/build.py:524
+#: inary/operations/build.py:524
 #, python-format
 msgid " unpacked (%s)"
 msgstr ""
 
-#: pisi/operations/build.py:529
+#: inary/operations/build.py:529
 msgid "Setting up source..."
 msgstr ""
 
-#: pisi/operations/build.py:534
+#: inary/operations/build.py:534
 msgid "Building source..."
 msgstr ""
 
-#: pisi/operations/build.py:539
+#: inary/operations/build.py:539
 msgid "Testing package..."
 msgstr ""
 
-#: pisi/operations/build.py:543
+#: inary/operations/build.py:543
 msgid "Installing..."
 msgstr ""
 
-#: pisi/operations/build.py:609
+#: inary/operations/build.py:609
 #, python-format
 msgid "Unable to read Actions Script (%s): %s"
 msgstr ""
 
-#: pisi/operations/build.py:612
+#: inary/operations/build.py:612
 #, python-format
 msgid "SyntaxError in Actions Script (%s): %s"
 msgstr ""
 
-#: pisi/operations/build.py:642
+#: inary/operations/build.py:642
 #, python-format
 msgid "Unable to read COMAR script (%s): %s"
 msgstr ""
 
-#: pisi/operations/build.py:645
+#: inary/operations/build.py:645
 #, python-format
 msgid "SyntaxError in COMAR file (%s): %s"
 msgstr ""
 
-#: pisi/operations/build.py:677
+#: inary/operations/build.py:677
 #, python-format
 msgid "Sandbox violation: %s (%s -> %s)"
 msgstr ""
 
-#: pisi/operations/build.py:693 pisi/util.py:517
+#: inary/operations/build.py:693 inary/util.py:517
 #, python-format
 msgid "ERROR: WorkDir (%s) does not exist\n"
 msgstr ""
 
-#: pisi/operations/build.py:702
+#: inary/operations/build.py:702
 msgid "Sandbox enabled build..."
 msgstr ""
 
-#: pisi/operations/build.py:726
+#: inary/operations/build.py:726
 msgid "Sandbox violation result:"
 msgstr ""
 
-#: pisi/operations/build.py:731
+#: inary/operations/build.py:731
 msgid "Sandbox violations!"
 msgstr ""
 
-#: pisi/operations/build.py:737
+#: inary/operations/build.py:737
 #, python-format
 msgid "unable to call function from actions: %s"
 msgstr ""
 
-#: pisi/operations/build.py:751
+#: inary/operations/build.py:751
 #, python-format
 msgid "Source package '%s' defines a relative 'Path' element: %s"
 msgstr ""
 
-#: pisi/operations/build.py:755
+#: inary/operations/build.py:755
 #, python-format
 msgid "Source package '%s' defines multiple 'Path' tags for %s"
 msgstr ""
 
-#: pisi/operations/build.py:784
+#: inary/operations/build.py:784
 msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 
-#: pisi/operations/build.py:789
+#: inary/operations/build.py:789
 msgid "Safety switch: the component system.devel cannot be found"
 msgstr ""
 
-#: pisi/operations/build.py:798
+#: inary/operations/build.py:798
 msgid "Unsatisfied Build Dependencies:"
 msgstr ""
 
-#: pisi/operations/build.py:802
+#: inary/operations/build.py:802
 msgid "Cannot build package due to unsatisfied build dependencies"
 msgstr ""
 
-#: pisi/operations/build.py:807
+#: inary/operations/build.py:807
 #, python-format
 msgid "Build dependency %s cannot be satisfied"
 msgstr ""
 
-#: pisi/operations/build.py:809
+#: inary/operations/build.py:809
 msgid "Do you want to install the unsatisfied build dependencies"
 msgstr ""
 
-#: pisi/operations/build.py:810
+#: inary/operations/build.py:810
 msgid "Installing build dependencies."
 msgstr ""
 
-#: pisi/operations/build.py:816
+#: inary/operations/build.py:816
 msgid "Ignoring build dependencies."
 msgstr ""
 
-#: pisi/operations/build.py:826
+#: inary/operations/build.py:826
 #, python-format
 msgid "Patch file is missing: %s\n"
 msgstr ""
 
-#: pisi/operations/build.py:828
+#: inary/operations/build.py:828
 #, python-format
 msgid "Patch file is empty: %s"
 msgstr ""
 
-#: pisi/operations/build.py:844
+#: inary/operations/build.py:844
 #, python-format
 msgid "Applying patch: %s"
 msgstr ""
 
-#: pisi/operations/build.py:963
+#: inary/operations/build.py:963
 #, python-format
 msgid "/%s has suid bit set"
 msgstr ""
 
-#: pisi/operations/build.py:1039
+#: inary/operations/build.py:1039
 #, python-format
 msgid "No user named '%s' found on the system"
 msgstr ""
 
-#: pisi/operations/build.py:1045
+#: inary/operations/build.py:1045
 #, python-format
 msgid "No group named '%s' found on the system"
 msgstr ""
 
-#: pisi/operations/build.py:1052
+#: inary/operations/build.py:1052
 #, python-format
 msgid "There are abandoned files under the install dir (%s):"
 msgstr ""
 
-#: pisi/operations/build.py:1080
+#: inary/operations/build.py:1080
 #, python-format
 msgid "Ignoring empty package %s"
 msgstr ""
 
-#: pisi/operations/build.py:1084
+#: inary/operations/build.py:1084
 #, python-format
 msgid "Building package: %s"
 msgstr ""
 
-#: pisi/operations/build.py:1103 pisi/operations/delta.py:59
+#: inary/operations/build.py:1103 inary/operations/delta.py:59
 #, python-format
 msgid "Creating %s..."
 msgstr ""
 
-#: pisi/operations/build.py:1150
+#: inary/operations/build.py:1150
 msgid "Cleaning build directory..."
 msgstr ""
 
-#: pisi/operations/build.py:1153
+#: inary/operations/build.py:1153
 msgid "Keeping build directory"
 msgstr ""
 
-#: pisi/operations/build.py:1237
+#: inary/operations/build.py:1237
 msgid "Action script error caught."
 msgstr ""
 
-#: pisi/operations/build.py:1241
+#: inary/operations/build.py:1241
 #, python-format
 msgid "*** %d error(s), %d warning(s)"
 msgstr ""
 
-#: pisi/operations/build.py:1324
+#: inary/operations/build.py:1324
 #, python-format
 msgid "Last state was '%s'"
 msgstr ""
 
-#: pisi/operations/delta.py:43
+#: inary/operations/delta.py:43
 #, python-format
 msgid "The file '%s' belongs to a different package other than '%s'. Skipping it..."
 msgstr ""
 
-#: pisi/operations/delta.py:49
+#: inary/operations/delta.py:49
 #, python-format
 msgid "Package '%s' has the same release number with the new package. Skipping it..."
 msgstr ""
 
-#: pisi/operations/delta.py:69
+#: inary/operations/delta.py:69
 #, python-format
 msgid "All files in the package '%s' are different from the files in the new package. Skipping it..."
 msgstr ""
 
-#: pisi/operations/delta.py:113
+#: inary/operations/delta.py:113
 #, python-format
 msgid "New package '%s' exists in the list of old packages. Skipping it..."
 msgstr ""
 
-#: pisi/operations/emerge.py:35
+#: inary/operations/emerge.py:35
 msgid "No packages to emerge."
 msgstr ""
 
-#: pisi/operations/emerge.py:50
+#: inary/operations/emerge.py:50
 msgid ""
 "The following list of packages will be installed\n"
 "from repository in the respective order to satisfy dependencies:\n"
 msgstr ""
 
-#: pisi/operations/emerge.py:53
+#: inary/operations/emerge.py:53
 msgid ""
 "The following list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
 msgstr ""
 
-#: pisi/operations/emerge.py:61 pisi/operations/install.py:82
+#: inary/operations/emerge.py:61 inary/operations/install.py:82
 msgid "There are extra packages due to dependencies. Do you want to continue?"
 msgstr ""
 
-#: pisi/operations/emerge.py:95
+#: inary/operations/emerge.py:95
 #, python-format
 msgid "Cannot find source package: %s"
 msgstr ""
 
-#: pisi/operations/helper.py:51
+#: inary/operations/helper.py:51
 #, python-format
 msgid "Selected packages [%s] are in conflict with each other."
 msgstr ""
 
-#: pisi/operations/helper.py:57
+#: inary/operations/helper.py:57
 #, python-format
 msgid "[%s conflicts with: %s]\n"
 msgstr ""
 
-#: pisi/operations/helper.py:59
+#: inary/operations/helper.py:59
 #, python-format
 msgid ""
 "The following packages have conflicts:\n"
 "%s"
 msgstr ""
 
-#: pisi/operations/helper.py:62
+#: inary/operations/helper.py:62
 msgid "Remove the following conflicting packages?"
 msgstr ""
 
-#: pisi/operations/helper.py:63
+#: inary/operations/helper.py:63
 msgid "Conflicting packages should be removed to continue"
 msgstr ""
 
-#: pisi/operations/history.py:82 pisi/operations/history.py:92
+#: inary/operations/history.py:82 inary/operations/history.py:92
 #, python-format
 msgid "%s could not be found"
 msgstr ""
 
-#: pisi/operations/history.py:95 pisi/package.py:107 pisi/sourcearchive.py:110
+#: inary/operations/history.py:95 inary/package.py:107 inary/sourcearchive.py:110
 #, python-format
 msgid "%s [cached]"
 msgstr ""
 
-#: pisi/operations/history.py:143
+#: inary/operations/history.py:143
 msgid "Following packages will be installed:\n"
 msgstr ""
 
-#: pisi/operations/history.py:146
+#: inary/operations/history.py:146
 msgid "Following packages will be removed:\n"
 msgstr ""
 
-#: pisi/operations/history.py:148 pisi/operations/history.py:162
-#: pisi/operations/install.py:200 pisi/operations/remove.py:72
-#: pisi/operations/upgrade.py:181
+#: inary/operations/history.py:148 inary/operations/history.py:162
+#: inary/operations/install.py:200 inary/operations/remove.py:72
+#: inary/operations/upgrade.py:181
 msgid "Do you want to continue?"
 msgstr ""
 
-#: pisi/operations/history.py:154 pisi/operations/install.py:95
-#: pisi/operations/upgrade.py:192
+#: inary/operations/history.py:154 inary/operations/install.py:95
+#: inary/operations/upgrade.py:192
 #, python-format
 msgid "Downloading %d / %d"
 msgstr ""
 
-#: pisi/operations/history.py:160
+#: inary/operations/history.py:160
 msgid ""
 "\n"
 "Following packages could not be found in repositories and are not cached:\n"
 msgstr ""
 
-#: pisi/operations/install.py:47 pisi/operations/install.py:134
+#: inary/operations/install.py:47 inary/operations/install.py:134
 msgid "The following package(s) are already installed and are not going to be installed again:"
 msgstr ""
 
-#: pisi/operations/install.py:53 pisi/operations/install.py:213
+#: inary/operations/install.py:53 inary/operations/install.py:213
 msgid "No packages to install."
 msgstr ""
 
-#: pisi/operations/install.py:71
+#: inary/operations/install.py:71
 msgid "Following packages will be installed:"
 msgstr ""
 
-#: pisi/operations/install.py:76 pisi/operations/upgrade.py:168
+#: inary/operations/install.py:76 inary/operations/upgrade.py:168
 #, python-format
 msgid "Total size of package(s): %.2f %s"
 msgstr ""
 
-#: pisi/operations/install.py:107 pisi/operations/upgrade.py:206
+#: inary/operations/install.py:107 inary/operations/upgrade.py:206
 #, python-format
 msgid "Installing %d / %d"
 msgstr ""
 
-#: pisi/operations/install.py:121
+#: inary/operations/install.py:121
 msgid "Mixing file names and package names not supported yet."
 msgstr ""
 
-#: pisi/operations/install.py:165
+#: inary/operations/install.py:165
 #, python-format
 msgid "Package %s is not compatible with your distribution release %s %s."
 msgstr ""
 
-#: pisi/operations/install.py:169
+#: inary/operations/install.py:169
 #, python-format
 msgid "Package %s (%s) is not compatible with your %s architecture."
 msgstr ""
 
-#: pisi/operations/install.py:192
+#: inary/operations/install.py:192
 #, python-format
 msgid "External dependencies not satisfied: %s"
 msgstr ""
 
-#: pisi/operations/install.py:197
+#: inary/operations/install.py:197
 msgid "The following packages will be installed in order to satisfy dependencies:"
 msgstr ""
 
-#: pisi/operations/install.py:201
+#: inary/operations/install.py:201
 msgid "External dependencies not satisfied"
 msgstr ""
 
-#: pisi/operations/install.py:244
+#: inary/operations/install.py:244
 msgid "Installation order: "
 msgstr ""
 
-#: pisi/operations/install.py:279 pisi/specfile.py:274
+#: inary/operations/install.py:279 inary/specfile.py:274
 #, python-format
 msgid "%s dependency of package %s is not satisfied"
 msgstr ""
 
-#: pisi/operations/remove.py:43
+#: inary/operations/remove.py:43
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr ""
 
-#: pisi/operations/remove.py:48 pisi/operations/upgrade.py:372
+#: inary/operations/remove.py:48 inary/operations/upgrade.py:372
 msgid "Safety switch: The component system.base cannot be found."
 msgstr ""
 
-#: pisi/operations/remove.py:55
+#: inary/operations/remove.py:55
 #, python-format
 msgid "Package %s does not exist. Cannot remove."
 msgstr ""
 
-#: pisi/operations/remove.py:59
+#: inary/operations/remove.py:59
 msgid "No packages to remove."
 msgstr ""
 
-#: pisi/operations/remove.py:68
+#: inary/operations/remove.py:68
 msgid ""
 "The following list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
 msgstr ""
 
-#: pisi/operations/remove.py:73
+#: inary/operations/remove.py:73
 msgid "Package removal declined"
 msgstr ""
 
-#: pisi/operations/remove.py:85
+#: inary/operations/remove.py:85
 #, python-format
 msgid "Package %s is not installed. Cannot remove."
 msgstr ""
 
-#: pisi/operations/remove.py:120
+#: inary/operations/remove.py:120
 msgid "Conflicts remain"
 msgstr ""
 
-#: pisi/operations/remove.py:128
+#: inary/operations/remove.py:128
 msgid "Obsoleted packages remaining"
 msgstr ""
 
-#: pisi/operations/remove.py:132
+#: inary/operations/remove.py:132
 msgid "Replaced package remains"
 msgstr ""
 
-#: pisi/operations/upgrade.py:52
+#: inary/operations/upgrade.py:52
 msgid "You must restart the following service(s) manually for the updated software to take effect:"
 msgstr ""
 
-#: pisi/operations/upgrade.py:59
+#: inary/operations/upgrade.py:59
 msgid "You must restart your system for the updates in the following package(s) to take effect:"
 msgstr ""
 
-#: pisi/operations/upgrade.py:81
-msgid "Warning: package *name* ends with '.pisi'"
+#: inary/operations/upgrade.py:81
+msgid "Warning: package *name* ends with '.inary'"
 msgstr ""
 
-#: pisi/operations/upgrade.py:84
+#: inary/operations/upgrade.py:84
 #, python-format
 msgid "Package %s is not installed."
 msgstr ""
 
-#: pisi/operations/upgrade.py:88
+#: inary/operations/upgrade.py:88
 #, python-format
 msgid "Package %s is not available in repositories."
 msgstr ""
 
-#: pisi/operations/upgrade.py:105
+#: inary/operations/upgrade.py:105
 #, python-format
 msgid "Package %s is already at the latest release %s."
 msgstr ""
 
-#: pisi/operations/upgrade.py:163
+#: inary/operations/upgrade.py:163
 msgid "The following packages will be upgraded:"
 msgstr ""
 
-#: pisi/operations/upgrade.py:174
+#: inary/operations/upgrade.py:174
 msgid "There are extra packages due to dependencies."
 msgstr ""
 
-#: pisi/operations/upgrade.py:254
+#: inary/operations/upgrade.py:254
 #, python-format
 msgid "Dependency %s of %s cannot be satisfied"
 msgstr ""
 
-#: pisi/operations/upgrade.py:255
+#: inary/operations/upgrade.py:255
 msgid "Upgrade is not possible."
 msgstr ""
 
-#: pisi/operations/upgrade.py:349
+#: inary/operations/upgrade.py:349
 msgid "Safety switch forces the installation of following packages:"
 msgstr ""
 
-#: pisi/operations/upgrade.py:365
+#: inary/operations/upgrade.py:365
 msgid "Safety switch forces the upgrade of following packages:"
 msgstr ""
 
-#: pisi/package.py:68
+#: inary/package.py:68
 #, python-format
 msgid "Cannot open package file: %s"
 msgstr ""
 
-#: pisi/package.py:89
+#: inary/package.py:89
 #, python-format
 msgid "Unsupported package format: %s"
 msgstr ""
 
-#: pisi/package.py:103
+#: inary/package.py:103
 #, python-format
 msgid ""
 "There was a problem while fetching '%s'.\n"
 "The package may have been upgraded. Please try to upgrade the package."
 msgstr ""
 
-#: pisi/pxml/autoxml.py:78
+#: inary/pxml/autoxml.py:78
 #, python-format
 msgid "At least one '%s' tag should have local text"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:85
+#: inary/pxml/autoxml.py:85
 #, python-format
 msgid "'%s' language of tag '%s' is empty"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:113
+#: inary/pxml/autoxml.py:113
 msgid "LocalText: unable to get either current or default locale"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:119 pisi/pxml/autoxml.py:134
+#: inary/pxml/autoxml.py:119 inary/pxml/autoxml.py:134
 msgid "Tag should have at least the current locale, or failing that an English or Turkish version"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:372
+#: inary/pxml/autoxml.py:372
 #, python-format
 msgid "autoxml.check: '%s' errors"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:427 pisi/pxml/autoxml.py:437
+#: inary/pxml/autoxml.py:427 inary/pxml/autoxml.py:437
 #, python-format
 msgid "autoxml.parse: String '%s' has errors"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:451 pisi/pxml/autoxml.py:461
+#: inary/pxml/autoxml.py:451 inary/pxml/autoxml.py:461
 #, python-format
 msgid "autoxml.read: File '%s' has errors"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:469
+#: inary/pxml/autoxml.py:469
 msgid "autoxml.write: object validation has failed"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:477
+#: inary/pxml/autoxml.py:477
 #, python-format
 msgid "autoxml.write: File encoding '%s' has errors"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:527
+#: inary/pxml/autoxml.py:527
 #, python-format
 msgid "gen_tag: unrecognized tag type %s in spec"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:575 pisi/pxml/autoxml.py:586
+#: inary/pxml/autoxml.py:575 inary/pxml/autoxml.py:586
 #, python-format
 msgid "Mandatory variable %s not available"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:656
+#: inary/pxml/autoxml.py:656
 msgid "Type mismatch: read text cannot be decoded"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:660 pisi/pxml/autoxml.py:669
+#: inary/pxml/autoxml.py:660 inary/pxml/autoxml.py:669
 #, python-format
 msgid "Mandatory token %s not available"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:674
+#: inary/pxml/autoxml.py:674
 #, python-format
 msgid "Type mismatch. Expected %s, got %s"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:704 pisi/pxml/autoxml.py:825
+#: inary/pxml/autoxml.py:704 inary/pxml/autoxml.py:825
 msgid "Type mismatch: DOM cannot be decoded"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:707 pisi/pxml/autoxml.py:723 pisi/pxml/autoxml.py:737
-#: pisi/pxml/autoxml.py:828 pisi/pxml/autoxml.py:842 pisi/pxml/autoxml.py:856
+#: inary/pxml/autoxml.py:707 inary/pxml/autoxml.py:723 inary/pxml/autoxml.py:737
+#: inary/pxml/autoxml.py:828 inary/pxml/autoxml.py:842 inary/pxml/autoxml.py:856
 msgid "Mandatory argument not available"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:720 pisi/pxml/autoxml.py:839
+#: inary/pxml/autoxml.py:720 inary/pxml/autoxml.py:839
 msgid "Object cannot be encoded"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:734 pisi/pxml/autoxml.py:853
+#: inary/pxml/autoxml.py:734 inary/pxml/autoxml.py:853
 msgid "Object cannot be formatted"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:750
+#: inary/pxml/autoxml.py:750
 msgid "List type must contain only one element"
 msgstr ""
 
-#: pisi/pxml/autoxml.py:763 pisi/pxml/autoxml.py:784
+#: inary/pxml/autoxml.py:763 inary/pxml/autoxml.py:784
 #, python-format
 msgid "Mandatory list \"%s\" under \"%s\" node is empty."
 msgstr ""
 
-#: pisi/pxml/xmlext.py:79
+#: inary/pxml/xmlext.py:79
 msgid "getNodeText: Expected text node, got something else!"
 msgstr ""
 
-#: pisi/pxml/xmlfile.py:60
+#: inary/pxml/xmlfile.py:60
 #, python-format
 msgid "String '%s' has invalid XML"
 msgstr ""
 
-#: pisi/pxml/xmlfile.py:83
+#: inary/pxml/xmlfile.py:83
 #, python-format
 msgid "Unable to read file (%s): %s"
 msgstr ""
 
-#: pisi/pxml/xmlfile.py:85 pisi/specfile.py:443
+#: inary/pxml/xmlfile.py:85 inary/specfile.py:443
 #, python-format
 msgid "File '%s' has invalid XML"
 msgstr ""
 
-#: pisi/scenarioapi/package.py:67
+#: inary/scenarioapi/package.py:67
 #, python-format
-msgid "No pisi package: %s* found."
+msgid "No inary package: %s* found."
 msgstr ""
 
-#: pisi/scenarioapi/repoops.py:28
+#: inary/scenarioapi/repoops.py:28
 #, python-format
 msgid "Repo already has package named %s."
 msgstr ""
 
-#: pisi/scenarioapi/repoops.py:52 pisi/scenarioapi/repoops.py:59
+#: inary/scenarioapi/repoops.py:52 inary/scenarioapi/repoops.py:59
 #, python-format
 msgid "Repo does not have package named %s."
 msgstr ""
 
-#: pisi/sourcearchive.py:62
+#: inary/sourcearchive.py:62
 #, python-format
 msgid "Fetching source from: %s"
 msgstr ""
 
-#: pisi/sourcearchive.py:73
+#: inary/sourcearchive.py:73
 #, python-format
 msgid "Source archive is stored: %s/%s"
 msgstr ""
 
-#: pisi/sourcearchive.py:79
+#: inary/sourcearchive.py:79
 #, python-format
 msgid "Trying fallback address: %s"
 msgstr ""
 
-#: pisi/sourcearchive.py:90
+#: inary/sourcearchive.py:90
 #, python-format
 msgid "%s mirrors are not defined."
 msgstr ""
 
-#: pisi/sourcearchive.py:95
+#: inary/sourcearchive.py:95
 #, python-format
 msgid "Fetching source from mirror: %s"
 msgstr ""
 
-#: pisi/sourcearchive.py:101
+#: inary/sourcearchive.py:101
 #, python-format
 msgid "Could not fetch source from %s mirrors."
 msgstr ""
 
-#: pisi/sourcearchive.py:119
+#: inary/sourcearchive.py:119
 msgid "unpack: check_file_hash failed"
 msgstr ""
 
-#: pisi/sourcearchive.py:124
+#: inary/sourcearchive.py:124
 #, python-format
 msgid "Unknown archive type '%s' is given for '%s'."
 msgstr ""
 
-#: pisi/sourcearchive.py:127
+#: inary/sourcearchive.py:127
 #, python-format
-msgid "Pisi needs %s to unpack this archive but it is not installed."
+msgid "Inary needs %s to unpack this archive but it is not installed."
 msgstr ""
 
-#: pisi/specfile.py:164
+#: inary/specfile.py:164
 #, python-format
 msgid "URI: %s, type: %s, sha1sum: %s"
 msgstr ""
 
-#: pisi/specfile.py:194 pisi/specfile.py:197
+#: inary/specfile.py:194 inary/specfile.py:197
 msgid " or "
 msgstr ""
 
-#: pisi/specfile.py:372 pisi/specfile.py:458
+#: inary/specfile.py:372 inary/specfile.py:458
 #, python-format
 msgid "Summary: %s\n"
 msgstr ""
 
-#: pisi/specfile.py:373 pisi/specfile.py:459
+#: inary/specfile.py:373 inary/specfile.py:459
 #, python-format
 msgid "Description: %s\n"
 msgstr ""
 
-#: pisi/specfile.py:374 pisi/specfile.py:460
+#: inary/specfile.py:374 inary/specfile.py:460
 #, fuzzy, python-format
 msgid "Licenses: %s\n"
 msgstr "Використання: %s\n"
 
-#: pisi/specfile.py:375 pisi/specfile.py:461
+#: inary/specfile.py:375 inary/specfile.py:461
 #, python-format
 msgid "Component: %s\n"
 msgstr ""
 
-#: pisi/specfile.py:376
+#: inary/specfile.py:376
 msgid "Provides: "
 msgstr ""
 
-#: pisi/specfile.py:380
+#: inary/specfile.py:380
 msgid "Dependencies: "
 msgstr ""
 
-#: pisi/specfile.py:434
+#: inary/specfile.py:434
 msgid "translations.xml file is badly formed."
 msgstr ""
 
-#: pisi/specfile.py:462
+#: inary/specfile.py:462
 msgid "Build Dependencies: "
 msgstr ""
 
-#: pisi/uri.py:78
+#: inary/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr ""
 
-#: pisi/util.py:188 pisi/util.py:200
+#: inary/util.py:188 inary/util.py:200
 msgid "Running "
 msgstr ""
 
-#: pisi/util.py:192 pisi/util.py:218
+#: inary/util.py:192 inary/util.py:218
 #, python-format
 msgid "return value for \"%s\" is %s"
 msgstr ""
 
-#: pisi/util.py:392
+#: inary/util.py:392
 #, python-format
 msgid "Including external link '%s'"
 msgstr ""
 
-#: pisi/util.py:394
+#: inary/util.py:394
 #, python-format
 msgid "Including directory '%s'"
 msgstr ""
 
-#: pisi/util.py:480
+#: inary/util.py:480
 msgid "You don't have necessary read permissions"
 msgstr ""
 
-#: pisi/util.py:482
+#: inary/util.py:482
 #, python-format
 msgid "Cannot calculate SHA1 hash of %s"
 msgstr ""
 
-#: pisi/util.py:494
+#: inary/util.py:494
 #, python-format
 msgid "Compression type is not valid: '%s'"
 msgstr ""
 
-#: pisi/util.py:500
+#: inary/util.py:500
 #, python-format
 msgid "Error while decompressing %s: %s"
 msgstr ""
 
-#: pisi/util.py:543
+#: inary/util.py:543
 #, python-format
 msgid "ERROR: patch (%s) failed"
 msgstr ""
 
-#: pisi/util.py:545
+#: inary/util.py:545
 #, python-format
 msgid "ERROR: patch (%s) failed: %s"
 msgstr ""
 
-#: pisi/util.py:555
+#: inary/util.py:555
 #, python-format
 msgid "strip command failed for file '%s'!"
 msgstr ""
 
-#: pisi/util.py:562
+#: inary/util.py:562
 #, python-format
 msgid "chrpath command failed for file '%s'!"
 msgstr ""
 
-#: pisi/util.py:569
+#: inary/util.py:569
 #, python-format
 msgid "objcopy (keep-debug) command failed for file '%s'!"
 msgstr ""
 
-#: pisi/util.py:575
+#: inary/util.py:575
 #, python-format
 msgid "objcopy (add-debuglink) command failed for file '%s'!"
 msgstr ""
 
-#: pisi/util.py:665
+#: inary/util.py:665
 #, python-format
 msgid "Invalid package name: %s"
 msgstr ""
 
-#: pisi/util.py:705
+#: inary/util.py:705
 #, python-format
 msgid "Invalid delta package name: %s"
 msgstr ""
 
-#: pisi/version.py:64
+#: inary/version.py:64
 #, python-format
 msgid "Invalid version string: '%s'"
 msgstr ""

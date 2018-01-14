@@ -1,21 +1,21 @@
 import unittest
-import pisi.replace
-import pisi.relation
+import inary.replace
+import inary.relation
 
 class ReplaceTestCase(unittest.TestCase):
     def testInstalledPackageReplaced(self):
-        pisi.api.install(["ethtool"])
-        relation = pisi.relation.Relation()
+        inary.api.install(["ethtool"])
+        relation = inary.relation.Relation()
         relation.package = "ethtool"
         relation.version = "6"
         relation.release = "1"
 
-        replace = pisi.replace.Replace(relation)
+        replace = inary.replace.Replace(relation)
         replace.package = "zlib"
         # Check if the replaced package is installed
-        self.assert_(pisi.replace.installed_package_replaced(replace))
-        repinfo = pisi.replace.Replace(relation)
+        self.assertTrue(inary.replace.installed_package_replaced(replace))
+        repinfo = inary.replace.Replace(relation)
         repinfo.package = "ctorrent"
-        assert not pisi.replace.installed_package_replaced(repinfo)
+        assert not inary.replace.installed_package_replaced(repinfo)
 
-        pisi.api.remove(["ethtool"])
+        inary.api.remove(["ethtool"])

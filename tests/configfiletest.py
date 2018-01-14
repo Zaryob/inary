@@ -1,10 +1,10 @@
 import unittest
-from pisi.configfile import ConfigurationFile
+from inary.configfile import ConfigurationFile
 
 class ConfigFileTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.cf = ConfigurationFile('pisi.conf')
+        self.cf = ConfigurationFile('inary.conf')
 
     def testGeneralDefaults(self):
         cf = self.cf
@@ -38,7 +38,7 @@ class ConfigFileTestCase(unittest.TestCase):
     def testPisiConfValues(self):
         cf = self.cf
         self.assertEqual(cf.dirs.kde_dir, '/usr/kde/4')
-        self.assertEqual(cf.dirs.compiled_packages_dir, '/var/cache/pisi/packages')
+        self.assertEqual(cf.dirs.compiled_packages_dir, '/var/cache/inary/packages')
         self.assertEqual(cf.general.architecture, 'i686')
         self.assertEqual(cf.general.distribution_release, '2009')
 

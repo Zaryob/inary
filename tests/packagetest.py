@@ -1,14 +1,14 @@
 import unittest
 import os
 
-from pisi import util
-from pisi import package
-import pisi.context as ctx
+from inary import util
+from inary import package
+import inary.context as ctx
 
 class PackageTestCase(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
-        self.pkgName = "test-7.1-2-p11-x86_64.pisi"
+        self.pkgName = "test-7.1-2-p11-x86_64.inary"
 
     def testAddPackage(self):
         cur = os.getcwd()
@@ -37,7 +37,7 @@ class PackageTestCase(unittest.TestCase):
         pkg.extract_file("files.xml",cur)
         if os.path.exists("files.xml"):
             self.fail("File extract error")
-        pkg.extract_pisi_files("002_remove.xml")
+        pkg.extract_inary_files("002_remove.xml")
         if os.path.exists("002_remove.xml"):
             self.fail("Pisi files extract error")
 

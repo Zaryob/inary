@@ -1,6 +1,6 @@
 import unittest
 import shutil
-from pisi.util import *
+from inary.util import *
 import os
 
 class UtilTestCase(unittest.TestCase):
@@ -27,9 +27,9 @@ class UtilTestCase(unittest.TestCase):
         assert ['usr', 'lib', 'pardus'] == splitpath('usr/lib/pardus')
 
     def testSubPath(self):
-        self.assert_(subpath('usr','usr'))
-        self.assert_(subpath('usr','usr/local/src'))
-        self.assert_(not subpath('usr/local','usr'))
+        self.assertTrue(subpath('usr','usr'))
+        self.assertTrue(subpath('usr','usr/local/src'))
+        self.assertTrue(not subpath('usr/local','usr'))
 
     def testRemovePathPrefix(self):
         pathname = removepathprefix('usr/local', 'usr/local/src')
@@ -45,19 +45,19 @@ class UtilTestCase(unittest.TestCase):
 
     #file/directory related functions tests
     def testCheckFile(self):
-        assert check_file('/etc/pisi/pisi.conf')
+        assert check_file('/etc/inary/pisi.conf')
         assert check_file('/usr/bin/aatest')
 
     def testCleanDir(self):
         assert None == clean_dir('usr/lib')
         assert None == clean_dir('usr/local')
-        assert not 'tmp/pisi-root' == clean_dir('usr/tmp')
+        assert not 'tmp/inary-root' == clean_dir('usr/tmp')
 
     def testDirSize(self):
         self.assertNotEqual(dir_size('usr/lib/pardus'),2940)
         self.assertNotEqual(dir_size('usr/lib'),65)
 
     def testCopyFile(self):
-        copy_file('/etc/pisi/pisi.conf', '/tmp/pisi-test1')
-        copy_file('/etc/pisi/sandbox.conf', '/tmp/pisi-test2')
-        copy_file_stat('/etc/pisi/pisi.conf', '/tmp/pisi-test1')
+        copy_file('/etc/inary/pisi.conf', '/tmp/pisi-test1')
+        copy_file('/etc/inary/sandbox.conf', '/tmp/pisi-test2')
+        copy_file_stat('/etc/inary/pisi.conf', '/tmp/pisi-test1')

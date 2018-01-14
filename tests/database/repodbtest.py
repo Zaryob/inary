@@ -10,18 +10,18 @@
 # Please read the COPYING file.
 #
 
-import testcase
-import pisi
+from . import testcase
+import inary
 
 class RepoDBTestCase(testcase.TestCase):
 
     def setUp(self):
         testcase.TestCase.setUp(self)
-        self.repodb = pisi.db.repodb.RepoDB()
+        self.repodb = inary.db.repodb.RepoDB()
 
     def testAddRemoveRepo(self):
         assert "contrib-2007-src" not in self.repodb.list_repos()
-        repo = pisi.db.repodb.Repo(pisi.uri.URI("repos/contrib-2007/pisi-index.xml"))
+        repo = inary.db.repodb.Repo(pisi.uri.URI("repos/contrib-2007/pisi-index.xml"))
         self.repodb.add_repo("contrib-2007-src", repo)
         assert "contrib-2007-src" in self.repodb.list_repos()
         self.repodb.remove_repo("contrib-2007-src")
@@ -32,7 +32,7 @@ class RepoDBTestCase(testcase.TestCase):
     def testAddRemoveCycle(self):
         for r in range(30):
             assert "test-repo" not in self.repodb.list_repos()
-            repo = pisi.db.repodb.Repo(pisi.uri.URI("http://test-repo/pisi-index.xml"))
+            repo = inary.db.repodb.Repo(pisi.uri.URI("http://test-repo/pisi-index.xml"))
             self.repodb.add_repo("test-repo", repo)
             assert "test-repo" in self.repodb.list_repos()
             self.repodb.remove_repo("test-repo")
@@ -51,13 +51,13 @@ class RepoDBTestCase(testcase.TestCase):
     def testGetRepo(self):
         repo = self.repodb.get_repo("pardus-2007")
         uri = repo.indexuri
-        assert uri.get_uri() == "repos/pardus-2007-bin/pisi-index.xml"
+        assert uri.get_uri() == "repos/pardus-2007-bin/inary-index.xml"
 
     def testRepoOrder(self):
-        repoorder = pisi.db.repodb.RepoOrder()
+        repoorder = inary.db.repodb.RepoOrder()
         assert repoorder.get_order() == ['pardus-2007', 'contrib-2007', 'pardus-2007-src']
 
-        repoorder.add("test-repo", "http://test-repo/pisi-index.xml")
+        repoorder.add("test-repo", "http://test-repo/inary-index.xml")
         assert repoorder.get_order() == ['pardus-2007', 'contrib-2007', 'pardus-2007-src', 'test-repo']
 
         repoorder.remove("test-repo")
