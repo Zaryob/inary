@@ -17,9 +17,11 @@ import glob
 import sys
 import inspect
 import tempfile
-from setuptools import setup
+from setuptools import setup, Extension
+from distutils.cmd import Command
 from distutils.command.build import build
 from distutils.command.install import install
+from distutils.sysconfig import get_python_lib
 
 sys.path.insert(0, '.')
 import inary
@@ -154,6 +156,18 @@ class Install(install):
                     inaryconf.write("%s = %s\n" % (member[0], member[1]))
             inaryconf.write('\n')
 
+class Uninstall(Command):
+    user_options = []
+    def initialize_options(self):
+        pass
+    def finalize_options(self):
+        pass
+    def run(self):
+        print('Uninstalling ...')
+        project_dir = os.path.join(get_python_lib(), PROJECT)
+        if os.path.exists(project_dir):
+            print(' removing: ', project_dir)
+            shutil.rmtree(project_dir)
 #class makeTest():
 
 
@@ -168,17 +182,35 @@ setup(name="inary",
     description="Inary (Special Package Manager)",
     long_description="Inary is the package management system of Sulin Linux.",
     license="GNU GPL2",
-    author="Aquila Nipalensis",
+    author="Zaryob",
     author_email="nipalensisaquila@gmail.com",
-    url="https://github.com/AquilaNipalensis/package-manager",
+    url="https://github.com/Zaryob/pisi",
     #package_dir = {'': ''},
-    packages = ['inary','inary.analyzer', 'inary.cli', 'inary.data', 'inary.operations', 'inary.actionsapi', 'inary.sxml', 'inary.scenarioapi', 'inary.db'],
-    scripts = ['inary-cli', 'scripts/lsinary', 'scripts/uninary', 'scripts/check-newconfigs.py', 'scripts/revdep-rebuild', 'scripts/inarysh'],
+    packages = ['inary',
+                'inary.actionsapi',
+                'inary.analyzer',
+                'inary.cli',
+                'inary.data',
+                'inary.db',
+                'inary.operations',
+                'inary.sxml',
+                'inary.scenarioapi',
+                'inary.system_literals'],
+    scripts = ['inary-cli', 
+               'scripts/lsinary',
+               'scripts/uninary',
+               'scripts/check-newconfigs.py',
+               'scripts/revdep-rebuild',
+               'scripts/inarysh'],
     include_package_data=True,
     cmdclass = {'build' : Build,
                 'build_po' : BuildPo,
                 'install' : Install,
-                                  },
+                'uninstall' : Uninstall},
+    ext_modules = [Extension('inary.system_literals.csapi',
+                               sources=['inary/system_literals/csapi.c'],
+                               libraries=[]),
+                    ],
     data_files =datas
     )
 
