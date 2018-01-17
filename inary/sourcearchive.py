@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2016 - 2018, Suleyman POYRAZ (AquilaNipalensis)
+# Copyright (C) 2016 - 2018, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -62,6 +62,8 @@ class SourceArchive:
                 ctx.ui.info(_("Fetching source from: %s") % self.url.uri)
                 if self.url.get_uri().startswith("mirrors://"):
                     self.fetch_from_mirror()
+                if self.url.get_uri().startswith("file://"):
+                    self.fetch_from_locale()
                 else:
                     inary.fetcher.fetch_url(self.url, ctx.config.archives_dir(), self.progress)
             except inary.fetcher.FetchError:
@@ -70,7 +72,7 @@ class SourceArchive:
                 else:
                     raise
 
-            ctx.ui.info(_("Source archive is stored: %s/%s")
+            ctx.ui.info(_("\nSource archive is stored: %s/%s")
                 % (ctx.config.archives_dir(), self.url.filename()))
 
     def fetch_from_fallback(self):
@@ -78,6 +80,14 @@ class SourceArchive:
         src = os.path.join(ctx.config.values.build.fallback, archive)
         ctx.ui.warning(_('Trying fallback address: %s') % src)
         inary.fetcher.fetch_url(src, ctx.config.archives_dir(), self.progress)
+
+    def fetch_from_locale(self):
+        url = self.url.uri
+
+        if not os.access(url, os.F_OK):
+            raise Error(_('No such file or no permission to read'))
+        shutil.copy(url, self.archiveFile)
+
 
     def fetch_from_mirror(self):
         uri = self.url.get_uri()
