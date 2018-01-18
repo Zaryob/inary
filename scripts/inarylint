@@ -1,0 +1,1044 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# inarylint is a inary package and spec checker which is written for doing
+# the automatic checks of the packages which are in review process.
+
+import os
+import re
+import sys
+import glob
+import inary
+import shutil
+import ciksemel
+import tempfile
+import subprocess
+import configparser
+
+# TODO:
+    # * Check for dodoc'ed files in WorkDir (except INSTALL and etc.)
+    # * Consider moving summary and description checks to Package class
+    # * If the source package has more than one package, the sub packages
+    #   should contain summaries at least
+    # * SUID bit check
+    # * Package contains weird file/dir permissions like 744 etc.
+    # * Documents contains executable bit
+    # * Add a verbose mode that prints more details when -v parameter is passed
+    # * If the dependency is in system.base and its strict, then remove that
+    #    dependency from alread_in_sys_base list
+    # * Check for archive attributes if they are in right order
+
+class CheckActions:
+    """ Check actions.py if it has unused imports or system() usage """
+
+    def __init__(self, filename="actions.py"):
+        self.filename = filename
+
+        # Must, Should, Cosmetic fixes
+        self.issues = {"M": [], "S": [], "C": []}
+
+        with open(filename, "r") as f_actions:
+            self.actions = f_actions.read()
+
+    def check_all(self):
+        """ Call all check functions """
+        self.check_actions()
+
+        if any([not x == [] for x in list(self.issues.values())]):
+            print(colorize("actions.py", "bold"))
+            print(colorize("----------", "bold"))
+            for issue in self.issues["M"]:
+                print(colorize(" *", "red"), issue)
+            for issue in self.issues["S"]:
+                print(colorize(" *", "yellow"), issue)
+            for issue in self.issues["C"]:
+                print(colorize(" *"), issue)
+            print()
+
+    def check_actions(self):
+        """ Check actions.py for unused imports and system() usage """
+
+        try:
+            status = get_status_output(('/usr/bin/sfood-checker', self.filename), False)
+            for line in status[1].splitlines():
+                self.issues["C"].append(line.split(": ")[1].strip())
+        except OSError:
+            print(colorize('You must install "snakefood" package to review actions.py', 'red'))
+
+        # Calling qmake* via system() is redundant since
+        # the API provides the related methods
+        for line in self.actions.splitlines():
+            if re.search('.*system\(.*qmake.*', line):
+                self.issues["M"].append('Use qt4 ActionsAPI module to configure the project')
+            elif "os.system" in line:
+                self.issues["M"].append('Avoid using "os.system". Use Inary ActionsAPI instead')
+
+    def actions_issues(self):
+        """ Total issues reported by the CheckActions class """
+        return sum(([len(x) for x in list(self.issues.values())]))
+
+
+class CheckPspec:
+    """ All methods related to pspec.xml checking like summary, description, archive and etc. """
+
+    def __init__(self, filename="pspec.xml"):
+
+        # Must, Should, Cosmetic fixes
+        self.issues = {"M": [], "S": [], "C": []}
+
+        with open(filename, "r") as f_pspec:
+            self.filename = f_pspec.read()
+
+        self.p_doc = ciksemel.parseString(self.filename)
+        self.s_name = self.p_doc.getTag("Source").getTagData("Name")
+
+        self.sys_base = []
+        self.sys_devel = []
+        self.cdb = inary.db.componentdb.ComponentDB()
+        self.rdb = inary.db.repodb.RepoDB()
+        for repo in self.rdb.list_repos():
+            for component in self.cdb.list_components(repo):
+                if component == "system.base":
+                    self.sys_base.extend(self.cdb.get_packages('system.base', repo))
+                if component == "system.devel":
+                    self.sys_devel.extend(self.cdb.get_packages('system.devel', repo))
+
+    def check_all(self):
+        """ Call all check functions """
+
+        self.check_build_deps()
+        self.check_runtime_deps()
+        self.check_packager_name()
+        self.check_archive()
+        self.check_summary()
+        self.check_description()
+        self.check_patches()
+        self.check_files()
+
+        if any([not x == [] for x in list(self.issues.values())]):
+            print(colorize("pspec.xml", "bold"))
+            print(colorize("---------", "bold"))
+            for issue in self.issues["M"]:
+                print(colorize(" *", "red"), issue)
+            for issue in self.issues["S"]:
+                print(colorize(" *", "yellow"), issue)
+            for issue in self.issues["C"]:
+                print(colorize(" *"), issue)
+            print()
+
+    def check_build_deps(self):
+        """ Check if the BuildDependencies tag has system.devel or system.base dependencies """
+
+        pdb = inary.db.packagedb.PackageDB()
+        build_deps = []
+        build_deps_tag = self.p_doc.getTag("Source").getTag("BuildDependencies")
+        if build_deps_tag:
+            for build_dep in build_deps_tag.tags("Dependency"):
+                build_deps.append(build_dep.firstChild().data())
+
+        already_in_sys_dev = []
+        already_in_sys_base = []
+        use_devel_pkg = []
+        for build_dep in build_deps:
+            if not build_dep.endswith("-devel"):
+                if pdb.has_package("%s-devel" % build_dep):
+                    use_devel_pkg.append(build_dep)
+            if build_dep in self.sys_devel:
+                already_in_sys_dev.append(build_dep)
+            elif build_dep in self.sys_base:
+                already_in_sys_base.append(build_dep)
+
+        if already_in_sys_dev:
+            self.issues["S"].append('There is no need to write "%s" as build dependency since it is already in system.devel' % already_in_sys_dev)
+
+        elif already_in_sys_base:
+            self.issues["S"].append('There is no need to write "%s" as build dependency since it is already in system.base' % already_in_sys_base)
+
+        if len(use_devel_pkg) == 1:
+            self.issues["M"].append('This package has "-devel" counterpart in repo to be written as build dependencies:\n   %s' % use_devel_pkg)
+        elif len(use_devel_pkg) > 1:
+            self.issues["M"].append('These packages have "-devel" counterparts in repo to be written as build dependencies:\n\t%s' % '\n\t'.join(use_devel_pkg))
+
+    def check_runtime_deps(self):
+        """ Check if the RuntimeDependencies tag has system.base dependencies and
+        check for release="current" attribute in -devel package's dependency tags """
+
+        deps = {}
+        for i in self.p_doc.tags("Package"):
+            deps[i.getTagData("Name")] = []
+            runtime_deps_tag = i.getTag("RuntimeDependencies")
+            if i.getTagData("Name") == (self.s_name + "-devel") and not runtime_deps_tag:
+                self.issues["M"].append('%s does not strictly depend on the main package with release="current"' % i.getTagData("Name"))
+            elif runtime_deps_tag:
+                for runtime_dep in runtime_deps_tag.tags("Dependency"):
+                    if runtime_dep.firstChild().data() == self.s_name and ("release" not in runtime_dep.attributes() or runtime_dep.getAttribute("release") != "current"):
+                        self.issues["M"].append('%s does not strictly depend on the main package with release="current"' % i.getTagData("Name"))
+                    if runtime_dep.firstChild().data() in self.sys_base:
+                        deps[i.getTagData("Name")].append(runtime_dep.firstChild().data())
+
+        for pkg in list(deps.keys()):
+            if deps[pkg]:
+                self.issues["S"].append('There is no need to write "%s" in "%s" as runtime dependency since it is already in system.base' % (deps[pkg], pkg))
+
+    def check_packager_name(self):
+        """ Check if the packager name has uppercased words """
+        faulty_packager_name = []
+
+        packager_name = self.p_doc.getTag("Source").getTag("Packager").getTagData("Name")
+        if packager_name.lower() == "pardus":
+            self.issues["M"].append('Packager name is "%s". Why don\'t you take over the package?' % packager_name)
+        else:
+            for i in packager_name.split(" "):
+                if len(i) > 2 and i.isupper():  # Consider abbreviations
+                    faulty_packager_name.append(i)
+
+        if faulty_packager_name:
+            self.issues["M"].append('Packager-name contains uppercased word (%s)' % ' '.join(faulty_packager_name))
+
+    def check_archive(self):
+        """ Check archive tag to see if the packager is using mirrors:// support """
+
+        # There is no clean way to detect if the archive is supported by mirrors,
+        # So just check for Sourceforge since it is the most common mistake that packagers do.
+        archives = self.p_doc.getTag("Source").tags("Archive")
+        archive_count = 0
+
+        for archive in archives:
+            if not archive.firstChild().data().startswith("mirrors://") and "sourceforge" in archive.firstChild().data():
+                self.issues["M"].append('Use "mirrors://sourceforge/<project-name>" in Archive[%s] to keep advantage of Sourceforge mirrors' % archive_count)
+            archive_count += 1
+
+    def check_summary(self):
+        """ Many checks for Summary such as leading/trailing whitespaces etc. """
+
+        s_sum = self.p_doc.getTag("Source").getTagData("Summary")
+        if not s_sum:
+            self.issues["M"].append('No Summary for Source package')
+
+        if "\n" in s_sum:
+            self.issues["M"].append('Summary for Source package has multiple lines')
+
+        if len(s_sum) < 10:
+            self.issues["C"].append('Summary for Source package is too short')
+
+        if s_sum.startswith(" "):
+            self.issues["C"].append('Summary for Source package has leading whitespace')
+
+        if self.s_name.lower() in s_sum.split(" ")[0].lower():
+            self.issues["S"].append('Summary for Source package mustnt contain the package name')
+
+        elif s_sum[0].islower():
+            self.issues["S"].append('First character of the Summary for Source package should be capitalized')
+
+        if s_sum.endswith(" "):
+            self.issues["C"].append('Summary for Source package has trailing whitespace')
+
+        if s_sum.strip().endswith("."):
+            self.issues["S"].append('Summary for Source Package should not end with a period')
+
+        for pkg in self.p_doc.tags("Package"):
+            pkg_name = pkg.getTagData("Name")
+            pkg_sum = pkg.getTagData("Summary")
+            if pkg_name == self.s_name:
+                if pkg_sum:
+                    self.issues["S"].append('Summary for %s package is not neccessary since it is defined in Source package' % pkg_name)
+            else:
+                if not pkg_sum:
+                    self.issues["M"].append('Summary for %s package does not exist' % pkg_name)
+                else:
+                    if "\n" in pkg_sum:
+                        self.issues["M"].append('Summary for %s package has multiple lines' % pkg_name)
+
+                    if len(pkg_sum) < 10:
+                        self.issues["C"].append('Summary for %s package is too short' % pkg_name)
+
+                    if pkg_sum.startswith(" "):
+                        self.issues["C"].append('Summary for %s package has leading whitespace' % pkg_name)
+
+                    if pkg_name.lower() in pkg_sum.split(" ")[0].lower():
+                        self.issues["S"].append('Summary for %s package mustnt contain the package name' % pkg_name)
+
+                    elif pkg_sum[0].islower():
+                        self.issues["S"].append('First character of the Summary for %s package should be capitalized' % pkg_name)
+
+                    if pkg_sum.endswith(" "):
+                        self.issues["C"].append('Summary for %s package has trailing whitespace' % pkg_name)
+
+                    if pkg_sum.strip().endswith("."):
+                        self.issues["S"].append('Summary for %s package should not end with a period' % pkg_name)
+
+    def check_patches(self):
+        """ Check for *.patch and *.diff in files/ directory and compare them with the patches in Patches tag. """
+
+        pspec_patches = []
+        files_patches = []
+        unused_patches = []
+
+        patches_tag = self.p_doc.getTag("Source").getTag("Patches")
+        if patches_tag:
+            for patch in patches_tag.tags("Patch"):
+                pspec_patches.append(patch.firstChild().data())
+
+        for root, dirs, files in os.walk("files"):
+            [files_patches.append(os.path.join(root[len('files/'):], patch)) for patch in files if patch.endswith(".patch") or patch.endswith(".diff")]
+
+        unused_patches = list(set(files_patches).difference(set(pspec_patches)))
+
+        if len(unused_patches) == 1:
+            self.issues["C"].append('There is an unapplied patch: %s' % unused_patches)
+        elif len(unused_patches) > 1:
+            self.issues["M"].append('These are unapplied patches:\n\t%s' % '\n\t'.join(unused_patches))
+
+    def check_description(self):
+        """ Many checks for Description such as leading/trailing whitespaces etc. """
+
+        s_desc = self.p_doc.getTag("Source").getTagData("Description")
+        if not s_desc:
+            self.issues["M"].append('No Description for Source package')
+
+        if s_desc.startswith(" "):
+            self.issues["C"].append('Description for Source package has leading whitespace')
+
+        if s_desc.endswith(" "):
+            self.issues["C"].append('Description for Source package has trailing whitespace')
+
+        if not s_desc.strip().endswith("."):
+            self.issues["S"].append('Description for Source package should end with a period')
+
+        if self.s_name.lower() not in s_desc.lower():
+            self.issues["S"].append('Description for Source package should contain the package name')
+
+        if not self.s_name.lower() in s_desc.split(" ")[0].lower():
+            if s_desc[0].islower():
+                self.issues["S"].append('First character of the Description for Source package should be capitalized')
+
+        for pkg in self.p_doc.tags("Package"):
+            pkg_name = pkg.getTagData("Name")
+            pkg_desc = pkg.getTagData("Description")
+            if pkg_name == self.s_name and pkg_desc:
+                self.issues["M"].append('Description for %s package is not neccessary since it is defined in Source package' % pkg_name)
+            elif pkg_desc:
+                if pkg_desc.startswith(" "):
+                    self.issues["C"].append('Description for %s package has leading whitespace' % pkg_name)
+
+                if pkg_desc.endswith(" "):
+                    self.issues["C"].append('Description for %s package has trailing whitespace' % pkg_name)
+
+                if not pkg_desc.strip().endswith("."):
+                    self.issues["S"].append('Description for %s package should end with a period' % pkg_name)
+
+                if self.s_name.lower() not in pkg_desc.split(" ")[0].lower():
+                    self.issues["S"].append('Description for %s package should contain the package name' % pkg_name)
+
+                if not self.s_name.lower() in pkg_desc.split(" ")[0].lower():
+                    if pkg_desc[0].islower():
+                        self.issues["S"].append('First character of the Description for %s package should be capitalized' % pkg_name)
+
+    def check_files(self):
+        """ Checks for shallow path declarations such as '/usr/share' """
+
+        shallow_path = False
+        for pkg in self.p_doc.tags("Package"):
+            for path in pkg.getTag("Files").tags("Path"):
+                if path.firstChild().data().strip("/") == "usr/share":
+                    shallow_path = True
+
+        if shallow_path:
+            self.issues["S"].append('/usr/share is shallow, widen the path into more specific paths')
+
+    def pspec_issues(self):
+        """ Total issues reported by the CheckPspec class """
+        return sum(([len(x) for x in list(self.issues.values())]))
+
+
+class CheckTranslations:
+    """ Cosmetic checks of summary and description lines """
+
+    def __init__(self, filename="translations.xml"):
+
+        # Must, Should, Cosmetic fixes
+        self.issues = {"M": [], "S": [], "C": []}
+
+        try:
+            with open(filename, "r") as f_translations:
+                self.t_doc = ciksemel.parseString(f_translations.read())
+        except IOError:
+            print(colorize("translations.xml"))
+            print(colorize("----------------"))
+            print(colorize(" *"), 'translations.xml is missing')
+            sys.exit(1)
+
+        self.s_name = self.t_doc.getTag("Source").getTagData("Name")
+
+    def check_all(self):
+        """ Call all check functions """
+
+        self.check_package_name()
+        self.check_summary()
+        self.check_description()
+
+        if any([not x == [] for x in list(self.issues.values())]):
+            print(colorize("translations.xml", "bold"))
+            print(colorize("----------------", "bold"))
+            for issue in self.issues["M"]:
+                print(colorize(" *", "red"), issue)
+            for issue in self.issues["S"]:
+                print(colorize(" *", "yellow"), issue)
+            for issue in self.issues["C"]:
+                print(colorize(" *"), issue)
+            print()
+
+    def check_package_name(self):
+        if not self.s_name:
+            self.issues["M"].append("Name tag is empty")
+
+    def check_summary(self):
+        """ Many checks for Summary such as leading/trailing whitespaces etc. """
+
+        s_sums = self.t_doc.getTag("Source").tags("Summary")
+        summary = {}
+        for s_sum in s_sums:
+            summary[s_sum.getAttribute("xml:lang")] = s_sum.firstChild().data()
+
+        if "tr" not in summary:
+            self.issues["M"].append("Turkish translation of 'Summary' is missing")
+
+        elif "kütüphane" in summary["tr"].lower():
+            self.issues["C"].append('It is better to use "kitaplık" instead of "kütüphane" in Turkish translation of Summary[tr]')
+
+        for i in list(summary.keys()):
+            if "\n" in summary[i]:
+                self.issues["S"].append("Summary[%s] has multiple lines" % i)
+
+            if len(summary[i]) < 10:
+                self.issues["C"].append("Summary[%s] is too short" % i)
+
+            if summary[i].startswith(" "):
+                self.issues["C"].append("Summary[%s] has leading whitespace" % i)
+
+            if self.s_name and self.s_name.lower() in summary[i].split(" ")[0].lower():
+                self.issues["S"].append("Summary[%s] mustnt contain the package name" % i)
+
+            if summary[i][0].islower():
+                self.issues["S"].append("First character of the Summary[%s] should be capitalized" % i)
+
+            if summary[i].endswith(" "):
+                self.issues["C"].append("Summary[%s] has trailing whitespace" % i)
+
+            if summary[i].strip().endswith("."):
+                self.issues["S"].append("Summary should[%s] not end with a period" % i)
+
+        for pkg in self.t_doc.tags("Package"):
+            pkg_name = pkg.getTagData("Name")
+            pkg_sum = pkg.getTagData("Summary")
+            if pkg_name == self.s_name:
+                if pkg_sum:
+                    self.issues["S"].append('Summary for %s package is not neccessary since it is defined in Source package' % pkg_name)
+            else:
+                if not pkg_sum:
+                    self.issues["M"].append('Summary for %s package does not exist' % pkg_name)
+                else:
+                    if "\n" in pkg_sum:
+                        self.issues["M"].append('Summary for %s package has multiple lines' % pkg_name)
+
+                    if len(pkg_sum) < 10:
+                        self.issues["C"].append('Summary for %s package is too short' % pkg_name)
+
+                    if pkg_sum.startswith(" "):
+                        self.issues["C"].append('Summary for %s package has leading whitespace' % pkg_name)
+
+                    if pkg_name.lower() in pkg_sum.split(" ")[0].lower():
+                        self.issues["S"].append('Summary for %s package mustnt contain the package name' % pkg_name)
+
+                    elif pkg_sum[0].islower():
+                        self.issues["S"].append('First character of the Summary for %s package should be capitalized' % pkg_name)
+
+                    if pkg_sum.endswith(" "):
+                        self.issues["C"].append('Summary for %s package has trailing whitespace' % pkg_name)
+
+                    if pkg_sum.strip().endswith("."):
+                        self.issues["S"].append('Summary for %s package should not end with a period' % pkg_name)
+
+    def check_description(self):
+        """ Many checks for Description such as leading/trailing whitespaces etc. """
+
+        # TODO:
+        # - Package tag must match with the original package name
+
+        s_descs = self.t_doc.getTag("Source").tags("Description")
+        description = {}
+        for s_desc in s_descs:
+            if s_desc.getAttribute("xml:lang"):
+                description[s_desc.getAttribute("xml:lang")] = s_desc.firstChild().data()
+
+        if "tr" not in description:
+            self.issues["M"].append("Turkish translation of 'Description' is missing")
+
+        # Kitaplık FTW :)
+        elif "kütüphane" in description["tr"].lower():
+            self.issues["C"].append('It is better to use "kitaplık" instead of "kütüphane" in Turkish translation of Description[tr]')
+
+        for i in list(description.keys()):
+            if description[i].startswith(" "):
+                self.issues["C"].append("Description[%s] has leading whitespace" % i)
+
+            if description[i].endswith(" "):
+                self.issues["C"].append("Description[%s] has trailing whitespace" % i)
+
+            if not description[i].strip().endswith("."):
+                self.issues["S"].append("Description[%s] should end with a period" % i)
+
+            if self.s_name and self.s_name.lower() not in description[i].lower():
+                self.issues["S"].append("Description[%s] should contain the package name" % i)
+
+            if self.s_name and not self.s_name.lower() in description[i].split(" ")[0].lower():
+                if description[i][0].islower():
+                    self.issues["S"].append("First character of the Description[%s] should be capitalized" % i)
+
+        for pkg in self.t_doc.tags("Package"):
+            pkg_name = pkg.getTagData("Name")
+            pkg_desc = pkg.getTagData("Description")
+            if pkg_name == self.s_name and pkg_desc:
+                self.issues["M"].append('Description for %s package is not neccessary since it is defined in Source package' % pkg_name)
+            elif pkg_desc:
+                if pkg_desc.startswith(" "):
+                    self.issues["C"].append('Description for %s package has leading whitespace' % pkg_name)
+
+                if pkg_desc.endswith(" "):
+                    self.issues["C"].append('Description for %s package has trailing whitespace' % pkg_name)
+
+                if not pkg_desc.strip().endswith("."):
+                    self.issues["S"].append('Description for %s package should end with a period' % pkg_name)
+
+                if self.s_name.lower() not in pkg_desc.lower():
+                    self.issues["S"].append('Description for %s package should contain the package name' % pkg_name)
+
+                if not self.s_name.lower() in pkg_desc.split(" ")[0].lower():
+                    if pkg_desc[0].islower():
+                        self.issues["S"].append('First character of the Description for %s package should be capitalized' % pkg_name)
+
+    def translations_issues(self):
+        """ Total issues reported by the CheckTranslations class """
+        return sum(([len(x) for x in list(self.issues.values())]))
+
+
+class CheckPackage:
+    """ Grand class of the script. Checks for filetypes, permission, desktop files etc. """
+
+    def __init__(self, filename):
+
+        self.filename = filename
+
+        # Must, Should, Cosmetic fixes
+        self.issues = {"M": [], "S": [], "C": []}
+
+        try:
+            self.p_metadata = inary.package.Package(self.filename).get_metadata().package
+        except:
+            print("metadata.xml contains errors")
+            sys.exit(1)
+
+        self.s_metadata = inary.package.Package(self.filename).get_metadata().source
+
+        try:
+            self.files = inary.package.Package(self.filename).get_files().list
+        except:
+            print("files.xml contains errors")
+            sys.exit(1)
+
+    def _extract(self):
+        """ Unzips the inary package """
+
+        self.inary_package = inary.package.Package(self.filename)
+        self.package_tmpdir = tempfile.mkdtemp(prefix=os.path.basename(sys.argv[0]) + "-" + inary.util.parse_package_name(self.filename)[0] + "-")
+        self.inary_package.extract_install(self.package_tmpdir)
+
+    def _cleanup(self):
+        """ Cleans up the temporary directory where the package is extracted """
+        shutil.rmtree(self.package_tmpdir)
+
+    def check_all(self):
+        """ Call all check functions """
+
+        self.check_filetype()
+        self.check_isa()
+        self.check_package_name()
+        self.check_empty_file()
+        self.check_redundant_file()
+
+        # XXX: Comment out to reduce disk IO
+        self._extract()
+        self.check_desktop_file()
+        self._cleanup()
+
+        if any([not x == [] for x in list(self.issues.values())]):
+            print(colorize("%s package" % inary.util.parse_package_name(self.filename)[0], "bold"))
+            print(colorize((len(inary.util.parse_package_name(self.filename)[0]) + 8) * "-", "bold"))
+            for issue in self.issues["M"]:
+                print(colorize(" *", "red"), issue)
+            for issue in self.issues["S"]:
+                print(colorize(" *", "yellow"), issue)
+            for issue in self.issues["C"]:
+                print(colorize(" *"), issue)
+            print()
+
+    def check_filetype(self):
+        """ Checks for the filetype properties and holds all the filetypes in a dictionary where the values are 2-D arrays """
+
+        try:
+            self.env_xdg_data_dirs = os.getenv("XDG_DATA_DIRS").split(":")
+        except:
+            # if the script is invoked as root, we can't get the XDG_DATA_DIRS env.var.
+            self.env_xdg_data_dirs = ("/usr/share/kde4", "/usr/share")
+
+        self.env_path = os.getenv("PATH").split(":")
+
+        # FIXME: Consider looking at ld.so.conf.d directory and append the library directoris to the list
+        self.lib_dir = ("/lib/", "/usr/lib/")
+
+        # ftypes dictionary holds the files' types that package contains. all
+        # keys' value is a 2 dimensional array:
+        # - first one holds the paths.
+        # - second one holds the paths which aren't correctly marked.
+        # e.g.: usr/lib/libnaber.so.3 is a shared object but marked as 'data'. This
+        # path is both in the 1st and 2nd array.
+        self.ftypes = {"exe_files":      [[], []],
+                       "xdg_apps":       [[], []],
+                       "desktop_files":  [[], []],
+                       "header_files":   [[], []],
+                       "macro_files":    [[], []],
+                       "shared_libs":    [[], []],
+                       "static_libs":    [[], []],
+                       "config_files":   [[], []],
+                       "pc_files":       [[], []],
+                       "locale_files":   [[], []],
+                       "cache_files":    [[], []],
+                       "man_files":      [[], []],
+                       "doc_files":      [[], []],
+                       "all":            [[], []]
+                       }
+
+
+        # fileType=all is a punishment
+        self.punishment = False
+
+        for _file in self.files:
+
+            # All files
+            self.ftypes["all"][0].append(_file.path)
+
+            # Executable files
+            for _bindir in self.env_path:
+                if os.path.join("/", _file.path).startswith(_bindir):
+                    self.ftypes["exe_files"][0].append(_file.path)
+
+                    if _file.type != "executable":
+                        self.ftypes["exe_files"][1].append(_file.path)
+
+            # Shared libraries
+            for _libdir in self.lib_dir:
+                if os.path.join("/", _file.path).startswith(_libdir):
+                    if len(os.path.join("/", _file.path).split(_libdir)[1].split("/")) == 1 and \
+                            _file.path.endswith(".so") or ".so." in _file.path:
+                        self.ftypes["shared_libs"][0].append(_file.path)
+
+                        if _file.type != "library":
+                            self.ftypes["shared_libs"][1].append(_file.path)
+
+            # Desktop files in XDG_DATA_DIRS
+            for _appdir in self.env_xdg_data_dirs:
+                if "%s/applications" % _appdir in os.path.join("/", _file.path):
+                    self.ftypes["xdg_apps"][0].append(_file.path)
+
+            # All desktop files to be validated
+            if _file.path.endswith(".desktop"):
+                self.ftypes["desktop_files"][0].append(_file.path)
+
+            # Header files
+            if not _file.path.startswith("usr/share/doc") and \
+               (_file.path.endswith(".h") or \
+               _file.path.endswith(".hpp") or \
+               _file.path.endswith(".x")):
+                self.ftypes["header_files"][0].append(_file.path)
+
+                if _file.type != "header":
+                    self.ftypes["header_files"][1].append(_file.path)
+
+            # m4 macro files
+            if _file.path.endswith(".m4"):
+                self.ftypes["macro_files"][0].append(_file.path)
+
+                if _file.type != "data":
+                    self.ftypes["macro_files"][1].append(_file.path)
+
+            # Static libraries
+            if _file.path.endswith(".a"):
+                self.ftypes["static_libs"][0].append(_file.path)
+
+                if _file.type != "library":
+                    self.ftypes["static_libs"][1].append(_file.path)
+
+            # Config files
+            if _file.path.startswith("etc"):
+                self.ftypes["config_files"][0].append(_file.path)
+
+                if _file.type != "config":
+                    self.ftypes["config_files"][1].append(_file.path)
+
+            # Man files
+            if _file.path.startswith("usr/share/man"):
+                self.ftypes["man_files"][0].append(_file.path)
+
+                if _file.type != "man":
+                    self.ftypes["man_files"][1].append(_file.path)
+
+            # Documentation files
+            if _file.path.startswith("usr/share/doc") or _file.path.startswith("usr/share/gtk-doc"):
+                self.ftypes["doc_files"][0].append(_file.path)
+
+                if _file.type != "doc":
+                    self.ftypes["doc_files"][1].append(_file.path)
+
+            # Pkgconfig files
+            if _file.path.endswith(".pc"):
+                self.ftypes["pc_files"][0].append(_file.path)
+
+                if _file.type != "data":
+                    self.ftypes["pc_files"][1].append(_file.path)
+
+            # Locale files
+            if _file.path.endswith(".po") or \
+                _file.path.endswith(".mo") or \
+                _file.path.endswith(".qm"):
+                self.ftypes["locale_files"][0].append(_file.path)
+
+                if _file.type != "localedata":
+                    self.ftypes["locale_files"][1].append(_file.path)
+
+            # Cache files
+            if _file.path.endswith(".cache"):
+                self.ftypes["cache_files"][0].append(_file.path)
+
+            # fileType="all" is BAD!
+            if _file.type == "all":
+                self.punishment = True
+
+        # Fill the issue list here
+        #########################
+
+        if self.punishment:
+            self.issues["M"].append('"FileType=all" is bad practice. Use fine-grained filetypes')
+
+        # pkgconfig files must be tagged as data
+        if self.ftypes["pc_files"][1]:
+            self.issues["M"].append('Pkgconfig file is not marked as "data"')
+
+        # pkgconfig files must be tagged as data
+        if self.ftypes["config_files"][1]:
+            self.issues["M"].append('Config files must be marked as "config"')
+
+        # header files must be tagged as data
+        if self.ftypes["header_files"][1]:
+            self.issues["M"].append('Header files must be  marked as "header"')
+
+        # macro files must be tagged as data
+        if self.ftypes["macro_files"][1]:
+            self.issues["M"].append('Macro files must be  marked as "data"')
+
+        # .cache files, like icon-theme.cache or ld.so.cache, must be generated in the user system.
+        if self.ftypes["cache_files"][0]:
+            self.issues["M"].append('Package contains a cache file (%s) which could be generated in the user system. It might not  be in the package' % self.ftypes["cache_files"][0])
+
+        # shared libraries must be marked as library
+        if self.ftypes["shared_libs"][1]:
+            self.issues["M"].append('Package has shared libraries but they are not marked as "library"')
+
+        # warn about static files
+        if self.ftypes["static_libs"][0]:
+            self.issues["M"].append('Package has static libraries. Consider removing them.')
+
+        # static libraries must be marked as library
+        if self.ftypes["static_libs"][1]:
+            self.issues["M"].append('Package has static libraries but they are not marked as "library"')
+
+        # locale files must be marked as localedata
+        if self.ftypes["locale_files"][1]:
+            self.issues["M"].append('Package contains locale files (.mo, .qm, .po) but they are not marked as "localedata"')
+
+        # man pages must be marked as man
+        if self.ftypes["man_files"][1]:
+            self.issues["M"].append('Package contains man files (/usr/share/man) but they are not marked as "man"')
+
+        # documentation files must be marked as doc
+        if self.ftypes["doc_files"][1]:
+            self.issues["M"].append('Package contains documentation files (/usr/share/doc) but they are not marked as "doc"')
+
+        # install files are useless since we already ship the package to users
+        redundant_files = [f for f in self.ftypes["doc_files"][0] if "install" in f.lower() or "install.txt" in f.lower()]
+        if redundant_files:
+            self.issues["S"].append('Unnecessary to distribute files list: %s' % redundant_files)
+
+        # shared libraries must not be in the -devel package
+        if self.p_metadata.name.endswith("-devel") and self.ftypes["shared_libs"][0]:
+            self.issues["M"].append('Libraries must not be in the -devel package')
+
+        # static libraries, if they are really needed, must be in the -devel package
+        if not self.p_metadata.name.endswith("-devel") and self.ftypes["static_libs"][0]:
+            self.issues["M"].append('Static libraries must be in the -devel package')
+
+        # header files must be in the -devel package
+        if not self.p_metadata.name.endswith("-devel") and self.ftypes["header_files"][0]:
+            self.issues["M"].append('Package contains header files. These files must be in -devel package')
+
+        # pkgconfig files must be in the devel package
+        if not self.p_metadata.name.endswith("-devel") and self.ftypes["pc_files"][0]:
+            self.issues["M"].append('Package contains pkgconfig files. These files must be in -devel package')
+
+        # m4 macro files must be in the -devel package
+        if not self.p_metadata.name.endswith("-devel") and self.ftypes["macro_files"][0]:
+            self.issues["M"].append('Package contains m4 macro files. These files must be in -devel package')
+
+        # if there is a -devel package and no pkgconfig, header or macro files, why the heck there is a -devel package then?
+        if self.p_metadata.name.endswith("-devel") and (not self.ftypes["macro_files"][0] \
+                                                        and not self.ftypes["header_files"][0] \
+                                                        and not self.ftypes["pc_files"][0]):
+            self.issues["M"].append('There is a -devel package but there is no macro, header or pkgconfig files in it. Then why is there a -devel package?')
+
+        # documentation path must not contain the package version
+        if (self.p_metadata.name + "-" + self.p_metadata.version) in self.ftypes["doc_files"][0]:
+            self.issues["M"].append('Documentation directory path must not contain version name')
+
+    def check_isa(self):
+        """ Checks for the IsA tags in metadata.xml """
+
+        # no IsA tag
+        if not self.p_metadata.isA:
+            self.issues["M"].append('There must be at least one "IsA" tag')
+
+        # there are desktop files but no IsA->app:gui
+        if self.ftypes["xdg_apps"][0] and "app:gui" not in self.p_metadata.isA:
+            self.issues["M"].append('Package has a desktop file in XDG_DATA_DIRS but there is no "IsA->app:gui" tag')
+
+        # no desktop file but IsA->app:gui
+        if not self.ftypes["xdg_apps"][0] and "app:gui" in self.p_metadata.isA:
+            self.issues["M"].append('Package has no desktop file but there is an "IsA->app:gui" tag')
+
+        # there is an app:gui tag but no Icon tag
+        if "app:gui" in self.p_metadata.isA and not self.p_metadata.icon:
+            self.issues["M"].append('Package has an IsA->app:gui tag but there is no "Icon" tag')
+
+        # there are libraries but no IsA->library
+        if (self.ftypes["shared_libs"][0] or self.ftypes["static_libs"][0]) and "library" not in self.p_metadata.isA:
+            self.issues["M"].append('Package has libraries but there is no "IsA->library" tag')
+
+        # there is no library (shared or static) however IsA->library tag exists
+        if not self.p_metadata.name.endswith("-devel"):  # -devel package considered library
+            if not self.ftypes["shared_libs"][0] and not self.ftypes["static_libs"][0] and "library" in self.p_metadata.isA:
+                self.issues["M"].append('Package has no library but there is an "IsA->library" tag')
+
+        # -doc package does not conform to package naming guideline
+        if self.p_metadata.name.endswith("-doc"):
+            self.issues["M"].append('-doc package name must be -docs to conform to package naming guideline')
+
+        # -docs package exists but no data:doc IsA
+        if self.p_metadata.name.endswith("-docs") and "data:doc" not in self.p_metadata.isA:
+            self.issues["M"].append('Package has documentation but there is no "IsA->data:doc" tag')
+
+        # there are executable files but no IsA->app:console
+        if not self.ftypes["xdg_apps"][0] and self.ftypes["exe_files"][0] and "service" not in self.p_metadata.isA and "app:console" not in self.p_metadata.isA:
+            self.issues["M"].append('Package has executable file but there is no "IsA->app:console" tag')
+
+        # no executable file but IsA->app:console
+        if not self.ftypes["exe_files"][0] and "app:console" in self.p_metadata.isA:
+            self.issues["M"].append('Package has no executable file but there is an "IsA->app:console" tag')
+
+    def check_package_name(self):
+        """ Checks the package name if it is longer than 64 characters or not """
+
+        # Package name length must be lesser than 64 character to fit in a CD (Joliet FS restriction)
+        if len(self.p_metadata.name) > 64:
+            self.issues["M"].append('Length of the package name must be lesser than 64 characters to fit in a CD')
+
+    def check_empty_file(self):
+        """ Checks for the empty files. """
+
+        for _file in self.files:
+            if not _file.size and _file.mode != "0755":  # Check only empty files, not dirs
+                if not _file.path.endswith(".py"):  # __init__.py files are mostly empty nowadays :(
+                    self.issues["S"].append("/%s is an empty file" % _file.path)
+
+    def check_redundant_file(self):
+        """ Checks for SCM dirs (.git, .cvs, .svn etc.) and inary tmp_dir in file paths """
+
+        #ctx.config.tmp_dir() does not give the tmp_dir in inary.conf if the
+        #script is not invoked as root. I have no other option afaik.
+        inaryconf = DesktopParser()
+        inaryconf.read("/etc/inary/pisi.conf")
+        inary_tmp_dir = inaryconf.get("directories", "tmp_dir")
+
+        scm_dirs = (".svn", ".git", ".cvs", ".hg")
+
+        for _file in self.files:
+
+            # inary tmp_dir is in the filepath
+            if inary_tmp_dir in _file.path:
+                self.issues["M"].append('Inary tmp_dir (%s) is in the package. This is BAD' % inary_tmp_dir)
+
+            # source control management directories in the filepath
+            for scm_dir in scm_dirs:
+                if scm_dir in _file.path:
+                    self.issues["S"].append('Package contains version control system directories (%s)' % scm_dir)
+
+    def check_desktop_file(self):
+        """ Validates the desktop file by executing desktop-file-validate command.
+        Besides, checks the Turkish translation of the localized entries such as GenericName and Comment."""
+
+        for desktop_file in self.ftypes["desktop_files"][0]:
+
+            desktop_file_path = os.path.join(self.package_tmpdir, desktop_file)
+
+            try:
+                status = get_status_output(('/usr/bin/desktop-file-validate', desktop_file_path), True)
+                got_error = False
+                for line in status[1].splitlines():
+                    # Consider just errors, not warning since they piss of the packagers.
+                    if 'error: ' in line:
+                        self.issues["M"].append('%s %s' % (desktop_file, line.split("error: ")[1]))
+            except OSError:
+                print(colorize('You must install "desktop-file-utils" package to review desktop files.', 'red'))
+
+            parser = DesktopParser()
+            parser.read(desktop_file_path)
+
+            # Groupless desktop files are not valid according to fd.o desktop spec.
+            if not parser.sections():
+                self.issues["S"].append('%s has no group. There must be, according to the fd.o desktop file specification' % desktop_file)
+
+            if parser.has_section("Desktop Entry"):
+                if parser.has_option("Desktop Entry", "GenericName") and not parser.has_option("Desktop Entry", "GenericName[tr]"):
+                    self.issues["S"].append('%s has GenericName entry but no Turkish translation"' % desktop_file)
+
+            if parser.has_section("Desktop Entry"):
+                if parser.has_option("Desktop Entry", "Comment") and not parser.has_option("Desktop Entry", "Comment[tr]"):
+                    self.issues["S"].append('%s has Comment entry but no Turkish translation"' % desktop_file)
+
+    def package_issues(self):
+        """ Total issues reported by the CheckPackage class """
+        return sum(([len(x) for x in list(self.issues.values())]))
+
+
+class DesktopParser(configparser.ConfigParser):
+    """ An obvious class to get the desktop file's localized entries """
+
+    def __init__(self, defaults=None):
+        configparser.ConfigParser.__init__(self, defaults)
+
+    # Desktop files are case sensitive so override this method to make it work
+    def optionxform(self, optionstr):
+        return optionstr
+
+
+def colorize(msg, color=False):
+    """ Colorizes the given message. """
+
+    if not color or args.nocolor:
+        return msg
+    else:
+        colors = {'green'  : '\x1b[32;01m%s\x1b[0m',
+                  'red'    : '\x1b[31;01m%s\x1b[0m',
+                  'yellow' : '\x1b[33;01m%s\x1b[0m',
+                  'bold'   : '\x1b[1;01m%s\x1b[0m',
+                  'none'   : '\x1b[0m%s\x1b[0m',
+                  }
+        return colors[color if sys.stdout.isatty() else 'none'] % msg
+
+
+def get_status_output(cmd, stdoutonly=False):
+    """ Generic function to execute a command and getting the output of it. """
+
+    if stdoutonly:
+        proc = subprocess.Popen(cmd, stdin=subprocess.PIPE,
+                                stdout=subprocess.PIPE, close_fds=True)
+    else:
+        proc = subprocess.Popen(cmd, stdin=subprocess.PIPE,
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.STDOUT, close_fds=True)
+
+    proc.stdin.close()
+    text = proc.stdout.read()
+    sts = proc.wait()
+    if sts is None:
+        sts = 0
+    if text.endswith('\n'):
+        text = text[:-1]
+    return sts, text
+
+
+def check_xml_wf(filename):
+    """ Checks the well-formness of the XML file and print if there are any issues """
+
+    if not os.path.exists("/usr/bin/xmlwf"):
+        sys.exit("xmlwf, which is in expat package, is not installed.")
+
+    st = get_status_output(('/usr/bin/xmlwf', filename), False)
+    got_error = 0
+    for line in st[1].splitlines():
+        if filename in line:
+            got_error = True
+            err_line = line
+
+    if got_error:
+        print(colorize("[xml well-formness issues]", "bold"))
+        if got_error:
+            print(colorize(" *", "red"), err_line)
+
+
+def print_legend():
+    """ Prints the meanings of M, S and C, a.k.a legend """
+
+    print(colorize("Legend:", "bold"), \
+            colorize("*", "red"), "Must fix /", \
+            colorize("*", "yellow"), "Should fix /", \
+            colorize("*"), "Cosmetic fix")
+
+if __name__ == '__main__':
+    import argparse
+
+    argparser = argparse.ArgumentParser(
+        description='Inary package and spec checker which is written for doing the automatic checks of the packages which are in review process.',
+        usage='Run the script in the directory where source files and inary packages exist.')
+
+    argparser.add_argument('-n', '--no-color', required=False, action='store_true', dest='nocolor', help='No color option, easier for redirecting the output to a file')
+    args = argparser.parse_args()
+
+    total_issues = 0
+
+    pkgs = glob.glob("*.inary")
+    if not len(pkgs):
+        print("First build the inary packages, then run the script.")
+        sys.exit(1)
+
+    if not os.path.exists("actions.py") or not os.path.exists("pspec.xml"):
+        argparser.print_usage()
+        sys.exit(1)
+
+    for pkg in pkgs:
+        package = CheckPackage(filename=pkg)
+        package.check_all()
+        total_issues += package.package_issues()
+
+
+    actions = CheckActions()
+    actions.check_all()
+    total_issues += actions.actions_issues()
+
+    pxml = CheckPspec()
+    pxml.check_all()
+    total_issues += pxml.pspec_issues()
+
+    txml = CheckTranslations()
+    txml.check_all()
+    total_issues += txml.translations_issues()
+
+    if not args.nocolor and total_issues:
+        print_legend()
