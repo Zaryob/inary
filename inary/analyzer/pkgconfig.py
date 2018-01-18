@@ -37,6 +37,9 @@ COMPONENTDB = inary.db.componentdb.ComponentDB()
 CONSTANTS = inary.constants.Constants()
 REPODB = inary.db.repodb.RepoDB
 
+class Error(inary.Error):
+    pass
+
 class LDD:
     def __init__(self, packages, directory, component, installed_list=True, systembase=False, systemdevel=False):
 
