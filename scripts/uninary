@@ -52,7 +52,7 @@ def main():
 
     package.extract_install(os.path.join(target, 'install'))
 
-    # FIXME: There is a Pisi bug, it already creates an install directory even its empty.
+    # FIXME: There is a Inary bug, it already creates an install directory even its empty.
     if os.listdir('install') == []:
         os.rmdir('install')
 

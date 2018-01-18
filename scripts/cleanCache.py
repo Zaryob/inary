@@ -53,7 +53,7 @@ def doit(root, listdir, clean, suffix = ""):
                     usage("Permission denied: %s" % e)
 
 
-def cleanPisis(clean, root = '/var/cache/inary/packages'):
+def cleanInarys(clean, root = '/var/cache/inary/packages'):
     # inary packages
     list = [os.path.basename(x).split(".inary")[0] for x in glob.glob("%s/*.inary" % root)]
     list.sort()
@@ -99,5 +99,5 @@ if __name__ == "__main__":
         cleanBuilds(clean)
 
     else:
-        cleanPisis(clean)
+        cleanInarys(clean)
 

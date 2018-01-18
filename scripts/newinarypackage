@@ -78,7 +78,7 @@ temp_pspec = '''<?xml version="1.0" ?>
 </INARY>
 '''
 
-temp_actions = '''#!/usr/bin/python
+temp_actions = '''#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Copyright %(year)s TUBITAK/UEKAE
@@ -152,7 +152,7 @@ def status():
 
 '''
 
-temp_postscript = '''#/usr/bin/python
+temp_postscript = '''#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import os

@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#!/usr/bin/env python3
 # a script to preare INARY source tarball from svn
 # author: exa
 
