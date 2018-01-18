@@ -1,3 +1,9 @@
+### Importing 
+----------------------------------------
+
+`from inary.system_literals import $module_name`
+
+
 ## Module 'strutils'
 ----------------------------------------
 # string/list/functional utility functions
