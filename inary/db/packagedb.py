@@ -88,16 +88,16 @@ class PackageDB(lazydb.LazyDB):
         return pkg
 
     def search_in_packages(self, packages, terms, lang=None):
-        resum = '<Summary xml:lang=.(%s|en).>.*?%s.*?</Summary>'
-        redesc = '<Description xml:lang=.(%s|en).>.*?%s.*?</Description>'
+        resum = '<Summary xml:lang=.({0}|en).>.*?{1}.*?</Summary>'
+        redesc = '<Description xml:lang=.({0}|en).>.*?{1}.*?</Description>'
         if not lang:
             lang = inary.sxml.autoxml.LocalText.get_lang()
         found = []
         for name in packages:
             xml = self.pdb.get_item(name)
             if terms == [term for term in terms if re.compile(term, re.I).search(name) or \
-                                            re.compile(resum % (lang, term), re.I).search(xml) or \
-                                            re.compile(redesc % (lang, term), re.I).search(xml)]:
+                                            re.compile(resum.format(lang, term), re.I).search(xml) or \
+                                            re.compile(redesc.format(lang, term), re.I).search(xml)]:
                 found.append(name)
         return found
 
@@ -111,8 +111,8 @@ class PackageDB(lazydb.LazyDB):
         This method will return only package that contents terms in the package
         name or summary
         """
-        resum = '<Summary xml:lang=.(%s|en).>.*?%s.*?</Summary>'
-        redesc = '<Description xml:lang=.(%s|en).>.*?%s.*?</Description>'
+        resum = '<Summary xml:lang=.({0}|en).>.*?{1}.*?</Summary>'
+        redesc = '<Description xml:lang=.({0}|en).>.*?{1}.*?</Description>'
         if not lang:
             lang = inary.sxml.autoxml.LocalText.get_lang()
         if not fields:
@@ -122,9 +122,9 @@ class PackageDB(lazydb.LazyDB):
             if terms == [term for term in terms if (fields['name'] and \
                     re.compile(term, re.I).search(name)) or \
                     (fields['summary'] and \
-                    re.compile(resum % (lang, term), 0 if cs else re.I).search(xml)) or \
+                    re.compile(resum.format(lang, term), 0 if cs else re.I).search(xml)) or \
                     (fields['desc'] and \
-                    re.compile(redesc % (lang, term), 0 if cs else re.I).search(xml))]:
+                    re.compile(redesc(lang, term), 0 if cs else re.I).search(xml))]:
                 found.append(name)
         return found
 
@@ -144,14 +144,14 @@ class PackageDB(lazydb.LazyDB):
 
     def get_version_and_distro_release(self, name, repo):
         if not self.has_package(name, repo):
-            raise Exception(_('Package %s not found.') % name)
+            raise Exception(_('Package {} not found.').format(name))
 
         pkg_doc = ciksemel.parseString(self.pdb.get_item(name, repo))
         return self.__get_version(pkg_doc) + self.__get_distro_release(pkg_doc)
 
     def get_version(self, name, repo):
         if not self.has_package(name, repo):
-            raise Exception(_('Package %s not found.') % name)
+            raise Exception(_('Package {} not found.').format(name))
 
         pkg_doc = ciksemel.parseString(self.pdb.get_item(name, repo))
         return self.__get_version(pkg_doc)

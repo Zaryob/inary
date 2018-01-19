@@ -60,7 +60,7 @@ class XmlFile(object):
         self.doc = iks.parseString(str(file))
         return self.doc
         #except Exception as e:
-            #raise Error(_("File '%s' has invalid XML") % (file) )
+            #raise Error(_("File '{}' has invalid XML").format(file) )
 
 
     def readxml(self, uri, tmpDir='/tmp', sha1sum=False, 
@@ -70,7 +70,7 @@ class XmlFile(object):
             localpath = File.download(uri, tmpDir, sha1sum=sha1sum, 
                                   compress=compress,sign=sign, copylocal=copylocal)
         except IOError as e:
-            raise Error(_("Cannot read URI %s: %s") % (uri, str(e)) )
+            raise Error(_("Cannot read URI {0}: {1}").format(uri, str(e)) )
         
         st = io.StringIO()
         
@@ -85,7 +85,7 @@ class XmlFile(object):
             self.doc = iks.parse(localpath)
             return self.doc
         except Exception as e:
-            raise Error(_("File '%s' has invalid XML") % (localpath) )
+            raise Error(_("File '{}' has invalid XML").format(localpath) )
 
     def writexml(self, uri, tmpDir = '/tmp', sha1sum=False, compress=None, sign=None):
         f = inary.file.File(uri, inary.file.File.write, sha1sum=sha1sum, compress=compress, sign=sign)

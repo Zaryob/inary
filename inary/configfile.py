@@ -127,7 +127,7 @@ class ConfigurationSection(object):
         elif section == "directories":
             self.defaults = DirectoriesDefaults
         else:
-            e = _("No section by name '%s'") % section
+            e = _("No section by name '{}'").format(section)
             raise Error(e)
 
         self.section = section
@@ -288,7 +288,7 @@ class ConfigurationFile(object):
                             value = self.parser.get(sect, opt)
                             # Fix continuations.
                             value = value.replace("\n", "\n\t")
-                            current.write("%s%s%s%s\n" % (opt, padded_vi,
+                            current.write("{0}{1}{2}{3}\n".format(opt, padded_vi,
                                                           value, comment))
                             written.append((sect, opt))
         if sect:
@@ -312,14 +312,14 @@ class ConfigurationFile(object):
                     output = current
                     if len(written) > 0:
                     	output.write("\n")
-                    output.write("[%s]\n" % (sect,))
+                    output.write("[{}]\n".format(sect))
                     sections[sect] = None
                 for opt in opts:
                     if opt != "__name__" and not (sect, opt) in written:
                         value = self.parser.get(sect, opt)
                         # Fix continuations.
                         value = value.replace("\n", "\n\t")
-                        output.write("%s%s%s\n" % (opt, padded_vi, value))
+                        output.write("{0}{1}{2}\n".format(opt, padded_vi, value))
                         written.append((sect, opt))
         # Copy across the new file.
         fp.seek(0)

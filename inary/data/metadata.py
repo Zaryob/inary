@@ -70,17 +70,17 @@ class Package(specfile.Package, xmlfile.XmlFile, metaclass=autoxml.autoxml):
         i_size = util.human_readable_size(self.installedSize)
         size = "%.2f %s" % (i_size[0], i_size[1])
 
-        s += _('Distribution: %s, Dist. Release: %s\n') % \
-              (self.distribution, self.distributionRelease)
-        s += _('Architecture: %s, Installed Size: %s') % \
-              (self.architecture, size)
+        s += _('Distribution: {0}, Dist. Release: {1}\n').format(
+               self.distribution, self.distributionRelease)
+        s += _('Architecture: {0}, Installed Size: {1}').format(
+               self.architecture, size)
 
         if self.packageSize:
             p_size = util.human_readable_size(self.packageSize)
             size = "%.2f %s" % (p_size[0], p_size[1])
-            s += _(', Package Size: %s') % size
+            s += _(', Package Size: {}').format(size)
 
-        s += _(', install.tar.xz sha1sum: %s') % self.installTarHash
+        s += _(', install.tar.xz sha1sum: {}').format(self.installTarHash)
 
         return s
 

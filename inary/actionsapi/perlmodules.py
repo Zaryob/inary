@@ -51,25 +51,25 @@ def configure(parameters = ''):
     '''configure source with given parameters.'''
     export('PERL_MM_USE_DEFAULT', '1')
     if can_access_file('Build.PL'):
-        if system('perl Build.PL installdirs=vendor destdir=%s' % get.installDIR()):
+        if system('perl Build.PL installdirs=vendor destdir={}'.format(get.installDIR())):
             raise ConfigureError(_('Configure failed.'))
     else:
-        if system('perl Makefile.PL %s PREFIX=/usr INSTALLDIRS=vendor DESTDIR=%s' % (parameters, get.installDIR())):
+        if system('perl Makefile.PL {0} PREFIX=/usr INSTALLDIRS=vendor DESTDIR={1}'.format(parameters, get.installDIR())):
             raise ConfigureError(_('Configure failed.'))
 
 def make(parameters = ''):
     '''make source with given parameters.'''
     if can_access_file('Makefile'):
-        if system('make %s' % parameters):
+        if system('make {}'.format(parameters)):
             raise MakeError(_('Make failed.'))
     else:
-        if system('perl Build %s' % parameters):
+        if system('perl Build {}'.format(parameters)):
             raise MakeError(_('perl build failed.'))
 
 def install(parameters = 'install'):
     '''install source with given parameters.'''
     if can_access_file('Makefile'):
-        if system('make %s' % parameters):
+        if system('make {}'.format(parameters)):
             raise InstallError(_('Make failed.'))
     else:
         if system('perl Build install'):
@@ -80,22 +80,22 @@ def install(parameters = 'install'):
 
 def removePacklist(path = 'usr/lib/perl5/'):
     ''' cleans .packlist file from perl packages '''
-    full_path = '%s/%s' % (get.installDIR(), path)
+    full_path = '{0}/{1}'.format(get.installDIR(), path)
     for root, dirs, files in os.walk(full_path):
         for packFile in files:
             if packFile == ".packlist":
-                if can_access_file('%s/%s' % (root, packFile)):
-                    unlink('%s/%s' % (root, packFile))
+                if can_access_file('{0}/{1}'.format(root, packFile)):
+                    unlink('{0}/{1}'.format(root, packFile))
                     removeEmptydirs(root)
 
 def removePodfiles(path = 'usr/lib/perl5/'):
     ''' cleans *.pod files from perl packages '''
-    full_path = '%s/%s' % (get.installDIR(), path)
+    full_path = '{0}/{1}'.format(get.installDIR(), path)
     for root, dirs, files in os.walk(full_path):
         for packFile in files:
             if packFile.endswith(".pod"):
-                if can_access_file('%s/%s' % (root, packFile)):
-                    unlink('%s/%s' % (root, packFile))
+                if can_access_file('{0}/{1}'.format(root, packFile)):
+                    unlink('{0}/{1}'.format(root, packFile))
                     removeEmptydirs(root)
 
 def removeEmptydirs(d):

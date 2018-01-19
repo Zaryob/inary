@@ -34,7 +34,7 @@ class RunTimeError(inary.actionsapi.Error):
 def preplib(sourceDirectory = '/usr/lib'):
     sourceDirectory = join_path(get.installDIR(), sourceDirectory)
     if can_access_directory(sourceDirectory):
-        if system('/sbin/ldconfig -n -N %s' % sourceDirectory):
+        if system('/sbin/ldconfig -n -N {}'.format(sourceDirectory)):
             raise RunTimeError(_('Running ldconfig failed.'))
 
 def gnuconfig_update():
@@ -47,21 +47,21 @@ def gnuconfig_update():
                     unlink(targetFile)
 
                 try:
-                    copy('/usr/share/gnuconfig/%s' % fileName, join_path(root, fileName))
+                    copy('/usr/share/gnuconfig/{}'.format(fileName), join_path(root, fileName))
                 except:
                     ctx.ui.info(_('Can not make GNU Config Update... Passing...'))
                 else:
                     ctx.ui.info(_('GNU Config Update Finished.'))
 
 def libtoolize(parameters = ''):
-    if system('/usr/bin/libtoolize %s' % parameters):
+    if system('/usr/bin/libtoolize {}'.format(parameters)):
         raise RunTimeError(_('Running libtoolize failed.'))
 
 def gen_usr_ldscript(dynamicLib):
 
-    makedirs('%s/usr/lib' % get.installDIR())
+    makedirs('{}/usr/lib'.format(get.installDIR()))
 
-    destinationFile = open('%s/usr/lib/%s' % (get.installDIR(), dynamicLib), 'w')
+    destinationFile = open('{0}/usr/lib/{1}'.format(get.installDIR(), dynamicLib), 'w')
     content = '''
 /* GNU ld script
     Since Pardus has critical dynamic libraries
@@ -69,9 +69,9 @@ def gen_usr_ldscript(dynamicLib):
     we need to have a "fake" dynamic lib in /usr/lib,
     otherwise we run into linking problems.
 */
-GROUP ( /lib/%s )
-''' % dynamicLib
+GROUP ( /lib/{} )
+'''.format(dynamicLib)
 
     destinationFile.write(content)
     destinationFile.close()
-    chmod('%s/usr/lib/%s' % (get.installDIR(), dynamicLib))
+    chmod('{0}/usr/lib/{1}'.format(get.installDIR(), dynamicLib))

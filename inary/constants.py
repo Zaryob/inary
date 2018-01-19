@@ -27,13 +27,13 @@ class _constant:
 
     def __setattr__(self, name, value):
         if name in self.__dict__:
-            raise self.ConstError(_("Can't rebind constant: %s") % name)
+            raise self.ConstError(_("Can't rebind constant: {}").format(name))
         # Binding an attribute once to a const is available
         self.__dict__[name] = value
 
     def __delattr__(self, name):
         if name in self.__dict__:
-            raise self.ConstError(_("Can't unbind constant: %s") % name)
+            raise self.ConstError(_("Can't unbind constant: {}").format(name))
         # we don't have an attribute by this name
         raise NameError(name)
 

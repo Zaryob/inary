@@ -27,19 +27,19 @@ from inary.actionsapi import shelltools
 
 basename = "qt4"
 
-prefix = "/%s" % get.defaultprefixDIR()
-libdir = "%s/lib" % prefix
-bindir = "%s/bin" % prefix
-datadir = "%s/share/%s" % (prefix, basename)
-includedir = "%s/include" % prefix
-docdir = "/%s/%s" % (get.docDIR(), basename)
-examplesdir = "%s/%s/examples" % (libdir, basename)
-demosdir = "%s/%s/demos" % (libdir, basename)
-importdir = "%s/%s/imports" % (libdir, basename)
-plugindir = "%s/%s/plugins" % (libdir, basename)
-translationdir = "%s/translations" % datadir
+prefix = "/{}".format(get.defaultprefixDIR())
+libdir = "{}/lib".format(prefix)
+bindir = "{}/bin".format(prefix)
+datadir = "{0}/share/{1}".format(prefix, basename)
+includedir = "{}/include".format(prefix)
+docdir = "/{0}/{1}".format(get.docDIR(), basename)
+examplesdir = "{0}/{1}/examples".format(libdir, basename)
+demosdir = "{0}/{1}/demos".format(libdir, basename)
+importdir = "{0}/{1}/imports".format(libdir, basename)
+plugindir = "{0}/{1}/plugins".format(libdir, basename)
+translationdir = "{}/translations".format(datadir)
 sysconfdir= "/etc"
-qmake = "%s/qmake" % bindir
+qmake = "{}/qmake".format(bindir)
 
 class ConfigureError(inary.actionsapi.Error):
     def __init__(self, value=''):
@@ -49,17 +49,17 @@ class ConfigureError(inary.actionsapi.Error):
 
 def configure(projectfile='', parameters='', installPrefix=prefix):
     if projectfile != '' and not shelltools.can_access_file(projectfile):
-        raise ConfigureError(_("Project file '%s' not found.") % projectfile)
+        raise ConfigureError(_("Project file '{}' not found.").format(projectfile))
 
     profiles = glob.glob("*.pro")
     if len(profiles) > 1 and projectfile == '':
-        raise ConfigureError(_("It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)") % ", ".join(profiles))
+        raise ConfigureError(_("It seems there are more than one .pro file, you must specify one. (Possible .pro files: {})").format(", ".join(profiles)))
 
-    shelltools.system("%s -makefile %s PREFIX='%s' QMAKE_CFLAGS+='%s' QMAKE_CXXFLAGS+='%s' %s" % (qmake, projectfile, installPrefix, get.CFLAGS(), get.CXXFLAGS(), parameters))
+    shelltools.system("{0} -makefile {1} PREFIX='{2}' QMAKE_CFLAGS+='{3.CFLAGS()}' QMAKE_CXXFLAGS+='{3.CXXFLAGS()}' {4}".format(qmake, projectfile, installPrefix, get, parameters))
 
 def make(parameters=''):
     cmaketools.make(parameters)
 
 def install(parameters='', argument='install'):
-    cmaketools.install('INSTALL_ROOT="%s" %s' % (get.installDIR(), parameters), argument)
+    cmaketools.install('INSTALL_ROOT="{0}" {1}'.format(get.installDIR(), parameters), argument)
 

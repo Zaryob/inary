@@ -92,8 +92,8 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                 pkgpath = os.path.join(repo_uri,
                                        util.parse_package_dir_path(fn))
                 if not os.path.isdir(pkgpath): os.makedirs(pkgpath)
-                ctx.ui.info("%-80.80s\r" % (_('Sorting: %s ') %
-                    fn), noln = False if ctx.config.get_option("verbose") else True)
+                ctx.ui.info("%-80.80s\r" % (_('Sorting:  %s').format(fn)),
+                            noln = False if ctx.config.get_option("verbose") else True)
                 shutil.copy2(os.path.join(repo_uri, fn), pkgpath)
                 os.remove(os.path.join(repo_uri, fn))
                 pkgs_sorted = True
@@ -175,7 +175,7 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                     sorted_pkgs[key] = [pkg]
             self.packages = []
             for key, pkgs in sorted(sorted_pkgs.items()):
-                ctx.ui.info("%-80.80s\r" % (_("Adding packages from directory %s... " % key)), noln=True)
+                ctx.ui.info("%-80.80s\r" % (_("Adding packages from directory {}... ".format(key))), noln=True)
                 try:
                     # Add binary packages to index using a process pool
                     self.packages.extend(pool.map(add_package, pkgs))
@@ -184,7 +184,7 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                     pool.join()
                     ctx.ui.info("")
                     raise
-                ctx.ui.info("%-80.80s\r" % (_("Adding packages from directory %s... done." % key)))
+                ctx.ui.info("%-80.80s\r" % (_("Adding packages from directory {}... done.".format(key))))
 
         ctx.ui.info("")
         pool.close()
@@ -194,8 +194,7 @@ def add_package(params):
     try:
         path, deltas, repo_uri = params
 
-        ctx.ui.info("%-80.80s\r" % (_('Adding package to index: %s') %
-            os.path.basename(path)), noln = True)
+        ctx.ui.info("%-80.80s\r" % (_('Adding package to index: {}').format(os.path.basename(path))), noln = True)
 
         package = inary.package.Package(path, 'r')
         md = package.get_metadata()
@@ -210,7 +209,7 @@ def add_package(params):
         errs = md.errors()
         if md.errors():
             ctx.ui.info("")
-            ctx.ui.error(_('Package %s: metadata corrupt, skipping...') % md.package.name)
+            ctx.ui.error(_('Package {}: metadata corrupt, skipping...').format(md.package.name))
             ctx.ui.error(str(Error(*errs)))
         else:
             # No need to carry these with index (#3965)
@@ -267,7 +266,7 @@ def add_components(path):
     #try:
     return components_xml.components
     #except:
-    #    raise Error(_('Component in %s is corrupt') % path)
+    #    raise Error(_('Component in {} is corrupt').format(path))
     #ctx.ui.error(str(Error(*errs)))
 
 def add_distro(path):
@@ -277,7 +276,7 @@ def add_distro(path):
     distro.read(path)
     return distro
     #except:
-    #    raise Error(_('Distribution in %s is corrupt') % path)
+    #    raise Error(_('Distribution in {} is corrupt').format(path))
     #ctx.ui.error(str(Error(*errs)))
 
 def add_spec(params):
@@ -292,8 +291,8 @@ def add_spec(params):
         else:
             sf.source.sourceURI = util.removepathprefix(repo_uri, path)
 
-        ctx.ui.info("%-80.80s\r" % (_('Adding %s to source index') %
-            path), noln = False if ctx.config.get_option("verbose") else True)
+        ctx.ui.info("%-80.80s\r" % (_('Adding {} to source index').format(path)),
+                                    noln = False if ctx.config.get_option("verbose") else True)
         return sf
 
     except KeyboardInterrupt:

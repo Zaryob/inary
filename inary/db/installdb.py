@@ -51,11 +51,11 @@ class InstallInfo:
         return s
 
     def __str__(self):
-        s = _("State: %s\nVersion: %s, Release: %s\n") % \
-            (InstallInfo.state_map[self.state], self.version, self.release)
+        s = _("State: {0}\nVersion: {1}, Release: {2}\n").format(
+            InstallInfo.state_map[self.state], self.version, self.release)
         import time
         time_str = time.strftime("%d %b %Y %H:%M", self.time)
-        s += _('Distribution: %s, Install Time: %s\n') % (self.distribution,
+        s += _('Distribution: {0}, Install Time: {1}\n').format(self.distribution,
                                                           time_str)
         return s
 
@@ -100,8 +100,8 @@ class InstallDB(lazydb.LazyDB):
 
         if pkg is None:
             # If package info is broken or not available, skip it.
-            ctx.ui.warning(_("Installation info for package '%s' is broken. "
-                             "Reinstall it to fix this problem.") % package)
+            ctx.ui.warning(_("Installation info for package '{}' is broken. "
+                             "Reinstall it to fix this problem.").format(package))
             del self.installed_db[package]
             return
 
@@ -197,8 +197,8 @@ class InstallDB(lazydb.LazyDB):
         This method will return only package that contents terms in the package
         name or summary
         """
-        resum = '<Summary xml:lang=.(%s|en).>.*?%s.*?</Summary>'
-        redesc = '<Description xml:lang=.(%s|en).>.*?%s.*?</Description>'
+        resum = '<Summary xml:lang=.({0}|en).>.*?{1}.*?</Summary>'
+        redesc = '<Description xml:lang=.({0}|en).>.*?{1}.*?</Description>'
         if not fields:
             fields = {'name': True, 'summary': True, 'desc': True}
         if not lang:
@@ -209,14 +209,14 @@ class InstallDB(lazydb.LazyDB):
             if terms == [term for term in terms if (fields['name'] and \
                     re.compile(term, re.I).search(name)) or \
                     (fields['summary'] and \
-                    re.compile(resum % (lang, term), 0 if cs else re.I).search(xml)) or \
+                    re.compile(resum.format(lang, term), 0 if cs else re.I).search(xml)) or \
                     (fields['desc'] and \
-                    re.compile(redesc % (lang, term), 0 if cs else re.I).search(xml))]:
+                    re.compile(redesc.format(lang, term), 0 if cs else re.I).search(xml))]:
                 found.append(name)
         return found
 
     def get_isa_packages(self, isa):
-        risa = '<IsA>%s</IsA>' % isa
+        risa = '<IsA>{}</IsA>'.format(isa)
         packages = []
         for name in self.list_installed():
             xml = open(os.path.join(self.package_path(name), ctx.const.metadata_xml)).read()
@@ -311,7 +311,7 @@ class InstallDB(lazydb.LazyDB):
             if pkginfo.name in revdep_info:
                 del revdep_info[pkginfo.name]
 
-        self.installed_db[pkginfo.name] = "%s-%s" % (pkginfo.version, pkginfo.release)
+        self.installed_db[pkginfo.name] = "{0.version}-{0.release}".format(pkginfo)
         self.__add_to_revdeps(pkginfo.name, self.rev_deps_db)
 
     def remove_package(self, package_name):
@@ -338,7 +338,7 @@ class InstallDB(lazydb.LazyDB):
         info_file = os.path.join(ctx.config.info_dir(), _type)
         config = open(info_file, "w")
         for pkg in set(packages):
-            config.write("%s\n" % pkg)
+            config.write("{}\n".format(pkg))
         config.close()
 
     def __clear_marked_packages(self, _type, package):
@@ -362,6 +362,6 @@ class InstallDB(lazydb.LazyDB):
     def package_path(self, package):
 
         if package in self.installed_db:
-            return os.path.join(ctx.config.packages_dir(), "%s-%s" % (package, self.installed_db[package]))
+            return os.path.join(ctx.config.packages_dir(), "{0}-{1}".format(package, self.installed_db[package]))
 
-        raise Exception(_('Package %s is not installed') % package)
+        raise Exception(_('Package {} is not installed').format(package))

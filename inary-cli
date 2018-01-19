@@ -55,7 +55,7 @@ def handle_exception(exception, value, tb):
         ui.error(_("System error. Program terminated."))
 
     if show_traceback:
-        ui.error("%s: %s" % (exception, str(value)))
+        ui.error("{}: {}".format(exception, str(value)))
     else:
         msg = str(value)
         if msg:

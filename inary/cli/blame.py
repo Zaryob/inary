@@ -63,10 +63,10 @@ Usage: blame <package> ... <package>
                             return
 
     def print_package_info(self, package, hno=0):
-        s = _('Name: %s, version: %s, release: %s\n') % (
+        s = _('Name: {0}, version: {1}, release: {2}\n').format(
               package.name, package.history[hno].version, package.history[hno].release)
-        s += _('Package Maintainer: %s <%s>\n') % (str(package.source.packager.name), package.source.packager.email)
-        s += _('Release Updater: %s <%s>\n') % (package.history[hno].name, package.history[hno].email)
-        s += _('Update Date: %s\n') % package.history[hno].date
-        s += '\n%s\n' % package.history[hno].comment
+        s += _('Package Maintainer: {0} <{1}>\n').format(str(package.source.packager.name), package.source.packager.email)
+        s += _('Release Updater: {0.name} <{0.email}>\n').format(package.history[hno])
+        s += _('Update Date: {}\n').format(package.history[hno].date)
+        s += '\n{}\n'.format(package.history[hno].comment)
         ctx.ui.info(s)

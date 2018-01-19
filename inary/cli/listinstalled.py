@@ -85,4 +85,4 @@ Usage: list-installed
                 ctx.ui.info('%-20s  |%s' % (package.name, inst_info.one_liner()))
             else:
                 package.name = package.name + ' ' * (maxlen - len(package.name))
-                ctx.ui.info('%s - %s' % (package.name, str(package.summary)))
+                ctx.ui.info('{0} - {1}'.format(package.name, str(package.summary)))

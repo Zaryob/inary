@@ -190,7 +190,7 @@ def run_batch(cmd, ui_debug=True):
     p = subprocess.Popen(cmd, shell=True,
                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = p.communicate()
-    if ui_debug: ctx.ui.debug(_('return value for "%s" is %s') % (cmd, p.returncode))
+    if ui_debug: ctx.ui.debug(_('return value for "{0}" is {1}').format(cmd, p.returncode))
     return (p.returncode, out, err)
 
 # TODO: it might be worthwhile to try to remove the
@@ -216,7 +216,7 @@ def run_logged(cmd):
 
     p = subprocess.Popen(cmd, shell=True, stdout=stdout, stderr=stderr)
     out, err = p.communicate()
-    ctx.ui.debug(_('return value for "%s" is %s') % (cmd, p.returncode))
+    ctx.ui.debug(_('return value for "{0}" is {1}').format(cmd, p.returncode))
 
     return p.returncode
 
@@ -390,9 +390,9 @@ def calculate_hash(path):
         # For symlinks, path string is hashed instead of the content
         value = sha1_data(read_link(path))
         if not os.path.exists(path):
-            ctx.ui.info(_("Including external link '%s'") % path)
+            ctx.ui.info(_("Including external link '{}'").format(path))
     elif os.path.isdir(path):
-        ctx.ui.info(_("Including directory '%s'") % path)
+        ctx.ui.info(_("Including directory '{}'").format(path))
         value = None
     else:
         if path.endswith('.a'):
@@ -480,7 +480,7 @@ def sha1_file(filename):
             # Permission denied, the file doesn't have read permissions, skip
             raise FilePermissionDeniedError(_("You don't have necessary read permissions"))
         else:
-            raise FileError(_("Cannot calculate SHA1 hash of %s") % filename)
+            raise FileError(_("Cannot calculate SHA1 hash of {}").format(filename))
 
 def sha1_data(data):
     """Calculate sha1 hash of given data."""
@@ -492,13 +492,13 @@ def uncompress(patchFile, compressType="gz", targetDir=""):
     """Uncompress the file and return the new path."""
     formats = ("gz", "gzip", "bz2", "bzip2", "lzma", "xz")
     if compressType not in formats:
-        raise Error(_("Compression type is not valid: '%s'") % compressType)
+        raise Error(_("Compression type is not valid: '{}'").format(compressType))
 
     archive = inary.archive.Archive(patchFile, compressType)
     try:
         archive.unpack(targetDir)
     except Exception as msg:
-        raise Error(_("Error while decompressing %s: %s") % (patchFile, msg))
+        raise Error(_("Error while decompressing {0}: {1}").format(patchFile, msg))
 
     # FIXME: Get file path from Archive instance
     filePath = join_path(targetDir, os.path.basename(patchFile))
@@ -506,12 +506,12 @@ def uncompress(patchFile, compressType="gz", targetDir=""):
     # remove suffix from file cause its uncompressed now
     extensions = {"gzip": "gz", "bzip2": "bz2"}
     extension = extensions.get(compressType, compressType)
-    return filePath.split(".%s" % extension)[0]
+    return filePath.split(".{}".format(extension))[0]
 
 def check_patch_level(workdir, path):
     level = 0
     while path:
-        if os.path.isfile("%s/%s" % (workdir, path)): return level
+        if os.path.isfile("{0}/{1}".format(workdir, path)): return level
         if path.find("/") == -1: return None
         level += 1
         path = path[path.find("/")+1:]
@@ -522,7 +522,7 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
     if os.path.exists(sourceDir):
         os.chdir(sourceDir)
     else:
-        raise Error(_("ERROR: WorkDir (%s) does not exist\n") % (sourceDir))
+        raise Error(_("ERROR: WorkDir ({}) does not exist\n").format(sourceDir))
 
     check_file(patchFile)
 
@@ -551,7 +551,7 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
                     if level == None and len(paths_m) -1 == paths_m.index(path_m):
                         level = check_patch_level(sourceDir, path_m)
                     if not level == None:
-                        ctx.ui.debug("Detected patch level=%s for %s" % (level, os.path.basename(patchFile)))
+                        ctx.ui.debug("Detected patch level={0} for {1}".format(level, os.path.basename(patchFile)))
                         break
 
     if level == None:
@@ -566,55 +566,55 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
         if not os.path.exists(patchesDir):
             os.makedirs(patchesDir)
         # Import original patch into quilt tree
-        (ret, out, err) = run_batch('quilt import %s -p %d -P %s \"%s\"' % (("-R" if reverse else ""), level, name, patchFile))
+        (ret, out, err) = run_batch('quilt import {0} -p {1} -P {2} \"{3}\"'.format(("-R" if reverse else ""), level, name, patchFile))
         # run quilt push to apply original patch into tree
         (ret, out, err) = run_batch('quilt push')
     else:
         # run GNU patch to apply original patch into tree
-        (ret, out, err) = run_batch("patch --remove-empty-files --no-backup-if-mismatch %s -p%d -i \"%s\"" % (("-R" if reverse else ""), level, patchFile))
+        (ret, out, err) = run_batch("patch --remove-empty-files --no-backup-if-mismatch {0} -p{1} -i \"{2}\"".format(("-R" if reverse else ""), level, patchFile))
 
     if ret:
         if out is None and err is None:
             # Which means stderr and stdout directed so they are None
-            raise Error(_("ERROR: patch (%s) failed") % (patchFile))
+            raise Error(_("ERROR: patch ({}) failed").format((patchFile)))
         else:
-            raise Error(_("ERROR: patch (%s) failed: %s") % (patchFile, out))
+            raise Error(_("ERROR: patch ({}) failed: {}").format(patchFile, out))
 
     os.chdir(cwd)
 
 def strip_file(filepath, fileinfo, outpath):
     """Strip an elf file from debug symbols."""
     def run_strip(f, flags=""):
-        p = os.popen("strip %s %s" %(flags, f))
+        p = os.popen("strip {0} {1}".format(flags, f))
         ret = p.close()
         if ret:
-            ctx.ui.warning(_("strip command failed for file '%s'!") % f)
+            ctx.ui.warning(_("strip command failed for file '{}'!").format(f))
 
     def run_chrpath(f):
         """ remove rpath info from binary """
-        p = os.popen("chrpath -d %s" % f)
+        p = os.popen("chrpath -d {}".format(f))
         ret = p.close()
         if ret:
-            ctx.ui.warning(_("chrpath command failed for file '%s'!") % f)
+            ctx.ui.warning(_("chrpath command failed for file '{}'!").format(f))
 
     def save_elf_debug(f, o):
         """copy debug info into file.debug file"""
-        p = os.popen("objcopy --only-keep-debug %s %s%s" % (f, o, ctx.const.debug_file_suffix))
+        p = os.popen("objcopy --only-keep-debug {0} {1}{2}".format(f, o, ctx.const.debug_file_suffix))
         ret = p.close()
         if ret:
-            ctx.ui.warning(_("objcopy (keep-debug) command failed for file '%s'!") % f)
+            ctx.ui.warning(_("objcopy (keep-debug) command failed for file '{}'!").format(f))
 
         """mark binary/shared objects to use file.debug"""
-        p = os.popen("objcopy --add-gnu-debuglink=%s%s %s" % (o, ctx.const.debug_file_suffix, f))
+        p = os.popen("objcopy --add-gnu-debuglink={0}{1} {2}".format(o, ctx.const.debug_file_suffix, f))
         ret = p.close()
         if ret:
-            ctx.ui.warning(_("objcopy (add-debuglink) command failed for file '%s'!") % f)
+            ctx.ui.warning(_("objcopy (add-debuglink) command failed for file '{}'!").format(f))
 
     if fileinfo == None:        
-        ret, out, err = run_batch("file %s" % filepath, ui_debug=False)
+        ret, out, err = run_batch("file {}".format(filepath), ui_debug=False)
         if ret:
-            ctx.ui.warning(_("file command failed with return code %s for file: %s") % (ret, filepath))
-            ctx.ui.info(_("Output:\n%s") % out, verbose=True)
+            ctx.ui.warning(_("file command failed with return code {0} for file: {1}") % (ret, filepath))
+            ctx.ui.info(_("Output:\n{}").format(out), verbose=True)
 
     elif "current ar archive" in fileinfo:
         run_strip(filepath, "--strip-debug")
@@ -704,14 +704,14 @@ def parse_package_name(package_name):
         try:
             return parse_package_name_legacy(package_name)
         except:
-            raise Error(_("Invalid package name: %s") % package_name)
+            raise Error(_("Invalid package name: {}").format(package_name))
 
-    return name, "%s-%s" % (version, release)
+    return name, "{}-{}".format(version, release)
 
 def parse_package_dir_path(package_name):
     name = parse_package_name(package_name)[0]
     if name.split("-").pop() in ["devel", "32bit", "doc", "docs", "userspace"]: name = name[:-1 - len(name.split("-").pop())]
-    return "%s/%s" % (name[0:4].lower() if name.startswith("lib") and len(name) > 3 else name.lower()[0], name.lower())
+    return "{}/{}".format(name[0:4].lower() if name.startswith("lib") and len(name) > 3 else name.lower()[0], name.lower())
 
 def parse_delta_package_name_legacy(package_name):
     """Separate delta package name and release infos for package formats <= 1.1.
@@ -749,7 +749,7 @@ def parse_delta_package_name(package_name):
         try:
             return parse_delta_package_name_legacy(package_name)
         except:
-            raise Error(_("Invalid delta package name: %s") % package_name)
+            raise Error(_("Invalid delta package name: {}").format(package_name))
 
     return name, source_release, target_release
 
@@ -880,7 +880,7 @@ def config_changed(config_file):
 # recursively remove empty dirs starting from dirpath
 def rmdirs(dirpath):
     if os.path.isdir(dirpath) and not os.listdir(dirpath):
-        ctx.ui.debug("Removing empty dir: %s" % dirpath)
+        ctx.ui.debug("Removing empty dir: {}".format(dirpath))
         os.rmdir(dirpath)
         rmdirs(os.path.dirname(dirpath))
 

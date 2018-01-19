@@ -52,7 +52,7 @@ class RunTimeError(inary.actionsapi.Error):
         ctx.ui.error(value)
 
 def get_config(config):
-    return os.popen("ruby -rrbconfig -e 'puts Config::CONFIG[\"%s\"]'" % config).read().strip()
+    return os.popen("ruby -rrbconfig -e 'puts Config::CONFIG[\"{}\"]'".format(config)).read().strip()
 
 def get_ruby_version():
     return get_config('ruby_version')
@@ -88,14 +88,14 @@ def auto_dodoc():
 
 def install(parameters=''):
     '''does ruby setup.rb install'''
-    if system('ruby -w setup.rb --prefix=/%s --destdir=%s %s' % (get.defaultprefixDIR(), get.installDIR(), parameters)):
+    if system('ruby -w setup.rb --prefix=/{0.defaultprefixDIR()} --destdir={0.installDIR()} {1}'.format(get, parameters)):
         raise InstallError(_('Install failed.'))
 
     auto_dodoc()
 
 def rake_install(parameters=''):
     '''execute rake script for installation'''
-    if system('rake -t -l %s %s' % (os.path.join('/', get.defaultprefixDIR(), 'lib'), parameters)):
+    if system('rake -t -l {0} {1}'.format(os.path.join('/', get.defaultprefixDIR(), 'lib'), parameters)):
         raise InstallError(_('Install failed.'))
 
     auto_dodoc()
@@ -104,5 +104,5 @@ def run(parameters=''):
     '''executes parameters with ruby'''
     export('DESTDIR', get.installDIR())
 
-    if system('ruby %s' % parameters):
-        raise RuntimeError(_("Running 'ruby %s' failed.") % parameters)
+    if system('ruby {}'.format(parameters)):
+        raise RuntimeError(_("Running 'ruby {}' failed.").format(parameters))

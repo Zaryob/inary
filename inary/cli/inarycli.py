@@ -135,7 +135,7 @@ class InaryCLI(object):
 
         self.command = command.Command.get_command(cmd_name, args=orig_args)
         if not self.command:
-            raise inary.cli.Error(_("Unrecognized command: %s") % cmd_name)
+            raise inary.cli.Error(_("Unrecognized command: {}").format(cmd_name))
 
     def die(self):
         inary.cli.printu('\n' + self.parser.format_help())

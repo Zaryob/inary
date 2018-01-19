@@ -23,7 +23,7 @@ class CycleException(inary.Exception):
         self.cycle = cycle
 
     def __str__(self):
-        return _('Encountered cycle %s') % self.cycle
+        return _('Encountered cycle {}').format(self.cycle)
 
 class Digraph(object):
 

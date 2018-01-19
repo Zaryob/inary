@@ -73,7 +73,7 @@ def __getSuffix():
     """Read and return the value read from .suffix file."""
     suffix = get.srcVERSION()
     if __getFlavour():
-        suffix += "-%s" % __getFlavour()
+        suffix += "-{}".format(__getFlavour())
     return suffix
 
 def __getExtraVersion():
@@ -89,7 +89,7 @@ def __getExtraVersion():
 
     # Append pae, default, rt, etc. to the extraversion if available
     if __getFlavour():
-        extraversion += "-%s" % __getFlavour()
+        extraversion += "-{}".format(__getFlavour())
 
     return extraversion
 
@@ -114,22 +114,22 @@ def getKernelVersion(flavour=None):
         return open(kverfile, "r").read().strip()
     else:
         # Fail
-        raise ConfigureError(_("Can't find kernel version information file %s.") % kverfile)
+        raise ConfigureError(_("Can't find kernel version information file {}.").format(kverfile))
 
 def configure():
     # Copy the relevant configuration file
-    shutil.copy("configs/kernel-%s-config" % get.ARCH(), ".config")
+    shutil.copy("configs/kernel-{}-config".format(get.ARCH()), ".config")
 
     # Set EXTRAVERSION
-    inarytools.dosed("Makefile", "EXTRAVERSION =.*", "EXTRAVERSION = %s" % __getExtraVersion())
+    inarytools.dosed("Makefile", "EXTRAVERSION =.*", "EXTRAVERSION = {}".format(__getExtraVersion()))
 
     # Configure the kernel interactively if
     # configuration contains new options
-    autotools.make("ARCH=%s oldconfig" % __getKernelARCH())
+    autotools.make("ARCH={} oldconfig".format(__getKernelARCH()))
 
     # Check configuration with listnewconfig
     try:
-        autotools.make("ARCH=%s listnewconfig" % __getKernelARCH())
+        autotools.make("ARCH={} listnewconfig".format(__getKernelARCH()))
     except:
         pass
 
@@ -152,7 +152,7 @@ def build(debugSymbols=False):
         # Enable debugging symbols (-g -gdwarf2)
         extra_config.append("CONFIG_DEBUG_INFO=y")
 
-    autotools.make("ARCH=%s %s" % (__getKernelARCH(), " ".join(extra_config)))
+    autotools.make("ARCH={0} {1}".format(__getKernelARCH(), " ".join(extra_config)))
 
 
 def install():
@@ -162,26 +162,26 @@ def install():
     dumpVersion()
 
     # Install kernel image
-    inarytools.insinto("/boot/", "arch/x86/boot/bzImage", "kernel-%s" % suffix)
+    inarytools.insinto("/boot/", "arch/x86/boot/bzImage", "kernel-{}".formar(suffix))
 
     # Install the modules
     # mod-fw= avoids firmwares from installing
     # Override DEPMOD= to not call depmod as it will be called
     # during module-init-tools' package handler
-    autotools.rawInstall("INSTALL_MOD_PATH=%s/" % get.installDIR(),
+    autotools.rawInstall("INSTALL_MOD_PATH={}/".format(get.installDIR()),
                          "DEPMOD=/bin/true modules_install mod-fw=")
 
     # Remove symlinks first
-    inarytools.remove("/lib/modules/%s/source" % suffix)
-    inarytools.remove("/lib/modules/%s/build" % suffix)
+    inarytools.remove("/lib/modules/{}/source".format(suffix))
+    inarytools.remove("/lib/modules/{}/build".format(suffix))
 
     # Install Module.symvers and System.map here too
-    shutil.copy("Module.symvers", "%s/lib/modules/%s/" % (get.installDIR(), suffix))
-    shutil.copy("System.map", "%s/lib/modules/%s/" % (get.installDIR(), suffix))
+    shutil.copy("Module.symvers", "{0}/lib/modules/{1}/".format(get.installDIR(), suffix))
+    shutil.copy("System.map", "{0}/lib/modules/{1}/".format(get.installDIR(), suffix))
 
     # Create extra/ and updates/ subdirectories
     for _dir in ("extra", "updates"):
-        inarytools.dodir("/lib/modules/%s/%s" % (suffix, _dir))
+        inarytools.dodir("/lib/modules/{0}/{1}".format(suffix, _dir))
 
 
 def installHeaders(extraHeaders=None):
@@ -199,58 +199,57 @@ def installHeaders(extraHeaders=None):
     wanted = ["Makefile*", "Kconfig*", "Kbuild*", "*.sh", "*.pl", "*.lds"]
 
     suffix = __getSuffix()
-    headersDirectoryName = "usr/src/linux-headers-%s" % suffix
+    headersDirectoryName = "usr/src/linux-headers-{}".format(suffix)
 
     # Get the destination directory for header installation
     destination = os.path.join(get.installDIR(), headersDirectoryName)
     shelltools.makedirs(destination)
 
     # First create the skel
-    find_cmd = "find . -path %s -prune -o -type f \( -name %s \) -print" % \
-                (
-                    " -prune -o -path ".join(["'./%s/*'" % l for l in pruned]),
-                    " -o -name ".join(["'%s'" % k for k in wanted])
-                ) + " | cpio -pVd --preserve-modification-time %s" % destination
+    find_cmd = "find . -path {0} -prune -o -type f \( -name {1} \) -print".format(
+                    " -prune -o -path ".join(["'./{}/*'".format(l for l in pruned)]),
+                    " -o -name ".join(["'{}'".format(k for k in wanted)])
+                ) + " | cpio -pVd --preserve-modification-time {}".format(destination)
 
     shelltools.system(find_cmd)
 
     # Install additional headers
     for headers in extras:
-        shelltools.system("cp -a %s/*.h %s/%s" % (headers, destination, headers))
+        shelltools.system("cp -a {0}/*.h {1}/{2}".format(headers, destination, headers))
 
     # Install remaining headers
-    shelltools.system("cp -a %s %s" % (" ".join(pruned), destination))
+    shelltools.system("cp -a {0} {1}".format(" ".join(pruned), destination))
 
     # Cleanup directories
-    shelltools.system("rm -rf %s/scripts/*.o" % destination)
-    shelltools.system("rm -rf %s/scripts/*/*.o" % destination)
-    shelltools.system("rm -rf %s/Documentation/DocBook" % destination)
+    shelltools.system("rm -rf {}/scripts/*.o".format(destination))
+    shelltools.system("rm -rf {}/scripts/*/*.o".format(destination))
+    shelltools.system("rm -rf {}/Documentation/DocBook".format(destination))
 
     # Finally copy the include directories found in arch/
     shelltools.system("(find arch -name include -type d -print | \
                         xargs -n1 -i: find : -type f) | \
-                        cpio -pd --preserve-modification-time %s" % destination)
+                        cpio -pd --preserve-modification-time {}".format(destination))
 
     # Copy Modules.symvers and System.map
-    shutil.copy("Module.symvers", "%s/" % destination)
-    shutil.copy("System.map", "%s/" % destination)
+    shutil.copy("Module.symvers", "{}/".format(destination))
+    shutil.copy("System.map", "{}/".format(destination))
 
     # Copy .config file which will be needed by some external modules
-    shutil.copy(".config", "%s/" % destination)
+    shutil.copy(".config", "{}/".format(destination))
 
     # Settle the correct build symlink to this headers
-    inarytools.dosym("/%s" % headersDirectoryName, "/lib/modules/%s/build" % suffix)
-    inarytools.dosym("build", "/lib/modules/%s/source" % suffix)
+    inarytools.dosym("/{}".format(headersDirectoryName), "/lib/modules/{}/build".format(suffix))
+    inarytools.dosym("build", "/lib/modules/{}/source".format(suffix))
 
 
 def installLibcHeaders(excludes=None):
     headers_tmp = os.path.join(get.installDIR(), 'tmp-headers')
     headers_dir = os.path.join(get.installDIR(), 'usr/include')
 
-    make_cmd = "O=%s INSTALL_HDR_PATH=%s/install" % (headers_tmp, headers_tmp)
+    make_cmd = "O={0} INSTALL_HDR_PATH={0}/install".format(headers_tmp)
 
     # Cleanup temporary header directory
-    shelltools.system("rm -rf %s" % headers_tmp)
+    shelltools.system("rm -rf {}".format(headers_tmp))
 
     # Create directories
     shelltools.makedirs(headers_tmp)
@@ -258,33 +257,33 @@ def installLibcHeaders(excludes=None):
     
     ###################Workaround begins here ...
     #Workaround information -- http://patches.openembedded.org/patch/33433/
-    cpy_src="%s/linux-*/arch/x86/include/generated" % (get.workDIR())
-    cpy_tgt="%s/arch/x86/include" % (headers_tmp)
+    cpy_src="{}/linux-*/arch/x86/include/generated".format(get.workDIR())
+    cpy_tgt="{}/arch/x86/include".format(headers_tmp)
     shelltools.makedirs(cpy_tgt)
-    
-    copy_cmd ="cp -Rv %s %s " % (cpy_src, cpy_tgt)
-    
+
+    copy_cmd ="cp -Rv {0} {1} ".format(cpy_src, cpy_tgt)
+
     shelltools.system(copy_cmd)
     #######################Workaround ends here ...
-    
+
     # make defconfig and install the headers
-    autotools.make("%s defconfig" % make_cmd)
+    autotools.make("{} defconfig".format(make_cmd))
     autotools.rawInstall(make_cmd, "headers_install")
 
     oldwd = os.getcwd()
 
     shelltools.cd(os.path.join(headers_tmp, "install", "include"))
     shelltools.system("find . -name '.' -o -name '.*' -prune -o -print | \
-                       cpio -pVd --preserve-modification-time %s" % headers_dir)
+                       cpio -pVd --preserve-modification-time {}".format(headers_dir))
 
     # Remove sound/ directory which is installed by alsa-headers
-    shelltools.system("rm -rf %s/sound" % headers_dir)
+    shelltools.system("rm -rf {}/sound".format(headers_dir))
 
     # Remove possible excludes given by actions.py
     if excludes:
-        shelltools.system("rm -rf %s" % " ".join(["%s/%s" % (headers_dir, exc.strip("/")) for exc in excludes]))
+        shelltools.system("rm -rf {}" .format(" ".join(["{0}/{1}".format(headers_dir, exc.strip("/")) for exc in excludes])))
 
     shelltools.cd(oldwd)
 
     # Remove tmp directory
-    shelltools.system("rm -rf %s" % headers_tmp)
+    shelltools.system("rm -rf {}".format(headers_tmp))

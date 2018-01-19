@@ -29,11 +29,11 @@ def loadFile(_file):
 def getXmlData(_file):
     if os.path.exists(_file):
         return ciksemel.parse(_file)
-    elif os.path.exists("%s.bz2" % _file):
-        indexdata = bz2.decompress(file("%s.bz2" % _file).read())
+    elif os.path.exists("{}.bz2".format(_file)):
+        indexdata = bz2.decompress(open("{}.bz2".format(_file)).read())
         return ciksemel.parseString(indexdata)
     else:
-        print("%s not found" % indexfile)
+        print("{} not found".format(indexfile))
         sys.exit(1)
 
 def fillPackageDict(tag, _hasSpecFile, packageOf):
@@ -45,7 +45,7 @@ def fillPackageDict(tag, _hasSpecFile, packageOf):
         else:
             PackagePackagerName = tag.getTag("Source").getTag("Packager").getTagData("Name")
 
-        fullpath = "%s/%s" % (PackagePartOf.replace(".", "/"), PackageName)
+        fullpath = "{0}/{1}".format(PackagePartOf.replace(".", "/"), PackageName)
 
         if not PackagePackagerName in packageOf:
             packageOf[PackagePackagerName] = []
@@ -70,7 +70,7 @@ def findRequiredPackages(packageList, packagersList):
     for pkg in packageList:
         for packager in packagersList:
             for sourcePackage in packagersList[packager]:
-                if sourcePackage.endswith("/%s" % pkg):
+                if sourcePackage.endswith("/{}".format(pkg)):
                     if not packager in pkgdict:
                         pkgdict[packager] = []
                     pkgdict[packager].append(pkg)
@@ -78,7 +78,7 @@ def findRequiredPackages(packageList, packagersList):
     return pkgdict
 
 def urgent_packages(index, packages):
-    indexfile = "%s/%s" % (index, "inary-index.xml")
+    indexfile = "{0}/{1}".format(index, "inary-index.xml")
     packageList = loadFile(packages)
 
     xmldata = getXmlData(indexfile)
@@ -89,8 +89,8 @@ def urgent_packages(index, packages):
     tmp = list(requiredPackages.keys())
     tmp.sort()
 
-    for i in tmp:
-        print("-> %s" % i)
-        for k in requiredPackages[i]:
-             print("\t%s" % k)
+#    for i in tmp:
+#        print("-> %s" % i)
+#        for k in requiredPackages[i]:
+#             print("\t%s" % k)
 

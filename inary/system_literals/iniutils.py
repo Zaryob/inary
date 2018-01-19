@@ -34,7 +34,7 @@ class iniDB:
         try:
             self.cp.read(db_file)
         except:
-            print(("Network configuration file %s is corrupt" % db_file))
+            print(("Network configuration file {} is corrupt".format(db_file)))
         self.__unlock()
 
     def __writelock(self):
@@ -175,7 +175,7 @@ class iniParser:
                 self.__fixIniFile()
                 return []
             else:
-                raise iniParserError("File is corrupt: %s" % self.inifile)
+                raise iniParserError("File is corrupt: {}".format(self.inifile))
         return ini.sections()
 
     def getSection(self, section):
@@ -190,7 +190,7 @@ class iniParser:
                 self.__fixIniFile()
                 return {}
             else:
-                raise iniParserError("File is corrupt: %s" % self.inifile)
+                raise iniParserError("File is corrupt: {}".format(self.inifile))
         if section not in ini.sections():
             return {}
         dct = {}
@@ -211,7 +211,7 @@ class iniParser:
                 self.setSection(section, dct)
                 return
             else:
-                raise iniParserError("File is corrupt: %s" % self.inifile)
+                raise iniParserError("File is corrupt: {}".format(self.inifile))
         if section not in ini.sections():
             ini.add_section(section)
         for key, value in list(dct.items()):
@@ -234,7 +234,7 @@ class iniParser:
                 self.__fixIniFile()
                 return
             else:
-                raise iniParserError("File is corrupt: %s" % self.inifile)
+                raise iniParserError("File is corrupt: {}".format(self.inifile))
         ini.remove_section(section)
         self.__writeIni(ini)
         self.__unlock()

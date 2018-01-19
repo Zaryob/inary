@@ -24,9 +24,9 @@ class grubCommand:
 
     def __str__(self):
         if self.options:
-            return "%s %s %s" % (self.key, " ".join(self.options), self.value)
+            return "{0} {1} {2}" % (self.key, " ".join(self.options), self.value)
         else:
-            return "%s %s" % (self.key, self.value)
+            return "{0} {1}".format(self.key, self.value)
 
 class grubEntry:
     """Grub menu entry"""
@@ -61,7 +61,7 @@ class grubEntry:
 
     def __str__(self):
         conf = []
-        conf.append("title %s" % self.title)
+        conf.append("title {}".format(self.title))
         for command in self.commands:
             conf.append(str(command))
         return "\n".join(conf)
@@ -150,11 +150,11 @@ class grubConf:
         conf = []
         if self.header:
             for h in self.header:
-                conf.append("# %s" % h)
+                conf.append("# {}".format(h))
             conf.append("")
         if self.options:
             for key, value in list(self.options.items()):
-                line = "%s %s" % (key, value)
+                line = "{0} {1}".format(key, value)
                 conf.append(line)
             conf.append("")
         for index, entry in enumerate(self.entries):
@@ -186,7 +186,7 @@ class grubConf:
 
     def getAllOptions(self):
         """Returns all options."""
-        return ["%s %s" % (key, value) for key, value in list(self.options.items())]
+        return ["{0} {1}".format(key, value) for key, value in list(self.options.items())]
 
     def listEntries(self):
         """Returns a list of entries."""

@@ -318,11 +318,11 @@ def fetch(packages=[], path=os.path.curdir):
     repodb = inary.db.repodb.RepoDB()
     for name in packages:
         package, repo = packagedb.get_package_repo(name)
-        ctx.ui.info(_("%s package found in %s repository") % (package.name, repo))
+        ctx.ui.info(_("{0} package found in {1} repository").format(package.name, repo))
         uri = inary.uri.URI(package.packageURI)
         output = os.path.join(path, uri.path())
         if os.path.exists(output) and package.packageHash == inary.util.sha1_file(output):
-            ctx.ui.warning(_("%s package already fetched") % uri.path())
+            ctx.ui.warning(_("{} package already fetched").format(uri.path()))
             continue
         if uri.is_absolute_path():
             url = str(pkg_uri)
@@ -440,15 +440,15 @@ def delete_cache():
     """
     Deletes cached packages, cached archives, build dirs, db caches
     """
-    ctx.ui.info(_("Cleaning package cache %s...") % ctx.config.cached_packages_dir())
+    ctx.ui.info(_("Cleaning package cache {}...").format(ctx.config.cached_packages_dir()))
     inary.util.clean_dir(ctx.config.cached_packages_dir())
-    ctx.ui.info(_("Cleaning source archive cache %s...") % ctx.config.archives_dir())
+    ctx.ui.info(_("Cleaning source archive cache {}...").format(ctx.config.archives_dir()))
     inary.util.clean_dir(ctx.config.archives_dir())
-    ctx.ui.info(_("Cleaning temporary directory %s...") % ctx.config.tmp_dir())
+    ctx.ui.info(_("Cleaning temporary directory {}...").format(ctx.config.tmp_dir()))
     inary.util.clean_dir(ctx.config.tmp_dir())
     for cache in [x for x in os.listdir(ctx.config.cache_root_dir()) if x.endswith(".cache")]:
         cache_file = inary.util.join_path(ctx.config.cache_root_dir(), cache)
-        ctx.ui.info(_("Removing cache file %s...") % cache_file)
+        ctx.ui.info(_("Removing cache file {}...").format(cache_file))
         os.unlink(cache_file)
 
 @locked
@@ -536,7 +536,7 @@ def package_graph(A, packagedb, ignore_installed = False, reverse=False):
 
     """
 
-    ctx.ui.debug('A = %s' % str(A))
+    ctx.ui.debug('A = {}'.format(str(A)))
 
     # try to construct a inary graph of packages to
     # install / reinstall
@@ -652,7 +652,7 @@ def info(package, installed = False):
 def info_file(package_fn):
 
     if not os.path.exists(package_fn):
-        raise inary.Error (_('File %s not found') % package_fn)
+        raise inary.Error (_('File {} not found').format(package_fn))
 
     package = inary.package.Package(package_fn)
     package.read()
@@ -694,7 +694,7 @@ def index(dirs=None, output='inary-index.xml',
         dirs = ['.']
     for repo_dir in dirs:
         repo_dir = str(repo_dir)
-        ctx.ui.info(_('Building index of Inary files under %s') % repo_dir)
+        ctx.ui.info(_('Building index of Inary files under {}').format(repo_dir))
         index.index(repo_dir, skip_sources)
 
     sign = None if skip_signing else inary.file.File.detached
@@ -704,19 +704,19 @@ def index(dirs=None, output='inary-index.xml',
 @locked
 def add_repo(name, indexuri, at = None):
     import re
-    if not re.match("^[0-9%s\-\\_\\.\s]*$" % str(inary.util.letters()), name):
+    if not re.match("^[0-9{}\-\\_\\.\s]*$".format(str(inary.util.letters())), name):
         raise inary.Error(_('Not a valid repo name.'))
     repodb = inary.db.repodb.RepoDB()
     if repodb.has_repo(name):
-        raise inary.Error(_('Repo %s already present.') % name)
+        raise inary.Error(_('Repo {} already present.').format(name))
     elif repodb.has_repo_url(indexuri, only_active = False):
         repo = repodb.get_repo_by_url(indexuri)
-        raise inary.Error(_('Repo already present with name %s.') % repo)
+        raise inary.Error(_('Repo already present with name {}.').format(repo))
     else:
         repo = inary.db.repodb.Repo(inary.uri.URI(indexuri))
         repodb.add_repo(name, repo, at = at)
         inary.db.flush_caches()
-        ctx.ui.info(_('Repo %s added to system.') % name)
+        ctx.ui.info(_('Repo {} added to system.').format(name))
 
 @locked
 def remove_repo(name):
@@ -724,10 +724,9 @@ def remove_repo(name):
     if repodb.has_repo(name):
         repodb.remove_repo(name)
         inary.db.flush_caches()
-        ctx.ui.info(_('Repo %s removed from system.') % name)
+        ctx.ui.info(_('Repo {} removed from system.').format(name))
     else:
-        raise inary.Error(_('Repository %s does not exist. Cannot remove.')
-                 % name)
+        raise inary.Error(_('Repository {} does not exist. Cannot remove.').format(name))
 
 @locked
 def update_repos(repos, force=False):
@@ -748,7 +747,7 @@ def update_repo(repo, force=False):
         inary.db.regenerate_caches()
 
 def __update_repo(repo, force=False):
-    ctx.ui.action(_('Updating repository: %s') % repo)
+    ctx.ui.action(_('Updating repository: {}').format(repo))
     ctx.ui.notify(inary.ui.updatingrepo, name = repo)
     repodb = inary.db.repodb.RepoDB()
     index = inary.data.index.Index()
@@ -757,7 +756,7 @@ def __update_repo(repo, force=False):
         try:
             index.read_uri_of_repo(repouri, repo)
         except inary.file.AlreadyHaveException as e:
-            ctx.ui.info(_('%s repository information is up-to-date.') % repo)
+            ctx.ui.info(_('{} repository information is up-to-date.').format(repo))
             if force:
                 ctx.ui.info(_('Updating database at any rate as requested'))
                 index.read_uri_of_repo(repouri, repo, force = force)
@@ -774,7 +773,7 @@ def __update_repo(repo, force=False):
 
         ctx.ui.info(_('Package database updated.'))
     else:
-        raise inary.Error(_('No repository named %s found.') % repo)
+        raise inary.Error(_('No repository named {} found.').format(repo))
 
     return True
 
@@ -834,7 +833,7 @@ def clearCache(all=False):
 
         latestVersions = []
         for pkg in latest:
-            latestVersions.append("%s-%s" % (pkg, latest[pkg][0]))
+            latestVersions.append("{0}-{1}".format(pkg, latest[pkg][0]))
 
         oldVersions = list(set(pkgList) - set(latestVersions))
         return oldVersions, latestVersions
@@ -859,7 +858,7 @@ def clearCache(all=False):
                     pass
 
     def removeAll(cacheDir):
-        cached = glob.glob("%s/*.inary" % cacheDir) + glob.glob("%s/*.part" % cacheDir)
+        cached = glob.glob("{}/*.inary".format(cacheDir)) + glob.glob("{}/*.part".format(cacheDir))
         for pkg in cached:
             try:
                 os.remove(pkg)
@@ -868,7 +867,7 @@ def clearCache(all=False):
 
     cacheDir = ctx.config.cached_packages_dir()
 
-    pkgList = [os.path.basename(x).split(ctx.const.package_suffix)[0] for x in glob.glob("%s/*.inary" % cacheDir)]
+    pkgList = [os.path.basename(x).split(ctx.const.package_suffix)[0] for x in glob.glob("{}/*.inary".format(cacheDir))]
     if not all:
         # Cache limits from inary.conf
         config = inary.configfile.ConfigurationFile("/etc/inary/inary.conf")

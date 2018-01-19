@@ -35,9 +35,9 @@ class InstallError(inary.actionsapi.Error):
         ctx.ui.error(value)
 
 def make(parameters = ''):
-    if system('scons %s %s' % (get.makeJOBS(), parameters)):
+    if system('scons {0} {1}'.format(get.makeJOBS(), parameters)):
         raise MakeError(_('Make failed.'))
 
 def install(parameters = 'install', prefix = get.installDIR(), argument='prefix'):
-    if system('scons %s=%s %s' % (argument, prefix, parameters)):
+    if system('scons {0}={1} {2}'.format(argument, prefix, parameters)):
         raise InstallError(_('Install failed.'))

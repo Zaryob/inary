@@ -33,7 +33,7 @@ class ConfigureError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
         if can_access_file('config.log'):
-            ctx.ui.error(_('Please attach the config.log to your bug report:\n%s/config.log') % os.getcwd())
+            ctx.ui.error(_('Please attach the config.log to your bug report:\n{}/config.log').format(os.getcwd()))
 
 class MakeError(inary.actionsapi.Error):
     def __init__(self, value=''):
@@ -53,14 +53,14 @@ class RunTimeError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
 
-def configure(parameters = '', installPrefix = '/%s' % get.defaultprefixDIR(), sourceDir = '.'):
+def configure(parameters = '', installPrefix = '/{}'.format(get.defaultprefixDIR()), sourceDir = '.'):
     '''configure source with given cmake parameters = "-DCMAKE_BUILD_TYPE -DCMAKE_CXX_FLAGS ... "'''
     if can_access_file(join_path(sourceDir, 'CMakeLists.txt')):
-        args = 'cmake -DCMAKE_INSTALL_PREFIX=%s \
-                      -DCMAKE_C_FLAGS="%s" \
-                      -DCMAKE_CXX_FLAGS="%s" \
-                      -DCMAKE_LD_FLAGS="%s" \
-                      -DCMAKE_BUILD_TYPE=RelWithDebInfo %s %s' % (installPrefix, get.CFLAGS(), get.CXXFLAGS(), get.LDFLAGS(), parameters, sourceDir)
+        args = 'cmake -DCMAKE_INSTALL_PREFIX={0} \
+                      -DCMAKE_C_FLAGS="{1}" \
+                      -DCMAKE_CXX_FLAGS="{2}" \
+                      -DCMAKE_LD_FLAGS="{3}" \
+                      -DCMAKE_BUILD_TYPE=RelWithDebInfo {4} {5}'.format(installPrefix, get.CFLAGS(), get.CXXFLAGS(), get.LDFLAGS(), parameters, sourceDir)
 
         if system(args):
             raise ConfigureError(_('Configure failed.'))
@@ -70,15 +70,15 @@ def configure(parameters = '', installPrefix = '/%s' % get.defaultprefixDIR(), s
 def make(parameters = ''):
     '''build source with given parameters'''
     if ctx.config.get_option("verbose") and ctx.config.get_option("debug"):
-        command = 'make VERBOSE=1 %s %s' % (get.makeJOBS(), parameters)
+        command = 'make VERBOSE=1 {0} {1}'.format(get.makeJOBS(), parameters)
     else:
-        command = 'make %s %s' % (get.makeJOBS(), parameters)
+        command = 'make {0} {1} '.format(get.makeJOBS(), parameters)
 
     if system(command):
         raise MakeError(_('Make failed.'))
 
 def fixInfoDir():
-    infoDir = '%s/usr/share/info/dir' % get.installDIR()
+    infoDir = '{}/usr/share/info/dir'.format(get.installDIR())
     if can_access_file(infoDir):
         unlink(infoDir)
 
@@ -102,7 +102,7 @@ def install(parameters = '', argument = 'install'):
 def rawInstall(parameters = '', argument = 'install'):
     '''install source into install directory with given parameters = PREFIX=%s % get.installDIR()'''
     if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
-        if system('make %s %s' % (parameters, argument)):
+        if system('make {} {} '.format(parameters, argument)):
             raise InstallError(_('Install failed.'))
         else:
             fixInfoDir()

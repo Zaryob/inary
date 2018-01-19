@@ -12,14 +12,14 @@ class autoprop(type):
             if name.startswith("_get_") or name.startswith("_set_"):
                 props[name[5:]] = 1
         for name in list(props.keys()):
-            fget = getattr(cls, "_get_%s" % name, None)
-            fset = getattr(cls, "_set_%s" % name, None)
+            fget = getattr(cls, "_get_{}".format(name), None)
+            fset = getattr(cls, "_set_{}".format(name), None)
             setattr(cls, name, property(fget, fset))
 
 class autosuper(type):
     def __init__(cls, name, bases, dict):
         super(autosuper, cls).__init__(name, bases, dict)
-        setattr(cls, "_%s__super" % name, super(cls))
+        setattr(cls, "_{}__super".format(name), super(cls))
 
 class autosuprop(autosuper, autoprop):
     pass

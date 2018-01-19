@@ -115,7 +115,7 @@ def deviceName(devuid):
             data = "/usr/share/misc/pci.ids"
         else:
             data = "/usr/share/misc/usb.ids"
-        return idsQuery(data, vendor, device) + " (%s)" % dev
+        return idsQuery(data, vendor, device) + " ({})".format(dev)
     if devuid.startswith("logic:"):
         return devuid.split(":", 1)[1]
     return devuid
@@ -174,19 +174,19 @@ class NetworkInterfaces:
 
         modalias = self.sysValue("device/modalias")
         if not modalias:
-            return "logic:%s" % self.name
+            return "logic:{}".format(self.name)
         bustype, rest = modalias.split(":", 1)
 
         if bustype == "pci":
             vendor = remHex(self.sysValue("device/vendor"))
             device = remHex(self.sysValue("device/device"))
-            return "pci:%s_%s_%s" % (vendor, device, self.name)
+            return "pci:{0}_{1}_{2}".format(vendor, device, self.name)
 
         if bustype == "usb":
             path = os.path.join("/sys/class/net", self.name, "device/driver")
             for item in os.listdir(path):
                 if ":" in item:
-                    path2 = "device/bus/devices/%s" % item.split(":", 1)[0]
+                    path2 = "device/bus/devices/{}".format(item.split(":", 1)[0])
                     try:
                         vendor = remHex(self.sysValue(path2 + "/idVendor"))
                         device = remHex(self.sysValue(path2 + "/idProduct"))
@@ -197,9 +197,9 @@ class NetworkInterfaces:
                                 product = line.split("=")[1]
                         vendor = product.split("/")[0]
                         device = product.split("/")[1]
-                    return "usb:%s_%s_%s" % (vendor, device, self.name)
+                    return "usb:{0}_{1}_{2}".format(vendor, device, self.name)
 
-        return "%s:%s" % (bustype, self.name)
+        return "{0}:{1}".format(bustype, self.name)
 
     def isEthernet(self):
         nettype = self.sysValue("type")
@@ -303,7 +303,7 @@ class NetworkInterfaces:
 
     def startAuto(self):
         try:
-            os.unlink("/var/lib/dhcpcd/dhcpcd-%s.info" % self.name)
+            os.unlink("/var/lib/dhcpcd/dhcpcd-{}.info".format(self.name))
         except OSError:
             pass
 
@@ -320,14 +320,14 @@ class NetworkInterfaces:
         # dhcpcd does not create a pid file until it gets 
         # an ip address so dhcpcd -k does not work while cancelling
         if subprocess.call(["/sbin/dhcpcd", "-k", self.name], stderr=file("/dev/null")):
-            subprocess.call(["pkill","-f","%s" % " ".join(self.autoCmd)])
+            subprocess.call(["pkill","-f","{}".format(" ".join(self.autoCmd))])
 
     def isAuto(self):
-        path = "/var/run/dhcpcd-%s.pid" % self.name
+        path = "/var/run/dhcpcd-{}.pid".format(self.name)
         if not os.path.exists(path):
             return False
         pid = file(path).read().rstrip("\n")
-        if not os.path.exists("/proc/%s" % pid):
+        if not os.path.exists("/proc/{}".format(pid)):
             return False
         return True
 
@@ -413,9 +413,9 @@ class NetworkFilter:
             elif rule.startswith(':'):
                 chain, policy, counter = rule[1:].split()
                 if chain in chains[table]:
-                    rules[table].append('-P %s %s' % (chain, policy))
+                    rules[table].append('-P {0} {1}'.format(chain, policy))
                 else:
-                    rules[table].append('-N %s' % chain)
+                    rules[table].append('-N {}'.format(chain))
             elif rule.startswith('-A'):
                 rules[table].append(rule)
         return rules
@@ -427,7 +427,7 @@ class NetworkFilter:
         for table in rules_dict:
             if not len(rules_dict[table]):
                 continue
-            rules.append('*%s' % table)
+            rules.append('*{}'.format(table))
             for rule in rules_dict[table]:
                 rules.append(rule)
             rules.append('COMMIT')
@@ -467,7 +467,7 @@ class NetworkFilter:
         opts = ''
         if not flush:
             opts = '--noflush'
-        p = os.popen('/sbin/iptables-restore %s' % opts, 'w')
+        p = os.popen('/sbin/iptables-restore {}'.format(opts), 'w')
         p.write(rules)
         p.close()
  
@@ -484,9 +484,9 @@ class NetworkFilter:
         '''Resets iptables.'''
         for table in chains:
             # Flush rules
-            os.popen('/sbin/iptables -t %s -F' % table)
-            os.popen('/sbin/iptables -t %s -X' % table)
+            os.popen('/sbin/iptables -t {} -F'.format(table))
+            os.popen('/sbin/iptables -t {} -X'.format(table))
             # Reset policies
             for chain in chains[table]:
-                os.popen('/sbin/iptables -t %s -P %s ACCEPT' % (table, chain))
+                os.popen('/sbin/iptables -t {0} -P {1} ACCEPT'.format(table, chain))
 

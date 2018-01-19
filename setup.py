@@ -57,7 +57,7 @@ class BuildPo(build):
 
         # Collect headers for mimetype files
         for filename in IN_FILES:
-            os.system("intltool-extract --type=gettext/xml %s" % filename)
+            os.system("intltool-extract --type=gettext/xml {}".format(filename))
 
         for root,dirs,filenames in os.walk("inary"):
             for filename in filenames:
@@ -71,16 +71,16 @@ class BuildPo(build):
 
         # Generate POT file
         os.system("xgettext -L Python \
-                            --default-domain=%s \
+                            --default-domain={0} \
                             --keyword=_ \
                             --keyword=N_ \
-                            --files-from=%s \
-                            -o po/%s.pot" % (PROJECT, files, PROJECT))
+                            --files-from={1} \
+                            -o po/{2}.pot".format(PROJECT, files, PROJECT))
 
         # Update PO files
         for item in glob.glob1("po", "*.po"):
             print("Updating .. ", item)
-            os.system("msgmerge --update --no-wrap --sort-by-file po/%s po/%s.pot" % (item, PROJECT))
+            os.system("msgmerge --update --no-wrap --sort-by-file po/{0} po/{1}.pot".format(item, PROJECT))
 
         # Cleanup
         os.unlink(files)
@@ -106,14 +106,14 @@ class Install(install):
 #            if not name.endswith('.po'):
 #                continue
 #            lang = name[:-3]
-#            print("Installing '%s' translations..." % lang)
-#            os.popen("msgfmt po/%s.po -o po/%s.mo" % (lang, lang))
+#            print("Installing '{}' translations...".format(lang))
+#            os.popen("msgfmt po/{0}.po -o po/{0}.mo".format(lang))
 #            if not self.root:
 ##                self.root = "/"
-##            destpath = os.path.join(self.root, "usr/share/locale/%s/LC_MESSAGES" % lang)
+##            destpath = os.path.join(self.root, "usr/share/locale/{}/LC_MESSAGES".format(lang))
 #            if not os.path.exists(destpath):
 #                os.makedirs(destpath)
-#            shutil.copy("po/%s.mo" % lang, os.path.join(destpath, "inary.mo"))
+#            shutil.copy("po/{}.mo".format(lang), os.path.join(destpath, "inary.mo"))
 
     def installdoc(self):
         self.root ='/'
@@ -143,7 +143,7 @@ class Install(install):
 
         for d in defaults:
             section_name = d[0][:-len('Defaults')].lower()
-            inaryconf.write("[%s]\n" % section_name)
+            inaryconf.write("[{}]\n".format(section_name))
 
             section_members = [m for m in inspect.getmembers(d[1]) \
                                if not m[0].startswith('__') \
@@ -151,9 +151,9 @@ class Install(install):
 
             for member in section_members:
                 if member[1] == None or member[1] == "":
-                    inaryconf.write("# %s = %s\n" % (member[0], member[1]))
+                    inaryconf.write("# {0[0]} = {0[1]}\n".format(member))
                 else:
-                    inaryconf.write("%s = %s\n" % (member[0], member[1]))
+                    inaryconf.write("{0[0]} = {0[1]}\n".format(member))
             inaryconf.write('\n')
 
 class Uninstall(Command):

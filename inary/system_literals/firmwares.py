@@ -30,12 +30,12 @@ class Error(inary.Error):
     pass
 
 def get_firmwares():
-    ctx.ui.info(inary.util.colorize("Extracting firmware list for %s..." % os.uname()[2], "green"))
+    ctx.ui.info(inary.util.colorize("Extracting firmware list for {}...".format(os.uname()[2]), "green"))
     d = {}
     modules = [os.path.basename(mod.replace(".ko", "")) for mod in \
             os.popen("modprobe -l").read().strip().split("\n")]
     for mod in modules:
-        fws = os.popen("modinfo -F firmware %s" % mod).read().strip()
+        fws = os.popen("modinfo -F firmware {}".format(mod)).read().strip()
         if fws:
             try:
                 d[mod].extend(fws.split("\n"))
@@ -54,15 +54,15 @@ def get_firmware_package(firmware):
             ctx.ui.info("\n".join(unavailable_fw_packages))
 
         for module, firmwares in list(get_firmwares().items()):
-            ctx.ui.info("\n %s requires the following firmwares:" % module)
+            ctx.ui.info("\n {} requires the following firmwares:".format(module))
             for fw in firmwares:
-                ctx.ui.info("  * %s" % fw, noln = True)
+                ctx.ui.info("  * {}".format(fw), noln = True)
                 try:
                     firmware = inary.api.search_file(fw)[0][0]
                 except:
                     pass
 
-                ctx.ui.info(" (%s)" % (inary.util.colorize(firmware, 'green') if firmware else \
+                ctx.ui.info(" ({})".format(inary.util.colorize(firmware, 'green') if firmware else \
                         inary.util.colorize("missing", 'red')))
     except:
         raise Error()

@@ -71,9 +71,9 @@ class Delta(command.Command, metaclass=command.autocommand):
             ctx.ui.info(_("Supported package formats:"))
             for format in inary.package.Package.formats:
                 if format == inary.package.Package.default_format:
-                    ctx.ui.info(_("  %s (default)") % format)
+                    ctx.ui.info(_("  {} (default)").format(format))
                 else:
-                    ctx.ui.info("  %s" % format)
+                    ctx.ui.info("  {}".format(format))
             return
 
         new_package = ctx.get_option("newest_package")

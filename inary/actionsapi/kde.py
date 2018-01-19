@@ -31,7 +31,7 @@ class ConfigureError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
         if can_access_file('config.log'):
-            ctx.ui.error(_('\n!!! Please attach the config.log to your bug report:\n%s/config.log') % os.getcwd())
+            ctx.ui.error(_('\n!!! Please attach the config.log to your bug report:\n{}/config.log').format(os.getcwd()))
 
 class MakeError(inary.actionsapi.Error):
     def __init__(self, value=''):
@@ -49,17 +49,17 @@ def configure(parameters = ''):
     ''' parameters = '--with-nls --with-libusb --with-something-usefull '''
     if can_access_file('configure'):
         args = './configure \
-                --prefix=%s \
-                --build=%s \
+                --prefix={0.kdeDIR()} \
+                --build={0.HOST()} \
                 --with-x \
                 --enable-mitshm \
                 --with-xinerama \
-                --with-qt-dir=%s \
+                --with-qt-dir={0.qtDIR()} \
                 --enable-mt \
-                --with-qt-libraries=%s/lib \
+                --with-qt-libraries={0.qtDIR}/lib \
                 --disable-dependency-tracking \
                 --disable-debug \
-                %s' % (get.kdeDIR(), get.HOST(), get.qtDIR(), get.qtDIR(), parameters)
+                {1}'.format(get, parameters)
 
         if system(args):
             raise ConfigureError(_('Configure failed.'))
@@ -68,12 +68,12 @@ def configure(parameters = ''):
 
 def make(parameters = ''):
     '''make source with given parameters = "all" || "doc" etc.'''
-    if system('make %s %s' % (get.makeJOBS(), parameters)):
+    if system('make {0} {1}'.format(get.makeJOBS(), parameters)):
         raise MakeError(_('Make failed.'))
 
 def install(parameters = 'install'):
     if can_access_file('Makefile'):
-        args = 'make DESTDIR=%s destdir=%s %s' % (get.installDIR(), get.installDIR(), parameters)
+        args = 'make DESTDIR={0} destdir={0} {1}'.format(get.installDIR(), parameters)
 
         if system(args):
             raise InstallError(_('Install failed.'))

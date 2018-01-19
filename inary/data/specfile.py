@@ -45,7 +45,7 @@ class Packager(metaclass= autoxml.autoxml):
     t_Email = [autoxml.String, autoxml.mandatory]
 
     def __str__(self):
-        s = "%s <%s>" % (self.name, self.email)
+        s = "{} <{}>".format(self.name, self.email)
         return s
 
 
@@ -58,9 +58,9 @@ class AdditionalFile(metaclass= autoxml.autoxml):
     a_group = [autoxml.String, autoxml.optional]
 
     def __str__(self):
-        s = "%s -> %s " % (self.filename, self.target)
+        s = "{0} -> {1} ".format(self.filename, self.target)
         if self.permission:
-            s += '(%s)' % self.permission
+            s += '({})'.format(self.permission)
         return s
 
 class Type(metaclass= autoxml.autoxml):
@@ -146,7 +146,7 @@ class ScomProvide(metaclass= autoxml.autoxml):
     def __str__(self):
         # FIXME: descriptive enough?
         s = self.script
-        s += ' (' + self.om + '%s' % (' for %s' % self.name if self.name else '') + ')'
+        s += ' (' + self.om + '{}'.format(' for {}'.format(self.name) if self.name else '') + ')'
         return s
 
 class Archive(metaclass= autoxml.autoxml):
@@ -160,7 +160,7 @@ class Archive(metaclass= autoxml.autoxml):
         self.name = os.path.basename(str(self.uri))
 
     def __str__(self):
-        s = _('URI: %s, type: %s, sha1sum: %s') % (self.uri, self.type, self.sha1sum)
+        s = _('URI: {0}, type: {1}, sha1sum: {2}') % (self.uri, self.type, self.sha1sum)
         return s
 
 class Source(metaclass= autoxml.autoxml):
@@ -190,10 +190,10 @@ class AnyDependency(metaclass= autoxml.autoxml):
     t_Dependencies = [[inary.analyzer.dependency.Dependency], autoxml.optional, "Dependency"]
 
     def __str__(self):
-        return "{%s}" % _(" or ").join([str(dep) for dep in self.dependencies])
+        return "{{}}".format(_(" or ").join([str(dep) for dep in self.dependencies]))
 
     def name(self):
-        return "{%s}" % _(" or ").join([dep.package for dep in self.dependencies])
+        return "{{}}".format(_(" or ").join([dep.package for dep in self.dependencies]))
 
     def decode_hook(self, node, errs, where):
         self.package = self.dependencies[0].package
@@ -270,7 +270,7 @@ class Package(metaclass= autoxml.autoxml):
     def satisfies_runtime_dependencies(self):
         for dep in self.runtimeDependencies():
             if not dep.satisfied_by_installed():
-                ctx.ui.error(_('%s dependency of package %s is not satisfied') % (dep, self.name))
+                ctx.ui.error(_('{0} dependency of package {1} is not satisfied').format(dep, self.name))
                 return False
         return True
 
@@ -366,12 +366,12 @@ class Package(metaclass= autoxml.autoxml):
         return actions
 
     def __str__(self):
-        s = _('Name: %s, version: %s, release: %s\n') \
-                % (self.name, self.version, self.release)
-        s += _('Summary: %s\n') % str(self.summary)
-        s += _('Description: %s\n') % str(self.description)
-        s += _('Licenses: %s\n') % ", ".join(self.license)
-        s += _('Component: %s\n') % str(self.partOf)
+        s = _('Name: {0}, version: {1}, release: {2}\n').format(
+              self.name, self.version, self.release)
+        s += _('Summary: {}\n').format(str(self.summary))
+        s += _('Description: {}\n').format(str(self.description))
+        s += _('Licenses: {}\n').format(", ".join(self.license))
+        s += _('Component: {}\n').format(str(self.partOf))
         s += _('Provides: ')
         for x in self.providesScom:
            s += x.om + ' '
@@ -437,7 +437,7 @@ class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         try:
             doc = ciksemel.parse(path)
         except Exception as e:
-            raise Error(_("File '%s' has invalid XML") % (path) )
+            raise Error(_("File '{}' has invalid XML").format(path) )
 
         if doc.getTag("Source").getTagData("Name") == self.source.name:
             # Set source package translations
@@ -450,12 +450,12 @@ class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                     break
 
     def __str__(self):
-        s = _('Name: %s, version: %s, release: %s\n') % (
+        s = _('Name: {}, version: {}, release: {}\n').format(
               self.source.name, self.history[0].version, self.history[0].release)
-        s += _('Summary: %s\n') % str(self.source.summary)
-        s += _('Description: %s\n') % str(self.source.description)
-        s += _('Licenses: %s\n') % ", ".join(self.source.license)
-        s += _('Component: %s\n') % str(self.source.partOf)
+        s += _('Summary: {}\n').format(str(self.source.summary))
+        s += _('Description: {}\n').format(str(self.source.description))
+        s += _('Licenses: {}\n').format(", ".join(self.source.license))
+        s += _('Component: {}\n').format(str(self.source.partOf))
         s += _('Build Dependencies: ')
         for x in self.source.buildDependencies:
            s += x.package + ' '

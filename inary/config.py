@@ -80,8 +80,7 @@ class Config(object, metaclass=inary.util.Singleton):
                 self.__dest_dir = self.values.general.destinationdirectory
 
             if not os.path.exists(self.__dest_dir):
-                ctx.ui.warning(_("Destination directory %s does not exist. "
-                                 "Creating it.") % self.__dest_dir)
+                ctx.ui.warning(_("Destination directory {} does not exist. Creating it.").format(self.__dest_dir))
                 os.makedirs(self.__dest_dir)
 
         return self.__dest_dir

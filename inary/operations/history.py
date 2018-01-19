@@ -43,11 +43,11 @@ def __listactions(actions):
         if action == "install":
             if __pkg_already_installed(pkg, pkginfo):
                 continue
-            beinstalled.append("%s-%s" % (pkg, pkginfo))
+            beinstalled.append("{0}-{1}".format(pkg, pkginfo))
             configs.append((pkg, operation))
         else:
             if installdb.has_package(pkg):
-                beremoved.append("%s" % pkg)
+                beremoved.append("{}".format(pkg))
 
     return beinstalled, beremoved, configs
 
@@ -69,7 +69,7 @@ def __getpackageurl(package):
         raise PackageNotFound
 
     repourl = repodb.get_repo_url(reponame)
-    ctx.ui.info(_("Package %s found in repository %s") % (pkg, reponame))
+    ctx.ui.info(_("Package {0} found in repository {1}").format(pkg, reponame))
 
     #return _possible_ url for this package
     return os.path.join(os.path.dirname(repourl),
@@ -81,7 +81,7 @@ def fetch_remote_file(package, errors):
         uri = inary.file.File.make_uri(__getpackageurl(package))
     except PackageNotFound:
         errors.append(package)
-        ctx.ui.info(inary.util.colorize(_("%s could not be found") % (package), "red"))
+        ctx.ui.info(inary.util.colorize(_("{} could not be found").format(package), "red"))
         return False
 
     dest = ctx.config.cached_packages_dir()
@@ -91,10 +91,10 @@ def fetch_remote_file(package, errors):
             inary.fetcher.fetch_url(uri, dest, ctx.ui.Progress)
         except inary.fetcher.FetchError as e:
             errors.append(package)
-            ctx.ui.info(inary.util.colorize(_("%s could not be found") % (package), "red"))
+            ctx.ui.info(inary.util.colorize(_("{} could not be found").format(package), "red"))
             return False
     else:
-        ctx.ui.info(_('%s [cached]') % uri.filename())
+        ctx.ui.info(_('{} [cached]').format(uri.filename()))
     return True
 
 def get_snapshot_actions(operation):

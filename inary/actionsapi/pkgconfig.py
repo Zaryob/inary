@@ -30,8 +30,8 @@ def getVariableForLibrary(library, variable):
     # Returns a specific variable provided in the library .pc file
     try:
         proc = subprocess.Popen(["pkg-config",
-                                 "--variable=%s" % variable,
-                                 "%s" % library],
+                                 "--variable={}".format(variable),
+                                 "{}".format(library)],
                                  stdout=subprocess.PIPE,
                                  stderr=subprocess.PIPE)
         return_code = proc.wait()
@@ -70,7 +70,7 @@ def getLibraryCFLAGS(library):
     try:
         proc = subprocess.Popen(["pkg-config",
                                  "--cflags",
-                                 "%s" % library],
+                                 "{}".format(library)],
                                  stdout=subprocess.PIPE,
                                  stderr=subprocess.PIPE)
         return_code = proc.wait()
@@ -90,7 +90,7 @@ def getLibraryLIBADD(library):
     try:
         proc = subprocess.Popen(["pkg-config",
                                  "--libs",
-                                 "%s" % library],
+                                 "{}".format(library)],
                                  stdout=subprocess.PIPE,
                                  stderr=subprocess.PIPE)
         return_code = proc.wait()
@@ -130,7 +130,7 @@ def libraryExists(library):
     try:
         result = subprocess.call(["pkg-config",
                                    "--exists",
-                                   "%s" % library])
+                                   "{}".format(library)])
     except OSError as exception:
         if exception.errno == 2:
             raise PkgconfigError(_("pkg-config is not installed on your system."))

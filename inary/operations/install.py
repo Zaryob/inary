@@ -118,7 +118,7 @@ def install_pkg_names(A, reinstall = False, extra = False):
         install_op.install(False)
         try:
             with open(os.path.join(ctx.config.info_dir(), ctx.const.installed_extra), "a") as ie_file:
-                ie_file.write("%s\n" % extra_paths[path])
+                ie_file.write("{}\n".format(extra_paths[path]))
             installdb.installed_extra.append(extra_paths[path])
         except KeyError:
             pass
@@ -129,7 +129,7 @@ def install_pkg_files(package_URIs, reinstall = False):
     """install a number of inary package files"""
 
     installdb = inary.db.installdb.InstallDB()
-    ctx.ui.debug('A = %s' % str(package_URIs))
+    ctx.ui.debug('A = {}'.format(str(package_URIs)))
 
     for x in package_URIs:
         if not x.endswith(ctx.const.package_suffix):
@@ -177,12 +177,11 @@ def install_pkg_files(package_URIs, reinstall = False):
         for x in list(d_t.keys()):
             pkg = d_t[x]
             if pkg.distributionRelease != ctx.config.values.general.distribution_release:
-                raise Exception(_('Package %s is not compatible with your distribution release %s %s.') \
-                        % (x, ctx.config.values.general.distribution, \
+                raise Exception(_('Package {0} is not compatible with your distribution release {1} {2}.').format(
+                        x, ctx.config.values.general.distribution, \
                         ctx.config.values.general.distribution_release))
             if pkg.architecture != ctx.config.values.general.architecture:
-                raise Exception(_('Package %s (%s) is not compatible with your %s architecture.') \
-                        % (x, pkg.architecture, ctx.config.values.general.architecture))
+                raise Exception(_('Package {0} ({1}) is not compatible with your {2} architecture.').format(x, pkg.architecture, ctx.config.values.general.architecture))
 
     def satisfiesDep(dep):
         # is dependency satisfied among available packages
@@ -204,7 +203,7 @@ def install_pkg_files(package_URIs, reinstall = False):
     # be satisfied by installing packages from the repo
     for dep in dep_unsatis:
         if not dep.satisfied_by_repo():
-            raise Exception(_('External dependencies not satisfied: %s') % dep)
+            raise Exception(_('External dependencies not satisfied: {}').format(dep))
 
     # if so, then invoke install_pkg_names
     extra_packages = [x.package for x in dep_unsatis]
@@ -287,11 +286,11 @@ def plan_install_pkg_names(A):
         for x in B:
             pkg = packagedb.get_package(x)
             for dep in pkg.runtimeDependencies():
-                ctx.ui.debug('checking %s' % str(dep))
+                ctx.ui.debug('checking {}'.format(str(dep)))
                 # we don't deal with already *satisfied* dependencies
                 if not dep.satisfied_by_installed():
                     if not dep.satisfied_by_repo():
-                        raise Exception(_('%s dependency of package %s is not satisfied') % (dep, pkg.name))
+                        raise Exception(_('{0} dependency of package {1} is not satisfied').format(dep, pkg.name))
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)

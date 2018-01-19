@@ -56,4 +56,4 @@ Gives a brief list of sources published in the repositories.
                 #if p in installed_list:
                 #    p = util.colorize(p, 'cyan')
                 p = p + ' ' * max(0, 15 - lenp)
-                ctx.ui.info('%s - %s' % (sf.source.name, str(sf.source.summary)))
+                ctx.ui.info('{0} - {1}'.format(sf.source.name, str(sf.source.summary)))

@@ -89,8 +89,8 @@ class SourceDB(lazydb.LazyDB):
         This method will return only package that contents terms in the package
         name or summary
         """
-        resum = '<Summary xml:lang=.(%s|en).>.*?%s.*?</Summary>'
-        redesc = '<Description xml:lang=.(%s|en).>.*?%s.*?</Description>'
+        resum = '<Summary xml:lang=.({0}|en).>.*?{1}.*?</Summary>'
+        redesc = '<Description xml:lang=.({0}|en).>.*?{1}.*?</Description>'
         if not fields:
             fields = {'name': True, 'summary': True, 'desc': True}
         if not lang:
@@ -100,9 +100,9 @@ class SourceDB(lazydb.LazyDB):
             if terms == [term for term in terms if (fields['name'] and \
                     re.compile(term, re.I).search(name)) or \
                     (fields['summary'] and \
-                    re.compile(resum % (lang, term), 0 if cs else re.I).search(xml)) or \
+                    re.compile(resum.format(lang, term), 0 if cs else re.I).search(xml)) or \
                     (fields['desc'] and \
-                    re.compile(redesc % (lang, term), 0 if cs else re.I).search(xml))]:
+                    re.compile(redesc.format(lang, term), 0 if cs else re.I).search(xml))]:
                 found.append(name)
         return found
 

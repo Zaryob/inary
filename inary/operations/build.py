@@ -62,7 +62,7 @@ def get_file_type(path, pinfo_list):
     """Return the file type of a path according to the given PathInfo
     list"""
 
-    path = "/%s" % re.sub("/+", "/", path)
+    path = "/{}".format(re.sub("/+", "/", path))
     info = None
     glob_match = parent_match = None
 
@@ -112,8 +112,7 @@ def check_path_collision(package, pkgList):
 
                 if util.subpath(pinfo.path, path.path):
                     collisions.append(path.path.rstrip("/"))
-                    ctx.ui.debug(_('Path %s belongs in multiple packages') %
-                                 path.path)
+                    ctx.ui.debug(_('Path {} belongs in multiple packages').format(path.path))
     return collisions
 
 def exclude_special_files(filepath, fileinfo, ag):
@@ -131,8 +130,8 @@ def exclude_special_files(filepath, fileinfo, ag):
         if re.match(patterns["libtool"], fileinfo) and \
                 not os.path.islink(filepath):
             ladata = open(filepath).read()
-            new_ladata = re.sub("-L%s/\S*" % ctx.config.tmp_dir(), "", ladata)
-            new_ladata = re.sub("%s/\S*/install/" % ctx.config.tmp_dir(), "/",
+            new_ladata = re.sub("-L{}/\S*".format(ctx.config.tmp_dir()), "", ladata)
+            new_ladata = re.sub("{}/\S*/install/".format(ctx.config.tmp_dir()), "/",
                                 new_ladata)
             if new_ladata != ladata:
                 open(filepath, "w").write(new_ladata)
@@ -142,10 +141,10 @@ def exclude_special_files(filepath, fileinfo, ag):
             continue
 
         if fileinfo == None:
-            ctx.ui.warning(_("Removing special file skipped for: %s") % filepath)
+            ctx.ui.warning(_("Removing special file skipped for: {}").format(filepath))
             return
         elif re.match(pattern, fileinfo):
-            ctx.ui.debug("Removing special %s file: %s" % (name, filepath))
+            ctx.ui.debug("Removing special {0} file: {1}".format(name, filepath))
             os.unlink(filepath)
             # Remove dir if it becomes empty (Bug #11588)
             util.rmdirs(os.path.dirname(filepath))
@@ -165,7 +164,7 @@ def strip_debug_action(filepath, fileinfo, install_dir, ag):
                                 path)
 
     if util.strip_file(filepath, fileinfo, outputpath):
-        ctx.ui.debug("%s [%s]" % (path, "stripped"))
+        ctx.ui.debug("{0} [{1}]".format(path, "stripped"))
 
 class Builder:
     """Provides the package build and creation routines"""
@@ -191,12 +190,11 @@ class Builder:
                                     os.path.dirname(repo.indexuri.get_uri()),
                                     str(src_uri.path()))
 
-            ctx.ui.debug(_("Source URI: %s") % src_path)
+            ctx.ui.debug(_("Source URI: {}").format(src_path))
 
             return Builder(src_path)
         else:
-            raise Error(_("Source %s not found in any active repository.")
-                        % name)
+            raise Error(_("Source {} not found in any active repository.").format(name))
 
     def __init__(self, specuri):
 
@@ -296,7 +294,7 @@ class Builder:
                               packageDir)
 
     def pkg_work_dir(self):
-        suffix = "-%s" % self.build_type if self.build_type else ""
+        suffix = "-{}".format(self.build_type) if self.build_type else ""
         return self.pkg_dir() + ctx.const.work_dir_suffix + suffix
 
     def pkg_debug_dir(self):
@@ -321,11 +319,11 @@ class Builder:
         architecture = ctx.config.values.general.architecture
         if architecture in self.spec.source.excludeArch:
             raise ExcludedArchitectureException(
-                    _("pspec.xml avoids this package from building for '%s'")
-                    % architecture)
+                    _("pspec.xml avoids this package from building for '{}'").format(
+                      architecture))
 
-        ctx.ui.status(_("Building source package: %s")
-                      % self.spec.source.name)
+        ctx.ui.status(_("Building source package: {}").format(
+                        self.spec.source.name))
 
         # check if all patch files exists, if there are missing no need
         # to unpack!
@@ -376,7 +374,7 @@ class Builder:
 
     def set_build_type(self, build_type):
         if build_type:
-            ctx.ui.action(_("Rebuilding for %s") % build_type)
+            ctx.ui.action(_("Rebuilding for {}").format(build_type))
 
         self.build_type = build_type
         self.set_environment_vars()
@@ -399,8 +397,8 @@ class Builder:
                "SRC_RELEASE": self.spec.getSourceRelease(),
                "PYTHONDONTWRITEBYTECODE": '1'}
         if self.build_type == "emul32":
-            env["CC"] = "%s -m32" % os.getenv("CC")
-            env["CXX"] = "%s -m32" % os.getenv("CXX")
+            env["CC"] = "{} -m32".format(os.getenv("CC"))
+            env["CXX"] = "{} -m32".format(os.getenv("CXX"))
             env["CFLAGS"] = os.getenv("CFLAGS").replace("-fPIC", "")
             env["CXXFLAGS"] = os.getenv("CXXFLAGS").replace("-fPIC", "")
             env["PKG_CONFIG_PATH"] = "/usr/lib32/pkgconfig"
@@ -483,7 +481,7 @@ class Builder:
                                 ctx.const.scom_dir, pscom.script)
                 self.download(scomuri, util.join_path(self.specdir,
                                                        ctx.const.scom_dir))
-                ctx.ui.info("Scom Script Fetched %s" %pscom.script)
+                ctx.ui.info("Scom Script Fetched {}".format(pscom.script))
 
 
     def download(self, uri, transferdir):
@@ -533,7 +531,7 @@ class Builder:
 
         # apply the patches and prepare a source directory for build.
         if self.apply_patches():
-            ctx.ui.info(_(" unpacked (%s)") % self.pkg_work_dir())
+            ctx.ui.info(_(" unpacked ({})").format(self.pkg_work_dir()))
             self.set_state("unpack")
 
     def run_setup_action(self):
@@ -631,11 +629,11 @@ class Builder:
             buf = open(fname).read()
             return compile(buf, fname, "exec")
         except IOError as e:
-            raise Error(_("Unable to read Actions Script (%s): %s")
-                        % (fname, e))
+            raise Error(_("Unable to read Actions Script ({0}): {1}").format(
+                          fname, e))
         except SyntaxError as e:
-            raise Error(_("SyntaxError in Actions Script (%s): %s")
-                        % (fname, e))
+            raise Error(_("SyntaxError in Actions Script ({0}): {1}").format(
+                          fname, e))
 
     def load_action_script(self):
         """Compiles and executes the action script"""
@@ -663,11 +661,11 @@ class Builder:
                     buf = open(fname).read()
                     compile(buf, "error", "exec")
                 except IOError as e:
-                    raise Error(_("Unable to read SCOM script (%s): %s")
-                                 % (fname, e))
+                    raise Error(_("Unable to read SCOM script ({0}): {1}").format(
+                                  fname, e))
                 except SyntaxError as e:
-                    raise Error(_("SyntaxError in SCOM file (%s): %s")
-                                 % (fname, e))
+                    raise Error(_("SyntaxError in SCOM file ({0}): {1}").format(
+                                  fname, e))
     def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
 
@@ -695,12 +693,12 @@ class Builder:
                     break
             if not os.path.exists(src_dir):
                 src_dir = util.join_path(self.pkg_work_dir(), [d for d in os.walk(self.pkg_work_dir()).__next__()[1] if not d.startswith(".")][0])
-                if self.get_state() == "unpack": ctx.ui.debug("Using %s as  WorkDir" % src_dir)
+                if self.get_state() == "unpack": ctx.ui.debug("Using {} as  WorkDir".format(src_dir))
 
         return src_dir
 
     def log_sandbox_violation(self, operation, path, canonical_path):
-        ctx.ui.error(_("Sandbox violation: %s (%s -> %s)") % (operation,
+        ctx.ui.error(_("Sandbox violation: {0} ({1} -> {2})").format(operation,
                                                               path,
                                                               canonical_path))
 
@@ -716,7 +714,7 @@ class Builder:
         if os.path.exists(src_dir):
             os.chdir(src_dir)
         else:
-            raise Error(_("ERROR: WorkDir (%s) does not exist\n") % src_dir)
+            raise Error(_("ERROR: WorkDir ({}) does not exist\n").format(src_dir))
 
         if func in self.actionLocals:
             if ctx.get_option('ignore_sandbox') or \
@@ -732,7 +730,7 @@ class Builder:
                 valid_paths = [self.pkg_dir()]
                 conf_file = ctx.const.sandbox_conf
                 if os.path.exists(conf_file):
-                    for line in file(conf_file):
+                    for line in open(conf_file):
                         line = line.strip()
                         if len(line) > 0 and not line.startswith("#"):
                             if line.startswith("~"):
@@ -752,7 +750,7 @@ class Builder:
                 if ret.violations != []:
                     ctx.ui.error(_("Sandbox violation result:"))
                     for result in ret.violations:
-                        ctx.ui.error("%s (%s -> %s)" % (result[0],
+                        ctx.ui.error("{0} ({1} -> {2})".format(result[0],
                                                         result[1],
                                                         result[2]))
                     raise Error(_("Sandbox violations!"))
@@ -761,8 +759,7 @@ class Builder:
                     raise ActionScriptException
         else:
             if mandatory:
-                raise Error(_("unable to call function from actions: %s")
-                            % func)
+                raise Error(_("unable to call function from actions: {}").format(func))
 
         os.chdir(curDir)
         return True
@@ -775,12 +772,12 @@ class Builder:
                 path = os.path.normpath(path_info.path)
 
                 if not path.startswith("/"):
-                    raise Error(_("Source package '%s' defines a relative 'Path' element: "
-                                  "%s") % (self.spec.source.name, path_info.path))
+                    raise Error(_("Source package '{0}' defines a relative 'Path' element: "
+                                  "{1}").format(self.spec.source.name, path_info.path))
 
                 if path in paths:
-                    raise Error(_("Source package '%s' defines multiple 'Path' tags "
-                                  "for %s") % (self.spec.source.name, path_info.path))
+                    raise Error(_("Source package '{0}' defines multiple 'Path' tags "
+                                  "for {1}").format(self.spec.source.name, path_info.path))
 
                 paths.append(path)
 
@@ -789,8 +786,7 @@ class Builder:
             int(release)
             inary.version.make_version(version)
         except (ValueError, inary.version.InvalidVersionError):
-            raise Error(_("%s-%s is not a valid INARY version format")
-                        % (version, release))
+            raise Error(_("{0}-{1} is not a valid INARY version format").format(version, release))
 
     def check_build_dependencies(self):
         """check and try to install build dependencies, otherwise fail."""
@@ -831,7 +827,7 @@ class Builder:
             if not ctx.config.get_option('ignore_dependency'):
                 for dep in dep_unsatis:
                     if not dep.satisfied_by_repo():
-                        raise Error(_('Build dependency %s cannot be satisfied') % str(dep))
+                        raise Error(_('Build dependency {} cannot be satisfied').format(str(dep)))
                 if ctx.ui.confirm(
                 _('Do you want to install the unsatisfied build dependencies')):
                     ctx.ui.info(_('Installing build dependencies.'))
@@ -850,9 +846,9 @@ class Builder:
         for patch in self.spec.source.patches:
             patchFile = util.join_path(files_dir, patch.filename)
             if not os.access(patchFile, os.F_OK):
-                raise Error(_("Patch file is missing: %s\n") % patch.filename)
+                raise Error(_("Patch file is missing: {}\n").format(patch.filename))
             if os.stat(patchFile).st_size == 0:
-                ctx.ui.warning(_('Patch file is empty: %s') % patch.filename)
+                ctx.ui.warning(_('Patch file is empty: {}').format(patch.filename))
 
     def apply_patches(self):
         files_dir = os.path.abspath(util.join_path(self.specdir,
@@ -866,9 +862,9 @@ class Builder:
                 patchFile = util.uncompress(patchFile,
                                             compressType=patch.compressionType,
                                             targetDir=ctx.config.tmp_dir())
-                relativePath = relativePath.rsplit(".%s" % patch.compressionType, 1)[0]
+                relativePath = relativePath.rsplit(".{}".format(patch.compressionType, 1))[0]
 
-            ctx.ui.action(_("Applying patch: %s") % patch.filename)
+            ctx.ui.action(_("Applying patch: {}").format(patch.filename))
             util.do_patch(self.pkg_src_dir(), patchFile,
                           level=patch.level,
                           name=relativePath,
@@ -888,8 +884,8 @@ class Builder:
         static_package_obj = Specfile.Package()
         static_package_obj.name = self.spec.source.name + ctx.const.static_name_suffix
         # FIXME: find a better way to deal with the summary and description constants.
-        static_package_obj.summary['en'] = 'Ar files for %s' % (self.spec.source.name)
-        static_package_obj.description['en'] = 'Ar files for %s' % (self.spec.source.name)
+        static_package_obj.summary['en'] = 'Ar files for {}'.format(self.spec.source.name)
+        static_package_obj.description['en'] = 'Ar files for {}'.format(self.spec.source.name)
         static_package_obj.partOf = self.spec.source.partOf
         for f in ar_files:
             static_package_obj.files.append(Specfile.Path(path=f[len(self.pkg_install_dir()):], fileType="library"))
@@ -906,8 +902,8 @@ class Builder:
         debug_package_obj.debug_package = True
         debug_package_obj.name = package.name + ctx.const.debug_name_suffix
         # FIXME: find a better way to deal with the summary and description constants.
-        debug_package_obj.summary['en'] = 'Debug files for %s' % (package.name)
-        debug_package_obj.description['en'] = 'Debug files for %s' % (package.name)
+        debug_package_obj.summary['en'] = 'Debug files for {}'.format(package.name)
+        debug_package_obj.description['en'] = 'Debug files for {}'.format(package.name)
         debug_package_obj.partOf = package.partOf
 
         dependency = inary.analyzer.dependency.Dependency()
@@ -989,7 +985,7 @@ class Builder:
                                      mode=oct(stat.S_IMODE(st.st_mode)))
 
                 if stat.S_IMODE(st.st_mode) & stat.S_ISUID:
-                    ctx.ui.warning(_("/%s has suid bit set") % frpath)
+                    ctx.ui.warning(_("/{} has suid bit set").format(frpath))
 
         for pinfo in package.files:
             wildcard_path = util.join_path(install_dir, pinfo.path)
@@ -1067,14 +1063,14 @@ class Builder:
 #                    try:
 #                        os.chown(dest, pwd.getpwnam(afile.owner)[2], -1)
 #                    except KeyError:
-#                        ctx.ui.warning(_("No user named '%s' found "
-#                                         "on the system") % afile.owner)
+#                        ctx.ui.warning(_("No user named '{}' found on the system").format(afile.owner))
+#
 #                if afile.group:
 #                    try:
 #                        os.chown(dest, -1, grp.getgrnam(afile.group)[2])
 #                    except KeyError:
-#                        ctx.ui.warning(_("No group named '%s' found "
-#                                         "on the system") % afile.group)
+#                        ctx.ui.warning(_("No group named '{}' found on the system").format(afile.group))
+#
 
         os.chdir(c)
 
@@ -1082,10 +1078,10 @@ class Builder:
         abandoned_files = self.get_abandoned_files()
         if abandoned_files:
             ctx.ui.error(_("There are abandoned files "
-                           "under the install dir (%s):") % install_dir)
+                           "under the install dir ({}):").format(install_dir))
 
             for f in abandoned_files:
-                ctx.ui.info("    - %s" % f)
+                ctx.ui.info("    - {}".format(f))
 
             raise AbandonedFilesException
 
@@ -1117,11 +1113,10 @@ class Builder:
 
             if not self.files.list:
                 if not package.debug_package:
-                    ctx.ui.warning(_("Ignoring empty package %s") \
-                                     % package.name)
+                    ctx.ui.warning(_("Ignoring empty package {}").format(package.name))
                 continue
 
-            ctx.ui.action(_("Building package: %s") % package.name)
+            ctx.ui.action(_("Building package: {}").format(package.name))
 
             self.gen_metadata_xml(package)
 
@@ -1138,7 +1133,7 @@ class Builder:
             else:
                 self.new_packages.append(name)
 
-            ctx.ui.info(_("Creating %s...") % name)
+            ctx.ui.info(_("Creating {}...").format(name))
 
             pkg = inary.package.Package(name, "w",
                                        format=self.target_package_format,
@@ -1166,7 +1161,7 @@ class Builder:
                     orgname = util.join_path("debug", finfo.path)
                 pkg.add_to_install(orgname, finfo.path)
 
-            self.metadata.package.installTarHash = util.sha1_file("%s/install.tar.xz" % self.pkg_dir())
+            self.metadata.package.installTarHash = util.sha1_file("{}/install.tar.xz".format(self.pkg_dir()))
             self.metadata.write(util.join_path(self.pkg_dir(), ctx.const.metadata_xml))
             pkg.add_metadata_xml(ctx.const.metadata_xml)
 
@@ -1367,7 +1362,7 @@ def build_until(pspec, state):
 
 
 def __build_until(pb, state, last):
-    ctx.ui.info(_("Last state was '%s'") % last)
+    ctx.ui.info(_("Last state was '{}'").format(last))
 
     if state == "unpack":
         __buildState_unpack(pb, last)

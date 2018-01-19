@@ -38,13 +38,13 @@ def idsQuery(name, vendor, device):
         else:
             if line.startswith("\t"):
                 if line.startswith("\t" + device):
-                    return "%s - %s" % (line[6:].strip(), company)
+                    return "{0} - {1}" % (line[6:].strip(), company)
             elif not line.startswith("#"):
                 flag = 0
     if company != "":
-        return "%s (%s)" % (company, device)
+        return "{0} ({1})".format(company, device)
     else:
-        return "Unknown (%s:%s)" % (vendor, device)
+        return "Unknown ({0}:{1})".format(vendor, device)
 
 class EDD:
     def __init__(self):
@@ -67,7 +67,7 @@ class EDD:
         return "0x"+b[3]+b[2]+b[1]+b[0]
 
     def get_edd_sig(self, _n):
-        sigfile = "%s/int13_dev%s/mbr_signature" % (self.edd_dir, _n)
+        sigfile = "{0}/int13_dev{1}/mbr_signature".format(self.edd_dir, _n)
         if os.path.exists(sigfile):
             sig = open(sigfile).read().strip("\n")
         else:
@@ -132,7 +132,7 @@ def getDeviceMap():
     for bios_num in edd_keys:
         edd_sig = edd_list[bios_num]
         if edd_sig in mbr_list:
-            devices.append(("hd%s" % i, mbr_list[edd_sig]))
+            devices.append(("hd{}".format(i), mbr_list[edd_sig]))
             i += 1
 
     return devices
@@ -184,7 +184,7 @@ def parseGrubDevice(device):
             # If device address ends with a number,
             # "p" is used before partition number
             if linux_disk[-1].isdigit():
-                linux_part = "p%s" % linux_part
+                linux_part = "p{}".format(linux_part)
             return grub_disk, part, linux_disk, linux_part
     return None
 
@@ -202,7 +202,7 @@ def grubAddress(device):
         linux_disk, linux_part, grub_disk, grub_part = parseLinuxDevice(device)
     except (ValueError, TypeError):
         return None
-    return "(%s,%s)" % (grub_disk, grub_part)
+    return "({0},{1})".format(grub_disk, grub_part)
 
 def linuxAddress(device):
     """
@@ -218,7 +218,7 @@ def linuxAddress(device):
         grub_disk, grub_part, linux_disk, linux_part = parseGrubDevice(device)
     except (ValueError, TypeError):
         return None
-    return "%s%s" % (linux_disk, linux_part)
+    return "{0}{1}".format(linux_disk, linux_part)
 
 def getDeviceByLabel(label):
     """
@@ -230,9 +230,9 @@ def getDeviceByLabel(label):
             None on error, Linux device on success
     """
 
-    fn = os.path.join("/dev/disk/by-label/%s" % label)
+    fn = os.path.join("/dev/disk/by-label/{}".format(label))
     if os.path.islink(fn):
-        return "/dev/%s" % os.readlink(fn)[6:]
+        return "/dev/{}".format(os.readlink(fn)[6:])
     else:
         return None
 
@@ -246,9 +246,9 @@ def getDeviceByUUID(uuid):
             None on error, Linux device on success
     """
 
-    fn = os.path.join("/dev/disk/by-uuid/%s" % uuid)
+    fn = os.path.join("/dev/disk/by-uuid/{}".format(uuid))
     if os.path.islink(fn):
-        return "/dev/%s" % os.readlink(fn)[6:]
+        return "/dev/{}".format(os.readlink(fn)[6:])
     else:
         return None
 

@@ -61,7 +61,7 @@ def make_version(version):
         return list(map(__make_version_item, ver.split("."))), 0, [(0, None)]
 
     except ValueError:
-        raise InvalidVersionError(_("Invalid version string: '%s'") % version)
+        raise InvalidVersionError(_("Invalid version string: '{}'").format(version))
 
 class Version(object):
 

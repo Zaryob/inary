@@ -67,7 +67,7 @@ database.
             return
 
         cs = ctx.get_option("case_sensitive")
-        replace = re.compile("(%s)" % "|".join(self.args), 0 if cs else re.I)
+        replace = re.compile("({})".format("|".join(self.args)), 0 if cs else re.I)
         lang = ctx.get_option('language')
         repo = ctx.get_option('repository')
         name = ctx.get_option('name')
@@ -110,4 +110,4 @@ database.
 
             name += ' ' * max(0, maxlen - lenp)
 
-            ctx.ui.info('%s - %s' % (name, summary))
+            ctx.ui.info('{0} - {1}'.format(name, summary))

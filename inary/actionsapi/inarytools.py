@@ -77,11 +77,11 @@ def dohtml(*sourceFiles, **kw):
     for sourceFile in sourceFiles:
         sourceFileGlob = glob.glob(sourceFile)
         if len(sourceFileGlob) == 0:
-            raise FileError(_("No file matched pattern \"%s\"") % sourceFile)
+            raise FileError(_("No file matched pattern \"{}\"") % sourceFile)
 
         for source in sourceFileGlob:
             if os.path.isfile(source) and os.path.splitext(source)[1] in allowed_extensions:
-                system('install -m0644 "%s" %s' % (source, destionationDirectory))
+                system('install -m0644 "{0}" {1}'.format(source, destionationDirectory))
             if os.path.isdir(source) and os.path.basename(source) not in disallowed_directories:
                 eraser = os.path.split(source)[0]
                 for root, dirs, files in os.walk(source):
@@ -89,7 +89,7 @@ def dohtml(*sourceFiles, **kw):
                     for sourcename in files:
                         if os.path.splitext(sourcename)[1] in allowed_extensions:
                             makedirs(join_path(destionationDirectory, newRoot))
-                            system('install -m0644 %s %s' % (join_path(root, sourcename), join_path(destionationDirectory, newRoot, sourcename)))
+                            system('install -m0644 {0} {1}'.format(join_path(root, sourcename), join_path(destionationDirectory, newRoot, sourcename)))
 
 def doinfo(*sourceFiles):
     '''inserts the into files in the list of files into /usr/share/info'''
@@ -126,7 +126,7 @@ def dolib_so(sourceFile, destinationDirectory = '/usr/lib'):
 def doman(*sourceFiles):
     '''inserts the man pages in the list of files into /usr/share/man/'''
 
-    '''example call: inarytools.doman("man.1", "pardus.*")'''
+    '''example call: inarytools.doman("man.1", "sulin.*")'''
     manDIR = join_path(get.installDIR(), get.manDIR())
     if not can_access_directory(manDIR):
         makedirs(manDIR)
@@ -134,7 +134,7 @@ def doman(*sourceFiles):
     for sourceFile in sourceFiles:
         sourceFileGlob = glob.glob(sourceFile)
         if len(sourceFileGlob) == 0:
-            raise FileError(_("No file matched pattern \"%s\"") % sourceFile)
+            raise FileError(_("No file matched pattern \"{}\"").format(sourceFile))
 
         for source in sourceFileGlob:
             compressed = source.endswith("gz") and source
@@ -144,12 +144,12 @@ def doman(*sourceFiles):
                 pageName, pageDirectory = source[:source.rindex('.')], \
                                           source[source.rindex('.')+1:]
             except ValueError:
-                error(_('ActionsAPI [doman]: Wrong man page file: %s') % (source))
+                error(_('ActionsAPI [doman]: Wrong man page file: {}').format(source))
 
-            manPDIR = join_path(manDIR, '/man%s' % pageDirectory)
+            manPDIR = join_path(manDIR, '/man{}'.format(pageDirectory))
             makedirs(manPDIR)
             if not compressed:
-                system('install -m0644 %s %s' % (source, manPDIR))
+                system('install -m0644 {} {}'.format(source, manPDIR))
             else:
                 uncompress(compressed, targetDir=manPDIR)
 
@@ -158,9 +158,9 @@ def domo(sourceFile, locale, destinationFile, localeDirPrefix = '/usr/share/loca
 
     '''example call: inarytools.domo("po/tr.po", "tr", "pam_login.mo")'''
 
-    system('msgfmt %s' % sourceFile)
-    makedirs('%s%s/%s/LC_MESSAGES/' % (get.installDIR(), localeDirPrefix, locale))
-    move('messages.mo', '%s%s/%s/LC_MESSAGES/%s' % (get.installDIR(), localeDirPrefix, locale, destinationFile))
+    system('msgfmt {}'.format(sourceFile))
+    makedirs('{0}{1}/{2}/LC_MESSAGES/'.format(get.installDIR(), localeDirPrefix, locale))
+    move('messages.mo', '{0}{1}/{2}/LC_MESSAGES/{3}'.format(get.installDIR(), localeDirPrefix, locale, destinationFile))
 
 def domove(sourceFile, destination, destinationFile = ''):
     '''moves sourceFile/Directory into destinationFile/Directory'''
@@ -171,7 +171,7 @@ def domove(sourceFile, destination, destinationFile = ''):
 
     sourceFileGlob = glob.glob(join_path(get.installDIR(), sourceFile))
     if len(sourceFileGlob) == 0:
-        raise FileError(_("No file matched pattern \"%s\". 'domove' operation failed.") % sourceFile)
+        raise FileError(_("No file matched pattern \"{}\". 'domove' operation failed.").format(sourceFile))
 
     for filePath in sourceFileGlob:
         if not destinationFile:
@@ -190,7 +190,7 @@ def rename(sourceFile, destinationFile):
     try:
         os.rename(join_path(get.installDIR(), sourceFile), join_path(get.installDIR(), baseDir, destinationFile))
     except OSError as e:
-        error(_('ActionsAPI [rename]: %s: %s') % (e, sourceFile))
+        error(_('ActionsAPI [rename]: {}: {}').format(e, sourceFile))
 
 def dosed(sources, findPattern, replacePattern = '', filePattern = '', deleteLine = False, level = -1):
     '''replaces patterns in sources'''
@@ -212,7 +212,7 @@ def dosed(sources, findPattern, replacePattern = '', filePattern = '', deleteLin
             if not level == -1 and currentLevel > level: continue
             for f in files:
                 if re.search(pattern, f):
-                    res.append("%s/%s" % (root, f))
+                    res.append("{0}/{1}".format(root, f))
         return res
 
     backupExtension = ".inary-backup"
@@ -227,11 +227,11 @@ def dosed(sources, findPattern, replacePattern = '', filePattern = '', deleteLin
 
     #if there is no match, raise exception
     if len(sourceFiles) == 0:
-        raise FileError(_('No such file matching pattern: "%s". \'dosed\' operation failed.') % filePattern if filePattern else sources)
+        raise FileError(_('No such file matching pattern: "{}". \'dosed\' operation failed.').format(filePattern if filePattern else sources))
 
     for sourceFile in sourceFiles:
         if can_access_file(sourceFile):
-            backupFile = "%s%s" % (sourceFile, backupExtension)
+            backupFile = "{0}{1}".format(sourceFile, backupExtension)
             for line in fileinput.input(sourceFile, inplace = 1, backup = backupExtension):
                 #FIXME: In-place filtering is disabled when standard input is read
                 if re.search(findPattern, line):
@@ -241,11 +241,11 @@ def dosed(sources, findPattern, replacePattern = '', filePattern = '', deleteLin
                 # By default, filecmp.cmp() compares two files by looking file sizes.
                 # shallow=False tells cmp() to look file content.
                 if filecmp.cmp(sourceFile, backupFile, shallow=False):
-                    ctx.ui.warning(_('dosed method has not changed file \'%s\'.') % sourceFile)
-                else: ctx.ui.info("%s has been changed by dosed method." % sourceFile, verbose=True)
+                    ctx.ui.warning(_('dosed method has not changed file \'{}\'.').format(sourceFile))
+                else: ctx.ui.info(_("{} has been changed by dosed method.").format(sourceFile), verbose=True)
                 os.unlink(backupFile)
         else:
-            raise FileError(_('File does not exist or permission denied: %s') % sourceFile)
+            raise FileError(_('File does not exist or permission denied: {}').format(sourceFile))
 
 def dosbin(sourceFile, destinationDirectory = '/usr/sbin'):
     '''insert a executable file into /sbin or /usr/sbin'''
@@ -262,7 +262,7 @@ def dosym(sourceFile, destinationFile):
     try:
         os.symlink(sourceFile, join_path(get.installDIR() ,destinationFile))
     except OSError:
-        error(_('ActionsAPI [dosym]: File already exists: %s') % (destinationFile))
+        error(_('ActionsAPI [dosym]: File already exists: {}').format(destinationFile))
 
 def insinto(destinationDirectory, sourceFile,  destinationFile = '', sym = True):
     '''insert a sourceFile into destinationDirectory as a destinationFile with same uid/guid/permissions'''
@@ -271,7 +271,7 @@ def insinto(destinationDirectory, sourceFile,  destinationFile = '', sym = True)
     if not destinationFile:
         sourceFileGlob = glob.glob(sourceFile)
         if len(sourceFileGlob) == 0:
-            raise FileError(_("No file matched pattern \"%s\".") % sourceFile)
+            raise FileError(_("No file matched pattern \"{}\".").format(sourceFile))
 
         for filePath in sourceFileGlob:
             if can_access_file(filePath):
@@ -298,7 +298,7 @@ def remove(sourceFile):
     '''removes sourceFile'''
     sourceFileGlob = glob.glob(join_path(get.installDIR(), sourceFile))
     if len(sourceFileGlob) == 0:
-        raise FileError(_("No file matched pattern \"%s\". Remove operation failed.") % sourceFile)
+        raise FileError(_("No file matched pattern \"{}\". Remove operation failed.").format(sourceFile))
 
     for filePath in sourceFileGlob:
         unlink(filePath)
@@ -307,7 +307,7 @@ def removeDir(destinationDirectory):
     '''removes destinationDirectory and its subtrees'''
     destdirGlob = glob.glob(join_path(get.installDIR(), destinationDirectory))
     if len(destdirGlob) == 0:
-        raise FileError(_("No directory matched pattern \"%s\". Remove directory operation failed.") % destinationDirectory)
+        raise FileError(_("No directory matched pattern \"{}\". Remove directory operation failed.").format(destinationDirectory))
 
     for directory in destdirGlob:
         unlinkDir(directory)

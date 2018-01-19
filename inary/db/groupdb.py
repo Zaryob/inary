@@ -63,7 +63,7 @@ class GroupDB(lazydb.LazyDB):
     def get_group(self, name, repo = None):
 
         if not self.has_group(name, repo):
-            raise GroupNotFound(_('Group %s not found') % name)
+            raise GroupNotFound(_('Group {} not found').format(name))
 
         group = Group.Group()
         group.parse(self.gdb.get_item(name, repo))
@@ -72,7 +72,7 @@ class GroupDB(lazydb.LazyDB):
 
     def get_group_components(self, name, repo=None):
         if not self.has_group(name, repo):
-            raise GroupNotFound(_('Group %s not found') % name)
+            raise GroupNotFound(_('Group {} not found').format(name))
 
         if self.gcdb.has_item(name):
             return self.gcdb.get_item(name, repo)

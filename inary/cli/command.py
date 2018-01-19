@@ -31,7 +31,7 @@ class autocommand(type):
         longname, shortname = name
         def add_cmd(cmd):
             if cmd in Command.cmd_dict:
-                raise inary.cli.Error(_('Duplicate command %s') % cmd)
+                raise inary.cli.Error(_('Duplicate command {}').format(cmd))
             else:
                 Command.cmd_dict[cmd] = cls
         add_cmd(longname)
@@ -57,7 +57,7 @@ class Command(object):
             summary = trans.gettext(commandcls.__doc__).split('\n')[0]
             name = commandcls.name[0]
             if commandcls.name[1]:
-                name += ' (%s)' % commandcls.name[1]
+                name += ' ({})'.format(commandcls.name[1])
             s += ' %23s - %s\n' % (name, summary)
         return s
 
@@ -68,7 +68,7 @@ class Command(object):
             return Command.cmd_dict[cmd](args)
 
         if fail:
-            raise inary.cli.Error(_("Unrecognized command: %s") % cmd)
+            raise inary.cli.Error(_("Unrecognized command: {}").format(cmd))
         else:
             return None
 
@@ -127,7 +127,7 @@ class Command(object):
         if self.options.destdir:
             d = str(self.options.destdir)
             if not os.path.exists(d):
-                inary.cli.printu(_('Destination directory %s does not exist. Creating directory.\n') % d)
+                inary.cli.printu(_('Destination directory {} does not exist. Creating directory.\n').format(d))
                 os.makedirs(d)
             self.options.destdir = os.path.realpath(d)
 
@@ -176,14 +176,14 @@ class Command(object):
     def format_name(self):
         (name, shortname) = self.get_name()
         if shortname:
-            return "%s (%s)" % (name, shortname)
+            return "{0} ({1})".format(name, shortname)
         else:
             return name
 
     def help(self):
         """print help for the command"""
         trans = gettext.translation('inary', fallback=True)
-        print("%s: %s\n" % (self.format_name(), trans.gettext(self.__doc__)))
+        print("{0}: {1}".format(self.format_name(), trans.gettext(self.__doc__)))
         print(self.parser.format_option_help())
 
     def die(self):
@@ -222,11 +222,11 @@ class PisiHelpFormatter(optparse.HelpFormatter):
         optparse.HelpFormatter.__init__(
             self, indent_increment, max_help_position, width, short_first)
 
-        self._short_opt_fmt = "%s"
-        self._long_opt_fmt = "%s"
+        self._short_opt_fmt = "{}"
+        self._long_opt_fmt = "{}"
 
     def format_usage(self, usage):
-        return _("usage: %s\n") % usage
+        return _("usage: {}\n").format(usage)
 
     def format_heading(self, heading):
         return "%*s%s:\n" % (self.current_indent, "", heading)
@@ -234,16 +234,16 @@ class PisiHelpFormatter(optparse.HelpFormatter):
     def format_option_strings(self, option):
         """Return a comma-separated list of option strings & metavariables."""
         if option.takes_value():
-            short_opts = [self._short_opt_fmt % sopt
+            short_opts = [self._short_opt_fmt.format(sopt)
                           for sopt in option._short_opts]
-            long_opts = [self._long_opt_fmt % lopt
+            long_opts = [self._long_opt_fmt.format(lopt)
                          for lopt in option._long_opts]
         else:
             short_opts = option._short_opts
             long_opts = option._long_opts
 
         if long_opts and short_opts:
-            opt = "%s [%s]" % (short_opts[0], long_opts[0])
+            opt = "{0} [{1}]".format(short_opts[0], long_opts[0])
         else:
             opt = long_opts[0] or short_opts[0]
 

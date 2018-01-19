@@ -59,7 +59,7 @@ class SourceArchive:
                 self.progress = None
 
             try:
-                ctx.ui.info(_("Fetching source from: %s") % self.url.uri)
+                ctx.ui.info(_("Fetching source from: {}").format(self.url.uri))
                 if self.url.get_uri().startswith("mirrors://"):
                     self.fetch_from_mirror()
                 if self.url.get_uri().startswith("file://"):
@@ -72,13 +72,12 @@ class SourceArchive:
                 else:
                     raise
 
-            ctx.ui.info(_("\nSource archive is stored: %s/%s")
-                % (ctx.config.archives_dir(), self.url.filename()))
+            ctx.ui.info(_("\nSource archive is stored: {0}/{1}").format(ctx.config.archives_dir(), self.url.filename()))
 
     def fetch_from_fallback(self):
         archive = os.path.basename(self.url.get_uri())
         src = os.path.join(ctx.config.values.build.fallback, archive)
-        ctx.ui.warning(_('Trying fallback address: %s') % src)
+        ctx.ui.warning(_('Trying fallback address: {}').format(src))
         inary.fetcher.fetch_url(src, ctx.config.archives_dir(), self.progress)
 
     def fetch_from_locale(self):
@@ -97,18 +96,18 @@ class SourceArchive:
 
         mirrors = inary.mirrors.Mirrors().get_mirrors(name)
         if not mirrors:
-            raise Error(_("%s mirrors are not defined.") % name)
+            raise Error(_("{} mirrors are not defined.").format(name))
 
         for mirror in mirrors:
             try:
                 url = os.path.join(mirror, archive)
-                ctx.ui.warning(_('Fetching source from mirror: %s') % url)
+                ctx.ui.warning(_('Fetching source from mirror: {}').format(url))
                 inary.fetcher.fetch_url(url, ctx.config.archives_dir(), self.progress)
                 return
             except inary.fetcher.FetchError:
                 pass
 
-        raise inary.fetcher.FetchError(_('Could not fetch source from %s mirrors.') % name);
+        raise inary.fetcher.FetchError(_('Could not fetch source from {} mirrors.').format(name))
 
     def is_cached(self, interactive=True):
         if not os.access(self.archiveFile, os.R_OK):
@@ -117,7 +116,7 @@ class SourceArchive:
         # check hash
         if util.check_file_hash(self.archiveFile, self.archive.sha1sum):
             if interactive:
-                ctx.ui.info(_('%s [cached]') % self.archive.name)
+                ctx.ui.info(_('{} [cached]').format(self.archive.name))
             return True
 
         return False
@@ -131,11 +130,9 @@ class SourceArchive:
         try:
             archive = inary.archive.Archive(self.archiveFile, self.archive.type)
         except inary.archive.UnknownArchiveType:
-            raise Error(_("Unknown archive type '%s' is given for '%s'.")
-                        % (self.archive.type, self.url.filename()))
+            raise Error(_("Unknown archive type '{0}' is given for '{1}'.").format(self.archive.type, self.url.filename()))
         except inary.archive.ArchiveHandlerNotInstalled:
-            raise Error(_("Inary needs %s to unpack this archive but it is not installed.")
-                        % self.archive.type)
+            raise Error(_("Inary needs {} to unpack this archive but it is not installed.").format(self.archive.type))
 
         target_dir = os.path.join(target_dir, self.archive.target or "")
         archive.unpack(target_dir, clean_dir)

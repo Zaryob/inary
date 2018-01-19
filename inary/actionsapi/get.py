@@ -46,7 +46,7 @@ def curKERNEL():
 def curPYTHON():
     ''' returns currently used python's version'''
     (a, b, c, x, y) = sys.version_info
-    return 'python%s.%s' % (a, b)
+    return 'python{0}.{1}'.format(a, b)
 
 def curPERL():
     ''' returns currently used perl's version'''
@@ -92,10 +92,10 @@ def srcRELEASE():
     return env.src_release
 
 def srcTAG():
-    return '%s-%s-%s' % (env.src_name, env.src_version, env.src_release)
+    return '{0}-{1}-{2}'.format(env.src_name, env.src_version, env.src_release)
 
 def srcDIR():
-    return '%s-%s' % (env.src_name, env.src_version)
+    return '{0}-{1}'.format(env.src_name, env.src_version)
 
 # Build Related Functions
 
@@ -175,13 +175,12 @@ def existBinary(bin):
     return False
 
 def getBinutilsInfo(util):
-    cross_build_name = '%s-%s' % (HOST(), util)
+    cross_build_name = '{0}-{1}'.format(HOST(), util)
     if not existBinary(cross_build_name):
         if not existBinary(util):
-            raise BinutilsError(_('Util %s cannot be found') % util)
+            raise BinutilsError(_('Util {} cannot be found').format(util))
         else:
-            ctx.ui.debug(_('Warning: %s does not exist, using plain name %s') \
-                     % (cross_build_name, util))
+            ctx.ui.debug(_('Warning: {0} does not exist, using plain name {1}').format(cross_build_name, util))
             return util
     else:
         return cross_build_name

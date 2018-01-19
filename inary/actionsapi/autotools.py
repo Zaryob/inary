@@ -37,7 +37,7 @@ class ConfigureError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
         if can_access_file('config.log'):
-            ctx.ui.error(_('Please attach the config.log to your bug report:\n%s/config.log') % os.getcwd())
+            ctx.ui.error(_('Please attach the config.log to your bug report:\n{}/config.log').format(os.getcwd()))
 
 class MakeError(inary.actionsapi.Error):
     def __init__(self, value=''):
@@ -65,18 +65,16 @@ def configure(parameters = ''):
 
         prefix = get.emul32prefixDIR() if get.buildTYPE() == "emul32" else get.defaultprefixDIR()
         args = './configure \
-                --prefix=/%s \
-                --build=%s \
-                --mandir=/%s \
-                --infodir=/%s \
-                --datadir=/%s \
-                --sysconfdir=/%s \
-                --localstatedir=/%s \
-                --libexecdir=/%s \
-                %s%s' % (prefix, \
-                         get.HOST(), get.manDIR(), \
-                         get.infoDIR(), get.dataDIR(), \
-                         get.confDIR(), get.localstateDIR(), get.libexecDIR(),
+                --prefix=/{0} \
+                --build={1.HOST()} \
+                --mandir=/{1.manDIR()} \
+                --infodir=/{1.infoDIR()} \
+                --datadir=/{1.dataDIR()} \
+                --sysconfdir=/{1.confDIR()} \
+                --localstatedir=/{1.localstateDIR()} \
+                --libexecdir=/{1.libexecDIR()} \
+                {2}{3}'.format(prefix, \
+                         get,
                          "--libdir=/usr/lib32 " if get.buildTYPE() == "emul32" else "",
                          parameters)
 
@@ -90,29 +88,29 @@ def rawConfigure(parameters = ''):
     if can_access_file('configure'):
         gnuconfig_update()
 
-        if system('./configure %s' % parameters):
+        if system('./configure {}'.format(parameters)):
             raise ConfigureError(_('Configure failed.'))
     else:
         raise ConfigureError(_('No configure script found.'))
 
 def compile(parameters = ''):
-    system('%s %s %s' % (get.CC(), get.CFLAGS(), parameters))
+    system('{0} {1} {2}'.format(get.CC(), get.CFLAGS(), parameters))
 
 def make(parameters = ''):
     '''make source with given parameters = "all" || "doc" etc.'''
-    if system('make %s %s' % (get.makeJOBS(), parameters)):
+    if system('make {0} {1}'.format(get.makeJOBS(), parameters)):
         raise MakeError(_('Make failed.'))
 
 def fixInfoDir():
-    infoDir = '%s/usr/share/info/dir' % get.installDIR()
+    infoDir = '{}/usr/share/info/dir'.format(get.installDIR())
     if can_access_file(infoDir):
         unlink(infoDir)
 
 def fixpc():
     ''' fix .pc files in installDIR()/usr/lib32/pkgconfig'''
-    path = "%s/usr/lib32/pkgconfig" % get.installDIR()
+    path = "{}/usr/lib32/pkgconfig".format(get.installDIR())
     if isDirectory(path):
-        for f in ls("%s/*.pc" % path):
+        for f in ls("{}/*.pc".format(path)):
             dosed(f, get.emul32prefixDIR(), get.defaultprefixDIR())
 
 def install(parameters = '', argument = 'install'):
@@ -143,40 +141,40 @@ def install(parameters = '', argument = 'install'):
 
     if get.buildTYPE() == "emul32":
         fixpc()
-        if isDirectory("%s/emul32" % get.installDIR()): removeDir("/emul32")
+        if isDirectory("{}/emul32".format(get.installDIR())): removeDir("/emul32")
 
 def rawInstall(parameters = '', argument = 'install'):
     '''install source into install directory with given parameters = PREFIX=%s % get.installDIR()'''
-    if system('make %s %s' % (parameters, argument)):
+    if system('make {0} {1}'.format(parameters, argument)):
         raise InstallError(_('Install failed.'))
     else:
         fixInfoDir()
 
     if get.buildTYPE() == "emul32":
         fixpc()
-        if isDirectory("%s/emul32" % get.installDIR()): removeDir("/emul32")
+        if isDirectory("{}/emul32".format(get.installDIR())): removeDir("/emul32")
 
 def aclocal(parameters = ''):
     '''generates an aclocal.m4 based on the contents of configure.in.'''
-    if system('aclocal %s' % parameters):
+    if system('aclocal {}'.format(parameters)):
         raise RunTimeError(_('Running aclocal failed.'))
 
 def autoconf(parameters = ''):
     '''generates a configure script'''
-    if system('autoconf %s' % parameters):
+    if system('autoconf {}'.format(parameters)):
         raise RunTimeError(_('Running autoconf failed.'))
 
 def autoreconf(parameters = ''):
     '''re-generates a configure script'''
-    if system('autoreconf %s' % parameters):
+    if system('autoreconf {}'.format(parameters)):
         raise RunTimeError(_('Running autoreconf failed.'))
 
 def automake(parameters = ''):
     '''generates a makefile'''
-    if system('automake %s' % parameters):
+    if system('automake {}'.format(parameters)):
         raise RunTimeError(_('Running automake failed.'))
 
 def autoheader(parameters = ''):
     '''generates templates for configure'''
-    if system('autoheader %s' % parameters):
+    if system('autoheader {}'.format(parameters)):
         raise RunTimeError(_('Running autoheader failed.'))

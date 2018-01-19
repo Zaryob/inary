@@ -52,14 +52,14 @@ def check_update_actions(packages):
         ctx.ui.warning(_("You must restart the following service(s) manually "
                          "for the updated software to take effect:"))
         for package, target in actions["serviceRestart"]:
-            ctx.ui.info("    - %s" % target)
+            ctx.ui.info("    - {}".format(target))
 
     if "systemRestart" in actions:
         has_actions = True
         ctx.ui.warning(_("You must restart your system for the updates "
                          "in the following package(s) to take effect:"))
         for package, target in actions["systemRestart"]:
-            ctx.ui.info("    - %s" % package)
+            ctx.ui.info("    - {}".format(package))
 
     return has_actions
 
@@ -84,11 +84,11 @@ def find_upgrades(packages, replaces):
             ctx.ui.debug(_("Warning: package *name* ends with '.inary'"))
 
         if not installdb.has_package(i_pkg):
-            ctx.ui.info(_('Package %s is not installed.') % i_pkg, True)
+            ctx.ui.info(_('Package {} is not installed.').format(i_pkg), True)
             continue
 
         if not packagedb.has_package(i_pkg):
-            ctx.ui.info(_('Package %s is not available in repositories.') % i_pkg, True)
+            ctx.ui.info(_('Package {} is not available in repositories.').format(i_pkg), True)
             continue
 
         pkg = packagedb.get_package(i_pkg)
@@ -111,8 +111,8 @@ def find_upgrades(packages, replaces):
                 Ap.append(i_pkg)
                 ds.append(i_pkg)
             else:
-                ctx.ui.info(_('Package %s is already at the latest release %s.')
-                            % (pkg.name, pkg.release), True)
+                ctx.ui.info(_('Package {0.name} is already at the latest release {0.release}.').format(
+                             pkg), True)
 
     if debug and ds:
         ctx.ui.status(_('The following packages have different sha1sum:'))
@@ -153,13 +153,13 @@ def upgrade(A=[], repo=None):
     if ctx.get_option('exclude'):
         A = inary.blacklist.exclude(A, ctx.get_option('exclude'))
 
-    ctx.ui.debug('A = %s' % str(A))
+    ctx.ui.debug('A = {}'.format(str(A)))
 
     if len(A)==0:
         ctx.ui.info(_('No packages to upgrade.'))
         return True
 
-    ctx.ui.debug('A = %s' % str(A))
+    ctx.ui.debug('A = {}'.format(str(A)))
 
     if not ctx.config.get_option('ignore_dependency'):
         G_f, order = plan_upgrade(A, replaces=replaces)
@@ -264,7 +264,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
                 # previous ones.
                 G_f.add_dep(pkg.name, dep)
             else:
-                ctx.ui.error(_('Dependency %s of %s cannot be satisfied') % (dep, pkg.name))
+                ctx.ui.error(_('Dependency {0} of {1} cannot be satisfied').format(dep, pkg.name))
                 raise Exception(_("Upgrade is not possible."))
 
     def add_resolvable_conflicts(pkg, Bp):

@@ -63,7 +63,7 @@ all repositories.
         else:
             # print for all repos
             for repo in Reactor.list_repos():
-                ctx.ui.info(_("Repository : %s\n") % repo)
+                ctx.ui.info(_("Repository : {}\n").format(str(repo)))
                 self.print_packages(repo)
 
     def print_packages(self, repo):
@@ -99,4 +99,4 @@ all repositories.
                 ctx.ui.info(str(package)+'\n')
             else:
                 package.name += ' ' * max(0, maxlen - len(p))
-                ctx.ui.info('%s - %s ' % (package.name, str(package.summary)))
+                ctx.ui.info('{0} - {1} '.format(package.name, str(package.summary)))

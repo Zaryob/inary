@@ -30,23 +30,23 @@ class Exception(inary.Exception):
     pass
 
 #in old releases used this printu function
-#def printu(obj, err = False):
-#    if not isinstance(obj, str):
-#        obj = str(obj)
-#    if err:
-#        out = sys.stderr
-#    else:
-#        out = sys.stdout
-#    out.write(str(obj))
-#    out.flush()
-#
-
-def printu(obj,err = False):
+def printu(obj, err = False):
+    if not isinstance(obj, str):
+        obj = str(obj)
     if err:
-       sys.stdout.write(str(obj))
-    
-    else: 
-       sys.stdout.write(str(obj))
+        out = sys.stderr
+    else:
+        out = sys.stdout
+    out.write(str(obj))
+    out.flush()
+
+
+#def printu(obj,err = False):
+#    if err:
+#       sys.stdout.write(str(obj))
+#    
+#    else: 
+#       sys.stdout.write(str(obj))
     
 class CLI(inary.ui.UI):
     "Command Line Interface"
@@ -109,7 +109,7 @@ class CLI(inary.ui.UI):
                                       "column": _column,
                                       "rest": rest}
             if not noln:
-                new_msg = "%s\n" % new_msg
+                new_msg = "{}\n".format(new_msg)
         msg = new_msg
         self.output(str(msg), verbose=verbose)
 
@@ -117,7 +117,7 @@ class CLI(inary.ui.UI):
         # TODO: need to look at more kinds of info messages
         # let's cheat from KDE :)
         if not noln:
-            msg = '%s\n' % msg
+            msg = '%s\n'%(msg)
         self.output(str(msg), verbose=verbose)
 
     def warning(self, msg, verbose = False):
@@ -149,7 +149,7 @@ class CLI(inary.ui.UI):
 
     def choose(self, msg, opts):
         msg = str(msg)
-        prompt = msg + inary.util.colorize(' (%s)' % "/".join(opts), 'red')
+        prompt = msg + inary.util.colorize(' (%s)' %("/".join(opts)), 'red')
         while True:
             s = input(prompt.encode('utf-8'))
             for opt in opts:
@@ -204,15 +204,15 @@ class CLI(inary.ui.UI):
 
     def notify(self, event, **keywords):
         if event == inary.ui.installed:
-            msg = _('Installed %s') % keywords['package'].name
+            msg = _('Installed {}').format(keywords['package'].name)
         elif event == inary.ui.removed:
-            msg = _('Removed %s') % keywords['package'].name
+            msg = _('Removed {}').format(keywords['package'].name)
         elif event == inary.ui.upgraded:
-            msg = _('Upgraded %s') % keywords['package'].name
+            msg = _('Upgraded {}').format(keywords['package'].name)
         elif event == inary.ui.configured:
-            msg = _('Configured %s') % keywords['package'].name
+            msg = _('Configured {}').format(keywords['package'].name)
         elif event == inary.ui.extracting:
-            msg = _('Extracting the files of %s') % keywords['package'].name
+            msg = _('Extracting the files of {}').format(keywords['package'].name)
         else:
             msg = None
         if msg:

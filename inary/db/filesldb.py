@@ -40,7 +40,7 @@ class FilesLDB():
         ctx.ui.info(inary.util.colorize(_('Creating files database...'), 'blue'))
         installdb = inary.db.installdb.InstallDB()
         for pkg in installdb.list_installed():
-            #ctx.ui.info(inary.util.colorize(_('  ---> Adding \'%s\' to db... '), 'purple') % pkg, noln= True)
+            #ctx.ui.info(inary.util.colorize(_('  ---> Adding \'{}\' to db... '), 'purple')¿format(pkg), noln= True)
             files = installdb.get_files(pkg)
             self.add_files(pkg, files)
             #ctx.ui.info(inary.util.colorize(_('OK.'), 'backgroundmagenta'))
@@ -58,7 +58,7 @@ class FilesLDB():
         found = []
         for pkg in installdb.list_installed():
             files_xml = open(os.path.join(installdb.package_path(pkg), ctx.const.files_xml)).read()
-            paths = re.compile('<Path>(.*?%s.*?)</Path>' % re.escape(term), re.I).findall(files_xml)
+            paths = re.compile('<Path>(.*?{}.*?)</Path>'.format(re.escape(term)), re.I).findall(files_xml)
             if paths:
                 found.append((pkg, paths))
         return found

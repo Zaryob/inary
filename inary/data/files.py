@@ -30,7 +30,7 @@ class FileInfo(metaclass=autoxml.autoxml):
     t_Replace = [ autoxml.String, autoxml.optional ]
 
     def __str__(self):
-        s = "/%s, type: %s, size: %s, sha1sum: %s" %  (self.path, self.type,
+        s = "/{0}, type: {1}, size: {2}, sha1sum: {3}".format(self.path, self.type,
                                                       self.size, self.hash)
         return s
 

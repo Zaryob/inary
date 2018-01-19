@@ -50,11 +50,11 @@ def executable_insinto(destinationDirectory, *sourceFiles):
     for sourceFile in sourceFiles:
         sourceFileGlob = glob.glob(sourceFile)
         if len(sourceFileGlob) == 0:
-            raise FileError(_("No executable file matched pattern \"%s\".") % sourceFile)
+            raise FileError(_("No executable file matched pattern \"{}\".").format(sourceFile))
 
         for source in sourceFileGlob:
             # FIXME: use an internal install routine for these
-            system('install -m0755 -o root -g root %s %s' % (source, destinationDirectory))
+            system('install -m0755 -o root -g root {0} {1}'.format(source, destinationDirectory))
 
 def readable_insinto(destinationDirectory, *sourceFiles):
     '''inserts file list into destinationDirectory'''
@@ -68,10 +68,10 @@ def readable_insinto(destinationDirectory, *sourceFiles):
     for sourceFile in sourceFiles:
         sourceFileGlob = glob.glob(sourceFile)
         if len(sourceFileGlob) == 0:
-            raise FileError(_("No file matched pattern \"%s\".") % sourceFile)
+            raise FileError(_("No file matched pattern \"{}\".").format(sourceFile))
 
         for source in sourceFileGlob:
-            system('install -m0644 "%s" %s' % (source, destinationDirectory))
+            system('install -m0644 "{0}" {1}'.format(source, destinationDirectory))
 
 def lib_insinto(sourceFile, destinationDirectory, permission = 0o644):
     '''inserts a library fileinto destinationDirectory with given permission'''
@@ -85,4 +85,4 @@ def lib_insinto(sourceFile, destinationDirectory, permission = 0o644):
     if os.path.islink(sourceFile):
         os.symlink(os.path.realpath(sourceFile), os.path.join(destinationDirectory, sourceFile))
     else:
-        system('install -m0%o %s %s' % (permission, sourceFile, destinationDirectory))
+        system('install -m0{0} {1} {2}'.format(permission, sourceFile, destinationDirectory))

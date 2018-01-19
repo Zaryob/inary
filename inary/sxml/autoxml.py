@@ -76,15 +76,13 @@ class LocalText(dict):
         nodes = xmlext.getAllNodes(node, self.tag)
         if not nodes:
             if self.req == mandatory:
-                errs.append(where + ': ' + _("At least one '%s' tag should have local text") %
-                                    self.tag )
+                errs.append(where + ': ' + _("At least one '{}' tag should have local text").format(self.tag))
         else:
             for node in nodes:
                 lang = xmlext.getNodeAttribute(node, 'xml:lang')
                 c = xmlext.getNodeText(node)
                 if not c:
-                    errs.append(where + ': ' + _("'%s' language of tag '%s' is empty") %
-                                (lang, self.tag))
+                    errs.append(where + ': ' + _("'{0}' language of tag '{1}' is empty").format(lang, self.tag))
                 # FIXME: check for dups and 'en'
                 if not lang:
                     lang = 'en'
@@ -367,7 +365,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         def check(self):
             errs = self.errors()
             if errs:
-                errs.append(_("autoxml.check: '%s' errors") % len(errs))
+                errs.append(_("autoxml.check: '{}' errors").format(len(errs)))
                 raise Error(*errs)
         cls.check = check
 
@@ -423,7 +421,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 errs = []
                 self.decode(self.rootNode(), errs)
                 if errs:
-                    errs.append(_("autoxml.parse: String '%s' has errors") % xml)
+                    errs.append(_("autoxml.parse: String '{}' has errors").format(xml))
                     raise Error(*errs)
                 if hasattr(self, 'read_hook'):
                     self.read_hook(errs)
@@ -433,7 +431,7 @@ class autoxml(oo.autosuper, oo.autoprop):
 
                 errs = self.errors()
                 if errs:
-                    errs.append(_("autoxml.parse: String '%s' has errors") % xml)
+                    errs.append(_("autoxml.parse: String '{}' has errors").format(xml))
 
             def read(self, uri, keepDoc = False, tmpDir = '/tmp',
                      sha1sum = False, compress = None, sign = None, copylocal = False, nodecode = False):
@@ -447,7 +445,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 errs = []
                 self.decode(self.rootNode(), errs)
                 if errs:
-                    errs.append(_("autoxml.read: File '%s' has errors") % uri)
+                    errs.append(_("autoxml.read: File '{}' has errors").format(uri))
                     raise Error(*errs)
                 if hasattr(self, 'read_hook'):
                     self.read_hook(errs)
@@ -457,7 +455,7 @@ class autoxml(oo.autosuper, oo.autoprop):
 
                 errs = self.errors()
                 if errs:
-                    errs.append(_("autoxml.read: File '%s' has errors") % uri)
+                    errs.append(_("autoxml.read: File '{}' has errors").format(uri))
                     raise Error(*errs)
 
             def write(self, uri, keepDoc = False, tmpDir = '/tmp',
@@ -473,7 +471,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if hasattr(self, 'write_hook'):
                     self.write_hook(errs)
                 if errs:
-                    errs.append(_("autoxml.write: File encoding '%s' has errors") % uri)
+                    errs.append(_("autoxml.write: File encoding '{}' has errors").format(uri))
                     raise Error(*errs)
                 self.writexml(uri, tmpDir, sha1sum=sha1sum, compress=compress, sign=sign)
                 if not keepDoc:
@@ -523,8 +521,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         elif type(tag_type) is autoxml or type(tag_type) is type:
             return cls.gen_class_tag(tag, spec)
         else:
-            raise Error(_('gen_tag: unrecognized tag type %s in spec') %
-                        str(tag_type))
+            raise Error(_('gen_tag: unrecognized tag type {} in spec').format(str(tag_type)))
 
     def gen_str_member(cls, token):
         """generate readers and writers for a string member"""
@@ -571,7 +568,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 errs.extend(errors_a(value, where + '.' + name))
             else:
                 if req == mandatory:
-                    errs.append(where + ': ' + _('Mandatory variable %s not available') % name)
+                    errs.append(where + ': ' + _('Mandatory variable {} not available').format(name))
             return errs
 
         def format(self, f, errs):
@@ -582,7 +579,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 f.add_line_break()
             else:
                 if req == mandatory:
-                    errs.append(_('Mandatory variable %s not available') % name)
+                    errs.append(_('Mandatory variable {} not available').format(name))
 
         return (name, init, decode, encode, errors, format)
 
@@ -656,7 +653,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 return value
             else:
                 if req == mandatory:
-                    errs.append(where + ': ' + _('Mandatory token %s not available') % token)
+                    errs.append(where + ': ' + _('Mandatory token {} not available').format(token))
                 return None
 
         def encode(node, value, errs):
@@ -665,13 +662,12 @@ class autoxml(oo.autosuper, oo.autoprop):
                 writetext(node, token, str(value))
             else:
                 if req == mandatory:
-                    errs.append(_('Mandatory token %s not available') % token)
+                    errs.append(_('Mandatory token {} not available').format(token))
 
         def errors(value, where):
             errs = []
             if value and not isinstance(value, token_type):
-                errs.append(where + ': ' + _('Type mismatch. Expected %s, got %s') %
-                                    (token_type, type(value)) )
+                errs.append(where + ': ' + _('Type mismatch. Expected {0}, got {1}').format(token_type, type(value)) )
             return errs
 
         def format(value, f, errs):
@@ -759,13 +755,12 @@ class autoxml(oo.autosuper, oo.autoprop):
             nodes = xmlext.getAllNodes(node, path)
             #print node, tag + '/' + comp_tag, nodes
             if len(nodes)==0 and req==mandatory:
-                errs.append(where + ': ' + _('Mandatory list "%s" under "%s" node is empty.') % (path, node.name()))
+                errs.append(where + ': ' + _('Mandatory list "{0}" under "{1}" node is empty.').format(path, node.name()))
             ix = 1
             for node in nodes:
                 dummy = xmlext.newNode(node, "Dummy")
                 xmlext.addNode(dummy, '', node)
-                l.append(decode_item(dummy, errs, where + str("[%s]" % ix)))
-                #l.append(decode_item(node, errs, where + unicode("[%s]" % ix)))
+                l.append(decode_item(dummy, errs, where + str("[{}]".format(ix))))
                 ix += 1
             return l
 
@@ -780,13 +775,13 @@ class autoxml(oo.autosuper, oo.autoprop):
                     #encode_item(node, item, errs)
             else:
                 if req is mandatory:
-                    errs.append(_('Mandatory list "%s" under "%s" node is empty.') % (path, node.name()))
+                    errs.append(_('Mandatory list "{0}" under "{1}" node is empty.').format(path, node.name()))
 
         def errors(l, where):
             errs = []
             ix = 1
             for node in l:
-                errs.extend(errors_item(node, where + '[%s]' % ix))
+                errs.extend(errors_item(node, where + '[{}]'.format(ix)))
                 ix += 1
             return errs
 

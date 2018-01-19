@@ -37,7 +37,7 @@ class ItemByRepo:
             if r in self.dbobj and item in self.dbobj[r]:
                 return r
 
-        raise Exception(_("%s not found in any repository.") % str(item))
+        raise Exception(_("{} not found in any repository.").format(str(item)))
 
     def get_item_repo(self, item, repo=None):
         for r in self.item_repos(repo):
@@ -47,7 +47,7 @@ class ItemByRepo:
                 else:
                     return self.dbobj[r][item], r
 
-        raise Exception(_("Repo item %s not found") % str(item))
+        raise Exception(_("Repo item {} not found").format(str(item)))
 
     def get_item(self, item, repo=None):
         item, repo = self.get_item_repo(item, repo)
@@ -57,7 +57,7 @@ class ItemByRepo:
         items = []
         for r in self.item_repos(repo):
             if not self.has_repo(r):
-                raise Exception(_('Repository %s does not exist.') % repo)
+                raise Exception(_('Repository {} does not exist.').format(repo))
 
             if r in self.dbobj:
                 items.extend(list(self.dbobj[r].keys()))
@@ -68,7 +68,7 @@ class ItemByRepo:
         items = []
         for r in self.item_repos(repo):
             if not self.has_repo(r):
-                raise Exception(_('Repository %s does not exist.') % repo)
+                raise Exception(_('Repository {} does not exist.').format(repo))
 
             if r in self.dbobj:
                 items.extend(self.dbobj[r])
@@ -78,7 +78,7 @@ class ItemByRepo:
     def get_items_iter(self, repo=None):
         for r in self.item_repos(repo):
             if not self.has_repo(r):
-                raise Exception(_('Repository %s does not exist.') % repo)
+                raise Exception(_('Repository {} does not exist.').format(repo))
 
             if self.compressed:
                 for item in list(self.dbobj[r].keys()):

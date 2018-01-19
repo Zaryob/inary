@@ -68,7 +68,7 @@ class Install(AtomicOperation):
         repo = packagedb.which_repo(name)
         if repo:
             repodb = inary.db.repodb.RepoDB()
-            ctx.ui.info(_("Package %s found in repository %s") % (name, repo))
+            ctx.ui.info(_("Package {0} found in repository {1}").format(name, repo))
 
             repo = repodb.get_repo(repo)
             pkg = packagedb.get_package(name)
@@ -99,7 +99,7 @@ class Install(AtomicOperation):
                 pkg_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
                                         str(uri.path()))
 
-            ctx.ui.info(_("Package URI: %s") % pkg_path, verbose=True)
+            ctx.ui.info(_("Package URI: {}").format(pkg_path), verbose=True)
 
             # Bug 4113
             cached_file = inary.package.Package.is_cached(pkg_path)
@@ -117,7 +117,7 @@ class Install(AtomicOperation):
 
             return install_op
         else:
-            raise Error(_("Package %s not found in any active repository.") % name)
+            raise Error(_("Package {} not found in any active repository.").format(name))
 
     def __init__(self, package_fname, ignore_dep = None, ignore_file_conflicts = None):
         if not ctx.filesdb: ctx.filesdb = inary.db.filesldb.FilesLDB()
@@ -144,9 +144,8 @@ class Install(AtomicOperation):
         # Any package should remove the package it replaces before
         self.check_replaces()
 
-        ctx.ui.status(_('Installing %s, version %s, release %s') %
-                (self.pkginfo.name, self.pkginfo.version,
-                 self.pkginfo.release))
+        ctx.ui.status(_('Installing {0.name}, version {0.version}, release {0.release}').format(self.pkginfo))
+
         ctx.ui.notify(inary.ui.installing, package=self.pkginfo, files=self.files)
 
         self.ask_reinstall = ask_reinstall
@@ -190,14 +189,13 @@ class Install(AtomicOperation):
             int(release)
             inary.version.make_version(version)
         except (ValueError, inary.version.InvalidVersionError):
-            raise Error(_("%s-%s is not a valid INARY version format") % (version, release))
+            raise Error(_("{}-{} is not a valid INARY version format").format(version, release))
 
     def check_relations(self):
         # check dependencies
         if not ctx.config.get_option('ignore_dependency'):
             if not self.pkginfo.installable():
-                raise Error(_("%s package cannot be installed unless the dependencies are satisfied") %
-                            self.pkginfo.name)
+                raise Error(_("{} package cannot be installed unless the dependencies are satisfied").format(self.pkginfo.name))
 
         # If it is explicitly specified that package conflicts with this package and also
         # we passed check_conflicts tests in operations.py than this means a non-conflicting
@@ -220,8 +218,8 @@ class Install(AtomicOperation):
         if file_conflicts:
             file_conflicts_str = ""
             for (pkg, existing_file) in file_conflicts:
-                file_conflicts_str += _("/%s from %s package\n") % (existing_file, pkg)
-            msg = _('File conflicts:\n%s') % file_conflicts_str
+                file_conflicts_str += _("/{0} from {1} package\n").format(existing_file, pkg)
+            msg = _('File conflicts:\n{}').format(file_conflicts_str)
             if self.ignore_file_conflicts:
                 ctx.ui.warning(msg)
             else:
@@ -248,7 +246,7 @@ class Install(AtomicOperation):
                 if ctx.get_option('store_lib_info') and pkg_version > iversion:
                     self.store_old_paths = os.path.join(ctx.config.old_paths_cache_dir(), pkg.name)
                     ctx.ui.info(_('Storing old paths info'))
-                    open(self.store_old_paths, "w").write("Version: %s\n" % iversion_s)
+                    open(self.store_old_paths, "w").write("Version: {}\n".format(iversion_s))
 
                 pkg_release = int(pkg.release)
                 irelease = int(irelease_s)
@@ -292,7 +290,7 @@ class Install(AtomicOperation):
         # Chowning for additional files
         for _file in self.package.get_files().list:
             fpath = util.join_path(ctx.config.dest_dir(), _file.path)
-            #print ("** chowning in postinstall (%s:%s)" % (_file.uid, _file.gid))
+            ctx.ui.debug("** chowning in postinstall ({0}:{1})".format(_file.uid, _file.gid))
             os.chown(fpath, int(_file.uid), int(_file.gid))
 
         if ctx.scom:
@@ -318,7 +316,7 @@ class Install(AtomicOperation):
                     )
                 ctx.ui.notify(inary.ui.configured, package = self.pkginfo, files = self.files)
             except inary.scomiface.Error:
-                ctx.ui.warning(_('%s configuration failed.') % self.pkginfo.name)
+                ctx.ui.warning(_('{} configuration failed.').format(self.pkginfo.name))
                 self.config_later = True
         else:
             self.config_later = True
@@ -410,7 +408,7 @@ class Install(AtomicOperation):
             if missing_old_files:
                 ctx.ui.warning(_("Unable to relocate following files. Reinstallation of this package is strongly recommended."))
                 for f in sorted(missing_old_files):
-                    ctx.ui.warning("    - %s" % f)
+                    ctx.ui.warning("    - {}".format(f))
 
         # remove left over files from the old package.
         def clean_leftovers():
@@ -507,7 +505,7 @@ class Install(AtomicOperation):
             fpath = os.path.join(ctx.const.scom_dir, pscom.script)
             # comar prefix is added to the pkg_dir while extracting comar
             # script file. so we'll use pkg_dir as destination.
-            ctx.ui.info(_('Storing %s') % fpath, verbose=True)
+            ctx.ui.info(_('Storing {}').format(fpath), verbose=True)
             self.package.extract_file_synced(fpath, self.package.pkg_dir())
 
     def update_databases(self):
@@ -575,13 +573,13 @@ class Remove(AtomicOperation):
         except inary.Error as e:
             # for some reason file was deleted, we still allow removes!
             ctx.ui.error(str(e))
-            ctx.ui.warning(_('File list could not be read for package %s, continuing removal.') % package_name)
+            ctx.ui.warning(_('File list could not be read for package {}, continuing removal.').format(package_name))
             self.files = inary.files.Files()
 
     def run(self):
         """Remove a single package"""
 
-        ctx.ui.status(_('Removing package %s') % self.package_name)
+        ctx.ui.status(_('Removing package {}').format(self.package_name))
         ctx.ui.notify(inary.ui.removing, package = self.package, files = self.files)
         if not self.installdb.has_package(self.package_name):
             raise Exception(_('Trying to remove nonexistent package ')
@@ -623,7 +621,7 @@ class Remove(AtomicOperation):
         # another as in #2911)
         #pkg, existing_file = ctx.filesdb.get_file(fileinfo.path)
         #if pkg != package_name:
-        #    ctx.ui.warning(_('Not removing conflicted file : %s') % fpath)
+        #    ctx.ui.warning(_('Not removing conflicted file : {}').format(fpath))
         #    return
 
         if fileinfo.type == ctx.const.conf:
@@ -649,11 +647,11 @@ class Remove(AtomicOperation):
             if os.path.isfile(fpath) or os.path.islink(fpath):
                 os.unlink(fpath)
                 if store_old_paths:
-                    open(store_old_paths, "a").write("%s\n" % fpath)
+                    open(store_old_paths, "a").write("{}\n".format(fpath))
             elif os.path.isdir(fpath) and not os.listdir(fpath):
                 os.rmdir(fpath)
             else:
-                ctx.ui.warning(_('Installed file %s does not exist on system [Probably you manually deleted]') % fpath)
+                ctx.ui.warning(_('Installed file {} does not exist on system [Probably you manually deleted]').format(fpath))
                 return
 
         # remove emptied directories

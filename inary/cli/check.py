@@ -87,7 +87,7 @@ class Check(command.Command, metaclass=command.autocommand):
         check_config = ctx.get_option('config')
 
         # Line prefix
-        prefix = _('Checking integrity of %s')
+        prefix = _('Checking integrity of {}')
 
         # Determine maximum length of messages for proper formatting
         maxpkglen = max([len(_p) for _p in pkgs])
@@ -95,8 +95,8 @@ class Check(command.Command, metaclass=command.autocommand):
         for pkg in pkgs:
             if self.installdb.has_package(pkg):
                 check_results = Reactor.check(pkg, check_config)
-                ctx.ui.info("%s    %s" % ((prefix % pkg),
-                                          ' ' * (maxpkglen - len(pkg))),
+                ctx.ui.info("{0}    {1}".format((prefix.format(pkg),
+                                          ' ' * (maxpkglen - len(pkg)))),
                             noln=True)
 
                 if check_results['missing'] or check_results['corrupted'] \
@@ -114,24 +114,24 @@ class Check(command.Command, metaclass=command.autocommand):
                 # Dump per file stuff
                 for fpath in check_results['missing']:
                     ctx.ui.info(util.colorize(
-                        _("Missing file: /%s") % fpath, 'brightred'))
+                        _("Missing file: /{}").format(fpath), 'brightred'))
 
                 for fpath in check_results['denied']:
                     ctx.ui.info(util.colorize(
-                        _("Access denied: /%s") % fpath, 'yellow'))
+                        _("Access denied: /{}").format(fpath), 'yellow'))
 
                 for fpath in check_results['corrupted']:
                     ctx.ui.info(util.colorize(
-                        _("Corrupted file: /%s") % fpath, 'brightyellow'))
+                        _("Corrupted file: /{}").format(fpath), 'brightyellow'))
 
                 for fpath in check_results['config']:
                     ctx.ui.info(util.colorize(
-                        _("Modified configuration file: /%s") % fpath,
+                        _("Modified configuration file: /{}").format(fpath),
                         'brightyellow'))
 
             else:
                 # Package is not installed
-                ctx.ui.info(_('Package %s not installed') % pkg)
+                ctx.ui.info(_('Package {} not installed').format(pkg))
 
         if not necessary_permissions:
             ctx.ui.info("")

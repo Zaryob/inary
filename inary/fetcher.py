@@ -13,13 +13,11 @@
 # python standard library modules
 import os
 import time
-import base64
 import shutil
 import socket
 import sys
 
 from base64 import encodestring
-from shutil import move
 
 # Network libraries
 from http.client import HTTPException
@@ -150,17 +148,17 @@ class Fetcher:
                            )
 
         except ValueError as e:
-            msg = _("Url Problem: \n %s") % e
+            msg = _("Url Problem: \n {}").format(e)
             raise FetchError(msg)
             return False
 
         except urlerror.HTTPError as e:
-            msg = _("Reaised an HTTP Error: \n %s") % e
+            msg = _("Reaised an HTTP Error: \n {}").format(e)
             raise FetchError(msg)
             return False
 
         except Error as e:
-            msg = _("Can not avaible remote server: \n %s") % e
+            msg = _("Can not avaible remote server: \n {}").format(e)
             raise FetchError(msg)
             return False
 
@@ -172,10 +170,10 @@ class Fetcher:
             raise FileError(_('Filename error'))
 
         if not os.access(self.destdir, os.W_OK):
-            raise FileError(_('Access denied to write to destination directory: "%s"') % (self.destdir))
+            raise FileError(_('Access denied to write to destination directory: "{}"').format(self.destdir))
 
         if os.path.exists(self.archive_file) and not os.access(self.archive_file, os.W_OK):
-            raise FileError(_('Access denied to destination file: "%s"') % (self.archive_file))
+            raise FileError(_('Access denied to destination file: "{}"').format(self.archive_file))
 
         else:
             self.exist_size = 0
@@ -195,18 +193,18 @@ class Fetcher:
                 handler= UIHandler()
 
             except ValueError as e:
-                raise FetchError(_('Could not fetch destination file: "%s" \nRaised Value error: "%s"') % (uri, e))
+                raise FetchError(_('Could not fetch destination file: "{0}" \nRaised Value error: "{1}"').format(uri, e))
             except OSError as e:
-                raise FetchError(_('Could not fetch destination file: "%s"; \n"%s"') % (uri, e))
+                raise FetchError(_('Could not fetch destination file: "{0}"; \n"{1}"').format(uri, e))
             except urllib.error.HTTPError as e:
-                raise FetchError(_('Could not fetch destination file: "%s"; \n"%s"') % (uri, e))
+                raise FetchError(_('Could not fetch destination file: "{0}"; \n"{1}"').format(uri, e))
             except urllib.error.URLError as e:
-                raise FetchError(_('Could not fetch destination file: "%s"; \n"%s"') % (uri, e[-1][-1]))
+                raise FetchError(_('Could not fetch destination file: "{0}"; \n"{1}"').format(uri, e[-1][-1]))
             except HTTPException as e:
-                raise FetchError(_('Could not fetch destination file: "%s"; ("%s"): "%s"') % (uri, e.__class__.__name__, e))
+                raise FetchError(_('Could not fetch destination file: "{0}"; ("{1}"): "{2}"').format(uri, e.__class__.__name__, e))
 
         except FetchError as e:
-            raise FetchError(_('A problem occurred. Please check the archive address and/or permissions again. %s') %e)
+            raise FetchError(_('A problem occurred. Please check the archive address and/or permissions again. {}').format(e))
 
         total_length = int(headers['Content-Length'])
 
@@ -243,8 +241,8 @@ class Fetcher:
 
     def formatRequest(self, request):
         if self.url.auth_info():
-            enc = encodestring('%s:%s' % self.url.auth_info())
-            request.add_header('Authorization', 'Basic %s' % enc)
+            enc = encodestring('{0}:{0}'.format(self.url.auth_info()))
+            headers.append(('Authorization', 'Basic {}'.format(enc)))
 
         range_handlers = {
             'http' : HTTPRangeHandler,
@@ -269,7 +267,7 @@ class Fetcher:
             ftp_proxy = ctx.config.values.general.ftp_proxy
             proxy_handler = urllib.request.ProxyHandler({URI(http_proxy): ftp_proxy})
         if proxy_handler:
-            ctx.ui.info(_("Proxy configuration has been found for '%s' protocol") % self.url.scheme())
+            ctx.ui.info(_("Proxy configuration has been found for '{}' protocol").format(self.url.scheme()))
             opener = urllib.request.build_opener(proxy_handler)
             urllib.request.install_opener(opener)
         return request
@@ -277,15 +275,15 @@ class Fetcher:
     def _get_http_headers(self):
         headers = []
         if self.url.auth_info() and (self.url.scheme() == "http" or self.url.scheme() == "https"):
-            enc = base64.encodestring('%s:%s' % self.url.auth_info())
-            headers.append(('Authorization', 'Basic %s' % enc),)
+            enc = encodestring('{0}:{0}'.format(self.url.auth_info()))
+            headers.append(('Authorization', 'Basic {}'.format(enc)))
         return tuple(headers)
 
     def _get_ftp_headers(self):
         headers = []
         if self.url.auth_info() and self.url.scheme() == "ftp":
-            enc = base64.encodestring('%s:%s' % self.url.auth_info())
-            headers.append(('Authorization', 'Basic %s' % enc),)
+            enc = encodestring('{0}:{0}'.format(self.url.auth_info()))
+            headers.append(('Authorization', 'Basic {}'.format(enc)))
         return tuple(headers)
 
     def _get_proxies(self):
@@ -301,14 +299,14 @@ class Fetcher:
             proxies[inary.uri.URI(ctx.config.values.general.ftp_proxy).scheme()] = ctx.config.values.general.ftp_proxy
 
         if self.url.scheme() in proxies:
-            ctx.ui.info(_("Proxy configuration has been found for '%s' protocol") % self.url.scheme())
+            ctx.ui.info(_("Proxy configuration has been found for '{}' protocol").format(self.url.scheme()))
 
         return proxies
 
     def _get_bandwith_limit(self):
         bandwidth_limit = ctx.config.options.bandwidth_limit or ctx.config.values.general.bandwidth_limit
         if bandwidth_limit and bandwidth_limit != "0":
-            ctx.ui.warning(_("Bandwidth usage is limited to %s KB/s") % bandwidth_limit)
+            ctx.ui.warning(_("Bandwidth usage is limited to {} KB/s").format(bandwidth_limit))
             return 1024 * int(bandwidth_limit)
         else:
             return 0
@@ -391,9 +389,9 @@ class FTPRangeHandler(urllib.request.FTPHandler):
             headers = ''
             mtype = guess_type(req.get_full_url())[0]
             if mtype:
-                headers += 'Content-Type: %s\n' % mtype
+                headers += 'Content-Type: {}\n'.format(mtype)
             if retrlen is not None and retrlen >= 0:
-                headers += 'Content-Length: %d\n' % retrlen
+                headers += 'Content-Length: {}\n'.format(retrlen)
 
             from io import StringIO
 

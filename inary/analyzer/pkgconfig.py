@@ -118,7 +118,7 @@ class LDD:
                     pkgconfig_list.append((result_broken, result_unused, result_undefined, result_lists, result_runpath, package_name))
 
             else:
-                raise Error("'%s' is not a valid .inary file or an installed package" % package)
+                raise Error("'{}' is not a valid .inary file or an installed package".format(package))
 
         return pkgconfig_list
 
@@ -159,7 +159,7 @@ class LDD:
         for obj in objdump_needed:
             # Find the absolute path of libraries from their SONAME's
             if obj in result_main_ldd:
-                result_needed.append(os.popen("readlink -f %s" % result_main_ldd[obj]).read().strip())
+                result_needed.append(os.popen("readlink -f {}".format(result_main_ldd[obj]).read().strip()))
             else:
                 result_needed.append(obj)
 
@@ -182,7 +182,7 @@ class LDD:
                     dependency_name = inary.api.search_file(obj_dump)[0][0]
                 except IndexError:
                     dependency_name = "broken"
-                    ctx.ui.info("%s (probably broken dependency)" % needed)
+                    ctx.ui.info("{} (probably broken dependency)".format(needed))
             result_needed.append((obj_dump, dependency_name))
         return result_needed
 
@@ -190,14 +190,14 @@ class LDD:
         '''check for .pc files created by pkgconfig and shipped with the package
            these .pc files have requirements tags that can be used for dependencies'''
         result_needed = []
-        requires = set(os.popen("pkg-config --print-requires --print-requires-private %s | gawk '{ print $1 }'" % \
-                os.path.basename(pc_file).replace(".pc", "")).read().split("\n")[:-1])
+        requires = set(os.popen("pkg-config --print-requires --print-requires-private {} | gawk '{ print $1 }'".format(
+                os.path.basename(pc_file).replace(".pc", ""))).read().split("\n")[:-1])
 
         for require in requires:
-            require_file = "/usr/share/pkgconfig/%s.pc" % require
+            require_file = "/usr/share/pkgconfig/{}.pc".format(require)
 
             if not os.path.exists(require_file):
-                require_file = "/usr/lib/pkgconfig/%s.pc" % require
+                require_file = "/usr/lib/pkgconfig/{}.pc".format(require)
             try:
                 dependency_name = inary.api.search_file(require_file)[0][0]
             except IndexError:
@@ -225,14 +225,14 @@ class LDD:
         result_must_removed = list(set(package_deps) & set(systembase_packages))
         for deps in package_deps:
             if deps in result_must_removed:
-                package_deps[package_deps.index(deps)] = "%s (base)" % deps
+                package_deps[package_deps.index(deps)] = "{} (base)".format(deps)
 
         # look for packages that are system.devel but are written as dependency
         # mark them with "*"
         result_must_removed = list(set(package_deps) & set(systemdevel_packages))
         for deps in package_deps:
             if deps in result_must_removed:
-                package_deps[package_deps.index(deps)] = "%s (devel)" % deps
+                package_deps[package_deps.index(deps)] = "{} (devel)".format(deps)
 
         # extract the dependency package names and store them in result_deps
         # dependencies tagged as broken or given itself are eliminated
@@ -252,11 +252,11 @@ class LDD:
             result_must_removed = list(set(result_deps) & set(systembase_packages))
             for deps in result_deps:
                 if deps in result_must_removed:
-                    result_deps[result_deps.index(deps)] = "%s (base)" % deps
+                    result_deps[result_deps.index(deps)] = "{} (base)".format(deps)
             result_must_removed = list(set(result_deps) & set(systemdevel_packages))
             for deps in result_deps:
                 if deps in result_must_removed:
-                    result_deps[result_deps.index(deps)] = "%s (devel)" % deps
+                    result_deps[result_deps.index(deps)] = "{} (devel)".format(deps)
             result_deps = list(set(result_deps))
 
         # remove packages that already are written in metadata.xml (runtime dependencies written in pspec.xml)
@@ -286,12 +286,12 @@ class LDD:
 
         # Two options are available. Checking for a inary file or an installed package in the database
         if package_dir:
-            package_files = os.popen("find %s" % package_dir).read().strip().split("\n")
-            package_pc_files = glob.glob("%s/usr/*/pkgconfig/*.pc" % package_dir)
+            package_files = os.popen("find {}".format(package_dir)).read().strip().split("\n")
+            package_pc_files = glob.glob("{}/usr/*/pkgconfig/*.pc".format(package_dir))
         else:
-            package_files = set(["/%s" % file_name.path \
+            package_files = set(["/{}".format(file_name.path) \
                 for file_name in INSTALLDB.get_files(package_name).list])
-            package_pc_files = set([os.path.realpath("/%s" % file_name.path) \
+            package_pc_files = set([os.path.realpath("/{}".format(file_name.path)) \
                     for file_name in INSTALLDB.get_files(package_name).list \
                     if fnmatch.fnmatch(file_name.path, "*/pkgconfig/*.pc")])
 
@@ -326,7 +326,7 @@ class LDD:
                                           env = os.environ).communicate()[0].strip().split(": ")
 
             objdump_needed = [line.strip().split()[1] for line in \
-                    os.popen("objdump -p \"%s\" | grep 'NEEDED'" % elf_file).readlines()]
+                    os.popen("objdump -p \"{}\" | grep 'NEEDED'".format(elf_file)).readlines()]
 
 
             # Process the various ldd and objdump outputs

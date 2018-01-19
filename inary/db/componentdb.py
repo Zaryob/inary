@@ -66,17 +66,17 @@ class ComponentDB(lazydb.LazyDB):
         return self.cdb.get_item_keys(repo)
 
     def search_component(self, terms, lang=None, repo=None):
-        rename = '<LocalName xml:lang="(%s|en)">.*?%s.*?</LocalName>'
-        resum = '<Summary xml:lang="(%s|en)">.*?%s.*?</Summary>'
-        redesc = '<Description xml:lang="(%s|en)">.*?%s.*?</Description>'
+        rename = '<LocalName xml:lang="({0}|en)">.*?{1}.*?</LocalName>'
+        resum = '<Summary xml:lang="({0}|en)">.*?{1}.*?</Summary>'
+        redesc = '<Description xml:lang="({0}|en)">.*?{1}.*?</Description>'
 
         if not lang:
             lang = inary.sxml.autoxml.LocalText.get_lang()
         found = []
         for name, xml in self.cdb.get_items_iter(repo):
-            if name not in found and terms == [term for term in terms if re.compile(rename % (lang, term), re.I).search(xml) or \
-                                                         re.compile(resum % (lang, term), re.I).search(xml) or \
-                                                         re.compile(redesc % (lang, term), re.I).search(xml)]:
+            if name not in found and terms == [term for term in terms if re.compile(rename.format(lang, term), re.I).search(xml) or \
+                                                         re.compile(resum.format(lang, term), re.I).search(xml) or \
+                                                         re.compile(redesc.format(lang, term), re.I).search(xml)]:
                 found.append(name)
         return found
 
@@ -84,7 +84,7 @@ class ComponentDB(lazydb.LazyDB):
     def get_component(self, component_name, repo = None):
 
         if not self.has_component(component_name, repo):
-            raise Exception(_('Component %s not found') % component_name)
+            raise Exception(_('Component {} not found').format(component_name))
 
         component = Component.Component()
         component.parse(self.cdb.get_item(component_name, repo))

@@ -65,7 +65,7 @@ class Package:
         try:
             self.impl = archive.ArchiveZip(self.filepath, 'zip', mode)
         except IOError as e:
-            raise Error(_("Cannot open package file: %s") % e)
+            raise Error(_("Cannot open package file: {}").format(e))
 
         self.install_archive = None
 
@@ -86,7 +86,7 @@ class Package:
         self.format = format or Package.default_format
 
         if self.format not in Package.formats:
-            raise Error(_("Unsupported package format: %s") % format)
+            raise Error(_("Unsupported package format: {}").format(format))
 
         self.tmp_dir = tmp_dir or ctx.config.tmp_dir()
 
@@ -100,11 +100,10 @@ class Package:
             except inary.fetcher.FetchError:
                 # Bug 3465
                 if ctx.get_option('reinstall'):
-                    raise Error(_("There was a problem while fetching '%s'.\nThe package "
-                    "may have been upgraded. Please try to upgrade the package.") % url);
+                    raise Error(_("There was a problem while fetching '{}'.\nThe package may have been upgraded. Please try to upgrade the package.").format(url))
                 raise
         else:
-            ctx.ui.info(_('%s [cached]') % url.filename())
+            ctx.ui.info(_('{} [cached]').format(url.filename()))
 
     def add_to_package(self, fn, an=None):
         """Add a file or directory to package"""

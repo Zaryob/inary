@@ -59,10 +59,10 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
             name, indexuri = self.args
 
             if ctx.get_option('no_fetch'):
-                if not ctx.ui.confirm(_('Add %s repository without updating the database?\nBy confirming '
+                if not ctx.ui.confirm(_('Add {} repository without updating the database?\nBy confirming '
                                         'this you are also adding the repository to your system without '
                                         'checking the distribution of the repository.\n'
-                                        'Do you want to continue?') % name):
+                                        'Do you want to continue?').format(name)):
                     return
 
             Reactor.add_repo(name, indexuri, ctx.get_option('at'))
@@ -71,7 +71,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
                 try:
                     Reactor.update_repo(name)
                 except (inary.Error, IOError):
-                    warning = _("%s repository could not be reached. Removing %s from system.") % (name, name)
+                    warning = _("{0} repository could not be reached. Removing {0} from system.").format(name)
                     self.warn_and_remove(warning, name)
         else:
             self.help()

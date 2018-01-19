@@ -93,13 +93,13 @@ class FstabEntry(object):
 
     def __str__(self):
         return """\
-fs_spec: %s
-fs_file: %s
-fs_vfstype: %s
-fs_mntopts: %s
-fs_freq: %s
-fs_passno: %s
-""" % (self.__fs_spec,
+fs_spec: {0}
+fs_file: {1}
+fs_vfstype: {2}
+fs_mntopts: {3}
+fs_freq: {4}
+fs_passno: {5}
+""".format(self.__fs_spec,
                     self.__fs_file,
                     self.__fs_vfstype,
                     self.__fs_mntopts,

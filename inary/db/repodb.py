@@ -113,7 +113,7 @@ class RepoOrder:
 
     def _update(self, doc):
         repos_file = os.path.join(ctx.config.info_dir(), ctx.const.repos)
-        open(repos_file, "w").write("%s\n" % doc.toPrettyString())
+        open(repos_file, "w").write("{}\n".format(doc.toPrettyString()))
         self._doc = None
         self.repos = self._get_repos()
 
@@ -165,7 +165,7 @@ class RepoDB(lazydb.LazyDB):
                 index_path = os.path.splitext(index_path)[0]
 
         if not os.path.exists(index_path):
-            ctx.ui.warning(_("%s repository needs to be updated") % repo_name)
+            ctx.ui.warning(_("{} repository needs to be updated").format(repo_name))
             return ciksemel.newDocument("INARY")
 
         try:
@@ -267,5 +267,5 @@ class RepoDB(lazydb.LazyDB):
         if not compatible:
             self.deactivate_repo(name)
             raise IncompatibleRepoError(
-                    _("Repository '%s' is not compatible with your "
-                      "distribution. Repository is disabled.") % name)
+                    _("Repository '{}' is not compatible with your distribution. Repository is disabled.").format(name))
+

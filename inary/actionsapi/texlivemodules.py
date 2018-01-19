@@ -28,7 +28,7 @@ from inary.actionsapi.shelltools import *
 from inary.actionsapi.inarytools import dodoc, dodir, domove, dosym, insinto, removeDir
 
 
-WorkDir = "%s-%s" % (get.srcNAME(), get.srcVERSION().split('_')[-1])
+WorkDir = "{0.srcNAME()}-{0.srcVERSION().split('_')[-1]}".format(get)
 
 class CompileError(inary.actionsapi.Error):
     def __init__(self, value=''):
@@ -86,83 +86,83 @@ def install(parameters = ''):
 
 def createSymlinksFormat2Engines():
     '''Create symlinks from format to engines'''
-    for formatfile in ls("%s/texmf/fmtutil/format*.cnf" % get.curDIR()):
+    for formatfile in ls("{}/texmf/fmtutil/format*.cnf".format(get.curDIR())):
         symfile = open(formatfile, "r")
         for line in symfile.readlines():
             if not line.startswith("#"):
                 symbin = line.split(None)
                 if "cont-" in symbin[0] or "metafun" in symbin[0] or "mptopdf" in symbin[0]:
-                     ctx.ui.info(_('Symlink %s skipped (special case)') % symbin[0])
+                     ctx.ui.info(_('Symlink {} skipped (special case)').format(symbin[0]))
                 elif "mf" in symbin[0]:
-                    ctx.ui.info(_('Symlink %s -> %s skipped (texlive-core takes care of it.') % (symbin[0], symbin[1]))
+                    ctx.ui.info(_('Symlink {0[0]} -> {0[1]} skipped (texlive-core takes care of it.').format(symbin))
                 else:
                     if symbin[0] == symbin[1]:
-                        ctx.ui.info(_('Symlink %s -> %s skipped.') % (symbin[0], symbin[1]))
-                    elif can_access_file("%s/usr/bin/%s" % (get.installDIR(), symbin[0])):
-                        ctx.ui.info(_('Symlink %s skipped (file exists.)') % symbin[0])
+                        ctx.ui.info(_('Symlink {0[0]} -> {0[1]} skipped.').format(symbin))
+                    elif can_access_file("{0}/usr/bin/{1}".format(get.installDIR(), symbin[0])):
+                        ctx.ui.info(_('Symlink {} skipped (file exists.)').format(symbin[0]))
                     else:
-                        ctx.ui.info(_('Making symlink from %s to %s') % (symbin[0], symbin[1]))
+                        ctx.ui.info(_('Making symlink from {0[0]} to {0[1]}').format(symbin))
                         dodir("/usr/bin")
-                        sym(symbin[1], "%s/usr/bin/%s" % (get.installDIR(), symbin[0]))
+                        sym(symbin[1], "{0}/usr/bin/{1}".format(get.installDIR(), symbin[0]))
         symfile.close()
 
 def installDocFiles():
     '''Installing docs'''
     if "documentation" in get.srcNAME():
-        if os.path.isdir("%s/texmf-doc" % get.curDIR()):
-            copytree("texmf-doc", "%s/usr/share/texmf-doc" % get.installDIR())
+        if os.path.isdir("{}/texmf-doc".format(get.curDIR())):
+            copytree("texmf-doc", "{}/usr/share/texmf-doc".format(get.installDIR()))
     else:
         for removedir in ["texmf", "texmf-dist"]:
-            if os.path.isdir("%s/%s/doc/" % (get.curDIR(), removedir)):
-                shutil.rmtree("%s/%s/doc" % (get.curDIR(),removedir))
+            if os.path.isdir("{0}/{1}/doc/".format(get.curDIR(), removedir)):
+                shutil.rmtree("{0}/{1}/doc".format(get.curDIR(),removedir))
 
 def installTexmfFiles():
     '''Installing texmf, texmf-dist, tlpkg, texmf-var'''
     for installdoc in ["texmf", "texmf-dist", "tlpkg", "texmf-var"]:
-        if os.path.isdir("%s/%s" % (get.curDIR(), installdoc)):
+        if os.path.isdir("{0}/{1}".format(get.curDIR(), installdoc)):
             if not installdoc == "texmf-var":
-                shutil.copytree(installdoc, "%s/usr/share/%s" % (get.installDIR(),installdoc))
+                shutil.copytree(installdoc, "{0}/usr/share/{1}".format(get.installDIR(),installdoc))
             else:
-                copytree(installdoc, "%s/var/lib/texmf" % get.installDIR())
+                copytree(installdoc, "{}/var/lib/texmf".format(get.installDIR()))
 
 def installConfigFiles():
     '''Installing config files'''
-    if can_access_file("%s/%s.cfg" % (get.curDIR(), get.srcNAME())):
-        insinto("/etc/texmf/updmap.d", "%s/%s.cfg" % ( get.curDIR(), get.srcNAME()))
+    if can_access_file("{0.curDIR()}/{0.srcNAME()}.cfg".format(get)):
+        insinto("/etc/texmf/updmap.d", "{0.curDIR()}/{0.srcNAME()}.cfg".format(get))
 
-    if can_access_file("%s/%s-config.ps" % (get.curDIR(), get.srcNAME())):
-        insinto("/etc/texmf/dvips.d", "%s/%s-config.ps" % (get.curDIR(), get.srcNAME()))
+    if can_access_file("{0.curDIR()}/{0.srcNAME()}.config.ps".format(get)):
+        insinto("/etc/texmf/dvips.d", "{0.curDIR()}/{0.srcNAME()}.config.ps".format(get))
 
-    if can_access_file("%s/%s-config" % (get.curDIR(), get.srcNAME())):
-        insinto("/etc/texmf/dvipdfm/config", "%s/%s-config" % (get.curDIR(), get.srcNAME()))
+    if can_access_file("{0.curDIR()}/{0.srcNAME()}.config".format(get)):
+        insinto("/etc/texmf/dvipdfm/config", "{0.curDIR()}/{0.srcNAME()}.config".format(get))
 
-    if can_access_file("%s/language.%s.def" % (get.curDIR(), get.srcNAME())):
-        insinto("/etc/texmf/language.def.d", "%s/language.%s.def" % (get.curDIR(), get.srcNAME()))
+    if can_access_file("{0.curDIR()}/language/{0.srcNAME().def}.config".format(get)):
+        insinto("/etc/texmf/language.def.d", "{0.curDIR()}/language.{0.srcNAME()}.def".format(get))
 
-    if can_access_file("%s/language.%s.dat" % (get.curDIR(), get.srcNAME())):
-        insinto( "/etc/texmf/language.dat.d", "%s/language.%s.dat" % (get.curDIR(), get.srcNAME()))
+    if can_access_file("{0.curDIR()}/language.{0.srcNAME()}.dat".format(get)):
+        insinto("/etc/texmf/language.dat.d", "{0.curDIR()}/language.{0.srcNAME()}.dat".format())
 
 def handleConfigFiles():
     '''Handling config files'''
-    for root, dirs,files in os.walk("%s/usr/share/texmf" % get.installDIR()):
+    for root, dirs,files in os.walk("{}/usr/share/texmf".format(get.installDIR())):
         if not ("config" in root or "doc" in root):
             for configFile in files:
                 if configFile.endswith(("cfg", "cnf")):
                     dirname = root.split("/")[-1]
-                    if not os.path.isdir("%s/etc/texmf/%s.d" % (get.installDIR(),dirname)):
-                        ctx.ui.info(_('Creating /etc/texmf/%s.d') % dirname)
-                        dodir("/etc/texmf/%s.d" % dirname)
-                    ctx.ui.info(_('Moving (and symlinking) /usr/share/texmf/%s to /etc/texmf/%s.d') % (configFile,dirname))
-                    domove("/usr/share/texmf/%s/%s" % (dirname,configFile), "/etc/texmf/%s.d" % dirname)
-                    dosym("/etc/texmf/%s.d/%s" % (dirname, configFile), "/usr/share/texmf/%s/%s" %(dirname, configFile))
+                    if not os.path.isdir("{0}/etc/texmf/{1}.d".format(get.installDIR(),dirname)):
+                        ctx.ui.info(_('Creating /etc/texmf/{}.d').format(dirname))
+                        dodir("/etc/texmf/{}.d".format(dirname))
+                    ctx.ui.info(_('Moving (and symlinking) /usr/share/texmf/{0} to /etc/texmf/{1}.d').format(configFile,dirname))
+                    domove("/usr/share/texmf/{0}/{1}".format(dirname,configFile), "/etc/texmf/{}.d".format(dirname))
+                    dosym("/etc/texmf/{0}.d/{1}".format(dirname, configFile), "/usr/share/texmf/{0}/{1}".format(dirname, configFile))
 
 def addFormat(parameters):
     '''Add format files'''
-    if not os.path.isdir("%s/texmf/fmtutil/" % get.curDIR()):
-        makedirs("%s/texmf/fmtutil/" % get.curDIR())
-    if not os.path.isfile("%s/texmf/fmtutil/format.%s.cnf" % (get.curDIR(),get.srcNAME())):
-        cnf_file = open("%s/texmf/fmtutil/format.%s.cnf" % (get.curDIR(),get.srcNAME()), "w")
-        cnf_file.write("# Generated for %s by actionsapi/texlivemodules.py\n" % get.srcNAME())
+    if not os.path.isdir("{}/texmf/fmtutil/".format(get.curDIR())):
+        makedirs("{}/texmf/fmtutil/".format(get.curDIR()))
+    if not os.path.isfile("{0.curDIR()}/texmf/fmtutil/format.{0.srcNAME()}.cnf".format(get)):
+        cnf_file = open("{0.curDIR()}/texmf/fmtutil/format.{0.srcNAME()}.cnf".format(get), "w")
+        cnf_file.write("# Generated for {} by actionsapi/texlivemodules.py\n".format(get.srcNAME()))
         cnf_file.close()
 
     # TODO: Use regex for code simplification
@@ -179,34 +179,34 @@ def addFormat(parameters):
             elif not pair[0] == 'patterns':
                 para_dict["patterns"] = '-'
 
-    cnf_file = open('%s/texmf/fmtutil/format.%s.cnf' % (get.curDIR(),get.srcNAME()), 'a')
-    cnf_file.write("%s\t%s\t%s\t%s\n" % (para_dict["name"], para_dict["engine"], para_dict["patterns"], para_dict["options"]))
+    cnf_file = open('{0.curDIR()}/texmf/fmtutil/format.{0.srcNAME()}.cnf'.format(get), 'a')
+    cnf_file.write('{0["name"]}\t{0["engine"]}\t{0["patterns"]}\t{0["options"]}\n'.format(para_dict))
     cnf_file.close()
 
 def moveSources():
     reloc = "texmf-dist"
 
     for tlpobjfile in os.listdir("tlpkg/tlpobj/"):
-        jobsfile=open("tlpkg/tlpobj/%s" % tlpobjfile, "r")
+        jobsfile=open("tlpkg/tlpobj/{}".format(tlpobjfile), "r")
         for line in jobsfile.readlines():
             if "RELOC" in line:
                 path = line.split("/", 1)[-1]
                 path = path.strip()
                 filename = path.split("/", -1)
                 dirname = os.path.dirname(path)
-                if not os.path.isdir("%s/%s" % (reloc,dirname)):
-                    os.system("mkdir -p %s/%s" % (reloc,dirname))
-                shutil.move("%s" % path , "%s/%s" % (reloc,dirname))
+                if not os.path.isdir("{0}/{1}".format(reloc,dirname)):
+                    os.system("mkdir -p {0}/{1}".format(reloc,dirname))
+                shutil.move("{}".format(path) , "{0}/{1}".format(reloc,dirname))
 
 def buildFormatFiles():
     '''Build format files'''
-    if os.path.isdir("%s/texmf/fmtutil/" % get.curDIR()):
-        for formatfile in ls("%s/texmf/fmtutil/format*.cnf" % get.curDIR()):
-            makedirs("%s/texmf-var/web2c/" % get.curDIR())
-            ctx.ui.info(_('Building format file %s') % formatfile)
-            export("TEXMFHOME", "%s/texmf:/%stexmf-dist:%s/texmf-var" %(get.curDIR(), get.curDIR(), get.curDIR() ))
+    if os.path.isdir("{}/texmf/fmtutil/".format(get.curDIR())):
+        for formatfile in ls("{}/texmf/fmtutil/format*.cnf".format(get.curDIR())):
+            makedirs("{}/texmf-var/web2c/".format(get.curDIR()))
+            ctx.ui.info(_('Building format file {}').format(formatfile))
+            export("TEXMFHOME", "{0}/texmf:/{0}texmf-dist:{0}/texmf-var".format(get.curDIR()))
             export("VARTEXFONTS", "fonts")
-            system("env -u TEXINPUTS fmtutil --cnffile %s --fmtdir texmf-var/web2c --all" % formatfile)
+            system("env -u TEXINPUTS fmtutil --cnffile {} --fmtdir texmf-var/web2c --all".format(formatfile))
 
 def addLanguageDat(parameter):
     '''Create language.*.dat files'''
@@ -217,13 +217,13 @@ def addLanguageDat(parameter):
         if len(pair) == 2: #That's just a caution, the pair should have two items, not more not less
             para_dict[pair[0]] = pair[1]
 
-    language_dat = open('%s/language.%s.dat' % (get.curDIR(),get.srcNAME())  , 'a')
-    language_dat.write("%s\t%s\n" % (para_dict["name"], para_dict["file"]))
+    language_dat = open('{0.curDIR()}/language.{0.srcNAME()}.dat'.format(get)  , 'a')
+    language_dat.write('{0["name"]}\t{0["file"]}\n"'.format(para_dict))
     language_dat.close()
 
     if "synonyms" in para_dict:
-        language_dat = open('%s/language.%s.dat' % (get.curDIR(),get.srcNAME())  , 'a')
-        language_dat.write("=%s\n" % para_dict["synonyms"])
+        language_dat = open('{0.curDIR()}/language.{0.srcNAME()}.dat'.format(get)  , 'a')
+        language_dat.write("={}\n".format(para_dict["synonyms"]))
         language_dat.close()
 
 def addLanguageDef(parameter):
@@ -259,25 +259,25 @@ def generateConfigFiles():
                 command = splitline[1]
                 parameter = splitline[2].strip()
                 if command == "addMap":
-                    echo("%s/%s.cfg" % (get.curDIR(), get.srcNAME()), "Map %s" % parameter)
-                    ctx.ui.info(_('Map %s is added to %s/%s.cfg') % (parameter, get.curDIR(), get.srcNAME()))
+                    echo("{0.curDIR()}/{0.srcNAME()}.cfg".format(get), "Map {}".format(parameter))
+                    ctx.ui.info(_('Map {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg').format(parameter, get))
                 elif command == "addMixedMap":
-                    echo("%s/%s.cfg" % (get.curDIR(), get.srcNAME()), "MixedMap %s" % parameter)
-                    ctx.ui.info(_('MixedMap %s is added to %s/%s.cfg') % (parameter, get.curDIR(), get.srcNAME()))
+                    echo("{0.curDIR()}/{0.srcNAME()}.cfg".format(get), "MixedMap {}".format(parameter))
+                    ctx.ui.info(_('MixedMap {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg').format(parameter, get))
                 elif command == "addDvipsMap":
-                    echo("%s/%s-config.ps" % (get.curDIR(), get.srcNAME()), "p +%s" % parameter)
-                    ctx.ui.info(_('p +%s is added to %s/%s-config.ps') % (parameter, get.curDIR(), get.srcNAME()))
+                    echo("{0.curDIR()}/{0.srcNAME()}-config.ps".format(get), "p +{}".format(parameter))
+                    ctx.ui.info(_('p +{0} is added to {1.curDIR()}/{1.srcNAME()}-config.ps').format(parameter, get))
                 elif command == "addDvipdfmMap":
-                    echo("%s/%s-config" % (get.curDIR(), get.srcNAME()), "f %s" % parameter)
-                    ctx.ui.info(_('f %s is added to %s/%s-config') % (parameter, get.curDIR(), get.srcNAME()))
+                    echo("{0.curDIR()}/{0.srcNAME()}-config".format(get), "f {}".format(parameter))
+                    ctx.ui.info(_('f {0} is added to {1.curDIR()}/{1.srcNAME()}-config').format(parameter, get))
                 elif command == "AddHyphen":
                     addLanguageDat(parameter)
                     addLanguageDef(parameter)
                 elif command == "AddFormat":
                     addFormat(parameter)
                 elif command == "BuildFormat":
-                    ctx.ui.info(_('Language file  %s  already generated.') % parameter)
+                    ctx.ui.info(_('Language file  {}  already generated.').format(parameter))
                 elif command == "BuildLanguageDat":
-                    ctx.ui.info(_('No rule to proccess %s. Please file a bug.') % command)
+                    ctx.ui.info(_('No rule to proccess {}. Please file a bug.').format(command))
         jobsfile.close()
 

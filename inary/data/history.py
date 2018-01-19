@@ -42,7 +42,7 @@ class Repo(metaclass = autoxml.autoxml):
         # "update", "remove", "add"
         operation = ""
         if self.operation == "update":
-            return _("%s repository is updated.") % self.name
+            return _("{0} repository is updated.").format(self.name)
         elif self.operation == "add":
             pass # TBD
         elif self.operation == "remove":
@@ -62,17 +62,17 @@ class Package(metaclass = autoxml.autoxml):
         operation = ""
         if self.operation == "upgrade":
             if self.type == "delta":
-                return _("%s is upgraded from %s to %s with delta.") % (self.name, self.before, self.after)
+                return _("{0} is upgraded from {1} to {2} with delta.").format(self.name, self.before, self.after)
             else:
-                return _("%s is upgraded from %s to %s.") % (self.name, self.before, self.after)
+                return _("{0} is upgraded from {1} to {2}.").format(self.name, self.before, self.after)
         elif self.operation == "remove":
-            return _("%s %s is removed.") % (self.name, self.before)
+            return _("{0} {1} is removed.").format(self.name, self.before)
         elif self.operation == "install":
-            return _("%s %s is installed.") % (self.name, self.after)
+            return _("{0} {1} is installed.").format(self.name, self.after)
         elif self.operation == "reinstall":
-            return _("%s %s is reinstalled.") % (self.name, self.after)
+            return _("{0} {1} is reinstalled.").format(self.name, self.after)
         elif self.operation == "downgrade":
-            return _("%s is downgraded from %s to %s.") % (self.name, self.before, self.after)
+            return _("{0} is downgraded from {1} to {2}.").format(self.name, self.before, self.after)
         else:
             return ""
 
@@ -100,7 +100,7 @@ class History(xmlfile.XmlFile, metaclass=autoxml.autoxml):
             raise Exception(_("Unknown package operation"))
 
         opno = self._get_latest()
-        self.histfile = "%s_%s.xml" % (opno, operation)
+        self.histfile = "{}_{}.xml".format(opno, operation)
 
         year, month, day, hour, minute = time.localtime()[0:5]
         self.operation.type = operation

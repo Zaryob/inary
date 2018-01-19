@@ -29,7 +29,7 @@ def emerge(A):
     # A was a list, remove duplicates and expand components
     A = [str(x) for x in A]
     A_0 = A = inary.operations.helper.expand_src_components(set(A))
-    ctx.ui.debug('A = %s' % str(A))
+    ctx.ui.debug('A = {}'.format(str(A)))
 
     if len(A)==0:
         ctx.ui.info(_('No packages to emerge.'))
@@ -92,7 +92,7 @@ def plan_emerge(A):
         if sourcedb.has_spec(name):
             return sourcedb.get_spec(name)
         else:
-            raise Exception(_('Cannot find source package: %s') % name)
+            raise Exception(_('Cannot find source package: {}').format(name))
     def get_src(name):
         return get_spec(name).source
     def add_src(src):

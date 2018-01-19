@@ -48,16 +48,14 @@ def check_conflicts(order, packagedb):
     (C, D, pkg_conflicts) = inary.analyzer.conflict.calculate_conflicts(order, packagedb)
 
     if D:
-        raise Exception(_("Selected packages [%s] are in conflict with each other.") %
-                    util.strlist(list(D)))
+        raise Exception(_("Selected packages [{}] are in conflict with each other.").format(util.strlist(list(D))))
 
     if pkg_conflicts:
         conflicts = ""
         for pkg in list(pkg_conflicts.keys()):
-            conflicts += _("[%s conflicts with: %s]\n") % (pkg, util.strlist(pkg_conflicts[pkg]))
+            conflicts += _("[{0} conflicts with: {1}]\n").format(pkg, util.strlist(pkg_conflicts[pkg]))
 
-        ctx.ui.info(_("The following packages have conflicts:\n%s") %
-                    conflicts)
+        ctx.ui.info(_("The following packages have conflicts:\n{}").format(conflicts))
 
         if not ctx.ui.confirm(_('Remove the following conflicting packages?')):
             raise Exception(_("Conflicting packages should be removed to continue"))
@@ -111,8 +109,8 @@ def calculate_download_sizes(order):
             # check the file and sha1sum to be sure it _is_ the cached package
             if os.path.exists(path) and util.sha1_file(path) == pkg_hash:
                 cached_size += pkg_size
-            elif os.path.exists("%s.part" % path):
-                cached_size += os.stat("%s.part" % path).st_size
+            elif os.path.exists("{}.part".format(path)):
+                cached_size += os.stat("{}.part".format(path)).st_size
 
         total_size += pkg_size
 

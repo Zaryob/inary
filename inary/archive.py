@@ -345,7 +345,7 @@ class ArchiveTar(ArchiveBase):
                                 if not new_path.startswith("/"):
                                     new_path = "/" + new_path
                                 print("Moving:", old_path, " -> ", new_path)
-                                os.system("mv -f %s %s" % (old_path, new_path))
+                                os.system("mv -f {0} {1}".format(old_path, new_path))
                             else:
                                 raise
                     try:
@@ -358,12 +358,12 @@ class ArchiveTar(ArchiveBase):
                                 if path.endswith("dbus") and "pid" in files:
                                     startservices.append("dbus")
                                     for service in ("NetworkManager", "connman", "wicd"):
-                                        if os.path.isfile("/etc/mudur/services/enabled/%s" % service):
+                                        if os.path.isfile("/etc/scom/services/enabled/{}".format(service)):
                                             startservices.append(service)
                                             os.system("service % stop" % service)
                                     os.system("service dbus stop")
                                     break
-                            os.system("mv -f %s %s.old" % (tarinfo.name, tarinfo.name))
+                            os.system("mv -f {0} {0}.old".format(tarinfo.name))
                         else:
                             raise
 
@@ -377,14 +377,14 @@ class ArchiveTar(ArchiveBase):
                     # Try to rename directory
                     try:
                         os.rename(tarinfo.name,
-                                  "%s.renamed-by-inary" % tarinfo.name)
+                                  "{}.renamed-by-inary".format(tarinfo.name))
                     except:
                         # If fails, try to remove it
                         shutil.rmtree(tarinfo.name)
 
             try:
                 self.tar.extract(tarinfo)
-                for service in startservices: os.system("service %s start" % service)
+                for service in startservices: os.system("service {} start".format(service))
             except OSError as e:
                 # Handle the case where an upper directory cannot
                 # be created because of a conflict with an existing
@@ -518,11 +518,9 @@ class ArchiveTarZ(ArchiveBase):
         self.file_path = util.remove_suffix(".Z", self.file_path)
 
         ret, out, err = util.run_batch(
-                "uncompress -cf %s.Z > %s" % (self.file_path, self.file_path))
+                "uncompress -cf {0}.Z > {0}".format(self.file_path))
         if ret != 0:
-            raise RuntimeError(
-                        _("Problem occured while uncompressing %s.Z file")
-                        % self.file_path)
+            raise RuntimeError(_("Problem occured while uncompressing {}.Z file").format(self.file_path))
 
         self.tar = tarfile.open(self.file_path)
 
@@ -583,7 +581,7 @@ class Archive7Zip(ArchiveBase):
         """Unpack 7z archive to a given target directory(target_dir)."""
 
         # e.g. 7z x -bd -o<target_directory> <archive.7z>
-        inary.util.run_batch("%s x -bd -o%s %s" % (self.cmd, target_dir, self.file_path))
+        inary.util.run_batch("{0} x -bd -o{1} {2}".format(self.cmd, target_dir, self.file_path))
 
 
 class ArchiveZip(ArchiveBase):

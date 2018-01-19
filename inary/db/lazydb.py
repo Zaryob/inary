@@ -49,10 +49,10 @@ class LazyDB(Singleton):
         return self.initialized
 
     def __cache_file(self):
-        return util.join_path(ctx.config.cache_root_dir(), "%s.cache" % self.__class__.__name__.translate(lower_map))
+        return util.join_path(ctx.config.cache_root_dir(), "{}.cache".format(self.__class__.__name__.translate(lower_map)))
 
     def __cache_version_file(self):
-        return "%s.version" % self.__cache_file()
+        return "{}.version".format(self.__cache_file())
 
     def __cache_file_version(self):
         try:
@@ -114,7 +114,7 @@ class LazyDB(Singleton):
             start = time.time()
             self.__init()
             end = time.time()
-            ctx.ui.debug("%s initialized in %s." % (self.__class__.__name__, end - start))
+            ctx.ui.debug("{0} initialized in {1}.".format(self.__class__.__name__, end - start))
             self.initialized = True
 
         if attr not in self.__dict__:

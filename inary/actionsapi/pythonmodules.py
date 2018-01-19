@@ -52,18 +52,18 @@ class RunTimeError(inary.actionsapi.Error):
 
 def configure(parameters = '', pyVer = ''):
     '''does python setup.py configure'''
-    if system('python%s setup.py configure %s' % (pyVer, parameters)):
+    if system('python{0} setup.py configure {1}'.format(pyVer, parameters)):
         raise ConfigureError(_('Configuration failed.'))
 
 
 def compile(parameters = '', pyVer = ''):
     '''compile source with given parameters.'''
-    if system('python%s setup.py build %s' % (pyVer, parameters)):
+    if system('python{0} setup.py build {1}'.format(pyVer, parameters)):
         raise CompileError(_('Make failed.'))
 
 def install(parameters = '', pyVer = ''):
     '''does python setup.py install'''
-    if system('python%s setup.py install --root=%s --no-compile -O0 %s' % (pyVer, get.installDIR(), parameters)):
+    if system('python{0} setup.py install --root={1} --no-compile -O0 {2}'.format(pyVer, get.installDIR(), parameters)):
         raise InstallError(_('Install failed.'))
 
     docFiles = ('AUTHORS', 'CHANGELOG', 'CONTRIBUTORS', 'COPYING*', 'COPYRIGHT',
@@ -77,13 +77,13 @@ def install(parameters = '', pyVer = ''):
 
 def run(parameters = '', pyVer = ''):
     '''executes parameters with python'''
-    if system('python%s %s' % (pyVer, parameters)):
-        raise RunTimeError(_('Running %s failed.') % parameters)
+    if system('python{0} {1}'.format(pyVer, parameters)):
+        raise RunTimeError(_('Running {} failed.').format(parameters))
 
-def fixCompiledPy(lookInto = '/usr/lib/%s/' % get.curPYTHON()):
+def fixCompiledPy(lookInto = '/usr/lib/{}/'.format(get.curPYTHON())):
     ''' cleans *.py[co] from packages '''
-    for root, dirs, files in os.walk('%s/%s' % (get.installDIR(),lookInto)):
+    for root, dirs, files in os.walk('{0}/{1}'.format(get.installDIR(),lookInto)):
         for compiledFile in files:
             if compiledFile.endswith('.pyc') or compiledFile.endswith('.pyo'):
-                if can_access_file('%s/%s' % (root,compiledFile)):
-                    unlink('%s/%s' % (root,compiledFile))
+                if can_access_file('{0}/{1}'.format(root,compiledFile)):
+                    unlink('{0}/{1}'.format(root,compiledFile))

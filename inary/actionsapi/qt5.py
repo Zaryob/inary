@@ -27,27 +27,27 @@ from inary.actionsapi import shelltools
 
 basename = "qt5"
 
-prefix = "/%s" % get.defaultprefixDIR()
-libdir = "%s/lib" % prefix
-libexecdir = "%s/libexec" % prefix
+prefix = "/{}".format(get.defaultprefixDIR())
+libdir = "{}/lib".format(prefix)
+libexecdir = "{}/libexec".format(prefix)
 sysconfdir= "/etc"
-bindir = "%s/bin" % prefix
-includedir = "%s/include" % prefix
+bindir = "{}/bin".format(prefix)
+includedir = "{}/include".format(prefix)
 
 # qt5 spesific variables
 
-headerdir = "%s/include/%s" % (prefix, basename)
-datadir = "%s/share/%s" % (prefix, basename)
-docdir = "/%s/%s" % (get.docDIR(), basename)
-archdatadir = "%s/%s" % (libdir, basename)
-examplesdir = "%s/%s/examples" % (libdir, basename)
-importdir = "%s/%s/imports" % (libdir, basename)
-plugindir = "%s/%s/plugins" % (libdir, basename)
-qmldir = "%s/%s/qmldir" % (libdir, basename)
-testdir = "%s/share/%s" % (prefix, basename)
-translationdir = "%s/translations" % datadir
+headerdir = "{}/include/{}".format(prefix, basename)
+datadir = "{}/share/{}".format(prefix, basename)
+docdir = "/{}/{}".format(get.docDIR(), basename)
+archdatadir = "{}/{}".format(libdir, basename)
+examplesdir = "{}/{}/examples".format(libdir, basename)
+importdir = "{}/{}/imports".format(libdir, basename)
+plugindir = "{}/{}/plugins".format(libdir, basename)
+qmldir = "{}/{}/qmldir".format(libdir, basename)
+testdir = "{}/share/{}".format(prefix, basename)
+translationdir = "{}/translations".format(datadir)
 
-qmake = "%s/qmake-qt5" % bindir
+qmake = "{}/qmake-qt5" % bindir
 
 class ConfigureError(inary.actionsapi.Error):
     def __init__(self, value=''):
@@ -57,17 +57,17 @@ class ConfigureError(inary.actionsapi.Error):
 
 def configure(projectfile='', parameters='', installPrefix=prefix):
     if projectfile != '' and not shelltools.can_access_file(projectfile):
-        raise ConfigureError(_("Project file '%s' not found.") % projectfile)
+        raise ConfigureError(_("Project file '{}' not found.").format(projectfile))
 
     profiles = glob.glob("*.pro")
     if len(profiles) > 1 and projectfile == '':
         raise ConfigureError(_("It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)") % ", ".join(profiles))
 
-    shelltools.system("%s -makefile %s PREFIX='%s' QMAKE_CFLAGS+='%s' QMAKE_CXXFLAGS+='%s' %s" % (qmake, projectfile, installPrefix, get.CFLAGS(), get.CXXFLAGS(), parameters))
+    shelltools.system("{0} -makefile {1} PREFIX='{2}' QMAKE_CFLAGS+='{3.CFLAGS()}' QMAKE_CXXFLAGS+='{3.CXXFLAGS()}' {5}".format(qmake, projectfile, installPrefix, get, parameters))
 
 def make(parameters=''):
     cmaketools.make(parameters)
 
 def install(parameters='', argument='install'):
-    cmaketools.install('INSTALL_ROOT="%s" %s' % (get.installDIR(), parameters), argument)
+    cmaketools.install('INSTALL_ROOT="{0}" {1}'.format(get.installDIR(), parameters), argument)
 

@@ -62,9 +62,9 @@ Lists previous operations.""")
 
     def print_history(self):
         for operation in self.historydb.get_last(ctx.get_option('last')):
-            print(_("Operation #%d: %s") % (operation.no, opttrans[operation.type]))
-            print(_("Date: %s %s") % (operation.date, operation.time))
-            print()
+            print(_("Operation #{0}: {1}").format(operation.no, opttrans[operation.type]))
+            print(_("Date: {0.date} {0.time}").format(operation))
+
 
             if operation.type == "snapshot":
                 print(_("    * There are %d packages in this snapshot.") % len(operation.packages))
