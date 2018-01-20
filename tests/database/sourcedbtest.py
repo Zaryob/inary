@@ -37,7 +37,7 @@ class SourceDBTestCase(testcase.TestCase):
         assert spec.source.partOf == "applications.network"
 
     def testGetSpecOfRepository(self):
-        spec = self.sourcedb.get_spec("ethtool", "pardus-2007-src")
+        spec = self.sourcedb.get_spec("ethtool", "repo1-src")
         assert spec.source.name == "ethtool"
         assert spec.source.partOf == "applications.network"
 
@@ -45,7 +45,7 @@ class SourceDBTestCase(testcase.TestCase):
         spec, repo = self.sourcedb.get_spec_repo("ethtool")
         assert spec.source.name == "ethtool"
         assert spec.source.partOf == "applications.network"
-        assert repo == "pardus-2007-src"
+        assert repo == "repo1-src"
 
     def testGetSourceFromPackage(self):
         # FIXME: Add multi package from source to createrepo.py
@@ -56,7 +56,7 @@ class SourceDBTestCase(testcase.TestCase):
         packages = self.sourcedb.search_spec(["open", "ssl"])
         assert set(["openssl"]) == set(packages)
 
-        packages = self.sourcedb.search_spec(["bogo", "filter"], repo="pardus-2007-src")
+        packages = self.sourcedb.search_spec(["bogo", "filter"], repo="repo1-src")
         assert set(["bogofilter"]) == set(packages)
 
 

@@ -5,13 +5,13 @@ from inary import uri
 from inary import archive
 from inary import sourcearchive
 from inary import fetcher
-from inary.specfile import SpecFile
+from inary.data.specfile import SpecFile
 from os.path import join, exists
 
 class ArchiveTestCase(unittest.TestCase):
 
     def testTarUnpack(self):
-        spec = SpecFile('repos/pardus-2007/system/base/curl/pspec.xml')
+        spec = SpecFile('repos/repo1/system/base/curl/pspec.xml')
         targetDir = '/tmp/tests'
         archives = sourcearchive.SourceArchives(spec)
         archives.unpack(targetDir)
@@ -20,7 +20,7 @@ class ArchiveTestCase(unittest.TestCase):
 
 
     def testUnpackTarCond(self):
-        spec = SpecFile('repos/pardus-2007/system/base/curl/pspec.xml')
+        spec = SpecFile('repos/repo1/system/base/curl/pspec.xml')
         targetDir = '/tmp'
         archives = sourcearchive.SourceArchives(spec)
         for archive in spec.source.archive:
@@ -32,7 +32,7 @@ class ArchiveTestCase(unittest.TestCase):
             assert archive.type == 'targz'
 
     def testZipUnpack(self):
-        spec = SpecFile('repos/pardus-2007/system/base/openssl/pspec.xml')
+        spec = SpecFile('repos/repo1/system/base/openssl/pspec.xml')
         targetDir = '/tmp/tests'
         archives = sourcearchive.SourceArchives(spec)
         archives.fetch()
@@ -40,7 +40,7 @@ class ArchiveTestCase(unittest.TestCase):
         assert not exists(targetDir + '/openssl')
 
     def testMakeZip(self):
-        spec = SpecFile('repos/pardus-2007/system/base/openssl/pspec.xml')
+        spec = SpecFile('repos/repo1/system/base/openssl/pspec.xml')
         targetDir = '/tmp/tests'
         archives = sourcearchive.SourceArchives(spec)
         archives.fetch(interactive = False)

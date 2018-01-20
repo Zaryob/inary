@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from inary import metadata
+from inary.data import metadata
 from inary import util
 
 class MetadataTestCase(unittest.TestCase):

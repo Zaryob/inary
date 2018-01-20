@@ -2,7 +2,7 @@ import unittest
 import os
 from inary import uri
 from inary.file import File
-from inary.specfile import SpecFile
+from inary.data.specfile import SpecFile
 
 class UriTestCase(unittest.TestCase):
 

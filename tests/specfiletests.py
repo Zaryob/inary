@@ -1,12 +1,12 @@
 import unittest
 import os
-import inary.specfile as specfile
+import inary.data.specfile as specfile
 import inary.util as util
 
 class SpecFileTestCase(unittest.TestCase):
     def setUp(self):
         self.spec = specfile.SpecFile()
-        self.spec.read('repos/pardus-2007/system/base/curl/pspec.xml')
+        self.spec.read('repos/repo1/system/base/curl/pspec.xml')
 
     def testGetSourceVersion(self):
         assert '0.3' == self.spec.getSourceVersion()
@@ -19,8 +19,8 @@ class SpecFileTestCase(unittest.TestCase):
             self.fail()
 
     def testCopy(self):
-        self.spec.read('repos/pardus-2007/system/base/curl/pspec.xml')
-        self.spec.write('repos/pardus-2007/system/base/curl/pspec.xml')
+        self.spec.read('repos/repo1/system/base/curl/pspec.xml')
+        self.spec.write('repos/repo1/system/base/curl/pspec.xml')
 
 
 

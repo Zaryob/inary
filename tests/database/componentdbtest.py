@@ -20,16 +20,16 @@ class ComponentDBTestCase(testcase.TestCase):
         self.componentdb = inary.db.componentdb.ComponentDB()
 
     def testHasComponent(self):
-        assert self.componentdb.has_component("system.base", "pardus-2007")
-        assert not self.componentdb.has_component("hede.hodo", "pardus-2007")
-        assert self.componentdb.has_component("applications.network", "contrib-2007")
-        assert not self.componentdb.has_component("hede.hodo", "contrib-2007")
+        assert self.componentdb.has_component("system.base", "repo1")
+        assert not self.componentdb.has_component("hede.hodo", "repo1")
+        assert self.componentdb.has_component("applications.network", "repo2")
+        assert not self.componentdb.has_component("hede.hodo", "repo2")
         assert self.componentdb.has_component("applications.network")
 
     def testListComponents(self):
-        assert set(self.componentdb.list_components("pardus-2007")) == set(["system", "system.base", 
+        assert set(self.componentdb.list_components("repo1")) == set(["system", "system.base", 
                                                                             "applications", "applications.network"])
-        assert set(self.componentdb.list_components("contrib-2007")) == set(["applications", "applications.util",
+        assert set(self.componentdb.list_components("repo2")) == set(["applications", "applications.util",
                                                                              "applications.network"])
         assert set(self.componentdb.list_components()) == set(["system", "system.base", 
                                                                "applications", "applications.network",
@@ -41,7 +41,7 @@ class ComponentDBTestCase(testcase.TestCase):
         assert "ncftp" in component.packages
         assert "lynx" not in component.packages
 
-        component = self.componentdb.get_component("applications.network", "contrib-2007")
+        component = self.componentdb.get_component("applications.network", "repo2")
         assert component.name == "applications.network"
         assert "lynx" in component.packages
         assert "ncftp" not in component.packages
@@ -57,11 +57,11 @@ class ComponentDBTestCase(testcase.TestCase):
         assert "ncftp" in packages
         assert "lynx" not in packages
 
-        packages = self.componentdb.get_packages("applications.network", "contrib-2007")
+        packages = self.componentdb.get_packages("applications.network", "repo2")
         assert "lynx" in packages
         assert "ncftp" not in packages
 
-        packages = self.componentdb.get_packages("applications", "contrib-2007", walk = True)
+        packages = self.componentdb.get_packages("applications", "repo2", walk = True)
         assert "cpulimit" and "lynx" in packages
         assert "ncftp" not in packages
 
@@ -78,8 +78,8 @@ class ComponentDBTestCase(testcase.TestCase):
         packages = self.componentdb.search_component(["applic"])
         assert set(packages) == set(['applications', 'applications.network', 'applications.util'])
 
-        packages = self.componentdb.search_component(["system", "base"], repo="pardus-2007")
+        packages = self.componentdb.search_component(["system", "base"], repo="repo1")
         assert set(packages) == set(["system.base"])
 
-        packages = self.componentdb.search_component(["system", "base"], repo="contrib-2007")
+        packages = self.componentdb.search_component(["system", "base"], repo="repo2")
         assert not packages

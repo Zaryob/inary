@@ -20,14 +20,14 @@ class RepoDBTestCase(testcase.TestCase):
         self.repodb = inary.db.repodb.RepoDB()
 
     def testAddRemoveRepo(self):
-        assert "contrib-2007-src" not in self.repodb.list_repos()
-        repo = inary.db.repodb.Repo(pisi.uri.URI("repos/contrib-2007/pisi-index.xml"))
-        self.repodb.add_repo("contrib-2007-src", repo)
-        assert "contrib-2007-src" in self.repodb.list_repos()
-        self.repodb.remove_repo("contrib-2007-src")
-        assert "contrib-2007" in self.repodb.list_repos()
-        assert "pardus-2007" in self.repodb.list_repos()
-        assert "contrib-2007-src" not in self.repodb.list_repos()
+        assert "repo2-src" not in self.repodb.list_repos()
+        repo = inary.db.repodb.Repo(pisi.uri.URI("repos/repo2/pisi-index.xml"))
+        self.repodb.add_repo("repo2-src", repo)
+        assert "repo2-src" in self.repodb.list_repos()
+        self.repodb.remove_repo("repo2-src")
+        assert "repo2" in self.repodb.list_repos()
+        assert "repo1" in self.repodb.list_repos()
+        assert "repo2-src" not in self.repodb.list_repos()
 
     def testAddRemoveCycle(self):
         for r in range(30):
@@ -40,25 +40,25 @@ class RepoDBTestCase(testcase.TestCase):
         assert "test-repo" not in self.repodb.list_repos()
 
     def testListRepos(self):
-        assert set(self.repodb.list_repos()) == set(['pardus-2007', 'contrib-2007', 'pardus-2007-src'])
+        assert set(self.repodb.list_repos()) == set(['repo1', 'repo2', 'repo1-src'])
 
     def testGetSourceRepos(self):
-        assert set(self.repodb.get_source_repos()) == set(['pardus-2007-src'])
+        assert set(self.repodb.get_source_repos()) == set(['repo1-src'])
 
     def testGetBinaryRepos(self):
-        assert set(self.repodb.get_binary_repos()) == set(['pardus-2007', 'contrib-2007'])
+        assert set(self.repodb.get_binary_repos()) == set(['repo1', 'repo2'])
 
     def testGetRepo(self):
-        repo = self.repodb.get_repo("pardus-2007")
+        repo = self.repodb.get_repo("repo1")
         uri = repo.indexuri
-        assert uri.get_uri() == "repos/pardus-2007-bin/inary-index.xml"
+        assert uri.get_uri() == "repos/repo1-bin/inary-index.xml"
 
     def testRepoOrder(self):
         repoorder = inary.db.repodb.RepoOrder()
-        assert repoorder.get_order() == ['pardus-2007', 'contrib-2007', 'pardus-2007-src']
+        assert repoorder.get_order() == ['repo1', 'repo2', 'repo1-src']
 
         repoorder.add("test-repo", "http://test-repo/inary-index.xml")
-        assert repoorder.get_order() == ['pardus-2007', 'contrib-2007', 'pardus-2007-src', 'test-repo']
+        assert repoorder.get_order() == ['repo1', 'repo2', 'repo1-src', 'test-repo']
 
         repoorder.remove("test-repo")
-        assert repoorder.get_order() == ['pardus-2007', 'contrib-2007', 'pardus-2007-src']
+        assert repoorder.get_order() == ['repo1', 'repo2', 'repo1-src']

@@ -15,7 +15,7 @@ import inary
 
 class FilesDBTestCase(testcase.TestCase):
 
-    filesdb = inary.db.filesdb.FilesDB()
+    filesdb = inary.db.filesldb.FilesLDB()
 
     def testHasFile(self):
         assert not self.filesdb.has_file("usr/bin/ethtool")

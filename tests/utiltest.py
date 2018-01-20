@@ -18,13 +18,13 @@ class UtilTestCase(unittest.TestCase):
         assert 1 == run_logged('rm')
 
     def testXtermTitle(self):
-        xterm_title('pardus')
+        xterm_title('sulin')
         xterm_title_reset()
 
     #path processing functions tests
     def testSplitPath(self):
         assert ['usr', 'local', 'src'] == splitpath('usr/local/src')
-        assert ['usr', 'lib', 'pardus'] == splitpath('usr/lib/pardus')
+        assert ['usr', 'lib', 'sulin'] == splitpath('usr/lib/pardus')
 
     def testSubPath(self):
         self.assertTrue(subpath('usr','usr'))
@@ -45,7 +45,7 @@ class UtilTestCase(unittest.TestCase):
 
     #file/directory related functions tests
     def testCheckFile(self):
-        assert check_file('/etc/inary/pisi.conf')
+        assert check_file('/etc/inary/inary.conf')
         assert check_file('/usr/bin/aatest')
 
     def testCleanDir(self):
@@ -54,10 +54,10 @@ class UtilTestCase(unittest.TestCase):
         assert not 'tmp/inary-root' == clean_dir('usr/tmp')
 
     def testDirSize(self):
-        self.assertNotEqual(dir_size('usr/lib/pardus'),2940)
+        self.assertNotEqual(dir_size('usr/lib/sulin'),2940)
         self.assertNotEqual(dir_size('usr/lib'),65)
 
     def testCopyFile(self):
-        copy_file('/etc/inary/pisi.conf', '/tmp/pisi-test1')
-        copy_file('/etc/inary/sandbox.conf', '/tmp/pisi-test2')
-        copy_file_stat('/etc/inary/pisi.conf', '/tmp/pisi-test1')
+        copy_file('/etc/inary/inary.conf', '/tmp/inary-test1')
+        copy_file('/etc/inary/sandbox.conf', '/tmp/inary-test2')
+        copy_file_stat('/etc/inary/inary.conf', '/tmp/inary-test1')

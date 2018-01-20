@@ -15,9 +15,9 @@ class TestCase(unittest.TestCase):
         ctx.config.values.general.distribution_release = "2007"
 
         if not inary.api.list_repos():
-            inary.api.add_repo("pardus-2007", "repos/pardus-2007-bin/pisi-index.xml")
-            inary.api.add_repo("contrib-2007", "repos/contrib-2007-bin/pisi-index.xml")
-            inary.api.add_repo("pardus-2007-src", "repos/pardus-2007/pisi-index.xml")
-            inary.api.update_repo("pardus-2007")
-            inary.api.update_repo("contrib-2007")
-            inary.api.update_repo("pardus-2007-src")
+            inary.api.add_repo("repo1", "repos/repo1-bin/pisi-index.xml")
+            inary.api.add_repo("repo2", "repos/repo2-bin/pisi-index.xml")
+            inary.api.add_repo("repo1-src", "repos/repo1/pisi-index.xml")
+            inary.api.update_repo("repo1")
+            inary.api.update_repo("repo2")
+            inary.api.update_repo("repo1-src")

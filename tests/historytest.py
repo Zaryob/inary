@@ -1,5 +1,5 @@
 import unittest
-import inary.relation
+import inary.data.relation
 
 class HistoryTestCase(unittest.TestCase):
 
