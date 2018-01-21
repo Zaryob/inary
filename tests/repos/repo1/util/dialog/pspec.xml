@@ -1,0 +1,100 @@
+<?xml version="1.0" ?>
+<!DOCTYPE INARY SYSTEM "http://www.sulin.org.tr/projeler/inary/inary-spec.dtd">
+<INARY>
+    <Source>
+        <Name>dialog</Name>
+        <Homepage>http://hightek.org/dialog</Homepage>
+        <Packager>
+            <Name>Inary Testers</Name>
+            <Email>admins@sulin.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>Tool to display dialog boxes in a shell</Summary>
+        <Description>Dialog is a utility to create nice user interfaces to shell scripts, or other scripting languages, such as perl. It is non-graphical so it can be run in the console or an xterm.</Description>
+        <Archive sha1sum="6945b302bf5b107c12f6009c25699d265b45579c" type="targz">ftp://invisible-island.net/dialog/dialog-1.1-20100428.tgz</Archive>
+    </Source>
+
+    <Package>
+        <Name>dialog</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="10">
+            <Date>2010-08-20</Date>
+            <Version>1.1_20100428</Version>
+            <Comment>Version bump</Comment>
+            <Name>Inary Testers</Name>
+            <Email>admins@sulin.org</Email>
+        </Update>
+        <Update release="9">
+            <Date>2009-04-14</Date>
+            <Version>1.1_20080819</Version>
+            <Comment>Version bump</Comment>
+            <Name>Inary Testers</Name>
+            <Email>admins@sulin.org</Email>
+        </Update>
+        <Update release="8">
+            <Date>2008-01-05</Date>
+            <Version>1.1_20071028</Version>
+            <Comment>Version bump</Comment>
+            <Name>Inary Testers</Name>
+            <Email>admins@sulin.org</Email>
+        </Update>
+        <Update release="7">
+            <Date>2007-07-09</Date>
+            <Version>1.1_20070704</Version>
+            <Comment>Version bump</Comment>
+            <Name>Inary Testers</Name>
+            <Email>admins@sulin.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2007-05-31</Date>
+            <Version>1.1_20070528</Version>
+            <Comment>Version bump</Comment>
+            <Name>Inary Testers</Name>
+            <Email>admins@sulin.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2007-04-07</Date>
+            <Version>1.1_20070325</Version>
+            <Comment>Version bump</Comment>
+            <Name>Inary Testers</Name>
+            <Email>admins@sulin.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2006-06-01</Date>
+            <Version>1.0_20060221</Version>
+            <Name>Inary Testers</Name>
+            <Email>admins@sulin.org</Email>
+            <Comment>Version bump</Comment>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-25</Date>
+            <Version>1.0_20051030</Version>
+            <Comment>Version Upgrade</Comment>
+            <Name>Inary Testers</Name>
+            <Email>admins@sulin.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-05</Date>
+            <Version>1.0_20051030</Version>
+            <Comment>Version Upgrade</Comment>
+            <Name>Inary Testers</Name>
+            <Email>admins@sulin.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-27</Date>
+            <Version>1.0_20050206</Version>
+            <Comment>First release.</Comment>
+            <Name>Inary Testers</Name>
+            <Email>admins@sulin.org</Email>
+        </Update>
+    </History>
+</INARY>
