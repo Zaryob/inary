@@ -15,8 +15,8 @@ import shutil
 import time
 
 pspecTemplate = """<?xml version="1.0" ?>
-<!DOCTYPE SPAM SYSTEM "http://www.pardus.org.tr/projeler/spam/spam-spec.dtd">
-<SPAM>
+<!DOCTYPE INARY SYSTEM "http://www.pardus.org.tr/projeler/spam/spam-spec.dtd">
+<INARY>
     <Source>
         <Name>%(package)s</Name>
         <Homepage>%(homepage)s</Homepage>
@@ -50,7 +50,7 @@ pspecTemplate = """<?xml version="1.0" ?>
             <Email>%(packager_email)s</Email>
         </Update>
     </History>
-</SPAM>
+</INARY>
 """
 
 componentsTemplate = """
@@ -68,9 +68,9 @@ componentsTemplate = """
 """
 
 componentTemplate = """
-<SPAM>
+<INARY>
     <Name>%(name)s</Name>
-</SPAM>
+</INARY>
 """
 
 actionsTemplate = """
@@ -84,7 +84,7 @@ def install():
 """
 
 distributionTemplate = """
-<SPAM>
+<INARY>
     <SourceName>%(sourcename)s</SourceName>
     <Version>%(version)s</Version>
     <Description>%(description)s</Description>
@@ -92,7 +92,7 @@ distributionTemplate = """
     <Obsoletes>
         %(obsoletes)s
     </Obsoletes>
-</SPAM>
+</INARY>
 """
 
 class Component:
@@ -200,7 +200,7 @@ class Repository:
         os.chdir(cur_dir)
 
     def create_components_xml(self):
-        xml_content = "<SPAM>\n    <Components>"
+        xml_content = "<INARY>\n    <Components>"
 
         for root, dirs, files in os.walk("."):
             if "component.xml" in files:
@@ -211,14 +211,14 @@ class Repository:
                                    "summary": component,
                                    "description": component}
 
-        xml_content += "    </Components>\n</SPAM>\n"
+        xml_content += "    </Components>\n</INARY>\n"
 
         open("components.xml", "w").write(xml_content)
 
 
 class Pardus2007Repo(Repository):
     def __init__(self):
-        Repository.__init__(self, "pardus-2007", "2007", [], ["wengophone", "rar"])
+        Repository.__init__(self, "main-2018", "2018", [], ["wengophone", "rar"])
         
     def create(self):
 

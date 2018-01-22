@@ -17,7 +17,7 @@ class ConfigFileTestCase(unittest.TestCase):
         cf = self.cf
         self.assertEqual(cf.build.jobs, cf.build['jobs'])
         assert not cf.build.defaults.generateDebug
-        assert cf.build.defaults.enableSandbox  #default is taken from 2009.2
+        assert cf.build.defaults.enableSandbox  
         self.assertEqual(cf.build.compressionlevel, cf.build['compressionlevel'])
         self.assertEqual(cf.build.fallback, cf.build['fallback'])
 
@@ -37,10 +37,10 @@ class ConfigFileTestCase(unittest.TestCase):
 
     def testPisiConfValues(self):
         cf = self.cf
-        self.assertEqual(cf.dirs.kde_dir, '/usr/kde/4')
+        self.assertEqual(cf.dirs.kde_dir, '/usr/')
         self.assertEqual(cf.dirs.compiled_packages_dir, '/var/cache/inary/packages')
-        self.assertEqual(cf.general.architecture, 'i686')
-        self.assertEqual(cf.general.distribution_release, '2009')
+        self.assertEqual(cf.general.architecture, 'x86_64')
+        self.assertEqual(cf.general.distribution_release, '2018')
 
     def testValuesExists(self):
         cf = self.cf

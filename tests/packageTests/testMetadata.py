@@ -8,7 +8,7 @@ class MetadataTestCase(unittest.TestCase):
 
     def testRead(self):
         md = metadata.MetaData()
-        md.read("metadata.xml")
+        md.read("../addfiles/metadata.xml")
         self.assertEqual(md.package.license,["As-Is"])
         self.assertEqual(md.package.version,"1.7")
         self.assertEqual(md.package.installedSize,149691)

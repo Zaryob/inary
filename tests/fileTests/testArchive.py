@@ -11,7 +11,7 @@ from os.path import join, exists
 class ArchiveTestCase(unittest.TestCase):
 
     def testTarUnpack(self):
-        spec = SpecFile('repos/repo1/system/base/curl/pspec.xml')
+        spec = SpecFile('../repos/repo1/system/base/bash/pspec.xml')
         targetDir = '/tmp/tests'
         archives = sourcearchive.SourceArchives(spec)
         archives.unpack(targetDir)
@@ -20,7 +20,7 @@ class ArchiveTestCase(unittest.TestCase):
 
 
     def testUnpackTarCond(self):
-        spec = SpecFile('repos/repo1/system/base/curl/pspec.xml')
+        spec = SpecFile('../repos/repo1/system/devel/xorg-util/pspec.xml')
         targetDir = '/tmp'
         archives = sourcearchive.SourceArchives(spec)
         for archive in spec.source.archive:
@@ -29,10 +29,10 @@ class ArchiveTestCase(unittest.TestCase):
             if util.sha1_file(filePath) != archive.sha1sum:
                 fetch = fetcher.Fetcher(archive.uri, targetDir)
                 fetch.fetch()
-            assert archive.type == 'targz'
+            assert archive.type == 'tarbz2'
 
     def testZipUnpack(self):
-        spec = SpecFile('repos/repo1/system/base/openssl/pspec.xml')
+        spec = SpecFile('../repos/repo1/multimedia/converter/uif2iso/pspec.xml')
         targetDir = '/tmp/tests'
         archives = sourcearchive.SourceArchives(spec)
         archives.fetch()
@@ -40,7 +40,7 @@ class ArchiveTestCase(unittest.TestCase):
         assert not exists(targetDir + '/openssl')
 
     def testMakeZip(self):
-        spec = SpecFile('repos/repo1/system/base/openssl/pspec.xml')
+        spec = SpecFile('../repos/repo1/multimedia/converter/uif2iso/pspec.xml')
         targetDir = '/tmp/tests'
         archives = sourcearchive.SourceArchives(spec)
         archives.fetch(interactive = False)

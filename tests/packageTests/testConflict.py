@@ -23,7 +23,7 @@ class ConflictTestCase(unittest.TestCase):
     def testConflictCheck(self):
         # In our sample repo1, inary.analyzer.conflicts with bar.
         # If this fails, it may affect database test case results.
-        inary.api.add_repo("repo1", "repos/repo1-bin/inary-index.xml")
+        inary.api.add_repo("repo1", "../repos/repo1-bin/inary-index.xml")
         inary.api.update_repo("repo1")
         inary.api.install(["inary"])
 
@@ -41,14 +41,14 @@ class ConflictTestCase(unittest.TestCase):
 
     def testInterRepoCrossConflicts(self):
         #If this fails, it may affect database test case results
-        inary.api.add_repo("repo1", "repos/repo1-bin/inary-index.xml")
+        inary.api.add_repo("repo1", "../repos/repo1-bin/inary-index.xml")
         inary.api.update_repo("repo1")
 
         inary.api.install(["inary", "foo"])
         before = inary.api.list_installed()
         inary.api.remove_repo("repo1")
 
-        inary.api.add_repo("repo2", "repos/repo2-bin/inary-index.xml")
+        inary.api.add_repo("repo2", "../repos/repo2-bin/inary-index.xml")
         inary.api.update_repo("repo2")
         inary.api.upgrade(["inary"])
         after = inary.api.list_installed()

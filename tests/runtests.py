@@ -18,36 +18,50 @@ import database
 import inary
 import inary.context as ctx
 
-from database.repodbtest import RepoDBTestCase
-from database.packagedbtest import PackageDBTestCase
-from database.sourcedbtest import SourceDBTestCase
-from database.installdbtest import InstallDBTestCase
-from database.componentdbtest import ComponentDBTestCase
-from database.filesdbtest import FilesDBTestCase
-from database.lazydbtest import LazyDBTestCase
-from database.itembyrepotest import ItemByRepoTestCase
+#Database tests
+from databaseTests.testRepoDB import RepoDBTestCase
+from databaseTests.testPackageDB import PackageDBTestCase
+from databaseTests.testSourceDB import SourceDBTestCase
+from databaseTests.testInstallDB import InstallDBTestCase
+from databaseTests.testComponentDB import ComponentDBTestCase
+from databaseTests.testFilesLDB import FilesDBTestCase
+from databaseTests.testLazyDB import LazyDBTestCase
+from databaseTests.testItembyRepo import ItemByRepoTestCase
 
-from archivetests import ArchiveTestCase
-from configfiletest import ConfigFileTestCase
-from conflicttests import ConflictTestCase
-from constanttest import ConstantTestCase
-from dependencytest import DependencyTestCase
-from fetchtest import FetchTestCase
-from filetest import FileTestCase
-from filestest import FilesTestCase
-from graphtest import GraphTestCase
-from historytest import HistoryTestCase
-from metadatatest import MetadataTestCase
-from mirrorstest import MirrorsTestCase
-from packagetest import PackageTestCase
-from relationtest import RelationTestCase
-from replacetest import ReplaceTestCase
-from shelltest import ShellTestCase
-from specfiletests import SpecFileTestCase
-from srcarchivetest import SourceArchiveTestCase
-from uritest import UriTestCase
-from utiltest import UtilTestCase
-from versiontest import VersionTestCase
+#Package Tests
+from packageTests.testConflict import ConflictTestCase
+from packageTests.testDependency import DependencyTestCase
+from packageTests.testFiles import FilesTestCase
+from packageTests.testHistory import HistoryTestCase
+from packageTests.testMetadata import MetadataTestCase
+from packageTests.testPackage import PackageTestCase
+from packageTests.testPspec import SpecFileTestCase
+from packageTests.relationtest import RelationTestCase
+from packageTests.testReplace import ReplaceTestCase
+
+#File Tests
+from fileTests.testArchive import ArchiveTestCase
+from fileTests.testFile import FileTestCase
+from fileTests.testSrcArchive import SourceArchiveTestCase
+
+#Inary Tests
+from inaryTests.testConstant import ConstantTestCase
+from inaryTests.testConfigFile import ConfigFileTestCase
+from inaryTests.testMirrors import MirrorsTestCase
+from inaryTests.testShell import ShellTestCase
+from inaryTests.testUri import UriTestCase
+from inaryTests.testUtil import UtilTestCase
+from inaryTests.testVersion import VersionTestCase
+
+#Process Tests
+from processTests.testFetch import FetchTestCase
+
+#Type Tests
+from typeTests.testOO import OOTestCase
+from typeTests.testPgraph import GraphTestCase
+
+# XML tests
+from xmlTests.testAutoxml import AutoxmlTestCase
 
 def setup():
     options = inary.config.Options()
