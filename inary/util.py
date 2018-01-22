@@ -578,7 +578,7 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
             # Which means stderr and stdout directed so they are None
             raise Error(_("ERROR: patch ({}) failed").format((patchFile)))
         else:
-            raise Error(_("ERROR: patch ({}) failed: {}").format(patchFile, out))
+            raise Error(_("ERROR: patch ({0}) failed: {1}").format(patchFile, out))
 
     os.chdir(cwd)
 

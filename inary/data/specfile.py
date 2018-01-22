@@ -450,7 +450,7 @@ class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                     break
 
     def __str__(self):
-        s = _('Name: {}, version: {}, release: {}\n').format(
+        s = _('Name: {0}, version: {1}, release: {2}\n').format(
               self.source.name, self.history[0].version, self.history[0].release)
         s += _('Summary: {}\n').format(str(self.source.summary))
         s += _('Description: {}\n').format(str(self.source.description))

@@ -189,7 +189,7 @@ class Install(AtomicOperation):
             int(release)
             inary.version.make_version(version)
         except (ValueError, inary.version.InvalidVersionError):
-            raise Error(_("{}-{} is not a valid INARY version format").format(version, release))
+            raise Error(_("{0}-{1} is not a valid INARY version format").format(version, release))
 
     def check_relations(self):
         # check dependencies
