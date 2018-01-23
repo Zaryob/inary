@@ -13,7 +13,6 @@
 
 import os
 import unittest
-import database
 
 import inary
 import inary.context as ctx
@@ -36,7 +35,7 @@ from packageTests.testHistory import HistoryTestCase
 from packageTests.testMetadata import MetadataTestCase
 from packageTests.testPackage import PackageTestCase
 from packageTests.testPspec import SpecFileTestCase
-from packageTests.relationtest import RelationTestCase
+from packageTests.testRelations import RelationTestCase
 from packageTests.testReplace import ReplaceTestCase
 
 #File Tests
@@ -45,23 +44,22 @@ from fileTests.testFile import FileTestCase
 from fileTests.testSrcArchive import SourceArchiveTestCase
 
 #Inary Tests
-from inaryTests.testConstant import ConstantTestCase
+from inaryTests.testConstants import ConstantTestCase
 from inaryTests.testConfigFile import ConfigFileTestCase
+from inaryTests.testFetcher import FetchTestCase
 from inaryTests.testMirrors import MirrorsTestCase
 from inaryTests.testShell import ShellTestCase
 from inaryTests.testUri import UriTestCase
 from inaryTests.testUtil import UtilTestCase
 from inaryTests.testVersion import VersionTestCase
 
-#Process Tests
-from processTests.testFetch import FetchTestCase
 
 #Type Tests
 from typeTests.testOO import OOTestCase
 from typeTests.testPgraph import GraphTestCase
 
 # XML tests
-from xmlTests.testAutoxml import AutoxmlTestCase
+from xmlTests.testAutoxml import AutoXmlTestCase
 
 def setup():
     options = inary.config.Options()
@@ -69,8 +67,8 @@ def setup():
     inary.api.set_options(options)
     inary.api.set_scom(False)
 
-    ctx.config.values.general.distribution = "Pardus"
-    ctx.config.values.general.distribution_release = "2007"
+    ctx.config.values.general.distribution = "Sulin"
+    ctx.config.values.general.distribution_release = "2018"
 
 
 if __name__ == '__main__':

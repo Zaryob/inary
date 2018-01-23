@@ -15,6 +15,7 @@
 import os
 import time
 import fcntl
+import platform
 
 
 class FileLock:
@@ -89,3 +90,76 @@ def get_kernel_option(option):
                     args[arg] = ""
 
     return args
+
+def get_cpu_count():
+        """
+        This function part of portage
+        Copyright 2015 Gentoo Foundation
+        Distributed under the terms of the GNU General Public License v2
+
+        Using:
+	Try to obtain the number of CPUs available.
+	@return: Number of CPUs or None if unable to obtain.
+	"""
+
+	try:
+		import multiprocessing
+		return multiprocessing.cpu_count()
+	except (ImportError, NotImplementedError):
+		return None
+
+def get_vm_info():
+    vm_info = {}
+
+    try:
+        import subprocess
+    except ImportError:
+        raise Exception(_("Module: \"subprocess\" can not import"))
+
+    if platform.system() == 'Linux':
+        try:
+            proc = subprocess.Popen(["free"],
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.STDOUT)
+        except OSError:
+            pass
+        output = proc.communicate()[0].decode('utf-8')
+        if proc.wait() == os.EX_OK:
+            for line in output.splitlines():
+                line = line.split()
+                if len(line) < 2:
+                    continue
+                if line[0] == "Mem:":
+                    try:
+                        vm_info["ram.total"] = int(line[1]) * 1024
+                    except ValueError:
+                        pass
+                    if len(line) > 3:
+                        try:
+                            vm_info["ram.free"] = int(line[3]) * 1024
+                        except ValueError:
+                            pass
+                elif line[0] == "Swap:":
+                    try:
+                        vm_info["swap.total"] = int(line[1]) * 1024
+                    except ValueError:
+                        pass
+                    if len(line) > 3:
+                        try:
+                            vm_info["swap.free"] = int(line[3]) * 1024
+                        except ValueError:
+                            pass
+    else:
+        try:
+            proc = subprocess.Popen(["sysctl", "-a"],
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.STDOUT)
+        except OSError:
+            pass
+        else:
+            output = proc.communicate()[0].decode('utf-8')
+            if proc.wait() == os.EX_OK:
+                for line in output.splitlines():
+                    line = line.split(":", 1)
+                    if len(line) != 2:
+                        continue

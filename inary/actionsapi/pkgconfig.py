@@ -133,7 +133,7 @@ def libraryExists(library):
                                    "{}".format(library)])
     except OSError as exception:
         if exception.errno == 2:
-            raise PkgconfigError(_("pkg-config is not installed on your system."))
+            raise PkgconfigError(_("Package pkgconfig is not installed on your system."))
     else:
         return result == 0
 

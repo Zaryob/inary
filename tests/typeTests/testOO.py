@@ -7,14 +7,13 @@
 #
 # Please read the COPYING file.
 #
-# Author:  Eray Ozkural <eray@pardus.org.tr>
 
 import unittest
 import os
 import time
 
-from pisi import version
-from pisi.oo import *
+from inary import version
+from inary.oo import *
  
 class OOTestCase(unittest.TestCase):
     def setUp(self):
@@ -47,7 +46,7 @@ class OOTestCase(unittest.TestCase):
         try:
             passed = False
             mya.a = 0
-        except ConstError, e:
+        except ConstError as e:
             passed = True
         self.assert_(passed)
 
@@ -70,7 +69,7 @@ class OOTestCase(unittest.TestCase):
         try:
             passed = False
             mya.a = 0
-        except ConstError, e:
+        except ConstError as e:
             passed = True
         self.assert_(passed)
         self.assertEqual(mya.a, 1)

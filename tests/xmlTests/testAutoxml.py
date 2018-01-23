@@ -19,9 +19,6 @@ from inary.sxml import xmlfile
 from inary.sxml import autoxml
 import inary.util as util
 
-suite1 = unittest.makeSuite(AutoXmlTestCase)
-suite2 = unittest.makeSuite(LocalTextTestCase)
-suite = unittest.TestSuite((suite1, suite2))
 class AutoXmlTestCase(unittest.TestCase):
 
     def setUp(self):
@@ -101,3 +98,6 @@ class LocalTextTestCase(unittest.TestCase):
         s = unicode(self.a)
         self.assert_(s!= None and len(s)>=6)
 
+suite1 = unittest.makeSuite(AutoXmlTestCase)
+suite2 = unittest.makeSuite(LocalTextTestCase)
+suite = unittest.TestSuite((suite1, suite2))
