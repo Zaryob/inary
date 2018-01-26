@@ -92,7 +92,7 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                 pkgpath = os.path.join(repo_uri,
                                        util.parse_package_dir_path(fn))
                 if not os.path.isdir(pkgpath): os.makedirs(pkgpath)
-                ctx.ui.info("%-80.80s\r" % (_('Sorting:  %s').format(fn)),
+                ctx.ui.info("%-80.80s\r" % (_('Sorting:  {}').format(fn)),
                             noln = False if ctx.config.get_option("verbose") else True)
                 shutil.copy2(os.path.join(repo_uri, fn), pkgpath)
                 os.remove(os.path.join(repo_uri, fn))

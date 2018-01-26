@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-20 18:22++03\n"
+"POT-Creation-Date: 2018-01-26 10:48++03\n"
 "PO-Revision-Date: 2011-02-04 12:21+0300\n"
 "Last-Translator: Korostil Daniel <ted.korostiled@gmail.com>\n"
 "Language-Team: translation@linux.org.ua\n"
@@ -34,7 +34,7 @@ msgid ""
 "Please file a bug report to <http://bugs.sulin.com.tr>."
 msgstr ""
 "Ноброблено внутрішні винятки.\n"
-"Будь ласка, повідомте про ваду в <http://bugs.inarylinux.org>."
+"Будь ласка, повідомте про ваду в <http://bugs.sulin.org>."
 
 #: inary-cli:55
 msgid "System error. Program terminated."
@@ -65,25 +65,25 @@ msgstr ""
 "Будь ласка, долучіть config.log до звіту про ваду:\n"
 "{}/config.log"
 
-#: inary/actionsapi/autotools.py:82 inary/actionsapi/autotools.py:92
+#: inary/actionsapi/autotools.py:83 inary/actionsapi/autotools.py:93
 #: inary/actionsapi/cmaketools.py:66 inary/actionsapi/kde.py:65
 #: inary/actionsapi/perlmodules.py:55 inary/actionsapi/perlmodules.py:58
 msgid "Configure failed."
 msgstr "Не вдалось налаштувати."
 
-#: inary/actionsapi/autotools.py:84 inary/actionsapi/autotools.py:94
+#: inary/actionsapi/autotools.py:85 inary/actionsapi/autotools.py:95
 #: inary/actionsapi/kde.py:67
 msgid "No configure script found."
 msgstr "Скрипта налаштування не знайдено."
 
-#: inary/actionsapi/autotools.py:102 inary/actionsapi/cmaketools.py:78
+#: inary/actionsapi/autotools.py:103 inary/actionsapi/cmaketools.py:78
 #: inary/actionsapi/kde.py:72 inary/actionsapi/perlmodules.py:64
 #: inary/actionsapi/perlmodules.py:73 inary/actionsapi/pythonmodules.py:62
 #: inary/actionsapi/scons.py:39
 msgid "Make failed."
 msgstr "Не вдалось зібрати."
 
-#: inary/actionsapi/autotools.py:138 inary/actionsapi/autotools.py:149
+#: inary/actionsapi/autotools.py:139 inary/actionsapi/autotools.py:150
 #: inary/actionsapi/cmaketools.py:98 inary/actionsapi/cmaketools.py:106
 #: inary/actionsapi/kde.py:79 inary/actionsapi/pythonmodules.py:67
 #: inary/actionsapi/rubymodules.py:92 inary/actionsapi/rubymodules.py:99
@@ -91,23 +91,23 @@ msgstr "Не вдалось зібрати."
 msgid "Install failed."
 msgstr "Не вдалось установити."
 
-#: inary/actionsapi/autotools.py:160
+#: inary/actionsapi/autotools.py:161
 msgid "Running aclocal failed."
 msgstr "Не вдалось запустити aclocal."
 
-#: inary/actionsapi/autotools.py:165
+#: inary/actionsapi/autotools.py:166
 msgid "Running autoconf failed."
 msgstr "Не вдалось запустити autoconf."
 
-#: inary/actionsapi/autotools.py:170
+#: inary/actionsapi/autotools.py:171
 msgid "Running autoreconf failed."
 msgstr "Не вдалось запустити autoreconf."
 
-#: inary/actionsapi/autotools.py:175
+#: inary/actionsapi/autotools.py:176
 msgid "Running automake failed."
 msgstr "Не вдалось запустити automake."
 
-#: inary/actionsapi/autotools.py:180
+#: inary/actionsapi/autotools.py:181
 msgid "Running autoheader failed."
 msgstr "Не вдалось запустити autoheader."
 
@@ -146,7 +146,7 @@ msgstr "Немає файла з відповідних шаблоном «{}».
 
 #: inary/actionsapi/inarytools.py:193
 #, fuzzy
-msgid "ActionsAPI [rename]: {}: {}"
+msgid "ActionsAPI [rename]: {0}: {1}"
 msgstr "ActionsAPI [rename]: {}: {}"
 
 #: inary/actionsapi/inarytools.py:230
@@ -262,8 +262,12 @@ msgstr "Не вдалось установити через perl."
 
 #: inary/actionsapi/pkgconfig.py:40 inary/actionsapi/pkgconfig.py:59
 #: inary/actionsapi/pkgconfig.py:79 inary/actionsapi/pkgconfig.py:99
-#: inary/actionsapi/pkgconfig.py:118 inary/actionsapi/pkgconfig.py:136
+#: inary/actionsapi/pkgconfig.py:118
 msgid "pkg-config is not installed on your system."
+msgstr ""
+
+#: inary/actionsapi/pkgconfig.py:136
+msgid "Package pkgconfig is not installed on your system."
 msgstr ""
 
 #: inary/actionsapi/pythonmodules.py:56
@@ -280,13 +284,7 @@ msgstr "Не вдалось запустити {}."
 msgid "Project file '{}' not found."
 msgstr "Не знайдено файла проекту «{}»."
 
-#: inary/actionsapi/qt4.py:56
-msgid ""
-"It seems there are more than one .pro file, you must specify one. (Possible ."
-"pro files: {})"
-msgstr ""
-
-#: inary/actionsapi/qt5.py:64
+#: inary/actionsapi/qt4.py:56 inary/actionsapi/qt5.py:64
 msgid ""
 "It seems there are more than one .pro file, you must specify one. (Possible ."
 "pro files: {})"
@@ -314,8 +312,8 @@ msgstr "ActionsAPI [chmod]: жодного файла відповідного �
 
 #: inary/actionsapi/shelltools.py:70
 #, fuzzy
-msgid "ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})"
-msgstr "ActionsAPI [chmod]: немає прав на виконання: {0} (режим: 0{1})\n"
+msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
+msgstr "ActionsAPI [chmod]: немає прав на виконання: %s (режим: 0%o)\n"
 
 #: inary/actionsapi/shelltools.py:72
 #, fuzzy
@@ -349,7 +347,7 @@ msgstr "ActionsAPI [dosym]:  файл уже існує: {}"
 #, fuzzy
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: {}"
 msgstr ""
-"ActionsAPI [chmod]: немає прав на виконання: {} (режим: 0%o)\r\n"
+"ActionsAPI [chmod]: немає прав на виконання: {}"
 "\t"
 
 #: inary/actionsapi/shelltools.py:119
@@ -470,19 +468,19 @@ msgid "Building format file {}"
 msgstr ""
 
 #: inary/actionsapi/texlivemodules.py:263
-msgid "Map {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg"
+msgid "Map {0} is added to {1}/{2}.cfg"
 msgstr ""
 
 #: inary/actionsapi/texlivemodules.py:266
-msgid "MixedMap {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg"
+msgid "MixedMap {0} is added to {1}/{2}.cfg"
 msgstr ""
 
 #: inary/actionsapi/texlivemodules.py:269
-msgid "p +{0} is added to {1.curDIR()}/{1.srcNAME()}-config.ps"
+msgid "p +{0} is added to {1}/{2}-config.ps"
 msgstr ""
 
 #: inary/actionsapi/texlivemodules.py:272
-msgid "f {0} is added to {1.curDIR()}/{1.srcNAME()}-config"
+msgid "f {0} is added to {1}/{2}-config"
 msgstr ""
 
 #: inary/actionsapi/texlivemodules.py:279
@@ -523,6 +521,10 @@ msgstr ""
 msgid " release "
 msgstr ""
 
+#: inary/analyzer/ctypes.py:28
+msgid "Module \"ctypes\" can not import"
+msgstr ""
+
 #: inary/archive.py:523
 msgid "Problem occured while uncompressing {}.Z file"
 msgstr ""
@@ -547,7 +549,7 @@ msgstr ""
 msgid "Installing {0.name}, version {0.version}, release {0.release}"
 msgstr ""
 
-#: inary/atomicoperations.py:192
+#: inary/atomicoperations.py:192 inary/operations/build.py:789
 msgid "{0}-{1} is not a valid INARY version format"
 msgstr ""
 
@@ -724,7 +726,7 @@ msgstr ""
 msgid "Blame for all of the releases"
 msgstr ""
 
-#: inary/cli/blame.py:66 inary/data/specfile.py:369
+#: inary/cli/blame.py:66 inary/data/specfile.py:369 inary/data/specfile.py:453
 msgid "Name: {0}, version: {1}, release: {2}\n"
 msgstr ""
 
@@ -837,7 +839,7 @@ msgstr ""
 msgid "Supported package formats:"
 msgstr ""
 
-#: inary/cli/build.py:167
+#: inary/cli/build.py:167 inary/cli/delta.py:74
 msgid "  {} (default)"
 msgstr ""
 
@@ -912,7 +914,7 @@ msgstr ""
 
 #: inary/cli/check.py:138
 msgid ""
-"Inary was unable to check the integrity of packages which contain files that "
+"Pisi was unable to check the integrity of packages which contain files that "
 "you don't have read access.\n"
 "Running the check under a privileged user may help fixing this problem."
 msgstr ""
@@ -1045,10 +1047,6 @@ msgstr ""
 msgid "Output directory for produced packages."
 msgstr ""
 
-#: inary/cli/delta.py:74
-msgid "  {} (default)"
-msgstr ""
-
 #: inary/cli/disablerepo.py:22
 msgid ""
 "Disable repository\n"
@@ -1159,7 +1157,7 @@ msgstr ""
 msgid "Emerge available packages under given component"
 msgstr ""
 
-#: inary/cli/emerge.py:70
+#: inary/cli/emerge.py:70 inary/cli/emergeup.py:74
 msgid "Output directory: {}"
 msgstr ""
 
@@ -1183,10 +1181,6 @@ msgstr ""
 #, fuzzy
 msgid "emergeup options"
 msgstr "%prog [параметри]"
-
-#: inary/cli/emergeup.py:74
-msgid "Output directory: {}"
-msgstr ""
 
 #: inary/cli/enablerepo.py:22
 msgid ""
@@ -2117,10 +2111,6 @@ msgstr ""
 msgid "File '{}' has invalid XML"
 msgstr ""
 
-#: inary/data/specfile.py:453
-msgid "Name: {}, version: {}, release: {}\n"
-msgstr ""
-
 #: inary/data/specfile.py:459
 msgid "Build Dependencies: "
 msgstr ""
@@ -2129,24 +2119,36 @@ msgstr ""
 msgid "Component {} not found"
 msgstr ""
 
+#: inary/db/filesdb.py:46 inary/db/filesldb.py:40
+msgid "Creating files database..."
+msgstr ""
+
+#: inary/db/filesdb.py:50
+msgid "  ---> Adding '{}' to db... "
+msgstr ""
+
+#: inary/db/filesdb.py:53
+msgid "OK."
+msgstr ""
+
+#: inary/db/filesdb.py:54 inary/db/filesldb.py:47
+msgid "Added files database..."
+msgstr ""
+
+#: inary/db/filesdb.py:84
+msgid "Cleaning files database folder...  "
+msgstr ""
+
+#: inary/db/filesdb.py:87 inary/db/filesldb.py:79
+msgid "done."
+msgstr ""
+
 #: inary/db/filesldb.py:29
 msgid "LevelDB not found! Please install LevelDB and plyvel!"
 msgstr ""
 
-#: inary/db/filesldb.py:40
-msgid "Creating files database..."
-msgstr ""
-
-#: inary/db/filesldb.py:47
-msgid "Added files database..."
-msgstr ""
-
 #: inary/db/filesldb.py:77
 msgid "Cleaning files database folder... "
-msgstr ""
-
-#: inary/db/filesldb.py:79
-msgid "done."
 msgstr ""
 
 #: inary/db/groupdb.py:66 inary/db/groupdb.py:75
@@ -2466,10 +2468,6 @@ msgstr ""
 msgid "Source package '{0}' defines multiple 'Path' tags for {1}"
 msgstr ""
 
-#: inary/operations/build.py:789
-msgid "{0}-{1} is not a valid INARY version format"
-msgstr ""
-
 #: inary/operations/build.py:807
 msgid ""
 "Safety switch: following extra packages in system.devel will be installed: "
@@ -2618,7 +2616,7 @@ msgstr ""
 
 #: inary/operations/downgrade.py:180 inary/operations/install.py:76
 #: inary/operations/upgrade.py:181
-msgid "Total size of package(s): %.2f {}"
+msgid "Total size of package(s): %.2f %s"
 msgstr ""
 
 #: inary/operations/downgrade.py:186 inary/operations/upgrade.py:187
@@ -3294,6 +3292,10 @@ msgstr ""
 
 #: inary/system_literals/localedata.py:265
 msgid "Vietnamese"
+msgstr ""
+
+#: inary/system_literals/sysutils.py:117
+msgid "Module: \"subprocess\" can not import"
 msgstr ""
 
 #: inary/uri.py:78

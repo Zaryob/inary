@@ -61,7 +61,7 @@ def configure(projectfile='', parameters='', installPrefix=prefix):
 
     profiles = glob.glob("*.pro")
     if len(profiles) > 1 and projectfile == '':
-        raise ConfigureError(_("It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)") % ", ".join(profiles))
+        raise ConfigureError(_("It seems there are more than one .pro file, you must specify one. (Possible .pro files: {})").format(", ".join(profiles)))
 
     shelltools.system("{0} -makefile {1} PREFIX='{2}' QMAKE_CFLAGS+='{3.CFLAGS()}' QMAKE_CXXFLAGS+='{3.CXXFLAGS()}' {5}".format(qmake, projectfile, installPrefix, get, parameters))
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-20 18:19++03\n"
+"POT-Creation-Date: 2018-01-26 10:48++03\n"
 "PO-Revision-Date: 2010-07-01 16:01+0200\n"
 "Last-Translator: Davide Siciliano <edivad95@gmail.com>\n"
 "Language-Team: Italian <pardus-translators@pardus.org.tr>\n"
@@ -34,7 +34,7 @@ msgid ""
 "Please file a bug report to <http://bugs.sulin.com.tr>."
 msgstr ""
 "Eccezione interna non gestita.\n"
-"Invia per piacere una segnalazione di un bug  su <http://bugs.inarylinux.org>"
+"Invia per piacere una segnalazione di un bug  su <http://bugs.sulin.org>"
 
 #: inary-cli:55
 msgid "System error. Program terminated."
@@ -65,25 +65,25 @@ msgstr ""
 "Includi per favore anche il file config.log nella segnalazione di bug:\n"
 "{}/config.log"
 
-#: inary/actionsapi/autotools.py:82 inary/actionsapi/autotools.py:92
+#: inary/actionsapi/autotools.py:83 inary/actionsapi/autotools.py:93
 #: inary/actionsapi/cmaketools.py:66 inary/actionsapi/kde.py:65
 #: inary/actionsapi/perlmodules.py:55 inary/actionsapi/perlmodules.py:58
 msgid "Configure failed."
 msgstr "Configure fallito."
 
-#: inary/actionsapi/autotools.py:84 inary/actionsapi/autotools.py:94
+#: inary/actionsapi/autotools.py:85 inary/actionsapi/autotools.py:95
 #: inary/actionsapi/kde.py:67
 msgid "No configure script found."
 msgstr "Nessun script configure trovato."
 
-#: inary/actionsapi/autotools.py:102 inary/actionsapi/cmaketools.py:78
+#: inary/actionsapi/autotools.py:103 inary/actionsapi/cmaketools.py:78
 #: inary/actionsapi/kde.py:72 inary/actionsapi/perlmodules.py:64
 #: inary/actionsapi/perlmodules.py:73 inary/actionsapi/pythonmodules.py:62
 #: inary/actionsapi/scons.py:39
 msgid "Make failed."
 msgstr "Make fallito."
 
-#: inary/actionsapi/autotools.py:138 inary/actionsapi/autotools.py:149
+#: inary/actionsapi/autotools.py:139 inary/actionsapi/autotools.py:150
 #: inary/actionsapi/cmaketools.py:98 inary/actionsapi/cmaketools.py:106
 #: inary/actionsapi/kde.py:79 inary/actionsapi/pythonmodules.py:67
 #: inary/actionsapi/rubymodules.py:92 inary/actionsapi/rubymodules.py:99
@@ -91,23 +91,23 @@ msgstr "Make fallito."
 msgid "Install failed."
 msgstr "Install fallito."
 
-#: inary/actionsapi/autotools.py:160
+#: inary/actionsapi/autotools.py:161
 msgid "Running aclocal failed."
 msgstr "Esecuzione di aclocal fallita."
 
-#: inary/actionsapi/autotools.py:165
+#: inary/actionsapi/autotools.py:166
 msgid "Running autoconf failed."
 msgstr "Esecuzione di autoconf fallita."
 
-#: inary/actionsapi/autotools.py:170
+#: inary/actionsapi/autotools.py:171
 msgid "Running autoreconf failed."
 msgstr "Esecuzione di autoreconf fallita."
 
-#: inary/actionsapi/autotools.py:175
+#: inary/actionsapi/autotools.py:176
 msgid "Running automake failed."
 msgstr "Esecuzione di automake fallita."
 
-#: inary/actionsapi/autotools.py:180
+#: inary/actionsapi/autotools.py:181
 msgid "Running autoheader failed."
 msgstr "Esecuzione di autoheader fallita."
 
@@ -265,7 +265,12 @@ msgstr "install Perl fallito."
 
 #: inary/actionsapi/pkgconfig.py:40 inary/actionsapi/pkgconfig.py:59
 #: inary/actionsapi/pkgconfig.py:79 inary/actionsapi/pkgconfig.py:99
-#: inary/actionsapi/pkgconfig.py:118 inary/actionsapi/pkgconfig.py:136
+#: inary/actionsapi/pkgconfig.py:118
+#, fuzzy
+msgid "pkg-config is not installed on your system."
+msgstr "Il pacchetto pkgconfig non è installato. Impossibile rimuovere."
+
+#: inary/actionsapi/pkgconfig.py:136
 #, fuzzy
 msgid "Package pkgconfig is not installed on your system."
 msgstr "Il pacchetto pkgconfig non è installato. Impossibile rimuovere."
@@ -284,16 +289,8 @@ msgstr "Esecuzione di {} fallita."
 msgid "Project file '{}' not found."
 msgstr "File di progetto {} non trovato."
 
-#: inary/actionsapi/qt4.py:56
+#: inary/actionsapi/qt4.py:56 inary/actionsapi/qt5.py:64
 #, fuzzy
-msgid ""
-"It seems there are more than one .pro file, you must specify one. (Possible ."
-"pro files: {})"
-msgstr ""
-"Sembra che ci siano più di un file .pro, è necessario specificare uno. "
-"(Eventuali file .pro: {})"
-
-#: inary/actionsapi/qt5.py:64
 msgid ""
 "It seems there are more than one .pro file, you must specify one. (Possible ."
 "pro files: {})"
@@ -323,8 +320,8 @@ msgstr "ActionsAPI [chmod]: nessun file con il pattern \"{}\"."
 
 #: inary/actionsapi/shelltools.py:70
 #, fuzzy
-msgid "ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})"
-msgstr "ActionsAPI [chmod]: Operazione non permessa: {0} (modalità: 0{1})"
+msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
+msgstr "ActionsAPI [chmod]: Operazione non permessa: %s (modalità: 0%o)"
 
 #: inary/actionsapi/shelltools.py:72
 #, fuzzy
@@ -492,23 +489,24 @@ msgid "Building format file {}"
 msgstr "costruzione del formato file {}"
 
 #: inary/actionsapi/texlivemodules.py:263
-msgid "Map {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg"
-msgstr "Map {0} aggiunto a {1.curDIR()}/{1.srcNAME()}.cfg"
+#, fuzzy
+msgid "Map {0} is added to {1}/{2}.cfg"
+msgstr "Map {0} è stato aggiunto a {1}/{2}.cfg"
 
 #: inary/actionsapi/texlivemodules.py:266
 #, fuzzy
-msgid "MixedMap {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg"
-msgstr "MixedMap {0} aggiunto a {1.curDIR()}/{1.srcNAME()}.cfg"
+msgid "MixedMap {0} is added to {1}/{2}.cfg"
+msgstr "MixedMap {0} è stato aggiunto a {1}/{2}.cfg"
 
 #: inary/actionsapi/texlivemodules.py:269
 #, fuzzy
-msgid "p +{0} is added to {1.curDIR()}/{1.srcNAME()}-config.ps"
-msgstr "p +{0} si aggiunge alla {1.curDIR()}/{1.srcNAME()}-config.ps"
+msgid "p +{0} is added to {1}/{2}-config.ps"
+msgstr "p +{0} si aggiunge alla {1}/{2}-config.ps"
 
 #: inary/actionsapi/texlivemodules.py:272
 #, fuzzy
-msgid "f {0} is added to {1.curDIR()}/{1.srcNAME()}-config"
-msgstr "f {0} è aggiunto {1.curDIR()}/{1.srcNAME()}-config"
+msgid "f {0} is added to {1}/{2}-config"
+msgstr "f {0} è aggiunto {1}/{2}-config"
 
 #: inary/actionsapi/texlivemodules.py:279
 #, fuzzy
@@ -550,6 +548,10 @@ msgstr " release <= "
 msgid " release "
 msgstr " release "
 
+#: inary/analyzer/ctypes.py:28
+msgid "Module \"ctypes\" can not import"
+msgstr ""
+
 #: inary/archive.py:523
 #, fuzzy
 msgid "Problem occured while uncompressing {}.Z file"
@@ -580,7 +582,7 @@ msgstr "Il pacchetto {} non è stato trovato in alcun repository attivo."
 msgid "Installing {0.name}, version {0.version}, release {0.release}"
 msgstr "Installazione di {0.name}, versione {0.version}, release {0.release}"
 
-#: inary/atomicoperations.py:192
+#: inary/atomicoperations.py:192 inary/operations/build.py:789
 #, fuzzy
 msgid "{0}-{1} is not a valid INARY version format"
 msgstr "{0}-{1} Non è un valido formato di versione Inary"
@@ -795,7 +797,7 @@ msgstr "Blame per il rilascio dato"
 msgid "Blame for all of the releases"
 msgstr "Blame per tutte le versioni"
 
-#: inary/cli/blame.py:66 inary/data/specfile.py:369
+#: inary/cli/blame.py:66 inary/data/specfile.py:369 inary/data/specfile.py:453
 #, fuzzy
 msgid "Name: {0}, version: {1}, release: {2}\n"
 msgstr "Nome: {0}, versione: {1}, release: {2}\n"
@@ -929,7 +931,8 @@ msgstr "Crea pacchetto INARY"
 msgid "Supported package formats:"
 msgstr "Supportati formati di pacchetto:"
 
-#: inary/cli/build.py:167
+#: inary/cli/build.py:167 inary/cli/delta.py:74
+#, fuzzy
 msgid "  {} (default)"
 msgstr "{} (predefinito)"
 
@@ -1024,7 +1027,7 @@ msgstr "Il pacchetto {} non è installato"
 #: inary/cli/check.py:138
 #, fuzzy
 msgid ""
-"Inary was unable to check the integrity of packages which contain files that "
+"Pisi was unable to check the integrity of packages which contain files that "
 "you don't have read access.\n"
 "Running the check under a privileged user may help fixing this problem."
 msgstr ""
@@ -1195,11 +1198,6 @@ msgstr ""
 msgid "Output directory for produced packages."
 msgstr "Cartella di output per i pacchetti prodotti."
 
-#: inary/cli/delta.py:74
-#, fuzzy
-msgid "  {} (default)"
-msgstr "{} (predefinito)"
-
 #: inary/cli/disablerepo.py:22
 msgid ""
 "Disable repository\n"
@@ -1355,7 +1353,7 @@ msgstr "opzioni di emerge"
 msgid "Emerge available packages under given component"
 msgstr "Elenca i pacchetti disponibili sotto il componente fornito"
 
-#: inary/cli/emerge.py:70
+#: inary/cli/emerge.py:70 inary/cli/emergeup.py:74
 #, fuzzy
 msgid "Output directory: {}"
 msgstr "Cartella di output: {}"
@@ -1389,10 +1387,6 @@ msgstr ""
 #, fuzzy
 msgid "emergeup options"
 msgstr "opzioni di emerge"
-
-#: inary/cli/emergeup.py:74
-msgid "Output directory: {}"
-msgstr "Cartella di output: {}"
 
 #: inary/cli/enablerepo.py:22
 msgid ""
@@ -1594,7 +1588,7 @@ msgstr "Operazione #{0}: {1}"
 
 #: inary/cli/history.py:66
 msgid "Date: {0.date} {0.time}"
-msgid "Data: {0.date} {0.time}"
+msgstr "Data: {0.date} {0.time}"
 
 #: inary/cli/history.py:70
 msgid "    * There are %d packages in this snapshot."
@@ -2559,11 +2553,6 @@ msgstr "File di translations.xml è di mal formato"
 msgid "File '{}' has invalid XML"
 msgstr "Il file {} contiene XML non valido"
 
-#: inary/data/specfile.py:453
-#, fuzzy
-msgid "Name: {0}, version: {1}, release: {2}\n"
-msgstr "Nome: {0}, versione: {1}, release: {2}\n"
-
 #: inary/data/specfile.py:459
 msgid "Build Dependencies: "
 msgstr "Dipendenze per la Costruzione: "
@@ -2573,29 +2562,43 @@ msgstr "Dipendenze per la Costruzione: "
 msgid "Component {} not found"
 msgstr "Componente {} non trovato"
 
-#: inary/db/filesldb.py:29
-msgid "LevelDB not found! Please install LevelDB and plyvel!"
-msgstr ""
-
-#: inary/db/filesldb.py:40
+#: inary/db/filesdb.py:46 inary/db/filesldb.py:40
 #, fuzzy
 msgid "Creating files database..."
 msgstr "Ricostruisci il database dei file"
 
-#: inary/db/filesldb.py:47
+#: inary/db/filesdb.py:50
+#, fuzzy
+msgid "  ---> Adding '{}' to db... "
+msgstr "Aggiunta di {} al database... "
+
+#: inary/db/filesdb.py:53
+msgid "OK."
+msgstr "Ok."
+
+#: inary/db/filesdb.py:54 inary/db/filesldb.py:47
 #, fuzzy
 msgid "Added files database..."
 msgstr "Ricostruisci il database dei file"
+
+#: inary/db/filesdb.py:84
+#, fuzzy
+msgid "Cleaning files database folder...  "
+msgstr "Pulizia della cartella di compilazione..."
+
+#: inary/db/filesdb.py:87 inary/db/filesldb.py:79
+#, fuzzy
+msgid "done."
+msgstr "Fatto."
+
+#: inary/db/filesldb.py:29
+msgid "LevelDB not found! Please install LevelDB and plyvel!"
+msgstr ""
 
 #: inary/db/filesldb.py:77
 #, fuzzy
 msgid "Cleaning files database folder... "
 msgstr "Pulizia della cartella di compilazione..."
-
-#: inary/db/filesldb.py:79
-#, fuzzy
-msgid "done."
-msgstr "Fatto."
 
 #: inary/db/groupdb.py:66 inary/db/groupdb.py:75
 #, fuzzy
@@ -2955,11 +2958,6 @@ msgstr ""
 msgid "Source package '{0}' defines multiple 'Path' tags for {1}"
 msgstr ""
 
-#: inary/operations/build.py:789
-#, fuzzy
-msgid "{0}-{1} is not a valid INARY version format"
-msgstr "{0}-{1} Non è un valido formato di versione Inary"
-
 #: inary/operations/build.py:807
 msgid ""
 "Safety switch: following extra packages in system.devel will be installed: "
@@ -3284,12 +3282,10 @@ msgid "Mixing file names and package names not supported yet."
 msgstr "Non è ancora possibile mescolare nomi dei file e nomi dei pacchetti."
 
 #: inary/operations/install.py:180
-#, fuzzy
 msgid "Package {0} is not compatible with your distribution release {1} {2}."
 msgstr ""
 
 #: inary/operations/install.py:184
-#, fuzzy
 msgid "Package {0} ({1}) is not compatible with your {2} architecture."
 msgstr ""
 
@@ -3498,14 +3494,17 @@ msgid "No repository named {} found."
 msgstr "Nessun repository di nome {} trovato."
 
 #: inary/scenarioapi/package.py:67
+#, fuzzy
 msgid "No inary package: {}* found."
 msgstr "Nessun pacchetto inary: {}* trovato."
 
 #: inary/scenarioapi/repoops.py:28
+#, fuzzy
 msgid "Repo already has package named {}."
 msgstr "Il repository ha già un pacchetto di nome {}."
 
 #: inary/scenarioapi/repoops.py:52 inary/scenarioapi/repoops.py:59
+#, fuzzy
 msgid "Repo does not have package named {}."
 msgstr "Il repository non ha un pacchetto di nome {}."
 
@@ -3891,6 +3890,10 @@ msgstr "Ucraino"
 msgid "Vietnamese"
 msgstr "Vietnamita"
 
+#: inary/system_literals/sysutils.py:117
+msgid "Module: \"subprocess\" can not import"
+msgstr ""
+
 #: inary/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr "setAuthInfo vuole una tupla (utente, password)"
@@ -4041,15 +4044,6 @@ msgstr "Versione della stringa non valido: {}"
 
 #~ msgid "INARY package"
 #~ msgstr "Pacchetto INARY"
-
-#~ msgid "Map {} is added to {}/%s.cfg"
-#~ msgstr "La mappa {} è stato aggiunto a {}/%s.cfg"
-
-#~ msgid "Adding {} to db... "
-#~ msgstr "Aggiunta di {} al database... "
-
-#~ msgid "OK."
-#~ msgstr "Ok."
 
 #~ msgid "Not removing conflicted file : {}"
 #~ msgstr "File in conflitto non rimossi: {}"
@@ -4649,8 +4643,7 @@ msgstr "Versione della stringa non valido: {}"
 #~ msgstr "Impossibile creare delta per lo stesso pacchetto!"
 
 #~ msgid ""
-#~ "All of the files under the install dir {} has been collected by "
-#~ "package(s)"
+#~ "All of the files under the install dir {} has been collected by package(s)"
 #~ msgstr ""
 #~ "Tutti i file nella cartella di installazione {} sono stati raccolti dai "
 #~ "pacchetti"

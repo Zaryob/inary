@@ -71,7 +71,7 @@ You can also give the name of a component.
                     emerge_up_list.append(package)
 
         if ctx.get_option('output_dir'):
-            ctx.ui.info(_('Output directory: %s') % ctx.config.options.output_dir)
+            ctx.ui.info(_('Output directory: {}').format(ctx.config.options.output_dir))
         else:
             ctx.ui.info(_('Outputting binary packages in the package cache.'))
             ctx.config.options.output_dir = ctx.config.cached_packages_dir()

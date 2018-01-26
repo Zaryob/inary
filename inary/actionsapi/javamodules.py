@@ -31,8 +31,8 @@ from inary.actionsapi.shelltools import system, export
 EXEC_TEMPLATE = """\
 #!/bin/sh
 
-cd %s
-java%s-jar %s%s
+cd {0}
+java{1}-jar {2}{3}
 """
 
 
@@ -81,8 +81,7 @@ def _dodoc(*source_files, **kw):
     for source_file in source_files:
         sources = glob(source_file)
         if not sources:
-            raise DoJavadocError(_('No any file/directory matched '
-                                   'to regex expression "%s".' % source_file))
+            raise DoJavadocError(_('No any file/directory matched to regex expression "{}".'.format(source_file)))
 
         for source in sources:
             if os.path.isfile(source):
@@ -112,7 +111,7 @@ def _generate_classpath_file(classpath):
         prefix = ':'
 
     cp_file = open(env_file, 'a')
-    cp_file.write('%s%s' % (prefix, ':'.join(classpath)))
+    cp_file.write('{0}{1}'.format(prefix, ':'.join(classpath)))
     cp_file.close()
 
 
@@ -127,7 +126,7 @@ def _generate_exec_file(dest_dir, exe, java_args, exe_args):
     exec_file = os.open(util.join_path(exec_dir, get.srcNAME()),
                         os.O_CREAT | os.O_WRONLY,
                         0o755)
-    os.write(exec_file, EXEC_TEMPLATE % (util.join_path('/', dest_dir),
+    os.write(exec_file, EXEC_TEMPLATE.format(util.join_path('/', dest_dir),
                                          java_args,
                                          exe,
                                          exe_args))
@@ -158,7 +157,7 @@ def installExe(exe='', java_args='', exe_args='', dest_dir=''):
     dest_dir:   Installation dir of executable jar'''
 
     if not dest_dir:
-        dest_dir = 'usr/share/java/%s' % get.srcNAME()
+        dest_dir = 'usr/share/java/{}'.format(get.srcNAME())
     destination = util.join_path(get.installDIR(), dest_dir)
 
     if not os.access(destination, os.F_OK):
@@ -170,10 +169,10 @@ def installExe(exe='', java_args='', exe_args='', dest_dir=''):
         copy(exe, destination)
         _generate_exec_file(dest_dir,
                             source,
-                            ' %s ' % java_args if java_args else ' ',
-                            ' %s' % exe_args if exe_args else '')
+                            ' {} '.format(java_args) if java_args else ' ',
+                            ' {}'.format(exe_args) if exe_args else '')
     except IOError:
-        raise InstallError(_('Installing file "%s" failed.' % exe))
+        raise InstallError(_('Installing file "{}" failed.'.format(exe)))
 
 
 def installLib(src='*.jar', dest='/usr/share/java'):
@@ -192,7 +191,7 @@ def installLib(src='*.jar', dest='/usr/share/java'):
     # If no source matched, then no need to create destination dir
     if not sources:
         raise InstallError(_('No any file/directory matched '
-                             'to regex expression "%s".' % src))
+                             'to regex expression "{}".'.format(src)))
 
     if not os.access(destination, os.F_OK):
         os.makedirs(destination)
@@ -202,8 +201,7 @@ def installLib(src='*.jar', dest='/usr/share/java'):
             try:
                 copy(source, destination)
             except IOError:
-                raise InstallError(_('Installing file "%s" '
-                                     'failed.' % source))
+                raise InstallError(_('Installing file "{}" failed.'.format(source)))
             if source.endswith('.jar'):
                 classpath.append(util.join_path('/',
                                                 dest,
@@ -213,8 +211,7 @@ def installLib(src='*.jar', dest='/usr/share/java'):
             try:
                 copytree(source, target)
             except IOError:
-                raise InstallError(_('Installing directory "%s" '
-                                     'failed.' % source))
+                raise InstallError(_('Installing directory "{}" failed.'.format(source)))
             for root, dirs, files in os.walk(target):
                 for f in files:
                     if f.endswith('.jar'):
@@ -258,5 +255,5 @@ def run(argument='', parameters='', build_tool='ant'):
     # Otherwise, javadoc might be completed with errors
     export('LC_ALL', 'en_US.UTF-8')
 
-    if system('%s %s %s' % (build_tool, parameters, argument)):
+    if system('{0} {1} {2}'.format(build_tool, parameters, argument)):
         raise RunTimeError(_('Run failed.'))

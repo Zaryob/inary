@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-20 18:16++03\n"
+"POT-Creation-Date: 2018-01-26 10:48++03\n"
 "PO-Revision-Date: 2010-03-24 16:28+0200\n"
 "Last-Translator: Fatih Aşıcı <fatih@pardus.org.tr>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -70,19 +70,19 @@ msgstr ""
 "{}/config.log"
 
 # inary/actionsapi/autotools.py:75 :85
-#: inary/actionsapi/autotools.py:82 inary/actionsapi/autotools.py:92
+#: inary/actionsapi/autotools.py:83 inary/actionsapi/autotools.py:93
 #: inary/actionsapi/cmaketools.py:66 inary/actionsapi/kde.py:65
 #: inary/actionsapi/perlmodules.py:55 inary/actionsapi/perlmodules.py:58
 msgid "Configure failed."
 msgstr "Yapılandırma işlemi başarısız oldu."
 
 # inary/actionsapi/autotools.py:77 :87
-#: inary/actionsapi/autotools.py:84 inary/actionsapi/autotools.py:94
+#: inary/actionsapi/autotools.py:85 inary/actionsapi/autotools.py:95
 #: inary/actionsapi/kde.py:67
 msgid "No configure script found."
 msgstr "Yapılandırma betiği bulunamadı."
 
-#: inary/actionsapi/autotools.py:102 inary/actionsapi/cmaketools.py:78
+#: inary/actionsapi/autotools.py:103 inary/actionsapi/cmaketools.py:78
 #: inary/actionsapi/kde.py:72 inary/actionsapi/perlmodules.py:64
 #: inary/actionsapi/perlmodules.py:73 inary/actionsapi/pythonmodules.py:62
 #: inary/actionsapi/scons.py:39
@@ -90,7 +90,7 @@ msgid "Make failed."
 msgstr "İnşa işlemi başarısız oldu."
 
 # inary/actionsapi/autotools.py:119 :127
-#: inary/actionsapi/autotools.py:138 inary/actionsapi/autotools.py:149
+#: inary/actionsapi/autotools.py:139 inary/actionsapi/autotools.py:150
 #: inary/actionsapi/cmaketools.py:98 inary/actionsapi/cmaketools.py:106
 #: inary/actionsapi/kde.py:79 inary/actionsapi/pythonmodules.py:67
 #: inary/actionsapi/rubymodules.py:92 inary/actionsapi/rubymodules.py:99
@@ -98,25 +98,25 @@ msgstr "İnşa işlemi başarısız oldu."
 msgid "Install failed."
 msgstr "Kurulum işlemi başarısız oldu."
 
-#: inary/actionsapi/autotools.py:160
+#: inary/actionsapi/autotools.py:161
 msgid "Running aclocal failed."
 msgstr "aclocal çalıştırma işlemi başarısız oldu."
 
 # inary/actionsapi/autotools.py:139 :144
-#: inary/actionsapi/autotools.py:165
+#: inary/actionsapi/autotools.py:166
 msgid "Running autoconf failed."
 msgstr "autoconf çalıştırma işlemi başarısız oldu."
 
 # inary/actionsapi/autotools.py:139 :144
-#: inary/actionsapi/autotools.py:170
+#: inary/actionsapi/autotools.py:171
 msgid "Running autoreconf failed."
 msgstr "autoreconf çalıştırma işlemi başarısız oldu."
 
-#: inary/actionsapi/autotools.py:175
+#: inary/actionsapi/autotools.py:176
 msgid "Running automake failed."
 msgstr "automake çalıştırma işlemi başarısız oldu."
 
-#: inary/actionsapi/autotools.py:180
+#: inary/actionsapi/autotools.py:181
 msgid "Running autoheader failed."
 msgstr "autoheader çalıştırma işlemi başarısız oldu."
 
@@ -158,7 +158,7 @@ msgstr ""
 
 #: inary/actionsapi/inarytools.py:193
 #, fuzzy
-msgid "ActionsAPI [rename]: {}: {}"
+msgid "ActionsAPI [rename]: {0}: {1}"
 msgstr "ActionsAPI [rename]: {}: {}"
 
 #: inary/actionsapi/inarytools.py:230
@@ -281,9 +281,14 @@ msgstr "perl kurma işlemi başarısız oldu."
 
 #: inary/actionsapi/pkgconfig.py:40 inary/actionsapi/pkgconfig.py:59
 #: inary/actionsapi/pkgconfig.py:79 inary/actionsapi/pkgconfig.py:99
-#: inary/actionsapi/pkgconfig.py:118 inary/actionsapi/pkgconfig.py:136
+#: inary/actionsapi/pkgconfig.py:118
 #, fuzzy
 msgid "pkg-config is not installed on your system."
+msgstr "Paket {} kurulu değil. Kaldırılamıyor."
+
+#: inary/actionsapi/pkgconfig.py:136
+#, fuzzy
+msgid "Package pkgconfig is not installed on your system."
 msgstr "Paket {} kurulu değil. Kaldırılamıyor."
 
 # inary/actionsapi/autotools.py:75 :85
@@ -301,16 +306,8 @@ msgstr "{} çalıştırma işlemi başarısız oldu."
 msgid "Project file '{}' not found."
 msgstr "{} dosyası bulunamadı."
 
-#: inary/actionsapi/qt4.py:56
+#: inary/actionsapi/qt4.py:56 inary/actionsapi/qt5.py:64
 #, fuzzy
-msgid ""
-"It seems there are more than one .pro file, you must specify one. (Possible ."
-"pro files: {})"
-msgstr ""
-"Birden fazla .pro dosyası mevcut görünüyor. Bir tane belirtmelisiniz (Olası ."
-"pro dosyaları: {})."
-
-#: inary/actionsapi/qt5.py:64
 msgid ""
 "It seems there are more than one .pro file, you must specify one. (Possible ."
 "pro files: {})"
@@ -340,8 +337,8 @@ msgstr "ActionsAPI [chmod]: \"{}\" ile eşleşen bir dosya bulunamadı."
 
 #: inary/actionsapi/shelltools.py:70
 #, fuzzy
-msgid "ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})"
-msgstr "ActionsAPI [chmod]: İşleme izin verilmedi: {0} (kip: 0{1})"
+msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
+msgstr "ActionsAPI [chmod]: İşleme izin verilmedi: %s (kip: 0%o)"
 
 #: inary/actionsapi/shelltools.py:72
 #, fuzzy
@@ -482,13 +479,14 @@ msgstr "{} sembolik bağı atlandı (özel durum)."
 #, fuzzy
 msgid "Symlink {0[0]} -> {0[1]} skipped (texlive-core takes care of it."
 msgstr ""
-"{0[0]} konumundan {0[1]} konumuna sembolik bağ oluşturma işlemi atlandı (texlive-"
-"core halledecek)."
+"{0[0]} konumundan {0[1]} konumuna sembolik bağ oluşturma işlemi atlandı "
+"(texlive-core halledecek)."
 
 #: inary/actionsapi/texlivemodules.py:100
 #, fuzzy
 msgid "Symlink {0[0]} -> {0[1]} skipped."
-msgstr "{0[0]} konumundan {0[1]} konumuna sembolik bağ oluşturma işlemi atlandı."
+msgstr ""
+"{0[0]} konumundan {0[1]} konumuna sembolik bağ oluşturma işlemi atlandı."
 
 #: inary/actionsapi/texlivemodules.py:102
 #, fuzzy
@@ -518,23 +516,26 @@ msgid "Building format file {}"
 msgstr "Biçem dosyası {} inşa ediliyor."
 
 #: inary/actionsapi/texlivemodules.py:263
-msgid "Map {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg"
-msgstr "{0} haritası {1.curDIR()}/{1.srcNAME()}.cfg dosyasına eklendi"
+#, fuzzy
+msgid "Map {0} is added to {1}/{2}.cfg"
+msgstr "{0} haritası {1}/{2}.cfg dosyasına eklendi"
 
 #: inary/actionsapi/texlivemodules.py:266
 #, fuzzy
-msgid "MixedMap {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg"
-msgstr "{0} karıştırılmış haritası {1.curDIR()}/{1.srcNAME()}.cfg dosyasına eklendi."
+msgid "MixedMap {0} is added to {1}/{2}.cfg"
+msgstr ""
+"{0} karıştırılmış haritası {1}/{2}.cfg dosyasına "
+"eklendi."
 
 #: inary/actionsapi/texlivemodules.py:269
 #, fuzzy
-msgid "p +{0} is added to {1.curDIR()}/{1.srcNAME()}-config.ps"
-msgstr "p +{0} {1.curDIR()}/{1.srcNAME()}-config.ps dosyasına eklendi."
+msgid "p +{0} is added to {1}/{2}-config.ps"
+msgstr "p +{0} {1}/{2}-config.ps dosyasına eklendi."
 
 #: inary/actionsapi/texlivemodules.py:272
 #, fuzzy
-msgid "f {0} is added to {1.curDIR()}/{1.srcNAME()}-config"
-msgstr "f {0} {1.curDIR()}/{1.srcNAME()}-config dosyasına eklendi"
+msgid "f {0} is added to {1}/{2}-config"
+msgstr "f {0} {1}/{2}-config dosyasına eklendi"
 
 #: inary/actionsapi/texlivemodules.py:279
 #, fuzzy
@@ -577,6 +578,10 @@ msgstr " sürüm <= "
 msgid " release "
 msgstr " sürüm "
 
+#: inary/analyzer/ctypes.py:28
+msgid "Module \"ctypes\" can not import"
+msgstr ""
+
 #: inary/archive.py:523
 #, fuzzy
 msgid "Problem occured while uncompressing {}.Z file"
@@ -606,7 +611,7 @@ msgstr "{} pakedi etkin hiçbir depoda bulunamadı."
 msgid "Installing {0.name}, version {0.version}, release {0.release}"
 msgstr "{0.name} paketi {0.version} sürümü {0.release} yayımı kuruluyor"
 
-#: inary/atomicoperations.py:192
+#: inary/atomicoperations.py:192 inary/operations/build.py:789
 #, fuzzy
 msgid "{0}-{1} is not a valid INARY version format"
 msgstr "{0}-{1} INARY sürüm biçimine uymuyor"
@@ -817,7 +822,7 @@ msgstr "Verilen sürüm için suçla"
 msgid "Blame for all of the releases"
 msgstr "Tüm sürümler için suçla"
 
-#: inary/cli/blame.py:66 inary/data/specfile.py:369
+#: inary/cli/blame.py:66 inary/data/specfile.py:369 inary/data/specfile.py:453
 #, fuzzy
 msgid "Name: {0}, version: {1}, release: {2}\n"
 msgstr "İsim: {0}, sürüm: {1}, yayım: {2}\n"
@@ -947,7 +952,8 @@ msgstr "INARY paketi oluştur"
 msgid "Supported package formats:"
 msgstr "Desteklenen paket biçimleri:"
 
-#: inary/cli/build.py:167
+#: inary/cli/build.py:167 inary/cli/delta.py:74
+#, fuzzy
 msgid "  {} (default)"
 msgstr "  {} (öntanımlı)"
 
@@ -1042,7 +1048,7 @@ msgstr "{} paketi kurulu değil."
 #: inary/cli/check.py:138
 #, fuzzy
 msgid ""
-"Inary was unable to check the integrity of packages which contain files that "
+"Pisi was unable to check the integrity of packages which contain files that "
 "you don't have read access.\n"
 "Running the check under a privileged user may help fixing this problem."
 msgstr ""
@@ -1211,11 +1217,6 @@ msgstr ""
 msgid "Output directory for produced packages."
 msgstr "Üretilen paketler için çıktı dizini"
 
-#: inary/cli/delta.py:74
-#, fuzzy
-msgid "  {} (default)"
-msgstr "  {} (öntanımlı)"
-
 #: inary/cli/disablerepo.py:22
 msgid ""
 "Disable repository\n"
@@ -1369,7 +1370,7 @@ msgstr "emerge seçenekleri"
 msgid "Emerge available packages under given component"
 msgstr "Bileşen altındaki paketleri derleyip kur"
 
-#: inary/cli/emerge.py:70
+#: inary/cli/emerge.py:70 inary/cli/emergeup.py:74
 #, fuzzy
 msgid "Output directory: {}"
 msgstr "Çıktı dizini: {}"
@@ -1403,10 +1404,6 @@ msgstr ""
 #, fuzzy
 msgid "emergeup options"
 msgstr "emerge seçenekleri"
-
-#: inary/cli/emergeup.py:74
-msgid "Output directory: {}"
-msgstr "Çıktı dizini: {}"
 
 #: inary/cli/enablerepo.py:22
 msgid ""
@@ -2571,11 +2568,6 @@ msgstr "translations.xml dosyası hatalı."
 msgid "File '{}' has invalid XML"
 msgstr "{} dosyasının XML sözdizimi geçersiz."
 
-#: inary/data/specfile.py:453
-#, fuzzy
-msgid "Name: {}, version: {}, release: {}\n"
-msgstr "İsim: {}, sürüm: {}, yayım: %s\n"
-
 #: inary/data/specfile.py:459
 msgid "Build Dependencies: "
 msgstr "İnşa Bağımlılıkları: "
@@ -2585,29 +2577,43 @@ msgstr "İnşa Bağımlılıkları: "
 msgid "Component {} not found"
 msgstr "{} bileşeni bulunamadı."
 
-#: inary/db/filesldb.py:29
-msgid "LevelDB not found! Please install LevelDB and plyvel!"
-msgstr ""
-
-#: inary/db/filesldb.py:40
+#: inary/db/filesdb.py:46 inary/db/filesldb.py:40
 #, fuzzy
 msgid "Creating files database..."
 msgstr "Dosya veritabanını yeniden inşa et"
 
-#: inary/db/filesldb.py:47
+#: inary/db/filesdb.py:50
+#, fuzzy
+msgid "  ---> Adding '{}' to db... "
+msgstr "{} veritabanına ekleniyor... "
+
+#: inary/db/filesdb.py:53
+msgid "OK."
+msgstr "Tamam."
+
+#: inary/db/filesdb.py:54 inary/db/filesldb.py:47
 #, fuzzy
 msgid "Added files database..."
 msgstr "Dosya veritabanını yeniden inşa et"
+
+#: inary/db/filesdb.py:84
+#, fuzzy
+msgid "Cleaning files database folder...  "
+msgstr "İnşa dizini temizleniyor..."
+
+#: inary/db/filesdb.py:87 inary/db/filesldb.py:79
+#, fuzzy
+msgid "done."
+msgstr "Tamamlandı."
+
+#: inary/db/filesldb.py:29
+msgid "LevelDB not found! Please install LevelDB and plyvel!"
+msgstr ""
 
 #: inary/db/filesldb.py:77
 #, fuzzy
 msgid "Cleaning files database folder... "
 msgstr "İnşa dizini temizleniyor..."
-
-#: inary/db/filesldb.py:79
-#, fuzzy
-msgid "done."
-msgstr "Tamamlandı."
 
 #: inary/db/groupdb.py:66 inary/db/groupdb.py:75
 #, fuzzy
@@ -2984,11 +2990,6 @@ msgstr "{0} kaynak paketi göreli bir 'Path' elemanı içeriyor: {1}"
 msgid "Source package '{0}' defines multiple 'Path' tags for {1}"
 msgstr "{0} kaynak paketi {1} yolu için birden fazla 'Path' etiketi içeriyor"
 
-#: inary/operations/build.py:789
-#, fuzzy
-msgid "{0}-{1} is not a valid INARY version format"
-msgstr "{0}-{1} INARY sürüm biçimine uymuyor"
-
 #: inary/operations/build.py:807
 msgid ""
 "Safety switch: following extra packages in system.devel will be installed: "
@@ -3104,8 +3105,7 @@ msgstr "{} paketi yeni paket ile aynı yayım numarasına sahip. Atlanıyor..."
 msgid ""
 "All files in the package '{}' are different from the files in the new "
 "package. Skipping it..."
-msgstr ""
-"{} paketindeki tüm dosyalar yeni pakettekilerden farklı. Atlanıyor..."
+msgstr "{} paketindeki tüm dosyalar yeni pakettekilerden farklı. Atlanıyor..."
 
 #: inary/operations/delta.py:108
 #, fuzzy
@@ -3526,14 +3526,17 @@ msgid "No repository named {} found."
 msgstr "{} adında bir depo bulunamadı."
 
 #: inary/scenarioapi/package.py:67
+#, fuzzy
 msgid "No inary package: {}* found."
 msgstr "INARY paketi yok: {}* bulundu."
 
 #: inary/scenarioapi/repoops.py:28
+#, fuzzy
 msgid "Repo already has package named {}."
 msgstr "Depoda {} isimli bir paket zaten mevcut."
 
 #: inary/scenarioapi/repoops.py:52 inary/scenarioapi/repoops.py:59
+#, fuzzy
 msgid "Repo does not have package named {}."
 msgstr "Depoda {} isminde bir paket yok."
 
@@ -3927,6 +3930,10 @@ msgstr "Ukraynaca"
 msgid "Vietnamese"
 msgstr "Vietnamca"
 
+#: inary/system_literals/sysutils.py:117
+msgid "Module: \"subprocess\" can not import"
+msgstr ""
+
 #: inary/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr "setAuthInfo bir (kullanıcı, parola) ikilisi ister."
@@ -4026,8 +4033,10 @@ msgstr "Geçersiz delta paket adı: {}"
 msgid "Invalid version string: '{}'"
 msgstr "Hatalı sürüm dizgisi: {}"
 
-#~ msgid "Map {} is added to {}/%s.cfg"
-#~ msgstr "{} haritası %2s/%3s.cfg dosyasına eklendi."
+
+#, fuzzy
+#~ msgid "Name: {}, version: {}, release: {}\n"
+#~ msgstr "İsim: {}, sürüm: {}, yayım: %s\n"
 
 #~ msgid "Not removing conflicted file : {}"
 #~ msgstr "Çakışan dosya {} silinmiyor."
@@ -4037,12 +4046,6 @@ msgstr "Hatalı sürüm dizgisi: {}"
 
 #~ msgid "{} [{}]"
 #~ msgstr "{} [{}]"
-
-#~ msgid "Adding {} to db... "
-#~ msgstr "{} veritabanına ekleniyor... "
-
-#~ msgid "OK."
-#~ msgstr "Tamam."
 
 #~ msgid "Installation order: "
 #~ msgstr "Kurulum sırası: "
@@ -4189,11 +4192,9 @@ msgstr "Hatalı sürüm dizgisi: {}"
 #~ msgstr "Aynı paket için delta oluşturulamaz!"
 
 #~ msgid ""
-#~ "All of the files under the install dir {} has been collected by "
-#~ "package(s)"
+#~ "All of the files under the install dir {} has been collected by package(s)"
 #~ msgstr ""
-#~ "Kurulum dizini {} altındaki bütün dosyalar paket(ler) tarafından "
-#~ "toplandı."
+#~ "Kurulum dizini {} altındaki bütün dosyalar paket(ler) tarafından toplandı."
 
 #~ msgid ""
 #~ "Build number is not available. For repo builds you must enable buildno in "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-20 18:18++03\n"
+"POT-Creation-Date: 2018-01-26 10:48++03\n"
 "PO-Revision-Date: 2010-01-01 22:22+0100\n"
 "Last-Translator: Philippe Svetoslavsky <philsvet@gmail.com>\n"
 "Language-Team: French <pardus-translators@pardus.org.tr>\n"
@@ -34,7 +34,7 @@ msgid ""
 "Please file a bug report to <http://bugs.sulin.com.tr>."
 msgstr ""
 "Exception interne non gérée.\n"
-"Veuillez signaler le bogue s'il vous plaît sur <http://bugs.inarylinux.org>."
+"Veuillez signaler le bogue s'il vous plaît sur <http://bugs.sulin.org>."
 
 #: inary-cli:55
 msgid "System error. Program terminated."
@@ -65,25 +65,25 @@ msgstr ""
 "Veuillez attacher le config.log à votre rapport de bogue s'il vous plaît :\n"
 "{}/config.log"
 
-#: inary/actionsapi/autotools.py:82 inary/actionsapi/autotools.py:92
+#: inary/actionsapi/autotools.py:83 inary/actionsapi/autotools.py:93
 #: inary/actionsapi/cmaketools.py:66 inary/actionsapi/kde.py:65
 #: inary/actionsapi/perlmodules.py:55 inary/actionsapi/perlmodules.py:58
 msgid "Configure failed."
 msgstr "Échec de la configuration."
 
-#: inary/actionsapi/autotools.py:84 inary/actionsapi/autotools.py:94
+#: inary/actionsapi/autotools.py:85 inary/actionsapi/autotools.py:95
 #: inary/actionsapi/kde.py:67
 msgid "No configure script found."
 msgstr "Pas de script configure trouvé."
 
-#: inary/actionsapi/autotools.py:102 inary/actionsapi/cmaketools.py:78
+#: inary/actionsapi/autotools.py:103 inary/actionsapi/cmaketools.py:78
 #: inary/actionsapi/kde.py:72 inary/actionsapi/perlmodules.py:64
 #: inary/actionsapi/perlmodules.py:73 inary/actionsapi/pythonmodules.py:62
 #: inary/actionsapi/scons.py:39
 msgid "Make failed."
 msgstr "Échec de la construction."
 
-#: inary/actionsapi/autotools.py:138 inary/actionsapi/autotools.py:149
+#: inary/actionsapi/autotools.py:139 inary/actionsapi/autotools.py:150
 #: inary/actionsapi/cmaketools.py:98 inary/actionsapi/cmaketools.py:106
 #: inary/actionsapi/kde.py:79 inary/actionsapi/pythonmodules.py:67
 #: inary/actionsapi/rubymodules.py:92 inary/actionsapi/rubymodules.py:99
@@ -91,23 +91,23 @@ msgstr "Échec de la construction."
 msgid "Install failed."
 msgstr "Échec de l'installation."
 
-#: inary/actionsapi/autotools.py:160
+#: inary/actionsapi/autotools.py:161
 msgid "Running aclocal failed."
 msgstr "L'exécution de aclocal a échoué."
 
-#: inary/actionsapi/autotools.py:165
+#: inary/actionsapi/autotools.py:166
 msgid "Running autoconf failed."
 msgstr "L'exécution de autoconf a échoué."
 
-#: inary/actionsapi/autotools.py:170
+#: inary/actionsapi/autotools.py:171
 msgid "Running autoreconf failed."
 msgstr "L'exécution de autoreconf a échoué."
 
-#: inary/actionsapi/autotools.py:175
+#: inary/actionsapi/autotools.py:176
 msgid "Running automake failed."
 msgstr "L'exécution de automake a échoué."
 
-#: inary/actionsapi/autotools.py:180
+#: inary/actionsapi/autotools.py:181
 msgid "Running autoheader failed."
 msgstr "L'exécution de autoheader a échoué."
 
@@ -269,9 +269,14 @@ msgstr "L'installation de perl a échoué."
 
 #: inary/actionsapi/pkgconfig.py:40 inary/actionsapi/pkgconfig.py:59
 #: inary/actionsapi/pkgconfig.py:79 inary/actionsapi/pkgconfig.py:99
-#: inary/actionsapi/pkgconfig.py:118 inary/actionsapi/pkgconfig.py:136
+#: inary/actionsapi/pkgconfig.py:118
 #, fuzzy
-msgid "Package pkgconfig is not installed on your system. "
+msgid "pkg-config is not installed on your system."
+msgstr "Le paquet pkgconfig n'est pas installé. Impossible de le supprimer."
+
+#: inary/actionsapi/pkgconfig.py:136
+#, fuzzy
+msgid "Package pkgconfig is not installed on your system."
 msgstr "Le paquet pkgconfig n'est pas installé. Impossible de le supprimer."
 
 #: inary/actionsapi/pythonmodules.py:56
@@ -298,9 +303,10 @@ msgstr ""
 "une. (Possible .pro files: {})"
 
 #: inary/actionsapi/qt5.py:64
+#, fuzzy
 msgid ""
 "It seems there are more than one .pro file, you must specify one. (Possible ."
-"pro files: {})"
+"pro files: ())"
 msgstr ""
 "Il semblerait qu'il y ait plus d'un fichier .pro, vous devez en spécifier "
 "une. (Possible .pro files: {})"
@@ -327,8 +333,8 @@ msgstr "ActionsAPI [chmod]: aucun fichier ne correspond au critère \"{}\"."
 
 #: inary/actionsapi/shelltools.py:70
 #, fuzzy
-msgid "ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})"
-msgstr "ActionsAPI [chmod] : Opération non permise : {0} (mode: 0{1})"
+msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
+msgstr "ActionsAPI [chmod] : Opération non permise : %s (mode: 0%o)"
 
 #: inary/actionsapi/shelltools.py:72
 #, fuzzy
@@ -491,7 +497,8 @@ msgstr "Création de /etc/texmf/{}.d"
 #, fuzzy
 msgid "Moving (and symlinking) /usr/share/texmf/{0} to /etc/texmf/{1}.d"
 msgstr ""
-"Déplacement (et liaison symbolique) /usr/share/texmf/{0}/ vers /etc/texmf/{1}.d"
+"Déplacement (et liaison symbolique) /usr/share/texmf/{0}/ vers /etc/texmf/"
+"{1}.d"
 
 #: inary/actionsapi/texlivemodules.py:206
 #, fuzzy
@@ -499,24 +506,24 @@ msgid "Building format file {}"
 msgstr "Construction du fichier 'format' {}"
 
 #: inary/actionsapi/texlivemodules.py:263
-msgid "Map {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg"
-msgstr "Map {0} est ajauté à {1.curDIR()}/{1.srcNAME()}.cfg"
-
+#, fuzzy
+msgid "Map {0} is added to {1}/{2}.cfg"
+msgstr "Map {0} est ajouté à {1}/{2}.cfg"
 
 #: inary/actionsapi/texlivemodules.py:266
 #, fuzzy
-msgid "MixedMap {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg"
-msgstr "MixedMap {0} est ajouté à {1.curDIR()}/{1.srcNAME()}.cfg"
+msgid "MixedMap {0} is added to {1}/{2}.cfg"
+msgstr "MixedMap {0} est ajouté à {1}/{2}.cfg"
 
 #: inary/actionsapi/texlivemodules.py:269
 #, fuzzy
-msgid "p +{0} is added to {1.curDIR()}/{1.srcNAME()}-config.ps"
-msgstr "p +{0} est ajouté à {1.curDIR()}/{1.srcNAME()}-config.ps"
+msgid "p +{0} is added to {1}/{2}-config.ps"
+msgstr "p +{0} est ajouté à {1}/{2}-config.ps"
 
 #: inary/actionsapi/texlivemodules.py:272
 #, fuzzy
-msgid "f {0} is added to {1.curDIR()}/{1.srcNAME()}-config"
-msgstr "f {0} est ajouté à {1.curDIR()}/{1.srcNAME()}-config"
+msgid "f {0} is added to {1}/{2}-config"
+msgstr "f {0} est ajouté à {1}/{2}-config"
 
 #: inary/actionsapi/texlivemodules.py:279
 #, fuzzy
@@ -558,6 +565,10 @@ msgstr " release <= "
 msgid " release "
 msgstr " release "
 
+#: inary/analyzer/ctypes.py:28
+msgid "Module \"ctypes\" can not import"
+msgstr ""
+
 #: inary/archive.py:523
 #, fuzzy
 msgid "Problem occured while uncompressing {}.Z file"
@@ -588,7 +599,7 @@ msgstr "Le paquet {} introuvable dans les dépôts actifs."
 msgid "Installing {0.name}, version {0.version}, release {0.release}"
 msgstr "Installation de {0.name}, version {0.version}, millésime {0.release}"
 
-#: inary/atomicoperations.py:192
+#: inary/atomicoperations.py:192 inary/operations/build.py:789
 #, fuzzy
 msgid "{0}-{1} is not a valid INARY version format"
 msgstr "{0}-{1} n'est pas un format de version valide de INARY."
@@ -807,7 +818,7 @@ msgstr "Accuse pour la version donnée"
 msgid "Blame for all of the releases"
 msgstr "Responsable de toutes les versions"
 
-#: inary/cli/blame.py:66 inary/data/specfile.py:369
+#: inary/cli/blame.py:66 inary/data/specfile.py:369 inary/data/specfile.py:453
 #, fuzzy
 msgid "Name: {0}, version: {1}, release: {2}\n"
 msgstr "Nom : {0}, version : {1}, release : {2}\n"
@@ -945,7 +956,8 @@ msgstr "Crée le paquet INARY"
 msgid "Supported package formats:"
 msgstr "Formats de paquets pris en charge :"
 
-#: inary/cli/build.py:167
+#: inary/cli/build.py:167 inary/cli/delta.py:74
+#, fuzzy
 msgid "  {} (default)"
 msgstr "{} (par défaut)"
 
@@ -1039,7 +1051,7 @@ msgstr "Le paquet {} n'est pas installé"
 #: inary/cli/check.py:138
 #, fuzzy
 msgid ""
-"Inary was unable to check the integrity of packages which contain files that "
+"Pisi was unable to check the integrity of packages which contain files that "
 "you don't have read access.\n"
 "Running the check under a privileged user may help fixing this problem."
 msgstr ""
@@ -1213,10 +1225,6 @@ msgstr ""
 msgid "Output directory for produced packages."
 msgstr "Répertoire accueillant les paquets produits"
 
-#: inary/cli/delta.py:74
-#, fuzzy
-msgid "  {} (default)"
-msgstr "{} (par défaut)"
 
 #: inary/cli/disablerepo.py:22
 msgid ""
@@ -1369,7 +1377,7 @@ msgstr "Options d'emerge"
 msgid "Emerge available packages under given component"
 msgstr "'Emerge' les paquets disponibles pour un composant donné"
 
-#: inary/cli/emerge.py:70
+#: inary/cli/emerge.py:70 inary/cli/emergeup.py:74
 #, fuzzy
 msgid "Output directory: {}"
 msgstr "Répertoire de sortie : {}"
@@ -1403,10 +1411,6 @@ msgstr ""
 #, fuzzy
 msgid "emergeup options"
 msgstr "Options d'emerge"
-
-#: inary/cli/emergeup.py:74
-msgid "Output directory: {}"
-msgstr "Répertoire de sortie : {}"
 
 #: inary/cli/enablerepo.py:22
 msgid ""
@@ -2574,11 +2578,6 @@ msgstr "Le fichier translation.xml est mal formé."
 msgid "File '{}' has invalid XML"
 msgstr "Le fichier {} contient un texte XML invalide"
 
-#: inary/data/specfile.py:453
-#, fuzzy
-msgid "Name: {0}, version: {1}, release: {2}\n"
-msgstr "Nom : {0}, version : {1}, release : {2}\n"
-
 #: inary/data/specfile.py:459
 msgid "Build Dependencies: "
 msgstr "Dépendances : "
@@ -2588,29 +2587,43 @@ msgstr "Dépendances : "
 msgid "Component {} not found"
 msgstr "Le composant {} est introuvable"
 
-#: inary/db/filesldb.py:29
-msgid "LevelDB not found! Please install LevelDB and plyvel!"
-msgstr ""
-
-#: inary/db/filesldb.py:40
+#: inary/db/filesdb.py:46 inary/db/filesldb.py:40
 #, fuzzy
 msgid "Creating files database..."
 msgstr "Reconstruction de la base de données fichiers"
 
-#: inary/db/filesldb.py:47
+#: inary/db/filesdb.py:50
+#, fuzzy
+msgid "  ---> Adding '{}' to db... "
+msgstr "Ajout de {} à la base de données... "
+
+#: inary/db/filesdb.py:53
+msgid "OK."
+msgstr "OK."
+
+#: inary/db/filesdb.py:54 inary/db/filesldb.py:47
 #, fuzzy
 msgid "Added files database..."
 msgstr "Reconstruction de la base de données fichiers"
+
+#: inary/db/filesdb.py:84
+#, fuzzy
+msgid "Cleaning files database folder...  "
+msgstr "Nettoyage du dossier de construction..."
+
+#: inary/db/filesdb.py:87 inary/db/filesldb.py:79
+#, fuzzy
+msgid "done."
+msgstr "Terminé."
+
+#: inary/db/filesldb.py:29
+msgid "LevelDB not found! Please install LevelDB and plyvel!"
+msgstr ""
 
 #: inary/db/filesldb.py:77
 #, fuzzy
 msgid "Cleaning files database folder... "
 msgstr "Nettoyage du dossier de construction..."
-
-#: inary/db/filesldb.py:79
-#, fuzzy
-msgid "done."
-msgstr "Terminé."
 
 #: inary/db/groupdb.py:66 inary/db/groupdb.py:75
 #, fuzzy
@@ -2749,7 +2762,8 @@ msgstr "Impossible de récupérer le fichier de destination \"{}\" : {}"
 #: inary/fetcher.py:204
 #, fuzzy
 msgid "Could not fetch destination file: \"{0}\"; (\"{1}\"): \"{2}\""
-msgstr "Impossible de récupérer le fichier de destination \"{0}\";  \"{1}\" : \"{2}\""
+msgstr ""
+"Impossible de récupérer le fichier de destination \"{0}\";  \"{1}\" : \"{2}\""
 
 #: inary/fetcher.py:207
 #, fuzzy
@@ -2986,11 +3000,6 @@ msgstr "Le paquet source {0} définit un chemin relatif de l'élément : {1}"
 msgid "Source package '{0}' defines multiple 'Path' tags for {1}"
 msgstr "Le paquet source {0} définit plusieurs balises de chemin pour {1}"
 
-#: inary/operations/build.py:789
-#, fuzzy
-msgid "{0}-{1} is not a valid INARY version format"
-msgstr "{0}-{1} n'est pas un format de version valide de INARY."
-
 #: inary/operations/build.py:807
 msgid ""
 "Safety switch: following extra packages in system.devel will be installed: "
@@ -3102,8 +3111,7 @@ msgstr "Le fichier {0} appartient à un autre paquet que '{1}'. On le saute..."
 msgid ""
 "Package '{}' has the same release number with the new package. Skipping it..."
 msgstr ""
-"Le paquet {} a le même numéro de sortie que le nouveau paquet. On le "
-"saute..."
+"Le paquet {} a le même numéro de sortie que le nouveau paquet. On le saute..."
 
 #: inary/operations/delta.py:66
 #, fuzzy
@@ -3111,15 +3119,14 @@ msgid ""
 "All files in the package '{}' are different from the files in the new "
 "package. Skipping it..."
 msgstr ""
-"Tous les fichiers du paquet {} diffèrent des fichiers du nouveau paquet. "
-"On le saute..."
+"Tous les fichiers du paquet {} diffèrent des fichiers du nouveau paquet. On "
+"le saute..."
 
 #: inary/operations/delta.py:108
 #, fuzzy
 msgid "New package '{}' exists in the list of old packages. Skipping it..."
 msgstr ""
-"Le nouveau paquet {} existe dans la liste des anciens paquets. On le "
-"saute..."
+"Le nouveau paquet {} existe dans la liste des anciens paquets. On le saute..."
 
 #: inary/operations/downgrade.py:52 inary/operations/upgrade.py:52
 msgid ""
@@ -3154,7 +3161,8 @@ msgstr "Le paquet {} n'est pas disponible dans les dépôts."
 #: inary/operations/downgrade.py:114
 #, fuzzy
 msgid "Package {0.name} is already at the first release {0.release}."
-msgstr "Le paquet {0.name} est déjà dans sa version la plus récente {0.release}."
+msgstr ""
+"Le paquet {0.name} est déjà dans sa version la plus récente {0.release}."
 
 #: inary/operations/downgrade.py:117 inary/operations/upgrade.py:118
 #, fuzzy
@@ -3333,7 +3341,8 @@ msgstr ""
 #, fuzzy
 msgid "Package {0} is not compatible with your distribution release {1} {2}."
 msgstr ""
-"Le paquet {0} n'est pas compatible avec votre version de distribution {1} {2}."
+"Le paquet {0} n'est pas compatible avec votre version de distribution {1} "
+"{2}."
 
 #: inary/operations/install.py:184
 #, fuzzy
@@ -3401,7 +3410,8 @@ msgstr "Le paquet remplacé demeure"
 #: inary/operations/upgrade.py:114
 #, fuzzy
 msgid "Package {0.name} is already at the latest release {0.release}."
-msgstr "Le paquet {0.name} est déjà dans sa version la plus récente {0.release}."
+msgstr ""
+"Le paquet {0.name} est déjà dans sa version la plus récente {0.release}."
 
 #: inary/operations/upgrade.py:176
 msgid "The following packages will be upgraded:"
@@ -3548,14 +3558,17 @@ msgid "No repository named {} found."
 msgstr "Pas de dépôt au nom {} trouvé."
 
 #: inary/scenarioapi/package.py:67
+#, fuzzy
 msgid "No inary package: {}* found."
 msgstr "Pas de paquet inary {}* trouvé."
 
 #: inary/scenarioapi/repoops.py:28
+#, fuzzy
 msgid "Repo already has package named {}."
 msgstr "Un dépôt a déjà le paquet {}."
 
 #: inary/scenarioapi/repoops.py:52 inary/scenarioapi/repoops.py:59
+#, fuzzy
 msgid "Repo does not have package named {}."
 msgstr "Le dépôt n'a pas le paquet {}."
 
@@ -3946,6 +3959,10 @@ msgstr "Ukrainien"
 msgid "Vietnamese"
 msgstr "Vietnamien"
 
+#: inary/system_literals/sysutils.py:117
+msgid "Module: \"subprocess\" can not import"
+msgstr ""
+
 #: inary/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr "setAuthInfo a besoin d'un tuple (utilisateur, mot de passe)"
@@ -4096,15 +4113,6 @@ msgstr "Chaîne de caractères invalide : {}"
 
 #~ msgid "INARY package"
 #~ msgstr "Paquet INARY"
-
-#~ msgid "Map {} is added to {}/%s.cfg"
-#~ msgstr "Map {} est ajouté à {}/%s.cfg"
-
-#~ msgid "Adding {} to db... "
-#~ msgstr "Ajout de {} à la base de données... "
-
-#~ msgid "OK."
-#~ msgstr "OK."
 
 #~ msgid "Not removing conflicted file : {}"
 #~ msgstr "Le fichier {} causant un conflit ne sera pas supprimé"
@@ -4319,11 +4327,10 @@ msgstr "Chaîne de caractères invalide : {}"
 #~ msgstr "Impossible de créer un delta pour le même paquet !"
 
 #~ msgid ""
-#~ "All of the files under the install dir {} has been collected by "
-#~ "package(s)"
+#~ "All of the files under the install dir {} has been collected by package(s)"
 #~ msgstr ""
-#~ "Tous les fichiers sous le répertoire d'installation {} ont été "
-#~ "collectés par le(s) paquet(s)"
+#~ "Tous les fichiers sous le répertoire d'installation {} ont été collectés "
+#~ "par le(s) paquet(s)"
 
 #~ msgid ""
 #~ "Build number is not available. For repo builds you must enable buildno in "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: inary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-20 18:18++03\n"
+"POT-Creation-Date: 2018-01-26 10:48++03\n"
 "PO-Revision-Date: 2011-06-11 23:13+0100\n"
 "Last-Translator: Ivica Kolić <ikoli@yahoo.com>\n"
 "Language-Team: Croatian <ikoli@yahoo.com>\n"
@@ -59,25 +59,25 @@ msgid ""
 "{}/config.log"
 msgstr ""
 
-#: inary/actionsapi/autotools.py:82 inary/actionsapi/autotools.py:92
+#: inary/actionsapi/autotools.py:83 inary/actionsapi/autotools.py:93
 #: inary/actionsapi/cmaketools.py:66 inary/actionsapi/kde.py:65
 #: inary/actionsapi/perlmodules.py:55 inary/actionsapi/perlmodules.py:58
 msgid "Configure failed."
 msgstr "Konfiguracija nije uspjela."
 
-#: inary/actionsapi/autotools.py:84 inary/actionsapi/autotools.py:94
+#: inary/actionsapi/autotools.py:85 inary/actionsapi/autotools.py:95
 #: inary/actionsapi/kde.py:67
 msgid "No configure script found."
 msgstr "Konfiguracijska skripta nije pronađena."
 
-#: inary/actionsapi/autotools.py:102 inary/actionsapi/cmaketools.py:78
+#: inary/actionsapi/autotools.py:103 inary/actionsapi/cmaketools.py:78
 #: inary/actionsapi/kde.py:72 inary/actionsapi/perlmodules.py:64
 #: inary/actionsapi/perlmodules.py:73 inary/actionsapi/pythonmodules.py:62
 #: inary/actionsapi/scons.py:39
 msgid "Make failed."
 msgstr ""
 
-#: inary/actionsapi/autotools.py:138 inary/actionsapi/autotools.py:149
+#: inary/actionsapi/autotools.py:139 inary/actionsapi/autotools.py:150
 #: inary/actionsapi/cmaketools.py:98 inary/actionsapi/cmaketools.py:106
 #: inary/actionsapi/kde.py:79 inary/actionsapi/pythonmodules.py:67
 #: inary/actionsapi/rubymodules.py:92 inary/actionsapi/rubymodules.py:99
@@ -85,23 +85,23 @@ msgstr ""
 msgid "Install failed."
 msgstr "Instalacija nije uspjela."
 
-#: inary/actionsapi/autotools.py:160
+#: inary/actionsapi/autotools.py:161
 msgid "Running aclocal failed."
 msgstr "Pokretanje aclocal nije uspjelo."
 
-#: inary/actionsapi/autotools.py:165
+#: inary/actionsapi/autotools.py:166
 msgid "Running autoconf failed."
 msgstr "Pokretanje autoconf nije uspjelo."
 
-#: inary/actionsapi/autotools.py:170
+#: inary/actionsapi/autotools.py:171
 msgid "Running autoreconf failed."
 msgstr "Pokretanje autoreconf nije uspjelo."
 
-#: inary/actionsapi/autotools.py:175
+#: inary/actionsapi/autotools.py:176
 msgid "Running automake failed."
 msgstr "Pokretanje automake nije uspjelo."
 
-#: inary/actionsapi/autotools.py:180
+#: inary/actionsapi/autotools.py:181
 msgid "Running autoheader failed."
 msgstr ""
 
@@ -256,9 +256,14 @@ msgstr "perl instalacija nije uspjela."
 
 #: inary/actionsapi/pkgconfig.py:40 inary/actionsapi/pkgconfig.py:59
 #: inary/actionsapi/pkgconfig.py:79 inary/actionsapi/pkgconfig.py:99
-#: inary/actionsapi/pkgconfig.py:118 inary/actionsapi/pkgconfig.py:136
+#: inary/actionsapi/pkgconfig.py:118
 #, fuzzy
 msgid "pkg-config is not installed on your system."
+msgstr "Paket {} nije instaliran. Ne mogu ukloniti."
+
+#: inary/actionsapi/pkgconfig.py:136
+#, fuzzy
+msgid "Package pkgconfig is not installed on your system."
 msgstr "Paket {} nije instaliran. Ne mogu ukloniti."
 
 #: inary/actionsapi/pythonmodules.py:56
@@ -275,16 +280,8 @@ msgstr "Pokretannje {} nije uspjelo."
 msgid "Project file '{}' not found."
 msgstr "Ime projekta  {} nije nađeno."
 
-#: inary/actionsapi/qt4.py:56
+#: inary/actionsapi/qt4.py:56 inary/actionsapi/qt5.py:64
 #, fuzzy
-msgid ""
-"It seems there are more than one .pro file, you must specify one. (Possible ."
-"pro files: {})"
-msgstr ""
-"Čini se da postoji više od jedne.pro datoteke,morate odrediti jednu. "
-"(Moguće .pro datoteke: {})"
-
-#: inary/actionsapi/qt5.py:64
 msgid ""
 "It seems there are more than one .pro file, you must specify one. (Possible ."
 "pro files: {})"
@@ -313,8 +310,8 @@ msgstr "ActionsAPI [chmod]: Nijedna datoteka ne odgovara uzorku \"{}\"."
 
 #: inary/actionsapi/shelltools.py:70
 #, fuzzy
-msgid "ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})"
-msgstr "ActionsAPI [chmod]: Operacija nije dopuštena: {0} (mode: 0{1})"
+msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
+msgstr "ActionsAPI [chmod]: Operacija nije dopuštena: %s (mode: 0%o)"
 
 #: inary/actionsapi/shelltools.py:72
 #, fuzzy
@@ -486,22 +483,24 @@ msgid "Building format file {}"
 msgstr ""
 
 #: inary/actionsapi/texlivemodules.py:263
-msgid "Map {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg"
-msgstr ""
+#, fuzzy
+msgid "Map {0} is added to {1}/{2}.cfg"
+msgstr "Karta {0} je dodana {1}/{2}.cfg"
 
 #: inary/actionsapi/texlivemodules.py:266
-msgid "MixedMap {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg"
-msgstr ""
+#, fuzzy
+msgid "MixedMap {0} is added to {1}/{2}.cfg"
+msgstr "Gemixte Karta {0} je dodana {1}/{2}.cfg"
 
 #: inary/actionsapi/texlivemodules.py:269
 #, fuzzy
-msgid "p +{0} is added to {1.curDIR()}/{1.srcNAME()}-config.ps"
-msgstr "p +{0} je dodan {1.curDIR()}/{1.srcNAME()}-config.ps"
+msgid "p +{0} is added to {1}/{2}-config.ps"
+msgstr "p +{0} je dodan {1}/{2}-config.ps"
 
 #: inary/actionsapi/texlivemodules.py:272
 #, fuzzy
-msgid "f {0} is added to {1.curDIR()}/{1.srcNAME()}-config"
-msgstr "f {0} je dodan u {1.curDIR()}/{1.srcNAME()}-config"
+msgid "f {0} is added to {1}/{2}-config"
+msgstr "f {0} je dodan u {1}/{2}-config"
 
 #: inary/actionsapi/texlivemodules.py:279
 #, fuzzy
@@ -542,6 +541,10 @@ msgstr "izdanje <="
 msgid " release "
 msgstr "izdanje"
 
+#: inary/analyzer/ctypes.py:28
+msgid "Module \"ctypes\" can not import"
+msgstr ""
+
 #: inary/archive.py:523
 msgid "Problem occured while uncompressing {}.Z file"
 msgstr ""
@@ -570,7 +573,7 @@ msgstr "Paket {} nije nađen u nijednom aktivnom repozitoriju."
 msgid "Installing {0.name}, version {0.version}, release {0.release}"
 msgstr "Instaliram {0.name},verzija {0.version},izdanje {0.release}"
 
-#: inary/atomicoperations.py:192
+#: inary/atomicoperations.py:192 inary/operations/build.py:789
 #, fuzzy
 msgid "{0}-{1} is not a valid INARY version format"
 msgstr "{0}-{1} nije valjan format Inary verzije"
@@ -783,7 +786,7 @@ msgstr "Krivnja za dano izdanje"
 msgid "Blame for all of the releases"
 msgstr "Krivnja za sva izdanja"
 
-#: inary/cli/blame.py:66 inary/data/specfile.py:369
+#: inary/cli/blame.py:66 inary/data/specfile.py:369 inary/data/specfile.py:453
 #, fuzzy
 msgid "Name: {0}, version: {1}, release: {2}\n"
 msgstr "Ime:{0}, verzija{1}, izdanje:{2}\n"
@@ -902,7 +905,8 @@ msgstr "Napravi Inary paket"
 msgid "Supported package formats:"
 msgstr "Podržani formati paketa:"
 
-#: inary/cli/build.py:167
+#: inary/cli/build.py:167 inary/cli/delta.py:74
+#, fuzzy
 msgid "  {} (default)"
 msgstr "  {} (zadano)"
 
@@ -983,7 +987,7 @@ msgstr "Paket {} nije instaliran"
 #: inary/cli/check.py:138
 #, fuzzy
 msgid ""
-"Inary was unable to check the integrity of packages which contain files that "
+"Pisi was unable to check the integrity of packages which contain files that "
 "you don't have read access.\n"
 "Running the check under a privileged user may help fixing this problem."
 msgstr ""
@@ -1132,11 +1136,6 @@ msgstr ""
 msgid "Output directory for produced packages."
 msgstr "Izlazbi direktorij za napravljene pakete."
 
-#: inary/cli/delta.py:74
-#, fuzzy
-msgid "  {} (default)"
-msgstr "  {} (zadano)"
-
 #: inary/cli/disablerepo.py:22
 msgid ""
 "Disable repository\n"
@@ -1268,7 +1267,7 @@ msgstr ""
 msgid "Emerge available packages under given component"
 msgstr ""
 
-#: inary/cli/emerge.py:70
+#: inary/cli/emerge.py:70 inary/cli/emergeup.py:74
 #, fuzzy
 msgid "Output directory: {}"
 msgstr "Izlazni direktorij: {}"
@@ -1301,10 +1300,6 @@ msgstr ""
 #, fuzzy
 msgid "emergeup options"
 msgstr "opcije uklanjanja"
-
-#: inary/cli/emergeup.py:74
-msgid "Output directory: {}"
-msgstr "Izlazni direktorij: {}"
 
 #: inary/cli/enablerepo.py:22
 msgid ""
@@ -2297,11 +2292,6 @@ msgstr "translations.xml datoteka je loše formirana."
 msgid "File '{}' has invalid XML"
 msgstr "Datoteka {} ima neispravan XML"
 
-#: inary/data/specfile.py:453
-#, fuzzy
-msgid "Name: {}, version: {}, release: {}\n"
-msgstr "Ime:{}, verzija{}, izdanje:%s\n"
-
 #: inary/data/specfile.py:459
 msgid "Build Dependencies: "
 msgstr ""
@@ -2311,28 +2301,42 @@ msgstr ""
 msgid "Component {} not found"
 msgstr "Komponenta {} nije nađena"
 
-#: inary/db/filesldb.py:29
-msgid "LevelDB not found! Please install LevelDB and plyvel!"
-msgstr ""
-
-#: inary/db/filesldb.py:40
+#: inary/db/filesdb.py:46 inary/db/filesldb.py:40
 #, fuzzy
 msgid "Creating files database..."
 msgstr "Obnovi bazu podataka datoteka"
 
-#: inary/db/filesldb.py:47
+#: inary/db/filesdb.py:50
+#, fuzzy
+msgid "  ---> Adding '{}' to db... "
+msgstr "Dodajem {} u db... "
+
+#: inary/db/filesdb.py:53
+msgid "OK."
+msgstr "U redu"
+
+#: inary/db/filesdb.py:54 inary/db/filesldb.py:47
 #, fuzzy
 msgid "Added files database..."
 msgstr "Obnovi bazu podataka datoteka"
+
+#: inary/db/filesdb.py:84
+#, fuzzy
+msgid "Cleaning files database folder...  "
+msgstr "Obnovi bazu podataka datoteka"
+
+#: inary/db/filesdb.py:87 inary/db/filesldb.py:79
+msgid "done."
+msgstr ""
+
+#: inary/db/filesldb.py:29
+msgid "LevelDB not found! Please install LevelDB and plyvel!"
+msgstr ""
 
 #: inary/db/filesldb.py:77
 #, fuzzy
 msgid "Cleaning files database folder... "
 msgstr "Obnovi bazu podataka datoteka"
-
-#: inary/db/filesldb.py:79
-msgid "done."
-msgstr ""
 
 #: inary/db/groupdb.py:66 inary/db/groupdb.py:75
 #, fuzzy
@@ -2681,11 +2685,6 @@ msgstr ""
 #: inary/operations/build.py:779
 msgid "Source package '{0}' defines multiple 'Path' tags for {1}"
 msgstr ""
-
-#: inary/operations/build.py:789
-#, fuzzy
-msgid "{0}-{1} is not a valid INARY version format"
-msgstr "{0}-{1} nije valjan format Inary verzije"
 
 #: inary/operations/build.py:807
 msgid ""
@@ -3192,14 +3191,17 @@ msgid "No repository named {} found."
 msgstr "NIjedan reopzitori zvan {} nije nađen."
 
 #: inary/scenarioapi/package.py:67
+#, fuzzy
 msgid "No inary package: {}* found."
 msgstr "Nema inary paketa: {}* nađen."
 
 #: inary/scenarioapi/repoops.py:28
+#, fuzzy
 msgid "Repo already has package named {}."
 msgstr "Repozitorij  već sadrži paket po imenu {}."
 
 #: inary/scenarioapi/repoops.py:52 inary/scenarioapi/repoops.py:59
+#, fuzzy
 msgid "Repo does not have package named {}."
 msgstr "Repo ne sadrži paket po imenu {}."
 
@@ -3564,6 +3566,10 @@ msgstr ""
 msgid "Vietnamese"
 msgstr ""
 
+#: inary/system_literals/sysutils.py:117
+msgid "Module: \"subprocess\" can not import"
+msgstr ""
+
 #: inary/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr ""
@@ -3603,12 +3609,10 @@ msgid "Error while decompressing {0}: {1}"
 msgstr ""
 
 #: inary/util.py:579
-#, fuzzy
 msgid "ERROR: patch ({}) failed"
 msgstr ""
 
 #: inary/util.py:581
-#, fuzzy
 msgid "ERROR: patch ({0}) failed: {1}"
 msgstr ""
 
@@ -3652,6 +3656,10 @@ msgstr "Neispravano ime delta paketa: {}"
 msgid "Invalid version string: '{}'"
 msgstr ""
 
+#, fuzzy
+#~ msgid "Name: {}, version: {}, release: {}\n"
+#~ msgstr "Ime:{}, verzija{}, izdanje:%s\n"
+
 #~ msgid "no such option: {}"
 #~ msgstr "nema takve opcije:  {}"
 
@@ -3690,15 +3698,6 @@ msgstr ""
 
 #~ msgid "INARY package"
 #~ msgstr "INARY paket"
-
-#~ msgid "Map {} is added to {}/%s.cfg"
-#~ msgstr "Karta {} je dodana {}/%s.cfg"
-
-#~ msgid "Adding {} to db... "
-#~ msgstr "Dodajem {} u db... "
-
-#~ msgid "OK."
-#~ msgstr "U redu"
 
 #~ msgid "Not removing conflicted file : {}"
 #~ msgstr "Ne uklanjanje sporne datoteke: {}"

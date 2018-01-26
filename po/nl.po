@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-20 18:20++03\n"
+"POT-Creation-Date: 2018-01-26 10:48++03\n"
 "PO-Revision-Date: 2011-06-17 15:13+0200\n"
 "Last-Translator: Antoon Tolboom <atolboo@gmail.com>\n"
 "Language-Team: Dutch <kde-i18n-doc@kde.org>\n"
@@ -39,7 +39,7 @@ msgid ""
 "Please file a bug report to <http://bugs.sulin.com.tr>."
 msgstr ""
 "Onhandelbare interne uitzondering.\n"
-"Rapporteer deze fout op <http://bugs.inarylinux.org>."
+"Rapporteer deze fout op <http://bugs.sulin.org>."
 
 #: inary-cli:55
 msgid "System error. Program terminated."
@@ -71,19 +71,19 @@ msgstr ""
 "{}/config.log"
 
 # inary/actionsapi/autotools.py:75 :85
-#: inary/actionsapi/autotools.py:82 inary/actionsapi/autotools.py:92
+#: inary/actionsapi/autotools.py:83 inary/actionsapi/autotools.py:93
 #: inary/actionsapi/cmaketools.py:66 inary/actionsapi/kde.py:65
 #: inary/actionsapi/perlmodules.py:55 inary/actionsapi/perlmodules.py:58
 msgid "Configure failed."
 msgstr "Configuratie mislukt."
 
 # inary/actionsapi/autotools.py:77 :87
-#: inary/actionsapi/autotools.py:84 inary/actionsapi/autotools.py:94
+#: inary/actionsapi/autotools.py:85 inary/actionsapi/autotools.py:95
 #: inary/actionsapi/kde.py:67
 msgid "No configure script found."
 msgstr "Geen configuratiescript gevonden."
 
-#: inary/actionsapi/autotools.py:102 inary/actionsapi/cmaketools.py:78
+#: inary/actionsapi/autotools.py:103 inary/actionsapi/cmaketools.py:78
 #: inary/actionsapi/kde.py:72 inary/actionsapi/perlmodules.py:64
 #: inary/actionsapi/perlmodules.py:73 inary/actionsapi/pythonmodules.py:62
 #: inary/actionsapi/scons.py:39
@@ -91,7 +91,7 @@ msgid "Make failed."
 msgstr "Make mislukt."
 
 # inary/actionsapi/autotools.py:119 :127
-#: inary/actionsapi/autotools.py:138 inary/actionsapi/autotools.py:149
+#: inary/actionsapi/autotools.py:139 inary/actionsapi/autotools.py:150
 #: inary/actionsapi/cmaketools.py:98 inary/actionsapi/cmaketools.py:106
 #: inary/actionsapi/kde.py:79 inary/actionsapi/pythonmodules.py:67
 #: inary/actionsapi/rubymodules.py:92 inary/actionsapi/rubymodules.py:99
@@ -99,25 +99,25 @@ msgstr "Make mislukt."
 msgid "Install failed."
 msgstr "Install mislukt."
 
-#: inary/actionsapi/autotools.py:160
+#: inary/actionsapi/autotools.py:161
 msgid "Running aclocal failed."
 msgstr "Uitvoeren aclocal mislukt."
 
 # inary/actionsapi/autotools.py:139 :144
-#: inary/actionsapi/autotools.py:165
+#: inary/actionsapi/autotools.py:166
 msgid "Running autoconf failed."
 msgstr "Uitvoeren autoconf mislukt."
 
 # inary/actionsapi/autotools.py:139 :144
-#: inary/actionsapi/autotools.py:170
+#: inary/actionsapi/autotools.py:171
 msgid "Running autoreconf failed."
 msgstr "Uitvoeren autoreconf mislukt."
 
-#: inary/actionsapi/autotools.py:175
+#: inary/actionsapi/autotools.py:176
 msgid "Running automake failed."
 msgstr "Uitvoeren automake mislukt."
 
-#: inary/actionsapi/autotools.py:180
+#: inary/actionsapi/autotools.py:181
 msgid "Running autoheader failed."
 msgstr "Uitvoeren autoheader mislukt."
 
@@ -281,7 +281,12 @@ msgstr "perl installatie mislukt."
 
 #: inary/actionsapi/pkgconfig.py:40 inary/actionsapi/pkgconfig.py:59
 #: inary/actionsapi/pkgconfig.py:79 inary/actionsapi/pkgconfig.py:99
-#: inary/actionsapi/pkgconfig.py:118 inary/actionsapi/pkgconfig.py:136
+#: inary/actionsapi/pkgconfig.py:118
+#, fuzzy
+msgid "pkg-config is not installed on your system."
+msgstr "Pakket pkgconfig niet geïnstalleerd. Kan niet verwijderen."
+
+#: inary/actionsapi/pkgconfig.py:136
 #, fuzzy
 msgid "Package pkgconfig is not installed on your system."
 msgstr "Pakket pkgconfig niet geïnstalleerd. Kan niet verwijderen."
@@ -301,15 +306,8 @@ msgstr "Uitvoeren {} mislukt."
 msgid "Project file '{}' not found."
 msgstr "Projectbestand {} niet gevonden."
 
-#: inary/actionsapi/qt4.py:56
+#: inary/actionsapi/qt4.py:56 inary/actionsapi/qt5.py:64
 #, fuzzy
-msgid ""
-"It seems there are more than one .pro file, you must specify one. (Possible ."
-"pro files: {})"
-msgstr ""
-"Er is meer dan een .pro-bestand, geef er een op. (Mogelijke .pro-bestand: {})"
-
-#: inary/actionsapi/qt5.py:64
 msgid ""
 "It seems there are more than one .pro file, you must specify one. (Possible ."
 "pro files: {})"
@@ -338,8 +336,8 @@ msgstr "ActionsAPI [chmod]: Geen bestand komt overeen met patroon \"{}\"."
 
 #: inary/actionsapi/shelltools.py:70
 #, fuzzy
-msgid "ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})"
-msgstr "ActionsAPI [chmod]: Bewerking niet toegestaan: {0} (mod: 0{1})"
+msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
+msgstr "ActionsAPI [chmod]: Bewerking niet toegestaan: %s (mod: 0%o)"
 
 #: inary/actionsapi/shelltools.py:72
 #, fuzzy
@@ -349,7 +347,8 @@ msgstr "ActionsAPI [chmod]: bestand {} bestaat niet."
 #: inary/actionsapi/shelltools.py:80
 #, fuzzy
 msgid "ActionsAPI [chown]: Operation not permitted: {0} (uid: {1}, gid: {2})"
-msgstr "ActionsAPI [chown]: handeling niet toegestaan: {0} (uid: {1}, gid: {2})"
+msgstr ""
+"ActionsAPI [chown]: handeling niet toegestaan: {0} (uid: {1}, gid: {2})"
 
 #: inary/actionsapi/shelltools.py:82
 #, fuzzy
@@ -504,8 +503,8 @@ msgstr "Aanmaken /etc/texmf/{}.d"
 #, fuzzy
 msgid "Moving (and symlinking) /usr/share/texmf/{0} to /etc/texmf/{1}.d"
 msgstr ""
-"Verplaatsen ( en maken symbolische link) /usr/share/texmf/{0} naar /etc/texmf/"
-"{1}.d"
+"Verplaatsen ( en maken symbolische link) /usr/share/texmf/{0} naar /etc/"
+"texmf/{1}.d"
 
 #: inary/actionsapi/texlivemodules.py:206
 #, fuzzy
@@ -513,23 +512,24 @@ msgid "Building format file {}"
 msgstr "Bouwen format bestand {}"
 
 #: inary/actionsapi/texlivemodules.py:263
-msgid "Map {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg"
-msgstr "Kaart {0} is toegevoegd aan {1.curDIR()}/{1.srcNAME()}.cfg"
+#, fuzzy
+msgid "Map {0} is added to {1}/{2}.cfg"
+msgstr "Kaart {0} is toegevoegd aan {1}/{2}.cfg"
 
 #: inary/actionsapi/texlivemodules.py:266
 #, fuzzy
-msgid "MixedMap {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg"
-msgstr "Gemixte kaart {0} is toegevoegd aan {1.curDIR()}/{1.srcNAME()}.cfg"
+msgid "MixedMap {0} is added to {1}/{2}.cfg"
+msgstr "Gemixte kaart {0} is toegevoegd aan {1}/{2}.cfg"
 
 #: inary/actionsapi/texlivemodules.py:269
 #, fuzzy
-msgid "p +{0} is added to {1.curDIR()}/{1.srcNAME()}-config.ps"
-msgstr "p +{0} is toegevoegd aan {1.curDIR()}/{1.srcNAME()}-config.ps"
+msgid "p +{0} is added to {1}/{2}-config.ps"
+msgstr "p +{0} is toegevoegd aan {1}/{2}-config.ps"
 
 #: inary/actionsapi/texlivemodules.py:272
 #, fuzzy
-msgid "f {0} is added to {1.curDIR()}/{1.srcNAME()}-config"
-msgstr "f {0} is toegevoegd aan {1.curDIR()}/{1.srcNAME()}-config"
+msgid "f {0} is added to {1}/{2}-config"
+msgstr "f {0} is toegevoegd aan {1}/{2}-config"
 
 #: inary/actionsapi/texlivemodules.py:279
 #, fuzzy
@@ -571,6 +571,10 @@ msgstr " uitgave <= "
 msgid " release "
 msgstr " uitgave "
 
+#: inary/analyzer/ctypes.py:28
+msgid "Module \"ctypes\" can not import"
+msgstr ""
+
 #: inary/archive.py:523
 #, fuzzy
 msgid "Problem occured while uncompressing {}.Z file"
@@ -601,7 +605,7 @@ msgstr "Pakket {} niet gevonden in de actieve softwarebronnen."
 msgid "Installing {0.name}, version {0.version}, release {0.release}"
 msgstr "Installatie {0.name}, versie {0.version}, uitgave {0.release}"
 
-#: inary/atomicoperations.py:192
+#: inary/atomicoperations.py:192 inary/operations/build.py:789
 #, fuzzy
 msgid "{0}-{1} is not a valid INARY version format"
 msgstr "{0}-{1} is niet een geldig INARY-versie formaat"
@@ -822,7 +826,7 @@ msgstr "Blame voor de gegeven uitgave"
 msgid "Blame for all of the releases"
 msgstr "Blame voor alle uitgaven"
 
-#: inary/cli/blame.py:66 inary/data/specfile.py:369
+#: inary/cli/blame.py:66 inary/data/specfile.py:369 inary/data/specfile.py:453
 #, fuzzy
 msgid "Name: {0}, version: {1}, release: {2}\n"
 msgstr "Naam: {0}, versie {1}, uitgave {2}\n"
@@ -952,7 +956,8 @@ msgstr "INARY-pakket aanmaken"
 msgid "Supported package formats:"
 msgstr "Ondersteunde pakketformaten:"
 
-#: inary/cli/build.py:167
+#: inary/cli/build.py:167 inary/cli/delta.py:74
+#, fuzzy
 msgid "  {} (default)"
 msgstr "  {} (standaard)"
 
@@ -1047,7 +1052,7 @@ msgstr "Pakket {} niet geïnstalleerd"
 #: inary/cli/check.py:138
 #, fuzzy
 msgid ""
-"Inary was unable to check the integrity of packages which contain files that "
+"Pisi was unable to check the integrity of packages which contain files that "
 "you don't have read access.\n"
 "Running the check under a privileged user may help fixing this problem."
 msgstr ""
@@ -1218,11 +1223,6 @@ msgstr ""
 #: inary/cli/delta.py:59
 msgid "Output directory for produced packages."
 msgstr "Uitvoermap voor geproduceerde pakketten."
-
-#: inary/cli/delta.py:74
-#, fuzzy
-msgid "  {} (default)"
-msgstr "  {} (standaard)"
 
 #: inary/cli/disablerepo.py:22
 msgid ""
@@ -1407,14 +1407,10 @@ msgstr ""
 "\n"
 "Een componentnaam is ook mogelijk.\n"
 
-#: inary/cli/emergeup.py:44
+#: inary/cli/emergeup.py:44 inary/cli/emergeup.py:74
 #, fuzzy
 msgid "emergeup options"
 msgstr "duik opties op"
-
-#: inary/cli/emergeup.py:74
-msgid "Output directory: {}"
-msgstr "Doelmap: {}"
 
 #: inary/cli/enablerepo.py:22
 msgid ""
@@ -2583,11 +2579,6 @@ msgstr "translations.xml bestand is niet goed. "
 msgid "File '{}' has invalid XML"
 msgstr "Bestand {} bevat ongeldige XML"
 
-#: inary/data/specfile.py:453
-#, fuzzy
-msgid "Name: {0}, version: {1}, release: {2}\n"
-msgstr "Naam: {0}, versie {1}, uitgave {2}\n"
-
 #: inary/data/specfile.py:459
 msgid "Build Dependencies: "
 msgstr "Bouw afhankelijkheden: "
@@ -2597,29 +2588,43 @@ msgstr "Bouw afhankelijkheden: "
 msgid "Component {} not found"
 msgstr "Component {} niet gevonden"
 
-#: inary/db/filesldb.py:29
-msgid "LevelDB not found! Please install LevelDB and plyvel!"
-msgstr ""
-
-#: inary/db/filesldb.py:40
+#: inary/db/filesdb.py:46 inary/db/filesldb.py:40
 #, fuzzy
 msgid "Creating files database..."
 msgstr "Herbouw bestanden database"
 
-#: inary/db/filesldb.py:47
+#: inary/db/filesdb.py:50
+#, fuzzy
+msgid "  ---> Adding '{}' to db... "
+msgstr "Toevoegen {} aan db... "
+
+#: inary/db/filesdb.py:53
+msgid "OK."
+msgstr "OK."
+
+#: inary/db/filesdb.py:54 inary/db/filesldb.py:47
 #, fuzzy
 msgid "Added files database..."
 msgstr "Herbouw bestanden database"
+
+#: inary/db/filesdb.py:84
+#, fuzzy
+msgid "Cleaning files database folder...  "
+msgstr "Opschonen bouwmap..."
+
+#: inary/db/filesdb.py:87 inary/db/filesldb.py:79
+#, fuzzy
+msgid "done."
+msgstr "Gereed."
+
+#: inary/db/filesldb.py:29
+msgid "LevelDB not found! Please install LevelDB and plyvel!"
+msgstr ""
 
 #: inary/db/filesldb.py:77
 #, fuzzy
 msgid "Cleaning files database folder... "
 msgstr "Opschonen bouwmap..."
-
-#: inary/db/filesldb.py:79
-#, fuzzy
-msgid "done."
-msgstr "Gereed."
 
 #: inary/db/groupdb.py:66 inary/db/groupdb.py:75
 #, fuzzy
@@ -2654,8 +2659,8 @@ msgid ""
 "Installation info for package '{}' is broken. Reinstall it to fix this "
 "problem."
 msgstr ""
-"Installatie-informatie voor pakket {} is niet goed. Installeer opnieuw "
-"voor het oplossen van het probleem."
+"Installatie-informatie voor pakket {} is niet goed. Installeer opnieuw voor "
+"het oplossen van het probleem."
 
 #: inary/db/installdb.py:367
 #, fuzzy
@@ -2996,11 +3001,6 @@ msgstr "Bronpakket '{0}' definieert een relatief 'Pad' element: {1}"
 msgid "Source package '{0}' defines multiple 'Path' tags for {1}"
 msgstr "Bronpakket {0} definieert meerdere 'Pad' tags voor {1}"
 
-#: inary/operations/build.py:789
-#, fuzzy
-msgid "{0}-{1} is not a valid INARY version format"
-msgstr "{0}-{1} is niet een geldig INARY-versie formaat"
-
 #: inary/operations/build.py:807
 msgid ""
 "Safety switch: following extra packages in system.devel will be installed: "
@@ -3111,8 +3111,7 @@ msgstr ""
 msgid ""
 "Package '{}' has the same release number with the new package. Skipping it..."
 msgstr ""
-"Pakket {} heeft hetzelfde vrijgavenummer met het nieuwe pakket. "
-"Overslaan..."
+"Pakket {} heeft hetzelfde vrijgavenummer met het nieuwe pakket. Overslaan..."
 
 #: inary/operations/delta.py:66
 #, fuzzy
@@ -3120,8 +3119,8 @@ msgid ""
 "All files in the package '{}' are different from the files in the new "
 "package. Skipping it..."
 msgstr ""
-"Alle bestanden in het pakket {} zijn ongelijk aan de bestanden in het "
-"nieuwe pakket. Overslaan..."
+"Alle bestanden in het pakket {} zijn ongelijk aan de bestanden in het nieuwe "
+"pakket. Overslaan..."
 
 #: inary/operations/delta.py:108
 #, fuzzy
@@ -3555,14 +3554,17 @@ msgid "No repository named {} found."
 msgstr "Geen softwarebron met de naam {} gevonden."
 
 #: inary/scenarioapi/package.py:67
+#, fuzzy
 msgid "No inary package: {}* found."
 msgstr "Geen inary pakket {}* gevonden."
 
 #: inary/scenarioapi/repoops.py:28
-msgid "Repo already has package named {}."
+#, fuzzy
+msgid "Repo already has package named ()."
 msgstr "Bron bevat al een pakket met de naam {}."
 
 #: inary/scenarioapi/repoops.py:52 inary/scenarioapi/repoops.py:59
+#, fuzzy
 msgid "Repo does not have package named {}."
 msgstr "Bron bevat geen pakket met de naam {}."
 
@@ -3588,8 +3590,7 @@ msgstr "Configureren {} pakket"
 #: inary/scomiface.py:102
 #, fuzzy
 msgid "SCOM package updated. From now on, using new SCOM daemon."
-msgstr ""
-"SCOM-pakket opgewaardeerd. Van nu af aan, niewe SCOM-daemon gebruiken."
+msgstr "SCOM-pakket opgewaardeerd. Van nu af aan, niewe SCOM-daemon gebruiken."
 
 #: inary/scomiface.py:109
 #, fuzzy
@@ -3957,6 +3958,10 @@ msgstr "Oekraïens"
 msgid "Vietnamese"
 msgstr "Vietnamees"
 
+#: inary/system_literals/sysutils.py:117
+msgid "Module: \"subprocess\" can not import"
+msgstr ""
+
 #: inary/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr "setAuthInfo heeft een unieke relatie nodig  (gebruiker, wachtwoord)"
@@ -4107,15 +4112,6 @@ msgstr "Ongeldige versie tekenreeks: {}"
 
 #~ msgid "INARY package"
 #~ msgstr "INARY-pakket"
-
-#~ msgid "Map {} is added to {}/%s.cfg"
-#~ msgstr "Kaart {} is toegevoegd aan {}/%s.cfg"
-
-#~ msgid "Adding {} to db... "
-#~ msgstr "Toevoegen {} aan db... "
-
-#~ msgid "OK."
-#~ msgstr "OK."
 
 #~ msgid "Not removing conflicted file : {}"
 #~ msgstr "Niet verwijderen conflicterend bestand: {}"
@@ -4418,8 +4414,7 @@ msgstr "Ongeldige versie tekenreeks: {}"
 #~ msgstr "Kan geen delta maken voor hetzelfde pakket!"
 
 #~ msgid ""
-#~ "All of the files under the install dir {} has been collected by "
-#~ "package(s)"
+#~ "All of the files under the install dir {} has been collected by package(s)"
 #~ msgstr ""
 #~ "Alle bestanden in de installatiemap {} zijn verzameld door pakket(ten)"
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: INARY\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-20 18:18++03\n"
+"POT-Creation-Date: 2018-01-26 10:48++03\n"
 "PO-Revision-Date: 2010-12-27 13:15+0100\n"
 "Last-Translator: Attila Siposs <sipiatti@gmail.com>\n"
 "Language-Team: Hungarian <pardus-translators@pardus.org.tr>\n"
@@ -37,7 +37,7 @@ msgid ""
 "Please file a bug report to <http://bugs.sulin.com.tr>."
 msgstr ""
 "Nem kezelt belső hiba.\n"
-"Küldjön hibabejelentést a <http://bugs.inarylinux.org> címen."
+"Küldjön hibabejelentést a <http://bugs.sulin.org> címen."
 
 #: inary-cli:55
 msgid "System error. Program terminated."
@@ -68,25 +68,25 @@ msgstr ""
 "Kérjük, csatolja a config.log-ot a hibajelentéshez:\n"
 "{}/config.log"
 
-#: inary/actionsapi/autotools.py:82 inary/actionsapi/autotools.py:92
+#: inary/actionsapi/autotools.py:83 inary/actionsapi/autotools.py:93
 #: inary/actionsapi/cmaketools.py:66 inary/actionsapi/kde.py:65
 #: inary/actionsapi/perlmodules.py:55 inary/actionsapi/perlmodules.py:58
 msgid "Configure failed."
 msgstr "A configure végrehajtása nem sikerült."
 
-#: inary/actionsapi/autotools.py:84 inary/actionsapi/autotools.py:94
+#: inary/actionsapi/autotools.py:85 inary/actionsapi/autotools.py:95
 #: inary/actionsapi/kde.py:67
 msgid "No configure script found."
 msgstr "Nem található a configure szkript."
 
-#: inary/actionsapi/autotools.py:102 inary/actionsapi/cmaketools.py:78
+#: inary/actionsapi/autotools.py:103 inary/actionsapi/cmaketools.py:78
 #: inary/actionsapi/kde.py:72 inary/actionsapi/perlmodules.py:64
 #: inary/actionsapi/perlmodules.py:73 inary/actionsapi/pythonmodules.py:62
 #: inary/actionsapi/scons.py:39
 msgid "Make failed."
 msgstr "A make végrehajtása nem sikerült."
 
-#: inary/actionsapi/autotools.py:138 inary/actionsapi/autotools.py:149
+#: inary/actionsapi/autotools.py:139 inary/actionsapi/autotools.py:150
 #: inary/actionsapi/cmaketools.py:98 inary/actionsapi/cmaketools.py:106
 #: inary/actionsapi/kde.py:79 inary/actionsapi/pythonmodules.py:67
 #: inary/actionsapi/rubymodules.py:92 inary/actionsapi/rubymodules.py:99
@@ -94,23 +94,23 @@ msgstr "A make végrehajtása nem sikerült."
 msgid "Install failed."
 msgstr "A telepítés nem sikerült."
 
-#: inary/actionsapi/autotools.py:160
+#: inary/actionsapi/autotools.py:161
 msgid "Running aclocal failed."
 msgstr "Az aclocal futtatása nem sikerült."
 
-#: inary/actionsapi/autotools.py:165
+#: inary/actionsapi/autotools.py:166
 msgid "Running autoconf failed."
 msgstr "Az autoconf végrehajtása nem sikerült."
 
-#: inary/actionsapi/autotools.py:170
+#: inary/actionsapi/autotools.py:171
 msgid "Running autoreconf failed."
 msgstr "Az autoreconf futása nem sikerült."
 
-#: inary/actionsapi/autotools.py:175
+#: inary/actionsapi/autotools.py:176
 msgid "Running automake failed."
 msgstr "Az automake futása nem sikerült."
 
-#: inary/actionsapi/autotools.py:180
+#: inary/actionsapi/autotools.py:181
 msgid "Running autoheader failed."
 msgstr "Az autoheader futása nem sikerült."
 
@@ -271,7 +271,12 @@ msgstr "A perl modul telepítése nem sikerült."
 
 #: inary/actionsapi/pkgconfig.py:40 inary/actionsapi/pkgconfig.py:59
 #: inary/actionsapi/pkgconfig.py:79 inary/actionsapi/pkgconfig.py:99
-#: inary/actionsapi/pkgconfig.py:118 inary/actionsapi/pkgconfig.py:136
+#: inary/actionsapi/pkgconfig.py:118
+#, fuzzy
+msgid "pkg-config is not installed on your system."
+msgstr "A(z) pkgconfig csomag nincs telepítve. Nem tudom eltávolítani."
+
+#: inary/actionsapi/pkgconfig.py:136
 #, fuzzy
 msgid "Package pkgconfig is not installed on your system."
 msgstr "A(z) pkgconfig csomag nincs telepítve. Nem tudom eltávolítani."
@@ -290,16 +295,8 @@ msgstr "A(z) {} futtatása nem sikerült."
 msgid "Project file '{}' not found."
 msgstr "A(z) {} projektfájl nem található."
 
-#: inary/actionsapi/qt4.py:56
+#: inary/actionsapi/qt4.py:56 inary/actionsapi/qt5.py:64
 #, fuzzy
-msgid ""
-"It seems there are more than one .pro file, you must specify one. (Possible ."
-"pro files: {})"
-msgstr ""
-"Úgy tűnik több mint egy .pro fájl van. Válasszon ki egyet. (Lehetséges .pro "
-"fájlok: {})"
-
-#: inary/actionsapi/qt5.py:64
 msgid ""
 "It seems there are more than one .pro file, you must specify one. (Possible ."
 "pro files: {})"
@@ -329,8 +326,8 @@ msgstr "ActionsAPI [chmod]: Nincs illeszkedő fájlnév-minta \"{}\"."
 
 #: inary/actionsapi/shelltools.py:70
 #, fuzzy
-msgid "ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})"
-msgstr "ActionsAPI [chmod]: A művelet nem engedélyezett: {0} (mode: 0{1})"
+msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
+msgstr "ActionsAPI [chmod]: A művelet nem engedélyezett: %s (mode: 0%o)"
 
 #: inary/actionsapi/shelltools.py:72
 #, fuzzy
@@ -340,7 +337,8 @@ msgstr "ActionsAPI [chmod]: A(z) {} nevű fájl nem létezik."
 #: inary/actionsapi/shelltools.py:80
 #, fuzzy
 msgid "ActionsAPI [chown]: Operation not permitted: {0} (uid: {1}, gid: {2})"
-msgstr "ActionsAPI [chown]: A művelet nem engedélyezett: {0} (uid: {1}, gid: {2})"
+msgstr ""
+"ActionsAPI [chown]: A művelet nem engedélyezett: {0} (uid: {1}, gid: {2})"
 
 #: inary/actionsapi/shelltools.py:82
 #, fuzzy
@@ -469,7 +467,8 @@ msgstr "Szimbolikus link {} kihagyva (speciális eset)"
 #: inary/actionsapi/texlivemodules.py:97
 #, fuzzy
 msgid "Symlink {0[0]} -> {0[1]} skipped (texlive-core takes care of it."
-msgstr "Szimbolikus link {0[0]} -> {0[1]} kihagyva (texlive-core gondoskodik róla."
+msgstr ""
+"Szimbolikus link {0[0]} -> {0[1]} kihagyva (texlive-core gondoskodik róla."
 
 #: inary/actionsapi/texlivemodules.py:100
 #, fuzzy
@@ -504,23 +503,24 @@ msgid "Building format file {}"
 msgstr "A(z) {} formátumfájl építése"
 
 #: inary/actionsapi/texlivemodules.py:263
-msgid "Map {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg"
-msgstr ""
+#, fuzzy
+msgid "Map {0} is added to {1}/{2}.cfg"
+msgstr "A {0} mixedmap hozzáadva {1}/{2}.cfg-hez"
 
 #: inary/actionsapi/texlivemodules.py:266
 #, fuzzy
-msgid "MixedMap {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg"
-msgstr "A(z) {0} MixedMap hozzáadva {1.curDIR()}/{1.srcNAME()}.cfg-hez"
+msgid "MixedMap {0} is added to {1}/{2}.cfg"
+msgstr "A {0} map hozzáadva {1}/{2}.cfg-hez"
 
 #: inary/actionsapi/texlivemodules.py:269
 #, fuzzy
-msgid "p +{0} is added to {1.curDIR()}/{1.srcNAME()}-config.ps"
-msgstr "p +{0} hozzáadva {1.curDIR()}/{1.srcNAME()}-config.ps-hez"
+msgid "p +{0} is added to {1}/{2}-config.ps"
+msgstr "p +{0} hozzáadva {1}/{2}-config.ps-hez"
 
 #: inary/actionsapi/texlivemodules.py:272
 #, fuzzy
-msgid "f {0} is added to {1.curDIR()}/{1.srcNAME()}-config"
-msgstr "f {0} {1.curDIR()}/1.srcNAME()}-config-hoz"
+msgid "f {0} is added to {1}/{2}-config"
+msgstr "f {0} {1}/2}-config-hoz"
 
 #: inary/actionsapi/texlivemodules.py:279
 #, fuzzy
@@ -562,6 +562,10 @@ msgstr "kiadás <="
 msgid " release "
 msgstr "kiadás"
 
+#: inary/analyzer/ctypes.py:28
+msgid "Module \"ctypes\" can not import"
+msgstr ""
+
 #: inary/archive.py:523
 #, fuzzy
 msgid "Problem occured while uncompressing {}.Z file"
@@ -592,7 +596,7 @@ msgstr "A(z) {} csomag nem található meg az aktív tárolókban."
 msgid "Installing {0.name}, version {0.version}, release {0.release}"
 msgstr "{0.name} telepítése, verzió {0.version}, kiadás {0.release}"
 
-#: inary/atomicoperations.py:192
+#: inary/atomicoperations.py:192 inary/operations/build.py:789
 #, fuzzy
 msgid "{0}-{1} is not a valid INARY version format"
 msgstr "{0}-{1} nem érvényes INARY verzió formátum"
@@ -810,7 +814,7 @@ msgstr "az adott verzió információi"
 msgid "Blame for all of the releases"
 msgstr "az összes verzó információi"
 
-#: inary/cli/blame.py:66 inary/data/specfile.py:369
+#: inary/cli/blame.py:66 inary/data/specfile.py:369 inary/data/specfile.py:453
 #, fuzzy
 msgid "Name: {0}, version: {1}, release: {2}\n"
 msgstr "Név: {0}, verzió: {1}, kiadás: {2}\n"
@@ -940,7 +944,8 @@ msgstr "INARY csomag létrehozása"
 msgid "Supported package formats:"
 msgstr "Támogatott csomagformátumok:"
 
-#: inary/cli/build.py:167
+#: inary/cli/build.py:167 inary/cli/delta.py:74
+#, fuzzy
 msgid "  {} (default)"
 msgstr "  {} (alapértelmezett)"
 
@@ -1035,7 +1040,7 @@ msgstr "A(z) {} csomag nincs telepítve"
 
 #: inary/cli/check.py:138
 msgid ""
-"Inary was unable to check the integrity of packages which contain files that "
+"Pisi was unable to check the integrity of packages which contain files that "
 "you don't have read access.\n"
 "Running the check under a privileged user may help fixing this problem."
 msgstr ""
@@ -1202,11 +1207,6 @@ msgstr ""
 msgid "Output directory for produced packages."
 msgstr "Könyvtár az elkészített csomagok számára"
 
-#: inary/cli/delta.py:74
-#, fuzzy
-msgid "  {} (default)"
-msgstr "  {} (alapértelmezett)"
-
 #: inary/cli/disablerepo.py:22
 msgid ""
 "Disable repository\n"
@@ -1359,7 +1359,7 @@ msgstr "emerge opciók"
 msgid "Emerge available packages under given component"
 msgstr "Az adott komponens elérhető csomagjainak beépítése."
 
-#: inary/cli/emerge.py:70
+#: inary/cli/emerge.py:70 inary/cli/emergeup.py:74
 #, fuzzy
 msgid "Output directory: {}"
 msgstr "Kimeneti könyvtár: {}"
@@ -1393,10 +1393,6 @@ msgstr ""
 #, fuzzy
 msgid "emergeup options"
 msgstr "emerge opciók"
-
-#: inary/cli/emergeup.py:74
-msgid "Output directory: {}"
-msgstr "Kimeneti könyvtár: {}"
 
 #: inary/cli/enablerepo.py:22
 msgid ""
@@ -2570,11 +2566,6 @@ msgstr "a translation.xml fájl hibás formátumú"
 msgid "File '{}' has invalid XML"
 msgstr "A(z) {} fájl hibás XML adatot tartalmaz"
 
-#: inary/data/specfile.py:453
-#, fuzzy
-msgid "Name: {0}, version: {1}, release: {2}\n"
-msgstr "Név: {0}, verzió: {1}, kiadás: {2}\n"
-
 #: inary/data/specfile.py:459
 msgid "Build Dependencies: "
 msgstr "Build függőségek:"
@@ -2584,29 +2575,43 @@ msgstr "Build függőségek:"
 msgid "Component {} not found"
 msgstr "A(z) {} komponens nem található."
 
-#: inary/db/filesldb.py:29
-msgid "LevelDB not found! Please install LevelDB and plyvel!"
-msgstr ""
-
-#: inary/db/filesldb.py:40
+#: inary/db/filesdb.py:46 inary/db/filesldb.py:40
 #, fuzzy
 msgid "Creating files database..."
 msgstr "Fájl adatbázis újraépítése"
 
-#: inary/db/filesldb.py:47
+#: inary/db/filesdb.py:50
+#, fuzzy
+msgid "  ---> Adding '{}' to db... "
+msgstr "* {} hozzáadása az adatbázishoz..."
+
+#: inary/db/filesdb.py:53
+msgid "OK."
+msgstr "OK."
+
+#: inary/db/filesdb.py:54 inary/db/filesldb.py:47
 #, fuzzy
 msgid "Added files database..."
 msgstr "Fájl adatbázis újraépítése"
+
+#: inary/db/filesdb.py:84
+#, fuzzy
+msgid "Cleaning files database folder...  "
+msgstr "Átmeneti könyvtár tisztítása..."
+
+#: inary/db/filesdb.py:87 inary/db/filesldb.py:79
+#, fuzzy
+msgid "done."
+msgstr "Kész."
+
+#: inary/db/filesldb.py:29
+msgid "LevelDB not found! Please install LevelDB and plyvel!"
+msgstr ""
 
 #: inary/db/filesldb.py:77
 #, fuzzy
 msgid "Cleaning files database folder... "
 msgstr "Átmeneti könyvtár tisztítása..."
-
-#: inary/db/filesldb.py:79
-#, fuzzy
-msgid "done."
-msgstr "Kész."
 
 #: inary/db/groupdb.py:66 inary/db/groupdb.py:75
 #, fuzzy
@@ -2980,11 +2985,6 @@ msgstr ""
 #: inary/operations/build.py:779
 msgid "Source package '{0}' defines multiple 'Path' tags for {1}"
 msgstr ""
-
-#: inary/operations/build.py:789
-#, fuzzy
-msgid "{0}-{1} is not a valid INARY version format"
-msgstr "{0}-{1} nem érvényes INARY verzió formátum"
 
 #: inary/operations/build.py:807
 msgid ""
@@ -3534,14 +3534,17 @@ msgid "No repository named {} found."
 msgstr "{} nevű tároló nem található."
 
 #: inary/scenarioapi/package.py:67
+#, fuzzy
 msgid "No inary package: {}* found."
 msgstr "Nem található {}* inary csomag."
 
 #: inary/scenarioapi/repoops.py:28
+#, fuzzy
 msgid "Repo already has package named {}."
 msgstr "A tároló már tartalmaz egy {} nevű csomagot."
 
 #: inary/scenarioapi/repoops.py:52 inary/scenarioapi/repoops.py:59
+#, fuzzy
 msgid "Repo does not have package named {}."
 msgstr "A tároló nem tartalmaz {} nevű csomagot."
 
@@ -3929,6 +3932,10 @@ msgstr ""
 msgid "Vietnamese"
 msgstr ""
 
+#: inary/system_literals/sysutils.py:117
+msgid "Module: \"subprocess\" can not import"
+msgstr ""
+
 #: inary/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr "a setAuthInfo bemenete egy tuple (user, pass)"
@@ -4028,6 +4035,7 @@ msgstr "Érvénytelen deltacsomagnév: {}"
 msgid "Invalid version string: '{}'"
 msgstr "Érvénytelen verzió-sztring: {}"
 
+
 #~ msgid "no such option: {}"
 #~ msgstr "nincs ilyen opció: {}"
 
@@ -4082,16 +4090,6 @@ msgstr "Érvénytelen verzió-sztring: {}"
 #, fuzzy
 #~ msgid "INARY package"
 #~ msgstr "INARY csomag létrehozása"
-
-#~ msgid "Map {} is added to {}/%s.cfg"
-#~ msgstr "A {} map hozzáadva {}/%s.cfg-hez"
-
-#, fuzzy
-#~ msgid "Adding {} to db... "
-#~ msgstr "* {} hozzáadása az adatbázishoz..."
-
-#~ msgid "OK."
-#~ msgstr "OK."
 
 #~ msgid "Not removing conflicted file : {}"
 #~ msgstr "Ütköző fájl nincs eltávolítva: {} "
@@ -4222,11 +4220,9 @@ msgstr "Érvénytelen verzió-sztring: {}"
 #~ "engedélyezze a buildno opciót a inary.conf-ban."
 
 #~ msgid ""
-#~ "All of the files under the install dir {} has been collected by "
-#~ "package(s)"
+#~ "All of the files under the install dir {} has been collected by package(s)"
 #~ msgstr ""
-#~ "A telepési könyvtárban {} található valamennyi fájl a csomag(ok)ba "
-#~ "gyűjtve"
+#~ "A telepési könyvtárban {} található valamennyi fájl a csomag(ok)ba gyűjtve"
 
 #~ msgid "Cannot create delta for same package!"
 #~ msgstr "Nem hozható létre különbözet ugyanazon csomagból!"

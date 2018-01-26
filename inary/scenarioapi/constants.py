@@ -16,13 +16,13 @@ class _constant:
 
     def __setattr__(self, name, value):
         if name in self.__dict__:
-            raise self.ConstError("Can't rebind constant: %s" % name)
+            raise self.ConstError("Can't rebind constant: {}".format(name))
         # Binding an attribute once to a const is available
         self.__dict__[name] = value
 
     def __delattr__(self, name):
         if name in self.__dict__:
-            raise self.ConstError("Can't unbind constant: %s" % name)
+            raise self.ConstError("Can't unbind constant: {}".format(name))
         # we don't have an attribute by this name
         raise NameError(name)
 
@@ -57,8 +57,8 @@ consts.packager_name = "Faik Uygur"
 consts.packager_email = "faik@pardus.org.tr"
 
 consts.homepage = "http://cekirdek.uludag.org.tr/~faik/inary"
-consts.summary = "%s is a good application"
-consts.description = "%s is a free software that can do anything it wants"
+consts.summary = "{} is a good application"
+consts.description = "{} is a free software that can do anything it wants"
 consts.license = ["GPL-2"]
 
 consts.skel_sha1sum = "cc64dfa6e068fe1f6fb68a635878b1ea21acfac7"

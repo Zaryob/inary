@@ -25,4 +25,4 @@ def let_inary_had(*args):
     url = os.path.join(os.getcwd(), consts.repo_url)
     inary_added_repo(consts.repo_name, url)
     packages = util.strlist(args).rstrip()
-    os.system("inary -D%s install --ignore-dependency %s" % (consts.inary_db, packages))
+    os.system("inary -D{0} install --ignore-dependency {1}".format(consts.inary_db, packages))

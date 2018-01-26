@@ -36,12 +36,12 @@ class Package:
         self.create_package()
 
     def create_inary(self):
-        os.system("inary build %s -O %s > /dev/null 2>&1" % (consts.pspec_path, consts.repo_path))
+        os.system("inary build {0} -O {1} > /dev/null 2>&1".format(consts.pspec_path, consts.repo_path))
 
     def create_package(self):
         pspec = Pspec(self.name, consts.pspec_path)
-        pspec.set_source(consts.homepage, consts.summary % self.name,
-                         consts.description % self.name, consts.license, self.partOf)
+        pspec.set_source(consts.homepage, consts.summary.format(self.name),
+                         consts.description.format(self.name), consts.license, self.partOf)
         pspec.set_packager(consts.packager_name, consts.packager_email)
         pspec.add_archive(consts.skel_sha1sum, consts.skel_type, consts.skel_uri)
         pspec.set_package(self.dependencies, self.conflicts)
@@ -64,7 +64,7 @@ class Package:
 
         found = glob.glob(pkg + consts.glob_inarys)
         if not found:
-            raise Exception(_("No inary package: %s* found.") % pkg)
+            raise Exception(_("No inary package: {}* found.").format(pkg))
 
         return os.path.basename(found[0])
 

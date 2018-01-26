@@ -19,7 +19,7 @@ WorkDir = "skeleton"
 
 def install():
     inarytools.dobin("skeleton.py")
-    inarytools.rename("/usr/bin/skeleton.py", "%s")
+    inarytools.rename("/usr/bin/skeleton.py", "{}")
 """
 
     def __init__(self, name, filepath):
@@ -27,4 +27,4 @@ def install():
         self.filepath = filepath
 
     def write(self):
-        open(self.filepath, "w").write(self.template % self.name)
+        open(self.filepath, "w").write(self.template.format(self.name))
