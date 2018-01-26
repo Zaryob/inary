@@ -795,6 +795,7 @@ def rebuild_db():
     inary.api.set_userinterface(ui)
     inary.api.set_options(options)
     inary.api.set_scom(scom)
+    ctx.filesdb.create_filesdb()
 
 def calculate_conflicts(*args, **kw):
     return inary.conflict.calculate_conflicts(*args, **kw)
