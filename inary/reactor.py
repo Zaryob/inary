@@ -620,7 +620,7 @@ def configure_pending(packages=None):
             if installdb.has_package(x):
                 pkginfo = installdb.get_package(x)
                 pkg_path = installdb.package_path(x)
-                m = inary.metadata.MetaData()
+                m = inary.data.metadata.MetaData()
                 metadata_path = inary.util.join_path(pkg_path, ctx.const.metadata_xml)
                 m.read(metadata_path)
                 # FIXME: we need a full package info here!
@@ -669,7 +669,7 @@ def info_name(package_name, useinstalldb=False):
     else:
         package, repo = packagedb.get_package_repo(package_name)
 
-    metadata = inary.metadata.MetaData()
+    metadata = inary.data.metadata.MetaData()
     metadata.package = package
     #FIXME: get it from sourcedb if available
     metadata.source = None
@@ -789,7 +789,7 @@ def rebuild_db():
 
     ctx.filesdb.close()
     ctx.filesdb.destroy()
-    ctx.filesdb = inary.db.filesldb.FilesLDB()
+    ctx.filesdb = inary.db.filesdb.FilesDB()
 
     # reinitialize everything
     inary.api.set_userinterface(ui)

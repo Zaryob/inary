@@ -66,15 +66,16 @@ def configure(parameters = ''):
         prefix = get.emul32prefixDIR() if get.buildTYPE() == "emul32" else get.defaultprefixDIR()
         args = './configure \
                 --prefix=/{0} \
-                --build={1.HOST()} \
-                --mandir=/{1.manDIR()} \
-                --infodir=/{1.infoDIR()} \
-                --datadir=/{1.dataDIR()} \
-                --sysconfdir=/{1.confDIR()} \
-                --localstatedir=/{1.localstateDIR()} \
-                --libexecdir=/{1.libexecDIR()} \
-                {2}{3}'.format(prefix, \
-                         get,
+                --build={1} \
+                --mandir=/{2} \
+                --infodir=/{3} \
+                --datadir=/{4} \
+                --sysconfdir=/{5} \
+                --localstatedir=/{6} \
+                --libexecdir=/{7} \
+                {8}{9}'.format(prefix, \
+                         get.HOST(), get.manDIR(), get.infoDIR(),
+                         get.dataDIR(), get.confDIR(), get.localstateDIR(), get.libexecDIR(),
                          "--libdir=/usr/lib32 " if get.buildTYPE() == "emul32" else "",
                          parameters)
 

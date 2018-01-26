@@ -78,5 +78,5 @@ if __name__ == "__main__":
 
     cli = inarycli.InaryCLI()
     if cli.command.name[1] in "rdb sf".split():
-        ctx.filesdb = inary.db.filesldb.FilesLDB()
+        ctx.filesdb = inary.db.filesdb.FilesDB()
     cli.run_command()

@@ -28,7 +28,7 @@ import inary.data.metadata
 import inary.data.pgraph as pgraph
 import inary.db.packagedb
 import inary.db.repodb
-import inary.db.filesldb
+import inary.db.filesdb
 import inary.db.installdb
 import inary.db.historydb
 import inary.db.sourcedb

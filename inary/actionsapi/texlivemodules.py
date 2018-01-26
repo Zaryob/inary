@@ -28,7 +28,7 @@ from inary.actionsapi.shelltools import *
 from inary.actionsapi.inarytools import dodoc, dodir, domove, dosym, insinto, removeDir
 
 
-WorkDir = "{0.srcNAME()}-{0.srcVERSION().split('_')[-1]}".format(get)
+WorkDir = "{0}-{1.split('_')[-1]}".format(get.srcNAME(), get.srcVERSION())
 
 class CompileError(inary.actionsapi.Error):
     def __init__(self, value=''):
@@ -127,20 +127,20 @@ def installTexmfFiles():
 
 def installConfigFiles():
     '''Installing config files'''
-    if can_access_file("{0.curDIR()}/{0.srcNAME()}.cfg".format(get)):
-        insinto("/etc/texmf/updmap.d", "{0.curDIR()}/{0.srcNAME()}.cfg".format(get))
+    if can_access_file("{0}/{1}.cfg".format(get.curDIR(), get.srcNAME())):
+        insinto("/etc/texmf/updmap.d", "{0}/{1}.cfg".format(get.curDIR(), get.srcNAME()))
 
-    if can_access_file("{0.curDIR()}/{0.srcNAME()}.config.ps".format(get)):
-        insinto("/etc/texmf/dvips.d", "{0.curDIR()}/{0.srcNAME()}.config.ps".format(get))
+    if can_access_file("{0}/{1}.config.ps".format(get.curDIR(), get.srcNAME())):
+        insinto("/etc/texmf/dvips.d", "{0}/{1}.config.ps".format(get.curDIR(), get.srcNAME()))
 
-    if can_access_file("{0.curDIR()}/{0.srcNAME()}.config".format(get)):
-        insinto("/etc/texmf/dvipdfm/config", "{0.curDIR()}/{0.srcNAME()}.config".format(get))
+    if can_access_file("{0}/{1}.config".format(get.curDIR(), get.srcNAME())):
+        insinto("/etc/texmf/dvipdfm/config", "{0}/{1}.config".format(get.curDIR(), get.srcNAME()))
 
-    if can_access_file("{0.curDIR()}/language/{0.srcNAME().def}.config".format(get)):
-        insinto("/etc/texmf/language.def.d", "{0.curDIR()}/language.{0.srcNAME()}.def".format(get))
+    if can_access_file("{0}/language/{1}.def.config".format(get.curDIR(), get.srcNAME())):
+        insinto("/etc/texmf/language.def.d", "{0}/language.{1}.def".format(get.curDIR(), get.srcNAME()))
 
-    if can_access_file("{0.curDIR()}/language.{0.srcNAME()}.dat".format(get)):
-        insinto("/etc/texmf/language.dat.d", "{0.curDIR()}/language.{0.srcNAME()}.dat".format())
+    if can_access_file("{0}/language.{1}.dat".format(get.curDIR(), get.srcNAME())):
+        insinto("/etc/texmf/language.dat.d", "{0}/language.{1}.dat".format(get.curDIR(), get.srcNAME()))
 
 def handleConfigFiles():
     '''Handling config files'''
@@ -160,8 +160,8 @@ def addFormat(parameters):
     '''Add format files'''
     if not os.path.isdir("{}/texmf/fmtutil/".format(get.curDIR())):
         makedirs("{}/texmf/fmtutil/".format(get.curDIR()))
-    if not os.path.isfile("{0.curDIR()}/texmf/fmtutil/format.{0.srcNAME()}.cnf".format(get)):
-        cnf_file = open("{0.curDIR()}/texmf/fmtutil/format.{0.srcNAME()}.cnf".format(get), "w")
+    if not os.path.isfile("{0}/texmf/fmtutil/format.{1}.cnf".format(get.curDIR(), get.srcNAME())):
+        cnf_file = open("{0}/texmf/fmtutil/format.{1}.cnf".format(get.curDIR(), get.srcNAME()), "w")
         cnf_file.write("# Generated for {} by actionsapi/texlivemodules.py\n".format(get.srcNAME()))
         cnf_file.close()
 
@@ -259,17 +259,17 @@ def generateConfigFiles():
                 command = splitline[1]
                 parameter = splitline[2].strip()
                 if command == "addMap":
-                    echo("{0.curDIR()}/{0.srcNAME()}.cfg".format(get), "Map {}".format(parameter))
-                    ctx.ui.info(_('Map {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg').format(parameter, get))
+                    echo("{0}/{1}.cfg".format(get.curDIR, get.srcNAME()), "Map {}".format(parameter))
+                    ctx.ui.info(_('Map {0} is added to {1}/{2}.cfg').format(parameter, get.curDIR(), get.srcNAME()))
                 elif command == "addMixedMap":
-                    echo("{0.curDIR()}/{0.srcNAME()}.cfg".format(get), "MixedMap {}".format(parameter))
-                    ctx.ui.info(_('MixedMap {0} is added to {1.curDIR()}/{1.srcNAME()}.cfg').format(parameter, get))
+                    echo("{0}/{1}.cfg".format(get.curDIR(), get.srcNAME()), "MixedMap {}".format(parameter))
+                    ctx.ui.info(_('MixedMap {0} is added to {1}/{2}.cfg').format(parameter, get.curDIR(), get.srcNAME()))
                 elif command == "addDvipsMap":
-                    echo("{0.curDIR()}/{0.srcNAME()}-config.ps".format(get), "p +{}".format(parameter))
-                    ctx.ui.info(_('p +{0} is added to {1.curDIR()}/{1.srcNAME()}-config.ps').format(parameter, get))
+                    echo("{0}/{1}-config.ps".format(get.curDIR(), get.srcNAME()), "p +{}".format(parameter))
+                    ctx.ui.info(_('p +{0} is added to {1}/{2}-config.ps').format(parameter, get.curDIR(), get.srcNAME()))
                 elif command == "addDvipdfmMap":
-                    echo("{0.curDIR()}/{0.srcNAME()}-config".format(get), "f {}".format(parameter))
-                    ctx.ui.info(_('f {0} is added to {1.curDIR()}/{1.srcNAME()}-config').format(parameter, get))
+                    echo("{0}/{1}-config".format(get.curDIR(), get.srcNAME()), "f {}".format(parameter))
+                    ctx.ui.info(_('f {0} is added to {1}/{2}-config').format(parameter, get.curDIR(), get.srcNAME()))
                 elif command == "AddHyphen":
                     addLanguageDat(parameter)
                     addLanguageDef(parameter)

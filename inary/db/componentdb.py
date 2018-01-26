@@ -55,7 +55,7 @@ class ComponentDB(lazydb.LazyDB):
             src = spec.getTag("Source")
             components.setdefault(src.getTagData("PartOf"), []).append(src.getTagData("Name"))
         return components
- 
+
     def __generate_components(self, doc):
         return dict([(x.getTagData("Name"), x.toString()) for x in doc.tags("Component")])
 
