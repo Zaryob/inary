@@ -56,11 +56,11 @@ Integer = int
 Long = int
 Float = float
 
-#class datatype(type):
-#    def __init__(cls, name, bases, dict):
-#        """entry point for metaclass code"""
-#        # standard initialization
-#        super(autoxml, cls).__init__(name, bases, dict)
+class datatype(type):
+    def __init__(cls, name, bases, dict):
+        """entry point for metaclass code"""
+        # standard initialization
+        super(autoxml, cls).__init__(name, bases, dict)
 
 class LocalText(dict):
     """Handles XML tags with localized text"""
