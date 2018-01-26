@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-26 16:01++03\n"
+"POT-Creation-Date: 2018-01-26 16:30+0300\n"
 "PO-Revision-Date: 2010-03-24 16:28+0200\n"
 "Last-Translator: Fatih Aşıcı <fatih@pardus.org.tr>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -22,6 +22,74 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1;plural=0;\n"
 "X-Generator: Lokalize 1.0\n"
+
+#: /usr/lib/python3.5/optparse.py:145
+#, fuzzy, python-format
+msgid "no such option: %s"
+msgstr "bilinmeyen seçenek: %s"
+
+#: /usr/lib/python3.5/optparse.py:156
+#, fuzzy, python-format
+msgid "ambiguous option: %s (%s?)"
+msgstr "belirsiz seçenek: %s (%s?)"
+
+#: /usr/lib/python3.5/optparse.py:380
+#, fuzzy, python-format
+msgid "Usage: %s\n"
+msgstr "Kullanım: %s\n"
+
+#: /usr/lib/python3.5/optparse.py:399
+msgid "Usage"
+msgstr "Kullanım"
+
+#: /usr/lib/python3.5/optparse.py:421 /usr/lib/python3.5/optparse.py:422
+msgid "integer"
+msgstr "tamsayı"
+
+#: /usr/lib/python3.5/optparse.py:423
+msgid "floating-point"
+msgstr "kayan noktalı"
+
+#: /usr/lib/python3.5/optparse.py:424
+msgid "complex"
+msgstr "karmaşık"
+
+#: /usr/lib/python3.5/optparse.py:432
+#, fuzzy, python-format
+msgid "option %s: invalid %s value: %r"
+msgstr "seçenek %s: geçersiz %s değeri: %r"
+
+#: /usr/lib/python3.5/optparse.py:440
+#, fuzzy, python-format
+msgid "option %s: invalid choice: %r (choose from %s)"
+msgstr "seçenek %s: geçersiz seçim: %r (olası değerler: %s)"
+
+#: /usr/lib/python3.5/optparse.py:1237
+msgid "show this help message and exit"
+msgstr "bu yardım iletisini göster ve çık"
+
+#: /usr/lib/python3.5/optparse.py:1242
+msgid "show program's version number and exit"
+msgstr "programın sürüm numarasını göster ve çık"
+
+#: /usr/lib/python3.5/optparse.py:1265
+msgid "%prog [options]"
+msgstr "%prog [seçenekler]"
+
+#: /usr/lib/python3.5/optparse.py:1485 /usr/lib/python3.5/optparse.py:1523
+#, fuzzy, python-format
+msgid "%(option)s option requires %(number)d argument"
+msgid_plural "%(option)s option requires %(number)d arguments"
+msgstr[0] "%s seçeneği %d adet argüman almalıdır"
+
+#: /usr/lib/python3.5/optparse.py:1495
+#, fuzzy, python-format
+msgid "%s option does not take a value"
+msgstr "%s seçeneği herhangi bir değer almaz"
+
+#: /usr/lib/python3.5/optparse.py:1611
+msgid "Options"
+msgstr "Seçenekler"
 
 #: inary-cli:40
 msgid "Keyboard Interrupt: Exiting..."
@@ -59,6 +127,11 @@ msgstr ""
 #: inary-cli:70
 msgid "Use --debug to see a traceback."
 msgstr "Geri izleme verisi almak için lütfen --debug seçeneğini kullanın."
+
+#: inary.xml.in.h:1
+#, fuzzy
+msgid "Inary package"
+msgstr "Yüklü paket:"
 
 #: inary/actionsapi/autotools.py:40 inary/actionsapi/cmaketools.py:36
 #, fuzzy
@@ -136,7 +209,7 @@ msgid "Util {} cannot be found"
 msgstr "{} aracı bulunamadı."
 
 #: inary/actionsapi/get.py:183
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Warning: {0} does not exist, using plain name {1}"
 msgstr "Uyarı: {0} yok, düz ad {1} kullanılıyor."
 
@@ -153,19 +226,17 @@ msgstr "ActionsAPI [doman]: Yanlış kılavuz sayfası dosyası: {}"
 #: inary/actionsapi/inarytools.py:174
 #, fuzzy
 msgid "No file matched pattern \"{}\". 'domove' operation failed."
-msgstr ""
-"\"{}\" ile eşleşen bir dosya bulunamadı. 'domove' işlemi başarısız oldu."
+msgstr "\"{}\" ile eşleşen bir dosya bulunamadı. 'domove' işlemi başarısız oldu."
 
 #: inary/actionsapi/inarytools.py:193
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "ActionsAPI [rename]: {0}: {1}"
 msgstr "ActionsAPI [rename]: {}: {}"
 
 #: inary/actionsapi/inarytools.py:230
 #, fuzzy
 msgid "No such file matching pattern: \"{}\". 'dosed' operation failed."
-msgstr ""
-"\"{}\" ile eşleşen bir dosya bulunamadı. 'dosed' işlemi başarısız oldu."
+msgstr "\"{}\" ile eşleşen bir dosya bulunamadı. 'dosed' işlemi başarısız oldu."
 
 #: inary/actionsapi/inarytools.py:244
 #, fuzzy
@@ -200,8 +271,7 @@ msgstr "\"{}\" ile eşleşen bir dosya bulunamadı. Silme işlemi başarısız o
 #: inary/actionsapi/inarytools.py:310
 #, fuzzy
 msgid "No directory matched pattern \"{}\". Remove directory operation failed."
-msgstr ""
-"\"{}\" ile eşleşen bir dizin bulunamadı. Dizin silme işlemi başarısız oldu."
+msgstr "\"{}\" ile eşleşen bir dizin bulunamadı. Dizin silme işlemi başarısız oldu."
 
 # inary/actionsapi/inarytoolsfunctions.py:46 :59
 #: inary/actionsapi/inarytoolsfunctions.py:45
@@ -215,6 +285,11 @@ msgstr "Yetersiz sayıda parametre."
 msgid "No executable file matched pattern \"{}\"."
 msgstr "\"{}\" ile eşleşen çalıştırılabilir bir dosya bulunamadı."
 
+#: inary/actionsapi/javamodules.py:84 inary/actionsapi/javamodules.py:193
+#, fuzzy
+msgid "No any file/directory matched to regex expression \"{}\"."
+msgstr "\"{}\" ile eşleşen bir dosya bulunamadı."
+
 #: inary/actionsapi/javamodules.py:91 inary/actionsapi/javamodules.py:97
 #, fuzzy
 msgid "DoJavadoc failed."
@@ -225,6 +300,18 @@ msgstr "İnşa işlemi başarısız oldu."
 #, fuzzy
 msgid "Compile failed."
 msgstr "Yapılandırma işlemi başarısız oldu."
+
+# inary/actionsapi/autotools.py:119 :127
+#: inary/actionsapi/javamodules.py:175 inary/actionsapi/javamodules.py:204
+#, fuzzy
+msgid "Installing file \"{}\" failed."
+msgstr "texmg dosyalarının yüklenmesi işlemi başarısız oldu."
+
+# inary/actionsapi/autotools.py:119 :127
+#: inary/actionsapi/javamodules.py:214
+#, fuzzy
+msgid "Installing directory \"{}\" failed."
+msgstr "Belgelendirme dosyalarının yüklenmesi işlemi başarısız oldu."
 
 # inary/actionsapi/autotools.py:75 :85
 #: inary/actionsapi/javamodules.py:243
@@ -308,12 +395,8 @@ msgstr "{} dosyası bulunamadı."
 
 #: inary/actionsapi/qt4.py:56 inary/actionsapi/qt5.py:64
 #, fuzzy
-msgid ""
-"It seems there are more than one .pro file, you must specify one. (Possible ."
-"pro files: {})"
-msgstr ""
-"Birden fazla .pro dosyası mevcut görünüyor. Bir tane belirtmelisiniz (Olası ."
-"pro dosyaları: {})."
+msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: {})"
+msgstr "Birden fazla .pro dosyası mevcut görünüyor. Bir tane belirtmelisiniz (Olası .pro dosyaları: {})."
 
 #: inary/actionsapi/rubymodules.py:108
 #, fuzzy
@@ -336,7 +419,7 @@ msgid "ActionsAPI [chmod]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [chmod]: \"{}\" ile eşleşen bir dosya bulunamadı."
 
 #: inary/actionsapi/shelltools.py:70
-#, fuzzy
+#, fuzzy, python-format
 msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
 msgstr "ActionsAPI [chmod]: İşleme izin verilmedi: %s (kip: 0%o)"
 
@@ -346,7 +429,7 @@ msgid "ActionsAPI [chmod]: File {} doesn't exists."
 msgstr "ActionsAPI [chmod]: {} dosyası bulunamadı."
 
 #: inary/actionsapi/shelltools.py:80
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "ActionsAPI [chown]: Operation not permitted: {0} (uid: {1}, gid: {2})"
 msgstr "ActionsAPI [chown]: İşleme izin verilmedi: {0} (uid: {1}, gid: {2})"
 
@@ -356,7 +439,7 @@ msgid "ActionsAPI [chown]: File {} doesn't exists."
 msgstr "ActionsAPI [chown]: {} dosyası bulunamadı."
 
 #: inary/actionsapi/shelltools.py:89
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "ActionsAPI [sym]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [sym]: Erişim reddedildi: {0} -> {1}"
 
@@ -386,7 +469,7 @@ msgid "ActionsAPI [move]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [move]: \"{}\" ile eşleşen bir dosya bulunamadı."
 
 #: inary/actionsapi/shelltools.py:132
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "ActionsAPI [move]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [move]: Erişim engellendi: {0} -> {1}"
 
@@ -401,7 +484,7 @@ msgid "ActionsAPI [copy]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [copy]: \"{}\" ile eşleşen bir dosya bulunamadı."
 
 #: inary/actionsapi/shelltools.py:148
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "ActionsAPI [copy]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [copy]: Erişim reddedildi: {0} -> {1}"
 
@@ -411,7 +494,7 @@ msgid "ActionsAPI [copy]: File {} does not exist."
 msgstr "ActionsAPI [copy]: {} dosyası bulunamadı."
 
 #: inary/actionsapi/shelltools.py:179
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "ActionsAPI [copytree] {0} to {1}: {2}"
 msgstr "ActionsAPI [copytree]: {0} konumundan {1} konumuna: {2}"
 
@@ -431,7 +514,7 @@ msgid "ActionsAPI [touch]: Permission denied: {}"
 msgstr "ActionsAPI [touch]: Erişim reddedildi: {}"
 
 #: inary/actionsapi/shelltools.py:257
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Command \"{0}\" failed, return value was {1}."
 msgstr "\"{0}\" komutu başarısız oldu, dönüş değeri: {1} ."
 
@@ -449,8 +532,7 @@ msgstr "Biçem dosyalarının inşası işlemi başarısız oldu."
 
 #: inary/actionsapi/texlivemodules.py:69
 msgid "Creating symlinks from format to engines failed"
-msgstr ""
-"Biçemden motorlara sembolik bağların oluşturulması işlemi başarısız oldu."
+msgstr "Biçemden motorlara sembolik bağların oluşturulması işlemi başarısız oldu."
 
 # inary/actionsapi/autotools.py:119 :127
 #: inary/actionsapi/texlivemodules.py:73
@@ -476,17 +558,14 @@ msgid "Symlink {} skipped (special case)"
 msgstr "{} sembolik bağı atlandı (özel durum)."
 
 #: inary/actionsapi/texlivemodules.py:97
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Symlink {0[0]} -> {0[1]} skipped (texlive-core takes care of it."
-msgstr ""
-"{0[0]} konumundan {0[1]} konumuna sembolik bağ oluşturma işlemi atlandı "
-"(texlive-core halledecek)."
+msgstr "{0[0]} konumundan {0[1]} konumuna sembolik bağ oluşturma işlemi atlandı (texlive-core halledecek)."
 
 #: inary/actionsapi/texlivemodules.py:100
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Symlink {0[0]} -> {0[1]} skipped."
-msgstr ""
-"{0[0]} konumundan {0[1]} konumuna sembolik bağ oluşturma işlemi atlandı."
+msgstr "{0[0]} konumundan {0[1]} konumuna sembolik bağ oluşturma işlemi atlandı."
 
 #: inary/actionsapi/texlivemodules.py:102
 #, fuzzy
@@ -494,7 +573,7 @@ msgid "Symlink {} skipped (file exists.)"
 msgstr "{} sembolik bağının oluşturulması atlandı (dosya zaten var)."
 
 #: inary/actionsapi/texlivemodules.py:104
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Making symlink from {0[0]} to {0[1]}"
 msgstr "{0[0]} konumundan {0[1]} konumuna sembolik bağ oluşturuluyor."
 
@@ -504,11 +583,9 @@ msgid "Creating /etc/texmf/{}.d"
 msgstr "/etc/texmf/{}.d oluşturuluyor."
 
 #: inary/actionsapi/texlivemodules.py:155
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Moving (and symlinking) /usr/share/texmf/{0} to /etc/texmf/{1}.d"
-msgstr ""
-"/usr/share/texmf/{0} dosyası /etc/texmf/{1}.d dizinine taşınıyor ve bağ "
-"oluşturuluyor"
+msgstr "/usr/share/texmf/{0} dosyası /etc/texmf/{1}.d dizinine taşınıyor ve bağ oluşturuluyor"
 
 #: inary/actionsapi/texlivemodules.py:206
 #, fuzzy
@@ -516,22 +593,22 @@ msgid "Building format file {}"
 msgstr "Biçem dosyası {} inşa ediliyor."
 
 #: inary/actionsapi/texlivemodules.py:263
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Map {0} is added to {1}/{2}.cfg"
 msgstr "{0} haritası {1}/{2}.cfg dosyasına eklendi"
 
 #: inary/actionsapi/texlivemodules.py:266
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "MixedMap {0} is added to {1}/{2}.cfg"
 msgstr "{0} karıştırılmış haritası {1}/{2}.cfg dosyasına eklendi."
 
 #: inary/actionsapi/texlivemodules.py:269
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "p +{0} is added to {1}/{2}-config.ps"
 msgstr "p +{0} {1}/{2}-config.ps dosyasına eklendi."
 
 #: inary/actionsapi/texlivemodules.py:272
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "f {0} is added to {1}/{2}-config"
 msgstr "f {0} {1}/{2}-config dosyasına eklendi"
 
@@ -543,8 +620,7 @@ msgstr "Lisan dosyası {} zaten oluşturuldu."
 #: inary/actionsapi/texlivemodules.py:281
 #, fuzzy
 msgid "No rule to proccess {}. Please file a bug."
-msgstr ""
-"{} öğesini işlemek için kural belirtilmemiş, lütfen bir hata raporu girin."
+msgstr "{} öğesini işlemek için kural belirtilmemiş, lütfen bir hata raporu girin."
 
 #: inary/analyzer/conflict.py:26 inary/analyzer/dependency.py:26
 #: inary/data/replace.py:24
@@ -586,7 +662,7 @@ msgid "Problem occured while uncompressing {}.Z file"
 msgstr "{}.Z dosyası genişletilirken hata oluştu"
 
 #: inary/atomicoperations.py:71 inary/operations/history.py:72
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Package {0} found in repository {1}"
 msgstr "{0} paketi {1} deposunda bulundu."
 
@@ -605,12 +681,12 @@ msgid "Package {} not found in any active repository."
 msgstr "{} pakedi etkin hiçbir depoda bulunamadı."
 
 #: inary/atomicoperations.py:147
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Installing {0.name}, version {0.version}, release {0.release}"
 msgstr "{0.name} paketi {0.version} sürümü {0.release} yayımı kuruluyor"
 
 #: inary/atomicoperations.py:192 inary/operations/build.py:789
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "{0}-{1} is not a valid INARY version format"
 msgstr "{0}-{1} INARY sürüm biçimine uymuyor"
 
@@ -620,7 +696,7 @@ msgid "{} package cannot be installed unless the dependencies are satisfied"
 msgstr "{} paketi bağımlılıkları sağlanmadan kurulamaz."
 
 #: inary/atomicoperations.py:221
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "/{0} from {1} package\n"
 msgstr "/{0} {1} paketinden\n"
 
@@ -668,11 +744,8 @@ msgid "{} configuration failed."
 msgstr "{} yapılandırması başarısız oldu."
 
 #: inary/atomicoperations.py:409
-msgid ""
-"Unable to relocate following files. Reinstallation of this package is "
-"strongly recommended."
-msgstr ""
-"Aşağıdaki dosyalar taşınamadı. Bu paketin yeniden kurulumu şiddetle önerilir."
+msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
+msgstr "Aşağıdaki dosyalar taşınamadı. Bu paketin yeniden kurulumu şiddetle önerilir."
 
 #: inary/atomicoperations.py:508
 #, fuzzy
@@ -695,8 +768,7 @@ msgstr "Varolmayan paket kaldırılmaya çalışıldı "
 
 #: inary/atomicoperations.py:654
 #, fuzzy
-msgid ""
-"Installed file {} does not exist on system [Probably you manually deleted]"
+msgid "Installed file {} does not exist on system [Probably you manually deleted]"
 msgstr "Kurulmuş dosya {} sistemde bulunamadı (Muhtemelen elle sildiniz)."
 
 #: inary/cli/__init__.py:129
@@ -750,8 +822,7 @@ msgid ""
 "<repo>: name of repository to add\n"
 "<indexuri>: URI of index file\n"
 "\n"
-"NB: We support only local files (e.g., /a/b/c) and http:// URIs at the "
-"moment\n"
+"NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment\n"
 msgstr ""
 "Depo ekle\n"
 "\n"
@@ -760,8 +831,7 @@ msgstr ""
 "<depo>: eklenecek deponun adı\n"
 "<katalog adresi>: depo katalog dosyasının adresi\n"
 "\n"
-"Not: Şu anda sadece yerel dosyalar (örn. /a/b/c) ve http:// adresleri "
-"destekleniyor.\n"
+"Not: Şu anda sadece yerel dosyalar (örn. /a/b/c) ve http:// adresleri destekleniyor.\n"
 
 #: inary/cli/addrepo.py:43
 msgid "add-repo options"
@@ -783,16 +853,14 @@ msgstr "Belirtilen konuma depo ekle (ilk konum 0'dır)."
 #, fuzzy
 msgid ""
 "Add {} repository without updating the database?\n"
-"By confirming this you are also adding the repository to your system without "
-"checking the distribution of the repository.\n"
+"By confirming this you are also adding the repository to your system without checking the distribution of the repository.\n"
 "Do you want to continue?"
 msgstr ""
 "{} deposunu veritabanını güncellemeden eklemek istediniz.\n"
-"Bu işlemi onayladığınızda, depoyu sisteminize depo dağıtımını denetlenmeden "
-"eklemiş olacaksınız. Devam etmek istediğinize emin misiniz?"
+"Bu işlemi onayladığınızda, depoyu sisteminize depo dağıtımını denetlenmeden eklemiş olacaksınız. Devam etmek istediğinize emin misiniz?"
 
 #: inary/cli/addrepo.py:74
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "{0} repository could not be reached. Removing {0} from system."
 msgstr "{0} deposuna erişilemedi. {0} sistemden kaldırılıyor."
 
@@ -821,17 +889,17 @@ msgid "Blame for all of the releases"
 msgstr "Tüm sürümler için suçla"
 
 #: inary/cli/blame.py:66 inary/data/specfile.py:368 inary/data/specfile.py:452
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Name: {0}, version: {1}, release: {2}\n"
 msgstr "İsim: {0}, sürüm: {1}, yayım: {2}\n"
 
 #: inary/cli/blame.py:68
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Package Maintainer: {0} <{1}>\n"
 msgstr "Paket Bakıcısı: {0} <{1}>\n"
 
 #: inary/cli/blame.py:69
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Release Updater: {0.name} <{0.email}>\n"
 msgstr "Yayım Güncelleyen: {0.name} <{0.emaik}>\n"
 
@@ -895,12 +963,8 @@ msgid "Create a static package with ar files"
 msgstr "Ar dosyalarıyla statik bir paket yarat."
 
 #: inary/cli/build.py:92 inary/cli/delta.py:63
-msgid ""
-"Create the binary package using the given format. Use '-F help' to see a "
-"list of supported formats."
-msgstr ""
-"İkili paketi verilen biçimde oluştur. Desteklenen biçimlerin listesini "
-"görmek için '-F help' kullanın."
+msgid "Create the binary package using the given format. Use '-F help' to see a list of supported formats."
+msgstr "İkili paketi verilen biçimde oluştur. Desteklenen biçimlerin listesini görmek için '-F help' kullanın."
 
 #: inary/cli/build.py:99
 msgid "Use quilt patch management system instead of GNU patch"
@@ -919,12 +983,8 @@ msgid "Break build after fetching the source archive"
 msgstr "Kaynak arşivi indirdikten sonra inşayı sonlandır."
 
 #: inary/cli/build.py:122
-msgid ""
-"Break build after unpacking the source archive, checking sha1sum and "
-"applying patches"
-msgstr ""
-"Kaynak arşivini açtıktan, sha1sum denetimi yaptıktan ve yamaları "
-"uyguladıktan sonra inşayı sonlandır."
+msgid "Break build after unpacking the source archive, checking sha1sum and applying patches"
+msgstr "Kaynak arşivini açtıktan, sha1sum denetimi yaptıktan ve yamaları uyguladıktan sonra inşayı sonlandır."
 
 #: inary/cli/build.py:130
 msgid "Break build after running configure step"
@@ -1046,12 +1106,10 @@ msgstr "{} paketi kurulu değil."
 #: inary/cli/check.py:138
 #, fuzzy
 msgid ""
-"Pisi was unable to check the integrity of packages which contain files that "
-"you don't have read access.\n"
+"Pisi was unable to check the integrity of packages which contain files that you don't have read access.\n"
 "Running the check under a privileged user may help fixing this problem."
 msgstr ""
-"Inary okuma izninizin olmadığı dosyalar içeren paketlerin bütünlüğünden emin "
-"olamadı.\n"
+"Inary okuma izninizin olmadığı dosyalar içeren paketlerin bütünlüğünden emin olamadı.\n"
 "Denetlemeyi yetkili kullanıcı ile gerçekleştirmeniz daha sağlıklı olabilir."
 
 #: inary/cli/clean.py:20
@@ -1207,9 +1265,7 @@ msgstr "delta seçenekleri"
 
 #: inary/cli/delta.py:53
 msgid "Use arg as the new package and treat other arguments as old packages."
-msgstr ""
-"Yeni paket adı olarak arg'ı kullan ve diğer argümanları eski paket listesi "
-"olarak al."
+msgstr "Yeni paket adı olarak arg'ı kullan ve diğer argümanları eski paket listesi olarak al."
 
 #: inary/cli/delta.py:59
 msgid "Output directory for produced packages."
@@ -1311,21 +1367,13 @@ msgstr "Yükseltmeleri indir ama kurma."
 
 #: inary/cli/downgrade.py:67
 #, fuzzy
-msgid ""
-"When downgrading system, ignore packages and components whose basenames "
-"match pattern."
-msgstr ""
-"Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile "
-"eşleşenleri yoksay."
+msgid "When downgrading system, ignore packages and components whose basenames match pattern."
+msgstr "Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile eşleşenleri yoksay."
 
 #: inary/cli/downgrade.py:70
 #, fuzzy
-msgid ""
-"When downgrading system, ignore packages and components whose basenames "
-"match any pattern contained in file."
-msgstr ""
-"Sistemi yükseltirken paket ya da bileşen isimlerinden dosya içerisinde "
-"verilen kalıplardan herhangi birisi ile eşleşenleri yoksay."
+msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
+msgstr "Sistemi yükseltirken paket ya da bileşen isimlerinden dosya içerisinde verilen kalıplardan herhangi birisi ile eşleşenleri yoksay."
 
 #: inary/cli/downgrade.py:74 inary/cli/upgrade.py:74
 #, fuzzy
@@ -1540,8 +1588,7 @@ msgid ""
 "Use \"%prog help <command>\" for help on a specific command.\n"
 msgstr ""
 "\n"
-"Belirli bir komut hakkında yardım almak için \"%prog help <komut>\" "
-"kullanınız.\n"
+"Belirli bir komut hakkında yardım almak için \"%prog help <komut>\" kullanınız.\n"
 
 #: inary/cli/history.py:28
 msgid "emerge"
@@ -1602,15 +1649,17 @@ msgid "Takeback to the state after the given operation finished"
 msgstr "Verilen operasyon tamamlandıktan sonraki duruma geri dön."
 
 #: inary/cli/history.py:65
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Operation #{0}: {1}"
 msgstr "İşlem #{0}: {1}"
 
 #: inary/cli/history.py:66
+#, python-brace-format
 msgid "Date: {0.date} {0.time}"
 msgstr "Tarih: {0.date} {0.time}"
 
 #: inary/cli/history.py:70
+#, python-format
 msgid "    * There are %d packages in this snapshot."
 msgstr "    * Bu durum görüntüsünde %d paket var."
 
@@ -1645,8 +1694,7 @@ msgstr ""
 "\n"
 "Kullanım: index <dizin> ...\n"
 "\n"
-"Bu komut bir dizinde INARY dosyaları arar, onlardan INARY etiketlerini "
-"çıkarır\n"
+"Bu komut bir dizinde INARY dosyaları arar, onlardan INARY etiketlerini çıkarır\n"
 "ve bilgiyi inary-index.xml adında bir XML dosyasında toplar. Hem kaynak hem\n"
 "de ikili paketleri bu XML kataloğuna ekler.\n"
 "\n"
@@ -1811,22 +1859,15 @@ msgid "Fetch upgrades but do not install."
 msgstr "Yükseltmeleri indir ama kurma."
 
 #: inary/cli/install.py:62
-msgid ""
-"When installing packages, ignore packages and components whose basenames "
-"match pattern."
+msgid "When installing packages, ignore packages and components whose basenames match pattern."
 msgstr "Paket kurarken, ifade ile eşleşen paket ve bileşenleri gözardı et."
 
 #: inary/cli/install.py:65
-msgid ""
-"When installing packages, ignore packages and components whose basenames "
-"match any pattern contained in file."
-msgstr ""
-"Paket kurarken, paket ya da bileşen isimlerinden dosya içerisinde verilen "
-"kalıplardan herhangi birisi ile eşleşenleri gözardı et."
+msgid "When installing packages, ignore packages and components whose basenames match any pattern contained in file."
+msgstr "Paket kurarken, paket ya da bileşen isimlerinden dosya içerisinde verilen kalıplardan herhangi birisi ile eşleşenleri gözardı et."
 
 #: inary/cli/install.py:69
-msgid ""
-"Store previous libraries info when package is updating to newer version."
+msgid "Store previous libraries info when package is updating to newer version."
 msgstr ""
 
 #: inary/cli/install.py:94
@@ -1931,10 +1972,8 @@ msgstr "Detaylı kurulum bilgisi göster."
 
 # inary/cli/commands.py:542 :729
 #: inary/cli/listinstalled.py:76 inary/cli/listupgrades.py:72
-msgid ""
-"Package Name          |St|        Version|  Rel.|  Distro|             Date"
-msgstr ""
-"Paket Adı             |Dm|          Sürüm| Yayım| Dağıtım|            Tarih"
+msgid "Package Name          |St|        Version|  Rel.|  Distro|             Date"
+msgstr "Paket Adı             |Dm|          Sürüm| Yayım| Dağıtım|            Tarih"
 
 #: inary/cli/listnewest.py:25
 msgid ""
@@ -1959,23 +1998,15 @@ msgid "list-newest options"
 msgstr "list-newest seçenekleri"
 
 #: inary/cli/listnewest.py:45
-msgid ""
-"List new packages added to repository after this given date formatted as "
-"yyyy-mm-dd"
-msgstr ""
-"yyyy-aa-gg biçiminde verdiğiniz tarihten sonra depoya eklenen paketleri "
-"listeler"
+msgid "List new packages added to repository after this given date formatted as yyyy-mm-dd"
+msgstr "yyyy-aa-gg biçiminde verdiğiniz tarihten sonra depoya eklenen paketleri listeler"
 
 #: inary/cli/listnewest.py:47
-msgid ""
-"List new packages added to repository after last nth previous repository "
-"update"
-msgstr ""
-"n önceki depo güncellemesinden itibaren depoya eklenen yeni paketleri "
-"listeler"
+msgid "List new packages added to repository after last nth previous repository update"
+msgstr "n önceki depo güncellemesinden itibaren depoya eklenen yeni paketleri listeler"
 
 #: inary/cli/listnewest.py:75
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Packages added to {0} since {1}:\n"
 msgstr "{0} deposuna {1} tarihinden bu yana giren paketler:\n"
 
@@ -1990,8 +2021,7 @@ msgid ""
 "\n"
 "Usage: list-orphaned\n"
 "\n"
-"Lists packages installed as dependency, but no longer needed by any other "
-"installed package.\n"
+"Lists packages installed as dependency, but no longer needed by any other installed package.\n"
 msgstr ""
 
 #: inary/cli/listorphaned.py:40
@@ -2007,9 +2037,7 @@ msgstr "Bağımlılıklar yüzünden ek paketler var."
 #: inary/cli/listorphaned.py:44
 #, fuzzy
 msgid "Ignore packages and components whose basenames match pattern."
-msgstr ""
-"Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile "
-"eşleşenleri yoksay."
+msgstr "Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile eşleşenleri yoksay."
 
 #: inary/cli/listorphaned.py:56
 #, fuzzy
@@ -2049,15 +2077,16 @@ msgstr ""
 "\n"
 "İzlemede olan depoları listele.\n"
 
-#: inary/cli/listrepo.py:40
-msgid "inactive"
-msgstr "etkin değil"
-
 #: inary/cli/listrepo.py:40 inary/cli/listrepo.py:41
 msgid "active"
 msgstr "etkin"
 
+#: inary/cli/listrepo.py:40
+msgid "inactive"
+msgstr "etkin değil"
+
 #: inary/cli/listrepo.py:42 inary/cli/listrepo.py:44
+#, python-brace-format
 msgid "{0} [{1}]"
 msgstr "{0} [{1}]"
 
@@ -2192,12 +2221,8 @@ msgstr "remove seçenekleri"
 
 #: inary/cli/removeorphaned.py:43
 #, fuzzy
-msgid ""
-"When removing orphaned, ignore packages and components whose basenames match "
-"pattern."
-msgstr ""
-"Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile "
-"eşleşenleri yoksay."
+msgid "When removing orphaned, ignore packages and components whose basenames match pattern."
+msgstr "Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile eşleşenleri yoksay."
 
 #: inary/cli/removerepo.py:21
 msgid ""
@@ -2290,7 +2315,7 @@ msgid "Show only package name"
 msgstr "Sadece paket ismini göster."
 
 #: inary/cli/searchfile.py:48
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Package {0} has file /{1}"
 msgstr "{0} paketi içinde {1} dosyası var."
 
@@ -2385,20 +2410,12 @@ msgid "Name of the to be upgraded packages' repository"
 msgstr "Güncellenecek paketlerin depo ismi"
 
 #: inary/cli/upgrade.py:67
-msgid ""
-"When upgrading system, ignore packages and components whose basenames match "
-"pattern."
-msgstr ""
-"Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile "
-"eşleşenleri yoksay."
+msgid "When upgrading system, ignore packages and components whose basenames match pattern."
+msgstr "Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile eşleşenleri yoksay."
 
 #: inary/cli/upgrade.py:70
-msgid ""
-"When upgrading system, ignore packages and components whose basenames match "
-"any pattern contained in file."
-msgstr ""
-"Sistemi yükseltirken paket ya da bileşen isimlerinden dosya içerisinde "
-"verilen kalıplardan herhangi birisi ile eşleşenleri yoksay."
+msgid "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
+msgstr "Sistemi yükseltirken paket ya da bileşen isimlerinden dosya içerisinde verilen kalıplardan herhangi birisi ile eşleşenleri yoksay."
 
 #: inary/config.py:83
 #, fuzzy
@@ -2421,37 +2438,37 @@ msgid "Can't unbind constant: {}"
 msgstr "Sabit ayrılamaz: {}"
 
 #: inary/data/history.py:45
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "{0} repository is updated."
 msgstr "{0} deposu güncellendi."
 
 #: inary/data/history.py:65
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "{0} is upgraded from {1} to {2} with delta."
 msgstr "{0} {1} sürümünden {2} sürümüne delta paketi ile yükseltildi."
 
 #: inary/data/history.py:67
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "{0} is upgraded from {1} to {2}."
 msgstr "{0} {1} sürümünden {2} sürümüne yükseltildi."
 
 #: inary/data/history.py:69
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "{0} {1} is removed."
 msgstr "{0} {1} kaldırıldı."
 
 #: inary/data/history.py:71
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "{0} {1} is installed."
 msgstr "{0} {1} kuruldu."
 
 #: inary/data/history.py:73
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "{0} {1} is reinstalled."
 msgstr "{0} {1} yeniden kuruldu."
 
 #: inary/data/history.py:75
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "{0} is downgraded from {1} to {2}."
 msgstr "{0} {1} sürümünden {2} sürümüne indirildi."
 
@@ -2463,6 +2480,16 @@ msgstr "Bilinmeyen paket işlemi"
 #, fuzzy
 msgid "Sorting:  {}"
 msgstr "{} oluşturuluyor... "
+
+#: inary/data/index.py:178
+#, fuzzy
+msgid "Adding packages from directory {}... "
+msgstr "Paket kataloğa ekleniyor: {}"
+
+#: inary/data/index.py:187
+#, fuzzy
+msgid "Adding packages from directory {}... done."
+msgstr "Paket kataloğa ekleniyor: {}"
 
 #: inary/data/index.py:197
 #, fuzzy
@@ -2492,12 +2519,12 @@ msgid "Adding {} to source index"
 msgstr "{} kaynak kataloğuna ekleniyor"
 
 #: inary/data/metadata.py:73
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Distribution: {0}, Dist. Release: {1}\n"
 msgstr "Dağıtım: {0}, Dağıtım Sürümü: {1}\n"
 
 #: inary/data/metadata.py:75
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Architecture: {0}, Installed Size: {1}"
 msgstr "Mimari: {0}, Yerleşik Boyut: {1}"
 
@@ -2516,7 +2543,7 @@ msgid "Encountered cycle {}"
 msgstr "Çember ile karşılaşıldı: {}."
 
 #: inary/data/specfile.py:163
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "URI: {0}, type: {1}, sha1sum: {2}"
 msgstr "Adres: {0}, tip: {1}, sha1sum: {2}"
 
@@ -2525,7 +2552,7 @@ msgid " or "
 msgstr " veya "
 
 #: inary/data/specfile.py:272 inary/operations/install.py:293
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "{0} dependency of package {1} is not satisfied"
 msgstr "{0} bağımlılığı {1} paketi için sağlanamadı."
 
@@ -2627,7 +2654,7 @@ msgid "installed-pending"
 msgstr "kurulu-beklemede"
 
 #: inary/db/installdb.py:54
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid ""
 "State: {0}\n"
 "Version: {1}, Release: {2}\n"
@@ -2636,18 +2663,14 @@ msgstr ""
 "Sürüm: {1}, Yayım: {2}\n"
 
 #: inary/db/installdb.py:58
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Distribution: {0}, Install Time: {1}\n"
 msgstr "Dağıtım: {0}, Kurulma Zamanı: {1}\n"
 
 #: inary/db/installdb.py:103
 #, fuzzy
-msgid ""
-"Installation info for package '{}' is broken. Reinstall it to fix this "
-"problem."
-msgstr ""
-"{} paketine ait kurulum bilgisi bozulmuş. Sorunu düzeltmek için paketi "
-"yeniden kurun."
+msgid "Installation info for package '{}' is broken. Reinstall it to fix this problem."
+msgstr "{} paketine ait kurulum bilgisi bozulmuş. Sorunu düzeltmek için paketi yeniden kurun."
 
 #: inary/db/installdb.py:367
 #, fuzzy
@@ -2681,20 +2704,13 @@ msgid "{} repository needs to be updated"
 msgstr "{} deposunun güncellenmesi gerekiyor"
 
 #: inary/db/repodb.py:174
-msgid ""
-"Error parsing repository index information. Index file does not exist or is "
-"malformed."
-msgstr ""
-"Depo bilgisi ayrıştırılırken hata oluştu. Katalog dosyası mevcut değil ya da "
-"bozuk."
+msgid "Error parsing repository index information. Index file does not exist or is malformed."
+msgstr "Depo bilgisi ayrıştırılırken hata oluştu. Katalog dosyası mevcut değil ya da bozuk."
 
 #: inary/db/repodb.py:270
 #, fuzzy
-msgid ""
-"Repository '{}' is not compatible with your distribution. Repository is "
-"disabled."
-msgstr ""
-"{} adlı depo dağıtımınız ile uyumlu değil. Depo etkisiz hale getirildi."
+msgid "Repository '{}' is not compatible with your distribution. Repository is disabled."
+msgstr "{} adlı depo dağıtımınız ile uyumlu değil. Depo etkisiz hale getirildi."
 
 #: inary/fetcher.py:151
 msgid ""
@@ -2733,32 +2749,28 @@ msgid "Requested range not satisfiable, starting again."
 msgstr ""
 
 #: inary/fetcher.py:196
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid ""
 "Could not fetch destination file: \"{0}\" \n"
 "Raised Value error: \"{1}\""
 msgstr "\"{0}\" hedef dosyasına erişilemedi: {1}"
 
 #: inary/fetcher.py:198 inary/fetcher.py:200 inary/fetcher.py:202
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid ""
 "Could not fetch destination file: \"{0}\"; \n"
 "\"{1}\""
 msgstr "\"{0}\" hedef dosyasına erişilemedi: {1}"
 
 #: inary/fetcher.py:204
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Could not fetch destination file: \"{0}\"; (\"{1}\"): \"{2}\""
 msgstr "\"{0}\"; \"({1})\" hedef dosyasına erişilemedi: {2}"
 
 #: inary/fetcher.py:207
 #, fuzzy
-msgid ""
-"A problem occurred. Please check the archive address and/or permissions "
-"again. {}"
-msgstr ""
-"Bir hata oluştu. Lütfen arşiv adresini ve/veya kullanıcı izinlerini kontrol "
-"edin."
+msgid "A problem occurred. Please check the archive address and/or permissions again. {}"
+msgstr "Bir hata oluştu. Lütfen arşiv adresini ve/veya kullanıcı izinlerini kontrol edin."
 
 #: inary/fetcher.py:270 inary/fetcher.py:302
 #, fuzzy
@@ -2771,25 +2783,19 @@ msgid "Bandwidth usage is limited to {} KB/s"
 msgstr "Bant genişliği kullanımı {} KB/s ile sınırlı."
 
 #: inary/fetcher.py:321
-msgid ""
-"Remote file can not be reached. Previously downloaded part of the file will "
-"be removed."
+msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
 msgstr "Uzak dosyaya erişilemedi. Dosyanın yarım kalan parçası silinecek."
 
 #: inary/fetcher.py:330
-msgid ""
-"Server doesn't support partial downloads. Previously downloaded part of the "
-"file will be over-written."
-msgstr ""
-"Sunucu kısmî indirimleri desteklemiyor. Dosyanın daha önce indirilen "
-"parçasının üzerine yazılacak."
+msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
+msgstr "Sunucu kısmî indirimleri desteklemiyor. Dosyanın daha önce indirilen parçasının üzerine yazılacak."
 
 #: inary/fetcher.py:400 inary/fetcher.py:421 inary/fetcher.py:434
 msgid "ftp error"
 msgstr ""
 
 #: inary/file.py:35
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "URL {0} already downloaded as {1}"
 msgstr "{0} adresi zaten {1} olarak indirilmişti."
 
@@ -2882,8 +2888,7 @@ msgstr "ccache bulundu..."
 
 #: inary/operations/build.py:343
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr ""
-"IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
+msgstr "IceCream bulundu. Lütfen artalan sürecinizin çalıştığından emin olunuz."
 
 #: inary/operations/build.py:377
 #, fuzzy
@@ -2891,20 +2896,12 @@ msgid "Rebuilding for {}"
 msgstr "{} için tekrar inşa ediliyor"
 
 #: inary/operations/build.py:504
-msgid ""
-"Cannot find component.xml in remote directory, Source is now part of unknown "
-"component"
-msgstr ""
-"component.xml uzaktaki dizinde bulunamadı, kaynak bilinmeyen bir bileşenin "
-"parçası"
+msgid "Cannot find component.xml in remote directory, Source is now part of unknown component"
+msgstr "component.xml uzaktaki dizinde bulunamadı, kaynak bilinmeyen bir bileşenin parçası"
 
 #: inary/operations/build.py:512
-msgid ""
-"Cannot find component.xml in upper directory, Source is now part of unknown "
-"component"
-msgstr ""
-"component.xml bir üst dizinde bulunamadı, kaynak bilinmeyen bir bileşenin "
-"parçası"
+msgid "Cannot find component.xml in upper directory, Source is now part of unknown component"
+msgstr "component.xml bir üst dizinde bulunamadı, kaynak bilinmeyen bir bileşenin parçası"
 
 #: inary/operations/build.py:526
 msgid "Unpacking archive(s)..."
@@ -2932,27 +2929,27 @@ msgid "Installing..."
 msgstr "Kuruluyor..."
 
 #: inary/operations/build.py:632
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Unable to read Actions Script ({0}): {1}"
 msgstr "Actions betiği okunamıyor ({0}): {1}"
 
 #: inary/operations/build.py:635
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "SyntaxError in Actions Script ({0}): {1}"
 msgstr "Actions betiğinde sözdizimi hatası {0}: {1}"
 
 #: inary/operations/build.py:664
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Unable to read SCOM script ({0}): {1}"
 msgstr "SCOM betiği okunamıyor {0}: {1}"
 
 #: inary/operations/build.py:667
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "SyntaxError in SCOM file ({0}): {1}"
 msgstr "SCOM dosyasında sözdizimi hatası {0}: {1}"
 
 #: inary/operations/build.py:701
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Sandbox violation: {0} ({1} -> {2})"
 msgstr "Sandbox ihlali: {0} ({1} -> {2})"
 
@@ -2979,21 +2976,18 @@ msgid "unable to call function from actions: {}"
 msgstr "fonksiyon eylemlerden çağırılamıyor: {}"
 
 #: inary/operations/build.py:775
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Source package '{0}' defines a relative 'Path' element: {1}"
 msgstr "{0} kaynak paketi göreli bir 'Path' elemanı içeriyor: {1}"
 
 #: inary/operations/build.py:779
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Source package '{0}' defines multiple 'Path' tags for {1}"
 msgstr "{0} kaynak paketi {1} yolu için birden fazla 'Path' etiketi içeriyor"
 
 #: inary/operations/build.py:807
-msgid ""
-"Safety switch: following extra packages in system.devel will be installed: "
-msgstr ""
-"Emniyet mandalı: taban geliştirme bileşeni system.devel içindeki bu paketler "
-"ek olarak kurulacak: "
+msgid "Safety switch: following extra packages in system.devel will be installed: "
+msgstr "Emniyet mandalı: taban geliştirme bileşeni system.devel içindeki bu paketler ek olarak kurulacak: "
 
 #: inary/operations/build.py:812
 msgid "Safety switch: the component system.devel cannot be found"
@@ -3077,6 +3071,7 @@ msgid "Action script error caught."
 msgstr "Eylem betiği hatası oluştu."
 
 #: inary/operations/build.py:1282
+#, python-format
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d hata, %d uyarı"
 
@@ -3086,23 +3081,18 @@ msgid "Last state was '{}'"
 msgstr "Son inşa adımı: {}"
 
 #: inary/operations/delta.py:43
-#, fuzzy
-msgid ""
-"The file '{0}' belongs to a different package other than '{1}'. Skipping "
-"it..."
+#, fuzzy, python-brace-format
+msgid "The file '{0}' belongs to a different package other than '{1}'. Skipping it..."
 msgstr "{0} dosyası '{1}' paketinden farklı bir pakete ait. Atlanıyor..."
 
 #: inary/operations/delta.py:47
 #, fuzzy
-msgid ""
-"Package '{}' has the same release number with the new package. Skipping it..."
+msgid "Package '{}' has the same release number with the new package. Skipping it..."
 msgstr "{} paketi yeni paket ile aynı yayım numarasına sahip. Atlanıyor..."
 
 #: inary/operations/delta.py:66
 #, fuzzy
-msgid ""
-"All files in the package '{}' are different from the files in the new "
-"package. Skipping it..."
+msgid "All files in the package '{}' are different from the files in the new package. Skipping it..."
 msgstr "{} paketindeki tüm dosyalar yeni pakettekilerden farklı. Atlanıyor..."
 
 #: inary/operations/delta.py:108
@@ -3111,20 +3101,12 @@ msgid "New package '{}' exists in the list of old packages. Skipping it..."
 msgstr "Yeni paket {}, eski paket listesinde de mevcut. Atlanıyor..."
 
 #: inary/operations/downgrade.py:52 inary/operations/upgrade.py:52
-msgid ""
-"You must restart the following service(s) manually for the updated software "
-"to take effect:"
-msgstr ""
-"Güncel yazılımların etkin hale gelmesi için aşağıdaki servis(ler)i yeniden "
-"başlatmalısınız:"
+msgid "You must restart the following service(s) manually for the updated software to take effect:"
+msgstr "Güncel yazılımların etkin hale gelmesi için aşağıdaki servis(ler)i yeniden başlatmalısınız:"
 
 #: inary/operations/downgrade.py:59 inary/operations/upgrade.py:59
-msgid ""
-"You must restart your system for the updates in the following package(s) to "
-"take effect:"
-msgstr ""
-"Aşağıdaki paket(ler)in güncel sürümlerinin etkin hale gelmesi için "
-"sisteminizi yeniden başlatmalısınız:"
+msgid "You must restart your system for the updates in the following package(s) to take effect:"
+msgstr "Aşağıdaki paket(ler)in güncel sürümlerinin etkin hale gelmesi için sisteminizi yeniden başlatmalısınız:"
 
 #: inary/operations/downgrade.py:84 inary/operations/upgrade.py:84
 msgid "Warning: package *name* ends with '.inary'"
@@ -3141,7 +3123,7 @@ msgid "Package {} is not available in repositories."
 msgstr "{} paketi depolarda mevcut değil."
 
 #: inary/operations/downgrade.py:114
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Package {0.name} is already at the first release {0.release}."
 msgstr "{0.name} paketi zaten (ilk) sürümde {0.release}."
 
@@ -3164,6 +3146,7 @@ msgstr "Aşağıdaki paketler yükseltilecektir:"
 
 #: inary/operations/downgrade.py:180 inary/operations/install.py:76
 #: inary/operations/upgrade.py:181
+#, python-format
 msgid "Total size of package(s): %.2f %s"
 msgstr "Paket(ler)in toplam boyu: %.2f %s"
 
@@ -3179,16 +3162,18 @@ msgstr "Devam etmek istiyor musunuz?"
 
 #: inary/operations/downgrade.py:204 inary/operations/history.py:156
 #: inary/operations/install.py:97 inary/operations/upgrade.py:205
+#, python-format
 msgid "Downloading %d / %d"
 msgstr "İndiriliyor %d / %d"
 
 #: inary/operations/downgrade.py:218 inary/operations/install.py:116
 #: inary/operations/upgrade.py:219
+#, python-format
 msgid "Installing %d / %d"
 msgstr "Kuruluyor %d / %d"
 
 #: inary/operations/downgrade.py:266 inary/operations/upgrade.py:267
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Dependency {0} of {1} cannot be satisfied"
 msgstr "{0} bağımlılığı, {1} paketi için sağlanamadı."
 
@@ -3244,7 +3229,7 @@ msgid "Selected packages [{}] are in conflict with each other."
 msgstr "Seçili paketler [{}] birbirleriyle çakışıyorlar."
 
 #: inary/operations/helper.py:56
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "[{0} conflicts with: {1}]\n"
 msgstr "[{0}, {1} ile çakışıyor]\n"
 
@@ -3293,9 +3278,7 @@ msgstr ""
 "Bu paketler depolarda ve önbellekte bulunamadı:\n"
 
 #: inary/operations/install.py:47 inary/operations/install.py:149
-msgid ""
-"The following package(s) are already installed and are not going to be "
-"installed again:"
+msgid "The following package(s) are already installed and are not going to be installed again:"
 msgstr "Aşağıdaki paket(ler) zaten kurulu ve yeniden kurulmayacak:"
 
 # inary/api.py:168 :215
@@ -3312,12 +3295,12 @@ msgid "Mixing file names and package names not supported yet."
 msgstr "Dosya ve paket adlarını birlikte kullanmak henüz desteklenmiyor."
 
 #: inary/operations/install.py:180
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Package {0} is not compatible with your distribution release {1} {2}."
 msgstr "{0} paketi, {1} {2} sürümü ile uyumlu değil."
 
 #: inary/operations/install.py:184
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Package {0} ({1}) is not compatible with your {2} architecture."
 msgstr "{0} {1} paketi {2} mimarisi ile uyumlu değil."
 
@@ -3327,8 +3310,7 @@ msgid "External dependencies not satisfied: {}"
 msgstr "Dış bağımlılıklar sağlanamadı: {}"
 
 #: inary/operations/install.py:211
-msgid ""
-"The following packages will be installed in order to satisfy dependencies:"
+msgid "The following packages will be installed in order to satisfy dependencies:"
 msgstr "Bağımlılıkları sağlamak için aşağıdaki paketler kurulacaktır:"
 
 #: inary/operations/install.py:215
@@ -3352,8 +3334,7 @@ msgstr "Kaldırılacak paket yok."
 msgid ""
 "The following list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
-msgstr ""
-"Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:\n"
+msgstr "Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:\n"
 
 #: inary/operations/remove.py:74
 msgid "Package removal declined"
@@ -3377,7 +3358,7 @@ msgid "Replaced package remains"
 msgstr "Yerine yenisi yerleştirilen bir paket duruyor."
 
 #: inary/operations/upgrade.py:114
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Package {0.name} is already at the latest release {0.release}."
 msgstr "{0.name} paketi zaten (en son) sürümde {0.release}."
 
@@ -3415,11 +3396,10 @@ msgstr ""
 #: inary/reactor.py:45
 #, fuzzy
 msgid "Another instance of Inary is running. Only one instance is allowed."
-msgstr ""
-"Sistemde çalışan bir INARY mevcut. Aynı anda sadece tek INARY çalışabilir."
+msgstr "Sistemde çalışan bir INARY mevcut. Aynı anda sadece tek INARY çalışabilir."
 
 #: inary/reactor.py:321
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "{0} package found in {1} repository"
 msgstr "{0} paketi {1} deposunda bulundu"
 
@@ -3619,7 +3599,7 @@ msgid "Fetching source from: {}"
 msgstr "Kaynak {} adresinden indiriliyor"
 
 #: inary/sourcearchive.py:75
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid ""
 "\n"
 "Source archive is stored: {0}/{1}"
@@ -3654,15 +3634,14 @@ msgid "unpack: check_file_hash failed"
 msgstr "unpack: kaynak arşivin bütünlüğünde sorun var."
 
 #: inary/sourcearchive.py:133
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Unknown archive type '{0}' is given for '{1}'."
 msgstr "Arşiv için bilinmeyen bir tip {0} verilmiş: {1}"
 
 #: inary/sourcearchive.py:135
 #, fuzzy
 msgid "Inary needs {} to unpack this archive but it is not installed."
-msgstr ""
-"Inary bu arşivi açabilmek için {} aracına ihtiyaç duyuyor ancak yüklü değil."
+msgstr "Inary bu arşivi açabilmek için {} aracına ihtiyaç duyuyor ancak yüklü değil."
 
 #: inary/sxml/autoxml.py:79
 #, fuzzy
@@ -3670,7 +3649,7 @@ msgid "At least one '{}' tag should have local text"
 msgstr "En azından bir tane {} etiketi yerel metne sahip olmalı."
 
 #: inary/sxml/autoxml.py:85
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "'{0}' language of tag '{1}' is empty"
 msgstr "{0} dili metni, etiket {1} için boş."
 
@@ -3679,12 +3658,8 @@ msgid "LocalText: unable to get either current or default locale"
 msgstr "LocalText: şu andaki ya da öntanımlı yerel bulunamıyor."
 
 #: inary/sxml/autoxml.py:118 inary/sxml/autoxml.py:133
-msgid ""
-"Tag should have at least the current locale, or failing that an English or "
-"Turkish version"
-msgstr ""
-"Etiket içeriğinin en azından güncel yerelde (locale) bir karşılığı olmalı, "
-"ya da eğer o yoksa bir Türkçe ya da İngilizce sürüme sahip olmalı."
+msgid "Tag should have at least the current locale, or failing that an English or Turkish version"
+msgstr "Etiket içeriğinin en azından güncel yerelde (locale) bir karşılığı olmalı, ya da eğer o yoksa bir Türkçe ya da İngilizce sürüme sahip olmalı."
 
 #: inary/sxml/autoxml.py:368
 #, fuzzy
@@ -3730,7 +3705,7 @@ msgid "Mandatory token {} not available"
 msgstr "Zorunlu etiket {} bulunamadı."
 
 #: inary/sxml/autoxml.py:670
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Type mismatch. Expected {0}, got {1}"
 msgstr "Tip uyumsuzluğu. {0} beklerken, {1} alındı."
 
@@ -3762,7 +3737,7 @@ msgstr "Liste tipi sadece bir eleman içermeli."
 
 # inary/xmlfile.py:470 :485
 #: inary/sxml/autoxml.py:758 inary/sxml/autoxml.py:778
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Mandatory list \"{0}\" under \"{1}\" node is empty."
 msgstr "Zorunlu \"{0}\" listesi (\"{1}\" düğümü altındaki) boş."
 
@@ -3771,7 +3746,7 @@ msgid "getNodeText: Expected text node, got something else!"
 msgstr "getNodeText: Metin düğüm beklenirken başka birşey alındı."
 
 #: inary/sxml/xmlfile.py:73
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Cannot read URI {0}: {1}"
 msgstr "Kaynak adresi {0}: {1}"
 
@@ -3941,7 +3916,7 @@ msgid "Running "
 msgstr "Çalışıyor "
 
 #: inary/util.py:193 inary/util.py:219
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "return value for \"{0}\" is {1}"
 msgstr "\"{0}\" için dönüş değeri {1}"
 
@@ -3970,7 +3945,7 @@ msgid "Compression type is not valid: '{}'"
 msgstr "Sıkıştırma türü geçerli değil: {}"
 
 #: inary/util.py:501
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "Error while decompressing {0}: {1}"
 msgstr "{0} genişletilirken hata: {1}"
 
@@ -3980,7 +3955,7 @@ msgid "ERROR: patch ({}) failed"
 msgstr "HATA: Yama {} başarısız."
 
 #: inary/util.py:581
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "ERROR: patch ({0}) failed: {1}"
 msgstr "HATA: Yama {0} başarısız: {1}"
 
@@ -4005,7 +3980,7 @@ msgid "objcopy (add-debuglink) command failed for file '{}'!"
 msgstr "objcopy (add-debuglink) komutu {} dosyası için başarısız oldu!"
 
 #: inary/util.py:616
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "file command failed with return code {0} for file: {1}"
 msgstr "strip komutu {1} dosyası için başarısız oldu! Dönüt : {0}"
 
@@ -4047,56 +4022,11 @@ msgstr "Hatalı sürüm dizgisi: {}"
 #~ msgid "Installation order: "
 #~ msgstr "Kurulum sırası: "
 
-#~ msgid "no such option: {}"
-#~ msgstr "bilinmeyen seçenek: {}"
-
-#~ msgid "ambiguous option: {} ({}?)"
-#~ msgstr "belirsiz seçenek: {} ({}?)"
-
-#~ msgid "Usage: {}\n"
-#~ msgstr "Kullanım: {}\n"
-
-#~ msgid "Usage"
-#~ msgstr "Kullanım"
-
-#~ msgid "integer"
-#~ msgstr "tamsayı"
-
 #~ msgid "long integer"
 #~ msgstr "uzun tamsayı"
 
-#~ msgid "floating-point"
-#~ msgstr "kayan noktalı"
-
-#~ msgid "complex"
-#~ msgstr "karmaşık"
-
-#~ msgid "option {}: invalid {} value: %r"
-#~ msgstr "seçenek {}: geçersiz {} değeri: %r"
-
-#~ msgid "option {}: invalid choice: %r (choose from {})"
-#~ msgstr "seçenek {}: geçersiz seçim: %r (olası değerler: {})"
-
-#~ msgid "show this help message and exit"
-#~ msgstr "bu yardım iletisini göster ve çık"
-
-#~ msgid "show program's version number and exit"
-#~ msgstr "programın sürüm numarasını göster ve çık"
-
-#~ msgid "%prog [options]"
-#~ msgstr "%prog [seçenekler]"
-
 #~ msgid "{} option requires an argument"
 #~ msgstr "{} seçeneği bir argüman almalıdır"
-
-#~ msgid "{} option requires %d arguments"
-#~ msgstr "{} seçeneği %d adet argüman almalıdır"
-
-#~ msgid "{} option does not take a value"
-#~ msgstr "{} seçeneği herhangi bir değer almaz"
-
-#~ msgid "Options"
-#~ msgstr "Seçenekler"
 
 #~ msgid "INARY package"
 #~ msgstr "INARY paketi"
@@ -4149,8 +4079,7 @@ msgstr "Hatalı sürüm dizgisi: {}"
 #~ msgstr "Bu yol için birden fazla 'Path' etiketi yazılmış: {}"
 
 #~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr ""
-#~ "Emniyet mandalı: taban geliştirme bileşeni system.devel zaten kurulu."
+#~ msgstr "Emniyet mandalı: taban geliştirme bileşeni system.devel zaten kurulu."
 
 #~ msgid "Checking /{} "
 #~ msgstr "/{} denetleniyor "
@@ -4166,15 +4095,10 @@ msgstr "Hatalı sürüm dizgisi: {}"
 #~ msgstr "Ters bağımlılık {}, {} paketi için sağlanamadı."
 
 #~ msgid "Repository distribution does not match. Removing {} from system."
-#~ msgstr ""
-#~ "Depo dağıtımı sisteminizle uyumsuz. {} deposu sistemden kaldırılıyor."
+#~ msgstr "Depo dağıtımı sisteminizle uyumsuz. {} deposu sistemden kaldırılıyor."
 
-#~ msgid ""
-#~ "Unable to check compatibility of this repository as it does not have "
-#~ "information about the distribution."
-#~ msgstr ""
-#~ "Dağıtım hakkında bilgi içermediği için bu deponun uyumluluğu "
-#~ "denetlenemiyor."
+#~ msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
+#~ msgstr "Dağıtım hakkında bilgi içermediği için bu deponun uyumluluğu denetlenemiyor."
 
 #~ msgid "Name: {}, version: {}, release: %s, build %s\n"
 #~ msgstr "İsim: {}, sürüm {}, yayım %s, inşa %s\n"
@@ -4188,17 +4112,11 @@ msgstr "Hatalı sürüm dizgisi: {}"
 #~ msgid "Cannot create delta for same package!"
 #~ msgstr "Aynı paket için delta oluşturulamaz!"
 
-#~ msgid ""
-#~ "All of the files under the install dir {} has been collected by package(s)"
-#~ msgstr ""
-#~ "Kurulum dizini {} altındaki bütün dosyalar paket(ler) tarafından toplandı."
+#~ msgid "All of the files under the install dir {} has been collected by package(s)"
+#~ msgstr "Kurulum dizini {} altındaki bütün dosyalar paket(ler) tarafından toplandı."
 
-#~ msgid ""
-#~ "Build number is not available. For repo builds you must enable buildno in "
-#~ "inary.conf."
-#~ msgstr ""
-#~ "İnşa numarası alınamıyor. Depo inşaları için inary.conf dosyasında "
-#~ "buildno seçeneğini etkinleştirmelisiniz."
+#~ msgid "Build number is not available. For repo builds you must enable buildno in inary.conf."
+#~ msgstr "İnşa numarası alınamıyor. Depo inşaları için inary.conf dosyasında buildno seçeneğini etkinleştirmelisiniz."
 
 #~ msgid "Generating {},"
 #~ msgstr "{} yaratılıyor,"
