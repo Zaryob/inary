@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-26 10:48++03\n"
+"POT-Creation-Date: 2018-01-26 16:01++03\n"
 "PO-Revision-Date: 2010-03-28 20:37-0400\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <kde-i18n-doc@kde.org>\n"
@@ -39,7 +39,7 @@ msgstr "Programa terminado."
 #, fuzzy
 msgid ""
 "Unhandled internal exception.\n"
-"Please file a bug report to <http://bugs.sulin.com.tr>."
+"Please file a bug report to <http://bugs.sulin.org>."
 msgstr ""
 "Excepción interna no prevista.\n"
 "Favor envíe un reporte de la falla<http://bugs.sulin.org>."
@@ -218,22 +218,22 @@ msgstr "Argumentos insuficientes."
 msgid "No executable file matched pattern \"{}\"."
 msgstr "No hay archivos ejecutables que coinciden con el patrón \"{}\"."
 
-#: inary/actionsapi/javamodules.py:92 inary/actionsapi/javamodules.py:98
+#: inary/actionsapi/javamodules.py:91 inary/actionsapi/javamodules.py:97
 #, fuzzy
 msgid "DoJavadoc failed."
 msgstr "Falló Make."
 
-#: inary/actionsapi/javamodules.py:148
+#: inary/actionsapi/javamodules.py:147
 #, fuzzy
 msgid "Compile failed."
 msgstr "Configuración fallada."
 
-#: inary/actionsapi/javamodules.py:246
+#: inary/actionsapi/javamodules.py:243
 #, fuzzy
 msgid "Javadoc generation failed."
 msgstr "Falló la configuración."
 
-#: inary/actionsapi/javamodules.py:262
+#: inary/actionsapi/javamodules.py:259
 #, fuzzy
 msgid "Run failed."
 msgstr "Ejecución de {} falló."
@@ -829,7 +829,7 @@ msgstr "Responsable para la versión indicada"
 msgid "Blame for all of the releases"
 msgstr "Responsable para todas las versiones"
 
-#: inary/cli/blame.py:66 inary/data/specfile.py:369 inary/data/specfile.py:453
+#: inary/cli/blame.py:66 inary/data/specfile.py:368 inary/data/specfile.py:452
 #, fuzzy
 msgid "Name: {0}, version: {1}, release: {2}\n"
 msgstr "Nombre: {0}, versión: {1}, release: {2}\n"
@@ -2582,55 +2582,55 @@ msgstr "Encontrado ciclo (cycle) {}"
 msgid "URI: {0}, type: {1}, sha1sum: {2}"
 msgstr "URI: {0}, tipo: {1}, sha1sum: {2}"
 
-#: inary/data/specfile.py:193 inary/data/specfile.py:196
+#: inary/data/specfile.py:192 inary/data/specfile.py:195
 msgid " or "
 msgstr " o "
 
 # satisfy - a traducir con "cumplir" ? como suena ?
-#: inary/data/specfile.py:273 inary/operations/install.py:293
+#: inary/data/specfile.py:272 inary/operations/install.py:293
 #, fuzzy
 msgid "{0} dependency of package {1} is not satisfied"
 msgstr "Dependencia {0} de paquete {1} no está satisfecha"
 
-#: inary/data/specfile.py:371 inary/data/specfile.py:455
+#: inary/data/specfile.py:370 inary/data/specfile.py:454
 #, fuzzy
 msgid "Summary: {}\n"
 msgstr "Resumen: {}\n"
 
-#: inary/data/specfile.py:372 inary/data/specfile.py:456
+#: inary/data/specfile.py:371 inary/data/specfile.py:455
 #, fuzzy
 msgid "Description: {}\n"
 msgstr "Descripción: {}\n"
 
-#: inary/data/specfile.py:373 inary/data/specfile.py:457
+#: inary/data/specfile.py:372 inary/data/specfile.py:456
 #, fuzzy
 msgid "Licenses: {}\n"
 msgstr "Licencias: {}\n"
 
-#: inary/data/specfile.py:374 inary/data/specfile.py:458
+#: inary/data/specfile.py:373 inary/data/specfile.py:457
 #, fuzzy
 msgid "Component: {}\n"
 msgstr "Componente: {}\n"
 
 # o simplemente "contiene" ?
-#: inary/data/specfile.py:375
+#: inary/data/specfile.py:374
 msgid "Provides: "
 msgstr "Provee: "
 
-#: inary/data/specfile.py:379
+#: inary/data/specfile.py:378
 msgid "Dependencies: "
 msgstr "Dependencias: "
 
-#: inary/data/specfile.py:431
+#: inary/data/specfile.py:430
 msgid "translations.xml file is badly formed."
 msgstr "Archivo translations.xml incorrecto."
 
-#: inary/data/specfile.py:440 inary/sxml/xmlfile.py:88
+#: inary/data/specfile.py:439 inary/sxml/xmlfile.py:88
 #, fuzzy
 msgid "File '{}' has invalid XML"
 msgstr "Archivo {} contiene XML inválido"
 
-#: inary/data/specfile.py:459
+#: inary/data/specfile.py:458
 msgid "Build Dependencies: "
 msgstr "Dependencias de Build: "
 

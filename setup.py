@@ -102,18 +102,18 @@ class Install(install):
 
     def installi18n(self):
         pass
-#        for name in os.listdir('po'):
-#            if not name.endswith('.po'):
-#                continue
-#            lang = name[:-3]
-#            print("Installing '{}' translations...".format(lang))
-#            os.popen("msgfmt po/{0}.po -o po/{0}.mo".format(lang))
-#            if not self.root:
-##                self.root = "/"
-##            destpath = os.path.join(self.root, "usr/share/locale/{}/LC_MESSAGES".format(lang))
-#            if not os.path.exists(destpath):
-#                os.makedirs(destpath)
-#            shutil.copy("po/{}.mo".format(lang), os.path.join(destpath, "inary.mo"))
+        for name in os.listdir('po'):
+            if not name.endswith('.po'):
+                continue
+            lang = name[:-3]
+            print("Installing '{}' translations...".format(lang))
+            os.popen("msgfmt po/{0}.po -o po/{0}.mo".format(lang))
+            if not self.root:
+                self.root = "/"
+            destpath = os.path.join(self.root, "usr/share/locale/{}/LC_MESSAGES".format(lang))
+            if not os.path.exists(destpath):
+                os.makedirs(destpath)
+            shutil.copy("po/{}.mo".format(lang), os.path.join(destpath, "inary.mo"))
 
     def installdoc(self):
         self.root ='/'

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: INARY\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-26 10:48++03\n"
+"POT-Creation-Date: 2018-01-26 16:01++03\n"
 "PO-Revision-Date: 2010-12-27 13:15+0100\n"
 "Last-Translator: Attila Siposs <sipiatti@gmail.com>\n"
 "Language-Team: Hungarian <pardus-translators@pardus.org.tr>\n"
@@ -34,7 +34,7 @@ msgstr "A program futása befejeződött."
 #, fuzzy
 msgid ""
 "Unhandled internal exception.\n"
-"Please file a bug report to <http://bugs.sulin.com.tr>."
+"Please file a bug report to <http://bugs.sulin.org>."
 msgstr ""
 "Nem kezelt belső hiba.\n"
 "Küldjön hibabejelentést a <http://bugs.sulin.org> címen."
@@ -209,22 +209,22 @@ msgstr "Nem elegendőek a megadott argumentumok."
 msgid "No executable file matched pattern \"{}\"."
 msgstr "Nincs a mintára illeszkedő, futtatható fájl: \"{}\"."
 
-#: inary/actionsapi/javamodules.py:92 inary/actionsapi/javamodules.py:98
+#: inary/actionsapi/javamodules.py:91 inary/actionsapi/javamodules.py:97
 #, fuzzy
 msgid "DoJavadoc failed."
 msgstr "A make végrehajtása nem sikerült."
 
-#: inary/actionsapi/javamodules.py:148
+#: inary/actionsapi/javamodules.py:147
 #, fuzzy
 msgid "Compile failed."
 msgstr "A configure végrehajtása nem sikerült."
 
-#: inary/actionsapi/javamodules.py:246
+#: inary/actionsapi/javamodules.py:243
 #, fuzzy
 msgid "Javadoc generation failed."
 msgstr "A konfigurálás nem sikerült."
 
-#: inary/actionsapi/javamodules.py:262
+#: inary/actionsapi/javamodules.py:259
 #, fuzzy
 msgid "Run failed."
 msgstr "A(z) {} futtatása nem sikerült."
@@ -814,7 +814,7 @@ msgstr "az adott verzió információi"
 msgid "Blame for all of the releases"
 msgstr "az összes verzó információi"
 
-#: inary/cli/blame.py:66 inary/data/specfile.py:369 inary/data/specfile.py:453
+#: inary/cli/blame.py:66 inary/data/specfile.py:368 inary/data/specfile.py:452
 #, fuzzy
 msgid "Name: {0}, version: {1}, release: {2}\n"
 msgstr "Név: {0}, verzió: {1}, kiadás: {2}\n"
@@ -2520,53 +2520,53 @@ msgstr "{} ciklusba futottam."
 msgid "URI: {0}, type: {1}, sha1sum: {2}"
 msgstr "URI: {0}, típus: {1}, sha1sum: {2}"
 
-#: inary/data/specfile.py:193 inary/data/specfile.py:196
+#: inary/data/specfile.py:192 inary/data/specfile.py:195
 msgid " or "
 msgstr "vagy"
 
-#: inary/data/specfile.py:273 inary/operations/install.py:293
+#: inary/data/specfile.py:272 inary/operations/install.py:293
 #, fuzzy
 msgid "{0} dependency of package {1} is not satisfied"
 msgstr "A(z) {0} csomag függősége a(z) {1} csomagnak, de nem teljesíthető."
 
-#: inary/data/specfile.py:371 inary/data/specfile.py:455
+#: inary/data/specfile.py:370 inary/data/specfile.py:454
 #, fuzzy
 msgid "Summary: {}\n"
 msgstr "Összefoglalás: {}\n"
 
-#: inary/data/specfile.py:372 inary/data/specfile.py:456
+#: inary/data/specfile.py:371 inary/data/specfile.py:455
 #, fuzzy
 msgid "Description: {}\n"
 msgstr "Leírás: {}\n"
 
-#: inary/data/specfile.py:373 inary/data/specfile.py:457
+#: inary/data/specfile.py:372 inary/data/specfile.py:456
 #, fuzzy
 msgid "Licenses: {}\n"
 msgstr "Használat: {}\n"
 
-#: inary/data/specfile.py:374 inary/data/specfile.py:458
+#: inary/data/specfile.py:373 inary/data/specfile.py:457
 #, fuzzy
 msgid "Component: {}\n"
 msgstr "Komponens: {}\n"
 
-#: inary/data/specfile.py:375
+#: inary/data/specfile.py:374
 msgid "Provides: "
 msgstr "Szolgáltat:"
 
-#: inary/data/specfile.py:379
+#: inary/data/specfile.py:378
 msgid "Dependencies: "
 msgstr "Függőségek:"
 
-#: inary/data/specfile.py:431
+#: inary/data/specfile.py:430
 msgid "translations.xml file is badly formed."
 msgstr "a translation.xml fájl hibás formátumú"
 
-#: inary/data/specfile.py:440 inary/sxml/xmlfile.py:88
+#: inary/data/specfile.py:439 inary/sxml/xmlfile.py:88
 #, fuzzy
 msgid "File '{}' has invalid XML"
 msgstr "A(z) {} fájl hibás XML adatot tartalmaz"
 
-#: inary/data/specfile.py:459
+#: inary/data/specfile.py:458
 msgid "Build Dependencies: "
 msgstr "Build függőségek:"
 
@@ -4034,7 +4034,6 @@ msgstr "Érvénytelen deltacsomagnév: {}"
 #, fuzzy
 msgid "Invalid version string: '{}'"
 msgstr "Érvénytelen verzió-sztring: {}"
-
 
 #~ msgid "no such option: {}"
 #~ msgstr "nincs ilyen opció: {}"

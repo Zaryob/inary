@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: inary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-26 10:48++03\n"
+"POT-Creation-Date: 2018-01-26 16:01++03\n"
 "PO-Revision-Date: 2011-06-11 23:13+0100\n"
 "Last-Translator: Ivica Kolić <ikoli@yahoo.com>\n"
 "Language-Team: Croatian <ikoli@yahoo.com>\n"
@@ -32,7 +32,7 @@ msgstr "Program je prekinut."
 #: inary-cli:46
 msgid ""
 "Unhandled internal exception.\n"
-"Please file a bug report to <http://bugs.sulin.com.tr>."
+"Please file a bug report to <http://bugs.sulin.org>."
 msgstr ""
 
 #: inary-cli:55
@@ -199,21 +199,21 @@ msgstr "Nedovoljno argumenata"
 msgid "No executable file matched pattern \"{}\"."
 msgstr "Nijedna izvršna datoteka se ne podudara sa uzorkom \"{}\"."
 
-#: inary/actionsapi/javamodules.py:92 inary/actionsapi/javamodules.py:98
+#: inary/actionsapi/javamodules.py:91 inary/actionsapi/javamodules.py:97
 msgid "DoJavadoc failed."
 msgstr ""
 
-#: inary/actionsapi/javamodules.py:148
+#: inary/actionsapi/javamodules.py:147
 #, fuzzy
 msgid "Compile failed."
 msgstr "Konfiguracija nije uspjela."
 
-#: inary/actionsapi/javamodules.py:246
+#: inary/actionsapi/javamodules.py:243
 #, fuzzy
 msgid "Javadoc generation failed."
 msgstr "Konfiguracija nije uspjela."
 
-#: inary/actionsapi/javamodules.py:262
+#: inary/actionsapi/javamodules.py:259
 #, fuzzy
 msgid "Run failed."
 msgstr "Pokretannje {} nije uspjelo."
@@ -786,7 +786,7 @@ msgstr "Krivnja za dano izdanje"
 msgid "Blame for all of the releases"
 msgstr "Krivnja za sva izdanja"
 
-#: inary/cli/blame.py:66 inary/data/specfile.py:369 inary/data/specfile.py:453
+#: inary/cli/blame.py:66 inary/data/specfile.py:368 inary/data/specfile.py:452
 #, fuzzy
 msgid "Name: {0}, version: {1}, release: {2}\n"
 msgstr "Ime:{0}, verzija{1}, izdanje:{2}\n"
@@ -2246,53 +2246,53 @@ msgstr ""
 msgid "URI: {0}, type: {1}, sha1sum: {2}"
 msgstr "URI: {0}, type: {1}, sha1sum: {2}"
 
-#: inary/data/specfile.py:193 inary/data/specfile.py:196
+#: inary/data/specfile.py:192 inary/data/specfile.py:195
 msgid " or "
 msgstr "ili"
 
-#: inary/data/specfile.py:273 inary/operations/install.py:293
+#: inary/data/specfile.py:272 inary/operations/install.py:293
 #, fuzzy
 msgid "{0} dependency of package {1} is not satisfied"
 msgstr "{0} zavisnost paketa {1} nije zadovoljena"
 
-#: inary/data/specfile.py:371 inary/data/specfile.py:455
+#: inary/data/specfile.py:370 inary/data/specfile.py:454
 #, fuzzy
 msgid "Summary: {}\n"
 msgstr "Sažetak: {}\n"
 
-#: inary/data/specfile.py:372 inary/data/specfile.py:456
+#: inary/data/specfile.py:371 inary/data/specfile.py:455
 #, fuzzy
 msgid "Description: {}\n"
 msgstr "Opis: {}\n"
 
-#: inary/data/specfile.py:373 inary/data/specfile.py:457
+#: inary/data/specfile.py:372 inary/data/specfile.py:456
 #, fuzzy
 msgid "Licenses: {}\n"
 msgstr "Licence: {}\n"
 
-#: inary/data/specfile.py:374 inary/data/specfile.py:458
+#: inary/data/specfile.py:373 inary/data/specfile.py:457
 #, fuzzy
 msgid "Component: {}\n"
 msgstr "Komponenta: {}\n"
 
-#: inary/data/specfile.py:375
+#: inary/data/specfile.py:374
 msgid "Provides: "
 msgstr ""
 
-#: inary/data/specfile.py:379
+#: inary/data/specfile.py:378
 msgid "Dependencies: "
 msgstr "Zavisnosti:"
 
-#: inary/data/specfile.py:431
+#: inary/data/specfile.py:430
 msgid "translations.xml file is badly formed."
 msgstr "translations.xml datoteka je loše formirana."
 
-#: inary/data/specfile.py:440 inary/sxml/xmlfile.py:88
+#: inary/data/specfile.py:439 inary/sxml/xmlfile.py:88
 #, fuzzy
 msgid "File '{}' has invalid XML"
 msgstr "Datoteka {} ima neispravan XML"
 
-#: inary/data/specfile.py:459
+#: inary/data/specfile.py:458
 msgid "Build Dependencies: "
 msgstr ""
 
