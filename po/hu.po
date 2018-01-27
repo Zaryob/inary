@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: INARY\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-26 16:30+0300\n"
+"POT-Creation-Date: 2018-01-27 23:19+0300\n"
 "PO-Revision-Date: 2010-12-27 13:15+0100\n"
 "Last-Translator: Attila Siposs <sipiatti@gmail.com>\n"
 "Language-Team: Hungarian <pardus-translators@pardus.org.tr>\n"
@@ -2581,43 +2581,38 @@ msgstr "Build függőségek:"
 msgid "Component {} not found"
 msgstr "A(z) {} komponens nem található."
 
-#: inary/db/filesdb.py:46 inary/db/filesldb.py:40
+#: inary/db/filesdb.py:29
+msgid "LevelDB not found! Please install LevelDB and plyvel!"
+msgstr ""
+
+#: inary/db/filesdb.py:40
 #, fuzzy
 msgid "Creating files database..."
 msgstr "Fájl adatbázis újraépítése"
 
-#: inary/db/filesdb.py:50
+#: inary/db/filesdb.py:43
 #, fuzzy
-msgid "  ---> Adding '{}' to db... "
+msgid "  |___* Adding '{}' to db... "
 msgstr "* {} hozzáadása az adatbázishoz..."
 
-#: inary/db/filesdb.py:53
+#: inary/db/filesdb.py:46
 msgid "OK."
 msgstr "OK."
 
-#: inary/db/filesdb.py:54 inary/db/filesldb.py:47
+#: inary/db/filesdb.py:47
 #, fuzzy
 msgid "Added files database..."
 msgstr "Fájl adatbázis újraépítése"
 
-#: inary/db/filesdb.py:84
-#, fuzzy
-msgid "Cleaning files database folder...  "
-msgstr "Átmeneti könyvtár tisztítása..."
-
-#: inary/db/filesdb.py:87 inary/db/filesldb.py:79
-#, fuzzy
-msgid "done."
-msgstr "Kész."
-
-#: inary/db/filesldb.py:29
-msgid "LevelDB not found! Please install LevelDB and plyvel!"
-msgstr ""
-
-#: inary/db/filesldb.py:77
+#: inary/db/filesdb.py:77
 #, fuzzy
 msgid "Cleaning files database folder... "
 msgstr "Átmeneti könyvtár tisztítása..."
+
+#: inary/db/filesdb.py:79
+#, fuzzy
+msgid "done."
+msgstr "Kész."
 
 #: inary/db/groupdb.py:66 inary/db/groupdb.py:75
 #, fuzzy
@@ -2672,7 +2667,7 @@ msgstr "A(z) {} tárolóbejegyzés nem található"
 msgid "Repository {} does not exist."
 msgstr "A(z) {} tároló nem létezik."
 
-#: inary/db/packagedb.py:147 inary/db/packagedb.py:154
+#: inary/db/packagedb.py:148 inary/db/packagedb.py:155
 #, fuzzy
 msgid "Package {} not found."
 msgstr "A(z) {} csomag nem található."
@@ -3293,6 +3288,10 @@ msgstr "A következő csomagok kerülnek telepítésre, a függőségeknek megfe
 msgid "External dependencies not satisfied"
 msgstr "A külső föggőségek nem teljesülnek"
 
+#: inary/operations/install.py:258
+msgid "Installation order: "
+msgstr "Telepítési sorrend: "
+
 #: inary/operations/remove.py:44
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "A biztonsági kapcsoló nem teszi lehetővé a következő csomagok eltávolítását:\n"
@@ -3640,77 +3639,77 @@ msgstr "LocalText: nem állapítható meg sem az aktuális, sem az alapértelmez
 msgid "Tag should have at least the current locale, or failing that an English or Turkish version"
 msgstr "A címkének legalább az aktuális területi beállítást tartalmaznia kell, vagy hiba esetére egy angol, vagy török verziót"
 
-#: inary/sxml/autoxml.py:368
+#: inary/sxml/autoxml.py:367
 #, fuzzy
 msgid "autoxml.check: '{}' errors"
 msgstr "autoxml.check: {} hiba"
 
-#: inary/sxml/autoxml.py:424 inary/sxml/autoxml.py:434
+#: inary/sxml/autoxml.py:423 inary/sxml/autoxml.py:433
 #, fuzzy
 msgid "autoxml.parse: String '{}' has errors"
 msgstr "autoxml.parse: A(z) {} sztring hibákat tartalmaz"
 
-#: inary/sxml/autoxml.py:448 inary/sxml/autoxml.py:458
+#: inary/sxml/autoxml.py:447 inary/sxml/autoxml.py:457
 #, fuzzy
 msgid "autoxml.read: File '{}' has errors"
 msgstr "autoxml.read: A(z) {} fájl hibákat tartalmaz"
 
-#: inary/sxml/autoxml.py:466
+#: inary/sxml/autoxml.py:465
 msgid "autoxml.write: object validation has failed"
 msgstr "autoxml.write: az objektum ellenőrzés nem sikerült."
 
-#: inary/sxml/autoxml.py:474
+#: inary/sxml/autoxml.py:473
 #, fuzzy
 msgid "autoxml.write: File encoding '{}' has errors"
 msgstr "autoxml.write: A fájl-kódolás {} hibákat tartalmaz"
 
-#: inary/sxml/autoxml.py:524
+#: inary/sxml/autoxml.py:523
 #, fuzzy
 msgid "gen_tag: unrecognized tag type {} in spec"
 msgstr "gen_tag: ismeretlen a megadott {} címketípus"
 
-#: inary/sxml/autoxml.py:571 inary/sxml/autoxml.py:582
+#: inary/sxml/autoxml.py:570 inary/sxml/autoxml.py:581
 #, fuzzy
 msgid "Mandatory variable {} not available"
 msgstr "Alapvető változó {} nem található"
 
-#: inary/sxml/autoxml.py:652
+#: inary/sxml/autoxml.py:651
 msgid "Type mismatch: read text cannot be decoded"
 msgstr "Típushiba: a beolvasott szöveget nem lehet dekódolni"
 
-#: inary/sxml/autoxml.py:656 inary/sxml/autoxml.py:665
+#: inary/sxml/autoxml.py:655 inary/sxml/autoxml.py:664
 #, fuzzy
 msgid "Mandatory token {} not available"
 msgstr "Alapvető token {} nem taláható"
 
-#: inary/sxml/autoxml.py:670
+#: inary/sxml/autoxml.py:669
 #, fuzzy, python-brace-format
 msgid "Type mismatch. Expected {0}, got {1}"
 msgstr "Típushiba: {0}-t vártam, {1}-t kaptam"
 
-#: inary/sxml/autoxml.py:699 inary/sxml/autoxml.py:819
+#: inary/sxml/autoxml.py:698 inary/sxml/autoxml.py:818
 msgid "Type mismatch: DOM cannot be decoded"
 msgstr "Típushiba: a DOM nem dekódolható"
 
-#: inary/sxml/autoxml.py:702 inary/sxml/autoxml.py:718
-#: inary/sxml/autoxml.py:732 inary/sxml/autoxml.py:822
-#: inary/sxml/autoxml.py:836 inary/sxml/autoxml.py:850
+#: inary/sxml/autoxml.py:701 inary/sxml/autoxml.py:717
+#: inary/sxml/autoxml.py:731 inary/sxml/autoxml.py:821
+#: inary/sxml/autoxml.py:835 inary/sxml/autoxml.py:849
 msgid "Mandatory argument not available"
 msgstr "Alapvető argumentum nem található"
 
-#: inary/sxml/autoxml.py:715 inary/sxml/autoxml.py:833
+#: inary/sxml/autoxml.py:714 inary/sxml/autoxml.py:832
 msgid "Object cannot be encoded"
 msgstr "Az objektum nem kódolható"
 
-#: inary/sxml/autoxml.py:729 inary/sxml/autoxml.py:847
+#: inary/sxml/autoxml.py:728 inary/sxml/autoxml.py:846
 msgid "Object cannot be formatted"
 msgstr "Az objektum nem formázható"
 
-#: inary/sxml/autoxml.py:745
+#: inary/sxml/autoxml.py:744
 msgid "List type must contain only one element"
 msgstr "A lista típus csak egy elemet tartalmazhat"
 
-#: inary/sxml/autoxml.py:758 inary/sxml/autoxml.py:778
+#: inary/sxml/autoxml.py:757 inary/sxml/autoxml.py:777
 #, fuzzy, python-brace-format
 msgid "Mandatory list \"{0}\" under \"{1}\" node is empty."
 msgstr "Üres az alapvető \"{0}\" lista a(z) \"{1}\" node alatt."
@@ -3978,74 +3977,77 @@ msgstr "Érvénytelen deltacsomagnév: {}"
 msgid "Invalid version string: '{}'"
 msgstr "Érvénytelen verzió-sztring: {}"
 
-#~ msgid "long integer"
-#~ msgstr "hosszú egész"
+#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
+#~ msgstr "Név: {}, verzió: {}, kiadás: %s, build: %s\n"
 
-#~ msgid "{} option requires an argument"
-#~ msgstr "a(z) {} opcióhoz paramétert is meg kell adni"
+#~ msgid "Package {} is already at the latest build {}."
+#~ msgstr "A(z) {} csomag már a legutolsó build számot viseli: {}."
 
-#, fuzzy
-#~ msgid "INARY package"
-#~ msgstr "INARY csomag létrehozása"
+#~ msgid "Creating delta INARY package between {} {}"
+#~ msgstr "INARY különbözeti csomag létrehozása {} és {} között."
 
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Ütköző fájl nincs eltávolítva: {} "
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Nem hozható létre különbözet ugyanazon csomagból!"
 
-#~ msgid "Date: {} {}"
-#~ msgstr "Dátum: {} {}"
+#~ msgid "All of the files under the install dir {} has been collected by package(s)"
+#~ msgstr "A telepési könyvtárban {} található valamennyi fájl a csomag(ok)ba gyűjtve"
 
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
+#~ msgid "Build number is not available. For repo builds you must enable buildno in inary.conf."
+#~ msgstr "A build számok használata nem lehetséges. Ha tároló számára épít, engedélyezze a buildno opciót a inary.conf-ban."
 
-#~ msgid "Urlgrabber needs to be installed to run this command"
-#~ msgstr "E parancs futtatásához az urlgrabber telepítése szükséges."
+#~ msgid "Generating {},"
+#~ msgstr "{} generálása,"
 
-#~ msgid "No user named {} found on the system"
-#~ msgstr "Nincs {} nevű felhasználó a rendszerben"
+#~ msgid "There is no change from previous build %d"
+#~ msgstr "Nincs változás az előző build-hez (%d) képest."
 
-#~ msgid "No group named {} found on the system"
-#~ msgstr "Nincs {} nevű csoport a rendszerben"
+#~ msgid "There are changes, incrementing build no to %d"
+#~ msgstr "Változásokat észleltem, a build szám így növelve lesz. Az új érték: %d."
 
-#~ msgid "Installation order: "
-#~ msgstr "Telepítési sorrend: "
+#~ msgid "(old package lacks a build no, setting build no to 1.)"
+#~ msgstr "(a régi csomgnak nincs build száma, az új build szám ezért 1. lesz)"
 
-#~ msgid "String {} has invalid XML"
-#~ msgstr "A(z) {} sztring hibás XML adatot tartalmaz"
+#~ msgid "(no previous build found, setting build no to 1.)"
+#~ msgstr "(nem találtam régebbi build-et, a sorszám 1-re lesz állítva)"
 
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Nem olvasható a fájl {}: {}"
+#~ msgid "(found old version {})"
+#~ msgstr "(régebbi verziójú {}-t találtam)"
 
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Csomagok elhelyezése a munkakönyvtárban."
+#~ msgid "gzip compression not supported yet"
+#~ msgstr "A gzip tömörítés még nem támogatott."
 
-#~ msgid "* Checking {}... "
-#~ msgstr "* {} ellenőrzése... "
+#~ msgid "zip compression not supported yet"
+#~ msgstr "A zip tömörítés még nem támogatott."
 
-#~ msgid ""
-#~ "\n"
-#~ "Package {} has changed config files."
-#~ msgstr ""
-#~ "\n"
-#~ "A(z) {} csomag konfigurációs állományai megváltoztak."
+#~ msgid "Indexing current directory."
+#~ msgstr "Az aktuális könyvtár indexelése."
 
-#~ msgid ""
-#~ "\n"
-#~ "Package {} is corrupt."
-#~ msgstr ""
-#~ "\n"
-#~ "A(z) {} csomag sérült."
+#~ msgid "package_format must be one of {} "
+#~ msgstr "a csomag formátuma csak a következők egyike lehet:  {}"
 
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "PartOf címke nincs definiálva, komponens keresése"
+#~ msgid "INARY binary package formats: '1.0', '1.1' (default)"
+#~ msgstr "INARY bináris csomag formátumok: 1.0', '1.1' (alapértelmezett)"
 
-#~ msgid "Source is part of {} component"
-#~ msgstr "A forrás a(z) {} komponens része."
+#~ msgid "Do not take build no into account."
+#~ msgstr "Nem veszi figyelembe a \"build-no\" kapcsolót."
 
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Biztonsági kapcsoló: a system.devel már telepítve van"
+#~ msgid "Downgrade to old distribution build?"
+#~ msgstr "Visszatér a disztribúció korábbi build-változatára?"
 
-#~ msgid "Checking /{} "
-#~ msgstr "/{} ellenőrzése "
+#~ msgid "Upgrading to new distribution build"
+#~ msgstr "Frissítés a disztribúció új build-változatára"
+
+#~ msgid "{} {} is added to %s/language.%s.dat "
+#~ msgstr "{} {} hozzáadva %s/language.%s.dat-hoz "
+
+#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def "
+#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} hozzáadva %s/language.%s.def-hez "
+
+#~ msgid "{} is added to {}/language.%s.dat"
+#~ msgstr "{} hozzáadva {}/language.%s.dat-hoz"
+
+#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def"
+#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} hozzáadva %s/language.%s.def-hez"
 
 #~ msgid ""
 #~ "\n"
@@ -4054,74 +4056,72 @@ msgstr "Érvénytelen verzió-sztring: {}"
 #~ "\n"
 #~ "Megváltozott beállító fájl: {}"
 
-#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def"
-#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} hozzáadva %s/language.%s.def-hez"
+#~ msgid "Checking /{} "
+#~ msgstr "/{} ellenőrzése "
 
-#~ msgid "{} is added to {}/language.%s.dat"
-#~ msgstr "{} hozzáadva {}/language.%s.dat-hoz"
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Biztonsági kapcsoló: a system.devel már telepítve van"
 
-#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def "
-#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} hozzáadva %s/language.%s.def-hez "
+#~ msgid "Source is part of {} component"
+#~ msgstr "A forrás a(z) {} komponens része."
 
-#~ msgid "{} {} is added to %s/language.%s.dat "
-#~ msgstr "{} {} hozzáadva %s/language.%s.dat-hoz "
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "PartOf címke nincs definiálva, komponens keresése"
 
-#~ msgid "Upgrading to new distribution build"
-#~ msgstr "Frissítés a disztribúció új build-változatára"
+#~ msgid ""
+#~ "\n"
+#~ "Package {} is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "A(z) {} csomag sérült."
 
-#~ msgid "Downgrade to old distribution build?"
-#~ msgstr "Visszatér a disztribúció korábbi build-változatára?"
+#~ msgid ""
+#~ "\n"
+#~ "Package {} has changed config files."
+#~ msgstr ""
+#~ "\n"
+#~ "A(z) {} csomag konfigurációs állományai megváltoztak."
 
-#~ msgid "Do not take build no into account."
-#~ msgstr "Nem veszi figyelembe a \"build-no\" kapcsolót."
+#~ msgid "* Checking {}... "
+#~ msgstr "* {} ellenőrzése... "
 
-#~ msgid "INARY binary package formats: '1.0', '1.1' (default)"
-#~ msgstr "INARY bináris csomag formátumok: 1.0', '1.1' (alapértelmezett)"
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Csomagok elhelyezése a munkakönyvtárban."
 
-#~ msgid "package_format must be one of {} "
-#~ msgstr "a csomag formátuma csak a következők egyike lehet:  {}"
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Nem olvasható a fájl {}: {}"
 
-#~ msgid "Indexing current directory."
-#~ msgstr "Az aktuális könyvtár indexelése."
+#~ msgid "String {} has invalid XML"
+#~ msgstr "A(z) {} sztring hibás XML adatot tartalmaz"
 
-#~ msgid "zip compression not supported yet"
-#~ msgstr "A zip tömörítés még nem támogatott."
+#~ msgid "No group named {} found on the system"
+#~ msgstr "Nincs {} nevű csoport a rendszerben"
 
-#~ msgid "gzip compression not supported yet"
-#~ msgstr "A gzip tömörítés még nem támogatott."
+#~ msgid "No user named {} found on the system"
+#~ msgstr "Nincs {} nevű felhasználó a rendszerben"
 
-#~ msgid "(found old version {})"
-#~ msgstr "(régebbi verziójú {}-t találtam)"
+#~ msgid "Urlgrabber needs to be installed to run this command"
+#~ msgstr "E parancs futtatásához az urlgrabber telepítése szükséges."
 
-#~ msgid "(no previous build found, setting build no to 1.)"
-#~ msgstr "(nem találtam régebbi build-et, a sorszám 1-re lesz állítva)"
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
 
-#~ msgid "(old package lacks a build no, setting build no to 1.)"
-#~ msgstr "(a régi csomgnak nincs build száma, az új build szám ezért 1. lesz)"
+#~ msgid "Date: {} {}"
+#~ msgstr "Dátum: {} {}"
 
-#~ msgid "There are changes, incrementing build no to %d"
-#~ msgstr "Változásokat észleltem, a build szám így növelve lesz. Az új érték: %d."
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Ütköző fájl nincs eltávolítva: {} "
 
-#~ msgid "There is no change from previous build %d"
-#~ msgstr "Nincs változás az előző build-hez (%d) képest."
+#, fuzzy
+#~ msgid "INARY package"
+#~ msgstr "INARY csomag létrehozása"
 
-#~ msgid "Generating {},"
-#~ msgstr "{} generálása,"
+#~ msgid "{} option requires an argument"
+#~ msgstr "a(z) {} opcióhoz paramétert is meg kell adni"
 
-#~ msgid "Build number is not available. For repo builds you must enable buildno in inary.conf."
-#~ msgstr "A build számok használata nem lehetséges. Ha tároló számára épít, engedélyezze a buildno opciót a inary.conf-ban."
+#~ msgid "long integer"
+#~ msgstr "hosszú egész"
 
-#~ msgid "All of the files under the install dir {} has been collected by package(s)"
-#~ msgstr "A telepési könyvtárban {} található valamennyi fájl a csomag(ok)ba gyűjtve"
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Nem hozható létre különbözet ugyanazon csomagból!"
-
-#~ msgid "Creating delta INARY package between {} {}"
-#~ msgstr "INARY különbözeti csomag létrehozása {} és {} között."
-
-#~ msgid "Package {} is already at the latest build {}."
-#~ msgstr "A(z) {} csomag már a legutolsó build számot viseli: {}."
-
-#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
-#~ msgstr "Név: {}, verzió: {}, kiadás: %s, build: %s\n"
+#, fuzzy
+#~ msgid "Cleaning files database folder...  "
+#~ msgstr "Átmeneti könyvtár tisztítása..."

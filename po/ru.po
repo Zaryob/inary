@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-26 16:30+0300\n"
+"POT-Creation-Date: 2018-01-27 23:19+0300\n"
 "PO-Revision-Date: 2011-07-04 23:03+0400\n"
 "Last-Translator: Alexey Ivanov <alexey.ivanes@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -2577,43 +2577,38 @@ msgstr "Сборка зависимостей:"
 msgid "Component {} not found"
 msgstr "Компонент {} не найден."
 
-#: inary/db/filesdb.py:46 inary/db/filesldb.py:40
+#: inary/db/filesdb.py:29
+msgid "LevelDB not found! Please install LevelDB and plyvel!"
+msgstr ""
+
+#: inary/db/filesdb.py:40
 #, fuzzy
 msgid "Creating files database..."
 msgstr "Обновление базы данных файлов"
 
-#: inary/db/filesdb.py:50
+#: inary/db/filesdb.py:43
 #, fuzzy
-msgid "  ---> Adding '{}' to db... "
+msgid "  |___* Adding '{}' to db... "
 msgstr "Добавление {} в базу данных... "
 
-#: inary/db/filesdb.py:53
+#: inary/db/filesdb.py:46
 msgid "OK."
 msgstr "ОК."
 
-#: inary/db/filesdb.py:54 inary/db/filesldb.py:47
+#: inary/db/filesdb.py:47
 #, fuzzy
 msgid "Added files database..."
 msgstr "Обновление базы данных файлов"
 
-#: inary/db/filesdb.py:84
-#, fuzzy
-msgid "Cleaning files database folder...  "
-msgstr "Очистка директории сборки..."
-
-#: inary/db/filesdb.py:87 inary/db/filesldb.py:79
-#, fuzzy
-msgid "done."
-msgstr "Выполнено."
-
-#: inary/db/filesldb.py:29
-msgid "LevelDB not found! Please install LevelDB and plyvel!"
-msgstr ""
-
-#: inary/db/filesldb.py:77
+#: inary/db/filesdb.py:77
 #, fuzzy
 msgid "Cleaning files database folder... "
 msgstr "Очистка директории сборки..."
+
+#: inary/db/filesdb.py:79
+#, fuzzy
+msgid "done."
+msgstr "Выполнено."
 
 #: inary/db/groupdb.py:66 inary/db/groupdb.py:75
 #, fuzzy
@@ -2668,7 +2663,7 @@ msgstr "Элемент {} репозитория не обнаружен"
 msgid "Repository {} does not exist."
 msgstr "Репозиторий {} не существует."
 
-#: inary/db/packagedb.py:147 inary/db/packagedb.py:154
+#: inary/db/packagedb.py:148 inary/db/packagedb.py:155
 #, fuzzy
 msgid "Package {} not found."
 msgstr "Пакет {} не найден."
@@ -3292,6 +3287,10 @@ msgstr "Следующие пакеты будут установлены в с�
 msgid "External dependencies not satisfied"
 msgstr "Внешние зависимости не соблюдены"
 
+#: inary/operations/install.py:258
+msgid "Installation order: "
+msgstr "Порядок установки: "
+
 #: inary/operations/remove.py:44
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "Переключатель безопасности предотвратил удаление следующих пакетов:\n"
@@ -3638,77 +3637,77 @@ msgstr "LocalText: не удалось получить текущую лока�
 msgid "Tag should have at least the current locale, or failing that an English or Turkish version"
 msgstr "Тег должен быть хотя бы в текущей локали или, если это невозможно, на английском или турецком языке"
 
-#: inary/sxml/autoxml.py:368
+#: inary/sxml/autoxml.py:367
 #, fuzzy
 msgid "autoxml.check: '{}' errors"
 msgstr "autoxml.check: {} errors"
 
-#: inary/sxml/autoxml.py:424 inary/sxml/autoxml.py:434
+#: inary/sxml/autoxml.py:423 inary/sxml/autoxml.py:433
 #, fuzzy
 msgid "autoxml.parse: String '{}' has errors"
 msgstr "autoxml.parse: Строка {} содержит ошибки"
 
-#: inary/sxml/autoxml.py:448 inary/sxml/autoxml.py:458
+#: inary/sxml/autoxml.py:447 inary/sxml/autoxml.py:457
 #, fuzzy
 msgid "autoxml.read: File '{}' has errors"
 msgstr "autoxml.read: Файл {} содержит ошибки"
 
-#: inary/sxml/autoxml.py:466
+#: inary/sxml/autoxml.py:465
 msgid "autoxml.write: object validation has failed"
 msgstr "autoxml.write: Проверка объекта не удалась"
 
-#: inary/sxml/autoxml.py:474
+#: inary/sxml/autoxml.py:473
 #, fuzzy
 msgid "autoxml.write: File encoding '{}' has errors"
 msgstr "autoxml.write: Кодировка файла {} содержит ошибки"
 
-#: inary/sxml/autoxml.py:524
+#: inary/sxml/autoxml.py:523
 #, fuzzy
 msgid "gen_tag: unrecognized tag type {} in spec"
 msgstr "gen_tag: неизвестный тип тега {} в спектре"
 
-#: inary/sxml/autoxml.py:571 inary/sxml/autoxml.py:582
+#: inary/sxml/autoxml.py:570 inary/sxml/autoxml.py:581
 #, fuzzy
 msgid "Mandatory variable {} not available"
 msgstr "Обязательная переменная {} не доступна"
 
-#: inary/sxml/autoxml.py:652
+#: inary/sxml/autoxml.py:651
 msgid "Type mismatch: read text cannot be decoded"
 msgstr "Несоответствие типов: читаемый текст не может быть распознан"
 
-#: inary/sxml/autoxml.py:656 inary/sxml/autoxml.py:665
+#: inary/sxml/autoxml.py:655 inary/sxml/autoxml.py:664
 #, fuzzy
 msgid "Mandatory token {} not available"
 msgstr "Обязательный маркер {} не доступен"
 
-#: inary/sxml/autoxml.py:670
+#: inary/sxml/autoxml.py:669
 #, fuzzy, python-brace-format
 msgid "Type mismatch. Expected {0}, got {1}"
 msgstr "Несоответствие типов: {0} вместо ожидаемого {1}"
 
-#: inary/sxml/autoxml.py:699 inary/sxml/autoxml.py:819
+#: inary/sxml/autoxml.py:698 inary/sxml/autoxml.py:818
 msgid "Type mismatch: DOM cannot be decoded"
 msgstr "Несоответствие типов: DOM не может быть раскодирован"
 
-#: inary/sxml/autoxml.py:702 inary/sxml/autoxml.py:718
-#: inary/sxml/autoxml.py:732 inary/sxml/autoxml.py:822
-#: inary/sxml/autoxml.py:836 inary/sxml/autoxml.py:850
+#: inary/sxml/autoxml.py:701 inary/sxml/autoxml.py:717
+#: inary/sxml/autoxml.py:731 inary/sxml/autoxml.py:821
+#: inary/sxml/autoxml.py:835 inary/sxml/autoxml.py:849
 msgid "Mandatory argument not available"
 msgstr "Обязательный аргумент не доступен"
 
-#: inary/sxml/autoxml.py:715 inary/sxml/autoxml.py:833
+#: inary/sxml/autoxml.py:714 inary/sxml/autoxml.py:832
 msgid "Object cannot be encoded"
 msgstr "Объект не может быть закодирован"
 
-#: inary/sxml/autoxml.py:729 inary/sxml/autoxml.py:847
+#: inary/sxml/autoxml.py:728 inary/sxml/autoxml.py:846
 msgid "Object cannot be formatted"
 msgstr "Объект не может быть отформатирован"
 
-#: inary/sxml/autoxml.py:745
+#: inary/sxml/autoxml.py:744
 msgid "List type must contain only one element"
 msgstr "Списоковый тип должен содержать только один элемент"
 
-#: inary/sxml/autoxml.py:758 inary/sxml/autoxml.py:778
+#: inary/sxml/autoxml.py:757 inary/sxml/autoxml.py:777
 #, fuzzy, python-brace-format
 msgid "Mandatory list \"{0}\" under \"{1}\" node is empty."
 msgstr "Обязательный список \"{0}\" под узлом \"{1}\" пуст."
@@ -3976,58 +3975,30 @@ msgstr "Неверное имя дельта пакета: {}"
 msgid "Invalid version string: '{}'"
 msgstr "Недопустимая строка версии: {}"
 
-#, fuzzy
-#~ msgid "Name: {}, version: {}, release: {}\n"
-#~ msgstr "Имя: {}, версия: {}, релиз: %s\n"
-
-#~ msgid "long integer"
-#~ msgstr "long integer"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} опция требует аргумент"
-
-#~ msgid "INARY package"
-#~ msgstr "INARY пакет"
-
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Не удаляется конфликтующий файл: {}"
-
-#~ msgid "Date: {} {}"
-#~ msgstr "Дата: {} {}"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "Urlgrabber needs to be installed to run this command"
-#~ msgstr "Urlgrabber должен быть установлен для запуска этой команды"
-
-#~ msgid "No user named {} found on the system"
-#~ msgstr "Пользователь по имени {} не найден в системе"
-
-#~ msgid "No group named {} found on the system"
-#~ msgstr "Группа {} не найдена в системе"
-
-#~ msgid "Installation order: "
-#~ msgstr "Порядок установки: "
-
-#~ msgid "String {} has invalid XML"
-#~ msgstr "Строка {} содержит неверный XML"
-
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Невозможно прочитать файл {}: {}"
-
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Пакеты в рабочей директории."
-
-#~ msgid "* Checking {}... "
-#~ msgstr "* Проверка {}... "
-
 #~ msgid ""
 #~ "\n"
-#~ "Package {} has changed config files."
+#~ "Changed config file: {}"
 #~ msgstr ""
 #~ "\n"
-#~ "Package {} изменение конфигурационного файла."
+#~ "Изменен конфигурационный файл: {}"
+
+#~ msgid "Checking /{} "
+#~ msgstr "Проверка /{}"
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Изменение безопасности: system.devel уже установлен"
+
+#~ msgid "Multiple 'Path' tags specified for this path: {}"
+#~ msgstr "Множественные тэги 'Path' определены для этого пути: {}"
+
+#~ msgid "Path must start with a slash: {}"
+#~ msgstr "Путь должен начинаться с \"/\": {}"
+
+#~ msgid "Source is part of {} component"
+#~ msgstr "Источник является частью {} компонента"
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "Тег PartOf не указан, поиск компонента"
 
 #~ msgid ""
 #~ "\n"
@@ -4036,27 +4007,56 @@ msgstr "Недопустимая строка версии: {}"
 #~ "\n"
 #~ "Package {} поврежден."
 
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "Тег PartOf не указан, поиск компонента"
-
-#~ msgid "Source is part of {} component"
-#~ msgstr "Источник является частью {} компонента"
-
-#~ msgid "Path must start with a slash: {}"
-#~ msgstr "Путь должен начинаться с \"/\": {}"
-
-#~ msgid "Multiple 'Path' tags specified for this path: {}"
-#~ msgstr "Множественные тэги 'Path' определены для этого пути: {}"
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Изменение безопасности: system.devel уже установлен"
-
-#~ msgid "Checking /{} "
-#~ msgstr "Проверка /{}"
-
 #~ msgid ""
 #~ "\n"
-#~ "Changed config file: {}"
+#~ "Package {} has changed config files."
 #~ msgstr ""
 #~ "\n"
-#~ "Изменен конфигурационный файл: {}"
+#~ "Package {} изменение конфигурационного файла."
+
+#~ msgid "* Checking {}... "
+#~ msgstr "* Проверка {}... "
+
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Пакеты в рабочей директории."
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Невозможно прочитать файл {}: {}"
+
+#~ msgid "String {} has invalid XML"
+#~ msgstr "Строка {} содержит неверный XML"
+
+#~ msgid "No group named {} found on the system"
+#~ msgstr "Группа {} не найдена в системе"
+
+#~ msgid "No user named {} found on the system"
+#~ msgstr "Пользователь по имени {} не найден в системе"
+
+#~ msgid "Urlgrabber needs to be installed to run this command"
+#~ msgstr "Urlgrabber должен быть установлен для запуска этой команды"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "Date: {} {}"
+#~ msgstr "Дата: {} {}"
+
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Не удаляется конфликтующий файл: {}"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY пакет"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} опция требует аргумент"
+
+#~ msgid "long integer"
+#~ msgstr "long integer"
+
+#, fuzzy
+#~ msgid "Name: {}, version: {}, release: {}\n"
+#~ msgstr "Имя: {}, версия: {}, релиз: %s\n"
+
+#, fuzzy
+#~ msgid "Cleaning files database folder...  "
+#~ msgstr "Очистка директории сборки..."

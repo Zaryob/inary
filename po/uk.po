@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-26 16:30+0300\n"
+"POT-Creation-Date: 2018-01-27 23:19+0300\n"
 "PO-Revision-Date: 2011-02-04 12:21+0300\n"
 "Last-Translator: Korostil Daniel <ted.korostiled@gmail.com>\n"
 "Language-Team: translation@linux.org.ua\n"
@@ -2222,36 +2222,32 @@ msgstr ""
 msgid "Component {} not found"
 msgstr ""
 
-#: inary/db/filesdb.py:46 inary/db/filesldb.py:40
-msgid "Creating files database..."
-msgstr ""
-
-#: inary/db/filesdb.py:50
-msgid "  ---> Adding '{}' to db... "
-msgstr ""
-
-#: inary/db/filesdb.py:53
-msgid "OK."
-msgstr ""
-
-#: inary/db/filesdb.py:54 inary/db/filesldb.py:47
-msgid "Added files database..."
-msgstr ""
-
-#: inary/db/filesdb.py:84
-msgid "Cleaning files database folder...  "
-msgstr ""
-
-#: inary/db/filesdb.py:87 inary/db/filesldb.py:79
-msgid "done."
-msgstr ""
-
-#: inary/db/filesldb.py:29
+#: inary/db/filesdb.py:29
 msgid "LevelDB not found! Please install LevelDB and plyvel!"
 msgstr ""
 
-#: inary/db/filesldb.py:77
+#: inary/db/filesdb.py:40
+msgid "Creating files database..."
+msgstr ""
+
+#: inary/db/filesdb.py:43
+msgid "  |___* Adding '{}' to db... "
+msgstr ""
+
+#: inary/db/filesdb.py:46
+msgid "OK."
+msgstr ""
+
+#: inary/db/filesdb.py:47
+msgid "Added files database..."
+msgstr ""
+
+#: inary/db/filesdb.py:77
 msgid "Cleaning files database folder... "
+msgstr ""
+
+#: inary/db/filesdb.py:79
+msgid "done."
 msgstr ""
 
 #: inary/db/groupdb.py:66 inary/db/groupdb.py:75
@@ -2300,7 +2296,7 @@ msgstr "Не знайдено файла проекту «{}»."
 msgid "Repository {} does not exist."
 msgstr ""
 
-#: inary/db/packagedb.py:147 inary/db/packagedb.py:154
+#: inary/db/packagedb.py:148 inary/db/packagedb.py:155
 #, fuzzy
 msgid "Package {} not found."
 msgstr "Не знайдено файла проекту «{}»."
@@ -2866,6 +2862,10 @@ msgstr ""
 msgid "External dependencies not satisfied"
 msgstr ""
 
+#: inary/operations/install.py:258
+msgid "Installation order: "
+msgstr ""
+
 #: inary/operations/remove.py:44
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr ""
@@ -3168,70 +3168,70 @@ msgstr ""
 msgid "Tag should have at least the current locale, or failing that an English or Turkish version"
 msgstr ""
 
-#: inary/sxml/autoxml.py:368
+#: inary/sxml/autoxml.py:367
 msgid "autoxml.check: '{}' errors"
 msgstr ""
 
-#: inary/sxml/autoxml.py:424 inary/sxml/autoxml.py:434
+#: inary/sxml/autoxml.py:423 inary/sxml/autoxml.py:433
 msgid "autoxml.parse: String '{}' has errors"
 msgstr ""
 
-#: inary/sxml/autoxml.py:448 inary/sxml/autoxml.py:458
+#: inary/sxml/autoxml.py:447 inary/sxml/autoxml.py:457
 msgid "autoxml.read: File '{}' has errors"
 msgstr ""
 
-#: inary/sxml/autoxml.py:466
+#: inary/sxml/autoxml.py:465
 msgid "autoxml.write: object validation has failed"
 msgstr ""
 
-#: inary/sxml/autoxml.py:474
+#: inary/sxml/autoxml.py:473
 msgid "autoxml.write: File encoding '{}' has errors"
 msgstr ""
 
-#: inary/sxml/autoxml.py:524
+#: inary/sxml/autoxml.py:523
 msgid "gen_tag: unrecognized tag type {} in spec"
 msgstr ""
 
-#: inary/sxml/autoxml.py:571 inary/sxml/autoxml.py:582
+#: inary/sxml/autoxml.py:570 inary/sxml/autoxml.py:581
 msgid "Mandatory variable {} not available"
 msgstr ""
 
-#: inary/sxml/autoxml.py:652
+#: inary/sxml/autoxml.py:651
 msgid "Type mismatch: read text cannot be decoded"
 msgstr ""
 
-#: inary/sxml/autoxml.py:656 inary/sxml/autoxml.py:665
+#: inary/sxml/autoxml.py:655 inary/sxml/autoxml.py:664
 msgid "Mandatory token {} not available"
 msgstr ""
 
-#: inary/sxml/autoxml.py:670
+#: inary/sxml/autoxml.py:669
 #, python-brace-format
 msgid "Type mismatch. Expected {0}, got {1}"
 msgstr ""
 
-#: inary/sxml/autoxml.py:699 inary/sxml/autoxml.py:819
+#: inary/sxml/autoxml.py:698 inary/sxml/autoxml.py:818
 msgid "Type mismatch: DOM cannot be decoded"
 msgstr ""
 
-#: inary/sxml/autoxml.py:702 inary/sxml/autoxml.py:718
-#: inary/sxml/autoxml.py:732 inary/sxml/autoxml.py:822
-#: inary/sxml/autoxml.py:836 inary/sxml/autoxml.py:850
+#: inary/sxml/autoxml.py:701 inary/sxml/autoxml.py:717
+#: inary/sxml/autoxml.py:731 inary/sxml/autoxml.py:821
+#: inary/sxml/autoxml.py:835 inary/sxml/autoxml.py:849
 msgid "Mandatory argument not available"
 msgstr ""
 
-#: inary/sxml/autoxml.py:715 inary/sxml/autoxml.py:833
+#: inary/sxml/autoxml.py:714 inary/sxml/autoxml.py:832
 msgid "Object cannot be encoded"
 msgstr ""
 
-#: inary/sxml/autoxml.py:729 inary/sxml/autoxml.py:847
+#: inary/sxml/autoxml.py:728 inary/sxml/autoxml.py:846
 msgid "Object cannot be formatted"
 msgstr ""
 
-#: inary/sxml/autoxml.py:745
+#: inary/sxml/autoxml.py:744
 msgid "List type must contain only one element"
 msgstr ""
 
-#: inary/sxml/autoxml.py:758 inary/sxml/autoxml.py:778
+#: inary/sxml/autoxml.py:757 inary/sxml/autoxml.py:777
 #, python-brace-format
 msgid "Mandatory list \"{0}\" under \"{1}\" node is empty."
 msgstr ""
@@ -3487,8 +3487,8 @@ msgstr ""
 msgid "Invalid version string: '{}'"
 msgstr ""
 
-#~ msgid "long integer"
-#~ msgstr "довге ціле число"
-
 #~ msgid "{} option requires an argument"
 #~ msgstr "параметр {} потребує аргумент"
+
+#~ msgid "long integer"
+#~ msgstr "довге ціле число"

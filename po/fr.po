@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-26 16:30+0300\n"
+"POT-Creation-Date: 2018-01-27 23:19+0300\n"
 "PO-Revision-Date: 2010-01-01 22:22+0100\n"
 "Last-Translator: Philippe Svetoslavsky <philsvet@gmail.com>\n"
 "Language-Team: French <pardus-translators@pardus.org.tr>\n"
@@ -2564,43 +2564,38 @@ msgstr "Dépendances : "
 msgid "Component {} not found"
 msgstr "Le composant {} est introuvable"
 
-#: inary/db/filesdb.py:46 inary/db/filesldb.py:40
+#: inary/db/filesdb.py:29
+msgid "LevelDB not found! Please install LevelDB and plyvel!"
+msgstr ""
+
+#: inary/db/filesdb.py:40
 #, fuzzy
 msgid "Creating files database..."
 msgstr "Reconstruction de la base de données fichiers"
 
-#: inary/db/filesdb.py:50
+#: inary/db/filesdb.py:43
 #, fuzzy
-msgid "  ---> Adding '{}' to db... "
+msgid "  |___* Adding '{}' to db... "
 msgstr "Ajout de {} à la base de données... "
 
-#: inary/db/filesdb.py:53
+#: inary/db/filesdb.py:46
 msgid "OK."
 msgstr "OK."
 
-#: inary/db/filesdb.py:54 inary/db/filesldb.py:47
+#: inary/db/filesdb.py:47
 #, fuzzy
 msgid "Added files database..."
 msgstr "Reconstruction de la base de données fichiers"
 
-#: inary/db/filesdb.py:84
-#, fuzzy
-msgid "Cleaning files database folder...  "
-msgstr "Nettoyage du dossier de construction..."
-
-#: inary/db/filesdb.py:87 inary/db/filesldb.py:79
-#, fuzzy
-msgid "done."
-msgstr "Terminé."
-
-#: inary/db/filesldb.py:29
-msgid "LevelDB not found! Please install LevelDB and plyvel!"
-msgstr ""
-
-#: inary/db/filesldb.py:77
+#: inary/db/filesdb.py:77
 #, fuzzy
 msgid "Cleaning files database folder... "
 msgstr "Nettoyage du dossier de construction..."
+
+#: inary/db/filesdb.py:79
+#, fuzzy
+msgid "done."
+msgstr "Terminé."
 
 #: inary/db/groupdb.py:66 inary/db/groupdb.py:75
 #, fuzzy
@@ -2655,7 +2650,7 @@ msgstr "L'item de dépôt {} est introuvable."
 msgid "Repository {} does not exist."
 msgstr "Le dépôt {} n'existe pas."
 
-#: inary/db/packagedb.py:147 inary/db/packagedb.py:154
+#: inary/db/packagedb.py:148 inary/db/packagedb.py:155
 #, fuzzy
 msgid "Package {} not found."
 msgstr "Le paquet {} est introuvable."
@@ -3278,6 +3273,10 @@ msgstr "Les paquets suivants vont être installés dans cet ordre afin de satisf
 msgid "External dependencies not satisfied"
 msgstr "Dépendances externes non satisfaites"
 
+#: inary/operations/install.py:258
+msgid "Installation order: "
+msgstr "Ordre d'installation : "
+
 #: inary/operations/remove.py:44
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "Le loquet de sécurité empêche la suppression des paquets suivants :\n"
@@ -3622,77 +3621,77 @@ msgstr "LocalText: Impossible d'obtenir la locale courante ni celle par défaut"
 msgid "Tag should have at least the current locale, or failing that an English or Turkish version"
 msgstr "À défaut d'avoir la locale courante, la balise devrait au moins avoir une version anglaise ou turque."
 
-#: inary/sxml/autoxml.py:368
+#: inary/sxml/autoxml.py:367
 #, fuzzy
 msgid "autoxml.check: '{}' errors"
 msgstr "autoxml.check : erreurs {}"
 
-#: inary/sxml/autoxml.py:424 inary/sxml/autoxml.py:434
+#: inary/sxml/autoxml.py:423 inary/sxml/autoxml.py:433
 #, fuzzy
 msgid "autoxml.parse: String '{}' has errors"
 msgstr "autoxml.parse : La chaîne {} comporte des erreurs"
 
-#: inary/sxml/autoxml.py:448 inary/sxml/autoxml.py:458
+#: inary/sxml/autoxml.py:447 inary/sxml/autoxml.py:457
 #, fuzzy
 msgid "autoxml.read: File '{}' has errors"
 msgstr "autoxml.read : Le fichier {} contient des erreurs"
 
-#: inary/sxml/autoxml.py:466
+#: inary/sxml/autoxml.py:465
 msgid "autoxml.write: object validation has failed"
 msgstr "autoxml.write : la validation a échoué"
 
-#: inary/sxml/autoxml.py:474
+#: inary/sxml/autoxml.py:473
 #, fuzzy
 msgid "autoxml.write: File encoding '{}' has errors"
 msgstr "autoxml.write : L'encodage du fichier {} comporte des erreurs"
 
-#: inary/sxml/autoxml.py:524
+#: inary/sxml/autoxml.py:523
 #, fuzzy
 msgid "gen_tag: unrecognized tag type {} in spec"
 msgstr "gen_tag : type de balyse {} non reconnu dans la spec"
 
-#: inary/sxml/autoxml.py:571 inary/sxml/autoxml.py:582
+#: inary/sxml/autoxml.py:570 inary/sxml/autoxml.py:581
 #, fuzzy
 msgid "Mandatory variable {} not available"
 msgstr "La variable obligatoire {} n'est pas disponible"
 
-#: inary/sxml/autoxml.py:652
+#: inary/sxml/autoxml.py:651
 msgid "Type mismatch: read text cannot be decoded"
 msgstr "Problème de correspondance de types : Le texte lu ne peut être décodé"
 
-#: inary/sxml/autoxml.py:656 inary/sxml/autoxml.py:665
+#: inary/sxml/autoxml.py:655 inary/sxml/autoxml.py:664
 #, fuzzy
 msgid "Mandatory token {} not available"
 msgstr "Item {} obligatoire non disponible"
 
-#: inary/sxml/autoxml.py:670
+#: inary/sxml/autoxml.py:669
 #, fuzzy, python-brace-format
 msgid "Type mismatch. Expected {0}, got {1}"
 msgstr "Problème de correspondance de type. Attendu {0}, reçu {1}"
 
-#: inary/sxml/autoxml.py:699 inary/sxml/autoxml.py:819
+#: inary/sxml/autoxml.py:698 inary/sxml/autoxml.py:818
 msgid "Type mismatch: DOM cannot be decoded"
 msgstr "Problème de correspondance de type : Impossible de décoder le DOM"
 
-#: inary/sxml/autoxml.py:702 inary/sxml/autoxml.py:718
-#: inary/sxml/autoxml.py:732 inary/sxml/autoxml.py:822
-#: inary/sxml/autoxml.py:836 inary/sxml/autoxml.py:850
+#: inary/sxml/autoxml.py:701 inary/sxml/autoxml.py:717
+#: inary/sxml/autoxml.py:731 inary/sxml/autoxml.py:821
+#: inary/sxml/autoxml.py:835 inary/sxml/autoxml.py:849
 msgid "Mandatory argument not available"
 msgstr "Argument obligatoire non disponible"
 
-#: inary/sxml/autoxml.py:715 inary/sxml/autoxml.py:833
+#: inary/sxml/autoxml.py:714 inary/sxml/autoxml.py:832
 msgid "Object cannot be encoded"
 msgstr "L'objet ne peut être encodé"
 
-#: inary/sxml/autoxml.py:729 inary/sxml/autoxml.py:847
+#: inary/sxml/autoxml.py:728 inary/sxml/autoxml.py:846
 msgid "Object cannot be formatted"
 msgstr "L'objet ne peut être formaté"
 
-#: inary/sxml/autoxml.py:745
+#: inary/sxml/autoxml.py:744
 msgid "List type must contain only one element"
 msgstr "La liste des type ne doit contenir qu'un seul élément"
 
-#: inary/sxml/autoxml.py:758 inary/sxml/autoxml.py:778
+#: inary/sxml/autoxml.py:757 inary/sxml/autoxml.py:777
 #, fuzzy, python-brace-format
 msgid "Mandatory list \"{0}\" under \"{1}\" node is empty."
 msgstr "La liste obligatoire \"{0}\" sous le noeud \"{1}\" est vide."
@@ -3961,102 +3960,160 @@ msgstr "Nom de paquet delta invalide : {}"
 msgid "Invalid version string: '{}'"
 msgstr "Chaîne de caractères invalide : {}"
 
-#, fuzzy
-#~ msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: ())"
-#~ msgstr "Il semblerait qu'il y ait plus d'un fichier .pro, vous devez en spécifier une. (Possible .pro files: {})"
+#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def"
+#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} ont été ajoutées à %s/language.%s.def"
 
-#~ msgid "long integer"
-#~ msgstr "entier long"
+#~ msgid "{} is added to {}/language.%s.dat"
+#~ msgstr "{} a été ajouté à {}/language.%s.dat"
 
-#~ msgid "{} option requires an argument"
-#~ msgstr "L'option {} requiert un argument"
+#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def "
+#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} est ajouté à %s/language.%s.def "
 
-#~ msgid "INARY package"
-#~ msgstr "Paquet INARY"
+#~ msgid "{} {} is added to %s/language.%s.dat "
+#~ msgstr "{} {} est ajouté à %s/language.%s.dat "
 
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Le fichier {} causant un conflit ne sera pas supprimé"
+#~ msgid "Upgrading to new distribution build"
+#~ msgstr "Mise à jour vers un nouveau build de la distribution"
 
-#~ msgid "Date: {} {}"
-#~ msgstr "Date : {} {}"
+#~ msgid "Downgrade to old distribution build?"
+#~ msgstr "Régresser vers une version de build plus vielle de la distribution ?"
 
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
+#~ msgid "Do not take build no into account."
+#~ msgstr "Ne pas prendre en compte le numéro de build."
 
-#~ msgid "Urlgrabber needs to be installed to run this command"
-#~ msgstr "L'utilisation de cette commande nécessite l'installation de Urlgrabber"
+#~ msgid "INARY binary package formats: '1.0', '1.1' (default)"
+#~ msgstr "formats de paquets binaires INARY : '1.0', '1.1' (par défaut)"
 
-#~ msgid "No user named {} found on the system"
-#~ msgstr "Aucun utilisateur {} trouvé sur le système"
+#~ msgid "package_format must be one of {} "
+#~ msgstr "package_format doit être l'un de {} "
 
-#~ msgid "No group named {} found on the system"
-#~ msgstr "Pas de groupe {} trouvé sur le système"
+#~ msgid "Indexing current directory."
+#~ msgstr "Indexer le répertoire courant."
 
-#~ msgid "Installation order: "
-#~ msgstr "Ordre d'installation : "
+#~ msgid "zip compression not supported yet"
+#~ msgstr "La compression zip n'est pas encore supportée"
 
-#~ msgid "String {} has invalid XML"
-#~ msgstr "Chaîne {} contient un texte XML invalide"
+#~ msgid "gzip compression not supported yet"
+#~ msgstr "La compression gzip n'est pas encore supportée"
 
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Impossible de lire le fichier {} : {}"
+#~ msgid "(found old version {})"
+#~ msgstr "(Une ancienne version {} a été trouvée)"
 
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Génération des paquets dans le répertoire de travail."
+#~ msgid "(no previous build found, setting build no to 1.)"
+#~ msgstr "(pas de version précédente trouvée, établissement du numéro de version à 1)"
 
-#~ msgid "* Checking {}... "
-#~ msgstr "* Vérification de {}... "
+#~ msgid "(old package lacks a build no, setting build no to 1.)"
+#~ msgstr "(le paquet précédent n'a pas de numéro de build, établissement du numéro de build à 1)"
+
+#~ msgid "There are changes, incrementing build no to %d"
+#~ msgstr "Il y a des changements, incrémentation du numéro de build à %d"
+
+#~ msgid "There is no change from previous build %d"
+#~ msgstr "Il n'y a aucun changement depuis la compilation précédente %d"
+
+#~ msgid "Generating {},"
+#~ msgstr "Génération de {}."
+
+#~ msgid "Build number is not available. For repo builds you must enable buildno in inary.conf."
+#~ msgstr "Numéro de build non disponible. Pour les builds de dépôts, vous devez activer buildno dans inary.conf"
+
+#~ msgid "All of the files under the install dir {} has been collected by package(s)"
+#~ msgstr "Tous les fichiers sous le répertoire d'installation {} ont été collectés par le(s) paquet(s)"
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Impossible de créer un delta pour le même paquet !"
+
+#~ msgid "Creating delta INARY package between {} {}"
+#~ msgstr "Création du paquet INARY delta entre {} {}."
+
+#~ msgid "Package {} is already at the latest build {}."
+#~ msgstr "Le paquet {} est déjà à son build le plus récent {}."
+
+#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
+#~ msgstr "Nom : {}, version : {}, release : %s, build %s\n"
+
+#~ msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
+#~ msgstr "Impossible de vérifier la compatibilité de ce dépôt car il n'a pas d'informations à propos de la distribution."
+
+#~ msgid "Repository distribution does not match. Removing {} from system."
+#~ msgstr "Le dépôt et la distribution ne correspondent pas. Retrait de {} du système."
+
+#~ msgid "Do not install build dependencies, fail if a build dependency is present"
+#~ msgstr "N'installe pas les dépendances de compilation, échoue en présence d'une dépendance de compilation"
+
+#~ msgid "* Rebuilding {} named repo... "
+#~ msgstr "* Reconstruction du dépôt {}... "
+
+#~ msgid "Skipping {} with wrong pkg name "
+#~ msgstr "Mise de côté de {} avec un nom de paquet erroné"
+
+#~ msgid "ActionsAPI [rename]: No such file or directory: {}"
+#~ msgstr "ActionsAPI [rename]: Pas de fichier ou répertoire à ce nom : {}"
+
+#~ msgid "Configuring {} package for removal"
+#~ msgstr "Configuration du paquet {} pour suppression"
+
+#~ msgid "dbus-python package is not fully installed"
+#~ msgstr "le paquet dbus-python n'est pas entièrement installé"
+
+#~ msgid "Stripping files.."
+#~ msgstr "Suppression des chaînes inutilisées des fichiers..."
+
+#~ msgid "Package {} is not present in the package database"
+#~ msgstr "Le paquet {} n'est pas présent dans la base de données des paquets"
+
+#~ msgid "Run inary build process in silent mode"
+#~ msgstr "Ne cantonne pas le processus de compilation au sein du répertoire de compilation"
+
+#~ msgid "The repository couldn't be added because of distribution release mismatch"
+#~ msgstr "Le dépôt n'a pas pu être ajouté car la version de la distribution ne correspond pas."
+
+#~ msgid "Update INARY database for repository {}?"
+#~ msgstr "Mettre à jour la base de données INARY pour le dépôt {} ?"
+
+#~ msgid "Repository architecture does not match. Removing {} from system."
+#~ msgstr "Impossible d'atteindre le dépôt {}. Suppression de {} du système."
+
+#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
+#~ msgstr "Précaution de sécurité : Les paquets suivants de system.base vont être mis à jours : "
+
+#~ msgid "Safety switch: Following packages in system.base will be installed: "
+#~ msgstr "Précautions de sécurité : Les paquets suivants de system.base vont être installés : "
 
 #~ msgid ""
-#~ "\n"
-#~ "Package {} has changed config files."
+#~ "The following packages will be installed\n"
+#~ "in the respective order to satisfy extra dependencies:\n"
 #~ msgstr ""
-#~ "\n"
-#~ "Le paquet {} a modifié des fichiers de configuration."
+#~ "Les paquets suivants vont être installés\n"
+#~ "dans cet ordre afin de satisfaire des dépendances supplémentaires :\n"
+
+#~ msgid "Storing {}."
+#~ msgstr "Stockage de {}."
+
+#~ msgid "Storing {}, "
+#~ msgstr "Stockage de {},"
+
+#~ msgid "Scanning binary packages...\n"
+#~ msgstr "Exploration de paquets binaires...\n"
+
+#~ msgid "Scanning source repository...\n"
+#~ msgstr "Exploration du dépôt de sources...\n"
+
+#~ msgid "Dont generate the web site.\n"
+#~ msgstr "Ne pas générer de site web.\n"
+
+#~ msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
+#~ msgstr "Mode d'emploi : repostats.py [OPTIONS] chemin-du-dépôt-source [chemin-du-dépôt-binaire]\n"
 
 #~ msgid ""
-#~ "\n"
-#~ "Package {} is corrupt."
-#~ msgstr ""
-#~ "\n"
-#~ "Le paquet {} est corrompu."
-
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "Balise PartOf non définie, recherche d'un composant"
-
-#~ msgid "Source is part of {} component"
-#~ msgstr "La source fait partie du composant {}"
-
-#~ msgid "Path must start with a slash: {}"
-#~ msgstr "Le chemin doit commencer par une barre oblique : {}"
-
-#~ msgid "Multiple 'Path' tags specified for this path: {}"
-#~ msgstr "Étiquettes de 'chemin' multiple spécifiées pour ce chemin : {}"
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Précautions de sécurité :  system.devel est déjà installé"
-
-#~ msgid "Checking /{} "
-#~ msgstr "Vérification de /{} "
-
-#~ msgid ""
-#~ "\n"
-#~ "Changed config file: {}"
-#~ msgstr ""
-#~ "\n"
-#~ "Fichier de configuration modifié : {}"
-
-#~ msgid "Reverse dependency {} of {} cannot be satisfied"
-#~ msgstr "La dépendance inverse {} de {} ne peut-être satisfaite"
-
-#~ msgid ""
-#~ "Duplicate binary packages:\n"
-#~ "{}\n"
+#~ "Cannot parse {}:\n"
 #~ "{}\n"
 #~ msgstr ""
-#~ "Paquets binaires dupliqués:\n"
+#~ "Impossible d'analyser {} :\n"
 #~ "{}\n"
-#~ "{}\n"
+
+#~ msgid "Developer '{} <{}>' has another mail address {} in source package '%s'"
+#~ msgstr "Le développeur '{} <{}>' a une autre adresse mail {} dans le paquet source {}"
 
 #~ msgid ""
 #~ "Duplicate source packages:\n"
@@ -4067,157 +4124,100 @@ msgstr "Chaîne de caractères invalide : {}"
 #~ "{}\n"
 #~ "{}\n"
 
-#~ msgid "Developer '{} <{}>' has another mail address {} in source package '%s'"
-#~ msgstr "Le développeur '{} <{}>' a une autre adresse mail {} dans le paquet source {}"
-
 #~ msgid ""
-#~ "Cannot parse {}:\n"
+#~ "Duplicate binary packages:\n"
+#~ "{}\n"
 #~ "{}\n"
 #~ msgstr ""
-#~ "Impossible d'analyser {} :\n"
+#~ "Paquets binaires dupliqués:\n"
+#~ "{}\n"
 #~ "{}\n"
 
-#~ msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-#~ msgstr "Mode d'emploi : repostats.py [OPTIONS] chemin-du-dépôt-source [chemin-du-dépôt-binaire]\n"
-
-#~ msgid "Dont generate the web site.\n"
-#~ msgstr "Ne pas générer de site web.\n"
-
-#~ msgid "Scanning source repository...\n"
-#~ msgstr "Exploration du dépôt de sources...\n"
-
-#~ msgid "Scanning binary packages...\n"
-#~ msgstr "Exploration de paquets binaires...\n"
-
-#~ msgid "Storing {}, "
-#~ msgstr "Stockage de {},"
-
-#~ msgid "Storing {}."
-#~ msgstr "Stockage de {}."
+#~ msgid "Reverse dependency {} of {} cannot be satisfied"
+#~ msgstr "La dépendance inverse {} de {} ne peut-être satisfaite"
 
 #~ msgid ""
-#~ "The following packages will be installed\n"
-#~ "in the respective order to satisfy extra dependencies:\n"
+#~ "\n"
+#~ "Changed config file: {}"
 #~ msgstr ""
-#~ "Les paquets suivants vont être installés\n"
-#~ "dans cet ordre afin de satisfaire des dépendances supplémentaires :\n"
+#~ "\n"
+#~ "Fichier de configuration modifié : {}"
 
-#~ msgid "Safety switch: Following packages in system.base will be installed: "
-#~ msgstr "Précautions de sécurité : Les paquets suivants de system.base vont être installés : "
+#~ msgid "Checking /{} "
+#~ msgstr "Vérification de /{} "
 
-#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
-#~ msgstr "Précaution de sécurité : Les paquets suivants de system.base vont être mis à jours : "
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Précautions de sécurité :  system.devel est déjà installé"
 
-#~ msgid "Repository architecture does not match. Removing {} from system."
-#~ msgstr "Impossible d'atteindre le dépôt {}. Suppression de {} du système."
+#~ msgid "Multiple 'Path' tags specified for this path: {}"
+#~ msgstr "Étiquettes de 'chemin' multiple spécifiées pour ce chemin : {}"
 
-#~ msgid "Update INARY database for repository {}?"
-#~ msgstr "Mettre à jour la base de données INARY pour le dépôt {} ?"
+#~ msgid "Path must start with a slash: {}"
+#~ msgstr "Le chemin doit commencer par une barre oblique : {}"
 
-#~ msgid "The repository couldn't be added because of distribution release mismatch"
-#~ msgstr "Le dépôt n'a pas pu être ajouté car la version de la distribution ne correspond pas."
+#~ msgid "Source is part of {} component"
+#~ msgstr "La source fait partie du composant {}"
 
-#~ msgid "Run inary build process in silent mode"
-#~ msgstr "Ne cantonne pas le processus de compilation au sein du répertoire de compilation"
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "Balise PartOf non définie, recherche d'un composant"
 
-#~ msgid "Package {} is not present in the package database"
-#~ msgstr "Le paquet {} n'est pas présent dans la base de données des paquets"
+#~ msgid ""
+#~ "\n"
+#~ "Package {} is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "Le paquet {} est corrompu."
 
-#~ msgid "Stripping files.."
-#~ msgstr "Suppression des chaînes inutilisées des fichiers..."
+#~ msgid ""
+#~ "\n"
+#~ "Package {} has changed config files."
+#~ msgstr ""
+#~ "\n"
+#~ "Le paquet {} a modifié des fichiers de configuration."
 
-#~ msgid "dbus-python package is not fully installed"
-#~ msgstr "le paquet dbus-python n'est pas entièrement installé"
+#~ msgid "* Checking {}... "
+#~ msgstr "* Vérification de {}... "
 
-#~ msgid "Configuring {} package for removal"
-#~ msgstr "Configuration du paquet {} pour suppression"
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Génération des paquets dans le répertoire de travail."
 
-#~ msgid "ActionsAPI [rename]: No such file or directory: {}"
-#~ msgstr "ActionsAPI [rename]: Pas de fichier ou répertoire à ce nom : {}"
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Impossible de lire le fichier {} : {}"
 
-#~ msgid "Skipping {} with wrong pkg name "
-#~ msgstr "Mise de côté de {} avec un nom de paquet erroné"
+#~ msgid "String {} has invalid XML"
+#~ msgstr "Chaîne {} contient un texte XML invalide"
 
-#~ msgid "* Rebuilding {} named repo... "
-#~ msgstr "* Reconstruction du dépôt {}... "
+#~ msgid "No group named {} found on the system"
+#~ msgstr "Pas de groupe {} trouvé sur le système"
 
-#~ msgid "Do not install build dependencies, fail if a build dependency is present"
-#~ msgstr "N'installe pas les dépendances de compilation, échoue en présence d'une dépendance de compilation"
+#~ msgid "No user named {} found on the system"
+#~ msgstr "Aucun utilisateur {} trouvé sur le système"
 
-#~ msgid "Repository distribution does not match. Removing {} from system."
-#~ msgstr "Le dépôt et la distribution ne correspondent pas. Retrait de {} du système."
+#~ msgid "Urlgrabber needs to be installed to run this command"
+#~ msgstr "L'utilisation de cette commande nécessite l'installation de Urlgrabber"
 
-#~ msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
-#~ msgstr "Impossible de vérifier la compatibilité de ce dépôt car il n'a pas d'informations à propos de la distribution."
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
 
-#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
-#~ msgstr "Nom : {}, version : {}, release : %s, build %s\n"
+#~ msgid "Date: {} {}"
+#~ msgstr "Date : {} {}"
 
-#~ msgid "Package {} is already at the latest build {}."
-#~ msgstr "Le paquet {} est déjà à son build le plus récent {}."
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Le fichier {} causant un conflit ne sera pas supprimé"
 
-#~ msgid "Creating delta INARY package between {} {}"
-#~ msgstr "Création du paquet INARY delta entre {} {}."
+#~ msgid "INARY package"
+#~ msgstr "Paquet INARY"
 
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Impossible de créer un delta pour le même paquet !"
+#~ msgid "{} option requires an argument"
+#~ msgstr "L'option {} requiert un argument"
 
-#~ msgid "All of the files under the install dir {} has been collected by package(s)"
-#~ msgstr "Tous les fichiers sous le répertoire d'installation {} ont été collectés par le(s) paquet(s)"
+#~ msgid "long integer"
+#~ msgstr "entier long"
 
-#~ msgid "Build number is not available. For repo builds you must enable buildno in inary.conf."
-#~ msgstr "Numéro de build non disponible. Pour les builds de dépôts, vous devez activer buildno dans inary.conf"
+#, fuzzy
+#~ msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: ())"
+#~ msgstr "Il semblerait qu'il y ait plus d'un fichier .pro, vous devez en spécifier une. (Possible .pro files: {})"
 
-#~ msgid "Generating {},"
-#~ msgstr "Génération de {}."
-
-#~ msgid "There is no change from previous build %d"
-#~ msgstr "Il n'y a aucun changement depuis la compilation précédente %d"
-
-#~ msgid "There are changes, incrementing build no to %d"
-#~ msgstr "Il y a des changements, incrémentation du numéro de build à %d"
-
-#~ msgid "(old package lacks a build no, setting build no to 1.)"
-#~ msgstr "(le paquet précédent n'a pas de numéro de build, établissement du numéro de build à 1)"
-
-#~ msgid "(no previous build found, setting build no to 1.)"
-#~ msgstr "(pas de version précédente trouvée, établissement du numéro de version à 1)"
-
-#~ msgid "(found old version {})"
-#~ msgstr "(Une ancienne version {} a été trouvée)"
-
-#~ msgid "gzip compression not supported yet"
-#~ msgstr "La compression gzip n'est pas encore supportée"
-
-#~ msgid "zip compression not supported yet"
-#~ msgstr "La compression zip n'est pas encore supportée"
-
-#~ msgid "Indexing current directory."
-#~ msgstr "Indexer le répertoire courant."
-
-#~ msgid "package_format must be one of {} "
-#~ msgstr "package_format doit être l'un de {} "
-
-#~ msgid "INARY binary package formats: '1.0', '1.1' (default)"
-#~ msgstr "formats de paquets binaires INARY : '1.0', '1.1' (par défaut)"
-
-#~ msgid "Do not take build no into account."
-#~ msgstr "Ne pas prendre en compte le numéro de build."
-
-#~ msgid "Downgrade to old distribution build?"
-#~ msgstr "Régresser vers une version de build plus vielle de la distribution ?"
-
-#~ msgid "Upgrading to new distribution build"
-#~ msgstr "Mise à jour vers un nouveau build de la distribution"
-
-#~ msgid "{} {} is added to %s/language.%s.dat "
-#~ msgstr "{} {} est ajouté à %s/language.%s.dat "
-
-#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def "
-#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} est ajouté à %s/language.%s.def "
-
-#~ msgid "{} is added to {}/language.%s.dat"
-#~ msgstr "{} a été ajouté à {}/language.%s.dat"
-
-#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def"
-#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} ont été ajoutées à %s/language.%s.def"
+#, fuzzy
+#~ msgid "Cleaning files database folder...  "
+#~ msgstr "Nettoyage du dossier de construction..."

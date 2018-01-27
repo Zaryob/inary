@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: INARYLinux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-26 16:30+0300\n"
+"POT-Creation-Date: 2018-01-27 23:19+0300\n"
 "PO-Revision-Date: 2013-01-04 21:08+0000\n"
 "Last-Translator: circass <erdincgultekin@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2576,42 +2576,37 @@ msgstr "Build Dependencies: "
 msgid "Component {} not found"
 msgstr "Component {} not found"
 
-#: inary/db/filesdb.py:46 inary/db/filesldb.py:40
+#: inary/db/filesdb.py:29
+msgid "LevelDB not found! Please install LevelDB and plyvel!"
+msgstr ""
+
+#: inary/db/filesdb.py:40
 #, fuzzy
 msgid "Creating files database..."
 msgstr "Rebuild files database"
 
-#: inary/db/filesdb.py:50
+#: inary/db/filesdb.py:43
 #, fuzzy
-msgid "  ---> Adding '{}' to db... "
+msgid "  |___* Adding '{}' to db... "
 msgstr "Adding {} to db... "
 
-#: inary/db/filesdb.py:53
+#: inary/db/filesdb.py:46
 msgid "OK."
 msgstr "OK."
 
-#: inary/db/filesdb.py:54 inary/db/filesldb.py:47
+#: inary/db/filesdb.py:47
 #, fuzzy
 msgid "Added files database..."
 msgstr "Rebuild files database"
 
-#: inary/db/filesdb.py:84
-#, fuzzy
-msgid "Cleaning files database folder...  "
-msgstr "Cleaning build directory..."
-
-#: inary/db/filesdb.py:87 inary/db/filesldb.py:79
-msgid "done."
-msgstr ""
-
-#: inary/db/filesldb.py:29
-msgid "LevelDB not found! Please install LevelDB and plyvel!"
-msgstr ""
-
-#: inary/db/filesldb.py:77
+#: inary/db/filesdb.py:77
 #, fuzzy
 msgid "Cleaning files database folder... "
 msgstr "Cleaning build directory..."
+
+#: inary/db/filesdb.py:79
+msgid "done."
+msgstr ""
 
 #: inary/db/groupdb.py:66 inary/db/groupdb.py:75
 #, fuzzy
@@ -2666,7 +2661,7 @@ msgstr "Repo item {} not found"
 msgid "Repository {} does not exist."
 msgstr "Repository {} does not exist."
 
-#: inary/db/packagedb.py:147 inary/db/packagedb.py:154
+#: inary/db/packagedb.py:148 inary/db/packagedb.py:155
 #, fuzzy
 msgid "Package {} not found."
 msgstr "Package {} not found."
@@ -3291,6 +3286,10 @@ msgstr "The following packages will be installed in order to satisfy dependencie
 msgid "External dependencies not satisfied"
 msgstr "External dependencies not satisfied"
 
+#: inary/operations/install.py:258
+msgid "Installation order: "
+msgstr "Installation order: "
+
 #: inary/operations/remove.py:44
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "Safety switch prevents the removal of following packages:\n"
@@ -3637,77 +3636,77 @@ msgstr "LocalText: unable to get either current or default locale"
 msgid "Tag should have at least the current locale, or failing that an English or Turkish version"
 msgstr "Tag should have at least the current locale, or failing that an English or Turkish version"
 
-#: inary/sxml/autoxml.py:368
+#: inary/sxml/autoxml.py:367
 #, fuzzy
 msgid "autoxml.check: '{}' errors"
 msgstr "autoxml.check: {} errors"
 
-#: inary/sxml/autoxml.py:424 inary/sxml/autoxml.py:434
+#: inary/sxml/autoxml.py:423 inary/sxml/autoxml.py:433
 #, fuzzy
 msgid "autoxml.parse: String '{}' has errors"
 msgstr "autoxml.parse: String {} has errors"
 
-#: inary/sxml/autoxml.py:448 inary/sxml/autoxml.py:458
+#: inary/sxml/autoxml.py:447 inary/sxml/autoxml.py:457
 #, fuzzy
 msgid "autoxml.read: File '{}' has errors"
 msgstr "autoxml.read: File {} has errors"
 
-#: inary/sxml/autoxml.py:466
+#: inary/sxml/autoxml.py:465
 msgid "autoxml.write: object validation has failed"
 msgstr "autoxml.write: object validation has failed"
 
-#: inary/sxml/autoxml.py:474
+#: inary/sxml/autoxml.py:473
 #, fuzzy
 msgid "autoxml.write: File encoding '{}' has errors"
 msgstr "autoxml.write: File encoding {} has errors"
 
-#: inary/sxml/autoxml.py:524
+#: inary/sxml/autoxml.py:523
 #, fuzzy
 msgid "gen_tag: unrecognized tag type {} in spec"
 msgstr "gen_tag: unrecognized tag type {} in spec"
 
-#: inary/sxml/autoxml.py:571 inary/sxml/autoxml.py:582
+#: inary/sxml/autoxml.py:570 inary/sxml/autoxml.py:581
 #, fuzzy
 msgid "Mandatory variable {} not available"
 msgstr "Mandatory variable {} not available"
 
-#: inary/sxml/autoxml.py:652
+#: inary/sxml/autoxml.py:651
 msgid "Type mismatch: read text cannot be decoded"
 msgstr "Type mismatch: read text cannot be decoded"
 
-#: inary/sxml/autoxml.py:656 inary/sxml/autoxml.py:665
+#: inary/sxml/autoxml.py:655 inary/sxml/autoxml.py:664
 #, fuzzy
 msgid "Mandatory token {} not available"
 msgstr "Mandatory token {} not available"
 
-#: inary/sxml/autoxml.py:670
+#: inary/sxml/autoxml.py:669
 #, fuzzy, python-brace-format
 msgid "Type mismatch. Expected {0}, got {1}"
 msgstr "Type mismatch. Expected {0}, got {1}"
 
-#: inary/sxml/autoxml.py:699 inary/sxml/autoxml.py:819
+#: inary/sxml/autoxml.py:698 inary/sxml/autoxml.py:818
 msgid "Type mismatch: DOM cannot be decoded"
 msgstr "Type mismatch: DOM cannot be decoded"
 
-#: inary/sxml/autoxml.py:702 inary/sxml/autoxml.py:718
-#: inary/sxml/autoxml.py:732 inary/sxml/autoxml.py:822
-#: inary/sxml/autoxml.py:836 inary/sxml/autoxml.py:850
+#: inary/sxml/autoxml.py:701 inary/sxml/autoxml.py:717
+#: inary/sxml/autoxml.py:731 inary/sxml/autoxml.py:821
+#: inary/sxml/autoxml.py:835 inary/sxml/autoxml.py:849
 msgid "Mandatory argument not available"
 msgstr "Mandatory argument not available"
 
-#: inary/sxml/autoxml.py:715 inary/sxml/autoxml.py:833
+#: inary/sxml/autoxml.py:714 inary/sxml/autoxml.py:832
 msgid "Object cannot be encoded"
 msgstr "Object cannot be encoded"
 
-#: inary/sxml/autoxml.py:729 inary/sxml/autoxml.py:847
+#: inary/sxml/autoxml.py:728 inary/sxml/autoxml.py:846
 msgid "Object cannot be formatted"
 msgstr "Object cannot be formatted"
 
-#: inary/sxml/autoxml.py:745
+#: inary/sxml/autoxml.py:744
 msgid "List type must contain only one element"
 msgstr "List type must contain only one element"
 
-#: inary/sxml/autoxml.py:758 inary/sxml/autoxml.py:778
+#: inary/sxml/autoxml.py:757 inary/sxml/autoxml.py:777
 #, fuzzy, python-brace-format
 msgid "Mandatory list \"{0}\" under \"{1}\" node is empty."
 msgstr "Mandatory list \"{0}\" under \"{1}\" node is empty."
@@ -3977,38 +3976,39 @@ msgstr "Invalid delta package name: {}"
 msgid "Invalid version string: '{}'"
 msgstr "Invalid version string: {}"
 
-#~ msgid "long integer"
-#~ msgstr "long integer"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} option requires an argument"
-
-#~ msgid "INARY package"
-#~ msgstr "INARY package"
-
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Not removing conflicted file : {}"
-
-#~ msgid "Date: {} {}"
-#~ msgstr "Date: {} {}"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "Urlgrabber needs to be installed to run this command"
-#~ msgstr "Urlgrabber needs to be installed to run this command"
-
-#~ msgid "No user named {} found on the system"
-#~ msgstr "No user named {} found on the system"
-
-#~ msgid "No group named {} found on the system"
-#~ msgstr "No group named {} found on the system"
-
-#~ msgid "Installation order: "
-#~ msgstr "Installation order: "
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Unable to read file {}: {}"
 
 #~ msgid "String {} has invalid XML"
 #~ msgstr "String {} has invalid XML"
 
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Unable to read file {}: {}"
+#~ msgid "No group named {} found on the system"
+#~ msgstr "No group named {} found on the system"
+
+#~ msgid "No user named {} found on the system"
+#~ msgstr "No user named {} found on the system"
+
+#~ msgid "Urlgrabber needs to be installed to run this command"
+#~ msgstr "Urlgrabber needs to be installed to run this command"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "Date: {} {}"
+#~ msgstr "Date: {} {}"
+
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Not removing conflicted file : {}"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY package"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} option requires an argument"
+
+#~ msgid "long integer"
+#~ msgstr "long integer"
+
+#, fuzzy
+#~ msgid "Cleaning files database folder...  "
+#~ msgstr "Cleaning build directory..."

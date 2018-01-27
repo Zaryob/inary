@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: inary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-26 16:30+0300\n"
+"POT-Creation-Date: 2018-01-27 23:19+0300\n"
 "PO-Revision-Date: 2010-12-27 10:06+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@trixon.se>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
@@ -2261,42 +2261,37 @@ msgstr ""
 msgid "Component {} not found"
 msgstr "Paketet {} hittades ej"
 
-#: inary/db/filesdb.py:46 inary/db/filesldb.py:40
+#: inary/db/filesdb.py:29
+msgid "LevelDB not found! Please install LevelDB and plyvel!"
+msgstr ""
+
+#: inary/db/filesdb.py:40
 #, fuzzy
 msgid "Creating files database..."
 msgstr "Skapar {}... "
 
-#: inary/db/filesdb.py:50
+#: inary/db/filesdb.py:43
 #, fuzzy
-msgid "  ---> Adding '{}' to db... "
+msgid "  |___* Adding '{}' to db... "
 msgstr "* Lägger till {} till db... "
 
-#: inary/db/filesdb.py:53
+#: inary/db/filesdb.py:46
 msgid "OK."
 msgstr "OK."
 
-#: inary/db/filesdb.py:54 inary/db/filesldb.py:47
+#: inary/db/filesdb.py:47
 msgid "Added files database..."
 msgstr ""
 
-#: inary/db/filesdb.py:84
-#, fuzzy
-msgid "Cleaning files database folder...  "
-msgstr "Rensar byggkatalog..."
-
-#: inary/db/filesdb.py:87 inary/db/filesldb.py:79
-#, fuzzy
-msgid "done."
-msgstr "Klar."
-
-#: inary/db/filesldb.py:29
-msgid "LevelDB not found! Please install LevelDB and plyvel!"
-msgstr ""
-
-#: inary/db/filesldb.py:77
+#: inary/db/filesdb.py:77
 #, fuzzy
 msgid "Cleaning files database folder... "
 msgstr "Rensar byggkatalog..."
+
+#: inary/db/filesdb.py:79
+#, fuzzy
+msgid "done."
+msgstr "Klar."
 
 #: inary/db/groupdb.py:66 inary/db/groupdb.py:75
 #, fuzzy
@@ -2350,7 +2345,7 @@ msgstr "Paketet {} hittades ej"
 msgid "Repository {} does not exist."
 msgstr "Förrådet % finns inte och kan därmed inte tas bort."
 
-#: inary/db/packagedb.py:147 inary/db/packagedb.py:154
+#: inary/db/packagedb.py:148 inary/db/packagedb.py:155
 #, fuzzy
 msgid "Package {} not found."
 msgstr "Paketet {} är inte installerat."
@@ -2942,6 +2937,10 @@ msgstr "Följande paket kommer att installeras för att uppfylla beroenden:"
 msgid "External dependencies not satisfied"
 msgstr ""
 
+#: inary/operations/install.py:258
+msgid "Installation order: "
+msgstr "Installationsordning: "
+
 #: inary/operations/remove.py:44
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "Säkerhetsspärren förhindrar borttagning av följande paket:\n"
@@ -3273,74 +3272,74 @@ msgstr ""
 msgid "Tag should have at least the current locale, or failing that an English or Turkish version"
 msgstr ""
 
-#: inary/sxml/autoxml.py:368
+#: inary/sxml/autoxml.py:367
 #, fuzzy
 msgid "autoxml.check: '{}' errors"
 msgstr "autoxml.check: {}-fel"
 
-#: inary/sxml/autoxml.py:424 inary/sxml/autoxml.py:434
+#: inary/sxml/autoxml.py:423 inary/sxml/autoxml.py:433
 #, fuzzy
 msgid "autoxml.parse: String '{}' has errors"
 msgstr "autoxml.parse: Strängen {} innehåller fel"
 
-#: inary/sxml/autoxml.py:448 inary/sxml/autoxml.py:458
+#: inary/sxml/autoxml.py:447 inary/sxml/autoxml.py:457
 #, fuzzy
 msgid "autoxml.read: File '{}' has errors"
 msgstr "autoxml.read: Filen {} innehåller fel"
 
-#: inary/sxml/autoxml.py:466
+#: inary/sxml/autoxml.py:465
 msgid "autoxml.write: object validation has failed"
 msgstr ""
 
-#: inary/sxml/autoxml.py:474
+#: inary/sxml/autoxml.py:473
 #, fuzzy
 msgid "autoxml.write: File encoding '{}' has errors"
 msgstr "autoxml.read: Filen {} innehåller fel"
 
-#: inary/sxml/autoxml.py:524
+#: inary/sxml/autoxml.py:523
 msgid "gen_tag: unrecognized tag type {} in spec"
 msgstr ""
 
-#: inary/sxml/autoxml.py:571 inary/sxml/autoxml.py:582
+#: inary/sxml/autoxml.py:570 inary/sxml/autoxml.py:581
 msgid "Mandatory variable {} not available"
 msgstr ""
 
-#: inary/sxml/autoxml.py:652
+#: inary/sxml/autoxml.py:651
 msgid "Type mismatch: read text cannot be decoded"
 msgstr ""
 
-#: inary/sxml/autoxml.py:656 inary/sxml/autoxml.py:665
+#: inary/sxml/autoxml.py:655 inary/sxml/autoxml.py:664
 msgid "Mandatory token {} not available"
 msgstr ""
 
-#: inary/sxml/autoxml.py:670
+#: inary/sxml/autoxml.py:669
 #, python-brace-format
 msgid "Type mismatch. Expected {0}, got {1}"
 msgstr ""
 
-#: inary/sxml/autoxml.py:699 inary/sxml/autoxml.py:819
+#: inary/sxml/autoxml.py:698 inary/sxml/autoxml.py:818
 msgid "Type mismatch: DOM cannot be decoded"
 msgstr ""
 
-#: inary/sxml/autoxml.py:702 inary/sxml/autoxml.py:718
-#: inary/sxml/autoxml.py:732 inary/sxml/autoxml.py:822
-#: inary/sxml/autoxml.py:836 inary/sxml/autoxml.py:850
+#: inary/sxml/autoxml.py:701 inary/sxml/autoxml.py:717
+#: inary/sxml/autoxml.py:731 inary/sxml/autoxml.py:821
+#: inary/sxml/autoxml.py:835 inary/sxml/autoxml.py:849
 msgid "Mandatory argument not available"
 msgstr ""
 
-#: inary/sxml/autoxml.py:715 inary/sxml/autoxml.py:833
+#: inary/sxml/autoxml.py:714 inary/sxml/autoxml.py:832
 msgid "Object cannot be encoded"
 msgstr ""
 
-#: inary/sxml/autoxml.py:729 inary/sxml/autoxml.py:847
+#: inary/sxml/autoxml.py:728 inary/sxml/autoxml.py:846
 msgid "Object cannot be formatted"
 msgstr "Objektet kan inte formateras"
 
-#: inary/sxml/autoxml.py:745
+#: inary/sxml/autoxml.py:744
 msgid "List type must contain only one element"
 msgstr ""
 
-#: inary/sxml/autoxml.py:758 inary/sxml/autoxml.py:778
+#: inary/sxml/autoxml.py:757 inary/sxml/autoxml.py:777
 #, python-brace-format
 msgid "Mandatory list \"{0}\" under \"{1}\" node is empty."
 msgstr ""
@@ -3601,37 +3600,41 @@ msgstr "Ogiltigt paketnamn: {}"
 msgid "Invalid version string: '{}'"
 msgstr "Ogiltig versionssträng: {}"
 
-#~ msgid "long integer"
-#~ msgstr "långt heltal"
+#~ msgid "Generating {},"
+#~ msgstr "Skapar {},"
 
-#~ msgid "{} option requires an argument"
-#~ msgstr "{}-alternativet kräver ett argument"
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Kan inte skapa delta av samma paket!"
 
-#, fuzzy
-#~ msgid "INARY package"
-#~ msgstr "Skapar INARY-paketet"
+#~ msgid "Creating delta INARY package between {} {}"
+#~ msgstr "Skapar delta-INARY-paket mellan {} och {}"
 
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Tar inte bort fil i konflikt: {}"
+#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
+#~ msgstr "Namn: {}, version: {}, utgåva: %s, bygge %s\n"
 
-#~ msgid "Date: {} {}"
-#~ msgstr "Datum: {} {}"
+#~ msgid "Repository distribution does not match. Removing {} from system."
+#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort {} från systemet."
 
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
+#~ msgid "Update INARY database for repository {}?"
+#~ msgstr "Uppdatera INARY-databasen för {}-förrådet?"
 
-#~ msgid "Installation order: "
-#~ msgstr "Installationsordning: "
+#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
 
-#~ msgid "* Checking {}... "
-#~ msgstr "* Kontrollerar {}... "
+#~ msgid "Safety switch: Following packages in system.base will be installed: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
 
-#~ msgid ""
-#~ "\n"
-#~ "Package {} has changed config files."
-#~ msgstr ""
-#~ "\n"
-#~ "Paketet {} har förändrade konfigurationsfiler."
+#~ msgid "Storing {}."
+#~ msgstr "Lagrar {}."
+
+#~ msgid "Storing {}, "
+#~ msgstr "Lagrar {}, "
+
+#~ msgid "Checking /{} "
+#~ msgstr "Kontrollerar /{} "
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Säkerhetslås: system.devel är redan installerad"
 
 #~ msgid ""
 #~ "\n"
@@ -3640,38 +3643,35 @@ msgstr "Ogiltig versionssträng: {}"
 #~ "\n"
 #~ "Paketet {} är trasigt."
 
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Säkerhetslås: system.devel är redan installerad"
+#~ msgid ""
+#~ "\n"
+#~ "Package {} has changed config files."
+#~ msgstr ""
+#~ "\n"
+#~ "Paketet {} har förändrade konfigurationsfiler."
 
-#~ msgid "Checking /{} "
-#~ msgstr "Kontrollerar /{} "
+#~ msgid "* Checking {}... "
+#~ msgstr "* Kontrollerar {}... "
 
-#~ msgid "Storing {}, "
-#~ msgstr "Lagrar {}, "
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
 
-#~ msgid "Storing {}."
-#~ msgstr "Lagrar {}."
+#~ msgid "Date: {} {}"
+#~ msgstr "Datum: {} {}"
 
-#~ msgid "Safety switch: Following packages in system.base will be installed: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Tar inte bort fil i konflikt: {}"
 
-#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
+#, fuzzy
+#~ msgid "INARY package"
+#~ msgstr "Skapar INARY-paketet"
 
-#~ msgid "Update INARY database for repository {}?"
-#~ msgstr "Uppdatera INARY-databasen för {}-förrådet?"
+#~ msgid "{} option requires an argument"
+#~ msgstr "{}-alternativet kräver ett argument"
 
-#~ msgid "Repository distribution does not match. Removing {} from system."
-#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort {} från systemet."
+#~ msgid "long integer"
+#~ msgstr "långt heltal"
 
-#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
-#~ msgstr "Namn: {}, version: {}, utgåva: %s, bygge %s\n"
-
-#~ msgid "Creating delta INARY package between {} {}"
-#~ msgstr "Skapar delta-INARY-paket mellan {} och {}"
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Kan inte skapa delta av samma paket!"
-
-#~ msgid "Generating {},"
-#~ msgstr "Skapar {},"
+#, fuzzy
+#~ msgid "Cleaning files database folder...  "
+#~ msgstr "Rensar byggkatalog..."
