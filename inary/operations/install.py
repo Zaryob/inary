@@ -255,7 +255,7 @@ def install_pkg_files(package_URIs, reinstall = False):
         if conflicts:
             operations.remove.remove_conflicting_packages(conflicts)
     order.reverse()
-    #ctx.ui.info(_('Installation order: ') + util.strlist(order) )
+    ctx.ui.info(_('Installation order: ') + util.strlist(order) )
 
     if ctx.get_option('dry_run'):
         return True

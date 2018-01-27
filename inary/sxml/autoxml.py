@@ -162,8 +162,7 @@ class Writer(formatter.DumbWriter):
         formatter.DumbWriter.__init__(self, file, maxcol)
 
     def send_literal_data(self, data):
-        #self.file.write(data.encode("utf-8"))
-        self.file.write(data)
+        self.file.write(data.encode("utf-8"))
         i = data.rfind('\n')
         if i >= 0:
             self.col = 0
@@ -332,7 +331,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         cls.__init__ = initialize
 
         cls.decoders = decoders
-        def decode(self, node, errs, where = (cls.tag)):
+        def decode(self, node, errs, where = String(cls.tag)):
             for base in cls.autoxml_bases:
                 base.decode(self, node, errs, where)
             for decode_member in decoders:#self.__class__.decoders:
@@ -352,7 +351,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         cls.encode = encode
 
         cls.errorss = errorss
-        def errors(self, where = (name)):
+        def errors(self, where = String(name)):
             errs = []
             for base in cls.autoxml_bases:
                 errs.extend(base.errors(self, where))

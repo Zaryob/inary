@@ -30,6 +30,7 @@ class PackageDB(lazydb.LazyDB):
 
     def __init__(self):
         lazydb.LazyDB.__init__(self, cacheable=True)
+        self.init()
 
     def init(self):
         self.__package_nodes = {} # Packages
@@ -65,10 +66,10 @@ class PackageDB(lazydb.LazyDB):
         return [x.firstChild().data() for x in obsoletes.tags("Package")]
 
     def __generate_packages(self, doc):
-        dict={}
-        for x in doc.tags("Packages"):
-            dict[x.getTagData("Name")]= gzip.zlib.compress(x.toString())
-        return dict
+        pdict={}
+        for x in doc.tags("Package"):
+            pdict[x.getTagData("Name")]= gzip.zlib.compress(x.toString().encode('utf-8'))
+        return pdict
 
     def __generate_revdeps(self, doc):
         revdeps = {}
