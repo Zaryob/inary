@@ -164,9 +164,9 @@ class Build(command.Command, metaclass=command.autocommand):
             ctx.ui.info(_("Supported package formats:"))
             for format in inary.package.Package.formats:
                 if format == inary.package.Package.default_format:
-                    ctx.ui.info(_("  {} (default)") % format)
+                    ctx.ui.info(_("  {} (default)").format(format))
                 else:
-                    ctx.ui.info("  {}" % format)
+                    ctx.ui.info("  {}".format(format))
             return
 
         self.init()

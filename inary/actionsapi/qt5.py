@@ -36,18 +36,18 @@ includedir = "{}/include".format(prefix)
 
 # qt5 spesific variables
 
-headerdir = "{}/include/{}".format(prefix, basename)
-datadir = "{}/share/{}".format(prefix, basename)
-docdir = "/{}/{}".format(get.docDIR(), basename)
-archdatadir = "{}/{}".format(libdir, basename)
-examplesdir = "{}/{}/examples".format(libdir, basename)
-importdir = "{}/{}/imports".format(libdir, basename)
-plugindir = "{}/{}/plugins".format(libdir, basename)
-qmldir = "{}/{}/qmldir".format(libdir, basename)
-testdir = "{}/share/{}".format(prefix, basename)
-translationdir = "{}/translations".format(datadir)
+headerdir = "{0}/include/{1}".format(prefix, basename)
+datadir = "{0}/share/{1}".format(prefix, basename)
+docdir = "/{0}/{1}".format(get.docDIR(), basename)
+archdatadir = "{0}/{1}".format(libdir, basename)
+examplesdir = "{0}/{1}/examples".format(libdir, basename)
+importdir = "{0}/{1}/imports".format(libdir, basename)
+plugindir = "{0}/{1}/plugins".format(libdir, basename)
+qmldir = "{0}/{1}/qmldir".format(libdir, basename)
+testdir = "{0}/share/{1}".format(prefix, basename)
+translationdir = "{0}/translations".format(datadir)
 
-qmake = "{}/qmake-qt5" % bindir
+qmake = "{}/qmake-qt5".format(bindir)
 
 class ConfigureError(inary.actionsapi.Error):
     def __init__(self, value=''):
@@ -63,7 +63,7 @@ def configure(projectfile='', parameters='', installPrefix=prefix):
     if len(profiles) > 1 and projectfile == '':
         raise ConfigureError(_("It seems there are more than one .pro file, you must specify one. (Possible .pro files: {})").format(", ".join(profiles)))
 
-    shelltools.system("{0} -makefile {1} PREFIX='{2}' QMAKE_CFLAGS+='{3.CFLAGS()}' QMAKE_CXXFLAGS+='{3.CXXFLAGS()}' {5}".format(qmake, projectfile, installPrefix, get, parameters))
+    shelltools.system("{0} -makefile {1} PREFIX='{2}' QMAKE_CFLAGS+='{3}' QMAKE_CXXFLAGS+='{4}' {5}".format(qmake, projectfile, installPrefix, get.CFLAGS(), get.CXXFLAGS(), parameters))
 
 def make(parameters=''):
     cmaketools.make(parameters)

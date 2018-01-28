@@ -613,7 +613,7 @@ def strip_file(filepath, fileinfo, outpath):
     if fileinfo == None:        
         ret, out, err = run_batch("file {}".format(filepath), ui_debug=False)
         if ret:
-            ctx.ui.warning(_("file command failed with return code {0} for file: {1}") % (ret, filepath))
+            ctx.ui.warning(_("file command failed with return code {0} for file: {1}").format(ret, filepath))
             ctx.ui.info(_("Output:\n{}").format(out), verbose=True)
 
     elif "current ar archive" in fileinfo:
@@ -706,12 +706,12 @@ def parse_package_name(package_name):
         except:
             raise Error(_("Invalid package name: {}").format(package_name))
 
-    return name, "{}-{}".format(version, release)
+    return name, "{0}-{1}".format(version, release)
 
 def parse_package_dir_path(package_name):
     name = parse_package_name(package_name)[0]
     if name.split("-").pop() in ["devel", "32bit", "doc", "docs", "userspace"]: name = name[:-1 - len(name.split("-").pop())]
-    return "{}/{}".format(name[0:4].lower() if name.startswith("lib") and len(name) > 3 else name.lower()[0], name.lower())
+    return "{0}/{1}".format(name[0:4].lower() if name.startswith("lib") and len(name) > 3 else name.lower()[0], name.lower())
 
 def parse_delta_package_name_legacy(package_name):
     """Separate delta package name and release infos for package formats <= 1.1.

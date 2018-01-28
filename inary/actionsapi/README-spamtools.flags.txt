@@ -9,10 +9,10 @@ available operations:
 add("param1", "param2", ..., "paramN")
 e.g.
 inarytools.cxxflags.add("-fpermisive")
-  -> shelltools.export("CXXFLAGS", "%s -fpermisive" % get.CXXFLAGS())
+  -> shelltools.export("CXXFLAGS", "{} -fpermisive".format(get.CXXFLAGS()))
 inarytools.flags.add("-fno-strict-aliasing", "-fPIC")
-  -> shelltools.export("CFLAGS", "%s -fno-strict-aliasing -fPIC" % get.CFLAGS())
-  -> shelltools.export("CXXFLAGS", "%s -ffno-strict-aliasing -fPIC" % get.CXXFLAGS())
+  -> shelltools.export("CFLAGS", "{} -fno-strict-aliasing -fPIC".format(get.CFLAGS()))
+  -> shelltools.export("CXXFLAGS", "{} -ffno-strict-aliasing -fPIC".format(get.CXXFLAGS()))
 
 remove("param1", "param2", ..., "paramN")
 e.g.

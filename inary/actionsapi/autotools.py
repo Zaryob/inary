@@ -116,24 +116,22 @@ def fixpc():
 
 def install(parameters = '', argument = 'install'):
     '''install source into install directory with given parameters'''
-    args = 'make prefix=%(prefix)s/%(defaultprefix)s \
-            datadir=%(prefix)s/%(data)s \
-            infodir=%(prefix)s/%(info)s \
-            localstatedir=%(prefix)s/%(localstate)s \
-            mandir=%(prefix)s/%(man)s \
-            sysconfdir=%(prefix)s/%(conf)s \
-            %(parameters)s \
-            %(argument)s' % {
-                                'prefix': get.installDIR(),
-                                'defaultprefix': get.defaultprefixDIR(),
-                                'man': get.manDIR(),
-                                'info': get.infoDIR(),
-                                'localstate': get.localstateDIR(),
-                                'conf': get.confDIR(),
-                                'data': get.dataDIR(),
-                                'parameters': parameters,
-                                'argument':argument,
-                            }
+    args = 'make prefix={0}/{1} \
+            datadir={0}/{2} \
+            infodir={0}/{3} \
+            localstatedir={0}/{4} \
+            mandir={0}/{5} \
+            sysconfdir={0}/{6} \
+            {7} \
+            {8}'.format(get.installDIR(),
+                        get.defaultprefixDIR(),
+                        get.dataDIR(),
+                        get.infoDIR(),
+                        get.localstateDIR(),
+                        get.manDIR(),
+                        get.confDIR(),
+                        parameters,
+                        argument )
 
     if system(args):
         raise InstallError(_('Install failed.'))
@@ -145,7 +143,7 @@ def install(parameters = '', argument = 'install'):
         if isDirectory("{}/emul32".format(get.installDIR())): removeDir("/emul32")
 
 def rawInstall(parameters = '', argument = 'install'):
-    '''install source into install directory with given parameters = PREFIX=%s % get.installDIR()'''
+    '''install source into install directory with given parameters = PREFIX=get.installDIR()'''
     if system('make {0} {1}'.format(parameters, argument)):
         raise InstallError(_('Install failed.'))
     else:

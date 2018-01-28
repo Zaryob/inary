@@ -24,7 +24,7 @@ class grubCommand:
 
     def __str__(self):
         if self.options:
-            return "{0} {1} {2}" % (self.key, " ".join(self.options), self.value)
+            return "{0} {1} {2}".format(self.key, " ".join(self.options), self.value)
         else:
             return "{0} {1}".format(self.key, self.value)
 

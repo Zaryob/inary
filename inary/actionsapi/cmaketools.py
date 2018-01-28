@@ -86,13 +86,11 @@ def install(parameters = '', argument = 'install'):
     '''install source into install directory with given parameters'''
     # You can't squeeze unix paths with things like 'bindir', 'datadir', etc with CMake
     # http://public.kitware.com/pipermail/cmake/2006-August/010748.html
-    args = 'make DESTDIR="%(destdir)s" \
-                 %(parameters)s \
-                 %(argument)s' % {
-                                     'destdir'      : get.installDIR(),
-                                     'parameters'   : parameters,
-                                     'argument'     : argument,
-                                 }
+    args = 'make DESTDIR="{0}" \
+                 {1} \
+                 {2}'.format(get.installDIR(),
+                             parameters,
+                             argument)
 
     if system(args):
         raise InstallError(_('Install failed.'))
@@ -100,9 +98,9 @@ def install(parameters = '', argument = 'install'):
         fixInfoDir()
 
 def rawInstall(parameters = '', argument = 'install'):
-    '''install source into install directory with given parameters = PREFIX=%s % get.installDIR()'''
+    '''install source into install directory with given parameters = PREFIX=get.installDIR()'''
     if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
-        if system('make {} {} '.format(parameters, argument)):
+        if system('make {0} {1} '.format(parameters, argument)):
             raise InstallError(_('Install failed.'))
         else:
             fixInfoDir()

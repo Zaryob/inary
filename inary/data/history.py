@@ -100,7 +100,7 @@ class History(xmlfile.XmlFile, metaclass=autoxml.autoxml):
             raise Exception(_("Unknown package operation"))
 
         opno = self._get_latest()
-        self.histfile = "{}_{}.xml".format(opno, operation)
+        self.histfile = "{0}_{1}.xml".format(opno, operation)
 
         year, month, day, hour, minute = time.localtime()[0:5]
         self.operation.type = operation

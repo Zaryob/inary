@@ -77,7 +77,7 @@ class HistoryDB(lazydb.LazyDB):
         configs = []
         for root, dirs, files in os.walk(package_path):
             for f in files:
-                configs.append(("%s/%s" % (root, f)))
+                configs.append(("{0}/{1}".format(root, f)))
 
         return configs
 

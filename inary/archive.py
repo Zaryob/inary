@@ -360,7 +360,7 @@ class ArchiveTar(ArchiveBase):
                                     for service in ("NetworkManager", "connman", "wicd"):
                                         if os.path.isfile("/etc/scom/services/enabled/{}".format(service)):
                                             startservices.append(service)
-                                            os.system("service % stop" % service)
+                                            os.system("service {} stop".format(service))
                                     os.system("service dbus stop")
                                     break
                             os.system("mv -f {0} {0}.old".format(tarinfo.name))

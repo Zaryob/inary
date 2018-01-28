@@ -38,7 +38,7 @@ def idsQuery(name, vendor, device):
         else:
             if line.startswith("\t"):
                 if line.startswith("\t" + device):
-                    return "{0} - {1}" % (line[6:].strip(), company)
+                    return "{0} - {1}".format(line[6:].strip(), company)
             elif not line.startswith("#"):
                 flag = 0
     if company != "":

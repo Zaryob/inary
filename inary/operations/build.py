@@ -415,8 +415,7 @@ class Builder:
             if os.path.exists("/usr/lib/ccache/bin/gcc"):
                 self.has_ccache = True
 
-                os.environ["PATH"] = "/usr/lib/ccache/bin:%(PATH)s" \
-                                                                % os.environ
+                os.environ["PATH"] = "/usr/lib/ccache/bin:%(PATH)s" % os.environ
                 # Force ccache to use /root/.ccache instead of $HOME/.ccache
                 # as $HOME can be modified through actions.py
                 os.environ["CCACHE_DIR"] = "/root/.ccache"

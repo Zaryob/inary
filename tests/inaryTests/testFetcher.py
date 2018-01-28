@@ -27,8 +27,8 @@ class FetchTestCase(unittest.TestCase):
         os.remove(fetchedFile)
 
     def testFetcherFunctions(self):
-        enc = base64.encodestring('%s:%s' % self.url.auth_info())
-        self.assertEqual(self.fetch._get_http_headers(),(('Authorization', 'Basic %s' % enc),))
+        enc = base64.encodestring('{0}:{0}'.format(self.url.auth_info()))
+        self.assertEqual(self.fetch._get_http_headers(),(('Authorization', 'Basic {}'.format(enc)),))
         assert not self.fetch._get_ftp_headers()
 
 

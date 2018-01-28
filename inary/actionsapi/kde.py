@@ -49,17 +49,17 @@ def configure(parameters = ''):
     ''' parameters = '--with-nls --with-libusb --with-something-usefull '''
     if can_access_file('configure'):
         args = './configure \
-                --prefix={0.kdeDIR()} \
-                --build={0.HOST()} \
+                --prefix={0} \
+                --build={1} \
                 --with-x \
                 --enable-mitshm \
                 --with-xinerama \
-                --with-qt-dir={0.qtDIR()} \
+                --with-qt-dir={2} \
                 --enable-mt \
-                --with-qt-libraries={0.qtDIR}/lib \
+                --with-qt-libraries={2}/lib \
                 --disable-dependency-tracking \
                 --disable-debug \
-                {1}'.format(get, parameters)
+                {3}'.format(get.kdeDIR(), get.HOST(), get.qtDIR(), parameters)
 
         if system(args):
             raise ConfigureError(_('Configure failed.'))

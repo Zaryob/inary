@@ -45,7 +45,7 @@ class Maintainer(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     t_Email = [autoxml.String, autoxml.mandatory]
 
     def __str__(self):
-        s = "{} <{}>".format(self.name, self.email)
+        s = "{0} <{1}>".format(self.name, self.email)
         return s
 
 class Component(xmlfile.XmlFile, metaclass=autoxml.autoxml):

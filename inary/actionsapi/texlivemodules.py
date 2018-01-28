@@ -179,8 +179,8 @@ def addFormat(parameters):
             elif not pair[0] == 'patterns':
                 para_dict["patterns"] = '-'
 
-    cnf_file = open('{0.curDIR()}/texmf/fmtutil/format.{0.srcNAME()}.cnf'.format(get), 'a')
-    cnf_file.write('{0["name"]}\t{0["engine"]}\t{0["patterns"]}\t{0["options"]}\n'.format(para_dict))
+    cnf_file = open('{0}/texmf/fmtutil/format.{1}.cnf'.format(get.curDIR(), get.srcNAME()), 'a')
+    cnf_file.write('{0[name]}\t{0[engine]}\t{0[patterns]}\t{0[options]}\n'.format(para_dict))
     cnf_file.close()
 
 def moveSources():
@@ -217,12 +217,12 @@ def addLanguageDat(parameter):
         if len(pair) == 2: #That's just a caution, the pair should have two items, not more not less
             para_dict[pair[0]] = pair[1]
 
-    language_dat = open('{0.curDIR()}/language.{0.srcNAME()}.dat'.format(get)  , 'a')
-    language_dat.write('{0["name"]}\t{0["file"]}\n"'.format(para_dict))
+    language_dat = open('{0}/language.{1}.dat'.format(get.curDIR(), get.srcNAME())  , 'a')
+    language_dat.write('{0[name]}\t{0[file]}\n"'.format(para_dict))
     language_dat.close()
 
     if "synonyms" in para_dict:
-        language_dat = open('{0.curDIR()}/language.{0.srcNAME()}.dat'.format(get)  , 'a')
+        language_dat = open('{0}/language.{1}.dat'.format(get.curDIR(),get.srcNAME())  , 'a')
         language_dat.write("={}\n".format(para_dict["synonyms"]))
         language_dat.close()
 
@@ -240,18 +240,18 @@ def addLanguageDef(parameter):
     if "righthyphenmin" in para_dict and not para_dict["righthyphenmin"]:
         para_dict["righthyphenmin"] = "3"
 
-    language_def = open('%s/language.%s.def' % (get.curDIR(),get.srcNAME())  , 'a')
+    language_def = open('{0}/language.{1}.def'.format(get.curDIR(),get.srcNAME())  , 'a')
     language_def.write("\\addlanguage{%s}{%s}{}{%s}{%s}\n" % (para_dict["name"], para_dict["file"],  para_dict["lefthyphenmin"],  para_dict["righthyphenmin"]))
     language_def.close()
 
     if "synonyms" in para_dict:
-        language_def = open('%s/language.%s.def' % (get.curDIR(),get.srcNAME())  , 'a')
+        language_def = open('{0}/language.{1}.def'.format(get.curDIR(),get.srcNAME())  , 'a')
         language_def.write("\\addlanguage{%s}{%s}{}{%s}{%s}\n" % (para_dict["synonyms"], para_dict["file"],  para_dict["lefthyphenmin"],  para_dict["righthyphenmin"]))
         language_def.close()
 
 def generateConfigFiles():
     '''Generate config files'''
-    for tlpobjfile in ls("%s/tlpkg/tlpobj/*" % get.curDIR()):
+    for tlpobjfile in ls("{}/tlpkg/tlpobj/*".format(get.curDIR())):
         jobsfile=open(tlpobjfile, "r")
         for line in jobsfile.readlines():
             splitline = line.split(" ", 2)
