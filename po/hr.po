@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: inary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-27 23:19+0300\n"
+"POT-Creation-Date: 2018-01-28 22:52+0300\n"
 "PO-Revision-Date: 2011-06-11 23:13+0100\n"
 "Last-Translator: Ivica Kolić <ikoli@yahoo.com>\n"
 "Language-Team: Croatian <ikoli@yahoo.com>\n"
@@ -153,31 +153,31 @@ msgstr "Konfiguracijska skripta nije pronađena."
 msgid "Make failed."
 msgstr ""
 
-#: inary/actionsapi/autotools.py:139 inary/actionsapi/autotools.py:150
-#: inary/actionsapi/cmaketools.py:98 inary/actionsapi/cmaketools.py:106
+#: inary/actionsapi/autotools.py:137 inary/actionsapi/autotools.py:148
+#: inary/actionsapi/cmaketools.py:96 inary/actionsapi/cmaketools.py:104
 #: inary/actionsapi/kde.py:79 inary/actionsapi/pythonmodules.py:67
 #: inary/actionsapi/rubymodules.py:92 inary/actionsapi/rubymodules.py:99
 #: inary/actionsapi/scons.py:43
 msgid "Install failed."
 msgstr "Instalacija nije uspjela."
 
-#: inary/actionsapi/autotools.py:161
+#: inary/actionsapi/autotools.py:159
 msgid "Running aclocal failed."
 msgstr "Pokretanje aclocal nije uspjelo."
 
-#: inary/actionsapi/autotools.py:166
+#: inary/actionsapi/autotools.py:164
 msgid "Running autoconf failed."
 msgstr "Pokretanje autoconf nije uspjelo."
 
-#: inary/actionsapi/autotools.py:171
+#: inary/actionsapi/autotools.py:169
 msgid "Running autoreconf failed."
 msgstr "Pokretanje autoreconf nije uspjelo."
 
-#: inary/actionsapi/autotools.py:176
+#: inary/actionsapi/autotools.py:174
 msgid "Running automake failed."
 msgstr "Pokretanje automake nije uspjelo."
 
-#: inary/actionsapi/autotools.py:181
+#: inary/actionsapi/autotools.py:179
 msgid "Running autoheader failed."
 msgstr ""
 
@@ -185,7 +185,7 @@ msgstr ""
 msgid "No configure script found for cmake."
 msgstr "Nije pronađena konfiguracijska skripta za cmake."
 
-#: inary/actionsapi/cmaketools.py:110 inary/actionsapi/kde.py:81
+#: inary/actionsapi/cmaketools.py:108 inary/actionsapi/kde.py:81
 msgid "No Makefile found."
 msgstr ""
 
@@ -389,8 +389,8 @@ msgid "ActionsAPI [chmod]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [chmod]: Nijedna datoteka ne odgovara uzorku \"{}\"."
 
 #: inary/actionsapi/shelltools.py:70
-#, fuzzy, python-format
-msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
+#, fuzzy, python-brace-format
+msgid "ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})"
 msgstr "ActionsAPI [chmod]: Operacija nije dopuštena: %s (mode: 0%o)"
 
 #: inary/actionsapi/shelltools.py:72
@@ -650,7 +650,7 @@ msgstr "Paket {} nije nađen u nijednom aktivnom repozitoriju."
 msgid "Installing {0.name}, version {0.version}, release {0.release}"
 msgstr "Instaliram {0.name},verzija {0.version},izdanje {0.release}"
 
-#: inary/atomicoperations.py:192 inary/operations/build.py:789
+#: inary/atomicoperations.py:192 inary/operations/build.py:788
 #, fuzzy, python-brace-format
 msgid "{0}-{1} is not a valid INARY version format"
 msgstr "{0}-{1} nije valjan format Inary verzije"
@@ -1204,94 +1204,48 @@ msgid ""
 "Disabled repositories are not taken into account in operations\n"
 msgstr ""
 
-#: inary/cli/downgrade.py:25
-#, fuzzy
+#: inary/cli/distupdate.py:25
 msgid ""
-"Downgrade INARY packages\n"
+"Update the system a new release\n"
 "\n"
-"Usage: Downgrade [<package1> <package2> ... <packagen>]\n"
+"Usage: DistUpdate [ next_dist_release_repo_url ] [ dist-update-list ]\n"
 "\n"
-"<packagei>: package name\n"
+"                WARNING: DIST-UPDATE risk içerir.\n"
+"    Dist-Update yapmadan önce iki kez düşününüz. Çünkü\n"
+"    Dist-Update sonrası sisteminiz çalışmayabilir, tüm\n"
+"    dosyalarınızı kaybedebilirsiniz. \n"
 "\n"
-"Downgrades the entire system if no package names are given\n"
+"   Sisteminizi Dist-Update yapmadan önce yedekleyiniz ve\n"
+"   EĞER YAPMAK İSTEDİĞİNİZE GERÇEKTEN EMİNSENİZ BU İŞLEMİ\n"
+"   BAŞLATINIZ.\n"
 "\n"
-"You may use only package names to specify packages because\n"
-"the package downgrade operation is defined only with respect\n"
-"to repositories. If you have specified a package name, it\n"
-"should exist in the package repositories. If you just want to\n"
-"reinstall a package from a INARY file, use the install command.\n"
+"                OLUŞAN HİÇBİR DİSK VE SİSTEM\n"
+"                 HASARINDAN SULIN TOPLULUĞU \n"
+"                       MESUL DEĞİLDİR\n"
 "\n"
-"You can also specify components instead of package names, which will be\n"
-"expanded to package names.\n"
 msgstr ""
-"Instaliraj INARY pakete\n"
-"\n"
-"Uporaba: instaliraj <paket1> <paket2> ... <paketn>\n"
-"\n"
-"Možete koristiti imena datoteka, URI-je ili imena paketa za pakete. Ako ste\n"
-"odredili ime paketa,tada trewba postojati u određenom repozitoriju.\n"
-"\n"
-"Također možete odrediti komponente umjesto imena paketa, koje će biti\n"
-"proširene na imena paketa.\n"
 
-#: inary/cli/downgrade.py:49
+#: inary/cli/distupdate.py:50
 #, fuzzy
-msgid "downgrade options"
-msgstr "opcije nadogradnje"
+msgid "dist-update options"
+msgstr "opcije listaj-najnovije"
 
-#: inary/cli/downgrade.py:53
-#, fuzzy
-msgid "Security related package downgrades only"
+#: inary/cli/distupdate.py:54 inary/cli/upgrade.py:53
+msgid "Security related package upgrades only"
 msgstr "Nadogradi samo pakete vezane za sigurnost "
 
-#: inary/cli/downgrade.py:55 inary/cli/upgrade.py:55
-msgid "Do not update repositories"
-msgstr "Ne dopunjuj repozitorije"
-
-#: inary/cli/downgrade.py:57 inary/cli/emerge.py:48 inary/cli/emergeup.py:49
-#: inary/cli/install.py:52 inary/cli/upgrade.py:57
-msgid "Ignore file conflicts"
-msgstr "Zanemari sukobe datoteka"
-
-#: inary/cli/downgrade.py:59 inary/cli/emerge.py:50 inary/cli/emergeup.py:51
-#: inary/cli/install.py:54 inary/cli/upgrade.py:59
-msgid "Ignore package conflicts"
-msgstr "Zanemari sukobe pakete"
-
-#: inary/cli/downgrade.py:61
-#, fuzzy
-msgid "Downgrade component's and recursive components' packages"
-msgstr "Nadogradnja komponente i rekurzivne pakete komponente "
-
-#: inary/cli/downgrade.py:63
-#, fuzzy
-msgid "Name of the to be downgraded packages' repository"
-msgstr "Ime nadograđenog repozitorija paketa"
-
-#: inary/cli/downgrade.py:65
-msgid "Fetch downgrades but do not install."
+#: inary/cli/distupdate.py:56 inary/cli/upgrade.py:67
+msgid "When upgrading system, ignore packages and components whose basenames match pattern."
 msgstr ""
 
-#: inary/cli/downgrade.py:67
-msgid "When downgrading system, ignore packages and components whose basenames match pattern."
+#: inary/cli/distupdate.py:59 inary/cli/upgrade.py:70
+msgid "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
 msgstr ""
 
-#: inary/cli/downgrade.py:70
-msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
-msgstr ""
-
-#: inary/cli/downgrade.py:74 inary/cli/upgrade.py:74
+#: inary/cli/distupdate.py:63 inary/cli/upgrade.py:74
 #, fuzzy
 msgid "compare sha1sum repo and installed packages"
 msgstr "Ponovno instaliraj već instalirane pakete"
-
-#: inary/cli/downgrade.py:86 inary/cli/upgrade.py:86
-msgid "Updating repositories"
-msgstr "Dopunjujem repozitorije"
-
-#: inary/cli/downgrade.py:90 inary/cli/upgrade.py:90
-msgid "Will not update repositories"
-msgstr "Neće dopuniti repozitorije"
 
 #: inary/cli/emerge.py:25
 msgid ""
@@ -1319,6 +1273,16 @@ msgstr ""
 #: inary/cli/emerge.py:46 inary/cli/emergeup.py:47
 msgid "Emerge available packages under given component"
 msgstr ""
+
+#: inary/cli/emerge.py:48 inary/cli/emergeup.py:49 inary/cli/install.py:52
+#: inary/cli/upgrade.py:57
+msgid "Ignore file conflicts"
+msgstr "Zanemari sukobe datoteka"
+
+#: inary/cli/emerge.py:50 inary/cli/emergeup.py:51 inary/cli/install.py:54
+#: inary/cli/upgrade.py:59
+msgid "Ignore package conflicts"
+msgstr "Zanemari sukobe pakete"
 
 #: inary/cli/emerge.py:70 inary/cli/emergeup.py:74
 #, fuzzy
@@ -2150,9 +2114,9 @@ msgstr ""
 msgid "upgrade options"
 msgstr "opcije nadogradnje"
 
-#: inary/cli/upgrade.py:53
-msgid "Security related package upgrades only"
-msgstr "Nadogradi samo pakete vezane za sigurnost "
+#: inary/cli/upgrade.py:55
+msgid "Do not update repositories"
+msgstr "Ne dopunjuj repozitorije"
 
 #: inary/cli/upgrade.py:61
 msgid "Upgrade component's and recursive components' packages"
@@ -2162,13 +2126,13 @@ msgstr "Nadogradnja komponente i rekurzivne pakete komponente "
 msgid "Name of the to be upgraded packages' repository"
 msgstr "Ime nadograđenog repozitorija paketa"
 
-#: inary/cli/upgrade.py:67
-msgid "When upgrading system, ignore packages and components whose basenames match pattern."
-msgstr ""
+#: inary/cli/upgrade.py:86
+msgid "Updating repositories"
+msgstr "Dopunjujem repozitorije"
 
-#: inary/cli/upgrade.py:70
-msgid "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
-msgstr ""
+#: inary/cli/upgrade.py:90
+msgid "Will not update repositories"
+msgstr "Neće dopuniti repozitorije"
 
 #: inary/config.py:83
 #, fuzzy
@@ -2628,181 +2592,181 @@ msgstr ""
 msgid "Rebuilding for {}"
 msgstr ""
 
-#: inary/operations/build.py:504
+#: inary/operations/build.py:503
 msgid "Cannot find component.xml in remote directory, Source is now part of unknown component"
 msgstr ""
 
-#: inary/operations/build.py:512
+#: inary/operations/build.py:511
 msgid "Cannot find component.xml in upper directory, Source is now part of unknown component"
 msgstr ""
 
-#: inary/operations/build.py:526
+#: inary/operations/build.py:525
 msgid "Unpacking archive(s)..."
 msgstr "Raspakiravanje arhive(a)..."
 
-#: inary/operations/build.py:534
+#: inary/operations/build.py:533
 #, fuzzy
 msgid " unpacked ({})"
 msgstr "raspakiran {}"
 
-#: inary/operations/build.py:539
+#: inary/operations/build.py:538
 msgid "Setting up source..."
 msgstr ""
 
-#: inary/operations/build.py:544
+#: inary/operations/build.py:543
 msgid "Building source..."
 msgstr ""
 
-#: inary/operations/build.py:549
+#: inary/operations/build.py:548
 msgid "Testing package..."
 msgstr "Testiram paket..."
 
-#: inary/operations/build.py:553
+#: inary/operations/build.py:552
 msgid "Installing..."
 msgstr "Instaliram..."
 
-#: inary/operations/build.py:632
+#: inary/operations/build.py:631
 #, fuzzy, python-brace-format
 msgid "Unable to read Actions Script ({0}): {1}"
 msgstr "Nije moguće pročitati SCOM skriptu {0}: {1}"
 
-#: inary/operations/build.py:635
+#: inary/operations/build.py:634
 #, python-brace-format
 msgid "SyntaxError in Actions Script ({0}): {1}"
 msgstr ""
 
-#: inary/operations/build.py:664
+#: inary/operations/build.py:663
 #, fuzzy, python-brace-format
 msgid "Unable to read SCOM script ({0}): {1}"
 msgstr "Nije moguće pročitati SCOM skriptu {0}: {1}"
 
-#: inary/operations/build.py:667
+#: inary/operations/build.py:666
 #, python-brace-format
 msgid "SyntaxError in SCOM file ({0}): {1}"
 msgstr ""
 
-#: inary/operations/build.py:701
+#: inary/operations/build.py:700
 #, python-brace-format
 msgid "Sandbox violation: {0} ({1} -> {2})"
 msgstr "Sandbox violation: {0} ({1} -> {2})"
 
-#: inary/operations/build.py:717 inary/util.py:525
+#: inary/operations/build.py:716 inary/util.py:525
 #, fuzzy
 msgid "ERROR: WorkDir ({}) does not exist\n"
 msgstr "repozitorij {} ne postoji."
 
-#: inary/operations/build.py:727
+#: inary/operations/build.py:726
 msgid "Sandbox enabled build..."
 msgstr ""
 
-#: inary/operations/build.py:751
+#: inary/operations/build.py:750
 msgid "Sandbox violation result:"
 msgstr ""
 
-#: inary/operations/build.py:756
+#: inary/operations/build.py:755
 msgid "Sandbox violations!"
 msgstr ""
 
-#: inary/operations/build.py:762
+#: inary/operations/build.py:761
 msgid "unable to call function from actions: {}"
 msgstr ""
 
-#: inary/operations/build.py:775
+#: inary/operations/build.py:774
 #, python-brace-format
 msgid "Source package '{0}' defines a relative 'Path' element: {1}"
 msgstr ""
 
-#: inary/operations/build.py:779
+#: inary/operations/build.py:778
 #, python-brace-format
 msgid "Source package '{0}' defines multiple 'Path' tags for {1}"
 msgstr ""
 
-#: inary/operations/build.py:807
+#: inary/operations/build.py:806
 msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 
-#: inary/operations/build.py:812
+#: inary/operations/build.py:811
 msgid "Safety switch: the component system.devel cannot be found"
 msgstr ""
 
-#: inary/operations/build.py:821
+#: inary/operations/build.py:820
 msgid "Unsatisfied Build Dependencies:"
 msgstr ""
 
-#: inary/operations/build.py:825
+#: inary/operations/build.py:824
 msgid "Cannot build package due to unsatisfied build dependencies"
 msgstr ""
 
-#: inary/operations/build.py:830
+#: inary/operations/build.py:829
 #, fuzzy
 msgid "Build dependency {} cannot be satisfied"
 msgstr "Zavisnost {} od {} ne može biti zadovoljena"
 
-#: inary/operations/build.py:832
+#: inary/operations/build.py:831
 msgid "Do you want to install the unsatisfied build dependencies"
 msgstr ""
 
-#: inary/operations/build.py:833
+#: inary/operations/build.py:832
 msgid "Installing build dependencies."
 msgstr ""
 
-#: inary/operations/build.py:839
+#: inary/operations/build.py:838
 msgid "Ignoring build dependencies."
 msgstr ""
 
-#: inary/operations/build.py:849
+#: inary/operations/build.py:848
 msgid "Patch file is missing: {}\n"
 msgstr ""
 
-#: inary/operations/build.py:851
+#: inary/operations/build.py:850
 msgid "Patch file is empty: {}"
 msgstr ""
 
-#: inary/operations/build.py:867
+#: inary/operations/build.py:866
 msgid "Applying patch: {}"
 msgstr ""
 
-#: inary/operations/build.py:988
+#: inary/operations/build.py:987
 msgid "/{} has suid bit set"
 msgstr ""
 
-#: inary/operations/build.py:1080
+#: inary/operations/build.py:1079
 msgid "There are abandoned files under the install dir ({}):"
 msgstr ""
 
-#: inary/operations/build.py:1116
+#: inary/operations/build.py:1115
 #, fuzzy
 msgid "Ignoring empty package {}"
 msgstr "Zanemari sukobe pakete"
 
-#: inary/operations/build.py:1119
+#: inary/operations/build.py:1118
 #, fuzzy
 msgid "Building package: {}"
 msgstr "Uklanjam paket {}"
 
-#: inary/operations/build.py:1136 inary/operations/delta.py:56
+#: inary/operations/build.py:1135 inary/operations/delta.py:56
 #, fuzzy
 msgid "Creating {}..."
 msgstr "Stvaram  {}..."
 
-#: inary/operations/build.py:1185
+#: inary/operations/build.py:1184
 msgid "Cleaning build directory..."
 msgstr ""
 
-#: inary/operations/build.py:1188
+#: inary/operations/build.py:1187
 msgid "Keeping build directory"
 msgstr ""
 
-#: inary/operations/build.py:1278
+#: inary/operations/build.py:1277
 msgid "Action script error caught."
 msgstr ""
 
-#: inary/operations/build.py:1282
+#: inary/operations/build.py:1281
 #, python-format
 msgid "*** %d error(s), %d warning(s)"
 msgstr ""
 
-#: inary/operations/build.py:1365
+#: inary/operations/build.py:1364
 msgid "Last state was '{}'"
 msgstr ""
 
@@ -2823,97 +2787,90 @@ msgstr ""
 msgid "New package '{}' exists in the list of old packages. Skipping it..."
 msgstr ""
 
-#: inary/operations/downgrade.py:52 inary/operations/upgrade.py:52
-msgid "You must restart the following service(s) manually for the updated software to take effect:"
-msgstr "Morate ponovno pokrenuti sljedeće uslugu(e) ručno za dopunjeni  software stupi na snagu:"
-
-#: inary/operations/downgrade.py:59 inary/operations/upgrade.py:59
-msgid "You must restart your system for the updates in the following package(s) to take effect:"
+#: inary/operations/distupdate.py:51
+msgid "* Getting index from {}"
 msgstr ""
 
-#: inary/operations/downgrade.py:84 inary/operations/upgrade.py:84
-msgid "Warning: package *name* ends with '.inary'"
-msgstr "Upozorenje: *ime* paketa završava sa '.inary'"
-
-#: inary/operations/downgrade.py:87 inary/operations/upgrade.py:87
-#, fuzzy
-msgid "Package {} is not installed."
-msgstr "Paket {} nije instaliran."
-
-#: inary/operations/downgrade.py:91 inary/operations/upgrade.py:91
-#, fuzzy
-msgid "Package {} is not available in repositories."
-msgstr "Paket {} nije dostupan u repozitorijima."
-
-#: inary/operations/downgrade.py:114
-#, fuzzy, python-brace-format
-msgid "Package {0.name} is already at the first release {0.release}."
-msgstr "Paket {0.name} je već najnovije izdanje {0.release}."
-
-#: inary/operations/downgrade.py:117 inary/operations/upgrade.py:118
-#, fuzzy
-msgid "The following packages have different sha1sum:"
-msgstr "Slijedeći paketi će biti nadograđeni:"
-
-#: inary/operations/downgrade.py:158
-#, fuzzy
-msgid "No packages to downgrade."
-msgstr "Nema paketa za nadogradnju"
-
-#: inary/operations/downgrade.py:175
-#, fuzzy
-msgid "The following packages will be downgraded:"
-msgstr "Slijedeći paketi će biti nadograđeni:"
-
-#: inary/operations/downgrade.py:180 inary/operations/install.py:76
-#: inary/operations/upgrade.py:181
-#, python-format
-msgid "Total size of package(s): %.2f %s"
-msgstr "Ukupna veličina paketa:  %.2f %s"
-
-#: inary/operations/downgrade.py:186 inary/operations/upgrade.py:187
-msgid "There are extra packages due to dependencies."
-msgstr "Ima dodatnih paketa zbog zavisnosti"
-
-#: inary/operations/downgrade.py:193 inary/operations/history.py:150
-#: inary/operations/history.py:164 inary/operations/install.py:214
-#: inary/operations/remove.py:73 inary/operations/upgrade.py:194
-msgid "Do you want to continue?"
-msgstr "Želite li nastaviti?"
-
-#: inary/operations/downgrade.py:204 inary/operations/history.py:156
-#: inary/operations/install.py:97 inary/operations/upgrade.py:205
-#, python-format
-msgid "Downloading %d / %d"
-msgstr "Preuzimam %d / %d"
-
-#: inary/operations/downgrade.py:218 inary/operations/install.py:116
-#: inary/operations/upgrade.py:219
-#, python-format
-msgid "Installing %d / %d"
-msgstr "Instaliram  %d / %d"
-
-#: inary/operations/downgrade.py:266 inary/operations/upgrade.py:267
-#, fuzzy, python-brace-format
-msgid "Dependency {0} of {1} cannot be satisfied"
-msgstr "Zavisnost {0} od {1} ne može biti zadovoljena"
-
-#: inary/operations/downgrade.py:267
-#, fuzzy
-msgid "Downgrade is not possible."
-msgstr "Nadogradnja nije moguća."
-
-#: inary/operations/downgrade.py:361 inary/operations/upgrade.py:362
-msgid "Safety switch forces the installation of following packages:"
+#: inary/operations/distupdate.py:69
+msgid "    done"
 msgstr ""
 
-#: inary/operations/downgrade.py:379
-msgid "Safety switch forces the downgrade of following packages:"
+#: inary/operations/distupdate.py:73
+msgid "* Converting package objects to db object"
 msgstr ""
 
-#: inary/operations/downgrade.py:391 inary/operations/remove.py:49
-#: inary/operations/upgrade.py:392
-msgid "Safety switch: The component system.base cannot be found."
+#: inary/operations/distupdate.py:83
+msgid "* Parsing package properties in new repo"
+msgstr ""
+
+#: inary/operations/distupdate.py:110
+#, python-brace-format
+msgid "    found {0} packages and {1} obsoletelist"
+msgstr ""
+
+#: inary/operations/distupdate.py:116
+#, fuzzy
+msgid "* Getting installed packages"
+msgstr "Provjeravam sve instalirane pakete"
+
+#: inary/operations/distupdate.py:121 inary/operations/distupdate.py:129
+#, fuzzy
+msgid "    found {} packages"
+msgstr "Konfiguriram{} paket"
+
+#: inary/operations/distupdate.py:125
+#, fuzzy
+msgid "* Getting force install packages"
+msgstr "Provjeravam sve instalirane pakete"
+
+#: inary/operations/distupdate.py:133
+#, fuzzy
+msgid "* Calculating disk space installed packages are using"
+msgstr "Provjeravam sve instalirane pakete"
+
+#: inary/operations/distupdate.py:143
+msgid "    total size = {}"
+msgstr ""
+
+#: inary/operations/distupdate.py:147
+msgid "* Calculating package size and installed size of new packages"
+msgstr ""
+
+#: inary/operations/distupdate.py:158
+msgid "    total download size = {}"
+msgstr ""
+
+#: inary/operations/distupdate.py:159
+msgid "    total install size  = {}"
+msgstr ""
+
+#: inary/operations/distupdate.py:162
+msgid "* Calculating needed space for distupate"
+msgstr ""
+
+#: inary/operations/distupdate.py:170
+msgid "    total needed space = {}"
+msgstr ""
+
+#: inary/operations/distupdate.py:173
+msgid "* Calculating package differences of old and new repos"
+msgstr ""
+
+#: inary/operations/distupdate.py:199
+msgid "    found {} obsoleted and replaced packages"
+msgstr ""
+
+#: inary/operations/distupdate.py:203
+#, fuzzy
+msgid "* Find dependencies for packages to be installed"
+msgstr "Slijedeći paketi će biti instalirani:"
+
+#: inary/operations/distupdate.py:249
+msgid "* Planning the whole distupdate process"
+msgstr ""
+
+#: inary/operations/distupdate.py:284
+msgid "* Find missing packages for distupdate "
 msgstr ""
 
 #: inary/operations/emerge.py:35
@@ -2986,6 +2943,18 @@ msgstr "Slijedeći paketi će biti instalirani:\n"
 msgid "Following packages will be removed:\n"
 msgstr "Slijedeći paketi će biti uklonjeni:\n"
 
+#: inary/operations/history.py:150 inary/operations/history.py:164
+#: inary/operations/install.py:214 inary/operations/remove.py:73
+#: inary/operations/upgrade.py:194
+msgid "Do you want to continue?"
+msgstr "Želite li nastaviti?"
+
+#: inary/operations/history.py:156 inary/operations/install.py:97
+#: inary/operations/upgrade.py:205
+#, python-format
+msgid "Downloading %d / %d"
+msgstr "Preuzimam %d / %d"
+
 #: inary/operations/history.py:162
 msgid ""
 "\n"
@@ -3003,6 +2972,16 @@ msgstr "Nema paketa za instalaciju."
 #: inary/operations/install.py:71
 msgid "Following packages will be installed:"
 msgstr "Slijedeći paketi će biti instalirani:"
+
+#: inary/operations/install.py:76 inary/operations/upgrade.py:181
+#, python-format
+msgid "Total size of package(s): %.2f %s"
+msgstr "Ukupna veličina paketa:  %.2f %s"
+
+#: inary/operations/install.py:116 inary/operations/upgrade.py:219
+#, python-format
+msgid "Installing %d / %d"
+msgstr "Instaliram  %d / %d"
 
 #: inary/operations/install.py:136
 msgid "Mixing file names and package names not supported yet."
@@ -3037,6 +3016,10 @@ msgstr "Redoslijed instaliranja:"
 
 #: inary/operations/remove.py:44
 msgid "Safety switch prevents the removal of following packages:\n"
+msgstr ""
+
+#: inary/operations/remove.py:49 inary/operations/upgrade.py:392
+msgid "Safety switch: The component system.base cannot be found."
 msgstr ""
 
 #: inary/operations/remove.py:56
@@ -3075,18 +3058,58 @@ msgstr ""
 msgid "Replaced package remains"
 msgstr "Zamijenjeni paket ostaje"
 
+#: inary/operations/upgrade.py:52
+msgid "You must restart the following service(s) manually for the updated software to take effect:"
+msgstr "Morate ponovno pokrenuti sljedeće uslugu(e) ručno za dopunjeni  software stupi na snagu:"
+
+#: inary/operations/upgrade.py:59
+msgid "You must restart your system for the updates in the following package(s) to take effect:"
+msgstr ""
+
+#: inary/operations/upgrade.py:84
+msgid "Warning: package *name* ends with '.inary'"
+msgstr "Upozorenje: *ime* paketa završava sa '.inary'"
+
+#: inary/operations/upgrade.py:87
+#, fuzzy
+msgid "Package {} is not installed."
+msgstr "Paket {} nije instaliran."
+
+#: inary/operations/upgrade.py:91
+#, fuzzy
+msgid "Package {} is not available in repositories."
+msgstr "Paket {} nije dostupan u repozitorijima."
+
 #: inary/operations/upgrade.py:114
 #, fuzzy, python-brace-format
 msgid "Package {0.name} is already at the latest release {0.release}."
 msgstr "Paket {0.name} je već najnovije izdanje {0.release}."
 
+#: inary/operations/upgrade.py:118
+#, fuzzy
+msgid "The following packages have different sha1sum:"
+msgstr "Slijedeći paketi će biti nadograđeni:"
+
 #: inary/operations/upgrade.py:176
 msgid "The following packages will be upgraded:"
 msgstr "Slijedeći paketi će biti nadograđeni:"
 
+#: inary/operations/upgrade.py:187
+msgid "There are extra packages due to dependencies."
+msgstr "Ima dodatnih paketa zbog zavisnosti"
+
+#: inary/operations/upgrade.py:267
+#, fuzzy, python-brace-format
+msgid "Dependency {0} of {1} cannot be satisfied"
+msgstr "Zavisnost {0} od {1} ne može biti zadovoljena"
+
 #: inary/operations/upgrade.py:268
 msgid "Upgrade is not possible."
 msgstr "Nadogradnja nije moguća."
+
+#: inary/operations/upgrade.py:362
+msgid "Safety switch forces the installation of following packages:"
+msgstr ""
 
 #: inary/operations/upgrade.py:380
 msgid "Safety switch forces the upgrade of following packages:"
@@ -3122,95 +3145,134 @@ msgstr "{0} paket nađen u {1} repozitoriju"
 msgid "{} package already fetched"
 msgstr "{} paket je već dohvaćen"
 
-#: inary/reactor.py:443
+#: inary/reactor.py:348
+msgid "*** Conclusion ***"
+msgstr ""
+
+#: inary/reactor.py:351
+msgid "  found packages preventing distupdate"
+msgstr ""
+
+#: inary/reactor.py:354
+msgid "  distupdate is good to go"
+msgstr ""
+
+#: inary/reactor.py:356
+#, fuzzy
+msgid "  installed size {}"
+msgstr "Instaliran {}"
+
+#: inary/reactor.py:357
+msgid "  installed size after update {}"
+msgstr ""
+
+#: inary/reactor.py:358
+msgid "  download size {}"
+msgstr ""
+
+#: inary/reactor.py:359
+#, fuzzy
+msgid "  biggest package size {}"
+msgstr ", Veličina paketa: {}"
+
+#: inary/reactor.py:360
+msgid "  total space needed for distupdate {}"
+msgstr ""
+
+#: inary/reactor.py:362
+#, fuzzy
+msgid "Do you want make dist-update?"
+msgstr "Želite li nastaviti?"
+
+#: inary/reactor.py:455
 #, fuzzy
 msgid "Cleaning package cache {}..."
 msgstr "Testiram paket..."
 
-#: inary/reactor.py:445
+#: inary/reactor.py:457
 msgid "Cleaning source archive cache {}..."
 msgstr ""
 
-#: inary/reactor.py:447
+#: inary/reactor.py:459
 #, fuzzy
 msgid "Cleaning temporary directory {}..."
 msgstr "Čistim privremeni direktorij {}..."
 
-#: inary/reactor.py:451
+#: inary/reactor.py:463
 msgid "Removing cache file {}..."
 msgstr ""
 
-#: inary/reactor.py:482
+#: inary/reactor.py:494
 msgid "Taking snapshot of the system"
 msgstr "Pravim snimak sustava"
 
-#: inary/reactor.py:643
+#: inary/reactor.py:655
 #, fuzzy
 msgid "scom package is not fully installed"
 msgstr "scom paket nije u potpunosti instaliran"
 
-#: inary/reactor.py:655
+#: inary/reactor.py:667
 #, fuzzy
 msgid "File {} not found"
 msgstr "Datoteka {} nije nađena"
 
-#: inary/reactor.py:697
+#: inary/reactor.py:709
 #, fuzzy
 msgid "Building index of Inary files under {}"
 msgstr "Izgradnja indeksa INARY datoteka pod {}"
 
-#: inary/reactor.py:702
+#: inary/reactor.py:714
 msgid "Index file written"
 msgstr "Napisana je index datoteka"
 
-#: inary/reactor.py:708
+#: inary/reactor.py:720
 msgid "Not a valid repo name."
 msgstr "Nema valjanog imena repozitorija"
 
-#: inary/reactor.py:711
+#: inary/reactor.py:723
 #, fuzzy
 msgid "Repo {} already present."
 msgstr "Repozitorij {} je već prisutan."
 
-#: inary/reactor.py:714
+#: inary/reactor.py:726
 #, fuzzy
 msgid "Repo already present with name {}."
 msgstr "Repozitorij je već prisutan po imenu {}."
 
-#: inary/reactor.py:719
+#: inary/reactor.py:731
 #, fuzzy
 msgid "Repo {} added to system."
 msgstr "Repozitorij {} dodan vašen sustavu."
 
-#: inary/reactor.py:727
+#: inary/reactor.py:739
 #, fuzzy
 msgid "Repo {} removed from system."
 msgstr "Repozitorij {} je uklonjen iz sustava."
 
-#: inary/reactor.py:729
+#: inary/reactor.py:741
 #, fuzzy
 msgid "Repository {} does not exist. Cannot remove."
 msgstr "Repozitorij {} ne postoji.Ne mogu ukloniti."
 
-#: inary/reactor.py:750
+#: inary/reactor.py:762
 #, fuzzy
 msgid "Updating repository: {}"
 msgstr "Dopunjujem repozitorij: {}"
 
-#: inary/reactor.py:759
+#: inary/reactor.py:771
 #, fuzzy
 msgid "{} repository information is up-to-date."
 msgstr "{} informacije repozitorija su dopunjene."
 
-#: inary/reactor.py:761
+#: inary/reactor.py:773
 msgid "Updating database at any rate as requested"
 msgstr "Dopuna baze podataka u svakom slučaju kako je zahtjevano"
 
-#: inary/reactor.py:774
+#: inary/reactor.py:786
 msgid "Package database updated."
 msgstr "Baza podataka paketa je dopunjena."
 
-#: inary/reactor.py:776
+#: inary/reactor.py:788
 #, fuzzy
 msgid "No repository named {} found."
 msgstr "NIjedan reopzitori zvan {} nije nađen."
@@ -3593,7 +3655,7 @@ msgstr ""
 msgid "Vietnamese"
 msgstr ""
 
-#: inary/system_literals/sysutils.py:117
+#: inary/system_literals/sysutils.py:116
 msgid "Module: \"subprocess\" can not import"
 msgstr ""
 
@@ -3687,28 +3749,89 @@ msgstr "Neispravano ime delta paketa: {}"
 msgid "Invalid version string: '{}'"
 msgstr ""
 
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Nije moguće čitati datoteku  {}: {}"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "Date: {} {}"
-#~ msgstr "Datum: {} {}"
-
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Ne uklanjanje sporne datoteke: {}"
-
-#~ msgid "INARY package"
-#~ msgstr "INARY paket"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} opcija zahtijeva argument"
+#, fuzzy
+#~ msgid "Cleaning files database folder...  "
+#~ msgstr "Obnovi bazu podataka datoteka"
 
 #, fuzzy
 #~ msgid "Name: {}, version: {}, release: {}\n"
 #~ msgstr "Ime:{}, verzija{}, izdanje:%s\n"
 
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} opcija zahtijeva argument"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY paket"
+
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Ne uklanjanje sporne datoteke: {}"
+
+#~ msgid "Date: {} {}"
+#~ msgstr "Datum: {} {}"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Nije moguće čitati datoteku  {}: {}"
+
 #, fuzzy
-#~ msgid "Cleaning files database folder...  "
-#~ msgstr "Obnovi bazu podataka datoteka"
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Nadogradnja nije moguća."
+
+#, fuzzy
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "Slijedeći paketi će biti nadograđeni:"
+
+#, fuzzy
+#~ msgid "No packages to downgrade."
+#~ msgstr "Nema paketa za nadogradnju"
+
+#, fuzzy
+#~ msgid "Package {0.name} is already at the first release {0.release}."
+#~ msgstr "Paket {0.name} je već najnovije izdanje {0.release}."
+
+#, fuzzy
+#~ msgid "Name of the to be downgraded packages' repository"
+#~ msgstr "Ime nadograđenog repozitorija paketa"
+
+#, fuzzy
+#~ msgid "Downgrade component's and recursive components' packages"
+#~ msgstr "Nadogradnja komponente i rekurzivne pakete komponente "
+
+#, fuzzy
+#~ msgid "Security related package downgrades only"
+#~ msgstr "Nadogradi samo pakete vezane za sigurnost "
+
+#, fuzzy
+#~ msgid "downgrade options"
+#~ msgstr "opcije nadogradnje"
+
+#, fuzzy
+#~ msgid ""
+#~ "Downgrade INARY packages\n"
+#~ "\n"
+#~ "Usage: Downgrade [<package1> <package2> ... <packagen>]\n"
+#~ "\n"
+#~ "<packagei>: package name\n"
+#~ "\n"
+#~ "Downgrades the entire system if no package names are given\n"
+#~ "\n"
+#~ "You may use only package names to specify packages because\n"
+#~ "the package downgrade operation is defined only with respect\n"
+#~ "to repositories. If you have specified a package name, it\n"
+#~ "should exist in the package repositories. If you just want to\n"
+#~ "reinstall a package from a INARY file, use the install command.\n"
+#~ "\n"
+#~ "You can also specify components instead of package names, which will be\n"
+#~ "expanded to package names.\n"
+#~ msgstr ""
+#~ "Instaliraj INARY pakete\n"
+#~ "\n"
+#~ "Uporaba: instaliraj <paket1> <paket2> ... <paketn>\n"
+#~ "\n"
+#~ "Možete koristiti imena datoteka, URI-je ili imena paketa za pakete. Ako ste\n"
+#~ "odredili ime paketa,tada trewba postojati u određenom repozitoriju.\n"
+#~ "\n"
+#~ "Također možete odrediti komponente umjesto imena paketa, koje će biti\n"
+#~ "proširene na imena paketa.\n"

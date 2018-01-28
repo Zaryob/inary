@@ -332,16 +332,6 @@ def fetch(packages=[], path=os.path.curdir):
         fetcher.fetch_url(url, path, ctx.ui.Progress)
 
 @locked
-def downgrade(packages=[], repo=None):
-    """
-    Downgrades the given packages, if no package given downgrades all the packages
-    @param packages: list of package names -> list_of_strings
-    @param repo: name of the repository that only the packages from that repo going to be downgraded
-    """
-    inary.db.historydb.HistoryDB().create_history("downgrade")
-    return inary.operations.downgrade.downgrade(packages, repo)
-
-@locked
 def upgrade(packages=[], repo=None):
     """
     Upgrades the given packages, if no package given upgrades all the packages
@@ -350,6 +340,28 @@ def upgrade(packages=[], repo=None):
     """
     inary.db.historydb.HistoryDB().create_history("upgrade")
     return inary.operations.upgrade.upgrade(packages, repo)
+
+def distupdate(targetrepo):
+    weddingplanner = inary.operations.distupdate.DistupdatePlanner(nextRepoUri=targetrepo, Debug=True)
+    weddingplanner.plan()
+
+    ctx.ui.info(inary.util.colorize(_("*** Conclusion ***"),"red"))
+
+    if len(weddingplanner.missingPackages):
+        ctx.ui.info(_("  found packages preventing distupdate"))
+        ctx.ui.info(weddingplanner.missingPackages)
+    else:
+        ctx.ui.info(_("  distupdate is good to go"))
+
+    ctx.ui.info(_("  installed size {}").format(weddingplanner.sizeOfInstalledPackages))
+    ctx.ui.info(_("  installed size after update {}").format(weddingplanner.sizeOfInstalledPackagesAfterUpdate))
+    ctx.ui.info(_("  download size {}").format(weddingplanner.sizeOfPackagesToDownload))
+    ctx.ui.info(_("  biggest package size {}").format(weddingplanner.sizeOfBiggestPackage))
+    ctx.ui.info(_("  total space needed for distupdate {}").format(weddingplanner.sizeOfNeededTotalSpace))
+
+    if ctx.ui.confirm(str(_('Do you want make dist-update?'))):
+        inary.operations.distupdate.MakeDistUpdate()
+
 
 @locked
 def remove(packages, ignore_dependency=False, ignore_safety=False):

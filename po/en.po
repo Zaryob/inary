@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: INARYLinux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-27 23:19+0300\n"
+"POT-Creation-Date: 2018-01-28 22:52+0300\n"
 "PO-Revision-Date: 2013-01-04 21:08+0000\n"
 "Last-Translator: circass <erdincgultekin@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -155,31 +155,31 @@ msgstr "No configure script found."
 msgid "Make failed."
 msgstr "Make failed."
 
-#: inary/actionsapi/autotools.py:139 inary/actionsapi/autotools.py:150
-#: inary/actionsapi/cmaketools.py:98 inary/actionsapi/cmaketools.py:106
+#: inary/actionsapi/autotools.py:137 inary/actionsapi/autotools.py:148
+#: inary/actionsapi/cmaketools.py:96 inary/actionsapi/cmaketools.py:104
 #: inary/actionsapi/kde.py:79 inary/actionsapi/pythonmodules.py:67
 #: inary/actionsapi/rubymodules.py:92 inary/actionsapi/rubymodules.py:99
 #: inary/actionsapi/scons.py:43
 msgid "Install failed."
 msgstr "Install failed."
 
-#: inary/actionsapi/autotools.py:161
+#: inary/actionsapi/autotools.py:159
 msgid "Running aclocal failed."
 msgstr "Running aclocal failed."
 
-#: inary/actionsapi/autotools.py:166
+#: inary/actionsapi/autotools.py:164
 msgid "Running autoconf failed."
 msgstr "Running autoconf failed."
 
-#: inary/actionsapi/autotools.py:171
+#: inary/actionsapi/autotools.py:169
 msgid "Running autoreconf failed."
 msgstr "Running autoreconf failed."
 
-#: inary/actionsapi/autotools.py:176
+#: inary/actionsapi/autotools.py:174
 msgid "Running automake failed."
 msgstr "Running automake failed."
 
-#: inary/actionsapi/autotools.py:181
+#: inary/actionsapi/autotools.py:179
 msgid "Running autoheader failed."
 msgstr "Running autoheader failed."
 
@@ -187,7 +187,7 @@ msgstr "Running autoheader failed."
 msgid "No configure script found for cmake."
 msgstr "No configure script found for cmake."
 
-#: inary/actionsapi/cmaketools.py:110 inary/actionsapi/kde.py:81
+#: inary/actionsapi/cmaketools.py:108 inary/actionsapi/kde.py:81
 msgid "No Makefile found."
 msgstr "No Makefile found."
 
@@ -399,8 +399,8 @@ msgid "ActionsAPI [chmod]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [chmod]: No file matched pattern \"{}\"."
 
 #: inary/actionsapi/shelltools.py:70
-#, fuzzy, python-format
-msgid "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
+#, fuzzy, python-brace-format
+msgid "ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})"
 msgstr "ActionsAPI [chmod]: Operation not permitted: %s (mode: 0%o)"
 
 #: inary/actionsapi/shelltools.py:72
@@ -663,7 +663,7 @@ msgstr "Package {} not found in any active repository."
 msgid "Installing {0.name}, version {0.version}, release {0.release}"
 msgstr "Installing {0.name}, version {0.version}, release {0.release}"
 
-#: inary/atomicoperations.py:192 inary/operations/build.py:789
+#: inary/atomicoperations.py:192 inary/operations/build.py:788
 #, fuzzy, python-brace-format
 msgid "{0}-{1} is not a valid INARY version format"
 msgstr "{0}-{1} is not a valid INARY version format"
@@ -1265,104 +1265,48 @@ msgstr ""
 "\n"
 "Disabled repositories are not taken into account in operations\n"
 
-#: inary/cli/downgrade.py:25
-#, fuzzy
+#: inary/cli/distupdate.py:25
 msgid ""
-"Downgrade INARY packages\n"
+"Update the system a new release\n"
 "\n"
-"Usage: Downgrade [<package1> <package2> ... <packagen>]\n"
+"Usage: DistUpdate [ next_dist_release_repo_url ] [ dist-update-list ]\n"
 "\n"
-"<packagei>: package name\n"
+"                WARNING: DIST-UPDATE risk içerir.\n"
+"    Dist-Update yapmadan önce iki kez düşününüz. Çünkü\n"
+"    Dist-Update sonrası sisteminiz çalışmayabilir, tüm\n"
+"    dosyalarınızı kaybedebilirsiniz. \n"
 "\n"
-"Downgrades the entire system if no package names are given\n"
+"   Sisteminizi Dist-Update yapmadan önce yedekleyiniz ve\n"
+"   EĞER YAPMAK İSTEDİĞİNİZE GERÇEKTEN EMİNSENİZ BU İŞLEMİ\n"
+"   BAŞLATINIZ.\n"
 "\n"
-"You may use only package names to specify packages because\n"
-"the package downgrade operation is defined only with respect\n"
-"to repositories. If you have specified a package name, it\n"
-"should exist in the package repositories. If you just want to\n"
-"reinstall a package from a INARY file, use the install command.\n"
+"                OLUŞAN HİÇBİR DİSK VE SİSTEM\n"
+"                 HASARINDAN SULIN TOPLULUĞU \n"
+"                       MESUL DEĞİLDİR\n"
 "\n"
-"You can also specify components instead of package names, which will be\n"
-"expanded to package names.\n"
 msgstr ""
-"Upgrade INARY packages\n"
-"\n"
-"Usage: Upgrade [<package1> <package2> ... <packagen>]\n"
-"\n"
-"<packagei>: package name\n"
-"\n"
-"Upgrades the entire system if no package names are given\n"
-"\n"
-"You may use only package names to specify packages because\n"
-"the package upgrade operation is defined only with respect\n"
-"to repositories. If you have specified a package name, it\n"
-"should exist in the package repositories. If you just want to\n"
-"reinstall a package from a INARY file, use the install command.\n"
-"\n"
-"You can also specify components instead of package names, which will be\n"
-"expanded to package names.\n"
 
-#: inary/cli/downgrade.py:49
+#: inary/cli/distupdate.py:50
 #, fuzzy
-msgid "downgrade options"
-msgstr "upgrade options"
+msgid "dist-update options"
+msgstr "list-upgrades options"
 
-#: inary/cli/downgrade.py:53
-#, fuzzy
-msgid "Security related package downgrades only"
+#: inary/cli/distupdate.py:54 inary/cli/upgrade.py:53
+msgid "Security related package upgrades only"
 msgstr "Security related package upgrades only"
 
-#: inary/cli/downgrade.py:55 inary/cli/upgrade.py:55
-msgid "Do not update repositories"
-msgstr "Do not update repositories"
-
-#: inary/cli/downgrade.py:57 inary/cli/emerge.py:48 inary/cli/emergeup.py:49
-#: inary/cli/install.py:52 inary/cli/upgrade.py:57
-msgid "Ignore file conflicts"
-msgstr "Ignore file conflicts"
-
-#: inary/cli/downgrade.py:59 inary/cli/emerge.py:50 inary/cli/emergeup.py:51
-#: inary/cli/install.py:54 inary/cli/upgrade.py:59
-msgid "Ignore package conflicts"
-msgstr "Ignore package conflicts"
-
-#: inary/cli/downgrade.py:61
-#, fuzzy
-msgid "Downgrade component's and recursive components' packages"
-msgstr "Upgrade component's and recursive components' packages"
-
-#: inary/cli/downgrade.py:63
-#, fuzzy
-msgid "Name of the to be downgraded packages' repository"
-msgstr "Name of the to be upgraded packages' repository"
-
-#: inary/cli/downgrade.py:65
-#, fuzzy
-msgid "Fetch downgrades but do not install."
-msgstr "Fetch upgrades but do not install."
-
-#: inary/cli/downgrade.py:67
-#, fuzzy
-msgid "When downgrading system, ignore packages and components whose basenames match pattern."
+#: inary/cli/distupdate.py:56 inary/cli/upgrade.py:67
+msgid "When upgrading system, ignore packages and components whose basenames match pattern."
 msgstr "When upgrading system, ignore packages and components whose basenames match pattern."
 
-#: inary/cli/downgrade.py:70
-#, fuzzy
-msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
+#: inary/cli/distupdate.py:59 inary/cli/upgrade.py:70
+msgid "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
 msgstr "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
 
-#: inary/cli/downgrade.py:74 inary/cli/upgrade.py:74
+#: inary/cli/distupdate.py:63 inary/cli/upgrade.py:74
 #, fuzzy
 msgid "compare sha1sum repo and installed packages"
 msgstr "Reinstall already installed packages"
-
-#: inary/cli/downgrade.py:86 inary/cli/upgrade.py:86
-msgid "Updating repositories"
-msgstr "Updating repositories"
-
-#: inary/cli/downgrade.py:90 inary/cli/upgrade.py:90
-msgid "Will not update repositories"
-msgstr "Will not update repositories"
 
 #: inary/cli/emerge.py:25
 msgid ""
@@ -1391,6 +1335,16 @@ msgstr "emerge options"
 #: inary/cli/emerge.py:46 inary/cli/emergeup.py:47
 msgid "Emerge available packages under given component"
 msgstr "Emerge available packages under given component"
+
+#: inary/cli/emerge.py:48 inary/cli/emergeup.py:49 inary/cli/install.py:52
+#: inary/cli/upgrade.py:57
+msgid "Ignore file conflicts"
+msgstr "Ignore file conflicts"
+
+#: inary/cli/emerge.py:50 inary/cli/emergeup.py:51 inary/cli/install.py:54
+#: inary/cli/upgrade.py:59
+msgid "Ignore package conflicts"
+msgstr "Ignore package conflicts"
 
 #: inary/cli/emerge.py:70 inary/cli/emergeup.py:74
 #, fuzzy
@@ -2371,9 +2325,9 @@ msgstr ""
 msgid "upgrade options"
 msgstr "upgrade options"
 
-#: inary/cli/upgrade.py:53
-msgid "Security related package upgrades only"
-msgstr "Security related package upgrades only"
+#: inary/cli/upgrade.py:55
+msgid "Do not update repositories"
+msgstr "Do not update repositories"
 
 #: inary/cli/upgrade.py:61
 msgid "Upgrade component's and recursive components' packages"
@@ -2383,13 +2337,13 @@ msgstr "Upgrade component's and recursive components' packages"
 msgid "Name of the to be upgraded packages' repository"
 msgstr "Name of the to be upgraded packages' repository"
 
-#: inary/cli/upgrade.py:67
-msgid "When upgrading system, ignore packages and components whose basenames match pattern."
-msgstr "When upgrading system, ignore packages and components whose basenames match pattern."
+#: inary/cli/upgrade.py:86
+msgid "Updating repositories"
+msgstr "Updating repositories"
 
-#: inary/cli/upgrade.py:70
-msgid "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
-msgstr "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
+#: inary/cli/upgrade.py:90
+msgid "Will not update repositories"
+msgstr "Will not update repositories"
 
 #: inary/config.py:83
 #, fuzzy
@@ -2863,187 +2817,187 @@ msgstr "IceCream detected. Make sure your daemon is up and running..."
 msgid "Rebuilding for {}"
 msgstr "Rebuilding for {}"
 
-#: inary/operations/build.py:504
+#: inary/operations/build.py:503
 msgid "Cannot find component.xml in remote directory, Source is now part of unknown component"
 msgstr "Cannot find component.xml in remote directory, Source is now part of unknown component"
 
-#: inary/operations/build.py:512
+#: inary/operations/build.py:511
 msgid "Cannot find component.xml in upper directory, Source is now part of unknown component"
 msgstr "Cannot find component.xml in upper directory, Source is now part of unknown component"
 
-#: inary/operations/build.py:526
+#: inary/operations/build.py:525
 msgid "Unpacking archive(s)..."
 msgstr "Unpacking archive(s)..."
 
-#: inary/operations/build.py:534
+#: inary/operations/build.py:533
 #, fuzzy
 msgid " unpacked ({})"
 msgstr " unpacked {}"
 
-#: inary/operations/build.py:539
+#: inary/operations/build.py:538
 msgid "Setting up source..."
 msgstr "Setting up source..."
 
-#: inary/operations/build.py:544
+#: inary/operations/build.py:543
 msgid "Building source..."
 msgstr "Building source..."
 
-#: inary/operations/build.py:549
+#: inary/operations/build.py:548
 msgid "Testing package..."
 msgstr "Testing package..."
 
-#: inary/operations/build.py:553
+#: inary/operations/build.py:552
 msgid "Installing..."
 msgstr "Installing..."
 
-#: inary/operations/build.py:632
+#: inary/operations/build.py:631
 #, fuzzy, python-brace-format
 msgid "Unable to read Actions Script ({0}): {1}"
 msgstr "Unable to read Actions Script ({0}): {1}"
 
-#: inary/operations/build.py:635
+#: inary/operations/build.py:634
 #, fuzzy, python-brace-format
 msgid "SyntaxError in Actions Script ({0}): {1}"
 msgstr "SyntaxError in Actions Script ({0}): {1}"
 
-#: inary/operations/build.py:664
+#: inary/operations/build.py:663
 #, fuzzy, python-brace-format
 msgid "Unable to read SCOM script ({0}): {1}"
 msgstr "Unable to read SCOM script ({0}): {1}"
 
-#: inary/operations/build.py:667
+#: inary/operations/build.py:666
 #, fuzzy, python-brace-format
 msgid "SyntaxError in SCOM file ({0}): {1}"
 msgstr "SyntaxError in SCOM file (){0}): {1}"
 
-#: inary/operations/build.py:701
+#: inary/operations/build.py:700
 #, fuzzy, python-brace-format
 msgid "Sandbox violation: {0} ({1} -> {2})"
 msgstr "Sandbox violation: {0} ({1} -> {2})"
 
-#: inary/operations/build.py:717 inary/util.py:525
+#: inary/operations/build.py:716 inary/util.py:525
 #, fuzzy
 msgid "ERROR: WorkDir ({}) does not exist\n"
 msgstr "ERROR: WorkDir {} does not exist\n"
 
-#: inary/operations/build.py:727
+#: inary/operations/build.py:726
 msgid "Sandbox enabled build..."
 msgstr "Sandbox enabled build..."
 
-#: inary/operations/build.py:751
+#: inary/operations/build.py:750
 msgid "Sandbox violation result:"
 msgstr "Sandbox violation result:"
 
-#: inary/operations/build.py:756
+#: inary/operations/build.py:755
 msgid "Sandbox violations!"
 msgstr "Sandbox violations!"
 
-#: inary/operations/build.py:762
+#: inary/operations/build.py:761
 #, fuzzy
 msgid "unable to call function from actions: {}"
 msgstr "unable to call function from actions: {}"
 
-#: inary/operations/build.py:775
+#: inary/operations/build.py:774
 #, fuzzy, python-brace-format
 msgid "Source package '{0}' defines a relative 'Path' element: {1}"
 msgstr "Source package '{0}' defines a relative 'Path' element: {1}"
 
-#: inary/operations/build.py:779
+#: inary/operations/build.py:778
 #, fuzzy, python-brace-format
 msgid "Source package '{0}' defines multiple 'Path' tags for {1}"
 msgstr "Source package '{0}' defines multiple 'Path' tags for {1}"
 
-#: inary/operations/build.py:807
+#: inary/operations/build.py:806
 msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr "Safety switch: following extra packages in system.devel will be installed: "
 
-#: inary/operations/build.py:812
+#: inary/operations/build.py:811
 msgid "Safety switch: the component system.devel cannot be found"
 msgstr "Safety switch: the component system.devel cannot be found"
 
-#: inary/operations/build.py:821
+#: inary/operations/build.py:820
 msgid "Unsatisfied Build Dependencies:"
 msgstr "Unsatisfied Build Dependencies:"
 
-#: inary/operations/build.py:825
+#: inary/operations/build.py:824
 msgid "Cannot build package due to unsatisfied build dependencies"
 msgstr "Cannot build package due to unsatisfied build dependencies"
 
-#: inary/operations/build.py:830
+#: inary/operations/build.py:829
 #, fuzzy
 msgid "Build dependency {} cannot be satisfied"
 msgstr "Build dependency {} cannot be satisfied"
 
-#: inary/operations/build.py:832
+#: inary/operations/build.py:831
 msgid "Do you want to install the unsatisfied build dependencies"
 msgstr "Do you want to install the unsatisfied build dependencies"
 
-#: inary/operations/build.py:833
+#: inary/operations/build.py:832
 msgid "Installing build dependencies."
 msgstr "Installing build dependencies."
 
-#: inary/operations/build.py:839
+#: inary/operations/build.py:838
 msgid "Ignoring build dependencies."
 msgstr "Ignoring build dependencies."
 
-#: inary/operations/build.py:849
+#: inary/operations/build.py:848
 #, fuzzy
 msgid "Patch file is missing: {}\n"
 msgstr "Patch file is missing: {}\n"
 
-#: inary/operations/build.py:851
+#: inary/operations/build.py:850
 #, fuzzy
 msgid "Patch file is empty: {}"
 msgstr "Patch file is empty: {}"
 
-#: inary/operations/build.py:867
+#: inary/operations/build.py:866
 #, fuzzy
 msgid "Applying patch: {}"
 msgstr "Applying patch: {}"
 
-#: inary/operations/build.py:988
+#: inary/operations/build.py:987
 #, fuzzy
 msgid "/{} has suid bit set"
 msgstr "/{} has suid bit set"
 
-#: inary/operations/build.py:1080
+#: inary/operations/build.py:1079
 #, fuzzy
 msgid "There are abandoned files under the install dir ({}):"
 msgstr "There are abandoned files under the install dir {}:"
 
-#: inary/operations/build.py:1116
+#: inary/operations/build.py:1115
 #, fuzzy
 msgid "Ignoring empty package {}"
 msgstr "Ignoring empty package {}"
 
-#: inary/operations/build.py:1119
+#: inary/operations/build.py:1118
 #, fuzzy
 msgid "Building package: {}"
 msgstr "Building package: {}"
 
-#: inary/operations/build.py:1136 inary/operations/delta.py:56
+#: inary/operations/build.py:1135 inary/operations/delta.py:56
 #, fuzzy
 msgid "Creating {}..."
 msgstr "Creating {}..."
 
-#: inary/operations/build.py:1185
+#: inary/operations/build.py:1184
 msgid "Cleaning build directory..."
 msgstr "Cleaning build directory..."
 
-#: inary/operations/build.py:1188
+#: inary/operations/build.py:1187
 msgid "Keeping build directory"
 msgstr "Keeping build directory"
 
-#: inary/operations/build.py:1278
+#: inary/operations/build.py:1277
 msgid "Action script error caught."
 msgstr "Action script error caught."
 
-#: inary/operations/build.py:1282
+#: inary/operations/build.py:1281
 #, python-format
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d error(s), %d warning(s)"
 
-#: inary/operations/build.py:1365
+#: inary/operations/build.py:1364
 #, fuzzy
 msgid "Last state was '{}'"
 msgstr "Last state was {}"
@@ -3068,101 +3022,92 @@ msgstr "All files in the package {} are different from the files in the new pack
 msgid "New package '{}' exists in the list of old packages. Skipping it..."
 msgstr "New package {} exists in the list of old packages. Skipping it..."
 
-#: inary/operations/downgrade.py:52 inary/operations/upgrade.py:52
-msgid "You must restart the following service(s) manually for the updated software to take effect:"
-msgstr "You must restart the following service(s) manually for the updated software to take effect:"
-
-#: inary/operations/downgrade.py:59 inary/operations/upgrade.py:59
-msgid "You must restart your system for the updates in the following package(s) to take effect:"
-msgstr "You must restart your system for the updates in the following package(s) to take effect:"
-
-#: inary/operations/downgrade.py:84 inary/operations/upgrade.py:84
-msgid "Warning: package *name* ends with '.inary'"
-msgstr "Warning: package *name* ends with '.inary'"
-
-#: inary/operations/downgrade.py:87 inary/operations/upgrade.py:87
+#: inary/operations/distupdate.py:51
 #, fuzzy
-msgid "Package {} is not installed."
-msgstr "Package {} is not installed."
+msgid "* Getting index from {}"
+msgstr "Fetching source from: {}"
 
-#: inary/operations/downgrade.py:91 inary/operations/upgrade.py:91
-#, fuzzy
-msgid "Package {} is not available in repositories."
-msgstr "Package {} is not available in repositories."
-
-#: inary/operations/downgrade.py:114
-#, fuzzy, python-brace-format
-msgid "Package {0.name} is already at the first release {0.release}."
-msgstr "Package {} is already at the latest release {}."
-
-#: inary/operations/downgrade.py:117 inary/operations/upgrade.py:118
-#, fuzzy
-msgid "The following packages have different sha1sum:"
+#: inary/operations/distupdate.py:69
+msgid "    done"
 msgstr ""
-"The following packages have conflicts:\n"
-"{}"
 
-#: inary/operations/downgrade.py:158
+#: inary/operations/distupdate.py:73
+msgid "* Converting package objects to db object"
+msgstr ""
+
+#: inary/operations/distupdate.py:83
+msgid "* Parsing package properties in new repo"
+msgstr ""
+
+#: inary/operations/distupdate.py:110
+#, python-brace-format
+msgid "    found {0} packages and {1} obsoletelist"
+msgstr ""
+
+#: inary/operations/distupdate.py:116
 #, fuzzy
-msgid "No packages to downgrade."
-msgstr "No packages to upgrade."
+msgid "* Getting installed packages"
+msgstr "Checking all installed packages"
 
-#: inary/operations/downgrade.py:175
+#: inary/operations/distupdate.py:121 inary/operations/distupdate.py:129
 #, fuzzy
-msgid "The following packages will be downgraded:"
-msgstr "The following packages will be upgraded:"
+msgid "    found {} packages"
+msgstr "Configuring {} package"
 
-#: inary/operations/downgrade.py:180 inary/operations/install.py:76
-#: inary/operations/upgrade.py:181
-#, python-format
-msgid "Total size of package(s): %.2f %s"
-msgstr "Total size of package(s): %.2f %s"
-
-#: inary/operations/downgrade.py:186 inary/operations/upgrade.py:187
-msgid "There are extra packages due to dependencies."
-msgstr "There are extra packages due to dependencies."
-
-#: inary/operations/downgrade.py:193 inary/operations/history.py:150
-#: inary/operations/history.py:164 inary/operations/install.py:214
-#: inary/operations/remove.py:73 inary/operations/upgrade.py:194
-msgid "Do you want to continue?"
-msgstr "Do you want to continue?"
-
-#: inary/operations/downgrade.py:204 inary/operations/history.py:156
-#: inary/operations/install.py:97 inary/operations/upgrade.py:205
-#, python-format
-msgid "Downloading %d / %d"
-msgstr "Downloading %d / %d"
-
-#: inary/operations/downgrade.py:218 inary/operations/install.py:116
-#: inary/operations/upgrade.py:219
-#, python-format
-msgid "Installing %d / %d"
-msgstr "Installing %d / %d"
-
-#: inary/operations/downgrade.py:266 inary/operations/upgrade.py:267
-#, fuzzy, python-brace-format
-msgid "Dependency {0} of {1} cannot be satisfied"
-msgstr "Dependency {0} of {1} cannot be satisfied"
-
-#: inary/operations/downgrade.py:267
+#: inary/operations/distupdate.py:125
 #, fuzzy
-msgid "Downgrade is not possible."
-msgstr "Upgrade is not possible."
+msgid "* Getting force install packages"
+msgstr "Checking all installed packages"
 
-#: inary/operations/downgrade.py:361 inary/operations/upgrade.py:362
-msgid "Safety switch forces the installation of following packages:"
-msgstr "Safety switch forces the installation of following packages:"
-
-#: inary/operations/downgrade.py:379
+#: inary/operations/distupdate.py:133
 #, fuzzy
-msgid "Safety switch forces the downgrade of following packages:"
-msgstr "Safety switch forces the upgrade of following packages:"
+msgid "* Calculating disk space installed packages are using"
+msgstr "Checking all installed packages"
 
-#: inary/operations/downgrade.py:391 inary/operations/remove.py:49
-#: inary/operations/upgrade.py:392
-msgid "Safety switch: The component system.base cannot be found."
-msgstr "Safety switch: The component system.base cannot be found."
+#: inary/operations/distupdate.py:143
+msgid "    total size = {}"
+msgstr ""
+
+#: inary/operations/distupdate.py:147
+msgid "* Calculating package size and installed size of new packages"
+msgstr ""
+
+#: inary/operations/distupdate.py:158
+msgid "    total download size = {}"
+msgstr ""
+
+#: inary/operations/distupdate.py:159
+msgid "    total install size  = {}"
+msgstr ""
+
+#: inary/operations/distupdate.py:162
+msgid "* Calculating needed space for distupate"
+msgstr ""
+
+#: inary/operations/distupdate.py:170
+msgid "    total needed space = {}"
+msgstr ""
+
+#: inary/operations/distupdate.py:173
+msgid "* Calculating package differences of old and new repos"
+msgstr ""
+
+#: inary/operations/distupdate.py:199
+msgid "    found {} obsoleted and replaced packages"
+msgstr ""
+
+#: inary/operations/distupdate.py:203
+#, fuzzy
+msgid "* Find dependencies for packages to be installed"
+msgstr "Following packages will be installed:"
+
+#: inary/operations/distupdate.py:249
+msgid "* Planning the whole distupdate process"
+msgstr ""
+
+#: inary/operations/distupdate.py:284
+msgid "* Find missing packages for distupdate "
+msgstr ""
 
 #: inary/operations/emerge.py:35
 msgid "No packages to emerge."
@@ -3239,6 +3184,18 @@ msgstr "Following packages will be installed:\n"
 msgid "Following packages will be removed:\n"
 msgstr "Following packages will be removed:\n"
 
+#: inary/operations/history.py:150 inary/operations/history.py:164
+#: inary/operations/install.py:214 inary/operations/remove.py:73
+#: inary/operations/upgrade.py:194
+msgid "Do you want to continue?"
+msgstr "Do you want to continue?"
+
+#: inary/operations/history.py:156 inary/operations/install.py:97
+#: inary/operations/upgrade.py:205
+#, python-format
+msgid "Downloading %d / %d"
+msgstr "Downloading %d / %d"
+
 #: inary/operations/history.py:162
 msgid ""
 "\n"
@@ -3258,6 +3215,16 @@ msgstr "No packages to install."
 #: inary/operations/install.py:71
 msgid "Following packages will be installed:"
 msgstr "Following packages will be installed:"
+
+#: inary/operations/install.py:76 inary/operations/upgrade.py:181
+#, python-format
+msgid "Total size of package(s): %.2f %s"
+msgstr "Total size of package(s): %.2f %s"
+
+#: inary/operations/install.py:116 inary/operations/upgrade.py:219
+#, python-format
+msgid "Installing %d / %d"
+msgstr "Installing %d / %d"
 
 #: inary/operations/install.py:136
 msgid "Mixing file names and package names not supported yet."
@@ -3293,6 +3260,10 @@ msgstr "Installation order: "
 #: inary/operations/remove.py:44
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "Safety switch prevents the removal of following packages:\n"
+
+#: inary/operations/remove.py:49 inary/operations/upgrade.py:392
+msgid "Safety switch: The component system.base cannot be found."
+msgstr "Safety switch: The component system.base cannot be found."
 
 #: inary/operations/remove.py:56
 #, fuzzy
@@ -3332,18 +3303,60 @@ msgstr "Obsoleted packages remaining"
 msgid "Replaced package remains"
 msgstr "Replaced package remains"
 
+#: inary/operations/upgrade.py:52
+msgid "You must restart the following service(s) manually for the updated software to take effect:"
+msgstr "You must restart the following service(s) manually for the updated software to take effect:"
+
+#: inary/operations/upgrade.py:59
+msgid "You must restart your system for the updates in the following package(s) to take effect:"
+msgstr "You must restart your system for the updates in the following package(s) to take effect:"
+
+#: inary/operations/upgrade.py:84
+msgid "Warning: package *name* ends with '.inary'"
+msgstr "Warning: package *name* ends with '.inary'"
+
+#: inary/operations/upgrade.py:87
+#, fuzzy
+msgid "Package {} is not installed."
+msgstr "Package {} is not installed."
+
+#: inary/operations/upgrade.py:91
+#, fuzzy
+msgid "Package {} is not available in repositories."
+msgstr "Package {} is not available in repositories."
+
 #: inary/operations/upgrade.py:114
 #, fuzzy, python-brace-format
 msgid "Package {0.name} is already at the latest release {0.release}."
 msgstr "Package {} is already at the latest release {}."
 
+#: inary/operations/upgrade.py:118
+#, fuzzy
+msgid "The following packages have different sha1sum:"
+msgstr ""
+"The following packages have conflicts:\n"
+"{}"
+
 #: inary/operations/upgrade.py:176
 msgid "The following packages will be upgraded:"
 msgstr "The following packages will be upgraded:"
 
+#: inary/operations/upgrade.py:187
+msgid "There are extra packages due to dependencies."
+msgstr "There are extra packages due to dependencies."
+
+#: inary/operations/upgrade.py:267
+#, fuzzy, python-brace-format
+msgid "Dependency {0} of {1} cannot be satisfied"
+msgstr "Dependency {0} of {1} cannot be satisfied"
+
 #: inary/operations/upgrade.py:268
 msgid "Upgrade is not possible."
 msgstr "Upgrade is not possible."
+
+#: inary/operations/upgrade.py:362
+msgid "Safety switch forces the installation of following packages:"
+msgstr "Safety switch forces the installation of following packages:"
 
 #: inary/operations/upgrade.py:380
 msgid "Safety switch forces the upgrade of following packages:"
@@ -3383,97 +3396,136 @@ msgstr "{0} package found in {1} repository"
 msgid "{} package already fetched"
 msgstr "{} package already fetched"
 
-#: inary/reactor.py:443
+#: inary/reactor.py:348
+msgid "*** Conclusion ***"
+msgstr ""
+
+#: inary/reactor.py:351
+msgid "  found packages preventing distupdate"
+msgstr ""
+
+#: inary/reactor.py:354
+msgid "  distupdate is good to go"
+msgstr ""
+
+#: inary/reactor.py:356
+#, fuzzy
+msgid "  installed size {}"
+msgstr "Installed {}"
+
+#: inary/reactor.py:357
+msgid "  installed size after update {}"
+msgstr ""
+
+#: inary/reactor.py:358
+msgid "  download size {}"
+msgstr ""
+
+#: inary/reactor.py:359
+#, fuzzy
+msgid "  biggest package size {}"
+msgstr ", Package Size: {}"
+
+#: inary/reactor.py:360
+msgid "  total space needed for distupdate {}"
+msgstr ""
+
+#: inary/reactor.py:362
+#, fuzzy
+msgid "Do you want make dist-update?"
+msgstr "Do you want to continue?"
+
+#: inary/reactor.py:455
 #, fuzzy
 msgid "Cleaning package cache {}..."
 msgstr "Cleaning package cache {}..."
 
-#: inary/reactor.py:445
+#: inary/reactor.py:457
 #, fuzzy
 msgid "Cleaning source archive cache {}..."
 msgstr "Cleaning source archive cache {}..."
 
-#: inary/reactor.py:447
+#: inary/reactor.py:459
 #, fuzzy
 msgid "Cleaning temporary directory {}..."
 msgstr "Cleaning temporary directory {}..."
 
-#: inary/reactor.py:451
+#: inary/reactor.py:463
 #, fuzzy
 msgid "Removing cache file {}..."
 msgstr "Removing cache file {}..."
 
-#: inary/reactor.py:482
+#: inary/reactor.py:494
 msgid "Taking snapshot of the system"
 msgstr "Taking snapshot of the system"
 
-#: inary/reactor.py:643
+#: inary/reactor.py:655
 #, fuzzy
 msgid "scom package is not fully installed"
 msgstr "scom package is not fully installed"
 
-#: inary/reactor.py:655
+#: inary/reactor.py:667
 #, fuzzy
 msgid "File {} not found"
 msgstr "File {} not found"
 
-#: inary/reactor.py:697
+#: inary/reactor.py:709
 #, fuzzy
 msgid "Building index of Inary files under {}"
 msgstr "Building index of INARY files under {}"
 
-#: inary/reactor.py:702
+#: inary/reactor.py:714
 msgid "Index file written"
 msgstr "Index file written"
 
-#: inary/reactor.py:708
+#: inary/reactor.py:720
 msgid "Not a valid repo name."
 msgstr "Not a valid repo name."
 
-#: inary/reactor.py:711
+#: inary/reactor.py:723
 #, fuzzy
 msgid "Repo {} already present."
 msgstr "Repo {} already present."
 
-#: inary/reactor.py:714
+#: inary/reactor.py:726
 #, fuzzy
 msgid "Repo already present with name {}."
 msgstr "Repo already present with name {}."
 
-#: inary/reactor.py:719
+#: inary/reactor.py:731
 #, fuzzy
 msgid "Repo {} added to system."
 msgstr "Repo {} added to system."
 
-#: inary/reactor.py:727
+#: inary/reactor.py:739
 #, fuzzy
 msgid "Repo {} removed from system."
 msgstr "Repo {} removed from system."
 
-#: inary/reactor.py:729
+#: inary/reactor.py:741
 #, fuzzy
 msgid "Repository {} does not exist. Cannot remove."
 msgstr "Repository {} does not exist. Cannot remove."
 
-#: inary/reactor.py:750
+#: inary/reactor.py:762
 #, fuzzy
 msgid "Updating repository: {}"
 msgstr "Updating repository: {}"
 
-#: inary/reactor.py:759
+#: inary/reactor.py:771
 #, fuzzy
 msgid "{} repository information is up-to-date."
 msgstr "{} repository information is up-to-date."
 
-#: inary/reactor.py:761
+#: inary/reactor.py:773
 msgid "Updating database at any rate as requested"
 msgstr "Updating database at any rate as requested"
 
-#: inary/reactor.py:774
+#: inary/reactor.py:786
 msgid "Package database updated."
 msgstr "Package database updated."
 
-#: inary/reactor.py:776
+#: inary/reactor.py:788
 #, fuzzy
 msgid "No repository named {} found."
 msgstr "No repository named {} found."
@@ -3872,7 +3924,7 @@ msgstr ""
 msgid "Vietnamese"
 msgstr ""
 
-#: inary/system_literals/sysutils.py:117
+#: inary/system_literals/sysutils.py:116
 msgid "Module: \"subprocess\" can not import"
 msgstr ""
 
@@ -3976,39 +4028,123 @@ msgstr "Invalid delta package name: {}"
 msgid "Invalid version string: '{}'"
 msgstr "Invalid version string: {}"
 
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Unable to read file {}: {}"
-
-#~ msgid "String {} has invalid XML"
-#~ msgstr "String {} has invalid XML"
-
-#~ msgid "No group named {} found on the system"
-#~ msgstr "No group named {} found on the system"
-
-#~ msgid "No user named {} found on the system"
-#~ msgstr "No user named {} found on the system"
-
-#~ msgid "Urlgrabber needs to be installed to run this command"
-#~ msgstr "Urlgrabber needs to be installed to run this command"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "Date: {} {}"
-#~ msgstr "Date: {} {}"
-
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Not removing conflicted file : {}"
-
-#~ msgid "INARY package"
-#~ msgstr "INARY package"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} option requires an argument"
+#, fuzzy
+#~ msgid "Cleaning files database folder...  "
+#~ msgstr "Cleaning build directory..."
 
 #~ msgid "long integer"
 #~ msgstr "long integer"
 
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} option requires an argument"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY package"
+
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Not removing conflicted file : {}"
+
+#~ msgid "Date: {} {}"
+#~ msgstr "Date: {} {}"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "Urlgrabber needs to be installed to run this command"
+#~ msgstr "Urlgrabber needs to be installed to run this command"
+
+#~ msgid "No user named {} found on the system"
+#~ msgstr "No user named {} found on the system"
+
+#~ msgid "No group named {} found on the system"
+#~ msgstr "No group named {} found on the system"
+
+#~ msgid "String {} has invalid XML"
+#~ msgstr "String {} has invalid XML"
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Unable to read file {}: {}"
+
 #, fuzzy
-#~ msgid "Cleaning files database folder...  "
-#~ msgstr "Cleaning build directory..."
+#~ msgid "Safety switch forces the downgrade of following packages:"
+#~ msgstr "Safety switch forces the upgrade of following packages:"
+
+#, fuzzy
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Upgrade is not possible."
+
+#, fuzzy
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "The following packages will be upgraded:"
+
+#, fuzzy
+#~ msgid "No packages to downgrade."
+#~ msgstr "No packages to upgrade."
+
+#, fuzzy
+#~ msgid "Package {0.name} is already at the first release {0.release}."
+#~ msgstr "Package {} is already at the latest release {}."
+
+#, fuzzy
+#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
+#~ msgstr "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
+
+#, fuzzy
+#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
+#~ msgstr "When upgrading system, ignore packages and components whose basenames match pattern."
+
+#, fuzzy
+#~ msgid "Fetch downgrades but do not install."
+#~ msgstr "Fetch upgrades but do not install."
+
+#, fuzzy
+#~ msgid "Name of the to be downgraded packages' repository"
+#~ msgstr "Name of the to be upgraded packages' repository"
+
+#, fuzzy
+#~ msgid "Downgrade component's and recursive components' packages"
+#~ msgstr "Upgrade component's and recursive components' packages"
+
+#, fuzzy
+#~ msgid "Security related package downgrades only"
+#~ msgstr "Security related package upgrades only"
+
+#, fuzzy
+#~ msgid "downgrade options"
+#~ msgstr "upgrade options"
+
+#, fuzzy
+#~ msgid ""
+#~ "Downgrade INARY packages\n"
+#~ "\n"
+#~ "Usage: Downgrade [<package1> <package2> ... <packagen>]\n"
+#~ "\n"
+#~ "<packagei>: package name\n"
+#~ "\n"
+#~ "Downgrades the entire system if no package names are given\n"
+#~ "\n"
+#~ "You may use only package names to specify packages because\n"
+#~ "the package downgrade operation is defined only with respect\n"
+#~ "to repositories. If you have specified a package name, it\n"
+#~ "should exist in the package repositories. If you just want to\n"
+#~ "reinstall a package from a INARY file, use the install command.\n"
+#~ "\n"
+#~ "You can also specify components instead of package names, which will be\n"
+#~ "expanded to package names.\n"
+#~ msgstr ""
+#~ "Upgrade INARY packages\n"
+#~ "\n"
+#~ "Usage: Upgrade [<package1> <package2> ... <packagen>]\n"
+#~ "\n"
+#~ "<packagei>: package name\n"
+#~ "\n"
+#~ "Upgrades the entire system if no package names are given\n"
+#~ "\n"
+#~ "You may use only package names to specify packages because\n"
+#~ "the package upgrade operation is defined only with respect\n"
+#~ "to repositories. If you have specified a package name, it\n"
+#~ "should exist in the package repositories. If you just want to\n"
+#~ "reinstall a package from a INARY file, use the install command.\n"
+#~ "\n"
+#~ "You can also specify components instead of package names, which will be\n"
+#~ "expanded to package names.\n"

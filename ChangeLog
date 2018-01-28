@@ -1,3 +1,52 @@
+2018-01-28 Suleyman Poyraz <nipalensisaquila@gmail.com>
+  * distupdate komutu eklendi:
+	Upgrade komutu buyuk capta guncellemeler için biraz 
+	tehlikeli kaçıyordu ve yetersiz sayılırdı. Bu yüzden bu 
+	modul eklendi.
+
+  * Downgrade silindi:
+	Downgrade çok vasat duruyor. Upgradeden çarptım ama bence yetersiz
+	o yüzden yeniden yazılana kadar rafa kaldırdım. çok yakında
+	yeniden yazıp koyacam. öteki türlü hep aklımdan cıkıyor :)
+
+2018-01-27 Suleyman Poyraz <nipalensisaquila@gmail.com>
+  * Darara (new tag= inary-1.0_rc1):
+	-> work build, fetch, update, install functions.
+	  |_ Fixed itembyrepodb.
+		|     Not used true tag. I use "Packages" but real tag was "Package".
+		|_ Fixed fetcher
+		|     now work very well.
+		|_ Fixed all po files
+		|     Usable Languages are: German, English, Franchis, Turkish and Russian
+		|_ Clean non useful imports
+		|_ Fixed filesdb
+		\     we use leveldb based filesdb (marcin)
+
+
+
+2018-01-26 Suleyman Poyraz <nipalensisaquila@gmail.com>
+	* Python3 kullanımı ile ilgili çok vasat bir kodlama
+	anlayışımız var:
+	a) Bu sorun ile ilgili olarak
+	   "%s" ile taglanma yerine "{}" kullaniliyor.
+	b) Ceşitli düzenlemeler yapıldı. Buna uygun olarak
+	   po dosyaları ve actions.py betikleri (repodan)
+		 düzenlendi.
+	c) yanlış kullanımlar gereksiz importlar silindi
+
+
+2018-01-20 Suleyman Poyraz <nipalensisaquila@gmail.com>
+	* Testler elden geçirilmeli:
+	-> Testler düzenlendi (2018-01-20)
+	-> Testler gruplandirildi (2018-01-22)
+	-> oo ve autoxml testleri eklendi (2018-01-22)
+	-> testlerin islevselliginden emin olunuldu (2018-01-23)
+
+2018-01-17 Suleyman Poyraz <nipalensisaquila@gmail.com>
+  * Added system_literals and now work crossplatorm 
+	inary packaging:
+	Look more about inary/system_literals/Modules.md
+
 2018-01-13 Suleyman Poyraz <nipalensisaquila@gmail.com>
 	* Scom dosyalari pakette yok!!:
 	Bu hata Fixe edilmiştir

@@ -28,7 +28,7 @@ import inary.cli.clean
 import inary.cli.configurepending
 import inary.cli.deletecache
 import inary.cli.delta
-import inary.cli.downgrade
+import inary.cli.distupdate
 import inary.cli.emerge
 import inary.cli.emergeup
 import inary.cli.fetch

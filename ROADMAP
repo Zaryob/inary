@@ -22,7 +22,6 @@ Legend:
       + Ruby Language Tools
       + Perl Language Tools
       + CMake Tools
-      / AfterInstall Modules
 
     / unit test
   + source building
@@ -35,7 +34,7 @@ Legend:
   + command line interface
     + inary-build
     + inary-install
-    + inary-index (but not indexing build repos-- Look for errors FIXME)
+    + inary-index 
     + inary-updatedb 
   + single repository index
   + simple dependency checking
@@ -66,11 +65,10 @@ Legend:
   + implement source database (eray) 
   + easy package preparation   
     ? convert ebuild to inary
-  / Configuring system interface after installing
+  + Configuring system interface after installing
     + what do we need to specify in a package
     + package install: register script and configure system with it
-    ? package remove: unregister script and reconfigure systen with it
-    (I don't know How I can remove unused config files, databases and others...)
+    + package remove: unregister script and reconfigure systen with it  (Zaryoh)
   + internet installation
     + support URI's whereever a filename is supported
     + http server
@@ -91,10 +89,12 @@ Legend:
     + list type
     + class type
     ? localtext/text types (localtext.... Ummm?.... )
+      + write meaningful localtext datas (Zaryob)
+      - return meaningful localtext summaries and descriptions (Hak getire)
     + revised interface
     / Error handling
       + improved error handling, check routines, hooks, format/print routines 
-      / write a meaningful traceback output (leş gibi yaHu şu hali ils)
+      / write a meaningful traceback output 
     + xmlfile support (read/write)
     + string member, in addition to tag/attribute members
     + replace specfile with new specfile using autoxml
@@ -122,14 +122,14 @@ Legend:
     + ciksemel rewrite and adding python3 support (aquila)
   / partial caching and automatic resume for file download (meren)
     + use a '.part' extension
-    - resume file downloading (Darara.... fetcher will rewrite with urllib.requests)
+    - resume file downloading (Darara.... fetcher will rewrite with httplib) (Zaryob)
   + search-file command (eray)
   + exception handling (eray)
     + uniform exception hierarchy 
     + proper handling
   + API: we even have application users (eray)
     + a facade module inary.api  (eray)
-    - clean unuseful inary.api functions (example: buildfarm functions move to buildfarm)
+    + clean unuseful inary.api functions 
     + a library init command (eray)
     + high-level package ops, index (eray)
     + info/util commands (eray)
@@ -137,9 +137,12 @@ Legend:
   + documentation
     + actionsAPI documentation, unittests (caglar - meren)
     + versioning information document (eray - baris)
+
   + UI
     - INARYMAT
-      - Automatic dependency finder
+      / Automatic dependency finder
+        / read pkgconfig files and find dependencies (Zaryob)
+        + find cycle dependencies (Zaryob)
       - Automatic build upgrader
     - pykde & pygtk GUI (cartman)
     + improve interface (eray)
@@ -156,6 +159,8 @@ Legend:
       / translate messages mesajların çevirisinin yapılması (inary tr.po) (eray)
       + proper unicode handling in code - tons of fixes (eray - baris)
     / configure-pending (eray) (should return which packages configured)
+      - report scom scripts problems to developers
+      + configure pendings (Zaryob)
     + proper commar connection (baris - gurer)
     + ignore-deps (eray)
     + more robust upgrade (eray)
@@ -222,6 +227,9 @@ Legend:
       - incremental build/fetch for repository index (pisi-index.xml)
     / xdelta support (caglar)
       - diffsets
+    / a useful distupdate command
+      + distupdate planner
+      - distupdate maker
     - a command (check-repo) to check if repos are consistent wrt dep relations
     - component improvements (optional)
       - maintain a list of components each component has

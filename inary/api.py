@@ -39,8 +39,8 @@ import inary.file
 from inary.reactor import *
 import inary.operations.build
 import inary.operations.check
-import inary.operations.downgrade
 import inary.operations.emerge
+import inary.operations.distupdate
 import inary.operations.install
 import inary.operations.history
 import inary.operations.helper

@@ -92,21 +92,20 @@ def get_kernel_option(option):
     return args
 
 def get_cpu_count():
-        """
-        This function part of portage
-        Copyright 2015 Gentoo Foundation
-        Distributed under the terms of the GNU General Public License v2
+    """
+    This function part of portage
+    Copyright 2015 Gentoo Foundation
+    Distributed under the terms of the GNU General Public License v2
 
-        Using:
-	Try to obtain the number of CPUs available.
-	@return: Number of CPUs or None if unable to obtain.
-	"""
-
-	try:
-		import multiprocessing
-		return multiprocessing.cpu_count()
-	except (ImportError, NotImplementedError):
-		return None
+    Using:
+    Try to obtain the number of CPUs available.
+    @return: Number of CPUs or None if unable to obtain.
+    """
+    try:
+        import multiprocessing
+        return multiprocessing.cpu_count()
+    except (ImportError, NotImplementedError):
+        return None
 
 def get_vm_info():
     vm_info = {}
