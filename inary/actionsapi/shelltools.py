@@ -16,6 +16,7 @@ import shutil
 import string
 import pwd
 import grp
+import sys
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -244,11 +245,11 @@ def dirName(filePath):
     '''return the directory name of pathname path'''
     return os.path.dirname(filePath)
 
-##Fix me:there are an important error in here please##
+##FIXME:there are an important error in here please##
 ##         fix here tomorrow (don't forget)         ##
 def system(command):
     #command an list but should be an str
-    print(command)
+    sys.stdout.write(command)
 #    command = str.join(str.split(command))
     retValue = run_logged(command)
 
